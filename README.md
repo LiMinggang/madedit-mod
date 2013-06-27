@@ -11,7 +11,6 @@ NOTE: The release marked as Selfuse is a bloody edge and buggy one with a lot of
 
 Current Feature list(comparing to the original Madedit@sourceforge)
 ===================================================================
-
 Drag&Drop Edit 
 
 Bookmark 
@@ -32,6 +31,10 @@ History
 
 2013.1.7 Finished feature list: Highlight words(Shift+F8, which is the same as Source Insight). It's easy to use Double click but I did not. Please ask for it if you prefer. Will do a release recently. 
 
-Todo: Partial load for large text files which was mentioned by the original author but never getting done. 
+Todo:
+=====
+Partial load for large text files which was mentioned by the original author but never getting done. 
 
-Known issues: 1. The cursors of Drag&Drop Edit do not be changed on Linux 2. Sometime lose focus would cause problem in mouse event, you have to restart it(you could not even close it by mouse).
+Known issues:
+=============
+1. The cursors of Drag&Drop Edit do not be changed on Linux 2. Sometime lose focus would cause problem in mouse event, you have to restart it(you could not even close it by mouse).
