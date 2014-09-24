@@ -1,0 +1,64 @@
+2009-02-08  Alston Chen  <madedit@gmail.com>
+
+	1.added that restore the encoding and font(name, size) of a file when reopening it.
+	2.added that use Ctrl+MouseWheel to decrease or increase the font size.
+	3.added Japanese language. Thank Tilt for the translations.
+	4.fixed a bug when converting between Tab and Space char in wordwrap mode.
+	5.modified that the dialogs will stay on top of main window, not top of all windows.
+	6.modified the action when associating file types.
+	7.some minor changes.
+
+2007-10-08  Alston Chen  <madedit@gmail.com>
+
+	1.added Japanese Kanji supporting for converting Chinese characters.
+	2.added the function to split window into multiple Tab Controls (by using wxAuiNotebook)
+	  ScreenShot: http://madedit.sourceforge.net/screenshot06.png
+	3.added the function to convert between WordWraps and NewLine chars.
+	4.added File-Type Associations Dialog under win32.
+	5.added Search-In-Selection function when searching and replaceing.
+	6.added Count function in SearchDialog.
+	7.added ToHalfWidthByOptions, ToFullWidthByOptions to choose the characters(ASCII,Japanese,Korean)
+	  you want to convert.
+	8.added ConvertSpaceToTab and ConvertTabToSpace functions.
+	9.added new syntax files for D, SQL, Verilog and VHDL.
+	10.fixed that cannot replace text in Hex-Mode.
+	11.many bug-fixes and changes.
+
+2007-04-10  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* Makefile.am (ACLOCAL_AMFLAGS): New variable.
+	(EXTRA_DIST): Add m4/ChangeLog.
+
+2006-05-08  Alston Chen  <madedit@gmail.com>
+
+	1.fixed crashes when copying and pasting data between TextMode and ColumnMode under Linux.
+	2.fixed sometimes crashes when using FindInFiles function under Linux.
+	3.added a dockable Information Window for listing the results of FindInFiles.
+	4.added Exclude Filters in FindInFiles dialog.
+	5.added a button ("<<") to get the path of the editing document in FindInFiles dialog.
+	6.added support for multiple shortcuts on all menu and editor commands.
+	7.added support for Mouse-Over-Get-Word of StarDict under Win32.
+	8.added Trim Trialing Spaces function.
+	9.added Sort Lines function.
+	10.added a new option to temporary disable or enable MouseSelectToCopy function when pressing Ctrl key.
+	11.added a new option to choose the Language of UI.
+	12.added Italian language. Thank Contardi Angelo for the translations.
+
+
+2006-04-12  Alston Chen  <madedit@gmail.com>
+
+	1.fixed that lost the last byte of clipboard data (Linux version only).
+
+
+2006-04-11  Alston Chen  <madedit@gmail.com>
+
+	1.added custom Syntax Highlighting settings.
+	2.added Find/Replace In Files function.
+	3.some minor changes.
+
+
+2006-02-26  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* Makefile.am (ACLOCAL_AMFLAGS): New variable.
+	(EXTRA_DIST): Add m4/ChangeLog.
+

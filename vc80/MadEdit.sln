@@ -1,0 +1,38 @@
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MadEdit", "MadEdit.vcproj", "{FA2A8E06-DD41-44E0-A1CB-02906D4A080E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CF7AC3D1-E2DF-41D2-BEA6-1E2556CDEA26} = {CF7AC3D1-E2DF-41D2-BEA6-1E2556CDEA26}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pythoncore", "..\minipython\PC\VS8.0\pythoncore.vcproj", "{CF7AC3D1-E2DF-41D2-BEA6-1E2556CDEA26}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+		Unicode Debug|Win32 = Unicode Debug|Win32
+		Unicode Release|Win32 = Unicode Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA2A8E06-DD41-44E0-A1CB-02906D4A080E}.Debug|Win32.ActiveCfg = Unicode Debug|Win32
+		{FA2A8E06-DD41-44E0-A1CB-02906D4A080E}.Debug|Win32.Build.0 = Unicode Debug|Win32
+		{FA2A8E06-DD41-44E0-A1CB-02906D4A080E}.Release|Win32.ActiveCfg = Unicode Release|Win32
+		{FA2A8E06-DD41-44E0-A1CB-02906D4A080E}.Release|Win32.Build.0 = Unicode Release|Win32
+		{FA2A8E06-DD41-44E0-A1CB-02906D4A080E}.Unicode Debug|Win32.ActiveCfg = Unicode Debug|Win32
+		{FA2A8E06-DD41-44E0-A1CB-02906D4A080E}.Unicode Debug|Win32.Build.0 = Unicode Debug|Win32
+		{FA2A8E06-DD41-44E0-A1CB-02906D4A080E}.Unicode Release|Win32.ActiveCfg = Unicode Release|Win32
+		{FA2A8E06-DD41-44E0-A1CB-02906D4A080E}.Unicode Release|Win32.Build.0 = Unicode Release|Win32
+		{CF7AC3D1-E2DF-41D2-BEA6-1E2556CDEA26}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CF7AC3D1-E2DF-41D2-BEA6-1E2556CDEA26}.Debug|Win32.Build.0 = Debug|Win32
+		{CF7AC3D1-E2DF-41D2-BEA6-1E2556CDEA26}.Release|Win32.ActiveCfg = Release|Win32
+		{CF7AC3D1-E2DF-41D2-BEA6-1E2556CDEA26}.Release|Win32.Build.0 = Release|Win32
+		{CF7AC3D1-E2DF-41D2-BEA6-1E2556CDEA26}.Unicode Debug|Win32.ActiveCfg = Debug|Win32
+		{CF7AC3D1-E2DF-41D2-BEA6-1E2556CDEA26}.Unicode Debug|Win32.Build.0 = Debug|Win32
+		{CF7AC3D1-E2DF-41D2-BEA6-1E2556CDEA26}.Unicode Release|Win32.ActiveCfg = Release|Win32
+		{CF7AC3D1-E2DF-41D2-BEA6-1E2556CDEA26}.Unicode Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

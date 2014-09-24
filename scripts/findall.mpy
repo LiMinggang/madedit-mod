@@ -1,0 +1,6 @@
+me=MadEdit()
+res = me.FindTextAll("a", False, False, False)
+
+print res
+
+me = None

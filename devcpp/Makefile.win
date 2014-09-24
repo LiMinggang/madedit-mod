@@ -1,0 +1,190 @@
+# Project: MadEdit
+# Compiler: Default GCC compiler
+# Compiler Type: MingW 3
+# Makefile created by wxDev-C++ wxDev-C++ IDE 7.4.2.6 on 21/05/12 14:11
+
+WXLIBNAME = wxmsw29u
+CPP       = g++.exe
+CC        = gcc.exe
+WINDRES   = "windres.exe"
+OBJ       = ./Release/MadEditFrame.o ./Release/MadEditApp.o ./Release/MadEdit.o ./Release/MadEncoding.o ./Release/MadLines.o ./Release/MadSyntax.o ./Release/MadUndo.o ./Release/MadPlugin.o ./Release/MadUtils.o ./Release/MadEditCommand.o ./Release/MadSearchDialog.o ./Release/MadOptionsDialog.o ./Release/MadEditSearch.o ./Release/MadReplaceDialog.o ./Release/MadAboutDialog.o ./Release/MadPrintout.o ./Release/TradSimp.o ./Release/MadConvEncDialog.o ./Release/MadEditAdvanced.o ./Release/MadWordCountDialog.o ./Release/MadHighlightingDialog.o ./Release/MadFindInFilesDialog.o ./Release/MadSortDialog.o ./Release/tabmdi.o ./Release/auibook.o ./Release/dockart.o ./Release/floatpane.o ./Release/framemanager.o ./Release/impl.o ./Release/CharDistribution.o ./Release/JpCntx.o ./Release/LangBulgarianModel.o ./Release/LangCyrillicModel.o ./Release/LangGreekModel.o ./Release/LangHebrewModel.o ./Release/LangHungarianModel.o ./Release/LangThaiModel.o ./Release/nsBig5Prober.o ./Release/nsCharSetProber.o ./Release/nsEscCharsetProber.o ./Release/nsEscSM.o ./Release/nsEUCJPProber.o ./Release/nsEUCKRProber.o ./Release/nsEUCTWProber.o ./Release/nsGB2312Prober.o ./Release/nsHebrewProber.o ./Release/nsLatin1Prober.o ./Release/nsMBCSGroupProber.o ./Release/nsMBCSSM.o ./Release/nsSBCharSetProber.o ./Release/nsSBCSGroupProber.o ./Release/nsSJISProber.o ./Release/nsUniversalDetector.o ./Release/nsUTF8Prober.o ./Release/MadFileAssociationDialog.o Release/MadEdit_private.res
+LINKOBJ   = "./Release/MadEditFrame.o" "./Release/MadEditApp.o" "./Release/MadEdit.o" "./Release/MadEncoding.o" "./Release/MadLines.o" "./Release/MadSyntax.o" "./Release/MadUndo.o" "./Release/MadPlugin.o" "./Release/MadUtils.o" "./Release/MadEditCommand.o" "./Release/MadSearchDialog.o" "./Release/MadOptionsDialog.o" "./Release/MadEditSearch.o" "./Release/MadReplaceDialog.o" "./Release/MadAboutDialog.o" "./Release/MadPrintout.o" "./Release/TradSimp.o" "./Release/MadConvEncDialog.o" "./Release/MadEditAdvanced.o" "./Release/MadWordCountDialog.o" "./Release/MadHighlightingDialog.o" "./Release/MadFindInFilesDialog.o" "./Release/MadSortDialog.o" "./Release/tabmdi.o" "./Release/auibook.o" "./Release/dockart.o" "./Release/floatpane.o" "./Release/framemanager.o" "./Release/impl.o" "./Release/CharDistribution.o" "./Release/JpCntx.o" "./Release/LangBulgarianModel.o" "./Release/LangCyrillicModel.o" "./Release/LangGreekModel.o" "./Release/LangHebrewModel.o" "./Release/LangHungarianModel.o" "./Release/LangThaiModel.o" "./Release/nsBig5Prober.o" "./Release/nsCharSetProber.o" "./Release/nsEscCharsetProber.o" "./Release/nsEscSM.o" "./Release/nsEUCJPProber.o" "./Release/nsEUCKRProber.o" "./Release/nsEUCTWProber.o" "./Release/nsGB2312Prober.o" "./Release/nsHebrewProber.o" "./Release/nsLatin1Prober.o" "./Release/nsMBCSGroupProber.o" "./Release/nsMBCSSM.o" "./Release/nsSBCharSetProber.o" "./Release/nsSBCSGroupProber.o" "./Release/nsSJISProber.o" "./Release/nsUniversalDetector.o" "./Release/nsUTF8Prober.o" "./Release/MadFileAssociationDialog.o" Release/MadEdit_private.res
+LIBS      = -L"C:/Program Files/Dev-Cpp/Lib" -L"C:/MinGW32/lib" -L"N:/wxWidgets/lib/gcc_lib" -L"../libunicows" -mwindows -lwxmsw28u_core -lwxbase28u -lunicows -lkernel32 -luser32 -lgdi32 -lcomdlg32 -lwinspool -lwinmm -lshell32 -lcomctl32 -lole32 -loleaut32 -luuid -lrpcrt4 -ladvapi32 -lwsock32 -lodbc32 -lopengl32  -s 
+INCS      = -I"C:/MinGW32/include" -I"../charset-detector/include" -I"../charset-detector/src" -I"../charset-detector/src/tables"
+CXXINCS   = -I"C:/MinGW32/include" -I"C:/Program Files/Dev-Cpp/include/common" -I"../charset-detector/include" -I"../charset-detector/src" -I"../charset-detector/src/tables"
+RCINCS    = --include-dir "C:/PROGRA~1/Dev-Cpp/include/common"
+BIN       = Release/MadEdit.exe
+DEFINES   = 
+CXXFLAGS  = $(CXXINCS) $(DEFINES) -D_UNICODE -D__WXMSW__ -D__GNUWIN32__ -D__WIN95__ -DWIN32 -DwxUSE_AUI=1 -DWXDLLIMPEXP_AUI=   -O2
+CFLAGS    = $(INCS) $(DEFINES) -fno-rtti -fno-exceptions -fno-pcc-struct-return -fstrict-aliasing -Wall -fvtable-thunks -D__WXMSW__ -D__GNUWIN32__ -D__WIN95__ -DwxUSE_AUI=1 -DWXDLLIMPEXP_AUI=   -O2
+GPROF     = gprof.exe
+ifeq ($(OS),Windows_NT)
+   RM = del /Q
+   FixPath = $(subst /,\,$1)
+else
+   RM = rm -f
+   FixPath = $1
+endif
+LINK      = g++.exe
+
+.PHONY: all all-before all-after clean clean-custom
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	$(RM) $(call FixPath,$(LINKOBJ)) "$(call FixPath,$(BIN))"
+
+$(BIN): $(OBJ)
+	$(LINK) $(LINKOBJ) -o "$(BIN)" $(LIBS) 
+
+./Release/MadEditFrame.o: $(GLOBALDEPS) ../src/MadEditFrame.cpp ../src/MadEdit/MadEdit.h ../src/MadEdit/MadLines.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadDeque.hpp ../src/MadEdit/MadEditCommand.h ../src/MadEdit/MadEncoding.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadSyntax.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadLines.h ../src/MadEdit/MadUndo.h ../src/MadEdit/MadLines.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadEditCommand.h ../src/MadEdit/MadEncoding.h ../src/MadEdit/MadSyntax.h ../src/MadEdit/TradSimp.h ../src/MadEdit/ucs4_t.h ../src/MadEditFrame.h ../src/MadSearchDialog.h ../src/MadReplaceDialog.h ../src/MadFindInFilesDialog.h ../src/MadOptionsDialog.h ../src/MadCommand.h ../src/MadEdit/MadEditCommand.h ../src/MadHighlightingDialog.h ../src/MadFileAssociationDialog.h ../src/MadConvEncDialog.h ../src/MadWordCountDialog.h ../src/MadSortDialog.h ../src/MadAboutDialog.h ../src/MadPrintout.h ../src/MadUtils.h ../src/MadCommand.h ../src/plugin.h ../images/Mad.xpm ../images/Mad2.xpm ../images/null.xpm ../images/new.xpm ../images/fileopen.xpm ../images/filesave.xpm ../images/saveall.xpm ../images/fileclose.xpm ../images/closeall.xpm ../images/preview.xpm ../images/print.xpm ../images/quit.xpm ../images/undo.xpm ../images/redo.xpm ../images/cut.xpm ../images/copy.xpm ../images/paste.xpm ../images/indent.xpm ../images/unindent.xpm ../images/comment.xpm ../images/uncomment.xpm ../images/find.xpm ../images/findnext.xpm ../images/findprev.xpm ../images/replace.xpm ../images/fontname.xpm ../images/fontsize.xpm ../images/font.xpm ../images/nowrap.xpm ../images/wrapbywin.xpm ../images/wrapbycol.xpm ../images/textmode.xpm ../images/columnmode.xpm ../images/hexmode.xpm ../images/Mad_16x15.xpm
+	$(CPP) -c ../src/MadEditFrame.cpp -o ./Release/MadEditFrame.o $(CXXFLAGS)
+
+./Release/MadEditApp.o: $(GLOBALDEPS) ../src/MadEditApp.cpp ../src/MadEditApp.h ../src/MadEditFrame.h ../src/MadOptionsDialog.h ../src/MadCommand.h ../src/MadEdit/MadEditCommand.h ../src/MadUtils.h ../src/MadEdit/MadEdit.h ../src/MadEdit/MadLines.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadDeque.hpp ../src/MadEdit/MadEditCommand.h ../src/MadEdit/MadEncoding.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadSyntax.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadLines.h ../src/MadEdit/MadUndo.h ../src/MadEdit/MadLines.h ../src/MadEdit/ucs4_t.h
+	$(CPP) -c ../src/MadEditApp.cpp -o ./Release/MadEditApp.o $(CXXFLAGS)
+
+./Release/MadEdit.o: $(GLOBALDEPS) ../src/MadEdit/MadEdit.cpp ../src/MadEdit/MadEdit.h ../src/MadEdit/MadLines.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadDeque.hpp ../src/MadEdit/MadEditCommand.h ../src/MadEdit/MadEncoding.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadSyntax.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadLines.h ../src/MadEdit/MadUndo.h ../src/MadEdit/MadLines.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadEncoding.h ../src/MadEdit/MadSyntax.h ../src/MadEdit/MadUndo.h ../src/MadEdit/MadEditPv.h ../src/MadEdit/clipbrd_gtk.h ../src/MadEdit/caret_new.h
+	$(CPP) -c ../src/MadEdit/MadEdit.cpp -o ./Release/MadEdit.o $(CXXFLAGS)
+
+./Release/MadEncoding.o: $(GLOBALDEPS) ../src/MadEdit/MadEncoding.cpp ../src/MadEdit/MadEncoding.h ../src/MadEdit/ucs4_t.h
+	$(CPP) -c ../src/MadEdit/MadEncoding.cpp -o ./Release/MadEncoding.o $(CXXFLAGS)
+
+./Release/MadLines.o: $(GLOBALDEPS) ../src/MadEdit/MadLines.cpp ../src/MadEdit/MadLines.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadDeque.hpp ../src/MadEdit/MadEncoding.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadSyntax.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadLines.h ../src/MadEdit/MadEdit.h ../src/MadEdit/MadLines.h ../src/MadEdit/MadEditCommand.h ../src/MadEdit/MadEncoding.h ../src/MadEdit/MadSyntax.h ../src/MadEdit/MadUndo.h ../src/MadEdit/MadLines.h ../src/MadEdit/ucs4_t.h
+	$(CPP) -c ../src/MadEdit/MadLines.cpp -o ./Release/MadLines.o $(CXXFLAGS)
+
+./Release/MadSyntax.o: $(GLOBALDEPS) ../src/MadEdit/MadSyntax.cpp ../src/MadEdit/MadSyntax.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadLines.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadDeque.hpp ../src/MadEdit/MadEdit.h ../src/MadEdit/MadLines.h ../src/MadEdit/MadEditCommand.h ../src/MadEdit/MadEncoding.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadSyntax.h ../src/MadEdit/MadUndo.h ../src/MadEdit/MadLines.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadEncoding.h
+	$(CPP) -c ../src/MadEdit/MadSyntax.cpp -o ./Release/MadSyntax.o $(CXXFLAGS)
+
+./Release/MadUndo.o: $(GLOBALDEPS) ../src/MadEdit/MadUndo.cpp ../src/MadEdit/MadUndo.h ../src/MadEdit/MadLines.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadDeque.hpp
+	$(CPP) -c ../src/MadEdit/MadUndo.cpp -o ./Release/MadUndo.o $(CXXFLAGS)
+
+./Release/MadPlugin.o: $(GLOBALDEPS) ../src/MadPlugin.cpp ../src/plugin.h
+	$(CPP) -c ../src/MadPlugin.cpp -o ./Release/MadPlugin.o $(CXXFLAGS)
+
+./Release/MadUtils.o: $(GLOBALDEPS) ../src/MadUtils.cpp ../src/MadUtils.h
+	$(CPP) -c ../src/MadUtils.cpp -o ./Release/MadUtils.o $(CXXFLAGS)
+
+./Release/MadEditCommand.o: $(GLOBALDEPS) ../src/MadEdit/MadEditCommand.cpp ../src/MadEdit/MadEditCommand.h
+	$(CPP) -c ../src/MadEdit/MadEditCommand.cpp -o ./Release/MadEditCommand.o $(CXXFLAGS)
+
+./Release/MadSearchDialog.o: $(GLOBALDEPS) ../src/MadSearchDialog.cpp ../src/MadEditFrame.h ../src/MadSearchDialog.h ../src/MadReplaceDialog.h ../src/MadEdit/MadEdit.h ../src/MadEdit/MadLines.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadDeque.hpp ../src/MadEdit/MadEditCommand.h ../src/MadEdit/MadEncoding.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadSyntax.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadLines.h ../src/MadEdit/MadUndo.h ../src/MadEdit/MadLines.h ../src/MadEdit/ucs4_t.h ../images/down.xpm
+	$(CPP) -c ../src/MadSearchDialog.cpp -o ./Release/MadSearchDialog.o $(CXXFLAGS)
+
+./Release/MadOptionsDialog.o: $(GLOBALDEPS) ../src/MadOptionsDialog.cpp ../src/MadOptionsDialog.h ../src/MadCommand.h ../src/MadEdit/MadEditCommand.h ../src/MadEdit/MadEncoding.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadEditCommand.h ../src/MadEdit/MadEdit.h ../src/MadEdit/MadLines.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadDeque.hpp ../src/MadEdit/MadEditCommand.h ../src/MadEdit/MadEncoding.h ../src/MadEdit/MadSyntax.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadLines.h ../src/MadEdit/MadUndo.h ../src/MadEdit/MadLines.h ../src/MadEdit/ucs4_t.h ../src/MadEditFrame.h ../src/MadUtils.h ../src/MadEdit/MadEditPv.h
+	$(CPP) -c ../src/MadOptionsDialog.cpp -o ./Release/MadOptionsDialog.o $(CXXFLAGS)
+
+./Release/MadEditSearch.o: $(GLOBALDEPS) ../src/MadEdit/MadEditSearch.cpp ../src/MadEdit/MadEdit.h ../src/MadEdit/MadLines.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadDeque.hpp ../src/MadEdit/MadEditCommand.h ../src/MadEdit/MadEncoding.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadSyntax.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadLines.h ../src/MadEdit/MadUndo.h ../src/MadEdit/MadLines.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadEncoding.h ../src/MadEdit/MadEditPv.h
+	$(CPP) -c ../src/MadEdit/MadEditSearch.cpp -o ./Release/MadEditSearch.o $(CXXFLAGS)
+
+./Release/MadReplaceDialog.o: $(GLOBALDEPS) ../src/MadReplaceDialog.cpp ../src/MadReplaceDialog.h ../src/MadSearchDialog.h ../src/MadEdit/MadEdit.h ../src/MadEdit/MadLines.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadDeque.hpp ../src/MadEdit/MadEditCommand.h ../src/MadEdit/MadEncoding.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadSyntax.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadLines.h ../src/MadEdit/MadUndo.h ../src/MadEdit/MadLines.h ../src/MadEdit/ucs4_t.h ../images/down.xpm
+	$(CPP) -c ../src/MadReplaceDialog.cpp -o ./Release/MadReplaceDialog.o $(CXXFLAGS)
+
+./Release/MadAboutDialog.o: $(GLOBALDEPS) ../src/MadAboutDialog.cpp ../src/MadAboutDialog.h ../images/Mad.xpm ../images/Mad2.xpm
+	$(CPP) -c ../src/MadAboutDialog.cpp -o ./Release/MadAboutDialog.o $(CXXFLAGS)
+
+./Release/MadPrintout.o: $(GLOBALDEPS) ../src/MadPrintout.cpp ../src/MadPrintout.h ../src/MadEdit/MadEdit.h ../src/MadEdit/MadLines.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadDeque.hpp ../src/MadEdit/MadEditCommand.h ../src/MadEdit/MadEncoding.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadSyntax.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadLines.h ../src/MadEdit/MadUndo.h ../src/MadEdit/MadLines.h ../src/MadEdit/ucs4_t.h
+	$(CPP) -c ../src/MadPrintout.cpp -o ./Release/MadPrintout.o $(CXXFLAGS)
+
+./Release/TradSimp.o: $(GLOBALDEPS) ../src/MadEdit/TradSimp.cpp ../src/MadEdit/TradSimp.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/clipbrd_gtk.h
+	$(CPP) -c ../src/MadEdit/TradSimp.cpp -o ./Release/TradSimp.o $(CXXFLAGS)
+
+./Release/MadConvEncDialog.o: $(GLOBALDEPS) ../src/MadConvEncDialog.cpp ../src/MadConvEncDialog.h ../src/MadEdit/MadEncoding.h ../src/MadEdit/ucs4_t.h
+	$(CPP) -c ../src/MadConvEncDialog.cpp -o ./Release/MadConvEncDialog.o $(CXXFLAGS)
+
+./Release/MadEditAdvanced.o: $(GLOBALDEPS) ../src/MadEdit/MadEditAdvanced.cpp ../src/MadEdit/MadEdit.h ../src/MadEdit/MadLines.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadDeque.hpp ../src/MadEdit/MadEditCommand.h ../src/MadEdit/MadEncoding.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadSyntax.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadLines.h ../src/MadEdit/MadUndo.h ../src/MadEdit/MadLines.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/TradSimp.h ../src/MadEdit/ucs4_t.h
+	$(CPP) -c ../src/MadEdit/MadEditAdvanced.cpp -o ./Release/MadEditAdvanced.o $(CXXFLAGS)
+
+./Release/MadWordCountDialog.o: $(GLOBALDEPS) ../src/MadWordCountDialog.cpp ../src/MadWordCountDialog.h ../src/MadEdit/MadEdit.h ../src/MadEdit/MadLines.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadDeque.hpp ../src/MadEdit/MadEditCommand.h ../src/MadEdit/MadEncoding.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadSyntax.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadLines.h ../src/MadEdit/MadUndo.h ../src/MadEdit/MadLines.h ../src/MadEdit/ucs4_t.h
+	$(CPP) -c ../src/MadWordCountDialog.cpp -o ./Release/MadWordCountDialog.o $(CXXFLAGS)
+
+./Release/MadHighlightingDialog.o: $(GLOBALDEPS) ../src/MadHighlightingDialog.cpp ../src/MadHighlightingDialog.h ../src/MadUtils.h ../src/MadEdit/MadSyntax.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadLines.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadDeque.hpp
+	$(CPP) -c ../src/MadHighlightingDialog.cpp -o ./Release/MadHighlightingDialog.o $(CXXFLAGS)
+
+./Release/MadFindInFilesDialog.o: $(GLOBALDEPS) ../src/MadFindInFilesDialog.cpp ../src/MadFindInFilesDialog.h ../src/MadEditFrame.h ../src/MadReplaceDialog.h ../src/MadSearchDialog.h ../src/MadEdit/MadEdit.h ../src/MadEdit/MadLines.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadDeque.hpp ../src/MadEdit/MadEditCommand.h ../src/MadEdit/MadEncoding.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadSyntax.h ../src/MadEdit/ucs4_t.h ../src/MadEdit/MadLines.h ../src/MadEdit/MadUndo.h ../src/MadEdit/MadLines.h ../src/MadEdit/ucs4_t.h ../images/down.xpm
+	$(CPP) -c ../src/MadFindInFilesDialog.cpp -o ./Release/MadFindInFilesDialog.o $(CXXFLAGS)
+
+./Release/MadSortDialog.o: $(GLOBALDEPS) ../src/MadSortDialog.cpp ../src/MadSortDialog.h
+	$(CPP) -c ../src/MadSortDialog.cpp -o ./Release/MadSortDialog.o $(CXXFLAGS)
+
+./Release/impl.o: $(GLOBALDEPS) ../charset-detector/src/entry/impl.cpp
+	$(CPP) -c ../charset-detector/src/entry/impl.cpp -o ./Release/impl.o $(CXXFLAGS)
+
+./Release/CharDistribution.o: $(GLOBALDEPS) ../charset-detector/src/CharDistribution.cpp ../charset-detector/src/CharDistribution.h ../charset-detector/src/nscore.h
+	$(CPP) -c ../charset-detector/src/CharDistribution.cpp -o ./Release/CharDistribution.o $(CXXFLAGS)
+
+./Release/JpCntx.o: $(GLOBALDEPS) ../charset-detector/src/JpCntx.cpp ../charset-detector/src/nscore.h ../charset-detector/src/JpCntx.h ../charset-detector/src/nscore.h
+	$(CPP) -c ../charset-detector/src/JpCntx.cpp -o ./Release/JpCntx.o $(CXXFLAGS)
+
+./Release/LangBulgarianModel.o: $(GLOBALDEPS) ../charset-detector/src/LangBulgarianModel.cpp ../charset-detector/src/nsSBCharSetProber.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nscore.h
+	$(CPP) -c ../charset-detector/src/LangBulgarianModel.cpp -o ./Release/LangBulgarianModel.o $(CXXFLAGS)
+
+./Release/LangCyrillicModel.o: $(GLOBALDEPS) ../charset-detector/src/LangCyrillicModel.cpp ../charset-detector/src/nsSBCharSetProber.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nscore.h
+	$(CPP) -c ../charset-detector/src/LangCyrillicModel.cpp -o ./Release/LangCyrillicModel.o $(CXXFLAGS)
+
+./Release/LangGreekModel.o: $(GLOBALDEPS) ../charset-detector/src/LangGreekModel.cpp ../charset-detector/src/nsSBCharSetProber.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nscore.h
+	$(CPP) -c ../charset-detector/src/LangGreekModel.cpp -o ./Release/LangGreekModel.o $(CXXFLAGS)
+
+./Release/LangHebrewModel.o: $(GLOBALDEPS) ../charset-detector/src/LangHebrewModel.cpp ../charset-detector/src/nsSBCharSetProber.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nscore.h
+	$(CPP) -c ../charset-detector/src/LangHebrewModel.cpp -o ./Release/LangHebrewModel.o $(CXXFLAGS)
+
+./Release/LangHungarianModel.o: $(GLOBALDEPS) ../charset-detector/src/LangHungarianModel.cpp ../charset-detector/src/nsSBCharSetProber.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nscore.h
+	$(CPP) -c ../charset-detector/src/LangHungarianModel.cpp -o ./Release/LangHungarianModel.o $(CXXFLAGS)
+
+./Release/LangThaiModel.o: $(GLOBALDEPS) ../charset-detector/src/LangThaiModel.cpp ../charset-detector/src/nsSBCharSetProber.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nscore.h
+	$(CPP) -c ../charset-detector/src/LangThaiModel.cpp -o ./Release/LangThaiModel.o $(CXXFLAGS)
+
+./Release/nsBig5Prober.o: $(GLOBALDEPS) ../charset-detector/src/nsBig5Prober.cpp ../charset-detector/src/nsBig5Prober.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nscore.h ../charset-detector/src/nsCodingStateMachine.h ../charset-detector/src/nsPkgInt.h ../charset-detector/src/nscore.h ../charset-detector/src/CharDistribution.h ../charset-detector/src/nscore.h
+	$(CPP) -c ../charset-detector/src/nsBig5Prober.cpp -o ./Release/nsBig5Prober.o $(CXXFLAGS)
+
+./Release/nsCharSetProber.o: $(GLOBALDEPS) ../charset-detector/src/nsCharSetProber.cpp ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nscore.h ../charset-detector/src/prmem.h
+	$(CPP) -c ../charset-detector/src/nsCharSetProber.cpp -o ./Release/nsCharSetProber.o $(CXXFLAGS)
+
+./Release/nsEscCharsetProber.o: $(GLOBALDEPS) ../charset-detector/src/nsEscCharsetProber.cpp ../charset-detector/src/nsEscCharsetProber.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nscore.h ../charset-detector/src/nsCodingStateMachine.h ../charset-detector/src/nsPkgInt.h ../charset-detector/src/nscore.h
+	$(CPP) -c ../charset-detector/src/nsEscCharsetProber.cpp -o ./Release/nsEscCharsetProber.o $(CXXFLAGS)
+
+./Release/nsEscSM.o: $(GLOBALDEPS) ../charset-detector/src/nsEscSM.cpp ../charset-detector/src/nsCodingStateMachine.h ../charset-detector/src/nsPkgInt.h ../charset-detector/src/nscore.h
+	$(CPP) -c ../charset-detector/src/nsEscSM.cpp -o ./Release/nsEscSM.o $(CXXFLAGS)
+
+./Release/nsEUCJPProber.o: $(GLOBALDEPS) ../charset-detector/src/nsEUCJPProber.cpp ../charset-detector/src/nsEUCJPProber.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nscore.h ../charset-detector/src/nsCodingStateMachine.h ../charset-detector/src/nsPkgInt.h ../charset-detector/src/nscore.h ../charset-detector/src/JpCntx.h ../charset-detector/src/nscore.h ../charset-detector/src/CharDistribution.h ../charset-detector/src/nscore.h
+	$(CPP) -c ../charset-detector/src/nsEUCJPProber.cpp -o ./Release/nsEUCJPProber.o $(CXXFLAGS)
+
+./Release/nsEUCKRProber.o: $(GLOBALDEPS) ../charset-detector/src/nsEUCKRProber.cpp ../charset-detector/src/nsEUCKRProber.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nscore.h ../charset-detector/src/nsCodingStateMachine.h ../charset-detector/src/nsPkgInt.h ../charset-detector/src/nscore.h ../charset-detector/src/CharDistribution.h ../charset-detector/src/nscore.h
+	$(CPP) -c ../charset-detector/src/nsEUCKRProber.cpp -o ./Release/nsEUCKRProber.o $(CXXFLAGS)
+
+./Release/nsEUCTWProber.o: $(GLOBALDEPS) ../charset-detector/src/nsEUCTWProber.cpp ../charset-detector/src/nsEUCTWProber.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nscore.h ../charset-detector/src/nsCodingStateMachine.h ../charset-detector/src/nsPkgInt.h ../charset-detector/src/nscore.h ../charset-detector/src/CharDistribution.h ../charset-detector/src/nscore.h
+	$(CPP) -c ../charset-detector/src/nsEUCTWProber.cpp -o ./Release/nsEUCTWProber.o $(CXXFLAGS)
+
+./Release/nsGB2312Prober.o: $(GLOBALDEPS) ../charset-detector/src/nsGB2312Prober.cpp ../charset-detector/src/nsGB2312Prober.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nscore.h ../charset-detector/src/nsCodingStateMachine.h ../charset-detector/src/nsPkgInt.h ../charset-detector/src/nscore.h ../charset-detector/src/CharDistribution.h ../charset-detector/src/nscore.h
+	$(CPP) -c ../charset-detector/src/nsGB2312Prober.cpp -o ./Release/nsGB2312Prober.o $(CXXFLAGS)
+
+./Release/nsHebrewProber.o: $(GLOBALDEPS) ../charset-detector/src/nsHebrewProber.cpp ../charset-detector/src/nsHebrewProber.h ../charset-detector/src/nsSBCharSetProber.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nscore.h
+	$(CPP) -c ../charset-detector/src/nsHebrewProber.cpp -o ./Release/nsHebrewProber.o $(CXXFLAGS)
+
+./Release/nsLatin1Prober.o: $(GLOBALDEPS) ../charset-detector/src/nsLatin1Prober.cpp ../charset-detector/src/nsLatin1Prober.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nscore.h ../charset-detector/src/prmem.h
+	$(CPP) -c ../charset-detector/src/nsLatin1Prober.cpp -o ./Release/nsLatin1Prober.o $(CXXFLAGS)
+
+./Release/nsMBCSGroupProber.o: $(GLOBALDEPS) ../charset-detector/src/nsMBCSGroupProber.cpp ../charset-detector/src/prmem.h ../charset-detector/src/nsMBCSGroupProber.h ../charset-detector/src/nsSJISProber.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nscore.h ../charset-detector/src/nsCodingStateMachine.h ../charset-detector/src/nsPkgInt.h ../charset-detector/src/nscore.h ../charset-detector/src/JpCntx.h ../charset-detector/src/nscore.h ../charset-detector/src/CharDistribution.h ../charset-detector/src/nscore.h ../charset-detector/src/nsUTF8Prober.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nsCodingStateMachine.h ../charset-detector/src/nsEUCJPProber.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nsCodingStateMachine.h ../charset-detector/src/JpCntx.h ../charset-detector/src/CharDistribution.h ../charset-detector/src/nsGB2312Prober.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nsCodingStateMachine.h ../charset-detector/src/CharDistribution.h ../charset-detector/src/nsEUCKRProber.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nsCodingStateMachine.h ../charset-detector/src/CharDistribution.h ../charset-detector/src/nsBig5Prober.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nsCodingStateMachine.h ../charset-detector/src/CharDistribution.h ../charset-detector/src/nsEUCTWProber.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nsCodingStateMachine.h ../charset-detector/src/CharDistribution.h
+	$(CPP) -c ../charset-detector/src/nsMBCSGroupProber.cpp -o ./Release/nsMBCSGroupProber.o $(CXXFLAGS)
+
+./Release/nsMBCSSM.o: $(GLOBALDEPS) ../charset-detector/src/nsMBCSSM.cpp ../charset-detector/src/nsCodingStateMachine.h ../charset-detector/src/nsPkgInt.h ../charset-detector/src/nscore.h
+	$(CPP) -c ../charset-detector/src/nsMBCSSM.cpp -o ./Release/nsMBCSSM.o $(CXXFLAGS)
+
+./Release/nsSBCharSetProber.o: $(GLOBALDEPS) ../charset-detector/src/nsSBCharSetProber.cpp ../charset-detector/src/nsSBCharSetProber.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nscore.h
+	$(CPP) -c ../charset-detector/src/nsSBCharSetProber.cpp -o ./Release/nsSBCharSetProber.o $(CXXFLAGS)
+
+./Release/nsSBCSGroupProber.o: $(GLOBALDEPS) ../charset-detector/src/nsSBCSGroupProber.cpp ../charset-detector/src/prmem.h ../charset-detector/src/nsSBCharSetProber.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nscore.h ../charset-detector/src/nsSBCSGroupProber.h ../charset-detector/src/nsHebrewProber.h ../charset-detector/src/nsSBCharSetProber.h
+	$(CPP) -c ../charset-detector/src/nsSBCSGroupProber.cpp -o ./Release/nsSBCSGroupProber.o $(CXXFLAGS)
+
+./Release/nsSJISProber.o: $(GLOBALDEPS) ../charset-detector/src/nsSJISProber.cpp ../charset-detector/src/nsSJISProber.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nscore.h ../charset-detector/src/nsCodingStateMachine.h ../charset-detector/src/nsPkgInt.h ../charset-detector/src/nscore.h ../charset-detector/src/JpCntx.h ../charset-detector/src/nscore.h ../charset-detector/src/CharDistribution.h ../charset-detector/src/nscore.h
+	$(CPP) -c ../charset-detector/src/nsSJISProber.cpp -o ./Release/nsSJISProber.o $(CXXFLAGS)
+
+./Release/nsUniversalDetector.o: $(GLOBALDEPS) ../charset-detector/src/nsUniversalDetector.cpp ../charset-detector/src/nscore.h ../charset-detector/src/nsUniversalDetector.h ../charset-detector/src/nsMBCSGroupProber.h ../charset-detector/src/nsSJISProber.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nscore.h ../charset-detector/src/nsCodingStateMachine.h ../charset-detector/src/nsPkgInt.h ../charset-detector/src/nscore.h ../charset-detector/src/JpCntx.h ../charset-detector/src/nscore.h ../charset-detector/src/CharDistribution.h ../charset-detector/src/nscore.h ../charset-detector/src/nsUTF8Prober.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nsCodingStateMachine.h ../charset-detector/src/nsEUCJPProber.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nsCodingStateMachine.h ../charset-detector/src/JpCntx.h ../charset-detector/src/CharDistribution.h ../charset-detector/src/nsGB2312Prober.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nsCodingStateMachine.h ../charset-detector/src/CharDistribution.h ../charset-detector/src/nsEUCKRProber.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nsCodingStateMachine.h ../charset-detector/src/CharDistribution.h ../charset-detector/src/nsBig5Prober.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nsCodingStateMachine.h ../charset-detector/src/CharDistribution.h ../charset-detector/src/nsEUCTWProber.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nsCodingStateMachine.h ../charset-detector/src/CharDistribution.h ../charset-detector/src/nsSBCSGroupProber.h ../charset-detector/src/nsEscCharsetProber.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nsCodingStateMachine.h ../charset-detector/src/nsLatin1Prober.h ../charset-detector/src/nsCharSetProber.h
+	$(CPP) -c ../charset-detector/src/nsUniversalDetector.cpp -o ./Release/nsUniversalDetector.o $(CXXFLAGS)
+
+./Release/nsUTF8Prober.o: $(GLOBALDEPS) ../charset-detector/src/nsUTF8Prober.cpp ../charset-detector/src/nsUTF8Prober.h ../charset-detector/src/nsCharSetProber.h ../charset-detector/src/nscore.h ../charset-detector/src/nsCodingStateMachine.h ../charset-detector/src/nsPkgInt.h ../charset-detector/src/nscore.h
+	$(CPP) -c ../charset-detector/src/nsUTF8Prober.cpp -o ./Release/nsUTF8Prober.o $(CXXFLAGS)
+
+./Release/MadFileAssociationDialog.o: $(GLOBALDEPS) ../src/MadFileAssociationDialog.cpp ../src/MadFileAssociationDialog.h ../src/MadUtils.h
+	$(CPP) -c ../src/MadFileAssociationDialog.cpp -o ./Release/MadFileAssociationDialog.o $(CXXFLAGS)
+
+Release/MadEdit_private.res: Release/MadEdit_private.rc ../src/MadEditApp.rc 
+	$(WINDRES) --input-format=rc -o Release/MadEdit_private.res $(RCINCS) Release/MADEDI~1.RC -O coff

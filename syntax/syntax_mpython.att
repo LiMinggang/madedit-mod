@@ -1,0 +1,58 @@
+CustomRange=
+TextColor=BLACK
+TextBgColor=WHITE
+TextStyle=
+DelimiterColor=SADDLEBROWN
+DelimiterBgColor=None
+DelimiterStyle=
+SpaceColor=CYAN
+SpaceBgColor=None
+SpaceStyle=
+NumberColor=BLUE
+NumberBgColor=None
+NumberStyle=
+StringColor=RED
+StringBgColor=None
+StringStyle=
+CommentColor=TEAL
+CommentBgColor=None
+CommentStyle=
+DirectiveColor=GREEN
+DirectiveBgColor=None
+DirectiveStyle=
+SpecialWordColor=NAVY
+SpecialWordBgColor=None
+SpecialWordStyle=
+LineNumberColor=WHITE
+LineNumberBgColor=A0A0A0
+LineNumberStyle=
+ActiveLineColor=FUCHSIA
+BookmarkColor=C0FFFF
+[1.Keyword]
+Color=BLACK
+BgColor=None
+Style= Bold
+[2.Keyword]
+Color=DARKBLUE
+BgColor=None
+Style= Bold
+[3.Keyword]
+Color=FORESTGREEN
+BgColor=None
+Style= Bold
+[4.Keyword]
+Color=DARKORCHID
+BgColor=None
+Style= Bold
+[5.Keyword]
+Color=CORNFLOWERBLUE
+BgColor=None
+Style= Bold
+[6.Keyword]
+Color=RED
+BgColor=None
+Style= Bold
+[7.Keyword]
+Color=RED
+BgColor=None
+Style=

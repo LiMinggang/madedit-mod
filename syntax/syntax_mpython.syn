@@ -1,0 +1,104 @@
+# MadPython
+Title=MadPython
+CaseSensitive=Yes
+Delimiter=~`!@#$%^&*()-+=|\{}[]:;"',.<>/?
+LineComment=#
+BlockComment=
+EscapeChar=\
+StringChar="'
+DirectiveLeading=
+KeywordPrefix=
+SpecialWordPrefix=
+IndentChar=
+UnindentChar=
+BracePair=( ) { } [ ]
+AutoCompletePair=() [] {} "" ''
+
+# System Predefined Color & Style
+TextColor=Black
+TextBgColor=White
+TextStyle=
+
+DelimiterColor=SaddleBrown
+DelimiterBgColor=
+DelimiterStyle=
+
+SpaceColor=Aqua
+SpaceBgColor=
+SpaceStyle=
+
+NumberColor=Orange
+NumberBgColor=
+NumberStyle=
+
+StringColor=Red
+StringBgColor=
+StringStyle=
+
+CommentColor=Teal
+CommentBgColor=
+CommentStyle=
+
+DirectiveColor=Green
+DirectiveBgColor=
+DirectiveStyle=
+
+SpecialWordColor=Navy
+SpecialWordBgColor=
+SpecialWordStyle=
+
+LineNumberColor=White
+LineNumberBgColor=A0A0A0
+LineNumberStyle=
+
+ActiveLineColor=Fuchsia
+BookmarkColor=C0FFFF
+
+# User Defined Keywords
+[1.Keywords]
+Color=Blue
+BgColor=
+Style=Bold
+InRange=0
+Keyword=and as assert break class continue def del elif else except exec finally for from global if import in is lambda not or object pass print raise range return try while yield
+
+[2.Functions]
+Color=DarkBlue
+Style=Bold
+InRange=0
+Keyword=__import__ abs apply basestring bool buffer callable chr classmethod cmp coerce compile complex delattr dict dir divmod enumerate eval execfile Ellipsis file filter float frozenset False getattr globals group hasattr hash help hex id input int intern isinstance issubclass iter joinfields len list local long map match max min None NotImplemented oct open ord pow property raw_input reduce reload repr round search set setattr slice sorted str splitfields tuple type True unichr unicode vars xrange zip
+
+[3.Methods]
+Color=ForestGreen
+Style=Bold
+InRange=0
+Keyword=__abs__ __add__ __and__ __call__ __cmp__ __coerce__ __contains__ __del__ __delattr__ __delitem__ __delslice__ __div__ __divmod__ __eq__ __float__ __floordiv__  __ge__ __getattribute__ __getitem__ __getnewargs__ __getslice__ __gt__ __hash__ __hex__ __iadd__ __iand__ __idiv__ __ilshift__ __imod__ __imul__ __init__ __int__ __invert__ __ior__ __ipow__ __irshift__ __isub__ __iter__ __ixor__ __le__ __len__ __long__ __lshift__ __lt__ __mod__ __mul__ __ne__ __neg__ __nonzero__ __oct__ __or__ __pos__ __pow__ __radd__ __rand__ __rdiv__ __rdivmod__ __reduce__ __reduce_ex__ __repr__ __reserved__ __rfloordiv__ __rlshift__ __rmod__ __rmul__ __ror__ __rpow__ __rlshift__ __rrshift__ __rshift__ __rsub__ __rtruediv__ __rxor__  __setattr__ __setitem__ __setslice__ __str__ __sub__ __xor__ add append capitalize center clear close conjugate copy count decode difference discard Decimal encode endswith expandtabs extend find flush fileno fromkeys get getcontext has_key index insert intersection intersection_update isalnum isalpha isatty isdigit islower isspace issubset issuperset istitle isupper items iteritems iterkeys itervalues join keys ljust lower lstrip next pop popitem read readline readlines remove rename replace reverse rfind rindex rjust rsplit rstrip seek setdefault sort split splitlines startswith strip swapcase symmetric_difference symmetric_difference_update tell title translate truncate union update upper values write writelines zfill ProcessCommand InsertWChar InsertStr ScrollLineUp ScrollLineDown ScrollPageUp ScrollPageDown ScrollLeft ScrollRight GoToLine SetSyntax GetSyntaxTitle LoadDefaultSyntaxScheme SetEncoding GetEncodingName GetEncodingDescription GetEncodingType GetRecordCaretMovements SetRecordCaretMovements SetTextFont SetHexFont GetTextFont GetHexFont GetFontNameSize SetFontA SetFixedWidthMode GetFixedWidthMode SetLineSpacing long GetLineSpacing SetEditMode GetEditMode SetSingleLineMode SetTabColumns long GetTabColumns SetIndentColumns long GetIndentColumns SetInsertSpacesInsteadOfTab GetInsertSpacesInsteadOfTab SetWantTab GetWantTab SetWordWrapMode GetWordWrapMode SetDisplayLineNumber SetShowEndOfLine SetShowTabChar SetShowSpaceChar SetMarkActiveLine GetDisplayLineNumber GetShowEndOfLine GetShowTabChar GetShowSpaceChar GetMarkActiveLine SetMarkBracePair GetMarkBracePair long GetMaxColumns SetMaxColumns GetAutoIndent SetAutoIndent SetAutoCompletePair GetAutoCompletePair SetInsertMode   GetInsertMode SetCaretType GetMouseSelectToCopy SetMouseSelectToCopy GetMouseSelectToCopyWithCtrlKey SetMouseSelectToCopyWithCtrlKey GetMiddleMouseToPaste SetMiddleMouseToPaste GetMaxWordWrapWidth GetUCharWidth GetHexUCharWidth GetUCharType GetCaretPositionA GetCaretPositionB GetFileName GetFileSize IsSelected GetSelectionSize GetSelectionBeginPos GetSelectionEndPos GetSelectionLineId GetLineCount ConvertNewLineType SetInsertNewLineType GetNewLineType GetInsertNewLineType IsModified long GetModificationTime SetReadOnly IsReadOnly IsTextFile GetSelText GetText SetText GetLine GetLineByPos const GetSelHexString const GetWordFromCaretPos Delete CutLine DeleteLine InsertTabChar InsertDateTime HighlightWords SelectAll CutToClipboard CopyToClipboardA PasteFromClipboard DndBegDrag DndDrop CanPaste CopyToClipboardB CanUndo CanRedo Undo Redo SetCaretPosition HasBracePair GoToLeftBrace GoToRightBrace FindTextNext FindTextPrevious FindHexNext FindHexPrevious ReplaceText ReplaceHex ReplaceTextAll ReplaceHexAll FindTextAll FindHexAll LoadFromFile SaveToFile Reload ReloadByModificationTime RestorePosition Save SetBookmark GotoNextBookmark GotoPreviousBookmark ConvertEncoding ConvertChineseA HasBOM ToggleBOM IncreaseDecreaseIndent HasLineComment CommentUncomment ToUpperCase ToLowerCase InvertCase ToHalfWidth ToFullWidth TrimTrailingSpaces SortLines ConvertWordWrapToNewLine ConvertNewLineToWordWrap ConvertSpaceToTab ConvertTabToSpace CopyAsHexString WordCount GoToLineColumn
+
+
+[4.Attributes]
+Color=DarkOrchid
+BgColor=
+Style=Bold
+InRange=0
+Keyword=__author__ __bases__ __class__ __dict__ __doc__ __email__ __methods__ __members__ __name__ __slots__ __version__
+
+[5.Exceptions]
+Color=CornflowerBlue
+BgColor=
+Style=Bold
+InRange=0
+Keyword=ArithmeticError AssertionError AttributeError DeprecationWarning EnvironmentError EOFError Exception FloatingPointError FutureWarning ImportError IndentationError IndexError IOError  KeyboardInterrupt KeyError LookupError MemoryError NameError NotImplementedError OSError OverflowWarning OverflowError PendingDeprecationWarning ReferenceError RuntimeError RuntimeWarning StandardError StopIteration SyntaxError SyntaxWarning SystemError SystemExit TabError TypeError UnboundLocalError UnicodeError UnicodeDecodeError UnicodeEncodeError UnicodeTranslateError UserWarning ValueError Warning WindowsError ZeroDivisionError
+
+[6.Common Libs]
+Color=Red
+BgColor=
+Style=Bold
+InRange=0
+Keyword=.ElementTree .ascii .ast .audio .base .charset .dom .encoders .errors .etree .expat .generator .handler .handlers .header .headers .idna .image .iterators .message .mime .minidom .multipart .nonmultipart .panel .parser .parsers .path .pulldom .sax .saxutils .simple_server .stats .test_support .text .textpad .util .utils .validate .visitor .wrapper .xmlreader AL AST BaseHTTPServer Bastion CGIHTTPServer Carbon ColorPicker Complex ConfigParser Cookie DEVICE DocXMLRPCServer EasyDialogs FL FrameWork GL HTMLParser MacOS MimeWriter MiniAEFrame NNTPError Para PixMapWrapper Queue SUNAUDIODEV ScrolledText SimpleHTTPServer SimpleXMLRPCServer SocketServer StringIO TERMIOS Tix Tkinter UserDict UserList UserString __builtin__ __future__ __main__ _locale _winreg aepack aetools aetypes aifc al anydbm applesingle array asynchat asyncore atexit audioop autoGIL base64 bdb binascii binhex bisect bsddb buildtools bz2 cPickle cProfile cStringIO calendar cd cfmfile cgi cgitb chunk cmath cmd code codecs codeop collections colorsys commands compileall compiler contextlib cookielib copy_reg crypt csv  ctypes curses datetime dbhash dbm decimal difflib dircache dircmp dis distutils dl doctest dospath dumbdbm dummy_thread dummy_threading emacs email encodings errno exceptions fcntl filecmp fileinput findertools fl flp fm fmt fnmatch formatter fpectl fpformat ftplib functools gc gdbm gensuitemodule getopt getpass gettext gl glob gopherlib grep grp gzip hashlib heapq hmac hotshot htmlentitydefs htmllib httplib ic icopen ihooks imageop imaplib imgfile imghdr imp imputil inspect itertools jpeg keyword knee linecache locale lockfile logging mac macerrors macfs macostools macpath macresource macurl2path mailbox mailcap marshal math md5 mhlib mimetools mimetypes mimify mmap modulefinder msilib msvcrt multifile mutex netrc new newdir ni nis nntplib nsremote ntpath nturl2path operator optparse os ossaudiodev parser pdb pgdb pickle pickletools pipes pkgutil platform poly popen2 poplib posix posixfile posixpath pprint profile pstats pty pwd py_compile pyclbr pydoc pyexpat pythonprefs quietconsole quopri rand random re regex regsub resource rexec rfc822 rgbimg rlcompleter robotparser rotor runpy sched select sets sgmllib sha shelve shlex shutil signal site sitecustomize smtpd smtplib sndhdr snmp socket spwd sqlite3 stat statcache statvfs string stringprep struct subprocess sunau sunaudiodev symbol sys syslog tabnanny tarfile tb telnetlib tempfile termios test textwrap thread threading time timeit toaiff token tokenize trace traceback tty turtle types tzparse unicodedata unittest urllib urllib2 urlparse user util uu uuid videoreader warnings waste wave weakref webbrowser whatsound whichdb whrandom winsound wsgiref xdrlib xml xmllib xmlpackage xmlrpclib zipfile zipimport zlib zmod MadEdit MadEditCmd MadWordWrapMode MadEditMode MadCaretType MadNewLineType MadConvertEncodingFlag
+
+[7.Others]
+Color=Red
+BgColor=
+Style=
+InRange=0
+Keyword=array cls fnmatch struct self

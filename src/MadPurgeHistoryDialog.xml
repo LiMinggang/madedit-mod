@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<resource version="2.3.0.1">
+<!-- Created by  build 7.4.2.569 -->
+<!--object class="wxDialog" name="MadPurgeHistoryDialog"-->
+<!--title>Purge Histories</title-->
+<!--IDident>ID_PURGEHISTORYDIALOG</IDident-->
+<!--ID>1000</ID-->
+<!--pos>8,8</pos-->
+<!--size>330,352</size-->
+<!--style>wxDEFAULT_DIALOG_STYLE</style-->
+  <!--object class="wxBoxSizer" name="WxBoxSizer1"-->
+    <!--orient>vertical</orient-->
+      <!--sizeritem-->
+        <!--option>0</option-->
+        <!--border>5</border-->
+        <!--flag>wxALL</flag-->
+          <object class="wxStaticBoxSizer" name="WxStaticBoxSizer1">
+            <orient>wxVERTICAL</orient>
+            <label></label>
+              <sizeritem>
+                <option>0</option>
+                <border>5</border>
+                <flag>wxALL</flag>
+                  <object class="wxCheckBox" name="wxCheckBoxRecentFiles">
+                    <IDident>ID_WXCHECKBOXRECENTFILES</IDident>
+                    <ID>1083</ID>
+                    <label>Recent Files</label>
+                    <checked>0</checked>
+                    <style></style>
+                  </object>
+              </sizeritem>
+              <sizeritem>
+                <option>0</option>
+                <border>5</border>
+                <flag>wxALL</flag>
+                  <object class="wxCheckBox" name="wxCheckBoxRecentFonts">
+                    <IDident>ID_WXCHECKBOXRECENTFONTS</IDident>
+                    <ID>1084</ID>
+                    <label>Recent Fonts</label>
+                    <checked>0</checked>
+                    <style></style>
+                  </object>
+              </sizeritem>
+              <sizeritem>
+                <option>0</option>
+                <border>5</border>
+                <flag>wxALL</flag>
+                  <object class="wxCheckBox" name="wxCheckBoxRecentEncodings">
+                    <IDident>ID_WXCHECKBOXRECENTENCODINGS</IDident>
+                    <ID>1085</ID>
+                    <label>Recent Encodings</label>
+                    <checked>0</checked>
+                    <style></style>
+                  </object>
+              </sizeritem>
+              <sizeritem>
+                <option>0</option>
+                <border>5</border>
+                <flag>wxALL</flag>
+                  <object class="wxCheckBox" name="wxCheckBoxRecentSearchedTexts">
+                    <IDident>ID_WXCHECKBOXRECENTSEARCHEDTEXTS</IDident>
+                    <ID>1086</ID>
+                    <label>Recent Searched Texts</label>
+                    <checked>0</checked>
+                    <style></style>
+                  </object>
+              </sizeritem>
+              <sizeritem>
+                <option>0</option>
+                <border>5</border>
+                <flag>wxALL</flag>
+                  <object class="wxCheckBox" name="wxCheckBoxRecentReplacedTexts">
+                    <IDident>ID_WXCHECKBOXRECENTREPLACEDTEXTS</IDident>
+                    <ID>1087</ID>
+                    <label>Recent Replaced Texts</label>
+                    <checked>0</checked>
+                    <style></style>
+                  </object>
+              </sizeritem>
+              <sizeritem>
+                <option>0</option>
+                <border>5</border>
+                <flag>wxALL</flag>
+                  <object class="wxCheckBox" name="wxCheckBoxRecentSearchedDirectories">
+                    <IDident>ID_WXCHECKBOXRECENTSEARCHEDDIRECTORIES</IDident>
+                    <ID>1088</ID>
+                    <label>Recent Searched Directories</label>
+                    <checked>0</checked>
+                    <style></style>
+                  </object>
+              </sizeritem>
+              <sizeritem>
+                <option>0</option>
+                <border>5</border>
+                <flag>wxALL</flag>
+                  <object class="wxCheckBox" name="wxRecentSearchedFileFilters">
+                    <IDident>ID_WXRECENTSEARCHEDFILEFILTERS</IDident>
+                    <ID>1089</ID>
+                    <label>Recent Searched File Filters</label>
+                    <checked>0</checked>
+                    <style></style>
+                  </object>
+              </sizeritem>
+              <sizeritem>
+                <option>0</option>
+                <border>5</border>
+                <flag>wxALL</flag>
+                  <object class="wxCheckBox" name="wxCheckBoxRecentSearchedExcludeFilters">
+                    <IDident>ID_WXCHECKBOXRECENTSEARCHEDEXCLUDEFILTERS</IDident>
+                    <ID>1090</ID>
+                    <label>Recent Searched Exclude Filters</label>
+                    <checked>0</checked>
+                    <style></style>
+                  </object>
+              </sizeritem>
+          </object>
+      <!--/sizeritem-->
+      <!--sizeritem-->
+        <!--option>0</option-->
+        <!--border>5</border-->
+        <!--flag>wxALL</flag-->
+          <object class="wxBoxSizer" name="WxBoxSizer2">
+            <orient>horizontal</orient>
+              <sizeritem>
+                <option>0</option>
+                <border>5</border>
+                <flag>wxALL</flag>
+                  <object class="wxButton" name="WxButtonOK">
+                    <label>_OK</label>
+                    <IDident>wxID_OK</IDident>
+                    <ID>1092</ID>
+                    <style></style>
+                  </object>
+              </sizeritem>
+              <sizeritem>
+                <option>0</option>
+                <border>5</border>
+                <flag>wxALL</flag>
+                  <object class="wxButton" name="wxButtonCancel">
+                    <label>_Cancel</label>
+                    <IDident>wxID_CANCEL</IDident>
+                    <ID>1093</ID>
+                    <style></style>
+                  </object>
+              </sizeritem>
+          </object>
+      <!--/sizeritem-->
+  <!--/object-->
+<!--/object-->
+</resource>

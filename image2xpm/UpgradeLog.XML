@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="image2xpm">
+</Property><Property Name="Solution File" Value="D:\madedit-mod\image2xpm\image2xpm.sln">
+</Property><Property Name="Date" Value="2014年9月11日">
+</Property><Property Name="Time" Value="9:49">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="image2xpm.sln" Description="File successfully backed up as D:\madedit-mod\image2xpm\image2xpm.sln.old">
+</Event><Event ErrorLevel="0" Project="image2xpm" Source="image2xpm.vcproj" Description="Converting project file 'D:\madedit-mod\image2xpm\image2xpm.vcproj'.">
+</Event><Event ErrorLevel="1" Project="image2xpm" Source="image2xpm.vcproj" Description="This application has been updated to include settings related to the User Account Control (UAC) feature of Windows Vista. By default, when run on Windows Vista with UAC enabled, this application is marked to run with the same privileges as the process that launched it. This marking also disables the application from running with virtualization. You can change UAC related settings from the Property Pages of the project.">
+</Event><Event ErrorLevel="1" Project="image2xpm" Source="image2xpm.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="image2xpm" Source="image2xpm.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="0" Project="image2xpm" Source="image2xpm.vcproj" Description="Web deployment to the local IIS server is no longer supported. The Web Deployment build tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="image2xpm" Source="image2xpm.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="0" Project="image2xpm" Source="image2xpm.vcproj" Description="Done converting to new project file 'D:\madedit-mod\image2xpm\image2xpm.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="image2xpm" Source="image2xpm.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="image2xpm.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="image2xpm.sln" Description="Converted">
+</Event></UpgradeLog>

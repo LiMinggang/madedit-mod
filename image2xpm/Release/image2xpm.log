@@ -1,0 +1,23 @@
+﻿Build started 2014/9/11 10:04:35.
+     1>Project "D:\madedit-mod\image2xpm\image2xpm.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Touching "Release\image2xpm.unsuccessfulbuild".
+       ClCompile:
+         All outputs are up-to-date.
+       ResourceCompile:
+         C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /D _VC80_UPGRADE=0x0710 /D _UNICODE /D UNICODE /l"0x0409" /I"c:\wxMSW-2.8.12\include" /I\wxWidgets\include /nologo /fo"Release\image2xpmApp.res" image2xpmApp.rc 
+       Link:
+         C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"Release\image2xpm.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"c:\wxMSW-2.8.12\\lib\vc_lib" /LIBPATH:..\libunicows wxmsw28u_core.lib wxbase28u.lib wxpng.lib wxzlib.lib wxjpeg.lib wxtiff.lib unicows.lib comctl32.lib uuid.lib rpcrt4.lib User32.Lib Gdi32.Lib Shell32.Lib AdvAPI32.Lib Ole32.Lib OleAut32.Lib ComDlg32.Lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\image2xpm.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\madedit-mod\image2xpm\Release\image2xpm.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"Release\image2xpm.lib" /MACHINE:X86 Release\image2xpmApp.res
+         Release\image2xpmApp.obj
+         Release\image2xpmFrm.obj
+         image2xpm.vcxproj -> D:\madedit-mod\image2xpm\Release\image2xpm.exe
+       Manifest:
+         C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"Release\image2xpm.exe;#1" /manifest Release\image2xpm.exe.intermediate.manifest
+       FinalizeBuildStatus:
+         Deleting file "Release\image2xpm.unsuccessfulbuild".
+         Touching "Release\image2xpm.lastbuildstate".
+     1>Done Building Project "D:\madedit-mod\image2xpm\image2xpm.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:07.72

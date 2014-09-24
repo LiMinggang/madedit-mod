@@ -1,0 +1,4 @@
+me=MadEdit()
+res = me.ReplaceTextAll("\\r\\n", "\\n", True, False, False)
+
+res = me.ReplaceTextAll("\\n\\n", "\\n", True, False, False)

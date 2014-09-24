@@ -1,0 +1,85 @@
+# Tcl/tk
+Title=Tcl/tk
+CaseSensitive=Yes
+Delimiter=~!@%^&*()+=|\/{}[]:;"' <> ,?#
+LineComment= #
+BlockComment= 
+EscapeChar=\
+StringChar="'
+DirectiveLeading=
+KeywordPrefix=
+SpecialWordPrefix=
+IndentChar={
+UnindentChar=}
+BracePair=--[[ ]]  --[=[ ]=]  [[ ]]  ( ) [ ] { } 
+AutoCompletePair=() [] {} "" ''
+
+
+# System Predefined Color & Style
+TextColor=Black
+TextBgColor=White
+TextStyle=
+
+DelimiterColor=SaddleBrown
+DelimiterBgColor=
+DelimiterStyle=
+
+SpaceColor=Aqua
+SpaceBgColor=
+SpaceStyle=
+
+NumberColor=Blue
+NumberBgColor=
+NumberStyle=
+
+StringColor=Red
+StringBgColor=
+StringStyle=
+
+CommentColor=Teal
+CommentBgColor=
+CommentStyle=
+
+DirectiveColor=Green
+DirectiveBgColor=
+DirectiveStyle=
+
+SpecialWordColor=Navy
+SpecialWordBgColor=
+SpecialWordStyle=
+
+LineNumberColor=White
+LineNumberBgColor=A0A0A0
+LineNumberStyle=
+
+ActiveLineColor=Fuchsia
+BookmarkColor=C0FFFF
+
+# User Defined Keywords
+[1.Keywords]
+Color=Black
+BgColor=
+Style=Bold
+InRange=0
+Keyword=bell bind bindtags bitmap button canvas checkbutton clipboard destroy entry event focus frame grab grid image label listbox lower menu menubutton message option pack photo place radiobutton raise scale scrollbar selection send text tk tk_bindForTraversal tk_bisque tk_chooseColor tk_dialog tk_focusFollowsMouse tk_focusNext tk_focusPrev tk_getOpenFile tk_getSaveFile tk_menuBar tk_messageBox tk_optionMenu tk_popup tk_setPalette tkerror tkvars tkwait toplevel winfo wm 
+
+[2.Libraries]
+Color=DarkBlue
+BgColor=
+Style=Bold
+InRange=0
+Keyword=ErrorCode ErrorInfo auto_execs auto_index auto_noexec auto_noload auto_path env tcl_library tcl_nonwordchars tcl_patchLevel tcl_pkgPath tcl_platform tcl_precision tcl_rcFileName tcl_rcRsrcName tcl_version tcl_wordchars unknown_active
+
+[3.Functions]
+Color=ForestGreen
+BgColor=
+Style=Bold
+InRange=0
+Keyword=proc method constructor destructor public variable common
+
+[4.Commands]
+Color=Blue
+BgColor=
+Style=Bold
+InRange=0
+Keyword=after append array auto_execok auto_import auto_load auto_mkindex auto_mkindex_old auto_qualify auto_reset bgerror binary break case catch cd class clock close common concat constructor continue dde destructor else elseif encoding eof error eval exec exit expr fblocked fconfigure fcopy file fileevent filename flush for foreach format gets glob global history http if incr info inherit interp join lappend lindex linsert list llength load lrange lreplace lsearch lset lsort memory method msgcat namespace open package parray pid pkg::create pkg_mkIndex private proc protected public puts pwd re_syntax read regexp registry regsub rename resource return scan seek set socket source split string subst switch tcl_endOfWord tcl_findLibrary tcl_startOfNextWord tcl_startOfPreviousWord tcl_wordBreakAfter tcl_wordBreakBefore tcltest tclvars tell time trace unknown unset update uplevel upvar variable vwait while
