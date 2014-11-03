@@ -139,7 +139,7 @@ void MadNumberDlg::CreateGUIControls()
 
 void MadNumberDlg::OnClose(wxCloseEvent& /*event*/)
 {
-	Destroy();
+    Destroy();
     g_MadNumberDlg = NULL;
 }
 

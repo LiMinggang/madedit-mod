@@ -1,19 +1,6 @@
 #include "EmbeddedPython.hpp"
 #include "MadPython.hpp"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-void Py_Initialize();
-//extern "C" int PyRun_SimpleString(const char *s);
-void Py_Finalize();
-//PyObject * Py_InitModule4(const char *name, PyMethodDef *methods,
-//                                      const char *doc, PyObject *self,
-//                                      int apiver);
-#ifdef __cplusplus
-}
-#endif
-
 BOOST_PYTHON_MODULE(redirector)
 {
     using namespace embedded_python;

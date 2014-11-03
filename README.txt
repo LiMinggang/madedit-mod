@@ -1,5 +1,5 @@
                         =================================
-                               MadEdit v0.2.9 mod
+                                  MadEdit Mod
                         =================================
 About:
 -----
@@ -17,11 +17,14 @@ A. Linux, FreeBSD, and Unix-like OS (__WXGTK__):
       1. wxWidgets-2.6.1 or higher with Unicode enabled
       2. Boost-1.33.0 or higher
       3. Boost.Xpressive latest version
+      4. Python 2.7 or higher
+      5. hunspell 1.3.3 or higher
 
 B. MS Windows (__WXMSW__):
    a. MinGW32/GNU C++ 3.x (wxDevCpp):
       Required Libraries to compile:
-      1. wxWidgets-2.6.1 or higher with Unicode enabled(wxWidgets-2.8.12 is recommanded)
+      1. wxWidgets-2.6.1 or higher with Unicode enabled(wxWidgets-2.8.12 is recommended, and apply patches)
+         --enable-ipc
       2. Boost-1.33.0 or higher
       3. Boost.Xpressive latest version
       4. libunicows: it's optional under WinNT/XP, but required under Win98
@@ -36,9 +39,13 @@ B. MS Windows (__WXMSW__):
 P.S.: If you use CVS version of Boost, Boost.Xpressive has been included in the CVS HEAD,
       or you must get 'xpressive.zip' at:
       http://www.boost-consulting.com/vault/index.php?directory=Strings%20-%20Text%20Processing
-P.S.2: Since MadEdit v0.2.2, Xpressive is attached in MadEdit sources package.
+P.S.: wxAUIBook patch http://trac.wxwidgets.org/attachment/ticket/10848/
+P.S.: Don't forget to Copy wxwin.m4 to /usr/share/aclocal folder if you use your own build of
+      wxWidgets
+P.S.: Install gettext-devel if you got AM_GNU_GETTEXT error
 
-P.S.3 wxAUIBook patch http://trac.wxwidgets.org/attachment/ticket/10848/
+P.S.: madedit.pot has been uploaded to the top directory. Any translation for MadEdit-Mod is welcome.
+P.S.: Please open a ticket for bug of MadEdit-Mod at http://sourceforge.net/projects/madedit-mod/
 
 
 Syntax files, Locale files and Settings:
@@ -62,14 +69,88 @@ Syntax files, Locale files and Settings:
     2. $(MadEdit execution file directory)/MadEdit.cfg: Windows
   And FontWidth.dat will also be saved to the same path.
   FontWidth.dat is Cache of Font-Width-Data, it can speed-up MadEdit a lot.
+  
+  Download dictionary at http://archive.services.openoffice.org/pub/mirror/OpenOffice.org/contrib/dictionaries/
+
+Feature/issues to be released in next release:
+----------------------------------------------
+Fix build issue with WX 3.0 under Fedora
+
+ChangeLog:
+----------
+Mod v0.2.5.3
+1. Clear ReadOnly flag of the file instead of change outside and close/open again
+2. Update Simplified Chinese
+
+Mod v0.2.5.2
+1. Remove word from Personal dictionary
+2. Fix Linux build(for SpellChecker changes)
+3. Fix X11 detection issue of configure script
+4. Update Simplified Chinese
+
+Mod v0.2.5.1
+1. Fix bugs of Spell Checker config save/load
+2. Multiple dictionary supported(different files with different dictionaries at the same time)
+3. Personal dictionary(AddWord)/temporary ignore by right click(Enable it @Tools->Options->
+   spellChecker)
+4. Disable Spell Checker/Bookmark in Hex Mode
+5. Fix case sensitive issue of Personal dictionary
+6. Fix typo and translation issue
+
+Mod v0.2.5
+1. Spell checker released
+2. Spell checker config(Dictionary path, switch Dictionary(Tools->Options))
+3. Different dictionary for different document(would not save in config)
+4. Detect possible dictionaries under some directories
+5. Fix typo in README.txt by using Spell Checker
+
+Mod v0.2.5 Alpha
+1. Add hunspell as spell checker(Hard code en_US as dictionary for preview, under Dictionaries/)
+2. Enable/Disable spell checker(View->Spell Checker)
+3. Encoding group/filter
+4. Toolbar of bookmark, add ClearAllBookmarks
+5. Fixed Linux build(Fedora Core 17)
+6. Fixed some minor coding issues reported by g++
+7. Add ".hxx" as header file of C++
+8. Rollback a fix from wxMedit, which is buggy. https://github.com/hltj/wxMEdit/issues/63
+
+Mod v0.2.4
+1. Column Align released
+2. Change HKEY_CLASSES_ROOT to HKEY_CURRENT_USER\\Software\\Classes\\ for Windows UAC
+3. Improve usability of FindAll
+4. FindAll in Selection
+5. Fix issue that cannot open the files "a b" and "a\xC0b" simultaneously
+6. Fix issue of wxFileHistory by porting wxRecentList from wxMEdit
+7. Fix crash issue while building with VS2010
+8. Fix issue that \xC0 matches spaces under Windows with Chinese Locale
+9. Fix Upper/Lower issue of wxString under Windows(Chinese Ed)
+10. Fix issue introduced by FindAll that it would be found if the matched text was at the beginning
+
+Mod v0.2.3
+1. Change Info window label for Search or Search in Files
+2. Fix issue of mixed tabs and spaces of Column Align and released
+3. Add ColumnAlign InsertIncrementalNumber to MadPython and update madpython syntax file
+
+Mod v0.2.2.1
+1. Fix Modal dialog bug of wxWidgets 2.8.12(Patch from MadEdit 0.2.9.1) (Win32 only):
+    Use MadEdit open two new files, NoName1 and NoName2, the focus is on NoName2 now.
+    Select [Convert File Encoding...] in Tools menu, and press OK to close the dialog.
+    Then switch to NoName1, and reopen the [Convert File Encoding...] dialog.
+    After pressing OK the focus will jump to NoName2, cannot convert the encoding of NoName1.
+
+2. Fix wrong tap order of AUINoteBook http://trac.wxwidgets.org/attachment/ticket/10848/
+3. Fix bug in Mouse Select to clipboard
+4. Fix issue that Replace dialog never has chance to replace wrap around
+5. Update simplified Chinese translation
 
 Mod v0.2.2
-1. Add "Insert increamental numbers" to edit popup menu
-2. Column Align(Alpha, Known issue: crash with tab misked with spaces.)
+1. Add "Insert incremental numbers" to edit popup menu
+2. Column Align(Alpha, Known issue: crash with tab mixed with spaces.)
 3. Add attribute check in file change detect. The file would be marked as modified
 if it was deleted, changed attributes.
 4. Improve the code of InsertColumnString
-5. Colorful ReadOnly and InsertMode
+5. Colorful ReadOnly and InsertMode indicator string
+6. Fixed issue that Double click would not jump to content line if the file was opened but deleted(FindAll)
 
 Mod v0.2.1
 1. Support Insert in HexMode(Toggleable)
@@ -80,22 +161,22 @@ Mod v0.2.1
 
 Mod v0.2.0
 New features from 0.1.x
-1. Single Instance feature don't compatable with 0.1.x
+1. Single Instance feature don't compatible with 0.1.x
 2. MadPython based on Python 2.7.8 as automation macro(Edit/Record/Run/Save/Load)
-3. Insert incremantal numbers
+3. Insert incremental numbers
 3. Purge history during exiting
 4. Right click on file tab supported
 5. Close to right/left
 6. Fixed bugs found including hang issue caused by empty (), [] and {} in regluar expression
 
-Mod v0.2.0
+Mod v0.2.0 beta 5
 New to beta 4
 1. Changed error message of Options Dialog
 2. Add Incremental numbering feature in Edit->Advanced for column numbering at current caret pos
 3. Use InsertString for InsertStr for performance
 4. Export InsertIncrementalNumber to MadPython
 5. Improve MadMacro dialog
-6. Update Simplifed Chinese
+6. Update Simplified Chinese
 Waiting for bug report of MadPython and Incremental numbering:-P
 
 Mod v0.2.0 beta 4
@@ -110,7 +191,7 @@ Mod v0.2.0 beta 3
 This would be 0.2.0 if no critical issue found
 1. Fixed Known issue(wxStyledTextCtrl bug in beta 2) by replacing wxStyledTextCtrl with MadEdit
 2. Fixed MadPython insert char issue in column mode
-3. Change behave while string has illegal zero. ie. change 0x00(NUL) to 0x2400 uncode NUL
+3. Change behave while string has illegal zero. ie. change 0x00(NUL) to 0x2400 Unicode NUL
 4. Fixed Caret issue of search/replace(introduced by MadEdit): Caret would blink on wrong place, which 
 would be shown in right place if you iconize/restore the window
 5. Added MadPython syntax file and MadPython API added in the file
@@ -120,7 +201,7 @@ Known issue: MadPython not work well in column mode, eg. insert char in column m
 1. Fixed wxAUIBook bug with patch(http://trac.wxwidgets.org/attachment/ticket/10848/)
 2. Add Close All To The Left/Right feature
 3. Add default sting in MadMacroDlg, say, medit = MadEdit()
-4. Fixed hang issue caused by empty (), [] and {} in regluar expression
+4. Fixed hang issue caused by empty (), [] and {} in regular expression
 5. More missed commands was recorded, eg, SetEditMode
 
 Mod v0.2.0 beta 2014.9.12
@@ -132,7 +213,7 @@ New to 0.1.5 beta
 4. Fixed issue of extra script because of Search/Replace dialog using MadEdit as TextEdit
 5. Fixed issue of updating StartRecord on Toolbar
 6. Fixed issue of duplicated Find/Replace generated
-7. Fixed issue of loading script with unicode characters, eg, unicode in comments
+7. Fixed issue of loading script with Unicode characters, eg, Unicode in comments
 8. Update translation of Simplified Chinese
 
 Mod v0.1.5 beta 2014.9.11
@@ -155,7 +236,7 @@ Mod v0.1.5 alpha 3 2014.9.10
 Warning: This is a Preview for 0.1.5, MadPython was not fully tested. Save your work before try MadPython
 New to alpha 2
 1. Fixed Assertion on wxEVT_MOUSE_CAPTURE_LOST
-2. Record/Stop/Playpack/SaveMacro is done(Known issue: SetCaretPosition would get wrong selection beginning
+2. Record/Stop/Playback/SaveMacro is done(Known issue: SetCaretPosition would get wrong selection beginning
 pos and duplicated SetCaretPosition). Not well tested.
 3. Added more apis
 4. Updated MadPython.txt
@@ -168,7 +249,7 @@ Warning: This is a Preview for 0.1.5, MadPython was not fully tested. Save your 
 
 1. Replace the ugly code with wxSingleInstanceChecker for singleton check(Todo)
 2. Embed minimized Python as Macro language(Only MS Windows supported currently)[Tools->Macros]
-3. Improve behaviour of Search and SearchInFiles
+3. Improve behavior of Search and SearchInFiles
 4. Show search results on status bar
 5. Recoding and Playback(Todo)
 6. Save script/connected with shortcut(?)(Todo)
@@ -176,12 +257,12 @@ Warning: This is a Preview for 0.1.5, MadPython was not fully tested. Save your 
 
 Mod v0.1.4 2014.6.29
 1. Add clear history function(search/replace history, recent file/font history) from WMedit
-2. Update Simplifed/Traditional Chinese translation
-3. Partially upadate/add translation of Italian/Japanese/Spanish/Russion? based on WMedit(Anyone can help on this? contact minggang.li@gmail.com)
+2. Update Simplified/Traditional Chinese translation
+3. Partially update/add translation of Italian/Japanese/Spanish/Russian? based on WMedit(Anyone can help on this? contact minggang.li@gmail.com)
 4. Use wxWidgets 2.8.12 because 3.0.1 still has random hang issue
 
 Mod v0.1.3 2014.6.23
-Nothing changed. Rebuid with wxWidgets 3.0.1 which is a bug fix of 3.0. So far so good.
+Nothing changed. Rebuild with wxWidgets 3.0.1 which is a bug fix of 3.0. So far so good.
 
 Mod v0.1.2
 1. Adding extra checking code for UTF8(From CodeBlocks)
@@ -212,7 +293,6 @@ Mod v0.1.2
 1.Fixed issues in Search/Replace in Selection
 2.Removed the confusing From/To on Search/Replace dialog
 
-ChangeLog:
 v0.2.9 Mod
 1.Fixed several critical/crash bugs in Madedit 0.2.9.
 2.New features added.
@@ -408,7 +488,9 @@ MadEdit is released under the GNU General Public License.
 
 Author:
 ------
+MadEdit
 Alston Chen <madedit@gmail.com>
+MadEdit-Mod
 Minggang Li <minggang.li@gmail.com>
 
 Links:

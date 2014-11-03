@@ -55,8 +55,8 @@ object frmNewForm: TfrmNewForm
       Top = 0
       Width = 681
       Height = 342
-      ActivePage = WxNoteBookPage1
-      TabIndex = 0
+      ActivePage = WxNoteBookPage5
+      TabIndex = 4
       TabOrder = 0
       Wx_Class = 'wxAuiNotebook'
       Wx_ControlOrientation = wxControlVertical
@@ -550,7 +550,7 @@ object frmNewForm: TfrmNewForm
             Left = 100
             Top = 187
             Width = 404
-            Height = 99
+            Height = 96
             TabOrder = 3
             Orientation = wxVertical
             Wx_Class = 'wxBoxSizer'
@@ -667,7 +667,7 @@ object frmNewForm: TfrmNewForm
             end
             object WxCheckBoxPurgeHistory: TWxCheckBox
               Left = 2
-              Top = 77
+              Top = 74
               Width = 400
               Height = 20
               Caption = 'Purge History while existing'
@@ -681,6 +681,7 @@ object frmNewForm: TfrmNewForm
               Wx_Hidden = False
               Wx_IDName = 'ID_PURGEHISTORY'
               Wx_IDValue = 1199
+              Wx_Border = 2
               Wx_Alignment = [wxALIGN_LEFT]
               Wx_PaneCaption = 'WxCheckBox1'
               Wx_PaneName = 'WxCheckBox1_Pane'
@@ -3232,6 +3233,536 @@ object frmNewForm: TfrmNewForm
           end
         end
       end
+      object WxNoteBookPage5: TWxNoteBookPage
+        Caption = 'SpellChecker'
+        Wx_BKColor = clBlack
+        Wx_Class = 'wxPanel'
+        Wx_ControlOrientation = wxControlVertical
+        Wx_Default = False
+        Wx_EventList.Strings = (
+          'EVT_UPDATE_UI:OnUpdateUI')
+        Wx_FGColor = clBlack
+        Wx_GeneralStyle = []
+        Wx_Hidden = False
+        Wx_IDName = 'ID_WXNOTEBOOKPAGE5'
+        Wx_IDValue = 1201
+        object WxBoxSizer29: TWxBoxSizer
+          Left = 0
+          Top = 0
+          Width = 673
+          Height = 314
+          Align = alClient
+          TabOrder = 0
+          Orientation = wxVertical
+          Wx_Class = 'wxBoxSizer'
+          Wx_ControlOrientation = wxControlVertical
+          Wx_IDName = 'ID_WXBOXSIZER29'
+          Wx_IDValue = 1202
+          Wx_Alignment = [wxALIGN_LEFT, wxALIGN_CENTER_VERTICAL, wxEXPAND]
+          object WxBoxSizer33: TWxBoxSizer
+            Left = 98
+            Top = 5
+            Width = 219
+            Height = 27
+            TabOrder = 0
+            Wx_Class = 'wxBoxSizer'
+            Wx_ControlOrientation = wxControlVertical
+            Wx_IDName = 'ID_WXBOXSIZER33'
+            Wx_IDValue = 1233
+            Wx_Alignment = [wxALIGN_LEFT, wxEXPAND]
+            object WxCheckBoxPersonalDict: TWxCheckBox
+              Left = 5
+              Top = 5
+              Width = 209
+              Height = 17
+              Caption = 'Enable Personal Dictionary'
+              TabOrder = 0
+              Wx_BGColor = clBlack
+              Wx_CheckBoxStyle = []
+              Wx_Class = 'wxCheckBox'
+              Wx_ControlOrientation = wxControlVertical
+              Wx_FGColor = clBlack
+              Wx_GeneralStyle = []
+              Wx_Hidden = False
+              Wx_IDName = 'ID_WXCHECKBOXPERSONALDICT'
+              Wx_IDValue = 1234
+              Wx_Alignment = [wxALIGN_LEFT]
+              Wx_PaneCaption = 'WxCheckBox1'
+              Wx_PaneName = 'WxCheckBox1_Pane'
+              Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+              Wx_Aui_Dockable_Direction = []
+              Wx_Aui_Pane_Style = []
+              Wx_Aui_Pane_Buttons = []
+              Wx_BestSize_Height = 0
+              Wx_BestSize_Width = 0
+              Wx_MinSize_Height = 0
+              Wx_MinSize_Width = 0
+              Wx_MaxSize_Height = 0
+              Wx_MaxSize_Width = 0
+              Wx_Floating_Height = 0
+              Wx_Floating_Width = 0
+              Wx_Floating_X_Pos = 0
+              Wx_Floating_Y_Pos = 0
+            end
+          end
+          object WxStaticBoxSizer5: TWxStaticBoxSizer
+            Left = 6
+            Top = 42
+            Width = 404
+            Height = 51
+            TabOrder = 1
+            Wx_Caption = 'Langurage'
+            Wx_Class = 'wxStaticBoxSizer'
+            Wx_ControlOrientation = wxControlVertical
+            Wx_IDName = 'ID_WXSTATICBOXSIZER5'
+            Wx_IDValue = 1234
+            Wx_Alignment = [wxALIGN_LEFT, wxEXPAND]
+            object WxStaticText18: TWxStaticText
+              Left = 10
+              Top = 22
+              Width = 54
+              Height = 17
+              Caption = 'Dictionary:'
+              TabOrder = 1
+              Wx_BGColor = clBlack
+              Wx_Class = 'wxStaticText'
+              Wx_ControlOrientation = wxControlVertical
+              Wx_FGColor = clBlack
+              Wx_GeneralStyle = []
+              Wx_Hidden = False
+              Wx_IDName = 'ID_WXSTATICTEXT18'
+              Wx_IDValue = 1211
+              Wx_LabelStyle = []
+              Wx_PaneCaption = 'WxStaticText18'
+              Wx_PaneName = 'WxStaticText18_Pane'
+              Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+              Wx_Aui_Dockable_Direction = []
+              Wx_Aui_Pane_Style = []
+              Wx_Aui_Pane_Buttons = []
+              Wx_BestSize_Height = 0
+              Wx_BestSize_Width = 0
+              Wx_MinSize_Height = 0
+              Wx_MinSize_Width = 0
+              Wx_MaxSize_Height = 0
+              Wx_MaxSize_Width = 0
+              Wx_Floating_Height = 0
+              Wx_Floating_Width = 0
+              Wx_Floating_X_Pos = 0
+              Wx_Floating_Y_Pos = 0
+            end
+            object WxChoiceDictionary: TWxChoice
+              Left = 74
+              Top = 20
+              Width = 320
+              Height = 21
+              ItemHeight = 13
+              TabOrder = 2
+              Text = 'WxChoiceDictionary'
+              EVT_CHOICE = 'OnSelectDictionary'
+              Wx_BGColor = clBlack
+              Wx_Class = 'wxChoice'
+              Wx_ControlOrientation = wxControlVertical
+              Wx_FGColor = clBlack
+              Wx_GeneralStyle = [wxVSCROLL]
+              Wx_Hidden = False
+              Wx_IDName = 'ID_WXCHOICEDICTIONARY'
+              Wx_IDValue = 1232
+              Wx_Alignment = [wxALIGN_LEFT]
+              Wx_PaneCaption = 'WxChoice1'
+              Wx_PaneName = 'WxChoice1_Pane'
+              Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+              Wx_Aui_Dockable_Direction = []
+              Wx_Aui_Pane_Style = []
+              Wx_Aui_Pane_Buttons = []
+              Wx_BestSize_Height = 0
+              Wx_BestSize_Width = 0
+              Wx_MinSize_Height = 0
+              Wx_MinSize_Width = 0
+              Wx_MaxSize_Height = 0
+              Wx_MaxSize_Width = 0
+              Wx_Floating_Height = 0
+              Wx_Floating_Width = 0
+              Wx_Floating_X_Pos = 0
+              Wx_Floating_Y_Pos = 0
+            end
+          end
+          object WxStaticBoxSizer6: TWxStaticBoxSizer
+            Left = 5
+            Top = 103
+            Width = 406
+            Height = 125
+            TabOrder = 2
+            Orientation = wxVertical
+            Wx_Caption = 'Path Setting'
+            Wx_Class = 'wxStaticBoxSizer'
+            Wx_ControlOrientation = wxControlVertical
+            Wx_IDName = 'ID_WXSTATICBOXSIZER6'
+            Wx_IDValue = 1235
+            Wx_Alignment = [wxALIGN_LEFT, wxEXPAND]
+            object WxBoxSizer30: TWxBoxSizer
+              Left = 5
+              Top = 15
+              Width = 396
+              Height = 35
+              TabOrder = 1
+              Wx_Class = 'wxBoxSizer'
+              Wx_ControlOrientation = wxControlVertical
+              Wx_IDName = 'ID_WXBOXSIZER30'
+              Wx_IDValue = 1215
+              Wx_Alignment = [wxALIGN_LEFT, wxEXPAND]
+              object WxEditDictionaryDir: TWxEdit
+                Left = 5
+                Top = 8
+                Width = 240
+                Height = 19
+                BevelInner = bvNone
+                BevelOuter = bvNone
+                AutoSize = False
+                TabOrder = 0
+                EVT_TEXT_ENTER = 'OnDictionaryDirChange'
+                Wx_BGColor = clBlack
+                Wx_Class = 'wxTextCtrl'
+                Wx_ControlOrientation = wxControlVertical
+                Wx_EditStyle = []
+                Wx_FGColor = clBlack
+                Wx_GeneralStyle = []
+                Wx_Hidden = False
+                Wx_IDName = 'ID_WXEDITDICTIONARYDIR'
+                Wx_IDValue = 1219
+                Wx_Validator = 'wxTextValidator(wxFILTER_NONE, NULL)'
+                Wx_MaxLength = 0
+                Wx_PaneCaption = 'WxEdit1'
+                Wx_PaneName = 'WxEdit1_Pane'
+                Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                Wx_Aui_Dockable_Direction = []
+                Wx_Aui_Pane_Style = []
+                Wx_Aui_Pane_Buttons = []
+                Wx_BestSize_Height = 0
+                Wx_BestSize_Width = 0
+                Wx_MinSize_Height = 0
+                Wx_MinSize_Width = 0
+                Wx_MaxSize_Height = 0
+                Wx_MaxSize_Width = 0
+                Wx_Floating_Height = 0
+                Wx_Floating_Width = 0
+                Wx_Floating_X_Pos = 0
+                Wx_Floating_Y_Pos = 0
+              end
+              object WxButtonDictionaryDir: TWxButton
+                Left = 255
+                Top = 5
+                Width = 75
+                Height = 25
+                Caption = '...'
+                TabOrder = 1
+                EVT_BUTTON = 'WxButtonDictionaryDirClick'
+                Wx_BKColor = clBlack
+                Wx_ButtonStyle = []
+                Wx_Class = 'wxButton'
+                Wx_ControlOrientation = wxControlVertical
+                Wx_Default = False
+                Wx_EventList.Strings = (
+                  'EVT_BUTTON:OnClick'
+                  'EVT_UPDATE_UI:OnUpdateUI')
+                Wx_FGColor = clBlack
+                Wx_GeneralStyle = []
+                Wx_Hidden = False
+                Wx_IDName = 'ID_WXDICTIONARY_DIR'
+                Wx_IDValue = 1221
+                Wx_PaneCaption = 'WxButton7'
+                Wx_PaneName = 'WxButton7_Pane'
+                Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                Wx_Aui_Dockable_Direction = []
+                Wx_Aui_Pane_Style = []
+                Wx_Aui_Pane_Buttons = []
+                Wx_BestSize_Height = 0
+                Wx_BestSize_Width = 0
+                Wx_MinSize_Height = 0
+                Wx_MinSize_Width = 0
+                Wx_MaxSize_Height = 0
+                Wx_MaxSize_Width = 0
+                Wx_Floating_Height = 0
+                Wx_Floating_Width = 0
+                Wx_Floating_X_Pos = 0
+                Wx_Floating_Y_Pos = 0
+              end
+              object WxStaticText19: TWxStaticText
+                Left = 340
+                Top = 9
+                Width = 51
+                Height = 17
+                Caption = 'Dictionary'
+                TabOrder = 2
+                Wx_BGColor = clBlack
+                Wx_Class = 'wxStaticText'
+                Wx_ControlOrientation = wxControlVertical
+                Wx_FGColor = clBlack
+                Wx_GeneralStyle = []
+                Wx_Hidden = False
+                Wx_IDName = 'ID_WXSTATICTEXT19'
+                Wx_IDValue = 1230
+                Wx_LabelStyle = []
+                Wx_PaneCaption = 'WxStaticText19'
+                Wx_PaneName = 'WxStaticText19_Pane'
+                Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                Wx_Aui_Dockable_Direction = []
+                Wx_Aui_Pane_Style = []
+                Wx_Aui_Pane_Buttons = []
+                Wx_BestSize_Height = 0
+                Wx_BestSize_Width = 0
+                Wx_MinSize_Height = 0
+                Wx_MinSize_Width = 0
+                Wx_MaxSize_Height = 0
+                Wx_MaxSize_Width = 0
+                Wx_Floating_Height = 0
+                Wx_Floating_Width = 0
+                Wx_Floating_X_Pos = 0
+                Wx_Floating_Y_Pos = 0
+              end
+            end
+            object WxBoxSizer31: TWxBoxSizer
+              Left = 8
+              Top = 50
+              Width = 390
+              Height = 35
+              TabOrder = 2
+              Wx_Class = 'wxBoxSizer'
+              Wx_ControlOrientation = wxControlVertical
+              Wx_IDName = 'ID_WXBOXSIZER31'
+              Wx_IDValue = 1216
+              Wx_Alignment = [wxALIGN_LEFT, wxEXPAND]
+              object WxEditThesauriDir: TWxEdit
+                Left = 5
+                Top = 8
+                Width = 240
+                Height = 19
+                BevelInner = bvNone
+                BevelOuter = bvNone
+                AutoSize = False
+                TabOrder = 0
+                Wx_BGColor = clBlack
+                Wx_Class = 'wxTextCtrl'
+                Wx_ControlOrientation = wxControlVertical
+                Wx_EditStyle = []
+                Wx_FGColor = clBlack
+                Wx_GeneralStyle = []
+                Wx_Hidden = False
+                Wx_IDName = 'ID_WXEDITTHESAURI'
+                Wx_IDValue = 1223
+                Wx_Validator = 'wxTextValidator(wxFILTER_NONE, NULL)'
+                Wx_MaxLength = 0
+                Wx_PaneCaption = 'WxEdit2'
+                Wx_PaneName = 'WxEdit2_Pane'
+                Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                Wx_Aui_Dockable_Direction = []
+                Wx_Aui_Pane_Style = []
+                Wx_Aui_Pane_Buttons = []
+                Wx_BestSize_Height = 0
+                Wx_BestSize_Width = 0
+                Wx_MinSize_Height = 0
+                Wx_MinSize_Width = 0
+                Wx_MaxSize_Height = 0
+                Wx_MaxSize_Width = 0
+                Wx_Floating_Height = 0
+                Wx_Floating_Width = 0
+                Wx_Floating_X_Pos = 0
+                Wx_Floating_Y_Pos = 0
+              end
+              object WxButtonThesauriDir: TWxButton
+                Left = 255
+                Top = 5
+                Width = 75
+                Height = 25
+                Caption = '...'
+                TabOrder = 1
+                EVT_BUTTON = 'WxButtonThesauriDirClick'
+                Wx_BKColor = clBlack
+                Wx_ButtonStyle = []
+                Wx_Class = 'wxButton'
+                Wx_ControlOrientation = wxControlVertical
+                Wx_Default = False
+                Wx_EventList.Strings = (
+                  'EVT_BUTTON:OnClick'
+                  'EVT_UPDATE_UI:OnUpdateUI')
+                Wx_FGColor = clBlack
+                Wx_GeneralStyle = []
+                Wx_Hidden = False
+                Wx_IDName = 'ID_WXTHESAURI_DIR'
+                Wx_IDValue = 1224
+                Wx_PaneCaption = 'WxButton8'
+                Wx_PaneName = 'WxButton8_Pane'
+                Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                Wx_Aui_Dockable_Direction = []
+                Wx_Aui_Pane_Style = []
+                Wx_Aui_Pane_Buttons = []
+                Wx_BestSize_Height = 0
+                Wx_BestSize_Width = 0
+                Wx_MinSize_Height = 0
+                Wx_MinSize_Width = 0
+                Wx_MaxSize_Height = 0
+                Wx_MaxSize_Width = 0
+                Wx_Floating_Height = 0
+                Wx_Floating_Width = 0
+                Wx_Floating_X_Pos = 0
+                Wx_Floating_Y_Pos = 0
+              end
+              object WxStaticText20: TWxStaticText
+                Left = 340
+                Top = 9
+                Width = 45
+                Height = 17
+                Caption = 'Thesauri'
+                TabOrder = 2
+                Wx_BGColor = clBlack
+                Wx_Class = 'wxStaticText'
+                Wx_ControlOrientation = wxControlVertical
+                Wx_FGColor = clBlack
+                Wx_GeneralStyle = []
+                Wx_Hidden = False
+                Wx_IDName = 'ID_WXSTATICTEXT20'
+                Wx_IDValue = 1229
+                Wx_LabelStyle = []
+                Wx_PaneCaption = 'WxStaticText20'
+                Wx_PaneName = 'WxStaticText20_Pane'
+                Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                Wx_Aui_Dockable_Direction = []
+                Wx_Aui_Pane_Style = []
+                Wx_Aui_Pane_Buttons = []
+                Wx_BestSize_Height = 0
+                Wx_BestSize_Width = 0
+                Wx_MinSize_Height = 0
+                Wx_MinSize_Width = 0
+                Wx_MaxSize_Height = 0
+                Wx_MaxSize_Width = 0
+                Wx_Floating_Height = 0
+                Wx_Floating_Width = 0
+                Wx_Floating_X_Pos = 0
+                Wx_Floating_Y_Pos = 0
+              end
+            end
+            object WxBoxSizer32: TWxBoxSizer
+              Left = 12
+              Top = 85
+              Width = 382
+              Height = 35
+              TabOrder = 3
+              Wx_Class = 'wxBoxSizer'
+              Wx_ControlOrientation = wxControlVertical
+              Wx_IDName = 'ID_WXBOXSIZER32'
+              Wx_IDValue = 1217
+              Wx_Alignment = [wxALIGN_LEFT, wxEXPAND]
+              object WxEditBitMapDir: TWxEdit
+                Left = 5
+                Top = 8
+                Width = 240
+                Height = 19
+                BevelInner = bvNone
+                BevelOuter = bvNone
+                AutoSize = False
+                TabOrder = 0
+                Wx_BGColor = clBlack
+                Wx_Class = 'wxTextCtrl'
+                Wx_ControlOrientation = wxControlVertical
+                Wx_EditStyle = []
+                Wx_FGColor = clBlack
+                Wx_GeneralStyle = []
+                Wx_Hidden = False
+                Wx_IDName = 'ID_WXEDITBITMAPDIR'
+                Wx_IDValue = 1226
+                Wx_Validator = 'wxTextValidator(wxFILTER_NONE, NULL)'
+                Wx_MaxLength = 0
+                Wx_PaneCaption = 'WxEdit3'
+                Wx_PaneName = 'WxEdit3_Pane'
+                Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                Wx_Aui_Dockable_Direction = []
+                Wx_Aui_Pane_Style = []
+                Wx_Aui_Pane_Buttons = []
+                Wx_BestSize_Height = 0
+                Wx_BestSize_Width = 0
+                Wx_MinSize_Height = 0
+                Wx_MinSize_Width = 0
+                Wx_MaxSize_Height = 0
+                Wx_MaxSize_Width = 0
+                Wx_Floating_Height = 0
+                Wx_Floating_Width = 0
+                Wx_Floating_X_Pos = 0
+                Wx_Floating_Y_Pos = 0
+              end
+              object WxButtonBitmapDir: TWxButton
+                Left = 255
+                Top = 5
+                Width = 75
+                Height = 25
+                Caption = '...'
+                TabOrder = 1
+                EVT_BUTTON = 'WxButtonBitmapDirClick'
+                Wx_BKColor = clBlack
+                Wx_ButtonStyle = []
+                Wx_Class = 'wxButton'
+                Wx_ControlOrientation = wxControlVertical
+                Wx_Default = False
+                Wx_EventList.Strings = (
+                  'EVT_BUTTON:OnClick'
+                  'EVT_UPDATE_UI:OnUpdateUI')
+                Wx_FGColor = clBlack
+                Wx_GeneralStyle = []
+                Wx_Hidden = False
+                Wx_IDName = 'ID_WXBITMAP_DIR'
+                Wx_IDValue = 1227
+                Wx_PaneCaption = 'WxButton9'
+                Wx_PaneName = 'WxButton9_Pane'
+                Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                Wx_Aui_Dockable_Direction = []
+                Wx_Aui_Pane_Style = []
+                Wx_Aui_Pane_Buttons = []
+                Wx_BestSize_Height = 0
+                Wx_BestSize_Width = 0
+                Wx_MinSize_Height = 0
+                Wx_MinSize_Width = 0
+                Wx_MaxSize_Height = 0
+                Wx_MaxSize_Width = 0
+                Wx_Floating_Height = 0
+                Wx_Floating_Width = 0
+                Wx_Floating_X_Pos = 0
+                Wx_Floating_Y_Pos = 0
+              end
+              object WxStaticText21: TWxStaticText
+                Left = 340
+                Top = 9
+                Width = 37
+                Height = 17
+                Caption = 'BitMap'
+                TabOrder = 2
+                Wx_BGColor = clBlack
+                Wx_Class = 'wxStaticText'
+                Wx_ControlOrientation = wxControlVertical
+                Wx_FGColor = clBlack
+                Wx_GeneralStyle = []
+                Wx_Hidden = False
+                Wx_IDName = 'ID_WXSTATICTEXT21'
+                Wx_IDValue = 1231
+                Wx_LabelStyle = []
+                Wx_PaneCaption = 'WxStaticText21'
+                Wx_PaneName = 'WxStaticText21_Pane'
+                Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                Wx_Aui_Dockable_Direction = []
+                Wx_Aui_Pane_Style = []
+                Wx_Aui_Pane_Buttons = []
+                Wx_BestSize_Height = 0
+                Wx_BestSize_Width = 0
+                Wx_MinSize_Height = 0
+                Wx_MinSize_Width = 0
+                Wx_MaxSize_Height = 0
+                Wx_MaxSize_Width = 0
+                Wx_Floating_Height = 0
+                Wx_Floating_Width = 0
+                Wx_Floating_X_Pos = 0
+                Wx_Floating_Y_Pos = 0
+              end
+            end
+          end
+        end
+      end
     end
     object WxBoxSizer2: TWxBoxSizer
       Left = 243
@@ -3320,6 +3851,193 @@ object frmNewForm: TfrmNewForm
         Wx_Floating_Y_Pos = 0
       end
     end
+  end
+  object WxPopupMenuPrintMark: TWxPopupMenu
+    Left = 502
+    Top = 350
+    Width = 28
+    Height = 27
+    TabOrder = 1
+    Glyph.Data = {
+      36090000424D3609000000000000360000002800000018000000180000000100
+      2000000000000009000000000000000000000000000000000000008080000080
+      8000008080000080800000808000008080000080800000808000008080000080
+      8000008080000080800000808000008080000080800000808000008080000080
+      8000008080000080800000808000008080000080800000808000008080000080
+      8000008080000080800000808000008080000080800000808000008080000080
+      8000008080000080800000808000008080000080800000808000000000000000
+      0000008080000080800000808000008080000080800000808000008080000080
+      8000008080000080800000808000008080000080800000808000008080000080
+      8000008080000080800000808000008080000080800000000000FFFFFF00FFFF
+      FF00000000000080800000808000008080000080800000808000008080000080
+      8000008080000080800000808000008080000080800000808000008080000080
+      8000008080000000000000808000008080000080800000000000FFFFFF00FFFF
+      FF00000000000080800000808000008080000080800000808000008080000080
+      8000008080000080800000808000008080000080800000808000008080000080
+      80000080800000000000000000000080800000000000FFFFFF00FFFFFF000000
+      0000008080000080800000808000008080000080800000808000008080000080
+      8000008080000080800000808000008080000080800000808000008080000080
+      80000080800000000000FFFFFF000000000000000000FFFFFF00FFFFFF000000
+      0000008080000080800000808000008080000080800000808000008080000080
+      8000008080000080800000808000008080000080800000808000008080000080
+      80000080800000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000080
+      8000008080000080800000808000008080000080800000808000008080000080
+      8000008080000080800000808000008080000080800000808000008080000080
+      80000080800000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000000
+      0000000000000000000000808000008080000080800000808000008080000080
+      8000008080000080800000808000008080000080800000808000008080000080
+      80000080800000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00000000000080800000808000008080000080800000808000008080000080
+      8000008080000080800000808000008080000080800000808000008080000080
+      80000080800000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
+      0000008080000080800000808000008080000080800000808000008080000080
+      8000008080000080800080808000000000000000000000000000000000000000
+      00000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000080
+      8000008080000080800000808000008080000080800000808000008080000080
+      8000008080000080800080808000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000008080000080
+      8000008080000080800000808000008080000080800000808000008080000080
+      8000008080000080800080808000FFFFFF008000000080000000800000008000
+      00008000000000000000FFFFFF00FFFFFF000000000000808000008080000080
+      8000008080000080800000808000008080000080800000808000008080000080
+      8000008080000080800080808000800000008000000080000000800000008000
+      00008000000000000000FFFFFF00000000000000000000808000008080000080
+      8000008080000080800000808000008080000080800000808000008080000080
+      800000808000008080008080800080000000FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF000000000000000000800000000000000000808000008080000080
+      8000008080000080800000808000008080000080800000808000008080000080
+      8000008080000080800080808000800000008000000080000000800000008000
+      0000800000008000000080000000800000000000000000808000008080000080
+      8000008080000080800000808000008080000080800000808000008080000080
+      8000008080000080800080808000FFFFFF008000000080000000800000008000
+      000080000000FFFFFF00FFFFFF00FFFFFF000000000000808000008080000080
+      8000008080000080800000808000008080000080800000808000008080000080
+      8000008080000080800080808000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000000000000808000008080000080
+      8000008080000080800000808000008080000080800000808000008080000080
+      8000008080000080800080808000FFFFFF008000000080000000800000008000
+      0000FFFFFF00FFFFFF00FFFFFF00FFFFFF000000000000808000008080000080
+      8000008080000080800000808000008080000080800000808000008080000080
+      8000008080000080800080808000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000000000000808000008080000080
+      8000008080000080800000808000008080000080800000808000008080000080
+      8000008080000080800080808000FFFFFF008000000080000000800000008000
+      000080000000FFFFFF00FFFFFF00FFFFFF000000000000808000008080000080
+      8000008080000080800000808000008080000080800000808000008080000080
+      8000008080000080800080808000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000000000000808000008080000080
+      8000008080000080800000808000008080000080800000808000008080000080
+      8000008080000080800080808000808080008080800080808000808080008080
+      8000808080008080800080808000808080008080800000808000008080000080
+      8000008080000080800000808000008080000080800000808000008080000080
+      8000008080000080800000808000008080000080800000808000008080000080
+      8000008080000080800000808000008080000080800000808000008080000080
+      8000008080000080800000808000008080000080800000808000}
+    Wx_Class = 'wxMenu'
+    Wx_MenuItems.IsSubMenu = False
+    Wx_MenuItems.Wx_Enabled = True
+    Wx_MenuItems.Wx_Hidden = False
+    Wx_MenuItems.Wx_IDValue = 0
+    Wx_MenuItems.Wx_MenuItemStyle = wxMnuItm_Normal
+    Wx_MenuItems.Wx_Checked = False
+    Wx_MenuItems.KeepFormat = False
+    Wx_MenuItems.Wx_FileHistory = False
+    Wx_MenuItems.WxCustomMenuItem = {
+      11000000545778437573746F6D4D656E754974656D5450463018547778437573
+      746F6D4D656E754974656D577261707065720011436172726965642E49735375
+      624D656E750810436172726965642E4556545F4D656E75060E5072696E744D61
+      726B436C69636B12436172726965642E57785F456E61626C6564091143617272
+      6965642E57785F48696464656E0811436172726965642E57785F49444E616D65
+      061549445F4D4E555F4D454E554954454D315F3131313012436172726965642E
+      57785F494456616C7565035E0418436172726965642E57785F4D656E75497465
+      6D5374796C65070F77784D6E7549746D5F4E6F726D616C12436172726965642E
+      57785F43617074696F6E060F5B25665D202646696C65204E616D651243617272
+      6965642E57785F436865636B65640816436172726965642E57585F4249544D41
+      502E446174610A0C00000007544269746D61700000000012436172726965642E
+      4B656570466F726D61740816436172726965642E57785F46696C65486973746F
+      727908000011000000545778437573746F6D4D656E754974656D545046301854
+      7778437573746F6D4D656E754974656D57726170706572001143617272696564
+      2E49735375624D656E750810436172726965642E4556545F4D656E75060E5072
+      696E744D61726B436C69636B12436172726965642E57785F456E61626C656409
+      11436172726965642E57785F48696464656E0811436172726965642E57785F49
+      444E616D65061949445F4D4E555F5F5F505F5F504154484E414D455F31313131
+      12436172726965642E57785F494456616C7565035F0418436172726965642E57
+      785F4D656E754974656D5374796C65070F77784D6E7549746D5F4E6F726D616C
+      12436172726965642E57785F43617074696F6E060F5B25705D20265061746820
+      4E616D6512436172726965642E57785F436865636B6564081643617272696564
+      2E57585F4249544D41502E446174610A0C00000007544269746D617000000000
+      12436172726965642E4B656570466F726D61740816436172726965642E57785F
+      46696C65486973746F727908000011000000545778437573746F6D4D656E7549
+      74656D5450463018547778437573746F6D4D656E754974656D57726170706572
+      0011436172726965642E49735375624D656E750812436172726965642E57785F
+      456E61626C65640911436172726965642E57785F48696464656E081143617272
+      6965642E57785F49444E616D65061549445F4D4E555F4D454E554954454D335F
+      3131313212436172726965642E57785F494456616C7565035804184361727269
+      65642E57785F4D656E754974656D5374796C65071277784D6E7549746D5F5365
+      70617261746F7212436172726965642E57785F43617074696F6E06032D2D2D12
+      436172726965642E57785F436865636B65640816436172726965642E57585F42
+      49544D41502E446174610A0C00000007544269746D6170000000001243617272
+      6965642E4B656570466F726D61740816436172726965642E57785F46696C6548
+      6973746F727908000011000000545778437573746F6D4D656E754974656D5450
+      463018547778437573746F6D4D656E754974656D577261707065720011436172
+      726965642E49735375624D656E750810436172726965642E4556545F4D656E75
+      060E5072696E744D61726B436C69636B12436172726965642E57785F456E6162
+      6C65640911436172726965642E57785F48696464656E0811436172726965642E
+      57785F49444E616D65061B49445F4D4E555F5F5F4E5F504147455F4E554D4245
+      525F3131313312436172726965642E57785F494456616C756503590418436172
+      726965642E57785F4D656E754974656D5374796C65070F77784D6E7549746D5F
+      4E6F726D616C12436172726965642E57785F43617074696F6E06115B256E5D20
+      5061676520264E756D62657212436172726965642E57785F436865636B656408
+      16436172726965642E57585F4249544D41502E446174610A0C00000007544269
+      746D61700000000012436172726965642E4B656570466F726D61740816436172
+      726965642E57785F46696C65486973746F727908000011000000545778437573
+      746F6D4D656E754974656D5450463018547778437573746F6D4D656E75497465
+      6D577261707065720011436172726965642E49735375624D656E750810436172
+      726965642E4556545F4D656E75060E5072696E744D61726B436C69636B124361
+      72726965642E57785F456E61626C65640911436172726965642E57785F486964
+      64656E0811436172726965642E57785F49444E616D65061B49445F4D4E555F5F
+      5F535F5F544F54414C50414745535F3131313412436172726965642E57785F49
+      4456616C7565035A0418436172726965642E57785F4D656E754974656D537479
+      6C65070F77784D6E7549746D5F4E6F726D616C12436172726965642E57785F43
+      617074696F6E06115B25735D20546F74616C2050616765267312436172726965
+      642E57785F436865636B65640816436172726965642E57585F4249544D41502E
+      446174610A0C00000007544269746D61700000000012436172726965642E4B65
+      6570466F726D61740816436172726965642E57785F46696C65486973746F7279
+      08000011000000545778437573746F6D4D656E754974656D5450463018547778
+      437573746F6D4D656E754974656D577261707065720011436172726965642E49
+      735375624D656E750812436172726965642E57785F456E61626C656409114361
+      72726965642E57785F48696464656E0811436172726965642E57785F49444E61
+      6D65061549445F4D4E555F4D454E554954454D365F3131313512436172726965
+      642E57785F494456616C7565035B0418436172726965642E57785F4D656E7549
+      74656D5374796C65071277784D6E7549746D5F536570617261746F7212436172
+      726965642E57785F43617074696F6E06032D2D2D12436172726965642E57785F
+      436865636B65640816436172726965642E57585F4249544D41502E446174610A
+      0C00000007544269746D61700000000012436172726965642E4B656570466F72
+      6D61740816436172726965642E57785F46696C65486973746F72790800001100
+      0000545778437573746F6D4D656E754974656D5450463018547778437573746F
+      6D4D656E754974656D577261707065720011436172726965642E49735375624D
+      656E750810436172726965642E4556545F4D656E75060E5072696E744D61726B
+      436C69636B12436172726965642E57785F456E61626C65640911436172726965
+      642E57785F48696464656E0811436172726965642E57785F49444E616D650615
+      49445F4D4E555F5F5F445F5F444154455F3131313612436172726965642E5778
+      5F494456616C7565035C0418436172726965642E57785F4D656E754974656D53
+      74796C65070F77784D6E7549746D5F4E6F726D616C12436172726965642E5778
+      5F43617074696F6E060A5B25645D20264461746512436172726965642E57785F
+      436865636B65640816436172726965642E57585F4249544D41502E446174610A
+      0C00000007544269746D61700000000012436172726965642E4B656570466F72
+      6D61740816436172726965642E57785F46696C65486973746F72790800001100
+      0000545778437573746F6D4D656E754974656D5450463018547778437573746F
+      6D4D656E754974656D577261707065720011436172726965642E49735375624D
+      656E750810436172726965642E4556545F4D656E75060E5072696E744D61726B
+      436C69636B12436172726965642E57785F456E61626C65640911436172726965
+      642E57785F48696464656E0811436172726965642E57785F49444E616D650615
+      49445F4D4E555F5F5F545F5F54494D455F3131313712436172726965642E5778
+      5F494456616C7565035D0418436172726965642E57785F4D656E754974656D53
+      74796C65070F77784D6E7549746D5F4E6F726D616C12436172726965642E5778
+      5F43617074696F6E060A5B25745D202654696D6512436172726965642E57785F
+      436865636B65640816436172726965642E57585F4249544D41502E446174610A
+      0C00000007544269746D61700000000012436172726965642E4B656570466F72
+      6D61740816436172726965642E57785F46696C65486973746F7279080000}
   end
   object WxPopupMenuDateTimeMark: TWxPopupMenu
     Left = 542
@@ -3770,192 +4488,5 @@ object frmNewForm: TfrmNewForm
       4249544D41502E446174610A0C00000007544269746D61700000000012436172
       726965642E4B656570466F726D61740816436172726965642E57785F46696C65
       486973746F7279080000}
-  end
-  object WxPopupMenuPrintMark: TWxPopupMenu
-    Left = 502
-    Top = 350
-    Width = 28
-    Height = 27
-    TabOrder = 1
-    Glyph.Data = {
-      36090000424D3609000000000000360000002800000018000000180000000100
-      2000000000000009000000000000000000000000000000000000008080000080
-      8000008080000080800000808000008080000080800000808000008080000080
-      8000008080000080800000808000008080000080800000808000008080000080
-      8000008080000080800000808000008080000080800000808000008080000080
-      8000008080000080800000808000008080000080800000808000008080000080
-      8000008080000080800000808000008080000080800000808000000000000000
-      0000008080000080800000808000008080000080800000808000008080000080
-      8000008080000080800000808000008080000080800000808000008080000080
-      8000008080000080800000808000008080000080800000000000FFFFFF00FFFF
-      FF00000000000080800000808000008080000080800000808000008080000080
-      8000008080000080800000808000008080000080800000808000008080000080
-      8000008080000000000000808000008080000080800000000000FFFFFF00FFFF
-      FF00000000000080800000808000008080000080800000808000008080000080
-      8000008080000080800000808000008080000080800000808000008080000080
-      80000080800000000000000000000080800000000000FFFFFF00FFFFFF000000
-      0000008080000080800000808000008080000080800000808000008080000080
-      8000008080000080800000808000008080000080800000808000008080000080
-      80000080800000000000FFFFFF000000000000000000FFFFFF00FFFFFF000000
-      0000008080000080800000808000008080000080800000808000008080000080
-      8000008080000080800000808000008080000080800000808000008080000080
-      80000080800000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000080
-      8000008080000080800000808000008080000080800000808000008080000080
-      8000008080000080800000808000008080000080800000808000008080000080
-      80000080800000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000000
-      0000000000000000000000808000008080000080800000808000008080000080
-      8000008080000080800000808000008080000080800000808000008080000080
-      80000080800000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
-      FF00000000000080800000808000008080000080800000808000008080000080
-      8000008080000080800000808000008080000080800000808000008080000080
-      80000080800000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000000
-      0000008080000080800000808000008080000080800000808000008080000080
-      8000008080000080800080808000000000000000000000000000000000000000
-      00000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00000000000080
-      8000008080000080800000808000008080000080800000808000008080000080
-      8000008080000080800080808000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
-      FF00FFFFFF0000000000FFFFFF00FFFFFF00FFFFFF0000000000008080000080
-      8000008080000080800000808000008080000080800000808000008080000080
-      8000008080000080800080808000FFFFFF008000000080000000800000008000
-      00008000000000000000FFFFFF00FFFFFF000000000000808000008080000080
-      8000008080000080800000808000008080000080800000808000008080000080
-      8000008080000080800080808000800000008000000080000000800000008000
-      00008000000000000000FFFFFF00000000000000000000808000008080000080
-      8000008080000080800000808000008080000080800000808000008080000080
-      800000808000008080008080800080000000FFFFFF00FFFFFF00FFFFFF00FFFF
-      FF00FFFFFF000000000000000000800000000000000000808000008080000080
-      8000008080000080800000808000008080000080800000808000008080000080
-      8000008080000080800080808000800000008000000080000000800000008000
-      0000800000008000000080000000800000000000000000808000008080000080
-      8000008080000080800000808000008080000080800000808000008080000080
-      8000008080000080800080808000FFFFFF008000000080000000800000008000
-      000080000000FFFFFF00FFFFFF00FFFFFF000000000000808000008080000080
-      8000008080000080800000808000008080000080800000808000008080000080
-      8000008080000080800080808000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
-      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000000000000808000008080000080
-      8000008080000080800000808000008080000080800000808000008080000080
-      8000008080000080800080808000FFFFFF008000000080000000800000008000
-      0000FFFFFF00FFFFFF00FFFFFF00FFFFFF000000000000808000008080000080
-      8000008080000080800000808000008080000080800000808000008080000080
-      8000008080000080800080808000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
-      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000000000000808000008080000080
-      8000008080000080800000808000008080000080800000808000008080000080
-      8000008080000080800080808000FFFFFF008000000080000000800000008000
-      000080000000FFFFFF00FFFFFF00FFFFFF000000000000808000008080000080
-      8000008080000080800000808000008080000080800000808000008080000080
-      8000008080000080800080808000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
-      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF000000000000808000008080000080
-      8000008080000080800000808000008080000080800000808000008080000080
-      8000008080000080800080808000808080008080800080808000808080008080
-      8000808080008080800080808000808080008080800000808000008080000080
-      8000008080000080800000808000008080000080800000808000008080000080
-      8000008080000080800000808000008080000080800000808000008080000080
-      8000008080000080800000808000008080000080800000808000008080000080
-      8000008080000080800000808000008080000080800000808000}
-    Wx_Class = 'wxMenu'
-    Wx_MenuItems.IsSubMenu = False
-    Wx_MenuItems.Wx_Enabled = True
-    Wx_MenuItems.Wx_Hidden = False
-    Wx_MenuItems.Wx_IDValue = 0
-    Wx_MenuItems.Wx_MenuItemStyle = wxMnuItm_Normal
-    Wx_MenuItems.Wx_Checked = False
-    Wx_MenuItems.KeepFormat = False
-    Wx_MenuItems.Wx_FileHistory = False
-    Wx_MenuItems.WxCustomMenuItem = {
-      11000000545778437573746F6D4D656E754974656D5450463018547778437573
-      746F6D4D656E754974656D577261707065720011436172726965642E49735375
-      624D656E750810436172726965642E4556545F4D656E75060E5072696E744D61
-      726B436C69636B12436172726965642E57785F456E61626C6564091143617272
-      6965642E57785F48696464656E0811436172726965642E57785F49444E616D65
-      061549445F4D4E555F4D454E554954454D315F3131313012436172726965642E
-      57785F494456616C7565035E0418436172726965642E57785F4D656E75497465
-      6D5374796C65070F77784D6E7549746D5F4E6F726D616C12436172726965642E
-      57785F43617074696F6E060F5B25665D202646696C65204E616D651243617272
-      6965642E57785F436865636B65640816436172726965642E57585F4249544D41
-      502E446174610A0C00000007544269746D61700000000012436172726965642E
-      4B656570466F726D61740816436172726965642E57785F46696C65486973746F
-      727908000011000000545778437573746F6D4D656E754974656D545046301854
-      7778437573746F6D4D656E754974656D57726170706572001143617272696564
-      2E49735375624D656E750810436172726965642E4556545F4D656E75060E5072
-      696E744D61726B436C69636B12436172726965642E57785F456E61626C656409
-      11436172726965642E57785F48696464656E0811436172726965642E57785F49
-      444E616D65061949445F4D4E555F5F5F505F5F504154484E414D455F31313131
-      12436172726965642E57785F494456616C7565035F0418436172726965642E57
-      785F4D656E754974656D5374796C65070F77784D6E7549746D5F4E6F726D616C
-      12436172726965642E57785F43617074696F6E060F5B25705D20265061746820
-      4E616D6512436172726965642E57785F436865636B6564081643617272696564
-      2E57585F4249544D41502E446174610A0C00000007544269746D617000000000
-      12436172726965642E4B656570466F726D61740816436172726965642E57785F
-      46696C65486973746F727908000011000000545778437573746F6D4D656E7549
-      74656D5450463018547778437573746F6D4D656E754974656D57726170706572
-      0011436172726965642E49735375624D656E750812436172726965642E57785F
-      456E61626C65640911436172726965642E57785F48696464656E081143617272
-      6965642E57785F49444E616D65061549445F4D4E555F4D454E554954454D335F
-      3131313212436172726965642E57785F494456616C7565035804184361727269
-      65642E57785F4D656E754974656D5374796C65071277784D6E7549746D5F5365
-      70617261746F7212436172726965642E57785F43617074696F6E06032D2D2D12
-      436172726965642E57785F436865636B65640816436172726965642E57585F42
-      49544D41502E446174610A0C00000007544269746D6170000000001243617272
-      6965642E4B656570466F726D61740816436172726965642E57785F46696C6548
-      6973746F727908000011000000545778437573746F6D4D656E754974656D5450
-      463018547778437573746F6D4D656E754974656D577261707065720011436172
-      726965642E49735375624D656E750810436172726965642E4556545F4D656E75
-      060E5072696E744D61726B436C69636B12436172726965642E57785F456E6162
-      6C65640911436172726965642E57785F48696464656E0811436172726965642E
-      57785F49444E616D65061B49445F4D4E555F5F5F4E5F504147455F4E554D4245
-      525F3131313312436172726965642E57785F494456616C756503590418436172
-      726965642E57785F4D656E754974656D5374796C65070F77784D6E7549746D5F
-      4E6F726D616C12436172726965642E57785F43617074696F6E06115B256E5D20
-      5061676520264E756D62657212436172726965642E57785F436865636B656408
-      16436172726965642E57585F4249544D41502E446174610A0C00000007544269
-      746D61700000000012436172726965642E4B656570466F726D61740816436172
-      726965642E57785F46696C65486973746F727908000011000000545778437573
-      746F6D4D656E754974656D5450463018547778437573746F6D4D656E75497465
-      6D577261707065720011436172726965642E49735375624D656E750810436172
-      726965642E4556545F4D656E75060E5072696E744D61726B436C69636B124361
-      72726965642E57785F456E61626C65640911436172726965642E57785F486964
-      64656E0811436172726965642E57785F49444E616D65061B49445F4D4E555F5F
-      5F535F5F544F54414C50414745535F3131313412436172726965642E57785F49
-      4456616C7565035A0418436172726965642E57785F4D656E754974656D537479
-      6C65070F77784D6E7549746D5F4E6F726D616C12436172726965642E57785F43
-      617074696F6E06115B25735D20546F74616C2050616765267312436172726965
-      642E57785F436865636B65640816436172726965642E57585F4249544D41502E
-      446174610A0C00000007544269746D61700000000012436172726965642E4B65
-      6570466F726D61740816436172726965642E57785F46696C65486973746F7279
-      08000011000000545778437573746F6D4D656E754974656D5450463018547778
-      437573746F6D4D656E754974656D577261707065720011436172726965642E49
-      735375624D656E750812436172726965642E57785F456E61626C656409114361
-      72726965642E57785F48696464656E0811436172726965642E57785F49444E61
-      6D65061549445F4D4E555F4D454E554954454D365F3131313512436172726965
-      642E57785F494456616C7565035B0418436172726965642E57785F4D656E7549
-      74656D5374796C65071277784D6E7549746D5F536570617261746F7212436172
-      726965642E57785F43617074696F6E06032D2D2D12436172726965642E57785F
-      436865636B65640816436172726965642E57585F4249544D41502E446174610A
-      0C00000007544269746D61700000000012436172726965642E4B656570466F72
-      6D61740816436172726965642E57785F46696C65486973746F72790800001100
-      0000545778437573746F6D4D656E754974656D5450463018547778437573746F
-      6D4D656E754974656D577261707065720011436172726965642E49735375624D
-      656E750810436172726965642E4556545F4D656E75060E5072696E744D61726B
-      436C69636B12436172726965642E57785F456E61626C65640911436172726965
-      642E57785F48696464656E0811436172726965642E57785F49444E616D650615
-      49445F4D4E555F5F5F445F5F444154455F3131313612436172726965642E5778
-      5F494456616C7565035C0418436172726965642E57785F4D656E754974656D53
-      74796C65070F77784D6E7549746D5F4E6F726D616C12436172726965642E5778
-      5F43617074696F6E060A5B25645D20264461746512436172726965642E57785F
-      436865636B65640816436172726965642E57585F4249544D41502E446174610A
-      0C00000007544269746D61700000000012436172726965642E4B656570466F72
-      6D61740816436172726965642E57785F46696C65486973746F72790800001100
-      0000545778437573746F6D4D656E754974656D5450463018547778437573746F
-      6D4D656E754974656D577261707065720011436172726965642E49735375624D
-      656E750810436172726965642E4556545F4D656E75060E5072696E744D61726B
-      436C69636B12436172726965642E57785F456E61626C65640911436172726965
-      642E57785F48696464656E0811436172726965642E57785F49444E616D650615
-      49445F4D4E555F5F5F545F5F54494D455F3131313712436172726965642E5778
-      5F494456616C7565035D0418436172726965642E57785F4D656E754974656D53
-      74796C65070F77784D6E7549746D5F4E6F726D616C12436172726965642E5778
-      5F43617074696F6E060A5B25745D202654696D6512436172726965642E57785F
-      436865636B65640816436172726965642E57585F4249544D41502E446174610A
-      0C00000007544269746D61700000000012436172726965642E4B656570466F72
-      6D61740816436172726965642E57785F46696C65486973746F7279080000}
   end
 end

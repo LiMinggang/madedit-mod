@@ -43,6 +43,7 @@
 ////Dialog Style End
 
 class MadEdit;
+class MadRecentList;
 
 class MadReplaceDialog : public wxDialog
 {
@@ -120,7 +121,7 @@ public:
 
     MadEdit *m_FindText, *m_ReplaceText;
     wxBitmapButton *WxBitmapButtonRecentFindText, *WxBitmapButtonRecentReplaceText;
-    wxFileHistory *m_RecentReplaceText;
+    MadRecentList *m_RecentReplaceText;
 
     void WxButtonCloseClick(wxCommandEvent& event);
     void WxButtonFindNextClick(wxCommandEvent& event);
@@ -141,7 +142,7 @@ public:
 	void MadReplaceDialogActivate(wxActivateEvent& event);
 	void WxButtonReplaceAllClick(wxCommandEvent& event);
 	void WxCheckBoxSearchInSelectionClick(wxCommandEvent& event);
-    void MadReplaceDialog::PurgeRecentReplaceTexts();
+    void PurgeRecentReplaceTexts();
 };
 
 extern MadReplaceDialog *g_ReplaceDialog;

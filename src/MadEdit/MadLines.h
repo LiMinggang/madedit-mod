@@ -283,6 +283,7 @@ struct MadLine
     void Get(wxFileOffset pos, wxByte *buf, size_t size)    // get n bytes
     {
         wxASSERT(pos >= 0 && pos + size <= m_Size);
+        if(size == 0) return;
 
         MadBlockIterator biter = m_Blocks.begin();
         if(pos >= biter->m_Size)
@@ -339,6 +340,8 @@ public:
     int  GetNextBookmark( MadLineIterator position ); // return line number, or -1 if no bookmars
     int  GetPreviousBookmark( MadLineIterator position ); // return line number from the end to the beginning, or -1
     bool IsBookmarked( MadLineIterator position );
+    void ClearAllBookmarks();
+    bool HasBookMark(){return !(m_BookmarkList.empty());}
 
     MadLineIterator erase( MadLineIterator position );
 

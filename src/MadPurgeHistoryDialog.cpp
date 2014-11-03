@@ -121,7 +121,7 @@ void MadPurgeHistoryDialog::CreateGUIControls()
 
 void MadPurgeHistoryDialog::OnClose(wxCloseEvent& /*event*/)
 {
-	Destroy();
+    Destroy();
 }
 
 
@@ -130,32 +130,32 @@ void MadPurgeHistoryDialog::OnClose(wxCloseEvent& /*event*/)
  */
 void MadPurgeHistoryDialog::WxButtonOKClick(wxCommandEvent& event)
 {
-	// insert your code here
-	if (wxCheckBoxRecentFiles->IsChecked())
-		g_MainFrame->PurgeRecentFiles();
+    // insert your code here
+    if (wxCheckBoxRecentFiles->IsChecked())
+        g_MainFrame->PurgeRecentFiles();
 
-	if (wxCheckBoxRecentFonts->IsChecked())
-		g_MainFrame->PurgeRecentFonts();
+    if (wxCheckBoxRecentFonts->IsChecked())
+        g_MainFrame->PurgeRecentFonts();
 
-	if (wxCheckBoxRecentEncodings->IsChecked())
-		g_MainFrame->PurgeRecentEncodings();
+    if (wxCheckBoxRecentEncodings->IsChecked())
+        g_MainFrame->PurgeRecentEncodings();
 
-	if (wxCheckBoxRecentSearchedTexts->IsChecked())
-		g_SearchDialog->PurgeRecentFindTexts();
+    if (wxCheckBoxRecentSearchedTexts->IsChecked())
+        g_SearchDialog->PurgeRecentFindTexts();
 
-	if (wxCheckBoxRecentReplacedTexts->IsChecked())
-		g_ReplaceDialog->PurgeRecentReplaceTexts();
+    if (wxCheckBoxRecentReplacedTexts->IsChecked())
+        g_ReplaceDialog->PurgeRecentReplaceTexts();
 
-	if (wxCheckBoxRecentSearchedDirectories->IsChecked())
-		g_FindInFilesDialog->PurgeRecentFindDirs();
+    if (wxCheckBoxRecentSearchedDirectories->IsChecked())
+        g_FindInFilesDialog->PurgeRecentFindDirs();
 
-	if (wxRecentSearchedFileFilters->IsChecked())
-		g_FindInFilesDialog->PurgeRecentFindFilters();
+    if (wxRecentSearchedFileFilters->IsChecked())
+        g_FindInFilesDialog->PurgeRecentFindFilters();
 
-	if (wxCheckBoxRecentSearchedExcludeFilters->IsChecked())
-		g_FindInFilesDialog->PurgeRecentFindExcludes();
+    if (wxCheckBoxRecentSearchedExcludeFilters->IsChecked())
+        g_FindInFilesDialog->PurgeRecentFindExcludes();
 
-	Close();
+    Close();
 }
 
 /*
@@ -163,8 +163,8 @@ void MadPurgeHistoryDialog::WxButtonOKClick(wxCommandEvent& event)
  */
 void MadPurgeHistoryDialog::wxButtonCancelClick(wxCommandEvent& event)
 {
-	// insert your code here
-	Destroy();
+    // insert your code here
+    Destroy();
 }
 
 /*
@@ -172,7 +172,7 @@ void MadPurgeHistoryDialog::wxButtonCancelClick(wxCommandEvent& event)
  */
 void MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown(wxKeyEvent& event)
 {
-	// insert your code here
+    // insert your code here
     int key=event.GetKeyCode();
 
     switch(key)
@@ -185,18 +185,18 @@ void MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown(wxKeyEvent& event)
         }
     case WXK_RETURN:
     case WXK_NUMPAD_ENTER:
-		if ((wxButton*)this != this->wxButtonCancel)
+        if ((wxButton*)this != this->wxButtonCancel)
         {
             wxCommandEvent e;
             this->WxButtonOKClick(e);
             return; // no skip
         }
-		else
-		{
+        else
+        {
             wxCommandEvent e;
-			this->wxButtonCancelClick(e);
+            this->wxButtonCancelClick(e);
             return; // no skip
-		}
+        }
         break;
     default:
         break;

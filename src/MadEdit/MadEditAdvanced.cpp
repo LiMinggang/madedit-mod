@@ -13,11 +13,74 @@
 #include <cwctype>
 #include <cctype>
 #include <locale>
+#include "SpellCheckerManager.h"
+#include "HunspellInterface.h"
+
 using std::vector;
 
 #ifdef _DEBUG
 #include <crtdbg.h>
 #define new new(_NORMAL_BLOCK ,__FILE__, __LINE__)
+#endif
+
+#define ITOA(num,buf,fmt) _itoa(num,buf,fmt)
+#ifndef __WXMSW__
+#include <iostream>
+
+/* A utility function to reverse a string  */
+void reverse(char str[], int length)
+{
+    int start = 0;
+    int end = length -1;
+    while (start < end)
+    {
+        std::swap(*(str+start), *(str+end));
+        ++start;
+        --end;
+    }
+}
+
+// Implementation of itoa()
+char* _itoa(int num, char* str, int base)
+{
+    int i = 0;
+    bool isNegative = false;
+
+    /* Handle 0 explicitely, otherwise empty string is printed for 0 */
+    if (num == 0)
+    {
+        str[i++] = '0';
+        str[i] = '\0';
+        return str;
+    }
+
+    // In standard itoa(), negative numbers are handled only with 
+    // base 10. Otherwise numbers are considered unsigned.
+    if (num < 0 && base == 10)
+    {
+        isNegative = true;
+        num = -num;
+    }
+
+    // Process individual digits
+    while (num != 0)
+    {
+        int rem = num % base;
+        str[i++] = (rem > 9)? (rem-10) + 'a' : rem + '0';
+        num = num/base;
+    }
+
+    // If number is negative, append '-'
+    if (isNegative)
+        str[i++] = '-';
+
+    str[i] = '\0'; // Append string terminator
+
+    // Reverse the string
+    reverse(str, i);
+
+    return str;
+}
 #endif
 
 //==============================================================================
@@ -759,7 +822,7 @@ void MadEdit::ToUpperCase()
         int nc=0;
 #if defined(__WXMSW__)
         if(c<=0xFF)
-		   nc=std::toupper(c);
+           nc=std::toupper(c);
         else 
 #endif
         nc=std::towupper(c);
@@ -804,7 +867,7 @@ void MadEdit::ToLowerCase()
         int nc=0;
 #if defined(__WXMSW__)
         if(c<=0xFF)
-			nc=std::tolower(c);
+        nc=std::tolower(c);
         else 
 #endif
         nc=std::towlower(c);
@@ -851,26 +914,26 @@ void MadEdit::InvertCase()
 #if defined(__WXMSW__)
         if (c<=0xFF)
         {
-			if(std::islower(c))
-			{
-				nc=std::toupper(c);
-			}
-			else if(std::isupper(c))
-			{
-				nc=std::tolower(c);
-			}
+            if(std::islower(c))
+            {
+                nc=std::toupper(c);
+            }
+            else if(std::isupper(c))
+            {
+                nc=std::tolower(c);
+            }
         }
         else
 #endif
         {
-			if(std::iswlower(c))
-			{
-				nc=std::towupper(c);
-			}
-			else if(std::iswupper(c))
-			{
-				nc=std::towlower(c);
-			}
+            if(std::iswlower(c))
+            {
+                nc=std::towupper(c);
+            }
+            else if(std::iswupper(c))
+            {
+                nc=std::towlower(c);
+            }
         }
 
         if(nc != c)
@@ -1709,7 +1772,7 @@ SortLineData::SortLineData(const MadLineIterator& l, int id)
             {
 #if defined(__WXMSW__)
                 if(uc<=0xFF)
-			        uc=std::tolower(uc);
+                    uc=std::tolower(uc);
                 else
 #endif
                 uc = std::towlower(wchar_t(uc));
@@ -2712,3 +2775,298 @@ void MadEdit::ConvertTabToSpace()
             InsertString(&newtext[0], newtext.size(), false, false, true);
     }
 }
+
+void MadEdit::ColumnAlign()
+{
+    if(IsReadOnly() || m_EditMode==emHexMode)
+        return;
+
+    bool oldModified=m_Modified;
+    MadLineIterator lit;
+
+    if((m_EditMode == emColumnMode) &&(m_Selection && m_SelectionBegin->xpos && m_SelectionBegin->lineid!=m_SelectionEnd->lineid))
+    {
+        MadUndo *undo = NULL;
+        MadLineIterator lit, lastlit, firstlit;
+        size_t count;
+        bool SelEndAtBOL=false;
+        wxFileOffset linestartpos;
+        int columns = m_SelectionBegin->xpos/GetUCharWidth(0x20);
+        //if(m_Selection && m_SelectionBegin->lineid!=m_SelectionEnd->lineid)
+        {
+            lastlit=lit=m_SelectionEnd->iter;
+            firstlit = m_SelectionBegin->iter;
+            if(m_SelectionEnd->linepos == 0) // selend at begin of line
+            {
+                count = m_SelectionEnd->lineid - m_SelectionBegin->lineid;
+            }
+            else
+            {
+                count = m_SelectionEnd->lineid - m_SelectionBegin->lineid +1;
+            }
+        
+            // save first line pos
+            linestartpos=lit->m_RowIndices.front().m_Start;
+            m_SelectionPos1.pos = m_SelectionBegin->pos - m_SelectionBegin->linepos + linestartpos;
+            
+        }
+
+        MadUCQueue ucqueue;
+        wxFileOffset delsize=0, pos = m_SelectionEnd->pos - m_SelectionEnd->linepos;
+        do  // for each line
+        {
+            ucs4_t tuc=0x0D;
+            MadLines::NextUCharFuncPtr NextUChar=m_Lines->NextUChar;
+            
+            m_Lines->InitNextUChar(lit, 0);
+            bool longline = false;
+            wxFileOffset startpos = 0, rowpos = 0;
+            while((m_Lines->*NextUChar)(ucqueue))
+            {
+                tuc = ucqueue.back().first;
+                if(tuc == 0x0D || tuc == 0x0A)
+                {
+                    break;
+                }
+                ++rowpos;
+                if(tuc == 0x09)
+                {
+                    size_t mod = startpos%m_TabColumns;
+                    startpos += (m_TabColumns-mod);
+                }
+                else
+                    ++startpos;
+                if(startpos == columns)
+                {
+                    longline = true;
+                    break;
+                }
+            }
+
+            if(longline)
+            {
+                delsize=0;
+                ucs4_t uc=0x0D;
+                ucqueue.clear();
+
+                
+                // get spaces at begin of line
+                while((m_Lines->*NextUChar)(ucqueue))
+                {
+                    uc=ucqueue.back().first;
+                    if(uc==0x20 || uc==0x09)
+                    {
+                        ++delsize;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            
+                // writeback the indent-spaces and rest content of line
+                if(delsize!=0) // this line is not a empty line
+                {
+                    MadDeleteUndoData *dudata = new MadDeleteUndoData;
+                    
+                    dudata->m_Pos = pos+rowpos;
+                    dudata->m_Size = delsize;
+                    
+                    lit = DeleteInsertData(dudata->m_Pos, dudata->m_Size, &dudata->m_Data, 0, NULL);
+
+                    if(undo == NULL)
+                    {
+                        undo = m_UndoBuffer->Add();
+                        undo->m_CaretPosBefore=m_CaretPos.pos;
+                    }
+                    undo->m_Undos.push_back(dudata);
+                }
+            }
+
+            --count;
+            if(count > 0)
+            {
+                --lit;
+                pos -= lit->m_Size;
+            }
+        }
+        while(count>0);
+
+        m_Lines->Reformat(firstlit, lastlit);
+        if(undo)
+        {
+            m_Modified = true;
+        }
+        m_Selection = false;
+        m_RepaintAll = true;
+        Refresh(false);
+    }
+    else
+    {
+        wxFileOffset rangeFrom = -1, rangeTo = -1;
+        if(m_Selection)
+        {
+            int lineid = m_SelectionBegin->lineid;
+            (void)GetLineByLine(lit, rangeFrom, lineid);
+            rangeTo = m_SelectionEnd->pos;
+        }
+        else
+        {
+            rangeFrom = m_CaretPos.pos;
+            rangeTo = rangeFrom+m_CaretPos.iter->m_Size-m_CaretPos.linepos;
+        }
+        ReplaceTextAll(wxT("^[ \t]+"), wxT(""), true, true, false, NULL, NULL, rangeFrom, rangeTo);        
+    }
+}
+
+void MadEdit::InsertIncrementalNumber(int initial, int step, int total, MadNumberingStepType stepType,
+                        MadNumberFormat fmt, MadNumberAlign align, bool zeroPad)
+{
+    wxString numFmt(wxT("%")), tstr;
+    ucs4string out;
+    vector<ucs4_t> ucs;
+    bool output = false, binary = false;
+    int colcount = 0, num = initial;
+    char padding[513], padchar = ' '; //init to '0'
+    
+    if(total > 512) return;
+
+    if(zeroPad) padchar = '0';
+    if(total && align == naRight && fmt != nfBIN)
+	{
+		if(zeroPad) numFmt<<wxT("0");
+		numFmt<<total;
+	}
+    switch(fmt)
+    {
+        case nfHEX:
+            numFmt<<wxT("X");
+            break;
+        case nfBIN:
+            binary = true;
+            break;
+        case nfOCT:
+            numFmt<<wxT("o");
+            break;
+        default://nfDEC
+            numFmt<<wxT("d");
+    }
+
+    if(m_Selection)
+    {
+        if(m_EditMode == emColumnMode)
+        {
+            output = true;
+            colcount = m_SelectionEnd->rowid - m_SelectionBegin->rowid + 1;
+            if(colcount>1)
+            {
+                int cc=colcount;
+                bool linear = (stepType==nstLinear);
+                const char * strbuff = 0;
+                char buffer[33];
+                do
+                {
+                    if(binary)
+                    {
+                        strbuff = &padding[0];
+                        if(total)
+                        {
+                            memset(padding, padchar, total);
+                            padding[total] = 0;
+                            if(align == naLeft)
+                                ITOA(num,padding,2);
+                            else//(align == naRight)
+                            {
+                                ITOA(num,buffer,2);
+                                int len = strlen(buffer);
+                                if(len < total)
+                                {
+                                    padding[total-len] = 0;
+                                    strcat(padding, buffer);
+                                }
+                                else
+                                    strbuff = buffer;
+                            }
+                        }
+                        else
+                        {
+                            ITOA(num,padding,2);
+                        }
+                        tstr +=  wxString::FromAscii(strbuff);
+                    }
+                    else
+                    {
+                        wxString tmp(wxString::Format(numFmt, num));
+                        tstr<<tmp;
+                        if(align == naLeft && total > tmp.Len())
+                        {
+                            memset(padding, padchar, (total - tmp.Len()));
+                            tstr +=  wxString::FromAscii(padding);
+                        }
+                        
+                    }
+                    tstr<<wxT("\n");
+
+                    if(linear) num += step;
+                    else num *= step;
+                }while(--cc > 0);
+            }
+        }
+    }
+    else//Ignore step and other
+    {
+        output = true;
+    }
+
+    if(output)
+    {
+        TranslateText(tstr.c_str(), tstr.Len(), &ucs, true);
+
+        for(size_t i=0, size=ucs.size(); i<size; ++i)
+        {
+            out += ucs[i] ;
+        }
+        if(m_Selection)
+        {
+            if(colcount>1)                
+                InsertColumnString(out.c_str(), out.length(), colcount, true, false);
+            else                
+                InsertColumnString(out.c_str(), out.length(), 0, true, false);
+        }
+        else
+        {
+            InsertString(out.c_str(), out.length(), false, true, false);
+        }
+    }
+}
+
+
+void MadEdit::SetSpellCheck(bool value)
+{
+    if(m_SingleLineMode) return;
+    if(value!=m_SpellCheck)
+    {
+        m_SpellCheck=value;
+        if(m_SpellCheck) 
+            m_SpellCheckerPtr = SpellCheckerManager::Instance().GetSpellChecker();
+        else
+            m_SpellCheckerPtr.reset();
+        if(m_StorePropertiesToGlobalConfig)
+        {
+            wxString oldpath=m_Config->GetPath();
+            m_Config->Write(wxT("/MadEdit/SpellCheck"), value);
+            m_Config->SetPath(oldpath);
+        }
+    }
+    m_RepaintAll=true;
+    Refresh(false);
+}
+
+void MadEdit::AddtoDictionary(wxString & misSpell)
+{
+    if(m_SingleLineMode || !m_SpellCheckerPtr) return;
+	m_SpellCheckerPtr->AddWordToDictionary(misSpell);
+    m_RepaintAll=true;
+    Refresh(false);
+}
+

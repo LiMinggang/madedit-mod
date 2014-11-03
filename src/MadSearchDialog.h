@@ -35,6 +35,7 @@
 ////Dialog Style End
 
 class MadEdit;
+class MadRecentList;
 
 class MadSearchDialog : public wxDialog
 {
@@ -109,7 +110,7 @@ public:
 
     MadEdit *m_FindText;
     wxBitmapButton *WxBitmapButtonRecentFindText;
-    wxFileHistory *m_RecentFindText;
+    MadRecentList *m_RecentFindText;
     
 	void WxButtonCloseClick(wxCommandEvent& event);
 	void MadSearchDialogKeyDown(wxKeyEvent& event);

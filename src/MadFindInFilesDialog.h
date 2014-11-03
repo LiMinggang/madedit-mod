@@ -48,6 +48,7 @@
 ////Dialog Style End
 
 class MadEdit;
+class MadRecentList;
 
 class MadFindInFilesDialog : public wxDialog
 {
@@ -148,8 +149,8 @@ class MadFindInFilesDialog : public wxDialog
 	public:
 		MadEdit *m_FindText, *m_ReplaceText;
 		wxBitmapButton *WxBitmapButtonRecentFindText, *WxBitmapButtonRecentReplaceText;
-		wxFileHistory *m_RecentFindDir;
-		wxFileHistory *m_RecentFindFilter, *m_RecentFindExclude;
+		MadRecentList *m_RecentFindDir;
+		MadRecentList *m_RecentFindFilter, *m_RecentFindExclude;
 		void UpdateCheckBoxByCBHex(bool check);
 		void WxBitmapButtonRecentFindTextClick(wxCommandEvent& event);
 		void WxBitmapButtonRecentReplaceTextClick(wxCommandEvent& event);

@@ -8,8 +8,10 @@
 #include "MadEditFrame.h"
 #include "MadSearchDialog.h"
 #include "MadReplaceDialog.h"
+#include "MadRecentList.h"
 
 #include "MadEdit/MadEdit.h"
+#include <wx/progdlg.h>
 #include "wx/gbsizer.h"
 #include <list>
 #include <sstream>
@@ -24,8 +26,16 @@
 extern wxStatusBar *g_StatusBar;   // add: gogo, 19.09.2009
 
 MadSearchDialog *g_SearchDialog=NULL;
-extern void RecordAsMadMacro(MadEdit *, wxString&);
+extern void RecordAsMadMacro(MadEdit *, const wxString&);
 extern MadEdit *g_ActiveMadEdit;
+wxProgressDialog *g_SearchProgressDialog=NULL;
+
+bool OnSearchProgressUpdate(int value, const wxString &newmsg=wxEmptyString, bool *skip=NULL)
+{
+    if(g_SearchProgressDialog == NULL)
+        return true;
+    return g_SearchProgressDialog->Update(value, newmsg, skip);
+}
 
 //----------------------------------------------------------------------------
 // MadSearchDialog
@@ -63,7 +73,6 @@ MadSearchDialog::MadSearchDialog( wxWindow *parent, wxWindowID id, const wxStrin
 
 MadSearchDialog::~MadSearchDialog()
 {
-
 }
 
 //static int gs_MinX=0;
@@ -228,7 +237,7 @@ void MadSearchDialog::CreateGUIControls(void)
     WxButtonClose->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MadSearchDialog::MadSearchDialogKeyDown));
 
 
-    m_RecentFindText=new wxFileHistory(20, ID_RECENTFINDTEXT1);
+    m_RecentFindText=new MadRecentList(20, ID_RECENTFINDTEXT1, true);
     m_RecentFindText->UseMenu(WxPopupMenuRecentFindText);
 
     wxConfigBase *m_Config=wxConfigBase::Get(false);
@@ -329,7 +338,7 @@ void MadSearchDialog::WxButtonFindNextClick(wxCommandEvent& event)
                 sr=g_ActiveMadEdit->FindHexNext(text, rangeFrom, rangeTo);
                 if(sr != SR_EXPR_ERROR)
                 {
-                    RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("FindHexNext(\"%s\", %d, %d)"), text, rangeFrom, rangeTo));
+                    RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("FindHexNext(\"%s\", %d, %d)"), text.c_str(), rangeFrom, rangeTo));
                 }
             }
             else
@@ -341,7 +350,7 @@ void MadSearchDialog::WxButtonFindNextClick(wxCommandEvent& event)
                     rangeFrom, rangeTo);
                 if(sr != SR_EXPR_ERROR)
                 {
-                    RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("FindTextNext(\"%s\", %s, %s, %s, %d, %d)"), text,
+                    RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("FindTextNext(\"%s\", %s, %s, %s, %d, %d)"), text.c_str(),
                                 WxCheckBoxRegex->GetValue()?wxT("True"):wxT("False"),
                                 WxCheckBoxCaseSensitive->GetValue()?wxT("True"):wxT("False"),
                                 WxCheckBoxWholeWord->GetValue()?wxT("True"):wxT("False"), rangeFrom, rangeTo));
@@ -450,7 +459,7 @@ void MadSearchDialog::WxButtonFindPrevClick(wxCommandEvent& event)
             if(WxCheckBoxFindHex->GetValue())
             {
                 sr=g_ActiveMadEdit->FindHexPrevious(text, rangeTo, rangeFrom);
-                RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("FindHexPrevious(\"%s\", %d, %d)"), text, rangeFrom, rangeTo));
+                RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("FindHexPrevious(\"%s\", %d, %d)"), text.c_str(), rangeFrom, rangeTo));
             }
             else
             {
@@ -459,7 +468,7 @@ void MadSearchDialog::WxButtonFindPrevClick(wxCommandEvent& event)
                     WxCheckBoxCaseSensitive->GetValue(),
                     WxCheckBoxWholeWord->GetValue(),
                     rangeTo, rangeFrom);
-                RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("FindTextPrevious(\"%s\", %s, %s, %s, %d, %d)"), text,
+                RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("FindTextPrevious(\"%s\", %s, %s, %s, %d, %d)"), text.c_str(),
                             WxCheckBoxRegex->GetValue()?wxT("True"):wxT("False"),
                             WxCheckBoxCaseSensitive->GetValue()?wxT("True"):wxT("False"),
                             WxCheckBoxWholeWord->GetValue()?wxT("True"):wxT("False"), rangeFrom, rangeTo));
@@ -844,10 +853,88 @@ void MadSearchDialog::WxButtonCountClick(wxCommandEvent& event)
     }
 }
 
+void DisplayFindAllResult(vector<wxFileOffset> &begpos, vector<wxFileOffset> &endpos, MadEdit *madedit, bool expandresults = true, OnProgressUpdatePtr updater = NULL)
+{
+    int ResultCount=0;
+    wxTreeCtrl * results = g_MainFrame->m_FindInFilesResults;
+
+    if(!begpos.empty()) // found data
+    {
+        int pid = ((wxAuiNotebook*)g_MainFrame->m_Notebook)->GetPageIndex(madedit);
+        wxString fmt, filename=madedit->GetFileName();
+
+        if(filename.IsEmpty())
+        {
+            if(pid>=0)
+            {
+                filename=((wxAuiNotebook*)g_MainFrame->m_Notebook)->GetPageText(pid);
+                if(filename[filename.Len()-1]==wxT('*'))
+                    filename.Truncate(filename.Len()-1);
+            }
+        }
+        if(!filename.IsEmpty())
+        {
+            size_t count=begpos.size(), idx=0;
+            int line=-1, oldline;
+            wxString linetext, loc;
+            results->Freeze();
+            
+            wxString status = _("Preparing %d of %d results...");
+            status += wxT("                                \n");
+            do
+            {
+                if(madedit->IsTextFile())
+                {
+                    oldline=line;
+                    line=madedit->GetLineByPos(begpos[idx]);
+                    if(line!=oldline)
+                    {
+                        linetext.Empty();
+                        madedit->GetLine(linetext, line, 512);
+                    }
+                    loc.Printf(_("Line(%d): "), line+1);
+                }
+                else
+                {
+                    loc.Printf(_("Offset(%s): "), wxLongLong(begpos[idx]).ToString().c_str());
+                    linetext = _("Binary file matches");
+                }
+
+                fmt = loc +linetext;
+                g_MainFrame->AddItemToFindInFilesResults(fmt, idx, filename, pid, begpos[idx], endpos[idx]);
+                ++ResultCount;
+                if(updater != NULL && (count >= 1000))
+                {
+                    if(updater(idx, wxString::Format(status, idx, count), NULL)== false) break;
+                }
+            }
+            while(++idx < count);
+            results->Thaw();
+            if(results->GetCount())
+            {
+                if(expandresults) results->ExpandAll();
+                g_MainFrame->m_AuiManager.GetPane(g_MainFrame->m_InfoNotebook).Show();
+                g_MainFrame->m_AuiManager.Update();
+            }
+        }
+    }
+
+    if(!ResultCount)
+    {
+        g_StatusBar->SetStatusText( _("Cannot find the matched string"), 0 );
+    }
+    else
+    {
+        wxString smsg;
+        smsg.Printf(_("%d results"), ResultCount);
+        g_StatusBar->SetStatusText(smsg, 0 );
+    }
+}
+
 void MadSearchDialog::WxButtonFindAllClick(wxCommandEvent& event)
 {
     extern MadEdit *g_ActiveMadEdit;
-    wxTreeCtrl * results = g_MainFrame->m_FindInFilesResults;
+    //wxTreeCtrl * results = g_MainFrame->m_FindInFilesResults;
     int ResultCount=0;
 
     if(g_ActiveMadEdit==NULL)
@@ -865,10 +952,26 @@ void MadSearchDialog::WxButtonFindAllClick(wxCommandEvent& event)
     if(expr.Len()>0)
     {
         m_RecentFindText->AddFileToHistory(expr);
+        
+        wxFileOffset selend = g_ActiveMadEdit->GetSelectionEndPos();
+
+        // moved here: gogo, 19.09.2009
+        wxFileOffset caretpos = g_ActiveMadEdit->GetCaretPosition();
+        //wxInt64 from = 0, to = 0;
+        wxFileOffset rangeFrom = -1, rangeTo = -1;
+        if(WxCheckBoxSearchInSelection->IsChecked())
+        {
+            rangeTo = m_SearchTo;
+            // removed: gogo, 19.09.2009
+            //wxFileOffset caretpos = g_ActiveMadEdit->GetCaretPosition();
+            if(caretpos <= m_SearchFrom || caretpos >= m_SearchTo)
+                rangeFrom = m_SearchFrom;
+        }
+
         if(WxCheckBoxFindHex->GetValue())
         {
-            ok = madedit->FindHexAll(expr, false, &begpos, &endpos);
-            RecordAsMadMacro(madedit, wxString::Format(wxT("FindHexAll(\"%s\")"), expr));
+            ok = madedit->FindHexAll(expr, false, &begpos, &endpos, rangeFrom, rangeTo);
+            RecordAsMadMacro(madedit, wxString::Format(wxT("FindHexAll(\"%s\")"), expr.c_str()));
         }
         else
         {
@@ -877,79 +980,32 @@ void MadSearchDialog::WxButtonFindAllClick(wxCommandEvent& event)
                 WxCheckBoxCaseSensitive->GetValue(),
                 WxCheckBoxWholeWord->GetValue(),
                 false,
-                &begpos, &endpos);
-            RecordAsMadMacro(madedit, wxString::Format(wxT("FindTextAll(\"%s\", %s, %s, %s)"), expr,
+                &begpos, &endpos, rangeFrom, rangeTo);
+            RecordAsMadMacro(madedit, wxString::Format(wxT("FindTextAll(\"%s\", %s, %s, %s)"), expr.c_str(),
                             WxCheckBoxRegex->GetValue()?wxT("True"):wxT("False"),
                             WxCheckBoxCaseSensitive->GetValue()?wxT("True"):wxT("False"),
                             WxCheckBoxWholeWord->GetValue()?wxT("True"):wxT("False")));
         }
 
-        if(ok<0) return;
+        if(ok<=0) return;
 
-        if(!begpos.empty()) // found data
-        {
-            int pid=-1;
-            expr=madedit->GetFileName();
-            if(expr.IsEmpty())
-            {
-                pid=((wxAuiNotebook*)g_MainFrame->m_Notebook)->GetPageIndex(madedit);
-                if(pid>=0)
-                {
-                    expr=((wxAuiNotebook*)g_MainFrame->m_Notebook)->GetPageText(pid);
-                    if(expr[expr.Len()-1]==wxT('*'))
-                        expr.Truncate(expr.Len()-1);
-                }
-            }
-            if(!expr.IsEmpty())
-            {
-                size_t count=begpos.size(), idx=0;
-                int line=-1, oldline;
-                wxString linetext, loc;
-                results->Freeze();
-                do
-                {
-                    if(madedit->IsTextFile())
-                    {
-                        oldline=line;
-                        line=madedit->GetLineByPos(begpos[idx]);
-                        if(line!=oldline)
-                        {
-                            linetext.Empty();
-                            madedit->GetLine(linetext, line, 512);
-                        }
-                        loc.Printf(_("Line(%d): "), line+1);
-                    }
-                    else
-                    {
-                        loc.Printf(_("Offset(%s): "), wxLongLong(begpos[idx]).ToString().c_str());
-                        linetext = _("Binary file matches");
-                    }
-
-                    fmt = loc +linetext;
-                    g_MainFrame->AddItemToFindInFilesResults(fmt, idx, expr, pid, begpos[idx], endpos[idx]);
-                    ++ResultCount;
-                }
-                while(++idx < count);
-                results->Thaw();
-                if(results->GetCount())
-                {
-                    results->ExpandAll();
-                    g_MainFrame->m_AuiManager.GetPane(g_MainFrame->m_InfoNotebook).Show();
-                    g_MainFrame->m_AuiManager.Update();
-                }
-            }
-        }
-    }
-
-    if(!ResultCount)
-    {
-        g_StatusBar->SetStatusText( _("Cannot find the matched string"), 0 );
-    }
-    else
-    {
-        wxString smsg;
-        smsg.Printf(_("%d results"), ResultCount);
-        g_StatusBar->SetStatusText(smsg, 0 );
+        Show(false);
+        wxString msg = _("Found %d matched texts...");
+        msg += wxT("                                \n");
+        wxProgressDialog dialog(_("Preparing Results"),
+                                    wxString::Format(msg, 0),
+                                    ok,    // range
+                                    this,   // parent
+                                    wxPD_CAN_ABORT |
+                                    wxPD_AUTO_HIDE |
+                                    wxPD_APP_MODAL);
+        g_SearchProgressDialog = &dialog;
+        
+        DisplayFindAllResult(begpos, endpos, madedit, true, &OnSearchProgressUpdate);
+        
+        dialog.Update(ok);
+        g_SearchProgressDialog = NULL;
+        //Show(true);
     }
 }
 

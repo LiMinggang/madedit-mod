@@ -1,7 +1,7 @@
 SUBDIRS = syntax po
 
 bin_PROGRAMS = madedit
-INCLUDES = -I$(top_srcdir)/charset-detector/include -I$(top_srcdir)/charset-detector/src -I$(top_srcdir)/charset-detector/src/tables
+INCLUDES = -I$(top_srcdir)/charset-detector/include -I$(top_srcdir)/charset-detector/src -I$(top_srcdir)/charset-detector/src/tables -I$(top_srcdir)/spellchecker -I$(top_srcdir)/spellchecker/hunspell/src
 madedit_CXXFLAGS = -DDATA_DIR=\"${datadir}\"
 madedit_SOURCES =	src/MadAboutDialog.cpp \
 	src/MadAboutDialog.h \
@@ -31,6 +31,17 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	src/MadUtils.h \
 	src/MadWordCountDialog.cpp \
 	src/MadWordCountDialog.h \
+	src/MadPurgeHistoryDialog.cpp \
+	src/MadPurgeHistoryDialog.h \
+	src/MadNumberDlg.cpp \
+	src/MadNumberDlg.h \
+	src/MadMacroDlg.cpp \
+	src/MadMacroDlg.h \
+	src/MadRecentList.cpp \
+	src/MadRecentList.h \
+	src/MadPython.hpp \
+	src/EmbeddedPython.cpp \
+	src/EmbeddedPython.hpp \
 	src/plugin.h \
 	src/MadEdit/caret_new.cpp \
 	src/MadEdit/caret_new.h \
@@ -103,7 +114,19 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	charset-detector/src/nsUTF8Prober.h \
 	charset-detector/src/prmem.h \
 	charset-detector/src/entry/impl.cpp \
-	charset-detector/include/chardetect.h
+	charset-detector/include/chardetect.h \
+	spellchecker/HunspellInterface.cpp \
+	spellchecker/HunspellInterface.h \
+	spellchecker/PersonalDictionary.cpp \
+	spellchecker/PersonalDictionary.h \
+	spellchecker/SpellCheckEngineInterface.cpp \
+	spellchecker/SpellCheckEngineInterface.h \
+	spellchecker/SpellCheckEngineOption.cpp \
+	spellchecker/SpellCheckEngineOption.h \
+	spellchecker/SpellCheckUserInterface.cpp \
+	spellchecker/SpellCheckUserInterface.h \
+	spellchecker/SpellCheckerManager.cpp \
+	spellchecker/SpellCheckerManager.h
 
 pixmapsdir = $(datadir)/pixmaps
 pixmaps_DATA = madedit.xpm

@@ -41,8 +41,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(WXWIN)\lib\vc_lib\mswud&quot;;&quot;$(WXWIN)\include&quot;;&quot;$(BOOST)&quot;;&quot;..\charset-detector\include&quot;;&quot;..\charset-detector\src&quot;;&quot;..\charset-detector\src\tables&quot;;&quot;$(SolutionDir)/../minipython/Include&quot;;&quot;$(SolutionDir)/../minipython/PC&quot;"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
+				AdditionalIncludeDirectories="&quot;$(WXWIN)\lib\vc_lib\mswud&quot;;&quot;$(WXWIN)\include&quot;;&quot;$(BOOST)&quot;;&quot;..\charset-detector\include&quot;;&quot;..\charset-detector\src&quot;;&quot;..\charset-detector\src\tables&quot;;&quot;$(SolutionDir)/../minipython/Include&quot;;&quot;$(SolutionDir)/../minipython/PC&quot;;&quot;$(SolutionDir)\..\spellchecker&quot;;&quot;$(SolutionDir)\..\spellchecker\hunspell\src&quot;"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_SCL_SECURE_NO_WARNINGS;HUNSPELL_STATIC;Py_NO_ENABLE_SHARED"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -64,11 +64,11 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalOptions="/ignore:4217 /ignore:4049"
-				AdditionalDependencies="wxmsw28ud_core.lib wxbase28ud.lib wxmsw28ud_aui.lib python27_d.lib libboost_python-vc80-mt-sgyd-1_56.lib comctl32.lib uuid.lib rpcrt4.lib User32.Lib Gdi32.Lib Shell32.Lib AdvAPI32.Lib Ole32.Lib OleAut32.Lib ComDlg32.Lib"
+				AdditionalOptions="/ignore:4217 /ignore:4049 /ignore:4204"
+				AdditionalDependencies="wxmsw28ud_core.lib wxbase28ud.lib wxmsw28ud_aui.lib wxpng.lib wxzlib.lib python27_d.lib libboost_python-vc80-mt-sgyd-1_56.lib libhunspell.lib comctl32.lib uuid.lib rpcrt4.lib User32.Lib Gdi32.Lib Shell32.Lib AdvAPI32.Lib Ole32.Lib OleAut32.Lib ComDlg32.Lib"
 				OutputFile="$(OutDir)/MadEdit.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(WXWIN)\lib\vc_lib&quot;;..\libunicows;..\ZLib;..\libpng;&quot;$(TargetDir)&quot;;&quot;$(BOOST)stage/lib&quot;"
+				AdditionalLibraryDirectories="&quot;$(WXWIN)\lib\vc_lib&quot;;&quot;$(TargetDir)&quot;;&quot;$(BOOST)stage/lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
@@ -124,8 +124,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				FavorSizeOrSpeed="1"
-				AdditionalIncludeDirectories="&quot;$(WXWIN)lib\vc_lib\mswu&quot;;&quot;$(WXWIN)include&quot;;&quot;$(BOOST)&quot;;&quot;$(SolutionDir)..\charset-detector\include&quot;;&quot;$(SolutionDir)..\charset-detector\src&quot;;&quot;$(SolutionDir)..\charset-detector\src\tables&quot;;&quot;$(SolutionDir)..\minipython\Include&quot;;&quot;$(SolutionDir)..\minipython\PC&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
+				AdditionalIncludeDirectories="&quot;$(WXWIN)lib\vc_lib\mswu&quot;;&quot;$(WXWIN)include&quot;;&quot;$(BOOST)&quot;;&quot;$(SolutionDir)..\charset-detector\include&quot;;&quot;$(SolutionDir)..\charset-detector\src&quot;;&quot;$(SolutionDir)..\charset-detector\src\tables&quot;;&quot;$(SolutionDir)..\minipython\Include&quot;;&quot;$(SolutionDir)..\minipython\PC&quot;;&quot;$(SolutionDir)\..\spellchecker&quot;;&quot;$(SolutionDir)\..\spellchecker\hunspell\src&quot;"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_SCL_SECURE_NO_WARNINGS;HUNSPELL_STATIC;Py_NO_ENABLE_SHARED"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -144,10 +144,10 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/ignore:4217 /ignore:4049"
-				AdditionalDependencies="wxmsw28u_core.lib wxbase28u.lib wxmsw28u_aui.lib libpng.lib zlib.lib python27.lib libboost_python-vc80-mt-s-1_56.lib comctl32.lib rpcrt4.lib User32.Lib Gdi32.Lib Shell32.Lib AdvAPI32.Lib Ole32.Lib OleAut32.Lib ComDlg32.Lib"
+				AdditionalDependencies="wxmsw28u_core.lib wxbase28u.lib wxmsw28u_aui.lib wxpng.lib wxzlib.lib python27.lib libboost_python-vc80-mt-s-1_56.lib libhunspell.lib comctl32.lib rpcrt4.lib User32.Lib Gdi32.Lib Shell32.Lib AdvAPI32.Lib Ole32.Lib OleAut32.Lib ComDlg32.Lib"
 				OutputFile="$(OutDir)/MadEdit.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(WXWIN)\lib\vc_lib&quot;;..\libpng;..\zlib;&quot;$(TargetDir)&quot;;&quot;$(BOOST)stage/lib&quot;;$(NOINHERIT)"
+				AdditionalLibraryDirectories="&quot;$(WXWIN)\lib\vc_lib&quot;;&quot;$(TargetDir)&quot;;&quot;$(BOOST)stage/lib&quot;;$(NOINHERIT)"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
@@ -241,6 +241,10 @@
 			</File>
 			<File
 				RelativePath="..\src\MadPurgeHistoryDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\src\MadRecentList.cpp"
 				>
 			</File>
 			<File
@@ -415,6 +419,58 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="SpellChecker"
+				>
+				<File
+					RelativePath="..\spellchecker\HunspellInterface.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\spellchecker\HunspellInterface.h"
+					>
+				</File>
+				<File
+					RelativePath="..\spellchecker\PersonalDictionary.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\spellchecker\PersonalDictionary.h"
+					>
+				</File>
+				<File
+					RelativePath="..\spellchecker\SpellCheckEngineInterface.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\spellchecker\SpellCheckEngineInterface.h"
+					>
+				</File>
+				<File
+					RelativePath="..\spellchecker\SpellCheckEngineOption.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\spellchecker\SpellCheckEngineOption.h"
+					>
+				</File>
+				<File
+					RelativePath="..\spellchecker\SpellCheckerManager.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\spellchecker\SpellCheckerManager.h"
+					>
+				</File>
+				<File
+					RelativePath="..\spellchecker\SpellCheckUserInterface.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\spellchecker\SpellCheckUserInterface.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -463,6 +519,10 @@
 			</File>
 			<File
 				RelativePath="..\src\MadPurgeHistoryDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\MadRecentList.h"
 				>
 			</File>
 			<File

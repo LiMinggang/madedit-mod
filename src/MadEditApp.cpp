@@ -27,15 +27,14 @@ IMPLEMENT_APP(MadEditApp)
 #define new new(_NORMAL_BLOCK ,__FILE__, __LINE__)
 #endif
 
-#ifdef __WXMSW__
-HANDLE g_Mutex=NULL;
-#endif
-
 wxLocale g_Locale;
 
 wxString g_MadEditAppDir;
 wxString g_MadEditHomeDir;
 wxString g_MadEditConfigName;
+#ifdef __WXMSW__
+wxString g_MadEditRegkeyPath = wxT("HKEY_CURRENT_USER\\Software\\Classes\\");
+#endif
 bool g_DoNotSaveSettings=false;
 bool g_ResetAllKeys=false;
 
@@ -73,12 +72,14 @@ const wxString g_MadTopicStr = wxT("single-instance");
 // are from gcin (http://www.csie.nctu.edu.tw/~cp76/gcin/)
 
 #include <X11/Xatom.h>
+#define GSocket GlibGSocket 
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
+#undef GSocket
 #if wxMAJOR_VERSION < 2 || (wxMAJOR_VERSION == 2 && wxMINOR_VERSION < 9)
 #include <wx/gtk/win_gtk.h>
-#else
-#include <wx/gtk/private/win_gtk.h>
+//#else
+//#include <wx/gtk/private/win_gtk.h>
 #endif
 
 Atom g_MadEdit_atom;
@@ -203,10 +204,18 @@ wxConnectionBase *MadAppSrv::OnAcceptConnection(const wxString& topic)
 }
 
 // Opens a file passed from another instance
-bool MadAppConn::OnExecute(const wxString& WXUNUSED(topic), wxChar *data, int WXUNUSED(size), wxIPCFormat WXUNUSED(format))
+bool MadAppConn::OnExecute(const wxString& topic,
+#if wxMAJOR_VERSION < 2 || (wxMAJOR_VERSION == 2 && wxMINOR_VERSION < 9)
+                        wxChar* data,
+                        int WXUNUSED(size),
+#else
+                        const void * data,
+                        size_t WXUNUSED(size),
+#endif
+                        wxIPCFormat WXUNUSED(format))
 {
     MadEditFrame* frame = wxDynamicCast(wxGetApp().GetTopWindow(), MadEditFrame);
-    wxString filename(data);
+    wxString filename((wxChar*)data);
     if (filename.IsEmpty())
     {
         // Just raise the main window
@@ -311,85 +320,6 @@ bool MadEditApp::OnInit()
             delete client;
             return false;
         }
-#if 0
-#ifdef __WXMSW__
-        g_Mutex = CreateMutex(NULL, true, wxT("MadEdit_App"));
-        if(GetLastError() == ERROR_ALREADY_EXISTS)
-        {
-#if wxMAJOR_VERSION < 2 || (wxMAJOR_VERSION == 2 && wxMINOR_VERSION < 9)
-            extern const wxChar *wxCanvasClassNameNR;    // class name of MadEditFrame
-#else
-            wxString MadFrameName(wxWindowMSW::MSWGetRegisteredClassName());
-			MadFrameName += "NR";
-#endif
-            wxChar title[256]={0};
-#if wxMAJOR_VERSION < 2 || (wxMAJOR_VERSION == 2 && wxMINOR_VERSION < 9)
-            HWND prevapp = ::FindWindowEx(NULL, NULL, wxCanvasClassNameNR, NULL);
-#else
-            HWND prevapp = ::FindWindowEx(NULL, NULL, MadFrameName.c_str()/*wxCanvasClassNameNR*/, NULL);
-#endif
-            for(;;)                // find wxCanvasClassNameNR
-            {
-                if(prevapp)
-                {
-                    int len = ::GetWindowText(prevapp, title, 256);
-                    if(len>=8 && title[len-1]==wxT(' '))    // last wchar is space?
-                    {
-                        title[7]=0;
-                        if(lstrcmp(title, wxT("MadEdit"))==0) // compare first 7 wchars
-                            break;
-                    }
-                }
-                else
-                {
-                    Sleep(50);
-                }
-#if wxMAJOR_VERSION < 2 || (wxMAJOR_VERSION == 2 && wxMINOR_VERSION < 9)
-                prevapp =::FindWindowEx(NULL, prevapp, wxCanvasClassNameNR, NULL);
-#else
-                prevapp =::FindWindowEx(NULL, prevapp, MadFrameName.c_str()/*wxCanvasClassNameNR*/, NULL);
-#endif
-            }
-
-            if(prevapp != NULL)   // send msg to the previous instance
-            {
-                WINDOWPLACEMENT wp;
-                wp.length=sizeof(WINDOWPLACEMENT);
-                GetWindowPlacement(prevapp, &wp);
-                if(wp.showCmd!=SW_SHOWMINIMIZED)
-                {
-                    ::SetForegroundWindow(prevapp);
-                }
-
-                COPYDATASTRUCT cds =
-                {
-                    (ULONG_PTR)prevapp,
-                    DWORD((filenames.length()+1)*sizeof(wxChar)),
-                    (PVOID)(const wxChar*)filenames.c_str()
-                };
-
-                ::SendMessage(prevapp, WM_COPYDATA, 0, (LPARAM) &cds);
-
-                g_DoNotSaveSettings = true;
-                DeleteConfig();
-                return false;
-            }
-        }
-#elif defined(__WXGTK__)
-        //g_Display=GDK_DISPLAY();
-        //g_MadEdit_atom = XInternAtom(g_Display, "g_MadEdit_atom", False);
-        //Window madedit_win;
-
-        //if ((madedit_win=XGetSelectionOwner(g_Display, g_MadEdit_atom))!=None)
-        {
-            send_message(madedit_win, filenames);
-
-            g_DoNotSaveSettings = true;
-            DeleteConfig();
-            return false;
-        }
-#endif
-#endif
     }
 
 
@@ -494,32 +424,16 @@ bool MadEditApp::OnInit()
         wp.length=sizeof(WINDOWPLACEMENT);
         GetWindowPlacement((HWND)myFrame->GetHWND(), &wp);
 
-	   // changed: gogo, 30.08.2009
-	   //wp.showCmd=SW_SHOWMAXIMIZED;
-	   wp.showCmd = maximize ? SW_SHOWMAXIMIZED : SW_SHOWNORMAL;
+       // changed: gogo, 30.08.2009
+       //wp.showCmd=SW_SHOWMAXIMIZED;
+       wp.showCmd = maximize ? SW_SHOWMAXIMIZED : SW_SHOWNORMAL;
 
-	   SetWindowPlacement((HWND)myFrame->GetHWND(), &wp);
+       SetWindowPlacement((HWND)myFrame->GetHWND(), &wp);
     }
 #endif
 
     myFrame->Show(true);
 
-#if 0
-#if defined(__WXGTK__)
-    if(bSingleInstance)
-    {
-#if wxMAJOR_VERSION < 2 || (wxMAJOR_VERSION == 2 && wxMINOR_VERSION < 9) || (wxMAJOR_VERSION == 2 && wxMINOR_VERSION == 9 && wxRELEASE_NUMBER<3)
-        GtkPizza *pizza = GTK_PIZZA(myFrame->m_mainWidget);
-        Window win=GDK_WINDOW_XWINDOW(pizza->bin_window);
-#else
-        wxPizza *pizza = WX_PIZZA(myFrame->m_mainWidget);
-        Window win=GDK_WINDOW_XWINDOW(pizza->m_fixed.container.widget.window);
-#endif
-        XSetSelectionOwner(g_Display, g_MadEdit_atom, win, CurrentTime);
-        gdk_window_add_filter(NULL, my_gdk_filter, NULL);
-    }
-#endif
-#endif
     // reload files previously opened
     wxString files;
     cfg->Read(wxT("/MadEdit/ReloadFilesList"), &files);

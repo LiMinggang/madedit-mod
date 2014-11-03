@@ -244,6 +244,9 @@ void ConvertSpaceToTab()
 void ConvertTabToSpace()
 void CopyAsHexString(bool withSpace)
 mad_py::tuple WordCount(bool selection)
+void ColumnAlign()
+void InsertIncrementalNumber(int initial, int step, int total, int stepType, int fmt, int align, bool zeroPad)
+
 
 MadEditCommand
 --------------

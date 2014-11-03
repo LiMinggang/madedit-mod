@@ -22,9 +22,33 @@
 #include <wx/fontmap.h>
 #include <wx/string.h>
 #include "ucs4_t.h"
+#include <vector>
+#include <map>
 
 enum MadEncodingType
 { etSingleByte, etDoubleByte, etUTF8, etUTF16LE, etUTF16BE, etUTF32LE, etUTF32BE };
+
+enum MadEncodingGrp
+{
+    ENCG_WESTERNEUROPE = 0,
+    ENCG_CENTRALEUROPE,
+    ENCG_SOUTHEUROPE,
+    ENCG_NORTHEUROPE,
+    ENCG_CYRILLIC,
+    ENCG_ARABIC,
+    ENCG_GREEK,
+    ENCG_HEBREW,
+    ENCG_TURKISH,
+    ENCG_BALTIC,
+    ENCG_EASTASIA,
+    ENCG_SOUTHEASTASIA,
+    ENCG_UNICODE,
+    ENCG_ISO8859,
+    ENCG_WINDOWS,
+    ENCG_OEM,
+    ENCG_DEFAULT,
+    ENCG_MAX
+};
 
 struct MadEncodingInfo
 {
@@ -37,10 +61,11 @@ struct MadEncodingInfo
     ucs2_t         *m_MBtoWC_Table;      // MultiByte To WideChar table
     wxWord         *m_WCtoMB_Table;      // WideChar To MultiByte table
     wxByte         *m_LeadByte_Table;    // DBCS Lead-Byte table
+    std::vector<int>  m_GrpIdVec; //Filter Ids
 
-    MadEncodingInfo(wxFontEncoding e, const wxString &n, const wxString &de, MadEncodingType t, const wxString &fn)
+    MadEncodingInfo(wxFontEncoding e, const wxString &n, const wxString &de, MadEncodingType t, const wxString &fn, std::vector<int>& grp)
         :m_Encoding(e), m_Name(n), m_Description(de), m_FontName(fn), m_Type(t),
-        m_CSConv(NULL), m_MBtoWC_Table(NULL), m_WCtoMB_Table(NULL), m_LeadByte_Table(NULL)
+        m_CSConv(NULL), m_MBtoWC_Table(NULL), m_WCtoMB_Table(NULL), m_LeadByte_Table(NULL), m_GrpIdVec(grp)
     {
     }
 };
@@ -51,6 +76,7 @@ class MadEncoding
 private:
     static size_t ms_SystemEncodingIndex;
     static MadEncoding *ms_SystemEncoding;
+    static std::map<int, wxString>MadEncodingGrpName;
 
 public:
     static void     InitEncodings(); // must call this before use MadEncoding
@@ -60,9 +86,15 @@ public:
     static wxString GetEncodingName(size_t idx);
     static wxString GetEncodingDescription(size_t idx);
     static wxString GetEncodingFontName(size_t idx);
+    static const std::vector<int>& GetEncodingGrps(size_t idx);
     static wxString EncodingToName(wxFontEncoding enc);
     static wxFontEncoding NameToEncoding(const wxString &name);
     static MadEncoding *GetSystemEncoding();
+    static wxString GetGroupNameById(int id)
+    {
+        if(id<ENCG_WESTERNEUROPE || id>=ENCG_MAX) return wxEmptyString;
+        return MadEncodingGrpName[id];
+    }
 
 private:
     MadEncodingInfo *m_Info;

@@ -1,7 +1,7 @@
 #ifndef __EMBEDDEDPYTHON__
 #define __EMBEDDEDPYTHON__
 
-#include <python.h>
+#include <Python.h>
 
 #define BOOST_PYTHON_STATIC_LIB
 #include <boost/python.hpp>

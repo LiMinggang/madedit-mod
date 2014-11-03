@@ -25,6 +25,9 @@
     <Filter Include="Source files\charset-detector">
       <UniqueIdentifier>{a9504282-edb0-4294-bc4b-28e4e850b62c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source files\SpellChecker">
+      <UniqueIdentifier>{5f0e3579-ebac-49d7-9215-f04bcba14878}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\MadAboutDialog.h">
@@ -182,6 +185,27 @@
     </ClInclude>
     <ClInclude Include="..\src\MadNumberDlg.h">
       <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MadRecentList.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\spellchecker\HunspellInterface.h">
+      <Filter>Source files\SpellChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\spellchecker\PersonalDictionary.h">
+      <Filter>Source files\SpellChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\spellchecker\SpellCheckEngineInterface.h">
+      <Filter>Source files\SpellChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\spellchecker\SpellCheckEngineOption.h">
+      <Filter>Source files\SpellChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\spellchecker\SpellCheckUserInterface.h">
+      <Filter>Source files\SpellChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\spellchecker\SpellCheckerManager.h">
+      <Filter>Source files\SpellChecker</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -356,10 +380,36 @@
     <ClCompile Include="..\src\MadNumberDlg.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\MadRecentList.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\spellchecker\HunspellInterface.cpp">
+      <Filter>Source files\SpellChecker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\spellchecker\PersonalDictionary.cpp">
+      <Filter>Source files\SpellChecker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\spellchecker\SpellCheckEngineInterface.cpp">
+      <Filter>Source files\SpellChecker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\spellchecker\SpellCheckEngineOption.cpp">
+      <Filter>Source files\SpellChecker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\spellchecker\SpellCheckUserInterface.cpp">
+      <Filter>Source files\SpellChecker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\spellchecker\SpellCheckerManager.cpp">
+      <Filter>Source files\SpellChecker</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\src\MadEditApp.rc">
       <Filter>Resource files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\spellchecker\libhunspell_v80.vcproj">
+      <Filter>Source files\SpellChecker</Filter>
+    </None>
   </ItemGroup>
 </Project>

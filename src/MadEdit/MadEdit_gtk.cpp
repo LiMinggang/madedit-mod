@@ -510,6 +510,7 @@ struct wxGtkIMData
 
 extern "C" {
 static gboolean
+#if wxMAJOR_VERSION < 2 || (wxMAJOR_VERSION == 2 && wxMINOR_VERSION < 9)
 gtk_window_key_press_callback( GtkWidget *widget,
                                GdkEventKey *gdk_event,
                                wxWindow *win )
@@ -520,10 +521,8 @@ gtk_window_key_press_callback( GtkWidget *widget,
 
     if (!win->m_hasVMT)
         return FALSE;
-#if wxMAJOR_VERSION < 2 || (wxMAJOR_VERSION == 2 && wxMINOR_VERSION < 9)
-    if (g_blockEventsOnDrag)
+     if (g_blockEventsOnDrag)
         return FALSE;
-#endif
 
 
     wxKeyEvent event( wxEVT_KEY_DOWN );
@@ -678,6 +677,133 @@ gtk_window_key_press_callback( GtkWidget *widget,
 
     return ret;
 }
+#else
+gtk_window_key_press_callback( GtkWidget *WXUNUSED(widget),
+                               GdkEventKey *gdk_event,
+                               wxWindow *win )
+{
+    if (g_blockEventsOnDrag)
+        return FALSE;
+
+    wxPROCESS_EVENT_ONCE(GdkEventKey, gdk_event);
+
+    wxKeyEvent event( wxEVT_KEY_DOWN );
+    bool ret = false;
+    bool return_after_IM = false;
+
+    if( wxTranslateGTKKeyEventToWx(event, win, gdk_event) )
+    {
+        // Send the CHAR_HOOK event first
+        if ( SendCharHookEvent(event, win) )
+        {
+            // Don't do anything at all with this event any more.
+            return TRUE;
+        }
+
+        // Next check for accelerators.
+#if wxUSE_ACCEL
+        wxWindowGTK *ancestor = win;
+        while (ancestor)
+        {
+            int command = ancestor->GetAcceleratorTable()->GetCommand( event );
+            if (command != -1)
+            {
+                wxCommandEvent menu_event( wxEVT_MENU, command );
+                ret = ancestor->HandleWindowEvent( menu_event );
+
+                if ( !ret )
+                {
+                    // if the accelerator wasn't handled as menu event, try
+                    // it as button click (for compatibility with other
+                    // platforms):
+                    wxCommandEvent button_event( wxEVT_BUTTON, command );
+                    ret = ancestor->HandleWindowEvent( button_event );
+                }
+
+                break;
+            }
+            if (ancestor->IsTopLevel())
+                break;
+            ancestor = ancestor->GetParent();
+        }
+#endif // wxUSE_ACCEL
+
+        // If not an accelerator, then emit KEY_DOWN event
+        if ( !ret )
+            ret = win->HandleWindowEvent( event );
+    }
+    else
+    {
+        // Return after IM processing as we cannot do
+        // anything with it anyhow.
+        return_after_IM = true;
+    }
+
+    if ( !ret )
+    {
+        // Indicate that IM handling is in process by setting this pointer
+        // (which will remain valid for all the code called during IM key
+        // handling).
+        win->m_imKeyEvent = gdk_event;
+
+        // We should let GTK+ IM filter key event first. According to GTK+ 2.0 API
+        // docs, if IM filter returns true, no further processing should be done.
+        // we should send the key_down event anyway.
+        const int intercepted_by_IM = win->GTKIMFilterKeypress(gdk_event);
+
+        win->m_imKeyEvent = NULL;
+
+        if ( intercepted_by_IM )
+        {
+            wxLogTrace(TRACE_KEYS, wxT("Key event intercepted by IM"));
+            return TRUE;
+        }
+    }
+
+    if (return_after_IM)
+        return FALSE;
+
+    // Only send wxEVT_CHAR event if not processed yet. Thus, ALT-x
+    // will only be sent if it is not in an accelerator table.
+    if (!ret)
+    {
+        KeySym keysym = gdk_event->keyval;
+        // Find key code for EVT_CHAR and EVT_CHAR_HOOK events
+        long key_code = wxTranslateKeySymToWXKey(keysym, true /* isChar */);
+        if ( !key_code )
+        {
+            if ( wxIsAsciiKeysym(keysym) )
+            {
+                // ASCII key
+                key_code = (unsigned char)keysym;
+            }
+            // gdk_event->string is actually deprecated
+            else if ( gdk_event->length == 1 )
+            {
+                key_code = (unsigned char)gdk_event->string[0];
+            }
+        }
+
+        if ( key_code )
+        {
+            wxKeyEvent eventChar(wxEVT_CHAR, event);
+
+            wxLogTrace(TRACE_KEYS, wxT("Char event: %ld"), key_code);
+
+            eventChar.m_keyCode = key_code;
+#if wxUSE_UNICODE
+            eventChar.m_uniChar = gdk_keyval_to_unicode(key_code);
+#endif // wxUSE_UNICODE
+
+            AdjustCharEventKeyCodes(eventChar);
+
+            ret = win->HandleWindowEvent(eventChar);
+        }
+    }
+
+    return ret;
+} 
+#endif
 }
 
 

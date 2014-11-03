@@ -20,7 +20,7 @@
 #define new new(_NORMAL_BLOCK ,__FILE__, __LINE__)
 #endif
 
-extern void RecordAsMadMacro(MadEdit *, wxString&);
+extern void RecordAsMadMacro(MadEdit *, const wxString&);
 //----------------------------------------------------------------------------
 // MadWordCountDialog
 //----------------------------------------------------------------------------

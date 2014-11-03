@@ -29,8 +29,7 @@ BEGIN_EVENT_TABLE(MadAboutDialog,wxDialog)
 END_EVENT_TABLE()
     ////Event Table End
 
-
-wxString g_MadEdit_Version(wxT("MadEdit mod 0.2.2"));
+wxString g_MadEdit_Version(wxT("MadEdit Mod 0.2.5.3"));
 wxString g_MadEdit_URL(wxT("http://sourceforge.net/projects/madedit/ or http://sourceforge.net/projects/madedit-mod/"));
 wxString g_MadEditMod_URL(wxT("http://sourceforge.net/projects/madedit-mod/"));
 
@@ -90,7 +89,7 @@ void MadAboutDialog::CreateGUIControls(void)
 	WxButtonCancel->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer3->Add(WxButtonCancel,0,wxALIGN_CENTER | wxALL,4);
 
-	SetTitle(_("About MadEdit"));
+	SetTitle(_("About MadEdit Mod"));
 	SetIcon(wxNullIcon);
 	
 	GetSizer()->Layout();

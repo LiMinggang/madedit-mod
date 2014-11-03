@@ -22,5 +22,5 @@ extern const int HtmlColorTableCount;
 
 extern void SetHtmlColors();
 extern wxString GetExecutablePath();
-
+extern wxString g_MadEditRegkeyPath;
 #endif

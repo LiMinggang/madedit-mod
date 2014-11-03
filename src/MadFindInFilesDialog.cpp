@@ -10,6 +10,7 @@
 #include "MadReplaceDialog.h"
 #include "MadSearchDialog.h"
 #include "MadEdit/MadEdit.h"
+#include "MadRecentList.h"
 
 #include <wx/progdlg.h>
 #include <wx/dir.h>
@@ -32,6 +33,7 @@
 
 MadFindInFilesDialog *g_FindInFilesDialog=NULL;
 extern wxStatusBar *g_StatusBar;
+extern void DisplayFindAllResult(vector<wxFileOffset> &begpos, vector<wxFileOffset> &endpos, MadEdit *madedit, bool expandresults = true, OnProgressUpdatePtr updater = NULL);
 
 //----------------------------------------------------------------------------
 // MadFindInFilesDialog
@@ -294,9 +296,9 @@ void MadFindInFilesDialog::CreateGUIControls(void)
     WxComboBoxEncoding->SetValue(systemenc);
 
     //
-    m_RecentFindDir = new wxFileHistory();
-    m_RecentFindFilter = new wxFileHistory();
-    m_RecentFindExclude = new wxFileHistory();
+    m_RecentFindDir = new MadRecentList();
+    m_RecentFindFilter = new MadRecentList();
+    m_RecentFindExclude = new MadRecentList();
     wxConfigBase *m_Config=wxConfigBase::Get(false);
     wxString oldpath=m_Config->GetPath();
     m_Config->SetPath(wxT("/RecentFindDir"));
@@ -548,7 +550,7 @@ WX_DECLARE_HASH_SET( wxString, wxStringHash, wxStringEqual, MadFileNameList );
 MadFileNameList g_FileNameList; // the filenames matched the filename filter
 
 vector<wxString> g_ExcludeFilters;
-
+extern wxString MadStrLower(const wxString &);
 class DirTraverser : public wxDirTraverser
 {
 public:
@@ -575,7 +577,8 @@ public:
             {
                 fn.Assign(filename);
 #ifdef __WXMSW__
-                if(fn.GetFullName().Lower().Matches(g_ExcludeFilters[i].c_str()))
+                if(MadStrLower(fn.GetFullName()).Matches(g_ExcludeFilters[i].c_str()))
+                //if(fn.GetFullName().Lower().Matches(g_ExcludeFilters[i].c_str()))
 #else
                 if(fn.GetFullName().Matches(g_ExcludeFilters[i].c_str()))
 #endif
@@ -635,7 +638,7 @@ void MadFindInFilesDialog::FindReplaceInFiles(bool bReplace)
     size_t totalfiles;
     if(WxRadioButtonOpenedFiles->GetValue())
     {
-        totalfiles= ((wxAuiNotebook*)g_MainFrame->m_Notebook)->GetPageCount();
+        totalfiles=((wxAuiNotebook*)g_MainFrame->m_Notebook)->GetPageCount();
     }
     else
     {
@@ -832,60 +835,7 @@ void MadFindInFilesDialog::FindReplaceInFiles(bool bReplace)
                 if(ok<0) break;
             }
 
-            if(!begpos.empty()) // found data
-            {
-                int pid=-1;
-                expr=madedit->GetFileName();
-                if(expr.IsEmpty())
-                {
-                    pid=((wxAuiNotebook*)g_MainFrame->m_Notebook)->GetPageIndex(madedit);
-                    if(pid>=0)
-                    {
-                        expr=((wxAuiNotebook*)g_MainFrame->m_Notebook)->GetPageText(pid);
-                        if(expr[expr.Len()-1]==wxT('*'))
-                            expr.Truncate(expr.Len()-1);
-                    }
-                }
-                if(!expr.IsEmpty())
-                {
-                    size_t count=begpos.size(), idx=0;
-                    if(WxCheckBoxListFirstOnly->GetValue()) count=1;
-                    int line=-1, oldline;
-                    wxString linetext, loc;
-                    g_MainFrame->m_FindInFilesResults->Freeze();
-                    do
-                    {
-                        if(madedit->IsTextFile())
-                        {
-                            oldline=line;
-                            line=madedit->GetLineByPos(begpos[idx]);
-                            if(line!=oldline)
-                            {
-                                linetext.Empty();
-                                madedit->GetLine(linetext, line, 512);
-                            }
-                            loc.Printf(_("Line(%d): "), line+1);
-                        }
-                        else
-                        {
-                            loc.Printf(_("Offset(%s): "), wxLongLong(begpos[idx]).ToString().c_str());
-                            linetext = _("Binary file matches");
-                        }
-
-                        fmt = loc +linetext;
-                        g_MainFrame->AddItemToFindInFilesResults(fmt, idx, expr, pid, begpos[idx], endpos[idx]);
-                        ++ResultCount;
-                    }
-                    while(++idx < count);
-                    g_MainFrame->m_FindInFilesResults->Thaw();
-
-                    if(ResultCount)
-                    {
-                        g_MainFrame->m_AuiManager.GetPane(g_MainFrame->m_InfoNotebook).Show();
-                        g_MainFrame->m_AuiManager.Update();
-                    }
-                }
-            }
+            DisplayFindAllResult(begpos, endpos, madedit, false);
         }
         
         if(tempedit) delete tempedit;

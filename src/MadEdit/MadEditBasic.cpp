@@ -15,7 +15,7 @@
 #endif
 
 #include <wx/filename.h>
-
+#include "SpellCheckerManager.h"
 
 #ifdef _DEBUG
 #include <crtdbg.h>
@@ -1049,7 +1049,6 @@ void MadEdit::SetInsertMode(bool mode)
     }
     DoStatusChanged();
 }
-
 
 void MadEdit::GetCaretPosition(int &line, int &subrow, wxFileOffset &column)
 {
@@ -3367,6 +3366,9 @@ int MadEdit::FindTextAll(const wxString &expr,
     endpos=epos;
     int count=0;
     int state;
+
+    wxString fmt = _("Found %d matched texts...");
+    fmt += wxT("                                \n");
 
     while((state=Search(bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord))==SR_YES)
     {

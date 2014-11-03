@@ -32,20 +32,22 @@ inline char_type xtolower(char_type ch)
 {
     if(ch<0 || ch>0xFFFF) return ch;
 #if defined(__WXMSW__)
-    if(ch<=0xFF)
-		return std::tolower(ch);
-#endif
+    ucs4_t tch = (ucs4_t)ch;
+    return (char_type)CharLowerW((LPWSTR)tch);
+#else
     return std::towlower(wchar_t(ch));
+#endif
 }
 
 template<>
 inline wchar_t xtolower(wchar_t ch)
 {
 #if defined(__WXMSW__)
-    if(ch<=0xFF)
-		return std::tolower(ch);
+    ucs4_t tch = (ucs4_t)ch;
+    return (wchar_t)CharLowerW((LPWSTR)tch);
+#else
+    return std::towlower(wchar_t(ch));
 #endif
-    return std::towlower(ch);
 }
 
 template<>
@@ -290,18 +292,20 @@ struct ucs4_regex_traits: public null_regex_traits<ucs4_t>
     {
         if(ch<0 || ch>0xFFFF) return ch;
 #if defined(__WXMSW__)
-        if(ch<=0xFF)
-			return std::tolower(ch);
-#endif
+        ucs4_t tch = (ucs4_t)ch;
+        return (char_type2)CharLowerW((LPWSTR)tch);
+#else
         return std::towlower(wchar_t(ch));
+#endif
     }
     static wchar_t tolower(wchar_t ch)
     {
 #if defined(__WXMSW__)
-        if(ch<=0xFF)
-			return std::tolower(ch);
-#endif
+        ucs4_t tch = (ucs4_t)ch;
+        return (wchar_t)CharLowerW((LPWSTR)tch);
+#else
         return std::towlower(ch);
+#endif
     }
 
     template<typename char_type2>
@@ -309,18 +313,20 @@ struct ucs4_regex_traits: public null_regex_traits<ucs4_t>
     {
         if(ch<0 || ch>0xFFFF) return ch;
 #if defined(__WXMSW__)
-        if(ch<=0xFF)
-			return std::toupper(ch);
-#endif
+        ucs4_t tch = (ucs4_t)ch;
+        return (char_type2)CharUpperW((LPWSTR)tch);
+#else
         return std::towupper(wchar_t(ch));
+#endif
     }
     static wchar_t toupper(wchar_t ch)
     {
 #if defined(__WXMSW__)
-        if(ch<=0xFF)
-			return std::toupper(ch);
+        ucs4_t tch = (ucs4_t)ch;
+        return (wchar_t)CharUpperW((LPWSTR)tch);
+#else
+        return std::towupper(wchar_t(ch));
 #endif
-        return std::towupper(ch);
     }
 
     static char_type widen(char ch)
@@ -646,7 +652,7 @@ MadLines::NextUCharFuncPtr UCIterator::s_NextUChar=NULL;
 wxFileOffset UCIterator::s_endpos=0;
 list<UCQueueSet> UCIterator::s_ucqueues;
 
-
+extern wxString MadStrLower(const wxString &);
 MadSearchResult MadEdit::Search(/*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadCaretPos &endpos,
     const wxString &text, bool bRegex, bool bCaseSensitive, bool bWholeWord)
 {
@@ -663,7 +669,8 @@ MadSearchResult MadEdit::Search(/*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadCa
     if(!bCaseSensitive)
     {
         static wxString text_lower;
-        text_lower = text.Lower();
+        text_lower = MadStrLower(text);
+        //text_lower = text.Lower();
         text_ptr = &text_lower;
     }
 

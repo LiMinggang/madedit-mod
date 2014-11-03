@@ -51,15 +51,15 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(WXWIN)\include;$(WXWIN)\include\msvc;$(WXWIN)\contrib\include;$(BOOST);$(SolutionDir)..\minipython\Include;$(SolutionDir)..\minipython\PC;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_UNICODE;UNICODE;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(WXWIN)\include;$(WXWIN)\include\msvc;$(WXWIN)\contrib\include;$(BOOST);$(SolutionDir)..\minipython\Include;$(SolutionDir)..\minipython\PC;$(SolutionDir)\..\spellchecker;$(SolutionDir)\..\spellchecker\hunspell\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;_SCL_SECURE_NO_WARNINGS;HUNSPELL_STATIC;Py_NO_ENABLE_SHARED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(WXWIN)\lib\vc_lib\;$(BOOST)\stage\lib;$(SolutionDir)$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
-      <AdditionalDependencies>comctl32.lib;rpcrt4.lib;python27_d.lib;libboost_python-vc120-mt-sgyd-1_56.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>comctl32.lib;rpcrt4.lib;python27_d.lib;libboost_python-vc120-mt-sgyd-1_56.lib;libhunspell.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/ignore:4217 /ignore:4049 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <ResourceCompile />
@@ -72,14 +72,15 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(WXWIN)\include;$(WXWIN)\include\msvc;$(BOOST);$(SolutionDir)..\minipython\Include;$(SolutionDir)..\minipython\PC;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(WXWIN)\include;$(WXWIN)\include\msvc;$(BOOST);$(SolutionDir)..\minipython\Include;$(SolutionDir)..\minipython\PC;$(SolutionDir)..\spellchecker\;$(SolutionDir)\..\spellchecker\hunspell\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;HUNSPELL_STATIC;Py_NO_ENABLE_SHARED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(WXWIN)\lib\vc_lib\;..\libpng;$(BOOST)\stage\lib;$(SolutionDir)$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>comctl32.lib;rpcrt4.lib;python27.lib;libboost_python-vc120-mt-s-1_56.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>comctl32.lib;rpcrt4.lib;python27.lib;libboost_python-vc120-mt-s-1_56.lib;libhunspell.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/ignore:4049 /ignore:4217 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <ResourceCompile>
@@ -110,6 +111,12 @@
     <ClInclude Include="..\charset-detector\src\nsUniversalDetector.h" />
     <ClInclude Include="..\charset-detector\src\nsUTF8Prober.h" />
     <ClInclude Include="..\charset-detector\src\prmem.h" />
+    <ClInclude Include="..\spellchecker\HunspellInterface.h" />
+    <ClInclude Include="..\spellchecker\PersonalDictionary.h" />
+    <ClInclude Include="..\spellchecker\SpellCheckEngineInterface.h" />
+    <ClInclude Include="..\spellchecker\SpellCheckEngineOption.h" />
+    <ClInclude Include="..\spellchecker\SpellCheckerManager.h" />
+    <ClInclude Include="..\spellchecker\SpellCheckUserInterface.h" />
     <ClInclude Include="..\src\MadAboutDialog.h" />
     <ClInclude Include="..\src\MadCommand.h" />
     <ClInclude Include="..\src\MadConvEncDialog.h" />
@@ -135,6 +142,7 @@
     <ClInclude Include="..\src\MadOptionsDialog.h" />
     <ClInclude Include="..\src\MadPrintout.h" />
     <ClInclude Include="..\src\MadPurgeHistoryDialog.h" />
+    <ClInclude Include="..\src\MadRecentList.h" />
     <ClInclude Include="..\src\MadReplaceDialog.h" />
     <ClInclude Include="..\src\MadSearchDialog.h" />
     <ClInclude Include="..\src\MadSortDialog.h" />
@@ -174,6 +182,12 @@
     <ClCompile Include="..\charset-detector\src\nsSJISProber.cpp" />
     <ClCompile Include="..\charset-detector\src\nsUniversalDetector.cpp" />
     <ClCompile Include="..\charset-detector\src\nsUTF8Prober.cpp" />
+    <ClCompile Include="..\spellchecker\HunspellInterface.cpp" />
+    <ClCompile Include="..\spellchecker\PersonalDictionary.cpp" />
+    <ClCompile Include="..\spellchecker\SpellCheckEngineInterface.cpp" />
+    <ClCompile Include="..\spellchecker\SpellCheckEngineOption.cpp" />
+    <ClCompile Include="..\spellchecker\SpellCheckerManager.cpp" />
+    <ClCompile Include="..\spellchecker\SpellCheckUserInterface.cpp" />
     <ClCompile Include="..\src\EmbeddedPython.cpp" />
     <ClCompile Include="..\src\MadAboutDialog.cpp" />
     <ClCompile Include="..\src\MadConvEncDialog.cpp" />
@@ -203,6 +217,7 @@
     <ClCompile Include="..\src\MadOptionsDialog.cpp" />
     <ClCompile Include="..\src\MadPrintout.cpp" />
     <ClCompile Include="..\src\MadPurgeHistoryDialog.cpp" />
+    <ClCompile Include="..\src\MadRecentList.cpp" />
     <ClCompile Include="..\src\MadReplaceDialog.cpp" />
     <ClCompile Include="..\src\MadSearchDialog.cpp" />
     <ClCompile Include="..\src\MadSortDialog.cpp" />
@@ -214,6 +229,9 @@
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(WXWIN)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(WXWIN)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\spellchecker\libhunspell_v80.vcproj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -33,7 +33,13 @@
 #include <wx/treectrl.h>
 
 #include <wx/aui/aui.h> // wxAUI
-
+#if __cplusplus <= 199711L
+#include <boost/shared_ptr.hpp>
+using boost::shared_ptr;
+#else
+#include <memory>
+using std::shared_ptr;
+#endif
 
 ////Dialog Style Start
 #undef MadEditFrame_STYLE
@@ -45,6 +51,8 @@ class wxMadAuiNotebook;
 class wxAuiNotebookEvent;
 class MadEdit;
 class MadTreeCtrl;
+class MadRecentList;
+class wxSpellCheckEngineInterface;
 
 class MadEditFrame : public wxFrame
 {
@@ -87,9 +95,9 @@ public:
     int           m_NewFileCount;
     wxConfigBase  *m_Config;
     wxImageList   *m_ImageList;
-    wxFileHistory *m_RecentFiles;
-    wxFileHistory *m_RecentEncodings;
-    wxFileHistory *m_RecentFonts;
+    MadRecentList *m_RecentFiles;
+    MadRecentList *m_RecentEncodings;
+    MadRecentList *m_RecentFonts;
 
     wxAuiManager m_AuiManager; // wxAUI
     wxAuiNotebook *m_InfoNotebook; //
@@ -110,11 +118,13 @@ public:
     void OnUpdateUI_MenuEditDeleteLine(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuEditInsertTabChar(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuEditInsertDateTime(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuEditToggleReadOnly(wxUpdateUIEvent& event);
 
     // add: gogo, 21.09.2009
     void OnUpdateUI_MenuEditToggleBookmark(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuEditGotoNextBookmark(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuEditGotoPreviousBookmark(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuEditClearAllBookmarks(wxUpdateUIEvent& event);
 
     void OnUpdateUI_Menu_CheckTextFile(wxUpdateUIEvent& event);
     void OnUpdateUI_Menu_InsertNumbers(wxUpdateUIEvent& event);
@@ -147,6 +157,10 @@ public:
     void OnUpdateUI_MenuViewTextMode(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuViewColumnMode(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuViewHexMode(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuViewSpellChecker(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuSpellIgnore(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuSpellAdd2Dict(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuSpellRemoveFromDict(wxUpdateUIEvent& event);
 
     void OnUpdateUI_MenuToolsByteOrderMark(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuToolsNewLineChar(wxUpdateUIEvent& event);
@@ -202,6 +216,7 @@ public:
     void OnEditToggleBookmark(wxCommandEvent& event);
     void OnEditGotoNextBookmark(wxCommandEvent& event);
     void OnEditGotoPreviousBookmark(wxCommandEvent& event);
+    void OnEditClearAllBookmarks(wxCommandEvent& event);
     //----------
 
     void OnEditSortAscending(wxCommandEvent& event);
@@ -210,6 +225,7 @@ public:
     void OnEditSortDescendingCase(wxCommandEvent& event);
     void OnEditSortByOptions(wxCommandEvent& event);
     void OnEditSortOptions(wxCommandEvent& event);
+    void OnEditToggleReadOnly(wxCommandEvent& event);
 
     void OnEditCopyAsHexString(wxCommandEvent& event);
     void OnEditCopyAsHexStringWithSpace(wxCommandEvent& event);
@@ -231,6 +247,7 @@ public:
     void OnEditTrimTrailingSpaces(wxCommandEvent& event);
     void OnEditInsertNumbers(wxCommandEvent& event);
     void OnEditColumnAlign(wxCommandEvent& event);
+    void OnEditSpellCheck(wxCommandEvent& event);
 
     void OnSearchFind(wxCommandEvent& event);
     void OnSearchFindNext(wxCommandEvent& event);
@@ -265,6 +282,10 @@ public:
     void OnViewTextMode(wxCommandEvent& event);
     void OnViewColumnMode(wxCommandEvent& event);
     void OnViewHexMode(wxCommandEvent& event);
+    void OnViewSpellChecker(wxCommandEvent& event);
+    void OnSpellCheckIgnore(wxCommandEvent& event);
+    void OnSpellAdd2Dict(wxCommandEvent& event);
+    void OnSpellCheckRemoveFromDict(wxCommandEvent& event);
 
     void OnToolsOptions(wxCommandEvent& event);
     void OnToolsHighlighting(wxCommandEvent& event);
@@ -371,7 +392,7 @@ public:
     void SetMacroRunning() {m_MadMacroStatus = emMacroRunning;}
     void SetMacroRecording() {m_MadMacroStatus = emMacroRecoding;}
     void SetMacroStopped() {m_MadMacroStatus = emMacroStopped;}
-    void AddMacroScript(wxString & script, int caretPos = 0, int selBeg = -1, int selEnd = -1)
+    void AddMacroScript(const wxString & script, int caretPos = 0, int selBeg = -1, int selEnd = -1)
     {
         if(((selBeg != -1) && (selEnd != -1)) && (selBeg != m_LastSelBeg || selEnd != m_LastSelEnd))
         {
@@ -426,6 +447,7 @@ enum { // menu id
     menuToggleBookmark,       // add: gogo, 21.09.2009
     menuGotoNextBookmark,     // add: gogo, 21.09.2009
     menuGotoPreviousBookmark, // add: gogo, 21.09.2009
+    menuClearAllBookmarks,
     menuSort,
     menuSortAscending,
     menuSortDescending,
@@ -434,6 +456,8 @@ enum { // menu id
     menuSortByOptions,
     menuSortOptions,
     menuAdvanced,
+    menuToggleReadOnly,
+    
     menuCopyAsHexString,
     menuCopyAsHexStringWithSpace,
     menuIncreaseIndent,
@@ -452,8 +476,8 @@ enum { // menu id
     menuTabToSpace,
     menuSpaceToTab,
     menuTrimTrailingSpaces,
-	menuInsertNumbers,
-	menuColumnAlign,
+    menuInsertNumbers,
+    menuColumnAlign,
 
     // search
     menuFindNext,
@@ -468,6 +492,9 @@ enum { // menu id
     // view
     menuEncoding,
     menuAllEncodings,
+    menuEncodingGroup1,
+    menuEncodingGroup99 = menuEncodingGroup1 + 98,
+
     menuEncoding1,
     menuEncoding99 = menuEncoding1 + 98,
 
@@ -522,6 +549,12 @@ enum { // menu id
     menuColumnMode,
     menuHexMode,
     menuMacroDebugMode,
+    menuSpellChecker,
+    menuSpellIgnore,
+    menuSpellAdd2Dict,
+    menuSpellRemoveFromDict,
+    menuSpellOption1,
+    menuSpellOption99 = menuSpellOption1 + 98,
 
     // tools
     menuOptions,

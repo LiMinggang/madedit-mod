@@ -21,6 +21,13 @@
 
 #include <wx/confbase.h>
 #include <string>
+#if __cplusplus <= 199711L
+#include <boost/shared_ptr.hpp>
+using boost::shared_ptr;
+#else
+#include <memory>
+using std::shared_ptr;
+#endif
 
 #include "MadLines.h"
 #include "MadEditCommand.h"
@@ -39,12 +46,15 @@ namespace mad_python
 
 class MadEdit;
 class MadSearchDialog;
+class MadReplaceDialog;
+class wxSpellCheckEngineInterface;
 
 typedef void (*OnSelectionChangedPtr)(MadEdit *madedit);
 typedef void (*OnStatusChangedPtr)(MadEdit *madedit);
 typedef void (*OnToggleWindowPtr)(MadEdit *madedit);
 typedef void (*OnMouseRightUpPtr)(MadEdit *madedit);
 typedef void (*OnActivatePtr)(MadEdit *madedit);
+typedef bool (*OnProgressUpdatePtr)(int value, const wxString &newmsg, bool *skip);
 
 //==============================================================================
 // A Manager of FontWidth Buffer
@@ -71,7 +81,7 @@ public:
 
     static int MaxCount;
     static wxString DataDir;
-	static wxString FontDataFile[17];
+    static wxString FontDataFile[17];
     typedef list<FontWidthBuffer> FontWidthBuffers;
     static vector<FontWidthBuffers> FontWidthBuffersVector; //0~16
 
@@ -386,7 +396,8 @@ private:
     OnActivatePtr         m_OnActivate;
 
     wxMilliClock_t m_lastDoubleClick;
-    bool m_mouse_in_window;
+    shared_ptr<wxSpellCheckEngineInterface> m_SpellCheckerPtr;
+    bool            m_SpellCheck;
 
 #ifdef __WXMSW__
     bool m_IsWin98;
@@ -437,7 +448,7 @@ protected:
     // update the two SelectionPos by their .pos
     void UpdateSelectionPos();
 
-    void PaintText(wxDC *dc, int x, int y, const ucs4_t *text, const int *width, int count, int minleft, int maxright);
+    void PaintText(wxDC *dc, int x, int y, const ucs4_t *text, const int *width, int count, int minleft, int maxright, bool spellmark=false);
     void PaintTextLines(wxDC *dc, const wxRect &rect, int toprow, int rowcount, const wxColor &bgcolor);
 
     void PaintHexDigit(wxDC *dc, int x, int y, const ucs4_t *hexdigit, const int *width, int count);
@@ -707,12 +718,16 @@ public: // basic functions
     void SetShowTabChar(bool value);
     void SetShowSpaceChar(bool value);
     void SetMarkActiveLine(bool value);
+    void SetSpellCheck(bool value);
+    void AddtoDictionary(wxString & misSpell);
 
     bool GetDisplayLineNumber() { return m_DisplayLineNumber; }
     bool GetShowEndOfLine() { return m_ShowEndOfLine; }
     bool GetShowTabChar() { return m_ShowTabChar; }
     bool GetShowSpaceChar() { return m_ShowSpaceChar; }
     bool GetMarkActiveLine() { return m_MarkActiveLine; }
+    bool GetSpellCheckStatus() { return m_SpellCheck; }
+    shared_ptr<wxSpellCheckEngineInterface> &GetSpellChecker() { return m_SpellCheckerPtr; }
 
     void SetMarkBracePair(bool value);
     bool GetMarkBracePair() { return m_MarkBracePair; }
@@ -779,7 +794,7 @@ public: // basic functions
 #ifdef __WXMSW__
             return nltDOS;
 #elif __WXMAC__
-			return nltMAC;
+            return nltMAC;
 #else
             return nltUNIX;
 #endif
@@ -794,7 +809,7 @@ public: // basic functions
 #ifdef __WXMSW__
             return nltDOS;
 #elif __WXMAC__
-			return nltMAC;
+            return nltMAC;
 #else
             return nltUNIX;
 #endif
@@ -805,7 +820,7 @@ public: // basic functions
     bool IsModified() { return m_Modified; }
     time_t GetModificationTime() { return m_ModificationTime; }
 
-    void SetReadOnly(bool value) { m_ReadOnly=value; }
+    void SetReadOnly(bool value) { m_ReadOnly=value; m_Lines->m_ReadOnly = value;}
     bool IsReadOnly() { return m_ReadOnly||m_Lines->m_ReadOnly; }
     bool IsTextFile() { return m_Lines->m_MaxLineWidth>=0; }
 
@@ -822,6 +837,7 @@ public: // basic functions
 
     void GetWordFromCaretPos(wxString &ws)
     { SelectWordFromCaretPos(&ws); }
+    void ReplaceWordFromCaretPos(wxString &ws);
 
     void Delete() { ProcessCommand(ecDelete); }
     void CutLine() { ProcessCommand(ecCutLine); }
@@ -842,7 +858,7 @@ public: // basic functions
     void DndBegDrag();
     void DndDrop();
     bool CanPaste();
-    void CopyToClipboard(wxString & text){PutTextToClipboard(text);}
+    void CopyToClipboard(const wxString & text){PutTextToClipboard(text);}
 
     bool CanUndo()
     {
@@ -923,6 +939,8 @@ public: // basic functions
     void SetBookmark();
     void GotoNextBookmark();
     void GotoPreviousBookmark();
+    void ClearAllBookmarks();
+    bool HasBookMark() {return m_Lines->m_LineList.HasBookMark();};
     //----------
 
 public: // advanced functions
@@ -986,7 +1004,6 @@ public:
     {
         m_OnActivate=func;
     }
-
     void SetSearchOptions(bool bUseDefaultSyntax, bool bSearchWholeWord)
     {
         m_UseDefaultSyntax = bUseDefaultSyntax;
@@ -1053,6 +1070,7 @@ public: // utility functions
 
     bool StringToHex(wxString ws, vector<wxByte> &hex);
     friend class MadSearchDialog;
+    friend class MadReplaceDialog;
     friend class mad_python::PyMadEdit;
 };
 
