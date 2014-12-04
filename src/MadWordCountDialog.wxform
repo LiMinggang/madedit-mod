@@ -29,7 +29,7 @@ object frmNewForm: TfrmNewForm
   Wx_Hidden = False
   Wx_SizeToContents = True
   Wx_GeneralStyle = []
-  Wx_DialogStyle = [wxCAPTION, wxRESIZE_BORDER, wxSYSTEM_MENU, wxDIALOG_NO_PARENT, wxMAXIMIZE_BOX, wxCLOSE_BOX]
+  Wx_DialogStyle = [wxCAPTION, wxSYSTEM_MENU, wxDIALOG_NO_PARENT, wxCLOSE_BOX]
   Wx_Border = 0
   Wx_BorderAlignment = []
   isAuimanagerAvailable = False

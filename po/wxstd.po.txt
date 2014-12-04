@@ -205,6 +205,47 @@ msgstr ""
 msgid "Printing "
 msgstr ""
 
+#: ../src/common/prntbase.cpp:1518
+msgid "First page"
+msgstr ""
+
+#: ../src/common/prntbase.cpp:1523
+msgid "Previous page"
+msgstr ""
+
+msgstr ""
+#: ../src/common/prntbase.cpp:1537
+msgid "Next page"
+msgstr ""
+
+#: ../src/common/prntbase.cpp:1542
+msgid "Last page"
+msgstr ""
+
+#: ../src/common/prntbase.cpp:1550
+msgid "Zoom Out"
+msgstr ""
+
+#: ../src/common/prntbase.cpp:1564
+msgid "Zoom In"
+msgstr ""
+
+#: ../src/common/prntbase.cpp:2035
+msgid "Sorry, not enough memory to create a preview."
+msgstr ""
+
+#: ../src/common/prntbase.cpp:2035
+msgid "Print Preview Failure"
+msgstr ""
+
+#: ../src/common/prntbase.cpp:2042
+msgid "Page %d of %d"
+msgstr ""
+
+#: ../src/common/prntbase.cpp:2042
+msgid "Page %d"
+msgstr 
+
 #: ../src/generic/prntdlgg.cpp:209
 msgid "All"
 msgstr ""

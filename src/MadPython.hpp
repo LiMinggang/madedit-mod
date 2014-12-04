@@ -730,7 +730,7 @@ namespace mad_python
         }
         void SetInsertNewLineType(int type)
         {
-			g_ActiveMadEdit->SetInsertNewLineType((MadNewLineType)type);
+            g_ActiveMadEdit->SetInsertNewLineType((MadNewLineType)type);
         }
 
         int GetNewLineType()
@@ -1143,6 +1143,10 @@ namespace mad_python
         {
             g_ActiveMadEdit->InvertCase();
         }
+        void Capitalize()
+        {
+            g_ActiveMadEdit->Capitalize();
+        }
         void ToHalfWidth(bool ascii=true, bool japanese=true, bool korean=true, bool other=true)
         {
             g_ActiveMadEdit->ToHalfWidth(ascii, japanese, korean, other);
@@ -1155,6 +1159,22 @@ namespace mad_python
         void TrimTrailingSpaces()
         {
             g_ActiveMadEdit->TrimTrailingSpaces();
+        }
+
+        void DeleteEmptyLines()
+        {
+            g_ActiveMadEdit->DeleteEmptyLines();
+        }
+
+        
+        void DeleteEmptyLinesWithSpaces()
+        {
+            g_ActiveMadEdit->DeleteEmptyLinesWithSpaces();
+        }
+
+        void JoinLines()
+        {
+            g_ActiveMadEdit->JoinLines();
         }
 
         // startline<0 : sort all lines otherwise sort [beginline, endline]
@@ -1186,6 +1206,12 @@ namespace mad_python
         void CopyAsHexString(bool withSpace)
         {
             g_ActiveMadEdit->CopyAsHexString(withSpace);
+        }
+
+        void CopyRevertHex(const std::string &delimiters)
+        {
+            wxString wxDelimiters(delimiters.c_str(), wxConvLocal);
+            g_ActiveMadEdit->CopyRevertHex(wxDelimiters);
         }
 
         mad_py::tuple WordCount(bool selection)
@@ -1374,13 +1400,18 @@ BOOST_PYTHON_MODULE(madpython)
         .def("ToLowerCase", &PyMadEdit::ToLowerCase, "")
 
         .def("InvertCase", &PyMadEdit::InvertCase, "")
+        .def("Capitalize", &PyMadEdit::Capitalize, "")
         .def("TrimTrailingSpaces", &PyMadEdit::TrimTrailingSpaces, "")
+        .def("DeleteEmptyLinesWithSpaces", &PyMadEdit::DeleteEmptyLinesWithSpaces, "")
+        .def("DeleteEmptyLines", &PyMadEdit::DeleteEmptyLines, "")
+        .def("JoinLines", &PyMadEdit::JoinLines, "")
         .def("SortLines", &PyMadEdit::SortLines, "")
         .def("ConvertWordWrapToNewLine", &PyMadEdit::ConvertWordWrapToNewLine, "")
         .def("ConvertNewLineToWordWrap", &PyMadEdit::ConvertNewLineToWordWrap, "")
         .def("ConvertSpaceToTab", &PyMadEdit::ConvertSpaceToTab, "")
         .def("ConvertTabToSpace", &PyMadEdit::ConvertTabToSpace, "")
         .def("CopyAsHexString", &PyMadEdit::CopyAsHexString, "")
+        .def("CopyRevertHex", &PyMadEdit::CopyRevertHex, "")
         .def("WordCount", &PyMadEdit::WordCount, return_value_policy<return_by_value>(), "")
         .def("SetFontA", &PyMadEdit::SetFontA, "Doc")
         .def("CopyToClipboardA", &PyMadEdit::CopyToClipboardA, "")

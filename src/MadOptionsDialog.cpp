@@ -5,6 +5,7 @@
 // Licence:     GPL
 ///////////////////////////////////////////////////////////////////////////////
 
+#include <vector>
 #include "MadOptionsDialog.h"
 #include <wx/fileconf.h>
 #include <wx/config.h>
@@ -158,6 +159,7 @@ BEGIN_EVENT_TABLE(MadOptionsDialog,wxDialog)
 	EVT_LISTBOX(ID_WXLISTBOXKEYS,MadOptionsDialog::WxListBoxKeysSelected)
 	
 	EVT_TREE_SEL_CHANGED(ID_WXTREECTRL1,MadOptionsDialog::WxTreeCtrl1SelChanged)
+	EVT_CHECKBOX(ID_WXCHECKBOXMOUSESELECTTOCOPY,MadOptionsDialog::OnMouseAutoCopyClicked)
 	EVT_BUTTON(ID_WXBUTTONDATETIME,MadOptionsDialog::WxButtonDateTimeClick)
 END_EVENT_TABLE()
     ////Event Table End
@@ -216,6 +218,18 @@ wxString FilterChar(const wxChar *ws)
     return str;
 }
 
+#if defined(__WXMSW__) && (wxMAJOR_VERSION >= 3)
+#define SET_CONTROLPARENT(pWin) \
+    {\
+        LONG exStyle = wxGetWindowExStyle((wxWindow *)(pWin));\
+        if ( !(exStyle & WS_EX_CONTROLPARENT) )\
+        {\
+            wxSetWindowExStyle((wxWindow *)(pWin), exStyle | WS_EX_CONTROLPARENT);\
+        }\
+    }
+#else
+#define SET_CONTROLPARENT(pWin)
+#endif
 void MadOptionsDialog::CreateGUIControls(void)
 {
     //do not set FontName, it is not exist on all platforms
@@ -249,6 +263,8 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxComboBoxLanguage = new wxComboBox(WxNoteBookPage1, ID_WXCOMBOBOXLANGUAGE, wxT(""), wxPoint(0, 3), wxSize(140, 21), arrayStringFor_WxComboBoxLanguage, wxCB_DROPDOWN | wxCB_READONLY, wxDefaultValidator, wxT("WxComboBoxLanguage"));
 	WxComboBoxLanguage->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer27->Add(WxComboBoxLanguage, 0, wxALIGN_LEFT | wxALL, 0);
+    SET_CONTROLPARENT(WxComboBoxLanguage);
+
 
 	WxStaticText16 = new wxStaticText(WxNoteBookPage1, ID_WXSTATICTEXT16, _("Language of User Interface (must restart MadEdit)"), wxPoint(145, 5), wxDefaultSize, 0, wxT("WxStaticText16"));
 	WxStaticText16->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
@@ -260,10 +276,12 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxCheckBoxSingleInstance = new wxCheckBox(WxNoteBookPage1, ID_WXCHECKBOXSINGLEINSTANCE, _("Single Instance (must restart MadEdit)"), wxPoint(2, 2), wxSize(300, 20), 0, wxDefaultValidator, wxT("WxCheckBoxSingleInstance"));
 	WxCheckBoxSingleInstance->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer4->Add(WxCheckBoxSingleInstance, 0, wxALIGN_LEFT | wxALL, 2);
+    SET_CONTROLPARENT(WxCheckBoxSingleInstance);
 
 	WxCheckBoxRecordCaretMovements = new wxCheckBox(WxNoteBookPage1, ID_WXCHECKBOXRECORDCARETMOVEMENTS, _("Record caret movements in undo list"), wxPoint(2, 26), wxSize(300, 20), 0, wxDefaultValidator, wxT("WxCheckBoxRecordCaretMovements"));
 	WxCheckBoxRecordCaretMovements->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer4->Add(WxCheckBoxRecordCaretMovements, 0, wxALIGN_LEFT | wxALL, 2);
+    SET_CONTROLPARENT(WxCheckBoxRecordCaretMovements);
 
 	WxBoxSizer5 = new wxBoxSizer(wxHORIZONTAL);
 	WxBoxSizer3->Add(WxBoxSizer5, 0, wxALIGN_LEFT | wxALL, 2);
@@ -271,6 +289,7 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxEditMaxSizeToLoad = new wxTextCtrl(WxNoteBookPage1, ID_WXEDITMAXSIZETOLOAD, wxT("0"), wxPoint(0, 3), wxSize(80, 21), 0, wxTextValidator(wxFILTER_NUMERIC), wxT("WxEditMaxSizeToLoad"));
 	WxEditMaxSizeToLoad->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer5->Add(WxEditMaxSizeToLoad, 0, wxALIGN_LEFT | wxALL, 0);
+    SET_CONTROLPARENT(WxEditMaxSizeToLoad);
 
 	WxStaticText1 = new wxStaticText(WxNoteBookPage1, ID_WXSTATICTEXT1, _("Max file size to load whole file into memory"), wxPoint(85, 5), wxSize(300, 17), wxST_NO_AUTORESIZE, wxT("WxStaticText1"));
 	WxStaticText1->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
@@ -282,6 +301,7 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxEditMaxTextFileSize = new wxTextCtrl(WxNoteBookPage1, ID_WXEDITMAXTEXTFILESIZE, wxT("0"), wxPoint(0, 3), wxSize(80, 21), 0, wxTextValidator(wxFILTER_NUMERIC), wxT("WxEditMaxTextFileSize"));
 	WxEditMaxTextFileSize->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer6->Add(WxEditMaxTextFileSize, 0, wxALIGN_LEFT | wxALL, 0);
+    SET_CONTROLPARENT(WxEditMaxTextFileSize);
 
 	WxStaticText2 = new wxStaticText(WxNoteBookPage1, ID_WXSTATICTEXT2, _("Max file size to load as a text file"), wxPoint(85, 5), wxSize(300, 17), wxST_NO_AUTORESIZE, wxT("WxStaticText2"));
 	WxStaticText2->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
@@ -294,6 +314,7 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxComboBoxEncoding = new wxComboBox(WxNoteBookPage1, ID_WXCOMBOBOXENCODING, wxT(""), wxPoint(0, 3), wxSize(140, 21), arrayStringFor_WxComboBoxEncoding, wxCB_DROPDOWN | wxCB_READONLY, wxDefaultValidator, wxT("WxComboBoxEncoding"));
 	WxComboBoxEncoding->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer17->Add(WxComboBoxEncoding, 0, wxALIGN_LEFT | wxALL, 0);
+    SET_CONTROLPARENT(WxComboBoxEncoding);
 
 	WxStaticText13 = new wxStaticText(WxNoteBookPage1, ID_WXSTATICTEXT13, _("Use this encoding to create new file or when MadEdit cannot determine the encoding of old file"), wxPoint(145, 5), wxDefaultSize, 0, wxT("WxStaticText13"));
 	WxStaticText13->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
@@ -305,19 +326,22 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxCheckBoxReloadFiles = new wxCheckBox(WxNoteBookPage1, ID_WXCHECKBOXRELOADFILES, _("Reload files previously open on startup"), wxPoint(2, 2), wxSize(400, 20), 0, wxDefaultValidator, wxT("WxCheckBoxReloadFiles"));
 	WxCheckBoxReloadFiles->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer7->Add(WxCheckBoxReloadFiles, 0, wxALIGN_LEFT | wxALL, 2);
+    SET_CONTROLPARENT(WxCheckBoxReloadFiles);
 
 	WxCheckBoxRestoreCaretPos = new wxCheckBox(WxNoteBookPage1, ID_WXCHECKBOXRESTORECARETPOS, _("Restore previous caret position when files are opened"), wxPoint(2, 26), wxSize(400, 20), 0, wxDefaultValidator, wxT("WxCheckBoxRestoreCaretPos"));
 	WxCheckBoxRestoreCaretPos->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer7->Add(WxCheckBoxRestoreCaretPos, 0, wxALIGN_LEFT | wxALL, 2);
+    SET_CONTROLPARENT(WxCheckBoxRestoreCaretPos);
 
 	WxCheckBoxDoNotSaveSettings = new wxCheckBox(WxNoteBookPage1, ID_WXCHECKBOXDONOTSAVESETTINGS, _("Do not save settings to MadEdit.cfg when MadEdit closed (this session only)"), wxPoint(2, 50), wxSize(400, 20), 0, wxDefaultValidator, wxT("WxCheckBoxDoNotSaveSettings"));
 	WxCheckBoxDoNotSaveSettings->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer7->Add(WxCheckBoxDoNotSaveSettings, 0, wxALIGN_LEFT | wxALL, 2);
+    SET_CONTROLPARENT(WxCheckBoxDoNotSaveSettings);
 
 	WxCheckBoxPurgeHistory = new wxCheckBox(WxNoteBookPage1, ID_PURGEHISTORY, _("Purge History while exiting"), wxPoint(2, 77), wxSize(400, 20), 0, wxDefaultValidator, wxT("WxCheckBoxPurgeHistory"));
 	WxCheckBoxPurgeHistory->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer7->Add(WxCheckBoxPurgeHistory, 0, wxALIGN_LEFT | wxALL, 2);
-
+    SET_CONTROLPARENT(WxCheckBoxPurgeHistory);
 
 	WxNoteBookPage2 = new wxPanel(WxNotebook1, ID_WXNOTEBOOKPAGE2, wxPoint(4, 24), wxSize(673, 314));
 	WxNoteBookPage2->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
@@ -333,6 +357,7 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxEditMaxLineLength = new wxTextCtrl(WxNoteBookPage2, ID_WXEDITMAXLINELENGTH, wxT("0"), wxPoint(0, 3), wxSize(60, 21), 0, wxTextValidator(wxFILTER_NUMERIC), wxT("WxEditMaxLineLength"));
 	WxEditMaxLineLength->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer9->Add(WxEditMaxLineLength, 0, wxALIGN_LEFT | wxALL, 0);
+    SET_CONTROLPARENT(WxEditMaxLineLength);
 
 	WxStaticText3 = new wxStaticText(WxNoteBookPage2, ID_WXSTATICTEXT3, _("Max line length before Line-Wrap (must restart MadEdit)"), wxPoint(65, 5), wxSize(300, 17), wxST_NO_AUTORESIZE, wxT("WxStaticText3"));
 	WxStaticText3->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
@@ -344,6 +369,7 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxEditMaxColumns = new wxTextCtrl(WxNoteBookPage2, ID_WXEDITMAXCOLUMNS, wxT("0"), wxPoint(0, 3), wxSize(60, 21), 0, wxTextValidator(wxFILTER_NUMERIC), wxT("WxEditMaxColumns"));
 	WxEditMaxColumns->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer10->Add(WxEditMaxColumns, 0, wxALIGN_LEFT | wxALL, 0);
+    SET_CONTROLPARENT(WxEditMaxColumns);
 
 	WxStaticText4 = new wxStaticText(WxNoteBookPage2, ID_WXSTATICTEXT4, _("Columns of Wrap-By-Column"), wxPoint(65, 5), wxSize(300, 17), wxST_NO_AUTORESIZE, wxT("WxStaticText4"));
 	WxStaticText4->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
@@ -355,6 +381,7 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxEditTabColumns = new wxTextCtrl(WxNoteBookPage2, ID_WXEDITTABCOLUMNS, wxT("0"), wxPoint(0, 3), wxSize(60, 21), 0, wxTextValidator(wxFILTER_NUMERIC), wxT("WxEditTabColumns"));
 	WxEditTabColumns->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer11->Add(WxEditTabColumns, 0, wxALIGN_LEFT | wxALL, 0);
+    SET_CONTROLPARENT(WxEditTabColumns);
 
 	WxStaticText5 = new wxStaticText(WxNoteBookPage2, ID_WXSTATICTEXT5, _("Columns of Tab"), wxPoint(65, 5), wxSize(300, 17), wxST_NO_AUTORESIZE, wxT("WxStaticText5"));
 	WxStaticText5->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
@@ -366,6 +393,7 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxEditIndentColumns = new wxTextCtrl(WxNoteBookPage2, ID_WXEDITTABCOLUMNS, wxT("0"), wxPoint(0, 3), wxSize(60, 21), 0, wxTextValidator(wxFILTER_NUMERIC), wxT("WxEditIndentColumns"));
 	WxEditIndentColumns->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer13->Add(WxEditIndentColumns, 0, wxALIGN_LEFT | wxALL, 0);
+    SET_CONTROLPARENT(WxEditIndentColumns);
 
 	WxStaticText6 = new wxStaticText(WxNoteBookPage2, ID_WXSTATICTEXT5, _("Columns of Indent"), wxPoint(65, 5), wxSize(300, 17), wxST_NO_AUTORESIZE, wxT("WxStaticText6"));
 	WxStaticText6->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
@@ -377,6 +405,7 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxEditDateTime = new wxTextCtrl(WxNoteBookPage2, ID_WXEDITDATETIME, wxT(""), wxPoint(0, 3), wxSize(160, 21), 0, wxDefaultValidator, wxT("WxEditDateTime"));
 	WxEditDateTime->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer23->Add(WxEditDateTime, 0, wxALIGN_LEFT | wxALL, 0);
+    SET_CONTROLPARENT(WxEditDateTime);
 
 	WxStaticTextDateTime = new wxStaticText(WxNoteBookPage2, ID_WXSTATICTEXTDATETIME, _("Format of Date/Time"), wxPoint(165, 5), wxDefaultSize, 0, wxT("WxStaticTextDateTime"));
 	WxStaticTextDateTime->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
@@ -385,10 +414,12 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxButtonDateTime = new wxButton(WxNoteBookPage2, ID_WXBUTTONDATETIME, wxT(">>"), wxPoint(273, 1), wxSize(25, 25), 0, wxDefaultValidator, wxT("WxButtonDateTime"));
 	WxButtonDateTime->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer23->Add(WxButtonDateTime, 0, wxALIGN_LEFT | wxALL, 1);
+    SET_CONTROLPARENT(WxButtonDateTime);
 
 	WxCheckBoxDateTimeInEnglish = new wxCheckBox(WxNoteBookPage2, ID_WXCHECKBOXDATETIMEINENGLISH, _("Use English instead of current locale"), wxPoint(301, 3), wxSize(200, 20), 0, wxDefaultValidator, wxT("WxCheckBoxDateTimeInEnglish"));
 	WxCheckBoxDateTimeInEnglish->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer23->Add(WxCheckBoxDateTimeInEnglish, 0, wxALIGN_LEFT | wxALL, 2);
+    SET_CONTROLPARENT(WxCheckBoxDateTimeInEnglish);
 
 	WxBoxSizer12 = new wxBoxSizer(wxVERTICAL);
 	WxBoxSizer8->Add(WxBoxSizer12, 0, wxALIGN_LEFT | wxALL, 5);
@@ -396,37 +427,35 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxCheckBoxTabOrSpaces = new wxCheckBox(WxNoteBookPage2, ID_WXCHECKBOXTABORSPACES, _("Insert Space char instead of Tab char"), wxPoint(24, 2), wxSize(480, 20), 0, wxDefaultValidator, wxT("WxCheckBoxTabOrSpaces"));
 	WxCheckBoxTabOrSpaces->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer12->Add(WxCheckBoxTabOrSpaces, 0, wxALIGN_LEFT | wxALL, 2);
+    SET_CONTROLPARENT(WxCheckBoxTabOrSpaces);
 
 	WxCheckBoxAutoIndent = new wxCheckBox(WxNoteBookPage2, ID_WXCHECKBOXAUTOINDENT, _("Auto Indent"), wxPoint(24, 26), wxSize(480, 20), 0, wxDefaultValidator, wxT("WxCheckBoxAutoIndent"));
 	WxCheckBoxAutoIndent->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer12->Add(WxCheckBoxAutoIndent, 0, wxALIGN_LEFT | wxALL, 2);
+    SET_CONTROLPARENT(WxCheckBoxAutoIndent);
 
 	WxCheckBoxAutoCompletePair = new wxCheckBox(WxNoteBookPage2, ID_WXCHECKBOXAUTOCOMPLETEPAIR, _("Auto complete character pair"), wxPoint(24, 50), wxSize(480, 20), 0, wxDefaultValidator, wxT("WxCheckBoxAutoCompletePair"));
 	WxCheckBoxAutoCompletePair->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer12->Add(WxCheckBoxAutoCompletePair, 0, wxALIGN_LEFT | wxALL, 2);
+    SET_CONTROLPARENT(WxCheckBoxAutoCompletePair);
 
 	WxBoxSizer28 = new wxBoxSizer(wxHORIZONTAL);
 	WxBoxSizer12->Add(WxBoxSizer28, 0, wxALIGN_LEFT | wxALL, 0);
 
-	WxCheckBoxMouseSelectToCopy = new wxCheckBox(WxNoteBookPage2, ID_WXCHECKBOXMOUSESELECTTOCOPY, _("Auto copy the mouse-selected text to clipboard  ("), wxPoint(2, 2), wxSize(260, 20), 0, wxDefaultValidator, wxT("WxCheckBoxMouseSelectToCopy"));
+	WxCheckBoxMouseSelectToCopy = new wxCheckBox(WxNoteBookPage2, ID_WXCHECKBOXMOUSESELECTTOCOPY, _("Auto copy the mouse-selected text to clipboard"), wxPoint(2, 2), wxSize(260, 20), 0, wxDefaultValidator, wxT("WxCheckBoxMouseSelectToCopy"));
 	WxCheckBoxMouseSelectToCopy->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer28->Add(WxCheckBoxMouseSelectToCopy, 0, wxALIGN_LEFT | wxALL, 2);
-
-	WxRadioButtonEnable = new wxRadioButton(WxNoteBookPage2, ID_WXRADIOBUTTONENABLE, _("Enable"), wxPoint(266, 2), wxSize(70, 20), 0, wxDefaultValidator, wxT("WxRadioButtonEnable"));
-	WxRadioButtonEnable->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
-	WxBoxSizer28->Add(WxRadioButtonEnable, 0, wxALIGN_LEFT | wxALL, 2);
-
-	WxRadioButtonDisable = new wxRadioButton(WxNoteBookPage2, ID_WXRADIOBUTTONDISABLE, _("Disable"), wxPoint(340, 2), wxSize(70, 20), 0, wxDefaultValidator, wxT("WxRadioButtonDisable"));
-	WxRadioButtonDisable->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
-	WxBoxSizer28->Add(WxRadioButtonDisable, 0, wxALIGN_LEFT | wxALL, 2);
-
-	WxStaticText17 = new wxStaticText(WxNoteBookPage2, ID_WXSTATICTEXT17, _("when pressing Ctrl key)"), wxPoint(414, 3), wxDefaultSize, 0, wxT("WxStaticText17"));
-	WxStaticText17->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
-	WxBoxSizer28->Add(WxStaticText17, 0, wxALIGN_LEFT | wxALL, 2);
+    SET_CONTROLPARENT(WxCheckBoxMouseSelectToCopy);
 
 	WxCheckBoxMiddleMouseToPaste = new wxCheckBox(WxNoteBookPage2, ID_WXCHECKBOXMIDDLEMOUSETOPASTE, _("Paste text from clipboard when pressing middle mouse button"), wxPoint(24, 98), wxSize(480, 20), 0, wxDefaultValidator, wxT("WxCheckBoxMiddleMouseToPaste"));
 	WxCheckBoxMiddleMouseToPaste->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer12->Add(WxCheckBoxMiddleMouseToPaste, 0, wxALIGN_LEFT | wxALL, 2);
+    SET_CONTROLPARENT(WxCheckBoxMiddleMouseToPaste);
+
+	WxCheckBoxAutoFillColumnPaste = new wxCheckBox(WxNoteBookPage2, ID_WXCHECKBOXAUTOFILLCOLUMN, _("Auto fill in column paste"), wxPoint(24, 122), wxSize(480, 20), 0, wxDefaultValidator, wxT("WxCheckBoxAutoFillColumnPaste"));
+	WxCheckBoxAutoFillColumnPaste->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
+	WxBoxSizer12->Add(WxCheckBoxAutoFillColumnPaste, 0, wxALIGN_LEFT | wxALL, 2);
+    SET_CONTROLPARENT(WxCheckBoxAutoFillColumnPaste);
 
 	WxNoteBookPage3 = new wxPanel(WxNotebook1, ID_WXNOTEBOOKPAGE3, wxPoint(4, 24), wxSize(673, 314));
 	WxNoteBookPage3->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
@@ -446,22 +475,27 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxCheckBoxPrintSyntax = new wxCheckBox(WxNoteBookPage3, ID_WXCHECKBOXPRINTSYNTAX, _("Print Syntax Highlighter"), wxPoint(6, 16), wxSize(150, 17), 0, wxDefaultValidator, wxT("WxCheckBoxPrintSyntax"));
 	WxCheckBoxPrintSyntax->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxStaticBoxSizer1->Add(WxCheckBoxPrintSyntax, 0, wxALIGN_LEFT | wxALL, 1);
+    SET_CONTROLPARENT(WxCheckBoxPrintSyntax);
 
 	WxCheckBoxPrintLineNumber = new wxCheckBox(WxNoteBookPage3, ID_WXCHECKBOXPRINTLINENUMBER, _("Print Line Number"), wxPoint(6, 35), wxSize(150, 17), 0, wxDefaultValidator, wxT("WxCheckBoxPrintLineNumber"));
 	WxCheckBoxPrintLineNumber->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxStaticBoxSizer1->Add(WxCheckBoxPrintLineNumber, 0, wxALIGN_LEFT | wxALL, 1);
+    SET_CONTROLPARENT(WxCheckBoxPrintLineNumber);
 
 	WxCheckBoxPrintEndOfLine = new wxCheckBox(WxNoteBookPage3, ID_WXCHECKBOXPRINTENDOFLINE, _("Print End of Line"), wxPoint(6, 54), wxSize(150, 17), 0, wxDefaultValidator, wxT("WxCheckBoxPrintEndOfLine"));
 	WxCheckBoxPrintEndOfLine->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxStaticBoxSizer1->Add(WxCheckBoxPrintEndOfLine, 0, wxALIGN_LEFT | wxALL, 1);
+    SET_CONTROLPARENT(WxCheckBoxPrintEndOfLine);
 
 	WxCheckBoxPrintTabChar = new wxCheckBox(WxNoteBookPage3, ID_WXCHECKBOXPRINTTABCHAR, _("Print Tab Char"), wxPoint(6, 73), wxSize(150, 17), 0, wxDefaultValidator, wxT("WxCheckBoxPrintTabChar"));
 	WxCheckBoxPrintTabChar->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxStaticBoxSizer1->Add(WxCheckBoxPrintTabChar, 0, wxALIGN_LEFT | wxALL, 1);
+    SET_CONTROLPARENT(WxCheckBoxPrintTabChar);
 
 	WxCheckBoxPrintSpaceChar = new wxCheckBox(WxNoteBookPage3, ID_WXCHECKBOXPRINTSPACECHAR, _("Print Space Char"), wxPoint(6, 92), wxSize(150, 17), 0, wxDefaultValidator, wxT("WxCheckBoxPrintSpaceChar"));
 	WxCheckBoxPrintSpaceChar->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxStaticBoxSizer1->Add(WxCheckBoxPrintSpaceChar, 0, wxALIGN_LEFT | wxALL, 1);
+    SET_CONTROLPARENT(WxCheckBoxPrintSpaceChar);
 
 	wxStaticBox* WxStaticBoxSizer2_StaticBoxObj = new wxStaticBox(WxNoteBookPage3, wxID_ANY, _("Hex Mode"));
 	WxStaticBoxSizer2 = new wxStaticBoxSizer(WxStaticBoxSizer2_StaticBoxObj, wxHORIZONTAL);
@@ -475,6 +509,7 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxRadioBoxPrintOffset->SetSelection(0);
 	WxRadioBoxPrintOffset->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxStaticBoxSizer2->Add(WxRadioBoxPrintOffset, 1, wxALIGN_LEFT | wxALL, 1);
+    SET_CONTROLPARENT(WxRadioBoxPrintOffset);
 
 	WxBoxSizer16 = new wxBoxSizer(wxVERTICAL);
 	WxBoxSizer14->Add(WxBoxSizer16, 1, wxEXPAND | wxALL, 2);
@@ -486,6 +521,7 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxCheckBoxPrintPageHeader = new wxCheckBox(WxNoteBookPage3, ID_WXCHECKBOXPRINTPAGEHEADER, _("Print Page Header"), wxPoint(86, 16), wxSize(150, 17), 0, wxDefaultValidator, wxT("WxCheckBoxPrintPageHeader"));
 	WxCheckBoxPrintPageHeader->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxStaticBoxSizer3->Add(WxCheckBoxPrintPageHeader, 0, wxALIGN_LEFT | wxALL, 1);
+    SET_CONTROLPARENT(WxCheckBoxPrintPageHeader);
 
 	WxFlexGridSizer1 = new wxFlexGridSizer(0, 3, 0, 0);
 	WxStaticBoxSizer3->Add(WxFlexGridSizer1, 1, wxEXPAND | wxALL, 2);
@@ -497,10 +533,12 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxEditHeaderLeft = new wxTextCtrl(WxNoteBookPage3, ID_WXEDITHEADERLEFT, wxT(""), wxPoint(44, 3), wxSize(240, 21), 0, wxDefaultValidator, wxT("WxEditHeaderLeft"));
 	WxEditHeaderLeft->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxFlexGridSizer1->Add(WxEditHeaderLeft, 0, 0 | wxALL, 2);
+    SET_CONTROLPARENT(WxEditHeaderLeft);
 
 	WxButton1 = new wxButton(WxNoteBookPage3, ID_WXBUTTON1, wxT(">>"), wxPoint(287, 1), wxSize(25, 25), 0, wxDefaultValidator, wxT("WxButton1"));
 	WxButton1->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxFlexGridSizer1->Add(WxButton1, 0, wxALIGN_LEFT | wxALL, 1);
+    SET_CONTROLPARENT(WxButton1);
 
 	WxStaticText8 = new wxStaticText(WxNoteBookPage3, ID_WXSTATICTEXT8, _("Center:"), wxPoint(2, 32), wxDefaultSize, 0, wxT("WxStaticText8"));
 	WxStaticText8->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
@@ -509,10 +547,12 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxEditHeaderCenter = new wxTextCtrl(WxNoteBookPage3, ID_WXEDITHEADERCENTER, wxT(""), wxPoint(44, 30), wxSize(240, 21), 0, wxDefaultValidator, wxT("WxEditHeaderCenter"));
 	WxEditHeaderCenter->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxFlexGridSizer1->Add(WxEditHeaderCenter, 0, 0 | wxALL, 2);
+    SET_CONTROLPARENT(WxEditHeaderCenter);
 
 	WxButton2 = new wxButton(WxNoteBookPage3, ID_WXBUTTON2, wxT(">>"), wxPoint(287, 28), wxSize(25, 25), 0, wxDefaultValidator, wxT("WxButton2"));
 	WxButton2->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxFlexGridSizer1->Add(WxButton2, 0, wxALIGN_LEFT | wxALL, 1);
+    SET_CONTROLPARENT(WxButton2);
 
 	WxStaticText9 = new wxStaticText(WxNoteBookPage3, ID_WXSTATICTEXT9, _("Right:"), wxPoint(5, 59), wxDefaultSize, 0, wxT("WxStaticText9"));
 	WxStaticText9->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
@@ -521,18 +561,21 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxEditHeaderRight = new wxTextCtrl(WxNoteBookPage3, ID_WXEDITHEADERRIGHT, wxT(""), wxPoint(44, 57), wxSize(240, 21), 0, wxDefaultValidator, wxT("WxEditHeaderRight"));
 	WxEditHeaderRight->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxFlexGridSizer1->Add(WxEditHeaderRight, 0, 0 | wxALL, 2);
+    SET_CONTROLPARENT(WxEditHeaderRight);
 
 	WxButton3 = new wxButton(WxNoteBookPage3, ID_WXBUTTON3, wxT(">>"), wxPoint(287, 55), wxSize(25, 25), 0, wxDefaultValidator, wxT("WxButton3"));
 	WxButton3->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxFlexGridSizer1->Add(WxButton3, 0, wxALIGN_LEFT | wxALL, 1);
+    SET_CONTROLPARENT(WxButton3);
 
 	wxStaticBox* WxStaticBoxSizer4_StaticBoxObj = new wxStaticBox(WxNoteBookPage3, wxID_ANY, _("Page Footer"));
 	WxStaticBoxSizer4 = new wxStaticBoxSizer(WxStaticBoxSizer4_StaticBoxObj, wxVERTICAL);
 	WxBoxSizer16->Add(WxStaticBoxSizer4, 1, wxEXPAND | wxALL, 4);
 
-	WxCheckBoxPrintPageFooter = new wxCheckBox(WxNoteBookPage3, ID_WXCHECKBOXPRINTPAGEFOOTER, wxT("Print Page Footer"), wxPoint(86, 16), wxSize(150, 17), 0, wxDefaultValidator, wxT("WxCheckBoxPrintPageFooter"));
+	WxCheckBoxPrintPageFooter = new wxCheckBox(WxNoteBookPage3, ID_WXCHECKBOXPRINTPAGEFOOTER, _("Print Page Footer"), wxPoint(86, 16), wxSize(150, 17), 0, wxDefaultValidator, wxT("WxCheckBoxPrintPageFooter"));
 	WxCheckBoxPrintPageFooter->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxStaticBoxSizer4->Add(WxCheckBoxPrintPageFooter, 0, wxALIGN_LEFT | wxALL, 1);
+    SET_CONTROLPARENT(WxCheckBoxPrintPageFooter);
 
 	WxFlexGridSizer2 = new wxFlexGridSizer(0, 3, 0, 0);
 	WxStaticBoxSizer4->Add(WxFlexGridSizer2, 1, wxEXPAND | wxALL, 2);
@@ -544,10 +587,12 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxEditFooterLeft = new wxTextCtrl(WxNoteBookPage3, ID_WXEDITHEADERLEFT, wxT(""), wxPoint(44, 3), wxSize(240, 21), 0, wxDefaultValidator, wxT("WxEditFooterLeft"));
 	WxEditFooterLeft->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxFlexGridSizer2->Add(WxEditFooterLeft, 0, 0 | wxALL, 2);
+    SET_CONTROLPARENT(WxEditFooterLeft);
 
 	WxButton4 = new wxButton(WxNoteBookPage3, ID_WXBUTTON4, wxT(">>"), wxPoint(287, 1), wxSize(25, 25), 0, wxDefaultValidator, wxT("WxButton4"));
 	WxButton4->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxFlexGridSizer2->Add(WxButton4, 0, wxALIGN_LEFT | wxALL, 1);
+    SET_CONTROLPARENT(WxButton4);
 
 	WxStaticText11 = new wxStaticText(WxNoteBookPage3, ID_WXSTATICTEXT8, _("Center:"), wxPoint(2, 32), wxDefaultSize, 0, wxT("WxStaticText11"));
 	WxStaticText11->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
@@ -556,10 +601,12 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxEditFooterCenter = new wxTextCtrl(WxNoteBookPage3, ID_WXEDITHEADERCENTER, wxT(""), wxPoint(44, 30), wxSize(240, 21), 0, wxDefaultValidator, wxT("WxEditFooterCenter"));
 	WxEditFooterCenter->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxFlexGridSizer2->Add(WxEditFooterCenter, 0, 0 | wxALL, 2);
+    SET_CONTROLPARENT(WxEditFooterCenter);
 
 	WxButton5 = new wxButton(WxNoteBookPage3, ID_WXBUTTON5, wxT(">>"), wxPoint(287, 28), wxSize(25, 25), 0, wxDefaultValidator, wxT("WxButton5"));
 	WxButton5->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxFlexGridSizer2->Add(WxButton5, 0, wxALIGN_LEFT | wxALL, 1);
+    SET_CONTROLPARENT(WxButton5);
 
 	WxStaticText12 = new wxStaticText(WxNoteBookPage3, ID_WXSTATICTEXT9, _("Right:"), wxPoint(5, 59), wxDefaultSize, 0, wxT("WxStaticText12"));
 	WxStaticText12->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
@@ -568,10 +615,12 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxEditFooterRight = new wxTextCtrl(WxNoteBookPage3, ID_WXEDITHEADERRIGHT, wxT(""), wxPoint(44, 57), wxSize(240, 21), 0, wxDefaultValidator, wxT("WxEditFooterRight"));
 	WxEditFooterRight->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxFlexGridSizer2->Add(WxEditFooterRight, 0, 0 | wxALL, 2);
+    SET_CONTROLPARENT(WxEditFooterRight);
 
 	WxButton6 = new wxButton(WxNoteBookPage3, ID_WXBUTTON6, wxT(">>"), wxPoint(287, 55), wxSize(25, 25), 0, wxDefaultValidator, wxT("WxButton6"));
 	WxButton6->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxFlexGridSizer2->Add(WxButton6, 0, wxALIGN_LEFT | wxALL, 1);
+    SET_CONTROLPARENT(WxButton6);
 
 	WxNoteBookPage4 = new wxPanel(WxNotebook1, ID_WXNOTEBOOKPAGE4, wxPoint(4, 24), wxSize(673, 314));
 	WxNoteBookPage4->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
@@ -587,6 +636,7 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxTreeCtrl1 = new wxTreeCtrl(WxNoteBookPage4, ID_WXTREECTRL1, wxPoint(3, 3), wxSize(250, 240), wxTR_HAS_BUTTONS | wxTR_DEFAULT_STYLE, wxDefaultValidator, wxT("WxTreeCtrl1"));
 	WxTreeCtrl1->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer19->Add(WxTreeCtrl1, 1, wxEXPAND | wxALL, 3);
+    SET_CONTROLPARENT(WxTreeCtrl1);
 
 	WxBoxSizer20 = new wxBoxSizer(wxVERTICAL);
 	WxBoxSizer18->Add(WxBoxSizer20, 3, wxEXPAND | wxALL, 2);
@@ -602,6 +652,7 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxEditCommandHint->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BTNFACE));
 	WxEditCommandHint->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer24->Add(WxEditCommandHint, 1, wxEXPAND | wxALL, 5);
+    SET_CONTROLPARENT(WxEditCommandHint);
 
 	WxBoxSizer21 = new wxBoxSizer(wxHORIZONTAL);
 	WxBoxSizer20->Add(WxBoxSizer21, 1, wxEXPAND | wxALL, 2);
@@ -617,6 +668,7 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxListBoxKeys = new wxListBox(WxNoteBookPage4, ID_WXLISTBOXKEYS, wxPoint(2, 29), wxSize(140, 200), arrayStringFor_WxListBoxKeys, wxLB_SINGLE);
 	WxListBoxKeys->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer22->Add(WxListBoxKeys, 1, wxEXPAND | wxALL, 2);
+    SET_CONTROLPARENT(WxListBoxKeys);
 
 	WxBoxSizer25 = new wxBoxSizer(wxVERTICAL);
 	WxBoxSizer21->Add(WxBoxSizer25, 5, wxEXPAND | wxALL, 1);
@@ -628,23 +680,28 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxEditKey = new KeyTextCtrl(WxNoteBookPage4, ID_WXEDITKEY, wxT(""), wxPoint(5, 32), wxSize(180, 21), wxWANTS_CHARS | wxTE_PROCESS_TAB, wxDefaultValidator, wxT("WxEditKey"));
 	WxEditKey->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer25->Add(WxEditKey, 0, wxEXPAND | wxALL, 5);
+    SET_CONTROLPARENT(WxEditKey);
 
 	WxEditKeyHint = new wxTextCtrl(WxNoteBookPage4, ID_WXEDITKEYHINT, wxT(""), wxPoint(5, 63), wxSize(180, 21), wxTE_READONLY, wxDefaultValidator, wxT("WxEditKeyHint"));
 	WxEditKeyHint->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BTNFACE));
 	WxEditKeyHint->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer25->Add(WxEditKeyHint, 1, wxEXPAND | wxALL, 5);
+    SET_CONTROLPARENT(WxEditKeyHint);
 
 	WxButtonAddKey = new wxButton(WxNoteBookPage4, ID_WXBUTTONADDKEY, _("<== Add Key"), wxPoint(15, 94), wxSize(160, 28), 0, wxDefaultValidator, wxT("WxButtonAddKey"));
 	WxButtonAddKey->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer25->Add(WxButtonAddKey, 0, wxALIGN_LEFT | wxALL, 5);
+    SET_CONTROLPARENT(WxButtonAddKey);
 
 	WxButtonDeleteKey = new wxButton(WxNoteBookPage4, ID_WXBUTTONDELETEKEY, _("==> Delete Key"), wxPoint(15, 132), wxSize(160, 28), 0, wxDefaultValidator, wxT("WxButtonDeleteKey"));
 	WxButtonDeleteKey->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer25->Add(WxButtonDeleteKey, 0, wxALIGN_LEFT | wxALL, 5);
+    SET_CONTROLPARENT(WxButtonDeleteKey);
 
 	WxButtonShowInMenu = new wxButton(WxNoteBookPage4, ID_WXBUTTONSHOWINMENU, _("Show the Key in Menu"), wxPoint(15, 170), wxSize(160, 28), 0, wxDefaultValidator, wxT("WxButtonShowInMenu"));
 	WxButtonShowInMenu->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer25->Add(WxButtonShowInMenu, 0, wxALIGN_LEFT | wxALL, 5);
+    SET_CONTROLPARENT(WxButtonShowInMenu);
 
 	WxBoxSizer26 = new wxBoxSizer(wxHORIZONTAL);
 	WxBoxSizer20->Add(WxBoxSizer26, 0, wxALIGN_LEFT | wxALL, 2);
@@ -652,6 +709,7 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxCheckBoxResetAllKeys = new wxCheckBox(WxNoteBookPage4, ID_WXCHECKBOXRESETALLKEYS, _("Reset all keys to default (must restart MadEdit)"), wxPoint(5, 5), wxSize(250, 17), 0, wxDefaultValidator, wxT("WxCheckBoxResetAllKeys"));
 	WxCheckBoxResetAllKeys->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer26->Add(WxCheckBoxResetAllKeys, 0, wxALIGN_LEFT | wxALL, 5);
+    SET_CONTROLPARENT(WxCheckBoxResetAllKeys);
 
 	WxNoteBookPage5 = new wxPanel(WxNotebook1, ID_WXNOTEBOOKPAGE5, wxPoint(4, 24), wxSize(673, 314));
 	WxNoteBookPage5->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
@@ -667,6 +725,7 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxCheckBoxPersonalDict = new wxCheckBox(WxNoteBookPage5, ID_WXCHECKBOXPERSONALDICT, _("Enable Personal Dictionary"), wxPoint(5, 5), wxSize(209, 17), 0, wxDefaultValidator, wxT("WxCheckBoxPersonalDict"));
 	WxCheckBoxPersonalDict->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer33->Add(WxCheckBoxPersonalDict, 0, wxALIGN_LEFT | wxALL, 5);
+    SET_CONTROLPARENT(WxCheckBoxPersonalDict);
 
 	wxStaticBox* WxStaticBoxSizer5_StaticBoxObj = new wxStaticBox(WxNoteBookPage5, wxID_ANY, _("Langurage"));
 	WxStaticBoxSizer5 = new wxStaticBoxSizer(WxStaticBoxSizer5_StaticBoxObj, wxHORIZONTAL);
@@ -675,6 +734,13 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxStaticText18 = new wxStaticText(WxNoteBookPage5, ID_WXSTATICTEXT18, _("Dictionary:"), wxPoint(10, 22), wxDefaultSize, 0, wxT("WxStaticText18"));
 	WxStaticText18->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxStaticBoxSizer5->Add(WxStaticText18, 0, wxALIGN_CENTER | wxALL, 5);
+
+	wxArrayString arrayStringFor_WxChoiceDictionary;
+	WxChoiceDictionary = new wxChoice(WxNoteBookPage5, ID_WXCHOICEDICTIONARY, wxPoint(74, 20), wxSize(320, 21), arrayStringFor_WxChoiceDictionary, 0, wxDefaultValidator, wxT(""));
+	WxChoiceDictionary->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
+	WxChoiceDictionary->SetSelection(-1);
+	WxStaticBoxSizer5->Add(WxChoiceDictionary, 0, wxALIGN_LEFT | wxALL, 5);
+    SET_CONTROLPARENT(WxChoiceDictionary);
 
 	wxStaticBox* WxStaticBoxSizer6_StaticBoxObj = new wxStaticBox(WxNoteBookPage5, wxID_ANY, _("Path Setting"));
 	WxStaticBoxSizer6 = new wxStaticBoxSizer(WxStaticBoxSizer6_StaticBoxObj, wxVERTICAL);
@@ -686,10 +752,12 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxEditDictionaryDir = new wxTextCtrl(WxNoteBookPage5, ID_WXEDITDICTIONARYDIR, wxT(""), wxPoint(5, 8), wxSize(240, 19), 0, wxTextValidator(wxFILTER_NONE, NULL), wxT("WxEditDictionaryDir"));
 	WxEditDictionaryDir->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer30->Add(WxEditDictionaryDir, 0, wxALIGN_CENTER | wxALL, 5);
+    SET_CONTROLPARENT(WxEditDictionaryDir);
 
 	WxButtonDictionaryDir = new wxButton(WxNoteBookPage5, ID_WXDICTIONARY_DIR, wxT("..."), wxPoint(255, 5), wxSize(75, 25), 0, wxDefaultValidator, wxT("WxButtonDictionaryDir"));
 	WxButtonDictionaryDir->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer30->Add(WxButtonDictionaryDir, 0, wxALIGN_CENTER | wxALL, 5);
+    SET_CONTROLPARENT(WxButtonDictionaryDir);
 
 	WxStaticText19 = new wxStaticText(WxNoteBookPage5, ID_WXSTATICTEXT19, _("Dictionary"), wxPoint(340, 9), wxDefaultSize, 0, wxT("WxStaticText19"));
 	WxStaticText19->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, _("MS Sans Serif")));
@@ -701,10 +769,12 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxEditThesauriDir = new wxTextCtrl(WxNoteBookPage5, ID_WXEDITTHESAURI, wxT(""), wxPoint(5, 8), wxSize(240, 19), 0, wxTextValidator(wxFILTER_NONE, NULL), wxT("WxEditThesauriDir"));
 	WxEditThesauriDir->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer31->Add(WxEditThesauriDir, 0, wxALIGN_CENTER | wxALL, 5);
+    SET_CONTROLPARENT(WxEditThesauriDir);
 
 	WxButtonThesauriDir = new wxButton(WxNoteBookPage5, ID_WXTHESAURI_DIR, wxT("..."), wxPoint(255, 5), wxSize(75, 25), 0, wxDefaultValidator, wxT("WxButtonThesauriDir"));
 	WxButtonThesauriDir->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer31->Add(WxButtonThesauriDir, 0, wxALIGN_CENTER | wxALL, 5);
+    SET_CONTROLPARENT(WxButtonThesauriDir);
 
 	WxStaticText20 = new wxStaticText(WxNoteBookPage5, ID_WXSTATICTEXT20, _("Thesauri"), wxPoint(340, 9), wxDefaultSize, 0, wxT("WxStaticText20"));
 	WxStaticText20->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, _("MS Sans Serif")));
@@ -716,10 +786,12 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxEditBitMapDir = new wxTextCtrl(WxNoteBookPage5, ID_WXEDITBITMAPDIR, wxT(""), wxPoint(5, 8), wxSize(240, 19), 0, wxTextValidator(wxFILTER_NONE, NULL), wxT("WxEditBitMapDir"));
 	WxEditBitMapDir->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer32->Add(WxEditBitMapDir, 0, wxALIGN_CENTER | wxALL, 5);
+    SET_CONTROLPARENT(WxEditBitMapDir);
 
 	WxButtonBitmapDir = new wxButton(WxNoteBookPage5, ID_WXBITMAP_DIR, wxT("..."), wxPoint(255, 5), wxSize(75, 25), 0, wxDefaultValidator, wxT("WxButtonBitmapDir"));
 	WxButtonBitmapDir->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer32->Add(WxButtonBitmapDir, 0, wxALIGN_CENTER | wxALL, 5);
+    SET_CONTROLPARENT(WxButtonBitmapDir);
 
 	WxStaticText21 = new wxStaticText(WxNoteBookPage5, ID_WXSTATICTEXT21, _("BitMap"), wxPoint(340, 9), wxDefaultSize, 0, wxT("WxStaticText21"));
 	WxStaticText21->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, _("MS Sans Serif")));
@@ -728,13 +800,15 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxBoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
 	WxBoxSizer1->Add(WxBoxSizer2, 0, wxALIGN_CENTER | wxALL, 5);
 
-	WxButtonOK = new wxButton(this, ID_WXBUTTONOK, wxT("&OK"), wxPoint(5, 5), wxSize(85, 30), 0, wxDefaultValidator, wxT("WxButtonOK"));
+	WxButtonOK = new wxButton(this, ID_WXBUTTONOK, _("&OK"), wxPoint(5, 5), wxSize(85, 30), 0, wxDefaultValidator, wxT("WxButtonOK"));
 	WxButtonOK->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer2->Add(WxButtonOK, 0, wxALIGN_CENTER | wxALL, 5);
+    SET_CONTROLPARENT(WxButtonOK);
 
 	WxButtonCancel = new wxButton(this, ID_WXBUTTONCANCEL, _("&Cancel"), wxPoint(100, 5), wxSize(90, 30), 0, wxDefaultValidator, wxT("WxButtonCancel"));
 	WxButtonCancel->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer2->Add(WxButtonCancel, 0, wxALIGN_CENTER | wxALL, 5);
+    SET_CONTROLPARENT(WxButtonCancel);
 
 	WxPopupMenuDateTimeMark = new wxMenu(wxT(""));
 	WxPopupMenuDateTimeMark->Append(ID_MNU___Y__M__D_I__M__S_P_2007_02_2408_30_55AM_1191, _("[%Y/%m/%d %I:%M:%S %p] 2007/02/24 08:30:55 AM"), wxT(""), wxITEM_NORMAL);
@@ -774,20 +848,18 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxPopupMenuPrintMark->Append(ID_MNU___D__DATE_1116, _("[%d] &Date"), wxT(""), wxITEM_NORMAL);
 	WxPopupMenuPrintMark->Append(ID_MNU___T__TIME_1117, _("[%t] &Time"), wxT(""), wxITEM_NORMAL);
 
-	wxArrayString arrayStringFor_WxChoiceDictionary;
-	WxChoiceDictionary = new wxChoice(WxNoteBookPage5, ID_WXCHOICEDICTIONARY, wxPoint(74, 20), wxSize(320, 21), arrayStringFor_WxChoiceDictionary, 0, wxDefaultValidator, wxT(""));
-	WxChoiceDictionary->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
-	WxChoiceDictionary->SetSelection(-1);
-	WxStaticBoxSizer5->Add(WxChoiceDictionary, 0, wxALIGN_LEFT | wxALL, 5);
+	WxCheckBoxCtrlWithMouseToSelect = new wxCheckBox(WxNoteBookPage2, ID_WXCHECKBOXCTRLWITHMOUSE, _("when pressing Ctrl key"), wxPoint(252, 3), wxSize(136, 17), 0, wxDefaultValidator, wxT("WxCheckBoxCtrlWithMouseToSelect"));
+	WxCheckBoxCtrlWithMouseToSelect->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
+	WxBoxSizer28->Add(WxCheckBoxCtrlWithMouseToSelect, 0, wxALIGN_CENTER | wxALL, 2);
+	SET_CONTROLPARENT(WxCheckBoxCtrlWithMouseToSelect);
 
 	SetTitle(_("Options"));
 	SetIcon(wxNullIcon);
 	
-	Layout();
+	GetSizer()->Layout();
 	GetSizer()->Fit(this);
 	
     ////GUI Items Creation End
-    WxButtonOK->SetDefault();
 
     //restore wxFont
     #undef wxFont
@@ -827,9 +899,7 @@ void MadOptionsDialog::CreateGUIControls(void)
     ResizeItem(WxBoxSizer12, WxCheckBoxAutoIndent, 25, 4);
     ResizeItem(WxBoxSizer12, WxCheckBoxAutoCompletePair, 25, 4);
     ResizeItem(WxBoxSizer28, WxCheckBoxMouseSelectToCopy, 25, 4);
-    ResizeItem(WxBoxSizer28, WxRadioButtonEnable, 25, 4);
-    ResizeItem(WxBoxSizer28, WxRadioButtonDisable, 25, 4);
-    ResizeItem(WxBoxSizer28, WxStaticText17, 2, 2);
+    ResizeItem(WxBoxSizer28, WxCheckBoxCtrlWithMouseToSelect, 25, 4);
     ResizeItem(WxBoxSizer12, WxCheckBoxMiddleMouseToPaste, 25, 4);
     ResizeItem(WxBoxSizer23, WxStaticTextDateTime, 2, 2);
     ResizeItem(WxBoxSizer23, WxCheckBoxDateTimeInEnglish, 25, 4);
@@ -881,6 +951,7 @@ void MadOptionsDialog::CreateGUIControls(void)
     WxCheckBoxRightClickMenu = new wxCheckBox(WxNoteBookPage1, -1, _("Add MadEdit to the RightClickMenu of Explorer(Deselect to Remove the Entry from Windows Registry)"), wxPoint(5,5), wxSize(400,20), 0, wxDefaultValidator, _T("WxCheckBoxRightClickMenu"));
     WxBoxSizer7->Add(WxCheckBoxRightClickMenu,0,wxALIGN_LEFT | wxALL,2);
     ResizeItem(WxBoxSizer7, WxCheckBoxRightClickMenu, 25, 4);
+    SET_CONTROLPARENT(WxCheckBoxRightClickMenu);
 #endif
 
     wxSize size=WxBoxSizer1->GetMinSize();
@@ -966,6 +1037,8 @@ void MadOptionsDialog::CreateGUIControls(void)
     WxNotebook1->SetWindowStyleFlag(wxAUI_NB_TOP|wxAUI_NB_TAB_MOVE|wxAUI_NB_SCROLL_BUTTONS);
 
     WxButtonCancel->SetId(wxID_CANCEL);
+    SetDefaultItem(WxButtonOK);
+    WxButtonOK->SetFocus();
 }
 
 void MadOptionsDialog::MadOptionsDialogClose(wxCloseEvent& event)
@@ -1078,12 +1151,15 @@ void MadOptionsDialog::LoadOptions(void)
     cfg->Read(wxT("MouseSelectToCopy"), &bb);
     WxCheckBoxMouseSelectToCopy->SetValue(bb);
 
+    WxCheckBoxCtrlWithMouseToSelect->Enable(bb);
     cfg->Read(wxT("MouseSelectToCopyWithCtrlKey"), &bb);
-    WxRadioButtonEnable->SetValue(bb);
-    WxRadioButtonDisable->SetValue(!bb);
+    WxCheckBoxCtrlWithMouseToSelect->SetValue(bb);
 
     cfg->Read(wxT("MiddleMouseToPaste"), &bb);
     WxCheckBoxMiddleMouseToPaste->SetValue(bb);
+
+    cfg->Read(wxT("AutoFillColumnPaste"), &bb);
+    WxCheckBoxAutoFillColumnPaste->SetValue(bb);
 
     extern bool g_DoNotSaveSettings;
     WxCheckBoxDoNotSaveSettings->SetValue(g_DoNotSaveSettings);
@@ -1588,3 +1664,9 @@ void MadOptionsDialog::OnSelectDictionary(wxCommandEvent& event)
         SpellCheckerManager::Instance().SetDictionaryName(dictName);
     }
 }
+
+void MadOptionsDialog::OnMouseAutoCopyClicked(wxCommandEvent& event)
+{
+    WxCheckBoxCtrlWithMouseToSelect->Enable(WxCheckBoxMouseSelectToCopy->GetValue());
+}
+

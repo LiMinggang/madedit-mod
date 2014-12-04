@@ -161,7 +161,14 @@ void image2xpmFrm::image2xpmFrmClose(wxCloseEvent& event)
  */
 void image2xpmFrm::WxButton1Click(wxCommandEvent& event)
 {
-	wxString filename = wxFileSelector(_T("Select image file"));
+	wxString filename = wxFileSelector(_T("Select image file"), wxEmptyString, wxEmptyString, wxEmptyString, wxString(wxT("All files (*;*.*)|")) + wxFileSelectorDefaultWildcardStr + wxT("BMP files (*.bmp)|*.bmp|")+
+		wxT("PNG files (*.png)|*.png|")+
+		wxT("JPEG files (*.jpg)|*.jpg|")+
+		wxT("GIF files (*.gif)|*.gif|")+
+		wxT("TIFF files (*.tif)|*.tif|")+
+		wxT("PCX files (*.pcx)|*.pcx|")+
+		wxT("ICO files (*.ico)|*.ico|")+
+		wxT("CUR files (*.cur)|*.cur"));
     if ( !filename )
         return;
 

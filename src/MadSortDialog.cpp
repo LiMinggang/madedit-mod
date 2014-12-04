@@ -107,7 +107,7 @@ void MadSortDialog::CreateGUIControls(void)
     //restore wxFont
     #undef wxFont
 
-	size_t i;
+    size_t i;
     int strx=0, stry=0;
     wxString str=WxRadioBoxOrder->GetLabel();
     WxRadioBoxOrder->GetTextExtent(str, &strx, &stry);

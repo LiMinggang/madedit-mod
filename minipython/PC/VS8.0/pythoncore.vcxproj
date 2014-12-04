@@ -329,7 +329,6 @@
     <ClCompile Include="..\..\Modules\zlib\gzio.c" />
     <ClCompile Include="..\..\Modules\zlib\infback.c" />
     <ClCompile Include="..\..\Modules\zlib\inffast.c" />
-    <ClCompile Include="..\..\Modules\zlib\inflate.c" />
     <ClCompile Include="..\..\Modules\zlib\inftrees.c" />
     <ClCompile Include="..\..\Modules\zlib\trees.c" />
     <ClCompile Include="..\..\Modules\zlib\uncompr.c" />

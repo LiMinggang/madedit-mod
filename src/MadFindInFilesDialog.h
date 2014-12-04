@@ -44,7 +44,7 @@
 
 ////Dialog Style Start
 #undef MadFindInFilesDialog_STYLE
-#define MadFindInFilesDialog_STYLE wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxDIALOG_NO_PARENT | wxCLOSE_BOX
+#define MadFindInFilesDialog_STYLE wxCAPTION | wxSYSTEM_MENU | wxCLOSE_BOX
 ////Dialog Style End
 
 class MadEdit;
@@ -56,7 +56,7 @@ class MadFindInFilesDialog : public wxDialog
 		DECLARE_EVENT_TABLE();
 		
 	public:
-		MadFindInFilesDialog(wxWindow *parent, wxWindowID id = 1, const wxString &title = wxT("Find/Replace in Files"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = MadFindInFilesDialog_STYLE);
+		MadFindInFilesDialog(wxWindow *parent, wxWindowID id = 1, const wxString &title = _("Find/Replace in Files"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = MadFindInFilesDialog_STYLE);
 		virtual ~MadFindInFilesDialog();
 	
 	public:

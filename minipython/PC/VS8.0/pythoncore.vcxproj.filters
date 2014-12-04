@@ -413,9 +413,6 @@
     <ClCompile Include="..\..\Modules\zlib\inffast.c">
       <Filter>Modules\zlib</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Modules\zlib\inflate.c">
-      <Filter>Modules\zlib</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Modules\zlib\inftrees.c">
       <Filter>Modules\zlib</Filter>
     </ClCompile>

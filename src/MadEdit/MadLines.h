@@ -342,6 +342,7 @@ public:
     bool IsBookmarked( MadLineIterator position );
     void ClearAllBookmarks();
     bool HasBookMark(){return !(m_BookmarkList.empty());}
+    list<MadLineIterator> & GetBookmarkedLines() {return m_BookmarkList;}
 
     MadLineIterator erase( MadLineIterator position );
 

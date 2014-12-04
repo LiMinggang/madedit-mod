@@ -21,6 +21,11 @@
 
 IMPLEMENT_APP(MadEditApp)
 
+extern int MadMessageBox(const wxString& message,
+                             const wxString& caption = wxMessageBoxCaptionStr,
+                             long style = wxOK | wxCENTRE,
+                             wxWindow *parent = NULL,
+                             int x = wxDefaultCoord, int y = wxDefaultCoord);
 
 #ifdef _DEBUG
 #include <crtdbg.h>
@@ -241,6 +246,7 @@ bool MadEditApp::OnInit()
     g_MadEditAppDir=filename.GetPath(wxPATH_GET_VOLUME|wxPATH_GET_SEPARATOR);
     
     m_SigleAppChecker = 0;
+    m_AppServer = 0;
 #ifdef __WXMSW__
     g_MadEditHomeDir=g_MadEditAppDir;
 #else //linux: ~/.madedit
@@ -312,7 +318,7 @@ bool MadEditApp::OnInit()
             }
             else
             {
-                wxMessageBox(_("Sorry, the existing instance may be too busy too respond.\nPlease close any open dialogs and retry."),
+                MadMessageBox(_("Sorry, the existing instance may be too busy too respond.\nPlease close any open dialogs and retry."),
                     wxT("MadEdit"), wxICON_INFORMATION|wxOK);
             }
             g_DoNotSaveSettings = true;
@@ -405,7 +411,6 @@ bool MadEditApp::OnInit()
         }
     }
 
-
     // load FontWidth buffers
     cfg->Read(wxT("/MadEdit/FontWidthBufferMaxCount"), &FontWidthManager::MaxCount, 10);
     if(FontWidthManager::MaxCount < 4) FontWidthManager::MaxCount=4;
@@ -463,6 +468,17 @@ int MadEditApp::OnExit()
         delete m_SigleAppChecker;
     if(m_AppServer)
         delete m_AppServer;
-    
+
+#ifdef __WXMSW__
+    // it will crash randomly while shutdown MS Windows.
+    // Try close frame again if not
+    if(g_MainFrame)
+    {
+        wxWindow * topWin = wxGetApp().GetTopWindow();
+        if(topWin != (wxWindow *)g_MainFrame)
+            topWin->Close();
+        g_MainFrame->Close(true);
+    }
+#endif
     return 0;
 }

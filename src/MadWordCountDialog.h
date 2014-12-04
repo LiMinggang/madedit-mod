@@ -39,7 +39,7 @@
 
 ////Dialog Style Start
 #undef MadWordCountDialog_STYLE
-#define MadWordCountDialog_STYLE wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxDIALOG_NO_PARENT | wxMAXIMIZE_BOX | wxCLOSE_BOX
+#define MadWordCountDialog_STYLE wxCAPTION | wxSYSTEM_MENU | wxDIALOG_NO_PARENT | wxCLOSE_BOX
 ////Dialog Style End
 
 class MadWordCountDialog : public wxDialog

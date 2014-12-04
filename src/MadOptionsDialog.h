@@ -19,12 +19,11 @@
 //Do not add custom headers.
 //wx-dvcpp designer will remove them
 ////Header Include Start
-#include <wx/choice.h>
 #include <wx/menu.h>
+#include <wx/choice.h>
 #include <wx/listbox.h>
 #include <wx/treectrl.h>
 #include <wx/radiobox.h>
-#include <wx/radiobut.h>
 #include <wx/button.h>
 #include <wx/textctrl.h>
 #include <wx/checkbox.h>
@@ -52,7 +51,7 @@ using std::list;
 
 ////Dialog Style Start
 #undef MadOptionsDialog_STYLE
-#define MadOptionsDialog_STYLE wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxDIALOG_NO_PARENT | wxMAXIMIZE_BOX | wxCLOSE_BOX
+#define MadOptionsDialog_STYLE wxCAPTION | wxSYSTEM_MENU | wxDIALOG_NO_PARENT | wxCLOSE_BOX
 ////Dialog Style End
 
 
@@ -81,6 +80,12 @@ public:
   //wx-devcpp will remove them. Try adding the custom code 
   //after the block.
   ////GUI Control Declaration Start
+		wxCheckBox *WxCheckBoxCtrlWithMouseToSelect;
+		wxMenu *WxPopupMenuPrintMark;
+		wxMenu *WxPopupMenuDateTimeMark;
+		wxButton *WxButtonCancel;
+		wxButton *WxButtonOK;
+		wxBoxSizer *WxBoxSizer2;
 		wxStaticText *WxStaticText21;
 		wxButton *WxButtonBitmapDir;
 		wxTextCtrl *WxEditBitMapDir;
@@ -99,11 +104,6 @@ public:
 		wxStaticBoxSizer *WxStaticBoxSizer5;
 		wxCheckBox *WxCheckBoxPersonalDict;
 		wxBoxSizer *WxBoxSizer33;
-		wxMenu *WxPopupMenuPrintMark;
-		wxMenu *WxPopupMenuDateTimeMark;
-		wxButton *WxButtonCancel;
-		wxButton *WxButtonOK;
-		wxBoxSizer *WxBoxSizer2;
 		wxBoxSizer *WxBoxSizer29;
 		wxPanel *WxNoteBookPage5;
 		wxCheckBox *WxCheckBoxResetAllKeys;
@@ -163,10 +163,8 @@ public:
 		wxBoxSizer *WxBoxSizer15;
 		wxBoxSizer *WxBoxSizer14;
 		wxPanel *WxNoteBookPage3;
+		wxCheckBox *WxCheckBoxAutoFillColumnPaste;
 		wxCheckBox *WxCheckBoxMiddleMouseToPaste;
-		wxStaticText *WxStaticText17;
-		wxRadioButton *WxRadioButtonDisable;
-		wxRadioButton *WxRadioButtonEnable;
 		wxCheckBox *WxCheckBoxMouseSelectToCopy;
 		wxBoxSizer *WxBoxSizer28;
 		wxCheckBox *WxCheckBoxAutoCompletePair;
@@ -229,6 +227,7 @@ public:
 	enum {
 ////GUI Enum Control ID Start
 			ID_DUMMY_START = 1000,
+			ID_WXCHECKBOXCTRLWITHMOUSE,
 			ID_MNU_MENUITEM1_1110,
 			ID_MNU___P__PATHNAME_1111,
 			ID_MNU_MENUITEM3_1112,
@@ -313,10 +312,8 @@ public:
 			ID_WXCHECKBOXPRINTLINENUMBER,
 			ID_WXCHECKBOXPRINTSYNTAX,
 			ID_WXNOTEBOOKPAGE3,
+			ID_WXCHECKBOXAUTOFILLCOLUMN,
 			ID_WXCHECKBOXMIDDLEMOUSETOPASTE,
-			ID_WXSTATICTEXT17,
-			ID_WXRADIOBUTTONDISABLE,
-			ID_WXRADIOBUTTONENABLE,
 			ID_WXCHECKBOXMOUSESELECTTOCOPY,
 			ID_WXCHECKBOXAUTOCOMPLETEPAIR,
 			ID_WXCHECKBOXAUTOINDENT,
@@ -386,6 +383,7 @@ public:
 	void WxButtonDictionaryDirClick(wxCommandEvent& event);
 	void OnDictionaryDirChange(wxCommandEvent& event);
 	void OnSelectDictionary(wxCommandEvent& event);
+	void OnMouseAutoCopyClicked(wxCommandEvent& event);
 };
 
 

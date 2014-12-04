@@ -21,6 +21,11 @@ END_EVENT_TABLE()
     ////Event Table End
 
 ///////////////////////////////////////////////////////////////////////////
+    extern int MadMessageBox(const wxString& message,
+                                 const wxString& caption = wxMessageBoxCaptionStr,
+                                 long style = wxOK | wxCENTRE,
+                                 wxWindow *parent = NULL,
+                                 int x = wxDefaultCoord, int y = wxDefaultCoord);
 
 MadMacroDlg::MadMacroDlg(wxWindow* parent, bool debug, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style) : wxDialog(parent, id, title, pos, size, style)
 {
@@ -33,7 +38,7 @@ MadMacroDlg::MadMacroDlg(wxWindow* parent, bool debug, wxWindowID id, const wxSt
     bSizer1 = new wxBoxSizer( wxVERTICAL );
 	WxStaticBoxSizer1->Add(bSizer1, 1, wxALIGN_CENTER | wxALIGN_TOP | wxEXPAND | wxALL, 5);
 
-    m_pymacro=new MadEdit(this, ID_MADEDIT, wxDefaultPosition, wxDefaultSize);
+    m_pymacro=new MadEdit(this, ID_MADEDIT, wxDefaultPosition, wxSize(640, 480));
     m_pymacro->SetFixedWidthMode(false);
     m_pymacro->SetRecordCaretMovements(false);
     m_pymacro->SetInsertSpacesInsteadOfTab(false);
@@ -88,7 +93,7 @@ void MadMacroDlg::OnRunClick( wxCommandEvent& event )
             }
             catch(std::bad_alloc &)
             {
-                wxMessageBox(_("Memory allocation failed"), _("Error"),  wxOK|wxICON_ERROR);
+                MadMessageBox(_("Memory allocation failed"), _("Error"),  wxOK|wxICON_ERROR);
                 g_EmbeddedPython = 0;
             }
         }

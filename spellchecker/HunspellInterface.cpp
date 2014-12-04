@@ -124,7 +124,7 @@ bool HunspellInterface::IsSpellingOk(wxString strText)
     if (m_pHunspell == NULL)
         return false;
 
-    int nDiff = 0;
+    //int nDiff = 0;
 
     strText += _T(" ");
 
@@ -134,7 +134,7 @@ bool HunspellInterface::IsSpellingOk(wxString strText)
     {
         wxString token = tkz.GetNextToken();
         int TokenStart = tkz.GetPosition() - token.Length() - 1;
-        TokenStart += nDiff;  // Take into account any changes to the size of the strText
+        //TokenStart += nDiff;  // Take into account any changes to the size of the strText
 
         // process token here
         if (!IsWordInDictionary(token))

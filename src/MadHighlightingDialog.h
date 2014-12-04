@@ -46,7 +46,7 @@ using std::vector;
 
 ////Dialog Style Start
 #undef MadHighlightingDialog_STYLE
-#define MadHighlightingDialog_STYLE wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxDIALOG_NO_PARENT | wxMAXIMIZE_BOX | wxCLOSE_BOX
+#define MadHighlightingDialog_STYLE wxCAPTION | wxSYSTEM_MENU | wxDIALOG_NO_PARENT | wxCLOSE_BOX
 ////Dialog Style End
 
 class MadSyntax;

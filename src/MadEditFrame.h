@@ -59,7 +59,7 @@ class MadEditFrame : public wxFrame
 private:
     DECLARE_EVENT_TABLE()
 public:
-    MadEditFrame( wxWindow *parent, wxWindowID id = 1, const wxString &title = wxT("MadEdit"),
+    MadEditFrame( wxWindow *parent, wxWindowID id = 1, const wxString &title = wxT("MadEdit-Mod"),
         const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize,
         long style = MadEditFrame_STYLE);
@@ -115,20 +115,16 @@ public:
     void OnUpdateUI_MenuEditCopy(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuEditPaste(wxUpdateUIEvent& event);
     void OnUpdateUI_Menu_CheckSize(wxUpdateUIEvent& event);
-    void OnUpdateUI_MenuEditDeleteLine(wxUpdateUIEvent& event);
-    void OnUpdateUI_MenuEditInsertTabChar(wxUpdateUIEvent& event);
-    void OnUpdateUI_MenuEditInsertDateTime(wxUpdateUIEvent& event);
-    void OnUpdateUI_MenuEditToggleReadOnly(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuFileToggleReadOnly(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuEditStartEndSelction(wxUpdateUIEvent& event);
 
     // add: gogo, 21.09.2009
     void OnUpdateUI_MenuEditToggleBookmark(wxUpdateUIEvent& event);
-    void OnUpdateUI_MenuEditGotoNextBookmark(wxUpdateUIEvent& event);
-    void OnUpdateUI_MenuEditGotoPreviousBookmark(wxUpdateUIEvent& event);
-    void OnUpdateUI_MenuEditClearAllBookmarks(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuSearchCheckBookmark(wxUpdateUIEvent& event);
 
     void OnUpdateUI_Menu_CheckTextFile(wxUpdateUIEvent& event);
     void OnUpdateUI_Menu_InsertNumbers(wxUpdateUIEvent& event);
-    void OnUpdateUI_Menu_ColumnAlign(wxUpdateUIEvent& event);
+    void OnUpdateUI_Menu_JoinLines(wxUpdateUIEvent& event);
 
     void OnUpdateUI_MenuEditCopyAsHexString(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuIndent(wxUpdateUIEvent& event);
@@ -152,6 +148,7 @@ public:
     void OnUpdateUI_MenuViewShowEndOfLine(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuViewShowTabChar(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuViewShowSpaceChar(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuViewShowAllChars(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuViewMarkActiveLine(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuViewMarkBracePair(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuViewTextMode(wxUpdateUIEvent& event);
@@ -199,6 +196,7 @@ public:
     void OnCopyFilePath(wxCommandEvent& event);
     void OnCopyFileName(wxCommandEvent& event);
     void OnCopyFileDir(wxCommandEvent& event);
+    void OnFileToggleReadOnly(wxCommandEvent& event);
 
     void OnEditUndo(wxCommandEvent& event);
     void OnEditRedo(wxCommandEvent& event);
@@ -209,14 +207,15 @@ public:
     void OnEditCutLine(wxCommandEvent& event);
     void OnEditDeleteLine(wxCommandEvent& event);
     void OnEditSelectAll(wxCommandEvent& event);
+    void OnEditStartEndSelction(wxCommandEvent& event);
     void OnEditInsertTabChar(wxCommandEvent& event);
     void OnEditInsertDateTime(wxCommandEvent& event);
 
     // add: gogo, 21.09.2009
-    void OnEditToggleBookmark(wxCommandEvent& event);
-    void OnEditGotoNextBookmark(wxCommandEvent& event);
-    void OnEditGotoPreviousBookmark(wxCommandEvent& event);
-    void OnEditClearAllBookmarks(wxCommandEvent& event);
+    void OnSearchToggleBookmark(wxCommandEvent& event);
+    void OnSearchGotoNextBookmark(wxCommandEvent& event);
+    void OnSearchGotoPreviousBookmark(wxCommandEvent& event);
+    void OnSearchClearAllBookmarks(wxCommandEvent& event);
     //----------
 
     void OnEditSortAscending(wxCommandEvent& event);
@@ -225,10 +224,10 @@ public:
     void OnEditSortDescendingCase(wxCommandEvent& event);
     void OnEditSortByOptions(wxCommandEvent& event);
     void OnEditSortOptions(wxCommandEvent& event);
-    void OnEditToggleReadOnly(wxCommandEvent& event);
 
     void OnEditCopyAsHexString(wxCommandEvent& event);
     void OnEditCopyAsHexStringWithSpace(wxCommandEvent& event);
+    void OnEditCopyRevertHex(wxCommandEvent& event);
     void OnEditIncIndent(wxCommandEvent& event);
     void OnEditDecIndent(wxCommandEvent& event);
     void OnEditComment(wxCommandEvent& event);
@@ -238,6 +237,7 @@ public:
     void OnEditToUpperCase(wxCommandEvent& event);
     void OnEditToLowerCase(wxCommandEvent& event);
     void OnEditInvertCase(wxCommandEvent& event);
+    void OnEditCapitalize(wxCommandEvent& event);
     void OnEditToHalfWidth(wxCommandEvent& event);
     void OnEditToHalfWidthByOptions(wxCommandEvent& event);
     void OnEditToFullWidth(wxCommandEvent& event);
@@ -245,9 +245,17 @@ public:
     void OnEditTabToSpace(wxCommandEvent& event);
     void OnEditSpaceToTab(wxCommandEvent& event);
     void OnEditTrimTrailingSpaces(wxCommandEvent& event);
+    void OnEditDeleteEmptyLines(wxCommandEvent& event);
+    void OnEditDeleteEmptyLinesWithSpaces(wxCommandEvent& event);
+    void OnEditJoinLines(wxCommandEvent& event);
     void OnEditInsertNumbers(wxCommandEvent& event);
     void OnEditColumnAlign(wxCommandEvent& event);
     void OnEditSpellCheck(wxCommandEvent& event);
+    void OnEditBookmarkCopy(wxCommandEvent& event);
+    void OnEditBookmarkCut(wxCommandEvent& event);
+    void OnEditBookmarkDel(wxCommandEvent& event);
+    void OnEditBookmarkDelUnmarked(wxCommandEvent& event);
+    void OnEditBookmarkReplace(wxCommandEvent& event);
 
     void OnSearchFind(wxCommandEvent& event);
     void OnSearchFindNext(wxCommandEvent& event);
@@ -277,6 +285,7 @@ public:
     void OnViewShowEndOfLine(wxCommandEvent& event);
     void OnViewShowTabChar(wxCommandEvent& event);
     void OnViewShowSpaceChar(wxCommandEvent& event);
+    void OnViewShowAllChars(wxCommandEvent& event);
     void OnViewMarkActiveLine(wxCommandEvent& event);
     void OnViewMarkBracePair(wxCommandEvent& event);
     void OnViewTextMode(wxCommandEvent& event);
@@ -351,7 +360,7 @@ protected:
     void OnNotebookPageChanged(wxAuiNotebookEvent& event);
     void OnNotebookPageClosing(wxAuiNotebookEvent& event);
     void OnNotebookPageClosed(bool bZeroPage=false);//wxAuiNotebookEvent& event); //wxAUI doesn't support this event
-    void OnNotebookPageRightDown(wxAuiNotebookEvent& event);
+    void OnNotebookPageRightUp(wxAuiNotebookEvent& event);
 
     void OnSize(wxSizeEvent &evt);
     //void OnChar(wxKeyEvent& evt);
@@ -444,10 +453,12 @@ enum { // menu id
     menuDeleteLine,
     menuInsertTabChar,
     menuInsertDateTime,
-    menuToggleBookmark,       // add: gogo, 21.09.2009
-    menuGotoNextBookmark,     // add: gogo, 21.09.2009
-    menuGotoPreviousBookmark, // add: gogo, 21.09.2009
-    menuClearAllBookmarks,
+    menuBookmark,
+    menuBookmarkCopy,
+    menuBookmarkCut,
+    menuBookmarkDel,
+    menuBookmarkDelUnmarked,
+    menuBookmarkReplace,
     menuSort,
     menuSortAscending,
     menuSortDescending,
@@ -457,9 +468,11 @@ enum { // menu id
     menuSortOptions,
     menuAdvanced,
     menuToggleReadOnly,
-    
+    menuStartEndSelction,
+
     menuCopyAsHexString,
     menuCopyAsHexStringWithSpace,
+    menuCopyRevertHex,
     menuIncreaseIndent,
     menuDecreaseIndent,
     menuComment,
@@ -469,6 +482,7 @@ enum { // menu id
     menuToUpperCase,
     menuToLowerCase,
     menuInvertCase,
+    menuCapitalize,
     menuToHalfWidth,
     menuToHalfWidthByOptions,
     menuToFullWidth,
@@ -476,6 +490,9 @@ enum { // menu id
     menuTabToSpace,
     menuSpaceToTab,
     menuTrimTrailingSpaces,
+    menuDeleteEmptyLines,
+    menuDeleteEmptyLinesWithSpaces,
+    menuJoinLines,
     menuInsertNumbers,
     menuColumnAlign,
 
@@ -488,6 +505,10 @@ enum { // menu id
     menuGoToPosition,
     menuLeftBrace,
     menuRightBrace,
+    menuToggleBookmark,       // add: gogo, 21.09.2009
+    menuGotoNextBookmark,     // add: gogo, 21.09.2009
+    menuGotoPreviousBookmark, // add: gogo, 21.09.2009
+    menuClearAllBookmarks,
 
     // view
     menuEncoding,
@@ -543,6 +564,7 @@ enum { // menu id
     menuShowEndOfLine,
     menuShowTabChar,
     menuShowSpaceChar,
+    menuShowAllChars,
     menuMarkActiveLine,
     menuMarkBracePair,
     menuTextMode,

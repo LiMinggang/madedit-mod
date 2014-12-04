@@ -4,3 +4,4 @@ appicon2 ICON "../images/Mad.ico"
 
 dnd_copy CURSOR "../images/dnd_copy.cur"
 dnd_move CURSOR "../images/dnd_move.cur"
+dnd_none CURSOR "../images/dnd_none.cur"

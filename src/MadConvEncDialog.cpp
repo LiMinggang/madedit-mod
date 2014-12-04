@@ -146,6 +146,8 @@ void MadConvEncDialog::CreateGUIControls(void)
     WxBoxSizer3->SetItemMinSize(WxRadioBoxOption, strx, stry);
 
     WxButtonCancel->SetFocus();
+    wxSize dlgsize = GetSize();
+    SetMaxSize(dlgsize);
 }
 
 void MadConvEncDialog::MadConvEncDialogClose(wxCloseEvent& event)

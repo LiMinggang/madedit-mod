@@ -34,7 +34,7 @@
 
 ////Dialog Style Start
 #undef MadFileAssociationDialog_STYLE
-#define MadFileAssociationDialog_STYLE wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxDIALOG_NO_PARENT | wxMAXIMIZE_BOX | wxCLOSE_BOX
+#define MadFileAssociationDialog_STYLE wxCAPTION | wxSYSTEM_MENU | wxDIALOG_NO_PARENT | wxCLOSE_BOX
 ////Dialog Style End
 
 class MadFileAssociationDialog : public wxDialog

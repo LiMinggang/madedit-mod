@@ -33,7 +33,7 @@
 
 ////Dialog Style Start
 #undef MadPurgeHistoryDialog_STYLE
-#define MadPurgeHistoryDialog_STYLE wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxSTAY_ON_TOP | wxCLOSE_BOX
+#define MadPurgeHistoryDialog_STYLE wxCAPTION | wxSYSTEM_MENU | wxSTAY_ON_TOP | wxCLOSE_BOX
 ////Dialog Style End
 
 class MadPurgeHistoryDialog : public wxDialog

@@ -37,15 +37,15 @@ wxString MadRecentList::NormalizeFileName(const wxFileName& fn)
     // delays when opening a program using wxFileHistory. We also exclude
     // wxPATH_NORM_ENV_VARS as the file names here are supposed to be "real"
     // file names and not have any environment variables in them.
-    wxFileName fnNorm(fn);
-    fnNorm.Normalize(wxPATH_NORM_DOTS |
-                     wxPATH_NORM_TILDE |
+    //wxFileName fnNorm(fn);
+    //fnNorm.Normalize(wxPATH_NORM_DOTS |
+    //                 wxPATH_NORM_TILDE |
     //                 wxPATH_NORM_CASE |
-                     wxPATH_NORM_ABSOLUTE);
+    //                 wxPATH_NORM_ABSOLUTE);
     //return fnNorm.GetFullPath();
     if (m_caseSensitive)
-        return fnNorm.GetFullPath();
-    return MadStrLower(fnNorm.GetFullPath());
+        return fn.GetFullPath();
+    return MadStrLower(fn.GetFullPath());
 }
 #endif
 // Recent List management

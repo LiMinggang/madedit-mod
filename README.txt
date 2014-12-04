@@ -14,8 +14,8 @@ Supported Platforms:
 A. Linux, FreeBSD, and Unix-like OS (__WXGTK__):
    a. GNU C++ 3.x/4.x:
       Required Libraries to compile:
-      1. wxWidgets-2.6.1 or higher with Unicode enabled
-      2. Boost-1.33.0 or higher
+      1. wxWidgets-2.6.1 or higher with Unicode and IPC enabled
+      2. Boost-1.33.0 or higher(build Boost-Python)
       3. Boost.Xpressive latest version
       4. Python 2.7 or higher
       5. hunspell 1.3.3 or higher
@@ -24,14 +24,13 @@ B. MS Windows (__WXMSW__):
    a. MinGW32/GNU C++ 3.x (wxDevCpp):
       Required Libraries to compile:
       1. wxWidgets-2.6.1 or higher with Unicode enabled(wxWidgets-2.8.12 is recommended, and apply patches)
-         --enable-ipc
       2. Boost-1.33.0 or higher
       3. Boost.Xpressive latest version
       4. libunicows: it's optional under WinNT/XP, but required under Win98
-   b. Visual C++ 7.1 (VS.Net 2003):
+   b. Visual C++ 7.1 (VS.Net 2003) or higher:
       Required Libraries to compile:
       1. wxWidgets-2.6.1 or higher with Unicode enabled
-      2. Boost-1.33.0 or higher(Source code is enough for MadEdit)
+      2. Boost-1.33.0 or higher(Source code is enough for MadEdit, build Boost-Python)
       3. Boost.Xpressive latest version
       4. libunicows: it's optional under WinNT/XP, but required under Win98
       5. Set WXWIN and BOOST to the root directory of your local ones
@@ -39,7 +38,7 @@ B. MS Windows (__WXMSW__):
 P.S.: If you use CVS version of Boost, Boost.Xpressive has been included in the CVS HEAD,
       or you must get 'xpressive.zip' at:
       http://www.boost-consulting.com/vault/index.php?directory=Strings%20-%20Text%20Processing
-P.S.: wxAUIBook patch http://trac.wxwidgets.org/attachment/ticket/10848/
+P.S.: wxAUIBook patch for wxWidgets 2.8.x http://trac.wxwidgets.org/attachment/ticket/10848/
 P.S.: Don't forget to Copy wxwin.m4 to /usr/share/aclocal folder if you use your own build of
       wxWidgets
 P.S.: Install gettext-devel if you got AM_GNU_GETTEXT error
@@ -69,17 +68,109 @@ Syntax files, Locale files and Settings:
     2. $(MadEdit execution file directory)/MadEdit.cfg: Windows
   And FontWidth.dat will also be saved to the same path.
   FontWidth.dat is Cache of Font-Width-Data, it can speed-up MadEdit a lot.
-  
-  Download dictionary at http://archive.services.openoffice.org/pub/mirror/OpenOffice.org/contrib/dictionaries/
 
-Feature/issues to be released in next release:
-----------------------------------------------
-Fix build issue with WX 3.0 under Fedora
+  * Download dictionary at http://archive.services.openoffice.org/pub/mirror/OpenOffice.org/contrib/dictionaries/
+  * Use MadEdit-Mod with other applications like CPPCheck, Visual Studio, try 'madedit %f*lineNum'
+
+Feature/issues to be released
+-----------------------------
 
 ChangeLog:
 ----------
+Mod v0.3.0
+1. Improve UI and all strings of message box/dialog can be translated since then
+2. Change application name to 'MadEdit-Mod'
+3. Update cursor as None while being out of window(Drag and Drop)
+4. Add debug output for Visual Studio
+5. Fix issue that caret was still moving while being out of window(Drag and Drop)
+6. Fix issue that should not do DND when user dropped the selection at the end of selection
+Update Simplified Chinese
+
+Mod v0.2.9
+1. Auto fill column data while pasting in column mode(the lines would be automatically duplicated if the
+   lines in clipboard was less than the selected. Eg, you copied ONE line but you chosen 3 lines in column
+   mode and pasted, the line would be automatically duplicated 3 times if the function was enabled in Options)
+2. Improve the UI of SelectToCopy in Option dialog
+3. Remove the Maximize from Option, FileAssociation, WordCount and Highlight dialogs
+4. Improve the UI of dialogs by disabling the resize function of all dialogs except MadMacro
+5. Fixed the issue of Mouse Select to Copy not working under wx 3.0(would affect 0.2.7 and 0.2.8)
+6. Fixed the issue of column copy/paste crash introduced by wx 3.0(would affect 0.2.7 and 0.2.8)
+7. Fix an issue of MadRecentList that would cause annoying error dialog of set working directory error
+   (would affect 0.2.7 and 0.2.8)
+8. Update Simplified Chinese
+
+Mod v0.2.8
+1. Fix the issue that Toolbar was not flat under wx3.0(Now we have separator on Toolbar under Windows now)
+2. Revert Hex String to hex(Eg, from '4D6F64', '4D 6F 64', '%4D%6F%64', or '4D,6F,64' to 'Mod', mainly for
+   Asian languages. Eg, used to correct some corrupted text----lost one byte)
+3. Change default size of MadMacro dialog to 640*480
+4. Improve usability of dialogs. Hide modaless dialog before show another modal/ess one
+5. Improve usability of FindInFiles
+6. Double click to select brace pairs if the caret is at the left/right brace
+7. Up/Down to the line above/under the selection while text being selected
+8. Add shortcut for Join Lines(Ctrl-J)
+9. Add shortcut for Spell Check(Ctrl-K)
+10. Add shortcut for Show All Symbols(Ctrl-Alt-A)
+11. Move Macro menu group from Tools to top level
+12. Fix translation issue with wx3.0(Some text wx3.0 of was not translated, eg. print dialog) 
+13. Update Translation for wx3.0, MadPython
+
+Mod v0.2.7
+Will move to wx3.0 since then
+1. Delete empty lines supported
+2. Delete empty lines(with spaces) supported(More line functions?)
+3. Join selected lines(replace EOL with space)
+4. Fix a bug that would hang Option Dialog(wx3.0.2), MS Windows only
+5. Improve usability of Search/Replace/Search In Files
+6. Fix issue of SearchAll that would not should results if none found
+7. Fix issue of statusbar working under wx3.0
+8. Fix issue of check/uncheck FindHex of search
+9. Fix issue of check/uncheck FindHex of Replace
+10. Rollback changes for INS and ReadOnly showing on statusbar, which is buggy
+11. Update Simplified Chinese
+
+Mod v0.2.6.1
+1. Bookmark while searching(toggle bookmark/bookmark all/don't show results in results window)
+2. Update Simplified Chinese
+
+Mod v0.2.6
+1. Enhanced bookmark edit functions(copy/cut/delete/replace) under Edit menu
+2. Move Toggle/Goto/clear bookmarks to Search because they are not edit functions
+3. Start/End select to mark a start and end of selection by menu
+4. Capitalize words in selection
+5. Add Capitalize to MadPython
+6. Update Simplified Chinese
+
+What's new from v0.2.5
+Enhanced bookmark edit functions(copy/cut/delete/replace) under Edit menu
+Move Toggle/Goto/clear bookmarks to Search because they are not edit functions
+Start/End select to mark a start and end of selection by menu
+Capitalize words in selection
+Add Capitalize to MadPython
+Multiple dictionary supported, Add/Remove word from Personal dictionary
+Clear/Set ReadOnly flag of the file
+ColumnAlign to align the 'short line'
+Add GNU ASM syntax file
+Fix build issue with WX 3.0 under Fedora Core 17
+Add shortcut to Show/Hide All Chars(Space, Tab and EOL)
+Bug fixes
+
+Mod v0.2.5.5
+1. Add shortcut to Show All Chars(Space, Tab and EOL)
+2. Fixed the mouse issue http://sourceforge.net/p/madedit/bugs/10/, which might cause crash if you click
+   on the edit area then click on menu or toolbar(It should be a bug of wxWidgets)
+3. Update Simplified Chinese
+
+Mod v0.2.5.4
+1. ColumnAlign to align the 'short line'(EOL is ahead of the caret position)
+2. Add URL of dictionary download in About Dialog
+3. Fix build issue with WX 3.0 under Fedora Core 17(Just follow the original way----to be investigated)
+4. Move Clear/Set ReadOnly flag to File menu
+5. Add GNU ASM syntax file
+6. Update Simplified Chinese
+
 Mod v0.2.5.3
-1. Clear ReadOnly flag of the file instead of change outside and close/open again
+1. Clear/Set ReadOnly flag of the file instead of change outside and close/open again
 2. Update Simplified Chinese
 
 Mod v0.2.5.2
@@ -309,7 +400,7 @@ v0.2.9:
 3.added Japanese language. Thank Tilt for the translations.
 4.fixed a bug when converting between Tab and Space char in wordwrap mode.
 5.modified that the dialogs will stay on top of main window, not top of all windows.
-6.modified the action when associating file types.
+6.modified the action when associating file types
 7.some minor changes.
 
 v0.2.8:

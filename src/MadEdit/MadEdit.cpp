@@ -16,6 +16,7 @@
 #include <wx/gdicmn.h>
 #include <wx/image.h>
 #include <wx/dataobj.h>
+#include <wx/tokenzr.h>
 
 #ifdef __WXGTK__
 #   include "clipbrd_gtk.h"
@@ -34,7 +35,7 @@
 #include <gdk/gdkx.h>
 #include <gdk/gdkprivate.h>
 #include <gtk/gtk.h>
-#if wxMAJOR_VERSION < 2 || (wxMAJOR_VERSION == 2 && wxMINOR_VERSION < 9)
+#if wxMAJOR_VERSION < 3)
 #include <wx/gtk/win_gtk.h>
 #include <wx/gtk/dcmemory.h>
 #else
@@ -63,7 +64,7 @@ using std::list;
 #endif
 
 /*wxMAJOR_VERSION wxMINOR_VERSION wxRELEASE_NUMBER wxSUBRELEASE_NUMBER*/
-#if wxMAJOR_VERSION < 2 || (wxMAJOR_VERSION == 2 && wxMINOR_VERSION < 9) || (wxMAJOR_VERSION == 2 && wxMINOR_VERSION == 9 && wxRELEASE_NUMBER < 2)
+#if wxMAJOR_VERSION < 3
 #define MADK_NONE 0
 #else
 #define MADK_NONE WXK_NONE
@@ -84,7 +85,7 @@ extern const ucs4_t HexHeader[78] =
     '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', '|', ':'
 };
 
-static wxCursor ArrowCursor, IBeamCursor, DragCopyCursor, DragMoveCursor;
+static wxCursor ArrowCursor, IBeamCursor, DragCopyCursor, DragMoveCursor, DragNoneCursor;
 //==================================================
 
 class MadDataObject : public wxDataObjectSimple
@@ -154,7 +155,7 @@ public:
         char *buf=&data[0];
         *((int*)buf)=linecount;
         buf+=sizeof(int);
-        memcpy(buf, ws.c_str(), size-sizeof(int));
+        memcpy(buf, ws.wc_str(), size-sizeof(int));
 
         return true;
     }
@@ -239,7 +240,7 @@ END_EVENT_TABLE()
 
 
 
-#if defined(__WXGTK20__) && (wxMAJOR_VERSION < 2 || (wxMAJOR_VERSION == 2 && wxMINOR_VERSION < 9))
+#if defined(__WXGTK20__) && (wxMAJOR_VERSION < 3)
 void GTK2_DrawText(wxMemoryDC *dc, MadEncoding *encoding, const int *widths,
               const wxString &text, wxCoord x, wxCoord y )
 {
@@ -739,6 +740,7 @@ int MadEdit::ms_Count = 0;
 
 #include "../../images/dnd_copy.xpm"
 #include "../../images/dnd_move.xpm"
+#include "../../images/dnd_none.xpm"
 
 MadEdit::MadEdit(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size, long style)
     :MadEditSuperClass(parent,id,pos,size,style)//wxWANTS_CHARS|wxSIMPLE_BORDER)//|style|wxTAB_TRAVERSAL)
@@ -760,6 +762,7 @@ MadEdit::MadEdit(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSi
         //DragMoveCursor = wxCursor(_T("dnd_move"));
         DragCopyCursor = wxCursor(wxImage(dnd_copy_xpm));
         DragMoveCursor = wxCursor(wxImage(dnd_move_xpm));
+        DragNoneCursor = wxCursor(wxImage(dnd_none_xpm));
     }
 
     m_VScrollBar->SetCursor(ArrowCursor);
@@ -833,6 +836,8 @@ MadEdit::MadEdit(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSi
     m_UpdateValidPos=0;
 
     m_Selection=false;
+    m_SelectionStart = false;
+    m_SelectionStartPos = -1;
     m_SelFirstRow=INT_MAX;
     m_SelLastRow=-1;
 
@@ -888,8 +893,9 @@ MadEdit::MadEdit(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSi
     m_Config->Read(wxT("AutoCompletePair"), &m_AutoCompletePair, false);
     m_AutoCompleteRightChar = 0;
     m_AutoCompletePos = 0;
-
     m_SpellCheck = false;
+    m_BookmarkInSearch = false;
+
     if(!m_SingleLineMode)
     {
         m_Config->Read(wxT("SpellCheck"),   &m_SpellCheck, true);
@@ -904,6 +910,7 @@ MadEdit::MadEdit(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSi
     m_MouseLeftDown=false;
     m_MouseLeftDoubleClick=false;
     m_MouseAtHexTextArea=false;
+    m_MouseInWindow = true;
     m_MouseMotionTimer=new MadMouseMotionTimer(this);
 
     m_Config->Read(wxT("MouseSelectToCopy"), &m_MouseSelectToCopy, true);
@@ -913,6 +920,7 @@ MadEdit::MadEdit(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSi
     m_Config->Read(wxT("MouseSelectToCopyWithCtrlKey"), &m_MouseSelectToCopyWithCtrlKey, true);
 #endif
     m_Config->Read(wxT("MiddleMouseToPaste"), &m_MiddleMouseToPaste, true);
+    m_Config->Read(wxT("AutoFillColumnPaste"), &m_AutoFillColumnPaste, false);
 
     m_HexTopRow = size_t(-1);
     m_HexRowCount = 0;
@@ -1830,7 +1838,7 @@ void MadEdit::PaintText(wxDC *dc, int x, int y, const ucs4_t *text, const int *w
         ::ExtTextOut(hdc, nowleft, y, 0, NULL, m_WCWordBuffer+wcstart, len, m_WCWidthBuffer+wcstart);
     }
 
-#elif defined(__WXGTK20__) && (wxMAJOR_VERSION < 2 || (wxMAJOR_VERSION == 2 && wxMINOR_VERSION < 9))
+#elif defined(__WXGTK20__) && (wxMAJOR_VERSION < 3)
     if(!InPrinting())
     {
         const ucs4_t *pu=text;
@@ -3957,6 +3965,27 @@ void MadEdit::SelectWordFromCaretPos(wxString *ws)
         }
 
         m_Selection=true;
+        if(m_MouseLeftDoubleClick && m_LeftBrace_rowid >= 0)
+        {
+            MadLineIterator lit;
+            wxFileOffset pos1, pos2;
+            GetLineByLine(lit, pos1, m_LeftBrace_rowid);
+            GetLineByLine(lit, pos2, m_RightBrace_rowid);
+            pos1 += m_LeftBrace.LinePos;
+            pos2 += m_RightBrace.LinePos;
+            if(startpos == pos1)
+            {
+                pos = pos2+m_RightBrace.Length/*for right brace*/;
+            }
+            else
+            {
+                if(startpos == pos2)
+                {
+                    startpos = pos1;
+                    pos = pos2+m_RightBrace.Length/*for right brace*/;
+                }
+            }
+        }
         m_SelectionPos1.pos = startpos;
         m_SelectionPos2.pos = pos;
 
@@ -4298,6 +4327,56 @@ int MadEdit::GetColumnDataFromClipboard(vector <ucs4_t> *ucs)
         }
     }
 
+    if(m_AutoFillColumnPaste && m_Selection)
+    {
+        size_t rowcount = m_SelectionEnd->rowid - m_SelectionBegin->rowid + 1;
+        if(rowcount > linecount)
+        {
+            rowcount -= linecount;
+            linecount += rowcount;
+            unsigned i = 0; 
+            while(rowcount>0)
+            {
+                for(i = 0; i<ucs->size(); ++i)
+                {
+                    ucs4_t uch = ucs->at(i);
+                    if( uch == 0x0D || uch == 0x0A)
+                    {
+                        --rowcount;
+                        switch(m_InsertNewLineType)
+                        {
+                            case nltDOS:
+#ifdef __WXMSW__
+                            case nltDefault:
+#endif
+                                ucs->push_back(0x0D);
+                                ucs->push_back(0x0A);
+                                break;
+            
+                            case nltMAC:
+                                ucs->push_back(0x0D);
+                                break;
+            
+                            case nltUNIX:
+#ifndef __WXMSW__
+                            case nltDefault:
+#endif
+                                ucs->push_back(0x0A);
+                                break;
+                        }
+                        if(i < (ucs->size()-1))
+                        {
+                            if(uch == 0x0D && ucs->at(i+1) == 0x0A)
+                                ++i;
+                        }
+                    }
+                    else
+                        ucs->push_back(uch);
+                    if(rowcount==0)break;
+                }
+            }
+        }
+    }
     return linecount;
 }
 
@@ -7773,6 +7852,8 @@ void MadEdit::ProcessCommand(MadEditCommand command)
                     break;
 
                 case ecUp:
+                    if(m_Selection)
+                        m_CaretPos = *m_SelectionBegin;
                 case ecSelUp:
                     if(m_CaretPos.rowid > 0)
                     {
@@ -7813,6 +7894,8 @@ void MadEdit::ProcessCommand(MadEditCommand command)
                     break;
 
                 case ecDown:
+                    if(m_Selection)
+                        m_CaretPos = *m_SelectionEnd;
                 case ecSelDown:
                     if(m_CaretPos.rowid < int(m_Lines->m_RowCount - 1))   //to next line/row
                     {
@@ -9516,7 +9599,7 @@ void MadEdit::OnKeyDown(wxKeyEvent& evt)
         {
             m_DragCopyFlag = true;
             wxSetCursor(DragCopyCursor);
-            SetCursor(DragCopyCursor);
+            //SetCursor(DragCopyCursor);
         }
         return;
     }
@@ -9588,7 +9671,7 @@ void MadEdit::OnKeyUp(wxKeyEvent& evt)
         {
             m_DragCopyFlag = false;
             wxSetCursor(DragMoveCursor);
-            SetCursor(DragMoveCursor);
+            //SetCursor(DragMoveCursor);
         }
     }
     
@@ -9598,7 +9681,6 @@ void MadEdit::OnKeyUp(wxKeyEvent& evt)
 void MadEdit::OnMouseLeftDown(wxMouseEvent &evt)
 {
     //wxTheApp->GetTopWindow()->SetTitle(wxString::Format(wxT("LDown")));
-
     ProcessCommand(ecMouseNotify);
 
     if(m_SingleLineMode && evt.m_x==m_LeftClickX && evt.m_y==m_LeftClickY)
@@ -9708,13 +9790,13 @@ void MadEdit::OnMouseLeftDown(wxMouseEvent &evt)
                 {
                     m_DragCopyFlag = true;
                     wxSetCursor(DragCopyCursor);
-                    SetCursor(DragCopyCursor);
+                    //SetCursor(DragCopyCursor);
                 }
                 else
                 {
                     m_DragCopyFlag = false;
                     wxSetCursor(DragMoveCursor);
-                    SetCursor(DragMoveCursor);
+                    //SetCursor(DragMoveCursor);
                 }
             }
             else
@@ -9783,23 +9865,30 @@ void MadEdit::OnMouseLeftUp(wxMouseEvent &evt)
     {
         if((evt.ControlDown() && m_MouseSelectToCopyWithCtrlKey) || !m_MouseSelectToCopyWithCtrlKey)
         {
+#if ((wxMAJOR_VERSION < 3) || defined(__WXGTK__))
             wxTheClipboard->UsePrimarySelection(true);
+#endif
             CopyToClipboard();
+#if ((wxMAJOR_VERSION < 3) || defined(__WXGTK__))
             wxTheClipboard->UsePrimarySelection(false);
+#endif
         }
     }
 
     //Hacking for 
     if(m_DragDrop)
     {
-        if(m_CaretPos.pos > m_SelectionBegin->pos && m_CaretPos.pos < m_SelectionEnd->pos)
+        if(m_MouseInWindow)
         {
-            EndUpdateSelection(false);  // reset selection
-            m_DndData.Empty();
-        }
-        else
-        {
-            DndDrop();
+            if(m_CaretPos.pos > m_SelectionBegin->pos && m_CaretPos.pos <= m_SelectionEnd->pos)
+            {
+                EndUpdateSelection(false);  // reset selection
+                m_DndData.Empty();
+            }
+            else
+            {
+                DndDrop();
+            }
         }
         m_DragDrop = false;
         UpdateCursor(evt.m_x, evt.m_y);
@@ -9847,129 +9936,130 @@ void MadEdit::OnMouseMotion(wxMouseEvent &evt)
         return;
     }
 
-
     if(m_SingleLineMode && FindFocus()!=this)
     {
         m_LeftClickX=evt.m_x;
         m_LeftClickY=evt.m_y;
     }
 
-    UpdateCursor(evt.m_x, evt.m_y);
-
-    if(m_MouseLeftDown)
+    if(m_MouseInWindow)
     {
-        wxFileOffset oldCaretPos=m_CaretPos.pos;
-
-        if(!m_Selection)
+        UpdateCursor(evt.m_x, evt.m_y);
+        
+        if(m_MouseLeftDown)
         {
-            BeginUpdateSelection();
-            m_DragDrop = false;
-        }
+            wxFileOffset oldCaretPos=m_CaretPos.pos;
 
-        if(!m_MouseMotionTimer->IsRunning())
-        {
-            m_MouseMotionTimer->Start(125);
-        }
-
-        if(m_EditMode != emHexMode)
-        {
-            int row;
-            if(evt.m_y < 0)
+            if(!m_Selection)
             {
-                row = (-evt.m_y / m_RowHeight) + 1;
-                if(row > m_TopRow)
-                {
-                    row = 0;
-                }
-                else
-                {
-                    row = m_TopRow - row;
-                }
-            }
-            else
-            {
-                row = evt.m_y / m_RowHeight;
-                row += m_TopRow;
-                if(row >= int(m_Lines->m_RowCount))
-                    row = int(m_Lines->m_RowCount - 1);
+                BeginUpdateSelection();
+                m_DragDrop = false;
             }
 
-            m_CaretPos.rowid = row;
-            m_CaretPos.lineid = GetLineByRow(m_CaretPos.iter, m_CaretPos.pos, row);
-            m_CaretPos.subrowid = m_CaretPos.rowid - row;
-
-            MadRowIndexIterator riter = m_CaretPos.iter->m_RowIndices.begin();
-            std::advance(riter, m_CaretPos.subrowid);
-
-            m_CaretPos.linepos = riter->m_Start;
-            m_CaretPos.pos += m_CaretPos.linepos;
-
-            UpdateCaretByXPos(evt.m_x + m_DrawingXPos - m_LineNumberAreaWidth - m_LeftMarginWidth,
-                m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos);
-
-            m_LastCaretXPos = m_CaretPos.xpos;
-        }
-        else                        //HexMode
-        {
-            int row;
-
-            if(evt.m_y < m_RowHeight)
+            if(!m_MouseMotionTimer->IsRunning())
             {
-                int y = -(evt.m_y - m_RowHeight);
-                row = (y / m_RowHeight) + 1;
-                if(row > m_TopRow)
-                {
-                    row = 0;
-                }
-                else
-                {
-                    row = m_TopRow - row;
-                }
+                m_MouseMotionTimer->Start(125);
             }
-            else
+
+            if(m_EditMode != emHexMode)
             {
-                row = (evt.m_y / m_RowHeight) - 1;
-                row += m_TopRow;
-
-                int rows = (m_Lines->m_Size >> 4) + 1;
-
-                if(row >= rows)
+                int row;
+                if(evt.m_y < 0)
                 {
-                    if(rows > 0)
-                        row = rows - 1;
-                    else
+                    row = (-evt.m_y / m_RowHeight) + 1;
+                    if(row > m_TopRow)
+                    {
                         row = 0;
+                    }
+                    else
+                    {
+                        row = m_TopRow - row;
+                    }
+                }
+                else
+                {
+                    row = evt.m_y / m_RowHeight;
+                    row += m_TopRow;
+                    if(row >= int(m_Lines->m_RowCount))
+                        row = int(m_Lines->m_RowCount - 1);
+                }
+
+                m_CaretPos.rowid = row;
+                m_CaretPos.lineid = GetLineByRow(m_CaretPos.iter, m_CaretPos.pos, row);
+                m_CaretPos.subrowid = m_CaretPos.rowid - row;
+
+                MadRowIndexIterator riter = m_CaretPos.iter->m_RowIndices.begin();
+                std::advance(riter, m_CaretPos.subrowid);
+
+                m_CaretPos.linepos = riter->m_Start;
+                m_CaretPos.pos += m_CaretPos.linepos;
+
+                UpdateCaretByXPos(evt.m_x + m_DrawingXPos - m_LineNumberAreaWidth - m_LeftMarginWidth,
+                    m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos);
+
+                m_LastCaretXPos = m_CaretPos.xpos;
+            }
+            else                        //HexMode
+            {
+                int row;
+
+                if(evt.m_y < m_RowHeight)
+                {
+                    int y = -(evt.m_y - m_RowHeight);
+                    row = (y / m_RowHeight) + 1;
+                    if(row > m_TopRow)
+                    {
+                        row = 0;
+                    }
+                    else
+                    {
+                        row = m_TopRow - row;
+                    }
+                }
+                else
+                {
+                    row = (evt.m_y / m_RowHeight) - 1;
+                    row += m_TopRow;
+
+                    int rows = (m_Lines->m_Size >> 4) + 1;
+
+                    if(row >= rows)
+                    {
+                        if(rows > 0)
+                            row = rows - 1;
+                        else
+                            row = 0;
+                    }
+                }
+
+                AppearHexRow(wxFileOffset(row) << 4);
+
+                UpdateHexPosByXPos(row, evt.m_x + m_DrawingXPos);
+
+                m_RepaintAll = true;
+            }
+
+            AppearCaret();
+            UpdateScrollBarPos();
+
+            m_LastTextAreaXPos = m_TextAreaXPos;
+
+            if(!m_DragDrop)
+            {
+                if(m_Selection)
+                {
+                    EndUpdateSelection(true);
                 }
             }
 
-            AppearHexRow(wxFileOffset(row) << 4);
+            DoSelectionChanged();
 
-            UpdateHexPosByXPos(row, evt.m_x + m_DrawingXPos);
-
-            m_RepaintAll = true;
-        }
-
-        AppearCaret();
-        UpdateScrollBarPos();
-
-        m_LastTextAreaXPos = m_TextAreaXPos;
-
-        if(!m_DragDrop)
-        {
-            if(m_Selection)
+            if(m_RecordCaretMovements && oldCaretPos != m_CaretPos.pos)
             {
-                EndUpdateSelection(true);
+                m_UndoBuffer->Add(oldCaretPos, m_CaretPos.pos);
             }
-        }
-
-        DoSelectionChanged();
-
-        if(m_RecordCaretMovements && oldCaretPos != m_CaretPos.pos)
-        {
-            m_UndoBuffer->Add(oldCaretPos, m_CaretPos.pos);
         }
     }
-
     evt.Skip();
 }
 
@@ -9985,9 +10075,13 @@ void MadEdit::OnMouseMiddleUp(wxMouseEvent &evt)
 
     if(m_MiddleMouseToPaste)
     {
+#if ((wxMAJOR_VERSION < 3) || defined(__WXGTK__))
         wxTheClipboard->UsePrimarySelection(true);
+#endif
         PasteFromClipboard();
+#if ((wxMAJOR_VERSION < 3) || defined(__WXGTK__))
         wxTheClipboard->UsePrimarySelection(false);
+#endif
         evt.Skip();
     }
 }
@@ -10024,7 +10118,6 @@ void MadEdit::OnKillFocus(wxFocusEvent &evt)
         if(m_SingleLineMode && m_Selection)
         {
             m_Selection=false;
-            m_DragDrop = false;
             m_RepaintAll=true;
             Refresh();
         }
@@ -10035,6 +10128,7 @@ void MadEdit::OnKillFocus(wxFocusEvent &evt)
         }
 #endif
     }
+    m_DragDrop = false;
     m_MouseLeftDown = false;
     evt.Skip();
 }
@@ -10262,29 +10356,51 @@ void MadEdit::OnMouseWheel(wxMouseEvent &evt)
 void MadEdit::OnMouseEnterWindow(wxMouseEvent &evt)
 {
     UpdateCursor(evt.m_x, evt.m_y);
+    m_MouseInWindow = true;
     evt.Skip();
 }
 
 void MadEdit::OnMouseLeaveWindow(wxMouseEvent &evt)
 {
-    wxSize sz = GetClientSize();
-    if(evt.m_x>=sz.x || evt.m_y>=sz.y)
+    if(m_DragDrop)
     {
-        wxSetCursor(wxNullCursor); // reset to default
+        wxSetCursor(DragNoneCursor);
     }
     else
     {
-        wxSetCursor(ArrowCursor); // scrollbar
+        wxSize sz = GetClientSize();
+        if(evt.m_x>=sz.x || evt.m_y>=sz.y)
+        {
+            wxSetCursor(wxNullCursor); // reset to default
+        }
+        else
+        {
+            if(evt.m_x>=sz.x)
+                wxSetCursor(ArrowCursor); // scrollbar
+            else
+                wxSetCursor(ArrowCursor); // scrollbar
+        }
     }
+    m_MouseInWindow = false;
     evt.Skip();
 }
 
 void MadEdit::OnMouseCaptureLost(wxMouseCaptureLostEvent &evt)
 {
-    m_MouseLeftDown=false;
+    if(m_MouseLeftDown)
+    {
+        if(!m_DragDrop)
+        {
+            EndUpdateSelection(true);
+        }
+    }
+
+    if(GetCapture() == this)
+        ReleaseMouse();
     m_MouseLeftDoubleClick=false;
-    m_MouseAtHexTextArea=false;
+    m_MouseLeftDown=false;
     m_DragDrop = false;
+    m_MouseAtHexTextArea=false;
     m_DragCopyFlag = false;//default move
     if(m_MouseMotionTimer->IsRunning())
     {
@@ -10305,12 +10421,12 @@ void MadEdit::UpdateCursor(int mouse_x, int mouse_y)
                 if(m_DragCopyFlag)
                 {
                     wxSetCursor(DragCopyCursor);
-                    SetCursor(DragCopyCursor);
+                    //SetCursor(DragCopyCursor);
                 }
                 else
                 {
                     wxSetCursor(DragMoveCursor);
-                    SetCursor(DragMoveCursor);
+                    //SetCursor(DragMoveCursor);
                 }
             }
             else
@@ -10334,12 +10450,12 @@ void MadEdit::UpdateCursor(int mouse_x, int mouse_y)
                 if(m_DragCopyFlag)
                 {
                     wxSetCursor(DragCopyCursor);
-                    SetCursor(DragCopyCursor);
+                    //SetCursor(DragCopyCursor);
                 }
                 else
                 {
                     wxSetCursor(DragMoveCursor);
-                    SetCursor(DragMoveCursor);
+                    //SetCursor(DragMoveCursor);
                 }
             }
             else

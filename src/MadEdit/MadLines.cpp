@@ -4031,7 +4031,7 @@ void MadLineList::ClearAllBookmarks()
 
 MadLineIterator MadLineList::erase( MadLineIterator position )
 {
-    // using remove() is simpler, but we plan more sophisticated bookmars later
+    // using remove() is simpler, but we plan more sophisticated bookmarks later
     MadBookmarkIterator found = find( m_BookmarkList.begin(), m_BookmarkList.end(), position );
     if ( found != m_BookmarkList.end() )
         m_BookmarkList.erase( found );

@@ -39,7 +39,7 @@
 
 ////Dialog Style Start
 #undef MadReplaceDialog_STYLE
-#define MadReplaceDialog_STYLE wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxDIALOG_NO_PARENT | wxCLOSE_BOX
+#define MadReplaceDialog_STYLE wxCAPTION | wxSYSTEM_MENU | wxDIALOG_NO_PARENT | wxCLOSE_BOX
 ////Dialog Style End
 
 class MadEdit;

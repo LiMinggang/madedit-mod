@@ -36,7 +36,7 @@
 
 ////Dialog Style Start
 #undef MadNumberDlg_STYLE
-#define MadNumberDlg_STYLE wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxDIALOG_NO_PARENT | wxCLOSE_BOX
+#define MadNumberDlg_STYLE wxCAPTION | wxSYSTEM_MENU | wxDIALOG_NO_PARENT | wxCLOSE_BOX
 ////Dialog Style End
 
 #define NUMBERING_MAX_CHARS 512

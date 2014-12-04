@@ -72,7 +72,7 @@ if test "x$WX_LIBS" != "x"; then
 fi
 
 AM_OPTIONS_WXCONFIG
-AM_PATH_WXCONFIG(2.8.0, wxWin=1, [net,base,core,aui])
+AM_PATH_WXCONFIG(2.8.0, wxWin=1, , [std, net,aui])
 if test "$wxWin" != 1; then
    AC_MSG_ERROR([
            wxWidgets must be installed on your system

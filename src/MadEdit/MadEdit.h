@@ -36,6 +36,20 @@ using std::shared_ptr;
 #include "MadUndo.h"
 #include "ucs4_t.h"
 
+#if defined(_DEBUG) && defined(__WXMSW__)
+#include <Windows.h>
+#include <iostream>
+#include <sstream>
+
+#define DBOUT( s )            \
+{                             \
+   std::wostringstream os_;    \
+   os_ << s;                   \
+   OutputDebugStringW( os_.str().c_str() );  \
+}
+#else
+#define DBOUT( s )
+#endif
 
 enum { ID_VSCROLLBAR=19876, ID_HSCROLLBAR };
 
@@ -276,6 +290,8 @@ private:
     bool            m_Selection;
     MadCaretPos     m_SelectionPos1, m_SelectionPos2;
     MadCaretPos     *m_SelectionBegin, *m_SelectionEnd;
+    bool            m_SelectionStart;
+    wxFileOffset    m_SelectionStartPos;
 
     //hacking for drag&drop
     bool            m_DragDrop;
@@ -354,7 +370,7 @@ private:
     bool            m_InsertMode;
     MadCaretType    m_CaretType;
 
-    bool            m_MouseLeftDown, m_MouseLeftDoubleClick;
+    bool            m_MouseLeftDown, m_MouseLeftDoubleClick, m_MouseInWindow;
     int             m_DoubleClickX, m_DoubleClickY;
     int             m_LeftClickX, m_LeftClickY;     // for singleline & setfocus
     bool            m_MouseAtHexTextArea;
@@ -364,6 +380,7 @@ private:
     bool            m_MouseSelectToCopy;
     bool            m_MouseSelectToCopyWithCtrlKey; // enable or disable when pressing Ctrl key
     bool            m_MiddleMouseToPaste;
+    bool            m_AutoFillColumnPaste;
 
     wxBitmap        *m_HexDigitBitmap;
     wxDC            *m_HexDigitDC;    // temp dc, must set it on OnPaint()
@@ -397,7 +414,8 @@ private:
 
     wxMilliClock_t m_lastDoubleClick;
     shared_ptr<wxSpellCheckEngineInterface> m_SpellCheckerPtr;
-    bool            m_SpellCheck;
+    bool           m_SpellCheck;
+    bool           m_BookmarkInSearch;
 
 #ifdef __WXMSW__
     bool m_IsWin98;
@@ -758,7 +776,10 @@ public: // basic functions
 
     bool GetMiddleMouseToPaste() { return m_MiddleMouseToPaste; }
     void SetMiddleMouseToPaste(bool value) { m_MiddleMouseToPaste=value; }
-
+ 
+     bool GetAutoFillColumnPaste() { return m_AutoFillColumnPaste; }
+     void SetAutoFillColumnPaste(bool value) { m_AutoFillColumnPaste=value; }
+ 
     int GetMaxWordWrapWidth();
     int GetUCharWidth(ucs4_t uc);
     int GetHexUCharWidth(ucs4_t uc);
@@ -848,9 +869,11 @@ public: // basic functions
                         MadNumberFormat fmt, MadNumberAlign align, bool zeroPad);
 
     void ColumnAlign();
-
     void HighlightWords();
-
+    void CopyBookmarkedLines();
+    void CutDelBookmarkedLines(bool copyLines = false);
+    void DeleteUnmarkedLines();
+    void ReplaceBookmarkedLines();
     void SelectAll();
     void CutToClipboard();
     void CopyToClipboard();
@@ -942,7 +965,9 @@ public: // basic functions
     void ClearAllBookmarks();
     bool HasBookMark() {return m_Lines->m_LineList.HasBookMark();};
     //----------
-
+    void SetBookmarkInSearch(bool bookmark){m_BookmarkInSearch = bookmark;}
+    bool IsSelecting() {return m_SelectionStart;}
+    void StartEndSelction();
 public: // advanced functions
     void ConvertEncoding(const wxString &newenc, MadConvertEncodingFlag flag);
     void ConvertChinese(MadConvertEncodingFlag flag);
@@ -960,10 +985,14 @@ public: // advanced functions
     void ToUpperCase();
     void ToLowerCase();
     void InvertCase();
+    void Capitalize();
     void ToHalfWidth(bool ascii=true, bool japanese=true, bool korean=true, bool other=true);
     void ToFullWidth(bool ascii=true, bool japanese=true, bool korean=true, bool other=true);
 
     void TrimTrailingSpaces();
+    void DeleteEmptyLines();
+    void DeleteEmptyLinesWithSpaces();
+    void JoinLines();
 
     // startline<0 : sort all lines; otherwise sort [beginline, endline]
     void SortLines(MadSortFlags flags, int beginline, int endline);
@@ -978,6 +1007,7 @@ public: // advanced functions
 
     void CopyAsHexString(bool withSpace);
 
+    void CopyRevertHex(wxString &delimiters);
 
     void WordCount(bool selection, int &wordCount, int &charCount, int &spaceCount,
                    int &halfWidthCount, int &fullWidthCount, int &lineCount,

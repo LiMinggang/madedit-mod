@@ -34,6 +34,11 @@
 MadFindInFilesDialog *g_FindInFilesDialog=NULL;
 extern wxStatusBar *g_StatusBar;
 extern void DisplayFindAllResult(vector<wxFileOffset> &begpos, vector<wxFileOffset> &endpos, MadEdit *madedit, bool expandresults = true, OnProgressUpdatePtr updater = NULL);
+extern int MadMessageBox(const wxString& message,
+                             const wxString& caption = wxMessageBoxCaptionStr,
+                             long style = wxOK | wxCENTRE,
+                             wxWindow *parent = NULL,
+                             int x = wxDefaultCoord, int y = wxDefaultCoord);
 
 //----------------------------------------------------------------------------
 // MadFindInFilesDialog
@@ -610,19 +615,18 @@ public:
         : filename(fn), pageid(pid), bpos(b), epos(e) {}
 };
 
+extern wxProgressDialog *g_SearchProgressDialog;
+extern bool OnSearchProgressUpdate(int value, const wxString &newmsg=wxEmptyString, bool *skip=NULL);
 void MadFindInFilesDialog::FindReplaceInFiles(bool bReplace)
 {
     //wxLogNull nolog;
-
-    int ResultCount=0;
-
     const int max=1000;
     fmtmsg1 = _("Found %d file(s) matched the filters...");
     fmtmsg1 += wxT("                                        \n");
     wxProgressDialog dialog(this->GetTitle(),
                             wxString::Format(fmtmsg1, 0),
                             max,    // range
-                            this,   // parent
+                            g_MainFrame,   // parent
                             wxPD_CAN_ABORT |
                             wxPD_AUTO_HIDE |
                             wxPD_APP_MODAL);
@@ -647,7 +651,7 @@ void MadFindInFilesDialog::FindReplaceInFiles(bool bReplace)
         if(!wxDirExists(str))
         {
             dialog.Update(max);
-            wxMessageBox(_("The selected directory does not exist."), wxT("MadEdit"), wxOK|wxICON_ERROR);
+            MadMessageBox(_("The selected directory does not exist."), wxT("MadEdit"), wxOK|wxICON_ERROR);
             return;
         }
         m_RecentFindDir->AddFileToHistory(str);
@@ -739,7 +743,11 @@ void MadFindInFilesDialog::FindReplaceInFiles(bool bReplace)
         wxString fmt(_("Processing %d of %d files..."));
         vector<wxFileOffset> begpos, endpos;
         MadFileNameList::iterator fnit=g_FileNameList.begin();
-        bool cont = true;
+        bool cont = true, hide_process = false;
+        Show(false);
+
+        begpos.reserve(128*1024);
+        endpos.reserve(128*1024);
         for(size_t i = 0; i < totalfiles && cont; ++i)
         {
             MadEdit *madedit = NULL;
@@ -835,26 +843,37 @@ void MadFindInFilesDialog::FindReplaceInFiles(bool bReplace)
                 if(ok<0) break;
             }
 
-            DisplayFindAllResult(begpos, endpos, madedit, false);
+            if(ok > 2000)
+            {
+                wxString msg = _("Found %d matched texts...");
+                msg += wxT("                                \n");
+                wxProgressDialog tmpdialog(_("Preparing Results"),
+                                            wxString::Format(msg, 0),
+                                            ok,    // range
+                                            g_MainFrame,   // parent
+                                            wxPD_CAN_ABORT |
+                                            wxPD_AUTO_HIDE |
+                                            wxPD_APP_MODAL);
+                g_SearchProgressDialog = &tmpdialog;
+                dialog.Show(false);
+                DisplayFindAllResult(begpos, endpos, madedit, false, &OnSearchProgressUpdate);
+
+                g_SearchProgressDialog->Update(ok);
+                g_SearchProgressDialog = NULL;
+
+                dialog.Show(true);
+            }
+            else
+                DisplayFindAllResult(begpos, endpos, madedit, false);
         }
         
         if(tempedit) delete tempedit;
     }
 
     dialog.Update(max);
+    Show(true);
     g_ProgressDialog=NULL;
     g_FileNameList.clear();
-
-    if(!ResultCount)
-    {
-        g_StatusBar->SetStatusText( _("Cannot find the matched string"), 0 );
-    }
-    else
-    {
-        wxString smsg;
-        smsg.Printf(_("%d results"), ResultCount);
-        g_StatusBar->SetStatusText(smsg, 0 );
-    }
 }
 
 /*

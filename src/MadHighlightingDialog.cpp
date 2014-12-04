@@ -22,7 +22,11 @@
 #define new new(_NORMAL_BLOCK ,__FILE__, __LINE__)
 #endif
 
-
+extern int MadMessageBox(const wxString& message,
+                             const wxString& caption = wxMessageBoxCaptionStr,
+                             long style = wxOK | wxCENTRE,
+                             wxWindow *parent = NULL,
+                             int x = wxDefaultCoord, int y = wxDefaultCoord);
 extern void ApplySyntaxAttributes(MadSyntax *syn);
 
 MadHighlightingDialog *g_HighlightingDialog=NULL;
@@ -987,7 +991,7 @@ void MadHighlightingDialog::WxButtonLoadClick(wxCommandEvent& event)
     }
     else
     {
-        wxMessageBox(_("Cannot load this scheme."), wxT("MadEdit"), wxICON_WARNING|wxOK);
+        MadMessageBox(_("Cannot load this scheme."), wxT("MadEdit"), wxICON_WARNING|wxOK);
     }
 }
 
@@ -1010,7 +1014,7 @@ void MadHighlightingDialog::WxButtonSaveClick(wxCommandEvent& event)
     }
     else
     {
-        wxMessageBox(_("Cannot save to the scheme."), wxT("MadEdit"), wxICON_WARNING|wxOK);
+        MadMessageBox(_("Cannot save to the scheme."), wxT("MadEdit"), wxICON_WARNING|wxOK);
     }
 }
 
@@ -1032,6 +1036,6 @@ void MadHighlightingDialog::WxButtonDeleteClick(wxCommandEvent& event)
     }
     else
     {
-        wxMessageBox(_("Cannot delete this scheme."), wxT("MadEdit"), wxICON_WARNING|wxOK);
+        MadMessageBox(_("Cannot delete this scheme."), wxT("MadEdit"), wxICON_WARNING|wxOK);
     }
 }

@@ -444,7 +444,6 @@ void MadFileAssociationDialog::CreateGUIControls()
     ResizeItem(WxBoxSizer6, WxStaticText1, 2, 2);
     ResizeItem(WxBoxSizer8, WxStaticText2, 2, 2);
 
-
     SetDefaultItem(WxButtonCancel);
     WxButtonCancel->SetFocus();
 }
