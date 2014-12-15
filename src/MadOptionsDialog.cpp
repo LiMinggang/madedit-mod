@@ -115,12 +115,6 @@ BEGIN_EVENT_TABLE(MadOptionsDialog,wxDialog)
 	
 	EVT_CLOSE(MadOptionsDialog::MadOptionsDialogClose)
 	EVT_ACTIVATE(MadOptionsDialog::MadOptionsDialogActivate)
-	EVT_MENU(ID_MNU_MENUITEM1_1110 , MadOptionsDialog::PrintMarkClick)
-	EVT_MENU(ID_MNU___P__PATHNAME_1111 , MadOptionsDialog::PrintMarkClick)
-	EVT_MENU(ID_MNU___N_PAGE_NUMBER_1113 , MadOptionsDialog::PrintMarkClick)
-	EVT_MENU(ID_MNU___S__TOTALPAGES_1114 , MadOptionsDialog::PrintMarkClick)
-	EVT_MENU(ID_MNU___D__DATE_1116 , MadOptionsDialog::PrintMarkClick)
-	EVT_MENU(ID_MNU___T__TIME_1117 , MadOptionsDialog::PrintMarkClick)
 	EVT_MENU(ID_MNU___Y__M__D_I__M__S_P_2007_02_2408_30_55AM_1191 , MadOptionsDialog::DateTimeMarkClick)
 	EVT_MENU(ID_MNU___D__M__Y_24_02_2007_1192 , MadOptionsDialog::DateTimeMarkClick)
 	EVT_MENU(ID_MNU___A__D_B_Y_H__M__S_Z_RFC822TIMESTAMP_1195 , MadOptionsDialog::DateTimeMarkClick)
@@ -146,6 +140,12 @@ BEGIN_EVENT_TABLE(MadOptionsDialog,wxDialog)
 	EVT_MENU(ID_MNU___Y_YEARWITHCENTURY_ASDECIMALNUMBER_1189 , MadOptionsDialog::DateTimeMarkClick)
 	EVT_MENU(ID_MNU___Z_TIME_ZONENAME_1193 , MadOptionsDialog::DateTimeMarkClick)
 	EVT_MENU(ID_MNU___Z_TIME_ZONEABBREVIATION_1194 , MadOptionsDialog::DateTimeMarkClick)
+	EVT_MENU(ID_MNU_MENUITEM1_1110 , MadOptionsDialog::PrintMarkClick)
+	EVT_MENU(ID_MNU___P__PATHNAME_1111 , MadOptionsDialog::PrintMarkClick)
+	EVT_MENU(ID_MNU___N_PAGE_NUMBER_1113 , MadOptionsDialog::PrintMarkClick)
+	EVT_MENU(ID_MNU___S__TOTALPAGES_1114 , MadOptionsDialog::PrintMarkClick)
+	EVT_MENU(ID_MNU___D__DATE_1116 , MadOptionsDialog::PrintMarkClick)
+	EVT_MENU(ID_MNU___T__TIME_1117 , MadOptionsDialog::PrintMarkClick)
 	EVT_BUTTON(ID_WXBUTTONCANCEL,MadOptionsDialog::WxButtonCancelClick)
 	EVT_BUTTON(ID_WXBUTTONOK,MadOptionsDialog::WxButtonOKClick)
 //	EVT_BUTTON(ID_WXBITMAP_DIR,MadOptionsDialog::WxButtonBitmapDirClick)
@@ -447,6 +447,11 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxBoxSizer28->Add(WxCheckBoxMouseSelectToCopy, 0, wxALIGN_LEFT | wxALL, 2);
     SET_CONTROLPARENT(WxCheckBoxMouseSelectToCopy);
 
+	WxCheckBoxCtrlWithMouseToSelect = new wxCheckBox(WxNoteBookPage2, ID_WXCHECKBOXCTRLWITHMOUSE, _("when pressing Ctrl key"), wxPoint(254, 3), wxSize(136, 17), 0, wxDefaultValidator, wxT("WxCheckBoxCtrlWithMouseToSelect"));
+	WxCheckBoxCtrlWithMouseToSelect->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
+	WxBoxSizer28->Add(WxCheckBoxCtrlWithMouseToSelect, 0, wxALIGN_CENTER | wxALL, 2);
+	SET_CONTROLPARENT(WxCheckBoxCtrlWithMouseToSelect);
+
 	WxCheckBoxMiddleMouseToPaste = new wxCheckBox(WxNoteBookPage2, ID_WXCHECKBOXMIDDLEMOUSETOPASTE, _("Paste text from clipboard when pressing middle mouse button"), wxPoint(24, 98), wxSize(480, 20), 0, wxDefaultValidator, wxT("WxCheckBoxMiddleMouseToPaste"));
 	WxCheckBoxMiddleMouseToPaste->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer12->Add(WxCheckBoxMiddleMouseToPaste, 0, wxALIGN_LEFT | wxALL, 2);
@@ -482,22 +487,7 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxStaticBoxSizer1->Add(WxCheckBoxPrintLineNumber, 0, wxALIGN_LEFT | wxALL, 1);
     SET_CONTROLPARENT(WxCheckBoxPrintLineNumber);
 
-	WxCheckBoxPrintEndOfLine = new wxCheckBox(WxNoteBookPage3, ID_WXCHECKBOXPRINTENDOFLINE, _("Print End of Line"), wxPoint(6, 54), wxSize(150, 17), 0, wxDefaultValidator, wxT("WxCheckBoxPrintEndOfLine"));
-	WxCheckBoxPrintEndOfLine->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
-	WxStaticBoxSizer1->Add(WxCheckBoxPrintEndOfLine, 0, wxALIGN_LEFT | wxALL, 1);
-    SET_CONTROLPARENT(WxCheckBoxPrintEndOfLine);
-
-	WxCheckBoxPrintTabChar = new wxCheckBox(WxNoteBookPage3, ID_WXCHECKBOXPRINTTABCHAR, _("Print Tab Char"), wxPoint(6, 73), wxSize(150, 17), 0, wxDefaultValidator, wxT("WxCheckBoxPrintTabChar"));
-	WxCheckBoxPrintTabChar->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
-	WxStaticBoxSizer1->Add(WxCheckBoxPrintTabChar, 0, wxALIGN_LEFT | wxALL, 1);
-    SET_CONTROLPARENT(WxCheckBoxPrintTabChar);
-
-	WxCheckBoxPrintSpaceChar = new wxCheckBox(WxNoteBookPage3, ID_WXCHECKBOXPRINTSPACECHAR, _("Print Space Char"), wxPoint(6, 92), wxSize(150, 17), 0, wxDefaultValidator, wxT("WxCheckBoxPrintSpaceChar"));
-	WxCheckBoxPrintSpaceChar->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
-	WxStaticBoxSizer1->Add(WxCheckBoxPrintSpaceChar, 0, wxALIGN_LEFT | wxALL, 1);
-    SET_CONTROLPARENT(WxCheckBoxPrintSpaceChar);
-
-	wxStaticBox* WxStaticBoxSizer2_StaticBoxObj = new wxStaticBox(WxNoteBookPage3, wxID_ANY, _("Hex Mode"));
+	wxStaticBox* WxStaticBoxSizer2_StaticBoxObj = new wxStaticBox(WxNoteBookPage3, wxID_ANY, wxT("Hex Mode"));
 	WxStaticBoxSizer2 = new wxStaticBoxSizer(WxStaticBoxSizer2_StaticBoxObj, wxHORIZONTAL);
 	WxBoxSizer15->Add(WxStaticBoxSizer2, 0, wxALIGN_LEFT | wxALL, 4);
 
@@ -810,6 +800,16 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxBoxSizer2->Add(WxButtonCancel, 0, wxALIGN_CENTER | wxALL, 5);
     SET_CONTROLPARENT(WxButtonCancel);
 
+	WxPopupMenuPrintMark = new wxMenu(wxT(""));
+	WxPopupMenuPrintMark->Append(ID_MNU_MENUITEM1_1110, _("[%f] &File Name"), wxT(""), wxITEM_NORMAL);
+	WxPopupMenuPrintMark->Append(ID_MNU___P__PATHNAME_1111, _("[%p] &Path Name"), wxT(""), wxITEM_NORMAL);
+	WxPopupMenuPrintMark->AppendSeparator();
+	WxPopupMenuPrintMark->Append(ID_MNU___N_PAGE_NUMBER_1113, _("[%n] Page &Number"), wxT(""), wxITEM_NORMAL);
+	WxPopupMenuPrintMark->Append(ID_MNU___S__TOTALPAGES_1114, _("[%s] Total Page&s"), wxT(""), wxITEM_NORMAL);
+	WxPopupMenuPrintMark->AppendSeparator();
+	WxPopupMenuPrintMark->Append(ID_MNU___D__DATE_1116, _("[%d] &Date"), wxT(""), wxITEM_NORMAL);
+	WxPopupMenuPrintMark->Append(ID_MNU___T__TIME_1117, _("[%t] &Time"), wxT(""), wxITEM_NORMAL);
+
 	WxPopupMenuDateTimeMark = new wxMenu(wxT(""));
 	WxPopupMenuDateTimeMark->Append(ID_MNU___Y__M__D_I__M__S_P_2007_02_2408_30_55AM_1191, _("[%Y/%m/%d %I:%M:%S %p] 2007/02/24 08:30:55 AM"), wxT(""), wxITEM_NORMAL);
 	WxPopupMenuDateTimeMark->Append(ID_MNU___D__M__Y_24_02_2007_1192, wxT("[%d/%m/%Y] 24/02/2007"), wxT(""), wxITEM_NORMAL);
@@ -838,20 +838,25 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxPopupMenuDateTimeMark->Append(ID_MNU___Z_TIME_ZONENAME_1193, _("[%z] Time-zone name"), wxT(""), wxITEM_NORMAL);
 	WxPopupMenuDateTimeMark->Append(ID_MNU___Z_TIME_ZONEABBREVIATION_1194, _("[%Z] Time-zone abbreviation"), wxT(""), wxITEM_NORMAL);
 
-	WxPopupMenuPrintMark = new wxMenu(wxT(""));
-	WxPopupMenuPrintMark->Append(ID_MNU_MENUITEM1_1110, _("[%f] &File Name"), wxT(""), wxITEM_NORMAL);
-	WxPopupMenuPrintMark->Append(ID_MNU___P__PATHNAME_1111, _("[%p] &Path Name"), wxT(""), wxITEM_NORMAL);
-	WxPopupMenuPrintMark->AppendSeparator();
-	WxPopupMenuPrintMark->Append(ID_MNU___N_PAGE_NUMBER_1113, _("[%n] Page &Number"), wxT(""), wxITEM_NORMAL);
-	WxPopupMenuPrintMark->Append(ID_MNU___S__TOTALPAGES_1114, _("[%s] Total Page&s"), wxT(""), wxITEM_NORMAL);
-	WxPopupMenuPrintMark->AppendSeparator();
-	WxPopupMenuPrintMark->Append(ID_MNU___D__DATE_1116, _("[%d] &Date"), wxT(""), wxITEM_NORMAL);
-	WxPopupMenuPrintMark->Append(ID_MNU___T__TIME_1117, _("[%t] &Time"), wxT(""), wxITEM_NORMAL);
+	WxCheckBoxPrintBookmark = new wxCheckBox(WxNoteBookPage3, ID_WXCHECKBOXPRINTBOOKMARK, _("Print Bookmark"), wxPoint(6, 54), wxSize(150, 17), 0, wxDefaultValidator, wxT("WxCheckBoxPrintBookmark"));
+	WxCheckBoxPrintBookmark->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
+	WxStaticBoxSizer1->Add(WxCheckBoxPrintBookmark, 0, wxALIGN_LEFT | wxALL, 1);
+    SET_CONTROLPARENT(WxCheckBoxPrintBookmark);
 
-	WxCheckBoxCtrlWithMouseToSelect = new wxCheckBox(WxNoteBookPage2, ID_WXCHECKBOXCTRLWITHMOUSE, _("when pressing Ctrl key"), wxPoint(252, 3), wxSize(136, 17), 0, wxDefaultValidator, wxT("WxCheckBoxCtrlWithMouseToSelect"));
-	WxCheckBoxCtrlWithMouseToSelect->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
-	WxBoxSizer28->Add(WxCheckBoxCtrlWithMouseToSelect, 0, wxALIGN_CENTER | wxALL, 2);
-	SET_CONTROLPARENT(WxCheckBoxCtrlWithMouseToSelect);
+	WxCheckBoxPrintEndOfLine = new wxCheckBox(WxNoteBookPage3, ID_WXCHECKBOXPRINTENDOFLINE, _("Print End of Line"), wxPoint(6, 73), wxSize(150, 17), 0, wxDefaultValidator, wxT("WxCheckBoxPrintEndOfLine"));
+	WxCheckBoxPrintEndOfLine->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
+	WxStaticBoxSizer1->Add(WxCheckBoxPrintEndOfLine, 0, wxALIGN_LEFT | wxALL, 1);
+    SET_CONTROLPARENT(WxCheckBoxPrintEndOfLine);
+
+	WxCheckBoxPrintTabChar = new wxCheckBox(WxNoteBookPage3, ID_WXCHECKBOXPRINTTABCHAR, _("Print Tab Char"), wxPoint(6, 92), wxSize(150, 17), 0, wxDefaultValidator, wxT("WxCheckBoxPrintTabChar"));
+	WxCheckBoxPrintTabChar->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
+	WxStaticBoxSizer1->Add(WxCheckBoxPrintTabChar, 0, wxALIGN_LEFT | wxALL, 1);
+    SET_CONTROLPARENT(WxCheckBoxPrintTabChar);
+
+	WxCheckBoxPrintSpaceChar = new wxCheckBox(WxNoteBookPage3, ID_WXCHECKBOXPRINTSPACECHAR, _("Print Space Char"), wxPoint(6, 111), wxSize(150, 17), 0, wxDefaultValidator, wxT("WxCheckBoxPrintSpaceChar"));
+	WxCheckBoxPrintSpaceChar->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
+	WxStaticBoxSizer1->Add(WxCheckBoxPrintSpaceChar, 0, wxALIGN_LEFT | wxALL, 1);
+    SET_CONTROLPARENT(WxCheckBoxPrintSpaceChar);
 
 	SetTitle(_("Options"));
 	SetIcon(wxNullIcon);
@@ -1107,7 +1112,7 @@ void MadOptionsDialog::LoadOptions(void)
     WxComboBoxEncoding->SetValue(ss);
 
 #ifdef __WXMSW__
-    wxRegKey *pRegKey = new wxRegKey(g_MadEditRegkeyPath + wxT("*\\shell\\MadEdit\\command"));
+    wxRegKey *pRegKey = new wxRegKey(g_MadEditRegkeyPath + wxT("*\\shell\\MadEdit-Mod\\command"));
     if(pRegKey->Exists())
     {
         wxString str;
@@ -1179,6 +1184,9 @@ void MadOptionsDialog::LoadOptions(void)
 
     cfg->Read(wxT("PrintLineNumber"), &bb);
     WxCheckBoxPrintLineNumber->SetValue(bb);
+
+    cfg->Read(wxT("PrintBookmark"), &bb);
+    WxCheckBoxPrintBookmark->SetValue(bb);
 
     cfg->Read(wxT("PrintEndOfLine"), &bb);
     WxCheckBoxPrintEndOfLine->SetValue(bb);
@@ -1497,7 +1505,7 @@ void MadOptionsDialog::WxButtonAddKeyClick(wxCommandEvent& event)
         {
             /*
             wxMessageDialog dlg(this, key +wxT(": ") +WxEditKeyHint->GetValue() +wxT("\n\n") + wxString(_("Do you want to reassign this key?")),
-                wxT("MadEdit"), wxYES_NO|wxICON_QUESTION );
+                wxT("MadEdit-Mod"), wxYES_NO|wxICON_QUESTION );
             if(dlg.ShowModal()!=wxID_YES)
             {
                 return;

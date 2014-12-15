@@ -533,10 +533,6 @@ namespace mad_python
             return (int)g_ActiveMadEdit->GetWordWrapMode();
         }
 
-        void SetDisplayLineNumber(bool value)
-        {
-            g_ActiveMadEdit->SetDisplayLineNumber(value);
-        }
         void SetShowEndOfLine(bool value)
         {
             g_ActiveMadEdit->SetShowEndOfLine(value);
@@ -553,10 +549,21 @@ namespace mad_python
         {
             g_ActiveMadEdit->SetMarkActiveLine(value);
         }
-
+        void SetDisplayLineNumber(bool value)
+        {
+            g_ActiveMadEdit->SetDisplayLineNumber(value);
+        }
         bool GetDisplayLineNumber()
         {
             return g_ActiveMadEdit->GetDisplayLineNumber();
+        }
+        void SetDisplayBookmark(bool value)
+        {
+            g_ActiveMadEdit->SetDisplayBookmark(value);
+        }
+        bool GetDisplayBookmark()
+        {
+            return g_ActiveMadEdit->GetDisplayBookmark();
         }
         bool GetShowEndOfLine()
         {
@@ -1015,6 +1022,9 @@ namespace mad_python
 
             if(ok>=0 && showresults)
             {
+                static wxString text(_("Search Results"));
+                int pid = g_MainFrame->m_InfoNotebook->GetPageIndex(g_MainFrame->m_FindInFilesResults);
+                g_MainFrame->m_InfoNotebook->SetPageText(pid, text);
                 DisplayFindAllResult(begpos, endpos, madedit);
             }
             
@@ -1035,6 +1045,9 @@ namespace mad_python
 
             if(ok>=0 && showresults)
             {
+                static wxString text(_("Search Results"));
+                int pid = g_MainFrame->m_InfoNotebook->GetPageIndex(g_MainFrame->m_FindInFilesResults);
+                g_MainFrame->m_InfoNotebook->SetPageText(pid, text);
                 DisplayFindAllResult(begpos, endpos, madedit);
             }
 

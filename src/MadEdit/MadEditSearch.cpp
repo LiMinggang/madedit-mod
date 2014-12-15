@@ -711,7 +711,7 @@ MadSearchResult MadEdit::Search(/*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadCa
         catch(regex_error &)
         {
             wxMessageDialog dlg(this, wxString::Format(_("'%s' is not a valid regular expression.(Or empty (), [] or {})"), text.c_str()),
-                                wxT("MadEdit"), wxOK|wxICON_ERROR );
+                                wxT("MadEdit-Mod"), wxOK|wxICON_ERROR );
             dlg.SetOKLabel(wxMessageDialog::ButtonLabel(_("&Ok")));
             dlg.ShowModal();
             return SR_EXPR_ERROR;
@@ -837,7 +837,7 @@ MadSearchResult MadEdit::Search(/*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadCa
     catch(regex_error)
     {
         wxMessageDialog dlg(this, _("Catched a exception of 'regex_error'.\nMaybe the regular expression is invalid."),
-                            wxT("MadEdit"), wxOK|wxICON_ERROR );
+                            wxT("MadEdit-Mod"), wxOK|wxICON_ERROR );
         dlg.SetOKLabel(wxMessageDialog::ButtonLabel(_("&Ok")));
         dlg.ShowModal();
         return SR_EXPR_ERROR;
@@ -929,7 +929,7 @@ MadSearchResult MadEdit::Replace(ucs4string &out, const MadCaretPos &beginpos, c
     catch(regex_error)
     {
         wxMessageDialog dlg(this, wxString::Format(_("'%s' is not a valid regular expression."), expr.c_str()),
-                            wxT("MadEdit"), wxOK|wxICON_ERROR );
+                            wxT("MadEdit-Mod"), wxOK|wxICON_ERROR );
         dlg.SetOKLabel(wxMessageDialog::ButtonLabel(_("&Ok")));
         dlg.ShowModal();
         return SR_EXPR_ERROR;
@@ -980,7 +980,7 @@ MadSearchResult MadEdit::Replace(ucs4string &out, const MadCaretPos &beginpos, c
     catch(regex_error)
     {
         wxMessageDialog dlg(this, wxString::Format(_("The format of '%s' is invalid."), fmt.c_str()),
-                            wxT("MadEdit"), wxOK|wxICON_ERROR );
+                            wxT("MadEdit-Mod"), wxOK|wxICON_ERROR );
         dlg.SetOKLabel(wxMessageDialog::ButtonLabel(_("&Ok")));
         dlg.ShowModal();
         return SR_EXPR_ERROR;

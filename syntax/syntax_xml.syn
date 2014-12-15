@@ -60,7 +60,7 @@ LineNumberBgColor=A0A0A0
 LineNumberStyle=
 
 ActiveLineColor=Fuchsia
-BookmarkColor=C0FFFF
+BookmarkColor=0000FF
 
 [1.Declearation]
 Color=Black
@@ -74,3 +74,8 @@ Style=Bold
 InRange=1
 Keyword=CDATA ID IDREF IDREFS ENTITY ENTITIES NMTOKEN NMTOKENS
 
+[3.Spirent]
+Color=Black
+Style=Bold
+InRange=1
+Keyword=messageSet implements bitmap bitgroup bitvalue structure enumeration enumvalue property message returns parameters from to access

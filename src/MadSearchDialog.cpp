@@ -29,7 +29,7 @@ extern int MadMessageBox(const wxString& message,
 #include "../images/down.xpm"
 
 extern wxStatusBar *g_StatusBar;   // add: gogo, 19.09.2009
-
+extern MadRecentList * g_RecentFindText;
 MadSearchDialog *g_SearchDialog=NULL;
 extern void RecordAsMadMacro(MadEdit *, const wxString&);
 extern MadEdit *g_ActiveMadEdit;
@@ -211,7 +211,11 @@ void MadSearchDialog::CreateGUIControls(void)
 
     m_FindText=new MadEdit(this, ID_MADEDIT, wxPoint(0, 0), wxSize(400, bh));
     m_FindText->SetSingleLineMode(true);
-    m_FindText->SetEncoding(wxT("UTF-32LE"));
+
+    if(g_ActiveMadEdit)
+        m_FindText->SetEncoding(g_ActiveMadEdit->GetEncodingName());
+    else
+        m_FindText->SetEncoding(wxT("UTF-32LE"));
     m_FindText->SetFixedWidthMode(false);
     m_FindText->SetRecordCaretMovements(false);
     m_FindText->SetInsertSpacesInsteadOfTab(false);
@@ -258,8 +262,9 @@ void MadSearchDialog::CreateGUIControls(void)
     WxButtonClose->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MadSearchDialog::MadSearchDialogKeyDown));
 
 
-    m_RecentFindText=new MadRecentList(20, ID_RECENTFINDTEXT1, true);
+    m_RecentFindText=g_RecentFindText;//new MadRecentList(20, ID_RECENTFINDTEXT1, true);
     m_RecentFindText->UseMenu(WxPopupMenuRecentFindText);
+    m_RecentFindText->AddFilesToMenu();
 
     wxConfigBase *m_Config=wxConfigBase::Get(false);
     wxString oldpath=m_Config->GetPath();
@@ -276,9 +281,9 @@ void MadSearchDialog::CreateGUIControls(void)
     WxCheckBoxSearchThrEndOfFile->SetValue( bb );
     //--------
 
-    m_Config->SetPath(wxT("/RecentFindText"));
-    m_RecentFindText->Load(*m_Config);
-    m_Config->SetPath(oldpath);
+    //m_Config->SetPath(wxT("/RecentFindText"));
+    //m_RecentFindText->Load(*m_Config);
+    //m_Config->SetPath(oldpath);
 
     if(m_RecentFindText->GetCount()>0)
     {
@@ -873,7 +878,7 @@ void MadSearchDialog::WxButtonCountClick(wxCommandEvent& event)
     {
         wxString msg;
         msg.Printf(_("'%s' was found %d times."), text.c_str(), count);
-        MadMessageBox(msg, wxT("MadEdit"), wxOK);
+        MadMessageBox(msg, wxT("MadEdit-Mod"), wxOK);
     }
 }
 
@@ -1033,6 +1038,9 @@ void MadSearchDialog::WxButtonFindAllClick(wxCommandEvent& event)
 
             if(!WxCheckBoxBookmarkOnly->IsChecked())
             {
+                static wxString text(_("Search Results"));
+                int pid = g_MainFrame->m_InfoNotebook->GetPageIndex(g_MainFrame->m_FindInFilesResults);
+                g_MainFrame->m_InfoNotebook->SetPageText(pid, text);
                 DisplayFindAllResult(begpos, endpos, madedit, true, &OnSearchProgressUpdate);
             }
 
@@ -1043,6 +1051,9 @@ void MadSearchDialog::WxButtonFindAllClick(wxCommandEvent& event)
         {
             if(!WxCheckBoxBookmarkOnly->IsChecked())
             {
+                static wxString text(_("Search Results"));
+                int pid = g_MainFrame->m_InfoNotebook->GetPageIndex(g_MainFrame->m_FindInFilesResults);
+                g_MainFrame->m_InfoNotebook->SetPageText(pid, text);
                 DisplayFindAllResult(begpos, endpos, madedit, true);
             }
         }

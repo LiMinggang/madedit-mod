@@ -151,10 +151,12 @@ void MadFindInFilesDialog::CreateGUIControls(void)
 	WxButtonReplace = new wxButton(this, ID_WXBUTTONREPLACE, _("&Replace"), wxPoint(2, 34), wxSize(100, 28), 0, wxDefaultValidator, wxT("WxButtonReplace"));
 	WxButtonReplace->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer5->Add(WxButtonReplace, 0, wxALIGN_CENTER | wxALL, 2);
+    WxButtonReplace->Disable();
 
 	WxCheckBoxEnableReplace = new wxCheckBox(this, ID_WXCHECKBOXENABLEREPLACE, _("&Enable Replace"), wxPoint(2, 64), wxSize(100, 25), 0, wxDefaultValidator, wxT("WxCheckBoxEnableReplace"));
 	WxCheckBoxEnableReplace->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer5->Add(WxCheckBoxEnableReplace, 0, wxALIGN_CENTER | wxALL, 0);
+    WxCheckBoxEnableReplace->SetValue(false);
 
 	WxButtonClose = new wxButton(this, wxID_CANCEL, _("Close"), wxPoint(2, 91), wxSize(100, 28), 0, wxDefaultValidator, wxT("WxButtonClose"));
 	WxButtonClose->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
@@ -496,9 +498,8 @@ void MadFindInFilesDialog::MadFindInFilesDialogActivate(wxActivateEvent& event)
 
     if(event.GetActive())
     {
-        WxButtonReplace->Disable();
-        WxCheckBoxEnableReplace->SetValue(false);
-
+        //WxButtonReplace->Disable();
+        //WxCheckBoxEnableReplace->SetValue(false);
         bool bb;
         m_Config->Read(wxT("/MadEdit/SearchCaseSensitive"), &bb, false);
         WxCheckBoxCaseSensitive->SetValue(bb);
@@ -651,7 +652,7 @@ void MadFindInFilesDialog::FindReplaceInFiles(bool bReplace)
         if(!wxDirExists(str))
         {
             dialog.Update(max);
-            MadMessageBox(_("The selected directory does not exist."), wxT("MadEdit"), wxOK|wxICON_ERROR);
+            MadMessageBox(_("The selected directory does not exist."), wxT("MadEdit-Mod"), wxOK|wxICON_ERROR);
             return;
         }
         m_RecentFindDir->AddFileToHistory(str);

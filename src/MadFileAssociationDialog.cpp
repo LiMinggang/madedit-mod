@@ -124,7 +124,7 @@ bool DetectType(wxString type)
 void AddType(wxString type)
 {
     wxString value;
-    wxString madedit_type = wxString(wxT("MadEdit")) + type;
+    wxString madedit_type = wxString(wxT("MadEdit-Mod")) + type;
 
     wxRegKey *pRegKey = new wxRegKey(g_MadEditRegkeyPath + type);
     if(!pRegKey->Exists()) pRegKey->Create();
@@ -187,7 +187,7 @@ void RemoveType(wxString type)
     if(type.IsEmpty()) return;
 
     wxString value, old_default;
-    wxString madedit_type = wxString(wxT("MadEdit")) + type;
+    wxString madedit_type = wxString(wxT("MadEdit-Mod")) + type;
 
     wxRegKey *pRegKey = new wxRegKey(g_MadEditRegkeyPath + type);
     if(pRegKey->Exists())

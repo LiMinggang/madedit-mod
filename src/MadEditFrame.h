@@ -41,11 +41,10 @@ using boost::shared_ptr;
 using std::shared_ptr;
 #endif
 
-////Dialog Style Start
+////Frame Style Start
 #undef MadEditFrame_STYLE
 #define MadEditFrame_STYLE wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxCLOSE_BOX
-////Dialog Style End
-
+////Frame Style End
 
 class wxMadAuiNotebook;
 class wxAuiNotebookEvent;
@@ -53,6 +52,18 @@ class MadEdit;
 class MadTreeCtrl;
 class MadRecentList;
 class wxSpellCheckEngineInterface;
+
+enum MadToolBarType
+{
+    tbSTANDARD = 0,
+    tbEDITOR,
+    tbSEARCHREPLACE,
+    tbTEXTVIEW,
+    tbEDITMODE,
+    tbMACRO,
+    tbQSEARCH,
+    tbMAX,
+};
 
 class MadEditFrame : public wxFrame
 {
@@ -70,7 +81,8 @@ public:
   //after the block.
   ////GUI Control Declaration Start
 		wxMenuBar *WxMenuBar1;
-		wxToolBar *WxToolBar1;
+		wxAuiToolBar *WxToolBar[tbMAX];
+		wxAuiToolBar *m_QuickSeachBar;
 		wxStatusBar *WxStatusBar1;
   ////GUI Control Declaration End
 public:
@@ -78,31 +90,44 @@ public:
     //change your old form code that are based on the #define control ids.
 	//It may replace a numeric value in the enums names.
 	enum {
+		ID_RECENTFINDTEXT1=1501,    // must be the same with MadSearchDialog
+		ID_RECENTFINDTEXT20=1520,
 ////GUI Enum Control ID Start
-			ID_WXTOOLBAR1 = 1005,
-			ID_WXSTATUSBAR1 = 1003,
+			ID_WXSTATUSBAR1 = 3003,
+			ID_WXTOOLBAR1 = 3005, //NextValue should be (ID_WXTOOLBAR1+tbTOOLBAR_MAX)
 ////GUI Enum Control ID End
 
-    ID_NOTEBOOK, // for wxAuiNotebook m_Notebook
+    ID_NOTEBOOK = (ID_WXTOOLBAR1+tbMAX), // for wxAuiNotebook m_Notebook
     ID_OUTPUTNOTEBOOK,
     ID_FINDINFILESRESULTS,
-
+    //ID_WXTOOLBARQUICKSEARCH,
+    ID_QUICKSEARCH,
+    ID_QUICKSEARCHWHOLEWORD,
+    ID_QUICKSEARCHREGEX,
+    ID_QUICKSEARCHCASESENSITIVE,
+    
     ID_DUMMY_VALUE_ //Dont Delete this DummyValue
    }; //End of Enum
 
 public:
     wxMadAuiNotebook *m_Notebook;
-    int           m_NewFileCount;
+    int            m_NewFileCount;
     wxConfigBase  *m_Config;
     wxImageList   *m_ImageList;
     MadRecentList *m_RecentFiles;
     MadRecentList *m_RecentEncodings;
     MadRecentList *m_RecentFonts;
 
-    wxAuiManager m_AuiManager; // wxAUI
+    wxAuiManager   m_AuiManager; // wxAUI
     wxAuiNotebook *m_InfoNotebook; //
     //wxTreeCtrl *m_FindInFilesResults;
-    MadTreeCtrl *m_FindInFilesResults;
+    MadTreeCtrl   *m_FindInFilesResults;
+    wxComboBox    *m_QuickSearch;
+    wxCheckBox    *m_CheckboxWholeWord;
+    wxCheckBox    *m_CheckboxRegEx;
+    wxCheckBox    *m_CheckboxCaseSensitive;
+    bool           m_SearchDirectionNext;
+    bool           m_ToolbarStatus[tbMAX+1];
 
     void OnUpdateUI_MenuFile_CheckCount(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuFileReload(wxUpdateUIEvent& event);
@@ -120,7 +145,7 @@ public:
 
     // add: gogo, 21.09.2009
     void OnUpdateUI_MenuEditToggleBookmark(wxUpdateUIEvent& event);
-    void OnUpdateUI_MenuSearchCheckBookmark(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuEditCheckBookmark(wxUpdateUIEvent& event);
 
     void OnUpdateUI_Menu_CheckTextFile(wxUpdateUIEvent& event);
     void OnUpdateUI_Menu_InsertNumbers(wxUpdateUIEvent& event);
@@ -145,6 +170,8 @@ public:
     void OnUpdateUI_MenuViewWrapByWindow(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuViewWrapByColumn(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuViewDisplayLineNumber(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuViewDisplayBookmark(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuViewDisplay80ColHint(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuViewShowEndOfLine(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuViewShowTabChar(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuViewShowSpaceChar(wxUpdateUIEvent& event);
@@ -158,6 +185,9 @@ public:
     void OnUpdateUI_MenuSpellIgnore(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuSpellAdd2Dict(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuSpellRemoveFromDict(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuViewToolbars(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuViewToolbarsToggleAll(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuViewToolbarList(wxUpdateUIEvent& event);
 
     void OnUpdateUI_MenuToolsByteOrderMark(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuToolsNewLineChar(wxUpdateUIEvent& event);
@@ -267,6 +297,10 @@ public:
     void OnSearchGoToPosition(wxCommandEvent& event);
     void OnSearchGoToLeftBrace(wxCommandEvent& event);
     void OnSearchGoToRightBrace(wxCommandEvent& event);
+    void OnSearchQuickFind(wxCommandEvent& event);
+    void OnSearchQuickFindNext(wxCommandEvent& event);
+    void OnSearchQuickFindPrevious(wxCommandEvent& event);
+    void OnShowSearchQuickFindBar(wxCommandEvent& event);
 
     void OnViewEncoding(wxCommandEvent& event);
     void OnViewRecentEncoding(wxCommandEvent& event);
@@ -282,6 +316,8 @@ public:
     void OnViewWrapByWindow(wxCommandEvent& event);
     void OnViewWrapByColumn(wxCommandEvent& event);
     void OnViewDisplayLineNumber(wxCommandEvent& event);
+    void OnViewDisplayBookmark(wxCommandEvent& event);
+    void OnViewDisplay80ColHint(wxCommandEvent& event);
     void OnViewShowEndOfLine(wxCommandEvent& event);
     void OnViewShowTabChar(wxCommandEvent& event);
     void OnViewShowSpaceChar(wxCommandEvent& event);
@@ -295,6 +331,8 @@ public:
     void OnSpellCheckIgnore(wxCommandEvent& event);
     void OnSpellAdd2Dict(wxCommandEvent& event);
     void OnSpellCheckRemoveFromDict(wxCommandEvent& event);
+    void OnViewToolBarsToggleAll(wxCommandEvent& event);
+    void OnViewToolbars(wxCommandEvent& event);
 
     void OnToolsOptions(wxCommandEvent& event);
     void OnToolsHighlighting(wxCommandEvent& event);
@@ -340,6 +378,8 @@ public:
     void OnCopyCurrResult(wxCommandEvent& event);
     void OnCopyAllResults(wxCommandEvent& event);
     void OnResetCurrResult(wxCommandEvent& event);
+    void OnRightClickToolBar(wxAuiToolBarEvent& event);
+    void OnContextMenu(wxContextMenuEvent& event);
 private:
     bool m_PageClosing; // prevent from reentry of CloseFile(), OnNotebookPageClosing()
 public:
@@ -351,6 +391,7 @@ public:
     void SetPageFocus(int pageId);
     MadEdit *GetEditByFileName(const wxString &filename, int &id);
     void ResetAcceleratorTable();
+    void HideQuickFindBar();
 
 protected:
     void MadEditFrameClose(wxCloseEvent& event);
@@ -500,6 +541,9 @@ enum { // menu id
     menuFindNext,
     menuFindPrevious,
     menuFindInFiles,
+    menuShowQuickFindBar,
+    menuQuickFindNext,
+    menuQuickFindPrevious,
     menuShowFindInFilesResults,
     menuGoToLine,
     menuGoToPosition,
@@ -561,6 +605,8 @@ enum { // menu id
     menuWrapByWindow,
     menuWrapByColumn,
     menuDisplayLineNumber,
+    menuDisplayBookmark,
+    menuDisplay80ColHint,
     menuShowEndOfLine,
     menuShowTabChar,
     menuShowSpaceChar,
@@ -577,6 +623,11 @@ enum { // menu id
     menuSpellRemoveFromDict,
     menuSpellOption1,
     menuSpellOption99 = menuSpellOption1 + 98,
+    // ToolBar
+    menuToolBars,
+    menuToolBarsToggleAll,
+    menuToolBar1,
+    menuToolBar99 = menuToolBar1 + 98,
 
     // tools
     menuOptions,

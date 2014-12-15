@@ -41,9 +41,10 @@ MadMacroDlg::MadMacroDlg(wxWindow* parent, bool debug, wxWindowID id, const wxSt
     m_pymacro=new MadEdit(this, ID_MADEDIT, wxDefaultPosition, wxSize(640, 480));
     m_pymacro->SetFixedWidthMode(false);
     m_pymacro->SetRecordCaretMovements(false);
-    m_pymacro->SetInsertSpacesInsteadOfTab(false);
-    m_pymacro->SetWantTab(false);
+    m_pymacro->SetInsertSpacesInsteadOfTab(true);
+    m_pymacro->SetWantTab(true);
     m_pymacro->SetSyntax(wxT("MadPython"));
+    m_pymacro->SetDisplayBookmark(false);
     wxString endline(wxT("\r"));
     if (m_pymacro->GetInsertNewLineType() == nltDOS) endline += wxT("\n");
     else if (m_pymacro->GetInsertNewLineType() == nltUNIX) endline = wxT("\n");

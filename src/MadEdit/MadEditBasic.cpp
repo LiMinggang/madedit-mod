@@ -830,6 +830,8 @@ void MadEdit::SetSingleLineMode(bool mode)
 
             m_VScrollBar->Show(false);
             m_HScrollBar->Show(false);
+            SetDisplayBookmark(false);
+            SetDisplay80ColHint(false);
         }
 
         m_SingleLineMode = mode;
@@ -923,6 +925,43 @@ void MadEdit::SetDisplayLineNumber(bool value)
         Refresh(false);
     }
 }
+
+void MadEdit::SetDisplayBookmark(bool value)
+{
+    if(value != m_DisplayBookmark)
+    {
+        m_DisplayBookmark = value;
+        if(m_DisplayBookmark) m_BookmarkWidth = m_RowHeight;
+        else m_BookmarkWidth = 0;
+        if(m_StorePropertiesToGlobalConfig)
+        {
+            wxString oldpath=m_Config->GetPath();
+            m_Config->Write(wxT("/MadEdit/DisplayBookmark"), value);
+            m_Config->SetPath(oldpath);
+        }
+    }
+    
+    m_RepaintAll=true;
+    Refresh(false);
+}
+
+void MadEdit::SetDisplay80ColHint(bool value)
+{
+    if(value != m_Display80ColHint)
+    {
+        m_Display80ColHint = value;
+        if(m_StorePropertiesToGlobalConfig)
+        {
+            wxString oldpath=m_Config->GetPath();
+            m_Config->Write(wxT("/MadEdit/Display80ColHint"), value);
+            m_Config->SetPath(oldpath);
+        }
+    }
+    
+    m_RepaintAll=true;
+    Refresh(false);
+}
+
 void MadEdit::SetShowEndOfLine(bool value)
 {
     if(value!=m_ShowEndOfLine)
@@ -2399,7 +2438,7 @@ bool MadEdit::SaveToFile(const wxString &filename)
     if(m_Lines->SaveToFile(filename, tempdir)==false)
     {
         wxMessageDialog dlg(this, wxString(_("Cannot save this file:")) +wxT("\n\n") + filename,
-                            wxT("MadEdit"), wxOK|wxICON_ERROR );
+                            wxT("MadEdit-Mod"), wxOK|wxICON_ERROR );
         dlg.SetOKLabel(wxMessageDialog::ButtonLabel(_("&Ok")));
         dlg.ShowModal();
 
@@ -2429,7 +2468,7 @@ int MadEdit::Save(bool ask, const wxString &title, bool saveas) // return YES, N
     if(m_Modified && ask) //ask the user to save this file
     {
         wxMessageDialog dlg(this, wxString(_("Do you want to save this file?")) +wxT("\n\n") + filename,
-            wxT("MadEdit"), wxYES_NO|wxCANCEL|wxICON_QUESTION );
+            wxT("MadEdit-Mod"), wxYES_NO|wxCANCEL|wxICON_QUESTION );
         dlg.SetYesNoCancelLabels(wxMessageDialog::ButtonLabel(_("&Yes")),
             wxMessageDialog::ButtonLabel(_("&No")), wxMessageDialog::ButtonLabel(_("&Cancel")));
         ret=dlg.ShowModal();
@@ -2492,7 +2531,7 @@ bool MadEdit::Reload()
 
     if(m_Modified)
     {
-        wxMessageDialog dlg(this, _("Do you want to discard changes?"), wxT("MadEdit"), wxYES_NO|wxICON_QUESTION );
+        wxMessageDialog dlg(this, _("Do you want to discard changes?"), wxT("MadEdit-Mod"), wxYES_NO|wxICON_QUESTION );
         dlg.SetYesNoLabels(wxMessageDialog::ButtonLabel(_("&Yes")), wxMessageDialog::ButtonLabel(_("&No")));
         if(dlg.ShowModal()!=wxID_YES)
         {
@@ -2541,7 +2580,7 @@ bool MadEdit::ReloadByModificationTime()
     wxMessageDialog dlg(this,
         wxString(_("This file has been changed by another application."))+ wxT("\n")+
         wxString(_("Do you want to reload it?"))+ wxT("\n\n")+ m_Lines->m_Name,
-        wxT("MadEdit"), wxYES_NO|wxICON_QUESTION );
+        wxT("MadEdit-Mod"), wxYES_NO|wxICON_QUESTION );
     dlg.SetYesNoLabels(wxMessageDialog::ButtonLabel(_("&Yes")), wxMessageDialog::ButtonLabel(_("&No")));
     wxMouseCaptureLostEvent mevt(GetId());
     mevt.SetEventObject(this);
@@ -2794,7 +2833,7 @@ bool MadEdit::StringToHex(wxString ws, vector<wxByte> &hex)
         if(len<2)
         {
             wxMessageDialog dlg(NULL, errmsg+wxT("\n\n")+ws,
-                            wxT("MadEdit"), wxOK|wxICON_ERROR );
+                            wxT("MadEdit-Mod"), wxOK|wxICON_ERROR );
             dlg.SetOKLabel(wxMessageDialog::ButtonLabel(_("&Ok")));
             dlg.ShowModal();
             return false;
@@ -2807,7 +2846,7 @@ bool MadEdit::StringToHex(wxString ws, vector<wxByte> &hex)
         if(b0<0 || b1<0)
         {
             wxMessageDialog dlg(NULL, errmsg+wxT("\n\n")+ws,
-                            wxT("MadEdit"), wxOK|wxICON_ERROR );
+                            wxT("MadEdit-Mod"), wxOK|wxICON_ERROR );
             dlg.SetOKLabel(wxMessageDialog::ButtonLabel(_("&Ok")));
             dlg.ShowModal();
             return false;
@@ -3517,11 +3556,13 @@ void MadEdit::BeginPrint(const wxRect &printRect)
     m_old_WordWrapMode      = m_WordWrapMode;
     m_old_Selection         = m_Selection;
     m_old_DisplayLineNumber = m_DisplayLineNumber;
+    m_old_DisplayBookmark   = m_DisplayBookmark;
     m_old_ShowEndOfLine     = m_ShowEndOfLine;
     m_old_ShowSpaceChar     = m_ShowSpaceChar;
     m_old_ShowTabChar       = m_ShowTabChar;
     m_old_LeftMarginWidth   = m_LeftMarginWidth;
     m_old_DrawingXPos       = m_DrawingXPos;
+    m_old_BookmarkWidth     = m_BookmarkWidth;
 
     // apply printing settings
     m_PrintRect=printRect;
@@ -3541,13 +3582,14 @@ void MadEdit::BeginPrint(const wxRect &printRect)
         m_Config->SetPath(wxT("/MadEdit"));
         m_Config->Read(wxT("PrintSyntax"), &m_PrintSyntax);
         m_Config->Read(wxT("PrintLineNumber"), &m_DisplayLineNumber);
+        m_Config->Read(wxT("PrintBookmark"), &m_DisplayBookmark);
         m_Config->Read(wxT("PrintEndOfLine"), &m_ShowEndOfLine);
         m_Config->Read(wxT("PrintTabChar"), &m_ShowSpaceChar);
         m_Config->Read(wxT("PrintSpaceChar"), &m_ShowTabChar);
         m_Config->SetPath(oldpath);
 
         m_Syntax->BeginPrint(m_PrintSyntax);
-        if(!m_DisplayLineNumber) m_LeftMarginWidth=0;
+        if(!m_DisplayLineNumber&&!m_DisplayBookmark) m_LeftMarginWidth=0;
 
         ReformatAll();
 
@@ -3592,6 +3634,7 @@ void MadEdit::BeginPrint(const wxRect &printRect)
         m_PrintHexEdit->m_Syntax->BeginPrint(false);
 
         m_PrintHexEdit->m_LineNumberAreaWidth = 0;
+        m_PrintHexEdit->m_BookmarkWidth = 0;
         m_PrintHexEdit->m_LeftMarginWidth = 0;
         m_PrintHexEdit->m_RightMarginWidth = 0;
 
@@ -3668,10 +3711,10 @@ void MadEdit::EndPrint()
     if(!InPrinting()) return;
 
     // restore settings
-    m_ClientWidth= m_old_ClientWidth;
-    m_ClientHeight=m_old_ClientHeight;
-    m_WordWrapMode=m_old_WordWrapMode;
-    m_Selection=m_old_Selection;
+    m_ClientWidth  = m_old_ClientWidth;
+    m_ClientHeight = m_old_ClientHeight;
+    m_WordWrapMode = m_old_WordWrapMode;
+    m_Selection    = m_old_Selection;
 
     if(TextPrinting())
     {
@@ -3681,6 +3724,8 @@ void MadEdit::EndPrint()
         m_ShowTabChar       = m_old_ShowTabChar;
         m_LeftMarginWidth   = m_old_LeftMarginWidth;
         m_DrawingXPos       = m_old_DrawingXPos;
+        m_DisplayBookmark   = m_old_DisplayBookmark;
+        m_BookmarkWidth     = m_old_BookmarkWidth;
 
         m_Syntax->EndPrint();
 
@@ -3732,15 +3777,23 @@ bool MadEdit::PrintPage(wxDC *dc, int pageNum)
             m_LineNumberAreaWidth = 0;
         }
 
+        if(m_DisplayBookmark)
+        {
+            m_BookmarkWidth = m_RowHeight;
+        }
+        else
+        {
+            m_BookmarkWidth = 0;
+        }
         PaintTextLines(dc, m_PrintRect, toprow, rowcount, *wxWHITE);
 
-        if(m_DisplayLineNumber && !m_PrintSyntax)
+        /*if((m_DisplayLineNumber || m_DisplayBookmark)&& !m_PrintSyntax)
         {
             // draw a line between LineNumberArea and Text
             dc->SetPen(*wxThePenList->FindOrCreatePen(*wxBLACK, 1, wxSOLID));
-            int x1=m_PrintRect.x+m_LineNumberAreaWidth;
+            int x1=m_PrintRect.x+m_LineNumberAreaWidth+m_BookmarkWidth+1;
             dc->DrawLine(x1, m_PrintRect.y, x1, m_PrintRect.y+(rowcount*m_RowHeight));
-        }
+        }*/
     }
     else //HexPrinting()
     {

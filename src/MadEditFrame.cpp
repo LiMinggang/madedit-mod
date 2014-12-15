@@ -63,7 +63,6 @@
 ////Header Include Start
 ////Header Include End
 
-
 #ifdef _DEBUG
 #include <crtdbg.h>
 #define new new(_NORMAL_BLOCK ,__FILE__, __LINE__)
@@ -169,6 +168,11 @@
 #include "../images/showsymbol.xpm"
 #define showsymbol_xpm_idx (spellchecker_xpm_idx+1)
 
+#include "../images/down.xpm"
+#define down_xpm_idx (showsymbol_xpm_idx+1)
+#include "../images/up.xpm"
+#define up_xpm_idx (down_xpm_idx+1)
+
 #if wxCHECK_VERSION(2,7,0)
     #define GetAccelFromString(x) wxAcceleratorEntry::Create(x)
 #else
@@ -181,7 +185,7 @@ extern wxString g_MadEditMod_URL;
 extern wxString MadEncodingGrpName[];
 
 EmbeddedPython *g_EmbeddedPython = 0;
-
+MadRecentList  *g_RecentFindText = NULL;
 extern wxString g_MadEditAppDir, g_MadEditHomeDir;
 
 MadEditFrame *g_MainFrame=NULL;
@@ -228,7 +232,8 @@ wxMenu *g_Menu_Tools_InsertNewLineChar = NULL;
 wxMenu *g_Menu_Tools_ConvertChineseChar = NULL;
 wxMenu *g_Menu_MadMacro = NULL;
 wxMenu *g_Menu_MadMacro_Scripts = NULL;
-
+wxMenu *g_Menu_Toolbars = NULL;
+wxMenu *g_Menu_FrameContext = NULL;
 
 wxArrayString g_FontNames;
 
@@ -239,6 +244,8 @@ int g_StatusWidths[7]={ 0, 215, 215, 135, 121, 60, (40 + 18)};
 int g_StatusWidth_1_6=    (220+ 235+ 135+ 155+ 65+ (40 + 0));
 int g_StatusWidths[7]={ 0, 220, 235, 135, 155, 65, (40 + 0)};
 #endif
+
+std::map<int, wxString>g_ToolbarNames;
 
 wxAcceleratorEntry g_AccelFindNext, g_AccelFindPrev;
 int MadMessageBox(const wxString& message,
@@ -1194,6 +1201,9 @@ BEGIN_EVENT_TABLE(MadEditFrame,wxFrame)
 	EVT_UPDATE_UI(menuSortAscendingCase, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
 	EVT_UPDATE_UI(menuSortDescendingCase, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
 	EVT_UPDATE_UI(menuSortByOptions, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
+	EVT_UPDATE_UI(menuSortOptions, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
+	EVT_UPDATE_UI(menuSort, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
+	EVT_UPDATE_UI(menuAdvanced, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
 	EVT_UPDATE_UI(menuCopyAsHexString, MadEditFrame::OnUpdateUI_MenuEditCopyAsHexString)
 	EVT_UPDATE_UI(menuCopyAsHexStringWithSpace, MadEditFrame::OnUpdateUI_MenuEditCopyAsHexString)
 	EVT_UPDATE_UI(menuCopyRevertHex, MadEditFrame::OnUpdateUI_MenuEditCopyAsHexString)
@@ -1219,24 +1229,26 @@ BEGIN_EVENT_TABLE(MadEditFrame,wxFrame)
 	EVT_UPDATE_UI(menuJoinLines, MadEditFrame::OnUpdateUI_Menu_JoinLines)
 	EVT_UPDATE_UI(menuInsertNumbers, MadEditFrame::OnUpdateUI_Menu_InsertNumbers)
 	EVT_UPDATE_UI(menuColumnAlign, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
-	EVT_UPDATE_UI(menuBookmarkCopy, MadEditFrame::OnUpdateUI_MenuSearchCheckBookmark)
-	EVT_UPDATE_UI(menuBookmarkCut, MadEditFrame::OnUpdateUI_MenuSearchCheckBookmark)
-	EVT_UPDATE_UI(menuBookmarkDel, MadEditFrame::OnUpdateUI_MenuSearchCheckBookmark)
-	EVT_UPDATE_UI(menuBookmarkDelUnmarked, MadEditFrame::OnUpdateUI_MenuSearchCheckBookmark)
-	EVT_UPDATE_UI(menuBookmarkReplace, MadEditFrame::OnUpdateUI_MenuSearchCheckBookmark)
+	EVT_UPDATE_UI(menuBookmark, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark)
+	EVT_UPDATE_UI(menuBookmarkCopy, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark)
+	EVT_UPDATE_UI(menuBookmarkCut, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark)
+	EVT_UPDATE_UI(menuBookmarkDel, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark)
+	EVT_UPDATE_UI(menuBookmarkDelUnmarked, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark)
+	EVT_UPDATE_UI(menuBookmarkReplace, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark)
 	// search
 	EVT_UPDATE_UI(menuFind, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
 	EVT_UPDATE_UI(menuFindNext, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
 	EVT_UPDATE_UI(menuFindPrevious, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
+	EVT_UPDATE_UI(menuShowQuickFindBar, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
 	EVT_UPDATE_UI(menuReplace, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
 	EVT_UPDATE_UI(menuGoToLine, MadEditFrame::OnUpdateUI_MenuSearchGoTo)
 	EVT_UPDATE_UI(menuGoToPosition, MadEditFrame::OnUpdateUI_MenuSearchGoTo)
 	EVT_UPDATE_UI(menuLeftBrace, MadEditFrame::OnUpdateUI_MenuSearchGoToBrace)
 	EVT_UPDATE_UI(menuRightBrace, MadEditFrame::OnUpdateUI_MenuSearchGoToBrace)
 	EVT_UPDATE_UI(menuToggleBookmark, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
-	EVT_UPDATE_UI(menuGotoNextBookmark, MadEditFrame::OnUpdateUI_MenuSearchCheckBookmark)
-	EVT_UPDATE_UI(menuGotoPreviousBookmark, MadEditFrame::OnUpdateUI_MenuSearchCheckBookmark)
-	EVT_UPDATE_UI(menuClearAllBookmarks, MadEditFrame::OnUpdateUI_MenuSearchCheckBookmark)
+	EVT_UPDATE_UI(menuGotoNextBookmark, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark)
+	EVT_UPDATE_UI(menuGotoPreviousBookmark, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark)
+	EVT_UPDATE_UI(menuClearAllBookmarks, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark)
 	// view
 	EVT_UPDATE_UI(menuEncoding, MadEditFrame::OnUpdateUI_MenuViewEncoding)
 	EVT_UPDATE_UI(menuSyntax, MadEditFrame::OnUpdateUI_MenuViewSyntax)
@@ -1250,6 +1262,8 @@ BEGIN_EVENT_TABLE(MadEditFrame,wxFrame)
 	EVT_UPDATE_UI(menuWrapByWindow, MadEditFrame::OnUpdateUI_MenuViewWrapByWindow)
 	EVT_UPDATE_UI(menuWrapByColumn, MadEditFrame::OnUpdateUI_MenuViewWrapByColumn)
 	EVT_UPDATE_UI(menuDisplayLineNumber, MadEditFrame::OnUpdateUI_MenuViewDisplayLineNumber)
+	EVT_UPDATE_UI(menuDisplayBookmark, MadEditFrame::OnUpdateUI_MenuViewDisplayBookmark)
+	EVT_UPDATE_UI(menuDisplay80ColHint, MadEditFrame::OnUpdateUI_MenuViewDisplay80ColHint)
 	EVT_UPDATE_UI(menuShowEndOfLine, MadEditFrame::OnUpdateUI_MenuViewShowEndOfLine)
 	EVT_UPDATE_UI(menuShowTabChar, MadEditFrame::OnUpdateUI_MenuViewShowTabChar)
 	EVT_UPDATE_UI(menuShowSpaceChar, MadEditFrame::OnUpdateUI_MenuViewShowSpaceChar)
@@ -1263,6 +1277,9 @@ BEGIN_EVENT_TABLE(MadEditFrame,wxFrame)
 	EVT_UPDATE_UI(menuSpellIgnore, MadEditFrame::OnUpdateUI_MenuSpellIgnore)
 	EVT_UPDATE_UI(menuSpellAdd2Dict, MadEditFrame::OnUpdateUI_MenuSpellAdd2Dict)
 	EVT_UPDATE_UI(menuSpellRemoveFromDict, MadEditFrame::OnUpdateUI_MenuSpellRemoveFromDict)
+	EVT_UPDATE_UI(menuToolBars, MadEditFrame::OnUpdateUI_MenuViewToolbars)
+	EVT_UPDATE_UI(menuToolBarsToggleAll, MadEditFrame::OnUpdateUI_MenuViewToolbarsToggleAll)
+	EVT_UPDATE_UI_RANGE(menuToolBar1, menuToolBar99, MadEditFrame::OnUpdateUI_MenuViewToolbarList)
 	// tools
 	EVT_UPDATE_UI(menuByteOrderMark, MadEditFrame::OnUpdateUI_MenuToolsByteOrderMark)
 	EVT_UPDATE_UI(menuMadMacro, MadEditFrame::OnUpdateUI_MenuToolsMadMacro)
@@ -1275,6 +1292,7 @@ BEGIN_EVENT_TABLE(MadEditFrame,wxFrame)
 	EVT_UPDATE_UI(menuMadScriptList, MadEditFrame::OnUpdateUI_MadScriptList)
 	EVT_UPDATE_UI(menuMacroDebugMode, MadEditFrame::OnUpdateUI_MenuToolsMacroDebugMode)
 	EVT_UPDATE_UI(menuInsertNewLineChar, MadEditFrame::OnUpdateUI_MenuToolsInsertNewLineChar)
+	EVT_UPDATE_UI(menuNewLineChar, MadEditFrame::OnUpdateUI_MenuToolsConvertNL)
 	EVT_UPDATE_UI(menuConvertToDOS, MadEditFrame::OnUpdateUI_MenuToolsConvertNL)
 	EVT_UPDATE_UI(menuConvertToMAC, MadEditFrame::OnUpdateUI_MenuToolsConvertNL)
 	EVT_UPDATE_UI(menuConvertToUNIX, MadEditFrame::OnUpdateUI_MenuToolsConvertNL)
@@ -1364,6 +1382,9 @@ BEGIN_EVENT_TABLE(MadEditFrame,wxFrame)
 	EVT_MENU(menuFind, MadEditFrame::OnSearchFind)
 	EVT_MENU(menuFindNext, MadEditFrame::OnSearchFindNext)
 	EVT_MENU(menuFindPrevious, MadEditFrame::OnSearchFindPrevious)
+	EVT_MENU(menuQuickFindNext, MadEditFrame::OnSearchQuickFindNext)
+	EVT_MENU(menuQuickFindPrevious, MadEditFrame::OnSearchQuickFindPrevious)
+	EVT_MENU(menuShowQuickFindBar, MadEditFrame::OnShowSearchQuickFindBar)
 	EVT_MENU(menuReplace, MadEditFrame::OnSearchReplace)
 	EVT_MENU(menuFindInFiles, MadEditFrame::OnSearchFindInFiles)
 	EVT_MENU(menuShowFindInFilesResults, MadEditFrame::OnSearchShowFindInFilesResults)
@@ -1390,6 +1411,8 @@ BEGIN_EVENT_TABLE(MadEditFrame,wxFrame)
 	EVT_MENU(menuWrapByWindow, MadEditFrame::OnViewWrapByWindow)
 	EVT_MENU(menuWrapByColumn, MadEditFrame::OnViewWrapByColumn)
 	EVT_MENU(menuDisplayLineNumber, MadEditFrame::OnViewDisplayLineNumber)
+	EVT_MENU(menuDisplayBookmark, MadEditFrame::OnViewDisplayBookmark)
+	EVT_MENU(menuDisplay80ColHint, MadEditFrame::OnViewDisplay80ColHint)
 	EVT_MENU(menuShowEndOfLine, MadEditFrame::OnViewShowEndOfLine)
 	EVT_MENU(menuShowTabChar, MadEditFrame::OnViewShowTabChar)
 	EVT_MENU(menuShowSpaceChar, MadEditFrame::OnViewShowSpaceChar)
@@ -1403,6 +1426,8 @@ BEGIN_EVENT_TABLE(MadEditFrame,wxFrame)
 	EVT_MENU(menuSpellIgnore, MadEditFrame::OnSpellCheckIgnore)
 	EVT_MENU(menuSpellAdd2Dict, MadEditFrame::OnSpellAdd2Dict)
 	EVT_MENU(menuSpellRemoveFromDict, MadEditFrame::OnSpellCheckRemoveFromDict)
+	EVT_MENU(menuToolBarsToggleAll, MadEditFrame::OnViewToolBarsToggleAll)
+	EVT_MENU_RANGE(menuToolBar1, menuToolBar99, MadEditFrame::OnViewToolbars)
 	// tools
 	EVT_MENU(menuOptions, MadEditFrame::OnToolsOptions)
 	EVT_MENU(menuHighlighting, MadEditFrame::OnToolsHighlighting)
@@ -1451,6 +1476,8 @@ BEGIN_EVENT_TABLE(MadEditFrame,wxFrame)
 	EVT_MENU(menuCopyCurResult, MadEditFrame::OnCopyCurrResult)
 	EVT_MENU(menuCopyAllResults, MadEditFrame::OnCopyAllResults)
 	EVT_MENU(menuResetCurResult, MadEditFrame::OnResetCurrResult)
+	EVT_TEXT(ID_QUICKSEARCH, MadEditFrame::OnSearchQuickFind)
+	EVT_TEXT_ENTER(ID_QUICKSEARCH, MadEditFrame::OnSearchQuickFind)
 END_EVENT_TABLE()
   ////Event Table End
 
@@ -1480,7 +1507,7 @@ CommandData CommandTable[]=
     { 0, 1, menuCloseAllToTheLeft,   wxT("menuCloseAllToTheLeft"),  _("Close All To The Left"),  wxT(""),  wxITEM_NORMAL,    -1,         0,                        _("Close all files to the left")},
     { 0, 1, menuCloseAllToTheRight,  wxT("menuCloseAllToTheRight"), _("Close All To The Right"), wxT(""),  wxITEM_NORMAL,    -1,         0,                        _("Close all files to the right")},
     { 0, 1, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0},
-    { 0, 1, menuToggleReadOnly,           wxT("menuToggleReadOnly"),           _("Set/clear ReadOnly flag"),                 0,                   wxITEM_NORMAL,    -1,                0,                     _("Set/clear ReadOnly flag of the file")},
+    { 0, 1, menuToggleReadOnly,           wxT("menuToggleReadOnly"),           _("Set/Clear ReadOnly Flag"),                 0,                   wxITEM_NORMAL,    -1,                0,                     _("Set/Clear ReadOnly flag of the file")},
     { 0, 1, 0,                0,                       0,                      0,                   wxITEM_SEPARATOR, -1,                0,                        0},
     { 0, 1, menuPageSetup,    wxT("menuPageSetup"),    _("Page Set&up..."),    wxT(""),             wxITEM_NORMAL,    -1,                0,                        _("Setup the pages for printing")},
     { 0, 1, menuPrintPreview, wxT("menuPrintPreview"), _("Print Previe&w..."), wxT(""),             wxITEM_NORMAL,    preview_xpm_idx,   0,                        _("Preview the result of printing")},
@@ -1591,6 +1618,7 @@ CommandData CommandTable[]=
     { 0,            1, menuFind,                   wxT("menuFind"),                   _("&Find..."),                                        wxT("Ctrl-F"),       wxITEM_NORMAL,    find_xpm_idx,     0, _("Find a string")},
     { 0,            1, menuFindNext,               wxT("menuFindNext"),               _("Find &Next"),                                      wxT("F3"),           wxITEM_NORMAL,    findnext_xpm_idx, 0, _("Find next occurrence")},
     { 0,            1, menuFindPrevious,           wxT("menuFindPrevious"),           _("Find &Previous"),                                  wxT("Ctrl-F3"),      wxITEM_NORMAL,    findprev_xpm_idx, 0, _("Find previous occurrence")},
+    { 0,            1, menuShowQuickFindBar,       wxT("menuShowQuickFindBar"),       _("&Quick Find"),                                     wxT("F8"),       wxITEM_NORMAL,    -1,               0, _("Find a string")},
     { 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0},
     { 0,            1, menuReplace,                wxT("menuReplace"),                _("&Replace..."),                                     wxT("Ctrl-H"),       wxITEM_NORMAL,    replace_xpm_idx,  0, _("Replace a string")},
     { 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0},
@@ -1616,12 +1644,12 @@ CommandData CommandTable[]=
     { 0,            1, menuSyntax,            wxT("menuSyntax"),            _("Syntax Type: "),        0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Syntax,       0},
     { 0,            1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0},
     { 0,            1, menuFontName,          wxT("menuFontName"),          _("Font Name: "),          0,                   wxITEM_NORMAL,    fontname_xpm_idx,   &g_Menu_View_FontName,     0},
-    { 0,            2, menuFont0,             wxT("menuFont0"),             _("[@]"),                  0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Font0,        0},
-    { 0,            2, menuFont1,             wxT("menuFont1"),             _("[ABCDE]"),              0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Font1,        0},
-    { 0,            2, menuFont2,             wxT("menuFont2"),             _("[FGHIJ]"),              0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Font2,        0},
-    { 0,            2, menuFont3,             wxT("menuFont3"),             _("[KLMNO]"),              0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Font3,        0},
-    { 0,            2, menuFont4,             wxT("menuFont4"),             _("[PQRST]"),              0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Font4,        0},
-    { 0,            2, menuFont5,             wxT("menuFont5"),             _("[UVWXYZ]"),             0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Font5,        0},
+    { 0,            2, menuFont0,             wxT("menuFont0"),             wxT("[@]"),                  0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Font0,        0},
+    { 0,            2, menuFont1,             wxT("menuFont1"),             wxT("[ABCDE]"),              0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Font1,        0},
+    { 0,            2, menuFont2,             wxT("menuFont2"),             wxT("[FGHIJ]"),              0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Font2,        0},
+    { 0,            2, menuFont3,             wxT("menuFont3"),             wxT("[KLMNO]"),              0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Font3,        0},
+    { 0,            2, menuFont4,             wxT("menuFont4"),             wxT("[PQRST]"),              0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Font4,        0},
+    { 0,            2, menuFont5,             wxT("menuFont5"),             wxT("[UVWXYZ]"),             0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Font5,        0},
     { 0,            2, menuFont6,             wxT("menuFont6"),             _("[other]"),              0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Font6,        0},
 
     { 0,            1, menuFontSize,          wxT("menuFontSize"),          _("Font Size: "),          0,                   wxITEM_NORMAL,    fontsize_xpm_idx,   &g_Menu_View_FontSize,     0},
@@ -1760,13 +1788,19 @@ CommandData CommandTable[]=
     { ecWrapByColumn, 1, menuWrapByColumn,      wxT("menuWrapByColumn"),      _("Wrap By Column"),       wxT("Ctrl-E"),       wxITEM_CHECK,     wrapbycol_xpm_idx,  0,                         _("Wrap the lines by the specified Max Columns")},
     { 0,              1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0},
     { 0,              1, menuDisplayLineNumber, wxT("menuDisplayLineNumber"), _("&Display Line Number"), wxT("Ctrl-Alt-D"),   wxITEM_CHECK,     -1,                 0,                         _("Display the Line Numbers")},
+    { 0,              1, menuDisplayBookmark,   wxT("menuDisplayBookmark"),   _("Display &Bookmark"),    wxT("Ctrl-Alt-B"),   wxITEM_CHECK,     -1,                 0,                         _("Display the Bookmark sign")},
+    { 0,              1, menuDisplay80ColHint,  wxT("menuDisplay80ColHint"),  _("Display 80th Cols &Hint"), wxT(""),          wxITEM_CHECK,     -1,                 0,                         _("Display the 80th columns hint")},
     { 0,              1, menuShowEndOfLine,     wxT("menuShowEndOfLine"),     _("Show End Of Line"),     wxT("Ctrl-Alt-L"),   wxITEM_CHECK,     -1,                 0,                         _("Show the sign of EndOfLine")},
     { 0,              1, menuShowTabChar,       wxT("menuShowTabChar"),       _("Show Tab Char"),        wxT("Ctrl-Alt-T"),   wxITEM_CHECK,     -1,                 0,                         _("Show the sign of Tab char")},
     { 0,              1, menuShowSpaceChar,     wxT("menuShowSpaceChar"),     _("Show Space Char"),      wxT("Ctrl-Alt-S"),   wxITEM_CHECK,     -1,                 0,                         _("Show the sign of Space char")},
-    { 0,              1, menuShowAllChars,       wxT("menuShowAllChar"),      _("Show All Chars"),       wxT("Ctrl-Alt-A"),   wxITEM_CHECK,     showsymbol_xpm_idx, 0,                         _("Show the sign of all characters")},
+    { 0,              1, menuShowAllChars,      wxT("menuShowAllChar"),       _("Show All Chars"),       wxT("Ctrl-Alt-A"),   wxITEM_CHECK,     showsymbol_xpm_idx, 0,                         _("Show the sign of all characters")},
     { 0,              1, menuMarkActiveLine,    wxT("menuMarkActiveLine"),    _("Mark Active Line"),     wxT(""),             wxITEM_CHECK,     -1,                 0,                         _("Mark the current line")},
     { 0,              1, menuMarkBracePair,     wxT("menuMarkBracePair"),     _("Mark Brace Pair"),      wxT(""),             wxITEM_CHECK,     -1,                 0,                         _("Mark the BracePair under the caret")},
     { 0,              1, menuSpellChecker,      wxT("menuSpellChecker"),      _("Spell Checker"),        wxT("Ctrl-K"),       wxITEM_CHECK,     spellchecker_xpm_idx,                 0,       _("Spell checker")},
+    { 0,              1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0},
+    { 0,              1, menuToolBars,          wxT("menuToolBar"),           _("Toolbars"),             0,                   wxITEM_NORMAL,    -1,                 &g_Menu_Toolbars,          0},
+    { 0,              2, menuToolBarsToggleAll, wxT("menuToolBarsToggleAll"), _("Toggle Main Toolbar"),  0,                   wxITEM_CHECK,     -1,                 0,                         _("Show/Hide Main Toolbar")},
+    { 0,              2, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0},
     { 0,              1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0},
     { ecTextMode,     1, menuTextMode,          wxT("menuTextMode"),          _("&Text Mode"),           wxT("Alt-1"),        wxITEM_CHECK,     textmode_xpm_idx,   0,                         _("Change the editing mode to Text-Mode")},
     { ecColumnMode,   1, menuColumnMode,        wxT("menuColumnMode"),        _("&Column Mode"),         wxT("Alt-2"),        wxITEM_CHECK,     columnmode_xpm_idx, 0,                         _("Change the editing mode to Column-Mode")},
@@ -1820,7 +1854,7 @@ CommandData CommandTable[]=
     { 0,               2, menuKanji2SimpClipboard,    wxT("menuKanji2SimpClipboard"),    _("Clipboard: Japanese Kanji to Sim&plified Chinese"),      0,             wxITEM_NORMAL,    -1, 0,                                _("Convert Japanese Kanji to simplified Chinese chars in the clipboard")},
     { 0,               2, menuChinese2KanjiClipboard, wxT("menuChinese2KanjiClipboard"), _("Clipboard: Chinese to Japanese &Kanji"),                 0,             wxITEM_NORMAL,    -1, 0,                                _("Convert Chinese chars to Japanese Kanji in the clipboard")},
     { 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0},
-    { 0,               1, menuWordCount,          wxT("menuWordCount"),          _("&Word Count"),                                   0,             wxITEM_NORMAL,    -1, 0,                                _("Count the words and chars of the file or selection")},
+    { 0,               1, menuWordCount,          wxT("menuWordCount"),          _("&Word Count..."),                                   0,             wxITEM_NORMAL,    -1, 0,                                _("Count the words and chars of the file or selection")},
 
     // Window
     { 0, 0, 0, 0, _("&Window"), 0, wxITEM_NORMAL, 0, &g_Menu_Window, 0},
@@ -1830,7 +1864,7 @@ CommandData CommandTable[]=
 
     // Help
     { 0, 0, 0, 0, _("&Help"), 0, wxITEM_NORMAL, 0, &g_Menu_Help, 0},
-    { 0, 1, menuAbout, wxT("menuAbout"), _("&About MadEdit..."), wxT(""),       wxITEM_NORMAL, Mad_16x15_xpm_idx, 0, wxT("")},
+    { 0, 1, menuAbout, wxT("menuAbout"), _("&About MadEdit-Mod..."), wxT(""),       wxITEM_NORMAL, Mad_16x15_xpm_idx, 0, wxT("")},
     // end menu
 
     // begin editor
@@ -1926,6 +1960,7 @@ void LoadDefaultSettings(wxConfigBase *m_Config)
 
     m_Config->Read(wxT("PrintSyntax"), &tempbool, false);
     m_Config->Read(wxT("PrintLineNumber"), &tempbool, true);
+    m_Config->Read(wxT("PrintBookmark"), &tempbool, false);
     m_Config->Read(wxT("PrintEndOfLine"), &tempbool, false);
     m_Config->Read(wxT("PrintTabChar"), &tempbool, false);
     m_Config->Read(wxT("PrintSpaceChar"), &tempbool, false);
@@ -1999,12 +2034,20 @@ MadEditFrame::MadEditFrame( wxWindow *parent, wxWindowID id, const wxString &tit
     m_LastSelEnd = -1;
     m_MacroDebug = false;
 
+    m_SearchDirectionNext = true;
     g_MainFrame=this;
 }
 
 MadEditFrame::~MadEditFrame()
 {}
 
+// not all ports have support for EVT_CONTEXT_MENU yet, don't define
+// USE_CONTEXT_MENU for those which don't
+#if defined(__WXMOTIF__) || defined(__WXPM__) || defined(__WXX11__)
+    #define USE_CONTEXT_MENU 0
+#else
+    #define USE_CONTEXT_MENU 1
+#endif
 
 void MadEditFrame::CreateGUIControls(void)
 {
@@ -2016,22 +2059,21 @@ void MadEditFrame::CreateGUIControls(void)
 
 	WxStatusBar1 = new wxStatusBar(this, ID_WXSTATUSBAR1);
 
-	WxToolBar1 = new wxToolBar(this, ID_WXTOOLBAR1, wxPoint(0, 0), wxSize(482, 29));
-	WxToolBar1->SetFont(wxFont(12, wxSWISS, wxNORMAL, wxNORMAL, false));
+	WxToolBar[tbSTANDARD] = new wxToolBar(this, ID_WXTOOLBAR1[tbSTANDARD], wxPoint(0, 0), wxSize(482, 29));
+	WxToolBar[tbSTANDARD]->SetFont(wxFont(12, wxSWISS, wxNORMAL, wxNORMAL, false));
 
 	WxMenuBar1 = new wxMenuBar();
 
 	SetStatusBar(WxStatusBar1);
-	WxToolBar1->Realize();
-	SetToolBar(WxToolBar1);
-	SetTitle(wxT("MadEdit"));
+	WxToolBar[tbSTANDARD]->Realize();
+	SetToolBar(WxToolBar[tbSTANDARD]);
+	SetTitle(wxT("MadEdit-Mod"));
 	SetIcon(wxNullIcon);
 	SetSize(8,8,400,404);
 	Center();
 	
     ////GUI Items Creation End
 #endif
-
 
     WxStatusBar1 = new wxStatusBar(this, ID_WXSTATUSBAR1);
     g_StatusBar = WxStatusBar1;
@@ -2044,7 +2086,29 @@ void MadEditFrame::CreateGUIControls(void)
     WxStatusBar1->SetFont(*pf);
 #endif
 
-    WxToolBar1 = new wxToolBar(this, ID_WXTOOLBAR1, wxPoint(0,0), wxSize(392,29), wxTB_DEFAULT_STYLE);
+    WxToolBar[tbSTANDARD] = new wxAuiToolBar(this, ID_WXTOOLBAR1+tbSTANDARD, wxPoint(0,0), wxSize(392,29), wxAUI_TB_DEFAULT_STYLE | wxAUI_TB_OVERFLOW | wxAUI_TB_HORIZONTAL);
+    WxToolBar[tbSTANDARD]->Connect(wxEVT_AUITOOLBAR_RIGHT_CLICK, wxAuiToolBarEventHandler(MadEditFrame::OnRightClickToolBar)); 
+    g_ToolbarNames[tbSTANDARD] = _("Standard");
+    WxToolBar[tbEDITOR] = new wxAuiToolBar(this, ID_WXTOOLBAR1+tbEDITOR, wxPoint(0,0), wxSize(392,29), wxAUI_TB_DEFAULT_STYLE | wxAUI_TB_OVERFLOW | wxAUI_TB_HORIZONTAL);
+    WxToolBar[tbEDITOR]->Connect(wxEVT_AUITOOLBAR_RIGHT_CLICK, wxAuiToolBarEventHandler(MadEditFrame::OnRightClickToolBar)); 
+    g_ToolbarNames[tbEDITOR] = _("Editor");
+    WxToolBar[tbSEARCHREPLACE] = new wxAuiToolBar(this, ID_WXTOOLBAR1+tbSEARCHREPLACE, wxPoint(0,0), wxSize(392,29), wxAUI_TB_DEFAULT_STYLE | wxAUI_TB_OVERFLOW | wxAUI_TB_HORIZONTAL);
+    WxToolBar[tbSEARCHREPLACE]->Connect(wxEVT_AUITOOLBAR_RIGHT_CLICK, wxAuiToolBarEventHandler(MadEditFrame::OnRightClickToolBar));
+    g_ToolbarNames[tbSEARCHREPLACE] = _("Search/Replace");
+    WxToolBar[tbTEXTVIEW] = new wxAuiToolBar(this, ID_WXTOOLBAR1+tbTEXTVIEW, wxPoint(0,0), wxSize(392,29), wxAUI_TB_DEFAULT_STYLE | wxAUI_TB_OVERFLOW | wxAUI_TB_HORIZONTAL);
+    WxToolBar[tbTEXTVIEW]->Connect(wxEVT_AUITOOLBAR_RIGHT_CLICK, wxAuiToolBarEventHandler(MadEditFrame::OnRightClickToolBar)); 
+    g_ToolbarNames[tbTEXTVIEW] = _("Text View");
+    WxToolBar[tbEDITMODE] = new wxAuiToolBar(this, ID_WXTOOLBAR1+tbEDITMODE, wxPoint(0,0), wxSize(392,29), wxAUI_TB_DEFAULT_STYLE | wxAUI_TB_OVERFLOW | wxAUI_TB_HORIZONTAL);
+    WxToolBar[tbEDITMODE]->Connect(wxEVT_AUITOOLBAR_RIGHT_CLICK, wxAuiToolBarEventHandler(MadEditFrame::OnRightClickToolBar)); 
+    g_ToolbarNames[tbEDITMODE] = _("Edit Mode");
+    WxToolBar[tbMACRO] = new wxAuiToolBar(this, ID_WXTOOLBAR1+tbMACRO, wxPoint(0,0), wxSize(392,29), wxAUI_TB_DEFAULT_STYLE | wxAUI_TB_OVERFLOW | wxAUI_TB_HORIZONTAL);
+    WxToolBar[tbMACRO]->Connect(wxEVT_AUITOOLBAR_RIGHT_CLICK, wxAuiToolBarEventHandler(MadEditFrame::OnRightClickToolBar)); 
+    g_ToolbarNames[tbMACRO] = _("Macro");
+    
+    m_QuickSeachBar = new wxAuiToolBar(this, ID_WXTOOLBAR1+tbQSEARCH, wxPoint(0,0), wxSize(392,29), wxAUI_TB_DEFAULT_STYLE | wxAUI_TB_OVERFLOW | wxAUI_TB_HORIZONTAL);
+    m_QuickSeachBar->Connect(wxEVT_AUITOOLBAR_RIGHT_CLICK, wxAuiToolBarEventHandler(MadEditFrame::OnRightClickToolBar)); 
+    g_ToolbarNames[tbQSEARCH] = _("Quick Search");
+    WxToolBar[tbQSEARCH] = m_QuickSeachBar;
 
     m_Notebook = new wxMadAuiNotebook(this, ID_NOTEBOOK, wxPoint(0,29),wxSize(392,320), wxWANTS_CHARS |wxAUI_NB_TOP|wxAUI_NB_TAB_SPLIT|wxAUI_NB_TAB_MOVE|wxAUI_NB_SCROLL_BUTTONS|wxAUI_NB_WINDOWLIST_BUTTON|wxAUI_NB_CLOSE_ON_ACTIVE_TAB);
     m_Notebook->wxControl::SetWindowStyleFlag(m_Notebook->wxControl::GetWindowStyleFlag() & ~wxTAB_TRAVERSAL);
@@ -2053,11 +2117,13 @@ void MadEditFrame::CreateGUIControls(void)
 
     WxMenuBar1 = new wxMenuBar();
     this->SetMenuBar(WxMenuBar1);
+#if USE_CONTEXT_MENU
+    Connect(wxEVT_CONTEXT_MENU, wxContextMenuEventHandler(MadEditFrame::OnContextMenu)); 
+#endif    
 
-    WxToolBar1->Realize();
-    this->SetToolBar(WxToolBar1);
+    //this->SetToolBar(WxToolBar[tbSTANDARD]);
     this->SetStatusBar(WxStatusBar1);
-    this->SetTitle(wxT("MadEdit "));
+    this->SetTitle(wxT("MadEdit-Mod "));
 
 #if !defined(__WXMSW__) //&& !defined(__WXPM__)
     SetIcon(wxIcon(Mad2_xpm));
@@ -2101,7 +2167,6 @@ void MadEditFrame::CreateGUIControls(void)
         }
         MadEdit::ms_KeyBindings.Add(StringToShortCut(str), ecToggleWindow, true);
     }
-
 
     //m_ImageList
     m_ImageList=new wxImageList(16,15);
@@ -2149,6 +2214,8 @@ void MadEditFrame::CreateGUIControls(void)
     m_ImageList->Add(wxBitmap(bookmark_clear_xpm));
     m_ImageList->Add(wxBitmap(spellchecker_xpm));
     m_ImageList->Add(wxBitmap(showsymbol_xpm));
+    m_ImageList->Add(wxBitmap(down_xpm));
+    m_ImageList->Add(wxBitmap(up_xpm));
 
     // add menuitems
     g_Menu_File = new wxMenu((long)0);
@@ -2251,6 +2318,7 @@ void MadEditFrame::CreateGUIControls(void)
     g_Menu_View_TabColumn = new wxMenu((long)0);
     g_Menu_Tools_BOM = new wxMenu((long)0);
     g_Menu_MadMacro = new wxMenu((long)0);
+    g_Menu_Toolbars = new wxMenu((long)0);
     g_Menu_MadMacro_Scripts = new wxMenu((long)0);
     g_Menu_Tools_NewLineChar = new wxMenu((long)0);
     g_Menu_Tools_InsertNewLineChar = new wxMenu((long)0);
@@ -2434,6 +2502,14 @@ void MadEditFrame::CreateGUIControls(void)
             menu->Append(menuFontName1 + int(i), name);
         }
     }
+    {
+        for(int i=0; i<tbMAX; ++i)
+        {
+            g_Menu_Toolbars->Append(menuToolBar1 + i, g_ToolbarNames[i], wxEmptyString, wxITEM_CHECK);
+            g_Menu_Toolbars->Check(menuToolBar1 + i, m_ToolbarStatus[i]);
+            g_Menu_Toolbars->Enable(menuToolBar1 + i, m_ToolbarStatus[tbMAX]);
+        }
+    }
 
     if(!m_Config->Exists(wxT("/KeyBindings")))
     {
@@ -2448,7 +2524,6 @@ void MadEditFrame::CreateGUIControls(void)
         }
     }
     ResetAcceleratorTable();
-
 
     /***/
     m_RecentFiles=new MadRecentList();
@@ -2512,60 +2587,140 @@ void MadEditFrame::CreateGUIControls(void)
     }
     */
 
+    //WxToolBar[tbSTANDARD]->AddSeparator();
+	WxToolBar[tbSTANDARD]->AddTool(menuNew, _T("New"), m_ImageList->GetBitmap(new_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("New File"), _("Create new file"), NULL);
+	WxToolBar[tbSTANDARD]->AddTool(menuOpen, _T("Open"), m_ImageList->GetBitmap(fileopen_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Open File"), _("Open an existing file"), NULL);
+	WxToolBar[tbSTANDARD]->AddTool(menuSave, _T("Save"), m_ImageList->GetBitmap(filesave_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Save File"), _("Save the modified file"), NULL);
+	WxToolBar[tbSTANDARD]->AddTool(menuSaveAll, _T("SaveAll"), m_ImageList->GetBitmap(saveall_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Save All Files"), _("Save all modified files"), NULL);
+	WxToolBar[tbSTANDARD]->AddTool(menuClose, _T("Close"), m_ImageList->GetBitmap(fileclose_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Close File"), _("Close this file"), NULL);
+	WxToolBar[tbSTANDARD]->AddTool(menuCloseAll, _T("CloseAll"), m_ImageList->GetBitmap(closeall_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Close All Files"), _("Close all opened files"), NULL);
+	WxToolBar[tbSTANDARD]->AddSeparator();
+	WxToolBar[tbSTANDARD]->AddTool(menuPrint, _T("Print"), m_ImageList->GetBitmap(print_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Print This File"), _("Print this file"), NULL);
+	WxToolBar[tbSTANDARD]->AddSeparator();
+	WxToolBar[tbSTANDARD]->AddTool(menuUndo, _T("Undo"), m_ImageList->GetBitmap(undo_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Undo"), _("Undo last operation"), NULL);
+	WxToolBar[tbSTANDARD]->AddTool(menuRedo, _T("Redo"), m_ImageList->GetBitmap(redo_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Redo"), _("Redo last undone operation"), NULL);
+	WxToolBar[tbSTANDARD]->AddSeparator();
+	WxToolBar[tbSTANDARD]->AddTool(menuCut, _T("Cut"), m_ImageList->GetBitmap(cut_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Cut"), _("Cut selection to clipboard"), NULL);
+	WxToolBar[tbSTANDARD]->AddTool(menuCopy, _T("Copy"), m_ImageList->GetBitmap(copy_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Copy"), _("Copy selection to clipboard"), NULL);
+	WxToolBar[tbSTANDARD]->AddTool(menuPaste, _T("Paste"), m_ImageList->GetBitmap(paste_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Paste"), _("Paste from clipboard"), NULL);
+	WxToolBar[tbSTANDARD]->Realize();
 
-    //WxToolBar1
-    //WxToolBar1->AddSeparator();
-    WxToolBar1->AddTool(menuNew,  _T("New"), m_ImageList->GetBitmap(new_xpm_idx),wxNullBitmap, wxITEM_NORMAL, _("New File") );
-    WxToolBar1->AddTool(menuOpen, _T("Open"), m_ImageList->GetBitmap(fileopen_xpm_idx),wxNullBitmap, wxITEM_NORMAL, _("Open File") );
-    WxToolBar1->AddTool(menuSave, _T("Save"), m_ImageList->GetBitmap(filesave_xpm_idx),wxNullBitmap, wxITEM_NORMAL, _("Save File") );
-    WxToolBar1->AddTool(menuSaveAll, _T("SaveAll"), m_ImageList->GetBitmap(saveall_xpm_idx),wxNullBitmap, wxITEM_NORMAL, _("Save All Files") );
-    WxToolBar1->AddTool(menuClose, _T("Close"), m_ImageList->GetBitmap(fileclose_xpm_idx),wxNullBitmap, wxITEM_NORMAL, _("Close File") );
-    WxToolBar1->AddTool(menuCloseAll, _T("CloseAll"), m_ImageList->GetBitmap(closeall_xpm_idx),wxNullBitmap, wxITEM_NORMAL, _("Close All Files") );
-    WxToolBar1->AddSeparator();
-    WxToolBar1->AddTool(menuUndo, _T("Undo"), m_ImageList->GetBitmap(undo_xpm_idx),wxNullBitmap, wxITEM_NORMAL, _("Undo") );
-    WxToolBar1->AddTool(menuRedo, _T("Redo"), m_ImageList->GetBitmap(redo_xpm_idx),wxNullBitmap, wxITEM_NORMAL, _("Redo") );
-    WxToolBar1->AddSeparator();
-    WxToolBar1->AddTool(menuCut, _T("Cut"), m_ImageList->GetBitmap(cut_xpm_idx),wxNullBitmap, wxITEM_NORMAL, _("Cut") );
-    WxToolBar1->AddTool(menuCopy, _T("Copy"), m_ImageList->GetBitmap(copy_xpm_idx),wxNullBitmap, wxITEM_NORMAL, _("Copy") );
-    WxToolBar1->AddTool(menuPaste, _T("Paste"), m_ImageList->GetBitmap(paste_xpm_idx),wxNullBitmap, wxITEM_NORMAL, _("Paste") );
-    WxToolBar1->AddSeparator();
-    WxToolBar1->AddTool(menuIncreaseIndent, _T("IncIndent"), m_ImageList->GetBitmap(indent_xpm_idx),wxNullBitmap, wxITEM_NORMAL, _("Increase Indent") );
-    WxToolBar1->AddTool(menuDecreaseIndent, _T("DecIndent"), m_ImageList->GetBitmap(unindent_xpm_idx),wxNullBitmap, wxITEM_NORMAL, _("Decrease Indent") );
-    WxToolBar1->AddSeparator();
-    WxToolBar1->AddTool(menuComment, _T("Comment"), m_ImageList->GetBitmap(comment_xpm_idx),wxNullBitmap, wxITEM_NORMAL, _("Comment") );
-    WxToolBar1->AddTool(menuUncomment, _T("Uncomment"), m_ImageList->GetBitmap(uncomment_xpm_idx),wxNullBitmap, wxITEM_NORMAL, _("Uncomment") );
-    WxToolBar1->AddSeparator();
-    WxToolBar1->AddTool(menuToggleBookmark,  _T("ToggleBookmark"),  m_ImageList->GetBitmap(bookmark_toggle_xpm_idx),wxNullBitmap, wxITEM_NORMAL, _("Toggle/Remove Bookmark ") );
-    WxToolBar1->AddTool(menuGotoNextBookmark, _T("GotoNextBookmark"), m_ImageList->GetBitmap(bookmark_next_xpm_idx),wxNullBitmap, wxITEM_NORMAL, _("Go To Next Bookmark") );
-    WxToolBar1->AddTool(menuGotoPreviousBookmark,  _T("GotoPreviousBookmark"),  m_ImageList->GetBitmap(bookmark_prev_xpm_idx),wxNullBitmap, wxITEM_NORMAL,  _("Go To Previous Bookmark") );
-    WxToolBar1->AddTool(menuClearAllBookmarks,  _T("ClearAllBookmarks"),  m_ImageList->GetBitmap(bookmark_clear_xpm_idx),wxNullBitmap, wxITEM_NORMAL, _("Clear All Bookmarks") );
-    WxToolBar1->AddSeparator();
-    WxToolBar1->AddTool(menuFind, _T("Find"), m_ImageList->GetBitmap(find_xpm_idx),wxNullBitmap, wxITEM_NORMAL, _("Find") );
-    WxToolBar1->AddTool(menuFindNext, _T("FindNext"), m_ImageList->GetBitmap(findnext_xpm_idx),wxNullBitmap, wxITEM_NORMAL, _("Find Next") );
-    WxToolBar1->AddTool(menuFindPrevious, _T("FindPrev"), m_ImageList->GetBitmap(findprev_xpm_idx),wxNullBitmap, wxITEM_NORMAL, _("Find Previous") );
-    WxToolBar1->AddTool(menuReplace, _T("Replace"), m_ImageList->GetBitmap(replace_xpm_idx),wxNullBitmap, wxITEM_NORMAL, _("Replace") );
-    WxToolBar1->AddSeparator();
-    WxToolBar1->AddTool(menuNoWrap, _T("NoWrap"), m_ImageList->GetBitmap(nowrap_xpm_idx),wxNullBitmap, wxITEM_CHECK, _("No Line Wrap") );
-    WxToolBar1->AddTool(menuWrapByWindow, _T("WrapByWindow"), m_ImageList->GetBitmap(wrapbywin_xpm_idx),wxNullBitmap, wxITEM_CHECK, _("Wrap Lines by Window") );
-    WxToolBar1->AddTool(menuWrapByColumn, _T("WrapByColumn"), m_ImageList->GetBitmap(wrapbycol_xpm_idx),wxNullBitmap, wxITEM_CHECK, _("Wrap Lines by Max Columns") );
-    WxToolBar1->AddTool(menuShowAllChars,  _T("ShowAllChars"),  m_ImageList->GetBitmap(showsymbol_xpm_idx),wxNullBitmap, wxITEM_CHECK, _("Show All Characters") );
-    WxToolBar1->AddSeparator();
-    WxToolBar1->AddTool(menuTextMode, _T("TextMode"), m_ImageList->GetBitmap(textmode_xpm_idx),wxNullBitmap, wxITEM_CHECK, _("Text Mode") );
-    WxToolBar1->AddTool(menuColumnMode, _T("ColumnMode"), m_ImageList->GetBitmap(columnmode_xpm_idx),wxNullBitmap, wxITEM_CHECK, _("Column Mode") );
-    WxToolBar1->AddTool(menuHexMode, _T("HexMode"), m_ImageList->GetBitmap(hexmode_xpm_idx),wxNullBitmap, wxITEM_CHECK, _("Hex Mode") );
-    WxToolBar1->AddSeparator();
-    WxToolBar1->AddTool(menuRunTempMacro,  _T("RunTempMacro"),  m_ImageList->GetBitmap(runscript_xpm_idx),wxNullBitmap, wxITEM_NORMAL, _("Run Temporary Macro") );
-    WxToolBar1->AddTool(menuStartRecMacro, _T("StartRecMacro"), m_ImageList->GetBitmap(record_xpm_idx),wxNullBitmap, wxITEM_NORMAL, _("Start Recording") );
-    WxToolBar1->AddTool(menuStopRecMacro,  _T("StopRecMacro"),  m_ImageList->GetBitmap(stop_xpm_idx),wxNullBitmap, wxITEM_NORMAL, _("Stop Recording") );
-    WxToolBar1->AddTool(menuPlayRecMacro,  _T("PlayRecMacro"),  m_ImageList->GetBitmap(play_xpm_idx),wxNullBitmap, wxITEM_NORMAL, _("Playback") );
-    WxToolBar1->AddTool(menuSaveRecMacro,  _T("SaveRecMacro"),  m_ImageList->GetBitmap(saverec_xpm_idx),wxNullBitmap, wxITEM_NORMAL, _("Save Currently Recorded Macro") );
-    WxToolBar1->AddSeparator();
-    WxToolBar1->AddTool(menuSpellChecker,  _T("SpellChecker"),  m_ImageList->GetBitmap(spellchecker_xpm_idx),wxNullBitmap, wxITEM_CHECK, _("Spell Checker") );
-    WxToolBar1->Realize();
+	WxToolBar[tbSEARCHREPLACE]->AddTool(menuFind, _T("Find"), m_ImageList->GetBitmap(find_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Find"), _("Find text from caret"), NULL);
+	WxToolBar[tbSEARCHREPLACE]->AddTool(menuFindNext, _T("FindNext"), m_ImageList->GetBitmap(findnext_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Find Next"), _("Find matched text next to caret"), NULL);
+	WxToolBar[tbSEARCHREPLACE]->AddTool(menuFindPrevious, _T("FindPrev"), m_ImageList->GetBitmap(findprev_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Find Previous"), _("Find matched text previous from caret"), NULL);
+	WxToolBar[tbSEARCHREPLACE]->AddTool(menuReplace, _T("Replace"), m_ImageList->GetBitmap(replace_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Replace"), _("Replace matched text with new one from caret"), NULL);
 
-    //WxToolBar1->EnableTool(wxID_NEW, false);
-    //WxToolBar1->ToggleTool(wxID_NEW, true);
+	WxToolBar[tbTEXTVIEW]->AddTool(menuNoWrap, _T("NoWrap"), m_ImageList->GetBitmap(nowrap_xpm_idx), wxNullBitmap, wxITEM_CHECK, _("No Line Wrap"), _("Don't wrap line "), NULL);
+	WxToolBar[tbTEXTVIEW]->AddTool(menuWrapByWindow, _T("WrapByWindow"), m_ImageList->GetBitmap(wrapbywin_xpm_idx), wxNullBitmap, wxITEM_CHECK, _("Wrap Lines by Window"), _("Wrap lines by window width"), NULL);
+	WxToolBar[tbTEXTVIEW]->AddTool(menuWrapByColumn, _T("WrapByColumn"), m_ImageList->GetBitmap(wrapbycol_xpm_idx), wxNullBitmap, wxITEM_CHECK, _("Wrap Lines by Max Columns"), _("Wrap lines by max columns set in Opions"), NULL);
+	WxToolBar[tbTEXTVIEW]->AddTool(menuShowAllChars, _T("ShowAllChars"), m_ImageList->GetBitmap(showsymbol_xpm_idx), wxNullBitmap, wxITEM_CHECK, _("Show All Characters"), _("Show all characters including TAB, Space and EOL"), NULL);
+	WxToolBar[tbTEXTVIEW]->AddTool(menuSpellChecker, _T("SpellChecker"), m_ImageList->GetBitmap(spellchecker_xpm_idx), wxNullBitmap, wxITEM_CHECK, _("Spell Checker"), _("Spell checker according to dictionary selected"), NULL);
+	WxToolBar[tbTEXTVIEW]->Realize();
+    
+	WxToolBar[tbEDITMODE]->AddTool(menuTextMode, _T("TextMode"), m_ImageList->GetBitmap(textmode_xpm_idx), wxNullBitmap, wxITEM_CHECK, _("Text Mode"), _("Normal text edit mode"), NULL);
+	WxToolBar[tbEDITMODE]->AddTool(menuColumnMode, _T("ColumnMode"), m_ImageList->GetBitmap(columnmode_xpm_idx), wxNullBitmap, wxITEM_CHECK, _("Column Mode"), _("Column edit mode"), NULL);
+	WxToolBar[tbEDITMODE]->AddTool(menuHexMode, _T("HexMode"), m_ImageList->GetBitmap(hexmode_xpm_idx), wxNullBitmap, wxITEM_CHECK, _("Hex Mode"), _("Hex edit mode"), NULL);
+	WxToolBar[tbEDITMODE]->Realize();
 
+	WxToolBar[tbMACRO]->AddTool(menuRunTempMacro, _T("RunTempMacro"), m_ImageList->GetBitmap(runscript_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Run Temporary Macro"), _("Temporarily edit and run a macro"), NULL);
+	WxToolBar[tbMACRO]->AddTool(menuStartRecMacro, _T("StartRecMacro"), m_ImageList->GetBitmap(record_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Start Recording"), _("Start recording user operation with Mad-Python"), NULL);
+	WxToolBar[tbMACRO]->AddTool(menuStopRecMacro, _T("StopRecMacro"), m_ImageList->GetBitmap(stop_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Stop Recording"), _("Stop recording user operation with Mad-Python"), NULL);
+	WxToolBar[tbMACRO]->AddTool(menuPlayRecMacro, _T("PlayRecMacro"), m_ImageList->GetBitmap(play_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Playback"), _("Playback recorded Mad-Python"), NULL);
+	WxToolBar[tbMACRO]->AddTool(menuSaveRecMacro, _T("SaveRecMacro"), m_ImageList->GetBitmap(saverec_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Save Currently Recorded Macro"), _("Save recorded macro to Mad-Python file"), NULL);
+	WxToolBar[tbMACRO]->Realize();
+
+	WxToolBar[tbEDITOR]->AddTool(menuIncreaseIndent, _T("IncIndent"), m_ImageList->GetBitmap(indent_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Increase Indent"), _("Increase indent for selection"), NULL);
+	WxToolBar[tbEDITOR]->AddTool(menuDecreaseIndent, _T("DecIndent"), m_ImageList->GetBitmap(unindent_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Decrease Indent"), _("Decrease indent for selection"), NULL);
+	WxToolBar[tbEDITOR]->AddSeparator();
+	WxToolBar[tbEDITOR]->AddTool(menuComment, _T("Comment"), m_ImageList->GetBitmap(comment_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Comment"), _("Comment selection"), NULL);
+	WxToolBar[tbEDITOR]->AddTool(menuUncomment, _T("Uncomment"), m_ImageList->GetBitmap(uncomment_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Uncomment"), _("Uncomment selection"), NULL);
+	WxToolBar[tbEDITOR]->AddSeparator();
+	WxToolBar[tbEDITOR]->AddTool(menuToggleBookmark, _T("ToggleBookmark"), m_ImageList->GetBitmap(bookmark_toggle_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Toggle/Remove Bookmark"), _("Toggle or remove bookmark"), NULL);
+	WxToolBar[tbEDITOR]->AddTool(menuGotoNextBookmark, _T("GotoNextBookmark"), m_ImageList->GetBitmap(bookmark_next_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Go To Next Bookmark"), _("Go to next bookmark"), NULL);
+	WxToolBar[tbEDITOR]->AddTool(menuGotoPreviousBookmark, _T("GotoPreviousBookmark"), m_ImageList->GetBitmap(bookmark_prev_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Go To Previous Bookmark"), _("Go to previous bookmark"), NULL);
+	WxToolBar[tbEDITOR]->AddTool(menuClearAllBookmarks, _T("ClearAllBookmarks"), m_ImageList->GetBitmap(bookmark_clear_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Clear All Bookmarks"), _("Clear all bookmarks"), NULL);
+	WxToolBar[tbEDITOR]->Realize();
+
+    //WxToolBar[tbSTANDARD]->EnableTool(wxID_NEW, false);
+    //WxToolBar[tbSTANDARD]->ToggleTool(wxID_NEW, true);
+	// add the toolbars to the manager
+	m_AuiManager.AddPane(WxToolBar[tbSTANDARD],      wxAuiPaneInfo().Name(wxT("WxToolBar1")).Caption(wxT("Starndard")).Floatable(false).ToolbarPane().Top().Row(1));
+	m_AuiManager.AddPane(WxToolBar[tbEDITOR],        wxAuiPaneInfo().Name(wxT("WxToolBar2")).Caption(wxT("Editor")).Floatable(false).ToolbarPane().Top().Row(1).Position(1));
+	m_AuiManager.AddPane(WxToolBar[tbSEARCHREPLACE], wxAuiPaneInfo().Name(wxT("WxToolBar3")).Caption(wxT("Search/Replace")).Floatable(false).ToolbarPane().Top().Row(1).Position(2));
+	m_AuiManager.AddPane(WxToolBar[tbTEXTVIEW],      wxAuiPaneInfo().Name(wxT("WxToolBar4")).Caption(wxT("Text View")).Floatable(false).ToolbarPane().Top().Row(1).Position(3));
+	m_AuiManager.AddPane(WxToolBar[tbEDITMODE],      wxAuiPaneInfo().Name(wxT("WxToolBar5")).Caption(wxT("Edit Mode")).Floatable(false).ToolbarPane().Top().Row(1).Position(4));
+	m_AuiManager.AddPane(WxToolBar[tbMACRO],         wxAuiPaneInfo().Name(wxT("WxToolBar6")).Caption(wxT("Macro")).Floatable(false).ToolbarPane().Top().Row(1).Position(5));
+    bool bb;
+    m_ToolbarStatus[tbMAX] = false;
+    m_Config->Read(wxT("/MadEdit/ShowToolbarStandard"), &bb, true);
+    m_ToolbarStatus[tbSTANDARD] = bb;
+    m_ToolbarStatus[tbMAX] = (m_ToolbarStatus[tbMAX] | bb);
+    if(!bb)
+        m_AuiManager.GetPane(WxToolBar[tbSTANDARD]).Hide();
+    m_Config->Read(wxT("/MadEdit/ShowToolbarEditor"), &bb, true);
+    m_ToolbarStatus[tbEDITOR] = bb;
+    m_ToolbarStatus[tbMAX] = (m_ToolbarStatus[tbMAX] | bb);
+    if(!bb)
+        m_AuiManager.GetPane(WxToolBar[tbEDITOR]).Hide();
+    m_Config->Read(wxT("/MadEdit/ShowToolbarSearchReplace"), &bb, true);
+    m_ToolbarStatus[tbSEARCHREPLACE] = bb;
+    m_ToolbarStatus[tbMAX] = (m_ToolbarStatus[tbMAX] | bb);
+    if(!bb)
+        m_AuiManager.GetPane(WxToolBar[tbSEARCHREPLACE]).Hide();
+    m_Config->Read(wxT("/MadEdit/ShowToolbarTextview"), &bb, true);
+    m_ToolbarStatus[tbTEXTVIEW] = bb;
+    m_ToolbarStatus[tbMAX] = (m_ToolbarStatus[tbMAX] | bb);
+    if(!bb)
+        m_AuiManager.GetPane(WxToolBar[tbTEXTVIEW]).Hide();
+    m_Config->Read(wxT("/MadEdit/ShowToolbarEditMode"), &bb, true);
+    m_ToolbarStatus[tbEDITMODE] = bb;
+    m_ToolbarStatus[tbMAX] = (m_ToolbarStatus[tbMAX] | bb);
+    if(!bb)
+        m_AuiManager.GetPane(WxToolBar[tbEDITMODE]).Hide();
+    m_Config->Read(wxT("/MadEdit/ShowToolbarMacro"), &bb, true);
+    m_ToolbarStatus[tbMACRO] = bb;
+    m_ToolbarStatus[tbMAX] = (m_ToolbarStatus[tbMAX] | bb);
+    if(!bb)
+        m_AuiManager.GetPane(WxToolBar[tbMACRO]).Hide();
+
+    m_QuickSearch = new wxComboBox(m_QuickSeachBar, ID_QUICKSEARCH, wxEmptyString, wxDefaultPosition, wxSize(200, 21));
+    g_RecentFindText=new MadRecentList(20, ID_RECENTFINDTEXT1, true); //Should be freed in SearchDialog 
+    wxString oldpath=m_Config->GetPath();
+    m_Config->SetPath(wxT("/RecentFindText"));
+    g_RecentFindText->Load(*m_Config);
+    m_Config->SetPath(oldpath);
+
+    size_t count = g_RecentFindText->GetCount();
+    if(count>0)
+    {
+        wxString text=g_RecentFindText->GetHistoryFile(0);
+        m_QuickSearch->SetValue(text);
+        m_QuickSearch->Append(text);
+        for(size_t i=1; i<count; ++i) m_QuickSearch->Append(g_RecentFindText->GetHistoryFile(i));
+    }
+    //m_QuickSearch->Connect(wxEVT_TEXT_ENTER, wxCommandEventHandler(MadEditFrame::OnSearchQuickFind));
+    m_QuickSearch->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MadEditFrame::MadEditFrameKeyDown));
+    m_QuickSeachBar->AddControl(m_QuickSearch);
+    m_QuickSeachBar->AddTool(menuQuickFindNext, _T("QuickFindNext"), m_ImageList->GetBitmap(down_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Find Next"), _("Find matched text next to caret"), NULL);
+    m_QuickSeachBar->AddTool(menuQuickFindPrevious, _T("QuickFindPrevious"), m_ImageList->GetBitmap(up_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Find Previous"), _("Find matched text previous from caret"), NULL);
+    
+    m_CheckboxWholeWord = new wxCheckBox( m_QuickSeachBar, ID_QUICKSEARCHWHOLEWORD, _("Whole Word"));
+    m_CheckboxWholeWord->SetValue(false);
+    m_CheckboxWholeWord->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MadEditFrame::MadEditFrameKeyDown));
+    m_QuickSeachBar->AddControl(m_CheckboxWholeWord);
+    m_CheckboxCaseSensitive = new wxCheckBox( m_QuickSeachBar, ID_QUICKSEARCHCASESENSITIVE, _("Case Sensitive"));
+    m_CheckboxCaseSensitive->SetValue(false);
+    m_QuickSeachBar->AddControl(m_CheckboxCaseSensitive);
+    m_CheckboxRegEx = new wxCheckBox( m_QuickSeachBar, ID_QUICKSEARCHREGEX, _("Regular Expression"));
+    m_CheckboxRegEx->SetValue(false);
+    m_CheckboxCaseSensitive->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MadEditFrame::MadEditFrameKeyDown));
+    m_QuickSeachBar->AddControl(m_CheckboxRegEx);
+    m_QuickSeachBar->Realize();
+
+    m_AuiManager.AddPane(m_QuickSeachBar, wxAuiPaneInfo().Name(wxT("QuickSeachBar")).Caption(_("Quick Search")).Floatable(true).ToolbarPane().Top().Row(2));
+    //m_AuiManager.AddPane(m_QuickSeachBar, wxRIGHT|wxTOP, wxT("Quick Seach"));
+    m_AuiManager.GetPane(m_QuickSeachBar).Hide();
+    m_ToolbarStatus[tbQSEARCH] = false;
 
     // information window
     int infoW = 300, infoH = 130;
@@ -2579,7 +2734,7 @@ void MadEditFrame::CreateGUIControls(void)
     m_FindInFilesResults->AddRoot(wxT("Root"));
     m_FindInFilesResults->Connect(wxEVT_LEFT_DCLICK, wxMouseEventHandler(MadEditFrame::OnFindInFilesResultsDClick));
 
-    m_InfoNotebook->AddPage(m_FindInFilesResults, _("Find/Replace in Files Results"));
+    m_InfoNotebook->AddPage(m_FindInFilesResults, _("Search Results"));
     m_InfoNotebook->Connect(wxEVT_SIZE, wxSizeEventHandler(MadEditFrame::OnInfoNotebookSize));
 
     // wxAUI
@@ -2634,6 +2789,22 @@ void MadEditFrame::MadEditFrameClose(wxCloseEvent& event)
         PurgeRecentFiles();
         PurgeRecentFonts();
         PurgeRecentEncodings();
+        extern bool g_ForcePurgeThisTime;
+        if(g_ForcePurgeThisTime)
+        {
+            if(g_SearchDialog==NULL)
+            {
+                g_SearchDialog=new MadSearchDialog(this, -1);
+            }
+            if(g_ReplaceDialog==NULL)
+            {
+                g_ReplaceDialog=new MadReplaceDialog(this, -1);
+            }
+            if(g_FindInFilesDialog==NULL)
+            {
+                g_FindInFilesDialog=new MadFindInFilesDialog(this, -1);
+            }
+        }
         if (g_SearchDialog != NULL)
         {
             if(g_SearchDialog->IsShown())
@@ -2654,6 +2825,7 @@ void MadEditFrame::MadEditFrameClose(wxCloseEvent& event)
             g_FindInFilesDialog->PurgeRecentFindFilters();
             g_FindInFilesDialog->PurgeRecentFindExcludes();
         }
+        m_QuickSearch->Clear();
     }
 
     m_Config->SetPath(wxT("/FileCaretPos"));
@@ -2731,6 +2903,12 @@ void MadEditFrame::MadEditFrameClose(wxCloseEvent& event)
     m_Config->Write(wxT("/MadEdit/SearchFrom"), wxEmptyString);
     m_Config->Write(wxT("/MadEdit/SearchTo"), wxEmptyString);
 
+    m_Config->Write(wxT("/MadEdit/ShowToolbarStandard"), m_ToolbarStatus[tbSTANDARD]);
+    m_Config->Write(wxT("/MadEdit/ShowToolbarEditor"), m_ToolbarStatus[tbEDITOR]);
+    m_Config->Write(wxT("/MadEdit/ShowToolbarSearchReplace"), m_ToolbarStatus[tbSEARCHREPLACE]);
+    m_Config->Write(wxT("/MadEdit/ShowToolbarTextview"), m_ToolbarStatus[tbTEXTVIEW]);
+    m_Config->Write(wxT("/MadEdit/ShowToolbarEditMode"), m_ToolbarStatus[tbEDITMODE]);
+    m_Config->Write(wxT("/MadEdit/ShowToolbarMacro"), m_ToolbarStatus[tbMACRO]);
     delete m_RecentFiles;
     m_RecentFiles=NULL;
     delete m_RecentEncodings;
@@ -2783,6 +2961,15 @@ void MadEditFrame::MadEditFrameKeyDown(wxKeyEvent& event)
         if(g_FindInFilesDialog && g_FindInFilesDialog->IsShown())
         {
             g_FindInFilesDialog->Show(false);
+        }
+        if(g_MainFrame->m_ToolbarStatus[tbQSEARCH])
+        {
+            g_MainFrame->HideQuickFindBar();
+            if(g_ActiveMadEdit)
+            {
+                g_ActiveMadEdit->SetFocus();
+                g_ActiveMadEdit->Refresh(false);
+            }
         }
         break;
     }
@@ -2862,7 +3049,7 @@ WXLRESULT MadEditFrame::MSWWindowProc(WXUINT message, WXWPARAM wParam, WXLPARAM 
 
 void MadEditFrame::OnNotebookPageChanging(wxAuiNotebookEvent& event)
 {
-	g_PrevPageID = event.GetOldSelection();
+    g_PrevPageID = event.GetOldSelection();
 }
 
 void MadEditFrame::OnNotebookPageChanged(wxAuiNotebookEvent& event)
@@ -3552,7 +3739,7 @@ void MadEditFrame::OnUpdateUI_MenuEditStartEndSelction(wxUpdateUIEvent& event)
 
 // add: gogo, 21.09.2009
 //----------
-void MadEditFrame::OnUpdateUI_MenuSearchCheckBookmark(wxUpdateUIEvent& event)
+void MadEditFrame::OnUpdateUI_MenuEditCheckBookmark(wxUpdateUIEvent& event)
 {
     event.Enable( g_ActiveMadEdit != NULL && g_ActiveMadEdit->GetEditMode()!=emHexMode && g_ActiveMadEdit->HasBookMark() );
 }
@@ -3718,11 +3905,20 @@ void MadEditFrame::OnUpdateUI_MenuViewWrapByColumn(wxUpdateUIEvent& event)
     event.Enable(g_ActiveMadEdit!=NULL);
     event.Check(g_ActiveMadEdit && g_ActiveMadEdit->GetWordWrapMode()==wwmWrapByColumn);
 }
-
 void MadEditFrame::OnUpdateUI_MenuViewDisplayLineNumber(wxUpdateUIEvent& event)
 {
     event.Enable(g_ActiveMadEdit!=NULL);
     event.Check(g_ActiveMadEdit && g_ActiveMadEdit->GetDisplayLineNumber());
+}
+void MadEditFrame::OnUpdateUI_MenuViewDisplayBookmark(wxUpdateUIEvent& event)
+{
+    event.Enable(g_ActiveMadEdit!=NULL);
+    event.Check(g_ActiveMadEdit && g_ActiveMadEdit->GetDisplayBookmark());
+}
+void MadEditFrame::OnUpdateUI_MenuViewDisplay80ColHint(wxUpdateUIEvent& event)
+{
+    event.Enable(g_ActiveMadEdit!=NULL);
+    event.Check(g_ActiveMadEdit && g_ActiveMadEdit->GetDisplay80ColHint());
 }
 void MadEditFrame::OnUpdateUI_MenuViewShowEndOfLine(wxUpdateUIEvent& event)
 {
@@ -3793,7 +3989,38 @@ void MadEditFrame::OnUpdateUI_MenuViewHexMode(wxUpdateUIEvent& event)
     event.Enable(g_ActiveMadEdit!=NULL);
     event.Check(g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode()==emHexMode);
 }
-
+void MadEditFrame::OnUpdateUI_MenuViewToolbars(wxUpdateUIEvent& event)
+{
+    event.Enable(tbMAX != 0);
+}
+void MadEditFrame::OnUpdateUI_MenuViewToolbarsToggleAll(wxUpdateUIEvent& event)
+{
+    event.Enable(tbMAX != 0);
+    
+    event.Check(m_ToolbarStatus[tbMAX]);
+}
+void MadEditFrame::OnUpdateUI_MenuViewToolbarList(wxUpdateUIEvent& event)
+{
+    int menuItemId = event.GetId();
+    int toolbarId = menuItemId - menuToolBar1;
+    if(toolbarId < tbMAX)
+    {
+        if(m_ToolbarStatus[tbMAX])
+        {
+            g_Menu_Toolbars->Enable(menuItemId, true);
+            if(m_ToolbarStatus[toolbarId])
+            {
+                g_Menu_Toolbars->Check(menuItemId, true);
+            }
+            else
+            {
+                g_Menu_Toolbars->Check(menuItemId, false);
+            }
+        }
+        else
+            g_Menu_Toolbars->Enable(menuItemId, false);
+    }
+}
 void MadEditFrame::OnUpdateUI_MenuToolsByteOrderMark(wxUpdateUIEvent& event)
 {
     MadEncodingType type;
@@ -5171,10 +5398,6 @@ void MadEditFrame::OnSearchFind(wxCommandEvent& event)
         g_FindInFilesDialog->Show(false);
     }
 
-    static wxString text(_("Search Results"));
-    int pid = m_InfoNotebook->GetPageIndex(m_FindInFilesResults);
-    m_InfoNotebook->SetPageText(pid, text);
-
     g_SearchDialog->m_FindText->SetEncoding(g_ActiveMadEdit->GetEncodingName());
 
     g_SearchDialog->Show();
@@ -5774,6 +5997,31 @@ void MadEditFrame::OnViewDisplayLineNumber(wxCommandEvent& event)
     else
         RecordAsMadMacro(g_ActiveMadEdit, wxString(wxT("SetDisplayLineNumber(False)")));
 }
+
+void MadEditFrame::OnViewDisplayBookmark(wxCommandEvent& event)
+{
+    if(g_ActiveMadEdit==NULL) return;
+
+    g_ActiveMadEdit->SetDisplayBookmark(event.IsChecked());
+    
+    if(event.IsChecked())
+        RecordAsMadMacro(g_ActiveMadEdit, wxString(wxT("SetDisplayBookmark(True)")));
+    else
+        RecordAsMadMacro(g_ActiveMadEdit, wxString(wxT("SetDisplayBookmark(False)")));
+}
+
+void MadEditFrame::OnViewDisplay80ColHint(wxCommandEvent& event)
+{
+    if(g_ActiveMadEdit==NULL) return;
+
+    g_ActiveMadEdit->SetDisplay80ColHint(event.IsChecked());
+    
+    if(event.IsChecked())
+        RecordAsMadMacro(g_ActiveMadEdit, wxString(wxT("SetDisplay80ColHint(True)")));
+    else
+        RecordAsMadMacro(g_ActiveMadEdit, wxString(wxT("SetDisplay80ColHint(False)")));
+}
+
 void MadEditFrame::OnViewShowEndOfLine(wxCommandEvent& event)
 {
     if(g_ActiveMadEdit==NULL) return;
@@ -5919,6 +6167,67 @@ void MadEditFrame::OnViewHexMode(wxCommandEvent& event)
     RecordAsMadMacro(g_ActiveMadEdit, wxString(wxT("SetEditMode(MadEditMode.HexMode)")));
 }
 
+void MadEditFrame::OnViewToolbars(wxCommandEvent& event)
+{
+    int menuId = event.GetId();
+    int toolbarId = menuId - menuToolBar1;
+    if(toolbarId < tbMAX)
+    {
+        if(m_ToolbarStatus[toolbarId])
+        {
+            m_ToolbarStatus[toolbarId] = false;
+            int i = tbSTANDARD;
+            for(; i<tbMAX; ++i)
+            {
+                if(m_ToolbarStatus[i])
+                {
+                    m_ToolbarStatus[tbMAX] = true;
+                    break;
+                }
+            }
+            if(i == tbMAX)
+                m_ToolbarStatus[tbMAX] = false;
+            m_AuiManager.GetPane(WxToolBar[toolbarId]).Hide();
+            for(int i = toolbarId+1; i < tbMAX; ++i)
+            {
+                m_AuiManager.GetPane(WxToolBar[i]).Position(i-1);
+            }
+        }
+        else
+        {
+            m_AuiManager.GetPane(WxToolBar[toolbarId]).Show(true);
+            m_ToolbarStatus[toolbarId] = true;
+            if(!m_ToolbarStatus[tbMAX])
+                m_ToolbarStatus[tbMAX] = true;
+        }
+        m_AuiManager.Update();
+    }
+}
+void MadEditFrame::OnViewToolBarsToggleAll(wxCommandEvent& event)
+{
+    if(event.IsChecked() || event.GetInt() == -1)
+    {
+        for(int toolbarId = tbSTANDARD; toolbarId < tbMAX; ++toolbarId)
+        {
+            if(m_ToolbarStatus[toolbarId])
+            {
+                m_AuiManager.GetPane(WxToolBar[toolbarId]).Show();
+            }
+        }
+        m_ToolbarStatus[tbMAX] = true;
+    }
+    else
+    {
+        for(int toolbarId = tbSTANDARD; toolbarId < tbMAX; ++toolbarId)
+        {
+            if(m_ToolbarStatus[toolbarId])
+                m_AuiManager.GetPane(WxToolBar[toolbarId]).Hide();
+        }
+        m_ToolbarStatus[tbMAX] = false;
+    }
+    m_AuiManager.Update();
+}
+
 void MadEditFrame::OnToolsOptions(wxCommandEvent& event)
 {
     if(g_OptionsDialog==NULL) g_OptionsDialog=new MadOptionsDialog(this);
@@ -5961,15 +6270,19 @@ void MadEditFrame::OnToolsOptions(wxCommandEvent& event)
 #ifdef __WXMSW__
         if(g_OptionsDialog->WxCheckBoxRightClickMenu->GetValue())
         {
-            wxRegKey *pRegKey = new wxRegKey(g_MadEditRegkeyPath + wxT("*\\shell\\MadEdit\\command"));
+            wxRegKey *pRegKeyMad = new wxRegKey(g_MadEditRegkeyPath + wxT("*\\shell\\MadEdit-Mod"));
+            pRegKeyMad->Create();
+            pRegKeyMad->SetValue(wxEmptyString, wxT("Edit with MadEdit-Mod"));
+            wxRegKey *pRegKey = new wxRegKey(*pRegKeyMad, wxT("\\command"));
             pRegKey->Create();
             wxString exepath=GetExecutablePath();
             pRegKey->SetValue(wxEmptyString, wxString(wxT('"'))+exepath+wxString(wxT("\" \"%1\"")));
             delete pRegKey;
+            delete pRegKeyMad;
         }
         else
         {
-            wxRegKey *pRegKey = new wxRegKey(g_MadEditRegkeyPath + wxT("*\\shell\\MadEdit"));
+            wxRegKey *pRegKey = new wxRegKey(g_MadEditRegkeyPath + wxT("*\\shell\\MadEdit-Mod"));
             pRegKey->DeleteSelf();
             delete pRegKey;
         }
@@ -6015,7 +6328,11 @@ void MadEditFrame::OnToolsOptions(wxCommandEvent& event)
 
         m_Config->Write(wxT("ReloadFiles"), g_OptionsDialog->WxCheckBoxReloadFiles->GetValue());
         m_Config->Write(wxT("RestoreCaretPos"), g_OptionsDialog->WxCheckBoxRestoreCaretPos->GetValue());
+        extern bool g_ForcePurgeThisTime;
+        m_Config->Read(wxT("PurgeHistory"), g_ForcePurgeThisTime);
         m_Config->Write(wxT("PurgeHistory"), g_OptionsDialog->WxCheckBoxPurgeHistory->GetValue());
+        if(!g_ForcePurgeThisTime) g_ForcePurgeThisTime = g_OptionsDialog->WxCheckBoxPurgeHistory->GetValue();
+        else g_ForcePurgeThisTime = false;
 
         bool bb;
         long ll;
@@ -6025,6 +6342,9 @@ void MadEditFrame::OnToolsOptions(wxCommandEvent& event)
 
         bb=g_OptionsDialog->WxCheckBoxPrintLineNumber->GetValue();
         m_Config->Write(wxT("PrintLineNumber"), bb);
+
+        bb=g_OptionsDialog->WxCheckBoxPrintBookmark->GetValue();
+        m_Config->Write(wxT("PrintBookmark"), bb);
 
         bb=g_OptionsDialog->WxCheckBoxPrintEndOfLine->GetValue();
         m_Config->Write(wxT("PrintEndOfLine"), bb);
@@ -6273,7 +6593,65 @@ void MadEditFrame::OnToolsFileAssociation(wxCommandEvent& event)
 void MadEditFrame::OnToolsPurgeHistories(wxCommandEvent& event)
 {
     MadPurgeHistoryDialog dlg(this);
-    dlg.ShowModal();
+
+    if(dlg.ShowModal()==wxID_OK)
+    {
+        // insert your code here
+        if (dlg.wxCheckBoxRecentFiles->IsChecked())
+            PurgeRecentFiles();
+        
+        if (dlg.wxCheckBoxRecentFonts->IsChecked())
+            PurgeRecentFonts();
+        
+        if (dlg.wxCheckBoxRecentEncodings->IsChecked())
+            PurgeRecentEncodings();
+        
+        if (dlg.wxCheckBoxRecentSearchedTexts->IsChecked())
+        {
+            if(g_SearchDialog==NULL)
+            {
+                g_SearchDialog=new MadSearchDialog(this, -1);
+            }
+            g_SearchDialog->PurgeRecentFindTexts();
+        }
+
+        if (dlg.wxCheckBoxRecentReplacedTexts->IsChecked())
+        {
+            if(g_ReplaceDialog==NULL)
+            {
+                g_ReplaceDialog=new MadReplaceDialog(this, -1);
+            }
+            g_ReplaceDialog->PurgeRecentReplaceTexts();
+        }
+        
+        if (dlg.wxCheckBoxRecentSearchedDirectories->IsChecked())
+        {
+            if(g_FindInFilesDialog==NULL)
+            {
+                g_FindInFilesDialog=new MadFindInFilesDialog(this, -1);
+            }
+            g_FindInFilesDialog->PurgeRecentFindDirs();
+        }
+        
+        if (dlg.wxRecentSearchedFileFilters->IsChecked())
+        {
+            if(g_FindInFilesDialog==NULL)
+            {
+                g_FindInFilesDialog=new MadFindInFilesDialog(this, -1);
+            }
+            g_FindInFilesDialog->PurgeRecentFindFilters();
+        }
+        
+        if (dlg.wxCheckBoxRecentSearchedExcludeFilters->IsChecked())
+        {
+            if(g_FindInFilesDialog==NULL)
+            {
+                g_FindInFilesDialog=new MadFindInFilesDialog(this, -1);
+            }
+            g_FindInFilesDialog->PurgeRecentFindExcludes();
+        }
+        m_QuickSearch->Clear();
+    }
 }
 
 void MadEditFrame::OnToolsRunTempMacro(wxCommandEvent& event)
@@ -6889,6 +7267,7 @@ void MadEditFrame::OnResetCurrResult(wxCommandEvent& event)
     if (g_ActiveMadEdit)
     {
         g_MainFrame->ResetFindInFilesResults();
+        g_StatusBar->SetStatusText( wxEmptyString, 0 );
     }
 }
 
@@ -6913,6 +7292,189 @@ void MadEditFrame::PurgeRecentEncodings()
         m_RecentEncodings->RemoveFileFromHistory((size_t)i);
 }
 
+void MadEditFrame::OnRightClickToolBar(wxAuiToolBarEvent& event)
+{
+    wxContextMenuEvent ctEvt(wxEVT_AUITOOLBAR_RIGHT_CLICK, event.GetId(), event.GetClickPoint());
+    g_MainFrame->OnContextMenu(ctEvt);
+}
+
+void MadEditFrame::OnContextMenu(wxContextMenuEvent& event)
+{
+#if wxUSE_MENUS
+    if(g_Menu_FrameContext == NULL)
+    {
+        g_Menu_FrameContext = new wxMenu((long)0);
+
+        g_Menu_FrameContext->AppendCheckItem(menuToolBarsToggleAll, _("Toggle Main Toolbar"));
+        g_Menu_FrameContext->AppendSeparator();
+        for(int i=tbSTANDARD; i<tbMAX; ++i)
+        {
+            g_Menu_FrameContext->AppendCheckItem(menuToolBar1 + i, g_ToolbarNames[i]);
+        }
+    }
+
+    for(int i=tbSTANDARD; i<tbMAX; ++i)
+    {
+        int menuId = menuToolBar1 + i;
+        if(m_ToolbarStatus[tbMAX])
+        {
+            if(!g_Menu_FrameContext->IsEnabled(menuId))
+                g_Menu_FrameContext->Enable(menuId, true);
+            if(m_ToolbarStatus[i])
+                g_Menu_FrameContext->Check(menuId, true);
+            else
+                g_Menu_FrameContext->Check(menuId, false);
+        }
+        else
+        {
+            g_Menu_FrameContext->Enable(menuId, false);
+        }
+    }
+    
+    PopupMenu(g_Menu_FrameContext);
+#endif // wxUSE_MENUS
+}
+
+void MadEditFrame::HideQuickFindBar()
+{
+    m_AuiManager.GetPane(m_QuickSeachBar).Hide();
+    m_AuiManager.Update();
+    m_ToolbarStatus[tbQSEARCH] = false;
+    int i = tbSTANDARD;
+    for(; i<tbMAX; ++i)
+    {
+        if(m_ToolbarStatus[i])
+        {
+            m_ToolbarStatus[tbMAX] = true;
+            break;
+        }
+    }
+    if(i == tbMAX)
+        m_ToolbarStatus[tbMAX] = false;
+}
+
+void MadEditFrame::OnShowSearchQuickFindBar(wxCommandEvent& event)
+{
+    if(!m_AuiManager.GetPane(m_QuickSeachBar).IsShown())
+    {
+        m_AuiManager.GetPane(m_QuickSeachBar).Show();
+        m_ToolbarStatus[tbQSEARCH] = true;
+        m_ToolbarStatus[tbMAX] = true;
+        m_AuiManager.Update();
+    }
+    m_QuickSearch->SetFocus();
+}
+
+void MadEditFrame::OnSearchQuickFind(wxCommandEvent& event)
+{
+    if(g_ActiveMadEdit)
+    {
+        if(m_SearchDirectionNext)
+            OnSearchQuickFindNext(event);
+        else
+            OnSearchQuickFindPrevious(event);
+    }
+}
+
+void MadEditFrame::OnSearchQuickFindPrevious(wxCommandEvent& event)
+{
+    m_SearchDirectionNext = false;
+    if(m_QuickSearch && g_ActiveMadEdit)
+    {
+        if(m_QuickSearch->GetValue().IsEmpty())
+        {
+            return;
+        }
+        if(event.GetEventType() == wxEVT_TEXT_ENTER)
+        {
+            if(wxNOT_FOUND == m_QuickSearch->FindString(m_QuickSearch->GetValue(), true))
+            {
+                m_QuickSearch->Insert( m_QuickSearch->GetValue(), 0 );
+                g_RecentFindText->AddFileToHistory(m_QuickSearch->GetValue());
+            }
+        }
+        
+        MadSearchResult sr;
+        static bool reset_caretpos = false;
+        static wxFileOffset lastCaret = 0;
+        wxFileOffset rangeFrom = g_ActiveMadEdit->GetCaretPosition(), rangeTo = -1;
+        
+        if(event.GetEventType() == wxEVT_TEXT && g_ActiveMadEdit->IsSelected())
+        {
+			rangeFrom = g_ActiveMadEdit->GetSelectionEndPos()+1;
+        }
+        if((reset_caretpos && rangeFrom <= lastCaret) && !g_ActiveMadEdit->IsModified())
+        {
+            rangeFrom = g_ActiveMadEdit->GetFileSize();
+            g_StatusBar->SetStatusText( wxT(""), 0 );
+            reset_caretpos = false;
+        }
+
+        sr=g_ActiveMadEdit->FindTextPrevious(m_QuickSearch->GetValue(), m_CheckboxRegEx->GetValue(),
+            m_CheckboxCaseSensitive->GetValue(), m_CheckboxWholeWord->GetValue(), rangeFrom, rangeTo);
+        if(sr == SR_NO)
+        {
+            reset_caretpos = true;
+            g_StatusBar->SetStatusText( _("Passed the begin of the file"), 0 );
+            lastCaret = g_ActiveMadEdit->GetFileSize();
+        }
+        else
+        {
+            lastCaret = 0;
+            //g_ActiveMadEdit->HighlightWords();
+        }
+    }
+}
+
+void MadEditFrame::OnSearchQuickFindNext(wxCommandEvent& event)
+{
+    m_SearchDirectionNext = true;
+    if(m_QuickSearch && g_ActiveMadEdit)
+    {
+        if(m_QuickSearch->GetValue().IsEmpty())
+        {
+            return;
+        }
+        if(event.GetEventType() == wxEVT_TEXT_ENTER)
+        {
+            if(wxNOT_FOUND == m_QuickSearch->FindString(m_QuickSearch->GetValue(), true))
+            {
+                m_QuickSearch->Insert( m_QuickSearch->GetValue(), 0 );
+                g_RecentFindText->AddFileToHistory(m_QuickSearch->GetValue());
+            }
+        }
+        
+        MadSearchResult sr;
+        static bool reset_caretpos = false;
+        static wxFileOffset lastCaret = 0;
+        wxFileOffset rangeFrom = g_ActiveMadEdit->GetCaretPosition(), rangeTo = -1;
+        if(event.GetEventType() == wxEVT_TEXT && g_ActiveMadEdit->IsSelected())
+        {
+			rangeFrom = g_ActiveMadEdit->GetSelectionBeginPos();
+        }
+        if((reset_caretpos && rangeFrom >= lastCaret) && !g_ActiveMadEdit->IsModified())
+        {
+            rangeFrom = 0;
+            g_StatusBar->SetStatusText( wxT(""), 0 );
+            reset_caretpos = false;
+        }
+
+        sr=g_ActiveMadEdit->FindTextNext(m_QuickSearch->GetValue(), m_CheckboxRegEx->GetValue(),
+            m_CheckboxCaseSensitive->GetValue(), m_CheckboxWholeWord->GetValue(), rangeFrom, rangeTo);
+        if(sr == SR_NO)
+        {
+            reset_caretpos = true;
+            g_StatusBar->SetStatusText( _("Passed the end of the file"), 0 );
+            lastCaret = rangeFrom;
+        }
+        else
+        {
+            lastCaret = g_ActiveMadEdit->GetFileSize();
+            //g_ActiveMadEdit->HighlightWords();
+        }
+    }
+}
+
 #if USE_GENERIC_TREECTRL
 BEGIN_EVENT_TABLE(MadTreeCtrl, wxGenericTreeCtrl)
 #else
@@ -6934,28 +7496,25 @@ MadTreeCtrl::MadTreeCtrl(wxWindow *parent, const wxWindowID id,
 void MadTreeCtrl::OnItemMenu(wxTreeEvent& event)
 {
     wxTreeItemId itemId = event.GetItem();
-    wxCHECK_RET( itemId.IsOk(), wxT("should have a valid item") );
+    wxCHECK_RET( itemId.IsOk(), _("Invalid item") );
 
-    //MyTreeItemData *item = (MyTreeItemData *)GetItemData(itemId);
     wxPoint clientpt = event.GetPoint();
-    wxPoint screenpt = ClientToScreen(clientpt);
-
-    //wxLogMessage(wxT("OnItemMenu for item \"%s\" at screen coords (%i, %i)"),
-    //             item->GetDesc(), screenpt.x, screenpt.y);
 
     ShowMenu(itemId, clientpt);
-    event.Skip();
 }
 
 void MadTreeCtrl::ShowMenu(wxTreeItemId id, const wxPoint& pt)
 {
 #if wxUSE_MENUS
-    wxMenu menu((long)0);
-    menu.Append(menuCopyCurResult, wxT("&Copy Selected"));
-    menu.Append(menuCopyAllResults, wxT("Copy &All"));
-    menu.Append(menuResetCurResult, wxT("&Reset Results"));
-    //menu.Append(TreeTest_Highlight, wxT("&Highlight item"));
-    //menu.Append(TreeTest_Dump, wxT("&Dump"));
+    static wxMenu menu((long)0);
+    static bool needInit = true;
+    if(needInit)
+    {
+        menu.Append(menuCopyCurResult, _("&Copy Selected"));
+        menu.Append(menuCopyAllResults, _("Copy &All"));
+        menu.Append(menuResetCurResult, _("&Reset Results"));
+        needInit = false;
+    }
 
     PopupMenu(&menu, pt);
 #endif // wxUSE_MENUS

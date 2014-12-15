@@ -42,20 +42,6 @@ class MadPurgeHistoryDialog : public wxDialog
 		DECLARE_EVENT_TABLE();
 		
 	public:
-		MadPurgeHistoryDialog(wxWindow *parent, wxWindowID id = 1, const wxString &title = wxT("Purge History"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = MadPurgeHistoryDialog_STYLE);
-		virtual ~MadPurgeHistoryDialog();
-		void WxButtonOKClick(wxCommandEvent& event);
-		void wxButtonCancelClick(wxCommandEvent& event);
-		void MadPurgeHistoryDialogKeyDown(wxKeyEvent& event);
-
-	private:
-		//Do not add custom control declarations between 
-		//GUI Control Declaration Start and GUI Control Declaration End.
-		//wxDev-C++ will remove them. Add custom code after the block.
-		////GUI Control Declaration Start
-		wxButton *wxButtonCancel;
-		wxButton *WxButtonOK;
-		wxBoxSizer *WxBoxSizer2;
 		wxCheckBox *wxCheckBoxRecentSearchedExcludeFilters;
 		wxCheckBox *wxRecentSearchedFileFilters;
 		wxCheckBox *wxCheckBoxRecentSearchedDirectories;
@@ -64,6 +50,22 @@ class MadPurgeHistoryDialog : public wxDialog
 		wxCheckBox *wxCheckBoxRecentEncodings;
 		wxCheckBox *wxCheckBoxRecentFonts;
 		wxCheckBox *wxCheckBoxRecentFiles;
+		MadPurgeHistoryDialog(wxWindow *parent, wxWindowID id = 1, const wxString &title = wxT("Purge History"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = MadPurgeHistoryDialog_STYLE);
+		virtual ~MadPurgeHistoryDialog();
+		void WxButtonOKClick(wxCommandEvent& event);
+		void wxButtonCancelClick(wxCommandEvent& event);
+		void MadPurgeHistoryDialogKeyDown(wxKeyEvent& event);
+        void OnAllAboveClick(wxCommandEvent& event);
+
+	private:
+		//Do not add custom control declarations between 
+		//GUI Control Declaration Start and GUI Control Declaration End.
+		//wxDev-C++ will remove them. Add custom code after the block.
+		////GUI Control Declaration Start
+		wxCheckBox *WxCheckBoxAllAbove;
+		wxButton *wxButtonCancel;
+		wxButton *WxButtonOK;
+		wxBoxSizer *WxBoxSizer2;
 		wxBoxSizer *WxBoxSizer1;
 		wxStaticBoxSizer *WxStaticBoxSizer1;
 		////GUI Control Declaration End
@@ -77,6 +79,7 @@ class MadPurgeHistoryDialog : public wxDialog
 		{
 			////GUI Enum Control ID Start
 			ID_DUMMY_START = 1000,
+			ID_WXCHECKBOXALLABOVE,
 			ID_WXCHECKBOXRECENTSEARCHEDEXCLUDEFILTERS,
 			ID_WXRECENTSEARCHEDFILEFILTERS,
 			ID_WXCHECKBOXRECENTSEARCHEDDIRECTORIES,

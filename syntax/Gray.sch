@@ -27,7 +27,7 @@ LineNumberColor=WHITE
 LineNumberBgColor=A0A0A0
 LineNumberStyle=
 ActiveLineColor=FUCHSIA
-BookmarkColor=C0FFFF
+BookmarkColor=0000FF
 [1.Keyword]
 Color=BLACK
 BgColor=

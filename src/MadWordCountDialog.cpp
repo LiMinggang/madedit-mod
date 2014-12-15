@@ -163,7 +163,7 @@ void MadWordCountDialog::CreateGUIControls(void)
 
     if(g_ActiveMadEdit->IsSelected())
     {
-        this->SetTitle(_("Word Count (Selected Text)"));
+        this->SetTitle(_("Word Count(Selected Text)"));
     }
     
     WxStaticTextWordCount->SetLabel(wxString()<<words);

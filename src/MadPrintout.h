@@ -12,7 +12,7 @@ class MadPrintout: public wxPrintout
 {
     static int s_PrintoutCount;
 public:
-    MadPrintout(const wxString& title = wxT("MadEdit Printout"));
+    MadPrintout(const wxString& title = _("MadEdit-Mod Printout"));
     virtual ~MadPrintout();
 
     virtual void GetPageInfo(int *minPage, int *maxPage, int *pageFrom, int *pageTo);

@@ -991,7 +991,7 @@ void MadHighlightingDialog::WxButtonLoadClick(wxCommandEvent& event)
     }
     else
     {
-        MadMessageBox(_("Cannot load this scheme."), wxT("MadEdit"), wxICON_WARNING|wxOK);
+        MadMessageBox(_("Cannot load this scheme."), wxT("MadEdit-Mod"), wxICON_WARNING|wxOK);
     }
 }
 
@@ -1014,7 +1014,7 @@ void MadHighlightingDialog::WxButtonSaveClick(wxCommandEvent& event)
     }
     else
     {
-        MadMessageBox(_("Cannot save to the scheme."), wxT("MadEdit"), wxICON_WARNING|wxOK);
+        MadMessageBox(_("Cannot save to the scheme."), wxT("MadEdit-Mod"), wxICON_WARNING|wxOK);
     }
 }
 
@@ -1036,6 +1036,6 @@ void MadHighlightingDialog::WxButtonDeleteClick(wxCommandEvent& event)
     }
     else
     {
-        MadMessageBox(_("Cannot delete this scheme."), wxT("MadEdit"), wxICON_WARNING|wxOK);
+        MadMessageBox(_("Cannot delete this scheme."), wxT("MadEdit-Mod"), wxICON_WARNING|wxOK);
     }
 }

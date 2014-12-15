@@ -42,6 +42,8 @@ wxString g_MadEditRegkeyPath = wxT("HKEY_CURRENT_USER\\Software\\Classes\\");
 #endif
 bool g_DoNotSaveSettings=false;
 bool g_ResetAllKeys=false;
+bool g_ForcePurgeThisTime = false;
+
 
 wxChar *g_LanguageString[]=
 {
@@ -319,7 +321,7 @@ bool MadEditApp::OnInit()
             else
             {
                 MadMessageBox(_("Sorry, the existing instance may be too busy too respond.\nPlease close any open dialogs and retry."),
-                    wxT("MadEdit"), wxICON_INFORMATION|wxOK);
+                    wxT("MadEdit-Mod"), wxICON_INFORMATION|wxOK);
             }
             g_DoNotSaveSettings = true;
             DeleteConfig();
@@ -370,7 +372,7 @@ bool MadEditApp::OnInit()
 #   endif
 
 #endif
-    g_Locale.AddCatalog(wxT("madedit"));
+    g_Locale.AddCatalog(wxT("MadEdit-Mod"));
 
     // set colors
     SetHtmlColors();
@@ -381,7 +383,7 @@ bool MadEditApp::OnInit()
 #endif
     wxPoint pos=wxDefaultPosition;
     wxSize size(1024, 768);
-    for(int i=0; i<wxDisplay::GetCount(); ++i)
+    for(unsigned int i=0; i<wxDisplay::GetCount(); ++i)
     {
         wxDisplay dis(i);
         if(dis.IsPrimary())

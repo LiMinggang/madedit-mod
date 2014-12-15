@@ -14,7 +14,7 @@ Supported Platforms:
 A. Linux, FreeBSD, and Unix-like OS (__WXGTK__):
    a. GNU C++ 3.x/4.x:
       Required Libraries to compile:
-      1. wxWidgets-2.6.1 or higher with Unicode and IPC enabled
+      1. wxWidgets-2.8.x or higher with Unicode and IPC enabled
       2. Boost-1.33.0 or higher(build Boost-Python)
       3. Boost.Xpressive latest version
       4. Python 2.7 or higher
@@ -23,28 +23,33 @@ A. Linux, FreeBSD, and Unix-like OS (__WXGTK__):
 B. MS Windows (__WXMSW__):
    a. MinGW32/GNU C++ 3.x (wxDevCpp):
       Required Libraries to compile:
-      1. wxWidgets-2.6.1 or higher with Unicode enabled(wxWidgets-2.8.12 is recommended, and apply patches)
-      2. Boost-1.33.0 or higher
+      1. wxWidgets-2.8.x or higher with Unicode enabled(wxWidgets-2.8.12 is
+         recommended, and apply patches)
+      2. Boost-1.33.0 or higher(build Boost-Python)
       3. Boost.Xpressive latest version
       4. libunicows: it's optional under WinNT/XP, but required under Win98
    b. Visual C++ 7.1 (VS.Net 2003) or higher:
       Required Libraries to compile:
       1. wxWidgets-2.6.1 or higher with Unicode enabled
-      2. Boost-1.33.0 or higher(Source code is enough for MadEdit, build Boost-Python)
+      2. Boost-1.33.0 or higher(Source code is enough for MadEdit, build
+         Boost-Python)
       3. Boost.Xpressive latest version
       4. libunicows: it's optional under WinNT/XP, but required under Win98
       5. Set WXWIN and BOOST to the root directory of your local ones
 
-P.S.: If you use CVS version of Boost, Boost.Xpressive has been included in the CVS HEAD,
-      or you must get 'xpressive.zip' at:
+P.S.: If you use CVS version of Boost, Boost.Xpressive has been included in the
+      CVS HEAD, or you must get 'xpressive.zip' at:
       http://www.boost-consulting.com/vault/index.php?directory=Strings%20-%20Text%20Processing
-P.S.: wxAUIBook patch for wxWidgets 2.8.x http://trac.wxwidgets.org/attachment/ticket/10848/
-P.S.: Don't forget to Copy wxwin.m4 to /usr/share/aclocal folder if you use your own build of
-      wxWidgets
+P.S.: wxAUIBook patch for wxWidgets 2.8.x
+      http://trac.wxwidgets.org/attachment/ticket/10848/
+P.S.: Don't forget to Copy wxwin.m4 to /usr/share/aclocal folder if you use your
+      own build of wxWidgets
 P.S.: Install gettext-devel if you got AM_GNU_GETTEXT error
 
-P.S.: madedit.pot has been uploaded to the top directory. Any translation for MadEdit-Mod is welcome.
-P.S.: Please open a ticket for bug of MadEdit-Mod at http://sourceforge.net/projects/madedit-mod/
+P.S.: madedit.pot has been uploaded to the top directory. Any translation for
+      MadEdit-Mod is welcome.
+P.S.: Please open a ticket for bug of MadEdit-Mod at 
+      http://sourceforge.net/projects/madedit-mod/
 
 
 Syntax files, Locale files and Settings:
@@ -70,21 +75,61 @@ Syntax files, Locale files and Settings:
   FontWidth.dat is Cache of Font-Width-Data, it can speed-up MadEdit a lot.
 
   * Download dictionary at http://archive.services.openoffice.org/pub/mirror/OpenOffice.org/contrib/dictionaries/
-  * Use MadEdit-Mod with other applications like CPPCheck, Visual Studio, try 'madedit %f*lineNum'
+  * Use MadEdit-Mod with other applications like CPPCheck, Visual Studio, try
+    'madedit %f*lineNum'
 
 Feature/issues to be released
 -----------------------------
 
 ChangeLog:
 ----------
+Mod v0.3.2
+1. Change RegKey to "MadEdit-Mod" and add RegKey value "Edit with MadEdit-Mod"
+2. Fix caret display issue after hiding Quick Search bar
+
+Mod v0.3.1
+Note: You have to change the madedit.mo to MadEdit-Mod.mo since then
+1. Use wxAuiToolBar as ToolBar, group tools into Standard, Editor, Search/Replace,
+   Text view, and Macro
+2. Context menu for Main Frame/Tool bars(Show/Hide one or all tool bars)
+3. Save/Load customized tool bars
+4. Add Quick search ToolBar, toggle show/hide with F8(Escape to hide it), drag
+   to float one and dock anywhere.follow your search direction if you hit Enter
+   after inputing some text. Searching during inputing.
+5. Toggle-able sign of the 80th column
+6. Improve UI and performance, improve usability of Purge History dialog
+7. Improve performance of Purge History
+8. Change language tag from "MadEdit" to "MadEdit-Mod"
+9. Add "Print" in ToolBar
+9. Fix bug of initialized bookmark width
+10. Fix crash if you purged history right after MadEdit started and select to purge
+    any related to search/replace
+11. Fix issue of not purging history till you search/replace after you check the
+    item in global option
+12. Fix issue of extra bookmark sign if the line was wrapped
+13. Update Simplified Chinese
+
 Mod v0.3.0
 1. Improve UI and all strings of message box/dialog can be translated since then
-2. Change application name to 'MadEdit-Mod'
-3. Update cursor as None while being out of window(Drag and Drop)
+2. Change application name string to 'MadEdit-Mod'
+3. Update cursor as NO_ENTRY sign while being out of window(Drag and Drop)
 4. Add debug output for Visual Studio
-5. Fix issue that caret was still moving while being out of window(Drag and Drop)
-6. Fix issue that should not do DND when user dropped the selection at the end of selection
-Update Simplified Chinese
+5. Disable DND and caret motion if caret is out of window(Drag and Drop)
+6. Left click on line number area to select one line/all(with Control pressed)
+7. Add area for bookmark instead of overwriting line number
+8. Left click on bookmark area to toggle bookmark
+9. Display/hide bookmark area
+10. Add config item in print options for printing bookmark
+11. Use color defined in syntax file for bookmark
+12. Add a line to separate line number/bookmark area to the actual content
+13. Add a line to as a sign of the 80th column like PSPad
+14. Set Encoding of Search/Replace dialog the same as main edit
+15. Fix the issue that caret was still moving while being out of window(Drag and Drop)
+16. Fix the issue that should not do DND when user dropped the selection at the end/begin of the selection
+17. Fix some wrong status of menus when there is no active edit
+18. Fix wrong result title of FindAll in MadPython
+19. Fix the issue that FindReplaceInFiles would reset the Enable Replace while activating again 
+20. Update Simplified Chinese
 
 Mod v0.2.9
 1. Auto fill column data while pasting in column mode(the lines would be automatically duplicated if the

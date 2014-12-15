@@ -348,6 +348,7 @@ private:
     int             m_LineNumberAreaWidth;
     int             m_LeftMarginWidth;
     int             m_RightMarginWidth;
+    int             m_BookmarkWidth;
 
     // for OnSize()
     int             m_MaxWidth, m_MaxHeight;
@@ -365,6 +366,8 @@ private:
 
     bool            m_DisplayLineNumber;
     bool            m_ShowEndOfLine, m_ShowSpaceChar, m_ShowTabChar, m_MarkActiveLine;
+    bool            m_DisplayBookmark;
+    bool            m_Display80ColHint;
     bool            m_MarkBracePair;
 
     bool            m_InsertMode;
@@ -625,7 +628,7 @@ public:
 
     void StopRepaint()
     {
-        m_Printing=true;
+        m_Printing=-1;
         m_LastPaintBitmap=-1;
     }
 
@@ -731,7 +734,6 @@ public: // basic functions
     void SetWordWrapMode(MadWordWrapMode mode);
     MadWordWrapMode GetWordWrapMode() { return m_WordWrapMode; }
 
-    void SetDisplayLineNumber(bool value);
     void SetShowEndOfLine(bool value);
     void SetShowTabChar(bool value);
     void SetShowSpaceChar(bool value);
@@ -739,7 +741,13 @@ public: // basic functions
     void SetSpellCheck(bool value);
     void AddtoDictionary(wxString & misSpell);
 
+    void SetDisplayLineNumber(bool value);
     bool GetDisplayLineNumber() { return m_DisplayLineNumber; }
+    void SetDisplayBookmark(bool value);
+    bool GetDisplayBookmark() {return m_DisplayBookmark; }
+    void SetDisplay80ColHint(bool value);
+    bool GetDisplay80ColHint() {return m_Display80ColHint; }
+
     bool GetShowEndOfLine() { return m_ShowEndOfLine; }
     bool GetShowTabChar() { return m_ShowTabChar; }
     bool GetShowSpaceChar() { return m_ShowSpaceChar; }
@@ -1051,9 +1059,11 @@ private: // Printing functions
     MadWordWrapMode m_old_WordWrapMode;
     bool            m_old_Selection;
     bool            m_old_DisplayLineNumber;
+    bool            m_old_DisplayBookmark;
     bool            m_old_ShowEndOfLine, m_old_ShowSpaceChar, m_old_ShowTabChar;
     int             m_old_LeftMarginWidth;
     int             m_old_DrawingXPos;
+    int             m_old_BookmarkWidth;
 
     wxRect m_PrintRect;
     int m_PrintPageCount;
