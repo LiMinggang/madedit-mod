@@ -52,6 +52,7 @@ class MadEdit;
 class MadTreeCtrl;
 class MadRecentList;
 class wxSpellCheckEngineInterface;
+class MadHtmlPreview;
 
 enum MadToolBarType
 {
@@ -122,13 +123,16 @@ public:
     wxAuiNotebook *m_InfoNotebook; //
     //wxTreeCtrl *m_FindInFilesResults;
     MadTreeCtrl   *m_FindInFilesResults;
+    MadHtmlPreview *m_HtmlPreview;
+    int            m_PreviewType;
     wxComboBox    *m_QuickSearch;
     wxCheckBox    *m_CheckboxWholeWord;
     wxCheckBox    *m_CheckboxRegEx;
     wxCheckBox    *m_CheckboxCaseSensitive;
+    bool           m_ReloadFiles;
+    bool           m_PurgeHistory;
     bool           m_SearchDirectionNext;
     bool           m_ToolbarStatus[tbMAX+1];
-
     void OnUpdateUI_MenuFile_CheckCount(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuFileReload(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuFileRecentFiles(wxUpdateUIEvent& event);
@@ -166,6 +170,8 @@ public:
     void OnUpdateUI_MenuViewFixedWidthMode(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuViewTabColumn(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuViewLineSpacing(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuViewPreview(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuViewPreviewList(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuViewNoWrap(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuViewWrapByWindow(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuViewWrapByColumn(wxUpdateUIEvent& event);
@@ -194,6 +200,8 @@ public:
     void OnUpdateUI_MenuToolsInsertNewLineChar(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuToolsConvertNL(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuToolsConvertEncoding(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuFile_Markdown2Html(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuFile_Html2PlainText(wxUpdateUIEvent& event);
 
     void OnUpdateUI_MenuWindow_CheckCount(wxUpdateUIEvent& event);
     
@@ -310,8 +318,9 @@ public:
     void OnViewFontSize(wxCommandEvent& event);
     void OnViewSetFont(wxCommandEvent& event);
     void OnViewFixedWidthMode(wxCommandEvent& event);
-    void OnViewTabColumn(wxCommandEvent& event);
     void OnViewLineSpacing(wxCommandEvent& event);
+    void OnViewTabColumn(wxCommandEvent& event);
+    void OnViewPreview(wxCommandEvent& event);
     void OnViewNoWrap(wxCommandEvent& event);
     void OnViewWrapByWindow(wxCommandEvent& event);
     void OnViewWrapByColumn(wxCommandEvent& event);
@@ -368,6 +377,8 @@ public:
     void OnToolsKanji2SimpClipboard(wxCommandEvent& event);
     void OnToolsChinese2KanjiClipboard(wxCommandEvent& event);
     void OnToolsWordCount(wxCommandEvent& event);
+    void OnToolsMarkdown2Html(wxCommandEvent& event);
+    void OnToolsHtml2PlainText(wxCommandEvent& event);
 
     void OnWindowToggleWindow(wxCommandEvent& event);
     void OnWindowPreviousWindow(wxCommandEvent& event);
@@ -610,6 +621,9 @@ enum { // menu id
     menuShowEndOfLine,
     menuShowTabChar,
     menuShowSpaceChar,
+    menuPreview,
+    menuPreview1,
+    menuPreview16 = menuPreview1 + 15,
     menuShowAllChars,
     menuMarkActiveLine,
     menuMarkBracePair,
@@ -669,6 +683,8 @@ enum { // menu id
     menuKanji2TradClipboard,
     menuKanji2SimpClipboard,
     menuChinese2KanjiClipboard,
+    menuMarkdown2Html,
+    menuHtml2PlainText,
     menuWordCount,
 
     // window
@@ -682,6 +698,14 @@ enum { // menu id
     menuResetCurResult,
 };
 
+enum MadPreviewType
+{
+    ptPREVIEW_NONE,
+    ptPREVIEW_HTML = menuPreview1,
+    ptPREVIEW_MARKDOWN,
+    ptPREVIEW_MAXTYPE,
+    //MAX::menuPreview16
+};
 extern MadEditFrame *g_MainFrame;
 extern void OnReceiveMessage(const wchar_t *msg, size_t size);
 

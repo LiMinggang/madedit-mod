@@ -51,6 +51,8 @@ using std::shared_ptr;
 #define DBOUT( s )
 #endif
 
+#define DEFAULT_MAX_LINELEN 4096
+
 enum { ID_VSCROLLBAR=19876, ID_HSCROLLBAR };
 
 namespace mad_python
@@ -62,6 +64,8 @@ class MadEdit;
 class MadSearchDialog;
 class MadReplaceDialog;
 class wxSpellCheckEngineInterface;
+
+wxDECLARE_EVENT(CHECK_MODIFICATION_TIME, wxCommandEvent);
 
 typedef void (*OnSelectionChangedPtr)(MadEdit *madedit);
 typedef void (*OnStatusChangedPtr)(MadEdit *madedit);
@@ -257,6 +261,8 @@ private:
     MadUndoBuffer   *m_UndoBuffer;
     MadUndo         *m_SavePoint;
     bool            m_RecordCaretMovements;
+
+    bool            m_NeedSync;
 
     ucs4_t          *m_WordBuffer;
     int             *m_WidthBuffer;
@@ -598,7 +604,8 @@ protected:
     void OnMouseWheel(wxMouseEvent &evt);
     void OnMouseEnterWindow(wxMouseEvent &evt);
     void OnMouseLeaveWindow(wxMouseEvent &evt);
-	void OnMouseCaptureLost(wxMouseCaptureLostEvent &evt);
+    void OnMouseCaptureLost(wxMouseCaptureLostEvent &evt);
+    void OnCheckModificationTime(wxCommandEvent& evt);
 
     void OnEraseBackground(wxEraseEvent &evt);
     void OnPaint(wxPaintEvent &evt);
@@ -760,6 +767,7 @@ public: // basic functions
 
     long GetMaxColumns() { return m_MaxColumns; }
     void SetMaxColumns(long cols);
+    void SetMaxLineLength(long lens) {m_MaxLineLength = lens;}
 
     bool GetAutoIndent() { return m_AutoIndent; }
     void SetAutoIndent(bool value) { m_AutoIndent=value; }
@@ -902,6 +910,10 @@ public: // basic functions
     void Undo();
     void Redo();
 
+    bool NeedSync() {return m_NeedSync;}
+    void SetNeedSync() {m_NeedSync = true;}
+    void Synced() {m_NeedSync = false;}
+     
     void GoToLine(int line);
     void SetCaretPosition(wxFileOffset pos, wxFileOffset selbeg=-1, wxFileOffset selend=-1);
 
@@ -942,6 +954,8 @@ public: // basic functions
     int ReplaceHexAll(const wxString &expr, const wxString &fmt,
             vector<wxFileOffset> *pbegpos = NULL, vector<wxFileOffset> *pendpos = NULL,
             wxFileOffset rangeFrom = -1, wxFileOffset rangeTo = -1);
+    
+    bool NextRegexSearchingPos(MadCaretPos& cp, const wxString &expr);
 
     // list the matched data to pbegpos & pendpos
     // return the found count or SR_EXPR_ERROR
@@ -957,7 +971,7 @@ public: // basic functions
     bool SaveToFile(const wxString &filename);
     bool Reload();
     // if the file is modified by another app, reload it.
-    bool ReloadByModificationTime();
+    bool ReloadByModificationTime(bool LostCapture = false);
     // restore pos in Reload(), ConvertEncoding()
     void RestorePosition(wxFileOffset pos, int toprow);
 

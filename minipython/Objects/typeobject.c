@@ -3507,7 +3507,7 @@ object_sizeof(PyObject *self, PyObject *args)
     res = 0;
     isize = self->ob_type->tp_itemsize;
     if (isize > 0)
-        res = self->ob_type->ob_size * isize;
+        res = Py_SIZE(self) * isize;
     res += self->ob_type->tp_basicsize;
 
     return PyInt_FromSsize_t(res);
@@ -4072,6 +4072,23 @@ PyType_Ready(PyTypeObject *type)
         if (PyType_Check(b))
             inherit_slots(type, (PyTypeObject *)b);
     }
+
+    /* All bases of statically allocated type should be statically allocated */
+    if (Py_Py3kWarningFlag && !(type->tp_flags & Py_TPFLAGS_HEAPTYPE))
+        for (i = 0; i < n; i++) {
+            PyObject *b = PyTuple_GET_ITEM(bases, i);
+            if (PyType_Check(b) &&
+                (((PyTypeObject *)b)->tp_flags & Py_TPFLAGS_HEAPTYPE)) {
+                char buf[300];
+                PyOS_snprintf(buf, sizeof(buf),
+                              "type '%.100s' is not dynamically allocated but "
+                              "its base type '%.100s' is dynamically allocated",
+                              type->tp_name, ((PyTypeObject *)b)->tp_name);
+                if (PyErr_WarnPy3k(buf, 1) < 0)
+                    goto error;
+                break;
+            }
+        }
 
     /* Sanity check for tp_free. */
     if (PyType_IS_GC(type) && (type->tp_flags & Py_TPFLAGS_BASETYPE) &&
@@ -4798,7 +4815,7 @@ tp_new_wrapper(PyObject *self, PyObject *args, PyObject *kwds)
                      "%s.__new__(%s) is not safe, use %s.__new__()",
                      type->tp_name,
                      subtype->tp_name,
-                     staticbase == NULL ? "?" : staticbase->tp_name);
+                     staticbase->tp_name);
         return NULL;
     }
 
@@ -5993,9 +6010,9 @@ static slotdef slotdefs[] = {
     BINSLOT("__truediv__", nb_true_divide, slot_nb_true_divide, "/"),
     RBINSLOT("__rtruediv__", nb_true_divide, slot_nb_true_divide, "/"),
     IBSLOT("__ifloordiv__", nb_inplace_floor_divide,
-           slot_nb_inplace_floor_divide, wrap_binaryfunc, "//"),
+           slot_nb_inplace_floor_divide, wrap_binaryfunc, "//="),
     IBSLOT("__itruediv__", nb_inplace_true_divide,
-           slot_nb_inplace_true_divide, wrap_binaryfunc, "/"),
+           slot_nb_inplace_true_divide, wrap_binaryfunc, "/="),
     NBSLOT("__index__", nb_index, slot_nb_index, wrap_unaryfunc,
            "x[y:z] <==> x[y.__index__():z.__index__()]"),
     MPSLOT("__len__", mp_length, slot_mp_length, wrap_lenfunc,

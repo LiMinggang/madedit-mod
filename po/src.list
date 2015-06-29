@@ -56,3 +56,9 @@
 ../src/plugin.h
 ../src/MadPrintout.cpp
 ../src/MadPrintout.h
+../spellchecker/HunspellInterface.cpp
+../spellchecker/PersonalDictionary.cpp
+../spellchecker/SpellCheckEngineInterface.cpp
+../spellchecker/SpellCheckEngineOption.cpp
+../spellchecker/SpellCheckerManager.cpp
+../spellchecker/SpellCheckUserInterface.cpp

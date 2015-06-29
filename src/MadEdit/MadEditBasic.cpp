@@ -266,6 +266,10 @@ void MadEdit::SetTextFont(const wxString &name, int size, bool forceReset)
         {
             MadEditSuperClass::SetFont(*m_TextFont);
             m_TextFontHeight=GetCharHeight();
+            wxASSERT(m_TextFontHeight > 0);
+
+            //Patch for Fedora 20 VMWare
+            if(m_TextFontHeight==0) m_TextFontHeight=19;
 
             bool ofwm=m_FixedWidthMode;
             m_FixedWidthMode=false; // avoid effecting on GetUCharWidth();
@@ -326,15 +330,15 @@ void MadEdit::SetTextFont(const wxString &name, int size, bool forceReset)
             {
                 const int t1 = m_TextFontHeight / 5;
                 const int y = 1 + m_TextFontHeight - t1;
-                const int x = cw / 4;
+                const int x = cw-1;
                 m_Space_Points[0].x = x;
-                m_Space_Points[0].y = y;
-                m_Space_Points[1].x = 3 * x;
+                m_Space_Points[0].y = y - m_TextFontHeight/6;
+                m_Space_Points[1].x = x;
                 m_Space_Points[1].y = y;
-                m_Space_Points[2].x = cw >> 1;
-                m_Space_Points[2].y = y - m_TextFontHeight/6;
-                m_Space_Points[3].x = x;
-                m_Space_Points[3].y = y;
+                m_Space_Points[2].x = 1;
+                m_Space_Points[2].y = y;
+                m_Space_Points[3].x = 1;
+                m_Space_Points[3].y = y - m_TextFontHeight/6;
             }
             {
                 const int t1 = m_TextFontHeight / 5;
@@ -1252,7 +1256,7 @@ void MadEdit::SetText(const wxString &ws)
             ++wcs;
         }
 
-        long maxlen = m_MaxLineLength - 100;
+        long maxlen = m_MaxLineLength - 80;
         if(m_Lines->m_Size + sss > maxlen)
             sss = maxlen - long (m_Lines->m_Size);
 
@@ -1273,6 +1277,7 @@ void MadEdit::SetText(const wxString &ws)
             lit = DeleteInsertData(0, dudata->m_Size, &dudata->m_Data, 0, NULL);
 
             undo = m_UndoBuffer->Add();
+            SetNeedSync();
             undo->m_Undos.push_back(dudata);
         }
         else                        // overwrite
@@ -1295,6 +1300,7 @@ void MadEdit::SetText(const wxString &ws)
                                       oudata->m_InsSize, &oudata->m_InsData);
 
             undo = m_UndoBuffer->Add();
+            SetNeedSync();
             undo->m_Undos.push_back(oudata);
         }
     }
@@ -1317,6 +1323,7 @@ void MadEdit::SetText(const wxString &ws)
         lit = DeleteInsertData(0, 0, NULL, insud->m_Size, &insud->m_Data);
 
         undo = m_UndoBuffer->Add();
+        SetNeedSync();
         undo->m_Undos.push_back(insud);
     }
 
@@ -1995,6 +2002,8 @@ void MadEdit::Undo()
         return;
     }
 
+    SetNeedSync();
+
     size_t oldrows = m_Lines->m_RowCount;
     size_t oldlines = m_Lines->m_LineCount;
 
@@ -2125,6 +2134,8 @@ void MadEdit::Redo()
         m_RecordCaretMovements=oldrcm;
         return;
     }
+
+    SetNeedSync();
 
     size_t oldrows = m_Lines->m_RowCount;
     size_t oldlines = m_Lines->m_LineCount;
@@ -2356,6 +2367,7 @@ bool MadEdit::LoadFromFile(const wxString &filename, const wxString &encoding)
         return false;
 
     m_UndoBuffer->Clear();
+    SetNeedSync();
     m_SavePoint = NULL;
     m_Modified = false;
     m_ModificationTime = wxFileModificationTime(filename);
@@ -2549,10 +2561,17 @@ bool MadEdit::Reload()
     return true;
 }
 
-bool MadEdit::ReloadByModificationTime()
+bool MadEdit::ReloadByModificationTime(bool LostCapture/* = false*/)
 {
     if(m_Lines->m_Name.IsEmpty()) return false;
 
+    if(LostCapture)
+    {
+        wxCommandEvent event(CHECK_MODIFICATION_TIME);
+        event.SetEventObject(this);
+        AddPendingEvent( event );
+        return false;
+    }
     wxLogNull nolog;
     time_t modtime=wxFileModificationTime(m_Lines->m_Name);
 
@@ -2582,15 +2601,20 @@ bool MadEdit::ReloadByModificationTime()
         wxString(_("Do you want to reload it?"))+ wxT("\n\n")+ m_Lines->m_Name,
         wxT("MadEdit-Mod"), wxYES_NO|wxICON_QUESTION );
     dlg.SetYesNoLabels(wxMessageDialog::ButtonLabel(_("&Yes")), wxMessageDialog::ButtonLabel(_("&No")));
-    wxMouseCaptureLostEvent mevt(GetId());
-    mevt.SetEventObject(this);
+    //wxMouseCaptureLostEvent mevt(GetId());
+    //DBOUT( "Reload\n" );
+    //DBOUT((m_MouseLeftDown?"LDown:TRUE\n":"LDown:FALSE\n"));
+    //if(LostCapture)
+    //    mevt.SetEventObject(this);    
     if(dlg.ShowModal()!=wxID_YES)
     {
-        AddPendingEvent( mevt ); 
+        //if(LostCapture)
+            //AddPendingEvent( mevt ); 
         return false;
     }
 
-    AddPendingEvent( mevt ); 
+    //if(LostCapture)
+        //AddPendingEvent( mevt ); 
 
     // YES, reload it.
     return Reload();
@@ -3246,6 +3270,9 @@ int MadEdit::ReplaceTextAll(const wxString &expr, const wxString &fmt,
         if(bpos.iter!=epos.iter)
             ++multi;
 
+        if (bpos.pos == epos.pos && !NextRegexSearchingPos(epos, expr))
+            break;
+
         bpos=epos;
         epos=endpos;
     }
@@ -3471,6 +3498,9 @@ int MadEdit::FindTextAll(const wxString &expr,
         if (IsTextFile() && m_BookmarkInSearch) m_Lines->m_LineList.SetBookmark(bpos.iter);
 
         if(bFirstOnly) break;
+
+        if (bpos.pos == epos.pos && !NextRegexSearchingPos(epos, expr))
+            break;
 
         bpos=epos;
         epos=endpos;
@@ -4068,3 +4098,4 @@ bool StrToInt64(wxString str, wxInt64 &i64)
 
     return ok;
 }
+

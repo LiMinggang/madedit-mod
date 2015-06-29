@@ -468,19 +468,26 @@ close_the_file(PyFileObject *f)
 PyObject *
 PyFile_FromFile(FILE *fp, char *name, char *mode, int (*close)(FILE *))
 {
-    PyFileObject *f = (PyFileObject *)PyFile_Type.tp_new(&PyFile_Type,
-                                                         NULL, NULL);
-    if (f != NULL) {
-        PyObject *o_name = PyString_FromString(name);
-        if (o_name == NULL)
-            return NULL;
-        if (fill_file_fields(f, fp, o_name, mode, close) == NULL) {
-            Py_DECREF(f);
-            f = NULL;
-        }
-        Py_DECREF(o_name);
+    PyFileObject *f;
+    PyObject *o_name;
+
+    f = (PyFileObject *)PyFile_Type.tp_new(&PyFile_Type, NULL, NULL);
+    if (f == NULL)
+        return NULL;
+    o_name = PyString_FromString(name);
+    if (o_name == NULL) {
+        if (close != NULL && fp != NULL)
+            close(fp);
+        Py_DECREF(f);
+        return NULL;
     }
-    return (PyObject *) f;
+    if (fill_file_fields(f, fp, o_name, mode, close) == NULL) {
+        Py_DECREF(f);
+        Py_DECREF(o_name);
+        return NULL;
+    }
+    Py_DECREF(o_name);
+    return (PyObject *)f;
 }
 
 PyObject *
@@ -629,11 +636,13 @@ file_dealloc(PyFileObject *f)
 static PyObject *
 file_repr(PyFileObject *f)
 {
+    PyObject *ret = NULL;
+    PyObject *name = NULL;
     if (PyUnicode_Check(f->f_name)) {
 #ifdef Py_USING_UNICODE
-        PyObject *ret = NULL;
-        PyObject *name = PyUnicode_AsUnicodeEscapeString(f->f_name);
-        const char *name_str = name ? PyString_AsString(name) : "?";
+        const char *name_str;
+        name = PyUnicode_AsUnicodeEscapeString(f->f_name);
+        name_str = name ? PyString_AsString(name) : "?";
         ret = PyString_FromFormat("<%s file u'%s', mode '%s' at %p>",
                            f->f_fp == NULL ? "closed" : "open",
                            name_str,
@@ -643,11 +652,16 @@ file_repr(PyFileObject *f)
         return ret;
 #endif
     } else {
-        return PyString_FromFormat("<%s file '%s', mode '%s' at %p>",
+        name = PyObject_Repr(f->f_name);
+        if (name == NULL)
+            return NULL;
+        ret = PyString_FromFormat("<%s file %s, mode '%s' at %p>",
                            f->f_fp == NULL ? "closed" : "open",
-                           PyString_AsString(f->f_name),
+                           PyString_AsString(name),
                            PyString_AsString(f->f_mode),
                            f);
+        Py_XDECREF(name);
+        return ret;
     }
 }
 
@@ -986,12 +1000,6 @@ file_isatty(PyFileObject *f)
 #define SMALLCHUNK BUFSIZ
 #endif
 
-#if SIZEOF_INT < 4
-#define BIGCHUNK  (512 * 32)
-#else
-#define BIGCHUNK  (512 * 1024)
-#endif
-
 static size_t
 new_buffersize(PyFileObject *f, size_t currentsize)
 {
@@ -1020,15 +1028,10 @@ new_buffersize(PyFileObject *f, size_t currentsize)
         /* Add 1 so if the file were to grow we'd notice. */
     }
 #endif
-    if (currentsize > SMALLCHUNK) {
-        /* Keep doubling until we reach BIGCHUNK;
-           then keep adding BIGCHUNK. */
-        if (currentsize <= BIGCHUNK)
-            return currentsize + currentsize;
-        else
-            return currentsize + BIGCHUNK;
-    }
-    return currentsize + SMALLCHUNK;
+    /* Expand the buffer by an amount proportional to the current size,
+       giving us amortized linear-time behavior. Use a less-than-double
+       growth factor to avoid excessive allocation. */
+    return currentsize + (currentsize >> 3) + 6;
 }
 
 #if defined(EWOULDBLOCK) && defined(EAGAIN) && EWOULDBLOCK != EAGAIN
@@ -1077,12 +1080,23 @@ file_read(PyFileObject *f, PyObject *args)
         return NULL;
     bytesread = 0;
     for (;;) {
+        int interrupted;
         FILE_BEGIN_ALLOW_THREADS(f)
         errno = 0;
         chunksize = Py_UniversalNewlineFread(BUF(v) + bytesread,
                   buffersize - bytesread, f->f_fp, (PyObject *)f);
+        interrupted = ferror(f->f_fp) && errno == EINTR;
         FILE_END_ALLOW_THREADS(f)
+        if (interrupted) {
+            clearerr(f->f_fp);
+            //if (PyErr_CheckSignals()) {
+            //    Py_DECREF(v);
+            //    return NULL;
+            //}
+        }
         if (chunksize == 0) {
+            if (interrupted)
+                continue;
             if (!ferror(f->f_fp))
                 break;
             clearerr(f->f_fp);
@@ -1097,7 +1111,7 @@ file_read(PyFileObject *f, PyObject *args)
             return NULL;
         }
         bytesread += chunksize;
-        if (bytesread < buffersize) {
+        if (bytesread < buffersize && !interrupted) {
             clearerr(f->f_fp);
             break;
         }
@@ -1138,12 +1152,23 @@ file_readinto(PyFileObject *f, PyObject *args)
     ntodo = pbuf.len;
     ndone = 0;
     while (ntodo > 0) {
+        int interrupted;
         FILE_BEGIN_ALLOW_THREADS(f)
         errno = 0;
         nnow = Py_UniversalNewlineFread(ptr+ndone, ntodo, f->f_fp,
                                         (PyObject *)f);
+        interrupted = ferror(f->f_fp) && errno == EINTR;
         FILE_END_ALLOW_THREADS(f)
+        if (interrupted) {
+            clearerr(f->f_fp);
+            //if (PyErr_CheckSignals()) {
+            //    PyBuffer_Release(&pbuf);
+            //    return NULL;
+            //}
+        }
         if (nnow == 0) {
+            if (interrupted)
+                continue;
             if (!ferror(f->f_fp))
                 break;
             PyErr_SetFromErrno(PyExc_IOError);
@@ -1431,8 +1456,25 @@ get_line(PyFileObject *f, int n)
                 *buf++ = c;
                 if (c == '\n') break;
             }
-            if ( c == EOF && skipnextlf )
-                newlinetypes |= NEWLINE_CR;
+            if (c == EOF) {
+                if (ferror(fp) && errno == EINTR) {
+                    FUNLOCKFILE(fp);
+                    FILE_ABORT_ALLOW_THREADS(f)
+                    f->f_newlinetypes = newlinetypes;
+                    f->f_skipnextlf = skipnextlf;
+
+                    //if (PyErr_CheckSignals()) {
+                    //    Py_DECREF(v);
+                    //    return NULL;
+                    //}
+                    /* We executed Python signal handlers and got no exception.
+                     * Now back to reading the line where we left off. */
+                    clearerr(fp);
+                    continue;
+                }
+                if (skipnextlf)
+                    newlinetypes |= NEWLINE_CR;
+            }
         } else /* If not universal newlines use the normal loop */
         while ((c = GETC(fp)) != EOF &&
                (*buf++ = c) != '\n' &&
@@ -1446,6 +1488,16 @@ get_line(PyFileObject *f, int n)
             break;
         if (c == EOF) {
             if (ferror(fp)) {
+                if (errno == EINTR) {
+                    //if (PyErr_CheckSignals()) {
+                    //    Py_DECREF(v);
+                    //    return NULL;
+                    //}
+                    /* We executed Python signal handlers and got no exception.
+                     * Now back to reading the line where we left off. */
+                    clearerr(fp);
+                    continue;
+                }
                 PyErr_SetFromErrno(PyExc_IOError);
                 clearerr(fp);
                 Py_DECREF(v);
@@ -1621,7 +1673,7 @@ file_readlines(PyFileObject *f, PyObject *args)
     size_t totalread = 0;
     char *p, *q, *end;
     int err;
-    int shortread = 0;
+    int shortread = 0;  /* bool, did the previous read come up short? */
 
     if (f->f_fp == NULL)
         return err_closed();
@@ -1651,6 +1703,14 @@ file_readlines(PyFileObject *f, PyObject *args)
             sizehint = 0;
             if (!ferror(f->f_fp))
                 break;
+            if (errno == EINTR) {
+                //if (PyErr_CheckSignals()) {
+                //    goto error;
+                //}
+                clearerr(f->f_fp);
+                shortread = 0;
+                continue;
+            }
             PyErr_SetFromErrno(PyExc_IOError);
             clearerr(f->f_fp);
             goto error;
@@ -1744,6 +1804,7 @@ file_write(PyFileObject *f, PyObject *args)
     const char *s;
     Py_ssize_t n, n2;
     PyObject *encoded = NULL;
+    int err_flag = 0, err;
 
     if (f->f_fp == NULL)
         return err_closed();
@@ -1756,7 +1817,6 @@ file_write(PyFileObject *f, PyObject *args)
         n = pbuf.len;
     }
     else {
-        const char *encoding, *errors;
         PyObject *text;
         if (!PyArg_ParseTuple(args, "O", &text))
             return NULL;
@@ -1764,7 +1824,9 @@ file_write(PyFileObject *f, PyObject *args)
         if (PyString_Check(text)) {
             s = PyString_AS_STRING(text);
             n = PyString_GET_SIZE(text);
+#ifdef Py_USING_UNICODE
         } else if (PyUnicode_Check(text)) {
+            const char *encoding, *errors;
             if (f->f_encoding != Py_None)
                 encoding = PyString_AS_STRING(f->f_encoding);
             else
@@ -1778,6 +1840,7 @@ file_write(PyFileObject *f, PyObject *args)
                 return NULL;
             s = PyString_AS_STRING(encoded);
             n = PyString_GET_SIZE(encoded);
+#endif
         } else {
             if (PyObject_AsCharBuffer(text, &s, &n))
                 return NULL;
@@ -1787,11 +1850,16 @@ file_write(PyFileObject *f, PyObject *args)
     FILE_BEGIN_ALLOW_THREADS(f)
     errno = 0;
     n2 = fwrite(s, 1, n, f->f_fp);
+    if (n2 != n || ferror(f->f_fp)) {
+        err_flag = 1;
+        err = errno;
+    }
     FILE_END_ALLOW_THREADS(f)
     Py_XDECREF(encoded);
     if (f->f_binary)
         PyBuffer_Release(&pbuf);
-    if (n2 != n) {
+    if (err_flag) {
+        errno = err;
         PyErr_SetFromErrno(PyExc_IOError);
         clearerr(f->f_fp);
         return NULL;
@@ -1873,13 +1941,13 @@ file_writelines(PyFileObject *f, PyObject *seq)
             PyObject *v = PyList_GET_ITEM(list, i);
             if (!PyString_Check(v)) {
                 const char *buffer;
-                if (((f->f_binary &&
-                      PyObject_AsReadBuffer(v,
-                          (const void**)&buffer,
-                                        &len)) ||
-                     PyObject_AsCharBuffer(v,
-                                           &buffer,
-                                           &len))) {
+                int res;
+                if (f->f_binary) {
+                    res = PyObject_AsReadBuffer(v, (const void**)&buffer, &len);
+                } else {
+                    res = PyObject_AsCharBuffer(v, &buffer, &len);
+                }
+                if (res) {
                     PyErr_SetString(PyExc_TypeError,
             "writelines() argument must be a sequence of strings");
                             goto error;
@@ -2168,7 +2236,7 @@ drop_readahead(PyFileObject *f)
    (unless at EOF) and no more than bufsize.  Returns negative value on
    error, will set MemoryError if bufsize bytes cannot be allocated. */
 static int
-readahead(PyFileObject *f, int bufsize)
+readahead(PyFileObject *f, Py_ssize_t bufsize)
 {
     Py_ssize_t chunksize;
 
@@ -2206,7 +2274,7 @@ readahead(PyFileObject *f, int bufsize)
    logarithmic buffer growth to about 50 even when reading a 1gb line. */
 
 static PyStringObject *
-readahead_get_line_skip(PyFileObject *f, int skip, int bufsize)
+readahead_get_line_skip(PyFileObject *f, Py_ssize_t skip, Py_ssize_t bufsize)
 {
     PyStringObject* s;
     char *bufptr;
@@ -2226,10 +2294,10 @@ readahead_get_line_skip(PyFileObject *f, int skip, int bufsize)
         bufptr++;                               /* Count the '\n' */
         len = bufptr - f->f_bufptr;
         s = (PyStringObject *)
-            PyString_FromStringAndSize(NULL, skip+len);
+            PyString_FromStringAndSize(NULL, skip + len);
         if (s == NULL)
             return NULL;
-        memcpy(PyString_AS_STRING(s)+skip, f->f_bufptr, len);
+        memcpy(PyString_AS_STRING(s) + skip, f->f_bufptr, len);
         f->f_bufptr = bufptr;
         if (bufptr == f->f_bufend)
             drop_readahead(f);
@@ -2237,14 +2305,13 @@ readahead_get_line_skip(PyFileObject *f, int skip, int bufsize)
         bufptr = f->f_bufptr;
         buf = f->f_buf;
         f->f_buf = NULL;                /* Force new readahead buffer */
-        assert(skip+len < INT_MAX);
-        s = readahead_get_line_skip(
-            f, (int)(skip+len), bufsize + (bufsize>>2) );
+        assert(len <= PY_SSIZE_T_MAX - skip);
+        s = readahead_get_line_skip(f, skip + len, bufsize + (bufsize>>2));
         if (s == NULL) {
             PyMem_Free(buf);
             return NULL;
         }
-        memcpy(PyString_AS_STRING(s)+skip, bufptr, len);
+        memcpy(PyString_AS_STRING(s) + skip, bufptr, len);
         PyMem_Free(buf);
     }
     return s;
@@ -2597,10 +2664,10 @@ int PyObject_AsFileDescriptor(PyObject *o)
     PyObject *meth;
 
     if (PyInt_Check(o)) {
-        fd = PyInt_AsLong(o);
+        fd = _PyInt_AsInt(o);
     }
     else if (PyLong_Check(o)) {
-        fd = PyLong_AsLong(o);
+        fd = _PyLong_AsInt(o);
     }
     else if ((meth = PyObject_GetAttrString(o, "fileno")) != NULL)
     {
@@ -2610,11 +2677,11 @@ int PyObject_AsFileDescriptor(PyObject *o)
             return -1;
 
         if (PyInt_Check(fno)) {
-            fd = PyInt_AsLong(fno);
+            fd = _PyInt_AsInt(fno);
             Py_DECREF(fno);
         }
         else if (PyLong_Check(fno)) {
-            fd = PyLong_AsLong(fno);
+            fd = _PyLong_AsInt(fno);
             Py_DECREF(fno);
         }
         else {

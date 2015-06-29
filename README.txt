@@ -17,8 +17,10 @@ A. Linux, FreeBSD, and Unix-like OS (__WXGTK__):
       1. wxWidgets-2.8.x or higher with Unicode and IPC enabled
       2. Boost-1.33.0 or higher(build Boost-Python)
       3. Boost.Xpressive latest version
-      4. Python 2.7 or higher
-      5. hunspell 1.3.3 or higher
+
+      (gtk2-devel gtext-devel automake rpm-build)
+      copy wxwin.m4 to usr/share/acloXXX/ or install wxGTK-devel
+
 
 B. MS Windows (__WXMSW__):
    a. MinGW32/GNU C++ 3.x (wxDevCpp):
@@ -37,6 +39,8 @@ B. MS Windows (__WXMSW__):
       4. libunicows: it's optional under WinNT/XP, but required under Win98
       5. Set WXWIN and BOOST to the root directory of your local ones
 
+P.S.: Please put the debug info(.pdb) under the App directory in case there was a 
+      crash happened. Paste the call stack and open a ticket
 P.S.: If you use CVS version of Boost, Boost.Xpressive has been included in the
       CVS HEAD, or you must get 'xpressive.zip' at:
       http://www.boost-consulting.com/vault/index.php?directory=Strings%20-%20Text%20Processing
@@ -51,10 +55,19 @@ P.S.: madedit.pot has been uploaded to the top directory. Any translation for
 P.S.: Please open a ticket for bug of MadEdit-Mod at 
       http://sourceforge.net/projects/madedit-mod/
 
+MadEdit_Win2K is a build by VC++ 2005 express for Windows 2000.
+
+Example build under Linux
+Boost Python(1.56)
+./bjam --with-python include="${HOME}/madedit-mod/minipython/Include" python-debugging=off threading=multi variant=release link=static runtime-link=static stage
+wxWidgets(3.0.2)
+./configure --enable-unicode --disable-shared
+MadEdit-Mod
+./configure --with-boost=${HOME}/boost_1_56_0 --with-wxdir=${HOME}/wxWidgets-3.0.2
 
 Syntax files, Locale files and Settings:
 ---------------------------------------
-  Syntax files: in the path $(MadEditConfigPath)/syntax/
+  Syntax files: in the path $(MadEditConfigPath)/syntax/safs
   Locale files: in the path $(MadEditConfigPath)/locale/
 
   $(MadEditConfigPath) are the one of below paths:
@@ -83,9 +96,43 @@ Feature/issues to be released
 
 ChangeLog:
 ----------
+Todo:
+FreeBSD packaging (with FreeBSD 10.01)
+
+Mod v0.3.4
+1. Fix issue of ReplaceTextAll being recorded as FindTextAll
+2. New: GTK+3 support (GTK+2 as default)
+3. New: Dynamically add recorded scripts in Toolbar
+
+Mod v0.3.3
+1. Update MiniPython to Python 2.7.10
+2. Change display of Space and Tab char
+3. Fix hang issue of Search/ReplaceTextAll(Use RegEx with ^, $ or (?:))
+4. Fix issue of Search/Replace dialog while maxLine is set to less than or equal to 100
+5. Refactoring VS2013 project files, X64 was added
+6. Refactoring VS2005 project files
+7. Improve version number string
+8. Update rpm packaging
+9. Update language files for linux
+10. Add crash dump support
+11. Markdown/Html preview(Lightweight Markdown/Html Editor). DON'T use it to edit
+  huge Markdown files like me, eg. 20MB. The performance is not good.
+12. Convert Markdown to Html
+13. Convert Html to plain text, so, Markdown => Html => text
+14. Use static link of Python and Hunspell
+
 Mod v0.3.2
 1. Change RegKey to "MadEdit-Mod" and add RegKey value "Edit with MadEdit-Mod"
 2. Fix caret display issue after hiding Quick Search bar
+3. Fix hang issue that in the patch for the https://github.com/hltj/wxMEdit/issues/63.
+   Re-implemented using custom event.
+4. Fix duplicate Macro recorded, such as cut, cutline, deleteline, etc
+5. Fix a random hang in Search/Replace (PaintTextLines), patch release
+6. RPM packaging supported(tested with Fedora 20/21)
+7. Debian packaging supported(tested with Ubuntu 15.04)
+8. Refactoring VS2010 project files, X64 was added
+9. Win64 was released
+10. Update MiniPython to Python 2.7.10(in X64 version)
 
 Mod v0.3.1
 Note: You have to change the madedit.mo to MadEdit-Mod.mo since then

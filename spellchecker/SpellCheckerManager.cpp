@@ -100,6 +100,11 @@ void SpellCheckerManager::ScanForDictionaries(const wxString &path)
     wxString filespec(_T("*.dic"));
 
     wxDir dir;
+    if(path.IsEmpty())
+    {
+        m_EnableOnlineChecker = false;
+        return;
+    }
     if ( dir.Open(path) )
     {
         wxString strfilename;

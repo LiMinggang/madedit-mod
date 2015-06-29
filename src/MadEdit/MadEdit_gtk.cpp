@@ -9,7 +9,6 @@
 
 #include "MadEdit.h"
 //#include <wx/gtk/private.h> // wxGTK-2.6.3 above
-#include <gdk/gdk.h>
 #include <gdk/gdkx.h>
 #include <gdk/gdkprivate.h>
 #include <gtk/gtk.h>
@@ -708,6 +707,11 @@ GtkIMContext *GetWindowIMContext(wxWindow *win)
     return win->m_imData->context;
 }
 #else
+#ifdef __WXGTK3__
+#include <gdk/gdkkeysyms-compat.h>
+#endif
+static bool gs_isNewEvent;
+
 #include <X11/XKBlib.h> 
 
 //extern bool g_blockEventsOnDrag;
@@ -1439,13 +1443,33 @@ GtkIMContext *GetWindowIMContext(wxWindow *win)
 {
     return win->m_imContext;
 }
+// GSource callback functions for source used to detect new GDK events
+extern "C" {
+static gboolean source_prepare(GSource*, int*)
+{
+    return !gs_isNewEvent;
+}
+
+static gboolean source_check(GSource*)
+{
+    // 'check' will only be called if 'prepare' returned false
+    return false;
+}
+
+static gboolean source_dispatch(GSource*, GSourceFunc, void*)
+{
+    gs_isNewEvent = true;
+    // don't remove this source
+    return true;
+}
+}
 
 #endif
 
 void MadEdit::ConnectToFixedKeyPressHandler()
 {
     GtkWidget *connect_widget = GetConnectWidget();
-
+#if wxMAJOR_VERSION < 3
     // get signal_id & signal_detail of "key_press_event"
     guint sid;
     GQuark det;
@@ -1469,6 +1493,22 @@ void MadEdit::ConnectToFixedKeyPressHandler()
         std::wcout<<"cannot disconnect old key_release handler\n";
         return;
     }
+#else
+    static bool isSourceAttached;
+    if (!isSourceAttached)
+    {
+        // attach GSource to detect new GDK events
+        isSourceAttached = true;
+        static GSourceFuncs funcs = {
+            source_prepare, source_check, source_dispatch,
+            NULL, NULL, NULL
+        };
+        GSource* source = g_source_new(&funcs, sizeof(GSource));
+        // priority slightly higher than GDK_PRIORITY_EVENTS
+        g_source_set_priority(source, GDK_PRIORITY_EVENTS - 1);
+        g_source_attach(source, NULL);
+    }
+#endif
     
     // connect to the fixed key_press handler
     g_signal_connect (connect_widget, "key_press_event", G_CALLBACK (gtk_window_key_press_callback), this);

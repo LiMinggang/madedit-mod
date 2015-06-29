@@ -1271,11 +1271,11 @@ get_ref_type(struct compiler *c, PyObject *name)
                       "symbols: %s\nlocals: %s\nglobals: %s",
                       PyString_AS_STRING(name),
                       PyString_AS_STRING(c->u->u_name),
-                      PyObject_REPR(c->u->u_ste->ste_id),
+                      PyString_AS_STRING(PyObject_Repr(c->u->u_ste->ste_id)),
                       c->c_filename,
-                      PyObject_REPR(c->u->u_ste->ste_symbols),
-                      PyObject_REPR(c->u->u_varnames),
-                      PyObject_REPR(c->u->u_names)
+                      PyString_AS_STRING(PyObject_Repr(c->u->u_ste->ste_symbols)),
+                      PyString_AS_STRING(PyObject_Repr(c->u->u_varnames)),
+                      PyString_AS_STRING(PyObject_Repr(c->u->u_names))
         );
         Py_FatalError(buf);
     }
@@ -1327,11 +1327,11 @@ compiler_make_closure(struct compiler *c, PyCodeObject *co, int args)
         if (arg == -1) {
             printf("lookup %s in %s %d %d\n"
                 "freevars of %s: %s\n",
-                PyObject_REPR(name),
+                PyString_AS_STRING(PyObject_Repr(name)),
                 PyString_AS_STRING(c->u->u_name),
                 reftype, arg,
                 PyString_AS_STRING(co->co_name),
-                PyObject_REPR(co->co_freevars));
+                PyString_AS_STRING(PyObject_Repr(co->co_freevars)));
             Py_FatalError("compiler_make_closure()");
         }
         ADDOP_I(c, LOAD_CLOSURE, arg);
@@ -1716,10 +1716,9 @@ compiler_while(struct compiler *c, stmt_ty s)
        if there is no else clause ?
     */
 
-    if (constant == -1) {
+    if (constant == -1)
         compiler_use_next_block(c, anchor);
-        ADDOP(c, POP_BLOCK);
-    }
+    ADDOP(c, POP_BLOCK);
     compiler_pop_fblock(c, LOOP, loop);
     if (orelse != NULL) /* what if orelse is just pass? */
         VISIT_SEQ(c, stmt, s->v.While.orelse);
@@ -1979,7 +1978,7 @@ compiler_import(struct compiler *c, stmt_ty s)
         else {
             identifier tmp = alias->name;
             const char *base = PyString_AS_STRING(alias->name);
-            const char *dot = strchr(base, '.');
+            char *dot = strchr(base, '.');
             if (dot)
                 tmp = PyString_FromStringAndSize(base,
                                                  dot - base);

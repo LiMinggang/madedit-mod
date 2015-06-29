@@ -1,0 +1,85 @@
+# Spirent Log
+Title=Spirent Log
+CaseSensitive=Yes
+Delimiter=~`!@#$%^&*()-+=|\{}[]:;"',.<>/?
+LineComment=
+BlockComment=
+EscapeChar=
+StringChar=
+DirectiveLeading=
+KeywordPrefix=
+SpecialWordPrefix=
+IndentChar=
+UnindentChar=
+BracePair= < > ( ) [ ] { }
+AutoCompletePair=<> () [] {} "" ''
+
+# System Predefined Color & Style
+TextColor=Black
+TextBgColor=White
+TextStyle=
+
+DelimiterColor=SaddleBrown
+DelimiterBgColor=
+DelimiterStyle=
+
+SpaceColor=Aqua
+SpaceBgColor=
+SpaceStyle=
+
+NumberColor=Blue
+NumberBgColor=
+NumberStyle=
+
+StringColor=Red
+StringBgColor=
+StringStyle=
+
+CommentColor=Teal
+CommentBgColor=
+CommentStyle=
+
+DirectiveColor=Green
+DirectiveBgColor=
+DirectiveStyle=
+
+SpecialWordColor=Navy
+SpecialWordBgColor=
+SpecialWordStyle=
+
+LineNumberColor=White
+LineNumberBgColor=A0A0A0
+LineNumberStyle=
+
+ActiveLineColor=Fuchsia
+BookmarkColor=C0FFFF
+
+
+# User Defined Keywords
+[1.Keywords]
+Color=Green
+BgColor=
+Style=Bold
+InRange=0
+Keyword= INFO DEBUG
+
+[2.Keywords]
+Color=Red
+BgColor=
+Style=Bold
+InRange=0
+Keyword= ERROR WARN FATAL exception Failed Assertion failure StcException
+
+[3.Keywords]
+Color=Navy
+BgColor=
+Style=Bold
+InRange=0
+Keyword= user 
+
+[4.Keywords]
+Color=BLACK
+BgColor=
+Style=Bold
+InRange=0
+Keyword= fmwk bll base cmd content core rcp perf

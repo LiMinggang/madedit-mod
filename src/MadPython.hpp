@@ -22,7 +22,7 @@ extern MadEdit *g_ActiveMadEdit;
 extern void DisplayFindAllResult(vector<wxFileOffset> &begpos, vector<wxFileOffset> &endpos, MadEdit *madedit, bool expandresults = true, OnProgressUpdatePtr updater = NULL);
 
 // Ugly bigger switch than bigger map
-void FromCmdToString(wxString &cmdStr, int madCmd)
+bool FromCmdToString(wxString &cmdStr, int madCmd)
 {
     switch(madCmd)
     {
@@ -176,22 +176,23 @@ void FromCmdToString(wxString &cmdStr, int madCmd)
         case ecDelNextWord:
             cmdStr<<(wxT("MadEditCommand.DelNextWord"));
             break;
-        case ecCutLine:
-            cmdStr<<(wxT("MadEditCommand.CutLine"));
-            break;
-        case ecDeleteLine:
-            cmdStr<<(wxT("MadEditCommand.DeleteLine"));
-            break;
-        case ecUndo:
-            cmdStr<<(wxT("MadEditCommand.Undo"));
-            break;
-        case ecRedo:
-            cmdStr<<(wxT("MadEditCommand.Redo"));
-            break;
-        case ecCut:
-            cmdStr<<(wxT("MadEditCommand.Cut"));
-            break;
-        case ecCopy:
+#if 0
+        //case ecCutLine:
+        //    cmdStr<<(wxT("MadEditCommand.CutLine"));
+        //    break;
+        //case ecDeleteLine:
+        //    cmdStr<<(wxT("MadEditCommand.DeleteLine"));
+        //    break;
+        //case ecUndo:
+        //    cmdStr<<(wxT("MadEditCommand.Undo"));
+        //    break;
+        //case ecRedo:
+        //    cmdStr<<(wxT("MadEditCommand.Redo"));
+        //    break;
+        //case ecCut:
+        //    cmdStr<<(wxT("MadEditCommand.Cut"));
+        //    break;
+        //case ecCopy:
             cmdStr<<(wxT("MadEditCommand.Copy"));
             break;
         case ecPaste:
@@ -254,11 +255,13 @@ void FromCmdToString(wxString &cmdStr, int madCmd)
         case ecMouseNotify:
             cmdStr<<(wxT("MadEditCommand.MouseNotify"));
             break;
-    
+#endif
         default:
             cmdStr<<(wxT("MadEditCommand.None)"));
+            return false;
             break;
     }
+    return true;
 }
 
 namespace mad_py = ::boost::python;
@@ -1075,7 +1078,7 @@ namespace mad_python
         // if the file is modified by another app, reload it.
         bool ReloadByModificationTime()
         {
-            return g_ActiveMadEdit->ReloadByModificationTime();
+            return g_ActiveMadEdit->ReloadByModificationTime(false);
         }
         // restore pos in Reload(), ConvertEncoding()
         void RestorePosition(int pos, int toprow)

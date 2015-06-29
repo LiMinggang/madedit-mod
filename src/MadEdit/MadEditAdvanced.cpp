@@ -111,6 +111,7 @@ void MadEdit::ToggleBOM()
         MadLineIterator lit = DeleteInsertData(dudata->m_Pos, dudata->m_Size, &dudata->m_Data, 0, NULL);
 
         MadUndo *undo = m_UndoBuffer->Add();
+        SetNeedSync();
         undo->m_CaretPosBefore = m_CaretPos.pos;
         undo->m_Undos.push_back(dudata);
 
@@ -143,6 +144,7 @@ void MadEdit::ToggleBOM()
         insud->m_Data.push_back(blk);
 
         MadUndo *undo = m_UndoBuffer->Add();
+        SetNeedSync();
         undo->m_CaretPosBefore = m_CaretPos.pos;
         undo->m_CaretPosAfter = m_CaretPos.pos+blk.m_Size;
         undo->m_Undos.push_back(insud);
@@ -402,6 +404,7 @@ void MadEdit::ConvertNewLineType(MadNewLineType type)
                                     oudata->m_InsSize, &oudata->m_InsData);
 
     MadUndo *undo=m_UndoBuffer->Add();
+    SetNeedSync();
     undo->m_CaretPosBefore=m_CaretPos.pos;
     undo->m_CaretPosAfter=newCaretPos;
     undo->m_Undos.push_back(oudata);
@@ -630,6 +633,7 @@ void MadEdit::IncreaseDecreaseIndent(bool incIndent)
                                           oudata->m_InsSize, &oudata->m_InsData);
 
     MadUndo *undo=m_UndoBuffer->Add();
+    SetNeedSync();
     undo->m_CaretPosBefore=m_CaretPos.pos;
     undo->m_CaretPosAfter=oudata->m_Pos;
     undo->m_Undos.push_back(oudata);
@@ -819,6 +823,7 @@ void MadEdit::CommentUncomment(bool comment)
                                           oudata->m_InsSize, &oudata->m_InsData);
 
     MadUndo *undo=m_UndoBuffer->Add();
+    SetNeedSync();
     undo->m_CaretPosBefore=m_CaretPos.pos;
     undo->m_CaretPosAfter=oudata->m_Pos;
     undo->m_Undos.push_back(oudata);
@@ -2347,6 +2352,7 @@ void MadEdit::SortLines(MadSortFlags flags, int beginline, int endline)
                             oudata->m_InsSize, &oudata->m_InsData);
 
     MadUndo *undo = m_UndoBuffer->Add();
+    SetNeedSync();
 
     if(m_CaretPos.pos > m_Lines->m_Size) m_CaretPos.pos = m_Lines->m_Size;
     undo->m_CaretPosBefore=m_CaretPos.pos;
@@ -3019,6 +3025,7 @@ void MadEdit::ColumnAlign()
                     if(undo == NULL)
                     {
                         undo = m_UndoBuffer->Add();
+                        SetNeedSync();
                         undo->m_CaretPosBefore=m_CaretPos.pos;
                     }
                     undo->m_Undos.push_back(dudata);
@@ -3047,6 +3054,7 @@ void MadEdit::ColumnAlign()
                 if(undo == NULL)
                 {
                     undo = m_UndoBuffer->Add();
+                    SetNeedSync();
                     undo->m_CaretPosBefore=m_CaretPos.pos;
                 }
                 undo->m_Undos.push_back(indata);
@@ -3388,6 +3396,7 @@ void MadEdit::CutDelBookmarkedLines(bool copyLines/*= false*/)
             if(undo == NULL)
             {
                 undo = m_UndoBuffer->Add();
+                SetNeedSync();
                 undo->m_CaretPosBefore=m_CaretPos.pos;
             }
             undo->m_Undos.push_back(dudata);
@@ -3453,6 +3462,7 @@ void MadEdit::DeleteUnmarkedLines()
             if(undo == NULL)
             {
                 undo = m_UndoBuffer->Add();
+                SetNeedSync();
                 undo->m_CaretPosBefore=m_CaretPos.pos;
             }
             undo->m_Undos.push_back(dudata);
@@ -3476,6 +3486,7 @@ void MadEdit::DeleteUnmarkedLines()
         if(undo == NULL)
         {
             undo = m_UndoBuffer->Add();
+            SetNeedSync();
             undo->m_CaretPosBefore=m_CaretPos.pos;
         }
         undo->m_Undos.push_back(dudata);
@@ -3561,6 +3572,7 @@ void MadEdit::ReplaceBookmarkedLines()
         if(undo == NULL)
         {
             undo = m_UndoBuffer->Add();
+            SetNeedSync();
             undo->m_CaretPosBefore=m_CaretPos.pos;
         }
         undo->m_CaretPosAfter=oudata->m_Pos + oudata->m_InsSize;

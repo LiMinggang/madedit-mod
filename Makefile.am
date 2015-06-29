@@ -1,7 +1,12 @@
 SUBDIRS = syntax po
 
 bin_PROGRAMS = madedit
-INCLUDES = -I$(top_srcdir)/charset-detector/include -I$(top_srcdir)/charset-detector/src -I$(top_srcdir)/charset-detector/src/tables -I$(top_srcdir)/spellchecker -I$(top_srcdir)/spellchecker/hunspell/src
+INCLUDES = -I$(top_srcdir)/charset-detector/include -I$(top_srcdir)/charset-detector/src \
+-I$(top_srcdir)/charset-detector/src/tables -I$(top_srcdir)/spellchecker -I$(top_srcdir)/spellchecker/hunspell/src \
+-I$(top_srcdir)/spellchecker/hunspell/src/hunspell -I$(top_srcdir)/spellchecker/hunspell/src/win_api \
+-I$(top_srcdir)/minipython/Include -I$(top_srcdir)/minipython/Python \
+-I$(top_srcdir)/minipython/Modules/zlib -I$(top_srcdir)/markdown
+
 madedit_CXXFLAGS = -DDATA_DIR=\"${datadir}\"
 madedit_SOURCES =	src/MadAboutDialog.cpp \
 	src/MadAboutDialog.h \
@@ -29,6 +34,8 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	src/MadSortDialog.h \
 	src/MadUtils.cpp \
 	src/MadUtils.h \
+	src/MadFileAssociationDialog.cpp \
+	src/MadFileAssociationDialog.h \
 	src/MadWordCountDialog.cpp \
 	src/MadWordCountDialog.h \
 	src/MadPurgeHistoryDialog.cpp \
@@ -45,6 +52,10 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	src/plugin.h \
 	src/MadEdit/caret_new.cpp \
 	src/MadEdit/caret_new.h \
+	src/MadEdit/clipbrd_gtk_wx2.cpp \
+	src/MadEdit/clipbrd_gtk_wx2.h \
+	src/MadEdit/clipbrd_gtk_wx3.cpp \
+	src/MadEdit/clipbrd_gtk_wx3.h \
 	src/MadEdit/clipbrd_gtk.cpp \
 	src/MadEdit/clipbrd_gtk.h \
 	src/MadEdit/MadDeque.hpp \
@@ -126,8 +137,276 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	spellchecker/SpellCheckUserInterface.cpp \
 	spellchecker/SpellCheckUserInterface.h \
 	spellchecker/SpellCheckerManager.cpp \
-	spellchecker/SpellCheckerManager.h
+	spellchecker/SpellCheckerManager.h \
+	spellchecker/hunspell/src/hunspell/affentry.cxx \
+	spellchecker/hunspell/src/hunspell/affixmgr.cxx \
+	spellchecker/hunspell/src/hunspell/csutil.cxx \
+	spellchecker/hunspell/src/hunspell/dictmgr.cxx \
+	spellchecker/hunspell/src/hunspell/filemgr.cxx \
+	spellchecker/hunspell/src/hunspell/hashmgr.cxx \
+	spellchecker/hunspell/src/hunspell/hunspell.cxx \
+	spellchecker/hunspell/src/hunspell/hunzip.cxx \
+	spellchecker/hunspell/src/hunspell/phonet.cxx \
+	spellchecker/hunspell/src/hunspell/replist.cxx \
+	spellchecker/hunspell/src/hunspell/suggestmgr.cxx \
+	spellchecker/hunspell/src/hunspell/utf_info.cxx \
+	spellchecker/config.h \
+	spellchecker/hunspell/src/win_api/hunspelldll.h \
+	spellchecker/hunspell/src/hunspell/affentry.hxx \
+	spellchecker/hunspell/src/hunspell/affixmgr.hxx \
+	spellchecker/hunspell/src/hunspell/atypes.hxx \
+	spellchecker/hunspell/src/hunspell/baseaffix.hxx \
+	spellchecker/hunspell/src/hunspell/csutil.hxx \
+	spellchecker/hunspell/src/hunspell/dictmgr.hxx \
+	spellchecker/hunspell/src/hunspell/filemgr.hxx \
+	spellchecker/hunspell/src/hunspell/hashmgr.hxx \
+	spellchecker/hunspell/src/hunspell/htypes.hxx \
+	spellchecker/hunspell/src/hunspell/hunspell.h \
+	spellchecker/hunspell/src/hunspell/hunspell.hxx \
+	spellchecker/hunspell/src/hunspell/hunvisapi.h \
+	spellchecker/hunspell/src/hunspell/hunzip.hxx \
+	spellchecker/hunspell/src/hunspell/langnum.hxx \
+	spellchecker/hunspell/src/hunspell/phonet.hxx \
+	spellchecker/hunspell/src/hunspell/replist.hxx \
+	spellchecker/hunspell/src/hunspell/suggestmgr.hxx \
+	spellchecker/hunspell/src/hunspell/w_char.hxx \
+	markdown/markdown-tokens.cpp \
+	markdown/markdown-tokens.h \
+	markdown/markdown.cpp \
+	markdown/markdown.h \
+	minipython/Include/abstract.h \
+	minipython/Include/asdl.h \
+	minipython/Include/ast.h \
+	minipython/Include/bitset.h \
+	minipython/Include/boolobject.h \
+	minipython/Include/bufferobject.h \
+	minipython/Include/bytearrayobject.h \
+	minipython/Include/bytes_methods.h \
+	minipython/Include/bytesobject.h \
+	minipython/Include/cellobject.h \
+	minipython/Include/ceval.h \
+	minipython/Include/classobject.h \
+	minipython/Include/cobject.h \
+	minipython/Include/code.h \
+	minipython/Include/codecs.h \
+	minipython/Include/compile.h \
+	minipython/Include/complexobject.h \
+	minipython/Include/descrobject.h \
+	minipython/Include/dictobject.h \
+	minipython/Include/dtoa.h \
+	minipython/Include/enumobject.h \
+	minipython/Include/errcode.h \
+	minipython/Include/eval.h \
+	minipython/Include/fileobject.h \
+	minipython/Include/floatobject.h \
+	minipython/Include/frameobject.h \
+	minipython/Include/funcobject.h \
+	minipython/Include/genobject.h \
+	minipython/Include/graminit.h \
+	minipython/Include/grammar.h \
+	minipython/Include/import.h \
+	minipython/Include/intobject.h \
+	minipython/Include/intrcheck.h \
+	minipython/Include/iterobject.h \
+	minipython/Include/listobject.h \
+	minipython/Include/longintrepr.h \
+	minipython/Include/longobject.h \
+	minipython/Include/marshal.h \
+	minipython/Include/metagrammar.h \
+	minipython/Include/methodobject.h \
+	minipython/Include/modsupport.h \
+	minipython/Include/moduleobject.h \
+	minipython/Include/node.h \
+	minipython/Include/object.h \
+	minipython/Include/objimpl.h \
+	minipython/Include/opcode.h \
+	minipython/Include/osdefs.h \
+	minipython/Include/parsetok.h \
+	minipython/Include/patchlevel.h \
+	minipython/Include/pgen.h \
+	minipython/Include/pgenheaders.h \
+	minipython/Include/py_curses.h \
+	minipython/Include/pyarena.h \
+	minipython/Include/pycapsule.h \
+	minipython/Include/pyctype.h \
+	minipython/Include/pydebug.h \
+	minipython/Include/pyerrors.h \
+	minipython/Include/pyexpat.h \
+	minipython/Include/pyfpe.h \
+	minipython/Include/pygetopt.h \
+	minipython/Include/pymactoolbox.h \
+	minipython/Include/pymath.h \
+	minipython/Include/pymem.h \
+	minipython/Include/pyport.h \
+	minipython/Include/pystate.h \
+	minipython/Include/pystrcmp.h \
+	minipython/Include/pystrtod.h \
+	minipython/Include/Python-ast.h \
+	minipython/Include/Python.h \
+	minipython/Include/pythonrun.h \
+	minipython/Include/pythread.h \
+	minipython/Include/rangeobject.h \
+	minipython/Include/setobject.h \
+	minipython/Include/sliceobject.h \
+	minipython/Include/stringobject.h \
+	minipython/Include/structmember.h \
+	minipython/Include/structseq.h \
+	minipython/Include/symtable.h \
+	minipython/Include/sysmodule.h \
+	minipython/Include/timefuncs.h \
+	minipython/Include/token.h \
+	minipython/Include/traceback.h \
+	minipython/Include/tupleobject.h \
+	minipython/Include/ucnhash.h \
+	minipython/Include/unicodeobject.h \
+	minipython/Include/weakrefobject.h \
+	minipython/Include/pyconfig.h \
+	minipython/Include/pyconfig-64.h \
+	minipython/Include/pyconfig-32.h \
+	minipython/Include/pyconfig-win.h \
+	minipython/Modules/_math.h \
+	minipython/Modules/zlib/crc32.h \
+	minipython/Modules/zlib/deflate.h \
+	minipython/Modules/zlib/inffast.h \
+	minipython/Modules/zlib/inffixed.h \
+	minipython/Modules/zlib/inflate.h \
+	minipython/Modules/zlib/inftrees.h \
+	minipython/Modules/zlib/trees.h \
+	minipython/Modules/zlib/zconf.h \
+	minipython/Modules/zlib/zconf.in.h \
+	minipython/Modules/zlib/zlib.h \
+	minipython/Modules/zlib/zutil.h \
+	minipython/Objects/stringlib/count.h \
+	minipython/Objects/stringlib/fastsearch.h \
+	minipython/Objects/stringlib/find.h \
+	minipython/Objects/stringlib/partition.h \
+	minipython/Objects/stringlib/split.h \
+	minipython/Objects/unicodetype_db.h \
+	minipython/Parser/parser.h \
+	minipython/Parser/tokenizer.h \
+	minipython/Python/importdl.h \
+	minipython/Python/thread_pthread.h \
+	minipython/Modules/_codecsmodule.c \
+	minipython/Modules/_math.c \
+	minipython/Modules/errnomodule.c \
+	minipython/Modules/future_builtins.c \
+	minipython/Modules/gcmodule.c \
+	minipython/Modules/getbuildinfo.c \
+	minipython/Modules/getpath.c \
+	minipython/Modules/config.c \
+	minipython/Modules/mathmodule.c \
+	minipython/Modules/parsermodule.c \
+	minipython/Modules/stropmodule.c \
+	minipython/Modules/symtablemodule.c \
+	minipython/Modules/zipimport.c \
+	minipython/Modules/zlibmodule.c \
+	minipython/Modules/zlib/adler32.c \
+	minipython/Modules/zlib/compress.c \
+	minipython/Modules/zlib/crc32.c \
+	minipython/Modules/zlib/deflate.c \
+	minipython/Modules/zlib/gzclose.c \
+	minipython/Modules/zlib/gzguts.h \
+	minipython/Modules/zlib/gzlib.c \
+	minipython/Modules/zlib/gzread.c \
+	minipython/Modules/zlib/gzwrite.c \
+	minipython/Modules/zlib/infback.c \
+	minipython/Modules/zlib/inffast.c \
+	minipython/Modules/zlib/inflate.c \
+	minipython/Modules/zlib/inftrees.c \
+	minipython/Modules/zlib/trees.c \
+	minipython/Modules/zlib/uncompr.c \
+	minipython/Modules/zlib/zutil.c \
+	minipython/Objects/abstract.c \
+	minipython/Objects/boolobject.c \
+	minipython/Objects/bufferobject.c \
+	minipython/Objects/capsule.c \
+	minipython/Objects/cellobject.c \
+	minipython/Objects/classobject.c \
+	minipython/Objects/cobject.c \
+	minipython/Objects/codeobject.c \
+	minipython/Objects/complexobject.c \
+	minipython/Objects/descrobject.c \
+	minipython/Objects/dictobject.c \
+	minipython/Objects/enumobject.c \
+	minipython/Objects/exceptions.c \
+	minipython/Objects/fileobject.c \
+	minipython/Objects/floatobject.c \
+	minipython/Objects/frameobject.c \
+	minipython/Objects/funcobject.c \
+	minipython/Objects/genobject.c \
+	minipython/Objects/intobject.c \
+	minipython/Objects/iterobject.c \
+	minipython/Objects/listobject.c \
+	minipython/Objects/longobject.c \
+	minipython/Objects/methodobject.c \
+	minipython/Objects/moduleobject.c \
+	minipython/Objects/object.c \
+	minipython/Objects/obmalloc.c \
+	minipython/Objects/rangeobject.c \
+	minipython/Objects/setobject.c \
+	minipython/Objects/sliceobject.c \
+	minipython/Objects/stringobject.c \
+	minipython/Objects/structseq.c \
+	minipython/Objects/tupleobject.c \
+	minipython/Objects/typeobject.c \
+	minipython/Objects/unicodectype.c \
+	minipython/Objects/unicodeobject.c \
+	minipython/Objects/weakrefobject.c \
+	minipython/Parser/acceler.c \
+	minipython/Parser/bitset.c \
+	minipython/Parser/firstsets.c \
+	minipython/Parser/grammar.c \
+	minipython/Parser/grammar1.c \
+	minipython/Parser/listnode.c \
+	minipython/Parser/metagrammar.c \
+	minipython/Parser/myreadline.c \
+	minipython/Parser/node.c \
+	minipython/Parser/parser.c \
+	minipython/Parser/parsetok.c \
+	minipython/Parser/tokenizer.c \
+	minipython/Python/_warnings.c \
+	minipython/Python/asdl.c \
+	minipython/Python/ast.c \
+	minipython/Python/bltinmodule.c \
+	minipython/Python/ceval.c \
+	minipython/Python/codecs.c \
+	minipython/Python/compile.c \
+	minipython/Python/dtoa.c \
+	minipython/Python/errors.c \
+	minipython/Python/formatter_string.c \
+	minipython/Python/formatter_unicode.c \
+	minipython/Python/frozen.c \
+	minipython/Python/future.c \
+	minipython/Python/getargs.c \
+	minipython/Python/getcompiler.c \
+	minipython/Python/getcopyright.c \
+	minipython/Python/getopt.c \
+	minipython/Python/getplatform.c \
+	minipython/Python/getversion.c \
+	minipython/Python/graminit.c \
+	minipython/Python/import.c \
+	minipython/Python/importdl.c \
+	minipython/Python/marshal.c \
+	minipython/Python/modsupport.c \
+	minipython/Python/mysnprintf.c \
+	minipython/Python/mystrtoul.c \
+	minipython/Python/peephole.c \
+	minipython/Python/pyarena.c \
+	minipython/Python/pyctype.c \
+	minipython/Python/pyfpe.c \
+	minipython/Python/pymath.c \
+	minipython/Python/pystate.c \
+	minipython/Python/pystrcmp.c \
+	minipython/Python/pystrtod.c \
+	minipython/Python/Python-ast.c \
+	minipython/Python/pythonrun.c \
+	minipython/Python/structmember.c \
+	minipython/Python/symtable.c \
+	minipython/Python/sysmodule.c \
+	minipython/Python/thread.c \
+	minipython/Python/traceback.c
 
+dist_doc_DATA = gpl-3.0.txt README.txt MadPython.txt
 pixmapsdir = $(datadir)/pixmaps
 pixmaps_DATA = madedit.xpm
 
@@ -142,15 +421,15 @@ noinst_HEADERS =	description-pak \
 	chmod_644_all_files.sh \
 	madedit.spec \
 	madedit-static.spec \
-	debian/changelog \
-	debian/control \
-	debian/copyright \
-	debian/menu \
-	debian/rules \
-	freebsd/pkg-comment \
-	freebsd/pkg-descr \
-	freebsd/pkg-plist \
-	freebsd/pkgcreate.txt \
+	packaging/debian/changelog \
+	packaging/debian/control \
+	packaging/debian/copyright \
+	packaging/debian/menu \
+	packaging/debian/rules \
+	packaging/freebsd/pkg-comment \
+	packaging/freebsd/pkg-descr \
+	packaging/freebsd/pkg-plist_old \
+	packaging/freebsd/pkgcreate.txt \
 	m4/gettext.m4 \
 	m4/iconv.m4 \
 	m4/lib-ld.m4 \
@@ -164,8 +443,6 @@ noinst_HEADERS =	description-pak \
 	src/MadAboutDialog.wxform \
 	src/MadConvEncDialog.wxform \
 	src/MadEditFrame.wxform \
-	src/MadFileAssociationDialog.cpp \
-	src/MadFileAssociationDialog.h \
 	src/MadFileAssociationDialog.wxform \
 	src/MadFindInFilesDialog.wxform \
 	src/MadHighlightingDialog.wxform \
@@ -180,6 +457,13 @@ noinst_HEADERS =	description-pak \
 	src/plugin_example/plugin.cpp \
 	src/plugin_example/vc_cl.bat \
 	src/plugin_example/wxwin16x16.xpm \
+	minipython/Python/thread_nt.h \
+	minipython/PC/config.c \
+	minipython/PC/dl_nt.c \
+	minipython/PC/getpathp.c \
+	minipython/PC/import_nt.c \
+	minipython/Python/dynload_win.c \
+	minipython/PC/errmap.h \
 	devcpp/MadEdit.dev \
 	devcpp/MadEdit.layout \
 	devcpp/MadEdit_private.h \
@@ -259,7 +543,7 @@ noinst_HEADERS =	description-pak \
 	charset-detector/src/tables/JISFreq.tab \
 	charset-detector/src/entry/export-symbol.list
 
-DOMAIN = madedit
+DOMAIN = madedit-mod
 podir = $(top_srcdir)/po
 LINGUAS = @ALL_LINGUAS@
 
@@ -269,6 +553,8 @@ loc:
 		dir=./locale/$$lang; \
 		$(mkinstalldirs) $$dir; \
 		if test -r $(podir)/$$lang.gmo; then \
+		    msgmerge -U $(podir)/$$lang.po $(podir)/madedit.pot \
+			msgfmt -o $(podir)/$$lang.gmo $(podir)/$$lang.po \
 			cp $(podir)/$$lang.gmo $$dir/$(DOMAIN).mo; \
 			echo "installing $(podir)/$$lang.gmo as $$dir/$(DOMAIN).mo"; \
 		fi; \

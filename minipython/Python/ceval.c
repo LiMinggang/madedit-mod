@@ -66,9 +66,11 @@ ppc_getcounter(uint64 *v)
    even in 64-bit mode, we need to use "a" and "d" for the lower and upper
    32-bit pieces of the result. */
 
-#define READ_TIMESTAMP(val) \
-    __asm__ __volatile__("rdtsc" : \
-                         "=a" (((int*)&(val))[0]), "=d" (((int*)&(val))[1]));
+#define READ_TIMESTAMP(val) do {                        \
+    unsigned int h, l;                                  \
+    __asm__ __volatile__("rdtsc" : "=a" (l), "=d" (h)); \
+    (val) = ((uint64)l) | (((uint64)h) << 32);          \
+    } while(0)
 
 
 #else
@@ -355,12 +357,6 @@ PyEval_RestoreThread(PyThreadState *tstate)
     if (interpreter_lock) {
         int err = errno;
         PyThread_acquire_lock(interpreter_lock, 1);
-        /* _Py_Finalizing is protected by the GIL */
-        if (_Py_Finalizing && tstate != _Py_Finalizing) {
-            PyThread_release_lock(interpreter_lock);
-            PyThread_exit_thread();
-            assert(0);  /* unreachable */
-        }
         errno = err;
     }
 #endif
@@ -1024,12 +1020,6 @@ PyEval_EvalFrameEx(PyFrameObject *f, int throwflag)
                 /* Other threads may run now */
 
                 PyThread_acquire_lock(interpreter_lock, 1);
-
-                /* Check if we should make a quick exit. */
-                if (_Py_Finalizing && _Py_Finalizing != tstate) {
-                    PyThread_release_lock(interpreter_lock);
-                    PyThread_exit_thread();
-                }
 
                 if (PyThreadState_Swap(tstate) != NULL)
                     Py_FatalError("ceval: orphan tstate");
@@ -1957,9 +1947,13 @@ PyEval_EvalFrameEx(PyFrameObject *f, int throwflag)
                 if (err == 0) continue;
                 break;
             }
+            t = PyObject_Repr(w);
+            if (t == NULL)
+                break;
             PyErr_Format(PyExc_SystemError,
                          "no locals found when storing %s",
-                         PyObject_REPR(w));
+                         PyString_AS_STRING(t));
+            Py_DECREF(t);
             break;
 
         case DELETE_NAME:
@@ -1971,9 +1965,13 @@ PyEval_EvalFrameEx(PyFrameObject *f, int throwflag)
                                          w);
                 break;
             }
+            t = PyObject_Repr(w);
+            if (t == NULL)
+                break;
             PyErr_Format(PyExc_SystemError,
                          "no locals when deleting %s",
-                         PyObject_REPR(w));
+                         PyString_AS_STRING(w));
+            Py_DECREF(t);
             break;
 
         PREDICTED_WITH_ARG(UNPACK_SEQUENCE);
@@ -2046,10 +2044,14 @@ PyEval_EvalFrameEx(PyFrameObject *f, int throwflag)
         case LOAD_NAME:
             w = GETITEM(names, oparg);
             if ((v = f->f_locals) == NULL) {
+                why = WHY_EXCEPTION;
+                t = PyObject_Repr(w);
+                if (t == NULL)
+                    break;
                 PyErr_Format(PyExc_SystemError,
                              "no locals when loading %s",
-                             PyObject_REPR(w));
-                why = WHY_EXCEPTION;
+                             PyString_AS_STRING(w));
+                Py_DECREF(t);
                 break;
             }
             if (PyDict_CheckExact(v)) {

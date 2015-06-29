@@ -660,14 +660,10 @@ MadSearchResult MadEdit::Search(/*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadCa
         return SR_NO;
 
     regex_constants::syntax_option_type opt = regex_constants::ECMAScript;
+    const wxString *text_ptr = &text;
     if(bCaseSensitive == false)
     {
         opt = opt | regex_constants::icase;
-    }
-
-    const wxString *text_ptr = &text;
-    if(!bCaseSensitive)
-    {
         static wxString text_lower;
         text_lower = MadStrLower(text);
         //text_lower = text.Lower();
@@ -1156,5 +1152,25 @@ MadSearchResult MadEdit::SearchHex(/*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/Ma
     }
 
     return SR_NO;
+}
+
+bool MadEdit::NextRegexSearchingPos(MadCaretPos& cp, const wxString &expr)
+{
+    if (expr.find_first_of(wxT('^')) != wxString::npos || expr.find_last_of(wxT('$')) != wxString::npos)
+    {
+        wxFileOffset len = cp.iter->m_Size - cp.linepos - 1;
+        cp.pos += len;
+        cp.linepos += len;
+    }
+
+    if (cp.pos == UCIterator::s_endpos)
+        return false;
+
+    UCIterator it(cp.pos, cp.iter, cp.linepos);
+    ++it;
+    cp.pos = it.pos;
+	cp.iter = it.lit;
+	cp.linepos = it.linepos;
+    return true;
 }
 

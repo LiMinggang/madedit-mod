@@ -27,7 +27,7 @@
 
 #include "pygetopt.h"
 
-#define COPYRIGHT  "A Mini Python for embed to C++, Base on 2.7.8 [www.adintr.com]"
+#define COPYRIGHT  "A Mini Python for embed to C++, Base on 2.7.10 [www.adintr.com]"
 
 #ifdef __cplusplus
 extern "C" {
@@ -541,7 +541,7 @@ Py_Main(int argc, char **argv)
         sts = PyRun_SimpleStringFlags(command, &cf) != 0;
         free(command);
     } else if (module) {
-        sts = RunModule(module, 1);
+        sts = (RunModule(module, 1) != 0);
         free(module);
     }
     else {

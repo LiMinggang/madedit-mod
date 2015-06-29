@@ -504,7 +504,7 @@ check_unoptimized(const PySTEntryObject* ste) {
     case OPT_BARE_EXEC:
         PyOS_snprintf(buf, sizeof(buf),
                       "unqualified exec is not allowed in function "
-                      "'%.100s' it %s",
+                      "'%.100s' because it %s",
                       PyString_AS_STRING(ste->ste_name), trailer);
         break;
     default:
@@ -1404,7 +1404,7 @@ symtable_visit_alias(struct symtable *st, alias_ty a)
     PyObject *store_name;
     PyObject *name = (a->asname == NULL) ? a->name : a->asname;
     const char *base = PyString_AS_STRING(name);
-    const char *dot = strchr(base, '.');
+    char *dot = strchr(base, '.');
     if (dot) {
         store_name = PyString_FromStringAndSize(base, dot - base);
         if (!store_name)

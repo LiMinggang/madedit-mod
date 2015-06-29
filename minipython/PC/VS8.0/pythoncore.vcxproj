@@ -311,6 +311,10 @@
     <ClInclude Include="..\..\Python\thread_nt.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Modules\zlib\gzclose.c" />
+    <ClCompile Include="..\..\Modules\zlib\gzlib.c" />
+    <ClCompile Include="..\..\Modules\zlib\gzread.c" />
+    <ClCompile Include="..\..\Modules\zlib\gzwrite.c" />
     <ClCompile Include="..\..\Modules\_codecsmodule.c" />
     <ClCompile Include="..\..\Modules\_math.c" />
     <ClCompile Include="..\..\Modules\errnomodule.c" />
@@ -326,7 +330,6 @@
     <ClCompile Include="..\..\Modules\zlib\compress.c" />
     <ClCompile Include="..\..\Modules\zlib\crc32.c" />
     <ClCompile Include="..\..\Modules\zlib\deflate.c" />
-    <ClCompile Include="..\..\Modules\zlib\gzio.c" />
     <ClCompile Include="..\..\Modules\zlib\infback.c" />
     <ClCompile Include="..\..\Modules\zlib\inffast.c" />
     <ClCompile Include="..\..\Modules\zlib\inftrees.c" />

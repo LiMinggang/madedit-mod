@@ -221,6 +221,7 @@ void MadSearchDialog::CreateGUIControls(void)
     m_FindText->SetInsertSpacesInsteadOfTab(false);
     m_FindText->SetWantTab(false);
     m_FindText->LoadDefaultSyntaxScheme();
+    m_FindText->SetMaxLineLength(DEFAULT_MAX_LINELEN);
 
     WxBoxSizer4->Add(m_FindText,0,wxALIGN_CENTER_HORIZONTAL | wxALL,2);
     WxBoxSizer4->SetItemMinSize(m_FindText, 400, bh);

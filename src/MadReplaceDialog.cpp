@@ -182,6 +182,7 @@ void MadReplaceDialog::CreateGUIControls(void)
     m_FindText->SetInsertSpacesInsteadOfTab(false);
     m_FindText->SetWantTab(false);
     m_FindText->LoadDefaultSyntaxScheme();
+    m_FindText->SetMaxLineLength(DEFAULT_MAX_LINELEN);
 
     WxBoxSizer4->Add(m_FindText,0,wxALIGN_CENTER_HORIZONTAL | wxALL,2);
     WxBoxSizer4->SetItemMinSize(m_FindText, 400, bh);
@@ -205,6 +206,7 @@ void MadReplaceDialog::CreateGUIControls(void)
     m_ReplaceText->SetInsertSpacesInsteadOfTab(false);
     m_ReplaceText->SetWantTab(false);
     m_ReplaceText->LoadDefaultSyntaxScheme();
+    m_ReplaceText->SetMaxLineLength(DEFAULT_MAX_LINELEN);
 
     WxBoxSizer5->Add(m_ReplaceText,0,wxALIGN_CENTER_HORIZONTAL | wxALL,2);
     WxBoxSizer5->SetItemMinSize(m_ReplaceText, 400, bh);
@@ -665,7 +667,7 @@ void MadReplaceDialog::WxButtonReplaceAllClick(wxCommandEvent& event)
                 WxCheckBoxCaseSensitive->GetValue(),
                 WxCheckBoxWholeWord->GetValue(),
                 NULL, NULL, rangeFrom, rangeTo);
-            RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("FindTextAll(\"%s\", \"%s\", %s, %s, %s, %s)"), text.c_str(), reptext.c_str(),
+            RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("ReplaceTextAll(\"%s\", \"%s\", %s, %s, %s, %s)"), text.c_str(), reptext.c_str(),
                             WxCheckBoxRegex->GetValue()?wxT("True"):wxT("False"),
                             WxCheckBoxCaseSensitive->GetValue()?wxT("True"):wxT("False"),
                             WxCheckBoxWholeWord->GetValue()?wxT("True"):wxT("False"), (wxLongLong(rangeFrom).ToString()).c_str(), (wxLongLong(rangeTo).ToString()).c_str()));

@@ -17,7 +17,9 @@
 #include <wx/wx.h>
 #endif
 #include <wx/ipc.h>
+#include <wx/stackwalk.h>
 
+class wxFile;
 class wxSingleInstanceChecker;
 
 class MadAppConn : public wxConnection
@@ -46,14 +48,32 @@ public:
     virtual wxConnectionBase* OnMakeConnection() {return new MadAppConn();}
 };
 
+#if (wxUSE_ON_FATAL_EXCEPTION == 1) && (wxUSE_STACKWALKER == 1)
+class MadStackWalker : public wxStackWalker
+{
+    wxFile * m_DumpFile;
+public:
+    MadStackWalker():m_DumpFile(0) {}
+    void SetDumpFile(wxFile * file){m_DumpFile = file;}
+protected:
+    inline void OnStackFrame(const wxStackFrame & frame);
+};
+#endif
 
 class MadEditApp:public wxApp
 {
     wxSingleInstanceChecker * m_SigleAppChecker;
     MadAppSrv * m_AppServer;
+#if (wxUSE_ON_FATAL_EXCEPTION == 1) && (wxUSE_STACKWALKER == 1)
+    MadStackWalker m_StackWalker;
+#endif
+
 public:
     bool OnInit();
     int OnExit();
+#if (wxUSE_ON_FATAL_EXCEPTION == 1) && (wxUSE_STACKWALKER == 1)
+    void OnFatalException();
+#endif
 };
 
  

@@ -404,9 +404,6 @@
     <ClCompile Include="..\..\Modules\zlib\deflate.c">
       <Filter>Modules\zlib</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Modules\zlib\gzio.c">
-      <Filter>Modules\zlib</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Modules\zlib\infback.c">
       <Filter>Modules\zlib</Filter>
     </ClCompile>
@@ -709,6 +706,18 @@
     </ClCompile>
     <ClCompile Include="..\..\Python\traceback.c">
       <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Modules\zlib\gzclose.c">
+      <Filter>Modules\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Modules\zlib\gzlib.c">
+      <Filter>Modules\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Modules\zlib\gzread.c">
+      <Filter>Modules\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Modules\zlib\gzwrite.c">
+      <Filter>Modules\zlib</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

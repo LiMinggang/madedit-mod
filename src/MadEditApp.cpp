@@ -17,6 +17,7 @@
 #include <wx/stdpaths.h>
 #include <wx/fileconf.h>
 #include <wx/snglinst.h>
+
 #include <algorithm>
 
 IMPLEMENT_APP(MadEditApp)
@@ -37,6 +38,7 @@ wxLocale g_Locale;
 wxString g_MadEditAppDir;
 wxString g_MadEditHomeDir;
 wxString g_MadEditConfigName;
+
 #ifdef __WXMSW__
 wxString g_MadEditRegkeyPath = wxT("HKEY_CURRENT_USER\\Software\\Classes\\");
 #endif
@@ -246,7 +248,7 @@ bool MadEditApp::OnInit()
     wxFileName filename(GetExecutablePath());
     filename.MakeAbsolute();
     g_MadEditAppDir=filename.GetPath(wxPATH_GET_VOLUME|wxPATH_GET_SEPARATOR);
-    
+
     m_SigleAppChecker = 0;
     m_AppServer = 0;
 #ifdef __WXMSW__
@@ -330,6 +332,7 @@ bool MadEditApp::OnInit()
         }
     }
 
+    wxHandleFatalExceptions();
 
 #ifdef __WXGTK__
     bool bDisableWarningMessage = true;
@@ -367,12 +370,12 @@ bool MadEditApp::OnInit()
     g_Locale.AddCatalogLookupPathPrefix(g_MadEditAppDir+wxT("locale/"));
 #ifndef __WXMSW__
     g_Locale.AddCatalogLookupPathPrefix(g_MadEditHomeDir+wxT("locale/"));
-#   if defined (DATA_DIR)
+#if defined (DATA_DIR)
     g_Locale.AddCatalogLookupPathPrefix(wxT(DATA_DIR"/locale/"));
-#   endif
+#endif
 
 #endif
-    g_Locale.AddCatalog(wxT("MadEdit-Mod"));
+    g_Locale.AddCatalog(wxT("madedit-mod"));
 
     // set colors
     SetHtmlColors();
@@ -394,7 +397,7 @@ bool MadEditApp::OnInit()
             break;
         }
     }
-    //if(!maximize)	// removed: gogo, 30.08.2009
+    //if(!maximize)    // removed: gogo, 30.08.2009
     {
         long x=0,y=0,w=0,h=0;
         cfg->Read(wxT("/MadEdit/WindowLeft"), &x);
@@ -425,7 +428,7 @@ bool MadEditApp::OnInit()
     SetTopWindow(myFrame);
 
 #ifdef __WXMSW__
-    //if(maximize)	// removed: gogo, 30.08.2009
+    //if(maximize)    // removed: gogo, 30.08.2009
     {
         WINDOWPLACEMENT wp;
         wp.length=sizeof(WINDOWPLACEMENT);
@@ -460,6 +463,10 @@ bool MadEditApp::OnInit()
         myFrame->OpenFile(wxEmptyString, false);
     }
 
+#if 0
+    // force crash
+    wxWindow *w = NULL; w->Show();
+#endif
     return TRUE;
 }
 
@@ -471,16 +478,56 @@ int MadEditApp::OnExit()
     if(m_AppServer)
         delete m_AppServer;
 
-#ifdef __WXMSW__
-    // it will crash randomly while shutdown MS Windows.
-    // Try close frame again if not
-    if(g_MainFrame)
-    {
-        wxWindow * topWin = wxGetApp().GetTopWindow();
-        if(topWin != (wxWindow *)g_MainFrame)
-            topWin->Close();
-        g_MainFrame->Close(true);
-    }
-#endif
     return 0;
 }
+
+#if (wxUSE_ON_FATAL_EXCEPTION == 1) && (wxUSE_STACKWALKER == 1)
+#include <wx/longlong.h>
+void MadStackWalker::OnStackFrame(const wxStackFrame & frame)
+{
+    if(m_DumpFile) 
+    {
+        wxULongLong address((size_t)frame.GetAddress());
+#if defined(__x86_64__) || defined(__LP64__) || defined(_WIN64)
+        wxString fmt(wxT("[%02u]:[%08X%08X] %s(%i)\t%s\n"));
+#else
+        wxString fmt(wxT("[%02u]:[%08X] %s(%i)\t%s\n"));
+#endif
+
+        m_DumpFile->Write(wxString::Format(fmt,
+            (unsigned)frame.GetLevel(),
+#if defined(__x86_64__) || defined(__LP64__) || defined(_WIN64)
+            address.GetHi(),
+#endif
+            address.GetLo(),
+            frame.GetFileName().c_str(),
+            (unsigned)frame.GetLine(),
+            frame.GetName().c_str()
+            ));
+    }
+}
+
+void MadEditApp::OnFatalException()
+{
+    wxString name = g_MadEditHomeDir + wxString::Format(
+                                                            wxT("%s_%s_%lu.dmp"),
+                                                            wxTheApp ? (const wxChar*)wxTheApp->GetAppDisplayName().c_str()
+                                                                     : wxT("wxwindows"),
+                                                            wxDateTime::Now().Format(wxT("%Y%m%dT%H%M%S")).c_str(),
+#if defined(__WXMSW__)
+                                                            ::GetCurrentProcessId()
+#else
+                                                            (unsigned)getpid()
+#endif
+                                                        );
+    wxFile dmpFile(name.c_str(), wxFile::write); 
+    if(dmpFile.IsOpened())
+    {
+        m_StackWalker.SetDumpFile(&dmpFile);
+        m_StackWalker.WalkFromException();
+        dmpFile.Close();
+    }
+}
+#endif
+
+

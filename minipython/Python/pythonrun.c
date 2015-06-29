@@ -91,8 +91,6 @@ int _Py_QnewFlag = 0;
 int Py_NoUserSiteDirectory = 0; /* for -s and site.py */
 int Py_HashRandomizationFlag = 0; /* for -R and PYTHONHASHSEED */
 
-PyThreadState *_Py_Finalizing = NULL;
-
 
 /* Hack to force loading of object files */
 int (*_PyOS_mystrnicmp_hack)(const char *, const char *, Py_ssize_t) = \
@@ -174,6 +172,12 @@ Py_InitializeEx(int install_sigs)
         Py_OptimizeFlag = add_flag(Py_OptimizeFlag, p);
     if ((p = Py_GETENV("PYTHONDONTWRITEBYTECODE")) && *p != '\0')
         Py_DontWriteBytecodeFlag = add_flag(Py_DontWriteBytecodeFlag, p);
+    /* The variable is only tested for existence here; _PyRandom_Init will
+       check its value further. */
+    //if ((p = Py_GETENV("PYTHONHASHSEED")) && *p != '\0')
+    //    Py_HashRandomizationFlag = add_flag(Py_HashRandomizationFlag, p);
+
+    //_PyRandom_Init();
 
     interp = PyInterpreterState_New();
     if (interp == NULL)
@@ -418,15 +422,11 @@ Py_Finalize(void)
      * the threads created via Threading.
      */
     call_sys_exitfunc();
+    initialized = 0;
 
     /* Get current thread state and interpreter pointer */
     tstate = PyThreadState_GET();
     interp = tstate->interp;
-
-    /* Remaining threads (e.g. daemon threads) will automatically exit
-       after taking the GIL (in PyEval_RestoreThread()). */
-    _Py_Finalizing = tstate;
-    initialized = 0;
 
     /* Disable signal handling */
     //PyOS_FiniInterrupts();
@@ -529,6 +529,7 @@ Py_Finalize(void)
     PyInt_Fini();
     PyFloat_Fini();
     PyDict_Fini();
+    //_PyRandom_Fini();
 
 #ifdef Py_USING_UNICODE
     /* Cleanup Unicode implementation */

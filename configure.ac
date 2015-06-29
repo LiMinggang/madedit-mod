@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
-AC_INIT([madedit-mod], [0.2.5], [liminggang@gmail.com])
+AC_INIT([madedit-mod], [0.3.3], [liminggang@gmail.com])
 AC_CONFIG_SRCDIR([src/MadEditApp.cpp])
 AC_CONFIG_HEADER([config.h])
 AC_PREFIX_DEFAULT([/usr])
@@ -10,7 +10,7 @@ AC_PREFIX_DEFAULT([/usr])
 AM_INIT_AUTOMAKE
 
 AC_USE_SYSTEM_EXTENSIONS
-ALL_LINGUAS="it_IT ja_JP zh_CN zh_TW"
+ALL_LINGUAS="it_IT ja_JP zh_CN zh_TW ru_RU es"
 AM_GNU_GETTEXT
 AC_SUBST(ALL_LINGUAS)
 
@@ -19,7 +19,7 @@ AC_PROG_CXX
 AC_PROG_INSTALL
 AC_LANG(C++)
 
-#CXXFLAGS="-O2"
+CXXFLAGS="-O2 -Wno-write-strings -fno-strict-aliasing"
 
 # Checks for MacOS
 IS_MACOS=
@@ -34,21 +34,31 @@ esac
 #AM_PATH_GTK_2_0(2.6.0)
 
 if test "x$IS_MACOS" == "x"; then
+    use_GTK2=yes
     PKG_CHECK_MODULES(glib_gtk2, [
             glib-2.0 >= 2.6.0
             gtk+-2.0 >= 2.6.0
-    ])
-    CXXFLAGS="$CXXFLAGS $glib_gtk2_CFLAGS"
-    LIBS="$LIBS $glib_gtk2_LIBS"
+    ], use_GTK2=yes, use_GTK2=no)
+    if test "$use_GTK2" == "yes"; then
+        CXXFLAGS="$CXXFLAGS $glib_gtk2_CFLAGS"
+        LIBS="$LIBS $glib_gtk2_LIBS"
+    else
+        PKG_CHECK_MODULES(glib_gtk3, [
+            glib-2.0 >= 2.6.0
+            gtk+-3.0
+        ])
+        CXXFLAGS="$CXXFLAGS $glib_gtk3_CFLAGS"
+        LIBS="$LIBS $glib_gtk3_LIBS"
+    fi
 fi
 
-if test "x$IS_MACOS" == "x"; then
-    PKG_CHECK_MODULES(python, [
-            python >= 2.7
-    ])
-    CXXFLAGS="$CXXFLAGS $python_CFLAGS"
-    LIBS="$LIBS $python_LIBS"
-fi
+#if test "x$IS_MACOS" == "x"; then
+#    PKG_CHECK_MODULES(python, [
+#            python >= 2.7
+#    ])
+#    CXXFLAGS="$CXXFLAGS $python_CFLAGS"
+#    LIBS="$LIBS $python_LIBS"
+#fi
 
 # option for additional Xpressive lib
 AC_ARG_WITH(xpressive, 
@@ -62,7 +72,7 @@ AC_ARG_WITH(boost,
     [  --with-boost=PATH       use additional Boost library path,
                           otherwise use system include path],
     [CXXFLAGS="$CXXFLAGS -I$withval"]
-    [LIBS="$LIBS -L$withval/stage/lib -lboost_python"])
+    [LIBS="$LIBS $withval/stage/lib/libboost_python.a"])
 
 
 # Checks for wxWidgets library
@@ -72,7 +82,7 @@ if test "x$WX_LIBS" != "x"; then
 fi
 
 AM_OPTIONS_WXCONFIG
-AM_PATH_WXCONFIG(2.8.0, wxWin=1, , [std, net,aui])
+AM_PATH_WXCONFIG(2.8.0, wxWin=1, , [std,net,aui,html], [--static])
 if test "$wxWin" != 1; then
    AC_MSG_ERROR([
            wxWidgets must be installed on your system
@@ -102,25 +112,25 @@ else
 fi
 
 # Make sure we have X11, and also have it added to LIBS
-AC_CHECK_LIB([X11], [XKeycodeToKeysym],[ac_X11="yes"],[ac_X11="no"])
-if test "x$ac_X11" = "xno"; then
-   AC_MSG_ERROR([Could not find XOpenDisplay in X11.])
-else
-   LIBS="$LIBS -lX11"
-fi
-#LIBS="$LIBS -lX11"
+#AC_CHECK_LIB([X11], [main],[ac_X11="yes"],[ac_X11="no"])
+#if test "x$ac_X11" = "xno"; then
+#   AC_MSG_ERROR([Could not find XOpenDisplay in X11.])
+#else
+#   LIBS="$LIBS -lX11"
+#fi
+LIBS="$LIBS -lX11"
 
 # Make sure we have hunspell, and also have it added to LIBS
 # Checks for header files.
 #AC_CHECK_HEADERS([hunspell/hunspell.hxx])
 #LIBS="$LIBS -lhunspell"
-if test "x$IS_MACOS" == "x"; then
-    PKG_CHECK_MODULES(hunspell, [
-            hunspell >= 1.3
-    ])
-    CXXFLAGS="$CXXFLAGS $hunspell_CFLAGS"
-    LIBS="$LIBS $hunspell_LIBS"
-fi
+#if test "x$IS_MACOS" == "x"; then
+#    PKG_CHECK_MODULES(hunspell, [
+#            hunspell >= 1.3
+#    ])
+#    CXXFLAGS="$CXXFLAGS $hunspell_CFLAGS"
+#    LIBS="$LIBS $hunspell_LIBS"
+#fi
 
 # Checks for header files.
 AC_CHECK_HEADERS([boost/config.hpp])

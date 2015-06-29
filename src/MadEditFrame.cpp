@@ -46,12 +46,15 @@
 #include <wx/msgdlg.h>
 #include <wx/dnd.h>
 #include <wx/printdlg.h>
+#include "wx/wxhtml.h"
 
 #include <algorithm>
 
 #include "EmbeddedPython.hpp"
 #include "SpellCheckerManager.h"
 #include "HunspellInterface.h"
+#include "markdown.h"
+
 #ifdef __WXMSW__
 #include <io.h>
 #else
@@ -187,6 +190,8 @@ extern wxString MadEncodingGrpName[];
 EmbeddedPython *g_EmbeddedPython = 0;
 MadRecentList  *g_RecentFindText = NULL;
 extern wxString g_MadEditAppDir, g_MadEditHomeDir;
+wxHtmlWindow * g_MadToolHtmlWin = NULL;
+
 
 MadEditFrame *g_MainFrame=NULL;
 MadEdit *g_ActiveMadEdit=NULL;
@@ -225,6 +230,7 @@ wxMenu *g_Menu_View_Font5 = NULL;
 wxMenu *g_Menu_View_Font6 = NULL;
 wxMenu *g_Menu_View_FontSize = NULL;
 wxMenu *g_Menu_View_TabColumn = NULL;
+wxMenu *g_Menu_View_Preview = NULL;
 wxMenu *g_Menu_View_LineSpacing = NULL;
 wxMenu *g_Menu_Tools_BOM = NULL;
 wxMenu *g_Menu_Tools_NewLineChar = NULL;
@@ -246,6 +252,55 @@ int g_StatusWidths[7]={ 0, 220, 235, 135, 155, 65, (40 + 0)};
 #endif
 
 std::map<int, wxString>g_ToolbarNames;
+std::map<int, wxString>g_PreviewTypeNames;
+
+class MadHtmlPreview : public wxHtmlWindow
+{
+    int & m_PreviewType;
+public:
+	MadHtmlPreview(int &previewType, wxWindow *parent, wxWindowID id=wxID_ANY, const wxPoint &pos=wxDefaultPosition, const wxSize &size=wxDefaultSize, long style=wxHW_DEFAULT_STYLE, const wxString &name="MadhtmlWindow")
+    : wxHtmlWindow(parent, id, pos, size, style, name), m_PreviewType(previewType)
+    {}
+	~MadHtmlPreview() {}
+protected:
+    void OnPaint(wxPaintEvent& event);
+	DECLARE_EVENT_TABLE()
+};
+
+BEGIN_EVENT_TABLE(MadHtmlPreview, wxHtmlWindow)
+    EVT_PAINT(MadHtmlPreview::OnPaint)
+END_EVENT_TABLE()
+
+void MadHtmlPreview::OnPaint(wxPaintEvent& event)
+{
+    if(g_ActiveMadEdit != NULL && m_PreviewType != ptPREVIEW_NONE)
+    {
+        if(g_ActiveMadEdit->NeedSync())
+        {
+            wxString text;
+            g_ActiveMadEdit->GetText(text, false);
+            if(m_PreviewType == ptPREVIEW_MARKDOWN)
+            {
+                std::wstring src = text.ToStdWstring();
+                std::wostringstream out;
+            	markdown::Document doc;
+            	doc.read(src);
+            	doc.write(out);
+                text = out.str();
+            }
+            SetPage(text);
+            g_ActiveMadEdit->Synced();
+        }
+    }
+    else
+    {
+        if((g_ActiveMadEdit == NULL && m_PreviewType != ptPREVIEW_NONE))
+        {
+            SetPage(wxT(""));
+        }
+    }
+    wxHtmlWindow::OnPaint(event);
+}
 
 wxAcceleratorEntry g_AccelFindNext, g_AccelFindPrev;
 int MadMessageBox(const wxString& message,
@@ -1160,324 +1215,331 @@ public:
    // Code added in  other places will be removed by wx-dvcpp
   ////Event Table Start
 BEGIN_EVENT_TABLE(MadEditFrame,wxFrame)
-	////Manual Code Start
-	//EVT_SIZE(MadEditFrame::OnSize)
-	EVT_AUINOTEBOOK_PAGE_CHANGING(ID_NOTEBOOK, MadEditFrame::OnNotebookPageChanging)
-	EVT_AUINOTEBOOK_PAGE_CHANGED(ID_NOTEBOOK, MadEditFrame::OnNotebookPageChanged)
-	EVT_AUINOTEBOOK_PAGE_CLOSE(ID_NOTEBOOK, MadEditFrame::OnNotebookPageClosing)
-	EVT_AUINOTEBOOK_TAB_RIGHT_UP(ID_NOTEBOOK, MadEditFrame::OnNotebookPageRightUp)
-	//EVT_AUINOTEBOOK_PAGE_CLOSE(ID_NOTEBOOK, MadEditFrame::OnNotebookPageClosed)
-	//EVT_CHAR(MadEditFrame::OnChar)
-	// file
-	EVT_ACTIVATE(MadEditFrame::OnActivate)
-	EVT_UPDATE_UI(menuSave, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
-	EVT_UPDATE_UI(menuSaveAs, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
-	EVT_UPDATE_UI(menuSaveAll, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
-	EVT_UPDATE_UI(menuReload, MadEditFrame::OnUpdateUI_MenuFileReload)
-	EVT_UPDATE_UI(menuClose, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
-	EVT_UPDATE_UI(menuCloseAll, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
-	EVT_UPDATE_UI(menuCloseAllButThis, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
-	EVT_UPDATE_UI(menuCloseAllToTheLeft, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
-	EVT_UPDATE_UI(menuCloseAllToTheRight, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
-	EVT_UPDATE_UI(menuPrintPreview, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
-	EVT_UPDATE_UI(menuPrint, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
-	EVT_UPDATE_UI(menuRecentFiles, MadEditFrame::OnUpdateUI_MenuFileRecentFiles)
-	EVT_UPDATE_UI(menuToggleReadOnly, MadEditFrame::OnUpdateUI_MenuFileToggleReadOnly)
-	// edit
-	EVT_UPDATE_UI(menuUndo, MadEditFrame::OnUpdateUI_MenuEditUndo)
-	EVT_UPDATE_UI(menuRedo, MadEditFrame::OnUpdateUI_MenuEditRedo)
-	EVT_UPDATE_UI(menuCut, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelection)
-	EVT_UPDATE_UI(menuCopy, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelection)
-	EVT_UPDATE_UI(menuPaste, MadEditFrame::OnUpdateUI_MenuEditPaste)
-	EVT_UPDATE_UI(menuDelete, MadEditFrame::OnUpdateUI_Menu_CheckSize)
-	EVT_UPDATE_UI(menuCutLine, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
-	EVT_UPDATE_UI(menuDeleteLine, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
-	EVT_UPDATE_UI(menuSelectAll, MadEditFrame::OnUpdateUI_Menu_CheckSize)
-	EVT_UPDATE_UI(menuStartEndSelction, MadEditFrame::OnUpdateUI_MenuEditStartEndSelction)
-	EVT_UPDATE_UI(menuInsertTabChar, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
-	EVT_UPDATE_UI(menuInsertDateTime, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
-	EVT_UPDATE_UI(menuSortAscending, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
-	EVT_UPDATE_UI(menuSortDescending, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
-	EVT_UPDATE_UI(menuSortAscendingCase, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
-	EVT_UPDATE_UI(menuSortDescendingCase, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
-	EVT_UPDATE_UI(menuSortByOptions, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
-	EVT_UPDATE_UI(menuSortOptions, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
-	EVT_UPDATE_UI(menuSort, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
-	EVT_UPDATE_UI(menuAdvanced, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
-	EVT_UPDATE_UI(menuCopyAsHexString, MadEditFrame::OnUpdateUI_MenuEditCopyAsHexString)
-	EVT_UPDATE_UI(menuCopyAsHexStringWithSpace, MadEditFrame::OnUpdateUI_MenuEditCopyAsHexString)
-	EVT_UPDATE_UI(menuCopyRevertHex, MadEditFrame::OnUpdateUI_MenuEditCopyAsHexString)
-	EVT_UPDATE_UI(menuIncreaseIndent, MadEditFrame::OnUpdateUI_MenuIndent)
-	EVT_UPDATE_UI(menuDecreaseIndent, MadEditFrame::OnUpdateUI_MenuIndent)
-	EVT_UPDATE_UI(menuComment, MadEditFrame::OnUpdateUI_MenuComment)
-	EVT_UPDATE_UI(menuUncomment, MadEditFrame::OnUpdateUI_MenuComment)
-	EVT_UPDATE_UI(menuWordWrapToNewLine, MadEditFrame::OnUpdateUI_Menu_CheckSize)
-	EVT_UPDATE_UI(menuNewLineToWordWrap, MadEditFrame::OnUpdateUI_Menu_CheckSize)
-	EVT_UPDATE_UI(menuToUpperCase, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize)
-	EVT_UPDATE_UI(menuToLowerCase, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize)
-	EVT_UPDATE_UI(menuInvertCase , MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize)
-	EVT_UPDATE_UI(menuCapitalize , MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize)
-	EVT_UPDATE_UI(menuToHalfWidth, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize)
-	EVT_UPDATE_UI(menuToHalfWidthByOptions, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize)
-	EVT_UPDATE_UI(menuToFullWidth, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize)
-	EVT_UPDATE_UI(menuToFullWidthByOptions, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize)
-	EVT_UPDATE_UI(menuTabToSpace, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize)
-	EVT_UPDATE_UI(menuSpaceToTab, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize)
-	EVT_UPDATE_UI(menuTrimTrailingSpaces, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
-	EVT_UPDATE_UI(menuDeleteEmptyLines, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
-	EVT_UPDATE_UI(menuDeleteEmptyLinesWithSpaces, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
-	EVT_UPDATE_UI(menuJoinLines, MadEditFrame::OnUpdateUI_Menu_JoinLines)
-	EVT_UPDATE_UI(menuInsertNumbers, MadEditFrame::OnUpdateUI_Menu_InsertNumbers)
-	EVT_UPDATE_UI(menuColumnAlign, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
-	EVT_UPDATE_UI(menuBookmark, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark)
-	EVT_UPDATE_UI(menuBookmarkCopy, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark)
-	EVT_UPDATE_UI(menuBookmarkCut, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark)
-	EVT_UPDATE_UI(menuBookmarkDel, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark)
-	EVT_UPDATE_UI(menuBookmarkDelUnmarked, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark)
-	EVT_UPDATE_UI(menuBookmarkReplace, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark)
-	// search
-	EVT_UPDATE_UI(menuFind, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
-	EVT_UPDATE_UI(menuFindNext, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
-	EVT_UPDATE_UI(menuFindPrevious, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
-	EVT_UPDATE_UI(menuShowQuickFindBar, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
-	EVT_UPDATE_UI(menuReplace, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
-	EVT_UPDATE_UI(menuGoToLine, MadEditFrame::OnUpdateUI_MenuSearchGoTo)
-	EVT_UPDATE_UI(menuGoToPosition, MadEditFrame::OnUpdateUI_MenuSearchGoTo)
-	EVT_UPDATE_UI(menuLeftBrace, MadEditFrame::OnUpdateUI_MenuSearchGoToBrace)
-	EVT_UPDATE_UI(menuRightBrace, MadEditFrame::OnUpdateUI_MenuSearchGoToBrace)
-	EVT_UPDATE_UI(menuToggleBookmark, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
-	EVT_UPDATE_UI(menuGotoNextBookmark, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark)
-	EVT_UPDATE_UI(menuGotoPreviousBookmark, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark)
-	EVT_UPDATE_UI(menuClearAllBookmarks, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark)
-	// view
-	EVT_UPDATE_UI(menuEncoding, MadEditFrame::OnUpdateUI_MenuViewEncoding)
-	EVT_UPDATE_UI(menuSyntax, MadEditFrame::OnUpdateUI_MenuViewSyntax)
-	EVT_UPDATE_UI(menuFontName, MadEditFrame::OnUpdateUI_MenuViewFontName)
-	EVT_UPDATE_UI(menuFontSize, MadEditFrame::OnUpdateUI_MenuViewFontSize)
-	EVT_UPDATE_UI(menuSetFont, MadEditFrame::OnUpdateUI_MenuViewSetFont)
-	EVT_UPDATE_UI(menuFixedWidthMode, MadEditFrame::OnUpdateUI_MenuViewFixedWidthMode)
-	EVT_UPDATE_UI(menuTabColumn, MadEditFrame::OnUpdateUI_MenuViewTabColumn)
-	EVT_UPDATE_UI(menuLineSpacing, MadEditFrame::OnUpdateUI_MenuViewLineSpacing)
-	EVT_UPDATE_UI(menuNoWrap, MadEditFrame::OnUpdateUI_MenuViewNoWrap)
-	EVT_UPDATE_UI(menuWrapByWindow, MadEditFrame::OnUpdateUI_MenuViewWrapByWindow)
-	EVT_UPDATE_UI(menuWrapByColumn, MadEditFrame::OnUpdateUI_MenuViewWrapByColumn)
-	EVT_UPDATE_UI(menuDisplayLineNumber, MadEditFrame::OnUpdateUI_MenuViewDisplayLineNumber)
-	EVT_UPDATE_UI(menuDisplayBookmark, MadEditFrame::OnUpdateUI_MenuViewDisplayBookmark)
-	EVT_UPDATE_UI(menuDisplay80ColHint, MadEditFrame::OnUpdateUI_MenuViewDisplay80ColHint)
-	EVT_UPDATE_UI(menuShowEndOfLine, MadEditFrame::OnUpdateUI_MenuViewShowEndOfLine)
-	EVT_UPDATE_UI(menuShowTabChar, MadEditFrame::OnUpdateUI_MenuViewShowTabChar)
-	EVT_UPDATE_UI(menuShowSpaceChar, MadEditFrame::OnUpdateUI_MenuViewShowSpaceChar)
-	EVT_UPDATE_UI(menuShowAllChars, MadEditFrame::OnUpdateUI_MenuViewShowAllChars)
-	EVT_UPDATE_UI(menuMarkActiveLine, MadEditFrame::OnUpdateUI_MenuViewMarkActiveLine)
-	EVT_UPDATE_UI(menuMarkBracePair, MadEditFrame::OnUpdateUI_MenuViewMarkBracePair)
-	EVT_UPDATE_UI(menuTextMode, MadEditFrame::OnUpdateUI_MenuViewTextMode)
-	EVT_UPDATE_UI(menuColumnMode, MadEditFrame::OnUpdateUI_MenuViewColumnMode)
-	EVT_UPDATE_UI(menuHexMode, MadEditFrame::OnUpdateUI_MenuViewHexMode)
-	EVT_UPDATE_UI(menuSpellChecker, MadEditFrame::OnUpdateUI_MenuViewSpellChecker)
-	EVT_UPDATE_UI(menuSpellIgnore, MadEditFrame::OnUpdateUI_MenuSpellIgnore)
-	EVT_UPDATE_UI(menuSpellAdd2Dict, MadEditFrame::OnUpdateUI_MenuSpellAdd2Dict)
-	EVT_UPDATE_UI(menuSpellRemoveFromDict, MadEditFrame::OnUpdateUI_MenuSpellRemoveFromDict)
-	EVT_UPDATE_UI(menuToolBars, MadEditFrame::OnUpdateUI_MenuViewToolbars)
-	EVT_UPDATE_UI(menuToolBarsToggleAll, MadEditFrame::OnUpdateUI_MenuViewToolbarsToggleAll)
-	EVT_UPDATE_UI_RANGE(menuToolBar1, menuToolBar99, MadEditFrame::OnUpdateUI_MenuViewToolbarList)
-	// tools
-	EVT_UPDATE_UI(menuByteOrderMark, MadEditFrame::OnUpdateUI_MenuToolsByteOrderMark)
-	EVT_UPDATE_UI(menuMadMacro, MadEditFrame::OnUpdateUI_MenuToolsMadMacro)
-	EVT_UPDATE_UI(menuRunTempMacro, MadEditFrame::OnUpdateUI_MenuToolsRunTempMacro)
-	EVT_UPDATE_UI(menuRunMacroFile, MadEditFrame::OnUpdateUI_MenuToolsRunMacroFile)
-	EVT_UPDATE_UI(menuStartRecMacro, MadEditFrame::OnUpdateUI_MenuToolsStartRecMacro)
-	EVT_UPDATE_UI(menuStopRecMacro, MadEditFrame::OnUpdateUI_MenuToolsStopRecMacro)
-	EVT_UPDATE_UI(menuPlayRecMacro, MadEditFrame::OnUpdateUI_MenuToolsPlayRecMacro)
-	EVT_UPDATE_UI(menuSaveRecMacro, MadEditFrame::OnUpdateUI_MenuToolsSaveRecMacro)
-	EVT_UPDATE_UI(menuMadScriptList, MadEditFrame::OnUpdateUI_MadScriptList)
-	EVT_UPDATE_UI(menuMacroDebugMode, MadEditFrame::OnUpdateUI_MenuToolsMacroDebugMode)
-	EVT_UPDATE_UI(menuInsertNewLineChar, MadEditFrame::OnUpdateUI_MenuToolsInsertNewLineChar)
-	EVT_UPDATE_UI(menuNewLineChar, MadEditFrame::OnUpdateUI_MenuToolsConvertNL)
-	EVT_UPDATE_UI(menuConvertToDOS, MadEditFrame::OnUpdateUI_MenuToolsConvertNL)
-	EVT_UPDATE_UI(menuConvertToMAC, MadEditFrame::OnUpdateUI_MenuToolsConvertNL)
-	EVT_UPDATE_UI(menuConvertToUNIX, MadEditFrame::OnUpdateUI_MenuToolsConvertNL)
-	EVT_UPDATE_UI(menuConvertEncoding, MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding)
-	EVT_UPDATE_UI(menuSimp2TradChinese, MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding)
-	EVT_UPDATE_UI(menuTrad2SimpChinese, MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding)
-	EVT_UPDATE_UI(menuKanji2TradChinese, MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding)
-	EVT_UPDATE_UI(menuKanji2SimpChinese, MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding)
-	EVT_UPDATE_UI(menuChinese2Kanji, MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding)
-	EVT_UPDATE_UI(menuWordCount, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
-	// window
-	EVT_UPDATE_UI(menuToggleWindow, MadEditFrame::OnUpdateUI_MenuWindow_CheckCount)
-	EVT_UPDATE_UI(menuNextWindow, MadEditFrame::OnUpdateUI_MenuWindow_CheckCount)
-	EVT_UPDATE_UI(menuPreviousWindow, MadEditFrame::OnUpdateUI_MenuWindow_CheckCount)
-	// file
-	EVT_MENU(menuNew, MadEditFrame::OnFileNew)
-	EVT_MENU(menuOpen, MadEditFrame::OnFileOpen)
-	EVT_MENU(menuSave, MadEditFrame::OnFileSave)
-	EVT_MENU(menuSaveAs, MadEditFrame::OnFileSaveAs)
-	EVT_MENU(menuSaveAll, MadEditFrame::OnFileSaveAll)
-	EVT_MENU(menuReload, MadEditFrame::OnFileReload)
-	EVT_MENU(menuClose, MadEditFrame::OnFileClose)
-	EVT_MENU(menuCloseAll, MadEditFrame::OnFileCloseAll)
-	EVT_MENU(menuCloseAllButThis, MadEditFrame::OnFileCloseAllButThis)
-	EVT_MENU(menuCloseAllToTheLeft, MadEditFrame::OnFileCloseAllToTheLeft)
-	EVT_MENU(menuCloseAllToTheRight, MadEditFrame::OnFileCloseAllToTheRight)
-	EVT_MENU(menuPageSetup, MadEditFrame::OnFilePageSetup)
-	EVT_MENU(menuPrintPreview, MadEditFrame::OnFilePrintPreview)
-	EVT_MENU(menuPrint, MadEditFrame::OnFilePrint)
-	EVT_MENU_RANGE(wxID_FILE1, wxID_FILE9, MadEditFrame::OnFileRecentFile)
-	EVT_MENU(menuExit, MadEditFrame::OnFileExit)
-	EVT_MENU(menuCopyFilePath, MadEditFrame::OnCopyFilePath)
-	EVT_MENU(menuCopyFileName, MadEditFrame::OnCopyFileName)
-	EVT_MENU(menuCopyFileDir, MadEditFrame::OnCopyFileDir)
-	EVT_MENU(menuToggleReadOnly, MadEditFrame::OnFileToggleReadOnly)
-	// edit
-	EVT_MENU(menuUndo, MadEditFrame::OnEditUndo)
-	EVT_MENU(menuRedo, MadEditFrame::OnEditRedo)
-	EVT_MENU(menuCut, MadEditFrame::OnEditCut)
-	EVT_MENU(menuCopy, MadEditFrame::OnEditCopy)
-	EVT_MENU(menuPaste, MadEditFrame::OnEditPaste)
-	EVT_MENU(menuDelete, MadEditFrame::OnEditDelete)
-	EVT_MENU(menuCutLine, MadEditFrame::OnEditCutLine)
-	EVT_MENU(menuDeleteLine, MadEditFrame::OnEditDeleteLine)
-	EVT_MENU(menuSelectAll, MadEditFrame::OnEditSelectAll)
-	EVT_MENU(menuStartEndSelction, MadEditFrame::OnEditStartEndSelction)
-	EVT_MENU(menuInsertTabChar, MadEditFrame::OnEditInsertTabChar)
-	EVT_MENU(menuInsertDateTime, MadEditFrame::OnEditInsertDateTime)
-	EVT_MENU(menuSortAscending, MadEditFrame::OnEditSortAscending)
-	EVT_MENU(menuSortDescending, MadEditFrame::OnEditSortDescending)
-	EVT_MENU(menuSortAscendingCase, MadEditFrame::OnEditSortAscendingCase)
-	EVT_MENU(menuSortDescendingCase, MadEditFrame::OnEditSortDescendingCase)
-	EVT_MENU(menuSortByOptions, MadEditFrame::OnEditSortByOptions)
-	EVT_MENU(menuSortOptions, MadEditFrame::OnEditSortOptions)
-	EVT_MENU(menuCopyAsHexString, MadEditFrame::OnEditCopyAsHexString)
-	EVT_MENU(menuCopyAsHexStringWithSpace, MadEditFrame::OnEditCopyAsHexStringWithSpace)
-	EVT_MENU(menuCopyRevertHex, MadEditFrame::OnEditCopyRevertHex)
-	EVT_MENU(menuIncreaseIndent, MadEditFrame::OnEditIncIndent)
-	EVT_MENU(menuDecreaseIndent, MadEditFrame::OnEditDecIndent)
-	EVT_MENU(menuComment, MadEditFrame::OnEditComment)
-	EVT_MENU(menuUncomment, MadEditFrame::OnEditUncomment)
-	EVT_MENU(menuWordWrapToNewLine, MadEditFrame::OnEditWordWrapToNewLine)
-	EVT_MENU(menuNewLineToWordWrap, MadEditFrame::OnEditNewLineToWordWrap)
-	EVT_MENU(menuToUpperCase, MadEditFrame::OnEditToUpperCase)
-	EVT_MENU(menuToLowerCase, MadEditFrame::OnEditToLowerCase)
-	EVT_MENU(menuInvertCase , MadEditFrame::OnEditInvertCase)
-	EVT_MENU(menuCapitalize , MadEditFrame::OnEditCapitalize)
-	EVT_MENU(menuToHalfWidth, MadEditFrame::OnEditToHalfWidth)
-	EVT_MENU(menuToHalfWidthByOptions, MadEditFrame::OnEditToHalfWidthByOptions)
-	EVT_MENU(menuToFullWidth, MadEditFrame::OnEditToFullWidth)
-	EVT_MENU(menuToFullWidthByOptions, MadEditFrame::OnEditToFullWidthByOptions)
-	EVT_MENU(menuTabToSpace, MadEditFrame::OnEditTabToSpace)
-	EVT_MENU(menuSpaceToTab, MadEditFrame::OnEditSpaceToTab)
-	EVT_MENU(menuTrimTrailingSpaces, MadEditFrame::OnEditTrimTrailingSpaces)
-	EVT_MENU(menuDeleteEmptyLines, MadEditFrame::OnEditDeleteEmptyLines)
-	EVT_MENU(menuDeleteEmptyLinesWithSpaces, MadEditFrame::OnEditDeleteEmptyLinesWithSpaces)
-	EVT_MENU(menuJoinLines, MadEditFrame::OnEditJoinLines)
-	EVT_MENU(menuInsertNumbers, MadEditFrame::OnEditInsertNumbers)
-	EVT_MENU(menuColumnAlign, MadEditFrame::OnEditColumnAlign)
-	EVT_MENU_RANGE(menuSpellOption1, menuSpellOption99, MadEditFrame::OnEditSpellCheck)
-	EVT_MENU(menuBookmarkCopy, MadEditFrame::OnEditBookmarkCopy)
-	EVT_MENU(menuBookmarkCut, MadEditFrame::OnEditBookmarkCut)
-	EVT_MENU(menuBookmarkDel, MadEditFrame::OnEditBookmarkDel)
-	EVT_MENU(menuBookmarkDelUnmarked, MadEditFrame::OnEditBookmarkDelUnmarked)
-	EVT_MENU(menuBookmarkReplace, MadEditFrame::OnEditBookmarkReplace)
-	// search
-	EVT_MENU(menuFind, MadEditFrame::OnSearchFind)
-	EVT_MENU(menuFindNext, MadEditFrame::OnSearchFindNext)
-	EVT_MENU(menuFindPrevious, MadEditFrame::OnSearchFindPrevious)
-	EVT_MENU(menuQuickFindNext, MadEditFrame::OnSearchQuickFindNext)
-	EVT_MENU(menuQuickFindPrevious, MadEditFrame::OnSearchQuickFindPrevious)
-	EVT_MENU(menuShowQuickFindBar, MadEditFrame::OnShowSearchQuickFindBar)
-	EVT_MENU(menuReplace, MadEditFrame::OnSearchReplace)
-	EVT_MENU(menuFindInFiles, MadEditFrame::OnSearchFindInFiles)
-	EVT_MENU(menuShowFindInFilesResults, MadEditFrame::OnSearchShowFindInFilesResults)
-	EVT_MENU(menuGoToLine, MadEditFrame::OnSearchGoToLine)
-	EVT_MENU(menuGoToPosition, MadEditFrame::OnSearchGoToPosition)
-	EVT_MENU(menuLeftBrace, MadEditFrame::OnSearchGoToLeftBrace)
-	EVT_MENU(menuRightBrace, MadEditFrame::OnSearchGoToRightBrace)
-	EVT_MENU(menuToggleBookmark, MadEditFrame::OnSearchToggleBookmark)
-	EVT_MENU(menuGotoNextBookmark, MadEditFrame::OnSearchGotoNextBookmark)
-	EVT_MENU(menuGotoPreviousBookmark, MadEditFrame::OnSearchGotoPreviousBookmark)
-	EVT_MENU(menuClearAllBookmarks, MadEditFrame::OnSearchClearAllBookmarks)
-	// view
-	EVT_MENU_RANGE(menuEncoding1, menuEncoding99, MadEditFrame::OnViewEncoding)
-	EVT_MENU_RANGE(menuRecentEncoding1, menuRecentEncoding9, MadEditFrame::OnViewRecentEncoding)
-	EVT_MENU_RANGE(menuSyntax1, menuSyntax199, MadEditFrame::OnViewSyntax)
-	EVT_MENU_RANGE(menuFontName1, menuFontName999, MadEditFrame::OnViewFontName)
-	EVT_MENU_RANGE(menuRecentFont1, menuRecentFont9, MadEditFrame::OnViewRecentFont)
-	EVT_MENU_RANGE(menuFontSize1, menuFontSize99, MadEditFrame::OnViewFontSize)
-	EVT_MENU(menuSetFont, MadEditFrame::OnViewSetFont)
-	EVT_MENU(menuFixedWidthMode, MadEditFrame::OnViewFixedWidthMode)
-	EVT_MENU_RANGE(menuTabColumn1, menuTabColumn16, MadEditFrame::OnViewTabColumn)
-	EVT_MENU_RANGE(menuLineSpacing100, menuLineSpacing250, MadEditFrame::OnViewLineSpacing)
-	EVT_MENU(menuNoWrap, MadEditFrame::OnViewNoWrap)
-	EVT_MENU(menuWrapByWindow, MadEditFrame::OnViewWrapByWindow)
-	EVT_MENU(menuWrapByColumn, MadEditFrame::OnViewWrapByColumn)
-	EVT_MENU(menuDisplayLineNumber, MadEditFrame::OnViewDisplayLineNumber)
-	EVT_MENU(menuDisplayBookmark, MadEditFrame::OnViewDisplayBookmark)
-	EVT_MENU(menuDisplay80ColHint, MadEditFrame::OnViewDisplay80ColHint)
-	EVT_MENU(menuShowEndOfLine, MadEditFrame::OnViewShowEndOfLine)
-	EVT_MENU(menuShowTabChar, MadEditFrame::OnViewShowTabChar)
-	EVT_MENU(menuShowSpaceChar, MadEditFrame::OnViewShowSpaceChar)
-	EVT_MENU(menuShowAllChars, MadEditFrame::OnViewShowAllChars)
-	EVT_MENU(menuMarkActiveLine, MadEditFrame::OnViewMarkActiveLine)
-	EVT_MENU(menuMarkBracePair, MadEditFrame::OnViewMarkBracePair)
-	EVT_MENU(menuTextMode, MadEditFrame::OnViewTextMode)
-	EVT_MENU(menuColumnMode, MadEditFrame::OnViewColumnMode)
-	EVT_MENU(menuHexMode, MadEditFrame::OnViewHexMode)
-	EVT_MENU(menuSpellChecker, MadEditFrame::OnViewSpellChecker)
-	EVT_MENU(menuSpellIgnore, MadEditFrame::OnSpellCheckIgnore)
-	EVT_MENU(menuSpellAdd2Dict, MadEditFrame::OnSpellAdd2Dict)
-	EVT_MENU(menuSpellRemoveFromDict, MadEditFrame::OnSpellCheckRemoveFromDict)
-	EVT_MENU(menuToolBarsToggleAll, MadEditFrame::OnViewToolBarsToggleAll)
-	EVT_MENU_RANGE(menuToolBar1, menuToolBar99, MadEditFrame::OnViewToolbars)
-	// tools
-	EVT_MENU(menuOptions, MadEditFrame::OnToolsOptions)
-	EVT_MENU(menuHighlighting, MadEditFrame::OnToolsHighlighting)
-	#ifdef __WXMSW__
-	EVT_MENU(menuFileAssociation, MadEditFrame::OnToolsFileAssociation)
-	#endif
-	EVT_MENU(menuPurgeHistories, MadEditFrame::OnToolsPurgeHistories)
-	EVT_MENU(menuRunTempMacro, MadEditFrame::OnToolsRunTempMacro)
-	EVT_MENU(menuRunMacroFile, MadEditFrame::OnToolsRunMacroFile)
-	EVT_MENU(menuStartRecMacro, MadEditFrame::OnToolsStartRecMacro)
-	EVT_MENU(menuStopRecMacro, MadEditFrame::OnToolsStopRecMacro)
-	EVT_MENU(menuPlayRecMacro, MadEditFrame::OnToolsPlayRecMacro)
-	EVT_MENU(menuSaveRecMacro, MadEditFrame::OnToolsSaveRecMacro)
-	EVT_MENU(menuMacroDebugMode, MadEditFrame::OnToolsMacroDebugMode)
-	EVT_MENU_RANGE(menuMadScrip1, menuMadScrip1000, MadEditFrame::OnToolsMadScriptList)
-	EVT_MENU(menuToggleBOM, MadEditFrame::OnToolsToggleBOM)
-	EVT_MENU(menuConvertToDOS, MadEditFrame::OnToolsConvertToDOS)
-	EVT_MENU(menuConvertToMAC, MadEditFrame::OnToolsConvertToMAC)
-	EVT_MENU(menuConvertToUNIX, MadEditFrame::OnToolsConvertToUNIX)
-	EVT_MENU(menuInsertDOS, MadEditFrame::OnToolsInsertDOS)
-	EVT_MENU(menuInsertMAC, MadEditFrame::OnToolsInsertMAC)
-	EVT_MENU(menuInsertUNIX, MadEditFrame::OnToolsInsertUNIX)
-	EVT_MENU(menuConvertEncoding, MadEditFrame::OnToolsConvertEncoding)
-	EVT_MENU(menuSimp2TradChinese, MadEditFrame::OnToolsSimp2TradChinese)
-	EVT_MENU(menuTrad2SimpChinese, MadEditFrame::OnToolsTrad2SimpChinese)
-	EVT_MENU(menuKanji2TradChinese, MadEditFrame::OnToolsKanji2TradChinese)
-	EVT_MENU(menuKanji2SimpChinese, MadEditFrame::OnToolsKanji2SimpChinese)
-	EVT_MENU(menuChinese2Kanji, MadEditFrame::OnToolsChinese2Kanji)
-	EVT_MENU(menuSimp2TradClipboard, MadEditFrame::OnToolsSimp2TradClipboard)
-	EVT_MENU(menuTrad2SimpClipboard, MadEditFrame::OnToolsTrad2SimpClipboard)
-	EVT_MENU(menuKanji2TradClipboard, MadEditFrame::OnToolsKanji2TradClipboard)
-	EVT_MENU(menuKanji2SimpClipboard, MadEditFrame::OnToolsKanji2SimpClipboard)
-	EVT_MENU(menuChinese2KanjiClipboard, MadEditFrame::OnToolsChinese2KanjiClipboard)
+    ////Manual Code Start
+    //EVT_SIZE(MadEditFrame::OnSize)
+    EVT_AUINOTEBOOK_PAGE_CHANGING(ID_NOTEBOOK, MadEditFrame::OnNotebookPageChanging)
+    EVT_AUINOTEBOOK_PAGE_CHANGED(ID_NOTEBOOK, MadEditFrame::OnNotebookPageChanged)
+    EVT_AUINOTEBOOK_PAGE_CLOSE(ID_NOTEBOOK, MadEditFrame::OnNotebookPageClosing)
+    EVT_AUINOTEBOOK_TAB_RIGHT_UP(ID_NOTEBOOK, MadEditFrame::OnNotebookPageRightUp)
+    //EVT_AUINOTEBOOK_PAGE_CLOSE(ID_NOTEBOOK, MadEditFrame::OnNotebookPageClosed)
+    //EVT_CHAR(MadEditFrame::OnChar)
+    // file
+    EVT_ACTIVATE(MadEditFrame::OnActivate)
+    EVT_UPDATE_UI(menuSave, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
+    EVT_UPDATE_UI(menuSaveAs, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
+    EVT_UPDATE_UI(menuSaveAll, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
+    EVT_UPDATE_UI(menuReload, MadEditFrame::OnUpdateUI_MenuFileReload)
+    EVT_UPDATE_UI(menuClose, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
+    EVT_UPDATE_UI(menuCloseAll, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
+    EVT_UPDATE_UI(menuCloseAllButThis, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
+    EVT_UPDATE_UI(menuCloseAllToTheLeft, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
+    EVT_UPDATE_UI(menuCloseAllToTheRight, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
+    EVT_UPDATE_UI(menuPrintPreview, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
+    EVT_UPDATE_UI(menuPrint, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
+    EVT_UPDATE_UI(menuRecentFiles, MadEditFrame::OnUpdateUI_MenuFileRecentFiles)
+    EVT_UPDATE_UI(menuToggleReadOnly, MadEditFrame::OnUpdateUI_MenuFileToggleReadOnly)
+    // edit
+    EVT_UPDATE_UI(menuUndo, MadEditFrame::OnUpdateUI_MenuEditUndo)
+    EVT_UPDATE_UI(menuRedo, MadEditFrame::OnUpdateUI_MenuEditRedo)
+    EVT_UPDATE_UI(menuCut, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelection)
+    EVT_UPDATE_UI(menuCopy, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelection)
+    EVT_UPDATE_UI(menuPaste, MadEditFrame::OnUpdateUI_MenuEditPaste)
+    EVT_UPDATE_UI(menuDelete, MadEditFrame::OnUpdateUI_Menu_CheckSize)
+    EVT_UPDATE_UI(menuCutLine, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
+    EVT_UPDATE_UI(menuDeleteLine, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
+    EVT_UPDATE_UI(menuSelectAll, MadEditFrame::OnUpdateUI_Menu_CheckSize)
+    EVT_UPDATE_UI(menuStartEndSelction, MadEditFrame::OnUpdateUI_MenuEditStartEndSelction)
+    EVT_UPDATE_UI(menuInsertTabChar, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
+    EVT_UPDATE_UI(menuInsertDateTime, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
+    EVT_UPDATE_UI(menuSortAscending, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
+    EVT_UPDATE_UI(menuSortDescending, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
+    EVT_UPDATE_UI(menuSortAscendingCase, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
+    EVT_UPDATE_UI(menuSortDescendingCase, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
+    EVT_UPDATE_UI(menuSortByOptions, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
+    EVT_UPDATE_UI(menuSortOptions, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
+    EVT_UPDATE_UI(menuSort, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
+    EVT_UPDATE_UI(menuAdvanced, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
+    EVT_UPDATE_UI(menuCopyAsHexString, MadEditFrame::OnUpdateUI_MenuEditCopyAsHexString)
+    EVT_UPDATE_UI(menuCopyAsHexStringWithSpace, MadEditFrame::OnUpdateUI_MenuEditCopyAsHexString)
+    EVT_UPDATE_UI(menuCopyRevertHex, MadEditFrame::OnUpdateUI_MenuEditCopyAsHexString)
+    EVT_UPDATE_UI(menuIncreaseIndent, MadEditFrame::OnUpdateUI_MenuIndent)
+    EVT_UPDATE_UI(menuDecreaseIndent, MadEditFrame::OnUpdateUI_MenuIndent)
+    EVT_UPDATE_UI(menuComment, MadEditFrame::OnUpdateUI_MenuComment)
+    EVT_UPDATE_UI(menuUncomment, MadEditFrame::OnUpdateUI_MenuComment)
+    EVT_UPDATE_UI(menuWordWrapToNewLine, MadEditFrame::OnUpdateUI_Menu_CheckSize)
+    EVT_UPDATE_UI(menuNewLineToWordWrap, MadEditFrame::OnUpdateUI_Menu_CheckSize)
+    EVT_UPDATE_UI(menuToUpperCase, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize)
+    EVT_UPDATE_UI(menuToLowerCase, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize)
+    EVT_UPDATE_UI(menuInvertCase , MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize)
+    EVT_UPDATE_UI(menuCapitalize , MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize)
+    EVT_UPDATE_UI(menuToHalfWidth, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize)
+    EVT_UPDATE_UI(menuToHalfWidthByOptions, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize)
+    EVT_UPDATE_UI(menuToFullWidth, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize)
+    EVT_UPDATE_UI(menuToFullWidthByOptions, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize)
+    EVT_UPDATE_UI(menuTabToSpace, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize)
+    EVT_UPDATE_UI(menuSpaceToTab, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize)
+    EVT_UPDATE_UI(menuTrimTrailingSpaces, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
+    EVT_UPDATE_UI(menuDeleteEmptyLines, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
+    EVT_UPDATE_UI(menuDeleteEmptyLinesWithSpaces, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
+    EVT_UPDATE_UI(menuJoinLines, MadEditFrame::OnUpdateUI_Menu_JoinLines)
+    EVT_UPDATE_UI(menuInsertNumbers, MadEditFrame::OnUpdateUI_Menu_InsertNumbers)
+    EVT_UPDATE_UI(menuColumnAlign, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
+    EVT_UPDATE_UI(menuBookmark, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark)
+    EVT_UPDATE_UI(menuBookmarkCopy, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark)
+    EVT_UPDATE_UI(menuBookmarkCut, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark)
+    EVT_UPDATE_UI(menuBookmarkDel, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark)
+    EVT_UPDATE_UI(menuBookmarkDelUnmarked, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark)
+    EVT_UPDATE_UI(menuBookmarkReplace, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark)
+    // search
+    EVT_UPDATE_UI(menuFind, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
+    EVT_UPDATE_UI(menuFindNext, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
+    EVT_UPDATE_UI(menuFindPrevious, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
+    EVT_UPDATE_UI(menuShowQuickFindBar, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
+    EVT_UPDATE_UI(menuReplace, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
+    EVT_UPDATE_UI(menuGoToLine, MadEditFrame::OnUpdateUI_MenuSearchGoTo)
+    EVT_UPDATE_UI(menuGoToPosition, MadEditFrame::OnUpdateUI_MenuSearchGoTo)
+    EVT_UPDATE_UI(menuLeftBrace, MadEditFrame::OnUpdateUI_MenuSearchGoToBrace)
+    EVT_UPDATE_UI(menuRightBrace, MadEditFrame::OnUpdateUI_MenuSearchGoToBrace)
+    EVT_UPDATE_UI(menuToggleBookmark, MadEditFrame::OnUpdateUI_Menu_CheckTextFile)
+    EVT_UPDATE_UI(menuGotoNextBookmark, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark)
+    EVT_UPDATE_UI(menuGotoPreviousBookmark, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark)
+    EVT_UPDATE_UI(menuClearAllBookmarks, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark)
+    // view
+    EVT_UPDATE_UI(menuEncoding, MadEditFrame::OnUpdateUI_MenuViewEncoding)
+    EVT_UPDATE_UI(menuSyntax, MadEditFrame::OnUpdateUI_MenuViewSyntax)
+    EVT_UPDATE_UI(menuFontName, MadEditFrame::OnUpdateUI_MenuViewFontName)
+    EVT_UPDATE_UI(menuFontSize, MadEditFrame::OnUpdateUI_MenuViewFontSize)
+    EVT_UPDATE_UI(menuSetFont, MadEditFrame::OnUpdateUI_MenuViewSetFont)
+    EVT_UPDATE_UI(menuFixedWidthMode, MadEditFrame::OnUpdateUI_MenuViewFixedWidthMode)
+    EVT_UPDATE_UI(menuTabColumn, MadEditFrame::OnUpdateUI_MenuViewTabColumn)
+    EVT_UPDATE_UI(menuLineSpacing, MadEditFrame::OnUpdateUI_MenuViewLineSpacing)
+    EVT_UPDATE_UI(menuNoWrap, MadEditFrame::OnUpdateUI_MenuViewNoWrap)
+    EVT_UPDATE_UI(menuWrapByWindow, MadEditFrame::OnUpdateUI_MenuViewWrapByWindow)
+    EVT_UPDATE_UI(menuWrapByColumn, MadEditFrame::OnUpdateUI_MenuViewWrapByColumn)
+    EVT_UPDATE_UI(menuDisplayLineNumber, MadEditFrame::OnUpdateUI_MenuViewDisplayLineNumber)
+    EVT_UPDATE_UI(menuDisplayBookmark, MadEditFrame::OnUpdateUI_MenuViewDisplayBookmark)
+    EVT_UPDATE_UI(menuDisplay80ColHint, MadEditFrame::OnUpdateUI_MenuViewDisplay80ColHint)
+    EVT_UPDATE_UI(menuShowEndOfLine, MadEditFrame::OnUpdateUI_MenuViewShowEndOfLine)
+    EVT_UPDATE_UI(menuShowTabChar, MadEditFrame::OnUpdateUI_MenuViewShowTabChar)
+    EVT_UPDATE_UI(menuShowSpaceChar, MadEditFrame::OnUpdateUI_MenuViewShowSpaceChar)
+    EVT_UPDATE_UI(menuShowAllChars, MadEditFrame::OnUpdateUI_MenuViewShowAllChars)
+    EVT_UPDATE_UI(menuMarkActiveLine, MadEditFrame::OnUpdateUI_MenuViewMarkActiveLine)
+    EVT_UPDATE_UI(menuMarkBracePair, MadEditFrame::OnUpdateUI_MenuViewMarkBracePair)
+    EVT_UPDATE_UI(menuTextMode, MadEditFrame::OnUpdateUI_MenuViewTextMode)
+    EVT_UPDATE_UI(menuColumnMode, MadEditFrame::OnUpdateUI_MenuViewColumnMode)
+    EVT_UPDATE_UI(menuHexMode, MadEditFrame::OnUpdateUI_MenuViewHexMode)
+    EVT_UPDATE_UI(menuPreview, MadEditFrame::OnUpdateUI_MenuViewPreview)
+    EVT_UPDATE_UI_RANGE(menuPreview1, menuPreview16, MadEditFrame::OnUpdateUI_MenuViewPreviewList)
+    EVT_UPDATE_UI(menuSpellChecker, MadEditFrame::OnUpdateUI_MenuViewSpellChecker)
+    EVT_UPDATE_UI(menuSpellIgnore, MadEditFrame::OnUpdateUI_MenuSpellIgnore)
+    EVT_UPDATE_UI(menuSpellAdd2Dict, MadEditFrame::OnUpdateUI_MenuSpellAdd2Dict)
+    EVT_UPDATE_UI(menuSpellRemoveFromDict, MadEditFrame::OnUpdateUI_MenuSpellRemoveFromDict)
+    EVT_UPDATE_UI(menuToolBars, MadEditFrame::OnUpdateUI_MenuViewToolbars)
+    EVT_UPDATE_UI(menuToolBarsToggleAll, MadEditFrame::OnUpdateUI_MenuViewToolbarsToggleAll)
+    EVT_UPDATE_UI_RANGE(menuToolBar1, menuToolBar99, MadEditFrame::OnUpdateUI_MenuViewToolbarList)
+    // tools
+    EVT_UPDATE_UI(menuByteOrderMark, MadEditFrame::OnUpdateUI_MenuToolsByteOrderMark)
+    EVT_UPDATE_UI(menuMadMacro, MadEditFrame::OnUpdateUI_MenuToolsMadMacro)
+    EVT_UPDATE_UI(menuRunTempMacro, MadEditFrame::OnUpdateUI_MenuToolsRunTempMacro)
+    EVT_UPDATE_UI(menuRunMacroFile, MadEditFrame::OnUpdateUI_MenuToolsRunMacroFile)
+    EVT_UPDATE_UI(menuStartRecMacro, MadEditFrame::OnUpdateUI_MenuToolsStartRecMacro)
+    EVT_UPDATE_UI(menuStopRecMacro, MadEditFrame::OnUpdateUI_MenuToolsStopRecMacro)
+    EVT_UPDATE_UI(menuPlayRecMacro, MadEditFrame::OnUpdateUI_MenuToolsPlayRecMacro)
+    EVT_UPDATE_UI(menuSaveRecMacro, MadEditFrame::OnUpdateUI_MenuToolsSaveRecMacro)
+    EVT_UPDATE_UI(menuMadScriptList, MadEditFrame::OnUpdateUI_MadScriptList)
+    EVT_UPDATE_UI(menuMacroDebugMode, MadEditFrame::OnUpdateUI_MenuToolsMacroDebugMode)
+    EVT_UPDATE_UI(menuInsertNewLineChar, MadEditFrame::OnUpdateUI_MenuToolsInsertNewLineChar)
+    EVT_UPDATE_UI(menuNewLineChar, MadEditFrame::OnUpdateUI_MenuToolsConvertNL)
+    EVT_UPDATE_UI(menuConvertToDOS, MadEditFrame::OnUpdateUI_MenuToolsConvertNL)
+    EVT_UPDATE_UI(menuConvertToMAC, MadEditFrame::OnUpdateUI_MenuToolsConvertNL)
+    EVT_UPDATE_UI(menuConvertToUNIX, MadEditFrame::OnUpdateUI_MenuToolsConvertNL)
+    EVT_UPDATE_UI(menuConvertEncoding, MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding)
+    EVT_UPDATE_UI(menuSimp2TradChinese, MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding)
+    EVT_UPDATE_UI(menuTrad2SimpChinese, MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding)
+    EVT_UPDATE_UI(menuKanji2TradChinese, MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding)
+    EVT_UPDATE_UI(menuKanji2SimpChinese, MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding)
+    EVT_UPDATE_UI(menuChinese2Kanji, MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding)
+    EVT_UPDATE_UI(menuMarkdown2Html, MadEditFrame::OnUpdateUI_MenuFile_Markdown2Html)
+    EVT_UPDATE_UI(menuHtml2PlainText, MadEditFrame::OnUpdateUI_MenuFile_Html2PlainText)
+    EVT_UPDATE_UI(menuWordCount, MadEditFrame::OnUpdateUI_MenuFile_CheckCount)
+    // window
+    EVT_UPDATE_UI(menuToggleWindow, MadEditFrame::OnUpdateUI_MenuWindow_CheckCount)
+    EVT_UPDATE_UI(menuNextWindow, MadEditFrame::OnUpdateUI_MenuWindow_CheckCount)
+    EVT_UPDATE_UI(menuPreviousWindow, MadEditFrame::OnUpdateUI_MenuWindow_CheckCount)
+    // file
+    EVT_MENU(menuNew, MadEditFrame::OnFileNew)
+    EVT_MENU(menuOpen, MadEditFrame::OnFileOpen)
+    EVT_MENU(menuSave, MadEditFrame::OnFileSave)
+    EVT_MENU(menuSaveAs, MadEditFrame::OnFileSaveAs)
+    EVT_MENU(menuSaveAll, MadEditFrame::OnFileSaveAll)
+    EVT_MENU(menuReload, MadEditFrame::OnFileReload)
+    EVT_MENU(menuClose, MadEditFrame::OnFileClose)
+    EVT_MENU(menuCloseAll, MadEditFrame::OnFileCloseAll)
+    EVT_MENU(menuCloseAllButThis, MadEditFrame::OnFileCloseAllButThis)
+    EVT_MENU(menuCloseAllToTheLeft, MadEditFrame::OnFileCloseAllToTheLeft)
+    EVT_MENU(menuCloseAllToTheRight, MadEditFrame::OnFileCloseAllToTheRight)
+    EVT_MENU(menuPageSetup, MadEditFrame::OnFilePageSetup)
+    EVT_MENU(menuPrintPreview, MadEditFrame::OnFilePrintPreview)
+    EVT_MENU(menuPrint, MadEditFrame::OnFilePrint)
+    EVT_MENU_RANGE(wxID_FILE1, wxID_FILE9, MadEditFrame::OnFileRecentFile)
+    EVT_MENU(menuExit, MadEditFrame::OnFileExit)
+    EVT_MENU(menuCopyFilePath, MadEditFrame::OnCopyFilePath)
+    EVT_MENU(menuCopyFileName, MadEditFrame::OnCopyFileName)
+    EVT_MENU(menuCopyFileDir, MadEditFrame::OnCopyFileDir)
+    EVT_MENU(menuToggleReadOnly, MadEditFrame::OnFileToggleReadOnly)
+    // edit
+    EVT_MENU(menuUndo, MadEditFrame::OnEditUndo)
+    EVT_MENU(menuRedo, MadEditFrame::OnEditRedo)
+    EVT_MENU(menuCut, MadEditFrame::OnEditCut)
+    EVT_MENU(menuCopy, MadEditFrame::OnEditCopy)
+    EVT_MENU(menuPaste, MadEditFrame::OnEditPaste)
+    EVT_MENU(menuDelete, MadEditFrame::OnEditDelete)
+    EVT_MENU(menuCutLine, MadEditFrame::OnEditCutLine)
+    EVT_MENU(menuDeleteLine, MadEditFrame::OnEditDeleteLine)
+    EVT_MENU(menuSelectAll, MadEditFrame::OnEditSelectAll)
+    EVT_MENU(menuStartEndSelction, MadEditFrame::OnEditStartEndSelction)
+    EVT_MENU(menuInsertTabChar, MadEditFrame::OnEditInsertTabChar)
+    EVT_MENU(menuInsertDateTime, MadEditFrame::OnEditInsertDateTime)
+    EVT_MENU(menuSortAscending, MadEditFrame::OnEditSortAscending)
+    EVT_MENU(menuSortDescending, MadEditFrame::OnEditSortDescending)
+    EVT_MENU(menuSortAscendingCase, MadEditFrame::OnEditSortAscendingCase)
+    EVT_MENU(menuSortDescendingCase, MadEditFrame::OnEditSortDescendingCase)
+    EVT_MENU(menuSortByOptions, MadEditFrame::OnEditSortByOptions)
+    EVT_MENU(menuSortOptions, MadEditFrame::OnEditSortOptions)
+    EVT_MENU(menuCopyAsHexString, MadEditFrame::OnEditCopyAsHexString)
+    EVT_MENU(menuCopyAsHexStringWithSpace, MadEditFrame::OnEditCopyAsHexStringWithSpace)
+    EVT_MENU(menuCopyRevertHex, MadEditFrame::OnEditCopyRevertHex)
+    EVT_MENU(menuIncreaseIndent, MadEditFrame::OnEditIncIndent)
+    EVT_MENU(menuDecreaseIndent, MadEditFrame::OnEditDecIndent)
+    EVT_MENU(menuComment, MadEditFrame::OnEditComment)
+    EVT_MENU(menuUncomment, MadEditFrame::OnEditUncomment)
+    EVT_MENU(menuWordWrapToNewLine, MadEditFrame::OnEditWordWrapToNewLine)
+    EVT_MENU(menuNewLineToWordWrap, MadEditFrame::OnEditNewLineToWordWrap)
+    EVT_MENU(menuToUpperCase, MadEditFrame::OnEditToUpperCase)
+    EVT_MENU(menuToLowerCase, MadEditFrame::OnEditToLowerCase)
+    EVT_MENU(menuInvertCase , MadEditFrame::OnEditInvertCase)
+    EVT_MENU(menuCapitalize , MadEditFrame::OnEditCapitalize)
+    EVT_MENU(menuToHalfWidth, MadEditFrame::OnEditToHalfWidth)
+    EVT_MENU(menuToHalfWidthByOptions, MadEditFrame::OnEditToHalfWidthByOptions)
+    EVT_MENU(menuToFullWidth, MadEditFrame::OnEditToFullWidth)
+    EVT_MENU(menuToFullWidthByOptions, MadEditFrame::OnEditToFullWidthByOptions)
+    EVT_MENU(menuTabToSpace, MadEditFrame::OnEditTabToSpace)
+    EVT_MENU(menuSpaceToTab, MadEditFrame::OnEditSpaceToTab)
+    EVT_MENU(menuTrimTrailingSpaces, MadEditFrame::OnEditTrimTrailingSpaces)
+    EVT_MENU(menuDeleteEmptyLines, MadEditFrame::OnEditDeleteEmptyLines)
+    EVT_MENU(menuDeleteEmptyLinesWithSpaces, MadEditFrame::OnEditDeleteEmptyLinesWithSpaces)
+    EVT_MENU(menuJoinLines, MadEditFrame::OnEditJoinLines)
+    EVT_MENU(menuInsertNumbers, MadEditFrame::OnEditInsertNumbers)
+    EVT_MENU(menuColumnAlign, MadEditFrame::OnEditColumnAlign)
+    EVT_MENU_RANGE(menuSpellOption1, menuSpellOption99, MadEditFrame::OnEditSpellCheck)
+    EVT_MENU(menuBookmarkCopy, MadEditFrame::OnEditBookmarkCopy)
+    EVT_MENU(menuBookmarkCut, MadEditFrame::OnEditBookmarkCut)
+    EVT_MENU(menuBookmarkDel, MadEditFrame::OnEditBookmarkDel)
+    EVT_MENU(menuBookmarkDelUnmarked, MadEditFrame::OnEditBookmarkDelUnmarked)
+    EVT_MENU(menuBookmarkReplace, MadEditFrame::OnEditBookmarkReplace)
+    // search
+    EVT_MENU(menuFind, MadEditFrame::OnSearchFind)
+    EVT_MENU(menuFindNext, MadEditFrame::OnSearchFindNext)
+    EVT_MENU(menuFindPrevious, MadEditFrame::OnSearchFindPrevious)
+    EVT_MENU(menuQuickFindNext, MadEditFrame::OnSearchQuickFindNext)
+    EVT_MENU(menuQuickFindPrevious, MadEditFrame::OnSearchQuickFindPrevious)
+    EVT_MENU(menuShowQuickFindBar, MadEditFrame::OnShowSearchQuickFindBar)
+    EVT_MENU(menuReplace, MadEditFrame::OnSearchReplace)
+    EVT_MENU(menuFindInFiles, MadEditFrame::OnSearchFindInFiles)
+    EVT_MENU(menuShowFindInFilesResults, MadEditFrame::OnSearchShowFindInFilesResults)
+    EVT_MENU(menuGoToLine, MadEditFrame::OnSearchGoToLine)
+    EVT_MENU(menuGoToPosition, MadEditFrame::OnSearchGoToPosition)
+    EVT_MENU(menuLeftBrace, MadEditFrame::OnSearchGoToLeftBrace)
+    EVT_MENU(menuRightBrace, MadEditFrame::OnSearchGoToRightBrace)
+    EVT_MENU(menuToggleBookmark, MadEditFrame::OnSearchToggleBookmark)
+    EVT_MENU(menuGotoNextBookmark, MadEditFrame::OnSearchGotoNextBookmark)
+    EVT_MENU(menuGotoPreviousBookmark, MadEditFrame::OnSearchGotoPreviousBookmark)
+    EVT_MENU(menuClearAllBookmarks, MadEditFrame::OnSearchClearAllBookmarks)
+    // view
+    EVT_MENU_RANGE(menuEncoding1, menuEncoding99, MadEditFrame::OnViewEncoding)
+    EVT_MENU_RANGE(menuRecentEncoding1, menuRecentEncoding9, MadEditFrame::OnViewRecentEncoding)
+    EVT_MENU_RANGE(menuSyntax1, menuSyntax199, MadEditFrame::OnViewSyntax)
+    EVT_MENU_RANGE(menuFontName1, menuFontName999, MadEditFrame::OnViewFontName)
+    EVT_MENU_RANGE(menuRecentFont1, menuRecentFont9, MadEditFrame::OnViewRecentFont)
+    EVT_MENU_RANGE(menuFontSize1, menuFontSize99, MadEditFrame::OnViewFontSize)
+    EVT_MENU(menuSetFont, MadEditFrame::OnViewSetFont)
+    EVT_MENU(menuFixedWidthMode, MadEditFrame::OnViewFixedWidthMode)
+    EVT_MENU_RANGE(menuTabColumn1, menuTabColumn16, MadEditFrame::OnViewTabColumn)
+    EVT_MENU_RANGE(menuPreview1, menuPreview16, MadEditFrame::OnViewPreview)
+    EVT_MENU_RANGE(menuLineSpacing100, menuLineSpacing250, MadEditFrame::OnViewLineSpacing)
+    EVT_MENU(menuNoWrap, MadEditFrame::OnViewNoWrap)
+    EVT_MENU(menuWrapByWindow, MadEditFrame::OnViewWrapByWindow)
+    EVT_MENU(menuWrapByColumn, MadEditFrame::OnViewWrapByColumn)
+    EVT_MENU(menuDisplayLineNumber, MadEditFrame::OnViewDisplayLineNumber)
+    EVT_MENU(menuDisplayBookmark, MadEditFrame::OnViewDisplayBookmark)
+    EVT_MENU(menuDisplay80ColHint, MadEditFrame::OnViewDisplay80ColHint)
+    EVT_MENU(menuShowEndOfLine, MadEditFrame::OnViewShowEndOfLine)
+    EVT_MENU(menuShowTabChar, MadEditFrame::OnViewShowTabChar)
+    EVT_MENU(menuShowSpaceChar, MadEditFrame::OnViewShowSpaceChar)
+    EVT_MENU(menuShowAllChars, MadEditFrame::OnViewShowAllChars)
+    EVT_MENU(menuMarkActiveLine, MadEditFrame::OnViewMarkActiveLine)
+    EVT_MENU(menuMarkBracePair, MadEditFrame::OnViewMarkBracePair)
+    EVT_MENU(menuTextMode, MadEditFrame::OnViewTextMode)
+    EVT_MENU(menuColumnMode, MadEditFrame::OnViewColumnMode)
+    EVT_MENU(menuHexMode, MadEditFrame::OnViewHexMode)
+    EVT_MENU(menuSpellChecker, MadEditFrame::OnViewSpellChecker)
+    EVT_MENU(menuSpellIgnore, MadEditFrame::OnSpellCheckIgnore)
+    EVT_MENU(menuSpellAdd2Dict, MadEditFrame::OnSpellAdd2Dict)
+    EVT_MENU(menuSpellRemoveFromDict, MadEditFrame::OnSpellCheckRemoveFromDict)
+    EVT_MENU(menuToolBarsToggleAll, MadEditFrame::OnViewToolBarsToggleAll)
+    EVT_MENU_RANGE(menuToolBar1, menuToolBar99, MadEditFrame::OnViewToolbars)
+    // tools
+    EVT_MENU(menuOptions, MadEditFrame::OnToolsOptions)
+    EVT_MENU(menuHighlighting, MadEditFrame::OnToolsHighlighting)
+    #ifdef __WXMSW__
+    EVT_MENU(menuFileAssociation, MadEditFrame::OnToolsFileAssociation)
+    #endif
+    EVT_MENU(menuPurgeHistories, MadEditFrame::OnToolsPurgeHistories)
+    EVT_MENU(menuRunTempMacro, MadEditFrame::OnToolsRunTempMacro)
+    EVT_MENU(menuRunMacroFile, MadEditFrame::OnToolsRunMacroFile)
+    EVT_MENU(menuStartRecMacro, MadEditFrame::OnToolsStartRecMacro)
+    EVT_MENU(menuStopRecMacro, MadEditFrame::OnToolsStopRecMacro)
+    EVT_MENU(menuPlayRecMacro, MadEditFrame::OnToolsPlayRecMacro)
+    EVT_MENU(menuSaveRecMacro, MadEditFrame::OnToolsSaveRecMacro)
+    EVT_MENU(menuMacroDebugMode, MadEditFrame::OnToolsMacroDebugMode)
+    EVT_MENU_RANGE(menuMadScrip1, menuMadScrip1000, MadEditFrame::OnToolsMadScriptList)
+    EVT_MENU(menuToggleBOM, MadEditFrame::OnToolsToggleBOM)
+    EVT_MENU(menuConvertToDOS, MadEditFrame::OnToolsConvertToDOS)
+    EVT_MENU(menuConvertToMAC, MadEditFrame::OnToolsConvertToMAC)
+    EVT_MENU(menuConvertToUNIX, MadEditFrame::OnToolsConvertToUNIX)
+    EVT_MENU(menuInsertDOS, MadEditFrame::OnToolsInsertDOS)
+    EVT_MENU(menuInsertMAC, MadEditFrame::OnToolsInsertMAC)
+    EVT_MENU(menuInsertUNIX, MadEditFrame::OnToolsInsertUNIX)
+    EVT_MENU(menuConvertEncoding, MadEditFrame::OnToolsConvertEncoding)
+    EVT_MENU(menuSimp2TradChinese, MadEditFrame::OnToolsSimp2TradChinese)
+    EVT_MENU(menuTrad2SimpChinese, MadEditFrame::OnToolsTrad2SimpChinese)
+    EVT_MENU(menuKanji2TradChinese, MadEditFrame::OnToolsKanji2TradChinese)
+    EVT_MENU(menuKanji2SimpChinese, MadEditFrame::OnToolsKanji2SimpChinese)
+    EVT_MENU(menuChinese2Kanji, MadEditFrame::OnToolsChinese2Kanji)
+    EVT_MENU(menuSimp2TradClipboard, MadEditFrame::OnToolsSimp2TradClipboard)
+    EVT_MENU(menuTrad2SimpClipboard, MadEditFrame::OnToolsTrad2SimpClipboard)
+    EVT_MENU(menuKanji2TradClipboard, MadEditFrame::OnToolsKanji2TradClipboard)
+    EVT_MENU(menuKanji2SimpClipboard, MadEditFrame::OnToolsKanji2SimpClipboard)
+    EVT_MENU(menuChinese2KanjiClipboard, MadEditFrame::OnToolsChinese2KanjiClipboard)
+    EVT_MENU(menuMarkdown2Html, MadEditFrame::OnToolsMarkdown2Html)
+    EVT_MENU(menuHtml2PlainText, MadEditFrame::OnToolsHtml2PlainText)
 	EVT_MENU(menuWordCount, MadEditFrame::OnToolsWordCount)
-	// window
-	EVT_MENU(menuToggleWindow, MadEditFrame::OnWindowToggleWindow)
-	EVT_MENU(menuNextWindow, MadEditFrame::OnWindowNextWindow)
-	EVT_MENU(menuPreviousWindow, MadEditFrame::OnWindowPreviousWindow)
-	// help
-	EVT_MENU(menuAbout, MadEditFrame::OnHelpAbout)
-	////Manual Code End
-	
-	EVT_CLOSE(MadEditFrame::MadEditFrameClose)
-	EVT_KEY_DOWN(MadEditFrame::MadEditFrameKeyDown)
-	
-	EVT_MENU(menuCopyCurResult, MadEditFrame::OnCopyCurrResult)
-	EVT_MENU(menuCopyAllResults, MadEditFrame::OnCopyAllResults)
-	EVT_MENU(menuResetCurResult, MadEditFrame::OnResetCurrResult)
-	EVT_TEXT(ID_QUICKSEARCH, MadEditFrame::OnSearchQuickFind)
-	EVT_TEXT_ENTER(ID_QUICKSEARCH, MadEditFrame::OnSearchQuickFind)
+    // window
+    EVT_MENU(menuToggleWindow, MadEditFrame::OnWindowToggleWindow)
+    EVT_MENU(menuNextWindow, MadEditFrame::OnWindowNextWindow)
+    EVT_MENU(menuPreviousWindow, MadEditFrame::OnWindowPreviousWindow)
+    // help
+    EVT_MENU(menuAbout, MadEditFrame::OnHelpAbout)
+    ////Manual Code End
+    
+    EVT_CLOSE(MadEditFrame::MadEditFrameClose)
+    EVT_KEY_DOWN(MadEditFrame::MadEditFrameKeyDown)
+    
+    EVT_MENU(menuCopyCurResult, MadEditFrame::OnCopyCurrResult)
+    EVT_MENU(menuCopyAllResults, MadEditFrame::OnCopyAllResults)
+    EVT_MENU(menuResetCurResult, MadEditFrame::OnResetCurrResult)
+    EVT_TEXT(ID_QUICKSEARCH, MadEditFrame::OnSearchQuickFind)
+    EVT_TEXT_ENTER(ID_QUICKSEARCH, MadEditFrame::OnSearchQuickFind)
 END_EVENT_TABLE()
   ////Event Table End
 
@@ -1805,6 +1867,8 @@ CommandData CommandTable[]=
     { ecTextMode,     1, menuTextMode,          wxT("menuTextMode"),          _("&Text Mode"),           wxT("Alt-1"),        wxITEM_CHECK,     textmode_xpm_idx,   0,                         _("Change the editing mode to Text-Mode")},
     { ecColumnMode,   1, menuColumnMode,        wxT("menuColumnMode"),        _("&Column Mode"),         wxT("Alt-2"),        wxITEM_CHECK,     columnmode_xpm_idx, 0,                         _("Change the editing mode to Column-Mode")},
     { ecHexMode,      1, menuHexMode,           wxT("menuHexMode"),           _("&Hex Mode"),            wxT("Alt-3"),        wxITEM_CHECK,     hexmode_xpm_idx,    0,                         _("Change the editing mode to Hex-Mode")},
+    { 0,              1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0},
+    { 0,              1, menuPreview,           wxT("menuPreview"),           _("Preview as: "),         0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Preview,      0},
 
     // Macro
     { 0, 0, 0, 0, _("&Macro"), 0, wxITEM_NORMAL, 0, &g_Menu_MadMacro, 0},
@@ -1854,7 +1918,9 @@ CommandData CommandTable[]=
     { 0,               2, menuKanji2SimpClipboard,    wxT("menuKanji2SimpClipboard"),    _("Clipboard: Japanese Kanji to Sim&plified Chinese"),      0,             wxITEM_NORMAL,    -1, 0,                                _("Convert Japanese Kanji to simplified Chinese chars in the clipboard")},
     { 0,               2, menuChinese2KanjiClipboard, wxT("menuChinese2KanjiClipboard"), _("Clipboard: Chinese to Japanese &Kanji"),                 0,             wxITEM_NORMAL,    -1, 0,                                _("Convert Chinese chars to Japanese Kanji in the clipboard")},
     { 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0},
-    { 0,               1, menuWordCount,          wxT("menuWordCount"),          _("&Word Count..."),                                   0,             wxITEM_NORMAL,    -1, 0,                                _("Count the words and chars of the file or selection")},
+    { 0,               1, menuMarkdown2Html,          wxT("menuMarkdown2Html"),          _("&Markdown to HTML"),                                     0,             wxITEM_NORMAL,    -1, 0,                                _("Convert Markdown to HTML")},
+    { 0,               1, menuHtml2PlainText,         wxT("menuHtml2PlainText"),         _("&HTML to Plain Text"),                                   0,             wxITEM_NORMAL,    -1, 0,                                _("Convert HTML to Plain Text")},
+    { 0,               1, menuWordCount,              wxT("menuWordCount"),              _("&Word Count..."),                                        0,             wxITEM_NORMAL,    -1, 0,                                _("Count the words and chars of the file or selection")},
 
     // Window
     { 0, 0, 0, 0, _("&Window"), 0, wxITEM_NORMAL, 0, &g_Menu_Window, 0},
@@ -1923,16 +1989,16 @@ CommandData CommandTable[]=
 #define _(s)    wxGetTranslation(_T(s))
 //==========================================================
 
-void LoadDefaultSettings(wxConfigBase *m_Config)
+void LoadDefaultSettings(wxConfigBase *madConfig)
 {
-    m_Config->SetPath(wxT("/MadEdit"));
+    madConfig->SetPath(wxT("/MadEdit"));
 
     long templong, x,y;
     bool tempbool;
     wxString tempstr;
 
     long orien;
-    m_Config->Read(wxT("PageOrientation"), &orien, wxPORTRAIT);
+    madConfig->Read(wxT("PageOrientation"), &orien, wxPORTRAIT);
 #if (wxMAJOR_VERSION < 3)
     g_PageSetupData->GetPrintData().SetOrientation(orien);
 #else
@@ -1940,8 +2006,8 @@ void LoadDefaultSettings(wxConfigBase *m_Config)
 #endif
 
     wxSize psize=g_PageSetupData->GetPaperSize();
-    m_Config->Read(wxT("PagePaperSizeW"), &psize.x);
-    m_Config->Read(wxT("PagePaperSizeH"), &psize.y);
+    madConfig->Read(wxT("PagePaperSizeW"), &psize.x);
+    madConfig->Read(wxT("PagePaperSizeH"), &psize.y);
     if(orien!=wxPORTRAIT)
     {
         long tmp=psize.x;
@@ -1950,35 +2016,35 @@ void LoadDefaultSettings(wxConfigBase *m_Config)
     }
     g_PageSetupData->SetPaperSize(psize);
 
-    m_Config->Read(wxT("PageLeftMargin"), &x, 20);
-    m_Config->Read(wxT("PageTopMargin"), &y, 30);
+    madConfig->Read(wxT("PageLeftMargin"), &x, 20);
+    madConfig->Read(wxT("PageTopMargin"), &y, 30);
     g_PageSetupData->SetMarginTopLeft(wxPoint(x,y));
-    m_Config->Read(wxT("PageRightMargin"), &x, 20);
-    m_Config->Read(wxT("PageBottomMargin"), &y, 30);
+    madConfig->Read(wxT("PageRightMargin"), &x, 20);
+    madConfig->Read(wxT("PageBottomMargin"), &y, 30);
     g_PageSetupData->SetMarginBottomRight(wxPoint(x,y));
 
 
-    m_Config->Read(wxT("PrintSyntax"), &tempbool, false);
-    m_Config->Read(wxT("PrintLineNumber"), &tempbool, true);
-    m_Config->Read(wxT("PrintBookmark"), &tempbool, false);
-    m_Config->Read(wxT("PrintEndOfLine"), &tempbool, false);
-    m_Config->Read(wxT("PrintTabChar"), &tempbool, false);
-    m_Config->Read(wxT("PrintSpaceChar"), &tempbool, false);
+    madConfig->Read(wxT("PrintSyntax"), &tempbool, false);
+    madConfig->Read(wxT("PrintLineNumber"), &tempbool, true);
+    madConfig->Read(wxT("PrintBookmark"), &tempbool, false);
+    madConfig->Read(wxT("PrintEndOfLine"), &tempbool, false);
+    madConfig->Read(wxT("PrintTabChar"), &tempbool, false);
+    madConfig->Read(wxT("PrintSpaceChar"), &tempbool, false);
 
-    m_Config->Read(wxT("PrintOffsetHeader"), &templong, 2);
+    madConfig->Read(wxT("PrintOffsetHeader"), &templong, 2);
 
-    m_Config->Read(wxT("PrintPageHeader"), &tempbool, true);
-    m_Config->Read(wxT("PageHeaderLeft"), &tempstr, wxT("%f"));
-    m_Config->Read(wxT("PageHeaderCenter"), &tempstr, wxEmptyString);
-    m_Config->Read(wxT("PageHeaderRight"), &tempstr, wxT("%n/%s"));
+    madConfig->Read(wxT("PrintPageHeader"), &tempbool, true);
+    madConfig->Read(wxT("PageHeaderLeft"), &tempstr, wxT("%f"));
+    madConfig->Read(wxT("PageHeaderCenter"), &tempstr, wxEmptyString);
+    madConfig->Read(wxT("PageHeaderRight"), &tempstr, wxT("%n/%s"));
 
-    m_Config->Read(wxT("PrintPageFooter"), &tempbool, true);
-    m_Config->Read(wxT("PageFooterLeft"), &tempstr, wxEmptyString);
-    m_Config->Read(wxT("PageFooterCenter"), &tempstr, wxEmptyString);
-    m_Config->Read(wxT("PageFooterRight"), &tempstr, wxT("%d %t"));
+    madConfig->Read(wxT("PrintPageFooter"), &tempbool, true);
+    madConfig->Read(wxT("PageFooterLeft"), &tempstr, wxEmptyString);
+    madConfig->Read(wxT("PageFooterCenter"), &tempstr, wxEmptyString);
+    madConfig->Read(wxT("PageFooterRight"), &tempstr, wxT("%d %t"));
 
-    m_Config->SetPath(wxT("/FileCaretPos"));
-    g_FileCaretPosManager.Load(m_Config);
+    madConfig->SetPath(wxT("/FileCaretPos"));
+    g_FileCaretPosManager.Load(madConfig);
 }
 
 
@@ -1988,7 +2054,6 @@ MadEditFrame::MadEditFrame( wxWindow *parent, wxWindowID id, const wxString &tit
 #ifndef __WXMSW__
     wxConvFileName=&MadConvFileNameObj;
 #endif
-
     this->SetWindowStyleFlag(this->GetWindowStyleFlag() & ~wxTAB_TRAVERSAL);
 
     /*
@@ -2025,6 +2090,8 @@ MadEditFrame::MadEditFrame( wxWindow *parent, wxWindowID id, const wxString &tit
     g_PageSetupData = new wxPageSetupDialogData;
 
     LoadDefaultSettings(m_Config);
+    m_ReloadFiles  = m_Config->ReadBool(wxT("/MadEdit/ReloadFiles"), true);;
+    m_PurgeHistory = m_Config->ReadBool(wxT("/MadEdit/PurgeHistory"), false);
 
     SetDropTarget(new DnDFile());
 
@@ -2035,6 +2102,8 @@ MadEditFrame::MadEditFrame( wxWindow *parent, wxWindowID id, const wxString &tit
     m_MacroDebug = false;
 
     m_SearchDirectionNext = true;
+    m_HtmlPreview = 0;
+    m_PreviewType = ptPREVIEW_NONE;
     g_MainFrame=this;
 }
 
@@ -2057,21 +2126,21 @@ void MadEditFrame::CreateGUIControls(void)
     //Add the custom code before or after the Blocks
     ////GUI Items Creation Start
 
-	WxStatusBar1 = new wxStatusBar(this, ID_WXSTATUSBAR1);
+    WxStatusBar1 = new wxStatusBar(this, ID_WXSTATUSBAR1);
 
-	WxToolBar[tbSTANDARD] = new wxToolBar(this, ID_WXTOOLBAR1[tbSTANDARD], wxPoint(0, 0), wxSize(482, 29));
-	WxToolBar[tbSTANDARD]->SetFont(wxFont(12, wxSWISS, wxNORMAL, wxNORMAL, false));
+    WxToolBar[tbSTANDARD] = new wxToolBar(this, ID_WXTOOLBAR1[tbSTANDARD], wxPoint(0, 0), wxSize(482, 29));
+    WxToolBar[tbSTANDARD]->SetFont(wxFont(12, wxSWISS, wxNORMAL, wxNORMAL, false));
 
-	WxMenuBar1 = new wxMenuBar();
+    WxMenuBar1 = new wxMenuBar();
 
-	SetStatusBar(WxStatusBar1);
-	WxToolBar[tbSTANDARD]->Realize();
-	SetToolBar(WxToolBar[tbSTANDARD]);
-	SetTitle(wxT("MadEdit-Mod"));
-	SetIcon(wxNullIcon);
-	SetSize(8,8,400,404);
-	Center();
-	
+    SetStatusBar(WxStatusBar1);
+    WxToolBar[tbSTANDARD]->Realize();
+    SetToolBar(WxToolBar[tbSTANDARD]);
+    SetTitle(wxT("MadEdit-Mod"));
+    SetIcon(wxNullIcon);
+    SetSize(8,8,400,404);
+    Center();
+    
     ////GUI Items Creation End
 #endif
 
@@ -2114,6 +2183,9 @@ void MadEditFrame::CreateGUIControls(void)
     m_Notebook->wxControl::SetWindowStyleFlag(m_Notebook->wxControl::GetWindowStyleFlag() & ~wxTAB_TRAVERSAL);
     m_Notebook->SetDropTarget(new DnDFile());
     m_Notebook->SetArtProvider(new wxAuiSimpleTabArt);
+
+    g_PreviewTypeNames[ptPREVIEW_HTML] = _("HTML");
+    g_PreviewTypeNames[ptPREVIEW_MARKDOWN] = _("Markdown");
 
     WxMenuBar1 = new wxMenuBar();
     this->SetMenuBar(WxMenuBar1);
@@ -2316,6 +2388,7 @@ void MadEditFrame::CreateGUIControls(void)
     g_Menu_View_FontSize = new wxMenu((long)0);
     g_Menu_View_LineSpacing = new wxMenu((long)0);
     g_Menu_View_TabColumn = new wxMenu((long)0);
+    g_Menu_View_Preview = new wxMenu((long)0);
     g_Menu_Tools_BOM = new wxMenu((long)0);
     g_Menu_MadMacro = new wxMenu((long)0);
     g_Menu_Toolbars = new wxMenu((long)0);
@@ -2510,6 +2583,14 @@ void MadEditFrame::CreateGUIControls(void)
             g_Menu_Toolbars->Enable(menuToolBar1 + i, m_ToolbarStatus[tbMAX]);
         }
     }
+    {
+        for(int i=ptPREVIEW_HTML; i<ptPREVIEW_MAXTYPE; ++i)
+        {
+            g_Menu_View_Preview->Append(i, g_PreviewTypeNames[i], wxEmptyString, wxITEM_CHECK);
+            g_Menu_View_Preview->Check(i, false);
+            g_Menu_View_Preview->Enable(i, false);
+        }
+    }
 
     if(!m_Config->Exists(wxT("/KeyBindings")))
     {
@@ -2588,68 +2669,68 @@ void MadEditFrame::CreateGUIControls(void)
     */
 
     //WxToolBar[tbSTANDARD]->AddSeparator();
-	WxToolBar[tbSTANDARD]->AddTool(menuNew, _T("New"), m_ImageList->GetBitmap(new_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("New File"), _("Create new file"), NULL);
-	WxToolBar[tbSTANDARD]->AddTool(menuOpen, _T("Open"), m_ImageList->GetBitmap(fileopen_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Open File"), _("Open an existing file"), NULL);
-	WxToolBar[tbSTANDARD]->AddTool(menuSave, _T("Save"), m_ImageList->GetBitmap(filesave_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Save File"), _("Save the modified file"), NULL);
-	WxToolBar[tbSTANDARD]->AddTool(menuSaveAll, _T("SaveAll"), m_ImageList->GetBitmap(saveall_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Save All Files"), _("Save all modified files"), NULL);
-	WxToolBar[tbSTANDARD]->AddTool(menuClose, _T("Close"), m_ImageList->GetBitmap(fileclose_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Close File"), _("Close this file"), NULL);
-	WxToolBar[tbSTANDARD]->AddTool(menuCloseAll, _T("CloseAll"), m_ImageList->GetBitmap(closeall_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Close All Files"), _("Close all opened files"), NULL);
-	WxToolBar[tbSTANDARD]->AddSeparator();
-	WxToolBar[tbSTANDARD]->AddTool(menuPrint, _T("Print"), m_ImageList->GetBitmap(print_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Print This File"), _("Print this file"), NULL);
-	WxToolBar[tbSTANDARD]->AddSeparator();
-	WxToolBar[tbSTANDARD]->AddTool(menuUndo, _T("Undo"), m_ImageList->GetBitmap(undo_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Undo"), _("Undo last operation"), NULL);
-	WxToolBar[tbSTANDARD]->AddTool(menuRedo, _T("Redo"), m_ImageList->GetBitmap(redo_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Redo"), _("Redo last undone operation"), NULL);
-	WxToolBar[tbSTANDARD]->AddSeparator();
-	WxToolBar[tbSTANDARD]->AddTool(menuCut, _T("Cut"), m_ImageList->GetBitmap(cut_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Cut"), _("Cut selection to clipboard"), NULL);
-	WxToolBar[tbSTANDARD]->AddTool(menuCopy, _T("Copy"), m_ImageList->GetBitmap(copy_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Copy"), _("Copy selection to clipboard"), NULL);
-	WxToolBar[tbSTANDARD]->AddTool(menuPaste, _T("Paste"), m_ImageList->GetBitmap(paste_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Paste"), _("Paste from clipboard"), NULL);
-	WxToolBar[tbSTANDARD]->Realize();
+    WxToolBar[tbSTANDARD]->AddTool(menuNew, _T("New"), m_ImageList->GetBitmap(new_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("New File"), _("Create new file"), NULL);
+    WxToolBar[tbSTANDARD]->AddTool(menuOpen, _T("Open"), m_ImageList->GetBitmap(fileopen_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Open File"), _("Open an existing file"), NULL);
+    WxToolBar[tbSTANDARD]->AddTool(menuSave, _T("Save"), m_ImageList->GetBitmap(filesave_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Save File"), _("Save the modified file"), NULL);
+    WxToolBar[tbSTANDARD]->AddTool(menuSaveAll, _T("SaveAll"), m_ImageList->GetBitmap(saveall_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Save All Files"), _("Save all modified files"), NULL);
+    WxToolBar[tbSTANDARD]->AddTool(menuClose, _T("Close"), m_ImageList->GetBitmap(fileclose_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Close File"), _("Close this file"), NULL);
+    WxToolBar[tbSTANDARD]->AddTool(menuCloseAll, _T("CloseAll"), m_ImageList->GetBitmap(closeall_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Close All Files"), _("Close all opened files"), NULL);
+    WxToolBar[tbSTANDARD]->AddSeparator();
+    WxToolBar[tbSTANDARD]->AddTool(menuPrint, _T("Print"), m_ImageList->GetBitmap(print_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Print This File"), _("Print this file"), NULL);
+    WxToolBar[tbSTANDARD]->AddSeparator();
+    WxToolBar[tbSTANDARD]->AddTool(menuUndo, _T("Undo"), m_ImageList->GetBitmap(undo_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Undo"), _("Undo last operation"), NULL);
+    WxToolBar[tbSTANDARD]->AddTool(menuRedo, _T("Redo"), m_ImageList->GetBitmap(redo_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Redo"), _("Redo last undone operation"), NULL);
+    WxToolBar[tbSTANDARD]->AddSeparator();
+    WxToolBar[tbSTANDARD]->AddTool(menuCut, _T("Cut"), m_ImageList->GetBitmap(cut_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Cut"), _("Cut selection to clipboard"), NULL);
+    WxToolBar[tbSTANDARD]->AddTool(menuCopy, _T("Copy"), m_ImageList->GetBitmap(copy_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Copy"), _("Copy selection to clipboard"), NULL);
+    WxToolBar[tbSTANDARD]->AddTool(menuPaste, _T("Paste"), m_ImageList->GetBitmap(paste_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Paste"), _("Paste from clipboard"), NULL);
+    WxToolBar[tbSTANDARD]->Realize();
 
-	WxToolBar[tbSEARCHREPLACE]->AddTool(menuFind, _T("Find"), m_ImageList->GetBitmap(find_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Find"), _("Find text from caret"), NULL);
-	WxToolBar[tbSEARCHREPLACE]->AddTool(menuFindNext, _T("FindNext"), m_ImageList->GetBitmap(findnext_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Find Next"), _("Find matched text next to caret"), NULL);
-	WxToolBar[tbSEARCHREPLACE]->AddTool(menuFindPrevious, _T("FindPrev"), m_ImageList->GetBitmap(findprev_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Find Previous"), _("Find matched text previous from caret"), NULL);
-	WxToolBar[tbSEARCHREPLACE]->AddTool(menuReplace, _T("Replace"), m_ImageList->GetBitmap(replace_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Replace"), _("Replace matched text with new one from caret"), NULL);
+    WxToolBar[tbSEARCHREPLACE]->AddTool(menuFind, _T("Find"), m_ImageList->GetBitmap(find_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Find"), _("Find text from caret"), NULL);
+    WxToolBar[tbSEARCHREPLACE]->AddTool(menuFindNext, _T("FindNext"), m_ImageList->GetBitmap(findnext_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Find Next"), _("Find matched text next to caret"), NULL);
+    WxToolBar[tbSEARCHREPLACE]->AddTool(menuFindPrevious, _T("FindPrev"), m_ImageList->GetBitmap(findprev_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Find Previous"), _("Find matched text previous from caret"), NULL);
+    WxToolBar[tbSEARCHREPLACE]->AddTool(menuReplace, _T("Replace"), m_ImageList->GetBitmap(replace_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Replace"), _("Replace matched text with new one from caret"), NULL);
 
-	WxToolBar[tbTEXTVIEW]->AddTool(menuNoWrap, _T("NoWrap"), m_ImageList->GetBitmap(nowrap_xpm_idx), wxNullBitmap, wxITEM_CHECK, _("No Line Wrap"), _("Don't wrap line "), NULL);
-	WxToolBar[tbTEXTVIEW]->AddTool(menuWrapByWindow, _T("WrapByWindow"), m_ImageList->GetBitmap(wrapbywin_xpm_idx), wxNullBitmap, wxITEM_CHECK, _("Wrap Lines by Window"), _("Wrap lines by window width"), NULL);
-	WxToolBar[tbTEXTVIEW]->AddTool(menuWrapByColumn, _T("WrapByColumn"), m_ImageList->GetBitmap(wrapbycol_xpm_idx), wxNullBitmap, wxITEM_CHECK, _("Wrap Lines by Max Columns"), _("Wrap lines by max columns set in Opions"), NULL);
-	WxToolBar[tbTEXTVIEW]->AddTool(menuShowAllChars, _T("ShowAllChars"), m_ImageList->GetBitmap(showsymbol_xpm_idx), wxNullBitmap, wxITEM_CHECK, _("Show All Characters"), _("Show all characters including TAB, Space and EOL"), NULL);
-	WxToolBar[tbTEXTVIEW]->AddTool(menuSpellChecker, _T("SpellChecker"), m_ImageList->GetBitmap(spellchecker_xpm_idx), wxNullBitmap, wxITEM_CHECK, _("Spell Checker"), _("Spell checker according to dictionary selected"), NULL);
-	WxToolBar[tbTEXTVIEW]->Realize();
+    WxToolBar[tbTEXTVIEW]->AddTool(menuNoWrap, _T("NoWrap"), m_ImageList->GetBitmap(nowrap_xpm_idx), wxNullBitmap, wxITEM_CHECK, _("No Line Wrap"), _("Don't wrap line "), NULL);
+    WxToolBar[tbTEXTVIEW]->AddTool(menuWrapByWindow, _T("WrapByWindow"), m_ImageList->GetBitmap(wrapbywin_xpm_idx), wxNullBitmap, wxITEM_CHECK, _("Wrap Lines by Window"), _("Wrap lines by window width"), NULL);
+    WxToolBar[tbTEXTVIEW]->AddTool(menuWrapByColumn, _T("WrapByColumn"), m_ImageList->GetBitmap(wrapbycol_xpm_idx), wxNullBitmap, wxITEM_CHECK, _("Wrap Lines by Max Columns"), _("Wrap lines by max columns set in Opions"), NULL);
+    WxToolBar[tbTEXTVIEW]->AddTool(menuShowAllChars, _T("ShowAllChars"), m_ImageList->GetBitmap(showsymbol_xpm_idx), wxNullBitmap, wxITEM_CHECK, _("Show All Characters"), _("Show all characters including TAB, Space and EOL"), NULL);
+    WxToolBar[tbTEXTVIEW]->AddTool(menuSpellChecker, _T("SpellChecker"), m_ImageList->GetBitmap(spellchecker_xpm_idx), wxNullBitmap, wxITEM_CHECK, _("Spell Checker"), _("Spell checker according to dictionary selected"), NULL);
+    WxToolBar[tbTEXTVIEW]->Realize();
     
-	WxToolBar[tbEDITMODE]->AddTool(menuTextMode, _T("TextMode"), m_ImageList->GetBitmap(textmode_xpm_idx), wxNullBitmap, wxITEM_CHECK, _("Text Mode"), _("Normal text edit mode"), NULL);
-	WxToolBar[tbEDITMODE]->AddTool(menuColumnMode, _T("ColumnMode"), m_ImageList->GetBitmap(columnmode_xpm_idx), wxNullBitmap, wxITEM_CHECK, _("Column Mode"), _("Column edit mode"), NULL);
-	WxToolBar[tbEDITMODE]->AddTool(menuHexMode, _T("HexMode"), m_ImageList->GetBitmap(hexmode_xpm_idx), wxNullBitmap, wxITEM_CHECK, _("Hex Mode"), _("Hex edit mode"), NULL);
-	WxToolBar[tbEDITMODE]->Realize();
+    WxToolBar[tbEDITMODE]->AddTool(menuTextMode, _T("TextMode"), m_ImageList->GetBitmap(textmode_xpm_idx), wxNullBitmap, wxITEM_CHECK, _("Text Mode"), _("Normal text edit mode"), NULL);
+    WxToolBar[tbEDITMODE]->AddTool(menuColumnMode, _T("ColumnMode"), m_ImageList->GetBitmap(columnmode_xpm_idx), wxNullBitmap, wxITEM_CHECK, _("Column Mode"), _("Column edit mode"), NULL);
+    WxToolBar[tbEDITMODE]->AddTool(menuHexMode, _T("HexMode"), m_ImageList->GetBitmap(hexmode_xpm_idx), wxNullBitmap, wxITEM_CHECK, _("Hex Mode"), _("Hex edit mode"), NULL);
+    WxToolBar[tbEDITMODE]->Realize();
 
-	WxToolBar[tbMACRO]->AddTool(menuRunTempMacro, _T("RunTempMacro"), m_ImageList->GetBitmap(runscript_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Run Temporary Macro"), _("Temporarily edit and run a macro"), NULL);
-	WxToolBar[tbMACRO]->AddTool(menuStartRecMacro, _T("StartRecMacro"), m_ImageList->GetBitmap(record_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Start Recording"), _("Start recording user operation with Mad-Python"), NULL);
-	WxToolBar[tbMACRO]->AddTool(menuStopRecMacro, _T("StopRecMacro"), m_ImageList->GetBitmap(stop_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Stop Recording"), _("Stop recording user operation with Mad-Python"), NULL);
-	WxToolBar[tbMACRO]->AddTool(menuPlayRecMacro, _T("PlayRecMacro"), m_ImageList->GetBitmap(play_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Playback"), _("Playback recorded Mad-Python"), NULL);
-	WxToolBar[tbMACRO]->AddTool(menuSaveRecMacro, _T("SaveRecMacro"), m_ImageList->GetBitmap(saverec_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Save Currently Recorded Macro"), _("Save recorded macro to Mad-Python file"), NULL);
-	WxToolBar[tbMACRO]->Realize();
+    WxToolBar[tbMACRO]->AddTool(menuRunTempMacro, _T("RunTempMacro"), m_ImageList->GetBitmap(runscript_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Run Temporary Macro"), _("Temporarily edit and run a macro"), NULL);
+    WxToolBar[tbMACRO]->AddTool(menuStartRecMacro, _T("StartRecMacro"), m_ImageList->GetBitmap(record_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Start Recording"), _("Start recording user operation with Mad-Python"), NULL);
+    WxToolBar[tbMACRO]->AddTool(menuStopRecMacro, _T("StopRecMacro"), m_ImageList->GetBitmap(stop_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Stop Recording"), _("Stop recording user operation with Mad-Python"), NULL);
+    WxToolBar[tbMACRO]->AddTool(menuPlayRecMacro, _T("PlayRecMacro"), m_ImageList->GetBitmap(play_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Playback"), _("Playback recorded Mad-Python"), NULL);
+    WxToolBar[tbMACRO]->AddTool(menuSaveRecMacro, _T("SaveRecMacro"), m_ImageList->GetBitmap(saverec_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Save Currently Recorded Macro"), _("Save recorded macro to Mad-Python file"), NULL);
+    WxToolBar[tbMACRO]->Realize();
 
-	WxToolBar[tbEDITOR]->AddTool(menuIncreaseIndent, _T("IncIndent"), m_ImageList->GetBitmap(indent_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Increase Indent"), _("Increase indent for selection"), NULL);
-	WxToolBar[tbEDITOR]->AddTool(menuDecreaseIndent, _T("DecIndent"), m_ImageList->GetBitmap(unindent_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Decrease Indent"), _("Decrease indent for selection"), NULL);
-	WxToolBar[tbEDITOR]->AddSeparator();
-	WxToolBar[tbEDITOR]->AddTool(menuComment, _T("Comment"), m_ImageList->GetBitmap(comment_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Comment"), _("Comment selection"), NULL);
-	WxToolBar[tbEDITOR]->AddTool(menuUncomment, _T("Uncomment"), m_ImageList->GetBitmap(uncomment_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Uncomment"), _("Uncomment selection"), NULL);
-	WxToolBar[tbEDITOR]->AddSeparator();
-	WxToolBar[tbEDITOR]->AddTool(menuToggleBookmark, _T("ToggleBookmark"), m_ImageList->GetBitmap(bookmark_toggle_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Toggle/Remove Bookmark"), _("Toggle or remove bookmark"), NULL);
-	WxToolBar[tbEDITOR]->AddTool(menuGotoNextBookmark, _T("GotoNextBookmark"), m_ImageList->GetBitmap(bookmark_next_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Go To Next Bookmark"), _("Go to next bookmark"), NULL);
-	WxToolBar[tbEDITOR]->AddTool(menuGotoPreviousBookmark, _T("GotoPreviousBookmark"), m_ImageList->GetBitmap(bookmark_prev_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Go To Previous Bookmark"), _("Go to previous bookmark"), NULL);
-	WxToolBar[tbEDITOR]->AddTool(menuClearAllBookmarks, _T("ClearAllBookmarks"), m_ImageList->GetBitmap(bookmark_clear_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Clear All Bookmarks"), _("Clear all bookmarks"), NULL);
-	WxToolBar[tbEDITOR]->Realize();
+    WxToolBar[tbEDITOR]->AddTool(menuIncreaseIndent, _T("IncIndent"), m_ImageList->GetBitmap(indent_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Increase Indent"), _("Increase indent for selection"), NULL);
+    WxToolBar[tbEDITOR]->AddTool(menuDecreaseIndent, _T("DecIndent"), m_ImageList->GetBitmap(unindent_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Decrease Indent"), _("Decrease indent for selection"), NULL);
+    WxToolBar[tbEDITOR]->AddSeparator();
+    WxToolBar[tbEDITOR]->AddTool(menuComment, _T("Comment"), m_ImageList->GetBitmap(comment_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Comment"), _("Comment selection"), NULL);
+    WxToolBar[tbEDITOR]->AddTool(menuUncomment, _T("Uncomment"), m_ImageList->GetBitmap(uncomment_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Uncomment"), _("Uncomment selection"), NULL);
+    WxToolBar[tbEDITOR]->AddSeparator();
+    WxToolBar[tbEDITOR]->AddTool(menuToggleBookmark, _T("ToggleBookmark"), m_ImageList->GetBitmap(bookmark_toggle_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Toggle/Remove Bookmark"), _("Toggle or remove bookmark"), NULL);
+    WxToolBar[tbEDITOR]->AddTool(menuGotoNextBookmark, _T("GotoNextBookmark"), m_ImageList->GetBitmap(bookmark_next_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Go To Next Bookmark"), _("Go to next bookmark"), NULL);
+    WxToolBar[tbEDITOR]->AddTool(menuGotoPreviousBookmark, _T("GotoPreviousBookmark"), m_ImageList->GetBitmap(bookmark_prev_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Go To Previous Bookmark"), _("Go to previous bookmark"), NULL);
+    WxToolBar[tbEDITOR]->AddTool(menuClearAllBookmarks, _T("ClearAllBookmarks"), m_ImageList->GetBitmap(bookmark_clear_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Clear All Bookmarks"), _("Clear all bookmarks"), NULL);
+    WxToolBar[tbEDITOR]->Realize();
 
     //WxToolBar[tbSTANDARD]->EnableTool(wxID_NEW, false);
     //WxToolBar[tbSTANDARD]->ToggleTool(wxID_NEW, true);
-	// add the toolbars to the manager
-	m_AuiManager.AddPane(WxToolBar[tbSTANDARD],      wxAuiPaneInfo().Name(wxT("WxToolBar1")).Caption(wxT("Starndard")).Floatable(false).ToolbarPane().Top().Row(1));
-	m_AuiManager.AddPane(WxToolBar[tbEDITOR],        wxAuiPaneInfo().Name(wxT("WxToolBar2")).Caption(wxT("Editor")).Floatable(false).ToolbarPane().Top().Row(1).Position(1));
-	m_AuiManager.AddPane(WxToolBar[tbSEARCHREPLACE], wxAuiPaneInfo().Name(wxT("WxToolBar3")).Caption(wxT("Search/Replace")).Floatable(false).ToolbarPane().Top().Row(1).Position(2));
-	m_AuiManager.AddPane(WxToolBar[tbTEXTVIEW],      wxAuiPaneInfo().Name(wxT("WxToolBar4")).Caption(wxT("Text View")).Floatable(false).ToolbarPane().Top().Row(1).Position(3));
-	m_AuiManager.AddPane(WxToolBar[tbEDITMODE],      wxAuiPaneInfo().Name(wxT("WxToolBar5")).Caption(wxT("Edit Mode")).Floatable(false).ToolbarPane().Top().Row(1).Position(4));
-	m_AuiManager.AddPane(WxToolBar[tbMACRO],         wxAuiPaneInfo().Name(wxT("WxToolBar6")).Caption(wxT("Macro")).Floatable(false).ToolbarPane().Top().Row(1).Position(5));
+    // add the toolbars to the manager
+    m_AuiManager.AddPane(WxToolBar[tbSTANDARD],      wxAuiPaneInfo().Name(wxT("WxToolBar1")).Caption(wxT("Starndard")).Floatable(false).ToolbarPane().Top().Row(1));
+    m_AuiManager.AddPane(WxToolBar[tbEDITOR],        wxAuiPaneInfo().Name(wxT("WxToolBar2")).Caption(wxT("Editor")).Floatable(false).ToolbarPane().Top().Row(1).Position(1));
+    m_AuiManager.AddPane(WxToolBar[tbSEARCHREPLACE], wxAuiPaneInfo().Name(wxT("WxToolBar3")).Caption(wxT("Search/Replace")).Floatable(false).ToolbarPane().Top().Row(1).Position(2));
+    m_AuiManager.AddPane(WxToolBar[tbTEXTVIEW],      wxAuiPaneInfo().Name(wxT("WxToolBar4")).Caption(wxT("Text View")).Floatable(false).ToolbarPane().Top().Row(1).Position(3));
+    m_AuiManager.AddPane(WxToolBar[tbEDITMODE],      wxAuiPaneInfo().Name(wxT("WxToolBar5")).Caption(wxT("Edit Mode")).Floatable(false).ToolbarPane().Top().Row(1).Position(4));
+    m_AuiManager.AddPane(WxToolBar[tbMACRO],         wxAuiPaneInfo().Name(wxT("WxToolBar6")).Caption(wxT("Macro")).Floatable(false).ToolbarPane().Top().Row(1).Position(5));
     bool bb;
     m_ToolbarStatus[tbMAX] = false;
     m_Config->Read(wxT("/MadEdit/ShowToolbarStandard"), &bb, true);
@@ -2767,8 +2848,8 @@ void MadEditFrame::MadEditFrameClose(wxCloseEvent& event)
     // save ReloadFilesList
     wxString files;
     int count=int(m_Notebook->GetPageCount());
-    bool bb=true;
-    m_Config->Read(wxT("ReloadFiles"), &bb);
+    bool bb=m_ReloadFiles;
+    //m_Config->Read(wxT("ReloadFiles"), &bb);
     if(bb && count>0)
     {
         count = m_Notebook->GetFilesList(files);
@@ -2782,8 +2863,8 @@ void MadEditFrame::MadEditFrameClose(wxCloseEvent& event)
     }
     m_Config->Write(wxT("/MadEdit/ReloadFilesList"), files );
 
-    bb=false;
-    m_Config->Read(wxT("/MadEdit/PurgeHistory"), &bb);
+    bb=m_PurgeHistory;
+    //m_Config->Read(wxT("/MadEdit/PurgeHistory"), &bb);
     if(bb)
     {
         PurgeRecentFiles();
@@ -2834,13 +2915,14 @@ void MadEditFrame::MadEditFrameClose(wxCloseEvent& event)
 // changed: gogo, 30.08.2009 ---
     int x, y;
 #ifdef __WXMSW__
+
     //int style=::GetWindowLong((HWND)GetHWND(), GWL_STYLE);
     //m_Config->Write(wxT("/MadEdit/WindowMaximize"), (style&WS_MAXIMIZE)!=0 );
 
     WINDOWPLACEMENT wp;
     wp.length = sizeof(WINDOWPLACEMENT);
     GetWindowPlacement( (HWND) GetHWND(), &wp );
-    m_Config->Write( wxT("/MadEdit/WindowMaximize"), wp.showCmd == SW_SHOWMAXIMIZED );
+    m_Config->Write(wxT("/MadEdit/WindowMaximize"), wp.showCmd == SW_SHOWMAXIMIZED );
 
     m_Config->Write(wxT("/MadEdit/WindowLeft"),  wp.rcNormalPosition.left );
     m_Config->Write(wxT("/MadEdit/WindowTop"),   wp.rcNormalPosition.top );
@@ -2856,6 +2938,8 @@ void MadEditFrame::MadEditFrameClose(wxCloseEvent& event)
     m_Config->Write(wxT("/MadEdit/WindowWidth"), x );
     m_Config->Write(wxT("/MadEdit/WindowHeight"), y );
 #endif
+
+
 //------------------
     m_Config->SetPath(wxT("/RecentFiles"));
     m_RecentFiles->Save(*m_Config);
@@ -2879,6 +2963,7 @@ void MadEditFrame::MadEditFrameClose(wxCloseEvent& event)
         m_Config->Write(wxT("/MadEdit/SearchThrEndOfFile"), g_SearchDialog->WxCheckBoxSearchThrEndOfFile->GetValue());
         //----------
     }
+
     if(g_ReplaceDialog!=NULL)
     {
         if(g_ReplaceDialog->IsShown())
@@ -2886,6 +2971,7 @@ void MadEditFrame::MadEditFrameClose(wxCloseEvent& event)
         m_Config->SetPath(wxT("/RecentReplaceText"));
         g_ReplaceDialog->m_RecentReplaceText->Save(*m_Config);
     }
+
     if(g_FindInFilesDialog!=NULL)
     {
         if(g_FindInFilesDialog->IsShown())
@@ -2909,6 +2995,7 @@ void MadEditFrame::MadEditFrameClose(wxCloseEvent& event)
     m_Config->Write(wxT("/MadEdit/ShowToolbarTextview"), m_ToolbarStatus[tbTEXTVIEW]);
     m_Config->Write(wxT("/MadEdit/ShowToolbarEditMode"), m_ToolbarStatus[tbEDITMODE]);
     m_Config->Write(wxT("/MadEdit/ShowToolbarMacro"), m_ToolbarStatus[tbMACRO]);
+    
     delete m_RecentFiles;
     m_RecentFiles=NULL;
     delete m_RecentEncodings;
@@ -2930,6 +3017,7 @@ void MadEditFrame::MadEditFrameClose(wxCloseEvent& event)
 
     m_AuiManager.UnInit();
 
+    if(g_MadToolHtmlWin) delete g_MadToolHtmlWin;
     g_MainFrame = 0;
 #ifndef __WXMSW__
     // it will crash randomly under linux.
@@ -3093,6 +3181,24 @@ void MadEditFrame::OnNotebookPageChanged(wxAuiNotebookEvent& event)
         {
             g_ActiveMadEdit->ReloadByModificationTime();
         }
+        
+        if(m_PreviewType != ptPREVIEW_NONE)
+        {
+            wxString text;
+            g_ActiveMadEdit->GetText(text, false);
+            if(m_PreviewType == ptPREVIEW_MARKDOWN)
+            {
+                std::wstring src = text.ToStdWstring();
+                std::wostringstream out;
+                markdown::Document doc;
+                doc.read(src);
+                doc.write(out);
+                text = out.str();
+            }
+            m_HtmlPreview->SetPage(text);
+            g_ActiveMadEdit->Synced();
+
+        }
     }
     else
     {
@@ -3187,10 +3293,11 @@ void MadEditFrame::OnSize(wxSizeEvent &evt)
 
 void MadEditFrame::OnActivate(wxActivateEvent &evt)
 {
+    DBOUT( "MadEditFrame::OnActivate\n" );
     if(evt.GetActive() && g_ActiveMadEdit)
     {
         g_ActiveMadEdit->SetFocus();
-        g_ActiveMadEdit->ReloadByModificationTime();
+        g_ActiveMadEdit->ReloadByModificationTime(true);
     }
     evt.Skip();
 }
@@ -3509,7 +3616,7 @@ void MadEditFrame::OpenFile(const wxString &fname, bool mustExist)
     else
     {
         // create a new MadEdit
-        madedit=new MadEdit(m_Notebook, wxID_ANY, wxDefaultPosition, wxDefaultSize, /*wxSIMPLE_BORDER|*/wxWANTS_CHARS);
+        madedit=new MadEdit(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, /*wxSIMPLE_BORDER|*/wxWANTS_CHARS);
         madedit->SetWindowStyleFlag(madedit->GetWindowStyleFlag() & ~wxTAB_TRAVERSAL);
         //madedit->SetDropTarget(new DnDFile());
         madedit->SetOnSelectionChanged(&OnEditSelectionChanged);
@@ -3558,7 +3665,6 @@ void MadEditFrame::OpenFile(const wxString &fname, bool mustExist)
     int size;
     madedit->GetFont(str, size);
     m_RecentFonts->AddFileToHistory(str);
-
     str= wxString(wxT('['))+ madedit->GetEncodingName() + wxT("] ")+ wxGetTranslation(madedit->GetEncodingDescription().c_str());
     m_RecentEncodings->AddFileToHistory(str);
 
@@ -3876,6 +3982,55 @@ void MadEditFrame::OnUpdateUI_MenuViewTabColumn(wxUpdateUIEvent& event)
     }
 }
 
+void MadEditFrame::OnUpdateUI_MenuViewPreview(wxUpdateUIEvent& event)
+{
+    wxString viewType(_("None"));
+    if(g_ActiveMadEdit!=NULL)
+    {
+        switch(m_PreviewType)
+        {
+            case ptPREVIEW_HTML:
+                viewType = _("HTML");
+                break;
+            case ptPREVIEW_MARKDOWN:
+                viewType = _("Markdown");
+                break;
+            default:
+                break;
+        }
+        event.Enable(true);
+    }
+    else
+    {
+        event.Enable(false);
+    }
+
+    event.SetText(wxString(_("Preview as: "))+viewType );
+}
+
+void MadEditFrame::OnUpdateUI_MenuViewPreviewList(wxUpdateUIEvent& event)
+{
+    for(int menuId = ptPREVIEW_HTML; menuId < ptPREVIEW_MAXTYPE; ++menuId)
+    {
+        if(menuId != m_PreviewType)
+        {
+            g_Menu_View_Preview->Check(menuId, false);
+        }
+        else
+        {
+            g_Menu_View_Preview->Check(menuId, true);
+        }
+        if(g_ActiveMadEdit!=NULL)
+        {
+            g_Menu_View_Preview->Enable(menuId, true);
+        }
+        else
+        {
+            g_Menu_View_Preview->Enable(menuId, false);
+        }
+    }
+}
+
 void MadEditFrame::OnUpdateUI_MenuViewLineSpacing(wxUpdateUIEvent& event)
 {
     if(g_ActiveMadEdit!=NULL)
@@ -4021,6 +4176,7 @@ void MadEditFrame::OnUpdateUI_MenuViewToolbarList(wxUpdateUIEvent& event)
             g_Menu_Toolbars->Enable(menuItemId, false);
     }
 }
+
 void MadEditFrame::OnUpdateUI_MenuToolsByteOrderMark(wxUpdateUIEvent& event)
 {
     MadEncodingType type;
@@ -4095,6 +4251,18 @@ void MadEditFrame::OnUpdateUI_MenuToolsConvertNL(wxUpdateUIEvent& event)
 }
 
 void MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding(wxUpdateUIEvent& event)
+{
+    event.Enable(g_ActiveMadEdit!=NULL &&
+        !g_ActiveMadEdit->IsReadOnly() && g_ActiveMadEdit->IsTextFile());
+}
+
+void MadEditFrame::OnUpdateUI_MenuFile_Markdown2Html(wxUpdateUIEvent& event)
+{
+    event.Enable(g_ActiveMadEdit!=NULL &&
+        !g_ActiveMadEdit->IsReadOnly() && g_ActiveMadEdit->IsTextFile());
+}
+
+void MadEditFrame::OnUpdateUI_MenuFile_Html2PlainText(wxUpdateUIEvent& event)
 {
     event.Enable(g_ActiveMadEdit!=NULL &&
         !g_ActiveMadEdit->IsReadOnly() && g_ActiveMadEdit->IsTextFile());
@@ -5955,6 +6123,53 @@ void MadEditFrame::OnViewTabColumn(wxCommandEvent& event)
     RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("SetTabColumns(%d)"), col));
 }
 
+void MadEditFrame::OnViewPreview(wxCommandEvent& event)
+{
+    if(g_ActiveMadEdit==NULL) return;
+
+    int menuItemId = event.GetId();
+
+    if(menuItemId != m_PreviewType)
+    {
+        m_PreviewType = menuItemId;
+        
+        if(m_HtmlPreview)
+        {
+            m_AuiManager.GetPane(m_HtmlPreview).Show();
+        }
+        else
+        {
+            m_HtmlPreview = new MadHtmlPreview(this->m_PreviewType, this, wxID_ANY,
+                                   wxDefaultPosition,
+                                   wxSize(400,300));
+            m_AuiManager.AddPane(m_HtmlPreview,wxAuiPaneInfo().Name(wxT("Markdown/HTML Preview")).Caption(_("Markdown/HTML Preview")).Floatable(false).Right().CloseButton(false));
+        }
+        wxString text;
+        g_ActiveMadEdit->GetText(text, false);
+        if(m_PreviewType == ptPREVIEW_MARKDOWN)
+        {
+            std::wstring src = text.ToStdWstring();
+            std::wostringstream out;
+        	markdown::Document doc;
+        	doc.read(src);
+        	doc.write(out);
+            text = out.str();
+        }
+        m_HtmlPreview->SetPage(text);
+        g_ActiveMadEdit->Synced();
+    }
+    else
+    {
+        m_PreviewType = ptPREVIEW_NONE;
+        if(m_HtmlPreview)
+        {
+            m_AuiManager.GetPane(m_HtmlPreview).Hide();
+        }
+    }
+    m_AuiManager.Update();
+}
+
+
 void MadEditFrame::OnViewLineSpacing(wxCommandEvent& event)
 {
     if(g_ActiveMadEdit==NULL) return;
@@ -6135,7 +6350,6 @@ void MadEditFrame::OnSpellAdd2Dict(wxCommandEvent& event)
     if(g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode()!=emHexMode)
     {
         wxString str;
-        shared_ptr<wxSpellCheckEngineInterface> & spellChecker = g_ActiveMadEdit->GetSpellChecker();
         if(g_ActiveMadEdit->IsSelected() && g_ActiveMadEdit->GetEditMode()!=emColumnMode)
             g_ActiveMadEdit->GetSelText(str);
         else
@@ -6327,9 +6541,11 @@ void MadEditFrame::OnToolsOptions(wxCommandEvent& event)
         g_DoNotSaveSettings=g_OptionsDialog->WxCheckBoxDoNotSaveSettings->GetValue();
 
         m_Config->Write(wxT("ReloadFiles"), g_OptionsDialog->WxCheckBoxReloadFiles->GetValue());
+        m_ReloadFiles  = g_OptionsDialog->WxCheckBoxReloadFiles->GetValue();
         m_Config->Write(wxT("RestoreCaretPos"), g_OptionsDialog->WxCheckBoxRestoreCaretPos->GetValue());
         extern bool g_ForcePurgeThisTime;
         m_Config->Read(wxT("PurgeHistory"), g_ForcePurgeThisTime);
+        m_PurgeHistory = g_OptionsDialog->WxCheckBoxPurgeHistory->GetValue();
         m_Config->Write(wxT("PurgeHistory"), g_OptionsDialog->WxCheckBoxPurgeHistory->GetValue());
         if(!g_ForcePurgeThisTime) g_ForcePurgeThisTime = g_OptionsDialog->WxCheckBoxPurgeHistory->GetValue();
         else g_ForcePurgeThisTime = false;
@@ -7087,6 +7303,43 @@ void MadEditFrame::OnToolsWordCount(wxCommandEvent& event)
     dialog.ShowModal();
 }
 
+void MadEditFrame::OnToolsMarkdown2Html(wxCommandEvent& event)
+{
+    if(g_ActiveMadEdit==NULL) return;
+    wxString text;
+	g_ActiveMadEdit->GetText(text, false);
+    std::wstring src = text.ToStdWstring();
+    std::wostringstream out;
+    markdown::Document doc;
+    doc.read(src);
+    doc.write(out);
+    text = out.str();
+    g_ActiveMadEdit->SetText(text);
+}
+
+void MadEditFrame::OnToolsHtml2PlainText(wxCommandEvent& event)
+{
+    if(g_ActiveMadEdit==NULL) return;
+    if(g_MadToolHtmlWin == NULL)
+    {
+        try
+        {
+            g_MadToolHtmlWin = new wxHtmlWindow(this, wxID_ANY);
+        }
+        catch(...)
+        {
+            return;
+        }
+    }
+    wxString text;
+	g_ActiveMadEdit->GetText(text, false);
+
+    g_MadToolHtmlWin->SetPage(text);
+    text = g_MadToolHtmlWin->ToText();
+    g_ActiveMadEdit->SetText(text);
+}
+
+
 void MadEditFrame::OnWindowToggleWindow(wxCommandEvent& event)
 {
     int count=int(m_Notebook->GetPageCount());
@@ -7401,7 +7654,7 @@ void MadEditFrame::OnSearchQuickFindPrevious(wxCommandEvent& event)
         
         if(event.GetEventType() == wxEVT_TEXT && g_ActiveMadEdit->IsSelected())
         {
-			rangeFrom = g_ActiveMadEdit->GetSelectionEndPos()+1;
+            rangeFrom = g_ActiveMadEdit->GetSelectionEndPos()+1;
         }
         if((reset_caretpos && rangeFrom <= lastCaret) && !g_ActiveMadEdit->IsModified())
         {
@@ -7450,7 +7703,7 @@ void MadEditFrame::OnSearchQuickFindNext(wxCommandEvent& event)
         wxFileOffset rangeFrom = g_ActiveMadEdit->GetCaretPosition(), rangeTo = -1;
         if(event.GetEventType() == wxEVT_TEXT && g_ActiveMadEdit->IsSelected())
         {
-			rangeFrom = g_ActiveMadEdit->GetSelectionBeginPos();
+            rangeFrom = g_ActiveMadEdit->GetSelectionBeginPos();
         }
         if((reset_caretpos && rangeFrom >= lastCaret) && !g_ActiveMadEdit->IsModified())
         {
