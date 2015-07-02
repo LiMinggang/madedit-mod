@@ -31,17 +31,17 @@ END_EVENT_TABLE()
 
 #if defined(__WXMSW__)
 #ifdef _WIN64
-wxString g_MadEdit_Version(wxT("MadEdit-Mod 0.3.4 win64"));
+wxString g_MadEdit_Version(wxT("MadEdit-Mod 0.3.3.1 win64"));
 #else
-wxString g_MadEdit_Version(wxT("MadEdit-Mod 0.3.4 win32"));
+wxString g_MadEdit_Version(wxT("MadEdit-Mod 0.3.3.1 win32"));
 #endif
 #elif defined(__WXMAC__)
-wxString g_MadEdit_Version(wxT("MadEdit-Mod 0.3.4 MacOS"));
+wxString g_MadEdit_Version(wxT("MadEdit-Mod 0.3.3.1 MacOS"));
 #else
 #if defined(__x86_64__) || defined(__LP64__)
-wxString g_MadEdit_Version(wxT("MadEdit-Mod 0.3.4 x86_x64"));
+wxString g_MadEdit_Version(wxT("MadEdit-Mod 0.3.3.1 x86_x64"));
 #else
-wxString g_MadEdit_Version(wxT("MadEdit-Mod 0.3.4 i686"));
+wxString g_MadEdit_Version(wxT("MadEdit-Mod 0.3.3.1 i686"));
 #endif
 #endif
 

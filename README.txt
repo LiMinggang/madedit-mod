@@ -25,14 +25,15 @@ A. Linux, FreeBSD, and Unix-like OS (__WXGTK__):
 B. MS Windows (__WXMSW__):
    a. MinGW32/GNU C++ 3.x (wxDevCpp):
       Required Libraries to compile:
-      1. wxWidgets-2.8.x or higher with Unicode enabled(wxWidgets-2.8.12 is
-         recommended, and apply patches)
+      1. wxWidgets-2.8.x or higher with Unicode enabled(wxWidgets-3.0.2 is
+         recommended)
       2. Boost-1.33.0 or higher(build Boost-Python)
       3. Boost.Xpressive latest version
       4. libunicows: it's optional under WinNT/XP, but required under Win98
-   b. Visual C++ 7.1 (VS.Net 2003) or higher:
+   b. Visual C++ 7.1 (VS.Net 2005) or higher:
       Required Libraries to compile:
-      1. wxWidgets-2.6.1 or higher with Unicode enabled
+      1. wxWidgets-2.8.x or higher with Unicode enabled(wxWidgets-3.0.2 is
+         recommended)
       2. Boost-1.33.0 or higher(Source code is enough for MadEdit, build
          Boost-Python)
       3. Boost.Xpressive latest version
@@ -67,7 +68,7 @@ MadEdit-Mod
 
 Syntax files, Locale files and Settings:
 ---------------------------------------
-  Syntax files: in the path $(MadEditConfigPath)/syntax/safs
+  Syntax files: in the path $(MadEditConfigPath)/syntax/
   Locale files: in the path $(MadEditConfigPath)/locale/
 
   $(MadEditConfigPath) are the one of below paths:
@@ -99,10 +100,17 @@ ChangeLog:
 Todo:
 FreeBSD packaging (with FreeBSD 10.01)
 
-Mod v0.3.4
-1. Fix issue of ReplaceTextAll being recorded as FindTextAll
-2. New: GTK+3 support (GTK+2 as default)
-3. New: Dynamically add recorded scripts in Toolbar
+Mod v0.3.3.1
+1. Fix: ReplaceTextAll being recorded as FindTextAll
+2. Fix: Replace button did the same as ReplaceAll
+3. Fix: Change local scripts dir to HomeDir instead of AppDir for Linux
+4. Fix: Use FileSelector instead of Openfile dialog to save script
+5. Fix: Text inversion not working under GTK+3
+6. New: Dynamically add saved script on menu list if saving in script home
+7. New: GTK+3 support (GTK+2 as default)
+8. Fix: Right click menu issue under GTK+3
+9. Fix: Text inversion issue under GTK+3
+10. Fix: Syntax/Locale directory update for Linux
 
 Mod v0.3.3
 1. Update MiniPython to Python 2.7.10

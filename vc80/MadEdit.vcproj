@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(WXWIN)\lib\vc_lib\mswud&quot;;&quot;$(WXWIN)\include&quot;;&quot;$(BOOST)&quot;;&quot;..\charset-detector\include&quot;;&quot;..\charset-detector\src&quot;;&quot;..\charset-detector\src\tables&quot;;&quot;$(SolutionDir)/../minipython/Include&quot;;&quot;$(SolutionDir)/../minipython/PC&quot;;&quot;$(SolutionDir)\..\spellchecker&quot;;&quot;$(SolutionDir)\..\spellchecker\hunspell\src&quot;"
+				AdditionalIncludeDirectories="&quot;$(WXWIN)\lib\vc_lib\mswud&quot;;&quot;$(WXWIN)\include&quot;;&quot;$(BOOST)&quot;;&quot;..\charset-detector\include&quot;;&quot;..\charset-detector\src&quot;;&quot;..\charset-detector\src\tables&quot;;&quot;$(SolutionDir)/../minipython/Include&quot;;&quot;$(SolutionDir)/../minipython/PC&quot;;&quot;$(SolutionDir)\..\spellchecker&quot;;&quot;$(SolutionDir)\..\spellchecker\hunspell\src&quot;;&quot;$(SolutionDir)\..\markdown&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_SCL_SECURE_NO_WARNINGS;HUNSPELL_STATIC;Py_NO_ENABLE_SHARED"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -65,7 +65,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/ignore:4217 /ignore:4049 /ignore:4204"
-				AdditionalDependencies="wxmsw28ud_core.lib wxbase28ud.lib wxmsw28ud_aui.lib wxpng.lib wxzlib.lib python27_d.lib libboost_python-vc80-mt-sgyd-1_56.lib libhunspell.lib comctl32.lib uuid.lib rpcrt4.lib User32.Lib Gdi32.Lib Shell32.Lib AdvAPI32.Lib Ole32.Lib OleAut32.Lib ComDlg32.Lib"
+				AdditionalDependencies="wxmsw30ud_core.lib wxbase30ud.lib wxmsw30ud_aui.lib wxmsw30ud_html.lib wxpngd.lib wxzlibd.lib python27_d.lib libhunspell.lib comctl32.lib uuid.lib rpcrt4.lib User32.Lib Gdi32.Lib Shell32.Lib AdvAPI32.Lib Ole32.Lib OleAut32.Lib ComDlg32.Lib"
 				OutputFile="$(OutDir)/MadEdit.exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="&quot;$(WXWIN)\lib\vc_lib&quot;;&quot;$(TargetDir)&quot;;&quot;$(BOOST)stage/lib&quot;"
@@ -124,8 +124,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				FavorSizeOrSpeed="1"
-				AdditionalIncludeDirectories="&quot;$(WXWIN)lib\vc_lib\mswu&quot;;&quot;$(WXWIN)include&quot;;&quot;$(BOOST)&quot;;&quot;$(SolutionDir)..\charset-detector\include&quot;;&quot;$(SolutionDir)..\charset-detector\src&quot;;&quot;$(SolutionDir)..\charset-detector\src\tables&quot;;&quot;$(SolutionDir)..\minipython\Include&quot;;&quot;$(SolutionDir)..\minipython\PC&quot;;&quot;$(SolutionDir)\..\spellchecker&quot;;&quot;$(SolutionDir)\..\spellchecker\hunspell\src&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_SCL_SECURE_NO_WARNINGS;HUNSPELL_STATIC;Py_NO_ENABLE_SHARED"
+				AdditionalIncludeDirectories="&quot;$(WXWIN3)\lib\vc_lib\mswu&quot;;&quot;$(WXWIN3)\include&quot;;&quot;$(BOOST)&quot;;&quot;$(SolutionDir)..\charset-detector\include&quot;;&quot;$(SolutionDir)..\charset-detector\src&quot;;&quot;$(SolutionDir)..\charset-detector\src\tables&quot;;&quot;$(SolutionDir)..\minipython\Include&quot;;&quot;$(SolutionDir)..\minipython\PC&quot;;&quot;$(SolutionDir)..\spellchecker&quot;;&quot;$(SolutionDir)..\spellchecker\hunspell\src&quot;;&quot;$(SolutionDir)..\markdown&quot;"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;HUNSPELL_STATIC;Py_NO_ENABLE_SHARED"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -136,7 +136,7 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
-				AdditionalIncludeDirectories="$(WXWIN)\include"
+				AdditionalIncludeDirectories="$(WXWIN3)\include"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -144,10 +144,10 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/ignore:4217 /ignore:4049"
-				AdditionalDependencies="wxmsw28u_core.lib wxbase28u.lib wxmsw28u_aui.lib wxpng.lib wxzlib.lib python27.lib libboost_python-vc80-mt-s-1_56.lib libhunspell.lib comctl32.lib rpcrt4.lib User32.Lib Gdi32.Lib Shell32.Lib AdvAPI32.Lib Ole32.Lib OleAut32.Lib ComDlg32.Lib"
+				AdditionalDependencies="wxmsw30u_core.lib wxbase30u.lib wxmsw30u_aui.lib wxmsw30u_html.lib wxpng.lib wxzlib.lib python27.lib libboost_python-vc80-mt-s-1_56.lib libhunspell.lib comctl32.lib rpcrt4.lib User32.Lib Gdi32.Lib Shell32.Lib AdvAPI32.Lib Ole32.Lib OleAut32.Lib ComDlg32.Lib Winspool.lib"
 				OutputFile="$(OutDir)/MadEdit.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(WXWIN)\lib\vc_lib&quot;;&quot;$(TargetDir)&quot;;&quot;$(BOOST)stage/lib&quot;;$(NOINHERIT)"
+				AdditionalLibraryDirectories="&quot;$(WXWIN3)\lib\vc_lib&quot;;&quot;$(TargetDir)&quot;;&quot;$(BOOST)\stage\lib&quot;;$(NOINHERIT)"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
@@ -468,6 +468,26 @@
 				</File>
 				<File
 					RelativePath="..\spellchecker\SpellCheckUserInterface.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="MarkDown"
+				>
+				<File
+					RelativePath="..\markdown\markdown-tokens.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\markdown\markdown-tokens.h"
+					>
+				</File>
+				<File
+					RelativePath="..\markdown\markdown.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\markdown\markdown.h"
 					>
 				</File>
 			</Filter>

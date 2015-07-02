@@ -17,6 +17,8 @@ syntax_DATA =	extension.list \
 	syntax_diff.syn \
 	syntax_d.syn \
 	syntax_fortran.syn \
+	syntax_freebasic.syn \
+	syntax_gnuasm.syn \
 	syntax_html.syn \
 	syntax_javascript.syn \
 	syntax_java.syn \
@@ -24,6 +26,7 @@ syntax_DATA =	extension.list \
 	syntax_jsp.syn \
 	syntax_latex.syn \
 	syntax_lua.syn \
+	syntax_mpython.syn \
 	syntax_nfo.syn \
 	syntax_pas.syn \
 	syntax_perl.syn \
@@ -35,6 +38,7 @@ syntax_DATA =	extension.list \
 	syntax_sql.syn \
 	syntax_squirrel.syn \
 	syntax_syn.syn \
+	syntax_tcl.syn \
 	syntax_txt.syn \
 	syntax_vbscript_asp.syn \
 	syntax_visualbasic.syn \

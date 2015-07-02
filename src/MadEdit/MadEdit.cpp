@@ -51,11 +51,15 @@ using std::vector;
 using std::list;
 
 #ifndef FIXINVERT
-//#   ifdef __WXMSW__
+#   ifdef __WXMSW__
 #       define FIXINVERT 0
-//#   else
-//#       define FIXINVERT 1
-//#   endif
+#   else
+#       ifdef __WXGTK3__ 
+#           define FIXINVERT 1
+#       else
+#           define FIXINVERT 0
+#       endif
+#   endif
 #endif
 
 #ifdef _DEBUG
@@ -10389,7 +10393,7 @@ void MadEdit::OnSize(wxSizeEvent &evt)
         if(InvertRect==NULL)
         {
             wxMemoryDC dc1, dc2;
-            dc.SelectObject(*m_ClientBitmap);
+            dc1.SelectObject(*m_ClientBitmap);
             dc1.SetBrush(*wxTheBrushList->FindOrCreateBrush(*wxWHITE));
             dc1.SetPen(*wxThePenList->FindOrCreatePen(*wxWHITE, 1, wxSOLID));
 

@@ -53,6 +53,7 @@ rm -rf $RPM_BUILD_DIR/%{name}-%{version}
 %defattr(-,root,root,0755)
 %doc gpl-3.0.txt
 %doc README.txt
+%doc MadPython.txt
 %{_bindir}/*
 %{_datadir}/applications/*
 %{_datadir}/pixmaps/*

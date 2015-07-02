@@ -1,7 +1,7 @@
-?package(madedit): \
+?package(madedit-mod): \
 	icon="/usr/share/pixmaps/madedit.xpm" \
 	title="MadEdit-Mod" \
-	longtitle="MadEdit-Mod, GTK+2 based Text/Hex editor" \
+	longtitle="MadEdit-Mod, GTK+2/3 based Text/Hex editor" \
 	needs="x11" \
 	section="Apps/Editors" \
 	command="/usr/bin/madedit"

@@ -1,4 +1,19 @@
-madedit (0.3.3-1) unstable; urgency=high
+madedit-mod (0.3.3.1-1) unstable; urgency=high
+
+  1. Fix: ReplaceTextAll being recorded as FindTextAll
+  2. Fix: Replace button did the same as ReplaceAll
+  3. Fix: Change local scripts dir to HomeDir instead of AppDir for Linux
+  4. Fix: Use FileSelector instead of Openfile dialog to save script
+  5. Fix: Text inversion not working under GTK+3
+  6. New: Dynamically add saved script on menu list if saving in script home
+  7. New: GTK+3 support (GTK+2 as default)
+  8. Fix: Right click menu issue under GTK+3
+  9. Fix: Text inversion issue under GTK+3
+  10. Fix: Syntax/Locale directory update for Linux
+
+ -- Minggang Li <liminggang@gmail.com>  Tue, 30 June 2015 21:05:40 +0800
+ 
+madedit-mod (0.3.3-1) unstable; urgency=high
 
   1. Update MiniPython to Python 2.7.10
   2. Change display of Space and Tab char
@@ -16,7 +31,7 @@ madedit (0.3.3-1) unstable; urgency=high
 
  -- Minggang Li <liminggang@gmail.com>  Tue, 24 June 2015 17:05:40 +0800
 
-madedit (0.3.2-1) unstable; urgency=high
+madedit-mod (0.3.2-1) unstable; urgency=high
 
   1. Change RegKey to "MadEdit-Mod" and add RegKey value "Edit with MadEdit-Mod"
   2. Fix caret display issue after hiding Quick Search bar
@@ -28,7 +43,7 @@ madedit (0.3.2-1) unstable; urgency=high
 
  -- Minggang Li <liminggang@gmail.com>  Tue, 6 June 2015 17:05:40 +0800
 
-madedit (0.3.1-1) unstable; urgency=high
+madedit-mod (0.3.1-1) unstable; urgency=high
 
   Note: You have to change the madedit.mo to MadEdit-Mod.mo since then
   1. Use wxAuiToolBar as ToolBar, group tools into Standard, Editor, Search/Replace,
@@ -53,7 +68,7 @@ madedit (0.3.1-1) unstable; urgency=high
 
  -- Minggang Li <liminggang@gmail.com>  Tue, 6 June 2015 17:05:40 +0800
 
-madedit (0.3.0-1) unstable; urgency=low
+madedit-mod (0.3.0-1) unstable; urgency=low
 
   1. Improve UI and all strings of message box/dialog can be translated since then
   2. Change application name string to 'MadEdit-Mod'
@@ -78,7 +93,7 @@ madedit (0.3.0-1) unstable; urgency=low
 
  -- Minggang Li <liminggang@gmail.com>  Tue, 6 June 2015 17:05:40 +0800
 
-madedit (0.2.9-1) unstable; urgency=low
+madedit-mod (0.2.9-1) unstable; urgency=low
 
   1. Auto fill column data while pasting in column mode(the lines would be automatically duplicated if the
      lines in clipboard was less than the selected. Eg, you copied ONE line but you chosen 3 lines in column
@@ -94,7 +109,7 @@ madedit (0.2.9-1) unstable; urgency=low
 
  -- Minggang Li <liminggang@gmail.com>  Tue, 6 June 2015 17:05:40 +0800
 
-madedit (0.2.8-1) unstable; urgency=low
+madedit-mod (0.2.8-1) unstable; urgency=low
 
   1. Fix the issue that Toolbar was not flat under wx3.0(Now we have separator on Toolbar under Windows now)
   2. Revert Hex String to hex(Eg, from '4D6F64', '4D 6F 64', '%4D%6F%64', or '4D,6F,64' to 'Mod', mainly for
@@ -113,7 +128,7 @@ madedit (0.2.8-1) unstable; urgency=low
 
  -- Minggang Li <liminggang@gmail.com>  Tue, 6 June 2015 17:05:40 +0800
 
-madedit (0.2.7-1) unstable; urgency=low
+madedit-mod (0.2.7-1) unstable; urgency=low
 
   Will move to wx3.0 since then
   1. Delete empty lines supported

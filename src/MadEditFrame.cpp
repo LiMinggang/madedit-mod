@@ -2076,9 +2076,9 @@ MadEditFrame::MadEditFrame( wxWindow *parent, wxWindowID id, const wxString &tit
     MadSyntax::AddSyntaxFilesPath(g_MadEditAppDir + wxT("syntax/"));
     MadSyntax::AddSyntaxFilesPath(g_MadEditHomeDir + wxT("syntax/"));
     #if defined (DATA_DIR)
-    MadSyntax::AddSyntaxFilesPath(wxT(DATA_DIR"/madedit/syntax/"));
+    MadSyntax::AddSyntaxFilesPath(wxT(DATA_DIR"/madedit-mod/syntax/"));
     #else
-    MadSyntax::AddSyntaxFilesPath(wxT("/usr/share/madedit/syntax/"));
+    MadSyntax::AddSyntaxFilesPath(wxT("/usr/share/madedit-mod/syntax/"));
     #endif
 #else // other platform
     MadSyntax::AddSyntaxFilesPath(g_MadEditAppDir + wxT("syntax/"));
@@ -2189,7 +2189,7 @@ void MadEditFrame::CreateGUIControls(void)
 
     WxMenuBar1 = new wxMenuBar();
     this->SetMenuBar(WxMenuBar1);
-#if USE_CONTEXT_MENU
+#if USE_CONTEXT_MENU && !defined(__WXGTK__) /*GTK+3 will show this while right clicking on editing erea*/
     Connect(wxEVT_CONTEXT_MENU, wxContextMenuEventHandler(MadEditFrame::OnContextMenu)); 
 #endif    
 
@@ -2509,12 +2509,12 @@ void MadEditFrame::CreateGUIControls(void)
     }
     {
         // enum all madpython files under scripts
-        wxString scriptsLibDir = g_MadEditAppDir + wxT("scripts/"), filename;
+        wxString scriptsLibDir = g_MadEditHomeDir + wxT("scripts/"), filename;
         if(wxDirExists(scriptsLibDir))
         {
             wxDir dir(scriptsLibDir);
      
-            wxString hlp_prefix(wxT("####"));
+            static wxString hlp_prefix(wxT("####"));
             size_t i=0;
             bool hasHelp = false;
             bool cont = dir.GetFirst(&filename, wxT("*.mpy"), wxDIR_FILES);
@@ -2722,15 +2722,13 @@ void MadEditFrame::CreateGUIControls(void)
     WxToolBar[tbEDITOR]->AddTool(menuClearAllBookmarks, _T("ClearAllBookmarks"), m_ImageList->GetBitmap(bookmark_clear_xpm_idx), wxNullBitmap, wxITEM_NORMAL, _("Clear All Bookmarks"), _("Clear all bookmarks"), NULL);
     WxToolBar[tbEDITOR]->Realize();
 
-    //WxToolBar[tbSTANDARD]->EnableTool(wxID_NEW, false);
-    //WxToolBar[tbSTANDARD]->ToggleTool(wxID_NEW, true);
-    // add the toolbars to the manager
-    m_AuiManager.AddPane(WxToolBar[tbSTANDARD],      wxAuiPaneInfo().Name(wxT("WxToolBar1")).Caption(wxT("Starndard")).Floatable(false).ToolbarPane().Top().Row(1));
-    m_AuiManager.AddPane(WxToolBar[tbEDITOR],        wxAuiPaneInfo().Name(wxT("WxToolBar2")).Caption(wxT("Editor")).Floatable(false).ToolbarPane().Top().Row(1).Position(1));
-    m_AuiManager.AddPane(WxToolBar[tbSEARCHREPLACE], wxAuiPaneInfo().Name(wxT("WxToolBar3")).Caption(wxT("Search/Replace")).Floatable(false).ToolbarPane().Top().Row(1).Position(2));
-    m_AuiManager.AddPane(WxToolBar[tbTEXTVIEW],      wxAuiPaneInfo().Name(wxT("WxToolBar4")).Caption(wxT("Text View")).Floatable(false).ToolbarPane().Top().Row(1).Position(3));
-    m_AuiManager.AddPane(WxToolBar[tbEDITMODE],      wxAuiPaneInfo().Name(wxT("WxToolBar5")).Caption(wxT("Edit Mode")).Floatable(false).ToolbarPane().Top().Row(1).Position(4));
-    m_AuiManager.AddPane(WxToolBar[tbMACRO],         wxAuiPaneInfo().Name(wxT("WxToolBar6")).Caption(wxT("Macro")).Floatable(false).ToolbarPane().Top().Row(1).Position(5));
+    m_AuiManager.AddPane(WxToolBar[tbSTANDARD],      wxAuiPaneInfo().Name(wxT("WxToolBar1")).Caption(wxT("Starndard")).Floatable().ToolbarPane().Top());
+    m_AuiManager.AddPane(WxToolBar[tbEDITOR],        wxAuiPaneInfo().Name(wxT("WxToolBar2")).Caption(wxT("Editor")).Floatable().ToolbarPane().Top());
+    m_AuiManager.AddPane(WxToolBar[tbSEARCHREPLACE], wxAuiPaneInfo().Name(wxT("WxToolBar3")).Caption(wxT("Search/Replace")).Floatable().ToolbarPane().Top());
+    m_AuiManager.AddPane(WxToolBar[tbTEXTVIEW],      wxAuiPaneInfo().Name(wxT("WxToolBar4")).Caption(wxT("Text View")).Floatable().ToolbarPane().Top());
+    m_AuiManager.AddPane(WxToolBar[tbEDITMODE],      wxAuiPaneInfo().Name(wxT("WxToolBar5")).Caption(wxT("Edit Mode")).Floatable().ToolbarPane().Top());
+    m_AuiManager.AddPane(WxToolBar[tbMACRO],         wxAuiPaneInfo().Name(wxT("WxToolBar6")).Caption(wxT("Macro")).Floatable().ToolbarPane().Top());
+
     bool bb;
     m_ToolbarStatus[tbMAX] = false;
     m_Config->Read(wxT("/MadEdit/ShowToolbarStandard"), &bb, true);
@@ -7016,26 +7014,12 @@ void MadEditFrame::OnToolsPlayRecMacro(wxCommandEvent& event)
 
 void MadEditFrame::OnToolsSaveRecMacro(wxCommandEvent& event)
 {
-    wxString dir;
-    if(m_RecentFiles->GetCount())
-    {
-        wxFileName filename(m_RecentFiles->GetHistoryFile(0));
-        dir=filename.GetPath(wxPATH_GET_VOLUME|wxPATH_GET_SEPARATOR);
-    }
-
-    static int filterIndex = 0;
+    wxString dir(g_MadEditHomeDir + wxT("scripts"));
     wxString fileFilter = wxString(wxT("Mad Macro(*.mpy)|*.mpy|")) + wxFileSelectorDefaultWildcardStr + wxT("|All files(*;*.*)");
-    wxFileDialog dlg(this, _("Open Mad Macro File"), dir, wxEmptyString, fileFilter,
-#if wxCHECK_VERSION(2,8,0)
-        wxFD_OPEN );
-#else
-        wxOPEN );
-#endif
-    dlg.SetFilterIndex(filterIndex);
-    if (dlg.ShowModal()==wxID_OK)
-    {
-        wxString filename = dlg.GetPath();
+    wxString filename = wxSaveFileSelector (_("Mad Macro"), fileFilter);
 
+    if(!filename.IsEmpty())
+    {
         wxTextFile scriptfile(filename);
         if(scriptfile.Exists())
         {
@@ -7068,7 +7052,19 @@ void MadEditFrame::OnToolsSaveRecMacro(wxCommandEvent& event)
 #else
                 scriptfile.Write(wxTextFileType_Unix);
 #endif           
-             }
+            }
+            wxFileName fn(filename);
+            wxString saveDir(fn.GetPath());
+            //if(dir == saveDir)
+            {
+                static wxString hlp_prefix(wxT("####"));
+                wxString help, firstLine;
+                firstLine = scriptfile.GetFirstLine();
+                if (firstLine.StartsWith(hlp_prefix, &help))
+                    g_Menu_MadMacro_Scripts->Append(menuMadScrip1 + int(g_Menu_MadMacro_Scripts->GetMenuItemCount()), fn.GetName(), help);
+                else
+                    g_Menu_MadMacro_Scripts->Append(menuMadScrip1 + int(g_Menu_MadMacro_Scripts->GetMenuItemCount()), fn.GetName());
+            }
             scriptfile.Close();
         }
     }

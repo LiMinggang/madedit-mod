@@ -34,15 +34,55 @@ esac
 #AM_PATH_GTK_2_0(2.6.0)
 
 if test "x$IS_MACOS" == "x"; then
-    use_GTK2=yes
+    want_GTK=
+    AC_ARG_WITH(gtk,
+    [  --with-gtk=version    use specified GTK+,
+                otherwise try to find GTK+2 then try GTK+3],
+    [want_GTK="$withval"],
+    [want_GTK=0])
+
+    case "$want_GTK" in
+        3)     ;;
+        2)     ;;
+        0)     ;;
+        *)      AC_MSG_ERROR([
+Unsupported GTK+ version $withval specified. Only GTK+2 and GTK+3
+are supported. 0 is auto.
+                        ])
+                ;;
+    esac
+
+    have_GTK=
     PKG_CHECK_MODULES(glib_gtk2, [
             glib-2.0 >= 2.6.0
             gtk+-2.0 >= 2.6.0
-    ], use_GTK2=yes, use_GTK2=no)
-    if test "$use_GTK2" == "yes"; then
-        CXXFLAGS="$CXXFLAGS $glib_gtk2_CFLAGS"
-        LIBS="$LIBS $glib_gtk2_LIBS"
+    ], have_GTK=2, have_GTK=0)
+
+    if test "$have_GTK" -ne 0; then
+        if test "$want_GTK" -eq 0; then
+            CXXFLAGS="$CXXFLAGS $glib_gtk2_CFLAGS"
+            LIBS="$LIBS $glib_gtk2_LIBS"
+        else
+            if test "$want_GTK" -eq "$have_GTK"; then
+                CXXFLAGS="$CXXFLAGS $glib_gtk2_CFLAGS"
+                LIBS="$LIBS $glib_gtk2_LIBS"
+            else
+                PKG_CHECK_MODULES(glib_gtk3, [
+                    glib-2.0 >= 2.6.0
+                    gtk+-3.0
+                ])
+                CXXFLAGS="$CXXFLAGS $glib_gtk3_CFLAGS"
+                LIBS="$LIBS $glib_gtk3_LIBS"
+            fi
+        fi
     else
+        if test "$want_GTK" -eq 2; then
+            AC_MSG_ERROR([
+Package gtk+-2.0 was not found in the pkg-config search path.
+Perhaps you should add the directory containing `gtk+-2.0.pc' to the PKG_CONFIG_PATH environment variable
+No package 'gtk+-2.0' found
+            ])
+        fi
         PKG_CHECK_MODULES(glib_gtk3, [
             glib-2.0 >= 2.6.0
             gtk+-3.0

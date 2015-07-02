@@ -530,12 +530,16 @@ void MadReplaceDialog::WxButtonReplaceClick(wxCommandEvent& event)
         }
 
         wxFileOffset rangeFrom = -1, rangeTo = -1;
+        wxFileOffset caretpos = g_ActiveMadEdit->GetCaretPosition();
         if(WxCheckBoxSearchInSelection->IsChecked())
         {
             rangeTo = m_SearchTo;
-            wxFileOffset caretpos = g_ActiveMadEdit->GetCaretPosition();
             if(caretpos <= m_SearchFrom || caretpos > m_SearchTo)
                 rangeFrom = m_SearchFrom;
+        }
+        else
+        {
+            rangeFrom = caretpos;
         }
 
         for(;;)
@@ -602,7 +606,7 @@ void MadReplaceDialog::WxButtonReplaceClick(wxCommandEvent& event)
                 msg += WxCheckBoxSearchInSelection->IsChecked()?
                     _("Do you want to find from begin of selection?"):
                     _("Do you want to find from begin of file?");
-    
+
                 if(wxCANCEL == MadMessageBox(msg, _("Find Next"), wxOK|wxCANCEL
 #if (wxMAJOR_VERSION == 2 && wxMINOR_VERSION > 9)
                     |wxCANCEL_DEFAULT
@@ -612,11 +616,24 @@ void MadReplaceDialog::WxButtonReplaceClick(wxCommandEvent& event)
                     m_FindText->SetFocus();
                     break;
                 }
-                rangeFrom = WxCheckBoxSearchInSelection->IsChecked()? m_SearchFrom : 0;
+
                 if(WxCheckBoxSearchInSelection->IsChecked())
                 {
+                    rangeFrom = m_SearchFrom;
+                    rangeTo = m_SearchTo;
                     g_ActiveMadEdit->SetSelection(m_SearchFrom, m_SearchTo);
                 }
+                else
+                {
+                    rangeFrom = 0;
+                    rangeTo = -1;
+                }
+            }
+            else
+            {
+                // Not done, just pause
+                m_FindText->SetFocus();
+                break;
             }
         }
     }
