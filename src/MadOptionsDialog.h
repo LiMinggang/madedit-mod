@@ -19,7 +19,10 @@
 //Do not add custom headers.
 //wx-dvcpp designer will remove them
 ////Header Include Start
+#include <wx/spinctrl.h>
 #include <wx/menu.h>
+#include <wx/richtext/richtextctrl.h>
+#include <wx/aui/auibook.h>
 #include <wx/choice.h>
 #include <wx/listbox.h>
 #include <wx/treectrl.h>
@@ -80,15 +83,93 @@ public:
   //wx-devcpp will remove them. Try adding the custom code 
   //after the block.
   ////GUI Control Declaration Start
-		wxCheckBox *WxCheckBoxPrintSpaceChar;
-		wxCheckBox *WxCheckBoxPrintTabChar;
-		wxCheckBox *WxCheckBoxPrintEndOfLine;
+		wxTextCtrl *WxEditXmlIndentSize;
+		wxStaticText *WxStaticText29;
+		wxBoxSizer *WxBoxSizer50;
+		wxTextCtrl *WxEditXMLversion;
+		wxStaticText *WxStaticText28;
+		wxBoxSizer *WxBoxSizer49;
+		wxBoxSizer *WxBoxSizer48;
+		wxPanel *WxAuiNoteBookPage6;
+		wxTextCtrl *WxEditMaxInStatementIndent;
+		wxStaticText *WxStaticText23;
+		wxBoxSizer *WxBoxSizer41;
+		wxSpinCtrl *WxSpinMinConditionalEvent;
+		wxStaticText *WxStaticText22;
+		wxBoxSizer *WxBoxSizer40;
+		wxCheckBox *WxCheckIndentCol1Comments;
+		wxCheckBox *WxCheckIndentPreprocCond;
+		wxCheckBox *WxCheckIndentPreprocDefine;
+		wxCheckBox *WxCheckIndentPreprocBlock;
+		wxCheckBox *WxCheckIndentSwitches;
+		wxCheckBox *WxCheckIndentNamespaces;
+		wxCheckBox *WxCheckIndentModifiers;
+		wxCheckBox *WxCheckIndentLabels;
+		wxCheckBox *WxCheckIndentClasses;
+		wxCheckBox *WxCheckIndentCase;
+		wxCheckBox *WxCheckForceUseTabs;
+		wxCheckBox *WxCheckUseTab;
+		wxBoxSizer *WxBoxSizer38;
+		wxSpinCtrl *WxSpinIndentation;
+		wxStaticText *WxStaticText17;
+		wxBoxSizer *WxBoxSizer37;
+		wxBoxSizer *WxBoxSizer39;
 		wxCheckBox *WxCheckBoxPrintBookmark;
 		wxMenu *WxPopupMenuDateTimeMark;
 		wxMenu *WxPopupMenuPrintMark;
 		wxButton *WxButtonCancel;
 		wxButton *WxButtonOK;
 		wxBoxSizer *WxBoxSizer2;
+		wxChoice *WxChoiceReferenceAlign;
+		wxStaticText *WxStaticText26;
+		wxChoice *WxChoicePointerAlign;
+		wxStaticText *WxStaticText25;
+		wxBoxSizer *WxBoxSizer46;
+		wxCheckBox *WxCheckFillEmptyLines;
+		wxCheckBox *WxCheckDelEmptyLine;
+		wxCheckBox *WxCheckUnpadParens;
+		wxCheckBox *WxCheckPadHeader;
+		wxCheckBox *WxCheckPadParensIn;
+		wxCheckBox *WxCheckPadParensOut;
+		wxCheckBox *WxCheckPadOperators;
+		wxCheckBox *WxCheckBreakBlocksAll;
+		wxCheckBox *WxCheckBreakBlocks;
+		wxBoxSizer *WxBoxSizer45;
+		wxPanel *WxAuiNoteBookPage5;
+		wxCheckBox *WxCheckBreakAfterLogical;
+		wxBoxSizer *WxBoxSizer44;
+		wxTextCtrl *WxEditSFMaxLineLength;
+		wxStaticText *WxStaticText24;
+		wxBoxSizer *WxBoxSizer43;
+		wxCheckBox *WxCheckBreakLines;
+		wxCheckBox *WxCheckRemoveCommentPrefix;
+		wxCheckBox *WxCheckCloseTemplates;
+		wxCheckBox *WxCheckConvertTabs;
+		wxCheckBox *WxCheckKeepComplex;
+		wxCheckBox *WxCheckKeepBlocks;
+		wxCheckBox *WxCheckRemoveBrackets;
+		wxCheckBox *WxCheckAddOneLineBrackets;
+		wxCheckBox *WxCheckAddBrackets;
+		wxCheckBox *WxCheckBreakElseIfs;
+		wxCheckBox *WxCheckBreakClosing;
+		wxBoxSizer *WxBoxSizer42;
+		wxPanel *WxAuiNoteBookPage4;
+		wxPanel *WxAuiNoteBookPage3;
+		wxCheckBox *WxCheckAttachInlines;
+		wxCheckBox *WxCheckAttachNamespaces;
+		wxCheckBox *WxCheckAttachExternC;
+		wxCheckBox *WxCheckAttachClasses;
+		wxBoxSizer *WxBoxSizer35;
+		wxPanel *WxAuiNoteBookPage2;
+        wxTextCtrl *WxTextSample;
+		wxStaticText *WxStaticText27;
+		wxStaticBoxSizer *WxStaticBoxSizer7;
+		wxRadioBox *WxRadioBoxBracketStyle;
+		wxBoxSizer *WxBoxSizer47;
+		wxPanel *WxAuiNoteBookPage1;
+		wxAuiNotebook *WxAuiNotebook1;
+		wxBoxSizer *WxBoxSizer34;
+		wxPanel *WxNoteBookPage6;
 		wxStaticText *WxStaticText21;
 		wxButton *WxButtonBitmapDir;
 		wxTextCtrl *WxEditBitMapDir;
@@ -157,6 +238,9 @@ public:
 		wxBoxSizer *WxBoxSizer16;
 		wxRadioBox *WxRadioBoxPrintOffset;
 		wxStaticBoxSizer *WxStaticBoxSizer2;
+		wxCheckBox *WxCheckBoxPrintSpaceChar;
+		wxCheckBox *WxCheckBoxPrintTabChar;
+		wxCheckBox *WxCheckBoxPrintEndOfLine;
 		wxCheckBox *WxCheckBoxPrintLineNumber;
 		wxCheckBox *WxCheckBoxPrintSyntax;
 		wxStaticBoxSizer *WxStaticBoxSizer1;
@@ -227,10 +311,30 @@ public:
     //Try copy pasting the below block in your old Form header Files.
 	enum {
 ////GUI Enum Control ID Start
-			ID_WXCHECKBOXPRINTSPACECHAR = 1241,
-			ID_WXCHECKBOXPRINTTABCHAR = 1240,
-			ID_WXCHECKBOXPRINTENDOFLINE = 1239,
-			ID_WXCHECKBOXPRINTBOOKMARK = 1238,
+			ID_WXEDITXMLINDENTSIZE = 1387,
+			ID_WXSTATICTEXT29 = 1386,
+			ID_WXEDITXMLVERSION = 1384,
+			ID_WXSTATICTEXT28 = 1383,
+			ID_WXAUINOTEBOOKPAGE6 = 1379,
+			ID_WXEDITMAXINSTATEMENTINDENT = 1322,
+			ID_WXSTATICTEXT23 = 1321,
+			ID_WXSPINCTRLMININDENT = 1319,
+			ID_WXSTATICTEXT22 = 1315,
+			ID_WXCHECKINDENETCPPCOMMENTS = 1310,
+			ID_WXCHECKINDENTPREPCOND = 1309,
+			ID_WXCHECKINDENTMULTIPREP = 1308,
+			ID_WXCHECKINDENTPREP = 1307,
+			ID_WXCHECKINDENTSWITCHS = 1306,
+			ID_WXCHECKINDENTNS = 1305,
+			ID_WXCHECKINDENTMODIFIERS = 1304,
+			ID_WXCHECKINDENTLABELS = 1303,
+			ID_WXCHECKINDENETCLASSES = 1302,
+			ID_WXCHECKINDENTCASE = 1301,
+			ID_WXCHECKFORCETABS = 1297,
+			ID_WXCHECKUSETABOVERSPACES = 1296,
+			ID_WXSPINCTRLINDENTSIZE = 1318,
+			ID_WXSTATICTEXT17 = 1291,
+			ID_WXCHECKBOXPRINTBOOKMARK = 1379,
 			ID_MNU___Y__M__D_I__M__S_P_2007_02_2408_30_55AM_1191 = 1191,
 			ID_MNU___D__M__Y_24_02_2007_1192 = 1192,
 			ID_MNU___A__D_B_Y_H__M__S_Z_RFC822TIMESTAMP_1195 = 1195,
@@ -268,6 +372,47 @@ public:
 			
 			ID_WXBUTTONCANCEL = 1007,
 			ID_WXBUTTONOK = 1006,
+			ID_WXCHOICEREFERENCEALIGN = 1371,
+			ID_WXSTATICTEXT26 = 1370,
+			ID_WXCHOICEPOINTERALIGN = 1369,
+			ID_WXSTATICTEXT25 = 1368,
+			ID_WXCHECKFILLEMPTYLINES = 1366,
+			ID_WXCHECKDELEMPTYLINE = 1365,
+			ID_WXCHECKUNPADPARENS = 1364,
+			ID_WXCHECKPADHEADER = 1363,
+			ID_WXCHECKPADPARENSIN = 1362,
+			ID_WXCHECKPADPARENSOUT = 1360,
+			ID_WXCHECKPADOPERATORS = 1359,
+			ID_WXCHECKBREAKBLOCKSALL = 1358,
+			ID_WXCHECKBREAKBLOCKS = 1357,
+			ID_WXAUINOTEBOOKPAGE5 = 1288,
+			ID_WXCHECKBREAKAFTERLOGICAL = 1346,
+			ID_WXEDITSFMAXLINELENGTH = 1341,
+			ID_WXSTATICTEXT24 = 1340,
+			ID_WXCHECKBREAKLINES = 1338,
+			ID_WXCHECKREMOVECOMMENTPREFIX = 1337,
+			ID_WXCHECKCLOSETEMPLATES = 1335,
+			ID_WXCHECKCONVERTTABS = 1334,
+			ID_WXCHECKKEEPCOMPLEX = 1333,
+			ID_WXCHECKKEEPBLOCKS = 1332,
+			ID_WXCHECKBOX17 = 1331,
+			ID_WXCHECKADDONELINEBRACKETS = 1330,
+			ID_WXCHECKADDBRACKETS = 1329,
+			ID_WXCHECKBREAKELSEIFS = 1328,
+			ID_WXCHECKBREAKCLOSING = 1327,
+			ID_WXAUINOTEBOOKPAGE4 = 1274,
+			ID_WXAUINOTEBOOKPAGE3 = 1273,
+			ID_WXCHECKATTACHINLINES = 1287,
+			ID_WXCHECKATTACHNAMESPACES = 1286,
+			ID_WXCHECKATTACHEXTERNC = 1285,
+			ID_WXCHECKATTACHCLASSES = 1284,
+			ID_WXAUINOTEBOOKPAGE2 = 1271,
+			ID_WXRICHTEXTSAMPLE = 1378,
+			ID_WXSTATICTEXT27 = 1376,
+			ID_WXRADIOBOXBRACKETSTYLE = 1373,
+			ID_WXAUINOTEBOOKPAGE1 = 1264,
+			ID_WXAUINOTEBOOK1 = 1263,
+			ID_WXNOTEBOOKPAGE6 = 1238,
 			ID_WXSTATICTEXT21 = 1231,
 			ID_WXBITMAP_DIR = 1227,
 			ID_WXEDITBITMAPDIR = 1226,
@@ -309,6 +454,9 @@ public:
 			ID_WXSTATICTEXT7 = 1099,
 			ID_WXCHECKBOXPRINTPAGEHEADER = 1093,
 			ID_WXRADIOBOXPRINTOFFSET = 1091,
+			ID_WXCHECKBOXPRINTSPACECHAR = 1090,
+			ID_WXCHECKBOXPRINTTABCHAR = 1089,
+			ID_WXCHECKBOXPRINTENDOFLINE = 1088,
 			ID_WXCHECKBOXPRINTLINENUMBER = 1087,
 			ID_WXCHECKBOXPRINTSYNTAX = 1084,
 			ID_WXNOTEBOOKPAGE3 = 1062,
@@ -385,6 +533,9 @@ public:
 	void OnDictionaryDirChange(wxCommandEvent& event);
 	void OnSelectDictionary(wxCommandEvent& event);
 	void OnMouseAutoCopyClicked(wxCommandEvent& event);
+    void OnRadioBoxBracketStyleClick(wxCommandEvent& event);
+	void OnFormattingBreakLinesClick(wxCommandEvent& event);
+	void OnPaddingBreakBlocksClick(wxCommandEvent& event);
 };
 
 

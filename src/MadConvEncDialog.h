@@ -12,12 +12,11 @@
 	#pragma hdrstop
 #endif
 
+#include <wx/wxprec.h>
 #ifndef WX_PRECOMP
 	#include <wx/wx.h>
-	#include <wx/dialog.h>
-#else
-	#include <wx/wxprec.h>
 #endif
+#include <wx/dialog.h>
 
 //Do not add custom headers
 //wxDev-C++ designer will remove them

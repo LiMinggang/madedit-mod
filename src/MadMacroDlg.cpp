@@ -38,7 +38,19 @@ MadMacroDlg::MadMacroDlg(wxWindow* parent, bool debug, wxWindowID id, const wxSt
     bSizer1 = new wxBoxSizer( wxVERTICAL );
 	WxStaticBoxSizer1->Add(bSizer1, 1, wxALIGN_CENTER | wxALIGN_TOP | wxEXPAND | wxALL, 5);
 
-    m_pymacro=new MadEdit(this, ID_MADEDIT, wxDefaultPosition, wxSize(640, 480));
+    m_debug = debug;
+    wxSize pymacro(640, 480);
+    if (m_debug)
+    {
+        pymacro = wxSize(640, 240);
+        m_output = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(640, 240), wxTE_READONLY|wxTE_MULTILINE|wxVSCROLL|wxHSCROLL|wxSIMPLE_BORDER );
+    }
+    else
+    {
+        m_output = 0;
+    }
+
+    m_pymacro=new MadEdit(this, ID_MADEDIT, wxDefaultPosition, pymacro);
     m_pymacro->SetFixedWidthMode(false);
     m_pymacro->SetRecordCaretMovements(false);
     m_pymacro->SetInsertSpacesInsteadOfTab(true);
@@ -50,15 +62,8 @@ MadMacroDlg::MadMacroDlg(wxWindow* parent, bool debug, wxWindowID id, const wxSt
     else if (m_pymacro->GetInsertNewLineType() == nltUNIX) endline = wxT("\n");
     m_pymacro->SetText((wxString(wxT("#Create MadEdit Object for active edit")) + endline + wxT("medit = MadEdit()") + endline + endline));
     bSizer1->Add( m_pymacro, 1, wxEXPAND | wxALL, 5 );
-
-    m_debug = debug;
-    if (m_debug)
-    {
-        m_output = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY|wxTE_MULTILINE|wxVSCROLL|wxHSCROLL|wxSIMPLE_BORDER );
+    if (m_output)
         bSizer1->Add( m_output, 1, wxEXPAND | wxALL, 5 );
-    }
-    else
-        m_output = 0;
 
     bSizer2 = new wxBoxSizer( wxHORIZONTAL );
 	WxStaticBoxSizer1->Add(bSizer2, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 2);

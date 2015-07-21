@@ -1485,7 +1485,6 @@ MadUCPair MadLines::PreviousUChar(/*IN_OUT*/MadLineIterator &lit, /*IN_OUT*/wxFi
     return ucq.back();
 }
 
-
 int MadLines::FindStringCase(MadUCQueue &ucqueue, MadStringIterator begin,
                             const MadStringIterator &end, size_t &len)
 // 0: none, 1: first, 2:...

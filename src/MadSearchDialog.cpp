@@ -96,9 +96,6 @@ static void ResizeItem(wxBoxSizer* sizer, wxWindow *item, int ax, int ay)
 
 void MadSearchDialog::CreateGUIControls(void)
 {
-    //do not set FontName, it is not exist on all platforms
-    #define wxFont(p0,p1,p2,p3,p4,p5) wxFont(wxDEFAULT,wxDEFAULT,p2,p3,p4)
-
     //Do not add custom Code here
     //wx-devcpp designer will remove them.
     //Add the custom code before or after the Blocks
@@ -118,31 +115,24 @@ void MadSearchDialog::CreateGUIControls(void)
 	WxBoxSizer2->Add(WxBoxSizer5, 0, wxALIGN_LEFT | wxALIGN_TOP | wxALL, 0);
 
 	WxCheckBoxMoveFocus = new wxCheckBox(this, ID_WXCHECKBOXMOVEFOCUS, _("&Move Focus to Editor Window"), wxPoint(164, 2), wxSize(300, 22), 0, wxDefaultValidator, wxT("WxCheckBoxMoveFocus"));
-	WxCheckBoxMoveFocus->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer5->Add(WxCheckBoxMoveFocus, 0, wxALIGN_LEFT | wxALL, 2);
 
 	WxCheckBoxCaseSensitive = new wxCheckBox(this, ID_WXCHECKBOXCASESENSITIVE, _("&Case Sensitive"), wxPoint(164, 28), wxSize(300, 22), 0, wxDefaultValidator, wxT("WxCheckBoxCaseSensitive"));
-	WxCheckBoxCaseSensitive->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer5->Add(WxCheckBoxCaseSensitive, 0, wxALIGN_LEFT | wxALL, 2);
 
 	WxCheckBoxWholeWord = new wxCheckBox(this, ID_WXCHECKBOXWHOLEWORD, _("&Whole Word Only"), wxPoint(164, 54), wxSize(300, 22), 0, wxDefaultValidator, wxT("WxCheckBoxWholeWord"));
-	WxCheckBoxWholeWord->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer5->Add(WxCheckBoxWholeWord, 0, wxALIGN_LEFT | wxALL, 2);
 
 	WxCheckBoxRegex = new wxCheckBox(this, ID_WXCHECKBOXREGEX, _("Use Regular E&xpressions"), wxPoint(164, 80), wxSize(300, 22), 0, wxDefaultValidator, wxT("WxCheckBoxRegex"));
-	WxCheckBoxRegex->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer5->Add(WxCheckBoxRegex, 0, wxALIGN_LEFT | wxALL, 2);
 
 	WxCheckBoxFindHex = new wxCheckBox(this, ID_WXCHECKBOXFINDHEX, _("Find &Hex String (Example: BE 00 3A or BE003A)"), wxPoint(164, 106), wxSize(300, 22), 0, wxDefaultValidator, wxT("WxCheckBoxFindHex"));
-	WxCheckBoxFindHex->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer5->Add(WxCheckBoxFindHex, 0, wxALIGN_LEFT | wxALL, 2);
 
 	WxCheckBoxSearchThrEndOfFile = new wxCheckBox(this, ID_WXCHECKBOXSEARCHTHRENDOFFILE, _("Search Through &End of File"), wxPoint(164, 132), wxSize(300, 22), 0, wxDefaultValidator, wxT("WxCheckBoxSearchThrEndOfFile"));
-	WxCheckBoxSearchThrEndOfFile->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer5->Add(WxCheckBoxSearchThrEndOfFile, 0, wxALIGN_LEFT | wxALL, 2);
 
 	WxCheckBoxSearchInSelection = new wxCheckBox(this, ID_WXCHECKBOXSEARCHINSELECTION, _("Search In &Selection"), wxPoint(12, 158), wxSize(300, 22), 0, wxDefaultValidator, wxT("WxCheckBoxSearchInSelection"));
-	WxCheckBoxSearchInSelection->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer5->Add(WxCheckBoxSearchInSelection, 0, wxALIGN_LEFT | wxALL, 2);
 
 	wxStaticBox* WxStaticBoxSizer1_StaticBoxObj = new wxStaticBox(this, wxID_ANY, _("Bookmark"));
@@ -150,45 +140,36 @@ void MadSearchDialog::CreateGUIControls(void)
 	WxBoxSizer5->Add(WxStaticBoxSizer1, 0, wxALIGN_LEFT | wxALIGN_TOP | wxALIGN_CENTER | wxALL, 5);
 
 	WxCheckBoxBookmarkLine = new wxCheckBox(this, ID_WXCHECKBOXBOOKMARKLINE, _("Bookmark line"), wxPoint(7, 17), wxSize(300, 22), 0, wxDefaultValidator, wxT("WxCheckBoxBookmarkLine"));
-	WxCheckBoxBookmarkLine->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxStaticBoxSizer1->Add(WxCheckBoxBookmarkLine, 0, wxALIGN_LEFT | wxALL, 2);
 
 	WxBoxSizer3 = new wxBoxSizer(wxVERTICAL);
 	WxBoxSizer1->Add(WxBoxSizer3, 0, wxALIGN_TOP | wxALL, 0);
 
 	WxButtonFindNext = new wxButton(this, ID_WXBUTTONFINDNEXT, _("Find &Next"), wxPoint(2, 2), wxSize(100, 28), 0, wxDefaultValidator, wxT("WxButtonFindNext"));
-	WxButtonFindNext->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer3->Add(WxButtonFindNext, 0, wxALIGN_CENTER | wxALL, 2);
 
 	WxButtonFindPrev = new wxButton(this, ID_WXBUTTONFINDPREV, _("Find &Previous"), wxPoint(2, 34), wxSize(100, 28), 0, wxDefaultValidator, wxT("WxButtonFindPrev"));
-	WxButtonFindPrev->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer3->Add(WxButtonFindPrev, 0, wxALIGN_CENTER | wxALL, 2);
 
 	WxButtonFindAll = new wxButton(this, ID_WXBUTTONFINDALL, _("Find &All"), wxPoint(2, 66), wxSize(100, 28), 0, wxDefaultValidator, wxT("WxButtonFindAll"));
-	WxButtonFindAll->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer3->Add(WxButtonFindAll, 0, wxALIGN_CENTER | wxALL, 2);
 
 	WxButtonCount = new wxButton(this, ID_WXBUTTONCOUNT, _("C&ount"), wxPoint(2, 98), wxSize(100, 28), 0, wxDefaultValidator, wxT("WxButtonCount"));
-	WxButtonCount->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer3->Add(WxButtonCount, 0, wxALIGN_CENTER | wxALL, 2);
 
 	WxButtonReplace = new wxButton(this, ID_WXBUTTONREPLACE, _("&Replace >>"), wxPoint(2, 130), wxSize(100, 28), 0, wxDefaultValidator, wxT("WxButtonReplace"));
-	WxButtonReplace->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer3->Add(WxButtonReplace, 0, wxALIGN_CENTER | wxALL, 2);
 
 	WxButtonClose = new wxButton(this, ID_WXBUTTONCLOSE, _("Close"), wxPoint(2, 162), wxSize(100, 28), 0, wxDefaultValidator, wxT("WxButtonClose"));
-	WxButtonClose->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer3->Add(WxButtonClose, 0, wxALIGN_CENTER | wxALL, 2);
 
 	WxPopupMenuRecentFindText = new wxMenu(wxT(""));
 	
 
 	WxCheckBoxBookmarkOnly = new wxCheckBox(this, ID_WXCHECKBOXBOOKMARKONLY, _("Bookmark only(Find All)"), wxPoint(7, 43), wxSize(300, 17), 0, wxDefaultValidator, wxT("WxCheckBoxBookmarkOnly"));
-	WxCheckBoxBookmarkOnly->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxStaticBoxSizer1->Add(WxCheckBoxBookmarkOnly, 0, wxALIGN_CENTER | wxALL, 2);
 
 	WxCheckBoxPurgeBookmark = new wxCheckBox(this, ID_WXCHECKBOXPURGEBOOKMARK, _("Purge mark for each search session"), wxPoint(311, 19), wxSize(300, 17), 0, wxDefaultValidator, wxT("WxCheckBoxPurgeBookmark"));
-	WxCheckBoxPurgeBookmark->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxStaticBoxSizer1->Add(WxCheckBoxPurgeBookmark, 0, wxALIGN_CENTER | wxALL, 2);
 
 	SetTitle(_("Search"));
@@ -199,9 +180,6 @@ void MadSearchDialog::CreateGUIControls(void)
 	GetSizer()->SetSizeHints(this);
 	
     ////GUI Items Creation End
-
-    //restore wxFont
-    #undef wxFont
 
     // removed: gogo, 19.09.2009
     //this->SetPosition(wxPoint(300,100));
@@ -320,8 +298,14 @@ void MadSearchDialog::MadSearchDialogClose(wxCloseEvent& event)
 void MadSearchDialog::WxButtonCloseClick(wxCommandEvent& event)
 {
     Show(false);
+
+    ((wxFrame*)wxTheApp->GetTopWindow())->Raise();
+
     if(g_ActiveMadEdit!=NULL)
+    {
         g_ActiveMadEdit->Refresh(false);
+        g_ActiveMadEdit->SetFocus();
+    }
 }
 
 /*
@@ -379,10 +363,12 @@ void MadSearchDialog::WxButtonFindNextClick(wxCommandEvent& event)
                     rangeFrom, rangeTo);
                 if(sr != SR_EXPR_ERROR)
                 {
-                    RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("FindTextNext(\"%s\", %s, %s, %s, %s, %s)"), text.c_str(),
-                                WxCheckBoxRegex->GetValue()?wxT("True"):wxT("False"),
-                                WxCheckBoxCaseSensitive->GetValue()?wxT("True"):wxT("False"),
-                                WxCheckBoxWholeWord->GetValue()?wxT("True"):wxT("False"), (wxLongLong(rangeFrom).ToString()).c_str(), (wxLongLong(rangeTo).ToString()).c_str()));
+					wxString fnstr(wxString::Format(wxT("FindTextNext(\"%s\", %s, %s, %s, %s, %s)"), text.c_str(),
+									WxCheckBoxRegex->GetValue()?wxT("True"):wxT("False"),
+									WxCheckBoxCaseSensitive->GetValue()?wxT("True"):wxT("False"),
+									WxCheckBoxWholeWord->GetValue()?wxT("True"):wxT("False"), (wxLongLong(rangeFrom).ToString()).c_str(), (wxLongLong(rangeTo).ToString()).c_str()));
+					fnstr.Replace(wxT("\\"), wxT("\\\\"));
+					RecordAsMadMacro(g_ActiveMadEdit, fnstr);
                 }
             }
 
@@ -503,10 +489,12 @@ void MadSearchDialog::WxButtonFindPrevClick(wxCommandEvent& event)
                     WxCheckBoxCaseSensitive->GetValue(),
                     WxCheckBoxWholeWord->GetValue(),
                     rangeTo, rangeFrom);
-                RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("FindTextPrevious(\"%s\", %s, %s, %s, %s, %s)"), text.c_str(),
+					wxString fnstr(wxString::Format(wxT("FindTextPrevious(\"%s\", %s, %s, %s, %s, %s)"), text.c_str(),
                             WxCheckBoxRegex->GetValue()?wxT("True"):wxT("False"),
                             WxCheckBoxCaseSensitive->GetValue()?wxT("True"):wxT("False"),
                             WxCheckBoxWholeWord->GetValue()?wxT("True"):wxT("False"), (wxLongLong(rangeFrom).ToString()).c_str(), (wxLongLong(rangeTo).ToString()).c_str()));
+					fnstr.Replace(wxT("\\"), wxT("\\\\"));
+					RecordAsMadMacro(g_ActiveMadEdit, fnstr);
             }
 
             if(sr!=SR_NO)
@@ -1015,10 +1003,13 @@ void MadSearchDialog::WxButtonFindAllClick(wxCommandEvent& event)
                 WxCheckBoxWholeWord->GetValue(),
                 false,
                 &begpos, &endpos, rangeFrom, rangeTo);
-            RecordAsMadMacro(madedit, wxString::Format(wxT("FindTextAll(\"%s\", %s, %s, %s)"), expr.c_str(),
+            
+			wxString fnstr(wxString::Format(wxT("FindTextAll(\"%s\", %s, %s, %s)"), expr.c_str(),
                             WxCheckBoxRegex->GetValue()?wxT("True"):wxT("False"),
                             WxCheckBoxCaseSensitive->GetValue()?wxT("True"):wxT("False"),
                             WxCheckBoxWholeWord->GetValue()?wxT("True"):wxT("False")));
+			fnstr.Replace(wxT("\\"), wxT("\\\\"));
+			RecordAsMadMacro(g_ActiveMadEdit, fnstr);
         }
 
         if(ok<0) return;

@@ -31,17 +31,17 @@ END_EVENT_TABLE()
 
 #if defined(__WXMSW__)
 #ifdef _WIN64
-wxString g_MadEdit_Version(wxT("MadEdit-Mod 0.3.3.1 win64"));
+wxString g_MadEdit_Version(wxT("MadEdit-Mod 0.3.5 win64"));
 #else
-wxString g_MadEdit_Version(wxT("MadEdit-Mod 0.3.3.1 win32"));
+wxString g_MadEdit_Version(wxT("MadEdit-Mod 0.3.5 win32"));
 #endif
 #elif defined(__WXMAC__)
-wxString g_MadEdit_Version(wxT("MadEdit-Mod 0.3.3.1 MacOS"));
-#else
+wxString g_MadEdit_Version(wxT("MadEdit-Mod 0.3.5 MacOS"));
+#else //Linux
 #if defined(__x86_64__) || defined(__LP64__)
-wxString g_MadEdit_Version(wxT("MadEdit-Mod 0.3.3.1 x86_x64"));
+wxString g_MadEdit_Version(wxT("MadEdit-Mod 0.3.5 x86_x64"));
 #else
-wxString g_MadEdit_Version(wxT("MadEdit-Mod 0.3.3.1 i686"));
+wxString g_MadEdit_Version(wxT("MadEdit-Mod 0.3.5 i686"));
 #endif
 #endif
 
@@ -58,9 +58,6 @@ MadAboutDialog::~MadAboutDialog() {}
 
 void MadAboutDialog::CreateGUIControls(void)
 {
-    //do not set FontName, it is not exist on all platforms
-    #define wxFont(p0,p1,p2,p3,p4,p5) wxFont(wxDEFAULT,wxDEFAULT,p2,p3,p4)
-
     //Do not add custom Code here
     //wx-devcpp designer will remove them.
     //Add the custom code before or after the Blocks
@@ -78,30 +75,25 @@ void MadAboutDialog::CreateGUIControls(void)
 
 	WxStaticBitmap1 = new wxStaticBitmap(this, ID_WXSTATICBITMAP1, wxNullBitmap, wxPoint(5, 5), wxSize(48, 48) );
 	WxStaticBitmap1->Enable(false);
-	WxStaticBitmap1->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer4->Add(WxStaticBitmap1,0,wxALIGN_CENTER | wxALL,5);
 
 	WxStaticBitmap2 = new wxStaticBitmap(this, ID_WXSTATICBITMAP2, wxNullBitmap, wxPoint(5, 63), wxSize(48, 48) );
 	WxStaticBitmap2->Enable(false);
-	WxStaticBitmap2->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer4->Add(WxStaticBitmap2,0,wxALIGN_CENTER | wxALL,5);
 
-	WxMemo1 = new wxTextCtrl(this, ID_WXMEMO1, wxT(""), wxPoint(70, 2), wxSize(350, 150), wxTE_READONLY | wxTE_AUTO_URL | wxTE_MULTILINE, wxDefaultValidator, wxT("WxMemo1"));
+	WxMemo1 = new wxTextCtrl(this, ID_WXMEMO1, wxT(""), wxPoint(70, 2), wxSize(400, 200), wxTE_READONLY | wxTE_AUTO_URL | wxTE_MULTILINE, wxDefaultValidator, wxT("WxMemo1"));
 	//WxMemo1->SetMaxLength(0);
 	WxMemo1->SetFocus();
 	WxMemo1->SetInsertionPointEnd();
-	WxMemo1->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer2->Add(WxMemo1,0,wxALIGN_CENTER | wxALL,2);
 
 	WxBoxSizer3 = new wxBoxSizer(wxHORIZONTAL);
 	WxBoxSizer1->Add(WxBoxSizer3, 0, wxALIGN_CENTER | wxALL, 3);
 
 	WxButtonOK = new wxButton(this, wxID_OK, _("&OK"), wxPoint(4, 4), wxSize(90, 30), 0, wxDefaultValidator, wxT("WxButtonOK"));
-	WxButtonOK->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer3->Add(WxButtonOK,0,wxALIGN_CENTER | wxALL,4);
 
 	WxButtonCancel = new wxButton(this, wxID_CANCEL, _("&Cancel"), wxPoint(102, 4), wxSize(90, 30), 0, wxDefaultValidator, wxT("WxButtonCancel"));
-	WxButtonCancel->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer3->Add(WxButtonCancel,0,wxALIGN_CENTER | wxALL,4);
 
 	SetTitle(_("About MadEdit-Mod"));
@@ -114,8 +106,6 @@ void MadAboutDialog::CreateGUIControls(void)
 	
     ////GUI Items Creation End
 
-    //restore wxFont
-    #undef wxFont
     
     WxStaticBitmap1->SetBitmap(wxBitmap(Mad_xpm));
     WxStaticBitmap1->Enable(true);

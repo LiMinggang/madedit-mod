@@ -1,3 +1,22 @@
+madedit-mod (0.3.4.1-1) unstable; urgency=low
+
+  1. Fix: Saved config of Astyle don't take effect
+  2. New: Group text convert/format into menu group
+  3. New: Added XML formatter and config
+  4. Updated translation
+
+ -- Minggang Li <liminggang@gmail.com>  Wed, 8 July 2015 21:05:40 +0800
+
+madedit-mod (0.3.4-1) unstable; urgency=low
+
+  1. Fix: Record string issue in FindNext, FindPrev, Replace, ReplaceAll while Regex was enabled
+  2. New: Automatically raise window after closing Search/Replace/FindInFiles dialog
+  3. New: GTK+ version selection supported(--with-gtk=[VERSION]), 2 and 3 are supported
+  4. New: Astyle is integrated for formatting C/C++/C#/Java code(Ctrl-Shift-K)
+  5. Updated Simplified Chinese
+
+ -- Minggang Li <liminggang@gmail.com>  Tue, 7 July 2015 21:05:40 +0800
+
 madedit-mod (0.3.3.1-1) unstable; urgency=high
 
   1. Fix: ReplaceTextAll being recorded as FindTextAll

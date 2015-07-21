@@ -5,7 +5,8 @@ INCLUDES = -I$(top_srcdir)/charset-detector/include -I$(top_srcdir)/charset-dete
 -I$(top_srcdir)/charset-detector/src/tables -I$(top_srcdir)/spellchecker -I$(top_srcdir)/spellchecker/hunspell/src \
 -I$(top_srcdir)/spellchecker/hunspell/src/hunspell -I$(top_srcdir)/spellchecker/hunspell/src/win_api \
 -I$(top_srcdir)/minipython/Include -I$(top_srcdir)/minipython/Python \
--I$(top_srcdir)/minipython/Modules/zlib -I$(top_srcdir)/markdown
+-I$(top_srcdir)/minipython/Modules/zlib -I$(top_srcdir)/markdown -I$(top_srcdir)/astyle \
+-I$(top_srcdir)/astyle/astyle
 
 madedit_CXXFLAGS = -DDATA_DIR=\"${datadir}\"
 madedit_SOURCES =	src/MadAboutDialog.cpp \
@@ -400,7 +401,16 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	minipython/Python/symtable.c \
 	minipython/Python/sysmodule.c \
 	minipython/Python/thread.c \
-	minipython/Python/traceback.c
+	minipython/Python/traceback.c \
+	astyle/formattersettings.cpp \
+	astyle/formattersettings.h \
+	astyle/asstreamiterator.cpp \
+	astyle/asstreamiterator.h \
+	astyle/astyle/ASBeautifier.cpp \
+	astyle/astyle/ASEnhancer.cpp \
+	astyle/astyle/ASFormatter.cpp \
+	astyle/astyle/ASResource.cpp \
+	astyle/astyle/astyle.h
 
 dist_doc_DATA = gpl-3.0.txt README.txt MadPython.txt
 pixmapsdir = $(datadir)/pixmaps
@@ -553,7 +563,7 @@ loc:
 		dir=./locale/$$lang; \
 		$(mkinstalldirs) $$dir; \
 		if test -r $(podir)/$$lang.gmo; then \
-		    msgmerge -U $(podir)/$$lang.po $(podir)/madedit.pot \
+			msgmerge -U $(podir)/$$lang.po $(podir)/madedit.pot \
 			msgfmt -o $(podir)/$$lang.gmo $(podir)/$$lang.po \
 			cp $(podir)/$$lang.gmo $$dir/$(DOMAIN).mo; \
 			echo "installing $(podir)/$$lang.gmo as $$dir/$(DOMAIN).mo"; \

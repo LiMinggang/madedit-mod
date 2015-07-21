@@ -4,8 +4,8 @@ object frmNewForm: TfrmNewForm
   AutoScroll = False
   BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'Options'
-  ClientHeight = 420
-  ClientWidth = 691
+  ClientHeight = 503
+  ClientWidth = 699
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -39,8 +39,8 @@ object frmNewForm: TfrmNewForm
   object WxBoxSizer1: TWxBoxSizer
     Left = 0
     Top = 0
-    Width = 691
-    Height = 420
+    Width = 699
+    Height = 503
     Align = alClient
     TabOrder = 0
     Orientation = wxVertical
@@ -53,17 +53,15 @@ object frmNewForm: TfrmNewForm
     object WxNotebook1: TWxNotebook
       Left = 0
       Top = 0
-      Width = 681
-      Height = 342
-      ActivePage = WxNoteBookPage2
-      TabIndex = 1
+      Width = 683
+      Height = 442
+      ActivePage = WxNoteBookPage6
+      TabIndex = 5
       TabOrder = 0
       Wx_Class = 'wxAuiNotebook'
       Wx_ControlOrientation = wxControlVertical
       Wx_EventList.Strings = (
-        'EVT_NOTEBOOK_PAGE_CHANGED:OnPageChanged'
-        'EVT_UPDATE_UI:OnUpdateUI'
-        'EVT_NOTEBOOK_PAGE_CHANGING:OnPageChanging')
+        'EVT_UPDATE_UI:OnUpdateUI')
       Wx_IDName = 'ID_WXNOTEBOOK1'
       Wx_IDValue = 1002
       Wx_Hidden = False
@@ -107,8 +105,8 @@ object frmNewForm: TfrmNewForm
         object WxBoxSizer3: TWxBoxSizer
           Left = 0
           Top = 0
-          Width = 673
-          Height = 314
+          Width = 675
+          Height = 414
           Align = alClient
           TabOrder = 0
           Orientation = wxVertical
@@ -136,6 +134,7 @@ object frmNewForm: TfrmNewForm
               Top = 3
               Width = 140
               Height = 21
+              ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
               ItemHeight = 13
               TabOrder = 0
               Wx_BGColor = clBlack
@@ -304,6 +303,7 @@ object frmNewForm: TfrmNewForm
               Height = 21
               BevelInner = bvNone
               BevelOuter = bvNone
+              ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
               AutoSize = False
               TabOrder = 0
               Text = '0'
@@ -392,6 +392,7 @@ object frmNewForm: TfrmNewForm
               Height = 21
               BevelInner = bvNone
               BevelOuter = bvNone
+              ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
               AutoSize = False
               TabOrder = 0
               Text = '0'
@@ -478,6 +479,7 @@ object frmNewForm: TfrmNewForm
               Top = 3
               Width = 140
               Height = 21
+              ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
               ItemHeight = 13
               TabOrder = 0
               Wx_BGColor = clBlack
@@ -720,8 +722,8 @@ object frmNewForm: TfrmNewForm
         object WxBoxSizer8: TWxBoxSizer
           Left = 0
           Top = 0
-          Width = 673
-          Height = 314
+          Width = 675
+          Height = 414
           Align = alClient
           TabOrder = 0
           Orientation = wxVertical
@@ -751,6 +753,7 @@ object frmNewForm: TfrmNewForm
               Height = 21
               BevelInner = bvNone
               BevelOuter = bvNone
+              ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
               AutoSize = False
               TabOrder = 0
               Text = '0'
@@ -839,6 +842,7 @@ object frmNewForm: TfrmNewForm
               Height = 21
               BevelInner = bvNone
               BevelOuter = bvNone
+              ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
               AutoSize = False
               TabOrder = 0
               Text = '0'
@@ -927,6 +931,7 @@ object frmNewForm: TfrmNewForm
               Height = 21
               BevelInner = bvNone
               BevelOuter = bvNone
+              ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
               AutoSize = False
               TabOrder = 0
               Text = '0'
@@ -1015,6 +1020,7 @@ object frmNewForm: TfrmNewForm
               Height = 21
               BevelInner = bvNone
               BevelOuter = bvNone
+              ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
               AutoSize = False
               TabOrder = 0
               Text = '0'
@@ -1103,6 +1109,7 @@ object frmNewForm: TfrmNewForm
               Height = 21
               BevelInner = bvNone
               BevelOuter = bvNone
+              ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
               AutoSize = False
               TabOrder = 0
               Wx_BGColor = clBlack
@@ -1533,8 +1540,8 @@ object frmNewForm: TfrmNewForm
         object WxBoxSizer14: TWxBoxSizer
           Left = 0
           Top = 0
-          Width = 673
-          Height = 314
+          Width = 675
+          Height = 414
           Align = alClient
           TabOrder = 0
           Wx_Class = 'wxBoxSizer'
@@ -1926,6 +1933,7 @@ object frmNewForm: TfrmNewForm
                   Height = 21
                   BevelInner = bvNone
                   BevelOuter = bvNone
+                  ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
                   AutoSize = False
                   TabOrder = 1
                   Wx_BGColor = clBlack
@@ -2038,6 +2046,7 @@ object frmNewForm: TfrmNewForm
                   Height = 21
                   BevelInner = bvNone
                   BevelOuter = bvNone
+                  ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
                   AutoSize = False
                   TabOrder = 4
                   Wx_BGColor = clBlack
@@ -2150,6 +2159,7 @@ object frmNewForm: TfrmNewForm
                   Height = 21
                   BevelInner = bvNone
                   BevelOuter = bvNone
+                  ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
                   AutoSize = False
                   TabOrder = 7
                   Wx_BGColor = clBlack
@@ -2328,6 +2338,7 @@ object frmNewForm: TfrmNewForm
                   Height = 21
                   BevelInner = bvNone
                   BevelOuter = bvNone
+                  ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
                   AutoSize = False
                   TabOrder = 1
                   Wx_BGColor = clBlack
@@ -2440,6 +2451,7 @@ object frmNewForm: TfrmNewForm
                   Height = 21
                   BevelInner = bvNone
                   BevelOuter = bvNone
+                  ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
                   AutoSize = False
                   TabOrder = 4
                   Wx_BGColor = clBlack
@@ -2552,6 +2564,7 @@ object frmNewForm: TfrmNewForm
                   Height = 21
                   BevelInner = bvNone
                   BevelOuter = bvNone
+                  ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
                   AutoSize = False
                   TabOrder = 7
                   Wx_BGColor = clBlack
@@ -2644,8 +2657,8 @@ object frmNewForm: TfrmNewForm
         object WxBoxSizer18: TWxBoxSizer
           Left = 0
           Top = 0
-          Width = 673
-          Height = 314
+          Width = 675
+          Height = 414
           Align = alClient
           TabOrder = 0
           Wx_Class = 'wxBoxSizer'
@@ -2773,6 +2786,7 @@ object frmNewForm: TfrmNewForm
                 Height = 21
                 BevelInner = bvNone
                 BevelOuter = bvNone
+                ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
                 AutoSize = False
                 Color = clBtnFace
                 TabOrder = 1
@@ -2872,6 +2886,7 @@ object frmNewForm: TfrmNewForm
                   Top = 29
                   Width = 140
                   Height = 200
+                  ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
                   ItemHeight = 13
                   TabOrder = 1
                   EVT_LISTBOX = 'WxListBoxKeysSelected'
@@ -2961,6 +2976,7 @@ object frmNewForm: TfrmNewForm
                   Height = 21
                   BevelInner = bvNone
                   BevelOuter = bvNone
+                  ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
                   AutoSize = False
                   TabOrder = 1
                   Wx_BGColor = clBlack
@@ -2998,6 +3014,7 @@ object frmNewForm: TfrmNewForm
                   Height = 21
                   BevelInner = bvNone
                   BevelOuter = bvNone
+                  ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
                   AutoSize = False
                   Color = clBtnFace
                   TabOrder = 3
@@ -3216,8 +3233,8 @@ object frmNewForm: TfrmNewForm
         object WxBoxSizer29: TWxBoxSizer
           Left = 0
           Top = 0
-          Width = 673
-          Height = 314
+          Width = 675
+          Height = 414
           Align = alClient
           TabOrder = 0
           Orientation = wxVertical
@@ -3322,6 +3339,7 @@ object frmNewForm: TfrmNewForm
               Top = 20
               Width = 320
               Height = 21
+              ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
               ItemHeight = 13
               TabOrder = 2
               Text = 'WxChoiceDictionary'
@@ -3384,6 +3402,7 @@ object frmNewForm: TfrmNewForm
                 Height = 19
                 BevelInner = bvNone
                 BevelOuter = bvNone
+                ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
                 AutoSize = False
                 TabOrder = 0
                 EVT_TEXT_ENTER = 'OnDictionaryDirChange'
@@ -3505,6 +3524,7 @@ object frmNewForm: TfrmNewForm
                 Height = 19
                 BevelInner = bvNone
                 BevelOuter = bvNone
+                ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
                 AutoSize = False
                 TabOrder = 0
                 Wx_BGColor = clBlack
@@ -3625,6 +3645,7 @@ object frmNewForm: TfrmNewForm
                 Height = 19
                 BevelInner = bvNone
                 BevelOuter = bvNone
+                ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
                 AutoSize = False
                 TabOrder = 0
                 Wx_BGColor = clBlack
@@ -3730,10 +3751,2380 @@ object frmNewForm: TfrmNewForm
           end
         end
       end
+      object WxNoteBookPage6: TWxNoteBookPage
+        Caption = 'Source Formatter'
+        Wx_BKColor = clBlack
+        Wx_Class = 'wxPanel'
+        Wx_ControlOrientation = wxControlVertical
+        Wx_Default = False
+        Wx_EventList.Strings = (
+          'EVT_UPDATE_UI:OnUpdateUI')
+        Wx_FGColor = clBlack
+        Wx_GeneralStyle = []
+        Wx_Hidden = False
+        Wx_IDName = 'ID_WXNOTEBOOKPAGE6'
+        Wx_IDValue = 1238
+        object WxBoxSizer34: TWxBoxSizer
+          Left = 0
+          Top = 0
+          Width = 675
+          Height = 414
+          Align = alClient
+          TabOrder = 0
+          Wx_Class = 'wxBoxSizer'
+          Wx_ControlOrientation = wxControlVertical
+          Wx_IDName = 'ID_WXBOXSIZER34'
+          Wx_IDValue = 1239
+          object WxAuiNotebook1: TWxAuiNotebook
+            Left = 5
+            Top = 5
+            Width = 668
+            Height = 398
+            ActivePage = WxAuiNoteBookPage6
+            TabIndex = 5
+            TabOrder = 0
+            Wx_Class = 'wxAuiNotebook'
+            Wx_ControlOrientation = wxControlVertical
+            Wx_EventList.Strings = (
+              'EVT_UPDATE_UI:OnUpdateUI'
+              'EVT_AUINOTEBOOK_PAGE_CLOSE:OnNotebookPageClose'
+              'EVT_AUINOTEBOOK_PAGE_CLOSED:OnNotebookPageClosed'
+              'EVT_AUINOTEBOOK_PAGE_CHANGED:OnNotebookPageChanged'
+              'EVT_AUINOTEBOOK_PAGE_CHANGING:OnNotebookPageChanging'
+              'EVT_AUINOTEBOOK_BUTTON:OnNotebookButton'
+              'EVT_AUINOTEBOOK_BEGIN_DRAG:OnNotebookBeginDrag'
+              'EVT_AUINOTEBOOK_END_DRAG:OnNotebookEndDrag'
+              'EVT_AUINOTEBOOK_DRAG_MOTION:OnNotebookDragMotion'
+              'EVT_AUINOTEBOOK_ALLOW_DND:OnNotebookAllowDND'
+              'EVT_AUINOTEBOOK_DRAG_DONE:OnNotebookDragDone'
+              'EVT_AUINOTEBOOK_TAB_MIDDLE_DOWN:OnNotebookTabMDown'
+              'EVT_AUINOTEBOOK_TAB_MIDDLE_UP:OnNotebookTabMUp'
+              'EVT_AUINOTEBOOK_TAB_RIGHT_DOWN:OnNotebookTabRDown'
+              'EVT_AUINOTEBOOK_TAB_RIGHT_UP:OnNotebookTabRUp'
+              'EVT_AUINOTEBOOK_BG_DCLICK:OnNotebook')
+            Wx_IDName = 'ID_WXAUINOTEBOOK1'
+            Wx_IDValue = 1263
+            Wx_Hidden = False
+            Wx_AuiNoteBookStyle = [wxAUI_NB_TAB_SPLIT, wxAUI_NB_TAB_MOVE, wxAUI_NB_SCROLL_BUTTONS, wxAUI_NB_CLOSE_ON_ACTIVE_TAB]
+            Wx_GeneralStyle = []
+            Wx_Alignment = [wxALIGN_LEFT]
+            Wx_BookAlignment = wxAUI_NB_TOP
+            Wx_PaneCaption = 'WxAuiNotebook1'
+            Wx_PaneName = 'WxAuiNotebook1_Pane'
+            Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+            Wx_Aui_Dockable_Direction = []
+            Wx_Aui_Pane_Style = []
+            Wx_Aui_Pane_Buttons = []
+            Wx_BestSize_Height = 0
+            Wx_BestSize_Width = 0
+            Wx_MinSize_Height = 193
+            Wx_MinSize_Width = 289
+            Wx_MaxSize_Height = 0
+            Wx_MaxSize_Width = 0
+            Wx_Floating_Height = 0
+            Wx_Floating_Width = 0
+            Wx_Floating_X_Pos = 0
+            Wx_Floating_Y_Pos = 0
+            object WxAuiNoteBookPage1: TWxAuiNoteBookPage
+              Caption = 'Style'
+              Wx_BKColor = clBlack
+              Wx_Class = 'wxPanel'
+              Wx_ControlOrientation = wxControlVertical
+              Wx_Default = False
+              Wx_EventList.Strings = (
+                'EVT_UPDATE_UI:OnUpdateUI')
+              Wx_FGColor = clBlack
+              Wx_GeneralStyle = []
+              Wx_Hidden = False
+              Wx_IDName = 'ID_WXAUINOTEBOOKPAGE1'
+              Wx_IDValue = 1264
+              object WxBoxSizer47: TWxBoxSizer
+                Left = 0
+                Top = 0
+                Width = 660
+                Height = 370
+                Align = alClient
+                TabOrder = 0
+                Wx_Class = 'wxBoxSizer'
+                Wx_ControlOrientation = wxControlVertical
+                Wx_IDName = 'ID_WXBOXSIZER47'
+                Wx_IDValue = 1372
+                object WxRadioBoxBracketStyle: TWxRadioBox
+                  Left = 2
+                  Top = 28
+                  Width = 124
+                  Height = 310
+                  Caption = 'Bracket Style'
+                  Orientation = wxdVertical
+                  Items.Strings = (
+                    'Allman'
+                    'Java'
+                    'Kr'
+                    'Stroustrup'
+                    'Whitesmith'
+                    'VTK'
+                    'Banner'
+                    'Gnu'
+                    'Linux'
+                    'Horstmann'
+                    '1TBS'
+                    'Google'
+                    'Pico'
+                    'Lisp'
+                    'Custom')
+                  TabOrder = 0
+                  Wx_BGColor = clBlack
+                  Wx_Class = 'wxRadioBox'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_EventList.Strings = (
+                    'EVT_RADIOBOX:OnClick'
+                    'EVT_UPDATE_UI:OnUpdateUI')
+                  Wx_FGColor = clBlack
+                  Wx_GeneralStyle = [wxTAB_TRAVERSAL]
+                  Wx_IDName = 'ID_WXRADIOBOXBRACKETSTYLE'
+                  Wx_IDValue = 1373
+                  Wx_RadioBoxStyle = wxRA_SPECIFY_COLS
+                  Wx_Selection = 0
+                  Wx_Border = 2
+                  Wx_Alignment = [wxALIGN_LEFT, wxALIGN_CENTER]
+                  Wx_PaneCaption = 'WxRadioBoxBracketStyle'
+                  Wx_PaneName = 'WxRadioBoxBracketStyle_Pane'
+                  Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                  Wx_Aui_Dockable_Direction = []
+                  Wx_Aui_Pane_Style = []
+                  Wx_Aui_Pane_Buttons = []
+                  Wx_BestSize_Height = 0
+                  Wx_BestSize_Width = 0
+                  Wx_MinSize_Height = 0
+                  Wx_MinSize_Width = 0
+                  Wx_MaxSize_Height = 0
+                  Wx_MaxSize_Width = 0
+                  Wx_Floating_Height = 0
+                  Wx_Floating_Width = 0
+                  Wx_Floating_X_Pos = 0
+                  Wx_Floating_Y_Pos = 0
+                end
+                object WxStaticBoxSizer7: TWxStaticBoxSizer
+                  Left = 133
+                  Top = 5
+                  Width = 257
+                  Height = 357
+                  TabOrder = 1
+                  Orientation = wxVertical
+                  Wx_Caption = 'Sample'
+                  Wx_Class = 'wxStaticBoxSizer'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_IDName = 'ID_WXSTATICBOXSIZER7'
+                  Wx_IDValue = 1375
+                  object WxStaticText27: TWxStaticText
+                    Left = 10
+                    Top = 20
+                    Width = 237
+                    Height = 17
+                    Caption = 'Sample of the bracket style option chosen to use:'
+                    TabOrder = 1
+                    Wx_BGColor = clBlack
+                    Wx_Class = 'wxStaticText'
+                    Wx_ControlOrientation = wxControlVertical
+                    Wx_FGColor = clBlack
+                    Wx_GeneralStyle = []
+                    Wx_Hidden = False
+                    Wx_IDName = 'ID_WXSTATICTEXT27'
+                    Wx_IDValue = 1376
+                    Wx_LabelStyle = []
+                    Wx_PaneCaption = 'WxStaticText27'
+                    Wx_PaneName = 'WxStaticText27_Pane'
+                    Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                    Wx_Aui_Dockable_Direction = []
+                    Wx_Aui_Pane_Style = []
+                    Wx_Aui_Pane_Buttons = []
+                    Wx_BestSize_Height = 0
+                    Wx_BestSize_Width = 0
+                    Wx_MinSize_Height = 0
+                    Wx_MinSize_Width = 0
+                    Wx_MaxSize_Height = 0
+                    Wx_MaxSize_Width = 0
+                    Wx_Floating_Height = 0
+                    Wx_Floating_Width = 0
+                    Wx_Floating_X_Pos = 0
+                    Wx_Floating_Y_Pos = 0
+                  end
+                  object WxRichTextSample: TWxRichTextCtrl
+                    Left = 19
+                    Top = 47
+                    Width = 219
+                    Height = 300
+                    BevelInner = bvNone
+                    BevelOuter = bvNone
+                    Font.Charset = GB2312_CHARSET
+                    Font.Color = clWindowText
+                    Font.Height = -11
+                    Font.Name = 'MS Sans Serif'
+                    Font.Style = []
+                    ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+                    Lines.Strings = (
+                      'WxRichTextSample')
+                    ParentFont = False
+                    ScrollBars = ssBoth
+                    TabOrder = 2
+                    Wx_BGColor = clBlack
+                    Wx_Class = 'wxRichTextCtrl'
+                    Wx_ControlOrientation = wxControlVertical
+                    Wx_RichTextStyle = []
+                    Wx_FGColor = clBlack
+                    Wx_GeneralStyle = [wxVSCROLL, wxHSCROLL]
+                    Wx_IDName = 'ID_WXRICHTEXTSAMPLE'
+                    Wx_IDValue = 1378
+                    Wx_MaxLength = 0
+                    Wx_PaneCaption = 'WxRichTextCtrl1'
+                    Wx_PaneName = 'WxRichTextCtrl1_Pane'
+                    Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                    Wx_Aui_Dockable_Direction = []
+                    Wx_Aui_Pane_Style = []
+                    Wx_Aui_Pane_Buttons = []
+                    Wx_BestSize_Height = 0
+                    Wx_BestSize_Width = 0
+                    Wx_MinSize_Height = 0
+                    Wx_MinSize_Width = 0
+                    Wx_MaxSize_Height = 0
+                    Wx_MaxSize_Width = 0
+                    Wx_Floating_Height = 0
+                    Wx_Floating_Width = 0
+                    Wx_Floating_X_Pos = 0
+                    Wx_Floating_Y_Pos = 0
+                  end
+                end
+              end
+            end
+            object WxAuiNoteBookPage2: TWxAuiNoteBookPage
+              Caption = 'Brackets'
+              Wx_BKColor = clBlack
+              Wx_Class = 'wxPanel'
+              Wx_ControlOrientation = wxControlVertical
+              Wx_Default = False
+              Wx_EventList.Strings = (
+                'EVT_UPDATE_UI:OnUpdateUI')
+              Wx_FGColor = clBlack
+              Wx_GeneralStyle = []
+              Wx_Hidden = False
+              Wx_IDName = 'ID_WXAUINOTEBOOKPAGE2'
+              Wx_IDValue = 1271
+              object WxBoxSizer35: TWxBoxSizer
+                Left = 0
+                Top = 0
+                Width = 660
+                Height = 370
+                Align = alClient
+                TabOrder = 0
+                Orientation = wxVertical
+                Wx_Class = 'wxBoxSizer'
+                Wx_ControlOrientation = wxControlVertical
+                Wx_IDName = 'ID_WXBOXSIZER35'
+                Wx_IDValue = 1277
+                object WxCheckAttachClasses: TWxCheckBox
+                  Left = 2
+                  Top = 2
+                  Width = 97
+                  Height = 17
+                  Caption = 'Attach Classes'
+                  TabOrder = 0
+                  Wx_BGColor = clBlack
+                  Wx_CheckBoxStyle = []
+                  Wx_Class = 'wxCheckBox'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_FGColor = clBlack
+                  Wx_GeneralStyle = []
+                  Wx_Hidden = False
+                  Wx_IDName = 'ID_WXCHECKATTACHCLASSES'
+                  Wx_IDValue = 1284
+                  Wx_Border = 2
+                  Wx_PaneCaption = 'WxCheckBox1'
+                  Wx_PaneName = 'WxCheckBox1_Pane'
+                  Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                  Wx_Aui_Dockable_Direction = []
+                  Wx_Aui_Pane_Style = []
+                  Wx_Aui_Pane_Buttons = []
+                  Wx_BestSize_Height = 0
+                  Wx_BestSize_Width = 0
+                  Wx_MinSize_Height = 0
+                  Wx_MinSize_Width = 0
+                  Wx_MaxSize_Height = 0
+                  Wx_MaxSize_Width = 0
+                  Wx_Floating_Height = 0
+                  Wx_Floating_Width = 0
+                  Wx_Floating_X_Pos = 0
+                  Wx_Floating_Y_Pos = 0
+                end
+                object WxCheckAttachExternC: TWxCheckBox
+                  Left = 2
+                  Top = 23
+                  Width = 97
+                  Height = 17
+                  Caption = 'Attach Extern C'
+                  TabOrder = 1
+                  Wx_BGColor = clBlack
+                  Wx_CheckBoxStyle = []
+                  Wx_Class = 'wxCheckBox'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_FGColor = clBlack
+                  Wx_GeneralStyle = []
+                  Wx_Hidden = False
+                  Wx_IDName = 'ID_WXCHECKATTACHEXTERNC'
+                  Wx_IDValue = 1285
+                  Wx_Border = 2
+                  Wx_PaneCaption = 'WxCheckBox2'
+                  Wx_PaneName = 'WxCheckBox2_Pane'
+                  Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                  Wx_Aui_Dockable_Direction = []
+                  Wx_Aui_Pane_Style = []
+                  Wx_Aui_Pane_Buttons = []
+                  Wx_BestSize_Height = 0
+                  Wx_BestSize_Width = 0
+                  Wx_MinSize_Height = 0
+                  Wx_MinSize_Width = 0
+                  Wx_MaxSize_Height = 0
+                  Wx_MaxSize_Width = 0
+                  Wx_Floating_Height = 0
+                  Wx_Floating_Width = 0
+                  Wx_Floating_X_Pos = 0
+                  Wx_Floating_Y_Pos = 0
+                end
+                object WxCheckAttachNamespaces: TWxCheckBox
+                  Left = 2
+                  Top = 44
+                  Width = 97
+                  Height = 17
+                  Caption = 'Attach Namespaces'
+                  TabOrder = 2
+                  Wx_BGColor = clBlack
+                  Wx_CheckBoxStyle = []
+                  Wx_Class = 'wxCheckBox'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_FGColor = clBlack
+                  Wx_GeneralStyle = []
+                  Wx_Hidden = False
+                  Wx_IDName = 'ID_WXCHECKATTACHNAMESPACES'
+                  Wx_IDValue = 1286
+                  Wx_Border = 2
+                  Wx_PaneCaption = 'WxCheckBox3'
+                  Wx_PaneName = 'WxCheckBox3_Pane'
+                  Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                  Wx_Aui_Dockable_Direction = []
+                  Wx_Aui_Pane_Style = []
+                  Wx_Aui_Pane_Buttons = []
+                  Wx_BestSize_Height = 0
+                  Wx_BestSize_Width = 0
+                  Wx_MinSize_Height = 0
+                  Wx_MinSize_Width = 0
+                  Wx_MaxSize_Height = 0
+                  Wx_MaxSize_Width = 0
+                  Wx_Floating_Height = 0
+                  Wx_Floating_Width = 0
+                  Wx_Floating_X_Pos = 0
+                  Wx_Floating_Y_Pos = 0
+                end
+                object WxCheckAttachInlines: TWxCheckBox
+                  Left = 2
+                  Top = 65
+                  Width = 97
+                  Height = 17
+                  Caption = 'Attach Inlines'
+                  TabOrder = 3
+                  Wx_BGColor = clBlack
+                  Wx_CheckBoxStyle = []
+                  Wx_Class = 'wxCheckBox'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_FGColor = clBlack
+                  Wx_GeneralStyle = []
+                  Wx_Hidden = False
+                  Wx_IDName = 'ID_WXCHECKATTACHINLINES'
+                  Wx_IDValue = 1287
+                  Wx_Border = 2
+                  Wx_PaneCaption = 'WxCheckBox4'
+                  Wx_PaneName = 'WxCheckBox4_Pane'
+                  Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                  Wx_Aui_Dockable_Direction = []
+                  Wx_Aui_Pane_Style = []
+                  Wx_Aui_Pane_Buttons = []
+                  Wx_BestSize_Height = 0
+                  Wx_BestSize_Width = 0
+                  Wx_MinSize_Height = 0
+                  Wx_MinSize_Width = 0
+                  Wx_MaxSize_Height = 0
+                  Wx_MaxSize_Width = 0
+                  Wx_Floating_Height = 0
+                  Wx_Floating_Width = 0
+                  Wx_Floating_X_Pos = 0
+                  Wx_Floating_Y_Pos = 0
+                end
+              end
+            end
+            object WxAuiNoteBookPage3: TWxAuiNoteBookPage
+              Caption = 'Indentation'
+              Wx_BKColor = clBlack
+              Wx_Class = 'wxPanel'
+              Wx_ControlOrientation = wxControlVertical
+              Wx_Default = False
+              Wx_EventList.Strings = (
+                'EVT_UPDATE_UI:OnUpdateUI')
+              Wx_FGColor = clBlack
+              Wx_GeneralStyle = []
+              Wx_Hidden = False
+              Wx_IDName = 'ID_WXAUINOTEBOOKPAGE3'
+              Wx_IDValue = 1273
+              object WxBoxSizer36: TWxBoxSizer
+                Left = 0
+                Top = 0
+                Width = 660
+                Height = 370
+                Align = alClient
+                TabOrder = 0
+                Orientation = wxVertical
+                Wx_Class = 'wxBoxSizer'
+                Wx_ControlOrientation = wxControlVertical
+                Wx_IDName = 'ID_WXBOXSIZER36'
+                Wx_IDValue = 1289
+                object WxBoxSizer39: TWxBoxSizer
+                  Left = 1
+                  Top = 1
+                  Width = 422
+                  Height = 329
+                  TabOrder = 0
+                  Orientation = wxVertical
+                  Wx_Class = 'wxBoxSizer'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_IDName = 'ID_WXBOXSIZER39'
+                  Wx_IDValue = 1298
+                  Wx_Border = 1
+                  Wx_Alignment = [wxALIGN_LEFT, wxEXPAND]
+                  object WxBoxSizer37: TWxBoxSizer
+                    Left = 81
+                    Top = 1
+                    Width = 260
+                    Height = 24
+                    TabOrder = 0
+                    Wx_Class = 'wxBoxSizer'
+                    Wx_ControlOrientation = wxControlVertical
+                    Wx_IDName = 'ID_WXBOXSIZER37'
+                    Wx_IDValue = 1299
+                    Wx_Border = 1
+                    object WxStaticText17: TWxStaticText
+                      Left = 1
+                      Top = 3
+                      Width = 135
+                      Height = 17
+                      Caption = 'Indentation size (in spaces):'
+                      TabOrder = 0
+                      Wx_BGColor = clBlack
+                      Wx_Class = 'wxStaticText'
+                      Wx_ControlOrientation = wxControlVertical
+                      Wx_FGColor = clBlack
+                      Wx_GeneralStyle = []
+                      Wx_Hidden = False
+                      Wx_IDName = 'ID_WXSTATICTEXT17'
+                      Wx_IDValue = 1291
+                      Wx_LabelStyle = []
+                      Wx_Border = 1
+                      Wx_PaneCaption = 'WxStaticText17'
+                      Wx_PaneName = 'WxStaticText17_Pane'
+                      Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                      Wx_Aui_Dockable_Direction = []
+                      Wx_Aui_Pane_Style = []
+                      Wx_Aui_Pane_Buttons = []
+                      Wx_BestSize_Height = 0
+                      Wx_BestSize_Width = 0
+                      Wx_MinSize_Height = 0
+                      Wx_MinSize_Width = 0
+                      Wx_MaxSize_Height = 0
+                      Wx_MaxSize_Width = 0
+                      Wx_Floating_Height = 0
+                      Wx_Floating_Width = 0
+                      Wx_Floating_X_Pos = 0
+                      Wx_Floating_Y_Pos = 0
+                    end
+                    object WxSpinIndentation: TWxSpinCtrl
+                      Left = 138
+                      Top = 1
+                      Width = 121
+                      Height = 22
+                      MaxValue = 8
+                      MinValue = 2
+                      TabOrder = 1
+                      Value = 4
+                      Wx_BGColor = clBlack
+                      Wx_Class = 'wxSpinCtrl'
+                      Wx_SpinButtonStyle = []
+                      Wx_EditStyle = []
+                      Wx_ControlOrientation = wxControlVertical
+                      Wx_FGColor = clBlack
+                      Wx_GeneralStyle = []
+                      Wx_Hidden = False
+                      Wx_IDName = 'ID_WXSPINCTRLINDENTSIZE'
+                      Wx_IDValue = 1318
+                      Wx_Border = 1
+                      Wx_PaneCaption = 'WxSpinCtrl1'
+                      Wx_PaneName = 'WxSpinCtrl1_Pane'
+                      Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                      Wx_Aui_Dockable_Direction = []
+                      Wx_Aui_Pane_Style = []
+                      Wx_Aui_Pane_Buttons = []
+                      Wx_BestSize_Height = 0
+                      Wx_BestSize_Width = 0
+                      Wx_MinSize_Height = 0
+                      Wx_MinSize_Width = 0
+                      Wx_MaxSize_Height = 0
+                      Wx_MaxSize_Width = 0
+                      Wx_Floating_Height = 0
+                      Wx_Floating_Width = 0
+                      Wx_Floating_X_Pos = 0
+                      Wx_Floating_Y_Pos = 0
+                    end
+                  end
+                  object WxBoxSizer38: TWxBoxSizer
+                    Left = 155
+                    Top = 27
+                    Width = 111
+                    Height = 252
+                    TabOrder = 1
+                    Orientation = wxVertical
+                    Wx_Class = 'wxBoxSizer'
+                    Wx_ControlOrientation = wxControlVertical
+                    Wx_IDName = 'ID_WXBOXSIZER38'
+                    Wx_IDValue = 1300
+                    Wx_Border = 1
+                    Wx_Alignment = [wxALIGN_LEFT, wxEXPAND]
+                    object WxCheckUseTab: TWxCheckBox
+                      Left = 2
+                      Top = 2
+                      Width = 107
+                      Height = 17
+                      Caption = 'Use TABs instead of spaces'
+                      TabOrder = 0
+                      Wx_BGColor = clBlack
+                      Wx_CheckBoxStyle = []
+                      Wx_Class = 'wxCheckBox'
+                      Wx_ControlOrientation = wxControlVertical
+                      Wx_FGColor = clBlack
+                      Wx_GeneralStyle = []
+                      Wx_Hidden = False
+                      Wx_IDName = 'ID_WXCHECKUSETABOVERSPACES'
+                      Wx_IDValue = 1296
+                      Wx_Border = 2
+                      Wx_Alignment = [wxALIGN_LEFT]
+                      Wx_PaneCaption = 'WxCheckBox5'
+                      Wx_PaneName = 'WxCheckBox5_Pane'
+                      Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                      Wx_Aui_Dockable_Direction = []
+                      Wx_Aui_Pane_Style = []
+                      Wx_Aui_Pane_Buttons = []
+                      Wx_BestSize_Height = 0
+                      Wx_BestSize_Width = 0
+                      Wx_MinSize_Height = 0
+                      Wx_MinSize_Width = 0
+                      Wx_MaxSize_Height = 0
+                      Wx_MaxSize_Width = 0
+                      Wx_Floating_Height = 0
+                      Wx_Floating_Width = 0
+                      Wx_Floating_X_Pos = 0
+                      Wx_Floating_Y_Pos = 0
+                    end
+                    object WxCheckForceUseTabs: TWxCheckBox
+                      Left = 2
+                      Top = 23
+                      Width = 107
+                      Height = 17
+                      Caption = 'Force using TABs'
+                      TabOrder = 1
+                      Wx_BGColor = clBlack
+                      Wx_CheckBoxStyle = []
+                      Wx_Class = 'wxCheckBox'
+                      Wx_ControlOrientation = wxControlVertical
+                      Wx_FGColor = clBlack
+                      Wx_GeneralStyle = []
+                      Wx_Hidden = False
+                      Wx_IDName = 'ID_WXCHECKFORCETABS'
+                      Wx_IDValue = 1297
+                      Wx_Border = 2
+                      Wx_Alignment = [wxALIGN_LEFT]
+                      Wx_PaneCaption = 'WxCheckBox6'
+                      Wx_PaneName = 'WxCheckBox6_Pane'
+                      Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                      Wx_Aui_Dockable_Direction = []
+                      Wx_Aui_Pane_Style = []
+                      Wx_Aui_Pane_Buttons = []
+                      Wx_BestSize_Height = 0
+                      Wx_BestSize_Width = 0
+                      Wx_MinSize_Height = 0
+                      Wx_MinSize_Width = 0
+                      Wx_MaxSize_Height = 0
+                      Wx_MaxSize_Width = 0
+                      Wx_Floating_Height = 0
+                      Wx_Floating_Width = 0
+                      Wx_Floating_X_Pos = 0
+                      Wx_Floating_Y_Pos = 0
+                    end
+                    object WxCheckIndentCase: TWxCheckBox
+                      Left = 7
+                      Top = 44
+                      Width = 97
+                      Height = 17
+                      Caption = 'Indent case: statement in switches (commands under case:)'
+                      TabOrder = 2
+                      Wx_BGColor = clBlack
+                      Wx_CheckBoxStyle = []
+                      Wx_Class = 'wxCheckBox'
+                      Wx_ControlOrientation = wxControlVertical
+                      Wx_FGColor = clBlack
+                      Wx_GeneralStyle = []
+                      Wx_Hidden = False
+                      Wx_IDName = 'ID_WXCHECKINDENTCASE'
+                      Wx_IDValue = 1301
+                      Wx_Border = 2
+                      Wx_Alignment = [wxALIGN_LEFT]
+                      Wx_PaneCaption = 'WxCheckBox7'
+                      Wx_PaneName = 'WxCheckBox7_Pane'
+                      Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                      Wx_Aui_Dockable_Direction = []
+                      Wx_Aui_Pane_Style = []
+                      Wx_Aui_Pane_Buttons = []
+                      Wx_BestSize_Height = 0
+                      Wx_BestSize_Width = 0
+                      Wx_MinSize_Height = 0
+                      Wx_MinSize_Width = 0
+                      Wx_MaxSize_Height = 0
+                      Wx_MaxSize_Width = 0
+                      Wx_Floating_Height = 0
+                      Wx_Floating_Width = 0
+                      Wx_Floating_X_Pos = 0
+                      Wx_Floating_Y_Pos = 0
+                    end
+                    object WxCheckIndentClasses: TWxCheckBox
+                      Left = 7
+                      Top = 65
+                      Width = 97
+                      Height = 17
+                      Caption = 'Indent classes (keywords public:, protected: and private:)'
+                      TabOrder = 3
+                      Wx_BGColor = clBlack
+                      Wx_CheckBoxStyle = []
+                      Wx_Class = 'wxCheckBox'
+                      Wx_ControlOrientation = wxControlVertical
+                      Wx_FGColor = clBlack
+                      Wx_GeneralStyle = []
+                      Wx_Hidden = False
+                      Wx_IDName = 'ID_WXCHECKINDENETCLASSES'
+                      Wx_IDValue = 1302
+                      Wx_Border = 2
+                      Wx_Alignment = [wxALIGN_LEFT]
+                      Wx_PaneCaption = 'WxCheckBox8'
+                      Wx_PaneName = 'WxCheckBox8_Pane'
+                      Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                      Wx_Aui_Dockable_Direction = []
+                      Wx_Aui_Pane_Style = []
+                      Wx_Aui_Pane_Buttons = []
+                      Wx_BestSize_Height = 0
+                      Wx_BestSize_Width = 0
+                      Wx_MinSize_Height = 0
+                      Wx_MinSize_Width = 0
+                      Wx_MaxSize_Height = 0
+                      Wx_MaxSize_Width = 0
+                      Wx_Floating_Height = 0
+                      Wx_Floating_Width = 0
+                      Wx_Floating_X_Pos = 0
+                      Wx_Floating_Y_Pos = 0
+                    end
+                    object WxCheckIndentLabels: TWxCheckBox
+                      Left = 7
+                      Top = 86
+                      Width = 97
+                      Height = 17
+                      Caption = 'Indent labels'
+                      TabOrder = 4
+                      Wx_BGColor = clBlack
+                      Wx_CheckBoxStyle = []
+                      Wx_Class = 'wxCheckBox'
+                      Wx_ControlOrientation = wxControlVertical
+                      Wx_FGColor = clBlack
+                      Wx_GeneralStyle = []
+                      Wx_Hidden = False
+                      Wx_IDName = 'ID_WXCHECKINDENTLABELS'
+                      Wx_IDValue = 1303
+                      Wx_Border = 2
+                      Wx_PaneCaption = 'WxCheckBox9'
+                      Wx_PaneName = 'WxCheckBox9_Pane'
+                      Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                      Wx_Aui_Dockable_Direction = []
+                      Wx_Aui_Pane_Style = []
+                      Wx_Aui_Pane_Buttons = []
+                      Wx_BestSize_Height = 0
+                      Wx_BestSize_Width = 0
+                      Wx_MinSize_Height = 0
+                      Wx_MinSize_Width = 0
+                      Wx_MaxSize_Height = 0
+                      Wx_MaxSize_Width = 0
+                      Wx_Floating_Height = 0
+                      Wx_Floating_Width = 0
+                      Wx_Floating_X_Pos = 0
+                      Wx_Floating_Y_Pos = 0
+                    end
+                    object WxCheckIndentModifiers: TWxCheckBox
+                      Left = 7
+                      Top = 107
+                      Width = 97
+                      Height = 17
+                      Caption = 'Indent modifiers'
+                      TabOrder = 5
+                      Wx_BGColor = clBlack
+                      Wx_CheckBoxStyle = []
+                      Wx_Class = 'wxCheckBox'
+                      Wx_ControlOrientation = wxControlVertical
+                      Wx_FGColor = clBlack
+                      Wx_GeneralStyle = []
+                      Wx_Hidden = False
+                      Wx_IDName = 'ID_WXCHECKINDENTMODIFIERS'
+                      Wx_IDValue = 1304
+                      Wx_Border = 2
+                      Wx_PaneCaption = 'WxCheckBox10'
+                      Wx_PaneName = 'WxCheckBox10_Pane'
+                      Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                      Wx_Aui_Dockable_Direction = []
+                      Wx_Aui_Pane_Style = []
+                      Wx_Aui_Pane_Buttons = []
+                      Wx_BestSize_Height = 0
+                      Wx_BestSize_Width = 0
+                      Wx_MinSize_Height = 0
+                      Wx_MinSize_Width = 0
+                      Wx_MaxSize_Height = 0
+                      Wx_MaxSize_Width = 0
+                      Wx_Floating_Height = 0
+                      Wx_Floating_Width = 0
+                      Wx_Floating_X_Pos = 0
+                      Wx_Floating_Y_Pos = 0
+                    end
+                    object WxCheckIndentNamespaces: TWxCheckBox
+                      Left = 7
+                      Top = 128
+                      Width = 97
+                      Height = 17
+                      Caption = 'Indent namespaces'
+                      TabOrder = 6
+                      Wx_BGColor = clBlack
+                      Wx_CheckBoxStyle = []
+                      Wx_Class = 'wxCheckBox'
+                      Wx_ControlOrientation = wxControlVertical
+                      Wx_FGColor = clBlack
+                      Wx_GeneralStyle = []
+                      Wx_Hidden = False
+                      Wx_IDName = 'ID_WXCHECKINDENTNS'
+                      Wx_IDValue = 1305
+                      Wx_Border = 2
+                      Wx_PaneCaption = 'WxCheckBox11'
+                      Wx_PaneName = 'WxCheckBox11_Pane'
+                      Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                      Wx_Aui_Dockable_Direction = []
+                      Wx_Aui_Pane_Style = []
+                      Wx_Aui_Pane_Buttons = []
+                      Wx_BestSize_Height = 0
+                      Wx_BestSize_Width = 0
+                      Wx_MinSize_Height = 0
+                      Wx_MinSize_Width = 0
+                      Wx_MaxSize_Height = 0
+                      Wx_MaxSize_Width = 0
+                      Wx_Floating_Height = 0
+                      Wx_Floating_Width = 0
+                      Wx_Floating_X_Pos = 0
+                      Wx_Floating_Y_Pos = 0
+                    end
+                    object WxCheckIndentSwitches: TWxCheckBox
+                      Left = 7
+                      Top = 149
+                      Width = 97
+                      Height = 17
+                      Caption = 'Indent switches'
+                      TabOrder = 7
+                      Wx_BGColor = clBlack
+                      Wx_CheckBoxStyle = []
+                      Wx_Class = 'wxCheckBox'
+                      Wx_ControlOrientation = wxControlVertical
+                      Wx_FGColor = clBlack
+                      Wx_GeneralStyle = []
+                      Wx_Hidden = False
+                      Wx_IDName = 'ID_WXCHECKINDENTSWITCHS'
+                      Wx_IDValue = 1306
+                      Wx_Border = 2
+                      Wx_PaneCaption = 'WxCheckBox12'
+                      Wx_PaneName = 'WxCheckBox12_Pane'
+                      Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                      Wx_Aui_Dockable_Direction = []
+                      Wx_Aui_Pane_Style = []
+                      Wx_Aui_Pane_Buttons = []
+                      Wx_BestSize_Height = 0
+                      Wx_BestSize_Width = 0
+                      Wx_MinSize_Height = 0
+                      Wx_MinSize_Width = 0
+                      Wx_MaxSize_Height = 0
+                      Wx_MaxSize_Width = 0
+                      Wx_Floating_Height = 0
+                      Wx_Floating_Width = 0
+                      Wx_Floating_X_Pos = 0
+                      Wx_Floating_Y_Pos = 0
+                    end
+                    object WxCheckIndentPreprocBlock: TWxCheckBox
+                      Left = 7
+                      Top = 170
+                      Width = 97
+                      Height = 17
+                      Caption = 
+                        'Indent preprocessor blocks at bracket level zero, and within a n' +
+                        'amespace'
+                      TabOrder = 8
+                      Wx_BGColor = clBlack
+                      Wx_CheckBoxStyle = []
+                      Wx_Class = 'wxCheckBox'
+                      Wx_ControlOrientation = wxControlVertical
+                      Wx_FGColor = clBlack
+                      Wx_GeneralStyle = []
+                      Wx_Hidden = False
+                      Wx_IDName = 'ID_WXCHECKINDENTPREP'
+                      Wx_IDValue = 1307
+                      Wx_Border = 2
+                      Wx_PaneCaption = 'WxCheckBox13'
+                      Wx_PaneName = 'WxCheckBox13_Pane'
+                      Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                      Wx_Aui_Dockable_Direction = []
+                      Wx_Aui_Pane_Style = []
+                      Wx_Aui_Pane_Buttons = []
+                      Wx_BestSize_Height = 0
+                      Wx_BestSize_Width = 0
+                      Wx_MinSize_Height = 0
+                      Wx_MinSize_Width = 0
+                      Wx_MaxSize_Height = 0
+                      Wx_MaxSize_Width = 0
+                      Wx_Floating_Height = 0
+                      Wx_Floating_Width = 0
+                      Wx_Floating_X_Pos = 0
+                      Wx_Floating_Y_Pos = 0
+                    end
+                    object WxCheckIndentPreprocDefine: TWxCheckBox
+                      Left = 7
+                      Top = 191
+                      Width = 97
+                      Height = 17
+                      Caption = 
+                        'Indent multi-line preprocessor definitions ending with a backsla' +
+                        'sh'
+                      TabOrder = 9
+                      Wx_BGColor = clBlack
+                      Wx_CheckBoxStyle = []
+                      Wx_Class = 'wxCheckBox'
+                      Wx_ControlOrientation = wxControlVertical
+                      Wx_FGColor = clBlack
+                      Wx_GeneralStyle = []
+                      Wx_Hidden = False
+                      Wx_IDName = 'ID_WXCHECKINDENTMULTIPREP'
+                      Wx_IDValue = 1308
+                      Wx_Border = 2
+                      Wx_PaneCaption = 'WxCheckBox14'
+                      Wx_PaneName = 'WxCheckBox14_Pane'
+                      Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                      Wx_Aui_Dockable_Direction = []
+                      Wx_Aui_Pane_Style = []
+                      Wx_Aui_Pane_Buttons = []
+                      Wx_BestSize_Height = 0
+                      Wx_BestSize_Width = 0
+                      Wx_MinSize_Height = 0
+                      Wx_MinSize_Width = 0
+                      Wx_MaxSize_Height = 0
+                      Wx_MaxSize_Width = 0
+                      Wx_Floating_Height = 0
+                      Wx_Floating_Width = 0
+                      Wx_Floating_X_Pos = 0
+                      Wx_Floating_Y_Pos = 0
+                    end
+                    object WxCheckIndentPreprocCond: TWxCheckBox
+                      Left = 7
+                      Top = 212
+                      Width = 97
+                      Height = 17
+                      Caption = 'Indent preprocessor conditionals'
+                      TabOrder = 10
+                      Wx_BGColor = clBlack
+                      Wx_CheckBoxStyle = []
+                      Wx_Class = 'wxCheckBox'
+                      Wx_ControlOrientation = wxControlVertical
+                      Wx_FGColor = clBlack
+                      Wx_GeneralStyle = []
+                      Wx_Hidden = False
+                      Wx_IDName = 'ID_WXCHECKINDENTPREPCOND'
+                      Wx_IDValue = 1309
+                      Wx_Border = 2
+                      Wx_PaneCaption = 'WxCheckBox15'
+                      Wx_PaneName = 'WxCheckBox15_Pane'
+                      Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                      Wx_Aui_Dockable_Direction = []
+                      Wx_Aui_Pane_Style = []
+                      Wx_Aui_Pane_Buttons = []
+                      Wx_BestSize_Height = 0
+                      Wx_BestSize_Width = 0
+                      Wx_MinSize_Height = 0
+                      Wx_MinSize_Width = 0
+                      Wx_MaxSize_Height = 0
+                      Wx_MaxSize_Width = 0
+                      Wx_Floating_Height = 0
+                      Wx_Floating_Width = 0
+                      Wx_Floating_X_Pos = 0
+                      Wx_Floating_Y_Pos = 0
+                    end
+                    object WxCheckIndentCol1Comments: TWxCheckBox
+                      Left = 7
+                      Top = 233
+                      Width = 97
+                      Height = 17
+                      Caption = 'Indent C++ comments beginning in column one'
+                      TabOrder = 11
+                      Wx_BGColor = clBlack
+                      Wx_CheckBoxStyle = []
+                      Wx_Class = 'wxCheckBox'
+                      Wx_ControlOrientation = wxControlVertical
+                      Wx_FGColor = clBlack
+                      Wx_GeneralStyle = []
+                      Wx_Hidden = False
+                      Wx_IDName = 'ID_WXCHECKINDENETCPPCOMMENTS'
+                      Wx_IDValue = 1310
+                      Wx_Border = 2
+                      Wx_PaneCaption = 'WxCheckBox16'
+                      Wx_PaneName = 'WxCheckBox16_Pane'
+                      Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                      Wx_Aui_Dockable_Direction = []
+                      Wx_Aui_Pane_Style = []
+                      Wx_Aui_Pane_Buttons = []
+                      Wx_BestSize_Height = 0
+                      Wx_BestSize_Width = 0
+                      Wx_MinSize_Height = 0
+                      Wx_MinSize_Width = 0
+                      Wx_MaxSize_Height = 0
+                      Wx_MaxSize_Width = 0
+                      Wx_Floating_Height = 0
+                      Wx_Floating_Width = 0
+                      Wx_Floating_X_Pos = 0
+                      Wx_Floating_Y_Pos = 0
+                    end
+                  end
+                  object WxBoxSizer40: TWxBoxSizer
+                    Left = 5
+                    Top = 281
+                    Width = 412
+                    Height = 24
+                    TabOrder = 2
+                    Wx_Class = 'wxBoxSizer'
+                    Wx_ControlOrientation = wxControlVertical
+                    Wx_IDName = 'ID_WXBOXSIZER40'
+                    Wx_IDValue = 1314
+                    Wx_Border = 1
+                    object WxStaticText22: TWxStaticText
+                      Left = 1
+                      Top = 3
+                      Width = 287
+                      Height = 17
+                      Caption = 'Minimal indent added when a header is built of multiple lines:'
+                      TabOrder = 0
+                      Wx_BGColor = clBlack
+                      Wx_Class = 'wxStaticText'
+                      Wx_ControlOrientation = wxControlVertical
+                      Wx_FGColor = clBlack
+                      Wx_GeneralStyle = []
+                      Wx_Hidden = False
+                      Wx_IDName = 'ID_WXSTATICTEXT22'
+                      Wx_IDValue = 1315
+                      Wx_LabelStyle = []
+                      Wx_Border = 1
+                      Wx_PaneCaption = 'WxStaticText22'
+                      Wx_PaneName = 'WxStaticText22_Pane'
+                      Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                      Wx_Aui_Dockable_Direction = []
+                      Wx_Aui_Pane_Style = []
+                      Wx_Aui_Pane_Buttons = []
+                      Wx_BestSize_Height = 0
+                      Wx_BestSize_Width = 0
+                      Wx_MinSize_Height = 0
+                      Wx_MinSize_Width = 0
+                      Wx_MaxSize_Height = 0
+                      Wx_MaxSize_Width = 0
+                      Wx_Floating_Height = 0
+                      Wx_Floating_Width = 0
+                      Wx_Floating_X_Pos = 0
+                      Wx_Floating_Y_Pos = 0
+                    end
+                    object WxSpinMinConditionalEvent: TWxSpinCtrl
+                      Left = 290
+                      Top = 1
+                      Width = 121
+                      Height = 22
+                      MaxValue = 3
+                      MinValue = 0
+                      TabOrder = 1
+                      Value = 2
+                      Wx_BGColor = clBlack
+                      Wx_Class = 'wxSpinCtrl'
+                      Wx_SpinButtonStyle = []
+                      Wx_EditStyle = []
+                      Wx_ControlOrientation = wxControlVertical
+                      Wx_FGColor = clBlack
+                      Wx_GeneralStyle = []
+                      Wx_Hidden = False
+                      Wx_IDName = 'ID_WXSPINCTRLMININDENT'
+                      Wx_IDValue = 1319
+                      Wx_Border = 1
+                      Wx_PaneCaption = 'WxSpinCtrl2'
+                      Wx_PaneName = 'WxSpinCtrl2_Pane'
+                      Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                      Wx_Aui_Dockable_Direction = []
+                      Wx_Aui_Pane_Style = []
+                      Wx_Aui_Pane_Buttons = []
+                      Wx_BestSize_Height = 0
+                      Wx_BestSize_Width = 0
+                      Wx_MinSize_Height = 0
+                      Wx_MinSize_Width = 0
+                      Wx_MaxSize_Height = 0
+                      Wx_MaxSize_Width = 0
+                      Wx_Floating_Height = 0
+                      Wx_Floating_Width = 0
+                      Wx_Floating_X_Pos = 0
+                      Wx_Floating_Y_Pos = 0
+                    end
+                  end
+                  object WxBoxSizer41: TWxBoxSizer
+                    Left = 1
+                    Top = 307
+                    Width = 420
+                    Height = 21
+                    TabOrder = 3
+                    Wx_Class = 'wxBoxSizer'
+                    Wx_ControlOrientation = wxControlVertical
+                    Wx_IDName = 'ID_WXBOXSIZER41'
+                    Wx_IDValue = 1320
+                    Wx_Border = 1
+                    object WxStaticText23: TWxStaticText
+                      Left = 1
+                      Top = 2
+                      Width = 295
+                      Height = 17
+                      Caption = 'Maximum of # spaces to indent a continuation line (max. 120):'
+                      TabOrder = 0
+                      Wx_BGColor = clBlack
+                      Wx_Class = 'wxStaticText'
+                      Wx_ControlOrientation = wxControlVertical
+                      Wx_FGColor = clBlack
+                      Wx_GeneralStyle = []
+                      Wx_Hidden = False
+                      Wx_IDName = 'ID_WXSTATICTEXT23'
+                      Wx_IDValue = 1321
+                      Wx_LabelStyle = []
+                      Wx_Border = 1
+                      Wx_PaneCaption = 'WxStaticText23'
+                      Wx_PaneName = 'WxStaticText23_Pane'
+                      Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                      Wx_Aui_Dockable_Direction = []
+                      Wx_Aui_Pane_Style = []
+                      Wx_Aui_Pane_Buttons = []
+                      Wx_BestSize_Height = 0
+                      Wx_BestSize_Width = 0
+                      Wx_MinSize_Height = 0
+                      Wx_MinSize_Width = 0
+                      Wx_MaxSize_Height = 0
+                      Wx_MaxSize_Width = 0
+                      Wx_Floating_Height = 0
+                      Wx_Floating_Width = 0
+                      Wx_Floating_X_Pos = 0
+                      Wx_Floating_Y_Pos = 0
+                    end
+                    object WxEditMaxInStatementIndent: TWxEdit
+                      Left = 298
+                      Top = 1
+                      Width = 121
+                      Height = 19
+                      BevelInner = bvNone
+                      BevelOuter = bvNone
+                      ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+                      AutoSize = False
+                      TabOrder = 1
+                      Text = '40'
+                      Wx_BGColor = clBlack
+                      Wx_Class = 'wxTextCtrl'
+                      Wx_ControlOrientation = wxControlVertical
+                      Wx_EditStyle = []
+                      Wx_FGColor = clBlack
+                      Wx_GeneralStyle = []
+                      Wx_Hidden = False
+                      Wx_IDName = 'ID_WXEDITMAXINSTATEMENTINDENT'
+                      Wx_IDValue = 1322
+                      Wx_Validator = 'wxTextValidator(wxFILTER_NUMERIC, NULL)'
+                      Wx_Border = 1
+                      Wx_MaxLength = 0
+                      Wx_PaneCaption = 'WxEdit1'
+                      Wx_PaneName = 'WxEdit1_Pane'
+                      Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                      Wx_Aui_Dockable_Direction = []
+                      Wx_Aui_Pane_Style = []
+                      Wx_Aui_Pane_Buttons = []
+                      Wx_BestSize_Height = 0
+                      Wx_BestSize_Width = 0
+                      Wx_MinSize_Height = 0
+                      Wx_MinSize_Width = 0
+                      Wx_MaxSize_Height = 0
+                      Wx_MaxSize_Width = 0
+                      Wx_Floating_Height = 0
+                      Wx_Floating_Width = 0
+                      Wx_Floating_X_Pos = 0
+                      Wx_Floating_Y_Pos = 0
+                    end
+                  end
+                end
+              end
+            end
+            object WxAuiNoteBookPage4: TWxAuiNoteBookPage
+              Caption = 'Formatting'
+              Wx_BKColor = clBlack
+              Wx_Class = 'wxPanel'
+              Wx_ControlOrientation = wxControlVertical
+              Wx_Default = False
+              Wx_EventList.Strings = (
+                'EVT_UPDATE_UI:OnUpdateUI')
+              Wx_FGColor = clBlack
+              Wx_GeneralStyle = []
+              Wx_Hidden = False
+              Wx_IDName = 'ID_WXAUINOTEBOOKPAGE4'
+              Wx_IDValue = 1274
+              object WxBoxSizer42: TWxBoxSizer
+                Left = 0
+                Top = 0
+                Width = 660
+                Height = 370
+                Align = alClient
+                TabOrder = 0
+                Orientation = wxVertical
+                Wx_Class = 'wxBoxSizer'
+                Wx_ControlOrientation = wxControlVertical
+                Wx_IDName = 'ID_WXBOXSIZER42'
+                Wx_IDValue = 1326
+                object WxCheckBreakClosing: TWxCheckBox
+                  Left = 2
+                  Top = 2
+                  Width = 457
+                  Height = 17
+                  Caption = 
+                    'Break closing headers from their immediately preceding closing b' +
+                    'rackets'
+                  TabOrder = 0
+                  Wx_BGColor = clBlack
+                  Wx_CheckBoxStyle = []
+                  Wx_Class = 'wxCheckBox'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_FGColor = clBlack
+                  Wx_GeneralStyle = []
+                  Wx_Hidden = False
+                  Wx_IDName = 'ID_WXCHECKBREAKCLOSING'
+                  Wx_IDValue = 1327
+                  Wx_Border = 2
+                  Wx_PaneCaption = 'WxCheckBox17'
+                  Wx_PaneName = 'WxCheckBox17_Pane'
+                  Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                  Wx_Aui_Dockable_Direction = []
+                  Wx_Aui_Pane_Style = []
+                  Wx_Aui_Pane_Buttons = []
+                  Wx_BestSize_Height = 0
+                  Wx_BestSize_Width = 0
+                  Wx_MinSize_Height = 0
+                  Wx_MinSize_Width = 0
+                  Wx_MaxSize_Height = 0
+                  Wx_MaxSize_Width = 0
+                  Wx_Floating_Height = 0
+                  Wx_Floating_Width = 0
+                  Wx_Floating_X_Pos = 0
+                  Wx_Floating_Y_Pos = 0
+                end
+                object WxCheckBreakElseIfs: TWxCheckBox
+                  Left = 2
+                  Top = 23
+                  Width = 457
+                  Height = 17
+                  Caption = 'Break '#39'else if()'#39' header combinations into seperate lines'
+                  TabOrder = 1
+                  Wx_BGColor = clBlack
+                  Wx_CheckBoxStyle = []
+                  Wx_Class = 'wxCheckBox'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_FGColor = clBlack
+                  Wx_GeneralStyle = []
+                  Wx_Hidden = False
+                  Wx_IDName = 'ID_WXCHECKBREAKELSEIFS'
+                  Wx_IDValue = 1328
+                  Wx_Border = 2
+                  Wx_PaneCaption = 'WxCheckBox17'
+                  Wx_PaneName = 'WxCheckBox17_Pane'
+                  Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                  Wx_Aui_Dockable_Direction = []
+                  Wx_Aui_Pane_Style = []
+                  Wx_Aui_Pane_Buttons = []
+                  Wx_BestSize_Height = 0
+                  Wx_BestSize_Width = 0
+                  Wx_MinSize_Height = 0
+                  Wx_MinSize_Width = 0
+                  Wx_MaxSize_Height = 0
+                  Wx_MaxSize_Width = 0
+                  Wx_Floating_Height = 0
+                  Wx_Floating_Width = 0
+                  Wx_Floating_X_Pos = 0
+                  Wx_Floating_Y_Pos = 0
+                end
+                object WxCheckAddBrackets: TWxCheckBox
+                  Left = 2
+                  Top = 44
+                  Width = 457
+                  Height = 17
+                  Caption = 'Add brackets to unbracketed one line conditional statements'
+                  TabOrder = 2
+                  Wx_BGColor = clBlack
+                  Wx_CheckBoxStyle = []
+                  Wx_Class = 'wxCheckBox'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_FGColor = clBlack
+                  Wx_GeneralStyle = []
+                  Wx_Hidden = False
+                  Wx_IDName = 'ID_WXCHECKADDBRACKETS'
+                  Wx_IDValue = 1329
+                  Wx_Border = 2
+                  Wx_PaneCaption = 'WxCheckBox17'
+                  Wx_PaneName = 'WxCheckBox17_Pane'
+                  Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                  Wx_Aui_Dockable_Direction = []
+                  Wx_Aui_Pane_Style = []
+                  Wx_Aui_Pane_Buttons = []
+                  Wx_BestSize_Height = 0
+                  Wx_BestSize_Width = 0
+                  Wx_MinSize_Height = 0
+                  Wx_MinSize_Width = 0
+                  Wx_MaxSize_Height = 0
+                  Wx_MaxSize_Width = 0
+                  Wx_Floating_Height = 0
+                  Wx_Floating_Width = 0
+                  Wx_Floating_X_Pos = 0
+                  Wx_Floating_Y_Pos = 0
+                end
+                object WxCheckAddOneLineBrackets: TWxCheckBox
+                  Left = 2
+                  Top = 65
+                  Width = 457
+                  Height = 17
+                  Caption = 
+                    'Add one line brackets to unbracketed one line conditional statem' +
+                    'ents'
+                  TabOrder = 3
+                  Wx_BGColor = clBlack
+                  Wx_CheckBoxStyle = []
+                  Wx_Class = 'wxCheckBox'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_FGColor = clBlack
+                  Wx_GeneralStyle = []
+                  Wx_Hidden = False
+                  Wx_IDName = 'ID_WXCHECKADDONELINEBRACKETS'
+                  Wx_IDValue = 1330
+                  Wx_Border = 2
+                  Wx_PaneCaption = 'WxCheckBox17'
+                  Wx_PaneName = 'WxCheckBox17_Pane'
+                  Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                  Wx_Aui_Dockable_Direction = []
+                  Wx_Aui_Pane_Style = []
+                  Wx_Aui_Pane_Buttons = []
+                  Wx_BestSize_Height = 0
+                  Wx_BestSize_Width = 0
+                  Wx_MinSize_Height = 0
+                  Wx_MinSize_Width = 0
+                  Wx_MaxSize_Height = 0
+                  Wx_MaxSize_Width = 0
+                  Wx_Floating_Height = 0
+                  Wx_Floating_Width = 0
+                  Wx_Floating_X_Pos = 0
+                  Wx_Floating_Y_Pos = 0
+                end
+                object WxCheckRemoveBrackets: TWxCheckBox
+                  Left = 2
+                  Top = 86
+                  Width = 457
+                  Height = 17
+                  Caption = 
+                    'Remove brackets from conditional statements (ingle statement on ' +
+                    'a single line)'
+                  TabOrder = 4
+                  Wx_BGColor = clBlack
+                  Wx_CheckBoxStyle = []
+                  Wx_Class = 'wxCheckBox'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_FGColor = clBlack
+                  Wx_GeneralStyle = []
+                  Wx_Hidden = False
+                  Wx_IDName = 'ID_WXCHECKBOX17'
+                  Wx_IDValue = 1331
+                  Wx_Border = 2
+                  Wx_PaneCaption = 'WxCheckRemoveBrackets'
+                  Wx_PaneName = 'WxCheckBox17_Pane'
+                  Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                  Wx_Aui_Dockable_Direction = []
+                  Wx_Aui_Pane_Style = []
+                  Wx_Aui_Pane_Buttons = []
+                  Wx_BestSize_Height = 0
+                  Wx_BestSize_Width = 0
+                  Wx_MinSize_Height = 0
+                  Wx_MinSize_Width = 0
+                  Wx_MaxSize_Height = 0
+                  Wx_MaxSize_Width = 0
+                  Wx_Floating_Height = 0
+                  Wx_Floating_Width = 0
+                  Wx_Floating_X_Pos = 0
+                  Wx_Floating_Y_Pos = 0
+                end
+                object WxCheckKeepBlocks: TWxCheckBox
+                  Left = 2
+                  Top = 107
+                  Width = 457
+                  Height = 17
+                  Caption = 'Don'#39't break one-line blocks'
+                  TabOrder = 5
+                  Wx_BGColor = clBlack
+                  Wx_CheckBoxStyle = []
+                  Wx_Class = 'wxCheckBox'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_FGColor = clBlack
+                  Wx_GeneralStyle = []
+                  Wx_Hidden = False
+                  Wx_IDName = 'ID_WXCHECKKEEPBLOCKS'
+                  Wx_IDValue = 1332
+                  Wx_Border = 2
+                  Wx_PaneCaption = 'WxCheckBox17'
+                  Wx_PaneName = 'WxCheckBox17_Pane'
+                  Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                  Wx_Aui_Dockable_Direction = []
+                  Wx_Aui_Pane_Style = []
+                  Wx_Aui_Pane_Buttons = []
+                  Wx_BestSize_Height = 0
+                  Wx_BestSize_Width = 0
+                  Wx_MinSize_Height = 0
+                  Wx_MinSize_Width = 0
+                  Wx_MaxSize_Height = 0
+                  Wx_MaxSize_Width = 0
+                  Wx_Floating_Height = 0
+                  Wx_Floating_Width = 0
+                  Wx_Floating_X_Pos = 0
+                  Wx_Floating_Y_Pos = 0
+                end
+                object WxCheckKeepComplex: TWxCheckBox
+                  Left = 2
+                  Top = 128
+                  Width = 457
+                  Height = 17
+                  Caption = 
+                    'Don'#39't break complex statements and multiple statements residing ' +
+                    'in a single line'
+                  TabOrder = 6
+                  Wx_BGColor = clBlack
+                  Wx_CheckBoxStyle = []
+                  Wx_Class = 'wxCheckBox'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_FGColor = clBlack
+                  Wx_GeneralStyle = []
+                  Wx_Hidden = False
+                  Wx_IDName = 'ID_WXCHECKKEEPCOMPLEX'
+                  Wx_IDValue = 1333
+                  Wx_Border = 2
+                  Wx_PaneCaption = 'WxCheckBox17'
+                  Wx_PaneName = 'WxCheckBox17_Pane'
+                  Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                  Wx_Aui_Dockable_Direction = []
+                  Wx_Aui_Pane_Style = []
+                  Wx_Aui_Pane_Buttons = []
+                  Wx_BestSize_Height = 0
+                  Wx_BestSize_Width = 0
+                  Wx_MinSize_Height = 0
+                  Wx_MinSize_Width = 0
+                  Wx_MaxSize_Height = 0
+                  Wx_MaxSize_Width = 0
+                  Wx_Floating_Height = 0
+                  Wx_Floating_Width = 0
+                  Wx_Floating_X_Pos = 0
+                  Wx_Floating_Y_Pos = 0
+                end
+                object WxCheckConvertTabs: TWxCheckBox
+                  Left = 2
+                  Top = 149
+                  Width = 457
+                  Height = 17
+                  Caption = 'Convert TABs to spaces'
+                  TabOrder = 7
+                  Wx_BGColor = clBlack
+                  Wx_CheckBoxStyle = []
+                  Wx_Class = 'wxCheckBox'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_FGColor = clBlack
+                  Wx_GeneralStyle = []
+                  Wx_Hidden = False
+                  Wx_IDName = 'ID_WXCHECKCONVERTTABS'
+                  Wx_IDValue = 1334
+                  Wx_Border = 2
+                  Wx_PaneCaption = 'WxCheckBox17'
+                  Wx_PaneName = 'WxCheckBox17_Pane'
+                  Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                  Wx_Aui_Dockable_Direction = []
+                  Wx_Aui_Pane_Style = []
+                  Wx_Aui_Pane_Buttons = []
+                  Wx_BestSize_Height = 0
+                  Wx_BestSize_Width = 0
+                  Wx_MinSize_Height = 0
+                  Wx_MinSize_Width = 0
+                  Wx_MaxSize_Height = 0
+                  Wx_MaxSize_Width = 0
+                  Wx_Floating_Height = 0
+                  Wx_Floating_Width = 0
+                  Wx_Floating_X_Pos = 0
+                  Wx_Floating_Y_Pos = 0
+                end
+                object WxCheckCloseTemplates: TWxCheckBox
+                  Left = 2
+                  Top = 170
+                  Width = 457
+                  Height = 17
+                  Caption = 'Closes whitespace in the angle brackets of template definitions'
+                  TabOrder = 8
+                  Wx_BGColor = clBlack
+                  Wx_CheckBoxStyle = []
+                  Wx_Class = 'wxCheckBox'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_FGColor = clBlack
+                  Wx_GeneralStyle = []
+                  Wx_Hidden = False
+                  Wx_IDName = 'ID_WXCHECKCLOSETEMPLATES'
+                  Wx_IDValue = 1335
+                  Wx_Border = 2
+                  Wx_PaneCaption = 'WxCheckBox17'
+                  Wx_PaneName = 'WxCheckBox17_Pane'
+                  Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                  Wx_Aui_Dockable_Direction = []
+                  Wx_Aui_Pane_Style = []
+                  Wx_Aui_Pane_Buttons = []
+                  Wx_BestSize_Height = 0
+                  Wx_BestSize_Width = 0
+                  Wx_MinSize_Height = 0
+                  Wx_MinSize_Width = 0
+                  Wx_MaxSize_Height = 0
+                  Wx_MaxSize_Width = 0
+                  Wx_Floating_Height = 0
+                  Wx_Floating_Width = 0
+                  Wx_Floating_X_Pos = 0
+                  Wx_Floating_Y_Pos = 0
+                end
+                object WxCheckRemoveCommentPrefix: TWxCheckBox
+                  Left = 2
+                  Top = 191
+                  Width = 457
+                  Height = 17
+                  Caption = 
+                    'Remove the preceding '#39'*'#39' in a multi-line comment that begins a l' +
+                    'ine'
+                  TabOrder = 9
+                  Wx_BGColor = clBlack
+                  Wx_CheckBoxStyle = []
+                  Wx_Class = 'wxCheckBox'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_FGColor = clBlack
+                  Wx_GeneralStyle = []
+                  Wx_Hidden = False
+                  Wx_IDName = 'ID_WXCHECKREMOVECOMMENTPREFIX'
+                  Wx_IDValue = 1337
+                  Wx_Border = 2
+                  Wx_PaneCaption = 'WxCheckBox17'
+                  Wx_PaneName = 'WxCheckBox17_Pane'
+                  Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                  Wx_Aui_Dockable_Direction = []
+                  Wx_Aui_Pane_Style = []
+                  Wx_Aui_Pane_Buttons = []
+                  Wx_BestSize_Height = 0
+                  Wx_BestSize_Width = 0
+                  Wx_MinSize_Height = 0
+                  Wx_MinSize_Width = 0
+                  Wx_MaxSize_Height = 0
+                  Wx_MaxSize_Width = 0
+                  Wx_Floating_Height = 0
+                  Wx_Floating_Width = 0
+                  Wx_Floating_X_Pos = 0
+                  Wx_Floating_Y_Pos = 0
+                end
+                object WxCheckBreakLines: TWxCheckBox
+                  Left = 2
+                  Top = 212
+                  Width = 457
+                  Height = 17
+                  Caption = 'Enable line breaking'
+                  TabOrder = 10
+                  Wx_BGColor = clBlack
+                  Wx_CheckBoxStyle = []
+                  Wx_Class = 'wxCheckBox'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_FGColor = clBlack
+                  Wx_GeneralStyle = []
+                  Wx_Hidden = False
+                  Wx_IDName = 'ID_WXCHECKBREAKLINES'
+                  Wx_IDValue = 1338
+                  Wx_Border = 2
+                  Wx_PaneCaption = 'WxCheckBox17'
+                  Wx_PaneName = 'WxCheckBox17_Pane'
+                  Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                  Wx_Aui_Dockable_Direction = []
+                  Wx_Aui_Pane_Style = []
+                  Wx_Aui_Pane_Buttons = []
+                  Wx_BestSize_Height = 0
+                  Wx_BestSize_Width = 0
+                  Wx_MinSize_Height = 0
+                  Wx_MinSize_Width = 0
+                  Wx_MaxSize_Height = 0
+                  Wx_MaxSize_Width = 0
+                  Wx_Floating_Height = 0
+                  Wx_Floating_Width = 0
+                  Wx_Floating_X_Pos = 0
+                  Wx_Floating_Y_Pos = 0
+                end
+                object WxBoxSizer43: TWxBoxSizer
+                  Left = 51
+                  Top = 232
+                  Width = 359
+                  Height = 21
+                  TabOrder = 11
+                  Wx_Class = 'wxBoxSizer'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_IDName = 'ID_WXBOXSIZER43'
+                  Wx_IDValue = 1339
+                  Wx_Border = 1
+                  object WxStaticText24: TWxStaticText
+                    Left = 1
+                    Top = 2
+                    Width = 234
+                    Height = 17
+                    Caption = 'Break lines after amount of chars (range: 50-200)'
+                    TabOrder = 0
+                    Wx_BGColor = clBlack
+                    Wx_Class = 'wxStaticText'
+                    Wx_ControlOrientation = wxControlVertical
+                    Wx_FGColor = clBlack
+                    Wx_GeneralStyle = []
+                    Wx_Hidden = False
+                    Wx_IDName = 'ID_WXSTATICTEXT24'
+                    Wx_IDValue = 1340
+                    Wx_LabelStyle = []
+                    Wx_Border = 1
+                    Wx_PaneCaption = 'WxStaticText24'
+                    Wx_PaneName = 'WxStaticText24_Pane'
+                    Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                    Wx_Aui_Dockable_Direction = []
+                    Wx_Aui_Pane_Style = []
+                    Wx_Aui_Pane_Buttons = []
+                    Wx_BestSize_Height = 0
+                    Wx_BestSize_Width = 0
+                    Wx_MinSize_Height = 0
+                    Wx_MinSize_Width = 0
+                    Wx_MaxSize_Height = 0
+                    Wx_MaxSize_Width = 0
+                    Wx_Floating_Height = 0
+                    Wx_Floating_Width = 0
+                    Wx_Floating_X_Pos = 0
+                    Wx_Floating_Y_Pos = 0
+                  end
+                  object WxEditSFMaxLineLength: TWxEdit
+                    Left = 237
+                    Top = 1
+                    Width = 121
+                    Height = 19
+                    BevelInner = bvNone
+                    BevelOuter = bvNone
+                    ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+                    AutoSize = False
+                    TabOrder = 1
+                    Text = '200'
+                    Wx_BGColor = clBlack
+                    Wx_Class = 'wxTextCtrl'
+                    Wx_ControlOrientation = wxControlVertical
+                    Wx_EditStyle = []
+                    Wx_Enabled = False
+                    Wx_FGColor = clBlack
+                    Wx_GeneralStyle = []
+                    Wx_Hidden = False
+                    Wx_IDName = 'ID_WXEDITSFMAXLINELENGTH'
+                    Wx_IDValue = 1341
+                    Wx_Validator = 'wxTextValidator(wxFILTER_NUMERIC, NULL)'
+                    Wx_Border = 1
+                    Wx_MaxLength = 0
+                    Wx_PaneCaption = 'WxEdit1'
+                    Wx_PaneName = 'WxEdit1_Pane'
+                    Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                    Wx_Aui_Dockable_Direction = []
+                    Wx_Aui_Pane_Style = []
+                    Wx_Aui_Pane_Buttons = []
+                    Wx_BestSize_Height = 0
+                    Wx_BestSize_Width = 0
+                    Wx_MinSize_Height = 0
+                    Wx_MinSize_Width = 0
+                    Wx_MaxSize_Height = 0
+                    Wx_MaxSize_Width = 0
+                    Wx_Floating_Height = 0
+                    Wx_Floating_Width = 0
+                    Wx_Floating_X_Pos = 0
+                    Wx_Floating_Y_Pos = 0
+                  end
+                end
+                object WxBoxSizer44: TWxBoxSizer
+                  Left = 181
+                  Top = 255
+                  Width = 99
+                  Height = 19
+                  TabOrder = 12
+                  Wx_Class = 'wxBoxSizer'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_IDName = 'ID_WXBOXSIZER44'
+                  Wx_IDValue = 1345
+                  Wx_Border = 1
+                  object WxCheckBreakAfterLogical: TWxCheckBox
+                    Left = 1
+                    Top = 1
+                    Width = 97
+                    Height = 17
+                    Caption = 
+                      'Break logical conditionals to be placed last on the previous lin' +
+                      'e'
+                    TabOrder = 0
+                    Wx_BGColor = clBlack
+                    Wx_CheckBoxStyle = []
+                    Wx_Class = 'wxCheckBox'
+                    Wx_ControlOrientation = wxControlVertical
+                    Wx_FGColor = clBlack
+                    Wx_GeneralStyle = []
+                    Wx_Hidden = False
+                    Wx_IDName = 'ID_WXCHECKBREAKAFTERLOGICAL'
+                    Wx_IDValue = 1346
+                    Wx_Border = 1
+                    Wx_PaneCaption = 'WxCheckBox18'
+                    Wx_PaneName = 'WxCheckBox18_Pane'
+                    Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                    Wx_Aui_Dockable_Direction = []
+                    Wx_Aui_Pane_Style = []
+                    Wx_Aui_Pane_Buttons = []
+                    Wx_BestSize_Height = 0
+                    Wx_BestSize_Width = 0
+                    Wx_MinSize_Height = 0
+                    Wx_MinSize_Width = 0
+                    Wx_MaxSize_Height = 0
+                    Wx_MaxSize_Width = 0
+                    Wx_Floating_Height = 0
+                    Wx_Floating_Width = 0
+                    Wx_Floating_X_Pos = 0
+                    Wx_Floating_Y_Pos = 0
+                  end
+                end
+              end
+            end
+            object WxAuiNoteBookPage5: TWxAuiNoteBookPage
+              Caption = 'Padding'
+              Wx_BKColor = clBlack
+              Wx_Class = 'wxPanel'
+              Wx_ControlOrientation = wxControlVertical
+              Wx_Default = False
+              Wx_EventList.Strings = (
+                'EVT_UPDATE_UI:OnUpdateUI')
+              Wx_FGColor = clBlack
+              Wx_GeneralStyle = []
+              Wx_Hidden = False
+              Wx_IDName = 'ID_WXAUINOTEBOOKPAGE5'
+              Wx_IDValue = 1288
+              object WxBoxSizer45: TWxBoxSizer
+                Left = 0
+                Top = 0
+                Width = 660
+                Height = 370
+                Align = alClient
+                TabOrder = 0
+                Orientation = wxVertical
+                Wx_Class = 'wxBoxSizer'
+                Wx_ControlOrientation = wxControlVertical
+                Wx_IDName = 'ID_WXBOXSIZER45'
+                Wx_IDValue = 1356
+                Wx_Border = 2
+                Wx_Alignment = [wxALIGN_LEFT]
+                object WxCheckBreakBlocks: TWxCheckBox
+                  Left = 167
+                  Top = 2
+                  Width = 97
+                  Height = 17
+                  Caption = 'Pad empty lines around header blocks (e.g. '#39'if'#39', '#39'while'#39'...)'
+                  TabOrder = 0
+                  Wx_BGColor = clBlack
+                  Wx_CheckBoxStyle = []
+                  Wx_Class = 'wxCheckBox'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_FGColor = clBlack
+                  Wx_GeneralStyle = []
+                  Wx_Hidden = False
+                  Wx_IDName = 'ID_WXCHECKBREAKBLOCKS'
+                  Wx_IDValue = 1357
+                  Wx_Border = 2
+                  Wx_PaneCaption = 'WxCheckBox18'
+                  Wx_PaneName = 'WxCheckBox18_Pane'
+                  Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                  Wx_Aui_Dockable_Direction = []
+                  Wx_Aui_Pane_Style = []
+                  Wx_Aui_Pane_Buttons = []
+                  Wx_BestSize_Height = 0
+                  Wx_BestSize_Width = 0
+                  Wx_MinSize_Height = 0
+                  Wx_MinSize_Width = 0
+                  Wx_MaxSize_Height = 0
+                  Wx_MaxSize_Width = 0
+                  Wx_Floating_Height = 0
+                  Wx_Floating_Width = 0
+                  Wx_Floating_X_Pos = 0
+                  Wx_Floating_Y_Pos = 0
+                end
+                object WxCheckBreakBlocksAll: TWxCheckBox
+                  Left = 167
+                  Top = 23
+                  Width = 97
+                  Height = 17
+                  Caption = 
+                    'Treat closing header blocks (e.g. '#39'else'#39', '#39'catch'#39') as stand-alon' +
+                    'e blocks'
+                  TabOrder = 1
+                  Wx_BGColor = clBlack
+                  Wx_CheckBoxStyle = []
+                  Wx_Class = 'wxCheckBox'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_FGColor = clBlack
+                  Wx_GeneralStyle = []
+                  Wx_Hidden = False
+                  Wx_IDName = 'ID_WXCHECKBREAKBLOCKSALL'
+                  Wx_IDValue = 1358
+                  Wx_Border = 2
+                  Wx_PaneCaption = 'WxCheckBox18'
+                  Wx_PaneName = 'WxCheckBox18_Pane'
+                  Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                  Wx_Aui_Dockable_Direction = []
+                  Wx_Aui_Pane_Style = []
+                  Wx_Aui_Pane_Buttons = []
+                  Wx_BestSize_Height = 0
+                  Wx_BestSize_Width = 0
+                  Wx_MinSize_Height = 0
+                  Wx_MinSize_Width = 0
+                  Wx_MaxSize_Height = 0
+                  Wx_MaxSize_Width = 0
+                  Wx_Floating_Height = 0
+                  Wx_Floating_Width = 0
+                  Wx_Floating_X_Pos = 0
+                  Wx_Floating_Y_Pos = 0
+                end
+                object WxCheckPadOperators: TWxCheckBox
+                  Left = 167
+                  Top = 44
+                  Width = 97
+                  Height = 17
+                  Caption = 'Insert space padding around operators'
+                  TabOrder = 2
+                  Wx_BGColor = clBlack
+                  Wx_CheckBoxStyle = []
+                  Wx_Class = 'wxCheckBox'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_FGColor = clBlack
+                  Wx_GeneralStyle = []
+                  Wx_Hidden = False
+                  Wx_IDName = 'ID_WXCHECKPADOPERATORS'
+                  Wx_IDValue = 1359
+                  Wx_Border = 2
+                  Wx_PaneCaption = 'WxCheckBox18'
+                  Wx_PaneName = 'WxCheckBox18_Pane'
+                  Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                  Wx_Aui_Dockable_Direction = []
+                  Wx_Aui_Pane_Style = []
+                  Wx_Aui_Pane_Buttons = []
+                  Wx_BestSize_Height = 0
+                  Wx_BestSize_Width = 0
+                  Wx_MinSize_Height = 0
+                  Wx_MinSize_Width = 0
+                  Wx_MaxSize_Height = 0
+                  Wx_MaxSize_Width = 0
+                  Wx_Floating_Height = 0
+                  Wx_Floating_Width = 0
+                  Wx_Floating_X_Pos = 0
+                  Wx_Floating_Y_Pos = 0
+                end
+                object WxCheckPadParensOut: TWxCheckBox
+                  Left = 167
+                  Top = 65
+                  Width = 97
+                  Height = 17
+                  Caption = 'Insert space padding around parenthesies on the outside'
+                  TabOrder = 3
+                  Wx_BGColor = clBlack
+                  Wx_CheckBoxStyle = []
+                  Wx_Class = 'wxCheckBox'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_FGColor = clBlack
+                  Wx_GeneralStyle = []
+                  Wx_Hidden = False
+                  Wx_IDName = 'ID_WXCHECKPADPARENSOUT'
+                  Wx_IDValue = 1360
+                  Wx_Border = 2
+                  Wx_PaneCaption = 'WxCheckBox18'
+                  Wx_PaneName = 'WxCheckBox18_Pane'
+                  Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                  Wx_Aui_Dockable_Direction = []
+                  Wx_Aui_Pane_Style = []
+                  Wx_Aui_Pane_Buttons = []
+                  Wx_BestSize_Height = 0
+                  Wx_BestSize_Width = 0
+                  Wx_MinSize_Height = 0
+                  Wx_MinSize_Width = 0
+                  Wx_MaxSize_Height = 0
+                  Wx_MaxSize_Width = 0
+                  Wx_Floating_Height = 0
+                  Wx_Floating_Width = 0
+                  Wx_Floating_X_Pos = 0
+                  Wx_Floating_Y_Pos = 0
+                end
+                object WxCheckPadParensIn: TWxCheckBox
+                  Left = 167
+                  Top = 86
+                  Width = 97
+                  Height = 17
+                  Caption = 'Insert space padding around parenthesies on the inside'
+                  TabOrder = 4
+                  Wx_BGColor = clBlack
+                  Wx_CheckBoxStyle = []
+                  Wx_Class = 'wxCheckBox'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_FGColor = clBlack
+                  Wx_GeneralStyle = []
+                  Wx_Hidden = False
+                  Wx_IDName = 'ID_WXCHECKPADPARENSIN'
+                  Wx_IDValue = 1362
+                  Wx_Border = 2
+                  Wx_PaneCaption = 'WxCheckBox18'
+                  Wx_PaneName = 'WxCheckBox18_Pane'
+                  Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                  Wx_Aui_Dockable_Direction = []
+                  Wx_Aui_Pane_Style = []
+                  Wx_Aui_Pane_Buttons = []
+                  Wx_BestSize_Height = 0
+                  Wx_BestSize_Width = 0
+                  Wx_MinSize_Height = 0
+                  Wx_MinSize_Width = 0
+                  Wx_MaxSize_Height = 0
+                  Wx_MaxSize_Width = 0
+                  Wx_Floating_Height = 0
+                  Wx_Floating_Width = 0
+                  Wx_Floating_X_Pos = 0
+                  Wx_Floating_Y_Pos = 0
+                end
+                object WxCheckPadHeader: TWxCheckBox
+                  Left = 167
+                  Top = 107
+                  Width = 97
+                  Height = 17
+                  Caption = 'Insert space padding between a header and the following paren'
+                  TabOrder = 5
+                  Wx_BGColor = clBlack
+                  Wx_CheckBoxStyle = []
+                  Wx_Class = 'wxCheckBox'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_FGColor = clBlack
+                  Wx_GeneralStyle = []
+                  Wx_Hidden = False
+                  Wx_IDName = 'ID_WXCHECKPADHEADER'
+                  Wx_IDValue = 1363
+                  Wx_Border = 2
+                  Wx_PaneCaption = 'WxCheckBox18'
+                  Wx_PaneName = 'WxCheckBox18_Pane'
+                  Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                  Wx_Aui_Dockable_Direction = []
+                  Wx_Aui_Pane_Style = []
+                  Wx_Aui_Pane_Buttons = []
+                  Wx_BestSize_Height = 0
+                  Wx_BestSize_Width = 0
+                  Wx_MinSize_Height = 0
+                  Wx_MinSize_Width = 0
+                  Wx_MaxSize_Height = 0
+                  Wx_MaxSize_Width = 0
+                  Wx_Floating_Height = 0
+                  Wx_Floating_Width = 0
+                  Wx_Floating_X_Pos = 0
+                  Wx_Floating_Y_Pos = 0
+                end
+                object WxCheckUnpadParens: TWxCheckBox
+                  Left = 167
+                  Top = 128
+                  Width = 97
+                  Height = 17
+                  Caption = 'Remove extra space padding around parenthesis'
+                  TabOrder = 6
+                  Wx_BGColor = clBlack
+                  Wx_CheckBoxStyle = []
+                  Wx_Class = 'wxCheckBox'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_FGColor = clBlack
+                  Wx_GeneralStyle = []
+                  Wx_Hidden = False
+                  Wx_IDName = 'ID_WXCHECKUNPADPARENS'
+                  Wx_IDValue = 1364
+                  Wx_Border = 2
+                  Wx_PaneCaption = 'WxCheckBox18'
+                  Wx_PaneName = 'WxCheckBox18_Pane'
+                  Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                  Wx_Aui_Dockable_Direction = []
+                  Wx_Aui_Pane_Style = []
+                  Wx_Aui_Pane_Buttons = []
+                  Wx_BestSize_Height = 0
+                  Wx_BestSize_Width = 0
+                  Wx_MinSize_Height = 0
+                  Wx_MinSize_Width = 0
+                  Wx_MaxSize_Height = 0
+                  Wx_MaxSize_Width = 0
+                  Wx_Floating_Height = 0
+                  Wx_Floating_Width = 0
+                  Wx_Floating_X_Pos = 0
+                  Wx_Floating_Y_Pos = 0
+                end
+                object WxCheckDelEmptyLine: TWxCheckBox
+                  Left = 167
+                  Top = 149
+                  Width = 97
+                  Height = 17
+                  Caption = 'Delete empty lines within a function or method'
+                  TabOrder = 7
+                  Wx_BGColor = clBlack
+                  Wx_CheckBoxStyle = []
+                  Wx_Class = 'wxCheckBox'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_FGColor = clBlack
+                  Wx_GeneralStyle = []
+                  Wx_Hidden = False
+                  Wx_IDName = 'ID_WXCHECKDELEMPTYLINE'
+                  Wx_IDValue = 1365
+                  Wx_Border = 2
+                  Wx_PaneCaption = 'WxCheckBox18'
+                  Wx_PaneName = 'WxCheckBox18_Pane'
+                  Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                  Wx_Aui_Dockable_Direction = []
+                  Wx_Aui_Pane_Style = []
+                  Wx_Aui_Pane_Buttons = []
+                  Wx_BestSize_Height = 0
+                  Wx_BestSize_Width = 0
+                  Wx_MinSize_Height = 0
+                  Wx_MinSize_Width = 0
+                  Wx_MaxSize_Height = 0
+                  Wx_MaxSize_Width = 0
+                  Wx_Floating_Height = 0
+                  Wx_Floating_Width = 0
+                  Wx_Floating_X_Pos = 0
+                  Wx_Floating_Y_Pos = 0
+                end
+                object WxCheckFillEmptyLines: TWxCheckBox
+                  Left = 167
+                  Top = 170
+                  Width = 97
+                  Height = 17
+                  Caption = 'Fill empty lines with the whitespace of their previous lines'
+                  TabOrder = 8
+                  Wx_BGColor = clBlack
+                  Wx_CheckBoxStyle = []
+                  Wx_Class = 'wxCheckBox'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_FGColor = clBlack
+                  Wx_GeneralStyle = []
+                  Wx_Hidden = False
+                  Wx_IDName = 'ID_WXCHECKFILLEMPTYLINES'
+                  Wx_IDValue = 1366
+                  Wx_Border = 2
+                  Wx_PaneCaption = 'WxCheckBox18'
+                  Wx_PaneName = 'WxCheckBox18_Pane'
+                  Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                  Wx_Aui_Dockable_Direction = []
+                  Wx_Aui_Pane_Style = []
+                  Wx_Aui_Pane_Buttons = []
+                  Wx_BestSize_Height = 0
+                  Wx_BestSize_Width = 0
+                  Wx_MinSize_Height = 0
+                  Wx_MinSize_Width = 0
+                  Wx_MaxSize_Height = 0
+                  Wx_MaxSize_Width = 0
+                  Wx_Floating_Height = 0
+                  Wx_Floating_Width = 0
+                  Wx_Floating_X_Pos = 0
+                  Wx_Floating_Y_Pos = 0
+                end
+                object WxBoxSizer46: TWxBoxSizer
+                  Left = 5
+                  Top = 194
+                  Width = 421
+                  Height = 31
+                  TabOrder = 9
+                  Wx_Class = 'wxBoxSizer'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_IDName = 'ID_WXBOXSIZER46'
+                  Wx_IDValue = 1367
+                  object WxStaticText25: TWxStaticText
+                    Left = 5
+                    Top = 7
+                    Width = 88
+                    Height = 17
+                    Caption = 'Pointer alignment:'
+                    TabOrder = 0
+                    Wx_BGColor = clBlack
+                    Wx_Class = 'wxStaticText'
+                    Wx_ControlOrientation = wxControlVertical
+                    Wx_FGColor = clBlack
+                    Wx_GeneralStyle = []
+                    Wx_Hidden = False
+                    Wx_IDName = 'ID_WXSTATICTEXT25'
+                    Wx_IDValue = 1368
+                    Wx_LabelStyle = []
+                    Wx_PaneCaption = 'WxStaticText25'
+                    Wx_PaneName = 'WxStaticText25_Pane'
+                    Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                    Wx_Aui_Dockable_Direction = []
+                    Wx_Aui_Pane_Style = []
+                    Wx_Aui_Pane_Buttons = []
+                    Wx_BestSize_Height = 0
+                    Wx_BestSize_Width = 0
+                    Wx_MinSize_Height = 0
+                    Wx_MinSize_Width = 0
+                    Wx_MaxSize_Height = 0
+                    Wx_MaxSize_Width = 0
+                    Wx_Floating_Height = 0
+                    Wx_Floating_Width = 0
+                    Wx_Floating_X_Pos = 0
+                    Wx_Floating_Y_Pos = 0
+                  end
+                  object WxChoicePointerAlign: TWxChoice
+                    Left = 103
+                    Top = 5
+                    Width = 104
+                    Height = 21
+                    ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+                    ItemHeight = 13
+                    ItemIndex = 0
+                    TabOrder = 1
+                    Text = 'None'
+                    Items.Strings = (
+                      'None'
+                      'Type'
+                      'Middle'
+                      'Name')
+                    Wx_BGColor = clBlack
+                    Wx_Class = 'wxChoice'
+                    Wx_ControlOrientation = wxControlVertical
+                    Wx_FGColor = clBlack
+                    Wx_GeneralStyle = []
+                    Wx_Hidden = False
+                    Wx_IDName = 'ID_WXCHOICEPOINTERALIGN'
+                    Wx_IDValue = 1369
+                    Wx_PaneCaption = 'WxChoice1'
+                    Wx_PaneName = 'WxChoice1_Pane'
+                    Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                    Wx_Aui_Dockable_Direction = []
+                    Wx_Aui_Pane_Style = []
+                    Wx_Aui_Pane_Buttons = []
+                    Wx_BestSize_Height = 0
+                    Wx_BestSize_Width = 0
+                    Wx_MinSize_Height = 0
+                    Wx_MinSize_Width = 0
+                    Wx_MaxSize_Height = 0
+                    Wx_MaxSize_Width = 0
+                    Wx_Floating_Height = 0
+                    Wx_Floating_Width = 0
+                    Wx_Floating_X_Pos = 0
+                    Wx_Floating_Y_Pos = 0
+                  end
+                  object WxStaticText26: TWxStaticText
+                    Left = 217
+                    Top = 7
+                    Width = 102
+                    Height = 17
+                    Caption = 'Reference alignment'
+                    TabOrder = 2
+                    Wx_BGColor = clBlack
+                    Wx_Class = 'wxStaticText'
+                    Wx_ControlOrientation = wxControlVertical
+                    Wx_FGColor = clBlack
+                    Wx_GeneralStyle = []
+                    Wx_Hidden = False
+                    Wx_IDName = 'ID_WXSTATICTEXT26'
+                    Wx_IDValue = 1370
+                    Wx_LabelStyle = []
+                    Wx_PaneCaption = 'WxStaticText26'
+                    Wx_PaneName = 'WxStaticText26_Pane'
+                    Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                    Wx_Aui_Dockable_Direction = []
+                    Wx_Aui_Pane_Style = []
+                    Wx_Aui_Pane_Buttons = []
+                    Wx_BestSize_Height = 0
+                    Wx_BestSize_Width = 0
+                    Wx_MinSize_Height = 0
+                    Wx_MinSize_Width = 0
+                    Wx_MaxSize_Height = 0
+                    Wx_MaxSize_Width = 0
+                    Wx_Floating_Height = 0
+                    Wx_Floating_Width = 0
+                    Wx_Floating_X_Pos = 0
+                    Wx_Floating_Y_Pos = 0
+                  end
+                  object WxChoiceReferenceAlign: TWxChoice
+                    Left = 329
+                    Top = 5
+                    Width = 87
+                    Height = 21
+                    ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+                    ItemHeight = 13
+                    ItemIndex = 0
+                    TabOrder = 3
+                    Text = 'None'
+                    Items.Strings = (
+                      'None'
+                      'Type'
+                      'Middle'
+                      'Name')
+                    Wx_BGColor = clBlack
+                    Wx_Class = 'wxChoice'
+                    Wx_ControlOrientation = wxControlVertical
+                    Wx_FGColor = clBlack
+                    Wx_GeneralStyle = []
+                    Wx_Hidden = False
+                    Wx_IDName = 'ID_WXCHOICEREFERENCEALIGN'
+                    Wx_IDValue = 1371
+                    Wx_PaneCaption = 'WxChoice1'
+                    Wx_PaneName = 'WxChoice1_Pane'
+                    Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                    Wx_Aui_Dockable_Direction = []
+                    Wx_Aui_Pane_Style = []
+                    Wx_Aui_Pane_Buttons = []
+                    Wx_BestSize_Height = 0
+                    Wx_BestSize_Width = 0
+                    Wx_MinSize_Height = 0
+                    Wx_MinSize_Width = 0
+                    Wx_MaxSize_Height = 0
+                    Wx_MaxSize_Width = 0
+                    Wx_Floating_Height = 0
+                    Wx_Floating_Width = 0
+                    Wx_Floating_X_Pos = 0
+                    Wx_Floating_Y_Pos = 0
+                  end
+                end
+              end
+            end
+            object WxAuiNoteBookPage6: TWxAuiNoteBookPage
+              Caption = 'XML'
+              Wx_BKColor = clBlack
+              Wx_Class = 'wxPanel'
+              Wx_ControlOrientation = wxControlVertical
+              Wx_Default = False
+              Wx_EventList.Strings = (
+                'EVT_UPDATE_UI:OnUpdateUI')
+              Wx_FGColor = clBlack
+              Wx_GeneralStyle = []
+              Wx_Hidden = False
+              Wx_IDName = 'ID_WXAUINOTEBOOKPAGE6'
+              Wx_IDValue = 1379
+              Wx_Alignment = [wxALIGN_LEFT]
+              object WxBoxSizer48: TWxBoxSizer
+                Left = 0
+                Top = 0
+                Width = 660
+                Height = 370
+                Align = alClient
+                TabOrder = 0
+                Orientation = wxVertical
+                Wx_Class = 'wxBoxSizer'
+                Wx_ControlOrientation = wxControlVertical
+                Wx_IDName = 'ID_WXBOXSIZER48'
+                Wx_IDValue = 1381
+                Wx_Alignment = [wxALIGN_LEFT]
+                object WxBoxSizer49: TWxBoxSizer
+                  Left = 44
+                  Top = 4
+                  Width = 135
+                  Height = 29
+                  TabOrder = 0
+                  Wx_Class = 'wxBoxSizer'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_IDName = 'ID_WXBOXSIZER49'
+                  Wx_IDValue = 1382
+                  Wx_Alignment = [wxALIGN_LEFT]
+                  object WxStaticText28: TWxStaticText
+                    Left = 5
+                    Top = 6
+                    Width = 66
+                    Height = 17
+                    Caption = 'XML version:'
+                    TabOrder = 0
+                    Wx_BGColor = clBlack
+                    Wx_Class = 'wxStaticText'
+                    Wx_ControlOrientation = wxControlVertical
+                    Wx_FGColor = clBlack
+                    Wx_GeneralStyle = []
+                    Wx_Hidden = False
+                    Wx_IDName = 'ID_WXSTATICTEXT28'
+                    Wx_IDValue = 1383
+                    Wx_LabelStyle = []
+                    Wx_PaneCaption = 'WxStaticText28'
+                    Wx_PaneName = 'WxStaticText28_Pane'
+                    Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                    Wx_Aui_Dockable_Direction = []
+                    Wx_Aui_Pane_Style = []
+                    Wx_Aui_Pane_Buttons = []
+                    Wx_BestSize_Height = 0
+                    Wx_BestSize_Width = 0
+                    Wx_MinSize_Height = 0
+                    Wx_MinSize_Width = 0
+                    Wx_MaxSize_Height = 0
+                    Wx_MaxSize_Width = 0
+                    Wx_Floating_Height = 0
+                    Wx_Floating_Width = 0
+                    Wx_Floating_X_Pos = 0
+                    Wx_Floating_Y_Pos = 0
+                  end
+                  object WxEditXMLversion: TWxEdit
+                    Left = 81
+                    Top = 5
+                    Width = 49
+                    Height = 19
+                    BevelInner = bvNone
+                    BevelOuter = bvNone
+                    ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+                    AutoSize = False
+                    TabOrder = 1
+                    Text = '1.0'
+                    Wx_BGColor = clBlack
+                    Wx_Class = 'wxTextCtrl'
+                    Wx_ControlOrientation = wxControlVertical
+                    Wx_EditStyle = []
+                    Wx_FGColor = clBlack
+                    Wx_GeneralStyle = []
+                    Wx_Hidden = False
+                    Wx_IDName = 'ID_WXEDITXMLVERSION'
+                    Wx_IDValue = 1384
+                    Wx_Validator = 'wxTextValidator(wxFILTER_ASCII, NULL)'
+                    Wx_MaxLength = 0
+                    Wx_PaneCaption = 'WxEdit1'
+                    Wx_PaneName = 'WxEdit1_Pane'
+                    Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                    Wx_Aui_Dockable_Direction = []
+                    Wx_Aui_Pane_Style = []
+                    Wx_Aui_Pane_Buttons = []
+                    Wx_BestSize_Height = 0
+                    Wx_BestSize_Width = 0
+                    Wx_MinSize_Height = 0
+                    Wx_MinSize_Width = 0
+                    Wx_MaxSize_Height = 0
+                    Wx_MaxSize_Width = 0
+                    Wx_Floating_Height = 0
+                    Wx_Floating_Width = 0
+                    Wx_Floating_X_Pos = 0
+                    Wx_Floating_Y_Pos = 0
+                  end
+                end
+                object WxBoxSizer50: TWxBoxSizer
+                  Left = 5
+                  Top = 44
+                  Width = 201
+                  Height = 29
+                  TabOrder = 1
+                  Wx_Class = 'wxBoxSizer'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_IDName = 'ID_WXBOXSIZER50'
+                  Wx_IDValue = 1385
+                  object WxStaticText29: TWxStaticText
+                    Left = 5
+                    Top = 6
+                    Width = 132
+                    Height = 17
+                    Caption = 'Indentation size(in spaces):'
+                    TabOrder = 0
+                    Wx_BGColor = clBlack
+                    Wx_Class = 'wxStaticText'
+                    Wx_ControlOrientation = wxControlVertical
+                    Wx_FGColor = clBlack
+                    Wx_GeneralStyle = []
+                    Wx_Hidden = False
+                    Wx_IDName = 'ID_WXSTATICTEXT29'
+                    Wx_IDValue = 1386
+                    Wx_LabelStyle = []
+                    Wx_PaneCaption = 'WxStaticText28'
+                    Wx_PaneName = 'WxStaticText28_Pane'
+                    Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                    Wx_Aui_Dockable_Direction = []
+                    Wx_Aui_Pane_Style = []
+                    Wx_Aui_Pane_Buttons = []
+                    Wx_BestSize_Height = 0
+                    Wx_BestSize_Width = 0
+                    Wx_MinSize_Height = 0
+                    Wx_MinSize_Width = 0
+                    Wx_MaxSize_Height = 0
+                    Wx_MaxSize_Width = 0
+                    Wx_Floating_Height = 0
+                    Wx_Floating_Width = 0
+                    Wx_Floating_X_Pos = 0
+                    Wx_Floating_Y_Pos = 0
+                  end
+                  object WxEditXmlIndentSize: TWxEdit
+                    Left = 147
+                    Top = 5
+                    Width = 49
+                    Height = 19
+                    BevelInner = bvNone
+                    BevelOuter = bvNone
+                    ImeName = #20013#25991'('#31616#20307') - '#24517#24212' Bing '#36755#20837#27861
+                    AutoSize = False
+                    TabOrder = 1
+                    Text = '4'
+                    Wx_BGColor = clBlack
+                    Wx_Class = 'wxTextCtrl'
+                    Wx_ControlOrientation = wxControlVertical
+                    Wx_EditStyle = []
+                    Wx_FGColor = clBlack
+                    Wx_GeneralStyle = []
+                    Wx_Hidden = False
+                    Wx_IDName = 'ID_WXEDITXMLINDENTSIZE'
+                    Wx_IDValue = 1387
+                    Wx_Validator = 'wxTextValidator(wxFILTER_NUMERIC, NULL)'
+                    Wx_MaxLength = 0
+                    Wx_PaneCaption = 'WxEdit1'
+                    Wx_PaneName = 'WxEdit1_Pane'
+                    Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                    Wx_Aui_Dockable_Direction = []
+                    Wx_Aui_Pane_Style = []
+                    Wx_Aui_Pane_Buttons = []
+                    Wx_BestSize_Height = 0
+                    Wx_BestSize_Width = 0
+                    Wx_MinSize_Height = 0
+                    Wx_MinSize_Width = 0
+                    Wx_MaxSize_Height = 0
+                    Wx_MaxSize_Width = 0
+                    Wx_Floating_Height = 0
+                    Wx_Floating_Width = 0
+                    Wx_Floating_X_Pos = 0
+                    Wx_Floating_Y_Pos = 0
+                  end
+                end
+              end
+            end
+          end
+        end
+      end
     end
     object WxBoxSizer2: TWxBoxSizer
-      Left = 243
-      Top = 347
+      Left = 244
+      Top = 447
       Width = 195
       Height = 40
       TabOrder = 1

@@ -1,15 +1,14 @@
-                        =================================
-                            MadPython for MadEdit Mod
-                        =================================
+MadPython for MadEdit Mod
+====
 Backgroud:
-----------
+====
 MadEdit is a cross-platform Text/Hex Editor written in C++ & wxWidgets.
 MadEdit supports many useful functions, e.g. SyntaxHighlightings, WordWraps, 
 Encodings, Column/Hex Modes, and a Plugin system(not work yet).
 In HexMode, MadEdit can open large files which size is up to 32GB (INT_MAX*16).
 
 About:
-------
+====
 MadPython is a minimized Python which is used as an embedded macro script for 
 automation of MadEdit-Mod. The Python is based on the work of Adie
 (http://www.adintr.com/article/blog/embedpython_source.html) and was updated 
@@ -21,11 +20,22 @@ I don't think it's a problem for the purpose to use it as a macro script languag
 Below is the list of the functions supported by MadPython. It's not a good doc 
 and it's to be improved. It's only for the advanced users to try and test.
 
-Note: the locale of the MadPython should be the default locale of your system. 
+Note: The locale of the MadPython should be the default locale of your system. 
 Don't support locale changing unless there was oustanding reason for the feature!
 
+Note: The APIs are listed as C++ functions.
+
+C++ Key word|In Python's world
+------------|------------------
+void        |No return value
+int         |integer
+string      |string
+tuple       |tuple
+bool        |bool
+
+
 Simple examples:
-----------------
+====
 1. Find all "abc" in current file, not using regular expression, case insensitive, 
 not whole word match(Simulate the Find All of Find Dialog)
     me=MadEdit()  # Create a MadEdit object
@@ -44,13 +54,13 @@ double line feedings with single one
     me=MadEdit() # Create a MadEdit object
     me.GoToLine(10)
 
-4. Insert 10 "A"s at current caret position(Or use InsertStr for unicode string----python only has string)
+4. Insert 10 "A"s at current caret position(Or use InsertStr for unicode string====python only has string)
     me=MadEdit() # Create a MadEdit object
     for i in range(10):
         me.InsertWChar(65) # Or me.InsertStr('A') or me.InsertStr("A")
 
 Supported method list:
-----------------------
+====
 void ProcessCommand(int command)
 void InsertWChar(int key)
 void InsertStr(const std::string &str)
@@ -256,7 +266,7 @@ void InsertIncrementalNumber(int initial, int step, int total, int stepType, int
 
 
 MadEditCommand
---------------
+====
 None
 CharFirst
 CharLast
@@ -339,32 +349,32 @@ Note: Some of the command is meanless with scriptin, such like MouseNotify. And 
 have meanfull clone like ToUpperCase, Paste, etc
 
 MadWordWrapMode
----------------
+====
 NoWrap
 WrapByWindow
 WrapByColumn
 
 MadEditMode
------------
+====
 TextMode
 ColumnMode
 HexMode
 
 MadCaretType
-------------
+====
 VerticalLine
 HorizontalLine
 Block
 
 MadNewLineType
---------------
+====
 Default
 DOS 
 UNIX 
 MAC
 
 MadConvertEncodingFlag
-----------------------
+====
 None
 SC2TC// Simplified Chinese  ==> Traditional Chinese
 TC2SC// Traditional Chinese ==> Simplified Chinese
@@ -373,31 +383,31 @@ JK2SC// Japanese Kanji      ==> Simplified Chinese
 C2JK  // Trad&Simp Chinese   ==> Japanese Kanji
 
 MadNumberingStepType
---------------------
+====
 Linear
 Exponential
 
 MadNumberFormat
----------------
+====
 DEC
 HEX
 BIN
 OCT
 
 MadNumberAlign
---------------
+====
 Left
 Right
 
 
 
 Author:
-------
+====
 Alston Chen <madedit@gmail.com>
 Minggang Li <minggang.li@gmail.com>
 
 Links:
------
+====
 MadEdit: http://sourceforge.net/projects/madedit/
 MadEdit-Mod: http://sourceforge.net/projects/madedit-mod/
 wxWidgets: http://www.wxwidgets.org

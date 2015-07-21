@@ -1931,6 +1931,34 @@ bool IsTheSame(vector< T >& First, T * Second, size_t Len)
     return true;
 }
 
+int MadEdit::GetIndentCountByPos(wxFileOffset endpos)
+{
+    MadLineIterator lineiter, lit;
+    int endrow = -1, count = 0;
+    vector <ucs4_t> spaces;
+    int lineid = GetLineByPos(lit, endpos, endrow);
+    
+    GetIndentSpaces(lineid, lit, spaces, true, false);
+    count = spaces.size()/GetIndentColumns();
+
+	return count;
+}
+
+void MadEdit::WholeLineSelection()
+{
+    SetSelection(m_SelectionBegin->pos-m_SelectionBegin->linepos, m_SelectionEnd->pos-m_SelectionEnd->linepos+m_SelectionEnd->iter->m_Size);
+}
+
+void MadEdit::ReplaceSelection(wxString &ws)
+{
+    vector < ucs4_t > ucs;
+    TranslateText(ws.c_str(), ws.Len(), &ucs, false);
+    if(ucs.size())
+        InsertString(&ucs[0], ucs.size(), false, false, false);
+    //else
+    //    DeleteSelection(false,vector < int > * rpos,bool bColumnEditing)
+}
+
 void MadEdit::PaintTextLines(wxDC *dc, const wxRect &rect, int toprow, int rowcount, const wxColor &bgcolor)
 {
     MadLineIterator lineiter;

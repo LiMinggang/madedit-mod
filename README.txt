@@ -62,7 +62,7 @@ Example build under Linux
 Boost Python(1.56)
 ./bjam --with-python include="${HOME}/madedit-mod/minipython/Include" python-debugging=off threading=multi variant=release link=static runtime-link=static stage
 wxWidgets(3.0.2)
-./configure --enable-unicode --disable-shared
+./configure --enable-unicode --disable-shared --with-libpng=builtin --with-zlib=builtin --with-expat=builtin
 MadEdit-Mod
 ./configure --with-boost=${HOME}/boost_1_56_0 --with-wxdir=${HOME}/wxWidgets-3.0.2
 
@@ -99,6 +99,28 @@ ChangeLog:
 ----------
 Todo:
 FreeBSD packaging (with FreeBSD 10.01)
+
+Mod v0.3.4.2
+Fix: Enable line breaking to enable disable 2 belows
+Fix: Pad empty lines function
+Fix: XML formatting config GUI
+Fix: Ctrl-Shift-K for Astyle formatter
+Fix: Assertion if the string was not found in Translation
+
+Mod v0.3.4.1
+1. Fix: Saved config of Astyle don't take effect
+2. New: Group text convert/format into menu group
+3. New: Added XML formatter and config
+4. Updated translation
+
+Mod v0.3.4
+1.Fix: Record string issue in FindNext, FindPrev, Replace, ReplaceAll while Regex
+    was enabled
+2.New: Automatically raise window after closing Search/Replace/FindInFiles dialog
+3.New: GTK+ version selection supported(--with-gtk=[VERSION]), 2 and 3 are supported
+4.New: Astyle is integrated for formatting C/C++/C#/Java code(Ctrl-Shift-K)
+5.Updated Simplified Chinese
+
 
 Mod v0.3.3.1
 1. Fix: ReplaceTextAll being recorded as FindTextAll

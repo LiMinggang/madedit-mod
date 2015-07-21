@@ -193,9 +193,6 @@ static void ResizeItem(wxBoxSizer* sizer, wxWindow *item, int ax, int ay)
 
 void MadHighlightingDialog::CreateGUIControls(void)
 {
-    //do not set FontName, it is not exist on all platforms
-    #define wxFont(p0,p1,p2,p3,p4,p5) wxFont(wxDEFAULT,wxDEFAULT,p2,p3,p4)
-
     //Do not add custom code here
 	//wxDev-C++ designer will remove them.
 	//Add the custom code before or after the blocks
@@ -207,7 +204,6 @@ void MadHighlightingDialog::CreateGUIControls(void)
 
 	wxArrayString arrayStringFor_WxListBoxSyntax;
 	WxListBoxSyntax = new wxListBox(this, ID_WXLISTBOXSYNTAX, wxPoint(4, 32), wxSize(145, 380), arrayStringFor_WxListBoxSyntax, wxLB_SINGLE | wxLB_HSCROLL);
-	WxListBoxSyntax->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer1->Add(WxListBoxSyntax,1,wxEXPAND | wxALL,4);
 
 	WxBoxSizer2 = new wxBoxSizer(wxVERTICAL);
@@ -220,42 +216,34 @@ void MadHighlightingDialog::CreateGUIControls(void)
 	WxBoxSizer3->Add(WxBoxSizer4, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 4);
 
 	WxStaticText1 = new wxStaticText(this, ID_WXSTATICTEXT1, _("Scheme:"), wxPoint(3, 5), wxDefaultSize, 0, wxT("WxStaticText1"));
-	WxStaticText1->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer4->Add(WxStaticText1,0,wxALIGN_CENTER_VERTICAL | wxALL,3);
 
 	wxArrayString arrayStringFor_WxComboBoxScheme;
 	WxComboBoxScheme = new wxComboBox(this, ID_WXCOMBOBOXSCHEME, wxT(""), wxPoint(55, 3), wxSize(145, 21), arrayStringFor_WxComboBoxScheme, 0, wxDefaultValidator, wxT("WxComboBoxScheme"));
-	WxComboBoxScheme->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer4->Add(WxComboBoxScheme,0,wxALIGN_CENTER_VERTICAL | wxALL,3);
 
 	WxStaticText2 = new wxStaticText(this, ID_WXSTATICTEXT2, _("You cannot modify the scheme with * sign."), wxPoint(206, 5), wxDefaultSize, 0, wxT("WxStaticText2"));
-	WxStaticText2->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer4->Add(WxStaticText2,0,wxALIGN_CENTER_VERTICAL | wxALL,3);
 
 	WxBoxSizer6 = new wxBoxSizer(wxHORIZONTAL);
 	WxBoxSizer3->Add(WxBoxSizer6, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 2);
 
 	WxButtonLoad = new wxButton(this, ID_WXBUTTONLOAD, _("&Load"), wxPoint(2, 2), wxSize(75, 25), 0, wxDefaultValidator, wxT("WxButtonLoad"));
-	WxButtonLoad->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer6->Add(WxButtonLoad,0,wxALIGN_CENTER_VERTICAL | wxALL,2);
 
 	WxButtonSave = new wxButton(this, ID_WXBUTTONSAVE, _("&Save"), wxPoint(81, 2), wxSize(75, 25), 0, wxDefaultValidator, wxT("WxButtonSave"));
-	WxButtonSave->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer6->Add(WxButtonSave,0,wxALIGN_CENTER_VERTICAL | wxALL,2);
 
 	WxButtonDelete = new wxButton(this, ID_WXBUTTONDELETE, _("&Delete"), wxPoint(160, 2), wxSize(75, 25), 0, wxDefaultValidator, wxT("WxButtonDelete"));
-	WxButtonDelete->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer6->Add(WxButtonDelete,0,wxALIGN_CENTER_VERTICAL | wxALL,2);
 
 	WxStaticLine1 = new wxStaticLine(this, ID_WXSTATICLINE1, wxPoint(47, 69), wxSize(400, -1), wxLI_HORIZONTAL);
-	WxStaticLine1->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer2->Add(WxStaticLine1,0,wxEXPAND | wxALL,1);
 
 	WxBoxSizer5 = new wxBoxSizer(wxHORIZONTAL);
 	WxBoxSizer2->Add(WxBoxSizer5, 1, wxEXPAND | wxALL, 0);
 
 	WxListCtrlKeyword = new wxListCtrl(this, ID_WXLISTCTRLKEYWORD, wxPoint(2, 35), wxSize(145, 259), wxLC_REPORT | wxLC_NO_HEADER | wxLC_SINGLE_SEL, wxDefaultValidator, wxT("WxListCtrlKeyword"));
-	WxListCtrlKeyword->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer5->Add(WxListCtrlKeyword,1,wxEXPAND | wxALL,2);
 
 	WxBoxSizer8 = new wxBoxSizer(wxVERTICAL);
@@ -265,19 +253,15 @@ void MadHighlightingDialog::CreateGUIControls(void)
 	WxBoxSizer8->Add(WxBoxSizer9, 0, wxALIGN_LEFT | wxALL, 2);
 
 	WxCheckBoxBold = new wxCheckBox(this, ID_WXCHECKBOXBOLD, _("Bold"), wxPoint(2, 2), wxSize(97, 17), 0, wxDefaultValidator, wxT("WxCheckBoxBold"));
-	WxCheckBoxBold->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer9->Add(WxCheckBoxBold,0,wxALIGN_LEFT | wxALL,2);
 
 	WxCheckBoxItalic = new wxCheckBox(this, ID_WXCHECKBOXITALIC, _("Italic"), wxPoint(2, 23), wxSize(97, 17), 0, wxDefaultValidator, wxT("WxCheckBoxItalic"));
-	WxCheckBoxItalic->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer9->Add(WxCheckBoxItalic,0,wxALIGN_LEFT | wxALL,2);
 
 	WxCheckBoxUnderline = new wxCheckBox(this, ID_WXCHECKBOXUNDERLINE, _("Underline"), wxPoint(2, 44), wxSize(97, 17), 0, wxDefaultValidator, wxT("WxCheckBoxUnderline"));
-	WxCheckBoxUnderline->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer9->Add(WxCheckBoxUnderline,0,wxALIGN_LEFT | wxALL,2);
 
 	WxStaticLine3 = new wxStaticLine(this, ID_WXSTATICLINE3, wxPoint(47, 68), wxSize(250, -1), wxLI_HORIZONTAL);
-	WxStaticLine3->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer8->Add(WxStaticLine3,0,wxEXPAND | wxALL,1);
 
 	WxBoxSizer10 = new wxBoxSizer(wxHORIZONTAL);
@@ -287,61 +271,48 @@ void MadHighlightingDialog::CreateGUIControls(void)
 	WxBoxSizer10->Add(WxBoxSizer11, 1, wxEXPAND | wxALL, 2);
 
 	WxStaticText3 = new wxStaticText(this, ID_WXSTATICTEXT3, _("Foreground/Text Color"), wxPoint(26, 3), wxDefaultSize, 0, wxT("WxStaticText3"));
-	WxStaticText3->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer11->Add(WxStaticText3,0,wxALIGN_CENTER_HORIZONTAL | wxALL,3);
 
 	WxStaticTextFCName = new wxStaticText(this, ID_WXSTATICTEXTFCNAME, wxT("WxStaticTextFCName"), wxPoint(27, 26), wxDefaultSize, wxALIGN_CENTRE, wxT("WxStaticTextFCName"));
-	WxStaticTextFCName->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer11->Add(WxStaticTextFCName,0,wxALIGN_CENTER_HORIZONTAL | wxALL,3);
 
 	WxPanelFC = new wxPanel(this, ID_WXPANELFC, wxPoint(39, 48), wxSize(85, 20), wxSIMPLE_BORDER);
-	WxPanelFC->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer11->Add(WxPanelFC,0,wxALIGN_CENTER_HORIZONTAL | wxALL,2);
 
 	WxListCtrlFC = new wxListCtrl(this, ID_WXLISTCTRLFC, wxPoint(2, 72), wxSize(160, 140), wxLC_REPORT | wxLC_NO_HEADER | wxLC_SINGLE_SEL, wxDefaultValidator, wxT("WxListCtrlFC"));
-	WxListCtrlFC->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer11->Add(WxListCtrlFC,1,wxEXPAND | wxALL,2);
 
 	WxButtonFC = new wxButton(this, ID_WXBUTTONFC, _("Other Color"), wxPoint(37, 216), wxSize(90, 25), 0, wxDefaultValidator, wxT("WxButtonFC"));
-	WxButtonFC->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer11->Add(WxButtonFC,0,wxALIGN_CENTER_HORIZONTAL | wxALL,2);
 
 	WxStaticLine2 = new wxStaticLine(this, ID_WXSTATICLINE2, wxPoint(169, 25), wxSize(-1, 200), wxLI_VERTICAL);
-	WxStaticLine2->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer10->Add(WxStaticLine2,0,wxEXPAND | wxALL,1);
 
 	WxBoxSizer12 = new wxBoxSizer(wxVERTICAL);
 	WxBoxSizer10->Add(WxBoxSizer12, 1, wxEXPAND | wxALL, 2);
 
 	WxStaticText4 = new wxStaticText(this, ID_WXSTATICTEXT4, _("Background Color"), wxPoint(37, 3), wxDefaultSize, 0, wxT("WxStaticText4"));
-	WxStaticText4->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer12->Add(WxStaticText4,0,wxALIGN_CENTER_HORIZONTAL | wxALL,3);
 
 	WxStaticTextBCName = new wxStaticText(this, ID_WXSTATICTEXTBCNAME, wxT("WxStaticTextBCName"), wxPoint(27, 26), wxDefaultSize, wxALIGN_CENTRE, wxT("WxStaticTextBCName"));
-	WxStaticTextBCName->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer12->Add(WxStaticTextBCName,0,wxALIGN_CENTER_HORIZONTAL | wxALL,3);
 
 	WxPanelBC = new wxPanel(this, ID_WXPANELBC, wxPoint(39, 48), wxSize(85, 20), wxSIMPLE_BORDER);
-	WxPanelBC->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer12->Add(WxPanelBC,0,wxALIGN_CENTER_HORIZONTAL | wxALL,2);
 
 	WxListCtrlBC = new wxListCtrl(this, ID_WXLISTCTRLBC, wxPoint(2, 72), wxSize(160, 140), wxLC_REPORT | wxLC_NO_HEADER | wxLC_SINGLE_SEL, wxDefaultValidator, wxT("WxListCtrlBC"));
-	WxListCtrlBC->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer12->Add(WxListCtrlBC,1,wxEXPAND | wxALL,2);
 
 	WxButtonBC = new wxButton(this, ID_WXBUTTONBC, _("Other Color"), wxPoint(37, 216), wxSize(90, 28), 0, wxDefaultValidator, wxT("WxButtonBC"));
-	WxButtonBC->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer12->Add(WxButtonBC,0,wxALIGN_CENTER_HORIZONTAL | wxALL,2);
 
 	WxBoxSizer7 = new wxBoxSizer(wxHORIZONTAL);
 	WxBoxSizer2->Add(WxBoxSizer7, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 2);
 
 	WxButtonClose = new wxButton(this, wxID_OK, _("&OK"), wxPoint(5, 3), wxSize(90, 27), 0, wxDefaultValidator, wxT("WxButtonClose"));
-	WxButtonClose->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer7->Add(WxButtonClose,0,wxALIGN_CENTER_VERTICAL | wxALL,3);
 
 	WxButtonCancel = new wxButton(this, wxID_CANCEL, _("&Cancel"), wxPoint(99, 3), wxSize(90, 27), 0, wxDefaultValidator, wxT("WxButtonCancel"));
-	WxButtonCancel->SetFont(wxFont(8, wxSWISS, wxNORMAL, wxNORMAL, false, wxT("MS Sans Serif")));
 	WxBoxSizer7->Add(WxButtonCancel,0,wxALIGN_CENTER_VERTICAL | wxALL,3);
 
 	SetTitle(_("Syntax Highlighting Settings"));
@@ -353,9 +324,6 @@ void MadHighlightingDialog::CreateGUIControls(void)
 	Center();
 	
 	////GUI Items Creation End
-
-    //restore wxFont
-    #undef wxFont
 
     ResizeItem(WxBoxSizer4, WxStaticText1, 2, 2);
     ResizeItem(WxBoxSizer4, WxStaticText2, 2, 2);

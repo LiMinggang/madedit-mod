@@ -200,8 +200,10 @@ public:
     void OnUpdateUI_MenuToolsInsertNewLineChar(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuToolsConvertNL(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuToolsConvertEncoding(wxUpdateUIEvent& event);
-    void OnUpdateUI_MenuFile_Markdown2Html(wxUpdateUIEvent& event);
-    void OnUpdateUI_MenuFile_Html2PlainText(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuTools_Markdown2Html(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuTools_Html2PlainText(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuTools_AstyleFormat(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuTools_XMLFormat(wxUpdateUIEvent& event);
 
     void OnUpdateUI_MenuWindow_CheckCount(wxUpdateUIEvent& event);
     
@@ -379,6 +381,8 @@ public:
     void OnToolsWordCount(wxCommandEvent& event);
     void OnToolsMarkdown2Html(wxCommandEvent& event);
     void OnToolsHtml2PlainText(wxCommandEvent& event);
+    void OnToolsAstyleFormat(wxCommandEvent& event);
+    void OnToolsXMLFormat(wxCommandEvent& event);
 
     void OnWindowToggleWindow(wxCommandEvent& event);
     void OnWindowPreviousWindow(wxCommandEvent& event);
@@ -685,6 +689,9 @@ enum { // menu id
     menuChinese2KanjiClipboard,
     menuMarkdown2Html,
     menuHtml2PlainText,
+    menuTextConvFormatter,
+    menuAstyleFormat,
+    menuXMLFormat,
     menuWordCount,
 
     // window

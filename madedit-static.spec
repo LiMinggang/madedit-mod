@@ -1,10 +1,10 @@
 %define release 1
 %define prefix /usr
 %define name madedit
-%define version 0.2.9
+%define version 0.3.4.1
 
 
-Summary: madedit : GTK+2 based text/hex editor
+Summary: madedit : GTK+ based text/hex editor
 Name: %{name}
 Version: %{version}
 Release: %{release}
@@ -13,7 +13,7 @@ Vendor: Alston Chen
 URL: http://madedit.sourceforge.net/
 Group: Applications/Editors
 Source0: %{name}-%{version}.tar.gz
-Packager: Alston Chen <madedit@gmail.com>
+Packager: Minggang Li <minggang.li@gmail.com>
 BuildRoot: %{_builddir}/%{name}-%{version}-root
 
 BuildRequires: gtk2-devel >= 2.4.0

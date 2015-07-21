@@ -82,12 +82,12 @@ build_triplet = @build@
 host_triplet = @host@
 bin_PROGRAMS = madedit$(EXEEXT)
 subdir = .
-DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
+DIST_COMMON = INSTALL NEWS README AUTHORS ChangeLog \
+	$(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/configure $(am__configure_deps) \
-	$(srcdir)/config.h.in mkinstalldirs depcomp $(dist_doc_DATA) \
-	$(noinst_HEADERS) ABOUT-NLS AUTHORS ChangeLog NEWS README \
-	compile config.guess config.rpath config.sub install-sh \
-	missing
+	$(srcdir)/config.h.in mkinstalldirs ABOUT-NLS depcomp \
+	$(dist_doc_DATA) $(noinst_HEADERS) COPYING compile \
+	config.guess config.rpath config.sub install-sh missing
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
@@ -200,7 +200,11 @@ am_madedit_OBJECTS = madedit-MadAboutDialog.$(OBJEXT) \
 	pystate.$(OBJEXT) pystrcmp.$(OBJEXT) pystrtod.$(OBJEXT) \
 	Python-ast.$(OBJEXT) pythonrun.$(OBJEXT) \
 	structmember.$(OBJEXT) symtable.$(OBJEXT) sysmodule.$(OBJEXT) \
-	thread.$(OBJEXT) traceback.$(OBJEXT)
+	thread.$(OBJEXT) traceback.$(OBJEXT) \
+	madedit-formattersettings.$(OBJEXT) \
+	madedit-asstreamiterator.$(OBJEXT) \
+	madedit-ASBeautifier.$(OBJEXT) madedit-ASEnhancer.$(OBJEXT) \
+	madedit-ASFormatter.$(OBJEXT) madedit-ASResource.$(OBJEXT)
 madedit_OBJECTS = $(am_madedit_OBJECTS)
 madedit_LDADD = $(LDADD)
 madedit_LINK = $(CXXLD) $(madedit_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) \
@@ -543,7 +547,8 @@ INCLUDES = -I$(top_srcdir)/charset-detector/include -I$(top_srcdir)/charset-dete
 -I$(top_srcdir)/charset-detector/src/tables -I$(top_srcdir)/spellchecker -I$(top_srcdir)/spellchecker/hunspell/src \
 -I$(top_srcdir)/spellchecker/hunspell/src/hunspell -I$(top_srcdir)/spellchecker/hunspell/src/win_api \
 -I$(top_srcdir)/minipython/Include -I$(top_srcdir)/minipython/Python \
--I$(top_srcdir)/minipython/Modules/zlib -I$(top_srcdir)/markdown
+-I$(top_srcdir)/minipython/Modules/zlib -I$(top_srcdir)/markdown -I$(top_srcdir)/astyle \
+-I$(top_srcdir)/astyle/astyle
 
 madedit_CXXFLAGS = -DDATA_DIR=\"${datadir}\"
 madedit_SOURCES = src/MadAboutDialog.cpp \
@@ -938,7 +943,16 @@ madedit_SOURCES = src/MadAboutDialog.cpp \
 	minipython/Python/symtable.c \
 	minipython/Python/sysmodule.c \
 	minipython/Python/thread.c \
-	minipython/Python/traceback.c
+	minipython/Python/traceback.c \
+	astyle/formattersettings.cpp \
+	astyle/formattersettings.h \
+	astyle/asstreamiterator.cpp \
+	astyle/asstreamiterator.h \
+	astyle/astyle/ASBeautifier.cpp \
+	astyle/astyle/ASEnhancer.cpp \
+	astyle/astyle/ASFormatter.cpp \
+	astyle/astyle/ASResource.cpp \
+	astyle/astyle/astyle.h
 
 dist_doc_DATA = gpl-3.0.txt README.txt MadPython.txt
 pixmapsdir = $(datadir)/pixmaps
@@ -1092,15 +1106,15 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
-	      echo ' cd $(srcdir) && $(AUTOMAKE) --foreign'; \
-	      $(am__cd) $(srcdir) && $(AUTOMAKE) --foreign \
+	      echo ' cd $(srcdir) && $(AUTOMAKE) --gnu'; \
+	      $(am__cd) $(srcdir) && $(AUTOMAKE) --gnu \
 		&& exit 0; \
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign Makefile
+	  $(AUTOMAKE) --gnu Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -1259,6 +1273,10 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/listnode.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/listobject.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/longobject.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/madedit-ASBeautifier.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/madedit-ASEnhancer.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/madedit-ASFormatter.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/madedit-ASResource.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/madedit-CharDistribution.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/madedit-EmbeddedPython.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/madedit-HunspellInterface.Po@am__quote@
@@ -1306,11 +1324,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/madedit-TradSimp.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/madedit-affentry.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/madedit-affixmgr.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/madedit-asstreamiterator.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/madedit-caret_new.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/madedit-clipbrd_gtk.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/madedit-csutil.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/madedit-dictmgr.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/madedit-filemgr.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/madedit-formattersettings.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/madedit-hashmgr.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/madedit-hunspell.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/madedit-hunzip.Po@am__quote@
@@ -4172,6 +4192,90 @@ madedit-markdown.obj: markdown/markdown.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o madedit-markdown.obj `if test -f 'markdown/markdown.cpp'; then $(CYGPATH_W) 'markdown/markdown.cpp'; else $(CYGPATH_W) '$(srcdir)/markdown/markdown.cpp'; fi`
 
+madedit-formattersettings.o: astyle/formattersettings.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT madedit-formattersettings.o -MD -MP -MF $(DEPDIR)/madedit-formattersettings.Tpo -c -o madedit-formattersettings.o `test -f 'astyle/formattersettings.cpp' || echo '$(srcdir)/'`astyle/formattersettings.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/madedit-formattersettings.Tpo $(DEPDIR)/madedit-formattersettings.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='astyle/formattersettings.cpp' object='madedit-formattersettings.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o madedit-formattersettings.o `test -f 'astyle/formattersettings.cpp' || echo '$(srcdir)/'`astyle/formattersettings.cpp
+
+madedit-formattersettings.obj: astyle/formattersettings.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT madedit-formattersettings.obj -MD -MP -MF $(DEPDIR)/madedit-formattersettings.Tpo -c -o madedit-formattersettings.obj `if test -f 'astyle/formattersettings.cpp'; then $(CYGPATH_W) 'astyle/formattersettings.cpp'; else $(CYGPATH_W) '$(srcdir)/astyle/formattersettings.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/madedit-formattersettings.Tpo $(DEPDIR)/madedit-formattersettings.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='astyle/formattersettings.cpp' object='madedit-formattersettings.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o madedit-formattersettings.obj `if test -f 'astyle/formattersettings.cpp'; then $(CYGPATH_W) 'astyle/formattersettings.cpp'; else $(CYGPATH_W) '$(srcdir)/astyle/formattersettings.cpp'; fi`
+
+madedit-asstreamiterator.o: astyle/asstreamiterator.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT madedit-asstreamiterator.o -MD -MP -MF $(DEPDIR)/madedit-asstreamiterator.Tpo -c -o madedit-asstreamiterator.o `test -f 'astyle/asstreamiterator.cpp' || echo '$(srcdir)/'`astyle/asstreamiterator.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/madedit-asstreamiterator.Tpo $(DEPDIR)/madedit-asstreamiterator.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='astyle/asstreamiterator.cpp' object='madedit-asstreamiterator.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o madedit-asstreamiterator.o `test -f 'astyle/asstreamiterator.cpp' || echo '$(srcdir)/'`astyle/asstreamiterator.cpp
+
+madedit-asstreamiterator.obj: astyle/asstreamiterator.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT madedit-asstreamiterator.obj -MD -MP -MF $(DEPDIR)/madedit-asstreamiterator.Tpo -c -o madedit-asstreamiterator.obj `if test -f 'astyle/asstreamiterator.cpp'; then $(CYGPATH_W) 'astyle/asstreamiterator.cpp'; else $(CYGPATH_W) '$(srcdir)/astyle/asstreamiterator.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/madedit-asstreamiterator.Tpo $(DEPDIR)/madedit-asstreamiterator.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='astyle/asstreamiterator.cpp' object='madedit-asstreamiterator.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o madedit-asstreamiterator.obj `if test -f 'astyle/asstreamiterator.cpp'; then $(CYGPATH_W) 'astyle/asstreamiterator.cpp'; else $(CYGPATH_W) '$(srcdir)/astyle/asstreamiterator.cpp'; fi`
+
+madedit-ASBeautifier.o: astyle/astyle/ASBeautifier.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT madedit-ASBeautifier.o -MD -MP -MF $(DEPDIR)/madedit-ASBeautifier.Tpo -c -o madedit-ASBeautifier.o `test -f 'astyle/astyle/ASBeautifier.cpp' || echo '$(srcdir)/'`astyle/astyle/ASBeautifier.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/madedit-ASBeautifier.Tpo $(DEPDIR)/madedit-ASBeautifier.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='astyle/astyle/ASBeautifier.cpp' object='madedit-ASBeautifier.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o madedit-ASBeautifier.o `test -f 'astyle/astyle/ASBeautifier.cpp' || echo '$(srcdir)/'`astyle/astyle/ASBeautifier.cpp
+
+madedit-ASBeautifier.obj: astyle/astyle/ASBeautifier.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT madedit-ASBeautifier.obj -MD -MP -MF $(DEPDIR)/madedit-ASBeautifier.Tpo -c -o madedit-ASBeautifier.obj `if test -f 'astyle/astyle/ASBeautifier.cpp'; then $(CYGPATH_W) 'astyle/astyle/ASBeautifier.cpp'; else $(CYGPATH_W) '$(srcdir)/astyle/astyle/ASBeautifier.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/madedit-ASBeautifier.Tpo $(DEPDIR)/madedit-ASBeautifier.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='astyle/astyle/ASBeautifier.cpp' object='madedit-ASBeautifier.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o madedit-ASBeautifier.obj `if test -f 'astyle/astyle/ASBeautifier.cpp'; then $(CYGPATH_W) 'astyle/astyle/ASBeautifier.cpp'; else $(CYGPATH_W) '$(srcdir)/astyle/astyle/ASBeautifier.cpp'; fi`
+
+madedit-ASEnhancer.o: astyle/astyle/ASEnhancer.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT madedit-ASEnhancer.o -MD -MP -MF $(DEPDIR)/madedit-ASEnhancer.Tpo -c -o madedit-ASEnhancer.o `test -f 'astyle/astyle/ASEnhancer.cpp' || echo '$(srcdir)/'`astyle/astyle/ASEnhancer.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/madedit-ASEnhancer.Tpo $(DEPDIR)/madedit-ASEnhancer.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='astyle/astyle/ASEnhancer.cpp' object='madedit-ASEnhancer.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o madedit-ASEnhancer.o `test -f 'astyle/astyle/ASEnhancer.cpp' || echo '$(srcdir)/'`astyle/astyle/ASEnhancer.cpp
+
+madedit-ASEnhancer.obj: astyle/astyle/ASEnhancer.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT madedit-ASEnhancer.obj -MD -MP -MF $(DEPDIR)/madedit-ASEnhancer.Tpo -c -o madedit-ASEnhancer.obj `if test -f 'astyle/astyle/ASEnhancer.cpp'; then $(CYGPATH_W) 'astyle/astyle/ASEnhancer.cpp'; else $(CYGPATH_W) '$(srcdir)/astyle/astyle/ASEnhancer.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/madedit-ASEnhancer.Tpo $(DEPDIR)/madedit-ASEnhancer.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='astyle/astyle/ASEnhancer.cpp' object='madedit-ASEnhancer.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o madedit-ASEnhancer.obj `if test -f 'astyle/astyle/ASEnhancer.cpp'; then $(CYGPATH_W) 'astyle/astyle/ASEnhancer.cpp'; else $(CYGPATH_W) '$(srcdir)/astyle/astyle/ASEnhancer.cpp'; fi`
+
+madedit-ASFormatter.o: astyle/astyle/ASFormatter.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT madedit-ASFormatter.o -MD -MP -MF $(DEPDIR)/madedit-ASFormatter.Tpo -c -o madedit-ASFormatter.o `test -f 'astyle/astyle/ASFormatter.cpp' || echo '$(srcdir)/'`astyle/astyle/ASFormatter.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/madedit-ASFormatter.Tpo $(DEPDIR)/madedit-ASFormatter.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='astyle/astyle/ASFormatter.cpp' object='madedit-ASFormatter.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o madedit-ASFormatter.o `test -f 'astyle/astyle/ASFormatter.cpp' || echo '$(srcdir)/'`astyle/astyle/ASFormatter.cpp
+
+madedit-ASFormatter.obj: astyle/astyle/ASFormatter.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT madedit-ASFormatter.obj -MD -MP -MF $(DEPDIR)/madedit-ASFormatter.Tpo -c -o madedit-ASFormatter.obj `if test -f 'astyle/astyle/ASFormatter.cpp'; then $(CYGPATH_W) 'astyle/astyle/ASFormatter.cpp'; else $(CYGPATH_W) '$(srcdir)/astyle/astyle/ASFormatter.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/madedit-ASFormatter.Tpo $(DEPDIR)/madedit-ASFormatter.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='astyle/astyle/ASFormatter.cpp' object='madedit-ASFormatter.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o madedit-ASFormatter.obj `if test -f 'astyle/astyle/ASFormatter.cpp'; then $(CYGPATH_W) 'astyle/astyle/ASFormatter.cpp'; else $(CYGPATH_W) '$(srcdir)/astyle/astyle/ASFormatter.cpp'; fi`
+
+madedit-ASResource.o: astyle/astyle/ASResource.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT madedit-ASResource.o -MD -MP -MF $(DEPDIR)/madedit-ASResource.Tpo -c -o madedit-ASResource.o `test -f 'astyle/astyle/ASResource.cpp' || echo '$(srcdir)/'`astyle/astyle/ASResource.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/madedit-ASResource.Tpo $(DEPDIR)/madedit-ASResource.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='astyle/astyle/ASResource.cpp' object='madedit-ASResource.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o madedit-ASResource.o `test -f 'astyle/astyle/ASResource.cpp' || echo '$(srcdir)/'`astyle/astyle/ASResource.cpp
+
+madedit-ASResource.obj: astyle/astyle/ASResource.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT madedit-ASResource.obj -MD -MP -MF $(DEPDIR)/madedit-ASResource.Tpo -c -o madedit-ASResource.obj `if test -f 'astyle/astyle/ASResource.cpp'; then $(CYGPATH_W) 'astyle/astyle/ASResource.cpp'; else $(CYGPATH_W) '$(srcdir)/astyle/astyle/ASResource.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/madedit-ASResource.Tpo $(DEPDIR)/madedit-ASResource.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='astyle/astyle/ASResource.cpp' object='madedit-ASResource.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o madedit-ASResource.obj `if test -f 'astyle/astyle/ASResource.cpp'; then $(CYGPATH_W) 'astyle/astyle/ASResource.cpp'; else $(CYGPATH_W) '$(srcdir)/astyle/astyle/ASResource.cpp'; fi`
+
 .cxx.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
@@ -4685,7 +4789,7 @@ loc:
 		dir=./locale/$$lang; \
 		$(mkinstalldirs) $$dir; \
 		if test -r $(podir)/$$lang.gmo; then \
-		    msgmerge -U $(podir)/$$lang.po $(podir)/madedit.pot \
+			msgmerge -U $(podir)/$$lang.po $(podir)/madedit.pot \
 			msgfmt -o $(podir)/$$lang.gmo $(podir)/$$lang.po \
 			cp $(podir)/$$lang.gmo $$dir/$(DOMAIN).mo; \
 			echo "installing $(podir)/$$lang.gmo as $$dir/$(DOMAIN).mo"; \
