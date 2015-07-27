@@ -102,10 +102,11 @@ FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.3.4.2
 Fix: Enable line breaking to enable disable 2 belows
-Fix: Pad empty lines function
+Fix: Pad empty lines function in Astyle configs
 Fix: XML formatting config GUI
 Fix: Ctrl-Shift-K for Astyle formatter
 Fix: Assertion if the string was not found in Translation
+Fix: Macro Recording, missed escape slash char '\' while searching '"'
 
 Mod v0.3.4.1
 1. Fix: Saved config of Astyle don't take effect
