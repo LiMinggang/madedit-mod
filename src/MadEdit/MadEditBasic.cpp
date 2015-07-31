@@ -338,7 +338,7 @@ void MadEdit::SetTextFont(const wxString &name, int size, bool forceReset)
                 m_Space_Points[2].x = 1;
                 m_Space_Points[2].y = y;
                 m_Space_Points[3].x = 1;
-                m_Space_Points[3].y = y - m_TextFontHeight/6;
+                m_Space_Points[3].y = m_Space_Points[0].y;//y - m_TextFontHeight/6;
             }
             {
                 const int t1 = m_TextFontHeight / 5;

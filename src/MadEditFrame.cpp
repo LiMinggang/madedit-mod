@@ -2451,7 +2451,7 @@ void MadEditFrame::CreateGUIControls( void )
 #ifdef __WXMSW__
     bool bHasMenuIcon = ( wxGetOsVersion() != wxOS_WINDOWS_9X ); // fixed win98 will crash if menuitem has icon
 #endif
-#define OUTPUT_MENU 1
+#define OUTPUT_MENU 0
 #if OUTPUT_MENU //Output all accel key to text file
     wxTextFile MenuTable( g_MadEditHomeDir + wxT( "MenuTable.txt" ) );
     MenuTable.Create();
