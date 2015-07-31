@@ -29,21 +29,23 @@ BEGIN_EVENT_TABLE(MadAboutDialog,wxDialog)
 END_EVENT_TABLE()
     ////Event Table End
 
+wxString g_MadEdit_Version( wxString(wxT("MadEdit-Mod 0.3.5 "))
 #if defined(__WXMSW__)
 #ifdef _WIN64
-wxString g_MadEdit_Version(wxT("MadEdit-Mod 0.3.5 win64"));
++ wxT("win64")
 #else
-wxString g_MadEdit_Version(wxT("MadEdit-Mod 0.3.5 win32"));
++ wxT("win32")
 #endif
 #elif defined(__WXMAC__)
-wxString g_MadEdit_Version(wxT("MadEdit-Mod 0.3.5 MacOS"));
++ wxT("MacOS")
 #else //Linux
 #if defined(__x86_64__) || defined(__LP64__)
-wxString g_MadEdit_Version(wxT("MadEdit-Mod 0.3.5 x86_x64"));
++ wxT("x86_x64")
 #else
-wxString g_MadEdit_Version(wxT("MadEdit-Mod 0.3.5 i686"));
++ wxT("i686")
 #endif
 #endif
+);
 
 wxString g_MadEdit_URL(wxT("http://sourceforge.net/projects/madedit/ or http://sourceforge.net/projects/madedit-mod/"));
 wxString g_MadEditMod_URL(wxT("http://sourceforge.net/projects/madedit-mod/"));

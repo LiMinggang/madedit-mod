@@ -107,6 +107,8 @@ Fix: XML formatting config GUI
 Fix: Ctrl-Shift-K for Astyle formatter
 Fix: Assertion if the string was not found in Translation
 Fix: Macro Recording, missed escape slash char '\' while searching '"'
+Fix: Remove duplicated recoring string in ProcessCommand
+Fix: Part of the line would not be see if "show line number" is checked in WordWrap mode
 
 Mod v0.3.4.1
 1. Fix: Saved config of Astyle don't take effect

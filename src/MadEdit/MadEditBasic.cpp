@@ -925,6 +925,16 @@ void MadEdit::SetDisplayLineNumber(bool value)
             m_Config->SetPath(oldpath);
         }
 
+        if(m_EditMode != emHexMode && m_WordWrapMode != wwmNoWrap)
+        {
+            if(m_WordWrapMode==wwmWrapByWindow)
+                m_DrawingXPos=0;
+
+            UpdateAppearance();
+            RecountLineWidth(true);
+            UpdateScrollBarPos();
+        }
+
         m_RepaintAll=true;
         Refresh(false);
     }
@@ -942,6 +952,16 @@ void MadEdit::SetDisplayBookmark(bool value)
             wxString oldpath=m_Config->GetPath();
             m_Config->Write(wxT("/MadEdit/DisplayBookmark"), value);
             m_Config->SetPath(oldpath);
+        }
+
+        if(m_EditMode != emHexMode && m_WordWrapMode != wwmNoWrap)
+        {
+            if(m_WordWrapMode==wwmWrapByWindow)
+                m_DrawingXPos=0;
+
+            UpdateAppearance();
+            RecountLineWidth(true);
+            UpdateScrollBarPos();
         }
     }
     

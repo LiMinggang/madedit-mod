@@ -7563,83 +7563,83 @@ void MadEdit::ProcessCommand(MadEditCommand command)
     case ecHighlightWords:
         {
             HighlightWords();
-            RecordAsMadMacro(this, wxString(wxT("HighlightWords()")));
+            //RecordAsMadMacro(this, wxString(wxT("HighlightWords()")));
         }
         break;
     case ecSelectAll:
         {
             SelectAll();
-            RecordAsMadMacro(this, wxString(wxT("SelectAll()")));
+            //RecordAsMadMacro(this, wxString(wxT("SelectAll()")));
         }
         break;
 
     case ecCut:
         {
             CutToClipboard();
-            RecordAsMadMacro(this, wxString(wxT("CutToClipboard()")));
+            //RecordAsMadMacro(this, wxString(wxT("CutToClipboard()")));
         }
         break;
     case ecCopy:
         {
             CopyToClipboard();
-            RecordAsMadMacro(this, wxString(wxT("CopyToClipboard()")));
+            //RecordAsMadMacro(this, wxString(wxT("CopyToClipboard()")));
         }
         break;
     case ecPaste:
         {
             PasteFromClipboard();
-            RecordAsMadMacro(this, wxString(wxT("PasteFromClipboard()")));
+            //RecordAsMadMacro(this, wxString(wxT("PasteFromClipboard()")));
         }
         break;
 
     case ecTextMode:
         {
             SetEditMode(emTextMode);
-            RecordAsMadMacro(this, wxString::Format(wxT("SetEditMode(%d)"), emTextMode));
+            //RecordAsMadMacro(this, wxString::Format(wxT("SetEditMode(%d)"), emTextMode));
         }
         break;
     case ecColumnMode:
         {
             SetEditMode(emColumnMode);
-            RecordAsMadMacro(this, wxString::Format(wxT("SetEditMode(%d)"), emColumnMode));
+            //RecordAsMadMacro(this, wxString::Format(wxT("SetEditMode(%d)"), emColumnMode));
         }
         break;
     case ecHexMode:
         {
             SetEditMode(emHexMode);
-            RecordAsMadMacro(this, wxString::Format(wxT("SetEditMode(%d)"), emHexMode));
+            //RecordAsMadMacro(this, wxString::Format(wxT("SetEditMode(%d)"), emHexMode));
         }
         break;
 
     case ecNoWrap:
         {
             SetWordWrapMode(wwmNoWrap);
-            RecordAsMadMacro(this, wxString::Format(wxT("SetWordWrapMode(%d)"), wwmNoWrap));
+            //RecordAsMadMacro(this, wxString::Format(wxT("SetWordWrapMode(%d)"), wwmNoWrap));
         }
         break;
     case ecWrapByWindow:
         {
             SetWordWrapMode(wwmWrapByWindow);
-            RecordAsMadMacro(this, wxString::Format(wxT("SetWordWrapMode(%d)"), wwmWrapByWindow));
+            //RecordAsMadMacro(this, wxString::Format(wxT("SetWordWrapMode(%d)"), wwmWrapByWindow));
         }
         break;
     case ecWrapByColumn:
         {
             SetWordWrapMode(wwmWrapByColumn);
-            RecordAsMadMacro(this, wxString::Format(wxT("SetWordWrapMode(%d)"), wwmWrapByColumn));
+            //RecordAsMadMacro(this, wxString::Format(wxT("SetWordWrapMode(%d)"), wwmWrapByColumn));
         }
         break;
 
     case ecUndo:
         {
             Undo();
-            RecordAsMadMacro(this, wxString(wxT("Undo()")));
+            //RecordAsMadMacro(this, wxString(wxT("Undo()")));
         }
         break;
     case ecRedo:
         {
             Redo();
-            RecordAsMadMacro(this, wxString(wxT("Redo()")));
+            //RecordAsMadMacro(this, wxString(wxT("Redo()")));
         }
         break;
 
@@ -7719,31 +7719,31 @@ void MadEdit::ProcessCommand(MadEditCommand command)
     case ecToUpperCase:
         {
             ToUpperCase();
-            RecordAsMadMacro(this, wxString(wxT("ToUpperCase()")));
+            //RecordAsMadMacro(this, wxString(wxT("ToUpperCase()")));
         }
         break;
     case ecToLowerCase:
         {
             ToLowerCase();
-            RecordAsMadMacro(this, wxString(wxT("ToLowerCase()")));
+            //RecordAsMadMacro(this, wxString(wxT("ToLowerCase()")));
         }
         break;
     case ecInvertCase:
         {
             InvertCase();
-            RecordAsMadMacro(this, wxString(wxT("InvertCase()")));
+            //RecordAsMadMacro(this, wxString(wxT("InvertCase()")));
         }
         break;
     case ecToHalfWidth:
         {
             ToHalfWidth();
-            RecordAsMadMacro(this, wxString(wxT("ToHalfWidth()")));
+            //RecordAsMadMacro(this, wxString(wxT("ToHalfWidth()")));
         }
         break;
     case ecToFullWidth:
         {
             ToFullWidth();
-            RecordAsMadMacro(this, wxString(wxT("ToFullWidth()")));
+            //RecordAsMadMacro(this, wxString(wxT("ToFullWidth()")));
         }
         break;
 
@@ -7858,6 +7858,7 @@ void MadEdit::ProcessCommand(MadEditCommand command)
             }
             else
             {
+#if 0                
                 if((command != ecIncreaseIndent) && (command != ecDecreaseIndent) &&
                     (command != ecComment) && (command != ecUncomment))
                 {
@@ -7868,6 +7869,7 @@ void MadEdit::ProcessCommand(MadEditCommand command)
                         RecordAsMadMacro(this, cmdStr);
                     }
                 }
+#endif
                 switch(command)
                 {
                 case ecLeft:
@@ -8646,26 +8648,26 @@ void MadEdit::ProcessCommand(MadEditCommand command)
 
                 case ecIncreaseIndent:
                     {
-                        RecordAsMadMacro(this, wxString(wxT("IncreaseDecreaseIndent(True)")));
+                        //RecordAsMadMacro(this, wxString(wxT("IncreaseDecreaseIndent(True)")));
                         IncreaseDecreaseIndent(true);
                     }
                     break;
                 case ecDecreaseIndent:
                     {
-                        RecordAsMadMacro(this, wxString(wxT("IncreaseDecreaseIndent(False)")));
+                        //RecordAsMadMacro(this, wxString(wxT("IncreaseDecreaseIndent(False)")));
                         IncreaseDecreaseIndent(false);
                     }
                     break;
 
                 case ecComment:
                     {
-                        RecordAsMadMacro(this, wxString(wxT("CommentUncomment(True)")));
+                        //RecordAsMadMacro(this, wxString(wxT("CommentUncomment(True)")));
                         CommentUncomment(true);
                     }
                     break;
                 case ecUncomment:
                     {
-                        RecordAsMadMacro(this, wxString(wxT("CommentUncomment(False)")));
+                        //RecordAsMadMacro(this, wxString(wxT("CommentUncomment(False)")));
                         CommentUncomment(false);
                     }
                     break;
