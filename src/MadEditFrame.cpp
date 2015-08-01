@@ -1663,8 +1663,8 @@ CommandData CommandTable[] =
     { 0,                2, menuWordWrapToNewLine,        wxT( "menuWordWrapToNewLine" ),        _( "WordWraps To NewLine Chars" ),              wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Convert WordWraps to NewLine chars in the file or selection" )},
     { 0,                2, menuNewLineToWordWrap,        wxT( "menuNewLineToWordWrap" ),        _( "NewLine Chars To WordWraps" ),              wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Convert NewLine chars to WordWraps in the selection" )},
     { 0,                2, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0},
-    { ecToUpperCase,    2, menuToUpperCase,              wxT( "menuToUpperCase" ),              _( "To U&PPERCASE" ),                           wxT( "Ctrl-U" ),       wxITEM_NORMAL,    -1,                0,                     _( "Convert the selection to UPPERCASE" )},
-    { ecToLowerCase,    2, menuToLowerCase,              wxT( "menuToLowerCase" ),              _( "To L&owerCase" ),                           wxT( "Ctrl-Shift-U" ), wxITEM_NORMAL,    -1,                0,                     _( "Convert the selection to lowercase" )},
+    { ecToUpperCase,    2, menuToUpperCase,              wxT( "menuToUpperCase" ),              _( "To U&PPERCASE" ),                           wxT( "Ctrl-U" ),       wxITEM_NORMAL,    -1,                0,                     _( "Convert the selection to uppercase" )},
+    { ecToLowerCase,    2, menuToLowerCase,              wxT( "menuToLowerCase" ),              _( "To l&owerCase" ),                           wxT( "Ctrl-Shift-U" ), wxITEM_NORMAL,    -1,                0,                     _( "Convert the selection to lowercase" )},
     { ecInvertCase,    2, menuInvertCase,                wxT( "menuInvertCase" ),              _( "Inver&t Case" ),                            wxT( "Ctrl-Alt-U" ),   wxITEM_NORMAL,    -1,                0,                     _( "Invert the case of the selection" )},
     { 0,                2, menuCapitalize,               wxT( "menuCapitalize" ),              _( "Capitalize" ),                              0,                   wxITEM_NORMAL,    -1,                0,                     _( "Capitalize words of the selection" )},
     { 0,                2, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0},
@@ -2337,7 +2337,7 @@ void MadEditFrame::CreateGUIControls( void )
     g_Menu_EditSubAdv->Append( menuNewLineToWordWrap, _( "NewLine Chars To WordWraps" ) );
     g_Menu_EditSubAdv->AppendSeparator();
     g_Menu_EditSubAdv->Append( menuToUpperCase, _( "To U&PPERCASE" ) );
-    g_Menu_EditSubAdv->Append( menuToLowerCase, _( "To L&owerCase" ) );
+    g_Menu_EditSubAdv->Append( menuToLowerCase, _( "To l&owerCase" ) );
     g_Menu_EditSubAdv->Append( menuInvertCase, _( "Inver&t Case" ) );
     g_Menu_EditSubAdv->Append( menuCapitalize, _( "Capitalize" ) );
     g_Menu_EditSubAdv->AppendSeparator();
