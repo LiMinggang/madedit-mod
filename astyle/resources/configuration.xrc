@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resource xmlns="http://www.wxwidgets.org/wxxrc" version="2.5.3.0">
+	<object class="wxPanel" name="dlgAstyleConfig">
+		<object class="wxBoxSizer">
+			<orient>wxVERTICAL</orient>
+			<object class="sizeritem">
+				<object class="wxNotebook" name="nbMain">
+					<object class="notebookpage">
+						<object class="wxPanel" name="tabStyle">
+							<object class="wxBoxSizer">
+								<object class="sizeritem">
+									<object class="wxStaticBoxSizer">
+										<label>Bracket style</label>
+										<orient>wxVERTICAL</orient>
+										<object class="sizeritem">
+											<object class="wxRadioButton" name="rbAllman">
+												<label>Allman (ANSI)</label>
+												<tooltip> Allman style uses broken brackets. </tooltip>
+											</object>
+											<flag>wxTOP|wxLEFT|wxRIGHT|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxRadioButton" name="rbJava">
+												<label>Java</label>
+												<tooltip> Java style uses attached brackets. </tooltip>
+											</object>
+											<flag>wxTOP|wxLEFT|wxRIGHT|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxRadioButton" name="rbKr">
+												<label>K&amp;&amp;R</label>
+												<tooltip>Kernighan &amp; Ritchie style uses linux brackets. Opening brackets are broken from namespaces, classes, and function definitions. Brackets are attached to everything else including statements within a function, arrays, structs, and enums. </tooltip>
+											</object>
+											<flag>wxTOP|wxLEFT|wxRIGHT|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxRadioButton" name="rbStroustrup">
+												<label>Stroustrup</label>
+												<tooltip>Stroustrup style uses stroustrup brackets. Brackets are broken from function definitions only. Brackets are attached to everything else including namespaces, classes, and statements within a function, arrays, structs, and enums. This style frequently is used with an indent of 5 spaces. </tooltip>
+											</object>
+											<flag>wxTOP|wxLEFT|wxRIGHT|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxRadioButton" name="rbWhitesmith">
+												<label>Whitesmith</label>
+												<tooltip>Whitesmith style uses broken, indented brackets. Switch blocks and class blocks are indented to prevent a &apos;hanging indent&apos; with following case statements and C++ class modifiers (public, private, protected).</tooltip>
+											</object>
+											<flag>wxTOP|wxLEFT|wxRIGHT|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxRadioButton" name="rbVTK">
+												<label>VTK</label>
+												<tooltip>VTK (Visualization Toolkit) style uses broken, indented brackets, except for the opening bracket. Switch blocks are indented to prevent a &apos;hanging indent&apos; with following case statements.</tooltip>
+											</object>
+											<flag>wxTOP|wxLEFT|wxRIGHT|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxRadioButton" name="rbBanner">
+												<label>Banner</label>
+												<tooltip>Banner style uses attached, indented brackets. Switch blocks and class blocks are indented to prevent a &apos;hanging indent&apos; with following case statements and C++ class modifiers (public, private, protected).</tooltip>
+											</object>
+											<flag>wxTOP|wxLEFT|wxRIGHT|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxRadioButton" name="rbGNU">
+												<label>GNU</label>
+												<tooltip>GNU style uses broken brackets and indented blocks. This style frequently is used with an indent of 2 spaces.&#x0A;Extra indentation is added to blocks within a function. The opening bracket for namespaces, classes, and functions is not indented. </tooltip>
+											</object>
+											<flag>wxTOP|wxLEFT|wxRIGHT|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxRadioButton" name="rbLinux">
+												<label>Linux</label>
+												<tooltip>Linux style uses linux brackets. Opening brackets are broken from namespace, class, and function definitions. Brackets are attached to everything else including statements within a function, arrays, structs, and enums. Minimum conditional indent is one-half indent. If you want a different minimum conditional indent use the K&amp;R style instead. This style works best with a large indent. It frequently is used with an indent of 8 spaces.&#x0A;Also known as Kernel Normal Form (KNF) style, this is the style used in the Linux kernel. </tooltip>
+											</object>
+											<flag>wxTOP|wxLEFT|wxRIGHT|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxRadioButton" name="rbHorstmann">
+												<label>Horstmann</label>
+												<tooltip>Horstmann style uses run-in brackets. Brackets are broken and allow run-in statements. Switches are indented to allow a run-in to the opening switch block. This style frequently is used with an indent of 3 spaces.</tooltip>
+											</object>
+											<flag>wxTOP|wxLEFT|wxRIGHT|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxRadioButton" name="rb1TBS">
+												<label>1TBS</label>
+												<tooltip>&quot;One True Brace Style&quot; uses linux brackets and adds brackets to unbracketed one line conditional statements. Opening brackets are broken from namespaces, classes, and function definitions. Brackets are attached to everything else including statements within a function, arrays, structs, and enums. &#x0A;In the following example brackets have been added to the &quot;return 0;&quot; statement. The option --add-one-line-brackets can also be used with this style. </tooltip>
+											</object>
+											<flag>wxTOP|wxLEFT|wxRIGHT|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxRadioButton" name="rbGoogle">
+												<label>Google</label>
+												<tooltip>Google style uses attached brackets and indented class access modifiers. See the indent-modifiers option for an example of the indented modifiers format. This style frequently is used with an indent of 2 spaces.</tooltip>
+											</object>
+											<flag>wxTOP|wxLEFT|wxRIGHT|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxRadioButton" name="rbPico">
+												<label>Pico</label>
+												<tooltip>Pico style uses run-in brackets and attached closing brackets. Opening brackets are broken and allow run-in statements. The closing bracket is attached to the last line in the block. Switches are indented to allow a run-in to the opening switch block. The style implies keep-one-line-blocks and keep-one-line-statements. If add-brackets is used they will be added as one-line brackets. This style frequently is used with an indent of 2 spaces.</tooltip>
+											</object>
+											<flag>wxTOP|wxLEFT|wxRIGHT|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxRadioButton" name="rbLisp">
+												<label>Lisp</label>
+												<tooltip>Lisp style uses attached opening and closing brackets. Opening brackets are attached at the end of the statement. The closing bracket is attached to the last line in the block. The style implies keep-one-line-statements but NOT keep-one-line-blocks. This style does not support one-line brackets. If add-one-line-brackets is used they will be added as multiple-line brackets.</tooltip>
+											</object>
+											<flag>wxTOP|wxLEFT|wxRIGHT|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxRadioButton" name="rbCustom">
+												<label>Custom</label>
+											</object>
+											<flag>wxTOP|wxLEFT|wxRIGHT|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+									</object>
+									<flag>wxEXPAND</flag>
+									<border>5</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxStaticBoxSizer">
+										<label>Sample</label>
+										<orient>wxVERTICAL</orient>
+										<object class="sizeritem">
+											<object class="wxStaticText" name="ID_STATICTEXT3">
+												<label>Sample of the bracket style option chosen to use:</label>
+											</object>
+											<flag>wxEXPAND</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxTextCtrl" name="txtSample">
+												<style>wxTE_MULTILINE|wxHSCROLL</style>
+											</object>
+											<flag>wxEXPAND</flag>
+											<border>5</border>
+											<option>1</option>
+										</object>
+										<object class="sizeritem">
+											<object class="wxButton" name="Preview">
+												<label>Preview</label>
+											</object>
+											<flag>wxTOP|wxALIGN_CENTER_HORIZONTAL</flag>
+											<border>5</border>
+										</object>
+									</object>
+									<flag>wxLEFT|wxEXPAND</flag>
+									<border>5</border>
+									<option>1</option>
+								</object>
+							</object>
+						</object>
+						<label>Style</label>
+					</object>
+					<object class="notebookpage">
+						<object class="wxPanel" name="tabBrackets">
+							<pos>47,10</pos>
+							<object class="wxBoxSizer">
+								<object class="sizeritem">
+									<object class="wxBoxSizer">
+										<orient>wxVERTICAL</orient>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkAttachClasses">
+												<label>Attach classes</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkAttachExternC">
+												<label>Attach &quot;extern c&quot;</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkAttachNamespaces">
+												<label>Attach namespaces</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkAttachInlines">
+												<label>Attach inlines</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+									</object>
+									<flag>wxEXPAND</flag>
+									<border>5</border>
+									<option>1</option>
+								</object>
+							</object>
+						</object>
+						<label>Brackets</label>
+					</object>
+					<object class="notebookpage">
+						<object class="wxPanel" name="tabIndentation">
+							<object class="wxBoxSizer">
+								<object class="sizeritem">
+									<object class="wxBoxSizer">
+										<orient>wxVERTICAL</orient>
+										<object class="sizeritem">
+											<object class="wxBoxSizer">
+												<object class="sizeritem">
+													<object class="wxStaticText" name="wxID_STATIC">
+														<label>Indentation size (in spaces):</label>
+													</object>
+													<flag>wxALIGN_CENTER_VERTICAL</flag>
+													<border>5</border>
+												</object>
+												<object class="sizeritem">
+													<object class="wxSpinCtrl" name="spnIndentation">
+														<value>4</value>
+														<min>1</min>
+														<max>16</max>
+													</object>
+													<flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+													<border>5</border>
+												</object>
+											</object>
+											<flag>wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkUseTab">
+												<label>Use TABs instead of spaces</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkForceUseTabs">
+												<label>Force using TABs</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkIndentCase">
+												<label>Indent case: statement in switches (commands under case:)</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkIndentClasses">
+												<label>Indent classes (keywords public:, protected: and private:)</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkIndentLabels">
+												<label>Indent labels</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkIndentModifiers">
+												<label>Indent modifiers</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkIndentNamespaces">
+												<label>Indent namespaces</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkIndentSwitches">
+												<label>Indent switches (keyword case:)</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkIndentPreprocBlock">
+												<label>Indent preprocessor blocks at bracket level zero, and within a namespace</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkIndentPreprocDefine">
+												<label>Indent multi-line preprocessor definitions ending with a backslash</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkIndentPreprocCond">
+												<label>Indent preprocessor conditionals</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkIndentCol1Comments">
+												<label>Indent C++ comments beginning in column one</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxBoxSizer">
+												<object class="sizeritem">
+													<object class="wxStaticText" name="ID_STATICTEXT5">
+														<label>Minimal indent added when a header is built of multiple lines:</label>
+													</object>
+													<flag>wxALIGN_CENTER_VERTICAL</flag>
+													<border>5</border>
+												</object>
+												<object class="sizeritem">
+													<object class="wxSpinCtrl" name="spnMinConditionalEvent">
+														<value>2</value>
+														<max>3</max>
+														<tooltip>0 - no minimal indent. The lines will be aligned with the paren on the preceding line.&#x0A;1 - indent at least one additional indent.&#x0A;2 - indent at least two additional indents.&#x0A;3 - indent at least one-half an additional indent. This is intended for large indents (e.g. 8).&#x0A;The default value is 2, two additional indents.</tooltip>
+													</object>
+													<flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+													<border>5</border>
+												</object>
+											</object>
+											<flag>wxEXPAND</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxBoxSizer">
+												<object class="sizeritem">
+													<object class="wxStaticText" name="ID_STATICTEXT6">
+														<label>Maximum of # spaces to indent a continuation line (max. 120):</label>
+													</object>
+													<flag>wxALIGN_CENTER_VERTICAL</flag>
+													<border>5</border>
+												</object>
+												<object class="sizeritem">
+													<object class="wxTextCtrl" name="txtMaxInStatementIndent">
+														<value>40</value>
+													</object>
+													<flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+													<border>5</border>
+												</object>
+											</object>
+											<flag>wxEXPAND</flag>
+											<border>5</border>
+										</object>
+									</object>
+									<flag>wxEXPAND</flag>
+									<border>5</border>
+									<option>1</option>
+								</object>
+							</object>
+						</object>
+						<label>Indentation</label>
+					</object>
+					<object class="notebookpage">
+						<object class="wxPanel" name="tabFormatting">
+							<object class="wxBoxSizer">
+								<object class="sizeritem">
+									<object class="wxBoxSizer">
+										<orient>wxVERTICAL</orient>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkBreakClosing">
+												<label>Break closing headers from their immediately preceding closing brackets</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkBreakElseIfs">
+												<label>Break &apos;else if()&apos; header combinations into seperate lines</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkAddBrackets">
+												<label>Add brackets to unbracketed one line conditional statements</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkAddOneLineBrackets">
+												<label>Add one line brackets to unbracketed one line conditional statements</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkRemoveBrackets">
+												<label>Remove brackets from conditional statements (ingle statement on a single line)</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkKeepBlocks">
+												<label>Don&apos;t break one-line blocks</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkKeepComplex">
+												<label>Don&apos;t break complex statements and multiple statements residing in a single line</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkConvertTabs">
+												<label>Convert TABs to spaces</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkCloseTemplates">
+												<label>Closes whitespace in the angle brackets of template definitions</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkRemoveCommentPrefix">
+												<label>Remove the preceding &apos;*&apos; in a multi-line comment that begins a line</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkBreakLines">
+												<label>Enable line breaking</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxBoxSizer">
+												<object class="sizeritem">
+													<object class="wxStaticText" name="ID_STATICTEXT1">
+														<label>Break lines after amount of chars (range: 50-200)</label>
+													</object>
+													<flag>wxALIGN_CENTER_VERTICAL</flag>
+													<border>5</border>
+												</object>
+												<object class="sizeritem">
+													<object class="wxTextCtrl" name="txtMaxLineLength">
+														<value>200</value>
+														<enabled>0</enabled>
+													</object>
+													<flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+													<border>5</border>
+													<option>1</option>
+												</object>
+											</object>
+											<flag>wxLEFT|wxALIGN_LEFT</flag>
+											<border>15</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkBreakAfterLogical">
+												<label>Break logical conditionals to be placed last on the previous line</label>
+												<enabled>0</enabled>
+											</object>
+											<flag>wxLEFT|wxALIGN_LEFT</flag>
+											<border>15</border>
+										</object>
+									</object>
+									<flag>wxEXPAND</flag>
+									<border>5</border>
+									<option>1</option>
+								</object>
+							</object>
+						</object>
+						<label>Formatting</label>
+					</object>
+					<object class="notebookpage">
+						<object class="wxPanel" name="tabPadding">
+							<pos>168,-45</pos>
+							<object class="wxBoxSizer">
+								<object class="sizeritem">
+									<object class="wxBoxSizer">
+										<orient>wxVERTICAL</orient>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkBreakBlocks">
+												<label>Pad empty lines around header blocks (e.g. &apos;if&apos;, &apos;while&apos;...)</label>
+											</object>
+											<flag>wxTOP|wxBOTTOM|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkBreakBlocksAll">
+												<label>Treat closing header blocks (e.g. &apos;else&apos;, &apos;catch&apos;) as stand-alone blocks</label>
+												<enabled>0</enabled>
+											</object>
+											<flag>wxLEFT|wxALIGN_LEFT</flag>
+											<border>15</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkPadOperators">
+												<label>Insert space padding around operators</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkPadParensOut">
+												<label>Insert space padding around parenthesies on the outside</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkPadParensIn">
+												<label>Insert space padding around parenthesies on the inside</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkPadHeader">
+												<label>Insert space padding between a header and the following paren</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkUnpadParens">
+												<label>Remove extra space padding around parenthesis</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkDelEmptyLine">
+												<label>Delete empty lines within a function or method</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="chkFillEmptyLines">
+												<label>Fill empty lines with the whitespace of their previous lines</label>
+											</object>
+											<flag>wxTOP|wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxBoxSizer">
+												<object class="sizeritem">
+													<object class="wxStaticText" name="ID_STATICTEXT2">
+														<label>Pointer alignment:</label>
+													</object>
+													<flag>wxALIGN_CENTER_VERTICAL</flag>
+													<border>5</border>
+												</object>
+												<object class="sizeritem">
+													<object class="wxComboBox" name="cmbPointerAlign">
+														<content>
+															<item>None</item>
+															<item>Type</item>
+															<item>Middle</item>
+															<item>Name</item>
+														</content>
+														<selection>0</selection>
+														<style>wxCB_DROPDOWN</style>
+													</object>
+													<flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+													<border>5</border>
+												</object>
+												<object class="sizeritem">
+													<object class="wxStaticText" name="ID_STATICTEXT4">
+														<label>Reference alignment</label>
+													</object>
+													<flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+													<border>5</border>
+													<option>1</option>
+												</object>
+												<object class="sizeritem">
+													<object class="wxComboBox" name="cmbReferenceAlign">
+														<content>
+															<item>None</item>
+															<item>Type</item>
+															<item>Middle</item>
+															<item>Name</item>
+														</content>
+														<selection>0</selection>
+													</object>
+													<flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+													<border>5</border>
+												</object>
+											</object>
+											<flag>wxALIGN_LEFT</flag>
+											<border>5</border>
+										</object>
+									</object>
+									<flag>wxEXPAND</flag>
+									<border>5</border>
+									<option>1</option>
+								</object>
+							</object>
+						</object>
+						<label>Padding</label>
+					</object>
+				</object>
+				<flag>wxLEFT|wxEXPAND</flag>
+				<border>5</border>
+				<option>1</option>
+			</object>
+		</object>
+	</object>
+</resource>

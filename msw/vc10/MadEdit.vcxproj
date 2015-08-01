@@ -1,0 +1,314 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Unicode Debug|Win32">
+      <Configuration>Unicode Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Unicode Debug|x64">
+      <Configuration>Unicode Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Unicode Release|Win32">
+      <Configuration>Unicode Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Unicode Release|x64">
+      <Configuration>Unicode Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{FA2A8E06-DD41-44E0-A1CB-02906D4A080E}</ProjectGuid>
+    <RootNamespace>MadEdit</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|x64'">Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">Debug\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|x64'">Debug\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">false</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|x64'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Unicode Release|x64'">Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">Release\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Unicode Release|x64'">Release\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">false</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Unicode Release|x64'">false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(WXWIN3)\lib\vc_lib\mswud;$(WXWIN3)\include;$(BOOST);..\..\charset-detector\include;..\..\charset-detector\src;..\..\charset-detector\src\tables;$(SolutionDir)\..\..\minipython\Include;$(SolutionDir)\..\..\minipython\PC;$(SolutionDir)\..\..\spellchecker;$(SolutionDir)\..\..\spellchecker\hunspell\src;..\..\markdown;..\..\astyle;..\..\astyle\astyle;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;HUNSPELL_STATIC;Py_NO_ENABLE_SHARED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <DisableSpecificWarnings>4068;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(WXWIN3)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalOptions>/ignore:4217 /ignore:4049 /ignore:4204 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>wxmsw30ud_core.lib;wxbase30ud.lib;wxmsw30ud_aui.lib;wxbase30ud_xml.lib;wxexpatd.lib;wxmsw30ud_html.lib;wxpngd.lib;wxzlibd.lib;python27_d.lib;libhunspell.lib;comctl32.lib;uuid.lib;rpcrt4.lib;User32.Lib;Gdi32.Lib;Shell32.Lib;AdvAPI32.Lib;Ole32.Lib;OleAut32.Lib;ComDlg32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)MadEdit.exe</OutputFile>
+      <AdditionalLibraryDirectories>$(WXWIN3)\lib\vc_lib;$(TargetDir);$(BOOST)\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(WXWIN3)\lib\vc_x64_lib\mswud;$(WXWIN3)\include;$(BOOST);..\..\charset-detector\include;..\..\charset-detector\src;..\..\charset-detector\src\tables;..\..\minipython\Include;..\..\minipython\PC;..\..\spellchecker;..\..\spellchecker\hunspell\src;..\..\markdown;..\..\astyle;..\..\astyle\astyle;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WIN64;_DEBUG;_WINDOWS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;HUNSPELL_STATIC;Py_NO_ENABLE_SHARED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4068</DisableSpecificWarnings>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(WXWIN)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalOptions>/ignore:4217 /ignore:4049 /ignore:4204 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>wxmsw30ud_core.lib;wxbase30ud.lib;wxmsw30ud_aui.lib;wxbase30ud_xml.lib;wxexpatd.lib;wxmsw30ud_html.lib;wxpngd.lib;wxzlibd.lib;python27_d.lib;libboost_python-vc100-mt-sgyd-1_56.lib;libhunspell.lib;comctl32.lib;uuid.lib;rpcrt4.lib;User32.Lib;Gdi32.Lib;Shell32.Lib;AdvAPI32.Lib;Ole32.Lib;OleAut32.Lib;ComDlg32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)MadEdit.exe</OutputFile>
+      <AdditionalLibraryDirectories>$(WXWIN3)\lib\vc_x64_lib;$(TargetDir);$(BOOST)\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">
+    <ClCompile>
+      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
+      <AdditionalIncludeDirectories>$(WXWIN3)\lib\vc_lib\mswu;$(WXWIN3)\include;$(BOOST);..\..\charset-detector\include;..\..\charset-detector\src;..\..\charset-detector\src\tables;..\..\minipython\Include;..\..\minipython\PC;$(SolutionDir)\..\..\spellchecker;$(SolutionDir)\..\..\spellchecker\hunspell\src;..\..\markdown;..\..\astyle;..\..\astyle\astyle;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;HUNSPELL_STATIC;Py_NO_ENABLE_SHARED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DisableSpecificWarnings>4706;4068;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>MaxSpeed</Optimization>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(WXWIN)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalOptions>/ignore:4217 /ignore:4049 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>wxmsw30u_core.lib;wxbase30u.lib;wxmsw30u_aui.lib;wxbase30u_xml.lib;wxexpat.lib;wxmsw30u_html.lib;wxpng.lib;wxzlib.lib;python27.lib;libboost_python-vc100-mt-s-1_56.lib;libhunspell.lib;comctl32.lib;rpcrt4.lib;User32.Lib;Gdi32.Lib;Shell32.Lib;AdvAPI32.Lib;Ole32.Lib;OleAut32.Lib;ComDlg32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)MadEdit.exe</OutputFile>
+      <AdditionalLibraryDirectories>$(WXWIN3)\lib\vc_lib;$(TargetDir);$(BOOST)\stage\lib</AdditionalLibraryDirectories>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Release|x64'">
+    <ClCompile>
+      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
+      <AdditionalIncludeDirectories>$(WXWIN3)\lib\vc_x64_lib\mswu;$(WXWIN3)\include;$(BOOST);..\..\charset-detector\include;..\..\charset-detector\src;..\..\charset-detector\src\tables;..\..\minipython\Include;..\..\minipython\PC;$(SolutionDir)\..\..\spellchecker;$(SolutionDir)\..\..\spellchecker\hunspell\src;$(SolutionDir)\..\..\markdown;..\..\astyle;..\..\astyle\astyle;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WIN64;NDEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;HUNSPELL_STATIC;Py_NO_ENABLE_SHARED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DisableSpecificWarnings>4706;4068;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(WXWIN3)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalOptions>/ignore:4217 /ignore:4049 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>wxmsw30u_core.lib;wxbase30u.lib;wxmsw30u_aui.lib;wxbase30u_xml.lib;wxexpat.lib;wxmsw30u_html.lib;wxpng.lib;wxzlib.lib;python27.lib;libboost_python-vc100-mt-s-1_56.lib;libhunspell.lib;comctl32.lib;rpcrt4.lib;User32.Lib;Gdi32.Lib;Shell32.Lib;AdvAPI32.Lib;Ole32.Lib;OleAut32.Lib;ComDlg32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)MadEdit.exe</OutputFile>
+      <AdditionalLibraryDirectories>$(WXWIN3)\lib\vc_x64_lib;$(TargetDir);$(BOOST)\stage\lib</AdditionalLibraryDirectories>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\astyle\asstreamiterator.cpp" />
+    <ClCompile Include="..\..\astyle\astyle\ASBeautifier.cpp" />
+    <ClCompile Include="..\..\astyle\astyle\ASEnhancer.cpp" />
+    <ClCompile Include="..\..\astyle\astyle\ASFormatter.cpp" />
+    <ClCompile Include="..\..\astyle\astyle\ASResource.cpp" />
+    <ClCompile Include="..\..\astyle\formattersettings.cpp" />
+    <ClCompile Include="..\..\markdown\markdown-tokens.cpp" />
+    <ClCompile Include="..\..\markdown\markdown.cpp" />
+    <ClCompile Include="..\..\src\EmbeddedPython.cpp" />
+    <ClCompile Include="..\..\src\MadAboutDialog.cpp" />
+    <ClCompile Include="..\..\src\MadConvEncDialog.cpp" />
+    <ClCompile Include="..\..\src\MadEditApp.cpp" />
+    <ClCompile Include="..\..\src\MadEditFrame.cpp" />
+    <ClCompile Include="..\..\src\MadFileAssociationDialog.cpp" />
+    <ClCompile Include="..\..\src\MadFindInFilesDialog.cpp" />
+    <ClCompile Include="..\..\src\MadHighlightingDialog.cpp" />
+    <ClCompile Include="..\..\src\MadMacroDlg.cpp" />
+    <ClCompile Include="..\..\src\MadNumberDlg.cpp" />
+    <ClCompile Include="..\..\src\MadOptionsDialog.cpp" />
+    <ClCompile Include="..\..\src\MadPlugin.cpp" />
+    <ClCompile Include="..\..\src\MadPrintout.cpp" />
+    <ClCompile Include="..\..\src\MadPurgeHistoryDialog.cpp" />
+    <ClCompile Include="..\..\src\MadRecentList.cpp" />
+    <ClCompile Include="..\..\src\MadReplaceDialog.cpp" />
+    <ClCompile Include="..\..\src\MadSearchDialog.cpp" />
+    <ClCompile Include="..\..\src\MadSortDialog.cpp" />
+    <ClCompile Include="..\..\src\MadUtils.cpp" />
+    <ClCompile Include="..\..\src\MadWordCountDialog.cpp" />
+    <ClCompile Include="..\..\src\MadEdit\MadEdit.cpp" />
+    <ClCompile Include="..\..\src\MadEdit\MadEditAdvanced.cpp" />
+    <ClCompile Include="..\..\src\MadEdit\MadEditBasic.cpp" />
+    <ClCompile Include="..\..\src\MadEdit\MadEditCommand.cpp" />
+    <ClCompile Include="..\..\src\MadEdit\MadEditSearch.cpp" />
+    <ClCompile Include="..\..\src\MadEdit\MadEncoding.cpp" />
+    <ClCompile Include="..\..\src\MadEdit\MadLines.cpp" />
+    <ClCompile Include="..\..\src\MadEdit\MadSyntax.cpp" />
+    <ClCompile Include="..\..\src\MadEdit\MadUndo.cpp" />
+    <ClCompile Include="..\..\src\MadEdit\TradSimp.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\CharDistribution.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\entry\impl.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\JpCntx.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangBulgarianModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangCyrillicModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangGreekModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangHebrewModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangHungarianModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangThaiModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\nsBig5Prober.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\nsCharSetProber.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\nsEscCharsetProber.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\nsEscSM.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\nsEUCJPProber.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\nsEUCKRProber.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\nsEUCTWProber.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\nsGB2312Prober.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\nsHebrewProber.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\nsLatin1Prober.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\nsMBCSGroupProber.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\nsMBCSSM.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\nsSBCharSetProber.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\nsSBCSGroupProber.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\nsSJISProber.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\nsUniversalDetector.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\nsUTF8Prober.cpp" />
+    <ClCompile Include="..\..\spellchecker\HunspellInterface.cpp" />
+    <ClCompile Include="..\..\spellchecker\PersonalDictionary.cpp" />
+    <ClCompile Include="..\..\spellchecker\SpellCheckEngineInterface.cpp" />
+    <ClCompile Include="..\..\spellchecker\SpellCheckEngineOption.cpp" />
+    <ClCompile Include="..\..\spellchecker\SpellCheckerManager.cpp" />
+    <ClCompile Include="..\..\spellchecker\SpellCheckUserInterface.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\astyle\asstreamiterator.h" />
+    <ClInclude Include="..\..\astyle\astylepredefinedstyles.h" />
+    <ClInclude Include="..\..\astyle\astyle\astyle.h" />
+    <ClInclude Include="..\..\astyle\formattersettings.h" />
+    <ClInclude Include="..\..\markdown\markdown-tokens.h" />
+    <ClInclude Include="..\..\markdown\markdown.h" />
+    <ClInclude Include="..\..\spellchecker\HunspellInterface.h" />
+    <ClInclude Include="..\..\spellchecker\PersonalDictionary.h" />
+    <ClInclude Include="..\..\spellchecker\SpellCheckEngineInterface.h" />
+    <ClInclude Include="..\..\spellchecker\SpellCheckEngineOption.h" />
+    <ClInclude Include="..\..\spellchecker\SpellCheckerManager.h" />
+    <ClInclude Include="..\..\spellchecker\SpellCheckUserInterface.h" />
+    <ClInclude Include="..\..\src\MadAboutDialog.h" />
+    <ClInclude Include="..\..\src\MadConvEncDialog.h" />
+    <ClInclude Include="..\..\src\MadEditApp.h" />
+    <ClInclude Include="..\..\src\MadEditFrame.h" />
+    <ClInclude Include="..\..\src\MadFileAssociationDialog.h" />
+    <ClInclude Include="..\..\src\MadFindInFilesDialog.h" />
+    <ClInclude Include="..\..\src\MadHighlightingDialog.h" />
+    <ClInclude Include="..\..\src\MadMacroDlg.h" />
+    <ClInclude Include="..\..\src\MadOptionsDialog.h" />
+    <ClInclude Include="..\..\src\MadPrintout.h" />
+    <ClInclude Include="..\..\src\MadPurgeHistoryDialog.h" />
+    <ClInclude Include="..\..\src\MadRecentList.h" />
+    <ClInclude Include="..\..\src\MadReplaceDialog.h" />
+    <ClInclude Include="..\..\src\MadSearchDialog.h" />
+    <ClInclude Include="..\..\src\MadSortDialog.h" />
+    <ClInclude Include="..\..\src\MadUtils.h" />
+    <ClInclude Include="..\..\src\MadWordCountDialog.h" />
+    <ClInclude Include="..\..\src\MadEdit\MadEdit.h" />
+    <ClInclude Include="..\..\src\MadEdit\MadEditCommand.h" />
+    <ClInclude Include="..\..\src\MadEdit\MadEncoding.h" />
+    <ClInclude Include="..\..\src\MadEdit\MadLines.h" />
+    <ClInclude Include="..\..\src\MadEdit\MadSyntax.h" />
+    <ClInclude Include="..\..\src\MadEdit\MadUndo.h" />
+    <ClInclude Include="..\..\src\plugin.h" />
+    <ClInclude Include="..\..\src\MadEdit\TradSimp.h" />
+    <ClInclude Include="..\..\src\MadEdit\ucs4_t.h" />
+    <ClInclude Include="..\..\charset-detector\include\chardetect.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\src\MadEditApp.rc">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">$(WXWIN3)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="libhunspell.vcxproj">
+      <Project>{53609bb3-d874-465c-af7b-df626db0d89b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="pythoncore.vcxproj">
+      <Project>{cf7ac3d1-e2df-41d2-bea6-1e2556cdea26}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_plugin_manifest_file>
+    <SdkVersion major="1" minor="10" release="0" />
+    <Plugin name="AStylePlugin">
+        <Value title="Source code formatter (AStyle)" />
+        <Value version="2.05.1" />
+        <Value description="Uses AStyle 2.05.1 to reformat your sources. Useful when copying
+code from the net or if you just want to reformat your sources
+based on a specific style.
+The configuration dialog for this plugin can be found clicking on Settings -> Editor (Source formatter)." />
+        <Value author="Yiannis Mandravellos | Morten MacFly | Ceniza" />
+        <Value authorEmail="info@codeblocks.org | mortenmacfly@codeblocks.org | ceniza666@gmail.com" />
+        <Value authorWebsite="http://www.codeblocks.org" />
+        <Value thanksTo="AStyle team for the useful library.
+See http://astyle.sourceforge.net" />
+        <Value license="GPL" />
+    </Plugin>
+</CodeBlocks_plugin_manifest_file>
