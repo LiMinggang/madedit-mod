@@ -1665,8 +1665,8 @@ CommandData CommandTable[] =
     { 0,                2, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0},
     { ecToUpperCase,    2, menuToUpperCase,              wxT( "menuToUpperCase" ),              _( "To U&pperCase" ),                           wxT( "Ctrl-U" ),       wxITEM_NORMAL,    -1,                0,                     _( "Convert the selection to uppercase" )},
     { ecToLowerCase,    2, menuToLowerCase,              wxT( "menuToLowerCase" ),              _( "To L&owerCase" ),                           wxT( "Ctrl-Shift-U" ), wxITEM_NORMAL,    -1,                0,                     _( "Convert the selection to lowercase" )},
-    { ecInvertCase,    2, menuInvertCase,              wxT( "menuInvertCase" ),              _( "Inver&t Case" ),                            wxT( "Ctrl-Alt-U" ),   wxITEM_NORMAL,    -1,                0,                     _( "Invert the case of the selection" )},
-    { 0,                2, menuCapitalize,              wxT( "menuCapitalize" ),              _( "Capitalize" ),                              0,                   wxITEM_NORMAL,    -1,                0,                     _( "Capitalize words of the selection" )},
+    { ecInvertCase,    2, menuInvertCase,                wxT( "menuInvertCase" ),              _( "Inver&t Case" ),                            wxT( "Ctrl-Alt-U" ),   wxITEM_NORMAL,    -1,                0,                     _( "Invert the case of the selection" )},
+    { 0,                2, menuCapitalize,               wxT( "menuCapitalize" ),              _( "Capitalize" ),                              0,                   wxITEM_NORMAL,    -1,                0,                     _( "Capitalize words of the selection" )},
     { 0,                2, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0},
     { ecToHalfWidth,    2, menuToHalfWidth,              wxT( "menuToHalfWidth" ),              _( "To H&alfwidth" ),                           wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Convert the selection to halfwidth" )},
     { 0,                2, menuToHalfWidthByOptions,     wxT( "menuToHalfWidthByOptions" ),     _( "To Halfwidth by Options..." ),              wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Convert the selection to halfwidth by options" )},
@@ -5456,14 +5456,16 @@ void MadEditFrame::OnEditToHalfWidthByOptions( wxCommandEvent& event )
     wxString choices[4] = { _( "ASCII characters" ), _( "Japanese characters" ),
                             _( "Korean characters" ), _( "other characters" )
                           };
-#if wxCHECK_VERSION(2,9,0)
+#if (wxMAJOR_VERSION == 2)
     size_t sels = wxGetSelectedChoices( selections,
                                         _( "Choose the characters you want to convert:" ), _( "To Halfwidth by Options..." ),
                                         4, choices, this );
 #else
-    size_t sels = wxGetMultipleChoices( selections,
+    int rc = wxGetSelectedChoices( selections,
                                         _( "Choose the characters you want to convert:" ), _( "To Halfwidth by Options..." ),
                                         4, choices, this );
+    size_t sels = 0;
+    if(rc != -1) sels = rc;
 #endif
 
     if( sels > 0 )
@@ -5518,14 +5520,16 @@ void MadEditFrame::OnEditToFullWidthByOptions( wxCommandEvent& event )
     wxString choices[4] = { _( "ASCII characters" ), _( "Japanese characters" ),
                             _( "Korean characters" ), _( "other characters" )
                           };
-#if wxCHECK_VERSION(2,9,0)
-    size_t sels = wxGetSelectedChoices( selections,
-                                        _( "Choose the characters you want to convert:" ), _( "To Fullwidth by Options..." ),
-                                        4, choices, this );
+#if (wxMAJOR_VERSION == 2)
+	size_t sels = wxGetSelectedChoices( selections,
+										_( "Choose the characters you want to convert:" ), _( "To Fullwidth by Options..." ),
+										4, choices, this );
 #else
-    size_t sels = wxGetMultipleChoices( selections,
-                                        _( "Choose the characters you want to convert:" ), _( "To Fullwidth by Options..." ),
-                                        4, choices, this );
+	int rc = wxGetSelectedChoices( selections,
+										_( "Choose the characters you want to convert:" ), _( "To Fullwidth by Options..." ),
+										4, choices, this );
+	size_t sels = 0;
+	if(rc != -1) sels = rc;
 #endif
 
     if( sels > 0 )
