@@ -5461,11 +5461,9 @@ void MadEditFrame::OnEditToHalfWidthByOptions( wxCommandEvent& event )
                                         _( "Choose the characters you want to convert:" ), _( "To Halfwidth by Options..." ),
                                         4, choices, this );
 #else
-    int rc = wxGetSelectedChoices( selections,
+	int sels = wxGetSelectedChoices(selections,
                                         _( "Choose the characters you want to convert:" ), _( "To Halfwidth by Options..." ),
                                         4, choices, this );
-    size_t sels = 0;
-    if(rc != -1) sels = rc;
 #endif
 
     if( sels > 0 )
@@ -5525,11 +5523,9 @@ void MadEditFrame::OnEditToFullWidthByOptions( wxCommandEvent& event )
 										_( "Choose the characters you want to convert:" ), _( "To Fullwidth by Options..." ),
 										4, choices, this );
 #else
-	int rc = wxGetSelectedChoices( selections,
+	int sels = wxGetSelectedChoices(selections,
 										_( "Choose the characters you want to convert:" ), _( "To Fullwidth by Options..." ),
 										4, choices, this );
-	size_t sels = 0;
-	if(rc != -1) sels = rc;
 #endif
 
     if( sels > 0 )
@@ -8053,9 +8049,9 @@ void MadEditFrame::OnWindowNextWindow( wxCommandEvent& event )
 void MadEditFrame::OnHelpAbout( wxCommandEvent& event )
 {
     MadAboutDialog dlg( this );
-    dlg.WxMemo1->AppendText( g_MadEdit_Version + wxT( "\n\n" ) +
-                             g_MadEditMod_URL + wxT( "\n\n" ) +
-                             _( "Download dictionary at http://archive.services.openoffice.org/pub/mirror/OpenOffice.org/contrib/dictionaries/" ) + wxT( "\n\n" ) +
+    dlg.WxMemo1->AppendText( g_MadEdit_Version + wxT( "\n" ) +
+                             g_MadEditMod_URL + wxT( "\n" ) +
+                             _( "Download dictionary at http://archive.services.openoffice.org/pub/mirror/OpenOffice.org/contrib/dictionaries/" ) + wxT( "\n" ) +
                              _( "Press OK to visit our HomePage." ) );
 
     // Hide Modaless Dialog
