@@ -100,7 +100,9 @@ ChangeLog:
 Todo:
 FreeBSD packaging (with FreeBSD 10.01)
 
-Mod v0.3.4.2
+Mod v0.3.5
+New: MadMacro local script list on Toolbar
+
 Fix: Enable line breaking to enable disable 2 belows
 Fix: Pad empty lines function in Astyle configs
 Fix: XML formatting config GUI

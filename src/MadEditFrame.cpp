@@ -2615,44 +2615,6 @@ void MadEditFrame::CreateGUIControls( void )
     }
 
     {
-        // enum all madpython files under scripts
-        wxString scriptsLibDir = g_MadEditHomeDir + wxT( "scripts/" ), filename;
-
-        if( wxDirExists( scriptsLibDir ) )
-        {
-            wxDir dir( scriptsLibDir );
-            static wxString hlp_prefix( wxT( "####" ) );
-            size_t i = 0;
-            bool hasHelp = false;
-            bool cont = dir.GetFirst( &filename, wxT( "*.mpy" ), wxDIR_FILES );
-
-            while( cont )
-            {
-                filename = scriptsLibDir + filename;
-                wxString help, firstLine;
-                wxFileName fn( filename );
-                wxTextFile scriptfile( filename );
-                scriptfile.Open( wxConvFile );
-                hasHelp = false;
-
-                if( scriptfile.IsOpened() )
-                {
-                    firstLine = scriptfile.GetFirstLine();
-                    hasHelp = firstLine.StartsWith( hlp_prefix, &help );
-                }
-
-                if( hasHelp )
-                { g_Menu_MadMacro_Scripts->Append( menuMadScrip1 + int( i ), fn.GetName(), help ); }
-                else
-                { g_Menu_MadMacro_Scripts->Append( menuMadScrip1 + int( i ), fn.GetName() ); }
-
-                ++i;
-                cont = dir.GetNext( &filename );
-            }
-        }
-    }
-
-    {
         MadFontEnumerator fontenumerator;
         fontenumerator.EnumerateFacenames(); // get all fontnames
         size_t count = g_FontNames.Count();
@@ -2876,6 +2838,45 @@ void MadEditFrame::CreateGUIControls( void )
 
     if( !bb )
     { m_AuiManager.GetPane( WxToolBar[tbMACRO] ).Hide(); }
+
+    {
+        // enum all madpython files under scripts
+        wxString scriptsLibDir = g_MadEditHomeDir + wxT( "scripts/" ), filename;
+
+        if( wxDirExists( scriptsLibDir ) )
+        {
+            wxDir dir( scriptsLibDir );
+            static wxString hlp_prefix( wxT( "####" ) );
+            size_t i = 0;
+            //bool hasHelp = false;
+            bool cont = dir.GetFirst( &filename, wxT( "*.mpy" ), wxDIR_FILES );
+            if(cont) WxToolBar[tbMACRO]->AddSeparator();
+
+            while( cont )
+            {
+                filename = scriptsLibDir + filename;
+                wxString help, firstLine;
+                wxFileName fn( filename );
+                wxTextFile scriptfile( filename );
+                scriptfile.Open( wxConvFile );
+                //hasHelp = false;
+
+                if( scriptfile.IsOpened() )
+                {
+                    firstLine = scriptfile.GetFirstLine();
+                    if(!firstLine.StartsWith( hlp_prefix, &help ))
+                    {
+                        help.Empty();
+                    }
+                    g_Menu_MadMacro_Scripts->Append( menuMadScrip1 + int( i ), fn.GetName(), help );
+                    WxToolBar[tbMACRO]->AddTool( menuMadScrip1 + int( i ), _T( "Macro" ), m_ImageList->GetBitmap( saverec_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, fn.GetName(), help, NULL );
+                    ++i;
+                }
+
+                cont = dir.GetNext( &filename );
+            }
+        }
+    }
 
     m_QuickSearch = new wxComboBox( m_QuickSeachBar, ID_QUICKSEARCH, wxEmptyString, wxDefaultPosition, wxSize( 200, 21 ) );
     g_RecentFindText = new MadRecentList( 20, ID_RECENTFINDTEXT1, true ); //Should be freed in SearchDialog
@@ -7475,10 +7476,12 @@ void MadEditFrame::OnToolsSaveRecMacro( wxCommandEvent& event )
                 wxString help, firstLine;
                 firstLine = scriptfile.GetFirstLine();
 
-                if( firstLine.StartsWith( hlp_prefix, &help ) )
-                { g_Menu_MadMacro_Scripts->Append( menuMadScrip1 + int( g_Menu_MadMacro_Scripts->GetMenuItemCount() ), fn.GetName(), help ); }
-                else
-                { g_Menu_MadMacro_Scripts->Append( menuMadScrip1 + int( g_Menu_MadMacro_Scripts->GetMenuItemCount() ), fn.GetName() ); }
+                if(!firstLine.StartsWith( hlp_prefix, &help ))
+                {
+                    help.Empty();
+                }
+                g_Menu_MadMacro_Scripts->Append( menuMadScrip1 + int( g_Menu_MadMacro_Scripts->GetMenuItemCount() ), fn.GetName(), help );
+                WxToolBar[tbMACRO]->AddTool( menuMadScrip1 + int( g_Menu_MadMacro_Scripts->GetMenuItemCount() ), _T( "Macro" ), m_ImageList->GetBitmap( saverec_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, fn.GetName(), help, NULL );
             }
             scriptfile.Close();
         }
