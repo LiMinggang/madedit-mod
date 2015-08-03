@@ -102,6 +102,8 @@ FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.3.5
 New: MadMacro local script list on Toolbar
+New: Open/edit Saved MadMacro script
+Update translation
 
 Fix: Enable line breaking to enable disable 2 belows
 Fix: Pad empty lines function in Astyle configs
@@ -112,6 +114,7 @@ Fix: Macro Recording, missed escape slash char '\' while searching '"'
 Fix: Remove duplicated recoring string in ProcessCommand
 Fix: Part of the line would not be see if "show line number" is checked in WordWrap mode
 Fix: wxGetSelectedChoices compatable issue
+Fix: Hang/crash on opening saved script if ${MADEDIT_HOME}/scripts not existing
 
 Mod v0.3.4.1
 1. Fix: Saved config of Astyle don't take effect

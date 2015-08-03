@@ -1,3 +1,4 @@
+#### Find a string then delete the chars from the beginning of it to a char specified
 #Create MadEdit Object for active edit
 medit = MadEdit()
 

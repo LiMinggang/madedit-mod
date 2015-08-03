@@ -1347,6 +1347,7 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
     EVT_UPDATE_UI( menuMadMacro, MadEditFrame::OnUpdateUI_MenuToolsMadMacro )
     EVT_UPDATE_UI( menuRunTempMacro, MadEditFrame::OnUpdateUI_MenuToolsRunTempMacro )
     EVT_UPDATE_UI( menuRunMacroFile, MadEditFrame::OnUpdateUI_MenuToolsRunMacroFile )
+    EVT_UPDATE_UI( menuEditMacroFile, MadEditFrame::OnUpdateUI_MenuToolsEditMacroFile )
     EVT_UPDATE_UI( menuStartRecMacro, MadEditFrame::OnUpdateUI_MenuToolsStartRecMacro )
     EVT_UPDATE_UI( menuStopRecMacro, MadEditFrame::OnUpdateUI_MenuToolsStopRecMacro )
     EVT_UPDATE_UI( menuPlayRecMacro, MadEditFrame::OnUpdateUI_MenuToolsPlayRecMacro )
@@ -1508,6 +1509,7 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
     EVT_MENU( menuStopRecMacro, MadEditFrame::OnToolsStopRecMacro )
     EVT_MENU( menuPlayRecMacro, MadEditFrame::OnToolsPlayRecMacro )
     EVT_MENU( menuSaveRecMacro, MadEditFrame::OnToolsSaveRecMacro )
+    EVT_MENU( menuEditMacroFile, MadEditFrame::OnToolsEditMacroFile )
     EVT_MENU( menuMacroDebugMode, MadEditFrame::OnToolsMacroDebugMode )
     EVT_MENU_RANGE( menuMadScrip1, menuMadScrip1000, MadEditFrame::OnToolsMadScriptList )
     EVT_MENU( menuToggleBOM, MadEditFrame::OnToolsToggleBOM )
@@ -1894,6 +1896,8 @@ CommandData CommandTable[] =
     { 0,               1, menuPlayRecMacro,       wxT( "menuPlayRecMacro" ),       _( "Playback" ),                                      wxT( "" ),       wxITEM_NORMAL,    play_xpm_idx,    0,                   _( "Playback" )},
     { 0,               1, menuSaveRecMacro,       wxT( "menuSaveRecMacro" ),       _( "Save Currently Recorded Macro..." ),              wxT( "" ),       wxITEM_NORMAL,    saverec_xpm_idx, 0,                   _( "Save Currently Recorded Macro" )},
     { 0,               1, menuMadScriptList,      wxT( "menuMadScriptList" ),      _( "Local Script List" ),                             wxT( "" ),       wxITEM_NORMAL,    -1, &g_Menu_MadMacro_Scripts,    0},
+    { 0,               2, menuEditMacroFile,      wxT( "menuEditMacroFile" ),      _( "Edit Saved MacroScript..." ),                     wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Edit saved macro script" )},
+    { 0,               2, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0},
     { 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0},
     { 0,               1, menuMacroDebugMode,     wxT( "menuMacroDebugMode" ),     _( "Macro Debug Mode" ),                              wxT( "" ),       wxITEM_CHECK,     -1,              0,                   _( "Show Macro running output for debugging" )},
 
@@ -4501,6 +4505,12 @@ void MadEditFrame::OnUpdateUI_MenuToolsRunMacroFile( wxUpdateUIEvent& event )
 {
     event.Enable( g_ActiveMadEdit != NULL );
 }
+
+void MadEditFrame::OnUpdateUI_MenuToolsEditMacroFile( wxUpdateUIEvent& event )
+{
+    event.Enable( g_ActiveMadEdit != NULL );
+}
+
 //---------------------------------------------------------------------------
 
 void MadEditFrame::OnFileNew( wxCommandEvent& event )
@@ -5367,6 +5377,7 @@ void MadEditFrame::OnEditComment( wxCommandEvent& event )
         RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "CommentUncomment(True)" ) ) );
     }
 }
+
 void MadEditFrame::OnEditUncomment( wxCommandEvent& event )
 {
     if( g_ActiveMadEdit )
@@ -7286,12 +7297,13 @@ void MadEditFrame::OnToolsRunTempMacro( wxCommandEvent& event )
 
 void MadEditFrame::OnToolsRunMacroFile( wxCommandEvent& event )
 {
-    wxString dir;
+    wxString dir = g_MadEditHomeDir + wxT( "scripts" );
 
-    if( m_RecentFiles->GetCount() )
+    if( !wxDir::Exists(dir) )
     {
         wxFileName filename( m_RecentFiles->GetHistoryFile( 0 ) );
         dir = filename.GetPath( wxPATH_GET_VOLUME | wxPATH_GET_SEPARATOR );
+        if( !wxDir::Exists(dir) ) dir = wxGetCwd();
     }
 
     // Hide Modaless Dialog
@@ -7314,7 +7326,7 @@ void MadEditFrame::OnToolsRunMacroFile( wxCommandEvent& event )
     wxString fileFilter = wxString( wxT( "Mad Macro(*.mpy)|*.mpy|" ) ) + wxFileSelectorDefaultWildcardStr + wxT( "|All files(*;*.*)" );
     wxFileDialog dlg( this, _( "Open Mad Macro File" ), dir, wxEmptyString, fileFilter,
 #if wxCHECK_VERSION(2,8,0)
-                      wxFD_OPEN );
+                      wxFD_OPEN |wxFD_FILE_MUST_EXIST);
 #else
                       wxOPEN );
 #endif
@@ -7424,6 +7436,14 @@ void MadEditFrame::OnToolsPlayRecMacro( wxCommandEvent& event )
 void MadEditFrame::OnToolsSaveRecMacro( wxCommandEvent& event )
 {
     wxString dir( g_MadEditHomeDir + wxT( "scripts" ) );
+    
+    if( !wxDir::Exists(dir) )
+    {
+        wxFileName filename( m_RecentFiles->GetHistoryFile( 0 ) );
+        dir = filename.GetPath( wxPATH_GET_VOLUME | wxPATH_GET_SEPARATOR );
+        if( !wxDir::Exists(dir) ) dir = wxGetCwd();
+    }
+
     wxString fileFilter = wxString( wxT( "Mad Macro(*.mpy)|*.mpy|" ) ) + wxFileSelectorDefaultWildcardStr + wxT( "|All files(*;*.*)" );
     wxString filename = wxSaveFileSelector( _( "Mad Macro" ), fileFilter );
 
@@ -7487,6 +7507,59 @@ void MadEditFrame::OnToolsSaveRecMacro( wxCommandEvent& event )
         }
     }
 }
+
+void MadEditFrame::OnToolsEditMacroFile( wxCommandEvent& event )
+{
+    wxString dir = g_MadEditHomeDir + wxT( "scripts" );
+
+    if( !wxDir::Exists(dir) )
+    {
+        wxFileName filename( m_RecentFiles->GetHistoryFile( 0 ) );
+        dir = filename.GetPath( wxPATH_GET_VOLUME | wxPATH_GET_SEPARATOR );
+        if( !wxDir::Exists(dir) ) dir = wxGetCwd();
+    }
+
+    // Hide Modaless Dialog
+    if( g_SearchDialog && g_SearchDialog->IsShown() )
+    {
+        g_SearchDialog->Show( false );
+    }
+
+    if( g_ReplaceDialog && g_ReplaceDialog->IsShown() )
+    {
+        g_ReplaceDialog->Show( false );
+    }
+
+    if( g_FindInFilesDialog && g_FindInFilesDialog->IsShown() )
+    {
+        g_FindInFilesDialog->Show( false );
+    }
+
+    static int filterIndex = 0;
+    wxString fileFilter = wxString( wxT( "Mad Macro(*.mpy)|*.mpy|" ) ) + wxFileSelectorDefaultWildcardStr + wxT( "|All files(*;*.*)" );
+    wxFileDialog dlg( this, _( "Edit Mad Macro File" ), dir, wxEmptyString, fileFilter,
+#if wxCHECK_VERSION(2,8,0)
+                      wxFD_OPEN |wxFD_FILE_MUST_EXIST);
+#else
+                      wxOPEN );
+#endif
+    dlg.SetFilterIndex( filterIndex );
+
+    if( dlg.ShowModal() == wxID_OK )
+    {
+        wxArrayString filenames;
+        g_MB2WC_check_dir_filename = true;
+        dlg.GetPaths( filenames );
+        g_MB2WC_check_dir_filename = false;
+        size_t count = filenames.GetCount();
+
+        for( size_t i = 0; i < count; ++i )
+        {
+            OpenFile( filenames[i], false );
+        }
+    }
+}
+
 
 void MadEditFrame::OnToolsMadScriptList( wxCommandEvent& event )
 {

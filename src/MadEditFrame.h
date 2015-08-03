@@ -215,6 +215,7 @@ public:
     void OnUpdateUI_MenuToolsPlayRecMacro(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuToolsSaveRecMacro(wxUpdateUIEvent& event);
     void OnUpdateUI_MadScriptList(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuToolsEditMacroFile(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuToolsMacroDebugMode(wxUpdateUIEvent& event);
 
     void OnFileNew(wxCommandEvent& event);
@@ -358,6 +359,7 @@ public:
     void OnToolsPlayRecMacro(wxCommandEvent& event);
     void OnToolsSaveRecMacro(wxCommandEvent& event);
     void OnToolsMadScriptList(wxCommandEvent& event);
+    void OnToolsEditMacroFile(wxCommandEvent& event);
     void OnToolsMacroDebugMode(wxCommandEvent& event);
 
     void OnToolsToggleBOM(wxCommandEvent& event);
@@ -662,6 +664,7 @@ enum { // menu id
     menuPlayRecMacro,
     menuSaveRecMacro,
     menuMadScriptList,
+    menuEditMacroFile,
     menuMadScrip1,
     menuMadScrip1000 = menuMadScrip1+999, //1000 scripts, enough?
     menuPlugins,

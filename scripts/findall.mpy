@@ -1,3 +1,4 @@
+#### Sample for FindTextAll API
 me=MadEdit()
 res = me.FindTextAll("a", False, False, False)
 
