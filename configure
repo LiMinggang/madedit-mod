@@ -816,6 +816,7 @@ with_libpth_prefix
 with_libiconv_prefix
 with_included_gettext
 with_libintl_prefix
+with_gtk
 with_xpressive
 with_boost
 with_wxdir
@@ -1484,6 +1485,8 @@ Optional Packages:
   --with-included-gettext use the GNU gettext library included here
   --with-libintl-prefix[=DIR]  search for libintl in DIR/include and DIR/lib
   --without-libintl-prefix     don't search for libintl in includedir and libdir
+  --with-gtk=version    use specified GTK+,
+                otherwise try to find GTK+2 then try GTK+3
   --with-xpressive=PATH   use additional Boost.Xpressive library path,
                           otherwise use default path "$(top_srcdir)/xpressive"
   --with-boost=PATH       use additional Boost library path,
@@ -10792,7 +10795,28 @@ esac
 #AM_PATH_GTK_2_0(2.6.0)
 
 if test "x$IS_MACOS" == "x"; then
-    use_GTK2=yes
+    want_GTK=
+
+# Check whether --with-gtk was given.
+if test "${with_gtk+set}" = set; then :
+  withval=$with_gtk; want_GTK="$withval"
+else
+  want_GTK=0
+fi
+
+
+    case "$want_GTK" in
+        3)     ;;
+        2)     ;;
+        0)     ;;
+        *)      as_fn_error $? "
+Unsupported GTK+ version $withval specified. Only GTK+2 and GTK+3
+are supported. 0 is auto.
+                        " "$LINENO" 5
+                ;;
+    esac
+
+    have_GTK=
 
 
 
@@ -10996,22 +11020,158 @@ fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$glib_gtk2_PKG_ERRORS" >&5
 
-	use_GTK2=no
+	have_GTK=0
 elif test $pkg_failed = untried; then
      	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
-	use_GTK2=no
+	have_GTK=0
 else
 	glib_gtk2_CFLAGS=$pkg_cv_glib_gtk2_CFLAGS
 	glib_gtk2_LIBS=$pkg_cv_glib_gtk2_LIBS
         { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
-	use_GTK2=yes
+	have_GTK=2
 fi
-    if test "$use_GTK2" == "yes"; then
-        CXXFLAGS="$CXXFLAGS $glib_gtk2_CFLAGS"
-        LIBS="$LIBS $glib_gtk2_LIBS"
+
+    if test "$have_GTK" -ne 0; then
+        if test "$want_GTK" -eq 0; then
+            CXXFLAGS="$CXXFLAGS $glib_gtk2_CFLAGS"
+            LIBS="$LIBS $glib_gtk2_LIBS"
+        else
+            if test "$want_GTK" -eq "$have_GTK"; then
+                CXXFLAGS="$CXXFLAGS $glib_gtk2_CFLAGS"
+                LIBS="$LIBS $glib_gtk2_LIBS"
+            else
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for glib_gtk3" >&5
+$as_echo_n "checking for glib_gtk3... " >&6; }
+
+if test -n "$glib_gtk3_CFLAGS"; then
+    pkg_cv_glib_gtk3_CFLAGS="$glib_gtk3_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"
+                    glib-2.0 >= 2.6.0
+                    gtk+-3.0
+                \""; } >&5
+  ($PKG_CONFIG --exists --print-errors "
+                    glib-2.0 >= 2.6.0
+                    gtk+-3.0
+                ") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_glib_gtk3_CFLAGS=`$PKG_CONFIG --cflags "
+                    glib-2.0 >= 2.6.0
+                    gtk+-3.0
+                " 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$glib_gtk3_LIBS"; then
+    pkg_cv_glib_gtk3_LIBS="$glib_gtk3_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"
+                    glib-2.0 >= 2.6.0
+                    gtk+-3.0
+                \""; } >&5
+  ($PKG_CONFIG --exists --print-errors "
+                    glib-2.0 >= 2.6.0
+                    gtk+-3.0
+                ") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_glib_gtk3_LIBS=`$PKG_CONFIG --libs "
+                    glib-2.0 >= 2.6.0
+                    gtk+-3.0
+                " 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        glib_gtk3_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "
+                    glib-2.0 >= 2.6.0
+                    gtk+-3.0
+                " 2>&1`
+        else
+	        glib_gtk3_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "
+                    glib-2.0 >= 2.6.0
+                    gtk+-3.0
+                " 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$glib_gtk3_PKG_ERRORS" >&5
+
+	as_fn_error $? "Package requirements (
+                    glib-2.0 >= 2.6.0
+                    gtk+-3.0
+                ) were not met:
+
+$glib_gtk3_PKG_ERRORS
+
+Consider adjusting the PKG_CONFIG_PATH environment variable if you
+installed software in a non-standard prefix.
+
+Alternatively, you may set the environment variables glib_gtk3_CFLAGS
+and glib_gtk3_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details." "$LINENO" 5
+elif test $pkg_failed = untried; then
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	{ { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
+$as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
+as_fn_error $? "The pkg-config script could not be found or is too old.  Make sure it
+is in your PATH or set the PKG_CONFIG environment variable to the full
+path to pkg-config.
+
+Alternatively, you may set the environment variables glib_gtk3_CFLAGS
+and glib_gtk3_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details.
+
+To get pkg-config, see <http://pkg-config.freedesktop.org/>.
+See \`config.log' for more details" "$LINENO" 5; }
+else
+	glib_gtk3_CFLAGS=$pkg_cv_glib_gtk3_CFLAGS
+	glib_gtk3_LIBS=$pkg_cv_glib_gtk3_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+
+fi
+                CXXFLAGS="$CXXFLAGS $glib_gtk3_CFLAGS"
+                LIBS="$LIBS $glib_gtk3_LIBS"
+            fi
+        fi
     else
+        if test "$want_GTK" -eq 2; then
+            as_fn_error $? "
+Package gtk+-2.0 was not found in the pkg-config search path.
+Perhaps you should add the directory containing \`gtk+-2.0.pc' to the PKG_CONFIG_PATH environment variable
+No package 'gtk+-2.0' found
+            " "$LINENO" 5
+        fi
 
 pkg_failed=no
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for glib_gtk3" >&5

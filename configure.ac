@@ -7,7 +7,7 @@ AC_CONFIG_SRCDIR([src/MadEditApp.cpp])
 AC_CONFIG_HEADER([config.h])
 AC_PREFIX_DEFAULT([/usr])
 
-AM_INIT_AUTOMAKE
+AM_INIT_AUTOMAKE([subdir-objects])
 
 AC_USE_SYSTEM_EXTENSIONS
 ALL_LINGUAS="it_IT ja_JP zh_CN zh_TW ru_RU es"

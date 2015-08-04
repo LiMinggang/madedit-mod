@@ -1,7 +1,7 @@
 SUBDIRS = syntax po
 
 bin_PROGRAMS = madedit
-INCLUDES = -I$(top_srcdir)/charset-detector/include -I$(top_srcdir)/charset-detector/src \
+AM_CPPFLAGS = -I$(top_srcdir)/charset-detector/include -I$(top_srcdir)/charset-detector/src \
 -I$(top_srcdir)/charset-detector/src/tables -I$(top_srcdir)/spellchecker -I$(top_srcdir)/spellchecker/hunspell/src \
 -I$(top_srcdir)/spellchecker/hunspell/src/hunspell -I$(top_srcdir)/spellchecker/hunspell/src/win_api \
 -I$(top_srcdir)/minipython/Include -I$(top_srcdir)/minipython/Python \
