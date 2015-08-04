@@ -1111,10 +1111,7 @@ void OnEditMouseRightUp( MadEdit *madedit )
         wxString misspelledStr;
         shared_ptr<wxSpellCheckEngineInterface> & spellChecker = g_ActiveMadEdit->GetSpellChecker();
 
-        if( g_ActiveMadEdit->IsSelected() && g_ActiveMadEdit->GetEditMode() != emColumnMode )
-        { g_ActiveMadEdit->GetSelText( misspelledStr ); }
-        else
-        { g_ActiveMadEdit->GetWordFromCaretPos( misspelledStr ); }
+        g_ActiveMadEdit->GetWordFromCaretPos( misspelledStr );
 
         size_t count = 0;
 
@@ -5785,7 +5782,9 @@ void MadEditFrame::OnSearchFind( wxCommandEvent& event )
     }
 
     if( g_ReplaceDialog->IsShown() )
-    { g_ReplaceDialog->Show( false ); }
+    {
+        g_ReplaceDialog->Show( false );
+    }
 
     if( g_FindInFilesDialog && g_FindInFilesDialog->IsShown() )
     {
@@ -5802,38 +5801,26 @@ void MadEditFrame::OnSearchFind( wxCommandEvent& event )
     g_ActiveMadEdit->GetFont( fname, fsize );
     g_SearchDialog->m_FindText->SetFont( fname, 14 );
 
-    if( g_ActiveMadEdit->IsSelected() )
+    wxString ws;
+    if( g_SearchDialog->WxCheckBoxFindHex->GetValue() && ( g_ActiveMadEdit->GetSelectionSize() <= 10240 ))
     {
-        if( g_ActiveMadEdit->GetSelectionSize() <= 10240 )
-        {
-            if( g_SearchDialog->WxCheckBoxFindHex->GetValue() )
-            {
-                wxString ws;
-                g_ActiveMadEdit->GetSelHexString( ws, true );
-                g_SearchDialog->m_FindText->SetText( ws );
-            }
-            else
-                if( g_SearchDialog->WxCheckBoxRegex->GetValue() == false )
-                {
-                    wxString ws;
-                    g_ActiveMadEdit->GetSelText( ws );
-                    g_SearchDialog->m_FindText->SetText( ws );
-                }
-        }
+        g_ActiveMadEdit->GetSelHexString( ws, true );
+        g_SearchDialog->m_FindText->SetText( ws );
     }
     else
     {
-        if( g_SearchDialog->WxCheckBoxRegex->GetValue() == false &&
-                !( g_SearchDialog->WxCheckBoxFindHex->GetValue() ) )
-        {
-            wxString ws;
-            g_ActiveMadEdit->GetWordFromCaretPos( ws );
+        wxString ws;
+        g_ActiveMadEdit->GetWordFromCaretPos( ws );
 
-            if( !ws.IsEmpty() && ws[0] > wxChar( 0x20 ) )
-            {
-                g_SearchDialog->m_FindText->SetText( ws );
-            }
+        if( !ws.IsEmpty() && ws[0] > wxChar( 0x20 ) )
+        {
+            g_SearchDialog->m_FindText->SetText( ws );
         }
+    }
+
+    if( g_ActiveMadEdit->IsSelected() )
+    {
+        g_SearchDialog->WxCheckBoxSearchInSelection->SetValue(true);
     }
 
     g_SearchDialog->m_FindText->SelectAll();
@@ -5966,38 +5953,26 @@ void MadEditFrame::OnSearchReplace( wxCommandEvent& event )
     g_ReplaceDialog->m_FindText->SetFont( fname, 14 );
     g_ReplaceDialog->m_ReplaceText->SetFont( fname, 14 );
 
-    if( g_ActiveMadEdit->IsSelected() )
+    wxString ws;
+    if( g_ReplaceDialog->WxCheckBoxFindHex->GetValue() && ( g_ActiveMadEdit->GetSelectionSize() <= 10240 ))
     {
-        if( g_ActiveMadEdit->GetSelectionSize() <= 10240 )
-        {
-            if( g_ReplaceDialog->WxCheckBoxFindHex->GetValue() )
-            {
-                wxString ws;
-                g_ActiveMadEdit->GetSelHexString( ws, true );
-                g_ReplaceDialog->m_FindText->SetText( ws );
-            }
-            else
-                if( g_ReplaceDialog->WxCheckBoxRegex->GetValue() == false )
-                {
-                    wxString ws;
-                    g_ActiveMadEdit->GetSelText( ws );
-                    g_ReplaceDialog->m_FindText->SetText( ws );
-                }
-        }
+        g_ActiveMadEdit->GetSelHexString( ws, true );
+        g_ReplaceDialog->m_FindText->SetText( ws );
     }
     else
     {
-        if( g_ReplaceDialog->WxCheckBoxRegex->GetValue() == false &&
-                !( g_ReplaceDialog->WxCheckBoxFindHex->GetValue() ) )
-        {
-            wxString ws;
-            g_ActiveMadEdit->GetWordFromCaretPos( ws );
+        wxString ws;
+        g_ActiveMadEdit->GetWordFromCaretPos( ws );
 
-            if( !ws.IsEmpty() && ws[0] > wxChar( 0x20 ) )
-            {
-                g_ReplaceDialog->m_FindText->SetText( ws );
-            }
+        if( !ws.IsEmpty() && ws[0] > wxChar( 0x20 ) )
+        {
+            g_ReplaceDialog->m_FindText->SetText( ws );
         }
+    }
+
+    if( g_ActiveMadEdit->IsSelected() )
+    {
+        g_ReplaceDialog->WxCheckBoxSearchInSelection->SetValue(true);
     }
 
     g_ReplaceDialog->m_FindText->SelectAll();
@@ -6576,10 +6551,7 @@ void MadEditFrame::OnSpellCheckIgnore( wxCommandEvent& event )
         wxString str;
         shared_ptr<wxSpellCheckEngineInterface> & spellChecker = g_ActiveMadEdit->GetSpellChecker();
 
-        if( g_ActiveMadEdit->IsSelected() && g_ActiveMadEdit->GetEditMode() != emColumnMode )
-        { g_ActiveMadEdit->GetSelText( str ); }
-        else
-        { g_ActiveMadEdit->GetWordFromCaretPos( str ); }
+        g_ActiveMadEdit->GetWordFromCaretPos( str );
 
         spellChecker->GetUserCorrection( str );
         g_ActiveMadEdit->SetSpellCheck( true );
@@ -6593,10 +6565,7 @@ void MadEditFrame::OnSpellCheckRemoveFromDict( wxCommandEvent& event )
         wxString str;
         shared_ptr<wxSpellCheckEngineInterface> & spellChecker = g_ActiveMadEdit->GetSpellChecker();
 
-        if( g_ActiveMadEdit->IsSelected() && g_ActiveMadEdit->GetEditMode() != emColumnMode )
-        { g_ActiveMadEdit->GetSelText( str ); }
-        else
-        { g_ActiveMadEdit->GetWordFromCaretPos( str ); }
+        g_ActiveMadEdit->GetWordFromCaretPos( str );
 
         spellChecker->RemoveWordFromDictionary( str );
         g_ActiveMadEdit->SetSpellCheck( true );
@@ -6609,11 +6578,7 @@ void MadEditFrame::OnSpellAdd2Dict( wxCommandEvent& event )
     {
         wxString str;
 
-        if( g_ActiveMadEdit->IsSelected() && g_ActiveMadEdit->GetEditMode() != emColumnMode )
-        { g_ActiveMadEdit->GetSelText( str ); }
-        else
-        { g_ActiveMadEdit->GetWordFromCaretPos( str ); }
-
+        g_ActiveMadEdit->GetWordFromCaretPos( str );
         g_ActiveMadEdit->AddtoDictionary( str );
     }
 }

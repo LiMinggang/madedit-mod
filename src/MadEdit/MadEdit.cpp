@@ -3948,9 +3948,11 @@ wxFileOffset MadEdit::GetColumnSelection(wxString *ws)
     return selsize;
 }
 
-void MadEdit::SelectWordFromCaretPos(wxString *ws)
+void MadEdit::SelectWordFromCaretPos(wxString *ws, MadCaretPos * cpos/* = NULL*/)
 {
-    if(m_EditMode == emColumnMode && m_CaretPos.extraspaces)
+    MadCaretPos * caretPos = cpos;
+    if(cpos == NULL) caretPos = &m_CaretPos;
+    if(m_EditMode == emColumnMode && caretPos->extraspaces)
         return;
 
     wxFileOffset startpos, endpos;
@@ -3971,22 +3973,22 @@ void MadEdit::SelectWordFromCaretPos(wxString *ws)
     else                          //TextMode
     {
         //may select whole line
-        //startpos = m_CaretPos.pos - m_CaretPos.linepos +
-                   //m_CaretPos.iter->m_RowIndices[0].m_Start; // exclude BOM
+        //startpos = caretPos->pos - caretPos->linepos +
+                   //caretPos->iter->m_RowIndices[0].m_Start; // exclude BOM
         //endpos = m_Lines->m_Size;
 
         //select wrapped-line only
-        startpos = m_CaretPos.pos - m_CaretPos.linepos +
-                   m_CaretPos.iter->m_RowIndices[m_CaretPos.subrowid].m_Start; // exclude BOM
-        endpos = m_CaretPos.pos - m_CaretPos.linepos +
-                 m_CaretPos.iter->m_RowIndices[m_CaretPos.subrowid+1].m_Start;
+        startpos = caretPos->pos - caretPos->linepos +
+                   caretPos->iter->m_RowIndices[caretPos->subrowid].m_Start; // exclude BOM
+        endpos = caretPos->pos - caretPos->linepos +
+                 caretPos->iter->m_RowIndices[caretPos->subrowid+1].m_Start;
     }
 
     // now startpos is the begin of line
     // check the word between startpos and endpos
 
-    MadLineIterator & lit = m_CaretPos.iter;
-    wxFileOffset pos = m_CaretPos.linepos - (m_CaretPos.pos - startpos);
+    MadLineIterator & lit = caretPos->iter;
+    wxFileOffset pos = caretPos->linepos - (caretPos->pos - startpos);
     m_Lines->InitNextUChar(lit, pos);
 
     MadUCQueue ucqueue;
@@ -4004,7 +4006,7 @@ void MadEdit::SelectWordFromCaretPos(wxString *ws)
             int uc = ucp.first;
             if(type == 0)
             {
-                if(pos >= m_CaretPos.pos)
+                if(pos >= caretPos->pos)
                 {
                     type = GetUCharType(uc);
                     posidx = idx;
@@ -4086,6 +4088,8 @@ void MadEdit::SelectWordFromCaretPos(wxString *ws)
             return;
         }
 
+        if(cpos) return;
+
         m_Selection=true;
         if(m_MouseLeftDoubleClick && m_LeftBrace_rowid >= 0)
         {
@@ -4113,7 +4117,7 @@ void MadEdit::SelectWordFromCaretPos(wxString *ws)
 
         UpdateSelectionPos();
 
-        m_CaretPos = m_SelectionPos2;
+        *caretPos = m_SelectionPos2;
 
         m_SelectionBegin = &m_SelectionPos1;
         m_SelectionEnd = &m_SelectionPos2;
@@ -4121,11 +4125,11 @@ void MadEdit::SelectWordFromCaretPos(wxString *ws)
         m_SelFirstRow = m_SelectionBegin->rowid;
         m_SelLastRow = m_SelectionEnd->rowid;
 
-        UpdateCaret(m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos);
+        UpdateCaret(*caretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos);
 
         if(m_EditMode==emHexMode)
         {
-            AppearHexRow(m_CaretPos.pos);
+            AppearHexRow(caretPos->pos);
 
             m_CaretAtHalfByte=false;
 
@@ -4139,14 +4143,13 @@ void MadEdit::SelectWordFromCaretPos(wxString *ws)
         UpdateScrollBarPos();
 
         m_LastTextAreaXPos=m_TextAreaXPos;
-        m_LastCaretXPos= m_CaretPos.xpos;
+        m_LastCaretXPos= caretPos->xpos;
 
         m_RepaintAll=true;
         Refresh(false);
 
         DoSelectionChanged();
     }
-
 }
 
 void MadEdit::SelectLineFromCaretPos(wxString *ws)
