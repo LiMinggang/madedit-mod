@@ -103,6 +103,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 Mod v0.3.5
 New: MadMacro local script list on Toolbar
 New: Open/edit Saved MadMacro script
+New: Build time shown on About Dialog(Windows)
 Update translation
 
 Fix: Enable line breaking to enable disable 2 belows

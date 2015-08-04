@@ -246,6 +246,9 @@
     <ClCompile Include="..\..\astyle\formattersettings.cpp">
       <Filter>Source Files\Astyle</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\version.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\spellchecker\HunspellInterface.h">

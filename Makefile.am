@@ -75,6 +75,7 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	src/MadEdit/TradSimp.cpp \
 	src/MadEdit/TradSimp.h \
 	src/MadEdit/ucs4_t.h \
+	src/version.cpp \
 	charset-detector/src/CharDistribution.cpp \
 	charset-detector/src/CharDistribution.h \
 	charset-detector/src/JpCntx.cpp \

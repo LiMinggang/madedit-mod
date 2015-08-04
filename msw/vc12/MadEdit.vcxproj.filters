@@ -266,7 +266,9 @@
     <ClCompile Include="..\..\src\MadUtils.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\MadWordCountDialog.cpp">
+    <ClCompile Include="..\..\src\version.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>    <ClCompile Include="..\..\src\MadWordCountDialog.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\MadEdit\caret_new.cpp">

@@ -74,6 +74,8 @@
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Unicode Release|x64'">Release\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">false</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Unicode Release|x64'">false</LinkIncremental>
+    <CustomBuildAfterTargets Condition="'$(Configuration)|$(Platform)'=='Unicode Release|x64'">
+    </CustomBuildAfterTargets>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">
     <ClCompile>
@@ -130,6 +132,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">
     <ClCompile>
@@ -181,6 +187,9 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
     </Link>
+    <PreBuildEvent>
+      <Command>del $(TargetDir)version.obj</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\astyle\asstreamiterator.cpp" />
@@ -253,6 +262,7 @@
     <ClCompile Include="..\..\spellchecker\SpellCheckEngineOption.cpp" />
     <ClCompile Include="..\..\spellchecker\SpellCheckerManager.cpp" />
     <ClCompile Include="..\..\spellchecker\SpellCheckUserInterface.cpp" />
+    <ClCompile Include="..\..\src\version.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\astyle\asstreamiterator.h" />
