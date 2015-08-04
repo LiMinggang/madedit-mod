@@ -9,9 +9,9 @@
 wxString g_MadEdit_Version( wxString(wxT("MadEdit-Mod 0.3.5 "))
 #if defined(__WXMSW__)
 #ifdef _WIN64
-+ wxT("win64 build ") + wxT(__TIME__) + wxT(" ") + wxT(__DATE__)
++ wxT("win64")
 #else
-+ wxT("win32 build ") + wxT(__TIME__) + wxT(" ") + wxT(__DATE__)
++ wxT("win32")
 #endif
 #elif defined(__WXMAC__)
 + wxT("MacOS")
@@ -22,5 +22,5 @@ wxString g_MadEdit_Version( wxString(wxT("MadEdit-Mod 0.3.5 "))
 + wxT("i686")
 #endif
 #endif
-);
++ wxT(" build ") + wxT(__TIME__) + wxT(" ") + wxT(__DATE__));
 
