@@ -1,3 +1,21 @@
+2009-02-08  Minggang Li <minggang.li@gmail.com>
+
+	1.New: MadMacro local script list on Toolbar
+	2.New: Open/edit Saved MadMacro script
+	3.New: Build time shown on About Dialog
+	4.New: Copy the first word instead of the whole selection for search/replace/spell check
+	5.Update translation
+	6.Fix: Enable line breaking to enable disable 2 belows
+	7.Fix: Pad empty lines function in Astyle configs
+	8.Fix: XML formatting config GUI
+	9.Fix: Ctrl-Shift-K for Astyle formatter
+	10.Fix: Assertion if the string was not found in Translation
+	11.Fix: Macro Recording, missed escape slash char '\' while searching '"'
+	12.Fix: Remove duplicated recoring string in ProcessCommand
+	13.Fix: Part of the line would not be see if "show line number" is checked in WordWrap mode
+	14.Fix: wxGetSelectedChoices compatable issue(crash if you close ToHalfWidth/ToFullWidth dialog directly)
+	15.Fix: Hang/crash on opening saved script if ${MADEDIT_HOME}/scripts not existing
+
 2009-02-08  Alston Chen  <madedit@gmail.com>
 
 	1.added that restore the encoding and font(name, size) of a file when reopening it.

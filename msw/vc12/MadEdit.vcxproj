@@ -142,6 +142,9 @@
       <PreprocessorDefinitions>
       </PreprocessorDefinitions>
     </ResourceCompile>
+    <PreBuildEvent>
+      <Command>del $(OutDir)version.obj</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>

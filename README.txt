@@ -102,7 +102,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.3.5
 New: MadMacro local script list on Toolbar
-New: Open/edit Saved MadMacro script
+New: Open/edit saved MadMacro script
 New: Build time shown on About Dialog
 New: Copy the first word instead of the whole selection for search/replace/spell check
 Update translation
@@ -115,7 +115,7 @@ Fix: Assertion if the string was not found in Translation
 Fix: Macro Recording, missed escape slash char '\' while searching '"'
 Fix: Remove duplicated recoring string in ProcessCommand
 Fix: Part of the line would not be see if "show line number" is checked in WordWrap mode
-Fix: wxGetSelectedChoices compatable issue
+Fix: wxGetSelectedChoices compatable issue(crash if you close ToHalfWidth/ToFullWidth dialog directly)
 Fix: Hang/crash on opening saved script if ${MADEDIT_HOME}/scripts not existing
 
 Mod v0.3.4.1
