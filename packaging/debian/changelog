@@ -15,6 +15,8 @@ madedit-mod (0.3.5-1) unstable; urgency=high
   13.Fix: Part of the line would not be see if "show line number" is checked in WordWrap mode
   14.Fix: wxGetSelectedChoices compatable issue(crash if you close ToHalfWidth/ToFullWidth dialog directly)
   15.Fix: Hang/crash on opening saved script if ${MADEDIT_HOME}/scripts not existing
+  16.Fix: Crash on opening saved script if the script was not saved under ${MADEDIT_HOME}/scripts
+  17.Fix: Script file would not listed if you saved it under directory other than ${MADEDIT_HOME}/scripts
 
  -- Minggang Li <liminggang@gmail.com>  Wed, 5 August 2015 10:35:40 +0800
 

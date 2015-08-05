@@ -108,7 +108,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="del $(TargetDir)version.obj"
+				CommandLine="del $(OutDir)version.obj"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"

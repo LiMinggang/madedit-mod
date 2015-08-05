@@ -164,7 +164,7 @@
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <PreBuildEvent>
-      <Command>del $(TargetDir)version.obj</Command>
+      <Command>del $(OutDir)version.obj</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Release|x64'">
@@ -191,7 +191,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
     </Link>
     <PreBuildEvent>
-      <Command>del $(TargetDir)version.obj</Command>
+      <Command>del $(OutDir)version.obj</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

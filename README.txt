@@ -101,22 +101,23 @@ Todo:
 FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.3.5
-New: MadMacro local script list on Toolbar
-New: Open/edit saved MadMacro script
-New: Build time shown on About Dialog
-New: Copy the first word instead of the whole selection for search/replace/spell check
-Update translation
-
-Fix: Enable line breaking to enable disable 2 belows
-Fix: Pad empty lines function in Astyle configs
-Fix: XML formatting config GUI
-Fix: Ctrl-Shift-K for Astyle formatter
-Fix: Assertion if the string was not found in Translation
-Fix: Macro Recording, missed escape slash char '\' while searching '"'
-Fix: Remove duplicated recoring string in ProcessCommand
-Fix: Part of the line would not be see if "show line number" is checked in WordWrap mode
-Fix: wxGetSelectedChoices compatable issue(crash if you close ToHalfWidth/ToFullWidth dialog directly)
-Fix: Hang/crash on opening saved script if ${MADEDIT_HOME}/scripts not existing
+1.New: MadMacro local script list on Toolbar
+2.New: Open/edit saved MadMacro script
+3.New: Build time shown on About Dialog
+4.New: Copy the first word instead of the whole selection for search/replace/spell check
+5.Update translation
+6.Fix: Enable line breaking to enable disable 2 belows
+7.Fix: Pad empty lines function in Astyle configs
+8.Fix: XML formatting config GUI
+9.Fix: Ctrl-Shift-K for Astyle formatter
+10.Fix: Assertion if the string was not found in Translation
+11.Fix: Macro Recording, missed escape slash char '\' while searching '"'
+12.Fix: Remove duplicated recoring string in ProcessCommand
+13.Fix: Part of the line would not be see if "show line number" is checked in WordWrap mode
+14.Fix: wxGetSelectedChoices compatable issue(crash if you close ToHalfWidth/ToFullWidth dialog directly)
+15.Fix: Hang/crash on opening saved script if ${MADEDIT_HOME}/scripts not existing
+16.Fix: Crash on opening saved script if the script was not saved under ${MADEDIT_HOME}/scripts
+17.Fix: Script file would not listed if you saved it under directory other than ${MADEDIT_HOME}/scripts
 
 Mod v0.3.4.1
 1. Fix: Saved config of Astyle don't take effect
