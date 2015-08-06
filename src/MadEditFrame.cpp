@@ -7411,15 +7411,18 @@ void MadEditFrame::OnToolsSaveRecMacro( wxCommandEvent& event )
     
     if( !wxDir::Exists(dir) )
     {
-        if( m_RecentFiles->GetCount() )
+        if(!::wxMkdir(dir))
         {
-            wxFileName filename( m_RecentFiles->GetHistoryFile( 0 ) );
-            dir = filename.GetPath( wxPATH_GET_VOLUME | wxPATH_GET_SEPARATOR );
-            if( !wxDir::Exists(dir) ) dir = wxGetCwd();
-        }
-        else
-        {
-            dir = wxGetCwd();
+            if( m_RecentFiles->GetCount() )
+            {
+                wxFileName filename( m_RecentFiles->GetHistoryFile( 0 ) );
+                dir = filename.GetPath( wxPATH_GET_VOLUME | wxPATH_GET_SEPARATOR );
+                if( !wxDir::Exists(dir) ) dir = wxGetCwd();
+            }
+            else
+            {
+                dir = wxGetCwd();
+            }
         }
     }
 
