@@ -196,12 +196,12 @@ MadRecentList  *g_RecentFindText = NULL;
 extern wxString g_MadEditAppDir, g_MadEditHomeDir;
 wxHtmlWindow * g_MadToolHtmlWin = NULL;
 
-
 MadEditFrame *g_MainFrame = NULL;
 MadEdit *g_ActiveMadEdit = NULL;
 int g_PrevPageID = -1;
 wxStatusBar *g_StatusBar = NULL;
 wxArrayString g_SpellSuggestions;
+astyle::ASFormatter * g_ASFormatter = NULL;
 
 bool g_CheckModTimeForReload = true;
 
@@ -1676,7 +1676,7 @@ CommandData CommandTable[] =
     { 0,                2, menuSpaceToTab,               wxT( "menuSpaceToTab" ),               _( "Space Chars To Tab Chars" ),                wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Convert Space chars to Tab chars in the selection" )},
     { 0,                2, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0},
     { 0,                2, menuTrimTrailingSpaces,       wxT( "menuTrimTrailingSpaces" ),       _( "Tri&m Trailing Spaces" ),                   wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Trim trailing spaces at the end of lines" )},
-    { 0,                2, menuInsertNumbers,            wxT( "menuInsertNumbers" ),            _( "Insert Incremental numbers..." ),           wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Insert incremental numbers with step and padding at current caret" )},
+    { 0,                2, menuInsertNumbers,            wxT( "menuInsertNumbers" ),            _( "Insert Incremental numbers..." ),           wxT( "Ctrl-Shift-N" ), wxITEM_NORMAL,    -1,                0,                     _( "Insert incremental numbers with step and padding at current caret" )},
     { 0,                2, menuColumnAlign,              wxT( "menuColumnAlign" ),              _( "Column Align" ),                            wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Column Align" )},
     { 0,                1, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0},
     { 0,                1, menuSort,                     wxT( "menuSort" ),                     _( "&Sort" ),                                   0,                   wxITEM_NORMAL,    -1,                &g_Menu_Edit_Sort,     0},
@@ -3124,6 +3124,11 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
     extern void DeleteConfig();
     DeleteConfig();
     m_AuiManager.UnInit();
+
+    if(g_ASFormatter != NULL)
+    {
+        delete g_ASFormatter;
+    }
 
     if( g_MadToolHtmlWin ) { delete g_MadToolHtmlWin; }
 
@@ -5822,6 +5827,10 @@ void MadEditFrame::OnSearchFind( wxCommandEvent& event )
     {
         g_SearchDialog->WxCheckBoxSearchInSelection->SetValue(true);
     }
+    else
+    {
+        g_SearchDialog->WxCheckBoxSearchInSelection->SetValue(false);
+    }
 
     g_SearchDialog->m_FindText->SelectAll();
     g_SearchDialog->m_FindText->SetFocus();
@@ -5850,24 +5859,30 @@ void MadEditFrame::OnSearchFindNext( wxCommandEvent& event )
     g_SearchDialog->m_FindText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
     g_SearchDialog->UpdateCheckBoxByCBHex( g_SearchDialog->WxCheckBoxFindHex->GetValue() );
 
+    wxString ws;
+    if( g_SearchDialog->WxCheckBoxFindHex->GetValue() && ( g_ActiveMadEdit->GetSelectionSize() <= 10240 ))
+    {
+        g_ActiveMadEdit->GetSelHexString( ws, true );
+        g_SearchDialog->m_FindText->SetText( ws );
+    }
+    else
+    {
+        wxString ws;
+        g_ActiveMadEdit->GetWordFromCaretPos( ws );
+
+        if( !ws.IsEmpty() && ws[0] > wxChar( 0x20 ) )
+        {
+            g_SearchDialog->m_FindText->SetText( ws );
+        }
+    }
+
     if( g_ActiveMadEdit->IsSelected() )
     {
-        if( g_ActiveMadEdit->GetSelectionSize() <= 10240 )
-        {
-            if( g_SearchDialog->WxCheckBoxFindHex->GetValue() )
-            {
-                wxString ws;
-                g_ActiveMadEdit->GetSelHexString( ws, true );
-                g_SearchDialog->m_FindText->SetText( ws );
-            }
-            else
-                if( g_SearchDialog->WxCheckBoxRegex->GetValue() == false )
-                {
-                    wxString ws;
-                    g_ActiveMadEdit->GetSelText( ws );
-                    g_SearchDialog->m_FindText->SetText( ws );
-                }
-        }
+        g_SearchDialog->WxCheckBoxSearchInSelection->SetValue(true);
+    }
+    else
+    {
+        g_SearchDialog->WxCheckBoxSearchInSelection->SetValue(false);
     }
 
     wxCommandEvent e;
@@ -5897,24 +5912,30 @@ void MadEditFrame::OnSearchFindPrevious( wxCommandEvent& event )
     g_SearchDialog->m_FindText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
     g_SearchDialog->UpdateCheckBoxByCBHex( g_SearchDialog->WxCheckBoxFindHex->GetValue() );
 
+    wxString ws;
+    if( g_SearchDialog->WxCheckBoxFindHex->GetValue() && ( g_ActiveMadEdit->GetSelectionSize() <= 10240 ))
+    {
+        g_ActiveMadEdit->GetSelHexString( ws, true );
+        g_SearchDialog->m_FindText->SetText( ws );
+    }
+    else
+    {
+        wxString ws;
+        g_ActiveMadEdit->GetWordFromCaretPos( ws );
+
+        if( !ws.IsEmpty() && ws[0] > wxChar( 0x20 ) )
+        {
+            g_SearchDialog->m_FindText->SetText( ws );
+        }
+    }
+
     if( g_ActiveMadEdit->IsSelected() )
     {
-        if( g_ActiveMadEdit->GetSelectionSize() <= 10240 )
-        {
-            if( g_SearchDialog->WxCheckBoxFindHex->GetValue() )
-            {
-                wxString ws;
-                g_ActiveMadEdit->GetSelHexString( ws, true );
-                g_SearchDialog->m_FindText->SetText( ws );
-            }
-            else
-                if( g_SearchDialog->WxCheckBoxRegex->GetValue() == false )
-                {
-                    wxString ws;
-                    g_ActiveMadEdit->GetSelText( ws );
-                    g_SearchDialog->m_FindText->SetText( ws );
-                }
-        }
+        g_SearchDialog->WxCheckBoxSearchInSelection->SetValue(true);
+    }
+    else
+    {
+        g_SearchDialog->WxCheckBoxSearchInSelection->SetValue(false);
     }
 
     wxCommandEvent e;
@@ -5974,6 +5995,10 @@ void MadEditFrame::OnSearchReplace( wxCommandEvent& event )
     {
         g_ReplaceDialog->WxCheckBoxSearchInSelection->SetValue(true);
     }
+    else
+    {
+        g_SearchDialog->WxCheckBoxSearchInSelection->SetValue(false);
+    }
 
     g_ReplaceDialog->m_FindText->SelectAll();
     g_ReplaceDialog->m_FindText->SetFocus();
@@ -6024,23 +6049,20 @@ void MadEditFrame::OnSearchFindInFiles( wxCommandEvent& event )
     g_FindInFilesDialog->m_FindText->SetFont( fname, 14 );
     g_FindInFilesDialog->m_ReplaceText->SetFont( fname, 14 );
 
-    if( g_ActiveMadEdit && g_ActiveMadEdit->IsSelected() )
+    wxString ws;
+    if( g_SearchDialog->WxCheckBoxFindHex->GetValue() && ( g_ActiveMadEdit->GetSelectionSize() <= 10240 ))
     {
-        if( g_ActiveMadEdit->GetSelectionSize() <= 10240 )
+        g_ActiveMadEdit->GetSelHexString( ws, true );
+        g_SearchDialog->m_FindText->SetText( ws );
+    }
+    else
+    {
+        wxString ws;
+        g_ActiveMadEdit->GetWordFromCaretPos( ws );
+
+        if( !ws.IsEmpty() && ws[0] > wxChar( 0x20 ) )
         {
-            if( g_FindInFilesDialog->WxCheckBoxFindHex->GetValue() )
-            {
-                wxString ws;
-                g_ActiveMadEdit->GetSelHexString( ws, true );
-                g_FindInFilesDialog->m_FindText->SetText( ws );
-            }
-            else
-                if( g_FindInFilesDialog->WxCheckBoxRegex->GetValue() == false )
-                {
-                    wxString ws;
-                    g_ActiveMadEdit->GetSelText( ws );
-                    g_FindInFilesDialog->m_FindText->SetText( ws );
-                }
+            g_SearchDialog->m_FindText->SetText( ws );
         }
     }
 
@@ -7929,19 +7951,22 @@ void MadEditFrame::OnToolsAstyleFormat( wxCommandEvent& event )
     }
 
     wxString formattedText;
-    astyle::ASFormatter formatter;
+    if(g_ASFormatter == NULL)
+    {
+        g_ASFormatter = new astyle::ASFormatter();
+    }
     // load settings
     FormatterSettings settings;
-    settings.ApplyTo( formatter );
+    settings.ApplyTo( *g_ASFormatter );
     ASStreamIterator *asi = new ASStreamIterator( g_ActiveMadEdit, text );
-    formatter.init( asi );
+    g_ASFormatter->init( asi );
     int lineCounter = 0;
 
-    while( formatter.hasMoreLines() )
+    while( g_ASFormatter->hasMoreLines() )
     {
-        formattedText << wxString( formatter.nextLine().c_str(), wxCSConv( g_ActiveMadEdit->GetEncodingName() ) );
+        formattedText << wxString( g_ASFormatter->nextLine().c_str(), wxCSConv( g_ActiveMadEdit->GetEncodingName() ) );
 
-        if( formatter.hasMoreLines() )
+        if( g_ASFormatter->hasMoreLines() )
         { formattedText << eolChars; }
 
         ++lineCounter;
@@ -7992,6 +8017,7 @@ void MadEditFrame::OnToolsAstyleFormat( wxCommandEvent& event )
             g_ActiveMadEdit->SetText( formattedText );
         }
     }
+    delete asi;
 }
 
 void MadEditFrame::OnToolsXMLFormat( wxCommandEvent& event )
