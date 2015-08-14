@@ -105,6 +105,8 @@ New: Create scripts directory if not exists while saving recorded script
 New: Shortcut for Insert numbers(Ctrl-Shift-N)
 Fix: Memory leak in MadEditFrame::OnToolsAstyleFormat
 Fix: Use global astyle::ASFormatter formatter for performance in MadEditFrame::OnToolsAstyleFormat enhancement
+Fix: Out-of-bounds issue in toolbar init
+Fix: Improve in MadLines::MadLines()
 
 Mod v0.3.5
 1.New: MadMacro local script list on Toolbar

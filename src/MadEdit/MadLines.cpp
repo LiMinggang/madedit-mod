@@ -797,15 +797,17 @@ MadLines::MadLines(MadEdit *madedit)
 
     m_FileData = NULL;
     m_TmpFileData = NULL;
-
-    m_MemData = new MadMemData();
-
-    m_WriteBuffer=NULL;
-
-    m_NextUChar_Buffer = new wxByte[NEXTUCHAR_BUFFER_SIZE+10];
+    m_MemData = NULL;
+    m_WriteBuffer = NULL;
+    m_NextUChar_Buffer = NULL;
     m_NextUChar_BufferLoadNew=true;
     m_NextUChar_BufferStart=0;
     m_NextUChar_BufferSize=0;
+
+    m_MemData = new MadMemData();
+
+    m_NextUChar_Buffer = new wxByte[NEXTUCHAR_BUFFER_SIZE+10];
+
 }
 
 MadLines::~MadLines(void)
