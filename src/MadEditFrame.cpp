@@ -2658,8 +2658,6 @@ void MadEditFrame::CreateGUIControls( void )
         for( int i = 0; i < tbMAX; ++i )
         {
             g_Menu_Toolbars->Append( menuToolBar1 + i, g_ToolbarNames[i], wxEmptyString, wxITEM_CHECK );
-            g_Menu_Toolbars->Check( menuToolBar1 + i, m_ToolbarStatus[i] );
-            g_Menu_Toolbars->Enable( menuToolBar1 + i, m_ToolbarStatus[i] );
         }
     }
 
@@ -2667,8 +2665,6 @@ void MadEditFrame::CreateGUIControls( void )
         for( int i = ptPREVIEW_HTML; i < ptPREVIEW_MAXTYPE; ++i )
         {
             g_Menu_View_Preview->Append( i, g_PreviewTypeNames[i], wxEmptyString, wxITEM_CHECK );
-            g_Menu_View_Preview->Check( i, false );
-            g_Menu_View_Preview->Enable( i, false );
         }
     }
 
