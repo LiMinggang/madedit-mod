@@ -2659,7 +2659,7 @@ void MadEditFrame::CreateGUIControls( void )
         {
             g_Menu_Toolbars->Append( menuToolBar1 + i, g_ToolbarNames[i], wxEmptyString, wxITEM_CHECK );
             g_Menu_Toolbars->Check( menuToolBar1 + i, m_ToolbarStatus[i] );
-            g_Menu_Toolbars->Enable( menuToolBar1 + i, m_ToolbarStatus[tbMAX] );
+            g_Menu_Toolbars->Enable( menuToolBar1 + i, m_ToolbarStatus[i] );
         }
     }
 
