@@ -108,6 +108,7 @@ Fix: Use global astyle::ASFormatter formatter for performance in MadEditFrame::O
 Fix: Out-of-bounds issue in toolbar init
 Fix: Improve in MadLines::MadLines()
 Fix: Randomly crash under Fedora 22 in initializing
+Fix: Build issue of FreeBSD
 
 Mod v0.3.5
 1.New: MadMacro local script list on Toolbar
