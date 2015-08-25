@@ -295,11 +295,7 @@ std::wstring RawText::_processCodeSpans(std::wstring src, ReplacementTable&
 			}
 		}
 		src.swap(tgt);
-#if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__)        
-		tgt = std::wstring(L"");
-#else
         tgt.clear();
-#endif
 	}
 	return src;
 }

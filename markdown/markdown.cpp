@@ -634,11 +634,7 @@ bool Document::read(const std::wstring& src) {
 bool Document::_getline(std::wistream& in, std::wstring& line) {
 	// Handles \n, \r, and \r\n (and even \n\r) on any system. Also does tab-
 	// expansion, since this is the most efficient place for it.
-#if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__)        
-    line = std::wstring(L"");
-#else
 	line.clear();
-#endif
 
 	bool initialWhitespace=true;
 	wchar_t c;
