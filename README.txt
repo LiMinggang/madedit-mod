@@ -14,8 +14,8 @@ Supported Platforms:
 A. Linux, FreeBSD, and Unix-like OS (__WXGTK__):
    a. GNU C++ 3.x/4.x:
       Required Libraries to compile:
-      1. wxWidgets-2.8.x or higher with Unicode and IPC enabled
-      2. Boost-1.33.0 or higher(build Boost-Python)
+      1. wxWidgets-3.0.2 or higher with Unicode and IPC enabled
+      2. Boost-1.56.0 or higher(build Boost-Python)
       3. Boost.Xpressive latest version
 
       (gtk2-devel gtext-devel automake rpm-build)
@@ -25,20 +25,17 @@ A. Linux, FreeBSD, and Unix-like OS (__WXGTK__):
 B. MS Windows (__WXMSW__):
    a. MinGW32/GNU C++ 3.x (wxDevCpp):
       Required Libraries to compile:
-      1. wxWidgets-2.8.x or higher with Unicode enabled(wxWidgets-3.0.2 is
-         recommended)
-      2. Boost-1.33.0 or higher(build Boost-Python)
+      1. wxWidgets-3.0.2 or higher with Unicode enabled
+      2. Boost-1.56.0 or higher(build Boost-Python)
       3. Boost.Xpressive latest version
       4. libunicows: it's optional under WinNT/XP, but required under Win98
    b. Visual C++ 7.1 (VS.Net 2005) or higher:
       Required Libraries to compile:
-      1. wxWidgets-2.8.x or higher with Unicode enabled(wxWidgets-3.0.2 is
-         recommended)
-      2. Boost-1.33.0 or higher(Source code is enough for MadEdit, build
+      1. wxWidgets-3.0.2 or higher with Unicode enabled
+      2. Boost-1.56.0 or higher(Source code is enough for MadEdit, build
          Boost-Python)
       3. Boost.Xpressive latest version
-      4. libunicows: it's optional under WinNT/XP, but required under Win98
-      5. Set WXWIN and BOOST to the root directory of your local ones
+      4. Set WXWIN and BOOST to the root directory of your local ones
 
 P.S.: Please put the debug info(.pdb) under the App directory in case there was a 
       crash happened. Paste the call stack and open a ticket
@@ -62,7 +59,7 @@ Example build under Linux
 Boost Python(1.56)
 ./bjam --with-python include="${HOME}/madedit-mod/minipython/Include" python-debugging=off threading=multi variant=release link=static runtime-link=static stage
 wxWidgets(3.0.2)
-./configure --enable-unicode --disable-shared --with-libpng=builtin --with-zlib=builtin --with-expat=builtin
+./configure --enable-unicode --disable-shared --with-libpng=builtin --with-zlib=builtin --with-expat=builtin  --with-gtk3=yes --with-libiconv=no
 MadEdit-Mod
 ./configure --with-boost=${HOME}/boost_1_56_0 --with-wxdir=${HOME}/wxWidgets-3.0.2
 

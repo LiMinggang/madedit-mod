@@ -30,7 +30,7 @@ END_EVENT_TABLE()
     ////Event Table End
 
 wxString g_MadEdit_URL(wxT("http://sourceforge.net/projects/madedit/ or http://sourceforge.net/projects/madedit-mod/"));
-wxString g_MadEditMod_URL(wxT("http://sourceforge.net/projects/madedit-mod/"));
+wxString g_MadEditMod_URL(wxT("https://sourceforge.net/p/madedit-mod/wiki/MadEdi-Mod/"));
 
 MadAboutDialog::MadAboutDialog( wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style )
     : wxDialog( parent, id, title, position, size, style)
