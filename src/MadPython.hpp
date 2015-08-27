@@ -15,10 +15,14 @@
 #include "MadEdit/MadEdit.h"
 #include "MadEdit/MadEditCommand.h"
 
+#ifndef PYMADEDIT_DLL
 #include "MadEditFrame.h"
-
 extern wxStatusBar *g_StatusBar;
 extern MadEdit *g_ActiveMadEdit;
+#else
+MadEdit *g_ActiveMadEdit = NULL;
+wxWindow g_DummyWin;
+#endif
 extern void DisplayFindAllResult(vector<wxFileOffset> &begpos, vector<wxFileOffset> &endpos, MadEdit *madedit, bool expandresults = true, OnProgressUpdatePtr updater = NULL);
 
 // Ugly bigger switch than bigger map
@@ -272,6 +276,7 @@ namespace mad_python
     public:
         PyMadEdit()
         {
+#ifndef PYMADEDIT_DLL        
             if(g_MainFrame) //Should be always true!!!
             {
                 if(!g_ActiveMadEdit)
@@ -280,10 +285,16 @@ namespace mad_python
                     g_MainFrame->OpenFile(wxEmptyString, false);
                     return;
                 }
-
             }
             else
                 throw std::runtime_error("No active main frame!");
+#else
+            if(!g_ActiveMadEdit)
+            {
+                g_ActiveMadEdit = new MadEdit( &g_DummyWin, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxNO_BORDER );
+                return;
+            }
+#endif
         }
         void ProcessCommand(int command)
         {
@@ -1008,6 +1019,7 @@ namespace mad_python
             return g_ActiveMadEdit->ReplaceHexAll(wxExpr, wxFmt, NULL, NULL, (wxFileOffset)rangeFrom, (wxFileOffset)rangeTo);
         }
 
+#ifndef PYMADEDIT_DLL
         // list the matched data to pbegpos & pendpos
         // return the found count or SR_EXPR_ERROR
         int FindTextAll(const std::string &expr, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool showresults = true)
@@ -1056,6 +1068,7 @@ namespace mad_python
 
             return ok;
         }
+#endif        
         bool LoadFromFile(const std::string &filename, const std::string &encoding=std::string(""))
         {
             if(filename.empty())
@@ -1449,8 +1462,10 @@ BOOST_PYTHON_MODULE(madpython)
         .def("ReplaceHex", &PyMadEdit::ReplaceHex, ReplaceHex_member_overloads( args("expr", "fmt"), "Doc string" )[return_value_policy<return_by_value>()])
         .def("ReplaceTextAll", &PyMadEdit::ReplaceTextAll, ReplaceTextAll_member_overloads( args("expr", "fmt", "bRegex", "bCaseSensitive", "bWholeWord", "rangeFrom", "rangeTo"), "Doc string" )[return_value_policy<return_by_value>()])
         .def("ReplaceHexAll", &PyMadEdit::ReplaceHexAll, ReplaceHexAll_member_overloads( args("expr", "fmt", "rangeFrom", "rangeTo"), "Doc string" )[return_value_policy<return_by_value>()])
+#ifndef PYMADEDIT_DLL
         .def("FindTextAll", &PyMadEdit::FindTextAll, FindTextAll_member_overloads( args("expr", "bRegex", "bCaseSensitive", "bWholeWord", "showresults"), "Doc string" )[return_value_policy<return_by_value>()])
         .def("FindHexAll", &PyMadEdit::FindHexAll, FindHexAll_member_overloads( args("expr", "showresults"), "Doc string" )[return_value_policy<return_by_value>()])
+#endif
         .def("LoadFromFile", &PyMadEdit::LoadFromFile, LoadFromFile_member_overloads( args("filename", "encoding"), "Doc string" )[return_value_policy<return_by_value>()])
 
         .def("ToHalfWidth", &PyMadEdit::ToHalfWidth, ToHalfWidth_member_overloads( args("ascii", "japanese", "korean", "other"), "Doc string" ))

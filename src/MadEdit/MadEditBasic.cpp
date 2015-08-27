@@ -15,7 +15,9 @@
 #endif
 
 #include <wx/filename.h>
+#ifndef PYMADEDIT_DLL
 #include "SpellCheckerManager.h"
+#endif
 
 #ifdef _DEBUG
 #include <crtdbg.h>
@@ -588,10 +590,12 @@ void MadEdit::HexModeToTextMode(MadEditMode mode)
             if(m_Lines->m_Size>=maxtextfilesize)
             {
                 wxString size=FormatThousands(wxLongLong(m_Lines->m_Size).ToString());
+#ifndef PYMADEDIT_DLL
                 if(wxNO==MadMessageBox(wxString::Format(_("Do you want to continue?\nThe file size is %s bytes.\nIt may take long time and large memories to convert to Text/Column Mode."), size.c_str()), _("Hex Mode to Text/Column Mode"), wxYES_NO))
                 {
                     return;
                 }
+#endif                
             }
 
             m_DrawingXPos = 0;

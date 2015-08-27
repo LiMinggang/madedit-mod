@@ -21,8 +21,10 @@
 #   include <wx/clipbrd.h>
 #endif
 
+#ifndef PYMADEDIT_DLL
 #include "SpellCheckerManager.h"
 #include "HunspellInterface.h"
+#endif
 
 using std::vector;
 
@@ -3220,6 +3222,7 @@ void MadEdit::InsertIncrementalNumber(int initial, int step, int total, MadNumbe
 
 void MadEdit::SetSpellCheck(bool value)
 {
+#ifndef PYMADEDIT_DLL
     if(m_SingleLineMode) return;
     if(value!=m_SpellCheck)
     {
@@ -3237,14 +3240,17 @@ void MadEdit::SetSpellCheck(bool value)
     }
     m_RepaintAll=true;
     Refresh(false);
+#endif
 }
 
 void MadEdit::AddtoDictionary(wxString & misSpell)
 {
+#ifndef PYMADEDIT_DLL
     if(m_SingleLineMode || !m_SpellCheckerPtr) return;
     m_SpellCheckerPtr->AddWordToDictionary(misSpell);
     m_RepaintAll=true;
     Refresh(false);
+#endif
 }
 
 void MadEdit::CopyBookmarkedLines()

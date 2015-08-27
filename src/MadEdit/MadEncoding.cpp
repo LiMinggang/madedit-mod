@@ -16,7 +16,6 @@ using std::map;
 #include <crtdbg.h>
 #define new new(_NORMAL_BLOCK ,__FILE__, __LINE__)
 #endif
-
 // Pure C instead of Map of Map, but map with MadEncodingGrp 
 // ISO_8859_1(NA)  ==> (ENCG_ISO8859)&&(ENCG_WESTERNEUROPE))
 // ISO_8859_2  ==> (ENCG_ISO8859)&&(ENCG_CENTRALEUROPE))
@@ -82,6 +81,11 @@ wxChar TestEncoding(const wxChar *name, wxFontEncoding enc, wxByte *mb)
     conv.MB2WC(wcs, (char*)mb, 4);
     return wcs[0];
 }
+#ifdef PYMADEDIT_DLL
+#ifdef __WXMSW__
+wxString g_MadEditRegkeyPath = wxT("HKEY_CURRENT_USER\\Software\\Classes\\");
+#endif
+#endif
 
 #ifdef __WXMSW__
 #define MSW_GET_FONT_NAME(cp,fn) MSW_GetFontName(cp,fn)

@@ -185,6 +185,7 @@
 #else
     #define GetAccelFromString(x) wxGetAccelFromString(x)
 #endif
+extern wxString MadStrLower(const wxString &);
 
 extern wxString g_MadEdit_Version;
 extern wxString g_MadEdit_URL;
@@ -383,29 +384,6 @@ int MadMessageBox( const wxString& message, const wxString& caption, long style,
 
     wxFAIL_MSG( wxT( "unexpected return code from wxMessageDialog" ) );
     return wxCANCEL;
-}
-
-#define BUF_LEN 512
-wxString MadStrLower( const wxString& ws )
-{
-#ifdef __WXMSW__
-    wchar_t buf[BUF_LEN + 1];
-    wxString result, tmp;
-    size_t len = ws.Len(), beg = 0;
-
-    do
-    {
-        wcscpy( buf, ws.SubString( beg, beg + BUF_LEN - 1 ).wc_str() );
-        CharLowerW( buf );
-        result << buf;
-        beg += BUF_LEN;
-    }
-    while( len > beg );
-
-    return result;
-#else
-    return ws.Lower();
-#endif
 }
 
 //---------------------------------------------------------------------------

@@ -28,7 +28,9 @@
 #if !defined(__WXMSW__)
 #   include "caret_new.h"
 #endif
-
+#ifdef __WXMSW__
+    #include <io.h>
+#endif
 #ifdef __WXGTK__
 #include <stdio.h>
 #include <gdk/gdk.h>
@@ -44,8 +46,10 @@
 #endif
 #endif
 
+#ifndef PYMADEDIT_DLL
 #include "SpellCheckerManager.h"
 #include "HunspellInterface.h"
+#endif
 
 using std::vector;
 using std::list;
@@ -75,7 +79,11 @@ using std::list;
 #endif
 
 static inline int wxChCmp(const wchar_t * wchStr, const wxString & wsStr);
+#ifndef PYMADEDIT_DLL
 extern void RecordAsMadMacro(MadEdit *, const wxString&);
+#else
+#define RecordAsMadMacro(medit, str)
+#endif
 extern bool FromCmdToString(wxString &cmdStr, int madCmd);
 MadKeyBindings MadEdit::ms_KeyBindings;
 
@@ -91,6 +99,29 @@ extern const ucs4_t HexHeader[78] =
 
 static wxCursor ArrowCursor, IBeamCursor, DragCopyCursor, DragMoveCursor, DragNoneCursor, RightArrowCursor;
 //==================================================
+
+#define BUF_LEN 512
+wxString MadStrLower( const wxString& ws )
+{
+#ifdef __WXMSW__
+    wchar_t buf[BUF_LEN + 1];
+    wxString result, tmp;
+    size_t len = ws.Len(), beg = 0;
+
+    do
+    {
+        wcscpy( buf, ws.SubString( beg, beg + BUF_LEN - 1 ).wc_str() );
+        CharLowerW( buf );
+        result << buf;
+        beg += BUF_LEN;
+    }
+    while( len > beg );
+
+    return result;
+#else
+    return ws.Lower();
+#endif
+}
 
 class MadDataObject : public wxDataObjectSimple
 {
@@ -905,10 +936,12 @@ MadEdit::MadEdit(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSi
     m_SpellCheck = false;
     m_BookmarkInSearch = false;
 
+#ifndef PYMADEDIT_DLL
     m_Config->Read(wxT("SpellCheck"),   &m_SpellCheck, true);
     if(SpellCheckerManager::Instance().GetSelectedDictionaryNumber() == -1) m_SpellCheck = false;
     if(m_SpellCheck)
         m_SpellCheckerPtr = SpellCheckerManager::Instance().GetSpellChecker();
+#endif
 
     m_InsertMode=true;
     m_CaretType=ctVerticalLine;
@@ -2185,7 +2218,8 @@ void MadEdit::PaintTextLines(wxDC *dc, const wxRect &rect, int toprow, int rowco
                             dc->SetTextForeground(m_Syntax->nw_Color);
                             dc->SetFont(*(m_Syntax->nw_Font));
 
-                            bool spellMark = false;
+							bool spellMark = false;
+#ifndef PYMADEDIT_DLL
                             if(!InPrinting() && (m_SpellCheckerPtr))
                             {
                                 wxString str;
@@ -2196,6 +2230,7 @@ void MadEdit::PaintTextLines(wxDC *dc, const wxRect &rect, int toprow, int rowco
                                 if(!m_SpellCheckerPtr->IsSpellingOk(str))
                                     spellMark = true;
                             }
+#endif
                             PaintText(dc, left, text_top, m_WordBuffer, m_WidthBuffer, wordlength, minleft, maxright, spellMark);
                         }
                     }
