@@ -949,8 +949,7 @@ void DisplayFindAllResult(vector<wxFileOffset> &begpos, vector<wxFileOffset> &en
     }
     else
     {
-        wxString smsg;
-        smsg.Printf(_("%d results"), begpos.size());
+		wxString smsg(wxLongLong(begpos.size()).ToString() + _(" results"));
         g_StatusBar->SetStatusText(smsg, 0 );
     }
 }
