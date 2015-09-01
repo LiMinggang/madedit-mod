@@ -4223,7 +4223,7 @@ void MadEdit::SelectLineFromCaretPos(wxString *ws)
 
     UpdateSelectionPos();
 
-    m_CaretPos = m_SelectionPos2;
+    m_CaretPos = m_SelectionPos1;
 
     m_SelectionBegin = &m_SelectionPos1;
     m_SelectionEnd = &m_SelectionPos2;

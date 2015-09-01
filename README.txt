@@ -106,7 +106,8 @@ Fix: Out-of-bounds issue in toolbar init
 Fix: Improve in MadLines::MadLines()
 Fix: Randomly crash under Fedora 22 in initializing
 Fix: Build issue of FreeBSD
-Fix: Assertion in 64bit Windows
+Fix: Assertion in FindAll on 64bit Windows
+Fix: Move caret to the beginning of the line instead of end while left click to select
 
 Mod v0.3.5
 1.New: MadMacro local script list on Toolbar

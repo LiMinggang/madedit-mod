@@ -1,7 +1,7 @@
 #ifndef __MADPYTHON__
 #define __MADPYTHON__
 #include <stdexcept>
-#include <Python.h>
+//#include <Python.h>
 
 #define BOOST_PYTHON_STATIC_LIB
 #include <boost/python.hpp>
@@ -21,7 +21,7 @@ extern wxStatusBar *g_StatusBar;
 extern MadEdit *g_ActiveMadEdit;
 #else
 MadEdit *g_ActiveMadEdit = NULL;
-wxWindow g_DummyWin;
+wxFrame g_DummyWin;
 #endif
 extern void DisplayFindAllResult(vector<wxFileOffset> &begpos, vector<wxFileOffset> &endpos, MadEdit *madedit, bool expandresults = true, OnProgressUpdatePtr updater = NULL);
 
