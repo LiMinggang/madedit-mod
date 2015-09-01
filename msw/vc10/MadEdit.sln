@@ -10,8 +10,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pythoncore", "pythoncore.vc
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libhunspell", "libhunspell.vcxproj", "{53609BB3-D874-465C-AF7B-DF626DB0D89B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PyMadEdit", "PyMadEdit.vcxproj", "{A9ACB35C-DE0B-4FD1-BFFA-363AFFE05BA1}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Unicode Debug|Win32 = Unicode Debug|Win32
@@ -44,12 +42,6 @@ Global
 		{53609BB3-D874-465C-AF7B-DF626DB0D89B}.Unicode Release|Win32.Build.0 = Unicode Release|Win32
 		{53609BB3-D874-465C-AF7B-DF626DB0D89B}.Unicode Release|x64.ActiveCfg = Unicode Release|x64
 		{53609BB3-D874-465C-AF7B-DF626DB0D89B}.Unicode Release|x64.Build.0 = Unicode Release|x64
-		{A9ACB35C-DE0B-4FD1-BFFA-363AFFE05BA1}.Unicode Debug|Win32.ActiveCfg = Unicode Debug|Win32
-		{A9ACB35C-DE0B-4FD1-BFFA-363AFFE05BA1}.Unicode Debug|Win32.Build.0 = Unicode Debug|Win32
-		{A9ACB35C-DE0B-4FD1-BFFA-363AFFE05BA1}.Unicode Debug|x64.ActiveCfg = Unicode Debug|x64
-		{A9ACB35C-DE0B-4FD1-BFFA-363AFFE05BA1}.Unicode Release|Win32.ActiveCfg = Unicode Release|Win32
-		{A9ACB35C-DE0B-4FD1-BFFA-363AFFE05BA1}.Unicode Release|Win32.Build.0 = Unicode Release|Win32
-		{A9ACB35C-DE0B-4FD1-BFFA-363AFFE05BA1}.Unicode Release|x64.ActiveCfg = Unicode Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

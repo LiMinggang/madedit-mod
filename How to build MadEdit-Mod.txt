@@ -16,7 +16,7 @@ Compile wxWidgets and boost_python
   git clone git://git.code.sf.net/p/madedit-mod/code madedit-mod
 
 * Static build of wxWidgets 3.0.2 with builtin png and zlib
-  ./configure --enable-unicode --disable-shared --with-libpng=builtin --with-zlib=builtin --with-expat=builtin  --with-libiconv=no
+  ./configure --enable-unicode --disable-shared --with-libpng=builtin --with-zlib=builtin --with-expat=builtin --with-libiconv=no
 
 * Static build of boost_python with minipython
   ./bootstrap.sh
