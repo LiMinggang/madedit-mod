@@ -489,11 +489,23 @@ void MadStackWalker::OnStackFrame(const wxStackFrame & frame)
     {
         wxULongLong address((size_t)frame.GetAddress());
 #if defined(__x86_64__) || defined(__LP64__) || defined(_WIN64)
-        wxString fmt(wxT("[%02u]:[%08X%08X] %s(%i)\t%s\n"));
+        wxString fmt(wxT("[%02u]:[%08X%08X] %s(%i)\t%s%s\n"));
 #else
-        wxString fmt(wxT("[%02u]:[%08X] %s(%i)\t%s\n"));
+        wxString fmt(wxT("[%02u]:[%08X] %s(%i)\t%s%s\n"));
 #endif
 
+        wxString paramInfo(wxT("("));
+#if defined(_WIN32)
+        wxString type, name, value;  
+        size_t count = frame.GetParamCount(), i = 0;
+        while(i < count)
+        {
+            frame.GetParam(i, &type, &name, &value);
+            paramInfo += type + wxT(" ") + name + wxT(" = ") + value;    
+            if(++i < count) paramInfo += wxT(", ");
+        }
+#endif
+        paramInfo += wxT(")");
         m_DumpFile->Write(wxString::Format(fmt,
             (unsigned)frame.GetLevel(),
 #if defined(__x86_64__) || defined(__LP64__) || defined(_WIN64)
@@ -502,8 +514,9 @@ void MadStackWalker::OnStackFrame(const wxStackFrame & frame)
             address.GetLo(),
             frame.GetFileName().c_str(),
             (unsigned)frame.GetLine(),
-            frame.GetName().c_str()
-            ));
+            frame.GetName().c_str(),
+            paramInfo.c_str())
+            );
     }
 }
 

@@ -100,6 +100,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 Mod v0.3.6
 New: Create scripts directory if not exists while saving recorded script
 New: Shortcut for Insert numbers(Ctrl-Shift-N)
+New: Print function parameter information while dumping(Windows only)
 Fix: Memory leak in MadEditFrame::OnToolsAstyleFormat
 Fix: Use global astyle::ASFormatter formatter for performance in MadEditFrame::OnToolsAstyleFormat enhancement
 Fix: Out-of-bounds issue in toolbar init
