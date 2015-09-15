@@ -109,6 +109,10 @@ Fix: Randomly crash under Fedora 22 in initializing
 Fix: Build issue of FreeBSD
 Fix: Assertion in FindAll on 64bit Windows
 Fix: Move caret to the beginning of the line instead of end while left click to select
+Fix: Update VS projects
+Fix: Triple click to select whole row not working after the fix above
+Fix: Diable a warning for libhunspell in VS2013
+Fix: Fix Assertion failure in MadEdit::UpdateCaret
 
 Mod v0.3.5
 1.New: MadMacro local script list on Toolbar

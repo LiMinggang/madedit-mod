@@ -505,7 +505,7 @@ protected:
     // if(ws==NULL) SelectWord only;
     // else GetWord to ws;
     void SelectWordFromCaretPos(wxString *ws, MadCaretPos * pos = NULL);
-    void SelectLineFromCaretPos(wxString *ws=NULL);
+    void SelectLineFromCaretPos(wxString *ws=NULL, bool caretToBegOfSel = true);
 
     bool PutTextToClipboard(const wxString &ws);
     bool PutColumnDataToClipboard(const wxString &ws, int linecount);

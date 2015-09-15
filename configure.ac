@@ -158,7 +158,7 @@ fi
 #else
 #   LIBS="$LIBS -lX11"
 #fi
-LIBS="$LIBS -lX11 -lc++"
+LIBS="$LIBS -lX11"
 
 # Make sure we have hunspell, and also have it added to LIBS
 # Checks for header files.

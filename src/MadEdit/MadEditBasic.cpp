@@ -603,10 +603,9 @@ void MadEdit::HexModeToTextMode(MadEditMode mode)
             m_EditMode = mode;
             m_RepaintAll = true;
 
-            SetTextFont(m_TextFont->GetFaceName(), m_TextFont->GetPointSize(), true);
+			ReformatAll();
+			SetTextFont(m_TextFont->GetFaceName(), m_TextFont->GetPointSize(), true);
             UpdateAppearance();
-
-            ReformatAll();
         }
         else
         {

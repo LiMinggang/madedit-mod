@@ -195,7 +195,9 @@
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Unicode Release|x64'">CompileAsCpp</CompileAs>
     </ClCompile>
     <ClCompile Include="..\..\spellchecker\hunspell\src\hunspell\affentry.cxx" />
-    <ClCompile Include="..\..\spellchecker\hunspell\src\hunspell\affixmgr.cxx" />
+    <ClCompile Include="..\..\spellchecker\hunspell\src\hunspell\affixmgr.cxx">
+      <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">4706</DisableSpecificWarnings>
+    </ClCompile>
     <ClCompile Include="..\..\spellchecker\hunspell\src\hunspell\csutil.cxx" />
     <ClCompile Include="..\..\spellchecker\hunspell\src\hunspell\dictmgr.cxx" />
     <ClCompile Include="..\..\spellchecker\hunspell\src\hunspell\filemgr.cxx" />

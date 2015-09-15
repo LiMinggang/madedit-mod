@@ -146,7 +146,7 @@
       </PreprocessorDefinitions>
     </ResourceCompile>
     <PreBuildEvent>
-      <Command>del $(OutDir)version.obj</Command>
+      <Command>del "$(OutDir)version.obj"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Release|x64'">
