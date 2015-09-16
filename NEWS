@@ -1,17 +1,16 @@
-Mod v0.3.5
-New: MadMacro local script list on Toolbar
-New: Open/edit saved MadMacro script
-New: Build time shown on About Dialog
-New: Copy the first word instead of the whole selection for search/replace/spell check
-Update translation
-
-Fix: Enable line breaking to enable disable 2 belows
-Fix: Pad empty lines function in Astyle configs
-Fix: XML formatting config GUI
-Fix: Ctrl-Shift-K for Astyle formatter
-Fix: Assertion if the string was not found in Translation
-Fix: Macro Recording, missed escape slash char '\' while searching '"'
-Fix: Remove duplicated recoring string in ProcessCommand
-Fix: Part of the line would not be see if "show line number" is checked in WordWrap mode
-Fix: wxGetSelectedChoices compatable issue(crash if you close ToHalfWidth/ToFullWidth dialog directly)
-Fix: Hang/crash on opening saved script if ${MADEDIT_HOME}/scripts not existing
+Mod v0.3.6
+New: Create scripts directory if not exists while saving recorded script
+New: Shortcut for Insert numbers(Ctrl-Shift-N)
+New: Print function parameter information while dumping(Windows only)
+Fix: Memory leak in MadEditFrame::OnToolsAstyleFormat
+Fix: Use global astyle::ASFormatter formatter for performance in MadEditFrame::OnToolsAstyleFormat enhancement
+Fix: Out-of-bounds issue in toolbar init
+Fix: Improve in MadLines::MadLines()
+Fix: Randomly crash under Fedora 22 in initializing
+Fix: Build issue of FreeBSD
+Fix: Assertion in FindAll on 64bit Windows
+Fix: Move caret to the beginning of the line instead of end while left click to select
+Fix: Update VS projects
+Fix: Triple click to select whole row not working after the fix above
+Fix: Diable a warning for libhunspell in VS2013
+Fix: Fix Assertion failure in MadEdit::UpdateCaret

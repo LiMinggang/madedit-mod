@@ -99,6 +99,23 @@ ChangeLog:
 Todo:
 FreeBSD packaging (with FreeBSD 10.01)
 
+Mod v0.3.6
+New: Create scripts directory if not exists while saving recorded script
+New: Shortcut for Insert numbers(Ctrl-Shift-N)
+New: Print function parameter information while dumping(Windows only)
+Fix: Memory leak in MadEditFrame::OnToolsAstyleFormat
+Fix: Use global astyle::ASFormatter formatter for performance in MadEditFrame::OnToolsAstyleFormat enhancement
+Fix: Out-of-bounds issue in toolbar init
+Fix: Improve in MadLines::MadLines()
+Fix: Randomly crash under Fedora 22 in initializing
+Fix: Build issue of FreeBSD
+Fix: Assertion in FindAll on 64bit Windows
+Fix: Move caret to the beginning of the line instead of end while left click to select
+Fix: Update VS projects
+Fix: Triple click to select whole row not working after the fix above
+Fix: Diable a warning for libhunspell in VS2013
+Fix: Fix Assertion failure in MadEdit::UpdateCaret
+
 Mod v0.3.5
 1.New: MadMacro local script list on Toolbar
 2.New: Open/edit saved MadMacro script
