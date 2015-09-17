@@ -3099,7 +3099,7 @@ void MadEdit::ColumnAlign()
 }
 
 void MadEdit::InsertIncrementalNumber(int initial, int step, int total, MadNumberingStepType stepType,
-                        MadNumberFormat fmt, MadNumberAlign align, bool zeroPad)
+                        MadNumberFormat fmt, MadNumberAlign align, bool zeroPad, const wxString& prefix, const wxString& postfix)
 {
     wxString numFmt(wxT("%")), tstr;
     ucs4string out;
@@ -3145,6 +3145,7 @@ void MadEdit::InsertIncrementalNumber(int initial, int step, int total, MadNumbe
                 char buffer[33];
                 do
                 {
+                    tstr += prefix;
                     if(binary)
                     {
                         strbuff = &padding[0];
@@ -3184,7 +3185,7 @@ void MadEdit::InsertIncrementalNumber(int initial, int step, int total, MadNumbe
                         }
                         
                     }
-                    tstr<<wxT("\n");
+                    tstr += postfix+wxT("\n");
 
                     if(linear) num += step;
                     else num *= step;

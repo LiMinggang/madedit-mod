@@ -3400,7 +3400,7 @@ void MadEditFrame::OnActivate( wxActivateEvent &evt )
 
     if( evt.GetActive() && g_ActiveMadEdit )
     {
-        g_ActiveMadEdit->SetFocus();
+        //g_ActiveMadEdit->SetFocus();
         g_ActiveMadEdit->ReloadByModificationTime( true );
     }
 
@@ -5678,13 +5678,18 @@ void MadEditFrame::OnEditInsertNumbers( wxCommandEvent& event )
 
             long initialNum = 0, numStep = 0, totalChar = 0;
             g_MadNumberDlg->WxEditNumberOfChars->GetValue().ToLong( &totalChar );
-            g_MadNumberDlg->WxEditNumberingStep->GetValue().ToLong( &numStep );;
-            g_MadNumberDlg->WxEditInitialNumber->GetValue().ToLong( &initialNum );;
-            g_ActiveMadEdit->InsertIncrementalNumber( initialNum, numStep, totalChar, numStepType, numFormat, numAlign, g_MadNumberDlg->WxPadChar->GetValue() );
+            g_MadNumberDlg->WxEditNumberingStep->GetValue().ToLong( &numStep );
+            g_MadNumberDlg->WxEditInitialNumber->GetValue().ToLong( &initialNum );
+            wxString prefix, postfix;
+            if(g_MadNumberDlg->WxCheckPrefix->GetValue())
+                prefix = g_MadNumberDlg->WxEditPrefix->GetValue();
+            if(g_MadNumberDlg->WxCheckPostfix->GetValue())
+                postfix = g_MadNumberDlg->WxEditPostfix->GetValue();
+            g_ActiveMadEdit->InsertIncrementalNumber( initialNum, numStep, totalChar, numStepType, numFormat, numAlign, g_MadNumberDlg->WxPadChar->GetValue(), prefix, postfix );
             g_ActiveMadEdit->Refresh( false );
-            RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "InsertIncrementalNumber(%d, %d, %d, %s, %s, %s, %s)" ),
+            RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "InsertIncrementalNumber(%d, %d, %d, %s, %s, %s, %s, \"%s\", \"%s\")" ),
                               initialNum, numStep, totalChar, strStepType.c_str(), strFormat.c_str(), strAlign.c_str(),
-                              g_MadNumberDlg->WxPadChar->GetValue() ? wxT( "True" ) : wxT( "False" ) ) );
+                              g_MadNumberDlg->WxPadChar->GetValue() ? wxT( "True" ) : wxT( "False" ), prefix.c_str(), postfix.c_str() ) );
         }
     }
 }

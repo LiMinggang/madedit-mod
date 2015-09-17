@@ -890,7 +890,7 @@ public: // basic functions
     void InsertTabChar() { ProcessCommand(ecInsertTabChar); }
     void InsertDateTime() { ProcessCommand(ecInsertDateTime); }
     void InsertIncrementalNumber(int intial, int step, int total, MadNumberingStepType stepType,
-                        MadNumberFormat fmt, MadNumberAlign align, bool zeroPad);
+                        MadNumberFormat fmt, MadNumberAlign align, bool zeroPad, const wxString& prefix, const wxString& postfix);
 
     void ColumnAlign();
     void HighlightWords();

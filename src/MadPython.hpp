@@ -322,10 +322,11 @@ namespace mad_python
         }
 
         void InsertIncrementalNumber(int initial, int step, int total, int stepType,
-                    int fmt, int align, bool zeroPad)
+                    int fmt, int align, bool zeroPad, const std::string & pref, const std::string & post)
         {
+            wxString wxPrefix(pref.c_str(), wxConvLocal), wxPostfix(post.c_str(), wxConvLocal);
             g_ActiveMadEdit->InsertIncrementalNumber(initial, step, total, 
-                    (MadNumberingStepType)stepType, (MadNumberFormat)fmt, (MadNumberAlign)align, zeroPad);
+                    (MadNumberingStepType)stepType, (MadNumberFormat)fmt, (MadNumberAlign)align, zeroPad, wxPrefix, wxPostfix);
         }
         void ScrollLineUp()
         {

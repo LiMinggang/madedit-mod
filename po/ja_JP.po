@@ -1,8 +1,9 @@
+#: ../src/MadNumberDlg.cpp:135
 msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-15 15:34+0800\n"
+"POT-Creation-Date: 2015-09-16 19:38+0800\n"
 "PO-Revision-Date: 2015-06-30 21:50+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
@@ -173,11 +174,11 @@ msgstr "日本語 (EUC-JP)"
 msgid "Windows/DOS OEM (CP 437)"
 msgstr "Windows /DOS OEM (CP 437)"
 
-#: wxstd.po.cpp:42 ../src/MadNumberDlg.cpp:123
+#: wxstd.po.cpp:42 ../src/MadNumberDlg.cpp:155
 msgid "OK"
 msgstr "OK"
 
-#: wxstd.po.cpp:43 ../src/MadSortDialog.cpp:85 ../src/MadNumberDlg.cpp:126
+#: wxstd.po.cpp:43 ../src/MadSortDialog.cpp:85 ../src/MadNumberDlg.cpp:158
 msgid "Cancel"
 msgstr "キャンセル"
 
@@ -1496,7 +1497,7 @@ msgstr ""
 msgid "Toolbars"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1856 ../src/MadEditFrame.cpp:8267
+#: ../src/MadEditFrame.cpp:1856 ../src/MadEditFrame.cpp:8272
 msgid "Toggle Main Toolbar"
 msgstr ""
 
@@ -2364,8 +2365,8 @@ msgid "Regular Expression"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:2904 ../src/MadSearchDialog.cpp:1039
-#: ../src/MadSearchDialog.cpp:1052 ../src/MadPython.hpp:1040
-#: ../src/MadPython.hpp:1063
+#: ../src/MadSearchDialog.cpp:1052 ../src/MadPython.hpp:1041
+#: ../src/MadPython.hpp:1064
 msgid "Search Results"
 msgstr ""
 
@@ -2466,92 +2467,92 @@ msgstr "その他の文字"
 msgid "Choose the characters you want to convert:"
 msgstr "変換する文字を選択してください:"
 
-#: ../src/MadEditFrame.cpp:6009
+#: ../src/MadEditFrame.cpp:6014
 msgid "Find/Replace in Files Results"
 msgstr "ファイルの検索/置換結果"
 
-#: ../src/MadEditFrame.cpp:6083
+#: ../src/MadEditFrame.cpp:6088
 #, c-format
 msgid "Line Number(1~%d): (you can input HexNumber(0x1~0x%X): 0xNNN)"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:6083
+#: ../src/MadEditFrame.cpp:6088
 msgid "Go To Line"
 msgstr "行の移動"
 
-#: ../src/MadEditFrame.cpp:6130
+#: ../src/MadEditFrame.cpp:6135
 #, c-format
 msgid "Position(0~%s): (you can input HexNumber: 0xNNN)"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:6130
+#: ../src/MadEditFrame.cpp:6135
 msgid "Go To Position"
 msgstr "位置の移動"
 
-#: ../src/MadEditFrame.cpp:6359
+#: ../src/MadEditFrame.cpp:6364
 msgid "Markdown/HTML Preview"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:7295
+#: ../src/MadEditFrame.cpp:7300
 #, fuzzy
 msgid "Open Mad Macro File"
 msgstr "ファイルを開く..."
 
-#: ../src/MadEditFrame.cpp:7426
+#: ../src/MadEditFrame.cpp:7431
 msgid "Mad Macro"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:7434
+#: ../src/MadEditFrame.cpp:7439
 #, fuzzy, c-format
 msgid "Do you want to overwrite %s"
 msgstr "再読み込みしますか?"
 
-#: ../src/MadEditFrame.cpp:7434
+#: ../src/MadEditFrame.cpp:7439
 msgid "Warning"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:7525
+#: ../src/MadEditFrame.cpp:7530
 #, fuzzy
 msgid "Edit Mad Macro File"
 msgstr "ファイルを開く..."
 
-#: ../src/MadEditFrame.cpp:7567 ../src/MadMacroDlg.cpp:102
+#: ../src/MadEditFrame.cpp:7572 ../src/MadMacroDlg.cpp:102
 msgid "Memory allocation failed"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8119
+#: ../src/MadEditFrame.cpp:8124
 msgid ""
 "Download dictionary at http://archive.services.openoffice.org/pub/mirror/"
 "OpenOffice.org/contrib/dictionaries/"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8120
+#: ../src/MadEditFrame.cpp:8125
 msgid "Press OK to visit our HomePage."
 msgstr "OK でホームページに移動します"
 
-#: ../src/MadEditFrame.cpp:8387
+#: ../src/MadEditFrame.cpp:8392
 msgid "Passed the begin of the file"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8441 ../src/MadSearchDialog.cpp:387
+#: ../src/MadEditFrame.cpp:8446 ../src/MadSearchDialog.cpp:387
 #: ../src/MadSearchDialog.cpp:516
 #, fuzzy
 msgid "Passed the end of the file"
 msgstr "選択された行のインデントを増加"
 
-#: ../src/MadEditFrame.cpp:8473
+#: ../src/MadEditFrame.cpp:8478
 msgid "Invalid item"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8486
+#: ../src/MadEditFrame.cpp:8491
 msgid "&Copy Selected"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8487
+#: ../src/MadEditFrame.cpp:8492
 msgid "Copy &All"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8488
+#: ../src/MadEditFrame.cpp:8493
 msgid "&Reset Results"
 msgstr ""
 
@@ -3657,77 +3658,90 @@ msgstr ""
 msgid "About MadEdit-Mod"
 msgstr ""
 
-#: ../src/MadNumberDlg.cpp:63
+#: ../src/MadNumberDlg.cpp:69
 #, fuzzy
 msgid "Intial Number"
 msgstr "行番号を印刷"
 
-#: ../src/MadNumberDlg.cpp:69
+#: ../src/MadNumberDlg.cpp:75
 #, fuzzy
 msgid "Numbering Step"
 msgstr "数値"
 
-#: ../src/MadNumberDlg.cpp:75
+#: ../src/MadNumberDlg.cpp:81
 #, fuzzy
 msgid "Number of Chars"
 msgstr "数字"
 
-#: ../src/MadNumberDlg.cpp:81
+#: ../src/MadNumberDlg.cpp:87
 msgid "Pad With Zero"
 msgstr ""
 
-#: ../src/MadNumberDlg.cpp:88
+#: ../src/MadNumberDlg.cpp:94
 msgid "Numbering Step Type"
 msgstr ""
 
-#: ../src/MadNumberDlg.cpp:92
+#: ../src/MadNumberDlg.cpp:98
 #, fuzzy
 msgid "Linear"
 msgstr "行"
 
-#: ../src/MadNumberDlg.cpp:93
+#: ../src/MadNumberDlg.cpp:99
 msgid "Exponential"
 msgstr ""
 
-#: ../src/MadNumberDlg.cpp:98
+#: ../src/MadNumberDlg.cpp:104
 msgid "Format"
 msgstr ""
 
-#: ../src/MadNumberDlg.cpp:102
+#: ../src/MadNumberDlg.cpp:108
 msgid "DEC"
 msgstr ""
 
-#: ../src/MadNumberDlg.cpp:103
+#: ../src/MadNumberDlg.cpp:109
 msgid "HEX"
 msgstr ""
 
-#: ../src/MadNumberDlg.cpp:104
+#: ../src/MadNumberDlg.cpp:110
 #, fuzzy
 msgid "BIN"
 msgstr "INS"
 
-#: ../src/MadNumberDlg.cpp:105
+#: ../src/MadNumberDlg.cpp:111
 msgid "OCT"
 msgstr ""
 
-#: ../src/MadNumberDlg.cpp:110
+#: ../src/MadNumberDlg.cpp:116
 msgid "Align"
 msgstr ""
 
-#: ../src/MadNumberDlg.cpp:114
+#: ../src/MadNumberDlg.cpp:120
 msgid "Align Left"
 msgstr ""
 
-#: ../src/MadNumberDlg.cpp:115
+#: ../src/MadNumberDlg.cpp:121
 msgid "Align Right"
 msgstr ""
 
-#: ../src/MadNumberDlg.cpp:155
+#: ../src/MadNumberDlg.cpp:132
+msgid "Prefix"
+msgstr ""
+
+#: ../src/MadNumberDlg.cpp:142
+msgid "Postfix"
+msgstr ""
+
+#: ../src/MadNumberDlg.cpp:161
+#, fuzzy
+msgid "Previw: "
+msgstr "プレビュー"
+
+#: ../src/MadNumberDlg.cpp:193
 #, fuzzy, c-format
 msgid "Invalid value of \"%s:%s\""
 msgstr "値 \"%s\" は無効です"
 
-#: ../src/MadNumberDlg.cpp:158
+#: ../src/MadNumberDlg.cpp:196
 msgid ": Valid range is 0~512, 0 means NO PADDING"
 msgstr ""
 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.3.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-15 15:34+0800\n"
-"PO-Revision-Date: 2015-09-15 15:37+0800\n"
+"POT-Creation-Date: 2015-09-16 19:38+0800\n"
+"PO-Revision-Date: 2015-09-16 19:39+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit-mod@gmail.com>\n"
 "Language: zh_CN\n"
@@ -178,11 +178,11 @@ msgstr "日文 (EUC-JP)"
 msgid "Windows/DOS OEM (CP 437)"
 msgstr "Windows/DOS OEM (CP 437)"
 
-#: wxstd.po.cpp:42 ../src/MadNumberDlg.cpp:123
+#: wxstd.po.cpp:42 ../src/MadNumberDlg.cpp:155
 msgid "OK"
 msgstr "确定"
 
-#: wxstd.po.cpp:43 ../src/MadSortDialog.cpp:85 ../src/MadNumberDlg.cpp:126
+#: wxstd.po.cpp:43 ../src/MadSortDialog.cpp:85 ../src/MadNumberDlg.cpp:158
 msgid "Cancel"
 msgstr "取消"
 
@@ -1496,7 +1496,7 @@ msgstr "拼写检查"
 msgid "Toolbars"
 msgstr "工具栏"
 
-#: ../src/MadEditFrame.cpp:1856 ../src/MadEditFrame.cpp:8267
+#: ../src/MadEditFrame.cpp:1856 ../src/MadEditFrame.cpp:8272
 msgid "Toggle Main Toolbar"
 msgstr "切换显示主工具栏"
 
@@ -2361,8 +2361,8 @@ msgid "Regular Expression"
 msgstr "使用正规表示式"
 
 #: ../src/MadEditFrame.cpp:2904 ../src/MadSearchDialog.cpp:1039
-#: ../src/MadSearchDialog.cpp:1052 ../src/MadPython.hpp:1040
-#: ../src/MadPython.hpp:1063
+#: ../src/MadSearchDialog.cpp:1052 ../src/MadPython.hpp:1041
+#: ../src/MadPython.hpp:1064
 msgid "Search Results"
 msgstr "查找结果"
 
@@ -2462,58 +2462,58 @@ msgstr "其他文字"
 msgid "Choose the characters you want to convert:"
 msgstr "选择想转换的文字："
 
-#: ../src/MadEditFrame.cpp:6009
+#: ../src/MadEditFrame.cpp:6014
 msgid "Find/Replace in Files Results"
 msgstr "多文件查找/替换的结果"
 
-#: ../src/MadEditFrame.cpp:6083
+#: ../src/MadEditFrame.cpp:6088
 #, c-format
 msgid "Line Number(1~%d): (you can input HexNumber(0x1~0x%X): 0xNNN)"
 msgstr "行数（1~%d）：（可以输入16进位数字（0x1~0x%X）: 0xNNN）"
 
-#: ../src/MadEditFrame.cpp:6083
+#: ../src/MadEditFrame.cpp:6088
 msgid "Go To Line"
 msgstr "跳到此行"
 
-#: ../src/MadEditFrame.cpp:6130
+#: ../src/MadEditFrame.cpp:6135
 #, c-format
 msgid "Position(0~%s): (you can input HexNumber: 0xNNN)"
 msgstr "文件位置（0~%s）：（可以输入16进位数字: 0xNNN）"
 
-#: ../src/MadEditFrame.cpp:6130
+#: ../src/MadEditFrame.cpp:6135
 msgid "Go To Position"
 msgstr "跳到文件位置"
 
-#: ../src/MadEditFrame.cpp:6359
+#: ../src/MadEditFrame.cpp:6364
 msgid "Markdown/HTML Preview"
 msgstr "Markdown/HTML预览"
 
-#: ../src/MadEditFrame.cpp:7295
+#: ../src/MadEditFrame.cpp:7300
 msgid "Open Mad Macro File"
 msgstr "打开MadPython宏文件"
 
-#: ../src/MadEditFrame.cpp:7426
+#: ../src/MadEditFrame.cpp:7431
 msgid "Mad Macro"
 msgstr "Mad宏语言"
 
-#: ../src/MadEditFrame.cpp:7434
+#: ../src/MadEditFrame.cpp:7439
 #, c-format
 msgid "Do you want to overwrite %s"
 msgstr "要覆盖%s吗？"
 
-#: ../src/MadEditFrame.cpp:7434
+#: ../src/MadEditFrame.cpp:7439
 msgid "Warning"
 msgstr "警告"
 
-#: ../src/MadEditFrame.cpp:7525
+#: ../src/MadEditFrame.cpp:7530
 msgid "Edit Mad Macro File"
 msgstr "编辑MadPython宏文件"
 
-#: ../src/MadEditFrame.cpp:7567 ../src/MadMacroDlg.cpp:102
+#: ../src/MadEditFrame.cpp:7572 ../src/MadMacroDlg.cpp:102
 msgid "Memory allocation failed"
 msgstr "分配内存失败"
 
-#: ../src/MadEditFrame.cpp:8119
+#: ../src/MadEditFrame.cpp:8124
 msgid ""
 "Download dictionary at http://archive.services.openoffice.org/pub/mirror/"
 "OpenOffice.org/contrib/dictionaries/"
@@ -2521,32 +2521,32 @@ msgstr ""
 "字典获取地址 http://archive.services.openoffice.org/pub/mirror/OpenOffice."
 "org/contrib/dictionaries/"
 
-#: ../src/MadEditFrame.cpp:8120
+#: ../src/MadEditFrame.cpp:8125
 msgid "Press OK to visit our HomePage."
 msgstr "按「确定」可以浏览我们的主页。"
 
-#: ../src/MadEditFrame.cpp:8387
+#: ../src/MadEditFrame.cpp:8392
 msgid "Passed the begin of the file"
 msgstr "已经过了文件末尾"
 
-#: ../src/MadEditFrame.cpp:8441 ../src/MadSearchDialog.cpp:387
+#: ../src/MadEditFrame.cpp:8446 ../src/MadSearchDialog.cpp:387
 #: ../src/MadSearchDialog.cpp:516
 msgid "Passed the end of the file"
 msgstr "已经过了文件末尾"
 
-#: ../src/MadEditFrame.cpp:8473
+#: ../src/MadEditFrame.cpp:8478
 msgid "Invalid item"
 msgstr "无效项"
 
-#: ../src/MadEditFrame.cpp:8486
+#: ../src/MadEditFrame.cpp:8491
 msgid "&Copy Selected"
 msgstr "拷贝选中文字"
 
-#: ../src/MadEditFrame.cpp:8487
+#: ../src/MadEditFrame.cpp:8492
 msgid "Copy &All"
 msgstr "复制全部"
 
-#: ../src/MadEditFrame.cpp:8488
+#: ../src/MadEditFrame.cpp:8493
 msgid "&Reset Results"
 msgstr "清空结果"
 
@@ -3628,72 +3628,84 @@ msgstr "统计字数(所选取的文字)"
 msgid "About MadEdit-Mod"
 msgstr "关于 MadEdit-Mod"
 
-#: ../src/MadNumberDlg.cpp:63
+#: ../src/MadNumberDlg.cpp:69
 msgid "Intial Number"
 msgstr "初始值"
 
-#: ../src/MadNumberDlg.cpp:69
+#: ../src/MadNumberDlg.cpp:75
 msgid "Numbering Step"
 msgstr "数值步进"
 
-#: ../src/MadNumberDlg.cpp:75
+#: ../src/MadNumberDlg.cpp:81
 msgid "Number of Chars"
 msgstr "总字符数"
 
-#: ../src/MadNumberDlg.cpp:81
+#: ../src/MadNumberDlg.cpp:87
 msgid "Pad With Zero"
 msgstr "用 0 填充"
 
-#: ../src/MadNumberDlg.cpp:88
+#: ../src/MadNumberDlg.cpp:94
 msgid "Numbering Step Type"
 msgstr "数列步进的类型"
 
-#: ../src/MadNumberDlg.cpp:92
+#: ../src/MadNumberDlg.cpp:98
 msgid "Linear"
 msgstr "线性递增"
 
-#: ../src/MadNumberDlg.cpp:93
+#: ../src/MadNumberDlg.cpp:99
 msgid "Exponential"
 msgstr "指数方式"
 
-#: ../src/MadNumberDlg.cpp:98
+#: ../src/MadNumberDlg.cpp:104
 msgid "Format"
 msgstr "格式"
 
-#: ../src/MadNumberDlg.cpp:102
+#: ../src/MadNumberDlg.cpp:108
 msgid "DEC"
 msgstr "十进制"
 
-#: ../src/MadNumberDlg.cpp:103
+#: ../src/MadNumberDlg.cpp:109
 msgid "HEX"
 msgstr "十六进制"
 
-#: ../src/MadNumberDlg.cpp:104
+#: ../src/MadNumberDlg.cpp:110
 msgid "BIN"
 msgstr "二进制"
 
-#: ../src/MadNumberDlg.cpp:105
+#: ../src/MadNumberDlg.cpp:111
 msgid "OCT"
 msgstr "八进制"
 
-#: ../src/MadNumberDlg.cpp:110
+#: ../src/MadNumberDlg.cpp:116
 msgid "Align"
 msgstr "对齐方式"
 
-#: ../src/MadNumberDlg.cpp:114
+#: ../src/MadNumberDlg.cpp:120
 msgid "Align Left"
 msgstr "左对齐"
 
-#: ../src/MadNumberDlg.cpp:115
+#: ../src/MadNumberDlg.cpp:121
 msgid "Align Right"
 msgstr "右对齐"
 
-#: ../src/MadNumberDlg.cpp:155
+#: ../src/MadNumberDlg.cpp:132
+msgid "Prefix"
+msgstr "前缀"
+
+#: ../src/MadNumberDlg.cpp:142
+msgid "Postfix"
+msgstr "后缀"
+
+#: ../src/MadNumberDlg.cpp:161
+msgid "Previw: "
+msgstr "预览："
+
+#: ../src/MadNumberDlg.cpp:193
 #, c-format
 msgid "Invalid value of \"%s:%s\""
 msgstr "\"%s:%s\" 不是正确的值"
 
-#: ../src/MadNumberDlg.cpp:158
+#: ../src/MadNumberDlg.cpp:196
 msgid ": Valid range is 0~512, 0 means NO PADDING"
 msgstr "：有效范围是0～512，0意味着没有填充字符"
 
@@ -3722,6 +3734,10 @@ msgstr "MadEdit-Mod预览打印"
 msgid ""
 "Unsure how to update the possible values for %s based on the value of %s"
 msgstr "不确定如何更新%s的可能值（基于%s的值）"
+
+#, fuzzy
+#~ msgid "WxCheckPrefix"
+#~ msgstr "WxCheckBoxPrintSyntax"
 
 #~ msgid "To U&pperCase"
 #~ msgstr "转成大写(&U)"
@@ -4155,9 +4171,6 @@ msgstr "不确定如何更新%s的可能值（基于%s的值）"
 
 #~ msgid "WxCheckBoxMiddleMouseToPaste"
 #~ msgstr "WxCheckBoxMiddleMouseToPaste"
-
-#~ msgid "WxCheckBoxPrintSyntax"
-#~ msgstr "WxCheckBoxPrintSyntax"
 
 #~ msgid "WxCheckBoxPrintLineNumber"
 #~ msgstr "WxCheckBoxPrintLineNumber"

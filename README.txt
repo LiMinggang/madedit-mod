@@ -97,22 +97,26 @@ ChangeLog:
 Todo:
 FreeBSD packaging (with FreeBSD 10.01)
 
+Mod v0.3.7
+New: Prefix, postfix and preview of numbering(enhanced)
+Fix assertion failure MadEditFrame.cpp:3403
+
 Mod v0.3.6
-New: Create scripts directory if not exists while saving recorded script
-New: Shortcut for Insert numbers(Ctrl-Shift-N)
-New: Print function parameter information while dumping(Windows only)
-Fix: Memory leak in MadEditFrame::OnToolsAstyleFormat
-Fix: Use global astyle::ASFormatter formatter for performance in MadEditFrame::OnToolsAstyleFormat enhancement
-Fix: Out-of-bounds issue in toolbar init
-Fix: Improve in MadLines::MadLines()
-Fix: Randomly crash under Fedora 22 in initializing
-Fix: Build issue of FreeBSD
-Fix: Assertion in FindAll on 64bit Windows
-Fix: Move caret to the beginning of the line instead of end while left click to select
-Fix: Update VS projects
-Fix: Triple click to select whole row not working after the fix above
-Fix: Diable a warning for libhunspell in VS2013
-Fix: Fix Assertion failure in MadEdit::UpdateCaret
+1.New: Create scripts directory if not exists while saving recorded script
+2.New: Shortcut for Insert numbers(Ctrl-Shift-N)
+3.New: Print function parameter information while dumping(Windows only)
+4.Fix: Memory leak in MadEditFrame::OnToolsAstyleFormat
+5.Fix: Use global astyle::ASFormatter formatter for performance in MadEditFrame::OnToolsAstyleFormat enhancement
+6.Fix: Out-of-bounds issue in toolbar init
+7.Fix: Improve in MadLines::MadLines()
+8.Fix: Randomly crash under Fedora 22 in initializing
+9.Fix: Build issue of FreeBSD
+10.Fix: Assertion in FindAll on 64bit Windows
+11.Fix: Move caret to the beginning of the line instead of end while left click to select
+12.Fix: Update VS projects
+13.Fix: Triple click to select whole row not working after the fix above
+14.Fix: Diable a warning for libhunspell in VS2013
+15.Fix: Fix Assertion failure in MadEdit::UpdateCaret
 
 Mod v0.3.5
 1.New: MadMacro local script list on Toolbar
