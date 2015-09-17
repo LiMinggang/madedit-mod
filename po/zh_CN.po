@@ -3,11 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#: ../src/MadNumberDlg.cpp:135
 msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.3.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-16 19:38+0800\n"
+"POT-Creation-Date: 2015-09-17 13:33+0800\n"
 "PO-Revision-Date: 2015-09-16 19:39+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit-mod@gmail.com>\n"
@@ -1496,7 +1497,7 @@ msgstr "拼写检查"
 msgid "Toolbars"
 msgstr "工具栏"
 
-#: ../src/MadEditFrame.cpp:1856 ../src/MadEditFrame.cpp:8272
+#: ../src/MadEditFrame.cpp:1856 ../src/MadEditFrame.cpp:8250
 msgid "Toggle Main Toolbar"
 msgstr "切换显示主工具栏"
 
@@ -2462,58 +2463,58 @@ msgstr "其他文字"
 msgid "Choose the characters you want to convert:"
 msgstr "选择想转换的文字："
 
-#: ../src/MadEditFrame.cpp:6014
+#: ../src/MadEditFrame.cpp:6012
 msgid "Find/Replace in Files Results"
 msgstr "多文件查找/替换的结果"
 
-#: ../src/MadEditFrame.cpp:6088
+#: ../src/MadEditFrame.cpp:6087
 #, c-format
 msgid "Line Number(1~%d): (you can input HexNumber(0x1~0x%X): 0xNNN)"
 msgstr "行数（1~%d）：（可以输入16进位数字（0x1~0x%X）: 0xNNN）"
 
-#: ../src/MadEditFrame.cpp:6088
+#: ../src/MadEditFrame.cpp:6087
 msgid "Go To Line"
 msgstr "跳到此行"
 
-#: ../src/MadEditFrame.cpp:6135
+#: ../src/MadEditFrame.cpp:6134
 #, c-format
 msgid "Position(0~%s): (you can input HexNumber: 0xNNN)"
 msgstr "文件位置（0~%s）：（可以输入16进位数字: 0xNNN）"
 
-#: ../src/MadEditFrame.cpp:6135
+#: ../src/MadEditFrame.cpp:6134
 msgid "Go To Position"
 msgstr "跳到文件位置"
 
-#: ../src/MadEditFrame.cpp:6364
+#: ../src/MadEditFrame.cpp:6363
 msgid "Markdown/HTML Preview"
 msgstr "Markdown/HTML预览"
 
-#: ../src/MadEditFrame.cpp:7300
+#: ../src/MadEditFrame.cpp:7299
 msgid "Open Mad Macro File"
 msgstr "打开MadPython宏文件"
 
-#: ../src/MadEditFrame.cpp:7431
+#: ../src/MadEditFrame.cpp:7430
 msgid "Mad Macro"
 msgstr "Mad宏语言"
 
-#: ../src/MadEditFrame.cpp:7439
+#: ../src/MadEditFrame.cpp:7438
 #, c-format
 msgid "Do you want to overwrite %s"
 msgstr "要覆盖%s吗？"
 
-#: ../src/MadEditFrame.cpp:7439
+#: ../src/MadEditFrame.cpp:7438
 msgid "Warning"
 msgstr "警告"
 
-#: ../src/MadEditFrame.cpp:7530
+#: ../src/MadEditFrame.cpp:7529
 msgid "Edit Mad Macro File"
 msgstr "编辑MadPython宏文件"
 
-#: ../src/MadEditFrame.cpp:7572 ../src/MadMacroDlg.cpp:102
+#: ../src/MadEditFrame.cpp:7571 ../src/MadMacroDlg.cpp:102
 msgid "Memory allocation failed"
 msgstr "分配内存失败"
 
-#: ../src/MadEditFrame.cpp:8124
+#: ../src/MadEditFrame.cpp:8102
 msgid ""
 "Download dictionary at http://archive.services.openoffice.org/pub/mirror/"
 "OpenOffice.org/contrib/dictionaries/"
@@ -2521,32 +2522,32 @@ msgstr ""
 "字典获取地址 http://archive.services.openoffice.org/pub/mirror/OpenOffice."
 "org/contrib/dictionaries/"
 
-#: ../src/MadEditFrame.cpp:8125
+#: ../src/MadEditFrame.cpp:8103
 msgid "Press OK to visit our HomePage."
 msgstr "按「确定」可以浏览我们的主页。"
 
-#: ../src/MadEditFrame.cpp:8392
+#: ../src/MadEditFrame.cpp:8370
 msgid "Passed the begin of the file"
 msgstr "已经过了文件末尾"
 
-#: ../src/MadEditFrame.cpp:8446 ../src/MadSearchDialog.cpp:387
+#: ../src/MadEditFrame.cpp:8424 ../src/MadSearchDialog.cpp:387
 #: ../src/MadSearchDialog.cpp:516
 msgid "Passed the end of the file"
 msgstr "已经过了文件末尾"
 
-#: ../src/MadEditFrame.cpp:8478
+#: ../src/MadEditFrame.cpp:8456
 msgid "Invalid item"
 msgstr "无效项"
 
-#: ../src/MadEditFrame.cpp:8491
+#: ../src/MadEditFrame.cpp:8469
 msgid "&Copy Selected"
 msgstr "拷贝选中文字"
 
-#: ../src/MadEditFrame.cpp:8492
+#: ../src/MadEditFrame.cpp:8470
 msgid "Copy &All"
 msgstr "复制全部"
 
-#: ../src/MadEditFrame.cpp:8493
+#: ../src/MadEditFrame.cpp:8471
 msgid "&Reset Results"
 msgstr "清空结果"
 
@@ -3700,6 +3701,10 @@ msgstr "后缀"
 msgid "Previw: "
 msgstr "预览："
 
+#: ../src/MadNumberDlg.cpp:167 ../src/MadNumberDlg.h:49
+msgid "Numbering Configuration"
+msgstr "数列配置"
+
 #: ../src/MadNumberDlg.cpp:193
 #, c-format
 msgid "Invalid value of \"%s:%s\""
@@ -3708,10 +3713,6 @@ msgstr "\"%s:%s\" 不是正确的值"
 #: ../src/MadNumberDlg.cpp:196
 msgid ": Valid range is 0~512, 0 means NO PADDING"
 msgstr "：有效范围是0～512，0意味着没有填充字符"
-
-#: ../src/MadNumberDlg.h:49
-msgid "Numbering Configuration"
-msgstr "数列配置"
 
 #: ../src/MadMacroDlg.h:59
 msgid "MadEdit Macro"
