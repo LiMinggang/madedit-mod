@@ -5687,8 +5687,8 @@ void MadEditFrame::OnEditInsertNumbers( wxCommandEvent& event )
                 postfix = g_MadNumberDlg->WxEditPostfix->GetValue();
             g_ActiveMadEdit->InsertIncrementalNumber( initialNum, numStep, totalChar, numStepType, numFormat, numAlign, g_MadNumberDlg->WxPadChar->GetValue(), prefix, postfix );
             g_ActiveMadEdit->Refresh( false );
-            RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "InsertIncrementalNumber(%d, %d, %d, %s, %s, %s, %s, \"%s\", \"%s\")" ),
-                              initialNum, numStep, totalChar, strStepType.c_str(), strFormat.c_str(), strAlign.c_str(),
+            RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "InsertIncrementalNumber(%s, %s, %s, %s, %s, %s, %s, \"%s\", \"%s\")" ),
+                              wxLongLong( initialNum ).ToString().c_str(), wxLongLong( numStep ).ToString().c_str(), wxLongLong( totalChar ).ToString().c_str(), strStepType.c_str(), strFormat.c_str(), strAlign.c_str(),
                               g_MadNumberDlg->WxPadChar->GetValue() ? wxT( "True" ) : wxT( "False" ), prefix.c_str(), postfix.c_str() ) );
         }
     }

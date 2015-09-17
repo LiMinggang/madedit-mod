@@ -101,6 +101,7 @@ Mod v0.3.7
 New: Prefix, postfix and preview of numbering(enhanced)
 Fix: assertion failure MadEditFrame.cpp:3403
 Fix: Rollback changes in Search/Replace(since 0.3.5)
+Fix: Assertion failure at MadEditFrame.cpp:5692 under x86_x64
 
 Mod v0.3.6
 1.New: Create scripts directory if not exists while saving recorded script
