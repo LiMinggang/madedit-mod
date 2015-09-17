@@ -99,7 +99,8 @@ FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.3.7
 New: Prefix, postfix and preview of numbering(enhanced)
-Fix assertion failure MadEditFrame.cpp:3403
+Fix: assertion failure MadEditFrame.cpp:3403
+Fix: Rollback changes in Search/Replace(since 0.3.5)
 
 Mod v0.3.6
 1.New: Create scripts directory if not exists while saving recorded script
