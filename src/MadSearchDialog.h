@@ -53,16 +53,17 @@ public:
   //wx-devcpp will remove them. Try adding the custom code 
   //after the block.
   ////GUI Control Declaration Start
-		wxCheckBox *WxCheckBoxPurgeBookmark;
-		wxCheckBox *WxCheckBoxBookmarkOnly;
-		wxMenu *WxPopupMenuRecentFindText;
 		wxButton *WxButtonClose;
 		wxButton *WxButtonReplace;
 		wxButton *WxButtonCount;
+		wxButton *WxButtonFindAllInAll;
+		wxMenu *WxPopupMenuRecentFindText;
 		wxButton *WxButtonFindAll;
 		wxButton *WxButtonFindPrev;
 		wxButton *WxButtonFindNext;
 		wxBoxSizer *WxBoxSizer3;
+		wxCheckBox *WxCheckBoxPurgeBookmark;
+		wxCheckBox *WxCheckBoxBookmarkOnly;
 		wxCheckBox *WxCheckBoxBookmarkLine;
 		wxStaticBoxSizer *WxStaticBoxSizer1;
 		wxCheckBox *WxCheckBoxSearchInSelection;
@@ -86,14 +87,15 @@ public:
     //Try copy pasting the below block in your old Form header Files.
 	enum {
 ////GUI Enum Control ID Start
-			ID_WXCHECKBOXPURGEBOOKMARK = 35,
-			ID_WXCHECKBOXBOOKMARKONLY = 34,
-			ID_WXBUTTONCLOSE = 13,
-			ID_WXBUTTONREPLACE = 12,
-			ID_WXBUTTONCOUNT = 23,
+			ID_WXBUTTONCLOSE = 42,
+			ID_WXBUTTONREPLACE = 41,
+			ID_WXBUTTONCOUNT = 40,
+			ID_WXBUTTONFINDALLINALL = 36,
 			ID_WXBUTTONFINDALL = 24,
 			ID_WXBUTTONFINDPREV = 11,
 			ID_WXBUTTONFINDNEXT = 10,
+			ID_WXCHECKBOXPURGEBOOKMARK = 35,
+			ID_WXCHECKBOXBOOKMARKONLY = 34,
 			ID_WXCHECKBOXBOOKMARKLINE = 32,
 			ID_WXCHECKBOXSEARCHINSELECTION = 26,
 			ID_WXCHECKBOXSEARCHTHRENDOFFILE = 25,
@@ -126,6 +128,7 @@ public:
 	void OnRecentFindText(wxCommandEvent& event);
 	void WxButtonFindPrevClick(wxCommandEvent& event);
 	void WxButtonFindAllClick(wxCommandEvent& event);
+	void WxButtonFindAllInAllClick(wxCommandEvent& event);
 
     void ReadWriteSettings(bool bRead);
     void UpdateCheckBoxByCBHex(bool check);
@@ -137,6 +140,7 @@ public:
     void WxCheckBoxSearchInSelectionClick(wxCommandEvent& event);
     void WxButtonCountClick(wxCommandEvent& event);
     void PurgeRecentFindTexts();
+    void SearchAll(MadEdit * madedit, bool needRec=true);
 };
 
 extern MadSearchDialog *g_SearchDialog;

@@ -268,7 +268,8 @@
     </ClCompile>
     <ClCompile Include="..\..\src\version.cpp">
       <Filter>Source files</Filter>
-    </ClCompile>    <ClCompile Include="..\..\src\MadWordCountDialog.cpp">
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadWordCountDialog.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\MadEdit\caret_new.cpp">
@@ -278,9 +279,6 @@
       <Filter>Source files\MadEdit</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\MadEdit\MadEdit.cpp">
-      <Filter>Source files\MadEdit</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\MadEdit\MadEdit_gtk.cpp">
       <Filter>Source files\MadEdit</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\MadEdit\MadEditAdvanced.cpp">

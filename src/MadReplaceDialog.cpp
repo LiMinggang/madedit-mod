@@ -5,12 +5,13 @@
 // Licence:     GPL
 ///////////////////////////////////////////////////////////////////////////////
 
+#include <wx/longlong.h>
+#include "MadEditFrame.h"
 #include "MadReplaceDialog.h"
 #include "MadSearchDialog.h"
 #include "MadRecentList.h"
 
 #include "MadEdit/MadEdit.h"
-#include <wx/longlong.h>
 
 //Do not add custom headers.
 //wx-dvcpp designer will remove them
@@ -46,6 +47,7 @@ BEGIN_EVENT_TABLE(MadReplaceDialog,wxDialog)
 	EVT_KEY_DOWN(MadReplaceDialog::MadReplaceDialogKeyDown)
 	EVT_ACTIVATE(MadReplaceDialog::MadReplaceDialogActivate)
 	EVT_BUTTON(ID_WXBUTTONCLOSE,MadReplaceDialog::WxButtonCloseClick)
+	EVT_BUTTON(ID_WXBUTTONREPLACEALLINALL,MadReplaceDialog::WxButtonReplaceAllInAllClick)
 	EVT_BUTTON(ID_WXBUTTONREPLACEALL,MadReplaceDialog::WxButtonReplaceAllClick)
 	EVT_BUTTON(ID_WXBUTTONREPLACE,MadReplaceDialog::WxButtonReplaceClick)
 	EVT_BUTTON(ID_WXBUTTONFINDNEXT,MadReplaceDialog::WxButtonFindNextClick)
@@ -131,14 +133,14 @@ void MadReplaceDialog::CreateGUIControls(void)
 	WxButtonReplace = new wxButton(this, ID_WXBUTTONREPLACE, _("&Replace"), wxPoint(2, 34), wxSize(100, 28), 0, wxDefaultValidator, wxT("WxButtonReplace"));
 	WxBoxSizer3->Add(WxButtonReplace, 0, wxALIGN_CENTER | wxALL, 2);
 
-	WxButtonReplaceAll = new wxButton(this, ID_WXBUTTONREPLACEALL, _("Replace &All"), wxPoint(2, 66), wxSize(100, 28), 0, wxDefaultValidator, wxT("WxButtonReplaceAll"));
+	WxButtonReplaceAll = new wxButton(this, ID_WXBUTTONREPLACEALL, _("Replace &All in\nCurrent"), wxPoint(2, 66), wxSize(100, 42), 0, wxDefaultValidator, wxT("WxButtonReplaceAll"));
 	WxBoxSizer3->Add(WxButtonReplaceAll, 0, wxALIGN_CENTER | wxALL, 2);
 
-	WxButtonClose = new wxButton(this, ID_WXBUTTONCLOSE, _("Close"), wxPoint(2, 98), wxSize(100, 28), 0, wxDefaultValidator, wxT("WxButtonClose"));
-	WxBoxSizer3->Add(WxButtonClose, 0, wxALIGN_CENTER | wxALL, 2);
-
 	WxPopupMenuRecentReplaceText = new wxMenu(wxT(""));
-	
+	WxButtonReplaceAllInAll = new wxButton(this, ID_WXBUTTONREPLACEALLINALL, _("Repl All in All\n&Opened"), wxPoint(2, 98), wxSize(100, 42), 0, wxDefaultValidator, wxT("WxButtonReplaceAllInAll"));
+	WxBoxSizer3->Add(WxButtonReplaceAllInAll, 0, wxALIGN_CENTER | wxALL, 2);
+	WxButtonClose = new wxButton(this, ID_WXBUTTONCLOSE, _("Close"), wxPoint(17, 130), wxSize(100, 28), 0, wxDefaultValidator, wxT("WxButtonClose"));
+	WxBoxSizer3->Add(WxButtonClose, 0, wxALIGN_CENTER | wxALL, 2);
 
 	SetTitle(_("Replace"));
 	SetIcon(wxNullIcon);
@@ -641,68 +643,20 @@ void MadReplaceDialog::WxButtonReplaceAllClick(wxCommandEvent& event)
 {
     extern MadEdit *g_ActiveMadEdit;
 
-    if(g_ActiveMadEdit==NULL)
-        return;
+    if(g_ActiveMadEdit!=NULL)
+        ReplaceAll(g_ActiveMadEdit);
+}
 
-    wxString text;
-    m_FindText->GetText(text, true);
+void MadReplaceDialog::WxButtonReplaceAllInAllClick(wxCommandEvent& event)
+{
+    extern MadEdit *g_ActiveMadEdit;
 
-    if(text.Len()>0)
+    int count = int( ((wxAuiNotebook*)g_MainFrame->m_Notebook)->GetPageCount() );
+
+    for( int id = 0; id < count; ++id )
     {
-        wxString reptext;
-        m_ReplaceText->GetText(reptext, true);
-
-        g_SearchDialog->m_RecentFindText->AddFileToHistory(text);
-
-        if(reptext.Len()>0)
-        {
-            m_RecentReplaceText->AddFileToHistory(reptext);
-        }
-
-        wxFileOffset rangeFrom = -1, rangeTo = -1;
-        if(WxCheckBoxSearchInSelection->IsChecked())
-        {
-            rangeTo = m_SearchTo;
-            rangeFrom = m_SearchFrom;
-        }
-
-        int count=0;
-        if(WxCheckBoxFindHex->GetValue())
-        {
-            count=g_ActiveMadEdit->ReplaceHexAll(text, reptext, NULL, NULL, rangeFrom, rangeTo);
-            RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("ReplaceHexAll(\"%s\", \"%s\", %s, %s)"), text.c_str(), reptext.c_str(), (wxLongLong(rangeFrom).ToString()).c_str(), (wxLongLong(rangeTo).ToString()).c_str()));
-        }
-        else
-        {
-            count=g_ActiveMadEdit->ReplaceTextAll(text, reptext,
-                WxCheckBoxRegex->GetValue(),
-                WxCheckBoxCaseSensitive->GetValue(),
-                WxCheckBoxWholeWord->GetValue(),
-                NULL, NULL, rangeFrom, rangeTo);
-            
-            text.Replace(wxT("\\"), wxT("\\\\"));
-            text.Replace(wxT("\""), wxT("\\\""));
-			wxString fnstr(wxString::Format(wxT("ReplaceTextAll(\"%s\", \"%s\", %s, %s, %s, %s)"), text.c_str(), reptext.c_str(),
-                            WxCheckBoxRegex->GetValue()?wxT("True"):wxT("False"),
-                            WxCheckBoxCaseSensitive->GetValue()?wxT("True"):wxT("False"),
-                            WxCheckBoxWholeWord->GetValue()?wxT("True"):wxT("False"), (wxLongLong(rangeFrom).ToString()).c_str(), (wxLongLong(rangeTo).ToString()).c_str()));
-			RecordAsMadMacro(g_ActiveMadEdit, fnstr);
-        }
-
-        if(count>=0)
-        {
-            wxString msg;
-            if(count==0)
-                msg=wxString(_("Cannot find any matched string."));
-            else
-                msg=wxString::Format(_("%d string(s) were replaced."), count);
-
-            wxMessageDialog dlg(this, msg, wxT("MadEdit-Mod"));
-            dlg.SetYesNoLabels(wxMessageDialog::ButtonLabel(_("&Yes")), wxMessageDialog::ButtonLabel(_("&No")));
-            dlg.ShowModal();
-        }
-
-        m_FindText->SetFocus();
+        MadEdit *madedit = ( MadEdit* )((wxAuiNotebook*)g_MainFrame->m_Notebook)->GetPage( id );
+        ReplaceAll(madedit, madedit==g_ActiveMadEdit);
     }
 }
 
@@ -739,5 +693,73 @@ void MadReplaceDialog::PurgeRecentReplaceTexts()
     int n = (int) m_RecentReplaceText->GetCount();
     for(int i = n-1; i>=0; --i)
         m_RecentReplaceText->RemoveFileFromHistory((size_t)i);
+}
+
+void MadReplaceDialog::ReplaceAll(MadEdit * madedit, bool needRec/*=true*/)
+{
+    wxString text;
+    m_FindText->GetText(text, true);
+
+    if(text.Len()>0)
+    {
+        wxString reptext;
+        m_ReplaceText->GetText(reptext, true);
+
+        g_SearchDialog->m_RecentFindText->AddFileToHistory(text);
+
+        if(reptext.Len()>0)
+        {
+            m_RecentReplaceText->AddFileToHistory(reptext);
+        }
+
+        wxFileOffset rangeFrom = -1, rangeTo = -1;
+        if(WxCheckBoxSearchInSelection->IsChecked())
+        {
+            rangeTo = m_SearchTo;
+            rangeFrom = m_SearchFrom;
+        }
+
+        int count=0;
+        if(WxCheckBoxFindHex->GetValue())
+        {
+            count=madedit->ReplaceHexAll(text, reptext, NULL, NULL, rangeFrom, rangeTo);
+            if(needRec)
+                RecordAsMadMacro(madedit, wxString::Format(wxT("ReplaceHexAll(\"%s\", \"%s\", %s, %s)"), text.c_str(), reptext.c_str(), (wxLongLong(rangeFrom).ToString()).c_str(), (wxLongLong(rangeTo).ToString()).c_str()));
+        }
+        else
+        {
+            count=madedit->ReplaceTextAll(text, reptext,
+                WxCheckBoxRegex->GetValue(),
+                WxCheckBoxCaseSensitive->GetValue(),
+                WxCheckBoxWholeWord->GetValue(),
+                NULL, NULL, rangeFrom, rangeTo);
+            if(needRec)
+            {
+                text.Replace(wxT("\\"), wxT("\\\\"));
+                text.Replace(wxT("\""), wxT("\\\""));
+    			wxString fnstr(wxString::Format(wxT("ReplaceTextAll(\"%s\", \"%s\", %s, %s, %s, %s)"), text.c_str(), reptext.c_str(),
+                                WxCheckBoxRegex->GetValue()?wxT("True"):wxT("False"),
+                                WxCheckBoxCaseSensitive->GetValue()?wxT("True"):wxT("False"),
+                                WxCheckBoxWholeWord->GetValue()?wxT("True"):wxT("False"), (wxLongLong(rangeFrom).ToString()).c_str(), (wxLongLong(rangeTo).ToString()).c_str()));
+    			RecordAsMadMacro(madedit, fnstr);
+            }
+        }
+
+        if(count>=0)
+        {
+            wxString msg;
+            if(count==0)
+                msg=wxString(_("Cannot find any matched string."));
+            else
+                msg=wxString::Format(_("%d string(s) were replaced."), count);
+
+            wxMessageDialog dlg(this, msg, wxT("MadEdit-Mod"));
+            dlg.SetYesNoLabels(wxMessageDialog::ButtonLabel(_("&Yes")), wxMessageDialog::ButtonLabel(_("&No")));
+            dlg.ShowModal();
+        }
+
+        m_FindText->SetFocus();
+    }
+
 }
 

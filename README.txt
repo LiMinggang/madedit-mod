@@ -85,7 +85,7 @@ Syntax files, Locale files and Settings:
   And FontWidth.dat will also be saved to the same path.
   FontWidth.dat is Cache of Font-Width-Data, it can speed-up MadEdit a lot.
 
-  * Download dictionary at http://archive.services.openoffice.org/pub/mirror/OpenOffice.org/contrib/dictionaries/
+  * Download dictionary at http://extensions.openoffice.org
   * Use MadEdit-Mod with other applications like CPPCheck, Visual Studio, try
     'madedit %f*lineNum'
 
@@ -99,9 +99,16 @@ FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.3.7
 New: Prefix, postfix and preview of numbering(enhanced)
-Fix: assertion failure MadEditFrame.cpp:3403
+New: Search All in All Opened documents
+New: Replace All in All Opened documents
+New: Indicate "Empty expression" on status bar if user did not fill the search
+     box and hit Search
+Fix: Assertion failure MadEditFrame.cpp:3403
 Fix: Rollback changes in Search/Replace(since 0.3.5)
-Fix: Assertion failure at MadEditFrame.cpp:5692 under x86_x64
+Fix: Assertion failure at MadEditFrame.cpp:5692 under x86_x64 linux
+Fix: Fix dictionary download link of OpenOffice on About Dialog
+Fix: Link warning of VS project
+Fix: Show search results by default
 
 Mod v0.3.6
 1.New: Create scripts directory if not exists while saving recorded script

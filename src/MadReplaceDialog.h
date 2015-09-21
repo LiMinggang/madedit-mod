@@ -60,8 +60,9 @@ public:
   //wx-devcpp will remove them. Try adding the custom code 
   //after the block.
   ////GUI Control Declaration Start
-		wxMenu *WxPopupMenuRecentReplaceText;
 		wxButton *WxButtonClose;
+		wxButton *WxButtonReplaceAllInAll;
+		wxMenu *WxPopupMenuRecentReplaceText;
 		wxButton *WxButtonReplaceAll;
 		wxButton *WxButtonReplace;
 		wxButton *WxButtonFindNext;
@@ -92,7 +93,8 @@ public:
     //Try copy pasting the below block in your old Form header Files.
 	enum {
 ////GUI Enum Control ID Start
-			ID_WXBUTTONCLOSE = 1028,
+			ID_WXBUTTONCLOSE = 1032,
+			ID_WXBUTTONREPLACEALLINALL = 1031,
 			ID_WXBUTTONREPLACEALL = 1027,
 			ID_WXBUTTONREPLACE = 1026,
 			ID_WXBUTTONFINDNEXT = 1025,
@@ -141,8 +143,10 @@ public:
 	void WxButtonReplaceClick(wxCommandEvent& event);
 	void MadReplaceDialogActivate(wxActivateEvent& event);
 	void WxButtonReplaceAllClick(wxCommandEvent& event);
+    void WxButtonReplaceAllInAllClick(wxCommandEvent& event);
 	void WxCheckBoxSearchInSelectionClick(wxCommandEvent& event);
     void PurgeRecentReplaceTexts();
+    void ReplaceAll(MadEdit * madedit, bool needRec=true);
 };
 
 extern MadReplaceDialog *g_ReplaceDialog;

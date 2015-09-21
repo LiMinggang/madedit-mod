@@ -8099,7 +8099,7 @@ void MadEditFrame::OnHelpAbout( wxCommandEvent& event )
     MadAboutDialog dlg( this );
     dlg.WxMemo1->AppendText( g_MadEdit_Version + wxT( "\n" ) +
                              g_MadEditMod_URL + wxT( "\n" ) +
-                             _( "Download dictionary at http://archive.services.openoffice.org/pub/mirror/OpenOffice.org/contrib/dictionaries/" ) + wxT( "\n" ) +
+                             _( "Download dictionary at http://extensions.openoffice.org/" ) + wxT( "\n" ) +
                              _( "Press OK to visit our HomePage." ) );
 
     // Hide Modaless Dialog

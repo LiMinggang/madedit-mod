@@ -3,12 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: ../src/MadNumberDlg.cpp:135
+#: ../src/MadNumberDlg.cpp:136
 msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-17 13:33+0800\n"
+"POT-Creation-Date: 2015-09-21 17:20+0800\n"
 "PO-Revision-Date: 2015-06-30 21:50+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
@@ -179,11 +179,11 @@ msgstr "Tabella Codici Unix estesa per Giapponese Japanese (EUC-JP)"
 msgid "Windows/DOS OEM (CP 437)"
 msgstr "Windows/DOS OEM (CP 437)"
 
-#: wxstd.po.cpp:42 ../src/MadNumberDlg.cpp:155
+#: wxstd.po.cpp:42 ../src/MadNumberDlg.cpp:156
 msgid "OK"
 msgstr "OK"
 
-#: wxstd.po.cpp:43 ../src/MadSortDialog.cpp:85 ../src/MadNumberDlg.cpp:158
+#: wxstd.po.cpp:43 ../src/MadSortDialog.cpp:85 ../src/MadNumberDlg.cpp:159
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -544,13 +544,13 @@ msgstr "Vuoi salvare questo File?"
 
 #: ../src/MadEdit/MadEditBasic.cpp:2507 ../src/MadEdit/MadEditBasic.cpp:2570
 #: ../src/MadEdit/MadEditBasic.cpp:2626 ../src/MadEditFrame.cpp:346
-#: ../src/MadEditFrame.cpp:352 ../src/MadReplaceDialog.cpp:701
+#: ../src/MadEditFrame.cpp:352 ../src/MadReplaceDialog.cpp:757
 msgid "&Yes"
 msgstr ""
 
 #: ../src/MadEdit/MadEditBasic.cpp:2508 ../src/MadEdit/MadEditBasic.cpp:2570
 #: ../src/MadEdit/MadEditBasic.cpp:2626 ../src/MadEditFrame.cpp:347
-#: ../src/MadEditFrame.cpp:352 ../src/MadReplaceDialog.cpp:701
+#: ../src/MadEditFrame.cpp:352 ../src/MadReplaceDialog.cpp:757
 msgid "&No"
 msgstr ""
 
@@ -587,7 +587,7 @@ msgid "The input string is not a valid Hex-String:"
 msgstr "La Stringa fornita non è una Stringa Esadecimale valida:"
 
 #: ../src/MadEdit/MadEditBasic.cpp:3512 ../src/MadFindInFilesDialog.cpp:826
-#: ../src/MadSearchDialog.cpp:1026
+#: ../src/MadSearchDialog.cpp:1054
 #, c-format
 msgid "Found %d matched texts..."
 msgstr ""
@@ -948,7 +948,7 @@ msgstr "Inserisci Data e Ora"
 msgid "Insert date and time at current position"
 msgstr "Inserisce Data e Ora nella posizione corrente"
 
-#: ../src/MadEditFrame.cpp:1622 ../src/MadSearchDialog.cpp:138
+#: ../src/MadEditFrame.cpp:1622
 msgid "Bookmark"
 msgstr ""
 
@@ -1221,8 +1221,8 @@ msgstr "&Trova..."
 msgid "Find a string"
 msgstr "Ricerca una Stringa"
 
-#: ../src/MadEditFrame.cpp:1673 ../src/MadSearchDialog.cpp:148
-#: ../src/MadReplaceDialog.cpp:128
+#: ../src/MadEditFrame.cpp:1673 ../src/MadSearchDialog.cpp:153
+#: ../src/MadReplaceDialog.cpp:130
 msgid "Find &Next"
 msgstr "Trova &Successivo"
 
@@ -1230,7 +1230,7 @@ msgstr "Trova &Successivo"
 msgid "Find next occurrence"
 msgstr "Ricerca la successiva occorrenza"
 
-#: ../src/MadEditFrame.cpp:1674 ../src/MadSearchDialog.cpp:151
+#: ../src/MadEditFrame.cpp:1674 ../src/MadSearchDialog.cpp:156
 msgid "Find &Previous"
 msgstr "Trova &Precedente"
 
@@ -2202,7 +2202,7 @@ msgid "Find text from caret"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:2737 ../src/MadEditFrame.cpp:2876
-#: ../src/MadSearchDialog.cpp:413 ../src/MadReplaceDialog.cpp:605
+#: ../src/MadSearchDialog.cpp:412 ../src/MadReplaceDialog.cpp:607
 msgid "Find Next"
 msgstr "Trova Successivo"
 
@@ -2211,7 +2211,7 @@ msgid "Find matched text next to caret"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:2738 ../src/MadEditFrame.cpp:2877
-#: ../src/MadSearchDialog.cpp:542
+#: ../src/MadSearchDialog.cpp:545
 msgid "Find Previous"
 msgstr "Trova Precedente"
 
@@ -2219,7 +2219,7 @@ msgstr "Trova Precedente"
 msgid "Find matched text previous from caret"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2739 ../src/MadReplaceDialog.cpp:143
+#: ../src/MadEditFrame.cpp:2739 ../src/MadReplaceDialog.cpp:145
 msgid "Replace"
 msgstr "Sostituisci"
 
@@ -2375,8 +2375,8 @@ msgstr ""
 msgid "Regular Expression"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2904 ../src/MadSearchDialog.cpp:1039
-#: ../src/MadSearchDialog.cpp:1052 ../src/MadPython.hpp:1041
+#: ../src/MadEditFrame.cpp:2904 ../src/MadSearchDialog.cpp:1067
+#: ../src/MadSearchDialog.cpp:1080 ../src/MadPython.hpp:1041
 #: ../src/MadPython.hpp:1064
 msgid "Search Results"
 msgstr ""
@@ -2532,9 +2532,7 @@ msgid "Memory allocation failed"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:8102
-msgid ""
-"Download dictionary at http://archive.services.openoffice.org/pub/mirror/"
-"OpenOffice.org/contrib/dictionaries/"
+msgid "Download dictionary at http://extensions.openoffice.org/"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:8103
@@ -2545,8 +2543,8 @@ msgstr "Premi OK per visitare il Sito."
 msgid "Passed the begin of the file"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8424 ../src/MadSearchDialog.cpp:387
-#: ../src/MadSearchDialog.cpp:516
+#: ../src/MadEditFrame.cpp:8424 ../src/MadSearchDialog.cpp:386
+#: ../src/MadSearchDialog.cpp:519
 #, fuzzy
 msgid "Passed the end of the file"
 msgstr "Aumenta l'Indentazione delle Linee Selezionate"
@@ -2598,23 +2596,23 @@ msgstr "&OK"
 msgid "File Type Associations"
 msgstr ""
 
-#: ../src/MadFindInFilesDialog.cpp:122 ../src/MadSearchDialog.cpp:120
-#: ../src/MadSortDialog.cpp:70 ../src/MadReplaceDialog.cpp:107
+#: ../src/MadFindInFilesDialog.cpp:122 ../src/MadSearchDialog.cpp:121
+#: ../src/MadSortDialog.cpp:70 ../src/MadReplaceDialog.cpp:109
 msgid "&Case Sensitive"
 msgstr "MAIUSCOLE/minuscole"
 
-#: ../src/MadFindInFilesDialog.cpp:125 ../src/MadSearchDialog.cpp:123
-#: ../src/MadReplaceDialog.cpp:110
+#: ../src/MadFindInFilesDialog.cpp:125 ../src/MadSearchDialog.cpp:124
+#: ../src/MadReplaceDialog.cpp:112
 msgid "&Whole Word Only"
 msgstr "Solo Parole Intere"
 
-#: ../src/MadFindInFilesDialog.cpp:128 ../src/MadSearchDialog.cpp:126
-#: ../src/MadReplaceDialog.cpp:113
+#: ../src/MadFindInFilesDialog.cpp:128 ../src/MadSearchDialog.cpp:127
+#: ../src/MadReplaceDialog.cpp:115
 msgid "Use Regular E&xpressions"
 msgstr "Usa Espressioni &Regolari"
 
-#: ../src/MadFindInFilesDialog.cpp:131 ../src/MadSearchDialog.cpp:129
-#: ../src/MadReplaceDialog.cpp:116
+#: ../src/MadFindInFilesDialog.cpp:131 ../src/MadSearchDialog.cpp:130
+#: ../src/MadReplaceDialog.cpp:118
 msgid "Find &Hex String (Example: BE 00 3A or BE003A)"
 msgstr "Trova Stringa &Esadecimale (Es.: BE 00 3A or BE003A)"
 
@@ -2626,7 +2624,7 @@ msgstr "&Mostra solo il Primo elemento trovato"
 msgid "&Find"
 msgstr "&Trova"
 
-#: ../src/MadFindInFilesDialog.cpp:143 ../src/MadReplaceDialog.cpp:131
+#: ../src/MadFindInFilesDialog.cpp:143 ../src/MadReplaceDialog.cpp:133
 msgid "&Replace"
 msgstr "&Sostituisci"
 
@@ -2634,8 +2632,8 @@ msgstr "&Sostituisci"
 msgid "&Enable Replace"
 msgstr "Abilita &Sostituzione"
 
-#: ../src/MadFindInFilesDialog.cpp:151 ../src/MadSearchDialog.cpp:163
-#: ../src/MadReplaceDialog.cpp:137 ../src/MadMacroDlg.cpp:73
+#: ../src/MadFindInFilesDialog.cpp:151 ../src/MadSearchDialog.cpp:171
+#: ../src/MadReplaceDialog.cpp:142 ../src/MadMacroDlg.cpp:73
 msgid "Close"
 msgstr "Chiudi"
 
@@ -2690,7 +2688,7 @@ msgstr "La Cartella Selezionata non esiste."
 msgid "Processing %d of %d files..."
 msgstr "Elaborazione %d di %d Files..."
 
-#: ../src/MadFindInFilesDialog.cpp:828 ../src/MadSearchDialog.cpp:1028
+#: ../src/MadFindInFilesDialog.cpp:828 ../src/MadSearchDialog.cpp:1056
 msgid "Preparing Results"
 msgstr ""
 
@@ -2796,106 +2794,124 @@ msgstr ""
 msgid "Purge Histories"
 msgstr ""
 
-#: ../src/MadSearchDialog.cpp:117 ../src/MadReplaceDialog.cpp:104
+#: ../src/MadSearchDialog.cpp:118 ../src/MadReplaceDialog.cpp:106
 msgid "&Move Focus to Editor Window"
 msgstr "&Sposta il Focus sulla Finestra di Editor"
 
-#: ../src/MadSearchDialog.cpp:132
+#: ../src/MadSearchDialog.cpp:133
 msgid "Search Through &End of File"
 msgstr ""
 
-#: ../src/MadSearchDialog.cpp:135 ../src/MadReplaceDialog.cpp:122
+#: ../src/MadSearchDialog.cpp:136 ../src/MadReplaceDialog.cpp:124
 msgid "Search In &Selection"
 msgstr ""
 
-#: ../src/MadSearchDialog.cpp:142
+#: ../src/MadSearchDialog.cpp:139
+msgid "Bookmark in Searching"
+msgstr ""
+
+#: ../src/MadSearchDialog.cpp:143
 msgid "Bookmark line"
 msgstr ""
 
-#: ../src/MadSearchDialog.cpp:154
-#, fuzzy
-msgid "Find &All"
-msgstr "Trova &Successivo"
-
-#: ../src/MadSearchDialog.cpp:157
-msgid "C&ount"
+#: ../src/MadSearchDialog.cpp:146
+msgid "Bookmark only(Find All in Current)"
 msgstr ""
 
-#: ../src/MadSearchDialog.cpp:160
-msgid "&Replace >>"
-msgstr "&Sostituisci >>"
-
-#: ../src/MadSearchDialog.cpp:169
-msgid "Bookmark only(Find All)"
-msgstr ""
-
-#: ../src/MadSearchDialog.cpp:172
+#: ../src/MadSearchDialog.cpp:148
 msgid "Purge mark for each search session"
 msgstr ""
 
-#: ../src/MadSearchDialog.cpp:175
+#: ../src/MadSearchDialog.cpp:159
+#, fuzzy
+msgid ""
+"Find &All in\n"
+"Current"
+msgstr "Trova &Successivo"
+
+#: ../src/MadSearchDialog.cpp:163
+#, fuzzy
+msgid ""
+"Find All in All\n"
+"&Opened"
+msgstr "Trova &Successivo"
+
+#: ../src/MadSearchDialog.cpp:165
+msgid "C&ount"
+msgstr ""
+
+#: ../src/MadSearchDialog.cpp:168
+msgid "&Replace >>"
+msgstr "&Sostituisci >>"
+
+#: ../src/MadSearchDialog.cpp:174
 msgid "Search"
 msgstr "Cerca"
 
-#: ../src/MadSearchDialog.cpp:397 ../src/MadSearchDialog.cpp:526
-#: ../src/MadSearchDialog.cpp:948 ../src/MadSearchDialog.cpp:1063
+#: ../src/MadSearchDialog.cpp:396 ../src/MadSearchDialog.cpp:529
+#: ../src/MadSearchDialog.cpp:955 ../src/MadSearchDialog.cpp:1089
 #, fuzzy
 msgid "Cannot find the matched string"
 msgstr "Nessuna Stringa trovata."
 
-#: ../src/MadSearchDialog.cpp:407 ../src/MadSearchDialog.cpp:536
+#: ../src/MadSearchDialog.cpp:406 ../src/MadSearchDialog.cpp:539
 msgid "Cannot find the matched string."
 msgstr ""
 
-#: ../src/MadSearchDialog.cpp:410 ../src/MadReplaceDialog.cpp:602
+#: ../src/MadSearchDialog.cpp:409 ../src/MadReplaceDialog.cpp:604
 msgid "Do you want to find from begin of selection?"
 msgstr ""
 
-#: ../src/MadSearchDialog.cpp:411 ../src/MadReplaceDialog.cpp:603
+#: ../src/MadSearchDialog.cpp:410 ../src/MadReplaceDialog.cpp:605
 #, fuzzy
 msgid "Do you want to find from begin of file?"
 msgstr "Vuoi salvare questo File?"
 
-#: ../src/MadSearchDialog.cpp:539
+#: ../src/MadSearchDialog.cpp:433 ../src/MadSearchDialog.cpp:558
+#: ../src/MadSearchDialog.cpp:1100
+msgid "Empty expression"
+msgstr ""
+
+#: ../src/MadSearchDialog.cpp:542
 #, fuzzy
 msgid "Do you want to find from end of selection?"
 msgstr "Vuoi annullare i Cambiamenti?"
 
-#: ../src/MadSearchDialog.cpp:540
+#: ../src/MadSearchDialog.cpp:543
 #, fuzzy
 msgid "Do you want to find from end of file?"
 msgstr "Vuoi salvare questo File?"
 
-#: ../src/MadSearchDialog.cpp:875
+#: ../src/MadSearchDialog.cpp:882
 #, c-format
 msgid "'%s' was found %d times."
 msgstr ""
 
-#: ../src/MadSearchDialog.cpp:906
+#: ../src/MadSearchDialog.cpp:913
 #, c-format
 msgid "Preparing %d of %d results..."
 msgstr ""
 
-#: ../src/MadSearchDialog.cpp:919
+#: ../src/MadSearchDialog.cpp:926
 #, c-format
 msgid "Line(%d): "
 msgstr "Linea(%d): "
 
-#: ../src/MadSearchDialog.cpp:923
+#: ../src/MadSearchDialog.cpp:930
 #, c-format
 msgid "Offset(%s): "
 msgstr "Spiazzamento(%s): "
 
-#: ../src/MadSearchDialog.cpp:924
+#: ../src/MadSearchDialog.cpp:931
 msgid "Binary file matches"
 msgstr "Files Binari trovati"
 
-#: ../src/MadSearchDialog.cpp:952
+#: ../src/MadSearchDialog.cpp:959
 #, fuzzy
 msgid " results"
 msgstr "%d risultati"
 
-#: ../src/MadSearchDialog.cpp:1068
+#: ../src/MadSearchDialog.cpp:1094
 #, c-format
 msgid "%d results"
 msgstr "%d risultati"
@@ -2924,22 +2940,31 @@ msgstr "&Elimina Duplicati"
 msgid "Sort Options"
 msgstr "Opzioni Ordinamento"
 
-#: ../src/MadReplaceDialog.cpp:134
-msgid "Replace &All"
-msgstr "Sostituisci &Tutto"
+#: ../src/MadReplaceDialog.cpp:136
+#, fuzzy
+msgid ""
+"Replace &All in\n"
+"Current"
+msgstr "Trova &Successivo"
 
-#: ../src/MadReplaceDialog.cpp:599
+#: ../src/MadReplaceDialog.cpp:140
+msgid ""
+"Repl All in All\n"
+"&Opened"
+msgstr ""
+
+#: ../src/MadReplaceDialog.cpp:601
 #, fuzzy
 msgid ""
 "Cannot find the matched string.\n"
 "Replace is finished."
 msgstr "Nessuna Stringa trovata. Sostituzione Terminata."
 
-#: ../src/MadReplaceDialog.cpp:696
+#: ../src/MadReplaceDialog.cpp:752
 msgid "Cannot find any matched string."
 msgstr "Nessuna Stringa trovata."
 
-#: ../src/MadReplaceDialog.cpp:698
+#: ../src/MadReplaceDialog.cpp:754
 #, c-format
 msgid "%d string(s) were replaced."
 msgstr "Sono state sostituite %d Stringhe."
@@ -3681,94 +3706,94 @@ msgstr ""
 msgid "About MadEdit-Mod"
 msgstr ""
 
-#: ../src/MadNumberDlg.cpp:69
+#: ../src/MadNumberDlg.cpp:70
 #, fuzzy
 msgid "Intial Number"
 msgstr "Numero di Linea"
 
-#: ../src/MadNumberDlg.cpp:75
+#: ../src/MadNumberDlg.cpp:76
 msgid "Numbering Step"
 msgstr ""
 
-#: ../src/MadNumberDlg.cpp:81
+#: ../src/MadNumberDlg.cpp:82
 #, fuzzy
 msgid "Number of Chars"
 msgstr "Forme Numeriche"
 
-#: ../src/MadNumberDlg.cpp:87
+#: ../src/MadNumberDlg.cpp:88
 msgid "Pad With Zero"
 msgstr ""
 
-#: ../src/MadNumberDlg.cpp:94
+#: ../src/MadNumberDlg.cpp:95
 msgid "Numbering Step Type"
 msgstr ""
 
-#: ../src/MadNumberDlg.cpp:98
+#: ../src/MadNumberDlg.cpp:99
 #, fuzzy
 msgid "Linear"
 msgstr "Linee"
 
-#: ../src/MadNumberDlg.cpp:99
+#: ../src/MadNumberDlg.cpp:100
 msgid "Exponential"
 msgstr ""
 
-#: ../src/MadNumberDlg.cpp:104
+#: ../src/MadNumberDlg.cpp:105
 msgid "Format"
 msgstr ""
 
-#: ../src/MadNumberDlg.cpp:108
+#: ../src/MadNumberDlg.cpp:109
 msgid "DEC"
 msgstr ""
 
-#: ../src/MadNumberDlg.cpp:109
+#: ../src/MadNumberDlg.cpp:110
 msgid "HEX"
 msgstr ""
 
-#: ../src/MadNumberDlg.cpp:110
+#: ../src/MadNumberDlg.cpp:111
 #, fuzzy
 msgid "BIN"
 msgstr "INS"
 
-#: ../src/MadNumberDlg.cpp:111
+#: ../src/MadNumberDlg.cpp:112
 msgid "OCT"
 msgstr ""
 
-#: ../src/MadNumberDlg.cpp:116
+#: ../src/MadNumberDlg.cpp:117
 msgid "Align"
 msgstr ""
 
-#: ../src/MadNumberDlg.cpp:120
+#: ../src/MadNumberDlg.cpp:121
 msgid "Align Left"
 msgstr ""
 
-#: ../src/MadNumberDlg.cpp:121
+#: ../src/MadNumberDlg.cpp:122
 msgid "Align Right"
 msgstr ""
 
-#: ../src/MadNumberDlg.cpp:132
+#: ../src/MadNumberDlg.cpp:133
 msgid "Prefix"
 msgstr ""
 
-#: ../src/MadNumberDlg.cpp:142
+#: ../src/MadNumberDlg.cpp:143
 msgid "Postfix"
 msgstr ""
 
-#: ../src/MadNumberDlg.cpp:161
+#: ../src/MadNumberDlg.cpp:162
 #, fuzzy
 msgid "Previw: "
 msgstr "Creazione Anteprima in corso"
 
-#: ../src/MadNumberDlg.cpp:167 ../src/MadNumberDlg.h:49
+#: ../src/MadNumberDlg.cpp:168 ../src/MadNumberDlg.h:49
 #, fuzzy
 msgid "Numbering Configuration"
 msgstr "Cambia le Impostazioni"
 
-#: ../src/MadNumberDlg.cpp:193
+#: ../src/MadNumberDlg.cpp:194
 #, fuzzy, c-format
 msgid "Invalid value of \"%s:%s\""
 msgstr "Valore di \"%s\" non valido"
 
-#: ../src/MadNumberDlg.cpp:196
+#: ../src/MadNumberDlg.cpp:197
 msgid ": Valid range is 0~512, 0 means NO PADDING"
 msgstr ""
 
@@ -3794,6 +3819,9 @@ msgstr ""
 msgid ""
 "Unsure how to update the possible values for %s based on the value of %s"
 msgstr ""
+
+#~ msgid "Replace &All"
+#~ msgstr "Sostituisci &Tutto"
 
 #~ msgid "To U&pperCase"
 #~ msgstr "In &MAIUSCOLO"

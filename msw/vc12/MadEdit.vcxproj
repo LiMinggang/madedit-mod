@@ -301,7 +301,6 @@
     <ClCompile Include="..\..\src\MadEdit\MadEditBasic.cpp" />
     <ClCompile Include="..\..\src\MadEdit\MadEditCommand.cpp" />
     <ClCompile Include="..\..\src\MadEdit\MadEditSearch.cpp" />
-    <ClCompile Include="..\..\src\MadEdit\MadEdit_gtk.cpp" />
     <ClCompile Include="..\..\src\MadEdit\MadEncoding.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">..\..\charset-detector\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">..\..\charset-detector\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
