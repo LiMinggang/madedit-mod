@@ -3,13 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: ../src/MadNumberDlg.cpp:136
 msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-21 17:20+0800\n"
-"PO-Revision-Date: 2015-06-30 21:50+0800\n"
+"POT-Creation-Date: 2015-09-22 11:57+0800\n"
+"PO-Revision-Date: 2015-09-22 13:00+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
 "Language: zh_CN\n"
@@ -543,13 +542,13 @@ msgstr "¿Desea guardar este archivo?"
 
 #: ../src/MadEdit/MadEditBasic.cpp:2507 ../src/MadEdit/MadEditBasic.cpp:2570
 #: ../src/MadEdit/MadEditBasic.cpp:2626 ../src/MadEditFrame.cpp:346
-#: ../src/MadEditFrame.cpp:352 ../src/MadReplaceDialog.cpp:757
+#: ../src/MadEditFrame.cpp:352 ../src/MadReplaceDialog.cpp:766
 msgid "&Yes"
 msgstr ""
 
 #: ../src/MadEdit/MadEditBasic.cpp:2508 ../src/MadEdit/MadEditBasic.cpp:2570
 #: ../src/MadEdit/MadEditBasic.cpp:2626 ../src/MadEditFrame.cpp:347
-#: ../src/MadEditFrame.cpp:352 ../src/MadReplaceDialog.cpp:757
+#: ../src/MadEditFrame.cpp:352 ../src/MadReplaceDialog.cpp:766
 msgid "&No"
 msgstr ""
 
@@ -586,7 +585,7 @@ msgid "The input string is not a valid Hex-String:"
 msgstr "La cadena introducida no es una cadena hexadecimal válida:"
 
 #: ../src/MadEdit/MadEditBasic.cpp:3512 ../src/MadFindInFilesDialog.cpp:826
-#: ../src/MadSearchDialog.cpp:1054
+#: ../src/MadSearchDialog.cpp:1066
 #, c-format
 msgid "Found %d matched texts..."
 msgstr ""
@@ -2188,7 +2187,7 @@ msgid "Find text from caret"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:2737 ../src/MadEditFrame.cpp:2876
-#: ../src/MadSearchDialog.cpp:412 ../src/MadReplaceDialog.cpp:607
+#: ../src/MadSearchDialog.cpp:412 ../src/MadReplaceDialog.cpp:605
 msgid "Find Next"
 msgstr "Buscar siguiente"
 
@@ -2361,8 +2360,8 @@ msgstr ""
 msgid "Regular Expression"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2904 ../src/MadSearchDialog.cpp:1067
-#: ../src/MadSearchDialog.cpp:1080 ../src/MadPython.hpp:1041
+#: ../src/MadEditFrame.cpp:2904 ../src/MadSearchDialog.cpp:1079
+#: ../src/MadSearchDialog.cpp:1092 ../src/MadPython.hpp:1041
 #: ../src/MadPython.hpp:1064
 msgid "Search Results"
 msgstr ""
@@ -2652,8 +2651,8 @@ msgstr "Buscar/Reemplazar en archivos"
 msgid "Automatic Detection"
 msgstr "Detección automática"
 
-#: ../src/MadFindInFilesDialog.cpp:461 ../src/MadOptionsDialog.cpp:1975
-#: ../src/MadOptionsDialog.cpp:1989
+#: ../src/MadFindInFilesDialog.cpp:461 ../src/MadOptionsDialog.cpp:1976
+#: ../src/MadOptionsDialog.cpp:1990
 msgid "Choose a directory"
 msgstr "Elija un directorio"
 
@@ -2671,7 +2670,7 @@ msgstr "El directorio seleccionado no existe."
 msgid "Processing %d of %d files..."
 msgstr "Procesando %d de %d archivos..."
 
-#: ../src/MadFindInFilesDialog.cpp:828 ../src/MadSearchDialog.cpp:1056
+#: ../src/MadFindInFilesDialog.cpp:828 ../src/MadSearchDialog.cpp:1068
 msgid "Preparing Results"
 msgstr ""
 
@@ -2791,7 +2790,7 @@ msgid "Search In &Selection"
 msgstr "Buscar tambien en la &selección"
 
 #: ../src/MadSearchDialog.cpp:139
-msgid "Bookmark in Searching"
+msgid "Bookmark while Searching"
 msgstr ""
 
 #: ../src/MadSearchDialog.cpp:143
@@ -2833,7 +2832,7 @@ msgid "Search"
 msgstr "Buscar"
 
 #: ../src/MadSearchDialog.cpp:396 ../src/MadSearchDialog.cpp:529
-#: ../src/MadSearchDialog.cpp:955 ../src/MadSearchDialog.cpp:1089
+#: ../src/MadSearchDialog.cpp:967 ../src/MadSearchDialog.cpp:1101
 #, fuzzy
 msgid "Cannot find the matched string"
 msgstr "No se encuentra cadena coincidente."
@@ -2842,16 +2841,16 @@ msgstr "No se encuentra cadena coincidente."
 msgid "Cannot find the matched string."
 msgstr "No se encuentra cadena coincidente."
 
-#: ../src/MadSearchDialog.cpp:409 ../src/MadReplaceDialog.cpp:604
+#: ../src/MadSearchDialog.cpp:409 ../src/MadReplaceDialog.cpp:602
 msgid "Do you want to find from begin of selection?"
 msgstr "¿Desea buscar desde el principio de la selección?"
 
-#: ../src/MadSearchDialog.cpp:410 ../src/MadReplaceDialog.cpp:605
+#: ../src/MadSearchDialog.cpp:410 ../src/MadReplaceDialog.cpp:603
 msgid "Do you want to find from begin of file?"
 msgstr "¿Desea buscar desde el principio del archivo?"
 
 #: ../src/MadSearchDialog.cpp:433 ../src/MadSearchDialog.cpp:558
-#: ../src/MadSearchDialog.cpp:1100
+#: ../src/MadSearchDialog.cpp:1112
 msgid "Empty expression"
 msgstr ""
 
@@ -2863,36 +2862,36 @@ msgstr "¿Desea buscar desde el final de la selección?"
 msgid "Do you want to find from end of file?"
 msgstr "¿Desea buscar desde el final del archivo?"
 
-#: ../src/MadSearchDialog.cpp:882
+#: ../src/MadSearchDialog.cpp:894
 #, c-format
 msgid "'%s' was found %d times."
 msgstr "'%s' se ha encontrado %d veces."
 
-#: ../src/MadSearchDialog.cpp:913
+#: ../src/MadSearchDialog.cpp:925
 #, c-format
 msgid "Preparing %d of %d results..."
 msgstr ""
 
-#: ../src/MadSearchDialog.cpp:926
+#: ../src/MadSearchDialog.cpp:938
 #, c-format
 msgid "Line(%d): "
 msgstr "Línea(%d): "
 
-#: ../src/MadSearchDialog.cpp:930
+#: ../src/MadSearchDialog.cpp:942
 #, c-format
 msgid "Offset(%s): "
 msgstr "Offset(%s): "
 
-#: ../src/MadSearchDialog.cpp:931
+#: ../src/MadSearchDialog.cpp:943
 msgid "Binary file matches"
 msgstr "Coincidencias de archivos binarios"
 
-#: ../src/MadSearchDialog.cpp:959
+#: ../src/MadSearchDialog.cpp:971
 #, fuzzy
 msgid " results"
 msgstr "%d resultados"
 
-#: ../src/MadSearchDialog.cpp:1094
+#: ../src/MadSearchDialog.cpp:1106
 #, c-format
 msgid "%d results"
 msgstr "%d resultados"
@@ -2934,18 +2933,18 @@ msgid ""
 "&Opened"
 msgstr ""
 
-#: ../src/MadReplaceDialog.cpp:601
+#: ../src/MadReplaceDialog.cpp:599
 #, fuzzy
 msgid ""
 "Cannot find the matched string.\n"
 "Replace is finished."
 msgstr "No se encuentra cadena coincidente. Reemplazar terminado."
 
-#: ../src/MadReplaceDialog.cpp:752
+#: ../src/MadReplaceDialog.cpp:761
 msgid "Cannot find any matched string."
 msgstr "No se encuentra ninguna cadena coincidente."
 
-#: ../src/MadReplaceDialog.cpp:754
+#: ../src/MadReplaceDialog.cpp:763
 #, c-format
 msgid "%d string(s) were replaced."
 msgstr "%d cadena(s) reemplazada(s)"
@@ -3576,7 +3575,7 @@ msgstr ""
 msgid "Indentation size(in spaces):"
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:1141 ../src/MadOptionsDialog.cpp:1379
+#: ../src/MadOptionsDialog.cpp:1141 ../src/MadOptionsDialog.cpp:1380
 msgid "System Default"
 msgstr "Sistema predeterminado"
 
@@ -3597,20 +3596,20 @@ msgstr "Comandos"
 msgid "Menu"
 msgstr "Menú"
 
-#: ../src/MadOptionsDialog.cpp:1636
+#: ../src/MadOptionsDialog.cpp:1637
 #, c-format
 msgid "Invalid value of \"%s(%s)\""
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:1732
+#: ../src/MadOptionsDialog.cpp:1733
 msgid "Cannot assign key to this item"
 msgstr "No se puede asignar a la clave a este objeto"
 
-#: ../src/MadOptionsDialog.cpp:1829
+#: ../src/MadOptionsDialog.cpp:1830
 msgid "This key is not assigned"
 msgstr "No es asignada esta clave"
 
-#: ../src/MadOptionsDialog.cpp:1853
+#: ../src/MadOptionsDialog.cpp:1854
 #, c-format
 msgid "This key is assigned to [%s]"
 msgstr "Esta clave se asigna a [%s]"

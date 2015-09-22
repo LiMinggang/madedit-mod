@@ -136,7 +136,7 @@ void MadSearchDialog::CreateGUIControls(void)
 	WxCheckBoxSearchInSelection = new wxCheckBox(this, ID_WXCHECKBOXSEARCHINSELECTION, _("Search In &Selection"), wxPoint(12, 158), wxSize(300, 22), 0, wxDefaultValidator, wxT("WxCheckBoxSearchInSelection"));
 	WxBoxSizer5->Add(WxCheckBoxSearchInSelection, 0, wxALIGN_LEFT | wxALL, 2);
 
-	wxStaticBox* WxStaticBoxSizer1_StaticBoxObj = new wxStaticBox(this, wxID_ANY, _("Bookmark in Searching"));
+	wxStaticBox* WxStaticBoxSizer1_StaticBoxObj = new wxStaticBox(this, wxID_ANY, _("Bookmark while Searching"));
 	WxStaticBoxSizer1 = new wxStaticBoxSizer(WxStaticBoxSizer1_StaticBoxObj, wxVERTICAL);
 	WxBoxSizer5->Add(WxStaticBoxSizer1, 0, wxALIGN_LEFT | wxALIGN_TOP | wxALIGN_CENTER | wxALL, 5);
 
@@ -777,6 +777,18 @@ void MadSearchDialog::WxCheckBoxFindHexClick(wxCommandEvent& event)
 void MadSearchDialog::MadSearchDialogActivate(wxActivateEvent& event)
 {
     ReadWriteSettings(event.GetActive());
+    if(event.GetActive())
+    {
+        if(g_ActiveMadEdit)
+        {
+            m_FindText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
+            wxString fname;
+            int fsize;
+            g_ActiveMadEdit->GetFont( fname, fsize );
+            m_FindText->SetFont( fname, 14 );
+        }
+        UpdateCheckBoxByCBHex( WxCheckBoxFindHex->GetValue() );        
+    }
 }
 
 
@@ -800,7 +812,7 @@ void MadSearchDialog::WxButtonReplaceClick(wxCommandEvent& event)
     g_ReplaceDialog->SetFocus();
     g_ReplaceDialog->Raise();
 
-    g_ReplaceDialog->UpdateCheckBoxByCBHex(g_ReplaceDialog->WxCheckBoxFindHex->GetValue());
+    //g_ReplaceDialog->UpdateCheckBoxByCBHex(g_ReplaceDialog->WxCheckBoxFindHex->GetValue());
 
     g_ReplaceDialog->m_FindText->SelectAll();
     g_ReplaceDialog->m_FindText->SetFocus();

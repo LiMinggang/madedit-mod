@@ -1309,6 +1309,7 @@ void MadOptionsDialog::CreateGUIControls(void)
     while(cd->command > 0);
 
     WxNotebook1->SetWindowStyleFlag(wxAUI_NB_TOP|wxAUI_NB_TAB_MOVE|wxAUI_NB_SCROLL_BUTTONS);
+	WxNotebook1->SetSelection(0);
 
     WxButtonCancel->SetId(wxID_CANCEL);
     SetDefaultItem(WxButtonOK);

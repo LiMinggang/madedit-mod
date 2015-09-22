@@ -306,7 +306,6 @@ void MadReplaceDialog::WxButtonFindNextClick(wxCommandEvent& event)
 
 void MadReplaceDialog::ReadWriteSettings(bool bRead)
 {
-    extern MadEdit *g_ActiveMadEdit;
     wxConfigBase *m_Config=wxConfigBase::Get(false);
     wxString oldpath=m_Config->GetPath();
 
@@ -376,7 +375,6 @@ void MadReplaceDialog::UpdateCheckBoxByCBHex(bool check)
  */
 void MadReplaceDialog::WxCheckBoxFindHexClick(wxCommandEvent& event)
 {
-    extern MadEdit *g_ActiveMadEdit;
     bool checked = event.IsChecked();
     if(checked)
     {
@@ -641,16 +639,12 @@ void MadReplaceDialog::WxButtonReplaceClick(wxCommandEvent& event)
  */
 void MadReplaceDialog::WxButtonReplaceAllClick(wxCommandEvent& event)
 {
-    extern MadEdit *g_ActiveMadEdit;
-
     if(g_ActiveMadEdit!=NULL)
         ReplaceAll(g_ActiveMadEdit);
 }
 
 void MadReplaceDialog::WxButtonReplaceAllInAllClick(wxCommandEvent& event)
 {
-    extern MadEdit *g_ActiveMadEdit;
-
     int count = int( ((wxAuiNotebook*)g_MainFrame->m_Notebook)->GetPageCount() );
 
     for( int id = 0; id < count; ++id )
@@ -666,11 +660,26 @@ void MadReplaceDialog::WxButtonReplaceAllInAllClick(wxCommandEvent& event)
 void MadReplaceDialog::MadReplaceDialogActivate(wxActivateEvent& event)
 {
     ReadWriteSettings(event.GetActive());
+    if(event.GetActive())
+    {
+        if(g_ActiveMadEdit)
+        {
+            m_ReplaceText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
+            m_FindText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
+            
+            wxString fname;
+            int fsize;
+            //g_ReplaceDialog->UpdateCheckBoxByCBHex( g_ReplaceDialog->WxCheckBoxFindHex->GetValue() );
+            g_ActiveMadEdit->GetFont( fname, fsize );
+            m_FindText->SetFont( fname, 14 );
+            m_ReplaceText->SetFont( fname, 14 );
+        }
+        UpdateCheckBoxByCBHex( WxCheckBoxFindHex->GetValue() );
+    }
 }
 
 void MadReplaceDialog::UpdateSearchInSelection(bool check)
 {
-    extern MadEdit *g_ActiveMadEdit;
     if(check && g_ActiveMadEdit!=NULL)
     {
         m_SearchFrom = wxLongLong(g_ActiveMadEdit->GetSelectionBeginPos()).GetValue();

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-21 17:20+0800\n"
+"POT-Creation-Date: 2015-09-22 11:57+0800\n"
 "PO-Revision-Date: 2015-06-30 21:51+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
@@ -543,13 +543,13 @@ msgstr "要儲存這個檔案嗎？"
 
 #: ../src/MadEdit/MadEditBasic.cpp:2507 ../src/MadEdit/MadEditBasic.cpp:2570
 #: ../src/MadEdit/MadEditBasic.cpp:2626 ../src/MadEditFrame.cpp:346
-#: ../src/MadEditFrame.cpp:352 ../src/MadReplaceDialog.cpp:757
+#: ../src/MadEditFrame.cpp:352 ../src/MadReplaceDialog.cpp:766
 msgid "&Yes"
 msgstr ""
 
 #: ../src/MadEdit/MadEditBasic.cpp:2508 ../src/MadEdit/MadEditBasic.cpp:2570
 #: ../src/MadEdit/MadEditBasic.cpp:2626 ../src/MadEditFrame.cpp:347
-#: ../src/MadEditFrame.cpp:352 ../src/MadReplaceDialog.cpp:757
+#: ../src/MadEditFrame.cpp:352 ../src/MadReplaceDialog.cpp:766
 msgid "&No"
 msgstr ""
 
@@ -586,7 +586,7 @@ msgid "The input string is not a valid Hex-String:"
 msgstr "這不是正確的十六進位字串："
 
 #: ../src/MadEdit/MadEditBasic.cpp:3512 ../src/MadFindInFilesDialog.cpp:826
-#: ../src/MadSearchDialog.cpp:1054
+#: ../src/MadSearchDialog.cpp:1066
 #, c-format
 msgid "Found %d matched texts..."
 msgstr ""
@@ -2185,7 +2185,7 @@ msgid "Find text from caret"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:2737 ../src/MadEditFrame.cpp:2876
-#: ../src/MadSearchDialog.cpp:412 ../src/MadReplaceDialog.cpp:607
+#: ../src/MadSearchDialog.cpp:412 ../src/MadReplaceDialog.cpp:605
 msgid "Find Next"
 msgstr "尋找下一個"
 
@@ -2358,8 +2358,8 @@ msgstr ""
 msgid "Regular Expression"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2904 ../src/MadSearchDialog.cpp:1067
-#: ../src/MadSearchDialog.cpp:1080 ../src/MadPython.hpp:1041
+#: ../src/MadEditFrame.cpp:2904 ../src/MadSearchDialog.cpp:1079
+#: ../src/MadSearchDialog.cpp:1092 ../src/MadPython.hpp:1041
 #: ../src/MadPython.hpp:1064
 msgid "Search Results"
 msgstr ""
@@ -2651,8 +2651,8 @@ msgstr "多檔案尋找/取代"
 msgid "Automatic Detection"
 msgstr "自動檢測"
 
-#: ../src/MadFindInFilesDialog.cpp:461 ../src/MadOptionsDialog.cpp:1975
-#: ../src/MadOptionsDialog.cpp:1989
+#: ../src/MadFindInFilesDialog.cpp:461 ../src/MadOptionsDialog.cpp:1976
+#: ../src/MadOptionsDialog.cpp:1990
 msgid "Choose a directory"
 msgstr "選擇目錄"
 
@@ -2670,7 +2670,7 @@ msgstr "選擇的目錄不存在。"
 msgid "Processing %d of %d files..."
 msgstr "第 %d 個檔案處理中(共有 %d 個)... "
 
-#: ../src/MadFindInFilesDialog.cpp:828 ../src/MadSearchDialog.cpp:1056
+#: ../src/MadFindInFilesDialog.cpp:828 ../src/MadSearchDialog.cpp:1068
 msgid "Preparing Results"
 msgstr ""
 
@@ -2783,7 +2783,7 @@ msgid "Search In &Selection"
 msgstr "只在選取資料中尋找(&S)"
 
 #: ../src/MadSearchDialog.cpp:139
-msgid "Bookmark in Searching"
+msgid "Bookmark while Searching"
 msgstr ""
 
 #: ../src/MadSearchDialog.cpp:143
@@ -2825,7 +2825,7 @@ msgid "Search"
 msgstr "尋找"
 
 #: ../src/MadSearchDialog.cpp:396 ../src/MadSearchDialog.cpp:529
-#: ../src/MadSearchDialog.cpp:955 ../src/MadSearchDialog.cpp:1089
+#: ../src/MadSearchDialog.cpp:967 ../src/MadSearchDialog.cpp:1101
 msgid "Cannot find the matched string"
 msgstr "找不到符合的字串。"
 
@@ -2833,16 +2833,16 @@ msgstr "找不到符合的字串。"
 msgid "Cannot find the matched string."
 msgstr "找不到符合的字串。"
 
-#: ../src/MadSearchDialog.cpp:409 ../src/MadReplaceDialog.cpp:604
+#: ../src/MadSearchDialog.cpp:409 ../src/MadReplaceDialog.cpp:602
 msgid "Do you want to find from begin of selection?"
 msgstr "要從選擇的開頭查找嗎？"
 
-#: ../src/MadSearchDialog.cpp:410 ../src/MadReplaceDialog.cpp:605
+#: ../src/MadSearchDialog.cpp:410 ../src/MadReplaceDialog.cpp:603
 msgid "Do you want to find from begin of file?"
 msgstr "要從文件開頭尋找嗎？"
 
 #: ../src/MadSearchDialog.cpp:433 ../src/MadSearchDialog.cpp:558
-#: ../src/MadSearchDialog.cpp:1100
+#: ../src/MadSearchDialog.cpp:1112
 msgid "Empty expression"
 msgstr ""
 
@@ -2854,36 +2854,36 @@ msgstr "要從選擇的末尾開始尋找嗎？"
 msgid "Do you want to find from end of file?"
 msgstr "要從文件結尾處開始尋找？"
 
-#: ../src/MadSearchDialog.cpp:882
+#: ../src/MadSearchDialog.cpp:894
 #, c-format
 msgid "'%s' was found %d times."
 msgstr "'%s' 尋找到 %d 次。"
 
-#: ../src/MadSearchDialog.cpp:913
+#: ../src/MadSearchDialog.cpp:925
 #, c-format
 msgid "Preparing %d of %d results..."
 msgstr ""
 
-#: ../src/MadSearchDialog.cpp:926
+#: ../src/MadSearchDialog.cpp:938
 #, c-format
 msgid "Line(%d): "
 msgstr "行(%d)： "
 
-#: ../src/MadSearchDialog.cpp:930
+#: ../src/MadSearchDialog.cpp:942
 #, c-format
 msgid "Offset(%s): "
 msgstr "位置(%s)： "
 
-#: ../src/MadSearchDialog.cpp:931
+#: ../src/MadSearchDialog.cpp:943
 msgid "Binary file matches"
 msgstr "符合二進位檔案"
 
-#: ../src/MadSearchDialog.cpp:959
+#: ../src/MadSearchDialog.cpp:971
 #, fuzzy
 msgid " results"
 msgstr "%d 個結果"
 
-#: ../src/MadSearchDialog.cpp:1094
+#: ../src/MadSearchDialog.cpp:1106
 #, c-format
 msgid "%d results"
 msgstr "%d 個結果"
@@ -2925,17 +2925,17 @@ msgid ""
 "&Opened"
 msgstr ""
 
-#: ../src/MadReplaceDialog.cpp:601
+#: ../src/MadReplaceDialog.cpp:599
 msgid ""
 "Cannot find the matched string.\n"
 "Replace is finished."
 msgstr "找不到符合的字串。「取代」結束。"
 
-#: ../src/MadReplaceDialog.cpp:752
+#: ../src/MadReplaceDialog.cpp:761
 msgid "Cannot find any matched string."
 msgstr "找不到符合的字串。"
 
-#: ../src/MadReplaceDialog.cpp:754
+#: ../src/MadReplaceDialog.cpp:763
 #, c-format
 msgid "%d string(s) were replaced."
 msgstr "%d 個字串已被取代。"
@@ -3547,7 +3547,7 @@ msgstr ""
 msgid "Indentation size(in spaces):"
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:1141 ../src/MadOptionsDialog.cpp:1379
+#: ../src/MadOptionsDialog.cpp:1141 ../src/MadOptionsDialog.cpp:1380
 msgid "System Default"
 msgstr "系統預設"
 
@@ -3566,20 +3566,20 @@ msgstr "命令"
 msgid "Menu"
 msgstr "選單"
 
-#: ../src/MadOptionsDialog.cpp:1636
+#: ../src/MadOptionsDialog.cpp:1637
 #, c-format
 msgid "Invalid value of \"%s(%s)\""
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:1732
+#: ../src/MadOptionsDialog.cpp:1733
 msgid "Cannot assign key to this item"
 msgstr "無法指定按鍵到此項目"
 
-#: ../src/MadOptionsDialog.cpp:1829
+#: ../src/MadOptionsDialog.cpp:1830
 msgid "This key is not assigned"
 msgstr "這個按鍵尚未指定"
 
-#: ../src/MadOptionsDialog.cpp:1853
+#: ../src/MadOptionsDialog.cpp:1854
 #, c-format
 msgid "This key is assigned to [%s]"
 msgstr "這個按鍵已指定給 [%s]"

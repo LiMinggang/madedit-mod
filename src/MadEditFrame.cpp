@@ -1056,7 +1056,7 @@ void OnEditStatusChanged( MadEdit *madedit )
 
             g_StatusBar->Update(); // repaint immediately
 
-            if( g_SearchDialog != NULL )
+            /*if( g_SearchDialog != NULL )
             {
                 g_SearchDialog->UpdateCheckBoxByCBHex( g_SearchDialog->WxCheckBoxFindHex->GetValue() );
             }
@@ -1064,7 +1064,7 @@ void OnEditStatusChanged( MadEdit *madedit )
             if( g_ReplaceDialog != NULL )
             {
                 g_ReplaceDialog->UpdateCheckBoxByCBHex( g_ReplaceDialog->WxCheckBoxFindHex->GetValue() );
-            }
+            }*/
 
             g_ActiveMadEdit->Refresh( false );
         }
@@ -5775,15 +5775,15 @@ void MadEditFrame::OnSearchFind( wxCommandEvent& event )
         g_FindInFilesDialog->Show( false );
     }
 
-    g_SearchDialog->m_FindText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
+    //g_SearchDialog->m_FindText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
     g_SearchDialog->Show();
     g_SearchDialog->SetFocus();
     g_SearchDialog->Raise();
-    wxString fname;
-    int fsize;
-    g_SearchDialog->UpdateCheckBoxByCBHex( g_SearchDialog->WxCheckBoxFindHex->GetValue() );
-    g_ActiveMadEdit->GetFont( fname, fsize );
-    g_SearchDialog->m_FindText->SetFont( fname, 14 );
+    //wxString fname;
+    //int fsize;
+    //g_SearchDialog->UpdateCheckBoxByCBHex( g_SearchDialog->WxCheckBoxFindHex->GetValue() );
+    //g_ActiveMadEdit->GetFont( fname, fsize );
+    //g_SearchDialog->m_FindText->SetFont( fname, 14 );
 
     if(g_ActiveMadEdit->IsSelected())
     {
@@ -5841,8 +5841,8 @@ void MadEditFrame::OnSearchFindNext( wxCommandEvent& event )
     if( g_FindInFilesDialog != NULL && g_FindInFilesDialog->IsShown() )
     { g_FindInFilesDialog->Show( false ); }
 
-    g_SearchDialog->m_FindText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
-    g_SearchDialog->UpdateCheckBoxByCBHex( g_SearchDialog->WxCheckBoxFindHex->GetValue() );
+    //g_SearchDialog->m_FindText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
+    //g_SearchDialog->UpdateCheckBoxByCBHex( g_SearchDialog->WxCheckBoxFindHex->GetValue() );
 
     if(g_ActiveMadEdit->IsSelected())
     {
@@ -5887,8 +5887,8 @@ void MadEditFrame::OnSearchFindPrevious( wxCommandEvent& event )
     if( g_FindInFilesDialog != NULL && g_FindInFilesDialog->IsShown() )
     { g_FindInFilesDialog->Show( false ); }
 
-    g_SearchDialog->m_FindText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
-    g_SearchDialog->UpdateCheckBoxByCBHex( g_SearchDialog->WxCheckBoxFindHex->GetValue() );
+    //g_SearchDialog->m_FindText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
+    //g_SearchDialog->UpdateCheckBoxByCBHex( g_SearchDialog->WxCheckBoxFindHex->GetValue() );
 
     if(g_ActiveMadEdit->IsSelected())
     {
@@ -5933,17 +5933,17 @@ void MadEditFrame::OnSearchReplace( wxCommandEvent& event )
     if( g_SearchDialog->IsShown() )
     { g_SearchDialog->Show( false ); }
 
-    g_ReplaceDialog->m_FindText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
-    g_ReplaceDialog->m_ReplaceText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
+    //g_ReplaceDialog->m_FindText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
+    //g_ReplaceDialog->m_ReplaceText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
     g_ReplaceDialog->Show();
     g_ReplaceDialog->SetFocus();
     g_ReplaceDialog->Raise();
-    wxString fname;
-    int fsize;
-    g_ReplaceDialog->UpdateCheckBoxByCBHex( g_ReplaceDialog->WxCheckBoxFindHex->GetValue() );
-    g_ActiveMadEdit->GetFont( fname, fsize );
-    g_ReplaceDialog->m_FindText->SetFont( fname, 14 );
-    g_ReplaceDialog->m_ReplaceText->SetFont( fname, 14 );
+    //wxString fname;
+    //int fsize;
+    //g_ReplaceDialog->UpdateCheckBoxByCBHex( g_ReplaceDialog->WxCheckBoxFindHex->GetValue() );
+    //g_ActiveMadEdit->GetFont( fname, fsize );
+    //g_ReplaceDialog->m_FindText->SetFont( fname, 14 );
+    //g_ReplaceDialog->m_ReplaceText->SetFont( fname, 14 );
 
     if(g_ActiveMadEdit->IsSelected())
     {

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-21 17:20+0800\n"
+"POT-Creation-Date: 2015-09-22 11:57+0800\n"
 "PO-Revision-Date: 2015-06-30 21:50+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
@@ -544,13 +544,13 @@ msgstr "Вы хотите сохранить этот файл?"
 
 #: ../src/MadEdit/MadEditBasic.cpp:2507 ../src/MadEdit/MadEditBasic.cpp:2570
 #: ../src/MadEdit/MadEditBasic.cpp:2626 ../src/MadEditFrame.cpp:346
-#: ../src/MadEditFrame.cpp:352 ../src/MadReplaceDialog.cpp:757
+#: ../src/MadEditFrame.cpp:352 ../src/MadReplaceDialog.cpp:766
 msgid "&Yes"
 msgstr ""
 
 #: ../src/MadEdit/MadEditBasic.cpp:2508 ../src/MadEdit/MadEditBasic.cpp:2570
 #: ../src/MadEdit/MadEditBasic.cpp:2626 ../src/MadEditFrame.cpp:347
-#: ../src/MadEditFrame.cpp:352 ../src/MadReplaceDialog.cpp:757
+#: ../src/MadEditFrame.cpp:352 ../src/MadReplaceDialog.cpp:766
 msgid "&No"
 msgstr ""
 
@@ -587,7 +587,7 @@ msgid "The input string is not a valid Hex-String:"
 msgstr "Строка не является правильной Hex-String:"
 
 #: ../src/MadEdit/MadEditBasic.cpp:3512 ../src/MadFindInFilesDialog.cpp:826
-#: ../src/MadSearchDialog.cpp:1054
+#: ../src/MadSearchDialog.cpp:1066
 #, c-format
 msgid "Found %d matched texts..."
 msgstr ""
@@ -2189,7 +2189,7 @@ msgid "Find text from caret"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:2737 ../src/MadEditFrame.cpp:2876
-#: ../src/MadSearchDialog.cpp:412 ../src/MadReplaceDialog.cpp:607
+#: ../src/MadSearchDialog.cpp:412 ../src/MadReplaceDialog.cpp:605
 msgid "Find Next"
 msgstr ""
 
@@ -2362,8 +2362,8 @@ msgstr ""
 msgid "Regular Expression"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2904 ../src/MadSearchDialog.cpp:1067
-#: ../src/MadSearchDialog.cpp:1080 ../src/MadPython.hpp:1041
+#: ../src/MadEditFrame.cpp:2904 ../src/MadSearchDialog.cpp:1079
+#: ../src/MadSearchDialog.cpp:1092 ../src/MadPython.hpp:1041
 #: ../src/MadPython.hpp:1064
 msgid "Search Results"
 msgstr ""
@@ -2649,8 +2649,8 @@ msgstr ""
 msgid "Automatic Detection"
 msgstr ""
 
-#: ../src/MadFindInFilesDialog.cpp:461 ../src/MadOptionsDialog.cpp:1975
-#: ../src/MadOptionsDialog.cpp:1989
+#: ../src/MadFindInFilesDialog.cpp:461 ../src/MadOptionsDialog.cpp:1976
+#: ../src/MadOptionsDialog.cpp:1990
 msgid "Choose a directory"
 msgstr ""
 
@@ -2668,7 +2668,7 @@ msgstr ""
 msgid "Processing %d of %d files..."
 msgstr ""
 
-#: ../src/MadFindInFilesDialog.cpp:828 ../src/MadSearchDialog.cpp:1056
+#: ../src/MadFindInFilesDialog.cpp:828 ../src/MadSearchDialog.cpp:1068
 msgid "Preparing Results"
 msgstr ""
 
@@ -2785,7 +2785,7 @@ msgid "Search In &Selection"
 msgstr ""
 
 #: ../src/MadSearchDialog.cpp:139
-msgid "Bookmark in Searching"
+msgid "Bookmark while Searching"
 msgstr ""
 
 #: ../src/MadSearchDialog.cpp:143
@@ -2825,7 +2825,7 @@ msgid "Search"
 msgstr ""
 
 #: ../src/MadSearchDialog.cpp:396 ../src/MadSearchDialog.cpp:529
-#: ../src/MadSearchDialog.cpp:955 ../src/MadSearchDialog.cpp:1089
+#: ../src/MadSearchDialog.cpp:967 ../src/MadSearchDialog.cpp:1101
 msgid "Cannot find the matched string"
 msgstr ""
 
@@ -2833,18 +2833,18 @@ msgstr ""
 msgid "Cannot find the matched string."
 msgstr ""
 
-#: ../src/MadSearchDialog.cpp:409 ../src/MadReplaceDialog.cpp:604
+#: ../src/MadSearchDialog.cpp:409 ../src/MadReplaceDialog.cpp:602
 #, fuzzy
 msgid "Do you want to find from begin of selection?"
 msgstr "Перечитать файл?"
 
-#: ../src/MadSearchDialog.cpp:410 ../src/MadReplaceDialog.cpp:605
+#: ../src/MadSearchDialog.cpp:410 ../src/MadReplaceDialog.cpp:603
 #, fuzzy
 msgid "Do you want to find from begin of file?"
 msgstr "Вы хотите сохранить этот файл?"
 
 #: ../src/MadSearchDialog.cpp:433 ../src/MadSearchDialog.cpp:558
-#: ../src/MadSearchDialog.cpp:1100
+#: ../src/MadSearchDialog.cpp:1112
 msgid "Empty expression"
 msgstr ""
 
@@ -2858,35 +2858,35 @@ msgstr "Перечитать файл?"
 msgid "Do you want to find from end of file?"
 msgstr "Вы хотите сохранить этот файл?"
 
-#: ../src/MadSearchDialog.cpp:882
+#: ../src/MadSearchDialog.cpp:894
 #, c-format
 msgid "'%s' was found %d times."
 msgstr ""
 
-#: ../src/MadSearchDialog.cpp:913
+#: ../src/MadSearchDialog.cpp:925
 #, c-format
 msgid "Preparing %d of %d results..."
 msgstr ""
 
-#: ../src/MadSearchDialog.cpp:926
+#: ../src/MadSearchDialog.cpp:938
 #, c-format
 msgid "Line(%d): "
 msgstr ""
 
-#: ../src/MadSearchDialog.cpp:930
+#: ../src/MadSearchDialog.cpp:942
 #, c-format
 msgid "Offset(%s): "
 msgstr ""
 
-#: ../src/MadSearchDialog.cpp:931
+#: ../src/MadSearchDialog.cpp:943
 msgid "Binary file matches"
 msgstr ""
 
-#: ../src/MadSearchDialog.cpp:959
+#: ../src/MadSearchDialog.cpp:971
 msgid " results"
 msgstr ""
 
-#: ../src/MadSearchDialog.cpp:1094
+#: ../src/MadSearchDialog.cpp:1106
 #, c-format
 msgid "%d results"
 msgstr ""
@@ -2927,17 +2927,17 @@ msgid ""
 "&Opened"
 msgstr ""
 
-#: ../src/MadReplaceDialog.cpp:601
+#: ../src/MadReplaceDialog.cpp:599
 msgid ""
 "Cannot find the matched string.\n"
 "Replace is finished."
 msgstr ""
 
-#: ../src/MadReplaceDialog.cpp:752
+#: ../src/MadReplaceDialog.cpp:761
 msgid "Cannot find any matched string."
 msgstr ""
 
-#: ../src/MadReplaceDialog.cpp:754
+#: ../src/MadReplaceDialog.cpp:763
 #, c-format
 msgid "%d string(s) were replaced."
 msgstr ""
@@ -3546,7 +3546,7 @@ msgstr ""
 msgid "Indentation size(in spaces):"
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:1141 ../src/MadOptionsDialog.cpp:1379
+#: ../src/MadOptionsDialog.cpp:1141 ../src/MadOptionsDialog.cpp:1380
 msgid "System Default"
 msgstr ""
 
@@ -3564,20 +3564,20 @@ msgstr ""
 msgid "Menu"
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:1636
+#: ../src/MadOptionsDialog.cpp:1637
 #, c-format
 msgid "Invalid value of \"%s(%s)\""
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:1732
+#: ../src/MadOptionsDialog.cpp:1733
 msgid "Cannot assign key to this item"
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:1829
+#: ../src/MadOptionsDialog.cpp:1830
 msgid "This key is not assigned"
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:1853
+#: ../src/MadOptionsDialog.cpp:1854
 #, c-format
 msgid "This key is assigned to [%s]"
 msgstr ""

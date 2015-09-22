@@ -101,14 +101,15 @@ Mod v0.3.7
 New: Prefix, postfix and preview of numbering(enhanced)
 New: Search All in All Opened documents
 New: Replace All in All Opened documents
-New: Indicate "Empty expression" on status bar if user did not fill the search
-     box and hit Search
+New: Indicate "Empty expression" on status bar if user did not fill the search box and hit Search
 Fix: Assertion failure MadEditFrame.cpp:3403
 Fix: Rollback changes in Search/Replace(since 0.3.5)
 Fix: Assertion failure at MadEditFrame.cpp:5692 under x86_x64 linux
 Fix: Fix dictionary download link of OpenOffice on About Dialog
 Fix: Link warning of VS project
 Fix: Show search results by default
+Fix: Set default page of Option dialog to "General"
+Fix: Move encoding update and config update from MainFrame to search/replace dialog
 
 Mod v0.3.6
 1.New: Create scripts directory if not exists while saving recorded script
