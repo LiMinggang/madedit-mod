@@ -160,7 +160,7 @@ void MadSearchDialog::CreateGUIControls(void)
 	WxBoxSizer3->Add(WxButtonFindAll, 0, wxALIGN_CENTER | wxALL, 2);
 
 	WxPopupMenuRecentFindText = new wxMenu(wxT(""));
-	WxButtonFindAllInAll = new wxButton(this, ID_WXBUTTONFINDALLINALL, _("Find All in All\n&Opened"), wxPoint(2, 98), wxSize(100, 42), 0, wxDefaultValidator, wxT("WxButtonFindAllInAll"));
+	WxButtonFindAllInAll = new wxButton(this, ID_WXBUTTONFINDALLINALL, _("Find All in All\nOpened"), wxPoint(2, 98), wxSize(100, 42), 0, wxDefaultValidator, wxT("WxButtonFindAllInAll"));
 	WxBoxSizer3->Add(WxButtonFindAllInAll, 0, wxALIGN_CENTER | wxALL, 2);
 	WxButtonCount = new wxButton(this, ID_WXBUTTONCOUNT, _("C&ount"), wxPoint(2, 98), wxSize(100, 28), 0, wxDefaultValidator, wxT("WxButtonCount"));
 	WxBoxSizer3->Add(WxButtonCount, 0, wxALIGN_CENTER | wxALL, 2);

@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="_Main">
-      <UniqueIdentifier>{88181a13-fe20-4a92-a5d8-657084557a3d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="hunspell">
       <UniqueIdentifier>{25dfc2b3-282e-46b0-9995-12882ae4b900}</UniqueIdentifier>
     </Filter>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-22 11:57+0800\n"
+"POT-Creation-Date: 2015-09-22 20:24+0800\n"
 "PO-Revision-Date: 2015-06-30 21:51+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
@@ -2809,7 +2809,7 @@ msgstr "尋找所有的(&A)"
 #, fuzzy
 msgid ""
 "Find All in All\n"
-"&Opened"
+"Opened"
 msgstr "尋找所有的(&A)"
 
 #: ../src/MadSearchDialog.cpp:165

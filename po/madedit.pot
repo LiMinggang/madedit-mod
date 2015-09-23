@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-22 11:57+0800\n"
+"POT-Creation-Date: 2015-09-22 20:24+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2791,7 +2791,7 @@ msgstr ""
 #: ../src/MadSearchDialog.cpp:163
 msgid ""
 "Find All in All\n"
-"&Opened"
+"Opened"
 msgstr ""
 
 #: ../src/MadSearchDialog.cpp:165
