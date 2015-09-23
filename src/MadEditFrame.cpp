@@ -2764,12 +2764,12 @@ void MadEditFrame::CreateGUIControls( void )
     WxToolBar[tbEDITOR]->AddTool( menuGotoPreviousBookmark, _T( "GotoPreviousBookmark" ), m_ImageList->GetBitmap( bookmark_prev_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _( "Go To Previous Bookmark" ), _( "Go to previous bookmark" ), NULL );
     WxToolBar[tbEDITOR]->AddTool( menuClearAllBookmarks, _T( "ClearAllBookmarks" ), m_ImageList->GetBitmap( bookmark_clear_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _( "Clear All Bookmarks" ), _( "Clear all bookmarks" ), NULL );
     WxToolBar[tbEDITOR]->Realize();
-    m_AuiManager.AddPane( WxToolBar[tbSTANDARD],      wxAuiPaneInfo().Name( wxT( "WxToolBar1" ) ).Caption( wxT( "Starndard" ) ).Floatable().ToolbarPane().Top() );
-    m_AuiManager.AddPane( WxToolBar[tbEDITOR],        wxAuiPaneInfo().Name( wxT( "WxToolBar2" ) ).Caption( wxT( "Editor" ) ).Floatable().ToolbarPane().Top() );
-    m_AuiManager.AddPane( WxToolBar[tbSEARCHREPLACE], wxAuiPaneInfo().Name( wxT( "WxToolBar3" ) ).Caption( wxT( "Search/Replace" ) ).Floatable().ToolbarPane().Top() );
-    m_AuiManager.AddPane( WxToolBar[tbTEXTVIEW],      wxAuiPaneInfo().Name( wxT( "WxToolBar4" ) ).Caption( wxT( "Text View" ) ).Floatable().ToolbarPane().Top() );
-    m_AuiManager.AddPane( WxToolBar[tbEDITMODE],      wxAuiPaneInfo().Name( wxT( "WxToolBar5" ) ).Caption( wxT( "Edit Mode" ) ).Floatable().ToolbarPane().Top() );
-    m_AuiManager.AddPane( WxToolBar[tbMACRO],         wxAuiPaneInfo().Name( wxT( "WxToolBar6" ) ).Caption( wxT( "Macro" ) ).Floatable().ToolbarPane().Top() );
+    m_AuiManager.AddPane( WxToolBar[tbSTANDARD],      wxAuiPaneInfo().Name( wxT( "WxToolBar1" ) ).Caption( wxT( "Starndard" ) ).Floatable().ToolbarPane().Top().Position(0) );
+    m_AuiManager.AddPane( WxToolBar[tbEDITOR],        wxAuiPaneInfo().Name( wxT( "WxToolBar2" ) ).Caption( wxT( "Editor" ) ).Floatable().ToolbarPane().Top().Position(1) );
+    m_AuiManager.AddPane( WxToolBar[tbSEARCHREPLACE], wxAuiPaneInfo().Name( wxT( "WxToolBar3" ) ).Caption( wxT( "Search/Replace" ) ).Floatable().ToolbarPane().Top().Position(2) );
+    m_AuiManager.AddPane( WxToolBar[tbTEXTVIEW],      wxAuiPaneInfo().Name( wxT( "WxToolBar4" ) ).Caption( wxT( "Text View" ) ).Floatable().ToolbarPane().Top().Position(3) );
+    m_AuiManager.AddPane( WxToolBar[tbEDITMODE],      wxAuiPaneInfo().Name( wxT( "WxToolBar5" ) ).Caption( wxT( "Edit Mode" ) ).Floatable().ToolbarPane().Top().Position(4) );
+    m_AuiManager.AddPane( WxToolBar[tbMACRO],         wxAuiPaneInfo().Name( wxT( "WxToolBar6" ) ).Caption( wxT( "Macro" ) ).Floatable().ToolbarPane().Top().Position(5) );
     bool bb;
     m_ToolbarStatus[tbMAX] = false;
     m_Config->Read( wxT( "/MadEdit/ShowToolbarStandard" ), &bb, true );

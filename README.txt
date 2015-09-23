@@ -110,6 +110,7 @@ Fix: Link warning of VS project
 Fix: Show search results by default
 Fix: Set default page of Option dialog to "General"
 Fix: Move encoding update and config update from MainFrame to search/replace dialog
+Fix: Reverse order toolbars under linux
 
 Mod v0.3.6
 1.New: Create scripts directory if not exists while saving recorded script
