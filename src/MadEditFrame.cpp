@@ -1551,35 +1551,35 @@ END_EVENT_TABLE()
 CommandData CommandTable[] =
 {
     // file
-    { 0, 0, 0, 0, _( "&File" ), 0, wxITEM_NORMAL, 0, &g_Menu_File, 0},
-    { 0, 1, menuNew,          wxT( "menuNew" ),          _( "&New File" ),         wxT( "Ctrl-N" ),       wxITEM_NORMAL,    new_xpm_idx,       0,                        _( "Create a new file" )},
-    { 0, 1, menuOpen,         wxT( "menuOpen" ),         _( "&Open File..." ),     wxT( "Ctrl-O" ),       wxITEM_NORMAL,    fileopen_xpm_idx,  0,                        _( "Open an existing file" )},
-    { 0, 1, 0,                0,                       0,                      0,                   wxITEM_SEPARATOR, -1,                0,                        0},
-    { 0, 1, menuSave,         wxT( "menuSave" ),         _( "&Save File" ),        wxT( "Ctrl-S" ),       wxITEM_NORMAL,    filesave_xpm_idx,  0,                        _( "Save the file" )},
-    { 0, 1, menuSaveAs,       wxT( "menuSaveAs" ),       _( "Save &As..." ),       wxT( "" ),             wxITEM_NORMAL,    -1,                0,                        _( "Save the file with a new name" )},
-    { 0, 1, menuSaveAll,      wxT( "menuSaveAll" ),      _( "Sa&ve All" ),         wxT( "Ctrl-Shift-S" ), wxITEM_NORMAL,    saveall_xpm_idx,   0,                        _( "Save all files" )},
-    { 0, 1, 0,                0,                       0,                      0,                   wxITEM_SEPARATOR, -1,                0,                        0},
-    { 0, 1, menuReload,       wxT( "menuReload" ),       _( "&Reload File" ),      wxT( "Ctrl-R" ),       wxITEM_NORMAL,    -1,                0,                        _( "Reload the file" )},
-    { 0, 1, 0,                0,                       0,                      0,                   wxITEM_SEPARATOR, -1,                0,                        0},
-    { 0, 1, menuClose,        wxT( "menuClose" ),        _( "&Close File" ),       wxT( "Ctrl-F4" ),      wxITEM_NORMAL,    fileclose_xpm_idx, 0,                        _( "Close the file" )},
-    { 0, 1, menuCloseAll,     wxT( "menuCloseAll" ),     _( "C&lose All" ),        wxT( "" ),             wxITEM_NORMAL,    closeall_xpm_idx,  0,                        _( "Close all files" )},
-    { 0, 1, menuCloseAllButThis,     wxT( "menuCloseAllButThis" ),    _( "Close All But This" ),     wxT( "" ),  wxITEM_NORMAL,    -1,         0,                        _( "Close all files but this" )},
-    { 0, 1, menuCloseAllToTheLeft,   wxT( "menuCloseAllToTheLeft" ),  _( "Close All To The Left" ),  wxT( "" ),  wxITEM_NORMAL,    -1,         0,                        _( "Close all files to the left" )},
-    { 0, 1, menuCloseAllToTheRight,  wxT( "menuCloseAllToTheRight" ), _( "Close All To The Right" ), wxT( "" ),  wxITEM_NORMAL,    -1,         0,                        _( "Close all files to the right" )},
-    { 0, 1, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0},
-    { 0, 1, menuToggleReadOnly,           wxT( "menuToggleReadOnly" ),           _( "Set/Clear ReadOnly Flag" ),                 0,                   wxITEM_NORMAL,    -1,                0,                     _( "Set/Clear ReadOnly flag of the file" )},
-    { 0, 1, 0,                0,                       0,                      0,                   wxITEM_SEPARATOR, -1,                0,                        0},
-    { 0, 1, menuPageSetup,    wxT( "menuPageSetup" ),    _( "Page Set&up..." ),    wxT( "" ),             wxITEM_NORMAL,    -1,                0,                        _( "Setup the pages for printing" )},
-    { 0, 1, menuPrintPreview, wxT( "menuPrintPreview" ), _( "Print Previe&w..." ), wxT( "" ),             wxITEM_NORMAL,    preview_xpm_idx,   0,                        _( "Preview the result of printing" )},
-    { 0, 1, menuPrint,        wxT( "menuPrint" ),        _( "&Print..." ),         wxT( "Ctrl-P" ),       wxITEM_NORMAL,    print_xpm_idx,     0,                        _( "Print the file" )},
-    { 0, 1, 0,                0,                       0,                      0,                   wxITEM_SEPARATOR, -1,                0,                        0},
-    { 0, 1, menuRecentFiles,  wxT( "menuRecentFiles" ),  _( "Recent Files" ),      wxT( "" ),             wxITEM_NORMAL,    -1,                &g_Menu_File_RecentFiles, 0},
-    { 0, 1, 0,                0,                       0,                      0,                   wxITEM_SEPARATOR, -1,                0,                        0},
-    { 0, 1, menuExit,         wxT( "menuExit" ),         _( "E&xit" ),             wxT( "" ),             wxITEM_NORMAL,    quit_xpm_idx,      0,                        _( "Quit MadEdit" )},
+    { 0, 0, 0, 0, _( "&File" ), 0, wxITEM_NORMAL, 0, &g_Menu_File, 0, 0},
+    { 0, 1, menuNew,          wxT( "menuNew" ),          _( "&New File" ),         wxT( "Ctrl-N" ),       wxITEM_NORMAL,    new_xpm_idx,       0,                        _( "Create a new file" ), 0},
+    { 0, 1, menuOpen,         wxT( "menuOpen" ),         _( "&Open File..." ),     wxT( "Ctrl-O" ),       wxITEM_NORMAL,    fileopen_xpm_idx,  0,                        _( "Open an existing file" ), 0},
+    { 0, 1, 0,                0,                       0,                      0,                   wxITEM_SEPARATOR, -1,                0,                        0, 0},
+    { 0, 1, menuSave,         wxT( "menuSave" ),         _( "&Save File" ),        wxT( "Ctrl-S" ),       wxITEM_NORMAL,    filesave_xpm_idx,  0,                        _( "Save the file" ), &g_Menu_FilePop},
+    { 0, 1, menuSaveAs,       wxT( "menuSaveAs" ),       _( "Save &As..." ),       wxT( "" ),             wxITEM_NORMAL,    -1,                0,                        _( "Save the file with a new name" ), &g_Menu_FilePop},
+    { 0, 1, menuSaveAll,      wxT( "menuSaveAll" ),      _( "Sa&ve All" ),         wxT( "Ctrl-Shift-S" ), wxITEM_NORMAL,    saveall_xpm_idx,   0,                        _( "Save all files" ), &g_Menu_FilePop},
+    { 0, 1, 0,                0,                       0,                      0,                   wxITEM_SEPARATOR, -1,                0,                        0, &g_Menu_FilePop},
+    { 0, 1, menuReload,       wxT( "menuReload" ),       _( "&Reload File" ),      wxT( "Ctrl-R" ),       wxITEM_NORMAL,    -1,                0,                        _( "Reload the file" ), &g_Menu_FilePop},
+    { 0, 1, 0,                0,                       0,                      0,                   wxITEM_SEPARATOR, -1,                0,                        0, &g_Menu_FilePop},
+    { 0, 1, menuClose,        wxT( "menuClose" ),        _( "&Close File" ),       wxT( "Ctrl-F4" ),      wxITEM_NORMAL,    fileclose_xpm_idx, 0,                        _( "Close the file" ), &g_Menu_FilePop},
+    { 0, 1, menuCloseAll,     wxT( "menuCloseAll" ),     _( "C&lose All" ),        wxT( "" ),             wxITEM_NORMAL,    closeall_xpm_idx,  0,                        _( "Close all files" ), &g_Menu_FilePop},
+    { 0, 1, menuCloseAllButThis,     wxT( "menuCloseAllButThis" ),    _( "Close All But This" ),     wxT( "" ),  wxITEM_NORMAL,    -1,         0,                        _( "Close all files but this" ), &g_Menu_FilePop},
+    { 0, 1, menuCloseAllToTheLeft,   wxT( "menuCloseAllToTheLeft" ),  _( "Close All To The Left" ),  wxT( "" ),  wxITEM_NORMAL,    -1,         0,                        _( "Close all files to the left" ), &g_Menu_FilePop},
+    { 0, 1, menuCloseAllToTheRight,  wxT( "menuCloseAllToTheRight" ), _( "Close All To The Right" ), wxT( "" ),  wxITEM_NORMAL,    -1,         0,                        _( "Close all files to the right" ), &g_Menu_FilePop},
+    { 0, 1, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0, &g_Menu_FilePop},
+    { 0, 1, menuToggleReadOnly,           wxT( "menuToggleReadOnly" ),           _( "Set/Clear ReadOnly Flag" ),                 0,                   wxITEM_NORMAL,    -1,                0,                     _( "Set/Clear ReadOnly flag of the file" ), &g_Menu_FilePop},
+    { 0, 1, 0,                0,                       0,                      0,                   wxITEM_SEPARATOR, -1,                0,                        0, &g_Menu_FilePop},
+    { 0, 1, menuPageSetup,    wxT( "menuPageSetup" ),    _( "Page Set&up..." ),    wxT( "" ),             wxITEM_NORMAL,    -1,                0,                        _( "Setup the pages for printing" ), &g_Menu_FilePop},
+    { 0, 1, menuPrintPreview, wxT( "menuPrintPreview" ), _( "Print Previe&w..." ), wxT( "" ),             wxITEM_NORMAL,    preview_xpm_idx,   0,                        _( "Preview the result of printing" ), &g_Menu_FilePop},
+    { 0, 1, menuPrint,        wxT( "menuPrint" ),        _( "&Print..." ),         wxT( "Ctrl-P" ),       wxITEM_NORMAL,    print_xpm_idx,     0,                        _( "Print the file" ), &g_Menu_FilePop},
+    { 0, 1, 0,                0,                       0,                      0,                   wxITEM_SEPARATOR, -1,                0,                        0, 0},
+    { 0, 1, menuRecentFiles,  wxT( "menuRecentFiles" ),  _( "Recent Files" ),      wxT( "" ),             wxITEM_NORMAL,    -1,                &g_Menu_File_RecentFiles, 0, 0},
+    { 0, 1, 0,                0,                       0,                      0,                   wxITEM_SEPARATOR, -1,                0,                        0, 0},
+    { 0, 1, menuExit,         wxT( "menuExit" ),         _( "E&xit" ),             wxT( "" ),             wxITEM_NORMAL,    quit_xpm_idx,      0,                        _( "Quit MadEdit" ), 0},
 
     // Edit
-    { 0, 0, 0, 0, _( "&Edit" ), 0, wxITEM_NORMAL, 0, &g_Menu_Edit, 0},
-    { ecUndo,           1, menuUndo,                     wxT( "menuUndo" ),                     _( "&Undo" ),                                   wxT( "Ctrl-Z" ),       wxITEM_NORMAL,    undo_xpm_idx,      0,                     _( "Undo the last action" )},
+    { 0, 0, 0, 0, _( "&Edit" ), 0, wxITEM_NORMAL, 0, &g_Menu_Edit, 0, 0},
+    { ecUndo,           1, menuUndo,                     wxT( "menuUndo" ),                     _( "&Undo" ),                                   wxT( "Ctrl-Z" ),       wxITEM_NORMAL,    undo_xpm_idx,      0,                     _( "Undo the last action" ), 0},
 
     {
         ecRedo,           1, menuRedo,                     wxT( "menuRedo" ),                     _( "&Redo" ),
@@ -1588,16 +1588,15 @@ CommandData CommandTable[] =
 #else
         wxT( "Ctrl-Shift-Z" ),
 #endif
-        wxITEM_NORMAL,    redo_xpm_idx,      0,                     _( "Redo the previously undone action" )
-    },
+        wxITEM_NORMAL,    redo_xpm_idx,      0,                     _( "Redo the previously undone action" ), 0},
 
-    { 0,                1, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0},
-    { ecCut,            1, menuCut,                      wxT( "menuCut" ),                      _( "Cu&t" ),                                    wxT( "Ctrl-X" ),       wxITEM_NORMAL,    cut_xpm_idx,       0,                     _( "Cut the selection and put it on the Clipboard" )},
-    { ecCopy,           1, menuCopy,                     wxT( "menuCopy" ),                     _( "&Copy" ),                                   wxT( "Ctrl-C" ),       wxITEM_NORMAL,    copy_xpm_idx,      0,                     _( "Copy the selection and put it on the Clipboard" )},
-    { ecPaste,          1, menuPaste,                    wxT( "menuPaste" ),                    _( "&Paste" ),                                  wxT( "Ctrl-V" ),       wxITEM_NORMAL,    paste_xpm_idx,     0,                     _( "Insert data from the Clipboard" )},
-    { ecDelete,         1, menuDelete,                   wxT( "menuDelete" ),                   _( "&Delete" ),                                 wxT( "DEL" ),          wxITEM_NORMAL,    -1,                0,                     _( "Delete data" )},
-    { 0,                1, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0},
-    { ecCutLine,        1, menuCutLine,                  wxT( "menuCutLine" ),                  _( "Cut L&ine" ),                               wxT( "Ctrl-Shift-L" ), wxITEM_NORMAL,    -1,                0,                     _( "Cut the selected lines and put it on the Clipboard" )},
+    { 0,                1, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0, 0},
+    { ecCut,            1, menuCut,                      wxT( "menuCut" ),                      _( "Cu&t" ),                                    wxT( "Ctrl-X" ),       wxITEM_NORMAL,    cut_xpm_idx,       0,                     _( "Cut the selection and put it on the Clipboard" ), &g_Menu_EditPop},
+    { ecCopy,           1, menuCopy,                     wxT( "menuCopy" ),                     _( "&Copy" ),                                   wxT( "Ctrl-C" ),       wxITEM_NORMAL,    copy_xpm_idx,      0,                     _( "Copy the selection and put it on the Clipboard" ), &g_Menu_EditPop},
+    { ecPaste,          1, menuPaste,                    wxT( "menuPaste" ),                    _( "&Paste" ),                                  wxT( "Ctrl-V" ),       wxITEM_NORMAL,    paste_xpm_idx,     0,                     _( "Insert data from the Clipboard" ), &g_Menu_EditPop},
+    { ecDelete,         1, menuDelete,                   wxT( "menuDelete" ),                   _( "&Delete" ),                                 wxT( "DEL" ),          wxITEM_NORMAL,    -1,                0,                     _( "Delete data" ), &g_Menu_EditPop},
+    { 0,                1, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0, &g_Menu_EditPop},
+    { ecCutLine,        1, menuCutLine,                  wxT( "menuCutLine" ),                  _( "Cut L&ine" ),                               wxT( "Ctrl-Shift-L" ), wxITEM_NORMAL,    -1,                0,                     _( "Cut the selected lines and put it on the Clipboard" ), &g_Menu_EditPop},
 
     {
         ecDeleteLine,     1, menuDeleteLine,               wxT( "menuDeleteLine" ),               _( "Delete &Line" ),
@@ -1606,16 +1605,15 @@ CommandData CommandTable[] =
 #else
         wxT( "Ctrl-Y" ),
 #endif
-        wxITEM_NORMAL,    -1,                0,                     _( "Delete the selected lines" )
-    },
+        wxITEM_NORMAL,    -1,                0,                     _( "Delete the selected lines" ), &g_Menu_EditPop},
 
-    { 0,                1, menuDeleteEmptyLines,         wxT( "menuDeleteEmptyLines" ),         _( "Delete Empty Lines" ),                      wxT( "Ctrl-Alt-L" ),   wxITEM_NORMAL,    -1,                0,                     _( "Delete empty lines" )},
-    { 0,                1, menuDeleteEmptyLinesWithSpaces, wxT( "menuDeleteEmptyLinesWithSpaces" ), _( "Delete Empty Lines With Spaces" ),      wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Delete empty lines with spaces" )},
-    { 0,                1, menuJoinLines,                wxT( "menuJoinLines" ),                _( "Join Lines" ),                              wxT( "Ctrl-J" ),       wxITEM_NORMAL,    -1,                0,                     _( "Join selected lines into one" )},
-    { 0,                1, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0},
-    { ecSelectAll,      1, menuSelectAll,                wxT( "menuSelectAll" ),                _( "Select &All" ),                             wxT( "Ctrl-A" ),       wxITEM_NORMAL,    -1,                0,                     _( "Select all data" )},
-    { 0,                1, menuStartEndSelction,         wxT( "menuStartEndSelction" ),         _( "Begin/End Select" ),                        0,                   wxITEM_CHECK,     -1,                0,                     _( "Select all data" )},
-    { 0,                1, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0},
+    { 0,                1, menuDeleteEmptyLines,         wxT( "menuDeleteEmptyLines" ),         _( "Delete Empty Lines" ),                      wxT( "Ctrl-Alt-L" ),   wxITEM_NORMAL,    -1,                0,                     _( "Delete empty lines" ), &g_Menu_EditPop},
+    { 0,                1, menuDeleteEmptyLinesWithSpaces, wxT( "menuDeleteEmptyLinesWithSpaces" ), _( "Delete Empty Lines With Spaces" ),      wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Delete empty lines with spaces" ), &g_Menu_EditPop},
+    { 0,                1, menuJoinLines,                wxT( "menuJoinLines" ),                _( "Join Lines" ),                              wxT( "Ctrl-J" ),       wxITEM_NORMAL,    -1,                0,                     _( "Join selected lines into one" ), &g_Menu_EditPop},
+    { 0,                1, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0, &g_Menu_EditPop},
+    { ecSelectAll,      1, menuSelectAll,                wxT( "menuSelectAll" ),                _( "Select &All" ),                             wxT( "Ctrl-A" ),       wxITEM_NORMAL,    -1,                0,                     _( "Select all data" ), &g_Menu_EditPop},
+    { 0,                1, menuStartEndSelction,         wxT( "menuStartEndSelction" ),         _( "Begin/End Select" ),                        0,                   wxITEM_CHECK,     -1,                0,                     _( "Select all data" ), &g_Menu_EditPop},
+    { 0,                1, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0, &g_Menu_EditPop},
 
     {
         ecInsertTabChar,  1, menuInsertTabChar,            wxT( "menuInsertTabChar" ),            _( "Insert Ta&b Char" ),
@@ -1624,377 +1622,376 @@ CommandData CommandTable[] =
 #else
         wxT( "Ctrl-`" ),
 #endif
-        wxITEM_NORMAL,    -1,                0,                     _( "Insert a Tab char at current position" )
-    },
+        wxITEM_NORMAL,    -1,                0,                     _( "Insert a Tab char at current position" ), &g_Menu_EditPop},
 
-    { ecInsertDateTime, 1, menuInsertDateTime,           wxT( "menuInsertDateTime" ),           _( "Insert Dat&e and Time" ),                   wxT( "F7" ),           wxITEM_NORMAL,    -1,                0,                     _( "Insert date and time at current position" )},
+    { ecInsertDateTime, 1, menuInsertDateTime,           wxT( "menuInsertDateTime" ),           _( "Insert Dat&e and Time" ),                   wxT( "F7" ),           wxITEM_NORMAL,    -1,                0,                     _( "Insert date and time at current position" ), &g_Menu_EditPop},
 
     // add: gogo, 21.09.2009
-    { 0,                1, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0},
-    { 0,                1, menuBookmark,                 wxT( "menuBookmark" ),                 _( "Bookmark" ),                                0,                   wxITEM_NORMAL,    -1,                &g_Menu_Edit_Bookmark, 0},
-    { 0,                2, menuBookmarkCopy,             wxT( "menuBookmarkCopy" ),             _( "Copy Bookmarked Lines" ),                   0,                   wxITEM_NORMAL,    -1,                0,                     _( "Copy Bookmarked Lines" )},
-    { 0,                2, menuBookmarkCut,              wxT( "menuBookmarkCut" ),              _( "Cut Bookmarked Lines" ),                    0,                   wxITEM_NORMAL,    -1,                0,                     _( "Cut Bookmarked Lines" )},
-    { 0,                2, menuBookmarkDel,              wxT( "menuBookmarkDel" ),              _( "Delete Bookmarked Lines" ),                 0,                   wxITEM_NORMAL,    -1,                0,                     _( "Delete Bookmarked Lines" )},
-    { 0,                2, menuBookmarkDelUnmarked,      wxT( "menuBookmarkDelUnmarked" ),      _( "Delete Unmarked Lines" ),                   0,                   wxITEM_NORMAL,    -1,                0,                     _( "Delete Unmarked Lines" )},
-    { 0,                2, menuBookmarkReplace,          wxT( "menuBookmarkReplace" ),          _( "Replace Bookmarked Lines" ),                0,                   wxITEM_NORMAL,    -1,                0,                     _( "Replace Bookmarked Lines" )},
-    { 0,                1, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0},
-    { 0,                1, menuAdvanced,                 wxT( "menuAdvanced" ),                 _( "Ad&vanced" ),                               0,                   wxITEM_NORMAL,    -1,                &g_Menu_Edit_Advanced, 0},
-    { 0,                2, menuCopyAsHexString,          wxT( "menuCopyAsHexString" ),          _( "Copy As &Hex String" ),                     wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Copy the selection as hex-string" )},
-    { 0,                2, menuCopyAsHexStringWithSpace, wxT( "menuCopyAsHexStringWithSpace" ), _( "Copy As He&x String with Space" ),          wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Copy the selection as hex-string with space" )},
-    { 0,                2, menuCopyRevertHex,            wxT( "menuCopyRevertHex" ),            _( "Copy Value &Reverted from Hex String" ),    wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Copy the selection reverted from hex-string" )},
-    { 0,                2, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0},
-    { ecIncreaseIndent, 2, menuIncreaseIndent,           wxT( "menuIncreaseIndent" ),           _( "&Increase Indent" ),                        wxT( "" ),             wxITEM_NORMAL,    indent_xpm_idx,    0,                     _( "Increase the indent of seleted lines" )},
-    { ecDecreaseIndent, 2, menuDecreaseIndent,           wxT( "menuDecreaseIndent" ),           _( "&Decrease Indent" ),                        wxT( "Shift-TAB" ),    wxITEM_NORMAL,    unindent_xpm_idx,  0,                     _( "Decrease the indent of seleted lines" )},
-    { 0,                2, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0},
-    { ecComment,        2, menuComment,                  wxT( "menuComment" ),                  _( "&Comment" ),                                wxT( "Ctrl-M" ),       wxITEM_NORMAL,    comment_xpm_idx,   0,                     _( "Comment out the selected lines" )},
-    { ecUncomment,      2, menuUncomment,                wxT( "menuUncomment" ),                _( "&Uncomment" ),                              wxT( "Ctrl-Shift-M" ), wxITEM_NORMAL,    uncomment_xpm_idx, 0,                     _( "Uncomment the selected lines" )},
-    { 0,                2, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0},
-    { 0,                2, menuWordWrapToNewLine,        wxT( "menuWordWrapToNewLine" ),        _( "WordWraps To NewLine Chars" ),              wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Convert WordWraps to NewLine chars in the file or selection" )},
-    { 0,                2, menuNewLineToWordWrap,        wxT( "menuNewLineToWordWrap" ),        _( "NewLine Chars To WordWraps" ),              wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Convert NewLine chars to WordWraps in the selection" )},
-    { 0,                2, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0},
-    { ecToUpperCase,    2, menuToUpperCase,              wxT( "menuToUpperCase" ),              _( "To U&PPERCASE" ),                           wxT( "Ctrl-U" ),       wxITEM_NORMAL,    -1,                0,                     _( "Convert the selection to uppercase" )},
-    { ecToLowerCase,    2, menuToLowerCase,              wxT( "menuToLowerCase" ),              _( "To l&owerCase" ),                           wxT( "Ctrl-Shift-U" ), wxITEM_NORMAL,    -1,                0,                     _( "Convert the selection to lowercase" )},
-    { ecInvertCase,    2, menuInvertCase,                wxT( "menuInvertCase" ),              _( "Inver&t Case" ),                            wxT( "Ctrl-Alt-U" ),   wxITEM_NORMAL,    -1,                0,                     _( "Invert the case of the selection" )},
-    { 0,                2, menuCapitalize,               wxT( "menuCapitalize" ),              _( "Capitalize" ),                              0,                   wxITEM_NORMAL,    -1,                0,                     _( "Capitalize words of the selection" )},
-    { 0,                2, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0},
-    { ecToHalfWidth,    2, menuToHalfWidth,              wxT( "menuToHalfWidth" ),              _( "To H&alfwidth" ),                           wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Convert the selection to halfwidth" )},
-    { 0,                2, menuToHalfWidthByOptions,     wxT( "menuToHalfWidthByOptions" ),     _( "To Halfwidth by Options..." ),              wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Convert the selection to halfwidth by options" )},
-    { ecToFullWidth,    2, menuToFullWidth,              wxT( "menuToFullWidth" ),              _( "To &Fullwidth" ),                           wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Convert the selection to fullwidth" )},
-    { 0,                2, menuToFullWidthByOptions,     wxT( "menuToFullWidthByOptions" ),     _( "To Fullwidth by Options..." ),              wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Convert the selection to fullwidth by options" )},
-    { 0,                2, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0},
-    { 0,                2, menuTabToSpace,               wxT( "menuTabToSpace" ),               _( "Tab Chars To Space Chars" ),                wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Convert Tab chars to Space chars in the selection" )},
-    { 0,                2, menuSpaceToTab,               wxT( "menuSpaceToTab" ),               _( "Space Chars To Tab Chars" ),                wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Convert Space chars to Tab chars in the selection" )},
-    { 0,                2, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0},
-    { 0,                2, menuTrimTrailingSpaces,       wxT( "menuTrimTrailingSpaces" ),       _( "Tri&m Trailing Spaces" ),                   wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Trim trailing spaces at the end of lines" )},
-    { 0,                2, menuTrimLeadingSpaces,        wxT( "menuTrimLeadingSpaces" ),        _( "Tri&m Leading Spaces" ),                    wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Trim leading spaces at the beginning of lines" )},
-    { 0,                2, menuInsertNumbers,            wxT( "menuInsertNumbers" ),            _( "Insert Incremental numbers..." ),           wxT( "Ctrl-Shift-N" ), wxITEM_NORMAL,    numbering_xpm_idx, 0,                     _( "Insert incremental numbers with step and padding at current caret" )},
-    { 0,                2, menuColumnAlignLeft,          wxT( "menuColumnAlignLeft" ),          _( "Column Align Left" ),                       wxT( "" ),             wxITEM_NORMAL,    alignleft_xpm_idx, 0,                     _( "Align selection to the left" )},
-    { 0,                2, menuColumnAlignRight,         wxT( "menuColumnAlignRight" ),         _( "Column Align Right" ),                      wxT( "" ),             wxITEM_NORMAL,    alignright_xpm_idx,0,                     _( "Align selection to the right" )},
-    { 0,                1, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0},
-    { 0,                1, menuSort,                     wxT( "menuSort" ),                     _( "&Sort" ),                                   0,                     wxITEM_NORMAL,    -1,                &g_Menu_Edit_Sort,     0},
-    { 0,                2, menuSortAscending,            wxT( "menuSortAscending" ),            _( "Sort Lines (&Ascending)" ),                 wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Sort the selected or all lines in ascending order" )},
-    { 0,                2, menuSortDescending,           wxT( "menuSortDescending" ),           _( "Sort Lines (&Descending)" ),                wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Sort the selected or all lines in descending order" )},
-    { 0,                2, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0},
-    { 0,                2, menuSortAscendingCase,        wxT( "menuSortAscendingCase" ),        _( "Sort Lines (A&scending, CaseSensitive)" ),  wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Sort lines in ascending order and with case-sensitive" )},
-    { 0,                2, menuSortDescendingCase,       wxT( "menuSortDescendingCase" ),       _( "Sort Lines (D&escending, CaseSensitive)" ), wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Sort lines in descending order and with case-sensitive" )},
-    { 0,                2, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0},
-    { 0,                2, menuSortByOptions,            wxT( "menuSortByOptions" ),            _( "Sort Lines by &Current Options" ),          wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Sort the selected or all lines by using current options" )},
-    { 0,                2, menuSortOptions,              wxT( "menuSortOptions" ),              _( "Sort &Options..." ),                        wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Set the sort options" )},
+    { 0,                1, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0, 0},
+    { 0,                1, menuBookmark,                 wxT( "menuBookmark" ),                 _( "Bookmark" ),                                0,                   wxITEM_NORMAL,    -1,                &g_Menu_Edit_Bookmark, 0, 0},
+    { 0,                2, menuBookmarkCopy,             wxT( "menuBookmarkCopy" ),             _( "Copy Bookmarked Lines" ),                   0,                   wxITEM_NORMAL,    -1,                0,                     _( "Copy Bookmarked Lines" ), 0},
+    { 0,                2, menuBookmarkCut,              wxT( "menuBookmarkCut" ),              _( "Cut Bookmarked Lines" ),                    0,                   wxITEM_NORMAL,    -1,                0,                     _( "Cut Bookmarked Lines" ), 0},
+    { 0,                2, menuBookmarkDel,              wxT( "menuBookmarkDel" ),              _( "Delete Bookmarked Lines" ),                 0,                   wxITEM_NORMAL,    -1,                0,                     _( "Delete Bookmarked Lines" ), 0},
+    { 0,                2, menuBookmarkDelUnmarked,      wxT( "menuBookmarkDelUnmarked" ),      _( "Delete Unmarked Lines" ),                   0,                   wxITEM_NORMAL,    -1,                0,                     _( "Delete Unmarked Lines" ), 0},
+    { 0,                2, menuBookmarkReplace,          wxT( "menuBookmarkReplace" ),          _( "Replace Bookmarked Lines" ),                0,                   wxITEM_NORMAL,    -1,                0,                     _( "Replace Bookmarked Lines" ), 0},
+    { 0,                1, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0, 0},
+    { 0,                1, menuAdvanced,                 wxT( "menuAdvanced" ),                 _( "Ad&vanced" ),                               0,                   wxITEM_NORMAL,    -1,                &g_Menu_Edit_Advanced, 0, 0},
+    { 0,                2, menuCopyAsHexString,          wxT( "menuCopyAsHexString" ),          _( "Copy As &Hex String" ),                     wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Copy the selection as hex-string" ), &g_Menu_EditSubAdv},
+    { 0,                2, menuCopyAsHexStringWithSpace, wxT( "menuCopyAsHexStringWithSpace" ), _( "Copy As He&x String with Space" ),          wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Copy the selection as hex-string with space" ), &g_Menu_EditSubAdv},
+    { 0,                2, menuCopyRevertHex,            wxT( "menuCopyRevertHex" ),            _( "Copy Value &Reverted from Hex String" ),    wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Copy the selection reverted from hex-string" ), &g_Menu_EditSubAdv},
+    { 0,                2, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0, &g_Menu_EditSubAdv},
+    { ecIncreaseIndent, 2, menuIncreaseIndent,           wxT( "menuIncreaseIndent" ),           _( "&Increase Indent" ),                        wxT( "" ),             wxITEM_NORMAL,    indent_xpm_idx,    0,                     _( "Increase the indent of seleted lines" ), &g_Menu_EditSubAdv},
+    { ecDecreaseIndent, 2, menuDecreaseIndent,           wxT( "menuDecreaseIndent" ),           _( "&Decrease Indent" ),                        wxT( "Shift-TAB" ),    wxITEM_NORMAL,    unindent_xpm_idx,  0,                     _( "Decrease the indent of seleted lines" ), &g_Menu_EditSubAdv},
+    { 0,                2, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0, &g_Menu_EditSubAdv},
+    { ecComment,        2, menuComment,                  wxT( "menuComment" ),                  _( "&Comment" ),                                wxT( "Ctrl-M" ),       wxITEM_NORMAL,    comment_xpm_idx,   0,                     _( "Comment out the selected lines" ), &g_Menu_EditSubAdv},
+    { ecUncomment,      2, menuUncomment,                wxT( "menuUncomment" ),                _( "&Uncomment" ),                              wxT( "Ctrl-Shift-M" ), wxITEM_NORMAL,    uncomment_xpm_idx, 0,                     _( "Uncomment the selected lines" ), &g_Menu_EditSubAdv},
+    { 0,                2, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0, &g_Menu_EditSubAdv},
+    { 0,                2, menuWordWrapToNewLine,        wxT( "menuWordWrapToNewLine" ),        _( "WordWraps To NewLine Chars" ),              wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Convert WordWraps to NewLine chars in the file or selection" ), &g_Menu_EditSubAdv},
+    { 0,                2, menuNewLineToWordWrap,        wxT( "menuNewLineToWordWrap" ),        _( "NewLine Chars To WordWraps" ),              wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Convert NewLine chars to WordWraps in the selection" ), &g_Menu_EditSubAdv},
+    { 0,                2, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0, &g_Menu_EditSubAdv},
+    { ecToUpperCase,    2, menuToUpperCase,              wxT( "menuToUpperCase" ),              _( "To U&PPERCASE" ),                           wxT( "Ctrl-U" ),       wxITEM_NORMAL,    -1,                0,                     _( "Convert the selection to uppercase" ), &g_Menu_EditSubAdv},
+    { ecToLowerCase,    2, menuToLowerCase,              wxT( "menuToLowerCase" ),              _( "To l&owerCase" ),                           wxT( "Ctrl-Shift-U" ), wxITEM_NORMAL,    -1,                0,                     _( "Convert the selection to lowercase" ), &g_Menu_EditSubAdv},
+    { ecInvertCase,     2, menuInvertCase,               wxT( "menuInvertCase" ),              _( "Inver&t Case" ),                            wxT( "Ctrl-Alt-U" ),   wxITEM_NORMAL,    -1,                0,                     _( "Invert the case of the selection" ), &g_Menu_EditSubAdv},
+    { 0,                2, menuCapitalize,               wxT( "menuCapitalize" ),              _( "Capitalize" ),                              0,                   wxITEM_NORMAL,    -1,                0,                     _( "Capitalize words of the selection" ), &g_Menu_EditSubAdv},
+    { 0,                2, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0, &g_Menu_EditSubAdv},
+    { ecToHalfWidth,    2, menuToHalfWidth,              wxT( "menuToHalfWidth" ),              _( "To H&alfwidth" ),                           wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Convert the selection to halfwidth" ), &g_Menu_EditSubAdv},
+    { 0,                2, menuToHalfWidthByOptions,     wxT( "menuToHalfWidthByOptions" ),     _( "To Halfwidth by Options..." ),              wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Convert the selection to halfwidth by options" ), &g_Menu_EditSubAdv},
+    { ecToFullWidth,    2, menuToFullWidth,              wxT( "menuToFullWidth" ),              _( "To &Fullwidth" ),                           wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Convert the selection to fullwidth" ), &g_Menu_EditSubAdv},
+    { 0,                2, menuToFullWidthByOptions,     wxT( "menuToFullWidthByOptions" ),     _( "To Fullwidth by Options..." ),              wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Convert the selection to fullwidth by options" ), &g_Menu_EditSubAdv},
+    { 0,                2, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0, &g_Menu_EditSubAdv},
+    { 0,                2, menuTabToSpace,               wxT( "menuTabToSpace" ),               _( "Tab Chars To Space Chars" ),                wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Convert Tab chars to Space chars in the selection" ), &g_Menu_EditSubAdv},
+    { 0,                2, menuSpaceToTab,               wxT( "menuSpaceToTab" ),               _( "Space Chars To Tab Chars" ),                wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Convert Space chars to Tab chars in the selection" ), &g_Menu_EditSubAdv},
+    { 0,                2, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0, &g_Menu_EditSubAdv},
+    { 0,                2, menuTrimTrailingSpaces,       wxT( "menuTrimTrailingSpaces" ),       _( "Tri&m Trailing Spaces" ),                   wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Trim trailing spaces at the end of lines" ), &g_Menu_EditSubAdv},
+    { 0,                2, menuTrimLeadingSpaces,        wxT( "menuTrimLeadingSpaces" ),        _( "Tri&m Leading Spaces" ),                    wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Trim leading spaces at the beginning of lines" ), &g_Menu_EditSubAdv},
+    { 0,                2, menuInsertNumbers,            wxT( "menuInsertNumbers" ),            _( "Insert Incremental numbers..." ),           wxT( "Ctrl-Shift-N" ), wxITEM_NORMAL,    numbering_xpm_idx, 0,                     _( "Insert incremental numbers with step and padding at current caret" ), &g_Menu_EditSubAdv},
+    { 0,                2, menuColumnAlignLeft,          wxT( "menuColumnAlignLeft" ),          _( "Column Align Left" ),                       wxT( "" ),             wxITEM_NORMAL,    alignleft_xpm_idx, 0,                     _( "Align selection to the left" ), &g_Menu_EditSubAdv},
+    { 0,                2, menuColumnAlignRight,         wxT( "menuColumnAlignRight" ),         _( "Column Align Right" ),                      wxT( "" ),             wxITEM_NORMAL,    alignright_xpm_idx,0,                     _( "Align selection to the right" ), &g_Menu_EditSubAdv},
+    { 0,                1, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0, 0},
+    { 0,                1, menuSort,                     wxT( "menuSort" ),                     _( "&Sort" ),                                   0,                     wxITEM_NORMAL,    -1,                &g_Menu_Edit_Sort,     0, 0},
+    { 0,                2, menuSortAscending,            wxT( "menuSortAscending" ),            _( "Sort Lines (&Ascending)" ),                 wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Sort the selected or all lines in ascending order" ), &g_Menu_EditSubSort},
+    { 0,                2, menuSortDescending,           wxT( "menuSortDescending" ),           _( "Sort Lines (&Descending)" ),                wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Sort the selected or all lines in descending order" ), &g_Menu_EditSubSort},
+    { 0,                2, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0, &g_Menu_EditSubSort},
+    { 0,                2, menuSortAscendingCase,        wxT( "menuSortAscendingCase" ),        _( "Sort Lines (A&scending, CaseSensitive)" ),  wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Sort lines in ascending order and with case-sensitive" ), &g_Menu_EditSubSort},
+    { 0,                2, menuSortDescendingCase,       wxT( "menuSortDescendingCase" ),       _( "Sort Lines (D&escending, CaseSensitive)" ), wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Sort lines in descending order and with case-sensitive" ), &g_Menu_EditSubSort},
+    { 0,                2, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0, &g_Menu_EditSubSort},
+    { 0,                2, menuSortByOptions,            wxT( "menuSortByOptions" ),            _( "Sort Lines by &Current Options" ),          wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Sort the selected or all lines by using current options" ), &g_Menu_EditSubSort},
+    { 0,                2, menuSortOptions,              wxT( "menuSortOptions" ),              _( "Sort &Options..." ),                        wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Set the sort options" ), &g_Menu_EditSubSort},
 
     // Search
-    { 0, 0, 0, 0, _( "&Search" ), 0, wxITEM_NORMAL, 0, &g_Menu_Search, 0},
-    { 0,            1, menuFind,                   wxT( "menuFind" ),                   _( "&Find..." ),                                        wxT( "Ctrl-F" ),       wxITEM_NORMAL,    find_xpm_idx,     0, _( "Find a string" )},
-    { 0,            1, menuFindNext,               wxT( "menuFindNext" ),               _( "Find &Next" ),                                      wxT( "F3" ),           wxITEM_NORMAL,    findnext_xpm_idx, 0, _( "Find next occurrence" )},
-    { 0,            1, menuFindPrevious,           wxT( "menuFindPrevious" ),           _( "Find &Previous" ),                                  wxT( "Ctrl-F3" ),      wxITEM_NORMAL,    findprev_xpm_idx, 0, _( "Find previous occurrence" )},
-    { 0,            1, menuShowQuickFindBar,       wxT( "menuShowQuickFindBar" ),       _( "&Quick Find" ),                                     wxT( "F8" ),           wxITEM_NORMAL,    -1,               0, _( "Find a string" )},
-    { 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0},
-    { 0,            1, menuReplace,                wxT( "menuReplace" ),                _( "&Replace..." ),                                     wxT( "Ctrl-H" ),       wxITEM_NORMAL,    replace_xpm_idx,  0, _( "Replace a string" )},
-    { 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0},
-    { 0,            1, menuFindInFiles,            wxT( "menuFindInFiles" ),            _( "Fin&d/Replace in Files..." ),                       wxT( "Ctrl-Shift-F" ), wxITEM_NORMAL,    -1,               0, _( "Find or replace a string in files" )},
-    { 0,            1, menuShowFindInFilesResults, wxT( "menuShowFindInFilesResults" ), _( "&Show/Hide the Results of Find/Replace in Files" ), wxT( "Ctrl-Shift-R" ), wxITEM_NORMAL,    -1,               0, _( "Show or hide the results of find or replace a string in files" )},
-    { 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0},
-    { 0,            1, menuGoToLine,               wxT( "menuGoToLine" ),               _( "&Go To Line..." ),                                  wxT( "Ctrl-G" ),       wxITEM_NORMAL,    -1,               0, _( "Go to the specified line" )},
-    { 0,            1, menuGoToPosition,           wxT( "menuGoToPosition" ),           _( "G&o To Position..." ),                              wxT( "Ctrl-Shift-G" ), wxITEM_NORMAL,    -1,               0, _( "Go to the specified position" )},
-    { 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0},
-    { ecLeftBrace,  1, menuLeftBrace,              wxT( "menuLeftBrace" ),              _( "Go To L&eft Brace" ),                               wxT( "Ctrl-[" ),       wxITEM_NORMAL,    -1,               0, _( "Go to left brace" )},
-    { ecRightBrace, 1, menuRightBrace,             wxT( "menuRightBrace" ),             _( "Go To R&ight Brace" ),                              wxT( "Ctrl-]" ),       wxITEM_NORMAL,    -1,               0, _( "Go to right brace" )},
-    { 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0},
-    { 0,            1, menuToggleBookmark,         wxT( "menuToggleBookmark" ),         _( "Toggle/Remove Bookmark " ),                         wxT( "Ctrl-F2" ),      wxITEM_NORMAL,    bookmark_toggle_xpm_idx, 0,               _( "Toggle Bookmark at current line" )},
-    { 0,            1, menuGotoNextBookmark,       wxT( "menuGotoNextBookmark" ),       _( "Go To Next Bookmark" ),                             wxT( "F2" ),           wxITEM_NORMAL,    bookmark_next_xpm_idx,   0,               _( "Go to the next bookmark" )},
-    { 0,            1, menuGotoPreviousBookmark,   wxT( "menuGotoPreviousBookmark" ),   _( "Go To Previous Bookmark" ),                         wxT( "Shift-F2" ),     wxITEM_NORMAL,    bookmark_prev_xpm_idx,   0,               _( "Go to the previous bookmark" )},
-    { 0,            1, menuClearAllBookmarks,      wxT( "menuClearAllBookmarks" ),      _( "Clear All Bookmarks" ),                             wxT( "" ),             wxITEM_NORMAL,    bookmark_clear_xpm_idx,  0,              _( "Clear All Bookmarks" )},
+    { 0, 0, 0, 0, _( "&Search" ), 0, wxITEM_NORMAL, 0, &g_Menu_Search, 0, 0},
+    { 0,            1, menuFind,                   wxT( "menuFind" ),                   _( "&Find..." ),                                        wxT( "Ctrl-F" ),       wxITEM_NORMAL,    find_xpm_idx,     0, _( "Find a string" ), 0},
+    { 0,            1, menuFindNext,               wxT( "menuFindNext" ),               _( "Find &Next" ),                                      wxT( "F3" ),           wxITEM_NORMAL,    findnext_xpm_idx, 0, _( "Find next occurrence" ), 0},
+    { 0,            1, menuFindPrevious,           wxT( "menuFindPrevious" ),           _( "Find &Previous" ),                                  wxT( "Ctrl-F3" ),      wxITEM_NORMAL,    findprev_xpm_idx, 0, _( "Find previous occurrence" ), 0},
+    { 0,            1, menuShowQuickFindBar,       wxT( "menuShowQuickFindBar" ),       _( "&Quick Find" ),                                     wxT( "F8" ),           wxITEM_NORMAL,    -1,               0, _( "Find a string" ), 0},
+    { 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0, 0},
+    { 0,            1, menuReplace,                wxT( "menuReplace" ),                _( "&Replace..." ),                                     wxT( "Ctrl-H" ),       wxITEM_NORMAL,    replace_xpm_idx,  0, _( "Replace a string" ), 0},
+    { 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0, 0},
+    { 0,            1, menuFindInFiles,            wxT( "menuFindInFiles" ),            _( "Fin&d/Replace in Files..." ),                       wxT( "Ctrl-Shift-F" ), wxITEM_NORMAL,    -1,               0, _( "Find or replace a string in files" ), 0},
+    { 0,            1, menuShowFindInFilesResults, wxT( "menuShowFindInFilesResults" ), _( "&Show/Hide the Results of Find/Replace in Files" ), wxT( "Ctrl-Shift-R" ), wxITEM_NORMAL,    -1,               0, _( "Show or hide the results of find or replace a string in files" ), 0},
+    { 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0, 0},
+    { 0,            1, menuGoToLine,               wxT( "menuGoToLine" ),               _( "&Go To Line..." ),                                  wxT( "Ctrl-G" ),       wxITEM_NORMAL,    -1,               0, _( "Go to the specified line" ), 0},
+    { 0,            1, menuGoToPosition,           wxT( "menuGoToPosition" ),           _( "G&o To Position..." ),                              wxT( "Ctrl-Shift-G" ), wxITEM_NORMAL,    -1,               0, _( "Go to the specified position" ), 0},
+    { 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0, 0},
+    { ecLeftBrace,  1, menuLeftBrace,              wxT( "menuLeftBrace" ),              _( "Go To L&eft Brace" ),                               wxT( "Ctrl-[" ),       wxITEM_NORMAL,    -1,               0, _( "Go to left brace" ), 0},
+    { ecRightBrace, 1, menuRightBrace,             wxT( "menuRightBrace" ),             _( "Go To R&ight Brace" ),                              wxT( "Ctrl-]" ),       wxITEM_NORMAL,    -1,               0, _( "Go to right brace" ), 0},
+    { 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0, 0},
+    { 0,            1, menuToggleBookmark,         wxT( "menuToggleBookmark" ),         _( "Toggle/Remove Bookmark " ),                         wxT( "Ctrl-F2" ),      wxITEM_NORMAL,    bookmark_toggle_xpm_idx, 0,               _( "Toggle Bookmark at current line" ), 0},
+    { 0,            1, menuGotoNextBookmark,       wxT( "menuGotoNextBookmark" ),       _( "Go To Next Bookmark" ),                             wxT( "F2" ),           wxITEM_NORMAL,    bookmark_next_xpm_idx,   0,               _( "Go to the next bookmark" ), 0},
+    { 0,            1, menuGotoPreviousBookmark,   wxT( "menuGotoPreviousBookmark" ),   _( "Go To Previous Bookmark" ),                         wxT( "Shift-F2" ),     wxITEM_NORMAL,    bookmark_prev_xpm_idx,   0,               _( "Go to the previous bookmark" ), 0},
+    { 0,            1, menuClearAllBookmarks,      wxT( "menuClearAllBookmarks" ),      _( "Clear All Bookmarks" ),                             wxT( "" ),             wxITEM_NORMAL,    bookmark_clear_xpm_idx,  0,              _( "Clear All Bookmarks" ), 0},
 
     // View
-    { 0, 0, 0, 0, _( "&View" ), 0, wxITEM_NORMAL, 0, &g_Menu_View, 0},
-    { 0,            1, menuEncoding,          wxT( "menuEncoding" ),          _( "Encoding: " ),           0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Encoding,     0},
-    { 0,            2, menuAllEncodings,      wxT( "menuAllEncodings" ),      _( "All Encodings" ),        0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_AllEncodings, 0},
-    { 0,            1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0},
-    { 0,            1, menuSyntax,            wxT( "menuSyntax" ),            _( "Syntax Type: " ),        0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Syntax,       0},
-    { 0,            1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0},
-    { 0,            1, menuFontName,          wxT( "menuFontName" ),          _( "Font Name: " ),          0,                   wxITEM_NORMAL,    fontname_xpm_idx,   &g_Menu_View_FontName,     0},
-    { 0,            2, menuFont0,             wxT( "menuFont0" ),             wxT( "[@]" ),                0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Font0,        0},
-    { 0,            2, menuFont1,             wxT( "menuFont1" ),             wxT( "[ABCDE]" ),            0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Font1,        0},
-    { 0,            2, menuFont2,             wxT( "menuFont2" ),             wxT( "[FGHIJ]" ),            0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Font2,        0},
-    { 0,            2, menuFont3,             wxT( "menuFont3" ),             wxT( "[KLMNO]" ),            0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Font3,        0},
-    { 0,            2, menuFont4,             wxT( "menuFont4" ),             wxT( "[PQRST]" ),            0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Font4,        0},
-    { 0,            2, menuFont5,             wxT( "menuFont5" ),             wxT( "[UVWXYZ]" ),           0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Font5,        0},
-    { 0,            2, menuFont6,             wxT( "menuFont6" ),             _( "[other]" ),              0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Font6,        0},
+    { 0, 0, 0, 0, _( "&View" ), 0, wxITEM_NORMAL, 0, &g_Menu_View, 0, 0},
+    { 0,            1, menuEncoding,          wxT( "menuEncoding" ),          _( "Encoding: " ),           0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Encoding,     0, 0},
+    { 0,            2, menuAllEncodings,      wxT( "menuAllEncodings" ),      _( "All Encodings" ),        0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_AllEncodings, 0, 0},
+    { 0,            1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0, 0},
+    { 0,            1, menuSyntax,            wxT( "menuSyntax" ),            _( "Syntax Type: " ),        0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Syntax,       0, 0},
+    { 0,            1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0, 0},
+    { 0,            1, menuFontName,          wxT( "menuFontName" ),          _( "Font Name: " ),          0,                   wxITEM_NORMAL,    fontname_xpm_idx,   &g_Menu_View_FontName,     0, 0},
+    { 0,            2, menuFont0,             wxT( "menuFont0" ),             wxT( "[@]" ),                0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Font0,        0, 0},
+    { 0,            2, menuFont1,             wxT( "menuFont1" ),             wxT( "[ABCDE]" ),            0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Font1,        0, 0},
+    { 0,            2, menuFont2,             wxT( "menuFont2" ),             wxT( "[FGHIJ]" ),            0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Font2,        0, 0},
+    { 0,            2, menuFont3,             wxT( "menuFont3" ),             wxT( "[KLMNO]" ),            0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Font3,        0, 0},
+    { 0,            2, menuFont4,             wxT( "menuFont4" ),             wxT( "[PQRST]" ),            0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Font4,        0, 0},
+    { 0,            2, menuFont5,             wxT( "menuFont5" ),             wxT( "[UVWXYZ]" ),           0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Font5,        0, 0},
+    { 0,            2, menuFont6,             wxT( "menuFont6" ),             _( "[other]" ),              0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Font6,        0, 0},
 
-    { 0,            1, menuFontSize,          wxT( "menuFontSize" ),          _( "Font Size: " ),          0,                   wxITEM_NORMAL,    fontsize_xpm_idx,   &g_Menu_View_FontSize,     0},
-    { 0,            2, menuFontSize1,         wxT( "menuFontSize1" ),         wxT( " 1 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         _( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 1,      wxT( "menuFontSize2" ),         wxT( " 2 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 2,      wxT( "menuFontSize3" ),         wxT( " 3 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 3,      wxT( "menuFontSize4" ),         wxT( " 4 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 4,      wxT( "menuFontSize5" ),         wxT( " 5 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 5,      wxT( "menuFontSize6" ),         wxT( " 6 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 6,      wxT( "menuFontSize7" ),         wxT( " 7 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 7,      wxT( "menuFontSize8" ),         wxT( " 8 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 8,      wxT( "menuFontSize9" ),         wxT( " 9 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 9,      wxT( "menuFontSize10" ),        wxT( " 10 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 10,      wxT( "menuFontSize11" ),        wxT( " 11 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 11,      wxT( "menuFontSize12" ),        wxT( " 12 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 12,      wxT( "menuFontSize13" ),        wxT( " 13 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 13,      wxT( "menuFontSize14" ),        wxT( " 14 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 14,      wxT( "menuFontSize15" ),        wxT( " 15 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 15,      wxT( "menuFontSize16" ),        wxT( " 16 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 16,      wxT( "menuFontSize17" ),        wxT( " 17 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 17,      wxT( "menuFontSize18" ),        wxT( " 18 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 18,      wxT( "menuFontSize19" ),        wxT( " 19 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 19,      wxT( "menuFontSize20" ),        wxT( " 20 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 20,      wxT( "menuFontSize21" ),        wxT( " 21 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 21,      wxT( "menuFontSize22" ),        wxT( " 22 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 22,      wxT( "menuFontSize23" ),        wxT( " 23 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 23,      wxT( "menuFontSize24" ),        wxT( " 24 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 24,      wxT( "menuFontSize25" ),        wxT( " 25 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 25,      wxT( "menuFontSize26" ),        wxT( " 26 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 26,      wxT( "menuFontSize27" ),        wxT( " 27 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 27,      wxT( "menuFontSize28" ),        wxT( " 28 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 28,      wxT( "menuFontSize29" ),        wxT( " 29 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 29,      wxT( "menuFontSize30" ),        wxT( " 30 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 30,      wxT( "menuFontSize31" ),        wxT( " 31 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 31,      wxT( "menuFontSize32" ),        wxT( " 32 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 32,      wxT( "menuFontSize33" ),        wxT( " 33 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 33,      wxT( "menuFontSize34" ),        wxT( " 34 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 34,      wxT( "menuFontSize35" ),        wxT( " 35 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 35,      wxT( "menuFontSize36" ),        wxT( " 36 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 36,      wxT( "menuFontSize37" ),        wxT( " 37 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 37,      wxT( "menuFontSize38" ),        wxT( " 38 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 38,      wxT( "menuFontSize39" ),        wxT( " 39 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 39,      wxT( "menuFontSize40" ),        wxT( " 40 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 40,      wxT( "menuFontSize41" ),        wxT( " 41 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 41,      wxT( "menuFontSize42" ),        wxT( " 42 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 42,      wxT( "menuFontSize43" ),        wxT( " 43 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 43,      wxT( "menuFontSize44" ),        wxT( " 44 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 44,      wxT( "menuFontSize45" ),        wxT( " 45 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 45,      wxT( "menuFontSize46" ),        wxT( " 46 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 46,      wxT( "menuFontSize47" ),        wxT( " 47 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 47,      wxT( "menuFontSize48" ),        wxT( " 48 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 48,      wxT( "menuFontSize49" ),        wxT( " 49 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 49,      wxT( "menuFontSize50" ),        wxT( " 50 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 50,      wxT( "menuFontSize51" ),        wxT( " 51 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 51,      wxT( "menuFontSize52" ),        wxT( " 52 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 52,      wxT( "menuFontSize53" ),        wxT( " 53 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 53,      wxT( "menuFontSize54" ),        wxT( " 54 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 54,      wxT( "menuFontSize55" ),        wxT( " 55 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 55,      wxT( "menuFontSize56" ),        wxT( " 56 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 56,      wxT( "menuFontSize57" ),        wxT( " 57 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 57,      wxT( "menuFontSize58" ),        wxT( " 58 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 58,      wxT( "menuFontSize59" ),        wxT( " 59 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 59,      wxT( "menuFontSize60" ),        wxT( " 60 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 60,      wxT( "menuFontSize61" ),        wxT( " 61 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 61,      wxT( "menuFontSize62" ),        wxT( " 62 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 62,      wxT( "menuFontSize63" ),        wxT( " 63 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 63,      wxT( "menuFontSize64" ),        wxT( " 64 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 64,      wxT( "menuFontSize65" ),        wxT( " 65 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 65,      wxT( "menuFontSize66" ),        wxT( " 66 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 66,      wxT( "menuFontSize67" ),        wxT( " 67 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 67,      wxT( "menuFontSize68" ),        wxT( " 68 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 68,      wxT( "menuFontSize69" ),        wxT( " 69 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 69,      wxT( "menuFontSize70" ),        wxT( " 70 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 70,      wxT( "menuFontSize71" ),        wxT( " 71 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
-    { 0,            2, menuFontSize1 + 71,      wxT( "menuFontSize72" ),        wxT( " 72 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" )},
+    { 0,            1, menuFontSize,          wxT( "menuFontSize" ),          _( "Font Size: " ),          0,                   wxITEM_NORMAL,    fontsize_xpm_idx,   &g_Menu_View_FontSize,     0, 0},
+    { 0,            2, menuFontSize1,         wxT( "menuFontSize1" ),         wxT( " 1 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         _( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 1,      wxT( "menuFontSize2" ),         wxT( " 2 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 2,      wxT( "menuFontSize3" ),         wxT( " 3 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 3,      wxT( "menuFontSize4" ),         wxT( " 4 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 4,      wxT( "menuFontSize5" ),         wxT( " 5 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 5,      wxT( "menuFontSize6" ),         wxT( " 6 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 6,      wxT( "menuFontSize7" ),         wxT( " 7 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 7,      wxT( "menuFontSize8" ),         wxT( " 8 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 8,      wxT( "menuFontSize9" ),         wxT( " 9 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 9,      wxT( "menuFontSize10" ),        wxT( " 10 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 10,      wxT( "menuFontSize11" ),        wxT( " 11 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 11,      wxT( "menuFontSize12" ),        wxT( " 12 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 12,      wxT( "menuFontSize13" ),        wxT( " 13 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 13,      wxT( "menuFontSize14" ),        wxT( " 14 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 14,      wxT( "menuFontSize15" ),        wxT( " 15 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 15,      wxT( "menuFontSize16" ),        wxT( " 16 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 16,      wxT( "menuFontSize17" ),        wxT( " 17 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 17,      wxT( "menuFontSize18" ),        wxT( " 18 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 18,      wxT( "menuFontSize19" ),        wxT( " 19 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 19,      wxT( "menuFontSize20" ),        wxT( " 20 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 20,      wxT( "menuFontSize21" ),        wxT( " 21 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 21,      wxT( "menuFontSize22" ),        wxT( " 22 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 22,      wxT( "menuFontSize23" ),        wxT( " 23 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 23,      wxT( "menuFontSize24" ),        wxT( " 24 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 24,      wxT( "menuFontSize25" ),        wxT( " 25 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 25,      wxT( "menuFontSize26" ),        wxT( " 26 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 26,      wxT( "menuFontSize27" ),        wxT( " 27 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 27,      wxT( "menuFontSize28" ),        wxT( " 28 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 28,      wxT( "menuFontSize29" ),        wxT( " 29 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 29,      wxT( "menuFontSize30" ),        wxT( " 30 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 30,      wxT( "menuFontSize31" ),        wxT( " 31 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 31,      wxT( "menuFontSize32" ),        wxT( " 32 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 32,      wxT( "menuFontSize33" ),        wxT( " 33 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 33,      wxT( "menuFontSize34" ),        wxT( " 34 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 34,      wxT( "menuFontSize35" ),        wxT( " 35 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 35,      wxT( "menuFontSize36" ),        wxT( " 36 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 36,      wxT( "menuFontSize37" ),        wxT( " 37 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 37,      wxT( "menuFontSize38" ),        wxT( " 38 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 38,      wxT( "menuFontSize39" ),        wxT( " 39 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 39,      wxT( "menuFontSize40" ),        wxT( " 40 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 40,      wxT( "menuFontSize41" ),        wxT( " 41 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 41,      wxT( "menuFontSize42" ),        wxT( " 42 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 42,      wxT( "menuFontSize43" ),        wxT( " 43 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 43,      wxT( "menuFontSize44" ),        wxT( " 44 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 44,      wxT( "menuFontSize45" ),        wxT( " 45 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 45,      wxT( "menuFontSize46" ),        wxT( " 46 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 46,      wxT( "menuFontSize47" ),        wxT( " 47 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 47,      wxT( "menuFontSize48" ),        wxT( " 48 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 48,      wxT( "menuFontSize49" ),        wxT( " 49 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 49,      wxT( "menuFontSize50" ),        wxT( " 50 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 50,      wxT( "menuFontSize51" ),        wxT( " 51 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 51,      wxT( "menuFontSize52" ),        wxT( " 52 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 52,      wxT( "menuFontSize53" ),        wxT( " 53 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 53,      wxT( "menuFontSize54" ),        wxT( " 54 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 54,      wxT( "menuFontSize55" ),        wxT( " 55 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 55,      wxT( "menuFontSize56" ),        wxT( " 56 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 56,      wxT( "menuFontSize57" ),        wxT( " 57 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 57,      wxT( "menuFontSize58" ),        wxT( " 58 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 58,      wxT( "menuFontSize59" ),        wxT( " 59 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 59,      wxT( "menuFontSize60" ),        wxT( " 60 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 60,      wxT( "menuFontSize61" ),        wxT( " 61 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 61,      wxT( "menuFontSize62" ),        wxT( " 62 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 62,      wxT( "menuFontSize63" ),        wxT( " 63 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 63,      wxT( "menuFontSize64" ),        wxT( " 64 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 64,      wxT( "menuFontSize65" ),        wxT( " 65 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 65,      wxT( "menuFontSize66" ),        wxT( " 66 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 66,      wxT( "menuFontSize67" ),        wxT( " 67 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 67,      wxT( "menuFontSize68" ),        wxT( " 68 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 68,      wxT( "menuFontSize69" ),        wxT( " 69 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 69,      wxT( "menuFontSize70" ),        wxT( " 70 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 70,      wxT( "menuFontSize71" ),        wxT( " 71 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
+    { 0,            2, menuFontSize1 + 71,      wxT( "menuFontSize72" ),        wxT( " 72 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set font point-size" ), 0},
 
-    { 0,            1, menuSetFont,           wxT( "menuSetFont" ),           _( "Set Font..." ),          wxT( "" ),             wxITEM_NORMAL,    font_xpm_idx,       0,                         _( "Change font settings" )},
-    { 0,            1, menuFixedWidthMode,    wxT( "menuFixedWidthMode" ),    _( "&Fixed Width Mode" ),    wxT( "Ctrl-Alt-F" ),   wxITEM_CHECK,     -1,                 0,                         _( "Set/Unset the font with Fixed Width" )},
+    { 0,            1, menuSetFont,           wxT( "menuSetFont" ),           _( "Set Font..." ),          wxT( "" ),             wxITEM_NORMAL,    font_xpm_idx,       0,                         _( "Change font settings" ), 0},
+    { 0,            1, menuFixedWidthMode,    wxT( "menuFixedWidthMode" ),    _( "&Fixed Width Mode" ),    wxT( "Ctrl-Alt-F" ),   wxITEM_CHECK,     -1,                 0,                         _( "Set/Unset the font with Fixed Width" ), 0},
 
-    { 0,            1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0},
-    { 0,            1, menuTabColumn,         wxT( "menuTabColumn" ),         _( "Tab Column: " ),         0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_TabColumn,    0},
-    { 0,            2, menuTabColumn1,        wxT( "menuTabColumn1" ),        wxT( " 1 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         _( "Set column of Tab char" )},
-    { 0,            2, menuTabColumn1 + 1,     wxT( "menuTabColumn2" ),        wxT( " 2 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" )},
-    { 0,            2, menuTabColumn1 + 2,     wxT( "menuTabColumn3" ),        wxT( " 3 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" )},
-    { 0,            2, menuTabColumn1 + 3,     wxT( "menuTabColumn4" ),        wxT( " 4 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" )},
-    { 0,            2, menuTabColumn1 + 4,     wxT( "menuTabColumn5" ),        wxT( " 5 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" )},
-    { 0,            2, menuTabColumn1 + 5,     wxT( "menuTabColumn6" ),        wxT( " 6 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" )},
-    { 0,            2, menuTabColumn1 + 6,     wxT( "menuTabColumn7" ),        wxT( " 7 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" )},
-    { 0,            2, menuTabColumn1 + 7,     wxT( "menuTabColumn8" ),        wxT( " 8 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" )},
-    { 0,            2, menuTabColumn1 + 8,     wxT( "menuTabColumn9" ),        wxT( " 9 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" )},
-    { 0,            2, menuTabColumn1 + 9,     wxT( "menuTabColumn10" ),       wxT( " 10 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" )},
-    { 0,            2, menuTabColumn1 + 10,     wxT( "menuTabColumn11" ),       wxT( " 11 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" )},
-    { 0,            2, menuTabColumn1 + 11,     wxT( "menuTabColumn12" ),       wxT( " 12 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" )},
-    { 0,            2, menuTabColumn1 + 12,     wxT( "menuTabColumn13" ),       wxT( " 13 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" )},
-    { 0,            2, menuTabColumn1 + 13,     wxT( "menuTabColumn14" ),       wxT( " 14 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" )},
-    { 0,            2, menuTabColumn1 + 14,     wxT( "menuTabColumn15" ),       wxT( " 15 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" )},
-    { 0,            2, menuTabColumn1 + 15,     wxT( "menuTabColumn16" ),       wxT( " 16 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" )},
+    { 0,            1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0, 0},
+    { 0,            1, menuTabColumn,         wxT( "menuTabColumn" ),         _( "Tab Column: " ),         0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_TabColumn,    0, 0},
+    { 0,            2, menuTabColumn1,        wxT( "menuTabColumn1" ),        wxT( " 1 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         _( "Set column of Tab char" ), 0},
+    { 0,            2, menuTabColumn1 + 1,     wxT( "menuTabColumn2" ),        wxT( " 2 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" ), 0},
+    { 0,            2, menuTabColumn1 + 2,     wxT( "menuTabColumn3" ),        wxT( " 3 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" ), 0},
+    { 0,            2, menuTabColumn1 + 3,     wxT( "menuTabColumn4" ),        wxT( " 4 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" ), 0},
+    { 0,            2, menuTabColumn1 + 4,     wxT( "menuTabColumn5" ),        wxT( " 5 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" ), 0},
+    { 0,            2, menuTabColumn1 + 5,     wxT( "menuTabColumn6" ),        wxT( " 6 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" ), 0},
+    { 0,            2, menuTabColumn1 + 6,     wxT( "menuTabColumn7" ),        wxT( " 7 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" ), 0},
+    { 0,            2, menuTabColumn1 + 7,     wxT( "menuTabColumn8" ),        wxT( " 8 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" ), 0},
+    { 0,            2, menuTabColumn1 + 8,     wxT( "menuTabColumn9" ),        wxT( " 9 " ),                0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" ), 0},
+    { 0,            2, menuTabColumn1 + 9,     wxT( "menuTabColumn10" ),       wxT( " 10 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" ), 0},
+    { 0,            2, menuTabColumn1 + 10,     wxT( "menuTabColumn11" ),       wxT( " 11 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" ), 0},
+    { 0,            2, menuTabColumn1 + 11,     wxT( "menuTabColumn12" ),       wxT( " 12 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" ), 0},
+    { 0,            2, menuTabColumn1 + 12,     wxT( "menuTabColumn13" ),       wxT( " 13 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" ), 0},
+    { 0,            2, menuTabColumn1 + 13,     wxT( "menuTabColumn14" ),       wxT( " 14 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" ), 0},
+    { 0,            2, menuTabColumn1 + 14,     wxT( "menuTabColumn15" ),       wxT( " 15 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" ), 0},
+    { 0,            2, menuTabColumn1 + 15,     wxT( "menuTabColumn16" ),       wxT( " 16 " ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set column of Tab char" ), 0},
 
-    { 0,            1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0},
-    { 0,            1, menuLineSpacing,       wxT( "menuLineSpacing" ),       _( "Line Spacing: " ),       0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_LineSpacing,  0},
-    { 0,            2, menuLineSpacing100,    wxT( "menuLineSpacing100" ),    wxT( "100%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         _( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 1, wxT( "menuLineSpacing105" ),    wxT( "105%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 2, wxT( "menuLineSpacing110" ),    wxT( "110%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 3, wxT( "menuLineSpacing115" ),    wxT( "115%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 4, wxT( "menuLineSpacing120" ),    wxT( "120%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 5, wxT( "menuLineSpacing125" ),    wxT( "125%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 6, wxT( "menuLineSpacing130" ),    wxT( "130%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 7, wxT( "menuLineSpacing135" ),    wxT( "135%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 8, wxT( "menuLineSpacing140" ),    wxT( "140%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 9, wxT( "menuLineSpacing145" ),    wxT( "145%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 10, wxT( "menuLineSpacing150" ),    wxT( "150%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 11, wxT( "menuLineSpacing155" ),    wxT( "155%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 12, wxT( "menuLineSpacing160" ),    wxT( "160%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 13, wxT( "menuLineSpacing165" ),    wxT( "165%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 14, wxT( "menuLineSpacing170" ),    wxT( "170%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 15, wxT( "menuLineSpacing175" ),    wxT( "175%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 16, wxT( "menuLineSpacing180" ),    wxT( "180%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 17, wxT( "menuLineSpacing185" ),    wxT( "185%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 18, wxT( "menuLineSpacing190" ),    wxT( "190%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 19, wxT( "menuLineSpacing195" ),    wxT( "195%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 20, wxT( "menuLineSpacing200" ),    wxT( "200%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 21, wxT( "menuLineSpacing205" ),    wxT( "205%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 22, wxT( "menuLineSpacing210" ),    wxT( "210%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 23, wxT( "menuLineSpacing215" ),    wxT( "215%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 24, wxT( "menuLineSpacing220" ),    wxT( "220%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 25, wxT( "menuLineSpacing225" ),    wxT( "225%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 26, wxT( "menuLineSpacing230" ),    wxT( "230%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 27, wxT( "menuLineSpacing235" ),    wxT( "235%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 28, wxT( "menuLineSpacing240" ),    wxT( "240%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 29, wxT( "menuLineSpacing245" ),    wxT( "245%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
-    { 0,            2, menuLineSpacing100 + 30, wxT( "menuLineSpacing250" ),    wxT( "250%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" )},
+    { 0,            1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0, 0},
+    { 0,            1, menuLineSpacing,       wxT( "menuLineSpacing" ),       _( "Line Spacing: " ),       0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_LineSpacing,  0, 0},
+    { 0,            2, menuLineSpacing100,    wxT( "menuLineSpacing100" ),    wxT( "100%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         _( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 1, wxT( "menuLineSpacing105" ),    wxT( "105%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 2, wxT( "menuLineSpacing110" ),    wxT( "110%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 3, wxT( "menuLineSpacing115" ),    wxT( "115%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 4, wxT( "menuLineSpacing120" ),    wxT( "120%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 5, wxT( "menuLineSpacing125" ),    wxT( "125%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 6, wxT( "menuLineSpacing130" ),    wxT( "130%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 7, wxT( "menuLineSpacing135" ),    wxT( "135%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 8, wxT( "menuLineSpacing140" ),    wxT( "140%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 9, wxT( "menuLineSpacing145" ),    wxT( "145%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 10, wxT( "menuLineSpacing150" ),    wxT( "150%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 11, wxT( "menuLineSpacing155" ),    wxT( "155%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 12, wxT( "menuLineSpacing160" ),    wxT( "160%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 13, wxT( "menuLineSpacing165" ),    wxT( "165%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 14, wxT( "menuLineSpacing170" ),    wxT( "170%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 15, wxT( "menuLineSpacing175" ),    wxT( "175%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 16, wxT( "menuLineSpacing180" ),    wxT( "180%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 17, wxT( "menuLineSpacing185" ),    wxT( "185%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 18, wxT( "menuLineSpacing190" ),    wxT( "190%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 19, wxT( "menuLineSpacing195" ),    wxT( "195%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 20, wxT( "menuLineSpacing200" ),    wxT( "200%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 21, wxT( "menuLineSpacing205" ),    wxT( "205%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 22, wxT( "menuLineSpacing210" ),    wxT( "210%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 23, wxT( "menuLineSpacing215" ),    wxT( "215%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 24, wxT( "menuLineSpacing220" ),    wxT( "220%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 25, wxT( "menuLineSpacing225" ),    wxT( "225%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 26, wxT( "menuLineSpacing230" ),    wxT( "230%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 27, wxT( "menuLineSpacing235" ),    wxT( "235%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 28, wxT( "menuLineSpacing240" ),    wxT( "240%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 29, wxT( "menuLineSpacing245" ),    wxT( "245%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
+    { 0,            2, menuLineSpacing100 + 30, wxT( "menuLineSpacing250" ),    wxT( "250%" ),               0,                   wxITEM_NORMAL,    -1,                 0,                         wxT( "Set line spacing" ), 0},
 
-    { 0,              1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0},
-    { ecNoWrap,       1, menuNoWrap,            wxT( "menuNoWrap" ),            _( "&No Wrap" ),             wxT( "Ctrl-Q" ),       wxITEM_CHECK,     nowrap_xpm_idx,     0,                         _( "Do not wrap lines" )},
-    { ecWrapByWindow, 1, menuWrapByWindow,      wxT( "menuWrapByWindow" ),      _( "Wrap By &Window" ),      wxT( "Ctrl-W" ),       wxITEM_CHECK,     wrapbywin_xpm_idx,  0,                         _( "Wrap the lines by the window width" )},
-    { ecWrapByColumn, 1, menuWrapByColumn,      wxT( "menuWrapByColumn" ),      _( "Wrap By Column" ),       wxT( "Ctrl-E" ),       wxITEM_CHECK,     wrapbycol_xpm_idx,  0,                         _( "Wrap the lines by the specified Max Columns" )},
-    { 0,              1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0},
-    { 0,              1, menuDisplayLineNumber, wxT( "menuDisplayLineNumber" ), _( "&Display Line Number" ), wxT( "Ctrl-Alt-D" ),   wxITEM_CHECK,     -1,                 0,                         _( "Display the Line Numbers" )},
-    { 0,              1, menuDisplayBookmark,   wxT( "menuDisplayBookmark" ),   _( "Display &Bookmark" ),    wxT( "Ctrl-Alt-B" ),   wxITEM_CHECK,     -1,                 0,                         _( "Display the Bookmark sign" )},
-    { 0,              1, menuDisplay80ColHint,  wxT( "menuDisplay80ColHint" ),  _( "Display 80th Cols &Hint" ), wxT( "" ),          wxITEM_CHECK,     -1,                 0,                         _( "Display the 80th columns hint" )},
-    { 0,              1, menuShowEndOfLine,     wxT( "menuShowEndOfLine" ),     _( "Show End Of Line" ),     wxT( "Ctrl-Alt-L" ),   wxITEM_CHECK,     -1,                 0,                         _( "Show the sign of EndOfLine" )},
-    { 0,              1, menuShowTabChar,       wxT( "menuShowTabChar" ),       _( "Show Tab Char" ),        wxT( "Ctrl-Alt-T" ),   wxITEM_CHECK,     -1,                 0,                         _( "Show the sign of Tab char" )},
-    { 0,              1, menuShowSpaceChar,     wxT( "menuShowSpaceChar" ),     _( "Show Space Char" ),      wxT( "Ctrl-Alt-S" ),   wxITEM_CHECK,     -1,                 0,                         _( "Show the sign of Space char" )},
-    { 0,              1, menuShowAllChars,      wxT( "menuShowAllChar" ),       _( "Show All Chars" ),       wxT( "Ctrl-Alt-A" ),   wxITEM_CHECK,     showsymbol_xpm_idx, 0,                         _( "Show the sign of all characters" )},
-    { 0,              1, menuMarkActiveLine,    wxT( "menuMarkActiveLine" ),    _( "Mark Active Line" ),     wxT( "" ),             wxITEM_CHECK,     -1,                 0,                         _( "Mark the current line" )},
-    { 0,              1, menuMarkBracePair,     wxT( "menuMarkBracePair" ),     _( "Mark Brace Pair" ),      wxT( "" ),             wxITEM_CHECK,     -1,                 0,                         _( "Mark the BracePair under the caret" )},
-    { 0,              1, menuSpellChecker,      wxT( "menuSpellChecker" ),      _( "Spell Checker" ),        wxT( "Ctrl-K" ),       wxITEM_CHECK,     spellchecker_xpm_idx,                 0,       _( "Spell checker" )},
-    { 0,              1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0},
-    { 0,              1, menuToolBars,          wxT( "menuToolBar" ),           _( "Toolbars" ),             0,                   wxITEM_NORMAL,    -1,                 &g_Menu_Toolbars,          0},
-    { 0,              2, menuToolBarsToggleAll, wxT( "menuToolBarsToggleAll" ), _( "Toggle Main Toolbar" ),  0,                   wxITEM_CHECK,     -1,                 0,                         _( "Show/Hide Main Toolbar" )},
-    { 0,              2, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0},
-    { 0,              1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0},
-    { ecTextMode,     1, menuTextMode,          wxT( "menuTextMode" ),          _( "&Text Mode" ),           wxT( "Alt-1" ),        wxITEM_CHECK,     textmode_xpm_idx,   0,                         _( "Change the editing mode to Text-Mode" )},
-    { ecColumnMode,   1, menuColumnMode,        wxT( "menuColumnMode" ),        _( "&Column Mode" ),         wxT( "Alt-2" ),        wxITEM_CHECK,     columnmode_xpm_idx, 0,                         _( "Change the editing mode to Column-Mode" )},
-    { ecHexMode,      1, menuHexMode,           wxT( "menuHexMode" ),           _( "&Hex Mode" ),            wxT( "Alt-3" ),        wxITEM_CHECK,     hexmode_xpm_idx,    0,                         _( "Change the editing mode to Hex-Mode" )},
-    { 0,              1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0},
-    { 0,              1, menuPreview,           wxT( "menuPreview" ),           _( "Preview as: " ),         0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Preview,      0},
+    { 0,              1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0, 0},
+    { ecNoWrap,       1, menuNoWrap,            wxT( "menuNoWrap" ),            _( "&No Wrap" ),             wxT( "Ctrl-Q" ),       wxITEM_CHECK,     nowrap_xpm_idx,     0,                         _( "Do not wrap lines" ), 0},
+    { ecWrapByWindow, 1, menuWrapByWindow,      wxT( "menuWrapByWindow" ),      _( "Wrap By &Window" ),      wxT( "Ctrl-W" ),       wxITEM_CHECK,     wrapbywin_xpm_idx,  0,                         _( "Wrap the lines by the window width" ), 0},
+    { ecWrapByColumn, 1, menuWrapByColumn,      wxT( "menuWrapByColumn" ),      _( "Wrap By Column" ),       wxT( "Ctrl-E" ),       wxITEM_CHECK,     wrapbycol_xpm_idx,  0,                         _( "Wrap the lines by the specified Max Columns" ), 0},
+    { 0,              1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0, 0},
+    { 0,              1, menuDisplayLineNumber, wxT( "menuDisplayLineNumber" ), _( "&Display Line Number" ), wxT( "Ctrl-Alt-D" ),   wxITEM_CHECK,     -1,                 0,                         _( "Display the Line Numbers" ), 0},
+    { 0,              1, menuDisplayBookmark,   wxT( "menuDisplayBookmark" ),   _( "Display &Bookmark" ),    wxT( "Ctrl-Alt-B" ),   wxITEM_CHECK,     -1,                 0,                         _( "Display the Bookmark sign" ), 0},
+    { 0,              1, menuDisplay80ColHint,  wxT( "menuDisplay80ColHint" ),  _( "Display 80th Cols &Hint" ), wxT( "" ),          wxITEM_CHECK,     -1,                 0,                         _( "Display the 80th columns hint" ), 0},
+    { 0,              1, menuShowEndOfLine,     wxT( "menuShowEndOfLine" ),     _( "Show End Of Line" ),     wxT( "Ctrl-Alt-L" ),   wxITEM_CHECK,     -1,                 0,                         _( "Show the sign of EndOfLine" ), 0},
+    { 0,              1, menuShowTabChar,       wxT( "menuShowTabChar" ),       _( "Show Tab Char" ),        wxT( "Ctrl-Alt-T" ),   wxITEM_CHECK,     -1,                 0,                         _( "Show the sign of Tab char" ), 0},
+    { 0,              1, menuShowSpaceChar,     wxT( "menuShowSpaceChar" ),     _( "Show Space Char" ),      wxT( "Ctrl-Alt-S" ),   wxITEM_CHECK,     -1,                 0,                         _( "Show the sign of Space char" ), 0},
+    { 0,              1, menuShowAllChars,      wxT( "menuShowAllChar" ),       _( "Show All Chars" ),       wxT( "Ctrl-Alt-A" ),   wxITEM_CHECK,     showsymbol_xpm_idx, 0,                         _( "Show the sign of all characters" ), 0},
+    { 0,              1, menuMarkActiveLine,    wxT( "menuMarkActiveLine" ),    _( "Mark Active Line" ),     wxT( "" ),             wxITEM_CHECK,     -1,                 0,                         _( "Mark the current line" ), 0},
+    { 0,              1, menuMarkBracePair,     wxT( "menuMarkBracePair" ),     _( "Mark Brace Pair" ),      wxT( "" ),             wxITEM_CHECK,     -1,                 0,                         _( "Mark the BracePair under the caret" ), 0},
+    { 0,              1, menuSpellChecker,      wxT( "menuSpellChecker" ),      _( "Spell Checker" ),        wxT( "Ctrl-K" ),       wxITEM_CHECK,     spellchecker_xpm_idx,                 0,       _( "Spell checker" ), 0},
+    { 0,              1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0, 0},
+    { 0,              1, menuToolBars,          wxT( "menuToolBar" ),           _( "Toolbars" ),             0,                   wxITEM_NORMAL,    -1,                 &g_Menu_Toolbars,          0, 0},
+    { 0,              2, menuToolBarsToggleAll, wxT( "menuToolBarsToggleAll" ), _( "Toggle Main Toolbar" ),  0,                   wxITEM_CHECK,     -1,                 0,                         _( "Show/Hide Main Toolbar" ), 0},
+    { 0,              2, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0, 0},
+    { 0,              1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0, 0},
+    { ecTextMode,     1, menuTextMode,          wxT( "menuTextMode" ),          _( "&Text Mode" ),           wxT( "Alt-1" ),        wxITEM_CHECK,     textmode_xpm_idx,   0,                         _( "Change the editing mode to Text-Mode" ), 0},
+    { ecColumnMode,   1, menuColumnMode,        wxT( "menuColumnMode" ),        _( "&Column Mode" ),         wxT( "Alt-2" ),        wxITEM_CHECK,     columnmode_xpm_idx, 0,                         _( "Change the editing mode to Column-Mode" ), 0},
+    { ecHexMode,      1, menuHexMode,           wxT( "menuHexMode" ),           _( "&Hex Mode" ),            wxT( "Alt-3" ),        wxITEM_CHECK,     hexmode_xpm_idx,    0,                         _( "Change the editing mode to Hex-Mode" ), 0},
+    { 0,              1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0, 0},
+    { 0,              1, menuPreview,           wxT( "menuPreview" ),           _( "Preview as: " ),         0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Preview,      0, 0},
 
     // Macro
-    { 0, 0, 0, 0, _( "&Macro" ), 0, wxITEM_NORMAL, 0, &g_Menu_MadMacro, 0},
-    { 0,               1, menuRunTempMacro,       wxT( "menuRunTempMacro" ),       _( "Run TemporayMacro" ),                             wxT( "" ),       wxITEM_NORMAL,    runscript_xpm_idx, 0,                 _( "Run temporary macro" )},
-    { 0,               1, menuRunMacroFile,       wxT( "menuRunMacroFile" ),       _( "Load Saved MacroScript..." ),                     wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Load saved macro script" )},
-    { 0,               1, menuStartRecMacro,      wxT( "menuStartRecMacro" ),      _( "Start Recording" ),                               wxT( "" ),       wxITEM_NORMAL,    record_xpm_idx,  0,                   _( "Start Recording" )},
-    { 0,               1, menuStopRecMacro,       wxT( "menuStopRecMacro" ),       _( "Stop Recording" ),                                wxT( "" ),       wxITEM_NORMAL,    stop_xpm_idx,    0,                   _( "Stop Recording" )},
-    { 0,               1, menuPlayRecMacro,       wxT( "menuPlayRecMacro" ),       _( "Playback" ),                                      wxT( "" ),       wxITEM_NORMAL,    play_xpm_idx,    0,                   _( "Playback" )},
-    { 0,               1, menuSaveRecMacro,       wxT( "menuSaveRecMacro" ),       _( "Save Currently Recorded Macro..." ),              wxT( "" ),       wxITEM_NORMAL,    saverec_xpm_idx, 0,                   _( "Save Currently Recorded Macro" )},
-    { 0,               1, menuMadScriptList,      wxT( "menuMadScriptList" ),      _( "Local Script List" ),                             wxT( "" ),       wxITEM_NORMAL,    -1, &g_Menu_MadMacro_Scripts,    0},
-    { 0,               2, menuEditMacroFile,      wxT( "menuEditMacroFile" ),      _( "Edit Saved MacroScript..." ),                     wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Edit saved macro script" )},
-    { 0,               2, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0},
-    { 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0},
-    { 0,               1, menuMacroDebugMode,     wxT( "menuMacroDebugMode" ),     _( "Macro Debug Mode" ),                              wxT( "" ),       wxITEM_CHECK,     -1,              0,                   _( "Show Macro running output for debugging" )},
+    { 0, 0, 0, 0, _( "&Macro" ), 0, wxITEM_NORMAL, 0, &g_Menu_MadMacro, 0, 0},
+    { 0,               1, menuRunTempMacro,       wxT( "menuRunTempMacro" ),       _( "Run TemporayMacro" ),                             wxT( "" ),       wxITEM_NORMAL,    runscript_xpm_idx, 0,                 _( "Run temporary macro" ), 0},
+    { 0,               1, menuRunMacroFile,       wxT( "menuRunMacroFile" ),       _( "Load Saved MacroScript..." ),                     wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Load saved macro script" ), 0},
+    { 0,               1, menuStartRecMacro,      wxT( "menuStartRecMacro" ),      _( "Start Recording" ),                               wxT( "" ),       wxITEM_NORMAL,    record_xpm_idx,  0,                   _( "Start Recording" ), 0},
+    { 0,               1, menuStopRecMacro,       wxT( "menuStopRecMacro" ),       _( "Stop Recording" ),                                wxT( "" ),       wxITEM_NORMAL,    stop_xpm_idx,    0,                   _( "Stop Recording" ), 0},
+    { 0,               1, menuPlayRecMacro,       wxT( "menuPlayRecMacro" ),       _( "Playback" ),                                      wxT( "" ),       wxITEM_NORMAL,    play_xpm_idx,    0,                   _( "Playback" ), 0},
+    { 0,               1, menuSaveRecMacro,       wxT( "menuSaveRecMacro" ),       _( "Save Currently Recorded Macro..." ),              wxT( "" ),       wxITEM_NORMAL,    saverec_xpm_idx, 0,                   _( "Save Currently Recorded Macro" ), 0},
+    { 0,               1, menuMadScriptList,      wxT( "menuMadScriptList" ),      _( "Local Script List" ),                             wxT( "" ),       wxITEM_NORMAL,    -1, &g_Menu_MadMacro_Scripts,    0, 0},
+    { 0,               2, menuEditMacroFile,      wxT( "menuEditMacroFile" ),      _( "Edit Saved MacroScript..." ),                     wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Edit saved macro script" ), 0},
+    { 0,               2, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0, 0},
+    { 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0, 0},
+    { 0,               1, menuMacroDebugMode,     wxT( "menuMacroDebugMode" ),     _( "Macro Debug Mode" ),                              wxT( "" ),       wxITEM_CHECK,     -1,              0,                   _( "Show Macro running output for debugging" ), 0},
 
     // Tools
-    { 0, 0, 0, 0, _( "&Tools" ), 0, wxITEM_NORMAL, 0, &g_Menu_Tools, 0},
-    { 0,               1, menuOptions,            wxT( "menuOptions" ),            _( "&Options..." ),                                   wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Change the configuration" )},
-    { 0,               1, menuHighlighting,       wxT( "menuHighlighting" ),       _( "&Syntax Highlighting Settings..." ),              wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Change syntax highlighting settings" )},
+    { 0, 0, 0, 0, _( "&Tools" ), 0, wxITEM_NORMAL, 0, &g_Menu_Tools, 0, 0},
+    { 0,               1, menuOptions,            wxT( "menuOptions" ),            _( "&Options..." ),                                   wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Change the configuration" ), 0},
+    { 0,               1, menuHighlighting,       wxT( "menuHighlighting" ),       _( "&Syntax Highlighting Settings..." ),              wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Change syntax highlighting settings" ), 0},
 #ifdef __WXMSW__
-    { 0,               1, menuFileAssociation,    wxT( "menuFileAssociation" ),    _( "&File Type Associations..." ),                    wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Change file type associations" )},
+    { 0,               1, menuFileAssociation,    wxT( "menuFileAssociation" ),    _( "&File Type Associations..." ),                    wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Change file type associations" ), 0},
 #endif
-    { 0,               1, menuPurgeHistories,     wxT( "menuPurgeHistories" ),     _( "&Purge Histories..." ),                           wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Clearing out your history" )},
-    { 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0},
-    { 0,               1, menuByteOrderMark,      wxT( "menuByteOrderMark" ),      _( "Has Unicode BOM (Byte-Order Mark)" ),             0,             wxITEM_NORMAL,    -1, &g_Menu_Tools_BOM,                0},
-    { 0,               2, menuToggleBOM,          wxT( "menuToggleBOM" ),          _( "Add/Remove BOM" ),                                wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Add/Remove Unicode BOM" )},
-    { 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0},
-    { 0,               1, menuNewLineChar,        wxT( "menuNewLineChar" ),        _( "NewLine Char (File Format): " ),                  0,             wxITEM_NORMAL,    -1, &g_Menu_Tools_NewLineChar,        0},
-    { 0,               2, menuConvertToDOS,       wxT( "menuConvertToDOS" ),       _( "Convert To CRLF/0D0A (&DOS)" ),                   wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Convert the file format to DOS format" )},
-    { 0,               2, menuConvertToMAC,       wxT( "menuConvertToMAC" ),       _( "Convert To CR/0D (Old &MAC)" ),                   wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Convert the file format to MAC format" )},
-    { 0,               2, menuConvertToUNIX,      wxT( "menuConvertToUNIX" ),      _( "Convert To LF/0A (&UNIX/OSX)" ),                  wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Convert the file format to UNIX format" )},
-    { 0,               1, menuInsertNewLineChar,  wxT( "menuInsertNewLineChar" ),  _( "Press Enter to Insert NewLine Char: " ),          0,             wxITEM_NORMAL,    -1, &g_Menu_Tools_InsertNewLineChar,  0},
-    { 0,               2, menuInsertDOS,          wxT( "menuInsertDOS" ),          _( "Insert CRLF/0D0A (&DOS)" ),                       wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Insert CR&LF chars when pressing Enter key" )},
-    { 0,               2, menuInsertMAC,          wxT( "menuInsertMAC" ),          _( "Insert CR/0D (Old &MAC)" ),                       wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Insert CR char when pressing Enter key" )},
-    { 0,               2, menuInsertUNIX,         wxT( "menuInsertUNIX" ),         _( "Insert LF/0A (&UNIX/OSX)" ),                      wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Insert LF char when pressing Enter key" )},
-    { 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0},
-    { 0,               1, menuConvertEncoding,    wxT( "menuConvertEncoding" ),    _( "Convert File &Encoding..." ),                     0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert to the specified encoding" )},
-    { 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0},
-    { 0,               1, menuConvertChineseChar,     wxT( "menuConvertChineseChar" ),     _( "Convert &Chinese Char" ),                                 0,             wxITEM_NORMAL,    -1, &g_Menu_Tools_ConvertChineseChar, 0},
-    { 0,               2, menuSimp2TradChinese,       wxT( "menuSimp2TradChinese" ),       _( "File: Simplified Chinese to &Traditional Chinese" ),      0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert simplified Chinese chars to traditional Chinese chars in the file" )},
-    { 0,               2, menuTrad2SimpChinese,       wxT( "menuTrad2SimpChinese" ),       _( "File: Traditional Chinese to &Simplified Chinese" ),      0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert traditional Chinese chars to simplified Chinese chars in the file" )},
-    { 0,               2, menuKanji2TradChinese,      wxT( "menuKanji2TradChinese" ),      _( "File: Japanese Kanji to Tr&aditional Chinese" ),          0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert Japanese Kanji to traditional Chinese chars in the file" )},
-    { 0,               2, menuKanji2SimpChinese,      wxT( "menuKanji2SimpChinese" ),      _( "File: Japanese Kanji to Si&mplified Chinese" ),           0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert Japanese Kanji to simplified Chinese chars in the file" )},
-    { 0,               2, menuChinese2Kanji,          wxT( "menuChinese2Kanji" ),          _( "File: Chinese to &Japanese Kanji" ),                      0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert Chinese chars to Japanese Kanji in the file" )},
-    { 0,               2, 0,                          0,                                 0,                                                          0,             wxITEM_SEPARATOR, -1, 0,                                0},
-    { 0,               2, menuSimp2TradClipboard,     wxT( "menuSimp2TradClipboard" ),     _( "Clipboard: Simplified Chinese to T&raditional Chinese" ), 0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert simplified Chinese chars to traditional Chinese chars in the clipboard" )},
-    { 0,               2, menuTrad2SimpClipboard,     wxT( "menuTrad2SimpClipboard" ),     _( "Clipboard: Traditional Chinese to S&implified Chinese" ), 0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert traditional Chinese chars to simplified Chinese chars in the clipboard" )},
-    { 0,               2, menuKanji2TradClipboard,    wxT( "menuKanji2TradClipboard" ),    _( "Clipboard: Japanese Kanji to Tra&ditional Chinese" ),     0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert Japanese Kanji to traditional Chinese chars in the clipboard" )},
-    { 0,               2, menuKanji2SimpClipboard,    wxT( "menuKanji2SimpClipboard" ),    _( "Clipboard: Japanese Kanji to Sim&plified Chinese" ),      0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert Japanese Kanji to simplified Chinese chars in the clipboard" )},
-    { 0,               2, menuChinese2KanjiClipboard, wxT( "menuChinese2KanjiClipboard" ), _( "Clipboard: Chinese to Japanese &Kanji" ),                 0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert Chinese chars to Japanese Kanji in the clipboard" )},
-    { 0,               1, 0,                          0,                                 0,                                                          0,             wxITEM_SEPARATOR, -1, 0,                                0},
-    { 0,               1, menuTextConvFormatter,      wxT( "menuTextConvFormatter" ),      _( "Text Converter/Formatter" ),                              0,             wxITEM_NORMAL,    -1, &g_Menu_Tools_TextConvFormatter, 0},
-    { 0,               2, menuMarkdown2Html,          wxT( "menuMarkdown2Html" ),          _( "&Markdown to HTML" ),                                     0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert Markdown to HTML" )},
-    { 0,               2, menuHtml2PlainText,         wxT( "menuHtml2PlainText" ),         _( "&HTML to Plain Text" ),                                   0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert HTML to Plain Text" )},
-    { 0,               2, 0,                          0,                                 0,                                                          0,             wxITEM_SEPARATOR, -1, 0,                                0},
-    { 0,               2, menuAstyleFormat,           wxT( "menuAstyleFormat" ),           _( "&Astyle(C++/C#/Java/ObjC)" ),             wxT( "Ctrl-Shift-K" ),           wxITEM_NORMAL,    -1, 0,                                _( "Format selection or whole file(C++/C#/Java)" )},
-    { 0,               2, menuXMLFormat,              wxT( "menuXMLFormat" ),              _( "&XML Formatter" ),                                        0,             wxITEM_NORMAL,    -1, 0,                                _( "Format XML(whole file)" )},
-    { 0,               1, 0,                          0,                                 0,                                                          0,             wxITEM_SEPARATOR, -1, 0,                                0},
-    { 0,               1, menuWordCount,              wxT( "menuWordCount" ),              _( "&Word Count..." ),                                        0,             wxITEM_NORMAL,    -1, 0,                                _( "Count the words and chars of the file or selection" )},
+    { 0,               1, menuPurgeHistories,     wxT( "menuPurgeHistories" ),     _( "&Purge Histories..." ),                           wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Clearing out your history" ), 0},
+    { 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0, 0},
+    { 0,               1, menuByteOrderMark,      wxT( "menuByteOrderMark" ),      _( "Has Unicode BOM (Byte-Order Mark)" ),             0,             wxITEM_NORMAL,    -1, &g_Menu_Tools_BOM,                0, 0},
+    { 0,               2, menuToggleBOM,          wxT( "menuToggleBOM" ),          _( "Add/Remove BOM" ),                                wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Add/Remove Unicode BOM" ), 0},
+    { 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0, 0},
+    { 0,               1, menuNewLineChar,        wxT( "menuNewLineChar" ),        _( "NewLine Char (File Format): " ),                  0,             wxITEM_NORMAL,    -1, &g_Menu_Tools_NewLineChar,        0, 0},
+    { 0,               2, menuConvertToDOS,       wxT( "menuConvertToDOS" ),       _( "Convert To CRLF/0D0A (&DOS)" ),                   wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Convert the file format to DOS format" ), 0},
+    { 0,               2, menuConvertToMAC,       wxT( "menuConvertToMAC" ),       _( "Convert To CR/0D (Old &MAC)" ),                   wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Convert the file format to MAC format" ), 0},
+    { 0,               2, menuConvertToUNIX,      wxT( "menuConvertToUNIX" ),      _( "Convert To LF/0A (&UNIX/OSX)" ),                  wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Convert the file format to UNIX format" ), 0},
+    { 0,               1, menuInsertNewLineChar,  wxT( "menuInsertNewLineChar" ),  _( "Press Enter to Insert NewLine Char: " ),          0,             wxITEM_NORMAL,    -1, &g_Menu_Tools_InsertNewLineChar,  0, 0},
+    { 0,               2, menuInsertDOS,          wxT( "menuInsertDOS" ),          _( "Insert CRLF/0D0A (&DOS)" ),                       wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Insert CR&LF chars when pressing Enter key" ), 0},
+    { 0,               2, menuInsertMAC,          wxT( "menuInsertMAC" ),          _( "Insert CR/0D (Old &MAC)" ),                       wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Insert CR char when pressing Enter key" ), 0},
+    { 0,               2, menuInsertUNIX,         wxT( "menuInsertUNIX" ),         _( "Insert LF/0A (&UNIX/OSX)" ),                      wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Insert LF char when pressing Enter key" ), 0},
+    { 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0, 0},
+    { 0,               1, menuConvertEncoding,    wxT( "menuConvertEncoding" ),    _( "Convert File &Encoding..." ),                     0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert to the specified encoding" ), 0},
+    { 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0, 0},
+    { 0,               1, menuConvertChineseChar,     wxT( "menuConvertChineseChar" ),     _( "Convert &Chinese Char" ),                                 0,             wxITEM_NORMAL,    -1, &g_Menu_Tools_ConvertChineseChar, 0, 0},
+    { 0,               2, menuSimp2TradChinese,       wxT( "menuSimp2TradChinese" ),       _( "File: Simplified Chinese to &Traditional Chinese" ),      0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert simplified Chinese chars to traditional Chinese chars in the file" ), 0},
+    { 0,               2, menuTrad2SimpChinese,       wxT( "menuTrad2SimpChinese" ),       _( "File: Traditional Chinese to &Simplified Chinese" ),      0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert traditional Chinese chars to simplified Chinese chars in the file" ), 0},
+    { 0,               2, menuKanji2TradChinese,      wxT( "menuKanji2TradChinese" ),      _( "File: Japanese Kanji to Tr&aditional Chinese" ),          0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert Japanese Kanji to traditional Chinese chars in the file" ), 0},
+    { 0,               2, menuKanji2SimpChinese,      wxT( "menuKanji2SimpChinese" ),      _( "File: Japanese Kanji to Si&mplified Chinese" ),           0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert Japanese Kanji to simplified Chinese chars in the file" ), 0},
+    { 0,               2, menuChinese2Kanji,          wxT( "menuChinese2Kanji" ),          _( "File: Chinese to &Japanese Kanji" ),                      0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert Chinese chars to Japanese Kanji in the file" ), 0},
+    { 0,               2, 0,                          0,                                 0,                                                          0,             wxITEM_SEPARATOR, -1, 0,                                0, 0},
+    { 0,               2, menuSimp2TradClipboard,     wxT( "menuSimp2TradClipboard" ),     _( "Clipboard: Simplified Chinese to T&raditional Chinese" ), 0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert simplified Chinese chars to traditional Chinese chars in the clipboard" ), 0},
+    { 0,               2, menuTrad2SimpClipboard,     wxT( "menuTrad2SimpClipboard" ),     _( "Clipboard: Traditional Chinese to S&implified Chinese" ), 0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert traditional Chinese chars to simplified Chinese chars in the clipboard" ), 0},
+    { 0,               2, menuKanji2TradClipboard,    wxT( "menuKanji2TradClipboard" ),    _( "Clipboard: Japanese Kanji to Tra&ditional Chinese" ),     0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert Japanese Kanji to traditional Chinese chars in the clipboard" ), 0},
+    { 0,               2, menuKanji2SimpClipboard,    wxT( "menuKanji2SimpClipboard" ),    _( "Clipboard: Japanese Kanji to Sim&plified Chinese" ),      0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert Japanese Kanji to simplified Chinese chars in the clipboard" ), 0},
+    { 0,               2, menuChinese2KanjiClipboard, wxT( "menuChinese2KanjiClipboard" ), _( "Clipboard: Chinese to Japanese &Kanji" ),                 0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert Chinese chars to Japanese Kanji in the clipboard" ), 0},
+    { 0,               1, 0,                          0,                                 0,                                                          0,             wxITEM_SEPARATOR, -1, 0,                                0, 0},
+    { 0,               1, menuTextConvFormatter,      wxT( "menuTextConvFormatter" ),      _( "Text Converter/Formatter" ),                              0,             wxITEM_NORMAL,    -1, &g_Menu_Tools_TextConvFormatter, 0, 0},
+    { 0,               2, menuMarkdown2Html,          wxT( "menuMarkdown2Html" ),          _( "&Markdown to HTML" ),                                     0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert Markdown to HTML" ), 0},
+    { 0,               2, menuHtml2PlainText,         wxT( "menuHtml2PlainText" ),         _( "&HTML to Plain Text" ),                                   0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert HTML to Plain Text" ), 0},
+    { 0,               2, 0,                          0,                                 0,                                                          0,             wxITEM_SEPARATOR, -1, 0,                                0, 0},
+    { 0,               2, menuAstyleFormat,           wxT( "menuAstyleFormat" ),           _( "&Astyle(C++/C#/Java/ObjC)" ),             wxT( "Ctrl-Shift-K" ),           wxITEM_NORMAL,    -1, 0,                                _( "Format selection or whole file(C++/C#/Java)" ), 0},
+    { 0,               2, menuXMLFormat,              wxT( "menuXMLFormat" ),              _( "&XML Formatter" ),                                        0,             wxITEM_NORMAL,    -1, 0,                                _( "Format XML(whole file)" ), 0},
+    { 0,               1, 0,                          0,                                 0,                                                          0,             wxITEM_SEPARATOR, -1, 0,                                0, 0},
+    { 0,               1, menuWordCount,              wxT( "menuWordCount" ),              _( "&Word Count..." ),                                        0,             wxITEM_NORMAL,    -1, 0,                                _( "Count the words and chars of the file or selection" ), 0},
 
     // Window
-    { 0, 0, 0, 0, _( "&Window" ), 0, wxITEM_NORMAL, 0, &g_Menu_Window, 0},
-    { ecToggleWindow, 1, menuToggleWindow,   wxT( "menuToggleWindow" ),   _( "&Toggle Window" ),   wxT( "Ctrl-TAB" ), wxITEM_NORMAL, -1, 0, _( "Switch to the previous active window" )},
-    { 0,              1, menuPreviousWindow, wxT( "menuPreviousWindow" ), _( "&Previous Window" ), wxT( "F5" ),       wxITEM_NORMAL, -1, 0, _( "Activate the previous window" )},
-    { 0,              1, menuNextWindow,     wxT( "menuNextWindow" ),     _( "&Next Window" ),     wxT( "F6" ),       wxITEM_NORMAL, -1, 0, _( "Activate the next window" )},
+    { 0, 0, 0, 0, _( "&Window" ), 0, wxITEM_NORMAL, 0, &g_Menu_Window, 0, 0},
+    { ecToggleWindow, 1, menuToggleWindow,   wxT( "menuToggleWindow" ),   _( "&Toggle Window" ),   wxT( "Ctrl-TAB" ), wxITEM_NORMAL, -1, 0, _( "Switch to the previous active window" ), 0},
+    { 0,              1, menuPreviousWindow, wxT( "menuPreviousWindow" ), _( "&Previous Window" ), wxT( "F5" ),       wxITEM_NORMAL, -1, 0, _( "Activate the previous window" ), 0},
+    { 0,              1, menuNextWindow,     wxT( "menuNextWindow" ),     _( "&Next Window" ),     wxT( "F6" ),       wxITEM_NORMAL, -1, 0, _( "Activate the next window" ), 0},
 
     // Help
-    { 0, 0, 0, 0, _( "&Help" ), 0, wxITEM_NORMAL, 0, &g_Menu_Help, 0},
-    { 0, 1, menuAbout, wxT( "menuAbout" ), _( "&About MadEdit-Mod..." ), wxT( "" ),       wxITEM_NORMAL, Mad_16x15_xpm_idx, 0, wxT( "" )},
+    { 0, 0, 0, 0, _( "&Help" ), 0, wxITEM_NORMAL, 0, &g_Menu_Help, 0, 0},
+    { 0, 1, menuAbout, wxT( "menuAbout" ), _( "&About MadEdit-Mod..." ), wxT( "" ),       wxITEM_NORMAL, Mad_16x15_xpm_idx, 0, wxT( "" ), 0},
     // end menu
 
     // begin editor
-    { ecLeft,      -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Move caret left one char" )},
-    { ecRight,     -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Move caret right one char" )},
-    { ecUp,        -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Move caret up one line" )},
-    { ecDown,      -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Move caret down one line" )},
-    { ecBeginLine, -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to begin of line" )},
-    { ecEndLine,   -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to end of line" )},
-    { ecBeginDoc,  -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to begin of document" )},
-    { ecEndDoc,    -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to end of document" )},
-    { ecPrevPage,  -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to previous page" )},
-    { ecNextPage,  -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to next page" )},
-    { ecPrevWord,  -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to previous word" )},
-    { ecNextWord,  -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to next word" )},
+    { ecLeft,      -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Move caret left one char" ), 0},
+    { ecRight,     -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Move caret right one char" ), 0},
+    { ecUp,        -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Move caret up one line" ), 0},
+    { ecDown,      -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Move caret down one line" ), 0},
+    { ecBeginLine, -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to begin of line" ), 0},
+    { ecEndLine,   -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to end of line" ), 0},
+    { ecBeginDoc,  -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to begin of document" ), 0},
+    { ecEndDoc,    -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to end of document" ), 0},
+    { ecPrevPage,  -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to previous page" ), 0},
+    { ecNextPage,  -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to next page" ), 0},
+    { ecPrevWord,  -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to previous word" ), 0},
+    { ecNextWord,  -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to next word" ), 0},
 
-    { ecSelLeft,       -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Move caret left one char and select" )},
-    { ecSelRight,      -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Move caret right one char and select" )},
-    { ecSelUp,         -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Move caret up one line and select" )},
-    { ecSelDown,       -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Move caret down one line and select" )},
-    { ecSelBeginLine,  -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to begin of line and select" )},
-    { ecSelEndLine,    -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to end of line and select" )},
-    { ecSelBeginDoc,   -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to begin of document and select" )},
-    { ecSelEndDoc,     -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to end of document and select" )},
-    { ecSelPrevPage,   -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to previous page and select" )},
-    { ecSelNextPage,   -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to next page and select" )},
-    { ecSelPrevWord,   -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to previous word and select" )},
-    { ecSelNextWord,   -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to next word and select" )},
-    { ecSelLeftBrace,  -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to left brace and select" )},
-    { ecSelRightBrace, -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to right brace and select" )},
+    { ecSelLeft,       -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Move caret left one char and select" ), 0},
+    { ecSelRight,      -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Move caret right one char and select" ), 0},
+    { ecSelUp,         -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Move caret up one line and select" ), 0},
+    { ecSelDown,       -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Move caret down one line and select" ), 0},
+    { ecSelBeginLine,  -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to begin of line and select" ), 0},
+    { ecSelEndLine,    -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to end of line and select" ), 0},
+    { ecSelBeginDoc,   -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to begin of document and select" ), 0},
+    { ecSelEndDoc,     -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to end of document and select" ), 0},
+    { ecSelPrevPage,   -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to previous page and select" ), 0},
+    { ecSelNextPage,   -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to next page and select" ), 0},
+    { ecSelPrevWord,   -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to previous word and select" ), 0},
+    { ecSelNextWord,   -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to next word and select" ), 0},
+    { ecSelLeftBrace,  -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to left brace and select" ), 0},
+    { ecSelRightBrace, -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Go to right brace and select" ), 0},
 
-    { ecScrollLineUp,   -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Scroll text up one line" )},
-    { ecScrollLineDown, -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Scroll text down one line" )},
-    { ecScrollPageUp,   -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Scroll text up one page" )},
-    { ecScrollPageDown, -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Scroll text down one page" )},
-    { ecScrollLeft,     -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Scroll text left" )},
-    { ecScrollRight,    -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Scroll text right" )},
+    { ecScrollLineUp,   -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Scroll text up one line" ), 0},
+    { ecScrollLineDown, -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Scroll text down one line" ), 0},
+    { ecScrollPageUp,   -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Scroll text up one page" ), 0},
+    { ecScrollPageDown, -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Scroll text down one page" ), 0},
+    { ecScrollLeft,     -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Scroll text left" ), 0},
+    { ecScrollRight,    -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Scroll text right" ), 0},
 
-    { ecReturn,         -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Insert one NewLine char" )},
-    { ecReturnNoIndent, -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Insert one NewLine char without indentation" )},
-    { ecTab,            -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Insert one Tab char or indent lines" )},
-    { ecBackSpace,      -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Delete one char to the left of the caret" )},
+    { ecReturn,         -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Insert one NewLine char" ), 0},
+    { ecReturnNoIndent, -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Insert one NewLine char without indentation" ), 0},
+    { ecTab,            -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Insert one Tab char or indent lines" ), 0},
+    { ecBackSpace,      -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Delete one char to the left of the caret" ), 0},
 
     // add: gogo, 30.08.2009
-    { ecDelPrevWord,    -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Delete a word left from the caret" )},
-    { ecDelNextWord,    -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Delete a word right from the caret" )},
+    { ecDelPrevWord,    -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Delete a word left from the caret" ), 0},
+    { ecDelNextWord,    -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Delete a word right from the caret" ), 0},
 
-    { ecToggleInsertMode, -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Toggle Insert/Overwrite Mode" )},
+    { ecToggleInsertMode, -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, _( "Toggle Insert/Overwrite Mode" ), 0},
 
     // end editor
-    { -1, -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, 0},
+    { -1, -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, 0, 0},
 };
 
 // restore the definition of _(s)
@@ -2283,85 +2280,10 @@ void MadEditFrame::CreateGUIControls( void )
     // add menuitems
     g_Menu_File = new wxMenu( ( long )0 );
     g_Menu_FilePop = new wxMenu( ( long )0 );
-    g_Menu_FilePop->Append( menuSave,         _( "&Save File" ) );
-    g_Menu_FilePop->Append( menuSaveAs,       _( "Save &As..." ) );
-    g_Menu_FilePop->Append( menuReload,       _( "&Reload File" ) );
-    g_Menu_FilePop->AppendSeparator();
-    g_Menu_FilePop->Append( menuClose,        _( "&Close File" ) );
-    g_Menu_FilePop->Append( menuCloseAll,     _( "C&lose All" ) );
-    g_Menu_FilePop->Append( menuCloseAllButThis,    _( "Close All BUT This" ) );
-    g_Menu_FilePop->Append( menuCloseAllToTheLeft,  _( "Close All To The Left" ) );
-    g_Menu_FilePop->Append( menuCloseAllToTheRight, _( "Close All To The Right" ) );
-    g_Menu_FilePop->AppendSeparator();
-    g_Menu_FilePop->Append( menuPrintPreview, _( "Print Previe&w..." ) );
-    g_Menu_FilePop->Append( menuPrint,        _( "&Print..." ) );
-    g_Menu_FilePop->AppendSeparator();
-    g_Menu_FilePop->Append( menuCopyFilePath,       _( "Copy full path name" ) );
-    g_Menu_FilePop->Append( menuCopyFileName,       _( "Copy full file name" ) );
-    g_Menu_FilePop->Append( menuCopyFileDir,        _( "Copy directory name" ) );
     g_Menu_Edit = new wxMenu( ( long )0 );
     g_Menu_EditPop = new wxMenu( ( long )0 );
-    g_Menu_EditPop->Append( menuUndo, _( "&Undo" ) );
-    g_Menu_EditPop->Append( menuRedo, _( "&Redo" ) );
-    g_Menu_EditPop->Append( menuCut, _( "Cu&t" ) );
-    g_Menu_EditPop->Append( menuCopy, _( "&Copy" ) );
-    g_Menu_EditPop->Append( menuPaste, _( "&Paste" ) );
-    g_Menu_EditPop->Append( menuDelete, _( "&Delete" ) );
-    g_Menu_EditPop->AppendSeparator();
-    g_Menu_EditPop->Append( menuCutLine, _( "Cut L&ine" ) );
-    g_Menu_EditPop->Append( menuDeleteLine, _( "Delete &Line" ) );
-    g_Menu_EditPop->Append( menuDeleteEmptyLines, _( "Delete Empty Lines" ) );
-    g_Menu_EditPop->Append( menuDeleteEmptyLinesWithSpaces, _( "Delete Empty Lines with Spaces" ) );
-    g_Menu_EditPop->Append( menuJoinLines, _( "Join Lines" ) );
-    g_Menu_EditPop->AppendSeparator();
-    g_Menu_EditPop->Append( menuSelectAll, _( "Select &All" ) );
-    g_Menu_EditPop->AppendSeparator();
-    g_Menu_EditPop->Append( menuInsertTabChar, _( "Insert Ta&b Char" ) );
-    g_Menu_EditPop->Append( menuInsertDateTime, _( "Insert Dat&e and Time" ) );
-    g_Menu_EditPop->AppendSeparator();
     g_Menu_EditSubAdv = new wxMenu( ( long )0 );
-    g_Menu_EditSubAdv->Append( menuCopyAsHexString, _( "Copy As &Hex String" ) );
-    g_Menu_EditSubAdv->Append( menuCopyAsHexStringWithSpace, _( "Copy As He&x String with Space" ) );
-    g_Menu_EditSubAdv->Append( menuCopyRevertHex, _( "Copy Value &Reverted from Hex String" ) );
-    g_Menu_EditSubAdv->AppendSeparator();
-    g_Menu_EditSubAdv->Append( menuIncreaseIndent, _( "&Increase Indent" ) );
-    g_Menu_EditSubAdv->Append( menuDecreaseIndent, _( "&Decrease Indent" ) );
-    g_Menu_EditSubAdv->AppendSeparator();
-    g_Menu_EditSubAdv->Append( menuComment, _( "&Comment" ) );
-    g_Menu_EditSubAdv->Append( menuUncomment, _( "&Uncomment" ) );
-    g_Menu_EditSubAdv->AppendSeparator();
-    g_Menu_EditSubAdv->Append( menuWordWrapToNewLine, _( "WordWraps To NewLine Chars" ) );
-    g_Menu_EditSubAdv->Append( menuNewLineToWordWrap, _( "NewLine Chars To WordWraps" ) );
-    g_Menu_EditSubAdv->AppendSeparator();
-    g_Menu_EditSubAdv->Append( menuToUpperCase, _( "To U&PPERCASE" ) );
-    g_Menu_EditSubAdv->Append( menuToLowerCase, _( "To l&owerCase" ) );
-    g_Menu_EditSubAdv->Append( menuInvertCase, _( "Inver&t Case" ) );
-    g_Menu_EditSubAdv->Append( menuCapitalize, _( "Capitalize" ) );
-    g_Menu_EditSubAdv->AppendSeparator();
-    g_Menu_EditSubAdv->Append( menuToHalfWidth, _( "To H&alfwidth" ) );
-    g_Menu_EditSubAdv->Append( menuToHalfWidthByOptions, _( "To Halfwidth by Options..." ) );
-    g_Menu_EditSubAdv->Append( menuToFullWidth, _( "To &Fullwidth" ) );
-    g_Menu_EditSubAdv->Append( menuToFullWidthByOptions, _( "To Fullwidth by Options..." ) );
-    g_Menu_EditSubAdv->AppendSeparator();
-    g_Menu_EditSubAdv->Append( menuTabToSpace, _( "Tab Chars To Space Chars" ) );
-    g_Menu_EditSubAdv->Append( menuSpaceToTab, _( "Space Chars To Tab Chars" ) );
-    g_Menu_EditSubAdv->AppendSeparator();
-    g_Menu_EditSubAdv->Append( menuTrimTrailingSpaces, _( "Tri&m Trailing Spaces" ) );
-    g_Menu_EditSubAdv->Append( menuTrimLeadingSpaces, _( "Tri&m Leading Spaces" ) );
-    g_Menu_EditSubAdv->Append( menuInsertNumbers, _( "Insert Incremental Numbers..." ) );
-    g_Menu_EditSubAdv->Append( menuColumnAlignLeft, _( "Column Align Left" ) );
-    g_Menu_EditSubAdv->Append( menuColumnAlignRight, _( "Column Align Right" ) );
-    g_Menu_EditPop->AppendSubMenu( g_Menu_EditSubAdv, _( "Ad&vanced" ) );
     g_Menu_EditSubSort = new wxMenu( ( long )0 );
-    g_Menu_EditSubSort->Append( menuSortAscending, _( "Sort Lines (&Ascending)" ) );
-    g_Menu_EditSubSort->Append( menuSortDescending, _( "Sort Lines (&Descending)" ) );
-    g_Menu_EditSubSort->AppendSeparator();
-    g_Menu_EditSubSort->Append( menuSortAscendingCase, _( "Sort Lines (A&scending, CaseSensitive)" ) );
-    g_Menu_EditSubSort->Append( menuSortDescendingCase, _( "Sort Lines (D&escending, CaseSensitive)" ) );
-    g_Menu_EditSubSort->AppendSeparator();
-    g_Menu_EditSubSort->Append( menuSortByOptions, _( "Sort Lines by &Current Options" ) );
-    g_Menu_EditSubSort->Append( menuSortOptions, _( "Sort &Options..." ) );
-    g_Menu_EditPop->AppendSubMenu( g_Menu_EditSubSort, _( "&Sort" ) );
     g_Menu_Search = new wxMenu( ( long )0 );
     g_Menu_View = new wxMenu( ( long )0 );
     g_Menu_Tools = new wxMenu( ( long )0 );
@@ -2396,6 +2318,8 @@ void MadEditFrame::CreateGUIControls( void )
     g_Menu_View_Font6 = new wxMenu( ( long )0 );
     list<wxMenu*> menu_stack;
     CommandData *cd = &CommandTable[0];
+#define OUTPUT_MENU 0
+#if OUTPUT_MENU
 #if defined(_DEBUG) && defined(__WXMSW__) //Output all accel key to text file
     wxTextFile KeyTable( g_MadEditAppDir + wxT( "key_table.csv" ) );
     KeyTable.Create();
@@ -2445,12 +2369,12 @@ void MadEditFrame::CreateGUIControls( void )
 #endif
         KeyTable.Close();
     }
-
+#endif
 #endif
 #ifdef __WXMSW__
     bool bHasMenuIcon = ( wxGetOsVersion() != wxOS_WINDOWS_9X ); // fixed win98 will crash if menuitem has icon
 #endif
-#define OUTPUT_MENU 0
+
 #if OUTPUT_MENU //Output all accel key to text file
     wxTextFile MenuTable( g_MadEditHomeDir + wxT( "MenuTable.txt" ) );
     MenuTable.Create();
@@ -2482,6 +2406,7 @@ void MadEditFrame::CreateGUIControls( void )
             continue;
         }
         else
+        {
             if( cd->menu_level < int( menu_stack.size() ) )
             {
                 do
@@ -2490,16 +2415,21 @@ void MadEditFrame::CreateGUIControls( void )
                 }
                 while( cd->menu_level < int( menu_stack.size() ) );
             }
-
+        }
         if( cd->menu_ptr != 0 )
         {
             menu_stack.back()->Append( cd->menu_id, wxGetTranslation( cd->text ), *cd->menu_ptr );
             menu_stack.push_back( *cd->menu_ptr );
         }
         else
+        {
             if( cd->kind == wxITEM_SEPARATOR )
             {
                 menu_stack.back()->AppendSeparator();
+                if(cd->popmenu_ptr)
+                {
+                    (*(cd->popmenu_ptr))->AppendSeparator();
+                }
             }
             else
             {
@@ -2536,14 +2466,27 @@ void MadEditFrame::CreateGUIControls( void )
                     }
 
                 menu_stack.back()->Append( mit );
+                if(cd->popmenu_ptr)
+                {
+                    mit = new wxMenuItem( menu_stack.back(), cd->menu_id, memLabel, wxGetTranslation( cd->hint ), cd->kind );
+                    if( cd->image_idx >= 0 && cd->kind == wxITEM_NORMAL )
+                    {
+                        mit->SetBitmap( m_ImageList->GetBitmap( cd->image_idx ) );
+                    }
+                    
+                    (*(cd->popmenu_ptr))->Append( mit );
+                }
             }
-
+        }
         ++cd;
     }
     while( cd->menu_level >= 0 );
+    g_Menu_EditSubSort->AppendSeparator();
+    g_Menu_EditPop->AppendSubMenu( g_Menu_EditSubAdv, _( "Ad&vanced" ) );
+    g_Menu_EditSubSort->AppendSeparator();
+    g_Menu_EditPop->AppendSubMenu( g_Menu_EditSubSort, _( "&Sort" ) );
 
 #if OUTPUT_MENU //Output all accel key to text file
-
     if( MenuTable.IsOpened() )
     {
 #ifdef __WXMAC__
