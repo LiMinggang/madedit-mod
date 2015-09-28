@@ -261,7 +261,8 @@ void ConvertTabToSpace()
 void CopyAsHexString(bool withSpace)
 void CopyRevertHex(const std::string &delimiters)
 mad_py::tuple WordCount(bool selection)
-void ColumnAlign()
+void ColumnAlignLeft()
+void ColumnAlignRight()
 void InsertIncrementalNumber(int initial, int step, int total, int stepType, int fmt, int align, bool zeroPad, std::string &prefix, std::string & postfix)
 
 
@@ -343,7 +344,6 @@ InvertCase
 ToHalfWidth
 ToFullWidth
 InsertDateTime
-MouseNotify
 
 Note: Some of the command is meanless with scriptin, such like MouseNotify. And some of them
 have meanfull clone like ToUpperCase, Paste, etc

@@ -89,6 +89,10 @@ Syntax files, Locale files and Settings:
   * Use MadEdit-Mod with other applications like CPPCheck, Visual Studio, try
     'madedit %f*lineNum'
 
+Known issues:
+The Macro recording function will save all your commands to one document which
+means it will not record the "switching" between documents.
+
 Feature/issues to be released
 -----------------------------
 
@@ -98,20 +102,30 @@ Todo:
 FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.3.7
-New: Prefix, postfix and preview of numbering(enhanced)
-New: Search All in All Opened documents
-New: Replace All in All Opened documents
-New: Indicate "Empty expression" on status bar if user did not fill the search box and hit Search
-Fix: Assertion failure MadEditFrame.cpp:3403
-Fix: Rollback changes in Search/Replace(since 0.3.5)
-Fix: Assertion failure at MadEditFrame.cpp:5692 under x86_x64 linux
-Fix: Fix dictionary download link of OpenOffice on About Dialog
-Fix: Link warning of VS project
-Fix: Show search results by default
-Fix: Set default page of Option dialog to "General"
-Fix: Move encoding update and config update from MainFrame to search/replace dialog
-Fix: Reverse order toolbars under linux
-Fix: Remove extra overflow icon from Toolbars
+1.New: Column Align Right(Selected text would be aligned according to right)
+2.New: Prefix, postfix and preview of numbering(enhanced numbering)
+3.New: Search All in All Opened documents
+4.New: Replace All in All Opened documents
+5.New: Indicate "Empty expression" on status bar if user did not fill the search box and hit Search
+6.New: TrimLeadingSpaces----remove leading space and tab chars of lines
+7.New: Selection support in TrimTrailingSpaces, TrimLeadingSpaces, DeleteEmptyLines, DeleteEmptyLinesWithSpaces and JoinLines
+8.New: Selected text copying to search text while searching with regex
+9.New: Tool button for Numbering(Insert incremental numbers)
+10.New: Update preview while editing initial number in Numbering dialog
+
+11.Fix: Assertion failure MadEditFrame.cpp:3403
+12.Fix: Rollback changes in Search/Replace(since 0.3.5)
+13.Fix: Assertion failure at MadEditFrame.cpp:5692 under x86_x64 linux
+14.Fix: Fix dictionary download link of OpenOffice on About Dialog
+15.Fix: Link warning of VS project
+16.Fix: Show search results by default
+17.Fix: Set default page of Option dialog to "General"
+18.Fix: Move encoding update and config update from MainFrame to search/replace dialog
+19.Fix: Reverse order toolbars under linux
+20.Fix: Remove extra overflow icon from Toolbars
+21.Fix: Crash in ColumnAlign while reverse selection
+22.Fix: Column align will has issue if you select beyond the EOF
+23.Fix: File name was not marked as "modified*" in ColumnAlign
 
 Mod v0.3.6
 1.New: Create scripts directory if not exists while saving recorded script

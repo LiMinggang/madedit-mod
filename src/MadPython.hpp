@@ -1191,6 +1191,11 @@ namespace mad_python
             g_ActiveMadEdit->TrimTrailingSpaces();
         }
 
+        void TrimLeadingSpaces()
+        {
+            g_ActiveMadEdit->TrimLeadingSpaces();
+        }
+
         void DeleteEmptyLines()
         {
             g_ActiveMadEdit->DeleteEmptyLines();
@@ -1258,11 +1263,15 @@ namespace mad_python
             return mad_py::make_tuple(words, chars, spaces, lines, halfwidths, fullwidths, std::string(str.mb_str()));
         }
 
-        void ColumnAlign()
+        void ColumnAlignLeft()
         {
-            g_ActiveMadEdit->ColumnAlign();
+            g_ActiveMadEdit->ColumnAlignLeft();
         }
 
+		void ColumnAlignRight()
+		{
+			g_ActiveMadEdit->ColumnAlignRight();
+		}
     };
     //PyMadEdit * InitMadPython() { return new PyMadEdit();}
 }
@@ -1432,6 +1441,7 @@ BOOST_PYTHON_MODULE(madpython)
         .def("InvertCase", &PyMadEdit::InvertCase, "")
         .def("Capitalize", &PyMadEdit::Capitalize, "")
         .def("TrimTrailingSpaces", &PyMadEdit::TrimTrailingSpaces, "")
+        .def("TrimLeadingSpaces", &PyMadEdit::TrimLeadingSpaces, "")
         .def("DeleteEmptyLinesWithSpaces", &PyMadEdit::DeleteEmptyLinesWithSpaces, "")
         .def("DeleteEmptyLines", &PyMadEdit::DeleteEmptyLines, "")
         .def("JoinLines", &PyMadEdit::JoinLines, "")
@@ -1452,7 +1462,8 @@ BOOST_PYTHON_MODULE(madpython)
         .def("ScrollPageDown", &PyMadEdit::ScrollPageDown, "")
         .def("ScrollLeft", &PyMadEdit::ScrollLeft, "")
         .def("ScrollRight", &PyMadEdit::ScrollRight, "")
-        .def("ColumnAlign", &PyMadEdit::ColumnAlign, "")
+        .def("ColumnAlignLeft", &PyMadEdit::ColumnAlignLeft, "")
+        .def("ColumnAlignRight", &PyMadEdit::ColumnAlignRight, "")
 
         .def("FindTextNext", &PyMadEdit::FindTextNext, FindTextNext_member_overloads( args("text", "bRegex", "bCaseSensitive", "bWholeWord", "rangeFrom", "rangeTo"), "Doc string" )[return_value_policy<return_by_value>()])
 

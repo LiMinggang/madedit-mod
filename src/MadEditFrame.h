@@ -152,7 +152,7 @@ public:
     void OnUpdateUI_MenuEditCheckBookmark(wxUpdateUIEvent& event);
 
     void OnUpdateUI_Menu_CheckTextFile(wxUpdateUIEvent& event);
-    void OnUpdateUI_Menu_InsertNumbers(wxUpdateUIEvent& event);
+    void OnUpdateUI_Menu_CheckColumnMode(wxUpdateUIEvent& event);
     void OnUpdateUI_Menu_JoinLines(wxUpdateUIEvent& event);
 
     void OnUpdateUI_MenuEditCopyAsHexString(wxUpdateUIEvent& event);
@@ -286,11 +286,13 @@ public:
     void OnEditTabToSpace(wxCommandEvent& event);
     void OnEditSpaceToTab(wxCommandEvent& event);
     void OnEditTrimTrailingSpaces(wxCommandEvent& event);
+    void OnEditTrimLeadingSpaces(wxCommandEvent& event);
     void OnEditDeleteEmptyLines(wxCommandEvent& event);
     void OnEditDeleteEmptyLinesWithSpaces(wxCommandEvent& event);
     void OnEditJoinLines(wxCommandEvent& event);
     void OnEditInsertNumbers(wxCommandEvent& event);
-    void OnEditColumnAlign(wxCommandEvent& event);
+    void OnEditColumnAlignLeft(wxCommandEvent& event);
+    void OnEditColumnAlignRight(wxCommandEvent& event);
     void OnEditSpellCheck(wxCommandEvent& event);
     void OnEditBookmarkCopy(wxCommandEvent& event);
     void OnEditBookmarkCut(wxCommandEvent& event);
@@ -548,11 +550,13 @@ enum { // menu id
     menuTabToSpace,
     menuSpaceToTab,
     menuTrimTrailingSpaces,
+	menuTrimLeadingSpaces,
     menuDeleteEmptyLines,
     menuDeleteEmptyLinesWithSpaces,
     menuJoinLines,
     menuInsertNumbers,
-    menuColumnAlign,
+    menuColumnAlignLeft,
+    menuColumnAlignRight,
 
     // search
     menuFindNext,

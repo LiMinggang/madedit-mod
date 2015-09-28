@@ -28,6 +28,8 @@ BEGIN_EVENT_TABLE(MadNumberDlg,wxDialog)
 	EVT_CLOSE(MadNumberDlg::OnClose)
 	EVT_BUTTON(wxID_OK,MadNumberDlg::WxOKButtonClick)
 	
+	EVT_TEXT(ID_WXEDITINITIALNUMBER,MadNumberDlg::WxEditItialnumberUpdated)
+	
 	EVT_TEXT(ID_WXEDITPOSTFIX,MadNumberDlg::WxEditPostfixUpdated)
 	EVT_CHECKBOX(ID_WXCHECKPOSTFIX,MadNumberDlg::WxCheckPostfixClick)
 	
@@ -133,7 +135,7 @@ void MadNumberDlg::CreateGUIControls()
 	WxCheckPrefix = new wxCheckBox(this, ID_WXCHECKPREFIX, _("Prefix"), wxPoint(5, 5), wxSize(132, 23), 0, wxDefaultValidator, wxT("WxCheckPrefix"));
 	WxBoxSizer6->Add(WxCheckPrefix, 0, wxALIGN_LEFT | wxALL, 5);
 
-	WxEditPrefix = new wxTextCtrl(this, ID_WXEDITPREFIX, _(""), wxPoint(147, 5), wxSize(124, 23), 0, wxDefaultValidator, wxT("WxEditPrefix"));
+	WxEditPrefix = new wxTextCtrl(this, ID_WXEDITPREFIX, wxT(""), wxPoint(147, 5), wxSize(124, 23), 0, wxDefaultValidator, wxT("WxEditPrefix"));
 	WxBoxSizer6->Add(WxEditPrefix, 0, wxALIGN_LEFT | wxALL, 5);
     WxEditPrefix->Enable(false);
 
@@ -162,7 +164,7 @@ void MadNumberDlg::CreateGUIControls()
 	WxStaticText6 = new wxStaticText(this, ID_WXSTATICTEXT6, _("Previw: "), wxPoint(5, 5), wxDefaultSize, 0, wxT("WxStaticText6"));
 	WxBoxSizer8->Add(WxStaticText6, 0, wxALIGN_LEFT | wxALL, 5);
 
-	WxStaticTextPreview = new wxStaticText(this, ID_WXSTATICTEXTPREVIEW, wxT(""), wxPoint(63, 5), wxDefaultSize, 0, wxT("WxStaticTextPreview"));
+	WxStaticTextPreview = new wxStaticText(this, ID_WXSTATICTEXTPREVIEW, wxT("0"), wxPoint(63, 5), wxDefaultSize, 0, wxT("WxStaticTextPreview"));
 	WxBoxSizer8->Add(WxStaticTextPreview, 0, wxALIGN_LEFT | wxALL, 5);
 
 	SetTitle(_("Numbering Configuration"));
@@ -233,6 +235,29 @@ void MadNumberDlg::WxEditPrefixUpdated(wxCommandEvent& event)
         if(WxCheckPostfix->GetValue())
             preview += WxEditPostfix->GetValue();
         WxStaticTextPreview->SetLabel(preview);
+    }
+}
+
+void MadNumberDlg::WxEditItialnumberUpdated(wxCommandEvent& event)
+{
+	// insert your code here
+	if(WxStaticTextPreview)
+    {
+        wxString preview;
+	    if(WxCheckPrefix->GetValue())
+		{
+	        if(WxCheckPrefix->GetValue())
+	            preview += WxEditPrefix->GetValue();
+	        
+	        preview += WxEditInitialNumber->GetValue();
+		}
+		else
+		{
+			preview = WxEditInitialNumber->GetValue();
+		}
+		if(WxCheckPostfix->GetValue())
+			preview += WxEditPostfix->GetValue();
+		WxStaticTextPreview->SetLabel(preview);
     }
 }
 

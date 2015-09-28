@@ -86,6 +86,7 @@ class MadNumberDlg : public wxDialog
 		wxBoxSizer *WxBoxSizer2;
 		wxBoxSizer *WxBoxSizer1;
 		////GUI Control Declaration End
+		void WxEditItialnumberUpdated(wxCommandEvent& event);
 		void WxEditPrefixUpdated(wxCommandEvent& event);
 		void WxEditPostfixUpdated(wxCommandEvent& event);
 		void WxCheckPrefixClick(wxCommandEvent& event);
