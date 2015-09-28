@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.3.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-28 11:30+0800\n"
-"PO-Revision-Date: 2015-09-28 11:33+0800\n"
+"POT-Creation-Date: 2015-09-28 16:11+0800\n"
+"PO-Revision-Date: 2015-09-28 16:20+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit-mod@gmail.com>\n"
 "Language: zh_CN\n"
@@ -3025,21 +3025,21 @@ msgstr "启动时重新载入上次编辑的文件"
 
 #: ../src/MadOptionsDialog.cpp:338
 msgid "Restore previous caret position when files are opened"
-msgstr "载入文件时回复到上次编辑的位置"
+msgstr "载入文件时回到上次编辑的位置"
 
 #: ../src/MadOptionsDialog.cpp:342
-msgid ""
-"Do not save settings to MadEdit.cfg when MadEdit closed (this session only)"
-msgstr "程序结束时不要把选项回存到 MadEdit.cfg (只对这次执行有效)"
-
-#: ../src/MadOptionsDialog.cpp:346
-msgid "Show quick search bar at startup"
+msgid "Show quick search bar on startup"
 msgstr "启动时显示快速搜索条"
 
-#: ../src/MadOptionsDialog.cpp:346
+#: ../src/MadOptionsDialog.cpp:342
 #, fuzzy
 msgid "WxCheckBoxShowQSearchBar"
 msgstr "WxCheckBoxPrintSpaceChar"
+
+#: ../src/MadOptionsDialog.cpp:346
+msgid ""
+"Do not save settings to MadEdit.cfg when MadEdit closed (this session only)"
+msgstr "程序结束时不要把选项回存到 MadEdit.cfg (只对这次执行有效)"
 
 #: ../src/MadOptionsDialog.cpp:350
 msgid "Purge History while exiting"

@@ -339,13 +339,13 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxBoxSizer7->Add(WxCheckBoxRestoreCaretPos, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2);
     SET_CONTROLPARENT(WxCheckBoxRestoreCaretPos);
 
-	WxCheckBoxDoNotSaveSettings = new wxCheckBox(WxNoteBookPage1, ID_WXCHECKBOXDONOTSAVESETTINGS, _("Do not save settings to MadEdit.cfg when MadEdit closed (this session only)"), wxPoint(2, 50), wxSize(400, 20), 0, wxDefaultValidator, wxT("WxCheckBoxDoNotSaveSettings"));
-	WxBoxSizer7->Add(WxCheckBoxDoNotSaveSettings, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2);
-    SET_CONTROLPARENT(WxCheckBoxDoNotSaveSettings);
-
-    WxCheckBoxShowQSearchBar = new wxCheckBox(WxNoteBookPage1, ID_WXCHECKBOXSHOWQSEARCHBAR, _("Show quick search bar at startup"), wxPoint(2, 77), wxSize(400, 20), 0, wxDefaultValidator, _("WxCheckBoxShowQSearchBar"));
+    WxCheckBoxShowQSearchBar = new wxCheckBox(WxNoteBookPage1, ID_WXCHECKBOXSHOWQSEARCHBAR, _("Show quick search bar on startup"), wxPoint(2, 50), wxSize(400, 20), 0, wxDefaultValidator, _("WxCheckBoxShowQSearchBar"));
 	WxBoxSizer7->Add(WxCheckBoxShowQSearchBar, 0, wxALIGN_LEFT | wxALL, 2);
     SET_CONTROLPARENT(WxCheckBoxShowQSearchBar);
+
+	WxCheckBoxDoNotSaveSettings = new wxCheckBox(WxNoteBookPage1, ID_WXCHECKBOXDONOTSAVESETTINGS, _("Do not save settings to MadEdit.cfg when MadEdit closed (this session only)"), wxPoint(2, 74), wxSize(400, 20), 0, wxDefaultValidator, wxT("WxCheckBoxDoNotSaveSettings"));
+	WxBoxSizer7->Add(WxCheckBoxDoNotSaveSettings, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2);
+    SET_CONTROLPARENT(WxCheckBoxDoNotSaveSettings);
 
 	WxCheckBoxPurgeHistory = new wxCheckBox(WxNoteBookPage1, ID_PURGEHISTORY, _("Purge History while exiting"), wxPoint(2, 98), wxSize(400, 20), 0, wxDefaultValidator, wxT("WxCheckBoxPurgeHistory"));
 	WxBoxSizer7->Add(WxCheckBoxPurgeHistory, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2);

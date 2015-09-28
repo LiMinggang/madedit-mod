@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-28 11:30+0800\n"
+"POT-Creation-Date: 2015-09-28 16:11+0800\n"
 "PO-Revision-Date: 2015-06-30 21:50+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
@@ -3027,16 +3027,16 @@ msgid "Restore previous caret position when files are opened"
 msgstr ""
 
 #: ../src/MadOptionsDialog.cpp:342
+msgid "Show quick search bar on startup"
+msgstr ""
+
+#: ../src/MadOptionsDialog.cpp:342
+msgid "WxCheckBoxShowQSearchBar"
+msgstr ""
+
+#: ../src/MadOptionsDialog.cpp:346
 msgid ""
 "Do not save settings to MadEdit.cfg when MadEdit closed (this session only)"
-msgstr ""
-
-#: ../src/MadOptionsDialog.cpp:346
-msgid "Show quick search bar at startup"
-msgstr ""
-
-#: ../src/MadOptionsDialog.cpp:346
-msgid "WxCheckBoxShowQSearchBar"
 msgstr ""
 
 #: ../src/MadOptionsDialog.cpp:350

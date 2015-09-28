@@ -99,6 +99,34 @@ ChangeLog:
 Todo:
 FreeBSD packaging (with FreeBSD 10.01)
 
+Mod v0.3.7
+1.New: Column Align Right(Selected text would be aligned according to right)
+2.New: Prefix, postfix and preview of numbering(enhanced numbering)
+3.New: Search All in All Opened documents
+4.New: Replace All in All Opened documents
+5.New: Indicate "Empty expression" on status bar if user did not fill the search box and hit Search
+6.New: TrimLeadingSpaces----remove leading space and tab chars of lines
+7.New: Selection support in TrimTrailingSpaces, TrimLeadingSpaces, DeleteEmptyLines, DeleteEmptyLinesWithSpaces and JoinLines
+8.New: Selected text copying to search text while searching with regex
+9.New: Tool button for Numbering(Insert incremental numbers)
+10.New: Update preview while editing initial number in Numbering dialog
+11.New: Config item for Quick Search bar in option dialog
+
+12.Fix: Assertion failure MadEditFrame.cpp:3403
+13.Fix: Rollback changes in Search/Replace(since 0.3.5)
+14.Fix: Assertion failure at MadEditFrame.cpp:5692 under x86_x64 linux
+15.Fix: Fix dictionary download link of OpenOffice on About Dialog
+16.Fix: Link warning of VS project
+17.Fix: Show search results by default
+18.Fix: Set default page of Option dialog to "General"
+19.Fix: Move encoding update and config update from MainFrame to search/replace dialog
+20.Fix: Reverse order toolbars under linux
+21.Fix: Remove extra overflow icon from Toolbars
+22.Fix: Crash in ColumnAlign while reverse selection
+23.Fix: Column align will has issue if you select beyond the EOF
+24.Fix: File name was not marked as "modified*" in ColumnAlign
+25:Fix: Improve simplified Chinese translation
+
 Mod v0.3.6
 New: Create scripts directory if not exists while saving recorded script
 New: Shortcut for Insert numbers(Ctrl-Shift-N)

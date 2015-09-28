@@ -127,6 +127,7 @@ Mod v0.3.7
 22.Fix: Crash in ColumnAlign while reverse selection
 23.Fix: Column align will has issue if you select beyond the EOF
 24.Fix: File name was not marked as "modified*" in ColumnAlign
+25:Fix: Improve simplified Chinese translation
 
 Mod v0.3.6
 1.New: Create scripts directory if not exists while saving recorded script
