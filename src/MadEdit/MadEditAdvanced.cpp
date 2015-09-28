@@ -3187,17 +3187,12 @@ void MadEdit::ColumnAlignRight()
             ucqueue.clear();
             m_Lines->InitNextUChar(lit, 0);
 
-            // get spaces at begin of line
+            // get spaces/tabs at the trailing of line
             while((m_Lines->*NextUChar)(ucqueue))
             {
                 tuc = ucqueue.back().first;
                 if(tuc == 0x0D || tuc == 0x0A)
                 {
-                    if(lastspblk == false)
-                	{
-                        startpos = rowpos;
-						startoffset = offset;
-                	}
                     break;
                 }
                 
@@ -3240,7 +3235,13 @@ void MadEdit::ColumnAlignRight()
                     break;
                 }
             }
-        
+
+            if(lastspblk == false)
+            {
+                startpos = rowpos;
+                startoffset = offset;
+            }
+
             // writeback the indent-spaces and rest content of line
             delsize = rowpos - startpos;
             if(delsize!=0) // this line is not a empty line
