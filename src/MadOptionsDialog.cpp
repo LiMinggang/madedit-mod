@@ -343,7 +343,11 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxBoxSizer7->Add(WxCheckBoxDoNotSaveSettings, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2);
     SET_CONTROLPARENT(WxCheckBoxDoNotSaveSettings);
 
-	WxCheckBoxPurgeHistory = new wxCheckBox(WxNoteBookPage1, ID_PURGEHISTORY, _("Purge History while exiting"), wxPoint(2, 77), wxSize(400, 20), 0, wxDefaultValidator, wxT("WxCheckBoxPurgeHistory"));
+    WxCheckBoxShowQSearchBar = new wxCheckBox(WxNoteBookPage1, ID_WXCHECKBOXSHOWQSEARCHBAR, _("Show quick search bar at startup"), wxPoint(2, 77), wxSize(400, 20), 0, wxDefaultValidator, _("WxCheckBoxShowQSearchBar"));
+	WxBoxSizer7->Add(WxCheckBoxShowQSearchBar, 0, wxALIGN_LEFT | wxALL, 2);
+    SET_CONTROLPARENT(WxCheckBoxShowQSearchBar);
+
+	WxCheckBoxPurgeHistory = new wxCheckBox(WxNoteBookPage1, ID_PURGEHISTORY, _("Purge History while exiting"), wxPoint(2, 98), wxSize(400, 20), 0, wxDefaultValidator, wxT("WxCheckBoxPurgeHistory"));
 	WxBoxSizer7->Add(WxCheckBoxPurgeHistory, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2);
     SET_CONTROLPARENT(WxCheckBoxPurgeHistory);
 
@@ -1162,6 +1166,7 @@ void MadOptionsDialog::CreateGUIControls(void)
     ResizeItem(WxBoxSizer7, WxCheckBoxDoNotSaveSettings, 25, 4);
     ResizeItem(WxBoxSizer7, WxCheckBoxReloadFiles, 25, 4);
     ResizeItem(WxBoxSizer7, WxCheckBoxRestoreCaretPos, 25, 4);
+    ResizeItem(WxBoxSizer7, WxCheckBoxShowQSearchBar, 25, 4);
     ResizeItem(WxBoxSizer7, WxCheckBoxPurgeHistory, 25, 4);
     ResizeItem(WxBoxSizer17, WxStaticText13, 2, 2);
 
@@ -1444,6 +1449,9 @@ void MadOptionsDialog::LoadOptions(void)
 
     cfg->Read(wxT("PurgeHistory"), &bb, false);
     WxCheckBoxPurgeHistory->SetValue(bb);
+
+    cfg->Read(wxT("ShowQSearchBarOnStart"), &bb, true);
+    WxCheckBoxShowQSearchBar->SetValue(bb);
 
     cfg->Read(wxT("RestoreCaretPos"), &bb, true);
     WxCheckBoxRestoreCaretPos->SetValue(bb);

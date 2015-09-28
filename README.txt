@@ -112,20 +112,21 @@ Mod v0.3.7
 8.New: Selected text copying to search text while searching with regex
 9.New: Tool button for Numbering(Insert incremental numbers)
 10.New: Update preview while editing initial number in Numbering dialog
+11.New: Config item for Quick Search bar in option dialog
 
-11.Fix: Assertion failure MadEditFrame.cpp:3403
-12.Fix: Rollback changes in Search/Replace(since 0.3.5)
-13.Fix: Assertion failure at MadEditFrame.cpp:5692 under x86_x64 linux
-14.Fix: Fix dictionary download link of OpenOffice on About Dialog
-15.Fix: Link warning of VS project
-16.Fix: Show search results by default
-17.Fix: Set default page of Option dialog to "General"
-18.Fix: Move encoding update and config update from MainFrame to search/replace dialog
-19.Fix: Reverse order toolbars under linux
-20.Fix: Remove extra overflow icon from Toolbars
-21.Fix: Crash in ColumnAlign while reverse selection
-22.Fix: Column align will has issue if you select beyond the EOF
-23.Fix: File name was not marked as "modified*" in ColumnAlign
+12.Fix: Assertion failure MadEditFrame.cpp:3403
+13.Fix: Rollback changes in Search/Replace(since 0.3.5)
+14.Fix: Assertion failure at MadEditFrame.cpp:5692 under x86_x64 linux
+15.Fix: Fix dictionary download link of OpenOffice on About Dialog
+16.Fix: Link warning of VS project
+17.Fix: Show search results by default
+18.Fix: Set default page of Option dialog to "General"
+19.Fix: Move encoding update and config update from MainFrame to search/replace dialog
+20.Fix: Reverse order toolbars under linux
+21.Fix: Remove extra overflow icon from Toolbars
+22.Fix: Crash in ColumnAlign while reverse selection
+23.Fix: Column align will has issue if you select beyond the EOF
+24.Fix: File name was not marked as "modified*" in ColumnAlign
 
 Mod v0.3.6
 1.New: Create scripts directory if not exists while saving recorded script

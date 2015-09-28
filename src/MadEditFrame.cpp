@@ -2088,7 +2088,7 @@ MadEditFrame::MadEditFrame( wxWindow *parent, wxWindowID id, const wxString &tit
     //g_PrintData = new wxPrintData;
     g_PageSetupData = new wxPageSetupDialogData;
     LoadDefaultSettings( m_Config );
-    m_ReloadFiles  = m_Config->ReadBool( wxT( "/MadEdit/ReloadFiles" ), true );;
+    m_ReloadFiles  = m_Config->ReadBool( wxT( "/MadEdit/ReloadFiles" ), true );
     m_PurgeHistory = m_Config->ReadBool( wxT( "/MadEdit/PurgeHistory" ), false );
     SetDropTarget( new DnDFile() );
     m_PageClosing = false;
@@ -2896,8 +2896,8 @@ void MadEditFrame::CreateGUIControls( void )
 
     m_QuickSearch->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ) );
     m_QuickSeachBar->AddControl( m_QuickSearch );
-    m_QuickSeachBar->AddTool( menuQuickFindNext, _T( "QuickFindNext" ), m_ImageList->GetBitmap( down_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _( "Find Next" ), _( "Find matched text next to caret" ), NULL );
-    m_QuickSeachBar->AddTool( menuQuickFindPrevious, _T( "QuickFindPrevious" ), m_ImageList->GetBitmap( up_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _( "Find Previous" ), _( "Find matched text previous from caret" ), NULL );
+    m_QuickSeachBar->AddTool( menuQuickFindNext, wxT( "QuickFindNext" ), m_ImageList->GetBitmap( down_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _( "Find Next" ), _( "Find matched text next to caret" ), NULL );
+    m_QuickSeachBar->AddTool( menuQuickFindPrevious, wxT( "QuickFindPrevious" ), m_ImageList->GetBitmap( up_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _( "Find Previous" ), _( "Find matched text previous from caret" ), NULL );
     m_CheckboxWholeWord = new wxCheckBox( m_QuickSeachBar, ID_QUICKSEARCHWHOLEWORD, _( "Whole Word" ) );
     m_CheckboxWholeWord->SetValue( false );
     m_CheckboxWholeWord->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ) );
@@ -2911,8 +2911,10 @@ void MadEditFrame::CreateGUIControls( void )
     m_QuickSeachBar->AddControl( m_CheckboxRegEx );
     m_QuickSeachBar->Realize();
     m_AuiManager.AddPane( m_QuickSeachBar, wxAuiPaneInfo().Name( wxT( "QuickSeachBar" ) ).Caption( _( "Quick Search" ) ).Floatable( true ).ToolbarPane().Top().Row( 2 ) );
-    m_AuiManager.GetPane( m_QuickSeachBar ).Hide();
-    m_ToolbarStatus[tbQSEARCH] = false;
+    bool showQsBar = m_Config->ReadBool( wxT( "/MadEdit/ShowQSearchBarOnStart" ), true );
+    if(!showQsBar)
+        m_AuiManager.GetPane( m_QuickSeachBar ).Hide();
+    m_ToolbarStatus[tbQSEARCH] = showQsBar;
     // information window
     int infoW = 300, infoH = 130;
     m_Config->Read( wxT( "/MadEdit/InfoWindowWidth" ), &infoW );
@@ -6848,6 +6850,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
         m_Config->Read( wxT( "PurgeHistory" ), g_ForcePurgeThisTime );
         m_PurgeHistory = g_OptionsDialog->WxCheckBoxPurgeHistory->GetValue();
         m_Config->Write( wxT( "PurgeHistory" ), g_OptionsDialog->WxCheckBoxPurgeHistory->GetValue() );
+        m_Config->Write( wxT( "ShowQSearchBarOnStart" ), g_OptionsDialog->WxCheckBoxShowQSearchBar->GetValue() );
 
         if( !g_ForcePurgeThisTime ) { g_ForcePurgeThisTime = g_OptionsDialog->WxCheckBoxPurgeHistory->GetValue(); }
         else { g_ForcePurgeThisTime = false; }
