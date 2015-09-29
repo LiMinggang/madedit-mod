@@ -130,6 +130,7 @@ Mod v0.3.7
 25.Fix: File name was not marked as "modified*" in ColumnAlign
 26.Fix: Minor fix in menu help text
 27.Fix: Improve simplified Chinese translation
+27.Fix: Wrong dnd cursor if no selection
 
 Mod v0.3.6
 1.New: Create scripts directory if not exists while saving recorded script

@@ -3908,9 +3908,10 @@ void MadEditFrame::OnUpdateUI_Menu_CheckTextFile( wxUpdateUIEvent& event )
 {
     event.Enable( g_ActiveMadEdit != NULL && g_ActiveMadEdit->GetEditMode() != emHexMode );
 }
+
 void MadEditFrame::OnUpdateUI_Menu_CheckColumnMode( wxUpdateUIEvent& event )
 {
-    event.Enable( g_ActiveMadEdit != NULL && g_ActiveMadEdit->GetEditMode() == emColumnMode );
+    event.Enable( g_ActiveMadEdit != NULL && g_ActiveMadEdit->GetEditMode() == emColumnMode && g_ActiveMadEdit->IsSelected());
 }
 
 void MadEditFrame::OnUpdateUI_Menu_JoinLines( wxUpdateUIEvent& event )

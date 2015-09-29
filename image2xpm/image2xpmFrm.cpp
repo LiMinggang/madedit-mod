@@ -161,7 +161,7 @@ void image2xpmFrm::image2xpmFrmClose(wxCloseEvent& event)
  */
 void image2xpmFrm::WxButton1Click(wxCommandEvent& event)
 {
-	wxString filename = wxFileSelector(_T("Select image file"), wxEmptyString, wxEmptyString, wxEmptyString, wxString(wxT("All files (*;*.*)|")) + wxFileSelectorDefaultWildcardStr + wxT("BMP files (*.bmp)|*.bmp|")+
+	wxString filename = wxFileSelector(_T("Select image file"), wxEmptyString, wxEmptyString, wxEmptyString, wxString(wxT("All files (*;*.*)|")) + wxFileSelectorDefaultWildcardStr + wxT("|BMP files (*.bmp)|*.bmp|")+
 		wxT("PNG files (*.png)|*.png|")+
 		wxT("JPEG files (*.jpg)|*.jpg|")+
 		wxT("GIF files (*.gif)|*.gif|")+
@@ -172,7 +172,6 @@ void image2xpmFrm::WxButton1Click(wxCommandEvent& event)
     if ( !filename )
         return;
 
-    
     if ( !g_Image.LoadFile(filename) )
     {
         wxLogError(_T("Couldn't load image from '%s'."), filename.c_str());
@@ -209,7 +208,7 @@ void image2xpmFrm::WxButton2Click(wxCommandEvent& event)
                                             wxT("PCX files (*.pcx)|*.pcx|")
                                             wxT("ICO files (*.ico)|*.ico|")
                                             wxT("CUR files (*.cur)|*.cur"),
-                                            wxSAVE,
+                                            wxFD_SAVE,
                                             this);
 
     if ( savefilename.empty() )

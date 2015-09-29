@@ -10008,7 +10008,7 @@ void MadEdit::OnMouseLeftDown(wxMouseEvent &evt)
 
         if(!evt.m_shiftDown)
         {
-            if(m_CaretPos.pos > m_SelectionBegin->pos && m_CaretPos.pos < m_SelectionEnd->pos)
+            if((m_Selection) && (m_CaretPos.pos > m_SelectionBegin->pos && m_CaretPos.pos < m_SelectionEnd->pos))
             {
                 m_DragDrop = true;
                 DndBegDrag();
