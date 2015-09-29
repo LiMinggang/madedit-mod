@@ -2464,7 +2464,7 @@ void MadEditFrame::CreateGUIControls( void )
                 menu_stack.back()->Append( mit );
                 if(cd->popmenu_ptr)
                 {
-                    mit = new wxMenuItem( (*(cd->popmenu_ptr)), cd->menu_id, memLabel, wxGetTranslation( cd->hint ), cd->kind );
+                    mit = new wxMenuItem( (*(cd->popmenu_ptr)), cd->menu_id, memLabel + GetMenuKey( cd->menuid_name, cd->key ), wxGetTranslation( cd->hint ), cd->kind );
                     if( cd->image_idx >= 0 && cd->kind == wxITEM_NORMAL )
                     {
                         mit->SetBitmap( m_ImageList->GetBitmap( cd->image_idx ) );
