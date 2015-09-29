@@ -9,6 +9,7 @@
 #define _MADCOMMAND_H_
 
 #include "MadEdit/MadEditCommand.h"
+class wxAuiToolBar;
 
 struct CommandData
 {
@@ -23,6 +24,9 @@ struct CommandData
     wxMenu         **menu_ptr;
     const wxChar   *hint;
     wxMenu         **popmenu_ptr;
+	wxAuiToolBar   **toolbar_ptr;
+    const wxChar   *short_help;
+    bool           apd_toolbar_spr;
 };
 
 extern CommandData CommandTable[];

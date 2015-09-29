@@ -339,7 +339,7 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxBoxSizer7->Add(WxCheckBoxRestoreCaretPos, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2);
     SET_CONTROLPARENT(WxCheckBoxRestoreCaretPos);
 
-    WxCheckBoxShowQSearchBar = new wxCheckBox(WxNoteBookPage1, ID_WXCHECKBOXSHOWQSEARCHBAR, _("Show quick search bar on startup"), wxPoint(2, 50), wxSize(400, 20), 0, wxDefaultValidator, _("WxCheckBoxShowQSearchBar"));
+    WxCheckBoxShowQSearchBar = new wxCheckBox(WxNoteBookPage1, ID_WXCHECKBOXSHOWQSEARCHBAR, _("Show quick search bar on startup"), wxPoint(2, 50), wxSize(400, 20), 0, wxDefaultValidator, wxT("WxCheckBoxShowQSearchBar"));
 	WxBoxSizer7->Add(WxCheckBoxShowQSearchBar, 0, wxALIGN_LEFT | wxALL, 2);
     SET_CONTROLPARENT(WxCheckBoxShowQSearchBar);
 

@@ -113,7 +113,7 @@ Mod v0.3.7
 9.New: Tool button for Numbering(Insert incremental numbers)
 10.New: Update preview while editing initial number in Numbering dialog
 11.New: Config item for Quick Search bar in option dialog
-12.New: Refactor of popup memu
+12.New: Refactor of popup memu/toolbar code
 
 13.Fix: Assertion failure MadEditFrame.cpp:3403
 14.Fix: Rollback changes in Search/Replace(since 0.3.5)
@@ -128,7 +128,8 @@ Mod v0.3.7
 23.Fix: Crash in ColumnAlign while reverse selection
 24.Fix: Column align will has issue if you select beyond the EOF
 25.Fix: File name was not marked as "modified*" in ColumnAlign
-26.Fix: Improve simplified Chinese translation
+26.Fix: Minor fix in menu help text
+27.Fix: Improve simplified Chinese translation
 
 Mod v0.3.6
 1.New: Create scripts directory if not exists while saving recorded script
