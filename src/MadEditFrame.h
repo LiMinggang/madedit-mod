@@ -144,6 +144,7 @@ public:
     void OnUpdateUI_MenuEditCopy(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuEditPaste(wxUpdateUIEvent& event);
     void OnUpdateUI_Menu_CheckSize(wxUpdateUIEvent& event);
+    void OnUpdateUI_Menu_CheckTextFileSize(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuFileToggleReadOnly(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuEditStartEndSelction(wxUpdateUIEvent& event);
 

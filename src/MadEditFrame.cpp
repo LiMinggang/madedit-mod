@@ -1254,8 +1254,8 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
     EVT_UPDATE_UI( menuDecreaseIndent, MadEditFrame::OnUpdateUI_MenuIndent )
     EVT_UPDATE_UI( menuComment, MadEditFrame::OnUpdateUI_MenuComment )
     EVT_UPDATE_UI( menuUncomment, MadEditFrame::OnUpdateUI_MenuComment )
-    EVT_UPDATE_UI( menuWordWrapToNewLine, MadEditFrame::OnUpdateUI_Menu_CheckSize )
-    EVT_UPDATE_UI( menuNewLineToWordWrap, MadEditFrame::OnUpdateUI_Menu_CheckSize )
+    EVT_UPDATE_UI( menuWordWrapToNewLine, MadEditFrame::OnUpdateUI_Menu_CheckTextFileSize )
+    EVT_UPDATE_UI( menuNewLineToWordWrap, MadEditFrame::OnUpdateUI_Menu_CheckTextFileSize )
     EVT_UPDATE_UI( menuToUpperCase, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize )
     EVT_UPDATE_UI( menuToLowerCase, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize )
     EVT_UPDATE_UI( menuInvertCase, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize )
@@ -3895,6 +3895,10 @@ void MadEditFrame::OnUpdateUI_Menu_CheckSize( wxUpdateUIEvent& event )
     event.Enable( g_ActiveMadEdit && g_ActiveMadEdit->GetFileSize() );
 }
 
+void MadEditFrame::OnUpdateUI_Menu_CheckTextFileSize( wxUpdateUIEvent& event )
+{
+    event.Enable( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() != emHexMode && g_ActiveMadEdit->GetFileSize() );
+}
 
 void MadEditFrame::OnUpdateUI_MenuEditStartEndSelction( wxUpdateUIEvent& event )
 {
@@ -3939,8 +3943,8 @@ void MadEditFrame::OnUpdateUI_MenuIndent( wxUpdateUIEvent& event )
 
 void MadEditFrame::OnUpdateUI_MenuComment( wxUpdateUIEvent& event )
 {
-    event.Enable( g_ActiveMadEdit && !g_ActiveMadEdit->IsReadOnly() &&
-                  g_ActiveMadEdit->HasLineComment() && g_ActiveMadEdit->GetEditMode() != emHexMode );
+    event.Enable( g_ActiveMadEdit && !g_ActiveMadEdit->IsReadOnly() && g_ActiveMadEdit->GetEditMode() != emHexMode
+                && g_ActiveMadEdit->HasLineComment() );
 }
 
 void MadEditFrame::OnUpdateUI_MenuSearchGoTo( wxUpdateUIEvent& event )
@@ -3950,8 +3954,7 @@ void MadEditFrame::OnUpdateUI_MenuSearchGoTo( wxUpdateUIEvent& event )
 
 void MadEditFrame::OnUpdateUI_MenuSearchGoToBrace( wxUpdateUIEvent& event )
 {
-    event.Enable( g_ActiveMadEdit != NULL && g_ActiveMadEdit->HasBracePair() &&
-                  g_ActiveMadEdit->GetEditMode() != emHexMode );
+    event.Enable( g_ActiveMadEdit != NULL && g_ActiveMadEdit->GetEditMode() != emHexMode && g_ActiveMadEdit->HasBracePair() );
 }
 
 void MadEditFrame::OnUpdateUI_MenuViewEncoding( wxUpdateUIEvent& event )
@@ -3974,7 +3977,7 @@ void MadEditFrame::OnUpdateUI_MenuViewSyntax( wxUpdateUIEvent& event )
 {
     if( g_ActiveMadEdit )
     {
-        event.Enable( true );
+        event.Enable( g_ActiveMadEdit->GetEditMode() != emHexMode );
         event.SetText( wxString( _( "Syntax Type: " ) ) + g_ActiveMadEdit->GetSyntaxTitle() );
     }
     else
@@ -4031,7 +4034,7 @@ void MadEditFrame::OnUpdateUI_MenuViewTabColumn( wxUpdateUIEvent& event )
 {
     if( g_ActiveMadEdit != NULL )
     {
-        event.Enable( true );
+        event.Enable( g_ActiveMadEdit->GetEditMode() != emHexMode );
         event.SetText( wxString( _( "Tab Column: " ) ) << g_ActiveMadEdit->GetTabColumns() );
     }
     else
@@ -4099,7 +4102,7 @@ void MadEditFrame::OnUpdateUI_MenuViewLineSpacing( wxUpdateUIEvent& event )
 {
     if( g_ActiveMadEdit != NULL )
     {
-        event.Enable( true );
+        event.Enable( g_ActiveMadEdit->GetEditMode() != emHexMode );
         event.SetText( wxString( _( "Line Spacing: " ) ) << g_ActiveMadEdit->GetLineSpacing() << wxT( '%' ) );
     }
     else
@@ -4111,63 +4114,63 @@ void MadEditFrame::OnUpdateUI_MenuViewLineSpacing( wxUpdateUIEvent& event )
 
 void MadEditFrame::OnUpdateUI_MenuViewNoWrap( wxUpdateUIEvent& event )
 {
-    event.Enable( g_ActiveMadEdit != NULL );
+    event.Enable( g_ActiveMadEdit != NULL && g_ActiveMadEdit->GetEditMode() != emHexMode );
     event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetWordWrapMode() == wwmNoWrap );
 }
 void MadEditFrame::OnUpdateUI_MenuViewWrapByWindow( wxUpdateUIEvent& event )
 {
-    event.Enable( g_ActiveMadEdit != NULL );
+    event.Enable( g_ActiveMadEdit != NULL && g_ActiveMadEdit->GetEditMode() != emHexMode );
     event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetWordWrapMode() == wwmWrapByWindow );
 }
 void MadEditFrame::OnUpdateUI_MenuViewWrapByColumn( wxUpdateUIEvent& event )
 {
-    event.Enable( g_ActiveMadEdit != NULL );
+    event.Enable( g_ActiveMadEdit != NULL && g_ActiveMadEdit->GetEditMode() != emHexMode );
     event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetWordWrapMode() == wwmWrapByColumn );
 }
 void MadEditFrame::OnUpdateUI_MenuViewDisplayLineNumber( wxUpdateUIEvent& event )
 {
-    event.Enable( g_ActiveMadEdit != NULL );
+    event.Enable( g_ActiveMadEdit != NULL && g_ActiveMadEdit->GetEditMode() != emHexMode );
     event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetDisplayLineNumber() );
 }
 void MadEditFrame::OnUpdateUI_MenuViewDisplayBookmark( wxUpdateUIEvent& event )
 {
-    event.Enable( g_ActiveMadEdit != NULL );
+    event.Enable( g_ActiveMadEdit != NULL && g_ActiveMadEdit->GetEditMode() != emHexMode );
     event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetDisplayBookmark() );
 }
 void MadEditFrame::OnUpdateUI_MenuViewDisplay80ColHint( wxUpdateUIEvent& event )
 {
-    event.Enable( g_ActiveMadEdit != NULL );
+    event.Enable( g_ActiveMadEdit != NULL && g_ActiveMadEdit->GetEditMode() != emHexMode );
     event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetDisplay80ColHint() );
 }
 void MadEditFrame::OnUpdateUI_MenuViewShowEndOfLine( wxUpdateUIEvent& event )
 {
-    event.Enable( g_ActiveMadEdit != NULL );
+    event.Enable( g_ActiveMadEdit != NULL && g_ActiveMadEdit->GetEditMode() != emHexMode );
     event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetShowEndOfLine() );
 }
 void MadEditFrame::OnUpdateUI_MenuViewShowTabChar( wxUpdateUIEvent& event )
 {
-    event.Enable( g_ActiveMadEdit != NULL );
+    event.Enable( g_ActiveMadEdit != NULL && g_ActiveMadEdit->GetEditMode() != emHexMode );
     event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetShowTabChar() );
 }
 void MadEditFrame::OnUpdateUI_MenuViewShowSpaceChar( wxUpdateUIEvent& event )
 {
-    event.Enable( g_ActiveMadEdit != NULL );
+    event.Enable( g_ActiveMadEdit != NULL && g_ActiveMadEdit->GetEditMode() != emHexMode );
     event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetShowSpaceChar() );
 }
 void MadEditFrame::OnUpdateUI_MenuViewShowAllChars( wxUpdateUIEvent& event )
 {
-    event.Enable( g_ActiveMadEdit != NULL );
+    event.Enable( g_ActiveMadEdit != NULL && g_ActiveMadEdit->GetEditMode() != emHexMode );
     event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetShowSpaceChar() && g_ActiveMadEdit->GetShowTabChar()
                  && g_ActiveMadEdit->GetShowEndOfLine() );
 }
 void MadEditFrame::OnUpdateUI_MenuViewMarkActiveLine( wxUpdateUIEvent& event )
 {
-    event.Enable( g_ActiveMadEdit != NULL );
+    event.Enable( g_ActiveMadEdit != NULL && g_ActiveMadEdit->GetEditMode() != emHexMode );
     event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetMarkActiveLine() );
 }
 void MadEditFrame::OnUpdateUI_MenuViewMarkBracePair( wxUpdateUIEvent& event )
 {
-    event.Enable( g_ActiveMadEdit != NULL );
+    event.Enable( g_ActiveMadEdit != NULL && g_ActiveMadEdit->GetEditMode() != emHexMode );
     event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetMarkBracePair() );
 }
 void MadEditFrame::OnUpdateUI_MenuViewSpellChecker( wxUpdateUIEvent& event )
