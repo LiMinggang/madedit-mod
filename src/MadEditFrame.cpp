@@ -3862,7 +3862,13 @@ void MadEditFrame::OnUpdateUI_MenuEditRedo( wxUpdateUIEvent& event )
 
 void MadEditFrame::OnUpdateUI_MenuEdit_CheckSelection( wxUpdateUIEvent& event )
 {
-    event.Enable( g_ActiveMadEdit && g_ActiveMadEdit->IsSelected() );
+    bool enabled = ( g_ActiveMadEdit && g_ActiveMadEdit->IsSelected() );
+    if(enabled)
+    {
+        if(g_ActiveMadEdit->GetEditMode()==emColumnMode && g_ActiveMadEdit->GetSelectionSize()==0)
+            enabled = false;
+    }
+    event.Enable( enabled );
 }
 
 void MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize( wxUpdateUIEvent& event )
