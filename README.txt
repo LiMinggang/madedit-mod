@@ -114,23 +114,24 @@ Mod v0.3.7
 10.New: Update preview while editing initial number in Numbering dialog
 11.New: Config item for Quick Search bar in option dialog
 12.New: Refactor of popup memu/toolbar code
-
-13.Fix: Assertion failure MadEditFrame.cpp:3403
-14.Fix: Rollback changes in Search/Replace(since 0.3.5)
-15.Fix: Assertion failure at MadEditFrame.cpp:5692 under x86_x64 linux
-16.Fix: Fix dictionary download link of OpenOffice on About Dialog
-17.Fix: Link warning of VS project
-18.Fix: Show search results by default
-19.Fix: Set default page of Option dialog to "General"
-20.Fix: Move encoding update and config update from MainFrame to search/replace dialog
-21.Fix: Reverse order toolbars under linux
-22.Fix: Remove extra overflow icon from Toolbars
-23.Fix: Crash in ColumnAlign while reverse selection
-24.Fix: Column align will has issue if you select beyond the EOF
-25.Fix: File name was not marked as "modified*" in ColumnAlign
-26.Fix: Minor fix in menu help text
-27.Fix: Improve simplified Chinese translation
-27.Fix: Wrong dnd cursor if no selection
+13.New: ReadOnly flag on title
+14.Fix: Assertion failure MadEditFrame.cpp:3403
+15.Fix: Rollback changes in Search/Replace(since 0.3.5)
+16.Fix: Assertion failure at MadEditFrame.cpp:5692 under x86_x64 linux
+17.Fix: Fix dictionary download link of OpenOffice on About Dialog
+18.Fix: Link warning of VS project
+19.Fix: Show search results by default
+20.Fix: Set default page of Option dialog to "General"
+21.Fix: Move encoding update and config update from MainFrame to search/replace dialog
+22.Fix: Reverse order toolbars under linux
+23.Fix: Remove extra overflow icon from Toolbars
+24.Fix: Crash in ColumnAlign while reverse selection
+25.Fix: Column align will has issue if you select beyond the EOF
+26.Fix: File name was not marked as "modified*" in ColumnAlign
+27.Fix: Minor fix in menu help text
+28.Fix: Improve simplified Chinese translation
+29.Fix: Wrong dnd cursor if no selection
+30:Improvement on GUI update for menu and toolbar
 
 Mod v0.3.6
 1.New: Create scripts directory if not exists while saving recorded script

@@ -139,20 +139,22 @@ public:
 
     void OnUpdateUI_MenuEditUndo(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuEditRedo(wxUpdateUIEvent& event);
-    void OnUpdateUI_MenuEdit_CheckSelection(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuEdit_CheckSelSize(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuEditCut(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuEditCopy(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuEditPaste(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuEditDelete(wxUpdateUIEvent& event);
     void OnUpdateUI_Menu_CheckSize(wxUpdateUIEvent& event);
     void OnUpdateUI_Menu_CheckTextFileSize(wxUpdateUIEvent& event);
-    void OnUpdateUI_MenuFileToggleReadOnly(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuEditStartEndSelction(wxUpdateUIEvent& event);
 
     // add: gogo, 21.09.2009
     void OnUpdateUI_MenuEditToggleBookmark(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuEditCheckBookmark(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuEditCheckBookmarkWritable(wxUpdateUIEvent& event);
 
     void OnUpdateUI_Menu_CheckTextFile(wxUpdateUIEvent& event);
+    void OnUpdateUI_Menu_CheckWritableTextFile(wxUpdateUIEvent& event);
     void OnUpdateUI_Menu_CheckColumnMode(wxUpdateUIEvent& event);
     void OnUpdateUI_Menu_JoinLines(wxUpdateUIEvent& event);
 
@@ -160,14 +162,12 @@ public:
     void OnUpdateUI_MenuIndent(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuComment(wxUpdateUIEvent& event);
 
-    void OnUpdateUI_MenuSearchGoTo(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuSearchGoToBrace(wxUpdateUIEvent& event);
 
     void OnUpdateUI_MenuViewEncoding(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuViewSyntax(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuViewFontName(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuViewFontSize(wxUpdateUIEvent& event);
-    void OnUpdateUI_MenuViewSetFont(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuViewFixedWidthMode(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuViewTabColumn(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuViewLineSpacing(wxUpdateUIEvent& event);
@@ -199,25 +199,16 @@ public:
     void OnUpdateUI_MenuToolsByteOrderMark(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuToolsNewLineChar(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuToolsInsertNewLineChar(wxUpdateUIEvent& event);
-    void OnUpdateUI_MenuToolsConvertNL(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuCheckWritable(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuToolsConvertEncoding(wxUpdateUIEvent& event);
-    void OnUpdateUI_MenuTools_Markdown2Html(wxUpdateUIEvent& event);
-    void OnUpdateUI_MenuTools_Html2PlainText(wxUpdateUIEvent& event);
-    void OnUpdateUI_MenuTools_AstyleFormat(wxUpdateUIEvent& event);
-    void OnUpdateUI_MenuTools_XMLFormat(wxUpdateUIEvent& event);
 
     void OnUpdateUI_MenuWindow_CheckCount(wxUpdateUIEvent& event);
-    
-    void OnUpdateUI_MenuToolsMadMacro(wxUpdateUIEvent& event);
-    void OnUpdateUI_MenuToolsRunTempMacro(wxUpdateUIEvent& event);
-    void OnUpdateUI_MenuToolsRunMacroFile(wxUpdateUIEvent& event);
+
     void OnUpdateUI_MenuToolsStartRecMacro(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuToolsStopRecMacro(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuToolsPlayRecMacro(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuToolsSaveRecMacro(wxUpdateUIEvent& event);
-    void OnUpdateUI_MadScriptList(wxUpdateUIEvent& event);
-    void OnUpdateUI_MenuToolsEditMacroFile(wxUpdateUIEvent& event);
-    void OnUpdateUI_MenuToolsMacroDebugMode(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuToolsMacroDebugMode( wxUpdateUIEvent& event );
 
     void OnFileNew(wxCommandEvent& event);
     void OnFileOpen(wxCommandEvent& event);
