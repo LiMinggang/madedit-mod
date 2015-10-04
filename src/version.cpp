@@ -23,6 +23,8 @@ wxString g_MadEdit_Version( wxString(wxT("MadEdit-Mod 0.3.7 "))
 + wxT(" Visual Studio 2012")
 #elif _MSC_VER == 1800
 + wxT(" Visual Studio 2013")
+#elif (_MSC_VER = 1900)
++ wxT(" Visual Studio 2015")
 #else
 #ifdef __GNUC__
 + wxT(" GCC ") + wxT(__VERSION__)

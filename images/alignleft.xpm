@@ -1,5 +1,5 @@
 /* XPM */
-static const char *alignleft_xpm[] = {
+static char *alignleft_xpm[] = {
 /* columns rows colors chars-per-pixel */
 "16 15 64 1",
 "F c #0F0F0F",

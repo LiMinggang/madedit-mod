@@ -1,5 +1,5 @@
 /* XPM */
-static const char *spellchecker_xpm[] = {
+static char *spellchecker_xpm[] = {
 /* columns rows colors chars-per-pixel */
 "16 15 15 1",
 ". c Black",

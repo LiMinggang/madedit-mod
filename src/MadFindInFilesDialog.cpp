@@ -475,8 +475,6 @@ void MadFindInFilesDialog::MadFindInFilesDialogActivate(wxActivateEvent& event)
 
     if(event.GetActive())
     {
-        //WxButtonReplace->Disable();
-        //WxCheckBoxEnableReplace->SetValue(false);
         bool bb;
         m_Config->Read(wxT("/MadEdit/SearchCaseSensitive"), &bb, false);
         WxCheckBoxCaseSensitive->SetValue(bb);

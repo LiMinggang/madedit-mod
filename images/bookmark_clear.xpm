@@ -1,5 +1,5 @@
 /* XPM */
-static const char *bookmark_clear_xpm[] = {
+static char *bookmark_clear_xpm[] = {
 /* columns rows colors chars-per-pixel */
 "16 15 89 1",
 "+ c #C82513",

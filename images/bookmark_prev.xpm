@@ -1,5 +1,5 @@
 /* XPM */
-static const char *bookmark_prev_xpm[] = {
+static char *bookmark_prev_xpm[] = {
 /* columns rows colors chars-per-pixel */
 "16 15 94 2",
 "+  c #C82513",

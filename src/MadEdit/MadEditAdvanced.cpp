@@ -3124,7 +3124,9 @@ void MadEdit::ColumnAlignLeft()
         {
             int lineid = m_SelectionBegin->lineid;
             (void)GetLineByLine(lit, rangeFrom, lineid);
-            rangeTo = m_SelectionEnd->pos;
+			rangeTo = m_SelectionEnd->pos;
+            if((m_SelectionBegin->lineid != m_SelectionEnd->lineid)&&(m_SelectionBegin->xpos == m_SelectionEnd->xpos))
+                rangeTo += m_SelectionEnd->iter->m_Size;
         }
         else
         {

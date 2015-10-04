@@ -1,5 +1,5 @@
 /* XPM */
-static const char *saverec_xpm[] = {
+static char *saverec_xpm[] = {
 /* columns rows colors chars-per-pixel */
 "16 15 179 2",
 "z. c #E3DECE",

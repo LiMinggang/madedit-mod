@@ -1,5 +1,5 @@
 /* XPM */
-static const char *playback_xpm[] = {
+static char *playback_xpm[] = {
 /* columns rows colors chars-per-pixel */
 "16 15 49 1",
 "X c #325A2F",

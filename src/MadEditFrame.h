@@ -52,7 +52,7 @@ class MadEdit;
 class MadTreeCtrl;
 class MadRecentList;
 class wxSpellCheckEngineInterface;
-class MadHtmlPreview;
+class wxHtmlWindow;
 
 enum MadToolBarType
 {
@@ -84,6 +84,7 @@ public:
 		wxMenuBar *WxMenuBar1;
 		wxAuiToolBar *WxToolBar[tbMAX];
 		wxAuiToolBar *m_QuickSeachBar;
+		wxAuiToolBar *m_RefreshView;
 		wxStatusBar *WxStatusBar1;
   ////GUI Control Declaration End
 public:
@@ -123,7 +124,7 @@ public:
     wxAuiNotebook *m_InfoNotebook; //
     //wxTreeCtrl *m_FindInFilesResults;
     MadTreeCtrl   *m_FindInFilesResults;
-    MadHtmlPreview *m_HtmlPreview;
+    wxHtmlWindow *m_HtmlPreview;
     int            m_PreviewType;
     wxComboBox    *m_QuickSearch;
     wxCheckBox    *m_CheckboxWholeWord;
@@ -318,6 +319,8 @@ public:
     void OnViewLineSpacing(wxCommandEvent& event);
     void OnViewTabColumn(wxCommandEvent& event);
     void OnViewPreview(wxCommandEvent& event);
+    void OnRefreshPreview(wxCommandEvent& event);
+    void OnClosePreview(wxCommandEvent& event);
     void OnViewNoWrap(wxCommandEvent& event);
     void OnViewWrapByWindow(wxCommandEvent& event);
     void OnViewWrapByColumn(wxCommandEvent& event);
@@ -626,6 +629,8 @@ enum { // menu id
     menuPreview,
     menuPreview1,
     menuPreview16 = menuPreview1 + 15,
+	menuRefreshPreview,
+	menuClosePreview,
     menuShowAllChars,
     menuMarkActiveLine,
     menuMarkBracePair,
