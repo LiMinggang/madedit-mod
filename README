@@ -114,24 +114,26 @@ Mod v0.3.7
 12.New: Refactor of popup memu/toolbar code
 13.New: ReadOnly flag on title and GUI update for ReadOnly mode(disable edit icon/menu in ReadOnly mode)
 14.New: New toolbar for refresh/close preview window
-15.Fix: Assertion failure MadEditFrame.cpp:3403
-16.Fix: Rollback changes in Search/Replace(since 0.3.5)
-17.Fix: Assertion failure at MadEditFrame.cpp:5692 under x86_x64 linux
-18.Fix: Fix dictionary download link of OpenOffice on About Dialog
-19.Fix: Link warning of VS project
-20.Fix: Show search results by default
-21.Fix: Set default page of Option dialog to "General"
-22.Fix: Move encoding update and config update from MainFrame to search/replace dialog
-23.Fix: Reverse order toolbars under linux
-24.Fix: Remove extra overflow icon from Toolbars
-25.Fix: Crash in ColumnAlign while reverse selection
-26.Fix: Column align will has issue if you select beyond the EOF
-27.Fix: File name was not marked as "modified*" in ColumnAlign
-28.Fix: Minor fix in menu help text
-29.Fix: Improve simplified Chinese translation
-30.Fix: Wrong dnd cursor if no selection
-31:Improvement on GUI update for menu and toolbar
-32.Fix: UI update issue of toggle toolbars
+15.New: Transparency supported in Search/Replace dialog
+16.Fix: Assertion failure MadEditFrame.cpp:3403
+17.Fix: Rollback changes in Search/Replace(since 0.3.5)
+18.Fix: Assertion failure at MadEditFrame.cpp:5692 under x86_x64 linux
+19.Fix: Fix dictionary download link of OpenOffice on About Dialog
+20.Fix: Link warning of VS project
+21.Fix: Show search results by default
+22.Fix: Set default page of Option dialog to "General"
+23.Fix: Move encoding update and config update from MainFrame to search/replace dialog
+24.Fix: Reverse order toolbars under linux
+25.Fix: Remove extra overflow icon from Toolbars
+26.Fix: Crash in ColumnAlign while reverse selection
+27.Fix: Column align will has issue if you select beyond the EOF
+28.Fix: File name was not marked as "modified*" in ColumnAlign
+29.Fix: Minor fix in menu help text
+30.Fix: Improve simplified Chinese translation
+31.Fix: Wrong dnd cursor if no selection
+32.Improvement on GUI update for menu and toolbar
+33.Fix: UI update issue of toggle toolbars
+34.Fix: Remove no parent from the style of Replace dialog
 
 Mod v0.3.6
 New: Create scripts directory if not exists while saving recorded script

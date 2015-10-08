@@ -31,12 +31,10 @@
 ../src/MadHighlightingDialog.h
 ../src/MadPurgeHistoryDialog.cpp
 ../src/MadPurgeHistoryDialog.h
-../src/MadSearchDialog.cpp
-../src/MadSearchDialog.h
+../src/MadSearchReplaceDialog.cpp
+../src/MadSearchReplaceDialog.h
 ../src/MadSortDialog.cpp
 ../src/MadSortDialog.h
-../src/MadReplaceDialog.cpp
-../src/MadReplaceDialog.h
 ../src/MadOptionsDialog.cpp
 ../src/MadOptionsDialog.h
 ../src/MadConvEncDialog.cpp

@@ -220,8 +220,7 @@
     <ClCompile Include="..\..\src\MadPrintout.cpp" />
     <ClCompile Include="..\..\src\MadPurgeHistoryDialog.cpp" />
     <ClCompile Include="..\..\src\MadRecentList.cpp" />
-    <ClCompile Include="..\..\src\MadReplaceDialog.cpp" />
-    <ClCompile Include="..\..\src\MadSearchDialog.cpp" />
+    <ClCompile Include="..\..\src\MadSearchReplaceDialog.cpp" />
     <ClCompile Include="..\..\src\MadSortDialog.cpp" />
     <ClCompile Include="..\..\src\MadUtils.cpp" />
     <ClCompile Include="..\..\src\MadWordCountDialog.cpp" />
@@ -294,8 +293,7 @@
     <ClInclude Include="..\..\src\MadPrintout.h" />
     <ClInclude Include="..\..\src\MadPurgeHistoryDialog.h" />
     <ClInclude Include="..\..\src\MadRecentList.h" />
-    <ClInclude Include="..\..\src\MadReplaceDialog.h" />
-    <ClInclude Include="..\..\src\MadSearchDialog.h" />
+    <ClInclude Include="..\..\src\MadSearchReplaceDialog.h" />
     <ClInclude Include="..\..\src\MadSortDialog.h" />
     <ClInclude Include="..\..\src\MadUtils.h" />
     <ClInclude Include="..\..\src\MadWordCountDialog.h" />

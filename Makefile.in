@@ -111,8 +111,7 @@ am_madedit_OBJECTS = src/madedit-MadAboutDialog.$(OBJEXT) \
 	src/madedit-MadOptionsDialog.$(OBJEXT) \
 	src/madedit-MadPlugin.$(OBJEXT) \
 	src/madedit-MadPrintout.$(OBJEXT) \
-	src/madedit-MadReplaceDialog.$(OBJEXT) \
-	src/madedit-MadSearchDialog.$(OBJEXT) \
+	src/madedit-MadSearchReplaceDialog.$(OBJEXT) \
 	src/madedit-MadSortDialog.$(OBJEXT) \
 	src/madedit-MadUtils.$(OBJEXT) \
 	src/madedit-MadFileAssociationDialog.$(OBJEXT) \
@@ -670,10 +669,8 @@ madedit_SOURCES = src/MadAboutDialog.cpp \
 	src/MadPlugin.cpp \
 	src/MadPrintout.cpp \
 	src/MadPrintout.h \
-	src/MadReplaceDialog.cpp \
-	src/MadReplaceDialog.h \
-	src/MadSearchDialog.cpp \
-	src/MadSearchDialog.h \
+	src/MadSearchReplaceDialog.cpp \
+	src/MadSearchReplaceDialog.h \
 	src/MadSortDialog.cpp \
 	src/MadSortDialog.h \
 	src/MadUtils.cpp \
@@ -1094,8 +1091,7 @@ noinst_HEADERS = description-pak \
 	src/MadFindInFilesDialog.wxform \
 	src/MadHighlightingDialog.wxform \
 	src/MadOptionsDialog.wxform \
-	src/MadReplaceDialog.wxform \
-	src/MadSearchDialog.wxform \
+	src/MadSearchReplaceDialog.wxform \
 	src/MadSortDialog.wxform \
 	src/MadWordCountDialog.wxform \
 	src/plugin_example/makefile.linux \
@@ -1317,9 +1313,7 @@ src/madedit-MadPlugin.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/madedit-MadPrintout.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
-src/madedit-MadReplaceDialog.$(OBJEXT): src/$(am__dirstamp) \
-	src/$(DEPDIR)/$(am__dirstamp)
-src/madedit-MadSearchDialog.$(OBJEXT): src/$(am__dirstamp) \
+src/madedit-MadSearchReplaceDialog.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/madedit-MadSortDialog.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
@@ -2152,8 +2146,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/madedit-MadPrintout.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/madedit-MadPurgeHistoryDialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/madedit-MadRecentList.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/madedit-MadReplaceDialog.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/madedit-MadSearchDialog.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/madedit-MadSearchReplaceDialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/madedit-MadSortDialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/madedit-MadUtils.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/madedit-MadWordCountDialog.Po@am__quote@
@@ -2330,28 +2323,14 @@ src/madedit-MadPrintout.obj: src/MadPrintout.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o src/madedit-MadPrintout.obj `if test -f 'src/MadPrintout.cpp'; then $(CYGPATH_W) 'src/MadPrintout.cpp'; else $(CYGPATH_W) '$(srcdir)/src/MadPrintout.cpp'; fi`
 
-src/madedit-MadReplaceDialog.o: src/MadReplaceDialog.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT src/madedit-MadReplaceDialog.o -MD -MP -MF src/$(DEPDIR)/madedit-MadReplaceDialog.Tpo -c -o src/madedit-MadReplaceDialog.o `test -f 'src/MadReplaceDialog.cpp' || echo '$(srcdir)/'`src/MadReplaceDialog.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/$(DEPDIR)/madedit-MadReplaceDialog.Tpo src/$(DEPDIR)/madedit-MadReplaceDialog.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/MadReplaceDialog.cpp' object='src/madedit-MadReplaceDialog.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o src/madedit-MadReplaceDialog.o `test -f 'src/MadReplaceDialog.cpp' || echo '$(srcdir)/'`src/MadReplaceDialog.cpp
-
-src/madedit-MadReplaceDialog.obj: src/MadReplaceDialog.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT src/madedit-MadReplaceDialog.obj -MD -MP -MF src/$(DEPDIR)/madedit-MadReplaceDialog.Tpo -c -o src/madedit-MadReplaceDialog.obj `if test -f 'src/MadReplaceDialog.cpp'; then $(CYGPATH_W) 'src/MadReplaceDialog.cpp'; else $(CYGPATH_W) '$(srcdir)/src/MadReplaceDialog.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/$(DEPDIR)/madedit-MadReplaceDialog.Tpo src/$(DEPDIR)/madedit-MadReplaceDialog.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/MadReplaceDialog.cpp' object='src/madedit-MadReplaceDialog.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o src/madedit-MadReplaceDialog.obj `if test -f 'src/MadReplaceDialog.cpp'; then $(CYGPATH_W) 'src/MadReplaceDialog.cpp'; else $(CYGPATH_W) '$(srcdir)/src/MadReplaceDialog.cpp'; fi`
-
-src/madedit-MadSearchDialog.o: src/MadSearchDialog.cpp
+src/madedit-MadSearchReplaceDialog.o: src/MadSearchDialog.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT src/madedit-MadSearchDialog.o -MD -MP -MF src/$(DEPDIR)/madedit-MadSearchDialog.Tpo -c -o src/madedit-MadSearchDialog.o `test -f 'src/MadSearchDialog.cpp' || echo '$(srcdir)/'`src/MadSearchDialog.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/$(DEPDIR)/madedit-MadSearchDialog.Tpo src/$(DEPDIR)/madedit-MadSearchDialog.Po
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/MadSearchDialog.cpp' object='src/madedit-MadSearchDialog.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o src/madedit-MadSearchDialog.o `test -f 'src/MadSearchDialog.cpp' || echo '$(srcdir)/'`src/MadSearchDialog.cpp
 
-src/madedit-MadSearchDialog.obj: src/MadSearchDialog.cpp
+src/madedit-MadSearchReplaceDialog.obj: src/MadSearchDialog.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT src/madedit-MadSearchDialog.obj -MD -MP -MF src/$(DEPDIR)/madedit-MadSearchDialog.Tpo -c -o src/madedit-MadSearchDialog.obj `if test -f 'src/MadSearchDialog.cpp'; then $(CYGPATH_W) 'src/MadSearchDialog.cpp'; else $(CYGPATH_W) '$(srcdir)/src/MadSearchDialog.cpp'; fi`
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/$(DEPDIR)/madedit-MadSearchDialog.Tpo src/$(DEPDIR)/madedit-MadSearchDialog.Po
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/MadSearchDialog.cpp' object='src/madedit-MadSearchDialog.obj' libtool=no @AMDEPBACKSLASH@

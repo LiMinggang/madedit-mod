@@ -11,8 +11,7 @@
 #include "MadEdit/MadSyntax.h"
 #include "MadEdit/TradSimp.h"
 #include "MadEditFrame.h"
-#include "MadSearchDialog.h"
-#include "MadReplaceDialog.h"
+#include "MadSearchReplaceDialog.h"
 #include "MadFindInFilesDialog.h"
 #include "MadOptionsDialog.h"
 #include "MadHighlightingDialog.h"
@@ -1045,18 +1044,32 @@ void OnEditStatusChanged( MadEdit *madedit )
 
             g_StatusBar->Update(); // repaint immediately
 
-            /*if( g_SearchDialog != NULL )
+            /*if( g_SearchReplaceDialog != NULL )
             {
-                g_SearchDialog->UpdateCheckBoxByCBHex( g_SearchDialog->WxCheckBoxFindHex->GetValue() );
+                g_SearchReplaceDialog->UpdateCheckBoxByCBHex( g_SearchReplaceDialog->WxCheckBoxFindHex->GetValue() );
             }
 
-            if( g_ReplaceDialog != NULL )
+            if( g_SearchReplaceDialog != NULL )
             {
-                g_ReplaceDialog->UpdateCheckBoxByCBHex( g_ReplaceDialog->WxCheckBoxFindHex->GetValue() );
+                g_SearchReplaceDialog->UpdateCheckBoxByCBHex( g_SearchReplaceDialog->WxCheckBoxFindHex->GetValue() );
             }*/
 
             g_ActiveMadEdit->Refresh( false );
         }
+    }
+}
+
+void OnEditActivate( MadEdit *madedit )
+{
+    if( g_SearchReplaceDialog && g_SearchReplaceDialog->IsShown() )
+    {
+        g_SearchReplaceDialog->SetTransparency();
+        return;
+    }
+    
+    if( g_FindInFilesDialog && g_FindInFilesDialog->IsShown() )
+    {
+        return;
     }
 }
 
@@ -1141,6 +1154,18 @@ void UpdateMenus()
     g_Menu_Help->UpdateUI();
 }
 
+void HideModalessDialogs()
+{
+    if( g_SearchReplaceDialog )
+    {
+        g_SearchReplaceDialog->Show( false );
+    }
+
+    if( g_FindInFilesDialog )
+    {
+        g_FindInFilesDialog->Show( false );
+    }
+}
 
 //---------------------------------------------------------------------------
 
@@ -2780,14 +2805,9 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 
         if( g_ForcePurgeThisTime )
         {
-            if( g_SearchDialog == NULL )
+            if( g_SearchReplaceDialog == NULL )
             {
-                g_SearchDialog = new MadSearchDialog( this, -1 );
-            }
-
-            if( g_ReplaceDialog == NULL )
-            {
-                g_ReplaceDialog = new MadReplaceDialog( this, -1 );
+                g_SearchReplaceDialog = new MadSearchReplaceDialog( this, -1 );
             }
 
             if( g_FindInFilesDialog == NULL )
@@ -2796,20 +2816,13 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
             }
         }
 
-        if( g_SearchDialog != NULL )
+        if( g_SearchReplaceDialog != NULL )
         {
-            if( g_SearchDialog->IsShown() )
-            { g_SearchDialog->Show( false ); }
+            if( g_SearchReplaceDialog->IsShown() )
+            { g_SearchReplaceDialog->Show( false ); }
 
-            g_SearchDialog->PurgeRecentFindTexts();
-        }
-
-        if( g_ReplaceDialog != NULL )
-        {
-            if( g_ReplaceDialog->IsShown() )
-            { g_ReplaceDialog->Show( false ); }
-
-            g_ReplaceDialog->PurgeRecentReplaceTexts();
+            g_SearchReplaceDialog->PurgeRecentFindTexts();
+            g_SearchReplaceDialog->PurgeRecentReplaceTexts();
         }
 
         if( g_FindInFilesDialog != NULL )
@@ -2857,28 +2870,29 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
     m_Config->SetPath( wxT( "/RecentFonts" ) );
     m_RecentFonts->Save( *m_Config );
 
-    if( g_SearchDialog != NULL )
+    if( g_SearchReplaceDialog != NULL )
     {
-        if( g_SearchDialog->IsShown() )
-        { g_SearchDialog->Show( false ); }
+        if( g_SearchReplaceDialog->IsShown() )
+        { g_SearchReplaceDialog->Show( false ); }
 
         m_Config->SetPath( wxT( "/RecentFindText" ) );
-        g_SearchDialog->m_RecentFindText->Save( *m_Config );
+        g_SearchReplaceDialog->m_RecentFindText->Save( *m_Config );
+        m_Config->SetPath( wxT( "/RecentReplaceText" ) );
+        g_SearchReplaceDialog->m_RecentReplaceText->Save( *m_Config );
         // add: gogo, 19.09.2009
-        g_SearchDialog->GetPosition( &x, &y );
+        g_SearchReplaceDialog->GetPosition( &x, &y );
         m_Config->Write( wxT( "/MadEdit/SearchWinLeft" ), x );
         m_Config->Write( wxT( "/MadEdit/SearchWinTop" ), y );
-        m_Config->Write( wxT( "/MadEdit/SearchThrEndOfFile" ), g_SearchDialog->WxCheckBoxSearchThrEndOfFile->GetValue() );
+        m_Config->Write( wxT( "/MadEdit/SearchThrEndOfFile" ), g_SearchReplaceDialog->WxCheckBoxSearchThrEndOfFile->GetValue() );
+
+        if(CanSetTransparent())
+        {
+            m_Config->Write(wxT("/MadEdit/AlwaysTransparent"), g_SearchReplaceDialog->WxRadioAlways->GetValue());
+
+            long trans = 25;
+            m_Config->Read( wxT("/MadEdit/Transparency"), &trans );
+        }
         //----------
-    }
-
-    if( g_ReplaceDialog != NULL )
-    {
-        if( g_ReplaceDialog->IsShown() )
-        { g_ReplaceDialog->Show( false ); }
-
-        m_Config->SetPath( wxT( "/RecentReplaceText" ) );
-        g_ReplaceDialog->m_RecentReplaceText->Save( *m_Config );
     }
 
     if( g_FindInFilesDialog != NULL )
@@ -2947,17 +2961,12 @@ void MadEditFrame::MadEditFrameKeyDown( wxKeyEvent& event )
     switch( key )
     {
     case WXK_ESCAPE:
-        if( g_SearchDialog && g_SearchDialog->IsShown() )
+        if( g_SearchReplaceDialog )
         {
-            g_SearchDialog->Show( false );
+            g_SearchReplaceDialog->Show( false );
         }
 
-        if( g_ReplaceDialog && g_ReplaceDialog->IsShown() )
-        {
-            g_ReplaceDialog->Show( false );
-        }
-
-        if( g_FindInFilesDialog && g_FindInFilesDialog->IsShown() )
+        if( g_FindInFilesDialog )
         {
             g_FindInFilesDialog->Show( false );
         }
@@ -3571,6 +3580,7 @@ void MadEditFrame::OpenFile( const wxString &fname, bool mustExist )
         //madedit->SetDropTarget(new DnDFile());
         madedit->SetOnSelectionChanged( &OnEditSelectionChanged );
         madedit->SetOnStatusChanged( &OnEditStatusChanged );
+        madedit->SetOnActivate(&OnEditActivate);
         madedit->SetOnToggleWindow( &OnEditToggleWindow );
         madedit->SetOnMouseRightUp( &OnEditMouseRightUp );
         madedit->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ) );
@@ -4337,20 +4347,7 @@ void MadEditFrame::OnFileOpen( wxCommandEvent& event )
 #endif
 
     // Hide Modaless Dialog
-    if( g_SearchDialog && g_SearchDialog->IsShown() )
-    {
-        g_SearchDialog->Show( false );
-    }
-
-    if( g_ReplaceDialog && g_ReplaceDialog->IsShown() )
-    {
-        g_ReplaceDialog->Show( false );
-    }
-
-    if( g_FindInFilesDialog && g_FindInFilesDialog->IsShown() )
-    {
-        g_FindInFilesDialog->Show( false );
-    }
+    HideModalessDialogs();
 
     dlg.SetFilterIndex( filterIndex );
 
@@ -4397,20 +4394,7 @@ void MadEditFrame::OnFileSaveAs( wxCommandEvent& event )
         { name.Truncate( name.Len() - 1 ); }
 
         // Hide Modaless Dialog
-        if( g_SearchDialog && g_SearchDialog->IsShown() )
-        {
-            g_SearchDialog->Show( false );
-        }
-
-        if( g_ReplaceDialog && g_ReplaceDialog->IsShown() )
-        {
-            g_ReplaceDialog->Show( false );
-        }
-
-        if( g_FindInFilesDialog && g_FindInFilesDialog->IsShown() )
-        {
-            g_FindInFilesDialog->Show( false );
-        }
+        HideModalessDialogs();
 
         if( g_ActiveMadEdit->Save( false, name, true ) == wxID_YES )
         {
@@ -4565,20 +4549,7 @@ void MadEditFrame::OnFilePageSetup( wxCommandEvent& event )
     //(*g_PageSetupData) = *g_PrintData;
 
     // Hide Modaless Dialog
-    if( g_SearchDialog && g_SearchDialog->IsShown() )
-    {
-        g_SearchDialog->Show( false );
-    }
-
-    if( g_ReplaceDialog && g_ReplaceDialog->IsShown() )
-    {
-        g_ReplaceDialog->Show( false );
-    }
-
-    if( g_FindInFilesDialog && g_FindInFilesDialog->IsShown() )
-    {
-        g_FindInFilesDialog->Show( false );
-    }
+    HideModalessDialogs();
 
     wxPageSetupDialog pageSetupDialog( this, g_PageSetupData );
 
@@ -4618,20 +4589,7 @@ void MadEditFrame::OnFilePrintPreview( wxCommandEvent& event )
     //#endif
 
     // Hide Modaless Dialog
-    if( g_SearchDialog && g_SearchDialog->IsShown() )
-    {
-        g_SearchDialog->Show( false );
-    }
-
-    if( g_ReplaceDialog && g_ReplaceDialog->IsShown() )
-    {
-        g_ReplaceDialog->Show( false );
-    }
-
-    if( g_FindInFilesDialog && g_FindInFilesDialog->IsShown() )
-    {
-        g_FindInFilesDialog->Show( false );
-    }
+    HideModalessDialogs();
 
     if( !preview->Ok() )
     {
@@ -4714,20 +4672,7 @@ void MadEditFrame::OnFilePrint( wxCommandEvent& event )
     if( g_ActiveMadEdit == NULL ) { return; }
 
     // Hide Modaless Dialog
-    if( g_SearchDialog && g_SearchDialog->IsShown() )
-    {
-        g_SearchDialog->Show( false );
-    }
-
-    if( g_ReplaceDialog && g_ReplaceDialog->IsShown() )
-    {
-        g_ReplaceDialog->Show( false );
-    }
-
-    if( g_FindInFilesDialog && g_FindInFilesDialog->IsShown() )
-    {
-        g_FindInFilesDialog->Show( false );
-    }
+    HideModalessDialogs();
 
 #if defined(__WXMSW__)
     // using a temp modal-dialog to avoid the user change the contents of Edit
@@ -5055,20 +5000,7 @@ void MadEditFrame::OnEditSortOptions( wxCommandEvent& event )
     dialog.WxCheckBoxRemoveDup->SetValue( rem );
 
     // Hide Modaless Dialog
-    if( g_SearchDialog && g_SearchDialog->IsShown() )
-    {
-        g_SearchDialog->Show( false );
-    }
-
-    if( g_ReplaceDialog && g_ReplaceDialog->IsShown() )
-    {
-        g_ReplaceDialog->Show( false );
-    }
-
-    if( g_FindInFilesDialog && g_FindInFilesDialog->IsShown() )
-    {
-        g_FindInFilesDialog->Show( false );
-    }
+    HideModalessDialogs();
 
     if( dialog.ShowModal() == wxID_OK )
     {
@@ -5407,20 +5339,7 @@ void MadEditFrame::OnEditInsertNumbers( wxCommandEvent& event )
     if( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() == emColumnMode )
     {
         // Hide Modaless Dialog
-        if( g_SearchDialog && g_SearchDialog->IsShown() )
-        {
-            g_SearchDialog->Show( false );
-        }
-
-        if( g_ReplaceDialog && g_ReplaceDialog->IsShown() )
-        {
-            g_ReplaceDialog->Show( false );
-        }
-
-        if( g_FindInFilesDialog && g_FindInFilesDialog->IsShown() )
-        {
-            g_FindInFilesDialog->Show( false );
-        }
+        HideModalessDialogs();
 
         if( g_MadNumberDlg == NULL ) { g_MadNumberDlg = new MadNumberDlg( this ); }
 
@@ -5573,51 +5492,33 @@ void MadEditFrame::OnSearchFind( wxCommandEvent& event )
 {
     if( g_ActiveMadEdit == NULL ) { return; }
 
-    if( g_SearchDialog == NULL )
+    if( g_SearchReplaceDialog == NULL )
     {
-        g_SearchDialog = new MadSearchDialog( this, -1 );
+        g_SearchReplaceDialog = new MadSearchReplaceDialog( this, -1 );
     }
 
-    if( g_ReplaceDialog == NULL )
-    {
-        g_ReplaceDialog = new MadReplaceDialog( this, -1 );
-    }
-
-    if( g_ReplaceDialog->IsShown() )
-    {
-        g_ReplaceDialog->Show( false );
-    }
-
-    if( g_FindInFilesDialog && g_FindInFilesDialog->IsShown() )
+    if( g_FindInFilesDialog )
     {
         g_FindInFilesDialog->Show( false );
     }
 
-    //g_SearchDialog->m_FindText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
-    g_SearchDialog->Show();
-    g_SearchDialog->SetFocus();
-    g_SearchDialog->Raise();
-    //wxString fname;
-    //int fsize;
-    //g_SearchDialog->UpdateCheckBoxByCBHex( g_SearchDialog->WxCheckBoxFindHex->GetValue() );
-    //g_ActiveMadEdit->GetFont( fname, fsize );
-    //g_SearchDialog->m_FindText->SetFont( fname, 14 );
+    g_SearchReplaceDialog->ShowFindUI();
 
     if(g_ActiveMadEdit->IsSelected())
     {
         if(g_ActiveMadEdit->GetSelectionSize()<=10240)
         {
             wxString ws;
-            if(g_SearchDialog->WxCheckBoxFindHex->GetValue())
+            if(g_SearchReplaceDialog->WxCheckBoxFindHex->GetValue())
             {
                 wxString ws;
                 g_ActiveMadEdit->GetSelHexString(ws, true);
-                g_SearchDialog->m_FindText->SetText(ws);
+                g_SearchReplaceDialog->m_FindText->SetText(ws);
             }
             else
             {
                 g_ActiveMadEdit->GetSelText(ws);
-                g_SearchDialog->m_FindText->SetText(ws);
+                g_SearchReplaceDialog->m_FindText->SetText(ws);
             }
         }
         else
@@ -5626,65 +5527,57 @@ void MadEditFrame::OnSearchFind( wxCommandEvent& event )
             g_ActiveMadEdit->GetWordFromCaretPos(ws);
             if(!ws.IsEmpty() && ws[0]>wxChar(0x20))
             {
-                g_SearchDialog->m_FindText->SetText(ws);
+                g_SearchReplaceDialog->m_FindText->SetText(ws);
             }
         }
     }
     else
     {
-        if(!(g_SearchDialog->WxCheckBoxFindHex->GetValue()) )
+        if(!(g_SearchReplaceDialog->WxCheckBoxFindHex->GetValue()) )
         {
             wxString ws;
             g_ActiveMadEdit->GetWordFromCaretPos(ws);
             if(!ws.IsEmpty() && ws[0]>wxChar(0x20))
             {
-                g_SearchDialog->m_FindText->SetText(ws);
+                g_SearchReplaceDialog->m_FindText->SetText(ws);
             }
         }
     }
 
-    g_SearchDialog->m_FindText->SelectAll();
-    g_SearchDialog->m_FindText->SetFocus();
+    g_SearchReplaceDialog->m_FindText->SelectAll();
+    g_SearchReplaceDialog->m_FindText->SetFocus();
 }
 
 void MadEditFrame::OnSearchFindNext( wxCommandEvent& event )
 {
     if( g_ActiveMadEdit == NULL ) { return; }
 
-    if( g_SearchDialog == NULL )
+    if( g_SearchReplaceDialog == NULL )
     {
-        g_SearchDialog = new MadSearchDialog( this, -1 );
+        g_SearchReplaceDialog = new MadSearchReplaceDialog( this, -1 );
     }
-
-    if( g_ReplaceDialog == NULL )
-    {
-        g_ReplaceDialog = new MadReplaceDialog( this, -1 );
-    }
-
-    if( g_ReplaceDialog->IsShown() )
-    { g_ReplaceDialog->Show( false ); }
 
     if( g_FindInFilesDialog != NULL && g_FindInFilesDialog->IsShown() )
     { g_FindInFilesDialog->Show( false ); }
 
-    //g_SearchDialog->m_FindText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
-    //g_SearchDialog->UpdateCheckBoxByCBHex( g_SearchDialog->WxCheckBoxFindHex->GetValue() );
+    //g_SearchReplaceDialog->m_FindText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
+    //g_SearchReplaceDialog->UpdateCheckBoxByCBHex( g_SearchReplaceDialog->WxCheckBoxFindHex->GetValue() );
 
     if(g_ActiveMadEdit->IsSelected())
     {
         if(g_ActiveMadEdit->GetSelectionSize()<=10240)
         {
-            if(g_SearchDialog->WxCheckBoxFindHex->GetValue())
+            if(g_SearchReplaceDialog->WxCheckBoxFindHex->GetValue())
             {
                 wxString ws;
                 g_ActiveMadEdit->GetSelHexString(ws, true);
-                g_SearchDialog->m_FindText->SetText(ws);
+                g_SearchReplaceDialog->m_FindText->SetText(ws);
             }
             else
             {
                 wxString ws;
                 g_ActiveMadEdit->GetSelText(ws);
-                g_SearchDialog->m_FindText->SetText(ws);
+                g_SearchReplaceDialog->m_FindText->SetText(ws);
             }
         }
         else
@@ -5693,117 +5586,97 @@ void MadEditFrame::OnSearchFindNext( wxCommandEvent& event )
             g_ActiveMadEdit->GetWordFromCaretPos(ws);
             if(!ws.IsEmpty() && ws[0]>wxChar(0x20))
             {
-                g_SearchDialog->m_FindText->SetText(ws);
+                g_SearchReplaceDialog->m_FindText->SetText(ws);
             }
         }
     }
 
     wxCommandEvent e;
-    g_SearchDialog->WxButtonFindNextClick( e );
+    g_SearchReplaceDialog->WxButtonFindNextClick( e );
 }
 
 void MadEditFrame::OnSearchFindPrevious( wxCommandEvent& event )
 {
     if( g_ActiveMadEdit == NULL ) { return; }
 
-    if( g_SearchDialog == NULL )
+    if( g_SearchReplaceDialog == NULL )
     {
-        g_SearchDialog = new MadSearchDialog( this, -1 );
+        g_SearchReplaceDialog = new MadSearchReplaceDialog( this, -1 );
     }
-
-    if( g_ReplaceDialog == NULL )
-    {
-        g_ReplaceDialog = new MadReplaceDialog( this, -1 );
-    }
-
-    if( g_ReplaceDialog->IsShown() )
-    { g_ReplaceDialog->Show( false ); }
 
     if( g_FindInFilesDialog != NULL && g_FindInFilesDialog->IsShown() )
     { g_FindInFilesDialog->Show( false ); }
 
-    //g_SearchDialog->m_FindText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
-    //g_SearchDialog->UpdateCheckBoxByCBHex( g_SearchDialog->WxCheckBoxFindHex->GetValue() );
+    //g_SearchReplaceDialog->m_FindText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
+    //g_SearchReplaceDialog->UpdateCheckBoxByCBHex( g_SearchReplaceDialog->WxCheckBoxFindHex->GetValue() );
 
     if(g_ActiveMadEdit->IsSelected())
     {
+        wxString ws;
         if(g_ActiveMadEdit->GetSelectionSize()<=10240)
         {
-            if(g_SearchDialog->WxCheckBoxFindHex->GetValue())
+            if(g_SearchReplaceDialog->WxCheckBoxFindHex->GetValue())
             {
-                wxString ws;
                 g_ActiveMadEdit->GetSelHexString(ws, true);
-                g_SearchDialog->m_FindText->SetText(ws);
+                g_SearchReplaceDialog->m_FindText->SetText(ws);
             }
             else
             {
-                wxString ws;
                 g_ActiveMadEdit->GetSelText(ws);
-                g_SearchDialog->m_FindText->SetText(ws);
+                g_SearchReplaceDialog->m_FindText->SetText(ws);
             }
         }
         else
         {
-            wxString ws;
             g_ActiveMadEdit->GetWordFromCaretPos(ws);
             if(!ws.IsEmpty() && ws[0]>wxChar(0x20))
             {
-                g_SearchDialog->m_FindText->SetText(ws);
+                g_SearchReplaceDialog->m_FindText->SetText(ws);
             }
         }
     }
 
     wxCommandEvent e;
-    g_SearchDialog->WxButtonFindPrevClick( e );
+    g_SearchReplaceDialog->WxButtonFindPrevClick( e );
 }
 
 void MadEditFrame::OnSearchReplace( wxCommandEvent& event )
 {
     if( g_ActiveMadEdit == NULL ) { return; }
 
-    if( g_SearchDialog == NULL )
+    if( g_SearchReplaceDialog == NULL )
     {
-        g_SearchDialog = new MadSearchDialog( this, -1 );
+        g_SearchReplaceDialog = new MadSearchReplaceDialog( this, -1 );
     }
 
-    if( g_ReplaceDialog == NULL )
-    {
-        g_ReplaceDialog = new MadReplaceDialog( this, -1 );
-    }
-
-    if( g_FindInFilesDialog != NULL && g_FindInFilesDialog->IsShown() )
+    if( g_FindInFilesDialog != NULL )
     { g_FindInFilesDialog->Show( false ); }
 
-    if( g_SearchDialog->IsShown() )
-    { g_SearchDialog->Show( false ); }
-
-    //g_ReplaceDialog->m_FindText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
-    //g_ReplaceDialog->m_ReplaceText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
-    g_ReplaceDialog->Show();
-    g_ReplaceDialog->SetFocus();
-    g_ReplaceDialog->Raise();
+    //g_SearchReplaceDialog->m_FindText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
+    //g_SearchReplaceDialog->m_ReplaceText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
+    g_SearchReplaceDialog->ShowReplaceUI();
     //wxString fname;
     //int fsize;
-    //g_ReplaceDialog->UpdateCheckBoxByCBHex( g_ReplaceDialog->WxCheckBoxFindHex->GetValue() );
+    //g_SearchReplaceDialog->UpdateCheckBoxByCBHex( g_SearchReplaceDialog->WxCheckBoxFindHex->GetValue() );
     //g_ActiveMadEdit->GetFont( fname, fsize );
-    //g_ReplaceDialog->m_FindText->SetFont( fname, 14 );
-    //g_ReplaceDialog->m_ReplaceText->SetFont( fname, 14 );
+    //g_SearchReplaceDialog->m_FindText->SetFont( fname, 14 );
+    //g_SearchReplaceDialog->m_ReplaceText->SetFont( fname, 14 );
 
     if(g_ActiveMadEdit->IsSelected())
     {
         if(g_ActiveMadEdit->GetSelectionSize()<=10240)
         {
-            if(g_ReplaceDialog->WxCheckBoxFindHex->GetValue())
+            if(g_SearchReplaceDialog->WxCheckBoxFindHex->GetValue())
             {
                 wxString ws;
                 g_ActiveMadEdit->GetSelHexString(ws, true);
-                g_ReplaceDialog->m_FindText->SetText(ws);
+                g_SearchReplaceDialog->m_FindText->SetText(ws);
             }
             else
             {
                 wxString ws;
                 g_ActiveMadEdit->GetSelText(ws);
-                g_ReplaceDialog->m_FindText->SetText(ws);
+                g_SearchReplaceDialog->m_FindText->SetText(ws);
             }
         }
         else
@@ -5812,37 +5685,32 @@ void MadEditFrame::OnSearchReplace( wxCommandEvent& event )
             g_ActiveMadEdit->GetWordFromCaretPos(ws);
             if(!ws.IsEmpty() && ws[0]>wxChar(0x20))
             {
-                g_ReplaceDialog->m_FindText->SetText(ws);
+                g_SearchReplaceDialog->m_FindText->SetText(ws);
             }
         }
     }
     else
     {
-        if(!(g_ReplaceDialog->WxCheckBoxFindHex->GetValue()) )
+        if(!(g_SearchReplaceDialog->WxCheckBoxFindHex->GetValue()) )
         {
             wxString ws;
             g_ActiveMadEdit->GetWordFromCaretPos(ws);
             if(!ws.IsEmpty() && ws[0]>wxChar(0x20))
             {
-                g_ReplaceDialog->m_FindText->SetText(ws);
+                g_SearchReplaceDialog->m_FindText->SetText(ws);
             }
         }
     }
 
-    g_ReplaceDialog->m_FindText->SelectAll();
-    g_ReplaceDialog->m_FindText->SetFocus();
+    g_SearchReplaceDialog->m_FindText->SelectAll();
+    g_SearchReplaceDialog->m_FindText->SetFocus();
 }
 
 void MadEditFrame::OnSearchFindInFiles( wxCommandEvent& event )
 {
-    if( g_SearchDialog == NULL )
+    if( g_SearchReplaceDialog == NULL )
     {
-        g_SearchDialog = new MadSearchDialog( this, -1 );
-    }
-
-    if( g_ReplaceDialog == NULL )
-    {
-        g_ReplaceDialog = new MadReplaceDialog( this, -1 );
+        g_SearchReplaceDialog = new MadSearchReplaceDialog( this, -1 );
     }
 
     if( g_FindInFilesDialog == NULL )
@@ -5851,21 +5719,11 @@ void MadEditFrame::OnSearchFindInFiles( wxCommandEvent& event )
     }
 
     // Hide Modaless Dialog
-    if( g_SearchDialog->IsShown() )
-    {
-        g_SearchDialog->Show( false );
-    }
-
-    if( g_ReplaceDialog->IsShown() )
-    {
-        g_ReplaceDialog->Show( false );
-    }
+    g_SearchReplaceDialog->Show( false );
 
     static wxString text( _( "Find/Replace in Files Results" ) );
     int pid = m_InfoNotebook->GetPageIndex( m_FindInFilesResults );
     m_InfoNotebook->SetPageText( pid, text );
-    g_ReplaceDialog->Show( false );
-    g_SearchDialog->Show( false );
     g_FindInFilesDialog->Show();
     g_FindInFilesDialog->SetFocus();
     g_FindInFilesDialog->Raise();
@@ -5928,20 +5786,7 @@ void MadEditFrame::OnSearchGoToLine( wxCommandEvent& event )
     if( g_ActiveMadEdit == NULL ) { return; }
 
     // Hide Modaless Dialog
-    if( g_SearchDialog && g_SearchDialog->IsShown() )
-    {
-        g_SearchDialog->Show( false );
-    }
-
-    if( g_ReplaceDialog && g_ReplaceDialog->IsShown() )
-    {
-        g_ReplaceDialog->Show( false );
-    }
-
-    if( g_FindInFilesDialog && g_FindInFilesDialog->IsShown() )
-    {
-        g_FindInFilesDialog->Show( false );
-    }
+    HideModalessDialogs();
 
     static wxString defstr;
     int lineCount = g_ActiveMadEdit->GetLineCount();
@@ -5975,20 +5820,7 @@ void MadEditFrame::OnSearchGoToPosition( wxCommandEvent& event )
     if( g_ActiveMadEdit == NULL ) { return; }
 
     // Hide Modaless Dialog
-    if( g_SearchDialog && g_SearchDialog->IsShown() )
-    {
-        g_SearchDialog->Show( false );
-    }
-
-    if( g_ReplaceDialog && g_ReplaceDialog->IsShown() )
-    {
-        g_ReplaceDialog->Show( false );
-    }
-
-    if( g_FindInFilesDialog && g_FindInFilesDialog->IsShown() )
-    {
-        g_FindInFilesDialog->Show( false );
-    }
+    HideModalessDialogs();
 
     static wxString defstr;
     wxLongLong wxPos( g_ActiveMadEdit->GetFileSize() );
@@ -6138,20 +5970,7 @@ void MadEditFrame::OnViewSetFont( wxCommandEvent& event )
     }
 
     // Hide Modaless Dialog
-    if( g_SearchDialog && g_SearchDialog->IsShown() )
-    {
-        g_SearchDialog->Show( false );
-    }
-
-    if( g_ReplaceDialog && g_ReplaceDialog->IsShown() )
-    {
-        g_ReplaceDialog->Show( false );
-    }
-
-    if( g_FindInFilesDialog && g_FindInFilesDialog->IsShown() )
-    {
-        g_FindInFilesDialog->Show( false );
-    }
+    HideModalessDialogs();
 
     wxFontDialog dialog( this, data );
 
@@ -6224,11 +6043,11 @@ void MadEditFrame::OnViewPreview( wxCommandEvent& event )
             m_AuiManager.AddPane( m_HtmlPreview, wxAuiPaneInfo().Name( wxT( "Markdown/HTML Preview" ) ).Caption( _( "Markdown/HTML Preview" ) ).Floatable( false ).Right().CloseButton( false ) );
             
             long style=wxAUI_TB_NO_TOOLTIPS;
-            m_RefreshView = new wxAuiToolBar( this, ID_WXTOOLBAR1 + tbMAX+1, wxPoint( 0, 0 ), wxSize( 392, 29 ), style    );
+            m_RefreshView = new wxAuiToolBar( this, ID_WXTOOLBAR1 + tbMAX+1, wxPoint( 0, 0 ), wxSize( 392, 29 ), style );
             m_RefreshView->AddTool( menuRefreshPreview, wxT( "RefreshPreview" ), m_ImageList->GetBitmap( refresh_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _( "Refresh" ), _( "Refresh prviewed text" ), NULL );
             m_RefreshView->AddTool( menuClosePreview, wxT( "ClosePreview" ), m_ImageList->GetBitmap( closepreview_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _( "Close Preveiw" ), _( "Close preveiw windows" ), NULL );
             m_RefreshView->Realize();
-            m_AuiManager.AddPane( m_RefreshView, wxAuiPaneInfo().Name( wxT( "RefreshBar" ) ).CaptionVisible(false).CloseButton (false).Dockable(false).DockFixed().Resizable(false).Right().Float() );
+			m_AuiManager.AddPane(m_RefreshView, wxAuiPaneInfo().Name(wxT("RefreshBar")).CaptionVisible(false).CloseButton(false).Dockable(false).DockFixed().Resizable(false).Top().Position(6).Float());
         }
 
         wxString text;
@@ -6585,20 +6404,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
     if( g_OptionsDialog == NULL ) { g_OptionsDialog = new MadOptionsDialog( this ); }
 
     // Hide Modaless Dialog
-    if( g_SearchDialog && g_SearchDialog->IsShown() )
-    {
-        g_SearchDialog->Show( false );
-    }
-
-    if( g_ReplaceDialog && g_ReplaceDialog->IsShown() )
-    {
-        g_ReplaceDialog->Show( false );
-    }
-
-    if( g_FindInFilesDialog && g_FindInFilesDialog->IsShown() )
-    {
-        g_FindInFilesDialog->Show( false );
-    }
+    HideModalessDialogs();
 
     g_OptionsDialog->LoadOptions();
 
@@ -7023,20 +6829,7 @@ void MadEditFrame::OnToolsHighlighting( wxCommandEvent& event )
     }
 
     // Hide Modaless Dialog
-    if( g_SearchDialog && g_SearchDialog->IsShown() )
-    {
-        g_SearchDialog->Show( false );
-    }
-
-    if( g_ReplaceDialog && g_ReplaceDialog->IsShown() )
-    {
-        g_ReplaceDialog->Show( false );
-    }
-
-    if( g_FindInFilesDialog && g_FindInFilesDialog->IsShown() )
-    {
-        g_FindInFilesDialog->Show( false );
-    }
+    HideModalessDialogs();
 
     int id = g_HighlightingDialog->ShowModal();
     g_HighlightingDialog->FreeSyntax( id != wxID_OK ); // press cancel to restore the syntax
@@ -7051,20 +6844,7 @@ void MadEditFrame::OnToolsHighlighting( wxCommandEvent& event )
 void MadEditFrame::OnToolsFileAssociation( wxCommandEvent& event )
 {
     // Hide Modaless Dialog
-    if( g_SearchDialog && g_SearchDialog->IsShown() )
-    {
-        g_SearchDialog->Show( false );
-    }
-
-    if( g_ReplaceDialog && g_ReplaceDialog->IsShown() )
-    {
-        g_ReplaceDialog->Show( false );
-    }
-
-    if( g_FindInFilesDialog && g_FindInFilesDialog->IsShown() )
-    {
-        g_FindInFilesDialog->Show( false );
-    }
+    HideModalessDialogs();
 
     MadFileAssociationDialog fadialog( this, -1 );
     fadialog.ShowModal();
@@ -7089,22 +6869,22 @@ void MadEditFrame::OnToolsPurgeHistories( wxCommandEvent& event )
 
         if( dlg.wxCheckBoxRecentSearchedTexts->IsChecked() )
         {
-            if( g_SearchDialog == NULL )
+            if( g_SearchReplaceDialog == NULL )
             {
-                g_SearchDialog = new MadSearchDialog( this, -1 );
+                g_SearchReplaceDialog = new MadSearchReplaceDialog( this, -1 );
             }
 
-            g_SearchDialog->PurgeRecentFindTexts();
+            g_SearchReplaceDialog->PurgeRecentFindTexts();
         }
 
         if( dlg.wxCheckBoxRecentReplacedTexts->IsChecked() )
         {
-            if( g_ReplaceDialog == NULL )
+            if( g_SearchReplaceDialog == NULL )
             {
-                g_ReplaceDialog = new MadReplaceDialog( this, -1 );
+                g_SearchReplaceDialog = new MadSearchReplaceDialog( this, -1 );
             }
 
-            g_ReplaceDialog->PurgeRecentReplaceTexts();
+            g_SearchReplaceDialog->PurgeRecentReplaceTexts();
         }
 
         if( dlg.wxCheckBoxRecentSearchedDirectories->IsChecked() )
@@ -7148,11 +6928,8 @@ void MadEditFrame::OnToolsRunTempMacro( wxCommandEvent& event )
         g_MadMacroDlg = new MadMacroDlg( this, m_MacroDebug );
     }
 
-    if( g_SearchDialog != NULL )
-    { g_SearchDialog->Show( false ); }
-
-    if( g_ReplaceDialog != NULL )
-    { g_ReplaceDialog->Show( false ); }
+    if( g_SearchReplaceDialog != NULL )
+    { g_SearchReplaceDialog->Show( false ); }
 
     if( g_FindInFilesDialog != NULL )
     { g_FindInFilesDialog->Show( false ); }
@@ -7184,17 +6961,12 @@ void MadEditFrame::OnToolsRunMacroFile( wxCommandEvent& event )
     }
 
     // Hide Modaless Dialog
-    if( g_SearchDialog && g_SearchDialog->IsShown() )
+    if( g_SearchReplaceDialog )
     {
-        g_SearchDialog->Show( false );
+        g_SearchReplaceDialog->Show( false );
     }
 
-    if( g_ReplaceDialog && g_ReplaceDialog->IsShown() )
-    {
-        g_ReplaceDialog->Show( false );
-    }
-
-    if( g_FindInFilesDialog && g_FindInFilesDialog->IsShown() )
+    if( g_FindInFilesDialog )
     {
         g_FindInFilesDialog->Show( false );
     }
@@ -7273,13 +7045,10 @@ void MadEditFrame::OnToolsPlayRecMacro( wxCommandEvent& event )
 
         if( total > 2 ) // Ignore the restore caret line and the comments
         {
-            if( g_SearchDialog != NULL && g_SearchDialog->IsShown() )
-            { g_SearchDialog->Show( false ); }
+            if( g_SearchReplaceDialog )
+            { g_SearchReplaceDialog->Show( false ); }
 
-            if( g_ReplaceDialog != NULL && g_ReplaceDialog->IsShown() )
-            { g_ReplaceDialog->Show( false ); }
-
-            if( g_FindInFilesDialog != NULL && g_FindInFilesDialog->IsShown() )
+            if( g_FindInFilesDialog )
             { g_FindInFilesDialog->Show( false ); }
 
             if( g_MadMacroDlg == NULL )
@@ -7414,20 +7183,7 @@ void MadEditFrame::OnToolsEditMacroFile( wxCommandEvent& event )
     }
 
     // Hide Modaless Dialog
-    if( g_SearchDialog && g_SearchDialog->IsShown() )
-    {
-        g_SearchDialog->Show( false );
-    }
-
-    if( g_ReplaceDialog && g_ReplaceDialog->IsShown() )
-    {
-        g_ReplaceDialog->Show( false );
-    }
-
-    if( g_FindInFilesDialog && g_FindInFilesDialog->IsShown() )
-    {
-        g_FindInFilesDialog->Show( false );
-    }
+    HideModalessDialogs();
 
     static int filterIndex = 0;
     wxString fileFilter = wxString( wxT( "Mad Macro(*.mpy)|*.mpy|" ) ) + wxFileSelectorDefaultWildcardStr + wxT( "|All files(*;*.*)" );
@@ -7566,20 +7322,7 @@ void MadEditFrame::OnToolsConvertEncoding( wxCommandEvent& event )
     if( g_ConvEncDialog == NULL ) { g_ConvEncDialog = new MadConvEncDialog( this, -1 ); }
 
     // Hide Modaless Dialog
-    if( g_SearchDialog && g_SearchDialog->IsShown() )
-    {
-        g_SearchDialog->Show( false );
-    }
-
-    if( g_ReplaceDialog && g_ReplaceDialog->IsShown() )
-    {
-        g_ReplaceDialog->Show( false );
-    }
-
-    if( g_FindInFilesDialog && g_FindInFilesDialog->IsShown() )
-    {
-        g_FindInFilesDialog->Show( false );
-    }
+    HideModalessDialogs();
 
     if( g_ConvEncDialog->ShowModal() == wxID_OK )
     {
@@ -7675,20 +7418,7 @@ void MadEditFrame::OnToolsWordCount( wxCommandEvent& event )
     if( g_ActiveMadEdit == NULL ) { return; }
 
     // Hide Modaless Dialog
-    if( g_SearchDialog && g_SearchDialog->IsShown() )
-    {
-        g_SearchDialog->Show( false );
-    }
-
-    if( g_ReplaceDialog && g_ReplaceDialog->IsShown() )
-    {
-        g_ReplaceDialog->Show( false );
-    }
-
-    if( g_FindInFilesDialog && g_FindInFilesDialog->IsShown() )
-    {
-        g_FindInFilesDialog->Show( false );
-    }
+    HideModalessDialogs();
 
     MadWordCountDialog dialog( this, -1 );
     dialog.ShowModal();
@@ -8008,20 +7738,7 @@ void MadEditFrame::OnHelpAbout( wxCommandEvent& event )
                              _( "Press OK to visit our HomePage." ) );
 
     // Hide Modaless Dialog
-    if( g_SearchDialog && g_SearchDialog->IsShown() )
-    {
-        g_SearchDialog->Show( false );
-    }
-
-    if( g_ReplaceDialog && g_ReplaceDialog->IsShown() )
-    {
-        g_ReplaceDialog->Show( false );
-    }
-
-    if( g_FindInFilesDialog && g_FindInFilesDialog->IsShown() )
-    {
-        g_FindInFilesDialog->Show( false );
-    }
+    HideModalessDialogs();
 
     if( dlg.ShowModal() == wxID_OK )
     {

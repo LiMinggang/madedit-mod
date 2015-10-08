@@ -7,8 +7,7 @@
 
 #include "MadFindInFilesDialog.h"
 #include "MadEditFrame.h"
-#include "MadReplaceDialog.h"
-#include "MadSearchDialog.h"
+#include "MadSearchReplaceDialog.h"
 #include "MadEdit/MadEdit.h"
 #include "MadRecentList.h"
 
@@ -329,13 +328,13 @@ void MadFindInFilesDialog::CreateGUIControls(void)
     GetSizer()->Fit(this);
 
     //
-    if(g_SearchDialog->m_RecentFindText->GetCount()>0)
+    if(g_SearchReplaceDialog->m_RecentFindText->GetCount()>0)
     {
-        m_FindText->SetText(g_SearchDialog->m_RecentFindText->GetHistoryFile(0));
+        m_FindText->SetText(g_SearchReplaceDialog->m_RecentFindText->GetHistoryFile(0));
     }
-    if(g_ReplaceDialog->m_RecentReplaceText->GetCount()>0)
+    if(g_SearchReplaceDialog->m_RecentReplaceText->GetCount()>0)
     {
-        m_ReplaceText->SetText(g_ReplaceDialog->m_RecentReplaceText->GetHistoryFile(0));
+        m_ReplaceText->SetText(g_SearchReplaceDialog->m_RecentReplaceText->GetHistoryFile(0));
     }
 
     WxButtonClose->SetFocus();
@@ -380,18 +379,18 @@ void MadFindInFilesDialog::UpdateCheckBoxByCBHex(bool check)
 
 void MadFindInFilesDialog::WxBitmapButtonRecentFindTextClick(wxCommandEvent& event)
 {
-    PopupMenu(g_SearchDialog->WxPopupMenuRecentFindText);
+    PopupMenu(g_SearchReplaceDialog->WxPopupMenuRecentFindText);
 }
 
 void MadFindInFilesDialog::WxBitmapButtonRecentReplaceTextClick(wxCommandEvent& event)
 {
-    PopupMenu(g_ReplaceDialog->WxPopupMenuRecentReplaceText);
+    PopupMenu(g_SearchReplaceDialog->WxPopupMenuRecentReplaceText);
 }
 
 void MadFindInFilesDialog::OnRecentFindText(wxCommandEvent& event)
 {
     int idx=event.GetId()-ID_RECENTFINDTEXT1;
-    wxString text=g_SearchDialog->m_RecentFindText->GetHistoryFile(idx);
+    wxString text=g_SearchReplaceDialog->m_RecentFindText->GetHistoryFile(idx);
     if(!text.IsEmpty())
     {
         m_FindText->SetText(text);
@@ -402,7 +401,7 @@ void MadFindInFilesDialog::OnRecentFindText(wxCommandEvent& event)
 void MadFindInFilesDialog::OnRecentReplaceText(wxCommandEvent& event)
 {
     int idx=event.GetId()-ID_RECENTREPLACETEXT1;
-    wxString text=g_ReplaceDialog->m_RecentReplaceText->GetHistoryFile(idx);
+    wxString text=g_SearchReplaceDialog->m_RecentReplaceText->GetHistoryFile(idx);
     if(!text.IsEmpty())
     {
         m_ReplaceText->SetText(text);
@@ -427,7 +426,7 @@ void MadFindInFilesDialog::WxButtonFindClick(wxCommandEvent& event)
     m_FindText->GetText(text);
     if(!text.IsEmpty())
     {
-        g_SearchDialog->m_RecentFindText->AddFileToHistory(text);
+        g_SearchReplaceDialog->m_RecentFindText->AddFileToHistory(text);
         FindReplaceInFiles(false);
     }
 }
@@ -442,10 +441,10 @@ void MadFindInFilesDialog::WxButtonReplaceClick(wxCommandEvent& event)
     m_ReplaceText->GetText(text2);
     if(!text.IsEmpty())
     {
-        g_SearchDialog->m_RecentFindText->AddFileToHistory(text);
+        g_SearchReplaceDialog->m_RecentFindText->AddFileToHistory(text);
         if(!text2.IsEmpty())
         {
-            g_ReplaceDialog->m_RecentReplaceText->AddFileToHistory(text2);
+            g_SearchReplaceDialog->m_RecentReplaceText->AddFileToHistory(text2);
         }
         FindReplaceInFiles(true);
     }

@@ -66,12 +66,6 @@
     <ClInclude Include="..\..\src\MadPrintout.h">
       <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\MadReplaceDialog.h">
-      <Filter>Header files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\MadSearchDialog.h">
-      <Filter>Header files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\MadSortDialog.h">
       <Filter>Header files</Filter>
     </ClInclude>
@@ -225,6 +219,9 @@
     <ClInclude Include="..\..\astyle\formattersettings.h">
       <Filter>Source files\Astyle</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\MadSearchReplaceDialog.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\MadAboutDialog.cpp">
@@ -252,12 +249,6 @@
       <Filter>Source files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\MadPrintout.cpp">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\MadReplaceDialog.cpp">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\MadSearchDialog.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\MadSortDialog.cpp">
@@ -442,6 +433,9 @@
     </ClCompile>
     <ClCompile Include="..\..\astyle\astyle\ASFormatter.cpp">
       <Filter>Source files\Astyle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadSearchReplaceDialog.cpp">
+      <Filter>Source files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

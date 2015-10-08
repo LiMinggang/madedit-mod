@@ -1133,8 +1133,7 @@ public: // utility functions
     }
 
     bool StringToHex(wxString ws, vector<wxByte> &hex);
-    friend class MadSearchDialog;
-    friend class MadReplaceDialog;
+    friend class MadSearchReplaceDialog;
     friend class mad_python::PyMadEdit;
 };
 

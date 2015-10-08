@@ -9,8 +9,7 @@
 ///------------------------------------------------------------------
 
 #include "MadEditFrame.h"
-#include "MadReplaceDialog.h"
-#include "MadSearchDialog.h"
+#include "MadSearchReplaceDialog.h"
 #include "MadFindInFilesDialog.h"
 #include "MadPurgeHistoryDialog.h"
 
