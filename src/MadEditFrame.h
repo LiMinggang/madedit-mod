@@ -209,7 +209,6 @@ public:
     void OnUpdateUI_MenuToolsStopRecMacro(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuToolsPlayRecMacro(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuToolsSaveRecMacro(wxUpdateUIEvent& event);
-    void OnUpdateUI_MenuToolsMacroDebugMode( wxUpdateUIEvent& event );
 
     void OnFileNew(wxCommandEvent& event);
     void OnFileOpen(wxCommandEvent& event);
@@ -357,7 +356,6 @@ public:
     void OnToolsSaveRecMacro(wxCommandEvent& event);
     void OnToolsMadScriptList(wxCommandEvent& event);
     void OnToolsEditMacroFile(wxCommandEvent& event);
-    void OnToolsMacroDebugMode(wxCommandEvent& event);
 
     void OnToolsToggleBOM(wxCommandEvent& event);
     void OnToolsConvertToDOS(wxCommandEvent& event);
@@ -447,7 +445,6 @@ private:
     MadMacroMode m_MadMacroStatus;
     wxArrayString m_MadMacroScripts;
     int m_LastSelBeg, m_LastSelEnd;
-    bool m_MacroDebug;
 public:
     MadMacroMode GetMadMacroStatus(){return m_MadMacroStatus;}
     bool IsMacroRunning() {return (m_MadMacroStatus == emMacroRunning);}
@@ -637,7 +634,6 @@ enum { // menu id
     menuTextMode,
     menuColumnMode,
     menuHexMode,
-    menuMacroDebugMode,
     menuSpellChecker,
     menuSpellIgnore,
     menuSpellAdd2Dict,

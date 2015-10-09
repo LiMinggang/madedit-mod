@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-07 21:44+0800\n"
+"POT-Creation-Date: 2015-10-09 14:11+0800\n"
 "PO-Revision-Date: 2015-06-30 21:50+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
@@ -417,7 +417,7 @@ msgstr ""
 msgid "Please wait while printing..."
 msgstr ""
 
-#: wxstd.po.cpp:102 ../src/MadEditFrame.cpp:1577
+#: wxstd.po.cpp:102 ../src/MadEditFrame.cpp:1587
 #: ../src/MadOptionsDialog.cpp:454
 msgid "Print"
 msgstr ""
@@ -523,7 +523,7 @@ msgid "Hex Mode to Text/Column Mode"
 msgstr ""
 
 #: ../src/MadEdit/MadEditBasic.cpp:2385 ../src/MadEdit/MadEditBasic.cpp:2455
-#: ../src/MadEditFrame.cpp:3542
+#: ../src/MadEditFrame.cpp:3552
 msgid "The Parent Directory of this file does not exist:"
 msgstr "Каталог для этого файла не существует"
 
@@ -545,13 +545,13 @@ msgstr "Вы хотите сохранить этот файл?"
 
 #: ../src/MadEdit/MadEditBasic.cpp:2507 ../src/MadEdit/MadEditBasic.cpp:2570
 #: ../src/MadEdit/MadEditBasic.cpp:2626 ../src/MadEditFrame.cpp:332
-#: ../src/MadEditFrame.cpp:338 ../src/MadSearchReplaceDialog.cpp:1517
+#: ../src/MadEditFrame.cpp:338 ../src/MadSearchReplaceDialog.cpp:1520
 msgid "&Yes"
 msgstr ""
 
 #: ../src/MadEdit/MadEditBasic.cpp:2508 ../src/MadEdit/MadEditBasic.cpp:2570
 #: ../src/MadEdit/MadEditBasic.cpp:2626 ../src/MadEditFrame.cpp:333
-#: ../src/MadEditFrame.cpp:338 ../src/MadSearchReplaceDialog.cpp:1517
+#: ../src/MadEditFrame.cpp:338 ../src/MadSearchReplaceDialog.cpp:1520
 msgid "&No"
 msgstr ""
 
@@ -567,7 +567,7 @@ msgstr ""
 msgid "Save File As"
 msgstr "Сохранить как"
 
-#: ../src/MadEdit/MadEditBasic.cpp:2521 ../src/MadEditFrame.cpp:1561
+#: ../src/MadEdit/MadEditBasic.cpp:2521 ../src/MadEditFrame.cpp:1571
 msgid "Save File"
 msgstr "Сохранить файл"
 
@@ -588,7 +588,7 @@ msgid "The input string is not a valid Hex-String:"
 msgstr "Строка не является правильной Hex-String:"
 
 #: ../src/MadEdit/MadEditBasic.cpp:3512 ../src/MadFindInFilesDialog.cpp:823
-#: ../src/MadSearchReplaceDialog.cpp:1401
+#: ../src/MadSearchReplaceDialog.cpp:1404
 #, c-format
 msgid "Found %d matched texts..."
 msgstr ""
@@ -686,1750 +686,1742 @@ msgstr ""
 msgid "' from dictionary"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1557
+#: ../src/MadEditFrame.cpp:1567
 msgid "&File"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1558
+#: ../src/MadEditFrame.cpp:1568
 msgid "&New File"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1558
+#: ../src/MadEditFrame.cpp:1568
 msgid "Create a new file"
 msgstr "Создать новый файл"
 
-#: ../src/MadEditFrame.cpp:1558
+#: ../src/MadEditFrame.cpp:1568
 #, fuzzy
 msgid "New File"
 msgstr "Сохранить файл"
 
-#: ../src/MadEditFrame.cpp:1559
+#: ../src/MadEditFrame.cpp:1569
 msgid "&Open File..."
 msgstr "Открыть файл (&O)"
 
-#: ../src/MadEditFrame.cpp:1559
+#: ../src/MadEditFrame.cpp:1569
 msgid "Open an existing file"
 msgstr "Открыть существующий файл"
 
-#: ../src/MadEditFrame.cpp:1559 ../src/MadEditFrame.cpp:4330
+#: ../src/MadEditFrame.cpp:1569 ../src/MadEditFrame.cpp:4334
 msgid "Open File"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1561
+#: ../src/MadEditFrame.cpp:1571
 msgid "&Save File"
 msgstr "Сохранить файл (&S)"
 
-#: ../src/MadEditFrame.cpp:1561
+#: ../src/MadEditFrame.cpp:1571
 msgid "Save the file"
 msgstr "Сохранить файл"
 
-#: ../src/MadEditFrame.cpp:1562
+#: ../src/MadEditFrame.cpp:1572
 msgid "Save &As..."
 msgstr "Сохранить как (&A)..."
 
-#: ../src/MadEditFrame.cpp:1562
+#: ../src/MadEditFrame.cpp:1572
 msgid "Save the file with a new name"
 msgstr "Сохранить файл с новым именем"
 
-#: ../src/MadEditFrame.cpp:1563
+#: ../src/MadEditFrame.cpp:1573
 msgid "Sa&ve All"
 msgstr "Сохранить все (&v)"
 
-#: ../src/MadEditFrame.cpp:1563
+#: ../src/MadEditFrame.cpp:1573
 msgid "Save all files"
 msgstr "Сохранить все файлы"
 
-#: ../src/MadEditFrame.cpp:1563
+#: ../src/MadEditFrame.cpp:1573
 #, fuzzy
 msgid "Save All"
 msgstr "Сохранить все (&v)"
 
-#: ../src/MadEditFrame.cpp:1565
+#: ../src/MadEditFrame.cpp:1575
 msgid "&Reload File"
 msgstr "Перечитать файл (&R)"
 
-#: ../src/MadEditFrame.cpp:1565
+#: ../src/MadEditFrame.cpp:1575
 msgid "Reload the file"
 msgstr "Перечитать файл"
 
-#: ../src/MadEditFrame.cpp:1567
+#: ../src/MadEditFrame.cpp:1577
 msgid "&Close File"
 msgstr "Закрыть файл (&C)"
 
-#: ../src/MadEditFrame.cpp:1567
+#: ../src/MadEditFrame.cpp:1577
 msgid "Close the file"
 msgstr "Закрыть файл"
 
-#: ../src/MadEditFrame.cpp:1567
+#: ../src/MadEditFrame.cpp:1577
 #, fuzzy
 msgid "Close File"
 msgstr "Закрыть файл (&C)"
 
-#: ../src/MadEditFrame.cpp:1568
+#: ../src/MadEditFrame.cpp:1578
 msgid "C&lose All"
 msgstr "Закрыть все"
 
-#: ../src/MadEditFrame.cpp:1568
+#: ../src/MadEditFrame.cpp:1578
 msgid "Close all files"
 msgstr "Закрыть все файлы"
 
-#: ../src/MadEditFrame.cpp:1568
+#: ../src/MadEditFrame.cpp:1578
 #, fuzzy
 msgid "Close All"
 msgstr "Закрыть все"
 
-#: ../src/MadEditFrame.cpp:1569
+#: ../src/MadEditFrame.cpp:1579
 #, fuzzy
 msgid "Close All But This"
 msgstr "Закрыть все файлы"
 
-#: ../src/MadEditFrame.cpp:1569
+#: ../src/MadEditFrame.cpp:1579
 #, fuzzy
 msgid "Close all files but this"
 msgstr "Закрыть все файлы"
 
-#: ../src/MadEditFrame.cpp:1570
+#: ../src/MadEditFrame.cpp:1580
 msgid "Close All To The Left"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1570
+#: ../src/MadEditFrame.cpp:1580
 #, fuzzy
 msgid "Close all files to the left"
 msgstr "Закрыть все файлы"
 
-#: ../src/MadEditFrame.cpp:1571
+#: ../src/MadEditFrame.cpp:1581
 msgid "Close All To The Right"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1571
+#: ../src/MadEditFrame.cpp:1581
 #, fuzzy
 msgid "Close all files to the right"
 msgstr "Закрыть все файлы"
 
-#: ../src/MadEditFrame.cpp:1573
+#: ../src/MadEditFrame.cpp:1583
 msgid "Set/Clear ReadOnly Flag"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1573
+#: ../src/MadEditFrame.cpp:1583
 msgid "Set/Clear ReadOnly flag of the file"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1575
+#: ../src/MadEditFrame.cpp:1585
 msgid "Page Set&up..."
 msgstr "Параметры страницы"
 
-#: ../src/MadEditFrame.cpp:1575
+#: ../src/MadEditFrame.cpp:1585
 msgid "Setup the pages for printing"
 msgstr "Печатать страницы"
 
-#: ../src/MadEditFrame.cpp:1576
+#: ../src/MadEditFrame.cpp:1586
 msgid "Print Previe&w..."
 msgstr "Просмотр печати"
 
-#: ../src/MadEditFrame.cpp:1576
+#: ../src/MadEditFrame.cpp:1586
 msgid "Preview the result of printing"
 msgstr "Просмотр печати"
 
-#: ../src/MadEditFrame.cpp:1577
+#: ../src/MadEditFrame.cpp:1587
 msgid "&Print..."
 msgstr "Печать..."
 
-#: ../src/MadEditFrame.cpp:1577
+#: ../src/MadEditFrame.cpp:1587
 msgid "Print the file"
 msgstr "Печать файла"
 
-#: ../src/MadEditFrame.cpp:1579 ../src/MadPurgeHistoryDialog.cpp:65
+#: ../src/MadEditFrame.cpp:1589 ../src/MadPurgeHistoryDialog.cpp:65
 msgid "Recent Files"
 msgstr "Последние файлы"
 
-#: ../src/MadEditFrame.cpp:1581
+#: ../src/MadEditFrame.cpp:1591
 msgid "E&xit"
 msgstr "Выход"
 
-#: ../src/MadEditFrame.cpp:1581
+#: ../src/MadEditFrame.cpp:1591
 #, fuzzy
 msgid "Quit MadEdit"
 msgstr "Выход"
 
-#: ../src/MadEditFrame.cpp:1584
+#: ../src/MadEditFrame.cpp:1594
 msgid "&Edit"
 msgstr "Редактировать"
 
-#: ../src/MadEditFrame.cpp:1585
+#: ../src/MadEditFrame.cpp:1595
 msgid "&Undo"
 msgstr "Отменить изменение"
 
-#: ../src/MadEditFrame.cpp:1585
+#: ../src/MadEditFrame.cpp:1595
 msgid "Undo the last action"
 msgstr "Отменить последнее действие"
 
-#: ../src/MadEditFrame.cpp:1585
+#: ../src/MadEditFrame.cpp:1595
 #, fuzzy
 msgid "Undo"
 msgstr "Отменить изменение"
 
-#: ../src/MadEditFrame.cpp:1588
+#: ../src/MadEditFrame.cpp:1598
 msgid "&Redo"
 msgstr "Повторить отмененное"
 
-#: ../src/MadEditFrame.cpp:1594
+#: ../src/MadEditFrame.cpp:1604
 msgid "Redo the previously undone action"
 msgstr "Повторить только что отмененное действие"
 
-#: ../src/MadEditFrame.cpp:1594
+#: ../src/MadEditFrame.cpp:1604
 #, fuzzy
 msgid "Redo"
 msgstr "Повторить отмененное"
 
-#: ../src/MadEditFrame.cpp:1597
+#: ../src/MadEditFrame.cpp:1607
 msgid "Cu&t"
 msgstr "Вырезать"
 
-#: ../src/MadEditFrame.cpp:1597
+#: ../src/MadEditFrame.cpp:1607
 msgid "Cut the selection and put it on the Clipboard"
 msgstr "Вырезать отмеченное и поместить в память"
 
-#: ../src/MadEditFrame.cpp:1597
+#: ../src/MadEditFrame.cpp:1607
 #, fuzzy
 msgid "Cut"
 msgstr "Вырезать"
 
-#: ../src/MadEditFrame.cpp:1598
+#: ../src/MadEditFrame.cpp:1608
 msgid "&Copy"
 msgstr "Копировать"
 
-#: ../src/MadEditFrame.cpp:1598
+#: ../src/MadEditFrame.cpp:1608
 msgid "Copy the selection and put it on the Clipboard"
 msgstr "Копировать отмеченное в память"
 
-#: ../src/MadEditFrame.cpp:1598
+#: ../src/MadEditFrame.cpp:1608
 #, fuzzy
 msgid "Copy"
 msgstr "Копировать"
 
-#: ../src/MadEditFrame.cpp:1599
+#: ../src/MadEditFrame.cpp:1609
 msgid "&Paste"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1599
+#: ../src/MadEditFrame.cpp:1609
 msgid "Insert data from the Clipboard"
 msgstr "Поместить данные из памяти"
 
-#: ../src/MadEditFrame.cpp:1599
+#: ../src/MadEditFrame.cpp:1609
 msgid "Paste"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1600 ../src/MadHighlightingDialog.cpp:237
+#: ../src/MadEditFrame.cpp:1610 ../src/MadHighlightingDialog.cpp:237
 msgid "&Delete"
 msgstr "Удалить"
 
-#: ../src/MadEditFrame.cpp:1600
+#: ../src/MadEditFrame.cpp:1610
 msgid "Delete data"
 msgstr "Удалить данные"
 
-#: ../src/MadEditFrame.cpp:1602
+#: ../src/MadEditFrame.cpp:1612
 msgid "Cut L&ine"
 msgstr "Вырезать строки"
 
-#: ../src/MadEditFrame.cpp:1602
+#: ../src/MadEditFrame.cpp:1612
 msgid "Cut the selected lines and put it on the Clipboard"
 msgstr "Вырезать отмеченные строки и поместить в память"
 
-#: ../src/MadEditFrame.cpp:1605
+#: ../src/MadEditFrame.cpp:1615
 msgid "Delete &Line"
 msgstr "Удалить строку"
 
-#: ../src/MadEditFrame.cpp:1611
+#: ../src/MadEditFrame.cpp:1621
 msgid "Delete the selected lines"
 msgstr "Удалить отмеченную строку"
 
-#: ../src/MadEditFrame.cpp:1613
+#: ../src/MadEditFrame.cpp:1623
 msgid "Delete Empty Lines"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1613
+#: ../src/MadEditFrame.cpp:1623
 msgid "Delete empty lines"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1614
+#: ../src/MadEditFrame.cpp:1624
 msgid "Delete Empty Lines With Spaces"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1614
+#: ../src/MadEditFrame.cpp:1624
 msgid "Delete empty lines with spaces"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1615
+#: ../src/MadEditFrame.cpp:1625
 msgid "Join Lines"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1615
+#: ../src/MadEditFrame.cpp:1625
 msgid "Join selected lines into one"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1616
+#: ../src/MadEditFrame.cpp:1626
 msgid "Tri&m Trailing Spaces"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1616
+#: ../src/MadEditFrame.cpp:1626
 msgid "Trim trailing spaces at the end of lines"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1617
+#: ../src/MadEditFrame.cpp:1627
 msgid "Tri&m Leading Spaces"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1617
+#: ../src/MadEditFrame.cpp:1627
 msgid "Trim leading spaces at the beginning of lines"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1619
+#: ../src/MadEditFrame.cpp:1629
 msgid "Select &All"
 msgstr "Выделить все"
 
-#: ../src/MadEditFrame.cpp:1619
+#: ../src/MadEditFrame.cpp:1629
 msgid "Select all data"
 msgstr "Выделить все данные"
 
-#: ../src/MadEditFrame.cpp:1620
+#: ../src/MadEditFrame.cpp:1630
 msgid "Begin/End Select"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1620
+#: ../src/MadEditFrame.cpp:1630
 msgid "Begin/End to select text"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1624
+#: ../src/MadEditFrame.cpp:1634
 msgid "Insert Ta&b Char"
 msgstr "Добавить символ Ta&b"
 
-#: ../src/MadEditFrame.cpp:1630
+#: ../src/MadEditFrame.cpp:1640
 msgid "Insert a Tab char at current position"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1632
+#: ../src/MadEditFrame.cpp:1642
 msgid "Insert Dat&e and Time"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1632
+#: ../src/MadEditFrame.cpp:1642
 msgid "Insert date and time at current position"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1636
+#: ../src/MadEditFrame.cpp:1646
 msgid "Bookmark"
 msgstr "Метка"
 
-#: ../src/MadEditFrame.cpp:1637
+#: ../src/MadEditFrame.cpp:1647
 msgid "Copy Bookmarked Lines"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1638
+#: ../src/MadEditFrame.cpp:1648
 msgid "Cut Bookmarked Lines"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1639
+#: ../src/MadEditFrame.cpp:1649
 msgid "Delete Bookmarked Lines"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1640
+#: ../src/MadEditFrame.cpp:1650
 msgid "Delete Unmarked Lines"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1641
+#: ../src/MadEditFrame.cpp:1651
 msgid "Replace Bookmarked Lines"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1643 ../src/MadEditFrame.cpp:2402
+#: ../src/MadEditFrame.cpp:1653 ../src/MadEditFrame.cpp:2408
 msgid "Ad&vanced"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1644
+#: ../src/MadEditFrame.cpp:1654
 msgid "Copy As &Hex String"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1644
+#: ../src/MadEditFrame.cpp:1654
 msgid "Copy the selection as hex-string"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1645
+#: ../src/MadEditFrame.cpp:1655
 msgid "Copy As He&x String with Space"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1645
+#: ../src/MadEditFrame.cpp:1655
 msgid "Copy the selection as hex-string with space"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1646
+#: ../src/MadEditFrame.cpp:1656
 msgid "Copy Value &Reverted from Hex String"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1646
+#: ../src/MadEditFrame.cpp:1656
 msgid "Copy the selection reverted from hex-string"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1648
+#: ../src/MadEditFrame.cpp:1658
 msgid "&Increase Indent"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1648
+#: ../src/MadEditFrame.cpp:1658
 msgid "Increase the indent of seleted lines"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1648
+#: ../src/MadEditFrame.cpp:1658
 msgid "Increase Indent"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1649
+#: ../src/MadEditFrame.cpp:1659
 msgid "&Decrease Indent"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1649
+#: ../src/MadEditFrame.cpp:1659
 msgid "Decrease the indent of seleted lines"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1649
+#: ../src/MadEditFrame.cpp:1659
 msgid "Decrease Indent"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1651
+#: ../src/MadEditFrame.cpp:1661
 msgid "&Comment"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1651
+#: ../src/MadEditFrame.cpp:1661
 msgid "Comment out the selected lines"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1651
+#: ../src/MadEditFrame.cpp:1661
 msgid "Comment"
 msgstr "Комментарий"
 
-#: ../src/MadEditFrame.cpp:1652
+#: ../src/MadEditFrame.cpp:1662
 msgid "&Uncomment"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1652
+#: ../src/MadEditFrame.cpp:1662
 msgid "Uncomment the selected lines"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1652
+#: ../src/MadEditFrame.cpp:1662
 #, fuzzy
 msgid "Uncomment"
 msgstr "Комментарий"
 
-#: ../src/MadEditFrame.cpp:1654
+#: ../src/MadEditFrame.cpp:1664
 msgid "WordWraps To NewLine Chars"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1654
+#: ../src/MadEditFrame.cpp:1664
 msgid "Convert WordWraps to NewLine chars in the file or selection"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1655
+#: ../src/MadEditFrame.cpp:1665
 msgid "NewLine Chars To WordWraps"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1655
+#: ../src/MadEditFrame.cpp:1665
 msgid "Convert NewLine chars to WordWraps in the selection"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1657
+#: ../src/MadEditFrame.cpp:1667
 msgid "To U&PPERCASE"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1657
+#: ../src/MadEditFrame.cpp:1667
 msgid "Convert the selection to uppercase"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1658
+#: ../src/MadEditFrame.cpp:1668
 msgid "To l&owerCase"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1658
+#: ../src/MadEditFrame.cpp:1668
 msgid "Convert the selection to lowercase"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1659
+#: ../src/MadEditFrame.cpp:1669
 msgid "Inver&t Case"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1659
+#: ../src/MadEditFrame.cpp:1669
 msgid "Invert the case of the selection"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1660
+#: ../src/MadEditFrame.cpp:1670
 msgid "Capitalize"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1660
+#: ../src/MadEditFrame.cpp:1670
 msgid "Capitalize words of the selection"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1662
+#: ../src/MadEditFrame.cpp:1672
 msgid "To H&alfwidth"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1662
+#: ../src/MadEditFrame.cpp:1672
 msgid "Convert the selection to halfwidth"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1663 ../src/MadEditFrame.cpp:5217
-#: ../src/MadEditFrame.cpp:5221
+#: ../src/MadEditFrame.cpp:1673 ../src/MadEditFrame.cpp:5173
+#: ../src/MadEditFrame.cpp:5177
 msgid "To Halfwidth by Options..."
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1663
+#: ../src/MadEditFrame.cpp:1673
 msgid "Convert the selection to halfwidth by options"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1664
+#: ../src/MadEditFrame.cpp:1674
 msgid "To &Fullwidth"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1664
+#: ../src/MadEditFrame.cpp:1674
 msgid "Convert the selection to fullwidth"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1665 ../src/MadEditFrame.cpp:5279
-#: ../src/MadEditFrame.cpp:5283
+#: ../src/MadEditFrame.cpp:1675 ../src/MadEditFrame.cpp:5235
+#: ../src/MadEditFrame.cpp:5239
 msgid "To Fullwidth by Options..."
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1665
+#: ../src/MadEditFrame.cpp:1675
 msgid "Convert the selection to fullwidth by options"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1667
+#: ../src/MadEditFrame.cpp:1677
 msgid "Tab Chars To Space Chars"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1667
+#: ../src/MadEditFrame.cpp:1677
 msgid "Convert Tab chars to Space chars in the selection"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1668
+#: ../src/MadEditFrame.cpp:1678
 msgid "Space Chars To Tab Chars"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1668
+#: ../src/MadEditFrame.cpp:1678
 msgid "Convert Space chars to Tab chars in the selection"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1670
+#: ../src/MadEditFrame.cpp:1680
 msgid "Insert Incremental numbers..."
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1670
+#: ../src/MadEditFrame.cpp:1680
 msgid "Insert incremental numbers with step and padding at current caret"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1670
+#: ../src/MadEditFrame.cpp:1680
 #, fuzzy
 msgid "Numbering and Bullets"
 msgstr "Число"
 
-#: ../src/MadEditFrame.cpp:1671
+#: ../src/MadEditFrame.cpp:1681
 msgid "Column Align Left"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1671
+#: ../src/MadEditFrame.cpp:1681
 #, fuzzy
 msgid "Align selection to the left"
 msgstr "Закрыть все файлы"
 
-#: ../src/MadEditFrame.cpp:1671 ../src/MadNumberDlg.cpp:123
+#: ../src/MadEditFrame.cpp:1681 ../src/MadNumberDlg.cpp:123
 msgid "Align Left"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1672
+#: ../src/MadEditFrame.cpp:1682
 msgid "Column Align Right"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1672
+#: ../src/MadEditFrame.cpp:1682
 #, fuzzy
 msgid "Align selection to the right"
 msgstr "Закрыть все файлы"
 
-#: ../src/MadEditFrame.cpp:1672 ../src/MadNumberDlg.cpp:124
+#: ../src/MadEditFrame.cpp:1682 ../src/MadNumberDlg.cpp:124
 msgid "Align Right"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1674 ../src/MadEditFrame.cpp:2404
+#: ../src/MadEditFrame.cpp:1684 ../src/MadEditFrame.cpp:2410
 #: ../src/MadSortDialog.cpp:82
 msgid "&Sort"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1675
+#: ../src/MadEditFrame.cpp:1685
 msgid "Sort Lines (&Ascending)"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1675
+#: ../src/MadEditFrame.cpp:1685
 msgid "Sort the selected or all lines in ascending order"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1676
+#: ../src/MadEditFrame.cpp:1686
 msgid "Sort Lines (&Descending)"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1676
+#: ../src/MadEditFrame.cpp:1686
 msgid "Sort the selected or all lines in descending order"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1678
+#: ../src/MadEditFrame.cpp:1688
 msgid "Sort Lines (A&scending, CaseSensitive)"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1678
+#: ../src/MadEditFrame.cpp:1688
 msgid "Sort lines in ascending order and with case-sensitive"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1679
+#: ../src/MadEditFrame.cpp:1689
 msgid "Sort Lines (D&escending, CaseSensitive)"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1679
+#: ../src/MadEditFrame.cpp:1689
 msgid "Sort lines in descending order and with case-sensitive"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1681
+#: ../src/MadEditFrame.cpp:1691
 msgid "Sort Lines by &Current Options"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1681
+#: ../src/MadEditFrame.cpp:1691
 msgid "Sort the selected or all lines by using current options"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1682
+#: ../src/MadEditFrame.cpp:1692
 msgid "Sort &Options..."
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1682
+#: ../src/MadEditFrame.cpp:1692
 msgid "Set the sort options"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1685
+#: ../src/MadEditFrame.cpp:1695
 msgid "&Search"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1686
+#: ../src/MadEditFrame.cpp:1696
 msgid "&Find..."
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1686 ../src/MadEditFrame.cpp:1689
+#: ../src/MadEditFrame.cpp:1696 ../src/MadEditFrame.cpp:1699
 msgid "Find a string"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1686
+#: ../src/MadEditFrame.cpp:1696
 msgid "Find"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1687 ../src/MadSearchReplaceDialog.cpp:186
+#: ../src/MadEditFrame.cpp:1697 ../src/MadSearchReplaceDialog.cpp:186
 msgid "Find &Next"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1687
+#: ../src/MadEditFrame.cpp:1697
 msgid "Find next occurrence"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1687 ../src/MadEditFrame.cpp:2710
-#: ../src/MadSearchReplaceDialog.cpp:519
-#: ../src/MadSearchReplaceDialog.cpp:1009
+#: ../src/MadEditFrame.cpp:1697 ../src/MadEditFrame.cpp:2720
+#: ../src/MadSearchReplaceDialog.cpp:523
+#: ../src/MadSearchReplaceDialog.cpp:1013
 msgid "Find Next"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1688 ../src/MadSearchReplaceDialog.cpp:189
+#: ../src/MadEditFrame.cpp:1698 ../src/MadSearchReplaceDialog.cpp:189
 msgid "Find &Previous"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1688
+#: ../src/MadEditFrame.cpp:1698
 msgid "Find previous occurrence"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1688 ../src/MadEditFrame.cpp:2711
-#: ../src/MadSearchReplaceDialog.cpp:652
+#: ../src/MadEditFrame.cpp:1698 ../src/MadEditFrame.cpp:2721
+#: ../src/MadSearchReplaceDialog.cpp:656
 msgid "Find Previous"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1689
+#: ../src/MadEditFrame.cpp:1699
 msgid "&Quick Find"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1691
+#: ../src/MadEditFrame.cpp:1701
 msgid "&Replace..."
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1691
+#: ../src/MadEditFrame.cpp:1701
 msgid "Replace a string"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1691 ../src/MadSearchReplaceDialog.cpp:1126
+#: ../src/MadEditFrame.cpp:1701 ../src/MadSearchReplaceDialog.cpp:1129
 msgid "Replace"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1693
+#: ../src/MadEditFrame.cpp:1703
 msgid "Fin&d/Replace in Files..."
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1693
+#: ../src/MadEditFrame.cpp:1703
 msgid "Find or replace a string in files"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1694
+#: ../src/MadEditFrame.cpp:1704
 msgid "&Show/Hide the Results of Find/Replace in Files"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1694
+#: ../src/MadEditFrame.cpp:1704
 msgid "Show or hide the results of find or replace a string in files"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1696
+#: ../src/MadEditFrame.cpp:1706
 msgid "&Go To Line..."
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1696
+#: ../src/MadEditFrame.cpp:1706
 msgid "Go to the specified line"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1697
+#: ../src/MadEditFrame.cpp:1707
 msgid "G&o To Position..."
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1697
+#: ../src/MadEditFrame.cpp:1707
 msgid "Go to the specified position"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1699
+#: ../src/MadEditFrame.cpp:1709
 msgid "Go To L&eft Brace"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1699
+#: ../src/MadEditFrame.cpp:1709
 msgid "Go to left brace"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1700
+#: ../src/MadEditFrame.cpp:1710
 msgid "Go To R&ight Brace"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1700
+#: ../src/MadEditFrame.cpp:1710
 msgid "Go to right brace"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1702
+#: ../src/MadEditFrame.cpp:1712
 msgid "Toggle/Remove Bookmark"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1702
+#: ../src/MadEditFrame.cpp:1712
 msgid "Toggle Bookmark at current line"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1703
+#: ../src/MadEditFrame.cpp:1713
 msgid "Go To Next Bookmark"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1703
+#: ../src/MadEditFrame.cpp:1713
 msgid "Go to the next bookmark"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1704
+#: ../src/MadEditFrame.cpp:1714
 msgid "Go To Previous Bookmark"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1704
+#: ../src/MadEditFrame.cpp:1714
 msgid "Go to the previous bookmark"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1705
+#: ../src/MadEditFrame.cpp:1715
 msgid "Clear All Bookmarks"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1708
+#: ../src/MadEditFrame.cpp:1718
 msgid "&View"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1709 ../src/MadEditFrame.cpp:3882
-#: ../src/MadEditFrame.cpp:3888
+#: ../src/MadEditFrame.cpp:1719 ../src/MadEditFrame.cpp:3892
+#: ../src/MadEditFrame.cpp:3898
 msgid "Encoding: "
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1710
+#: ../src/MadEditFrame.cpp:1720
 msgid "All Encodings"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1712 ../src/MadEditFrame.cpp:3897
-#: ../src/MadEditFrame.cpp:3902
+#: ../src/MadEditFrame.cpp:1722 ../src/MadEditFrame.cpp:3907
+#: ../src/MadEditFrame.cpp:3912
 msgid "Syntax Type: "
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1714 ../src/MadEditFrame.cpp:3914
-#: ../src/MadEditFrame.cpp:3919
+#: ../src/MadEditFrame.cpp:1724 ../src/MadEditFrame.cpp:3924
+#: ../src/MadEditFrame.cpp:3929
 msgid "Font Name: "
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1721
+#: ../src/MadEditFrame.cpp:1731
 msgid "[other]"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1723 ../src/MadEditFrame.cpp:3930
-#: ../src/MadEditFrame.cpp:3935
+#: ../src/MadEditFrame.cpp:1733 ../src/MadEditFrame.cpp:3940
+#: ../src/MadEditFrame.cpp:3945
 msgid "Font Size: "
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1724
+#: ../src/MadEditFrame.cpp:1734
 msgid "Set font point-size"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1797
+#: ../src/MadEditFrame.cpp:1807
 msgid "Set Font..."
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1797
+#: ../src/MadEditFrame.cpp:1807
 msgid "Change font settings"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1798
+#: ../src/MadEditFrame.cpp:1808
 msgid "&Fixed Width Mode"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1798
+#: ../src/MadEditFrame.cpp:1808
 msgid "Set/Unset the font with Fixed Width"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1801 ../src/MadEditFrame.cpp:3950
-#: ../src/MadEditFrame.cpp:3955
+#: ../src/MadEditFrame.cpp:1811 ../src/MadEditFrame.cpp:3960
+#: ../src/MadEditFrame.cpp:3965
 msgid "Tab Column: "
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1802
+#: ../src/MadEditFrame.cpp:1812
 msgid "Set column of Tab char"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1820 ../src/MadEditFrame.cpp:4018
-#: ../src/MadEditFrame.cpp:4023
+#: ../src/MadEditFrame.cpp:1830 ../src/MadEditFrame.cpp:4028
+#: ../src/MadEditFrame.cpp:4033
 msgid "Line Spacing: "
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1821
+#: ../src/MadEditFrame.cpp:1831
 msgid "Set line spacing"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1854
+#: ../src/MadEditFrame.cpp:1864
 msgid "&No Wrap"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1854
+#: ../src/MadEditFrame.cpp:1864
 msgid "Do not wrap lines"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1854
+#: ../src/MadEditFrame.cpp:1864
 msgid "No Wrap"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1855
+#: ../src/MadEditFrame.cpp:1865
 msgid "Wrap By &Window"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1855
+#: ../src/MadEditFrame.cpp:1865
 msgid "Wrap the lines by the window width"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1855
+#: ../src/MadEditFrame.cpp:1865
 msgid "Wrap By Window"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1856
+#: ../src/MadEditFrame.cpp:1866
 msgid "Wrap By Column"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1856
+#: ../src/MadEditFrame.cpp:1866
 msgid "Wrap the lines by the specified Max Columns"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1858
+#: ../src/MadEditFrame.cpp:1868
 msgid "&Display Line Number"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1858
+#: ../src/MadEditFrame.cpp:1868
 msgid "Display the Line Numbers"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1859
+#: ../src/MadEditFrame.cpp:1869
 msgid "Display &Bookmark"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1859
+#: ../src/MadEditFrame.cpp:1869
 msgid "Display the Bookmark sign"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1860
+#: ../src/MadEditFrame.cpp:1870
 msgid "Display 80th Cols &Hint"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1860
+#: ../src/MadEditFrame.cpp:1870
 msgid "Display the 80th columns hint"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1861
+#: ../src/MadEditFrame.cpp:1871
 msgid "Show End Of Line"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1861
+#: ../src/MadEditFrame.cpp:1871
 msgid "Show the sign of EndOfLine"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1862
+#: ../src/MadEditFrame.cpp:1872
 msgid "Show Tab Char"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1862
+#: ../src/MadEditFrame.cpp:1872
 msgid "Show the sign of Tab char"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1863
+#: ../src/MadEditFrame.cpp:1873
 msgid "Show Space Char"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1863
+#: ../src/MadEditFrame.cpp:1873
 msgid "Show the sign of Space char"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1864
+#: ../src/MadEditFrame.cpp:1874
 msgid "Show All Chars"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1864
+#: ../src/MadEditFrame.cpp:1874
 msgid "Show the sign of all characters"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1865
+#: ../src/MadEditFrame.cpp:1875
 msgid "Mark Active Line"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1865
+#: ../src/MadEditFrame.cpp:1875
 msgid "Mark the current line"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1866
+#: ../src/MadEditFrame.cpp:1876
 msgid "Mark Brace Pair"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1866
+#: ../src/MadEditFrame.cpp:1876
 msgid "Mark the BracePair under the caret"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1867
+#: ../src/MadEditFrame.cpp:1877
 msgid "Spell Check"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1867
+#: ../src/MadEditFrame.cpp:1877
 msgid "Turn on spell checker"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1869
+#: ../src/MadEditFrame.cpp:1879
 msgid "Toolbars"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1870 ../src/MadEditFrame.cpp:8003
+#: ../src/MadEditFrame.cpp:1880 ../src/MadEditFrame.cpp:7853
 msgid "Toggle Main Toolbar"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1870
+#: ../src/MadEditFrame.cpp:1880
 msgid "Show/Hide Main Toolbar"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1873
+#: ../src/MadEditFrame.cpp:1883
 msgid "&Text Mode"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1873
+#: ../src/MadEditFrame.cpp:1883
 msgid "Change the editing mode to Text-Mode"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1873 ../src/MadOptionsDialog.cpp:463
+#: ../src/MadEditFrame.cpp:1883 ../src/MadOptionsDialog.cpp:463
 msgid "Text Mode"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1874
+#: ../src/MadEditFrame.cpp:1884
 msgid "&Column Mode"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1874
+#: ../src/MadEditFrame.cpp:1884
 msgid "Change the editing mode to Column-Mode"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1874
+#: ../src/MadEditFrame.cpp:1884
 msgid "Column Mode"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1875
+#: ../src/MadEditFrame.cpp:1885
 msgid "&Hex Mode"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1875
+#: ../src/MadEditFrame.cpp:1885
 msgid "Change the editing mode to Hex-Mode"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1875
+#: ../src/MadEditFrame.cpp:1885
 msgid "Hex Mode"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1877 ../src/MadEditFrame.cpp:3986
+#: ../src/MadEditFrame.cpp:1887 ../src/MadEditFrame.cpp:3996
 msgid "Preview as: "
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1880
+#: ../src/MadEditFrame.cpp:1890
 msgid "&Macro"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1881
+#: ../src/MadEditFrame.cpp:1891
 msgid "Run TemporayMacro"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1881
+#: ../src/MadEditFrame.cpp:1891
 msgid "Run temporary macro"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1882
+#: ../src/MadEditFrame.cpp:1892
 msgid "Load Saved MacroScript..."
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1882
+#: ../src/MadEditFrame.cpp:1892
 msgid "Load saved macro script"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1883
+#: ../src/MadEditFrame.cpp:1893
 msgid "Start Recording"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1884
+#: ../src/MadEditFrame.cpp:1894
 msgid "Stop Recording"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1885
+#: ../src/MadEditFrame.cpp:1895
 msgid "Playback"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1886
+#: ../src/MadEditFrame.cpp:1896
 msgid "Save Currently Recorded Macro..."
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1886
+#: ../src/MadEditFrame.cpp:1896
 msgid "Save Currently Recorded Macro"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1886
+#: ../src/MadEditFrame.cpp:1896
 msgid "Save Recorded Macro"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1887
+#: ../src/MadEditFrame.cpp:1897
 msgid "Local Script List"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1888
+#: ../src/MadEditFrame.cpp:1898
 msgid "Edit Saved MacroScript..."
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1888
+#: ../src/MadEditFrame.cpp:1898
 msgid "Edit saved macro script"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1891
-msgid "Macro Debug Mode"
-msgstr ""
-
-#: ../src/MadEditFrame.cpp:1891
-msgid "Show Macro running output for debugging"
-msgstr ""
-
-#: ../src/MadEditFrame.cpp:1894
+#: ../src/MadEditFrame.cpp:1901
 msgid "&Tools"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1895
+#: ../src/MadEditFrame.cpp:1902
 msgid "&Options..."
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1895
+#: ../src/MadEditFrame.cpp:1902
 msgid "Change the configuration"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1896
+#: ../src/MadEditFrame.cpp:1903
 msgid "&Syntax Highlighting Settings..."
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1896
+#: ../src/MadEditFrame.cpp:1903
 msgid "Change syntax highlighting settings"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1898
+#: ../src/MadEditFrame.cpp:1905
 msgid "&File Type Associations..."
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1898
+#: ../src/MadEditFrame.cpp:1905
 msgid "Change file type associations"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1900
+#: ../src/MadEditFrame.cpp:1907
 msgid "&Purge Histories..."
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1900
+#: ../src/MadEditFrame.cpp:1907
 msgid "Clearing out your history"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1902 ../src/MadEditFrame.cpp:4176
+#: ../src/MadEditFrame.cpp:1909 ../src/MadEditFrame.cpp:4186
 msgid "Has Unicode BOM (Byte-Order Mark)"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1903
+#: ../src/MadEditFrame.cpp:1910
 msgid "Add/Remove BOM"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1903
+#: ../src/MadEditFrame.cpp:1910
 msgid "Add/Remove Unicode BOM"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1905 ../src/MadEditFrame.cpp:4191
+#: ../src/MadEditFrame.cpp:1912 ../src/MadEditFrame.cpp:4201
 msgid "NewLine Char (File Format): "
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1906
+#: ../src/MadEditFrame.cpp:1913
 msgid "Convert To CRLF/0D0A (&DOS)"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1906
+#: ../src/MadEditFrame.cpp:1913
 msgid "Convert the file format to DOS format"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1907
+#: ../src/MadEditFrame.cpp:1914
 msgid "Convert To CR/0D (Old &MAC)"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1907
+#: ../src/MadEditFrame.cpp:1914
 msgid "Convert the file format to MAC format"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1908
+#: ../src/MadEditFrame.cpp:1915
 msgid "Convert To LF/0A (&UNIX/OSX)"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1908
+#: ../src/MadEditFrame.cpp:1915
 msgid "Convert the file format to UNIX format"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1909 ../src/MadEditFrame.cpp:4218
+#: ../src/MadEditFrame.cpp:1916 ../src/MadEditFrame.cpp:4228
 msgid "Press Enter to Insert NewLine Char: "
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1910
+#: ../src/MadEditFrame.cpp:1917
 msgid "Insert CRLF/0D0A (&DOS)"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1910
+#: ../src/MadEditFrame.cpp:1917
 msgid "Insert CR&LF chars when pressing Enter key"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1911
+#: ../src/MadEditFrame.cpp:1918
 msgid "Insert CR/0D (Old &MAC)"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1911
+#: ../src/MadEditFrame.cpp:1918
 msgid "Insert CR char when pressing Enter key"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1912
+#: ../src/MadEditFrame.cpp:1919
 msgid "Insert LF/0A (&UNIX/OSX)"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1912
+#: ../src/MadEditFrame.cpp:1919
 msgid "Insert LF char when pressing Enter key"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1914
+#: ../src/MadEditFrame.cpp:1921
 msgid "Convert File &Encoding..."
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1914
+#: ../src/MadEditFrame.cpp:1921
 msgid "Convert to the specified encoding"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1916
+#: ../src/MadEditFrame.cpp:1923
 msgid "Convert &Chinese Char"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1917
+#: ../src/MadEditFrame.cpp:1924
 msgid "File: Simplified Chinese to &Traditional Chinese"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1917
+#: ../src/MadEditFrame.cpp:1924
 msgid ""
 "Convert simplified Chinese chars to traditional Chinese chars in the file"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1918
+#: ../src/MadEditFrame.cpp:1925
 msgid "File: Traditional Chinese to &Simplified Chinese"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1918
+#: ../src/MadEditFrame.cpp:1925
 msgid ""
 "Convert traditional Chinese chars to simplified Chinese chars in the file"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1919
+#: ../src/MadEditFrame.cpp:1926
 msgid "File: Japanese Kanji to Tr&aditional Chinese"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1919
+#: ../src/MadEditFrame.cpp:1926
 msgid "Convert Japanese Kanji to traditional Chinese chars in the file"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1920
+#: ../src/MadEditFrame.cpp:1927
 msgid "File: Japanese Kanji to Si&mplified Chinese"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1920
+#: ../src/MadEditFrame.cpp:1927
 msgid "Convert Japanese Kanji to simplified Chinese chars in the file"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1921
+#: ../src/MadEditFrame.cpp:1928
 msgid "File: Chinese to &Japanese Kanji"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1921
+#: ../src/MadEditFrame.cpp:1928
 msgid "Convert Chinese chars to Japanese Kanji in the file"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1923
+#: ../src/MadEditFrame.cpp:1930
 msgid "Clipboard: Simplified Chinese to T&raditional Chinese"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1923
+#: ../src/MadEditFrame.cpp:1930
 msgid ""
 "Convert simplified Chinese chars to traditional Chinese chars in the "
 "clipboard"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1924
+#: ../src/MadEditFrame.cpp:1931
 msgid "Clipboard: Traditional Chinese to S&implified Chinese"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1924
+#: ../src/MadEditFrame.cpp:1931
 msgid ""
 "Convert traditional Chinese chars to simplified Chinese chars in the "
 "clipboard"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1925
+#: ../src/MadEditFrame.cpp:1932
 msgid "Clipboard: Japanese Kanji to Tra&ditional Chinese"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1925
+#: ../src/MadEditFrame.cpp:1932
 msgid "Convert Japanese Kanji to traditional Chinese chars in the clipboard"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1926
+#: ../src/MadEditFrame.cpp:1933
 msgid "Clipboard: Japanese Kanji to Sim&plified Chinese"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1926
+#: ../src/MadEditFrame.cpp:1933
 msgid "Convert Japanese Kanji to simplified Chinese chars in the clipboard"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1927
+#: ../src/MadEditFrame.cpp:1934
 msgid "Clipboard: Chinese to Japanese &Kanji"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1927
+#: ../src/MadEditFrame.cpp:1934
 msgid "Convert Chinese chars to Japanese Kanji in the clipboard"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1929
+#: ../src/MadEditFrame.cpp:1936
 msgid "Text Converter/Formatter"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1930
+#: ../src/MadEditFrame.cpp:1937
 msgid "&Markdown to HTML"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1930
+#: ../src/MadEditFrame.cpp:1937
 msgid "Convert Markdown to HTML"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1931
+#: ../src/MadEditFrame.cpp:1938
 msgid "&HTML to Plain Text"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1931
+#: ../src/MadEditFrame.cpp:1938
 msgid "Convert HTML to Plain Text"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1933
+#: ../src/MadEditFrame.cpp:1940
 msgid "&Astyle(C++/C#/Java/ObjC)"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1933
+#: ../src/MadEditFrame.cpp:1940
 msgid "Format selection or whole file(C++/C#/Java)"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1934
+#: ../src/MadEditFrame.cpp:1941
 msgid "&XML Formatter"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1934
+#: ../src/MadEditFrame.cpp:1941
 msgid "Format XML(whole file)"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1936
+#: ../src/MadEditFrame.cpp:1943
 msgid "&Word Count..."
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1936
+#: ../src/MadEditFrame.cpp:1943
 msgid "Count the words and chars of the file or selection"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1939
+#: ../src/MadEditFrame.cpp:1946
 msgid "&Window"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1940
+#: ../src/MadEditFrame.cpp:1947
 msgid "&Toggle Window"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1940
+#: ../src/MadEditFrame.cpp:1947
 msgid "Switch to the previous active window"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1941
+#: ../src/MadEditFrame.cpp:1948
 msgid "&Previous Window"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1941
+#: ../src/MadEditFrame.cpp:1948
 msgid "Activate the previous window"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1942
+#: ../src/MadEditFrame.cpp:1949
 msgid "&Next Window"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1942
+#: ../src/MadEditFrame.cpp:1949
 msgid "Activate the next window"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1945
+#: ../src/MadEditFrame.cpp:1952
 msgid "&Help"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1946
+#: ../src/MadEditFrame.cpp:1953
 msgid "&About MadEdit-Mod..."
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1950
+#: ../src/MadEditFrame.cpp:1957
 msgid "Move caret left one char"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1951
+#: ../src/MadEditFrame.cpp:1958
 msgid "Move caret right one char"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1952
+#: ../src/MadEditFrame.cpp:1959
 msgid "Move caret up one line"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1953
+#: ../src/MadEditFrame.cpp:1960
 msgid "Move caret down one line"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1954
+#: ../src/MadEditFrame.cpp:1961
 msgid "Go to begin of line"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1955
+#: ../src/MadEditFrame.cpp:1962
 msgid "Go to end of line"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1956
+#: ../src/MadEditFrame.cpp:1963
 msgid "Go to begin of document"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1957
+#: ../src/MadEditFrame.cpp:1964
 msgid "Go to end of document"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1958
+#: ../src/MadEditFrame.cpp:1965
 msgid "Go to previous page"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1959
+#: ../src/MadEditFrame.cpp:1966
 msgid "Go to next page"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1960
+#: ../src/MadEditFrame.cpp:1967
 msgid "Go to previous word"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1961
+#: ../src/MadEditFrame.cpp:1968
 msgid "Go to next word"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1963
+#: ../src/MadEditFrame.cpp:1970
 msgid "Move caret left one char and select"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1964
+#: ../src/MadEditFrame.cpp:1971
 msgid "Move caret right one char and select"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1965
+#: ../src/MadEditFrame.cpp:1972
 msgid "Move caret up one line and select"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1966
+#: ../src/MadEditFrame.cpp:1973
 msgid "Move caret down one line and select"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1967
+#: ../src/MadEditFrame.cpp:1974
 msgid "Go to begin of line and select"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1968
+#: ../src/MadEditFrame.cpp:1975
 msgid "Go to end of line and select"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1969
+#: ../src/MadEditFrame.cpp:1976
 msgid "Go to begin of document and select"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1970
+#: ../src/MadEditFrame.cpp:1977
 msgid "Go to end of document and select"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1971
+#: ../src/MadEditFrame.cpp:1978
 msgid "Go to previous page and select"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1972
+#: ../src/MadEditFrame.cpp:1979
 msgid "Go to next page and select"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1973
+#: ../src/MadEditFrame.cpp:1980
 msgid "Go to previous word and select"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1974
+#: ../src/MadEditFrame.cpp:1981
 msgid "Go to next word and select"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1975
+#: ../src/MadEditFrame.cpp:1982
 msgid "Go to left brace and select"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1976
+#: ../src/MadEditFrame.cpp:1983
 msgid "Go to right brace and select"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1978
+#: ../src/MadEditFrame.cpp:1985
 msgid "Scroll text up one line"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1979
+#: ../src/MadEditFrame.cpp:1986
 msgid "Scroll text down one line"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1980
+#: ../src/MadEditFrame.cpp:1987
 msgid "Scroll text up one page"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1981
+#: ../src/MadEditFrame.cpp:1988
 msgid "Scroll text down one page"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1982
+#: ../src/MadEditFrame.cpp:1989
 msgid "Scroll text left"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1983
+#: ../src/MadEditFrame.cpp:1990
 msgid "Scroll text right"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1985
+#: ../src/MadEditFrame.cpp:1992
 msgid "Insert one NewLine char"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1986
+#: ../src/MadEditFrame.cpp:1993
 msgid "Insert one NewLine char without indentation"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1987
+#: ../src/MadEditFrame.cpp:1994
 msgid "Insert one Tab char or indent lines"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1988
+#: ../src/MadEditFrame.cpp:1995
 msgid "Delete one char to the left of the caret"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1991
+#: ../src/MadEditFrame.cpp:1998
 msgid "Delete a word left from the caret"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1992
+#: ../src/MadEditFrame.cpp:1999
 msgid "Delete a word right from the caret"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1994
+#: ../src/MadEditFrame.cpp:2001
 msgid "Toggle Insert/Overwrite Mode"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2132
+#: ../src/MadEditFrame.cpp:2138
 msgid "Standard"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2135 ../src/MadOptionsDialog.cpp:1258
+#: ../src/MadEditFrame.cpp:2141 ../src/MadOptionsDialog.cpp:1258
 msgid "Editor"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2138
+#: ../src/MadEditFrame.cpp:2144
 msgid "Search/Replace"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2141
+#: ../src/MadEditFrame.cpp:2147
 msgid "Text View"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2144
+#: ../src/MadEditFrame.cpp:2150
 msgid "Edit Mode"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2147
+#: ../src/MadEditFrame.cpp:2153
 msgid "Macro"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2150 ../src/MadEditFrame.cpp:2724
+#: ../src/MadEditFrame.cpp:2156 ../src/MadEditFrame.cpp:2734
 msgid "Quick Search"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2156 ../src/MadEditFrame.cpp:3968
+#: ../src/MadEditFrame.cpp:2162 ../src/MadEditFrame.cpp:3978
 msgid "HTML"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2157 ../src/MadEditFrame.cpp:3972
+#: ../src/MadEditFrame.cpp:2163 ../src/MadEditFrame.cpp:3982
 msgid "Markdown"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2710
+#: ../src/MadEditFrame.cpp:2720
 msgid "Find matched text next to caret"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2711
+#: ../src/MadEditFrame.cpp:2721
 msgid "Find matched text previous from caret"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2712
+#: ../src/MadEditFrame.cpp:2722
 msgid "Whole Word"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2716
+#: ../src/MadEditFrame.cpp:2726
 msgid "Case Sensitive"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2719
+#: ../src/MadEditFrame.cpp:2729
 msgid "Regular Expression"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2738 ../src/MadSearchReplaceDialog.cpp:1414
-#: ../src/MadSearchReplaceDialog.cpp:1427 ../src/MadPython.hpp:1041
+#: ../src/MadEditFrame.cpp:2748 ../src/MadSearchReplaceDialog.cpp:1417
+#: ../src/MadSearchReplaceDialog.cpp:1430 ../src/MadPython.hpp:1041
 #: ../src/MadPython.hpp:1064
 msgid "Search Results"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2745
+#: ../src/MadEditFrame.cpp:2755
 msgid "Information Window"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:3466
+#: ../src/MadEditFrame.cpp:3476
 #, c-format
 msgid "NoName%d"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:3523
+#: ../src/MadEditFrame.cpp:3533
 msgid "This is a Directory:"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:3532
+#: ../src/MadEditFrame.cpp:3542
 msgid "This file does not exist:"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:3551
+#: ../src/MadEditFrame.cpp:3561
 msgid "Cannot access this file:"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:3594
+#: ../src/MadEditFrame.cpp:3604
 msgid "Cannot load this file:"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:3888 ../src/MadEditFrame.cpp:3902
-#: ../src/MadEditFrame.cpp:3919 ../src/MadEditFrame.cpp:3935
-#: ../src/MadEditFrame.cpp:3955 ../src/MadEditFrame.cpp:3961
-#: ../src/MadEditFrame.cpp:4023 ../src/MadEditFrame.cpp:4213
-#: ../src/MadEditFrame.cpp:4240 ../src/MadOptionsDialog.cpp:496
+#: ../src/MadEditFrame.cpp:3898 ../src/MadEditFrame.cpp:3912
+#: ../src/MadEditFrame.cpp:3929 ../src/MadEditFrame.cpp:3945
+#: ../src/MadEditFrame.cpp:3965 ../src/MadEditFrame.cpp:3971
+#: ../src/MadEditFrame.cpp:4033 ../src/MadEditFrame.cpp:4223
+#: ../src/MadEditFrame.cpp:4250 ../src/MadOptionsDialog.cpp:496
 #: ../src/MadOptionsDialog.cpp:1039 ../src/MadOptionsDialog.cpp:1052
 #: ../src/MadConvEncDialog.cpp:80
 msgid "None"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:4180 ../src/MadEditFrame.cpp:4186
+#: ../src/MadEditFrame.cpp:4190 ../src/MadEditFrame.cpp:4196
 msgid "Has No Unicode BOM (Byte-Order Mark)"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:4617
+#: ../src/MadEditFrame.cpp:4589
 msgid ""
 "There was a problem previewing.\n"
 "Perhaps your current printer is not set correctly?"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:4617
+#: ../src/MadEditFrame.cpp:4589
 msgid "Previewing"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:4621
+#: ../src/MadEditFrame.cpp:4593
 #, fuzzy
 msgid "MadEdit Print Preview"
 msgstr "Просмотр печати"
 
-#: ../src/MadEditFrame.cpp:4645
+#: ../src/MadEditFrame.cpp:4617
 msgid ""
 "There was a problem printing.\n"
 "Perhaps your current printer is not set correctly?"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:4645
+#: ../src/MadEditFrame.cpp:4617
 msgid "Printing"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:5087
+#: ../src/MadEditFrame.cpp:5043
 msgid "Delimiters:"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:5087
+#: ../src/MadEditFrame.cpp:5043
 msgid "Revert Hex String"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:5212 ../src/MadEditFrame.cpp:5274
+#: ../src/MadEditFrame.cpp:5168 ../src/MadEditFrame.cpp:5230
 msgid "ASCII characters"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:5212 ../src/MadEditFrame.cpp:5274
+#: ../src/MadEditFrame.cpp:5168 ../src/MadEditFrame.cpp:5230
 msgid "Japanese characters"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:5213 ../src/MadEditFrame.cpp:5275
+#: ../src/MadEditFrame.cpp:5169 ../src/MadEditFrame.cpp:5231
 msgid "Korean characters"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:5213 ../src/MadEditFrame.cpp:5275
+#: ../src/MadEditFrame.cpp:5169 ../src/MadEditFrame.cpp:5231
 msgid "other characters"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:5217 ../src/MadEditFrame.cpp:5221
-#: ../src/MadEditFrame.cpp:5279 ../src/MadEditFrame.cpp:5283
+#: ../src/MadEditFrame.cpp:5173 ../src/MadEditFrame.cpp:5177
+#: ../src/MadEditFrame.cpp:5235 ../src/MadEditFrame.cpp:5239
 msgid "Choose the characters you want to convert:"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:5775
+#: ../src/MadEditFrame.cpp:5716
 msgid "Find/Replace in Files Results"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:5852
+#: ../src/MadEditFrame.cpp:5785
 #, c-format
 msgid "Line Number(1~%d): (you can input HexNumber(0x1~0x%X): 0xNNN)"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:5852
+#: ../src/MadEditFrame.cpp:5785
 msgid "Go To Line"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:5894
+#: ../src/MadEditFrame.cpp:5819
 #, c-format
 msgid "Position(0~%s): (you can input HexNumber: 0xNNN)"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:5894
+#: ../src/MadEditFrame.cpp:5819
 msgid "Go To Position"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:6118
+#: ../src/MadEditFrame.cpp:6035
 msgid "Markdown/HTML Preview"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:6122
+#: ../src/MadEditFrame.cpp:6039
 msgid "Refresh"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:6122
+#: ../src/MadEditFrame.cpp:6039
 msgid "Refresh prviewed text"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:6123
+#: ../src/MadEditFrame.cpp:6040
 #, fuzzy
 msgid "Close Preveiw"
 msgstr "Закрыть файл (&C)"
 
-#: ../src/MadEditFrame.cpp:6123
+#: ../src/MadEditFrame.cpp:6040
 msgid "Close preveiw windows"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:7075
+#: ../src/MadEditFrame.cpp:6968
 msgid "Open Mad Macro File"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:7203
+#: ../src/MadEditFrame.cpp:7096
 msgid "Mad Macro"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:7211
+#: ../src/MadEditFrame.cpp:7104
 #, fuzzy, c-format
 msgid "Do you want to overwrite %s"
 msgstr "Перечитать файл?"
 
-#: ../src/MadEditFrame.cpp:7211
+#: ../src/MadEditFrame.cpp:7104
 msgid "Warning"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:7297
+#: ../src/MadEditFrame.cpp:7182
 msgid "Edit Mad Macro File"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:7339 ../src/MadMacroDlg.cpp:102
+#: ../src/MadEditFrame.cpp:7224 ../src/MadMacroDlg.cpp:99
 msgid "Memory allocation failed"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:7860
+#: ../src/MadEditFrame.cpp:7718
 msgid "Download dictionary at http://extensions.openoffice.org/"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:7861
+#: ../src/MadEditFrame.cpp:7719
 msgid "Press OK to visit our HomePage."
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8131
+#: ../src/MadEditFrame.cpp:7981
 msgid "Passed the begin of the file"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8185 ../src/MadSearchReplaceDialog.cpp:493
-#: ../src/MadSearchReplaceDialog.cpp:626
+#: ../src/MadEditFrame.cpp:8035 ../src/MadSearchReplaceDialog.cpp:497
+#: ../src/MadSearchReplaceDialog.cpp:630
 msgid "Passed the end of the file"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8217
+#: ../src/MadEditFrame.cpp:8067
 msgid "Invalid item"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8230
+#: ../src/MadEditFrame.cpp:8080
 msgid "&Copy Selected"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8231
+#: ../src/MadEditFrame.cpp:8081
 msgid "Copy &All"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8232
+#: ../src/MadEditFrame.cpp:8082
 msgid "&Reset Results"
 msgstr ""
 
@@ -2489,7 +2481,7 @@ msgstr ""
 msgid "&Find"
 msgstr ""
 
-#: ../src/MadFindInFilesDialog.cpp:142 ../src/MadSearchReplaceDialog.cpp:204
+#: ../src/MadFindInFilesDialog.cpp:142 ../src/MadSearchReplaceDialog.cpp:198
 msgid "&Replace"
 msgstr ""
 
@@ -2497,7 +2489,7 @@ msgstr ""
 msgid "&Enable Replace"
 msgstr ""
 
-#: ../src/MadFindInFilesDialog.cpp:150 ../src/MadMacroDlg.cpp:73
+#: ../src/MadFindInFilesDialog.cpp:150 ../src/MadMacroDlg.cpp:68
 msgid "Close"
 msgstr ""
 
@@ -2552,7 +2544,7 @@ msgstr ""
 msgid "Processing %d of %d files..."
 msgstr ""
 
-#: ../src/MadFindInFilesDialog.cpp:825 ../src/MadSearchReplaceDialog.cpp:1403
+#: ../src/MadFindInFilesDialog.cpp:825 ../src/MadSearchReplaceDialog.cpp:1406
 msgid "Preparing Results"
 msgstr ""
 
@@ -2708,111 +2700,111 @@ msgid ""
 "Opened"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:198
-msgid "C&ount"
-msgstr ""
-
 #: ../src/MadSearchReplaceDialog.cpp:201
-msgid "R&eplace >>"
-msgstr ""
-
-#: ../src/MadSearchReplaceDialog.cpp:207
 msgid ""
 "Replace A&ll in\n"
 "Current"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:210
+#: ../src/MadSearchReplaceDialog.cpp:204
 msgid ""
 "Repl All in All\n"
 "Opened"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:503 ../src/MadSearchReplaceDialog.cpp:636
-#: ../src/MadSearchReplaceDialog.cpp:1302
-#: ../src/MadSearchReplaceDialog.cpp:1436
+#: ../src/MadSearchReplaceDialog.cpp:207
+msgid "C&ount"
+msgstr ""
+
+#: ../src/MadSearchReplaceDialog.cpp:210
+msgid "R&eplace >>"
+msgstr ""
+
+#: ../src/MadSearchReplaceDialog.cpp:507 ../src/MadSearchReplaceDialog.cpp:640
+#: ../src/MadSearchReplaceDialog.cpp:1305
+#: ../src/MadSearchReplaceDialog.cpp:1439
 msgid "Cannot find the matched string"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:513 ../src/MadSearchReplaceDialog.cpp:646
+#: ../src/MadSearchReplaceDialog.cpp:517 ../src/MadSearchReplaceDialog.cpp:650
 msgid "Cannot find the matched string."
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:516
-#: ../src/MadSearchReplaceDialog.cpp:1006
+#: ../src/MadSearchReplaceDialog.cpp:520
+#: ../src/MadSearchReplaceDialog.cpp:1010
 #, fuzzy
 msgid "Do you want to find from begin of selection?"
 msgstr "Перечитать файл?"
 
-#: ../src/MadSearchReplaceDialog.cpp:517
-#: ../src/MadSearchReplaceDialog.cpp:1007
+#: ../src/MadSearchReplaceDialog.cpp:521
+#: ../src/MadSearchReplaceDialog.cpp:1011
 #, fuzzy
 msgid "Do you want to find from begin of file?"
 msgstr "Вы хотите сохранить этот файл?"
 
-#: ../src/MadSearchReplaceDialog.cpp:540 ../src/MadSearchReplaceDialog.cpp:665
-#: ../src/MadSearchReplaceDialog.cpp:1447
+#: ../src/MadSearchReplaceDialog.cpp:544 ../src/MadSearchReplaceDialog.cpp:669
+#: ../src/MadSearchReplaceDialog.cpp:1450
 msgid "Empty expression"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:649
+#: ../src/MadSearchReplaceDialog.cpp:653
 #, fuzzy
 msgid "Do you want to find from end of selection?"
 msgstr "Перечитать файл?"
 
-#: ../src/MadSearchReplaceDialog.cpp:650
+#: ../src/MadSearchReplaceDialog.cpp:654
 #, fuzzy
 msgid "Do you want to find from end of file?"
 msgstr "Вы хотите сохранить этот файл?"
 
-#: ../src/MadSearchReplaceDialog.cpp:1003
+#: ../src/MadSearchReplaceDialog.cpp:1007
 msgid ""
 "Cannot find the matched string.\n"
 "Replace is finished."
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:1150
+#: ../src/MadSearchReplaceDialog.cpp:1153
 msgid "Search"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:1229
+#: ../src/MadSearchReplaceDialog.cpp:1232
 #, c-format
 msgid "'%s' was found %d times."
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:1260
+#: ../src/MadSearchReplaceDialog.cpp:1263
 #, c-format
 msgid "Preparing %d of %d results..."
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:1273
+#: ../src/MadSearchReplaceDialog.cpp:1276
 #, c-format
 msgid "Line(%d): "
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:1277
+#: ../src/MadSearchReplaceDialog.cpp:1280
 #, c-format
 msgid "Offset(%s): "
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:1278
+#: ../src/MadSearchReplaceDialog.cpp:1281
 msgid "Binary file matches"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:1306
+#: ../src/MadSearchReplaceDialog.cpp:1309
 msgid " results"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:1441
+#: ../src/MadSearchReplaceDialog.cpp:1444
 #, c-format
 msgid "%d results"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:1512
+#: ../src/MadSearchReplaceDialog.cpp:1515
 msgid "Cannot find any matched string."
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:1514
+#: ../src/MadSearchReplaceDialog.cpp:1517
 #, c-format
 msgid "%d string(s) were replaced."
 msgstr ""
@@ -3637,16 +3629,24 @@ msgstr ""
 msgid ": Valid range is 0~512, 0 means NO PADDING"
 msgstr ""
 
-#: ../src/MadMacroDlg.h:59
+#: ../src/MadMacroDlg.h:61
 msgid "MadEdit Macro"
 msgstr ""
 
-#: ../src/MadMacroDlg.cpp:70
+#: ../src/MadMacroDlg.cpp:65
 msgid "Run"
 msgstr ""
 
-#: ../src/MadMacroDlg.cpp:102
+#: ../src/MadMacroDlg.cpp:70 ../src/MadMacroDlg.cpp:149
+msgid "Results >>"
+msgstr ""
+
+#: ../src/MadMacroDlg.cpp:99
 msgid "Error"
+msgstr ""
+
+#: ../src/MadMacroDlg.cpp:147
+msgid "Results <<"
 msgstr ""
 
 #: ../src/MadPrintout.h:15

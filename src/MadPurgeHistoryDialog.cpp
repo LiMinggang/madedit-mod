@@ -60,31 +60,31 @@ void MadPurgeHistoryDialog::CreateGUIControls()
 	this->SetAutoLayout(true);
 
 	WxBoxSizer1 = new wxBoxSizer(wxVERTICAL);
-	WxStaticBoxSizer1->Add(WxBoxSizer1, 0, wxALIGN_LEFT | wxALIGN_TOP | wxALL, 5);
+	WxStaticBoxSizer1->Add(WxBoxSizer1, 0, wxALIGN_LEFT | wxEXPAND | wxALIGN_TOP | wxALL, 5);
 
 	wxCheckBoxRecentFiles = new wxCheckBox(this, ID_WXCHECKBOXRECENTFILES, _("Recent Files"), wxPoint(5, 5), wxSize(212, 16), 0, wxDefaultValidator, wxT("wxCheckBoxRecentFiles"));
-	WxBoxSizer1->Add(wxCheckBoxRecentFiles, 0, wxALIGN_LEFT | wxALIGN_TOP | wxALL, 5);
+	WxBoxSizer1->Add(wxCheckBoxRecentFiles, 0, wxALIGN_LEFT | wxEXPAND | wxALIGN_TOP | wxALL, 5);
 
 	wxCheckBoxRecentFonts = new wxCheckBox(this, ID_WXCHECKBOXRECENTFONTS, _("Recent Fonts"), wxPoint(5, 31), wxSize(212, 18), 0, wxDefaultValidator, wxT("wxCheckBoxRecentFonts"));
-	WxBoxSizer1->Add(wxCheckBoxRecentFonts, 0, wxALIGN_LEFT | wxALIGN_TOP | wxALL, 5);
+	WxBoxSizer1->Add(wxCheckBoxRecentFonts, 0, wxALIGN_LEFT | wxEXPAND | wxALIGN_TOP | wxALL, 5);
 
 	wxCheckBoxRecentEncodings = new wxCheckBox(this, ID_WXCHECKBOXRECENTENCODINGS, _("Recent Encodings"), wxPoint(5, 59), wxSize(212, 16), 0, wxDefaultValidator, wxT("wxCheckBoxRecentEncodings"));
-	WxBoxSizer1->Add(wxCheckBoxRecentEncodings, 0, wxALIGN_LEFT | wxALIGN_TOP | wxALL, 5);
+	WxBoxSizer1->Add(wxCheckBoxRecentEncodings, 0, wxALIGN_LEFT | wxEXPAND | wxALIGN_TOP | wxALL, 5);
 
 	wxCheckBoxRecentSearchedTexts = new wxCheckBox(this, ID_WXCHECKBOXRECENTSEARCHEDTEXTS, _("Recent Searched Texts"), wxPoint(5, 85), wxSize(212, 18), 0, wxDefaultValidator, wxT("wxCheckBoxRecentSearchedTexts"));
-	WxBoxSizer1->Add(wxCheckBoxRecentSearchedTexts, 0, wxALIGN_LEFT | wxALIGN_TOP | wxALL, 5);
+	WxBoxSizer1->Add(wxCheckBoxRecentSearchedTexts, 0, wxALIGN_LEFT | wxEXPAND | wxALIGN_TOP | wxALL, 5);
 
 	wxCheckBoxRecentReplacedTexts = new wxCheckBox(this, ID_WXCHECKBOXRECENTREPLACEDTEXTS, _("Recent Replaced Texts"), wxPoint(5, 113), wxSize(212, 17), 0, wxDefaultValidator, wxT("wxCheckBoxRecentReplacedTexts"));
-	WxBoxSizer1->Add(wxCheckBoxRecentReplacedTexts, 0, wxALIGN_LEFT | wxALIGN_TOP | wxALL, 5);
+	WxBoxSizer1->Add(wxCheckBoxRecentReplacedTexts, 0, wxALIGN_LEFT | wxEXPAND | wxALIGN_TOP | wxALL, 5);
 
 	wxCheckBoxRecentSearchedDirectories = new wxCheckBox(this, ID_WXCHECKBOXRECENTSEARCHEDDIRECTORIES, _("Recent Searched Directories"), wxPoint(5, 140), wxSize(212, 17), 0, wxDefaultValidator, wxT("wxCheckBoxRecentSearchedDirectories"));
-	WxBoxSizer1->Add(wxCheckBoxRecentSearchedDirectories, 0, wxALIGN_LEFT | wxALIGN_TOP | wxALL, 5);
+	WxBoxSizer1->Add(wxCheckBoxRecentSearchedDirectories, 0, wxALIGN_LEFT | wxEXPAND | wxALIGN_TOP | wxALL, 5);
 
 	wxRecentSearchedFileFilters = new wxCheckBox(this, ID_WXRECENTSEARCHEDFILEFILTERS, _("Recent Searched File Filters"), wxPoint(5, 167), wxSize(212, 18), 0, wxDefaultValidator, wxT("wxRecentSearchedFileFilters"));
 	WxBoxSizer1->Add(wxRecentSearchedFileFilters, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 5);
 
 	wxCheckBoxRecentSearchedExcludeFilters = new wxCheckBox(this, ID_WXCHECKBOXRECENTSEARCHEDEXCLUDEFILTERS, _("Recent Searched Exclude Filters"), wxPoint(5, 195), wxSize(212, 17), 0, wxDefaultValidator, wxT("wxCheckBoxRecentSearchedExcludeFilters"));
-	WxBoxSizer1->Add(wxCheckBoxRecentSearchedExcludeFilters, 0, wxALIGN_LEFT | wxALIGN_TOP | wxALL, 5);
+	WxBoxSizer1->Add(wxCheckBoxRecentSearchedExcludeFilters, 0, wxALIGN_LEFT | wxEXPAND | wxALIGN_TOP | wxALL, 5);
 
 	WxBoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
 	WxStaticBoxSizer1->Add(WxBoxSizer2, 0, wxALIGN_CENTER | wxALL, 5);

@@ -1344,7 +1344,6 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
     EVT_UPDATE_UI( menuPlayRecMacro, MadEditFrame::OnUpdateUI_MenuToolsPlayRecMacro )
     EVT_UPDATE_UI( menuSaveRecMacro, MadEditFrame::OnUpdateUI_MenuToolsSaveRecMacro )
     EVT_UPDATE_UI( menuMadScriptList, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
-    EVT_UPDATE_UI( menuMacroDebugMode, MadEditFrame::OnUpdateUI_MenuToolsMacroDebugMode)
     EVT_UPDATE_UI( menuInsertNewLineChar, MadEditFrame::OnUpdateUI_MenuToolsInsertNewLineChar )
     EVT_UPDATE_UI( menuNewLineChar, MadEditFrame::OnUpdateUI_MenuCheckWritable )
     EVT_UPDATE_UI( menuConvertToDOS, MadEditFrame::OnUpdateUI_MenuCheckWritable )
@@ -1505,7 +1504,6 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
     EVT_MENU( menuPlayRecMacro, MadEditFrame::OnToolsPlayRecMacro )
     EVT_MENU( menuSaveRecMacro, MadEditFrame::OnToolsSaveRecMacro )
     EVT_MENU( menuEditMacroFile, MadEditFrame::OnToolsEditMacroFile )
-    EVT_MENU( menuMacroDebugMode, MadEditFrame::OnToolsMacroDebugMode )
     EVT_MENU_RANGE( menuMadScrip1, menuMadScrip1000, MadEditFrame::OnToolsMadScriptList )
     EVT_MENU( menuToggleBOM, MadEditFrame::OnToolsToggleBOM )
     EVT_MENU( menuConvertToDOS, MadEditFrame::OnToolsConvertToDOS )
@@ -1898,9 +1896,6 @@ CommandData CommandTable[] =
     { 0,               1, menuSaveRecMacro,       wxT( "menuSaveRecMacro" ),       _( "Save Currently Recorded Macro..." ),              wxT( "" ),       wxITEM_NORMAL,    saverec_xpm_idx, 0,                   _( "Save Currently Recorded Macro" ), 0, &g_tbMACRO_ptr, _( "Save Recorded Macro" ), false},
     { 0,               1, menuMadScriptList,      wxT( "menuMadScriptList" ),      _( "Local Script List" ),                             wxT( "" ),       wxITEM_NORMAL,    -1, &g_Menu_MadMacro_Scripts,    0, 0, 0, 0, false},
     { 0,               2, menuEditMacroFile,      wxT( "menuEditMacroFile" ),      _( "Edit Saved MacroScript..." ),                     wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Edit saved macro script" ), 0, 0, 0, false},
-    { 0,               2, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0, 0, 0, 0, false},
-    { 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0, 0, 0, 0, false},
-    { 0,               1, menuMacroDebugMode,     wxT( "menuMacroDebugMode" ),     _( "Macro Debug Mode" ),                              wxT( "" ),       wxITEM_CHECK,     -1,              0,                   _( "Show Macro running output for debugging" ), 0, 0, 0, false},
 
     // Tools
     { 0, 0, 0, 0, _( "&Tools" ), 0, wxITEM_NORMAL, 0, &g_Menu_Tools, 0, 0, 0, 0, false},
@@ -2107,7 +2102,6 @@ MadEditFrame::MadEditFrame( wxWindow *parent, wxWindowID id, const wxString &tit
     m_MadMacroStatus = emMacroStopped;
     m_LastSelBeg = -1;
     m_LastSelEnd = -1;
-    m_MacroDebug = false;
     m_SearchDirectionNext = true;
     m_HtmlPreview = 0;
     m_PreviewType = ptPREVIEW_NONE;
@@ -2672,7 +2666,11 @@ void MadEditFrame::CreateGUIControls( void )
             size_t i = 0;
             //bool hasHelp = false;
             bool cont = dir.GetFirst( &filename, wxT( "*.mpy" ), wxDIR_FILES );
-            if(cont) WxToolBar[tbMACRO]->AddSeparator();
+            if(cont)
+            {
+                g_Menu_MadMacro_Scripts->AppendSeparator();
+                WxToolBar[tbMACRO]->AddSeparator();
+            }
 
             while( cont )
             {
@@ -4287,12 +4285,6 @@ void MadEditFrame::OnUpdateUI_MenuToolsPlayRecMacro( wxUpdateUIEvent& event )
 void MadEditFrame::OnUpdateUI_MenuToolsSaveRecMacro( wxUpdateUIEvent& event )
 {
     event.Enable( g_ActiveMadEdit != NULL && IsMacroStopped() && HasRecordedScript() );
-}
-
-void MadEditFrame::OnUpdateUI_MenuToolsMacroDebugMode( wxUpdateUIEvent& event )
-{
-    event.Enable( true );
-    event.Check( m_MacroDebug );
 }
 
 //---------------------------------------------------------------------------
@@ -6925,7 +6917,7 @@ void MadEditFrame::OnToolsRunTempMacro( wxCommandEvent& event )
 {
     if( g_MadMacroDlg == NULL )
     {
-        g_MadMacroDlg = new MadMacroDlg( this, m_MacroDebug );
+        g_MadMacroDlg = new MadMacroDlg( this );
     }
 
     if( g_SearchReplaceDialog != NULL )
@@ -7000,7 +6992,7 @@ void MadEditFrame::OnToolsRunMacroFile( wxCommandEvent& event )
             {
                 if( g_MadMacroDlg == NULL )
                 {
-                    g_MadMacroDlg = new MadMacroDlg( this, m_MacroDebug );
+                    g_MadMacroDlg = new MadMacroDlg( this );
                 }
 
                 g_MadMacroDlg->SetPyScript( str );
@@ -7053,7 +7045,7 @@ void MadEditFrame::OnToolsPlayRecMacro( wxCommandEvent& event )
 
             if( g_MadMacroDlg == NULL )
             {
-                g_MadMacroDlg = new MadMacroDlg( this, m_MacroDebug );
+                g_MadMacroDlg = new MadMacroDlg( this );
             }
 
             wxString endline( wxT( "\r" ) );
@@ -7249,17 +7241,6 @@ void MadEditFrame::OnToolsMadScriptList( wxCommandEvent& event )
         }
 
         scriptfile.Close();
-    }
-}
-
-void MadEditFrame::OnToolsMacroDebugMode( wxCommandEvent& event )
-{
-    m_MacroDebug = ( !m_MacroDebug );
-
-    if( g_MadMacroDlg && ( g_MadMacroDlg->IsDebugOn() != m_MacroDebug ) )
-    {
-        g_MadMacroDlg->Destroy();
-        g_MadMacroDlg = NULL;
     }
 }
 

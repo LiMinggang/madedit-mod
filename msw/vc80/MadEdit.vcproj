@@ -252,11 +252,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\MadReplaceDialog.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\MadSearchDialog.cpp"
+				RelativePath="..\..\src\MadSearchReplaceDialog.cpp"
 				>
 			</File>
 			<File
@@ -598,11 +594,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\MadReplaceDialog.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\MadSearchDialog.h"
+				RelativePath="..\..\src\MadSearchReplaceDialog.h"
 				>
 			</File>
 			<File

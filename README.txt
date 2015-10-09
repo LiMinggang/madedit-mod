@@ -117,25 +117,29 @@ Mod v0.3.7
 14.New: New toolbar for refresh/close preview window
 15.New: Transparency supported in Search/Replace dialog
 16.New: Merge Search/Replace dialog
-17.Fix: Assertion failure MadEditFrame.cpp:3403
-18.Fix: Rollback changes in Search/Replace(since 0.3.5)
-19.Fix: Assertion failure at MadEditFrame.cpp:5692 under x86_x64 linux
-20.Fix: Fix dictionary download link of OpenOffice on About Dialog
-21.Fix: Link warning of VS project
-22.Fix: Show search results by default
-23.Fix: Set default page of Option dialog to "General"
-24.Fix: Move encoding update and config update from MainFrame to search/replace dialog
-25.Fix: Reverse order toolbars under linux
-26.Fix: Remove extra overflow icon from Toolbars
-27.Fix: Crash in ColumnAlign while reverse selection
-28.Fix: Column align will has issue if you select beyond the EOF
-29.Fix: File name was not marked as "modified*" in ColumnAlign
-30.Fix: Minor fix in menu help text
-31.Fix: Improve simplified Chinese translation
-32.Fix: Wrong dnd cursor if no selection
-33.Improvement on GUI update for menu and toolbar
-34.Fix: UI update issue of toggle toolbars
-35.Fix: Remove no parent from the style of Replace dialog
+17.New: Toggle macro result by button
+18.Fix: Assertion failure MadEditFrame.cpp:3403
+19.Fix: Rollback changes in Search/Replace(since 0.3.5)
+20.Fix: Assertion failure at MadEditFrame.cpp:5692 under x86_x64 linux
+21.Fix: Fix dictionary download link of OpenOffice on About Dialog
+22.Fix: Link warning of VS project
+23.Fix: Show search results by default
+24.Fix: Set default page of Option dialog to "General"
+25.Fix: Move encoding update and config update from MainFrame to search/replace dialog
+26.Fix: Reverse order toolbars under linux
+27.Fix: Remove extra overflow icon from Toolbars
+28.Fix: Crash in ColumnAlign while reverse selection
+29.Fix: Column align will has issue if you select beyond the EOF
+30.Fix: File name was not marked as "modified*" in ColumnAlign
+31.Fix: Minor fix in menu help text
+32.Fix: Improve simplified Chinese translation
+33.Fix: Wrong dnd cursor if no selection
+34.Fix: Improvement on GUI update for menu and toolbar
+35.Fix: UI update issue of toggle toolbars
+36.Fix: Remove no parent from the style of Replace dialog
+37.Fix: Remove duplicated code lines
+38.Fix: Bookmark would be toggled if there were multiple instance found in one line
+39.Fix: Remove macro debug menu item
 
 Mod v0.3.6
 1.New: Create scripts directory if not exists while saving recorded script

@@ -17,6 +17,7 @@ BEGIN_EVENT_TABLE(MadMacroDlg,wxDialog)
 	EVT_CLOSE(MadMacroDlg::MadMacroDlgClose)
 	EVT_BUTTON(ID_WXBUTTONRUN,MadMacroDlg::OnRunClick)
 	EVT_BUTTON(ID_WXBUTTONCLOSE,MadMacroDlg::OnCloseClick)
+    EVT_BUTTON(ID_WXBUTTONENABLERESULT,MadMacroDlg::OnEnableResultClick)
 END_EVENT_TABLE()
     ////Event Table End
 
@@ -27,7 +28,7 @@ END_EVENT_TABLE()
                                  wxWindow *parent = NULL,
                                  int x = wxDefaultCoord, int y = wxDefaultCoord);
 
-MadMacroDlg::MadMacroDlg(wxWindow* parent, bool debug, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style) : wxDialog(parent, id, title, pos, size, style)
+MadMacroDlg::MadMacroDlg(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style) : wxDialog(parent, id, title, pos, size, style)
 {
     //this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	wxStaticBox* WxStaticBoxSizer1_StaticBoxObj = new wxStaticBox(this, wxID_ANY, wxT(""));
@@ -38,17 +39,11 @@ MadMacroDlg::MadMacroDlg(wxWindow* parent, bool debug, wxWindowID id, const wxSt
     bSizer1 = new wxBoxSizer( wxVERTICAL );
 	WxStaticBoxSizer1->Add(bSizer1, 1, wxALIGN_CENTER | wxALIGN_TOP | wxEXPAND | wxALL, 5);
 
-    m_debug = debug;
+    m_debug = false;
     wxSize pymacro(640, 480);
-    if (m_debug)
-    {
-        pymacro = wxSize(640, 240);
-        m_output = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(640, 240), wxTE_READONLY|wxTE_MULTILINE|wxVSCROLL|wxHSCROLL|wxSIMPLE_BORDER );
-    }
-    else
-    {
-        m_output = 0;
-    }
+    pymacro = wxSize(640, 240);
+    m_output = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(640, 240), wxTE_READONLY|wxTE_MULTILINE|wxVSCROLL|wxHSCROLL|wxSIMPLE_BORDER );
+    m_output->Show(false);
 
     m_pymacro=new MadEdit(this, ID_MADEDIT, wxDefaultPosition, pymacro);
     m_pymacro->SetFixedWidthMode(false);
@@ -72,6 +67,8 @@ MadMacroDlg::MadMacroDlg(wxWindow* parent, bool debug, wxWindowID id, const wxSt
     
     m_close = new wxButton( this, ID_WXBUTTONCLOSE, _("Close"), wxDefaultPosition, wxDefaultSize, 0 );
     bSizer2->Add( m_close, 0, wxALIGN_CENTER_VERTICAL | wxALL, 3 );
+    m_enableresult = new wxButton( this, ID_WXBUTTONENABLERESULT, _("Results >>"), wxDefaultPosition, wxDefaultSize, 0 );
+    bSizer2->Add( m_enableresult, 0, wxALIGN_CENTER_VERTICAL | wxALL, 3 );
     m_run->SetDefault();
     
 	Layout();
@@ -139,4 +136,17 @@ void MadMacroDlg::MadMacroDlgClose(wxCloseEvent& event)
     Destroy();
     g_MadMacroDlg = NULL;
 }
+
+void MadMacroDlg::OnEnableResultClick( wxCommandEvent& event ) 
+{
+    m_debug = !m_debug;
+    m_output->Show(m_debug);
+    GetSizer()->Fit(this);
+	GetSizer()->SetSizeHints(this);
+    if(m_debug)
+        m_enableresult->SetLabel(_("Results <<"));
+    else
+        m_enableresult->SetLabel(_("Results >>"));
+}
+
 
