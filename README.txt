@@ -104,6 +104,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 Mod v0.3.8
 New: Automatically advance number for new file in NoNameXX
 New: Change insert mode to insertion while changing from hex to text mode
+New: Use indent size of current line instead of tha last line that has non-space/tab char
 Fix: Match brace pair has bug if it was in comment or string(From MadEdit)
 Fix: Select contents between a brace pair has bug
 Fix: Size of the dictionary selection and path is too small under Ubuntu
