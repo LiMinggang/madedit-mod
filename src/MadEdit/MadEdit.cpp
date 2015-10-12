@@ -961,7 +961,7 @@ MadEdit::MadEdit(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSi
     m_Config->Read(wxT("MiddleMouseToPaste"), &m_MiddleMouseToPaste, true);
     m_Config->Read(wxT("AutoFillColumnPaste"), &m_AutoFillColumnPaste, false);
 
-    m_HexTopRow = size_t(-1);
+    m_HexTopRow = -1;
     m_HexRowCount = 0;
     m_HexDigitBitmap=NULL;
 
@@ -4126,13 +4126,12 @@ void MadEdit::SelectWordFromCaretPos(wxString *ws, MadCaretPos * cpos/* = NULL*/
 
         if(cpos) return;
 
-        m_Selection=true;
         if(m_MouseLeftDoubleClick && m_LeftBrace_rowid >= 0)
         {
             MadLineIterator lit;
             wxFileOffset pos1, pos2;
-            GetLineByLine(lit, pos1, m_LeftBrace_rowid);
-            GetLineByLine(lit, pos2, m_RightBrace_rowid);
+			GetLineByRow(lit, pos1, m_LeftBrace_rowid);
+			GetLineByRow(lit, pos2, m_RightBrace_rowid);
             pos1 += m_LeftBrace.LinePos;
             pos2 += m_RightBrace.LinePos;
             if(startpos == pos1)
@@ -4148,6 +4147,7 @@ void MadEdit::SelectWordFromCaretPos(wxString *ws, MadCaretPos * cpos/* = NULL*/
                 }
             }
         }
+        m_Selection=true;
         m_SelectionPos1.pos = startpos;
         m_SelectionPos2.pos = pos;
 
@@ -8626,32 +8626,21 @@ void MadEdit::ProcessCommand(MadEditCommand command)
                                     UpdateSelectionPos();
                                 }
 
-
+                                MadLineIterator &lit = m_CaretPos.iter;
+                                int lineid = m_CaretPos.lineid;
+                                wxFileOffset linepos = m_CaretPos.linepos;
                                 if(m_Selection)
                                 {
-                                    if((prevline || m_SelectionBegin->linepos == 0)
-                                        && m_SelectionBegin->lineid != 0)
-                                    {
-                                        MadLineIterator lit = m_SelectionBegin->iter;
-                                        GetIndentSpaces(m_SelectionBegin->lineid - 1, --lit, ucs, true, unindentChar);
-                                    }
-                                    else
-                                    {
-                                        GetIndentSpaces(m_SelectionBegin->lineid, m_SelectionBegin->iter, ucs, true, unindentChar);
-                                    }
+                                    lit = m_SelectionBegin->iter;
+                                    lineid = m_SelectionBegin->lineid; 
+                                    linepos = m_SelectionBegin->linepos;
                                 }
-                                else
+                                if((prevline || linepos == 0) && lineid != 0)
                                 {
-                                    if((prevline || m_CaretPos.linepos == 0) && m_CaretPos.lineid != 0)
-                                    {
-                                        MadLineIterator lit = m_CaretPos.iter;
-                                        GetIndentSpaces(m_CaretPos.lineid - 1, --lit, ucs, true, unindentChar);
-                                    }
-                                    else
-                                    {
-                                        GetIndentSpaces(m_CaretPos.lineid, m_CaretPos.iter, ucs, true, unindentChar);
-                                    }
+                                    --lineid;
+                                    --lit;
                                 }
+                                GetIndentSpaces(lineid, lit, ucs, true, unindentChar);
                             }
 
                             InsertString(&ucs[0], ucs.size(), false, true, false);

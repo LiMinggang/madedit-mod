@@ -91,6 +91,7 @@ Syntax files, Locale files and Settings:
 Known issues:
 The Macro recording function will save all your commands to one document which
 means it will not record the "switching" between documents.
+Search in selection in column mode is not exact the selection highlighted.
 
 Feature/issues to be released
 -----------------------------
@@ -99,6 +100,13 @@ ChangeLog:
 ----------
 Todo:
 FreeBSD packaging (with FreeBSD 10.01)
+
+Mod v0.3.8
+New: Automatically advance number for new file in NoNameXX
+New: Change insert mode to insertion while changing from hex to text mode
+Fix: Match brace pair has bug if it was in comment or string(From MadEdit)
+Fix: Select contents between a brace pair has bug
+Fix: Size of the dictionary selection and path is too small under Ubuntu
 
 Mod v0.3.7
 1.New: Column Align Right(Selected text would be aligned according to right)

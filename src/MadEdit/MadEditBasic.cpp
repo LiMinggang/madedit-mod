@@ -710,6 +710,7 @@ void MadEdit::SetEditMode(MadEditMode mode)
             }
             else                      //HexMode
             {
+                SetInsertMode(true);
                 HexModeToTextMode(mode);
             }
 
@@ -755,6 +756,7 @@ void MadEdit::SetEditMode(MadEditMode mode)
             }
             else                      //HexMode
             {
+                SetInsertMode(true);
                 HexModeToTextMode(mode);
             }
 
@@ -1165,7 +1167,6 @@ void MadEdit::GetSelectionLineId(int &beginline, int &endline)
     }
 }
 
-
 void MadEdit::GetSelText(wxString &ws)
 {
     if(!m_Selection)
@@ -1416,6 +1417,19 @@ bool MadEdit::GetLine(wxString &ws, int line, size_t maxlen, bool ignoreBOM)
         {
             ++lit;
         }
+    }
+
+    return GetLine(ws, lit, maxlen, ignoreBOM);
+}
+
+bool MadEdit::GetLine(wxString &ws, MadLineIterator lit, size_t maxlen, bool ignoreBOM)
+{
+    wxFileOffset pos = 0;
+    MadUCQueue ucqueue;
+
+    if(lit == m_Lines->m_LineList.begin()) // if first line has BOM, we will ignore it
+    {
+        if(ignoreBOM) pos = lit->m_RowIndices.front().m_Start;
     }
 
     if(pos >= m_Lines->m_Size)

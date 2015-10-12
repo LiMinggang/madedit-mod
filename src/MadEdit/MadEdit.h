@@ -868,6 +868,7 @@ public: // basic functions
     // line: zero based
     // return true for full line, false for partial line
     bool GetLine(wxString &ws, int line, size_t maxlen = 0, bool ignoreBOM = true);
+    bool GetLine(wxString &ws, MadLineIterator lit, size_t maxlen = 0, bool ignoreBOM = true);
     int GetLineByPos(const wxFileOffset &pos);
 
     int GetIndentCountByPos(wxFileOffset pos);

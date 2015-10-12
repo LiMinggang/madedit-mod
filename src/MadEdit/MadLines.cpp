@@ -1799,7 +1799,9 @@ MadLineState MadLines::Reformat(MadLineIterator iter)
                             ++notSpaceCount;
 
                             // check left/right brace
-                            if(//state.CommentId==0 && state.StringId==0 &&
+                            //Minggang: Not sure why this was commneted out at the first promote of MadEdit
+                            //https://sourceforge.net/p/madedit/code/9/tree/trunk/madedit/src/MadEdit/MadLines.cpp#l1761
+                            if(state.CommentId==0 && state.StringId==0 &&
                                 !m_Syntax->m_LeftBrace.empty())
                             {
                                 bool ok=false;
@@ -1852,51 +1854,53 @@ MadLineState MadLines::Reformat(MadLineIterator iter)
                                     ++bracexpos_count;
                                 }
                                 else // check right brace
+                                {
                                     if((index=(this->*FindString)(ucqueue, m_Syntax->m_RightBrace.begin(),
                                                                 m_Syntax->m_RightBrace.end(), length)) != 0 )
-                                {
-                                    ok=true;
-                                    ucs4_t uc=ucqueue[length-1].first;
-                                    if(!m_Syntax->IsDelimiter(uc) && uc>0x20)// check last char for wholeword
                                     {
-                                        if(ucqueue.size()>length || (this->*NextUChar)(ucqueue))
+                                        ok=true;
+                                        ucs4_t uc=ucqueue[length-1].first;
+                                        if(!m_Syntax->IsDelimiter(uc) && uc>0x20)// check last char for wholeword
                                         {
-                                            uc = ucqueue[length].first;
-                                            if(!m_Syntax->IsDelimiter(uc) && uc>0x20)
+                                            if(ucqueue.size()>length || (this->*NextUChar)(ucqueue))
                                             {
-                                                ok=false;
+                                                uc = ucqueue[length].first;
+                                                if(!m_Syntax->IsDelimiter(uc) && uc>0x20)
+                                                {
+                                                    ok=false;
+                                                }
                                             }
                                         }
-                                    }
-                                    if(ok) // check first char for wholeword
-                                    {
-                                        if(!m_Syntax->IsDelimiter(firstuc) && firstuc>0x20)
+                                        if(ok) // check first char for wholeword
                                         {
-                                            if(!m_Syntax->IsDelimiter(prevuc) && prevuc>0x20)
+                                            if(!m_Syntax->IsDelimiter(firstuc) && firstuc>0x20)
                                             {
-                                                ok=false;
+                                                if(!m_Syntax->IsDelimiter(prevuc) && prevuc>0x20)
+                                                {
+                                                    ok=false;
+                                                }
                                             }
                                         }
-                                    }
 
-                                    if(ok)
-                                    {
-                                        //eatUCharCount = length;
-                                        wxUint16 len=wxUint16(firstuclen);
-                                        wxUint16 width=m_MadEdit->GetUCharWidth(firstuc);
-                                        if(length>1)
+                                        if(ok)
                                         {
-                                            size_t idx=1;
-                                            do
+                                            //eatUCharCount = length;
+                                            wxUint16 len=wxUint16(firstuclen);
+                                            wxUint16 width=m_MadEdit->GetUCharWidth(firstuc);
+                                            if(length>1)
                                             {
-                                                len+=ucqueue[idx].second;
-                                                width+=m_MadEdit->GetUCharWidth(ucqueue[idx].first);
+                                                size_t idx=1;
+                                                do
+                                                {
+                                                    len+=ucqueue[idx].second;
+                                                    width+=m_MadEdit->GetUCharWidth(ucqueue[idx].first);
+                                                }
+                                                while(++idx < length);
                                             }
-                                            while(++idx < length);
+                                            iter->m_BracePairIndices.push_back(BracePairIndex(0, width, bracepos, len, 0, index-1));
+                                            bracexpos=&iter->m_BracePairIndices.back().XPos;
+                                            ++bracexpos_count;
                                         }
-                                        iter->m_BracePairIndices.push_back(BracePairIndex(0, width, bracepos, len, 0, index-1));
-                                        bracexpos=&iter->m_BracePairIndices.back().XPos;
-                                        ++bracexpos_count;
                                     }
                                 }
                             }

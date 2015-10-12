@@ -690,7 +690,7 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxStaticBoxSizer5->Add(WxStaticText18, 0, wxALIGN_CENTER | wxALL, 5);
 
 	wxArrayString arrayStringFor_WxChoiceDictionary;
-	WxChoiceDictionary = new wxChoice(WxNoteBookPage5, ID_WXCHOICEDICTIONARY, wxPoint(74, 20), wxSize(320, 21), arrayStringFor_WxChoiceDictionary, 0, wxDefaultValidator, wxT(""));
+	WxChoiceDictionary = new wxChoice(WxNoteBookPage5, ID_WXCHOICEDICTIONARY, wxPoint(74, 20), wxSize(320, 25), arrayStringFor_WxChoiceDictionary, 0, wxDefaultValidator, wxT(""));
 	WxChoiceDictionary->SetSelection(-1);
 	WxStaticBoxSizer5->Add(WxChoiceDictionary, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 5);
     SET_CONTROLPARENT(WxChoiceDictionary);
@@ -702,7 +702,7 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxBoxSizer30 = new wxBoxSizer(wxHORIZONTAL);
 	WxStaticBoxSizer6->Add(WxBoxSizer30, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 5);
 
-	WxEditDictionaryDir = new wxTextCtrl(WxNoteBookPage5, ID_WXEDITDICTIONARYDIR, wxT(""), wxPoint(5, 8), wxSize(240, 19), 0, wxTextValidator(wxFILTER_NONE, NULL), wxT("WxEditDictionaryDir"));
+	WxEditDictionaryDir = new wxTextCtrl(WxNoteBookPage5, ID_WXEDITDICTIONARYDIR, wxT(""), wxPoint(5, 8), wxSize(240, 25), 0, wxTextValidator(wxFILTER_NONE, NULL), wxT("WxEditDictionaryDir"));
 	WxBoxSizer30->Add(WxEditDictionaryDir, 0, wxALIGN_CENTER | wxALL, 5);
     SET_CONTROLPARENT(WxEditDictionaryDir);
 

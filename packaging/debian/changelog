@@ -1,3 +1,9 @@
+madedit-mod (0.3.8-1) unstable; urgency=low
+
+  1.New: New version
+
+ -- Minggang Li <liminggang@gmail.com>  Tues, 09 October 2015 17:30:40 +0800
+
 madedit-mod (0.3.7-1) unstable; urgency=low
 
   1.New: Column Align Right(Selected text would be aligned according to right)

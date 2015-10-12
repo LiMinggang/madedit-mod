@@ -3473,7 +3473,26 @@ void MadEditFrame::OpenFile( const wxString &fname, bool mustExist )
 
     if( filename.IsEmpty() )
     {
-        title.Printf( _( "NoName%d" ), ++m_NewFileCount );
+        int count = int( m_Notebook->GetPageCount() );
+        wxArrayString fnames;
+        wxString fname;
+
+        for( int id = 0; id < count; ++id )
+        {
+            fname = m_Notebook->GetPageText( id );
+            if( fname[fname.Len() - 1] == wxT( '*' ) )
+            { fname.Truncate( fname.Len() - 1 ); }
+            fnames.Add(fname);
+        }
+
+        bool nameNotOk = true;
+        do
+        {
+            title.Printf( _( "NoName%d" ), ++m_NewFileCount );
+            if(wxNOT_FOUND == fnames.Index(title))
+                nameNotOk = false;
+        }
+        while(nameNotOk);
     }
     else
     {
@@ -7715,7 +7734,7 @@ void MadEditFrame::OnHelpAbout( wxCommandEvent& event )
     MadAboutDialog dlg( this );
     dlg.WxMemo1->AppendText( g_MadEdit_Version + wxT( "\n" ) +
                              g_MadEditMod_URL + wxT( "\n" ) +
-                             _( "Download dictionary at http://extensions.openoffice.org/" ) + wxT( "\n" ) +
+                             _( "Download dictionary at\nhttp://extensions.openoffice.org/" ) + wxT( "\n\n" ) +
                              _( "Press OK to visit our HomePage." ) );
 
     // Hide Modaless Dialog

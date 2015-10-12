@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.3.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-09 14:11+0800\n"
-"PO-Revision-Date: 2015-10-09 14:14+0800\n"
+"POT-Creation-Date: 2015-10-10 17:33+0800\n"
+"PO-Revision-Date: 2015-10-10 17:34+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit-mod@gmail.com>\n"
 "Language: zh_CN\n"
@@ -525,40 +525,40 @@ msgstr ""
 msgid "Hex Mode to Text/Column Mode"
 msgstr "十六进制模式转换到文字/列块模式"
 
-#: ../src/MadEdit/MadEditBasic.cpp:2385 ../src/MadEdit/MadEditBasic.cpp:2455
+#: ../src/MadEdit/MadEditBasic.cpp:2397 ../src/MadEdit/MadEditBasic.cpp:2467
 #: ../src/MadEditFrame.cpp:3552
 msgid "The Parent Directory of this file does not exist:"
 msgstr "这个文件所属的目录不存在："
 
-#: ../src/MadEdit/MadEditBasic.cpp:2475
+#: ../src/MadEdit/MadEditBasic.cpp:2487
 msgid "Cannot save this file:"
 msgstr "无法保存这个文件："
 
-#: ../src/MadEdit/MadEditBasic.cpp:2477 ../src/MadEdit/MadEditBasic.cpp:2884
-#: ../src/MadEdit/MadEditBasic.cpp:2897 ../src/MadEdit/MadEditSearch.cpp:711
+#: ../src/MadEdit/MadEditBasic.cpp:2489 ../src/MadEdit/MadEditBasic.cpp:2896
+#: ../src/MadEdit/MadEditBasic.cpp:2909 ../src/MadEdit/MadEditSearch.cpp:711
 #: ../src/MadEdit/MadEditSearch.cpp:837 ../src/MadEdit/MadEditSearch.cpp:929
 #: ../src/MadEdit/MadEditSearch.cpp:980 ../src/MadEditFrame.cpp:343
 #: ../src/MadEditFrame.cpp:348
 msgid "&Ok"
 msgstr "确定(&O)"
 
-#: ../src/MadEdit/MadEditBasic.cpp:2505
+#: ../src/MadEdit/MadEditBasic.cpp:2517
 msgid "Do you want to save this file?"
 msgstr "要保存这个文件吗？"
 
-#: ../src/MadEdit/MadEditBasic.cpp:2507 ../src/MadEdit/MadEditBasic.cpp:2570
-#: ../src/MadEdit/MadEditBasic.cpp:2626 ../src/MadEditFrame.cpp:332
+#: ../src/MadEdit/MadEditBasic.cpp:2519 ../src/MadEdit/MadEditBasic.cpp:2582
+#: ../src/MadEdit/MadEditBasic.cpp:2638 ../src/MadEditFrame.cpp:332
 #: ../src/MadEditFrame.cpp:338 ../src/MadSearchReplaceDialog.cpp:1520
 msgid "&Yes"
 msgstr "是(&Y)"
 
-#: ../src/MadEdit/MadEditBasic.cpp:2508 ../src/MadEdit/MadEditBasic.cpp:2570
-#: ../src/MadEdit/MadEditBasic.cpp:2626 ../src/MadEditFrame.cpp:333
+#: ../src/MadEdit/MadEditBasic.cpp:2520 ../src/MadEdit/MadEditBasic.cpp:2582
+#: ../src/MadEdit/MadEditBasic.cpp:2638 ../src/MadEditFrame.cpp:333
 #: ../src/MadEditFrame.cpp:338 ../src/MadSearchReplaceDialog.cpp:1520
 msgid "&No"
 msgstr "否(&N)"
 
-#: ../src/MadEdit/MadEditBasic.cpp:2508 ../src/MadEditFrame.cpp:333
+#: ../src/MadEdit/MadEditBasic.cpp:2520 ../src/MadEditFrame.cpp:333
 #: ../src/MadEditFrame.cpp:343 ../src/MadFileAssociationDialog.cpp:389
 #: ../src/MadHighlightingDialog.cpp:315 ../src/MadPurgeHistoryDialog.cpp:95
 #: ../src/MadOptionsDialog.cpp:1068 ../src/MadConvEncDialog.cpp:126
@@ -566,31 +566,31 @@ msgstr "否(&N)"
 msgid "&Cancel"
 msgstr "取消(&C)"
 
-#: ../src/MadEdit/MadEditBasic.cpp:2517
+#: ../src/MadEdit/MadEditBasic.cpp:2529
 msgid "Save File As"
 msgstr "另存为"
 
-#: ../src/MadEdit/MadEditBasic.cpp:2521 ../src/MadEditFrame.cpp:1571
+#: ../src/MadEdit/MadEditBasic.cpp:2533 ../src/MadEditFrame.cpp:1571
 msgid "Save File"
 msgstr "保存文件"
 
-#: ../src/MadEdit/MadEditBasic.cpp:2569
+#: ../src/MadEdit/MadEditBasic.cpp:2581
 msgid "Do you want to discard changes?"
 msgstr "要放弃所做的修改吗？"
 
-#: ../src/MadEdit/MadEditBasic.cpp:2623
+#: ../src/MadEdit/MadEditBasic.cpp:2635
 msgid "This file has been changed by another application."
 msgstr "这个文件被其它程序修改过了。"
 
-#: ../src/MadEdit/MadEditBasic.cpp:2624
+#: ../src/MadEdit/MadEditBasic.cpp:2636
 msgid "Do you want to reload it?"
 msgstr "要重载这个文件吗？"
 
-#: ../src/MadEdit/MadEditBasic.cpp:2874
+#: ../src/MadEdit/MadEditBasic.cpp:2886
 msgid "The input string is not a valid Hex-String:"
 msgstr "这个不是正确的十六进制字符串："
 
-#: ../src/MadEdit/MadEditBasic.cpp:3512 ../src/MadFindInFilesDialog.cpp:823
+#: ../src/MadEdit/MadEditBasic.cpp:3524 ../src/MadFindInFilesDialog.cpp:823
 #: ../src/MadSearchReplaceDialog.cpp:1404
 #, c-format
 msgid "Found %d matched texts..."
@@ -2383,8 +2383,12 @@ msgid "Memory allocation failed"
 msgstr "分配内存失败"
 
 #: ../src/MadEditFrame.cpp:7718
-msgid "Download dictionary at http://extensions.openoffice.org/"
-msgstr "字典获取地址 http://extensions.openoffice.org/"
+msgid ""
+"Download dictionary at\n"
+"http://extensions.openoffice.org/"
+msgstr ""
+"字典获取地址\n"
+"http://extensions.openoffice.org/"
 
 #: ../src/MadEditFrame.cpp:7719
 msgid "Press OK to visit our HomePage."
