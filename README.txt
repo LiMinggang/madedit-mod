@@ -85,6 +85,8 @@ Syntax files, Locale files and Settings:
   FontWidth.dat is Cache of Font-Width-Data, it can speed-up MadEdit a lot.
 
   * Download dictionary at http://extensions.openoffice.org
+    oxt is actually a zip file. So, download it and open it with 7-zip. Then extract
+    the .dic and .aff to ./Dictionaries. Re-start MadEdit-Mod to load the dictionary.
   * Use MadEdit-Mod with other applications like CPPCheck, Visual Studio, try
     'madedit %f*lineNum'
 
@@ -105,6 +107,7 @@ Mod v0.3.8
 New: Automatically advance number for new file in NoNameXX
 New: Change insert mode to insertion while changing from hex to text mode
 New: Use indent size of current line instead of tha last line that has non-space/tab char
+New: Add Spanish dictionary in release since a lot of downloads from Spanish
 Fix: Match brace pair has bug if it was in comment or string(From MadEdit)
 Fix: Select contents between a brace pair has bug
 Fix: Size of the dictionary selection and path is too small under Ubuntu

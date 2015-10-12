@@ -1,1 +1,5 @@
-Download more dictionaries at http://archive.services.openoffice.org/pub/mirror/OpenOffice.org/contrib/dictionaries/
+Download more dictionaries at http://extensions.openoffice.org
+
+Note:
+oxt is actually a zip file. So, download it and open it with 7-zip. Then extract
+the .dic and .aff to ./Dictionaries. Re-start MadEdit-Mod to load the dictionary.
