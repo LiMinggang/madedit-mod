@@ -397,6 +397,7 @@ private:
 public:
     int OpenedFileCount();
     void OpenFile(const wxString &filename, bool mustExist); // if filename is empty, open a new file
+    void RunScriptWithFile(const wxString &filename, const wxString &scriptname, bool mustExist, bool closeafterdone);
     void CloseFile(int pageId);
     void CloseAllFiles(bool force);
     void MadEditFrameKeyDown(wxKeyEvent& event);

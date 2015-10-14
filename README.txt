@@ -100,17 +100,31 @@ Feature/issues to be released
 
 ChangeLog:
 ----------
+Note: Not support wxWidgets 2.8 anymore since 0.3.8
+
 Todo:
 FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.3.8
+New: Silent mode which can be used in scripting
+     Run MadEdit-Mod without show GUI and use a MadPython to handle the files to
+     be opened. So, you can use the Astyle/XML formatter/HTML tools the same as 
+     the original ones, eg, call it in a script to handle a lot of files.
+     Furthermore, you can use MadPython to do more!!!
+     [-h], help, Displays help on the command line parameters
+     [-s], silent, Disables the GUI
+     [-m], madpython, Specify MadPython file to be run on the file
+     [files], File(s) to be opened
 New: Automatically advance number for new file in NoNameXX
 New: Change insert mode to insertion while changing from hex to text mode
 New: Use indent size of current line instead of tha last line that has non-space/tab char
 New: Add Spanish dictionary in release since a lot of downloads from Spanish
+New: Improve UI for Mad-Macro list
+New: Auto indent support for Python
 Fix: Match brace pair has bug if it was in comment or string(From MadEdit)
 Fix: Select contents between a brace pair has bug
 Fix: Size of the dictionary selection and path is too small under Ubuntu
+Fix: Remove some of the code for compatible with wxWidgets 2.8.x
 
 Mod v0.3.7
 1.New: Column Align Right(Selected text would be aligned according to right)

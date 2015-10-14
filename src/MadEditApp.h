@@ -67,10 +67,15 @@ class MadEditApp:public wxApp
 #if (wxUSE_ON_FATAL_EXCEPTION == 1) && (wxUSE_STACKWALKER == 1)
     MadStackWalker m_StackWalker;
 #endif
+    bool m_SilentMode;
+    wxArrayString m_FileNames;
+    wxString m_MadPythonScript;
 
 public:
-    bool OnInit();
-    int OnExit();
+    virtual bool OnInit();
+    virtual int OnExit();
+    virtual void OnInitCmdLine(wxCmdLineParser& cmdParser);
+    virtual bool OnCmdLineParsed(wxCmdLineParser& cmdParser);
 #if (wxUSE_ON_FATAL_EXCEPTION == 1) && (wxUSE_STACKWALKER == 1)
     void OnFatalException();
 #endif

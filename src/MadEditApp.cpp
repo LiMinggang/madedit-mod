@@ -9,16 +9,16 @@
 #include "MadEditFrame.h"
 #include "MadOptionsDialog.h"
 #include "MadUtils.h"
-
 #include "MadEdit/MadEdit.h"
+
+#include <algorithm>
 
 #include <wx/display.h>
 #include <wx/filename.h>
 #include <wx/stdpaths.h>
 #include <wx/fileconf.h>
 #include <wx/snglinst.h>
-
-#include <algorithm>
+#include <wx/cmdline.h>
 
 IMPLEMENT_APP(MadEditApp)
 
@@ -69,6 +69,17 @@ int g_LanguageValue[]=
     wxLANGUAGE_SPANISH,
     wxLANGUAGE_RUSSIAN,
 };
+static const wxCmdLineEntryDesc g_cmdLineDesc [] =
+{
+     { wxCMD_LINE_SWITCH, "h", "help", "Displays help on the command line parameters",
+          wxCMD_LINE_VAL_NONE, wxCMD_LINE_OPTION_HELP },
+     { wxCMD_LINE_SWITCH, "s", "silent", "Disables the GUI" },
+     { wxCMD_LINE_OPTION, "m", "madpython", "Specify MadPython file to be run on the file" },
+	 { wxCMD_LINE_PARAM, NULL, NULL, "File(s) to be opened", wxCMD_LINE_VAL_STRING,  wxCMD_LINE_PARAM_OPTIONAL | wxCMD_LINE_PARAM_MULTIPLE }, 
+ 
+     { wxCMD_LINE_NONE }
+};
+
 extern const size_t g_LanguageCount = sizeof(g_LanguageValue)/sizeof(int);
 //wxIMPLEMENT_APP(MadEditApp);
 const wxString g_MadServerStr = wxT("MadMainApp");
@@ -245,6 +256,10 @@ bool MadAppConn::OnExecute(const wxString& topic,
 
 bool MadEditApp::OnInit()
 {
+    // call default behaviour (mandatory)
+    if (!wxApp::OnInit())
+        return false;
+
     wxFileName filename(GetExecutablePath());
     filename.MakeAbsolute();
     g_MadEditAppDir=filename.GetPath(wxPATH_GET_VOLUME|wxPATH_GET_SEPARATOR);
@@ -264,16 +279,6 @@ bool MadEditApp::OnInit()
 
     //wxLogMessage(g_MadEditAppDir);
     //wxLogMessage(g_MadEditHomeDir);
-
-    // parse commandline to filenames, every file is with a trailing char '|', ex: filename1|filename2|
-    wxString filenames;
-    for(int i=1;i<argc;++i)
-    {
-        wxFileName filename(argv[i]);
-        filename.MakeAbsolute();
-        filenames += filename.GetFullPath() + wxT('|');
-    }
-
 
     // init wxConfig
     g_MadEditConfigName=g_MadEditHomeDir+ GetAppName()+ wxT(".cfg");
@@ -315,8 +320,15 @@ bool MadEditApp::OnInit()
             wxConnectionBase* connection = client->MakeConnection(hostName, g_MadServerStr, g_MadTopicStr);
             if (connection)
             {
+                // Only file names would be send to the instance, ignore other switches, options
                 // Ask the other instance to open a file or raise itself
-                connection->Execute(filenames);
+                wxString fnames;
+                for(size_t i=0; i<m_FileNames.GetCount(); ++i)
+                {
+                    //The name is what follows the last \ or /
+                    fnames +=  m_FileNames[i] + wxT('|');
+                }
+                connection->Execute(fnames);
                 connection->Disconnect();
                 delete connection;
             }
@@ -380,7 +392,7 @@ bool MadEditApp::OnInit()
     // set colors
     SetHtmlColors();
 
-    bool maximize=false;
+     bool maximize=false;
 #ifdef __WXMSW__
     cfg->Read(wxT("/MadEdit/WindowMaximize"), &maximize, false);
 #endif
@@ -422,52 +434,71 @@ bool MadEditApp::OnInit()
     else if(FontWidthManager::MaxCount>40) FontWidthManager::MaxCount=40;
     FontWidthManager::Init(g_MadEditHomeDir);
 
-
     // create the main frame
     MadEditFrame *myFrame = new MadEditFrame(NULL, 1 , wxEmptyString, pos, size);
-    SetTopWindow(myFrame);
+
+    if(!m_SilentMode)
+    {
+
+        SetTopWindow(myFrame);
 
 #ifdef __WXMSW__
-    //if(maximize)    // removed: gogo, 30.08.2009
-    {
-        WINDOWPLACEMENT wp;
-        wp.length=sizeof(WINDOWPLACEMENT);
-        GetWindowPlacement((HWND)myFrame->GetHWND(), &wp);
+        //if(maximize)    // removed: gogo, 30.08.2009
+        {
+            WINDOWPLACEMENT wp;
+            wp.length=sizeof(WINDOWPLACEMENT);
+            GetWindowPlacement((HWND)myFrame->GetHWND(), &wp);
 
-       // changed: gogo, 30.08.2009
-       //wp.showCmd=SW_SHOWMAXIMIZED;
-       wp.showCmd = maximize ? SW_SHOWMAXIMIZED : SW_SHOWNORMAL;
+           // changed: gogo, 30.08.2009
+           //wp.showCmd=SW_SHOWMAXIMIZED;
+           wp.showCmd = maximize ? SW_SHOWMAXIMIZED : SW_SHOWNORMAL;
 
-       SetWindowPlacement((HWND)myFrame->GetHWND(), &wp);
-    }
+           SetWindowPlacement((HWND)myFrame->GetHWND(), &wp);
+        }
 #endif
 
-    myFrame->Show(true);
+        myFrame->Show(true);
 
-    // reload files previously opened
-    wxString files;
-    cfg->Read(wxT("/MadEdit/ReloadFilesList"), &files);
-    if(!files.IsEmpty())
-    {
-        filenames = files + filenames;
+        // reload files previously opened
+        wxString files;
+        cfg->Read(wxT("/MadEdit/ReloadFilesList"), &files);
+        
+        for(size_t i=0; i<m_FileNames.GetCount(); ++i)
+        {
+            //The name is what follows the last \ or /
+            files +=  m_FileNames[i] + wxT('|');
+        }
+
+        if(!files.IsEmpty())
+        {
+            // use OnReceiveMessage() to open the files
+            OnReceiveMessage(files.c_str(), (files.size()+1)*sizeof(wxChar));
+        }
+
+        if(myFrame->OpenedFileCount()==0)
+        {
+            myFrame->OpenFile(wxEmptyString, false);
+        }
     }
-
-    if(!filenames.IsEmpty())
+    else
     {
-        // use OnReceiveMessage() to open the files
-        OnReceiveMessage(filenames.c_str(), (filenames.size()+1)*sizeof(wxChar));
-    }
 
-    if(myFrame->OpenedFileCount()==0)
-    {
-        myFrame->OpenFile(wxEmptyString, false);
+        if(!m_FileNames.IsEmpty() && !m_MadPythonScript.IsEmpty())
+        {
+            // open the files
+            for( size_t i = 0; i < m_FileNames.GetCount(); ++i )
+            {
+                myFrame->RunScriptWithFile(m_FileNames[i], m_MadPythonScript, false, true);
+            }
+        }
+        return false;//exit
     }
 
 #if 0
     // force crash
     wxWindow *w = NULL; w->Show();
 #endif
-    return TRUE;
+    return true;
 }
 
 int MadEditApp::OnExit()
@@ -480,6 +511,36 @@ int MadEditApp::OnExit()
 
     return 0;
 }
+
+void MadEditApp::OnInitCmdLine(wxCmdLineParser& cmdParser)
+{
+    cmdParser.SetDesc (g_cmdLineDesc);
+    // must refuse '/' as parameter starter or cannot use "/path" style paths
+    cmdParser.SetSwitchChars (wxT("-"));
+}
+ 
+bool MadEditApp::OnCmdLineParsed(wxCmdLineParser& cmdParser)
+{
+    m_SilentMode = cmdParser.Found(wxT("s"));
+ 
+    // to get at your unnamed parameters use
+    // parse commandline to filenames, every file is with a trailing char '|', ex: filename1|filename2|
+    wxFileName filename;
+    m_FileNames.Empty();
+    for (int i = 0; i < cmdParser.GetParamCount(); i++)
+    {
+        filename = cmdParser.GetParam(i);
+        filename.MakeAbsolute();
+		m_FileNames.Add(filename.GetFullPath());
+    }
+
+    // and other command line parameters
+    cmdParser.Found(wxT("m"), &m_MadPythonScript);
+    // then do what you need with them.
+ 
+    return true;
+}
+
 
 #if (wxUSE_ON_FATAL_EXCEPTION == 1) && (wxUSE_STACKWALKER == 1)
 #include <wx/longlong.h>

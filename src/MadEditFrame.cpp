@@ -2392,6 +2392,14 @@ void MadEditFrame::CreateGUIControls( void )
                     }
                     
                     (*(cd->popmenu_ptr))->Append( mit );
+                    if(cd->menu_id == menuToggleReadOnly)
+                    {
+                        (*(cd->popmenu_ptr))->AppendSeparator();
+                        (*(cd->popmenu_ptr))->Append(menuCopyFilePath,       _("Copy full path name"));
+                        (*(cd->popmenu_ptr))->Append(menuCopyFileName,       _("Copy full file name"));
+                        (*(cd->popmenu_ptr))->Append(menuCopyFileDir,        _("Copy directory name"));
+                        
+                    }
                 }
                 if(cd->toolbar_ptr && *(cd->toolbar_ptr))
                 {
@@ -2669,7 +2677,7 @@ void MadEditFrame::CreateGUIControls( void )
             if(cont)
             {
                 g_Menu_MadMacro_Scripts->AppendSeparator();
-                WxToolBar[tbMACRO]->AddSeparator();
+                g_tbMACRO_ptr->AddSeparator();
             }
 
             while( cont )
@@ -2689,7 +2697,7 @@ void MadEditFrame::CreateGUIControls( void )
                         help.Empty();
                     }
                     g_Menu_MadMacro_Scripts->Append( menuMadScrip1 + int( i ), fn.GetName(), help );
-                    WxToolBar[tbMACRO]->AddTool( menuMadScrip1 + int( i ), _T( "Macro" ), m_ImageList->GetBitmap( saverec_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, fn.GetName(), help, NULL );
+                    g_tbMACRO_ptr->AddTool( menuMadScrip1 + int( i ), _T( "Macro" ), m_ImageList->GetBitmap( saverec_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, fn.GetName(), help, NULL );
                     ++i;
                 }
 
@@ -2755,6 +2763,11 @@ void MadEditFrame::CreateGUIControls( void )
     m_AuiManager.AddPane( m_InfoNotebook, wxBOTTOM, _( "Information Window" ) );
     m_AuiManager.GetPane( m_InfoNotebook ).Show( false ).FloatingSize( nbsize );
     m_AuiManager.Update();
+	if (g_tbMACRO_ptr->GetToolCount() <= 5)
+	{
+		g_tbMACRO_ptr->SetOverflowVisible(false);
+		g_tbMACRO_ptr->Realize();
+	}
     // fixed for using wxAUI
     WxStatusBar1->Connect( wxEVT_SIZE, wxSizeEventHandler( MadEditFrame::OnSize ) );
 }
@@ -3667,6 +3680,76 @@ void MadEditFrame::OpenFile( const wxString &fname, bool mustExist )
 
     if( linenum != -1 )
     { g_ActiveMadEdit->GoToLine( linenum ); }
+}
+
+void MadEditFrame::RunScriptWithFile(const wxString &filename, const wxString &scriptname, bool mustExist, bool closeafterdone)
+{
+    if(!filename.IsEmpty())
+    {
+
+        wxTextFile scriptfile( scriptname );
+        scriptfile.Open( wxConvFile );
+
+        if( scriptfile.IsOpened() )
+        {
+            int utf8test = MadFileNameIsUTF8( filename );
+            bool exists = ( wxFileExists( filename ) || ( utf8test != 0 ) );
+            if( mustExist && !exists )
+            {
+                scriptfile.Close();
+                return;
+            }
+            OpenFile( filename, mustExist );
+            if( g_ActiveMadEdit != NULL)
+            {
+				int idx = m_Notebook->GetSelection();
+                if((!g_ActiveMadEdit->IsReadOnly()) && ((!mustExist)||(filename == g_ActiveMadEdit->GetFileName())))
+                {
+                    if( !g_EmbeddedPython )
+                    {
+                        try
+                        {
+                            g_EmbeddedPython = new EmbeddedPython();
+                        }
+                        catch( std::bad_alloc & )
+                        {
+                            MadMessageBox( _( "Memory allocation failed" ), wxT( "Error" ),  wxOK | wxICON_ERROR );
+                        }
+                    }
+
+                    if( g_EmbeddedPython )
+                    {
+                        wxString str = scriptfile.GetFirstLine() + wxT( "\n" );
+
+                        for( ; !scriptfile.Eof(); )
+                        {
+                            str << scriptfile.GetNextLine() << wxT( "\n" );
+                        }
+
+                        if( str.IsNull() == false )
+                        {
+                            g_EmbeddedPython->exec( std::string( str.mb_str() ) );
+                        }
+                    }
+
+                    wxString name = m_Notebook->GetPageText( idx );
+
+                    if( name[name.Len() - 1] == wxT( '*' ) )
+                    { name.Truncate( name.Len() - 1 ); }
+
+                    if( g_ActiveMadEdit->Save( false, name, false ) == wxID_YES )
+                    {
+                        m_RecentFiles->AddFileToHistory( g_ActiveMadEdit->GetFileName() );
+                    }
+                }
+                if(closeafterdone)
+                {
+                    CloseFile( idx );
+                }
+            }            
+            scriptfile.Close();
+        }
+    }
 }
 
 void MadEditFrame::CloseFile( int pageId )
@@ -7167,8 +7250,14 @@ void MadEditFrame::OnToolsSaveRecMacro( wxCommandEvent& event )
                 {
                     help.Empty();
                 }
+				if (!g_tbMACRO_ptr->GetOverflowVisible())
+				{
+					g_tbMACRO_ptr->SetOverflowVisible(true);
+					g_tbMACRO_ptr->Realize();
+                    m_AuiManager.Update();
+				}
                 g_Menu_MadMacro_Scripts->Append( menuMadScrip1 + int( g_Menu_MadMacro_Scripts->GetMenuItemCount() ), fn.GetName(), help );
-                WxToolBar[tbMACRO]->AddTool( menuMadScrip1 + int( g_Menu_MadMacro_Scripts->GetMenuItemCount() ), _T( "Macro" ), m_ImageList->GetBitmap( saverec_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, fn.GetName(), help, NULL );
+                g_tbMACRO_ptr->AddTool( menuMadScrip1 + int( g_Menu_MadMacro_Scripts->GetMenuItemCount() ), _T( "Macro" ), m_ImageList->GetBitmap( saverec_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, fn.GetName(), help, NULL );
             }
             scriptfile.Close();
         }
