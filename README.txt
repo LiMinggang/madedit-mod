@@ -89,6 +89,12 @@ Syntax files, Locale files and Settings:
     the .dic and .aff to ./Dictionaries. Re-start MadEdit-Mod to load the dictionary.
   * Use MadEdit-Mod with other applications like CPPCheck, Visual Studio, try
     'madedit %f*lineNum'
+  * Silent mode which can be used in scripting, no GUI will be shown
+    [-h], help, Displays help on the command line parameters
+    [-s], silent, Disables the GUI
+    [-m], madpython, Specify MadPython file to be run on the file
+    [files], File(s) to be opened
+    Eg: madedit -s -m madpytho.mpy ./1.txt /tmp/2.txt
 
 Known issues:
 The Macro recording function will save all your commands to one document which
@@ -115,6 +121,7 @@ New: Silent mode which can be used in scripting
      [-s], silent, Disables the GUI
      [-m], madpython, Specify MadPython file to be run on the file
      [files], File(s) to be opened
+     Eg: madedit -s -m madpytho.mpy ./1.txt /tmp/2.txt
 New: Automatically advance number for new file in NoNameXX
 New: Change insert mode to insertion while changing from hex to text mode
 New: Use indent size of current line instead of tha last line that has non-space/tab char
@@ -125,6 +132,8 @@ Fix: Match brace pair has bug if it was in comment or string(From MadEdit)
 Fix: Select contents between a brace pair has bug
 Fix: Size of the dictionary selection and path is too small under Ubuntu
 Fix: Remove some of the code for compatible with wxWidgets 2.8.x
+Fix: Missing menu items for Copy file path/name/directory after refactor
+Fix: Fix Mouse event(LDown LDClick) handle issue(Since the beginning of MadEdit)
 
 Mod v0.3.7
 1.New: Column Align Right(Selected text would be aligned according to right)

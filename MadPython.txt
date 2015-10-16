@@ -264,6 +264,10 @@ mad_py::tuple WordCount(bool selection)
 void ColumnAlignLeft()
 void ColumnAlignRight()
 void InsertIncrementalNumber(int initial, int step, int total, int stepType, int fmt, int align, bool zeroPad, std::string &prefix, std::string & postfix)
+void Astyle()
+void XMLFormat()
+void Markdown2Html()
+void Html2PlainText()
 
 
 MadEditCommand

@@ -11,6 +11,8 @@
 #include "EmbeddedPython.hpp"
 
 MadMacroDlg * g_MadMacroDlg = NULL;
+extern MadEdit *g_ActiveMadEdit;
+
     ////Event Table Start
 BEGIN_EVENT_TABLE(MadMacroDlg,wxDialog)
 	
@@ -40,11 +42,7 @@ MadMacroDlg::MadMacroDlg(wxWindow* parent, wxWindowID id, const wxString& title,
 	WxStaticBoxSizer1->Add(bSizer1, 1, wxALIGN_CENTER | wxALIGN_TOP | wxEXPAND | wxALL, 5);
 
     m_debug = false;
-    wxSize pymacro(640, 480);
-    pymacro = wxSize(640, 240);
-    m_output = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(640, 240), wxTE_READONLY|wxTE_MULTILINE|wxVSCROLL|wxHSCROLL|wxSIMPLE_BORDER );
-    m_output->Show(false);
-
+    wxSize pymacro(640, 240);
     m_pymacro=new MadEdit(this, ID_MADEDIT, wxDefaultPosition, pymacro);
     m_pymacro->SetFixedWidthMode(false);
     m_pymacro->SetRecordCaretMovements(false);
@@ -57,8 +55,6 @@ MadMacroDlg::MadMacroDlg(wxWindow* parent, wxWindowID id, const wxString& title,
     else if (m_pymacro->GetInsertNewLineType() == nltUNIX) endline = wxT("\n");
     m_pymacro->SetText((wxString(wxT("#Create MadEdit Object for active edit")) + endline + wxT("medit = MadEdit()") + endline + endline));
     bSizer1->Add( m_pymacro, 1, wxEXPAND | wxALL, 5 );
-    if (m_output)
-        bSizer1->Add( m_output, 1, wxEXPAND | wxALL, 5 );
 
     bSizer2 = new wxBoxSizer( wxHORIZONTAL );
 	WxStaticBoxSizer1->Add(bSizer2, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 2);
@@ -70,7 +66,14 @@ MadMacroDlg::MadMacroDlg(wxWindow* parent, wxWindowID id, const wxString& title,
     m_enableresult = new wxButton( this, ID_WXBUTTONENABLERESULT, _("Results >>"), wxDefaultPosition, wxDefaultSize, 0 );
     bSizer2->Add( m_enableresult, 0, wxALIGN_CENTER_VERTICAL | wxALL, 3 );
     m_run->SetDefault();
-    
+
+    bSizer3 = new wxBoxSizer( wxVERTICAL );
+	WxStaticBoxSizer1->Add(bSizer3, 1, wxALIGN_CENTER | wxALIGN_TOP | wxEXPAND | wxALL, 5);
+    m_output = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, pymacro, wxTE_READONLY|wxTE_MULTILINE|wxVSCROLL|wxHSCROLL|wxSIMPLE_BORDER );
+    m_output->Show(false);
+
+    if (m_output)
+        bSizer3->Add( m_output, 1, wxEXPAND | wxALL, 5 );
 	Layout();
 	GetSizer()->Fit(this);
 	GetSizer()->SetSizeHints(this);
@@ -85,35 +88,38 @@ MadMacroDlg::~MadMacroDlg()
 void MadMacroDlg::OnRunClick( wxCommandEvent& event )
 {
     wxString pystr;
-    m_pymacro->GetText(pystr);
-    if(!pystr.IsEmpty())
+    if(g_ActiveMadEdit)
     {
-        if(!g_EmbeddedPython)
+        m_pymacro->GetText(pystr);
+        if(!pystr.IsEmpty())
         {
-            try
+            if(!g_EmbeddedPython)
             {
-                g_EmbeddedPython = new EmbeddedPython();
+                try
+                {
+                    g_EmbeddedPython = new EmbeddedPython();
+                }
+                catch(std::bad_alloc &)
+                {
+                    MadMessageBox(_("Memory allocation failed"), _("Error"),  wxOK|wxICON_ERROR);
+                    g_EmbeddedPython = 0;
+                }
             }
-            catch(std::bad_alloc &)
+            if(g_EmbeddedPython)
             {
-                MadMessageBox(_("Memory allocation failed"), _("Error"),  wxOK|wxICON_ERROR);
-                g_EmbeddedPython = 0;
-            }
-        }
-        if(g_EmbeddedPython)
-        {
-            if (m_debug)
-            {
-                wxStreamToTextRedirector redirector((wxTextCtrl *)m_output);
-                g_MainFrame->SetMacroRunning();
-                g_EmbeddedPython->exec(std::string(pystr.mb_str()));
-                g_MainFrame->SetMacroStopped();
-            }
-            else
-            {
-                g_MainFrame->SetMacroRunning();
-                g_EmbeddedPython->exec(std::string(pystr.mb_str()));
-                g_MainFrame->SetMacroStopped();                
+                if (m_debug)
+                {
+                    wxStreamToTextRedirector redirector((wxTextCtrl *)m_output);
+                    g_MainFrame->SetMacroRunning();
+                    g_EmbeddedPython->exec(std::string(pystr.mb_str()));
+                    g_MainFrame->SetMacroStopped();
+                }
+                else
+                {
+                    g_MainFrame->SetMacroRunning();
+                    g_EmbeddedPython->exec(std::string(pystr.mb_str()));
+                    g_MainFrame->SetMacroStopped();                
+                }
             }
         }
     }

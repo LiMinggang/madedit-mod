@@ -1272,6 +1272,31 @@ namespace mad_python
 		{
 			g_ActiveMadEdit->ColumnAlignRight();
 		}
+        /**=======================================================**/
+
+        void Astyle()
+        {
+            wxCommandEvent event;
+            g_MainFrame->OnToolsAstyleFormat( event );
+        }
+        
+        void XMLFormat()
+        {
+            wxCommandEvent event;
+            g_MainFrame->OnToolsXMLFormat( event );
+        }
+
+        void Markdown2Html()
+        {
+            wxCommandEvent event;
+            g_MainFrame->OnToolsMarkdown2Html( event );
+        }
+
+        void Html2PlainText()
+        {
+            wxCommandEvent event;
+            g_MainFrame->OnToolsHtml2PlainText( event );
+        }
     };
     //PyMadEdit * InitMadPython() { return new PyMadEdit();}
 }
@@ -1464,6 +1489,10 @@ BOOST_PYTHON_MODULE(madpython)
         .def("ScrollRight", &PyMadEdit::ScrollRight, "")
         .def("ColumnAlignLeft", &PyMadEdit::ColumnAlignLeft, "")
         .def("ColumnAlignRight", &PyMadEdit::ColumnAlignRight, "")
+        .def("Astyle", &PyMadEdit::Astyle, "")
+        .def("XMLFormat", &PyMadEdit::XMLFormat, "")
+        .def("Markdown2Html", &PyMadEdit::Markdown2Html, "")
+        .def("Html2PlainText", &PyMadEdit::Html2PlainText, "")
 
         .def("FindTextNext", &PyMadEdit::FindTextNext, FindTextNext_member_overloads( args("text", "bRegex", "bCaseSensitive", "bWholeWord", "rangeFrom", "rangeTo"), "Doc string" )[return_value_policy<return_by_value>()])
 

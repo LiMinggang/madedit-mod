@@ -33,6 +33,7 @@ class MadMacroDlg : public wxDialog
 		wxStaticBoxSizer *WxStaticBoxSizer1;
    		wxBoxSizer* bSizer1;
 		wxBoxSizer* bSizer2;
+		wxBoxSizer* bSizer3;
 		MadEdit* m_pymacro;
 		wxTextCtrl* m_output;
 		wxButton* m_run;

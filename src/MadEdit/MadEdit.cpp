@@ -9851,6 +9851,11 @@ void MadEdit::OnMouseLeftDown(wxMouseEvent &evt)
 {
 	//wxTheApp->GetTopWindow()->SetTitle(wxString::Format(wxT("LDown")));
 	DBOUT("LDown\n");
+	if(GetCapture() == this)
+	{
+		ReleaseMouse();
+	}
+
 	if ((m_EditMode != emHexMode) && evt.m_x>=0 && evt.m_x <= (m_LineNumberAreaWidth+m_BookmarkWidth))
 	{
 		if((evt.m_x <= m_LineNumberAreaWidth) && evt.m_controlDown)
@@ -10126,11 +10131,15 @@ void MadEdit::OnMouseLeftDClick(wxMouseEvent &evt)
 {
 	//wxTheApp->GetTopWindow()->SetTitle(wxString::Format(wxT("DClick")));
 	DBOUT("DClick\n");
-	if ((m_EditMode != emHexMode) && evt.m_x>=0 && evt.m_x <= (m_LineNumberAreaWidth+m_BookmarkWidth))
+	
+	if (((m_EditMode != emHexMode) && evt.m_x>=0 && evt.m_x <= (m_LineNumberAreaWidth+m_BookmarkWidth)))
 	{
 		evt.Skip();
 		return;
 	}
+
+	if(GetCapture() == this)
+		ReleaseMouse();
 	ProcessCommand(ecMouseNotify);
 
 	wxFileOffset oldCaretPos=m_CaretPos.pos;
