@@ -68,6 +68,7 @@ class MadEditApp:public wxApp
     MadStackWalker m_StackWalker;
 #endif
     bool m_SilentMode;
+    bool m_ForceEdit;
     wxArrayString m_FileNames;
     wxString m_MadPythonScript;
 
