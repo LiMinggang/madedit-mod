@@ -10057,23 +10057,23 @@ void MadEdit::OnMouseLeftUp(wxMouseEvent &evt)
 		m_MouseMotionTimer->Stop();
 	}
 
-	if(m_MouseLeftDoubleClick)
-	{
-		m_MouseLeftDoubleClick=false;
+    if( m_MouseLeftDown || m_MouseLeftDoubleClick)
+    {
+        if(m_MouseLeftDoubleClick)
+        {
+            m_MouseLeftDoubleClick=false;
+        }
+        else if(m_MouseLeftDown)
+        {
+            //Hacking for
+            if(!m_DragDrop)
+            {
+                EndUpdateSelection(true);
+            }
+        }
 		m_MouseLeftDown=false;
 		ReleaseMouse();
-	}
-	else if(m_MouseLeftDown)
-	{
-		m_MouseLeftDown=false;
-
-		//Hacking for
-		if(!m_DragDrop)
-		{
-			EndUpdateSelection(true);
-		}
-		ReleaseMouse();
-	}
+    }
 
 	if(m_EditMode != emHexMode)
 	{

@@ -130,6 +130,7 @@ New: Use indent size of current line instead of tha last line that has non-space
 New: Add Spanish dictionary in release since a lot of downloads from Spanish
 New: Improve UI for Mad-Macro list
 New: Auto indent support for Python
+New: Purge Caret position history
 Fix: Match brace pair has bug if it was in comment or string(From MadEdit)
 Fix: Select contents between a brace pair has bug
 Fix: Size of the dictionary selection and path is too small under Ubuntu
@@ -137,6 +138,7 @@ Fix: Remove some of the code for compatible with wxWidgets 2.8.x
 Fix: Missing menu items for Copy file path/name/directory after refactor
 Fix: Fix Mouse event(LDown LDClick) handle issue(Since the beginning of MadEdit)
 Fix: Don't need "(R)" on windows title to mark read only file
+Fix: Assertion failure of search/replace results display
 
 Mod v0.3.7
 1.New: Column Align Right(Selected text would be aligned according to right)

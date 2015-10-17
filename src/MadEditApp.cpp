@@ -442,7 +442,6 @@ bool MadEditApp::OnInit()
 
 	if(!m_SilentMode)
 	{
-
 		SetTopWindow(myFrame);
 
 #ifdef __WXMSW__
@@ -485,7 +484,6 @@ bool MadEditApp::OnInit()
 	}
 	else
 	{
-
 		if(!m_FileNames.IsEmpty() && !m_MadPythonScript.IsEmpty())
 		{
 			// open the files
@@ -497,10 +495,6 @@ bool MadEditApp::OnInit()
 		return false;//exit
 	}
 
-#if 0
-	// force crash
-	wxWindow *w = NULL; w->Show();
-#endif
 	return true;
 }
 
@@ -527,9 +521,9 @@ bool MadEditApp::OnCmdLineParsed(wxCmdLineParser& cmdParser)
 	wxFileName filename;
 	m_SilentMode = cmdParser.Found(wxT("s"));
 	m_ForceEdit = cmdParser.Found(wxT("f"));
-	// to get at your unnamed parameters use
 	// parse commandline to filenames, every file is with a trailing char '|', ex: filename1|filename2|
 	m_FileNames.Empty();
+	// to get at your unnamed parameters use GetParam
 	for (int i = 0; i < cmdParser.GetParamCount(); i++)
 	{
 		filename = cmdParser.GetParam(i);

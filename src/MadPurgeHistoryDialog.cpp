@@ -95,6 +95,9 @@ void MadPurgeHistoryDialog::CreateGUIControls()
 	wxButtonCancel = new wxButton(this, wxID_CANCEL, _("&Cancel"), wxPoint(90, 5), wxSize(75, 25), 0, wxDefaultValidator, wxT("wxButtonCancel"));
 	WxBoxSizer2->Add(wxButtonCancel, 0, wxALIGN_CENTER | wxALL, 5);
 
+	WxCheckBoxCaretPos = new wxCheckBox(this, ID_WXCHECKBOXCARETPOS, _("Recent Caret Position"), wxPoint(-1, 222), wxSize(212, 17), 0, wxDefaultValidator, wxT("WxCheckBoxCaretPos"));
+	WxBoxSizer1->Add(WxCheckBoxCaretPos, 0, wxALIGN_LEFT | wxALL, 5);
+
 	WxCheckBoxAllAbove = new wxCheckBox(this, ID_WXCHECKBOXALLABOVE, _("All Above"), wxPoint(5, 222), wxSize(212, 17), 0, wxDefaultValidator, wxT("WxCheckBoxAllAbove"));
 	WxBoxSizer1->Add(WxCheckBoxAllAbove, 0, wxALIGN_CENTER | wxALL, 5);
 
@@ -117,6 +120,7 @@ void MadPurgeHistoryDialog::CreateGUIControls()
 	wxCheckBoxRecentSearchedDirectories->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown));
 	wxRecentSearchedFileFilters->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown));
 	wxCheckBoxRecentSearchedExcludeFilters->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown));
+	WxCheckBoxCaretPos->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown));
 	WxButtonOK->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown));
 	wxButtonCancel->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown));
 	WxButtonOK->SetDefault();
@@ -212,7 +216,8 @@ void MadPurgeHistoryDialog::OnAllAboveClick(wxCommandEvent& event)
         wxCheckBoxRecentSearchedTexts->SetValue(true);
         wxCheckBoxRecentEncodings->SetValue(true);
         wxCheckBoxRecentFonts->SetValue(true);
-        wxCheckBoxRecentFiles->SetValue(true);        
+        wxCheckBoxRecentFiles->SetValue(true); 
+		WxCheckBoxCaretPos->SetValue(true); 
     }
     else
     {
@@ -224,6 +229,7 @@ void MadPurgeHistoryDialog::OnAllAboveClick(wxCommandEvent& event)
         wxCheckBoxRecentEncodings->SetValue(false);
         wxCheckBoxRecentFonts->SetValue(false);
         wxCheckBoxRecentFiles->SetValue(false);
+		WxCheckBoxCaretPos->SetValue(false); 
     }
 }
 

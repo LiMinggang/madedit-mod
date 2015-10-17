@@ -41,6 +41,12 @@ class MadPurgeHistoryDialog : public wxDialog
 		DECLARE_EVENT_TABLE();
 		
 	public:
+		//Do not add custom control declarations between 
+		//GUI Control Declaration Start and GUI Control Declaration End.
+		//wxDev-C++ will remove them. Add custom code after the block.
+		////GUI Control Declaration Start
+		wxCheckBox *WxCheckBoxAllAbove;
+		wxCheckBox *WxCheckBoxCaretPos;
 		wxCheckBox *wxCheckBoxRecentSearchedExcludeFilters;
 		wxCheckBox *wxRecentSearchedFileFilters;
 		wxCheckBox *wxCheckBoxRecentSearchedDirectories;
@@ -55,20 +61,13 @@ class MadPurgeHistoryDialog : public wxDialog
 		void wxButtonCancelClick(wxCommandEvent& event);
 		void MadPurgeHistoryDialogKeyDown(wxKeyEvent& event);
         void OnAllAboveClick(wxCommandEvent& event);
-
-	private:
-		//Do not add custom control declarations between 
-		//GUI Control Declaration Start and GUI Control Declaration End.
-		//wxDev-C++ will remove them. Add custom code after the block.
-		////GUI Control Declaration Start
-		wxCheckBox *WxCheckBoxAllAbove;
 		wxButton *wxButtonCancel;
 		wxButton *WxButtonOK;
 		wxBoxSizer *WxBoxSizer2;
 		wxBoxSizer *WxBoxSizer1;
 		wxStaticBoxSizer *WxStaticBoxSizer1;
 		////GUI Control Declaration End
-		
+
 	private:
 		//Note: if you receive any error with these enum IDs, then you need to
 		//change your old form code that are based on the #define control IDs.
@@ -79,6 +78,7 @@ class MadPurgeHistoryDialog : public wxDialog
 			////GUI Enum Control ID Start
 			ID_DUMMY_START = 1000,
 			ID_WXCHECKBOXALLABOVE,
+            ID_WXCHECKBOXCARETPOS,
 			ID_WXCHECKBOXRECENTSEARCHEDEXCLUDEFILTERS,
 			ID_WXRECENTSEARCHEDFILEFILTERS,
 			ID_WXCHECKBOXRECENTSEARCHEDDIRECTORIES,

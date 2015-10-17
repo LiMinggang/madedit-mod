@@ -715,7 +715,7 @@ void MadFindInFilesDialog::FindReplaceInFiles(bool bReplace)
             tempedit->SetSearchOptions(true, WxCheckBoxWholeWord->GetValue());
         }
 
-        wxString fmt(_("Processing %d of %d files..."));
+        wxString fmt(_("Processing %s of %s files..."));
         vector<wxFileOffset> begpos, endpos;
         MadFileNameList::iterator fnit=g_FileNameList.begin();
         bool cont = true, hide_process = false;
@@ -755,7 +755,7 @@ void MadFindInFilesDialog::FindReplaceInFiles(bool bReplace)
             {
                 g_Time=t;
                 int idx = int(i*max / totalfiles);
-                wxString str=wxString::Format(fmt, i, totalfiles);
+                wxString str=wxString::Format(fmt, (wxLongLong(i).ToString().c_str()), (wxLongLong(totalfiles).ToString().c_str()));
                 wxString fn=madedit->GetFileName();
                 if(!fn.IsEmpty())
                 {
@@ -769,19 +769,19 @@ void MadFindInFilesDialog::FindReplaceInFiles(bool bReplace)
             // get all matched data in madedit
             begpos.clear();
             endpos.clear();
-            wxString expr, fmt;
+            wxString expr, rstr;
             int ok;
             if(bReplace)
             {
                 m_FindText->GetText(expr);
-                m_ReplaceText->GetText(fmt);
+                m_ReplaceText->GetText(rstr);
                 if(WxCheckBoxFindHex->GetValue())
                 {
-                    ok = madedit->ReplaceHexAll(expr, fmt, &begpos, &endpos);
+                    ok = madedit->ReplaceHexAll(expr, rstr, &begpos, &endpos);
                 }
                 else
                 {
-                    ok = madedit->ReplaceTextAll(expr, fmt, 
+                    ok = madedit->ReplaceTextAll(expr, rstr, 
                         WxCheckBoxRegex->GetValue(),
                         WxCheckBoxCaseSensitive->GetValue(),
                         WxCheckBoxWholeWord->GetValue(), 
@@ -820,10 +820,10 @@ void MadFindInFilesDialog::FindReplaceInFiles(bool bReplace)
 
             if(ok > 2000)
             {
-                wxString msg = _("Found %d matched texts...");
+                wxString msg = _("Found %s matched texts...");
                 msg += wxT("                                \n");
                 wxProgressDialog tmpdialog(_("Preparing Results"),
-                                            wxString::Format(msg, 0),
+                                            wxString::Format(msg, (wxLongLong(ok).ToString().c_str())),
                                             ok,    // range
                                             g_MainFrame,   // parent
                                             wxPD_CAN_ABORT |

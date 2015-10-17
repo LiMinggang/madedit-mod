@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-14 20:58+0800\n"
+"POT-Creation-Date: 2015-10-17 23:23+0800\n"
 "PO-Revision-Date: 2015-06-30 21:50+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
@@ -517,7 +517,7 @@ msgid "Hex Mode to Text/Column Mode"
 msgstr "16 進モードから テキスト/列モード"
 
 #: ../src/MadEdit/MadEditBasic.cpp:2399 ../src/MadEdit/MadEditBasic.cpp:2469
-#: ../src/MadEditFrame.cpp:3584
+#: ../src/MadEditFrame.cpp:3580
 msgid "The Parent Directory of this file does not exist:"
 msgstr "このファイルの親ディレクトリが存在しません:"
 
@@ -581,8 +581,7 @@ msgstr "再読み込みしますか?"
 msgid "The input string is not a valid Hex-String:"
 msgstr "入力された文字列は有効な16進文字列ではありません:"
 
-#: ../src/MadEdit/MadEditBasic.cpp:3526 ../src/MadFindInFilesDialog.cpp:823
-#: ../src/MadSearchReplaceDialog.cpp:1404
+#: ../src/MadEdit/MadEditBasic.cpp:3526 ../src/MadSearchReplaceDialog.cpp:1404
 #, c-format
 msgid "Found %d matched texts..."
 msgstr ""
@@ -614,33 +613,33 @@ msgstr "この形式 '%s' は無効です"
 msgid "Invalid"
 msgstr ""
 
-#: ../src/MadEditApp.cpp:308
+#: ../src/MadEditApp.cpp:311
 msgid "Failed to create an IPC service."
 msgstr ""
 
-#: ../src/MadEditApp.cpp:337
+#: ../src/MadEditApp.cpp:340
 msgid ""
 "Sorry, the existing instance may be too busy too respond.\n"
 "Please close any open dialogs and retry."
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:901
+#: ../src/MadEditFrame.cpp:903
 msgid "Ln:"
 msgstr "行: "
 
-#: ../src/MadEditFrame.cpp:904
+#: ../src/MadEditFrame.cpp:906
 msgid "Sub:"
 msgstr "Sub:"
 
-#: ../src/MadEditFrame.cpp:907
+#: ../src/MadEditFrame.cpp:909
 msgid "Col:"
 msgstr "列: "
 
-#: ../src/MadEditFrame.cpp:908
+#: ../src/MadEditFrame.cpp:910
 msgid "CharPos:"
 msgstr "文字位置: "
 
-#: ../src/MadEditFrame.cpp:909
+#: ../src/MadEditFrame.cpp:911
 msgid "SelSize:"
 msgstr "セルのサイズ: "
 
@@ -1625,7 +1624,7 @@ msgstr ""
 msgid "Toolbars"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1880 ../src/MadEditFrame.cpp:7961
+#: ../src/MadEditFrame.cpp:1880 ../src/MadEditFrame.cpp:7964
 msgid "Toggle Main Toolbar"
 msgstr ""
 
@@ -2248,29 +2247,29 @@ msgstr ""
 msgid "Information Window"
 msgstr "情報ウィンドウ"
 
-#: ../src/MadEditFrame.cpp:3504
+#: ../src/MadEditFrame.cpp:3500
 #, c-format
 msgid "NoName%d"
 msgstr "無題 %d"
 
-#: ../src/MadEditFrame.cpp:3565
+#: ../src/MadEditFrame.cpp:3561
 msgid "This is a Directory:"
 msgstr "これはディレクトリです:"
 
-#: ../src/MadEditFrame.cpp:3574
+#: ../src/MadEditFrame.cpp:3570
 msgid "This file does not exist:"
 msgstr "このファイルは存在しません:"
 
-#: ../src/MadEditFrame.cpp:3593
+#: ../src/MadEditFrame.cpp:3589
 msgid "Cannot access this file:"
 msgstr "ファイルにアクセス出来ません:"
 
-#: ../src/MadEditFrame.cpp:3636
+#: ../src/MadEditFrame.cpp:3632
 msgid "Cannot load this file:"
 msgstr "ファイルを読み込めません:"
 
-#: ../src/MadEditFrame.cpp:3716 ../src/MadEditFrame.cpp:7332
-#: ../src/MadMacroDlg.cpp:99
+#: ../src/MadEditFrame.cpp:3716 ../src/MadEditFrame.cpp:7335
+#: ../src/MadMacroDlg.cpp:104
 msgid "Memory allocation failed"
 msgstr ""
 
@@ -2389,62 +2388,62 @@ msgstr "ファイルを閉じる"
 msgid "Close preveiw windows"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:7070
+#: ../src/MadEditFrame.cpp:7073
 #, fuzzy
 msgid "Open Mad Macro File"
 msgstr "ファイルを開く..."
 
-#: ../src/MadEditFrame.cpp:7198
+#: ../src/MadEditFrame.cpp:7201
 msgid "Mad Macro"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:7206
+#: ../src/MadEditFrame.cpp:7209
 #, fuzzy, c-format
 msgid "Do you want to overwrite %s"
 msgstr "再読み込みしますか?"
 
-#: ../src/MadEditFrame.cpp:7206
+#: ../src/MadEditFrame.cpp:7209
 msgid "Warning"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:7290
+#: ../src/MadEditFrame.cpp:7293
 #, fuzzy
 msgid "Edit Mad Macro File"
 msgstr "ファイルを開く..."
 
-#: ../src/MadEditFrame.cpp:7826
+#: ../src/MadEditFrame.cpp:7829
 msgid ""
 "Download dictionary at\n"
 "http://extensions.openoffice.org/"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:7827
+#: ../src/MadEditFrame.cpp:7830
 msgid "Press OK to visit our HomePage."
 msgstr "OK でホームページに移動します"
 
-#: ../src/MadEditFrame.cpp:8089
+#: ../src/MadEditFrame.cpp:8092
 msgid "Passed the begin of the file"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8143 ../src/MadSearchReplaceDialog.cpp:497
+#: ../src/MadEditFrame.cpp:8146 ../src/MadSearchReplaceDialog.cpp:497
 #: ../src/MadSearchReplaceDialog.cpp:630
 #, fuzzy
 msgid "Passed the end of the file"
 msgstr "選択された行のインデントを増加"
 
-#: ../src/MadEditFrame.cpp:8175
+#: ../src/MadEditFrame.cpp:8178
 msgid "Invalid item"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8188
+#: ../src/MadEditFrame.cpp:8191
 msgid "&Copy Selected"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8189
+#: ../src/MadEditFrame.cpp:8192
 msgid "Copy &All"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8190
+#: ../src/MadEditFrame.cpp:8193
 msgid "&Reset Results"
 msgstr ""
 
@@ -2512,7 +2511,7 @@ msgstr "置換(&R)"
 msgid "&Enable Replace"
 msgstr "置換を有効(&E)"
 
-#: ../src/MadFindInFilesDialog.cpp:150 ../src/MadMacroDlg.cpp:68
+#: ../src/MadFindInFilesDialog.cpp:150 ../src/MadMacroDlg.cpp:64
 msgid "Close"
 msgstr "閉じる"
 
@@ -2563,9 +2562,14 @@ msgid "The selected directory does not exist."
 msgstr "選択されたディレクトリは存在しません"
 
 #: ../src/MadFindInFilesDialog.cpp:718
-#, c-format
-msgid "Processing %d of %d files..."
+#, fuzzy, c-format
+msgid "Processing %s of %s files..."
 msgstr "ファイル%d から %d まで処理されます..."
+
+#: ../src/MadFindInFilesDialog.cpp:823
+#, fuzzy, c-format
+msgid "Found %s matched texts..."
+msgstr "フィルタに適合するファイル %d が見つかりました"
 
 #: ../src/MadFindInFilesDialog.cpp:825 ../src/MadSearchReplaceDialog.cpp:1406
 msgid "Preparing Results"
@@ -2667,10 +2671,14 @@ msgid "Recent Searched Exclude Filters"
 msgstr "最近検索した除外フィルター(&X)"
 
 #: ../src/MadPurgeHistoryDialog.cpp:98
-msgid "All Above"
+msgid "Recent Caret Position"
 msgstr ""
 
 #: ../src/MadPurgeHistoryDialog.cpp:101
+msgid "All Above"
+msgstr ""
+
+#: ../src/MadPurgeHistoryDialog.cpp:104
 msgid "Purge Histories"
 msgstr "履歴をクリア"
 
@@ -2802,9 +2810,9 @@ msgid "'%s' was found %d times."
 msgstr "'%s' を検出 %d 回"
 
 #: ../src/MadSearchReplaceDialog.cpp:1263
-#, c-format
-msgid "Preparing %d of %d results..."
-msgstr ""
+#, fuzzy, c-format
+msgid "Preparing %s of %s results..."
+msgstr "ファイル%d から %d まで処理されます..."
 
 #: ../src/MadSearchReplaceDialog.cpp:1276
 #, c-format
@@ -2826,8 +2834,8 @@ msgid " results"
 msgstr "%d 結果"
 
 #: ../src/MadSearchReplaceDialog.cpp:1444
-#, c-format
-msgid "%d results"
+#, fuzzy, c-format
+msgid "%s results"
 msgstr "%d 結果"
 
 #: ../src/MadSearchReplaceDialog.cpp:1515
@@ -2835,8 +2843,8 @@ msgid "Cannot find any matched string."
 msgstr "適合する文字列は見つかりませんでした"
 
 #: ../src/MadSearchReplaceDialog.cpp:1517
-#, c-format
-msgid "%d string(s) were replaced."
+#, fuzzy, c-format
+msgid "%s string(s) were replaced."
 msgstr "%d つの文字列が置換されました"
 
 #: ../src/MadSortDialog.cpp:64
@@ -3678,25 +3686,25 @@ msgstr "値 \"%s\" は無効です"
 msgid ": Valid range is 0~512, 0 means NO PADDING"
 msgstr ""
 
-#: ../src/MadMacroDlg.h:61
+#: ../src/MadMacroDlg.h:62
 msgid "MadEdit Macro"
 msgstr ""
 
-#: ../src/MadMacroDlg.cpp:65
+#: ../src/MadMacroDlg.cpp:61
 #, fuzzy
 msgid "Run"
 msgstr "ルーン文字"
 
-#: ../src/MadMacroDlg.cpp:70 ../src/MadMacroDlg.cpp:149
+#: ../src/MadMacroDlg.cpp:66 ../src/MadMacroDlg.cpp:155
 #, fuzzy
 msgid "Results >>"
 msgstr "%d 結果"
 
-#: ../src/MadMacroDlg.cpp:99
+#: ../src/MadMacroDlg.cpp:104
 msgid "Error"
 msgstr ""
 
-#: ../src/MadMacroDlg.cpp:147
+#: ../src/MadMacroDlg.cpp:153
 #, fuzzy
 msgid "Results <<"
 msgstr "%d 結果"

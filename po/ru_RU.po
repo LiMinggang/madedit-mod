@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-14 20:58+0800\n"
+"POT-Creation-Date: 2015-10-17 23:23+0800\n"
 "PO-Revision-Date: 2015-06-30 21:50+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
@@ -523,7 +523,7 @@ msgid "Hex Mode to Text/Column Mode"
 msgstr ""
 
 #: ../src/MadEdit/MadEditBasic.cpp:2399 ../src/MadEdit/MadEditBasic.cpp:2469
-#: ../src/MadEditFrame.cpp:3584
+#: ../src/MadEditFrame.cpp:3580
 msgid "The Parent Directory of this file does not exist:"
 msgstr "Каталог для этого файла не существует"
 
@@ -587,8 +587,7 @@ msgstr "Перечитать файл?"
 msgid "The input string is not a valid Hex-String:"
 msgstr "Строка не является правильной Hex-String:"
 
-#: ../src/MadEdit/MadEditBasic.cpp:3526 ../src/MadFindInFilesDialog.cpp:823
-#: ../src/MadSearchReplaceDialog.cpp:1404
+#: ../src/MadEdit/MadEditBasic.cpp:3526 ../src/MadSearchReplaceDialog.cpp:1404
 #, c-format
 msgid "Found %d matched texts..."
 msgstr ""
@@ -620,33 +619,33 @@ msgstr "Формат '%s' неправильный"
 msgid "Invalid"
 msgstr ""
 
-#: ../src/MadEditApp.cpp:308
+#: ../src/MadEditApp.cpp:311
 msgid "Failed to create an IPC service."
 msgstr ""
 
-#: ../src/MadEditApp.cpp:337
+#: ../src/MadEditApp.cpp:340
 msgid ""
 "Sorry, the existing instance may be too busy too respond.\n"
 "Please close any open dialogs and retry."
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:901
+#: ../src/MadEditFrame.cpp:903
 msgid "Ln:"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:904
+#: ../src/MadEditFrame.cpp:906
 msgid "Sub:"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:907
+#: ../src/MadEditFrame.cpp:909
 msgid "Col:"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:908
+#: ../src/MadEditFrame.cpp:910
 msgid "CharPos:"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:909
+#: ../src/MadEditFrame.cpp:911
 msgid "SelSize:"
 msgstr ""
 
@@ -1627,7 +1626,7 @@ msgstr ""
 msgid "Toolbars"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1880 ../src/MadEditFrame.cpp:7961
+#: ../src/MadEditFrame.cpp:1880 ../src/MadEditFrame.cpp:7964
 msgid "Toggle Main Toolbar"
 msgstr ""
 
@@ -2247,29 +2246,29 @@ msgstr ""
 msgid "Information Window"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:3504
+#: ../src/MadEditFrame.cpp:3500
 #, c-format
 msgid "NoName%d"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:3565
+#: ../src/MadEditFrame.cpp:3561
 msgid "This is a Directory:"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:3574
+#: ../src/MadEditFrame.cpp:3570
 msgid "This file does not exist:"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:3593
+#: ../src/MadEditFrame.cpp:3589
 msgid "Cannot access this file:"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:3636
+#: ../src/MadEditFrame.cpp:3632
 msgid "Cannot load this file:"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:3716 ../src/MadEditFrame.cpp:7332
-#: ../src/MadMacroDlg.cpp:99
+#: ../src/MadEditFrame.cpp:3716 ../src/MadEditFrame.cpp:7335
+#: ../src/MadMacroDlg.cpp:104
 msgid "Memory allocation failed"
 msgstr ""
 
@@ -2384,59 +2383,59 @@ msgstr "Закрыть файл (&C)"
 msgid "Close preveiw windows"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:7070
+#: ../src/MadEditFrame.cpp:7073
 msgid "Open Mad Macro File"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:7198
+#: ../src/MadEditFrame.cpp:7201
 msgid "Mad Macro"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:7206
+#: ../src/MadEditFrame.cpp:7209
 #, fuzzy, c-format
 msgid "Do you want to overwrite %s"
 msgstr "Перечитать файл?"
 
-#: ../src/MadEditFrame.cpp:7206
+#: ../src/MadEditFrame.cpp:7209
 msgid "Warning"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:7290
+#: ../src/MadEditFrame.cpp:7293
 msgid "Edit Mad Macro File"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:7826
+#: ../src/MadEditFrame.cpp:7829
 msgid ""
 "Download dictionary at\n"
 "http://extensions.openoffice.org/"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:7827
+#: ../src/MadEditFrame.cpp:7830
 msgid "Press OK to visit our HomePage."
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8089
+#: ../src/MadEditFrame.cpp:8092
 msgid "Passed the begin of the file"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8143 ../src/MadSearchReplaceDialog.cpp:497
+#: ../src/MadEditFrame.cpp:8146 ../src/MadSearchReplaceDialog.cpp:497
 #: ../src/MadSearchReplaceDialog.cpp:630
 msgid "Passed the end of the file"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8175
+#: ../src/MadEditFrame.cpp:8178
 msgid "Invalid item"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8188
+#: ../src/MadEditFrame.cpp:8191
 msgid "&Copy Selected"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8189
+#: ../src/MadEditFrame.cpp:8192
 msgid "Copy &All"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8190
+#: ../src/MadEditFrame.cpp:8193
 msgid "&Reset Results"
 msgstr ""
 
@@ -2504,7 +2503,7 @@ msgstr ""
 msgid "&Enable Replace"
 msgstr ""
 
-#: ../src/MadFindInFilesDialog.cpp:150 ../src/MadMacroDlg.cpp:68
+#: ../src/MadFindInFilesDialog.cpp:150 ../src/MadMacroDlg.cpp:64
 msgid "Close"
 msgstr ""
 
@@ -2556,7 +2555,12 @@ msgstr ""
 
 #: ../src/MadFindInFilesDialog.cpp:718
 #, c-format
-msgid "Processing %d of %d files..."
+msgid "Processing %s of %s files..."
+msgstr ""
+
+#: ../src/MadFindInFilesDialog.cpp:823
+#, c-format
+msgid "Found %s matched texts..."
 msgstr ""
 
 #: ../src/MadFindInFilesDialog.cpp:825 ../src/MadSearchReplaceDialog.cpp:1406
@@ -2656,10 +2660,14 @@ msgid "Recent Searched Exclude Filters"
 msgstr ""
 
 #: ../src/MadPurgeHistoryDialog.cpp:98
-msgid "All Above"
+msgid "Recent Caret Position"
 msgstr ""
 
 #: ../src/MadPurgeHistoryDialog.cpp:101
+msgid "All Above"
+msgstr ""
+
+#: ../src/MadPurgeHistoryDialog.cpp:104
 msgid "Purge Histories"
 msgstr ""
 
@@ -2789,7 +2797,7 @@ msgstr ""
 
 #: ../src/MadSearchReplaceDialog.cpp:1263
 #, c-format
-msgid "Preparing %d of %d results..."
+msgid "Preparing %s of %s results..."
 msgstr ""
 
 #: ../src/MadSearchReplaceDialog.cpp:1276
@@ -2812,7 +2820,7 @@ msgstr ""
 
 #: ../src/MadSearchReplaceDialog.cpp:1444
 #, c-format
-msgid "%d results"
+msgid "%s results"
 msgstr ""
 
 #: ../src/MadSearchReplaceDialog.cpp:1515
@@ -2821,7 +2829,7 @@ msgstr ""
 
 #: ../src/MadSearchReplaceDialog.cpp:1517
 #, c-format
-msgid "%d string(s) were replaced."
+msgid "%s string(s) were replaced."
 msgstr ""
 
 #: ../src/MadSortDialog.cpp:64
@@ -3644,23 +3652,23 @@ msgstr ""
 msgid ": Valid range is 0~512, 0 means NO PADDING"
 msgstr ""
 
-#: ../src/MadMacroDlg.h:61
+#: ../src/MadMacroDlg.h:62
 msgid "MadEdit Macro"
 msgstr ""
 
-#: ../src/MadMacroDlg.cpp:65
+#: ../src/MadMacroDlg.cpp:61
 msgid "Run"
 msgstr ""
 
-#: ../src/MadMacroDlg.cpp:70 ../src/MadMacroDlg.cpp:149
+#: ../src/MadMacroDlg.cpp:66 ../src/MadMacroDlg.cpp:155
 msgid "Results >>"
 msgstr ""
 
-#: ../src/MadMacroDlg.cpp:99
+#: ../src/MadMacroDlg.cpp:104
 msgid "Error"
 msgstr ""
 
-#: ../src/MadMacroDlg.cpp:147
+#: ../src/MadMacroDlg.cpp:153
 msgid "Results <<"
 msgstr ""
 

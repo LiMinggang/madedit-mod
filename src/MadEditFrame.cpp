@@ -559,9 +559,23 @@ public:
 
 		return pos;
 	}
-};
-FileCaretPosManager g_FileCaretPosManager;
+	void Clear( wxConfigBase *cfg )
+	{
+		cfg->Write( wxT( "MaxCount" ), max_count );
+		std::list<FilePosData>::iterator it = files.begin();
+		wxString entry( wxT( "file" ) ), text;
+		int idx = 0, count = int( files.size() );
 
+		while( idx < count ) {
+			cfg->Write( entry + ( wxString() << ( idx + 1 ) ), text );
+			++idx;
+			++it;
+		}
+		files.clear();
+	}
+};
+
+FileCaretPosManager g_FileCaretPosManager;
 
 //---------------------------------------------------------------------------
 
@@ -614,9 +628,7 @@ wxString FixFileNameEncoding( const wxString &filename )
 	delete []str;
 	return newfn;
 }
-
 #endif
-
 
 class DnDFile : public wxFileDropTarget
 {
@@ -7007,6 +7019,12 @@ void MadEditFrame::OnToolsPurgeHistories( wxCommandEvent& event )
 			}
 
 			g_FindInFilesDialog->PurgeRecentFindExcludes();
+		}
+
+		if( dlg.WxCheckBoxCaretPos->IsChecked() )
+		{
+			m_Config->SetPath( wxT( "/FileCaretPos" ) );
+			g_FileCaretPosManager.Clear(m_Config);
 		}
 
 		m_QuickSearch->Clear();

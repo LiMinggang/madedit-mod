@@ -4,8 +4,8 @@ object frmNewForm: TfrmNewForm
   AutoScroll = False
   BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'Purge Histories'
-  ClientHeight = 313
-  ClientWidth = 314
+  ClientHeight = 349
+  ClientWidth = 359
   Color = clBtnFace
   OldCreateOrder = True
   PopupMenu = DesignerPopup.Owner
@@ -34,8 +34,8 @@ object frmNewForm: TfrmNewForm
   object WxStaticBoxSizer1: TWxStaticBoxSizer
     Left = 0
     Top = 0
-    Width = 314
-    Height = 313
+    Width = 359
+    Height = 349
     Align = alClient
     TabOrder = 0
     Orientation = wxVertical
@@ -49,7 +49,7 @@ object frmNewForm: TfrmNewForm
       Left = 5
       Top = 15
       Width = 222
-      Height = 244
+      Height = 271
       TabOrder = 0
       Orientation = wxVertical
       Wx_Class = 'wxBoxSizer'
@@ -329,12 +329,12 @@ object frmNewForm: TfrmNewForm
         Wx_Floating_X_Pos = 0
         Wx_Floating_Y_Pos = 0
       end
-      object WxCheckBoxAllAbove: TWxCheckBox
-        Left = 5
+      object WxCheckBoxCaretPos: TWxCheckBox
+        Left = -1
         Top = 222
         Width = 212
         Height = 17
-        Caption = 'All Above'
+        Caption = 'Recent Caret Position'
         TabOrder = 8
         Wx_BGColor = clBlack
         Wx_CheckBoxStyle = []
@@ -343,8 +343,42 @@ object frmNewForm: TfrmNewForm
         Wx_FGColor = clBlack
         Wx_GeneralStyle = []
         Wx_Hidden = False
+        Wx_IDName = 'ID_WXCHECKBOXCARETPOS'
+        Wx_IDValue = 1095
+        Wx_Alignment = [wxALIGN_LEFT]
+        Wx_PaneCaption = 'WxCheckBox1'
+        Wx_PaneName = 'WxCheckBox1_Pane'
+        Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+        Wx_Aui_Dockable_Direction = []
+        Wx_Aui_Pane_Style = []
+        Wx_Aui_Pane_Buttons = []
+        Wx_BestSize_Height = 0
+        Wx_BestSize_Width = 0
+        Wx_MinSize_Height = 0
+        Wx_MinSize_Width = 0
+        Wx_MaxSize_Height = 0
+        Wx_MaxSize_Width = 0
+        Wx_Floating_Height = 0
+        Wx_Floating_Width = 0
+        Wx_Floating_X_Pos = 0
+        Wx_Floating_Y_Pos = 0
+      end
+      object WxCheckBoxAllAbove: TWxCheckBox
+        Left = 5
+        Top = 249
+        Width = 212
+        Height = 17
+        Caption = 'All Above'
+        TabOrder = 9
+        Wx_BGColor = clBlack
+        Wx_CheckBoxStyle = []
+        Wx_Class = 'wxCheckBox'
+        Wx_ControlOrientation = wxControlVertical
+        Wx_FGColor = clBlack
+        Wx_GeneralStyle = []
+        Wx_Hidden = False
         Wx_IDName = 'ID_WXCHECKBOXALLABOVE'
-        Wx_IDValue = 1094
+        Wx_IDValue = 1096
         Wx_PaneCaption = 'WxCheckBox1'
         Wx_PaneName = 'WxCheckBox1_Pane'
         Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
@@ -365,7 +399,7 @@ object frmNewForm: TfrmNewForm
     end
     object WxBoxSizer2: TWxBoxSizer
       Left = 31
-      Top = 259
+      Top = 286
       Width = 170
       Height = 35
       TabOrder = 1

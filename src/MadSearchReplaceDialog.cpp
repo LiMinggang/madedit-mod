@@ -1260,7 +1260,7 @@ void DisplayFindAllResult(vector<wxFileOffset> &begpos, vector<wxFileOffset> &en
             wxString linetext, loc;
             results->Freeze();
             
-            wxString status = _("Preparing %d of %d results...");
+            wxString status = _("Preparing %s of %s results...");
             status += wxT("                                \n");
             do
             {
@@ -1286,7 +1286,7 @@ void DisplayFindAllResult(vector<wxFileOffset> &begpos, vector<wxFileOffset> &en
                 ++ResultCount;
                 if(updater != NULL && (count >= 2000))
                 {
-                    if(updater(idx, wxString::Format(status, idx, count), NULL)== false) break;
+                    if(updater(idx, wxString::Format(status, (wxLongLong(idx).ToString().c_str()), (wxLongLong(count).ToString().c_str())), NULL)== false) break;
                 }
             }
             while(++idx < count);
@@ -1404,7 +1404,7 @@ void MadSearchReplaceDialog::SearchAll(MadEdit * madedit, bool needRec/*=true*/)
             wxString msg = _("Found %d matched texts...");
             msg += wxT("                                \n");
             wxProgressDialog dialog(_("Preparing Results"),
-                                        wxString::Format(msg, 0),
+                                        wxString::Format(msg, (wxLongLong(ok).ToString().c_str())),
                                         ok,    // range
                                         this,   // parent
                                         wxPD_CAN_ABORT |
@@ -1441,7 +1441,7 @@ void MadSearchReplaceDialog::SearchAll(MadEdit * madedit, bool needRec/*=true*/)
         else
         {
             wxString smsg;
-            smsg.Printf(_("%d results"), ok);
+            smsg.Printf(_("%s results"), (wxLongLong(ok).ToString().c_str()));
             g_StatusBar->SetStatusText(smsg, 0 );
         }
     }
@@ -1514,7 +1514,7 @@ void MadSearchReplaceDialog::ReplaceAll(MadEdit * madedit, bool needRec/*=true*/
             if(count==0)
                 msg=wxString(_("Cannot find any matched string."));
             else
-                msg=wxString::Format(_("%d string(s) were replaced."), count);
+                msg=wxString::Format(_("%s string(s) were replaced."), (wxLongLong(count).ToString().c_str()));
 
             wxMessageDialog dlg(this, msg, wxT("MadEdit-Mod"));
             dlg.SetYesNoLabels(wxMessageDialog::ButtonLabel(_("&Yes")), wxMessageDialog::ButtonLabel(_("&No")));
