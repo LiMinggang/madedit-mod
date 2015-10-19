@@ -504,7 +504,7 @@ protected:
 
     // if(ws==NULL) SelectWord only;
     // else GetWord to ws;
-    void SelectWordFromCaretPos(wxString *ws, MadCaretPos * pos = NULL);
+    void SelectWordFromCaretPos(wxString *ws, MadCaretPos * pos = NULL, bool bSelection = false);
     void SelectLineFromCaretPos(wxString *ws=NULL, bool caretToBegOfSel = true);
 
     bool PutTextToClipboard(const wxString &ws);
@@ -876,13 +876,8 @@ public: // basic functions
     void ReplaceSelection(wxString &ws);
     void GetSelHexString(wxString &ws, bool withSpace);
 
-    void GetWordFromCaretPos(wxString &ws) 
-        {
-            MadCaretPos * pos(0);
-            if(IsSelected())
-                pos = m_SelectionBegin;
-            SelectWordFromCaretPos(&ws, pos);
-        }
+    void GetWordFromCaretPos(wxString &ws);
+
     void ReplaceWordFromCaretPos(wxString &ws);
 
     void Delete() { ProcessCommand(ecDelete); }

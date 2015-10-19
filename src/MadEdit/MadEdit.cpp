@@ -3984,7 +3984,7 @@ wxFileOffset MadEdit::GetColumnSelection(wxString *ws)
 	return selsize;
 }
 
-void MadEdit::SelectWordFromCaretPos(wxString *ws, MadCaretPos * cpos/* = NULL*/)
+void MadEdit::SelectWordFromCaretPos(wxString *ws, MadCaretPos * cpos/* = NULL*/, bool bSelection/* = false*/)
 {
 	MadCaretPos * caretPos = cpos;
 	if(cpos == NULL) caretPos = &m_CaretPos;
@@ -4047,7 +4047,7 @@ void MadEdit::SelectWordFromCaretPos(wxString *ws, MadCaretPos * cpos/* = NULL*/
 					type = GetUCharType(uc);
 					posidx = idx;
 
-					if(ws != NULL
+					if((ws != NULL || bSelection)
 						&& ((type <= 3 && prevtype > 3) || (type <= 2 && prevtype > 2)))
 					{
 						--posidx;
@@ -4057,7 +4057,7 @@ void MadEdit::SelectWordFromCaretPos(wxString *ws, MadCaretPos * cpos/* = NULL*/
 						break;
 					}
 				}
-				else if(ws != NULL)
+				else if(ws != NULL || bSelection)
 				{
 					prevtype = GetUCharType(uc);
 				}
@@ -4120,6 +4120,7 @@ void MadEdit::SelectWordFromCaretPos(wxString *ws, MadCaretPos * cpos/* = NULL*/
 				(*ws)<<ucqueue[i].first;
 #endif
 			}
+			return;
 		}
 
 		if(cpos) return;
@@ -4184,6 +4185,14 @@ void MadEdit::SelectWordFromCaretPos(wxString *ws, MadCaretPos * cpos/* = NULL*/
 
 		DoSelectionChanged();
 	}
+}
+
+void MadEdit::GetWordFromCaretPos(wxString &ws) 
+{
+	MadCaretPos * pos(0);
+	if(IsSelected())
+		pos = m_SelectionBegin;
+	SelectWordFromCaretPos(&ws, pos, false);
 }
 
 void MadEdit::SelectLineFromCaretPos(wxString *ws, bool caretToBegOfSel)
@@ -4595,10 +4604,7 @@ void MadEdit::ReplaceWordFromCaretPos(wxString &ws)
 		out += ucs[i] ;
 	}
 	if(!m_Selection)
-	{
-		wxString ws;
-		GetWordFromCaretPos(ws);
-	}
+		SelectWordFromCaretPos(NULL, NULL, true);
 	InsertString(out.c_str(), out.length(), false, true, false);
 }
 
