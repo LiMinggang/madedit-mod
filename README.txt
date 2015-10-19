@@ -128,7 +128,7 @@ New: Silent mode which can be used in scripting(Only file names would be passed 
      Eg: madedit -s -m madpytho.mpy ./1.txt /tmp/2.txt
 New: Automatically advance number for new file in NoNameXX
 New: Change insert mode to insertion while changing from hex to text mode
-New: Use indent size of current line instead of tha last line that has non-space/tab char
+New: Use indent size of current line instead of the last line that has non-space/tab char
 New: Add Spanish dictionary in release since a lot of downloads from Spanish
 New: Improve UI for Mad-Macro list
 New: Auto indent support for Python
