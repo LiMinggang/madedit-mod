@@ -14,6 +14,7 @@
 #include <algorithm>
 
 #include <wx/display.h>
+#include <wx/dir.h>
 #include <wx/filename.h>
 #include <wx/stdpaths.h>
 #include <wx/fileconf.h>
@@ -74,10 +75,12 @@ static const wxCmdLineEntryDesc g_cmdLineDesc [] =
 	 { wxCMD_LINE_SWITCH, "h", "help", "Displays help on the command line parameters",
 		  wxCMD_LINE_VAL_NONE, wxCMD_LINE_OPTION_HELP },
 	 { wxCMD_LINE_SWITCH, "f", "force", "Edit and save file ignoring the ReadOnly flag" },
-	 { wxCMD_LINE_SWITCH, "s", "silent", "Disables the GUI" },
+	 { wxCMD_LINE_SWITCH, "r", "recursive", "Recursively run on files of subdirectories" },
+     { wxCMD_LINE_SWITCH, "s", "silent", "Disables the GUI" },
+	 { wxCMD_LINE_SWITCH, "w", "wildcard", "Enable wildcard support in file name\n(line number would be disabled becasue it used '*')" },
 	 { wxCMD_LINE_OPTION, "m", "madpython", "Specify MadPython file to be run on the file" },
 	 { wxCMD_LINE_PARAM, NULL, NULL, "File(s) to be opened", wxCMD_LINE_VAL_STRING,  wxCMD_LINE_PARAM_OPTIONAL | wxCMD_LINE_PARAM_MULTIPLE }, 
- 
+
 	 { wxCMD_LINE_NONE }
 };
 
@@ -520,19 +523,40 @@ bool MadEditApp::OnCmdLineParsed(wxCmdLineParser& cmdParser)
 {
 	wxFileName filename;
 	m_SilentMode = cmdParser.Found(wxT("s"));
-	m_ForceEdit = cmdParser.Found(wxT("f"));
+	m_ForceEdit  = cmdParser.Found(wxT("f"));
+	cmdParser.Found(wxT("m"), &m_MadPythonScript);
+
 	// parse commandline to filenames, every file is with a trailing char '|', ex: filename1|filename2|
 	m_FileNames.Empty();
 	// to get at your unnamed parameters use GetParam
+	int flags=wxDIR_FILES|wxDIR_HIDDEN;
+    wxString fname;
 	for (int i = 0; i < cmdParser.GetParamCount(); i++)
 	{
 		filename = cmdParser.GetParam(i);
 		filename.MakeAbsolute();
-		m_FileNames.Add(filename.GetFullPath());
+
+        fname = filename.GetFullName();
+        if(cmdParser.Found(wxT("w")))
+        {
+        	//WildCard
+            if(cmdParser.Found(wxT("r"))) flags|=wxDIR_DIRS;
+			wxArrayString files;
+			size_t nums = wxDir::GetAllFiles ( filename.GetPath(), &files, fname, flags);
+            for(size_t i=0; i<nums; ++i)
+        	{
+
+        		m_FileNames.Add(files[i]);
+        	}
+        }
+		else
+        {
+        	// Support for name*linenum
+			m_FileNames.Add(filename.GetFullPath());
+		}
 	}
 
 	// and other command line parameters
-	cmdParser.Found(wxT("m"), &m_MadPythonScript);
 	// then do what you need with them.
  
 	return true;

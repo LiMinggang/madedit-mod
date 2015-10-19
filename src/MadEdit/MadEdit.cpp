@@ -4120,8 +4120,6 @@ void MadEdit::SelectWordFromCaretPos(wxString *ws, MadCaretPos * cpos/* = NULL*/
 				(*ws)<<ucqueue[i].first;
 #endif
 			}
-
-			return;
 		}
 
 		if(cpos) return;
@@ -4597,7 +4595,10 @@ void MadEdit::ReplaceWordFromCaretPos(wxString &ws)
 		out += ucs[i] ;
 	}
 	if(!m_Selection)
-		SelectWordFromCaretPos(NULL);
+	{
+		wxString ws;
+		GetWordFromCaretPos(ws);
+	}
 	InsertString(out.c_str(), out.length(), false, true, false);
 }
 
@@ -10057,23 +10058,23 @@ void MadEdit::OnMouseLeftUp(wxMouseEvent &evt)
 		m_MouseMotionTimer->Stop();
 	}
 
-    if( m_MouseLeftDown || m_MouseLeftDoubleClick)
-    {
-        if(m_MouseLeftDoubleClick)
-        {
-            m_MouseLeftDoubleClick=false;
-        }
-        else if(m_MouseLeftDown)
-        {
-            //Hacking for
-            if(!m_DragDrop)
-            {
-                EndUpdateSelection(true);
-            }
-        }
+	if( m_MouseLeftDown || m_MouseLeftDoubleClick)
+	{
+		if(m_MouseLeftDoubleClick)
+		{
+			m_MouseLeftDoubleClick=false;
+		}
+		else if(m_MouseLeftDown)
+		{
+			//Hacking for
+			if(!m_DragDrop)
+			{
+				EndUpdateSelection(true);
+			}
+		}
 		m_MouseLeftDown=false;
 		ReleaseMouse();
-    }
+	}
 
 	if(m_EditMode != emHexMode)
 	{

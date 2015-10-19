@@ -122,6 +122,8 @@ New: Silent mode which can be used in scripting(Only file names would be passed 
      [-f], force, Edit and save file ignoring the ReadOnly flag(For the files in command line)
      [-s], silent, Disables the GUI
      [-m], madpython, Specify MadPython file to be run on the file
+     [-r], recursive, Recursively run on files of subdirectories
+     [-w], wildcard, Enable wildcard support in file name\n(line number would be disabled becasue it used '*')
      [files], File(s) to be opened
      Eg: madedit -s -m madpytho.mpy ./1.txt /tmp/2.txt
 New: Automatically advance number for new file in NoNameXX
@@ -138,7 +140,8 @@ Fix: Remove some of the code for compatible with wxWidgets 2.8.x
 Fix: Missing menu items for Copy file path/name/directory after refactor
 Fix: Fix Mouse event(LDown LDClick) handle issue(Since the beginning of MadEdit)
 Fix: Don't need "(R)" on windows title to mark read only file
-Fix: Assertion failure of search/replace results display
+Fix: Assertion failure of search/replace results display(string conversion)
+Fix: Spellchecker would insert instead of replace the word if the caret is at the end of a word
 
 Mod v0.3.7
 1.New: Column Align Right(Selected text would be aligned according to right)
