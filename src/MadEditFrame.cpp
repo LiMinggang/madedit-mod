@@ -833,18 +833,15 @@ void OnReceiveMessage( const wchar_t *msg, size_t size )
 	size_t len = size / sizeof( wchar_t );
 	const wchar_t *pwc = msg;
 
-	for( size_t i = 0; i < len && *pwc != 0; ++i, ++pwc )
-	{
-		if( *pwc == '|' )
-		{
-			g_MainFrame->OpenFile( file, false );
-			file.clear();
-		}
-		else
-		{
-			file << *pwc;
-		}
-	}
+    wxString strDelimiters = wxT("|");
+    wxStringTokenizer tkz(msg, strDelimiters);
+    while ( tkz.HasMoreTokens() )
+    {
+        file = tkz.GetNextToken();
+
+        // process token here
+        g_MainFrame->OpenFile( file, false );
+    }
 }
 
 

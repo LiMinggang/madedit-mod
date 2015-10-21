@@ -133,7 +133,7 @@ bool HunspellInterface::IsSpellingOk(wxString strText)
     while ( tkz.HasMoreTokens() )
     {
         wxString token = tkz.GetNextToken();
-        int TokenStart = tkz.GetPosition() - token.Length() - 1;
+        //int TokenStart = tkz.GetPosition() - token.Length() - 1;
         //TokenStart += nDiff;  // Take into account any changes to the size of the strText
 
         // process token here

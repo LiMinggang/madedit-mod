@@ -93,6 +93,8 @@ Syntax files, Locale files and Settings:
     [-h], help, Displays help on the command line parameters
     [-s], silent, Disables the GUI
     [-m], madpython, Specify MadPython file to be run on the file
+    [-r], recursive, Recursively run on files of subdirectories
+    [-w], wildcard, Enable wildcard support in file name\n(line number would be disabled because it used '*')
     [files], File(s) to be opened
     Eg: madedit -s -m madpytho.mpy ./1.txt /tmp/2.txt
 
@@ -106,12 +108,13 @@ Feature/issues to be released
 
 ChangeLog:
 ----------
-Note: Not support wxWidgets 2.8 anymore since 0.3.8
+Note: Not support wxWidgets 2.X anymore since 0.3.X
 
 Todo:
 FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.3.8
+New: Upgrade boost to 1.59
 New: Silent mode which can be used in scripting(Only file names would be passed to
      running instance in single instance mode)
      Run MadEdit-Mod without show GUI and use a MadPython to handle the files to
@@ -123,7 +126,7 @@ New: Silent mode which can be used in scripting(Only file names would be passed 
      [-s], silent, Disables the GUI
      [-m], madpython, Specify MadPython file to be run on the file
      [-r], recursive, Recursively run on files of subdirectories
-     [-w], wildcard, Enable wildcard support in file name\n(line number would be disabled becasue it used '*')
+     [-w], wildcard, Enable wildcard support in file name\n(line number would be disabled because it used '*')
      [files], File(s) to be opened
      Eg: madedit -s -m madpytho.mpy ./1.txt /tmp/2.txt
 New: Automatically advance number for new file in NoNameXX
@@ -133,6 +136,7 @@ New: Add Spanish dictionary in release since a lot of downloads from Spanish
 New: Improve UI for Mad-Macro list
 New: Auto indent support for Python
 New: Purge Caret position history
+New: Add brief help documents(Basic introduction, Key mapping and help for Regex)
 Fix: Match brace pair has bug if it was in comment or string(From MadEdit)
 Fix: Select contents between a brace pair has bug
 Fix: Size of the dictionary selection and path is too small under Ubuntu
