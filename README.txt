@@ -146,6 +146,9 @@ Fix: Fix Mouse event(LDown LDClick) handle issue(Since the beginning of MadEdit)
 Fix: Don't need "(R)" on windows title to mark read only file
 Fix: Assertion failure of search/replace results display(string conversion)
 Fix: Spellchecker would insert instead of replace the word if the caret is at the end of a word(Issue #61)
+Fix: Horizontal scroll paint issue
+Fix: Right click menu string
+Other minor improvements
 
 Mod v0.3.7
 1.New: Column Align Right(Selected text would be aligned according to right)

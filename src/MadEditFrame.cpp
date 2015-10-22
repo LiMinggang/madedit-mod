@@ -6529,7 +6529,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		{
 			wxRegKey *pRegKeyMad = new wxRegKey( g_MadEditRegkeyPath + wxT( "*\\shell\\MadEdit-Mod" ) );
 			pRegKeyMad->Create();
-			pRegKeyMad->SetValue( wxEmptyString, wxT( "Edit with MadEdit-Mod" ) );
+			pRegKeyMad->SetValue( wxEmptyString, wxT( "MadEdit-Mod" ) );
 			wxRegKey *pRegKey = new wxRegKey( *pRegKeyMad, wxT( "\\command" ) );
 			pRegKey->Create();
 			wxString exepath = GetExecutablePath();
