@@ -1,0 +1,88 @@
+MadEdit-Mod is a clone of MadEdit with lots of bug fix and enhancement
+====
+
+ ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+Features
+====
+* Original features from MadEdit(Hex Edit, Column Edit, many encodings support, etc) with lots of bug fixes
+* Drag&Drop Edit(Cross platform)
+* Bookmark(From Gogo)
+* Bookmark edit functions(Copy/Cut/Delete/Replace bookmarked lines)
+* Bookmark if found
+* Highlight word(shift+F8)
+* Triple click to select whole line
+* Search all in current file
+* Delete all by using ReplaceAll with NULL
+* Open files and go to #line by command line
+* Embedded Python as Macro language for automation(Run/Rec/Playback, local script list)
+* Insert incremental numbers
+* Fully functional Hex edit
+* Replace in all mode(Normal/Column/Hex) by paste according to insert mode
+* Column Align
+* Right click on file tab(Close all to the right/left/but this file)
+* Spell Check/Suggestions, ignore list and personal dictionary
+* Clear history while exiting
+* Line function enhancement(Cut/Delete/Join/Delete empty)
+* Revert Hex String to hex(Eg, from '4D6F64', '4D 6F 64', '%4D%6F%64', or '4D,6F,64' to 'Mod')
+* Double click at a brace to select all between the brace pair(Delimiter selection)
+* Up/Down to the line above/under the selection if selecting
+* Auto fill column data according to rows selected while pasting in column mode, don't need to prepare lines any more
+* Click on line number area to select one line or all(click with Control pressed)
+* Click on bookmark area to toggle bookmark
+* Print bookmark sign with content
+* Context menu for Main Frame/Tool bars(Show/Hide one or all tool bars)
+* Quick Search, F8 to show, Esc to hide search bar, Enter to search next/previous according to your last operation. Immediately matching while inputting
+* Purge history manually or automatically while exiting
+* 64 Bit build (Win64 and x86_x64), GTK+3 support
+* Crash dump function
+* Mardown/Html Preview(Lightweight Markdown/Html editor)
+* Convert Mardown to Html
+* Convert Html to plain text
+* Automatic Formatter for C, C++, C++/CLI, Objective-C, C#, and Java Source Code(Astyle)
+* XML Formatter(DTD is not supported)
+* Silent mode which can be used in scripting
+     Run MadEdit-Mod without show GUI and use a MadPython to handle the files to
+     be opened. So, you can use the Astyle/XML formatter/HTML tools the same as 
+     the original ones, eg, call it in a script to handle a lot of files.
+     Furthermore, you can use MadPython to do more!!!
+     [-h], help, Displays help on the command line parameters
+     [-f], force, Edit and save file ignoring the ReadOnly flag(For the files in command line)
+     [-s], silent, Disables the GUI
+     [-m], madpython, Specify MadPython file to be run on the file
+     [-r], recursive, Recursively run on files of subdirectories
+     [-w], wildcard, Enable wildcard support in file name\n(line number would be disabled because it used '*')
+     [files], File(s) to be opened
+     Eg: madedit -s -m madpytho.mpy ./1.txt /tmp/2.txt
+ ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+
+Reference
+====
+[How to build MadEdit-Mod under Linux](/p/madedit-mod/wiki/How%20to%20compile%20MadEdit-Mod%20under%20Linux/)
+[MadEdit-Mod Key/Shortcut List](/p/madedit-mod/wiki/Key%20Mapping/)
+[MadPython Introduction](/p/madedit-mod/wiki/MadPython%20Introduction/)
+
+ ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+
+Author:
+====
+Alston Chen <madedit@gmail.com>
+Minggang Li <minggang.li@gmail.com>
+
+ ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+
+Links:
+====
+[MadEdit](http://sourceforge.net/projects/madedit/)
+[MadEdit-Mod](http://sourceforge.net/projects/madedit-mod/)
+[wxWidgets](http://www.wxwidgets.org)
+[wxDevCpp](http://wxdsgn.sourceforge.net)
+[Boost](http://www.boost.org)
+[Python](http://www.python.org)
+[Open Clip Art Library](http://www.openclipart.org)
+[CPP-Markdown](http://sourceforge.net/projects/cpp-markdown/)
+[Hunspell](https://sourceforge.net/projects/hunspell/)
+[Astyle](https://sourceforge.net/projects/astyle/)
+[OpenOffice](http://www.openoffice.org/)
+[Dictionary download](http://archive.services.openoffice.org/pub/mirror/OpenOffice.org/contrib/dictionaries/)
+ ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
+
