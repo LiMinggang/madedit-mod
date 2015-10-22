@@ -1326,6 +1326,7 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_UPDATE_UI( menuShowTabChar, MadEditFrame::OnUpdateUI_MenuViewShowTabChar )
 	EVT_UPDATE_UI( menuShowSpaceChar, MadEditFrame::OnUpdateUI_MenuViewShowSpaceChar )
 	EVT_UPDATE_UI( menuShowAllChars, MadEditFrame::OnUpdateUI_MenuViewShowAllChars )
+	EVT_UPDATE_UI( menuViewRightToLeft, MadEditFrame::OnUpdateUI_MenuViewRightToLeft )
 	EVT_UPDATE_UI( menuMarkActiveLine, MadEditFrame::OnUpdateUI_MenuViewMarkActiveLine )
 	EVT_UPDATE_UI( menuMarkBracePair, MadEditFrame::OnUpdateUI_MenuViewMarkBracePair )
 	EVT_UPDATE_UI( menuTextMode, MadEditFrame::OnUpdateUI_MenuViewTextMode )
@@ -1486,6 +1487,7 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_MENU( menuShowTabChar, MadEditFrame::OnViewShowTabChar )
 	EVT_MENU( menuShowSpaceChar, MadEditFrame::OnViewShowSpaceChar )
 	EVT_MENU( menuShowAllChars, MadEditFrame::OnViewShowAllChars )
+	EVT_MENU( menuViewRightToLeft, MadEditFrame::OnViewRightToLeft )
 	EVT_MENU( menuMarkActiveLine, MadEditFrame::OnViewMarkActiveLine )
 	EVT_MENU( menuMarkBracePair, MadEditFrame::OnViewMarkBracePair )
 	EVT_MENU( menuTextMode, MadEditFrame::OnViewTextMode )
@@ -1879,6 +1881,7 @@ CommandData CommandTable[] =
 	{ 0,              1, menuShowTabChar,       wxT( "menuShowTabChar" ),       _( "Show Tab Char" ),        wxT( "Ctrl-Alt-T" ),   wxITEM_CHECK,     -1,                 0,                         _( "Show the sign of Tab char" ), 0, 0, 0, false},
 	{ 0,              1, menuShowSpaceChar,     wxT( "menuShowSpaceChar" ),     _( "Show Space Char" ),      wxT( "Ctrl-Alt-S" ),   wxITEM_CHECK,     -1,                 0,                         _( "Show the sign of Space char" ), 0, 0, 0, false},
 	{ 0,              1, menuShowAllChars,      wxT( "menuShowAllChar" ),       _( "Show All Chars" ),       wxT( "Ctrl-Alt-A" ),   wxITEM_CHECK,     showsymbol_xpm_idx, 0,                         _( "Show the sign of all characters" ), 0, &g_tbTEXTVIEW_ptr, _( "Show All Chars" ), false},
+	{ 0,              1, menuViewRightToLeft,   wxT( "menuViewRightToLeft" ),   _( "Right-to-left" ),        wxT( "Ctrl-Alt-R" ),   wxITEM_CHECK,     -1,                 0,                         _( "View text from Right-to-left" ), 0, 0, 0, false},
 	{ 0,              1, menuMarkActiveLine,    wxT( "menuMarkActiveLine" ),    _( "Mark Active Line" ),     wxT( "" ),             wxITEM_CHECK,     -1,                 0,                         _( "Mark the current line" ), 0, 0, 0, false},
 	{ 0,              1, menuMarkBracePair,     wxT( "menuMarkBracePair" ),     _( "Mark Brace Pair" ),      wxT( "" ),             wxITEM_CHECK,     -1,                 0,                         _( "Mark the BracePair under the caret" ), 0, 0, 0, false},
 	{ 0,              1, menuSpellChecker,      wxT( "menuSpellChecker" ),      _( "Spell Check" ),        wxT( "Ctrl-K" ),       wxITEM_CHECK,     spellchecker_xpm_idx,                 0,       _( "Turn on spell checker" ), 0, &g_tbTEXTVIEW_ptr, _( "Spell Check" ), false},
@@ -4194,6 +4197,11 @@ void MadEditFrame::OnUpdateUI_MenuViewShowAllChars( wxUpdateUIEvent& event )
 	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetShowSpaceChar() && g_ActiveMadEdit->GetShowTabChar()
 				 && g_ActiveMadEdit->GetShowEndOfLine() );
 }
+void MadEditFrame::OnUpdateUI_MenuViewRightToLeft( wxUpdateUIEvent& event )
+{
+	event.Enable( g_ActiveMadEdit != NULL && g_ActiveMadEdit->GetEditMode() != emHexMode );
+	event.Check( g_ActiveMadEdit && (g_ActiveMadEdit->GetLayoutDirection() == wxLayout_RightToLeft) );
+}
 void MadEditFrame::OnUpdateUI_MenuViewMarkActiveLine( wxUpdateUIEvent& event )
 {
 	event.Enable( g_ActiveMadEdit != NULL && g_ActiveMadEdit->GetEditMode() != emHexMode );
@@ -6307,6 +6315,7 @@ void MadEditFrame::OnViewShowTabChar( wxCommandEvent& event )
 	else
 	{ RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetShowTabChar(False)" ) ) ); }
 }
+
 void MadEditFrame::OnViewShowSpaceChar( wxCommandEvent& event )
 {
 	if( g_ActiveMadEdit == NULL ) { return; }
@@ -6318,6 +6327,7 @@ void MadEditFrame::OnViewShowSpaceChar( wxCommandEvent& event )
 	else
 	{ RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetShowSpaceChar(False)" ) ) ); }
 }
+
 void MadEditFrame::OnViewShowAllChars( wxCommandEvent& event )
 {
 	if( g_ActiveMadEdit == NULL ) { return; }
@@ -6339,27 +6349,41 @@ void MadEditFrame::OnViewShowAllChars( wxCommandEvent& event )
 		RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetShowEndOfLine(False)" ) ) );
 	}
 }
+
+void MadEditFrame::OnViewRightToLeft( wxCommandEvent& event )
+{
+	if( g_ActiveMadEdit )
+	{
+		wxLayoutDirection dir = wxLayout_LeftToRight;
+		if(event.IsChecked()) dir = wxLayout_RightToLeft;
+		g_ActiveMadEdit->SetLayoutDirection( dir );	
+	}
+}
+
 void MadEditFrame::OnViewMarkActiveLine( wxCommandEvent& event )
 {
-	if( g_ActiveMadEdit == NULL ) { return; }
-
-	g_ActiveMadEdit->SetMarkActiveLine( event.IsChecked() );
-
-	if( event.IsChecked() )
-	{ RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetMarkActiveLine(True)" ) ) ); }
-	else
-	{ RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetMarkActiveLine(False)" ) ) ); }
+	if( g_ActiveMadEdit )
+	{
+		g_ActiveMadEdit->SetMarkActiveLine( event.IsChecked() );
+		
+		if( event.IsChecked() )
+		{ RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetMarkActiveLine(True)" ) ) ); }
+		else
+		{ RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetMarkActiveLine(False)" ) ) ); }
+	}
 }
+
 void MadEditFrame::OnViewMarkBracePair( wxCommandEvent& event )
 {
-	if( g_ActiveMadEdit == NULL ) { return; }
+	if( g_ActiveMadEdit )
+	{
+		g_ActiveMadEdit->SetMarkBracePair( event.IsChecked() );
 
-	g_ActiveMadEdit->SetMarkBracePair( event.IsChecked() );
-
-	if( event.IsChecked() )
-	{ RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetMarkBracePair(True)" ) ) ); }
-	else
-	{ RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetMarkBracePair(False)" ) ) ); }
+		if( event.IsChecked() )
+		{ RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetMarkBracePair(True)" ) ) ); }
+		else
+		{ RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetMarkBracePair(False)" ) ) ); }
+	}
 }
 
 void MadEditFrame::OnViewSpellChecker( wxCommandEvent& event )

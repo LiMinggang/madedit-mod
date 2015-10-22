@@ -137,6 +137,7 @@ New: Improve UI for Mad-Macro list
 New: Auto indent support for Python
 New: Purge Caret position history
 New: Add brief help documents(Basic introduction, Key mapping and help for Regex)
+New: Switch between Right-to-left and Left-to-right language
 Fix: Match brace pair has bug if it was in comment or string(From MadEdit)
 Fix: Select contents between a brace pair has bug
 Fix: Size of the dictionary selection and path is too small under Ubuntu
@@ -148,6 +149,7 @@ Fix: Assertion failure of search/replace results display(string conversion)
 Fix: Spellchecker would insert instead of replace the word if the caret is at the end of a word(Issue #61)
 Fix: Horizontal scroll paint issue
 Fix: Right click menu string
+Fix: OnPaint issue in RTL
 Other minor improvements
 
 Mod v0.3.7

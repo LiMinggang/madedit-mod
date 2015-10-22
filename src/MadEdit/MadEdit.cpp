@@ -2033,8 +2033,8 @@ void MadEdit::PaintTextLines(wxDC *dc, const wxRect &rect, int toprow, int rowco
 		}
 	}
 
-    m_Syntax->SetAttributes(aeSpace);
-    const wxColor bm_BgColor = m_Syntax->nw_BgColor;
+	m_Syntax->SetAttributes(aeSpace);
+	const wxColor bm_BgColor = m_Syntax->nw_BgColor;
 
 	const int minleft = rect.GetLeft() + m_LineNumberAreaWidth + m_BookmarkWidth;
 	const int maxright = rect.GetRight();
@@ -2086,7 +2086,7 @@ void MadEdit::PaintTextLines(wxDC *dc, const wxRect &rect, int toprow, int rowco
 		}
 	}
 
-    const int wspace = GetUCharWidth(0x20);
+	const int wspace = GetUCharWidth(0x20);
 
 	// Begin Paint Lines
 	for(;;)                         // every line
@@ -2420,9 +2420,9 @@ void MadEdit::PaintTextLines(wxDC *dc, const wxRect &rect, int toprow, int rowco
 					m_Syntax->SetAttributes(aeLineNumber);
 					if( m_DrawingXPos && m_Syntax->nw_BgColor != bgcolor)
 					{
-					    dc->SetPen(*wxThePenList->FindOrCreatePen(m_Syntax->nw_BgColor, 1, wxSOLID));
-					    dc->SetBrush(*wxTheBrushList->FindOrCreateBrush(m_Syntax->nw_BgColor));
-					    dc->DrawRectangle(l, row_top, m_LineNumberAreaWidth, m_RowHeight);
+						dc->SetPen(*wxThePenList->FindOrCreatePen(m_Syntax->nw_BgColor, 1, wxSOLID));
+						dc->SetBrush(*wxTheBrushList->FindOrCreateBrush(m_Syntax->nw_BgColor));
+						dc->DrawRectangle(l, row_top, m_LineNumberAreaWidth, m_RowHeight);
 					}
 					if(displaylinenumber)
 					{
@@ -2447,7 +2447,7 @@ void MadEdit::PaintTextLines(wxDC *dc, const wxRect &rect, int toprow, int rowco
 						}
 						if(m_DisplayBookmark)
 						{
-						    int tl = rect.GetLeft();
+							int tl = rect.GetLeft();
 							if (m_DrawingXPos)
 							{
 								dc->SetPen(*wxThePenList->FindOrCreatePen(bm_BgColor, 1, wxSOLID));
@@ -2529,18 +2529,18 @@ void MadEdit::PaintTextLines(wxDC *dc, const wxRect &rect, int toprow, int rowco
 		{
 			int width = 80 * wspace;
 			x1 += width + m_LeftMarginWidth - m_DrawingXPos;
-            if(x1>minleft)
-            {
-    			if(*wxLIGHT_GREY!= bgcolor)
-    			{
-    				dc->SetPen(*wxThePenList->FindOrCreatePen(*wxLIGHT_GREY, 1, wxSOLID));
-    			}
-    			else
-    			{
-    				dc->SetPen(*wxThePenList->FindOrCreatePen(wxColour(128, 128, 128), 1, wxSOLID));
-    			}
-    			dc->DrawLine(x1, y, x1, y+rect.GetHeight());
-            }
+			if(x1>minleft)
+			{
+				if(*wxLIGHT_GREY!= bgcolor)
+				{
+					dc->SetPen(*wxThePenList->FindOrCreatePen(*wxLIGHT_GREY, 1, wxSOLID));
+				}
+				else
+				{
+					dc->SetPen(*wxThePenList->FindOrCreatePen(wxColour(128, 128, 128), 1, wxSOLID));
+				}
+				dc->DrawLine(x1, y, x1, y+rect.GetHeight());
+			}
 		}
 	}
 }
@@ -10750,7 +10750,7 @@ void MadEdit::OnPaint(wxPaintEvent &evt)
 	//if(mClientWidth==0 || mClientHeight==0) return;
 
 	wxPaintDC dc(this);
-	wxMemoryDC memdc, markdc;
+	wxMemoryDC memdc(&dc), markdc(&dc);
 
 	wxWindow *focuswin=FindFocus();
 	if (NULL == m_ClientBitmap)

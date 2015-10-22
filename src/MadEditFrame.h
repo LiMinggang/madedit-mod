@@ -184,6 +184,7 @@ public:
     void OnUpdateUI_MenuViewShowTabChar(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuViewShowSpaceChar(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuViewShowAllChars(wxUpdateUIEvent& event);
+    void OnUpdateUI_MenuViewRightToLeft(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuViewMarkActiveLine(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuViewMarkBracePair(wxUpdateUIEvent& event);
     void OnUpdateUI_MenuViewTextMode(wxUpdateUIEvent& event);
@@ -330,6 +331,7 @@ public:
     void OnViewShowTabChar(wxCommandEvent& event);
     void OnViewShowSpaceChar(wxCommandEvent& event);
     void OnViewShowAllChars(wxCommandEvent& event);
+    void OnViewRightToLeft(wxCommandEvent& event);
     void OnViewMarkActiveLine(wxCommandEvent& event);
     void OnViewMarkBracePair(wxCommandEvent& event);
     void OnViewTextMode(wxCommandEvent& event);
@@ -624,6 +626,7 @@ enum { // menu id
     menuShowEndOfLine,
     menuShowTabChar,
     menuShowSpaceChar,
+    menuViewRightToLeft,
     menuPreview,
     menuPreview1,
     menuPreview16 = menuPreview1 + 15,
