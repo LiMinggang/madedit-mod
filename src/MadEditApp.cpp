@@ -542,10 +542,9 @@ bool MadEditApp::OnCmdLineParsed(wxCmdLineParser& cmdParser)
         	//WildCard
             if(cmdParser.Found(wxT("r"))) flags|=wxDIR_DIRS;
 			wxArrayString files;
-			size_t nums = wxDir::GetAllFiles ( filename.GetPath(), &files, fname, flags);
+			size_t nums = wxDir::GetAllFiles ( filename.GetPath(), &files, fname, flags );
             for(size_t i=0; i<nums; ++i)
         	{
-
         		m_FileNames.Add(files[i]);
         	}
         }

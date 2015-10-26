@@ -1072,13 +1072,15 @@ void MadSearchReplaceDialog::MadSearchReplaceDialogActivate(wxActivateEvent& eve
     {
         if(g_ActiveMadEdit)
         {
-            m_ReplaceText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
-            m_FindText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
             wxString fname;
             int fsize;
             g_ActiveMadEdit->GetFont( fname, fsize );
+            m_FindText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
             m_FindText->SetFont( fname, 14 );
+			m_FindText->SetSpellCheck(g_ActiveMadEdit->GetSpellCheckStatus());
+            m_ReplaceText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
             m_ReplaceText->SetFont( fname, 14 );
+			m_ReplaceText->SetSpellCheck(g_ActiveMadEdit->GetSpellCheckStatus());
         }
         UpdateCheckBoxByCBHex( WxCheckBoxFindHex->GetValue() );
 
