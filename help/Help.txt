@@ -55,6 +55,20 @@ Features
      Eg: madedit -s -m madpytho.mpy ./1.txt /tmp/2.txt
  ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
+Syntax files, Locale files, Dictionaries and Settings:
+====
+  Syntax files: in the path $(MadEditConfigPath)/syntax/
+  Locale files: in the path $(MadEditConfigPath)/locale/
+  Dictionaries: in the path $(MadEditConfigPath)/Dictionaries/
+
+  $(MadEditConfigPath) are the one of below paths:
+    1. MadEdit execution file directory : Windows and Linux
+    2. $(HOME)/.madedit/ : Linux
+    3. /usr/share/madedit/ : Linux
+
+  If MadEdit does not find any files in those paths,
+  MadEdit can also execute standalone by using default settings.
+ ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 Reference
 ====
 [How to build MadEdit-Mod under Linux](/p/madedit-mod/wiki/How%20to%20compile%20MadEdit-Mod%20under%20Linux/)

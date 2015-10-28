@@ -3605,7 +3605,7 @@ void MadEdit::UpdateScrollBarPos()
 		m_MaxColumnRowWidth = m_Lines->m_MaxLineWidth + m_RightMarginWidth;
 
 		int xmax = GetLineNumberAreaWidth(int(m_Lines->m_LineCount)) + m_LeftMarginWidth
-			+ m_MaxColumnRowWidth;
+			+ m_MaxColumnRowWidth + m_BookmarkWidth;
 
 		if(m_WordWrapMode==wwmWrapByWindow)
 		{
@@ -10574,7 +10574,7 @@ void MadEdit::OnHScroll(wxScrollEvent &evt)
 	if(m_EditMode!=emHexMode)
 	{
 		int xmax = GetLineNumberAreaWidth(int(m_Lines->m_LineCount)) + m_LeftMarginWidth
-			+ m_Lines->m_MaxLineWidth + m_RightMarginWidth;
+			+ m_Lines->m_MaxLineWidth + m_RightMarginWidth + m_BookmarkWidth;
 
 		if(m_WordWrapMode==wwmWrapByWindow)
 		{

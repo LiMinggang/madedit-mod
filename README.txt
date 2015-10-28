@@ -62,10 +62,11 @@ wxWidgets(3.0.2)
 MadEdit-Mod
 ./configure --with-boost=${HOME}/boost_1_56_0 --with-wxdir=${HOME}/wxWidgets-3.0.2
 
-Syntax files, Locale files and Settings:
+Syntax files, Locale files, Dictionaries and Settings:
 ---------------------------------------
   Syntax files: in the path $(MadEditConfigPath)/syntax/
   Locale files: in the path $(MadEditConfigPath)/locale/
+  Dictionaries: in the path $(MadEditConfigPath)/Dictionaries/
 
   $(MadEditConfigPath) are the one of below paths:
     1. MadEdit execution file directory : Windows and Linux
@@ -138,19 +139,21 @@ Mod v0.3.8
 9.New: Purge Caret position history
 10.New: Add brief help documents(Basic introduction, Key mapping and help for Regex)
 11.New: Switch between Right-to-left and Left-to-right language
-12.Fix: Match brace pair has bug if it was in comment or string(From MadEdit)
-13.Fix: Select contents between a brace pair has bug
-14.Fix: Size of the dictionary selection and path is too small under Ubuntu
-15.Fix: Remove some of the code for compatible with wxWidgets 2.8.x
-16.Fix: Missing menu items for Copy file path/name/directory after refactor
-17.Fix: Fix Mouse event(LDown LDClick) handle issue(Since the beginning of MadEdit)
-18.Fix: Don't need "(R)" on windows title to mark read only file
-19.Fix: Assertion failure of search/replace results display(string conversion)
-20.Fix: Spellchecker would insert instead of replace the word if the caret is at the end of a word(Issue #61)
-21.Fix: Horizontal scroll paint issue
-22.Fix: Right click menu string
-23.Fix: OnPaint issue in RTL
-24.Other minor improvements
+12.New: Toggle back from Replace Dialog to Find Dialog
+13.Fix: Match brace pair has bug if it was in comment or string(From MadEdit)
+14.Fix: Select contents between a brace pair has bug
+15.Fix: Size of the dictionary selection and path is too small under Ubuntu
+16.Fix: Remove some of the code for compatible with wxWidgets 2.8.x
+17.Fix: Missing menu items for Copy file path/name/directory after refactor
+18.Fix: Fix Mouse event(LDown LDClick) handle issue(Since the beginning of MadEdit)
+19.Fix: Don't need "(R)" on windows title to mark read only file
+20.Fix: Assertion failure of search/replace results display(string conversion)
+21.Fix: Spellchecker would insert instead of replace the word if the caret is at the end of a word(Issue #61)
+22.Fix: Horizontal scroll paint issue
+23.Fix: Right click menu string
+24.Fix: OnPaint issue in RTL
+25.Fix: The last char was not displayed while scrolling to the right most
+26.Other minor improvements
 
 Mod v0.3.7
 1.New: Column Align Right(Selected text would be aligned according to right)
