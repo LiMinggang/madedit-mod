@@ -2437,7 +2437,7 @@ void MadEdit::PaintTextLines(wxDC *dc, const wxRect &rect, int toprow, int rowco
 
 							dc->SetTextForeground(m_Syntax->nw_Color);
 							dc->SetFont(*(m_Syntax->nw_Font));
-							if(reverseLineNum)
+							if(!InPrinting() && reverseLineNum)
 							{
 								for(int i = 0; i < ncount; ++i, l+=m_TextFontMaxDigitWidth)
 								{

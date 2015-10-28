@@ -153,7 +153,8 @@ Mod v0.3.8
 23.Fix: Right click menu string
 24.Fix: OnPaint issue in RTL
 25.Fix: The last char was not displayed while scrolling to the right most
-26.Other minor improvements
+26.Fix: Line number would be reversed in printing while enable RTL
+27.Other minor improvements
 
 Mod v0.3.7
 1.New: Column Align Right(Selected text would be aligned according to right)
