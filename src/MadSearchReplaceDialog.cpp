@@ -81,7 +81,7 @@ END_EVENT_TABLE()
     ////Event Table End
 
 MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style )
-    : wxDialog( parent, id, title, position, size, style), m_SearchFrom(-1), m_SearchTo(-1)
+    : wxDialog( parent, id, title, position, size, style), m_SearchFrom(-1), m_SearchTo(-1), m_ReplaceDlgUi(false)
 {
     m_EnableTransparency = CanSetTransparent();
     CreateGUIControls();
@@ -1097,25 +1097,31 @@ void MadSearchReplaceDialog::MadSearchReplaceDialogActivate(wxActivateEvent& eve
  */
 void MadSearchReplaceDialog::WxButtonReplaceExpandClick(wxCommandEvent& event)
 {
-    wxString fname;
-    int fsize;
-    m_FindText->GetFont(fname, fsize);
-    m_FindText->SetFont(fname, 14);
-    m_ReplaceText->SetFont(fname, 14);
+    if(!m_ReplaceDlgUi)
+    {
+        wxString fname;
+        int fsize;
+        m_FindText->GetFont(fname, fsize);
+        m_FindText->SetFont(fname, 14);
+        m_ReplaceText->SetFont(fname, 14);
 
-    //g_SearchReplaceDialog->UpdateCheckBoxByCBHex(g_SearchReplaceDialog->WxCheckBoxFindHex->GetValue());
-
-
-	m_FindText->SelectAll();
-	m_FindText->SetFocus();
-    ShowReplaceUI();
+        ShowReplaceUI();
+    }
+    else
+    {
+        ShowFindUI();
+    }
+    m_FindText->SelectAll();
+    m_FindText->SetFocus();
 }
 
 void MadSearchReplaceDialog::ShowReplaceUI()
 {
-	WxButtonReplaceExpand->Show(false);
+	//WxButtonReplaceExpand->Show(false);
+	m_ReplaceDlgUi = true;
     WxButtonFindAllInAll->Show(false);
     WxButtonFindAll->Show(false);
+	WxButtonReplaceExpand->SetLabel(_("Search <<"));
 
 	m_ReplaceText->Show(true);
 	WxBitmapButtonRecentReplaceText->Show(true);
@@ -1137,6 +1143,7 @@ void MadSearchReplaceDialog::ShowReplaceUI()
 
 void MadSearchReplaceDialog::ShowFindUI()
 {
+    m_ReplaceDlgUi = false;
 	m_ReplaceText->Show(false);
 	WxBitmapButtonRecentReplaceText->Show(false);
 	WxButtonReplace->Show(false);
@@ -1145,7 +1152,8 @@ void MadSearchReplaceDialog::ShowFindUI()
 
     WxButtonFindAllInAll->Show(true);
     WxButtonFindAll->Show(true);
-	WxButtonReplaceExpand->Show(true);
+	//WxButtonReplaceExpand->Show(true);
+    WxButtonReplaceExpand->SetLabel(_("R&eplace >>"));
 
 	WxButtonFindNext->SetDefault();
 

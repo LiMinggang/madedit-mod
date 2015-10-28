@@ -93,6 +93,11 @@ public:
         wxInt64 m_SearchFrom;
         wxInt64 m_SearchTo;
 		bool m_EnableTransparency;
+        
+        MadEdit *m_FindText, *m_ReplaceText;
+        wxBitmapButton *WxBitmapButtonRecentFindText, *WxBitmapButtonRecentReplaceText;
+        MadRecentList *m_RecentFindText, *m_RecentReplaceText;
+        bool m_ReplaceDlgUi;
 public:
     //Note: if you receive any error with these enums, then you need to
     //change your old form code that are based on the #define control ids.
@@ -139,15 +144,9 @@ public:
 public:
     void MadSearchReplaceDialogClose(wxCloseEvent& event);
     void CreateGUIControls(void);
-
-    MadEdit *m_FindText, *m_ReplaceText;
-    wxBitmapButton *WxBitmapButtonRecentFindText, *WxBitmapButtonRecentReplaceText;
-    MadRecentList *m_RecentFindText, *m_RecentReplaceText;
-    
 	void WxButtonCloseClick(wxCommandEvent& event);
 	void MadSearchReplaceDialogKeyDown(wxKeyEvent& event);
 	void WxButtonFindNextClick(wxCommandEvent& event);
-	
 	void WxBitmapButtonRecentFindTextClick(wxCommandEvent& event);
 	void WxBitmapButtonRecentReplaceTextClick(wxCommandEvent& event);
 	void OnRecentFindText(wxCommandEvent& event);
@@ -155,7 +154,6 @@ public:
 	void WxButtonFindPrevClick(wxCommandEvent& event);
 	void WxButtonFindAllClick(wxCommandEvent& event);
 	void WxButtonFindAllInAllClick(wxCommandEvent& event);
-
     void ReadWriteSettings(bool bRead);
     void UpdateCheckBoxByCBHex(bool check);
     void UpdateSearchInSelection(bool check);
