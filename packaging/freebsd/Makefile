@@ -16,7 +16,7 @@ USES=		gettext pkgconfig desktop-file-utils
 WANT_UNICODE=	yes
 
 GNU_CONFIGURE=	yes
-CONFIGURE_ARGS+=--with-boost=${HOME}/boost_1_56_0
+CONFIGURE_ARGS+=--with-boost=${HOME}/boost_1_59_0
 CONFIGURE_ARGS+=--with-wxdir=${HOME}/wxWidgets-3.0.2
 CONFIGURE_ENV+=	PKG_CONFIG="${PKG_CONFIG}" glib_gtk2_CFLAGS="${glib_gtk2_CFLAGS}" glib_gtk2_LIBS="${glib_gtk2_LIBS}"
 CXXFLAGS+=	${glib_gtk2_CFLAGS}

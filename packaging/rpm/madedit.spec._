@@ -37,7 +37,7 @@ sed -i 's/^dist_doc_DATA/#dist_doc_DATA/' \
 
 %build
 sh ./autogen.sh
-%configure --with-boost=${HOME}/boost_1_56_0 --with-wxdir=${HOME}/wxWidgets-3.0.2
+%configure --with-boost=${HOME}/boost_1_59_0 --with-wxdir=${HOME}/wxWidgets-3.0.2
 make
 strip -s ./madedit
 
@@ -53,7 +53,10 @@ rm -rf $RPM_BUILD_DIR/%{name}-%{version}
 %defattr(-,root,root,0755)
 %doc gpl-3.0.txt
 %doc README.txt
-%doc MadPython.txt
+%doc help/MadPython.txt
+%doc help/Help.txt
+%doc help/KeyMapping.html
+%doc help/RegexReference.html
 %{_bindir}/*
 %{_datadir}/applications/*
 %{_datadir}/pixmaps/*

@@ -114,8 +114,8 @@ Todo:
 FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.3.8
-New: Upgrade boost to 1.59
-New: Silent mode which can be used in scripting(Only file names would be passed to
+1.New: Upgrade boost to 1.59
+2.New: Silent mode which can be used in scripting(Only file names would be passed to
      running instance in single instance mode)
      Run MadEdit-Mod without show GUI and use a MadPython to handle the files to
      be opened. So, you can use the Astyle/XML formatter/HTML tools the same as 
@@ -129,28 +129,28 @@ New: Silent mode which can be used in scripting(Only file names would be passed 
      [-w], wildcard, Enable wildcard support in file name\n(line number would be disabled because it used '*')
      [files], File(s) to be opened
      Eg: madedit -s -m madpytho.mpy ./1.txt /tmp/2.txt
-New: Automatically advance number for new file in NoNameXX
-New: Change insert mode to insertion while changing from hex to text mode
-New: Use indent size of current line instead of the last line that has non-space/tab char
-New: Add Spanish dictionary in release since a lot of downloads from Spanish
-New: Improve UI for Mad-Macro list
-New: Auto indent support for Python
-New: Purge Caret position history
-New: Add brief help documents(Basic introduction, Key mapping and help for Regex)
-New: Switch between Right-to-left and Left-to-right language
-Fix: Match brace pair has bug if it was in comment or string(From MadEdit)
-Fix: Select contents between a brace pair has bug
-Fix: Size of the dictionary selection and path is too small under Ubuntu
-Fix: Remove some of the code for compatible with wxWidgets 2.8.x
-Fix: Missing menu items for Copy file path/name/directory after refactor
-Fix: Fix Mouse event(LDown LDClick) handle issue(Since the beginning of MadEdit)
-Fix: Don't need "(R)" on windows title to mark read only file
-Fix: Assertion failure of search/replace results display(string conversion)
-Fix: Spellchecker would insert instead of replace the word if the caret is at the end of a word(Issue #61)
-Fix: Horizontal scroll paint issue
-Fix: Right click menu string
-Fix: OnPaint issue in RTL
-Other minor improvements
+3.New: Automatically advance number for new file in NoNameXX
+4.New: Change insert mode to insertion while changing from hex to text mode
+5.New: Use indent size of current line instead of the last line that has non-space/tab char
+6.New: Add Spanish dictionary in release since a lot of downloads from Spanish
+7.New: Improve UI for Mad-Macro list
+8.New: Auto indent support for Python
+9.New: Purge Caret position history
+10.New: Add brief help documents(Basic introduction, Key mapping and help for Regex)
+11.New: Switch between Right-to-left and Left-to-right language
+12.Fix: Match brace pair has bug if it was in comment or string(From MadEdit)
+13.Fix: Select contents between a brace pair has bug
+14.Fix: Size of the dictionary selection and path is too small under Ubuntu
+15.Fix: Remove some of the code for compatible with wxWidgets 2.8.x
+16.Fix: Missing menu items for Copy file path/name/directory after refactor
+17.Fix: Fix Mouse event(LDown LDClick) handle issue(Since the beginning of MadEdit)
+18.Fix: Don't need "(R)" on windows title to mark read only file
+19.Fix: Assertion failure of search/replace results display(string conversion)
+20.Fix: Spellchecker would insert instead of replace the word if the caret is at the end of a word(Issue #61)
+21.Fix: Horizontal scroll paint issue
+22.Fix: Right click menu string
+23.Fix: OnPaint issue in RTL
+24.Other minor improvements
 
 Mod v0.3.7
 1.New: Column Align Right(Selected text would be aligned according to right)
