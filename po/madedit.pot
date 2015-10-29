@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-28 12:12+0800\n"
+"POT-Creation-Date: 2015-10-29 14:04+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -190,7 +190,7 @@ msgstr ""
 msgid "File '%s' already exists, do you really want to overwrite it?"
 msgstr ""
 
-#: wxstd.po.cpp:45 ../src/MadSearchReplaceDialog.cpp:213
+#: wxstd.po.cpp:45 ../src/MadSearchReplaceDialog.cpp:216
 #: ../src/MadWordCountDialog.cpp:124
 msgid "&Close"
 msgstr ""
@@ -1297,7 +1297,7 @@ msgstr ""
 msgid "Find"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1706 ../src/MadSearchReplaceDialog.cpp:186
+#: ../src/MadEditFrame.cpp:1706 ../src/MadSearchReplaceDialog.cpp:189
 msgid "Find &Next"
 msgstr ""
 
@@ -1311,7 +1311,7 @@ msgstr ""
 msgid "Find Next"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1707 ../src/MadSearchReplaceDialog.cpp:189
+#: ../src/MadEditFrame.cpp:1707 ../src/MadSearchReplaceDialog.cpp:192
 msgid "Find &Previous"
 msgstr ""
 
@@ -2452,20 +2452,20 @@ msgstr ""
 msgid "File Type Associations"
 msgstr ""
 
-#: ../src/MadFindInFilesDialog.cpp:121 ../src/MadSearchReplaceDialog.cpp:134
+#: ../src/MadFindInFilesDialog.cpp:121 ../src/MadSearchReplaceDialog.cpp:135
 #: ../src/MadSortDialog.cpp:70
 msgid "&Case Sensitive"
 msgstr ""
 
-#: ../src/MadFindInFilesDialog.cpp:124 ../src/MadSearchReplaceDialog.cpp:137
+#: ../src/MadFindInFilesDialog.cpp:124 ../src/MadSearchReplaceDialog.cpp:138
 msgid "&Whole Word Only"
 msgstr ""
 
-#: ../src/MadFindInFilesDialog.cpp:127 ../src/MadSearchReplaceDialog.cpp:140
+#: ../src/MadFindInFilesDialog.cpp:127 ../src/MadSearchReplaceDialog.cpp:141
 msgid "Use Regular E&xpressions"
 msgstr ""
 
-#: ../src/MadFindInFilesDialog.cpp:130 ../src/MadSearchReplaceDialog.cpp:143
+#: ../src/MadFindInFilesDialog.cpp:130 ../src/MadSearchReplaceDialog.cpp:144
 msgid "Find &Hex String (Example: BE 00 3A or BE003A)"
 msgstr ""
 
@@ -2477,7 +2477,7 @@ msgstr ""
 msgid "&Find"
 msgstr ""
 
-#: ../src/MadFindInFilesDialog.cpp:142 ../src/MadSearchReplaceDialog.cpp:198
+#: ../src/MadFindInFilesDialog.cpp:142 ../src/MadSearchReplaceDialog.cpp:201
 msgid "&Replace"
 msgstr ""
 
@@ -2649,75 +2649,75 @@ msgstr ""
 msgid "Purge Histories"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:131
+#: ../src/MadSearchReplaceDialog.cpp:132
 msgid "&Move Focus to Editor Window"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:146
+#: ../src/MadSearchReplaceDialog.cpp:147
 msgid "Search Through &End of File"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:149
+#: ../src/MadSearchReplaceDialog.cpp:150
 msgid "Search In &Selection"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:155
+#: ../src/MadSearchReplaceDialog.cpp:156
 msgid "Bookmark in Searching"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:159
+#: ../src/MadSearchReplaceDialog.cpp:160
 msgid "Bookmark line"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:162
+#: ../src/MadSearchReplaceDialog.cpp:163
 msgid "Bookmark only(Find All in Current)"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:165
+#: ../src/MadSearchReplaceDialog.cpp:166
 msgid "Purge mark for each search session"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:168
+#: ../src/MadSearchReplaceDialog.cpp:171
 msgid "Transparency"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:172
+#: ../src/MadSearchReplaceDialog.cpp:175
 msgid "On Losing Focus"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:175
+#: ../src/MadSearchReplaceDialog.cpp:178
 msgid "Always"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:192
+#: ../src/MadSearchReplaceDialog.cpp:195
 msgid ""
 "Find &All in\n"
 "Current"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:195
+#: ../src/MadSearchReplaceDialog.cpp:198
 msgid ""
 "Find All in All\n"
 "Opened"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:201
+#: ../src/MadSearchReplaceDialog.cpp:204
 msgid ""
 "Replace A&ll in\n"
 "Current"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:204
+#: ../src/MadSearchReplaceDialog.cpp:207
 msgid ""
 "Repl All in All\n"
 "Opened"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:207
+#: ../src/MadSearchReplaceDialog.cpp:210
 msgid "C&ount"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:210
+#: ../src/MadSearchReplaceDialog.cpp:213
 #: ../src/MadSearchReplaceDialog.cpp:1156
 msgid "R&eplace >>"
 msgstr ""

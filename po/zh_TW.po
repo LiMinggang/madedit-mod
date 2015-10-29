@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-28 12:12+0800\n"
+"POT-Creation-Date: 2015-10-29 14:04+0800\n"
 "PO-Revision-Date: 2015-06-30 21:51+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
@@ -191,7 +191,7 @@ msgstr "取消"
 msgid "File '%s' already exists, do you really want to overwrite it?"
 msgstr "檔案 '%s' 已存在，確定要覆蓋嗎？"
 
-#: wxstd.po.cpp:45 ../src/MadSearchReplaceDialog.cpp:213
+#: wxstd.po.cpp:45 ../src/MadSearchReplaceDialog.cpp:216
 #: ../src/MadWordCountDialog.cpp:124
 msgid "&Close"
 msgstr "關閉(&C)"
@@ -1311,7 +1311,7 @@ msgstr "尋找字串"
 msgid "Find"
 msgstr "尋找"
 
-#: ../src/MadEditFrame.cpp:1706 ../src/MadSearchReplaceDialog.cpp:186
+#: ../src/MadEditFrame.cpp:1706 ../src/MadSearchReplaceDialog.cpp:189
 msgid "Find &Next"
 msgstr "尋找下一個(&N)"
 
@@ -1325,7 +1325,7 @@ msgstr "到字串下一次出現的位置"
 msgid "Find Next"
 msgstr "尋找下一個"
 
-#: ../src/MadEditFrame.cpp:1707 ../src/MadSearchReplaceDialog.cpp:189
+#: ../src/MadEditFrame.cpp:1707 ../src/MadSearchReplaceDialog.cpp:192
 msgid "Find &Previous"
 msgstr "尋找上一個(&P)"
 
@@ -2479,20 +2479,20 @@ msgstr "確定(&O)"
 msgid "File Type Associations"
 msgstr "檔案關聯"
 
-#: ../src/MadFindInFilesDialog.cpp:121 ../src/MadSearchReplaceDialog.cpp:134
+#: ../src/MadFindInFilesDialog.cpp:121 ../src/MadSearchReplaceDialog.cpp:135
 #: ../src/MadSortDialog.cpp:70
 msgid "&Case Sensitive"
 msgstr "區分大小寫(&C)"
 
-#: ../src/MadFindInFilesDialog.cpp:124 ../src/MadSearchReplaceDialog.cpp:137
+#: ../src/MadFindInFilesDialog.cpp:124 ../src/MadSearchReplaceDialog.cpp:138
 msgid "&Whole Word Only"
 msgstr "全字符合(&W)"
 
-#: ../src/MadFindInFilesDialog.cpp:127 ../src/MadSearchReplaceDialog.cpp:140
+#: ../src/MadFindInFilesDialog.cpp:127 ../src/MadSearchReplaceDialog.cpp:141
 msgid "Use Regular E&xpressions"
 msgstr "使用正規運算式(&X)"
 
-#: ../src/MadFindInFilesDialog.cpp:130 ../src/MadSearchReplaceDialog.cpp:143
+#: ../src/MadFindInFilesDialog.cpp:130 ../src/MadSearchReplaceDialog.cpp:144
 msgid "Find &Hex String (Example: BE 00 3A or BE003A)"
 msgstr "尋找十六進位字串 (例如: BE 00 3A 或 BE003A)(&H)"
 
@@ -2504,7 +2504,7 @@ msgstr "只列出第一個找到的項目(&L)"
 msgid "&Find"
 msgstr "尋找(&F)"
 
-#: ../src/MadFindInFilesDialog.cpp:142 ../src/MadSearchReplaceDialog.cpp:198
+#: ../src/MadFindInFilesDialog.cpp:142 ../src/MadSearchReplaceDialog.cpp:201
 msgid "&Replace"
 msgstr "取代(&R)"
 
@@ -2676,79 +2676,79 @@ msgstr ""
 msgid "Purge Histories"
 msgstr "清除歷史記錄"
 
-#: ../src/MadSearchReplaceDialog.cpp:131
+#: ../src/MadSearchReplaceDialog.cpp:132
 msgid "&Move Focus to Editor Window"
 msgstr "將輸入焦點移到編輯器視窗(&M)"
 
-#: ../src/MadSearchReplaceDialog.cpp:146
+#: ../src/MadSearchReplaceDialog.cpp:147
 msgid "Search Through &End of File"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:149
+#: ../src/MadSearchReplaceDialog.cpp:150
 msgid "Search In &Selection"
 msgstr "只在選取資料中尋找(&S)"
 
-#: ../src/MadSearchReplaceDialog.cpp:155
+#: ../src/MadSearchReplaceDialog.cpp:156
 msgid "Bookmark in Searching"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:159
+#: ../src/MadSearchReplaceDialog.cpp:160
 msgid "Bookmark line"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:162
+#: ../src/MadSearchReplaceDialog.cpp:163
 msgid "Bookmark only(Find All in Current)"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:165
+#: ../src/MadSearchReplaceDialog.cpp:166
 msgid "Purge mark for each search session"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:168
+#: ../src/MadSearchReplaceDialog.cpp:171
 msgid "Transparency"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:172
+#: ../src/MadSearchReplaceDialog.cpp:175
 msgid "On Losing Focus"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:175
+#: ../src/MadSearchReplaceDialog.cpp:178
 msgid "Always"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:192
+#: ../src/MadSearchReplaceDialog.cpp:195
 #, fuzzy
 msgid ""
 "Find &All in\n"
 "Current"
 msgstr "尋找所有的(&A)"
 
-#: ../src/MadSearchReplaceDialog.cpp:195
+#: ../src/MadSearchReplaceDialog.cpp:198
 #, fuzzy
 msgid ""
 "Find All in All\n"
 "Opened"
 msgstr "尋找所有的(&A)"
 
-#: ../src/MadSearchReplaceDialog.cpp:201
+#: ../src/MadSearchReplaceDialog.cpp:204
 #, fuzzy
 msgid ""
 "Replace A&ll in\n"
 "Current"
 msgstr "尋找所有的(&A)"
 
-#: ../src/MadSearchReplaceDialog.cpp:204
+#: ../src/MadSearchReplaceDialog.cpp:207
 #, fuzzy
 msgid ""
 "Repl All in All\n"
 "Opened"
 msgstr "尋找所有的(&A)"
 
-#: ../src/MadSearchReplaceDialog.cpp:207
+#: ../src/MadSearchReplaceDialog.cpp:210
 msgid "C&ount"
 msgstr "計算次數(&O)"
 
-#: ../src/MadSearchReplaceDialog.cpp:210
+#: ../src/MadSearchReplaceDialog.cpp:213
 #: ../src/MadSearchReplaceDialog.cpp:1156
 #, fuzzy
 msgid "R&eplace >>"
