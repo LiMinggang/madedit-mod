@@ -1,40 +1,47 @@
-Mod v0.3.7
-1.New: Column Align Right(Selected text would be aligned according to right)
-2.New: Prefix, postfix and preview of numbering(enhanced numbering)
-3.New: Search All in All Opened documents
-4.New: Replace All in All Opened documents
-5.New: Indicate "Empty expression" on status bar if user did not fill the search box and hit Search
-6.New: TrimLeadingSpaces----remove leading space and tab chars of lines
-7.New: Selection support in TrimTrailingSpaces, TrimLeadingSpaces, DeleteEmptyLines, DeleteEmptyLinesWithSpaces and JoinLines
-8.New: Selected text copying to search text while searching with regex
-9.New: Tool button for Numbering(Insert incremental numbers)
-10.New: Update preview while editing initial number in Numbering dialog
-11.New: Config item for Quick Search bar in option dialog
-12.New: Refactor of popup memu/toolbar code
-13.New: ReadOnly flag on title and GUI update for ReadOnly mode(disable edit icon/menu in ReadOnly mode)
-14.New: New toolbar for refresh/close preview window
-15.New: Transparency supported in Search/Replace dialog
-16.New: Merge Search/Replace dialog
-17.New: Toggle macro result by button
-18.Fix: Assertion failure MadEditFrame.cpp:3403
-19.Fix: Rollback changes in Search/Replace(since 0.3.5)
-20.Fix: Assertion failure at MadEditFrame.cpp:5692 under x86_x64 linux
-21.Fix: Fix dictionary download link of OpenOffice on About Dialog
-22.Fix: Link warning of VS project
-23.Fix: Show search results by default
-24.Fix: Set default page of Option dialog to "General"
-25.Fix: Move encoding update and config update from MainFrame to search/replace dialog
-26.Fix: Reverse order toolbars under linux
-27.Fix: Remove extra overflow icon from Toolbars
-28.Fix: Crash in ColumnAlign while reverse selection
-29.Fix: Column align will has issue if you select beyond the EOF
-30.Fix: File name was not marked as "modified*" in ColumnAlign
-31.Fix: Minor fix in menu help text
-32.Fix: Improve simplified Chinese translation
-33.Fix: Wrong dnd cursor if no selection
-34.Fix: Improvement on GUI update for menu and toolbar
-35.Fix: UI update issue of toggle toolbars
-36.Fix: Remove no parent from the style of Replace dialog
-37.Fix: Remove duplicated code lines
-38.Fix: Bookmark would be toggled if there were multiple instance found in one line
-39.Fix: Remove macro debug menu item
+Mod v0.3.8
+1.New: Upgrade boost to 1.59
+2.New: Silent mode which can be used in scripting(Only file names would be passed to
+     running instance in single instance mode)
+     Run MadEdit-Mod without show GUI and use a MadPython to handle the files to
+     be opened. So, you can use the Astyle/XML formatter/HTML tools the same as 
+     the original ones, eg, call it in a script to handle a lot of files.
+     Furthermore, you can use MadPython to do more!!!
+     [-h], help, Displays help on the command line parameters
+     [-f], force, Edit and save file ignoring the ReadOnly flag(For the files in command line)
+     [-s], silent, Disables the GUI(would close the file automatically after done if another instance is running)
+     [-x], eXit, Exit MadEdit(mark as done working with previous "Silent" instance! Can also close the UI)
+     [-m], madpython, Specify MadPython file to be run on the file
+     [-r], recursive, Recursively run on files of subdirectories
+     [-w], wildcard, Enable wildcard support in file name(line number would be disabled because it used '*')
+     [files], File(s) to be opened
+     Eg: madedit -s -m madpytho.mpy ./1.txt /tmp/2.txt
+3.New: Automatically advance number for new file in NoNameXX if already opened a file with the same name
+4.New: Change insert mode to insertion while changing from hex to text mode
+5.New: Use indent size of current line instead of the last line that has non-space/tab char
+6.New: Add Spanish dictionary in release since a lot of downloads from Spanish
+7.New: Improve UI for Mad-Macro list
+8.New: Auto indent support for Python
+9.New: Purge Caret position history
+10.New: Add brief help documents(Basic introduction, Key mapping and help for Regex)
+11.New: Switch between Right-to-left and Left-to-right language
+12.New: Toggle back from Replace Dialog to Find Dialog
+13.New: Add VS 2015 support
+14.New: RTL support
+15.Fix: Match brace pair has bug if it was in comment or string(From MadEdit)
+16.Fix: Select contents between a brace pair has bug
+17.Fix: Size of the dictionary selection and path is too small under Ubuntu
+18.Fix: Remove some of the code for compatible with wxWidgets 2.8.x
+19.Fix: Missing menu items for Copy file path/name/directory after refactor
+20.Fix: Fix Mouse event(LDown LDClick) handle issue(Since the beginning of MadEdit)
+21.Fix: Don't need "(R)" on windows title to mark read only file
+22.Fix: Assertion failure of search/replace results display(string conversion)
+23.Fix: Spellchecker would insert instead of replace the word if the caret is at the end of a word(Issue #61)
+24.Fix: Horizontal scroll paint issue
+25.Fix: Right click menu string
+26.Fix: OnPaint issue in RTL
+27.Fix: The last char was not displayed while scrolling to the right most
+28.Fix: Line number would be reversed in printing while enable RTL
+29.Fix: Fix Astyle config could not be saved
+30.Fix: Add Readonly check in MadPython before actually run
+31.Fix: Assertion failure at MadLines.cpp:2829
+32.Other minor improvements

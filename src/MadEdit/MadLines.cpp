@@ -2503,9 +2503,15 @@ void MadLines::RecountLineWidth(void)
 
     BracePairIndex *bpi;
     vector <BracePairIndex>::iterator bpit, bpitend;
-    size_t bracepos, bracelen=0, bracemaxlen=0;
+    size_t bracepos, bracelen=0, bracemaxlen=0, braceposdelta = 0;
     wxUint16 *bracewidth=NULL;
     vector<int*> bracexpos_thisrow;
+	// Do we have BOM?
+	if(iter->m_RowIndices[0].m_Start != 0)
+	{
+
+		braceposdelta = iter->m_RowIndices[0].m_Start;
+	}
 
     do
     {
@@ -2541,7 +2547,7 @@ void MadLines::RecountLineWidth(void)
             wordlength = 0;
             wordwidth = 0;
             rowlen = 0;
-            bracepos=0;
+            bracepos=braceposdelta;
 
             do
             {
@@ -2827,6 +2833,7 @@ void MadLines::RecountLineWidth(void)
         }
 
         wxASSERT(bpi==NULL);
+		braceposdelta = 0;
     }
     while(++iter != iterend);
 

@@ -174,6 +174,8 @@ class MadMouseMotionTimer;
 
 struct MadCaretPos
 {
+	MadCaretPos(): pos(-1), rowid(0), linepos(-1), lineid(0), subrowid(0), xpos(0), extraspaces(0)
+	{}
     wxFileOffset pos;     // position of whole file
     int rowid;            // row-id. of whole file
 

@@ -11549,7 +11549,7 @@ int MadEdit::GetMaxWordWrapWidth()
 	{
 	case wwmWrapByWindow:
 		{
-			maxwidth = m_ClientWidth - (GetLineNumberAreaWidth(m_Lines->m_Size >> 5) +
+			maxwidth = m_ClientWidth - (GetLineNumberAreaWidth(m_Lines->m_Size >> 5) + m_BookmarkWidth +
 					   m_LeftMarginWidth + m_RightMarginWidth + m_TextFontAveCharWidth);
 		}
 		break;

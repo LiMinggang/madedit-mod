@@ -77,6 +77,7 @@ static const wxCmdLineEntryDesc g_cmdLineDesc [] =
 	 { wxCMD_LINE_SWITCH, "f", "force", "Edit and save file ignoring the ReadOnly flag" },
 	 { wxCMD_LINE_SWITCH, "r", "recursive", "Recursively run on files of subdirectories" },
 	 { wxCMD_LINE_SWITCH, "s", "silent", "Disables the GUI" },
+	 { wxCMD_LINE_SWITCH, "x", "eXit", "Exit GUI if it was in silent mode" },
 	 { wxCMD_LINE_SWITCH, "w", "wildcard", "Enable wildcard support in file name\n(line number would be disabled becasue it used '*')" },
 	 { wxCMD_LINE_OPTION, "m", "madpython", "Specify MadPython file to be run on the file" },
 	 { wxCMD_LINE_PARAM, NULL, NULL, "File(s) to be opened", wxCMD_LINE_VAL_STRING,  wxCMD_LINE_PARAM_OPTIONAL | wxCMD_LINE_PARAM_MULTIPLE }, 
@@ -262,6 +263,7 @@ bool MadEditApp::OnInit()
 {
 	// call default behaviour (mandatory)
 	m_SilentMode = false;
+	m_Exit = false;
 	m_ForceEdit = false;
 	if (!wxApp::OnInit())
 		return false;
@@ -339,6 +341,8 @@ bool MadEditApp::OnInit()
 				{
 					if(m_SilentMode)
 						fnames += wxT("*s");
+					if(m_Exit)
+						fnames += wxT("*x");
 					if(m_ForceEdit)
 						fnames += wxT("*f");
 					fnames += wxT("*m")+m_MadPythonScript;
@@ -408,7 +412,7 @@ bool MadEditApp::OnInit()
 	// set colors
 	SetHtmlColors();
 
-	 bool maximize=false;
+	bool maximize=false;
 #ifdef __WXMSW__
 	cfg->Read(wxT("/MadEdit/WindowMaximize"), &maximize, false);
 #endif
@@ -514,12 +518,30 @@ bool MadEditApp::OnInit()
 		if(!m_FileNames.IsEmpty() && !m_MadPythonScript.IsEmpty())
 		{
 			// open the files
-			for( size_t i = 0; i < m_FileNames.GetCount(); ++i )
+			wxTextFile scriptfile( m_MadPythonScript );
+			scriptfile.Open( wxConvFile );
+
+			if( scriptfile.IsOpened() )
 			{
-				myFrame->RunScriptWithFile(m_FileNames[i], m_MadPythonScript, false, true, m_ForceEdit);
+				
+				wxString str = scriptfile.GetFirstLine() + wxT( "\n" );
+				
+				for( ; !scriptfile.Eof(); )
+				{
+					str << scriptfile.GetNextLine() << wxT( "\n" );
+				}
+				
+				if( str.IsNull() == false )
+				{
+					for( size_t i = 0; i < m_FileNames.GetCount(); ++i )
+					{
+						myFrame->RunScriptWithFile(m_FileNames[i], str, false, true, m_ForceEdit);
+					}
+				}
+				scriptfile.Close();
 			}
 		}
-		return false;//exit
+		// Waiting for -x to close
 	}
 
 	return true;
@@ -547,6 +569,7 @@ bool MadEditApp::OnCmdLineParsed(wxCmdLineParser& cmdParser)
 {
 	wxFileName filename;
 	m_SilentMode = cmdParser.Found(wxT("s"));
+	m_Exit = cmdParser.Found(wxT("x"));
 	m_ForceEdit  = cmdParser.Found(wxT("f"));
 	cmdParser.Found(wxT("m"), &m_MadPythonScript);
 

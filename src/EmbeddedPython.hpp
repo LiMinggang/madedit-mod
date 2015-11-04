@@ -15,98 +15,90 @@ namespace py = ::boost::python;
 
 namespace embedded_python {
 
-    enum direction_type {
-        STDIN,
-        STDOUT,
-        STDERR
-    };
+	enum direction_type
+	{
+		STDIN,
+		STDOUT,
+		STDERR
+	};
 
-    template<direction_type>
-    class py_redirector
-    {
-    public:
-        py_redirector()
-        { }
+	template<direction_type>
+	class py_redirector
+	{
+	public:
+		py_redirector()
+		{ }
 
-        py_redirector(boost::function<void (const std::string&)> f)
-            : m_write_fn(f)
-        { }
+		py_redirector( boost::function<void ( const std::string& )> f )
+			: m_write_fn( f )
+		{ }
 
-        void write(const std::string& text) {
+		void write( const std::string& text ) {
+			if( m_write_fn )
+			{ m_write_fn( text ); }
+			else
+			{ std::cout << text; }
+		}
 
-            if (m_write_fn)
-                m_write_fn(text);
-            else
-                std::cout << text;
-        }
+	public:
+		boost::function<void ( const std::string& )> m_write_fn;
+	};
 
-    public:
-        boost::function<void (const std::string&)> m_write_fn;
-    };
-
-    typedef py_redirector<STDOUT>	stdout_redirector;
-    typedef py_redirector<STDERR>	stderr_redirector;
+	typedef py_redirector<STDOUT>   stdout_redirector;
+	typedef py_redirector<STDERR>   stderr_redirector;
 
 
-    static std::auto_ptr<stdout_redirector> make_stdout_redirector() {
+	static std::auto_ptr<stdout_redirector> make_stdout_redirector()
+	{
+		std::auto_ptr<stdout_redirector> ptr( new stdout_redirector );
+		return ptr;
+	}
 
-        std::auto_ptr<stdout_redirector> ptr(new stdout_redirector);
-
-        return ptr;
-    }
-
-    static std::auto_ptr<stderr_redirector> make_stderr_redirector() {
-
-        std::auto_ptr<stderr_redirector> ptr(new stderr_redirector);
-
-        return ptr;
-    }
+	static std::auto_ptr<stderr_redirector> make_stderr_redirector()
+	{
+		std::auto_ptr<stderr_redirector> ptr( new stderr_redirector );
+		return ptr;
+	}
 }
 
 class EmbeddedPython
 {
 public:
-    EmbeddedPython();
+	EmbeddedPython();
 
-    ~EmbeddedPython() {
-        // Boost.Python doesn't support Py_Finalize yet, so don't call it!
-        //Py_Finalize();
-    }
+	~EmbeddedPython() {
+		// Boost.Python doesn't support Py_Finalize yet, so don't call it!
+		//Py_Finalize();
+	}
 
-    void exec(const std::string& command)
-    {
-        try {
-            py::object result = py::exec(command.c_str(),
-                                         m_main_global, m_main_global);
-        }
-        catch(const py::error_already_set&) {
+	void exec( const std::string& command ) {
+		try {
+			py::object result = py::exec( command.c_str(),
+			                              m_main_global, m_main_global );
+		}
+		catch( const py::error_already_set& ) {
+			if( PyErr_Occurred() ) {
+				PyErr_Print();
+				PyErr_Clear();
+			}
+			else {
+				std::cerr << "A C++ exception was thrown for which "
+				          << "there was no exception handler registered.\n";
+			}
+		}
+	}
 
-            if (PyErr_Occurred()) {
-                PyErr_Print();
-                PyErr_Clear();
-            }
-            else {
-                std::cerr << "A C++ exception was thrown for which "
-                          << "there was no exception handler registered.\n";
-            }
-        }
-    }
+	void write_stdout( const std::string& text ) {
+		std::cout << ">>> " << text;
+	}
 
-    void write_stdout(const std::string& text) {
-
-        std::cout << ">>> " << text;
-
-    }
-
-    void write_stderr(const std::string& text) {
-
-        std::cout << "xxx " << text;
-
-    }
+	void write_stderr( const std::string& text ) {
+		std::cout << "xxx " << text;
+	}
 
 private:
-    py::object m_main_module;
-    py::dict   m_main_global;
+	py::object m_main_module;
+	py::dict   m_main_global;
 };
 
 extern EmbeddedPython * g_EmbeddedPython;

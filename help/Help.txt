@@ -40,6 +40,7 @@ Features
 * Convert Html to plain text
 * Automatic Formatter for C, C++, C++/CLI, Objective-C, C#, and Java Source Code(Astyle)
 * XML Formatter(DTD is not supported)
+* RTL support
 * Silent mode which can be used in scripting
      Run MadEdit-Mod without show GUI and use a MadPython to handle the files to
      be opened. So, you can use the Astyle/XML formatter/HTML tools the same as 
@@ -47,12 +48,14 @@ Features
      Furthermore, you can use MadPython to do more!!!
      [-h], help, Displays help on the command line parameters
      [-f], force, Edit and save file ignoring the ReadOnly flag(For the files in command line)
-     [-s], silent, Disables the GUI
+     [-s], silent, Disables the GUI(would close the file automatically after done if another instance is running)
+     [-x], eXit, Exit MadEdit(mark as done working with previous "Silent" instance! Can also close the UI)
      [-m], madpython, Specify MadPython file to be run on the file
      [-r], recursive, Recursively run on files of subdirectories
-     [-w], wildcard, Enable wildcard support in file name\n(line number would be disabled because it used '*')
+     [-w], wildcard, Enable wildcard support in file name(line number would be disabled because it used '*')
      [files], File(s) to be opened
      Eg: madedit -s -m madpytho.mpy ./1.txt /tmp/2.txt
+* RTL(Right-to-left) view mode
  ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
 Syntax files, Locale files, Dictionaries and Settings:
@@ -79,8 +82,8 @@ Reference
 
 Author:
 ====
-Alston Chen <madedit@gmail.com>
 Minggang Li <minggang.li@gmail.com>
+Alston Chen <madedit@gmail.com>
 
  ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
 
