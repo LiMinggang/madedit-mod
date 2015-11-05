@@ -301,10 +301,10 @@ std::map<int, wxString>g_PreviewTypeNames;
 
 wxAcceleratorEntry g_AccelFindNext, g_AccelFindPrev;
 int MadMessageBox( const wxString& message,
-                   const wxString& caption = wxMessageBoxCaptionStr,
-                   long style = wxOK | wxCENTRE,
-                   wxWindow *parent = NULL,
-                   int x = wxDefaultCoord, int y = wxDefaultCoord );
+				   const wxString& caption = wxMessageBoxCaptionStr,
+				   long style = wxOK | wxCENTRE,
+				   wxWindow *parent = NULL,
+				   int x = wxDefaultCoord, int y = wxDefaultCoord );
 inline void RecordAsMadMacro( MadEdit * edit, const wxString& script )
 {
 	if( ( g_MainFrame != NULL ) && ( edit == g_ActiveMadEdit ) )
@@ -312,13 +312,13 @@ inline void RecordAsMadMacro( MadEdit * edit, const wxString& script )
 		if( g_MainFrame->IsMacroRecording() )
 		{
 			g_MainFrame->AddMacroScript( script, ( int )g_ActiveMadEdit->GetCaretPosition(),
-			                             ( int )g_ActiveMadEdit->GetSelectionBeginPos(), ( int )g_ActiveMadEdit->GetSelectionEndPos() );
+										 ( int )g_ActiveMadEdit->GetSelectionBeginPos(), ( int )g_ActiveMadEdit->GetSelectionEndPos() );
 		}
 	}
 }
 
 int MadMessageBox( const wxString& message, const wxString& caption, long style,
-                   wxWindow *parent, int WXUNUSED( x ), int WXUNUSED( y ) )
+				   wxWindow *parent, int WXUNUSED( x ), int WXUNUSED( y ) )
 {
 	// add the appropriate icon unless this was explicitly disabled by use of
 	// wxICON_NONE
@@ -332,7 +332,7 @@ int MadMessageBox( const wxString& message, const wxString& caption, long style,
 	if( ( style & ( wxYES_NO | wxCANCEL ) ) == ( wxYES_NO | wxCANCEL ) )
 	{
 		dialog.SetYesNoCancelLabels( wxMessageDialog::ButtonLabel( _( "&Yes" ) ),
-		                             wxMessageDialog::ButtonLabel( _( "&No" ) ), wxMessageDialog::ButtonLabel( _( "&Cancel" ) ) );
+									 wxMessageDialog::ButtonLabel( _( "&No" ) ), wxMessageDialog::ButtonLabel( _( "&Cancel" ) ) );
 	}
 	else
 		if( ( style & ( wxYES_NO ) ) == ( wxYES_NO ) )
@@ -659,10 +659,10 @@ public:
 	wxMadAuiNotebook() : wxAuiNotebook() {}
 
 	wxMadAuiNotebook( wxWindow* parent,
-	                  wxWindowID id = wxID_ANY,
-	                  const wxPoint& pos = wxDefaultPosition,
-	                  const wxSize& size = wxDefaultSize,
-	                  long style = wxAUI_NB_DEFAULT_STYLE )
+					  wxWindowID id = wxID_ANY,
+					  const wxPoint& pos = wxDefaultPosition,
+					  const wxSize& size = wxDefaultSize,
+					  long style = wxAUI_NB_DEFAULT_STYLE )
 		: wxAuiNotebook( parent, id, pos, size, style ) {
 	}
 
@@ -818,6 +818,7 @@ void OnReceiveMessage( const wchar_t *msg, size_t size )
 
 		SetWindowPlacement( ( HWND )g_MainFrame->GetHWND(), &wp );
 	}
+
 #else
 	//g_MainFrame->Show(true);
 	g_MainFrame->Raise();
@@ -911,9 +912,9 @@ void OnReceiveMessage( const wchar_t *msg, size_t size )
 			else
 			{ g_MainFrame->RunScriptWithFile( file, arg, false, silent, forceEdit ); }
 		}
-
 	}
-	if(exitS)
+
+	if( exitS )
 	{ g_MainFrame->Close( false ); }
 }
 
@@ -3696,7 +3697,7 @@ void MadEditFrame::OpenFile( const wxString &fname, bool mustExist )
 	MadEdit *madedit = g_ActiveMadEdit;
 
 	if( !filename.IsEmpty() && madedit != NULL
-	        && !madedit->IsModified() && madedit->GetFileName().IsEmpty() )
+			&& !madedit->IsModified() && madedit->GetFileName().IsEmpty() )
 	{
 		// load file in g_ActiveMadEdit
 	}
@@ -3949,7 +3950,7 @@ void MadEditFrame::OnUpdateUI_MenuFile_CheckCount( wxUpdateUIEvent& event )
 void MadEditFrame::OnUpdateUI_MenuFileReload( wxUpdateUIEvent& event )
 {
 	event.Enable( g_ActiveMadEdit != NULL &&
-	              !g_ActiveMadEdit->GetFileName().IsEmpty() );
+				  !g_ActiveMadEdit->GetFileName().IsEmpty() );
 }
 
 void MadEditFrame::OnUpdateUI_MenuFileRecentFiles( wxUpdateUIEvent& event )
@@ -4057,19 +4058,19 @@ void MadEditFrame::OnUpdateUI_Menu_JoinLines( wxUpdateUIEvent& event )
 void MadEditFrame::OnUpdateUI_MenuEditCopyAsHexString( wxUpdateUIEvent& event )
 {
 	event.Enable( g_ActiveMadEdit && //g_ActiveMadEdit->GetEditMode()==emHexMode &&
-	              g_ActiveMadEdit->IsSelected() );
+				  g_ActiveMadEdit->IsSelected() );
 }
 
 void MadEditFrame::OnUpdateUI_MenuIndent( wxUpdateUIEvent& event )
 {
 	event.Enable( g_ActiveMadEdit && !g_ActiveMadEdit->IsReadOnly() &&
-	              g_ActiveMadEdit->GetEditMode() != emHexMode );
+				  g_ActiveMadEdit->GetEditMode() != emHexMode );
 }
 
 void MadEditFrame::OnUpdateUI_MenuComment( wxUpdateUIEvent& event )
 {
 	event.Enable( g_ActiveMadEdit && !g_ActiveMadEdit->IsReadOnly() && g_ActiveMadEdit->GetEditMode() != emHexMode
-	              && g_ActiveMadEdit->HasLineComment() );
+				  && g_ActiveMadEdit->HasLineComment() );
 }
 
 void MadEditFrame::OnUpdateUI_MenuSearchGoToBrace( wxUpdateUIEvent& event )
@@ -4277,7 +4278,7 @@ void MadEditFrame::OnUpdateUI_MenuViewShowAllChars( wxUpdateUIEvent& event )
 {
 	event.Enable( g_ActiveMadEdit != NULL && g_ActiveMadEdit->GetEditMode() != emHexMode );
 	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetShowSpaceChar() && g_ActiveMadEdit->GetShowTabChar()
-	             && g_ActiveMadEdit->GetShowEndOfLine() );
+				 && g_ActiveMadEdit->GetShowEndOfLine() );
 }
 void MadEditFrame::OnUpdateUI_MenuViewRightToLeft( wxUpdateUIEvent& event )
 {
@@ -4297,25 +4298,25 @@ void MadEditFrame::OnUpdateUI_MenuViewMarkBracePair( wxUpdateUIEvent& event )
 void MadEditFrame::OnUpdateUI_MenuViewSpellChecker( wxUpdateUIEvent& event )
 {
 	event.Enable( g_ActiveMadEdit != NULL && g_ActiveMadEdit->GetEditMode() != emHexMode
-	              && SpellCheckerManager::Instance().GetSelectedDictionaryNumber() != -1 );
+				  && SpellCheckerManager::Instance().GetSelectedDictionaryNumber() != -1 );
 	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetSpellCheckStatus() );
 }
 void MadEditFrame::OnUpdateUI_MenuSpellIgnore( wxUpdateUIEvent& event )
 {
 	event.Enable( g_ActiveMadEdit != NULL && g_ActiveMadEdit->GetEditMode() != emHexMode
-	              && SpellCheckerManager::Instance().GetSelectedDictionaryNumber() != -1 );
+				  && SpellCheckerManager::Instance().GetSelectedDictionaryNumber() != -1 );
 }
 
 void MadEditFrame::OnUpdateUI_MenuSpellRemoveFromDict( wxUpdateUIEvent& event )
 {
 	event.Enable( g_ActiveMadEdit != NULL && g_ActiveMadEdit->GetEditMode() != emHexMode
-	              && SpellCheckerManager::Instance().GetEnablePersonalDictionary() );
+				  && SpellCheckerManager::Instance().GetEnablePersonalDictionary() );
 }
 
 void MadEditFrame::OnUpdateUI_MenuSpellAdd2Dict( wxUpdateUIEvent& event )
 {
 	event.Enable( g_ActiveMadEdit != NULL && g_ActiveMadEdit->GetEditMode() != emHexMode
-	              && SpellCheckerManager::Instance().GetEnablePersonalDictionary() );
+				  && SpellCheckerManager::Instance().GetEnablePersonalDictionary() );
 }
 void MadEditFrame::OnUpdateUI_MenuViewTextMode( wxUpdateUIEvent& event )
 {
@@ -4376,8 +4377,8 @@ void MadEditFrame::OnUpdateUI_MenuToolsByteOrderMark( wxUpdateUIEvent& event )
 	MadEncodingType type;
 
 	if( g_ActiveMadEdit && g_ActiveMadEdit->IsTextFile()
-	        && ( type = g_ActiveMadEdit->GetEncodingType() ) != etSingleByte
-	        && type != etDoubleByte )   // unicode format
+			&& ( type = g_ActiveMadEdit->GetEncodingType() ) != etSingleByte
+			&& type != etDoubleByte )   // unicode format
 	{
 		event.Enable( true );
 
@@ -4459,7 +4460,7 @@ void MadEditFrame::OnUpdateUI_MenuCheckWritable( wxUpdateUIEvent& event )
 void MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding( wxUpdateUIEvent& event )
 {
 	event.Enable( g_ActiveMadEdit != NULL &&
-	              !g_ActiveMadEdit->IsReadOnly() && g_ActiveMadEdit->IsTextFile() );
+				  !g_ActiveMadEdit->IsReadOnly() && g_ActiveMadEdit->IsTextFile() );
 }
 
 void MadEditFrame::OnUpdateUI_MenuWindow_CheckCount( wxUpdateUIEvent& event )
@@ -4506,36 +4507,36 @@ void MadEditFrame::OnFileOpen( wxCommandEvent& event )
 
 	static int filterIndex = 0;
 	wxString fileFilter = wxString( wxT( "All files(*;*.*)|" ) ) + wxFileSelectorDefaultWildcardStr + wxT( "|68k Assembly (*.68k)|*.68k|" )
-	                      wxT( "ActionScript (*.as;*.asc;*.mx)|*.as;*.asc;*.mx|Ada (*.a;*.ada;*.adb;*.ads)|*.a;*.ada;*.adb;*.ads|Apache Conf (*.conf;*.htaccess)|" )
-	                      wxT( "*.conf;*.htaccess|Bash Shell Script (*.bsh;*.configure;*.sh)|*.bsh;*.configure;*.sh|Boo (*.boo)|*.boo|C (*.c;*.h)|*.c;*.h|" )
-	                      wxT( "C# (*.cs)|*.cs|C-Shell Script (*.csh)|*.csh|Caml (*.ml;*.mli)|*.ml;*.mli|Cascading Style Sheet (*.css)|*.css|" )
-	                      wxT( "Cilk (*.cilk;*.cilkh)|*.cilk;*.cilkh|Cobra (*.cobra)|*.cobra|ColdFusion (*.cfc;*.cfm;*.cfml;*.dbm)|*.cfc;*.cfm;*.cfml;*.dbm|" )
-	                      wxT( "CPP (*.c++;*.cc;*.cpp;*.cxx;*.h++;*.hh;*.hpp;*.hxx)|*.c++;*.cc;*.cpp;*.cxx;*.h++;*.hh;*.hpp;*.hxx|D (*.d)|*.d|" )
-	                      wxT( "Diff File (*.diff;*.patch)|*.diff;*.patch|Django (*.django)|*.django|DOS Batch Script (*.bat;*.cmd)|*.bat;*.cmd|DOT (*.dot)|" )
-	                      wxT( "*.dot|DSP56K Assembly (*.56k)|*.56k|Editra Style Sheet (*.ess)|*.ess|Edje (*.edc)|*.edc|Eiffel (*.e)|*.e|Erlang (*.erl)|*.erl|" )
-	                      wxT( "Ferite (*.fe)|*.fe|FlagShip (*.prg)|*.prg|Forth (*.4th;*.fs;*.fth;*.seq)|*.4th;*.fs;*.fth;*.seq|Fortran 77 (*.f;*.for)|*.f;*.for|" )
-	                      wxT( "Fortran 95 (*.f2k;*.f90;*.f95;*.fpp)|*.f2k;*.f90;*.f95;*.fpp|GLSL (*.frag;*.glsl;*.vert)|*.frag;*.glsl;*.vert|" )
-	                      wxT( "GNU Assembly (*.gasm)|*.gasm|Groovy (*.groovy)|*.groovy|Gui4Cli (*.gc;*.gui)|*.gc;*.gui|Haskell (*.hs)|*.hs|HaXe (*.hx;*.hxml)|" )
-	                      wxT( "*.hx;*.hxml|HTML (*.htm;*.html;*.shtm;*.shtml;*.xhtml)|*.htm;*.html;*.shtm;*.shtml;*.xhtml|Inno Setup Script (*.iss)|*.iss|" )
-	                      wxT( "IssueList (*.isl)|*.isl|Java (*.java)|*.java|JavaScript (*.js)|*.js|Kix (*.kix)|*.kix|Korn Shell Script (*.ksh)|*.ksh|" )
-	                      wxT( "LaTeX (*.aux;*.sty;*.tex)|*.aux;*.sty;*.tex|Lisp (*.cl;*.lisp)|*.cl;*.lisp|Lout (*.lt)|*.lt|Lua (*.lua)|*.lua|Mako (*.mako;*.mao)|" )
-	                      wxT( "*.mako;*.mao|MASM (*.asm;*.masm)|*.asm;*.masm|Matlab (*.matlab)|*.matlab|Microsoft SQL (*.mssql)|*.mssql|Netwide Assembler (*.nasm)|" )
-	                      wxT( "*.nasm|newLISP (*.lsp)|*.lsp|NONMEM Control Stream (*.ctl)|*.ctl|Nullsoft Installer Script (*.nsh;*.nsi)|*.nsh;*.nsi|" )
-	                      wxT( "Objective C (*.m;*.mm)|*.m;*.mm|Octave (*.oct;*.octave)|*.oct;*.octave|OOC (*.ooc)|*.ooc|Pascal (*.dfm;*.dpk;*.dpr;*.inc;*.p;*.pas;*.pp)|" )
-	                      wxT( "*.dfm;*.dpk;*.dpr;*.inc;*.p;*.pas;*.pp|Perl (*.cgi;*.pl;*.pm;*.pod)|*.cgi;*.pl;*.pm;*.pod|PHP (*.php;*.php3;*.phtm;*.phtml)|" )
-	                      wxT( "*.php;*.php3;*.phtm;*.phtml|Pike (*.pike)|*.pike|PL/SQL (*.plsql)|*.plsql|Plain Text (*.txt)|*.txt|Postscript (*.ai;*.ps)|" )
-	                      wxT( "*.ai;*.ps|Progress 4GL (*.4gl)|*.4gl|Properties (*.cfg;*.cnf;*.inf;*.ini;*.reg;*.url)|*.cfg;*.cnf;*.inf;*.ini;*.reg;*.url|" )
-	                      wxT( "Python (*.py;*.python;*.pyw)|*.py;*.python;*.pyw|R (*.r)|*.r|Ruby (*.gemspec;*.rake;*.rb;*.rbw;*.rbx)|*.gemspec;*.rake;*.rb;*.rbw;*.rbx|" )
-	                      wxT( "S (*.s)|*.s|Scheme (*.scm;*.smd;*.ss)|*.scm;*.smd;*.ss|Smalltalk (*.st)|*.st|SQL (*.sql)|*.sql|Squirrel (*.nut)|*.nut|Stata (*.ado;*.do)|" )
-	                      wxT( "*.ado;*.do|System Verilog (*.sv;*.svh)|*.sv;*.svh|Tcl/Tk (*.itcl;*.tcl;*.tk)|*.itcl;*.tcl;*.tk|Vala (*.vala)|*.vala|" )
-	                      wxT( "VBScript (*.dsm;*.vbs)|*.dsm;*.vbs|Verilog (*.v)|*.v|VHDL (*.vh;*.vhd;*.vhdl)|*.vh;*.vhd;*.vhdl|Visual Basic (*.bas;*.cls;*.frm;*.vb)|" )
-	                      wxT( "*.bas;*.cls;*.frm;*.vb|XML (*.axl;*.dtd;*.plist;*.rdf;*.svg;*.xml;*.xrc;*.xsd;*.xsl;*.xslt;*.xul)|*.axl;*.dtd;*.plist;*.rdf;*.svg;*.xml;" )
-	                      wxT( "*.xrc;*.xsd;*.xsl;*.xslt;*.xul|Xtext (*.xtext)|*.xtext|YAML (*.yaml;*.yml)|*.yaml;*.yml" );
+						  wxT( "ActionScript (*.as;*.asc;*.mx)|*.as;*.asc;*.mx|Ada (*.a;*.ada;*.adb;*.ads)|*.a;*.ada;*.adb;*.ads|Apache Conf (*.conf;*.htaccess)|" )
+						  wxT( "*.conf;*.htaccess|Bash Shell Script (*.bsh;*.configure;*.sh)|*.bsh;*.configure;*.sh|Boo (*.boo)|*.boo|C (*.c;*.h)|*.c;*.h|" )
+						  wxT( "C# (*.cs)|*.cs|C-Shell Script (*.csh)|*.csh|Caml (*.ml;*.mli)|*.ml;*.mli|Cascading Style Sheet (*.css)|*.css|" )
+						  wxT( "Cilk (*.cilk;*.cilkh)|*.cilk;*.cilkh|Cobra (*.cobra)|*.cobra|ColdFusion (*.cfc;*.cfm;*.cfml;*.dbm)|*.cfc;*.cfm;*.cfml;*.dbm|" )
+						  wxT( "CPP (*.c++;*.cc;*.cpp;*.cxx;*.h++;*.hh;*.hpp;*.hxx)|*.c++;*.cc;*.cpp;*.cxx;*.h++;*.hh;*.hpp;*.hxx|D (*.d)|*.d|" )
+						  wxT( "Diff File (*.diff;*.patch)|*.diff;*.patch|Django (*.django)|*.django|DOS Batch Script (*.bat;*.cmd)|*.bat;*.cmd|DOT (*.dot)|" )
+						  wxT( "*.dot|DSP56K Assembly (*.56k)|*.56k|Editra Style Sheet (*.ess)|*.ess|Edje (*.edc)|*.edc|Eiffel (*.e)|*.e|Erlang (*.erl)|*.erl|" )
+						  wxT( "Ferite (*.fe)|*.fe|FlagShip (*.prg)|*.prg|Forth (*.4th;*.fs;*.fth;*.seq)|*.4th;*.fs;*.fth;*.seq|Fortran 77 (*.f;*.for)|*.f;*.for|" )
+						  wxT( "Fortran 95 (*.f2k;*.f90;*.f95;*.fpp)|*.f2k;*.f90;*.f95;*.fpp|GLSL (*.frag;*.glsl;*.vert)|*.frag;*.glsl;*.vert|" )
+						  wxT( "GNU Assembly (*.gasm)|*.gasm|Groovy (*.groovy)|*.groovy|Gui4Cli (*.gc;*.gui)|*.gc;*.gui|Haskell (*.hs)|*.hs|HaXe (*.hx;*.hxml)|" )
+						  wxT( "*.hx;*.hxml|HTML (*.htm;*.html;*.shtm;*.shtml;*.xhtml)|*.htm;*.html;*.shtm;*.shtml;*.xhtml|Inno Setup Script (*.iss)|*.iss|" )
+						  wxT( "IssueList (*.isl)|*.isl|Java (*.java)|*.java|JavaScript (*.js)|*.js|Kix (*.kix)|*.kix|Korn Shell Script (*.ksh)|*.ksh|" )
+						  wxT( "LaTeX (*.aux;*.sty;*.tex)|*.aux;*.sty;*.tex|Lisp (*.cl;*.lisp)|*.cl;*.lisp|Lout (*.lt)|*.lt|Lua (*.lua)|*.lua|Mako (*.mako;*.mao)|" )
+						  wxT( "*.mako;*.mao|MASM (*.asm;*.masm)|*.asm;*.masm|Matlab (*.matlab)|*.matlab|Microsoft SQL (*.mssql)|*.mssql|Netwide Assembler (*.nasm)|" )
+						  wxT( "*.nasm|newLISP (*.lsp)|*.lsp|NONMEM Control Stream (*.ctl)|*.ctl|Nullsoft Installer Script (*.nsh;*.nsi)|*.nsh;*.nsi|" )
+						  wxT( "Objective C (*.m;*.mm)|*.m;*.mm|Octave (*.oct;*.octave)|*.oct;*.octave|OOC (*.ooc)|*.ooc|Pascal (*.dfm;*.dpk;*.dpr;*.inc;*.p;*.pas;*.pp)|" )
+						  wxT( "*.dfm;*.dpk;*.dpr;*.inc;*.p;*.pas;*.pp|Perl (*.cgi;*.pl;*.pm;*.pod)|*.cgi;*.pl;*.pm;*.pod|PHP (*.php;*.php3;*.phtm;*.phtml)|" )
+						  wxT( "*.php;*.php3;*.phtm;*.phtml|Pike (*.pike)|*.pike|PL/SQL (*.plsql)|*.plsql|Plain Text (*.txt)|*.txt|Postscript (*.ai;*.ps)|" )
+						  wxT( "*.ai;*.ps|Progress 4GL (*.4gl)|*.4gl|Properties (*.cfg;*.cnf;*.inf;*.ini;*.reg;*.url)|*.cfg;*.cnf;*.inf;*.ini;*.reg;*.url|" )
+						  wxT( "Python (*.py;*.python;*.pyw)|*.py;*.python;*.pyw|R (*.r)|*.r|Ruby (*.gemspec;*.rake;*.rb;*.rbw;*.rbx)|*.gemspec;*.rake;*.rb;*.rbw;*.rbx|" )
+						  wxT( "S (*.s)|*.s|Scheme (*.scm;*.smd;*.ss)|*.scm;*.smd;*.ss|Smalltalk (*.st)|*.st|SQL (*.sql)|*.sql|Squirrel (*.nut)|*.nut|Stata (*.ado;*.do)|" )
+						  wxT( "*.ado;*.do|System Verilog (*.sv;*.svh)|*.sv;*.svh|Tcl/Tk (*.itcl;*.tcl;*.tk)|*.itcl;*.tcl;*.tk|Vala (*.vala)|*.vala|" )
+						  wxT( "VBScript (*.dsm;*.vbs)|*.dsm;*.vbs|Verilog (*.v)|*.v|VHDL (*.vh;*.vhd;*.vhdl)|*.vh;*.vhd;*.vhdl|Visual Basic (*.bas;*.cls;*.frm;*.vb)|" )
+						  wxT( "*.bas;*.cls;*.frm;*.vb|XML (*.axl;*.dtd;*.plist;*.rdf;*.svg;*.xml;*.xrc;*.xsd;*.xsl;*.xslt;*.xul)|*.axl;*.dtd;*.plist;*.rdf;*.svg;*.xml;" )
+						  wxT( "*.xrc;*.xsd;*.xsl;*.xslt;*.xul|Xtext (*.xtext)|*.xtext|YAML (*.yaml;*.yml)|*.yaml;*.yml" );
 	wxFileDialog dlg( this, _( "Open File" ), dir, wxEmptyString, fileFilter,
 #if wxCHECK_VERSION(2,8,0)
-	                  wxFD_OPEN | wxFD_MULTIPLE );
+					  wxFD_OPEN | wxFD_MULTIPLE );
 #else
-	                  wxOPEN | wxMULTIPLE );
+					  wxOPEN | wxMULTIPLE );
 #endif
 	// Hide Modaless Dialog
 	HideModalessDialogs();
@@ -4785,13 +4786,13 @@ void MadEditFrame::OnFilePrintPreview( wxCommandEvent& event )
 	else
 	{
 		wxPreviewFrame *frame = new wxPreviewFrame( preview, this, _( "MadEdit Print Preview" ),
-		        wxPoint( 0, 0 ),
+				wxPoint( 0, 0 ),
 #ifdef __WXMSW__
-		        wxSize( 600, 720 )
+				wxSize( 600, 720 )
 #else
-		        wxSize( 600, 620 )
+				wxSize( 600, 620 )
 #endif
-		                                          );
+												  );
 		frame->Centre( wxBOTH );
 		frame->Initialize();
 		frame->Show();
@@ -4825,9 +4826,9 @@ private:
 	DECLARE_EVENT_TABLE()
 public:
 	TempPrintDialog( wxWindow *parent, wxWindowID id = 1, const wxString &title = wxT( "TopPrintDialog" ),
-	                 const wxPoint& pos = wxPoint( 10, 10 ), //wxDefaultPosition,
-	                 const wxSize& size = wxSize( 1, 1 ), //wxDefaultSize,
-	                 long style = wxDIALOG_NO_PARENT )
+					 const wxPoint& pos = wxPoint( 10, 10 ), //wxDefaultPosition,
+					 const wxSize& size = wxSize( 1, 1 ), //wxDefaultSize,
+					 long style = wxDIALOG_NO_PARENT )
 		: wxDialog( parent, id, title, pos, size, style ), m_Printed( false ) { }
 	virtual ~TempPrintDialog() { }
 
@@ -5155,9 +5156,9 @@ void MadEditFrame::OnEditSortByOptions( wxCommandEvent& event )
 		m_Config->Read( wxT( "SortRemoveDup" ), &rem, false );
 		m_Config->SetPath( oldpath );
 		MadSortFlags flags = order |
-		                     ( cs ? sfCaseSensitive : 0 ) |
-		                     ( num ? sfNumericSort : 0 ) |
-		                     ( rem ? sfRemoveDuplicate : 0 ) ;
+							 ( cs ? sfCaseSensitive : 0 ) |
+							 ( num ? sfNumericSort : 0 ) |
+							 ( rem ? sfRemoveDuplicate : 0 ) ;
 		int begin, end;
 		g_ActiveMadEdit->GetSelectionLineId( begin, end );
 		g_ActiveMadEdit->SortLines( flags, begin, end );
@@ -5197,9 +5198,9 @@ void MadEditFrame::OnEditSortOptions( wxCommandEvent& event )
 		m_Config->Write( wxT( "SortNumeric" ), num );
 		m_Config->Write( wxT( "SortRemoveDup" ), rem );
 		int flags = order |
-		            ( cs ? sfCaseSensitive : 0 ) |
-		            ( num ? sfNumericSort : 0 ) |
-		            ( rem ? sfRemoveDuplicate : 0 ) ;
+					( cs ? sfCaseSensitive : 0 ) |
+					( num ? sfNumericSort : 0 ) |
+					( rem ? sfRemoveDuplicate : 0 ) ;
 		int begin, end;
 		g_ActiveMadEdit->GetSelectionLineId( begin, end );
 		g_ActiveMadEdit->SortLines( flags, begin, end );
@@ -5358,16 +5359,16 @@ void MadEditFrame::OnEditToHalfWidthByOptions( wxCommandEvent& event )
 	}
 
 	wxString choices[4] = { _( "ASCII characters" ), _( "Japanese characters" ),
-	                        _( "Korean characters" ), _( "other characters" )
-	                      };
+							_( "Korean characters" ), _( "other characters" )
+						  };
 #if (wxMAJOR_VERSION == 2)
 	size_t sels = wxGetSelectedChoices( selections,
-	                                    _( "Choose the characters you want to convert:" ), _( "To Halfwidth by Options..." ),
-	                                    4, choices, this );
+										_( "Choose the characters you want to convert:" ), _( "To Halfwidth by Options..." ),
+										4, choices, this );
 #else
 	int sels = wxGetSelectedChoices( selections,
-	                                 _( "Choose the characters you want to convert:" ), _( "To Halfwidth by Options..." ),
-	                                 4, choices, this );
+									 _( "Choose the characters you want to convert:" ), _( "To Halfwidth by Options..." ),
+									 4, choices, this );
 #endif
 
 	if( sels > 0 )
@@ -5390,7 +5391,7 @@ void MadEditFrame::OnEditToHalfWidthByOptions( wxCommandEvent& event )
 
 		g_ActiveMadEdit->ToHalfWidth( ascii, japanese, korean, other );
 		RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "ToHalfWidth(%s, %s, %s)" ), ascii ? wxT( "True" ) : wxT( "False" ),
-		                  japanese ? wxT( "True" ) : wxT( "False" ), korean ? wxT( "True" ) : wxT( "False" ), other ? wxT( "True" ) : wxT( "False" ) ) );
+						  japanese ? wxT( "True" ) : wxT( "False" ), korean ? wxT( "True" ) : wxT( "False" ), other ? wxT( "True" ) : wxT( "False" ) ) );
 	}
 }
 
@@ -5420,16 +5421,16 @@ void MadEditFrame::OnEditToFullWidthByOptions( wxCommandEvent& event )
 	}
 
 	wxString choices[4] = { _( "ASCII characters" ), _( "Japanese characters" ),
-	                        _( "Korean characters" ), _( "other characters" )
-	                      };
+							_( "Korean characters" ), _( "other characters" )
+						  };
 #if (wxMAJOR_VERSION == 2)
 	size_t sels = wxGetSelectedChoices( selections,
-	                                    _( "Choose the characters you want to convert:" ), _( "To Fullwidth by Options..." ),
-	                                    4, choices, this );
+										_( "Choose the characters you want to convert:" ), _( "To Fullwidth by Options..." ),
+										4, choices, this );
 #else
 	int sels = wxGetSelectedChoices( selections,
-	                                 _( "Choose the characters you want to convert:" ), _( "To Fullwidth by Options..." ),
-	                                 4, choices, this );
+									 _( "Choose the characters you want to convert:" ), _( "To Fullwidth by Options..." ),
+									 4, choices, this );
 #endif
 
 	if( sels > 0 )
@@ -5452,7 +5453,7 @@ void MadEditFrame::OnEditToFullWidthByOptions( wxCommandEvent& event )
 
 		g_ActiveMadEdit->ToFullWidth( ascii, japanese, korean, other );
 		RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "ToFullWidth(%s, %s, %s)" ), ascii ? wxT( "True" ) : wxT( "False" ),
-		                  japanese ? wxT( "True" ) : wxT( "False" ), korean ? wxT( "True" ) : wxT( "False" ), other ? wxT( "True" ) : wxT( "False" ) ) );
+						  japanese ? wxT( "True" ) : wxT( "False" ), korean ? wxT( "True" ) : wxT( "False" ), other ? wxT( "True" ) : wxT( "False" ) ) );
 	}
 }
 
@@ -5533,8 +5534,8 @@ void MadEditFrame::OnEditInsertNumbers( wxCommandEvent& event )
 			MadNumberFormat numFormat = nfDEC;
 			MadNumberAlign numAlign = naLeft;
 			wxString strStepType( wxT( "MadNumberingStepType.Linear" ) ),
-			         strFormat( wxT( "MadNumberFormat.DEC" ) ),
-			         strAlign( wxT( "MadNumberAlign.Left" ) );
+					 strFormat( wxT( "MadNumberFormat.DEC" ) ),
+					 strAlign( wxT( "MadNumberAlign.Left" ) );
 			int sel = g_MadNumberDlg->WxChoiceNumberStepType->GetSelection();
 
 			switch( sel )
@@ -5603,8 +5604,8 @@ void MadEditFrame::OnEditInsertNumbers( wxCommandEvent& event )
 			g_ActiveMadEdit->InsertIncrementalNumber( initialNum, numStep, totalChar, numStepType, numFormat, numAlign, g_MadNumberDlg->WxPadChar->GetValue(), prefix, postfix );
 			g_ActiveMadEdit->Refresh( false );
 			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "InsertIncrementalNumber(%s, %s, %s, %s, %s, %s, %s, \"%s\", \"%s\")" ),
-			                  wxLongLong( initialNum ).ToString().c_str(), wxLongLong( numStep ).ToString().c_str(), wxLongLong( totalChar ).ToString().c_str(), strStepType.c_str(), strFormat.c_str(), strAlign.c_str(),
-			                  g_MadNumberDlg->WxPadChar->GetValue() ? wxT( "True" ) : wxT( "False" ), prefix.c_str(), postfix.c_str() ) );
+							  wxLongLong( initialNum ).ToString().c_str(), wxLongLong( numStep ).ToString().c_str(), wxLongLong( totalChar ).ToString().c_str(), strStepType.c_str(), strFormat.c_str(), strAlign.c_str(),
+							  g_MadNumberDlg->WxPadChar->GetValue() ? wxT( "True" ) : wxT( "False" ), prefix.c_str(), postfix.c_str() ) );
 		}
 	}
 }
@@ -6231,8 +6232,8 @@ void MadEditFrame::OnViewPreview( wxCommandEvent& event )
 		else
 		{
 			m_HtmlPreview = new wxHtmlWindow( this, wxID_ANY,
-			                                  wxDefaultPosition,
-			                                  wxSize( 400, 300 ) );
+											  wxDefaultPosition,
+											  wxSize( 400, 300 ) );
 			m_AuiManager.AddPane( m_HtmlPreview, wxAuiPaneInfo().Name( wxT( "Markdown/HTML Preview" ) ).Caption( _( "Markdown/HTML Preview" ) ).Floatable( false ).Right().CloseButton( false ) );
 			long style = wxAUI_TB_NO_TOOLTIPS;
 			m_RefreshView = new wxAuiToolBar( this, ID_WXTOOLBAR1 + tbMAX + 1, wxPoint( 0, 0 ), wxSize( 392, 29 ), style );
@@ -6736,7 +6737,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		}
 
 		if( SpellCheckerManager::Instance().GetEnablePersonalDictionary()
-		        != g_OptionsDialog->WxCheckBoxPersonalDict->GetValue() )
+				!= g_OptionsDialog->WxCheckBoxPersonalDict->GetValue() )
 		{
 			SpellCheckerManager::Instance().SetEnablePersonalDictionary( g_OptionsDialog->WxCheckBoxPersonalDict->GetValue() );
 		}
@@ -7185,9 +7186,9 @@ void MadEditFrame::OnToolsRunMacroFile( wxCommandEvent& event )
 	wxString fileFilter = wxString( wxT( "Mad Macro(*.mpy)|*.mpy|" ) ) + wxFileSelectorDefaultWildcardStr + wxT( "|All files(*;*.*)" );
 	wxFileDialog dlg( this, _( "Open Mad Macro File" ), dir, wxEmptyString, fileFilter,
 #if wxCHECK_VERSION(2,8,0)
-	                  wxFD_OPEN | wxFD_FILE_MUST_EXIST );
+					  wxFD_OPEN | wxFD_FILE_MUST_EXIST );
 #else
-	                  wxOPEN );
+					  wxOPEN );
 #endif
 	dlg.SetFilterIndex( filterIndex );
 
@@ -7410,9 +7411,9 @@ void MadEditFrame::OnToolsEditMacroFile( wxCommandEvent& event )
 	wxString fileFilter = wxString( wxT( "Mad Macro(*.mpy)|*.mpy|" ) ) + wxFileSelectorDefaultWildcardStr + wxT( "|All files(*;*.*)" );
 	wxFileDialog dlg( this, _( "Edit Mad Macro File" ), dir, wxEmptyString, fileFilter,
 #if wxCHECK_VERSION(2,8,0)
-	                  wxFD_OPEN | wxFD_FILE_MUST_EXIST );
+					  wxFD_OPEN | wxFD_FILE_MUST_EXIST );
 #else
-	                  wxOPEN );
+					  wxOPEN );
 #endif
 	dlg.SetFilterIndex( filterIndex );
 
@@ -7537,15 +7538,15 @@ void MadEditFrame::OnToolsConvertEncoding( wxCommandEvent& event )
 	if( g_ConvEncDialog->ShowModal() == wxID_OK )
 	{
 		g_ActiveMadEdit->ConvertEncoding( g_ConvEncDialog->WxComboBoxEncoding->GetValue(),
-		                                  MadConvertEncodingFlag( g_ConvEncDialog->WxRadioBoxOption->GetSelection() ) );
+										  MadConvertEncodingFlag( g_ConvEncDialog->WxRadioBoxOption->GetSelection() ) );
 		RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "ConvertEncoding(%s, %d)" ), g_ConvEncDialog->WxComboBoxEncoding->GetValue().c_str(),
-		                  MadConvertEncodingFlag( g_ConvEncDialog->WxRadioBoxOption->GetSelection() ) ) );
+						  MadConvertEncodingFlag( g_ConvEncDialog->WxRadioBoxOption->GetSelection() ) ) );
 		wxString oldpath = m_Config->GetPath();
 		m_Config->SetPath( wxT( "/MadEdit" ) );
 		m_Config->Write( wxT( "/MadEdit/ConvertEncoding" ), g_ConvEncDialog->WxComboBoxEncoding->GetValue() );
 		m_Config->SetPath( oldpath );
 		wxString str = wxString( wxT( '[' ) ) + g_ActiveMadEdit->GetEncodingName() + wxT( "] " ) +
-		               wxGetTranslation( g_ActiveMadEdit->GetEncodingDescription().c_str() );
+					   wxGetTranslation( g_ActiveMadEdit->GetEncodingDescription().c_str() );
 		m_RecentEncodings->AddFileToHistory( str );
 		int size;
 		g_ActiveMadEdit->GetFont( str, size );
@@ -7871,8 +7872,8 @@ void MadEditFrame::OnWindowToggleWindow( wxCommandEvent& event )
 	g_CheckModTimeForReload = false;
 
 	if( g_PrevPageID >= 0 &&
-	        g_PrevPageID <  count &&
-	        g_PrevPageID != selid )
+			g_PrevPageID <  count &&
+			g_PrevPageID != selid )
 	{
 		m_Notebook->SetSelection( g_PrevPageID );
 		g_PrevPageID = selid;
@@ -7945,9 +7946,9 @@ void MadEditFrame::OnHelpAbout( wxCommandEvent& event )
 {
 	MadAboutDialog dlg( this );
 	dlg.WxMemo1->AppendText( g_MadEdit_Version + wxT( "\n" ) +
-	                         g_MadEditMod_URL + wxT( "\n\n" ) +
-	                         _( "Download dictionary at\nhttp://extensions.openoffice.org/" ) + wxT( "\n\n" ) +
-	                         _( "Press OK to visit our HomePage." ) );
+							 g_MadEditMod_URL + wxT( "\n\n" ) +
+							 _( "Download dictionary at\nhttp://extensions.openoffice.org/" ) + wxT( "\n\n" ) +
+							 _( "Press OK to visit our HomePage." ) );
 	// Hide Modaless Dialog
 	HideModalessDialogs();
 
@@ -8204,7 +8205,7 @@ void MadEditFrame::OnSearchQuickFindPrevious( wxCommandEvent& event )
 		}
 
 		sr = g_ActiveMadEdit->FindTextPrevious( m_QuickSearch->GetValue(), m_CheckboxRegEx->GetValue(),
-		                                        m_CheckboxCaseSensitive->GetValue(), m_CheckboxWholeWord->GetValue(), rangeFrom, rangeTo );
+												m_CheckboxCaseSensitive->GetValue(), m_CheckboxWholeWord->GetValue(), rangeFrom, rangeTo );
 
 		if( sr == SR_NO )
 		{
@@ -8258,7 +8259,7 @@ void MadEditFrame::OnSearchQuickFindNext( wxCommandEvent& event )
 		}
 
 		sr = g_ActiveMadEdit->FindTextNext( m_QuickSearch->GetValue(), m_CheckboxRegEx->GetValue(),
-		                                    m_CheckboxCaseSensitive->GetValue(), m_CheckboxWholeWord->GetValue(), rangeFrom, rangeTo );
+											m_CheckboxCaseSensitive->GetValue(), m_CheckboxWholeWord->GetValue(), rangeFrom, rangeTo );
 
 		if( sr == SR_NO )
 		{
@@ -8286,8 +8287,8 @@ void MadEditFrame::OnSearchQuickFindNext( wxCommandEvent& event )
 END_EVENT_TABLE()
 
 MadTreeCtrl::MadTreeCtrl( wxWindow *parent, const wxWindowID id,
-                          const wxPoint& pos, const wxSize& size,
-                          long style )
+						  const wxPoint& pos, const wxSize& size,
+						  long style )
 	: wxTreeCtrl( parent, id, pos, size, style )
 {
 }

@@ -98,6 +98,7 @@
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
       <AdditionalDependencies>comctl32.lib;rpcrt4.lib;python27_d.lib;libboost_python-vc140-mt-sgyd-1_59.lib;libhunspell.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/ignore:4217 /ignore:4049 %(AdditionalOptions)</AdditionalOptions>
+      <Profile>true</Profile>
     </Link>
     <ResourceCompile />
   </ItemDefinitionGroup>
@@ -118,6 +119,7 @@
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
       <AdditionalDependencies>comctl32.lib;rpcrt4.lib;libboost_python-vc140-mt-sgyd-1_59.lib;python27_d.lib;libhunspell.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/ignore:4217 /ignore:4049 %(AdditionalOptions)</AdditionalOptions>
+      <Profile>true</Profile>
     </Link>
     <ResourceCompile />
   </ItemDefinitionGroup>

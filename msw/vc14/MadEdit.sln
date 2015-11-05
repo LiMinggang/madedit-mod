@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2013 for Windows Desktop
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MadEdit", "MadEdit.vcxproj", "{C9A98DDD-7807-401D-BA7C-C1C364F04276}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -14,6 +14,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libhunspell", "libhunspell.vcxproj", "{53609BB3-D874-465C-AF7B-DF626DB0D89B}"
 EndProject
 Global
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Unicode Debug|Win32 = Unicode Debug|Win32
 		Unicode Debug|x64 = Unicode Debug|x64

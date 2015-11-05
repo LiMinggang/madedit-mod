@@ -15,42 +15,30 @@ A. Linux, FreeBSD, and Unix-like OS (__WXGTK__):
       Required Libraries to compile:
       1. wxWidgets-3.0.2 or higher with Unicode and IPC enabled
       2. Boost-1.56.0 or higher(build Boost-Python)
-      3. Boost.Xpressive latest version
 
-      (gtk2-devel gtext-devel automake rpm-build)
+      (install gtk2-devel gtext-devel automake rpm-build)
       copy wxwin.m4 to usr/share/acloXXX/ or install wxGTK-devel
-
 
 B. MS Windows (__WXMSW__):
    a. MinGW32/GNU C++ 3.x (wxDevCpp):
       Required Libraries to compile:
       1. wxWidgets-3.0.2 or higher with Unicode enabled
       2. Boost-1.56.0 or higher(build Boost-Python)
-      3. Boost.Xpressive latest version
-      4. libunicows: it's optional under WinNT/XP, but required under Win98
    b. Visual C++ 7.1 (VS.Net 2005) or higher:
       Required Libraries to compile:
       1. wxWidgets-3.0.2 or higher with Unicode enabled
-      2. Boost-1.56.0 or higher(Source code is enough for MadEdit, build
-         Boost-Python)
-      3. Boost.Xpressive latest version
-      4. Set WXWIN and BOOST to the root directory of your local ones
+      2. Boost-1.56.0 or higher(build Boost-Python)
+      3. Set WXWIN and BOOST to the root directory of your local ones
 
 P.S.: Please put the debug info(.pdb) under the App directory in case there was a 
       crash happened. Paste the call stack and open a ticket
-P.S.: If you use CVS version of Boost, Boost.Xpressive has been included in the
-      CVS HEAD, or you must get 'xpressive.zip' at:
-      http://www.boost-consulting.com/vault/index.php?directory=Strings%20-%20Text%20Processing
-P.S.: wxAUIBook patch for wxWidgets 2.8.x
-      http://trac.wxwidgets.org/attachment/ticket/10848/
 P.S.: Don't forget to Copy wxwin.m4 to /usr/share/aclocal folder if you use your
       own build of wxWidgets
-P.S.: Install gettext-devel if you got AM_GNU_GETTEXT error
-
-P.S.: madedit.pot has been uploaded to the top directory. Any translation for
+P.S.: Install gettext-devel if you got AM_GNU_GETTEXT error under Linux
+P.S.: madedit.pot/po has been uploaded to the top directory. Any translation for
       MadEdit-Mod is welcome.
 P.S.: Please open a ticket for bug of MadEdit-Mod at 
-      http://sourceforge.net/projects/madedit-mod/
+      https://github.com/LiMinggang/madedit-mod/issues/
 
 MadEdit_Win2K is a build by VC++ 2005 express for Windows 2000.
 
@@ -76,9 +64,6 @@ Syntax files, Locale files, Dictionaries and Settings:
   If MadEdit does not find any files in those paths,
   MadEdit can also execute standalone by using default settings.
 
-  If you are under Win98, you must get unicows.dll from MS's website:
-  http://www.microsoft.com/downloads/details.aspx?FamilyId=73BA7BD7-ED06-4F0D-80A4-2A7EEAEE17E2&displaylang=en
-
   When quit MadEdit, MadEdit will save the settings to:
     1. $(HOME)/.madedit/madedit.cfg: Linux
     2. $(MadEdit execution file directory)/MadEdit.cfg: Windows
@@ -93,12 +78,14 @@ Syntax files, Locale files, Dictionaries and Settings:
   * Silent mode which can be used in scripting, no GUI will be shown
     [-h], help, Displays help on the command line parameters
     [-s], silent, Disables the GUI
+    [-x], eXit, Exit MadEdit(mark as done working with previous "Silent" instance! Can also close the UI)
     [-f], force, Edit and save file ignoring the ReadOnly flag
     [-m], madpython, Specify MadPython file to be run on the file
     [-r], recursive, Recursively run on files of subdirectories
     [-w], wildcard, Enable wildcard support in file name\n(line number would be disabled because it used '*')
     [files], File(s) to be opened
     Eg: madedit -s -m madpytho.mpy ./1.txt /tmp/2.txt
+    Make sure you use Single Instance with -s, -x!!
 
 Known issues:
 The Macro recording function will save all your commands to one document which
@@ -114,6 +101,11 @@ Note: Not support wxWidgets 2.X anymore since 0.3.X
 
 Todo:
 FreeBSD packaging (with FreeBSD 10.01)
+
+Mod v0.3.9
+1.Improve on change syntax on save as
+2. Fix: Improve mark brace issue(#15 in 0.3.8)
+
 
 Mod v0.3.8
 1.New: Upgrade boost to 1.59
