@@ -31,7 +31,7 @@
 #include "MadRecentList.h"
 #include "plugin.h"
 #include <wx/config.h>
-#include "wx/aui/auibook.h"
+#include <wx/aui/auibook.h>
 
 #include <wx/app.h>
 //#include <wx/dynload.h>

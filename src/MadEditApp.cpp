@@ -12,6 +12,7 @@
 #include "MadEdit/MadEdit.h"
 
 #include <algorithm>
+#include <map>
 
 #include <wx/display.h>
 #include <wx/dir.h>
@@ -34,7 +35,7 @@ extern int MadMessageBox(const wxString& message,
 #define new new(_NORMAL_BLOCK ,__FILE__, __LINE__)
 #endif
 
-wxLocale g_Locale;
+wxLocale * g_Locale = 0;
 
 wxString g_MadEditAppDir;
 wxString g_MadEditHomeDir;
@@ -47,8 +48,13 @@ bool g_DoNotSaveSettings=false;
 bool g_ResetAllKeys=false;
 bool g_ForcePurgeThisTime = false;
 
+wxArrayString g_LanguageString;
+wxArrayLong g_LanguageId;
+std::map<long, wxString> g_EnhancedLangNameMap;
+wxString g_MadLanguageFileName = wxT("madedit-mod");
+void ScanForLocales();
 
-wxChar *g_LanguageString[]=
+wxChar *g_LanguageStr[]=
 {
 	wxT("System Default"),
 	wxT("\u7B80\u4F53\u4E2D\u6587(Chinese Simplified)"),
@@ -90,6 +96,40 @@ extern const size_t g_LanguageCount = sizeof(g_LanguageValue)/sizeof(int);
 const wxString g_MadServerStr = wxT("MadMainApp");
 const wxString g_MadTopicStr = wxT("single-instance");
 
+class MadTranslationHelper : public wxDirTraverser
+{
+	wxString m_TransName;
+	std::map<long, wxString>& m_LanguageIdNameMap;
+public:
+	MadTranslationHelper(const wxString& transName, std::map<long, wxString>& langIdNameMap) :
+		m_TransName(transName), m_LanguageIdNameMap(langIdNameMap)
+	{}
+	~MadTranslationHelper(){};
+	virtual wxDirTraverseResult OnFile(const wxString& WXUNUSED(filename))
+    {
+         return wxDIR_CONTINUE;
+    }
+	virtual wxDirTraverseResult OnDir(const wxString& dirName)
+	{
+		const wxLanguageInfo * langinfo;
+		langinfo = wxLocale::FindLanguageInfo(dirName.AfterLast(wxFileName::GetPathSeparator()));
+		if(langinfo != NULL)
+		{
+			wxLogTrace(wxTraceMask(), _("SEARCHING FOR %s"),
+				wxString(dirName+wxFileName::GetPathSeparator()+
+				m_TransName+wxT(".mo")).GetData());
+			if(wxFileExists(dirName+wxFileName::GetPathSeparator()+
+				m_TransName+wxT(".mo")))
+			{
+				if(langinfo->Language != wxLANGUAGE_CHINESE)
+					m_LanguageIdNameMap[langinfo->Language] = langinfo->Description;
+				else
+					m_LanguageIdNameMap[wxLANGUAGE_CHINESE_TRADITIONAL] = langinfo->Description;
+			}
+		}
+		return wxDIR_CONTINUE;
+	}
+};
 #ifdef __WXGTK__
 
 // the codes of SingleInstance checking and
@@ -381,33 +421,13 @@ bool MadEditApp::OnInit()
 #endif
 
 	// init locale
-	wxString strlang;
-	cfg->Read(wxT("/MadEdit/Language"), &strlang);
-	int lang=g_LanguageValue[0];
-	if(!strlang.IsEmpty())
+	for(long i = 0; i < g_LanguageCount; ++i)
 	{
-		strlang.MakeLower();
-		for(size_t idx=1; idx<g_LanguageCount; ++idx)
-		{
-			if(strlang == wxString(g_LanguageString[idx]).Lower())
-			{
-				lang=g_LanguageValue[idx];
-				break;
-			}
-		}
+		g_EnhancedLangNameMap[g_LanguageValue[i]] = wxString(g_LanguageStr[i]);
 	}
 
-	g_Locale.Init(lang);
-	g_Locale.AddCatalogLookupPathPrefix(wxT("./locale/"));
-	g_Locale.AddCatalogLookupPathPrefix(g_MadEditAppDir+wxT("locale/"));
-#ifndef __WXMSW__
-	g_Locale.AddCatalogLookupPathPrefix(g_MadEditHomeDir+wxT("locale/"));
-#if defined (DATA_DIR)
-	g_Locale.AddCatalogLookupPathPrefix(wxT(DATA_DIR"/locale/"));
-#endif
-
-#endif
-	g_Locale.AddCatalog(wxT("madedit-mod"));
+	ScanForLocales();
+	InitLocale();
 
 	// set colors
 	SetHtmlColors();
@@ -458,60 +478,8 @@ bool MadEditApp::OnInit()
 	MadEditFrame *myFrame = new MadEditFrame(NULL, 1 , wxEmptyString, pos, size);
 
 	if(!m_SilentMode)
-	{
-		SetTopWindow(myFrame);
-
-#ifdef __WXMSW__
-		//if(maximize)	  // removed: gogo, 30.08.2009
-		{
-			WINDOWPLACEMENT wp;
-			wp.length=sizeof(WINDOWPLACEMENT);
-			GetWindowPlacement((HWND)myFrame->GetHWND(), &wp);
-
-		   // changed: gogo, 30.08.2009
-		   //wp.showCmd=SW_SHOWMAXIMIZED;
-		   wp.showCmd = maximize ? SW_SHOWMAXIMIZED : SW_SHOWNORMAL;
-
-		   SetWindowPlacement((HWND)myFrame->GetHWND(), &wp);
-		}
-#endif
-
-		myFrame->Show(true);
-
-		// reload files previously opened
-		wxString files;
-		cfg->Read(wxT("/MadEdit/ReloadFilesList"), &files);
-		
-		if(!files.IsEmpty())
-		{
-			// use OnReceiveMessage() to open the files
-			OnReceiveMessage(files.c_str(), (files.size()+1)*sizeof(wxChar));
-		}
-
-		files.Empty();
-		for(size_t i=0; i<m_FileNames.GetCount(); ++i)
-		{
-			//The name is what follows the last \ or /
-			files +=  m_FileNames[i] + wxT('|');
-		}
-
-		if(!files.IsEmpty())
-		{
-			if(!m_MadPythonScript.IsEmpty())
-			{
-				files += wxT("*s");
-				if(m_ForceEdit)
-					files += wxT("*f");
-				files += wxT("*m")+m_MadPythonScript;
-			}
-			// use OnReceiveMessage() to open the files
-			OnReceiveMessage(files.c_str(), (files.size()+1)*sizeof(wxChar));
-		}
-
-		if(myFrame->OpenedFileCount()==0)
-		{
-			myFrame->OpenFile(wxEmptyString, false);
-		}
+	{   
+		ShowMainFrame(myFrame, maximize);
 	}
 	else
 	{
@@ -541,6 +509,11 @@ bool MadEditApp::OnInit()
 				scriptfile.Close();
 			}
 		}
+		if(!bSingleInstance)
+		{
+			OnExit(); // Clean up
+			return false;
+		}
 		// Waiting for -x to close
 	}
 
@@ -554,6 +527,8 @@ int MadEditApp::OnExit()
 		delete m_SigleAppChecker;
 	if(m_AppServer)
 		delete m_AppServer;
+	if(g_Locale)
+		delete g_Locale;
 
 	return 0;
 }
@@ -578,7 +553,7 @@ bool MadEditApp::OnCmdLineParsed(wxCmdLineParser& cmdParser)
 	// to get at your unnamed parameters use GetParam
 	int flags=wxDIR_FILES|wxDIR_HIDDEN;
 	wxString fname;
-	for (int i = 0; i < cmdParser.GetParamCount(); i++)
+	for (size_t i = 0; i < cmdParser.GetParamCount(); i++)
 	{
 		filename = cmdParser.GetParam(i);
 		filename.MakeAbsolute();
@@ -671,4 +646,159 @@ void MadEditApp::OnFatalException()
 }
 #endif
 
+void MadEditApp::ShowMainFrame(MadEditFrame *mainFrame, bool maximize)
+{
+    if(mainFrame)
+    {
+		SetTopWindow(mainFrame);
+
+#ifdef __WXMSW__
+		//if(maximize)	  // removed: gogo, 30.08.2009
+		{
+			WINDOWPLACEMENT wp;
+			wp.length=sizeof(WINDOWPLACEMENT);
+			GetWindowPlacement((HWND)mainFrame->GetHWND(), &wp);
+
+		   // changed: gogo, 30.08.2009
+		   //wp.showCmd=SW_SHOWMAXIMIZED;
+		   wp.showCmd = maximize ? SW_SHOWMAXIMIZED : SW_SHOWNORMAL;
+
+		   SetWindowPlacement((HWND)mainFrame->GetHWND(), &wp);
+		}
+#endif
+
+		mainFrame->Show(true);
+
+		// reload files previously opened
+		wxString files;
+		wxConfigBase *cfg=wxConfigBase::Get(false);
+		cfg->Read(wxT("/MadEdit/ReloadFilesList"), &files);
+		
+		if(!files.IsEmpty())
+		{
+			// use OnReceiveMessage() to open the files
+			OnReceiveMessage(files.c_str(), (files.size()+1)*sizeof(wxChar));
+		}
+
+		files.Empty();
+		for(size_t i=0; i<m_FileNames.GetCount(); ++i)
+		{
+			//The name is what follows the last \ or /
+			files +=  m_FileNames[i] + wxT('|');
+		}
+
+		if(!files.IsEmpty())
+		{
+			if(!m_MadPythonScript.IsEmpty())
+			{
+				files += wxT("*s");
+				if(m_ForceEdit)
+					files += wxT("*f");
+				files += wxT("*m")+m_MadPythonScript;
+			}
+			// use OnReceiveMessage() to open the files
+			OnReceiveMessage(files.c_str(), (files.size()+1)*sizeof(wxChar));
+		}
+
+		if(mainFrame->OpenedFileCount()==0)
+		{
+			mainFrame->OpenFile(wxEmptyString, false);
+		}
+	}
+}
+
+void ScanForLocales()
+{
+	g_LanguageString.Empty();
+	g_LanguageString.Add(g_LanguageStr[0]);
+	g_LanguageId.Add(wxLANGUAGE_DEFAULT);
+	std::map<long, wxString> languageIdNameMap;
+	MadTranslationHelper langScaner(g_MadLanguageFileName, languageIdNameMap);
+
+	wxASSERT(!g_MadEditAppDir.IsEmpty());
+	wxString searchPath(g_MadEditAppDir+wxT("locale/"));
+	if(!wxDir::Exists(searchPath))
+	{
+		wxLogTrace(wxTraceMask(), _("Directory %s DOES NOT EXIST !!!"),
+			searchPath.GetData());
+		return;
+	}
+	wxDir dir(searchPath);
+	int flags=wxDIR_DIRS;
+	dir.Traverse(langScaner, wxEmptyString, flags);
+#ifndef __WXMSW__
+	wxASSERT(!g_MadEditHomeDir.IsEmpty());
+	searchPath = g_MadEditHomeDir+wxT("locale/");
+	if(!wxDir::Exists(searchPath))
+	{
+		wxLogTrace(wxTraceMask(), _("Directory %s DOES NOT EXIST !!!"),
+			searchPath.GetData());
+		return;
+	}
+	dir = searchPath;
+	dir.Traverse(langScaner, wxEmptyString, flags);
+#if defined (DATA_DIR)
+	searchPath = (wxT(DATA_DIR"/locale/"));
+	if(!wxDir::Exists(searchPath))
+	{
+		wxLogTrace(wxTraceMask(), _("Directory %s DOES NOT EXIST !!!"),
+			searchPath.GetData());
+		return;
+	}
+	dir = searchPath;
+	dir.Traverse(langScaner, wxEmptyString, flags);
+#endif
+#endif
+	std::map<long, wxString>::iterator it = languageIdNameMap.begin();
+	while(it != languageIdNameMap.end())
+	{
+		std::map<long, wxString>::iterator it_tmp = g_EnhancedLangNameMap.find(it->first);
+		if(it_tmp != g_EnhancedLangNameMap.end())
+		{
+			g_LanguageString.Add(it_tmp->second);
+		}
+		++it;
+	}
+	/*for(size_t i = 1; i < g_LanguageCount; ++i)
+	{
+		g_LanguageString.Add(g_LanguageStr[i]);
+	}*/
+}
+
+void MadEditApp::InitLocale()
+{
+	wxString strlang;
+	wxConfigBase *cfg=wxConfigBase::Get(false);
+	cfg->Read(wxT("/MadEdit/Language"), &strlang);
+	int lang=g_LanguageValue[0];
+	if(!strlang.IsEmpty())
+	{
+		strlang.MakeLower();
+		for(size_t idx=1; idx<g_LanguageString.GetCount(); ++idx)
+		{
+			if(strlang == g_LanguageString[idx].Lower())
+			{
+				lang=g_LanguageValue[idx];
+				break;
+			}
+		}
+	}
+
+	if(g_Locale)
+	{
+		delete g_Locale;
+		g_Locale = 0;
+	}
+	g_Locale = new wxLocale(lang);
+	// g_Locale.Init(lang);
+	g_Locale->AddCatalogLookupPathPrefix(wxT("./locale/"));
+	g_Locale->AddCatalogLookupPathPrefix(g_MadEditAppDir+wxT("locale/"));
+#ifndef __WXMSW__
+	g_Locale->AddCatalogLookupPathPrefix(g_MadEditHomeDir+wxT("locale/"));
+#if defined (DATA_DIR)
+	g_Locale->AddCatalogLookupPathPrefix(wxT(DATA_DIR"/locale/"));
+#endif
+#endif
+	g_Locale->AddCatalog(g_MadLanguageFileName);
+}
 

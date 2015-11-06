@@ -21,6 +21,7 @@
 
 class wxFile;
 class wxSingleInstanceChecker;
+class MadEditFrame;
 
 class MadAppConn : public wxConnection
 {
@@ -81,7 +82,8 @@ public:
 #if (wxUSE_ON_FATAL_EXCEPTION == 1) && (wxUSE_STACKWALKER == 1)
     void OnFatalException();
 #endif
+	void InitLocale();
+    void ShowMainFrame(MadEditFrame *mainFrame, bool maximize);
 };
-
  
 #endif

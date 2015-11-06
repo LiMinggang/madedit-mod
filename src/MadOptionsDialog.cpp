@@ -10,7 +10,7 @@
 #include <wx/fileconf.h>
 #include <wx/config.h>
 #include <wx/dir.h>
-#include "wx/aui/auibook.h"
+#include <wx/aui/auibook.h>
 #include "MadEdit/MadEncoding.h"
 #include "MadEdit/MadEditCommand.h"
 #include "MadEdit/MadEdit.h"
@@ -28,8 +28,7 @@
 
 MadOptionsDialog *g_OptionsDialog=NULL;
 
-extern wxChar *g_LanguageString[];
-extern const size_t g_LanguageCount;
+extern wxArrayString g_LanguageString;
 extern wxString g_MadEditAppDir;
 
 TreeItemData *g_SelectedCommandItem=NULL;
@@ -1152,11 +1151,11 @@ void MadOptionsDialog::CreateGUIControls(void)
     }
     WxComboBoxEncoding->SetValue(systemenc);
 
-    for(i=0; i<g_LanguageCount; ++i)
+    for(i=0; i<g_LanguageString.GetCount(); ++i)
     {
-        WxComboBoxLanguage->Append(wxString(g_LanguageString[i]));
+        WxComboBoxLanguage->Append(g_LanguageString[i]);
     }
-    WxComboBoxLanguage->SetValue(wxString(g_LanguageString[0]));
+    WxComboBoxLanguage->SetValue(g_LanguageString[0]);
 
     ResizeItem(WxBoxSizer27, WxStaticText16, 2, 2);
     ResizeItem(WxBoxSizer4, WxCheckBoxSingleInstance, 25, 4);
