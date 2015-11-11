@@ -3842,4 +3842,19 @@ void MadEdit::ReplaceBookmarkedLines()
     }
 }
 
+void MadEdit::SetColumnSelection(int startlineid, int startxpos, int hlines, int wlines)
+{
+	wxFileOffset rangeFrom = -1, rangeTo = -1;
+	MadLineIterator lit;
+	(void)GetLineByLine(lit, rangeFrom, startlineid);
+	rangeFrom += startxpos;
+	(void)GetLineByLine(lit, rangeTo, startlineid+hlines);
+	rangeTo += (startxpos + wlines);
+	SetEditMode(emColumnMode);
+	SetSelection(rangeFrom, rangeTo, true);
+	
+	m_RepaintSelection = true;
+	Refresh(false);
+}
+
 

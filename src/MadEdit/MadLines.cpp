@@ -220,94 +220,94 @@ void MadMemData::Get( const wxFileOffset &pos, wxByte *buffer, size_t size )
 		/***
 		if(buf_size <= sizeof(int)*40) buggy!!!
 		{
-		    int *src=(int*)buffer;
-		    int *des=(int*)(m_Buffers[buf] + idx);
-		    size_t s=buf_size;
+			int *src=(int*)buffer;
+			int *des=(int*)(m_Buffers[buf] + idx);
+			size_t s=buf_size;
 
-		    if(s >= sizeof(int)*20)     //max:40
-		    {
-		        *src++ = *des++; *src++ = *des++;
-		        *src++ = *des++; *src++ = *des++;
-		        *src++ = *des++; *src++ = *des++;
-		        *src++ = *des++; *src++ = *des++;
-		        *src++ = *des++; *src++ = *des++;
-		        *src++ = *des++; *src++ = *des++;
-		        *src++ = *des++; *src++ = *des++;
-		        *src++ = *des++; *src++ = *des++;
-		        *src++ = *des++; *src++ = *des++;
-		        *src++ = *des++; *src++ = *des++;
-		        s-=sizeof(int)*20;
-		    }
-		    if(s >= sizeof(int)*10)     //max:20
-		    {
-		        *src++ = *des++; *src++ = *des++;
-		        *src++ = *des++; *src++ = *des++;
-		        *src++ = *des++; *src++ = *des++;
-		        *src++ = *des++; *src++ = *des++;
-		        *src++ = *des++; *src++ = *des++;
-		        s-=sizeof(int)*10;
-		    }
-		    if(s >= sizeof(int)*10)     //max:10
-		    {
-		        *src++ = *des++; *src++ = *des++;
-		        *src++ = *des++; *src++ = *des++;
-		        *src++ = *des++; *src++ = *des++;
-		        *src++ = *des++; *src++ = *des++;
-		        *src++ = *des++; *src++ = *des++;
-		        s-=sizeof(int)*10;
-		    }
-		    if(s >= sizeof(int)*5)      //max:9
-		    {
-		        *src++ = *des++;
-		        *src++ = *des++;
-		        *src++ = *des++;
-		        *src++ = *des++;
-		        *src++ = *des++;
-		        s-=sizeof(int)*5;
-		    }
-		    if(s >= sizeof(int))        //max:4
-		    {
-		        *src++ = *des++;
-		        s-=sizeof(int);
-		        if(s >= sizeof(int))        //max:3
-		        {
-		            *src++ = *des++;
-		            s-=sizeof(int);
-		            if(s >= sizeof(int))        //max:2
-		            {
-		                *src++ = *des++;
-		                s-=sizeof(int);
-		                if(s >= sizeof(int))        //max:1
-		                {
-		                    *src++ = *des++;
-		                    s-=sizeof(int);
-		                }
-		            }
-		        }
-		    }
-		    if(s)       //max:3byte
-		    {
-		        buffer=(wxByte*)src;
-		        wxByte *bdes=(wxByte*)des;
+			if(s >= sizeof(int)*20)     //max:40
+			{
+				*src++ = *des++; *src++ = *des++;
+				*src++ = *des++; *src++ = *des++;
+				*src++ = *des++; *src++ = *des++;
+				*src++ = *des++; *src++ = *des++;
+				*src++ = *des++; *src++ = *des++;
+				*src++ = *des++; *src++ = *des++;
+				*src++ = *des++; *src++ = *des++;
+				*src++ = *des++; *src++ = *des++;
+				*src++ = *des++; *src++ = *des++;
+				*src++ = *des++; *src++ = *des++;
+				s-=sizeof(int)*20;
+			}
+			if(s >= sizeof(int)*10)     //max:20
+			{
+				*src++ = *des++; *src++ = *des++;
+				*src++ = *des++; *src++ = *des++;
+				*src++ = *des++; *src++ = *des++;
+				*src++ = *des++; *src++ = *des++;
+				*src++ = *des++; *src++ = *des++;
+				s-=sizeof(int)*10;
+			}
+			if(s >= sizeof(int)*10)     //max:10
+			{
+				*src++ = *des++; *src++ = *des++;
+				*src++ = *des++; *src++ = *des++;
+				*src++ = *des++; *src++ = *des++;
+				*src++ = *des++; *src++ = *des++;
+				*src++ = *des++; *src++ = *des++;
+				s-=sizeof(int)*10;
+			}
+			if(s >= sizeof(int)*5)      //max:9
+			{
+				*src++ = *des++;
+				*src++ = *des++;
+				*src++ = *des++;
+				*src++ = *des++;
+				*src++ = *des++;
+				s-=sizeof(int)*5;
+			}
+			if(s >= sizeof(int))        //max:4
+			{
+				*src++ = *des++;
+				s-=sizeof(int);
+				if(s >= sizeof(int))        //max:3
+				{
+					*src++ = *des++;
+					s-=sizeof(int);
+					if(s >= sizeof(int))        //max:2
+					{
+						*src++ = *des++;
+						s-=sizeof(int);
+						if(s >= sizeof(int))        //max:1
+						{
+							*src++ = *des++;
+							s-=sizeof(int);
+						}
+					}
+				}
+			}
+			if(s)       //max:3byte
+			{
+				buffer=(wxByte*)src;
+				wxByte *bdes=(wxByte*)des;
 
-		        *buffer++=*bdes++;
-		        s--;
-		        if(s)   //max:2b
-		        {
-		            *buffer++=*bdes++;
-		            s--;
-		            if(s)   //max:1byte
-		            {
-		                *buffer=*bdes;
-		                s--;            //over
-		            }
-		        }
-		    }
+				*buffer++=*bdes++;
+				s--;
+				if(s)   //max:2b
+				{
+					*buffer++=*bdes++;
+					s--;
+					if(s)   //max:1byte
+					{
+						*buffer=*bdes;
+						s--;            //over
+					}
+				}
+			}
 
-		    wxASSERT(s==0);
+			wxASSERT(s==0);
 		}
 		else
-		    ***/
+			***/
 		{
 			memcpy( buffer, m_Buffers[buf] + idx, buf_size );
 		}
@@ -992,8 +992,8 @@ void MadLines::LoadNewBuffer()
 
 	wxASSERT( size > 0 );
 	m_NextUChar_LineIter->Get( m_NextUChar_BufferNextPos,
-	                           m_NextUChar_Buffer + m_NextUChar_BufferSize,
-	                           size );
+							   m_NextUChar_Buffer + m_NextUChar_BufferSize,
+							   size );
 	m_NextUChar_BufferSize += size;
 	m_NextUChar_BufferNextPos += size;
 }
@@ -1112,9 +1112,9 @@ bool MadLines::NextUChar_UTF8( MadUCQueue &ucqueue )
 	UTF8-1      = %x00-7F
 	UTF8-2      = %xC2-DF UTF8-tail
 	UTF8-3      = %xE0 %xA0-BF UTF8-tail / %xE1-EC 2( UTF8-tail ) /
-	              %xED %x80-9F UTF8-tail / %xEE-EF 2( UTF8-tail )
+				  %xED %x80-9F UTF8-tail / %xEE-EF 2( UTF8-tail )
 	UTF8-4      = %xF0 %x90-BF 2( UTF8-tail ) / %xF1-F3 3( UTF8-tail ) /
-	              %xF4 %x80-8F 2( UTF8-tail )
+				  %xF4 %x80-8F 2( UTF8-tail )
 	UTF8-tail   = %x80-BF
 	***/
 	wxFileOffset rest = m_NextUChar_LineSize - m_NextUChar_Pos;
@@ -1259,11 +1259,11 @@ bool MadLines::NextUChar_UTF16LE( MadUCQueue &ucqueue )
 	ucs4_t uc;
 	if(m_MadEdit->editMode_!=emHexMode)
 	{
-	    uc=wxT('?');
+		uc=wxT('?');
 	}
 	else
 	{
-	    uc=m_NextUChar_LineIter->Get(m_NextUChar_Pos);
+		uc=m_NextUChar_LineIter->Get(m_NextUChar_Pos);
 	}
 	***/
 	ucqueue.push_back( MadUCPair( '?', 1 ) );
@@ -1320,11 +1320,11 @@ bool MadLines::NextUChar_UTF16BE( MadUCQueue &ucqueue )
 	ucs4_t uc;
 	if(m_MadEdit->editMode_!=emHexMode)
 	{
-	    uc=wxT('?');
+		uc=wxT('?');
 	}
 	else
 	{
-	    uc=m_NextUChar_LineIter->Get(m_NextUChar_Pos);
+		uc=m_NextUChar_LineIter->Get(m_NextUChar_Pos);
 	}
 	***/
 	ucqueue.push_back( MadUCPair( '?', 1 ) );
@@ -1367,11 +1367,11 @@ bool MadLines::NextUChar_UTF32LE( MadUCQueue &ucqueue )
 	ucs4_t uc;
 	if(m_MadEdit->editMode_!=emHexMode)
 	{
-	    uc=wxT('?');
+		uc=wxT('?');
 	}
 	else
 	{
-	    uc=m_NextUChar_LineIter->Get(m_NextUChar_Pos);
+		uc=m_NextUChar_LineIter->Get(m_NextUChar_Pos);
 	}
 	***/
 	ucqueue.push_back( MadUCPair( '?', MadUCPair::second_type( rest ) ) );
@@ -1414,11 +1414,11 @@ bool MadLines::NextUChar_UTF32BE( MadUCQueue &ucqueue )
 	ucs4_t uc;
 	if(m_MadEdit->editMode_!=emHexMode)
 	{
-	    uc=wxT('?');
+		uc=wxT('?');
 	}
 	else
 	{
-	    uc=m_NextUChar_LineIter->Get(m_NextUChar_Pos);
+		uc=m_NextUChar_LineIter->Get(m_NextUChar_Pos);
 	}
 	***/
 	ucqueue.push_back( MadUCPair( '?', MadUCPair::second_type( rest ) ) );
@@ -1537,7 +1537,7 @@ MadUCPair MadLines::PreviousUChar( /*IN_OUT*/MadLineIterator &lit, /*IN_OUT*/wxF
 }
 
 int MadLines::FindStringCase( MadUCQueue &ucqueue, MadStringIterator begin,
-                              const MadStringIterator &end, size_t &len )
+							  const MadStringIterator &end, size_t &len )
 // 0: none, 1: first, 2:...
 {
 	wxASSERT( !ucqueue.empty() );
@@ -1606,7 +1606,7 @@ int MadLines::FindStringCase( MadUCQueue &ucqueue, MadStringIterator begin,
 }
 
 int MadLines::FindStringNoCase( MadUCQueue &ucqueue, MadStringIterator begin,
-                                const MadStringIterator &end, size_t &len )
+								const MadStringIterator &end, size_t &len )
 // 0: none, 1: first, 2:...
 {
 	wxASSERT( !ucqueue.empty() );
@@ -1728,7 +1728,6 @@ MadLineState MadLines::Reformat( MadLineIterator iter )
 	case etUTF16BE:
 	case etUTF32LE:
 	case etUTF32BE:
-
 		// Byte-Order Mark
 		if( ucqueue.front().first == 0xFEFF && iter == m_LineList.begin() )
 		{
@@ -1842,8 +1841,8 @@ MadLineState MadLines::Reformat( MadLineIterator iter )
 				if( eatUCharCount == 0 )
 				{
 					++eatUCharCount; // = 1;
-_RUNAGAIN_:
 
+_RUNAGAIN_:
 					if( CheckState )
 					{
 						if( firstuc < 0x100 && firstuc != 0x20 && firstuc != 0x09 )
@@ -1854,11 +1853,11 @@ _RUNAGAIN_:
 							//Minggang: Not sure why this was commneted out at the first promote of MadEdit
 							//https://sourceforge.net/p/madedit/code/9/tree/trunk/madedit/src/MadEdit/MadLines.cpp#l1761
 							if( state.CommentId == 0 && state.StringId == 0 &&
-							        !m_Syntax->m_LeftBrace.empty() )
+									!m_Syntax->m_LeftBrace.empty() )
 							{
 								bool ok = false;
 								index = ( this->*FindString )( ucqueue, m_Syntax->m_LeftBrace.begin(),
-								                               m_Syntax->m_LeftBrace.end(), length );
+															   m_Syntax->m_LeftBrace.end(), length );
 
 								if( index != 0 )
 								{
@@ -1915,7 +1914,7 @@ _RUNAGAIN_:
 								else // check right brace
 								{
 									if( ( index = ( this->*FindString )( ucqueue, m_Syntax->m_RightBrace.begin(),
-									                                     m_Syntax->m_RightBrace.end(), length ) ) != 0 )
+																		 m_Syntax->m_RightBrace.end(), length ) ) != 0 )
 									{
 										ok = true;
 										ucs4_t uc = ucqueue[length - 1].first;
@@ -2004,8 +2003,10 @@ _RUNAGAIN_:
 									{
 										state.CommentId = 0;
 										//Fixme: hacking
-										//eatUCharCount = length;
+										eatUCharCount = length;
 										iter->m_State.CommentOff = true;
+										// Back off
+										--notSpaceCount;
 										goto _RUNAGAIN_;
 									}
 
@@ -2070,7 +2071,7 @@ _RUNAGAIN_:
 								if( !m_Syntax->m_BlockCommentOn.empty() )
 								{
 									index = ( this->*FindString )( ucqueue, m_Syntax->m_BlockCommentOn.begin(),
-									                               m_Syntax->m_BlockCommentOn.end(), length );
+																   m_Syntax->m_BlockCommentOn.end(), length );
 
 									if( index != 0 )  // got
 									{
@@ -2091,7 +2092,7 @@ _RUNAGAIN_:
 									if( !m_Syntax->m_LineComment.empty() )
 									{
 										index = ( this->*FindString )( ucqueue, m_Syntax->m_LineComment.begin(),
-										                               m_Syntax->m_LineComment.end(), length );
+																	   m_Syntax->m_LineComment.end(), length );
 
 										if( index != 0 )  // got
 										{
@@ -2140,7 +2141,7 @@ _RUNAGAIN_:
 							if( state.LineComment == 0 && state.RangeId == 0 && !m_Syntax->m_RangeBeginString.empty() )
 							{
 								index = ( this->*FindString )( ucqueue, m_Syntax->m_RangeBeginString.begin(),
-								                               m_Syntax->m_RangeBeginString.end(), length );
+															   m_Syntax->m_RangeBeginString.end(), length );
 
 								if( index != 0 )
 								{
@@ -2439,7 +2440,7 @@ _NOCHECK_:
 			//size_t nn = iter->m_Blocks.size();
 			// insert blocks to new line
 			nline->m_Blocks.insert( nline->m_Blocks.begin(), blockiter,
-			                        iter->m_Blocks.end() );
+									iter->m_Blocks.end() );
 			// erase blocks from old line
 			iter->m_Blocks.erase( blockiter, iter->m_Blocks.end() );
 			nline->m_RowIndices.resize( 2 );
@@ -2505,7 +2506,7 @@ size_t MadLines::Reformat( MadLineIterator first, MadLineIterator last )
 					}
 				}
 				while( ( uc = first->LastUCharIsNewLine( m_Encoding ) ) == 0
-				        || ( uc == 0x0D && next->FirstUCharIs0x0A( m_Encoding ) ) );
+						|| ( uc == 0x0D && next->FirstUCharIs0x0A( m_Encoding ) ) );
 		}
 		else
 		{ bIsNotEnd = false; }
@@ -3185,10 +3186,10 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 				wxFontEncoding enc = m_MadEdit->m_Encoding->GetEncoding();
 
 				if( enc == wxFONTENCODING_UTF8 ||
-				        enc == wxFONTENCODING_UTF16LE ||
-				        enc == wxFONTENCODING_UTF16BE ||
-				        enc == wxFONTENCODING_UTF32LE ||
-				        enc == wxFONTENCODING_UTF32BE
+						enc == wxFONTENCODING_UTF16LE ||
+						enc == wxFONTENCODING_UTF16BE ||
+						enc == wxFONTENCODING_UTF32LE ||
+						enc == wxFONTENCODING_UTF32BE
 				  )
 				{
 					// use default encoding
@@ -3205,23 +3206,23 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 
 				if(cname.Len()>=2)
 				{
-				    if(cname[0]==wxT('z') && cname[1]==wxT('h'))
-				    {
-				        detectchinese=true;
-				    }
-				    else if(cname[0]==wxT('j') && cname[1]==wxT('a'))
-				    {
-				        detectjapanese=true;
-				    }
+					if(cname[0]==wxT('z') && cname[1]==wxT('h'))
+					{
+						detectchinese=true;
+					}
+					else if(cname[0]==wxT('j') && cname[1]==wxT('a'))
+					{
+						detectjapanese=true;
+					}
 				}
 
 				if(detectchinese || enc==wxFONTENCODING_CP936 || enc==wxFONTENCODING_CP950)
 				{
-				    DetectChineseEncoding(buf, s, enc);
+					DetectChineseEncoding(buf, s, enc);
 				}
 				else if(detectjapanese || enc==wxFONTENCODING_CP932 || enc==wxFONTENCODING_EUC_JP)
 				{
-				    DetectJapaneseEncoding(buf, s, enc);
+					DetectJapaneseEncoding(buf, s, enc);
 				}
 				*/
 				// use charset-detector
@@ -3250,12 +3251,12 @@ bool TruncateFile( const wxString &filename, wxFileOffset size )
 {
 #ifdef __WXMSW__
 	HANDLE handle = CreateFile( filename.c_str(),       // file to open
-	                            GENERIC_WRITE,   // open for writing
-	                            0,       // do not share
-	                            NULL,    // default security
-	                            OPEN_ALWAYS,   // open the file, if not exist then create it
-	                            FILE_ATTRIBUTE_NORMAL,   // normal file
-	                            NULL );
+								GENERIC_WRITE,   // open for writing
+								0,       // do not share
+								NULL,    // default security
+								OPEN_ALWAYS,   // open the file, if not exist then create it
+								FILE_ATTRIBUTE_NORMAL,   // normal file
+								NULL );
 
 	if( handle == INVALID_HANDLE_VALUE )
 	{
@@ -3283,8 +3284,8 @@ bool TruncateFile( const wxString &filename, wxFileOffset size )
 		/**
 		if(SetFileValidData(handle, size)==FALSE)
 		{
-		    CloseHandle(handle);
-		    return false;
+			CloseHandle(handle);
+			return false;
 		}
 		**/
 		wxFileOffset s = size - oldsize.QuadPart;
@@ -3437,7 +3438,7 @@ wxFileOffset MadLines::GetMaxTempSize( const wxString &filename )
 	{
 		// find the block that must write back to file
 		while( writable_size == 0 && write_bit->m_Data == m_FileData &&
-		        write_bit->m_Pos  == writepos )
+				write_bit->m_Pos  == writepos )
 		{
 			// this block is not necessary to write back
 			writepos += write_bit->m_Size;
@@ -3748,7 +3749,7 @@ bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 	{
 		// find the block that must write back to file
 		while( writable_size == 0 && write_bit->m_Data == m_FileData &&
-		        write_bit->m_Pos  == writepos )
+				write_bit->m_Pos  == writepos )
 		{
 			// this block is not necessary for writing back
 			writepos += write_bit->m_Size;

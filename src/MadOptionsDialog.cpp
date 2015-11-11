@@ -27,7 +27,6 @@
 ////Header Include End
 
 MadOptionsDialog *g_OptionsDialog=NULL;
-
 extern wxArrayString g_LanguageString;
 extern wxString g_MadEditAppDir;
 
@@ -276,11 +275,12 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxBoxSizer27 = new wxBoxSizer(wxHORIZONTAL);
 	WxBoxSizer3->Add(WxBoxSizer27, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2);
 
-	wxArrayString arrayStringFor_WxComboBoxLanguage;
-	WxComboBoxLanguage = new wxComboBox(WxNoteBookPage1, ID_WXCOMBOBOXLANGUAGE, wxT(""), wxPoint(0, 3), wxSize(140, 21), arrayStringFor_WxComboBoxLanguage, wxCB_DROPDOWN | wxCB_READONLY, wxDefaultValidator, wxT("WxComboBoxLanguage"));
+	//wxArrayString arrayStringFor_WxComboBoxLanguage;
+	wxASSERT(g_LanguageString.GetCount() != 0);
+	WxComboBoxLanguage = new wxComboBox(WxNoteBookPage1, ID_WXCOMBOBOXLANGUAGE, wxT(""), wxPoint(0, 3), wxSize(140, 21), g_LanguageString, wxCB_DROPDOWN | wxCB_READONLY, wxDefaultValidator, wxT("WxComboBoxLanguage"));
 	WxBoxSizer27->Add(WxComboBoxLanguage, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 0);
     SET_CONTROLPARENT(WxComboBoxLanguage);
-
+	WxComboBoxLanguage->SetValue(g_LanguageString[0]);
 
 	WxStaticText16 = new wxStaticText(WxNoteBookPage1, ID_WXSTATICTEXT16, _("Language of User Interface (must restart MadEdit)"), wxPoint(145, 5), wxDefaultSize, 0, wxT("WxStaticText16"));
 	WxBoxSizer27->Add(WxStaticText16, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 5);
@@ -1151,11 +1151,11 @@ void MadOptionsDialog::CreateGUIControls(void)
     }
     WxComboBoxEncoding->SetValue(systemenc);
 
-    for(i=0; i<g_LanguageString.GetCount(); ++i)
+    /*for(i=0; i<g_LanguageString.GetCount(); ++i)
     {
         WxComboBoxLanguage->Append(g_LanguageString[i]);
     }
-    WxComboBoxLanguage->SetValue(g_LanguageString[0]);
+    WxComboBoxLanguage->SetValue(g_LanguageString[0]);*/
 
     ResizeItem(WxBoxSizer27, WxStaticText16, 2, 2);
     ResizeItem(WxBoxSizer4, WxCheckBoxSingleInstance, 25, 4);

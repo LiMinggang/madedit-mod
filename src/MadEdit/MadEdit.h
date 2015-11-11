@@ -1042,6 +1042,8 @@ public: // advanced functions
     void WordCount(bool selection, int &wordCount, int &charCount, int &spaceCount,
                    int &halfWidthCount, int &fullWidthCount, int &lineCount,
                    wxArrayString *detail);
+	
+	void MadEdit::SetColumnSelection(int startlineid, int startxpos, int hlines, int wlines);
 
 public:
     void SetOnSelectionChanged(OnSelectionChangedPtr func)

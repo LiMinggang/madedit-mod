@@ -6,7 +6,7 @@
 	#include <wx/wx.h>
 #endif
 
-wxString g_MadEdit_Version( wxString( wxT( "MadEdit-Mod 0.3.8 " ) )
+wxString g_MadEdit_Version( wxString( wxT( "MadEdit-Mod 0.3.9 " ) )
 #if defined(__WXMSW__)
 	#ifdef _WIN64
 		+ wxT( "win64" )

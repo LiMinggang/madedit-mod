@@ -1230,6 +1230,9 @@ namespace mad_python {
 
 			return mad_py::make_tuple( words, chars, spaces, lines, halfwidths, fullwidths, std::string( str.mb_str() ) );
 		}
+		void SetColumnSelection(int startlineid, int startxpos, int hlines, int wlines) {
+			g_ActiveMadEdit->SetColumnSelection(startlineid, startxpos, hlines, wlines);
+		}
 
 		void ColumnAlignLeft() {
 			if( !g_ActiveMadEdit->IsReadOnly() )
@@ -1440,6 +1443,7 @@ BOOST_PYTHON_MODULE( madpython )
 	.def( "CopyAsHexString", &PyMadEdit::CopyAsHexString, "" )
 	.def( "CopyRevertHex", &PyMadEdit::CopyRevertHex, "" )
 	.def( "WordCount", &PyMadEdit::WordCount, return_value_policy<return_by_value>(), "" )
+	.def( "SetColumnSelection", &PyMadEdit::SetColumnSelection, "")
 	.def( "SetFontA", &PyMadEdit::SetFontA, "Doc" )
 	.def( "CopyToClipboardA", &PyMadEdit::CopyToClipboardA, "" )
 	.def( "CopyToClipboardB", &PyMadEdit::CopyToClipboardB, "" )

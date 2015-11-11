@@ -106,9 +106,9 @@ public:
 	{}
 	~MadTranslationHelper(){};
 	virtual wxDirTraverseResult OnFile(const wxString& WXUNUSED(filename))
-    {
-         return wxDIR_CONTINUE;
-    }
+	{
+		 return wxDIR_CONTINUE;
+	}
 	virtual wxDirTraverseResult OnDir(const wxString& dirName)
 	{
 		const wxLanguageInfo * langinfo;
@@ -648,8 +648,8 @@ void MadEditApp::OnFatalException()
 
 void MadEditApp::ShowMainFrame(MadEditFrame *mainFrame, bool maximize)
 {
-    if(mainFrame)
-    {
+	if(mainFrame)
+	{
 		SetTopWindow(mainFrame);
 
 #ifdef __WXMSW__
@@ -757,12 +757,12 @@ void ScanForLocales()
 		{
 			g_LanguageString.Add(it_tmp->second);
 		}
+		else
+		{
+			g_LanguageString.Add(it->second);
+		}
 		++it;
 	}
-	/*for(size_t i = 1; i < g_LanguageCount; ++i)
-	{
-		g_LanguageString.Add(g_LanguageStr[i]);
-	}*/
 }
 
 void MadEditApp::InitLocale()
