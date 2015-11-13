@@ -2158,19 +2158,19 @@ MadEditFrame::MadEditFrame( wxWindow *parent, wxWindowID id, const wxString &tit
 	m_NewFileCount = 0;
 	m_Config = wxConfigBase::Get( false );
 	MadEncoding::InitEncodings();
-	MadSyntax::SetAttributeFilePath( g_MadEditHomeDir + wxT( "syntax/" ) );
+	MadSyntax::SetAttributeFilePath( g_MadEditHomeDir + wxT( "syntax" ) + wxFILE_SEP_PATH );
 #if defined(__WXMSW__)
-	MadSyntax::AddSyntaxFilesPath( g_MadEditAppDir + wxT( "syntax/" ) );
+	MadSyntax::AddSyntaxFilesPath( g_MadEditAppDir + wxT( "syntax" ) + wxFILE_SEP_PATH );
 #elif defined(__WXGTK__) // linux
-	MadSyntax::AddSyntaxFilesPath( g_MadEditAppDir + wxT( "syntax/" ) );
-	MadSyntax::AddSyntaxFilesPath( g_MadEditHomeDir + wxT( "syntax/" ) );
+	MadSyntax::AddSyntaxFilesPath( g_MadEditAppDir + wxT( "syntax" ) + wxFILE_SEP_PATH );
+	MadSyntax::AddSyntaxFilesPath( g_MadEditHomeDir + wxT( "syntax" ) + wxFILE_SEP_PATH );
 #if defined (DATA_DIR)
 	MadSyntax::AddSyntaxFilesPath( wxT( DATA_DIR"/madedit-mod/syntax/" ) );
 #else
 	MadSyntax::AddSyntaxFilesPath( wxT( "/usr/share/madedit-mod/syntax/" ) );
 #endif
 #else // other platform
-	MadSyntax::AddSyntaxFilesPath( g_MadEditAppDir + wxT( "syntax/" ) );
+	MadSyntax::AddSyntaxFilesPath( g_MadEditAppDir + wxT( "syntax" ) + wxFILE_SEP_PATH );
 #endif
 	CreateGUIControls();
 	//g_PrintData = new wxPrintData;
@@ -2755,7 +2755,7 @@ void MadEditFrame::CreateGUIControls( void )
 
 	{
 		// enum all madpython files under scripts
-		wxString scriptsLibDir = g_MadEditHomeDir + wxT( "scripts/" ), filename;
+		wxString scriptsLibDir = g_MadEditHomeDir + wxT( "scripts" ) + wxFILE_SEP_PATH, filename;
 
 		if( wxDirExists( scriptsLibDir ) )
 		{
@@ -7445,7 +7445,7 @@ void MadEditFrame::OnToolsEditMacroFile( wxCommandEvent& event )
 
 void MadEditFrame::OnToolsMadScriptList( wxCommandEvent& event )
 {
-	wxString filename = g_MadEditAppDir + wxT( "scripts/" );
+	wxString filename = g_MadEditAppDir + wxT( "scripts" ) + wxFILE_SEP_PATH;
 	int menuId = event.GetId();
 	filename += g_Menu_MadMacro_Scripts->GetLabelText( menuId ) + wxT( ".mpy" );
 	wxTextFile scriptfile( filename );
