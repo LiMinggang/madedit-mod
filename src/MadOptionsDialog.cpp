@@ -681,7 +681,7 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxBoxSizer33->Add(WxCheckBoxPersonalDict, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 5);
     SET_CONTROLPARENT(WxCheckBoxPersonalDict);
 
-	wxStaticBox* WxStaticBoxSizer5_StaticBoxObj = new wxStaticBox(WxNoteBookPage5, wxID_ANY, _("Langurage"));
+	wxStaticBox* WxStaticBoxSizer5_StaticBoxObj = new wxStaticBox(WxNoteBookPage5, wxID_ANY, _("Language"));
 	WxStaticBoxSizer5 = new wxStaticBoxSizer(WxStaticBoxSizer5_StaticBoxObj, wxHORIZONTAL);
 	WxBoxSizer29->Add(WxStaticBoxSizer5, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 5);
 
