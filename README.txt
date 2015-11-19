@@ -110,6 +110,7 @@ Mod v0.3.9
 Fix: Improve mark brace issue(#15 in 0.3.8)
 Fix: Purge recent caret position history
 Fix: Typo on Option dialog(Dictionary settings) #82
+Fix: Not enough space for translated string #83
 
 
 Mod v0.3.8
