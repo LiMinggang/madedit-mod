@@ -13,6 +13,7 @@
 
 #include <algorithm>
 #include <map>
+#include <boost/bimap.hpp>
 
 #include <wx/display.h>
 #include <wx/dir.h>
@@ -50,6 +51,10 @@ bool g_ForcePurgeThisTime = false;
 
 wxArrayString g_LanguageString;
 wxArrayLong g_LanguageId;
+typedef boost::bimap<long, wxString> bm_type;
+typedef bm_type::value_type mad_lang;
+bm_type g_EnhancedLangNameBMap;
+
 std::map<long, wxString> g_EnhancedLangNameMap;
 wxString g_MadLanguageFileName = wxT("madedit-mod");
 void ScanForLocales();
@@ -425,6 +430,7 @@ bool MadEditApp::OnInit()
 	for(long i = 0; i < g_LanguageCount; ++i)
 	{
 		g_EnhancedLangNameMap[g_LanguageValue[i]] = wxString(g_LanguageStr[i]);
+		g_EnhancedLangNameBMap.insert(mad_lang(g_LanguageValue[i], wxString(g_LanguageStr[i])));
 	}
 
 	ScanForLocales();
@@ -763,10 +769,12 @@ void ScanForLocales()
 		if(it_tmp != g_EnhancedLangNameMap.end())
 		{
 			g_LanguageString.Add(it_tmp->second);
+			g_LanguageId.Add(it_tmp->first);
 		}
 		else
 		{
 			g_LanguageString.Add(it->second);
+			g_LanguageId.Add(it->first);
 		}
 		++it;
 	}
@@ -785,7 +793,7 @@ void MadEditApp::InitLocale()
 		{
 			if(strlang == g_LanguageString[idx].Lower())
 			{
-				lang=g_LanguageValue[idx];
+				lang=g_LanguageId[idx];
 				break;
 			}
 		}
@@ -793,11 +801,12 @@ void MadEditApp::InitLocale()
 
 	if(g_Locale)
 	{
-		delete g_Locale;
+		wxDELETE( g_Locale );
 		g_Locale = 0;
 	}
-	g_Locale = new wxLocale(lang);
+	g_Locale = new wxLocale;
 	// g_Locale.Init(lang);
+	g_Locale->Init(lang);
 	g_Locale->AddCatalogLookupPathPrefix(wxString(wxT("."))+wxFILE_SEP_PATH+wxT("locale")+wxFILE_SEP_PATH);
 	g_Locale->AddCatalogLookupPathPrefix(g_MadEditAppDir+wxT("locale")+wxFILE_SEP_PATH);
 #ifndef __WXMSW__
