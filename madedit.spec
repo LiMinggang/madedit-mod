@@ -1,7 +1,7 @@
 %define release 1
 %define prefix /usr
 %define name madedit
-%define version 0.2.9
+%define version 0.3.9
 
 
 Summary: madedit : GTK+2 based text/hex editor
@@ -50,10 +50,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/madedit/*
 %{_datadir}/pixmaps/*
 %{_datadir}/applications/*
-%{_datadir}/locale/zh_TW/LC_MESSAGES/madedit.mo
-%{_datadir}/locale/zh_CN/LC_MESSAGES/madedit.mo
-%{_datadir}/locale/it_IT/LC_MESSAGES/madedit.mo
-%{_datadir}/locale/ja_JP/LC_MESSAGES/madedit.mo
-
+%{_datadir}/locale/zh_TW/LC_MESSAGES/madedit-mod.mo
+%{_datadir}/locale/zh_CN/LC_MESSAGES/madedit-mod.mo
+%{_datadir}/locale/it_IT/LC_MESSAGES/madedit-mod.mo
+%{_datadir}/locale/ja_JP/LC_MESSAGES/madedit-mod.mo
+%{_datadir}/locale/ja_JP/LC_MESSAGES/madedit-mod.mo
 
 %changelog

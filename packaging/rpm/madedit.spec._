@@ -67,5 +67,5 @@ rm -rf $RPM_BUILD_DIR/%{name}-%{version}
 %{_datadir}/locale/zh_TW/LC_MESSAGES/madedit-mod.mo
 %{_datadir}/locale/ru_RU/LC_MESSAGES/madedit-mod.mo
 %{_datadir}/locale/es/LC_MESSAGES/madedit-mod.mo
-
+%{_datadir}/locale/el_GR/LC_MESSAGES/madedit-mod.mo
 

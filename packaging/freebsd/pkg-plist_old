@@ -1,8 +1,11 @@
 bin/madedit
-share/locale/zh_CN/LC_MESSAGES/madedit.mo
-share/locale/zh_TW/LC_MESSAGES/madedit.mo
-share/locale/it_IT/LC_MESSAGES/madedit.mo
-share/locale/ja_JP/LC_MESSAGES/madedit.mo
+share/locale/zh_CN/LC_MESSAGES/madedit-mod.mo
+share/locale/zh_TW/LC_MESSAGES/madedit-mod.mo
+share/locale/it_IT/LC_MESSAGES/madedit-mod.mo
+share/locale/ja_JP/LC_MESSAGES/madedit-mod.mo
+share/locale/es/LC_MESSAGES/madedit-mod.mo
+share/locale/el_GR/LC_MESSAGES/madedit-mod.mo
+share/locale/ru_RU/LC_MESSAGES/madedit-mod.mo
 share/applications/madedit.desktop
 share/madedit/syntax/Dark.sch
 share/madedit/syntax/DarkBlue.sch
@@ -39,7 +42,8 @@ share/madedit/syntax/syntax_sh.syn
 share/madedit/syntax/syntax_sql.syn
 share/madedit/syntax/syntax_squirrel.syn
 share/madedit/syntax/syntax_syn.syn
-share/madedit/syntax/syntax_txt.syn
+share/madedit/syntax/syntax_syn.syn
+share/madedit/syntax/syntax_tcl.syn
 share/madedit/syntax/syntax_vbscript_asp.syn
 share/madedit/syntax/syntax_visualbasic.syn
 share/madedit/syntax/syntax_verilog.syn

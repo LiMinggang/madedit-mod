@@ -13,7 +13,7 @@
 
 #include <algorithm>
 #include <map>
-#include <boost/bimap.hpp>
+//#include <boost/bimap.hpp>
 
 #include <wx/display.h>
 #include <wx/dir.h>
@@ -51,9 +51,9 @@ bool g_ForcePurgeThisTime = false;
 
 wxArrayString g_LanguageString;
 wxArrayLong g_LanguageId;
-typedef boost::bimap<long, wxString> bm_type;
-typedef bm_type::value_type mad_lang;
-bm_type g_EnhancedLangNameBMap;
+//typedef boost::bimap<long, wxString> bm_type;
+//typedef bm_type::value_type mad_lang;
+//bm_type g_EnhancedLangNameBMap;
 
 std::map<long, wxString> g_EnhancedLangNameMap;
 wxString g_MadLanguageFileName = wxT("madedit-mod");
@@ -69,6 +69,7 @@ wxChar *g_LanguageStr[]=
 	wxT("\u65E5\u6587(Japanese)"),
 	wxT("Espa\u00F1ol(Spanish)"),
 	wxT("\u0440\u0443\u0441\u0441\u043a\u0438\u0439(Russian)"),
+	wxT("\u0395\u03BB\u03BB\u03B7\u03BD\u03B9\u03BA\u03AC(Greek)"),
 };
 int g_LanguageValue[]=
 {
@@ -80,6 +81,7 @@ int g_LanguageValue[]=
 	wxLANGUAGE_JAPANESE,
 	wxLANGUAGE_SPANISH,
 	wxLANGUAGE_RUSSIAN,
+	wxLANGUAGE_GREEK,
 };
 static const wxCmdLineEntryDesc g_cmdLineDesc [] =
 {
@@ -430,7 +432,7 @@ bool MadEditApp::OnInit()
 	for(long i = 0; i < g_LanguageCount; ++i)
 	{
 		g_EnhancedLangNameMap[g_LanguageValue[i]] = wxString(g_LanguageStr[i]);
-		g_EnhancedLangNameBMap.insert(mad_lang(g_LanguageValue[i], wxString(g_LanguageStr[i])));
+		//g_EnhancedLangNameBMap.insert(mad_lang(g_LanguageValue[i], wxString(g_LanguageStr[i])));
 	}
 
 	ScanForLocales();

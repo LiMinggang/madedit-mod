@@ -107,6 +107,7 @@ Mod v0.3.9
 2.New: Check available translation at start time and refresh on opening Option dialog(You can add new translation now!!)
 3.New: Add API SetColumnSelection
 4.New: Use default script directory if not specified
+5.New: Greek translation(Thanks nikoss(https://github.com/nikoss))
 Fix: Improve mark brace issue(#15 in 0.3.8)
 Fix: Purge recent caret position history
 Fix: Typo on Option dialog(Dictionary settings) #82
