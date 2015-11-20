@@ -800,9 +800,8 @@ void MadEditApp::InitLocale()
 		wxDELETE( g_Locale );
 		g_Locale = 0;
 	}
-	g_Locale = new wxLocale;
+	g_Locale = new wxLocale(lang);
 	// g_Locale.Init(lang);
-	g_Locale->Init(lang);
 	g_Locale->AddCatalogLookupPathPrefix(wxString(wxT("."))+wxFILE_SEP_PATH+wxT("locale")+wxFILE_SEP_PATH);
 	g_Locale->AddCatalogLookupPathPrefix(g_MadEditAppDir+wxT("locale")+wxFILE_SEP_PATH);
 #ifndef __WXMSW__
