@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.3.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-19 19:47+0800\n"
-"PO-Revision-Date: 2015-10-29 14:06+0800\n"
+"POT-Creation-Date: 2015-11-20 13:12+0800\n"
+"PO-Revision-Date: 2015-11-20 13:15+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit-mod@gmail.com>\n"
 "Language: zh_CN\n"
@@ -622,16 +622,16 @@ msgstr "'%s' 的格式不正确。"
 msgid "Invalid"
 msgstr "无效"
 
-#: ../src/MadEditApp.cpp:118
+#: ../src/MadEditApp.cpp:125
 #, c-format
 msgid "SEARCHING FOR %s"
-msgstr ""
+msgstr "正在检索 %s"
 
-#: ../src/MadEditApp.cpp:357
+#: ../src/MadEditApp.cpp:364
 msgid "Failed to create an IPC service."
 msgstr "创建IPC（进程间通信）失败"
 
-#: ../src/MadEditApp.cpp:398
+#: ../src/MadEditApp.cpp:405
 msgid ""
 "Sorry, the existing instance may be too busy too respond.\n"
 "Please close any open dialogs and retry."
@@ -639,11 +639,11 @@ msgstr ""
 "抱歉，已运行的实例可能因为太忙而没有响应。\n"
 "请关闭已打开的对话框后重试。"
 
-#: ../src/MadEditApp.cpp:729 ../src/MadEditApp.cpp:741
-#: ../src/MadEditApp.cpp:751
+#: ../src/MadEditApp.cpp:737 ../src/MadEditApp.cpp:749
+#: ../src/MadEditApp.cpp:759
 #, c-format
 msgid "Directory %s DOES NOT EXIST !!!"
-msgstr ""
+msgstr "目录 %s 不存在！！！"
 
 #: ../src/MadEditFrame.cpp:982
 msgid "Ln:"

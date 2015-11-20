@@ -738,9 +738,9 @@ void ScanForLocales()
 			searchPath.GetData());
 		return;
 	}
-	wxDir dir(searchPath);
+	wxDir dir1(searchPath);
 	int flags=wxDIR_DIRS;
-	dir.Traverse(langScaner, wxEmptyString, flags);
+	dir1.Traverse(langScaner, wxEmptyString, flags);
 #ifndef __WXMSW__
 	wxASSERT(!g_MadEditHomeDir.IsEmpty());
 	searchPath = g_MadEditHomeDir + wxT("locale") + wxFILE_SEP_PATH;
@@ -750,8 +750,8 @@ void ScanForLocales()
 			searchPath.GetData());
 		return;
 	}
-	dir = searchPath;
-	dir.Traverse(langScaner, wxEmptyString, flags);
+	wxDir dir2(searchPath);
+	dir2.Traverse(langScaner, wxEmptyString, flags);
 #if defined (DATA_DIR)
 	searchPath = (wxT(DATA_DIR"/locale/"));
 	if(!wxDir::Exists(searchPath))
@@ -760,8 +760,8 @@ void ScanForLocales()
 			searchPath.GetData());
 		return;
 	}
-	dir = searchPath;
-	dir.Traverse(langScaner, wxEmptyString, flags);
+	wxDir dir3(searchPath);
+	dir3.Traverse(langScaner, wxEmptyString, flags);
 #endif
 #endif
 	std::map<long, wxString>::iterator it = languageIdNameMap.begin();

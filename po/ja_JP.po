@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-19 19:47+0800\n"
+"POT-Creation-Date: 2015-11-20 13:12+0800\n"
 "PO-Revision-Date: 2015-06-30 21:50+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
@@ -613,23 +613,23 @@ msgstr "この形式 '%s' は無効です"
 msgid "Invalid"
 msgstr ""
 
-#: ../src/MadEditApp.cpp:118
+#: ../src/MadEditApp.cpp:125
 #, c-format
 msgid "SEARCHING FOR %s"
 msgstr ""
 
-#: ../src/MadEditApp.cpp:357
+#: ../src/MadEditApp.cpp:364
 msgid "Failed to create an IPC service."
 msgstr ""
 
-#: ../src/MadEditApp.cpp:398
+#: ../src/MadEditApp.cpp:405
 msgid ""
 "Sorry, the existing instance may be too busy too respond.\n"
 "Please close any open dialogs and retry."
 msgstr ""
 
-#: ../src/MadEditApp.cpp:729 ../src/MadEditApp.cpp:741
-#: ../src/MadEditApp.cpp:751
+#: ../src/MadEditApp.cpp:737 ../src/MadEditApp.cpp:749
+#: ../src/MadEditApp.cpp:759
 #, c-format
 msgid "Directory %s DOES NOT EXIST !!!"
 msgstr ""
