@@ -1,12 +1,9 @@
-///-----------------------------------------------------------------
-///
-/// @file      MadNumberDlg.h
-/// @author    user
-/// Created:   2014/9/17 14:31:05
-/// @section   DESCRIPTION
-///            MadNumberDlg class declaration
-///
-///------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////
+// Name:		MadEditApp.cpp
+// Description:
+// Maintainer:	minggang.li@gmail.com
+// Licence: 	GPL
+///////////////////////////////////////////////////////////////////////////////
 
 #ifndef __MADNUMBERDLG_H__
 #define __MADNUMBERDLG_H__

@@ -1,8 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////
-// Name:        MadHighlightingDialog.h
+// Name:		MadEditApp.cpp
 // Description:
-// Author:      madedit@gmail.com
-// Licence:     GPL
+// Author:		madedit@gmail.com
+// Maintainer:	minggang.li@gmail.com
+// Licence: 	GPL
 ///////////////////////////////////////////////////////////////////////////////
 
 #ifndef _MADHIGHLIGHTINGDIALOG_H_

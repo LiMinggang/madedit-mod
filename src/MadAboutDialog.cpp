@@ -1,8 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////
-// Name:        MadAboutDialog.cpp
+// Name:		MadAboutDialog.cpp
 // Description:
-// Author:      madedit@gmail.com
-// Licence:     GPL
+// Author:		madedit@gmail.com
+// Maintainer:	minggang.li@gmail.com
+// Licence: 	GPL
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "MadAboutDialog.h"

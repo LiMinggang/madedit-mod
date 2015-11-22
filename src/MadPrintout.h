@@ -1,8 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////
-// Name:        MadPrintout.h
-// Description: Printing functions
-// Author:      madedit@gmail.com
-// Licence:     GPL
+// Name:		MadEditApp.cpp
+// Description:
+// Author:		madedit@gmail.com
+// Maintainer:	minggang.li@gmail.com
+// Licence: 	GPL
 ///////////////////////////////////////////////////////////////////////////////
 
 #ifndef _MADPRINTOUT_H_

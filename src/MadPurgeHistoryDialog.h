@@ -1,12 +1,9 @@
-///-----------------------------------------------------------------
-///
-/// @file      MadPurgeHistoryDialog.h
-/// @author    GLi
-/// Created:   2014/6/27 13:25:39
-/// @section   DESCRIPTION
-///            MadPurgeHistoryDialog class declaration
-///
-///------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////
+// Name:		MadEditApp.cpp
+// Description:
+// Author:		minggang.li@gmail.com
+// Licence: 	GPL
+///////////////////////////////////////////////////////////////////////////////
 
 #ifndef __MADPURGEHISTORYDIALOG_H__
 #define __MADPURGEHISTORYDIALOG_H__

@@ -2,7 +2,7 @@
 // vim:         ts=4 sw=4
 // Name:        MadRecentList.h
 // Description: Porting Recent List from wxMedit
-// Author:      
+// Author:      minggang.li@gmail.com
 // Licence:     GPL
 ///////////////////////////////////////////////////////////////////////////////
 

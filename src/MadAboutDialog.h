@@ -1,8 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////
-// Name:        MadAboutDialog.h
+// Name:		MadAboutDialog.h
 // Description:
-// Author:      madedit@gmail.com
-// Licence:     GPL
+// Author:		madedit@gmail.com
+// Maintainer:	minggang.li@gmail.com
+// Licence: 	GPL
 ///////////////////////////////////////////////////////////////////////////////
 
 #ifndef _MADABOUTDIALOG_H_

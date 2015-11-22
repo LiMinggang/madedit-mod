@@ -1,9 +1,10 @@
-///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Jun  5 2014)
-// http://www.wxformbuilder.org/
-//
-// PLEASE DO "NOT" EDIT THIS FILE!
-///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+// Name:		MadEditApp.cpp
+// Description:
+// Author:		minggang.li@gmail.com
+// Licence: 	GPL
+///////////////////////////////////////////////////////////////////////////////
+
 #include <wx/textctrl.h>
 #include "MadEdit/MadEdit.h"
 #include "MadEditFrame.h"
@@ -53,7 +54,7 @@ MadMacroDlg::MadMacroDlg(wxWindow* parent, wxWindowID id, const wxString& title,
     wxString endline(wxT("\r"));
     if (m_pymacro->GetInsertNewLineType() == nltDOS) endline += wxT("\n");
     else if (m_pymacro->GetInsertNewLineType() == nltUNIX) endline = wxT("\n");
-    m_pymacro->SetText((wxString(wxT("#Create MadEdit Object for active edit")) + endline + wxT("medit = MadEdit()") + endline + endline));
+    m_pymacro->SetText((wxString(wxT("#Create MadEdit Object for the active edit")) + endline + wxT("medit = MadEdit()") + endline + endline));
     bSizer1->Add( m_pymacro, 1, wxEXPAND | wxALL, 5 );
 
     bSizer2 = new wxBoxSizer( wxHORIZONTAL );
