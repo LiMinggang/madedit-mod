@@ -111,10 +111,11 @@ Mod v0.3.9
 6.New: Add Credits and License to About Dialog
 7.New: Toggle hide/show replace UI items by checkbox for FindReplaceInFilesDialog
 8.New: Add Credits and License information on About dialog
+9.New: Add German and Polish translations(based on wxMedit)
 Fix: Improve mark brace issue(#15 in 0.3.8)
 Fix: Purge recent caret position history
 Fix: Typo on Option dialog(Dictionary settings) #82
-Fix: Not enough space for translated string #83
+Fix: Not enough space for translated string(Greek) #83
 
 
 Mod v0.3.8

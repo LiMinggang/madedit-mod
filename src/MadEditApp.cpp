@@ -66,10 +66,12 @@ wxChar *g_LanguageStr[]=
 	wxT("\u7B80\u4F53\u4E2D\u6587(Chinese Simplified)"),
 	wxT("\u6B63\u9AD4\u4E2D\u6587(Chinese Traditional)"),
 	wxT("English"),
-	wxT("Italiano(Italian)"),
-	wxT("\u65E5\u6587(Japanese)"),
-	wxT("Espa\u00F1ol(Spanish)"),
-	wxT("\u0440\u0443\u0441\u0441\u043a\u0438\u0439(Russian)"),
+	wxT("Deutsch (German)"),
+	wxT("Italiano (Italian)"),
+	wxT("\u65E5\u672C\u8A9E (Japanese)"),
+	wxT("Polski (Polish)"),
+	wxT("\u0420\u0443\u0441\u0441\u043a\u0438\u0439 (Russian)"),
+	wxT("Espa\u00F1ol (Spanish)"),
 	wxT("\u0395\u03BB\u03BB\u03B7\u03BD\u03B9\u03BA\u03AC(Greek)"),
 };
 int g_LanguageValue[]=
@@ -78,10 +80,12 @@ int g_LanguageValue[]=
 	wxLANGUAGE_CHINESE_SIMPLIFIED,
 	wxLANGUAGE_CHINESE_TRADITIONAL,
 	wxLANGUAGE_ENGLISH_US,
+	wxLANGUAGE_GERMAN,
 	wxLANGUAGE_ITALIAN,
 	wxLANGUAGE_JAPANESE,
-	wxLANGUAGE_SPANISH,
+	wxLANGUAGE_POLISH,
 	wxLANGUAGE_RUSSIAN,
+	wxLANGUAGE_SPANISH,
 	wxLANGUAGE_GREEK,
 };
 static const wxCmdLineEntryDesc g_cmdLineDesc [] =

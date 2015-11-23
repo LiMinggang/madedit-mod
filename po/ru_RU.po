@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-23 16:33+0800\n"
+"POT-Creation-Date: 2015-11-23 19:19+0800\n"
 "PO-Revision-Date: 2015-06-30 21:50+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
@@ -1639,7 +1639,7 @@ msgstr ""
 msgid "Toolbars"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1962 ../src/MadEditFrame.cpp:8097
+#: ../src/MadEditFrame.cpp:1962 ../src/MadEditFrame.cpp:8103
 msgid "Toggle Main Toolbar"
 msgstr ""
 
@@ -2426,28 +2426,28 @@ msgstr ""
 msgid "Press OK to visit our HomePage."
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8226
+#: ../src/MadEditFrame.cpp:8232
 msgid "Passed the begin of the file"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8280 ../src/MadSearchReplaceDialog.cpp:498
+#: ../src/MadEditFrame.cpp:8286 ../src/MadSearchReplaceDialog.cpp:498
 #: ../src/MadSearchReplaceDialog.cpp:631
 msgid "Passed the end of the file"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8312
+#: ../src/MadEditFrame.cpp:8318
 msgid "Invalid item"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8325
+#: ../src/MadEditFrame.cpp:8331
 msgid "&Copy Selected"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8326
+#: ../src/MadEditFrame.cpp:8332
 msgid "Copy &All"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8327
+#: ../src/MadEditFrame.cpp:8333
 msgid "&Reset Results"
 msgstr ""
 
@@ -3587,22 +3587,25 @@ msgstr ""
 
 #: ../src/MadAboutDialog.cpp:36
 msgid ""
-"    This program is free software; you can redistribute it and/or modify it "
+"This program is free software; you can redistribute it and/or modify it "
 "under the terms of the GNU General Public License as published by the Free "
 "Software Foundation; either version 3 of the License, or (at your option) "
 "any later version.\n"
-"\tThis program is distributed in the hope that it will be useful, but "
-"WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY "
-"or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+"\n"
+"This program is distributed in the hope that it will be useful, but WITHOUT "
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
 "more details.\n"
-"\tYou should have received a copy of the GNU General Public License along "
-"with this program; if not, write to the Free Software Foundation, Inc., 675 "
-"Mass Ave, Cambridge, MA 02139, USA.\n"
+"\n"
+"You should have received a copy of the GNU General Public License along with "
+"this program; if not, write to the Free Software Foundation, Inc., 675 Mass "
+"Ave, Cambridge, MA 02139, USA.\n"
 msgstr ""
 
 #: ../src/MadAboutDialog.cpp:41
 msgid ""
 "Minggang Li(Current maintainer of MadEdit-Mod)\n"
+"\n"
 "Alston Chen(Author of MadEdit)\n"
 "JiaYanwei(Patch contributer for MadEdit)\n"
 "nikoss(Greek Translation)\n"

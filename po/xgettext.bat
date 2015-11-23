@@ -7,3 +7,5 @@
 "c:\Program Files (x86)\Poedit\GettextTools\bin\msgmerge.exe" -U .\it_IT.po .\madedit.pot
 "c:\Program Files (x86)\Poedit\GettextTools\bin\msgmerge.exe" -U .\es.po .\madedit.pot
 "c:\Program Files (x86)\Poedit\GettextTools\bin\msgmerge.exe" -U .\el.po .\madedit.pot
+"c:\Program Files (x86)\Poedit\GettextTools\bin\msgmerge.exe" -U .\de_DE.po .\madedit.pot
+"c:\Program Files (x86)\Poedit\GettextTools\bin\msgmerge.exe" -U .\pl_PL.po .\madedit.pot
