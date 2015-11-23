@@ -1,15 +1,15 @@
 ///////////////////////////////////////////////////////////////////////////////
-// Name:		MadAboutDialog.cpp
+// Name:        MadAboutDialog.cpp
 // Description:
-// Author:		madedit@gmail.com
+// Author:      madedit@gmail.com
 // Maintainer:	minggang.li@gmail.com
-// Licence:		GPL
+// Licence:     GPL
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "MadAboutDialog.h"
 
-//Do not add custom	headers.
-//wx-dvcpp designer	will remove	them
+//Do not add custom headers.
+//wx-dvcpp designer will remove them
 ////Header Include Start
 ////Header Include End
 
@@ -20,21 +20,33 @@
 // MadAboutDialog
 //----------------------------------------------------------------------------
 	 //Add Custom Events only in the appropriate Block.
-	// Code	added in  other	places will	be removed by wx-dvcpp 
-	////Event Table	Start
+	// Code added in  other places will be removed by wx-dvcpp 
+	////Event Table Start
 BEGIN_EVENT_TABLE(MadAboutDialog,wxDialog)
-	////Manual Code	Start
-	////Manual Code	End
+	////Manual Code Start
+	////Manual Code End
 	
 	EVT_CLOSE(MadAboutDialog::MadAboutDialogClose)
 END_EVENT_TABLE()
-	////Event Table	End
+	////Event Table End
 
-wxString g_MadEdit_URL(wxT("http://sourceforge.net/projects/madedit/ or	http://sourceforge.net/projects/madedit-mod/"));
+wxString g_MadEdit_URL(wxT("http://sourceforge.net/projects/madedit/ or http://sourceforge.net/projects/madedit-mod/"));
 wxString g_MadEditMod_URL(wxT("https://sourceforge.net/p/madedit-mod/wiki/MadEdi-Mod/"));
+wxString g_MadEditModLicense (
+	_("    This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.\n\
+	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.\n\
+	You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.\n")
+);
+wxString g_MadEditModCredits(
+	_("Minggang Li(Current maintainer of MadEdit-Mod)\n\
+Alston Chen(Author of MadEdit)\n\
+JiaYanwei(Patch contributer for MadEdit)\n\
+nikoss(Greek Translation)\n\
+Other translation/patch contributers")
+);
 
-MadAboutDialog::MadAboutDialog(	wxWindow *parent, wxWindowID id, const wxString	&title,	const wxPoint &position, const wxSize& size,	long style )
-	: wxDialog(	parent,	id,	title, position, size, style)
+MadAboutDialog::MadAboutDialog( wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style )
+	: wxDialog( parent, id, title, position, size, style)
 {
 	CreateGUIControls();
 }
@@ -43,54 +55,95 @@ MadAboutDialog::~MadAboutDialog() {}
 
 void MadAboutDialog::CreateGUIControls(void)
 {
-	//Do not add custom	Code here
-	//wx-devcpp	designer will remove them.
-	//Add the custom code before or	after the Blocks
-	////GUI	Items Creation Start
+	//Do not add custom Code here
+	//wx-devcpp designer will remove them.
+	//Add the custom code before or after the Blocks
+	////GUI Items Creation Start
 
-	WxBoxSizer1	= new wxBoxSizer(wxVERTICAL);
+	//wxInitAllImageHandlers();   //Initialize graphic format handlers
+
+	WxBoxSizer1 = new wxBoxSizer(wxVERTICAL);
 	this->SetSizer(WxBoxSizer1);
 	this->SetAutoLayout(true);
 
-	WxBoxSizer2	= new wxBoxSizer(wxHORIZONTAL);
-	WxBoxSizer1->Add(WxBoxSizer2, 0, wxALIGN_CENTER	| wxALL, 3);
+	WxBoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
+	WxBoxSizer1->Add(WxBoxSizer2, 0, wxALIGN_CENTER | wxALL, 5);
 
-	WxBoxSizer4	= new wxBoxSizer(wxVERTICAL);
-	WxBoxSizer2->Add(WxBoxSizer4, 0, wxALIGN_TOP | wxALL, 5);
+	WxBoxSizer4 = new wxBoxSizer(wxVERTICAL);
+	WxBoxSizer2->Add(WxBoxSizer4, 0, wxALIGN_CENTER | wxALL, 5);
 
-	WxStaticBitmap1	= new wxStaticBitmap(this, ID_WXSTATICBITMAP1, wxNullBitmap, wxPoint(5,	5),	wxSize(48, 48) );
-	WxStaticBitmap1->Enable(false);
-	WxBoxSizer4->Add(WxStaticBitmap1,0,wxALIGN_CENTER |	wxALL,5);
+	WxStaticBitmap1 = new wxStaticBitmap(this, ID_WXSTATICBITMAP1, wxNullBitmap, wxPoint(5, 5), wxSize(48, 48) );
+	WxBoxSizer4->Add(WxStaticBitmap1, 0, wxALIGN_CENTER | wxALL, 5);
 
-	WxStaticBitmap2	= new wxStaticBitmap(this, ID_WXSTATICBITMAP2, wxNullBitmap, wxPoint(5,	63), wxSize(48,	48)	);
-	WxStaticBitmap2->Enable(false);
-	WxBoxSizer4->Add(WxStaticBitmap2,0,wxALIGN_CENTER |	wxALL,5);
+	WxStaticBitmap2 = new wxStaticBitmap(this, ID_WXSTATICBITMAP2, wxNullBitmap, wxPoint(5, 63), wxSize(48, 48) );
+	WxBoxSizer4->Add(WxStaticBitmap2, 0, wxALIGN_CENTER | wxALL, 5);
 
-	WxMemo1	= new wxTextCtrl(this, ID_WXMEMO1, wxT(""),	wxPoint(70,	2),	wxSize(400,	200), wxTE_READONLY	| wxTE_AUTO_URL |	wxTE_MULTILINE,	wxDefaultValidator,	wxT("WxMemo1"));
-	//WxMemo1->SetMaxLength(0);
-	WxMemo1->SetFocus();
-	WxMemo1->SetInsertionPointEnd();
-	WxBoxSizer2->Add(WxMemo1,0,wxALIGN_CENTER |	wxALL,2);
+	WxBoxSizer5 = new wxBoxSizer(wxHORIZONTAL);
+	WxBoxSizer2->Add(WxBoxSizer5, 0, wxALIGN_CENTER | wxALL, 5);
 
-	WxBoxSizer3	= new wxBoxSizer(wxHORIZONTAL);
-	WxBoxSizer1->Add(WxBoxSizer3, 0, wxALIGN_CENTER	| wxALL, 3);
+	WxAuiNotebookAbout = new wxAuiNotebook(this, ID_WXAUINOTEBOOKABOUT, wxPoint(5, 5), wxSize(450, 220), wxAUI_NB_TOP | wxAUI_NB_TAB_SPLIT | wxAUI_NB_TAB_MOVE | wxAUI_NB_SCROLL_BUTTONS | wxAUI_NB_CLOSE_ON_ACTIVE_TAB);
+	WxBoxSizer5->Add(WxAuiNotebookAbout, 0, wxALIGN_CENTER | wxALL, 5);
 
-	WxButtonOK = new wxButton(this,	wxID_OK, _("&OK"), wxPoint(4, 4), wxSize(90, 30), 0, wxDefaultValidator, wxT("WxButtonOK"));
-	WxBoxSizer3->Add(WxButtonOK,0,wxALIGN_CENTER | wxALL,4);
+	WxPanelAbout = new wxPanel(WxAuiNotebookAbout, ID_WXPANELABOUT, wxPoint(-1, -1), wxSize(420, 210));
+	WxAuiNotebookAbout->AddPage(WxPanelAbout, _("About"));
 
-	WxButtonCancel = new wxButton(this,	wxID_CANCEL, _("&Cancel"), wxPoint(102,	4),	wxSize(90, 30),	0, wxDefaultValidator,	wxT("WxButtonCancel"));
-	WxBoxSizer3->Add(WxButtonCancel,0,wxALIGN_CENTER | wxALL,4);
+	WxBoxSizer6 = new wxBoxSizer(wxHORIZONTAL);
+	WxPanelAbout->SetSizer(WxBoxSizer6);
+	WxPanelAbout->SetAutoLayout(true);
+
+	WxMemoAbout = new wxTextCtrl(WxPanelAbout, ID_WXMEMOABOUT, wxEmptyString, wxPoint(5, 5), wxSize(400, 200), wxTE_READONLY | wxTE_AUTO_URL | wxTE_MULTILINE, wxDefaultValidator, wxT("WxMemoAbout"));
+	WxMemoAbout->SetMaxLength(0);
+	WxMemoAbout->AppendText(wxT(""));
+	WxMemoAbout->SetFocus();
+	WxMemoAbout->SetInsertionPointEnd();
+	WxBoxSizer6->Add(WxMemoAbout, 0, wxALIGN_CENTER | wxALL, 5);
+
+	WxPanelCredits = new wxPanel(WxAuiNotebookAbout, ID_WXPANELCREDITS, wxPoint(0, -1), wxSize(420, 210));
+	WxAuiNotebookAbout->AddPage(WxPanelCredits, _("Credits"));
+
+	WxBoxSizer7 = new wxBoxSizer(wxHORIZONTAL);
+	WxPanelCredits->SetSizer(WxBoxSizer7);
+	WxPanelCredits->SetAutoLayout(true);
+
+	WxMemoCredits = new wxTextCtrl(WxPanelCredits, ID_WXMEMOCREDITS, wxEmptyString, wxPoint(5, 5), wxSize(400, 200), wxTE_READONLY | wxTE_AUTO_URL | wxTE_MULTILINE, wxDefaultValidator, wxT("WxMemoCredits"));
+	WxMemoCredits->SetMaxLength(0);
+	WxMemoCredits->AppendText(wxT(""));
+	WxMemoCredits->SetFocus();
+	WxMemoCredits->SetInsertionPointEnd();
+	WxBoxSizer7->Add(WxMemoCredits, 0, wxALIGN_CENTER | wxALL, 5);
+
+	WxPanelLicense = new wxPanel(WxAuiNotebookAbout, ID_WXPANELLICENSE, wxPoint(-1, 2), wxSize(420, 210));
+	WxAuiNotebookAbout->AddPage(WxPanelLicense, _("License"));
+
+	wxStaticBox* WxStaticBoxSizer1_StaticBoxObj = new wxStaticBox(WxPanelLicense, wxID_ANY, _("GNU General Public License"));
+	WxStaticBoxSizer1 = new wxStaticBoxSizer(WxStaticBoxSizer1_StaticBoxObj, wxHORIZONTAL);
+	WxPanelLicense->SetSizer(WxStaticBoxSizer1);
+	WxPanelLicense->SetAutoLayout(true);
+
+	WxMemoLicense = new wxTextCtrl(WxPanelLicense, ID_WXMEMOLICENSE, wxEmptyString, wxPoint(10, 20), wxSize(400, 200), wxTE_READONLY | wxTE_AUTO_URL | wxTE_MULTILINE, wxDefaultValidator, wxT("WxMemoLicense"));
+	WxMemoLicense->SetMaxLength(0);
+	WxMemoLicense->SetFocus();
+	WxMemoLicense->SetInsertionPointEnd();
+	WxStaticBoxSizer1->Add(WxMemoLicense, 0, wxALIGN_CENTER | wxALL, 5);
+
+	WxBoxSizer3 = new wxBoxSizer(wxHORIZONTAL);
+	WxBoxSizer1->Add(WxBoxSizer3, 0, wxALIGN_CENTER | wxALL, 5);
+
+	WxButtonOK = new wxButton(this, wxID_OK, _("&OK"), wxPoint(5, 5), wxSize(75, 25), 0, wxDefaultValidator, wxT("WxButtonOK"));
+	WxBoxSizer3->Add(WxButtonOK, 0, wxALIGN_CENTER | wxALL, 5);
+
+	WxButtonCancel = new wxButton(this, wxID_CANCEL, _("&Cancel"), wxPoint(90, 5), wxSize(75, 25), 0, wxDefaultValidator, wxT("WxButtonCancel"));
+	WxBoxSizer3->Add(WxButtonCancel, 0, wxALIGN_CENTER | wxALL, 5);
 
 	SetTitle(_("About MadEdit-Mod"));
 	SetIcon(wxNullIcon);
 	
-	GetSizer()->Layout();
+	Layout();
 	GetSizer()->Fit(this);
 	GetSizer()->SetSizeHints(this);
 	Center();
 	
-	////GUI	Items Creation End
-
+	////GUI Items Creation End
 	
 	WxStaticBitmap1->SetBitmap(wxBitmap(Mad_xpm));
 	WxStaticBitmap1->Enable(true);
@@ -103,7 +156,7 @@ void MadAboutDialog::CreateGUIControls(void)
 
 void MadAboutDialog::MadAboutDialogClose(wxCloseEvent& event)
 {
-	// --> Don't use Close with	a wxDialog,
+	// --> Don't use Close with a wxDialog,
 	// use Destroy instead.
 	Destroy();
 }

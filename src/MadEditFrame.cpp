@@ -214,7 +214,7 @@ extern wxArrayString g_LanguageString;
 #endif
 extern wxString MadStrLower( const wxString & );
 
-extern wxString g_MadEdit_Version;
+extern wxString g_MadEdit_Version, g_MadEditModLicense, g_MadEditModCredits;
 extern wxString g_MadEdit_URL;
 extern wxString g_MadEditMod_URL;
 extern wxString MadEncodingGrpName[];
@@ -7956,10 +7956,12 @@ void MadEditFrame::OnWindowNextWindow( wxCommandEvent& event )
 void MadEditFrame::OnHelpAbout( wxCommandEvent& event )
 {
 	MadAboutDialog dlg( this );
-	dlg.WxMemo1->AppendText( g_MadEdit_Version + wxT( "\n" ) +
+	dlg.WxMemoAbout->AppendText( g_MadEdit_Version + wxT( "\n" ) +
 							 g_MadEditMod_URL + wxT( "\n\n" ) +
 							 _( "Download dictionary at\nhttp://extensions.openoffice.org/" ) + wxT( "\n\n" ) +
 							 _( "Press OK to visit our HomePage." ) );
+	dlg.WxMemoLicense->AppendText( g_MadEditModLicense );
+	dlg.WxMemoCredits->AppendText( g_MadEditModCredits );
 	// Hide Modaless Dialog
 	HideModalessDialogs();
 

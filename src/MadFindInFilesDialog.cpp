@@ -127,7 +127,6 @@ void MadFindInFilesDialog::CreateGUIControls( void )
 	WxBoxSizer5->Add( WxButtonFind, 0, wxALIGN_CENTER | wxEXPAND | wxALL, 2 );
 	WxButtonReplace = new wxButton( this, ID_WXBUTTONREPLACE, _( "&Replace" ), wxPoint( 2, 34 ), wxSize( 100, 28 ), 0, wxDefaultValidator, wxT( "WxButtonReplace" ) );
 	WxBoxSizer5->Add( WxButtonReplace, 0, wxALIGN_CENTER | wxEXPAND | wxALL, 2 );
-	WxButtonReplace->Disable();
 	WxCheckBoxEnableReplace = new wxCheckBox( this, ID_WXCHECKBOXENABLEREPLACE, _( "&Enable Replace" ), wxPoint( 2, 64 ), wxSize( 100, 25 ), 0, wxDefaultValidator, wxT( "WxCheckBoxEnableReplace" ) );
 	WxBoxSizer5->Add( WxCheckBoxEnableReplace, 0, wxALIGN_CENTER | wxEXPAND | wxALL, 0 );
 	WxCheckBoxEnableReplace->SetValue( false );
@@ -213,6 +212,9 @@ void MadFindInFilesDialog::CreateGUIControls( void )
 	WxBoxSizer7->SetItemMinSize( m_ReplaceText, 400, bh );
 	WxBitmapButtonRecentReplaceText = new wxBitmapButton( this, ID_WXBITMAPBUTTONRECENTREPLACETEXT, WxBitmapButtonRecentFindText_BITMAP, wxPoint( 0, 0 ), wxSize( bh, bh ), wxBU_AUTODRAW, wxDefaultValidator, wxT( "WxBitmapButtonRecentReplaceText" ) );
 	WxBoxSizer7->Add( WxBitmapButtonRecentReplaceText, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 2 );
+	m_ReplaceText->Show(false);
+	WxBitmapButtonRecentReplaceText->Show(false);
+	WxButtonReplace->Show(false);
 	// build encoding list
 	wxString systemenc( _( "Automatic Detection" ) );
 	WxComboBoxEncoding->Append( systemenc );
@@ -840,7 +842,23 @@ void MadFindInFilesDialog::FindReplaceInFiles( bool bReplace )
  */
 void MadFindInFilesDialog::WxCheckBoxEnableReplaceClick( wxCommandEvent& event )
 {
-	WxButtonReplace->Enable( event.IsChecked() );
+	if(event.IsChecked())
+	{
+		m_ReplaceText->Show(true);
+		WxBitmapButtonRecentReplaceText->Show(true);
+		WxButtonReplace->Show(true);
+		WxButtonReplace->SetDefault();
+	}
+	else
+	{
+		m_ReplaceText->Show(false);
+		WxBitmapButtonRecentReplaceText->Show(false);
+		WxButtonReplace->Show(false);
+		WxButtonFind->SetDefault();
+	}
+	
+	GetSizer()->Fit(this);
+	GetSizer()->SetSizeHints(this);
 }
 
 /*

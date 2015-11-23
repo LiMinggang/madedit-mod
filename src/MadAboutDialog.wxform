@@ -1,17 +1,12 @@
-object frmNewForm: TfrmNewForm
+object frmNewForm_1: TfrmNewForm
   Left = 8
   Top = 8
   AutoScroll = False
   BorderIcons = [biSystemMenu, biMinimize]
-  Caption = 'About MadEdit'
-  ClientHeight = 222
-  ClientWidth = 431
+  Caption = 'About MadEdit-Mod'
+  ClientHeight = 379
+  ClientWidth = 506
   Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
-  Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'MS Sans Serif'
-  Font.Style = []
   OldCreateOrder = True
   PopupMenu = DesignerPopup.Owner
   Visible = True
@@ -29,113 +24,468 @@ object frmNewForm: TfrmNewForm
   Wx_Hidden = False
   Wx_SizeToContents = True
   Wx_GeneralStyle = []
-  Wx_DialogStyle = [wxCAPTION, wxSYSTEM_MENU, wxDIALOG_NO_PARENT, wxCLOSE_BOX]
+  Wx_DialogStyle = [wxCAPTION, wxDIALOG_NO_PARENT, wxCLOSE_BOX]
   Wx_Border = 0
   Wx_BorderAlignment = []
   isAuimanagerAvailable = False
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 15
   object WxBoxSizer1: TWxBoxSizer
     Left = 0
     Top = 0
-    Width = 431
-    Height = 222
+    Width = 506
+    Height = 379
     Align = alClient
     TabOrder = 0
     Orientation = wxVertical
     Wx_Class = 'wxBoxSizer'
     Wx_ControlOrientation = wxControlVertical
     Wx_IDName = 'ID_WXBOXSIZER1'
-    Wx_IDValue = 1007
-    Wx_Border = 0
+    Wx_IDValue = 1001
     object WxBoxSizer2: TWxBoxSizer
-      Left = 3
-      Top = 3
-      Width = 422
-      Height = 154
+      Left = 5
+      Top = 5
+      Width = 377
+      Height = 213
       TabOrder = 0
       Wx_Class = 'wxBoxSizer'
       Wx_ControlOrientation = wxControlVertical
       Wx_IDName = 'ID_WXBOXSIZER2'
-      Wx_IDValue = 1008
-      Wx_Border = 3
+      Wx_IDValue = 1002
       object WxBoxSizer4: TWxBoxSizer
         Left = 5
-        Top = 19
+        Top = 48
         Width = 58
         Height = 116
-        TabOrder = 1
+        TabOrder = 0
         Orientation = wxVertical
         Wx_Class = 'wxBoxSizer'
         Wx_ControlOrientation = wxControlVertical
         Wx_IDName = 'ID_WXBOXSIZER4'
-        Wx_IDValue = 1014
-        Wx_Alignment = [wxALIGN_TOP]
+        Wx_IDValue = 1004
         object WxStaticBitmap1: TWxStaticBitmap
           Left = 5
           Top = 5
-          Width = 48
-          Height = 48
-          TabOrder = 1
-          Picture.Data = {07544269746D617000000000}
-          Wx_Class = 'wxStaticBitmap'
-          Wx_ControlOrientation = wxControlVertical
-          Wx_Enabled = False
-          Wx_GeneralStyle = []
-          Wx_IDName = 'ID_WXSTATICBITMAP1'
-          Wx_IDValue = 1016
-        end
-        object WxStaticBitmap2: TWxStaticBitmap
-          Left = 5
-          Top = 63
           Width = 48
           Height = 48
           TabOrder = 0
           Picture.Data = {07544269746D617000000000}
           Wx_Class = 'wxStaticBitmap'
           Wx_ControlOrientation = wxControlVertical
-          Wx_Enabled = False
+          Wx_GeneralStyle = []
+          Wx_IDName = 'ID_WXSTATICBITMAP1'
+          Wx_IDValue = 1008
+          Wx_PaneCaption = 'WxStaticBitmap1'
+          Wx_PaneName = 'WxStaticBitmap1_Pane'
+          Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+          Wx_Aui_Dockable_Direction = []
+          Wx_Aui_Pane_Style = []
+          Wx_Aui_Pane_Buttons = []
+          Wx_BestSize_Height = 0
+          Wx_BestSize_Width = 0
+          Wx_MinSize_Height = 0
+          Wx_MinSize_Width = 0
+          Wx_MaxSize_Height = 0
+          Wx_MaxSize_Width = 0
+          Wx_Floating_Height = 0
+          Wx_Floating_Width = 0
+          Wx_Floating_X_Pos = 0
+          Wx_Floating_Y_Pos = 0
+        end
+        object WxStaticBitmap2: TWxStaticBitmap
+          Left = 5
+          Top = 63
+          Width = 48
+          Height = 48
+          TabOrder = 1
+          Picture.Data = {07544269746D617000000000}
+          Wx_Class = 'wxStaticBitmap'
+          Wx_ControlOrientation = wxControlVertical
           Wx_GeneralStyle = []
           Wx_IDName = 'ID_WXSTATICBITMAP2'
-          Wx_IDValue = 1015
+          Wx_IDValue = 1009
+          Wx_PaneCaption = 'WxStaticBitmap2'
+          Wx_PaneName = 'WxStaticBitmap2_Pane'
+          Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+          Wx_Aui_Dockable_Direction = []
+          Wx_Aui_Pane_Style = []
+          Wx_Aui_Pane_Buttons = []
+          Wx_BestSize_Height = 0
+          Wx_BestSize_Width = 0
+          Wx_MinSize_Height = 0
+          Wx_MinSize_Width = 0
+          Wx_MaxSize_Height = 0
+          Wx_MaxSize_Width = 0
+          Wx_Floating_Height = 0
+          Wx_Floating_Width = 0
+          Wx_Floating_X_Pos = 0
+          Wx_Floating_Y_Pos = 0
         end
       end
-      object WxMemo1: TWxMemo
-        Left = 70
-        Top = 2
-        Width = 350
-        Height = 150
-        BevelInner = bvNone
-        BevelOuter = bvNone
-        TabOrder = 0
-        Wx_BGColor = clBlack
-        Wx_Class = 'wxTextCtrl'
+      object WxBoxSizer5: TWxBoxSizer
+        Left = 73
+        Top = 5
+        Width = 299
+        Height = 203
+        TabOrder = 1
+        Wx_Class = 'wxBoxSizer'
         Wx_ControlOrientation = wxControlVertical
-        Wx_EditStyle = [wxTE_READONLY, wxTE_AUTO_URL, wxTE_MULTILINE]
-        Wx_FGColor = clBlack
-        Wx_GeneralStyle = []
-        Wx_IDName = 'ID_WXMEMO1'
-        Wx_IDValue = 1011
-        Wx_MaxLength = 0
-        Wx_Border = 2
+        Wx_IDName = 'ID_WXBOXSIZER5'
+        Wx_IDValue = 1005
+        object WxAuiNotebookAbout: TWxAuiNotebook
+          Left = 5
+          Top = 5
+          Width = 289
+          Height = 193
+          ActivePage = WxAuiNoteBookPageLicense
+          TabIndex = 2
+          TabOrder = 0
+          Wx_Class = 'wxAuiNotebook'
+          Wx_ControlOrientation = wxControlVertical
+          Wx_EventList.Strings = (
+            'EVT_UPDATE_UI:OnUpdateUI'
+            'EVT_AUINOTEBOOK_PAGE_CLOSE:OnNotebookPageClose'
+            'EVT_AUINOTEBOOK_PAGE_CLOSED:OnNotebookPageClosed'
+            'EVT_AUINOTEBOOK_PAGE_CHANGED:OnNotebookPageChanged'
+            'EVT_AUINOTEBOOK_PAGE_CHANGING:OnNotebookPageChanging'
+            'EVT_AUINOTEBOOK_BUTTON:OnNotebookButton'
+            'EVT_AUINOTEBOOK_BEGIN_DRAG:OnNotebookBeginDrag'
+            'EVT_AUINOTEBOOK_END_DRAG:OnNotebookEndDrag'
+            'EVT_AUINOTEBOOK_DRAG_MOTION:OnNotebookDragMotion'
+            'EVT_AUINOTEBOOK_ALLOW_DND:OnNotebookAllowDND'
+            'EVT_AUINOTEBOOK_DRAG_DONE:OnNotebookDragDone'
+            'EVT_AUINOTEBOOK_TAB_MIDDLE_DOWN:OnNotebookTabMDown'
+            'EVT_AUINOTEBOOK_TAB_MIDDLE_UP:OnNotebookTabMUp'
+            'EVT_AUINOTEBOOK_TAB_RIGHT_DOWN:OnNotebookTabRDown'
+            'EVT_AUINOTEBOOK_TAB_RIGHT_UP:OnNotebookTabRUp'
+            'EVT_AUINOTEBOOK_BG_DCLICK:OnNotebook')
+          Wx_IDName = 'ID_WXAUINOTEBOOKABOUT'
+          Wx_IDValue = 1010
+          Wx_Hidden = False
+          Wx_AuiNoteBookStyle = [wxAUI_NB_TAB_SPLIT, wxAUI_NB_TAB_MOVE, wxAUI_NB_SCROLL_BUTTONS, wxAUI_NB_CLOSE_ON_ACTIVE_TAB]
+          Wx_GeneralStyle = []
+          Wx_BookAlignment = wxAUI_NB_TOP
+          Wx_PaneCaption = 'WxAuiNotebook1'
+          Wx_PaneName = 'WxAuiNotebook1_Pane'
+          Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+          Wx_Aui_Dockable_Direction = []
+          Wx_Aui_Pane_Style = []
+          Wx_Aui_Pane_Buttons = []
+          Wx_BestSize_Height = 0
+          Wx_BestSize_Width = 0
+          Wx_MinSize_Height = 193
+          Wx_MinSize_Width = 289
+          Wx_MaxSize_Height = 0
+          Wx_MaxSize_Width = 0
+          Wx_Floating_Height = 0
+          Wx_Floating_Width = 0
+          Wx_Floating_X_Pos = 0
+          Wx_Floating_Y_Pos = 0
+          object WxAuiNoteBookPageAbout: TWxAuiNoteBookPage
+            Caption = 'About'
+            Wx_BKColor = clBlack
+            Wx_Class = 'wxPanel'
+            Wx_ControlOrientation = wxControlVertical
+            Wx_Default = False
+            Wx_EventList.Strings = (
+              'EVT_UPDATE_UI:OnUpdateUI')
+            Wx_FGColor = clBlack
+            Wx_GeneralStyle = []
+            Wx_Hidden = False
+            Wx_IDName = 'ID_WXAUINOTEBOOKPAGEABOUT'
+            Wx_IDValue = 1011
+            object WxPanelAbout: TWxPanel
+              Left = -1
+              Top = -1
+              Width = 283
+              Height = 164
+              TabOrder = 0
+              Wx_BKColor = clBlack
+              Wx_Class = 'wxPanel'
+              Wx_ControlOrientation = wxControlVertical
+              Wx_Default = False
+              Wx_EventList.Strings = (
+                'EVT_UPDATE_UI:OnUpdateUI')
+              Wx_FGColor = clBlack
+              Wx_GeneralStyle = []
+              Wx_Hidden = False
+              Wx_IDName = 'ID_WXPANELABOUT'
+              Wx_IDValue = 1014
+              Wx_PaneCaption = 'WxPanel1'
+              Wx_PaneName = 'WxPanel1_Pane'
+              Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+              Wx_Aui_Dockable_Direction = []
+              Wx_Aui_Pane_Style = []
+              Wx_Aui_Pane_Buttons = []
+              Wx_BestSize_Height = 0
+              Wx_BestSize_Width = 0
+              Wx_MinSize_Height = 0
+              Wx_MinSize_Width = 0
+              Wx_MaxSize_Height = 0
+              Wx_MaxSize_Width = 0
+              Wx_Floating_Height = 0
+              Wx_Floating_Width = 0
+              Wx_Floating_X_Pos = 0
+              Wx_Floating_Y_Pos = 0
+              object WxBoxSizer6: TWxBoxSizer
+                Left = 1
+                Top = 1
+                Width = 281
+                Height = 162
+                Align = alClient
+                TabOrder = 0
+                Wx_Class = 'wxBoxSizer'
+                Wx_ControlOrientation = wxControlVertical
+                Wx_IDName = 'ID_WXBOXSIZER6'
+                Wx_IDValue = 1023
+                object WxMemoAbout: TWxMemo
+                  Left = 5
+                  Top = 5
+                  Width = 400
+                  Height = 200
+                  BevelInner = bvNone
+                  BevelOuter = bvNone
+                  Lines.Strings = (
+                    '')
+                  TabOrder = 0
+                  Wx_BGColor = clBlack
+                  Wx_Class = 'wxTextCtrl'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_EditStyle = [wxTE_READONLY, wxTE_AUTO_URL, wxTE_MULTILINE]
+                  Wx_FGColor = clBlack
+                  Wx_GeneralStyle = []
+                  Wx_IDName = 'ID_WXMEMOABOUT'
+                  Wx_IDValue = 1024
+                  Wx_MaxLength = 0
+                  Wx_PaneCaption = 'WxMemo1'
+                  Wx_PaneName = 'WxMemo1_Pane'
+                  Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                  Wx_Aui_Dockable_Direction = []
+                  Wx_Aui_Pane_Style = []
+                  Wx_Aui_Pane_Buttons = []
+                  Wx_BestSize_Height = 0
+                  Wx_BestSize_Width = 0
+                  Wx_MinSize_Height = 0
+                  Wx_MinSize_Width = 0
+                  Wx_MaxSize_Height = 0
+                  Wx_MaxSize_Width = 0
+                  Wx_Floating_Height = 0
+                  Wx_Floating_Width = 0
+                  Wx_Floating_X_Pos = 0
+                  Wx_Floating_Y_Pos = 0
+                end
+              end
+            end
+          end
+          object WxAuiNoteBookPageCredits: TWxAuiNoteBookPage
+            Caption = 'Credits'
+            Wx_BKColor = clBlack
+            Wx_Class = 'wxPanel'
+            Wx_ControlOrientation = wxControlVertical
+            Wx_Default = False
+            Wx_EventList.Strings = (
+              'EVT_UPDATE_UI:OnUpdateUI')
+            Wx_FGColor = clBlack
+            Wx_GeneralStyle = []
+            Wx_Hidden = False
+            Wx_IDName = 'ID_WXAUINOTEBOOKPAGECREDITS'
+            Wx_IDValue = 1017
+            object WxPanelCredits: TWxPanel
+              Left = 0
+              Top = -1
+              Width = 316
+              Height = 163
+              TabOrder = 0
+              Wx_BKColor = clBlack
+              Wx_Class = 'wxPanel'
+              Wx_ControlOrientation = wxControlVertical
+              Wx_Default = False
+              Wx_EventList.Strings = (
+                'EVT_UPDATE_UI:OnUpdateUI')
+              Wx_FGColor = clBlack
+              Wx_GeneralStyle = []
+              Wx_Hidden = False
+              Wx_IDName = 'ID_WXPANELCREDITS'
+              Wx_IDValue = 1018
+              Wx_PaneCaption = 'WxPanel1'
+              Wx_PaneName = 'WxPanel1_Pane'
+              Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+              Wx_Aui_Dockable_Direction = []
+              Wx_Aui_Pane_Style = []
+              Wx_Aui_Pane_Buttons = []
+              Wx_BestSize_Height = 0
+              Wx_BestSize_Width = 0
+              Wx_MinSize_Height = 0
+              Wx_MinSize_Width = 0
+              Wx_MaxSize_Height = 0
+              Wx_MaxSize_Width = 0
+              Wx_Floating_Height = 0
+              Wx_Floating_Width = 0
+              Wx_Floating_X_Pos = 0
+              Wx_Floating_Y_Pos = 0
+              object WxBoxSizer7: TWxBoxSizer
+                Left = 1
+                Top = 1
+                Width = 314
+                Height = 161
+                Align = alClient
+                TabOrder = 0
+                Wx_Class = 'wxBoxSizer'
+                Wx_ControlOrientation = wxControlVertical
+                Wx_IDName = 'ID_WXBOXSIZER7'
+                Wx_IDValue = 1021
+                object WxMemoCredits: TWxMemo
+                  Left = 5
+                  Top = 5
+                  Width = 400
+                  Height = 200
+                  BevelInner = bvNone
+                  BevelOuter = bvNone
+                  Lines.Strings = (
+                    '')
+                  TabOrder = 0
+                  Wx_BGColor = clBlack
+                  Wx_Class = 'wxTextCtrl'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_EditStyle = [wxTE_READONLY, wxTE_AUTO_URL, wxTE_MULTILINE]
+                  Wx_FGColor = clBlack
+                  Wx_GeneralStyle = []
+                  Wx_IDName = 'ID_WXMEMOCREDITS'
+                  Wx_IDValue = 1025
+                  Wx_MaxLength = 0
+                  Wx_PaneCaption = 'WxMemo1'
+                  Wx_PaneName = 'WxMemo1_Pane'
+                  Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                  Wx_Aui_Dockable_Direction = []
+                  Wx_Aui_Pane_Style = []
+                  Wx_Aui_Pane_Buttons = []
+                  Wx_BestSize_Height = 0
+                  Wx_BestSize_Width = 0
+                  Wx_MinSize_Height = 0
+                  Wx_MinSize_Width = 0
+                  Wx_MaxSize_Height = 0
+                  Wx_MaxSize_Width = 0
+                  Wx_Floating_Height = 0
+                  Wx_Floating_Width = 0
+                  Wx_Floating_X_Pos = 0
+                  Wx_Floating_Y_Pos = 0
+                end
+              end
+            end
+          end
+          object WxAuiNoteBookPageLicense: TWxAuiNoteBookPage
+            Caption = 'License'
+            Wx_BKColor = clBlack
+            Wx_Class = 'wxPanel'
+            Wx_ControlOrientation = wxControlVertical
+            Wx_Default = False
+            Wx_EventList.Strings = (
+              'EVT_UPDATE_UI:OnUpdateUI')
+            Wx_FGColor = clBlack
+            Wx_GeneralStyle = []
+            Wx_Hidden = False
+            Wx_IDName = 'ID_WXAUINOTEBOOKPAGELICENSE'
+            Wx_IDValue = 1026
+            object WxPanelLicense: TWxPanel
+              Left = -1
+              Top = 2
+              Width = 278
+              Height = 159
+              TabOrder = 0
+              Wx_BKColor = clBlack
+              Wx_Class = 'wxPanel'
+              Wx_ControlOrientation = wxControlVertical
+              Wx_Default = False
+              Wx_EventList.Strings = (
+                'EVT_UPDATE_UI:OnUpdateUI')
+              Wx_FGColor = clBlack
+              Wx_GeneralStyle = []
+              Wx_Hidden = False
+              Wx_IDName = 'ID_WXPANELLICENSE'
+              Wx_IDValue = 1027
+              Wx_PaneCaption = 'WxPanel1'
+              Wx_PaneName = 'WxPanel1_Pane'
+              Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+              Wx_Aui_Dockable_Direction = []
+              Wx_Aui_Pane_Style = []
+              Wx_Aui_Pane_Buttons = []
+              Wx_BestSize_Height = 0
+              Wx_BestSize_Width = 0
+              Wx_MinSize_Height = 0
+              Wx_MinSize_Width = 0
+              Wx_MaxSize_Height = 0
+              Wx_MaxSize_Width = 0
+              Wx_Floating_Height = 0
+              Wx_Floating_Width = 0
+              Wx_Floating_X_Pos = 0
+              Wx_Floating_Y_Pos = 0
+              object WxStaticBoxSizer1: TWxStaticBoxSizer
+                Left = 1
+                Top = 1
+                Width = 276
+                Height = 157
+                Align = alClient
+                TabOrder = 0
+                Wx_Caption = 'GNU General Public License'
+                Wx_Class = 'wxStaticBoxSizer'
+                Wx_ControlOrientation = wxControlVertical
+                Wx_IDName = 'ID_WXSTATICBOXSIZER1'
+                Wx_IDValue = 1028
+                object WxMemoLicense: TWxMemo
+                  Left = 10
+                  Top = 20
+                  Width = 400
+                  Height = 200
+                  BevelInner = bvNone
+                  BevelOuter = bvNone
+                  TabOrder = 1
+                  Wx_BGColor = clBlack
+                  Wx_Class = 'wxTextCtrl'
+                  Wx_ControlOrientation = wxControlVertical
+                  Wx_EditStyle = [wxTE_READONLY, wxTE_AUTO_URL, wxTE_MULTILINE]
+                  Wx_FGColor = clBlack
+                  Wx_GeneralStyle = []
+                  Wx_IDName = 'ID_WXMEMOLICENSE'
+                  Wx_IDValue = 1029
+                  Wx_MaxLength = 0
+                  Wx_PaneCaption = 'WxMemo1'
+                  Wx_PaneName = 'WxMemo1_Pane'
+                  Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+                  Wx_Aui_Dockable_Direction = []
+                  Wx_Aui_Pane_Style = []
+                  Wx_Aui_Pane_Buttons = []
+                  Wx_BestSize_Height = 0
+                  Wx_BestSize_Width = 0
+                  Wx_MinSize_Height = 0
+                  Wx_MinSize_Width = 0
+                  Wx_MaxSize_Height = 0
+                  Wx_MaxSize_Width = 0
+                  Wx_Floating_Height = 0
+                  Wx_Floating_Width = 0
+                  Wx_Floating_X_Pos = 0
+                  Wx_Floating_Y_Pos = 0
+                end
+              end
+            end
+          end
+        end
       end
     end
     object WxBoxSizer3: TWxBoxSizer
-      Left = 116
-      Top = 163
-      Width = 196
-      Height = 38
+      Left = 108
+      Top = 228
+      Width = 170
+      Height = 35
       TabOrder = 1
       Wx_Class = 'wxBoxSizer'
       Wx_ControlOrientation = wxControlVertical
       Wx_IDName = 'ID_WXBOXSIZER3'
-      Wx_IDValue = 1009
-      Wx_Border = 3
+      Wx_IDValue = 1003
       object WxButtonOK: TWxButton
-        Left = 4
-        Top = 4
-        Width = 90
-        Height = 30
+        Left = 5
+        Top = 5
+        Width = 75
+        Height = 25
         Caption = '&OK'
         TabOrder = 0
         Wx_BKColor = clBlack
@@ -151,13 +501,28 @@ object frmNewForm: TfrmNewForm
         Wx_Hidden = False
         Wx_IDName = 'wxID_OK'
         Wx_IDValue = 1012
-        Wx_Border = 4
+        Wx_PaneCaption = 'WxButton1'
+        Wx_PaneName = 'WxButton1_Pane'
+        Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+        Wx_Aui_Dockable_Direction = []
+        Wx_Aui_Pane_Style = []
+        Wx_Aui_Pane_Buttons = []
+        Wx_BestSize_Height = 0
+        Wx_BestSize_Width = 0
+        Wx_MinSize_Height = 0
+        Wx_MinSize_Width = 0
+        Wx_MaxSize_Height = 0
+        Wx_MaxSize_Width = 0
+        Wx_Floating_Height = 0
+        Wx_Floating_Width = 0
+        Wx_Floating_X_Pos = 0
+        Wx_Floating_Y_Pos = 0
       end
       object WxButtonCancel: TWxButton
-        Left = 102
-        Top = 4
-        Width = 90
-        Height = 30
+        Left = 90
+        Top = 5
+        Width = 75
+        Height = 25
         Caption = '&Cancel'
         TabOrder = 1
         Wx_BKColor = clBlack
@@ -173,7 +538,22 @@ object frmNewForm: TfrmNewForm
         Wx_Hidden = False
         Wx_IDName = 'wxID_CANCEL'
         Wx_IDValue = 1013
-        Wx_Border = 4
+        Wx_PaneCaption = 'WxButton2'
+        Wx_PaneName = 'WxButton2_Pane'
+        Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+        Wx_Aui_Dockable_Direction = []
+        Wx_Aui_Pane_Style = []
+        Wx_Aui_Pane_Buttons = []
+        Wx_BestSize_Height = 0
+        Wx_BestSize_Width = 0
+        Wx_MinSize_Height = 0
+        Wx_MinSize_Width = 0
+        Wx_MaxSize_Height = 0
+        Wx_MaxSize_Width = 0
+        Wx_Floating_Height = 0
+        Wx_Floating_Width = 0
+        Wx_Floating_X_Pos = 0
+        Wx_Floating_Y_Pos = 0
       end
     end
   end
