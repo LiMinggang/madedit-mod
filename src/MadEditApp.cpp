@@ -806,7 +806,7 @@ void MadEditApp::InitLocale()
 	}
 	g_Locale = new wxLocale(lang);
 	// g_Locale.Init(lang);
-	for(size_t idx=1; idx<g_LocaleDirPrefix.GetCount(); ++idx)
+	for(size_t idx=0; idx<g_LocaleDirPrefix.GetCount(); ++idx)
 	{
 		g_Locale->AddCatalogLookupPathPrefix(g_LocaleDirPrefix[idx]);
 	}

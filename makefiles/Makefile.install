@@ -11,7 +11,7 @@ mo_zh_CN_dir = $(prefix_dir)/share/locale/zh_CN/LC_MESSAGES
 mo_zh_TW_dir = $(prefix_dir)/share/locale/zh_TW/LC_MESSAGES
 mo_ja_JP_dir = $(prefix_dir)/share/locale/ja_JP/LC_MESSAGES
 mo_es_dir = $(prefix_dir)/share/locale/es/LC_MESSAGES
-mo_el_dir = $(prefix_dir)/share/locale/el_GR/LC_MESSAGES
+mo_el_dir = $(prefix_dir)/share/locale/el/LC_MESSAGES
 mo_ru_RU_dir = $(prefix_dir)/share/locale/ru_RU/LC_MESSAGES
 data_dir = $(prefix_dir)/share/madedit-mod
 
@@ -40,7 +40,7 @@ install:
 	$(MKDIR) $(mo_es_dir)
 	$(INSTALL_DATA) locale/es/madedit-mod.mo $(mo_es_dir)
 	$(MKDIR) $(mo_es_dir)
-	$(INSTALL_DATA) locale/el_GR/madedit-mod.mo $(mo_el_dir)
+	$(INSTALL_DATA) locale/el/madedit-mod.mo $(mo_el_dir)
 	$(MKDIR) $(mo_ja_JP_dir)
 	$(INSTALL_DATA) locale/ru_RU/madedit-mod.mo $(mo_ru_RU_dir)
 	$(MKDIR) $(data_dir)/syntax
