@@ -56,5 +56,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/locale/ja_JP/LC_MESSAGES/madedit.mo
 %{_datadir}/locale/ru_RU/LC_MESSAGES/madedit-mod.mo
 %{_datadir}/locale/es/LC_MESSAGES/madedit-mod.mo
+%{_datadir}/locale/el/LC_MESSAGES/madedit-mod.mo
+%{_datadir}/locale/de_DE/LC_MESSAGES/madedit-mod.mo
+%{_datadir}/locale/pl_PL/LC_MESSAGES/madedit-mod.mo
 
 %changelog
