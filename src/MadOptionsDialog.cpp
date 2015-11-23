@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-// Name:		MadEditApp.cpp
+// Name:        MadOptionsDialog.cpp
 // Description:
 // Author:		madedit@gmail.com
 // Maintainer:	minggang.li@gmail.com
@@ -678,7 +678,7 @@ void MadOptionsDialog::CreateGUIControls(void)
 	WxBoxSizer33 = new wxBoxSizer(wxHORIZONTAL);
 	WxBoxSizer29->Add(WxBoxSizer33, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 5);
 
-	WxCheckBoxPersonalDict = new wxCheckBox(WxNoteBookPage5, ID_WXCHECKBOXPERSONALDICT, _("Enable Personal Dictionary"), wxPoint(5, 5), wxSize(309, 17), 0, wxDefaultValidator, wxT("WxCheckBoxPersonalDict"));
+	WxCheckBoxPersonalDict = new wxCheckBox(WxNoteBookPage5, ID_WXCHECKBOXPERSONALDICT, _("Enable Personal Dictionary"), wxPoint(5, 5), wxSize(400, 17), 0, wxDefaultValidator, wxT("WxCheckBoxPersonalDict"));
 	WxBoxSizer33->Add(WxCheckBoxPersonalDict, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 5);
     SET_CONTROLPARENT(WxCheckBoxPersonalDict);
 

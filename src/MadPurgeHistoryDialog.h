@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-// Name:		MadEditApp.cpp
+// Name:		MadPurgeHistoryDialog.h
 // Description:
 // Author:		minggang.li@gmail.com
 // Licence: 	GPL

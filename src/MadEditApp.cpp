@@ -50,7 +50,7 @@ bool g_DoNotSaveSettings=false;
 bool g_ResetAllKeys=false;
 bool g_ForcePurgeThisTime = false;
 
-wxArrayString g_LanguageString;
+wxArrayString g_LanguageString, g_LocaleDirPrefix;
 wxArrayLong g_LanguageId;
 //typedef boost::bimap<long, wxString> bm_type;
 //typedef bm_type::value_type mad_lang;
@@ -726,6 +726,7 @@ void MadEditApp::ShowMainFrame(MadEditFrame *mainFrame, bool maximize)
 void ScanForLocales()
 {
 	g_LanguageString.Empty();
+	g_LocaleDirPrefix.Empty();
 	g_LanguageString.Add(g_LanguageStr[0]);
 	g_LanguageId.Add(wxLANGUAGE_DEFAULT);
 	std::map<long, wxString> languageIdNameMap;
@@ -737,6 +738,7 @@ void ScanForLocales()
 	{
 		wxDir dir(searchPath);
 		int flags=wxDIR_DIRS;
+		g_LocaleDirPrefix.Add(searchPath);
 		dir.Traverse(langScaner, wxEmptyString, flags);
 	}
 #ifndef __WXMSW__
@@ -746,6 +748,7 @@ void ScanForLocales()
 	{
 		wxDir dir(searchPath);
 		int flags=wxDIR_DIRS;
+		g_LocaleDirPrefix.Add(searchPath);
 		dir.Traverse(langScaner, wxEmptyString, flags);
 	}
 #if defined (DATA_DIR)
@@ -754,6 +757,7 @@ void ScanForLocales()
 	{
 		wxDir dir(searchPath);
 		int flags=wxDIR_DIRS;
+		g_LocaleDirPrefix.Add(searchPath);
 		dir.Traverse(langScaner, wxEmptyString, flags);
 	}
 #endif
@@ -802,14 +806,10 @@ void MadEditApp::InitLocale()
 	}
 	g_Locale = new wxLocale(lang);
 	// g_Locale.Init(lang);
-	g_Locale->AddCatalogLookupPathPrefix(wxString(wxT("."))+wxFILE_SEP_PATH+wxT("locale")+wxFILE_SEP_PATH);
-	g_Locale->AddCatalogLookupPathPrefix(g_MadEditAppDir+wxT("locale")+wxFILE_SEP_PATH);
-#ifndef __WXMSW__
-	g_Locale->AddCatalogLookupPathPrefix(g_MadEditHomeDir+wxT("locale")+wxFILE_SEP_PATH);
-#if defined (DATA_DIR)
-	g_Locale->AddCatalogLookupPathPrefix(wxT(DATA_DIR"/locale/"));
-#endif
-#endif
+	for(size_t idx=1; idx<g_LocaleDirPrefix.GetCount(); ++idx)
+	{
+		g_Locale->AddCatalogLookupPathPrefix(g_LocaleDirPrefix[idx]);
+	}
 	g_Locale->AddCatalog(g_MadLanguageFileName);
 }
 

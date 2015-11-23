@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-// Name:		MadEditApp.cpp
+// Name:        MadEditApp.h
 // Description:
 // Author:		madedit@gmail.com
 // Maintainer:	minggang.li@gmail.com

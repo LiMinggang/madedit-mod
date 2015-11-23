@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
-// Name:		MadEditApp.cpp
-// Description:
+// Name:        MadFindInFilesDialog.h
+// Description: find or replace in files dialog
 // Author:		madedit@gmail.com
 // Maintainer:	minggang.li@gmail.com
 // Licence: 	GPL

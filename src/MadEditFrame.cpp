@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
-// Name:		MadEditApp.cpp
-// Description:
+// Name:        MadEditFrame.cpp
+// Description: main frame of MadEdit
 // Author:		madedit@gmail.com
 // Maintainer:	minggang.li@gmail.com
 // Licence: 	GPL

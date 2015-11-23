@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-// Name:		MadEditApp.cpp
+// Name:        MadPlugin.cpp
 // Description:
 // Author:		madedit@gmail.com
 // Maintainer:	minggang.li@gmail.com

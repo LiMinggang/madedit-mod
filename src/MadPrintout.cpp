@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
-// Name:		MadEditApp.cpp
-// Description:
+// Name:        MadPrintout.cpp
+// Description: Printing functions
 // Author:		madedit@gmail.com
 // Maintainer:	minggang.li@gmail.com
 // Licence: 	GPL

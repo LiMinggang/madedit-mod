@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
-// Name:		MadEditApp.cpp
-// Description:
+// Name:        MadFileAssociationDialog.h
+// Description: File Type Association Dialog for MSWindows
 // Author:		madedit@gmail.com
 // Maintainer:	minggang.li@gmail.com
 // Licence: 	GPL

@@ -1,6 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
-// Name:		MadEditApp.cpp
-// Description:
+// vim:         ts=4 sw=4
+// Name:		MadRecentList.cpp
+// Description: Porting Recent List from wxMEdit
 // Author:		madedit@gmail.com
 // Maintainer:	minggang.li@gmail.com
 // Licence: 	GPL

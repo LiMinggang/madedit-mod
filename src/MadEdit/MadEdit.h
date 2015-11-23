@@ -2,6 +2,7 @@
 // Name:		MadEdit/MadEdit.h
 // Description: main Edit component of MadEdit
 // Author:		madedit@gmail.com
+// Maintainer:	minggang.li@gmail.com
 // Licence: 	GPL
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -279,7 +280,7 @@ private:
 
 	wxPoint 		m_Space_Points[4], m_EOF_Points[5];
 	wxPoint 		m_CR_Points[40], m_LF_Points[40], m_CRLF_Points[80];
-	int 			m_CR_Points_Count, m_LF_Points_Count, m_CRLF_Points_Count;
+	int				m_CR_Points_Count, m_LF_Points_Count, m_CRLF_Points_Count;
 
 
 	MadCaretPos 	m_CaretPos;
