@@ -7968,15 +7968,21 @@ void MadEditFrame::OnHelpAbout( wxCommandEvent& event )
 	if( dlg.ShowModal() == wxID_OK )
 	{
 #ifdef __WXGTK__
-		const wxChar *browsers[] =
-		{
-			wxT( "/usr/bin/firefox" ),
-			wxT( "/usr/bin/mozilla" ),
-			wxT( "/usr/kde/3.5/bin/konqueror" ),
-			wxT( "/usr/kde/3.4/bin/konqueror" ),
-			wxT( "/usr/kde/3.3/bin/konqueror" ),
-			wxT( "/usr/kde/3.2/bin/konqueror" ),
-		};
+			const wxChar *browsers[]=
+			{
+				wxT("/usr/bin/firefox"),
+				wxT("/usr/bin/mozilla"),
+				wxT("/usr/bin/chromium"),
+				wxT("/usr/bin/konqueror"),
+# if defined(__APPLE__) && defined(__MACH__)
+				wxT("/usr/bin/open"),
+# endif
+				wxT("/usr/kde/3.5/bin/konqueror"),
+				wxT("/usr/kde/3.4/bin/konqueror"),
+				wxT("/usr/kde/3.3/bin/konqueror"),
+				wxT("/usr/kde/3.2/bin/konqueror"),
+			};
+
 		int idx = 0;
 		int count = sizeof( browsers ) / sizeof( browsers[0] );
 
