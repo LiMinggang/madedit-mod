@@ -12,6 +12,7 @@
 #include <wx/config.h>
 #include <wx/dir.h>
 #include <wx/aui/auibook.h>
+
 #include "MadEdit/MadEncoding.h"
 #include "MadEdit/MadEditCommand.h"
 #include "MadEdit/MadEdit.h"
@@ -22,6 +23,12 @@
 #include "astyle/astyle.h"
 #include "astylepredefinedstyles.h"
 
+enum
+{
+    MARGIN_LINE_NUMBERS,
+    MARGIN_FOLD
+};
+ 
 //Do not add custom headers.
 //wx-dvcpp designer will remove them
 ////Header Include Start
@@ -797,14 +804,96 @@ void MadOptionsDialog::CreateGUIControls(void)
     WxTextSample->SetMaxLineLength(DEFAULT_MAX_LINELEN);
     WxTextSample->SetText(wxT("int Foo(bool isBar)\n{\n    if (isBar)\n    {\n        bar();\n        return 1;\n    }\n    else\n        return 0;\n}\n"));
     */
+#if 1
+	WxTextSample = new wxStyledTextCtrl(WxAuiNoteBookPage1, ID_WXRICHTEXTSAMPLE, wxPoint(19, 47), wxSize(219, 300));
+
+	WxTextSample->StyleClearAll();
+	WxTextSample->SetLexer(wxSTC_LEX_CPP);
+
+	WxTextSample->SetMarginWidth (MARGIN_LINE_NUMBERS, 50);
+	WxTextSample->StyleSetForeground (wxSTC_STYLE_LINENUMBER, wxColour (75, 75, 75) );
+	WxTextSample->StyleSetBackground (wxSTC_STYLE_LINENUMBER, wxColour (220, 220, 220));
+	WxTextSample->SetMarginType (MARGIN_LINE_NUMBERS, wxSTC_MARGIN_NUMBER);
+
+
+	// ---- Enable code folding
+	WxTextSample->SetMarginType (MARGIN_FOLD, wxSTC_MARGIN_SYMBOL);
+	WxTextSample->SetMarginWidth(MARGIN_FOLD, 15);
+	WxTextSample->SetMarginMask (MARGIN_FOLD, wxSTC_MASK_FOLDERS);
+	WxTextSample->StyleSetBackground(MARGIN_FOLD, wxColor(200, 200, 200) );
+	WxTextSample->SetMarginSensitive(MARGIN_FOLD, true);
+
+	// Properties found from http://www.scintilla.org/SciTEDoc.html
+	WxTextSample->SetProperty (wxT("fold"),         wxT("1") );
+	WxTextSample->SetProperty (wxT("fold.comment"), wxT("1") );
+	WxTextSample->SetProperty (wxT("fold.compact"), wxT("1") );
+
+	wxColor grey( 100, 100, 100 );
+	WxTextSample->MarkerDefine (wxSTC_MARKNUM_FOLDER, wxSTC_MARK_ARROW );
+	WxTextSample->MarkerSetForeground (wxSTC_MARKNUM_FOLDER, grey);
+	WxTextSample->MarkerSetBackground (wxSTC_MARKNUM_FOLDER, grey);
+
+	WxTextSample->MarkerDefine (wxSTC_MARKNUM_FOLDEROPEN,    wxSTC_MARK_ARROWDOWN);
+	WxTextSample->MarkerSetForeground (wxSTC_MARKNUM_FOLDEROPEN, grey);
+	WxTextSample->MarkerSetBackground (wxSTC_MARKNUM_FOLDEROPEN, grey);
+
+	WxTextSample->MarkerDefine (wxSTC_MARKNUM_FOLDERSUB,     wxSTC_MARK_EMPTY);
+	WxTextSample->MarkerSetForeground (wxSTC_MARKNUM_FOLDERSUB, grey);
+	WxTextSample->MarkerSetBackground (wxSTC_MARKNUM_FOLDERSUB, grey);
+
+	WxTextSample->MarkerDefine (wxSTC_MARKNUM_FOLDEREND,     wxSTC_MARK_ARROW);
+	WxTextSample->MarkerSetForeground (wxSTC_MARKNUM_FOLDEREND, grey);
+	WxTextSample->MarkerSetBackground (wxSTC_MARKNUM_FOLDEREND, _T("WHITE"));
+
+	WxTextSample->MarkerDefine (wxSTC_MARKNUM_FOLDEROPENMID, wxSTC_MARK_ARROWDOWN);
+	WxTextSample->MarkerSetForeground (wxSTC_MARKNUM_FOLDEROPENMID, grey);
+	WxTextSample->MarkerSetBackground (wxSTC_MARKNUM_FOLDEROPENMID, _T("WHITE"));
+
+	WxTextSample->MarkerDefine (wxSTC_MARKNUM_FOLDERMIDTAIL, wxSTC_MARK_EMPTY);
+	WxTextSample->MarkerSetForeground (wxSTC_MARKNUM_FOLDERMIDTAIL, grey);
+	WxTextSample->MarkerSetBackground (wxSTC_MARKNUM_FOLDERMIDTAIL, grey);
+
+	WxTextSample->MarkerDefine (wxSTC_MARKNUM_FOLDERTAIL,    wxSTC_MARK_EMPTY);
+	WxTextSample->MarkerSetForeground (wxSTC_MARKNUM_FOLDERTAIL, grey);
+	WxTextSample->MarkerSetBackground (wxSTC_MARKNUM_FOLDERTAIL, grey);
+	// ---- End of code folding part
+
+	WxTextSample->SetWrapMode (wxSTC_WRAP_WORD); // other choice is wxSCI_WRAP_NONE
+
+	WxTextSample->SetText(bracket_style[aspsAllman]);
+
+	WxTextSample->StyleSetForeground (wxSTC_C_STRING,            wxColour(150,0,0));
+	WxTextSample->StyleSetForeground (wxSTC_C_PREPROCESSOR,      wxColour(165,105,0));
+	WxTextSample->StyleSetForeground (wxSTC_C_IDENTIFIER,        wxColour(40,0,60));
+	WxTextSample->StyleSetForeground (wxSTC_C_NUMBER,            wxColour(0,150,0));
+	WxTextSample->StyleSetForeground (wxSTC_C_CHARACTER,         wxColour(150,0,0));
+	WxTextSample->StyleSetForeground (wxSTC_C_WORD,              wxColour(0,0,150));
+	WxTextSample->StyleSetForeground (wxSTC_C_WORD2,             wxColour(0,150,0));
+	WxTextSample->StyleSetForeground (wxSTC_C_COMMENT,           wxColour(150,150,150));
+	WxTextSample->StyleSetForeground (wxSTC_C_COMMENTLINE,       wxColour(150,150,150));
+	WxTextSample->StyleSetForeground (wxSTC_C_COMMENTDOC,        wxColour(150,150,150));
+	WxTextSample->StyleSetForeground (wxSTC_C_COMMENTDOCKEYWORD, wxColour(0,0,200));
+	WxTextSample->StyleSetForeground (wxSTC_C_COMMENTDOCKEYWORDERROR, wxColour(0,0,200));
+	WxTextSample->StyleSetBold(wxSTC_C_WORD, true);
+	WxTextSample->StyleSetBold(wxSTC_C_WORD2, true);
+	WxTextSample->StyleSetBold(wxSTC_C_COMMENTDOCKEYWORD, true);
+
+	// a sample list of keywords, I haven't included them all to keep it short...
+	WxTextSample->SetKeyWords(0, wxT("if else return for while break continue"));
+	WxTextSample->SetKeyWords(1, wxT("const int float void char double bool"));
+	WxTextSample->SetReadOnly(true);
+
+	WxTextSample->Connect(wxEVT_STC_MARGINCLICK, wxStyledTextEventHandler(MadOptionsDialog::OnMarginClick), NULL, this);
+#else
 	WxTextSample = new wxTextCtrl(WxAuiNoteBookPage1, ID_WXRICHTEXTSAMPLE, wxT(""), wxPoint(19, 47), wxSize(219, 300), wxTE_MULTILINE | wxVSCROLL | wxHSCROLL | wxTE_READONLY, wxDefaultValidator, wxT("WxTextSample"));
 	//WxTextSample->SetMaxLength(0);
 	WxTextSample->AppendText(bracket_style[aspsAllman]);
+#endif
 	WxTextSample->SetFocus();
 	WxTextSample->SetInsertionPointEnd();
     SET_CONTROLPARENT(WxTextSample);
 
-	WxStaticBoxSizer7->Add(WxTextSample, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 5);
+	WxStaticBoxSizer7->Add(WxTextSample, 1, wxALIGN_LEFT | wxEXPAND | wxALL, 5);
 
 	WxAuiNoteBookPage2 = new wxPanel(WxAuiNotebook1, ID_WXAUINOTEBOOKPAGE2, wxPoint(4, 24), wxSize(692, 464));
 	WxAuiNotebook1->AddPage(WxAuiNoteBookPage2, _("Brackets"));
@@ -2054,6 +2143,8 @@ void MadOptionsDialog::OnRadioBoxBracketStyleClick(wxCommandEvent& event)
 {
     long style=WxRadioBoxBracketStyle->GetSelection();
 
+	WxTextSample->SetReadOnly(false);
+
     switch (style)
     {
         case aspsAllman: // Allman (ANSI)
@@ -2076,6 +2167,7 @@ void MadOptionsDialog::OnRadioBoxBracketStyleClick(wxCommandEvent& event)
             WxTextSample->SetValue(bracket_style[aspsCustom]);
             break;
     }
+	WxTextSample->SetReadOnly(true);
 }
 
 void MadOptionsDialog::OnFormattingBreakLinesClick(wxCommandEvent& event)
@@ -2102,5 +2194,19 @@ void MadOptionsDialog::OnPaddingBreakBlocksClick(wxCommandEvent& event)
     {
         WxCheckBreakBlocksAll->Enable(false);
     }
+}
+
+void MadOptionsDialog::OnMarginClick(wxStyledTextEvent &event)
+{
+	if (event.GetMargin() == MARGIN_FOLD)
+	{
+		int lineClick = WxTextSample->LineFromPosition(event.GetPosition());
+		int levelClick = WxTextSample->GetFoldLevel(lineClick);
+
+		if ((levelClick & wxSTC_FOLDLEVELHEADERFLAG) > 0)
+		{
+			WxTextSample->ToggleFold(lineClick);
+		}
+	}
 }
 

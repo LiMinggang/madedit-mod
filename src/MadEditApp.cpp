@@ -23,6 +23,7 @@
 #include <wx/fileconf.h>
 #include <wx/snglinst.h>
 #include <wx/cmdline.h>
+#include <wx/settings.h>
 
 IMPLEMENT_APP(MadEditApp)
 
