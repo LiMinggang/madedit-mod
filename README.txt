@@ -117,6 +117,7 @@ Fix: Purge recent caret position history
 Fix: Typo on Option dialog(Dictionary settings) #82
 Fix: Not enough space for translated string(Greek) #83
 Fix: Can't convert Chinese(simplified) to Japanese #88
+Fix: Update MadPython Syntax
 
 
 Mod v0.3.8

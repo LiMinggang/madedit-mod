@@ -1,9 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 // Name:        MadFileAssociationDialog.cpp
 // Description: File Type Association Dialog for MSWindows
-// Author:		madedit@gmail.com
-// Maintainer:	minggang.li@gmail.com
-// Licence: 	GPL
+// Author:      madedit@gmail.com
+// Maintainer:  minggang.li@gmail.com
+// Licence:     GPL
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "MadFileAssociationDialog.h"
@@ -19,267 +19,283 @@
 
 
 #ifdef _DEBUG
-#include <crtdbg.h>
-#define new new(_NORMAL_BLOCK ,__FILE__, __LINE__)
+	#include <crtdbg.h>
+	#define new new(_NORMAL_BLOCK ,__FILE__, __LINE__)
 #endif
 
 
-const wxChar *g_PredefinedTypes[]=
+const wxChar *g_PredefinedTypes[] =
 {
-    wxT(".txt"),
-    wxT(".c"),
-    wxT(".cpp"),
-    wxT(".cc"),
-    wxT(".cxx"),
-    wxT(".h"),
-    wxT(".hpp"),
-    wxT(".d"),
-    wxT(".asm"),
-    wxT(".java"),
-//    wxT(".htm"),
-//    wxT(".html"),
-    wxT(".pas"),
-//    wxT(".dpr"),
-    wxT(".css"),
-    wxT(".js"),
-    wxT(".xml"),
-    wxT(".sql"),
-    wxT(".php"),
-    wxT(".asp"),
-    wxT(".inc"),
-    wxT(".cs"),
-//    wxT(".vbs"),
-    wxT(".bas"),
-    wxT(".frm"),
-    wxT(".cls"),
-//    wxT(".reg"),
-//    wxT(".inf"),
-    wxT(".ini"),
-    wxT(".cfg"),
-    wxT(".conf"),
-    wxT(".mak"),
-    wxT(".nfo"),
-    wxT(".diz"),
-//    wxT(".bat"),
-//    wxT(".cmd"),
-    wxT(".awk"),
-    wxT(".py"),
-    wxT(".python"),
-    wxT(".pl"),
-    wxT(".perl"),
-    wxT(".rb"),
-    wxT(".rbw"),
-    wxT(".diff"),
-    wxT(".patch"),
-    wxT(".lua"),
-    wxT(".nut"),
-    wxT(".f90"),
-    wxT(".f77"),
-    wxT(".for"),
-    wxT(".ftn"),
-    wxT(".lat"),
-    wxT(".tex"),
-    wxT(".lex"),
-    wxT(".as"),
-    wxT(".v"),
-    wxT(".vl"),
-    wxT(".vmd"),
-    wxT(".vhd"),
-    wxT(".vho"),
-    wxT(".vhdl"),
-    wxT(".syn"),
-    wxT(".sch"),
-    wxT(".att"),
+	wxT( ".txt" ),
+	wxT( ".c" ),
+	wxT( ".cpp" ),
+	wxT( ".cc" ),
+	wxT( ".cxx" ),
+	wxT( ".h" ),
+	wxT( ".hpp" ),
+	wxT( ".d" ),
+	wxT( ".asm" ),
+	wxT( ".java" ),
+	//    wxT(".htm"),
+	//    wxT(".html"),
+	wxT( ".pas" ),
+	//    wxT(".dpr"),
+	wxT( ".css" ),
+	wxT( ".js" ),
+	wxT( ".xml" ),
+	wxT( ".sql" ),
+	wxT( ".php" ),
+	wxT( ".asp" ),
+	wxT( ".inc" ),
+	wxT( ".cs" ),
+	//    wxT(".vbs"),
+	wxT( ".bas" ),
+	wxT( ".frm" ),
+	wxT( ".cls" ),
+	//    wxT(".reg"),
+	//    wxT(".inf"),
+	wxT( ".ini" ),
+	wxT( ".cfg" ),
+	wxT( ".conf" ),
+	wxT( ".mak" ),
+	wxT( ".nfo" ),
+	wxT( ".diz" ),
+	//    wxT(".bat"),
+	//    wxT(".cmd"),
+	wxT( ".awk" ),
+	wxT( ".py" ),
+	wxT( ".python" ),
+	wxT( ".pl" ),
+	wxT( ".perl" ),
+	wxT( ".rb" ),
+	wxT( ".rbw" ),
+	wxT( ".diff" ),
+	wxT( ".patch" ),
+	wxT( ".lua" ),
+	wxT( ".nut" ),
+	wxT( ".f90" ),
+	wxT( ".f77" ),
+	wxT( ".for" ),
+	wxT( ".ftn" ),
+	wxT( ".lat" ),
+	wxT( ".tex" ),
+	wxT( ".lex" ),
+	wxT( ".as" ),
+	wxT( ".v" ),
+	wxT( ".vl" ),
+	wxT( ".vmd" ),
+	wxT( ".vhd" ),
+	wxT( ".vho" ),
+	wxT( ".vhdl" ),
+	wxT( ".syn" ),
+	wxT( ".sch" ),
+	wxT( ".att" ),
 };
 
-const int g_PredefinedTypes_Count = sizeof(g_PredefinedTypes) / sizeof(g_PredefinedTypes[0]);
+const int g_PredefinedTypes_Count = sizeof( g_PredefinedTypes ) / sizeof( g_PredefinedTypes[0] );
 
-bool DetectType(wxString type)
+bool DetectType( wxString type )
 {
-    wxLogNull nolog; // disable error log
+	wxLogNull nolog; // disable error log
+	wxString value;
+	wxRegKey *pRegKey = new wxRegKey( g_MadEditRegkeyPath + type );
 
-    wxString value;
-    wxRegKey *pRegKey = new wxRegKey(g_MadEditRegkeyPath + type);
-    if(pRegKey->Exists()) pRegKey->QueryValue(wxEmptyString, value);
-    delete pRegKey;
+	if( pRegKey->Exists() ) { pRegKey->QueryValue( wxEmptyString, value ); }
 
-    if(!value.IsEmpty())
-    {
-        pRegKey = new wxRegKey(g_MadEditRegkeyPath
-                               + value
-                               + wxString(wxT("\\shell\\open\\command")));
-        value.Empty();
-        if(pRegKey->Exists()) pRegKey->QueryValue(wxEmptyString, value);
-        delete pRegKey;
+	delete pRegKey;
 
-        wxString exepath = GetExecutablePath();
-        if(value.Upper().Find(exepath.Upper()) >= 0 )
-        {
-            return true;
-        }
-    }
+	if( !value.IsEmpty() )
+	{
+		pRegKey = new wxRegKey( g_MadEditRegkeyPath
+								+ value
+								+ wxString( wxT( "\\shell\\open\\command" ) ) );
+		value.Empty();
 
-    return false;
+		if( pRegKey->Exists() ) { pRegKey->QueryValue( wxEmptyString, value ); }
+
+		delete pRegKey;
+		wxString exepath = GetExecutablePath();
+
+		if( value.Upper().Find( exepath.Upper() ) >= 0 )
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
-void AddType(wxString type)
+void AddType( wxString type )
 {
-    wxString value;
-    wxString madedit_type = wxString(wxT("MadEdit-Mod")) + type;
+	wxString value;
+	wxString madedit_type = wxString( wxT( "MadEdit-Mod" ) ) + type;
+	wxRegKey *pRegKey = new wxRegKey( g_MadEditRegkeyPath + type );
 
-    wxRegKey *pRegKey = new wxRegKey(g_MadEditRegkeyPath + type);
-    if(!pRegKey->Exists()) pRegKey->Create();
-    else pRegKey->QueryValue(wxEmptyString, value);
-    if(value != madedit_type)
-    {
-        if(!value.IsEmpty()) //save old default value
-        {
-            pRegKey->SetValue(wxT("Old_Default"), value);
+	if( !pRegKey->Exists() ) { pRegKey->Create(); }
+	else { pRegKey->QueryValue( wxEmptyString, value ); }
 
-            //if(type == wxT(".txt"))
-            //{
-            //    wxRegKey *pRegKey1 = new wxRegKey(wxString(wxT("HKEY_CLASSES_ROOT\\")) + type);
-            //    pRegKey->QueryValue(wxEmptyString, txt_name);
-            //    delete pRegKey1;
-            //}
-        }
+	if( value != madedit_type )
+	{
+		if( !value.IsEmpty() ) //save old default value
+		{
+			pRegKey->SetValue( wxT( "Old_Default" ), value );
+			//if(type == wxT(".txt"))
+			//{
+			//    wxRegKey *pRegKey1 = new wxRegKey(wxString(wxT("HKEY_CLASSES_ROOT\\")) + type);
+			//    pRegKey->QueryValue(wxEmptyString, txt_name);
+			//    delete pRegKey1;
+			//}
+		}
 
-        value = madedit_type;
-        pRegKey->SetValue(wxEmptyString, value);
-    }
-    delete pRegKey;
+		value = madedit_type;
+		pRegKey->SetValue( wxEmptyString, value );
+	}
 
-    wxString name(g_MadEditRegkeyPath);
-    name += value;
+	delete pRegKey;
+	wxString name( g_MadEditRegkeyPath );
+	name += value;
 
-    if(type == wxT(".txt"))
-    {
-        wxString txt_name;
-        pRegKey = new wxRegKey(wxString(g_MadEditRegkeyPath + wxT("txtfile")));
-        if(pRegKey->Exists()) pRegKey->QueryValue(wxEmptyString, txt_name);
-        delete pRegKey;
+	if( type == wxT( ".txt" ) )
+	{
+		wxString txt_name;
+		pRegKey = new wxRegKey( wxString( g_MadEditRegkeyPath + wxT( "txtfile" ) ) );
 
-        if(txt_name.IsEmpty()) txt_name = wxT("Text file");
+		if( pRegKey->Exists() ) { pRegKey->QueryValue( wxEmptyString, txt_name ); }
 
-        pRegKey = new wxRegKey(name);
-        pRegKey->Create();
-        pRegKey->SetValue(wxEmptyString, txt_name);
-        delete pRegKey;
-    }
+		delete pRegKey;
 
-    name += wxT("\\shell\\open\\command");
-    pRegKey = new wxRegKey(name);
-    pRegKey->Create();
-    wxString exepath=GetExecutablePath();
-    pRegKey->SetValue(wxEmptyString, wxString(wxT('"'))+exepath+wxString(wxT("\" \"%1\"")));
-    delete pRegKey;
+		if( txt_name.IsEmpty() ) { txt_name = wxT( "Text file" ); }
 
-    name = g_MadEditRegkeyPath;
-    name += value;
-    name += wxT("\\DefaultIcon");
-    pRegKey = new wxRegKey(name);
-    pRegKey->Create();
-    pRegKey->SetValue(wxEmptyString, exepath + wxString(wxT(",1")));
-    delete pRegKey;
+		pRegKey = new wxRegKey( name );
+		pRegKey->Create();
+		pRegKey->SetValue( wxEmptyString, txt_name );
+		delete pRegKey;
+	}
+
+	name += wxT( "\\shell\\open\\command" );
+	pRegKey = new wxRegKey( name );
+	pRegKey->Create();
+	wxString exepath = GetExecutablePath();
+	pRegKey->SetValue( wxEmptyString, wxString( wxT( '"' ) ) + exepath + wxString( wxT( "\" \"%1\"" ) ) );
+	delete pRegKey;
+	name = g_MadEditRegkeyPath;
+	name += value;
+	name += wxT( "\\DefaultIcon" );
+	pRegKey = new wxRegKey( name );
+	pRegKey->Create();
+	pRegKey->SetValue( wxEmptyString, exepath + wxString( wxT( ",1" ) ) );
+	delete pRegKey;
 }
 
-void RemoveType(wxString type)
+void RemoveType( wxString type )
 {
-    if(type.IsEmpty()) return;
+	if( type.IsEmpty() ) { return; }
 
-    wxString value, old_default;
-    wxString madedit_type = wxString(wxT("MadEdit-Mod")) + type;
+	wxString value, old_default;
+	wxString madedit_type = wxString( wxT( "MadEdit-Mod" ) ) + type;
+	wxRegKey *pRegKey = new wxRegKey( g_MadEditRegkeyPath + type );
 
-    wxRegKey *pRegKey = new wxRegKey(g_MadEditRegkeyPath + type);
-    if(pRegKey->Exists())
-    {
-        pRegKey->QueryValue(wxT("Old_Default"), old_default);
-        pRegKey->QueryValue(wxEmptyString, value);
-    }
-    if(!old_default.IsEmpty())
-    {
-        pRegKey->DeleteValue(wxT("Old_Default"));
-        pRegKey->SetValue(wxEmptyString, old_default);
-    }
-    else if(!value.IsEmpty())
-    {
-        if(value == madedit_type)
-        {
-            pRegKey->DeleteSelf();
-        }
-    }
-    delete pRegKey;
+	if( pRegKey->Exists() )
+	{
+		pRegKey->QueryValue( wxT( "Old_Default" ), old_default );
+		pRegKey->QueryValue( wxEmptyString, value );
+	}
 
-    if(value == madedit_type)
-    {
-        pRegKey = new wxRegKey(g_MadEditRegkeyPath + value);
-        if(pRegKey->Exists()) pRegKey->DeleteSelf();
-        delete pRegKey;
-    }
+	if( !old_default.IsEmpty() )
+	{
+		pRegKey->DeleteValue( wxT( "Old_Default" ) );
+		pRegKey->SetValue( wxEmptyString, old_default );
+	}
+	else
+		if( !value.IsEmpty() )
+		{
+			if( value == madedit_type )
+			{
+				pRegKey->DeleteSelf();
+			}
+		}
+
+	delete pRegKey;
+
+	if( value == madedit_type )
+	{
+		pRegKey = new wxRegKey( g_MadEditRegkeyPath + value );
+
+		if( pRegKey->Exists() ) { pRegKey->DeleteSelf(); }
+
+		delete pRegKey;
+	}
 }
 
 
 wxArrayString as_remove; // the types will be removed
 
-void GetListBoxSelections(wxListBox *lb, wxArrayString &as)
+void GetListBoxSelections( wxListBox *lb, wxArrayString &as )
 {
-    wxArrayInt sel;
-    lb->GetSelections(sel);
-    int idx=0;
-    const int count=int(sel.Count());
-    while(idx<count)
-    {
-        as.Add(lb->GetString(sel[idx]));
-        ++idx;
-    }
+	wxArrayInt sel;
+	lb->GetSelections( sel );
+	int idx = 0;
+	const int count = int( sel.Count() );
+
+	while( idx < count )
+	{
+		as.Add( lb->GetString( sel[idx] ) );
+		++idx;
+	}
 }
 
-void AddTypeToAssociated(wxListBox *WxListBoxAssociated,
-                         wxListBox *WxListBoxPredefined,
-                         const wxArrayString &as)
+void AddTypeToAssociated( wxListBox *WxListBoxAssociated,
+						  wxListBox *WxListBoxPredefined,
+						  const wxArrayString &as )
 {
-    int idx = 0;
-    const int count = int(as.Count());
-    wxString type;
-    while(idx < count)
-    {
-        type = as[idx];
+	int idx = 0;
+	const int count = int( as.Count() );
+	wxString type;
 
-        int n = WxListBoxPredefined->FindString(type);
-        if(n != wxNOT_FOUND) WxListBoxPredefined->Delete(n);
+	while( idx < count )
+	{
+		type = as[idx];
+		int n = WxListBoxPredefined->FindString( type );
 
-        n = WxListBoxAssociated->FindString(type);
-        if(n == wxNOT_FOUND) WxListBoxAssociated->Append(type);
+		if( n != wxNOT_FOUND ) { WxListBoxPredefined->Delete( n ); }
 
-        n = as_remove.Index(type);
-        if(n != wxNOT_FOUND) as_remove.RemoveAt(n);
+		n = WxListBoxAssociated->FindString( type );
 
-        ++idx;
-    }
+		if( n == wxNOT_FOUND ) { WxListBoxAssociated->Append( type ); }
+
+		n = as_remove.Index( type );
+
+		if( n != wxNOT_FOUND ) { as_remove.RemoveAt( n ); }
+
+		++idx;
+	}
 }
 
-void AddTypeToPredefined(wxListBox *WxListBoxAssociated,
-                         wxListBox *WxListBoxPredefined,
-                         const wxArrayString &as)
+void AddTypeToPredefined( wxListBox *WxListBoxAssociated,
+						  wxListBox *WxListBoxPredefined,
+						  const wxArrayString &as )
 {
-    int idx = 0;
-    const int count = int(as.Count());
-    wxString type;
-    while(idx < count)
-    {
-        type = as[idx];
+	int idx = 0;
+	const int count = int( as.Count() );
+	wxString type;
 
-        int n = WxListBoxAssociated->FindString(type);
-        if(n != wxNOT_FOUND) WxListBoxAssociated->Delete(n);
+	while( idx < count )
+	{
+		type = as[idx];
+		int n = WxListBoxAssociated->FindString( type );
 
-        n = WxListBoxPredefined->FindString(type);
-        if(n == wxNOT_FOUND) WxListBoxPredefined->Append(type);
+		if( n != wxNOT_FOUND ) { WxListBoxAssociated->Delete( n ); }
 
-        n = as_remove.Index(type);
-        if(n == wxNOT_FOUND) as_remove.Add(type);
+		n = WxListBoxPredefined->FindString( type );
 
-        ++idx;
-    }
+		if( n == wxNOT_FOUND ) { WxListBoxPredefined->Append( type ); }
+
+		n = as_remove.Index( type );
+
+		if( n == wxNOT_FOUND ) { as_remove.Add( type ); }
+
+		++idx;
+	}
 }
 
 
@@ -289,24 +305,24 @@ void AddTypeToPredefined(wxListBox *WxListBoxAssociated,
 //Add Custom Events only in the appropriate block.
 //Code added in other places will be removed by wxDev-C++
 ////Event Table Start
-BEGIN_EVENT_TABLE(MadFileAssociationDialog,wxDialog)
+BEGIN_EVENT_TABLE( MadFileAssociationDialog, wxDialog )
 	////Manual Code Start
 	////Manual Code End
-	
-	EVT_CLOSE(MadFileAssociationDialog::OnClose)
-	EVT_BUTTON(ID_WXBUTTONOK,MadFileAssociationDialog::WxButtonOKClick)
-	EVT_BUTTON(ID_WXBUTTONADDCUSTOM,MadFileAssociationDialog::WxButtonAddCustomClick)
-	
-	EVT_LISTBOX_DCLICK(ID_WXLISTBOXPREDEFINED,MadFileAssociationDialog::WxListBoxPredefinedDoubleClicked)
-	EVT_BUTTON(ID_WXBUTTONREMOVE,MadFileAssociationDialog::WxButtonRemoveClick)
-	EVT_BUTTON(ID_WXBUTTONADD,MadFileAssociationDialog::WxButtonAddClick)
-	
-	EVT_LISTBOX_DCLICK(ID_WXLISTBOXASSOCIATED,MadFileAssociationDialog::WxListBoxAssociatedDoubleClicked)
+
+	EVT_CLOSE( MadFileAssociationDialog::OnClose )
+	EVT_BUTTON( ID_WXBUTTONOK, MadFileAssociationDialog::WxButtonOKClick )
+	EVT_BUTTON( ID_WXBUTTONADDCUSTOM, MadFileAssociationDialog::WxButtonAddCustomClick )
+
+	EVT_LISTBOX_DCLICK( ID_WXLISTBOXPREDEFINED, MadFileAssociationDialog::WxListBoxPredefinedDoubleClicked )
+	EVT_BUTTON( ID_WXBUTTONREMOVE, MadFileAssociationDialog::WxButtonRemoveClick )
+	EVT_BUTTON( ID_WXBUTTONADD, MadFileAssociationDialog::WxButtonAddClick )
+
+	EVT_LISTBOX_DCLICK( ID_WXLISTBOXASSOCIATED, MadFileAssociationDialog::WxListBoxAssociatedDoubleClicked )
 END_EVENT_TABLE()
 ////Event Table End
 
-MadFileAssociationDialog::MadFileAssociationDialog(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style)
-: wxDialog(parent, id, title, position, size, style)
+MadFileAssociationDialog::MadFileAssociationDialog( wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style )
+	: wxDialog( parent, id, title, position, size, style )
 {
 	CreateGUIControls();
 }
@@ -316,13 +332,13 @@ MadFileAssociationDialog::~MadFileAssociationDialog()
 }
 
 
-static void ResizeItem(wxBoxSizer* sizer, wxWindow *item, int ax, int ay)
+static void ResizeItem( wxBoxSizer* sizer, wxWindow *item, int ax, int ay )
 {
-    int x, y;
-    wxString str=item->GetLabel();
-    item->GetTextExtent(str, &x, &y);
-    item->SetSize(x+=ax, y+=ay);
-    sizer->SetItemMinSize(item, x, y);
+	int x, y;
+	wxString str = item->GetLabel();
+	item->GetTextExtent( str, &x, &y );
+	item->SetSize( x += ax, y += ay );
+	sizer->SetItemMinSize( item, x, y );
 }
 
 void MadFileAssociationDialog::CreateGUIControls()
@@ -332,196 +348,173 @@ void MadFileAssociationDialog::CreateGUIControls()
 	//wxDev-C++ designer will remove them.
 	//Add the custom code before or after the blocks
 	////GUI Items Creation Start
-
-	WxBoxSizer1 = new wxBoxSizer(wxVERTICAL);
-	this->SetSizer(WxBoxSizer1);
-	this->SetAutoLayout(true);
-
-	WxBoxSizer2 = new wxBoxSizer(wxVERTICAL);
-	WxBoxSizer1->Add(WxBoxSizer2, 0, wxALIGN_CENTER | wxALL, 5);
-
-	WxBoxSizer4 = new wxBoxSizer(wxHORIZONTAL);
-	WxBoxSizer2->Add(WxBoxSizer4, 0, wxALIGN_CENTER | wxALL, 0);
-
-	WxBoxSizer6 = new wxBoxSizer(wxVERTICAL);
-	WxBoxSizer4->Add(WxBoxSizer6, 0, wxALIGN_CENTER | wxALL, 5);
-
-	WxStaticText1 = new wxStaticText(this, ID_WXSTATICTEXT1, _("Associated File Types:"), wxPoint(10, 5), wxDefaultSize, 0, wxT("WxStaticText1"));
-	WxBoxSizer6->Add(WxStaticText1,0,wxALIGN_CENTER | wxALL,5);
-
+	WxBoxSizer1 = new wxBoxSizer( wxVERTICAL );
+	this->SetSizer( WxBoxSizer1 );
+	this->SetAutoLayout( true );
+	WxBoxSizer2 = new wxBoxSizer( wxVERTICAL );
+	WxBoxSizer1->Add( WxBoxSizer2, 0, wxALIGN_CENTER | wxALL, 5 );
+	WxBoxSizer4 = new wxBoxSizer( wxHORIZONTAL );
+	WxBoxSizer2->Add( WxBoxSizer4, 0, wxALIGN_CENTER | wxALL, 0 );
+	WxBoxSizer6 = new wxBoxSizer( wxVERTICAL );
+	WxBoxSizer4->Add( WxBoxSizer6, 0, wxALIGN_CENTER | wxALL, 5 );
+	WxStaticText1 = new wxStaticText( this, ID_WXSTATICTEXT1, _( "Associated File Types:" ), wxPoint( 10, 5 ), wxDefaultSize, 0, wxT( "WxStaticText1" ) );
+	WxBoxSizer6->Add( WxStaticText1, 0, wxALIGN_CENTER | wxALL, 5 );
 	wxArrayString arrayStringFor_WxListBoxAssociated;
-	WxListBoxAssociated = new wxListBox(this, ID_WXLISTBOXASSOCIATED, wxPoint(5, 32), wxSize(121, 200), arrayStringFor_WxListBoxAssociated, wxLB_EXTENDED);
-	WxBoxSizer6->Add(WxListBoxAssociated,0,wxALIGN_CENTER | wxALL,5);
-
-	WxBoxSizer7 = new wxBoxSizer(wxVERTICAL);
-	WxBoxSizer4->Add(WxBoxSizer7, 0, wxALIGN_CENTER | wxALL, 5);
-
-	WxButtonAdd = new wxButton(this, ID_WXBUTTONADD, _("<- Add"), wxPoint(5, 5), wxSize(100, 30), 0, wxDefaultValidator, wxT("WxButtonAdd"));
-	WxBoxSizer7->Add(WxButtonAdd,0,wxALIGN_CENTER | wxALL,5);
-
-	WxButtonRemove = new wxButton(this, ID_WXBUTTONREMOVE, _("Remove ->"), wxPoint(5, 45), wxSize(100, 30), 0, wxDefaultValidator, wxT("WxButtonRemove"));
-	WxBoxSizer7->Add(WxButtonRemove,0,wxALIGN_CENTER | wxALL,5);
-
-	WxBoxSizer8 = new wxBoxSizer(wxVERTICAL);
-	WxBoxSizer4->Add(WxBoxSizer8, 0, wxALIGN_CENTER | wxALL, 5);
-
-	WxStaticText2 = new wxStaticText(this, ID_WXSTATICTEXT2, _("Predefined File Types:"), wxPoint(11, 5), wxDefaultSize, 0, wxT("WxStaticText2"));
-	WxBoxSizer8->Add(WxStaticText2,0,wxALIGN_CENTER | wxALL,5);
-
+	WxListBoxAssociated = new wxListBox( this, ID_WXLISTBOXASSOCIATED, wxPoint( 5, 32 ), wxSize( 121, 200 ), arrayStringFor_WxListBoxAssociated, wxLB_EXTENDED );
+	WxBoxSizer6->Add( WxListBoxAssociated, 0, wxALIGN_CENTER | wxALL, 5 );
+	WxBoxSizer7 = new wxBoxSizer( wxVERTICAL );
+	WxBoxSizer4->Add( WxBoxSizer7, 0, wxALIGN_CENTER | wxALL, 5 );
+	WxButtonAdd = new wxButton( this, ID_WXBUTTONADD, _( "<- Add" ), wxPoint( 5, 5 ), wxSize( 100, 30 ), 0, wxDefaultValidator, wxT( "WxButtonAdd" ) );
+	WxBoxSizer7->Add( WxButtonAdd, 0, wxALIGN_CENTER | wxALL, 5 );
+	WxButtonRemove = new wxButton( this, ID_WXBUTTONREMOVE, _( "Remove ->" ), wxPoint( 5, 45 ), wxSize( 100, 30 ), 0, wxDefaultValidator, wxT( "WxButtonRemove" ) );
+	WxBoxSizer7->Add( WxButtonRemove, 0, wxALIGN_CENTER | wxALL, 5 );
+	WxBoxSizer8 = new wxBoxSizer( wxVERTICAL );
+	WxBoxSizer4->Add( WxBoxSizer8, 0, wxALIGN_CENTER | wxALL, 5 );
+	WxStaticText2 = new wxStaticText( this, ID_WXSTATICTEXT2, _( "Predefined File Types:" ), wxPoint( 11, 5 ), wxDefaultSize, 0, wxT( "WxStaticText2" ) );
+	WxBoxSizer8->Add( WxStaticText2, 0, wxALIGN_CENTER | wxALL, 5 );
 	wxArrayString arrayStringFor_WxListBoxPredefined;
-	WxListBoxPredefined = new wxListBox(this, ID_WXLISTBOXPREDEFINED, wxPoint(5, 32), wxSize(121, 200), arrayStringFor_WxListBoxPredefined, wxLB_EXTENDED);
-	WxBoxSizer8->Add(WxListBoxPredefined,0,wxALIGN_CENTER | wxALL,5);
-
-	WxBoxSizer5 = new wxBoxSizer(wxHORIZONTAL);
-	WxBoxSizer2->Add(WxBoxSizer5, 0, wxALIGN_LEFT | wxALL, 5);
-
-	WxEditCustomType = new wxTextCtrl(this, ID_WXEDITCUSTOMTYPE, wxT(""), wxPoint(5, 5), wxSize(121, 30), 0, wxDefaultValidator, wxT("WxEditCustomType"));
-	WxBoxSizer5->Add(WxEditCustomType,0,wxALIGN_LEFT | wxALL,5);
-
-	WxButtonAddCustom = new wxButton(this, ID_WXBUTTONADDCUSTOM, _("<- Add Custom File Type"), wxPoint(136, 5), wxSize(175, 30), 0, wxDefaultValidator, wxT("WxButtonAddCustom"));
-	WxBoxSizer5->Add(WxButtonAddCustom,0,wxALIGN_LEFT | wxALL,5);
-
-	WxBoxSizer3 = new wxBoxSizer(wxHORIZONTAL);
-	WxBoxSizer1->Add(WxBoxSizer3, 0, wxALIGN_CENTER | wxALL, 5);
-
-	WxButtonOK = new wxButton(this, ID_WXBUTTONOK, _("&OK"), wxPoint(14, 5), wxSize(85, 30), 0, wxDefaultValidator, wxT("WxButtonOK"));
-	WxBoxSizer3->Add(WxButtonOK,0,wxALIGN_CENTER | wxALL,5);
-
-	WxButtonCancel = new wxButton(this, wxID_CANCEL, _("&Cancel"), wxPoint(100, 5), wxSize(90, 30), 0, wxDefaultValidator, wxT("WxButtonCancel"));
-	WxBoxSizer3->Add(WxButtonCancel,0,wxALIGN_CENTER | wxALL,5);
-
-	SetTitle(_("File Type Associations"));
-	SetIcon(wxNullIcon);
-	
+	WxListBoxPredefined = new wxListBox( this, ID_WXLISTBOXPREDEFINED, wxPoint( 5, 32 ), wxSize( 121, 200 ), arrayStringFor_WxListBoxPredefined, wxLB_EXTENDED );
+	WxBoxSizer8->Add( WxListBoxPredefined, 0, wxALIGN_CENTER | wxALL, 5 );
+	WxBoxSizer5 = new wxBoxSizer( wxHORIZONTAL );
+	WxBoxSizer2->Add( WxBoxSizer5, 0, wxALIGN_LEFT | wxALL, 5 );
+	WxEditCustomType = new wxTextCtrl( this, ID_WXEDITCUSTOMTYPE, wxT( "" ), wxPoint( 5, 5 ), wxSize( 121, 30 ), 0, wxDefaultValidator, wxT( "WxEditCustomType" ) );
+	WxBoxSizer5->Add( WxEditCustomType, 0, wxALIGN_LEFT | wxALL, 5 );
+	WxButtonAddCustom = new wxButton( this, ID_WXBUTTONADDCUSTOM, _( "<- Add Custom File Type" ), wxPoint( 136, 5 ), wxSize( 175, 30 ), 0, wxDefaultValidator, wxT( "WxButtonAddCustom" ) );
+	WxBoxSizer5->Add( WxButtonAddCustom, 0, wxALIGN_LEFT | wxALL, 5 );
+	WxBoxSizer3 = new wxBoxSizer( wxHORIZONTAL );
+	WxBoxSizer1->Add( WxBoxSizer3, 0, wxALIGN_CENTER | wxALL, 5 );
+	WxButtonOK = new wxButton( this, ID_WXBUTTONOK, _( "&OK" ), wxPoint( 14, 5 ), wxSize( 85, 30 ), 0, wxDefaultValidator, wxT( "WxButtonOK" ) );
+	WxBoxSizer3->Add( WxButtonOK, 0, wxALIGN_CENTER | wxALL, 5 );
+	WxButtonCancel = new wxButton( this, wxID_CANCEL, _( "&Cancel" ), wxPoint( 100, 5 ), wxSize( 90, 30 ), 0, wxDefaultValidator, wxT( "WxButtonCancel" ) );
+	WxBoxSizer3->Add( WxButtonCancel, 0, wxALIGN_CENTER | wxALL, 5 );
+	SetTitle( _( "File Type Associations" ) );
+	SetIcon( wxNullIcon );
 	GetSizer()->Layout();
-	GetSizer()->Fit(this);
-	GetSizer()->SetSizeHints(this);
+	GetSizer()->Fit( this );
+	GetSizer()->SetSizeHints( this );
 	Center();
-	
 	////GUI Items Creation End
+	wxArrayString as_predefined( g_PredefinedTypes_Count, g_PredefinedTypes );
+	wxConfigBase *cfg = wxConfigBase::Get( false );
+	wxString oldpath = cfg->GetPath();
+	cfg->SetPath( wxT( "/AssociatedFileTypes" ) );
+	int idx = 0, idx2;
+	wxString type;
 
-    wxArrayString as_predefined(g_PredefinedTypes_Count, g_PredefinedTypes);
+	while( cfg->Read( wxString() << idx, &type ) )
+	{
+		if( DetectType( type ) )
+		{
+			WxListBoxAssociated->Append( type );
 
-    wxConfigBase *cfg=wxConfigBase::Get(false);
-    wxString oldpath=cfg->GetPath();
-    cfg->SetPath(wxT("/AssociatedFileTypes"));
+			if( ( idx2 = as_predefined.Index( type.c_str() ) ) != wxNOT_FOUND )
+			{
+				as_predefined.RemoveAt( idx2 );
+			}
+		}
 
-    int idx=0, idx2;
-    wxString type;
-    while(cfg->Read(wxString()<<idx, &type))
-    {
-        if(DetectType(type))
-        {
-            WxListBoxAssociated->Append(type);
-            if((idx2=as_predefined.Index(type.c_str()))!=wxNOT_FOUND)
-            {
-                as_predefined.RemoveAt(idx2);
-            }
-        }
-        ++idx;
-    }
+		++idx;
+	}
 
-    WxListBoxPredefined->Set(as_predefined);
-
-    cfg->SetPath(oldpath);
-
-
-    ResizeItem(WxBoxSizer6, WxStaticText1, 2, 2);
-    ResizeItem(WxBoxSizer8, WxStaticText2, 2, 2);
-
-    SetDefaultItem(WxButtonCancel);
-    WxButtonCancel->SetFocus();
+	WxListBoxPredefined->Set( as_predefined );
+	cfg->SetPath( oldpath );
+	ResizeItem( WxBoxSizer6, WxStaticText1, 2, 2 );
+	ResizeItem( WxBoxSizer8, WxStaticText2, 2, 2 );
+	SetDefaultItem( WxButtonCancel );
+	WxButtonCancel->SetFocus();
 }
 
-void MadFileAssociationDialog::OnClose(wxCloseEvent& /*event*/)
+void MadFileAssociationDialog::OnClose( wxCloseEvent& /*event*/ )
 {
-    Destroy();
+	Destroy();
 }
 
 
-void MadFileAssociationDialog::WxListBoxAssociatedDoubleClicked(wxCommandEvent& event)
+void MadFileAssociationDialog::WxListBoxAssociatedDoubleClicked( wxCommandEvent& event )
 {
-    wxArrayString sel;
-    GetListBoxSelections(WxListBoxAssociated, sel);
-    AddTypeToPredefined(WxListBoxAssociated, WxListBoxPredefined, sel);
+	wxArrayString sel;
+	GetListBoxSelections( WxListBoxAssociated, sel );
+	AddTypeToPredefined( WxListBoxAssociated, WxListBoxPredefined, sel );
 }
 
-void MadFileAssociationDialog::WxListBoxPredefinedDoubleClicked(wxCommandEvent& event)
+void MadFileAssociationDialog::WxListBoxPredefinedDoubleClicked( wxCommandEvent& event )
 {
-    wxArrayString sel;
-    GetListBoxSelections(WxListBoxPredefined, sel);
-    AddTypeToAssociated(WxListBoxAssociated, WxListBoxPredefined, sel);
+	wxArrayString sel;
+	GetListBoxSelections( WxListBoxPredefined, sel );
+	AddTypeToAssociated( WxListBoxAssociated, WxListBoxPredefined, sel );
 }
 
-void MadFileAssociationDialog::WxButtonAddClick(wxCommandEvent& event)
+void MadFileAssociationDialog::WxButtonAddClick( wxCommandEvent& event )
 {
-    wxArrayString sel;
-    GetListBoxSelections(WxListBoxPredefined, sel);
-    AddTypeToAssociated(WxListBoxAssociated, WxListBoxPredefined, sel);
+	wxArrayString sel;
+	GetListBoxSelections( WxListBoxPredefined, sel );
+	AddTypeToAssociated( WxListBoxAssociated, WxListBoxPredefined, sel );
 }
 
-void MadFileAssociationDialog::WxButtonRemoveClick(wxCommandEvent& event)
+void MadFileAssociationDialog::WxButtonRemoveClick( wxCommandEvent& event )
 {
-    wxArrayString sel;
-    GetListBoxSelections(WxListBoxAssociated, sel);
-    AddTypeToPredefined(WxListBoxAssociated, WxListBoxPredefined, sel);
+	wxArrayString sel;
+	GetListBoxSelections( WxListBoxAssociated, sel );
+	AddTypeToPredefined( WxListBoxAssociated, WxListBoxPredefined, sel );
 }
 
-void MadFileAssociationDialog::WxButtonAddCustomClick(wxCommandEvent& event)
+void MadFileAssociationDialog::WxButtonAddCustomClick( wxCommandEvent& event )
 {
-    wxString type = WxEditCustomType->GetValue();
-    type.Trim(false);
-    type.Trim(true);
-    if(!type.IsEmpty())
-    {
-        type.MakeLower();
-        wxString dot(wxT('.'));
-        if(type[0] != dot) type = dot + type;
+	wxString type = WxEditCustomType->GetValue();
+	type.Trim( false );
+	type.Trim( true );
 
-        wxArrayString sel;
-        sel.Add(type);
-        AddTypeToAssociated(WxListBoxAssociated, WxListBoxPredefined, sel);
-    }
+	if( !type.IsEmpty() )
+	{
+		type.MakeLower();
+		wxString dot( wxT( '.' ) );
+
+		if( type[0] != dot ) { type = dot + type; }
+
+		wxArrayString sel;
+		sel.Add( type );
+		AddTypeToAssociated( WxListBoxAssociated, WxListBoxPredefined, sel );
+	}
 }
 
-void MadFileAssociationDialog::WxButtonOKClick(wxCommandEvent& event)
+void MadFileAssociationDialog::WxButtonOKClick( wxCommandEvent& event )
 {
-    wxConfigBase *cfg=wxConfigBase::Get(false);
-    wxString oldpath=cfg->GetPath();
+	wxConfigBase *cfg = wxConfigBase::Get( false );
+	wxString oldpath = cfg->GetPath();
+	// clear old filetypes
+	cfg->DeleteGroup( wxT( "/AssociatedFileTypes" ) );
+	cfg->SetPath( wxT( "/AssociatedFileTypes" ) );
+	// remove types
+	int idx = 0;
+	int count = int( as_remove.Count() );
+	wxString type;
 
-    // clear old filetypes
-    cfg->DeleteGroup(wxT("/AssociatedFileTypes"));
+	while( idx < count )
+	{
+		type = as_remove[idx];
 
-    cfg->SetPath(wxT("/AssociatedFileTypes"));
+		if( DetectType( type ) )
+		{
+			RemoveType( type );
+		}
 
-    // remove types
-    int idx=0;
-    int count = int(as_remove.Count());
-    wxString type;
-    while(idx<count)
-    {
-        type = as_remove[idx];
-        if(DetectType(type))
-        {
-            RemoveType(type);
-        }
-        ++idx;
-    }
+		++idx;
+	}
 
-    // add types
-    idx=0;
-    count = int(WxListBoxAssociated->GetCount());
-    while(idx<count)
-    {
-        type = WxListBoxAssociated->GetString(idx);
-        AddType(type);
-        cfg->Write(wxString()<<idx, type);
-        ++idx;
-    }
+	// add types
+	idx = 0;
+	count = int( WxListBoxAssociated->GetCount() );
 
-    cfg->SetPath(oldpath);
+	while( idx < count )
+	{
+		type = WxListBoxAssociated->GetString( idx );
+		AddType( type );
+		cfg->Write( wxString() << idx, type );
+		++idx;
+	}
 
-    Close();
+	cfg->SetPath( oldpath );
+	Close();
 }
 
 #endif //__WXMSW__
