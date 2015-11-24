@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-23 19:19+0800\n"
+"POT-Creation-Date: 2015-11-24 11:42+0800\n"
 "PO-Revision-Date: 2015-06-30 21:51+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
@@ -558,7 +558,7 @@ msgstr ""
 #: ../src/MadEditFrame.cpp:349 ../src/MadFileAssociationDialog.cpp:390
 #: ../src/MadHighlightingDialog.cpp:316 ../src/MadPurgeHistoryDialog.cpp:92
 #: ../src/MadOptionsDialog.cpp:1068 ../src/MadConvEncDialog.cpp:127
-#: ../src/MadAboutDialog.cpp:135
+#: ../src/MadAboutDialog.cpp:137
 msgid "&Cancel"
 msgstr "取消(&C)"
 
@@ -618,16 +618,16 @@ msgstr "'%s' 的格式不正確。"
 msgid "Invalid"
 msgstr ""
 
-#: ../src/MadEditApp.cpp:126
+#: ../src/MadEditApp.cpp:130
 #, c-format
 msgid "SEARCHING FOR %s"
 msgstr ""
 
-#: ../src/MadEditApp.cpp:365
+#: ../src/MadEditApp.cpp:369
 msgid "Failed to create an IPC service."
 msgstr ""
 
-#: ../src/MadEditApp.cpp:406
+#: ../src/MadEditApp.cpp:410
 msgid ""
 "Sorry, the existing instance may be too busy too respond.\n"
 "Please close any open dialogs and retry."
@@ -2475,7 +2475,7 @@ msgstr "<- 增加自定檔案類型"
 #: ../src/MadFileAssociationDialog.cpp:387
 #: ../src/MadHighlightingDialog.cpp:313 ../src/MadPurgeHistoryDialog.cpp:89
 #: ../src/MadOptionsDialog.cpp:1064 ../src/MadConvEncDialog.cpp:124
-#: ../src/MadAboutDialog.cpp:132
+#: ../src/MadAboutDialog.cpp:134
 msgid "&OK"
 msgstr "確定(&O)"
 
@@ -3591,6 +3591,8 @@ msgstr ""
 
 #: ../src/MadAboutDialog.cpp:36
 msgid ""
+"Copyright (C) 2012-2015  Minggang Li <minggang.li@gmail.com>\n"
+"\n"
 "This program is free software; you can redistribute it and/or modify it "
 "under the terms of the GNU General Public License as published by the Free "
 "Software Foundation; either version 3 of the License, or (at your option) "
@@ -3606,33 +3608,33 @@ msgid ""
 "Ave, Cambridge, MA 02139, USA.\n"
 msgstr ""
 
-#: ../src/MadAboutDialog.cpp:41
+#: ../src/MadAboutDialog.cpp:42
 msgid ""
-"Minggang Li(Current maintainer of MadEdit-Mod)\n"
-"\n"
-"Alston Chen(Author of MadEdit)\n"
-"JiaYanwei(Patch contributer for MadEdit)\n"
-"nikoss(Greek Translation)\n"
-"Other translation/patch contributers"
+"Minggang Li\t\tCurrent maintainer of MadEdit-Mod\n"
+"===========================================\n"
+"Alston Chen\t\tAuthor of MadEdit\n"
+"JiaYanwei\t\tPatch contributer for MadEdit\n"
+"nikoss\t\t\tGreek Translation\n"
+"Others\t\t\tTranslation/patch contributers"
 msgstr ""
 
-#: ../src/MadAboutDialog.cpp:88
+#: ../src/MadAboutDialog.cpp:90
 msgid "About"
 msgstr "關於"
 
-#: ../src/MadAboutDialog.cpp:102
+#: ../src/MadAboutDialog.cpp:104
 msgid "Credits"
 msgstr "致謝"
 
-#: ../src/MadAboutDialog.cpp:116
+#: ../src/MadAboutDialog.cpp:118
 msgid "License"
 msgstr "授權許可"
 
-#: ../src/MadAboutDialog.cpp:118
+#: ../src/MadAboutDialog.cpp:120
 msgid "GNU General Public License"
 msgstr ""
 
-#: ../src/MadAboutDialog.cpp:138
+#: ../src/MadAboutDialog.cpp:140
 msgid "About MadEdit-Mod"
 msgstr ""
 
@@ -3698,7 +3700,7 @@ msgstr ""
 
 #: ../src/MadNumberDlg.cpp:161
 #, fuzzy
-msgid "Previw:\t"
+msgid "Previw: "
 msgstr "列印預覽"
 
 #: ../src/MadNumberDlg.cpp:167 ../src/MadNumberDlg.h:46
@@ -3722,7 +3724,7 @@ msgstr ""
 msgid "Run"
 msgstr ""
 
-#: ../src/MadMacroDlg.cpp:67
+#: ../src/MadMacroDlg.cpp:67 ../src/MadMacroDlg.cpp:156
 #, fuzzy
 msgid "Results >>"
 msgstr "%d 個結果"
@@ -3740,11 +3742,6 @@ msgstr ""
 msgid "Results\t<<"
 msgstr "%d 個結果"
 
-#: ../src/MadMacroDlg.cpp:156
-#, fuzzy
-msgid "Results\t>>"
-msgstr "%d 個結果"
-
 #: ../src/MadPrintout.h:16
 msgid "MadEdit-Mod Printout"
 msgstr ""
@@ -3754,6 +3751,10 @@ msgstr ""
 msgid ""
 "Unsure how to update the possible values for %s based on the value of %s"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Results\t>>"
+#~ msgstr "%d 個結果"
 
 #~ msgid "Save All Files"
 #~ msgstr "儲存全部的檔案"

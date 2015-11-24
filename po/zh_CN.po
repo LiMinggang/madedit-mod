@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.3.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-23 19:19+0800\n"
-"PO-Revision-Date: 2015-11-20 13:15+0800\n"
+"POT-Creation-Date: 2015-11-24 11:42+0800\n"
+"PO-Revision-Date: 2015-11-24 11:59+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit-mod@gmail.com>\n"
 "Language: zh_CN\n"
@@ -562,7 +562,7 @@ msgstr "否(&N)"
 #: ../src/MadEditFrame.cpp:349 ../src/MadFileAssociationDialog.cpp:390
 #: ../src/MadHighlightingDialog.cpp:316 ../src/MadPurgeHistoryDialog.cpp:92
 #: ../src/MadOptionsDialog.cpp:1068 ../src/MadConvEncDialog.cpp:127
-#: ../src/MadAboutDialog.cpp:135
+#: ../src/MadAboutDialog.cpp:137
 msgid "&Cancel"
 msgstr "取消(&C)"
 
@@ -622,16 +622,16 @@ msgstr "'%s' 的格式不正确。"
 msgid "Invalid"
 msgstr "无效"
 
-#: ../src/MadEditApp.cpp:126
+#: ../src/MadEditApp.cpp:130
 #, c-format
 msgid "SEARCHING FOR %s"
 msgstr "正在检索 %s"
 
-#: ../src/MadEditApp.cpp:365
+#: ../src/MadEditApp.cpp:369
 msgid "Failed to create an IPC service."
 msgstr "创建IPC（进程间通信）失败"
 
-#: ../src/MadEditApp.cpp:406
+#: ../src/MadEditApp.cpp:410
 msgid ""
 "Sorry, the existing instance may be too busy too respond.\n"
 "Please close any open dialogs and retry."
@@ -2466,7 +2466,7 @@ msgstr "<- 加入自定义文件类型"
 #: ../src/MadFileAssociationDialog.cpp:387
 #: ../src/MadHighlightingDialog.cpp:313 ../src/MadPurgeHistoryDialog.cpp:89
 #: ../src/MadOptionsDialog.cpp:1064 ../src/MadConvEncDialog.cpp:124
-#: ../src/MadAboutDialog.cpp:132
+#: ../src/MadAboutDialog.cpp:134
 msgid "&OK"
 msgstr "确定(&O)"
 
@@ -3079,7 +3079,6 @@ msgid "Enable Personal Dictionary"
 msgstr "使用个人字典"
 
 #: ../src/MadOptionsDialog.cpp:685
-#, fuzzy
 msgid "Language"
 msgstr "语言"
 
@@ -3582,6 +3581,8 @@ msgstr "统计字数(所选取的文字)"
 
 #: ../src/MadAboutDialog.cpp:36
 msgid ""
+"Copyright (C) 2012-2015  Minggang Li <minggang.li@gmail.com>\n"
+"\n"
 "This program is free software; you can redistribute it and/or modify it "
 "under the terms of the GNU General Public License as published by the Free "
 "Software Foundation; either version 3 of the License, or (at your option) "
@@ -3596,34 +3597,51 @@ msgid ""
 "this program; if not, write to the Free Software Foundation, Inc., 675 Mass "
 "Ave, Cambridge, MA 02139, USA.\n"
 msgstr ""
-
-#: ../src/MadAboutDialog.cpp:41
-msgid ""
-"Minggang Li(Current maintainer of MadEdit-Mod)\n"
+"著作权所有(C) 2012-2015 Minggang Li <minggang.li@gmail.com>\n"
 "\n"
-"Alston Chen(Author of MadEdit)\n"
-"JiaYanwei(Patch contributer for MadEdit)\n"
-"nikoss(Greek Translation)\n"
-"Other translation/patch contributers"
-msgstr ""
+"本程序为自由软件；您可依据自由软件基金会所发表的GNU通用公共授权条款规定，就本"
+"程序再为发布与／或修改；无论您依据的是本授权的第二版或（您自行选择的）任一日"
+"后发行的版本。\n"
+"\n"
+"本程序是基于使用目的而加以发布，然而不负任何担保责任；亦无对适售性或特定目的"
+"适用性所为的默示性担保。详情请参照GNU通用公共授权。\n"
+"\n"
+"您应已收到附随于本程序的GNU通用公共授权的副本；如果没有，请写信至自由软件基金"
+"会：59 Temple Place - Suite 330, Boston, Ma 02111-1307, USA。\n"
 
-#: ../src/MadAboutDialog.cpp:88
+#: ../src/MadAboutDialog.cpp:42
+msgid ""
+"Minggang Li\t\tCurrent maintainer of MadEdit-Mod\n"
+"===========================================\n"
+"Alston Chen\t\tAuthor of MadEdit\n"
+"JiaYanwei\t\tPatch contributer for MadEdit\n"
+"nikoss\t\t\tGreek Translation\n"
+"Others\t\t\tTranslation/patch contributers"
+msgstr ""
+"Minggang Li\t\tMadEdit-Mod当前的维护者\n"
+"===========================================\n"
+"Alston Chen\t\tMadEdit的作者\n"
+"JiaYanwei\t\tMadEdit补丁贡献者\n"
+"nikoss\t\t\t希腊语翻译者\n"
+"其他人\t\t\t翻译或补丁贡献者"
+
+#: ../src/MadAboutDialog.cpp:90
 msgid "About"
-msgstr ""
+msgstr "关于"
 
-#: ../src/MadAboutDialog.cpp:102
+#: ../src/MadAboutDialog.cpp:104
 msgid "Credits"
-msgstr ""
-
-#: ../src/MadAboutDialog.cpp:116
-msgid "License"
-msgstr ""
+msgstr "致谢"
 
 #: ../src/MadAboutDialog.cpp:118
-msgid "GNU General Public License"
-msgstr ""
+msgid "License"
+msgstr "许可证"
 
-#: ../src/MadAboutDialog.cpp:138
+#: ../src/MadAboutDialog.cpp:120
+msgid "GNU General Public License"
+msgstr "GNU通用公共许可证"
+
+#: ../src/MadAboutDialog.cpp:140
 msgid "About MadEdit-Mod"
 msgstr "关于 MadEdit-Mod"
 
@@ -3640,7 +3658,6 @@ msgid "Number of Chars"
 msgstr "总字符数"
 
 #: ../src/MadNumberDlg.cpp:87
-#, fuzzy
 msgid "Pad\tWith Zero"
 msgstr "用 0 填充"
 
@@ -3689,26 +3706,23 @@ msgid "Postfix"
 msgstr "后缀"
 
 #: ../src/MadNumberDlg.cpp:161
-#, fuzzy
-msgid "Previw:\t"
-msgstr "预览："
+msgid "Previw: "
+msgstr "预览 "
 
 #: ../src/MadNumberDlg.cpp:167 ../src/MadNumberDlg.h:46
 msgid "Numbering Configuration"
 msgstr "数列配置"
 
 #: ../src/MadNumberDlg.cpp:193
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid\tvalue of \"%s:%s\""
 msgstr "\"%s:%s\" 不是正确的值"
 
 #: ../src/MadNumberDlg.cpp:196
-#, fuzzy
 msgid ": Valid\trange is 0~512,\t0 means\tNO PADDING"
 msgstr "：有效范围是0～512，0意味着没有填充字符"
 
 #: ../src/MadMacroDlg.h:62
-#, fuzzy
 msgid "MadEdit\tMacro"
 msgstr "MadEdit 宏"
 
@@ -3716,12 +3730,11 @@ msgstr "MadEdit 宏"
 msgid "Run"
 msgstr "运行"
 
-#: ../src/MadMacroDlg.cpp:67
+#: ../src/MadMacroDlg.cpp:67 ../src/MadMacroDlg.cpp:156
 msgid "Results >>"
 msgstr "显示结果 >>"
 
 #: ../src/MadMacroDlg.cpp:105
-#, fuzzy
 msgid "Memory\tallocation failed"
 msgstr "分配内存失败"
 
@@ -3730,14 +3743,8 @@ msgid "Error"
 msgstr "错误"
 
 #: ../src/MadMacroDlg.cpp:154
-#, fuzzy
 msgid "Results\t<<"
-msgstr "隐藏结果 <<"
-
-#: ../src/MadMacroDlg.cpp:156
-#, fuzzy
-msgid "Results\t>>"
-msgstr "显示结果 >>"
+msgstr "隐藏结果<<"
 
 #: ../src/MadPrintout.h:16
 msgid "MadEdit-Mod Printout"
@@ -3748,6 +3755,10 @@ msgstr "MadEdit-Mod预览打印"
 msgid ""
 "Unsure how to update the possible values for %s based on the value of %s"
 msgstr "不确定如何更新%s的可能值（基于%s的值）"
+
+#, fuzzy
+#~ msgid "Results\t>>"
+#~ msgstr "显示结果 >>"
 
 #~ msgid "Directory %s DOES NOT EXIST !!!"
 #~ msgstr "目录 %s 不存在！！！"

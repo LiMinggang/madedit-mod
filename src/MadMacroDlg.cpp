@@ -153,7 +153,7 @@ void MadMacroDlg::OnEnableResultClick( wxCommandEvent& event )
 	if(m_debug)
 		m_enableresult->SetLabel(_("Results	<<"));
 	else
-		m_enableresult->SetLabel(_("Results	>>"));
+		m_enableresult->SetLabel(_("Results >>"));
 }
 
 

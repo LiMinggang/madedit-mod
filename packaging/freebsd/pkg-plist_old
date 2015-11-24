@@ -4,8 +4,10 @@ share/locale/zh_TW/LC_MESSAGES/madedit-mod.mo
 share/locale/it_IT/LC_MESSAGES/madedit-mod.mo
 share/locale/ja_JP/LC_MESSAGES/madedit-mod.mo
 share/locale/es/LC_MESSAGES/madedit-mod.mo
-share/locale/el_GR/LC_MESSAGES/madedit-mod.mo
+share/locale/el/LC_MESSAGES/madedit-mod.mo
 share/locale/ru_RU/LC_MESSAGES/madedit-mod.mo
+share/locale/pl_PL/LC_MESSAGES/madedit-mod.mo
+share/locale/de_DE/LC_MESSAGES/madedit-mod.mo
 share/applications/madedit.desktop
 share/madedit/syntax/Dark.sch
 share/madedit/syntax/DarkBlue.sch

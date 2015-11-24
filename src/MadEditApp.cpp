@@ -542,7 +542,7 @@ int MadEditApp::OnExit()
 	if(m_AppServer)
 		delete m_AppServer;
 	if(g_Locale)
-		delete g_Locale;
+		wxDELETE( g_Locale );
 
 	return 0;
 }
