@@ -36,7 +36,10 @@
 #include <wx/panel.h>
 #include <wx/notebook.h>
 #include <wx/sizer.h>
+
+#ifdef MADEDIT_ENABLE_STC
 #include <wx/stc/stc.h>
+#endif
 ////Header Include End
 
 #include <wx/dialog.h>
@@ -163,7 +166,11 @@ public:
 		wxCheckBox *WxCheckAttachClasses;
 		wxBoxSizer *WxBoxSizer35;
 		wxPanel *WxAuiNoteBookPage2;
+#ifdef MADEDIT_ENABLE_STC
         wxStyledTextCtrl *WxTextSample;
+#else
+		wxTextCtrl *WxTextSample;
+#endif
 		wxStaticText *WxStaticText27;
 		wxStaticBoxSizer *WxStaticBoxSizer7;
 		wxRadioBox *WxRadioBoxBracketStyle;
@@ -539,7 +546,9 @@ public:
     void OnRadioBoxBracketStyleClick(wxCommandEvent& event);
 	void OnFormattingBreakLinesClick(wxCommandEvent& event);
 	void OnPaddingBreakBlocksClick(wxCommandEvent& event);
+#ifdef MADEDIT_ENABLE_STC
 	void OnMarginClick(wxStyledTextEvent &event);
+#endif
 };
 
 

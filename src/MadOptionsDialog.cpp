@@ -23,11 +23,14 @@
 #include "astyle/astyle.h"
 #include "astylepredefinedstyles.h"
 
+#ifdef MADEDIT_ENABLE_STC
 enum
 {
     MARGIN_LINE_NUMBERS,
     MARGIN_FOLD
 };
+#endif
+
  
 //Do not add custom headers.
 //wx-dvcpp designer will remove them
@@ -804,7 +807,7 @@ void MadOptionsDialog::CreateGUIControls(void)
     WxTextSample->SetMaxLineLength(DEFAULT_MAX_LINELEN);
     WxTextSample->SetText(wxT("int Foo(bool isBar)\n{\n    if (isBar)\n    {\n        bar();\n        return 1;\n    }\n    else\n        return 0;\n}\n"));
     */
-#if 1
+#ifdef MADEDIT_ENABLE_STC
 	WxTextSample = new wxStyledTextCtrl(WxAuiNoteBookPage1, ID_WXRICHTEXTSAMPLE, wxPoint(19, 47), wxSize(219, 300));
 
 	WxTextSample->StyleClearAll();
@@ -2143,8 +2146,9 @@ void MadOptionsDialog::OnRadioBoxBracketStyleClick(wxCommandEvent& event)
 {
     long style=WxRadioBoxBracketStyle->GetSelection();
 
+#ifdef MADEDIT_ENABLE_STC
 	WxTextSample->SetReadOnly(false);
-
+#endif
     switch (style)
     {
         case aspsAllman: // Allman (ANSI)
@@ -2167,7 +2171,9 @@ void MadOptionsDialog::OnRadioBoxBracketStyleClick(wxCommandEvent& event)
             WxTextSample->SetValue(bracket_style[aspsCustom]);
             break;
     }
+#ifdef MADEDIT_ENABLE_STC
 	WxTextSample->SetReadOnly(true);
+#endif
 }
 
 void MadOptionsDialog::OnFormattingBreakLinesClick(wxCommandEvent& event)
@@ -2196,6 +2202,7 @@ void MadOptionsDialog::OnPaddingBreakBlocksClick(wxCommandEvent& event)
     }
 }
 
+#ifdef MADEDIT_ENABLE_STC
 void MadOptionsDialog::OnMarginClick(wxStyledTextEvent &event)
 {
 	if (event.GetMargin() == MARGIN_FOLD)
@@ -2209,4 +2216,4 @@ void MadOptionsDialog::OnMarginClick(wxStyledTextEvent &event)
 		}
 	}
 }
-
+#endif
