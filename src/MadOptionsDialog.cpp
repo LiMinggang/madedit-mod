@@ -671,6 +671,8 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxTextSample->SetDisplayBookmark(false);
 	WxTextSample->SetShowSpaceChar(false);
 	WxTextSample->SetShowTabChar(false);
+	WxTextSample->SetShowEndOfLine(false);
+	WxTextSample->SetSpellCheck(false);
 	WxTextSample->SetSyntax(wxT("C/C++"));
 	WxTextSample->SetText(bracket_style[aspsAllman]);
 #elif MADEDIT_ENABLE_STC

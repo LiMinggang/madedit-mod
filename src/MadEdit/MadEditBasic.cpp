@@ -992,7 +992,7 @@ void MadEdit::SetDisplay80ColHint(bool value)
 	Refresh(false);
 }
 
-void MadEdit::SetShowEndOfLine(bool	value)
+void MadEdit::SetShowEndOfLine(bool value)
 {
 	if(value!=m_ShowEndOfLine)
 	{
