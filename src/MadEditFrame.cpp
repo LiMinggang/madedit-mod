@@ -7964,8 +7964,11 @@ void MadEditFrame::OnHelpAbout( wxCommandEvent& event )
 							 g_MadEditMod_URL + wxT( "\n\n" ) +
 							 _( "Download dictionary at\nhttp://extensions.openoffice.org/" ) + wxT( "\n\n" ) +
 							 _( "Press OK to visit our HomePage." ) );
+	dlg.WxMemoAbout->SetInsertionPoint(0);
 	dlg.WxMemoLicense->AppendText( g_MadEditModLicense );
+	dlg.WxMemoLicense->SetInsertionPoint(0);
 	dlg.WxMemoCredits->AppendText( g_MadEditModCredits );
+	dlg.WxMemoCredits->SetInsertionPoint(0);
 	// Hide Modaless Dialog
 	HideModalessDialogs();
 

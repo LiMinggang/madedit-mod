@@ -86,35 +86,35 @@ void MadAboutDialog::CreateGUIControls(void)
 	WxAuiNotebookAbout = new wxAuiNotebook(this, ID_WXAUINOTEBOOKABOUT, wxPoint(5, 5), wxSize(450, 220), wxAUI_NB_TOP | wxAUI_NB_TAB_SPLIT | wxAUI_NB_TAB_MOVE | wxAUI_NB_SCROLL_BUTTONS | wxAUI_NB_CLOSE_ON_ACTIVE_TAB);
 	WxBoxSizer5->Add(WxAuiNotebookAbout, 0, wxALIGN_CENTER | wxALL, 5);
 
-	WxPanelAbout = new wxPanel(WxAuiNotebookAbout, ID_WXPANELABOUT, wxPoint(-1, -1), wxSize(420, 210));
+	WxPanelAbout = new wxPanel(WxAuiNotebookAbout, ID_WXPANELABOUT, wxPoint(-1, -1), wxSize(440, 210));
 	WxAuiNotebookAbout->AddPage(WxPanelAbout, _("About"));
 
 	WxBoxSizer6 = new wxBoxSizer(wxHORIZONTAL);
 	WxPanelAbout->SetSizer(WxBoxSizer6);
 	WxPanelAbout->SetAutoLayout(true);
 
-	WxMemoAbout = new wxTextCtrl(WxPanelAbout, ID_WXMEMOABOUT, wxEmptyString, wxPoint(5, 5), wxSize(400, 200), wxTE_READONLY | wxTE_AUTO_URL | wxTE_MULTILINE, wxDefaultValidator, wxT("WxMemoAbout"));
+	WxMemoAbout = new wxTextCtrl(WxPanelAbout, ID_WXMEMOABOUT, wxEmptyString, wxPoint(5, 5), wxSize(435, 200), wxTE_READONLY | wxTE_AUTO_URL | wxTE_MULTILINE, wxDefaultValidator, wxT("WxMemoAbout"));
 	WxMemoAbout->SetMaxLength(0);
 	WxMemoAbout->AppendText(wxT(""));
 	WxMemoAbout->SetFocus();
 	WxMemoAbout->SetInsertionPointEnd();
 	WxBoxSizer6->Add(WxMemoAbout, 0, wxALIGN_CENTER | wxALL, 5);
 
-	WxPanelCredits = new wxPanel(WxAuiNotebookAbout, ID_WXPANELCREDITS, wxPoint(0, -1), wxSize(420, 210));
+	WxPanelCredits = new wxPanel(WxAuiNotebookAbout, ID_WXPANELCREDITS, wxPoint(0, -1), wxSize(440, 210));
 	WxAuiNotebookAbout->AddPage(WxPanelCredits, _("Credits"));
 
 	WxBoxSizer7 = new wxBoxSizer(wxHORIZONTAL);
 	WxPanelCredits->SetSizer(WxBoxSizer7);
 	WxPanelCredits->SetAutoLayout(true);
 
-	WxMemoCredits = new wxTextCtrl(WxPanelCredits, ID_WXMEMOCREDITS, wxEmptyString, wxPoint(5, 5), wxSize(400, 200), wxTE_READONLY | wxTE_AUTO_URL | wxTE_MULTILINE, wxDefaultValidator, wxT("WxMemoCredits"));
+	WxMemoCredits = new wxTextCtrl(WxPanelCredits, ID_WXMEMOCREDITS, wxEmptyString, wxPoint(5, 5), wxSize(425, 200), wxTE_READONLY | wxTE_AUTO_URL | wxTE_MULTILINE, wxDefaultValidator, wxT("WxMemoCredits"));
 	WxMemoCredits->SetMaxLength(0);
 	WxMemoCredits->AppendText(wxT(""));
 	WxMemoCredits->SetFocus();
 	WxMemoCredits->SetInsertionPointEnd();
 	WxBoxSizer7->Add(WxMemoCredits, 0, wxALIGN_CENTER | wxALL, 5);
 
-	WxPanelLicense = new wxPanel(WxAuiNotebookAbout, ID_WXPANELLICENSE, wxPoint(-1, 2), wxSize(420, 210));
+	WxPanelLicense = new wxPanel(WxAuiNotebookAbout, ID_WXPANELLICENSE, wxPoint(-1, 2), wxSize(440, 210));
 	WxAuiNotebookAbout->AddPage(WxPanelLicense, _("License"));
 
 	wxStaticBox* WxStaticBoxSizer1_StaticBoxObj = new wxStaticBox(WxPanelLicense, wxID_ANY, _("GNU General Public License"));
@@ -122,7 +122,7 @@ void MadAboutDialog::CreateGUIControls(void)
 	WxPanelLicense->SetSizer(WxStaticBoxSizer1);
 	WxPanelLicense->SetAutoLayout(true);
 
-	WxMemoLicense = new wxTextCtrl(WxPanelLicense, ID_WXMEMOLICENSE, wxEmptyString, wxPoint(10, 20), wxSize(400, 200), wxTE_READONLY | wxTE_AUTO_URL | wxTE_MULTILINE, wxDefaultValidator, wxT("WxMemoLicense"));
+	WxMemoLicense = new wxTextCtrl(WxPanelLicense, ID_WXMEMOLICENSE, wxEmptyString, wxPoint(10, 20), wxSize(435, 200), wxTE_READONLY | wxTE_AUTO_URL | wxTE_MULTILINE, wxDefaultValidator, wxT("WxMemoLicense"));
 	WxMemoLicense->SetMaxLength(0);
 	WxMemoLicense->SetFocus();
 	WxMemoLicense->SetInsertionPointEnd();
