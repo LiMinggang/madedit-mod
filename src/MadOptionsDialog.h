@@ -37,6 +37,8 @@
 #include <wx/notebook.h>
 #include <wx/sizer.h>
 
+#define MADEDIT_ENABLE_MADEDIT
+
 #ifdef MADEDIT_ENABLE_STC
 #include <wx/stc/stc.h>
 #endif
@@ -71,6 +73,9 @@ public:
 
 class KeyTextCtrl;
 class wxAuiNotebook;
+#ifdef MADEDIT_ENABLE_MADEDIT
+class MadEdit;
+#endif
 
 class MadOptionsDialog : public wxDialog
 {
@@ -166,7 +171,9 @@ public:
 		wxCheckBox *WxCheckAttachClasses;
 		wxBoxSizer *WxBoxSizer35;
 		wxPanel *WxAuiNoteBookPage2;
-#ifdef MADEDIT_ENABLE_STC
+#ifdef MADEDIT_ENABLE_MADEDIT
+		MadEdit *WxTextSample;
+#elif MADEDIT_ENABLE_STC
         wxStyledTextCtrl *WxTextSample;
 #else
 		wxTextCtrl *WxTextSample;

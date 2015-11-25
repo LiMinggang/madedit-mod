@@ -650,7 +650,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	arrayStringFor_WxRadioBoxBracketStyle.Add( wxT( "Pico" ) );
 	arrayStringFor_WxRadioBoxBracketStyle.Add( wxT( "Lisp" ) );
 	arrayStringFor_WxRadioBoxBracketStyle.Add( wxT( "Custom" ) );
-	WxRadioBoxBracketStyle = new wxRadioBox( WxAuiNoteBookPage1, ID_WXRADIOBOXBRACKETSTYLE, _( "Bracket Style" ), wxPoint( 2, 28 ), wxSize( 124, 320 ), arrayStringFor_WxRadioBoxBracketStyle, 1, wxRA_SPECIFY_COLS, wxDefaultValidator, wxT( "WxRadioBoxBracketStyle" ) );
+	WxRadioBoxBracketStyle = new wxRadioBox( WxAuiNoteBookPage1, ID_WXRADIOBOXBRACKETSTYLE, _( "Bracket Style" ), wxPoint( 2, 28 ), wxSize( 124, 400 ), arrayStringFor_WxRadioBoxBracketStyle, 1, wxRA_SPECIFY_COLS, wxDefaultValidator, wxT( "WxRadioBoxBracketStyle" ) );
 	WxRadioBoxBracketStyle->SetSelection( 0 );
 	WxBoxSizer47->Add( WxRadioBoxBracketStyle, 0, wxALIGN_LEFT | wxALIGN_TOP | wxALL, 2 );
 	SET_CONTROLPARENT( WxRadioBoxBracketStyle );
@@ -658,19 +658,22 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxStaticBoxSizer7 = new wxStaticBoxSizer( WxStaticBoxSizer7_StaticBoxObj, wxVERTICAL );
 	WxBoxSizer47->Add( WxStaticBoxSizer7, 0, wxALIGN_LEFT | wxALIGN_TOP | wxALL, 5 );
 	WxStaticText27 = new wxStaticText( WxAuiNoteBookPage1, ID_WXSTATICTEXT27, _( "Sample of the bracket style option chosen to use:" ), wxPoint( 10, 20 ), wxDefaultSize, 0, wxT( "WxStaticText27" ) );
-	WxStaticBoxSizer7->Add( WxStaticText27, 0, wxALIGN_LEFT | wxALIGN_TOP | wxALL, 5 );
-	/*
-	    WxTextSample = new MadEdit(this, ID_WXRICHTEXTSAMPLE, wxPoint(19, 47), wxSize(219, 300));
-	    WxTextSample->SetEncoding(wxT("UTF-32LE"));
-	    WxTextSample->SetFixedWidthMode(false);
-	    WxTextSample->SetRecordCaretMovements(false);
-	    WxTextSample->SetInsertSpacesInsteadOfTab(false);
-	    WxTextSample->SetWantTab(false);
-	    WxTextSample->SetSyntax(wxT("C/C++"));
-	    WxTextSample->SetMaxLineLength(DEFAULT_MAX_LINELEN);
-	    WxTextSample->SetText(wxT("int Foo(bool isBar)\n{\n    if (isBar)\n    {\n        bar();\n        return 1;\n    }\n    else\n        return 0;\n}\n"));
-	    */
-#ifdef MADEDIT_ENABLE_STC
+	WxStaticBoxSizer7->Add(WxStaticText27, 0, wxALIGN_LEFT | wxALIGN_TOP | wxALL, 5);
+#ifdef MADEDIT_ENABLE_MADEDIT
+	WxTextSample = new MadEdit(WxAuiNoteBookPage1, ID_WXRICHTEXTSAMPLE, wxPoint(19, 47), wxSize(300, 300));
+	WxTextSample->SetEncoding(wxT("UTF-32LE"));
+	WxTextSample->SetFixedWidthMode(false);
+	WxTextSample->SetRecordCaretMovements(false);
+	WxTextSample->SetInsertSpacesInsteadOfTab(false);
+	WxTextSample->SetWantTab(false);
+	WxTextSample->SetMaxLineLength(DEFAULT_MAX_LINELEN);
+	WxTextSample->SetReadOnly(true);
+	WxTextSample->SetDisplayBookmark(false);
+	WxTextSample->SetShowSpaceChar(false);
+	WxTextSample->SetShowTabChar(false);
+	WxTextSample->SetSyntax(wxT("C/C++"));
+	WxTextSample->SetText(bracket_style[aspsAllman]);
+#elif MADEDIT_ENABLE_STC
 	WxTextSample = new wxStyledTextCtrl( WxAuiNoteBookPage1, ID_WXRICHTEXTSAMPLE, wxPoint( 19, 47 ), wxSize( 219, 300 ) );
 	WxTextSample->StyleClearAll();
 	WxTextSample->SetLexer( wxSTC_LEX_CPP );
@@ -739,8 +742,10 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxTextSample->AppendText( bracket_style[aspsAllman] );
 #endif
 	WxTextSample->SetFocus();
+#ifndef MADEDIT_ENABLE_MADEDIT
 	WxTextSample->SetInsertionPointEnd();
 	SET_CONTROLPARENT( WxTextSample );
+#endif
 	WxStaticBoxSizer7->Add( WxTextSample, 1, wxALIGN_LEFT | wxEXPAND | wxALL, 5 );
 	WxAuiNoteBookPage2 = new wxPanel( WxAuiNotebook1, ID_WXAUINOTEBOOKPAGE2, wxPoint( 4, 24 ), wxSize( 692, 464 ) );
 	WxAuiNotebook1->AddPage( WxAuiNoteBookPage2, _( "Brackets" ) );
@@ -1906,11 +1911,19 @@ void MadOptionsDialog::OnRadioBoxBracketStyleClick( wxCommandEvent& event )
 	case aspsGoogle: // Google
 	case aspsPico: // Pico
 	case aspsLisp: // Lisp
+#ifndef MADEDIT_ENABLE_MADEDIT
 		WxTextSample->SetValue( bracket_style[style] );
+#else
+		WxTextSample->SetText(bracket_style[style]);
+#endif
 		break;
 
 	default: // Custom
-		WxTextSample->SetValue( bracket_style[aspsCustom] );
+#ifndef MADEDIT_ENABLE_MADEDIT
+		WxTextSample->SetValue(bracket_style[aspsCustom]);
+#else
+		WxTextSample->SetText(bracket_style[aspsCustom]);
+#endif
 		break;
 	}
 
