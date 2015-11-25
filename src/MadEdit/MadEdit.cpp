@@ -9836,15 +9836,18 @@ void MadEdit::OnKeyDown(wxKeyEvent&	evt)
 	   // add: gogo, 30.08.2009	---
 		if ( cmd ==	ecDelPrevWord || cmd ==	ecDelNextWord )
 		{
-		   if (	m_EditMode != emHexMode	)
-		  {
-			  Freeze();
-			  // if	there is a selection, maybe	some caret movement	have to	be done	here:
-			  // moving	the	caret before or	after the current selection	?
-			  ProcessCommand( cmd == ecDelPrevWord ? ecSelPrevWord : ecSelNextWord );
-			  ProcessCommand( ecDelete );
-			  Thaw();
-		  }
+			if (	m_EditMode != emHexMode	)
+			{
+				Freeze();
+				// if	there is a selection, maybe	some caret movement	have to	be done	here:
+				// moving	the	caret before or	after the current selection	?
+				if (!m_Selection)
+					ProcessCommand( cmd == ecDelPrevWord ? ecSelPrevWord : ecSelNextWord );
+
+				if (m_Selection)
+					ProcessCommand(cmd == ecDelPrevWord? ecBackSpace: ecDelete);
+				Thaw();
+			}
 		}
 	   else	//--------------------------
 			ProcessCommand(cmd);

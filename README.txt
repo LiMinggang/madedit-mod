@@ -118,6 +118,7 @@ Fix: Purge recent caret position history
 Fix: Typo on Option dialog(Dictionary settings) #82
 Fix: Not enough space for translated string(Greek) #83
 Fix: Can't convert Chinese(simplified) to Japanese #88
+Fix: Incorrect behavior of MadEdit when Ctrl-Backspace pressed at beginning of a text file OR at zero-width selection in column mode #89
 Fix: Update MadPython Syntax
 Fix: Update Translations
 
