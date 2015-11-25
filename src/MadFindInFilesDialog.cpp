@@ -127,11 +127,11 @@ void MadFindInFilesDialog::CreateGUIControls( void )
 	WxBoxSizer5->Add( WxButtonFind, 0, wxALIGN_CENTER | wxEXPAND | wxALL, 2 );
 	WxButtonReplace = new wxButton( this, ID_WXBUTTONREPLACE, _( "&Replace" ), wxPoint( 2, 34 ), wxSize( 100, 28 ), 0, wxDefaultValidator, wxT( "WxButtonReplace" ) );
 	WxBoxSizer5->Add( WxButtonReplace, 0, wxALIGN_CENTER | wxEXPAND | wxALL, 2 );
-	WxCheckBoxEnableReplace = new wxCheckBox( this, ID_WXCHECKBOXENABLEREPLACE, _( "&Enable Replace" ), wxPoint( 2, 64 ), wxSize( 100, 25 ), 0, wxDefaultValidator, wxT( "WxCheckBoxEnableReplace" ) );
+	WxButtonClose = new wxButton( this, wxID_CANCEL, _( "Close" ), wxPoint( 2, 64 ), wxSize( 100, 28 ), 0, wxDefaultValidator, wxT( "WxButtonClose" ) );
+	WxBoxSizer5->Add( WxButtonClose, 0, wxALIGN_CENTER | wxEXPAND | wxALL, 2 );
+	WxCheckBoxEnableReplace = new wxCheckBox( this, ID_WXCHECKBOXENABLEREPLACE, _( "&Enable Replace" ), wxPoint( 2, 94 ), wxSize( 100, 25 ), 0, wxDefaultValidator, wxT( "WxCheckBoxEnableReplace" ) );
 	WxBoxSizer5->Add( WxCheckBoxEnableReplace, 0, wxALIGN_CENTER | wxEXPAND | wxALL, 0 );
 	WxCheckBoxEnableReplace->SetValue( false );
-	WxButtonClose = new wxButton( this, wxID_CANCEL, _( "Close" ), wxPoint( 2, 91 ), wxSize( 100, 28 ), 0, wxDefaultValidator, wxT( "WxButtonClose" ) );
-	WxBoxSizer5->Add( WxButtonClose, 0, wxALIGN_CENTER | wxEXPAND | wxALL, 2 );
 	WxStaticLine1 = new wxStaticLine( this, ID_WXSTATICLINE1, wxPoint( 184, 162 ), wxSize( 150, -1 ), wxLI_HORIZONTAL );
 	WxBoxSizer1->Add( WxStaticLine1, 0, wxEXPAND | wxALL, 2 );
 	WxBoxSizer3 = new wxBoxSizer( wxVERTICAL );

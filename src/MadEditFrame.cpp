@@ -3818,7 +3818,9 @@ void MadEditFrame::RunScriptWithFile( const wxString &filename, const wxString &
 
 				if( g_EmbeddedPython )
 				{
+					g_ActiveMadEdit->CaptureMouse();
 					g_EmbeddedPython->exec( std::string( script.mb_str() ) );
+					g_ActiveMadEdit->ReleaseMouse();
 				}
 
 				wxString name = m_Notebook->GetPageText( idx );
@@ -7477,7 +7479,9 @@ void MadEditFrame::OnToolsMadScriptList( wxCommandEvent& event )
 
 			if( str.IsNull() == false )
 			{
+				g_ActiveMadEdit->CaptureMouse();
 				g_EmbeddedPython->exec( std::string( str.mb_str() ) );
+				g_ActiveMadEdit->ReleaseMouse();
 			}
 		}
 

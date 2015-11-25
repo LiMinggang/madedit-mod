@@ -112,7 +112,7 @@ Mod v0.3.9
 7.New: Toggle hide/show replace UI items by checkbox for FindReplaceInFilesDialog
 8.New: Add Credits and License information on About dialog
 9.New: Add German and Polish translations(based on wxMedit)
-10.New: Syntax highlight support in Source formatter tab #89
+10.New: Syntax highlight support in Source formatter tab
 Fix: Improve mark brace issue(#15 in 0.3.8)
 Fix: Purge recent caret position history
 Fix: Typo on Option dialog(Dictionary settings) #82
@@ -121,7 +121,7 @@ Fix: Can't convert Chinese(simplified) to Japanese #88
 Fix: Incorrect behavior of MadEdit when Ctrl-Backspace pressed at beginning of a text file OR at zero-width selection in column mode #89
 Fix: Update MadPython Syntax
 Fix: Update Translations
-
+Other minor improvments
 
 Mod v0.3.8
 1.New: Upgrade boost to 1.59
