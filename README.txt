@@ -14,7 +14,7 @@ A. Linux, FreeBSD, and Unix-like OS (__WXGTK__):
    a. GNU C++ 3.x/4.x:
       Required Libraries to compile:
       1. wxWidgets-3.0.2 or higher with Unicode and IPC enabled
-      2. Boost-1.56.0 or higher(build Boost-Python)
+      2. Boost-1.56.0 or higher(build Boost-Python)(1.59 is recommended)
 
       (install gtk2-devel gtext-devel automake rpm-build)
       copy wxwin.m4 to usr/share/acloXXX/ or install wxGTK-devel
@@ -27,7 +27,7 @@ B. MS Windows (__WXMSW__):
    b. Visual C++ 7.1 (VS.Net 2005) or higher:
       Required Libraries to compile:
       1. wxWidgets-3.0.2 or higher with Unicode and IPC enabled
-      2. Boost-1.56.0 or higher(build Boost-Python)
+      2. Boost-1.56.0 or higher(build Boost-Python)(1.59 is recommended)
       3. Set WXWIN and BOOST to the root directory of your local ones
 
 P.S.: Please put the debug info(.pdb) under the App directory in case there was a 
@@ -43,12 +43,12 @@ P.S.: Please open a ticket for bug of MadEdit-Mod at
 MadEdit_Win2K is a build by VC++ 2005 express for Windows 2000.
 
 Example build under Linux
-Boost Python(1.56)
+Boost Python(1.59)
 ./bjam --with-python include="${HOME}/madedit-mod/minipython/Include" python-debugging=off threading=multi variant=release link=static runtime-link=static stage
 wxWidgets(3.0.2)
 ./configure --enable-unicode --disable-shared --with-libpng=builtin --with-zlib=builtin --with-expat=builtin  --with-gtk3=yes --with-libiconv=no
 MadEdit-Mod
-./configure --with-boost=${HOME}/boost_1_56_0 --with-wxdir=${HOME}/wxWidgets-3.0.2
+./configure --with-boost=${HOME}/boost_1_59_0 --with-wxdir=${HOME}/wxWidgets-3.0.2
 
 Syntax files, Locale files, Dictionaries and Settings:
 ---------------------------------------
@@ -69,6 +69,17 @@ Syntax files, Locale files, Dictionaries and Settings:
     2. $(MadEdit execution file directory)/MadEdit.cfg: Windows
   And FontWidth.dat will also be saved to the same path.
   FontWidth.dat is Cache of Font-Width-Data, it can speed-up MadEdit a lot.
+
+  Currently supported Languages:
+  	English
+  	Chinese Simplified
+  	Chinese Traditional(Not finished)
+  	German(Not finished)
+  	Greek(Not finished)
+  	Japanese(Not finished)
+	Polish(Not finished)
+	Russian(Not finished)
+	Spanish(Not finished)
 
   * Download dictionary at http://extensions.openoffice.org
     oxt is actually a zip file. So, download it and open it with 7-zip. Then extract
