@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: madedit-mod 001 3.4.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-25 14:56+0800\n"
+"POT-Creation-Date: 2015-11-26 20:11+0800\n"
 "PO-Revision-Date: 2015-11-19 20:20+0800\n"
 "Last-Translator: nikos papadopoulos <231036448@freemail.gr>\n"
 "Language-Team: greek <http://www.mageia-gr.org/forum/>\n"
@@ -1679,7 +1679,7 @@ msgstr "Ενεργοποίηση του ορθογραφικού έλεγχου"
 msgid "Toolbars"
 msgstr "Γραμμές Εργαλείων"
 
-#: ../src/MadEditFrame.cpp:1962 ../src/MadEditFrame.cpp:8107
+#: ../src/MadEditFrame.cpp:1962 ../src/MadEditFrame.cpp:8110
 msgid "Toggle Main Toolbar"
 msgstr "Εναλλαγή της Κύριας Γραμμής Εργαλείων"
 
@@ -2563,31 +2563,31 @@ msgstr ""
 msgid "Press OK to visit our HomePage."
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8236
+#: ../src/MadEditFrame.cpp:8239
 #, fuzzy
 msgid "Passed the begin of the file"
 msgstr "ο κατάλογος που περιέχει το αρχείο στην %f"
 
-#: ../src/MadEditFrame.cpp:8290 ../src/MadSearchReplaceDialog.cpp:498
+#: ../src/MadEditFrame.cpp:8293 ../src/MadSearchReplaceDialog.cpp:498
 #: ../src/MadSearchReplaceDialog.cpp:631
 #, fuzzy
 msgid "Passed the end of the file"
 msgstr "ο κατάλογος που περιέχει το αρχείο στην %f"
 
-#: ../src/MadEditFrame.cpp:8322
+#: ../src/MadEditFrame.cpp:8325
 #, fuzzy
 msgid "Invalid item"
 msgstr "Μη έγκυρο αντικείμενο."
 
-#: ../src/MadEditFrame.cpp:8335
+#: ../src/MadEditFrame.cpp:8338
 msgid "&Copy Selected"
 msgstr "Αντι&γραφή Επιλεγμένων"
 
-#: ../src/MadEditFrame.cpp:8336
+#: ../src/MadEditFrame.cpp:8339
 msgid "Copy &All"
 msgstr "&Αντιγραφή Όλων"
 
-#: ../src/MadEditFrame.cpp:8337
+#: ../src/MadEditFrame.cpp:8340
 #, fuzzy
 msgid "&Reset Results"
 msgstr "αποτελέσματα"
@@ -2623,118 +2623,118 @@ msgstr "&Εντάξει"
 msgid "File Type Associations"
 msgstr "Συσχετίσεις Μορφών Αρχείων"
 
-#: ../src/MadFindInFilesDialog.cpp:114 ../src/MadSearchReplaceDialog.cpp:136
+#: ../src/MadFindInFilesDialog.cpp:113 ../src/MadSearchReplaceDialog.cpp:136
 #: ../src/MadSortDialog.cpp:71
 msgid "&Case Sensitive"
 msgstr "Διάκριση Πεζών κ´ Κεφαλαίων"
 
-#: ../src/MadFindInFilesDialog.cpp:116 ../src/MadSearchReplaceDialog.cpp:139
+#: ../src/MadFindInFilesDialog.cpp:115 ../src/MadSearchReplaceDialog.cpp:139
 msgid "&Whole Word Only"
 msgstr "Ολόκληρες Λέξεις Μόνο"
 
-#: ../src/MadFindInFilesDialog.cpp:118 ../src/MadSearchReplaceDialog.cpp:142
+#: ../src/MadFindInFilesDialog.cpp:117 ../src/MadSearchReplaceDialog.cpp:142
 msgid "Use Regular E&xpressions"
 msgstr "Χρήση Κανονικών Ε&κφράσεων"
 
-#: ../src/MadFindInFilesDialog.cpp:120 ../src/MadSearchReplaceDialog.cpp:145
+#: ../src/MadFindInFilesDialog.cpp:119 ../src/MadSearchReplaceDialog.cpp:145
 msgid "Find &Hex String (Example: BE 00 3A or BE003A)"
 msgstr ""
 
-#: ../src/MadFindInFilesDialog.cpp:122
+#: ../src/MadFindInFilesDialog.cpp:121
 #, fuzzy
 msgid "&List the First Found Item Only"
 msgstr "Η λίστα ανάδειξης διαδρομών για μετονομασμένη διαδρομή δεν ευρέθη!"
 
-#: ../src/MadFindInFilesDialog.cpp:126
+#: ../src/MadFindInFilesDialog.cpp:125
 #, fuzzy
 msgid "&Find"
 msgstr "_Εύρεση"
 
-#: ../src/MadFindInFilesDialog.cpp:128 ../src/MadSearchReplaceDialog.cpp:202
+#: ../src/MadFindInFilesDialog.cpp:127 ../src/MadSearchReplaceDialog.cpp:202
 #, fuzzy
 msgid "&Replace"
 msgstr "Replace...|"
 
-#: ../src/MadFindInFilesDialog.cpp:130 ../src/MadMacroDlg.cpp:65
+#: ../src/MadFindInFilesDialog.cpp:129 ../src/MadMacroDlg.cpp:65
 #, fuzzy
 msgid "Close"
 msgstr "κλείσιμο"
 
-#: ../src/MadFindInFilesDialog.cpp:132
+#: ../src/MadFindInFilesDialog.cpp:131
 #, fuzzy
 msgid "&Enable Replace"
 msgstr "Ενεργοποίηση εντολών στις συμβολοσειρές αντικατάστασης"
 
-#: ../src/MadFindInFilesDialog.cpp:139
+#: ../src/MadFindInFilesDialog.cpp:138
 msgid "Opened Files in Editor"
 msgstr ""
 
-#: ../src/MadFindInFilesDialog.cpp:144
+#: ../src/MadFindInFilesDialog.cpp:143
 #, fuzzy
 msgid "Selected Directory:"
 msgstr "Εισαγωγή επιλεγμένου φακέλου"
 
-#: ../src/MadFindInFilesDialog.cpp:153
+#: ../src/MadFindInFilesDialog.cpp:152
 #, fuzzy
 msgid "File Filters:"
 msgstr ""
 "Αυτό θα επαναφέρει τα φίλτρα αρχείων στα προεπιλεγμένα.\n"
 "Να συνεχίσω;"
 
-#: ../src/MadFindInFilesDialog.cpp:162
+#: ../src/MadFindInFilesDialog.cpp:161
 #, fuzzy
 msgid "Exclude Filters:"
 msgstr "Φίλτρα εξαίρεσης ευρετηρίου του Strigi"
 
-#: ../src/MadFindInFilesDialog.cpp:171
+#: ../src/MadFindInFilesDialog.cpp:170
 #, fuzzy
 msgid "File Encoding:"
 msgstr "Κωδικοποίηση αρχείου για το Α:"
 
-#: ../src/MadFindInFilesDialog.cpp:176
+#: ../src/MadFindInFilesDialog.cpp:175
 #, fuzzy
 msgid "Include Subdirectories"
 msgstr "Περίληψη υποκαταλόγων"
 
-#: ../src/MadFindInFilesDialog.cpp:178
+#: ../src/MadFindInFilesDialog.cpp:177
 #, fuzzy
 msgid "Find/Replace In Files"
 msgstr ""
 "Εμφάνισ&η ή Απόκρυψη των Αποτελεσμάτων της Αναζήτησης ή Αντικατάστασης στα "
 "Αρχεία"
 
-#: ../src/MadFindInFilesDialog.cpp:219
+#: ../src/MadFindInFilesDialog.cpp:218
 #, fuzzy
 msgid "Automatic Detection"
 msgstr "Αυτόματη ανίχνευση"
 
-#: ../src/MadFindInFilesDialog.cpp:429 ../src/MadOptionsDialog.cpp:1818
+#: ../src/MadFindInFilesDialog.cpp:428 ../src/MadOptionsDialog.cpp:1818
 #: ../src/MadOptionsDialog.cpp:1835
 #, fuzzy
 msgid "Choose a directory"
 msgstr "Επιλογή καταλόγου"
 
-#: ../src/MadFindInFilesDialog.cpp:562
+#: ../src/MadFindInFilesDialog.cpp:561
 #, fuzzy, c-format
 msgid "Found %d file(s) matched the filters..."
 msgstr "Βρέθηκαν: %d αρχείο/α"
 
-#: ../src/MadFindInFilesDialog.cpp:591
+#: ../src/MadFindInFilesDialog.cpp:590
 #, fuzzy
 msgid "The selected directory does not exist."
 msgstr "Ο κατάλογος %1 δεν υπάρχει!"
 
-#: ../src/MadFindInFilesDialog.cpp:694
+#: ../src/MadFindInFilesDialog.cpp:693
 #, fuzzy, c-format
 msgid "Processing %s of %s files..."
 msgstr "%d φάκελοι, %d αρχεία"
 
-#: ../src/MadFindInFilesDialog.cpp:811
+#: ../src/MadFindInFilesDialog.cpp:810
 #, fuzzy, c-format
 msgid "Found %s matched texts..."
 msgstr "Βρέθηκαν %d κείμενα που ταιριάζουν..."
 
-#: ../src/MadFindInFilesDialog.cpp:813 ../src/MadSearchReplaceDialog.cpp:1417
+#: ../src/MadFindInFilesDialog.cpp:812 ../src/MadSearchReplaceDialog.cpp:1417
 #, fuzzy
 msgid "Preparing Results"
 msgstr "Προετοιμασία..."

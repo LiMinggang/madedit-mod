@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.3.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-26 11:33+0800\n"
+"POT-Creation-Date: 2015-11-26 20:11+0800\n"
 "PO-Revision-Date: 2015-04-18 00:14+0100\n"
 "Last-Translator: Ronny Steiner <post@sirsteiner.de>\n"
 "Language-Team: \n"
@@ -2600,100 +2600,100 @@ msgstr "&Ok"
 msgid "File Type Associations"
 msgstr "Dateityp-Zuordnung"
 
-#: ../src/MadFindInFilesDialog.cpp:114 ../src/MadSearchReplaceDialog.cpp:136
+#: ../src/MadFindInFilesDialog.cpp:113 ../src/MadSearchReplaceDialog.cpp:136
 #: ../src/MadSortDialog.cpp:71
 msgid "&Case Sensitive"
 msgstr "&Groß-/Kleinschreibung unterscheiden"
 
-#: ../src/MadFindInFilesDialog.cpp:116 ../src/MadSearchReplaceDialog.cpp:139
+#: ../src/MadFindInFilesDialog.cpp:115 ../src/MadSearchReplaceDialog.cpp:139
 msgid "&Whole Word Only"
 msgstr "Nur &ganze Wörter"
 
-#: ../src/MadFindInFilesDialog.cpp:118 ../src/MadSearchReplaceDialog.cpp:142
+#: ../src/MadFindInFilesDialog.cpp:117 ../src/MadSearchReplaceDialog.cpp:142
 msgid "Use Regular E&xpressions"
 msgstr "&Reguläre Ausdrücke verwenden"
 
-#: ../src/MadFindInFilesDialog.cpp:120 ../src/MadSearchReplaceDialog.cpp:145
+#: ../src/MadFindInFilesDialog.cpp:119 ../src/MadSearchReplaceDialog.cpp:145
 msgid "Find &Hex String (Example: BE 00 3A or BE003A)"
 msgstr "Finde &Hexadezimal-Zeichen (Beispiel: BE 00 3A oder BE003A)"
 
-#: ../src/MadFindInFilesDialog.cpp:122
+#: ../src/MadFindInFilesDialog.cpp:121
 msgid "&List the First Found Item Only"
 msgstr "Nur den &ersten Fund anzeigen"
 
-#: ../src/MadFindInFilesDialog.cpp:126
+#: ../src/MadFindInFilesDialog.cpp:125
 msgid "&Find"
 msgstr "&Suchen"
 
-#: ../src/MadFindInFilesDialog.cpp:128 ../src/MadSearchReplaceDialog.cpp:202
+#: ../src/MadFindInFilesDialog.cpp:127 ../src/MadSearchReplaceDialog.cpp:202
 msgid "&Replace"
 msgstr "&Ersetzen"
 
-#: ../src/MadFindInFilesDialog.cpp:130 ../src/MadMacroDlg.cpp:65
+#: ../src/MadFindInFilesDialog.cpp:129 ../src/MadMacroDlg.cpp:65
 msgid "Close"
 msgstr "Schließen"
 
-#: ../src/MadFindInFilesDialog.cpp:132
+#: ../src/MadFindInFilesDialog.cpp:131
 msgid "&Enable Replace"
 msgstr "Ersetzen &aktivieren"
 
-#: ../src/MadFindInFilesDialog.cpp:139
+#: ../src/MadFindInFilesDialog.cpp:138
 msgid "Opened Files in Editor"
 msgstr "Geöffnete Dateien im Editor"
 
-#: ../src/MadFindInFilesDialog.cpp:144
+#: ../src/MadFindInFilesDialog.cpp:143
 msgid "Selected Directory:"
 msgstr "Ausgewähltes Verzeichnis:"
 
-#: ../src/MadFindInFilesDialog.cpp:153
+#: ../src/MadFindInFilesDialog.cpp:152
 msgid "File Filters:"
 msgstr "Datei-Filter:"
 
-#: ../src/MadFindInFilesDialog.cpp:162
+#: ../src/MadFindInFilesDialog.cpp:161
 msgid "Exclude Filters:"
 msgstr "Ausgeschlossene Filter:"
 
-#: ../src/MadFindInFilesDialog.cpp:171
+#: ../src/MadFindInFilesDialog.cpp:170
 msgid "File Encoding:"
 msgstr "Datei-Codierung:"
 
-#: ../src/MadFindInFilesDialog.cpp:176
+#: ../src/MadFindInFilesDialog.cpp:175
 msgid "Include Subdirectories"
 msgstr "Unterverzeichnisse einschließen"
 
-#: ../src/MadFindInFilesDialog.cpp:178
+#: ../src/MadFindInFilesDialog.cpp:177
 msgid "Find/Replace In Files"
 msgstr "Suchen/Ersetzen in Dateien"
 
-#: ../src/MadFindInFilesDialog.cpp:219
+#: ../src/MadFindInFilesDialog.cpp:218
 msgid "Automatic Detection"
 msgstr "Automatische Erkennung"
 
-#: ../src/MadFindInFilesDialog.cpp:429 ../src/MadOptionsDialog.cpp:1818
+#: ../src/MadFindInFilesDialog.cpp:428 ../src/MadOptionsDialog.cpp:1818
 #: ../src/MadOptionsDialog.cpp:1835
 msgid "Choose a directory"
 msgstr "Verzeichnis auswählen"
 
-#: ../src/MadFindInFilesDialog.cpp:562
+#: ../src/MadFindInFilesDialog.cpp:561
 #, c-format
 msgid "Found %d file(s) matched the filters..."
 msgstr "%d Datei(en) entsprechend der Filter gefunden..."
 
-#: ../src/MadFindInFilesDialog.cpp:591
+#: ../src/MadFindInFilesDialog.cpp:590
 msgid "The selected directory does not exist."
 msgstr "Das gewählte Verzeichnis existiert nicht."
 
-#: ../src/MadFindInFilesDialog.cpp:694
+#: ../src/MadFindInFilesDialog.cpp:693
 #, fuzzy, c-format
 msgid "Processing %s of %s files..."
 msgstr "Verarbeite %d von %d Dateien..."
 
-#: ../src/MadFindInFilesDialog.cpp:811
+#: ../src/MadFindInFilesDialog.cpp:810
 #, fuzzy, c-format
 msgid "Found %s matched texts..."
 msgstr "%d Datei(en) entsprechend der Filter gefunden..."
 
-#: ../src/MadFindInFilesDialog.cpp:813 ../src/MadSearchReplaceDialog.cpp:1417
+#: ../src/MadFindInFilesDialog.cpp:812 ../src/MadSearchReplaceDialog.cpp:1417
 msgid "Preparing Results"
 msgstr ""
 
