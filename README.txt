@@ -8,7 +8,7 @@ MadEdit supports many useful functions, e.g. SyntaxHighlightings, WordWraps,
 Encodings, Column/Hex Modes, and a Plugin system(not work yet).
 In HexMode, MadEdit can open large files which size is up to 32GB (INT_MAX*16).
 
-Supported Platforms:
+Supported Developing Platforms:
 -------------------
 A. Linux, FreeBSD, and Unix-like OS (__WXGTK__):
    a. GNU C++ 3.x/4.x:
@@ -23,7 +23,7 @@ B. MS Windows (__WXMSW__):
    a. MinGW32/GNU C++ 3.x (wxDevCpp):
       Required Libraries to compile:
       1. wxWidgets-3.0.2 or higher with Unicode and IPC enabled
-      2. Boost-1.56.0 or higher(build Boost-Python)
+      2. Boost-1.56.0 or higher(build Boost-Python)(1.59 is recommended)
    b. Visual C++ 7.1 (VS.Net 2005) or higher:
       Required Libraries to compile:
       1. wxWidgets-3.0.2 or higher with Unicode and IPC enabled
@@ -72,14 +72,15 @@ Syntax files, Locale files, Dictionaries and Settings:
 
   Currently supported Languages:
   	English
-  	Chinese Simplified
-  	Chinese Traditional(Not finished)
-  	German(Not finished)
-  	Greek(Not finished)
-  	Japanese(Not finished)
-	Polish(Not finished)
-	Russian(Not finished)
-	Spanish(Not finished)
+  	Chinese Simplified (zh_CN)
+  	Chinese Traditional(zh_TW) (Not done)
+  	German(de_DE)              (Not done)
+  	Greek(el)                  (Not done)
+  	Italian(it_IT)             (Not done)
+  	Japanese(ja_JP)            (Not done)
+	Polish(pl_PL)              (Not done)
+	Russian(ru_RU)             (Not done)
+	Spanish(es)                (Not done)
 
   * Download dictionary at http://extensions.openoffice.org
     oxt is actually a zip file. So, download it and open it with 7-zip. Then extract

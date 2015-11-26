@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.3.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-25 14:56+0800\n"
+"POT-Creation-Date: 2015-11-26 11:33+0800\n"
 "PO-Revision-Date: 2015-06-30 21:50+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
@@ -1639,7 +1639,7 @@ msgstr ""
 msgid "Toolbars"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:1962 ../src/MadEditFrame.cpp:8107
+#: ../src/MadEditFrame.cpp:1962 ../src/MadEditFrame.cpp:8110
 msgid "Toggle Main Toolbar"
 msgstr ""
 
@@ -2426,28 +2426,28 @@ msgstr ""
 msgid "Press OK to visit our HomePage."
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8236
+#: ../src/MadEditFrame.cpp:8239
 msgid "Passed the begin of the file"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8290 ../src/MadSearchReplaceDialog.cpp:498
+#: ../src/MadEditFrame.cpp:8293 ../src/MadSearchReplaceDialog.cpp:498
 #: ../src/MadSearchReplaceDialog.cpp:631
 msgid "Passed the end of the file"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8322
+#: ../src/MadEditFrame.cpp:8325
 msgid "Invalid item"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8335
+#: ../src/MadEditFrame.cpp:8338
 msgid "&Copy Selected"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8336
+#: ../src/MadEditFrame.cpp:8339
 msgid "Copy &All"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8337
+#: ../src/MadEditFrame.cpp:8340
 msgid "&Reset Results"
 msgstr ""
 
