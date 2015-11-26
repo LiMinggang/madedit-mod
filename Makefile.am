@@ -561,8 +561,8 @@ loc:
 		dir=./locale/$$lang; \
 		$(mkinstalldirs) $$dir; \
 		if test -r $(podir)/$$lang.gmo; then \
-			msgmerge -U $(podir)/$$lang.po $(podir)/madedit.pot \
-			msgfmt -o $(podir)/$$lang.gmo $(podir)/$$lang.po \
+			msgmerge -U $(podir)/$$lang.po $(podir)/madedit.pot; \
+			msgfmt -o $(podir)/$$lang.gmo $(podir)/$$lang.po; \
 			cp $(podir)/$$lang.gmo $$dir/$(DOMAIN).mo; \
 			echo "installing $(podir)/$$lang.gmo as $$dir/$(DOMAIN).mo"; \
 		fi; \
