@@ -1718,7 +1718,7 @@ msgstr ""
 
 #: ../src/MadEditFrame.cpp:1978
 msgid "Save Currently Recorded Macro"
-msgstr ""
+msgstr "儲存目前的工作巨集"
 
 #: ../src/MadEditFrame.cpp:1978
 msgid "Save Recorded Macro"
@@ -1770,7 +1770,7 @@ msgstr "清除歷史記錄(&P)"
 
 #: ../src/MadEditFrame.cpp:1989
 msgid "Clearing out your history"
-msgstr ""
+msgstr "清除歷史紀錄"
 
 #: ../src/MadEditFrame.cpp:1991 ../src/MadEditFrame.cpp:4388
 msgid "Has Unicode BOM (Byte-Order Mark)"
@@ -1798,7 +1798,7 @@ msgstr "轉換檔案格式為 DOS 的格式"
 
 #: ../src/MadEditFrame.cpp:1996
 msgid "Convert To CR/0D (Old &MAC)"
-msgstr ""
+msgstr "轉換為CR/0D (Old &MAC)"
 
 #: ../src/MadEditFrame.cpp:1996
 msgid "Convert the file format to MAC format"
@@ -1806,7 +1806,7 @@ msgstr "轉換檔案格式為 MAC 的格式"
 
 #: ../src/MadEditFrame.cpp:1997
 msgid "Convert To LF/0A (&UNIX/OSX)"
-msgstr ""
+msgstr "轉換為 LF/0A (&UNIX/OSX)"
 
 #: ../src/MadEditFrame.cpp:1997
 msgid "Convert the file format to UNIX format"
@@ -1826,7 +1826,7 @@ msgstr "按Enter鍵時插入 CR&LF 字元"
 
 #: ../src/MadEditFrame.cpp:2000
 msgid "Insert CR/0D (Old &MAC)"
-msgstr ""
+msgstr "插入 CR/0D 字元(Old &MAC)"
 
 #: ../src/MadEditFrame.cpp:2000
 msgid "Insert CR char when pressing Enter key"
@@ -1834,7 +1834,7 @@ msgstr "按Enter鍵時插入 CR 字元"
 
 #: ../src/MadEditFrame.cpp:2001
 msgid "Insert LF/0A (&UNIX/OSX)"
-msgstr ""
+msgstr "插入 LF/0A 字元(&UNIX/OSX)"
 
 #: ../src/MadEditFrame.cpp:2001
 msgid "Insert LF char when pressing Enter key"
@@ -1940,11 +1940,11 @@ msgstr "把剪貼簿中的中文漢字轉換成日文漢字"
 
 #: ../src/MadEditFrame.cpp:2018
 msgid "Text Converter/Formatter"
-msgstr ""
+msgstr "純文字轉換/格式工具"
 
 #: ../src/MadEditFrame.cpp:2019
 msgid "&Markdown to HTML"
-msgstr ""
+msgstr "轉換Markdown為HTML"
 
 #: ../src/MadEditFrame.cpp:2019
 msgid "Convert Markdown to HTML"
@@ -1952,11 +1952,11 @@ msgstr ""
 
 #: ../src/MadEditFrame.cpp:2020
 msgid "&HTML to Plain Text"
-msgstr ""
+msgstr "HTML轉換為純文字"
 
 #: ../src/MadEditFrame.cpp:2020
 msgid "Convert HTML to Plain Text"
-msgstr ""
+msgstr "轉換HTML為純文字"
 
 #: ../src/MadEditFrame.cpp:2022
 msgid "&Astyle(C++/C#/Java/ObjC)"
@@ -1968,7 +1968,7 @@ msgstr ""
 
 #: ../src/MadEditFrame.cpp:2023
 msgid "&XML Formatter"
-msgstr ""
+msgstr "XML格式工具"
 
 #: ../src/MadEditFrame.cpp:2023
 msgid "Format XML(whole file)"
@@ -2192,7 +2192,7 @@ msgstr ""
 
 #: ../src/MadEditFrame.cpp:2232
 msgid "Edit Mode"
-msgstr ""
+msgstr "編輯模式"
 
 #: ../src/MadEditFrame.cpp:2235
 msgid "Macro"
@@ -2211,14 +2211,12 @@ msgid "Markdown"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:2485
-#, fuzzy
 msgid "Copy full path name"
-msgstr "[%B] 幾月的全寫"
+msgstr "複製全寫目錄名稱"
 
 #: ../src/MadEditFrame.cpp:2486
-#, fuzzy
 msgid "Copy full file name"
-msgstr "[%B] 幾月的全寫"
+msgstr "複製檔案名稱"
 
 #: ../src/MadEditFrame.cpp:2487
 msgid "Copy directory name"
