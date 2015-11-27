@@ -4033,15 +4033,15 @@ void MadEdit::SelectWordFromCaretPos(wxString *ws, MadCaretPos * cpos/*	= NULL*/
 	else						  //TextMode
 	{
 		//may select whole line
-		//startpos = caretPos->pos - caretPos->linepos +
-				   //caretPos->iter->m_RowIndices[0].m_Start; // exclude BOM
-		//endpos = m_Lines->m_Size;
+		startpos = caretPos->pos - caretPos->linepos +
+				   caretPos->iter->m_RowIndices[0].m_Start; // exclude BOM
+		endpos = m_Lines->m_Size;
 
 		//select wrapped-line only
-		startpos = caretPos->pos - caretPos->linepos +
-				   caretPos->iter->m_RowIndices[caretPos->subrowid].m_Start; //	exclude	BOM
-		endpos = caretPos->pos - caretPos->linepos +
-				 caretPos->iter->m_RowIndices[caretPos->subrowid+1].m_Start;
+		//startpos = caretPos->pos - caretPos->linepos +
+		//		   caretPos->iter->m_RowIndices[caretPos->subrowid].m_Start; //	exclude	BOM
+		//endpos = caretPos->pos - caretPos->linepos +
+		//		 caretPos->iter->m_RowIndices[caretPos->subrowid+1].m_Start;
 	}
 
 	// now startpos	is the begin of	line
