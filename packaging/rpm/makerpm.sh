@@ -21,6 +21,7 @@ SRCPARENTDIR="$SRCBASEDIR/.."
 SRCVERDIR="$SRCPARENTDIR/madedit-mod-$verbase"
 
 mkdir -p "$SRCVERDIR"
+chmod +x "$SRCBASEDIR/configure"
 /bin/cp -Rf "$SRCBASEDIR/"* "$SRCVERDIR"
 
 #======================================================================
