@@ -94,7 +94,6 @@ void MadAboutDialog::CreateGUIControls(void)
 	WxPanelAbout->SetAutoLayout(true);
 
 	WxMemoAbout = new wxTextCtrl(WxPanelAbout, ID_WXMEMOABOUT, wxEmptyString, wxPoint(5, 5), wxSize(435, 200), wxTE_READONLY | wxTE_AUTO_URL | wxTE_MULTILINE, wxDefaultValidator, wxT("WxMemoAbout"));
-	WxMemoAbout->SetMaxLength(0);
 	WxMemoAbout->AppendText(wxT(""));
 	WxMemoAbout->SetFocus();
 	WxMemoAbout->SetInsertionPointEnd();
@@ -108,7 +107,6 @@ void MadAboutDialog::CreateGUIControls(void)
 	WxPanelCredits->SetAutoLayout(true);
 
 	WxMemoCredits = new wxTextCtrl(WxPanelCredits, ID_WXMEMOCREDITS, wxEmptyString, wxPoint(5, 5), wxSize(425, 200), wxTE_READONLY | wxTE_AUTO_URL | wxTE_MULTILINE, wxDefaultValidator, wxT("WxMemoCredits"));
-	WxMemoCredits->SetMaxLength(0);
 	WxMemoCredits->AppendText(wxT(""));
 	WxMemoCredits->SetFocus();
 	WxMemoCredits->SetInsertionPointEnd();
@@ -123,7 +121,6 @@ void MadAboutDialog::CreateGUIControls(void)
 	WxPanelLicense->SetAutoLayout(true);
 
 	WxMemoLicense = new wxTextCtrl(WxPanelLicense, ID_WXMEMOLICENSE, wxEmptyString, wxPoint(10, 20), wxSize(435, 200), wxTE_READONLY | wxTE_AUTO_URL | wxTE_MULTILINE, wxDefaultValidator, wxT("WxMemoLicense"));
-	WxMemoLicense->SetMaxLength(0);
 	WxMemoLicense->SetFocus();
 	WxMemoLicense->SetInsertionPointEnd();
 	WxStaticBoxSizer1->Add(WxMemoLicense, 0, wxALIGN_CENTER | wxALL, 5);
