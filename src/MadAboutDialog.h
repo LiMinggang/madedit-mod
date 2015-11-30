@@ -61,17 +61,14 @@ public:
 		wxTextCtrl *WxMemoLicense;
 		wxStaticBoxSizer *WxStaticBoxSizer1;
 		wxPanel *WxPanelLicense;
-		wxPanel *WxAuiNoteBookPageLicense;
 		wxTextCtrl *WxMemoCredits;
 		wxTextCtrl *WxMemoAbout;
 		wxBoxSizer *WxBoxSizer6;
 		wxBoxSizer *WxBoxSizer7;
 		wxPanel *WxPanelCredits;
-		wxPanel *WxAuiNoteBookPageCredits;
 		wxPanel *WxPanelAbout;
 		wxButton *WxButtonCancel;
 		wxButton *WxButtonOK;
-		wxPanel *WxAuiNoteBookPageAbout;
 		wxAuiNotebook *WxAuiNotebookAbout;
 		wxStaticBitmap *WxStaticBitmap2;
 		wxStaticBitmap *WxStaticBitmap1;
@@ -95,13 +92,10 @@ public:
 			////GUI Enum Control ID Start
 			ID_WXMEMOLICENSE = 1029,
 			ID_WXPANELLICENSE = 1027,
-			ID_WXAUINOTEBOOKPAGELICENSE = 1026,
 			ID_WXMEMOCREDITS = 1025,
 			ID_WXMEMOABOUT = 1024,
 			ID_WXPANELCREDITS = 1018,
-			ID_WXAUINOTEBOOKPAGECREDITS = 1017,
 			ID_WXPANELABOUT = 1014,
-			ID_WXAUINOTEBOOKPAGEABOUT = 1011,
 			ID_WXAUINOTEBOOKABOUT = 1010,
 			ID_WXSTATICBITMAP2 = 1009,
 			ID_WXSTATICBITMAP1 = 1008,
