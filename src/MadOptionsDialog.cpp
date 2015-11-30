@@ -629,7 +629,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxNoteBookPage6->SetAutoLayout( true );
 	WxAuiNotebook1 = new wxAuiNotebook( WxNoteBookPage6, ID_WXAUINOTEBOOK1, wxPoint( 5, 5 ), wxSize( 668, 398 ), wxNB_DEFAULT );
 	WxBoxSizer34->Add( WxAuiNotebook1, 0, wxEXPAND | wxALL, 5 );
-	WxAuiNoteBookPage1 = new wxPanel( WxAuiNotebook1, ID_WXAUINOTEBOOKPAGE1, wxPoint( 5, 5 ), wxSize( 692, 464 ) );
+	WxAuiNoteBookPage1 = new wxPanel( WxAuiNotebook1, ID_WXAUINOTEBOOKPAGE1, wxPoint( 4, 24 ), wxSize( 692, 464 ) );
 	WxAuiNotebook1->AddPage( WxAuiNoteBookPage1, _( "Style" ) );
 	WxBoxSizer47 = new wxBoxSizer( wxHORIZONTAL );
 	WxAuiNoteBookPage1->SetSizer( WxBoxSizer47 );
