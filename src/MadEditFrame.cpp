@@ -3789,7 +3789,41 @@ void MadEditFrame::RunScriptWithFile( const wxString &filename, const wxString &
 		{
 			return;
 		}
+#if 0
+		MadEdit *tempedit = NULL;
 
+		if( WxRadioButtonDir->GetValue() )
+		{
+			tempedit = new MadEdit( this, -1, wxPoint( -1024, -1024 ) );
+			tempedit->StopRepaint();
+			tempedit->SetStorePropertiesToGlobalConfig( false );
+			tempedit->SetFixedWidthMode( false );
+			tempedit->SetWordWrapMode( wwmNoWrap );
+			tempedit->SetSearchOptions( true, WxCheckBoxWholeWord->GetValue() );
+		}
+		
+		{
+			MadEdit *madedit = NULL;
+			if(g_MainFrame)
+			{
+				int id;
+				madedit = g_MainFrame->GetEditByFileName( filename, id );
+			}
+		
+			if( madedit == NULL )
+			{
+				madedit = tempedit;
+				wxString enc = WxComboBoxEncoding->GetValue();
+		
+				if( enc == WxComboBoxEncoding->GetString( 0 ) )
+				{
+					enc.Clear();
+				}
+		
+				madedit->LoadFromFile( filename, enc );
+			}
+		}
+#endif
 		OpenFile( filename, mustExist );
 
 		if( g_ActiveMadEdit != NULL )
