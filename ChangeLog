@@ -1,3 +1,26 @@
+2015-11-30  Minggang Li <minggang.li@gmail.com>
+
+	1.Improve on change syntax on save as
+	2.New: Check available translation at start time and refresh on opening Option dialog(New translation will automatically listed at runtime)
+	3.New: Add API SetColumnSelection
+	4.New: Use default script directory if not specified
+	5.New: Greek translation(Thanks nikoss(https://github.com/nikoss))
+	6.New: Add Credits and License information to About Dialog
+	7.New: Toggle hide/show replace UI items by checkbox for FindReplaceInFilesDialog
+	8.New: Add German and Polish translations(based on wxMedit)
+	9.New: Syntax highlight support in Source formatter tab
+	10.New: Debian 8.2 X64 build
+	11.Fix: Improve mark brace issue(#15 in 0.3.8)
+	12.Fix: Purge recent caret position history
+	13.Fix: Typo on Option dialog(Dictionary settings) #82
+	14.Fix: Not enough space for translated string(Greek) #83
+	15.Fix: Can't convert Chinese(simplified) to Japanese #88
+	16.Fix: Incorrect behavior of MadEdit when Ctrl-Backspace pressed at beginning of a text file OR at zero-width selection in column mode #89
+	17.Fix: Update MadPython Syntax
+	18.Fix: Update Translations
+	19.Fix: Update Documents
+	20.Other minor improvements
+
 2015-10-30  Minggang Li <minggang.li@gmail.com>
 
 	1.New: Upgrade boost to 1.59

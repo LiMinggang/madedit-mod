@@ -124,15 +124,17 @@ Mod v0.3.9
 7.New: Toggle hide/show replace UI items by checkbox for FindReplaceInFilesDialog
 8.New: Add German and Polish translations(based on wxMedit)
 9.New: Syntax highlight support in Source formatter tab
-Fix: Improve mark brace issue(#15 in 0.3.8)
-Fix: Purge recent caret position history
-Fix: Typo on Option dialog(Dictionary settings) #82
-Fix: Not enough space for translated string(Greek) #83
-Fix: Can't convert Chinese(simplified) to Japanese #88
-Fix: Incorrect behavior of MadEdit when Ctrl-Backspace pressed at beginning of a text file OR at zero-width selection in column mode #89
-Fix: Update MadPython Syntax
-Fix: Update Translations
-Other minor improvments
+10.New: Debian 8.2 X64 build
+11.Fix: Improve mark brace issue(#15 in 0.3.8)
+12.Fix: Purge recent caret position history
+13.Fix: Typo on Option dialog(Dictionary settings) #82
+14.Fix: Not enough space for translated string(Greek) #83
+15.Fix: Can't convert Chinese(simplified) to Japanese #88
+16.Fix: Incorrect behavior of MadEdit when Ctrl-Backspace pressed at beginning of a text file OR at zero-width selection in column mode #89
+17.Fix: Update MadPython Syntax
+18.Fix: Update Translations
+19.Fix: Update Documents
+20.Other minor improvements
 
 Mod v0.3.8
 1.New: Upgrade boost to 1.59
