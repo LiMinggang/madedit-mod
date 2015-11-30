@@ -351,19 +351,17 @@ namespace mad_python {
 	public:
 		PyMadEdit(){
 #ifndef PYMADEDIT_DLL
-
-			if( g_MainFrame ) { //Should be always true!!!
-				if( !g_ActiveMadEdit ) {
-					// Simulate MadEditFrame::OnFileNew
-					g_MainFrame->OpenFile( wxEmptyString, false );
-				}
-
-				if( g_ActiveMadEdit->IsReadOnly() ) {
-					std::cout << "WARNING: Current file is ReadOnly!!!" << std::endl;
-				}
+			if( !g_ActiveMadEdit ) {
+				// Simulate MadEditFrame::OnFileNew
+				std::cout << "WARNING: No active MadEdit!!!" << std::endl;
 			}
-			else
-			{ throw std::runtime_error( "No active main frame!" ); }
+			else if (g_ActiveMadEdit->IsReadOnly() ) {
+				std::cout << "WARNING: Current file is ReadOnly!!!" << std::endl;
+			}
+			if(!g_MainFrame)
+			{ 
+				std::cout << "WARNING: No main frame!!!" << std::endl;
+			}
 
 #else
 
