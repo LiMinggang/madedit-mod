@@ -21,6 +21,8 @@ madedit-mod (0.3.9-1) stable; urgency=low
   19.Fix: Update Documents
   20.Other minor improvements
 
+ -- Minggang Li <liminggang@gmail.com>  Mons, 30 November 2015 13:08:40 +0800
+
 madedit-mod (0.3.8-1) stable; urgency=low
 
   1.New: Upgrade boost to 1.59
