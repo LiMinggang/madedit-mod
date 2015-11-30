@@ -83,7 +83,7 @@ void MadAboutDialog::CreateGUIControls(void)
 	WxBoxSizer5 = new wxBoxSizer(wxHORIZONTAL);
 	WxBoxSizer2->Add(WxBoxSizer5, 0, wxALIGN_CENTER | wxALL, 5);
 
-	WxAuiNotebookAbout = new wxAuiNotebook(this, ID_WXAUINOTEBOOKABOUT, wxPoint(5, 5), wxSize(450, 220), wxAUI_NB_TOP | wxAUI_NB_TAB_SPLIT | wxAUI_NB_TAB_MOVE | wxAUI_NB_SCROLL_BUTTONS | wxAUI_NB_CLOSE_ON_ACTIVE_TAB);
+	WxAuiNotebookAbout = new wxAuiNotebook(this, ID_WXAUINOTEBOOKABOUT, wxPoint(5, 5), wxSize(450, 220), wxNB_DEFAULT);
 	WxBoxSizer5->Add(WxAuiNotebookAbout, 0, wxALIGN_CENTER | wxALL, 5);
 
 	WxPanelAbout = new wxPanel(WxAuiNotebookAbout, ID_WXPANELABOUT, wxPoint(-1, -1), wxSize(440, 210));

@@ -162,7 +162,7 @@ object frmNewForm_1: TfrmNewForm
           Wx_IDName = 'ID_WXAUINOTEBOOKABOUT'
           Wx_IDValue = 1010
           Wx_Hidden = False
-          Wx_AuiNoteBookStyle = [wxAUI_NB_TAB_SPLIT, wxAUI_NB_TAB_MOVE, wxAUI_NB_SCROLL_BUTTONS, wxAUI_NB_CLOSE_ON_ACTIVE_TAB]
+          Wx_AuiNoteBookStyle = [wxNB_DEFAULT]
           Wx_GeneralStyle = []
           Wx_BookAlignment = wxAUI_NB_TOP
           Wx_PaneCaption = 'WxAuiNotebook1'
