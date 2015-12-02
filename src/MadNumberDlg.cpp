@@ -347,14 +347,17 @@ void MadNumberDlg::WxButtonSymbolClick(wxCommandEvent& event)
 	static wxSymbolPickerDialog dlg(wxT("*"), wxEmptyString, wxEmptyString, this);
 	if (dlg.ShowModal() == wxID_OK)
 	{
-		wxString symbol = dlg.GetSymbol();
-		if(event.GetId() == ID_WXBUTTONPREFIXSYMBOL)
+		if (dlg.HasSelection())
 		{
-			WxEditPrefix->WriteText(symbol);
-		}
-		else if(event.GetId() == ID_WXBUTTONPOSTFIXSYMBOL)
-		{
-			WxEditPostfix->WriteText(symbol);
+			wxString symbol = dlg.GetSymbol();
+			if(event.GetId() == ID_WXBUTTONPREFIXSYMBOL)
+			{
+				WxEditPrefix->WriteText(symbol);
+			}
+			else if(event.GetId() == ID_WXBUTTONPOSTFIXSYMBOL)
+			{
+				WxEditPostfix->WriteText(symbol);
+			}
 		}
 	}
 }
