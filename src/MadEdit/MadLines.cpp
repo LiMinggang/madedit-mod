@@ -2939,7 +2939,7 @@ void MadLines::Append( const MadLineIterator &lit1,	const MadLineIterator &lit2	
 
 //===========================================================================
 
-bool MadLines::LoadFromFile( const wxString	&filename, const wxString &encoding	)
+bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding )
 {
 	MadFileData	*fd	= new MadFileData( filename	);
 

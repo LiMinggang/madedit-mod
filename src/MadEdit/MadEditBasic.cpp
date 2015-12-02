@@ -2392,7 +2392,7 @@ void MadEdit::SetCaretPosition(wxFileOffset	pos, wxFileOffset selbeg, wxFileOffs
 }
 
 
-bool MadEdit::LoadFromFile(const wxString &filename, const wxString	&encoding)
+bool MadEdit::LoadFromFile(const wxString &filename, const wxString &encoding)
 {
 	wxFileName fn(filename);
 	if(MadDirExists(fn.GetPath(wxPATH_GET_VOLUME))==0)
