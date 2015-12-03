@@ -114,6 +114,9 @@ Note: Not support wxWidgets 2.X anymore since 0.3.X
 Todo:
 FreeBSD packaging (with FreeBSD 10.01)
 
+Mod v0.4.0
+1.New: No scroll bar for HTML/Markdown preview window #95
+
 Mod v0.3.9
 1.Improve on change syntax on save as
 2.New: Check available translation at start time and refresh on opening Option dialog(New translation will automatically listed at runtime)

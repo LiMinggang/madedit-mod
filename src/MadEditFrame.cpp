@@ -6268,7 +6268,7 @@ void MadEditFrame::OnViewPreview( wxCommandEvent& event )
 		{
 			m_HtmlPreview = new wxHtmlWindow( this, wxID_ANY,
 											  wxDefaultPosition,
-											  wxSize( 400, 300 ) );
+											  wxSize( 400, 300 ), wxHW_SCROLLBAR_NEVER );
 			m_AuiManager.AddPane( m_HtmlPreview, wxAuiPaneInfo().Name( wxT( "Markdown/HTML Preview" ) ).Caption( _( "Markdown/HTML Preview" ) ).Floatable( false ).Right().CloseButton( false ) );
 			long style = wxAUI_TB_NO_TOOLTIPS;
 			m_RefreshView = new wxAuiToolBar( this, ID_WXTOOLBAR1 + tbMAX + 1, wxPoint( 0, 0 ), wxSize( 392, 29 ), style );
