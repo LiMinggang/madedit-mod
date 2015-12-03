@@ -6,7 +6,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "MadNumberDlg.h"
-#include <wx/richtext/richtextsymboldlg.h>
 
 //Do not add custom	headers
 //wxDev-C++	designer will remove them
@@ -33,8 +32,6 @@ BEGIN_EVENT_TABLE(MadNumberDlg,wxDialog)
 	
 	EVT_TEXT(ID_WXEDITPREFIX,MadNumberDlg::WxEditPrefixUpdated)
 	EVT_CHECKBOX(ID_WXCHECKPREFIX,MadNumberDlg::WxCheckPrefixClick)
-	EVT_BUTTON(ID_WXBUTTONPREFIXSYMBOL,MadNumberDlg::WxButtonSymbolClick)
-	EVT_BUTTON(ID_WXBUTTONPOSTFIXSYMBOL,MadNumberDlg::WxButtonSymbolClick)
 END_EVENT_TABLE()
 ////Event Table	End
 
@@ -132,28 +129,20 @@ void MadNumberDlg::CreateGUIControls()
 	WxBoxSizer6	= new wxBoxSizer(wxHORIZONTAL);
 	WxBoxSizer3->Add(WxBoxSizer6, 0, wxALIGN_CENTER	| wxALL, 5);
 
-	WxCheckPrefix =	new	wxCheckBox(this, ID_WXCHECKPREFIX, _("Prefix"),	wxPoint(5, 6), wxSize(132, 23),	0, wxDefaultValidator,	wxT("WxCheckPrefix"));
+	WxCheckPrefix =	new	wxCheckBox(this, ID_WXCHECKPREFIX, _("Prefix"),	wxPoint(5, 5), wxSize(132, 23),	0, wxDefaultValidator,	wxT("WxCheckPrefix"));
 	WxBoxSizer6->Add(WxCheckPrefix,	0, wxALIGN_LEFT	| wxALL, 5);
 
-	WxButtonPrefixSymbol = new wxButton(this,	ID_WXBUTTONPREFIXSYMBOL, wxT("..."), wxPoint(147, 5), wxSize(75, 25), 0, wxDefaultValidator,	wxT("WxButtonPrefixSymbol"));
-	WxBoxSizer6->Add(WxButtonPrefixSymbol, 0,	wxALIGN_CENTER | wxALL,	5);
-	WxButtonPrefixSymbol->Enable(false);
-
-	WxEditPrefix = new wxTextCtrl(this,	ID_WXEDITPREFIX, wxT(""), wxPoint(232, 6), wxSize(124, 23),	0, wxDefaultValidator,	wxT("WxEditPrefix"));
+	WxEditPrefix = new wxTextCtrl(this,	ID_WXEDITPREFIX, wxT(""), wxPoint(147, 5), wxSize(124, 23),	0, wxDefaultValidator,	wxT("WxEditPrefix"));
 	WxBoxSizer6->Add(WxEditPrefix, 0, wxALIGN_LEFT | wxALL,	5);
 	WxEditPrefix->Enable(false);
 
 	WxBoxSizer7	= new wxBoxSizer(wxHORIZONTAL);
 	WxBoxSizer3->Add(WxBoxSizer7, 0, wxALIGN_CENTER	| wxALL, 5);
 
-	WxCheckPostfix = new wxCheckBox(this, ID_WXCHECKPOSTFIX, _("Postfix"), wxPoint(5, 6), wxSize(132, 23), 0, wxDefaultValidator,	wxT("WxCheckPostfix"));
+	WxCheckPostfix = new wxCheckBox(this, ID_WXCHECKPOSTFIX, _("Postfix"), wxPoint(5, 5), wxSize(132, 23), 0, wxDefaultValidator,	wxT("WxCheckPostfix"));
 	WxBoxSizer7->Add(WxCheckPostfix, 0,	wxALIGN_LEFT | wxALL, 5);
 
-	WxButtonPostfixSymbol = new wxButton(this,	ID_WXBUTTONPOSTFIXSYMBOL, wxT("..."), wxPoint(147, 5), wxSize(75, 25), 0, wxDefaultValidator,	wxT("WxButtonPostfixSymbol"));
-	WxBoxSizer7->Add(WxButtonPostfixSymbol, 0,	wxALIGN_CENTER | wxALL,	5);
-	WxButtonPostfixSymbol->Enable(false);
-
-	WxEditPostfix =	new	wxTextCtrl(this, ID_WXEDITPOSTFIX, wxT("."), wxPoint(232, 6), wxSize(124, 23), 0, wxDefaultValidator,	wxT("WxEditPostfix"));
+	WxEditPostfix =	new	wxTextCtrl(this, ID_WXEDITPOSTFIX, wxT("."), wxPoint(147, 5), wxSize(124, 23), 0, wxDefaultValidator,	wxT("WxEditPostfix"));
 	WxBoxSizer7->Add(WxEditPostfix,	0, wxALIGN_LEFT	| wxALL, 5);
 	WxEditPostfix->Enable(false);
 
@@ -301,7 +290,6 @@ void MadNumberDlg::WxCheckPrefixClick(wxCommandEvent& event)
 		preview	+= WxEditPrefix->GetValue()+WxEditInitialNumber->GetValue();
 		if(WxCheckPostfix->GetValue())
 			preview	+= WxEditPostfix->GetValue();
-		WxButtonPrefixSymbol->Enable(true);
 	}
 	else
 	{
@@ -309,7 +297,6 @@ void MadNumberDlg::WxCheckPrefixClick(wxCommandEvent& event)
 		preview	+= WxEditInitialNumber->GetValue();
 		if(WxCheckPostfix->GetValue())
 			preview	+= WxEditPostfix->GetValue();
-		WxButtonPrefixSymbol->Enable(false);
 	}
 	WxStaticTextPreview->SetLabel(preview);
 }
@@ -328,7 +315,6 @@ void MadNumberDlg::WxCheckPostfixClick(wxCommandEvent& event)
 			preview	+= WxEditPrefix->GetValue();
 		
 		preview	+= WxEditInitialNumber->GetValue() + WxEditPostfix->GetValue();
-		WxButtonPostfixSymbol->Enable(true);
 	}
 	else
 	{
@@ -337,27 +323,6 @@ void MadNumberDlg::WxCheckPostfixClick(wxCommandEvent& event)
 			preview	+= WxEditPrefix->GetValue();
 		
 		preview	+= WxEditInitialNumber->GetValue();
-		WxButtonPostfixSymbol->Enable(false);
 	}
 	WxStaticTextPreview->SetLabel(preview);
-}
-
-void MadNumberDlg::WxButtonSymbolClick(wxCommandEvent& event)
-{
-	static wxSymbolPickerDialog dlg(wxT("*"), wxEmptyString, wxEmptyString, this);
-	if (dlg.ShowModal() == wxID_OK)
-	{
-		if (dlg.HasSelection())
-		{
-			wxString symbol = dlg.GetSymbol();
-			if(event.GetId() == ID_WXBUTTONPREFIXSYMBOL)
-			{
-				WxEditPrefix->WriteText(symbol);
-			}
-			else if(event.GetId() == ID_WXBUTTONPOSTFIXSYMBOL)
-			{
-				WxEditPostfix->WriteText(symbol);
-			}
-		}
-	}
 }

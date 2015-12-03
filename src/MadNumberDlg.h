@@ -46,7 +46,6 @@ class MadNumberDlg : public	wxDialog
 		MadNumberDlg(wxWindow *parent, wxWindowID id = 1, const	wxString &title	= _("Numbering Configuration"),	const wxPoint& pos = wxDefaultPosition,	const wxSize& size = wxDefaultSize,	long style = MadNumberDlg_STYLE);
 		virtual	~MadNumberDlg();
 		void WxOKButtonClick(wxCommandEvent& event);		
-		void WxButtonSymbolClick(wxCommandEvent& event);		
 	
 	//private:
 		//Do not add custom	control	declarations between 
@@ -83,8 +82,6 @@ class MadNumberDlg : public	wxDialog
 		wxBoxSizer *WxBoxSizer11;
 		wxBoxSizer *WxBoxSizer2;
 		wxBoxSizer *WxBoxSizer1;
-		wxButton *WxButtonPrefixSymbol;
-		wxButton *WxButtonPostfixSymbol;
 		////GUI	Control	Declaration	End
 		void WxEditItialnumberUpdated(wxCommandEvent& event);
 		void WxEditPrefixUpdated(wxCommandEvent& event);
@@ -100,8 +97,6 @@ class MadNumberDlg : public	wxDialog
 		enum
 		{
 			////GUI	Enum Control ID	Start
-			ID_WXBUTTONPREFIXSYMBOL = 1144,
-			ID_WXBUTTONPOSTFIXSYMBOL = 1143,
 			ID_WXSTATICTEXTPREVIEW = 1142,
 			ID_WXSTATICTEXT6 = 1141,
 			ID_WXEDITPOSTFIX = 1137,
