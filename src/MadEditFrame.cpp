@@ -8264,7 +8264,7 @@ void MadEditFrame::OnSearchQuickFindPrevious( wxCommandEvent& event )
 			reset_caretpos = false;
 		}
 
-		bool bRegex = WxCheckBoxRegex->GetValue(), bWholeWord = WxCheckBoxWholeWord->GetValue();
+		bool bRegex = m_CheckboxRegEx->GetValue(), bWholeWord = m_CheckboxWholeWord->GetValue();
 		if(bRegex) bWholeWord = false;
 
 		sr = g_ActiveMadEdit->FindTextPrevious( m_QuickSearch->GetValue(), bRegex,
@@ -8321,7 +8321,7 @@ void MadEditFrame::OnSearchQuickFindNext( wxCommandEvent& event )
 			reset_caretpos = false;
 		}
 
-		bool bRegex = WxCheckBoxRegex->GetValue(), bWholeWord = WxCheckBoxWholeWord->GetValue();
+		bool bRegex = m_CheckboxRegEx->GetValue(), bWholeWord = m_CheckboxWholeWord->GetValue();
 		if(bRegex) bWholeWord = false;
 
 		sr = g_ActiveMadEdit->FindTextNext( m_QuickSearch->GetValue(), bRegex,
