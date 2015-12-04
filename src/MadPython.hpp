@@ -1288,6 +1288,9 @@ namespace mad_python {
 			if( ( !text.empty() ) && ( g_ActiveMadEdit ) ) {
 				wxString wxText( text.c_str(), wxConvLocal );
 				wxFileOffset from = ( wxFileOffset )rangeFrom, to = ( wxFileOffset )rangeTo;
+				
+				if(bRegex) bWholeWord = false;
+				else bDotMatchNewline = false;
 				ok = g_ActiveMadEdit->FindTextNext( wxText, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, from, to );
 			}
 
@@ -1303,6 +1306,9 @@ namespace mad_python {
 			if( ( !text.empty() ) && ( g_ActiveMadEdit ) ) {
 				wxString wxText( text.c_str(), wxConvLocal );
 				wxFileOffset from = ( wxFileOffset )rangeFrom, to = ( wxFileOffset )rangeTo;
+				
+				if(bRegex) bWholeWord = false;
+				else bDotMatchNewline = false;
 				ok = g_ActiveMadEdit->FindTextPrevious( wxText, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, from, to );
 			}
 
@@ -1350,6 +1356,9 @@ namespace mad_python {
 
 			wxString wxExpr( expr.c_str(), wxConvLocal ), wxFmt( fmt.c_str(), wxConvLocal );
 			wxFileOffset from = ( wxFileOffset )rangeFrom, to = ( wxFileOffset )rangeTo;
+			
+			if(bRegex) bWholeWord = false;
+			else bDotMatchNewline = false;
 			return g_ActiveMadEdit->ReplaceText( wxExpr, wxFmt, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, from, to );
 		}
 
@@ -1374,6 +1383,9 @@ namespace mad_python {
 
 			if( ( !expr.empty() ) && ( g_ActiveMadEdit ) && ( !g_ActiveMadEdit->IsReadOnly() ) ) {
 				wxString wxExpr( expr.c_str(), wxConvLocal ), wxFmt( fmt.c_str(), wxConvLocal );
+				
+				if(bRegex) bWholeWord = false;
+				else bDotMatchNewline = false;
 				ok = g_ActiveMadEdit->ReplaceTextAll( wxExpr, wxFmt, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline,
 					NULL, NULL, ( wxFileOffset )rangeFrom, ( wxFileOffset )rangeTo );
 			}
@@ -1404,6 +1416,9 @@ namespace mad_python {
 				vector<wxFileOffset> begpos, endpos;
 				MadEdit *madedit = ( g_ActiveMadEdit );
 				//wxTreeCtrl * results = g_MainFrame->m_FindInFilesResults;
+				
+				if(bRegex) bWholeWord = false;
+				else bDotMatchNewline = false;
 				ok = madedit->FindTextAll( wxExpr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, false, &begpos, &endpos );
 
 				if( ok >= 0 && showresults ) {

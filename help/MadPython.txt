@@ -193,11 +193,11 @@ void GoToLeftBrace()
 void GoToRightBrace()
 // search in [rangeFrom, rangeTo], default in [CaretPos, EndOfDoc]
 int FindTextNext(const std::string &text,
-                        bool bRegex, bool bCaseSensitive, bool bWholeWord,
+                        bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
                         int rangeFrom = -1, int rangeTo = -1)
 // search in [rangeFrom, rangeTo], rangeFrom > rangeTo, default in [CaretPos, BeginOfDoc]
 int FindTextPrevious(const std::string &text,
-                            bool bRegex, bool bCaseSensitive, bool bWholeWord,
+                            bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
                             int rangeFrom = -1, int rangeTo = -1)
 // search in [rangeFrom, rangeTo], default in [CaretPos, EndOfDoc]
 int FindHexNext(const std::string &hexstr, int rangeFrom = -1, int rangeTo = -1)
@@ -205,19 +205,19 @@ int FindHexNext(const std::string &hexstr, int rangeFrom = -1, int rangeTo = -1)
 int FindHexPrevious(const std::string &hexstr, int rangeFrom = -1, int rangeTo = -1)
 // replace the selected text that must match expr
 int ReplaceText(const std::string &expr, const std::string &fmt,
-                             bool bRegex, bool bCaseSensitive, bool bWholeWord,
+                             bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
                              int rangeFrom = -1, int rangeTo = -1)
 int ReplaceHex(const std::string &expr, const std::string &fmt,
                              int rangeFrom = -1, int rangeTo = -1)
 // return the replaced count or SR_EXPR_ERROR
 int ReplaceTextAll(const std::string &expr, const std::string &fmt,
-                    bool bRegex, bool bCaseSensitive, bool bWholeWord,
+                    bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
                     int rangeFrom = -1, int rangeTo = -1)
 int ReplaceHexAll(const std::string &expr, const std::string &fmt,
                     int rangeFrom = -1, int rangeTo = -1)
 // list the matched data to pbegpos & pendpos
 // return the found count or SR_EXPR_ERROR
-int FindTextAll(const std::string &expr, bool bRegex, bool bCaseSensitive, bool bWholeWord)
+int FindTextAll(const std::string &expr, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline)
 int FindHexAll(const std::string &expr)
 bool LoadFromFile(const std::string &filename, const std::string &encoding=std::string(""))
 bool SaveToFile(const std::string &filename)
