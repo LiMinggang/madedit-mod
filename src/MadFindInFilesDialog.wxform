@@ -186,6 +186,7 @@ object frmNewForm: TfrmNewForm
             Height = 22
             Caption = 'Use Regular E&xpressions'
             TabOrder = 2
+            EVT_CHECKBOX = 'WxCheckBoxRegexClick'
             Wx_BGColor = clBlack
             Wx_CheckBoxStyle = []
             Wx_Class = 'wxCheckBox'
@@ -287,7 +288,7 @@ object frmNewForm: TfrmNewForm
           end
           object WxCheckBoxDotMatchNewLine: TWxCheckBox
             Left = 1
-            Top = 123
+            Top = 121
             Width = 300
             Height = 22
             Caption = '&. Match Newline'
