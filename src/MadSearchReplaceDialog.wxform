@@ -1,4 +1,4 @@
-object frmNewForm_1: TfrmNewForm
+object frmNewForm: TfrmNewForm
   Left = 8
   Top = 8
   AutoScroll = False
@@ -52,7 +52,7 @@ object frmNewForm_1: TfrmNewForm
       Left = 0
       Top = 0
       Width = 492
-      Height = 340
+      Height = 366
       TabOrder = 0
       Orientation = wxVertical
       Wx_Class = 'wxBoxSizer'
@@ -88,7 +88,7 @@ object frmNewForm_1: TfrmNewForm
         Left = 0
         Top = 40
         Width = 492
-        Height = 300
+        Height = 326
         TabOrder = 2
         Orientation = wxVertical
         Wx_Class = 'wxBoxSizer'
@@ -209,6 +209,7 @@ object frmNewForm_1: TfrmNewForm
           Height = 22
           Caption = 'Use Regular E&xpressions'
           TabOrder = 2
+          EVT_CHECKBOX = 'WxCheckBoxRegexClick'
           Wx_BGColor = clBlack
           Wx_CheckBoxStyle = []
           Wx_Class = 'wxCheckBox'
@@ -344,16 +345,48 @@ object frmNewForm_1: TfrmNewForm
           Wx_Floating_X_Pos = 0
           Wx_Floating_Y_Pos = 0
         end
+        object WxCheckBoxDotMatchNewLine: TWxCheckBox
+          Left = 96
+          Top = 184
+          Width = 300
+          Height = 22
+          Caption = '&. Matches Newline'
+          TabOrder = 7
+          Wx_BGColor = clBlack
+          Wx_CheckBoxStyle = []
+          Wx_Class = 'wxCheckBox'
+          Wx_ControlOrientation = wxControlVertical
+          Wx_FGColor = clBlack
+          Wx_GeneralStyle = []
+          Wx_Hidden = False
+          Wx_IDName = 'ID_WXCHECKBOXDOTMATCHNEWLINE'
+          Wx_IDValue = 59
+          Wx_Border = 2
+          Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
+          Wx_Aui_Dockable_Direction = []
+          Wx_Aui_Pane_Style = []
+          Wx_Aui_Pane_Buttons = []
+          Wx_BestSize_Height = 0
+          Wx_BestSize_Width = 0
+          Wx_MinSize_Height = 0
+          Wx_MinSize_Width = 0
+          Wx_MaxSize_Height = 0
+          Wx_MaxSize_Width = 0
+          Wx_Floating_Height = 0
+          Wx_Floating_Width = 0
+          Wx_Floating_X_Pos = 0
+          Wx_Floating_Y_Pos = 0
+        end
         object WxBoxSizer6: TWxBoxSizer
           Left = 5
-          Top = 187
+          Top = 213
           Width = 482
           Height = 108
-          TabOrder = 7
+          TabOrder = 8
           Wx_Class = 'wxBoxSizer'
           Wx_ControlOrientation = wxControlVertical
           Wx_IDName = 'ID_WXBOXSIZER6'
-          Wx_IDValue = 43
+          Wx_IDValue = 60
           object WxStaticBoxSizer1: TWxStaticBoxSizer
             Left = 5
             Top = 5
@@ -601,7 +634,7 @@ object frmNewForm_1: TfrmNewForm
     end
     object WxBoxSizer3: TWxBoxSizer
       Left = 492
-      Top = 10
+      Top = 23
       Width = 134
       Height = 320
       TabOrder = 1
@@ -925,7 +958,7 @@ object frmNewForm_1: TfrmNewForm
         Wx_Floating_Y_Pos = 0
       end
       object WxButtonReplaceAllInAll: TWxButton
-        Left = 4
+        Left = 2
         Top = 258
         Width = 130
         Height = 28

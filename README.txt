@@ -116,7 +116,11 @@ FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.4.0
 1.New: No scroll bar for HTML/Markdown preview window #95
-Fix: Find Hex should be gray out if Regular expression was enabled #97
+2.New: Support "Dot(".") match new line", default behavior is changed to NOT match new line #98
+Fix: Find Hex should be gray out if Regular expression was enabled(SearchReplaceDialog) #97
+Fix: Find Hex should be gray out if Regular expression was enabled(SearchReplaceInFilesDialog) #99
+Fix: Match whole words should be gray out if Regular expression was enabled(SearchReplaceDialog/SearchReplaceInFilesDialog) #100
+Fix: Match whole word and dot match newline should be overridden according to Search RegEx #101
 
 Mod v0.3.9
 1.Improve on change syntax on save as

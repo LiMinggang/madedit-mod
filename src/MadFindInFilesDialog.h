@@ -64,6 +64,7 @@ class MadFindInFilesDialog : public wxDialog
 		//Do not add custom control declarations
 		//wxDev-C++ will remove them. Add custom code after the block.
 		////GUI Control Declaration Start
+		wxCheckBox *WxCheckBoxDotMatchNewLine;
 		wxCheckBox *WxCheckBoxSubDir;
 		wxComboBox *WxComboBoxEncoding;
 		wxStaticText *WxStaticText3;
@@ -109,6 +110,7 @@ class MadFindInFilesDialog : public wxDialog
 		enum
 		{
 			////GUI Enum Control ID Start
+			ID_WXCHECKBOXDOTMATCHNEWLINE = 1052,
 			ID_WXCHECKBOXSUBDIR = 1038,
 			ID_WXCOMBOBOXENCODING = 1042,
 			ID_WXSTATICTEXT3 = 1041,
@@ -171,6 +173,7 @@ class MadFindInFilesDialog : public wxDialog
 		void PurgeRecentFindDirs();
 		void PurgeRecentFindFilters();
 		void PurgeRecentFindExcludes();
+		void WxCheckBoxRegexClick(wxCommandEvent& event);
 };
 
 extern MadFindInFilesDialog *g_FindInFilesDialog;

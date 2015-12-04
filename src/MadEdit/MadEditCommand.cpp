@@ -447,7 +447,7 @@ wxString ShortCutToString(MadEditShortCut shortcut)
 			text <<	wxT("INS");
 			break;
 		case WXK_RETURN:
-			text <<	wxT("ENTER");;
+			text <<	wxT("ENTER");
 			break;
 		case WXK_LEFT:
 			text <<	wxT("LEFT");

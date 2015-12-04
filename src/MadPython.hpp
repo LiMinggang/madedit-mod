@@ -1281,14 +1281,14 @@ namespace mad_python {
 
 		// search in [rangeFrom, rangeTo], default in [CaretPos, EndOfDoc]
 		int FindTextNext( const std::string &text,
-						  bool bRegex, bool bCaseSensitive, bool bWholeWord,
+						  bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
 						  long rangeFrom = -1, long rangeTo = -1 ) {
 			int ok = SR_EXPR_ERROR;
 
 			if( ( !text.empty() ) && ( g_ActiveMadEdit ) ) {
 				wxString wxText( text.c_str(), wxConvLocal );
 				wxFileOffset from = ( wxFileOffset )rangeFrom, to = ( wxFileOffset )rangeTo;
-				ok = g_ActiveMadEdit->FindTextNext( wxText, bRegex, bCaseSensitive, bWholeWord, from, to );
+				ok = g_ActiveMadEdit->FindTextNext( wxText, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, from, to );
 			}
 
 			return ok;
@@ -1296,14 +1296,14 @@ namespace mad_python {
 
 		// search in [rangeFrom, rangeTo], rangeFrom > rangeTo, default in [CaretPos, BeginOfDoc]
 		int FindTextPrevious( const std::string &text,
-							  bool bRegex, bool bCaseSensitive, bool bWholeWord,
+							  bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
 							  long rangeFrom = -1, long rangeTo = -1 ) {
 			int ok = SR_EXPR_ERROR;
 
 			if( ( !text.empty() ) && ( g_ActiveMadEdit ) ) {
 				wxString wxText( text.c_str(), wxConvLocal );
 				wxFileOffset from = ( wxFileOffset )rangeFrom, to = ( wxFileOffset )rangeTo;
-				ok = g_ActiveMadEdit->FindTextPrevious( wxText, bRegex, bCaseSensitive, bWholeWord, from, to );
+				ok = g_ActiveMadEdit->FindTextPrevious( wxText, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, from, to );
 			}
 
 			return ok;
@@ -1340,7 +1340,7 @@ namespace mad_python {
 
 		// replace the selected text that must match expr
 		int ReplaceText( const std::string &expr, const std::string &fmt,
-						 bool bRegex, bool bCaseSensitive, bool bWholeWord,
+						 bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
 						 long rangeFrom = -1, long rangeTo = -1 ) {
 			if( !( g_ActiveMadEdit ) || g_ActiveMadEdit->IsReadOnly() )
 			{ return RR_NREP_NNEXT; }
@@ -1350,7 +1350,7 @@ namespace mad_python {
 
 			wxString wxExpr( expr.c_str(), wxConvLocal ), wxFmt( fmt.c_str(), wxConvLocal );
 			wxFileOffset from = ( wxFileOffset )rangeFrom, to = ( wxFileOffset )rangeTo;
-			return g_ActiveMadEdit->ReplaceText( wxExpr, wxFmt, bRegex, bCaseSensitive, bWholeWord, from, to );
+			return g_ActiveMadEdit->ReplaceText( wxExpr, wxFmt, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, from, to );
 		}
 
 		int ReplaceHex( const std::string &expr, const std::string &fmt,
@@ -1368,13 +1368,14 @@ namespace mad_python {
 
 		// return the replaced count or SR_EXPR_ERROR
 		int ReplaceTextAll( const std::string &expr, const std::string &fmt,
-							bool bRegex, bool bCaseSensitive, bool bWholeWord,
+							bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline, 
 							long rangeFrom = -1, long rangeTo = -1 ) {
 			int ok = 0;
 
 			if( ( !expr.empty() ) && ( g_ActiveMadEdit ) && ( !g_ActiveMadEdit->IsReadOnly() ) ) {
 				wxString wxExpr( expr.c_str(), wxConvLocal ), wxFmt( fmt.c_str(), wxConvLocal );
-				ok = g_ActiveMadEdit->ReplaceTextAll( wxExpr, wxFmt, bRegex, bCaseSensitive, bWholeWord, NULL, NULL, ( wxFileOffset )rangeFrom, ( wxFileOffset )rangeTo );
+				ok = g_ActiveMadEdit->ReplaceTextAll( wxExpr, wxFmt, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline,
+					NULL, NULL, ( wxFileOffset )rangeFrom, ( wxFileOffset )rangeTo );
 			}
 
 			return ok;
@@ -1395,7 +1396,7 @@ namespace mad_python {
 #ifndef PYMADEDIT_DLL
 		// list the matched data to pbegpos & pendpos
 		// return the found count or SR_EXPR_ERROR
-		int FindTextAll( const std::string &expr, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool showresults = true ) {
+		int FindTextAll( const std::string &expr, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline, bool showresults = true ) {
 			int ok = SR_EXPR_ERROR;
 
 			if( ( !expr.empty() ) && ( g_ActiveMadEdit ) ) {
@@ -1403,7 +1404,7 @@ namespace mad_python {
 				vector<wxFileOffset> begpos, endpos;
 				MadEdit *madedit = ( g_ActiveMadEdit );
 				//wxTreeCtrl * results = g_MainFrame->m_FindInFilesResults;
-				ok = madedit->FindTextAll( wxExpr, bRegex, bCaseSensitive, bWholeWord, false, &begpos, &endpos );
+				ok = madedit->FindTextAll( wxExpr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, false, &begpos, &endpos );
 
 				if( ok >= 0 && showresults ) {
 					static wxString text( _( "Search Results" ) );
@@ -1699,15 +1700,15 @@ namespace mad_python {
 	//PyMadEdit * InitMadPython() { return new PyMadEdit();}
 }
 
-BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( FindTextNext_member_overloads, FindTextNext, 4, 6 )
-BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( FindTextPrevious_member_overloads, FindTextPrevious, 4, 6 )
+BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( FindTextNext_member_overloads, FindTextNext, 5, 7 )
+BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( FindTextPrevious_member_overloads, FindTextPrevious, 5, 7 )
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( FindHexNext_member_overloads, FindHexNext, 1, 3 )
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( FindHexPrevious_member_overloads, FindHexPrevious, 1, 3 )
-BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( FindTextAll_member_overloads, FindTextAll, 4, 5 )
+BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( FindTextAll_member_overloads, FindTextAll, 5, 6 )
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( FindHexAll_member_overloads, FindHexAll, 1, 2 )
-BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( ReplaceText_member_overloads, ReplaceText, 5, 7 )
+BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( ReplaceText_member_overloads, ReplaceText, 6, 8 )
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( ReplaceHex_member_overloads, ReplaceHex, 2, 4 )
-BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( ReplaceTextAll_member_overloads, ReplaceTextAll, 5, 7 )
+BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( ReplaceTextAll_member_overloads, ReplaceTextAll, 6, 8 )
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( ReplaceHexAll_member_overloads, ReplaceHexAll, 2, 4 )
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( LoadFromFile_member_overloads, LoadFromFile, 1, 2 )
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( ToHalfWidth_member_overloads, ToHalfWidth, 0, 4 )
@@ -1881,16 +1882,16 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.def( "XMLFormat", &PyMadEdit::XMLFormat, "" )
 	.def( "Markdown2Html", &PyMadEdit::Markdown2Html, "" )
 	.def( "Html2PlainText", &PyMadEdit::Html2PlainText, "" )
-	.def( "FindTextNext", &PyMadEdit::FindTextNext, FindTextNext_member_overloads( args( "text", "bRegex", "bCaseSensitive", "bWholeWord", "rangeFrom", "rangeTo" ), "Doc string" )[return_value_policy<return_by_value>()] )
-	.def( "FindTextPrevious", &PyMadEdit::FindTextPrevious, FindTextPrevious_member_overloads( args( "text", "bRegex", "bCaseSensitive", "bWholeWord", "rangeFrom", "rangeTo" ), "Doc string" )[return_value_policy<return_by_value>()] )
+	.def( "FindTextNext", &PyMadEdit::FindTextNext, FindTextNext_member_overloads( args( "text", "bRegex", "bCaseSensitive", "bWholeWord", "bDotMatchNewline", "rangeFrom", "rangeTo" ), "Doc string" )[return_value_policy<return_by_value>()] )
+	.def( "FindTextPrevious", &PyMadEdit::FindTextPrevious, FindTextPrevious_member_overloads( args( "text", "bRegex", "bCaseSensitive", "bWholeWord", "bDotMatchNewline", "rangeFrom", "rangeTo" ), "Doc string" )[return_value_policy<return_by_value>()] )
 	.def( "FindHexNext", &PyMadEdit::FindHexNext, FindHexNext_member_overloads( args( "hexstr", "rangeFrom", "rangeTo" ), "Doc string" )[return_value_policy<return_by_value>()] )
 	.def( "FindHexPrevious", &PyMadEdit::FindHexPrevious, FindHexPrevious_member_overloads( args( "hexstr", "rangeFrom", "rangeTo" ), "Doc string" )[return_value_policy<return_by_value>()] )
-	.def( "ReplaceText", &PyMadEdit::ReplaceText, ReplaceText_member_overloads( args( "expr", "fmt", "bRegex", "bCaseSensitive", "bWholeWord", "rangeFrom", "rangeTo" ), "Doc string" )[return_value_policy<return_by_value>()] )
+	.def( "ReplaceText", &PyMadEdit::ReplaceText, ReplaceText_member_overloads( args( "expr", "fmt", "bRegex", "bCaseSensitive", "bWholeWord", "bDotMatchNewline", "rangeFrom", "rangeTo" ), "Doc string" )[return_value_policy<return_by_value>()] )
 	.def( "ReplaceHex", &PyMadEdit::ReplaceHex, ReplaceHex_member_overloads( args( "expr", "fmt" ), "Doc string" )[return_value_policy<return_by_value>()] )
-	.def( "ReplaceTextAll", &PyMadEdit::ReplaceTextAll, ReplaceTextAll_member_overloads( args( "expr", "fmt", "bRegex", "bCaseSensitive", "bWholeWord", "rangeFrom", "rangeTo" ), "Doc string" )[return_value_policy<return_by_value>()] )
+	.def( "ReplaceTextAll", &PyMadEdit::ReplaceTextAll, ReplaceTextAll_member_overloads( args( "expr", "fmt", "bRegex", "bCaseSensitive", "bWholeWord", "bDotMatchNewline", "rangeFrom", "rangeTo" ), "Doc string" )[return_value_policy<return_by_value>()] )
 	.def( "ReplaceHexAll", &PyMadEdit::ReplaceHexAll, ReplaceHexAll_member_overloads( args( "expr", "fmt", "rangeFrom", "rangeTo" ), "Doc string" )[return_value_policy<return_by_value>()] )
 #ifndef PYMADEDIT_DLL
-	.def( "FindTextAll", &PyMadEdit::FindTextAll, FindTextAll_member_overloads( args( "expr", "bRegex", "bCaseSensitive", "bWholeWord", "showresults" ), "Doc string" )[return_value_policy<return_by_value>()] )
+	.def( "FindTextAll", &PyMadEdit::FindTextAll, FindTextAll_member_overloads( args( "expr", "bRegex", "bCaseSensitive", "bWholeWord", "bDotMatchNewline", "showresults" ), "Doc string" )[return_value_policy<return_by_value>()] )
 	.def( "FindHexAll", &PyMadEdit::FindHexAll, FindHexAll_member_overloads( args( "expr", "showresults" ), "Doc string" )[return_value_policy<return_by_value>()] )
 #endif
 	.def( "LoadFromFile", &PyMadEdit::LoadFromFile, LoadFromFile_member_overloads( args( "filename", "encoding" ), "Doc string" )[return_value_policy<return_by_value>()] )

@@ -2699,7 +2699,7 @@ void MadEdit::RestorePosition(wxFileOffset pos,	int	toprow)
 /**************	Find/Replace functions ****************/
 
 MadSearchResult	MadEdit::FindTextNext(const	wxString &text,
-				bool bRegex, bool bCaseSensitive, bool bWholeWord,
+				bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
 				wxFileOffset rangeFrom,	wxFileOffset rangeTo)
 {
 	MadCaretPos	bpos, epos;
@@ -2732,7 +2732,7 @@ MadSearchResult	MadEdit::FindTextNext(const	wxString &text,
 		UpdateCaretByPos(epos, ucharQueue, widthArray, tmp);
 	}
 
-	MadSearchResult	state=Search(bpos, epos, text, bRegex, bCaseSensitive, bWholeWord);
+	MadSearchResult	state=Search(bpos, epos, text, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline);
 	if(state==SR_YES)
 	{
 		SetSelection(bpos.pos, epos.pos);
@@ -2744,7 +2744,7 @@ MadSearchResult	MadEdit::FindTextNext(const	wxString &text,
 }
 
 MadSearchResult	MadEdit::FindTextPrevious(const	wxString &text,
-				bool bRegex, bool bCaseSensitive, bool bWholeWord,
+				bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
 				wxFileOffset rangeFrom,	wxFileOffset rangeTo)
 {
 	MadCaretPos	bpos, epos;
@@ -2803,7 +2803,7 @@ MadSearchResult	MadEdit::FindTextPrevious(const	wxString &text,
 		}
 
 		MadCaretPos	bpos1=bpos,	epos1=epos;
-		int	state=Search(bpos1,	epos1, text, bRegex, bCaseSensitive, bWholeWord);
+		int	state=Search(bpos1,	epos1, text, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline);
 		if(state==SR_EXPR_ERROR)
 		{
 			return SR_EXPR_ERROR;
@@ -2834,7 +2834,7 @@ MadSearchResult	MadEdit::FindTextPrevious(const	wxString &text,
 
 				epos1=epos;
 			}
-			while(Search(bpos1,	epos1, text, bRegex, bCaseSensitive, bWholeWord));
+			while(Search(bpos1,	epos1, text, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline));
 
 			SetSelection(bp.pos, ep.pos, true);
 			if (IsTextFile() && m_BookmarkInSearch && !(m_Lines->m_LineList.IsBookmarked(bp.iter))) m_Lines->m_LineList.SetBookmark(bp.iter);
@@ -3101,7 +3101,7 @@ MadSearchResult	MadEdit::FindHexPrevious(const wxString	&hexstr,
 }
 
 MadReplaceResult MadEdit::ReplaceText(const	wxString &expr,	const wxString &fmt,
-									  bool bRegex, bool	bCaseSensitive,	bool bWholeWord,
+									  bool bRegex, bool	bCaseSensitive,	bool bWholeWord, bool bDotMatchNewline,
 									  wxFileOffset rangeFrom, wxFileOffset rangeTo)
 {
 	if(expr.Len()==0)
@@ -3114,7 +3114,7 @@ MadReplaceResult MadEdit::ReplaceText(const	wxString &expr,	const wxString &fmt,
 
 	if(m_Selection)	// test	the	selection is wanted	text
 	{
-		int	state=Search(bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord);
+		int	state=Search(bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline);
 
 		if(state==SR_EXPR_ERROR)
 		{
@@ -3132,7 +3132,7 @@ MadReplaceResult MadEdit::ReplaceText(const	wxString &expr,	const wxString &fmt,
 
 	if(!selok)	// just	find next
 	{
-		switch(FindTextNext(expr, bRegex, bCaseSensitive, bWholeWord, rangeFrom, rangeTo))
+		switch(FindTextNext(expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, rangeFrom, rangeTo))
 		{
 		case SR_EXPR_ERROR:	return RR_EXPR_ERROR;
 		case SR_YES:		return RR_NREP_NEXT;
@@ -3143,7 +3143,7 @@ MadReplaceResult MadEdit::ReplaceText(const	wxString &expr,	const wxString &fmt,
 	ucs4string out;
 
 	// replace the selected	text
-	int	state=Replace(out, bpos, epos, expr, fmt, bRegex, bCaseSensitive, bWholeWord);
+	int	state=Replace(out, bpos, epos, expr, fmt, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline);
 
 	if(state==SR_EXPR_ERROR)
 	{
@@ -3159,7 +3159,7 @@ MadReplaceResult MadEdit::ReplaceText(const	wxString &expr,	const wxString &fmt,
 		InsertString(out.c_str(), out.length(),	false, true, false);
 	}
 
-	if(SR_NO==FindTextNext(expr, bRegex, bCaseSensitive, bWholeWord, -1, rangeTo))
+	if(SR_NO==FindTextNext(expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, -1, rangeTo))
 		return RR_REP_NNEXT;
 
 	return RR_REP_NEXT;
@@ -3228,7 +3228,7 @@ MadReplaceResult MadEdit::ReplaceHex(const wxString	&expr, const wxString &fmt,
 
 
 int	MadEdit::ReplaceTextAll(const wxString &expr, const	wxString &fmt,
-	bool bRegex, bool bCaseSensitive, bool bWholeWord,
+	bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
 	vector<wxFileOffset> *pbegpos, vector<wxFileOffset>	*pendpos,
 	wxFileOffset rangeFrom,	wxFileOffset rangeTo)
 {
@@ -3287,10 +3287,10 @@ int	MadEdit::ReplaceTextAll(const wxString &expr, const	wxString &fmt,
 	int	multi=0;
 	int	state;
 
-	while((state=Search(bpos, epos,	expr, bRegex, bCaseSensitive, bWholeWord))==SR_YES)
+	while((state=Search(bpos, epos,	expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline))==SR_YES)
 	{
 		ucs4string out;
-		int	state=Replace(out, bpos, epos, expr, fmt, bRegex, bCaseSensitive, bWholeWord);
+		int	state=Replace(out, bpos, epos, expr, fmt, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline);
 
 		if(state==SR_EXPR_ERROR)
 		{
@@ -3472,7 +3472,7 @@ int	MadEdit::ReplaceHexAll(const wxString &expr, const wxString	&fmt,
 }
 
 int	MadEdit::FindTextAll(const wxString	&expr,
-						 bool bRegex, bool bCaseSensitive, bool	bWholeWord,	bool bFirstOnly,
+						 bool bRegex, bool bCaseSensitive, bool	bWholeWord,	bool bDotMatchNewline, bool bFirstOnly,
 						 vector<wxFileOffset> *pbegpos,	vector<wxFileOffset> *pendpos,
 						 wxFileOffset rangeFrom, wxFileOffset rangeTo)
 {
@@ -3527,7 +3527,7 @@ int	MadEdit::FindTextAll(const wxString	&expr,
 	wxString fmt = _("Found %d matched texts...");
 	fmt += wxT("								\n");
 
-	while((state=Search(bpos, epos,	expr, bRegex, bCaseSensitive, bWholeWord))==SR_YES)
+	while((state=Search(bpos, epos,	expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline))==SR_YES)
 	{
 		if(pbegpos)	pbegpos->push_back(bpos.pos);
 		if(pendpos)	pendpos->push_back(epos.pos);

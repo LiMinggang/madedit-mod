@@ -628,7 +628,7 @@ list<UCQueueSet> UCIterator::s_ucqueues;
 
 extern wxString	MadStrLower( const wxString	& );
 MadSearchResult	MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadCaretPos	&endpos,
-		const wxString &text, bool bRegex, bool	bCaseSensitive,	bool bWholeWord	)
+		const wxString &text, bool bRegex, bool	bCaseSensitive,	bool bWholeWord, bool bDotMatchNewline/* = false*/ )
 {
 	if(	beginpos.pos >=	endpos.pos || text.IsEmpty() )
 	{ return SR_NO;	}
@@ -643,6 +643,11 @@ MadSearchResult	MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 		text_lower = MadStrLower( text );
 		//text_lower = text.Lower();
 		text_ptr = &text_lower;
+	}
+
+	if( bDotMatchNewline == false )
+	{
+		opt = opt | regex_constants::not_dot_newline;
 	}
 
 #ifdef __WXMSW__
@@ -859,7 +864,7 @@ ucs4string ConvertEscape( const	ucs4string &str	)
 
 MadSearchResult	MadEdit::Replace( ucs4string &out, const MadCaretPos &beginpos,	const MadCaretPos &endpos,
 								  const	wxString &expr,	const wxString &fmt,
-								  bool bRegex, bool	bCaseSensitive,	bool bWholeWord	)
+								  bool bRegex, bool	bCaseSensitive,	bool bWholeWord, bool bDotMatchNewline/* = false*/ )
 {
 	if(	expr.IsEmpty() ) { return SR_NO; }
 
@@ -884,6 +889,10 @@ MadSearchResult	MadEdit::Replace( ucs4string &out, const MadCaretPos &beginpos,	
 		opt	= opt |	regex_constants::icase;
 	}
 
+	if( bDotMatchNewline == false )
+	{
+		opt = opt | regex_constants::not_dot_newline;
+	}
 #ifdef __WXMSW__
 	vector<ucs4_t> ucs;
 	TranslateText( expr.c_str(), expr.Len(), &ucs, true	);

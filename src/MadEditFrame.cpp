@@ -831,7 +831,7 @@ void OnReceiveMessage( const wchar_t *msg, size_t size )
 
 	// open the files
 	wxString files, file, args( msg ), arg, mpScript;
-	bool use_script = false, forceEdit = false, silent = false, exitS = false;;
+	bool use_script = false, forceEdit = false, silent = false, exitS = false;
 	/* filename1|filename2| *s *f *m mpython.mpy */
 	files = args.BeforeLast( '|', &arg );
 	args = arg;
@@ -6268,7 +6268,7 @@ void MadEditFrame::OnViewPreview( wxCommandEvent& event )
 		{
 			m_HtmlPreview = new wxHtmlWindow( this, wxID_ANY,
 											  wxDefaultPosition,
-											  wxSize( 400, 300 ), wxVSCROLL );
+											  wxSize( 400, 300 ) );
 			m_AuiManager.AddPane( m_HtmlPreview, wxAuiPaneInfo().Name( wxT( "Markdown/HTML Preview" ) ).Caption( _( "Markdown/HTML Preview" ) ).Floatable( false ).Right().CloseButton( false ) );
 			long style = wxAUI_TB_NO_TOOLTIPS;
 			m_RefreshView = new wxAuiToolBar( this, ID_WXTOOLBAR1 + tbMAX + 1, wxPoint( 0, 0 ), wxSize( 392, 29 ), style );
@@ -8264,8 +8264,11 @@ void MadEditFrame::OnSearchQuickFindPrevious( wxCommandEvent& event )
 			reset_caretpos = false;
 		}
 
-		sr = g_ActiveMadEdit->FindTextPrevious( m_QuickSearch->GetValue(), m_CheckboxRegEx->GetValue(),
-												m_CheckboxCaseSensitive->GetValue(), m_CheckboxWholeWord->GetValue(), rangeFrom, rangeTo );
+		bool bRegex = WxCheckBoxRegex->GetValue(), bWholeWord = WxCheckBoxWholeWord->GetValue();
+		if(bRegex) bWholeWord = false;
+
+		sr = g_ActiveMadEdit->FindTextPrevious( m_QuickSearch->GetValue(), bRegex,
+												m_CheckboxCaseSensitive->GetValue(), bWholeWord, false, rangeFrom, rangeTo );
 
 		if( sr == SR_NO )
 		{
@@ -8318,8 +8321,11 @@ void MadEditFrame::OnSearchQuickFindNext( wxCommandEvent& event )
 			reset_caretpos = false;
 		}
 
-		sr = g_ActiveMadEdit->FindTextNext( m_QuickSearch->GetValue(), m_CheckboxRegEx->GetValue(),
-											m_CheckboxCaseSensitive->GetValue(), m_CheckboxWholeWord->GetValue(), rangeFrom, rangeTo );
+		bool bRegex = WxCheckBoxRegex->GetValue(), bWholeWord = WxCheckBoxWholeWord->GetValue();
+		if(bRegex) bWholeWord = false;
+
+		sr = g_ActiveMadEdit->FindTextNext( m_QuickSearch->GetValue(), bRegex,
+											m_CheckboxCaseSensitive->GetValue(), bWholeWord, false, rangeFrom, rangeTo );
 
 		if( sr == SR_NO )
 		{

@@ -1843,7 +1843,7 @@ void MadEdit::TrimTrailingSpaces()
 		return;
 
 	// use Regular Expressions to trim all trailing	spaces
-	ReplaceTextAll(wxT("[ \t]+(\r|\n|$)"), wxT("$1"), true,	true, false);
+	ReplaceTextAll(wxT("[ \t]+(\r|\n|$)"), wxT("$1"), true,	true, false, false);
 }
 
 void MadEdit::TrimLeadingSpaces()
@@ -1859,7 +1859,7 @@ void MadEdit::TrimLeadingSpaces()
 	}
 
 	// use Regular Expressions to trim all trailing	spaces
-	ReplaceTextAll(wxT("^[ \t]+"), wxT(""),	true, true,	false, NULL, NULL, rangeFrom, rangeTo);
+	ReplaceTextAll(wxT("^[ \t]+"), wxT(""),	true, true,	false, false, NULL, NULL, rangeFrom, rangeTo);
 }
 
 void MadEdit::DeleteEmptyLines()
@@ -1874,7 +1874,7 @@ void MadEdit::DeleteEmptyLines()
 		rangeTo= m_SelectionEnd->pos;
 	}
 	// use Regular Expressions to delete all empty lines
-	ReplaceTextAll(wxT("^(\r\n|\r|\n|$)"), wxT(""),	true, true,	false, NULL, NULL, rangeFrom, rangeTo);
+	ReplaceTextAll(wxT("^(\r\n|\r|\n|$)"), wxT(""),	true, true,	false, false, NULL, NULL, rangeFrom, rangeTo);
 }
 
 void MadEdit::DeleteEmptyLinesWithSpaces()
@@ -1890,7 +1890,7 @@ void MadEdit::DeleteEmptyLinesWithSpaces()
 	}
 	
 	// use Regular Expressions to delete all empty lines(with spcaces)
-	ReplaceTextAll(wxT("^[ \t]+(\r\n|\r|\n|$)"), wxT(""), true,	true, false, NULL, NULL, rangeFrom,	rangeTo);
+	ReplaceTextAll(wxT("^[ \t]+(\r\n|\r|\n|$)"), wxT(""), true,	true, false, false, NULL, NULL, rangeFrom,	rangeTo);
 }
 
 void MadEdit::JoinLines()
@@ -1906,7 +1906,7 @@ void MadEdit::JoinLines()
 	}
 
 	// use Regular Expressions to join all selected	lines
-	ReplaceTextAll(wxT("(\r\n|\r|\n)"),	wxT(" "), true,	true, false, NULL, NULL, rangeFrom,	rangeTo);
+	ReplaceTextAll(wxT("(\r\n|\r|\n)"),	wxT(" "), true,	true, false, false, NULL, NULL, rangeFrom,	rangeTo);
 }
 
 //==============================================================================
@@ -3134,7 +3134,7 @@ void MadEdit::ColumnAlignLeft()
 			rangeFrom =	m_CaretPos.pos;
 			rangeTo	= rangeFrom+m_CaretPos.iter->m_Size-m_CaretPos.linepos;
 		}
-		ReplaceTextAll(wxT("^[ \t]+"), wxT(""),	true, true,	false, NULL, NULL, rangeFrom, rangeTo);
+		ReplaceTextAll(wxT("^[ \t]+"), wxT(""),	true, true,	false, false, NULL, NULL, rangeFrom, rangeTo);
 	}
 }
 

@@ -489,7 +489,7 @@ void MadFileData::Get( const wxFileOffset &pos,	wxByte * buffer, size_t	size )
 		}
 	}
 
-	idx	= pos &	BUFFER_BASE_MASK; //(pos >>	BUFFER_BITS) <<	BUFFER_BITS;		//(pos / BUFFER_SIZE) *	BUFFER_SIZE;;
+	idx	= pos &	BUFFER_BASE_MASK; //(pos >>	BUFFER_BITS) <<	BUFFER_BITS;		//(pos / BUFFER_SIZE) *	BUFFER_SIZE;
 
 	if(	pos	+ size <= idx +	BUFFER_SIZE	)			   // wanted bytes in one block
 	{

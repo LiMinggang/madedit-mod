@@ -62,6 +62,7 @@ BEGIN_EVENT_TABLE( MadFindInFilesDialog, wxDialog )
 	EVT_BUTTON( ID_WXBUTTONREPLACE, MadFindInFilesDialog::WxButtonReplaceClick )
 	EVT_BUTTON( ID_WXBUTTONFIND, MadFindInFilesDialog::WxButtonFindClick )
 	EVT_CHECKBOX( ID_WXCHECKBOXFINDHEX, MadFindInFilesDialog::WxCheckBoxFindHexClick )
+	EVT_CHECKBOX(ID_WXCHECKBOXREGEX,MadFindInFilesDialog::WxCheckBoxRegexClick)
 END_EVENT_TABLE()
 ////Event Table End
 
@@ -120,6 +121,8 @@ void MadFindInFilesDialog::CreateGUIControls( void )
 	WxBoxSizer8->Add( WxCheckBoxFindHex, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	WxCheckBoxListFirstOnly = new wxCheckBox( this, ID_WXCHECKBOXLISTFIRSTONLY, _( "&List the First Found Item Only" ), wxPoint( 1, 97 ), wxSize( 300, 22 ), 0, wxDefaultValidator, wxT( "WxCheckBoxListFirstOnly" ) );
 	WxBoxSizer8->Add( WxCheckBoxListFirstOnly, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
+	WxCheckBoxDotMatchNewLine = new wxCheckBox(this, ID_WXCHECKBOXDOTMATCHNEWLINE, _("&. Match Newline"), wxPoint(1, 123), wxSize(300, 22), 0, wxDefaultValidator, wxT("WxCheckBoxDotMatchNewLine"));
+	WxBoxSizer8->Add(WxCheckBoxDotMatchNewLine, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1);
 	WxBoxSizer5 = new wxBoxSizer( wxVERTICAL );
 	WxBoxSizer2->Add( WxBoxSizer5, 0, wxALIGN_TOP | wxALL, 0 );
 	WxButtonFind = new wxButton( this, ID_WXBUTTONFIND, _( "&Find" ), wxPoint( 2, 2 ), wxSize( 100, 28 ), 0, wxDefaultValidator, wxT( "WxButtonFind" ) );
@@ -328,12 +331,22 @@ void MadFindInFilesDialog::UpdateCheckBoxByCBHex( bool check )
 		WxCheckBoxCaseSensitive->Disable();
 		WxCheckBoxWholeWord->Disable();
 		WxCheckBoxRegex->Disable();
+		WxCheckBoxDotMatchNewLine->Disable();
 	}
 	else
 	{
 		WxCheckBoxCaseSensitive->Enable();
-		WxCheckBoxWholeWord->Enable();
 		WxCheckBoxRegex->Enable();
+		if(WxCheckBoxRegex->GetValue())
+		{
+			WxCheckBoxDotMatchNewLine->Enable();
+			WxCheckBoxWholeWord->Disable();
+		}
+		else
+		{
+			WxCheckBoxWholeWord->Enable();
+			WxCheckBoxDotMatchNewLine->Disable();
+		}
 	}
 }
 
@@ -766,10 +779,14 @@ void MadFindInFilesDialog::FindReplaceInFiles( bool bReplace )
 				}
 				else
 				{
+					bool bRegex = WxCheckBoxRegex->GetValue(), bWholeWord = WxCheckBoxWholeWord->GetValue(), bDotMatchNewline = WxCheckBoxDotMatchNewLine->GetValue();
+					if(bRegex) bWholeWord = false;
+					else bDotMatchNewline = false;
 					ok = madedit->ReplaceTextAll( expr, rstr,
-					                              WxCheckBoxRegex->GetValue(),
+					                              bRegex,
 					                              WxCheckBoxCaseSensitive->GetValue(),
-					                              WxCheckBoxWholeWord->GetValue(),
+					                              bWholeWord,
+					                              bDotMatchNewline,
 					                              &begpos, &endpos );
 				}
 
@@ -794,10 +811,14 @@ void MadFindInFilesDialog::FindReplaceInFiles( bool bReplace )
 				}
 				else
 				{
+					bool bRegex = WxCheckBoxRegex->GetValue(), bWholeWord = WxCheckBoxWholeWord->GetValue(), bDotMatchNewline = WxCheckBoxDotMatchNewLine->GetValue();
+					if(bRegex) bWholeWord = false;
+					else bDotMatchNewline = false;
 					ok = madedit->FindTextAll( expr,
-					                           WxCheckBoxRegex->GetValue(),
+					                           bRegex,
 					                           WxCheckBoxCaseSensitive->GetValue(),
-					                           WxCheckBoxWholeWord->GetValue(),
+					                           bWholeWord,
+					                           bDotMatchNewline,
 					                           WxCheckBoxListFirstOnly->GetValue(),
 					                           &begpos, &endpos );
 				}
@@ -909,3 +930,23 @@ void MadFindInFilesDialog::PurgeRecentFindExcludes()
 	WxComboBoxExclude->Clear();
 }
 
+/*
+ * WxCheckBoxRegexClick
+ */
+void MadFindInFilesDialog::WxCheckBoxRegexClick(wxCommandEvent& event)
+{
+	// insert your code here
+	if(event.IsChecked())
+	{
+		WxCheckBoxDotMatchNewLine->Enable();
+		WxCheckBoxFindHex->Disable();
+		WxCheckBoxWholeWord->Disable();
+	}
+	else
+	{
+		WxCheckBoxWholeWord->Enable();
+		WxCheckBoxFindHex->Enable();
+		WxCheckBoxDotMatchNewLine->Disable();
+	}
+
+}
