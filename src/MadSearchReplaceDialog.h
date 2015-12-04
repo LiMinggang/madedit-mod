@@ -78,6 +78,7 @@ public:
 		wxCheckBox *WxCheckBoxBookmarkLine;
 		wxStaticBoxSizer *WxStaticBoxSizer1;
 		wxBoxSizer *WxBoxSizer6;
+		wxCheckBox *WxCheckBoxDotMatchNewLine;
 		wxCheckBox *WxCheckBoxSearchInSelection;
 		wxCheckBox *WxCheckBoxSearchThrEndOfFile;
 		wxCheckBox *WxCheckBoxFindHex;
@@ -106,6 +107,7 @@ public:
 	//Try copy pasting the below block in your old Form	header Files.
 	enum {
 ////GUI	Enum Control ID	Start
+			ID_WXCHECKBOXBOXDOTMATCHNEWLINE = 59,
 			ID_WXBUTTONCLOSE = 57,
 			ID_WXBUTTONREPLACEALLINALL = 56,
 			ID_WXBUTTONREPLACEALL =	55,
@@ -178,6 +180,7 @@ public:
 	void ShowReplaceUI();
 	void SetTransparency();
 	void ShowFindUI();
+	void WxCheckBoxRegexClick(wxCommandEvent& event);
 };
 
 extern MadSearchReplaceDialog *g_SearchReplaceDialog;

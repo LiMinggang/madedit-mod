@@ -78,6 +78,7 @@ BEGIN_EVENT_TABLE(MadSearchReplaceDialog,wxDialog)
 	EVT_RADIOBUTTON(ID_WXRADIOLOSINGFOCUS,MadSearchReplaceDialog::WxRadioLosingFocusClick)
 	EVT_CHECKBOX(ID_WXCHECKBOXSEARCHINSELECTION,MadSearchReplaceDialog::WxCheckBoxSearchInSelectionClick)
 	EVT_CHECKBOX(ID_WXCHECKBOXFINDHEX,MadSearchReplaceDialog::WxCheckBoxFindHexClick)
+	EVT_CHECKBOX(ID_WXCHECKBOXREGEX,MadSearchReplaceDialog::WxCheckBoxRegexClick)
 END_EVENT_TABLE()
 	////Event Table	End
 
@@ -150,6 +151,9 @@ void MadSearchReplaceDialog::CreateGUIControls(void)
 
 	WxCheckBoxSearchInSelection = new wxCheckBox(this, ID_WXCHECKBOXSEARCHINSELECTION, _("Search In &Selection"), wxPoint(96, 158), wxSize(300, 22), 0, wxDefaultValidator, wxT("WxCheckBoxSearchInSelection"));
 	WxBoxSizer5->Add(WxCheckBoxSearchInSelection, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2);
+
+	WxCheckBoxDotMatchNewLine = new wxCheckBox(this, ID_WXCHECKBOXBOXDOTMATCHNEWLINE, _("&. Matches Newline"), wxPoint(96, 184), wxSize(300, 22), 0, wxDefaultValidator, wxT("WxCheckBoxDotMatchNewLine"));
+	WxBoxSizer5->Add(WxCheckBoxDotMatchNewLine, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2);
 
 	WxBoxSizer6	= new wxBoxSizer(wxHORIZONTAL);
 	WxBoxSizer5->Add(WxBoxSizer6, 0, wxALIGN_CENTER	| wxEXPAND | wxALL,	2);
@@ -847,7 +851,7 @@ static inline ucs4_t ToHex(int d)//	0 <= d <= 15
 	return 'A' + d - 10;
 }
 
-void MadSearchReplaceDialog::UpdateCheckBoxByCBHex(bool	check)
+void MadSearchReplaceDialog::UpdateCheckBoxByCBHex(bool check)
 {
 	if(check)
 	{
@@ -1584,4 +1588,22 @@ void MadSearchReplaceDialog::WxSliderTransDegreeScroll(wxScrollEvent& event)
 		trans =	(wxByte)WxSliderTransDegree->GetValue();
 	}
 	SetTransparent(trans);
+}
+
+/*
+ * WxCheckBoxRegexClick
+ */
+void MadSearchReplaceDialog::WxCheckBoxRegexClick(wxCommandEvent& event)
+{
+	// insert your code here
+	if(event.IsChecked())
+	{
+		WxCheckBoxWholeWord->Disable();
+		WxCheckBoxFindHex->Disable();
+	}
+	else
+	{
+		WxCheckBoxWholeWord->Enable();
+		WxCheckBoxFindHex->Enable();
+	}
 }

@@ -116,6 +116,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.4.0
 1.New: No scroll bar for HTML/Markdown preview window #95
+Fix: Find Hex should be gray out if Regular expression was enabled #97
 
 Mod v0.3.9
 1.Improve on change syntax on save as
