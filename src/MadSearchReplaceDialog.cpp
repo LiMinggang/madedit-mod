@@ -458,9 +458,6 @@ void MadSearchReplaceDialog::WxButtonFindNextClick(wxCommandEvent& event)
 
 		g_ActiveMadEdit->SetBookmarkInSearch(WxCheckBoxBookmarkLine->IsChecked());
 
-		expr = text;
-		expr.Replace(wxT("\\"),	wxT("\\\\"));
-		expr.Replace(wxT("\""),	wxT("\\\""));
 		for(;;)
 		{
 			if(WxCheckBoxFindHex->GetValue())
@@ -468,8 +465,9 @@ void MadSearchReplaceDialog::WxButtonFindNextClick(wxCommandEvent& event)
 				sr=g_ActiveMadEdit->FindHexNext(text, rangeFrom, rangeTo);
 				if(sr != SR_EXPR_ERROR)
 				{
-					RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("FindHexNext(\"%s\", %s, %s)"), expr.c_str(),
-								(wxLongLong(rangeFrom).ToString()).c_str(), (wxLongLong(rangeTo).ToString()).c_str()));
+					if( g_MainFrame->IsMacroRecording() )
+						RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("FindHexNext(\"%s\", %s, %s)"), text.c_str(),
+									(wxLongLong(rangeFrom).ToString()).c_str(), (wxLongLong(rangeTo).ToString()).c_str()));
 				}
 			}
 			else
@@ -485,13 +483,30 @@ void MadSearchReplaceDialog::WxButtonFindNextClick(wxCommandEvent& event)
 					rangeFrom, rangeTo);
 				if(sr != SR_EXPR_ERROR)
 				{
-					wxString fnstr(wxString::Format(wxT("FindTextNext(\"%s\", %s, %s, %s, %s, %s, %s)"), expr.c_str(),
-									bRegex?wxT("True"):wxT("False"),
-									WxCheckBoxCaseSensitive->GetValue()?wxT("True"):wxT("False"),
-									bWholeWord?wxT("True"):wxT("False"),
-									bDotMatchNewline?wxT("True"):wxT("False"),
-									(wxLongLong(rangeFrom).ToString()).c_str(), (wxLongLong(rangeTo).ToString()).c_str()));
-					RecordAsMadMacro(g_ActiveMadEdit, fnstr);
+					if( g_MainFrame->IsMacroRecording() )
+					{
+						expr = text;
+						if(!bRegex)
+						{
+							expr.Replace(wxT("\\"),	wxT("\\\\"));
+							expr.Replace(wxT("\""),	wxT("\\\""));
+						}
+						else
+						{
+							size_t len = expr.Len();
+							if(expr[len-1] == '\\' && ((len == 1) || ((len > 1) && expr[len-2] != '\\')))
+							{
+								expr<<'\\';
+							}
+						}
+						wxString fnstr(wxString::Format(wxT("FindTextNext(\"%s\", %s, %s, %s, %s, %s, %s)"), expr.c_str(),
+										bRegex?wxT("True"):wxT("False"),
+										WxCheckBoxCaseSensitive->GetValue()?wxT("True"):wxT("False"),
+										bWholeWord?wxT("True"):wxT("False"),
+										bDotMatchNewline?wxT("True"):wxT("False"),
+										(wxLongLong(rangeFrom).ToString()).c_str(), (wxLongLong(rangeTo).ToString()).c_str()));
+						RecordAsMadMacro(g_ActiveMadEdit, fnstr);
+					}
 				}
 			}
 
@@ -600,10 +615,6 @@ void MadSearchReplaceDialog::WxButtonFindPrevClick(wxCommandEvent& event)
 				rangeFrom =	m_SearchFrom;
 		}
 
-		expr = text;
-		expr.Replace(wxT("\\"),	wxT("\\\\"));
-		expr.Replace(wxT("\""),	wxT("\\\""));
-
 		g_ActiveMadEdit->SetBookmarkInSearch(WxCheckBoxBookmarkLine->IsChecked());
 
 		for(;;)
@@ -611,7 +622,8 @@ void MadSearchReplaceDialog::WxButtonFindPrevClick(wxCommandEvent& event)
 			if(WxCheckBoxFindHex->GetValue())
 			{
 				sr=g_ActiveMadEdit->FindHexPrevious(text, rangeTo, rangeFrom);
-				RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("FindHexPrevious(\"%s\", %s, %s)"), expr.c_str(), (wxLongLong(rangeFrom).ToString()).c_str(), (wxLongLong(rangeTo).ToString()).c_str()));
+				if( g_MainFrame->IsMacroRecording() )
+					RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("FindHexPrevious(\"%s\", %s, %s)"), text.c_str(), (wxLongLong(rangeFrom).ToString()).c_str(), (wxLongLong(rangeTo).ToString()).c_str()));
 			}
 			else
 			{
@@ -626,6 +638,22 @@ void MadSearchReplaceDialog::WxButtonFindPrevClick(wxCommandEvent& event)
 					bDotMatchNewline,
 					rangeTo, rangeFrom);
 				
+				if( g_MainFrame->IsMacroRecording() )
+				{
+					expr = text;
+					if(!bRegex)
+					{
+						expr.Replace(wxT("\\"), wxT("\\\\"));
+						expr.Replace(wxT("\""), wxT("\\\""));
+					}
+					else
+					{
+						size_t len = expr.Len();
+						if(expr[len-1] == '\\' && ((len == 1) || ((len > 1) && expr[len-2] != '\\')))
+						{
+							expr<<'\\';
+						}
+					}
 					wxString fnstr(wxString::Format(wxT("FindTextPrevious(\"%s\", %s, %s, %s, %s, %s, %s)"), expr.c_str(),
 							bRegex?wxT("True"):wxT("False"),
 							WxCheckBoxCaseSensitive->GetValue()?wxT("True"):wxT("False"),
@@ -633,6 +661,7 @@ void MadSearchReplaceDialog::WxButtonFindPrevClick(wxCommandEvent& event)
 							bDotMatchNewline?wxT("True"):wxT("False"),
 							(wxLongLong(rangeFrom).ToString()).c_str(), (wxLongLong(rangeTo).ToString()).c_str()));
 					RecordAsMadMacro(g_ActiveMadEdit, fnstr);
+				}
 			}
 
 			if(sr!=SR_NO)
@@ -968,10 +997,6 @@ void MadSearchReplaceDialog::WxButtonReplaceClick(wxCommandEvent& event)
 			rangeFrom =	caretpos;
 		}
 
-		expr = text;
-		expr.Replace(wxT("\\"),	wxT("\\\\"));
-		expr.Replace(wxT("\""),	wxT("\\\""));
-
 		for(;;)
 		{
 			MadReplaceResult ret=RR_EXPR_ERROR;
@@ -979,9 +1004,9 @@ void MadSearchReplaceDialog::WxButtonReplaceClick(wxCommandEvent& event)
 			{
 				ret=g_ActiveMadEdit->ReplaceHex(text, reptext, rangeFrom, rangeTo);
 				
-				if(ret == RR_REP_NEXT || ret ==	RR_NREP_NEXT)
+				if((ret == RR_REP_NEXT || ret == RR_NREP_NEXT) && ( g_MainFrame->IsMacroRecording() ))
 				{
-					RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("ReplaceHex(\"%s\", \"%s\", %s, %s)"), expr.c_str(), reptext.c_str(), (wxLongLong(rangeFrom).ToString()).c_str(), (wxLongLong(rangeTo).ToString()).c_str()));
+					RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("ReplaceHex(\"%s\", \"%s\", %s, %s)"), text.c_str(), reptext.c_str(), (wxLongLong(rangeFrom).ToString()).c_str(), (wxLongLong(rangeTo).ToString()).c_str()));
 				}
 			}
 			else
@@ -995,8 +1020,22 @@ void MadSearchReplaceDialog::WxButtonReplaceClick(wxCommandEvent& event)
 					bWholeWord,
 					bDotMatchNewline,
 					rangeFrom, rangeTo);
-				if(ret == RR_REP_NEXT || ret ==	RR_NREP_NEXT)
+				if((ret == RR_REP_NEXT || ret == RR_NREP_NEXT) && ( g_MainFrame->IsMacroRecording() ))
 				{
+					expr = text;
+					if(!bRegex)
+					{
+						expr.Replace(wxT("\\"), wxT("\\\\"));
+						expr.Replace(wxT("\""), wxT("\\\""));
+					}
+					else
+					{
+						size_t len = expr.Len();
+						if(expr[len-1] == '\\' && ((len == 1) || ((len > 1) && expr[len-2] != '\\')))
+						{
+							expr<<'\\';
+						}
+					}
 					wxString fnstr(wxString::Format(wxT("ReplaceText(\"%s\", \"%s\", %s, %s, %s, %s, %s, %s)"),	expr.c_str(), reptext.c_str(),
 										bRegex?wxT("True"):wxT("False"),
 										WxCheckBoxCaseSensitive->GetValue()?wxT("True"):wxT("False"),
@@ -1444,15 +1483,29 @@ void MadSearchReplaceDialog::SearchAll(MadEdit * madedit, bool needRec/*=true*/)
 				false,
 				&begpos, &endpos, rangeFrom, rangeTo);
 
-			expr.Replace(wxT("\\"),	wxT("\\\\"));
-			expr.Replace(wxT("\""),	wxT("\\\""));
-			wxString fnstr(wxString::Format(wxT("FindTextAll(\"%s\", %s, %s, %s, %s, False)"),	expr.c_str(),
-							bRegex?wxT("True"):wxT("False"),
-							WxCheckBoxCaseSensitive->GetValue()?wxT("True"):wxT("False"),
-							bWholeWord?wxT("True"):wxT("False"),
-							bDotMatchNewline?wxT("True"):wxT("False")));
-			if(needRec)
+			if(needRec && ( g_MainFrame->IsMacroRecording() ))
+			{
+				if(!bRegex)
+				{
+					expr.Replace(wxT("\\"), wxT("\\\\"));
+					expr.Replace(wxT("\""), wxT("\\\""));
+				}
+				else
+				{
+					size_t len = expr.Len();
+					if(expr[len-1] == '\\' && ((len == 1) || ((len > 1) && expr[len-2] != '\\')))
+					{
+						expr<<'\\';
+					}
+				}
+
+				wxString fnstr(wxString::Format(wxT("FindTextAll(\"%s\", %s, %s, %s, %s, False)"),	expr.c_str(),
+								bRegex?wxT("True"):wxT("False"),
+								WxCheckBoxCaseSensitive->GetValue()?wxT("True"):wxT("False"),
+								bWholeWord?wxT("True"):wxT("False"),
+								bDotMatchNewline?wxT("True"):wxT("False")));
 				RecordAsMadMacro(madedit, fnstr);
+			}
 		}
 
 		if(ok<0) return;
@@ -1545,7 +1598,7 @@ void MadSearchReplaceDialog::ReplaceAll(MadEdit	* madedit, bool	needRec/*=true*/
 		if(WxCheckBoxFindHex->GetValue())
 		{
 			count=madedit->ReplaceHexAll(text, reptext,	NULL, NULL,	rangeFrom, rangeTo);
-			if(needRec)
+			if(needRec && ( g_MainFrame->IsMacroRecording() ))
 				RecordAsMadMacro(madedit, wxString::Format(wxT("ReplaceHexAll(\"%s\", \"%s\", %s, %s)"), text.c_str(),	reptext.c_str(), (wxLongLong(rangeFrom).ToString()).c_str(), (wxLongLong(rangeTo).ToString()).c_str()));
 		}
 		else
@@ -1559,10 +1612,21 @@ void MadSearchReplaceDialog::ReplaceAll(MadEdit	* madedit, bool	needRec/*=true*/
 				bWholeWord,
 				bDotMatchNewline,
 				NULL, NULL,	rangeFrom, rangeTo);
-			if(needRec)
+			if(needRec && ( g_MainFrame->IsMacroRecording() ))
 			{
-				text.Replace(wxT("\\"),	wxT("\\\\"));
-				text.Replace(wxT("\""),	wxT("\\\""));
+				if(!bRegex)
+				{
+					text.Replace(wxT("\\"),	wxT("\\\\"));
+					text.Replace(wxT("\""),	wxT("\\\""));
+				}
+				else
+				{
+					size_t len = text.Len();
+					if(text[len-1] == '\\' && ((len == 1) || ((len > 1) && text[len-2] != '\\')))
+					{
+						text<<'\\';
+					}
+				}
 				wxString fnstr(wxString::Format(wxT("ReplaceTextAll(\"%s\", \"%s\", %s, %s, %s, %s, %s)"), text.c_str(), reptext.c_str(),
 								bRegex?wxT("True"):wxT("False"),
 								WxCheckBoxCaseSensitive->GetValue()?wxT("True"):wxT("False"),
