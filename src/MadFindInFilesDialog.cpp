@@ -121,7 +121,7 @@ void MadFindInFilesDialog::CreateGUIControls( void )
 	WxBoxSizer8->Add( WxCheckBoxFindHex, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	WxCheckBoxListFirstOnly = new wxCheckBox( this, ID_WXCHECKBOXLISTFIRSTONLY, _( "&List the First Found Item Only" ), wxPoint( 1, 97 ), wxSize( 300, 22 ), 0, wxDefaultValidator, wxT( "WxCheckBoxListFirstOnly" ) );
 	WxBoxSizer8->Add( WxCheckBoxListFirstOnly, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
-	WxCheckBoxDotMatchNewLine = new wxCheckBox(this, ID_WXCHECKBOXDOTMATCHNEWLINE, _("&. Match Newline"), wxPoint(1, 123), wxSize(300, 22), 0, wxDefaultValidator, wxT("WxCheckBoxDotMatchNewLine"));
+	WxCheckBoxDotMatchNewLine = new wxCheckBox(this, ID_WXCHECKBOXDOTMATCHNEWLINE, _("&. Matches Newline"), wxPoint(1, 123), wxSize(300, 22), 0, wxDefaultValidator, wxT("WxCheckBoxDotMatchNewLine"));
 	WxBoxSizer8->Add(WxCheckBoxDotMatchNewLine, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1);
 	WxBoxSizer5 = new wxBoxSizer( wxVERTICAL );
 	WxBoxSizer2->Add( WxBoxSizer5, 0, wxALIGN_TOP | wxALL, 0 );

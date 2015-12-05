@@ -2827,11 +2827,16 @@ void MadEditFrame::CreateGUIControls( void )
 	m_QuickSeachBar->AddControl( m_CheckboxWholeWord );
 	m_CheckboxCaseSensitive = new wxCheckBox( m_QuickSeachBar, ID_QUICKSEARCHCASESENSITIVE, _( "Case Sensitive" ) );
 	m_CheckboxCaseSensitive->SetValue( false );
+	m_CheckboxCaseSensitive->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ) );
 	m_QuickSeachBar->AddControl( m_CheckboxCaseSensitive );
 	m_CheckboxRegEx = new wxCheckBox( m_QuickSeachBar, ID_QUICKSEARCHREGEX, _( "Regular Expression" ) );
 	m_CheckboxRegEx->SetValue( false );
-	m_CheckboxCaseSensitive->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ) );
+	m_CheckboxRegEx->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ) );
 	m_QuickSeachBar->AddControl( m_CheckboxRegEx );
+	m_CheckboxDotMatchNewline = new wxCheckBox( m_QuickSeachBar, ID_QUICKSEARCHDOTMATCHNEWLINE, _( ". Matches Newline" ) );
+	m_CheckboxDotMatchNewline->SetValue( false );
+	m_CheckboxDotMatchNewline->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ) );
+	m_QuickSeachBar->AddControl( m_CheckboxDotMatchNewline );
 	m_QuickSeachBar->Realize();
 	m_AuiManager.AddPane( m_QuickSeachBar, wxAuiPaneInfo().Name( wxT( "QuickSeachBar" ) ).CloseButton( false ).Caption( _( "Quick Search" ) ).Floatable( true ).ToolbarPane().Top().Row( 2 ) );
 	bool showQsBar = m_Config->ReadBool( wxT( "/MadEdit/ShowQSearchBarOnStart" ), true );
@@ -8371,11 +8376,12 @@ void MadEditFrame::OnSearchQuickFindPrevious( wxCommandEvent& event )
 			reset_caretpos = false;
 		}
 
-		bool bRegex = m_CheckboxRegEx->GetValue(), bWholeWord = m_CheckboxWholeWord->GetValue();
+		bool bRegex = m_CheckboxRegEx->GetValue(), bWholeWord = m_CheckboxWholeWord->GetValue(), bDotMatchNewline = m_CheckboxDotMatchNewline->GetValue();
 		if(bRegex) bWholeWord = false;
+		else bDotMatchNewline = false;
 
 		sr = g_ActiveMadEdit->FindTextPrevious( m_QuickSearch->GetValue(), bRegex,
-												m_CheckboxCaseSensitive->GetValue(), bWholeWord, false, rangeFrom, rangeTo );
+												m_CheckboxCaseSensitive->GetValue(), bWholeWord, bDotMatchNewline, rangeFrom, rangeTo );
 
 		if( sr == SR_NO )
 		{
@@ -8428,11 +8434,12 @@ void MadEditFrame::OnSearchQuickFindNext( wxCommandEvent& event )
 			reset_caretpos = false;
 		}
 
-		bool bRegex = m_CheckboxRegEx->GetValue(), bWholeWord = m_CheckboxWholeWord->GetValue();
+		bool bRegex = m_CheckboxRegEx->GetValue(), bWholeWord = m_CheckboxWholeWord->GetValue(), bDotMatchNewline = m_CheckboxDotMatchNewline->GetValue();
 		if(bRegex) bWholeWord = false;
+		else bDotMatchNewline = false;
 
 		sr = g_ActiveMadEdit->FindTextNext( m_QuickSearch->GetValue(), bRegex,
-											m_CheckboxCaseSensitive->GetValue(), bWholeWord, false, rangeFrom, rangeTo );
+											m_CheckboxCaseSensitive->GetValue(), bWholeWord, bDotMatchNewline, rangeFrom, rangeTo );
 
 		if( sr == SR_NO )
 		{

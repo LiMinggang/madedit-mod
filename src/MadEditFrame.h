@@ -109,6 +109,7 @@ public:
 		ID_QUICKSEARCHWHOLEWORD,
 		ID_QUICKSEARCHREGEX,
 		ID_QUICKSEARCHCASESENSITIVE,
+		ID_QUICKSEARCHDOTMATCHNEWLINE,
 
 		ID_DUMMY_VALUE_ //Dont Delete this DummyValue
 	}; //End of Enum
@@ -131,6 +132,7 @@ public:
 	wxComboBox    *m_QuickSearch;
 	wxCheckBox    *m_CheckboxWholeWord;
 	wxCheckBox    *m_CheckboxRegEx;
+	wxCheckBox    *m_CheckboxDotMatchNewline;
 	wxCheckBox    *m_CheckboxCaseSensitive;
 	bool           m_ReloadFiles;
 	bool           m_PurgeHistory;
