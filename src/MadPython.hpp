@@ -453,6 +453,8 @@ namespace mad_python {
 
 		void GoToLineColumn( int line, int column ) {
 			if( g_ActiveMadEdit ) {
+				if(column < 0) column = 0;
+				if(line < 0) line = 0;
 				g_ActiveMadEdit->GoToLine( line );
 
 				for( int col = 0; col < ( column - 1 ); ++col ) // no validate for input
@@ -528,14 +530,14 @@ namespace mad_python {
 		}
 
 		void SetTextFont( const std::string &name, int size, bool forceReset ) {
-			if( ( g_ActiveMadEdit ) && ( ! name.empty() ) ) {
+			if( ( ! name.empty()) && (size > 0) && ( g_ActiveMadEdit ) ) {
 				wxString wxName( name.c_str(), wxConvLocal );
 				g_ActiveMadEdit->SetTextFont( wxName, size, forceReset );
 			}
 		}
 
 		void SetHexFont( const std::string &name, int size, bool forceReset ) {
-			if( ( g_ActiveMadEdit ) && ( ! name.empty() ) ) {
+			if( ( ! name.empty()) && (size > 0) && ( g_ActiveMadEdit ) ) {
 				wxString wxName( name.c_str(), wxConvLocal );
 				g_ActiveMadEdit->SetHexFont( wxName, size, forceReset );
 			}
@@ -617,7 +619,7 @@ namespace mad_python {
 		}
 
 		void SetEditMode( int mode ) {
-			if( g_ActiveMadEdit )
+			if( g_ActiveMadEdit && ( mode >= emTextMode ) && ( mode <= emHexMode ) )
 			{ g_ActiveMadEdit->SetEditMode( ( MadEditMode )mode ); }
 		}
 
@@ -691,7 +693,7 @@ namespace mad_python {
 		}
 
 		void SetWordWrapMode( int mode ) {
-			if( g_ActiveMadEdit )
+			if( g_ActiveMadEdit && ( mode >= wwmNoWrap ) && ( mode <= wwmWrapByColumn ) )
 			{ g_ActiveMadEdit->SetWordWrapMode( ( MadWordWrapMode )mode ); }
 		}
 
@@ -802,7 +804,8 @@ namespace mad_python {
 
 		long GetMaxColumns() {
 			long cols = 0;
-			cols = g_ActiveMadEdit->GetMaxColumns();
+			if( g_ActiveMadEdit )
+				cols = g_ActiveMadEdit->GetMaxColumns();
 			return cols;
 		}
 
@@ -821,12 +824,14 @@ namespace mad_python {
 		}
 
 		void SetAutoIndent( bool value ) {
-			g_ActiveMadEdit->SetAutoIndent( value );
+			if( g_ActiveMadEdit )
+				g_ActiveMadEdit->SetAutoIndent( value );
 		}
 
 		void SetAutoCompletePair( bool value ) {
-			g_ActiveMadEdit->SetAutoCompletePair( value );
-		}
+			if( g_ActiveMadEdit )
+				g_ActiveMadEdit->SetAutoCompletePair( value );
+			}
 		bool GetAutoCompletePair() {
 			bool res = false;
 
@@ -851,7 +856,7 @@ namespace mad_python {
 		}
 
 		void SetCaretType( int type ) {
-			if( g_ActiveMadEdit )
+			if( g_ActiveMadEdit  && ( type >= ctVerticalLine ) && ( type <= ctBlock ))
 			{ g_ActiveMadEdit->SetCaretType( ( MadCaretType )type ); }
 		}
 
@@ -1114,7 +1119,7 @@ namespace mad_python {
 		}
 
 		void SetText( const std::string &ws ) {
-			if( ( g_ActiveMadEdit ) && ( ! ws.empty() ) ) {
+			if( ( ! ws.empty() ) && ( g_ActiveMadEdit ) ) {
 				wxString wxWs( ws.c_str(), wxConvLocal );
 				g_ActiveMadEdit->SetText( wxWs );
 			}
@@ -1320,9 +1325,6 @@ namespace mad_python {
 			int ok = SR_EXPR_ERROR;
 
 			if( ( !hexstr.empty() ) && ( g_ActiveMadEdit ) ) {
-				if( hexstr.empty() )
-				{ return SR_EXPR_ERROR; }
-
 				wxString wxHexExpr( hexstr.c_str(), wxConvLocal );
 				wxFileOffset from = ( wxFileOffset )rangeFrom, to = ( wxFileOffset )rangeTo;
 				ok = g_ActiveMadEdit->FindHexNext( wxHexExpr, from, to );
@@ -1348,11 +1350,11 @@ namespace mad_python {
 		int ReplaceText( const std::string &expr, const std::string &fmt,
 						 bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false,
 						 long rangeFrom = -1, long rangeTo = -1 ) {
-			if( !( g_ActiveMadEdit ) || g_ActiveMadEdit->IsReadOnly() )
-			{ return RR_NREP_NNEXT; }
-
 			if( expr.empty() )
 			{ return RR_EXPR_ERROR; }
+
+			if( !( g_ActiveMadEdit ) || g_ActiveMadEdit->IsReadOnly() )
+			{ return RR_NREP_NNEXT; }
 
 			wxString wxExpr( expr.c_str(), wxConvLocal ), wxFmt( fmt.c_str(), wxConvLocal );
 			wxFileOffset from = ( wxFileOffset )rangeFrom, to = ( wxFileOffset )rangeTo;
@@ -1364,11 +1366,11 @@ namespace mad_python {
 
 		int ReplaceHex( const std::string &expr, const std::string &fmt,
 						long rangeFrom = -1, long rangeTo = -1 ) {
-			if( !( g_ActiveMadEdit ) || g_ActiveMadEdit->IsReadOnly() )
-			{ return RR_NREP_NNEXT; }
-
 			if( expr.empty() )
 			{ return RR_EXPR_ERROR; }
+
+			if( !( g_ActiveMadEdit ) || g_ActiveMadEdit->IsReadOnly() )
+			{ return RR_NREP_NNEXT; }
 
 			wxString wxExpr( expr.c_str(), wxConvLocal ), wxFmt( fmt.c_str(), wxConvLocal );
 			wxFileOffset from = ( wxFileOffset )rangeFrom, to = ( wxFileOffset )rangeTo;
@@ -1724,7 +1726,6 @@ namespace mad_python {
 			}
 		}
 	};
-	//PyMadEdit * InitMadPython() { return new PyMadEdit();}
 }
 
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( FindTextNext_member_overloads, FindTextNext, 4, 7 )
