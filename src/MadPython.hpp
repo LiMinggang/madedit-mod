@@ -1281,7 +1281,7 @@ namespace mad_python {
 
 		// search in [rangeFrom, rangeTo], default in [CaretPos, EndOfDoc]
 		int FindTextNext( const std::string &text,
-						  bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
+						  bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false,
 						  long rangeFrom = -1, long rangeTo = -1 ) {
 			int ok = SR_EXPR_ERROR;
 
@@ -1299,7 +1299,7 @@ namespace mad_python {
 
 		// search in [rangeFrom, rangeTo], rangeFrom > rangeTo, default in [CaretPos, BeginOfDoc]
 		int FindTextPrevious( const std::string &text,
-							  bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
+							  bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false,
 							  long rangeFrom = -1, long rangeTo = -1 ) {
 			int ok = SR_EXPR_ERROR;
 
@@ -1346,7 +1346,7 @@ namespace mad_python {
 
 		// replace the selected text that must match expr
 		int ReplaceText( const std::string &expr, const std::string &fmt,
-						 bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
+						 bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false,
 						 long rangeFrom = -1, long rangeTo = -1 ) {
 			if( !( g_ActiveMadEdit ) || g_ActiveMadEdit->IsReadOnly() )
 			{ return RR_NREP_NNEXT; }
@@ -1377,7 +1377,7 @@ namespace mad_python {
 
 		// return the replaced count or SR_EXPR_ERROR
 		int ReplaceTextAll( const std::string &expr, const std::string &fmt,
-							bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline, 
+							bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false, 
 							long rangeFrom = -1, long rangeTo = -1 ) {
 			int ok = 0;
 
@@ -1408,7 +1408,7 @@ namespace mad_python {
 #ifndef PYMADEDIT_DLL
 		// list the matched data to pbegpos & pendpos
 		// return the found count or SR_EXPR_ERROR
-		int FindTextAll( const std::string &expr, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline, bool showresults = true ) {
+		int FindTextAll( const std::string &expr, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false, bool showresults = true ) {
 			int ok = SR_EXPR_ERROR;
 
 			if( ( !expr.empty() ) && ( g_ActiveMadEdit ) ) {
@@ -1715,15 +1715,15 @@ namespace mad_python {
 	//PyMadEdit * InitMadPython() { return new PyMadEdit();}
 }
 
-BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( FindTextNext_member_overloads, FindTextNext, 5, 7 )
-BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( FindTextPrevious_member_overloads, FindTextPrevious, 5, 7 )
+BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( FindTextNext_member_overloads, FindTextNext, 4, 7 )
+BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( FindTextPrevious_member_overloads, FindTextPrevious, 4, 7 )
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( FindHexNext_member_overloads, FindHexNext, 1, 3 )
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( FindHexPrevious_member_overloads, FindHexPrevious, 1, 3 )
-BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( FindTextAll_member_overloads, FindTextAll, 5, 6 )
+BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( FindTextAll_member_overloads, FindTextAll, 4, 6 )
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( FindHexAll_member_overloads, FindHexAll, 1, 2 )
-BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( ReplaceText_member_overloads, ReplaceText, 6, 8 )
+BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( ReplaceText_member_overloads, ReplaceText, 5, 8 )
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( ReplaceHex_member_overloads, ReplaceHex, 2, 4 )
-BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( ReplaceTextAll_member_overloads, ReplaceTextAll, 6, 8 )
+BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( ReplaceTextAll_member_overloads, ReplaceTextAll, 5, 8 )
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( ReplaceHexAll_member_overloads, ReplaceHexAll, 2, 4 )
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( LoadFromFile_member_overloads, LoadFromFile, 1, 2 )
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( ToHalfWidth_member_overloads, ToHalfWidth, 0, 4 )

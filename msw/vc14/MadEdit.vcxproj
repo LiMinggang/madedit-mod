@@ -237,6 +237,7 @@
     <ClInclude Include="..\..\src\MadOptionsDialog.h" />
     <ClInclude Include="..\..\src\MadPrintout.h" />
     <ClInclude Include="..\..\src\MadPurgeHistoryDialog.h" />
+    <ClInclude Include="..\..\src\MadPython.hpp" />
     <ClInclude Include="..\..\src\MadRecentList.h" />
     <ClInclude Include="..\..\src\MadSearchReplaceDialog.h" />
     <ClInclude Include="..\..\src\MadSortDialog.h" />
