@@ -1475,12 +1475,18 @@ namespace mad_python {
 		}
 
 		bool Reload() {
-			return g_ActiveMadEdit->Reload();
+			if( g_ActiveMadEdit ) 
+				return g_ActiveMadEdit->Reload();
+			else
+				return false;
 		}
 
 		// if the file is modified by another app, reload it.
 		bool ReloadByModificationTime() {
-			return g_ActiveMadEdit->ReloadByModificationTime( false );
+			if( g_ActiveMadEdit ) 
+				return g_ActiveMadEdit->ReloadByModificationTime( false );
+			else
+				return false;
 		}
 
 		// restore pos in Reload(), ConvertEncoding()
@@ -1537,7 +1543,10 @@ namespace mad_python {
 		}
 
 		bool HasBOM() {
-			return g_ActiveMadEdit->HasBOM();
+			if( g_ActiveMadEdit ) 
+				return g_ActiveMadEdit->HasBOM();
+			else
+				return false;
 		}
 
 		void ToggleBOM() {
@@ -1551,7 +1560,10 @@ namespace mad_python {
 		}
 
 		bool HasLineComment() {
-			return g_ActiveMadEdit->HasLineComment();
+			if( g_ActiveMadEdit ) 
+				return g_ActiveMadEdit->HasLineComment();
+			else
+				return false;
 		}
 
 		void CommentUncomment( bool comment ) {
