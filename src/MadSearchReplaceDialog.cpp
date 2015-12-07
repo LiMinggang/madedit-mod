@@ -143,7 +143,7 @@ void MadSearchReplaceDialog::CreateGUIControls(void)
 	WxCheckBoxRegex	= new wxCheckBox(this, ID_WXCHECKBOXREGEX, _("Use Regular E&xpressions"), wxPoint(96, 80), wxSize(300,	22), 0,	wxDefaultValidator,	wxT("WxCheckBoxRegex"));
 	WxBoxSizer5->Add(WxCheckBoxRegex, 0, wxALIGN_LEFT |	wxEXPAND | wxALL, 2);
 	WxBoxSizer8 = new wxBoxSizer( wxHORIZONTAL );
-	WxBoxSizer5->Add( WxBoxSizer8, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
+	WxBoxSizer5->Add( WxBoxSizer8, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 0 );
 	WxBoxSizer8->Add(12,22,1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
 
 	WxCheckBoxDotMatchNewLine = new wxCheckBox(this, ID_WXCHECKBOXBOXDOTMATCHNEWLINE, _("&. Matches Newline"), wxPoint(15, 106), wxSize(300, 22), 0, wxDefaultValidator, wxT("WxCheckBoxDotMatchNewLine"));
