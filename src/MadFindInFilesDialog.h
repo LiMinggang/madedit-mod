@@ -94,6 +94,7 @@ class MadFindInFilesDialog : public wxDialog
 		wxCheckBox *WxCheckBoxRegex;
 		wxCheckBox *WxCheckBoxWholeWord;
 		wxCheckBox *WxCheckBoxCaseSensitive;
+		wxBoxSizer *WxBoxSizer9;
 		wxBoxSizer *WxBoxSizer8;
 		wxBoxSizer *WxBoxSizer7;
 		wxBoxSizer *WxBoxSizer6;

@@ -117,8 +117,11 @@ void MadFindInFilesDialog::CreateGUIControls( void )
 	WxBoxSizer8->Add( WxCheckBoxWholeWord, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	WxCheckBoxRegex = new wxCheckBox( this, ID_WXCHECKBOXREGEX, _( "Use Regular E&xpressions" ), wxPoint( 1, 49 ), wxSize( 300, 22 ), 0, wxDefaultValidator, wxT( "WxCheckBoxRegex" ) );
 	WxBoxSizer8->Add( WxCheckBoxRegex, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
+	WxBoxSizer9 = new wxBoxSizer( wxHORIZONTAL );
+	WxBoxSizer8->Add( WxBoxSizer9, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
+	WxBoxSizer9->Add(10,22,1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	WxCheckBoxDotMatchNewLine = new wxCheckBox(this, ID_WXCHECKBOXDOTMATCHNEWLINE, _("&. Matches Newline"), wxPoint( 11, 73 ), wxSize( 300, 22 ), 0, wxDefaultValidator, wxT("WxCheckBoxDotMatchNewLine"));
-	WxBoxSizer8->Add(WxCheckBoxDotMatchNewLine, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1);
+	WxBoxSizer9->Add(WxCheckBoxDotMatchNewLine, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1);
 	WxCheckBoxFindHex = new wxCheckBox( this, ID_WXCHECKBOXFINDHEX, _( "Find &Hex String (Example: BE 00 3A or BE003A)" ), wxPoint( 1, 97 ), wxSize( 300, 22 ), 0, wxDefaultValidator, wxT( "WxCheckBoxFindHex" ) );
 	WxBoxSizer8->Add( WxCheckBoxFindHex, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	WxCheckBoxListFirstOnly = new wxCheckBox( this, ID_WXCHECKBOXLISTFIRSTONLY, _( "&List the First Found Item Only" ), wxPoint( 1, 123 ), wxSize( 300, 22 ), 0, wxDefaultValidator, wxT( "WxCheckBoxListFirstOnly" ) );

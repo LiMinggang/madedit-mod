@@ -142,9 +142,12 @@ void MadSearchReplaceDialog::CreateGUIControls(void)
 
 	WxCheckBoxRegex	= new wxCheckBox(this, ID_WXCHECKBOXREGEX, _("Use Regular E&xpressions"), wxPoint(96, 80), wxSize(300,	22), 0,	wxDefaultValidator,	wxT("WxCheckBoxRegex"));
 	WxBoxSizer5->Add(WxCheckBoxRegex, 0, wxALIGN_LEFT |	wxEXPAND | wxALL, 2);
+	WxBoxSizer8 = new wxBoxSizer( wxHORIZONTAL );
+	WxBoxSizer5->Add( WxBoxSizer8, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
+	WxBoxSizer8->Add(12,22,1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
 
-	WxCheckBoxDotMatchNewLine = new wxCheckBox(this, ID_WXCHECKBOXBOXDOTMATCHNEWLINE, _("&. Matches Newline"), wxPoint(106, 106), wxSize(300, 22), 0, wxDefaultValidator, wxT("WxCheckBoxDotMatchNewLine"));
-	WxBoxSizer5->Add(WxCheckBoxDotMatchNewLine, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2);
+	WxCheckBoxDotMatchNewLine = new wxCheckBox(this, ID_WXCHECKBOXBOXDOTMATCHNEWLINE, _("&. Matches Newline"), wxPoint(15, 106), wxSize(300, 22), 0, wxDefaultValidator, wxT("WxCheckBoxDotMatchNewLine"));
+	WxBoxSizer8->Add(WxCheckBoxDotMatchNewLine, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2);
 
 	WxCheckBoxFindHex = new wxCheckBox(this, ID_WXCHECKBOXFINDHEX, _("Find &Hex String (Example: BE 00 3A or BE003A)"), wxPoint(96, 132), wxSize(300, 22), 0, wxDefaultValidator, wxT("WxCheckBoxFindHex"));
 	WxBoxSizer5->Add(WxCheckBoxFindHex, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2);

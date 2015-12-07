@@ -86,6 +86,7 @@ public:
 		wxCheckBox *WxCheckBoxWholeWord;
 		wxCheckBox *WxCheckBoxCaseSensitive;
 		wxCheckBox *WxCheckBoxMoveFocus;
+		wxBoxSizer *WxBoxSizer8;
 		wxBoxSizer *WxBoxSizer5;
 		wxBoxSizer *WxBoxSizer7;
 		wxBoxSizer *WxBoxSizer4;
