@@ -69,7 +69,7 @@ MadAboutDialog::MadAboutDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos
 	WxStaticBitmap2 = new wxStaticBitmap(this, ID_STATICBITMAP2, wxNullBitmap, wxDefaultPosition, wxSize(48,48), 0, _T("ID_STATICBITMAP2"));
 	BoxSizer3->Add(WxStaticBitmap2, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	BoxSizer2->Add(BoxSizer3, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5);
-	WxAuiNotebookAbout = new wxAuiNotebook(this, ID_WXAUINOTEBOOKABOUT, wxDefaultPosition, wxSize(440,210), wxAUI_NB_DEFAULT_STYLE);
+	WxAuiNotebookAbout = new wxAuiNotebook(this, ID_WXAUINOTEBOOKABOUT, wxDefaultPosition, wxSize(440,220), wxAUI_NB_TAB_FIXED_WIDTH|wxAUI_NB_TOP|wxNO_BORDER|wxTAB_TRAVERSAL);
 	WxPanelAbout = new wxPanel(WxAuiNotebookAbout, ID_WXPANELABOUT, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_WXPANELABOUT"));
 	WxMemoAbout = new wxTextCtrl(WxPanelAbout, ID_WXMEMOABOUT, wxEmptyString, wxDefaultPosition, wxSize(435,200), wxTE_MULTILINE|wxTE_READONLY|wxTE_AUTO_URL|wxTE_WORDWRAP|wxDOUBLE_BORDER|wxVSCROLL, wxDefaultValidator, _T("ID_WXMEMOABOUT"));
 	WxPanelCredits = new wxPanel(WxAuiNotebookAbout, ID_WXPANELCREDITS, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_WXPANELCREDITS"));

@@ -35,7 +35,8 @@
 					</object>
 					<object class="sizeritem">
 						<object class="wxAuiNotebook" name="ID_WXAUINOTEBOOKABOUT" variable="WxAuiNotebookAbout" member="yes">
-							<size>440,210</size>
+							<size>440,220</size>
+							<style>wxAUI_NB_TAB_FIXED_WIDTH|wxAUI_NB_TOP|wxNO_BORDER|wxTAB_TRAVERSAL</style>
 							<object class="AuiNotebookPage">
 								<object class="wxPanel" name="ID_WXPANELABOUT" variable="WxPanelAbout" member="yes">
 									<object class="wxTextCtrl" name="ID_WXMEMOABOUT" variable="WxMemoAbout" member="yes">
