@@ -9,109 +9,58 @@
 #ifndef _MADABOUTDIALOG_H_
 #define _MADABOUTDIALOG_H_
 
-#include <wx/wxprec.h>
-#ifdef __BORLANDC__
-        #pragma hdrstop
-#endif
-#ifndef WX_PRECOMP
-        #include <wx/wx.h>
-#endif
-
-//Do not add custom headers.
-//wx-dvcpp designer will remove them
-////Header Include Start
-#include <wx/textctrl.h>
-#include <wx/button.h>
-#include <wx/panel.h>
-#include <wx/aui/auibook.h>
-#include <wx/statbmp.h>
+//(*Headers(MadAboutDialog)
 #include <wx/sizer.h>
-////Header Include End
-
+#include <wx/textctrl.h>
+#include <wx/aui/aui.h>
+#include <wx/panel.h>
+#include <wx/statbmp.h>
+#include <wx/button.h>
 #include <wx/dialog.h>
+//*)
 
-//Compatibility for 2.4.x code
-#ifndef wxCLOSE_BOX
-#define wxCLOSE_BOX 0x1000
-#endif
-#ifndef wxFIXED_MINSIZE
-#define wxFIXED_MINSIZE 0
-#endif
-
-////Dialog Style Start
-#undef MadAboutDialog_STYLE
-#define MadAboutDialog_STYLE wxCAPTION | wxSYSTEM_MENU | wxDIALOG_NO_PARENT | wxCLOSE_BOX
-////Dialog Style End
-
-class MadAboutDialog : public wxDialog
+class MadAboutDialog: public wxDialog
 {
-public:
-    MadAboutDialog( wxWindow *parent, wxWindowID id = 1, const wxString &title = wxT("About MadEdit"),
-        const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize,
-        long style = MadAboutDialog_STYLE);
-    virtual ~MadAboutDialog();
+	public:
 
-public:
+		MadAboutDialog(wxWindow* parent,wxWindowID id=wxID_ANY,const wxPoint& pos=wxDefaultPosition,const wxSize& size=wxDefaultSize);
+		virtual ~MadAboutDialog();
 
-  //Do not add custom Control Declarations here.
-  //wx-devcpp will remove them. Try adding the custom code 
-  //after the block.
-  ////GUI Control Declaration Start
-		wxTextCtrl *WxMemoLicense;
-		wxStaticBoxSizer *WxStaticBoxSizer1;
-		wxPanel *WxPanelLicense;
-		wxTextCtrl *WxMemoCredits;
-		wxTextCtrl *WxMemoAbout;
-		wxBoxSizer *WxBoxSizer6;
-		wxBoxSizer *WxBoxSizer7;
-		wxPanel *WxPanelCredits;
-		wxPanel *WxPanelAbout;
-		wxButton *WxButtonCancel;
-		wxButton *WxButtonOK;
-		wxAuiNotebook *WxAuiNotebookAbout;
-		wxStaticBitmap *WxStaticBitmap2;
-		wxStaticBitmap *WxStaticBitmap1;
-		wxBoxSizer *WxBoxSizer5;
-		wxBoxSizer *WxBoxSizer4;
-		wxBoxSizer *WxBoxSizer3;
-		wxBoxSizer *WxBoxSizer2;
-		wxBoxSizer *WxBoxSizer1;
-  ////GUI Control Declaration End
+		//(*Declarations(MadAboutDialog)
+		wxTextCtrl* WxMemoLicense;
+		wxTextCtrl* WxMemoAbout;
+		wxPanel* WxPanelLicense;
+		wxPanel* WxPanelAbout;
+		wxPanel* WxPanelCredits;
+		wxStaticBitmap* WxStaticBitmap2;
+		wxButton* WxButtonCancel;
+		wxStaticBitmap* WxStaticBitmap1;
+		wxButton* WxButtonOK;
+		wxAuiNotebook* WxAuiNotebookAbout;
+		wxTextCtrl* WxMemoCredits;
+		//*)
 
-private:
-    DECLARE_EVENT_TABLE()
+	protected:
 
-public:
-    //Note: if you receive any error with these enums, then you need to
-    //change your old form code that are based on the #define control ids.
-    //#defines may replace a numeric value for the enums names.
-    //Try copy pasting the below block in your old Form header Files.
-		enum
-		{
-			////GUI Enum Control ID Start
-			ID_WXMEMOLICENSE = 1029,
-			ID_WXPANELLICENSE = 1027,
-			ID_WXMEMOCREDITS = 1025,
-			ID_WXMEMOABOUT = 1024,
-			ID_WXPANELCREDITS = 1018,
-			ID_WXPANELABOUT = 1014,
-			ID_WXAUINOTEBOOKABOUT = 1010,
-			ID_WXSTATICBITMAP2 = 1009,
-			ID_WXSTATICBITMAP1 = 1008,
-			////GUI Enum Control ID End
-   ID_DUMMY_VALUE_ //Dont Delete this DummyValue
-   }; //End of Enum
+		//(*Identifiers(MadAboutDialog)
+		static const long ID_STATICBITMAP1;
+		static const long ID_STATICBITMAP2;
+		static const long ID_WXMEMOABOUT;
+		static const long ID_WXPANELABOUT;
+		static const long ID_WXMEMOCREDITS;
+		static const long ID_WXPANELCREDITS;
+		static const long ID_TEXTCTRL1;
+		static const long ID_WXMEMOLICENSE;
+		static const long ID_WXAUINOTEBOOKABOUT;
+		//*)
 
-public:
-    void MadAboutDialogClose(wxCloseEvent& event);
-    void CreateGUIControls(void);
+	private:
 
+		//(*Handlers(MadAboutDialog)
+		void MadAboutDialogClose(wxCloseEvent& event);
+		//*)
+
+		DECLARE_EVENT_TABLE()
 };
 
-
 #endif
- 
- 
- 
- 

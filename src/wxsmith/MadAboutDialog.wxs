@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<wxsmith>
+	<object class="wxDialog" name="MadAboutDialog">
+		<title>About MadEdit-Mod</title>
+		<centered>1</centered>
+		<pos_arg>1</pos_arg>
+		<size_arg>1</size_arg>
+		<handler function="MadAboutDialogClose" entry="EVT_CLOSE" />
+		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
+			<orient>wxVERTICAL</orient>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
+					<object class="sizeritem">
+						<object class="wxBoxSizer" variable="BoxSizer3" member="no">
+							<orient>wxVERTICAL</orient>
+							<object class="sizeritem">
+								<object class="wxStaticBitmap" name="ID_STATICBITMAP1" variable="WxStaticBitmap1" member="yes">
+									<size>48,48</size>
+									<style>0</style>
+								</object>
+								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+								<border>5</border>
+							</object>
+							<object class="sizeritem">
+								<object class="wxStaticBitmap" name="ID_STATICBITMAP2" variable="WxStaticBitmap2" member="yes">
+									<size>48,48</size>
+									<style>0</style>
+								</object>
+								<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+								<border>5</border>
+							</object>
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxAuiNotebook" name="ID_WXAUINOTEBOOKABOUT" variable="WxAuiNotebookAbout" member="yes">
+							<size>440,210</size>
+							<object class="AuiNotebookPage">
+								<object class="wxPanel" name="ID_WXPANELABOUT" variable="WxPanelAbout" member="yes">
+									<object class="wxTextCtrl" name="ID_WXMEMOABOUT" variable="WxMemoAbout" member="yes">
+										<size>435,200</size>
+										<style>wxTE_MULTILINE|wxTE_READONLY|wxTE_AUTO_URL|wxTE_WORDWRAP|wxDOUBLE_BORDER|wxVSCROLL</style>
+									</object>
+								</object>
+								<label>About</label>
+								<selected>1</selected>
+							</object>
+							<object class="AuiNotebookPage">
+								<object class="wxPanel" name="ID_WXPANELCREDITS" variable="WxPanelCredits" member="yes">
+									<object class="wxTextCtrl" name="ID_WXMEMOCREDITS" variable="WxMemoCredits" member="yes">
+										<size>435,200</size>
+										<style>wxTE_MULTILINE|wxTE_READONLY|wxTE_AUTO_URL|wxTE_WORDWRAP|wxDOUBLE_BORDER|wxVSCROLL</style>
+									</object>
+								</object>
+								<label>Credits</label>
+							</object>
+							<object class="AuiNotebookPage">
+								<object class="wxPanel" name="ID_WXMEMOLICENSE" variable="WxPanelLicense" member="yes">
+									<object class="wxStaticBoxSizer" variable="StaticBoxSizer1" member="no">
+										<label>GNU General Public License</label>
+										<object class="sizeritem">
+											<object class="wxTextCtrl" name="ID_TEXTCTRL1" variable="WxMemoLicense" member="yes">
+												<size>435,200</size>
+												<style>wxTE_MULTILINE|wxTE_READONLY|wxTE_AUTO_URL|wxTE_WORDWRAP|wxVSCROLL</style>
+											</object>
+											<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+											<border>5</border>
+										</object>
+									</object>
+								</object>
+								<label>License</label>
+							</object>
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+					</object>
+				</object>
+				<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+				<border>5</border>
+			</object>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer4" member="no">
+					<object class="sizeritem">
+						<object class="wxButton" name="wxID_OK" variable="WxButtonOK" member="yes">
+							<label>&amp;OK</label>
+							<default>1</default>
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxButton" name="wxID_CANCEL" variable="WxButtonCancel" member="yes">
+							<label>&amp;Cancel</label>
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+					</object>
+				</object>
+				<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+				<border>5</border>
+			</object>
+		</object>
+	</object>
+</wxsmith>
