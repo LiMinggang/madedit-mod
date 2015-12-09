@@ -137,7 +137,7 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID id,const 
 	WxCheckBoxDotMatchNewLine = new wxCheckBox(this, ID_CHECKBOXDOTMATCHNEWLINE, _("&. Matches Newline"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXDOTMATCHNEWLINE"));
 	WxCheckBoxDotMatchNewLine->SetValue(false);
 	BoxSizer9->Add(WxCheckBoxDotMatchNewLine, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	BoxSizer8->Add(BoxSizer9, 0, wxALL|wxALIGN_LEFT, 5);
+	BoxSizer8->Add(BoxSizer9, 0, wxALL|wxALIGN_LEFT, 0);
 	WxCheckBoxFindHex = new wxCheckBox(this, ID_WXCHECKBOXFINDHEX, _("Find &Hex String (Example: BE 00 3A or BE003A)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXFINDHEX"));
 	WxCheckBoxFindHex->SetValue(false);
 	BoxSizer8->Add(WxCheckBoxFindHex, 0, wxALL|wxALIGN_LEFT, 2);
