@@ -106,44 +106,39 @@ public:
 	//change your old form code	that are based on the #define control ids.
 	//#defines may replace a numeric value for the enums names.
 	//Try copy pasting the below block in your old Form	header Files.
-	enum {
-////GUI	Enum Control ID	Start
-			ID_WXCHECKBOXBOXDOTMATCHNEWLINE = 59,
-			ID_WXBUTTONCLOSE = 57,
-			ID_WXBUTTONREPLACEALLINALL = 56,
-			ID_WXBUTTONREPLACEALL =	55,
-			ID_WXBUTTONREPLACE = 54,
-			ID_WXBUTTONREPLACEEXPAND = 41,
-			ID_WXBUTTONCOUNT = 40,
-			ID_WXBUTTONFINDALLINALL	= 36,
-			ID_WXBUTTONFINDALL = 24,
-			ID_WXBUTTONFINDPREV	= 11,
-			ID_WXBUTTONFINDNEXT	= 10,
-			ID_WXSLIDERTRANSDEGREE = 48,
-			ID_WXRADIOALWAYS = 47,
-			ID_WXRADIOLOSINGFOCUS =	46,
-			ID_WXCHECKBOXPURGEBOOKMARK = 35,
-			ID_WXCHECKBOXBOOKMARKONLY =	34,
-			ID_WXCHECKBOXBOOKMARKLINE =	32,
-			ID_WXCHECKBOXSEARCHINSELECTION = 26,
-			ID_WXCHECKBOXSEARCHTHRENDOFFILE	= 25,
-			ID_WXCHECKBOXFINDHEX = 9,
-			ID_WXCHECKBOXREGEX = 8,
-			ID_WXCHECKBOXWHOLEWORD = 7,
-			ID_WXCHECKBOXCASESENSITIVE = 6,
-			ID_WXCHECKBOXMOVEFOCUS = 16,
-////GUI	Enum Control ID	End
-			ID_MADEDIT1	= 1400,
-			ID_MADEDIT2	= 1401,
-			ID_WXBITMAPBUTTONRECENTFINDTEXT=1402,
-			ID_WXBITMAPBUTTONRECENTREPLACETEXT=1403,
+	static const long ID_WXCHECKBOXBOXDOTMATCHNEWLINE;
+	static const long ID_WXBUTTONCLOSE;
+	static const long ID_WXBUTTONREPLACEALLINALL;
+	static const long ID_WXBUTTONREPLACEALL;
+	static const long ID_WXBUTTONREPLACE;
+	static const long ID_WXBUTTONREPLACEEXPAND;
+	static const long ID_WXBUTTONCOUNT;
+	static const long ID_WXBUTTONFINDALLINALL;
+	static const long ID_WXBUTTONFINDALL;
+	static const long ID_WXBUTTONFINDPREV;
+	static const long ID_WXBUTTONFINDNEXT;
+	static const long ID_WXSLIDERTRANSDEGREE;
+	static const long ID_WXRADIOALWAYS;
+	static const long ID_WXRADIOLOSINGFOCUS;
+	static const long ID_WXCHECKBOXPURGEBOOKMARK;
+	static const long ID_WXCHECKBOXBOOKMARKONLY;
+	static const long ID_WXCHECKBOXBOOKMARKLINE;
+	static const long ID_WXCHECKBOXSEARCHINSELECTION;
+	static const long ID_WXCHECKBOXSEARCHTHRENDOFFILE;
+	static const long ID_WXCHECKBOXFINDHEX;
+	static const long ID_WXCHECKBOXREGEX;
+	static const long ID_WXCHECKBOXWHOLEWORD;
+	static const long ID_WXCHECKBOXCASESENSITIVE;
+	static const long ID_WXCHECKBOXMOVEFOCUS;
+	static const long ID_MADEDIT1;
+	static const long ID_MADEDIT2;
+	static const long ID_WXBITMAPBUTTONRECENTFINDTEXT;
+	static const long ID_WXBITMAPBUTTONRECENTREPLACETEXT;
 
-			ID_RECENTFINDTEXT1=1501,	// must	be the same	with MadSearchDialog
-			ID_RECENTFINDTEXT20=1520,
-			ID_RECENTREPLACETEXT1=ID_RECENTFINDTEXT20+1,
-			ID_RECENTREPLACETEXT20=ID_RECENTREPLACETEXT1+19,
-   ID_DUMMY_VALUE_ //Dont Delete this DummyValue
-   }; //End	of Enum
+	static const long ID_RECENTFINDTEXT1;	// must be the same with MadSearchDialog
+	static const long ID_RECENTFINDTEXT20;
+	static const long ID_RECENTREPLACETEXT1;
+	static const long ID_RECENTREPLACETEXT20;
 
 public:
 	void MadSearchReplaceDialogClose(wxCloseEvent& event);

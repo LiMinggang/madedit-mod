@@ -229,3 +229,22 @@ wxString GetExecutablePath()
 	return path;
 }
 
+
+static long MadNewIDRange(long begin, size_t count)
+{
+	for (size_t i = 1; i<count; ++i)
+		wxRegisterId(begin + i);
+	return begin + count - 1;
+}
+
+MadUniqueIDReserver::MadUniqueIDReserver()
+	: fid1(-1), fid20(-1) , rid1(-1), rid20(-1)
+{
+	fid1 = wxNewId();
+	fid20 = MadNewIDRange(fid1, 20);
+
+	rid1 = wxNewId();
+	rid20 = MadNewIDRange(rid1, 20);
+}
+
+

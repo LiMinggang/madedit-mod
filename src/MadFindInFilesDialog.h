@@ -9,172 +9,142 @@
 #ifndef _MADFINDINFILESDIALOG_H_
 #define _MADFINDINFILESDIALOG_H_
 
-#ifdef __BORLANDC__
-	#pragma hdrstop
+#ifdef _MSC_VER
+# pragma warning( push )
+# pragma warning( disable : 4996 )
 #endif
-
-#ifndef WX_PRECOMP
-	#include <wx/wx.h>
-	#include <wx/dialog.h>
-#else
-	#include <wx/wxprec.h>
-#endif
-
-//Do not add custom headers
-//wxDev-C++ designer will remove them
-////Header Include Start
-#include <wx/stattext.h>
-#include <wx/combobox.h>
-#include <wx/radiobut.h>
-#include <wx/statline.h>
-#include <wx/button.h>
-#include <wx/checkbox.h>
+// disable 4996 {
+//(*Headers(MadFindInFilesDialog)
 #include <wx/sizer.h>
-////Header Include End
+#include <wx/stattext.h>
+#include <wx/checkbox.h>
+#include <wx/statline.h>
+#include <wx/radiobut.h>
+#include <wx/button.h>
+#include <wx/dialog.h>
+#include <wx/combobox.h>
+//*)
+// disable 4996 }
+#ifdef _MSC_VER
+# pragma warning( pop )
+#endif
 
-#include <wx/docview.h>
 #include <wx/fileconf.h>
+#include <wx/bmpbuttn.h>
 
-//Compatibility for 2.4 code
-#ifndef wxCLOSE_BOX
-	#define wxCLOSE_BOX 0x1000
-#endif
-#ifndef wxFIXED_MINSIZE
-	#define wxFIXED_MINSIZE 0
-#endif
-
-////Dialog Style Start
-#undef MadFindInFilesDialog_STYLE
-#define MadFindInFilesDialog_STYLE wxCAPTION | wxSYSTEM_MENU | wxCLOSE_BOX
-////Dialog Style End
 
 class MadEdit;
 class MadRecentList;
 
-class MadFindInFilesDialog : public wxDialog
+class MadFindInFilesDialog: public wxDialog
 {
-	private:
-		DECLARE_EVENT_TABLE();
-		
 	public:
-		MadFindInFilesDialog(wxWindow *parent, wxWindowID id = 1, const wxString &title = _("Find/Replace in Files"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = MadFindInFilesDialog_STYLE);
-		virtual ~MadFindInFilesDialog();
-	
-	public:
-		//Do not add custom control declarations
-		//wxDev-C++ will remove them. Add custom code after the block.
-		////GUI Control Declaration Start
-		wxCheckBox *WxCheckBoxDotMatchNewLine;
-		wxCheckBox *WxCheckBoxSubDir;
-		wxComboBox *WxComboBoxEncoding;
-		wxStaticText *WxStaticText3;
-		wxStaticText *WxStaticText7;
-		wxStaticText *WxStaticText6;
-		wxComboBox *WxComboBoxExclude;
-		wxStaticText *WxStaticText4;
-		wxStaticText *WxStaticText5;
-		wxStaticText *WxStaticText2;
-		wxComboBox *WxComboBoxFilter;
-		wxStaticText *WxStaticText1;
-		wxButton *WxButtonActiveDir;
-		wxButton *WxButtonDir;
-		wxComboBox *WxComboBoxDir;
-		wxRadioButton *WxRadioButtonDir;
-		wxFlexGridSizer *WxFlexGridSizer1;
-		wxRadioButton *WxRadioButtonOpenedFiles;
-		wxBoxSizer *WxBoxSizer3;
-		wxStaticLine *WxStaticLine1;
-		wxButton *WxButtonClose;
-		wxCheckBox *WxCheckBoxEnableReplace;
-		wxButton *WxButtonReplace;
-		wxButton *WxButtonFind;
-		wxBoxSizer *WxBoxSizer5;
-		wxCheckBox *WxCheckBoxListFirstOnly;
-		wxCheckBox *WxCheckBoxFindHex;
-		wxCheckBox *WxCheckBoxRegex;
-		wxCheckBox *WxCheckBoxWholeWord;
-		wxCheckBox *WxCheckBoxCaseSensitive;
-		wxBoxSizer *WxBoxSizer9;
-		wxBoxSizer *WxBoxSizer8;
-		wxBoxSizer *WxBoxSizer7;
-		wxBoxSizer *WxBoxSizer6;
-		wxBoxSizer *WxBoxSizer4;
-		wxBoxSizer *WxBoxSizer2;
-		wxBoxSizer *WxBoxSizer1;
-		////GUI Control Declaration End
-		
-	public:
-		//Note: if you receive any error with these enum IDs, then you need to
-		//change your old form code that are based on the #define control IDs.
-		//#defines may replace a numeric value for the enum names.
-		//Try copy and pasting the below block in your old form header files.
-		enum
-		{
-			////GUI Enum Control ID Start
-			ID_WXCHECKBOXDOTMATCHNEWLINE = 1052,
-			ID_WXCHECKBOXSUBDIR = 1038,
-			ID_WXCOMBOBOXENCODING = 1042,
-			ID_WXSTATICTEXT3 = 1041,
-			ID_WXSTATICTEXT7 = 1049,
-			ID_WXSTATICTEXT6 = 1048,
-			ID_WXCOMBOBOXEXCLUDE = 1050,
-			ID_WXSTATICTEXT4 = 1046,
-			ID_WXSTATICTEXT5 = 1047,
-			ID_WXSTATICTEXT2 = 1040,
-			ID_WXCOMBOBOXFILTER = 1037,
-			ID_WXSTATICTEXT1 = 1036,
-			ID_WXBUTTONACTIVEDIR = 1045,
-			ID_WXBUTTONDIR = 1035,
-			ID_WXCOMBOBOXDIR = 1034,
-			ID_WXRADIOBUTTONDIR = 1033,
-			ID_WXRADIOBUTTONOPENEDFILES = 1031,
-			ID_WXSTATICLINE1 = 1029,
-			ID_WXCHECKBOXENABLEREPLACE = 1044,
-			ID_WXBUTTONREPLACE = 1023,
-			ID_WXBUTTONFIND = 1022,
-			ID_WXCHECKBOXLISTFIRSTONLY = 1043,
-			ID_WXCHECKBOXFINDHEX = 1018,
-			ID_WXCHECKBOXREGEX = 1017,
-			ID_WXCHECKBOXWHOLEWORD = 1016,
-			ID_WXCHECKBOXCASESENSITIVE = 1015,
-			////GUI Enum Control ID End
-			ID_MADEDIT1 = 1400,
-			ID_MADEDIT2 = 1401,
-			ID_WXBITMAPBUTTONRECENTFINDTEXT=1402,
-			ID_WXBITMAPBUTTONRECENTREPLACETEXT=1403,
-			ID_RECENTFINDTEXT1=1501,    // must be the same with MadSearchDialog
-			ID_RECENTFINDTEXT20=1520,
-			ID_RECENTREPLACETEXT1=ID_RECENTFINDTEXT20+1,
-			ID_RECENTREPLACETEXT20=ID_RECENTREPLACETEXT1+19,
 
-			ID_DUMMY_VALUE_ //don't remove this value unless you have other enum values
-		}; //End of Enum
-	
+		MadFindInFilesDialog(wxWindow* parent,wxWindowID id=wxID_ANY,const wxPoint& pos=wxDefaultPosition,const wxSize& size=wxDefaultSize);
+		virtual ~MadFindInFilesDialog();
+
+		//(*Declarations(MadFindInFilesDialog)
+		wxButton* WxButtonReplace;
+		wxRadioButton* WxRadioButtonOpenedFiles;
+		wxComboBox* WxComboBoxExclude;
+		wxComboBox* WxComboBoxFilter;
+		wxStaticText* StaticText2;
+		wxButton* WxButtonFind;
+		wxStaticText* StaticText6;
+		wxCheckBox* WxCheckBoxCaseSensitive;
+		wxCheckBox* WxCheckBoxEnableReplace;
+		wxStaticText* StaticText1;
+		wxStaticText* StaticText3;
+		wxButton* WxButtonClose;
+		wxRadioButton* WxRadioButtonDir;
+		wxButton* WxButtonActiveDir;
+		wxButton* WxButtonDir;
+		wxComboBox* WxComboBoxDir;
+		wxComboBox* WxComboBoxEncoding;
+		wxStaticText* StaticText5;
+		wxStaticText* StaticText7;
+		wxCheckBox* WxCheckBoxListFirstOnly;
+		wxCheckBox* WxCheckBoxFindHex;
+		wxStaticLine* StaticLine1;
+		wxCheckBox* WxCheckBoxWholeWord;
+		wxCheckBox* WxCheckBoxSubDir;
+		wxCheckBox* WxCheckBoxRegex;
+		wxStaticText* StaticText4;
+		wxCheckBox* WxCheckBoxDotMatchNewLine;
+		//*)
+
+	protected:
+
+		//(*Identifiers(MadFindInFilesDialog)
+		static const long ID_WXCHECKBOXCASESENSITIVE;
+		static const long ID_WXCHECKBOXWHOLEWORD;
+		static const long ID_WXCHECKBOXREGEX;
+		static const long ID_CHECKBOXDOTMATCHNEWLINE;
+		static const long ID_WXCHECKBOXFINDHEX;
+		static const long ID_WXCHECKBOXLISTFIRSTONLY;
+		static const long ID_WXBUTTONFIND;
+		static const long ID_WXBUTTONREPLACE;
+		static const long ID_WXCHECKBOXENABLEREPLACE;
+		static const long ID_STATICLINE1;
+		static const long ID_WXRADIOBUTTONOPENEDFILES;
+		static const long ID_WXRADIOBUTTONDIR;
+		static const long ID_COMBOBOX1;
+		static const long ID_WXBUTTONDIR;
+		static const long ID_WXBUTTONACTIVEDIR;
+		static const long ID_STATICTEXT1;
+		static const long ID_WXCOMBOBOXFILTER;
+		static const long ID_STATICTEXT2;
+		static const long ID_STATICTEXT3;
+		static const long ID_STATICTEXT4;
+		static const long ID_WXCOMBOBOXEXCLUDE;
+		static const long ID_STATICTEXT5;
+		static const long ID_STATICTEXT6;
+		static const long ID_STATICTEXT7;
+		static const long ID_WXCOMBOBOXENCODING;
+		static const long ID_WXCHECKBOXSUBDIR;
+		//*)
+
+		static const long ID_MADEDIT1;
+		static const long ID_MADEDIT2;
+		static const long ID_WXBITMAPBUTTONRECENTFINDTEXT;
+		static const long ID_WXBITMAPBUTTONRECENTREPLACETEXT;
+		static const long ID_RECENTFINDTEXT1;    // must be the same with MadSearchDialog
+		static const long ID_RECENTFINDTEXT20;
+		static const long ID_RECENTREPLACETEXT1;
+		static const long ID_RECENTREPLACETEXT20;
+
 	public:
 		MadEdit *m_FindText, *m_ReplaceText;
 		wxBitmapButton *WxBitmapButtonRecentFindText, *WxBitmapButtonRecentReplaceText;
 		MadRecentList *m_RecentFindDir;
 		MadRecentList *m_RecentFindFilter, *m_RecentFindExclude;
 		void UpdateCheckBoxByCBHex(bool check);
+		void FindReplaceInFiles(bool bReplace);//false: find; true: replace
+	//private:
+	public:
+		//(*Handlers(MadFindInFilesDialog)
+		void MadFindInFilesDialogClose(wxCloseEvent& event);
+		void WxCheckBoxFindHexClick(wxCommandEvent& event);
+		void WxButtonFindClick(wxCommandEvent& event);
+		void WxButtonReplaceClick(wxCommandEvent& event);
+		void WxCheckBoxEnableReplaceClick(wxCommandEvent& event);
+		void WxButtonDirClick(wxCommandEvent& event);
+		void WxButtonActiveDirClick(wxCommandEvent& event);
+		void WxCheckBoxRegexClick(wxCommandEvent& event);
+		//*)
+
+		void MadFindInFilesDialogActivate(wxActivateEvent& event);
+
 		void WxBitmapButtonRecentFindTextClick(wxCommandEvent& event);
 		void WxBitmapButtonRecentReplaceTextClick(wxCommandEvent& event);
 		void OnRecentFindText(wxCommandEvent& event);
 		void OnRecentReplaceText(wxCommandEvent& event);
-		void FindReplaceInFiles(bool bReplace);//false: find; true: replace
-	public:
-		void MadFindInFilesDialogClose(wxCloseEvent& event);
-		void CreateGUIControls(void);
-		void WxCheckBoxFindHexClick(wxCommandEvent& event);
-		void WxButtonFindClick(wxCommandEvent& event);
-		void WxButtonReplaceClick(wxCommandEvent& event);
-		void WxButtonDirClick(wxCommandEvent& event);
-		void MadFindInFilesDialogActivate(wxActivateEvent& event);
-		void WxCheckBoxEnableReplaceClick(wxCommandEvent& event);
-		void WxButtonActiveDirClick(wxCommandEvent& event);
+
 		void PurgeRecentFindDirs();
 		void PurgeRecentFindFilters();
 		void PurgeRecentFindExcludes();
-		void WxCheckBoxRegexClick(wxCommandEvent& event);
+
+		DECLARE_EVENT_TABLE()
 };
 
 extern MadFindInFilesDialog *g_FindInFilesDialog;

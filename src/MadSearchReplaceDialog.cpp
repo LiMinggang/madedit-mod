@@ -14,6 +14,7 @@
 #include "MadEditFrame.h"
 #include "MadSearchReplaceDialog.h"
 #include "MadRecentList.h"
+#include "MadUtils.h"
 
 #include "MadEdit/MadEdit.h"
 //Do not add custom	headers.
@@ -42,6 +43,40 @@ bool OnSearchProgressUpdate(int	value, const wxString &newmsg=wxEmptyString, boo
 		return true;
 	return g_SearchProgressDialog->Update(value, newmsg, skip);
 }
+
+const long MadSearchReplaceDialog::ID_WXCHECKBOXBOXDOTMATCHNEWLINE = wxNewId();
+const long MadSearchReplaceDialog::ID_WXBUTTONCLOSE = wxNewId();
+const long MadSearchReplaceDialog::ID_WXBUTTONREPLACEALLINALL = wxNewId();
+const long MadSearchReplaceDialog::ID_WXBUTTONREPLACEALL = wxNewId();
+const long MadSearchReplaceDialog::ID_WXBUTTONREPLACE = wxNewId();
+const long MadSearchReplaceDialog::ID_WXBUTTONREPLACEEXPAND = wxNewId();
+const long MadSearchReplaceDialog::ID_WXBUTTONCOUNT = wxNewId();
+const long MadSearchReplaceDialog::ID_WXBUTTONFINDALLINALL = wxNewId();
+const long MadSearchReplaceDialog::ID_WXBUTTONFINDALL = wxNewId();
+const long MadSearchReplaceDialog::ID_WXBUTTONFINDPREV = wxNewId();
+const long MadSearchReplaceDialog::ID_WXBUTTONFINDNEXT = wxNewId();
+const long MadSearchReplaceDialog::ID_WXSLIDERTRANSDEGREE = wxNewId();
+const long MadSearchReplaceDialog::ID_WXRADIOALWAYS = wxNewId();
+const long MadSearchReplaceDialog::ID_WXRADIOLOSINGFOCUS = wxNewId();
+const long MadSearchReplaceDialog::ID_WXCHECKBOXPURGEBOOKMARK = wxNewId();
+const long MadSearchReplaceDialog::ID_WXCHECKBOXBOOKMARKONLY = wxNewId();
+const long MadSearchReplaceDialog::ID_WXCHECKBOXBOOKMARKLINE = wxNewId();
+const long MadSearchReplaceDialog::ID_WXCHECKBOXSEARCHINSELECTION = wxNewId();
+const long MadSearchReplaceDialog::ID_WXCHECKBOXSEARCHTHRENDOFFILE = wxNewId();
+const long MadSearchReplaceDialog::ID_WXCHECKBOXFINDHEX = wxNewId();
+const long MadSearchReplaceDialog::ID_WXCHECKBOXREGEX = wxNewId();
+const long MadSearchReplaceDialog::ID_WXCHECKBOXWHOLEWORD = wxNewId();
+const long MadSearchReplaceDialog::ID_WXCHECKBOXCASESENSITIVE = wxNewId();
+const long MadSearchReplaceDialog::ID_WXCHECKBOXMOVEFOCUS = wxNewId();
+const long MadSearchReplaceDialog::ID_MADEDIT1 = wxNewId();
+const long MadSearchReplaceDialog::ID_MADEDIT2 = wxNewId();
+const long MadSearchReplaceDialog::ID_WXBITMAPBUTTONRECENTFINDTEXT = wxNewId();
+const long MadSearchReplaceDialog::ID_WXBITMAPBUTTONRECENTREPLACETEXT = wxNewId();
+
+const long MadSearchReplaceDialog::ID_RECENTFINDTEXT1 = MadUniqueIDReserver::Instance().RecentFindTextID1();    // must be the same with MadSearchDialog
+const long MadSearchReplaceDialog::ID_RECENTFINDTEXT20 = MadUniqueIDReserver::Instance().RecentFindTextID20();
+const long MadSearchReplaceDialog::ID_RECENTREPLACETEXT1 = MadUniqueIDReserver::Instance().RecentReplaceTextID1();
+const long MadSearchReplaceDialog::ID_RECENTREPLACETEXT20 = MadUniqueIDReserver::Instance().RecentReplaceTextID20();
 
 //----------------------------------------------------------------------------
 // MadSearchReplaceDialog

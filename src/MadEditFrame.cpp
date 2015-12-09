@@ -219,6 +219,9 @@ extern wxString g_MadEdit_URL;
 extern wxString g_MadEditMod_URL;
 extern wxString MadEncodingGrpName[];
 
+const long MadEditFrame::ID_RECENTFINDTEXT1 = MadUniqueIDReserver::Instance().RecentFindTextID1();    // must be the same with MadSearchDialog
+const long MadEditFrame::ID_RECENTFINDTEXT20 = MadUniqueIDReserver::Instance().RecentFindTextID20();
+
 EmbeddedPython *g_EmbeddedPython = 0;
 MadRecentList  *g_RecentFindText = NULL;
 extern wxString g_MadEditAppDir, g_MadEditHomeDir;
@@ -2140,7 +2143,6 @@ void LoadDefaultSettings( wxConfigBase *madConfig )
 	madConfig->SetPath( wxT( "/FileCaretPos" ) );
 	g_FileCaretPosManager.Load( madConfig );
 }
-
 
 MadEditFrame::MadEditFrame( wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style )
 	: wxFrame( parent, id, title, position, size, style )
