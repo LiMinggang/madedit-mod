@@ -732,8 +732,12 @@ void ScanForLocales()
 {
 	g_LanguageString.Empty();
 	g_LocaleDirPrefix.Empty();
+	// System Default
 	g_LanguageString.Add(g_LanguageStr[0]);
 	g_LanguageId.Add(g_LanguageValue[0]);
+	// English
+	g_LanguageString.Add(g_LanguageStr[3]);
+	g_LanguageId.Add(g_LanguageValue[3]);
 	std::map<long, wxString> languageIdNameMap;
 	MadTranslationHelper langScaner(g_MadLanguageFileName, languageIdNameMap);
 

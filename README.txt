@@ -124,7 +124,7 @@ Fix: Match whole words should be gray out if Regular expression was enabled(Sear
 Fix: Match whole word and dot match newline should be overridden according to Search RegEx #101
 Fix: Extra '\' was added to recorded MadPython while searching with RegEx #102
 Fix: Caret pos should be at the last while opening the Macro dialog #94 #104
-Fix: File extension sorted in File association dialog
+Fix: English was missing in the language list #105
 Improve performance of script recording
 Update translations
 
