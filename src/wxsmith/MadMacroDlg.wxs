@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<wxsmith>
+	<object class="wxDialog" name="MadMacroDlg">
+		<title>MadEdit Macro</title>
+		<pos_arg>1</pos_arg>
+		<size_arg>1</size_arg>
+		<style>wxCAPTION|wxSYSTEM_MENU|wxRESIZE_BORDER|wxCLOSE_BOX</style>
+		<handler function="MadMacroDlgClose" entry="EVT_CLOSE" />
+		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
+			<orient>wxVERTICAL</orient>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
+					<object class="sizeritem">
+						<object class="wxTextCtrl" name="ID_MADEDIT" variable="m_Pymacro" member="yes">
+							<value>Text</value>
+							<size>640,240</size>
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<option>1</option>
+			</object>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer3" member="no">
+					<object class="sizeritem">
+						<object class="wxButton" name="wxID_OK" variable="WxButtonRun" member="yes">
+							<label>&amp;Run</label>
+							<default>1</default>
+							<handler function="OnWxButtonRunClick" entry="EVT_BUTTON" />
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxButton" name="wxID_CANCEL" variable="WxButtonClose" member="yes">
+							<label>&amp;Close</label>
+							<handler function="OnWxButtonCloseClick" entry="EVT_BUTTON" />
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxButton" name="ID_WXBUTTONTOGGLERESULT" variable="WxButtonResult" member="yes">
+							<label>Results &gt;&gt;</label>
+							<handler function="OnWxButtonResultClick" entry="EVT_BUTTON" />
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>5</border>
+					</object>
+				</object>
+				<flag>wxALL|wxALIGN_CENTER_HORIZONTAL</flag>
+				<border>5</border>
+			</object>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer4" member="no">
+					<object class="sizeritem">
+						<object class="wxTextCtrl" name="ID_TEXTCTRLRESULT" variable="WxMemoOutput" member="yes">
+							<size>640,240</size>
+							<style>wxTE_MULTILINE|wxTE_READONLY|wxTE_WORDWRAP|wxDOUBLE_BORDER|wxVSCROLL</style>
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<option>1</option>
+			</object>
+		</object>
+	</object>
+</wxsmith>
