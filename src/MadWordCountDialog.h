@@ -9,103 +9,77 @@
 #ifndef	_MADWORDCOUNTDIALOG_H_
 #define	_MADWORDCOUNTDIALOG_H_
 
-#ifdef __BORLANDC__
-	#pragma	hdrstop
+#ifdef _MSC_VER
+# pragma warning( push )
+# pragma warning( disable : 4996 )
 #endif
-
-#ifndef	WX_PRECOMP
-	#include <wx/wx.h>
-	#include <wx/dialog.h>
-#else
-	#include <wx/wxprec.h>
-#endif
-
-//Do not add custom	headers
-//wxDev-C++	designer will remove them
-////Header Include Start
-#include <wx/button.h>
+// disable 4996 {
+//(*Headers(WXMWordCountDialog)
+#include <wx/sizer.h>
+#include <wx/stattext.h>
 #include <wx/textctrl.h>
 #include <wx/statline.h>
-#include <wx/stattext.h>
-#include <wx/sizer.h>
-////Header Include End
-
-//Compatibility	for	2.4	code
-#ifndef	wxCLOSE_BOX
-	#define	wxCLOSE_BOX	0x1000
-#endif
-#ifndef	wxFIXED_MINSIZE
-	#define	wxFIXED_MINSIZE	0
+#include <wx/button.h>
+#include <wx/dialog.h>
+//*)
+// disable 4996 }
+#ifdef _MSC_VER
+# pragma warning( pop )
 #endif
 
-////Dialog Style Start
-#undef MadWordCountDialog_STYLE
-#define	MadWordCountDialog_STYLE wxCAPTION | wxSYSTEM_MENU | wxDIALOG_NO_PARENT	| wxCLOSE_BOX
-////Dialog Style End
-
-class MadWordCountDialog : public wxDialog
+class MadWordCountDialog: public wxDialog
 {
+	public:
+
+		MadWordCountDialog(wxWindow* parent,wxWindowID id=wxID_ANY,const wxPoint& pos=wxDefaultPosition,const wxSize& size=wxDefaultSize);
+		virtual ~MadWordCountDialog();
+
+		//(*Declarations(MadWordCountDialog)
+		wxStaticText* WxStaticText2;
+		wxStaticText* WxStaticText1;
+		wxButton* Button1;
+		wxStaticText* WxStaticText4;
+		wxStaticText* WxStaticTextWordCount;
+		wxStaticText* WxStaticTextLineCount;
+		wxStaticText* WxStaticText3;
+		wxStaticText* WxStaticTextCharCount;
+		wxStaticText* WxStaticTextFullwidthCount;
+		wxStaticText* StaticText7;
+		wxStaticLine* StaticLine1;
+		wxTextCtrl* WxMemo1;
+		wxStaticText* WxStaticTextSpaceCount;
+		wxStaticText* WxStaticTextHalfwidthCount;
+		wxStaticText* WxStaticText5;
+		wxStaticText* WxStaticText7;
+		//*)
+
+	protected:
+
+		//(*Identifiers(MadWordCountDialog)
+		static const long ID_WXSTATICTEXT7;
+		static const long ID_WXSTATICTEXTLINECOUNT;
+		static const long ID_WXSTATICTEXT1;
+		static const long ID_WXSTATICTEXTWORDCOUNT;
+		static const long ID_WXSTATICTEXT2;
+		static const long ID_WXSTATICTEXTCHARCOUNT;
+		static const long ID_WXSTATICTEXT3;
+		static const long ID_WXSTATICTEXTSPACECOUNT;
+		static const long ID_WXSTATICTEXT4;
+		static const long ID_WXSTATICTEXTHALFWIDTHCOUNT;
+		static const long ID_WXSTATICTEXT5;
+		static const long ID_WXSTATICTEXTFULLWIDTHCOUNT;
+		static const long ID_STATICLINE1;
+		static const long ID_STATICTEXT7;
+		static const long ID_WXMEMO1;
+		//*)
+
 	private:
-		DECLARE_EVENT_TABLE();
-		
-	public:
-		MadWordCountDialog(wxWindow	*parent, wxWindowID	id = 1,	const wxString &title =	wxT("Word Count"), const wxPoint& pos = wxDefaultPosition, const	wxSize&	size = wxDefaultSize, long style = MadWordCountDialog_STYLE);
-		virtual	~MadWordCountDialog();
-	
-	public:
-		//Do not add custom	control	declarations
-		//wxDev-C++	will remove	them. Add custom code after	the	block.
-		////GUI	Control	Declaration	Start
-		wxButton *WxButton1;
-		wxTextCtrl *WxMemo1;
-		wxStaticText *WxStaticText6;
-		wxStaticLine *WxStaticLine1;
-		wxStaticText *WxStaticTextLineCount;
-		wxStaticText *WxStaticText7;
-		wxStaticText *WxStaticTextFullwidthCount;
-		wxStaticText *WxStaticText5;
-		wxStaticText *WxStaticTextHalfwidthCount;
-		wxStaticText *WxStaticText4;
-		wxStaticText *WxStaticTextSpaceCount;
-		wxStaticText *WxStaticText3;
-		wxStaticText *WxStaticTextCharCount;
-		wxStaticText *WxStaticText2;
-		wxStaticText *WxStaticTextWordCount;
-		wxStaticText *WxStaticText1;
-		wxFlexGridSizer	*WxFlexGridSizer1;
-		wxBoxSizer *WxBoxSizer1;
-		////GUI	Control	Declaration	End
-		
-	public:
-		//Note:	if you receive any error with these	enum IDs, then you need	to
-		//change your old form code	that are based on the #define control IDs.
-		//#defines may replace a numeric value for the enum	names.
-		//Try copy and pasting the below block in your old form	header files.
-		enum
-		{
-			////GUI	Enum Control ID	Start
-			ID_WXMEMO1 = 1019,
-			ID_WXSTATICTEXT6 = 1018,
-			ID_WXSTATICLINE1 = 1017,
-			ID_WXSTATICTEXTLINECOUNT = 1022,
-			ID_WXSTATICTEXT7 = 1021,
-			ID_WXSTATICTEXTFULLWIDTHCOUNT =	1013,
-			ID_WXSTATICTEXT5 = 1012,
-			ID_WXSTATICTEXTHALFWIDTHCOUNT =	1011,
-			ID_WXSTATICTEXT4 = 1010,
-			ID_WXSTATICTEXTSPACECOUNT =	1009,
-			ID_WXSTATICTEXT3 = 1008,
-			ID_WXSTATICTEXTCHARCOUNT = 1007,
-			ID_WXSTATICTEXT2 = 1006,
-			ID_WXSTATICTEXTWORDCOUNT = 1005,
-			ID_WXSTATICTEXT1 = 1004,
-			////GUI	Enum Control ID	End
-			ID_DUMMY_VALUE_	//don't	remove this	value unless you have other	enum values
-		}; //End of	Enum
-	
-	public:
+
+		//(*Handlers(MadWordCountDialog)
 		void MadWordCountDialogClose(wxCloseEvent& event);
-		void CreateGUIControls(void);
+		//*)
+
+		DECLARE_EVENT_TABLE()
 };
 
 #endif
