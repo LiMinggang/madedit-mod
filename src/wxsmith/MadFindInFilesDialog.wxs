@@ -62,7 +62,6 @@
 											</object>
 										</object>
 										<flag>wxALL|wxALIGN_LEFT</flag>
-										<border>5</border>
 									</object>
 									<object class="sizeritem">
 										<object class="wxCheckBox" name="ID_WXCHECKBOXFINDHEX" variable="WxCheckBoxFindHex" member="yes">
