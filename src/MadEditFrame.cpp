@@ -7266,7 +7266,7 @@ void MadEditFrame::OnToolsPurgeHistories( wxCommandEvent& event )
 			g_FindInFilesDialog->PurgeRecentFindExcludes();
 		}
 
-		if( dlg.WxCheckBoxCaretPos->IsChecked() )
+		if( dlg.wxCheckBoxCaretPos->IsChecked() )
 		{
 			m_Config->SetPath( wxT( "/FileCaretPos" ) );
 			g_FileCaretPosManager.Clear( m_Config );

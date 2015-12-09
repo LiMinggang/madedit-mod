@@ -5,132 +5,120 @@
 // Licence: 	GPL
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "MadPurgeHistoryDialog.h"
 #include "MadEditFrame.h"
 #include "MadSearchReplaceDialog.h"
 #include "MadFindInFilesDialog.h"
-#include "MadPurgeHistoryDialog.h"
 
-//Do not add custom headers
-//wxDev-C++ designer will remove them
-////Header Include Start
-////Header Include End
+#ifdef _MSC_VER
+# pragma warning( push )
+# pragma warning( disable : 4996 )
+#endif
+// disable 4996 {
+//(*InternalHeaders(MadPurgeHistoriesDialog)
+#include <wx/intl.h>
+#include <wx/string.h>
+//*)
+// disable 4996 }
+#ifdef _MSC_VER
+# pragma warning( pop )
+#endif
 
-//----------------------------------------------------------------------------
-// MadPurgeHistoryDialog
-//----------------------------------------------------------------------------
-//Add Custom Events only in the appropriate block.
-//Code added in other places will be removed by wxDev-C++
-////Event Table Start
+#ifdef _DEBUG
+#include <crtdbg.h>
+#define new new(_NORMAL_BLOCK ,__FILE__, __LINE__)
+#endif
+
+//(*IdInit(MadPurgeHistoryDialog)
+const long MadPurgeHistoryDialog::ID_WXCHECKBOXRECENTFILES = wxNewId();
+const long MadPurgeHistoryDialog::ID_WXCHECKBOXRECENTFONTS = wxNewId();
+const long MadPurgeHistoryDialog::ID_WXCHECKBOXRECENTENCODINGS = wxNewId();
+const long MadPurgeHistoryDialog::ID_WXCHECKBOXRECENTSEARCHEDTEXTS = wxNewId();
+const long MadPurgeHistoryDialog::ID_WXCHECKBOXRECENTREPLACEDTEXTS = wxNewId();
+const long MadPurgeHistoryDialog::ID_WXCHECKBOXRECENTSEARCHEDDIRECTORIES = wxNewId();
+const long MadPurgeHistoryDialog::ID_WXRECENTSEARCHEDFILEFILTERS = wxNewId();
+const long MadPurgeHistoryDialog::ID_WXCHECKBOXRECENTSEARCHEDEXCLUDEFILTERS = wxNewId();
+const long MadPurgeHistoryDialog::ID_WXCHECKBOXCARETPOS = wxNewId();
+const long MadPurgeHistoryDialog::ID_WXCHECKBOXALLABOVE = wxNewId();
+//*)
+
 BEGIN_EVENT_TABLE(MadPurgeHistoryDialog,wxDialog)
-	////Manual Code Start
-	////Manual Code End
-	
-	EVT_CLOSE(MadPurgeHistoryDialog::OnClose)
-	EVT_KEY_DOWN(MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown)
-	EVT_CHECKBOX(ID_WXCHECKBOXALLABOVE,MadPurgeHistoryDialog::OnAllAboveClick)
-	EVT_BUTTON(wxID_CANCEL,MadPurgeHistoryDialog::wxButtonCancelClick)
-	EVT_BUTTON(wxID_OK,MadPurgeHistoryDialog::WxButtonOKClick)
+	//(*EventTable(MadPurgeHistoryDialog)
+	//*)
 END_EVENT_TABLE()
-////Event Table End
 
-MadPurgeHistoryDialog::MadPurgeHistoryDialog(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style)
-: wxDialog(parent, id, title, position, size, style)
+MadPurgeHistoryDialog::MadPurgeHistoryDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)
 {
-	CreateGUIControls();
+	//(*Initialize(MadPurgeHistoryDialog)
+	wxBoxSizer* BoxSizer2;
+	wxBoxSizer* BoxSizer1;
+	wxStaticBoxSizer* StaticBoxSizer1;
+
+	Create(parent, wxID_ANY, _("Purge Histories"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxSYSTEM_MENU|wxCLOSE_BOX|wxDIALOG_NO_PARENT, _T("wxID_ANY"));
+	BoxSizer1 = new wxBoxSizer(wxVERTICAL);
+	StaticBoxSizer1 = new wxStaticBoxSizer(wxVERTICAL, this, wxEmptyString);
+	wxCheckBoxRecentFiles = new wxCheckBox(this, ID_WXCHECKBOXRECENTFILES, _("Recent &Files"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXRECENTFILES"));
+	wxCheckBoxRecentFiles->SetValue(false);
+	StaticBoxSizer1->Add(wxCheckBoxRecentFiles, 0, wxALL|wxALIGN_LEFT, 5);
+	wxCheckBoxRecentFonts = new wxCheckBox(this, ID_WXCHECKBOXRECENTFONTS, _("Recent Fon&ts"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXRECENTFONTS"));
+	wxCheckBoxRecentFonts->SetValue(false);
+	StaticBoxSizer1->Add(wxCheckBoxRecentFonts, 0, wxALL|wxALIGN_LEFT, 5);
+	wxCheckBoxRecentEncodings = new wxCheckBox(this, ID_WXCHECKBOXRECENTENCODINGS, _("Recent &Encodings"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXRECENTENCODINGS"));
+	wxCheckBoxRecentEncodings->SetValue(false);
+	StaticBoxSizer1->Add(wxCheckBoxRecentEncodings, 0, wxALL|wxALIGN_LEFT, 5);
+	wxCheckBoxRecentSearchedTexts = new wxCheckBox(this, ID_WXCHECKBOXRECENTSEARCHEDTEXTS, _("Recent &Searched Texts"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXRECENTSEARCHEDTEXTS"));
+	wxCheckBoxRecentSearchedTexts->SetValue(false);
+	StaticBoxSizer1->Add(wxCheckBoxRecentSearchedTexts, 0, wxALL|wxALIGN_LEFT, 5);
+	wxCheckBoxRecentReplacedTexts = new wxCheckBox(this, ID_WXCHECKBOXRECENTREPLACEDTEXTS, _("Recent &Replaced Texts"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXRECENTREPLACEDTEXTS"));
+	wxCheckBoxRecentReplacedTexts->SetValue(false);
+	StaticBoxSizer1->Add(wxCheckBoxRecentReplacedTexts, 0, wxALL|wxALIGN_LEFT, 5);
+	wxCheckBoxRecentSearchedDirectories = new wxCheckBox(this, ID_WXCHECKBOXRECENTSEARCHEDDIRECTORIES, _("Recent Searched &Directories"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXRECENTSEARCHEDDIRECTORIES"));
+	wxCheckBoxRecentSearchedDirectories->SetValue(false);
+	StaticBoxSizer1->Add(wxCheckBoxRecentSearchedDirectories, 0, wxALL|wxALIGN_LEFT, 5);
+	wxRecentSearchedFileFilters = new wxCheckBox(this, ID_WXRECENTSEARCHEDFILEFILTERS, _("Recent Searched File Fi&lters"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXRECENTSEARCHEDFILEFILTERS"));
+	wxRecentSearchedFileFilters->SetValue(false);
+	StaticBoxSizer1->Add(wxRecentSearchedFileFilters, 0, wxALL|wxALIGN_LEFT, 5);
+	wxCheckBoxRecentSearchedExcludeFilters = new wxCheckBox(this, ID_WXCHECKBOXRECENTSEARCHEDEXCLUDEFILTERS, _("Recent Searched E&xclude Filters"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXRECENTSEARCHEDEXCLUDEFILTERS"));
+	wxCheckBoxRecentSearchedExcludeFilters->SetValue(false);
+	StaticBoxSizer1->Add(wxCheckBoxRecentSearchedExcludeFilters, 0, wxALL|wxALIGN_LEFT, 5);
+	wxCheckBoxCaretPos = new wxCheckBox(this, ID_WXCHECKBOXCARETPOS, _("Recent Caret Position"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXCARETPOS"));
+	wxCheckBoxCaretPos->SetValue(false);
+	StaticBoxSizer1->Add(wxCheckBoxCaretPos, 1, wxALL|wxALIGN_LEFT, 5);
+	wxCheckBoxAllAbove = new wxCheckBox(this, ID_WXCHECKBOXALLABOVE, _("All Above"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXALLABOVE"));
+	wxCheckBoxAllAbove->SetValue(false);
+	StaticBoxSizer1->Add(wxCheckBoxAllAbove, 1, wxALL|wxALIGN_LEFT, 5);
+	BoxSizer1->Add(StaticBoxSizer1, 1, wxALL|wxEXPAND, 5);
+	BoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
+	WxButtonOK = new wxButton(this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_OK"));
+	BoxSizer2->Add(WxButtonOK, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	WxButtonCancel = new wxButton(this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_CANCEL"));
+	WxButtonCancel->SetDefault();
+	BoxSizer2->Add(WxButtonCancel, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	BoxSizer1->Add(BoxSizer2, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	SetSizer(BoxSizer1);
+	BoxSizer1->Fit(this);
+	BoxSizer1->SetSizeHints(this);
+	Center();
+
+	Connect(ID_WXCHECKBOXALLABOVE,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&MadPurgeHistoryDialog::wxCheckBoxAllAboveClick);
+	Connect(wxID_OK,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadPurgeHistoryDialog::WxButtonOKClick);
+	Connect(wxID_CANCEL,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadPurgeHistoryDialog::WxButtonCancelClick);
+	Connect(wxEVT_KEY_DOWN,(wxObjectEventFunction)&MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown);
+	//*)
 }
 
 MadPurgeHistoryDialog::~MadPurgeHistoryDialog()
 {
-} 
-
-void MadPurgeHistoryDialog::CreateGUIControls()
-{
-	//Do not add custom code between
-	//GUI Items Creation Start and GUI Items Creation End.
-	//wxDev-C++ designer will remove them.
-	//Add the custom code before or after the blocks
-	////GUI Items Creation Start
-
-	wxStaticBox* WxStaticBoxSizer1_StaticBoxObj = new wxStaticBox(this, wxID_ANY, wxT(""));
-	WxStaticBoxSizer1 = new wxStaticBoxSizer(WxStaticBoxSizer1_StaticBoxObj, wxVERTICAL);
-	this->SetSizer(WxStaticBoxSizer1);
-	this->SetAutoLayout(true);
-
-	WxBoxSizer1 = new wxBoxSizer(wxVERTICAL);
-	WxStaticBoxSizer1->Add(WxBoxSizer1, 0, wxALIGN_LEFT | wxEXPAND | wxALIGN_TOP | wxALL, 5);
-
-	wxCheckBoxRecentFiles = new wxCheckBox(this, ID_WXCHECKBOXRECENTFILES, _("Recent Files"), wxPoint(5, 5), wxSize(212, 16), 0, wxDefaultValidator, wxT("wxCheckBoxRecentFiles"));
-	WxBoxSizer1->Add(wxCheckBoxRecentFiles, 0, wxALIGN_LEFT | wxEXPAND | wxALIGN_TOP | wxALL, 5);
-
-	wxCheckBoxRecentFonts = new wxCheckBox(this, ID_WXCHECKBOXRECENTFONTS, _("Recent Fonts"), wxPoint(5, 31), wxSize(212, 18), 0, wxDefaultValidator, wxT("wxCheckBoxRecentFonts"));
-	WxBoxSizer1->Add(wxCheckBoxRecentFonts, 0, wxALIGN_LEFT | wxEXPAND | wxALIGN_TOP | wxALL, 5);
-
-	wxCheckBoxRecentEncodings = new wxCheckBox(this, ID_WXCHECKBOXRECENTENCODINGS, _("Recent Encodings"), wxPoint(5, 59), wxSize(212, 16), 0, wxDefaultValidator, wxT("wxCheckBoxRecentEncodings"));
-	WxBoxSizer1->Add(wxCheckBoxRecentEncodings, 0, wxALIGN_LEFT | wxEXPAND | wxALIGN_TOP | wxALL, 5);
-
-	wxCheckBoxRecentSearchedTexts = new wxCheckBox(this, ID_WXCHECKBOXRECENTSEARCHEDTEXTS, _("Recent Searched Texts"), wxPoint(5, 85), wxSize(212, 18), 0, wxDefaultValidator, wxT("wxCheckBoxRecentSearchedTexts"));
-	WxBoxSizer1->Add(wxCheckBoxRecentSearchedTexts, 0, wxALIGN_LEFT | wxEXPAND | wxALIGN_TOP | wxALL, 5);
-
-	wxCheckBoxRecentReplacedTexts = new wxCheckBox(this, ID_WXCHECKBOXRECENTREPLACEDTEXTS, _("Recent Replaced Texts"), wxPoint(5, 113), wxSize(212, 17), 0, wxDefaultValidator, wxT("wxCheckBoxRecentReplacedTexts"));
-	WxBoxSizer1->Add(wxCheckBoxRecentReplacedTexts, 0, wxALIGN_LEFT | wxEXPAND | wxALIGN_TOP | wxALL, 5);
-
-	wxCheckBoxRecentSearchedDirectories = new wxCheckBox(this, ID_WXCHECKBOXRECENTSEARCHEDDIRECTORIES, _("Recent Searched Directories"), wxPoint(5, 140), wxSize(212, 17), 0, wxDefaultValidator, wxT("wxCheckBoxRecentSearchedDirectories"));
-	WxBoxSizer1->Add(wxCheckBoxRecentSearchedDirectories, 0, wxALIGN_LEFT | wxEXPAND | wxALIGN_TOP | wxALL, 5);
-
-	wxRecentSearchedFileFilters = new wxCheckBox(this, ID_WXRECENTSEARCHEDFILEFILTERS, _("Recent Searched File Filters"), wxPoint(5, 167), wxSize(212, 18), 0, wxDefaultValidator, wxT("wxRecentSearchedFileFilters"));
-	WxBoxSizer1->Add(wxRecentSearchedFileFilters, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 5);
-
-	wxCheckBoxRecentSearchedExcludeFilters = new wxCheckBox(this, ID_WXCHECKBOXRECENTSEARCHEDEXCLUDEFILTERS, _("Recent Searched Exclude Filters"), wxPoint(5, 195), wxSize(212, 17), 0, wxDefaultValidator, wxT("wxCheckBoxRecentSearchedExcludeFilters"));
-	WxBoxSizer1->Add(wxCheckBoxRecentSearchedExcludeFilters, 0, wxALIGN_LEFT | wxEXPAND | wxALIGN_TOP | wxALL, 5);
-
-	WxBoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
-	WxStaticBoxSizer1->Add(WxBoxSizer2, 0, wxALIGN_CENTER | wxALL, 5);
-
-	WxButtonOK = new wxButton(this, wxID_OK, _("&OK"), wxPoint(5, 5), wxSize(75, 25), 0, wxDefaultValidator, wxT("WxButtonOK"));
-	WxBoxSizer2->Add(WxButtonOK, 0, wxALIGN_CENTER | wxALL, 5);
-
-	wxButtonCancel = new wxButton(this, wxID_CANCEL, _("&Cancel"), wxPoint(90, 5), wxSize(75, 25), 0, wxDefaultValidator, wxT("wxButtonCancel"));
-	WxBoxSizer2->Add(wxButtonCancel, 0, wxALIGN_CENTER | wxALL, 5);
-
-	WxCheckBoxCaretPos = new wxCheckBox(this, ID_WXCHECKBOXCARETPOS, _("Recent Caret Position"), wxPoint(-1, 222), wxSize(212, 17), 0, wxDefaultValidator, wxT("WxCheckBoxCaretPos"));
-	WxBoxSizer1->Add(WxCheckBoxCaretPos, 0, wxALIGN_LEFT | wxALL, 5);
-
-	WxCheckBoxAllAbove = new wxCheckBox(this, ID_WXCHECKBOXALLABOVE, _("All Above"), wxPoint(5, 222), wxSize(212, 17), 0, wxDefaultValidator, wxT("WxCheckBoxAllAbove"));
-	WxBoxSizer1->Add(WxCheckBoxAllAbove, 0, wxALIGN_CENTER | wxALL, 5);
-
-	SetTitle(_("Purge Histories"));
-	SetIcon(wxNullIcon);
-	
-	Layout();
-	GetSizer()->Fit(this);
-	GetSizer()->SetSizeHints(this);
-	Center();
-	
-	////GUI Items Creation End
-
-	// connect to KeyDown event handler
-	wxCheckBoxRecentFiles->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown));
-	wxCheckBoxRecentFonts->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown));
-	wxCheckBoxRecentEncodings->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown));
-	wxCheckBoxRecentSearchedTexts->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown));
-	wxCheckBoxRecentReplacedTexts->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown));
-	wxCheckBoxRecentSearchedDirectories->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown));
-	wxRecentSearchedFileFilters->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown));
-	wxCheckBoxRecentSearchedExcludeFilters->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown));
-	WxCheckBoxCaretPos->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown));
-	WxButtonOK->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown));
-	wxButtonCancel->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown));
-	WxButtonOK->SetDefault();
+	//(*Destroy(MadPurgeHistoryDialog)
+	//*)
 }
 
-void MadPurgeHistoryDialog::OnClose(wxCloseEvent& /*event*/)
+
+void MadPurgeHistoryDialog::MadPurgeHistoryDialogClose(wxCloseEvent& event)
 {
-    Destroy();
+	Destroy();
 }
 
-/*
- * WxButtonOKClick
- */
 void MadPurgeHistoryDialog::WxButtonOKClick(wxCommandEvent& event)
 {
     EndModal(wxID_OK);
@@ -139,7 +127,7 @@ void MadPurgeHistoryDialog::WxButtonOKClick(wxCommandEvent& event)
 /*
  * wxButtonCancelClick
  */
-void MadPurgeHistoryDialog::wxButtonCancelClick(wxCommandEvent& event)
+void MadPurgeHistoryDialog::WxButtonCancelClick(wxCommandEvent& event)
 {
     // insert your code here
     EndModal(wxID_CANCEL);
@@ -158,12 +146,12 @@ void MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown(wxKeyEvent& event)
     case WXK_ESCAPE:
         {
             wxCommandEvent e;
-            this->wxButtonCancelClick(e);
+            this->WxButtonCancelClick(e);
             return;
         }
     case WXK_RETURN:
     case WXK_NUMPAD_ENTER:
-        if ((wxButton*)this != this->wxButtonCancel)
+        if ((wxButton*)this != this->WxButtonCancel)
         {
             wxCommandEvent e;
             this->WxButtonOKClick(e);
@@ -172,7 +160,7 @@ void MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown(wxKeyEvent& event)
         else
         {
             wxCommandEvent e;
-            this->wxButtonCancelClick(e);
+            this->WxButtonCancelClick(e);
             return; // no skip
         }
         break;
@@ -195,14 +183,14 @@ void MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown(wxKeyEvent& event)
     if('c' == key && wxACCEL_ALT == flags)
     {
         wxCommandEvent e;
-        this->wxButtonCancelClick(e);
+        this->WxButtonCancelClick(e);
         return; // no skip
     }
 
     event.Skip();
 }
 
-void MadPurgeHistoryDialog::OnAllAboveClick(wxCommandEvent& event)
+void MadPurgeHistoryDialog::wxCheckBoxAllAboveClick(wxCommandEvent& event)
 {
     if(event.IsChecked()) 
     {
@@ -214,7 +202,7 @@ void MadPurgeHistoryDialog::OnAllAboveClick(wxCommandEvent& event)
         wxCheckBoxRecentEncodings->SetValue(true);
         wxCheckBoxRecentFonts->SetValue(true);
         wxCheckBoxRecentFiles->SetValue(true); 
-		WxCheckBoxCaretPos->SetValue(true); 
+		wxCheckBoxCaretPos->SetValue(true); 
     }
     else
     {
@@ -226,7 +214,6 @@ void MadPurgeHistoryDialog::OnAllAboveClick(wxCommandEvent& event)
         wxCheckBoxRecentEncodings->SetValue(false);
         wxCheckBoxRecentFonts->SetValue(false);
         wxCheckBoxRecentFiles->SetValue(false);
-		WxCheckBoxCaretPos->SetValue(false); 
+		wxCheckBoxCaretPos->SetValue(false); 
     }
 }
-
