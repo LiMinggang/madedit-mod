@@ -319,7 +319,6 @@ const long MadFileAssociationDialog::ID_STATICTEXT2 = wxNewId();
 const long MadFileAssociationDialog::ID_WXLISTBOXPREDEFINED = wxNewId();
 const long MadFileAssociationDialog::ID_WXEDITCUSTOMTYPE = wxNewId();
 const long MadFileAssociationDialog::ID_WXBUTTONADDCUSTOM = wxNewId();
-const long MadFileAssociationDialog::ID_WXBUTTONOK = wxNewId();
 //*)
 
 BEGIN_EVENT_TABLE(MadFileAssociationDialog,wxDialog)
@@ -370,7 +369,7 @@ MadFileAssociationDialog::MadFileAssociationDialog(wxWindow* parent,wxWindowID i
 	BoxSizer2->Add(BoxSizer5, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	BoxSizer1->Add(BoxSizer2, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	BoxSizer3 = new wxBoxSizer(wxHORIZONTAL);
-	WxButtonOK = new wxButton(this, ID_WXBUTTONOK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXBUTTONOK"));
+	WxButtonOK = new wxButton(this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_OK"));
 	BoxSizer3->Add(WxButtonOK, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	WxButtonCancel = new wxButton(this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_CANCEL"));
 	WxButtonCancel->SetDefault();
@@ -386,7 +385,7 @@ MadFileAssociationDialog::MadFileAssociationDialog(wxWindow* parent,wxWindowID i
 	Connect(ID_WXBUTTONREMOVE,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadFileAssociationDialog::WxButtonRemoveClick);
 	Connect(ID_WXLISTBOXPREDEFINED,wxEVT_COMMAND_LISTBOX_DOUBLECLICKED,(wxObjectEventFunction)&MadFileAssociationDialog::WxListBoxPredefinedDoubleClicked);
 	Connect(ID_WXBUTTONADDCUSTOM,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadFileAssociationDialog::WxButtonAddCustomClick);
-	Connect(ID_WXBUTTONOK,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadFileAssociationDialog::WxButtonOKClick);
+	Connect(wxID_OK,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadFileAssociationDialog::WxButtonOKClick);
 	//*)
 
 	wxArrayString as_predefined(g_PredefinedTypes_Count, g_PredefinedTypes);

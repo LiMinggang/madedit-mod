@@ -61,7 +61,6 @@ class MadFileAssociationDialog: public wxDialog
 		static const long ID_WXLISTBOXPREDEFINED;
 		static const long ID_WXEDITCUSTOMTYPE;
 		static const long ID_WXBUTTONADDCUSTOM;
-		static const long ID_WXBUTTONOK;
 		//*)
 
 	private:
