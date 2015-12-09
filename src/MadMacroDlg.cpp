@@ -5,93 +5,108 @@
 // Licence:		GPL
 ///////////////////////////////////////////////////////////////////////////////
 
-#include <wx/textctrl.h>
 #include "MadEdit/MadEdit.h"
 #include "MadEditFrame.h"
-#include "MadMacroDlg.h"
 #include "EmbeddedPython.hpp"
+#include "MadMacroDlg.h"
 
-MadMacroDlg	* g_MadMacroDlg	= NULL;
-extern MadEdit *g_ActiveMadEdit;
+//(*InternalHeaders(MadMacroDlg)
+#include <wx/intl.h>
+#include <wx/string.h>
+//*)
 
-	////Event Table	Start
+//(*IdInit(MadMacroDlg)
+const long MadMacroDlg::ID_MADEDIT = wxNewId();
+const long MadMacroDlg::ID_WXBUTTONTOGGLERESULT = wxNewId();
+const long MadMacroDlg::ID_TEXTCTRLRESULT = wxNewId();
+//*)
+
 BEGIN_EVENT_TABLE(MadMacroDlg,wxDialog)
-	
-	EVT_CLOSE(MadMacroDlg::MadMacroDlgClose)
-	EVT_BUTTON(ID_WXBUTTONRUN,MadMacroDlg::OnRunClick)
-	EVT_BUTTON(ID_WXBUTTONCLOSE,MadMacroDlg::OnCloseClick)
-	EVT_BUTTON(ID_WXBUTTONENABLERESULT,MadMacroDlg::OnEnableResultClick)
+	//(*EventTable(MadMacroDlg)
+	//*)
 END_EVENT_TABLE()
-	////Event Table	End
 
-///////////////////////////////////////////////////////////////////////////
-	extern int MadMessageBox(const wxString& message,
+extern MadEdit *g_ActiveMadEdit;
+extern int MadMessageBox(const wxString& message,
 								 const wxString& caption = wxMessageBoxCaptionStr,
 								 long style	= wxOK | wxCENTRE,
 								 wxWindow *parent =	NULL,
 								 int x = wxDefaultCoord, int y = wxDefaultCoord);
-
-MadMacroDlg::MadMacroDlg(wxWindow* parent, wxWindowID id, const	wxString& title, const wxPoint&	pos, const wxSize& size, long style) :	wxDialog(parent, id, title,	pos, size, style)
+MadMacroDlg *g_MadMacroDlg = NULL;
+MadMacroDlg::MadMacroDlg(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)
 {
-	//this->SetSizeHints( wxDefaultSize, wxDefaultSize );
-	wxStaticBox* WxStaticBoxSizer1_StaticBoxObj	= new wxStaticBox(this,	wxID_ANY, wxT(""));
-	WxStaticBoxSizer1 =	new	wxStaticBoxSizer(WxStaticBoxSizer1_StaticBoxObj, wxVERTICAL);
-	this->SetSizer(WxStaticBoxSizer1);
-	this->SetAutoLayout(true);
+	wxSize pymacro(640, 240);
+	//(*Initialize(MadMacroDlg)
+	wxBoxSizer* BoxSizer4;
+	wxBoxSizer* BoxSizer2;
+	wxBoxSizer* BoxSizer1;
+	wxBoxSizer* BoxSizer3;
 
-	bSizer1	= new wxBoxSizer( wxVERTICAL );
-	WxStaticBoxSizer1->Add(bSizer1,	1, wxALIGN_CENTER |	wxALIGN_TOP	| wxEXPAND | wxALL,	5);
-
-	m_debug	= false;
-	wxSize pymacro(640,	240);
-	m_pymacro=new MadEdit(this,	ID_MADEDIT,	wxDefaultPosition, pymacro);
-	m_pymacro->SetFixedWidthMode(false);
-	m_pymacro->SetRecordCaretMovements(false);
-	m_pymacro->SetInsertSpacesInsteadOfTab(true);
-	m_pymacro->SetWantTab(true);
-	m_pymacro->SetSyntax(wxT("MadPython"));
-	m_pymacro->SetDisplayBookmark(false);
+	Create(parent, id, _("MadEdit Macro"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxSYSTEM_MENU|wxRESIZE_BORDER|wxCLOSE_BOX, _T("id"));
+	SetClientSize(wxDefaultSize);
+	Move(wxDefaultPosition);
+	BoxSizer1 = new wxBoxSizer(wxVERTICAL);
+	BoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
+    m_debug	= false;
+	m_Pymacro=new MadEdit(this, ID_MADEDIT, wxPoint(0, 0), pymacro);
+	m_Pymacro->SetFixedWidthMode(false);
+	m_Pymacro->SetRecordCaretMovements(false);
+	m_Pymacro->SetInsertSpacesInsteadOfTab(true);
+	m_Pymacro->SetWantTab(true);
+	m_Pymacro->SetSyntax(wxT("MadPython"));
+	m_Pymacro->SetDisplayBookmark(false);
 	wxString endline(wxT("\r"));
-	if (m_pymacro->GetInsertNewLineType() == nltDOS) endline +=	wxT("\n");
-	else if	(m_pymacro->GetInsertNewLineType() == nltUNIX) endline = wxT("\n");
-	m_pymacro->SetText((wxString(wxT("#Create MadEdit Object for the active	edit"))	+ endline +	wxT("medit = MadEdit()") + endline + endline));
-	bSizer1->Add( m_pymacro, 1,	wxEXPAND | wxALL, 5	);
+	if (m_Pymacro->GetInsertNewLineType() == nltDOS) endline += wxT("\n");
+	else if (m_Pymacro->GetInsertNewLineType() == nltUNIX) endline = wxT("\n");
+	m_Pymacro->SetText((wxString(wxT("#Create MadEdit Object for the active edit")) + endline + wxT("medit = MadEdit()") + endline + endline));
+	m_Pymacro->SetCaretPosition(m_Pymacro->GetFileSize());
+	//m_Pymacro = new wxTextCtrl(this, ID_MADEDIT, _("Text"), wxDefaultPosition, wxSize(640,240), 0, wxDefaultValidator, _T("ID_MADEDIT"));
+	BoxSizer2->Add(m_Pymacro, 1, wxALL|wxEXPAND, 5);
+	BoxSizer1->Add(BoxSizer2, 1, wxALL|wxEXPAND, 5);
+	BoxSizer3 = new wxBoxSizer(wxHORIZONTAL);
+	WxButtonRun = new wxButton(this, wxID_OK, _("&Run"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_OK"));
+	WxButtonRun->SetDefault();
+	BoxSizer3->Add(WxButtonRun, 0, wxALL|wxEXPAND, 5);
+	WxButtonClose = new wxButton(this, wxID_CANCEL, _("&Close"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_CANCEL"));
+	BoxSizer3->Add(WxButtonClose, 0, wxALL|wxEXPAND, 5);
+	WxButtonResult = new wxButton(this, ID_WXBUTTONTOGGLERESULT, _("Results >>"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXBUTTONTOGGLERESULT"));
+	BoxSizer3->Add(WxButtonResult, 0, wxALL|wxEXPAND, 5);
+	BoxSizer1->Add(BoxSizer3, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5);
+	BoxSizer4 = new wxBoxSizer(wxHORIZONTAL);
+	WxMemoOutput = new wxTextCtrl(this, ID_TEXTCTRLRESULT, wxEmptyString, wxDefaultPosition, wxSize(640,240), wxTE_MULTILINE|wxTE_READONLY|wxTE_WORDWRAP|wxDOUBLE_BORDER|wxVSCROLL, wxDefaultValidator, _T("ID_TEXTCTRLRESULT"));
+	BoxSizer4->Add(WxMemoOutput, 1, wxALL|wxEXPAND, 5);
+	BoxSizer1->Add(BoxSizer4, 1, wxALL|wxEXPAND, 5);
+	WxMemoOutput->Show(m_debug);
+	SetSizer(BoxSizer1);
+	BoxSizer1->Fit(this);
+	BoxSizer1->SetSizeHints(this);
 
-	bSizer2	= new wxBoxSizer( wxHORIZONTAL );
-	WxStaticBoxSizer1->Add(bSizer2,	0, wxALIGN_CENTER_HORIZONTAL | wxALL, 2);
-	m_run =	new	wxButton( this,	ID_WXBUTTONRUN,	_("Run"), wxDefaultPosition, wxDefaultSize,	0 );
-	bSizer2->Add( m_run, 0,	wxALIGN_CENTER_VERTICAL	| wxALL, 3 );
-	
-	m_close	= new wxButton(	this, ID_WXBUTTONCLOSE,	_("Close"),	wxDefaultPosition, wxDefaultSize, 0	);
-	bSizer2->Add( m_close, 0, wxALIGN_CENTER_VERTICAL |	wxALL, 3 );
-	m_enableresult = new wxButton( this, ID_WXBUTTONENABLERESULT, _("Results >>"), wxDefaultPosition, wxDefaultSize, 0	);
-	bSizer2->Add( m_enableresult, 0, wxALIGN_CENTER_VERTICAL | wxALL, 3	);
-	m_run->SetDefault();
-
-	bSizer3	= new wxBoxSizer( wxVERTICAL );
-	WxStaticBoxSizer1->Add(bSizer3,	1, wxALIGN_CENTER |	wxALIGN_TOP	| wxEXPAND | wxALL,	5);
-	m_output = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, pymacro, wxTE_READONLY|wxTE_MULTILINE|wxVSCROLL|wxHSCROLL|wxSIMPLE_BORDER );
-	m_output->Show(false);
-
-	if (m_output)
-		bSizer3->Add( m_output,	1, wxEXPAND	| wxALL, 5 );
-	Layout();
-	GetSizer()->Fit(this);
-	GetSizer()->SetSizeHints(this);
-	
-	this->Centre( wxBOTH );
+	Connect(wxID_OK,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadMacroDlg::OnWxButtonRunClick);
+	Connect(wxID_CANCEL,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadMacroDlg::OnWxButtonCloseClick);
+	Connect(ID_WXBUTTONTOGGLERESULT,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadMacroDlg::OnWxButtonResultClick);
+	Connect(wxID_ANY,wxEVT_CLOSE_WINDOW,(wxObjectEventFunction)&MadMacroDlg::MadMacroDlgClose);
+	//*)
+	m_Pymacro->SetFocus();
 }
 
 MadMacroDlg::~MadMacroDlg()
 {
+	//(*Destroy(MadMacroDlg)
+	//*)
+	g_MadMacroDlg =	NULL;
 }
 
-void MadMacroDlg::OnRunClick( wxCommandEvent& event	)
+void MadMacroDlg::SetPyScript(wxString & pyscript)
 {
-	wxString pystr;
+	m_Pymacro->SetText(pyscript);
+}
+
+void MadMacroDlg::OnWxButtonRunClick(wxCommandEvent& event)
+{
 	if(g_ActiveMadEdit)
 	{
-		m_pymacro->GetText(pystr);
+		wxString pystr;
+		m_Pymacro->GetText(pystr);
 		if(!pystr.IsEmpty())
 		{
 			if(!g_EmbeddedPython)
@@ -110,7 +125,7 @@ void MadMacroDlg::OnRunClick( wxCommandEvent& event	)
 			{
 				if (m_debug)
 				{
-					wxStreamToTextRedirector redirector((wxTextCtrl	*)m_output);
+					wxStreamToTextRedirector redirector((wxTextCtrl	*)WxMemoOutput);
 					g_MainFrame->SetMacroRunning();
 					g_ActiveMadEdit->CaptureMouse();
 					g_EmbeddedPython->exec(std::string(pystr.mb_str()));
@@ -129,35 +144,27 @@ void MadMacroDlg::OnRunClick( wxCommandEvent& event	)
 		}
 	}
 }
-void MadMacroDlg::OnCloseClick(	wxCommandEvent&	event )	
+
+void MadMacroDlg::OnWxButtonCloseClick(wxCommandEvent& event)
 {
-	if(m_output) m_output->Clear();
-	EndModal(ID_WXBUTTONCLOSE);
+	if(WxMemoOutput) WxMemoOutput->Clear();
+	EndModal(wxID_CANCEL);
 }
 
-void MadMacroDlg::SetPyScript(wxString & pyscript)
+void MadMacroDlg::OnWxButtonResultClick(wxCommandEvent& event)
 {
-	m_pymacro->SetText(pyscript);
+    m_debug	= !m_debug;
+	WxMemoOutput->Show(m_debug);
+	GetSizer()->Fit(this);
+	GetSizer()->SetSizeHints(this);
+	if(m_debug)
+		WxButtonResult->SetLabel(_("Results <<"));
+	else
+		WxButtonResult->SetLabel(_("Results >>"));
 }
 
 void MadMacroDlg::MadMacroDlgClose(wxCloseEvent& event)
 {
-	// --> Don't use Close with	a Dialog,
-	// use Destroy instead.
-	Destroy();
+    Destroy();
 	g_MadMacroDlg =	NULL;
 }
-
-void MadMacroDlg::OnEnableResultClick( wxCommandEvent& event ) 
-{
-	m_debug	= !m_debug;
-	m_output->Show(m_debug);
-	GetSizer()->Fit(this);
-	GetSizer()->SetSizeHints(this);
-	if(m_debug)
-		m_enableresult->SetLabel(_("Results	<<"));
-	else
-		m_enableresult->SetLabel(_("Results >>"));
-}
-
-

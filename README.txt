@@ -123,7 +123,9 @@ Fix: Find Hex should be gray out if Regular expression was enabled(SearchReplace
 Fix: Match whole words should be gray out if Regular expression was enabled(SearchReplaceDialog/SearchReplaceInFilesDialog) #100
 Fix: Match whole word and dot match newline should be overridden according to Search RegEx #101
 Fix: Extra '\' was added to recorded MadPython while searching with RegEx #102
+Fix: Caret pos should be at the last while opening the Macro dialog #94 #104
 Improve performance of script recording
+Update translations
 
 Mod v0.3.9
 1.Improve on change syntax on save as

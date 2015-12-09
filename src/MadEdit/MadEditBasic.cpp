@@ -1265,7 +1265,7 @@ void MadEdit::GetText(wxString &ws,	bool ignoreBOM)
 	while(pos <	m_Lines->m_Size);
 }
 
-void MadEdit::SetText(const	wxString &ws)
+void MadEdit::SetText(const wxString &ws)
 {
 	MadLineIterator	lit;
 	size_t size	= ws.Len();
@@ -2342,7 +2342,7 @@ void MadEdit::GoToLine(int line)
 
 }
 
-void MadEdit::SetCaretPosition(wxFileOffset	pos, wxFileOffset selbeg, wxFileOffset selend)
+void MadEdit::SetCaretPosition(wxFileOffset pos, wxFileOffset selbeg, wxFileOffset selend)
 {
 	wxFileOffset oldCaretPos=m_CaretPos.pos;
 
