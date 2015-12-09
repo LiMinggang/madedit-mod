@@ -2999,7 +2999,7 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 		g_SearchReplaceDialog->GetPosition( &x, &y );
 		m_Config->Write( wxT( "/MadEdit/SearchWinLeft" ), x );
 		m_Config->Write( wxT( "/MadEdit/SearchWinTop" ), y );
-		m_Config->Write( wxT( "/MadEdit/SearchThrEndOfFile" ), g_SearchReplaceDialog->WxCheckBoxSearchThrEndOfFile->GetValue() );
+		m_Config->Write( wxT( "/MadEdit/SearchWrapAround" ), g_SearchReplaceDialog->WxCheckBoxWrapAround->GetValue() );
 
 		if( CanSetTransparent() )
 		{
