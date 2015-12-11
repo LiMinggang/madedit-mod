@@ -671,25 +671,6 @@ void MadEditApp::ShowMainFrame(MadEditFrame *mainFrame, bool maximize)
 {
 	if(mainFrame)
 	{
-		SetTopWindow(mainFrame);
-
-#ifdef __WXMSW__
-		//if(maximize)	  // removed: gogo, 30.08.2009
-		{
-			WINDOWPLACEMENT wp;
-			wp.length=sizeof(WINDOWPLACEMENT);
-			GetWindowPlacement((HWND)mainFrame->GetHWND(), &wp);
-
-		   // changed: gogo, 30.08.2009
-		   //wp.showCmd=SW_SHOWMAXIMIZED;
-		   wp.showCmd = maximize ? SW_SHOWMAXIMIZED : SW_SHOWNORMAL;
-
-		   SetWindowPlacement((HWND)mainFrame->GetHWND(), &wp);
-		}
-#endif
-
-		mainFrame->Show(true);
-
 		// reload files previously opened
 		wxString files;
 		wxConfigBase *cfg=wxConfigBase::Get(false);
@@ -725,6 +706,25 @@ void MadEditApp::ShowMainFrame(MadEditFrame *mainFrame, bool maximize)
 		{
 			mainFrame->OpenFile(wxEmptyString, false);
 		}
+
+		SetTopWindow(mainFrame);
+
+#ifdef __WXMSW__
+		//if(maximize)	  // removed: gogo, 30.08.2009
+		{
+			WINDOWPLACEMENT wp;
+			wp.length=sizeof(WINDOWPLACEMENT);
+			GetWindowPlacement((HWND)mainFrame->GetHWND(), &wp);
+
+		   // changed: gogo, 30.08.2009
+		   //wp.showCmd=SW_SHOWMAXIMIZED;
+		   wp.showCmd = maximize ? SW_SHOWMAXIMIZED : SW_SHOWNORMAL;
+
+		   SetWindowPlacement((HWND)mainFrame->GetHWND(), &wp);
+		}
+#endif
+
+		mainFrame->Show(true);
 	}
 }
 
