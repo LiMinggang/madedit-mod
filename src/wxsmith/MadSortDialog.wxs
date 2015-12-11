@@ -18,7 +18,7 @@
 					<default>-1</default>
 					<style>wxRA_SPECIFY_COLS</style>
 				</object>
-				<flag>wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL</flag>
+				<flag>wxALL|wxEXPAND</flag>
 				<border>5</border>
 				<option>1</option>
 			</object>
@@ -26,21 +26,21 @@
 				<object class="wxCheckBox" name="ID_WXCHECKBOXCASE" variable="WxCheckBoxCase" member="yes">
 					<label>&amp;Case Sensitive</label>
 				</object>
-				<flag>wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL</flag>
+				<flag>wxALL|wxEXPAND</flag>
 				<border>5</border>
 			</object>
 			<object class="sizeritem">
 				<object class="wxCheckBox" name="ID_WXCHECKBOXNUMERIC" variable="WxCheckBoxNumeric" member="yes">
 					<label>&amp;Numeric Sort</label>
 				</object>
-				<flag>wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL</flag>
+				<flag>wxALL|wxEXPAND</flag>
 				<border>5</border>
 			</object>
 			<object class="sizeritem">
 				<object class="wxCheckBox" name="ID_WXCHECKBOXREMOVEDUP" variable="WxCheckBoxRemoveDup" member="yes">
 					<label>&amp;Remove Duplicates</label>
 				</object>
-				<flag>wxALL|wxALIGN_LEFT</flag>
+				<flag>wxALL|wxEXPAND</flag>
 				<border>5</border>
 			</object>
 			<object class="sizeritem">
@@ -65,7 +65,6 @@
 				</object>
 				<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 				<border>5</border>
-				<option>1</option>
 			</object>
 		</object>
 	</object>
