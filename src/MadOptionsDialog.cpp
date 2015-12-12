@@ -318,8 +318,6 @@ const long MadOptionsDialog::ID_PANEL12 = wxNewId();
 const long MadOptionsDialog::ID_AUINOTEBOOK2 = wxNewId();
 const long MadOptionsDialog::ID_PANEL6 = wxNewId();
 const long MadOptionsDialog::ID_AUINOTEBOOK1 = wxNewId();
-const long MadOptionsDialog::ID_WXBUTTONOK = wxNewId();
-const long MadOptionsDialog::ID_WXBUTTONCANCEL = wxNewId();
 //*)
 
 const long MadOptionsDialog:: ID_MNU___Y__M__D_I__M__S_P_2007_02_2408_30_55AM_1191 = wxNewId();
@@ -539,7 +537,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 #ifdef __WXMSW__
 	WxCheckBoxRightClickMenu = new wxCheckBox(Panel1, ID_WSCHECKBOXMSRIGHTCCLICKMENU, _("Add MadEdit to the RightClickMenu of Explorer(Deselect to Remove the Entry from Windows Registry)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WSCHECKBOXMSRIGHTCCLICKMENU"));
 	WxCheckBoxRightClickMenu->SetValue(false);
-	BoxSizer7->Add(WxCheckBoxRightClickMenu, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	BoxSizer7->Add(WxCheckBoxRightClickMenu, 0, wxALL|wxEXPAND, 2);
 	BoxSizer3->Add(BoxSizer7, 0, wxALL|wxALIGN_LEFT, 2);
 	Panel1->SetSizer(BoxSizer3);
 	BoxSizer3->Fit(Panel1);
@@ -1053,7 +1051,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	BoxSizer47->Add(WxCheckUnpadParens, 0, wxALL|wxEXPAND, 2);
 	WxCheckDelEmptyLine = new wxCheckBox(Panel11, ID_WXCHECKDELEMPTYLINE, _("Delete empty lines within a function or method"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKDELEMPTYLINE"));
 	WxCheckDelEmptyLine->SetValue(false);
-	BoxSizer47->Add(WxCheckDelEmptyLine, 0, wxALL|wxALIGN_LEFT, 2);
+	BoxSizer47->Add(WxCheckDelEmptyLine, 0, wxALL|wxEXPAND, 2);
 	WxCheckFillEmptyLines = new wxCheckBox(Panel11, ID_WXCHECKFILLEMPTYLINES, _("Fill empty lines with the whitespace of their previous lines"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKFILLEMPTYLINES"));
 	WxCheckFillEmptyLines->SetValue(false);
 	BoxSizer47->Add(WxCheckFillEmptyLines, 0, wxALL|wxEXPAND, 2);
@@ -1074,7 +1072,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	WxChoiceReferenceAlign->Append(_("Middle"));
 	WxChoiceReferenceAlign->Append(_("Name"));
 	GridSizer3->Add(WxChoiceReferenceAlign, 0, wxALL|wxEXPAND, 2);
-	BoxSizer47->Add(GridSizer3, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	BoxSizer47->Add(GridSizer3, 0, wxALL|wxEXPAND, 2);
 	Panel11->SetSizer(BoxSizer47);
 	BoxSizer47->Fit(Panel11);
 	BoxSizer47->SetSizeHints(Panel11);
@@ -1119,9 +1117,9 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	BoxSizer30->Add(BoxSizer33, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	BoxSizer1->Add(BoxSizer30, 1, wxALL|wxEXPAND, 0);
 	BoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
-	WxButtonOK = new wxButton(this, ID_WXBUTTONOK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXBUTTONOK"));
+	WxButtonOK = new wxButton(this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_OK"));
 	BoxSizer2->Add(WxButtonOK, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-	WxButtonCancel = new wxButton(this, ID_WXBUTTONCANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXBUTTONCANCEL"));
+	WxButtonCancel = new wxButton(this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_CANCEL"));
 	BoxSizer2->Add(WxButtonCancel, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	BoxSizer1->Add(BoxSizer2, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	SetSizer(BoxSizer1);
@@ -1141,8 +1139,8 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	Connect(ID_WXRADIOBOXBRACKETSTYLE,wxEVT_COMMAND_RADIOBOX_SELECTED,(wxObjectEventFunction)&MadOptionsDialog::OnWxRadioBoxBracketStyleSelect);
 	Connect(ID_WXCHECKBREAKLINES,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&MadOptionsDialog::OnFormattingBreakLinesClick);
 	Connect(ID_WXCHECKBREAKBLOCKS,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&MadOptionsDialog::OnPaddingBreakBlocksClick);
-	Connect(ID_WXBUTTONOK,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadOptionsDialog::WxButtonOKClick);
-	Connect(ID_WXBUTTONCANCEL,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadOptionsDialog::WxButtonCancelClick);
+	Connect(wxID_OK,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadOptionsDialog::WxButtonOKClick);
+	Connect(wxID_CANCEL,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadOptionsDialog::WxButtonCancelClick);
 	Connect(wxID_ANY,wxEVT_CLOSE_WINDOW,(wxObjectEventFunction)&MadOptionsDialog::MadOptionsDialogClose);
 	//*)
 
@@ -1278,8 +1276,6 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	while(cd->command > 0);
 
 	AuiNotebook1->SetWindowStyleFlag(wxAUI_NB_TOP|wxAUI_NB_TAB_MOVE|wxAUI_NB_SCROLL_BUTTONS);
-
-	//WxButtonCancel->SetId(wxID_CANCEL);
 }
 
 MadOptionsDialog::~MadOptionsDialog()
