@@ -6812,7 +6812,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		m_Config->Write( wxT( "AutoCompletePair" ), acp );
 		msc = g_OptionsDialog->WxCheckBoxMouseSelectToCopy->GetValue();
 		m_Config->Write( wxT( "MouseSelectToCopy" ), msc );
-		mscck = g_OptionsDialog->WxCheckBoxCtrlWithMouseToSelect->GetValue();
+		mscck = g_OptionsDialog->WxCheckBoxWhenPressCtrlKey->GetValue();
 		m_Config->Write( wxT( "MouseSelectToCopyWithCtrlKey" ), mscck );
 		mmp = g_OptionsDialog->WxCheckBoxMiddleMouseToPaste->GetValue();
 		m_Config->Write( wxT( "MiddleMouseToPaste" ), mmp );
