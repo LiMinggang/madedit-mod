@@ -3,9 +3,9 @@
 	<object class="wxDialog" name="MadOptionsDialog">
 		<title>Options</title>
 		<centered>1</centered>
-		<size>580,640</size>
+		<size>553,438</size>
 		<id_arg>0</id_arg>
-		<style>wxCAPTION|wxSYSTEM_MENU|wxRESIZE_BORDER|wxCLOSE_BOX|wxMAXIMIZE_BOX</style>
+		<style>wxCAPTION|wxSYSTEM_MENU|wxRESIZE_BORDER|wxCLOSE_BOX|wxDIALOG_NO_PARENT|wxMAXIMIZE_BOX</style>
 		<handler function="MadOptionsDialogClose" entry="EVT_CLOSE" />
 		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
 			<orient>wxVERTICAL</orient>
@@ -16,8 +16,10 @@
 							<orient>wxVERTICAL</orient>
 							<object class="sizeritem">
 								<object class="wxAuiNotebook" name="ID_AUINOTEBOOK1" variable="AuiNotebook1" member="yes">
+									<size>-1,-1</size>
 									<object class="AuiNotebookPage">
 										<object class="wxPanel" name="ID_PANEL1" variable="Panel1" member="yes">
+											<style>0</style>
 											<object class="wxBoxSizer" variable="BoxSizer3" member="no">
 												<orient>wxVERTICAL</orient>
 												<object class="sizeritem">
@@ -185,6 +187,7 @@
 									</object>
 									<object class="AuiNotebookPage">
 										<object class="wxPanel" name="ID_PANEL2" variable="Panel2" member="yes">
+											<style>0</style>
 											<object class="wxBoxSizer" variable="BoxSizer8" member="no">
 												<orient>wxVERTICAL</orient>
 												<object class="sizeritem">
@@ -393,6 +396,7 @@
 									</object>
 									<object class="AuiNotebookPage">
 										<object class="wxPanel" name="ID_PANEL3" variable="Panel3" member="yes">
+											<style>0</style>
 											<object class="wxBoxSizer" variable="BoxSizer14" member="no">
 												<object class="sizeritem">
 													<object class="wxBoxSizer" variable="BoxSizer15" member="no">
@@ -663,6 +667,7 @@
 									</object>
 									<object class="AuiNotebookPage">
 										<object class="wxPanel" name="ID_PANEL4" variable="Panel4" member="yes">
+											<style>0</style>
 											<object class="wxBoxSizer" variable="BoxSizer18" member="no">
 												<object class="sizeritem">
 													<object class="wxBoxSizer" variable="BoxSizer19" member="no">
@@ -830,6 +835,7 @@
 									</object>
 									<object class="AuiNotebookPage">
 										<object class="wxPanel" name="ID_PANEL5" variable="Panel5" member="yes">
+											<style>0</style>
 											<object class="wxBoxSizer" variable="BoxSizer36" member="no">
 												<orient>wxVERTICAL</orient>
 												<object class="sizeritem">
@@ -898,13 +904,15 @@
 									<object class="AuiNotebookPage">
 										<object class="wxPanel" name="ID_PANEL6" variable="Panel6" member="yes">
 											<size>480,240</size>
+											<style>0</style>
 											<object class="wxBoxSizer" variable="BoxSizer6" member="no">
 												<object class="sizeritem">
 													<object class="wxAuiNotebook" name="ID_AUINOTEBOOK2" variable="AuiNotebook2" member="yes">
 														<size>300,360</size>
-														<style>wxAUI_NB_TOP|wxTAB_TRAVERSAL</style>
+														<style>wxAUI_NB_TOP</style>
 														<object class="AuiNotebookPage">
 															<object class="wxPanel" name="ID_PANEL7" variable="Panel7" member="yes">
+																<style>0</style>
 																<object class="wxGridSizer" variable="GridSizer2" member="no">
 																	<cols>2</cols>
 																	<object class="sizeritem">
@@ -960,6 +968,7 @@
 														</object>
 														<object class="AuiNotebookPage">
 															<object class="wxPanel" name="ID_PANEL8" variable="Panel8" member="yes">
+																<style>0</style>
 																<object class="wxBoxSizer" variable="BoxSizer34" member="no">
 																	<orient>wxVERTICAL</orient>
 																	<object class="sizeritem">
@@ -996,6 +1005,7 @@
 														</object>
 														<object class="AuiNotebookPage">
 															<object class="wxPanel" name="ID_PANEL9" variable="Panel9" member="yes">
+																<style>0</style>
 																<object class="wxBoxSizer" variable="BoxSizer35" member="no">
 																	<orient>wxVERTICAL</orient>
 																	<object class="sizeritem">
@@ -1154,6 +1164,7 @@
 														</object>
 														<object class="AuiNotebookPage">
 															<object class="wxPanel" name="ID_PANEL10" variable="Panel10" member="yes">
+																<style>0</style>
 																<object class="wxBoxSizer" variable="BoxSizer41" member="no">
 																	<orient>wxVERTICAL</orient>
 																	<object class="sizeritem">
@@ -1237,29 +1248,26 @@
 																	<object class="sizeritem">
 																		<object class="wxBoxSizer" variable="BoxSizer42" member="no">
 																			<object class="spacer">
-																				<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
-																				<option>1</option>
+																				<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
 																				<size>10,0</size>
 																			</object>
 																			<object class="sizeritem">
 																				<object class="wxStaticText" name="ID_STATICTEXT23" variable="StaticText23" member="yes">
 																					<label>Break lines after amount of chars (range: 50-200)</label>
 																				</object>
-																				<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
-																				<border>5</border>
-																				<option>1</option>
+																				<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+																				<border>2</border>
 																			</object>
 																			<object class="sizeritem">
 																				<object class="wxTextCtrl" name="ID_WXEDITSFMAXLINELENGTH" variable="WxEditSFMaxLineLength" member="yes">
 																					<value>200</value>
 																				</object>
-																				<flag>wxALL|wxEXPAND</flag>
+																				<flag>wxALL</flag>
 																				<border>2</border>
 																			</object>
 																		</object>
-																		<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
-																		<border>5</border>
-																		<option>1</option>
+																		<flag>wxALL|wxEXPAND</flag>
+																		<border>2</border>
 																	</object>
 																	<object class="sizeritem">
 																		<object class="wxBoxSizer" variable="BoxSizer43" member="no">
@@ -1276,9 +1284,8 @@
 																				<option>1</option>
 																			</object>
 																		</object>
-																		<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
-																		<border>5</border>
-																		<option>1</option>
+																		<flag>wxALL|wxEXPAND</flag>
+																		<border>2</border>
 																	</object>
 																</object>
 															</object>
@@ -1286,6 +1293,7 @@
 														</object>
 														<object class="AuiNotebookPage">
 															<object class="wxPanel" name="ID_PANEL11" variable="Panel11" member="yes">
+																<style>0</style>
 																<object class="wxBoxSizer" variable="BoxSizer47" member="no">
 																	<orient>wxVERTICAL</orient>
 																	<object class="sizeritem">
@@ -1352,7 +1360,7 @@
 																		<object class="wxCheckBox" name="ID_WXCHECKDELEMPTYLINE" variable="WxCheckDelEmptyLine" member="yes">
 																			<label>Delete empty lines within a function or method</label>
 																		</object>
-																		<flag>wxALL|wxALIGN_LEFT</flag>
+																		<flag>wxALL|wxEXPAND</flag>
 																		<border>2</border>
 																	</object>
 																	<object class="sizeritem">
@@ -1406,7 +1414,7 @@
 																				<border>2</border>
 																			</object>
 																		</object>
-																		<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+																		<flag>wxALL|wxEXPAND</flag>
 																		<border>2</border>
 																	</object>
 																</object>
@@ -1415,6 +1423,7 @@
 														</object>
 														<object class="AuiNotebookPage">
 															<object class="wxPanel" name="ID_PANEL12" variable="Panel12" member="yes">
+																<style>0</style>
 																<object class="wxBoxSizer" variable="BoxSizer44" member="no">
 																	<orient>wxVERTICAL</orient>
 																	<object class="sizeritem">
@@ -1508,7 +1517,7 @@
 						<border>5</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxButton" name="ID_WXBUTTONCANCEL" variable="WxButtonCancel" member="yes">
+						<object class="wxButton" name="wxID_CANCEL" variable="WxButtonCancel" member="yes">
 							<label>&amp;Cancel</label>
 							<handler function="WxButtonCancelClick" entry="EVT_BUTTON" />
 						</object>

@@ -252,7 +252,7 @@
 								<border>2</border>
 							</object>
 							<object class="sizeritem">
-								<object class="wxButton" name="ID_WXBUTTONCLOSE" variable="WxButtonClose" member="yes">
+								<object class="wxButton" name="wxID_CANCEL" variable="WxButtonClose" member="yes">
 									<label>Close</label>
 									<handler function="WxButtonCloseClick" entry="EVT_BUTTON" />
 								</object>
