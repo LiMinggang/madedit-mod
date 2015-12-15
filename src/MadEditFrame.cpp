@@ -2881,6 +2881,7 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 {
 	// --> Don't use Close with a Frame,
 	// use Destroy instead.
+	g_CheckModTimeForReload = false;
 	if( event.CanVeto() )
 	{
 		if( QueryCloseAllFiles() == false )
