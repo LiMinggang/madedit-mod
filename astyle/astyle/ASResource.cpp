@@ -1,26 +1,8 @@
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *   ASResource.cpp
- *
- *   Copyright (C) 2014 by Jim Pattee
- *   <http://www.gnu.org/licenses/lgpl-3.0.html>
- *
- *   This file is a part of Artistic Style <http://astyle.sourceforge.net>.
- *
- *   Artistic Style is free software: you can redistribute it and/or modify
- *   it under the terms of the GNU Lesser General Public License as published
- *   by the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version.
- *
- *   Artistic Style is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU Lesser General Public License for more details.
- *
- *   You should have received a copy of the GNU Lesser General Public License
- *   along with Artistic Style.  If not, see <http://www.gnu.org/licenses/>.
- *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- */
+// ASResource.cpp
+// Copyright (c) 2015 by Jim Pattee <jimp03@email.com>.
+// Licensed under the MIT license.
+// License.txt describes the conditions under which this software may be distributed.
+
 
 #include "astyle.h"
 #include <algorithm>
@@ -315,17 +297,19 @@ void ASResource::buildIndentableHeaders(vector<const string*>* indentableHeaders
 */
 void ASResource::buildIndentableMacros(vector<const pair<const string, const string>* >* indentableMacros)
 {
+	typedef pair<const string, const string> macro_pair;
+
 	// the pairs must be retained in memory
-	static const struct pair<const string, const string> macros[] =
+	static const macro_pair macros[] =
 	{
 		// wxWidgets
-		make_pair("BEGIN_EVENT_TABLE", "END_EVENT_TABLE"),
-		make_pair("wxBEGIN_EVENT_TABLE", "wxEND_EVENT_TABLE"),
+		macro_pair("BEGIN_EVENT_TABLE", "END_EVENT_TABLE"),
+		macro_pair("wxBEGIN_EVENT_TABLE", "wxEND_EVENT_TABLE"),
 		// MFC
-		make_pair("BEGIN_DISPATCH_MAP", "END_DISPATCH_MAP"),
-		make_pair("BEGIN_EVENT_MAP", "END_EVENT_MAP"),
-		make_pair("BEGIN_MESSAGE_MAP", "END_MESSAGE_MAP"),
-		make_pair("BEGIN_PROPPAGEIDS", "END_PROPPAGEIDS"),
+		macro_pair("BEGIN_DISPATCH_MAP", "END_DISPATCH_MAP"),
+		macro_pair("BEGIN_EVENT_MAP", "END_EVENT_MAP"),
+		macro_pair("BEGIN_MESSAGE_MAP", "END_MESSAGE_MAP"),
+		macro_pair("BEGIN_PROPPAGEIDS", "END_PROPPAGEIDS"),
 	};
 
 	size_t elements = sizeof(macros) / sizeof(macros[0]);

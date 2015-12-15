@@ -1,26 +1,8 @@
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *   ASEnhancer.cpp
- *
- *   Copyright (C) 2014 by Jim Pattee
- *   <http://www.gnu.org/licenses/lgpl-3.0.html>
- *
- *   This file is a part of Artistic Style <http://astyle.sourceforge.net>.
- *
- *   Artistic Style is free software: you can redistribute it and/or modify
- *   it under the terms of the GNU Lesser General Public License as published
- *   by the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version.
- *
- *   Artistic Style is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU Lesser General Public License for more details.
- *
- *   You should have received a copy of the GNU Lesser General Public License
- *   along with Artistic Style.  If not, see <http://www.gnu.org/licenses/>.
- *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- */
+// ASEnhancer.cpp
+// Copyright (c) 2015 by Jim Pattee <jimp03@email.com>.
+// Licensed under the MIT license.
+// License.txt describes the conditions under which this software may be distributed.
+
 
 #include "astyle.h"
 
@@ -200,8 +182,7 @@ void ASEnhancer::convertSpaceIndentToForceTab(string& line) const
 	// replace leading spaces with tab indents
 	size_t newSpaceIndentLength = line.find_first_not_of(" \t");
 	size_t tabCount = newSpaceIndentLength / tabLength;		// truncate extra spaces
-	line.erase(0U, tabCount * tabLength);
-	line.insert(0U, tabCount, '\t');
+	line.replace(0U, tabCount * tabLength, tabCount, '\t');
 }
 
 /**
@@ -275,19 +256,19 @@ int ASEnhancer::indentLine(string& line, int indent) const
 		convertForceTabIndentToSpaces(line);
 		// insert the space indents
 		charsToInsert = indent * indentLength;
-		line.insert(0U, charsToInsert, ' ');
+		line.insert(line.begin(), charsToInsert, ' ');
 		// replace leading spaces with tab indents
 		convertSpaceIndentToForceTab(line);
 	}
 	else if (useTabs)
 	{
 		charsToInsert = indent;
-		line.insert(0U, charsToInsert, '\t');
+		line.insert(line.begin(), charsToInsert, '\t');
 	}
 	else // spaces
 	{
 		charsToInsert = indent * indentLength;
-		line.insert(0U, charsToInsert, ' ');
+		line.insert(line.begin(), charsToInsert, ' ');
 	}
 
 	return charsToInsert;

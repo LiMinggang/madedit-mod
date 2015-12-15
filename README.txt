@@ -127,6 +127,7 @@ Fix: Extra '\' was added to recorded MadPython while searching with RegEx #102
 Fix: Caret pos should be at the last while opening the Macro dialog #94 #104
 Fix: English was missing in the language list #105
 Improve performance of script recording
+Update Astyle to latest code
 Update translations
 
 Mod v0.3.9

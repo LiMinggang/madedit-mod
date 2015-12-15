@@ -1,26 +1,8 @@
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *   ASBeautifier.cpp
- *
- *   Copyright (C) 2014 by Jim Pattee
- *   <http://www.gnu.org/licenses/lgpl-3.0.html>
- *
- *   This file is a part of Artistic Style <http://astyle.sourceforge.net>.
- *
- *   Artistic Style is free software: you can redistribute it and/or modify
- *   it under the terms of the GNU Lesser General Public License as published
- *   by the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version.
- *
- *   Artistic Style is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU Lesser General Public License for more details.
- *
- *   You should have received a copy of the GNU Lesser General Public License
- *   along with Artistic Style.  If not, see <http://www.gnu.org/licenses/>.
- *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- */
+// ASBeautifier.cpp
+// Copyright (c) 2015 by Jim Pattee <jimp03@email.com>.
+// Licensed under the MIT license.
+// License.txt describes the conditions under which this software may be distributed.
+
 
 #include "astyle.h"
 
@@ -39,8 +21,6 @@ static int g_preprocessorCppExternCBracket;
  */
 ASBeautifier::ASBeautifier()
 {
-	g_preprocessorCppExternCBracket = 0;
-
 	waitingBeautifierStack = NULL;
 	activeBeautifierStack = NULL;
 	waitingBeautifierStackLengthStack = NULL;
@@ -156,6 +136,7 @@ ASBeautifier::ASBeautifier(const ASBeautifier& other) : ASBase(other)
 	inLineNumber = other.inLineNumber;
 	horstmannIndentInStatement = other.horstmannIndentInStatement;
 	nonInStatementBracket = other.nonInStatementBracket;
+	objCColonAlignSubsequent = other.objCColonAlignSubsequent;
 	lineCommentNoBeautify = other.lineCommentNoBeautify;
 	isElseHeaderIndent = other.isElseHeaderIndent;
 	isCaseHeaderCommentIndent = other.isCaseHeaderCommentIndent;
@@ -300,6 +281,7 @@ void ASBeautifier::init(ASSourceIterator* iter)
 	sourceIterator = iter;
 	initVectors();
 	ASBase::init(getFileType());
+	g_preprocessorCppExternCBracket = 0;
 
 	initContainer(waitingBeautifierStack, new vector<ASBeautifier*>);
 	initContainer(activeBeautifierStack, new vector<ASBeautifier*>);
@@ -407,6 +389,7 @@ void ASBeautifier::init(ASSourceIterator* iter)
 	inLineNumber = 0;
 	horstmannIndentInStatement = 0;
 	nonInStatementBracket = 0;
+	objCColonAlignSubsequent = 0;
 }
 
 /*
@@ -732,6 +715,16 @@ bool ASBeautifier::getModeManuallySet() const
 bool ASBeautifier::getForceTabIndentation(void) const
 {
 	return shouldForceTabIndentation;
+}
+
+/**
+* Get the state of the Objective-C align method colon option.
+*
+* @return   state of shouldAlignMethodColon option.
+*/
+bool ASBeautifier::getAlignMethodColon(void) const
+{
+	return shouldAlignMethodColon;
 }
 
 /**
@@ -1097,6 +1090,7 @@ string ASBeautifier::beautify(const string& originalLine)
 		activeBeautifierStack->back()->inLineNumber = inLineNumber;
 		activeBeautifierStack->back()->horstmannIndentInStatement = horstmannIndentInStatement;
 		activeBeautifierStack->back()->nonInStatementBracket = nonInStatementBracket;
+		activeBeautifierStack->back()->objCColonAlignSubsequent = objCColonAlignSubsequent;
 		activeBeautifierStack->back()->lineCommentNoBeautify = lineCommentNoBeautify;
 		activeBeautifierStack->back()->isElseHeaderIndent = isElseHeaderIndent;
 		activeBeautifierStack->back()->isCaseHeaderCommentIndent = isCaseHeaderCommentIndent;
@@ -1141,6 +1135,9 @@ string ASBeautifier::beautify(const string& originalLine)
 			if (shouldAlignMethodColon)
 			{
 				colonIndentObjCMethodDefinition = line.find(':');
+				int objCColonAlignSubsequentIndent = objCColonAlignSubsequent + indentLength;
+				if (objCColonAlignSubsequentIndent > colonIndentObjCMethodDefinition)
+					colonIndentObjCMethodDefinition = objCColonAlignSubsequentIndent;
 			}
 			else if (inStatementIndentStack->empty()
 			         || inStatementIndentStack->back() == 0)
@@ -2303,6 +2300,7 @@ void ASBeautifier::clearObjCMethodDefinitionAlignment()
 	spaceIndentCount = 0;
 	spaceIndentObjCMethodDefinition = 0;
 	colonIndentObjCMethodDefinition = 0;
+	objCColonAlignSubsequent = 0;
 	isInObjCMethodDefinition = false;
 	isImmediatelyPostObjCMethodDefinition = false;
 	if (!inStatementIndentStack->empty())
@@ -3029,8 +3027,7 @@ void ASBeautifier::parseCurrentLine(const string& line)
 			}
 			else if (isDigit(peekNextChar(line, i)))
 			{
-				// found a bit field
-				// so do nothing special
+				// found a bit field - do nothing special
 			}
 			else if (isCStyle() && isInClass && prevNonSpaceCh != ')')
 			{

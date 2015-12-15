@@ -1,26 +1,8 @@
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *   ASFormatter.cpp
- *
- *   Copyright (C) 2014 by Jim Pattee
- *   <http://www.gnu.org/licenses/lgpl-3.0.html>
- *
- *   This file is a part of Artistic Style <http://astyle.sourceforge.net>.
- *
- *   Artistic Style is free software: you can redistribute it and/or modify
- *   it under the terms of the GNU Lesser General Public License as published
- *   by the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version.
- *
- *   Artistic Style is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU Lesser General Public License for more details.
- *
- *   You should have received a copy of the GNU Lesser General Public License
- *   along with Artistic Style.  If not, see <http://www.gnu.org/licenses/>.
- *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- */
+// ASFormatter.cpp
+// Copyright (c) 2015 by Jim Pattee <jimp03@email.com>.
+// Licensed under the MIT license.
+// License.txt describes the conditions under which this software may be distributed.
+
 
 #include "astyle.h"
 
@@ -188,6 +170,7 @@ void ASFormatter::init(ASSourceIterator* si)
 	preprocBracketTypeStackSize = 0;
 	spacePadNum = 0;
 	nextLineSpacePadNum = 0;
+	objCColonAlign = 0;
 	templateDepth = 0;
 	squareBracketCount = 0;
 	horstmannIndentChars = 0;
@@ -896,6 +879,7 @@ string ASFormatter::nextLine()
 				isCharImmediatelyPostNonInStmt = false;
 				needHeaderOpeningBracket = false;
 				shouldKeepLineUnbroken = false;
+				objCColonAlign = 0;
 
 				isPreviousBracketBlockRelated = !isBracketType(newBracketType, ARRAY_TYPE);
 				bracketTypeStack->push_back(newBracketType);
@@ -1103,8 +1087,12 @@ string ASFormatter::nextLine()
 				isNonParenHeader = findHeader(nonParenHeaders) != NULL;
 
 				// join 'else if' statements
-				if (currentHeader == &AS_IF && previousHeader == &AS_ELSE && isInLineBreak
-				        && !shouldBreakElseIfs && !isCharImmediatelyPostLineComment)
+				if (currentHeader == &AS_IF
+				        && previousHeader == &AS_ELSE
+				        && isInLineBreak
+				        && !shouldBreakElseIfs
+				        && !isCharImmediatelyPostLineComment
+				        && !isImmediatelyPostPreprocessor)
 				{
 					// 'else' must be last thing on the line
 					size_t start = formattedLine.length() >= 6 ? formattedLine.length() - 6 : 0;
@@ -1446,6 +1434,8 @@ string ASFormatter::nextLine()
 			isInObjCMethodDefinition = true;
 			isImmediatelyPostObjCMethodPrefix = true;
 			isInObjCInterface = false;
+			if (getAlignMethodColon())
+				objCColonAlign = findObjCColonAlignment();
 			appendCurrentChar();
 			continue;
 		}
@@ -1630,6 +1620,7 @@ string ASFormatter::nextLine()
 		isIndentableProprocessor = false;
 		isElseHeaderIndent = elseHeaderFollowsComments;
 		isCaseHeaderCommentIndent = caseHeaderFollowsComments;
+		objCColonAlignSubsequent = objCColonAlign;
 		if (isCharImmediatelyPostNonInStmt)
 		{
 			isNonInStatementArray = false;
@@ -2692,7 +2683,7 @@ BracketType ASFormatter::getBracketType()
 */
 bool ASFormatter::isClassInitializer() const
 {
-	assert(currentLine[charNum] == ':');
+	assert(currentChar == ':');
 	assert(previousChar != ':' && peekNextChar() != ':');	// not part of '::'
 
 	// this should be similar to ASBeautifier::parseCurrentLine()
@@ -2996,7 +2987,7 @@ bool ASFormatter::isDereferenceOrAddressOf() const
  */
 bool ASFormatter::isPointerOrReferenceCentered() const
 {
-	assert(currentLine[charNum] == '*' || currentLine[charNum] == '&' || currentLine[charNum] == '^');
+	assert(currentChar == '*' || currentChar == '&' || currentChar == '^');
 
 	int prNum = charNum;
 	int lineLength = (int) currentLine.length();
@@ -4733,8 +4724,7 @@ void ASFormatter::formatRunIn()
 			indent.append(indentLength_, ' ');
 		// replace spaces indents with tab indents
 		size_t tabCount = indent.length() / tabLength_;		// truncate extra spaces
-		indent.erase(0U, tabCount * tabLength_);
-		indent.insert(0U, tabCount, '\t');
+		indent.replace(0U, tabCount * tabLength_, tabCount, '\t');
 		horstmannIndentChars = indentLength_;
 		if (indent[0] == ' ')			// allow for bracket
 			indent.erase(0, 1);
@@ -4865,7 +4855,7 @@ void ASFormatter::initContainer(T& container, T value)
  */
 void ASFormatter::convertTabToSpaces()
 {
-	assert(currentLine[charNum] == '\t');
+	assert(currentChar == '\t');
 
 	// do NOT replace if in quotes
 	if (isInQuote || isInQuoteContinuation)
@@ -6988,6 +6978,108 @@ void ASFormatter::resetEndOfStatement()
 	nonInStatementBracket = 0;
 	while (!questionMarkStack->empty())
 		questionMarkStack->pop_back();
+}
+
+// Find the colon alignment for an Objective-C method definition.
+int ASFormatter::findObjCColonAlignment() const
+{
+	assert(currentChar == '+' || currentChar == '-');
+	assert(getAlignMethodColon());
+
+	bool isFirstLine = true;
+	bool haveFirstColon = false;
+	bool needReset = false;
+	bool isInComment_ = false;
+	bool isInQuote_ = false;
+	char quoteChar_ = ' ';
+	int  colonAdjust = 0;
+	int  colonAlign = 0;
+	string nextLine_ = currentLine;
+
+	// peek next line
+	while (sourceIterator->hasMoreLines() || isFirstLine)
+	{
+		if (!isFirstLine)
+		{
+			nextLine_ = sourceIterator->peekNextLine();
+			needReset = true;
+		}
+		// parse the line
+		haveFirstColon = false;
+		nextLine_ = ASBeautifier::trim(nextLine_);
+		for (size_t i = 0; i < nextLine_.length(); i++)
+		{
+			if (isWhiteSpace(nextLine_[i]))
+				continue;
+			if (nextLine_.compare(i, 2, "/*") == 0)
+				isInComment_ = true;
+			if (isInComment_)
+			{
+				if (nextLine_.compare(i, 2, "*/") == 0)
+				{
+					isInComment_ = false;
+					++i;
+				}
+				continue;
+			}
+			if (nextLine_[i] == '\\')
+			{
+				++i;
+				continue;
+			}
+			if (isInQuote_)
+			{
+				if (nextLine_[i] == quoteChar_)
+					isInQuote_ = false;
+				continue;
+			}
+
+			if (nextLine_[i] == '"' || nextLine_[i] == '\'')
+			{
+				isInQuote_ = true;
+				quoteChar_ = nextLine_[i];
+				continue;
+			}
+			if (nextLine_.compare(i, 2, "//") == 0)
+			{
+				i = nextLine_.length();
+				continue;
+			}
+			// process the current char
+			if (nextLine_[i] == '{' || nextLine_[i] == ';')
+				goto EndOfWhileLoop;
+			if (isFirstLine)	// colon align does not include the first line
+				continue;
+			if (haveFirstColon)
+				continue;
+			// compute colon adjustment
+			if (nextLine_[i] == ':')
+			{
+				haveFirstColon = true;
+				if (shouldPadMethodColon)
+				{
+					int spacesStart;
+					for (spacesStart = i; spacesStart > 0; spacesStart--)
+						if (!isWhiteSpace(nextLine_[spacesStart - 1]))
+							break;
+					int spaces = i - spacesStart;
+					if (objCColonPadMode == COLON_PAD_ALL || objCColonPadMode == COLON_PAD_BEFORE)
+						colonAdjust = 1 - spaces;
+					else if (objCColonPadMode == COLON_PAD_NONE || objCColonPadMode == COLON_PAD_AFTER)
+						colonAdjust = 0 - spaces;
+				}
+				// compute alignment
+				int colonPosition = i + colonAdjust;
+				if (colonPosition > colonAlign)
+					colonAlign = colonPosition;
+			}
+		}	// end of for loop
+		isFirstLine = false;
+	}	// end of while loop
+EndOfWhileLoop:
+	if (needReset)
+		sourceIterator->peekReset();
+	return colonAlign;
 }
 
 // pad an Objective-C method colon

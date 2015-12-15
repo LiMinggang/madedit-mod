@@ -1,26 +1,8 @@
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *   astyle.h
+// astyle.h
+// Copyright (c) 2015 by Jim Pattee <jimp03@email.com>.
+// Licensed under the MIT license.
+// License.txt describes the conditions under which this software may be distributed.
 
- *   Copyright (C) 2014 by Jim Pattee
- *   <http://www.gnu.org/licenses/lgpl-3.0.html>
- *
- *   This file is a part of Artistic Style <http://astyle.sourceforge.net>.
- *
- *   Artistic Style is free software: you can redistribute it and/or modify
- *   it under the terms of the GNU Lesser General Public License as published
- *   by the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version.
- *
- *   Artistic Style is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU Lesser General Public License for more details.
- *
- *   You should have received a copy of the GNU Lesser General Public License
- *   along with Artistic Style.  If not, see <http://www.gnu.org/licenses/>.
- *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- */
 
 #ifndef ASTYLE_H
 #define ASTYLE_H
@@ -373,6 +355,7 @@ public:
 	int  getTabLength(void) const;
 	string getIndentString(void) const;
 	string getNextWord(const string& line, size_t currPos) const;
+	bool getAlignMethodColon(void) const;
 	bool getBracketIndent(void) const;
 	bool getBlockIndent(void) const;
 	bool getCaseIndent(void) const;
@@ -404,6 +387,7 @@ protected:
 	int  inLineNumber;
 	int  horstmannIndentInStatement;
 	int  nonInStatementBracket;
+	int  objCColonAlignSubsequent;		// for subsequent lines not counting indent
 	bool lineCommentNoBeautify;
 	bool isElseHeaderIndent;
 	bool isCaseHeaderCommentIndent;
@@ -748,6 +732,7 @@ private:  // functions
 	bool isOkToBreakBlock(BracketType bracketType) const;
 	bool isOperatorPaddingDisabled() const;
 	bool pointerSymbolFollows() const;
+	int  findObjCColonAlignment() const;
 	int  getCurrentLineCommentAdjustment();
 	int  getNextLineCommentAdjustment();
 	int  isOneLineBlockReached(string& line, int startChar) const;
@@ -795,7 +780,6 @@ private:  // functions
 	void processPreprocessor();
 	void resetEndOfStatement();
 	void setAttachClosingBracketMode(bool state);
-	void setBreakBlocksVariables();
 	void stripCommentPrefix();
 	void testForTimeToSplitFormattedLine();
 	void trimContinuationLine();
@@ -842,6 +826,7 @@ private:  // variables
 	int  charNum;
 	int  horstmannIndentChars;
 	int  nextLineSpacePadNum;
+	int  objCColonAlign;
 	int  preprocBracketTypeStackSize;
 	int  spacePadNum;
 	int  tabIncrementIn;

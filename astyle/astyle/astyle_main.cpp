@@ -1,50 +1,34 @@
+// astyle_main.cpp
+// Copyright (c) 2015 by Jim Pattee <jimp03@email.com>.
+// Licensed under the MIT license.
+// License.txt describes the conditions under which this software may be distributed.
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *   astyle_main.cpp
- *
- *   Copyright (C) 2014 by Jim Pattee
- *   <http://www.gnu.org/licenses/lgpl-3.0.html>
- *
- *   This file is a part of Artistic Style <http://astyle.sourceforge.net>.
- *
- *   Artistic Style is free software: you can redistribute it and/or modify
- *   it under the terms of the GNU Lesser General Public License as published
- *   by the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version.
- *
- *   Artistic Style is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU Lesser General Public License for more details.
- *
- *   You should have received a copy of the GNU Lesser General Public License
- *   along with Artistic Style.  If not, see <http://www.gnu.org/licenses/>.
- *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *   AStyle_main source file map.
+ *   This source file contains several classes.
+ *   They are arranged as follows.
+ *   ---------------------------------------
+ *   namespace astyle {
+ *   ASStreamIterator methods
+ *   ASConsole methods
+ *      // Windows specific
+ *      // Linux specific
+ *   ASLibrary methods
+ *      // Windows specific
+ *      // Linux specific
+ *   ASOptions methods
+ *   Utf8_16 methods
+ *   }  // end of astyle namespace
+ *   Global Area ---------------------------
+ *      Java Native Interface functions
+ *      AStyleMainUtf16 entry point
+ *      AStyleMain entry point
+ *      AStyleGetVersion entry point
+ *      main entry point
+ *  ---------------------------------------
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-/*
-    AStyle_main source file map.
-    This source file contains several classes.
-    They are arranged as follows.
-    ---------------------------------------
-    namespace astyle {
-    ASStreamIterator methods
-    ASConsole methods
-        // Windows specific
-        // Linux specific
-    ASLibrary methods
-        // Windows specific
-        // Linux specific
-    ASOptions methods
-    Utf8_16 methods
-    }   // end of astyle namespace
-    Global Area ---------------------------
-        Java Native Interface functions
-        AStyleMainUtf16 entry point
-        AStyleMain entry point
-        AStyleGetVersion entry point
-        main entry point
-    ---------------------------------------
-*/
+
 
 #include "astyle_main.h"
 
@@ -52,6 +36,7 @@
 #include <cstdlib>
 #include <errno.h>
 #include <fstream>
+#include <locale.h>		// needed by some compilers
 #include <sstream>
 
 // includes for recursive getFileNames() function
@@ -70,10 +55,6 @@
 		#include <lib$routines.h>
 		#include <starlet.h>
 	#endif /* __VMS */
-#endif
-
-#ifdef __DMC__
-	#include <locale.h>
 #endif
 
 // turn off MinGW automatic file globbing
@@ -108,7 +89,7 @@ namespace astyle {
 	jmethodID g_mid;
 #endif
 
-const char* g_version = "2.06";
+const char* g_version = "2.06 beta";
 
 //-----------------------------------------------------------------------------
 // ASStreamIterator class
