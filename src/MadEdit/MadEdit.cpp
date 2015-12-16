@@ -960,7 +960,7 @@ MadEdit::MadEdit(wxWindow* parent, wxWindowID id, const	wxPoint& pos, const	wxSi
 	m_Config->Read(wxT("MouseSelectToCopyWithCtrlKey"),	&m_MouseSelectToCopyWithCtrlKey, true);
 #endif
 	m_Config->Read(wxT("MiddleMouseToPaste"), &m_MiddleMouseToPaste, true);
-	m_Config->Read(wxT("AutoFillColumnPaste"), &m_AutoFillColumnPaste, false);
+	m_Config->Read(wxT("AutoFillColumnPaste"), &m_AutoFillColumnPaste, true);
 
 	m_HexTopRow	= -1;
 	m_HexRowCount =	0;

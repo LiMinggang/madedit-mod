@@ -1276,7 +1276,7 @@ void MadOptionsDialog::LoadOptions( void )
 	WxCheckBoxCtrlWithMouseToSelect->SetValue( bb );
 	cfg->Read( wxT( "MiddleMouseToPaste" ), &bb );
 	WxCheckBoxMiddleMouseToPaste->SetValue( bb );
-	cfg->Read( wxT( "AutoFillColumnPaste" ), &bb );
+	cfg->Read( wxT( "AutoFillColumnPaste" ), &bb, true );
 	WxCheckBoxAutoFillColumnPaste->SetValue( bb );
 	extern bool g_DoNotSaveSettings;
 	WxCheckBoxDoNotSaveSettings->SetValue( g_DoNotSaveSettings );

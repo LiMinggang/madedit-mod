@@ -114,22 +114,22 @@ Note: Not support wxWidgets 2.X anymore since 0.3.X
 Todo:
 FreeBSD packaging (with FreeBSD 10.01)
 
-Mod v0.4.0
+Mod v0.3.9.1
 1.New: No scroll bar for HTML/Markdown preview window #95
 2.New: Support "Dot(".") match new line", default behavior is changed to NOT match new line #98
 3.New: Dot match newline for Quick Search bar #103
 4.New: Show main frame after everything was done #107
-Fix: Find Hex should be gray out if Regular expression was enabled(SearchReplaceDialog) #97
-Fix: Find Hex should be gray out if Regular expression was enabled(SearchReplaceInFilesDialog) #99
-Fix: Match whole words should be gray out if Regular expression was enabled(SearchReplaceDialog/SearchReplaceInFilesDialog) #100
-Fix: Match whole word and dot match newline should be overridden according to Search RegEx #101
-Fix: Extra '\' was added to recorded MadPython while searching with RegEx #102
-Fix: Caret pos should be at the last while opening the Macro dialog #94 #104
-Fix: English was missing in the language list #105
-Fix: Should not call Reload on exiting #109
-Improve performance of script recording
-Update Astyle to latest code
-Update translations
+5.Fix: Find Hex should be gray out if Regular expression was enabled(SearchReplaceDialog) #97
+6.Fix: Find Hex should be gray out if Regular expression was enabled(SearchReplaceInFilesDialog) #99
+7.Fix: Match whole words should be gray out if Regular expression was enabled(SearchReplaceDialog/SearchReplaceInFilesDialog) #100
+8.Fix: Match whole word and dot match newline should be overridden according to Search RegEx #101
+9.Fix: Extra '\' was added to recorded MadPython while searching with RegEx #102
+10.Fix: Caret pos should be at the last while opening the Macro dialog #94 #104
+11.Fix: English was missing in the language list #105
+12.Fix: Should not call Reload on exiting #109
+13.Improve performance of script recording
+14.Update Astyle to latest code
+15.Update translations
 
 Mod v0.3.9
 1.Improve on change syntax on save as
