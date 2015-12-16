@@ -435,7 +435,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxCheckBoxPrintSpaceChar = new wxCheckBox( WxNoteBookPage3, ID_WXCHECKBOXPRINTSPACECHAR, _( "Print Space Char" ), wxPoint( 6, 111 ), wxSize( 150, 17 ), 0, wxDefaultValidator, wxT( "WxCheckBoxPrintSpaceChar" ) );
 	WxStaticBoxSizer1->Add( WxCheckBoxPrintSpaceChar, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	SET_CONTROLPARENT( WxCheckBoxPrintSpaceChar );
-	wxStaticBox* WxStaticBoxSizer2_StaticBoxObj = new wxStaticBox( WxNoteBookPage3, wxID_ANY, wxT( "Hex Mode" ) );
+	wxStaticBox* WxStaticBoxSizer2_StaticBoxObj = new wxStaticBox( WxNoteBookPage3, wxID_ANY, _( "Hex Mode" ) );
 	WxStaticBoxSizer2 = new wxStaticBoxSizer( WxStaticBoxSizer2_StaticBoxObj, wxVERTICAL );
 	WxBoxSizer15->Add( WxStaticBoxSizer2, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 4 );
 	wxArrayString arrayStringFor_WxRadioBoxPrintOffset;

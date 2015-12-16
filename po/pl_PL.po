@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.3.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-16 13:47+0800\n"
+"POT-Creation-Date: 2015-12-16 20:34+0800\n"
 "PO-Revision-Date: 2015-03-31 14:56+0100\n"
 "Last-Translator: Adam Massalski <massaada@wp.pl>\n"
 "Language-Team: Adam Massalski <massaada@wp.pl>\n"
@@ -1751,7 +1751,7 @@ msgstr "Tryb &heksadecymalny"
 msgid "Change the editing mode to Hex-Mode"
 msgstr "Zmień tryb edycji na heksadecymalny"
 
-#: ../src/MadEditFrame.cpp:1970
+#: ../src/MadEditFrame.cpp:1970 ../src/MadOptionsDialog.cpp:438
 msgid "Hex Mode"
 msgstr "Tryb heksadecymakny"
 

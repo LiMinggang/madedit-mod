@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-16 13:47+0800\n"
+"POT-Creation-Date: 2015-12-16 20:34+0800\n"
 "PO-Revision-Date: 2015-09-22 13:00+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
@@ -1674,7 +1674,7 @@ msgstr "Modo &Hexadecimal"
 msgid "Change the editing mode to Hex-Mode"
 msgstr "Cambia al modo de edición hexadecimal"
 
-#: ../src/MadEditFrame.cpp:1970
+#: ../src/MadEditFrame.cpp:1970 ../src/MadOptionsDialog.cpp:438
 msgid "Hex Mode"
 msgstr "Modo hexadecimal"
 

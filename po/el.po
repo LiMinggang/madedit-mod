@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: madedit-mod 001 3.4.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-16 13:47+0800\n"
+"POT-Creation-Date: 2015-12-16 20:34+0800\n"
 "PO-Revision-Date: 2015-11-19 20:20+0800\n"
 "Last-Translator: nikos papadopoulos <231036448@freemail.gr>\n"
 "Language-Team: greek <http://www.mageia-gr.org/forum/>\n"
@@ -1718,7 +1718,7 @@ msgstr "Δεκαε&ξαδική Λειτουργία"
 msgid "Change the editing mode to Hex-Mode"
 msgstr "Αλλαγή της λειτουργίας επεξεργασίας σε Δεκαε&ξαδική Λειτουργία"
 
-#: ../src/MadEditFrame.cpp:1970
+#: ../src/MadEditFrame.cpp:1970 ../src/MadOptionsDialog.cpp:438
 msgid "Hex Mode"
 msgstr "Δεκαεξαδική Λειτουργία"
 

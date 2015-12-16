@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.3.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-16 13:47+0800\n"
-"PO-Revision-Date: 2015-12-16 13:49+0800\n"
+"POT-Creation-Date: 2015-12-16 20:34+0800\n"
+"PO-Revision-Date: 2015-12-16 20:31+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit-mod@gmail.com>\n"
 "Language: zh_CN\n"
@@ -1666,7 +1666,7 @@ msgstr "十六进制模式(&H)"
 msgid "Change the editing mode to Hex-Mode"
 msgstr "改变编辑模式为十六进制模式"
 
-#: ../src/MadEditFrame.cpp:1970
+#: ../src/MadEditFrame.cpp:1970 ../src/MadOptionsDialog.cpp:438
 msgid "Hex Mode"
 msgstr "十六进制模式"
 
@@ -2643,9 +2643,8 @@ msgid "WxStaticTextBCName"
 msgstr "WxStaticTextBCName"
 
 #: ../src/MadHighlightingDialog.cpp:331
-#, fuzzy
 msgid "(Automatic)"
-msgstr "自动检测"
+msgstr "（自动）"
 
 #: ../src/MadHighlightingDialog.cpp:924
 msgid "Cannot load this scheme."
@@ -2668,37 +2667,30 @@ msgid "Recent &Files"
 msgstr "最近打开过的文件列表"
 
 #: ../src/MadPurgeHistoryDialog.cpp:63
-#, fuzzy
 msgid "Recent Fon&ts"
 msgstr "最近使用过的字体"
 
 #: ../src/MadPurgeHistoryDialog.cpp:66
-#, fuzzy
 msgid "Recent &Encodings"
-msgstr "最近使用过的编码"
+msgstr "最近使用的編碼(&E)"
 
 #: ../src/MadPurgeHistoryDialog.cpp:69
-#, fuzzy
 msgid "Recent &Searched Texts"
 msgstr "最近搜索过的文本"
 
 #: ../src/MadPurgeHistoryDialog.cpp:72
-#, fuzzy
 msgid "Recent &Replaced Texts"
 msgstr "最近替换过的文本"
 
 #: ../src/MadPurgeHistoryDialog.cpp:75
-#, fuzzy
 msgid "Recent Searched &Directories"
 msgstr "最近查找过的目录"
 
 #: ../src/MadPurgeHistoryDialog.cpp:78
-#, fuzzy
 msgid "Recent Searched File Fi&lters"
 msgstr "最近查找文件的筛选条件"
 
 #: ../src/MadPurgeHistoryDialog.cpp:81
-#, fuzzy
 msgid "Recent Searched E&xclude Filters"
 msgstr "最近查找文件的排除条件"
 
@@ -2719,9 +2711,8 @@ msgid "Search In &Selection"
 msgstr "只在选取数据中查找(&S)"
 
 #: ../src/MadSearchReplaceDialog.cpp:165
-#, fuzzy
 msgid "Wrap aroun&d"
-msgstr "按最大长度折行"
+msgstr "循环查找"
 
 #: ../src/MadSearchReplaceDialog.cpp:169
 msgid "Bookmark in Searching"
@@ -3598,7 +3589,6 @@ msgid "Words"
 msgstr "字数"
 
 #: ../src/MadWordCountDialog.cpp:74
-#, fuzzy
 msgid "Characters (no space)"
 msgstr "字符数（不含空白）"
 
@@ -3786,9 +3776,8 @@ msgid "Error"
 msgstr "错误"
 
 #: ../src/MadMacroDlg.cpp:161
-#, fuzzy
 msgid "Results <<"
-msgstr "隐藏结果<<"
+msgstr "隐藏结果 <<"
 
 #: ../src/MadPrintout.h:16
 msgid "MadEdit-Mod Printout"
