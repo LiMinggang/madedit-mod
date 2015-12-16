@@ -18,7 +18,6 @@
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
-						<option>1</option>
 					</object>
 					<object class="sizeritem">
 						<object class="wxCheckBox" name="ID_WXCHECKBOXRECENTFONTS" variable="wxCheckBoxRecentFonts" member="yes">
@@ -26,7 +25,6 @@
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
-						<option>1</option>
 					</object>
 					<object class="sizeritem">
 						<object class="wxCheckBox" name="ID_WXCHECKBOXRECENTENCODINGS" variable="wxCheckBoxRecentEncodings" member="yes">
@@ -34,7 +32,6 @@
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
-						<option>1</option>
 					</object>
 					<object class="sizeritem">
 						<object class="wxCheckBox" name="ID_WXCHECKBOXRECENTSEARCHEDTEXTS" variable="wxCheckBoxRecentSearchedTexts" member="yes">
@@ -42,7 +39,6 @@
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
-						<option>1</option>
 					</object>
 					<object class="sizeritem">
 						<object class="wxCheckBox" name="ID_WXCHECKBOXRECENTREPLACEDTEXTS" variable="wxCheckBoxRecentReplacedTexts" member="yes">
@@ -50,7 +46,6 @@
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
-						<option>1</option>
 					</object>
 					<object class="sizeritem">
 						<object class="wxCheckBox" name="ID_WXCHECKBOXRECENTSEARCHEDDIRECTORIES" variable="wxCheckBoxRecentSearchedDirectories" member="yes">
@@ -58,7 +53,6 @@
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
-						<option>1</option>
 					</object>
 					<object class="sizeritem">
 						<object class="wxCheckBox" name="ID_WXRECENTSEARCHEDFILEFILTERS" variable="wxRecentSearchedFileFilters" member="yes">
@@ -66,7 +60,6 @@
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
-						<option>1</option>
 					</object>
 					<object class="sizeritem">
 						<object class="wxCheckBox" name="ID_WXCHECKBOXRECENTSEARCHEDEXCLUDEFILTERS" variable="wxCheckBoxRecentSearchedExcludeFilters" member="yes">
@@ -74,7 +67,6 @@
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
-						<option>1</option>
 					</object>
 					<object class="sizeritem">
 						<object class="wxCheckBox" name="ID_WXCHECKBOXCARETPOS" variable="wxCheckBoxCaretPos" member="yes">
@@ -82,7 +74,6 @@
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
-						<option>1</option>
 					</object>
 					<object class="sizeritem">
 						<object class="wxCheckBox" name="ID_WXCHECKBOXALLABOVE" variable="wxCheckBoxAllAbove" member="yes">
@@ -91,7 +82,6 @@
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
-						<option>1</option>
 					</object>
 				</object>
 				<flag>wxALL|wxEXPAND</flag>
