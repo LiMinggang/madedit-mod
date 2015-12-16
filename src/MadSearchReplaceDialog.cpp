@@ -202,13 +202,13 @@ MadSearchReplaceDialog::MadSearchReplaceDialog(wxWindow* parent,wxWindowID id,co
 	WxButtonFindAll = new wxButton(this, ID_WXBUTTONFINDALL, _("Find &All"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXBUTTONFINDALL"));
 	BoxSizer3->Add(WxButtonFindAll, 0, wxALL|wxEXPAND, 2);
 	WxButtonFindAllInAll = new wxButton(this, ID_WXBUTTONFINDALLINALL, _("Find All in All\nOpened"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXBUTTONFINDALLINALL"));
-	BoxSizer3->Add(WxButtonFindAllInAll, 1, wxALL|wxEXPAND, 2);
+	BoxSizer3->Add(WxButtonFindAllInAll, 0, wxALL|wxEXPAND, 2);
 	WxButtonReplace = new wxButton(this, ID_WXBUTTONREPLACE, _("&Replace"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXBUTTONREPLACE"));
 	BoxSizer3->Add(WxButtonReplace, 0, wxALL|wxEXPAND, 2);
 	WxButtonReplaceAll = new wxButton(this, ID_WXBUTTONREPLACEALL, _("Replace &All"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXBUTTONREPLACEALL"));
 	BoxSizer3->Add(WxButtonReplaceAll, 0, wxALL|wxEXPAND, 2);
 	WxButtonReplaceAllInAll = new wxButton(this, ID_WXBUTTONREPLACEALLINALL, _("Repl All in All\nOpened"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXBUTTONREPLACEALLINALL"));
-	BoxSizer3->Add(WxButtonReplaceAllInAll, 1, wxALL|wxEXPAND, 2);
+	BoxSizer3->Add(WxButtonReplaceAllInAll, 0, wxALL|wxEXPAND, 2);
 	WxButtonCount = new wxButton(this, ID_WXBUTTONCOUNT, _("C&ount"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXBUTTONCOUNT"));
 	BoxSizer3->Add(WxButtonCount, 0, wxALL|wxEXPAND, 2);
 	WxButtonReplaceExpand = new wxButton(this, ID_WXBUTTONREPLACEEXPAND, _("R&eplace >>"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXBUTTONREPLACEEXPAND"));
