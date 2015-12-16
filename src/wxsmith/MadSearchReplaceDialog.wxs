@@ -208,7 +208,6 @@
 								</object>
 								<flag>wxALL|wxEXPAND</flag>
 								<border>2</border>
-								<option>1</option>
 							</object>
 							<object class="sizeritem">
 								<object class="wxButton" name="ID_WXBUTTONREPLACE" variable="WxButtonReplace" member="yes">
@@ -233,7 +232,6 @@
 								</object>
 								<flag>wxALL|wxEXPAND</flag>
 								<border>2</border>
-								<option>1</option>
 							</object>
 							<object class="sizeritem">
 								<object class="wxButton" name="ID_WXBUTTONCOUNT" variable="WxButtonCount" member="yes">

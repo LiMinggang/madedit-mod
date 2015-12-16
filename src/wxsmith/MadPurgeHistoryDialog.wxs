@@ -5,6 +5,8 @@
 		<centered>1</centered>
 		<id_arg>0</id_arg>
 		<style>wxCAPTION|wxSYSTEM_MENU|wxCLOSE_BOX</style>
+		<handler function="MadPurgeHistoryDialogClose" entry="EVT_CLOSE" />
+		<handler function="MadPurgeHistoryDialogKeyDown" entry="EVT_KEY_DOWN" />
 		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
 			<orient>wxVERTICAL</orient>
 			<object class="sizeritem">
@@ -14,71 +16,80 @@
 						<object class="wxCheckBox" name="ID_WXCHECKBOXRECENTFILES" variable="wxCheckBoxRecentFiles" member="yes">
 							<label>Recent &amp;Files</label>
 						</object>
-						<flag>wxALL|wxALIGN_LEFT</flag>
+						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
+						<option>1</option>
 					</object>
 					<object class="sizeritem">
 						<object class="wxCheckBox" name="ID_WXCHECKBOXRECENTFONTS" variable="wxCheckBoxRecentFonts" member="yes">
 							<label>Recent Fon&amp;ts</label>
 						</object>
-						<flag>wxALL|wxALIGN_LEFT</flag>
+						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
+						<option>1</option>
 					</object>
 					<object class="sizeritem">
 						<object class="wxCheckBox" name="ID_WXCHECKBOXRECENTENCODINGS" variable="wxCheckBoxRecentEncodings" member="yes">
 							<label>Recent &amp;Encodings</label>
 						</object>
-						<flag>wxALL|wxALIGN_LEFT</flag>
+						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
+						<option>1</option>
 					</object>
 					<object class="sizeritem">
 						<object class="wxCheckBox" name="ID_WXCHECKBOXRECENTSEARCHEDTEXTS" variable="wxCheckBoxRecentSearchedTexts" member="yes">
 							<label>Recent &amp;Searched Texts</label>
 						</object>
-						<flag>wxALL|wxALIGN_LEFT</flag>
+						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
+						<option>1</option>
 					</object>
 					<object class="sizeritem">
 						<object class="wxCheckBox" name="ID_WXCHECKBOXRECENTREPLACEDTEXTS" variable="wxCheckBoxRecentReplacedTexts" member="yes">
 							<label>Recent &amp;Replaced Texts</label>
 						</object>
-						<flag>wxALL|wxALIGN_LEFT</flag>
+						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
+						<option>1</option>
 					</object>
 					<object class="sizeritem">
 						<object class="wxCheckBox" name="ID_WXCHECKBOXRECENTSEARCHEDDIRECTORIES" variable="wxCheckBoxRecentSearchedDirectories" member="yes">
 							<label>Recent Searched &amp;Directories</label>
 						</object>
-						<flag>wxALL|wxALIGN_LEFT</flag>
+						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
+						<option>1</option>
 					</object>
 					<object class="sizeritem">
 						<object class="wxCheckBox" name="ID_WXRECENTSEARCHEDFILEFILTERS" variable="wxRecentSearchedFileFilters" member="yes">
 							<label>Recent Searched File Fi&amp;lters</label>
 						</object>
-						<flag>wxALL|wxALIGN_LEFT</flag>
+						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
+						<option>1</option>
 					</object>
 					<object class="sizeritem">
 						<object class="wxCheckBox" name="ID_WXCHECKBOXRECENTSEARCHEDEXCLUDEFILTERS" variable="wxCheckBoxRecentSearchedExcludeFilters" member="yes">
 							<label>Recent Searched E&amp;xclude Filters</label>
 						</object>
-						<flag>wxALL|wxALIGN_LEFT</flag>
+						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
+						<option>1</option>
 					</object>
 					<object class="sizeritem">
 						<object class="wxCheckBox" name="ID_WXCHECKBOXCARETPOS" variable="wxCheckBoxCaretPos" member="yes">
 							<label>Recent Caret Position</label>
 						</object>
-						<flag>wxALL|wxALIGN_LEFT</flag>
+						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
 						<option>1</option>
 					</object>
 					<object class="sizeritem">
 						<object class="wxCheckBox" name="ID_WXCHECKBOXALLABOVE" variable="wxCheckBoxAllAbove" member="yes">
 							<label>All Above</label>
+							<handler function="wxCheckBoxAllAboveClick" entry="EVT_CHECKBOX" />
 						</object>
-						<flag>wxALL|wxALIGN_LEFT</flag>
+						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
 						<option>1</option>
 					</object>
@@ -92,6 +103,7 @@
 					<object class="sizeritem">
 						<object class="wxButton" name="wxID_OK" variable="WxButtonOK" member="yes">
 							<label>&amp;OK</label>
+							<handler function="WxButtonOKClick" entry="EVT_BUTTON" />
 						</object>
 						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>5</border>
@@ -100,6 +112,7 @@
 						<object class="wxButton" name="wxID_CANCEL" variable="WxButtonCancel" member="yes">
 							<label>&amp;Cancel</label>
 							<default>1</default>
+							<handler function="WxButtonCancelClick" entry="EVT_BUTTON" />
 						</object>
 						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>5</border>

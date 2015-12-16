@@ -60,7 +60,7 @@ MadWordCountDialog::MadWordCountDialog(wxWindow* parent,wxWindowID id,const wxPo
 	wxBoxSizer* BoxSizer1;
 	wxFlexGridSizer* FlexGridSizer1;
 
-	Create(parent, wxID_ANY, _("Word Count"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxSYSTEM_MENU|wxCLOSE_BOX|wxDIALOG_NO_PARENT, _T("wxID_ANY"));
+	Create(parent, wxID_ANY, _("Word Count"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxSYSTEM_MENU|wxCLOSE_BOX, _T("wxID_ANY"));
 	BoxSizer1 = new wxBoxSizer(wxVERTICAL);
 	FlexGridSizer1 = new wxFlexGridSizer(0, 2, 0, 60);
 	WxStaticText7 = new wxStaticText(this, ID_WXSTATICTEXT7, _("Lines"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_WXSTATICTEXT7"));
