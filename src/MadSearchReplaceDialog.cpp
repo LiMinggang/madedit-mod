@@ -81,7 +81,6 @@ const long MadSearchReplaceDialog::ID_WXBUTTONREPLACEALL = wxNewId();
 const long MadSearchReplaceDialog::ID_WXBUTTONREPLACEALLINALL = wxNewId();
 const long MadSearchReplaceDialog::ID_WXBUTTONCOUNT = wxNewId();
 const long MadSearchReplaceDialog::ID_WXBUTTONREPLACEEXPAND = wxNewId();
-const long MadSearchReplaceDialog::ID_WXBUTTONCLOSE = wxNewId();
 //*)
 
 const long MadSearchReplaceDialog::ID_MADEDIT1 = wxNewId();
@@ -128,7 +127,7 @@ MadSearchReplaceDialog::MadSearchReplaceDialog(wxWindow* parent,wxWindowID id,co
 	wxStaticBoxSizer* StaticBoxSizer1;
 	wxBoxSizer* BoxSizer3;
 
-	Create(parent, id, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxCAPTION|wxSYSTEM_MENU|wxRESIZE_BORDER|wxCLOSE_BOX|wxDIALOG_NO_PARENT, _T("id"));
+	Create(parent, id, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxCAPTION|wxSYSTEM_MENU|wxRESIZE_BORDER|wxCLOSE_BOX, _T("id"));
 	SetClientSize(wxDefaultSize);
 	Move(wxDefaultPosition);
 	BoxSizer1 = new wxBoxSizer(wxVERTICAL);
@@ -214,7 +213,7 @@ MadSearchReplaceDialog::MadSearchReplaceDialog(wxWindow* parent,wxWindowID id,co
 	BoxSizer3->Add(WxButtonCount, 0, wxALL|wxEXPAND, 2);
 	WxButtonReplaceExpand = new wxButton(this, ID_WXBUTTONREPLACEEXPAND, _("R&eplace >>"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXBUTTONREPLACEEXPAND"));
 	BoxSizer3->Add(WxButtonReplaceExpand, 0, wxALL|wxEXPAND, 2);
-	WxButtonClose = new wxButton(this, ID_WXBUTTONCLOSE, _("Close"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXBUTTONCLOSE"));
+	WxButtonClose = new wxButton(this, wxID_CANCEL, _("Close"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_CANCEL"));
 	BoxSizer3->Add(WxButtonClose, 0, wxALL|wxEXPAND, 2);
 	BoxSizer8->Add(BoxSizer3, 0, wxALL|wxEXPAND, 0);
 	BoxSizer1->Add(BoxSizer8, 1, wxALL|wxEXPAND, 0);
@@ -238,7 +237,7 @@ MadSearchReplaceDialog::MadSearchReplaceDialog(wxWindow* parent,wxWindowID id,co
 	Connect(ID_WXBUTTONREPLACEALLINALL,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadSearchReplaceDialog::WxButtonReplaceAllInAllClick);
 	Connect(ID_WXBUTTONCOUNT,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadSearchReplaceDialog::WxButtonCountClick);
 	Connect(ID_WXBUTTONREPLACEEXPAND,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadSearchReplaceDialog::WxButtonReplaceExpandClick);
-	Connect(ID_WXBUTTONCLOSE,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadSearchReplaceDialog::WxButtonCloseClick);
+	Connect(wxID_CANCEL,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadSearchReplaceDialog::WxButtonCloseClick);
 	Connect(wxID_ANY,wxEVT_CLOSE_WINDOW,(wxObjectEventFunction)&MadSearchReplaceDialog::MadSearchReplaceDialogClose);
 	Connect(wxEVT_KEY_DOWN,(wxObjectEventFunction)&MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown);
 	//*)

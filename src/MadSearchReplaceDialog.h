@@ -98,7 +98,6 @@ class MadSearchReplaceDialog: public wxDialog
 		static const long ID_WXBUTTONREPLACEALLINALL;
 		static const long ID_WXBUTTONCOUNT;
 		static const long ID_WXBUTTONREPLACEEXPAND;
-		static const long ID_WXBUTTONCLOSE;
 		//*)
 
 		static const long ID_MADEDIT1;

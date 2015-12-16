@@ -65,7 +65,7 @@ MadConvEncDialog::MadConvEncDialog(wxWindow* parent,wxWindowID id,const wxPoint&
 		_("Chinese => Japanese Kanji")
 	};
 	WxRadioBoxOption = new wxRadioBox(this, ID_WXRADIOBOXOPTION, _("Addtional Option"), wxDefaultPosition, wxDefaultSize, 6, __wxRadioBoxChoices_1, 1, wxRA_SPECIFY_COLS, wxDefaultValidator, _T("ID_WXRADIOBOXOPTION"));
-	BoxSizer3->Add(WxRadioBoxOption, 0, wxALL|wxEXPAND, 5);
+	BoxSizer3->Add(WxRadioBoxOption, 1, wxALL|wxEXPAND, 5);
 	BoxSizer1->Add(BoxSizer3, 0, wxALL|wxEXPAND, 5);
 	BoxSizer4 = new wxBoxSizer(wxHORIZONTAL);
 	WxButtonOK = new wxButton(this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_OK"));

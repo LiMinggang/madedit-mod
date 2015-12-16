@@ -84,7 +84,7 @@ MadAboutDialog::MadAboutDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos
 	WxAuiNotebookAbout->AddPage(WxPanelAbout, _("About"), true);
 	WxAuiNotebookAbout->AddPage(WxPanelCredits, _("Credits"));
 	WxAuiNotebookAbout->AddPage(WxPanelLicense, _("License"));
-	BoxSizer2->Add(WxAuiNotebookAbout, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	BoxSizer2->Add(WxAuiNotebookAbout, 0, wxALL|wxEXPAND, 5);
 	BoxSizer1->Add(BoxSizer2, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	BoxSizer4 = new wxBoxSizer(wxHORIZONTAL);
 	WxButtonOK = new wxButton(this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_OK"));

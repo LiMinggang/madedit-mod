@@ -48,6 +48,7 @@
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
+						<option>1</option>
 					</object>
 				</object>
 				<flag>wxALL|wxEXPAND</flag>
