@@ -199,7 +199,7 @@ MadSearchReplaceDialog::MadSearchReplaceDialog(wxWindow* parent,wxWindowID id,co
 	BoxSizer3->Add(WxButtonFindNext, 0, wxALL|wxEXPAND, 2);
 	WxButtonFindPrev = new wxButton(this, ID_WXBUTTONFINDPREV, _("Find &Previous"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXBUTTONFINDPREV"));
 	BoxSizer3->Add(WxButtonFindPrev, 0, wxALL|wxEXPAND, 2);
-	WxButtonFindAll = new wxButton(this, ID_WXBUTTONFINDALL, _("Find &All"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXBUTTONFINDALL"));
+	WxButtonFindAll = new wxButton(this, ID_WXBUTTONFINDALL, _("Find A&ll"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXBUTTONFINDALL"));
 	BoxSizer3->Add(WxButtonFindAll, 0, wxALL|wxEXPAND, 2);
 	WxButtonFindAllInAll = new wxButton(this, ID_WXBUTTONFINDALLINALL, _("Find All in All\nOpened"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXBUTTONFINDALLINALL"));
 	BoxSizer3->Add(WxButtonFindAllInAll, 0, wxALL|wxEXPAND, 2);
