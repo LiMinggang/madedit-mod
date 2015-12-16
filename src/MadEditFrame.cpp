@@ -2317,8 +2317,6 @@ void MadEditFrame::CreateGUIControls( void )
 	for( int i = 0; i < ( sizeof( g_Menus ) / sizeof( g_Menus[0] ) ); ++i )
 	{ ( *g_Menus[i] ) = new wxMenu( ( long )0 ); }
 
-	list<wxMenu*> menu_stack;
-	CommandData *cd = &CommandTable[0];
 #define OUTPUT_MENU 0
 #if OUTPUT_MENU
 #if defined(_DEBUG) && defined(__WXMSW__) //Output all accel key to text file
@@ -2395,6 +2393,9 @@ void MadEditFrame::CreateGUIControls( void )
 	}
 
 #endif
+
+	list<wxMenu*> menu_stack;
+	CommandData *cd = &CommandTable[0];
 
 	do
 	{
