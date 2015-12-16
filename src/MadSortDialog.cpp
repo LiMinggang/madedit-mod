@@ -39,7 +39,7 @@ MadSortDialog::MadSortDialog(wxWindow* parent)
 		_("&Descending")
 	};
 	WxRadioBoxOrder = new wxRadioBox(this, ID_WXRADIOBOXORDER, _("Sort Order"), wxDefaultPosition, wxDefaultSize, 2, __wxRadioBoxChoices_1, 1, wxRA_SPECIFY_COLS, wxDefaultValidator, _T("ID_WXRADIOBOXORDER"));
-	BoxSizer1->Add(WxRadioBoxOrder, 1, wxALL|wxEXPAND, 5);
+	BoxSizer1->Add(WxRadioBoxOrder, 0, wxALL|wxEXPAND, 5);
 	WxCheckBoxCase = new wxCheckBox(this, ID_WXCHECKBOXCASE, _("&Case Sensitive"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXCASE"));
 	WxCheckBoxCase->SetValue(false);
 	BoxSizer1->Add(WxCheckBoxCase, 0, wxALL|wxEXPAND, 5);
