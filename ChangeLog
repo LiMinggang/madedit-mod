@@ -1,3 +1,20 @@
+2015-12-17  Minggang Li <minggang.li@gmail.com>
+
+	1.New: Support "Dot(".") match new line", default behavior is changed to NOT match new line #98
+	2.New: Dot match newline for Quick Search bar #103
+	3.New: Show main frame after everything was done #107
+	4.Fix: Find Hex should be gray out if Regular expression was enabled(SearchReplaceDialog) #97
+	5.Fix: Find Hex should be gray out if Regular expression was enabled(SearchReplaceInFilesDialog) #99
+	6.Fix: Match whole words should be gray out if Regular expression was enabled(SearchReplaceDialog/SearchReplaceInFilesDialog) #100
+	7.Fix: Match whole word and dot match newline should be overridden according to Search RegEx #101
+	8.Fix: Extra '\' was added to recorded MadPython while searching with RegEx #102
+	9.Fix: Caret pos should be at the last while opening the Macro dialog #94 #104
+	10.Fix: English was missing in the language list #105
+	11.Fix: Should not call Reload on exiting #109
+	12.Improve performance of script recording
+	13.Update Astyle to latest code
+	14.Update translations
+
 2015-11-30  Minggang Li <minggang.li@gmail.com>
 
 	1.Improve on change syntax on save as
