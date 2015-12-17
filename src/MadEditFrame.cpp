@@ -2218,25 +2218,25 @@ void MadEditFrame::CreateGUIControls( void )
 #endif
 #define MADTOOBAR_STYLE_NO_OVERFLOW (wxAUI_TB_DEFAULT_STYLE | wxAUI_TB_HORIZONTAL)
 	WxToolBar[tbSTANDARD] = new wxAuiToolBar( this, ID_WXTOOLBAR1 + tbSTANDARD, wxPoint( 0, 0 ), wxSize( 392, 29 ), MADTOOBAR_STYLE_NO_OVERFLOW );
-	WxToolBar[tbSTANDARD]->Connect( wxEVT_AUITOOLBAR_RIGHT_CLICK, wxAuiToolBarEventHandler( MadEditFrame::OnRightClickToolBar ) );
+	WxToolBar[tbSTANDARD]->Connect( wxEVT_AUITOOLBAR_RIGHT_CLICK, wxAuiToolBarEventHandler( MadEditFrame::OnRightClickToolBar ), NULL, this );
 	g_ToolbarNames[tbSTANDARD] = _( "Standard" );
 	WxToolBar[tbEDITOR] = new wxAuiToolBar( this, ID_WXTOOLBAR1 + tbEDITOR, wxPoint( 0, 0 ), wxSize( 392, 29 ), MADTOOBAR_STYLE_NO_OVERFLOW );
-	WxToolBar[tbEDITOR]->Connect( wxEVT_AUITOOLBAR_RIGHT_CLICK, wxAuiToolBarEventHandler( MadEditFrame::OnRightClickToolBar ) );
+	WxToolBar[tbEDITOR]->Connect( wxEVT_AUITOOLBAR_RIGHT_CLICK, wxAuiToolBarEventHandler( MadEditFrame::OnRightClickToolBar ), NULL, this );
 	g_ToolbarNames[tbEDITOR] = _( "Editor" );
 	WxToolBar[tbSEARCHREPLACE] = new wxAuiToolBar( this, ID_WXTOOLBAR1 + tbSEARCHREPLACE, wxPoint( 0, 0 ), wxSize( 392, 29 ), MADTOOBAR_STYLE_NO_OVERFLOW );
-	WxToolBar[tbSEARCHREPLACE]->Connect( wxEVT_AUITOOLBAR_RIGHT_CLICK, wxAuiToolBarEventHandler( MadEditFrame::OnRightClickToolBar ) );
+	WxToolBar[tbSEARCHREPLACE]->Connect( wxEVT_AUITOOLBAR_RIGHT_CLICK, wxAuiToolBarEventHandler( MadEditFrame::OnRightClickToolBar ), NULL, this );
 	g_ToolbarNames[tbSEARCHREPLACE] = _( "Search/Replace" );
 	WxToolBar[tbTEXTVIEW] = new wxAuiToolBar( this, ID_WXTOOLBAR1 + tbTEXTVIEW, wxPoint( 0, 0 ), wxSize( 392, 29 ), MADTOOBAR_STYLE_NO_OVERFLOW );
-	WxToolBar[tbTEXTVIEW]->Connect( wxEVT_AUITOOLBAR_RIGHT_CLICK, wxAuiToolBarEventHandler( MadEditFrame::OnRightClickToolBar ) );
+	WxToolBar[tbTEXTVIEW]->Connect( wxEVT_AUITOOLBAR_RIGHT_CLICK, wxAuiToolBarEventHandler( MadEditFrame::OnRightClickToolBar ), NULL, this );
 	g_ToolbarNames[tbTEXTVIEW] = _( "Text View" );
 	WxToolBar[tbEDITMODE] = new wxAuiToolBar( this, ID_WXTOOLBAR1 + tbEDITMODE, wxPoint( 0, 0 ), wxSize( 392, 29 ), MADTOOBAR_STYLE_NO_OVERFLOW );
-	WxToolBar[tbEDITMODE]->Connect( wxEVT_AUITOOLBAR_RIGHT_CLICK, wxAuiToolBarEventHandler( MadEditFrame::OnRightClickToolBar ) );
+	WxToolBar[tbEDITMODE]->Connect( wxEVT_AUITOOLBAR_RIGHT_CLICK, wxAuiToolBarEventHandler( MadEditFrame::OnRightClickToolBar ), NULL, this );
 	g_ToolbarNames[tbEDITMODE] = _( "Edit Mode" );
 	WxToolBar[tbMACRO] = new wxAuiToolBar( this, ID_WXTOOLBAR1 + tbMACRO, wxPoint( 0, 0 ), wxSize( 392, 29 ), MADTOOBAR_STYLE_NO_OVERFLOW | wxAUI_TB_OVERFLOW );
-	WxToolBar[tbMACRO]->Connect( wxEVT_AUITOOLBAR_RIGHT_CLICK, wxAuiToolBarEventHandler( MadEditFrame::OnRightClickToolBar ) );
+	WxToolBar[tbMACRO]->Connect( wxEVT_AUITOOLBAR_RIGHT_CLICK, wxAuiToolBarEventHandler( MadEditFrame::OnRightClickToolBar ), NULL, this );
 	g_ToolbarNames[tbMACRO] = _( "Macro" );
 	m_QuickSeachBar = new wxAuiToolBar( this, ID_WXTOOLBAR1 + tbQSEARCH, wxPoint( 0, 0 ), wxSize( 392, 29 ), MADTOOBAR_STYLE_NO_OVERFLOW );
-	m_QuickSeachBar->Connect( wxEVT_AUITOOLBAR_RIGHT_CLICK, wxAuiToolBarEventHandler( MadEditFrame::OnRightClickToolBar ) );
+	m_QuickSeachBar->Connect( wxEVT_AUITOOLBAR_RIGHT_CLICK, wxAuiToolBarEventHandler( MadEditFrame::OnRightClickToolBar ), NULL, this );
 	g_ToolbarNames[tbQSEARCH] = _( "Quick Search" );
 	WxToolBar[tbQSEARCH] = m_QuickSeachBar;
 	m_Notebook = new wxMadAuiNotebook( this, ID_NOTEBOOK, wxPoint( 0, 29 ), wxSize( 392, 320 ), wxWANTS_CHARS | wxAUI_NB_TOP | wxAUI_NB_TAB_SPLIT | wxAUI_NB_TAB_MOVE | wxAUI_NB_SCROLL_BUTTONS | wxAUI_NB_WINDOWLIST_BUTTON | wxAUI_NB_CLOSE_ON_ACTIVE_TAB );
@@ -2820,25 +2820,26 @@ void MadEditFrame::CreateGUIControls( void )
 		for( size_t i = 1; i < count; ++i ) { m_QuickSearch->Append( g_RecentFindText->GetHistoryFile( i ) ); }
 	}
 
-	m_QuickSearch->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ) );
+	m_QuickSearch->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ), NULL, this );
 	m_QuickSeachBar->AddControl( m_QuickSearch );
 	m_QuickSeachBar->AddTool( menuQuickFindNext, wxT( "QuickFindNext" ), m_ImageList->GetBitmap( down_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _( "Find Next" ), _( "Find matched text next to caret" ), NULL );
 	m_QuickSeachBar->AddTool( menuQuickFindPrevious, wxT( "QuickFindPrevious" ), m_ImageList->GetBitmap( up_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _( "Find Previous" ), _( "Find matched text previous from caret" ), NULL );
 	m_CheckboxWholeWord = new wxCheckBox( m_QuickSeachBar, ID_QUICKSEARCHWHOLEWORD, _( "Whole Word" ) );
 	m_CheckboxWholeWord->SetValue( false );
-	m_CheckboxWholeWord->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ) );
+	m_CheckboxWholeWord->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ), NULL, this );
 	m_QuickSeachBar->AddControl( m_CheckboxWholeWord );
 	m_CheckboxCaseSensitive = new wxCheckBox( m_QuickSeachBar, ID_QUICKSEARCHCASESENSITIVE, _( "Case Sensitive" ) );
 	m_CheckboxCaseSensitive->SetValue( false );
-	m_CheckboxCaseSensitive->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ) );
+	m_CheckboxCaseSensitive->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ), NULL, this );
 	m_QuickSeachBar->AddControl( m_CheckboxCaseSensitive );
 	m_CheckboxRegEx = new wxCheckBox( m_QuickSeachBar, ID_QUICKSEARCHREGEX, _( "Regular Expression" ) );
 	m_CheckboxRegEx->SetValue( false );
-	m_CheckboxRegEx->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ) );
+	m_CheckboxRegEx->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ), NULL, this );
 	m_QuickSeachBar->AddControl( m_CheckboxRegEx );
 	m_CheckboxDotMatchNewline = new wxCheckBox( m_QuickSeachBar, ID_QUICKSEARCHDOTMATCHNEWLINE, _( ". Matches Newline" ) );
 	m_CheckboxDotMatchNewline->SetValue( false );
-	m_CheckboxDotMatchNewline->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ) );
+	m_CheckboxDotMatchNewline->Disable();
+	m_CheckboxDotMatchNewline->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ), NULL, this );
 	m_QuickSeachBar->AddControl( m_CheckboxDotMatchNewline );
 	m_QuickSeachBar->Realize();
 	m_AuiManager.AddPane( m_QuickSeachBar, wxAuiPaneInfo().Name( wxT( "QuickSeachBar" ) ).CloseButton( false ).Caption( _( "Quick Search" ) ).Floatable( true ).ToolbarPane().Top().Row( 2 ) );
@@ -7579,7 +7580,6 @@ void MadEditFrame::OnToolsEditMacroFile( wxCommandEvent& event )
 		}
 	}
 }
-
 
 void MadEditFrame::OnToolsMadScriptList( wxCommandEvent& event )
 {
