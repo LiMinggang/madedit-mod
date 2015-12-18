@@ -2650,7 +2650,7 @@ void MadEdit::ConvertSpaceToTab()
 	if( IsReadOnly() || GetEditMode() == emHexMode || !IsSelected() )
 		return;
 
-	vector < ucs4_t,  newtext;
+	vector < ucs4_t >  newtext;
 	bool modified = false;
 	size_t firstrow = m_SelectionBegin->rowid;
 	size_t subrowid = m_SelectionBegin->subrowid;
@@ -2862,7 +2862,7 @@ void MadEdit::ConvertTabToSpace()
 	if( IsReadOnly() || GetEditMode() == emHexMode || !IsSelected() )
 		return;
 
-	vector < ucs4_t,  newtext;
+	vector < ucs4_t >  newtext;
 	bool modified = false;
 	size_t firstrow = m_SelectionBegin->rowid;
 	size_t subrowid = m_SelectionBegin->subrowid;
