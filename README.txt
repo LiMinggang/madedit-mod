@@ -126,9 +126,10 @@ Mod v0.3.9.1
 9.Fix: Caret pos should be at the last while opening the Macro dialog #94 #104
 10.Fix: English was missing in the language list #105
 11.Fix: Should not call Reload on exiting #109
-12.Improve performance of script recording
-13.Update Astyle to latest code
-14.Update translations
+12.Fix: Should rarely need to use wxConvLocal directly in MadPython #111
+13.Improve performance of script recording
+14.Update Astyle to latest code
+15.Update translations
 
 Mod v0.3.9
 1.Improve on change syntax on save as
