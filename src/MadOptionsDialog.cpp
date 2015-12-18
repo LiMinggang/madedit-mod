@@ -398,7 +398,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxCheckBoxMouseSelectToCopy = new wxCheckBox( WxNoteBookPage2, ID_WXCHECKBOXMOUSESELECTTOCOPY, _( "Auto copy the mouse-selected text to clipboard" ), wxPoint( 2, 2 ), wxSize( 260, 20 ), 0, wxDefaultValidator, wxT( "WxCheckBoxMouseSelectToCopy" ) );
 	WxBoxSizer28->Add( WxCheckBoxMouseSelectToCopy, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
 	SET_CONTROLPARENT( WxCheckBoxMouseSelectToCopy );
-	WxCheckBoxCtrlWithMouseToSelect = new wxCheckBox( WxNoteBookPage2, ID_WXCHECKBOXCTRLWITHMOUSE, _( "when pressing Ctrl key" ), wxPoint( 254, 3 ), wxSize( 136, 17 ), 0, wxDefaultValidator, wxT( "WxCheckBoxCtrlWithMouseToSelect" ) );
+	WxCheckBoxCtrlWithMouseToSelect = new wxCheckBox( WxNoteBookPage2, ID_WXCHECKBOXCTRLWITHMOUSE, _( "when pressing Ctrl key" ), wxPoint( 254, 3 ), wxSize( 160, 17 ), 0, wxDefaultValidator, wxT( "WxCheckBoxCtrlWithMouseToSelect" ) );
 	WxBoxSizer28->Add( WxCheckBoxCtrlWithMouseToSelect, 0, wxALIGN_LEFT | wxEXPAND | wxALL,, 2 );
 	SET_CONTROLPARENT( WxCheckBoxCtrlWithMouseToSelect );
 	WxCheckBoxMiddleMouseToPaste = new wxCheckBox( WxNoteBookPage2, ID_WXCHECKBOXMIDDLEMOUSETOPASTE, _( "Paste text from clipboard when pressing middle mouse button" ), wxPoint( 24, 98 ), wxSize( 480, 20 ), 0, wxDefaultValidator, wxT( "WxCheckBoxMiddleMouseToPaste" ) );
@@ -417,22 +417,22 @@ void MadOptionsDialog::CreateGUIControls( void )
 	wxStaticBox* WxStaticBoxSizer1_StaticBoxObj = new wxStaticBox( WxNoteBookPage3, wxID_ANY, _( "Text Mode" ) );
 	WxStaticBoxSizer1 = new wxStaticBoxSizer( WxStaticBoxSizer1_StaticBoxObj, wxVERTICAL );
 	WxBoxSizer15->Add( WxStaticBoxSizer1, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 4 );
-	WxCheckBoxPrintSyntax = new wxCheckBox( WxNoteBookPage3, ID_WXCHECKBOXPRINTSYNTAX, _( "Print Syntax Highlighter" ), wxPoint( 6, 16 ), wxSize( 150, 17 ), 0, wxDefaultValidator, wxT( "WxCheckBoxPrintSyntax" ) );
+	WxCheckBoxPrintSyntax = new wxCheckBox( WxNoteBookPage3, ID_WXCHECKBOXPRINTSYNTAX, _( "Print Syntax Highlighter" ), wxPoint( 6, 16 ), wxSize( 200, 17 ), 0, wxDefaultValidator, wxT( "WxCheckBoxPrintSyntax" ) );
 	WxStaticBoxSizer1->Add( WxCheckBoxPrintSyntax, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	SET_CONTROLPARENT( WxCheckBoxPrintSyntax );
-	WxCheckBoxPrintLineNumber = new wxCheckBox( WxNoteBookPage3, ID_WXCHECKBOXPRINTLINENUMBER, _( "Print Line Number" ), wxPoint( 6, 35 ), wxSize( 150, 17 ), 0, wxDefaultValidator, wxT( "WxCheckBoxPrintLineNumber" ) );
+	WxCheckBoxPrintLineNumber = new wxCheckBox( WxNoteBookPage3, ID_WXCHECKBOXPRINTLINENUMBER, _( "Print Line Number" ), wxPoint( 6, 35 ), wxSize( 200, 17 ), 0, wxDefaultValidator, wxT( "WxCheckBoxPrintLineNumber" ) );
 	WxStaticBoxSizer1->Add( WxCheckBoxPrintLineNumber, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	SET_CONTROLPARENT( WxCheckBoxPrintLineNumber );
-	WxCheckBoxPrintBookmark = new wxCheckBox( WxNoteBookPage3, ID_WXCHECKBOXPRINTBOOKMARK, _( "Print Bookmark" ), wxPoint( 6, 54 ), wxSize( 150, 17 ), 0, wxDefaultValidator, wxT( "WxCheckBoxPrintBookmark" ) );
+	WxCheckBoxPrintBookmark = new wxCheckBox( WxNoteBookPage3, ID_WXCHECKBOXPRINTBOOKMARK, _( "Print Bookmark" ), wxPoint( 6, 54 ), wxSize( 200, 17 ), 0, wxDefaultValidator, wxT( "WxCheckBoxPrintBookmark" ) );
 	WxStaticBoxSizer1->Add( WxCheckBoxPrintBookmark, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	SET_CONTROLPARENT( WxCheckBoxPrintBookmark );
-	WxCheckBoxPrintEndOfLine = new wxCheckBox( WxNoteBookPage3, ID_WXCHECKBOXPRINTENDOFLINE, _( "Print End of Line" ), wxPoint( 6, 73 ), wxSize( 150, 17 ), 0, wxDefaultValidator, wxT( "WxCheckBoxPrintEndOfLine" ) );
+	WxCheckBoxPrintEndOfLine = new wxCheckBox( WxNoteBookPage3, ID_WXCHECKBOXPRINTENDOFLINE, _( "Print End of Line" ), wxPoint( 6, 73 ), wxSize( 200, 17 ), 0, wxDefaultValidator, wxT( "WxCheckBoxPrintEndOfLine" ) );
 	WxStaticBoxSizer1->Add( WxCheckBoxPrintEndOfLine, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	SET_CONTROLPARENT( WxCheckBoxPrintEndOfLine );
-	WxCheckBoxPrintTabChar = new wxCheckBox( WxNoteBookPage3, ID_WXCHECKBOXPRINTTABCHAR, _( "Print Tab Char" ), wxPoint( 6, 92 ), wxSize( 150, 17 ), 0, wxDefaultValidator, wxT( "WxCheckBoxPrintTabChar" ) );
+	WxCheckBoxPrintTabChar = new wxCheckBox( WxNoteBookPage3, ID_WXCHECKBOXPRINTTABCHAR, _( "Print Tab Char" ), wxPoint( 6, 92 ), wxSize( 200, 17 ), 0, wxDefaultValidator, wxT( "WxCheckBoxPrintTabChar" ) );
 	WxStaticBoxSizer1->Add( WxCheckBoxPrintTabChar, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	SET_CONTROLPARENT( WxCheckBoxPrintTabChar );
-	WxCheckBoxPrintSpaceChar = new wxCheckBox( WxNoteBookPage3, ID_WXCHECKBOXPRINTSPACECHAR, _( "Print Space Char" ), wxPoint( 6, 111 ), wxSize( 150, 17 ), 0, wxDefaultValidator, wxT( "WxCheckBoxPrintSpaceChar" ) );
+	WxCheckBoxPrintSpaceChar = new wxCheckBox( WxNoteBookPage3, ID_WXCHECKBOXPRINTSPACECHAR, _( "Print Space Char" ), wxPoint( 6, 111 ), wxSize( 200, 17 ), 0, wxDefaultValidator, wxT( "WxCheckBoxPrintSpaceChar" ) );
 	WxStaticBoxSizer1->Add( WxCheckBoxPrintSpaceChar, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	SET_CONTROLPARENT( WxCheckBoxPrintSpaceChar );
 	wxStaticBox* WxStaticBoxSizer2_StaticBoxObj = new wxStaticBox( WxNoteBookPage3, wxID_ANY, _( "Hex Mode" ) );
@@ -442,7 +442,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	arrayStringFor_WxRadioBoxPrintOffset.Add( _( "None" ) );
 	arrayStringFor_WxRadioBoxPrintOffset.Add( _( "First Page Only" ) );
 	arrayStringFor_WxRadioBoxPrintOffset.Add( _( "Every Page" ) );
-	WxRadioBoxPrintOffset = new wxRadioBox( WxNoteBookPage3, ID_WXRADIOBOXPRINTOFFSET, _( "Print Offset Header" ), wxPoint( 6, 16 ), wxSize( 150, 130 ), arrayStringFor_WxRadioBoxPrintOffset, 1, wxRA_SPECIFY_COLS, wxDefaultValidator, wxT( "WxRadioBoxPrintOffset" ) );
+	WxRadioBoxPrintOffset = new wxRadioBox( WxNoteBookPage3, ID_WXRADIOBOXPRINTOFFSET, _( "Print Offset Header" ), wxPoint( 6, 16 ), wxSize( 200, 130 ), arrayStringFor_WxRadioBoxPrintOffset, 1, wxRA_SPECIFY_COLS, wxDefaultValidator, wxT( "WxRadioBoxPrintOffset" ) );
 	WxRadioBoxPrintOffset->SetSelection( 0 );
 	WxStaticBoxSizer2->Add( WxRadioBoxPrintOffset, 1, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	SET_CONTROLPARENT( WxRadioBoxPrintOffset );
@@ -451,7 +451,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	wxStaticBox* WxStaticBoxSizer3_StaticBoxObj = new wxStaticBox( WxNoteBookPage3, wxID_ANY, _( "Page Header" ) );
 	WxStaticBoxSizer3 = new wxStaticBoxSizer( WxStaticBoxSizer3_StaticBoxObj, wxVERTICAL );
 	WxBoxSizer16->Add( WxStaticBoxSizer3, 1, wxEXPAND | wxALL, 4 );
-	WxCheckBoxPrintPageHeader = new wxCheckBox( WxNoteBookPage3, ID_WXCHECKBOXPRINTPAGEHEADER, _( "Print Page Header" ), wxPoint( 86, 16 ), wxSize( 150, 17 ), 0, wxDefaultValidator, wxT( "WxCheckBoxPrintPageHeader" ) );
+	WxCheckBoxPrintPageHeader = new wxCheckBox( WxNoteBookPage3, ID_WXCHECKBOXPRINTPAGEHEADER, _( "Print Page Header" ), wxPoint( 86, 16 ), wxSize( 200, 17 ), 0, wxDefaultValidator, wxT( "WxCheckBoxPrintPageHeader" ) );
 	WxStaticBoxSizer3->Add( WxCheckBoxPrintPageHeader, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	SET_CONTROLPARENT( WxCheckBoxPrintPageHeader );
 	WxFlexGridSizer1 = new wxFlexGridSizer( 0, 3, 0, 0 );
@@ -461,7 +461,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxEditHeaderLeft = new wxTextCtrl( WxNoteBookPage3, ID_WXEDITHEADERLEFT, wxT( "" ), wxPoint( 44, 3 ), wxSize( 240, 21 ), 0, wxDefaultValidator, wxT( "WxEditHeaderLeft" ) );
 	WxFlexGridSizer1->Add( WxEditHeaderLeft, 0, 0 | wxALL, 2 );
 	SET_CONTROLPARENT( WxEditHeaderLeft );
-	WxButton1 = new wxButton( WxNoteBookPage3, ID_WXBUTTON1, wxT( ">>" ), wxPoint( 287, 1 ), wxSize( 25, 25 ), 0, wxDefaultValidator, wxT( "WxButton1" ) );
+	WxButton1 = new wxButton( WxNoteBookPage3, ID_WXBUTTON1, wxT( ">>" ), wxPoint( 287, 1 ), wxSize( 40, 25 ), 0, wxDefaultValidator, wxT( "WxButton1" ) );
 	WxFlexGridSizer1->Add( WxButton1, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	SET_CONTROLPARENT( WxButton1 );
 	WxStaticText8 = new wxStaticText( WxNoteBookPage3, ID_WXSTATICTEXT8, _( "Center:" ), wxPoint( 2, 32 ), wxDefaultSize, 0, wxT( "WxStaticText8" ) );
@@ -469,7 +469,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxEditHeaderCenter = new wxTextCtrl( WxNoteBookPage3, ID_WXEDITHEADERCENTER, wxT( "" ), wxPoint( 44, 30 ), wxSize( 240, 21 ), 0, wxDefaultValidator, wxT( "WxEditHeaderCenter" ) );
 	WxFlexGridSizer1->Add( WxEditHeaderCenter, 0, 0 | wxALL, 2 );
 	SET_CONTROLPARENT( WxEditHeaderCenter );
-	WxButton2 = new wxButton( WxNoteBookPage3, ID_WXBUTTON2, wxT( ">>" ), wxPoint( 287, 28 ), wxSize( 25, 25 ), 0, wxDefaultValidator, wxT( "WxButton2" ) );
+	WxButton2 = new wxButton( WxNoteBookPage3, ID_WXBUTTON2, wxT( ">>" ), wxPoint( 287, 28 ), wxSize( 40, 25 ), 0, wxDefaultValidator, wxT( "WxButton2" ) );
 	WxFlexGridSizer1->Add( WxButton2, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	SET_CONTROLPARENT( WxButton2 );
 	WxStaticText9 = new wxStaticText( WxNoteBookPage3, ID_WXSTATICTEXT9, _( "Right:" ), wxPoint( 5, 59 ), wxDefaultSize, 0, wxT( "WxStaticText9" ) );
@@ -477,7 +477,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxEditHeaderRight = new wxTextCtrl( WxNoteBookPage3, ID_WXEDITHEADERRIGHT, wxT( "" ), wxPoint( 44, 57 ), wxSize( 240, 21 ), 0, wxDefaultValidator, wxT( "WxEditHeaderRight" ) );
 	WxFlexGridSizer1->Add( WxEditHeaderRight, 0, 0 | wxALL, 2 );
 	SET_CONTROLPARENT( WxEditHeaderRight );
-	WxButton3 = new wxButton( WxNoteBookPage3, ID_WXBUTTON3, wxT( ">>" ), wxPoint( 287, 55 ), wxSize( 25, 25 ), 0, wxDefaultValidator, wxT( "WxButton3" ) );
+	WxButton3 = new wxButton( WxNoteBookPage3, ID_WXBUTTON3, wxT( ">>" ), wxPoint( 287, 55 ), wxSize( 40, 25 ), 0, wxDefaultValidator, wxT( "WxButton3" ) );
 	WxFlexGridSizer1->Add( WxButton3, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	SET_CONTROLPARENT( WxButton3 );
 	wxStaticBox* WxStaticBoxSizer4_StaticBoxObj = new wxStaticBox( WxNoteBookPage3, wxID_ANY, _( "Page Footer" ) );
@@ -493,7 +493,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxEditFooterLeft = new wxTextCtrl( WxNoteBookPage3, ID_WXEDITHEADERLEFT, wxT( "" ), wxPoint( 44, 3 ), wxSize( 240, 21 ), 0, wxDefaultValidator, wxT( "WxEditFooterLeft" ) );
 	WxFlexGridSizer2->Add( WxEditFooterLeft, 0, 0 | wxALL, 2 );
 	SET_CONTROLPARENT( WxEditFooterLeft );
-	WxButton4 = new wxButton( WxNoteBookPage3, ID_WXBUTTON4, wxT( ">>" ), wxPoint( 287, 1 ), wxSize( 25, 25 ), 0, wxDefaultValidator, wxT( "WxButton4" ) );
+	WxButton4 = new wxButton( WxNoteBookPage3, ID_WXBUTTON4, wxT( ">>" ), wxPoint( 287, 1 ), wxSize( 40, 25 ), 0, wxDefaultValidator, wxT( "WxButton4" ) );
 	WxFlexGridSizer2->Add( WxButton4, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	SET_CONTROLPARENT( WxButton4 );
 	WxStaticText11 = new wxStaticText( WxNoteBookPage3, ID_WXSTATICTEXT8, _( "Center:" ), wxPoint( 2, 32 ), wxDefaultSize, 0, wxT( "WxStaticText11" ) );
@@ -501,7 +501,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxEditFooterCenter = new wxTextCtrl( WxNoteBookPage3, ID_WXEDITHEADERCENTER, wxT( "" ), wxPoint( 44, 30 ), wxSize( 240, 21 ), 0, wxDefaultValidator, wxT( "WxEditFooterCenter" ) );
 	WxFlexGridSizer2->Add( WxEditFooterCenter, 0, 0 | wxALL, 2 );
 	SET_CONTROLPARENT( WxEditFooterCenter );
-	WxButton5 = new wxButton( WxNoteBookPage3, ID_WXBUTTON5, wxT( ">>" ), wxPoint( 287, 28 ), wxSize( 25, 25 ), 0, wxDefaultValidator, wxT( "WxButton5" ) );
+	WxButton5 = new wxButton( WxNoteBookPage3, ID_WXBUTTON5, wxT( ">>" ), wxPoint( 287, 28 ), wxSize( 40, 25 ), 0, wxDefaultValidator, wxT( "WxButton5" ) );
 	WxFlexGridSizer2->Add( WxButton5, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	SET_CONTROLPARENT( WxButton5 );
 	WxStaticText12 = new wxStaticText( WxNoteBookPage3, ID_WXSTATICTEXT9, _( "Right:" ), wxPoint( 5, 59 ), wxDefaultSize, 0, wxT( "WxStaticText12" ) );
@@ -509,7 +509,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxEditFooterRight = new wxTextCtrl( WxNoteBookPage3, ID_WXEDITHEADERRIGHT, wxT( "" ), wxPoint( 44, 57 ), wxSize( 240, 21 ), 0, wxDefaultValidator, wxT( "WxEditFooterRight" ) );
 	WxFlexGridSizer2->Add( WxEditFooterRight, 0, 0 | wxALL, 2 );
 	SET_CONTROLPARENT( WxEditFooterRight );
-	WxButton6 = new wxButton( WxNoteBookPage3, ID_WXBUTTON6, wxT( ">>" ), wxPoint( 287, 55 ), wxSize( 25, 25 ), 0, wxDefaultValidator, wxT( "WxButton6" ) );
+	WxButton6 = new wxButton( WxNoteBookPage3, ID_WXBUTTON6, wxT( ">>" ), wxPoint( 287, 55 ), wxSize( 40, 25 ), 0, wxDefaultValidator, wxT( "WxButton6" ) );
 	WxFlexGridSizer2->Add( WxButton6, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	SET_CONTROLPARENT( WxButton6 );
 	WxNoteBookPage4 = new wxPanel( WxNotebook1, ID_WXNOTEBOOKPAGE4, wxPoint( 4, 24 ), wxSize( 673, 314 ) );
@@ -583,7 +583,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxStaticText18 = new wxStaticText( WxNoteBookPage5, ID_WXSTATICTEXT18, _( "Dictionary:" ), wxPoint( 10, 22 ), wxDefaultSize, 0, wxT( "WxStaticText18" ) );
 	WxStaticBoxSizer5->Add( WxStaticText18, 0, wxALIGN_CENTER | wxALL, 5 );
 	wxArrayString arrayStringFor_WxChoiceDictionary;
-	WxChoiceDictionary = new wxChoice( WxNoteBookPage5, ID_WXCHOICEDICTIONARY, wxPoint( 74, 20 ), wxSize( 320, 25 ), arrayStringFor_WxChoiceDictionary, 0, wxDefaultValidator, wxT( "" ) );
+	WxChoiceDictionary = new wxChoice( WxNoteBookPage5, ID_WXCHOICEDICTIONARY, wxPoint( 74, 20 ), wxSize( 320, 30 ), arrayStringFor_WxChoiceDictionary, 0, wxDefaultValidator, wxT( "" ) );
 	WxChoiceDictionary->SetSelection( -1 );
 	WxStaticBoxSizer5->Add( WxChoiceDictionary, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 5 );
 	SET_CONTROLPARENT( WxChoiceDictionary );
