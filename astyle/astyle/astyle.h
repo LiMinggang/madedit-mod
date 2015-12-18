@@ -291,7 +291,7 @@ protected:
 	// check if a specific character can be part of an operator
 	bool isCharPotentialOperator(char ch) const
 	{
-		assert(!isWhiteSpace(ch));
+		//assert(!isWhiteSpace(ch));
 		if ((unsigned) ch > 127) return false;
 		return (ispunct((unsigned char)ch)
 		        && ch != '{' && ch != '}'
