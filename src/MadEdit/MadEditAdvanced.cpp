@@ -78,7 +78,7 @@ char* _itoa( int num, char* str, int base )
 	while( num != 0 )
 	{
 		int rem = num % base;
-		str[i++] = ( rem,  9 ) ? ( rem - 10 ) + 'a' : rem + '0';
+		str[i++] = ( rem >  9 ) ? ( rem - 10 ) + 'a' : rem + '0';
 		num = num / base;
 	}
 
@@ -2104,7 +2104,7 @@ SortLineData::SortLineData( const MadLineIterator& l, int id )
 
 				++int_begin;
 			}
-			while( --int_len,  0 );
+			while( --int_len >  0 );
 		}
 
 		if( frac_begin >= 0 ) // trim trailing '0'
@@ -2779,7 +2779,7 @@ void MadEdit::ConvertSpaceToTab()
 									{
 										newtext.push_back( 0x20 );
 									}
-									while( --space_count,  0 );
+									while( --space_count >  0 );
 								}
 
 								newtext.push_back( uc );
@@ -2791,7 +2791,7 @@ void MadEdit::ConvertSpaceToTab()
 						xpos2 = 0;
 				}
 			}
-			while( xpos2,  0 && rowpos < rowendpos );
+			while( xpos2 > 0 && rowpos < rowendpos );
 
 			if( space_count > 0 )
 			{
@@ -2799,7 +2799,7 @@ void MadEdit::ConvertSpaceToTab()
 				{
 					newtext.push_back( 0x20 );
 				}
-				while( --space_count,  0 );
+				while( --space_count > 0 );
 			}
 		}
 
@@ -2970,7 +2970,7 @@ void MadEdit::ConvertTabToSpace()
 							{
 								newtext.push_back( 0x20 );
 							}
-							while( --space_count,  0 );
+							while( --space_count > 0 );
 
 							modified = true;
 						}
@@ -2985,7 +2985,7 @@ void MadEdit::ConvertTabToSpace()
 						xpos2 = 0;
 				}
 			}
-			while( xpos2,  0 && rowpos < rowendpos );
+			while( xpos2 > 0 && rowpos < rowendpos );
 		}
 
 		// add newline
@@ -3538,7 +3538,7 @@ void MadEdit::InsertIncrementalNumber( int initial, int step, int total, MadNumb
 						wxString tmp( wxString::Format( numFmt, num ) );
 						tstr << tmp;
 
-						if( align == naLeft && total, tmp.Len() )
+						if( align == naLeft && ( total > tmp.Len() ) )
 						{
 							memset( padding, padchar, ( total - tmp.Len() ) );
 							tstr += wxString::FromAscii( padding );
@@ -3550,7 +3550,7 @@ void MadEdit::InsertIncrementalNumber( int initial, int step, int total, MadNumb
 					if( linear ) num += step;
 					else num *= step;
 				}
-				while( --cc,  0 );
+				while( --cc >  0 );
 			}
 		}
 		else

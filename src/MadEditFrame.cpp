@@ -2839,7 +2839,6 @@ void MadEditFrame::CreateGUIControls( void )
 	m_QuickSeachBar->AddControl( m_CheckboxRegEx );
 	m_CheckboxDotMatchNewline = new wxCheckBox( m_QuickSeachBar, ID_QUICKSEARCHDOTMATCHNEWLINE, _( ". Matches Newline" ) );
 	m_CheckboxDotMatchNewline->SetValue( false );
-	m_CheckboxDotMatchNewline->Disable();
 	m_CheckboxDotMatchNewline->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ), NULL, this );
 	m_QuickSeachBar->AddControl( m_CheckboxDotMatchNewline );
 	m_QuickSeachBar->Realize();
