@@ -399,7 +399,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxBoxSizer28->Add( WxCheckBoxMouseSelectToCopy, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
 	SET_CONTROLPARENT( WxCheckBoxMouseSelectToCopy );
 	WxCheckBoxCtrlWithMouseToSelect = new wxCheckBox( WxNoteBookPage2, ID_WXCHECKBOXCTRLWITHMOUSE, _( "when pressing Ctrl key" ), wxPoint( 254, 3 ), wxSize( 160, 17 ), 0, wxDefaultValidator, wxT( "WxCheckBoxCtrlWithMouseToSelect" ) );
-	WxBoxSizer28->Add( WxCheckBoxCtrlWithMouseToSelect, 0, wxALIGN_LEFT | wxEXPAND | wxALL,, 2 );
+	WxBoxSizer28->Add( WxCheckBoxCtrlWithMouseToSelect, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
 	SET_CONTROLPARENT( WxCheckBoxCtrlWithMouseToSelect );
 	WxCheckBoxMiddleMouseToPaste = new wxCheckBox( WxNoteBookPage2, ID_WXCHECKBOXMIDDLEMOUSETOPASTE, _( "Paste text from clipboard when pressing middle mouse button" ), wxPoint( 24, 98 ), wxSize( 480, 20 ), 0, wxDefaultValidator, wxT( "WxCheckBoxMiddleMouseToPaste" ) );
 	WxBoxSizer12->Add( WxCheckBoxMiddleMouseToPaste, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
