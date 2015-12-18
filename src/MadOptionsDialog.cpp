@@ -376,7 +376,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	SET_CONTROLPARENT( WxEditDateTime );
 	WxStaticTextDateTime = new wxStaticText( WxNoteBookPage2, ID_WXSTATICTEXTDATETIME, _( "Format of Date/Time" ), wxPoint( 165, 5 ), wxDefaultSize, 0, wxT( "WxStaticTextDateTime" ) );
 	WxBoxSizer23->Add( WxStaticTextDateTime, 0, wxALIGN_CENTER | wxALL, 5 );
-	WxButtonDateTime = new wxButton( WxNoteBookPage2, ID_WXBUTTONDATETIME, wxT( ">>" ), wxPoint( 273, 1 ), wxSize( 25, 25 ), 0, wxDefaultValidator, wxT( "WxButtonDateTime" ) );
+	WxButtonDateTime = new wxButton( WxNoteBookPage2, ID_WXBUTTONDATETIME, wxT( ">>" ), wxPoint( 273, 1 ), wxSize( 40, 25 ), 0, wxDefaultValidator, wxT( "WxButtonDateTime" ) );
 	WxBoxSizer23->Add( WxButtonDateTime, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	SET_CONTROLPARENT( WxButtonDateTime );
 	WxCheckBoxDateTimeInEnglish = new wxCheckBox( WxNoteBookPage2, ID_WXCHECKBOXDATETIMEINENGLISH, _( "Use English instead of current locale" ), wxPoint( 301, 3 ), wxSize( 480, 20 ), 0, wxDefaultValidator, wxT( "WxCheckBoxDateTimeInEnglish" ) );
@@ -927,7 +927,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	arrayStringFor_WxChoicePointerAlign.Add( _( "Type" ) );
 	arrayStringFor_WxChoicePointerAlign.Add( _( "Middle" ) );
 	arrayStringFor_WxChoicePointerAlign.Add( _( "Name" ) );
-	WxChoicePointerAlign = new wxChoice( WxAuiNoteBookPage5, ID_WXCHOICEPOINTERALIGN, wxPoint( 103, 5 ), wxSize( 104, 21 ), arrayStringFor_WxChoicePointerAlign, 0, wxDefaultValidator, wxT( "WxChoicePointerAlign" ) );
+	WxChoicePointerAlign = new wxChoice( WxAuiNoteBookPage5, ID_WXCHOICEPOINTERALIGN, wxPoint( 103, 5 ), wxSize( 104, 30 ), arrayStringFor_WxChoicePointerAlign, 0, wxDefaultValidator, wxT( "WxChoicePointerAlign" ) );
 	WxChoicePointerAlign->SetSelection( 0 );
 	WxBoxSizer46->Add( WxChoicePointerAlign, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 5 );
 	SET_CONTROLPARENT( WxChoicePointerAlign );
@@ -938,7 +938,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	arrayStringFor_WxChoiceReferenceAlign.Add( _( "Type" ) );
 	arrayStringFor_WxChoiceReferenceAlign.Add( _( "Middle" ) );
 	arrayStringFor_WxChoiceReferenceAlign.Add( _( "Name" ) );
-	WxChoiceReferenceAlign = new wxChoice( WxAuiNoteBookPage5, ID_WXCHOICEREFERENCEALIGN, wxPoint( 329, 5 ), wxSize( 87, 21 ), arrayStringFor_WxChoiceReferenceAlign, 0, wxDefaultValidator, wxT( "WxChoiceReferenceAlign" ) );
+	WxChoiceReferenceAlign = new wxChoice( WxAuiNoteBookPage5, ID_WXCHOICEREFERENCEALIGN, wxPoint( 329, 5 ), wxSize( 87, 30 ), arrayStringFor_WxChoiceReferenceAlign, 0, wxDefaultValidator, wxT( "WxChoiceReferenceAlign" ) );
 	WxChoiceReferenceAlign->SetSelection( 0 );
 	WxBoxSizer46->Add( WxChoiceReferenceAlign, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 5 );
 	SET_CONTROLPARENT( WxChoiceReferenceAlign );
