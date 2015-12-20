@@ -29,7 +29,7 @@
 #define new new(_NORMAL_BLOCK ,__FILE__, __LINE__)
 #endif
 
-extern void	RecordAsMadMacro(MadEdit *,	const wxString&);
+extern void	RecordAsMadMacro(MadEdit *, const wxString&, bool=false);
 
 //(*IdInit(MadWordCountDialog)
 const long MadWordCountDialog::ID_WXSTATICTEXT7 = wxNewId();

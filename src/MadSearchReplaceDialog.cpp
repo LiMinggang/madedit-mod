@@ -47,7 +47,7 @@ extern int MadMessageBox(const wxString& message,
 extern wxStatusBar *g_StatusBar;   // add: gogo, 19.09.2009
 extern MadRecentList * g_RecentFindText;
 MadSearchReplaceDialog *g_SearchReplaceDialog=NULL;
-extern void	RecordAsMadMacro(MadEdit *,	const wxString&);
+extern void RecordAsMadMacro(MadEdit *, const wxString&, bool=false);
 extern MadEdit *g_ActiveMadEdit;
 wxProgressDialog *g_SearchProgressDialog=NULL;
 

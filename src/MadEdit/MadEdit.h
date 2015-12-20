@@ -1142,4 +1142,9 @@ wxString FixUTF8ToWCS(const wxString &str);
 wxString FormatThousands(const wxString& s);
 bool StrToInt64(wxString str, wxInt64 &i64);
 
+extern wxString g_MPythonInputBuf;
+extern wxFileOffset g_MPythonCaretPos;
+extern wxFileOffset g_MPythonSelBegPos;
+extern wxFileOffset g_MPythonSelEndPos;
+
 #endif

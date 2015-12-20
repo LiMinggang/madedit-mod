@@ -81,9 +81,9 @@ using std::list;
 
 static inline int wxChCmp( const wchar_t * wchStr, const wxString & wsStr );
 #ifndef PYMADEDIT_DLL
-	extern void RecordAsMadMacro( MadEdit *, const wxString& );
+	extern void RecordAsMadMacro( MadEdit *, const wxString&, bool=false);
 #else
-	#define RecordAsMadMacro(medit, str)
+	#define RecordAsMadMacro(medit, str, input)
 #endif
 extern bool FromCmdToString( wxString &cmdStr, int madCmd );
 MadKeyBindings MadEdit::ms_KeyBindings;
@@ -7784,7 +7784,8 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 				{
 					// insert the AutoCompleteLeftChar
 					InsertString( &uc, 1, true, true, false );
-					RecordAsMadMacro( this, wxString::Format( wxT( "InsertWChar(%d) #'%c'" ), command, command ) );
+					RecordAsMadMacro( this, wxString::Format( wxT( "%c" ), command, command ), true );
+
 					MadCaretPos *send;
 
 					if( m_Selection )
@@ -7807,7 +7808,8 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 					{
 						NewAutoCompleteRightChar = m_Syntax->m_AutoCompleteRightChar[idx];
 						InsertString( &NewAutoCompleteRightChar, 1, true, false, false );
-						RecordAsMadMacro( this, wxString::Format( wxT( "InsertWChar(%d) #'%c'" ), ( int )NewAutoCompleteRightChar, ( int )NewAutoCompleteRightChar ) );
+						
+						RecordAsMadMacro( this, wxString::Format( wxT( "%c" ), ( int )NewAutoCompleteRightChar, ( int )NewAutoCompleteRightChar ), true);
 						m_AutoCompletePos = m_CaretPos.pos;
 					}
 				}
@@ -7870,7 +7872,9 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 							m_SelectionBegin->linepos = spos;
 							spaces.push_back( uc );
 							InsertString( &spaces[0], spaces.size(), true, false, false );
-							RecordAsMadMacro( this, wxString::Format( wxT( "InsertWChar(%d) #'%c'" ), ( int )spaces[0], ( int )spaces[0] ) );
+							
+							RecordAsMadMacro( this, wxString::Format( wxT( "%c" ), ( int )spaces[0], ( int )spaces[0] ), true );
+							
 							inserted = true;
 						}
 					}
@@ -7878,7 +7882,7 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 					if( !inserted )
 					{
 						InsertString( &uc, 1, true, true, false );
-						RecordAsMadMacro( this, wxString::Format( wxT( "InsertWChar(%d) #'%c'" ), ( int )uc, ( int )uc ) );
+						RecordAsMadMacro( this, wxString::Format( wxT( "%c" ), ( int )uc, ( int )uc ), true );
 					}
 				}
 			}
