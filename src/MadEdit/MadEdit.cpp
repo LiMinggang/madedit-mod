@@ -7780,7 +7780,7 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 				// check for AutoCompletePair
 				int idx;
 
-				if( m_AutoCompletePair/* && m_EditMode==emTextMode*/ && ( idx = m_Syntax->m_AutoCompleteLeftChar.Find( wxChar( uc ) ) ) >= 0 )
+				if( m_AutoCompletePair && m_EditMode==emTextMode && ( idx = m_Syntax->m_AutoCompleteLeftChar.Find( wxChar( uc ) ) ) >= 0 )
 				{
 					// insert the AutoCompleteLeftChar
 					InsertString( &uc, 1, true, true, false );
@@ -8610,7 +8610,7 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 				case ecTab:
 					if( !IsReadOnly() )
 					{
-						if( m_Selection && ( m_SelectionPos1.lineid != m_SelectionPos2.lineid ) )
+						if( m_Selection && ( m_SelectionPos1.lineid != m_SelectionPos2.lineid )  && m_EditMode==emTextMode)
 						{
 							IncreaseDecreaseIndent( true );
 						}
