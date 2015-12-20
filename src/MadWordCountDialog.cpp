@@ -29,7 +29,8 @@
 #define new new(_NORMAL_BLOCK ,__FILE__, __LINE__)
 #endif
 
-extern void	RecordAsMadMacro(MadEdit *, const wxString&, bool=false);
+extern bool IsMacroRecording();
+extern void RecordAsMadMacro(MadEdit *, const wxString&, bool=false);
 
 //(*IdInit(MadWordCountDialog)
 const long MadWordCountDialog::ID_WXSTATICTEXT7 = wxNewId();
@@ -109,7 +110,8 @@ MadWordCountDialog::MadWordCountDialog(wxWindow* parent,wxWindowID id,const wxPo
 	int	words, chars, spaces, lines, halfwidths, fullwidths;
 	wxArrayString detail;
 	g_ActiveMadEdit->WordCount(g_ActiveMadEdit->IsSelected(), words, chars,	spaces,	halfwidths,	fullwidths,	lines, &detail);
-	RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("WordCount(%s)"), g_ActiveMadEdit->IsSelected()?wxT("True"):wxT("False")));
+	if( IsMacroRecording() )
+		RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("WordCount(%s)"), g_ActiveMadEdit->IsSelected()?wxT("True"):wxT("False")));
 
 	if(g_ActiveMadEdit->IsSelected())
 	{

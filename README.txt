@@ -128,9 +128,10 @@ Mod v0.3.9.1
 11.Fix: English was missing in the language list #105
 12.Fix: Should not call Reload on exiting #109
 13.Fix: Should rarely need to use wxConvLocal directly in MadPython #111
-14.Improve performance of script recording
-15.Update Astyle to latest code
-16.Update translations
+14.Fix: Tab/Return/BackSpace was not recorded in MadPython #114
+15.Improve performance of script recording
+16.Update Astyle to latest code
+17.Update translations
 
 Mod v0.3.9
 1.Improve on change syntax on save as

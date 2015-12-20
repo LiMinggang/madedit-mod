@@ -317,6 +317,12 @@ wxString     g_MPythonInputBuf;
 wxFileOffset g_MPythonCaretPos = -1;
 wxFileOffset g_MPythonSelBegPos = -1;
 wxFileOffset g_MPythonSelEndPos = -1;
+
+extern inline bool IsMacroRecording()
+{
+	return ( ( g_MainFrame != NULL ) && (g_MainFrame->IsMacroRecording() ) && (g_ActiveMadEdit));
+}
+
 inline void RecordAsMadMacro(MadEdit * edit, const wxString& script, bool inputCh = false);
 
 inline void RecordAsMadMacro( MadEdit * edit, const wxString& script, bool inputCh /*= false*/ )
@@ -4412,7 +4418,7 @@ void MadEditFrame::OnUpdateUI_MenuViewColumnMode( wxUpdateUIEvent& event )
 }
 void MadEditFrame::OnUpdateUI_MenuViewHexMode( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != NULL );
+	event.Enable( g_ActiveMadEdit != NULL && !IsMacroRecording());
 	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() == emHexMode );
 }
 void MadEditFrame::OnUpdateUI_MenuViewToolbars( wxUpdateUIEvent& event )
@@ -4552,17 +4558,17 @@ void MadEditFrame::OnUpdateUI_MenuWindow_CheckCount( wxUpdateUIEvent& event )
 
 void MadEditFrame::OnUpdateUI_MenuToolsStartRecMacro( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != NULL && IsMacroStopped() );
+	event.Enable( g_ActiveMadEdit != NULL && (g_ActiveMadEdit->GetEditMode() != emHexMode) && IsMacroStopped() );
 }
 
 void MadEditFrame::OnUpdateUI_MenuToolsStopRecMacro( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != NULL && IsMacroRecording() );
+	event.Enable( g_ActiveMadEdit != NULL && (g_ActiveMadEdit->GetEditMode() != emHexMode) && IsMacroRecording() );
 }
 
 void MadEditFrame::OnUpdateUI_MenuToolsPlayRecMacro( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit && IsMacroStopped() && HasRecordedScript() );
+	event.Enable( g_ActiveMadEdit != NULL && (g_ActiveMadEdit->GetEditMode() != emHexMode) && IsMacroStopped() && HasRecordedScript() );
 }
 
 void MadEditFrame::OnUpdateUI_MenuToolsSaveRecMacro( wxUpdateUIEvent& event )

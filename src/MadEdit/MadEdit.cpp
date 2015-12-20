@@ -80,12 +80,8 @@ using std::list;
 #endif
 
 static inline int wxChCmp( const wchar_t * wchStr, const wxString & wsStr );
-#ifndef PYMADEDIT_DLL
-	extern void RecordAsMadMacro( MadEdit *, const wxString&, bool=false);
-#else
-	#define RecordAsMadMacro(medit, str, input)
-#endif
-extern bool FromCmdToString( wxString &cmdStr, int madCmd );
+extern bool IsMacroRecording();
+extern void RecordAsMadMacro( MadEdit *, const wxString&, bool=false);
 MadKeyBindings MadEdit::ms_KeyBindings;
 
 const int HexModeMaxColumns = 78;
@@ -804,12 +800,11 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_Encoding = new MadEncoding( defaultenc );
 	m_Lines = new MadLines( this );
 	// set default value
-	long templong;
-	m_Config->Read( wxT( "MaxSizeToLoad" ), &templong, 20 * 1000 * 1000 );
-	m_Config->Read( wxT( "MaxTextFileSize" ), &templong, 10 * 1000 * 1000 );
+	m_Config->ReadLong( wxT( "MaxSizeToLoad" ), 20 * 1000 * 1000 );
+	m_Config->ReadLong( wxT( "MaxTextFileSize" ), 10 * 1000 * 1000 );
 	m_UndoBuffer = new MadUndoBuffer();
 	m_SavePoint = NULL;
-	m_Config->Read( wxT( "RecordCaretMovements" ), &m_RecordCaretMovements, false );
+	m_RecordCaretMovements = m_Config->ReadBool( wxT( "RecordCaretMovements" ), false );
 	m_Modified = false;
 	m_ModificationTime = 0;
 	m_ReadOnly = false;
@@ -820,7 +815,7 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 #endif
 	SetCaret( caret );
 	//caret->Show();    // first Show() in OnPaint()
-	m_Config->Read( wxT( "MaxLineLength" ), &m_MaxLineLength, DEFAULT_MAX_LINELEN );
+	m_MaxLineLength = m_Config->ReadLong( wxT( "MaxLineLength" ), DEFAULT_MAX_LINELEN );
 
 	if( m_MaxLineLength < 80 ) m_MaxLineLength = 80;
 
@@ -860,37 +855,37 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_SelectionEnd = &m_SelectionPos2;
 	m_RepaintAll = true;
 	m_RepaintSelection = false;
-	m_Config->Read( wxT( "FixedWidthMode" ), &m_FixedWidthMode, false );
+	m_FixedWidthMode = m_Config->ReadBool( wxT( "FixedWidthMode" ), false );
 	m_EditMode = emTextMode;
 	m_DoRecountLineWidth = false;
 	m_OldWidth = m_OldHeight = 0;
 	long mode;
-	m_Config->Read( wxT( "WordWrapMode" ), &mode, ( long )wwmNoWrap );
+	mode = m_Config->ReadLong( wxT( "WordWrapMode" ), ( long )wwmNoWrap );
 	m_WordWrapMode = ( MadWordWrapMode )mode;
 	m_TopRow = 0;
 	m_DrawingXPos = 0;
-	m_Config->Read( wxT( "LineSpacing" ), &m_LineSpacing, 100 );
-	m_Config->Read( wxT( "MaxColumns" ), &m_MaxColumns, 80 );
+	m_LineSpacing = m_Config->ReadLong( wxT( "LineSpacing" ), 100 );
+	m_MaxColumns = m_Config->ReadLong( wxT( "MaxColumns" ), 80 );
 	m_MaxWidth = m_MaxHeight = 0;
 	m_NewLineType = m_InsertNewLineType = nltDefault;
 	m_HasTab = false;
-	m_Config->Read( wxT( "TabColumns" ), &m_TabColumns, 8 );
-	m_Config->Read( wxT( "IndentColumns" ), &m_IndentColumns, 8 );
-	m_Config->Read( wxT( "InsertSpacesInsteadOfTab" ), &m_InsertSpacesInsteadOfTab, false );
+	m_TabColumns = m_Config->ReadLong( wxT( "TabColumns" ), 8 );
+	m_IndentColumns = m_Config->ReadLong( wxT( "IndentColumns" ), 8 );
+	m_InsertSpacesInsteadOfTab = m_Config->ReadBool( wxT( "InsertSpacesInsteadOfTab" ), false );
 	m_WantTab = true;
-	m_Config->Read( wxT( "AutoIndent" ), &m_AutoIndent, true );
-	m_Config->Read( wxT( "DisplayLineNumber" ),  &m_DisplayLineNumber, true );
-	m_Config->Read( wxT( "DisplayBookmark" ),    &m_DisplayBookmark, true );
-	m_Config->Read( wxT( "Display80ColHint" ),   &m_Display80ColHint, true );
-	m_Config->Read( wxT( "ShowEndOfLine" ),   &m_ShowEndOfLine,   true );
-	m_Config->Read( wxT( "ShowSpaceChar" ),   &m_ShowSpaceChar,   true );
-	m_Config->Read( wxT( "ShowTabChar" ),     &m_ShowTabChar,     true );
-	m_Config->Read( wxT( "MarkActiveLine" ),  &m_MarkActiveLine,  true );
-	m_Config->Read( wxT( "MarkBracePair" ), &m_MarkBracePair, true );
-	m_LeftBrace_rowid = m_RightBrace_rowid = -1;
-	m_Config->Read( wxT( "AutoCompletePair" ), &m_AutoCompletePair, false );
+	m_AutoIndent        = m_Config->ReadBool( wxT( "AutoIndent" ),         true );
+	m_DisplayLineNumber = m_Config->ReadBool( wxT( "DisplayLineNumber" ),  true );
+	m_DisplayBookmark   = m_Config->ReadBool( wxT( "DisplayBookmark" ),    true );
+	m_Display80ColHint  = m_Config->ReadBool( wxT( "Display80ColHint" ),   true );
+	m_ShowEndOfLine     = m_Config->ReadBool( wxT( "ShowEndOfLine" ),      true );
+	m_ShowSpaceChar     = m_Config->ReadBool( wxT( "ShowSpaceChar" ),      true );
+	m_ShowTabChar       = m_Config->ReadBool( wxT( "ShowTabChar" ),        true );
+	m_MarkActiveLine    = m_Config->ReadBool( wxT( "MarkActiveLine" ),     true );
+	m_MarkBracePair     = m_Config->ReadBool( wxT( "MarkBracePair" ),      true );
+	m_AutoCompletePair  = m_Config->ReadBool( wxT( "AutoCompletePair" ),   false );
 	m_AutoCompleteRightChar = 0;
 	m_AutoCompletePos = 0;
+	m_LeftBrace_rowid   = m_RightBrace_rowid = -1;
 	m_SpellCheck = false;
 	m_BookmarkInSearch = false;
 #ifndef PYMADEDIT_DLL
@@ -909,14 +904,14 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_MouseAtHexTextArea = false;
 	m_MouseInWindow = true;
 	m_MouseMotionTimer = new MadMouseMotionTimer( this );
-	m_Config->Read( wxT( "MouseSelectToCopy" ), &m_MouseSelectToCopy, true );
+	m_MouseSelectToCopy = m_Config->ReadBool( wxT( "MouseSelectToCopy" ), true );
 #if defined(__WXGTK__)
-	m_Config->Read( wxT( "MouseSelectToCopyWithCtrlKey" ), &m_MouseSelectToCopyWithCtrlKey, false );
+	m_MouseSelectToCopyWithCtrlKey = m_Config->ReadBool( wxT( "MouseSelectToCopyWithCtrlKey" ), false );
 #else
-	m_Config->Read( wxT( "MouseSelectToCopyWithCtrlKey" ), &m_MouseSelectToCopyWithCtrlKey, true );
+	m_MouseSelectToCopyWithCtrlKey = m_Config->ReadBool( wxT( "MouseSelectToCopyWithCtrlKey" ), true );
 #endif
-	m_Config->Read( wxT( "MiddleMouseToPaste" ), &m_MiddleMouseToPaste, true );
-	m_Config->Read( wxT( "AutoFillColumnPaste" ), &m_AutoFillColumnPaste, true );
+	m_MiddleMouseToPaste = m_Config->ReadBool( wxT( "MiddleMouseToPaste" ), true );
+	m_AutoFillColumnPaste = m_Config->ReadBool( wxT( "AutoFillColumnPaste" ), true );
 	m_HexTopRow = -1;
 	m_HexRowCount = 0;
 	m_HexDigitBitmap = NULL;
@@ -931,8 +926,8 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	memset( m_HexFontWidths, 0, sizeof( m_HexFontWidths ) );
 	wxString fontname;
 	int fontsize;
-	m_Config->Read( wxString( wxT( "/Fonts/" ) ) + m_Encoding->GetName(), &fontname, m_Encoding->GetFontName() );
-	m_Config->Read( wxT( "TextFontSize" ), &fontsize, 12 );
+	fontname = m_Config->Read( wxString( wxT( "/Fonts/" ) ) + m_Encoding->GetName(), m_Encoding->GetFontName() );
+	fontsize = m_Config->ReadLong( wxT( "TextFontSize" ), 12 );
 	SetTextFont( fontname, fontsize, true );
 #ifdef __WXMSW__
 	fontname = wxT( "Courier New" );
@@ -941,7 +936,7 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 #else
 	fontname = wxT( "Monospace" );
 #endif
-	m_Config->Read( wxString( wxT( "HexFontName" ) ), &fontname, fontname );
+	fontname = m_Config->Read( wxString( wxT( "HexFontName" ) ), fontname );
 	m_Config->Read( wxT( "HexFontSize" ), &fontsize, 12 );
 	SetHexFont( fontname, fontsize, true );
 	m_Printing = 0;
@@ -7674,7 +7669,8 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 			m_RepaintAll = true;
 			Refresh( false );
 			NewAutoCompleteRightChar = m_AutoCompleteRightChar;
-			RecordAsMadMacro( this, wxString( wxT( "ScrollLineUp()" ) ) );
+			if((!m_SingleLineMode) && IsMacroRecording())
+				RecordAsMadMacro( this, wxString( wxT( "ScrollLineUp()" ) ) );
 		}
 		break;
 
@@ -7685,7 +7681,8 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 			m_RepaintAll = true;
 			Refresh( false );
 			NewAutoCompleteRightChar = m_AutoCompleteRightChar;
-			RecordAsMadMacro( this, wxString( wxT( "ScrollLineDown()" ) ) );
+			if((!m_SingleLineMode) && IsMacroRecording())
+				RecordAsMadMacro( this, wxString( wxT( "ScrollLineDown()" ) ) );
 		}
 		break;
 
@@ -7696,7 +7693,8 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 			m_RepaintAll = true;
 			Refresh( false );
 			NewAutoCompleteRightChar = m_AutoCompleteRightChar;
-			RecordAsMadMacro( this, wxString( wxT( "ScrollPageUp()" ) ) );
+			if((!m_SingleLineMode) && IsMacroRecording())
+				RecordAsMadMacro( this, wxString( wxT( "ScrollPageUp()" ) ) );
 		}
 		break;
 
@@ -7707,7 +7705,8 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 			m_RepaintAll = true;
 			Refresh( false );
 			NewAutoCompleteRightChar = m_AutoCompleteRightChar;
-			RecordAsMadMacro( this, wxString( wxT( "ScrollPageDown()" ) ) );
+			if((!m_SingleLineMode) && IsMacroRecording())
+				RecordAsMadMacro( this, wxString( wxT( "ScrollPageDown()" ) ) );
 		}
 		break;
 
@@ -7718,7 +7717,8 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 			m_RepaintAll = true;
 			Refresh( false );
 			NewAutoCompleteRightChar = m_AutoCompleteRightChar;
-			RecordAsMadMacro( this, wxString( wxT( "ScrollLeft()" ) ) );
+			if((!m_SingleLineMode) && IsMacroRecording())
+				RecordAsMadMacro( this, wxString( wxT( "ScrollLeft()" ) ) );
 		}
 		break;
 
@@ -7729,7 +7729,8 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 			m_RepaintAll = true;
 			Refresh( false );
 			NewAutoCompleteRightChar = m_AutoCompleteRightChar;
-			RecordAsMadMacro( this, wxString( wxT( "ScrollRight()" ) ) );
+			if((!m_SingleLineMode) && IsMacroRecording())
+				RecordAsMadMacro( this, wxString( wxT( "ScrollRight()" ) ) );
 		}
 		break;
 
@@ -7784,7 +7785,8 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 				{
 					// insert the AutoCompleteLeftChar
 					InsertString( &uc, 1, true, true, false );
-					RecordAsMadMacro( this, wxString::Format( wxT( "%c" ), command, command ), true );
+					if((!m_SingleLineMode) && IsMacroRecording())
+						RecordAsMadMacro( this, wxString::Format( wxT( "%c" ), command, command ), true );
 
 					MadCaretPos *send;
 
@@ -7809,7 +7811,8 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 						NewAutoCompleteRightChar = m_Syntax->m_AutoCompleteRightChar[idx];
 						InsertString( &NewAutoCompleteRightChar, 1, true, false, false );
 						
-						RecordAsMadMacro( this, wxString::Format( wxT( "%c" ), ( int )NewAutoCompleteRightChar, ( int )NewAutoCompleteRightChar ), true);
+						if((!m_SingleLineMode) && IsMacroRecording())
+							RecordAsMadMacro( this, wxString::Format( wxT( "%c" ), ( int )NewAutoCompleteRightChar, ( int )NewAutoCompleteRightChar ), true);
 						m_AutoCompletePos = m_CaretPos.pos;
 					}
 				}
@@ -7873,7 +7876,8 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 							spaces.push_back( uc );
 							InsertString( &spaces[0], spaces.size(), true, false, false );
 							
-							RecordAsMadMacro( this, wxString::Format( wxT( "%c" ), ( int )spaces[0], ( int )spaces[0] ), true );
+							if((!m_SingleLineMode) && IsMacroRecording())
+								RecordAsMadMacro( this, wxString::Format( wxT( "%c" ), ( int )spaces[0], ( int )spaces[0] ), true );
 							
 							inserted = true;
 						}
@@ -7882,28 +7886,13 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 					if( !inserted )
 					{
 						InsertString( &uc, 1, true, true, false );
-						RecordAsMadMacro( this, wxString::Format( wxT( "%c" ), ( int )uc, ( int )uc ), true );
+						if((!m_SingleLineMode) && IsMacroRecording())
+							RecordAsMadMacro( this, wxString::Format( wxT( "%c" ), ( int )uc, ( int )uc ), true );
 					}
 				}
 			}
 			else
 			{
-#if 0
-
-				if( ( command != ecIncreaseIndent ) && ( command != ecDecreaseIndent ) &&
-						( command != ecComment ) && ( command != ecUncomment ) )
-				{
-					wxString cmdStr( wxT( "ProcessCommand(" ) );
-
-					if( FromCmdToString( cmdStr, command ) )
-					{
-						cmdStr << wxT( ")" );
-						RecordAsMadMacro( this, cmdStr );
-					}
-				}
-
-#endif
-
 				switch( command )
 				{
 				case ecLeft:
@@ -8524,6 +8513,9 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 								break;
 							}
 
+							if((!m_SingleLineMode) && IsMacroRecording())
+								RecordAsMadMacro( this, wxString(wxT("ProcessCommand( MadEditCommand.Return )")));
+
 							if( m_AutoIndent && command == ecReturn )
 							{
 								MadUCQueue ucqueue;
@@ -8639,6 +8631,9 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 								ucs4_t tab = 0x09;
 								InsertString( &tab, 1, true, true, false );
 							}
+							
+							if((!m_SingleLineMode) && IsMacroRecording())
+								RecordAsMadMacro( this, wxString( wxT( "\\t" ) ), true );
 					}
 
 					break;
@@ -8676,6 +8671,9 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 					{
 						ucs4_t tab = 0x09;
 						InsertString( &tab, 1, true, true, false );
+						
+						if((!m_SingleLineMode) && IsMacroRecording())
+							RecordAsMadMacro( this, wxString( wxT( "\\t" ) ), true );
 					}
 
 					break;
@@ -9049,6 +9047,11 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 									}
 								}
 							}
+						}
+						
+						if((!m_SingleLineMode) && IsMacroRecording())
+						{
+							RecordAsMadMacro( this, wxString(wxT("ProcessCommand( MadEditCommand.BackSpace )")));
 						}
 					}
 
