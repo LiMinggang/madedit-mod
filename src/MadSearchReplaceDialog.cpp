@@ -47,7 +47,7 @@ extern int MadMessageBox(const wxString& message,
 extern wxStatusBar *g_StatusBar;   // add: gogo, 19.09.2009
 extern MadRecentList * g_RecentFindText;
 MadSearchReplaceDialog *g_SearchReplaceDialog=NULL;
-//extern bool IsMacroRecording();
+extern bool IsMacroRecording();
 extern void RecordAsMadMacro(MadEdit *, const wxString&, bool=false);
 extern MadEdit *g_ActiveMadEdit;
 wxProgressDialog *g_SearchProgressDialog=NULL;
@@ -461,7 +461,7 @@ void MadSearchReplaceDialog::WxButtonFindNextClick(wxCommandEvent& event)
 				sr=g_ActiveMadEdit->FindHexNext(text, rangeFrom, rangeTo);
 				if(sr != SR_EXPR_ERROR)
 				{
-					if( g_MainFrame->IsMacroRecording() )
+					if( IsMacroRecording() )
 						RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("FindHexNext(\"%s\", %s, %s)"), text.c_str(),
 									(wxLongLong(rangeFrom).ToString()).c_str(), (wxLongLong(rangeTo).ToString()).c_str()));
 				}
@@ -479,7 +479,7 @@ void MadSearchReplaceDialog::WxButtonFindNextClick(wxCommandEvent& event)
 					rangeFrom, rangeTo);
 				if(sr != SR_EXPR_ERROR)
 				{
-					if( g_MainFrame->IsMacroRecording() )
+					if( IsMacroRecording() )
 					{
 						expr = text;
 						if(!bRegex)
@@ -615,7 +615,7 @@ void MadSearchReplaceDialog::WxButtonFindPrevClick(wxCommandEvent& event)
 			if(WxCheckBoxFindHex->GetValue())
 			{
 				sr=g_ActiveMadEdit->FindHexPrevious(text, rangeTo, rangeFrom);
-				if( g_MainFrame->IsMacroRecording() )
+				if( IsMacroRecording() )
 					RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("FindHexPrevious(\"%s\", %s, %s)"), text.c_str(), (wxLongLong(rangeFrom).ToString()).c_str(), (wxLongLong(rangeTo).ToString()).c_str()));
 			}
 			else
@@ -631,7 +631,7 @@ void MadSearchReplaceDialog::WxButtonFindPrevClick(wxCommandEvent& event)
 					bDotMatchNewline,
 					rangeTo, rangeFrom);
 
-				if( g_MainFrame->IsMacroRecording() )
+				if( IsMacroRecording() )
 				{
 					expr = text;
 					if(!bRegex)
@@ -997,7 +997,7 @@ void MadSearchReplaceDialog::WxButtonReplaceClick(wxCommandEvent& event)
 			{
 				ret=g_ActiveMadEdit->ReplaceHex(text, reptext, rangeFrom, rangeTo);
 				
-				if((ret == RR_REP_NEXT || ret == RR_NREP_NEXT) && ( g_MainFrame->IsMacroRecording() ))
+				if((ret == RR_REP_NEXT || ret == RR_NREP_NEXT) && ( IsMacroRecording() ))
 				{
 					RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("ReplaceHex(\"%s\", \"%s\", %s, %s)"), text.c_str(), reptext.c_str(), (wxLongLong(rangeFrom).ToString()).c_str(), (wxLongLong(rangeTo).ToString()).c_str()));
 				}
@@ -1013,7 +1013,7 @@ void MadSearchReplaceDialog::WxButtonReplaceClick(wxCommandEvent& event)
 					bWholeWord,
 					bDotMatchNewline,
 					rangeFrom, rangeTo);
-				if((ret == RR_REP_NEXT || ret == RR_NREP_NEXT) && ( g_MainFrame->IsMacroRecording() ))
+				if((ret == RR_REP_NEXT || ret == RR_NREP_NEXT) && ( IsMacroRecording() ))
 				{
 					expr = text;
 					if(!bRegex)
@@ -1476,7 +1476,7 @@ void MadSearchReplaceDialog::SearchAll(MadEdit * madedit, bool needRec/*=true*/)
 				false,
 				&begpos, &endpos, rangeFrom, rangeTo);
 
-			if(needRec && ( g_MainFrame->IsMacroRecording() ))
+			if(needRec && ( IsMacroRecording() ))
 			{
 				if(!bRegex)
 				{
@@ -1591,7 +1591,7 @@ void MadSearchReplaceDialog::ReplaceAll(MadEdit	* madedit, bool	needRec/*=true*/
 		if(WxCheckBoxFindHex->GetValue())
 		{
 			count=madedit->ReplaceHexAll(text, reptext,	NULL, NULL,	rangeFrom, rangeTo);
-			if(needRec && ( g_MainFrame->IsMacroRecording() ))
+			if(needRec && ( IsMacroRecording() ))
 				RecordAsMadMacro(madedit, wxString::Format(wxT("ReplaceHexAll(\"%s\", \"%s\", %s, %s)"), text.c_str(),	reptext.c_str(), (wxLongLong(rangeFrom).ToString()).c_str(), (wxLongLong(rangeTo).ToString()).c_str()));
 		}
 		else
@@ -1605,7 +1605,7 @@ void MadSearchReplaceDialog::ReplaceAll(MadEdit	* madedit, bool	needRec/*=true*/
 				bWholeWord,
 				bDotMatchNewline,
 				NULL, NULL,	rangeFrom, rangeTo);
-			if(needRec && ( g_MainFrame->IsMacroRecording() ))
+			if(needRec && ( IsMacroRecording() ))
 			{
 				if(!bRegex)
 				{

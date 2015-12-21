@@ -318,7 +318,7 @@ wxFileOffset g_MPythonCaretPos = -1;
 wxFileOffset g_MPythonSelBegPos = -1;
 wxFileOffset g_MPythonSelEndPos = -1;
 
-extern inline bool IsMacroRecording()
+extern bool IsMacroRecording()
 {
 	return ( ( g_MainFrame != NULL ) && ( g_MainFrame->IsMacroRecording() ) && ( g_ActiveMadEdit ) );
 }
