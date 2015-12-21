@@ -320,37 +320,41 @@ wxFileOffset g_MPythonSelEndPos = -1;
 
 extern inline bool IsMacroRecording()
 {
-	return ( ( g_MainFrame != NULL ) && (g_MainFrame->IsMacroRecording() ) && (g_ActiveMadEdit));
+	return ( ( g_MainFrame != NULL ) && ( g_MainFrame->IsMacroRecording() ) && ( g_ActiveMadEdit ) );
 }
 
-inline void RecordAsMadMacro(MadEdit * edit, const wxString& script, bool inputCh = false);
+inline void RecordAsMadMacro( MadEdit * edit, const wxString& script, bool inputCh = false );
 
 inline void RecordAsMadMacro( MadEdit * edit, const wxString& script, bool inputCh /*= false*/ )
 {
 	if( ( g_MainFrame != NULL ) && ( edit == g_ActiveMadEdit ) )
 	{
-		if(g_MainFrame->IsMacroRecording() )
+		if( g_MainFrame->IsMacroRecording() )
 		{
-			if(!inputCh)
+			if( !inputCh )
 			{
 				if( !g_MPythonInputBuf.IsEmpty() )
 				{
-					if(g_MPythonCaretPos == -1)
+					if( g_MPythonCaretPos == -1 )
 					{
 						g_MPythonCaretPos  = g_ActiveMadEdit->GetCaretPosition();
 						g_MPythonSelBegPos = g_ActiveMadEdit->GetSelectionBeginPos();
 						g_MPythonSelEndPos = g_ActiveMadEdit->GetSelectionEndPos();
 					}
-	 				g_MainFrame->AddMacroScript( wxT("InsertStr(\"") + g_MPythonInputBuf +wxT("\")"), g_MPythonCaretPos, g_MPythonSelBegPos, g_MPythonSelEndPos );
+
+					g_MainFrame->AddMacroScript( wxT( "InsertStr(\"" ) + g_MPythonInputBuf + wxT( "\")" ), g_MPythonCaretPos, g_MPythonSelBegPos, g_MPythonSelEndPos );
 					g_MPythonInputBuf.Empty();
+					g_MPythonCaretPos = -1;
 				}
+
 				g_MainFrame->AddMacroScript( script, g_ActiveMadEdit->GetCaretPosition(),
-										 g_ActiveMadEdit->GetSelectionBeginPos(), g_ActiveMadEdit->GetSelectionEndPos() );
+											 g_ActiveMadEdit->GetSelectionBeginPos(), g_ActiveMadEdit->GetSelectionEndPos() );
 			}
 			else
 			{
 				g_MPythonInputBuf << script;
-				if (g_MPythonCaretPos == -1)
+
+				if( g_MPythonCaretPos == -1 )
 				{
 					g_MPythonCaretPos = g_ActiveMadEdit->GetCaretPosition();
 					g_MPythonSelBegPos = g_ActiveMadEdit->GetSelectionBeginPos();
@@ -4418,7 +4422,7 @@ void MadEditFrame::OnUpdateUI_MenuViewColumnMode( wxUpdateUIEvent& event )
 }
 void MadEditFrame::OnUpdateUI_MenuViewHexMode( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != NULL && !IsMacroRecording());
+	event.Enable( g_ActiveMadEdit != NULL && !IsMacroRecording() );
 	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() == emHexMode );
 }
 void MadEditFrame::OnUpdateUI_MenuViewToolbars( wxUpdateUIEvent& event )
@@ -4558,17 +4562,17 @@ void MadEditFrame::OnUpdateUI_MenuWindow_CheckCount( wxUpdateUIEvent& event )
 
 void MadEditFrame::OnUpdateUI_MenuToolsStartRecMacro( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != NULL && (g_ActiveMadEdit->GetEditMode() != emHexMode) && IsMacroStopped() );
+	event.Enable( g_ActiveMadEdit != NULL && ( g_ActiveMadEdit->GetEditMode() != emHexMode ) && IsMacroStopped() );
 }
 
 void MadEditFrame::OnUpdateUI_MenuToolsStopRecMacro( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != NULL && (g_ActiveMadEdit->GetEditMode() != emHexMode) && IsMacroRecording() );
+	event.Enable( g_ActiveMadEdit != NULL && ( g_ActiveMadEdit->GetEditMode() != emHexMode ) && IsMacroRecording() );
 }
 
 void MadEditFrame::OnUpdateUI_MenuToolsPlayRecMacro( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != NULL && (g_ActiveMadEdit->GetEditMode() != emHexMode) && IsMacroStopped() && HasRecordedScript() );
+	event.Enable( g_ActiveMadEdit != NULL && ( g_ActiveMadEdit->GetEditMode() != emHexMode ) && IsMacroStopped() && HasRecordedScript() );
 }
 
 void MadEditFrame::OnUpdateUI_MenuToolsSaveRecMacro( wxUpdateUIEvent& event )
@@ -7544,16 +7548,18 @@ void MadEditFrame::OnToolsStopRecMacro( wxCommandEvent& event )
 {
 	if( !g_MPythonInputBuf.IsEmpty() )
 	{
-		if(g_MPythonCaretPos == -1)
+		if( g_MPythonCaretPos == -1 )
 		{
 			g_MPythonCaretPos  = g_ActiveMadEdit->GetCaretPosition();
 			g_MPythonSelBegPos = g_ActiveMadEdit->GetSelectionBeginPos();
 			g_MPythonSelEndPos = g_ActiveMadEdit->GetSelectionEndPos();
 		}
-		g_MainFrame->AddMacroScript( wxT("InsertStr(\"") + g_MPythonInputBuf +wxT("\")"), g_MPythonCaretPos, g_MPythonSelBegPos, g_MPythonSelEndPos );
-	}
-	g_MPythonInputBuf.Empty();
 
+		g_MainFrame->AddMacroScript( wxT( "InsertStr(\"" ) + g_MPythonInputBuf + wxT( "\")" ), g_MPythonCaretPos, g_MPythonSelBegPos, g_MPythonSelEndPos );
+	}
+
+	g_MPythonInputBuf.Empty();
+	g_MPythonCaretPos = -1;
 	SetMacroStopped();
 }
 

@@ -20,8 +20,7 @@ I don't think it's a problem for the purpose to use it as a macro script languag
 Below is the list of the functions supported by MadPython. It's not a good doc 
 and it's to be improved. It's only for the advanced users to try and test.
 
-Note: The locale of the MadPython should be the default locale of your system. 
-Don't support locale changing unless there was oustanding reason for the feature!
+Note: Don't support MadPython recording/Playing in Hex Mode
 
 Note: The APIs are listed as C++ functions.
 
@@ -58,6 +57,8 @@ double line feedings with single one
     me=MadEdit() # Create a MadEdit object
     for i in range(10):
         me.InsertWChar(65) # Or me.InsertStr('A') or me.InsertStr("A")
+
+5. Use Recording/Playing to see advanced examples!!
 
 Supported method list:
 ====

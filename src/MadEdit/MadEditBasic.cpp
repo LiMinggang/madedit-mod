@@ -1,213 +1,210 @@
 ///////////////////////////////////////////////////////////////////////////////
-// Name:		MadEdit/MadEditBasic.cpp
-// Description:	basic functions	of MadEdit
-// Author:		madedit@gmail.com
-// Maintainer:	minggang.li@gmail.com
-// Licence:		GPL
+// Name:        MadEdit/MadEditBasic.cpp
+// Description: basic functions of MadEdit
+// Author:      madedit@gmail.com
+// Maintainer:  minggang.li@gmail.com
+// Licence:     GPL
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "MadEdit.h"
 #include "MadEditPv.h"
 
 #ifdef __WXGTK__
-#	include	"clipbrd_gtk.h"
+	#   include "clipbrd_gtk.h"
 #else
-#	include	<wx/clipbrd.h>
+	#   include <wx/clipbrd.h>
 #endif
 
 #include <wx/filename.h>
-#ifndef	PYMADEDIT_DLL
-#include "SpellCheckerManager.h"
+#ifndef PYMADEDIT_DLL
+	#include "SpellCheckerManager.h"
 #endif
 
 #ifdef _DEBUG
-#include <crtdbg.h>
-#define	new	new(_NORMAL_BLOCK ,__FILE__, __LINE__)
+	#include <crtdbg.h>
+	#define new new(_NORMAL_BLOCK ,__FILE__, __LINE__)
 #endif
 
-extern const ucs4_t	HexHeader[];
-extern int MadMessageBox(const wxString& message,
-							 const wxString& caption = wxMessageBoxCaptionStr,
-							 long style	= wxOK | wxCENTRE,
-							 wxWindow *parent =	NULL,
-							 int x = wxDefaultCoord, int y = wxDefaultCoord);
+extern const ucs4_t HexHeader[];
+extern int MadMessageBox( const wxString& message,
+						  const wxString& caption = wxMessageBoxCaptionStr,
+						  long style = wxOK | wxCENTRE,
+						  wxWindow *parent = NULL,
+						  int x = wxDefaultCoord, int y = wxDefaultCoord );
 
 //==============================================================================
 
-const int CR_Points_Count =	5;
-const int CR_Points[CR_Points_Count+1][2]=
+const int CR_Points_Count = 5;
+const int CR_Points[CR_Points_Count + 1][2] =
 {
-	{	0,	 0 },
-	{ 400,	 0 },
+	{   0,  0 },
+	{ 400,  0 },
 	{ 400, 999 },
 	{ 101, 700 },
 	{ 400, 700 },
-	{ 600, 999 }	 //	max	value
+	{ 600, 999 }     // max value
 };
 
-const int LF_Points_Count =	5;
-const int LF_Points[LF_Points_Count+1][2]=
+const int LF_Points_Count = 5;
+const int LF_Points[LF_Points_Count + 1][2] =
 {
-	{ 578,	 0 },
-	{ 178,	 0 },
+	{ 578,  0 },
+	{ 178,  0 },
 	{ 178, 999 },
 	{ 477, 700 },
 	{ 178, 700 },
-	{ 600, 999 } //	max	value
+	{ 600, 999 } // max value
 };
 
-const int CRLF_Points_Count	= 8;
-const int CRLF_Points[CRLF_Points_Count+1][2]=
+const int CRLF_Points_Count = 8;
+const int CRLF_Points[CRLF_Points_Count + 1][2] =
 {
-	{	0,	 0 },
-	{ 560,	 0 },
-	{ 300,	 0 },
+	{   0,  0 },
+	{ 560,  0 },
+	{ 300,  0 },
 	{ 300, 700 },
 	{  76, 700 },
 	{ 300, 999 },
 	{ 524, 700 },
 	{ 300, 700 },
-	{ 600, 999 } //	max	value
+	{ 600, 999 } // max value
 };
 
 /*
 const int CR_Points2_Count = 14;
 const int CR_Points2[CR_Points2_Count+1][2]=
 {
-	{	0,	 0 },
-	{	0, 601 },
-	{ 255, 348 },
-	{ 255, 850 },
-	{  79, 644 },
-	{  56, 667 },
-	{ 278, 999 },
-	{ 502, 664 },
-	{ 479, 641 },
-	{ 304, 850 },
-	{ 304, 270 },
-	{ 281, 247 },
-	{  70, 457 },
-	{  70,	 0 },
-	{ 600, 999 }	 //	max	value
+    {   0,  0 },
+    {   0, 601 },
+    { 255, 348 },
+    { 255, 850 },
+    {  79, 644 },
+    {  56, 667 },
+    { 278, 999 },
+    { 502, 664 },
+    { 479, 641 },
+    { 304, 850 },
+    { 304, 270 },
+    { 281, 247 },
+    {  70, 457 },
+    {  70,  0 },
+    { 600, 999 }     // max value
 };
 
 const int LF_Points2_Count = 14;
 const int LF_Points2[LF_Points2_Count+1][2]=
 {
-	{ 255, 273 },
-	{ 255, 850 },
-	{  79, 644 },
-	{  56, 667 },
-	{ 278, 999 },
-	{ 502, 664 },
-	{ 479, 641 },
-	{ 304, 850 },
-	{ 304, 345 },
-	{ 558, 559 },
-	{ 558,	 0 },
-	{ 488,	 0 },
-	{ 488, 454 },
-	{ 281, 247 },
-	{ 600, 999 } //	max	value
+    { 255, 273 },
+    { 255, 850 },
+    {  79, 644 },
+    {  56, 667 },
+    { 278, 999 },
+    { 502, 664 },
+    { 479, 641 },
+    { 304, 850 },
+    { 304, 345 },
+    { 558, 559 },
+    { 558,  0 },
+    { 488,  0 },
+    { 488, 454 },
+    { 281, 247 },
+    { 600, 999 } // max value
 };
 
 const int CRLF_Points2_Count = 18;
 const int CRLF_Points2[CRLF_Points2_Count+1][2]=
 {
-	{	0,	 0 },
-	{	0, 601 },
-	{ 255, 348 },
-	{ 255, 850 },
-	{  79, 644 },
-	{  56, 667 },
-	{ 278, 999 },
-	{ 502, 664 },
-	{ 479, 641 },
-	{ 304, 850 },
-	{ 304, 345 },
-	{ 558, 559 },
-	{ 558,	 0 },
-	{ 488,	 0 },
-	{ 488, 454 },
-	{ 281, 247 },
-	{  70, 457 },
-	{  70,	 0 },
-	{ 600, 999 } //	max	value
+    {   0,  0 },
+    {   0, 601 },
+    { 255, 348 },
+    { 255, 850 },
+    {  79, 644 },
+    {  56, 667 },
+    { 278, 999 },
+    { 502, 664 },
+    { 479, 641 },
+    { 304, 850 },
+    { 304, 345 },
+    { 558, 559 },
+    { 558,  0 },
+    { 488,  0 },
+    { 488, 454 },
+    { 281, 247 },
+    {  70, 457 },
+    {  70,  0 },
+    { 600, 999 } // max value
 };
 */
 
-void MadEdit::SetSyntax(const wxString &title)
+void MadEdit::SetSyntax( const wxString &title )
 {
-	if(m_Syntax->m_Title !=	title)
+	if( m_Syntax->m_Title != title )
 	{
 		delete m_Syntax;
-		m_Syntax = MadSyntax::GetSyntaxByTitle(title);
-		m_Syntax->SetEncoding(m_Encoding);
-		m_Syntax->InitNextWord1(m_Lines, m_WordBuffer, m_WidthBuffer,
-			m_TextFont->GetFaceName(), m_TextFont->GetPointSize(), m_TextFont->GetFamily());
+		m_Syntax = MadSyntax::GetSyntaxByTitle( title );
+		m_Syntax->SetEncoding( m_Encoding );
+		m_Syntax->InitNextWord1( m_Lines, m_WordBuffer, m_WidthBuffer,
+								 m_TextFont->GetFaceName(), m_TextFont->GetPointSize(), m_TextFont->GetFamily() );
+		m_Lines->m_Syntax = m_Syntax;
 
-		m_Lines->m_Syntax=m_Syntax;
-
-		if(!m_LoadingFile)
+		if( !m_LoadingFile )
 		{
-			if(IsTextFile())	// data	is text
+			if( IsTextFile() )  // data is text
 			{
 				ReformatAll();
-
 				DoStatusChanged();
 				DoSelectionChanged();
-
 				m_RepaintAll = true;
-				Refresh(false);
+				Refresh( false );
 			}
 		}
 	}
 }
 
-void MadEdit::ApplySyntaxAttributes(MadSyntax *syn,	bool matchTitle)
+void MadEdit::ApplySyntaxAttributes( MadSyntax *syn, bool matchTitle )
 {
-	if(!matchTitle || syn->m_Title==m_Syntax->m_Title)
+	if( !matchTitle || syn->m_Title == m_Syntax->m_Title )
 	{
-		m_Syntax->AssignAttributes(syn);
-		if(m_EditMode==emHexMode &&	m_HexDigitBitmap)
+		m_Syntax->AssignAttributes( syn );
+
+		if( m_EditMode == emHexMode && m_HexDigitBitmap )
 		{
 			delete m_HexDigitBitmap;
-			m_HexDigitBitmap=NULL;
+			m_HexDigitBitmap = NULL;
 		}
+
 		m_RepaintAll = true;
-		Refresh(false);
+		Refresh( false );
 	}
 }
 
-void MadEdit::SetEncoding(const	wxString &encname)
+void MadEdit::SetEncoding( const wxString &encname )
 {
-	if(encname.Lower() != m_Encoding->GetName().Lower())
+	if( encname.Lower() != m_Encoding->GetName().Lower() )
 	{
 		delete m_Encoding;
-		m_Encoding=new MadEncoding(encname);
-		m_Lines->SetEncoding(m_Encoding);
-		m_Syntax->SetEncoding(m_Encoding);
-
+		m_Encoding = new MadEncoding( encname );
+		m_Lines->SetEncoding( m_Encoding );
+		m_Syntax->SetEncoding( m_Encoding );
 		wxString fontname;
-		m_Config->Read(wxString(wxT("/Fonts/"))+m_Encoding->GetName(), &fontname, m_Encoding->GetFontName());
+		m_Config->Read( wxString( wxT( "/Fonts/" ) ) + m_Encoding->GetName(), &fontname, m_Encoding->GetFontName() );
+		bool oldlf = m_LoadingFile;
+		m_LoadingFile = true;
+		SetTextFont( fontname, m_TextFont->GetPointSize(), false );
+		m_LoadingFile = oldlf;
 
-		bool oldlf=m_LoadingFile;
-		m_LoadingFile=true;
-		SetTextFont(fontname, m_TextFont->GetPointSize(), false);
-		m_LoadingFile=oldlf;
-
-		if(!m_LoadingFile)
+		if( !m_LoadingFile )
 		{
-			if(IsTextFile())	// data	is text
+			if( IsTextFile() )  // data is text
 			{
 				ReformatAll();
 			}
-			else //	hex	data
+			else // hex data
 			{
 				AppearCaret();
 				UpdateScrollBarPos();
 
-				if(!m_CaretAtHexArea)
+				if( !m_CaretAtHexArea )
 				{
 					UpdateTextAreaXPos();
 					m_LastTextAreaXPos = m_TextAreaXPos;
@@ -216,584 +213,572 @@ void MadEdit::SetEncoding(const	wxString &encname)
 
 			DoStatusChanged();
 			DoSelectionChanged();
-
 			m_RepaintAll = true;
-			Refresh(false);
+			Refresh( false );
 		}
 	}
 }
 
 
-void MadEdit::SetRecordCaretMovements(bool value)
+void MadEdit::SetRecordCaretMovements( bool value )
 {
-	if(value!=m_RecordCaretMovements)
+	if( value != m_RecordCaretMovements )
 	{
-		m_RecordCaretMovements=value;
+		m_RecordCaretMovements = value;
 
-		if(m_StorePropertiesToGlobalConfig)
+		if( m_StorePropertiesToGlobalConfig )
 		{
-			wxString oldpath=m_Config->GetPath();
-			m_Config->Write(wxT("/MadEdit/RecordCaretMovements"), value);
-			m_Config->SetPath(oldpath);
+			wxString oldpath = m_Config->GetPath();
+			m_Config->Write( wxT( "/MadEdit/RecordCaretMovements" ), value );
+			m_Config->SetPath( oldpath );
 		}
 	}
 }
 
 
-void MadEdit::SetTextFont(const	wxString &name,	int	size, bool forceReset)
+void MadEdit::SetTextFont( const wxString &name, int size, bool forceReset )
 {
-	if(size	< 1) size =	1;
+	if( size < 1 ) size = 1;
 
-	if(forceReset || size!=m_TextFont->GetPointSize() || name!=m_TextFont->GetFaceName())
+	if( forceReset || size != m_TextFont->GetPointSize() || name != m_TextFont->GetFaceName() )
 	{
-		m_TextFont=wxTheFontList->FindOrCreateFont(size, //font.GetFamily(), font.GetStyle(), font.GetWeight(),	font.GetUnderlined(), name);
-			wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, name);
+		m_TextFont = wxTheFontList->FindOrCreateFont( size, //font.GetFamily(), font.GetStyle(), font.GetWeight(), font.GetUnderlined(), name);
+					 wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, name );
+		memset( m_TextFontWidths, 0, sizeof( m_TextFontWidths ) );
+		m_TextFontWidths[0] = FontWidthManager::GetFontWidths( 0, name, size, this );
 
-		memset(m_TextFontWidths, 0,	sizeof(m_TextFontWidths));
-		m_TextFontWidths[0]	= FontWidthManager::GetFontWidths(0, name, size, this);
-
-		if(m_StorePropertiesToGlobalConfig)
+		if( m_StorePropertiesToGlobalConfig )
 		{
-			wxString oldpath=m_Config->GetPath();
-			m_Config->Write(wxString(wxT("/Fonts/"))+m_Encoding->GetName(),	name);
-			m_Config->Write(wxT("/MadEdit/TextFontSize"), size);
-			m_Config->SetPath(oldpath);
+			wxString oldpath = m_Config->GetPath();
+			m_Config->Write( wxString( wxT( "/Fonts/" ) ) + m_Encoding->GetName(), name );
+			m_Config->Write( wxT( "/MadEdit/TextFontSize" ), size );
+			m_Config->SetPath( oldpath );
 		}
 
-
-		if(m_EditMode==emHexMode)
+		if( m_EditMode == emHexMode )
 		{
-			m_DoRecountLineWidth=true;
+			m_DoRecountLineWidth = true;
 		}
 		else
 		{
-			MadEditSuperClass::SetFont(*m_TextFont);
-			m_TextFontHeight=GetCharHeight();
-			wxASSERT(m_TextFontHeight >	0);
+			MadEditSuperClass::SetFont( *m_TextFont );
+			m_TextFontHeight = GetCharHeight();
+			wxASSERT( m_TextFontHeight > 0 );
 
-			//Patch	for	Fedora 20 VMWare
-			if(m_TextFontHeight==0)	m_TextFontHeight=19;
+			//Patch for Fedora 20 VMWare
+			if( m_TextFontHeight == 0 ) m_TextFontHeight = 19;
 
-			bool ofwm=m_FixedWidthMode;
-			m_FixedWidthMode=false;	// avoid effecting on GetUCharWidth();
+			bool ofwm = m_FixedWidthMode;
+			m_FixedWidthMode = false; // avoid effecting on GetUCharWidth();
+			m_TextFontAveCharWidth = GetUCharWidth( 0x20 ); //GetCharWidth();
+			int w;
+			m_TextFontMaxDigitWidth = GetUCharWidth( '0' );
 
-			m_TextFontAveCharWidth=GetUCharWidth(0x20);//GetCharWidth();
-
-			int	w;
-			m_TextFontMaxDigitWidth=GetUCharWidth('0');
-			for(wxChar wc=wxT('1');wc<=wxT('9');wc++)
+			for( wxChar wc = wxT( '1' ); wc <= wxT( '9' ); wc++ )
 			{
-				w=GetUCharWidth(wc);
-				if(w>m_TextFontMaxDigitWidth)
+				w = GetUCharWidth( wc );
+
+				if( w > m_TextFontMaxDigitWidth )
 				{
-					m_TextFontMaxDigitWidth=w;
-					m_TextFontAveCharWidth=w;
+					m_TextFontMaxDigitWidth = w;
+					m_TextFontAveCharWidth = w;
 				}
 			}
 
-			if(ofwm)//(m_FixedWidthMode)
+			if( ofwm ) //(m_FixedWidthMode)
 			{
-				m_TextFontAveCharWidth=m_TextFontMaxDigitWidth;
+				m_TextFontAveCharWidth = m_TextFontMaxDigitWidth;
 
-				if(!HexPrinting())
+				if( !HexPrinting() )
 				{
-					w=GetUCharWidth('W');
-					if(w>m_TextFontMaxDigitWidth)
+					w = GetUCharWidth( 'W' );
+
+					if( w > m_TextFontMaxDigitWidth )
 					{
-						m_TextFontMaxDigitWidth=w;
-						m_TextFontAveCharWidth=w;
+						m_TextFontMaxDigitWidth = w;
+						m_TextFontAveCharWidth = w;
 					}
 				}
 				else
 				{
-					for(wxChar wc=wxT('A');wc<=wxT('F');++wc)
+					for( wxChar wc = wxT( 'A' ); wc <= wxT( 'F' ); ++wc )
 					{
-						w=GetUCharWidth(wc);
-						if(w>m_TextFontMaxDigitWidth)
+						w = GetUCharWidth( wc );
+
+						if( w > m_TextFontMaxDigitWidth )
 						{
-							m_TextFontMaxDigitWidth=w;
-							m_TextFontAveCharWidth=w;
+							m_TextFontMaxDigitWidth = w;
+							m_TextFontAveCharWidth = w;
 						}
 					}
 				}
 			}
 
-			m_FixedWidthMode=ofwm;
-
-
-			m_LeftMarginWidth =	(m_TextFontAveCharWidth	>> 1)-1;
-			m_RightMarginWidth = m_TextFontAveCharWidth	<< 1;
-
-			m_Syntax->InitNextWord1(m_Lines, m_WordBuffer, m_WidthBuffer,
-				name, size,	m_TextFont->GetFamily());
-
-
+			m_FixedWidthMode = ofwm;
+			m_LeftMarginWidth = ( m_TextFontAveCharWidth >> 1 ) - 1;
+			m_RightMarginWidth = m_TextFontAveCharWidth << 1;
+			m_Syntax->InitNextWord1( m_Lines, m_WordBuffer, m_WidthBuffer,
+									 name, size, m_TextFont->GetFamily() );
 			// prepare m_Space_Points, m_EOF_Points
-			const int cw = GetUCharWidth(0x20);	  //FFontAveCharWidth;
+			const int cw = GetUCharWidth( 0x20 ); //FFontAveCharWidth;
 			{
-				const int t1 = m_TextFontHeight	/ 5;
-				const int y	= 1	+ m_TextFontHeight - t1;
-				const int x	= cw-1;
-				m_Space_Points[0].x	= x;
-				m_Space_Points[0].y	= y	- m_TextFontHeight/6;
-				m_Space_Points[1].x	= x;
-				m_Space_Points[1].y	= y;
-				m_Space_Points[2].x	= 1;
-				m_Space_Points[2].y	= y;
-				m_Space_Points[3].x	= 1;
-				m_Space_Points[3].y	= m_Space_Points[0].y-1;//y	- m_TextFontHeight/6;
+				const int t1 = m_TextFontHeight / 5;
+				const int y = 1 + m_TextFontHeight - t1;
+				const int x = cw - 1;
+				m_Space_Points[0].x = x;
+				m_Space_Points[0].y = y - m_TextFontHeight / 6;
+				m_Space_Points[1].x = x;
+				m_Space_Points[1].y = y;
+				m_Space_Points[2].x = 1;
+				m_Space_Points[2].y = y;
+				m_Space_Points[3].x = 1;
+				m_Space_Points[3].y = m_Space_Points[0].y - 1; //y - m_TextFontHeight/6;
 			}
 			{
-				const int t1 = m_TextFontHeight	/ 5;
-				const int x	= cw - 1;
-				int	y =	t1 + 1;
-				m_EOF_Points[0].x =	x;
-				m_EOF_Points[0].y =	y;
-				m_EOF_Points[1].x =	x;
-				m_EOF_Points[1].y =	y += (m_TextFontHeight - (t1 <<	1));
-				m_EOF_Points[2].x =	x -	(cw	- 3);
-				m_EOF_Points[2].y =	y;
-				m_EOF_Points[3].x =	cw / 2;
-				m_EOF_Points[3].y =	y -	(m_TextFontHeight  / 6 );
-				m_EOF_Points[4].x =	cw / 2;
-				m_EOF_Points[4].y =	y;
+				const int t1 = m_TextFontHeight / 5;
+				const int x = cw - 1;
+				int y = t1 + 1;
+				m_EOF_Points[0].x = x;
+				m_EOF_Points[0].y = y;
+				m_EOF_Points[1].x = x;
+				m_EOF_Points[1].y = y += ( m_TextFontHeight - ( t1 << 1 ) );
+				m_EOF_Points[2].x = x - ( cw - 3 );
+				m_EOF_Points[2].y = y;
+				m_EOF_Points[3].x = cw / 2;
+				m_EOF_Points[3].y = y - ( m_TextFontHeight  / 6 );
+				m_EOF_Points[4].x = cw / 2;
+				m_EOF_Points[4].y = y;
 			}
-			//m_CR_Points[], m_LF_Points[],	m_CRLF_Points[];
+			//m_CR_Points[], m_LF_Points[], m_CRLF_Points[];
 			{
-				const int t1 = m_TextFontHeight	/ 5;
-				const int x	= cw/5;
-
-				m_CR_Points_Count =	CR_Points_Count;
-				m_LF_Points_Count =	LF_Points_Count;
-				m_CRLF_Points_Count	= CRLF_Points_Count;
+				const int t1 = m_TextFontHeight / 5;
+				const int x = cw / 5;
+				m_CR_Points_Count = CR_Points_Count;
+				m_LF_Points_Count = LF_Points_Count;
+				m_CRLF_Points_Count = CRLF_Points_Count;
 				{
 					const int maxX = CR_Points[CR_Points_Count][0] * 7;
 					const int maxY = CR_Points[CR_Points_Count][1] * 7;
-					for(int	i=0; i<	CR_Points_Count; ++i)
+
+					for( int i = 0; i < CR_Points_Count; ++i )
 					{
-						int	tx = CR_Points[i][0]*cw*5 /	maxX;
-						int	ty = CR_Points[i][1]*m_TextFontHeight*5	/ maxY;
-						m_CR_Points[i].x = tx +	x;
-						m_CR_Points[i].y = ty +	t1;
+						int tx = CR_Points[i][0] * cw * 5 / maxX;
+						int ty = CR_Points[i][1] * m_TextFontHeight * 5 / maxY;
+						m_CR_Points[i].x = tx + x;
+						m_CR_Points[i].y = ty + t1;
 					}
 				}
 				{
 					const int maxX = LF_Points[LF_Points_Count][0] * 7;
 					const int maxY = LF_Points[LF_Points_Count][1] * 7;
-					for(int	i=0; i<	LF_Points_Count; ++i)
+
+					for( int i = 0; i < LF_Points_Count; ++i )
 					{
-						int	tx = LF_Points[i][0]*cw*5 /	maxX;
-						int	ty = LF_Points[i][1]*m_TextFontHeight*5	/ maxY;
-						m_LF_Points[i].x = tx +	x ;
-						m_LF_Points[i].y = ty +	t1;
+						int tx = LF_Points[i][0] * cw * 5 / maxX;
+						int ty = LF_Points[i][1] * m_TextFontHeight * 5 / maxY;
+						m_LF_Points[i].x = tx + x ;
+						m_LF_Points[i].y = ty + t1;
 					}
 				}
 				{
 					const int maxX = CRLF_Points[CRLF_Points_Count][0] * 7;
 					const int maxY = CRLF_Points[CRLF_Points_Count][1] * 7;
-					for(int	i=0; i<	CRLF_Points_Count; ++i)
+
+					for( int i = 0; i < CRLF_Points_Count; ++i )
 					{
-						int	tx = CRLF_Points[i][0]*cw*5	/ maxX;
-						int	ty = CRLF_Points[i][1]*m_TextFontHeight*5 /	maxY;
-						m_CRLF_Points[i].x = tx	+ x	;
-						m_CRLF_Points[i].y = ty	+ t1;
+						int tx = CRLF_Points[i][0] * cw * 5 / maxX;
+						int ty = CRLF_Points[i][1] * m_TextFontHeight * 5 / maxY;
+						m_CRLF_Points[i].x = tx + x ;
+						m_CRLF_Points[i].y = ty + t1;
 					}
 				}
-
 				/*
-				m_CR_Points_Count =	CR_Points2_Count;
-				m_LF_Points_Count =	LF_Points2_Count;
-				m_CRLF_Points_Count	= CRLF_Points2_Count;
+				m_CR_Points_Count = CR_Points2_Count;
+				m_LF_Points_Count = LF_Points2_Count;
+				m_CRLF_Points_Count = CRLF_Points2_Count;
 				{
 					const int maxX = CR_Points2[CR_Points2_Count][0] * 7;
 					const int maxY = CR_Points2[CR_Points2_Count][1] * 7;
-					for(int	i=0; i<	CR_Points2_Count; ++i)
+					for(int i=0; i< CR_Points2_Count; ++i)
 					{
-						int	tx = CR_Points2[i][0]*cw*5 / maxX;
-						int	ty = CR_Points2[i][1]*m_TextFontHeight*5 / maxY;
-						m_CR_Points[i].x = tx +	x;
-						m_CR_Points[i].y = ty +	t1;
+						int tx = CR_Points2[i][0]*cw*5 / maxX;
+						int ty = CR_Points2[i][1]*m_TextFontHeight*5 / maxY;
+						m_CR_Points[i].x = tx + x;
+						m_CR_Points[i].y = ty + t1;
 					}
 				}
 				{
 					const int maxX = LF_Points2[LF_Points2_Count][0] * 7;
 					const int maxY = LF_Points2[LF_Points2_Count][1] * 7;
-					for(int	i=0; i<	LF_Points2_Count; ++i)
+					for(int i=0; i< LF_Points2_Count; ++i)
 					{
-						int	tx = LF_Points2[i][0]*cw*5 / maxX;
-						int	ty = LF_Points2[i][1]*m_TextFontHeight*5 / maxY;
-						m_LF_Points[i].x = tx +	x;
-						m_LF_Points[i].y = ty +	t1;
+						int tx = LF_Points2[i][0]*cw*5 / maxX;
+						int ty = LF_Points2[i][1]*m_TextFontHeight*5 / maxY;
+						m_LF_Points[i].x = tx + x;
+						m_LF_Points[i].y = ty + t1;
 					}
 				}
 				{
 					const int maxX = CRLF_Points2[CRLF_Points2_Count][0] * 7;
 					const int maxY = CRLF_Points2[CRLF_Points2_Count][1] * 7;
-					for(int	i=0; i<	CRLF_Points2_Count;	++i)
+					for(int i=0; i< CRLF_Points2_Count; ++i)
 					{
-						int	tx = CRLF_Points2[i][0]*cw*5 / maxX;
-						int	ty = CRLF_Points2[i][1]*m_TextFontHeight*5 / maxY;
-						m_CRLF_Points[i].x = tx	+ x;
-						m_CRLF_Points[i].y = ty	+ t1;
+						int tx = CRLF_Points2[i][0]*cw*5 / maxX;
+						int ty = CRLF_Points2[i][1]*m_TextFontHeight*5 / maxY;
+						m_CRLF_Points[i].x = tx + x;
+						m_CRLF_Points[i].y = ty + t1;
 					}
 				}
 				*/
 			}
-
 			UpdateAppearance();
-			m_RepaintAll=true;
+			m_RepaintAll = true;
+			SetCaretType( m_CaretType );
 
-			SetCaretType(m_CaretType);
-
-			if(!m_LoadingFile)
+			if( !m_LoadingFile )
 			{
-				RecountLineWidth(true);
-
+				RecountLineWidth( true );
 				UpdateScrollBarPos();
-				Refresh(false);
-
+				Refresh( false );
 				DoStatusChanged();
 			}
 			else
 			{
-				m_DoRecountLineWidth=true;
+				m_DoRecountLineWidth = true;
 			}
 		}
 	}
 }
 
-void MadEdit::SetHexFont(const wxString	&name, int size, bool forceReset)
+void MadEdit::SetHexFont( const wxString &name, int size, bool forceReset )
 {
-	if(size	< 1) size =	1;
+	if( size < 1 ) size = 1;
 
-	if(forceReset || size!=m_HexFont->GetPointSize() ||	name!=m_HexFont->GetFaceName())
+	if( forceReset || size != m_HexFont->GetPointSize() || name != m_HexFont->GetFaceName() )
 	{
-		m_HexFont=wxTheFontList->FindOrCreateFont(size,	//font.GetFamily(),	font.GetStyle(), font.GetWeight(), font.GetUnderlined(), name);
-			wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, name);
+		m_HexFont = wxTheFontList->FindOrCreateFont( size, //font.GetFamily(), font.GetStyle(), font.GetWeight(), font.GetUnderlined(), name);
+					wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, name );
+		memset( m_HexFontWidths, 0, sizeof( m_HexFontWidths ) );
+		m_HexFontWidths[0] = FontWidthManager::GetFontWidths( 0, name, size, this );
 
-		memset(m_HexFontWidths,	0, sizeof(m_HexFontWidths));
-		m_HexFontWidths[0]=FontWidthManager::GetFontWidths(0, name,	size, this);
-
-		if(m_StorePropertiesToGlobalConfig)
+		if( m_StorePropertiesToGlobalConfig )
 		{
-			wxString oldpath=m_Config->GetPath();
-			m_Config->Write(wxString(wxT("/MadEdit/HexFontName")), name);
-			m_Config->Write(wxT("/MadEdit/HexFontSize"), size);
-			m_Config->SetPath(oldpath);
+			wxString oldpath = m_Config->GetPath();
+			m_Config->Write( wxString( wxT( "/MadEdit/HexFontName" ) ), name );
+			m_Config->Write( wxT( "/MadEdit/HexFontSize" ), size );
+			m_Config->SetPath( oldpath );
 		}
 
-		if(m_HexDigitBitmap)
+		if( m_HexDigitBitmap )
 		{
 			delete m_HexDigitBitmap;
-			m_HexDigitBitmap=NULL;
+			m_HexDigitBitmap = NULL;
 		}
 
-		if(m_EditMode==emHexMode)
+		if( m_EditMode == emHexMode )
 		{
-			MadEditSuperClass::SetFont(*m_HexFont);
-			m_HexFontHeight=GetCharHeight();
+			MadEditSuperClass::SetFont( *m_HexFont );
+			m_HexFontHeight = GetCharHeight();
+			GetHexUCharWidth( 0x20 );
+			int w;
+			m_HexFontMaxDigitWidth = GetHexUCharWidth( '0' );
 
-			GetHexUCharWidth(0x20);
-
-			int	w;
-			m_HexFontMaxDigitWidth=GetHexUCharWidth('0');
-			for(wxChar wc=wxT('1');wc<=wxT('9');++wc)
+			for( wxChar wc = wxT( '1' ); wc <= wxT( '9' ); ++wc )
 			{
-				w=GetHexUCharWidth(wc);
-				if(w>m_HexFontMaxDigitWidth)
-					m_HexFontMaxDigitWidth=w;
+				w = GetHexUCharWidth( wc );
+
+				if( w > m_HexFontMaxDigitWidth )
+					m_HexFontMaxDigitWidth = w;
 			}
-			for(wxChar wc=wxT('A');wc<=wxT('F');++wc)
+
+			for( wxChar wc = wxT( 'A' ); wc <= wxT( 'F' ); ++wc )
 			{
-				w=GetHexUCharWidth(wc);
-				if(w>m_HexFontMaxDigitWidth)
-					m_HexFontMaxDigitWidth=w;
+				w = GetHexUCharWidth( wc );
+
+				if( w > m_HexFontMaxDigitWidth )
+					m_HexFontMaxDigitWidth = w;
 			}
 
 			UpdateAppearance();
-			m_RepaintAll=true;
+			m_RepaintAll = true;
+			SetCaretType( ctBlock );
 
-			SetCaretType(ctBlock);
-
-			if(!m_LoadingFile)
+			if( !m_LoadingFile )
 			{
 				UpdateScrollBarPos();
 
-				if(!m_CaretAtHexArea)
+				if( !m_CaretAtHexArea )
 				{
-					int	crow = m_CaretPos.pos >> 4;
-					if(crow	>= m_TopRow	&& crow	< m_TopRow + m_HexRowCount)
+					int crow = m_CaretPos.pos >> 4;
+
+					if( crow >= m_TopRow && crow < m_TopRow + m_HexRowCount )
 					{
 						UpdateTextAreaXPos();
 						m_LastTextAreaXPos = m_TextAreaXPos;
 					}
 				}
 
-				Refresh(false);
+				Refresh( false );
 				DoStatusChanged();
 			}
 		}
 	}
 }
 
-void MadEdit::SetFixedWidthMode(bool mode)
+void MadEdit::SetFixedWidthMode( bool mode )
 {
-	if(mode!=m_FixedWidthMode)
+	if( mode != m_FixedWidthMode )
 	{
-		m_FixedWidthMode=mode;
-		if(m_StorePropertiesToGlobalConfig)
+		m_FixedWidthMode = mode;
+
+		if( m_StorePropertiesToGlobalConfig )
 		{
-			wxString oldpath=m_Config->GetPath();
-			m_Config->Write(wxT("/MadEdit/FixedWidthMode"),	mode);
-			m_Config->SetPath(oldpath);
+			wxString oldpath = m_Config->GetPath();
+			m_Config->Write( wxT( "/MadEdit/FixedWidthMode" ), mode );
+			m_Config->SetPath( oldpath );
 		}
 
-		SetTextFont(m_TextFont->GetFaceName(), m_TextFont->GetPointSize(), true);
+		SetTextFont( m_TextFont->GetFaceName(), m_TextFont->GetPointSize(), true );
 	}
 }
 
-void MadEdit::SetLineSpacing(int percent)
+void MadEdit::SetLineSpacing( int percent )
 {
-	if(percent<100)	percent=100;
-	else if(percent>500) percent=500;
+	if( percent < 100 ) percent = 100;
+	else
+		if( percent > 500 ) percent = 500;
 
-	if(percent != m_LineSpacing)
+	if( percent != m_LineSpacing )
 	{
-		m_LineSpacing=percent;
-		if(m_StorePropertiesToGlobalConfig)
+		m_LineSpacing = percent;
+
+		if( m_StorePropertiesToGlobalConfig )
 		{
-			wxString oldpath=m_Config->GetPath();
-			m_Config->Write(wxT("/MadEdit/LineSpacing"), percent);
-			m_Config->SetPath(oldpath);
+			wxString oldpath = m_Config->GetPath();
+			m_Config->Write( wxT( "/MadEdit/LineSpacing" ), percent );
+			m_Config->SetPath( oldpath );
 		}
 
-		if(m_EditMode!=emHexMode)
+		if( m_EditMode != emHexMode )
 		{
-			m_RepaintAll=true;
+			m_RepaintAll = true;
 			UpdateAppearance();
 			UpdateScrollBarPos();
-			Refresh(false);
+			Refresh( false );
 		}
 	}
 }
 
-void MadEdit::HexModeToTextMode(MadEditMode	mode)
+void MadEdit::HexModeToTextMode( MadEditMode mode )
 {
-	if(m_LoadingFile ==	false)
+	if( m_LoadingFile == false )
 	{
 		long maxtextfilesize;
-		wxString oldpath=m_Config->GetPath();
-		m_Config->Read(wxT("/MadEdit/MaxTextFileSize"),	&maxtextfilesize, 1024*1024*10);//10MB
-		m_Config->SetPath(oldpath);
+		wxString oldpath = m_Config->GetPath();
+		m_Config->Read( wxT( "/MadEdit/MaxTextFileSize" ), &maxtextfilesize, 1024 * 1024 * 10 ); //10MB
+		m_Config->SetPath( oldpath );
 
-		if(!IsTextFile())
+		if( !IsTextFile() )
 		{
-			if(m_Lines->m_Size>=maxtextfilesize)
+			if( m_Lines->m_Size >= maxtextfilesize )
 			{
-				wxString size=FormatThousands(wxLongLong(m_Lines->m_Size).ToString());
-#ifndef	PYMADEDIT_DLL
-				if(wxNO==MadMessageBox(wxString::Format(_("Do you want to continue?\nThe file size is %s bytes.\nIt may take long time and large memories to convert to Text/Column Mode."), size.c_str()), _("Hex Mode to Text/Column Mode"), wxYES_NO))
+				wxString size = FormatThousands( wxLongLong( m_Lines->m_Size ).ToString() );
+#ifndef PYMADEDIT_DLL
+
+				if( wxNO == MadMessageBox( wxString::Format( _( "Do you want to continue?\nThe file size is %s bytes.\nIt may take long time and large memories to convert to Text/Column Mode." ), size.c_str() ), _( "Hex Mode to Text/Column Mode" ), wxYES_NO ) )
 				{
 					return;
 				}
-#endif				  
+
+#endif
 			}
 
-			m_DrawingXPos =	0;
+			m_DrawingXPos = 0;
 			m_TopRow = m_TextTopRow;
 			m_EditMode = mode;
 			m_RepaintAll = true;
-
 			ReformatAll();
-			SetTextFont(m_TextFont->GetFaceName(), m_TextFont->GetPointSize(), true);
+			SetTextFont( m_TextFont->GetFaceName(), m_TextFont->GetPointSize(), true );
 			UpdateAppearance();
 		}
 		else
 		{
-			m_DrawingXPos =	0;
+			m_DrawingXPos = 0;
 			m_TopRow = m_TextTopRow;
 			m_EditMode = mode;
 			m_RepaintAll = true;
-
-			SetTextFont(m_TextFont->GetFaceName(), m_TextFont->GetPointSize(), true);
+			SetTextFont( m_TextFont->GetFaceName(), m_TextFont->GetPointSize(), true );
 			UpdateAppearance();
 
-			if(m_DoRecountLineWidth)
+			if( m_DoRecountLineWidth )
 			{
-				RecountLineWidth(true);
+				RecountLineWidth( true );
 			}
-			UpdateCaretByPos(m_CaretPos, m_ActiveRowUChars,	m_ActiveRowWidths, m_CaretRowUCharPos);
 
+			UpdateCaretByPos( m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
 			AppearCaret();
 			UpdateScrollBarPos();
+			m_LastCaretXPos = m_CaretPos.xpos;
 
-			m_LastCaretXPos	= m_CaretPos.xpos;
-
-			if(m_Selection)
+			if( m_Selection )
 			{
 				UpdateSelectionPos();
 			}
 		}
 
 		m_DoRecountLineWidth = false;
-
 		// reset m_ValidPos
-		m_ValidPos_iter	= m_CaretPos.iter;
-		m_ValidPos_lineid =	m_CaretPos.lineid;
-		m_ValidPos_rowid = m_CaretPos.rowid	- m_CaretPos.subrowid;
-		m_ValidPos_pos = m_CaretPos.pos	- m_CaretPos.linepos;
-
+		m_ValidPos_iter = m_CaretPos.iter;
+		m_ValidPos_lineid = m_CaretPos.lineid;
+		m_ValidPos_rowid = m_CaretPos.rowid - m_CaretPos.subrowid;
+		m_ValidPos_pos = m_CaretPos.pos - m_CaretPos.linepos;
 		DoStatusChanged();
 		DoSelectionChanged();
-
 		//SetInsertMode(m_InsertMode);
 	}
 	else
 	{
-		m_DrawingXPos =	0;
+		m_DrawingXPos = 0;
 		m_TopRow = m_TextTopRow;
 		m_EditMode = mode;
 		m_RepaintAll = true;
-
 		UpdateAppearance();
 		//SetInsertMode(m_InsertMode);
 	}
-	SetInsertMode(m_InsertMode);
+
+	SetInsertMode( m_InsertMode );
 }
 
-void MadEdit::SetEditMode(MadEditMode mode)
+void MadEdit::SetEditMode( MadEditMode mode )
 {
-	if(m_EditMode != mode && !m_SingleLineMode)
+	if( m_EditMode != mode && !m_SingleLineMode )
 	{
 		bool selchange = false;
 
-		switch(mode)
+		switch( mode )
 		{
 		case emTextMode:
-			if(m_EditMode == emColumnMode)
+			if( m_EditMode == emColumnMode )
 			{
-				if(m_CaretPos.extraspaces)
+				if( m_CaretPos.extraspaces )
 				{
-					m_CaretPos.xpos	-= int(m_CaretPos.extraspaces *	GetUCharWidth(0x20));
+					m_CaretPos.xpos -= int( m_CaretPos.extraspaces * GetUCharWidth( 0x20 ) );
 					m_CaretPos.extraspaces = 0;
-
-					m_LastCaretXPos	= m_CaretPos.xpos;
-
+					m_LastCaretXPos = m_CaretPos.xpos;
 					AppearCaret();
 					UpdateScrollBarPos();
-					selchange =	true;
+					selchange = true;
 				}
 
-				if(m_Selection)
+				if( m_Selection )
 				{
-					if(m_SelectionPos1.extraspaces)
+					if( m_SelectionPos1.extraspaces )
 					{
-						m_SelectionPos1.xpos -=	int(m_SelectionPos1.extraspaces	* GetUCharWidth(0x20));
-						m_SelectionPos1.extraspaces	= 0;
+						m_SelectionPos1.xpos -= int( m_SelectionPos1.extraspaces * GetUCharWidth( 0x20 ) );
+						m_SelectionPos1.extraspaces = 0;
 					}
-					if(m_SelectionPos2.extraspaces)
+
+					if( m_SelectionPos2.extraspaces )
 					{
-						m_SelectionPos2.xpos -=	int(m_SelectionPos2.extraspaces	* GetUCharWidth(0x20));
-						m_SelectionPos2.extraspaces	= 0;
+						m_SelectionPos2.xpos -= int( m_SelectionPos2.extraspaces * GetUCharWidth( 0x20 ) );
+						m_SelectionPos2.extraspaces = 0;
 					}
 
 					m_RepaintSelection = true;
-					selchange =	true;
+					selchange = true;
 				}
 
 				m_EditMode = emTextMode;
 
-				if(selchange ==	true)
+				if( selchange == true )
 					DoSelectionChanged();
-				DoStatusChanged();
 
+				DoStatusChanged();
 				//SetInsertMode(m_InsertMode);
 			}
-			else					  //HexMode
+			else //HexMode
 			{
-				SetInsertMode(true);
-				HexModeToTextMode(mode);
+				SetInsertMode( true );
+				HexModeToTextMode( mode );
 			}
 
 			break;
 
 		case emColumnMode:
-			if(m_EditMode == emTextMode)
+			if( m_EditMode == emTextMode )
 			{
 				UpdateScrollBarPos();//update m_MaxColumnModeWidth;
 
-				if(m_Selection)
+				if( m_Selection )
 				{
-					if(m_SelectionPos1.xpos	< m_SelectionPos2.xpos)
+					if( m_SelectionPos1.xpos < m_SelectionPos2.xpos )
 					{
-						m_SelLeftXPos =	m_SelectionPos1.xpos;
+						m_SelLeftXPos = m_SelectionPos1.xpos;
 						m_SelRightXPos = m_SelectionPos2.xpos;
 					}
 					else
 					{
-						m_SelLeftXPos =	m_SelectionPos2.xpos;
+						m_SelLeftXPos = m_SelectionPos2.xpos;
 						m_SelRightXPos = m_SelectionPos1.xpos;
 					}
 
 					m_RepaintSelection = true;
-					selchange =	true;
+					selchange = true;
 				}
 
 				m_EditMode = emColumnMode;
 
-				if(m_WordWrapMode != wwmNoWrap)
+				if( m_WordWrapMode != wwmNoWrap )
 				{
 					bool oldconfigmode = m_StorePropertiesToGlobalConfig;
-					m_StorePropertiesToGlobalConfig	= false;
-					SetWordWrapMode(wwmNoWrap);// WordWrap is useless in columnmode
-					m_StorePropertiesToGlobalConfig	= oldconfigmode;
+					m_StorePropertiesToGlobalConfig = false;
+					SetWordWrapMode( wwmNoWrap ); // WordWrap is useless in columnmode
+					m_StorePropertiesToGlobalConfig = oldconfigmode;
 				}
 
-				if(selchange ==	true)
+				if( selchange == true )
 					DoSelectionChanged();
-				DoStatusChanged();
 
+				DoStatusChanged();
 				//SetInsertMode(m_InsertMode);
 			}
-			else					  //HexMode
+			else                      //HexMode
 			{
-				SetInsertMode(true);
-				HexModeToTextMode(mode);
+				SetInsertMode( true );
+				HexModeToTextMode( mode );
 			}
 
 			break;
 
 		case emHexMode:
-			GetSize(&m_OldWidth, &m_OldHeight);
-
+			GetSize( &m_OldWidth, &m_OldHeight );
 			m_EditMode = emHexMode;
 			m_TextTopRow = m_TopRow;
-			m_DrawingXPos =	0;
-
+			m_DrawingXPos = 0;
 			m_CaretAtHexArea = true;
-			m_CaretAtHalfByte =	false;
-
-			SetHexFont(m_HexFont->GetFaceName(), m_HexFont->GetPointSize(),	true);
+			m_CaretAtHalfByte = false;
+			SetHexFont( m_HexFont->GetFaceName(), m_HexFont->GetPointSize(), true );
 			UpdateAppearance();
-
 			m_RepaintAll = true;
+
 			//SetCaretType(ctBlock);
 
-			if(m_LoadingFile ==	false)
+			if( m_LoadingFile == false )
 			{
-				m_TopRow = (m_CaretPos.pos >> 4);
-				if(m_TopRow	>= (m_VisibleRowCount >> 1))
-				{
-					m_TopRow -=	(m_VisibleRowCount >> 1);
-					int	rows = (m_Lines->m_Size	>> 4);
+				m_TopRow = ( m_CaretPos.pos >> 4 );
 
-					if((((int)m_Lines->m_Size) & 0xF) != 0)
+				if( m_TopRow >= ( m_VisibleRowCount >> 1 ) )
+				{
+					m_TopRow -= ( m_VisibleRowCount >> 1 );
+					int rows = ( m_Lines->m_Size >> 4 );
+
+					if( ( ( ( int )m_Lines->m_Size ) & 0xF ) != 0 )
 						++rows;
 
-					if(rows	- m_TopRow < m_CompleteRowCount)
+					if( rows - m_TopRow < m_CompleteRowCount )
 					{
-						if(rows	> m_CompleteRowCount)
-							m_TopRow = rows	- m_CompleteRowCount;
+						if( rows > m_CompleteRowCount )
+							m_TopRow = rows - m_CompleteRowCount;
 						else
 							m_TopRow = 0;
 					}
@@ -802,115 +787,114 @@ void MadEdit::SetEditMode(MadEditMode mode)
 					m_TopRow = 0;
 
 				m_CaretPos.extraspaces = 0;
-				if(m_Selection)
+
+				if( m_Selection )
 				{
-					m_SelectionPos1.extraspaces	= 0;
-					m_SelectionPos2.extraspaces	= 0;
+					m_SelectionPos1.extraspaces = 0;
+					m_SelectionPos2.extraspaces = 0;
 				}
 
 				AppearCaret();
 				UpdateScrollBarPos();
-
 				DoSelectionChanged();
 				DoStatusChanged();
 			}
 
 			// change to replace mode for backward comptability
-			SetInsertMode(false);
-			//if(Focused())	ShowCaret();
+			SetInsertMode( false );
+			//if(Focused()) ShowCaret();
 			break;
-
 		}
 
-		Refresh(false);
+		Refresh( false );
 	}
 }
 
-void MadEdit::SetSingleLineMode(bool mode)
+void MadEdit::SetSingleLineMode( bool mode )
 {
-	if(m_SingleLineMode	!= mode)
+	if( m_SingleLineMode != mode )
 	{
-		if(mode)
+		if( mode )
 		{
-			m_StorePropertiesToGlobalConfig	= false;
-			SetDisplayLineNumber(false);
-			SetWordWrapMode(wwmNoWrap);
-			SetEditMode(emTextMode);
-			SetMarkActiveLine(false);
-
-			m_VScrollBar->Show(false);
-			m_HScrollBar->Show(false);
-			SetDisplayBookmark(false);
-			SetDisplay80ColHint(false);
+			m_StorePropertiesToGlobalConfig = false;
+			SetDisplayLineNumber( false );
+			SetWordWrapMode( wwmNoWrap );
+			SetEditMode( emTextMode );
+			SetMarkActiveLine( false );
+			m_VScrollBar->Show( false );
+			m_HScrollBar->Show( false );
+			SetDisplayBookmark( false );
+			SetDisplay80ColHint( false );
 		}
 
 		m_SingleLineMode = mode;
-
-		wxSizeEvent	evt;
-		OnSize(evt);
+		wxSizeEvent evt;
+		OnSize( evt );
 	}
 }
 
-void MadEdit::SetTabColumns(long value)
+void MadEdit::SetTabColumns( long value )
 {
-	if(m_TabColumns	!= value &&	value >= 1 && value	<= 80)
+	if( m_TabColumns != value && value >= 1 && value <= 80 )
 	{
 		m_TabColumns = value;
-		if(m_StorePropertiesToGlobalConfig)
+
+		if( m_StorePropertiesToGlobalConfig )
 		{
-			wxString oldpath=m_Config->GetPath();
-			m_Config->Write(wxT("/MadEdit/TabColumns"),	value);
-			m_Config->SetPath(oldpath);
+			wxString oldpath = m_Config->GetPath();
+			m_Config->Write( wxT( "/MadEdit/TabColumns" ), value );
+			m_Config->SetPath( oldpath );
 		}
 
-		if(m_HasTab)
+		if( m_HasTab )
 		{
 			UpdateAppearance();
-			RecountLineWidth(true);
+			RecountLineWidth( true );
 			UpdateScrollBarPos();
 			m_RepaintAll = true;
-			Refresh(false);
+			Refresh( false );
 		}
 	}
 }
 
-void MadEdit::SetInsertSpacesInsteadOfTab(bool value)
+void MadEdit::SetInsertSpacesInsteadOfTab( bool value )
 {
-	if(value!=m_InsertSpacesInsteadOfTab)
+	if( value != m_InsertSpacesInsteadOfTab )
 	{
-		m_InsertSpacesInsteadOfTab=value;
-		if(m_StorePropertiesToGlobalConfig)
+		m_InsertSpacesInsteadOfTab = value;
+
+		if( m_StorePropertiesToGlobalConfig )
 		{
-			wxString oldpath=m_Config->GetPath();
-			m_Config->Write(wxT("/MadEdit/InsertSpacesInsteadOfTab"), value);
-			m_Config->SetPath(oldpath);
+			wxString oldpath = m_Config->GetPath();
+			m_Config->Write( wxT( "/MadEdit/InsertSpacesInsteadOfTab" ), value );
+			m_Config->SetPath( oldpath );
 		}
 	}
 }
 
-void MadEdit::SetWordWrapMode(MadWordWrapMode mode)
+void MadEdit::SetWordWrapMode( MadWordWrapMode mode )
 {
-	if(m_WordWrapMode != mode && !m_SingleLineMode)
+	if( m_WordWrapMode != mode && !m_SingleLineMode )
 	{
 		m_WordWrapMode = mode;
-		if(m_StorePropertiesToGlobalConfig)
+
+		if( m_StorePropertiesToGlobalConfig )
 		{
-			wxString oldpath=m_Config->GetPath();
-			m_Config->Write(wxT("/MadEdit/WordWrapMode"), (long)mode);
-			m_Config->SetPath(oldpath);
+			wxString oldpath = m_Config->GetPath();
+			m_Config->Write( wxT( "/MadEdit/WordWrapMode" ), ( long )mode );
+			m_Config->SetPath( oldpath );
 		}
 
-		if(m_EditMode != emHexMode)
+		if( m_EditMode != emHexMode )
 		{
-			if(mode==wwmWrapByWindow)
-				m_DrawingXPos=0;
+			if( mode == wwmWrapByWindow )
+				m_DrawingXPos = 0;
 
 			UpdateAppearance();
-			RecountLineWidth(true);
+			RecountLineWidth( true );
 			UpdateScrollBarPos();
-
 			m_RepaintAll = true;
-			Refresh(false);
+			Refresh( false );
 		}
 		else
 		{
@@ -919,460 +903,459 @@ void MadEdit::SetWordWrapMode(MadWordWrapMode mode)
 	}
 }
 
-void MadEdit::SetDisplayLineNumber(bool	value)
+void MadEdit::SetDisplayLineNumber( bool value )
 {
-	if(value!=m_DisplayLineNumber)
+	if( value != m_DisplayLineNumber )
 	{
-		m_DisplayLineNumber=value;
-		if(m_StorePropertiesToGlobalConfig)
+		m_DisplayLineNumber = value;
+
+		if( m_StorePropertiesToGlobalConfig )
 		{
-			wxString oldpath=m_Config->GetPath();
-			m_Config->Write(wxT("/MadEdit/DisplayLineNumber"), value);
-			m_Config->SetPath(oldpath);
+			wxString oldpath = m_Config->GetPath();
+			m_Config->Write( wxT( "/MadEdit/DisplayLineNumber" ), value );
+			m_Config->SetPath( oldpath );
 		}
 
-		if(m_EditMode != emHexMode && m_WordWrapMode !=	wwmNoWrap)
+		if( m_EditMode != emHexMode && m_WordWrapMode != wwmNoWrap )
 		{
-			if(m_WordWrapMode==wwmWrapByWindow)
-				m_DrawingXPos=0;
+			if( m_WordWrapMode == wwmWrapByWindow )
+				m_DrawingXPos = 0;
 
 			UpdateAppearance();
-			RecountLineWidth(true);
+			RecountLineWidth( true );
 			UpdateScrollBarPos();
 		}
 
-		m_RepaintAll=true;
-		Refresh(false);
+		m_RepaintAll = true;
+		Refresh( false );
 	}
 }
 
-void MadEdit::SetDisplayBookmark(bool value)
+void MadEdit::SetDisplayBookmark( bool value )
 {
-	if(value !=	m_DisplayBookmark)
+	if( value != m_DisplayBookmark )
 	{
-		m_DisplayBookmark =	value;
-		if(m_DisplayBookmark) m_BookmarkWidth =	m_RowHeight;
+		m_DisplayBookmark = value;
+
+		if( m_DisplayBookmark ) m_BookmarkWidth = m_RowHeight;
 		else m_BookmarkWidth = 0;
-		if(m_StorePropertiesToGlobalConfig)
+
+		if( m_StorePropertiesToGlobalConfig )
 		{
-			wxString oldpath=m_Config->GetPath();
-			m_Config->Write(wxT("/MadEdit/DisplayBookmark"), value);
-			m_Config->SetPath(oldpath);
+			wxString oldpath = m_Config->GetPath();
+			m_Config->Write( wxT( "/MadEdit/DisplayBookmark" ), value );
+			m_Config->SetPath( oldpath );
 		}
 
-		if(m_EditMode != emHexMode && m_WordWrapMode !=	wwmNoWrap)
+		if( m_EditMode != emHexMode && m_WordWrapMode != wwmNoWrap )
 		{
-			if(m_WordWrapMode==wwmWrapByWindow)
-				m_DrawingXPos=0;
+			if( m_WordWrapMode == wwmWrapByWindow )
+				m_DrawingXPos = 0;
 
 			UpdateAppearance();
-			RecountLineWidth(true);
+			RecountLineWidth( true );
 			UpdateScrollBarPos();
 		}
 	}
-	
-	m_RepaintAll=true;
-	Refresh(false);
+
+	m_RepaintAll = true;
+	Refresh( false );
 }
 
-void MadEdit::SetDisplay80ColHint(bool value)
+void MadEdit::SetDisplay80ColHint( bool value )
 {
-	if(value !=	m_Display80ColHint)
+	if( value != m_Display80ColHint )
 	{
 		m_Display80ColHint = value;
-		if(m_StorePropertiesToGlobalConfig)
+
+		if( m_StorePropertiesToGlobalConfig )
 		{
-			wxString oldpath=m_Config->GetPath();
-			m_Config->Write(wxT("/MadEdit/Display80ColHint"), value);
-			m_Config->SetPath(oldpath);
+			wxString oldpath = m_Config->GetPath();
+			m_Config->Write( wxT( "/MadEdit/Display80ColHint" ), value );
+			m_Config->SetPath( oldpath );
 		}
 	}
-	
-	m_RepaintAll=true;
-	Refresh(false);
+
+	m_RepaintAll = true;
+	Refresh( false );
 }
 
-void MadEdit::SetShowEndOfLine(bool value)
+void MadEdit::SetShowEndOfLine( bool value )
 {
-	if(value!=m_ShowEndOfLine)
+	if( value != m_ShowEndOfLine )
 	{
-		m_ShowEndOfLine=value;
-		if(m_StorePropertiesToGlobalConfig)
+		m_ShowEndOfLine = value;
+
+		if( m_StorePropertiesToGlobalConfig )
 		{
-			wxString oldpath=m_Config->GetPath();
-			m_Config->Write(wxT("/MadEdit/ShowEndOfLine"), value);
-			m_Config->SetPath(oldpath);
+			wxString oldpath = m_Config->GetPath();
+			m_Config->Write( wxT( "/MadEdit/ShowEndOfLine" ), value );
+			m_Config->SetPath( oldpath );
 		}
 
-		m_RepaintAll=true;
-		Refresh(false);
+		m_RepaintAll = true;
+		Refresh( false );
 	}
 }
-void MadEdit::SetShowTabChar(bool value)
+void MadEdit::SetShowTabChar( bool value )
 {
-	if(value!=m_ShowTabChar)
+	if( value != m_ShowTabChar )
 	{
-		m_ShowTabChar=value;
-		if(m_StorePropertiesToGlobalConfig)
+		m_ShowTabChar = value;
+
+		if( m_StorePropertiesToGlobalConfig )
 		{
-			wxString oldpath=m_Config->GetPath();
-			m_Config->Write(wxT("/MadEdit/ShowTabChar"), value);
-			m_Config->SetPath(oldpath);
+			wxString oldpath = m_Config->GetPath();
+			m_Config->Write( wxT( "/MadEdit/ShowTabChar" ), value );
+			m_Config->SetPath( oldpath );
 		}
 
-		if(m_HasTab)
+		if( m_HasTab )
 		{
-			m_RepaintAll=true;
-			Refresh(false);
+			m_RepaintAll = true;
+			Refresh( false );
 		}
 	}
 }
-void MadEdit::SetShowSpaceChar(bool	value)
+void MadEdit::SetShowSpaceChar( bool value )
 {
-	if(value!=m_ShowSpaceChar)
+	if( value != m_ShowSpaceChar )
 	{
-		m_ShowSpaceChar=value;
-		if(m_StorePropertiesToGlobalConfig)
+		m_ShowSpaceChar = value;
+
+		if( m_StorePropertiesToGlobalConfig )
 		{
-			wxString oldpath=m_Config->GetPath();
-			m_Config->Write(wxT("/MadEdit/ShowSpaceChar"), value);
-			m_Config->SetPath(oldpath);
+			wxString oldpath = m_Config->GetPath();
+			m_Config->Write( wxT( "/MadEdit/ShowSpaceChar" ), value );
+			m_Config->SetPath( oldpath );
 		}
 
-		m_RepaintAll=true;
-		Refresh(false);
+		m_RepaintAll = true;
+		Refresh( false );
 	}
 }
-void MadEdit::SetMarkActiveLine(bool value)
+void MadEdit::SetMarkActiveLine( bool value )
 {
-	if(value!=m_MarkActiveLine)
+	if( value != m_MarkActiveLine )
 	{
-		m_MarkActiveLine=value;
-		if(m_StorePropertiesToGlobalConfig)
+		m_MarkActiveLine = value;
+
+		if( m_StorePropertiesToGlobalConfig )
 		{
-			wxString oldpath=m_Config->GetPath();
-			m_Config->Write(wxT("/MadEdit/MarkActiveLine"),	value);
-			m_Config->SetPath(oldpath);
+			wxString oldpath = m_Config->GetPath();
+			m_Config->Write( wxT( "/MadEdit/MarkActiveLine" ), value );
+			m_Config->SetPath( oldpath );
 		}
 
-		m_RepaintAll=true;
-		Refresh(false);
+		m_RepaintAll = true;
+		Refresh( false );
 	}
 }
 
-void MadEdit::SetMarkBracePair(bool	value)
+void MadEdit::SetMarkBracePair( bool value )
 {
-	if(value!=m_MarkBracePair)
+	if( value != m_MarkBracePair )
 	{
-		m_MarkBracePair=value;
-		if(m_StorePropertiesToGlobalConfig)
+		m_MarkBracePair = value;
+
+		if( m_StorePropertiesToGlobalConfig )
 		{
-			wxString oldpath=m_Config->GetPath();
-			m_Config->Write(wxT("/MadEdit/MarkBracePair"), value);
-			m_Config->SetPath(oldpath);
+			wxString oldpath = m_Config->GetPath();
+			m_Config->Write( wxT( "/MadEdit/MarkBracePair" ), value );
+			m_Config->SetPath( oldpath );
 		}
 
-		m_RepaintAll=true;
-		Refresh(false);
+		m_RepaintAll = true;
+		Refresh( false );
 	}
 }
 
-void MadEdit::SetMaxColumns(long cols)
+void MadEdit::SetMaxColumns( long cols )
 {
-	if(m_MaxColumns!=cols)
+	if( m_MaxColumns != cols )
 	{
 		m_MaxColumns = cols;
-		if(m_StorePropertiesToGlobalConfig)
+
+		if( m_StorePropertiesToGlobalConfig )
 		{
-			wxString oldpath=m_Config->GetPath();
-			m_Config->Write(wxT("/MadEdit/MaxColumns"),	cols);
-			m_Config->SetPath(oldpath);
+			wxString oldpath = m_Config->GetPath();
+			m_Config->Write( wxT( "/MadEdit/MaxColumns" ), cols );
+			m_Config->SetPath( oldpath );
 		}
 
-		if(m_WordWrapMode==wwmWrapByColumn)
+		if( m_WordWrapMode == wwmWrapByColumn )
 		{
-			if(m_EditMode != emHexMode)
+			if( m_EditMode != emHexMode )
 			{
 				//UpdateAppearance();
-				RecountLineWidth(true);
+				RecountLineWidth( true );
 				UpdateScrollBarPos();
 				m_RepaintAll = true;
-				Refresh(false);
+				Refresh( false );
 			}
 			else
 			{
 				m_DoRecountLineWidth = true;
 			}
 		}
-
 	}
 }
 
-void MadEdit::SetInsertMode(bool mode)
+void MadEdit::SetInsertMode( bool mode )
 {
-	if(m_InsertMode==mode) return;
+	if( m_InsertMode == mode ) return;
 
-	m_InsertMode=mode;
-	if(mode==true)
+	m_InsertMode = mode;
+
+	if( mode == true )
 	{
-		SetCaretType(ctVerticalLine);
+		SetCaretType( ctVerticalLine );
 	}
 	else
 	{
-		SetCaretType(ctBlock);
+		SetCaretType( ctBlock );
 	}
+
 	DoStatusChanged();
 }
 
-void MadEdit::GetCaretPosition(int &line, int &subrow, wxFileOffset	&column)
+void MadEdit::GetCaretPosition( int &line, int &subrow, wxFileOffset &column )
 {
 	line = m_CaretPos.lineid;
-	subrow=m_CaretPos.subrowid;
+	subrow = m_CaretPos.subrowid;
 
-	if(m_EditMode==emHexMode)
+	if( m_EditMode == emHexMode )
 	{
-		column=m_CaretPos.linepos;
-	}
-	else if(m_FixedWidthMode ||	GetUCharWidth('W')==GetUCharWidth('i'))//m_TextFontAveCharWidth)
-	{
-		column=((m_CaretPos.xpos+m_TextFontAveCharWidth-1)/m_TextFontAveCharWidth);
+		column = m_CaretPos.linepos;
 	}
 	else
-	{
-		column=m_CaretRowUCharPos+m_CaretPos.extraspaces;
-	}
+		if( m_FixedWidthMode || GetUCharWidth( 'W' ) == GetUCharWidth( 'i' ) ) //m_TextFontAveCharWidth)
+		{
+			column = ( ( m_CaretPos.xpos + m_TextFontAveCharWidth - 1 ) / m_TextFontAveCharWidth );
+		}
+		else
+		{
+			column = m_CaretRowUCharPos + m_CaretPos.extraspaces;
+		}
 }
 
 wxFileOffset MadEdit::GetSelectionSize()
 {
-	if(!m_Selection) return	0;
+	if( !m_Selection ) return 0;
 
-	if(m_EditMode==emColumnMode)
+	if( m_EditMode == emColumnMode )
 	{
-		return GetColumnSelection(NULL);
+		return GetColumnSelection( NULL );
 	}
 
 	return m_SelectionEnd->pos - m_SelectionBegin->pos;
 }
 
-void MadEdit::GetSelectionLineId(int &beginline, int &endline)
+void MadEdit::GetSelectionLineId( int &beginline, int &endline )
 {
-	if(!m_Selection)
+	if( !m_Selection )
 	{
-		beginline =	endline	= -1;
+		beginline = endline = -1;
 	}
 	else
 	{
-		beginline =	m_SelectionBegin->lineid;
-		endline	= m_SelectionEnd->lineid;
+		beginline = m_SelectionBegin->lineid;
+		endline = m_SelectionEnd->lineid;
 	}
 }
 
-void MadEdit::GetSelText(wxString &ws)
+void MadEdit::GetSelText( wxString &ws )
 {
-	if(!m_Selection)
+	if( !m_Selection )
 		return;
 
-	if(m_EditMode == emColumnMode)
+	if( m_EditMode == emColumnMode )
 	{
-		GetColumnSelection(&ws);
+		GetColumnSelection( &ws );
 	}
 	else
 	{
 		wxFileOffset pos = m_SelectionBegin->pos;
 		MadUCQueue ucqueue;
+		MadLineIterator lit = m_SelectionBegin->iter;
+		m_Lines->InitNextUChar( lit, m_SelectionBegin->linepos );
+		MadLines::NextUCharFuncPtr NextUChar = m_Lines->NextUChar;
 
-		MadLineIterator	lit	= m_SelectionBegin->iter;
-		m_Lines->InitNextUChar(lit,	m_SelectionBegin->linepos);
-		MadLines::NextUCharFuncPtr NextUChar=m_Lines->NextUChar;
 		do
 		{
-			if(!(m_Lines->*NextUChar)(ucqueue))
+			if( !( m_Lines->*NextUChar )( ucqueue ) )
 			{
 				++lit;
-				m_Lines->InitNextUChar(lit,	0);
-				(m_Lines->*NextUChar)(ucqueue);
+				m_Lines->InitNextUChar( lit, 0 );
+				( m_Lines->*NextUChar )( ucqueue );
 			}
 
 #ifdef __WXMSW__
-			ucs4_t uc=ucqueue.back().first;
-			if(uc>=0x10000)
+			ucs4_t uc = ucqueue.back().first;
+
+			if( uc >= 0x10000 )
 			{
-				wchar_t	wbuf[2];
-				m_Encoding->UCS4toUTF16LE_U10000(uc, (wxByte*)wbuf);
-				ws<<wbuf[0];
-				ws<<wbuf[1];
+				wchar_t wbuf[2];
+				m_Encoding->UCS4toUTF16LE_U10000( uc, ( wxByte* )wbuf );
+				ws << wbuf[0];
+				ws << wbuf[1];
 			}
 			else
 			{
-				ws<<wxChar(uc);
+				ws << wxChar( uc );
 			}
-#else
-			ws<<wxChar(ucqueue.back().first);
-#endif
 
-			pos	+= ucqueue.back().second;
+#else
+			ws << wxChar( ucqueue.back().first );
+#endif
+			pos += ucqueue.back().second;
 		}
-		while(pos <	m_SelectionEnd->pos);
+		while( pos < m_SelectionEnd->pos );
 	}
 }
 
-void MadEdit::GetText(wxString &ws,	bool ignoreBOM)
+void MadEdit::GetText( wxString &ws, bool ignoreBOM )
 {
 	wxFileOffset pos = 0;
 	MadUCQueue ucqueue;
+	MadLineIterator lit = m_Lines->m_LineList.begin();
 
-	MadLineIterator	lit	= m_Lines->m_LineList.begin();
-
-	if(ignoreBOM)				  // if	first line has BOM,	we will	ignore it
+	if( ignoreBOM )               // if first line has BOM, we will ignore it
 	{
-		pos	= lit->m_RowIndices.front().m_Start;
+		pos = lit->m_RowIndices.front().m_Start;
 	}
 
-	if(pos >= m_Lines->m_Size)
+	if( pos >= m_Lines->m_Size )
 		return;
 
-	MadLines::NextUCharFuncPtr NextUChar=m_Lines->NextUChar;
-	m_Lines->InitNextUChar(lit,	pos);
+	MadLines::NextUCharFuncPtr NextUChar = m_Lines->NextUChar;
+	m_Lines->InitNextUChar( lit, pos );
+
 	do
 	{
-		if(!(m_Lines->*NextUChar)(ucqueue))
+		if( !( m_Lines->*NextUChar )( ucqueue ) )
 		{
 			++lit;
-			m_Lines->InitNextUChar(lit,	0);
-			(m_Lines->*NextUChar)(ucqueue);
+			m_Lines->InitNextUChar( lit, 0 );
+			( m_Lines->*NextUChar )( ucqueue );
 		}
 
 #ifdef __WXMSW__
-		ucs4_t uc=ucqueue.back().first;
-		if(uc>=0x10000)
+		ucs4_t uc = ucqueue.back().first;
+
+		if( uc >= 0x10000 )
 		{
-			wchar_t	wbuf[2];
-			m_Encoding->UCS4toUTF16LE_U10000(uc, (wxByte*)wbuf);
-			ws<<wbuf[0];
-			ws<<wbuf[1];
+			wchar_t wbuf[2];
+			m_Encoding->UCS4toUTF16LE_U10000( uc, ( wxByte* )wbuf );
+			ws << wbuf[0];
+			ws << wbuf[1];
 		}
 		else
 		{
-			ws<<wxChar(uc);
+			ws << wxChar( uc );
 		}
-#else
-		ws<<wxChar(ucqueue.back().first);
-#endif
 
-		pos	+= ucqueue.back().second;
+#else
+		ws << wxChar( ucqueue.back().first );
+#endif
+		pos += ucqueue.back().second;
 	}
-	while(pos <	m_Lines->m_Size);
+	while( pos < m_Lines->m_Size );
 }
 
-void MadEdit::SetText(const wxString &ws)
+void MadEdit::SetText( const wxString &ws )
 {
-	MadLineIterator	lit;
-	size_t size	= ws.Len();
+	MadLineIterator lit;
+	size_t size = ws.Len();
 
-	if(m_SingleLineMode)
+	if( m_SingleLineMode )
 	{
-		const wxChar *wcs =	ws.c_str();
+		const wxChar *wcs = ws.c_str();
 		size_t sss = 0;
 
-		while(sss <	size &&	*wcs !=	0x0D &&	*wcs !=	0x0A)
+		while( sss < size && *wcs != 0x0D && *wcs != 0x0A )
 		{
 			++sss;
 			++wcs;
 		}
 
-		long maxlen	= m_MaxLineLength -	80;
-		if(m_Lines->m_Size + sss > maxlen)
-			sss	= maxlen - long	(m_Lines->m_Size);
+		long maxlen = m_MaxLineLength - 80;
+
+		if( m_Lines->m_Size + sss > maxlen )
+			sss = maxlen - long ( m_Lines->m_Size );
 
 		size = sss;
 	}
 
-	MadUndo	*undo=NULL;
+	MadUndo *undo = NULL;
 
-	if(m_Lines->m_Size)
+	if( m_Lines->m_Size )
 	{
-		if(size	== 0)				// delete
+		if( size == 0 )             // delete
 		{
-			MadDeleteUndoData *dudata =	new	MadDeleteUndoData;
-
-			dudata->m_Pos =	0;
+			MadDeleteUndoData *dudata = new MadDeleteUndoData;
+			dudata->m_Pos = 0;
 			dudata->m_Size = m_Lines->m_Size;
-
-			lit	= DeleteInsertData(0, dudata->m_Size, &dudata->m_Data, 0, NULL);
-
+			lit = DeleteInsertData( 0, dudata->m_Size, &dudata->m_Data, 0, NULL );
 			undo = m_UndoBuffer->Add();
 			SetNeedSync();
-			undo->m_Undos.push_back(dudata);
+			undo->m_Undos.push_back( dudata );
 		}
-		else						// overwrite
+		else                        // overwrite
 		{
 			MadOverwriteUndoData *oudata = new MadOverwriteUndoData();
-
-			oudata->m_Pos =	0;
-			oudata->m_DelSize =	m_Lines->m_Size;
-
-			MadBlock blk(m_Lines->m_MemData, -1, 0);
-
+			oudata->m_Pos = 0;
+			oudata->m_DelSize = m_Lines->m_Size;
+			MadBlock blk( m_Lines->m_MemData, -1, 0 );
 			vector<ucs4_t> ucs;
-			TranslateText(ws.c_str(), size,	&ucs, true);
-			UCStoBlock(&ucs[0],	ucs.size(),	blk);
-
-			oudata->m_InsSize =	blk.m_Size;
-			oudata->m_InsData.push_back(blk);
-
-			lit	= DeleteInsertData(0, oudata->m_DelSize, &oudata->m_DelData,
-									  oudata->m_InsSize, &oudata->m_InsData);
-
+			TranslateText( ws.c_str(), size, &ucs, true );
+			UCStoBlock( &ucs[0], ucs.size(), blk );
+			oudata->m_InsSize = blk.m_Size;
+			oudata->m_InsData.push_back( blk );
+			lit = DeleteInsertData( 0, oudata->m_DelSize, &oudata->m_DelData,
+									oudata->m_InsSize, &oudata->m_InsData );
 			undo = m_UndoBuffer->Add();
 			SetNeedSync();
-			undo->m_Undos.push_back(oudata);
+			undo->m_Undos.push_back( oudata );
 		}
 	}
-	else						  //insert
+	else //insert
 	{
-		if(size	== 0)
+		if( size == 0 )
 			return;
 
-		MadBlock blk(m_Lines->m_MemData, -1, 0);
-
+		MadBlock blk( m_Lines->m_MemData, -1, 0 );
 		vector<ucs4_t> ucs;
-		TranslateText(ws.c_str(), size,	&ucs, true);
-		UCStoBlock(&ucs[0],	ucs.size(),	blk);
-
+		TranslateText( ws.c_str(), size, &ucs, true );
+		UCStoBlock( &ucs[0], ucs.size(), blk );
 		MadInsertUndoData *insud = new MadInsertUndoData;
 		insud->m_Pos = 0;
-		insud->m_Size =	blk.m_Size;
-		insud->m_Data.push_back(blk);
-
-		lit	= DeleteInsertData(0, 0, NULL, insud->m_Size, &insud->m_Data);
-
+		insud->m_Size = blk.m_Size;
+		insud->m_Data.push_back( blk );
+		lit = DeleteInsertData( 0, 0, NULL, insud->m_Size, &insud->m_Data );
 		undo = m_UndoBuffer->Add();
 		SetNeedSync();
-		undo->m_Undos.push_back(insud);
+		undo->m_Undos.push_back( insud );
 	}
 
-	undo->m_CaretPosBefore=m_CaretPos.pos;
-
+	undo->m_CaretPosBefore = m_CaretPos.pos;
 	m_Modified = true;
-	m_Selection	= false;
+	m_Selection = false;
 	m_RepaintAll = true;
-	Refresh(false);
+	Refresh( false );
 
-	if(IsTextFile())
+	if( IsTextFile() )
 	{
-		m_Lines->Reformat(lit, lit);
-
-		m_CaretPos.Reset(m_Lines->m_LineList.begin());
-		undo->m_CaretPosAfter=m_CaretPos.pos;
-		UpdateCaret(m_CaretPos,	m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos);
-
+		m_Lines->Reformat( lit, lit );
+		m_CaretPos.Reset( m_Lines->m_LineList.begin() );
+		undo->m_CaretPosAfter = m_CaretPos.pos;
+		UpdateCaret( m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
 		AppearCaret();
 		UpdateScrollBarPos();
 
-		if(m_EditMode == emHexMode)
+		if( m_EditMode == emHexMode )
 		{
-			if(!m_CaretAtHexArea)
+			if( !m_CaretAtHexArea )
 			{
 				UpdateTextAreaXPos();
 				m_LastTextAreaXPos = m_TextAreaXPos;
@@ -1383,12 +1366,11 @@ void MadEdit::SetText(const wxString &ws)
 	{
 		m_CaretPos.pos = 0;
 		m_CaretPos.linepos = 0;
-		undo->m_CaretPosAfter=0;
-
+		undo->m_CaretPosAfter = 0;
 		AppearCaret();
 		UpdateScrollBarPos();
 
-		if(!m_CaretAtHexArea)
+		if( !m_CaretAtHexArea )
 		{
 			UpdateTextAreaXPos();
 			m_LastTextAreaXPos = m_TextAreaXPos;
@@ -1399,163 +1381,165 @@ void MadEdit::SetText(const wxString &ws)
 	DoSelectionChanged();
 }
 
-bool MadEdit::GetLine(wxString &ws,	int	line, size_t maxlen, bool ignoreBOM)
+bool MadEdit::GetLine( wxString &ws, int line, size_t maxlen, bool ignoreBOM )
 {
 	wxFileOffset pos = 0;
 	MadUCQueue ucqueue;
+	MadLineIterator lit = m_Lines->m_LineList.begin();
 
-	MadLineIterator	lit	= m_Lines->m_LineList.begin();
-
-	if(line==0)	// if first	line has BOM, we will ignore it
+	if( line == 0 ) // if first line has BOM, we will ignore it
 	{
-		if(ignoreBOM) pos =	lit->m_RowIndices.front().m_Start;
+		if( ignoreBOM ) pos = lit->m_RowIndices.front().m_Start;
 	}
 	else
 	{
-		if(line	>= int(m_Lines->m_LineCount)) return true;
+		if( line >= int( m_Lines->m_LineCount ) ) return true;
 
-		for(int	i=0; i<line; ++i)
+		for( int i = 0; i < line; ++i )
 		{
 			++lit;
 		}
 	}
 
-	return GetLine(ws, lit,	maxlen,	ignoreBOM);
+	return GetLine( ws, lit, maxlen, ignoreBOM );
 }
 
-bool MadEdit::GetLine(wxString &ws,	MadLineIterator	lit, size_t	maxlen,	bool ignoreBOM)
+bool MadEdit::GetLine( wxString &ws, MadLineIterator lit, size_t maxlen, bool ignoreBOM )
 {
 	wxFileOffset pos = 0;
 	MadUCQueue ucqueue;
 
-	if(lit == m_Lines->m_LineList.begin()) // if first line	has	BOM, we	will ignore	it
+	if( lit == m_Lines->m_LineList.begin() ) // if first line has BOM, we will ignore it
 	{
-		if(ignoreBOM) pos =	lit->m_RowIndices.front().m_Start;
+		if( ignoreBOM ) pos = lit->m_RowIndices.front().m_Start;
 	}
 
-	if(pos >= m_Lines->m_Size)
+	if( pos >= m_Lines->m_Size )
 		return true;
 
-	if(maxlen==0) maxlen=size_t(-1);
+	if( maxlen == 0 ) maxlen = size_t( -1 );
 
-	MadLines::NextUCharFuncPtr NextUChar=m_Lines->NextUChar;
-	m_Lines->InitNextUChar(lit,	pos);
+	MadLines::NextUCharFuncPtr NextUChar = m_Lines->NextUChar;
+	m_Lines->InitNextUChar( lit, pos );
+
 	do
 	{
-		if(!(m_Lines->*NextUChar)(ucqueue))
+		if( !( m_Lines->*NextUChar )( ucqueue ) )
 		{
 			return true;
 		}
 
-		ucs4_t uc=ucqueue.back().first;
-		if(uc==0x0D	|| uc==0x0A)
+		ucs4_t uc = ucqueue.back().first;
+
+		if( uc == 0x0D || uc == 0x0A )
 			return true;
 
 #ifdef __WXMSW__
-		if(uc>=0x10000)
+
+		if( uc >= 0x10000 )
 		{
-			wchar_t	wbuf[2];
-			m_Encoding->UCS4toUTF16LE_U10000(uc, (wxByte*)wbuf);
-			ws<<wbuf[0];
-			ws<<wbuf[1];
+			wchar_t wbuf[2];
+			m_Encoding->UCS4toUTF16LE_U10000( uc, ( wxByte* )wbuf );
+			ws << wbuf[0];
+			ws << wbuf[1];
 		}
 		else
 		{
-			ws<<wxChar(uc);
+			ws << wxChar( uc );
 		}
+
 #else
-		ws<<wxChar(uc);
+		ws << wxChar( uc );
 #endif
 	}
-	while(ws.Len() < maxlen);
+	while( ws.Len() < maxlen );
 
-	if((m_Lines->*NextUChar)(ucqueue)) return false;
+	if( ( m_Lines->*NextUChar )( ucqueue ) ) return false;
+
 	return true;
 }
 
-int	MadEdit::GetLineByPos(const	wxFileOffset &pos)
+int MadEdit::GetLineByPos( const wxFileOffset &pos )
 {
-	wxFileOffset p=pos;
-	if(p<0)	p=0;
-	else if(p >	m_Lines->m_Size) p=m_Lines->m_Size;
+	wxFileOffset p = pos;
 
-	MadLineIterator	lit;
-	int	rid;
-	m_UpdateValidPos=-1;
-	int	line=GetLineByPos(lit, p, rid);
-	m_UpdateValidPos=0;
+	if( p < 0 ) p = 0;
+	else
+		if( p > m_Lines->m_Size ) p = m_Lines->m_Size;
+
+	MadLineIterator lit;
+	int rid;
+	m_UpdateValidPos = -1;
+	int line = GetLineByPos( lit, p, rid );
+	m_UpdateValidPos = 0;
 	return line;
 }
 
 void MadEdit::HighlightWords()
 {
-	if(m_EditMode == emColumnMode && m_CaretPos.extraspaces)
+	if( m_EditMode == emColumnMode && m_CaretPos.extraspaces )
 		return;
 
 	wxFileOffset startpos, endpos;
 
-	if(!IsTextFile()) // not a text	file (HexMode)
+	if( !IsTextFile() ) // not a text file (HexMode)
 	{
 		return;
 	}
-	else						  //TextMode
+	else                          //TextMode
 	{
 		//may select whole line
-		//startpos = m_CaretPos.pos	- m_CaretPos.linepos +
-				   //m_CaretPos.iter->m_RowIndices[0].m_Start; // exclude BOM
+		//startpos = m_CaretPos.pos - m_CaretPos.linepos +
+		//m_CaretPos.iter->m_RowIndices[0].m_Start; // exclude BOM
 		//endpos = m_Lines->m_Size;
-		
 		//select wrapped-line only
-		startpos = m_CaretPos.pos -	m_CaretPos.linepos +
+		startpos = m_CaretPos.pos - m_CaretPos.linepos +
 				   m_CaretPos.iter->m_RowIndices[m_CaretPos.subrowid].m_Start; // exclude BOM
-		endpos = m_CaretPos.pos	- m_CaretPos.linepos +
-				 m_CaretPos.iter->m_RowIndices[m_CaretPos.subrowid+1].m_Start;
+		endpos = m_CaretPos.pos - m_CaretPos.linepos +
+				 m_CaretPos.iter->m_RowIndices[m_CaretPos.subrowid + 1].m_Start;
 	}
 
-	// now startpos	is the begin of	line
+	// now startpos is the begin of line
 	// check the word between startpos and endpos
-
-	MadLineIterator	& lit =	m_CaretPos.iter;
-	wxFileOffset pos = m_CaretPos.linepos -	(m_CaretPos.pos	- startpos);
-	m_Lines->InitNextUChar(lit,	pos);
-
+	MadLineIterator & lit = m_CaretPos.iter;
+	wxFileOffset pos = m_CaretPos.linepos - ( m_CaretPos.pos - startpos );
+	m_Lines->InitNextUChar( lit, pos );
 	MadUCQueue ucqueue;
-	int	type = 0, prevtype = 0;
-	int	idx	= 0, posidx	= 0;
+	int type = 0, prevtype = 0;
+	int idx = 0, posidx = 0;
+	pos = startpos;
+	MadLines::NextUCharFuncPtr NextUChar = m_Lines->NextUChar;
 
-	pos	= startpos;
-	MadLines::NextUCharFuncPtr NextUChar=m_Lines->NextUChar;
-
-	if((m_Lines->*NextUChar)(ucqueue))
+	if( ( m_Lines->*NextUChar )( ucqueue ) )
 	{
 		do
 		{
-			MadUCPair &	ucp	= ucqueue.back();
-			int	uc = ucp.first;
-			if(type	== 0)
+			MadUCPair & ucp = ucqueue.back();
+			int uc = ucp.first;
+
+			if( type == 0 )
 			{
-				if(pos >= m_CaretPos.pos)
+				if( pos >= m_CaretPos.pos )
 				{
-					type = GetUCharType(uc);
+					type = GetUCharType( uc );
 					posidx = idx;
 
-					if((type <=	3 && prevtype >	3) || (type	<= 2 &&	prevtype > 2))
+					if( ( type <= 3 && prevtype > 3 ) || ( type <= 2 && prevtype > 2 ) )
 					{
 						--posidx;
 						type = prevtype;
-
 						ucqueue.pop_back();
 						break;
 					}
 				}
 				else
 				{
-					prevtype = GetUCharType(uc);
+					prevtype = GetUCharType( uc );
 				}
 			}
 			else
 			{
-				if(GetUCharType(uc)	!= type)
+				if( GetUCharType( uc ) != type )
 				{
 					ucqueue.pop_back();
 					break;
@@ -1563,114 +1547,115 @@ void MadEdit::HighlightWords()
 			}
 
 			++idx;
-			pos	+= ucp.second;
+			pos += ucp.second;
 		}
-		while(pos <	endpos && (m_Lines->*NextUChar)(ucqueue));
+		while( pos < endpos && ( m_Lines->*NextUChar )( ucqueue ) );
 	}
 
+	idx = posidx - 1;
 
-	idx	= posidx - 1;
-	while(idx >= 0 && GetUCharType(ucqueue[idx].first) == type)
+	while( idx >= 0 && GetUCharType( ucqueue[idx].first ) == type )
 	{
 		--idx;
 	}
 
-	if(idx >= 0)
+	if( idx >= 0 )
 	{
 		do
 		{
-			startpos +=	ucqueue.front().second;
+			startpos += ucqueue.front().second;
 			ucqueue.pop_front();
 		}
-		while(--idx	>= 0);
+		while( --idx >= 0 );
 	}
 
-	if(!ucqueue.empty()	&& type	!= 0)
+	if( !ucqueue.empty() && type != 0 )
 	{
-		//wxASSERT(type	!= 0);
+		//wxASSERT(type != 0);
 		size_t s = ucqueue.size();
-		if(s !=	m_HighlightWords.size())
+
+		if( s != m_HighlightWords.size() )
 		{
 			m_HighlightWords.clear();
-			for(size_t i = 0; i	< s; ++i)
+
+			for( size_t i = 0; i < s; ++i )
 			{
-				m_HighlightWords.push_back(ucqueue[i].first);
+				m_HighlightWords.push_back( ucqueue[i].first );
 			}
 		}
 		else
 		{
 			bool toggleHighlight = true;
-			for(size_t i = 0; i	< s; ++i)
+
+			for( size_t i = 0; i < s; ++i )
 			{
-				if(m_HighlightWords[i] != ucqueue[i].first)	
+				if( m_HighlightWords[i] != ucqueue[i].first )
 				{
-					toggleHighlight	= false;
-					m_HighlightWords[i]	= ucqueue[i].first;
+					toggleHighlight = false;
+					m_HighlightWords[i] = ucqueue[i].first;
 				}
 			}
 
-			if(toggleHighlight)
+			if( toggleHighlight )
 			{
 				m_HighlightWords.clear();
 			}
 		}
-
 	}
 	else
 		m_HighlightWords.clear();
 
-	m_RepaintAll=true;
-	Refresh(false);
+	m_RepaintAll = true;
+	Refresh( false );
 }
 
 void MadEdit::SelectAll()
 {
-	if(m_Lines->m_Size)
+	if( m_Lines->m_Size )
 	{
-		m_SelectionPos1.Reset(m_Lines->m_LineList.begin());
+		m_SelectionPos1.Reset( m_Lines->m_LineList.begin() );
 		m_SelectionBegin = &m_SelectionPos1;
-
 		m_SelectionPos2.iter = m_Lines->m_LineList.end();
 		--m_SelectionPos2.iter;
-		m_SelectionPos2.pos	= m_Lines->m_Size;
-		m_SelectionPos2.linepos	= m_SelectionPos2.iter->m_Size;
-		m_SelectionPos2.lineid = int(m_Lines->m_LineCount -	1);
-		m_SelectionPos2.rowid =	int(m_Lines->m_RowCount	- 1);
-		m_SelectionPos2.subrowid = int(m_SelectionPos2.iter->RowCount()-1);
-		m_SelectionPos2.xpos=0;
+		m_SelectionPos2.pos = m_Lines->m_Size;
+		m_SelectionPos2.linepos = m_SelectionPos2.iter->m_Size;
+		m_SelectionPos2.lineid = int( m_Lines->m_LineCount - 1 );
+		m_SelectionPos2.rowid = int( m_Lines->m_RowCount - 1 );
+		m_SelectionPos2.subrowid = int( m_SelectionPos2.iter->RowCount() - 1 );
+		m_SelectionPos2.xpos = 0;
 
-		if(m_SelectionPos2.linepos > 0)//update	xpos
+		if( m_SelectionPos2.linepos > 0 ) //update xpos
 		{
 			MadUCQueue ucharQueue;
-			vector<int>	widthArray;
-			int	ucharPos;
-			UpdateCaret(m_SelectionPos2, ucharQueue, widthArray	,ucharPos);
+			vector<int> widthArray;
+			int ucharPos;
+			UpdateCaret( m_SelectionPos2, ucharQueue, widthArray, ucharPos );
 		}
 
 		m_SelectionEnd = &m_SelectionPos2;
 
-		if(m_SelectionPos1.pos != m_SelectionPos2.pos)
+		if( m_SelectionPos1.pos != m_SelectionPos2.pos )
 		{
-			m_SelFirstRow =	0;
-			m_SelLastRow = int(m_Lines->m_RowCount - 1);
+			m_SelFirstRow = 0;
+			m_SelLastRow = int( m_Lines->m_RowCount - 1 );
 
-			if(m_EditMode == emColumnMode)
+			if( m_EditMode == emColumnMode )
 			{
-				if(m_SelectionPos1.xpos	< m_SelectionPos2.xpos)
+				if( m_SelectionPos1.xpos < m_SelectionPos2.xpos )
 				{
-					m_SelLeftXPos =	m_SelectionPos1.xpos;
+					m_SelLeftXPos = m_SelectionPos1.xpos;
 					m_SelRightXPos = m_SelectionPos2.xpos;
 				}
 				else
 				{
-					m_SelLeftXPos =	m_SelectionPos2.xpos;
+					m_SelLeftXPos = m_SelectionPos2.xpos;
 					m_SelRightXPos = m_SelectionPos1.xpos;
 				}
 			}
 
 			m_RepaintSelection = true;
-			m_Selection	= true;
-			Refresh(false);
+			m_Selection = true;
+			Refresh( false );
 		}
 
 		DoSelectionChanged();
@@ -1679,19 +1664,21 @@ void MadEdit::SelectAll()
 
 void MadEdit::StartEndSelction()
 {
-	if(!m_SelectionStart)
+	if( !m_SelectionStart )
 	{
 		m_SelectionStart = true;
-		m_SelectionStartPos	= GetCaretPosition();
+		m_SelectionStartPos = GetCaretPosition();
 	}
 	else
 	{
-		wxFileOffset ends =	 GetCaretPosition();
+		wxFileOffset ends =  GetCaretPosition();
 		m_SelectionStart = false;
-		if(ends	!= m_SelectionStartPos)
+
+		if( ends != m_SelectionStartPos )
 		{
-			wxFileOffset starts	= -1;
-			if(ends	> m_SelectionStartPos) 
+			wxFileOffset starts = -1;
+
+			if( ends > m_SelectionStartPos )
 			{
 				starts = m_SelectionStartPos;
 			}
@@ -1700,874 +1687,859 @@ void MadEdit::StartEndSelction()
 				starts = ends;
 				ends = m_SelectionStartPos;
 			}
-			SetSelection(starts, ends, false);
 
+			SetSelection( starts, ends, false );
 			m_RepaintSelection = true;
-			Refresh(false);
+			Refresh( false );
 		}
-		m_SelectionStartPos	= -1;
+
+		m_SelectionStartPos = -1;
 	}
 }
 
 void MadEdit::CutToClipboard()
 {
-	if(m_Selection)
+	if( m_Selection )
 	{
 		CopyToClipboard();
-		DeleteSelection(true, NULL,	true);
+		DeleteSelection( true, NULL, true );
 	}
 }
 
 void MadEdit::CopyToClipboard()
 {
-	if(!m_Selection) return;
+	if( !m_Selection ) return;
 
-	if(m_EditMode==emColumnMode)
+	if( m_EditMode == emColumnMode )
 	{
 		wxString ws;
-		GetColumnSelection(&ws);
-		if(ws.size())
+		GetColumnSelection( &ws );
+
+		if( ws.size() )
 		{
-			PutColumnDataToClipboard(ws, m_SelectionEnd->rowid - m_SelectionBegin->rowid + 1);
+			PutColumnDataToClipboard( ws, m_SelectionEnd->rowid - m_SelectionBegin->rowid + 1 );
 		}
 	}
-	else if(m_EditMode==emTextMode || !m_CaretAtHexArea)
-	{
-		wxString ws;
-		MadUCQueue ucqueue;
-		MadLines::NextUCharFuncPtr NextUChar=m_Lines->NextUChar;
-
-		wxFileOffset pos = m_SelectionBegin->pos;
-		MadLineIterator	lit	= m_SelectionBegin->iter;
-		m_Lines->InitNextUChar(lit,	m_SelectionBegin->linepos);
-		do
+	else
+		if( m_EditMode == emTextMode || !m_CaretAtHexArea )
 		{
-			if(ucqueue.size() || (m_Lines->*NextUChar)(ucqueue))
+			wxString ws;
+			MadUCQueue ucqueue;
+			MadLines::NextUCharFuncPtr NextUChar = m_Lines->NextUChar;
+			wxFileOffset pos = m_SelectionBegin->pos;
+			MadLineIterator lit = m_SelectionBegin->iter;
+			m_Lines->InitNextUChar( lit, m_SelectionBegin->linepos );
+
+			do
 			{
-				ucs4_t &uc=ucqueue.front().first;
-				if(uc==0x0D	|| uc==0x0A)
+				if( ucqueue.size() || ( m_Lines->*NextUChar )( ucqueue ) )
 				{
-#ifdef __WXMSW__
-					ws<<wxChar(0x0D);
-#endif
-					ws<<wxChar(0x0A);
+					ucs4_t &uc = ucqueue.front().first;
 
-					pos	+= ucqueue.front().second;
-
-					if(uc==0x0D	&& (m_Lines->*NextUChar)(ucqueue) &&
-						ucqueue.back().first==0x0A)
+					if( uc == 0x0D || uc == 0x0A )
 					{
-						pos	+= ucqueue.back().second;
+#ifdef __WXMSW__
+						ws << wxChar( 0x0D );
+#endif
+						ws << wxChar( 0x0A );
+						pos += ucqueue.front().second;
+
+						if( uc == 0x0D && ( m_Lines->*NextUChar )( ucqueue ) &&
+								ucqueue.back().first == 0x0A )
+						{
+							pos += ucqueue.back().second;
+						}
+
+						ucqueue.clear();
 					}
 
-					ucqueue.clear();
-
-				}
 #ifdef __WXMSW__
-				else if(uc>=0x10000)
-				{
-					wchar_t	wcbuf[2];
-					m_Encoding->UCS4toUTF16LE_U10000(uc, (wxByte*)wcbuf);
-					ws<<wxChar(wcbuf[0]);
-					ws<<wxChar(wcbuf[1]);
-					pos	+= ucqueue.front().second;
-					ucqueue.clear();
-				}
+					else
+						if( uc >= 0x10000 )
+						{
+							wchar_t wcbuf[2];
+							m_Encoding->UCS4toUTF16LE_U10000( uc, ( wxByte* )wcbuf );
+							ws << wxChar( wcbuf[0] );
+							ws << wxChar( wcbuf[1] );
+							pos += ucqueue.front().second;
+							ucqueue.clear();
+						}
+
 #endif
+						else
+						{
+							if( !uc ) uc = 0x2400; // change 0x00(NUL) to 0x2400 uncode NUL
+
+							ws << wxChar( uc );
+							pos += ucqueue.front().second;
+							ucqueue.clear();
+						}
+				}
 				else
 				{
-					if(!uc)	uc = 0x2400; //	change 0x00(NUL) to	0x2400 uncode NUL
-					ws<<wxChar(uc);
-					pos	+= ucqueue.front().second;
-					ucqueue.clear();
+					m_Lines->InitNextUChar( ++lit, 0 );
 				}
+			}
+			while( pos < m_SelectionEnd->pos );
 
-			}
-			else
-			{
-				m_Lines->InitNextUChar(++lit, 0);
-			}
+			PutTextToClipboard( ws );
 		}
-		while(pos <	m_SelectionEnd->pos);
-
-		PutTextToClipboard(ws);
-	}
-	else //m_EditMode==emHexMode &&	m_CaretAtHexArea
-	{
-		wxFileOffset pos = m_SelectionBegin->pos;
-		MadLineIterator	lit	= m_SelectionBegin->iter;
-		wxFileOffset lpos =	m_SelectionBegin->linepos;
-
-		std::string	data;
-		do
+		else //m_EditMode==emHexMode && m_CaretAtHexArea
 		{
-			if(lpos	< lit->m_Size)
-			{
-				data +=	lit->Get(lpos++);
-				++pos;
-			}
-			else
-			{
-				++lit;
-				lpos = 0;
-			}
-		}
-		while(pos <	m_SelectionEnd->pos);
+			wxFileOffset pos = m_SelectionBegin->pos;
+			MadLineIterator lit = m_SelectionBegin->iter;
+			wxFileOffset lpos = m_SelectionBegin->linepos;
+			std::string data;
 
-		PutHexDataToClipboard(data.c_str(),	data.size());
-	}
+			do
+			{
+				if( lpos < lit->m_Size )
+				{
+					data += lit->Get( lpos++ );
+					++pos;
+				}
+				else
+				{
+					++lit;
+					lpos = 0;
+				}
+			}
+			while( pos < m_SelectionEnd->pos );
+
+			PutHexDataToClipboard( data.c_str(), data.size() );
+		}
 }
 
 void MadEdit::PasteFromClipboard()
 {
-	if(IsReadOnly())
+	if( IsReadOnly() )
 		return;
 
-	if(m_EditMode == emColumnMode)
+	if( m_EditMode == emColumnMode )
 	{
-		vector < ucs4_t	> ucs;
-		int	lines=GetColumnDataFromClipboard(&ucs);
+		vector < ucs4_t > ucs;
+		int lines = GetColumnDataFromClipboard( &ucs );
 
-		if(!ucs.empty())
-			InsertColumnString(&ucs[0],	ucs.size(),	lines, false, false);
+		if( !ucs.empty() )
+			InsertColumnString( &ucs[0], ucs.size(), lines, false, false );
 	}
-	else if(m_EditMode == emHexMode	&& m_CaretAtHexArea)
-	{
-		vector < char >cs;
-		GetHexDataFromClipboard(&cs);
-
-		if(!cs.empty())
+	else
+		if( m_EditMode == emHexMode && m_CaretAtHexArea )
 		{
-			InsertHexData((wxByte*)&cs[0], cs.size());
-		}
-	}
-	else //if(m_EditMode ==	emTextMode || !m_CaretAtHexArea)
-	{
-		vector < ucs4_t	> ucs;
-		GetTextFromClipboard(&ucs);
+			vector < char >cs;
+			GetHexDataFromClipboard( &cs );
 
-		size_t size	= ucs.size();
-		if(size)
+			if( !cs.empty() )
+			{
+				InsertHexData( ( wxByte* )&cs[0], cs.size() );
+			}
+		}
+		else //if(m_EditMode == emTextMode || !m_CaretAtHexArea)
 		{
-			//bool oldim = m_InsertMode;
-			//m_InsertMode = true;
+			vector < ucs4_t > ucs;
+			GetTextFromClipboard( &ucs );
+			size_t size = ucs.size();
 
-			InsertString(&ucs[0], size,	false, true, false);
-
-			//m_InsertMode = oldim;
+			if( size )
+			{
+				//bool oldim = m_InsertMode;
+				//m_InsertMode = true;
+				InsertString( &ucs[0], size, false, true, false );
+				//m_InsertMode = oldim;
+			}
 		}
-	}
 }
 
 void MadEdit::DndBegDrag()
 {
-	if(!m_Selection) return;
+	if( !m_Selection ) return;
 
 	//m_DndData.Empty();
-	if(m_EditMode==emColumnMode)
+	if( m_EditMode == emColumnMode )
 	{
-		GetColumnSelection(&m_DndData);
-		
-		if(m_DndData.size())
+		GetColumnSelection( &m_DndData );
+
+		if( m_DndData.size() )
 		{
 			m_DndLines = m_SelectionEnd->rowid - m_SelectionBegin->rowid + 1;
 		}
 	}
-	else if(m_EditMode==emTextMode || !m_CaretAtHexArea)
-	{
-		MadUCQueue ucqueue;
-		MadLines::NextUCharFuncPtr NextUChar=m_Lines->NextUChar;
-
-		wxFileOffset pos = m_SelectionBegin->pos;
-		MadLineIterator	lit	= m_SelectionBegin->iter;
-		m_Lines->InitNextUChar(lit,	m_SelectionBegin->linepos);
-		do
+	else
+		if( m_EditMode == emTextMode || !m_CaretAtHexArea )
 		{
-			if(ucqueue.size() || (m_Lines->*NextUChar)(ucqueue))
+			MadUCQueue ucqueue;
+			MadLines::NextUCharFuncPtr NextUChar = m_Lines->NextUChar;
+			wxFileOffset pos = m_SelectionBegin->pos;
+			MadLineIterator lit = m_SelectionBegin->iter;
+			m_Lines->InitNextUChar( lit, m_SelectionBegin->linepos );
+
+			do
 			{
-				ucs4_t &uc=ucqueue.front().first;
-				if(uc==0x0D	|| uc==0x0A)
+				if( ucqueue.size() || ( m_Lines->*NextUChar )( ucqueue ) )
 				{
-#ifdef __WXMSW__
-					m_DndData<<wxChar(0x0D);
-#endif
-					m_DndData<<wxChar(0x0A);
+					ucs4_t &uc = ucqueue.front().first;
 
-					pos	+= ucqueue.front().second;
-
-					if(uc==0x0D	&& (m_Lines->*NextUChar)(ucqueue) &&
-						ucqueue.back().first==0x0A)
+					if( uc == 0x0D || uc == 0x0A )
 					{
-						pos	+= ucqueue.back().second;
+#ifdef __WXMSW__
+						m_DndData << wxChar( 0x0D );
+#endif
+						m_DndData << wxChar( 0x0A );
+						pos += ucqueue.front().second;
+
+						if( uc == 0x0D && ( m_Lines->*NextUChar )( ucqueue ) &&
+								ucqueue.back().first == 0x0A )
+						{
+							pos += ucqueue.back().second;
+						}
+
+						ucqueue.clear();
 					}
 
-					ucqueue.clear();
-
-				}
 #ifdef __WXMSW__
-				else if(uc>=0x10000)
-				{
-					wchar_t	wcbuf[2];
-					m_Encoding->UCS4toUTF16LE_U10000(uc, (wxByte*)wcbuf);
-					m_DndData<<wxChar(wcbuf[0]);
-					m_DndData<<wxChar(wcbuf[1]);
-					pos	+= ucqueue.front().second;
-					ucqueue.clear();
-				}
+					else
+						if( uc >= 0x10000 )
+						{
+							wchar_t wcbuf[2];
+							m_Encoding->UCS4toUTF16LE_U10000( uc, ( wxByte* )wcbuf );
+							m_DndData << wxChar( wcbuf[0] );
+							m_DndData << wxChar( wcbuf[1] );
+							pos += ucqueue.front().second;
+							ucqueue.clear();
+						}
+
 #endif
+						else
+						{
+							m_DndData << wxChar( uc );
+							pos += ucqueue.front().second;
+							ucqueue.clear();
+						}
+				}
 				else
 				{
-					m_DndData<<wxChar(uc);
-					pos	+= ucqueue.front().second;
-					ucqueue.clear();
+					m_Lines->InitNextUChar( ++lit, 0 );
 				}
-
 			}
-			else
-			{
-				m_Lines->InitNextUChar(++lit, 0);
-			}
+			while( pos < m_SelectionEnd->pos );
 		}
-		while(pos <	m_SelectionEnd->pos);
-	}
-	else //m_EditMode==emHexMode &&	m_CaretAtHexArea
-	{
-		wxFileOffset pos = m_SelectionBegin->pos;
-		MadLineIterator	lit	= m_SelectionBegin->iter;
-		wxFileOffset lpos =	m_SelectionBegin->linepos;
-
-		std::string	data;
-		do
+		else //m_EditMode==emHexMode && m_CaretAtHexArea
 		{
-			if(lpos	< lit->m_Size)
-			{
-				data +=	lit->Get(lpos++);
-				++pos;
-			}
-			else
-			{
-				++lit;
-				lpos = 0;
-			}
-		}
-		while(pos <	m_SelectionEnd->pos);
+			wxFileOffset pos = m_SelectionBegin->pos;
+			MadLineIterator lit = m_SelectionBegin->iter;
+			wxFileOffset lpos = m_SelectionBegin->linepos;
+			std::string data;
 
-		m_DndData=wxString(data.c_str(), wxConvLibc, data.size());
-	}
+			do
+			{
+				if( lpos < lit->m_Size )
+				{
+					data += lit->Get( lpos++ );
+					++pos;
+				}
+				else
+				{
+					++lit;
+					lpos = 0;
+				}
+			}
+			while( pos < m_SelectionEnd->pos );
+
+			m_DndData = wxString( data.c_str(), wxConvLibc, data.size() );
+		}
 }
 
 void MadEdit::DndDrop()
 {
-	if(IsReadOnly())
+	if( IsReadOnly() )
 		return;
-		
-	if(m_EditMode == emColumnMode)
-	{
-		vector < ucs4_t	> ucs;
-		TranslateText(m_DndData.c_str(), m_DndData.Len(), &ucs,	false);
 
-		if(!ucs.empty())
-			InsertColumnString(&(*ucs.begin()),	ucs.size(),	m_DndLines,	false, false);
+	if( m_EditMode == emColumnMode )
+	{
+		vector < ucs4_t > ucs;
+		TranslateText( m_DndData.c_str(), m_DndData.Len(), &ucs, false );
+
+		if( !ucs.empty() )
+			InsertColumnString( &( *ucs.begin() ), ucs.size(), m_DndLines, false, false );
 	}
-	else if(m_EditMode == emHexMode	&& m_CaretAtHexArea)
-	{
-		#if	0
-		vector < char >cs;
-		GetHexDataFromClipboard(&cs);
-
-		if(!cs.empty())
+	else
+		if( m_EditMode == emHexMode && m_CaretAtHexArea )
 		{
-			InsertHexData((wxByte*)&(*cs.begin()), cs.size());
-		}
-		#endif
-	}
-	else //if(m_EditMode ==	emTextMode || !m_CaretAtHexArea)
-	{
-		vector < ucs4_t	> ucs;
-		TranslateText(m_DndData.c_str(), m_DndData.Len(), &ucs,	false);
+#if 0
+			vector < char >cs;
+			GetHexDataFromClipboard( &cs );
 
-		size_t size	= ucs.size();
-		if(size)
-		{
-			//bool oldim = m_InsertMode;
-			//m_InsertMode = true;
-			//bool old_selflag = m_Selection;
-			//m_Selection =	false;
-			InsertString(&(*ucs.begin()), size,	false, true, false);
-			//m_Selection =	old_selflag;
-			//m_InsertMode = oldim;
-			
-			/*if(!m_DragCopyFlag)
+			if( !cs.empty() )
 			{
-				wxFileOffset OldCaretPos = m_CaretPos.pos;
-				wxFileOffset SelectionLen =	0, SelDelta	= m_SelectionEnd->pos -	m_SelectionBegin->pos;
-				if(OldCaretPos > m_SelectionBegin->pos)
-				{
-					SelectionLen = SelDelta;
-				}
-				else
-				{
-					m_SelectionPos1.pos	+= SelDelta;
-					m_SelectionPos2.pos	+= SelDelta;
-					UpdateCaretByPos(m_SelectionPos1, m_ActiveRowUChars, m_ActiveRowWidths,	m_CaretRowUCharPos);
-					UpdateCaretByPos(m_SelectionPos2, m_ActiveRowUChars, m_ActiveRowWidths,	m_CaretRowUCharPos);
-					UpdateSelectionPos();
-				}
+				InsertHexData( ( wxByte* ) & ( *cs.begin() ), cs.size() );
+			}
 
-				DeleteSelection(false, NULL, false);
-				SetCaretPosition(OldCaretPos-SelectionLen);
-			}*/
+#endif
 		}
-	}
+		else //if(m_EditMode == emTextMode || !m_CaretAtHexArea)
+		{
+			vector < ucs4_t > ucs;
+			TranslateText( m_DndData.c_str(), m_DndData.Len(), &ucs, false );
+			size_t size = ucs.size();
 
-	//EndUpdateSelection(false); 
+			if( size )
+			{
+				//bool oldim = m_InsertMode;
+				//m_InsertMode = true;
+				//bool old_selflag = m_Selection;
+				//m_Selection = false;
+				InsertString( &( *ucs.begin() ), size, false, true, false );
+				//m_Selection = old_selflag;
+				//m_InsertMode = oldim;
+				/*if(!m_DragCopyFlag)
+				{
+					wxFileOffset OldCaretPos = m_CaretPos.pos;
+					wxFileOffset SelectionLen = 0, SelDelta = m_SelectionEnd->pos - m_SelectionBegin->pos;
+					if(OldCaretPos > m_SelectionBegin->pos)
+					{
+						SelectionLen = SelDelta;
+					}
+					else
+					{
+						m_SelectionPos1.pos += SelDelta;
+						m_SelectionPos2.pos += SelDelta;
+						UpdateCaretByPos(m_SelectionPos1, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos);
+						UpdateCaretByPos(m_SelectionPos2, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos);
+						UpdateSelectionPos();
+					}
+
+					DeleteSelection(false, NULL, false);
+					SetCaretPosition(OldCaretPos-SelectionLen);
+				}*/
+			}
+		}
+
+	//EndUpdateSelection(false);
 	m_DndData.clear();
 }
 
 
 void MadEdit::Undo()
 {
-	MadUndo	*undo =	m_UndoBuffer->Undo(!m_RecordCaretMovements);
-	if(undo==NULL)
+	MadUndo *undo = m_UndoBuffer->Undo( !m_RecordCaretMovements );
+
+	if( undo == NULL )
 		return;
 
-	if(undo->m_Undos.empty()) // caret movement	undo
+	if( undo->m_Undos.empty() ) // caret movement undo
 	{
-		bool oldrcm=m_RecordCaretMovements;
-		m_RecordCaretMovements=false;
-		SetCaretPosition(undo->m_CaretPosBefore);
-		m_RecordCaretMovements=oldrcm;
+		bool oldrcm = m_RecordCaretMovements;
+		m_RecordCaretMovements = false;
+		SetCaretPosition( undo->m_CaretPosBefore );
+		m_RecordCaretMovements = oldrcm;
 		return;
 	}
 
 	SetNeedSync();
-
 	size_t oldrows = m_Lines->m_RowCount;
-	size_t oldlines	= m_Lines->m_LineCount;
-
-	MadUndoDataRvsIterator it =	undo->m_Undos.rbegin();
+	size_t oldlines = m_Lines->m_LineCount;
+	MadUndoDataRvsIterator it = undo->m_Undos.rbegin();
 	MadUndoDataRvsIterator itend = undo->m_Undos.rend();
-
-	MadLineIterator	lit, litfirst, litlast;
-	int	lineid,	fid	= INT_MAX, lid = -1;
+	MadLineIterator lit, litfirst, litlast;
+	int lineid, fid = INT_MAX, lid = -1;
 
 	do
 	{
-		wxFileOffset &pos =	(*it)->m_Pos;
-		switch ((*it)->m_Type)
+		wxFileOffset &pos = ( *it )->m_Pos;
+
+		switch( ( *it )->m_Type )
 		{
 		case udtInsert:
 			{
-				MadInsertUndoData *iudata =	(MadInsertUndoData *) (*it);
-				lit	= DeleteInsertData(pos,	iudata->m_Size,	NULL, 0, NULL, &lineid);
+				MadInsertUndoData *iudata = ( MadInsertUndoData * )( *it );
+				lit = DeleteInsertData( pos, iudata->m_Size, NULL, 0, NULL, &lineid );
 			}
 			break;
+
 		case udtDelete:
 			{
-				MadDeleteUndoData *dudata =	(MadDeleteUndoData *) (*it);
-				lit	= DeleteInsertData(pos,	0, NULL, dudata->m_Size, &dudata->m_Data, &lineid);
+				MadDeleteUndoData *dudata = ( MadDeleteUndoData * )( *it );
+				lit = DeleteInsertData( pos, 0, NULL, dudata->m_Size, &dudata->m_Data, &lineid );
 			}
 			break;
+
 		case udtOverwrite:
 			{
-				MadOverwriteUndoData *oudata = (MadOverwriteUndoData *)	(*it);
-				lit	= DeleteInsertData(pos,	oudata->m_InsSize, NULL,
-											oudata->m_DelSize, &oudata->m_DelData,
-											&lineid);
+				MadOverwriteUndoData *oudata = ( MadOverwriteUndoData * )( *it );
+				lit = DeleteInsertData( pos, oudata->m_InsSize, NULL,
+										oudata->m_DelSize, &oudata->m_DelData,
+										&lineid );
 			}
 			break;
 		}
 
-		if(lineid <	fid)
+		if( lineid < fid )
 		{
-			fid	= lineid;
+			fid = lineid;
 			litfirst = lit;
 		}
 
-		if(lineid >	lid)
+		if( lineid > lid )
 		{
-			lid	= lineid;
-			litlast	= lit;
+			lid = lineid;
+			litlast = lit;
 		}
 	}
-	while(++it != itend);
+	while( ++it != itend );
 
-	if(IsTextFile())
+	if( IsTextFile() )
 	{
-		size_t count = m_Lines->Reformat(litfirst, litlast);
-
+		size_t count = m_Lines->Reformat( litfirst, litlast );
 		m_CaretPos.pos = undo->m_CaretPosBefore;
-		UpdateCaretByPos(m_CaretPos, m_ActiveRowUChars,	m_ActiveRowWidths, m_CaretRowUCharPos);
+		UpdateCaretByPos( m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
 
-		if(m_EditMode != emTextMode	|| m_Selection || oldrows != m_Lines->m_RowCount
-			|| oldlines	!= m_Lines->m_LineCount	|| count > 1 ||	lid	< m_CaretPos.lineid)
+		if( m_EditMode != emTextMode || m_Selection || oldrows != m_Lines->m_RowCount
+				|| oldlines    != m_Lines->m_LineCount || count > 1 || lid < m_CaretPos.lineid )
 		{
 			m_RepaintAll = true;
 		}
 		else
 		{
 			m_RepaintSelection = true;
-			m_SelFirstRow =	m_CaretPos.rowid - m_CaretPos.subrowid;
-			m_SelLastRow = m_SelFirstRow + int(litfirst->RowCount()	- 1);
+			m_SelFirstRow = m_CaretPos.rowid - m_CaretPos.subrowid;
+			m_SelLastRow = m_SelFirstRow + int( litfirst->RowCount() - 1 );
 		}
 
 		AppearCaret();
 		UpdateScrollBarPos();
 
-		if(m_EditMode == emHexMode)
+		if( m_EditMode == emHexMode )
 		{
-			if(!m_CaretAtHexArea)
+			if( !m_CaretAtHexArea )
 			{
 				UpdateTextAreaXPos();
 				m_LastTextAreaXPos = m_TextAreaXPos;
 			}
 		}
 
-		m_LastCaretXPos	= m_CaretPos.xpos;
-
+		m_LastCaretXPos = m_CaretPos.xpos;
 	}
 	else
 	{
 		m_CaretPos.pos = undo->m_CaretPosBefore;
 		m_CaretPos.linepos = m_CaretPos.pos;
-
 		m_RepaintAll = true;
 		AppearCaret();
 		UpdateScrollBarPos();
 
-		if(!m_CaretAtHexArea)
+		if( !m_CaretAtHexArea )
 		{
 			UpdateTextAreaXPos();
 			m_LastTextAreaXPos = m_TextAreaXPos;
 		}
 	}
 
-	m_Selection	= false;
+	m_Selection = false;
+	bool oldmod = m_Modified;
 
-	bool oldmod=m_Modified;
-
-	if(m_UndoBuffer->GetPrevUndo() == m_SavePoint)
+	if( m_UndoBuffer->GetPrevUndo() == m_SavePoint )
 		m_Modified = false;
 	else
 		m_Modified = true;
 
 	DoSelectionChanged();
-	if(oldmod!=m_Modified) DoStatusChanged();
 
-	Refresh(false);
-	Update();	// repaint immediately
+	if( oldmod != m_Modified ) DoStatusChanged();
+
+	Refresh( false );
+	Update();   // repaint immediately
 }
 
 void MadEdit::Redo()
 {
-	MadUndo	*redo =	m_UndoBuffer->Redo(!m_RecordCaretMovements);
-	if(redo==NULL)
+	MadUndo *redo = m_UndoBuffer->Redo( !m_RecordCaretMovements );
+
+	if( redo == NULL )
 		return;
 
-	if(redo->m_Undos.empty()) // caret movement	redo
+	if( redo->m_Undos.empty() ) // caret movement redo
 	{
-		bool oldrcm=m_RecordCaretMovements;
-		m_RecordCaretMovements=false;
-		SetCaretPosition(redo->m_CaretPosAfter);
-		m_RecordCaretMovements=oldrcm;
+		bool oldrcm = m_RecordCaretMovements;
+		m_RecordCaretMovements = false;
+		SetCaretPosition( redo->m_CaretPosAfter );
+		m_RecordCaretMovements = oldrcm;
 		return;
 	}
 
 	SetNeedSync();
-
 	size_t oldrows = m_Lines->m_RowCount;
-	size_t oldlines	= m_Lines->m_LineCount;
-
-	MadUndoDataIterator	it = redo->m_Undos.begin();
-	MadUndoDataIterator	itend =	redo->m_Undos.end();
-
-	MadLineIterator	lit, litfirst, litlast;
-	int	lineid,	fid	= INT_MAX, lid = -1;
+	size_t oldlines = m_Lines->m_LineCount;
+	MadUndoDataIterator it = redo->m_Undos.begin();
+	MadUndoDataIterator itend = redo->m_Undos.end();
+	MadLineIterator lit, litfirst, litlast;
+	int lineid, fid = INT_MAX, lid = -1;
 
 	do
 	{
-		wxFileOffset & pos = (*it)->m_Pos;
-		switch ((*it)->m_Type)
+		wxFileOffset & pos = ( *it )->m_Pos;
+
+		switch( ( *it )->m_Type )
 		{
 		case udtInsert:
 			{
-				MadInsertUndoData *iudata =	(MadInsertUndoData *) (*it);
-				lit	= DeleteInsertData(pos,	0, NULL, iudata->m_Size, &iudata->m_Data, &lineid);
+				MadInsertUndoData *iudata = ( MadInsertUndoData * )( *it );
+				lit = DeleteInsertData( pos, 0, NULL, iudata->m_Size, &iudata->m_Data, &lineid );
 			}
 			break;
+
 		case udtDelete:
 			{
-				MadDeleteUndoData *dudata =	(MadDeleteUndoData *) (*it);
-				lit	= DeleteInsertData(pos,	dudata->m_Size,	NULL, 0, NULL, &lineid);
+				MadDeleteUndoData *dudata = ( MadDeleteUndoData * )( *it );
+				lit = DeleteInsertData( pos, dudata->m_Size, NULL, 0, NULL, &lineid );
 			}
 			break;
+
 		case udtOverwrite:
 			{
-				MadOverwriteUndoData *oudata = (MadOverwriteUndoData *)	(*it);
-				lit	= DeleteInsertData(pos,	oudata->m_DelSize, NULL,
-											oudata->m_InsSize, &oudata->m_InsData,
-											&lineid);
+				MadOverwriteUndoData *oudata = ( MadOverwriteUndoData * )( *it );
+				lit = DeleteInsertData( pos, oudata->m_DelSize, NULL,
+										oudata->m_InsSize, &oudata->m_InsData,
+										&lineid );
 			}
 			break;
 		}
 
-		if(lineid <	fid)
+		if( lineid < fid )
 		{
-			fid	= lineid;
+			fid = lineid;
 			litfirst = lit;
 		}
 
-		if(lineid >	lid)
+		if( lineid > lid )
 		{
-			lid	= lineid;
-			litlast	= lit;
+			lid = lineid;
+			litlast = lit;
 		}
 	}
-	while(++it != itend);
+	while( ++it != itend );
 
-	if(IsTextFile())
+	if( IsTextFile() )
 	{
-		size_t count = m_Lines->Reformat(litfirst, litlast);
-
+		size_t count = m_Lines->Reformat( litfirst, litlast );
 		m_CaretPos.pos = redo->m_CaretPosAfter;
-		UpdateCaretByPos(m_CaretPos, m_ActiveRowUChars,	m_ActiveRowWidths, m_CaretRowUCharPos);
+		UpdateCaretByPos( m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
 
-		if(m_EditMode != emTextMode	|| m_Selection || oldrows != m_Lines->m_RowCount
-			|| oldlines	!= m_Lines->m_LineCount	|| count > 1 ||	lid	< m_CaretPos.lineid)
+		if( m_EditMode != emTextMode || m_Selection || oldrows != m_Lines->m_RowCount
+				|| oldlines    != m_Lines->m_LineCount || count > 1 || lid < m_CaretPos.lineid )
 		{
 			m_RepaintAll = true;
 		}
 		else
 		{
 			m_RepaintSelection = true;
-			m_SelFirstRow =	m_CaretPos.rowid - m_CaretPos.subrowid;
-			m_SelLastRow = m_SelFirstRow + int(litfirst->RowCount()	- 1);
+			m_SelFirstRow = m_CaretPos.rowid - m_CaretPos.subrowid;
+			m_SelLastRow = m_SelFirstRow + int( litfirst->RowCount() - 1 );
 		}
 
 		AppearCaret();
 		UpdateScrollBarPos();
 
-		if(m_EditMode == emHexMode)
+		if( m_EditMode == emHexMode )
 		{
-			if(!m_CaretAtHexArea)
+			if( !m_CaretAtHexArea )
 			{
 				UpdateTextAreaXPos();
 				m_LastTextAreaXPos = m_TextAreaXPos;
 			}
 		}
 
-		m_LastCaretXPos	= m_CaretPos.xpos;
-
+		m_LastCaretXPos = m_CaretPos.xpos;
 	}
 	else
 	{
 		m_CaretPos.pos = redo->m_CaretPosAfter;
 		m_CaretPos.linepos = m_CaretPos.pos;
-
 		m_RepaintAll = true;
 		AppearCaret();
 		UpdateScrollBarPos();
 
-		if(!m_CaretAtHexArea)
+		if( !m_CaretAtHexArea )
 		{
 			UpdateTextAreaXPos();
 			m_LastTextAreaXPos = m_TextAreaXPos;
 		}
 	}
 
-	m_Selection	= false;
+	m_Selection = false;
+	bool oldmod = m_Modified;
 
-	bool oldmod=m_Modified;
-
-	if(m_UndoBuffer->GetPrevUndo() == m_SavePoint)
+	if( m_UndoBuffer->GetPrevUndo() == m_SavePoint )
 		m_Modified = false;
 	else
 		m_Modified = true;
 
 	DoSelectionChanged();
-	if(oldmod!=m_Modified) DoStatusChanged();
 
-	Refresh(false);
-	Update();	// repaint immediately
+	if( oldmod != m_Modified ) DoStatusChanged();
+
+	Refresh( false );
+	Update();   // repaint immediately
 }
 
-void MadEdit::GoToLine(int line)
+void MadEdit::GoToLine( int line )
 {
-	wxFileOffset oldCaretPos=m_CaretPos.pos;
-
+	wxFileOffset oldCaretPos = m_CaretPos.pos;
 	--line;
-	if(line<0) line=0;
-	else if(line>= int(m_Lines->m_LineCount)) line=int(m_Lines->m_LineCount-1);
+
+	if( line < 0 ) line = 0;
+	else
+		if( line >= int( m_Lines->m_LineCount ) ) line = int( m_Lines->m_LineCount - 1 );
 
 	m_UpdateValidPos = -1;
+	m_CaretPos.rowid = GetLineByLine( m_CaretPos.iter, m_CaretPos.pos, line );
+	m_CaretPos.lineid = line;
+	m_CaretPos.subrowid = 0;
+	m_CaretPos.linepos = 0;
+	m_CaretPos.xpos = 0;
+	m_CaretPos.extraspaces = 0;
+	m_LastCaretXPos = 0;
+	m_UpdateValidPos = 0;
+	UpdateCaret( m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
 
-	m_CaretPos.rowid=GetLineByLine(m_CaretPos.iter,	m_CaretPos.pos,	line);
-	m_CaretPos.lineid=line;
-	m_CaretPos.subrowid=0;
-	m_CaretPos.linepos=0;
-	m_CaretPos.xpos=0;
-	m_CaretPos.extraspaces=0;
-	m_LastCaretXPos=0;
-
-	m_UpdateValidPos=0;
-
-	UpdateCaret(m_CaretPos,	m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos);
-
-	if(m_EditMode==emHexMode)
+	if( m_EditMode == emHexMode )
 	{
-		AppearHexRow(m_CaretPos.pos);
+		AppearHexRow( m_CaretPos.pos );
+		m_CaretAtHalfByte = false;
 
-		m_CaretAtHalfByte=false;
-
-		if(!m_CaretAtHexArea)
+		if( !m_CaretAtHexArea )
 		{
 			UpdateTextAreaXPos();
 		}
 	}
 
-	AppearCaret(true);
+	AppearCaret( true );
 	UpdateScrollBarPos();
+	m_LastTextAreaXPos = m_TextAreaXPos;
+	m_RepaintAll = true;
+	Refresh( false );
 
-	m_LastTextAreaXPos=m_TextAreaXPos;
-
-	m_RepaintAll=true;
-	Refresh(false);
-
-	if(m_RecordCaretMovements && oldCaretPos !=	m_CaretPos.pos)
+	if( m_RecordCaretMovements && oldCaretPos != m_CaretPos.pos )
 	{
-		m_UndoBuffer->Add(oldCaretPos, m_CaretPos.pos);
+		m_UndoBuffer->Add( oldCaretPos, m_CaretPos.pos );
 	}
 
 	DoSelectionChanged();
-
 }
 
-void MadEdit::SetCaretPosition(wxFileOffset pos, wxFileOffset selbeg, wxFileOffset selend)
+void MadEdit::SetCaretPosition( wxFileOffset pos, wxFileOffset selbeg, wxFileOffset selend )
 {
-	wxFileOffset oldCaretPos=m_CaretPos.pos;
+	wxFileOffset oldCaretPos = m_CaretPos.pos;
 
-	if(pos<0) pos=0;
-	else if(pos>m_Lines->m_Size) pos=m_Lines->m_Size;
+	if( pos < 0 ) pos = 0;
+	else
+		if( pos > m_Lines->m_Size ) pos = m_Lines->m_Size;
 
-	m_CaretPos.pos=pos;
-
-	m_UpdateValidPos=-1;
-	UpdateCaretByPos(m_CaretPos, m_ActiveRowUChars,	m_ActiveRowWidths, m_CaretRowUCharPos);
-	m_UpdateValidPos=0;
-
-	AppearCaret(true);
+	m_CaretPos.pos = pos;
+	m_UpdateValidPos = -1;
+	UpdateCaretByPos( m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
+	m_UpdateValidPos = 0;
+	AppearCaret( true );
 	UpdateScrollBarPos();
+	m_LastCaretXPos = m_CaretPos.xpos;
 
-	m_LastCaretXPos=m_CaretPos.xpos;
-
-	if(m_EditMode == emHexMode)
+	if( m_EditMode == emHexMode )
 	{
-		if(!m_CaretAtHexArea)
+		if( !m_CaretAtHexArea )
 		{
 			UpdateTextAreaXPos();
 			m_LastTextAreaXPos = m_TextAreaXPos;
 		}
 	}
 
-	// update selection	pos
-	if(selbeg >	m_Lines->m_Size) selbeg=m_Lines->m_Size;
-	if(selend >	m_Lines->m_Size) selend=m_Lines->m_Size;
-	if(selbeg>=0 &&	selend>=0 && selbeg!=selend)
+	// update selection pos
+	if( selbeg > m_Lines->m_Size ) selbeg = m_Lines->m_Size;
+
+	if( selend > m_Lines->m_Size ) selend = m_Lines->m_Size;
+
+	if( selbeg >= 0 && selend >= 0 && selbeg != selend )
 	{
-		m_SelectionPos1.pos	= selbeg;
-		m_SelectionPos2.pos	= selend;
-		m_Selection=true;
+		m_SelectionPos1.pos = selbeg;
+		m_SelectionPos2.pos = selend;
+		m_Selection = true;
 		UpdateSelectionPos();
 	}
 
-	m_RepaintAll=true;
-	Refresh(false);
+	m_RepaintAll = true;
+	Refresh( false );
 
-	if(m_RecordCaretMovements && oldCaretPos !=	m_CaretPos.pos)
+	if( m_RecordCaretMovements && oldCaretPos != m_CaretPos.pos )
 	{
-		m_UndoBuffer->Add(oldCaretPos, m_CaretPos.pos);
+		m_UndoBuffer->Add( oldCaretPos, m_CaretPos.pos );
 	}
 
 	DoSelectionChanged();
 }
 
 
-bool MadEdit::LoadFromFile(const wxString &filename, const wxString &encoding)
+bool MadEdit::LoadFromFile( const wxString &filename, const wxString &encoding )
 {
-	wxFileName fn(filename);
-	if(MadDirExists(fn.GetPath(wxPATH_GET_VOLUME))==0)
+	wxFileName fn( filename );
+
+	if( MadDirExists( fn.GetPath( wxPATH_GET_VOLUME ) ) == 0 )
 	{
-		wxLogError(wxString(_("The Parent Directory of this file does not exist:"))+ wxT("\n\n") + filename);
+		wxLogError( wxString( _( "The Parent Directory of this file does not exist:" ) ) + wxT( "\n\n" ) + filename );
 		return false;
 	}
 
-	if(m_Lines->LoadFromFile(filename, encoding)==false)
+	if( m_Lines->LoadFromFile( filename, encoding ) == false )
 		return false;
 
 	m_UndoBuffer->Clear();
 	SetNeedSync();
-	m_SavePoint	= NULL;
+	m_SavePoint = NULL;
 	m_Modified = false;
-	m_ModificationTime = wxFileModificationTime(filename);
-	m_ReadOnly = false;	// use IsReadOnly()	to check ReadOnly or not
-
-	m_InsertNewLineType=m_NewLineType;
-
-	m_Selection	= false;
-	m_SelFirstRow=INT_MAX;
-	m_SelLastRow=-1;
-
+	m_ModificationTime = wxFileModificationTime( filename );
+	m_ReadOnly = false; // use IsReadOnly() to check ReadOnly or not
+	m_InsertNewLineType = m_NewLineType;
+	m_Selection = false;
+	m_SelFirstRow = INT_MAX;
+	m_SelLastRow = -1;
 	m_TopRow = 0;
 	m_TextTopRow = 0;
-	m_HexTopRow	= 0;
-	m_DrawingXPos =	0;
-
-	m_ValidPos_iter=m_Lines->m_LineList.begin();
-	m_ValidPos_lineid=0;
-	m_ValidPos_rowid=0;
-	m_ValidPos_pos=0;
-
-	m_CaretPos.Reset(m_ValidPos_iter);
-
-	m_LastCaretXPos	= 0;
+	m_HexTopRow = 0;
+	m_DrawingXPos = 0;
+	m_ValidPos_iter = m_Lines->m_LineList.begin();
+	m_ValidPos_lineid = 0;
+	m_ValidPos_rowid = 0;
+	m_ValidPos_pos = 0;
+	m_CaretPos.Reset( m_ValidPos_iter );
+	m_LastCaretXPos = 0;
 	m_DoRecountLineWidth = false;
 
-	if(m_EditMode == emHexMode)
+	if( m_EditMode == emHexMode )
 	{
-
 	}
 	else
 	{
-		UpdateCaret(m_CaretPos,	m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos);
+		UpdateCaret( m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
 	}
 
-	m_Selection	= false;
-	m_SelFirstRow=INT_MAX;
-	m_SelLastRow=-1;
-
-	m_SelectionPos1	= m_CaretPos;
-	m_SelectionPos2	= m_CaretPos;
+	m_Selection = false;
+	m_SelFirstRow = INT_MAX;
+	m_SelLastRow = -1;
+	m_SelectionPos1 = m_CaretPos;
+	m_SelectionPos2 = m_CaretPos;
 	m_SelectionBegin = &m_SelectionPos1;
 	m_SelectionEnd = &m_SelectionPos2;
-
 	AppearCaret();
 	UpdateScrollBarPos();
-
 	m_RepaintAll = true;
-	Refresh(false);
-
+	Refresh( false );
 	DoSelectionChanged();
 	DoStatusChanged();
-
 	return true;
 }
 
-bool MadEdit::SaveToFile(const wxString	&filename)
+bool MadEdit::SaveToFile( const wxString &filename )
 {
-	wxFileName fn(filename);
-	if(MadDirExists(fn.GetPath(wxPATH_GET_VOLUME))==0)
+	wxFileName fn( filename );
+
+	if( MadDirExists( fn.GetPath( wxPATH_GET_VOLUME ) ) == 0 )
 	{
-		wxLogError(wxString(_("The Parent Directory of this file does not exist:"))+ wxT("\n\n") + filename);
+		wxLogError( wxString( _( "The Parent Directory of this file does not exist:" ) ) + wxT( "\n\n" ) + filename );
 		return false;
 	}
 
-	wxFileOffset tempsize=m_Lines->GetMaxTempSize(filename);
-	wxMemorySize memsize=wxGetFreeMemory();
-
+	wxFileOffset tempsize = m_Lines->GetMaxTempSize( filename );
+	wxMemorySize memsize = wxGetFreeMemory();
 	wxString tempdir;
 
-	if(memsize>=0 && memsize < (tempsize+ 20*1024*1024)) //	use	disk as	tempdata
+	if( memsize >= 0 && memsize < ( tempsize + 20 * 1024 * 1024 ) ) // use disk as tempdata
 	{
-		wxFileName fn(filename);
-		tempdir=fn.GetPath(wxPATH_GET_VOLUME|wxPATH_GET_SEPARATOR);
-
+		wxFileName fn( filename );
+		tempdir = fn.GetPath( wxPATH_GET_VOLUME | wxPATH_GET_SEPARATOR );
 		// ToDo: test the disk size
-
 	}
 
-	if(m_Lines->SaveToFile(filename, tempdir)==false)
+	if( m_Lines->SaveToFile( filename, tempdir ) == false )
 	{
-		wxMessageDialog	dlg(this, wxString(_("Cannot save this file:"))	+wxT("\n\n") + filename,
-							wxT("MadEdit-Mod"),	wxOK|wxICON_ERROR );
-		dlg.SetOKLabel(wxMessageDialog::ButtonLabel(_("&Ok")));
+		wxMessageDialog dlg( this, wxString( _( "Cannot save this file:" ) ) + wxT( "\n\n" ) + filename,
+							 wxT( "MadEdit-Mod" ), wxOK | wxICON_ERROR );
+		dlg.SetOKLabel( wxMessageDialog::ButtonLabel( _( "&Ok" ) ) );
 		dlg.ShowModal();
-
 		return false;
 	}
 
-	m_SavePoint	= m_UndoBuffer->GetPrevUndo();
-	m_Modified=false;
+	m_SavePoint = m_UndoBuffer->GetPrevUndo();
+	m_Modified = false;
 	wxLogNull nolog;
-	m_ModificationTime = wxFileModificationTime(filename);
-	m_ReadOnly=false;
+	m_ModificationTime = wxFileModificationTime( filename );
+	m_ReadOnly = false;
 	DoStatusChanged();
-
 	return true;
 }
 
-int	MadEdit::Save(bool ask,	const wxString &title, bool	saveas)	// return YES, NO, CANCEL
+int MadEdit::Save( bool ask, const wxString &title, bool saveas ) // return YES, NO, CANCEL
 {
-	int	ret=wxID_YES;
-	bool refresh = false; 
-	wxString filename=m_Lines->m_Name;
-	if(filename.IsEmpty())
+	int ret = wxID_YES;
+	bool refresh = false;
+	wxString filename = m_Lines->m_Name;
+
+	if( filename.IsEmpty() )
 	{
-		filename=title;
+		filename = title;
 	}
 
-	if(m_Modified && ask) //ask	the	user to	save this file
+	if( m_Modified && ask ) //ask the user to save this file
 	{
-		wxMessageDialog	dlg(this, wxString(_("Do you want to save this file?"))	+wxT("\n\n") + filename,
-			wxT("MadEdit-Mod"),	wxYES_NO|wxCANCEL|wxICON_QUESTION );
-		dlg.SetYesNoCancelLabels(wxMessageDialog::ButtonLabel(_("&Yes")),
-			wxMessageDialog::ButtonLabel(_("&No")),	wxMessageDialog::ButtonLabel(_("&Cancel")));
-		ret=dlg.ShowModal();
+		wxMessageDialog dlg( this, wxString( _( "Do you want to save this file?" ) ) + wxT( "\n\n" ) + filename,
+							 wxT( "MadEdit-Mod" ), wxYES_NO | wxCANCEL | wxICON_QUESTION );
+		dlg.SetYesNoCancelLabels( wxMessageDialog::ButtonLabel( _( "&Yes" ) ),
+								  wxMessageDialog::ButtonLabel( _( "&No" ) ), wxMessageDialog::ButtonLabel( _( "&Cancel" ) ) );
+		ret = dlg.ShowModal();
 	}
 
-	if(saveas || (ret==wxID_YES	&& m_Modified))
+	if( saveas || ( ret == wxID_YES && m_Modified ) )
 	{
 		wxString dlgtitle;
-		if(saveas)
+
+		if( saveas )
 		{
-			dlgtitle=_("Save File As");
+			dlgtitle = _( "Save File As" );
 		}
 		else
 		{
-			dlgtitle=_("Save File");
+			dlgtitle = _( "Save File" );
 		}
 
-		if(saveas || m_Lines->m_Name.IsEmpty())	 //	choose a file to save
+		if( saveas || m_Lines->m_Name.IsEmpty() ) // choose a file to save
 		{
 			static int filterIndex = 0;
-			wxString fileFilter = wxString(wxT("All files (*;*.*)|")) + wxFileSelectorDefaultWildcardStr + wxT("|68k Assembly (*.68k)|*.68k|ActionScript (*.as;*.asc;*.mx)|*.as;*.asc;*.mx|Ada (*.a;*.ada;*.adb;*.ads)|*.a;*.ada;*.adb;*.ads|Apache Conf (*.conf;*.htaccess)|*.conf;*.htaccess|Bash Shell Script (*.bsh;*.configure;*.sh)|*.bsh;*.configure;*.sh|Boo (*.boo)|*.boo|C (*.c;*.h)|*.c;*.h|C# (*.cs)|*.cs|C-Shell Script (*.csh)|*.csh|Caml (*.ml;*.mli)|*.ml;*.mli|Cascading Style Sheet (*.css)|*.css|Cilk (*.cilk;*.cilkh)|*.cilk;*.cilkh|Cobra (*.cobra)|*.cobra|ColdFusion (*.cfc;*.cfm;*.cfml;*.dbm)|*.cfc;*.cfm;*.cfml;*.dbm|CPP (*.c++;*.cc;*.cpp;*.cxx;*.h++;*.hh;*.hpp;*.hxx)|*.c++;*.cc;*.cpp;*.cxx;*.h++;*.hh;*.hpp;*.hxx|D (*.d)|*.d|Diff File (*.diff;*.patch)|*.diff;*.patch|Django (*.django)|*.django|DOS Batch Script (*.bat;*.cmd)|*.bat;*.cmd|DOT (*.dot)|*.dot|DSP56K Assembly (*.56k)|*.56k|Editra Style Sheet (*.ess)|*.ess|Edje (*.edc)|*.edc|Eiffel (*.e)|*.e|Erlang (*.erl)|*.erl|Ferite (*.fe)|*.fe|FlagShip (*.prg)|*.prg|Forth (*.4th;*.fs;*.fth;*.seq)|*.4th;*.fs;*.fth;*.seq|Fortran 77 (*.f;*.for)|*.f;*.for|Fortran 95 (*.f2k;*.f90;*.f95;*.fpp)|*.f2k;*.f90;*.f95;*.fpp|GLSL (*.frag;*.glsl;*.vert)|*.frag;*.glsl;*.vert|GNU Assembly (*.gasm)|*.gasm|Groovy (*.groovy)|*.groovy|Gui4Cli (*.gc;*.gui)|*.gc;*.gui|Haskell (*.hs)|*.hs|HaXe (*.hx;*.hxml)|*.hx;*.hxml|HTML (*.htm;*.html;*.shtm;*.shtml;*.xhtml)|*.htm;*.html;*.shtm;*.shtml;*.xhtml|Inno Setup Script (*.iss)|*.iss|IssueList (*.isl)|*.isl|Java (*.java)|*.java|JavaScript (*.js)|*.js|Kix (*.kix)|*.kix|Korn Shell Script (*.ksh)|*.ksh|LaTeX (*.aux;*.sty;*.tex)|*.aux;*.sty;*.tex|Lisp (*.cl;*.lisp)|*.cl;*.lisp|Lout (*.lt)|*.lt|Lua (*.lua)|*.lua|Mako (*.mako;*.mao)|*.mako;*.mao|MASM (*.asm;*.masm)|*.asm;*.masm|Matlab (*.matlab)|*.matlab|Microsoft SQL (*.mssql)|*.mssql|Netwide Assembler (*.nasm)|*.nasm|newLISP (*.lsp)|*.lsp|NONMEM Control Stream (*.ctl)|*.ctl|Nullsoft Installer Script (*.nsh;*.nsi)|*.nsh;*.nsi|Objective C (*.m;*.mm)|*.m;*.mm|Octave (*.oct;*.octave)|*.oct;*.octave|OOC (*.ooc)|*.ooc|Pascal (*.dfm;*.dpk;*.dpr;*.inc;*.p;*.pas;*.pp)|*.dfm;*.dpk;*.dpr;*.inc;*.p;*.pas;*.pp|Perl (*.cgi;*.pl;*.pm;*.pod)|*.cgi;*.pl;*.pm;*.pod|PHP (*.php;*.php3;*.phtm;*.phtml)|*.php;*.php3;*.phtm;*.phtml|Pike (*.pike)|*.pike|PL/SQL (*.plsql)|*.plsql|Plain Text (*.txt)|*.txt|Postscript (*.ai;*.ps)|*.ai;*.ps|Progress 4GL (*.4gl)|*.4gl|Properties (*.cfg;*.cnf;*.inf;*.ini;*.reg;*.url)|*.cfg;*.cnf;*.inf;*.ini;*.reg;*.url|Python (*.py;*.python;*.pyw)|*.py;*.python;*.pyw|R (*.r)|*.r|Ruby (*.gemspec;*.rake;*.rb;*.rbw;*.rbx)|*.gemspec;*.rake;*.rb;*.rbw;*.rbx|S (*.s)|*.s|Scheme (*.scm;*.smd;*.ss)|*.scm;*.smd;*.ss|Smalltalk (*.st)|*.st|SQL (*.sql)|*.sql|Squirrel (*.nut)|*.nut|Stata (*.ado;*.do)|*.ado;*.do|System Verilog (*.sv;*.svh)|*.sv;*.svh|Tcl/Tk (*.itcl;*.tcl;*.tk)|*.itcl;*.tcl;*.tk|Vala (*.vala)|*.vala|VBScript (*.dsm;*.vbs)|*.dsm;*.vbs|Verilog (*.v)|*.v|VHDL (*.vh;*.vhd;*.vhdl)|*.vh;*.vhd;*.vhdl|Visual Basic (*.bas;*.cls;*.frm;*.vb)|*.bas;*.cls;*.frm;*.vb|XML (*.axl;*.dtd;*.plist;*.rdf;*.svg;*.xml;*.xrc;*.xsd;*.xsl;*.xslt;*.xul)|*.axl;*.dtd;*.plist;*.rdf;*.svg;*.xml;*.xrc;*.xsd;*.xsl;*.xslt;*.xul|Xtext (*.xtext)|*.xtext|YAML (*.yaml;*.yml)|*.yaml;*.yml");
-			wxFileDialog dlg(this, dlgtitle, wxEmptyString, filename, fileFilter,
+			wxString fileFilter = wxString( wxT( "All files (*;*.*)|" ) ) + wxFileSelectorDefaultWildcardStr + wxT( "|68k Assembly (*.68k)|*.68k|ActionScript (*.as;*.asc;*.mx)|*.as;*.asc;*.mx|Ada (*.a;*.ada;*.adb;*.ads)|*.a;*.ada;*.adb;*.ads|Apache Conf (*.conf;*.htaccess)|*.conf;*.htaccess|Bash Shell Script (*.bsh;*.configure;*.sh)|*.bsh;*.configure;*.sh|Boo (*.boo)|*.boo|C (*.c;*.h)|*.c;*.h|C# (*.cs)|*.cs|C-Shell Script (*.csh)|*.csh|Caml (*.ml;*.mli)|*.ml;*.mli|Cascading Style Sheet (*.css)|*.css|Cilk (*.cilk;*.cilkh)|*.cilk;*.cilkh|Cobra (*.cobra)|*.cobra|ColdFusion (*.cfc;*.cfm;*.cfml;*.dbm)|*.cfc;*.cfm;*.cfml;*.dbm|CPP (*.c++;*.cc;*.cpp;*.cxx;*.h++;*.hh;*.hpp;*.hxx)|*.c++;*.cc;*.cpp;*.cxx;*.h++;*.hh;*.hpp;*.hxx|D (*.d)|*.d|Diff File (*.diff;*.patch)|*.diff;*.patch|Django (*.django)|*.django|DOS Batch Script (*.bat;*.cmd)|*.bat;*.cmd|DOT (*.dot)|*.dot|DSP56K Assembly (*.56k)|*.56k|Editra Style Sheet (*.ess)|*.ess|Edje (*.edc)|*.edc|Eiffel (*.e)|*.e|Erlang (*.erl)|*.erl|Ferite (*.fe)|*.fe|FlagShip (*.prg)|*.prg|Forth (*.4th;*.fs;*.fth;*.seq)|*.4th;*.fs;*.fth;*.seq|Fortran 77 (*.f;*.for)|*.f;*.for|Fortran 95 (*.f2k;*.f90;*.f95;*.fpp)|*.f2k;*.f90;*.f95;*.fpp|GLSL (*.frag;*.glsl;*.vert)|*.frag;*.glsl;*.vert|GNU Assembly (*.gasm)|*.gasm|Groovy (*.groovy)|*.groovy|Gui4Cli (*.gc;*.gui)|*.gc;*.gui|Haskell (*.hs)|*.hs|HaXe (*.hx;*.hxml)|*.hx;*.hxml|HTML (*.htm;*.html;*.shtm;*.shtml;*.xhtml)|*.htm;*.html;*.shtm;*.shtml;*.xhtml|Inno Setup Script (*.iss)|*.iss|IssueList (*.isl)|*.isl|Java (*.java)|*.java|JavaScript (*.js)|*.js|Kix (*.kix)|*.kix|Korn Shell Script (*.ksh)|*.ksh|LaTeX (*.aux;*.sty;*.tex)|*.aux;*.sty;*.tex|Lisp (*.cl;*.lisp)|*.cl;*.lisp|Lout (*.lt)|*.lt|Lua (*.lua)|*.lua|Mako (*.mako;*.mao)|*.mako;*.mao|MASM (*.asm;*.masm)|*.asm;*.masm|Matlab (*.matlab)|*.matlab|Microsoft SQL (*.mssql)|*.mssql|Netwide Assembler (*.nasm)|*.nasm|newLISP (*.lsp)|*.lsp|NONMEM Control Stream (*.ctl)|*.ctl|Nullsoft Installer Script (*.nsh;*.nsi)|*.nsh;*.nsi|Objective C (*.m;*.mm)|*.m;*.mm|Octave (*.oct;*.octave)|*.oct;*.octave|OOC (*.ooc)|*.ooc|Pascal (*.dfm;*.dpk;*.dpr;*.inc;*.p;*.pas;*.pp)|*.dfm;*.dpk;*.dpr;*.inc;*.p;*.pas;*.pp|Perl (*.cgi;*.pl;*.pm;*.pod)|*.cgi;*.pl;*.pm;*.pod|PHP (*.php;*.php3;*.phtm;*.phtml)|*.php;*.php3;*.phtm;*.phtml|Pike (*.pike)|*.pike|PL/SQL (*.plsql)|*.plsql|Plain Text (*.txt)|*.txt|Postscript (*.ai;*.ps)|*.ai;*.ps|Progress 4GL (*.4gl)|*.4gl|Properties (*.cfg;*.cnf;*.inf;*.ini;*.reg;*.url)|*.cfg;*.cnf;*.inf;*.ini;*.reg;*.url|Python (*.py;*.python;*.pyw)|*.py;*.python;*.pyw|R (*.r)|*.r|Ruby (*.gemspec;*.rake;*.rb;*.rbw;*.rbx)|*.gemspec;*.rake;*.rb;*.rbw;*.rbx|S (*.s)|*.s|Scheme (*.scm;*.smd;*.ss)|*.scm;*.smd;*.ss|Smalltalk (*.st)|*.st|SQL (*.sql)|*.sql|Squirrel (*.nut)|*.nut|Stata (*.ado;*.do)|*.ado;*.do|System Verilog (*.sv;*.svh)|*.sv;*.svh|Tcl/Tk (*.itcl;*.tcl;*.tk)|*.itcl;*.tcl;*.tk|Vala (*.vala)|*.vala|VBScript (*.dsm;*.vbs)|*.dsm;*.vbs|Verilog (*.v)|*.v|VHDL (*.vh;*.vhd;*.vhdl)|*.vh;*.vhd;*.vhdl|Visual Basic (*.bas;*.cls;*.frm;*.vb)|*.bas;*.cls;*.frm;*.vb|XML (*.axl;*.dtd;*.plist;*.rdf;*.svg;*.xml;*.xrc;*.xsd;*.xsl;*.xslt;*.xul)|*.axl;*.dtd;*.plist;*.rdf;*.svg;*.xml;*.xrc;*.xsd;*.xsl;*.xslt;*.xul|Xtext (*.xtext)|*.xtext|YAML (*.yaml;*.yml)|*.yaml;*.yml" );
+			wxFileDialog dlg( this, dlgtitle, wxEmptyString, filename, fileFilter,
 #if wxCHECK_VERSION(2,8,0)
-			wxFD_SAVE|wxFD_OVERWRITE_PROMPT );
+							  wxFD_SAVE | wxFD_OVERWRITE_PROMPT );
 #else
-			wxSAVE|wxOVERWRITE_PROMPT );
+							  wxSAVE | wxOVERWRITE_PROMPT );
 #endif
-			dlg.SetFilterIndex(filterIndex);
-			dlg.SetReturnCode(wxID_OK);
+			dlg.SetFilterIndex( filterIndex );
+			dlg.SetReturnCode( wxID_OK );
+			ret = dlg.ShowModal();
+			filterIndex = dlg.GetFilterIndex();
 
-			ret=dlg.ShowModal();
-			filterIndex	= dlg.GetFilterIndex();
-			if(ret==wxID_OK)
+			if( ret == wxID_OK )
 			{
-				g_MB2WC_check_dir_filename=true;
-				filename=dlg.GetPath();
-				g_MB2WC_check_dir_filename=false;
-				ret=wxID_YES;
-				refresh	= true;
+				g_MB2WC_check_dir_filename = true;
+				filename = dlg.GetPath();
+				g_MB2WC_check_dir_filename = false;
+				ret = wxID_YES;
+				refresh = true;
 			}
 		}
 
-		if(ret==wxID_YES)
+		if( ret == wxID_YES )
 		{
-			SaveToFile(filename);
-			if(refresh)
+			SaveToFile( filename );
+
+			if( refresh )
 			{
-				m_RepaintAll=true;
-				Refresh(false);
+				m_RepaintAll = true;
+				Refresh( false );
 			}
 		}
 	}
@@ -2577,300 +2549,312 @@ int	MadEdit::Save(bool ask,	const wxString &title, bool	saveas)	// return YES, N
 
 bool MadEdit::Reload()
 {
-	if(m_Lines->m_Name.IsEmpty()) return false;
+	if( m_Lines->m_Name.IsEmpty() ) return false;
 
-	if(m_Modified)
+	if( m_Modified )
 	{
-		wxMessageDialog dlg(this, _("Do you want to discard changes?"), wxT("MadEdit-Mod"), wxYES_NO|wxICON_QUESTION );
-		dlg.SetYesNoLabels(wxMessageDialog::ButtonLabel(_("&Yes")), wxMessageDialog::ButtonLabel(_("&No")));
-		if(dlg.ShowModal()!=wxID_YES)
+		wxMessageDialog dlg( this, _( "Do you want to discard changes?" ), wxT( "MadEdit-Mod" ), wxYES_NO | wxICON_QUESTION );
+		dlg.SetYesNoLabels( wxMessageDialog::ButtonLabel( _( "&Yes" ) ), wxMessageDialog::ButtonLabel( _( "&No" ) ) );
+
+		if( dlg.ShowModal() != wxID_YES )
 		{
 			return false;
 		}
 	}
 
-	int	toprow=m_TopRow;
-	wxFileOffset oldCaretPos=m_CaretPos.pos;
-	MadEditMode	editmode=m_EditMode;
-
-	LoadFromFile(m_Lines->m_Name, m_Lines->m_Encoding->GetName());
-	SetEditMode(editmode);
-	RestorePosition(oldCaretPos, toprow);
+	int toprow = m_TopRow;
+	wxFileOffset oldCaretPos = m_CaretPos.pos;
+	MadEditMode editmode = m_EditMode;
+	LoadFromFile( m_Lines->m_Name, m_Lines->m_Encoding->GetName() );
+	SetEditMode( editmode );
+	RestorePosition( oldCaretPos, toprow );
 	return true;
 }
 
-bool MadEdit::ReloadByModificationTime(bool	LostCapture/* =	false*/)
+bool MadEdit::ReloadByModificationTime( bool LostCapture/* = false*/ )
 {
-	if(m_Lines->m_Name.IsEmpty()) return false;
+	if( m_Lines->m_Name.IsEmpty() ) return false;
 
-	if(LostCapture)
+	if( LostCapture )
 	{
-		wxCommandEvent event(CHECK_MODIFICATION_TIME);
-		event.SetEventObject(this);
+		wxCommandEvent event( CHECK_MODIFICATION_TIME );
+		event.SetEventObject( this );
 		AddPendingEvent( event );
 		return false;
 	}
-	wxLogNull nolog;
-	time_t modtime=wxFileModificationTime(m_Lines->m_Name);
 
-	if(modtime==0) // the file has been	deleted
+	wxLogNull nolog;
+	time_t modtime = wxFileModificationTime( m_Lines->m_Name );
+
+	if( modtime == 0 ) // the file has been deleted
 	{
-		m_ModificationTime=0;
+		m_ModificationTime = 0;
 		return false;
 	}
 
-	// Check if	the	file attribute was changed
-	bool writable =	wxFileName::IsFileWritable(m_Lines->m_Name);
-	bool readable =	wxFileName::IsFileReadable(m_Lines->m_Name);
-	if(!readable)
+	// Check if the file attribute was changed
+	bool writable = wxFileName::IsFileWritable( m_Lines->m_Name );
+	bool readable = wxFileName::IsFileReadable( m_Lines->m_Name );
+
+	if( !readable )
 	{
 		m_Modified = true;
 		DoStatusChanged();
 		return false;
 	}
 
-	if(!((IsReadOnly() && writable)	|| (!IsReadOnly() && !writable)))
-		if(modtime == m_ModificationTime) return false;	// the file	doesn't	change.
+	if( !( ( IsReadOnly() && writable ) || ( !IsReadOnly() && !writable ) ) )
+		if( modtime == m_ModificationTime ) return false; // the file doesn't change.
 
 	m_ModificationTime = modtime;
+	wxMessageDialog dlg( this,
+						 wxString( _( "This file has been changed by another application." ) ) + wxT( "\n" ) +
+						 wxString( _( "Do you want to reload it?" ) ) + wxT( "\n\n" ) + m_Lines->m_Name,
+						 wxT( "MadEdit-Mod" ), wxYES_NO | wxICON_QUESTION );
+	dlg.SetYesNoLabels( wxMessageDialog::ButtonLabel( _( "&Yes" ) ), wxMessageDialog::ButtonLabel( _( "&No" ) ) );
 
-	wxMessageDialog	dlg(this,
-		wxString(_("This file has been changed by another application."))+ wxT("\n")+
-		wxString(_("Do you want to reload it?"))+ wxT("\n\n")+ m_Lines->m_Name,
-		wxT("MadEdit-Mod"), wxYES_NO|wxICON_QUESTION );
-	dlg.SetYesNoLabels(wxMessageDialog::ButtonLabel(_("&Yes")), wxMessageDialog::ButtonLabel(_("&No")));
 	//wxMouseCaptureLostEvent mevt(GetId());
-	//DBOUT( "Reload\n"	);
+	//DBOUT( "Reload\n" );
 	//DBOUT((m_MouseLeftDown?"LDown:TRUE\n":"LDown:FALSE\n"));
 	//if(LostCapture)
-	//	  mevt.SetEventObject(this);	
-	if(dlg.ShowModal()!=wxID_YES)
+	//    mevt.SetEventObject(this);
+	if( dlg.ShowModal() != wxID_YES )
 	{
 		//if(LostCapture)
-			//AddPendingEvent( mevt	); 
+		//AddPendingEvent( mevt );
 		return false;
 	}
 
 	//if(LostCapture)
-		//AddPendingEvent( mevt	); 
-
-	// YES,	reload it.
+	//AddPendingEvent( mevt );
+	// YES, reload it.
 	return Reload();
 }
 
-void MadEdit::RestorePosition(wxFileOffset pos,	int	toprow)
+void MadEdit::RestorePosition( wxFileOffset pos, int toprow )
 {
-	if(pos > m_Lines->m_Size) pos=m_Lines->m_Size;
+	if( pos > m_Lines->m_Size ) pos = m_Lines->m_Size;
 
-	m_CaretPos.pos=pos;
-
-	m_UpdateValidPos=-1;
-	UpdateCaretByPos(m_CaretPos, m_ActiveRowUChars,	m_ActiveRowWidths, m_CaretRowUCharPos);
-	m_UpdateValidPos=0;
-
-	m_TopRow=toprow;
-
+	m_CaretPos.pos = pos;
+	m_UpdateValidPos = -1;
+	UpdateCaretByPos( m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
+	m_UpdateValidPos = 0;
+	m_TopRow = toprow;
 	AppearCaret();
 	UpdateScrollBarPos();
+	m_LastCaretXPos = m_CaretPos.xpos;
 
-	m_LastCaretXPos=m_CaretPos.xpos;
-
-	if(m_EditMode == emHexMode)
+	if( m_EditMode == emHexMode )
 	{
-		if(!m_CaretAtHexArea)
+		if( !m_CaretAtHexArea )
 		{
 			UpdateTextAreaXPos();
 			m_LastTextAreaXPos = m_TextAreaXPos;
 		}
 	}
 
-	m_RepaintAll=true;
-	Refresh(false);
+	m_RepaintAll = true;
+	Refresh( false );
 
-	if(m_RecordCaretMovements && 0 != m_CaretPos.pos)
+	if( m_RecordCaretMovements && 0 != m_CaretPos.pos )
 	{
-		m_UndoBuffer->Add(0, m_CaretPos.pos);
+		m_UndoBuffer->Add( 0, m_CaretPos.pos );
 	}
 
 	DoSelectionChanged();
 }
 
 
-/**************	Find/Replace functions ****************/
+/************** Find/Replace functions ****************/
 
-MadSearchResult	MadEdit::FindTextNext(const	wxString &text,
-				bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
-				wxFileOffset rangeFrom,	wxFileOffset rangeTo)
+MadSearchResult MadEdit::FindTextNext( const wxString &text,
+									   bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
+									   wxFileOffset rangeFrom, wxFileOffset rangeTo )
 {
-	MadCaretPos	bpos, epos;
+	MadCaretPos bpos, epos;
 	MadUCQueue ucharQueue;
-	vector<int>	widthArray;
-	int	tmp;
+	vector<int> widthArray;
+	int tmp;
 
-	if(rangeFrom < 0)
+	if( rangeFrom < 0 )
 	{
-		bpos=m_CaretPos;
+		bpos = m_CaretPos;
 	}
 	else
 	{
-		if(rangeFrom > GetFileSize()) rangeFrom	= GetFileSize();
+		if( rangeFrom > GetFileSize() ) rangeFrom = GetFileSize();
+
 		bpos.pos = rangeFrom;
-		UpdateCaretByPos(bpos, ucharQueue, widthArray, tmp);
+		UpdateCaretByPos( bpos, ucharQueue, widthArray, tmp );
 	}
 
-	if(rangeTo < 0)
+	if( rangeTo < 0 )
 	{
-		epos.iter=m_Lines->m_LineList.end();
+		epos.iter = m_Lines->m_LineList.end();
 		--epos.iter;
-		epos.linepos=epos.iter->m_Size;
-		epos.pos=m_Lines->m_Size;
+		epos.linepos = epos.iter->m_Size;
+		epos.pos = m_Lines->m_Size;
 	}
 	else
 	{
-		if(rangeTo > GetFileSize())	rangeTo	= GetFileSize();
+		if( rangeTo > GetFileSize() ) rangeTo = GetFileSize();
+
 		epos.pos = rangeTo;
-		UpdateCaretByPos(epos, ucharQueue, widthArray, tmp);
+		UpdateCaretByPos( epos, ucharQueue, widthArray, tmp );
 	}
 
-	MadSearchResult	state=Search(bpos, epos, text, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline);
-	if(state==SR_YES)
+	MadSearchResult state = Search( bpos, epos, text, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
+
+	if( state == SR_YES )
 	{
-		SetSelection(bpos.pos, epos.pos);
-		
-		if (IsTextFile() &&	m_BookmarkInSearch && !(m_Lines->m_LineList.IsBookmarked(bpos.iter))) m_Lines->m_LineList.SetBookmark(bpos.iter);
+		SetSelection( bpos.pos, epos.pos );
+
+		if( IsTextFile() && m_BookmarkInSearch && !( m_Lines->m_LineList.IsBookmarked( bpos.iter ) ) ) m_Lines->m_LineList.SetBookmark( bpos.iter );
 	}
 
 	return state;
 }
 
-MadSearchResult	MadEdit::FindTextPrevious(const	wxString &text,
-				bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
-				wxFileOffset rangeFrom,	wxFileOffset rangeTo)
+MadSearchResult MadEdit::FindTextPrevious( const wxString &text,
+		bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
+		wxFileOffset rangeFrom, wxFileOffset rangeTo )
 {
-	MadCaretPos	bpos, epos;
+	MadCaretPos bpos, epos;
 
-	if(rangeFrom < 0)
+	if( rangeFrom < 0 )
 	{
-		epos=m_CaretPos;
+		epos = m_CaretPos;
 	}
 	else
 	{
 		MadUCQueue ucharQueue;
-		vector<int>	widthArray;
-		int	tmp;
-		if(rangeFrom > GetFileSize()) rangeFrom	= GetFileSize();
+		vector<int> widthArray;
+		int tmp;
+
+		if( rangeFrom > GetFileSize() ) rangeFrom = GetFileSize();
+
 		epos.pos = rangeFrom;
-		UpdateCaretByPos(epos, ucharQueue, widthArray, tmp);
+		UpdateCaretByPos( epos, ucharQueue, widthArray, tmp );
 	}
 
-	if(rangeTo < 0)	rangeTo	= 0;
-	else if(rangeTo	> GetFileSize()) rangeTo = GetFileSize();
+	if( rangeTo < 0 ) rangeTo = 0;
+	else
+		if( rangeTo > GetFileSize() ) rangeTo = GetFileSize();
 
-	if(epos.pos	<= rangeTo)	return SR_NO;
+	if( epos.pos <= rangeTo ) return SR_NO;
 
-	size_t searchsize= 50 *	1024;
-	if(searchsize< text.Len()*8) searchsize=text.Len()*8;
+	size_t searchsize = 50 * 1024;
 
-	wxFileOffset startpos=epos.pos;
+	if( searchsize < text.Len() * 8 ) searchsize = text.Len() * 8;
 
-	for(;;)
+	wxFileOffset startpos = epos.pos;
+
+	for( ;; )
 	{
-		startpos -=	searchsize;
-		if(startpos<rangeTo)
+		startpos -= searchsize;
+
+		if( startpos < rangeTo )
 		{
-			startpos=rangeTo;
+			startpos = rangeTo;
 		}
 		else
 		{
-			size_t s=size_t(startpos);
-			s=s%4;
-			startpos-=s;
+			size_t s = size_t( startpos );
+			s = s % 4;
+			startpos -= s;
 		}
 
-		wxFileOffset len=epos.pos-startpos;
-		if(epos.linepos	>= len)
+		wxFileOffset len = epos.pos - startpos;
+
+		if( epos.linepos >= len )
 		{
-			bpos.pos=epos.pos-len;
-			bpos.iter=epos.iter;
-			bpos.linepos=epos.linepos-len;
+			bpos.pos = epos.pos - len;
+			bpos.iter = epos.iter;
+			bpos.linepos = epos.linepos - len;
 		}
 		else
 		{
-			bpos.pos=startpos;
-			GetLineByPos(bpos.iter,	bpos.pos, bpos.rowid);
-			bpos.linepos=0;
-			startpos=bpos.pos;
+			bpos.pos = startpos;
+			GetLineByPos( bpos.iter, bpos.pos, bpos.rowid );
+			bpos.linepos = 0;
+			startpos = bpos.pos;
 		}
 
-		MadCaretPos	bpos1=bpos,	epos1=epos;
-		int	state=Search(bpos1,	epos1, text, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline);
-		if(state==SR_EXPR_ERROR)
+		MadCaretPos bpos1 = bpos, epos1 = epos;
+		int state = Search( bpos1, epos1, text, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
+
+		if( state == SR_EXPR_ERROR )
 		{
 			return SR_EXPR_ERROR;
 		}
 
-		if(state==SR_YES) // found
+		if( state == SR_YES ) // found
 		{
-			MadLines::NextUCharFuncPtr NextUChar=m_Lines->NextUChar;
+			MadLines::NextUCharFuncPtr NextUChar = m_Lines->NextUChar;
 			MadUCQueue ucq;
+			MadCaretPos bp, ep;
 
-			MadCaretPos	bp,	ep;
 			do
 			{
-				bp=bpos1;
-				ep=epos1;
-
+				bp = bpos1;
+				ep = epos1;
 				// advance one uchar
-				m_Lines->InitNextUChar(bpos1.iter, bpos1.linepos);
-				if(!(m_Lines->*NextUChar)(ucq))
+				m_Lines->InitNextUChar( bpos1.iter, bpos1.linepos );
+
+				if( !( m_Lines->*NextUChar )( ucq ) )
 				{
 					++bpos1.iter;
-					bpos1.linepos=0;
-					m_Lines->InitNextUChar(bpos1.iter, 0);
-					(m_Lines->*NextUChar)(ucq);
+					bpos1.linepos = 0;
+					m_Lines->InitNextUChar( bpos1.iter, 0 );
+					( m_Lines->*NextUChar )( ucq );
 				}
-				bpos1.pos+=ucq.back().second;
-				bpos1.linepos+=ucq.back().second;
 
-				epos1=epos;
+				bpos1.pos += ucq.back().second;
+				bpos1.linepos += ucq.back().second;
+				epos1 = epos;
 			}
-			while(Search(bpos1,	epos1, text, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline));
+			while( Search( bpos1, epos1, text, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline ) );
 
-			SetSelection(bp.pos, ep.pos, true);
-			if (IsTextFile() && m_BookmarkInSearch && !(m_Lines->m_LineList.IsBookmarked(bp.iter))) m_Lines->m_LineList.SetBookmark(bp.iter);
+			SetSelection( bp.pos, ep.pos, true );
+
+			if( IsTextFile() && m_BookmarkInSearch && !( m_Lines->m_LineList.IsBookmarked( bp.iter ) ) ) m_Lines->m_LineList.SetBookmark( bp.iter );
+
 			return SR_YES;
 		}
 
 		// not found
-		if(startpos<=rangeTo) break;
+		if( startpos <= rangeTo ) break;
 
-		epos=bpos;
-		size_t s=text.Len()*4;
+		epos = bpos;
+		size_t s = text.Len() * 4;
 
-		if(epos.pos+ s > epos1.pos)
+		if( epos.pos + s > epos1.pos )
 		{
-			s=text.Len();
-			if(epos.pos+ s > epos1.pos)
+			s = text.Len();
+
+			if( epos.pos + s > epos1.pos )
 			{
-				s=0;
+				s = 0;
 			}
 		}
 
-		if(s!=0)
+		if( s != 0 )
 		{
-			epos.pos+=s;
+			epos.pos += s;
+
 			do
 			{
-				len=epos.iter->m_Size-epos.linepos;
-				if(len>s) len=s;
+				len = epos.iter->m_Size - epos.linepos;
 
-				if((epos.linepos+=len)==epos.iter->m_Size)
+				if( len > s ) len = s;
+
+				if( ( epos.linepos += len ) == epos.iter->m_Size )
 				{
-					epos.linepos=0;
+					epos.linepos = 0;
 					++epos.iter;
 				}
 			}
-			while((s-=len) > 0);
+			while( ( s -= len ) > 0 );
 		}
 	}
 
@@ -2878,474 +2862,496 @@ MadSearchResult	MadEdit::FindTextPrevious(const	wxString &text,
 }
 
 
-bool MadEdit::StringToHex(wxString ws, vector<wxByte> &hex)
+bool MadEdit::StringToHex( wxString ws, vector<wxByte> &hex )
 {
-	ws.Trim(false);
+	ws.Trim( false );
+	size_t len = ws.Len();
 
-	size_t len=ws.Len();
-	if(len==0)
-		return true;	// it's	OK!!!
+	if( len == 0 )
+		return true;    // it's OK!!!
 
-	wxString errmsg(_("The input string is not a valid Hex-String:"));
-
-	const wxChar *pc=ws.c_str();
+	wxString errmsg( _( "The input string is not a valid Hex-String:" ) );
+	const wxChar *pc = ws.c_str();
 
 	do
 	{
-		if(len<2)
+		if( len < 2 )
 		{
-			wxMessageDialog	dlg(NULL, errmsg+wxT("\n\n")+ws,
-							wxT("MadEdit-Mod"),	wxOK|wxICON_ERROR );
-			dlg.SetOKLabel(wxMessageDialog::ButtonLabel(_("&Ok")));
+			wxMessageDialog dlg( NULL, errmsg + wxT( "\n\n" ) + ws,
+								 wxT( "MadEdit-Mod" ), wxOK | wxICON_ERROR );
+			dlg.SetOKLabel( wxMessageDialog::ButtonLabel( _( "&Ok" ) ) );
 			dlg.ShowModal();
 			return false;
 		}
 
-		int	b0=FromHex(*pc++);
-		int	b1=FromHex(*pc++);
-		len-=2;
+		int b0 = FromHex( *pc++ );
+		int b1 = FromHex( *pc++ );
+		len -= 2;
 
-		if(b0<0	|| b1<0)
+		if( b0 < 0 || b1 < 0 )
 		{
-			wxMessageDialog	dlg(NULL, errmsg+wxT("\n\n")+ws,
-							wxT("MadEdit-Mod"),	wxOK|wxICON_ERROR );
-			dlg.SetOKLabel(wxMessageDialog::ButtonLabel(_("&Ok")));
+			wxMessageDialog dlg( NULL, errmsg + wxT( "\n\n" ) + ws,
+								 wxT( "MadEdit-Mod" ), wxOK | wxICON_ERROR );
+			dlg.SetOKLabel( wxMessageDialog::ButtonLabel( _( "&Ok" ) ) );
 			dlg.ShowModal();
 			return false;
 		}
 
-		hex.push_back( (b0<<4) | b1	);
+		hex.push_back( ( b0 << 4 ) | b1 );
 
-		while(len>0	&& ((*pc)==0x20	|| (*pc==0x09))) //	ignore spaces
+		while( len > 0 && ( ( *pc ) == 0x20 || ( *pc == 0x09 ) ) ) // ignore spaces
 		{
 			--len;
 			++pc;
 		}
 	}
-	while(len>0);
+	while( len > 0 );
 
 	return true;
 }
 
-MadSearchResult	MadEdit::FindHexNext(const wxString	&hexstr,
-									 wxFileOffset rangeFrom, wxFileOffset rangeTo)
+MadSearchResult MadEdit::FindHexNext( const wxString &hexstr,
+									  wxFileOffset rangeFrom, wxFileOffset rangeTo )
 {
 	vector<wxByte> hex;
-	if(!StringToHex(hexstr,	hex))
+
+	if( !StringToHex( hexstr, hex ) )
 		return SR_EXPR_ERROR;
 
-	MadCaretPos	bpos, epos;
+	MadCaretPos bpos, epos;
 
-	if(rangeFrom < 0)
+	if( rangeFrom < 0 )
 	{
-		bpos=m_CaretPos;
+		bpos = m_CaretPos;
 	}
 	else
 	{
-		if(rangeFrom > GetFileSize()) rangeFrom	= GetFileSize();
+		if( rangeFrom > GetFileSize() ) rangeFrom = GetFileSize();
+
 		bpos.pos = rangeFrom;
 		bpos.linepos = rangeFrom;
-		GetLineByPos(bpos.iter,	bpos.linepos, bpos.rowid);
+		GetLineByPos( bpos.iter, bpos.linepos, bpos.rowid );
 		bpos.linepos = rangeFrom - bpos.linepos;
 	}
 
-	if(rangeTo < 0)
+	if( rangeTo < 0 )
 	{
-		epos.iter=m_Lines->m_LineList.end();
+		epos.iter = m_Lines->m_LineList.end();
 		--epos.iter;
-		epos.linepos=epos.iter->m_Size;
-		epos.pos=m_Lines->m_Size;
+		epos.linepos = epos.iter->m_Size;
+		epos.pos = m_Lines->m_Size;
 	}
 	else
 	{
-		if(rangeTo > GetFileSize())	rangeTo	= GetFileSize();
+		if( rangeTo > GetFileSize() ) rangeTo = GetFileSize();
+
 		epos.pos = rangeTo;
 		epos.linepos = rangeTo;
-		GetLineByPos(epos.iter,	epos.linepos, epos.rowid);
+		GetLineByPos( epos.iter, epos.linepos, epos.rowid );
 		epos.linepos = rangeTo - epos.linepos;
 	}
 
-	if(SR_YES==SearchHex(bpos, epos, &hex[0], hex.size()))
+	if( SR_YES == SearchHex( bpos, epos, &hex[0], hex.size() ) )
 	{
-		SetSelection(bpos.pos, epos.pos);
-		if (IsTextFile() &&	m_BookmarkInSearch && !(m_Lines->m_LineList.IsBookmarked(bpos.iter))) m_Lines->m_LineList.SetBookmark(bpos.iter);
+		SetSelection( bpos.pos, epos.pos );
+
+		if( IsTextFile() && m_BookmarkInSearch && !( m_Lines->m_LineList.IsBookmarked( bpos.iter ) ) ) m_Lines->m_LineList.SetBookmark( bpos.iter );
+
 		return SR_YES;
 	}
 
 	return SR_NO;
 }
 
-MadSearchResult	MadEdit::FindHexPrevious(const wxString	&hexstr,
-										 wxFileOffset rangeFrom, wxFileOffset rangeTo)
+MadSearchResult MadEdit::FindHexPrevious( const wxString &hexstr,
+		wxFileOffset rangeFrom, wxFileOffset rangeTo )
 {
 	vector<wxByte> hex;
-	if(!StringToHex(hexstr,	hex))
+
+	if( !StringToHex( hexstr, hex ) )
 		return SR_EXPR_ERROR;
 
-	MadCaretPos	bpos, epos;
+	MadCaretPos bpos, epos;
 
-	if(rangeFrom < 0)
+	if( rangeFrom < 0 )
 	{
-		epos=m_CaretPos;
+		epos = m_CaretPos;
 	}
 	else
 	{
-		if(rangeFrom > GetFileSize()) rangeFrom	= GetFileSize();
+		if( rangeFrom > GetFileSize() ) rangeFrom = GetFileSize();
+
 		epos.pos = rangeFrom;
 		epos.linepos = rangeFrom;
-		GetLineByPos(epos.iter,	epos.linepos, epos.rowid);
+		GetLineByPos( epos.iter, epos.linepos, epos.rowid );
 		epos.linepos = rangeFrom - epos.linepos;
 	}
 
-	if(rangeTo < 0)	rangeTo	= 0;
-	else if(rangeTo	> GetFileSize()) rangeTo = GetFileSize();
+	if( rangeTo < 0 ) rangeTo = 0;
+	else
+		if( rangeTo > GetFileSize() ) rangeTo = GetFileSize();
 
-	if(epos.pos	<= rangeTo)	return SR_NO;
+	if( epos.pos <= rangeTo ) return SR_NO;
 
-	size_t searchsize= 50 *	1024;
-	if(searchsize< hexstr.Len()*8) searchsize=hexstr.Len()*8;
+	size_t searchsize = 50 * 1024;
 
-	wxFileOffset startpos=epos.pos;
+	if( searchsize < hexstr.Len() * 8 ) searchsize = hexstr.Len() * 8;
 
-	for(;;)
+	wxFileOffset startpos = epos.pos;
+
+	for( ;; )
 	{
-		startpos -=	searchsize;
-		if(startpos<rangeTo)
+		startpos -= searchsize;
+
+		if( startpos < rangeTo )
 		{
-			startpos=rangeTo;
+			startpos = rangeTo;
 		}
 		else
 		{
-			size_t s=size_t(startpos);
-			s=s%4;
-			startpos-=s;
+			size_t s = size_t( startpos );
+			s = s % 4;
+			startpos -= s;
 		}
 
-		wxFileOffset len=epos.pos-startpos;
-		if(epos.linepos	>= len)
+		wxFileOffset len = epos.pos - startpos;
+
+		if( epos.linepos >= len )
 		{
-			bpos.pos=epos.pos-len;
-			bpos.iter=epos.iter;
-			bpos.linepos=epos.linepos-len;
+			bpos.pos = epos.pos - len;
+			bpos.iter = epos.iter;
+			bpos.linepos = epos.linepos - len;
 		}
 		else
 		{
-			bpos.pos=startpos;
-			GetLineByPos(bpos.iter,	bpos.pos, bpos.rowid);
-			bpos.linepos=0;
-			startpos=bpos.pos;
+			bpos.pos = startpos;
+			GetLineByPos( bpos.iter, bpos.pos, bpos.rowid );
+			bpos.linepos = 0;
+			startpos = bpos.pos;
 		}
 
-		MadCaretPos	bpos1=bpos,	epos1=epos;
-		if(SR_YES==SearchHex(bpos1,	epos1, &hex[0],	hex.size())) //	found
+		MadCaretPos bpos1 = bpos, epos1 = epos;
+
+		if( SR_YES == SearchHex( bpos1, epos1, &hex[0], hex.size() ) ) // found
 		{
-			MadCaretPos	bp,	ep;
+			MadCaretPos bp, ep;
+
 			do
 			{
-				bp=bpos1;
-				ep=epos1;
+				bp = bpos1;
+				ep = epos1;
 
 				// advance one byte
-				if(bpos1.linepos==bpos1.iter->m_Size)
+				if( bpos1.linepos == bpos1.iter->m_Size )
 				{
 					++bpos1.iter;
-					bpos1.linepos=0;
+					bpos1.linepos = 0;
 				}
+
 				++bpos1.pos;
 				++bpos1.linepos;
-
-				epos1=epos;
+				epos1 = epos;
 			}
-			while(SearchHex(bpos1, epos1, &hex[0], hex.size()));
+			while( SearchHex( bpos1, epos1, &hex[0], hex.size() ) );
 
-			SetSelection(bp.pos, ep.pos, true);
-			if (IsTextFile() && m_BookmarkInSearch && !(m_Lines->m_LineList.IsBookmarked(bp.iter))) m_Lines->m_LineList.SetBookmark(bp.iter);
+			SetSelection( bp.pos, ep.pos, true );
+
+			if( IsTextFile() && m_BookmarkInSearch && !( m_Lines->m_LineList.IsBookmarked( bp.iter ) ) ) m_Lines->m_LineList.SetBookmark( bp.iter );
+
 			return SR_YES;
 		}
 
 		// not found
-		if(startpos<=rangeTo) break;
+		if( startpos <= rangeTo ) break;
 
-		epos=bpos;
-		size_t s=hexstr.Len()*4;
+		epos = bpos;
+		size_t s = hexstr.Len() * 4;
 
-		if(epos.pos+ s > epos1.pos)
+		if( epos.pos + s > epos1.pos )
 		{
-			s=hexstr.Len();
-			if(epos.pos+ s > epos1.pos)
+			s = hexstr.Len();
+
+			if( epos.pos + s > epos1.pos )
 			{
-				s=0;
+				s = 0;
 			}
 		}
 
-		if(s!=0)
+		if( s != 0 )
 		{
-			epos.pos+=s;
+			epos.pos += s;
+
 			do
 			{
-				len=epos.iter->m_Size-epos.linepos;
-				if(len>s) len=s;
+				len = epos.iter->m_Size - epos.linepos;
 
-				if((epos.linepos+=len)==epos.iter->m_Size)
+				if( len > s ) len = s;
+
+				if( ( epos.linepos += len ) == epos.iter->m_Size )
 				{
-					epos.linepos=0;
+					epos.linepos = 0;
 					++epos.iter;
 				}
 			}
-			while((s-=len) > 0);
+			while( ( s -= len ) > 0 );
 		}
-
 	}
 
 	return SR_NO;
 }
 
-MadReplaceResult MadEdit::ReplaceText(const	wxString &expr,	const wxString &fmt,
-									  bool bRegex, bool	bCaseSensitive,	bool bWholeWord, bool bDotMatchNewline,
-									  wxFileOffset rangeFrom, wxFileOffset rangeTo)
+MadReplaceResult MadEdit::ReplaceText( const wxString &expr, const wxString &fmt,
+									   bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
+									   wxFileOffset rangeFrom, wxFileOffset rangeTo )
 {
-	if(expr.Len()==0)
+	if( expr.Len() == 0 )
 		return RR_NREP_NNEXT;
 
-	bool selok=false;
+	bool selok = false;
+	MadCaretPos bpos = *m_SelectionBegin;
+	MadCaretPos epos = *m_SelectionEnd;
 
-	MadCaretPos	bpos=*m_SelectionBegin;
-	MadCaretPos	epos=*m_SelectionEnd;
-
-	if(m_Selection)	// test	the	selection is wanted	text
+	if( m_Selection ) // test the selection is wanted text
 	{
-		int	state=Search(bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline);
+		int state = Search( bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
 
-		if(state==SR_EXPR_ERROR)
+		if( state == SR_EXPR_ERROR )
 		{
 			return RR_EXPR_ERROR;
 		}
 
-		if(state==SR_YES)
+		if( state == SR_YES )
 		{
-			if(bpos.pos==m_SelectionBegin->pos && epos.pos==m_SelectionEnd->pos)
+			if( bpos.pos == m_SelectionBegin->pos && epos.pos == m_SelectionEnd->pos )
 			{
-				selok=true;
+				selok = true;
 			}
 		}
 	}
 
-	if(!selok)	// just	find next
+	if( !selok ) // just find next
 	{
-		switch(FindTextNext(expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, rangeFrom, rangeTo))
+		switch( FindTextNext( expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, rangeFrom, rangeTo ) )
 		{
-		case SR_EXPR_ERROR:	return RR_EXPR_ERROR;
-		case SR_YES:		return RR_NREP_NEXT;
-		case SR_NO:			return RR_NREP_NNEXT;
+		case SR_EXPR_ERROR: return RR_EXPR_ERROR;
+
+		case SR_YES:        return RR_NREP_NEXT;
+
+		case SR_NO:         return RR_NREP_NNEXT;
 		}
 	}
 
 	ucs4string out;
+	// replace the selected text
+	int state = Replace( out, bpos, epos, expr, fmt, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
 
-	// replace the selected	text
-	int	state=Replace(out, bpos, epos, expr, fmt, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline);
-
-	if(state==SR_EXPR_ERROR)
+	if( state == SR_EXPR_ERROR )
 	{
 		return RR_EXPR_ERROR;
 	}
 
-	if(out.length()==0)
+	if( out.length() == 0 )
 	{
-		DeleteSelection(true, NULL,	false);
+		DeleteSelection( true, NULL, false );
 	}
 	else
 	{
-		InsertString(out.c_str(), out.length(),	false, true, false);
+		InsertString( out.c_str(), out.length(), false, true, false );
 	}
 
-	if(SR_NO==FindTextNext(expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, -1, rangeTo))
+	if( SR_NO == FindTextNext( expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, -1, rangeTo ) )
 		return RR_REP_NNEXT;
 
 	return RR_REP_NEXT;
 }
 
-MadReplaceResult MadEdit::ReplaceHex(const wxString	&expr, const wxString &fmt,
-									 wxFileOffset rangeFrom, wxFileOffset rangeTo)
+MadReplaceResult MadEdit::ReplaceHex( const wxString &expr, const wxString &fmt,
+									  wxFileOffset rangeFrom, wxFileOffset rangeTo )
 {
-	if(expr.Len()==0)
+	if( expr.Len() == 0 )
 		return RR_NREP_NNEXT;
 
-	bool selok=false;
-
+	bool selok = false;
 	vector<wxByte> hex;
-	if(!StringToHex(expr, hex))	return RR_EXPR_ERROR;
+
+	if( !StringToHex( expr, hex ) ) return RR_EXPR_ERROR;
 
 	vector<wxByte> fmthex;
-	if(!StringToHex(fmt, fmthex)) return RR_EXPR_ERROR;
 
+	if( !StringToHex( fmt, fmthex ) ) return RR_EXPR_ERROR;
 
-	MadCaretPos	bpos=*m_SelectionBegin;
-	MadCaretPos	epos=*m_SelectionEnd;
+	MadCaretPos bpos = *m_SelectionBegin;
+	MadCaretPos epos = *m_SelectionEnd;
 
-	if(m_Selection)	// test	the	selection is wanted	text
+	if( m_Selection ) // test the selection is wanted text
 	{
-		int	state=SearchHex(bpos, epos,	&hex[0], hex.size());
+		int state = SearchHex( bpos, epos, &hex[0], hex.size() );
 
-		if(state==SR_EXPR_ERROR)
+		if( state == SR_EXPR_ERROR )
 		{
 			return RR_EXPR_ERROR;
 		}
 
-		if(state==SR_YES)
+		if( state == SR_YES )
 		{
-			if(bpos.pos==m_SelectionBegin->pos && epos.pos==m_SelectionEnd->pos)
+			if( bpos.pos == m_SelectionBegin->pos && epos.pos == m_SelectionEnd->pos )
 			{
-				selok=true;
+				selok = true;
 			}
 		}
 	}
 
-	if(!selok)	// just	find next
+	if( !selok ) // just find next
 	{
-		switch(FindHexNext(expr, rangeFrom,	rangeTo))
+		switch( FindHexNext( expr, rangeFrom, rangeTo ) )
 		{
-			case SR_EXPR_ERROR:	return RR_EXPR_ERROR;
-			case SR_YES:		return RR_NREP_NEXT;
-			case SR_NO:			return RR_NREP_NNEXT;
+		case SR_EXPR_ERROR: return RR_EXPR_ERROR;
+
+		case SR_YES:        return RR_NREP_NEXT;
+
+		case SR_NO:         return RR_NREP_NNEXT;
 		}
 	}
 
-	if(fmthex.empty())
+	if( fmthex.empty() )
 	{
-		DeleteSelection(true, NULL,	false);
+		DeleteSelection( true, NULL, false );
 	}
 	else
 	{
-		InsertHexData(&fmthex[0], fmthex.size());
+		InsertHexData( &fmthex[0], fmthex.size() );
 	}
 
-	if(SR_NO==FindHexNext(expr,	-1,	rangeTo))
+	if( SR_NO == FindHexNext( expr, -1, rangeTo ) )
 		return RR_REP_NNEXT;
 
 	return RR_REP_NEXT;
 }
 
 
-int	MadEdit::ReplaceTextAll(const wxString &expr, const	wxString &fmt,
-	bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
-	vector<wxFileOffset> *pbegpos, vector<wxFileOffset>	*pendpos,
-	wxFileOffset rangeFrom,	wxFileOffset rangeTo)
+int MadEdit::ReplaceTextAll( const wxString &expr, const wxString &fmt,
+							 bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
+							 vector<wxFileOffset> *pbegpos, vector<wxFileOffset> *pendpos,
+							 wxFileOffset rangeFrom, wxFileOffset rangeTo )
 {
-	if(expr.IsEmpty())
+	if( expr.IsEmpty() )
 		return 0;
 
 	vector<wxFileOffset> del_bpos;
 	vector<wxFileOffset> del_epos;
 	vector<const ucs4_t*> ins_ucs;
 	vector<wxFileOffset> ins_len;
-
 	list<ucs4string> outs;
+	MadCaretPos bpos, epos, endpos;
 
-	MadCaretPos	bpos, epos,	endpos;
-
-	if(rangeFrom <=	0)
+	if( rangeFrom <= 0 )
 	{
-		bpos.iter=m_Lines->m_LineList.begin();
-		bpos.pos=bpos.iter->m_RowIndices[0].m_Start;
-		if(m_CaretPos.pos <	bpos.pos ||	m_EditMode==emHexMode)
+		bpos.iter = m_Lines->m_LineList.begin();
+		bpos.pos = bpos.iter->m_RowIndices[0].m_Start;
+
+		if( m_CaretPos.pos < bpos.pos || m_EditMode == emHexMode )
 		{
-			bpos.pos=0;
+			bpos.pos = 0;
 		}
-		bpos.linepos=bpos.pos;
+
+		bpos.linepos = bpos.pos;
 	}
 	else
 	{
 		MadUCQueue ucharQueue;
-		vector<int>	widthArray;
-		int	tmp;
-		if(rangeFrom > GetFileSize()) rangeFrom	= GetFileSize();
+		vector<int> widthArray;
+		int tmp;
+
+		if( rangeFrom > GetFileSize() ) rangeFrom = GetFileSize();
+
 		bpos.pos = rangeFrom;
-		UpdateCaretByPos(bpos, ucharQueue, widthArray, tmp);
+		UpdateCaretByPos( bpos, ucharQueue, widthArray, tmp );
 	}
 
-	if(rangeTo < 0)
+	if( rangeTo < 0 )
 	{
-		epos.pos=m_Lines->m_Size;
-		epos.iter=m_Lines->m_LineList.end();
+		epos.pos = m_Lines->m_Size;
+		epos.iter = m_Lines->m_LineList.end();
 		--epos.iter;
-		epos.linepos=epos.iter->m_Size;
+		epos.linepos = epos.iter->m_Size;
 	}
 	else
 	{
 		MadUCQueue ucharQueue;
-		vector<int>	widthArray;
-		int	tmp;
-		if(rangeTo > GetFileSize())	rangeTo	= GetFileSize();
+		vector<int> widthArray;
+		int tmp;
+
+		if( rangeTo > GetFileSize() ) rangeTo = GetFileSize();
+
 		epos.pos = rangeTo;
-		UpdateCaretByPos(epos, ucharQueue, widthArray, tmp);
+		UpdateCaretByPos( epos, ucharQueue, widthArray, tmp );
 	}
 
-	if(bpos.pos	>= epos.pos) return	0;
+	if( bpos.pos >= epos.pos ) return 0;
 
-	endpos=epos;
-	int	multi=0;
-	int	state;
+	endpos = epos;
+	int multi = 0;
+	int state;
 
-	while((state=Search(bpos, epos,	expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline))==SR_YES)
+	while( ( state = Search( bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline ) ) == SR_YES )
 	{
 		ucs4string out;
-		int	state=Replace(out, bpos, epos, expr, fmt, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline);
+		int state = Replace( out, bpos, epos, expr, fmt, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
 
-		if(state==SR_EXPR_ERROR)
+		if( state == SR_EXPR_ERROR )
 		{
 			return SR_EXPR_ERROR;
 		}
 
-		del_bpos.push_back(bpos.pos);
-		del_epos.push_back(epos.pos);
-
-		outs.push_back(out);
-		ucs4string &str=outs.back();
+		del_bpos.push_back( bpos.pos );
+		del_epos.push_back( epos.pos );
+		outs.push_back( out );
+		ucs4string &str = outs.back();
 		ins_ucs.push_back( str.c_str() );
-		ins_len.push_back( str.length()	);
+		ins_len.push_back( str.length() );
 
-		if(bpos.iter!=epos.iter)
+		if( bpos.iter != epos.iter )
 			++multi;
 
-		if (bpos.pos ==	epos.pos &&	!NextRegexSearchingPos(epos, expr))
+		if( bpos.pos == epos.pos && !NextRegexSearchingPos( epos, expr ) )
 			break;
 
-		bpos=epos;
-		epos=endpos;
+		bpos = epos;
+		epos = endpos;
 	}
 
-	if(state==SR_EXPR_ERROR) return	SR_EXPR_ERROR;
+	if( state == SR_EXPR_ERROR ) return SR_EXPR_ERROR;
 
-	int	count=int(del_bpos.size());
+	int count = int( del_bpos.size() );
 
-	if(count>0)
+	if( count > 0 )
 	{
-		wxFileOffset size=del_epos.back() -	del_bpos.front();
-		if((size <=	2*1024*1024) ||	(multi>=40 && size<= 10*1024*1024))
+		wxFileOffset size = del_epos.back() - del_bpos.front();
+
+		if( ( size <= 2 * 1024 * 1024 ) || ( multi >= 40 && size <= 10 * 1024 * 1024 ) )
 		{
-			OverwriteDataSingle(del_bpos, del_epos,	&ins_ucs, NULL,	ins_len);
+			OverwriteDataSingle( del_bpos, del_epos, &ins_ucs, NULL, ins_len );
 		}
 		else
 		{
-			OverwriteDataMultiple(del_bpos,	del_epos, &ins_ucs,	NULL, ins_len);
+			OverwriteDataMultiple( del_bpos, del_epos, &ins_ucs, NULL, ins_len );
 		}
 
-		if(pbegpos!=0 && pendpos!=0)
+		if( pbegpos != 0 && pendpos != 0 )
 		{
-			pbegpos->resize(count);
-			pendpos->resize(count);
+			pbegpos->resize( count );
+			pendpos->resize( count );
+			wxFileOffset diff = 0, b, e, l;
 
-			wxFileOffset diff=0, b,	e, l;
-			for(int	i=0; i<count; ++i)
+			for( int i = 0; i < count; ++i )
 			{
-				b =	del_bpos[i];
-				e =	del_epos[i];
-				l =	ins_len[i];
+				b = del_bpos[i];
+				e = del_epos[i];
+				l = ins_len[i];
 				size = b + diff;
-				(*pbegpos)[i] =	size;
-				(*pendpos)[i] =	size + l;
-				diff +=	(l - (e	- b));
+				( *pbegpos )[i] = size;
+				( *pendpos )[i] = size + l;
+				diff += ( l - ( e - b ) );
 			}
 		}
 	}
@@ -3353,117 +3359,122 @@ int	MadEdit::ReplaceTextAll(const wxString &expr, const	wxString &fmt,
 	return count;
 }
 
-int	MadEdit::ReplaceHexAll(const wxString &expr, const wxString	&fmt,
-	vector<wxFileOffset> *pbegpos, vector<wxFileOffset>	*pendpos,
-	wxFileOffset rangeFrom,	wxFileOffset rangeTo)
+int MadEdit::ReplaceHexAll( const wxString &expr, const wxString &fmt,
+							vector<wxFileOffset> *pbegpos, vector<wxFileOffset> *pendpos,
+							wxFileOffset rangeFrom, wxFileOffset rangeTo )
 {
-	if(expr.Len()==0)
+	if( expr.Len() == 0 )
 		return 0;
 
 	vector<wxByte> hex;
-	if(!StringToHex(expr, hex))	return SR_EXPR_ERROR;
+
+	if( !StringToHex( expr, hex ) ) return SR_EXPR_ERROR;
 
 	vector<wxByte> fmthex;
-	if(!StringToHex(fmt, fmthex)) return SR_EXPR_ERROR;
+
+	if( !StringToHex( fmt, fmthex ) ) return SR_EXPR_ERROR;
 
 	vector<wxFileOffset> del_bpos;
 	vector<wxFileOffset> del_epos;
-	vector<wxByte*>	ins_data;
+	vector<wxByte*> ins_data;
 	vector<wxFileOffset> ins_len;
+	MadCaretPos bpos, epos, endpos;
 
-	MadCaretPos	bpos, epos,	endpos;
-
-	if(rangeFrom <=	0)
+	if( rangeFrom <= 0 )
 	{
-		bpos.pos=0;
-		bpos.iter=m_Lines->m_LineList.begin();
-		bpos.linepos=0;
+		bpos.pos = 0;
+		bpos.iter = m_Lines->m_LineList.begin();
+		bpos.linepos = 0;
 	}
 	else
 	{
-		if(rangeFrom > GetFileSize()) rangeFrom	= GetFileSize();
+		if( rangeFrom > GetFileSize() ) rangeFrom = GetFileSize();
+
 		bpos.pos = rangeFrom;
 		bpos.linepos = rangeFrom;
-		GetLineByPos(bpos.iter,	bpos.linepos, bpos.rowid);
+		GetLineByPos( bpos.iter, bpos.linepos, bpos.rowid );
 		bpos.linepos = rangeFrom - bpos.linepos;
 	}
 
-	if(rangeTo < 0)
+	if( rangeTo < 0 )
 	{
-		epos.pos=m_Lines->m_Size;
-		epos.iter=m_Lines->m_LineList.end();
+		epos.pos = m_Lines->m_Size;
+		epos.iter = m_Lines->m_LineList.end();
 		--epos.iter;
-		epos.linepos=epos.iter->m_Size;
+		epos.linepos = epos.iter->m_Size;
 	}
 	else
 	{
-		if(rangeTo > GetFileSize())	rangeTo	= GetFileSize();
+		if( rangeTo > GetFileSize() ) rangeTo = GetFileSize();
+
 		epos.pos = rangeTo;
 		epos.linepos = rangeTo;
-		GetLineByPos(epos.iter,	epos.linepos, epos.rowid);
+		GetLineByPos( epos.iter, epos.linepos, epos.rowid );
 		epos.linepos = rangeTo - epos.linepos;
 	}
 
-	if(bpos.pos	>= epos.pos) return	0;
+	if( bpos.pos >= epos.pos ) return 0;
 
-	endpos=epos;
-	int	multi=0;
-	
-#if	PATCH_RPLACEALL_HEX_MODE ==	1
-	wxByte*	fmtdat=	0;
-	if(!fmthex.empty())
+	endpos = epos;
+	int multi = 0;
+#if PATCH_RPLACEALL_HEX_MODE == 1
+	wxByte* fmtdat = 0;
+
+	if( !fmthex.empty() )
 	{
 		fmtdat = &fmthex[0];
 	}
+
 #endif
 
-	while(SearchHex(bpos, epos,	&hex[0], hex.size())==SR_YES)
+	while( SearchHex( bpos, epos, &hex[0], hex.size() ) == SR_YES )
 	{
-		del_bpos.push_back(bpos.pos);
-		del_epos.push_back(epos.pos);
-#if	PATCH_RPLACEALL_HEX_MODE ==	1
-		ins_data.push_back(fmtdat);
-#else		 
-		ins_data.push_back(&fmthex[0]);
+		del_bpos.push_back( bpos.pos );
+		del_epos.push_back( epos.pos );
+#if PATCH_RPLACEALL_HEX_MODE == 1
+		ins_data.push_back( fmtdat );
+#else
+		ins_data.push_back( &fmthex[0] );
 #endif
-		ins_len.push_back(fmthex.size());
+		ins_len.push_back( fmthex.size() );
 
-		if(bpos.iter!=epos.iter)
+		if( bpos.iter != epos.iter )
 			++multi;
 
-		bpos=epos;
-		epos=endpos;
+		bpos = epos;
+		epos = endpos;
 	}
 
-	int	count=int(del_bpos.size());
+	int count = int( del_bpos.size() );
 
-	if(count>0)
+	if( count > 0 )
 	{
-		wxFileOffset size=del_epos.back() -	del_bpos.front();
-		if(IsTextFile()	&& ((size <= 2*1024*1024) || (multi>=40	&& size<= 10*1024*1024)))
+		wxFileOffset size = del_epos.back() - del_bpos.front();
+
+		if( IsTextFile() && ( ( size <= 2 * 1024 * 1024 ) || ( multi >= 40 && size <= 10 * 1024 * 1024 ) ) )
 		{
-			OverwriteDataSingle(del_bpos, del_epos,	NULL, &ins_data, ins_len);
+			OverwriteDataSingle( del_bpos, del_epos, NULL, &ins_data, ins_len );
 		}
 		else
 		{
-			OverwriteDataMultiple(del_bpos,	del_epos, NULL,	&ins_data, ins_len);
+			OverwriteDataMultiple( del_bpos, del_epos, NULL, &ins_data, ins_len );
 		}
 
-		if(pbegpos!=0 && pendpos!=0)
+		if( pbegpos != 0 && pendpos != 0 )
 		{
-			pbegpos->resize(count);
-			pendpos->resize(count);
+			pbegpos->resize( count );
+			pendpos->resize( count );
+			wxFileOffset diff = 0, b, e, l;
 
-			wxFileOffset diff=0, b,	e, l;
-			for(int	i=0; i<count; ++i)
+			for( int i = 0; i < count; ++i )
 			{
-				b =	del_bpos[i];
-				e =	del_epos[i];
-				l =	ins_len[i];
+				b = del_bpos[i];
+				e = del_epos[i];
+				l = ins_len[i];
 				size = b + diff;
-				(*pbegpos)[i] =	size;
-				(*pendpos)[i] =	size + l;
-				diff +=	(l - (e	- b));
+				( *pbegpos )[i] = size;
+				( *pendpos )[i] = size + l;
+				diff += ( l - ( e - b ) );
 			}
 		}
 	}
@@ -3471,303 +3482,320 @@ int	MadEdit::ReplaceHexAll(const wxString &expr, const wxString	&fmt,
 	return count;
 }
 
-int	MadEdit::FindTextAll(const wxString	&expr,
-						 bool bRegex, bool bCaseSensitive, bool	bWholeWord,	bool bDotMatchNewline, bool bFirstOnly,
-						 vector<wxFileOffset> *pbegpos,	vector<wxFileOffset> *pendpos,
-						 wxFileOffset rangeFrom, wxFileOffset rangeTo)
+int MadEdit::FindTextAll( const wxString &expr,
+						  bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline, bool bFirstOnly,
+						  vector<wxFileOffset> *pbegpos, vector<wxFileOffset> *pendpos,
+						  wxFileOffset rangeFrom, wxFileOffset rangeTo )
 {
-	if(expr.Len()==0)
+	if( expr.Len() == 0 )
 		return 0;
 
-	MadCaretPos	bpos, epos,	endpos;
+	MadCaretPos bpos, epos, endpos;
 
-	if(rangeFrom <=	0)
+	if( rangeFrom <= 0 )
 	{
-		bpos.iter=m_Lines->m_LineList.begin();
-		bpos.pos=bpos.iter->m_RowIndices[0].m_Start;
-		if(m_CaretPos.pos <	bpos.pos ||	m_EditMode==emHexMode)
+		bpos.iter = m_Lines->m_LineList.begin();
+		bpos.pos = bpos.iter->m_RowIndices[0].m_Start;
+
+		if( m_CaretPos.pos < bpos.pos || m_EditMode == emHexMode )
 		{
-			bpos.pos=0;
+			bpos.pos = 0;
 		}
-		bpos.linepos=bpos.pos;
+
+		bpos.linepos = bpos.pos;
 	}
 	else
 	{
 		MadUCQueue ucharQueue;
-		vector<int>	widthArray;
-		int	tmp;
-		if(rangeFrom > GetFileSize()) rangeFrom	= GetFileSize();
+		vector<int> widthArray;
+		int tmp;
+
+		if( rangeFrom > GetFileSize() ) rangeFrom = GetFileSize();
+
 		bpos.pos = rangeFrom;
-		UpdateCaretByPos(bpos, ucharQueue, widthArray, tmp);
+		UpdateCaretByPos( bpos, ucharQueue, widthArray, tmp );
 	}
 
-	if(rangeTo < 0)
+	if( rangeTo < 0 )
 	{
-		epos.pos=m_Lines->m_Size;
-		epos.iter=m_Lines->m_LineList.end();
+		epos.pos = m_Lines->m_Size;
+		epos.iter = m_Lines->m_LineList.end();
 		--epos.iter;
-		epos.linepos=epos.iter->m_Size;
+		epos.linepos = epos.iter->m_Size;
 	}
 	else
 	{
 		MadUCQueue ucharQueue;
-		vector<int>	widthArray;
-		int	tmp;
-		if(rangeTo > GetFileSize())	rangeTo	= GetFileSize();
+		vector<int> widthArray;
+		int tmp;
+
+		if( rangeTo > GetFileSize() ) rangeTo = GetFileSize();
+
 		epos.pos = rangeTo;
-		UpdateCaretByPos(epos, ucharQueue, widthArray, tmp);
+		UpdateCaretByPos( epos, ucharQueue, widthArray, tmp );
 	}
 
-	if(bpos.pos	>= epos.pos) return	0;
+	if( bpos.pos >= epos.pos ) return 0;
 
-	endpos=epos;
-	int	count=0;
-	int	state;
+	endpos = epos;
+	int count = 0;
+	int state;
+	wxString fmt = _( "Found %d matched texts..." );
+	fmt += wxT( "								\n" );
 
-	wxString fmt = _("Found %d matched texts...");
-	fmt += wxT("								\n");
-
-	while((state=Search(bpos, epos,	expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline))==SR_YES)
+	while( ( state = Search( bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline ) ) == SR_YES )
 	{
-		if(pbegpos)	pbegpos->push_back(bpos.pos);
-		if(pendpos)	pendpos->push_back(epos.pos);
+		if( pbegpos ) pbegpos->push_back( bpos.pos );
+
+		if( pendpos ) pendpos->push_back( epos.pos );
+
 		++count;
 
-		if (IsTextFile() &&	m_BookmarkInSearch && !(m_Lines->m_LineList.IsBookmarked(bpos.iter))) m_Lines->m_LineList.SetBookmark(bpos.iter);
+		if( IsTextFile() && m_BookmarkInSearch && !( m_Lines->m_LineList.IsBookmarked( bpos.iter ) ) ) m_Lines->m_LineList.SetBookmark( bpos.iter );
 
-		if(bFirstOnly) break;
+		if( bFirstOnly ) break;
 
-		if (bpos.pos ==	epos.pos &&	!NextRegexSearchingPos(epos, expr))
+		if( bpos.pos == epos.pos && !NextRegexSearchingPos( epos, expr ) )
 			break;
 
-		bpos=epos;
-		epos=endpos;
+		bpos = epos;
+		epos = endpos;
 	}
 
-	if(state==SR_EXPR_ERROR) return	SR_EXPR_ERROR;
+	if( state == SR_EXPR_ERROR ) return SR_EXPR_ERROR;
 
 	return count;
 }
 
-int	MadEdit::FindHexAll(const wxString &expr, bool bFirstOnly,
-						vector<wxFileOffset> *pbegpos, vector<wxFileOffset>	*pendpos,
-						wxFileOffset rangeFrom,	wxFileOffset rangeTo)
+int MadEdit::FindHexAll( const wxString &expr, bool bFirstOnly,
+						 vector<wxFileOffset> *pbegpos, vector<wxFileOffset> *pendpos,
+						 wxFileOffset rangeFrom, wxFileOffset rangeTo )
 {
-	if(expr.Len()==0)
+	if( expr.Len() == 0 )
 		return 0;
 
 	vector<wxByte> hex;
-	if(!StringToHex(expr, hex))	return SR_EXPR_ERROR;
 
-	MadCaretPos	bpos, epos,	endpos;
+	if( !StringToHex( expr, hex ) ) return SR_EXPR_ERROR;
 
-	if(rangeFrom <=	0)
+	MadCaretPos bpos, epos, endpos;
+
+	if( rangeFrom <= 0 )
 	{
-		bpos.pos=0;
-		bpos.iter=m_Lines->m_LineList.begin();
-		bpos.linepos=0;
+		bpos.pos = 0;
+		bpos.iter = m_Lines->m_LineList.begin();
+		bpos.linepos = 0;
 	}
 	else
 	{
-		if(rangeFrom > GetFileSize()) rangeFrom	= GetFileSize();
+		if( rangeFrom > GetFileSize() ) rangeFrom = GetFileSize();
+
 		bpos.pos = rangeFrom;
 		bpos.linepos = rangeFrom;
-		GetLineByPos(bpos.iter,	bpos.linepos, bpos.rowid);
+		GetLineByPos( bpos.iter, bpos.linepos, bpos.rowid );
 		bpos.linepos = rangeFrom - bpos.linepos;
 	}
 
-	if(rangeTo < 0)
+	if( rangeTo < 0 )
 	{
-		epos.pos=m_Lines->m_Size;
-		epos.iter=m_Lines->m_LineList.end();
+		epos.pos = m_Lines->m_Size;
+		epos.iter = m_Lines->m_LineList.end();
 		--epos.iter;
-		epos.linepos=epos.iter->m_Size;
+		epos.linepos = epos.iter->m_Size;
 	}
 	else
 	{
-		if(rangeTo > GetFileSize())	rangeTo	= GetFileSize();
+		if( rangeTo > GetFileSize() ) rangeTo = GetFileSize();
+
 		epos.pos = rangeTo;
 		epos.linepos = rangeTo;
-		GetLineByPos(epos.iter,	epos.linepos, epos.rowid);
+		GetLineByPos( epos.iter, epos.linepos, epos.rowid );
 		epos.linepos = rangeTo - epos.linepos;
 	}
 
-	if(bpos.pos	>= epos.pos) return	0;
+	if( bpos.pos >= epos.pos ) return 0;
 
-	endpos=epos;
-	int	count=0;
+	endpos = epos;
+	int count = 0;
 
-	while(SearchHex(bpos, epos,	&hex[0], hex.size())==SR_YES)
+	while( SearchHex( bpos, epos, &hex[0], hex.size() ) == SR_YES )
 	{
-		if(pbegpos)	pbegpos->push_back(bpos.pos);
-		if(pendpos)	pendpos->push_back(epos.pos);
-		++count;
-		if (IsTextFile() &&	m_BookmarkInSearch && !(m_Lines->m_LineList.IsBookmarked(bpos.iter))) m_Lines->m_LineList.SetBookmark(bpos.iter);
-		if(bFirstOnly) break;
+		if( pbegpos ) pbegpos->push_back( bpos.pos );
 
-		bpos=epos;
-		epos=endpos;
+		if( pendpos ) pendpos->push_back( epos.pos );
+
+		++count;
+
+		if( IsTextFile() && m_BookmarkInSearch && !( m_Lines->m_LineList.IsBookmarked( bpos.iter ) ) ) m_Lines->m_LineList.SetBookmark( bpos.iter );
+
+		if( bFirstOnly ) break;
+
+		bpos = epos;
+		epos = endpos;
 	}
 
 	return count;
 }
 
 /******** Printing Functions ********/
-void MadEdit::BeginPrint(const wxRect &printRect)
+void MadEdit::BeginPrint( const wxRect &printRect )
 {
-	if(InPrinting()) return;
+	if( InPrinting() ) return;
 
 	//SetReadOnly(true);
 	// store settings
-	m_old_ClientWidth		= m_ClientWidth;
-	m_old_ClientHeight		= m_ClientHeight;
-	m_old_WordWrapMode		= m_WordWrapMode;
-	m_old_Selection			= m_Selection;
-	m_old_DisplayLineNumber	= m_DisplayLineNumber;
-	m_old_DisplayBookmark	= m_DisplayBookmark;
-	m_old_ShowEndOfLine		= m_ShowEndOfLine;
-	m_old_ShowSpaceChar		= m_ShowSpaceChar;
-	m_old_ShowTabChar		= m_ShowTabChar;
-	m_old_LeftMarginWidth	= m_LeftMarginWidth;
-	m_old_DrawingXPos		= m_DrawingXPos;
-	m_old_BookmarkWidth		= m_BookmarkWidth;
-
+	m_old_ClientWidth       = m_ClientWidth;
+	m_old_ClientHeight      = m_ClientHeight;
+	m_old_WordWrapMode      = m_WordWrapMode;
+	m_old_Selection         = m_Selection;
+	m_old_DisplayLineNumber = m_DisplayLineNumber;
+	m_old_DisplayBookmark   = m_DisplayBookmark;
+	m_old_ShowEndOfLine     = m_ShowEndOfLine;
+	m_old_ShowSpaceChar     = m_ShowSpaceChar;
+	m_old_ShowTabChar       = m_ShowTabChar;
+	m_old_LeftMarginWidth   = m_LeftMarginWidth;
+	m_old_DrawingXPos       = m_DrawingXPos;
+	m_old_BookmarkWidth     = m_BookmarkWidth;
 	// apply printing settings
-	m_PrintRect=printRect;
+	m_PrintRect = printRect;
 
-	// calc	page count
-	if(m_EditMode!=emHexMode) // Print Text
+	// calc page count
+	if( m_EditMode != emHexMode ) // Print Text
 	{
-		m_Printing=-1;
-		m_ClientWidth=m_PrintRect.width	+ m_RightMarginWidth;
-		m_ClientHeight=m_PrintRect.height;
-		m_WordWrapMode=wwmWrapByWindow;
-		m_DrawingXPos=0;
+		m_Printing = -1;
+		m_ClientWidth = m_PrintRect.width + m_RightMarginWidth;
+		m_ClientHeight = m_PrintRect.height;
+		m_WordWrapMode = wwmWrapByWindow;
+		m_DrawingXPos = 0;
+		m_PrintSyntax = false;
+		wxString oldpath = m_Config->GetPath();
+		m_Config->SetPath( wxT( "/MadEdit" ) );
+		m_Config->Read( wxT( "PrintSyntax" ), &m_PrintSyntax );
+		m_Config->Read( wxT( "PrintLineNumber" ), &m_DisplayLineNumber );
+		m_Config->Read( wxT( "PrintBookmark" ), &m_DisplayBookmark );
+		m_Config->Read( wxT( "PrintEndOfLine" ), &m_ShowEndOfLine );
+		m_Config->Read( wxT( "PrintTabChar" ), &m_ShowSpaceChar );
+		m_Config->Read( wxT( "PrintSpaceChar" ), &m_ShowTabChar );
+		m_Config->SetPath( oldpath );
+		m_Syntax->BeginPrint( m_PrintSyntax );
 
-		m_PrintSyntax=false;
-
-		wxString oldpath=m_Config->GetPath();
-		m_Config->SetPath(wxT("/MadEdit"));
-		m_Config->Read(wxT("PrintSyntax"), &m_PrintSyntax);
-		m_Config->Read(wxT("PrintLineNumber"), &m_DisplayLineNumber);
-		m_Config->Read(wxT("PrintBookmark"), &m_DisplayBookmark);
-		m_Config->Read(wxT("PrintEndOfLine"), &m_ShowEndOfLine);
-		m_Config->Read(wxT("PrintTabChar"),	&m_ShowSpaceChar);
-		m_Config->Read(wxT("PrintSpaceChar"), &m_ShowTabChar);
-		m_Config->SetPath(oldpath);
-
-		m_Syntax->BeginPrint(m_PrintSyntax);
-		if(!m_DisplayLineNumber&&!m_DisplayBookmark) m_LeftMarginWidth=0;
+		if( !m_DisplayLineNumber && !m_DisplayBookmark ) m_LeftMarginWidth = 0;
 
 		ReformatAll();
+		m_Selection = false;
+		m_RowCountPerPage = m_ClientHeight / m_RowHeight;
 
-		m_Selection=false;
-
-		m_RowCountPerPage =	m_ClientHeight / m_RowHeight;
-		if(m_RowCountPerPage==0)
+		if( m_RowCountPerPage == 0 )
 			++m_RowCountPerPage;
-		m_PrintPageCount = int(m_Lines->m_RowCount)	/ m_RowCountPerPage;
 
-		if(int(m_Lines->m_RowCount)	> (m_PrintPageCount	* m_RowCountPerPage))
+		m_PrintPageCount = int( m_Lines->m_RowCount ) / m_RowCountPerPage;
+
+		if( int( m_Lines->m_RowCount ) > ( m_PrintPageCount * m_RowCountPerPage ) )
 			++m_PrintPageCount;
 	}
-	else //	Print Hex
+	else // Print Hex
 	{
-		m_Printing=1;
-		m_old_CaretAtHexArea=m_CaretAtHexArea;
-		m_CaretAtHexArea=true;
-
-		wxString oldpath=m_Config->GetPath();
-		m_Config->SetPath(wxT("/MadEdit"));
-		m_Config->Read(wxT("PrintOffsetHeader"), &m_PrintOffsetHeader);
-		m_Config->SetPath(oldpath);
-
-		// use a temporary MadEdit to print	Hex-Data
-		m_PrintHexEdit=new MadEdit(this, -1, wxPoint(-999,-999));
-		m_PrintHexEdit->m_StorePropertiesToGlobalConfig	= false;
-
+		m_Printing = 1;
+		m_old_CaretAtHexArea = m_CaretAtHexArea;
+		m_CaretAtHexArea = true;
+		wxString oldpath = m_Config->GetPath();
+		m_Config->SetPath( wxT( "/MadEdit" ) );
+		m_Config->Read( wxT( "PrintOffsetHeader" ), &m_PrintOffsetHeader );
+		m_Config->SetPath( oldpath );
+		// use a temporary MadEdit to print Hex-Data
+		m_PrintHexEdit = new MadEdit( this, -1, wxPoint( -999, -999 ) );
+		m_PrintHexEdit->m_StorePropertiesToGlobalConfig = false;
 		// set properties of m_PrintHexEdit
-		m_PrintHexEdit->m_Printing=1;
-		m_PrintHexEdit->SetEncoding(wxT("UTF-32LE"));
-		m_PrintHexEdit->SetLineSpacing(100);
-		m_PrintHexEdit->SetDisplayLineNumber(false);
-		m_PrintHexEdit->SetShowEndOfLine(false);
-		m_PrintHexEdit->SetShowSpaceChar(false);
-		m_PrintHexEdit->SetShowTabChar(false);
-
-		m_PrintHexEdit->SetFixedWidthMode(true);
-		m_PrintHexEdit->SetTextFont(m_HexFont->GetFaceName(), m_HexFont->GetPointSize(), true);
-		m_PrintHexEdit->SetWordWrapMode(wwmWrapByColumn);
-
-		m_PrintHexEdit->m_Syntax->BeginPrint(false);
-
-		m_PrintHexEdit->m_LineNumberAreaWidth =	0;
-		m_PrintHexEdit->m_BookmarkWidth	= 0;
-		m_PrintHexEdit->m_LeftMarginWidth =	0;
+		m_PrintHexEdit->m_Printing = 1;
+		m_PrintHexEdit->SetEncoding( wxT( "UTF-32LE" ) );
+		m_PrintHexEdit->SetLineSpacing( 100 );
+		m_PrintHexEdit->SetDisplayLineNumber( false );
+		m_PrintHexEdit->SetShowEndOfLine( false );
+		m_PrintHexEdit->SetShowSpaceChar( false );
+		m_PrintHexEdit->SetShowTabChar( false );
+		m_PrintHexEdit->SetFixedWidthMode( true );
+		m_PrintHexEdit->SetTextFont( m_HexFont->GetFaceName(), m_HexFont->GetPointSize(), true );
+		m_PrintHexEdit->SetWordWrapMode( wwmWrapByColumn );
+		m_PrintHexEdit->m_Syntax->BeginPrint( false );
+		m_PrintHexEdit->m_LineNumberAreaWidth = 0;
+		m_PrintHexEdit->m_BookmarkWidth = 0;
+		m_PrintHexEdit->m_LeftMarginWidth = 0;
 		m_PrintHexEdit->m_RightMarginWidth = 0;
+		// In Hex-Printing mode, every char is only one maxdigit width.
+		// calc max columns of one line
+		int maxcols = printRect.width / m_PrintHexEdit->m_TextFontMaxDigitWidth;
 
-		// In Hex-Printing mode, every char	is only	one	maxdigit width.
-		// calc	max	columns	of one line
-		int	maxcols=printRect.width	/ m_PrintHexEdit->m_TextFontMaxDigitWidth;
-		if(maxcols==0) maxcols=1;
+		if( maxcols == 0 ) maxcols = 1;
 
-		const int MaxColumns=76;
-		if(MaxColumns <= maxcols)
+		const int MaxColumns = 76;
+
+		if( MaxColumns <= maxcols )
 		{
-			m_RowCountPerHexLine=1;
+			m_RowCountPerHexLine = 1;
 		}
 		else
 		{
-			m_RowCountPerHexLine = MaxColumns /	maxcols;
-			if(m_RowCountPerHexLine*maxcols	< MaxColumns)
+			m_RowCountPerHexLine = MaxColumns / maxcols;
+
+			if( m_RowCountPerHexLine * maxcols < MaxColumns )
 				++m_RowCountPerHexLine;
 		}
 
-		m_PrintHexEdit->SetMaxColumns(maxcols);
+		m_PrintHexEdit->SetMaxColumns( maxcols );
+		// calc m_PrintPageCount
+		m_RowCountPerPage = printRect.height / m_RowHeight;
 
-		// calc	m_PrintPageCount
-		m_RowCountPerPage =	printRect.height / m_RowHeight;
-		if(m_RowCountPerPage==0)
+		if( m_RowCountPerPage == 0 )
 			++m_RowCountPerPage;
 
-		m_HexLineCountPerPage=m_RowCountPerPage/m_RowCountPerHexLine;
-		if(m_HexLineCountPerPage==0)
+		m_HexLineCountPerPage = m_RowCountPerPage / m_RowCountPerHexLine;
+
+		if( m_HexLineCountPerPage == 0 )
 			++m_HexLineCountPerPage;
 
-		if(m_Lines->m_Size==0) // no data
+		if( m_Lines->m_Size == 0 ) // no data
 		{
-			m_PrintTotalHexLineCount=0;
-			m_PrintPageCount=1;
+			m_PrintTotalHexLineCount = 0;
+			m_PrintPageCount = 1;
 		}
 		else
 		{
-			m_PrintTotalHexLineCount=m_Lines->m_Size >>	4; // /16
-			if((size_t(m_Lines->m_Size)	& 0x0F)!=0)
+			m_PrintTotalHexLineCount = m_Lines->m_Size >> 4; // /16
+
+			if( ( size_t( m_Lines->m_Size ) & 0x0F ) != 0 )
 				++m_PrintTotalHexLineCount;
 
-			switch(m_PrintOffsetHeader)
+			switch( m_PrintOffsetHeader )
 			{
-			case 0:	// do not print	OffsetHeader
-				m_PrintPageCount= m_PrintTotalHexLineCount/m_HexLineCountPerPage;
-				if(m_PrintPageCount*m_HexLineCountPerPage <	m_PrintTotalHexLineCount)
+			case 0: // do not print OffsetHeader
+				m_PrintPageCount = m_PrintTotalHexLineCount / m_HexLineCountPerPage;
+
+				if( m_PrintPageCount * m_HexLineCountPerPage < m_PrintTotalHexLineCount )
 					++m_PrintPageCount;
+
 				break;
-			case 1:	// print OffsetHeader on first page	only
-				m_PrintPageCount= (m_PrintTotalHexLineCount+1)/m_HexLineCountPerPage;
-				if(m_PrintPageCount*m_HexLineCountPerPage <	(m_PrintTotalHexLineCount+1))
+
+			case 1: // print OffsetHeader on first page only
+				m_PrintPageCount = ( m_PrintTotalHexLineCount + 1 ) / m_HexLineCountPerPage;
+
+				if( m_PrintPageCount * m_HexLineCountPerPage < ( m_PrintTotalHexLineCount + 1 ) )
 					++m_PrintPageCount;
+
 				break;
-			case 2:	// print OffsetHeader on every page
-				if(m_HexLineCountPerPage==1)
+
+			case 2: // print OffsetHeader on every page
+				if( m_HexLineCountPerPage == 1 )
 				{
-					m_PrintPageCount=m_PrintTotalHexLineCount;
+					m_PrintPageCount = m_PrintTotalHexLineCount;
 				}
 				else
 				{
-					m_PrintPageCount= m_PrintTotalHexLineCount/(m_HexLineCountPerPage-1);
-					if(m_PrintPageCount*(m_HexLineCountPerPage-1) <	m_PrintTotalHexLineCount)
+					m_PrintPageCount = m_PrintTotalHexLineCount / ( m_HexLineCountPerPage - 1 );
+
+					if( m_PrintPageCount * ( m_HexLineCountPerPage - 1 ) < m_PrintTotalHexLineCount )
 						++m_PrintPageCount;
 				}
+
 				break;
 			}
 		}
@@ -3776,361 +3804,384 @@ void MadEdit::BeginPrint(const wxRect &printRect)
 
 void MadEdit::EndPrint()
 {
-	if(!InPrinting()) return;
+	if( !InPrinting() ) return;
 
 	// restore settings
 	m_ClientWidth  = m_old_ClientWidth;
 	m_ClientHeight = m_old_ClientHeight;
 	m_WordWrapMode = m_old_WordWrapMode;
-	m_Selection	   = m_old_Selection;
+	m_Selection    = m_old_Selection;
 
-	if(TextPrinting())
+	if( TextPrinting() )
 	{
-		m_DisplayLineNumber	= m_old_DisplayLineNumber;
-		m_ShowEndOfLine		= m_old_ShowEndOfLine;
-		m_ShowSpaceChar		= m_old_ShowSpaceChar;
-		m_ShowTabChar		= m_old_ShowTabChar;
-		m_LeftMarginWidth	= m_old_LeftMarginWidth;
-		m_DrawingXPos		= m_old_DrawingXPos;
-		m_DisplayBookmark	= m_old_DisplayBookmark;
-		m_BookmarkWidth		= m_old_BookmarkWidth;
-
+		m_DisplayLineNumber = m_old_DisplayLineNumber;
+		m_ShowEndOfLine     = m_old_ShowEndOfLine;
+		m_ShowSpaceChar     = m_old_ShowSpaceChar;
+		m_ShowTabChar       = m_old_ShowTabChar;
+		m_LeftMarginWidth   = m_old_LeftMarginWidth;
+		m_DrawingXPos       = m_old_DrawingXPos;
+		m_DisplayBookmark   = m_old_DisplayBookmark;
+		m_BookmarkWidth     = m_old_BookmarkWidth;
 		m_Syntax->EndPrint();
-
 		ReformatAll();
 	}
 	else //HexPrinting()
 	{
-		m_CaretAtHexArea=m_old_CaretAtHexArea;
+		m_CaretAtHexArea = m_old_CaretAtHexArea;
 		delete m_PrintHexEdit;
-		m_PrintHexEdit=NULL;
+		m_PrintHexEdit = NULL;
 	}
 
-	m_Printing=0;
-	m_PrintPageCount=0;
-
-	m_RepaintAll=true;
-	Refresh(false);
-
+	m_Printing = 0;
+	m_PrintPageCount = 0;
+	m_RepaintAll = true;
+	Refresh( false );
 	//SetReadOnly(false);
 }
 
-bool MadEdit::PrintPage(wxDC *dc, int pageNum)
+bool MadEdit::PrintPage( wxDC *dc, int pageNum )
 {
-	if(!InPrinting() ||	!(pageNum>=1 &&	pageNum<=m_PrintPageCount))
+	if( !InPrinting() || !( pageNum >= 1 && pageNum <= m_PrintPageCount ) )
 		return false;
 
-	if(TextPrinting())
+	if( TextPrinting() )
 	{
-		int	rowcount=m_RowCountPerPage;
-		if(pageNum*rowcount	> int(m_Lines->m_RowCount))
+		int rowcount = m_RowCountPerPage;
+
+		if( pageNum * rowcount > int( m_Lines->m_RowCount ) )
 		{
-			rowcount -=	(pageNum*rowcount -	int(m_Lines->m_RowCount));
+			rowcount -= ( pageNum * rowcount - int( m_Lines->m_RowCount ) );
 		}
 
-		int	toprow=(pageNum-1)*m_RowCountPerPage;
-
-		MadLineIterator	lit;
+		int toprow = ( pageNum - 1 ) * m_RowCountPerPage;
+		MadLineIterator lit;
 		wxFileOffset tmppos;
-		int	rowid=toprow;
-		int	lineid=GetLineByRow(lit, tmppos, rowid);
+		int rowid = toprow;
+		int lineid = GetLineByRow( lit, tmppos, rowid );
 
 		// update m_LineNumberAreaWidth
-		if(m_DisplayLineNumber)
+		if( m_DisplayLineNumber )
 		{
-			m_LineNumberAreaWidth=CalcLineNumberAreaWidth(lit, lineid, rowid, toprow, rowcount);
+			m_LineNumberAreaWidth = CalcLineNumberAreaWidth( lit, lineid, rowid, toprow, rowcount );
 		}
 		else
 		{
-			m_LineNumberAreaWidth =	0;
+			m_LineNumberAreaWidth = 0;
 		}
 
-		if(m_DisplayBookmark)
+		if( m_DisplayBookmark )
 		{
-			m_BookmarkWidth	= m_RowHeight;
+			m_BookmarkWidth = m_RowHeight;
 		}
 		else
 		{
-			m_BookmarkWidth	= 0;
+			m_BookmarkWidth = 0;
 		}
-		PaintTextLines(dc, m_PrintRect,	toprow,	rowcount, *wxWHITE);
 
+		PaintTextLines( dc, m_PrintRect, toprow, rowcount, *wxWHITE );
 		/*if((m_DisplayLineNumber || m_DisplayBookmark)&& !m_PrintSyntax)
 		{
-			// draw	a line between LineNumberArea and Text
-			dc->SetPen(*wxThePenList->FindOrCreatePen(*wxBLACK,	1, wxSOLID));
-			int	x1=m_PrintRect.x+m_LineNumberAreaWidth+m_BookmarkWidth+1;
-			dc->DrawLine(x1, m_PrintRect.y,	x1,	m_PrintRect.y+(rowcount*m_RowHeight));
+			// draw a line between LineNumberArea and Text
+			dc->SetPen(*wxThePenList->FindOrCreatePen(*wxBLACK, 1, wxSOLID));
+			int x1=m_PrintRect.x+m_LineNumberAreaWidth+m_BookmarkWidth+1;
+			dc->DrawLine(x1, m_PrintRect.y, x1, m_PrintRect.y+(rowcount*m_RowHeight));
 		}*/
 	}
 	else //HexPrinting()
 	{
-		int	toprow,	rowcount;
+		int toprow, rowcount;
 
-		switch(m_PrintOffsetHeader)
+		switch( m_PrintOffsetHeader )
 		{
-		case 0:	// do not print	OffsetHeader
-			toprow = (pageNum-1) * m_HexLineCountPerPage;
-			rowcount=m_HexLineCountPerPage;
-			if(pageNum==m_PrintPageCount &&	m_HexLineCountPerPage>1)// last	page
+		case 0: // do not print OffsetHeader
+			toprow = ( pageNum - 1 ) * m_HexLineCountPerPage;
+			rowcount = m_HexLineCountPerPage;
+
+			if( pageNum == m_PrintPageCount && m_HexLineCountPerPage > 1 ) // last page
 			{
-				rowcount=m_PrintTotalHexLineCount-toprow;
+				rowcount = m_PrintTotalHexLineCount - toprow;
 			}
+
 			break;
-		case 1:	// print OffsetHeader on first page	only
-			if(m_HexLineCountPerPage==1)
+
+		case 1: // print OffsetHeader on first page only
+			if( m_HexLineCountPerPage == 1 )
 			{
-				toprow=(pageNum-1);
-				rowcount=1;
+				toprow = ( pageNum - 1 );
+				rowcount = 1;
 			}
 			else
 			{
-				if(pageNum==1)
+				if( pageNum == 1 )
 				{
-					toprow=0;
-					rowcount=m_HexLineCountPerPage-1;
+					toprow = 0;
+					rowcount = m_HexLineCountPerPage - 1;
 				}
 				else
 				{
-					toprow = (pageNum-1) * m_HexLineCountPerPage -1;
-					rowcount=m_HexLineCountPerPage;
+					toprow = ( pageNum - 1 ) * m_HexLineCountPerPage - 1;
+					rowcount = m_HexLineCountPerPage;
 				}
-				if(pageNum==m_PrintPageCount)
+
+				if( pageNum == m_PrintPageCount )
 				{
-					rowcount=m_PrintTotalHexLineCount-toprow;
+					rowcount = m_PrintTotalHexLineCount - toprow;
 				}
 			}
+
 			break;
-		case 2:	// print OffsetHeader on every page
-			if(m_HexLineCountPerPage==1)
+
+		case 2: // print OffsetHeader on every page
+			if( m_HexLineCountPerPage == 1 )
 			{
-				toprow=(pageNum-1);
-				rowcount=1;
+				toprow = ( pageNum - 1 );
+				rowcount = 1;
 			}
 			else
 			{
-				rowcount = m_HexLineCountPerPage-1;
-				toprow = (pageNum-1) * rowcount;
-				if(pageNum==m_PrintPageCount)//	last page
+				rowcount = m_HexLineCountPerPage - 1;
+				toprow = ( pageNum - 1 ) * rowcount;
+
+				if( pageNum == m_PrintPageCount ) // last page
 				{
-					rowcount=m_PrintTotalHexLineCount-toprow;
+					rowcount = m_PrintTotalHexLineCount - toprow;
 				}
 			}
+
 			break;
 		}
 
-		PrepareHexRowIndex(toprow, rowcount);
-
+		PrepareHexRowIndex( toprow, rowcount );
 		wxString lines;
-		if(m_PrintOffsetHeader==2 || (m_PrintOffsetHeader==1&&pageNum==1))
-		{
-			for(int	i=0;i<76;++i)
-				lines << wxChar(HexHeader[i]);
 
-			lines << wxT('\n');
+		if( m_PrintOffsetHeader == 2 || ( m_PrintOffsetHeader == 1 && pageNum == 1 ) )
+		{
+			for( int i = 0; i < 76; ++i )
+				lines << wxChar( HexHeader[i] );
+
+			lines << wxT( '\n' );
 		}
 
-		MadLineIterator	lit, lineend = m_Lines->m_LineList.end();
-		int	rn;
+		MadLineIterator lit, lineend = m_Lines->m_LineList.end();
+		int rn;
 		wxFileOffset pos;
 		MadUCQueue ucqueue;
-		MadLines::NextUCharFuncPtr NextUChar= m_Lines->NextUChar;
+		MadLines::NextUCharFuncPtr NextUChar = m_Lines->NextUChar;
+		wxFileOffset hexrowpos = size_t( toprow ) << 4;
+		wxString offset( wxT( "12345678" ) );
 
-		wxFileOffset hexrowpos = size_t(toprow)<<4;
-		wxString offset(wxT("12345678"));
-		for(int	rowidx=0;rowidx<rowcount;++rowidx, hexrowpos+=16)//	for	every hex-line
+		for( int rowidx = 0; rowidx < rowcount; ++rowidx, hexrowpos += 16 ) // for every hex-line
 		{
 			// paint offset
-			size_t hex = size_t(hexrowpos);
-			for(int	i =	7; i >=	0; --i)
-			{
-				offset[i]=wxChar(ToHex(int(hex & 0x0F)));
-				hex	>>=	4;
-			}
-			lines << offset;
-			lines << wxT(": ");
+			size_t hex = size_t( hexrowpos );
 
-			// paint Binary	Data
-			pos=hexrowpos;
-			GetLineByPos(lit, pos, rn);
-			pos=hexrowpos-pos;
-			int	idx	= 0;
-			for(int	i =	0; i < 16; ++i)
+			for( int i = 7; i >= 0; --i )
 			{
-				if(pos == lit->m_Size)		 //	to next	line
+				offset[i] = wxChar( ToHex( int( hex & 0x0F ) ) );
+				hex >>= 4;
+			}
+
+			lines << offset;
+			lines << wxT( ": " );
+			// paint Binary Data
+			pos = hexrowpos;
+			GetLineByPos( lit, pos, rn );
+			pos = hexrowpos - pos;
+			int idx = 0;
+
+			for( int i = 0; i < 16; ++i )
+			{
+				if( pos == lit->m_Size )     // to next line
 				{
-					if((++lit) == lineend || lit->m_Size ==	0)
+					if( ( ++lit ) == lineend || lit->m_Size == 0 )
 					{
 						break;
 					}
-					pos	= 0;
+
+					pos = 0;
 				}
 
-				hex	= lit->Get(pos++);
-
-				lines << wxChar(ToHex(int(hex >> 4)));
-				lines << wxChar(ToHex(int(hex &	0x0F)));
-				lines << wxChar(0x20);
-				idx+=3;
+				hex = lit->Get( pos++ );
+				lines << wxChar( ToHex( int( hex >> 4 ) ) );
+				lines << wxChar( ToHex( int( hex & 0x0F ) ) );
+				lines << wxChar( 0x20 );
+				idx += 3;
 			}
 
-			if(idx < 16	* 3)
+			if( idx < 16 * 3 )
 				do
 				{
-					lines << wxChar(0x20);
+					lines << wxChar( 0x20 );
 				}
-				while(++idx	< 16 * 3);
+				while( ++idx < 16 * 3 );
 
-			lines << wxT("| ");
-
+			lines << wxT( "| " );
 			// paint Text Data
 			ucqueue.clear();
-			wxFileOffset rowpos	= m_HexRowIndex[rowidx];
-			if(rowpos>hexrowpos)
+			wxFileOffset rowpos = m_HexRowIndex[rowidx];
+
+			if( rowpos > hexrowpos )
 			{
-				idx=rowpos-hexrowpos;
-				if(idx>0)
+				idx = rowpos - hexrowpos;
+
+				if( idx > 0 )
 				{
 					do
 					{
-						lines << wxChar(0x20);	// append space
-					}while(--idx>0);
+						lines << wxChar( 0x20 ); // append space
+					}
+					while( --idx > 0 );
 				}
 			}
-			pos	= rowpos;
-			GetLineByPos(lit, pos, rn);
-			pos	= rowpos - pos;
-			const wxFileOffset hexrowpos16=hexrowpos+16;
-			m_Lines->InitNextUChar(lit,	pos);
+
+			pos = rowpos;
+			GetLineByPos( lit, pos, rn );
+			pos = rowpos - pos;
+			const wxFileOffset hexrowpos16 = hexrowpos + 16;
+			m_Lines->InitNextUChar( lit, pos );
+
 			do
 			{
-				if(!(m_Lines->*NextUChar)(ucqueue))
+				if( !( m_Lines->*NextUChar )( ucqueue ) )
 				{
-					if(++lit ==	lineend	|| lit->m_Size == 0)
+					if( ++lit == lineend || lit->m_Size == 0 )
 					{
 						break;
 					}
-					m_Lines->InitNextUChar(lit,	0);
-					(m_Lines->*NextUChar)(ucqueue);
+
+					m_Lines->InitNextUChar( lit, 0 );
+					( m_Lines->*NextUChar )( ucqueue );
 				}
 
-				MadUCPair &ucp=ucqueue.back();
-				rowpos+=ucp.second;
-				if(ucp.first<=0x20)
+				MadUCPair &ucp = ucqueue.back();
+				rowpos += ucp.second;
+
+				if( ucp.first <= 0x20 )
 				{
-					lines << wxT('.');
+					lines << wxT( '.' );
 				}
 				else
 				{
 #ifdef __WXMSW__
-					if(ucp.first<0x10000)
+
+					if( ucp.first < 0x10000 )
 					{
-						lines << wxChar(ucp.first);
+						lines << wxChar( ucp.first );
 					}
 					else
 					{
-						wchar_t	wbuf[2];
-						m_Encoding->UCS4toUTF16LE_U10000(ucp.first,	(wxByte*)wbuf);
+						wchar_t wbuf[2];
+						m_Encoding->UCS4toUTF16LE_U10000( ucp.first, ( wxByte* )wbuf );
 						lines << wbuf[0];
 						lines << wbuf[1];
 					}
+
 #else
-					lines << wxChar(ucp.first);
+					lines << wxChar( ucp.first );
 #endif
 				}
 
-				idx=ucp.second-1;
-				if(idx>0 &&	rowpos<hexrowpos16)
+				idx = ucp.second - 1;
+
+				if( idx > 0 && rowpos < hexrowpos16 )
 				{
 					do
 					{
-						lines << wxChar(0x20);	// append space
-					}while(--idx>0);
+						lines << wxChar( 0x20 ); // append space
+					}
+					while( --idx > 0 );
 				}
 			}
-			while(rowpos<hexrowpos16);
+			while( rowpos < hexrowpos16 );
 
-			lines << wxT('\n');
+			lines << wxT( '\n' );
 		}
 
-		m_PrintHexEdit->SetText(lines);
-
-		m_PrintHexEdit->m_DrawingXPos=0;
-
-		m_PrintHexEdit->PaintTextLines(dc, m_PrintRect,
-			0, int(m_PrintHexEdit->m_Lines->m_RowCount), *wxWHITE);
+		m_PrintHexEdit->SetText( lines );
+		m_PrintHexEdit->m_DrawingXPos = 0;
+		m_PrintHexEdit->PaintTextLines( dc, m_PrintRect,
+										0, int( m_PrintHexEdit->m_Lines->m_RowCount ), *wxWHITE );
 	}
 
 	return true;
 }
 
-wxString FormatThousands(const wxString& s)	
-{ 
-	/* 
-	// example:	
-	int	mynumber = 12345678; 
-	wxString s = wxString::Format("%d",	mynumber); // format the integer to	string 
-	s =	FormatThousands(s);	// add separators 
-	// s now contains "12,345,678" or "12.345.678" according to	locale.	
+wxString FormatThousands( const wxString& s )
+{
+	/*
+	// example:
+	int mynumber = 12345678;
+	wxString s = wxString::Format("%d", mynumber); // format the integer to string
+	s = FormatThousands(s); // add separators
+	// s now contains "12,345,678" or "12.345.678" according to locale.
 	*/
+	static wxString thousandssep = wxT( "," );
+	static struct lconv *loc = 0;
 
-	static wxString	thousandssep = wxT(","); 
-	static struct lconv	*loc = 0; 
-	if (!loc) {	
-		loc	= localeconv();	
-		if (loc	&& loc->thousands_sep && loc->thousands_sep[0])	
+	if( !loc )
+	{
+		loc = localeconv();
+
+		if( loc && loc->thousands_sep && loc->thousands_sep[0] )
 		{
-#if	wxUSE_UNICODE
-			thousandssep = wxString(loc->thousands_sep,	wxConvLibc);
+#if wxUSE_UNICODE
+			thousandssep = wxString( loc->thousands_sep, wxConvLibc );
 #else
 			thousandssep = loc->thousands_sep;
 #endif
 		}
-	} 
-
-	wxString in	= s, out; 
-	while (in.Length() > 3)	{ 
-			out.Prepend(thousandssep + in.Right(3)); 
-			in.RemoveLast(3); 
-	} 
-	if (!in.IsEmpty()) 
-			out.Prepend(in); 
-	return out;	
-}
-
-bool StrToInt64(wxString str, wxInt64 &i64)
-{
-	str.Trim(false);
-	str.Trim(true);
-
-	int	base=10;
-	str.MakeLower();
-	if(str.Left(2)==wxT("0x")) 
-	{
-		base=16;
-		str=str.Right(str.Len()-2);
 	}
 
-	bool ok=false;
-	size_t i=0,len=str.Len();
-	i64=0;
-	while(i<len)
+	wxString in = s, out;
+
+	while( in.Length() > 3 )
 	{
-		wxChar c=str[i];
-		if(c<='9' && c>='0')
+		out.Prepend( thousandssep + in.Right( 3 ) );
+		in.RemoveLast( 3 );
+	}
+
+	if( !in.IsEmpty() )
+		out.Prepend( in );
+
+	return out;
+}
+
+bool StrToInt64( wxString str, wxInt64 &i64 )
+{
+	str.Trim( false );
+	str.Trim( true );
+	int base = 10;
+	str.MakeLower();
+
+	if( str.Left( 2 ) == wxT( "0x" ) )
+	{
+		base = 16;
+		str = str.Right( str.Len() - 2 );
+	}
+
+	bool ok = false;
+	size_t i = 0, len = str.Len();
+	i64 = 0;
+
+	while( i < len )
+	{
+		wxChar c = str[i];
+
+		if( c <= '9' && c >= '0' )
 		{
-			i64= (i64*base)	+ (c-'0');
-		}
-		else if(base==16 &&	c>='a' && c<='f')
-		{
-			i64= (i64*16) +	(c-'a'+10);
+			i64 = ( i64 * base ) + ( c - '0' );
 		}
 		else
-		{
-			return false;
-		}
+			if( base == 16 && c >= 'a' && c <= 'f' )
+			{
+				i64 = ( i64 * 16 ) + ( c - 'a' + 10 );
+			}
+			else
+			{
+				return false;
+			}
 
-		ok=true;
+		ok = true;
 		++i;
 	}
 
