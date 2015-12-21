@@ -859,9 +859,7 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_EditMode = emTextMode;
 	m_DoRecountLineWidth = false;
 	m_OldWidth = m_OldHeight = 0;
-	long mode;
-	mode = m_Config->ReadLong( wxT( "WordWrapMode" ), ( long )wwmNoWrap );
-	m_WordWrapMode = ( MadWordWrapMode )mode;
+	m_WordWrapMode = (MadWordWrapMode) m_Config->ReadLong( wxT( "WordWrapMode" ), ( long )wwmNoWrap );
 	m_TopRow = 0;
 	m_DrawingXPos = 0;
 	m_LineSpacing = m_Config->ReadLong( wxT( "LineSpacing" ), 100 );
