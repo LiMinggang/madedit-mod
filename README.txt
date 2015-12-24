@@ -114,6 +114,9 @@ Note: Not support wxWidgets 2.X anymore since 0.3.X
 Todo:
 FreeBSD packaging (with FreeBSD 10.01)
 
+Mod v0.4.0
+Improve performance of script recording
+
 Mod v0.3.10
 1.New: Support "Dot(".") match new line", default behavior is changed to NOT match new line #98
 2.New: Dot match newline for Quick Search bar #103
