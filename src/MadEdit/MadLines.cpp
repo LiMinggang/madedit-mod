@@ -2582,14 +2582,13 @@ void MadLines::RecountLineWidth( void )
 	wxUint16 *bracewidth = NULL;
 	vector<int*> bracexpos_thisrow;
 	vector<int*>::iterator it;
+	int orgtabwidth = m_MadEdit->m_TabColumns * m_MadEdit->GetUCharWidth( 0x20 );
 
 	// Do we have BOM?
 	if( iter->m_RowIndices[0].m_Start != 0 )
 	{
 		braceposdelta = iter->m_RowIndices[0].m_Start;
 	}
-
-	int tabwidth = m_MadEdit->m_TabColumns * m_MadEdit->GetUCharWidth( 0x20 );
 
 	do
 	{
@@ -2719,6 +2718,7 @@ void MadLines::RecountLineWidth( void )
 				if( firstuc == 0x09 )       // Tab char
 				{
 					//m_MadEdit->FHasTab = true;
+                    int tabwidth = orgtabwidth;
 					ucwidth = maxwidth - rowidx.m_Width;
 
 					if( ucwidth == 0 )          // Tab at line-end
