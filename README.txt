@@ -116,6 +116,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.4.0
 Improve performance of script recording
+Improve text processing performance
 
 Mod v0.3.10
 1.New: Support "Dot(".") match new line", default behavior is changed to NOT match new line #98

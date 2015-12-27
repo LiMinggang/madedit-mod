@@ -855,7 +855,7 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_SelectionEnd = &m_SelectionPos2;
 	m_RepaintAll = true;
 	m_RepaintSelection = false;
-	m_FixedWidthMode = m_Config->ReadBool( wxT( "FixedWidthMode" ), false );
+	m_FixedWidthMode = m_Config->ReadBool( wxT( "FixedWidthMode" ), true );
 	m_EditMode = emTextMode;
 	m_DoRecountLineWidth = false;
 	m_OldWidth = m_OldHeight = 0;
@@ -11516,7 +11516,7 @@ int MadEdit::GetMaxWordWrapWidth()
 	{
 	case wwmWrapByWindow:
 		{
-			maxwidth = m_ClientWidth - ( GetLineNumberAreaWidth( m_Lines->m_Size >> 5 ) + m_BookmarkWidth  +
+			maxwidth = m_ClientWidth - ( GetLineNumberAreaWidth( m_Lines->m_Size >> 5 ) + m_BookmarkWidth +
 										 m_LeftMarginWidth + m_RightMarginWidth + m_TextFontAveCharWidth );
 		}
 		break;
@@ -11543,7 +11543,7 @@ int MadEdit::GetUCharWidth( ucs4_t uc )
 
 	if( widths == NULL )
 	{
-		widths = m_TextFontWidths[idx] = FontWidthManager::GetFontWidths( idx, m_TextFont->GetFaceName(), m_TextFont->GetPointSize(),    this );
+		widths = m_TextFontWidths[idx] = FontWidthManager::GetFontWidths( idx, m_TextFont->GetFaceName(), m_TextFont->GetPointSize(), this );
 	}
 
 	idx = uc & 0xFFFF;

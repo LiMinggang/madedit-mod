@@ -200,13 +200,14 @@ public:
 
 	bool IsDelimiter(ucs4_t	uc)
 	{
-		return (uc < 0x100 && m_Delimiter.Find(wxChar(uc))>=0);
+		return ((uc < 0x100) && m_Delimiter.Find(wxChar(uc))>=0);
 	}
 	bool IsNotDelimiter(ucs4_t uc)
 	{
 		// changed:	gogo, 21.09.2009 (purpose -	correct	word wrap for words	with non-ascii chars)
-		//return (uc < 0x100 &&	m_Delimiter.Find(wxChar(uc))<0 && !IsSpace(uc));
-		return m_Delimiter.Find(wxChar(uc))	< 0	&& ! IsSpace(uc);
+		// Rollbacked: 26.12.2015 for performance
+		return ((uc < 0x100) && (!IsSpace(uc)) && (m_Delimiter.Find(wxChar(uc))<0));
+		//return ((m_Delimiter.Find(wxChar(uc)) < 0)  && (! IsSpace(uc)));
 	}
 
 	void SetAttributes(MadAttributeElement ae)
