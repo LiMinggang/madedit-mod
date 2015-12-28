@@ -119,6 +119,7 @@ Improve performance of script recording
 Improve text processing performance
 Improve syntax highlighting performance
 Improve ReloadByModificationTime event handling
+Increase file reading buffer for performance
 
 Mod v0.3.10
 1.New: Support "Dot(".") match new line", default behavior is changed to NOT match new line #98
