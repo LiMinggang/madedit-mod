@@ -410,6 +410,7 @@ private:
 
 	bool            m_LoadingFile;
 	bool            m_Painted;
+	bool            m_ModReloaded;
 
 	// speed-up flags for FindInFiles
 	bool            m_UseDefaultSyntax;

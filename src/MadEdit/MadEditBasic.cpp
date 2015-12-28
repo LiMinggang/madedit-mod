@@ -2580,6 +2580,7 @@ bool MadEdit::ReloadByModificationTime( bool LostCapture/* = false*/ )
 		wxCommandEvent event( CHECK_MODIFICATION_TIME );
 		event.SetEventObject( this );
 		AddPendingEvent( event );
+		m_ModReloaded = false;
 		return false;
 	}
 
@@ -2628,6 +2629,7 @@ bool MadEdit::ReloadByModificationTime( bool LostCapture/* = false*/ )
 	//if(LostCapture)
 	//AddPendingEvent( mevt );
 	// YES, reload it.
+	m_ModReloaded = true;
 	return Reload();
 }
 

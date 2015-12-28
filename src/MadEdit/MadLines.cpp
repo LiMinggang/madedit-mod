@@ -20,8 +20,8 @@
 	#define new new(_NORMAL_BLOCK ,__FILE__, __LINE__)
 #endif
 
-const int BUFFER_SIZE = 1024 * 256;     // 256KB
-const int BUFFER_BITS = 18;
+const int BUFFER_SIZE = 1024 * 256 * 16;     // 256KB
+const int BUFFER_BITS = 22;
 const int BUFFER_MASK = BUFFER_SIZE - 1;
 const wxFileOffset BUFFER_BASE_MASK = wxFileOffset( -1 ) << BUFFER_BITS;
 //wxFileOffset(-1) -  BUFFER_MASK;
@@ -3093,7 +3093,8 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 
 		if( m_MadEdit->m_SearchWholeWord == false )
 		{
-			m_Syntax->m_Delimiter.Empty();
+			//m_Syntax->m_Delimiter.Empty();
+			m_Syntax->m_Delimiter.clear();
 		}
 
 		m_Syntax->m_CaseSensitive = true;

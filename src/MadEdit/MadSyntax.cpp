@@ -613,6 +613,7 @@ void MadSyntax::ParseSyntax( const wxString &filename )
 	m_Title = wxT( "No Title" );
 	long idx = 0;
 	bool cont = syn.GetNextEntry( entry, idx );
+	wxString s;
 
 	while( cont )
 	{
@@ -640,7 +641,12 @@ void MadSyntax::ParseSyntax( const wxString &filename )
 				else
 					if( entry == wxT( "delimiter" ) )
 					{
-						m_Delimiter = value;
+						//m_Delimiter = value;
+						m_Delimiter.clear();
+						for( size_t i = 0; i < value.Len(); ++i )
+						{
+							m_Delimiter.insert((ucs4_t)value[i]);
+						}
 					}
 					else
 						if( entry == wxT( "escapechar" ) )
@@ -654,7 +660,7 @@ void MadSyntax::ParseSyntax( const wxString &filename )
 							if( entry == wxT( "stringchar" ) )
 							{
 								wxStringTokenizer tkz( value );
-								wxString s = tkz.GetNextToken();
+								s = tkz.GetNextToken();
 
 								while( !s.IsEmpty() )
 								{
@@ -687,7 +693,7 @@ void MadSyntax::ParseSyntax( const wxString &filename )
 												if( entry == wxT( "indentchar" ) )
 												{
 													wxStringTokenizer tkz( value );
-													wxString s = tkz.GetNextToken();
+													s = tkz.GetNextToken();
 
 													while( !s.IsEmpty() )
 													{
@@ -699,7 +705,7 @@ void MadSyntax::ParseSyntax( const wxString &filename )
 													if( entry == wxT( "unindentchar" ) )
 													{
 														wxStringTokenizer tkz( value );
-														wxString s = tkz.GetNextToken();
+														s = tkz.GetNextToken();
 
 														while( !s.IsEmpty() )
 														{
@@ -747,7 +753,7 @@ void MadSyntax::ParseSyntax( const wxString &filename )
 
 																	while( true )
 																	{
-																		wxString s = tkz.GetNextToken();
+																		s = tkz.GetNextToken();
 
 																		if( !s.ToULong( &ra.id ) ) break;
 
@@ -772,7 +778,7 @@ void MadSyntax::ParseSyntax( const wxString &filename )
 																		if( entry == wxT( "linecomment" ) )
 																		{
 																			wxStringTokenizer tkz( value );
-																			wxString s = tkz.GetNextToken();
+																			s = tkz.GetNextToken();
 
 																			while( !s.IsEmpty() )
 																			{
@@ -814,14 +820,13 @@ void MadSyntax::ParseSyntax( const wxString &filename )
 
 																							while( tkz.HasMoreTokens() )
 																							{
-																								wxString s = tkz.GetNextToken();
+																								s = tkz.GetNextToken();
 																								m_BlockCommentInRange.push_back( vector<int>() );
 																								SetInRange( s, m_BlockCommentInRange[idx++] );
 																							}
 																						}
 																						else
 																						{
-																							wxString s;
 																							int attr = 0, alen = 5;
 
 																							if( entry.Right( 7 ) == wxT( "bgcolor" ) )
@@ -1056,11 +1061,18 @@ void MadSyntax::ParseSyntax( const wxString &filename )
 	}
 }
 
+static ucs4_t DefDelimiter[] = {wxT('~'), wxT('`'), wxT('!'), wxT('@'), wxT('#'), wxT('$'), wxT('%'), wxT('^'), wxT('&'), wxT('*'), wxT('('), wxT(')'), wxT('-'), wxT('+'), wxT('='), wxT('|'), wxT('\\'), wxT('{'), wxT('}'), wxT('['), wxT(']'), wxT(':'), wxT(';'), wxT('"'), wxT('\''), wxT(','), wxT('.'), wxT('<'), wxT('>'), wxT('/'), wxT('?')};
 void MadSyntax::Reset()
 {
+	size_t i;
 	m_Title = MadPlainTextTitle;
 	m_CaseSensitive = false;
-	m_Delimiter = wxT( "~`!@#$%^&*()-+=|\\{}[]:;\"\',.<>/?" );
+	//m_Delimiter = wxT( "~`!@#$%^&*()-+=|\\{}[]:;\"\',.<>/?" );
+	m_Delimiter.clear();
+	for( i = 0; i < (sizeof(DefDelimiter)/sizeof(ucs4_t)); ++i )
+	{
+		m_Delimiter.insert((ucs4_t)DefDelimiter[i]);
+	}
 	m_LineComment.clear();
 	m_BlockCommentOn.clear();
 	m_BlockCommentOff.clear();
@@ -1079,7 +1091,6 @@ void MadSyntax::Reset()
 	nw_EscapeChar = 0xFFFFFFFF;
 	m_StringInRange.clear();
 	m_LineCommentInRange.clear();
-	size_t i;
 
 	for( i = 0; i < m_BlockCommentInRange.size(); ++i )
 	{
@@ -1422,6 +1433,7 @@ int MadSyntax::FindStringCase( MadUCQueue & ucqueue, size_t first,
 	size_t ucsize = ucqueue.size() - first;
 	wxASSERT( ucsize > 0 );
 	bool noNewLine = true;
+	MadUCQueueIterator it;
 
 	if( ucsize > 1 )
 	{
@@ -1463,7 +1475,7 @@ int MadSyntax::FindStringCase( MadUCQueue & ucqueue, size_t first,
 
 			if( ucsize >= len )
 			{
-				MadUCQueueIterator it = ucqueue.begin();
+				it = ucqueue.begin();
 				std::advance( it, first + 1 );
 
 				while( *( ++cstr ) != 0 )
@@ -1512,6 +1524,7 @@ int MadSyntax::FindStringNoCase( MadUCQueue & ucqueue, size_t first,
 	}
 
 	MadLines::NextUCharFuncPtr NextUChar = nw_MadLines->NextUChar;
+	MadUCQueueIterator it;
 
 	do
 	{
@@ -1540,7 +1553,7 @@ int MadSyntax::FindStringNoCase( MadUCQueue & ucqueue, size_t first,
 
 			if( ucsize >= len )
 			{
-				MadUCQueueIterator it = ucqueue.begin();
+				it = ucqueue.begin();
 				std::advance( it, first + 1 );
 
 				while( *( ++cstr ) != 0 )

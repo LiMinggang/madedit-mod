@@ -914,6 +914,7 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_HexRowCount = 0;
 	m_HexDigitBitmap = NULL;
 	m_LoadingFile = false;
+	m_ModReloaded = true;
 	m_OnSelectionChanged = NULL;
 	m_OnStatusChanged = NULL;
 	m_OnToggleWindow = NULL;
@@ -4613,7 +4614,7 @@ void MadEdit::CopyFileDataToMem( MadBlockIterator begin, MadBlockIterator end )
 	if( m_Lines->m_FileData == NULL )
 		return;
 
-	const size_t BUFFER_SIZE = 128 * 1024;
+	const size_t BUFFER_SIZE = 256 * 1024;
 	static vector<wxByte> TempBufferVector;
 	static wxByte *TempBuffer = NULL;
 
@@ -11708,6 +11709,7 @@ void MadEdit::ClearAllBookmarks()
 void MadEdit::OnCheckModificationTime( wxCommandEvent& evt )
 {
 	DBOUT( "OnCheckModificationTime\n" );
-	ReloadByModificationTime();
+	if(m_ModReloaded == false )
+		ReloadByModificationTime();
 }
 
