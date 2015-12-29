@@ -4614,7 +4614,7 @@ void MadEdit::CopyFileDataToMem( MadBlockIterator begin, MadBlockIterator end )
 	if( m_Lines->m_FileData == NULL )
 		return;
 
-	const size_t BUFFER_SIZE = 256 * 1024;
+	const size_t BUFFER_SIZE = 128 * 1024;
 	static vector<wxByte> TempBufferVector;
 	static wxByte *TempBuffer = NULL;
 
@@ -9653,7 +9653,7 @@ void MadEdit::OnChar( wxKeyEvent& evt )
 				{
 					if( m_Win98LeadByte >= 0 )
 					{
-						wxByte db[2] = {m_Win98LeadByte, ucs4};
+						wxByte db[2] = { wxByte(m_Win98LeadByte), wxByte(ucs4)};
 						ucs4_t uc = enc->DBtoUCS4( db );
 
 						if( uc > 0 )
@@ -9671,7 +9671,7 @@ void MadEdit::OnChar( wxKeyEvent& evt )
 
 					if( !processed )
 					{
-						wxByte db[2] = {ucs4, 0};
+						wxByte db[2] = { wxByte(ucs4), 0};
 						ucs4_t uc = enc->DBtoUCS4( db );
 
 						if( uc != 0 ) // is a valid single-byte char

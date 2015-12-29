@@ -108,7 +108,7 @@ void MSW_GetFontName(wxChar	*codepage, wxString	&fontname)
 	if(pRegKey->QueryValue(wxT("Family"), &cp))
 	{
 		delete pRegKey;
-		pRegKey	= new wxRegKey(MIMEDB +	wxString::Format(wxT("%d"),	cp));
+		pRegKey	= new wxRegKey(MIMEDB +	wxString::Format(wxT("%s"),	( wxLongLong( cp ).ToString() ).c_str()));
 	}
 
 	pRegKey->QueryValue(wxT("FixedWidthFont"), fontname);

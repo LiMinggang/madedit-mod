@@ -451,7 +451,7 @@ private:
 	{ emMacroStopped = 0, emMacroRecoding, emMacroRunning };
 	MadMacroMode m_MadMacroStatus;
 	wxArrayString m_MadMacroScripts;
-	int m_LastSelBeg, m_LastSelEnd;
+	wxFileOffset m_LastSelBeg, m_LastSelEnd;
 public:
 	MadMacroMode GetMadMacroStatus() {return m_MadMacroStatus;}
 	bool IsMacroRunning() {return ( m_MadMacroStatus == emMacroRunning );}
@@ -464,7 +464,7 @@ public:
 		if( ( ( selBeg != -1 ) && ( selEnd != -1 ) ) && ( selBeg != m_LastSelBeg || selEnd != m_LastSelEnd ) ) {
 			m_LastSelBeg = selBeg;
 			m_LastSelEnd = selEnd;
-			m_MadMacroScripts.Add( wxString::Format( wxT( "SetSelection(%d, %d, True)" ), m_LastSelBeg, m_LastSelEnd ) );
+			m_MadMacroScripts.Add( wxString::Format( wxT( "SetSelection(%s, %s, True)" ), ( wxLongLong( m_LastSelBeg ).ToString() ).c_str(), ( wxLongLong( m_LastSelEnd ).ToString() ).c_str() ) );
 		}
 
 		m_MadMacroScripts.Add( script );

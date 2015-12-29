@@ -544,7 +544,7 @@ public:
 
 		if( delta.ToLong() >= 350 ) {
 			g_Time = t;
-			g_Continue = g_ProgressDialog->Update( 0, wxString::Format( fmtmsg1, g_FileNameList.size() ) );
+			g_Continue = g_ProgressDialog->Update( 0, wxString::Format( fmtmsg1, ( wxLongLong( g_FileNameList.size() ).ToString() ).c_str() ) );
 
 			if( !g_Continue ) { return wxDIR_STOP; }
 		}
@@ -601,10 +601,10 @@ void MadFindInFilesDialog::FindReplaceInFiles( bool bReplace )
 {
 	//wxLogNull nolog;
 	const int max = 1000;
-	fmtmsg1 = _( "Found %d file(s) matched the filters..." );
+	fmtmsg1 = _( "Found %s file(s) matched the filters..." );
 	fmtmsg1 += wxT( "                                        \n" );
 	wxProgressDialog dialog( this->GetTitle(),
-	                         wxString::Format( fmtmsg1, 0 ),
+	                         wxString::Format( fmtmsg1, wxT("0") ),
 	                         max,    // range
 	                         g_MainFrame,   // parent
 	                         wxPD_CAN_ABORT |
@@ -642,57 +642,63 @@ void MadFindInFilesDialog::FindReplaceInFiles( bool bReplace )
 		}
 
 		// get the filename filters
-		str = WxComboBoxFilter->GetValue();
-		str.Trim( true );
-		str.Trim( false );
-		wxStringTokenizer tkz( str, wxT( " \t;" ) );
 		vector<wxString> filters;
 		wxString tok;
-
-		for( ;; )
+		str = WxComboBoxFilter->GetValue();
+		if (!str.IsEmpty())
 		{
-			tok = tkz.GetNextToken();
+			str.Trim( true );
+			str.Trim( false );
+			wxStringTokenizer tkz( str, wxT( " \t;" ) );
 
-			if( tok.IsEmpty() ) { break; }
-
-			filters.push_back( tok );
-		}
-
-		if( !filters.empty() )
-		{
-			m_RecentFindFilter->AddFileToHistory( str );
-
-			if( WxComboBoxFilter->GetCount() == 0 || WxComboBoxFilter->GetString( 0 ) != str )
+			for( ;; )
 			{
-				WxComboBoxFilter->Insert( str, 0 );
+				tok = tkz.GetNextToken();
+
+				if( tok.IsEmpty() ) { break; }
+
+				filters.push_back( tok );
+			}
+
+			if( !filters.empty() )
+			{
+				m_RecentFindFilter->AddFileToHistory( str );
+
+				if( WxComboBoxFilter->GetCount() == 0 || WxComboBoxFilter->GetString( 0 ) != str )
+				{
+					WxComboBoxFilter->Insert( str, 0 );
+				}
 			}
 		}
 
 		str = WxComboBoxExclude->GetValue();
-		str.Trim( true );
-		str.Trim( false );
-		wxStringTokenizer tkz2( str, wxT( " \t;" ) );
 		g_ExcludeFilters.clear();
-
-		for( ;; )
+		if(!str.IsEmpty())
 		{
-			tok = tkz2.GetNextToken();
+			str.Trim( true );
+			str.Trim( false );
+			wxStringTokenizer tkz2( str, wxT( " \t;" ) );
 
-			if( tok.IsEmpty() ) { break; }
+			for( ;; )
+			{
+				tok = tkz2.GetNextToken();
+
+				if( tok.IsEmpty() ) { break; }
 
 #ifdef __WXMSW__
-			tok.MakeLower();
+				tok.MakeLower();
 #endif
-			g_ExcludeFilters.push_back( tok );
-		}
+				g_ExcludeFilters.push_back( tok );
+			}
 
-		if( !g_ExcludeFilters.empty() )
-		{
-			m_RecentFindExclude->AddFileToHistory( str );
-
-			if( WxComboBoxExclude->GetCount() == 0 || WxComboBoxExclude->GetString( 0 ) != str )
+			if( !g_ExcludeFilters.empty() )
 			{
-				WxComboBoxExclude->Insert( str, 0 );
+				m_RecentFindExclude->AddFileToHistory( str );
+
+				if( WxComboBoxExclude->GetCount() == 0 || WxComboBoxExclude->GetString( 0 ) != str )
+				{
+					WxComboBoxExclude->Insert( str, 0 );
+				}
 			}
 		}
 

@@ -20,8 +20,8 @@
 	#define new new(_NORMAL_BLOCK ,__FILE__, __LINE__)
 #endif
 
-const int BUFFER_SIZE = 1024 * 256 * 16;     // 256KB
-const int BUFFER_BITS = 22;
+const int BUFFER_SIZE = 1024 * 256;     // 256KB
+const int BUFFER_BITS = 18;
 const int BUFFER_MASK = BUFFER_SIZE - 1;
 const wxFileOffset BUFFER_BASE_MASK = wxFileOffset( -1 ) << BUFFER_BITS;
 //wxFileOffset(-1) -  BUFFER_MASK;
@@ -1728,7 +1728,7 @@ MadLineState MadLines::Reformat( MadLineIterator iter )
 	vector < wxString > strvec;
 	MadSyntaxRange *srange = NULL;
 	int CheckState = m_Syntax->m_CheckState;
-	int tabwidth = m_MadEdit->m_TabColumns * m_MadEdit->GetUCharWidth( 0x20 );
+	int orgtabwidth = m_MadEdit->m_TabColumns * m_MadEdit->GetUCharWidth( 0x20 ), tabwidth;
 
 	( this->*NextUChar )( ucqueue );
 
@@ -2237,6 +2237,9 @@ _NOCHECK_:
 				if( firstuc == 0x09 )       // Tab char
 				{
 					m_MadEdit->m_HasTab = true;
+
+					tabwidth = orgtabwidth; 
+
 					ucwidth = maxwidth - rowidx.m_Width;
 
 					if( ucwidth == 0 )          // Tab at line-end

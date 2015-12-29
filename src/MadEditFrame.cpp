@@ -1023,8 +1023,8 @@ void OnEditSelectionChanged( MadEdit *madedit )
 			++col;
 		}
 
-		wxString s1 = FormatThousands( wxString::Format( wxT( "%d" ), line ) );
-		wxString s2 = FormatThousands( wxString::Format( wxT( "%u" ), madedit->GetLineCount() ) );
+		wxString s1 = FormatThousands( wxString::Format( wxT( "%s" ), ( wxLongLong( line ).ToString() ).c_str() ) );
+		wxString s2 = FormatThousands( wxString::Format( wxT( "%s" ), ( wxLongLong( madedit->GetLineCount() ).ToString() ).c_str() ) );
 		wxString s4 = FormatThousands( wxLongLong( col ).ToString() );
 		static wxString lnstr( _( "Ln:" ) );
 		static wxString sepstr( wxT( " /" ) );
@@ -6173,7 +6173,7 @@ void MadEditFrame::OnSearchGoToLine( wxCommandEvent& event )
 	HideModalessDialogs();
 	static wxString defstr;
 	int lineCount = g_ActiveMadEdit->GetLineCount();
-	wxString str = wxGetTextFromUser( wxString::Format( _( "Line Number(1~%d): (you can input HexNumber(0x1~0x%X): 0xNNN)" ), lineCount, lineCount ), _( "Go To Line" ), defstr );
+	wxString str = wxGetTextFromUser( wxString::Format( _( "Line Number(1~%s): (you can input HexNumber(0x1~0x%X): 0xNNN)" ), ( wxLongLong( lineCount ).ToString() ).c_str(), lineCount ), _( "Go To Line" ), defstr );
 
 	if( !str.IsEmpty() )
 	{
@@ -6199,7 +6199,7 @@ void MadEditFrame::OnSearchGoToLine( wxCommandEvent& event )
 			}
 			else
 			{
-				RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "GoToLine(%d)" ), line ) );
+				RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "GoToLine(%s)" ), ( wxLongLong( line ).ToString() ).c_str() ) );
 			}
 		}
 	}
@@ -7539,9 +7539,9 @@ void MadEditFrame::OnToolsStartRecMacro( wxCommandEvent& event )
 		SetMacroRecording();
 		m_MadMacroScripts.Empty();
 		{
-			int caretPos = ( int )g_ActiveMadEdit->GetCaretPosition();
+			wxFileOffset caretPos = g_ActiveMadEdit->GetCaretPosition();
 			AddMacroScript( wxString::Format( wxT( "#Restore caret position" ) ) );
-			AddMacroScript( wxString::Format( wxT( "SetCaretPosition(%d)" ), caretPos ) );
+			AddMacroScript( wxString::Format( wxT( "SetCaretPosition(%s)" ), ( wxLongLong( caretPos ).ToString() ).c_str() ) );
 		}
 	}
 }
