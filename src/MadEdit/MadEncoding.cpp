@@ -740,7 +740,7 @@ size_t MadEncoding::UCS4toMB(ucs4_t	ucs4, wxByte *buf)
 	if(mb==0xFFFF)	  // non-cached
 	{
 		wxByte mbs[4];
-		wchar_t	wc[2]={ucs4,0};
+		wchar_t	wc[2]={wchar_t(ucs4),0};
 		len=m_CSConv->WC2MB((char*)mbs,wc,4);
 		if(len==0 || len==(size_t)-1)
 		{

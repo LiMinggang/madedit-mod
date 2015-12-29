@@ -814,6 +814,8 @@ bool MadLine::FirstUCharIs0x0A( MadEncoding *encoding )
 //===========================================================================
 // MadLines
 //===========================================================================
+const MadLine MadLines::madNewEmptyLine;
+const MadRowIndex MadLines::madNewRowIdx;
 
 MadLines::MadLines( MadEdit *madedit )
 {
@@ -873,7 +875,7 @@ void MadLines::Empty( bool freeAll )
 	{
 		if( m_LineList.empty() )
 		{
-			iter = m_LineList.insert( end, MadLine() );
+			iter = m_LineList.insert( end, madNewEmptyLine );
 		}
 
 		// reserve one empty line
@@ -1686,14 +1688,15 @@ int MadLines::FindStringNoCase( MadUCQueue &ucqueue, MadStringIterator begin,
 	return 0;
 }
 
-
-MadLineState MadLines::Reformat( MadLineIterator iter )
+/*Changed to reference since the iter would be reassigned imediatly after this was called*/
+void MadLines::Reformat( /*IN*/MadLineIterator &iter,/*IN*/int maxwrapwidth, /*IN*/long orgtabwidth, /*OUT*/MadLineState &state )
 {
 	ReformatCount = 1;
 	iter->m_BracePairIndices.clear();
+	state = iter->m_State;
 
 	if( iter->m_Size == 0 )                  // is a empty line
-		return iter->m_State;
+		return;
 
 	m_NextUChar_BufferLoadNew = false;
 	m_NextUChar_BufferStart = 0;
@@ -1701,7 +1704,6 @@ MadLineState MadLines::Reformat( MadLineIterator iter )
 	MadLineIterator nextline = iter;
 	++nextline;
 	iter->m_State.CommentOff = false;
-	MadLineState state = iter->m_State;
 	InitNextUChar( iter, 0 );
 	iter->m_NewLineSize = 0;
 	// every line must be one row at first
@@ -1716,7 +1718,7 @@ MadLineState MadLines::Reformat( MadLineIterator iter )
 	int wordwidth;
 	int wordisdelimiter = 0; //1:is delimiter, -1:not delimiter, 0:other
 	const size_t maxlinelength = m_MadEdit->m_MaxLineLength;
-	int maxwidth = m_MadEdit->GetMaxWordWrapWidth();
+	//int maxwidth = m_MadEdit->GetMaxWordWrapWidth();
 	size_t bomlen = 0;
 	
 	ucs4_t firstuc, lastuc, prevuc;
@@ -1728,7 +1730,7 @@ MadLineState MadLines::Reformat( MadLineIterator iter )
 	vector < wxString > strvec;
 	MadSyntaxRange *srange = NULL;
 	int CheckState = m_Syntax->m_CheckState;
-	int orgtabwidth = m_MadEdit->m_TabColumns * m_MadEdit->GetUCharWidth( 0x20 ), tabwidth;
+	long tabwidth;
 
 	( this->*NextUChar )( ucqueue );
 
@@ -1756,7 +1758,6 @@ MadLineState MadLines::Reformat( MadLineIterator iter )
 	if( state.RangeId )
 		srange = m_Syntax->GetSyntaxRange( state.RangeId );
 
-
 	if( m_Syntax->m_CaseSensitive )
 		FindString = &MadLines::FindStringCase;
 	else
@@ -1767,7 +1768,6 @@ MadLineState MadLines::Reformat( MadLineIterator iter )
 		MadLineIterator nline;
 		MadBlockIterator blockiter;
 		MadBlock block_tmp;
-		MadLine newLine;
 
 		while( true )
 		{
@@ -2210,8 +2210,8 @@ _NOCHECK_:
 
 					bracexpos_count = 0;
 					iter->m_RowIndices[rowidx_idx++] = rowidx;
-					iter->m_RowIndices.push_back( MadRowIndex() );
-					m_RowCount++;
+					iter->m_RowIndices.push_back( madNewRowIdx );
+					++m_RowCount;
 
 					if( rowidx.m_Width > m_MaxLineWidth )
 						m_MaxLineWidth = rowidx.m_Width;
@@ -2240,7 +2240,7 @@ _NOCHECK_:
 
 					tabwidth = orgtabwidth; 
 
-					ucwidth = maxwidth - rowidx.m_Width;
+					ucwidth = maxwrapwidth - rowidx.m_Width;
 
 					if( ucwidth == 0 )          // Tab at line-end
 					{
@@ -2255,7 +2255,7 @@ _NOCHECK_:
 					}
 				}
 
-				if( rowidx.m_Width + ucwidth > maxwidth )  // wordwrap by width
+				if( rowidx.m_Width + ucwidth > maxwrapwidth )  // wordwrap by width
 				{
 					bool move_word_to_next_line = false;
 
@@ -2297,7 +2297,7 @@ _NOCHECK_:
 
 					bracexpos_count = 0;
 					iter->m_RowIndices[rowidx_idx++] = rowidx;
-					iter->m_RowIndices.push_back( MadRowIndex() );
+					iter->m_RowIndices.push_back( madNewRowIdx );
 					++m_RowCount;
 
 					if( rowidx.m_Width > m_MaxLineWidth )
@@ -2418,7 +2418,7 @@ _NOCHECK_:
 
 			iter->m_Size = m_NextUChar_Pos;
 			// add a new line
-			nline = m_LineList.insert( nextline, newLine );
+			nline = m_LineList.insert( nextline, madNewEmptyLine);
 			++ReformatCount;
 			//*** get corresponding block ***//
 			blockiter = iter->m_Blocks.begin();
@@ -2472,7 +2472,6 @@ _NOCHECK_:
 	}
 
 	m_NextUChar_BufferLoadNew = true;
-	return state;
 }
 
 // reformat lines [first,last].
@@ -2482,8 +2481,10 @@ size_t MadLines::Reformat( MadLineIterator first, MadLineIterator last )
 {
 	MadLineState state;
 	MadLineIterator next = first, end = m_LineList.end();
-	bool bContinue = true, bIsNotEnd = true, bStateIsNotOkay;
+	bool bContinue = true, bIsNotEnd = true, bStateIsNotOkay = false;
 	size_t count = 0;
+	long lTabWidth = m_MadEdit->m_TabColumns * m_MadEdit->GetUCharWidth(0x20);
+	int iMaxWrapWidth = m_MadEdit->GetMaxWordWrapWidth();
 
 	do
 	{
@@ -2521,7 +2522,8 @@ size_t MadLines::Reformat( MadLineIterator first, MadLineIterator last )
 			bIsNotEnd = false;
 
 		// reformat this line
-		state = Reformat( first );
+		state.Reset();
+		Reformat( first, iMaxWrapWidth, lTabWidth, state);
 		count += ReformatCount;
 
 		if( bIsNotEnd )
@@ -2545,7 +2547,7 @@ size_t MadLines::Reformat( MadLineIterator first, MadLineIterator last )
 			if( first->LastUCharIsNewLine( m_Encoding ) != 0 )
 			{
 				// add a empty line to end
-				first = m_LineList.insert( next, MadLine() );
+				first = m_LineList.insert( next, madNewEmptyLine);
 				first->Empty();
 				++m_LineCount;
 				++m_RowCount;
@@ -2694,7 +2696,7 @@ void MadLines::RecountLineWidth( void )
 
 					bracexpos_thisrow.clear();
 					iter->m_RowIndices[rowidx_idx++] = rowidx;
-					iter->m_RowIndices.push_back( MadRowIndex() );
+					iter->m_RowIndices.push_back( madNewRowIdx );
 					++m_RowCount;
 
 					if( rowidx.m_Width > m_MaxLineWidth )
@@ -2775,7 +2777,7 @@ void MadLines::RecountLineWidth( void )
 
 					bracexpos_thisrow.clear();
 					iter->m_RowIndices[rowidx_idx++] = rowidx;
-					iter->m_RowIndices.push_back( MadRowIndex() );
+					iter->m_RowIndices.push_back( madNewRowIdx );
 					++m_RowCount;
 
 					if( rowidx.m_Width > m_MaxLineWidth )

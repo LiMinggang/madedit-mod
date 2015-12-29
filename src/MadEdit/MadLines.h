@@ -203,6 +203,14 @@ struct MadLineState
 			   CommentOff == ls.CommentOff && StringId == ls.StringId &&
 			   LineComment == ls.LineComment && Directive == ls.Directive;
 	}
+	void Reset() {
+		RangeId = 0; 	// 0: Global Range, 1..255: User Defined Range
+		CommentId = 0;	// 0: not in blockcomment, 1..255: User Defined BlockComment
+		CommentOff = 0;	// contains a BlockCommentOff string in this line, for speed-up of parsing
+		StringId = 0;	// 0: not in string, 1..255: in string
+		LineComment = 0; // 0: not in linecomment, 1..255: in linecomment
+		Directive = 0;	// 0: not in directive, 1..255: in directive
+	}
 };
 
 struct BracePairIndex
@@ -381,7 +389,7 @@ private:
 
 	size_t ReformatCount;
 	// reformat single line, return the state of line-end
-	MadLineState Reformat( MadLineIterator iter );
+	void Reformat( /*IN*/MadLineIterator &iter,/*IN*/int maxwrapwidth, /*IN*/long orgtabwidth, /*OUT*/MadLineState &state );
 	// reformat lines in [first,last]
 	size_t Reformat( MadLineIterator first, MadLineIterator last );
 	// Recount all lines' width
@@ -453,6 +461,8 @@ public:
 	// should not frequently use this, it's slowly
 	// if no, return MadUCPair(0, 0)
 	MadUCPair PreviousUChar( /*IN_OUT*/MadLineIterator &lit, /*IN_OUT*/wxFileOffset &linepos );
+	static const MadLine madNewEmptyLine;
+	static const MadRowIndex madNewRowIdx;
 };
 
 
