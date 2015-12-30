@@ -1689,7 +1689,7 @@ int MadLines::FindStringNoCase( MadUCQueue &ucqueue, MadStringIterator begin,
 }
 
 /*1. iter was changed to reference since the iter would be reassigned imediatly after this was called
-  2. You should make sure iter->m_Size != 0
+  2. You should make sure iter->m_Size != 0 before call this
 */
 void MadLines::Reformat( /*IN*/MadLineIterator &iter,/*IN*/int maxwrapwidth, /*IN*/long orgtabwidth, /*OUT*/MadLineState &state )
 {
@@ -1753,10 +1753,10 @@ void MadLines::Reformat( /*IN*/MadLineIterator &iter,/*IN*/int maxwrapwidth, /*I
 	if( state.RangeId )
 		srange = m_Syntax->GetSyntaxRange( state.RangeId );
 
-	if( m_Syntax->m_CaseSensitive )
-		FindString = &MadLines::FindStringCase;
-	else
-		FindString = &MadLines::FindStringNoCase;
+//	if( m_Syntax->m_CaseSensitive )
+//		FindString = &MadLines::FindStringCase;
+//	else
+//		FindString = &MadLines::FindStringNoCase;
 
 	if( !ucqueue.empty() )
 	{
@@ -2478,8 +2478,16 @@ size_t MadLines::Reformat( MadLineIterator first, MadLineIterator last )
 	MadLineIterator next = first, end = m_LineList.end();
 	bool bContinue = true, bIsNotEnd = true, bStateIsNotOkay = false;
 	size_t count = 0;
+
+	/*====Moved from Reformat() above for performance====*/
 	long lTabWidth = m_MadEdit->m_TabColumns * m_MadEdit->GetUCharWidth(0x20);
 	int iMaxWrapWidth = m_MadEdit->GetMaxWordWrapWidth();
+
+	if( m_Syntax->m_CaseSensitive )
+		FindString = &MadLines::FindStringCase;
+	else
+		FindString = &MadLines::FindStringNoCase;
+	/*====End of being moved from Reformat() above for performance====*/
 
 	do
 	{
@@ -2517,9 +2525,11 @@ size_t MadLines::Reformat( MadLineIterator first, MadLineIterator last )
 			bIsNotEnd = false;
 
 		// reformat this line, note: first would be changed after this
+		/*====Moved from Reformat() above for performance====*/
 		state = first->m_State;
 		ReformatCount = 1;
 		first->m_BracePairIndices.clear();
+		/*====End of being moved from Reformat() above for performance====*/
 		
 		if( first->m_Size != 0 ) // not an empty line
 			Reformat( first, iMaxWrapWidth, lTabWidth, state);

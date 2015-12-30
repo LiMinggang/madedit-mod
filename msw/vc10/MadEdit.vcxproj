@@ -108,7 +108,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|x64'">
     <ClCompile>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(WXWIN3)\lib\vc_x64_lib\mswud;$(WXWIN3)\include;$(BOOST);..\..\charset-detector\include;..\..\charset-detector\src;..\..\charset-detector\src\tables;..\..\minipython\Include;..\..\minipython\PC;..\..\spellchecker;..\..\spellchecker\hunspell\src;..\..\markdown;..\..\astyle;..\..\astyle\astyle;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WIN64;_DEBUG;_WINDOWS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;HUNSPELL_STATIC;Py_NO_ENABLE_SHARED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
