@@ -1688,16 +1688,11 @@ int MadLines::FindStringNoCase( MadUCQueue &ucqueue, MadStringIterator begin,
 	return 0;
 }
 
-/*Changed to reference since the iter would be reassigned imediatly after this was called*/
+/*1. iter was changed to reference since the iter would be reassigned imediatly after this was called
+  2. You should make sure iter->m_Size != 0
+*/
 void MadLines::Reformat( /*IN*/MadLineIterator &iter,/*IN*/int maxwrapwidth, /*IN*/long orgtabwidth, /*OUT*/MadLineState &state )
 {
-	ReformatCount = 1;
-	iter->m_BracePairIndices.clear();
-	state = iter->m_State;
-
-	if( iter->m_Size == 0 )                  // is a empty line
-		return;
-
 	m_NextUChar_BufferLoadNew = false;
 	m_NextUChar_BufferStart = 0;
 	m_NextUChar_BufferSize = 0;
@@ -2521,9 +2516,14 @@ size_t MadLines::Reformat( MadLineIterator first, MadLineIterator last )
 		else
 			bIsNotEnd = false;
 
-		// reformat this line
-		state.Reset();
-		Reformat( first, iMaxWrapWidth, lTabWidth, state);
+		// reformat this line, note: first would be changed after this
+		state = first->m_State;
+		ReformatCount = 1;
+		first->m_BracePairIndices.clear();
+		
+		if( first->m_Size != 0 ) // not an empty line
+			Reformat( first, iMaxWrapWidth, lTabWidth, state);
+
 		count += ReformatCount;
 
 		if( bIsNotEnd )

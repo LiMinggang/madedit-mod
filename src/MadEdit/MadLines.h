@@ -203,14 +203,6 @@ struct MadLineState
 			   CommentOff == ls.CommentOff && StringId == ls.StringId &&
 			   LineComment == ls.LineComment && Directive == ls.Directive;
 	}
-	void Reset() {
-		RangeId = 0; 	// 0: Global Range, 1..255: User Defined Range
-		CommentId = 0;	// 0: not in blockcomment, 1..255: User Defined BlockComment
-		CommentOff = 0;	// contains a BlockCommentOff string in this line, for speed-up of parsing
-		StringId = 0;	// 0: not in string, 1..255: in string
-		LineComment = 0; // 0: not in linecomment, 1..255: in linecomment
-		Directive = 0;	// 0: not in directive, 1..255: in directive
-	}
 };
 
 struct BracePairIndex
