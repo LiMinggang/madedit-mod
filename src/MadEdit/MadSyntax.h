@@ -25,13 +25,13 @@
 #include <wx/string.h>
 
 #include <vector>
-#include <set>
-using std::vector;
-using std::set;
+//#include <set>
 
 #include "ucs4_t.h"
 #include "MadLines.h"
 
+using std::vector;
+//using std::set;
 
 WX_DECLARE_HASH_SET( wxString, wxStringHash, wxStringEqual, MadKeywordSet );
 
@@ -87,7 +87,6 @@ struct MadState
 		rangeid = blkcmtid = stringid = linecmt = directive = 0;
 	}
 };
-
 
 class MadEdit;
 class MadEncoding;
