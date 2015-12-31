@@ -143,7 +143,8 @@ public:
 	wxString            m_Title;
 	bool                m_CaseSensitive;
 	//wxString          m_Delimiter;
-	set< ucs4_t >         m_Delimiter;
+	//set< ucs4_t >         m_Delimiter;
+	wxByte              m_Delimiter[256];
 	vector < wxString > m_LineComment;
 	vector < wxString > m_BlockCommentOn;
 	vector < wxString > m_BlockCommentOff;
@@ -199,14 +200,16 @@ public:
 
 	bool IsDelimiter( ucs4_t uc ) {
 		//return ((uc < 0x100) && m_Delimiter.Find(wxChar(uc))>=0);
-		return ( ( uc < 0x100 ) && ( m_Delimiter.find( uc ) != m_Delimiter.end() ) );
+		//return ( ( uc < 0x100 ) && ( m_Delimiter.find( uc ) != m_Delimiter.end() ) );
+		return ( ( uc < 0x100 ) && ( m_Delimiter[ uc ] != 0 ) );
 	}
 	bool IsNotDelimiter( ucs4_t uc ) {
 		// changed: gogo, 21.09.2009 (purpose - correct word wrap for words with non-ascii chars)
 		// Rollbacked: 26.12.2015 for performance
 		//return ((uc < 0x100) && (!IsSpace(uc)) && (m_Delimiter.Find(wxChar(uc))<0));
-		return ( ( uc < 0x100 ) && ( !IsSpace( uc ) ) && ( m_Delimiter.find( uc ) == m_Delimiter.end() ) );
+		//return ( ( uc < 0x100 ) && ( !IsSpace( uc ) ) && ( m_Delimiter.find( uc ) == m_Delimiter.end() ) );
 		//return ((m_Delimiter.Find(wxChar(uc)) < 0)  && (! IsSpace(uc)));
+		return ( ( uc < 0x100 ) && ( !IsSpace( uc ) ) && ( m_Delimiter[ uc ] == 0 ) );
 	}
 
 	void SetAttributes( MadAttributeElement ae ) {

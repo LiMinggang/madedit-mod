@@ -642,10 +642,13 @@ void MadSyntax::ParseSyntax( const wxString &filename )
 					if( entry == wxT( "delimiter" ) )
 					{
 						//m_Delimiter = value;
-						m_Delimiter.clear();
+						//m_Delimiter.clear();
+						memset(m_Delimiter, 0, sizeof(m_Delimiter));
 						for( size_t i = 0; i < value.Len(); ++i )
 						{
-							m_Delimiter.insert((ucs4_t)value[i]);
+							//m_Delimiter.insert((ucs4_t)value[i]);
+							if(value[i] < 0x100)
+							m_Delimiter[(ucs4_t)value[i]] = 1;
 						}
 					}
 					else
@@ -1061,17 +1064,20 @@ void MadSyntax::ParseSyntax( const wxString &filename )
 	}
 }
 
-static ucs4_t DefDelimiter[] = {wxT('~'), wxT('`'), wxT('!'), wxT('@'), wxT('#'), wxT('$'), wxT('%'), wxT('^'), wxT('&'), wxT('*'), wxT('('), wxT(')'), wxT('-'), wxT('+'), wxT('='), wxT('|'), wxT('\\'), wxT('{'), wxT('}'), wxT('['), wxT(']'), wxT(':'), wxT(';'), wxT('"'), wxT('\''), wxT(','), wxT('.'), wxT('<'), wxT('>'), wxT('/'), wxT('?')};
+//static ucs4_t DefDelimiter[] = {wxT('~'), wxT('`'), wxT('!'), wxT('@'), wxT('#'), wxT('$'), wxT('%'), wxT('^'), wxT('&'), wxT('*'), wxT('('), wxT(')'), wxT('-'), wxT('+'), wxT('='), wxT('|'), wxT('\\'), wxT('{'), wxT('}'), wxT('['), wxT(']'), wxT(':'), wxT(';'), wxT('"'), wxT('\''), wxT(','), wxT('.'), wxT('<'), wxT('>'), wxT('/'), wxT('?')};
+static unsigned char DefDelimiter[] = {'~', '`', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '+', '=', '|', '\\', '{', '}', '[', ']', ':', ';', '"', '\'', ',', '.', '<', '>', '/', '?'};
 void MadSyntax::Reset()
 {
 	size_t i;
 	m_Title = MadPlainTextTitle;
 	m_CaseSensitive = false;
 	//m_Delimiter = wxT( "~`!@#$%^&*()-+=|\\{}[]:;\"\',.<>/?" );
-	m_Delimiter.clear();
-	for( i = 0; i < (sizeof(DefDelimiter)/sizeof(ucs4_t)); ++i )
+	//m_Delimiter.clear();
+	memset(m_Delimiter, 0, sizeof(m_Delimiter));
+	for( i = 0; i < (sizeof(DefDelimiter)/sizeof(unsigned char)); ++i )
 	{
-		m_Delimiter.insert((ucs4_t)DefDelimiter[i]);
+		//m_Delimiter.insert((ucs4_t)DefDelimiter[i]);
+		m_Delimiter[DefDelimiter[i]] = 1;
 	}
 	m_LineComment.clear();
 	m_BlockCommentOn.clear();
