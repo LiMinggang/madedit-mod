@@ -843,7 +843,7 @@ protected:
 };
 
 
-void OnReceiveMessage( const wchar_t *msg, size_t size )
+void OnReceiveMessage( const wchar_t *msg, size_t size, bool activeFile/* = true*/ )
 {
 #ifdef __WXMSW__
 	WINDOWPLACEMENT wp;
@@ -953,9 +953,9 @@ void OnReceiveMessage( const wchar_t *msg, size_t size )
 
 			// process token here
 			if( !use_script )
-			{ g_MainFrame->OpenFile( file, false ); }
+			{ g_MainFrame->OpenFile( file, false, activeFile ); }
 			else
-			{ g_MainFrame->RunScriptWithFile( file, arg, false, silent, forceEdit ); }
+			{ g_MainFrame->RunScriptWithFile( file, arg, false, silent, forceEdit, activeFile ); }
 		}
 	}
 
@@ -3625,7 +3625,7 @@ int MadEditFrame::OpenedFileCount()
 	return ( int )m_Notebook->GetPageCount();
 }
 
-void MadEditFrame::OpenFile( const wxString &fname, bool mustExist )
+void MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeSelection /*= true*/ )
 {
 	wxString title, filename( fname ), linenumstr;
 	long linenum = -1;
@@ -3689,23 +3689,26 @@ void MadEditFrame::OpenFile( const wxString &fname, bool mustExist )
 				if( linenum != -1 )
 				{ me->GoToLine( linenum ); }
 
-				g_CheckModTimeForReload = false;
-				m_Notebook->SetSelection( id );
-				MadEdit *madedit = ( MadEdit* )m_Notebook->GetPage( m_Notebook->GetSelection() );
-
-				if( madedit != g_ActiveMadEdit )
+				if(changeSelection)
 				{
-					wxAuiNotebookEvent event( wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGED, m_Notebook->GetId() );
-					event.SetSelection( m_Notebook->GetSelection() );
-					event.SetOldSelection( selid );
-					event.SetEventObject( this );
-					OnNotebookPageChanged( event );
-				}
+					g_CheckModTimeForReload = false;
+					m_Notebook->SetSelection( id );
+					MadEdit *madedit = ( MadEdit* )m_Notebook->GetPage( m_Notebook->GetSelection() );
 
-				g_CheckModTimeForReload = true;
-				g_ActiveMadEdit->ReloadByModificationTime();
-				m_RecentFiles->AddFileToHistory( filename ); // bring the filename to top of list
-				g_ActiveMadEdit->SetFocus();
+					if( madedit != g_ActiveMadEdit )
+					{
+						wxAuiNotebookEvent event( wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGED, m_Notebook->GetId() );
+						event.SetSelection( m_Notebook->GetSelection() );
+						event.SetOldSelection( selid );
+						event.SetEventObject( this );
+						OnNotebookPageChanged( event );
+					}
+
+					g_CheckModTimeForReload = true;
+					g_ActiveMadEdit->ReloadByModificationTime();
+					m_RecentFiles->AddFileToHistory( filename ); // bring the filename to top of list
+					g_ActiveMadEdit->SetFocus();
+				}
 				return;
 			}
 		}
@@ -3766,7 +3769,10 @@ void MadEditFrame::OpenFile( const wxString &fname, bool mustExist )
 		madedit->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ) );
 		g_PrevPageID = m_Notebook->GetSelection();
 		m_Notebook->AddPage( madedit, title, true );
-		m_Notebook->SetSelection( m_Notebook->GetPageCount() - 1 );
+		if(changeSelection)
+		{
+			m_Notebook->SetSelection( m_Notebook->GetPageCount() - 1 );
+		}
 	}
 
 	if( !filename.IsEmpty() )
@@ -3830,7 +3836,7 @@ void MadEditFrame::OpenFile( const wxString &fname, bool mustExist )
 	{ g_ActiveMadEdit->GoToLine( linenum ); }
 }
 
-void MadEditFrame::RunScriptWithFile( const wxString &filename, const wxString &script, bool mustExist, bool closeafterdone, bool ignorereadonly )
+void MadEditFrame::RunScriptWithFile( const wxString &filename, const wxString &script, bool mustExist, bool closeafterdone, bool ignorereadonly, bool activeFile )
 {
 	if( !filename.IsEmpty() )
 	{
@@ -3879,7 +3885,7 @@ void MadEditFrame::RunScriptWithFile( const wxString &filename, const wxString &
 		}
 
 #endif
-		OpenFile( filename, mustExist );
+		OpenFile( filename, mustExist, activeFile);
 
 		if( g_ActiveMadEdit != NULL )
 		{

@@ -402,8 +402,8 @@ private:
 	bool m_PageClosing; // prevent from reentry of CloseFile(), OnNotebookPageClosing()
 public:
 	int OpenedFileCount();
-	void OpenFile( const wxString &filename, bool mustExist ); // if filename is empty, open a new file
-	void RunScriptWithFile( const wxString &filename, const wxString &script, bool mustExist, bool closeafterdone, bool ignorereadonly );
+	void OpenFile( const wxString &filename, bool mustExist, bool changeSelection = true ); // if filename is empty, open a new file
+	void RunScriptWithFile( const wxString &filename, const wxString &script, bool mustExist, bool closeafterdone, bool ignorereadonly, bool activeFile );
 	void CloseFile( int pageId );
 	void CloseAllFiles( bool force );
 	void MadEditFrameKeyDown( wxKeyEvent& event );
@@ -722,7 +722,7 @@ enum MadPreviewType
 	//MAX::menuPreview16
 };
 extern MadEditFrame *g_MainFrame;
-extern void OnReceiveMessage( const wchar_t *msg, size_t size );
+extern void OnReceiveMessage( const wchar_t *msg, size_t size, bool activeFile = true );
 
 class MadTreeCtrl : public wxTreeCtrl
 {

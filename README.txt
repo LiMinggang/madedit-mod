@@ -119,6 +119,7 @@ Improve performance of script recording
 Improve text processing performance
 Improve syntax highlighting performance
 Improve ReloadByModificationTime event handling
+Fix: The tab of the selected page could not be seen if a lot of files were opened #115
 Update boost to 1.60
 
 Mod v0.3.10

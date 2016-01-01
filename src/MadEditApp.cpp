@@ -521,7 +521,7 @@ bool MadEditApp::OnInit()
 				{
 					for( size_t i = 0; i < m_FileNames.GetCount(); ++i )
 					{
-						myFrame->RunScriptWithFile( m_FileNames[i], str, false, true, m_ForceEdit );
+						myFrame->RunScriptWithFile( m_FileNames[i], str, false, true, m_ForceEdit, true );
 					}
 				}
 
@@ -694,7 +694,7 @@ void MadEditApp::ShowMainFrame( MadEditFrame *mainFrame, bool maximize )
 		if( !files.IsEmpty() )
 		{
 			// use OnReceiveMessage() to open the files
-			OnReceiveMessage( files.c_str(), ( files.size() + 1 )*sizeof( wxChar ) );
+			OnReceiveMessage( files.c_str(), ( files.size() + 1 )*sizeof( wxChar ), false );
 		}
 
 		files.Empty();
@@ -718,12 +718,17 @@ void MadEditApp::ShowMainFrame( MadEditFrame *mainFrame, bool maximize )
 			}
 
 			// use OnReceiveMessage() to open the files
-			OnReceiveMessage( files.c_str(), ( files.size() + 1 )*sizeof( wxChar ) );
+			OnReceiveMessage( files.c_str(), ( files.size() + 1 )*sizeof( wxChar ), false );
 		}
 
-		if( mainFrame->OpenedFileCount() == 0 )
+		int pages = mainFrame->OpenedFileCount();
+		if( pages == 0 )
 		{
 			mainFrame->OpenFile( wxEmptyString, false );
+		}
+		else if(pages > 1)
+		{
+			mainFrame->SetPageFocus( pages - 1 );
 		}
 
 		SetTopWindow( mainFrame );
