@@ -695,10 +695,6 @@ void MadEditApp::ShowMainFrame( MadEditFrame *mainFrame, bool maximize )
 		{
 			// use OnReceiveMessage() to open the files
 			OnReceiveMessage( files.c_str(), ( files.size() + 1 )*sizeof( wxChar ), false );
-			if(mainFrame->OpenedFileCount())
-			{
-				mainFrame->SetPageFocus( 0 );
-			}
 		}
 
 		files.Empty();
@@ -725,8 +721,13 @@ void MadEditApp::ShowMainFrame( MadEditFrame *mainFrame, bool maximize )
 			OnReceiveMessage( files.c_str(), ( files.size() + 1 )*sizeof( wxChar ), false );
 		}
 
-		mainFrame->Show( true );
 		int pages = mainFrame->OpenedFileCount();
+		
+		if(pages>1)
+		{
+			mainFrame->SetPageFocus( pages - 2 );
+		}
+		mainFrame->Show( true );
 		if( pages == 0 )
 		{
 			mainFrame->OpenFile( wxEmptyString, false );
