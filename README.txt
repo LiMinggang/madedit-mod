@@ -14,7 +14,7 @@ A. Linux, FreeBSD, and Unix-like OS (__WXGTK__):
    a. GNU C++ 3.x/4.x:
       Required Libraries to compile:
       1. wxWidgets-3.0.2 or higher with Unicode and IPC enabled
-      2. Boost-1.56.0 or higher(build Boost-Python)(1.59 is recommended)
+      2. Boost-1.56.0 or higher(build Boost-Python)(1.60 is recommended)
 
       (install gtk2-devel gtext-devel automake rpm-build)
       copy wxwin.m4 to usr/share/acloXXX/ or install wxGTK-devel
@@ -23,11 +23,11 @@ B. MS Windows (__WXMSW__):
    a. MinGW32/GNU C++ 3.x (wxDevCpp):
       Required Libraries to compile:
       1. wxWidgets-3.0.2 or higher with Unicode and IPC enabled
-      2. Boost-1.56.0 or higher(build Boost-Python)(1.59 is recommended)
+      2. Boost-1.56.0 or higher(build Boost-Python)(1.60 is recommended)
    b. Visual C++ 7.1 (VS.Net 2005) or higher:
       Required Libraries to compile:
       1. wxWidgets-3.0.2 or higher with Unicode and IPC enabled
-      2. Boost-1.56.0 or higher(build Boost-Python)(1.59 is recommended)
+      2. Boost-1.56.0 or higher(build Boost-Python)(1.60 is recommended)
       3. Set WXWIN and BOOST to the root directory of your local ones
 
 P.S.: Please put the debug info(.pdb) under the App directory in case there was a 
@@ -43,7 +43,7 @@ P.S.: Please open a ticket for bug of MadEdit-Mod at
 MadEdit_Win2K is a build by VC++ 2005 express for Windows 2000.
 
 Example build under Linux
-Boost Python(1.59)
+Boost Python(1.60)
 ./bjam --with-python include="${HOME}/madedit-mod/minipython/Include" python-debugging=off threading=multi variant=release link=static runtime-link=static stage
 wxWidgets(3.0.2)
 ./configure --enable-unicode --disable-shared --with-libpng=builtin --with-zlib=builtin --with-expat=builtin  --with-gtk3=yes --with-libiconv=no
@@ -116,7 +116,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.4.0
 Improve performance of script recording
-Improve text processing performance
+Improve text processing performance(doubled)
 Improve syntax highlighting performance
 Improve ReloadByModificationTime event handling
 Fix: The tab of the selected page could not be seen if a lot of files were opened #115
