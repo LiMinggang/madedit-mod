@@ -98,7 +98,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalOptions>/ignore:4217 /ignore:4049 /ignore:4204 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>wxmsw30ud_core.lib;wxbase30ud.lib;wxmsw30ud_aui.lib;wxbase30ud_xml.lib;wxexpatd.lib;wxmsw30ud_html.lib;wxpngd.lib;wxzlibd.lib;libboost_python-vc100-mt-sgyd-1_59.lib;python27_d.lib;libhunspell.lib;comctl32.lib;uuid.lib;rpcrt4.lib;User32.Lib;Gdi32.Lib;Shell32.Lib;AdvAPI32.Lib;Ole32.Lib;OleAut32.Lib;ComDlg32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>wxmsw30ud_core.lib;wxbase30ud.lib;wxmsw30ud_aui.lib;wxbase30ud_xml.lib;wxexpatd.lib;wxmsw30ud_html.lib;wxpngd.lib;wxzlibd.lib;libboost_python-vc100-mt-sgyd-1_60.lib;python27_d.lib;libhunspell.lib;comctl32.lib;uuid.lib;rpcrt4.lib;User32.Lib;Gdi32.Lib;Shell32.Lib;AdvAPI32.Lib;Ole32.Lib;OleAut32.Lib;ComDlg32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)MadEdit.exe</OutputFile>
       <AdditionalLibraryDirectories>$(WXWIN3)\lib\vc_lib;$(TargetDir);$(BOOST)\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -155,7 +155,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalOptions>/ignore:4217 /ignore:4049 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>wxmsw30u_core.lib;wxbase30u.lib;wxmsw30u_aui.lib;wxbase30u_xml.lib;wxexpat.lib;wxmsw30u_html.lib;wxpng.lib;wxzlib.lib;python27.lib;libboost_python-vc100-mt-s-1_59.lib;libhunspell.lib;comctl32.lib;rpcrt4.lib;User32.Lib;Gdi32.Lib;Shell32.Lib;AdvAPI32.Lib;Ole32.Lib;OleAut32.Lib;ComDlg32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>wxmsw30u_core.lib;wxbase30u.lib;wxmsw30u_aui.lib;wxbase30u_xml.lib;wxexpat.lib;wxmsw30u_html.lib;wxpng.lib;wxzlib.lib;python27.lib;libboost_python-vc100-mt-s-1_60.lib;libhunspell.lib;comctl32.lib;rpcrt4.lib;User32.Lib;Gdi32.Lib;Shell32.Lib;AdvAPI32.Lib;Ole32.Lib;OleAut32.Lib;ComDlg32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)MadEdit.exe</OutputFile>
       <AdditionalLibraryDirectories>$(WXWIN3)\lib\vc_lib;$(TargetDir);$(BOOST)\stage\lib</AdditionalLibraryDirectories>
       <SubSystem>Windows</SubSystem>
