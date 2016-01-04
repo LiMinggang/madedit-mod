@@ -1724,6 +1724,12 @@ best_base(PyObject *bases)
             if (PyType_Ready(base_i) < 0)
                 return NULL;
         }
+        if (!PyType_HasFeature(base_i, Py_TPFLAGS_BASETYPE)) {
+            PyErr_Format(PyExc_TypeError,
+                         "type '%.100s' is not an acceptable base type",
+                         base_i->tp_name);
+            return NULL;
+        }
         candidate = solid_base(base_i);
         if (winner == NULL) {
             winner = candidate;
@@ -2145,13 +2151,6 @@ type_new(PyTypeObject *metatype, PyObject *args, PyObject *kwds)
     /* Calculate best base, and check that all bases are type objects */
     base = best_base(bases);
     if (base == NULL) {
-        Py_DECREF(bases);
-        return NULL;
-    }
-    if (!PyType_HasFeature(base, Py_TPFLAGS_BASETYPE)) {
-        PyErr_Format(PyExc_TypeError,
-                     "type '%.100s' is not an acceptable base type",
-                     base->tp_name);
         Py_DECREF(bases);
         return NULL;
     }
@@ -3215,6 +3214,13 @@ reduce_2(PyObject *obj)
     if (cls == NULL)
         return NULL;
 
+    if (PyType_Check(cls) && ((PyTypeObject *)cls)->tp_new == NULL) {
+        PyErr_Format(PyExc_TypeError,
+                     "can't pickle %s objects",
+                     ((PyTypeObject *)cls)->tp_name);
+        return NULL;
+    }
+
     getnewargs = PyObject_GetAttrString(obj, "__getnewargs__");
     if (getnewargs != NULL) {
         args = PyObject_CallObject(getnewargs, NULL);
@@ -3444,10 +3450,10 @@ PyDoc_STRVAR(object_subclasshook_doc,
 
    class object:
        def __format__(self, format_spec):
-       if isinstance(format_spec, str):
-           return format(str(self), format_spec)
-       elif isinstance(format_spec, unicode):
-           return format(unicode(self), format_spec)
+           if isinstance(format_spec, str):
+               return format(str(self), format_spec)
+           elif isinstance(format_spec, unicode):
+               return format(unicode(self), format_spec)
 */
 static PyObject *
 object_format(PyObject *self, PyObject *args)

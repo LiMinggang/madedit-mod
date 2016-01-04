@@ -1979,9 +1979,12 @@ compiler_import(struct compiler *c, stmt_ty s)
             identifier tmp = alias->name;
             const char *base = PyString_AS_STRING(alias->name);
             char *dot = strchr(base, '.');
-            if (dot)
+            if (dot) {
                 tmp = PyString_FromStringAndSize(base,
                                                  dot - base);
+                if (tmp == NULL)
+                    return 0;
+            }
             r = compiler_nameop(c, tmp, Store);
             if (dot) {
                 Py_DECREF(tmp);
@@ -2931,9 +2934,9 @@ expr_constant(expr_ty e)
        BLOCK
    finally:
        if an exception was raised:
-       exc = copy of (exception, instance, traceback)
+           exc = copy of (exception, instance, traceback)
        else:
-       exc = (None, None, None)
+           exc = (None, None, None)
        exit(*exc)
  */
 static int

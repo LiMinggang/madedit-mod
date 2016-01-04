@@ -1259,7 +1259,7 @@ PyObject *PyUnicode_Decode(const char *s,
     buffer = PyBuffer_FromMemory((void *)s, size);
     if (buffer == NULL)
         goto onError;
-    unicode = PyCodec_Decode(buffer, encoding, errors);
+    unicode = _PyCodec_DecodeText(buffer, encoding, errors);
     if (unicode == NULL)
         goto onError;
     if (!PyUnicode_Check(unicode)) {
@@ -1292,7 +1292,7 @@ PyObject *PyUnicode_AsDecodedObject(PyObject *unicode,
         encoding = PyUnicode_GetDefaultEncoding();
 
     /* Decode via the codec registry */
-    v = PyCodec_Decode(unicode, encoding, errors);
+    v = _PyCodec_DecodeText(unicode, encoding, errors);
     if (v == NULL)
         goto onError;
     return v;
@@ -1331,7 +1331,7 @@ PyObject *PyUnicode_AsEncodedObject(PyObject *unicode,
         encoding = PyUnicode_GetDefaultEncoding();
 
     /* Encode via the codec registry */
-    v = PyCodec_Encode(unicode, encoding, errors);
+    v = _PyCodec_EncodeText(unicode, encoding, errors);
     if (v == NULL)
         goto onError;
     return v;
@@ -1369,7 +1369,7 @@ PyObject *PyUnicode_AsEncodedString(PyObject *unicode,
     }
 
     /* Encode via the codec registry */
-    v = PyCodec_Encode(unicode, encoding, errors);
+    v = _PyCodec_EncodeText(unicode, encoding, errors);
     if (v == NULL)
         goto onError;
     if (!PyString_Check(v)) {
@@ -1555,7 +1555,10 @@ int unicode_decode_call_errorhandler(const char *errors, PyObject **errorHandler
 /* Is c a base-64 character? */
 
 #define IS_BASE64(c) \
-    (isalnum(c) || (c) == '+' || (c) == '/')
+    (((c) >= 'A' && (c) <= 'Z') ||     \
+     ((c) >= 'a' && (c) <= 'z') ||     \
+     ((c) >= '0' && (c) <= '9') ||     \
+     (c) == '+' || (c) == '/')
 
 /* given that c is a base-64 character, what is its base-64 value? */
 
@@ -1716,29 +1719,29 @@ PyObject *PyUnicode_DecodeUTF7Stateful(const char *s,
             }
             else { /* now leaving a base-64 section */
                 inShift = 0;
-                s++;
-                if (surrogate) {
-                    *p++ = surrogate;
-                    surrogate = 0;
-                }
                 if (base64bits > 0) { /* left-over bits */
                     if (base64bits >= 6) {
                         /* We've seen at least one base-64 character */
+                        s++;
                         errmsg = "partial character in shift sequence";
                         goto utf7Error;
                     }
                     else {
                         /* Some bits remain; they should be zero */
                         if (base64buffer != 0) {
+                            s++;
                             errmsg = "non-zero padding bits in shift sequence";
                             goto utf7Error;
                         }
                     }
                 }
-                if (ch != '-') {
+                if (surrogate && DECODE_DIRECT(ch))
+                    *p++ = surrogate;
+                surrogate = 0;
+                if (ch == '-') {
                     /* '-' is absorbed; other terminating
                        characters are preserved */
-                    *p++ = ch;
+                    s++;
                 }
             }
         }
@@ -1751,6 +1754,7 @@ PyObject *PyUnicode_DecodeUTF7Stateful(const char *s,
             }
             else { /* begin base64-encoded section */
                 inShift = 1;
+                surrogate = 0;
                 shiftOutStart = p;
                 base64bits = 0;
                 base64buffer = 0;
@@ -1782,6 +1786,7 @@ utf7Error:
 
     if (inShift && !consumed) { /* in shift sequence, no more to follow */
         /* if we're in an inconsistent state, that's an error */
+        inShift = 0;
         if (surrogate ||
                 (base64bits >= 6) ||
                 (base64bits > 0 && base64buffer != 0)) {
@@ -6638,6 +6643,9 @@ unicode_hash(PyUnicodeObject *self)
     register Py_UNICODE *p;
     register long x;
 
+#ifdef Py_DEBUG
+    assert(_Py_HashSecret_Initialized);
+#endif
     if (self->hash != -1)
         return self->hash;
     len = PyUnicode_GET_SIZE(self);
@@ -6650,10 +6658,12 @@ unicode_hash(PyUnicodeObject *self)
         return 0;
     }
     p = PyUnicode_AS_UNICODE(self);
-    x = *p << 7;
+    x = _Py_HashSecret.prefix;
+    x ^= *p << 7;
     while (--len >= 0)
         x = (1000003*x) ^ *p++;
     x ^= PyUnicode_GET_SIZE(self);
+    x ^= _Py_HashSecret.suffix;
     if (x == -1)
         x = -2;
     self->hash = x;

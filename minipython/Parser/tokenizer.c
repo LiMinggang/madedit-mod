@@ -169,7 +169,8 @@ error_ret(struct tok_state *tok) /* XXX */
     tok->decoding_erred = 1;
     if (tok->fp != NULL && tok->buf != NULL) /* see PyTokenizer_Free */
         PyMem_FREE(tok->buf);
-    tok->buf = NULL;
+    tok->buf = tok->cur = tok->end = tok->inp = tok->start = NULL;
+    tok->done = E_DECODE;
     return NULL;                /* as if it were EOF */
 }
 
@@ -235,7 +236,10 @@ get_coding_spec(const char *s, Py_ssize_t size)
 
             if (begin < t) {
                 char* r = new_string(begin, t - begin);
-                char* q = get_normal_name(r);
+                char* q;
+                if (!r)
+                    return NULL;
+                q = get_normal_name(r);
                 if (r != q) {
                     PyMem_FREE(r);
                     r = new_string(q, strlen(q));
@@ -259,11 +263,25 @@ check_coding_spec(const char* line, Py_ssize_t size, struct tok_state *tok,
     char * cs;
     int r = 1;
 
-    if (tok->cont_line)
+    if (tok->cont_line) {
         /* It's a continuation line, so it can't be a coding spec. */
+        tok->read_coding_spec = 1;
         return 1;
+    }
     cs = get_coding_spec(line, size);
-    if (cs != NULL) {
+    if (!cs) {
+        Py_ssize_t i;
+        for (i = 0; i < size; i++) {
+            if (line[i] == '#' || line[i] == '\n' || line[i] == '\r')
+                break;
+            if (line[i] != ' ' && line[i] != '\t' && line[i] != '\014') {
+                /* Stop checking coding spec after a line containing
+                 * anything except a comment. */
+                tok->read_coding_spec = 1;
+                break;
+            }
+        }
+    } else {
         tok->read_coding_spec = 1;
         if (tok->encoding == NULL) {
             assert(tok->decoding_state == 1); /* raw */
@@ -688,7 +706,7 @@ decode_str(const char *input, int single, struct tok_state *tok)
     if (newl[0]) {
         if (!check_coding_spec(str, newl[0] - str, tok, buf_setreadl))
             return error_ret(tok);
-        if (tok->enc == NULL && newl[1]) {
+        if (tok->enc == NULL && !tok->read_coding_spec && newl[1]) {
             if (!check_coding_spec(newl[0]+1, newl[1] - newl[0],
                                    tok, buf_setreadl))
                 return error_ret(tok);
@@ -904,7 +922,6 @@ tok_nextc(register struct tok_state *tok)
                 if (tok->buf != NULL)
                     PyMem_FREE(tok->buf);
                 tok->buf = newtok;
-                tok->line_start = tok->buf;
                 tok->cur = tok->buf;
                 tok->line_start = tok->buf;
                 tok->inp = strchr(tok->buf, '\0');
@@ -927,7 +944,8 @@ tok_nextc(register struct tok_state *tok)
                 }
                 if (decoding_fgets(tok->buf, (int)(tok->end - tok->buf),
                           tok) == NULL) {
-                    tok->done = E_EOF;
+                    if (!tok->decoding_erred)
+                        tok->done = E_EOF;
                     done = 1;
                 }
                 else {
@@ -961,6 +979,8 @@ tok_nextc(register struct tok_state *tok)
                     return EOF;
                 }
                 tok->buf = newbuf;
+                tok->cur = tok->buf + cur;
+                tok->line_start = tok->cur;
                 tok->inp = tok->buf + curvalid;
                 tok->end = tok->buf + newsize;
                 tok->start = curstart < 0 ? NULL :

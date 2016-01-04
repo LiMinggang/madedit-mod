@@ -12,7 +12,7 @@ About:
 MadPython is a minimized Python which is used as an embedded macro script for 
 automation of MadEdit-Mod. The Python is based on the work of Adie
 (http://www.adintr.com/article/blog/embedpython_source.html) and was updated 
-to Python 2.7.8. Lots of Python modules were removed to reduce the size of it. 
+to Python 2.7.11. Lots of Python modules were removed to reduce the size of it. 
 So, you may get errors while importing some of the standard modules. However, 
 I don't think it's a problem for the purpose to use it as a macro script language.
 
@@ -23,6 +23,14 @@ and it's to be improved. It's only for the advanced users to try and test.
 Note: Don't support MadPython recording/Playing in Hex Mode
 
 Note: The APIs are listed as C++ functions.
+
+Note:
+    Not supported Python modules:
+    cPickle, _io, datetime, _random, cStringIO, _lsprof, _collections, _struct,
+    _sre, time, _locale, _headq, _functools, _weakref, itertools, _ctypes and
+    all the modules that was implemented by Python, Eg, re, shutil, etc.
+
+    Not supported Python internal ojbects: bytearray, memoryobject
 
 C++ Key word|In Python's world
 ------------|------------------
@@ -45,9 +53,9 @@ not whole word match(Simulate the Find All of Find Dialog)
 2. Replace "\r\n"(Dos/Windows) to "\n"(Unix) by regular expression, then replace 
 double line feedings with single one
     me=MadEdit() # Create a MadEdit object
-    res = me.ReplaceTextAll("\\r\\n", "\\n", True, False, False)
+    res = me.ReplaceTextAll("\r\n", "\n", True, False, False)
 
-    res = me.ReplaceTextAll("\\n\\n", "\\n", True, False, False)
+    res = me.ReplaceTextAll("\n\n", "\n", True, False, False)
 
 3. Move caret to line #10
     me=MadEdit() # Create a MadEdit object

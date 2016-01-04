@@ -259,7 +259,7 @@ PyObject_AsCharBuffer(PyObject *obj,
          pb->bf_getcharbuffer == NULL ||
          pb->bf_getsegcount == NULL) {
         PyErr_SetString(PyExc_TypeError,
-                        "expected a character buffer object");
+                        "expected a string or other character buffer object");
         return -1;
     }
     if ((*pb->bf_getsegcount)(obj,NULL) != 1) {
@@ -1666,8 +1666,17 @@ PyNumber_Int(PyObject *o)
                                  PyUnicode_GET_SIZE(o),
                                  10);
 #endif
-    if (!PyObject_AsCharBuffer(o, &buffer, &buffer_len))
-        return int_from_string((char*)buffer, buffer_len);
+    if (!PyObject_AsCharBuffer(o, &buffer, &buffer_len)) {
+        PyObject *result, *str;
+
+        /* Copy to NUL-terminated buffer. */
+        str = PyString_FromStringAndSize((const char *)buffer, buffer_len);
+        if (str == NULL)
+            return NULL;
+        result = int_from_string(PyString_AS_STRING(str), buffer_len);
+        Py_DECREF(str);
+        return result;
+    }
 
     return type_error("int() argument must be a string or a "
                       "number, not '%.200s'", o);
@@ -1765,9 +1774,17 @@ PyNumber_Long(PyObject *o)
                                   PyUnicode_GET_SIZE(o),
                                   10);
 #endif
-    if (!PyObject_AsCharBuffer(o, &buffer, &buffer_len))
-        return long_from_string(buffer, buffer_len);
+    if (!PyObject_AsCharBuffer(o, &buffer, &buffer_len)) {
+        PyObject *result, *str;
 
+        /* Copy to NUL-terminated buffer. */
+        str = PyString_FromStringAndSize((const char *)buffer, buffer_len);
+        if (str == NULL)
+            return NULL;
+        result = long_from_string(PyString_AS_STRING(str), buffer_len);
+        Py_DECREF(str);
+        return result;
+    }
     return type_error("long() argument must be a string or a "
                       "number, not '%.200s'", o);
 }
@@ -2169,7 +2186,7 @@ PySequence_Tuple(PyObject *v)
         Py_INCREF(v);
         return v;
     }
-    if (PyList_Check(v))
+    if (PyList_CheckExact(v))
         return PyList_AsTuple(v);
 
     /* Get iterator. */

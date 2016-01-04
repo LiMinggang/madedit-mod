@@ -449,7 +449,7 @@ PyObject *PyString_AsDecodedObject(PyObject *str,
     }
 
     /* Decode via the codec registry */
-    v = PyCodec_Decode(str, encoding, errors);
+    v = _PyCodec_DecodeText(str, encoding, errors);
     if (v == NULL)
         goto onError;
 
@@ -529,7 +529,7 @@ PyObject *PyString_AsEncodedObject(PyObject *str,
     }
 
     /* Encode via the codec registry */
-    v = PyCodec_Encode(str, encoding, errors);
+    v = _PyCodec_EncodeText(str, encoding, errors);
     if (v == NULL)
         goto onError;
 
@@ -1266,6 +1266,9 @@ string_hash(PyStringObject *a)
     register unsigned char *p;
     register long x;
 
+#ifdef Py_DEBUG
+    assert(_Py_HashSecret_Initialized);
+#endif
     if (a->ob_shash != -1)
         return a->ob_shash;
     len = Py_SIZE(a);
@@ -1278,10 +1281,12 @@ string_hash(PyStringObject *a)
         return 0;
     }
     p = (unsigned char *) a->ob_sval;
-    x = *p << 7;
+    x = _Py_HashSecret.prefix;
+    x ^= *p << 7;
     while (--len >= 0)
         x = (1000003*x) ^ *p++;
     x ^= Py_SIZE(a);
+    x ^= _Py_HashSecret.suffix;
     if (x == -1)
         x = -2;
     a->ob_shash = x;
