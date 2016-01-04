@@ -6644,7 +6644,7 @@ unicode_hash(PyUnicodeObject *self)
     register long x;
 
 #ifdef Py_DEBUG
-    assert(_Py_HashSecret_Initialized);
+//    assert(_Py_HashSecret_Initialized);
 #endif
     if (self->hash != -1)
         return self->hash;

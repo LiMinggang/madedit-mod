@@ -524,7 +524,7 @@ typedef struct {
 PyAPI_DATA(_Py_HashSecret_t) _Py_HashSecret;
 
 #ifdef Py_DEBUG
-PyAPI_DATA(int) _Py_HashSecret_Initialized;
+//PyAPI_DATA(int) _Py_HashSecret_Initialized;
 #endif
 
 /* Helper for passing objects to printf and the like.
