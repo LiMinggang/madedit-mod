@@ -4178,7 +4178,7 @@ void MadEdit::SelectLineFromCaretPos( wxString *ws, bool caretToBegOfSel )
 		startpos = m_CaretPos.pos - m_CaretPos.linepos +
 				   m_CaretPos.iter->m_RowIndices[0].m_Start; // exclude BOM
 		endpos = m_CaretPos.pos - m_CaretPos.linepos +
-				 m_CaretPos.iter->m_RowIndices[1].m_Start; ;
+				 m_CaretPos.iter->m_Size;//m_RowIndices[1].m_Start;
 	}
 
 	m_Selection = true;
