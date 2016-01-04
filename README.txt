@@ -116,7 +116,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.4.0
 Improve performance of script recording
-Improve text processing performance(doubled)
+Improve text processing performance(almost doubled)
 Improve syntax highlighting performance
 Improve ReloadByModificationTime event handling
 Fix: The tab of the selected page could not be seen if a lot of files were opened #115
