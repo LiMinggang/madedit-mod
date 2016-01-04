@@ -723,7 +723,7 @@ void MadEditApp::ShowMainFrame( MadEditFrame *mainFrame, bool maximize )
 
 		int pages = mainFrame->OpenedFileCount();
 		
-		if(pages>1)
+		if(pages > 5)
 		{
 			mainFrame->SetPageFocus( pages - 2 );
 		}
@@ -732,7 +732,7 @@ void MadEditApp::ShowMainFrame( MadEditFrame *mainFrame, bool maximize )
 		{
 			mainFrame->OpenFile( wxEmptyString, false );
 		}
-		else if(pages > 1)
+		else if(pages > 5)
 		{
 			mainFrame->SetPageFocus( pages - 1 );
 		}
