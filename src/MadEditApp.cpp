@@ -723,20 +723,10 @@ void MadEditApp::ShowMainFrame( MadEditFrame *mainFrame, bool maximize )
 
 		int pages = mainFrame->OpenedFileCount();
 		
-		if(pages > 5)
-		{
-			mainFrame->SetPageFocus( pages - 2 );
-		}
-		mainFrame->Show( true );
 		if( pages == 0 )
 		{
 			mainFrame->OpenFile( wxEmptyString, false );
 		}
-		else if(pages > 5)
-		{
-			mainFrame->SetPageFocus( pages - 1 );
-		}
-
 		SetTopWindow( mainFrame );
 #ifdef __WXMSW__
 		//if(maximize)    // removed: gogo, 30.08.2009
@@ -750,7 +740,17 @@ void MadEditApp::ShowMainFrame( MadEditFrame *mainFrame, bool maximize )
 			SetWindowPlacement( ( HWND )mainFrame->GetHWND(), &wp );
 		}
 #endif
+		bool changeFocus = (pages > 5);
+		if(changeFocus)
+		{
+			mainFrame->SetPageFocus( pages - 2 );
+		}
 		mainFrame->Show( true );
+		if(changeFocus)
+		{
+			mainFrame->SetPageFocus( pages - 1 );
+		}
+
 	}
 }
 
