@@ -1,9 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////
-// Name:		MadEdit/MadEditSearch.cpp
-// Description:	searching and replacing	functions
-// Author:		madedit@gmail.com
-// Maintainer:	minggang.li@gmail.com
-// Licence:		GPL
+// Name:        MadEdit/MadEditSearch.cpp
+// Description: searching and replacing functions
+// Author:      madedit@gmail.com
+// Maintainer:  minggang.li@gmail.com
+// Licence:     GPL
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "MadEdit.h"
@@ -20,50 +20,50 @@
 #include <boost/xpressive/traits/cpp_regex_traits.hpp>
 
 #include "MadEditPv.h"
-using namespace	std;
-using namespace	boost::xpressive;
+using namespace std;
+using namespace boost::xpressive;
 
 #ifdef _DEBUG
 	#include <crtdbg.h>
-	#define	new	new(_NORMAL_BLOCK ,__FILE__, __LINE__)
+	#define new new(_NORMAL_BLOCK ,__FILE__, __LINE__)
 #endif
 
 template<typename char_type>
-inline char_type xtolower( char_type ch	)
+inline char_type xtolower( char_type ch )
 {
-	if(	ch < 0 || ch > 0xFFFF )	{ return ch; }
+	if( ch < 0 || ch > 0xFFFF ) { return ch; }
 
-#if	defined(__WXMSW__)
+#if defined(__WXMSW__)
 	ucs4_t tch = ( ucs4_t )ch;
-	return ( char_type )CharLowerW(	( LPWSTR )tch );
+	return ( char_type )CharLowerW( ( LPWSTR )tch );
 #else
-	return std::towlower( wchar_t( ch )	);
+	return std::towlower( wchar_t( ch ) );
 #endif
 }
 
 template<>
-inline wchar_t xtolower( wchar_t ch	)
+inline wchar_t xtolower( wchar_t ch )
 {
-#if	defined(__WXMSW__)
+#if defined(__WXMSW__)
 	ucs4_t tch = ( ucs4_t )ch;
-	return ( wchar_t )CharLowerW( (	LPWSTR )tch	);
+	return ( wchar_t )CharLowerW( ( LPWSTR )tch );
 #else
-	return std::towlower( wchar_t( ch )	);
+	return std::towlower( wchar_t( ch ) );
 #endif
 }
 
 template<>
-inline wxByte xtolower(	wxByte ch )
+inline wxByte xtolower( wxByte ch )
 {
 	return ch;
 }
 
 template <typename char_type>
-bool IsTheSame(	const char_type	*s1, const char_type *s2, int len )
+bool IsTheSame( const char_type *s1, const char_type *s2, int len )
 {
-	while( --len >=	0 )
+	while( --len >= 0 )
 	{
-		if(	*s1++ != *s2++ ) { return false; }
+		if( *s1++ != *s2++ ) { return false; }
 	}
 
 	return true;
@@ -72,63 +72,63 @@ bool IsTheSame(	const char_type	*s1, const char_type *s2, int len )
 class JumpTable_Hex
 {
 private:
-	int	m_Table[256];
+	int m_Table[256];
 	std::basic_string<wxByte> m_Pattern;
 public:
-	void Build(	const wxByte* pat, size_t len )	{
-		if(	m_Pattern.length() == len && IsTheSame(	m_Pattern.c_str(), pat,	( int )len ) ) { return; }
+	void Build( const wxByte* pat, size_t len ) {
+		if( m_Pattern.length() == len && IsTheSame( m_Pattern.c_str(), pat, ( int )len ) ) { return; }
 
 		m_Pattern.assign( pat, len );
 
-		for( size_t	i =	0; i < 256;	++i	) {	m_Table[i] = ( int )len	+ 1; }
+		for( size_t i = 0; i < 256; ++i ) { m_Table[i] = ( int )len + 1; }
 
-		for( size_t	i =	0; i < len;	++i	) {	m_Table[pat[i]]	= (	int	)( len - i ); }
+		for( size_t i = 0; i < len; ++i ) { m_Table[pat[i]] = ( int )( len - i ); }
 	}
-	int	GetValue( const	wxByte ch )	const {
+	int GetValue( const wxByte ch ) const {
 		return m_Table[ch];
 	}
 };
 
-WX_DECLARE_HASH_MAP( unsigned int, int,	wxIntegerHash, wxIntegerEqual, UCS4_Map	);
+WX_DECLARE_HASH_MAP( unsigned int, int, wxIntegerHash, wxIntegerEqual, UCS4_Map );
 class JumpTable_UCS4
 {
 private:
-	int	m_UCS2_Table[65536];
+	int m_UCS2_Table[65536];
 	UCS4_Map m_Table;
 	ucs4string m_Pattern;
-	int	m_Len_1;
+	int m_Len_1;
 public:
-	void Build(	const ucs4_t* pat, size_t len )	{
-		if(	m_Pattern.length() == len && IsTheSame(	m_Pattern.c_str(), pat,	( int )len ) ) { return; }
+	void Build( const ucs4_t* pat, size_t len ) {
+		if( m_Pattern.length() == len && IsTheSame( m_Pattern.c_str(), pat, ( int )len ) ) { return; }
 
 		m_Pattern.assign( pat, len );
-		const int len1 = m_Len_1 = ( int )len +	1;
-		int	*ptab =	m_UCS2_Table;
+		const int len1 = m_Len_1 = ( int )len + 1;
+		int *ptab = m_UCS2_Table;
 
-		for( size_t	i =	0; i < 65536; ++i, ++ptab )	{ *ptab	= len1;	}
+		for( size_t i = 0; i < 65536; ++i, ++ptab ) { *ptab = len1; }
 
 		m_Table.clear();
-		const ucs4_t* p	= pat;
+		const ucs4_t* p = pat;
 
-		for( size_t	i =	0; i < len;	++i, ++p ) {
-			const unsigned int idx = ( unsigned	int	)( *p );
+		for( size_t i = 0; i < len; ++i, ++p ) {
+			const unsigned int idx = ( unsigned int )( *p );
 
-			if(	idx	<= 0xFFFF )	{
-				m_UCS2_Table[idx] =	( int )( len - i );
+			if( idx <= 0xFFFF ) {
+				m_UCS2_Table[idx] = ( int )( len - i );
 			}
 			else {
-				m_Table[idx] = ( int )(	len	- i	);
+				m_Table[idx] = ( int )( len - i );
 			}
 		}
 	}
-	int	GetValue( const	ucs4_t ch )	const {
-		if(	ch <= 0xFFFF &&	ch >= 0	) {
+	int GetValue( const ucs4_t ch ) const {
+		if( ch <= 0xFFFF && ch >= 0 ) {
 			return m_UCS2_Table[( unsigned int )ch];
 		}
 
-		UCS4_Map::const_iterator it	= m_Table.find(	( unsigned int )ch );
+		UCS4_Map::const_iterator it = m_Table.find( ( unsigned int )ch );
 
-		if(	it == m_Table.end()	) {	return m_Len_1;	}
+		if( it == m_Table.end() ) { return m_Len_1; }
 
 		return it->second;
 	}
@@ -138,29 +138,29 @@ template <typename char_type, typename CharIter, typename JumpTable>
 bool Search( CharIter &begin, CharIter &end,
 			 const char_type *pattern, size_t pat_len,
 			 const JumpTable &jump_table, bool bCaseSensitive )
-// if(bCaseSensitive==false) the content of	'pattern' must be lower	case!!!
+// if(bCaseSensitive==false) the content of 'pattern' must be lower case!!!
 {
 	wxASSERT( pat_len != 0 );
 
-	if(	begin == end ) { return	false; }
+	if( begin == end ) { return false; }
 
-	register size_t	idx	= 0;
-	register const char_type *p	= pattern;
+	register size_t idx = 0;
+	register const char_type *p = pattern;
 	CharIter beginpos;
 	register char_type c1;
 
-	for( ;;	)
+	for( ;; )
 	{
 		c1 = *begin;
 
-		if(	bCaseSensitive == false	)
+		if( bCaseSensitive == false )
 		{
 			c1 = xtolower( c1 );
 		}
 
-		if(	c1 == *p )
+		if( c1 == *p )
 		{
-			if(	idx	== 0 )
+			if( idx == 0 )
 			{
 				beginpos = begin;
 			}
@@ -168,63 +168,63 @@ bool Search( CharIter &begin, CharIter &end,
 			++idx;
 			++p;
 
-			if(	idx	== pat_len ) //	found
+			if( idx == pat_len ) // found
 			{
-				end	= begin;
+				end = begin;
 				++end;
-				begin =	beginpos;
+				begin = beginpos;
 				return true;
 			}
 
-			// compare next	char
-			if(	++begin	== end )
-			{ return false;	}
+			// compare next char
+			if( ++begin == end )
+			{ return false; }
 		}
-		else //	c1 != *p
+		else // c1 != *p
 		{
-			// jump	by the jump_table
-			CharIter it	= begin;
-			int	i =	( int )( pat_len - idx );
+			// jump by the jump_table
+			CharIter it = begin;
+			int i = ( int )( pat_len - idx );
 
 			do
 			{
-				if(	++it ==	end	)
-				{ return false;	}
+				if( ++it == end )
+				{ return false; }
 			}
 			while( --i > 0 );
 
 			c1 = *it;
 
-			if(	bCaseSensitive == false	)
+			if( bCaseSensitive == false )
 			{
 				c1 = xtolower( c1 );
 			}
 
-			register int jv	= jump_table.GetValue( c1 );
+			register int jv = jump_table.GetValue( c1 );
 
-			if(	jv >= (	int	)pat_len )
+			if( jv >= ( int )pat_len )
 			{
-				begin =	it;
-				jv -= (	int	)pat_len;
-				idx	= 0;
-				p =	pattern;
+				begin = it;
+				jv -= ( int )pat_len;
+				idx = 0;
+				p = pattern;
 			}
 			else
-				if(	idx	!= 0 )
+				if( idx != 0 )
 				{
-					begin =	beginpos;
-					idx	= 0;
-					p =	pattern;
+					begin = beginpos;
+					idx = 0;
+					p = pattern;
 				}
 
-			if(	jv > 0 )
+			if( jv > 0 )
 			{
 				do
 				{
-					if(	++begin	== end )
-					{ return false;	}
+					if( ++begin == end )
+					{ return false; }
 				}
-				while( --jv	> 0	);
+				while( --jv > 0 );
 			}
 		}
 	}
@@ -235,27 +235,27 @@ bool Search( CharIter &begin, CharIter &end,
 
 
 #ifdef __WXMSW__
-namespace boost	{
-	namespace xpressive	{
+namespace boost {
+	namespace xpressive {
 		namespace detail {
 
-#if	BOOST_VERSION >= 103500
+#if BOOST_VERSION >= 103500
 
 			template<>
-			struct string_type<ucs4_t>	// defined in xpressive/detail/detail_fwd.hpp
+			struct string_type<ucs4_t>  // defined in xpressive/detail/detail_fwd.hpp
 			{
-				typedef	ucs4string type;
+				typedef ucs4string type;
 			};
 
 #else
 
 			template<char Ch, wchar_t Wch>
-			struct char_literal<ucs4_t,	Ch,	Wch>
+			struct char_literal<ucs4_t, Ch, Wch>
 			{
 				BOOST_STATIC_CONSTANT( ucs4_t, value = Wch );
 			};
 
-#ifndef	BOOST_NO_INCLASS_MEMBER_INITIALIZATION
+#ifndef BOOST_NO_INCLASS_MEMBER_INITIALIZATION
 	template<char Ch, wchar_t Wch>
 	ucs4_t const char_literal<ucs4_t, Ch, Wch>::value;
 #endif
@@ -267,10 +267,10 @@ namespace boost	{
 			{
 				static ucs4string inter_str;
 
-				static ucs4_t const	*pick( char	const *, wchar_t const *cstr ) {
+				static ucs4_t const *pick( char const *, wchar_t const *cstr ) {
 					inter_str.clear();
 
-					while( *cstr !=	0 )	{
+					while( *cstr != 0 ) {
 						inter_str.push_back( ucs4_t( *cstr ) );
 						++cstr;
 					}
@@ -278,7 +278,7 @@ namespace boost	{
 					return inter_str.c_str();
 				}
 
-				static ucs4_t pick(	char, wchar_t ch ) {
+				static ucs4_t pick( char, wchar_t ch ) {
 					return ch;
 				}
 			};
@@ -292,26 +292,26 @@ namespace boost	{
 
 struct ucs4_regex_traits: public null_regex_traits<ucs4_t>
 {
-	typedef	ucs4_t char_type;
-	typedef	detail::umaskex_t char_class_type;
-	typedef	ucs4string string_type;
-	typedef	std::locale	locale_type;
+	typedef ucs4_t char_type;
+	typedef detail::umaskex_t char_class_type;
+	typedef ucs4string string_type;
+	typedef std::locale locale_type;
 
 	template<typename char_type2>
 	static char_type2 tolower( char_type2 ch ) {
-		if(	ch < 0 || ch > 0xFFFF )	{ return ch; }
+		if( ch < 0 || ch > 0xFFFF ) { return ch; }
 
-#if	defined(__WXMSW__)
+#if defined(__WXMSW__)
 		ucs4_t tch = ( ucs4_t )ch;
-		return ( char_type2	)CharLowerW( ( LPWSTR )tch );
+		return ( char_type2 )CharLowerW( ( LPWSTR )tch );
 #else
-		return std::towlower( wchar_t( ch )	);
+		return std::towlower( wchar_t( ch ) );
 #endif
 	}
-	static wchar_t tolower(	wchar_t	ch ) {
-#if	defined(__WXMSW__)
+	static wchar_t tolower( wchar_t ch ) {
+#if defined(__WXMSW__)
 		ucs4_t tch = ( ucs4_t )ch;
-		return ( wchar_t )CharLowerW( (	LPWSTR )tch	);
+		return ( wchar_t )CharLowerW( ( LPWSTR )tch );
 #else
 		return std::towlower( ch );
 #endif
@@ -319,72 +319,72 @@ struct ucs4_regex_traits: public null_regex_traits<ucs4_t>
 
 	template<typename char_type2>
 	static char_type2 toupper( char_type2 ch ) {
-		if(	ch < 0 || ch > 0xFFFF )	{ return ch; }
+		if( ch < 0 || ch > 0xFFFF ) { return ch; }
 
-#if	defined(__WXMSW__)
+#if defined(__WXMSW__)
 		ucs4_t tch = ( ucs4_t )ch;
-		return ( char_type2	)CharUpperW( ( LPWSTR )tch );
+		return ( char_type2 )CharUpperW( ( LPWSTR )tch );
 #else
-		return std::towupper( wchar_t( ch )	);
+		return std::towupper( wchar_t( ch ) );
 #endif
 	}
-	static wchar_t toupper(	wchar_t	ch ) {
-#if	defined(__WXMSW__)
+	static wchar_t toupper( wchar_t ch ) {
+#if defined(__WXMSW__)
 		ucs4_t tch = ( ucs4_t )ch;
-		return ( wchar_t )CharUpperW( (	LPWSTR )tch	);
+		return ( wchar_t )CharUpperW( ( LPWSTR )tch );
 #else
-		return std::towupper( wchar_t( ch )	);
+		return std::towupper( wchar_t( ch ) );
 #endif
 	}
 
-	static char_type widen(	char ch	) {
+	static char_type widen( char ch ) {
 		return char_type( ch );
 	}
 
-	char_type translate_nocase(	char_type ch ) const {
+	char_type translate_nocase( char_type ch ) const {
 		return this->tolower( ch );
 	}
 
-	bool in_range_nocase( char_type	first, char_type last, char_type ch	) const	{
-		return this->in_range( first, last,	ch )
+	bool in_range_nocase( char_type first, char_type last, char_type ch ) const {
+		return this->in_range( first, last, ch )
 			   || this->in_range( first, last, this->toupper( ch ) )
 			   || this->in_range( first, last, this->tolower( ch ) );
 	}
 
 	template<typename FwdIter>
-	static char_class_type lookup_classname( FwdIter begin,	FwdIter	end, bool icase	) {
+	static char_class_type lookup_classname( FwdIter begin, FwdIter end, bool icase ) {
 		cpp_regex_traits<char> cpptraits;
-		char_class_type	c =	cpptraits.lookup_classname(	begin, end,	icase );
+		char_class_type c = cpptraits.lookup_classname( begin, end, icase );
 		return c;
 	}
 
-	static bool	isctype( char_type ch, char_class_type mask	) {
+	static bool isctype( char_type ch, char_class_type mask ) {
 		cpp_regex_traits<char> cpptraits;
-		int	i =	ch;
+		int i = ch;
 
-		if(	i <	0 || i > 0xFF )	{ ch = 0x0;	} //?
+		if( i < 0 || i > 0xFF ) { ch = 0x0; } //?
 
-		return cpptraits.isctype( char(	ch ), mask );
+		return cpptraits.isctype( char( ch ), mask );
 	}
 
-	static int value( char_type	ch,	int	radix )	{
-		switch(	radix )	{
+	static int value( char_type ch, int radix ) {
+		switch( radix ) {
 		case 8:
-			if(	ch >= '0' && ch	<= '7' ) { return ch - '0';	}
+			if( ch >= '0' && ch <= '7' ) { return ch - '0'; }
 
 			break;
 
 		case 10:
-			if(	ch >= '0' && ch	<= '9' ) { return ch - '0';	}
+			if( ch >= '0' && ch <= '9' ) { return ch - '0'; }
 
 			break;
 
 		case 16:
-			if(	ch >= '0' && ch	<= '9' ) { return ch - '0';	}
+			if( ch >= '0' && ch <= '9' ) { return ch - '0'; }
 
-			if(	ch >= 'A' && ch	<= 'F' ) { return ch - 'A' + 10; }
+			if( ch >= 'A' && ch <= 'F' ) { return ch - 'A' + 10; }
 
-			if(	ch >= 'a' && ch	<= 'f' ) { return ch - 'a' + 10; }
+			if( ch >= 'a' && ch <= 'f' ) { return ch - 'a' + 10; }
 
 			break;
 		}
@@ -395,154 +395,154 @@ struct ucs4_regex_traits: public null_regex_traits<ucs4_t>
 
 #else // __WXGTK__
 
-typedef	cpp_regex_traits<ucs4_t> ucs4_regex_traits;
+typedef cpp_regex_traits<ucs4_t> ucs4_regex_traits;
 
 #endif
 
 
 struct UCQueueSet
 {
-	MadUCQueue	 ucq;
-	int			 lock;
+	MadUCQueue   ucq;
+	int          lock;
 };
 
-struct UCIterator	// ucs4_t widechar iterator
+struct UCIterator   // ucs4_t widechar iterator
 {
-	typedef	std::bidirectional_iterator_tag	iterator_category;
-	typedef	ucs4_t value_type;
-	typedef	wxFileOffset difference_type;
-	typedef	const value_type *pointer;
-	typedef	const value_type &reference;
+	typedef std::bidirectional_iterator_tag iterator_category;
+	typedef ucs4_t value_type;
+	typedef wxFileOffset difference_type;
+	typedef const value_type *pointer;
+	typedef const value_type &reference;
 
-	static MadLines			*s_lines;
+	static MadLines         *s_lines;
 	static MadLines::NextUCharFuncPtr s_NextUChar;
-	static wxFileOffset		s_endpos;
-	static list<UCQueueSet>	s_ucqueues;
+	static wxFileOffset     s_endpos;
+	static list<UCQueueSet> s_ucqueues;
 
-	static void	Init( MadLines *lines, const wxFileOffset &endpos )	{
-		wxASSERT( endpos >=	0 && endpos	<= lines->GetSize()	);
-		s_lines	= lines;
-		s_NextUChar	= lines->NextUChar;
+	static void Init( MadLines *lines, const wxFileOffset &endpos ) {
+		wxASSERT( endpos >= 0 && endpos <= lines->GetSize() );
+		s_lines = lines;
+		s_NextUChar = lines->NextUChar;
 		s_endpos = endpos;
 		s_ucqueues.clear();
 	}
 
-	typedef	list<UCQueueSet>::iterator UCQIterator;
-#define	UCQ_MAXSIZE	(10	* 1024)
-#define	BUF_MAXSIZE	(5 * 1024)
+	typedef list<UCQueueSet>::iterator UCQIterator;
+#define UCQ_MAXSIZE (10 * 1024)
+#define BUF_MAXSIZE (5 * 1024)
 
-	wxFileOffset	pos;
-	MadLineIterator	lit;
-	wxFileOffset	linepos;
-	UCQIterator		ucqit;
-	int				ucqidx;
+	wxFileOffset    pos;
+	MadLineIterator lit;
+	wxFileOffset    linepos;
+	UCQIterator     ucqit;
+	int             ucqidx;
 
 	UCIterator(): ucqidx( -1 ) {}
 
 	~UCIterator() {
-		if(	ucqidx >= 0	&& --ucqit->lock ==	0 )	{
-			s_ucqueues.erase( ucqit	);
+		if( ucqidx >= 0 && --ucqit->lock == 0 ) {
+			s_ucqueues.erase( ucqit );
 		}
 	}
 
-	//UCIterator(wxFileOffset pos0):ucqidx(-1),	pos(pos0) {}
+	//UCIterator(wxFileOffset pos0):ucqidx(-1), pos(pos0) {}
 
-	UCIterator(	const UCIterator &ucit ): ucqidx( -1 ) {
+	UCIterator( const UCIterator &ucit ): ucqidx( -1 ) {
 		this->operator =( ucit );
 	}
 
-	UCIterator(	wxFileOffset pos0, const MadLineIterator &lit0,	wxFileOffset linepos0 )
-		: pos( pos0	), lit(	lit0 ),	linepos( linepos0 )	{
-		if(	linepos	== lit->m_Size && pos <	s_lines->GetSize() ) {
+	UCIterator( wxFileOffset pos0, const MadLineIterator &lit0, wxFileOffset linepos0 )
+		: pos( pos0 ), lit( lit0 ), linepos( linepos0 ) {
+		if( linepos == lit->m_Size && pos < s_lines->GetSize() ) {
 			++lit;
-			linepos	= 0;
+			linepos = 0;
 		}
 
 		s_ucqueues.push_back( UCQueueSet() );
-		ucqit =	s_ucqueues.end();
+		ucqit = s_ucqueues.end();
 		--ucqit;
-		ucqit->lock	= 1;		  // lock this ucqueue
+		ucqit->lock = 1;          // lock this ucqueue
 		ucqidx = 0;
 
-		if(	pos	< s_lines->GetSize() ) {
-			MadUCQueue &ucqueue	= ucqit->ucq;
-			s_lines->InitNextUChar(	lit, linepos );
-			int	i =	BUF_MAXSIZE;
+		if( pos < s_lines->GetSize() ) {
+			MadUCQueue &ucqueue = ucqit->ucq;
+			s_lines->InitNextUChar( lit, linepos );
+			int i = BUF_MAXSIZE;
 
-			if(	pos	>= s_endpos	) {	i =	10;	}
+			if( pos >= s_endpos ) { i = 10; }
 
-			while( --i > 0 && (	s_lines->*s_NextUChar )( ucqueue ) ) {
+			while( --i > 0 && ( s_lines->*s_NextUChar )( ucqueue ) ) {
 				//ucqit->size += ucqueue.back().second;
 			}
 		}
 	}
 
-	UCIterator & operator=(	const UCIterator & it )	{
-		if(	ucqidx >= 0	&& --ucqit->lock ==	0 )	{
-			wxASSERT( ucqit	!= it.ucqit	);
-			s_ucqueues.erase( ucqit	);
+	UCIterator & operator=( const UCIterator & it ) {
+		if( ucqidx >= 0 && --ucqit->lock == 0 ) {
+			wxASSERT( ucqit != it.ucqit );
+			s_ucqueues.erase( ucqit );
 		}
 
-		pos	= it.pos;
-		lit	= it.lit;
-		linepos	= it.linepos;
-		ucqit =	it.ucqit;
+		pos = it.pos;
+		lit = it.lit;
+		linepos = it.linepos;
+		ucqit = it.ucqit;
 		ucqidx = it.ucqidx;
 
-		if(	ucqidx >= 0	) {	++ucqit->lock; }
+		if( ucqidx >= 0 ) { ++ucqit->lock; }
 
 		return *this;
 	}
 
 	const value_type operator*() const {
-		wxASSERT( ucqidx >=	0 && ucqidx	< int( ucqit->ucq.size() ) );
+		wxASSERT( ucqidx >= 0 && ucqidx < int( ucqit->ucq.size() ) );
 		return ucqit->ucq[ucqidx].first;
 	}
 
 	/***
 	ucs4_t *operator->() const
 	{
-		return _ws_	+ pos;
+	    return _ws_ + pos;
 	}
 	***/
 
 	// pre-increment operator
 	UCIterator & operator++() {
-		wxASSERT( ucqidx >=	0 && ucqidx	< int( ucqit->ucq.size() ) );
-		MadUCQueue *ucqueue	= &( ucqit->ucq	);
-		int	len	= (	*ucqueue )[ucqidx].second;
-		pos	+= len;
-		linepos	+= len;
+		wxASSERT( ucqidx >= 0 && ucqidx < int( ucqit->ucq.size() ) );
+		MadUCQueue *ucqueue = &( ucqit->ucq );
+		int len = ( *ucqueue )[ucqidx].second;
+		pos += len;
+		linepos += len;
 
-		if(	linepos	== lit->m_Size ) {
-			if(	pos	== s_endpos	) {	return *this; }	// end
+		if( linepos == lit->m_Size ) {
+			if( pos == s_endpos ) { return *this; } // end
 
 			++lit;
-			linepos	= 0;
+			linepos = 0;
 		}
 
 		++ucqidx;
 
-		if(	ucqidx == (	int	)( *ucqueue	).size() ) {
+		if( ucqidx == ( int )( *ucqueue ).size() ) {
 			wxASSERT( pos <= s_endpos );
 
-			if(	ucqidx >= UCQ_MAXSIZE )	{
-				if(	--ucqit->lock == 0 ) {
-					s_ucqueues.erase( ucqit	);
+			if( ucqidx >= UCQ_MAXSIZE ) {
+				if( --ucqit->lock == 0 ) {
+					s_ucqueues.erase( ucqit );
 				}
 
 				s_ucqueues.push_back( UCQueueSet() );
-				ucqit =	s_ucqueues.end();
+				ucqit = s_ucqueues.end();
 				--ucqit;
-				ucqit->lock	= 1;		  // lock this ucqueue
+				ucqit->lock = 1;          // lock this ucqueue
 				ucqidx = 0;
-				ucqueue	= &( ucqit->ucq	);
+				ucqueue = &( ucqit->ucq );
 			}
 
-			s_lines->InitNextUChar(	lit, linepos );
-			int	i =	BUF_MAXSIZE;
+			s_lines->InitNextUChar( lit, linepos );
+			int i = BUF_MAXSIZE;
 
-			while( --i > 0 && (	s_lines->*s_NextUChar )( *ucqueue )	) {
+			while( --i > 0 && ( s_lines->*s_NextUChar )( *ucqueue ) ) {
 				//ucqit->size += ucqueue->back().second;
 			}
 		}
@@ -554,47 +554,47 @@ struct UCIterator	// ucs4_t widechar iterator
 	// post-increment operator
 	UCIterator operator++(int)
 	{
-		UCIterator tmp = *this;
-		++*this;
-		return tmp;
+	    UCIterator tmp = *this;
+	    ++*this;
+	    return tmp;
 	}
 	***/
 
 	//***
 	// pre-decrement operator
 	UCIterator & operator--() {
-		wxASSERT( pos >	0 && ucqidx	>= 0 &&	ucqidx <= int( ucqit->ucq.size() ) );
+		wxASSERT( pos > 0 && ucqidx >= 0 && ucqidx <= int( ucqit->ucq.size() ) );
 
-		if(	ucqidx == 0	) {				//rarely happen
-			if(	--ucqit->lock == 0 ) {
-				s_ucqueues.erase( ucqit	);
+		if( ucqidx == 0 ) {             //rarely happen
+			if( --ucqit->lock == 0 ) {
+				s_ucqueues.erase( ucqit );
 			}
 
 			s_ucqueues.push_back( UCQueueSet() );
-			ucqit =	s_ucqueues.end();
+			ucqit = s_ucqueues.end();
 			--ucqit;
-			ucqit->lock	= 1;			// lock	this ucqueue
+			ucqit->lock = 1;            // lock this ucqueue
 			ucqidx = 0;
-			MadUCPair ucp =	s_lines->PreviousUChar(	lit, linepos );
-			wxASSERT( ucp.second !=	0 );
-			pos	-= ucp.second;
+			MadUCPair ucp = s_lines->PreviousUChar( lit, linepos );
+			wxASSERT( ucp.second != 0 );
+			pos -= ucp.second;
 			ucqit->ucq.push_back( ucp );
 			return *this;
 		}
 
 		//--ucqidx;
-		//The regex	search fails when content is "込1込", expression is	  ＾込.+込" From	stonewell in SF.net
-		if(	pos	!= s_endpos	) {	--ucqidx; }
+		//The regex search fails when content is "込1込", expression is   ＾込.+込" From    stonewell in SF.net
+		if( pos != s_endpos ) { --ucqidx; }
 
-		int	len	= ucqit->ucq[ucqidx].second;
-		pos	-= len;
+		int len = ucqit->ucq[ucqidx].second;
+		pos -= len;
 
-		if(	linepos	== 0 ) {
+		if( linepos == 0 ) {
 			--lit;
-			linepos	= lit->m_Size;
+			linepos = lit->m_Size;
 		}
 
-		linepos	-= len;
+		linepos -= len;
 		return *this;
 	}
 	//***/
@@ -603,44 +603,68 @@ struct UCIterator	// ucs4_t widechar iterator
 	// post-decrement operator
 	UCIterator operator--(int)
 	{
-		UCIterator tmp = *this;
-		--*this;
-		return tmp;
+	    UCIterator tmp = *this;
+	    --*this;
+	    return tmp;
 	}
 	***/
 
-	bool operator==( const UCIterator &	it ) const {
-		if(	pos	== it.pos )	{ return true; }
+	bool operator==( const UCIterator & it ) const {
+		if( pos == it.pos ) { return true; }
 
-		return ( pos >=	s_endpos &&	it.pos >= s_endpos );
+		return ( pos >= s_endpos && it.pos >= s_endpos );
 	}
 
-	bool operator!=( const UCIterator &	it ) const {
-		return !( this->operator==(	it ) ) ;
+	bool operator!=( const UCIterator & it ) const {
+		return !( this->operator==( it ) ) ;
 	}
 
 };
 
-MadLines *UCIterator::s_lines =	NULL;
+MadLines *UCIterator::s_lines = NULL;
 MadLines::NextUCharFuncPtr UCIterator::s_NextUChar = NULL;
-wxFileOffset UCIterator::s_endpos =	0;
+wxFileOffset UCIterator::s_endpos = 0;
 list<UCQueueSet> UCIterator::s_ucqueues;
 
-extern wxString	MadStrLower( const wxString	& );
-MadSearchResult	MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadCaretPos	&endpos,
-		const wxString &text, bool bRegex, bool	bCaseSensitive,	bool bWholeWord, bool bDotMatchNewline/* = false*/ )
+extern wxString MadStrLower( const wxString & );
+MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadCaretPos &endpos,
+		const wxString &text, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline/* = false*/ )
 {
-	if(	beginpos.pos >=	endpos.pos || text.IsEmpty() )
-	{ return SR_NO;	}
+	if( beginpos.pos >= endpos.pos || text.IsEmpty() )
+	{ return SR_NO; }
 
-	regex_constants::syntax_option_type	opt	= regex_constants::ECMAScript;
+	regex_constants::syntax_option_type opt = regex_constants::ECMAScript;
 	const wxString *text_ptr = &text;
 
-	if(	bCaseSensitive == false	)
+	if( bCaseSensitive == false )
 	{
-		opt	= opt |	regex_constants::icase;
-		static wxString	text_lower;
-		text_lower = MadStrLower( text );
+		opt = opt | regex_constants::icase;
+		static wxString text_lower;
+		if(bRegex)
+		{
+			text_lower.Empty();
+			wchar_t lastChar = 0;
+			for(size_t i =0; i < text.Len(); ++i)
+			{
+				if(lastChar == wchar_t('\\'))
+				{
+					text_lower << text[i];
+				}
+				else
+				{
+#ifdef __WXMSW__
+					TCHAR singleChar = text[i];
+					singleChar = (TCHAR)CharLowerW( (LPTSTR)singleChar );
+					text_lower << singleChar;
+#else
+					text_lower << towlower(text[i]);
+#endif
+				}
+				lastChar = text[i];
+			}
+		}
+		else
+			text_lower = MadStrLower( text );
 		//text_lower = text.Lower();
 		text_ptr = &text_lower;
 	}
@@ -653,151 +677,151 @@ MadSearchResult	MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 #ifdef __WXMSW__
 	vector<ucs4_t> ucs;
 	TranslateText( text_ptr->c_str(), text_ptr->Len(), &ucs, true );
-	ucs4_t *puc	= &ucs[0];
+	ucs4_t *puc = &ucs[0];
 	size_t len = ucs.size();
-	ucs4string exprstr(	puc, puc + len );
+	ucs4string exprstr( puc, puc + len );
 #else
-	const ucs4_t *puc =	text_ptr->c_str();
+	const ucs4_t *puc = text_ptr->c_str();
 	size_t len = text_ptr->Len();
-	ucs4string exprstr(	puc, puc + len );
+	ucs4string exprstr( puc, puc + len );
 #endif
 	regex_compiler<UCIterator, ucs4_regex_traits > ucs4comp;
-	basic_regex<UCIterator>	expression;
+	basic_regex<UCIterator> expression;
 
-	if(	bRegex )
+	if( bRegex )
 	{
 		try
 		{
-			// Ugly	patch for deadloop
-			ucs4_t bad_reg[3][3] =	{{'(', ')',	0},	{'[', ']', 0}, {'{', '}', 0}}, transChar = '\\';
+			// Ugly patch for deadloop
+			ucs4_t bad_reg[3][3] =  {{'(', ')', 0}, {'[', ']', 0}, {'{', '}', 0}}, transChar = '\\';
 
-			for( int i = 0;	i <	3; ++i )
+			for( int i = 0; i < 3; ++i )
 			{
-				ucs4_t *tpuc = &( bad_reg[i][0]	);
-				ucs4string bstr( tpuc, tpuc	+ 2	);
-				ucs4string::size_type n	= exprstr.find(	bstr );
+				ucs4_t *tpuc = &( bad_reg[i][0] );
+				ucs4string bstr( tpuc, tpuc + 2 );
+				ucs4string::size_type n = exprstr.find( bstr );
 
-				if(	n != ucs4string::npos )
+				if( n != ucs4string::npos )
 				{
-					if(	n == 0 || (	exprstr.at(	n -	1 )	!= transChar ) )
+					if( n == 0 || ( exprstr.at( n - 1 ) != transChar ) )
 					{ throw regex_error( regex_constants::error_badbrace, "Empty (), [] or {}" ); }
 				}
 			}
 
-			expression = ucs4comp.compile( exprstr,	opt	);
+			expression = ucs4comp.compile( exprstr, opt );
 		}
 		catch( regex_error & )
 		{
 			wxMessageDialog dlg( this, wxString::Format( _( "'%s' is not a valid regular expression.(Or empty (), [] or {})" ), text.c_str() ),
-								 wxT( "MadEdit-Mod"	), wxOK	| wxICON_ERROR );
-			dlg.SetOKLabel(	wxMessageDialog::ButtonLabel( _( "&Ok" ) ) );
+								 wxT( "MadEdit-Mod" ), wxOK | wxICON_ERROR );
+			dlg.SetOKLabel( wxMessageDialog::ButtonLabel( _( "&Ok" ) ) );
 			dlg.ShowModal();
 			return SR_EXPR_ERROR;
 		}
 	}
 
 	UCIterator::Init( m_Lines, endpos.pos );
-	UCIterator start( beginpos.pos,	beginpos.iter, beginpos.linepos	);
-	UCIterator end(	endpos.pos,	endpos.iter, endpos.linepos	);
+	UCIterator start( beginpos.pos, beginpos.iter, beginpos.linepos );
+	UCIterator end( endpos.pos, endpos.iter, endpos.linepos );
 	UCIterator fbegin, fend;
-	match_results <	UCIterator > what;
+	match_results < UCIterator > what;
 	bool found;
 	static JumpTable_UCS4 jtab;
-	jtab.Build(	puc, len );
+	jtab.Build( puc, len );
 
 	try
 	{
-		for( ;;	)
+		for( ;; )
 		{
-			if(	bRegex )
+			if( bRegex )
 			{
-				found =	regex_search( start, end, what,	expression );
+				found = regex_search( start, end, what, expression );
 			}
 			else
 			{
 				fbegin = start;
 				fend = end;
-				found =::Search<ucs4_t,	UCIterator,	JumpTable_UCS4>( fbegin, fend, puc,	len, jtab, bCaseSensitive );
+				found =::Search<ucs4_t, UCIterator, JumpTable_UCS4>( fbegin, fend, puc, len, jtab, bCaseSensitive );
 			}
 
-			if(	!found ) { break; }
+			if( !found ) { break; }
 
-			if(	bWholeWord )			// check if	is WholeWord
+			if( bWholeWord )            // check if is WholeWord
 			{
 				UCIterator cpos1, cpos2;
 
-				if(	bRegex )
+				if( bRegex )
 				{
-					cpos1 =	what[0].first;
-					cpos2 =	what[0].second;
+					cpos1 = what[0].first;
+					cpos2 = what[0].second;
 				}
 				else
 				{
-					cpos1 =	fbegin;
-					cpos2 =	fend;
+					cpos1 = fbegin;
+					cpos2 = fend;
 				}
 
 				// check cpos2
-				if(	cpos2.linepos >	cpos2.lit->m_RowIndices[0].m_Start	   // not at begin/end of line
-						&& cpos2.linepos < ( cpos2.lit->m_Size - cpos2.lit->m_NewLineSize )	)
+				if( cpos2.linepos > cpos2.lit->m_RowIndices[0].m_Start     // not at begin/end of line
+						&& cpos2.linepos < ( cpos2.lit->m_Size - cpos2.lit->m_NewLineSize ) )
 				{
-					ucs4_t uc =	*cpos2;
+					ucs4_t uc = *cpos2;
 
-					if(	uc > 0x20 && !m_Syntax->IsDelimiter( uc	) && uc	!= 0x3000 )
+					if( uc > 0x20 && !m_Syntax->IsDelimiter( uc ) && uc != 0x3000 )
 					{
-						// check prev-uchar	of cpos2
+						// check prev-uchar of cpos2
 						--cpos2;
 						uc = *cpos2;
 
-						if(	uc > 0x20 &&  !m_Syntax->IsDelimiter( uc ) && uc !=	0x3000 )
+						if( uc > 0x20 &&  !m_Syntax->IsDelimiter( uc ) && uc != 0x3000 )
 						{
-							found =	false;
+							found = false;
 						}
 					}
 				}
 
 				// check cpos1
-				if(	found )
+				if( found )
 				{
-					wxFileOffset lpos =	cpos1.lit->m_RowIndices[0].m_Start;
+					wxFileOffset lpos = cpos1.lit->m_RowIndices[0].m_Start;
 
-					if(	cpos1.linepos >	lpos )		// not at begin	of line
+					if( cpos1.linepos > lpos )      // not at begin of line
 					{
-						ucs4_t uc =	*cpos1;
+						ucs4_t uc = *cpos1;
 
-						if(	uc > 0x20 && !m_Syntax->IsDelimiter( uc	) && uc	!= 0x3000 )
+						if( uc > 0x20 && !m_Syntax->IsDelimiter( uc ) && uc != 0x3000 )
 						{
-							// check prev-uchar	of cpos1
+							// check prev-uchar of cpos1
 							--cpos1;
 							uc = *cpos1;
 
-							if(	uc > 0x20 && !m_Syntax->IsDelimiter( uc	) && uc	!= 0x3000 )
+							if( uc > 0x20 && !m_Syntax->IsDelimiter( uc ) && uc != 0x3000 )
 							{
-								found =	false;
+								found = false;
 							}
 						}
 					}
 				}
 			}
 
-			if(	found )
+			if( found )
 			{
-				if(	bRegex )
+				if( bRegex )
 				{
 					beginpos.pos = what[0].first.pos;
-					beginpos.iter =	what[0].first.lit;
+					beginpos.iter = what[0].first.lit;
 					beginpos.linepos = what[0].first.linepos;
 					endpos.pos = what[0].second.pos;
-					endpos.iter	= what[0].second.lit;
+					endpos.iter = what[0].second.lit;
 					endpos.linepos = what[0].second.linepos;
 				}
 				else
 				{
 					beginpos.pos = fbegin.pos;
-					beginpos.iter =	fbegin.lit;
+					beginpos.iter = fbegin.lit;
 					beginpos.linepos = fbegin.linepos;
 					endpos.pos = fend.pos;
-					endpos.iter	= fend.lit;
+					endpos.iter = fend.lit;
 					endpos.linepos = fend.linepos;
 				}
 
@@ -805,21 +829,21 @@ MadSearchResult	MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 			}
 
 			// not found, repeat...
-			if(	bRegex )
+			if( bRegex )
 			{
-				start =	what[0].second;
+				start = what[0].second;
 			}
 			else
 			{
-				start =	fend;
+				start = fend;
 			}
 		}
 	}
 	catch( regex_error )
 	{
 		wxMessageDialog dlg( this, _( "Catched a exception of 'regex_error'.\nMaybe the regular expression is invalid." ),
-							 wxT( "MadEdit-Mod"	), wxOK	| wxICON_ERROR );
-		dlg.SetOKLabel(	wxMessageDialog::ButtonLabel( _( "&Ok" ) ) );
+							 wxT( "MadEdit-Mod" ), wxOK | wxICON_ERROR );
+		dlg.SetOKLabel( wxMessageDialog::ButtonLabel( _( "&Ok" ) ) );
 		dlg.ShowModal();
 		return SR_EXPR_ERROR;
 	}
@@ -829,7 +853,7 @@ MadSearchResult	MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 
 
 // convert escape char to literal char
-ucs4string ConvertEscape( const	ucs4string &str	)
+ucs4string ConvertEscape( const ucs4string &str )
 {
 	ucs4string out;
 	detail::escape_value<ucs4_t, ucs4_regex_traits::char_class_type> esc;
@@ -837,24 +861,24 @@ ucs4string ConvertEscape( const	ucs4string &str	)
 	ucs4string::const_iterator end = str.end();
 	compiler_traits<ucs4_regex_traits> ucs4traits;
 
-	while( begin !=	end	)
+	while( begin != end )
 	{
-		if(	*begin == '\\' )
+		if( *begin == '\\' )
 		{
-			if(	++begin	== end )
+			if( ++begin == end )
 			{
-				//out.push_back('\\'); // last char	is '\'
+				//out.push_back('\\'); // last char is '\'
 				throw regex_error( regex_constants::error_escape );
 			}
 			else
 			{
-				esc	= detail::parse_escape(	begin, end,	ucs4traits );
-				out	+= esc.ch_;
+				esc = detail::parse_escape( begin, end, ucs4traits );
+				out += esc.ch_;
 			}
 		}
 		else
 		{
-			out	+= *begin;
+			out += *begin;
 			++begin;
 		}
 	}
@@ -862,112 +886,113 @@ ucs4string ConvertEscape( const	ucs4string &str	)
 	return out;
 }
 
-MadSearchResult	MadEdit::Replace( ucs4string &out, const MadCaretPos &beginpos,	const MadCaretPos &endpos,
-								  const	wxString &expr,	const wxString &fmt,
-								  bool bRegex, bool	bCaseSensitive,	bool bWholeWord, bool bDotMatchNewline/* = false*/ )
+MadSearchResult MadEdit::Replace( ucs4string &out, const MadCaretPos &beginpos, const MadCaretPos &endpos,
+								  const wxString &expr, const wxString &fmt,
+								  bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline/* = false*/ )
 {
-	if(	expr.IsEmpty() ) { return SR_NO; }
+	if( expr.IsEmpty() ) { return SR_NO; }
 
-	if(	bRegex == false	)
+	if( bRegex == false )
 	{
 		// fmt is the wanted string
 		vector<ucs4_t> ucs;
-		TranslateText( fmt.c_str(),	fmt.Len(), &ucs, true );
+		TranslateText( fmt.c_str(), fmt.Len(), &ucs, true );
 
-		for( size_t	i =	0, size	= ucs.size(); i	< size;	++i	)
+		for( size_t i = 0, size = ucs.size(); i < size; ++i )
 		{
-			out	+= ucs[i] ;
+			out += ucs[i] ;
 		}
 
 		return SR_YES;
 	}
 
-	regex_constants::syntax_option_type	opt	= regex_constants::ECMAScript;
+	regex_constants::syntax_option_type opt = regex_constants::ECMAScript;
 
-	if(	bCaseSensitive == false	)
+	if( bCaseSensitive == false )
 	{
-		opt	= opt |	regex_constants::icase;
+		opt = opt | regex_constants::icase;
 	}
 
 	if( bDotMatchNewline == false )
 	{
 		opt = opt | regex_constants::not_dot_newline;
 	}
+
 #ifdef __WXMSW__
 	vector<ucs4_t> ucs;
-	TranslateText( expr.c_str(), expr.Len(), &ucs, true	);
-	ucs4_t *puc	= &ucs[0];
-	ucs4string exprstr(	puc, puc + ucs.size() );
+	TranslateText( expr.c_str(), expr.Len(), &ucs, true );
+	ucs4_t *puc = &ucs[0];
+	ucs4string exprstr( puc, puc + ucs.size() );
 #else
-	const ucs4_t *puc =	expr.c_str();
-	ucs4string exprstr(	puc, puc + expr.Len() );
+	const ucs4_t *puc = expr.c_str();
+	ucs4string exprstr( puc, puc + expr.Len() );
 #endif
-	typedef	ucs4string::const_iterator ucs4iter;
+	typedef ucs4string::const_iterator ucs4iter;
 	regex_compiler<ucs4iter, ucs4_regex_traits > ucs4comp;
 	basic_regex<ucs4iter> expression;
 
 	try
 	{
-		expression = ucs4comp.compile( exprstr,	opt	);
+		expression = ucs4comp.compile( exprstr, opt );
 	}
 	catch( regex_error )
 	{
-		wxMessageDialog	dlg( this, wxString::Format( _(	"'%s' is not a valid regular expression." ), expr.c_str() ),
-							 wxT( "MadEdit-Mod"	), wxOK	| wxICON_ERROR );
-		dlg.SetOKLabel(	wxMessageDialog::ButtonLabel( _( "&Ok" ) ) );
+		wxMessageDialog dlg( this, wxString::Format( _( "'%s' is not a valid regular expression." ), expr.c_str() ),
+							 wxT( "MadEdit-Mod" ), wxOK | wxICON_ERROR );
+		dlg.SetOKLabel( wxMessageDialog::ButtonLabel( _( "&Ok" ) ) );
 		dlg.ShowModal();
 		return SR_EXPR_ERROR;
 	}
 
 #ifdef __WXMSW__
 	ucs.clear();
-#if	PATCH_RPLACE_REGEXP	== 1
+#if PATCH_RPLACE_REGEXP == 1
 
-	if(	!fmt.IsEmpty() )
+	if( !fmt.IsEmpty() )
 	{
 #endif
-		TranslateText( fmt.c_str(),	fmt.Len(), &ucs, true );
-		puc	= &ucs[0];
-#if	PATCH_RPLACE_REGEXP	== 1
+		TranslateText( fmt.c_str(), fmt.Len(), &ucs, true );
+		puc = &ucs[0];
+#if PATCH_RPLACE_REGEXP == 1
 	}
 	else
-	{ puc =	0; }
+	{ puc = 0; }
 
 #endif
-	ucs4string fmtstr( puc,	puc	+ ucs.size() );
+	ucs4string fmtstr( puc, puc + ucs.size() );
 #else
 
-	if(	!fmt.IsEmpty() )
+	if( !fmt.IsEmpty() )
 	{
-		puc	= fmt.c_str();
+		puc = fmt.c_str();
 	}
 	else
-	{ puc =	0; }
+	{ puc = 0; }
 
-	ucs4string fmtstr( puc,	puc	+ fmt.Len()	);
+	ucs4string fmtstr( puc, puc + fmt.Len() );
 #endif
-	UCIterator begin( beginpos.pos,	beginpos.iter, beginpos.linepos	);
-	UCIterator end(	endpos.pos,	endpos.iter, endpos.linepos	);
+	UCIterator begin( beginpos.pos, beginpos.iter, beginpos.linepos );
+	UCIterator end( endpos.pos, endpos.iter, endpos.linepos );
 	ucs4string str;
 
 	//back_insert_iterator<ucs4string> oi(str);
 	//std::copy(first, last, oi);
-	while( begin !=	end	)
+	while( begin != end )
 	{
-		str	+= *begin;
+		str += *begin;
 		++begin;
 	}
 
 	try
 	{
-		out	= regex_replace( str, expression, fmtstr );
-		out	= ConvertEscape( out );
+		out = regex_replace( str, expression, fmtstr );
+		out = ConvertEscape( out );
 	}
 	catch( regex_error )
 	{
 		wxMessageDialog dlg( this, wxString::Format( _( "The format of '%s' is invalid." ), fmt.c_str() ),
-							 wxT( "MadEdit-Mod"	), wxOK	| wxICON_ERROR );
-		dlg.SetOKLabel(	wxMessageDialog::ButtonLabel( _( "&Ok" ) ) );
+							 wxT( "MadEdit-Mod" ), wxOK | wxICON_ERROR );
+		dlg.SetOKLabel( wxMessageDialog::ButtonLabel( _( "&Ok" ) ) );
 		dlg.ShowModal();
 		return SR_EXPR_ERROR;
 	}
@@ -983,68 +1008,68 @@ MadSearchResult	MadEdit::Replace( ucs4string &out, const MadCaretPos &beginpos,	
 // Hex Search
 struct ByteIterator
 {
-	typedef	std::bidirectional_iterator_tag	iterator_category;
-	typedef	wxByte value_type;
-	typedef	wxFileOffset difference_type;
-	typedef	const value_type *pointer;
-	typedef	const value_type &reference;
+	typedef std::bidirectional_iterator_tag iterator_category;
+	typedef wxByte value_type;
+	typedef wxFileOffset difference_type;
+	typedef const value_type *pointer;
+	typedef const value_type &reference;
 
-	static MadLines			*s_lines;
-	static wxFileOffset		s_endpos;
+	static MadLines         *s_lines;
+	static wxFileOffset     s_endpos;
 
-	static void	Init( MadLines *lines, const wxFileOffset &endpos )	{
-		wxASSERT( endpos >=	0 && endpos	<= lines->GetSize()	);
-		s_lines	= lines;
+	static void Init( MadLines *lines, const wxFileOffset &endpos ) {
+		wxASSERT( endpos >= 0 && endpos <= lines->GetSize() );
+		s_lines = lines;
 		s_endpos = endpos;
 	}
 
-	wxFileOffset	pos;
-	MadLineIterator	lit;
-	wxFileOffset	linepos;
+	wxFileOffset    pos;
+	MadLineIterator lit;
+	wxFileOffset    linepos;
 
 	ByteIterator() {}
 
-	ByteIterator( const	ByteIterator &it ) {
+	ByteIterator( const ByteIterator &it ) {
 		this->operator =( it );
 	}
 
-	ByteIterator( wxFileOffset pos0, const MadLineIterator &lit0, wxFileOffset linepos0	)
-		: pos( pos0	), lit(	lit0 ),	linepos( linepos0 )	{
-		if(	linepos	== lit->m_Size && pos <	s_lines->GetSize() ) {
+	ByteIterator( wxFileOffset pos0, const MadLineIterator &lit0, wxFileOffset linepos0 )
+		: pos( pos0 ), lit( lit0 ), linepos( linepos0 ) {
+		if( linepos == lit->m_Size && pos < s_lines->GetSize() ) {
 			++lit;
-			linepos	= 0;
+			linepos = 0;
 		}
 	}
 
-	ByteIterator & operator=( const	ByteIterator & it )	{
-		pos	= it.pos;
-		lit	= it.lit;
-		linepos	= it.linepos;
+	ByteIterator & operator=( const ByteIterator & it ) {
+		pos = it.pos;
+		lit = it.lit;
+		linepos = it.linepos;
 		return *this;
 	}
 
 	const value_type operator*() {
-		wxASSERT( linepos <	lit->m_Size	);
+		wxASSERT( linepos < lit->m_Size );
 		return lit->Get( linepos );
 	}
 
 	/***
 	ucs4_t *operator->() const
 	{
-		return _ws_	+ pos;
+	    return _ws_ + pos;
 	}
 	***/
 
 	// pre-increment operator
-	ByteIterator & operator++()	{
+	ByteIterator & operator++() {
 		++pos;
 		++linepos;
 
-		if(	linepos	== lit->m_Size ) {
-			if(	pos	== s_endpos	) {	return *this; }	// end
+		if( linepos == lit->m_Size ) {
+			if( pos == s_endpos ) { return *this; } // end
 
 			++lit;
-			linepos	= 0;
+			linepos = 0;
 		}
 
 		return *this;
@@ -1054,21 +1079,21 @@ struct ByteIterator
 	// post-increment operator
 	ByteIterator operator++(int)
 	{
-		ByteIterator tmp = *this;
-		++*this;
-		return tmp;
+	    ByteIterator tmp = *this;
+	    ++*this;
+	    return tmp;
 	}
 	***/
 
 	//***
 	// pre-decrement operator
-	ByteIterator & operator--()	{
-		wxASSERT( pos >	0 );
+	ByteIterator & operator--() {
+		wxASSERT( pos > 0 );
 		--pos;
 
-		if(	linepos	== 0 ) {
+		if( linepos == 0 ) {
 			--lit;
-			linepos	= lit->m_Size;
+			linepos = lit->m_Size;
 		}
 
 		--linepos;
@@ -1080,46 +1105,46 @@ struct ByteIterator
 	// post-decrement operator
 	ByteIterator operator--(int)
 	{
-		ByteIterator tmp = *this;
-		--*this;
-		return tmp;
+	    ByteIterator tmp = *this;
+	    --*this;
+	    return tmp;
 	}
 	***/
 
-	bool operator==( const ByteIterator	& it ) const {
-		if(	pos	== it.pos )	{ return true; }
+	bool operator==( const ByteIterator & it ) const {
+		if( pos == it.pos ) { return true; }
 
-		return ( pos >=	s_endpos &&	it.pos >= s_endpos );
+		return ( pos >= s_endpos && it.pos >= s_endpos );
 	}
 
-	bool operator!=( const ByteIterator	& it ) const {
-		return !( this->operator==(	it ) ) ;
+	bool operator!=( const ByteIterator & it ) const {
+		return !( this->operator==( it ) ) ;
 	}
 
 };
 
-MadLines *ByteIterator::s_lines	= NULL;
-wxFileOffset ByteIterator::s_endpos	= 0;
+MadLines *ByteIterator::s_lines = NULL;
+wxFileOffset ByteIterator::s_endpos = 0;
 
-MadSearchResult	MadEdit::SearchHex(	/*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadCaretPos &endpos,
-		const wxByte *hex, size_t count	)
+MadSearchResult MadEdit::SearchHex( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadCaretPos &endpos,
+		const wxByte *hex, size_t count )
 {
-	if(	beginpos.pos >=	endpos.pos || count	== 0 )
-	{ return SR_NO;	}
+	if( beginpos.pos >= endpos.pos || count == 0 )
+	{ return SR_NO; }
 
-	ByteIterator::Init(	m_Lines, endpos.pos	);
-	ByteIterator start(	beginpos.pos, beginpos.iter, beginpos.linepos );
+	ByteIterator::Init( m_Lines, endpos.pos );
+	ByteIterator start( beginpos.pos, beginpos.iter, beginpos.linepos );
 	ByteIterator end( endpos.pos, endpos.iter, endpos.linepos );
 	static JumpTable_Hex jtab;
-	jtab.Build(	hex, count );
+	jtab.Build( hex, count );
 
-	if(	::Search( start, end, hex, count, jtab,	true ) )
+	if( ::Search( start, end, hex, count, jtab, true ) )
 	{
 		beginpos.pos = start.pos;
-		beginpos.iter =	start.lit;
+		beginpos.iter = start.lit;
 		beginpos.linepos = start.linepos;
 		endpos.pos = end.pos;
-		endpos.iter	= end.lit;
+		endpos.iter = end.lit;
 		endpos.linepos = end.linepos;
 		return SR_YES;
 	}
@@ -1127,22 +1152,22 @@ MadSearchResult	MadEdit::SearchHex(	/*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/M
 	return SR_NO;
 }
 
-bool MadEdit::NextRegexSearchingPos( MadCaretPos& cp, const	wxString &expr )
+bool MadEdit::NextRegexSearchingPos( MadCaretPos& cp, const wxString &expr )
 {
-	if(	expr.find_first_of(	wxT( '^' ) ) !=	wxString::npos || expr.find_last_of( wxT( '$' )	) != wxString::npos	)
+	if( expr.find_first_of( wxT( '^' ) ) != wxString::npos || expr.find_last_of( wxT( '$' ) ) != wxString::npos )
 	{
-		wxFileOffset len = cp.iter->m_Size - cp.linepos	- 1;
+		wxFileOffset len = cp.iter->m_Size - cp.linepos - 1;
 		cp.pos += len;
 		cp.linepos += len;
 	}
 
-	if(	cp.pos == UCIterator::s_endpos )
-	{ return false;	}
+	if( cp.pos == UCIterator::s_endpos )
+	{ return false; }
 
-	UCIterator it( cp.pos, cp.iter,	cp.linepos );
+	UCIterator it( cp.pos, cp.iter, cp.linepos );
 	++it;
 	cp.pos = it.pos;
-	cp.iter	= it.lit;
+	cp.iter = it.lit;
 	cp.linepos = it.linepos;
 	return true;
 }
