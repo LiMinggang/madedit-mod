@@ -2020,7 +2020,7 @@ _NEXTUCHAR_:
 								--nw_FirstIndex;
 							}
 							while( --nw_RestCount && nw_LineWidth < nw_RowIndexIter->m_Width
-									&& IsNotDelimiter( uc = nw_ucqueue.front().first ) );
+									&& IsNotDelimiter( uc = nw_ucqueue.front().first ) && ( uc >= '0' && uc <= '9' ));
 
 							nw_Word[idx] = 0;
 						}
