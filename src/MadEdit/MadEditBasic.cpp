@@ -3300,32 +3300,32 @@ int MadEdit::ReplaceTextAll( const wxString &expr, const wxString &fmt,
 	while( ( state = Search( bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline ) ) == SR_YES )
 	{
 		out.clear();
-		if(!bRegex)
+		if(bRegex)
 		{
-			obpos = bpos;
-			oepos = epos;
+			bpos = obpos;
+			epos = oepos;
 		}
-		int state = Replace( out, obpos, oepos, expr, fmt, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
+		int state = Replace( out, bpos, epos, expr, fmt, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
 
 		if( state == SR_EXPR_ERROR )
 		{
 			return SR_EXPR_ERROR;
 		}
 
-		del_bpos.push_back( obpos.pos );
-		del_epos.push_back( oepos.pos );
+		del_bpos.push_back( bpos.pos );
+		del_epos.push_back( epos.pos );
 		outs.push_back( out );
 		ucs4string &str = outs.back();
 		ins_ucs.push_back( str.c_str() );
 		ins_len.push_back( str.length() );
 
-		if( obpos.iter != oepos.iter )
+		if( bpos.iter != epos.iter )
 			++multi;
 
-		if( obpos.pos == oepos.pos && !NextRegexSearchingPos( oepos, expr ) )
+		if( bpos.pos == epos.pos && !NextRegexSearchingPos( epos, expr ) )
 			break;
 
-		obpos = bpos = oepos;
+		obpos = bpos = epos;
 		oepos = epos = endpos;
 	}
 
