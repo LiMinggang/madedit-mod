@@ -3244,7 +3244,7 @@ int MadEdit::ReplaceTextAll( const wxString &expr, const wxString &fmt,
 	vector<const ucs4_t*> ins_ucs;
 	vector<wxFileOffset> ins_len;
 	list<ucs4string> outs;
-	MadCaretPos bpos, epos, endpos;
+	MadCaretPos bpos, epos, endpos, obpos, oepos;
 
 	if( rangeFrom <= 0 )
 	{
@@ -3291,7 +3291,8 @@ int MadEdit::ReplaceTextAll( const wxString &expr, const wxString &fmt,
 
 	if( bpos.pos >= epos.pos ) return 0;
 
-	endpos = epos;
+	obpos = bpos;
+	oepos = endpos = epos;
 	int multi = 0;
 	int state;
 	ucs4string out;
@@ -3299,28 +3300,33 @@ int MadEdit::ReplaceTextAll( const wxString &expr, const wxString &fmt,
 	while( ( state = Search( bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline ) ) == SR_YES )
 	{
 		out.clear();
-		int state = Replace( out, bpos, epos, expr, fmt, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
+		if(!bRegex)
+		{
+			obpos = bpos;
+			oepos = epos;
+		}
+		int state = Replace( out, obpos, oepos, expr, fmt, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
 
 		if( state == SR_EXPR_ERROR )
 		{
 			return SR_EXPR_ERROR;
 		}
 
-		del_bpos.push_back( bpos.pos );
-		del_epos.push_back( epos.pos );
+		del_bpos.push_back( obpos.pos );
+		del_epos.push_back( oepos.pos );
 		outs.push_back( out );
 		ucs4string &str = outs.back();
 		ins_ucs.push_back( str.c_str() );
 		ins_len.push_back( str.length() );
 
-		if( bpos.iter != epos.iter )
+		if( obpos.iter != oepos.iter )
 			++multi;
 
-		if( bpos.pos == epos.pos && !NextRegexSearchingPos( epos, expr ) )
+		if( obpos.pos == oepos.pos && !NextRegexSearchingPos( oepos, expr ) )
 			break;
 
-		bpos = epos;
-		epos = endpos;
+		obpos = bpos = oepos;
+		oepos = epos = endpos;
 	}
 
 	if( state == SR_EXPR_ERROR ) return SR_EXPR_ERROR;
