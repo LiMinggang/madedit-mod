@@ -1630,7 +1630,7 @@ void MadSearchReplaceDialog::ReplaceAll( MadEdit * madedit, bool needRec/*=true*
 		{
 			count = madedit->ReplaceHexAll( text, reptext, NULL, NULL, rangeFrom, rangeTo );
 
-			if( needRec && ( IsMacroRecording() ) )
+			if( needRec && count && ( IsMacroRecording() ) )
 				RecordAsMadMacro( madedit, wxString::Format( wxT( "ReplaceHexAll(\"%s\", \"%s\", %s, %s)" ), text.c_str(),  reptext.c_str(), ( wxLongLong( rangeFrom ).ToString() ).c_str(), ( wxLongLong( rangeTo ).ToString() ).c_str() ) );
 		}
 		else
@@ -1647,7 +1647,7 @@ void MadSearchReplaceDialog::ReplaceAll( MadEdit * madedit, bool needRec/*=true*
 											 bDotMatchNewline,
 											 NULL, NULL, rangeFrom, rangeTo );
 
-			if( needRec && ( IsMacroRecording() ) )
+			if( needRec && count && ( IsMacroRecording() ) )
 			{
 				if( !bRegex )
 				{

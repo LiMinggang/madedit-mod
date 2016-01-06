@@ -665,7 +665,7 @@ MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 		}
 		else
 			text_lower = MadStrLower( text );
-		//text_lower = text.Lower();
+
 		text_ptr = &text_lower;
 	}
 
