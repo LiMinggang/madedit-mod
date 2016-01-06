@@ -3294,10 +3294,11 @@ int MadEdit::ReplaceTextAll( const wxString &expr, const wxString &fmt,
 	endpos = epos;
 	int multi = 0;
 	int state;
+	ucs4string out;
 
 	while( ( state = Search( bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline ) ) == SR_YES )
 	{
-		ucs4string out;
+		out.clear();
 		int state = Replace( out, bpos, epos, expr, fmt, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
 
 		if( state == SR_EXPR_ERROR )
