@@ -2526,13 +2526,14 @@ size_t MadLines::Reformat( MadLineIterator first, MadLineIterator last )
 
 		// reformat this line, note: first would be changed after this
 		/*====Moved from Reformat() above for performance====*/
-		state = first->m_State;
 		ReformatCount = 1;
 		first->m_BracePairIndices.clear();
 		/*====End of being moved from Reformat() above for performance====*/
 		
 		if( first->m_Size != 0 ) // not an empty line
 			Reformat( first, iMaxWrapWidth, lTabWidth, state);
+		else			
+			state = first->m_State;
 
 		count += ReformatCount;
 

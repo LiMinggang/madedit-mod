@@ -750,7 +750,6 @@ void MadEditApp::ShowMainFrame( MadEditFrame *mainFrame, bool maximize )
 		{
 			mainFrame->SetPageFocus( pages - 1 );
 		}
-
 	}
 }
 
