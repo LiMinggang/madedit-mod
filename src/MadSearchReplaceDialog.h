@@ -110,8 +110,8 @@ class MadSearchReplaceDialog: public wxDialog
 		static const long ID_RECENTREPLACETEXT1;
 		static const long ID_RECENTREPLACETEXT20;
 	public:
-		wxInt64	m_SearchFrom;
-		wxInt64	m_SearchTo;
+		wxFileOffset m_SearchFrom;
+		wxFileOffset m_SearchTo;
 		bool m_EnableTransparency;
 		bool m_ReplaceDlgUi;
 

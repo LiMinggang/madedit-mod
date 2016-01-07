@@ -1266,8 +1266,8 @@ void MadSearchReplaceDialog::UpdateSearchInSelection( bool check )
 
 	if( check && g_ActiveMadEdit != NULL )
 	{
-		m_SearchFrom = wxLongLong( g_ActiveMadEdit->GetSelectionBeginPos() ).GetValue();
-		m_SearchTo = wxLongLong( g_ActiveMadEdit->GetSelectionEndPos() ).GetValue();
+		m_SearchFrom = g_ActiveMadEdit->GetSelectionBeginPos();
+		m_SearchTo = g_ActiveMadEdit->GetSelectionEndPos();
 	}
 	else
 	{

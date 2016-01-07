@@ -101,8 +101,11 @@ Syntax files, Locale files, Dictionaries and Settings:
 
 Known issues:
 The Macro recording function will save all your commands to one document which
-means it will not record the "switching" between documents.
+    means it will not record the "switching" between documents.
 Search in selection in column mode is not exact the selection highlighted.
+Regular expression which relies on characters before/after the matched string, 
+    Eg. (?<=.)\s(?=.), will has issue to be replaced. It's tricky and NP++ has the 
+    same issue too.
 
 Feature/issues to be released
 -----------------------------
