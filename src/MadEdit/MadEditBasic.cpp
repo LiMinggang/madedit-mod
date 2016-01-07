@@ -3112,7 +3112,7 @@ MadReplaceResult MadEdit::ReplaceText( const wxString &expr, const wxString &fmt
 	bool selok = false;
 	MadCaretPos bpos = *m_SelectionBegin;
 	MadCaretPos epos = *m_SelectionEnd;
-	int state;
+	int state = SR_EXPR_ERROR;
 
 	if( m_Selection ) // test the selection is wanted text
 	{
