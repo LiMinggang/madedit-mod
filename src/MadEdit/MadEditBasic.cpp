@@ -3112,10 +3112,11 @@ MadReplaceResult MadEdit::ReplaceText( const wxString &expr, const wxString &fmt
 	bool selok = false;
 	MadCaretPos bpos = *m_SelectionBegin;
 	MadCaretPos epos = *m_SelectionEnd;
+	int state;
 
 	if( m_Selection ) // test the selection is wanted text
 	{
-		int state = Search( bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
+		state = Search( bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
 
 		if( state == SR_EXPR_ERROR )
 		{
@@ -3145,7 +3146,7 @@ MadReplaceResult MadEdit::ReplaceText( const wxString &expr, const wxString &fmt
 
 	ucs4string out;
 	// replace the selected text
-	int state = Replace( out, bpos, epos, expr, fmt, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
+	state = Replace( out, bpos, epos, expr, fmt, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
 
 	if( state == SR_EXPR_ERROR )
 	{
@@ -3305,7 +3306,7 @@ int MadEdit::ReplaceTextAll( const wxString &expr, const wxString &fmt,
 			bpos = obpos;
 			epos = oepos;
 		}
-		int state = Replace( out, bpos, epos, expr, fmt, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
+		state = Replace( out, bpos, epos, expr, fmt, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
 
 		if( state == SR_EXPR_ERROR )
 		{
