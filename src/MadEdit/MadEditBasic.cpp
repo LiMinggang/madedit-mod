@@ -3297,14 +3297,27 @@ int MadEdit::ReplaceTextAll( const wxString &expr, const wxString &fmt,
 	int state;
 	ucs4string out;
 
+	if(!bRegex)
+	{
+		// fmt is the wanted string
+		vector<ucs4_t> ucs;
+		TranslateText( fmt.c_str(), fmt.Len(), &ucs, true );
+	
+		for( size_t i = 0, size = ucs.size(); i < size; ++i )
+		{
+			out += ucs[i] ;
+		}
+	}
 	while( ( state = Search( bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline ) ) == SR_YES )
 	{
-		out.clear();
-		state = Replace( out, bpos, epos, expr, fmt, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
-
-		if( state == SR_EXPR_ERROR )
+		if(bRegex)
 		{
-			return SR_EXPR_ERROR;
+			out.clear();
+			state = Replace( out, bpos, epos, expr, fmt, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
+			if( state == SR_EXPR_ERROR )
+			{
+				return SR_EXPR_ERROR;
+			}
 		}
 
 		del_bpos.push_back( bpos.pos );

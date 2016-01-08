@@ -122,6 +122,7 @@ Improve performance of script recording
 Improve text processing performance(almost doubled)
 Improve syntax highlighting performance
 Improve ReloadByModificationTime event handling
+Improve performance of ReplaceTextAll
 Fix: The tab of the selected page could not be seen if a lot of files were opened #115
 Fix: Can't select the whole line by Tripple click or click on Line number area if the line was wrapped #116
 Fix: Negative match was not supported in Regex with case insensitive(Issue 2) #117
