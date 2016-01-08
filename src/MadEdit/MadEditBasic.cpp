@@ -3292,8 +3292,7 @@ int MadEdit::ReplaceTextAll( const wxString &expr, const wxString &fmt,
 
 	if( bpos.pos >= epos.pos ) return 0;
 
-	obpos = bpos;
-	oepos = endpos = epos;
+    endpos=epos;
 	int multi = 0;
 	int state;
 	ucs4string out;
@@ -3301,11 +3300,6 @@ int MadEdit::ReplaceTextAll( const wxString &expr, const wxString &fmt,
 	while( ( state = Search( bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline ) ) == SR_YES )
 	{
 		out.clear();
-		if(bRegex)
-		{
-			bpos = obpos;
-			epos = oepos;
-		}
 		state = Replace( out, bpos, epos, expr, fmt, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
 
 		if( state == SR_EXPR_ERROR )
@@ -3326,8 +3320,8 @@ int MadEdit::ReplaceTextAll( const wxString &expr, const wxString &fmt,
 		if( bpos.pos == epos.pos && !NextRegexSearchingPos( epos, expr ) )
 			break;
 
-		obpos = bpos = epos;
-		oepos = epos = endpos;
+        bpos=epos;
+        epos=endpos;
 	}
 
 	if( state == SR_EXPR_ERROR ) return SR_EXPR_ERROR;
