@@ -71,13 +71,13 @@ Syntax files, Locale files, Dictionaries and Settings:
   FontWidth.dat is Cache of Font-Width-Data, it can speed-up MadEdit a lot.
 
   Currently supported Languages:
-  	English
-  	Chinese Simplified (zh_CN)
-  	Chinese Traditional(zh_TW) (Not done)
-  	German(de_DE)              (Not done)
-  	Greek(el)                  (Not done)
-  	Italian(it_IT)             (Not done)
-  	Japanese(ja_JP)            (Not done)
+    English
+    Chinese Simplified (zh_CN)
+    Chinese Traditional(zh_TW) (Not done)
+    German(de_DE)              (Not done)
+    Greek(el)                  (Not done)
+    Italian(it_IT)             (Not done)
+    Japanese(ja_JP)            (Not done)
 	Polish(pl_PL)              (Not done)
 	Russian(ru_RU)             (Not done)
 	Spanish(es)                (Not done)
@@ -127,6 +127,7 @@ Fix: The tab of the selected page could not be seen if a lot of files were opene
 Fix: Can't select the whole line by Tripple click or click on Line number area if the line was wrapped #116
 Fix: Negative match was not supported in Regex with case insensitive(Issue 2) #117
 Fix: Number was not highlighted correctly in Text file(Issue 1) #117
+Fix: Caret and selection would have issue while '\W' matching \r or \n #121
 Add documents(CN) for Python simplification
 Update boost to 1.60
 Update Python to 2.7.11

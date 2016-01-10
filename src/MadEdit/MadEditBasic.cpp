@@ -2709,9 +2709,16 @@ MadSearchResult MadEdit::FindTextNext( const wxString &text,
 
 	if( state == SR_YES )
 	{
-		SetSelection( bpos.pos, epos.pos );
+		wxFileOffset beginpos = bpos.pos, endpos = epos.pos;
+		if ((bpos.linepos > (bpos.iter->m_Size - bpos.iter->m_NewLineSize)) && (bpos.linepos < bpos.iter->m_Size))
+			beginpos -= (bpos.linepos + bpos.iter->m_NewLineSize - bpos.iter->m_Size);
+		if ((epos.linepos > (epos.iter->m_Size - epos.iter->m_NewLineSize)) && (epos.linepos < epos.iter->m_Size))
+			endpos += (epos.linepos + epos.iter->m_NewLineSize - epos.iter->m_Size);
+		SetSelection(beginpos, endpos);
+		if (endpos != epos.pos)
+			m_CaretPos = epos;
 
-		if( IsTextFile() && m_BookmarkInSearch && !( m_Lines->m_LineList.IsBookmarked( bpos.iter ) ) ) m_Lines->m_LineList.SetBookmark( bpos.iter );
+		if (IsTextFile() && m_BookmarkInSearch && !(m_Lines->m_LineList.IsBookmarked(bpos.iter))) m_Lines->m_LineList.SetBookmark(bpos.iter);
 	}
 
 	return state;
