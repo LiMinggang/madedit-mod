@@ -10536,7 +10536,7 @@ void MadEdit::OnMouseWheel( wxMouseEvent &evt )
 	if( m_SingleLineMode )
 		return;
 
-	if( evt.ControlDown() ) // inc/dec font size
+	if( evt.ControlDown() && (! evt.ShiftDown() )) // inc/dec font size
 	{
 		wxString name;
 		int size;
@@ -10549,11 +10549,24 @@ void MadEdit::OnMouseWheel( wxMouseEvent &evt )
 	}
 	else
 	{
-		if( evt.m_wheelRotation < 0 )
-			m_TopRow += 3;
+		if( evt.ShiftDown() )
+		{
+			static const int pagesize = 80 * 8;//GetUCharWidth( 0x20 ); // almost 80 column
+			int scrollsize = 5;
+			if(evt.ControlDown())
+				scrollsize = pagesize;
+			if( evt.m_wheelRotation < 0 )
+				m_DrawingXPos += scrollsize;
+			else
+				m_DrawingXPos -= scrollsize;
+		}
 		else
-			m_TopRow -= 3;
-
+		{
+			if( evt.m_wheelRotation < 0 )
+				m_TopRow += 3;
+			else
+				m_TopRow -= 3;
+		}
 		UpdateScrollBarPos();
 		m_RepaintAll = true;
 		Refresh( false );

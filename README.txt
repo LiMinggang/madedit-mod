@@ -128,6 +128,7 @@ Fix: Can't select the whole line by Tripple click or click on Line number area i
 Fix: Negative match was not supported in Regex with case insensitive(Issue 2) #117
 Fix: Number was not highlighted correctly in Text file(Issue 1) #117
 Fix: Caret and selection would have issue while '\W' matching \r or \n #121
+Fix: To use shift + middle mouse wheel to horizontal scrolling #123
 Add documents(CN) for Python simplification
 Update boost to 1.60
 Update Python to 2.7.11
