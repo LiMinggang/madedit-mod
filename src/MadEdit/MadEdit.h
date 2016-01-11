@@ -555,7 +555,7 @@ protected:
 	void InsertHexData( wxByte *hex, size_t count );
 
 	MadSearchResult Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadCaretPos &endpos,
-									  const wxString &text, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false );
+									  const wxString &text, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false, /*IN_OUT*/ucs4string *fmt = NULL, ucs4string *out = NULL );
 
 	MadSearchResult SearchHex( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadCaretPos &endpos,
 										 const wxByte *hex, size_t count );

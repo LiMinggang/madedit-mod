@@ -6,6 +6,7 @@
 // Licence:     GPL
 ///////////////////////////////////////////////////////////////////////////////
 
+#include <boost/scoped_ptr.hpp>
 #include "MadEdit.h"
 #include "MadEditPv.h"
 
@@ -3255,6 +3256,7 @@ int MadEdit::ReplaceTextAll( const wxString &expr, const wxString &fmt,
 	vector<wxFileOffset> ins_len;
 	list<ucs4string> outs;
 	MadCaretPos bpos, epos, endpos, obpos, oepos;
+	boost::scoped_ptr< ucs4string > fmtstr;
 
 	if( rangeFrom <= 0 )
 	{
@@ -3306,10 +3308,12 @@ int MadEdit::ReplaceTextAll( const wxString &expr, const wxString &fmt,
 	int state;
 	ucs4string out;
 
+	ucs4_t *puc;
+	vector<ucs4_t> ucs;
+
 	if(!bRegex)
 	{
 		// fmt is the wanted string
-		vector<ucs4_t> ucs;
 		TranslateText( fmt.c_str(), fmt.Len(), &ucs, true );
 	
 		for( size_t i = 0, size = ucs.size(); i < size; ++i )
@@ -3317,9 +3321,38 @@ int MadEdit::ReplaceTextAll( const wxString &expr, const wxString &fmt,
 			out += ucs[i] ;
 		}
 	}
-	while( ( state = Search( bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline ) ) == SR_YES )
+	else
 	{
-		if(bRegex)
+#ifdef __WXMSW__
+#if PATCH_RPLACE_REGEXP == 1
+
+		if( !fmt.IsEmpty() )
+		{
+#endif
+			TranslateText( fmt.c_str(), fmt.Len(), &ucs, true );
+			puc = &ucs[0];
+#if PATCH_RPLACE_REGEXP == 1
+		}
+		else
+		{ puc = 0; }
+
+#endif
+		fmtstr.reset(new ucs4string( puc, puc + ucs.size() ));
+#else
+		if( !fmt.IsEmpty() )
+		{
+			puc = fmt.c_str();
+		}
+		else
+		{ puc = 0; }
+
+		fmtstr.reset(new ucs4string( puc, puc + fmt.Len() ));
+#endif
+	}
+
+	while( ( state = Search( bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, fmtstr.get(), &out) ) == SR_YES )
+	{
+		/*if(bRegex)
 		{
 			out.clear();
 			state = Replace( out, bpos, epos, expr, fmt, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
@@ -3327,7 +3360,7 @@ int MadEdit::ReplaceTextAll( const wxString &expr, const wxString &fmt,
 			{
 				return SR_EXPR_ERROR;
 			}
-		}
+		}*/
 
 		del_bpos.push_back( bpos.pos );
 		del_epos.push_back( epos.pos );
@@ -3344,6 +3377,8 @@ int MadEdit::ReplaceTextAll( const wxString &expr, const wxString &fmt,
 
 		bpos=epos;
 		epos=endpos;
+		if(bRegex)
+			out.clear();
 	}
 
 	if( state == SR_EXPR_ERROR ) return SR_EXPR_ERROR;
