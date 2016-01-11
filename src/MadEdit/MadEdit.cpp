@@ -10552,10 +10552,9 @@ void MadEdit::OnMouseWheel( wxMouseEvent &evt )
 	{
 		if( evt.ShiftDown() )
 		{
-			static const int pagesize = 80 * m_TextFontSpaceWidth/*GetUCharWidth( 0x20 )*/; // almost 80 column
-			int scrollsize = 5;
+			int scrollsize = m_TextFontSpaceWidth/2; //Half char width
 			if(evt.ControlDown())
-				scrollsize = pagesize;
+				scrollsize = 80 * m_TextFontSpaceWidth; // almost 80 columns
 			if( evt.m_wheelRotation < 0 )
 				m_DrawingXPos += scrollsize;
 			else
