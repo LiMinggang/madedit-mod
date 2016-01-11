@@ -312,6 +312,7 @@ private:
 	int             m_TextFontHeight;
 	int             m_TextFontAveCharWidth;
 	int             m_TextFontMaxDigitWidth;
+	int             m_TextFontSpaceWidth;
 
 	wxFont          *m_HexFont; // readonly, set it at SetHexFont()
 	int             m_HexFontHeight;

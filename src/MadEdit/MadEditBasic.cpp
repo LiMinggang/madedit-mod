@@ -74,65 +74,65 @@ const int CRLF_Points[CRLF_Points_Count + 1][2] =
 const int CR_Points2_Count = 14;
 const int CR_Points2[CR_Points2_Count+1][2]=
 {
-    {   0,  0 },
-    {   0, 601 },
-    { 255, 348 },
-    { 255, 850 },
-    {  79, 644 },
-    {  56, 667 },
-    { 278, 999 },
-    { 502, 664 },
-    { 479, 641 },
-    { 304, 850 },
-    { 304, 270 },
-    { 281, 247 },
-    {  70, 457 },
-    {  70,  0 },
-    { 600, 999 }     // max value
+	{   0,  0 },
+	{   0, 601 },
+	{ 255, 348 },
+	{ 255, 850 },
+	{  79, 644 },
+	{  56, 667 },
+	{ 278, 999 },
+	{ 502, 664 },
+	{ 479, 641 },
+	{ 304, 850 },
+	{ 304, 270 },
+	{ 281, 247 },
+	{  70, 457 },
+	{  70,  0 },
+	{ 600, 999 }     // max value
 };
 
 const int LF_Points2_Count = 14;
 const int LF_Points2[LF_Points2_Count+1][2]=
 {
-    { 255, 273 },
-    { 255, 850 },
-    {  79, 644 },
-    {  56, 667 },
-    { 278, 999 },
-    { 502, 664 },
-    { 479, 641 },
-    { 304, 850 },
-    { 304, 345 },
-    { 558, 559 },
-    { 558,  0 },
-    { 488,  0 },
-    { 488, 454 },
-    { 281, 247 },
-    { 600, 999 } // max value
+	{ 255, 273 },
+	{ 255, 850 },
+	{  79, 644 },
+	{  56, 667 },
+	{ 278, 999 },
+	{ 502, 664 },
+	{ 479, 641 },
+	{ 304, 850 },
+	{ 304, 345 },
+	{ 558, 559 },
+	{ 558,  0 },
+	{ 488,  0 },
+	{ 488, 454 },
+	{ 281, 247 },
+	{ 600, 999 } // max value
 };
 
 const int CRLF_Points2_Count = 18;
 const int CRLF_Points2[CRLF_Points2_Count+1][2]=
 {
-    {   0,  0 },
-    {   0, 601 },
-    { 255, 348 },
-    { 255, 850 },
-    {  79, 644 },
-    {  56, 667 },
-    { 278, 999 },
-    { 502, 664 },
-    { 479, 641 },
-    { 304, 850 },
-    { 304, 345 },
-    { 558, 559 },
-    { 558,  0 },
-    { 488,  0 },
-    { 488, 454 },
-    { 281, 247 },
-    {  70, 457 },
-    {  70,  0 },
-    { 600, 999 } // max value
+	{   0,  0 },
+	{   0, 601 },
+	{ 255, 348 },
+	{ 255, 850 },
+	{  79, 644 },
+	{  56, 667 },
+	{ 278, 999 },
+	{ 502, 664 },
+	{ 479, 641 },
+	{ 304, 850 },
+	{ 304, 345 },
+	{ 558, 559 },
+	{ 558,  0 },
+	{ 488,  0 },
+	{ 488, 454 },
+	{ 281, 247 },
+	{  70, 457 },
+	{  70,  0 },
+	{ 600, 999 } // max value
 };
 */
 
@@ -270,7 +270,7 @@ void MadEdit::SetTextFont( const wxString &name, int size, bool forceReset )
 
 			bool ofwm = m_FixedWidthMode;
 			m_FixedWidthMode = false; // avoid effecting on GetUCharWidth();
-			m_TextFontAveCharWidth = GetUCharWidth( 0x20 ); //GetCharWidth();
+			m_TextFontAveCharWidth = m_TextFontSpaceWidth/*GetUCharWidth( 0x20 )*/; //GetCharWidth();
 			int w;
 			m_TextFontMaxDigitWidth = GetUCharWidth( '0' );
 
@@ -320,7 +320,7 @@ void MadEdit::SetTextFont( const wxString &name, int size, bool forceReset )
 			m_Syntax->InitNextWord1( m_Lines, m_WordBuffer, m_WidthBuffer,
 									 name, size, m_TextFont->GetFamily() );
 			// prepare m_Space_Points, m_EOF_Points
-			const int cw = GetUCharWidth( 0x20 ); //FFontAveCharWidth;
+			const int cw = m_TextFontSpaceWidth/*GetUCharWidth( 0x20 )*/; //FFontAveCharWidth;
 			{
 				const int t1 = m_TextFontHeight / 5;
 				const int y = 1 + m_TextFontHeight - t1;
@@ -448,6 +448,8 @@ void MadEdit::SetTextFont( const wxString &name, int size, bool forceReset )
 			}
 		}
 	}
+
+	m_TextFontSpaceWidth = m_TextFontSpaceWidth/*GetUCharWidth( 0x20 )*/;
 }
 
 void MadEdit::SetHexFont( const wxString &name, int size, bool forceReset )
@@ -662,7 +664,7 @@ void MadEdit::SetEditMode( MadEditMode mode )
 			{
 				if( m_CaretPos.extraspaces )
 				{
-					m_CaretPos.xpos -= int( m_CaretPos.extraspaces * GetUCharWidth( 0x20 ) );
+					m_CaretPos.xpos -= int( m_CaretPos.extraspaces * m_TextFontSpaceWidth/*GetUCharWidth( 0x20 )*/ );
 					m_CaretPos.extraspaces = 0;
 					m_LastCaretXPos = m_CaretPos.xpos;
 					AppearCaret();
@@ -674,13 +676,13 @@ void MadEdit::SetEditMode( MadEditMode mode )
 				{
 					if( m_SelectionPos1.extraspaces )
 					{
-						m_SelectionPos1.xpos -= int( m_SelectionPos1.extraspaces * GetUCharWidth( 0x20 ) );
+						m_SelectionPos1.xpos -= int( m_SelectionPos1.extraspaces * m_TextFontSpaceWidth/*GetUCharWidth( 0x20 )*/ );
 						m_SelectionPos1.extraspaces = 0;
 					}
 
 					if( m_SelectionPos2.extraspaces )
 					{
-						m_SelectionPos2.xpos -= int( m_SelectionPos2.extraspaces * GetUCharWidth( 0x20 ) );
+						m_SelectionPos2.xpos -= int( m_SelectionPos2.extraspaces * m_TextFontSpaceWidth/*GetUCharWidth( 0x20 )*/ );
 						m_SelectionPos2.extraspaces = 0;
 					}
 
@@ -3299,7 +3301,7 @@ int MadEdit::ReplaceTextAll( const wxString &expr, const wxString &fmt,
 
 	if( bpos.pos >= epos.pos ) return 0;
 
-    endpos=epos;
+	endpos=epos;
 	int multi = 0;
 	int state;
 	ucs4string out;
@@ -3340,8 +3342,8 @@ int MadEdit::ReplaceTextAll( const wxString &expr, const wxString &fmt,
 		if( bpos.pos == epos.pos && !NextRegexSearchingPos( epos, expr ) )
 			break;
 
-        bpos=epos;
-        epos=endpos;
+		bpos=epos;
+		epos=endpos;
 	}
 
 	if( state == SR_EXPR_ERROR ) return SR_EXPR_ERROR;

@@ -2723,7 +2723,7 @@ void MadEdit::ConvertSpaceToTab()
 
 				if( uc == 0x09 )
 				{
-					int tabwidth = m_TabColumns * GetUCharWidth( 0x20 );
+					int tabwidth = m_TabColumns * m_TextFontSpaceWidth/*GetUCharWidth( 0x20 )*/;
 					ucwidth = rowwidth - nowxpos;
 					tabwidth -= ( nowxpos % tabwidth );
 
@@ -2934,7 +2934,7 @@ void MadEdit::ConvertTabToSpace()
 
 				if( uc == 0x09 )
 				{
-					int tabwidth = m_TabColumns * GetUCharWidth( 0x20 );
+					int tabwidth = m_TabColumns * m_TextFontSpaceWidth/*GetUCharWidth( 0x20 )*/;
 					ucwidth = rowwidth - nowxpos;
 					tabwidth -= ( nowxpos % tabwidth );
 
@@ -2959,7 +2959,7 @@ void MadEdit::ConvertTabToSpace()
 					{
 						if( uc == 0x09 )
 						{
-							int sw = GetUCharWidth( 0x20 );
+							int sw = m_TextFontSpaceWidth/*GetUCharWidth( 0x20 )*/;
 							int space_count = ucwidth / sw;
 
 							if( space_count * sw < ucwidth ) ++space_count;
@@ -3057,7 +3057,7 @@ void MadEdit::ColumnAlignLeft()
 		size_t count;
 		bool SelEndAtBOL = false;
 		wxFileOffset linestartpos;
-		int columns = m_SelectionBegin->xpos / GetUCharWidth( 0x20 );
+		int columns = m_SelectionBegin->xpos / m_TextFontSpaceWidth/*GetUCharWidth( 0x20 )*/;
 		wxFileOffset delsize = 0, pos = m_SelectionEnd->pos - m_SelectionEnd->linepos;
 		//if(m_Selection && m_SelectionBegin->lineid!=m_SelectionEnd->lineid)
 		{
@@ -3246,7 +3246,7 @@ void MadEdit::ColumnAlignRight()
 		size_t count;
 		bool SelEndAtBOL = false;
 		wxFileOffset linestartpos;
-		int columns = m_SelectionBegin->xpos / GetUCharWidth( 0x20 );
+		int columns = m_SelectionBegin->xpos / m_TextFontSpaceWidth/*GetUCharWidth( 0x20 )*/;
 		wxFileOffset delsize = 0, pos = m_SelectionEnd->pos, insize = 0;
 		//if(m_Selection && m_SelectionBegin->lineid!=m_SelectionEnd->lineid)
 		{
