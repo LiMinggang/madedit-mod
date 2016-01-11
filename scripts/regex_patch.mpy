@@ -1,0 +1,13 @@
+### This is a patch for Regex Replace issue of MadEdit
+#The issue is hard to fix, so, use this workarond, remove the '#' 
+#before the InsertStr if you want to replace the space
+
+#Create MadEdit Object for active edit
+medit = MadEdit()
+
+#Restore caret position
+medit.SetCaretPosition(0) #Move caret/cursor to the begeinning of the file
+#Search a space char that was between two none space chars
+while medit.FindTextNext("(?<=.)\s(?=.)", True, False, False, False, -1, -1) == -1:
+    medit.Delete()  #delete the space char if found
+    #medit.InsertStr("ÖÐ¹ú") #then insert any string you want
