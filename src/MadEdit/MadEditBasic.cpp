@@ -449,7 +449,7 @@ void MadEdit::SetTextFont( const wxString &name, int size, bool forceReset )
 		}
 	}
 
-	m_TextFontSpaceWidth = m_TextFontSpaceWidth/*GetUCharWidth( 0x20 )*/;
+	m_TextFontSpaceWidth = GetUCharWidth( 0x20 );
 }
 
 void MadEdit::SetHexFont( const wxString &name, int size, bool forceReset )
