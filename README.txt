@@ -123,6 +123,7 @@ Improve text processing performance(almost doubled)
 Improve syntax highlighting performance
 Improve ReloadByModificationTime event handling
 Improve performance of ReplaceTextAll(non-regex)
+New: Add new MadPython API Goto(pos)
 Fix: The tab of the selected page could not be seen if a lot of files were opened #115
 Fix: Can't select the whole line by Tripple click or click on Line number area if the line was wrapped #116
 Fix: Negative match was not supported in Regex with case insensitive(Issue 2) #117
@@ -133,6 +134,7 @@ Fix: Regular expression (?<=.)\s(?=.) replacement issue(Case 1: ReplaceAll) #119
 Add documents(CN) for Python simplification
 Update boost to 1.60
 Update Python to 2.7.11
+Other minor improvments
 
 Mod v0.3.10
 1.New: Support "Dot(".") match new line", default behavior is changed to NOT match new line #98

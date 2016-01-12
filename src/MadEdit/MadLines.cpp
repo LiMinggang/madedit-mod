@@ -821,6 +821,7 @@ MadLines::MadLines( MadEdit *madedit )
 {
 	m_MadEdit = madedit;
 	m_Syntax = madedit->m_Syntax;
+	wxASSERT( m_Syntax != 0 );
 	SetEncoding( madedit->m_Encoding );
 #ifdef DEBUG_LOG
 	wxLog::AddTraceMask( TRACE_MLINES );
@@ -3035,6 +3036,7 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 				m_Syntax = MadSyntax::GetSyntaxByTitle( MadPlainTextTitle );
 			}
 		}
+		wxASSERT( m_Syntax != 0 );
 
 		wxFont *font = m_MadEdit->m_TextFont;
 		m_Syntax->InitNextWord1( m_MadEdit->m_Lines, m_MadEdit->m_WordBuffer, m_MadEdit->m_WidthBuffer, font->GetFaceName(), font->GetPointSize(), font->GetFamily() );
@@ -3137,6 +3139,7 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 		}
 	}
 
+	wxASSERT( m_Syntax != 0 );
 	wxFont *font = m_MadEdit->m_TextFont;
 	m_Syntax->InitNextWord1( m_MadEdit->m_Lines, m_MadEdit->m_WordBuffer, m_MadEdit->m_WidthBuffer, font->GetFaceName(), font->GetPointSize(), font->GetFamily() );
 	m_MadEdit->m_Syntax = m_Syntax;
@@ -3607,6 +3610,7 @@ bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 		{
 			tmp_Syntax = MadSyntax::GetSyntaxByTitle( MadPlainTextTitle );
 		}
+		wxASSERT( tmp_Syntax != 0 );
 	}
 
 	if( tmp_Syntax->m_Title != m_Syntax->m_Title )
@@ -4122,7 +4126,12 @@ MadLineIterator MadLineList::erase( MadLineIterator position )
 	return list<MadLine>::erase( position );
 }
 
+class MadLineLT
+{
+public:
+	
 
+};
 bool MadLineList::IsBookmarked( MadLineIterator position )
 {
 	MadBookmarkIterator found = find( m_BookmarkList.begin(), m_BookmarkList.end(), position );

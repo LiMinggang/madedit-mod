@@ -143,6 +143,7 @@ void MadEdit::SetSyntax( const wxString &title )
 	{
 		delete m_Syntax;
 		m_Syntax = MadSyntax::GetSyntaxByTitle( title );
+		wxASSERT( m_Syntax != 0 );
 		m_Syntax->SetEncoding( m_Encoding );
 		m_Syntax->InitNextWord1( m_Lines, m_WordBuffer, m_WidthBuffer,
 								 m_TextFont->GetFaceName(), m_TextFont->GetPointSize(), m_TextFont->GetFamily() );

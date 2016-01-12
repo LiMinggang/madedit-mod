@@ -765,6 +765,7 @@ MadSyntax *MadHighlightingDialog::GetSyntax(const wxString &title)
 
     if(m_Syntax) delete m_Syntax;
     m_Syntax=MadSyntax::GetSyntaxByTitle(title);
+	wxASSERT( m_Syntax != 0 );
     return m_Syntax;
 }
 

@@ -1262,6 +1262,11 @@ namespace mad_python {
 			{ g_ActiveMadEdit->Redo(); }
 		}
 
+		void Goto( long pos ) {
+			if( g_ActiveMadEdit )
+			{ g_ActiveMadEdit->SetCaretPosition( ( wxFileOffset )pos ); }
+		}
+
 		void SetCaretPosition( long pos, long selbeg = -1, long selend = -1 ) {
 			if( g_ActiveMadEdit )
 			{ g_ActiveMadEdit->SetCaretPosition( ( wxFileOffset )pos, ( wxFileOffset )selbeg, ( wxFileOffset )selend ); }
@@ -1840,6 +1845,7 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.def( "IsTextFile", &PyMadEdit::IsTextFile, "" )
 	.def( "GetSelText", &PyMadEdit::GetSelText, return_value_policy<return_by_value>(), "" )
 	.def( "SetText", &PyMadEdit::SetText, "" )
+	.def( "Goto", &PyMadEdit::Goto, "" )
 	.def( "GetLineByPos", &PyMadEdit::GetLineByPos, "" )
 	.def( "GetSelHexString", &PyMadEdit::GetSelHexString, "" )
 	.def( "GetWordFromCaretPos", &PyMadEdit::GetWordFromCaretPos, return_value_policy<return_by_value>(), "" )
