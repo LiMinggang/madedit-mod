@@ -4126,12 +4126,6 @@ MadLineIterator MadLineList::erase( MadLineIterator position )
 	return list<MadLine>::erase( position );
 }
 
-class MadLineLT
-{
-public:
-	
-
-};
 bool MadLineList::IsBookmarked( MadLineIterator position )
 {
 	MadBookmarkIterator found = find( m_BookmarkList.begin(), m_BookmarkList.end(), position );
