@@ -6196,11 +6196,13 @@ void MadEditFrame::OnSearchGoToLine( wxCommandEvent& event )
 	else if( str.Left( 1 ) == wxT( "+" ) )
 	{
 		relative = true;
+		str = str.substr(1);
 	}
 	else if( str.Left( 1 ) == wxT( "-" ) )
 	{
 		relative = true;
 		positive = false;
+		str = str.substr(1);
 	}
 
 	if( !str.IsEmpty() && str.ToLong( &line, base ) )
@@ -6210,8 +6212,8 @@ void MadEditFrame::OnSearchGoToLine( wxCommandEvent& event )
 			int caretline = 0, subrow;
 			wxFileOffset column;
 			g_ActiveMadEdit->GetCaretPosition( caretline, subrow, column );
-			if(positive) line += caretline;
-			else line = caretline - line;
+			if(positive) line += caretline + 1;
+			else line = caretline - line + 1;
 		}
 
 		g_ActiveMadEdit->GoToLine( line );
@@ -6251,11 +6253,13 @@ void MadEditFrame::OnSearchGoToPosition( wxCommandEvent& event )
 			if( str.Left( 1 ) == wxT( "+" ) )
 			{
 				relative = true;
+				str = str.substr(1);
 			}
 			else if( str.Left( 1 ) == wxT( "-" ) )
 			{
 				relative = true;
 				positive = false;
+				str = str.substr(1);
 			}
 
 			if(relative)
