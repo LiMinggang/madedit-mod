@@ -6179,6 +6179,7 @@ void MadEditFrame::OnSearchGoToLine( wxCommandEvent& event )
 	HideModalessDialogs();
 	static wxString defstr;
 	int lineCount = g_ActiveMadEdit->GetLineCount();
+	bool relative = false, positive = true;
 	wxString str = wxGetTextFromUser( wxString::Format( _( "Line Number(1~%s): (you can input HexNumber(0x1~0x%X): 0xNNN)" ), ( wxLongLong( lineCount ).ToString() ).c_str(), lineCount ), _( "Go To Line" ), defstr );
 
 	if( !str.IsEmpty() )
@@ -6192,9 +6193,27 @@ void MadEditFrame::OnSearchGoToLine( wxCommandEvent& event )
 	int base = 10;
 
 	if( str.Left( 2 ).Lower() == wxT( "0x" ) ) { base = 16; }
+	else if( str.Left( 1 ) == wxT( "+" ) )
+	{
+		relative = true;
+	}
+	else if( str.Left( 1 ) == wxT( "-" ) )
+	{
+		relative = true;
+		positive = false;
+	}
 
 	if( !str.IsEmpty() && str.ToLong( &line, base ) )
 	{
+		if(relative)
+		{
+			int caretline = 0, subrow;
+			wxFileOffset column;
+			g_ActiveMadEdit->GetCaretPosition( caretline, subrow, column );
+			if(positive) line += caretline;
+			else line = caretline - line;
+		}
+
 		g_ActiveMadEdit->GoToLine( line );
 
 		if( IsMacroRecording() )
@@ -6218,6 +6237,7 @@ void MadEditFrame::OnSearchGoToPosition( wxCommandEvent& event )
 	// Hide Modaless Dialog
 	HideModalessDialogs();
 	static wxString defstr;
+	bool relative = false, positive = true;
 	wxLongLong wxPos( g_ActiveMadEdit->GetFileSize() );
 	wxString str = wxGetTextFromUser( wxString::Format( _( "Position(0~%s): (you can input HexNumber: 0xNNN)" ), ( wxPos.ToString() ).c_str() ), _( "Go To Position" ), defstr );
 
@@ -6228,6 +6248,23 @@ void MadEditFrame::OnSearchGoToPosition( wxCommandEvent& event )
 
 		if( StrToInt64( str, pos ) )
 		{
+			if( str.Left( 1 ) == wxT( "+" ) )
+			{
+				relative = true;
+			}
+			else if( str.Left( 1 ) == wxT( "-" ) )
+			{
+				relative = true;
+				positive = false;
+			}
+
+			if(relative)
+			{
+				wxFileOffset caretPos = g_ActiveMadEdit->GetCaretPosition();
+				if(positive) pos += caretPos;
+				else pos = caretPos - pos;
+			}
+
 			g_ActiveMadEdit->SetCaretPosition( pos );
 			wxLongLong wxPos1( pos );
 
