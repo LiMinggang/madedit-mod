@@ -604,6 +604,8 @@ void MadSyntax::LoadFromFile( const wxString &filename )
 {
 	Reset();    // reset attributes
 	ParseSyntax( filename );
+	if(m_Title == MadPlainTextTitle) m_IsPlainText = true;
+	else m_IsPlainText = false;
 }
 
 void MadSyntax::ParseSyntax( const wxString &filename )
@@ -611,6 +613,7 @@ void MadSyntax::ParseSyntax( const wxString &filename )
 	wxFileConfig syn( wxEmptyString, wxEmptyString, filename, wxEmptyString, wxCONFIG_USE_RELATIVE_PATH | wxCONFIG_USE_NO_ESCAPE_CHARACTERS );
 	wxString entry, value;
 	m_Title = wxT( "No Title" );
+	m_IsPlainText = false;
 	long idx = 0;
 	bool cont = syn.GetNextEntry( entry, idx );
 	wxString s;
@@ -1070,6 +1073,7 @@ void MadSyntax::Reset()
 {
 	size_t i;
 	m_Title = MadPlainTextTitle;
+	m_IsPlainText = true;
 	m_CaseSensitive = false;
 	//m_Delimiter = wxT( "~`!@#$%^&*()-+=|\\{}[]:;\"\',.<>/?" );
 	//m_Delimiter.clear();
@@ -2011,6 +2015,8 @@ _NEXTUCHAR_:
 
 							do
 							{
+								if(m_IsPlainText && ( uc < '0' || uc > '9' )) break;
+
 								nw_Word[idx] = uc;
 								nw_ucqueue.pop_front();
 								width = nw_MadEdit->GetUCharWidth( uc );
@@ -2020,7 +2026,7 @@ _NEXTUCHAR_:
 								--nw_FirstIndex;
 							}
 							while( --nw_RestCount && nw_LineWidth < nw_RowIndexIter->m_Width
-									&& IsNotDelimiter( uc = nw_ucqueue.front().first ) && ( uc >= '0' && uc <= '9' ));
+									&& IsNotDelimiter( uc = nw_ucqueue.front().first ));
 
 							nw_Word[idx] = 0;
 						}

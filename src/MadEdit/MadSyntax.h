@@ -173,6 +173,7 @@ public:
 	vector < MadSyntaxKeyword > m_CustomKeyword; // user defined keywords
 
 	bool m_CheckState;
+	bool m_IsPlainText;
 
 public:
 	MadSyntax( const wxString &filename, bool loadAttr = true );
