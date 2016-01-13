@@ -132,6 +132,7 @@ Fix: Caret and selection would have issue while '\W' matching \r or \n #121
 Fix: To use shift + middle mouse wheel to horizontal scrolling #123
 Fix: Regular expression (?<=.)\s(?=.) replacement issue(Case 1: ReplaceAll) #119
 Fix: Restore the transparence configuration of the search window #129
+Fix: Another bug about number highlight in 0.4.0 preview #127
 Add documents(CN) for Python simplification
 Update boost to 1.60
 Update Python to 2.7.11
