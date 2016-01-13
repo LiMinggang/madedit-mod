@@ -840,6 +840,10 @@ void MadSearchReplaceDialog::ReadWriteSettings( bool bRead )
 	extern MadEdit *g_ActiveMadEdit;
 	wxConfigBase *m_Config = wxConfigBase::Get( false );
 	wxString oldpath = m_Config->GetPath();
+	if( m_EnableTransparency && WxRadioLosingFocus->GetValue() )
+	{
+		SetTransparent( ( wxByte )WxSliderTransDegree->GetValue() );
+	}
 
 	if( bRead )
 	{
@@ -864,6 +868,14 @@ void MadSearchReplaceDialog::ReadWriteSettings( bool bRead )
 		WxCheckBoxBookmarkOnly->SetValue( bb );
 		m_Config->Read( wxT( "/MadEdit/SearchPurgeBookmark" ), &bb, false );
 		WxCheckBoxPurgeBookmark->SetValue( bb );
+		if(m_EnableTransparency)
+		{
+			long transparency = 30;
+			m_Config->Read( wxT( "/MadEdit/SearchTransparency" ), &transparency, 30 );
+			if(transparency < 30) transparency = 30;
+			else if(transparency > 255) transparency = 255;
+			WxSliderTransDegree->SetValue(transparency);
+		}
 	}
 	else
 	{
@@ -878,6 +890,11 @@ void MadSearchReplaceDialog::ReadWriteSettings( bool bRead )
 		m_Config->Write( wxT( "/MadEdit/SearchBookmarkLines" ), WxCheckBoxBookmarkLine->GetValue() );
 		m_Config->Write( wxT( "/MadEdit/SearchBookmarkOnly" ), WxCheckBoxBookmarkOnly->GetValue() );
 		m_Config->Write( wxT( "/MadEdit/SearchPurgeBookmark" ), WxCheckBoxPurgeBookmark->GetValue() );
+		
+		if(m_EnableTransparency)
+		{
+			m_Config->Write( wxT( "/MadEdit/SearchTransparency" ), WxSliderTransDegree->GetValue() );
+		}
 	}
 
 	m_Config->SetPath( oldpath );
