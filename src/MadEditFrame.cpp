@@ -2894,22 +2894,32 @@ void MadEditFrame::CreateGUIControls( void )
 	m_ToolbarStatus[tbQSEARCH] = showQsBar;
 	// information window
 	int infoW = 300, infoH = 130;
-	m_Config->Read( wxT( "/MadEdit/InfoWindowWidth" ), &infoW );
-	m_Config->Read( wxT( "/MadEdit/InfoWindowHeight" ), &infoH );
+	//m_Config->Read( wxT( "/MadEdit/InfoWindowWidth" ), &infoW );
+	//m_Config->Read( wxT( "/MadEdit/InfoWindowHeight" ), &infoH );
+	m_Config->Read( wxT( "/MadEdit/InfoWindowStatus" ), &m_InfoNoteBookStatus );
 	wxSize nbsize( infoW, infoH );
 	m_InfoNotebook = new wxAuiNotebook( this, ID_OUTPUTNOTEBOOK, wxDefaultPosition, nbsize, wxAUI_NB_TOP | wxAUI_NB_SCROLL_BUTTONS );
 	m_FindInFilesResults = new MadTreeCtrl( m_InfoNotebook, ID_FINDINFILESRESULTS, wxDefaultPosition, wxSize( infoW, 4 ), wxTR_DEFAULT_STYLE | wxTR_HIDE_ROOT );
 	m_FindInFilesResults->AddRoot( wxT( "Root" ) );
 	m_FindInFilesResults->Connect( wxEVT_LEFT_DCLICK, wxMouseEventHandler( MadEditFrame::OnFindInFilesResultsDClick ) );
 	m_InfoNotebook->AddPage( m_FindInFilesResults, _( "Search Results" ) );
-	m_InfoNotebook->Connect( wxEVT_SIZE, wxSizeEventHandler( MadEditFrame::OnInfoNotebookSize ) );
+	//m_InfoNotebook->Connect( wxEVT_SIZE, wxSizeEventHandler( MadEditFrame::OnInfoNotebookSize ) );
 	// wxAUI
 	m_AuiManager.SetManagedWindow( this );
 	m_AuiManager.SetFlags( m_AuiManager.GetFlags() | wxAUI_MGR_ALLOW_ACTIVE_PANE );
 	m_AuiManager.SetDockSizeConstraint( 0.75, 0.75 );
 	m_AuiManager.AddPane( m_Notebook, wxCENTER );
-	m_AuiManager.AddPane( m_InfoNotebook, wxBOTTOM, _( "Information Window" ) );
-	m_AuiManager.GetPane( m_InfoNotebook ).Show( false ).FloatingSize( nbsize );
+
+	if(m_InfoNoteBookStatus.IsEmpty())
+		m_AuiManager.AddPane( m_InfoNotebook, wxBOTTOM, _( "Information Window" ) );
+	else
+		{
+			wxAuiPaneInfo pane_info;
+			m_AuiManager.LoadPaneInfo( m_InfoNoteBookStatus, pane_info );
+			m_AuiManager.AddPane( m_InfoNotebook, pane_info );
+		}
+	//m_AuiManager.AddPane( m_InfoNotebook, m_InfoNoteBookStatus, _( "Information Window" ) );
+	m_AuiManager.GetPane( m_InfoNotebook ).Show( false );
 	m_AuiManager.Update();
 
 	if( g_tbMACRO_ptr->GetToolCount() <= 5 )
@@ -3081,6 +3091,9 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 	m_Config->Write( wxT( "/MadEdit/ShowToolbarTextview" ), m_ToolbarStatus[tbTEXTVIEW] );
 	m_Config->Write( wxT( "/MadEdit/ShowToolbarEditMode" ), m_ToolbarStatus[tbEDITMODE] );
 	m_Config->Write( wxT( "/MadEdit/ShowToolbarMacro" ), m_ToolbarStatus[tbMACRO] );
+
+	m_InfoNoteBookStatus = m_AuiManager.SavePaneInfo(m_AuiManager.GetPane( m_InfoNotebook ));
+	g_MainFrame->m_Config->Write( wxT( "/MadEdit/InfoWindowStatus" ), m_InfoNoteBookStatus );
 	delete m_RecentFiles;
 	m_RecentFiles = NULL;
 	delete m_RecentEncodings;
@@ -3456,6 +3469,7 @@ wxString MadEditFrame::GetMenuKey( const wxString &menu, const wxString &default
 	return wxString( wxT( "\t" ) ) + defaultkey;
 }
 
+#if 0
 void MadEditFrame::OnInfoNotebookSize( wxSizeEvent &evt )
 {
 	wxAuiPaneInfo &pinfo = g_MainFrame->m_AuiManager.GetPane( g_MainFrame->m_InfoNotebook );
@@ -3508,7 +3522,7 @@ void MadEditFrame::OnInfoNotebookSize( wxSizeEvent &evt )
 
 	evt.Skip();
 }
-
+#endif
 void MadEditFrame::OnFindInFilesResultsDClick( wxMouseEvent& event )
 {
 	MadEdit *madedit = NULL;

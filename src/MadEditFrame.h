@@ -123,11 +123,12 @@ public:
 	MadRecentList *m_RecentEncodings;
 	MadRecentList *m_RecentFonts;
 
-	wxAuiManager   m_AuiManager; // wxAUI
+	wxAuiManager  m_AuiManager; // wxAUI
 	wxAuiNotebook *m_InfoNotebook; //
+	wxString      m_InfoNoteBookStatus;
 	//wxTreeCtrl *m_FindInFilesResults;
 	MadTreeCtrl   *m_FindInFilesResults;
-	wxHtmlWindow *m_HtmlPreview;
+	wxHtmlWindow  *m_HtmlPreview;
 	int            m_PreviewType;
 	wxComboBox    *m_QuickSearch;
 	wxCheckBox    *m_CheckboxWholeWord;
@@ -433,7 +434,7 @@ protected:
 	void LoadMenuKeys( wxConfigBase *config );
 	wxString GetMenuKey( const wxString &menu, const wxString &defaultkey );
 
-	void OnInfoNotebookSize( wxSizeEvent &evt );
+	//void OnInfoNotebookSize( wxSizeEvent &evt );
 	void OnFindInFilesResultsDClick( wxMouseEvent& event );
 
 #ifdef __WXMSW__

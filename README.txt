@@ -127,6 +127,7 @@ Improve ReloadByModificationTime event handling
 Improve performance of ReplaceTextAll(non-regex)
 New: Add new MadPython API Goto(pos)
 New: New short cut(Alt--) to collapse all results in Results window #131
+New: Restore the last position of the Search result window #132
 Fix: The tab of the selected page could not be seen if a lot of files were opened #115
 Fix: Can't select the whole line by Tripple click or click on Line number area if the line was wrapped #116
 Fix: Negative match was not supported in Regex with case insensitive(Issue 2) #117
