@@ -1663,6 +1663,7 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_CLOSE( MadEditFrame::MadEditFrameClose )
 	EVT_KEY_DOWN( MadEditFrame::MadEditFrameKeyDown )
 
+	EVT_MENU( menuCollapseAllResults, MadEditFrame::CollapseAllResults )
 	EVT_MENU( menuCopyCurResult, MadEditFrame::OnCopyCurrResult )
 	EVT_MENU( menuCopyAllResults, MadEditFrame::OnCopyAllResults )
 	EVT_MENU( menuResetCurResult, MadEditFrame::OnResetCurrResult )
@@ -1829,6 +1830,7 @@ CommandData CommandTable[] =
 	{ 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0, 0, 0, 0, false},
 	{ 0,            1, menuFindInFiles,            wxT( "menuFindInFiles" ),            _( "Fin&d/Replace in Files..." ),                       wxT( "Ctrl-Shift-F" ), wxITEM_NORMAL,    -1,               0, _( "Find or replace a string in files" ), 0, 0, 0, false},
 	{ 0,            1, menuShowFindInFilesResults, wxT( "menuShowFindInFilesResults" ), _( "&Show/Hide the Results of Find/Replace in Files" ), wxT( "Ctrl-Shift-R" ), wxITEM_NORMAL,    -1,               0, _( "Show or hide the results of find or replace a string in files" ), 0, 0, 0, false},
+	{ 0,            1, menuCollapseAllResults,      wxT( "menuCollapseAllResults" ),      _( "Calapse &All Results of Find/Replace in Files" ),   wxT( "Alt--" ),        wxITEM_NORMAL,    -1,               0, _( "Collapse all results of find or replace a string in files" ), 0, 0, 0, false},
 	{ 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0, 0, 0, 0, false},
 	{ 0,            1, menuGoToLine,               wxT( "menuGoToLine" ),               _( "&Go To Line..." ),                                  wxT( "Ctrl-G" ),       wxITEM_NORMAL,    -1,               0, _( "Go to the specified line" ), 0, 0, 0, false},
 	{ 0,            1, menuGoToPosition,           wxT( "menuGoToPosition" ),           _( "G&o To Position..." ),                              wxT( "Ctrl-Shift-G" ), wxITEM_NORMAL,    -1,               0, _( "Go to the specified position" ), 0, 0, 0, false},
@@ -8409,6 +8411,12 @@ void MadEditFrame::OnHelpAbout( wxCommandEvent& event )
 	}
 }
 
+void MadEditFrame::CollapseAllResults( wxCommandEvent& event )
+{
+
+	m_FindInFilesResults->CollapseAll( );
+}
+
 void MadEditFrame::OnCopyCurrResult( wxCommandEvent& event )
 {
 	//wxTreeItemId id = m_FindInFilesResults->GetFocusedItem();
@@ -8739,6 +8747,8 @@ void MadTreeCtrl::ShowMenu( wxTreeItemId id, const wxPoint& pt )
 
 	if( needInit )
 	{
+		menu.Append( menuCollapseAllResults, _( "&Collapse All" ) );
+		menu.AppendSeparator();
 		menu.Append( menuCopyCurResult, _( "&Copy Selected" ) );
 		menu.Append( menuCopyAllResults, _( "Copy &All" ) );
 		menu.Append( menuResetCurResult, _( "&Reset Results" ) );

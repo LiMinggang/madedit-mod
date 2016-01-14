@@ -104,8 +104,10 @@ The Macro recording function will save all your commands to one document which
     means it will not record the "switching" between documents.
 Search in selection in column mode is not exact the selection highlighted.
 Regular expression which relies on characters before/after the matched string, 
-    Eg. (?<=.)\s(?=.), will has issue to be replaced. It's tricky and NP++ has the 
-    same issue too.
+    Eg. (?<=.)\s(?=.), will has issue to be replaced one by one. It's tricky and
+    NP++ has the same issue too.
+Open a file by mouse or command line if MadEdit-Mod is not running will not jumb to
+    the one you opened if it has been opened and not closed last time
 
 Feature/issues to be released
 -----------------------------
@@ -124,6 +126,7 @@ Improve syntax highlighting performance
 Improve ReloadByModificationTime event handling
 Improve performance of ReplaceTextAll(non-regex)
 New: Add new MadPython API Goto(pos)
+New: New short cut(Alt--) to collapse all results in Results window #131
 Fix: The tab of the selected page could not be seen if a lot of files were opened #115
 Fix: Can't select the whole line by Tripple click or click on Line number area if the line was wrapped #116
 Fix: Negative match was not supported in Regex with case insensitive(Issue 2) #117

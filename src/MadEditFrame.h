@@ -393,6 +393,7 @@ public:
 
 	void OnHelpAbout( wxCommandEvent& event );
 
+    void CollapseAllResults( wxCommandEvent& event );
 	void OnCopyCurrResult( wxCommandEvent& event );
 	void OnCopyAllResults( wxCommandEvent& event );
 	void OnResetCurrResult( wxCommandEvent& event );
@@ -565,7 +566,8 @@ enum   // menu id
 	menuQuickFindNext,
 	menuQuickFindPrevious,
 	menuShowFindInFilesResults,
-	menuGoToLine,
+    menuCollapseAllResults,
+    menuGoToLine,
 	menuGoToPosition,
 	menuLeftBrace,
 	menuRightBrace,
