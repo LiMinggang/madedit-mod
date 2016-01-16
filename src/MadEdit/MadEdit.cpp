@@ -9771,8 +9771,8 @@ void MadEdit::OnKeyDown( wxKeyEvent& evt )
 			{
 				Freeze();
 
-				// if   there is a selection, maybe some caret movement have to be done here:
-				// moving   the caret before or after the current selection ?
+				// if there is a selection, maybe some caret movement have to be done here:
+				// moving the caret before or after the current selection ?
 				if( !m_Selection )
 					ProcessCommand( cmd == ecDelPrevWord ? ecSelPrevWord : ecSelNextWord );
 
@@ -9871,9 +9871,6 @@ void MadEdit::OnMouseLeftDown( wxMouseEvent &evt )
 		return;
 	}
 
-	m_MouseLeftDown = true;
-	int row = evt.m_y / m_RowHeight;
-
 	if( m_EditMode == emHexMode && row == 0 )
 	{
 		m_MouseLeftDown = false;
@@ -9882,6 +9879,8 @@ void MadEdit::OnMouseLeftDown( wxMouseEvent &evt )
 	else
 	{
 		CaptureMouse();
+		int row = evt.m_y / m_RowHeight;
+		m_MouseLeftDown = true;
 		const long TRIPLECLICK_LEN = 200; // 0.2 sec after doubleclick
 
 		if( wxGetLocalTimeMillis() - m_lastDoubleClick <= TRIPLECLICK_LEN )
