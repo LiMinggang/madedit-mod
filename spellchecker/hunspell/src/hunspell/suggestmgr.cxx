@@ -1588,7 +1588,11 @@ char * SuggestMgr::suggest_morph_for_spelling_error(const char * word)
 {
     char * p = NULL;
     char ** wlst = (char **) calloc(maxSug, sizeof(char *));
-    if (!**wlst) return NULL;
+	if (!**wlst)
+	{
+		free(wlst);
+		return NULL;
+	}
     // we will use only the first suggestion
     for (int i = 0; i < maxSug - 1; i++) wlst[i] = "";
     int ns = suggest(&wlst, word, maxSug - 1, NULL);

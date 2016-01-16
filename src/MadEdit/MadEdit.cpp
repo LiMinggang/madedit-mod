@@ -9871,6 +9871,7 @@ void MadEdit::OnMouseLeftDown( wxMouseEvent &evt )
 		return;
 	}
 
+	int row = evt.m_y / m_RowHeight;
 	if( m_EditMode == emHexMode && row == 0 )
 	{
 		m_MouseLeftDown = false;
@@ -9879,7 +9880,6 @@ void MadEdit::OnMouseLeftDown( wxMouseEvent &evt )
 	else
 	{
 		CaptureMouse();
-		int row = evt.m_y / m_RowHeight;
 		m_MouseLeftDown = true;
 		const long TRIPLECLICK_LEN = 200; // 0.2 sec after doubleclick
 

@@ -105,7 +105,13 @@ int Hunzip::getcode(const char * key) {
                 lastbit++;
                 if (lastbit == allocatedbit) {
                     allocatedbit += BASEBITREC;
+					struct bit * tdec = dec;
                     dec = (struct bit *) realloc(dec, allocatedbit * sizeof(struct bit));
+					if (!dec)
+					{
+						free(tdec);
+						return fail(MSG_MEMORY, filename);
+					}
                 }
                 dec[lastbit].v[0] = 0;
                 dec[lastbit].v[1] = 0;
