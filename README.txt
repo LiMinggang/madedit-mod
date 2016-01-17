@@ -37,7 +37,7 @@ P.S.: Don't forget to Copy wxwin.m4 to /usr/share/aclocal folder if you use your
 P.S.: Install gettext-devel if you got AM_GNU_GETTEXT error under Linux
 P.S.: madedit.pot/po has been uploaded to the top directory. Any translation for
       MadEdit-Mod is welcome.
-P.S.: Please open a ticket for bug of MadEdit-Mod at 
+P.S.: Please open a ticket for bug of MadEdit-Mod at
       https://github.com/LiMinggang/madedit-mod/issues/
 
 MadEdit_Win2K is a build by VC++ 2005 express for Windows 2000.
@@ -86,7 +86,7 @@ Syntax files, Locale files, Dictionaries and Settings:
     oxt is actually a zip file. So, download it and open it with 7-zip. Then extract
     the .dic and .aff to ./Dictionaries. Re-start MadEdit-Mod to load the dictionary.
   * Use MadEdit-Mod with other applications like CPPCheck, Visual Studio, try
-    'madedit %f*lineNum'
+    'madedit filename*lineNum'
   * Silent mode which can be used in scripting, no GUI will be shown
     [-h], help, Displays help on the command line parameters
     [-s], silent, Disables the GUI
@@ -106,8 +106,8 @@ Search in selection in column mode is not exact the selection highlighted.
 Regular expression which relies on characters before/after the matched string, 
     Eg. (?<=.)\s(?=.), will has issue to be replaced one by one. It's tricky and
     NP++ has the same issue too.
-Open a file by mouse or command line if MadEdit-Mod is not running will not jumb to
-    the one you opened if it has been opened and not closed last time
+Open a file by mouse or command line will not jumb to the one you opened if
+    it has been opened and not closed last time if MadEdit-Mod is not running
 
 Feature/issues to be released
 -----------------------------
@@ -138,6 +138,7 @@ Fix: Regular expression (?<=.)\s(?=.) replacement issue(Case 1: ReplaceAll) #119
 Fix: Restore the transparence configuration of the search window #129
 Fix: Another bug about number highlight in 0.4.0 preview #127
 Fix: Enhanced ctrl+g & ctrl+shift+g and more бнбн #128
+Fix: Can't work with CPPCheck 1.72 #134
 Add documents(CN) for Python simplification
 Update boost to 1.60
 Update Python to 2.7.11

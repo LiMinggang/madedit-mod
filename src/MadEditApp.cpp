@@ -587,7 +587,10 @@ bool MadEditApp::OnCmdLineParsed( wxCmdLineParser& cmdParser )
 
 	for( size_t i = 0; i < cmdParser.GetParamCount(); i++ )
 	{
-		filename = cmdParser.GetParam( i );
+		fname = cmdParser.GetParam( i );
+		fname.Replace(wxT("\\\\"), wxT("\\"));
+		filename = fname;
+
 		filename.MakeAbsolute();
 		fname = filename.GetFullName();
 
