@@ -81,7 +81,7 @@
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">$(SolutionDir)$(Platform)\$(Configuration)\</IntDir>
     <PreBuildEventUseInBuild Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|x64'">true</PreBuildEventUseInBuild>
     <PostBuildEventUseInBuild Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|x64'">true</PostBuildEventUseInBuild>
-    <PreLinkEventUseInBuild Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|x64'">false</PreLinkEventUseInBuild>
+    <PreLinkEventUseInBuild Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|x64'">true</PreLinkEventUseInBuild>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|x64'">python27_d</TargetName>
     <PreLinkEventUseInBuild Condition="'$(Configuration)|$(Platform)'=='Unicode Release|x64'">false</PreLinkEventUseInBuild>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|x64'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
@@ -201,8 +201,10 @@
       <AdditionalIncludeDirectories>..\..\minipython\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <PreLinkEvent>
-      <Message>Generate build information...</Message>
-      <Command>"$(SolutionDir)make_buildinfo.exe" Debug</Command>
+      <Message>
+      </Message>
+      <Command>
+      </Command>
     </PreLinkEvent>
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
