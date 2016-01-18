@@ -127,7 +127,7 @@ Mod v0.4.0
 7.New: New short cut(Alt--) to collapse all results in Results window #131
 8.New: Restore the last position of the Search result window #132
 9.Fix: The tab of the selected page could not be seen if a lot of files were opened #115
-10.Fix: Can't select the whole line by Tripple click or click on Line number area if the line was wrapped #116
+10.Fix: Can't select the whole line by Triple click or click on Line number area if the line was wrapped #116
 11.Fix: Negative match was not supported in Regex with case insensitive(Issue 2) #117
 12.Fix: Number was not highlighted correctly in Text file(Issue 1) #117
 13.Fix: Caret and selection would have issue while '\W' matching \r or \n #121
