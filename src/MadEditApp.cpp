@@ -743,7 +743,7 @@ void MadEditApp::ShowMainFrame( MadEditFrame *mainFrame, bool maximize )
 			SetWindowPlacement( ( HWND )mainFrame->GetHWND(), &wp );
 		}
 #endif
-		bool changeFocus = (pages > 5);
+		bool changeFocus = (pages > 10);
 		if(changeFocus)
 		{
 			mainFrame->SetPageFocus( pages - 2 );

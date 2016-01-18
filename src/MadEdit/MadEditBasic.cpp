@@ -3309,7 +3309,6 @@ int MadEdit::ReplaceTextAll( const wxString &expr, const wxString &fmt,
 	int state;
 	ucs4string out;
 
-	ucs4_t *puc;
 	vector<ucs4_t> ucs;
 
 	if(!bRegex)
@@ -3326,7 +3325,7 @@ int MadEdit::ReplaceTextAll( const wxString &expr, const wxString &fmt,
 	{
 #ifdef __WXMSW__
 #if PATCH_RPLACE_REGEXP == 1
-
+		ucs4_t *puc = 0;
 		if( !fmt.IsEmpty() )
 		{
 #endif
@@ -3334,18 +3333,14 @@ int MadEdit::ReplaceTextAll( const wxString &expr, const wxString &fmt,
 			puc = &ucs[0];
 #if PATCH_RPLACE_REGEXP == 1
 		}
-		else
-		{ puc = 0; }
-
 #endif
 		fmtstr.reset(new ucs4string( puc, puc + ucs.size() ));
 #else
+		const ucs4_t *puc = 0;
 		if( !fmt.IsEmpty() )
 		{
 			puc = fmt.c_str();
 		}
-		else
-		{ puc = 0; }
 
 		fmtstr.reset(new ucs4string( puc, puc + fmt.Len() ));
 #endif
