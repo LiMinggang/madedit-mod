@@ -1,18 +1,24 @@
-Mod v0.3.10
-1.New: Support "Dot(".") match new line", default behavior is changed to NOT match new line #98
-2.New: Dot match newline for Quick Search bar #103
-3.New: Show main frame after everything was done #107
-4.New: Optimization on MadPython---using InsertStr instead of InsertWChar #112
-5.Fix: Find Hex should be gray out if Regular expression was enabled(SearchReplaceDialog) #97
-6.Fix: Find Hex should be gray out if Regular expression was enabled(SearchReplaceInFilesDialog) #99
-7.Fix: Match whole words should be gray out if Regular expression was enabled(SearchReplaceDialog/SearchReplaceInFilesDialog) #100
-8.Fix: Match whole word and dot match newline should be overridden according to Search RegEx #101
-9.Fix: Extra '\' was added to recorded MadPython while searching with RegEx #102
-10.Fix: Caret pos should be at the last while opening the Macro dialog #94 #104
-11.Fix: English was missing in the language list #105
-12.Fix: Should not call Reload on exiting #109
-13.Fix: Should rarely need to use wxConvLocal directly in MadPython #111
-14.Fix: Tab/Return/BackSpace was not recorded in MadPython #114
-15.Improve performance of script recording
-16.Update Astyle to latest code
-17.Update translations
+Mod v0.4.0
+Improve performance of script recording
+Improve text processing performance(almost doubled)
+Improve syntax highlighting performance
+Improve ReloadByModificationTime event handling
+Improve performance of ReplaceTextAll(non-regex)
+New: Add new MadPython API Goto(pos)
+New: New short cut(Alt--) to collapse all results in Results window #131
+New: Restore the last position of the Search result window #132
+Fix: The tab of the selected page could not be seen if a lot of files were opened #115
+Fix: Can't select the whole line by Tripple click or click on Line number area if the line was wrapped #116
+Fix: Negative match was not supported in Regex with case insensitive(Issue 2) #117
+Fix: Number was not highlighted correctly in Text file(Issue 1) #117
+Fix: Caret and selection would have issue while '\W' matching \r or \n #121
+Fix: To use shift + middle mouse wheel to horizontal scrolling #123
+Fix: Regular expression (?<=.)\s(?=.) replacement issue(Case 1: ReplaceAll) #119
+Fix: Restore the transparence configuration of the search window #129
+Fix: Another bug about number highlight in 0.4.0 preview #127
+Fix: Enhanced ctrl+g & ctrl+shift+g and more бнбн #128 Support '+/-' as relative offset to current caret position/line
+Fix: Can't work with CPPCheck 1.72 #134
+Add documents(CN) for Python simplification
+Update boost to 1.60
+Update Python to 2.7.11
+Other minor improvments
