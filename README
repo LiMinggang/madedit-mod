@@ -78,9 +78,6 @@ Syntax files, Locale files and Settings:
   If MadEdit does not find any files in those paths,
   MadEdit can also execute standalone by using default settings.
 
-  If you are under Win98, you must get unicows.dll from MS's website:
-  http://www.microsoft.com/downloads/details.aspx?FamilyId=73BA7BD7-ED06-4F0D-80A4-2A7EEAEE17E2&displaylang=en
-
   When quit MadEdit, MadEdit will save the settings to:
     1. $(HOME)/.madedit/madedit.cfg: Linux
     2. $(MadEdit execution file directory)/MadEdit.cfg: Windows

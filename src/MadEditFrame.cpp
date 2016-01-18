@@ -951,6 +951,8 @@ void OnReceiveMessage( const wchar_t *msg, size_t size, bool activeFile/* = true
 		{
 			file = tkz2.GetNextToken();
 
+			if(!tkz2.HasMoreTokens()) //Force active the last one
+				activeFile = true;
 			// process token here
 			if( !use_script )
 			{ g_MainFrame->OpenFile( file, false, activeFile ); }
@@ -3182,6 +3184,12 @@ void MadEditFrame::SetPageFocus( int pageId )
 			OnNotebookPageChanged( event );
 		}
 	}
+}
+
+int MadEditFrame::GetPageFocus( )
+{
+
+	return m_Notebook->GetSelection();
 }
 
 MadEdit *MadEditFrame::GetEditByFileName( const wxString &filename, int &id )
@@ -7604,7 +7612,7 @@ void MadEditFrame::OnToolsStartRecMacro( wxCommandEvent& event )
 		{
 			wxFileOffset caretPos = g_ActiveMadEdit->GetCaretPosition();
 			AddMacroScript( wxString::Format( wxT( "#Restore caret position" ) ) );
-			AddMacroScript( wxString::Format( wxT( "SetCaretPosition(%s)" ), ( wxLongLong( caretPos ).ToString() ).c_str() ) );
+			AddMacroScript( wxString::Format( wxT( "Goto(%s)" ), ( wxLongLong( caretPos ).ToString() ).c_str() ) );
 		}
 	}
 }

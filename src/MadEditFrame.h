@@ -410,6 +410,7 @@ public:
 	void CloseAllFiles( bool force );
 	void MadEditFrameKeyDown( wxKeyEvent& event );
 	void SetPageFocus( int pageId );
+	int GetPageFocus( );
 	MadEdit *GetEditByFileName( const wxString &filename, int &id );
 	void ResetAcceleratorTable();
 	void HideQuickFindBar();

@@ -106,8 +106,6 @@ Search in selection in column mode is not exact the selection highlighted.
 Regular expression which relies on characters before/after the matched string, 
     Eg. (?<=.)\s(?=.), will has issue to be replaced one by one. It's tricky and
     NP++ has the same issue too.
-Open a file by mouse or command line will not jumb to the one you opened if
-    it has been opened and not closed last time if MadEdit-Mod is not running
 
 Feature/issues to be released
 -----------------------------
@@ -142,7 +140,7 @@ Mod v0.4.0
 20.Add documents(CN) for Python simplification
 21.Update boost to 1.60
 22.Update Python to 2.7.11
-23.Other minor improvments
+23.Other minor improvements
 
 Mod v0.3.10
 1.New: Support "Dot(".") match new line", default behavior is changed to NOT match new line #98
