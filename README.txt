@@ -117,6 +117,10 @@ Note: Not support wxWidgets 2.X anymore since 0.3.X
 Todo:
 FreeBSD packaging (with FreeBSD 10.01)
 
+Mod v0.4.1
+New: Enhancement on Results(Delete items, collapse items) #138
+Update translation
+
 Mod v0.4.0
 1.Improve performance of script recording
 2.Improve text processing performance(almost doubled)
