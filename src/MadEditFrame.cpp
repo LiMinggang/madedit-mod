@@ -65,6 +65,12 @@
 	#include <sys/stat.h>
 #endif
 
+#ifdef __WXGTK__
+	#   include "clipbrd_gtk.h"
+#else
+	#   include <wx/clipbrd.h>
+#endif
+
 //Do not add custom headers.
 //wx-dvcpp designer will remove them
 ////Header Include Start
@@ -1668,7 +1674,9 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_MENU( menuCollapseAllResults, MadEditFrame::CollapseAllResults )
 	EVT_MENU( menuCopyCurResult, MadEditFrame::OnCopyCurrResult )
 	EVT_MENU( menuCopyAllResults, MadEditFrame::OnCopyAllResults )
-	EVT_MENU( menuResetCurResult, MadEditFrame::OnResetCurrResult )
+	EVT_MENU( menuResetResult, MadEditFrame::OnResetResult )
+	EVT_MENU( menuDeleteCurResult, MadEditFrame::OnDeleteCurrResult )
+	EVT_MENU( menuCollapseCurResult, MadEditFrame::OnCollapseCurrResult )
 	EVT_TEXT( ID_QUICKSEARCH, MadEditFrame::OnSearchQuickFind )
 	EVT_TEXT_ENTER( ID_QUICKSEARCH, MadEditFrame::OnSearchQuickFind )
 END_EVENT_TABLE()
@@ -8435,25 +8443,33 @@ void MadEditFrame::OnHelpAbout( wxCommandEvent& event )
 
 void MadEditFrame::CollapseAllResults( wxCommandEvent& event )
 {
-
 	m_FindInFilesResults->CollapseAll( );
 }
 
 void MadEditFrame::OnCopyCurrResult( wxCommandEvent& event )
 {
-	//wxTreeItemId id = m_FindInFilesResults->GetFocusedItem();
 	wxTreeItemId id = m_FindInFilesResults->GetSelection();
 
-	if( id.IsOk() && g_ActiveMadEdit )
+	if( id.IsOk()/* && g_ActiveMadEdit*/ )
 	{
 		wxString result = m_FindInFilesResults->GetItemText( id );
-		g_ActiveMadEdit->CopyToClipboard( result );
+		//g_ActiveMadEdit->CopyToClipboard( result );
+
+		if( !result.IsEmpty() )
+		{
+			if( wxTheClipboard->Open() )
+			{
+				bool ok = wxTheClipboard->SetData( new wxTextDataObject( result ) );
+				wxTheClipboard->Flush();
+				wxTheClipboard->Close();
+			}
+		}
 	}
 }
 
 void MadEditFrame::OnCopyAllResults( wxCommandEvent& event )
 {
-	if( g_ActiveMadEdit )
+	//if( g_ActiveMadEdit )
 	{
 		wxTreeItemId RootId = m_FindInFilesResults->GetRootItem();
 		wxString result( wxT( "" ) );
@@ -8480,17 +8496,41 @@ void MadEditFrame::OnCopyAllResults( wxCommandEvent& event )
 			}
 		}
 
-		if( result != wxString( wxT( "" ) ) )
-		{ g_ActiveMadEdit->CopyToClipboard( result ); }
+		if( !result.IsEmpty() )
+		{
+			if( wxTheClipboard->Open() )
+			{
+				bool ok = wxTheClipboard->SetData( new wxTextDataObject( result ) );
+				wxTheClipboard->Flush();
+				wxTheClipboard->Close();
+			}
+		}
 	}
 }
 
-void MadEditFrame::OnResetCurrResult( wxCommandEvent& event )
+void MadEditFrame::OnResetResult( wxCommandEvent& event )
 {
-	if( g_ActiveMadEdit )
+	g_MainFrame->ResetFindInFilesResults();
+	g_StatusBar->SetStatusText( wxEmptyString, 0 );
+}
+
+void MadEditFrame::OnDeleteCurrResult( wxCommandEvent& event )
+{
+	wxTreeItemId id = m_FindInFilesResults->GetSelection();
+	m_FindInFilesResults->Delete(id);
+}
+
+void MadEditFrame::OnCollapseCurrResult( wxCommandEvent& event )
+{
+	wxTreeItemId id = m_FindInFilesResults->GetSelection();
+	if( id.IsOk() )
 	{
-		g_MainFrame->ResetFindInFilesResults();
-		g_StatusBar->SetStatusText( wxEmptyString, 0 );
+		wxTreeItemIdValue cookie;
+		wxTreeItemId tid = m_FindInFilesResults->GetFirstChild(id, cookie);
+		if( !tid.IsOk() )
+			id = m_FindInFilesResults->GetItemParent(id);
+		if( id.IsOk() )
+			m_FindInFilesResults->Collapse(id);
 	}
 }
 
@@ -8770,10 +8810,12 @@ void MadTreeCtrl::ShowMenu( wxTreeItemId id, const wxPoint& pt )
 	if( needInit )
 	{
 		menu.Append( menuCollapseAllResults, _( "&Collapse All" ) );
-		menu.AppendSeparator();
-		menu.Append( menuCopyCurResult, _( "&Copy Selected" ) );
 		menu.Append( menuCopyAllResults, _( "Copy &All" ) );
-		menu.Append( menuResetCurResult, _( "&Reset Results" ) );
+		menu.Append( menuResetResult, _( "&Reset Results" ) );
+		menu.AppendSeparator();
+		menu.Append( menuCollapseCurResult, _( "&Collapse Selected" ) );
+		menu.Append( menuCopyCurResult, _( "&Copy Selected" ) );
+		menu.Append( menuDeleteCurResult, _( "&Delete Selected" ) );
 		needInit = false;
 	}
 

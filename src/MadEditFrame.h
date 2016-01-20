@@ -397,8 +397,10 @@ public:
     void CollapseAllResults( wxCommandEvent& event );
 	void OnCopyCurrResult( wxCommandEvent& event );
 	void OnCopyAllResults( wxCommandEvent& event );
-	void OnResetCurrResult( wxCommandEvent& event );
-	void OnRightClickToolBar( wxAuiToolBarEvent& event );
+	void OnResetResult( wxCommandEvent& event );
+	void OnDeleteCurrResult( wxCommandEvent& event );
+	void OnCollapseCurrResult( wxCommandEvent& event );
+    void OnRightClickToolBar( wxAuiToolBarEvent& event );
 	void OnContextMenu( wxContextMenuEvent& event );
 private:
 	bool m_PageClosing; // prevent from reentry of CloseFile(), OnNotebookPageClosing()
@@ -714,7 +716,9 @@ enum   // menu id
 	// results
 	menuCopyCurResult,
 	menuCopyAllResults,
-	menuResetCurResult,
+	menuResetResult,
+	menuDeleteCurResult,
+    menuCollapseCurResult,
 };
 
 enum MadPreviewType

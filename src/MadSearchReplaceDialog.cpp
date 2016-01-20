@@ -1424,7 +1424,14 @@ void DisplayFindAllResult( vector<wxFileOffset> &begpos, vector<wxFileOffset> &e
 
 			if( results->GetCount() )
 			{
-				if( expandresults ) results->ExpandAll();
+				if( expandresults )
+					{
+						wxTreeItemId rtid = results->GetRootItem();
+						wxASSERT(rtid.IsOk());
+						wxTreeItemId id = results->GetLastChild(rtid);
+						if(id.IsOk())
+							results->Expand(id);
+					}
 
 				g_MainFrame->m_AuiManager.GetPane( g_MainFrame->m_InfoNotebook ).Show();
 				g_MainFrame->m_AuiManager.Update();
