@@ -732,7 +732,16 @@ enum MadPreviewType
 extern MadEditFrame *g_MainFrame;
 extern void OnReceiveMessage( const wchar_t *msg, size_t size, bool activeFile = true );
 
+#define USE_GENERIC_TREECTRL 1
+#if USE_GENERIC_TREECTRL
+#include "wx/generic/treectlg.h"
+//#ifndef wxTreeCtrl
+//#define wxTreeCtrl wxGenericTreeCtrl
+class MadTreeCtrl : public wxGenericTreeCtrl
+//#endif
+#else
 class MadTreeCtrl : public wxTreeCtrl
+#endif
 {
 public:
 	MadTreeCtrl() {}
@@ -741,6 +750,7 @@ public:
 	             long style );
 	virtual ~MadTreeCtrl() {};
 	void OnItemMenu( wxTreeEvent& event );
+	void OnMouseWheel( wxMouseEvent &evt );
 protected:
 	void ShowMenu( wxTreeItemId id, const wxPoint& pt );
 private:

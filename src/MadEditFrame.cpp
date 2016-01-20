@@ -8778,18 +8778,23 @@ void MadEditFrame::OnSearchQuickFindNext( wxCommandEvent& event )
 #if USE_GENERIC_TREECTRL
 	BEGIN_EVENT_TABLE( MadTreeCtrl, wxGenericTreeCtrl )
 #else
-		BEGIN_EVENT_TABLE( MadTreeCtrl, wxTreeCtrl )
+	BEGIN_EVENT_TABLE( MadTreeCtrl, wxTreeCtrl )
 #endif
 	// EVT_TREE_ITEM_MENU is the preferred event for creating context menus
 	// on a tree control, because it includes the point of the click or item,
 	// meaning that no additional placement calculations are required.
 	EVT_TREE_ITEM_MENU( MadEditFrame::ID_FINDINFILESRESULTS, MadTreeCtrl::OnItemMenu )
+	EVT_MOUSEWHEEL( MadTreeCtrl::OnMouseWheel )
 END_EVENT_TABLE()
 
 MadTreeCtrl::MadTreeCtrl( wxWindow *parent, const wxWindowID id,
 						  const wxPoint& pos, const wxSize& size,
 						  long style )
+#if USE_GENERIC_TREECTRL
+	: wxGenericTreeCtrl(parent, id, pos, size, style)
+#else
 	: wxTreeCtrl( parent, id, pos, size, style )
+#endif
 {
 }
 
@@ -8822,4 +8827,34 @@ void MadTreeCtrl::ShowMenu( wxTreeItemId id, const wxPoint& pt )
 	PopupMenu( &menu, pt );
 #endif // wxUSE_MENUS
 }
+
+void MadTreeCtrl::OnMouseWheel( wxMouseEvent &evt )
+{
+	if( evt.ShiftDown() )
+	{
+		int ThumbHorizon = GetScrollThumb(wxHORIZONTAL);
+		int PosHorizon   = GetScrollPos(wxHORIZONTAL);
+		int RangeHorizon = GetScrollRange(wxHORIZONTAL);
+		int NewPosHorizon = PosHorizon;
+		int scrollsize = 10;
+		if(evt.ControlDown())
+			scrollsize = 800; // almost 80 columns
+		if( evt.m_wheelRotation < 0 )
+		{
+			NewPosHorizon += scrollsize;
+			if(NewPosHorizon > RangeHorizon) NewPosHorizon = RangeHorizon;
+		}
+		else
+		{
+			NewPosHorizon -= scrollsize;
+			if(NewPosHorizon < 0) NewPosHorizon = 0;
+		}
+		//SetScrollbar(wxHORIZONTAL,NewPosHorizon,ThumbHorizon,RangeHorizon);
+		Scroll(NewPosHorizon, -1);
+		return;
+	}
+
+	evt.Skip();
+}
+
 

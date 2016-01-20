@@ -1361,7 +1361,11 @@ void MadSearchReplaceDialog::WxButtonCountClick( wxCommandEvent& event )
 void DisplayFindAllResult( vector<wxFileOffset> &begpos, vector<wxFileOffset> &endpos, MadEdit *madedit, bool expandresults = true, OnProgressUpdatePtr updater = NULL )
 {
 	int ResultCount = 0;
+#if USE_GENERIC_TREECTRL
+	wxGenericTreeCtrl * results = g_MainFrame->m_FindInFilesResults;
+#else
 	wxTreeCtrl * results = g_MainFrame->m_FindInFilesResults;
+#endif
 
 	if( !begpos.empty() ) // found data
 	{
