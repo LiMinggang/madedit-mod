@@ -8832,6 +8832,7 @@ void MadTreeCtrl::OnMouseWheel( wxMouseEvent &evt )
 {
 	if( evt.ShiftDown() )
 	{
+#if 0	
 		int ThumbHorizon = GetScrollThumb(wxHORIZONTAL);
 		int PosHorizon   = GetScrollPos(wxHORIZONTAL);
 		int RangeHorizon = GetScrollRange(wxHORIZONTAL);
@@ -8851,6 +8852,38 @@ void MadTreeCtrl::OnMouseWheel( wxMouseEvent &evt )
 		}
 		//SetScrollbar(wxHORIZONTAL,NewPosHorizon,ThumbHorizon,RangeHorizon);
 		Scroll(NewPosHorizon, -1);
+#else
+		int xpixunit, ypixunit, xview, yview, xsize, ysize, vxsize, vysize,
+		  newx, maxx, totalsize, thumbsize;
+
+		GetScrollPixelsPerUnit(&xpixunit, &ypixunit);
+		GetViewStart(&xview, &yview);
+		GetSize(&xsize, &ysize);
+		GetVirtualSize(&vxsize, &vysize);
+
+		thumbsize = (int)(xsize/xpixunit);
+		totalsize = (int)(vxsize/xpixunit);
+		maxx = totalsize - thumbsize;
+
+		int scrollsize = 10;
+		if(evt.ControlDown())
+			scrollsize = 800; // almost 80 columns
+		if( evt.m_wheelRotation < 0 )
+		{
+			newx = xview + scrollsize;
+			if(newx > maxx) newx = maxx;
+		}
+		else
+		{
+			newx = xview - scrollsize;
+			if(newx < 0) newx = 0;
+		}
+
+		wxLogMessage(wxT("vMyFrame::Scroll GetSize(%i, %i) GetVirtualSize(%i, %i) GetScrollPixelsPerUnit(%i, %i) GetViewStart(%i, %i) newx=%i maxx=%i totalsize=%i thumbsize=%i)"), xsize, ysize, vxsize, vysize, xpixunit, ypixunit, xview, yview, newx, maxx, totalsize, thumbsize);
+
+		SetScrollbars(xpixunit, ypixunit, (vxsize/xpixunit), (vysize/ypixunit), newx, yview);
+
+#endif
 		return;
 	}
 
