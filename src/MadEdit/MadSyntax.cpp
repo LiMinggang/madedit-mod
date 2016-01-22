@@ -2037,7 +2037,7 @@ _NEXTUCHAR_:
 
 								do
 								{
-									if(m_IsPlainText && ( uc > '0' && uc < '9' )) break;
+									if(m_IsPlainText && ( uc >= '0' && uc <= '9' )) break;
 									nw_Word[idx] = uc;
 									nw_ucqueue.pop_front();
 									width = nw_MadEdit->GetUCharWidth( uc );
