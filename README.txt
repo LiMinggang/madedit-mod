@@ -119,6 +119,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.4.1
 New: Enhancement on Results(Delete items, collapse items) #138
+New: Improve syntax highlight function for non-English language Text file #142
 Update translation
 
 Mod v0.4.0
