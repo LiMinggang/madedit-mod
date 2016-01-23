@@ -22,6 +22,7 @@
 #include "MadEditPv.h"
 using namespace std;
 using namespace boost::xpressive;
+extern wxStatusBar *g_StatusBar;
 
 #ifdef _DEBUG
 	#include <crtdbg.h>
@@ -712,10 +713,11 @@ MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 		}
 		catch( regex_error & )
 		{
-			wxMessageDialog dlg( this, wxString::Format( _( "'%s' is not a valid regular expression.(Or empty (), [] or {})" ), text.c_str() ),
-								 wxT( "MadEdit-Mod" ), wxOK | wxICON_ERROR );
-			dlg.SetOKLabel( wxMessageDialog::ButtonLabel( _( "&Ok" ) ) );
-			dlg.ShowModal();
+			//wxMessageDialog dlg( this, wxString::Format( _( "'%s' is not a valid regular expression.(Or empty (), [] or {})" ), text.c_str() ),
+			//					 wxT( "MadEdit-Mod" ), wxOK | wxICON_ERROR );
+			//dlg.SetOKLabel( wxMessageDialog::ButtonLabel( _( "&Ok" ) ) );
+			//dlg.ShowModal();
+			g_StatusBar->SetStatusText( wxString::Format( _( "'%s' is not a valid regular expression.(Or empty (), [] or {})" ), text.c_str() ), 0 );
 			return SR_EXPR_ERROR;
 		}
 	}

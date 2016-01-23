@@ -82,6 +82,7 @@ using std::list;
 static inline int wxChCmp( const wchar_t * wchStr, const wxString & wsStr );
 extern bool IsMacroRecording();
 extern void RecordAsMadMacro( MadEdit *, const wxString&, bool=false);
+
 MadKeyBindings MadEdit::ms_KeyBindings;
 
 const int HexModeMaxColumns = 78;
