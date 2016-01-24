@@ -23,6 +23,7 @@
 using namespace std;
 using namespace boost::xpressive;
 extern wxStatusBar *g_StatusBar;
+ucs4string ConvertEscape( const ucs4string &str );
 
 #ifdef _DEBUG
 	#include <crtdbg.h>
@@ -819,7 +820,7 @@ MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 					if(fmt)
 					{
 						*out = what.format<ucs4string, ucs4string::iterator>(*fmt);
-						//out = ConvertEscape( out );
+						*out = ConvertEscape( *out );
 					}
 				}
 				else
