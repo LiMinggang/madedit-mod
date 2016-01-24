@@ -30,3 +30,10 @@ Index: dialog.cpp
      m_endModalCalled = false;
  
      Show();
+
+
+diff -r d:\wxWidgets-3.0.2-org\src\generic\scrlwing.cpp d:\wxWidgets-3.0.2\src\generic\scrlwing.cpp
+282c282
+<     else if ( evType == wxEVT_MOUSEWHEEL )
+---
+>     else if ((!processed) && evType == wxEVT_MOUSEWHEEL )

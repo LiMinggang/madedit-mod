@@ -8832,7 +8832,7 @@ void MadTreeCtrl::OnMouseWheel( wxMouseEvent &evt )
 {
 	if( evt.ShiftDown() )
 	{
-#if 0	
+#if 1	
 		int ThumbHorizon = GetScrollThumb(wxHORIZONTAL);
 		int PosHorizon   = GetScrollPos(wxHORIZONTAL);
 		int RangeHorizon = GetScrollRange(wxHORIZONTAL);
@@ -8879,7 +8879,7 @@ void MadTreeCtrl::OnMouseWheel( wxMouseEvent &evt )
 			if(newx < 0) newx = 0;
 		}
 
-		wxLogMessage(wxT("vMyFrame::Scroll GetSize(%i, %i) GetVirtualSize(%i, %i) GetScrollPixelsPerUnit(%i, %i) GetViewStart(%i, %i) newx=%i maxx=%i totalsize=%i thumbsize=%i)"), xsize, ysize, vxsize, vysize, xpixunit, ypixunit, xview, yview, newx, maxx, totalsize, thumbsize);
+		//wxLogMessage(wxT("vMyFrame::Scroll GetSize(%i, %i) GetVirtualSize(%i, %i) GetScrollPixelsPerUnit(%i, %i) GetViewStart(%i, %i) newx=%i maxx=%i totalsize=%i thumbsize=%i)"), xsize, ysize, vxsize, vysize, xpixunit, ypixunit, xview, yview, newx, maxx, totalsize, thumbsize);
 
 		SetScrollbars(xpixunit, ypixunit, (vxsize/xpixunit), (vysize/ypixunit), newx, yview);
 
