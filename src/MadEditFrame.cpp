@@ -8457,6 +8457,9 @@ void MadEditFrame::OnCopyCurrResult( wxCommandEvent& event )
 
 		if( !result.IsEmpty() )
 		{
+			int pos = result.Find(wxT(": "));
+			wxASSERT(pos != wxNOT_FOUND);
+			result = result.substr( pos+2 );
 			if( wxTheClipboard->Open() )
 			{
 				bool ok = wxTheClipboard->SetData( new wxTextDataObject( result ) );
@@ -8472,35 +8475,37 @@ void MadEditFrame::OnCopyAllResults( wxCommandEvent& event )
 	//if( g_ActiveMadEdit )
 	{
 		wxTreeItemId RootId = m_FindInFilesResults->GetRootItem();
-		wxString result( wxT( "" ) );
+		wxString results( wxT( "" ) ), result;
 
 		if( RootId.IsOk() )
 		{
 			wxTreeItemIdValue cookie;
 			wxTreeItemId id = m_FindInFilesResults->GetFirstChild( m_FindInFilesResults->GetRootItem(), cookie );
 
-			while( id.IsOk() )
+			while( id.IsOk() )// File
 			{
-				result += m_FindInFilesResults->GetItemText( id );
 				wxTreeItemIdValue tmpCookie;
 				wxTreeItemId tmpId = m_FindInFilesResults->GetFirstChild( id, tmpCookie );
 
-				while( tmpId.IsOk() )
+				while( tmpId.IsOk() )// Result
 				{
-					result += wxString( wxT( "\n	" ) ) + m_FindInFilesResults->GetItemText( tmpId );
+					result = m_FindInFilesResults->GetItemText( tmpId );
+					int pos = result.Find(wxT(": "));
+					wxASSERT(pos != wxNOT_FOUND);
+					results += result.substr( pos+2 ) + wxString( wxT( "\n" ) );
 					tmpId = m_FindInFilesResults->GetNextChild( id, tmpCookie );
 				}
 
 				id = m_FindInFilesResults->GetNextChild( m_FindInFilesResults->GetRootItem(), cookie );
-				result += wxT( "\n" );
+				results += wxT( "\n" );
 			}
 		}
 
-		if( !result.IsEmpty() )
+		if( !results.IsEmpty() )
 		{
 			if( wxTheClipboard->Open() )
 			{
-				bool ok = wxTheClipboard->SetData( new wxTextDataObject( result ) );
+				bool ok = wxTheClipboard->SetData( new wxTextDataObject( results ) );
 				wxTheClipboard->Flush();
 				wxTheClipboard->Close();
 			}

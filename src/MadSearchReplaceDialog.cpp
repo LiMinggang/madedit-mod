@@ -1405,13 +1405,15 @@ void DisplayFindAllResult( vector<wxFileOffset> &begpos, vector<wxFileOffset> &e
 						madedit->GetLine( linetext, line, 1024 );
 					}
 
-					loc.Printf( _( "Line(%d): " ), line + 1 );
+					loc.Printf( _( "Line(%d)" ), line + 1 );
 				}
 				else
 				{
-					loc.Printf( _( "Offset(%s): " ), wxLongLong( begpos[idx] ).ToString().c_str() );
+					loc.Printf( _( "Offset(%s)" ), wxLongLong( begpos[idx] ).ToString().c_str() );
 					linetext = _( "Binary file matches" );
 				}
+
+				loc += wxT(": "); //As delimiter
 
 				fmt = loc + linetext;
 				g_MainFrame->AddItemToFindInFilesResults( fmt, idx, filename, pid, begpos[idx], endpos[idx] );
