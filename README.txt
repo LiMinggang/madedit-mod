@@ -120,6 +120,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 Mod v0.4.1
 New: Enhancement on Results(Delete items, collapse items) #138
 New: Improve syntax highlight function for non-English language Text file #142
+New: Create a new file by double click on the blank area of the Tab bar #144
 Fix: A bug in the "quick search bar" #143
 Fix: A bug in replace all introduced by code change for #119
 Fix: An issue of wxWidgets while scroll result window by mouse wheel

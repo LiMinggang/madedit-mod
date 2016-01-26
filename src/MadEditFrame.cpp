@@ -844,6 +844,9 @@ protected:
 		if( ctrl->TabHitTest( evt.m_x, evt.m_y, &win ) ) {
 			g_MainFrame->CloseFile( g_MainFrame->m_Notebook->GetPageIndex( win ) );
 		}
+		else{
+			g_MainFrame->OpenFile( wxEmptyString, false );
+		}
 	}
 
 };
