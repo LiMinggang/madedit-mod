@@ -66,7 +66,7 @@
 #endif
 
 #ifdef __WXGTK__
-	#   include "clipbrd_gtk.h"
+	#   include "MadEdit/clipbrd_gtk.h"
 #else
 	#   include <wx/clipbrd.h>
 #endif
