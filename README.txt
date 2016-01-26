@@ -78,9 +78,9 @@ Syntax files, Locale files, Dictionaries and Settings:
     Greek(el)                  (Not done)
     Italian(it_IT)             (Not done)
     Japanese(ja_JP)            (Not done)
-	Polish(pl_PL)              (Not done)
-	Russian(ru_RU)             (Not done)
-	Spanish(es)                (Not done)
+    Polish(pl_PL)              (Not done)
+    Russian(ru_RU)             (Not done)
+    Spanish(es)                (Not done)
 
   * Download dictionary at http://extensions.openoffice.org
     oxt is actually a zip file. So, download it and open it with 7-zip. Then extract
@@ -143,7 +143,7 @@ Mod v0.4.0
 15.Fix: Regular expression (?<=.)\s(?=.) replacement issue(Case 1: ReplaceAll) #119
 16.Fix: Restore the transparence configuration of the search window #129
 17.Fix: Another bug about number highlight in 0.4.0 preview #127
-18.Fix: Enhanced ctrl+g & ctrl+shift+g and more бнбн #128 Support '+/-' as relative offset to current caret position/line
+18.Fix: Enhanced ctrl+g & ctrl+shift+g and more #128 Support '+/-' as relative offset to current caret position/line
 19.Fix: Can't work with CPPCheck 1.72 #134
 20.Add documents(CN) for Python simplification
 21.Update boost to 1.60
