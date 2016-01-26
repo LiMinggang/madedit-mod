@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-20 15:44+0800\n"
+"POT-Creation-Date: 2016-01-26 16:39+0800\n"
 "PO-Revision-Date: 2015-11-24 19:34+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
@@ -525,10 +525,9 @@ msgid "Cannot save this file:"
 msgstr "ファイルを保存できません:"
 
 #: ../src/MadEdit/MadEditBasic.cpp:2467 ../src/MadEdit/MadEditBasic.cpp:2895
-#: ../src/MadEdit/MadEditBasic.cpp:2908 ../src/MadEdit/MadEditSearch.cpp:717
-#: ../src/MadEdit/MadEditSearch.cpp:851 ../src/MadEdit/MadEditSearch.cpp:947
-#: ../src/MadEdit/MadEditSearch.cpp:1000 ../src/MadEditFrame.cpp:399
-#: ../src/MadEditFrame.cpp:404
+#: ../src/MadEdit/MadEditBasic.cpp:2908 ../src/MadEdit/MadEditSearch.cpp:854
+#: ../src/MadEdit/MadEditSearch.cpp:950 ../src/MadEdit/MadEditSearch.cpp:1003
+#: ../src/MadEditFrame.cpp:399 ../src/MadEditFrame.cpp:404
 msgid "&Ok"
 msgstr ""
 
@@ -538,13 +537,13 @@ msgstr "ファイルを保存しますか?"
 
 #: ../src/MadEdit/MadEditBasic.cpp:2496 ../src/MadEdit/MadEditBasic.cpp:2561
 #: ../src/MadEdit/MadEditBasic.cpp:2619 ../src/MadEditFrame.cpp:388
-#: ../src/MadEditFrame.cpp:394 ../src/MadSearchReplaceDialog.cpp:1711
+#: ../src/MadEditFrame.cpp:394 ../src/MadSearchReplaceDialog.cpp:1717
 msgid "&Yes"
 msgstr ""
 
 #: ../src/MadEdit/MadEditBasic.cpp:2497 ../src/MadEdit/MadEditBasic.cpp:2561
 #: ../src/MadEdit/MadEditBasic.cpp:2619 ../src/MadEditFrame.cpp:389
-#: ../src/MadEditFrame.cpp:394 ../src/MadSearchReplaceDialog.cpp:1711
+#: ../src/MadEditFrame.cpp:394 ../src/MadSearchReplaceDialog.cpp:1717
 msgid "&No"
 msgstr ""
 
@@ -580,17 +579,17 @@ msgstr "再読み込みしますか?"
 msgid "The input string is not a valid Hex-String:"
 msgstr "入力された文字列は有効な16進文字列ではありません:"
 
-#: ../src/MadEdit/MadEditBasic.cpp:3600 ../src/MadSearchReplaceDialog.cpp:1569
+#: ../src/MadEdit/MadEditBasic.cpp:3600 ../src/MadSearchReplaceDialog.cpp:1575
 #, c-format
 msgid "Found %d matched texts..."
 msgstr ""
 
-#: ../src/MadEdit/MadEditSearch.cpp:715
+#: ../src/MadEdit/MadEditSearch.cpp:721
 #, fuzzy, c-format
 msgid "'%s' is not a valid regular expression.(Or empty (), [] or {})"
 msgstr "'%s' は有効な正規表現ではありません"
 
-#: ../src/MadEdit/MadEditSearch.cpp:849
+#: ../src/MadEdit/MadEditSearch.cpp:852
 msgid ""
 "Catched a exception of 'regex_error'.\n"
 "Maybe the regular expression is invalid."
@@ -598,12 +597,12 @@ msgstr ""
 "'regex_error' が起こりました.\n"
 "無効な正規表現です"
 
-#: ../src/MadEdit/MadEditSearch.cpp:945
+#: ../src/MadEdit/MadEditSearch.cpp:948
 #, c-format
 msgid "'%s' is not a valid regular expression."
 msgstr "'%s' は有効な正規表現ではありません"
 
-#: ../src/MadEdit/MadEditSearch.cpp:998
+#: ../src/MadEdit/MadEditSearch.cpp:1001
 #, c-format
 msgid "The format of '%s' is invalid."
 msgstr "この形式 '%s' は無効です"
@@ -1645,7 +1644,7 @@ msgstr ""
 msgid "Toolbars"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2020 ../src/MadEditFrame.cpp:8574
+#: ../src/MadEditFrame.cpp:2020 ../src/MadEditFrame.cpp:8579
 msgid "Toggle Main Toolbar"
 msgstr ""
 
@@ -2262,8 +2261,8 @@ msgstr ""
 msgid ". Matches Newline"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2915 ../src/MadSearchReplaceDialog.cpp:1582
-#: ../src/MadSearchReplaceDialog.cpp:1595 ../src/MadPython.hpp:1432
+#: ../src/MadEditFrame.cpp:2915 ../src/MadSearchReplaceDialog.cpp:1588
+#: ../src/MadSearchReplaceDialog.cpp:1601 ../src/MadPython.hpp:1432
 #: ../src/MadPython.hpp:1453
 msgid "Search Results"
 msgstr ""
@@ -2444,43 +2443,43 @@ msgstr ""
 msgid "Press OK to visit our HomePage."
 msgstr "OK でホームページに移動します"
 
-#: ../src/MadEditFrame.cpp:8708
+#: ../src/MadEditFrame.cpp:8713
 msgid "Passed the begin of the file"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8767 ../src/MadSearchReplaceDialog.cpp:515
+#: ../src/MadEditFrame.cpp:8772 ../src/MadSearchReplaceDialog.cpp:515
 #: ../src/MadSearchReplaceDialog.cpp:671
 #, fuzzy
 msgid "Passed the end of the file"
 msgstr "選択された行のインデントを増加"
 
-#: ../src/MadEditFrame.cpp:8799
+#: ../src/MadEditFrame.cpp:8809
 msgid "Invalid item"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8812
+#: ../src/MadEditFrame.cpp:8822
 #, fuzzy
 msgid "&Collapse All"
 msgstr "すべて閉じる(&L)"
 
-#: ../src/MadEditFrame.cpp:8813
+#: ../src/MadEditFrame.cpp:8823
 msgid "Copy &All"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8814
+#: ../src/MadEditFrame.cpp:8824
 msgid "&Reset Results"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8816
+#: ../src/MadEditFrame.cpp:8826
 #, fuzzy
 msgid "&Collapse Selected"
 msgstr "すべて閉じる(&L)"
 
-#: ../src/MadEditFrame.cpp:8817
+#: ../src/MadEditFrame.cpp:8827
 msgid "&Copy Selected"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8818
+#: ../src/MadEditFrame.cpp:8828
 #, fuzzy
 msgid "&Delete Selected"
 msgstr "選択された行を削除"
@@ -2625,7 +2624,7 @@ msgstr "ファイル%d から %d まで処理されます..."
 msgid "Found %s matched texts..."
 msgstr "フィルタに適合するファイル %d が見つかりました"
 
-#: ../src/MadFindInFilesDialog.cpp:869 ../src/MadSearchReplaceDialog.cpp:1571
+#: ../src/MadFindInFilesDialog.cpp:869 ../src/MadSearchReplaceDialog.cpp:1577
 msgid "Preparing Results"
 msgstr ""
 
@@ -2827,8 +2826,8 @@ msgid "WxBitmapButtonRecentFindText"
 msgstr "WxBitmapButtonRecentFindText"
 
 #: ../src/MadSearchReplaceDialog.cpp:525 ../src/MadSearchReplaceDialog.cpp:681
-#: ../src/MadSearchReplaceDialog.cpp:1444
-#: ../src/MadSearchReplaceDialog.cpp:1604
+#: ../src/MadSearchReplaceDialog.cpp:1450
+#: ../src/MadSearchReplaceDialog.cpp:1610
 #, fuzzy
 msgid "Cannot find the matched string"
 msgstr "合致する文字列は見つかりませんでした"
@@ -2848,7 +2847,7 @@ msgid "Do you want to find from begin of file?"
 msgstr "ファイルの先頭から検索しますか?"
 
 #: ../src/MadSearchReplaceDialog.cpp:565 ../src/MadSearchReplaceDialog.cpp:712
-#: ../src/MadSearchReplaceDialog.cpp:1615
+#: ../src/MadSearchReplaceDialog.cpp:1621
 msgid "Empty expression"
 msgstr ""
 
@@ -2881,40 +2880,40 @@ msgstr "検索"
 msgid "'%s' was found %d times."
 msgstr "'%s' を検出 %d 回"
 
-#: ../src/MadSearchReplaceDialog.cpp:1388
+#: ../src/MadSearchReplaceDialog.cpp:1392
 #, fuzzy, c-format
 msgid "Preparing %s of %s results..."
 msgstr "ファイル%d から %d まで処理されます..."
 
-#: ../src/MadSearchReplaceDialog.cpp:1404
-#, c-format
-msgid "Line(%d): "
+#: ../src/MadSearchReplaceDialog.cpp:1408
+#, fuzzy, c-format
+msgid "Line(%d)"
 msgstr "行(%d): "
 
-#: ../src/MadSearchReplaceDialog.cpp:1408
-#, c-format
-msgid "Offset(%s): "
+#: ../src/MadSearchReplaceDialog.cpp:1412
+#, fuzzy, c-format
+msgid "Offset(%s)"
 msgstr "オフセット(%s): "
 
-#: ../src/MadSearchReplaceDialog.cpp:1409
+#: ../src/MadSearchReplaceDialog.cpp:1413
 msgid "Binary file matches"
 msgstr "バイナリファイルのマッチ"
 
-#: ../src/MadSearchReplaceDialog.cpp:1448
+#: ../src/MadSearchReplaceDialog.cpp:1454
 #, fuzzy
 msgid " results"
 msgstr "%d 結果"
 
-#: ../src/MadSearchReplaceDialog.cpp:1609
+#: ../src/MadSearchReplaceDialog.cpp:1615
 #, fuzzy, c-format
 msgid "%s results"
 msgstr "%d 結果"
 
-#: ../src/MadSearchReplaceDialog.cpp:1706
+#: ../src/MadSearchReplaceDialog.cpp:1712
 msgid "Cannot find any matched string."
 msgstr "適合する文字列は見つかりませんでした"
 
-#: ../src/MadSearchReplaceDialog.cpp:1708
+#: ../src/MadSearchReplaceDialog.cpp:1714
 #, fuzzy, c-format
 msgid "%s string(s) were replaced."
 msgstr "%d つの文字列が置換されました"
