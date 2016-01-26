@@ -101,7 +101,8 @@
       <AdditionalIncludeDirectories>..\..\minipython\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <PreLinkEvent>
-      <Message>Generate build information...</Message>
+      <Message>
+      </Message>
       <Command>
       </Command>
     </PreLinkEvent>
