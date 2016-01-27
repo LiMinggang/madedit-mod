@@ -116,6 +116,8 @@ public:
 
 public:
 	wxMadAuiNotebook *m_Notebook;
+	long           m_FullScreenStyle;
+	int            m_NoteBookTabHeight;
 	int            m_NewFileCount;
 	wxConfigBase  *m_Config;
 	wxImageList   *m_ImageList;
@@ -139,6 +141,7 @@ public:
 	bool           m_PurgeHistory;
 	bool           m_SearchDirectionNext;
 	bool           m_ToolbarStatus[tbMAX + 1];
+	void OnUpdateUI_CheckFrameStyle( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuFile_CheckCount( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuFileReload( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuFileRecentFiles( wxUpdateUIEvent& event );
@@ -313,6 +316,7 @@ public:
 	void OnSearchQuickFindPrevious( wxCommandEvent& event );
 	void OnShowSearchQuickFindBar( wxCommandEvent& event );
 
+    void OnViewAlwaysOnTop( wxCommandEvent& event );
     void OnViewFullScreen( wxCommandEvent& event );
 	void OnViewPostIt( wxCommandEvent& event );
 	void OnViewEncoding( wxCommandEvent& event );
@@ -586,6 +590,7 @@ enum   // menu id
 	menuClearAllBookmarks,
 
 	// view
+	menuAlwaysOnTop,
 	menuFullScreen,
     menuPostIt,
 	menuEncoding,

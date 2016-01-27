@@ -1434,6 +1434,7 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_UPDATE_UI( menuGotoPreviousBookmark, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark )
 	EVT_UPDATE_UI( menuClearAllBookmarks, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark )
 	// view
+	EVT_UPDATE_UI( menuAlwaysOnTop, MadEditFrame::OnUpdateUI_CheckFrameStyle )
 	EVT_UPDATE_UI( menuEncoding, MadEditFrame::OnUpdateUI_MenuViewEncoding )
 	EVT_UPDATE_UI( menuSyntax, MadEditFrame::OnUpdateUI_MenuViewSyntax )
 	EVT_UPDATE_UI( menuFontName, MadEditFrame::OnUpdateUI_MenuViewFontName )
@@ -1590,7 +1591,7 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_MENU( menuGotoPreviousBookmark, MadEditFrame::OnSearchGotoPreviousBookmark )
 	EVT_MENU( menuClearAllBookmarks, MadEditFrame::OnSearchClearAllBookmarks )
 	// view
-	
+	EVT_MENU( menuAlwaysOnTop, MadEditFrame::OnViewAlwaysOnTop )
 	EVT_MENU( menuFullScreen, MadEditFrame::OnViewFullScreen )
 	EVT_MENU( menuPostIt, MadEditFrame::OnViewPostIt )
 	EVT_MENU_RANGE( menuEncoding1, menuEncoding99, MadEditFrame::OnViewEncoding )
@@ -1861,8 +1862,9 @@ CommandData CommandTable[] =
 
 	// View
 	{ 0, 0, 0, 0, _( "&View" ), 0, wxITEM_NORMAL, 0, &g_Menu_View, 0, 0, 0, 0, false},
-	{ 0,            1, menuFullScreen,        wxT( "menuFullScreen" ),      _( "Toggle Full Screen Mode" ),wxT( "F11" ),         wxITEM_NORMAL,    -1,                 0,     _( "Toggle full screen mode" ), 0, 0, 0, false},
-	{ 0,            1, menuPostIt,            wxT( "menuPostIt" ),          _( "Post-It" ),                wxT( "F12" ),        wxITEM_NORMAL,    -1,                 0,     _( "Post-It mode" ), 0, 0, 0, false},
+	{ 0,            1, menuAlwaysOnTop,       wxT( "menuAlwaysOnTop" ),     _( "Always on Top" ),          wxT( "Ctrl-F11" ),   wxITEM_CHECK,     -1,                 0,     0, 0, 0, 0, false},
+	{ 0,            1, menuFullScreen,        wxT( "menuFullScreen" ),      _( "Toggle Full Screen Mode" ),wxT( "F11" ),        wxITEM_NORMAL,    -1,                 0,     0, 0, 0, 0, false},
+	{ 0,            1, menuPostIt,            wxT( "menuPostIt" ),          _( "Post-It" ),                wxT( "F12" ),        wxITEM_NORMAL,    -1,                 0,     0, 0, 0, 0, false},
 	{ 0,            1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0, 0, 0, 0, false},
 	{ 0,            1, menuEncoding,          wxT( "menuEncoding" ),          _( "Encoding: " ),           0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Encoding,     0, 0, 0, 0, false},
 	{ 0,            2, menuAllEncodings,      wxT( "menuAllEncodings" ),      _( "All Encodings" ),        0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_AllEncodings, 0, 0, 0, 0, false},
@@ -2307,6 +2309,8 @@ void MadEditFrame::CreateGUIControls( void )
 	m_Notebook->wxControl::SetWindowStyleFlag( m_Notebook->wxControl::GetWindowStyleFlag() & ~wxTAB_TRAVERSAL );
 	m_Notebook->SetDropTarget( new DnDFile() );
 	m_Notebook->SetArtProvider( new wxAuiSimpleTabArt );
+	m_NoteBookTabHeight = m_Notebook->GetTabCtrlHeight();
+	m_FullScreenStyle = 0;
 	g_PreviewTypeNames[ptPREVIEW_HTML] = _( "HTML" );
 	g_PreviewTypeNames[ptPREVIEW_MARKDOWN] = _( "Markdown" );
 	g_tbSTANDARD_ptr      = WxToolBar[tbSTANDARD];
@@ -4084,6 +4088,11 @@ bool MadEditFrame::QueryCloseAllFiles()
 void MadEditFrame::OnUpdateUI_MenuFile_CheckCount( wxUpdateUIEvent& event )
 {
 	event.Enable( g_ActiveMadEdit != NULL );
+}
+
+void MadEditFrame::OnUpdateUI_CheckFrameStyle( wxUpdateUIEvent& event )
+{
+	event.Check( ((GetWindowStyle()) & wxSTAY_ON_TOP) != 0 );
 }
 
 void MadEditFrame::OnUpdateUI_MenuFileReload( wxUpdateUIEvent& event )
@@ -6347,23 +6356,41 @@ void MadEditFrame::ToggleFullScreen(long style)
 		fullScrn = false;
 		//Hide toolbar first
 		ShowAllToolBars();
+		if (style == wxFULLSCREEN_ALL || (m_Notebook->GetTabCtrlHeight() == 0))
+			m_Notebook->SetTabCtrlHeight(m_NoteBookTabHeight);
+		m_FullScreenStyle = 0;
 	}
 	else
 	{
 		HideAllToolBars();
+		if (style == wxFULLSCREEN_ALL)
+			m_Notebook->SetTabCtrlHeight(0);
+		else if (m_Notebook->GetTabCtrlHeight() == 0)
+			m_Notebook->SetTabCtrlHeight(m_NoteBookTabHeight);
+		m_FullScreenStyle = style;
 	}
 	topWin->ShowFullScreen( fullScrn, style );
 }
 
+void MadEditFrame::OnViewAlwaysOnTop( wxCommandEvent& event )
+{
+	long style = GetWindowStyle( );
+	style ^= wxSTAY_ON_TOP;
+	SetWindowStyle(style);
+}
+
 void MadEditFrame::OnViewFullScreen( wxCommandEvent& event )
 {
-	long style = wxFULLSCREEN_NOMENUBAR | wxFULLSCREEN_NOTOOLBAR | wxFULLSCREEN_NOBORDER | wxFULLSCREEN_NOCAPTION;
-	ToggleFullScreen(style);
+	static long style = wxFULLSCREEN_NOMENUBAR | wxFULLSCREEN_NOTOOLBAR | wxFULLSCREEN_NOBORDER | wxFULLSCREEN_NOCAPTION;
+
+	if((m_FullScreenStyle == 0) || (m_FullScreenStyle == style))
+		ToggleFullScreen(style);
 }
 
 void MadEditFrame::OnViewPostIt( wxCommandEvent& event )
 {
-	ToggleFullScreen(wxFULLSCREEN_ALL);
+	if((m_FullScreenStyle == 0) || (m_FullScreenStyle == wxFULLSCREEN_ALL))
+		ToggleFullScreen(wxFULLSCREEN_ALL);
 }
 
 void MadEditFrame::OnViewEncoding( wxCommandEvent& event )
