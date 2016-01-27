@@ -4,7 +4,7 @@
 		<centered>1</centered>
 		<pos_arg>1</pos_arg>
 		<size_arg>1</size_arg>
-		<style>wxCAPTION|wxSYSTEM_MENU|wxRESIZE_BORDER|wxCLOSE_BOX</style>
+		<style>wxCAPTION|wxSYSTEM_MENU|wxCLOSE_BOX</style>
 		<handler function="MadSearchReplaceDialogClose" entry="EVT_CLOSE" />
 		<handler function="MadSearchReplaceDialogKeyDown" entry="EVT_KEY_DOWN" />
 		<object class="wxBoxSizer" variable="BoxSizer1" member="no">

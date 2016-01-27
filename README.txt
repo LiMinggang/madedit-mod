@@ -125,6 +125,7 @@ New: Full screen/Post-It Mode support #147
 Fix: A bug in the "quick search bar" #143
 Fix: A bug in replace all introduced by code change for #119
 Fix: An issue of wxWidgets while scroll result window by mouse wheel
+Fix: Not allow to change the size of SearchReplace dialog
 Update translation
 
 Mod v0.4.0
