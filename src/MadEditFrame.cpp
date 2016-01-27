@@ -1590,6 +1590,9 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_MENU( menuGotoPreviousBookmark, MadEditFrame::OnSearchGotoPreviousBookmark )
 	EVT_MENU( menuClearAllBookmarks, MadEditFrame::OnSearchClearAllBookmarks )
 	// view
+	
+	EVT_MENU( menuFullScreen, MadEditFrame::OnViewFullScreen )
+	EVT_MENU( menuPostIt, MadEditFrame::OnViewPostIt )
 	EVT_MENU_RANGE( menuEncoding1, menuEncoding99, MadEditFrame::OnViewEncoding )
 	EVT_MENU_RANGE( menuRecentEncoding1, menuRecentEncoding9, MadEditFrame::OnViewRecentEncoding )
 	EVT_MENU_RANGE( menuSyntax1, menuSyntax199, MadEditFrame::OnViewSyntax )
@@ -1858,6 +1861,9 @@ CommandData CommandTable[] =
 
 	// View
 	{ 0, 0, 0, 0, _( "&View" ), 0, wxITEM_NORMAL, 0, &g_Menu_View, 0, 0, 0, 0, false},
+	{ 0,            1, menuFullScreen,        wxT( "menuFullScreen" ),      _( "Toggle Full Screen Mode" ),wxT( "F11" ),         wxITEM_NORMAL,    -1,                 0,     _( "Toggle full screen mode" ), 0, 0, 0, false},
+	{ 0,            1, menuPostIt,            wxT( "menuPostIt" ),          _( "Post-It" ),                wxT( "F12" ),        wxITEM_NORMAL,    -1,                 0,     _( "Post-It mode" ), 0, 0, 0, false},
+	{ 0,            1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0, 0, 0, 0, false},
 	{ 0,            1, menuEncoding,          wxT( "menuEncoding" ),          _( "Encoding: " ),           0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Encoding,     0, 0, 0, 0, false},
 	{ 0,            2, menuAllEncodings,      wxT( "menuAllEncodings" ),      _( "All Encodings" ),        0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_AllEncodings, 0, 0, 0, 0, false},
 	{ 0,            1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0, 0, 0, 0, false},
@@ -6332,6 +6338,33 @@ void MadEditFrame::OnSearchGoToRightBrace( wxCommandEvent& event )
 		RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "GoToRightBrace()" ) ) );
 }
 
+void MadEditFrame::ToggleFullScreen(long style)
+{
+	wxTopLevelWindow * topWin = (wxTopLevelWindow*)this;
+	bool fullScrn = true;
+	if(topWin->IsFullScreen())
+	{
+		fullScrn = false;
+		//Hide toolbar first
+		ShowAllToolBars();
+	}
+	else
+	{
+		HideAllToolBars();
+	}
+	topWin->ShowFullScreen( fullScrn, style );
+}
+
+void MadEditFrame::OnViewFullScreen( wxCommandEvent& event )
+{
+	long style = wxFULLSCREEN_NOMENUBAR | wxFULLSCREEN_NOTOOLBAR | wxFULLSCREEN_NOBORDER | wxFULLSCREEN_NOCAPTION;
+	ToggleFullScreen(style);
+}
+
+void MadEditFrame::OnViewPostIt( wxCommandEvent& event )
+{
+	ToggleFullScreen(wxFULLSCREEN_ALL);
+}
 
 void MadEditFrame::OnViewEncoding( wxCommandEvent& event )
 {
@@ -6950,32 +6983,43 @@ void MadEditFrame::OnViewToolbars( wxCommandEvent& event )
 		m_AuiManager.Update();
 	}
 }
+void MadEditFrame::HideAllToolBars()
+{
+
+	for( int toolbarId = tbSTANDARD; toolbarId < tbMAX; ++toolbarId )
+	{
+		if( m_ToolbarStatus[toolbarId] )
+		{ m_AuiManager.GetPane( WxToolBar[toolbarId] ).Hide(); }
+	}
+	
+	m_ToolbarStatus[tbMAX] = false;
+	m_AuiManager.Update();
+}
+
+void MadEditFrame::ShowAllToolBars()
+{
+	for( int toolbarId = tbSTANDARD; toolbarId < tbMAX; ++toolbarId )
+	{
+		if( m_ToolbarStatus[toolbarId] )
+		{
+			m_AuiManager.GetPane( WxToolBar[toolbarId] ).Show();
+		}
+	}
+	
+	m_ToolbarStatus[tbMAX] = true;
+	m_AuiManager.Update();
+}
+
 void MadEditFrame::OnViewToolBarsToggleAll( wxCommandEvent& event )
 {
 	if( event.IsChecked() || event.GetInt() == -1 )
 	{
-		for( int toolbarId = tbSTANDARD; toolbarId < tbMAX; ++toolbarId )
-		{
-			if( m_ToolbarStatus[toolbarId] )
-			{
-				m_AuiManager.GetPane( WxToolBar[toolbarId] ).Show();
-			}
-		}
-
-		m_ToolbarStatus[tbMAX] = true;
+		ShowAllToolBars();
 	}
 	else
 	{
-		for( int toolbarId = tbSTANDARD; toolbarId < tbMAX; ++toolbarId )
-		{
-			if( m_ToolbarStatus[toolbarId] )
-			{ m_AuiManager.GetPane( WxToolBar[toolbarId] ).Hide(); }
-		}
-
-		m_ToolbarStatus[tbMAX] = false;
+		HideAllToolBars();
 	}
-
-	m_AuiManager.Update();
 }
 
 void MadEditFrame::OnToolsOptions( wxCommandEvent& event )

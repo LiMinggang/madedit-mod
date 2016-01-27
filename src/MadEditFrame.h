@@ -313,6 +313,8 @@ public:
 	void OnSearchQuickFindPrevious( wxCommandEvent& event );
 	void OnShowSearchQuickFindBar( wxCommandEvent& event );
 
+    void OnViewFullScreen( wxCommandEvent& event );
+	void OnViewPostIt( wxCommandEvent& event );
 	void OnViewEncoding( wxCommandEvent& event );
 	void OnViewRecentEncoding( wxCommandEvent& event );
 	void OnViewSyntax( wxCommandEvent& event );
@@ -439,6 +441,9 @@ protected:
 
 	//void OnInfoNotebookSize( wxSizeEvent &evt );
 	void OnFindInFilesResultsDClick( wxMouseEvent& event );
+    void HideAllToolBars();
+    void ShowAllToolBars();
+    void ToggleFullScreen(long style);
 
 #ifdef __WXMSW__
 	WXLRESULT MSWWindowProc( WXUINT message, WXWPARAM wParam, WXLPARAM lParam );
@@ -581,6 +586,8 @@ enum   // menu id
 	menuClearAllBookmarks,
 
 	// view
+	menuFullScreen,
+    menuPostIt,
 	menuEncoding,
 	menuAllEncodings,
 	menuEncodingGroup1,

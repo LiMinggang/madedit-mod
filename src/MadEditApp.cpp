@@ -757,8 +757,6 @@ void MadEditApp::ShowMainFrame( MadEditFrame *mainFrame, bool maximize )
 		{
 			mainFrame->SetPageFocus( selId );
 		}
-		//Hide toolbar first
-		//((wxTopLevelWindow*)g_MainFrame)->ShowFullScreen( true, wxFULLSCREEN_ALL );
 	}
 }
 
