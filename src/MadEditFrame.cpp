@@ -1857,7 +1857,7 @@ CommandData CommandTable[] =
 	{ 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0, 0, 0, 0, false},
 	{ 0,            1, menuFindInFiles,            wxT( "menuFindInFiles" ),            _( "Fin&d/Replace in Files..." ),                       wxT( "Ctrl-Shift-F" ), wxITEM_NORMAL,    -1,               0, _( "Find or replace a string in files" ), 0, 0, 0, false},
 	{ 0,            1, menuShowFindInFilesResults, wxT( "menuShowFindInFilesResults" ), _( "&Show/Hide the Results of Find/Replace in Files" ), wxT( "Ctrl-Shift-R" ), wxITEM_NORMAL,    -1,               0, _( "Show or hide the results of find or replace a string in files" ), 0, 0, 0, false},
-	{ 0,            1, menuCollapseAllResults,      wxT( "menuCollapseAllResults" ),      _( "Calapse &All Results of Find/Replace in Files" ),   wxT( "Alt--" ),        wxITEM_NORMAL,    -1,               0, _( "Collapse all results of find or replace a string in files" ), 0, 0, 0, false},
+	{ 0,            1, menuCollapseAllResults,      wxT( "menuCollapseAllResults" ),      _( "Collapse &All Results" ),                          wxT( "Alt--" ),        wxITEM_NORMAL,    -1,               0, _( "Collapse all results of find or replace a string in files" ), 0, 0, 0, false},
 	{ 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0, 0, 0, 0, false},
 	{ 0,            1, menuGoToLine,               wxT( "menuGoToLine" ),               _( "&Go To Line..." ),                                  wxT( "Ctrl-G" ),       wxITEM_NORMAL,    -1,               0, _( "Go to the specified line" ), 0, 0, 0, false},
 	{ 0,            1, menuGoToPosition,           wxT( "menuGoToPosition" ),           _( "G&o To Position..." ),                              wxT( "Ctrl-Shift-G" ), wxITEM_NORMAL,    -1,               0, _( "Go to the specified position" ), 0, 0, 0, false},
@@ -2924,7 +2924,7 @@ void MadEditFrame::CreateGUIControls( void )
 	m_CheckboxDotMatchNewline->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ), NULL, this );
 	m_QuickSeachBar->AddControl( m_CheckboxDotMatchNewline );
 	m_QuickSeachBar->AddSeparator();
-	m_QuickSeachBar->AddTool( menuRecentFilesToolbar, _( "Recent Files" ), m_ImageList->GetBitmap( recentfiles_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, wxT("Recent file list"), wxT("Recent file list"), NULL );
+	m_QuickSeachBar->AddTool( menuRecentFilesToolbar, _( "Recent Files" ), m_ImageList->GetBitmap( recentfiles_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _("Recent file list"), _("List all recent opened files"), NULL );
 
 	m_QuickSeachBar->Realize();
 	m_AuiManager.AddPane( m_QuickSeachBar, wxAuiPaneInfo().Name( wxT( "QuickSeachBar" ) ).CloseButton( false ).Caption( _( "Quick Search" ) ).Floatable( true ).ToolbarPane().Top().Row( 2 ) );
