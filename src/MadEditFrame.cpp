@@ -196,6 +196,8 @@
 #define refresh_xpm_idx (numbering_xpm_idx+1)
 #include "../images/closepreview.xpm"
 #define closepreview_xpm_idx (refresh_xpm_idx+1)
+#include "../images/recentfiles.xpm"
+#define recentfiles_xpm_idx (closepreview_xpm_idx+1)
 
 char ** g_MadIcons[] =
 {
@@ -207,7 +209,7 @@ char ** g_MadIcons[] =
 	&hexmode_xpm[0], &Mad_16x15_xpm[0], &runscript_xpm[0], &record_xpm[0], &stop_xpm[0], &playback_xpm[0],
 	&saverec_xpm[0], &bookmark_toggle_xpm[0], &bookmark_next_xpm[0], &bookmark_prev_xpm[0],
 	&bookmark_clear_xpm[0], &spellchecker_xpm[0], &showsymbol_xpm[0], &down_xpm[0], &up_xpm[0],
-	&alignleft_xpm[0], &alignright_xpm[0], &numbering_xpm[0], &refresh_xpm[0], &closepreview_xpm[0]
+	&alignleft_xpm[0], &alignright_xpm[0], &numbering_xpm[0], &refresh_xpm[0], &closepreview_xpm[0], &recentfiles_xpm[0]
 };
 
 extern void ScanForLocales();
@@ -2580,10 +2582,6 @@ void MadEditFrame::CreateGUIControls( void )
 	}
 	while( cd->menu_level >= 0 );
 
-	//	{ 0, 1, menuRecentFiles,  wxT( "menuRecentFiles" ),  _( "Recent Files" ),      wxT( "" ),             wxITEM_NORMAL,    -1,                &g_Menu_File_RecentFiles, 0, 0, &g_tbSTANDARD_ptr, 0, false},
-	g_tbSTANDARD_ptr->AddSeparator();
-	g_tbSTANDARD_ptr->AddTool( menuRecentFilesToolbar, _( "Recent Files" ), m_ImageList->GetBitmap( fileopen_xpm_idx ), wxNullBitmap, cd->kind, wxT(""), wxT(""), NULL );
-
 	g_Menu_EditPop->AppendSeparator();
 	g_Menu_EditPop->AppendSubMenu( g_Menu_EditSubAdv, _( "Ad&vanced" ) );
 	g_Menu_EditPop->AppendSeparator();
@@ -2925,6 +2923,9 @@ void MadEditFrame::CreateGUIControls( void )
 	m_CheckboxDotMatchNewline->SetValue( bb );
 	m_CheckboxDotMatchNewline->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ), NULL, this );
 	m_QuickSeachBar->AddControl( m_CheckboxDotMatchNewline );
+	m_QuickSeachBar->AddSeparator();
+	m_QuickSeachBar->AddTool( menuRecentFilesToolbar, _( "Recent Files" ), m_ImageList->GetBitmap( recentfiles_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, wxT("Recent file list"), wxT("Recent file list"), NULL );
+
 	m_QuickSeachBar->Realize();
 	m_AuiManager.AddPane( m_QuickSeachBar, wxAuiPaneInfo().Name( wxT( "QuickSeachBar" ) ).CloseButton( false ).Caption( _( "Quick Search" ) ).Floatable( true ).ToolbarPane().Top().Row( 2 ) );
 	bool showQsBar = m_Config->ReadBool( wxT( "/MadEdit/ShowQSearchBarOnStart" ), true );
