@@ -227,6 +227,7 @@ extern wxString MadEncodingGrpName[];
 
 const long MadEditFrame::ID_RECENTFINDTEXT1 = MadUniqueIDReserver::Instance().RecentFindTextID1();    // must be the same with MadSearchDialog
 const long MadEditFrame::ID_RECENTFINDTEXT20 = MadUniqueIDReserver::Instance().RecentFindTextID20();
+wxDEFINE_EVENT( EVT_AUINOTEBOOK_PAGE_ADVANCE, wxMouseEvent );
 
 EmbeddedPython *g_EmbeddedPython = 0;
 MadRecentList  *g_RecentFindText = NULL;
@@ -254,6 +255,7 @@ wxMenu *g_Menu_Tools = NULL;
 wxMenu *g_Menu_Window = NULL;
 wxMenu *g_Menu_Help = NULL;
 wxMenu *g_Menu_File_RecentFiles = NULL;
+wxMenu *g_Menu_File_RecentFilesPop = NULL;
 wxMenu *g_Menu_Edit_Bookmark = NULL;
 wxMenu *g_Menu_Edit_Sort = NULL;
 wxMenu *g_Menu_Edit_Advanced = NULL;
@@ -288,7 +290,7 @@ wxMenu ** g_Menus[] =
 {
 	&g_Menu_File, &g_Menu_FilePop, &g_Menu_Edit, &g_Menu_EditPop, &g_Menu_EditSubAdv,
 	&g_Menu_EditSubSort, &g_Menu_Search, &g_Menu_View, &g_Menu_Tools, &g_Menu_Window,
-	&g_Menu_Help, &g_Menu_File_RecentFiles, &g_Menu_Edit_Bookmark, &g_Menu_Edit_Sort,
+	&g_Menu_Help, &g_Menu_File_RecentFiles, &g_Menu_File_RecentFilesPop, &g_Menu_Edit_Bookmark, &g_Menu_Edit_Sort,
 	&g_Menu_Edit_Advanced, &g_Menu_View_Encoding, &g_Menu_View_AllEncodings,
 	&g_Menu_View_Syntax, &g_Menu_View_FontName, &g_Menu_View_Font0, &g_Menu_View_Font1,
 	&g_Menu_View_Font2, &g_Menu_View_Font3, &g_Menu_View_Font4, &g_Menu_View_Font5,
@@ -830,6 +832,7 @@ public:
 			wxAuiTabCtrl *ctrl = GetActiveTabCtrl();
 			ctrl->Connect( wxEVT_LEFT_DCLICK, wxMouseEventHandler( wxMadAuiNotebook::OnMouseClick ) );
 			ctrl->Connect( wxEVT_MIDDLE_UP, wxMouseEventHandler( wxMadAuiNotebook::OnMouseClick ) );
+			ctrl->Connect( wxEVT_MOUSEWHEEL, wxMouseEventHandler( wxMadAuiNotebook::OnMouseWheel ) );
 		}
 	}
 
@@ -848,7 +851,11 @@ protected:
 			g_MainFrame->OpenFile( wxEmptyString, false );
 		}
 	}
-
+	void OnMouseWheel( wxMouseEvent &evt ) {
+		bool bForward = true;
+		if( evt.m_wheelRotation > 0 ) bForward = false;
+			g_MainFrame->m_Notebook->AdvanceSelection( bForward );
+	}
 };
 
 
@@ -1506,6 +1513,7 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_MENU( menuSaveAs, MadEditFrame::OnFileSaveAs )
 	EVT_MENU( menuSaveAll, MadEditFrame::OnFileSaveAll )
 	EVT_MENU( menuReload, MadEditFrame::OnFileReload )
+	EVT_MENU( menuRecentFilesToolbar, MadEditFrame::OnRecentFilesPop )
 	EVT_MENU( menuClose, MadEditFrame::OnFileClose )
 	EVT_MENU( menuCloseAll, MadEditFrame::OnFileCloseAll )
 	EVT_MENU( menuCloseAllButThis, MadEditFrame::OnFileCloseAllButThis )
@@ -2572,6 +2580,10 @@ void MadEditFrame::CreateGUIControls( void )
 	}
 	while( cd->menu_level >= 0 );
 
+	//	{ 0, 1, menuRecentFiles,  wxT( "menuRecentFiles" ),  _( "Recent Files" ),      wxT( "" ),             wxITEM_NORMAL,    -1,                &g_Menu_File_RecentFiles, 0, 0, &g_tbSTANDARD_ptr, 0, false},
+	g_tbSTANDARD_ptr->AddSeparator();
+	g_tbSTANDARD_ptr->AddTool( menuRecentFilesToolbar, _( "Recent Files" ), wxNullBitmap, wxNullBitmap, cd->kind, wxT(""), wxT(""), NULL );
+
 	g_Menu_EditPop->AppendSeparator();
 	g_Menu_EditPop->AppendSubMenu( g_Menu_EditSubAdv, _( "Ad&vanced" ) );
 	g_Menu_EditPop->AppendSeparator();
@@ -2719,6 +2731,7 @@ void MadEditFrame::CreateGUIControls( void )
 	m_RecentFiles->UseMenu( g_Menu_File_RecentFiles );
 	m_Config->SetPath( wxT( "/RecentFiles" ) );
 	m_RecentFiles->Load( *m_Config );
+	
 	m_RecentEncodings = new MadRecentList( 9, menuRecentEncoding1 );
 	m_RecentEncodings->UseMenu( g_Menu_View_Encoding );
 	m_Config->SetPath( wxT( "/RecentEncodings" ) );
@@ -3295,7 +3308,7 @@ void MadEditFrame::OnNotebookPageChanged( wxAuiNotebookEvent& event )
 	//wxLogMessage( wxString()<<int(g_ActiveMadEdit));
 	if( g_ActiveMadEdit != NULL )
 	{
-		g_ActiveMadEdit->SetFocus();
+		//g_ActiveMadEdit->SetFocus();
 		wxString title = g_ActiveMadEdit->GetFileName();
 
 		if( title.IsEmpty() )
@@ -4809,6 +4822,25 @@ void MadEditFrame::OnFileReload( wxCommandEvent& event )
 	{
 		g_ActiveMadEdit->Reload();
 	}
+}
+
+void MadEditFrame::OnRecentFilesPop( wxCommandEvent& event )
+{
+	size_t i = g_Menu_File_RecentFilesPop->GetMenuItemCount();
+	while(i)
+	{
+		g_Menu_File_RecentFilesPop->Delete((wxID_FILE1 + i -1));
+		--i;
+	}
+
+	int n = ( int ) m_RecentFiles->GetCount();
+
+	for( int i = 0; i < n; ++i )
+	{ 
+		g_Menu_File_RecentFilesPop->Append( wxID_FILE1 + i, m_RecentFiles->GetHistoryFile( ( size_t )i ));
+	}
+
+	PopupMenu( g_Menu_File_RecentFilesPop );
 }
 
 void MadEditFrame::OnFileClose( wxCommandEvent& event )
