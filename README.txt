@@ -124,6 +124,8 @@ New: Create a new file by double click on the blank area of the Tab bar #144
 New: Full screen/Post-It Mode support #147
 New: Always on the top #146
 New: Use mouse wheel to scroll and activate the tabs on the tab bar. Click on any of the File name Tab to set the focus to the tab bar. Then use mouse wheel to scroll.The file would not be activated automatically #148
+New: History files bar, open recent file list from tool bar #144
+New: Save user config of "quick search bar" #149
 Fix: A bug in the "quick search bar" #143
 Fix: A bug in replace all introduced by code change for #119
 Fix: An issue of wxWidgets while scroll result window by mouse wheel
