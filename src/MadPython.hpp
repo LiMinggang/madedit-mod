@@ -994,6 +994,16 @@ namespace mad_python {
 			return res;
 		}
 
+		int GetIndentCountByPos( long endpos ) {
+			int res = 0;
+
+			if( g_ActiveMadEdit )
+			{ res = g_ActiveMadEdit->GetIndentCountByPos( (wxFileOffset) endpos ); }
+
+			return res;
+			
+		}
+
 		int GetSelectionBeginPos() {
 			int res = 0;
 
@@ -1025,6 +1035,11 @@ namespace mad_python {
 		void SetSelection( long beginpos, long endpos, bool bCaretAtBeginPos = false ) {
 			if( g_ActiveMadEdit )
 			{ g_ActiveMadEdit->SetSelection( ( wxFileOffset )beginpos, ( wxFileOffset )endpos, bCaretAtBeginPos ); }
+		}
+
+		void WholeLineSelection() {
+			if( g_ActiveMadEdit )
+			{ g_ActiveMadEdit->WholeLineSelection(); }
 		}
 
 		int GetLineCount() {
@@ -1916,6 +1931,8 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.def( "XMLFormat", &PyMadEdit::XMLFormat, "" )
 	.def( "Markdown2Html", &PyMadEdit::Markdown2Html, "" )
 	.def( "Html2PlainText", &PyMadEdit::Html2PlainText, "" )
+	.def( "WholeLineSelection", &PyMadEdit::WholeLineSelection, "" )
+	.def( "GetIndentCountByPos", &PyMadEdit::GetIndentCountByPos, "" )
 	.def( "FindTextNext", &PyMadEdit::FindTextNext, FindTextNext_member_overloads( args( "text", "bRegex", "bCaseSensitive", "bWholeWord", "bDotMatchNewline", "rangeFrom", "rangeTo" ), "Doc string" )[return_value_policy<return_by_value>()] )
 	.def( "FindTextPrevious", &PyMadEdit::FindTextPrevious, FindTextPrevious_member_overloads( args( "text", "bRegex", "bCaseSensitive", "bWholeWord", "bDotMatchNewline", "rangeFrom", "rangeTo" ), "Doc string" )[return_value_policy<return_by_value>()] )
 	.def( "FindHexNext", &PyMadEdit::FindHexNext, FindHexNext_member_overloads( args( "hexstr", "rangeFrom", "rangeTo" ), "Doc string" )[return_value_policy<return_by_value>()] )

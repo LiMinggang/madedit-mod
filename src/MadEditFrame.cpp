@@ -8953,6 +8953,7 @@ void MadTreeCtrl::ShowMenu( wxTreeItemId id, const wxPoint& pt )
 
 void MadTreeCtrl::OnMouseWheel( wxMouseEvent &evt )
 {
+#if USE_GENERIC_TREECTRL
 	if( evt.ShiftDown() )
 	{
 #if 1	
@@ -9009,8 +9010,8 @@ void MadTreeCtrl::OnMouseWheel( wxMouseEvent &evt )
 #endif
 		return;
 	}
+#endif
 
 	evt.Skip();
 }
-
 

@@ -279,6 +279,8 @@ void XMLFormat()
 void Markdown2Html()
 void Html2PlainText()
 void SetColumnSelection(int startlineid, int startxpos, int hlines, int wlines)
+void WholeLineSelection()
+int GetIndentCountByPos( long endpos )
 
 MadEditCommand
 ====
