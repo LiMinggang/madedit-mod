@@ -2033,8 +2033,6 @@ _NEXTUCHAR_:
 						else
 							if( m_SpecialWordPrefix.Find( wxChar( uc ) ) >= 0 )
 							{
-								SetAttributes( aeSpecialWord );
-
 								do
 								{
 									if(m_IsPlainText && ( uc >= '0' && uc <= '9' )) break;
@@ -2050,6 +2048,67 @@ _NEXTUCHAR_:
 										&& IsNotDelimiter( uc = nw_ucqueue.front().first ) );
 
 								nw_Word[idx] = 0;
+
+								// check if is Keyword
+								vector < MadSyntaxKeyword >::iterator kit = m_CustomKeyword.begin();
+								vector < MadSyntaxKeyword >::iterator kend = m_CustomKeyword.end();
+								bool bIsKeyword = false;
+
+								if( nw_MaxKeywordLen != 0 && idx <= ( int )nw_MaxKeywordLen && kit != kend )
+								{
+									wxString strorg( wxT( ' ' ), idx ), strlower( wxT( ' ' ), idx );
+									ucs4_t *puc = nw_Word;
+
+									for( int i = 0; i < idx; ++i )
+									{
+										ucs4_t uc = *puc++;
+#ifdef __WXMSW__
+
+										if( uc < 0x10000 )
+#endif
+										{
+											strorg[i] = wxChar( uc );
+
+											if( uc <= ( ucs4_t )wxT( 'Z' ) && uc >= ( ucs4_t )wxT( 'A' ) )
+												strlower[i] = wxChar( uc | 0x20 );
+											else
+												strlower[i] = wxChar( uc );
+										}
+
+#ifdef __WXMSW__
+										else
+										{
+											//to surrogates????
+											strorg[i] = wxChar( 0xFFFF );
+											strlower[i] = wxChar( 0xFFFF );
+										}
+
+#endif
+									}
+
+									MadKeywordSet::iterator it;
+
+									do
+									{
+										if( IsInRange( nw_State.rangeid, kit->m_InRange ) )
+										{
+											if( kit->m_CaseSensitive ) it = kit->m_Keywords.find( strorg );
+											else                     it = kit->m_Keywords.find( strlower );
+
+											if( it != kit->m_Keywords.end() )
+											{
+												bIsKeyword = true;
+												break;
+											}
+										}
+									}
+									while( ++kit != kend );
+								}
+
+								if( bIsKeyword )
+									SetAttributes( &( kit->m_Attr ) );
+								else
+									SetAttributes( aeSpecialWord );
 							}
 							else
 								if( m_KeywordPrefix.Find( wxChar( uc ) ) >= 0 )
