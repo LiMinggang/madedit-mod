@@ -48,7 +48,7 @@ Boost Python(1.60)
 wxWidgets(3.0.2)
 ./configure --enable-unicode --disable-shared --with-libpng=builtin --with-zlib=builtin --with-expat=builtin --with-gtk3=yes --with-libiconv=no
 MadEdit-Mod
-./configure --with-boost=${HOME}/boost_1_59_0 --with-wxdir=${HOME}/wxWidgets-3.0.2
+./configure --with-boost=${HOME}/boost_1_60_0 --with-wxdir=${HOME}/wxWidgets-3.0.2
 
 Syntax files, Locale files, Dictionaries and Settings:
 ---------------------------------------
