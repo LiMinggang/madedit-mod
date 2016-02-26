@@ -1626,7 +1626,7 @@ void MadSearchReplaceDialog::SearchAll( MadEdit * madedit, bool needRec/*=true*/
 
 		if( ok > 2000 )
 		{
-			wxString msg = _( "Found %d matched texts..." );
+			wxString msg = _( "Found %s matched texts..." );
 			msg += wxT( "								\n" );
 			wxProgressDialog dialog( _( "Preparing Results" ),
 									 wxString::Format( msg, ( wxLongLong( ok ).ToString().c_str() ) ),
