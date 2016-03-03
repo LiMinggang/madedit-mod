@@ -585,16 +585,6 @@ public:
 	}
 };
 
-class CaretPosData: public wxClientData
-{
-public:
-	wxString filename;
-	int pageid; // >=0 for 'NoName'
-	wxFileOffset bpos, epos;
-	CaretPosData( const wxString &fn, int pid, const wxFileOffset &b, wxFileOffset &e )
-		: filename( fn ), pageid( pid ), bpos( b ), epos( e ) {}
-};
-
 extern wxProgressDialog *g_SearchProgressDialog;
 extern bool OnSearchProgressUpdate( int value, const wxString &newmsg = wxEmptyString, bool *skip = NULL );
 void MadFindInFilesDialog::FindReplaceInFiles( bool bReplace )

@@ -1387,26 +1387,56 @@ void DisplayFindAllResult( vector<wxFileOffset> &begpos, vector<wxFileOffset> &e
 		if( !filename.IsEmpty() )
 		{
 			size_t count = begpos.size(), idx = 0;
-			int line = -1, oldline;
+			int line = -1, endline = -1, oldline;
 			wxString linetext, loc;
 			results->Freeze();
 			wxString status = _( "Preparing %s of %s results..." );
 			status += wxT( " 							   \n" );
+			wxString lend;
+			bool multiline = false;
+			switch( madedit->GetNewLineType() )
+			{
+				case nltDOS:  lend = wxT( "\r\n" ); break;
+			
+				case nltUNIX: lend = wxT( "\n" ); break;
+			
+				case nltMAC: lend = wxT( "\r" ); break;
+			
+				default: break;
+			}
 
 			do
 			{
+				multiline = false;
 				if( madedit->IsTextFile() )
 				{
 					oldline = line;
 					line = madedit->GetLineByPos( begpos[idx] );
+					endline = madedit->GetLineByPos( endpos[idx] );
 
 					if( line != oldline )
 					{
 						linetext.Empty();
-						madedit->GetLine( linetext, line, 1024 );
-					}
+						madedit->GetLine( linetext, line, 0xFFFF );
+						if(endline != line && (linetext.Len() < 0xFFFF)) // matched multipile lines
+						{
+							wxString linetmp;
+							int linett = line + 1;
 
-					loc.Printf( _( "Line(%d)" ), line + 1 );
+							while((linetext.Len() < 0xFFFF) && (linett <= endline))
+							{
+								linetmp.Empty();
+								madedit->GetLine( linetmp, linett, 0xFFFF );
+								linetext += (lend + linetmp);
+								++linett;
+							}
+						}
+						multiline = true;
+						loc.Printf( _( "Line(%d-%d)" ), line + 1,  endline + 1 );
+					}
+					else
+						loc.Printf( _( "Line(%d)" ), line + 1 );
+					linetext += lend;
 				}
 				else
 				{
@@ -1417,7 +1447,30 @@ void DisplayFindAllResult( vector<wxFileOffset> &begpos, vector<wxFileOffset> &e
 				loc += wxT(": "); //As delimiter
 
 				fmt = loc + linetext;
-				g_MainFrame->AddItemToFindInFilesResults( fmt, idx, filename, pid, begpos[idx], endpos[idx] );
+				if(fmt.Len() > 1024)
+				{
+					fmt.Remove(1020);
+					fmt += wxT("...");
+				}
+				if(multiline)
+				{
+					switch( madedit->GetNewLineType() )
+					{
+						case nltDOS:  fmt.Replace(wxT( "\r\n" ), wxT( "\\r\\n" )); break;
+					
+						case nltUNIX: fmt.Replace(wxT( "\n" ), wxT( "\\n" )); break;
+					
+						case nltMAC: fmt.Replace(wxT( "\n" ), wxT( "\\n" )); break;
+					
+						default: break;
+					}
+				}
+				if( madedit->IsTextFile() )
+				{
+
+					linetext += lend;
+				}
+				g_MainFrame->AddItemToFindInFilesResults( fmt, linetext, idx, filename, pid, begpos[idx], endpos[idx] );
 				++ResultCount;
 
 				if( updater != NULL && ( count >= 2000 ) )

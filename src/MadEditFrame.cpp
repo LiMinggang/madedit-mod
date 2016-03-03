@@ -641,10 +641,11 @@ class CaretPosData: public wxTreeItemData
 {
 public:
 	wxString filename;
+	wxString matchstring;
 	int pageid; // >=0 for 'NoName'
 	wxFileOffset bpos, epos;
-	CaretPosData( const wxString &fn, int pid, const wxFileOffset &b, wxFileOffset &e )
-		: filename( fn ), pageid( pid ), bpos( b ), epos( e ) {}
+	CaretPosData( const wxString &fn, wxString ms, int pid, const wxFileOffset &b, wxFileOffset &e )
+		: filename( fn ), matchstring(ms), pageid( pid ), bpos( b ), epos( e ) {}
 };
 
 //---------------------------------------------------------------------------
@@ -3639,7 +3640,7 @@ void MadEditFrame::ResetFindInFilesResults()
 	m_FindInFilesResults->AddRoot( wxT( "Root" ) );
 }
 
-void MadEditFrame::AddItemToFindInFilesResults( const wxString &text, size_t index, const wxString &filename, int pageid, const wxFileOffset &begpos, wxFileOffset &endpos )
+void MadEditFrame::AddItemToFindInFilesResults( const wxString &distext, const wxString &acttext, size_t index, const wxString &filename, int pageid, const wxFileOffset &begpos, wxFileOffset &endpos )
 {
 	static wxTreeItemId fileid;
 
@@ -3685,7 +3686,7 @@ void MadEditFrame::AddItemToFindInFilesResults( const wxString &text, size_t ind
 		}
 	}
 
-	m_FindInFilesResults->AppendItem( fileid, text, -1, -1, new CaretPosData( filename, pageid, begpos, endpos ) );
+	m_FindInFilesResults->AppendItem( fileid, distext, -1, -1, new CaretPosData( filename, acttext, pageid, begpos, endpos ) );
 }
 
 //---------------------------------------------------------------------------
@@ -8576,13 +8577,16 @@ void MadEditFrame::OnCopyCurrResult( wxCommandEvent& event )
 		if( !result.IsEmpty() )
 		{
 			int pos = result.Find(wxT(": "));
-			wxASSERT(pos != wxNOT_FOUND);
-			result = result.substr( pos+2 );
-			if( wxTheClipboard->Open() )
+			if(pos != wxNOT_FOUND)
 			{
-				bool ok = wxTheClipboard->SetData( new wxTextDataObject( result ) );
-				wxTheClipboard->Flush();
-				wxTheClipboard->Close();
+				CaretPosData *cpdata = ( CaretPosData* )m_FindInFilesResults->GetItemData( id );
+				result = cpdata->matchstring;
+				if( wxTheClipboard->Open() )
+				{
+					bool ok = wxTheClipboard->SetData( new wxTextDataObject( result ) );
+					wxTheClipboard->Flush();
+					wxTheClipboard->Close();
+				}
 			}
 		}
 	}
@@ -8609,13 +8613,15 @@ void MadEditFrame::OnCopyAllResults( wxCommandEvent& event )
 				{
 					result = m_FindInFilesResults->GetItemText( tmpId );
 					int pos = result.Find(wxT(": "));
-					wxASSERT(pos != wxNOT_FOUND);
-					results += result.substr( pos+2 ) + wxString( wxT( "\n" ) );
+					if(pos != wxNOT_FOUND)
+					{
+						CaretPosData *cpdata = ( CaretPosData* )m_FindInFilesResults->GetItemData( tmpId );
+						results += cpdata->matchstring;
+					}
 					tmpId = m_FindInFilesResults->GetNextChild( id, tmpCookie );
 				}
 
 				id = m_FindInFilesResults->GetNextChild( m_FindInFilesResults->GetRootItem(), cookie );
-				results += wxT( "\n" );
 			}
 		}
 
