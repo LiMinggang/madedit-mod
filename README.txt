@@ -132,7 +132,8 @@ Fix: A bug in replace all introduced by code change for #119
 Fix: An issue of wxWidgets while scroll result window by mouse wheel
 Fix: Not allow to change the size of SearchReplace dialog
 Fix: Syntax highlight of Keyword should override special word prefix #164
-Fix: A multiline search result bug(MadEdit can not display/copy multiline result) #173
+Fix: A multi-line search result bug(MadEdit can not display/copy multi-line result) #173
+Fix: Need to toggle the QuickSearch Bar more simply #172
 Update translation
 
 Mod v0.4.0

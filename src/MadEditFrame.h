@@ -315,7 +315,7 @@ public:
 	void OnSearchQuickFind( wxCommandEvent& event );
 	void OnSearchQuickFindNext( wxCommandEvent& event );
 	void OnSearchQuickFindPrevious( wxCommandEvent& event );
-	void OnShowSearchQuickFindBar( wxCommandEvent& event );
+	void OnToggleSearchQuickFindBar( wxCommandEvent& event );
 
     void OnViewAlwaysOnTop( wxCommandEvent& event );
     void OnViewFullScreen( wxCommandEvent& event );
@@ -577,7 +577,7 @@ enum   // menu id
 	menuFindNext,
 	menuFindPrevious,
 	menuFindInFiles,
-	menuShowQuickFindBar,
+	menuToggleQuickFindBar,
 	menuQuickFindNext,
 	menuQuickFindPrevious,
 	menuShowFindInFilesResults,
