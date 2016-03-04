@@ -8581,12 +8581,12 @@ void MadEditFrame::OnCopyCurrResult( wxCommandEvent& event )
 			{
 				CaretPosData *cpdata = ( CaretPosData* )m_FindInFilesResults->GetItemData( id );
 				result = cpdata->matchstring;
-				if( wxTheClipboard->Open() )
-				{
-					bool ok = wxTheClipboard->SetData( new wxTextDataObject( result ) );
-					wxTheClipboard->Flush();
-					wxTheClipboard->Close();
-				}
+			}
+			if( wxTheClipboard->Open() )
+			{
+				bool ok = wxTheClipboard->SetData( new wxTextDataObject( result ) );
+				wxTheClipboard->Flush();
+				wxTheClipboard->Close();
 			}
 		}
 	}
