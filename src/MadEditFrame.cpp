@@ -352,6 +352,7 @@ inline void RecordAsMadMacro( MadEdit * edit, const wxString& script, bool input
 						g_MPythonSelEndPos = g_ActiveMadEdit->GetSelectionEndPos();
 					}
 
+					g_MainFrame->AddMacroScript( wxString::Format( wxT( "Goto(%s)" ), ( wxLongLong( g_MPythonCaretPos ).ToString() ).c_str() ) );
 					g_MainFrame->AddMacroScript( wxT( "InsertStr(\"" ) + g_MPythonInputBuf + wxT( "\")" ), g_MPythonCaretPos, g_MPythonSelBegPos, g_MPythonSelEndPos );
 					g_MPythonInputBuf.Empty();
 					g_MPythonCaretPos = -1;
@@ -7738,11 +7739,11 @@ void MadEditFrame::OnToolsStartRecMacro( wxCommandEvent& event )
 	{
 		SetMacroRecording();
 		m_MadMacroScripts.Empty();
-		{
-			wxFileOffset caretPos = g_ActiveMadEdit->GetCaretPosition();
-			AddMacroScript( wxString::Format( wxT( "#Restore caret position" ) ) );
-			AddMacroScript( wxString::Format( wxT( "Goto(%s)" ), ( wxLongLong( caretPos ).ToString() ).c_str() ) );
-		}
+		//{
+		//	wxFileOffset caretPos = g_ActiveMadEdit->GetCaretPosition();
+		//	AddMacroScript( wxString::Format( wxT( "#Restore caret position" ) ) );
+		//	AddMacroScript( wxString::Format( wxT( "Goto(%s)" ), ( wxLongLong( caretPos ).ToString() ).c_str() ) );
+		//}
 	}
 }
 

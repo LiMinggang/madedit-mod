@@ -8483,6 +8483,8 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 				case ecReturnNoIndent:
 					if( !IsReadOnly() && !m_SingleLineMode )
 					{
+						if((!m_SingleLineMode) && IsMacroRecording())
+							RecordAsMadMacro( this, wxString(wxT("ProcessCommand( MadEditCommand.Return )")));
 						if( m_Selection && m_EditMode == emColumnMode )
 						{
 							DeleteSelection( true, NULL, false );
@@ -8514,9 +8516,6 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 								ucs.push_back( 0x0A );
 								break;
 							}
-
-							if((!m_SingleLineMode) && IsMacroRecording())
-								RecordAsMadMacro( this, wxString(wxT("ProcessCommand( MadEditCommand.Return )")));
 
 							if( m_AutoIndent && command == ecReturn )
 							{
@@ -8904,6 +8903,10 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 				case ecBackSpace:
 					if( !IsReadOnly() )
 					{
+						if((!m_SingleLineMode) && IsMacroRecording())
+						{
+							RecordAsMadMacro( this, wxString(wxT("ProcessCommand( MadEditCommand.BackSpace )")));
+						}
 						if( m_Selection )
 						{
 							if( m_EditMode == emColumnMode && GetSelectionSize() == 0 && m_SelLeftXPos != 0 )
@@ -9049,11 +9052,6 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 									}
 								}
 							}
-						}
-						
-						if((!m_SingleLineMode) && IsMacroRecording())
-						{
-							RecordAsMadMacro( this, wxString(wxT("ProcessCommand( MadEditCommand.BackSpace )")));
 						}
 					}
 
