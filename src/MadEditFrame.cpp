@@ -352,7 +352,7 @@ inline void RecordAsMadMacro( MadEdit * edit, const wxString& script, bool input
 						g_MPythonSelEndPos = g_ActiveMadEdit->GetSelectionEndPos();
 					}
 
-					g_MainFrame->AddMacroScript( wxString::Format( wxT( "Goto(%s)" ), ( wxLongLong( g_MPythonCaretPos ).ToString() ).c_str() ) );
+					g_MainFrame->AddMacroScript( wxString::Format( wxT( "Goto( %s )" ), ( wxLongLong( g_MPythonCaretPos ).ToString() ).c_str() ) );
 					g_MainFrame->AddMacroScript( wxT( "InsertStr(\"" ) + g_MPythonInputBuf + wxT( "\")" ), g_MPythonCaretPos, g_MPythonSelBegPos, g_MPythonSelEndPos );
 					g_MPythonInputBuf.Empty();
 					g_MPythonCaretPos = -1;
@@ -5137,9 +5137,6 @@ void MadEditFrame::OnEditCut( wxCommandEvent& event )
 	if( g_ActiveMadEdit )
 	{
 		g_ActiveMadEdit->CutToClipboard();
-
-		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "CutToClipboard()" ) ) );
 	}
 }
 
@@ -5170,9 +5167,6 @@ void MadEditFrame::OnEditDelete( wxCommandEvent& event )
 	if( g_ActiveMadEdit )
 	{
 		g_ActiveMadEdit->Delete();
-
-		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "Delete()" ) ) );
 	}
 }
 
@@ -5192,9 +5186,6 @@ void MadEditFrame::OnEditDeleteLine( wxCommandEvent& event )
 	if( g_ActiveMadEdit )
 	{
 		g_ActiveMadEdit->DeleteLine();
-
-		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "DeleteLine()" ) ) );
 	}
 }
 
@@ -5222,9 +5213,6 @@ void MadEditFrame::OnEditInsertTabChar( wxCommandEvent& event )
 	if( g_ActiveMadEdit )
 	{
 		g_ActiveMadEdit->InsertTabChar();
-
-		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "InsertTabChar()" ) ) );
 	}
 }
 
@@ -5490,8 +5478,8 @@ void MadEditFrame::OnEditIncIndent( wxCommandEvent& event )
 	if( g_ActiveMadEdit )
 	{
 		g_ActiveMadEdit->IncreaseDecreaseIndent( true );
-
-		if( IsMacroRecording() )
+		
+		if(IsMacroRecording())
 			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "IncreaseDecreaseIndent(True)" ) ) );
 	}
 }
@@ -5500,8 +5488,7 @@ void MadEditFrame::OnEditDecIndent( wxCommandEvent& event )
 	if( g_ActiveMadEdit )
 	{
 		g_ActiveMadEdit->IncreaseDecreaseIndent( false );
-
-		if( IsMacroRecording() )
+		if(IsMacroRecording())
 			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "IncreaseDecreaseIndent(False)" ) ) );
 	}
 }
@@ -5511,9 +5498,9 @@ void MadEditFrame::OnEditComment( wxCommandEvent& event )
 	if( g_ActiveMadEdit )
 	{
 		g_ActiveMadEdit->CommentUncomment( true );
-
-		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "CommentUncomment(True)" ) ) );
+		
+		if(IsMacroRecording())
+			RecordAsMadMacro(g_ActiveMadEdit, wxString(wxT("CommentUncomment(True)")));
 	}
 }
 
@@ -5522,9 +5509,9 @@ void MadEditFrame::OnEditUncomment( wxCommandEvent& event )
 	if( g_ActiveMadEdit )
 	{
 		g_ActiveMadEdit->CommentUncomment( false );
-
-		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "CommentUncomment(False)" ) ) );
+		
+		if(IsMacroRecording())
+			RecordAsMadMacro(g_ActiveMadEdit, wxString(wxT("CommentUncomment(False)")));
 	}
 }
 
@@ -7739,7 +7726,7 @@ void MadEditFrame::OnToolsStartRecMacro( wxCommandEvent& event )
 		//{
 		//	wxFileOffset caretPos = g_ActiveMadEdit->GetCaretPosition();
 		//	AddMacroScript( wxString::Format( wxT( "#Restore caret position" ) ) );
-		//	AddMacroScript( wxString::Format( wxT( "Goto(%s)" ), ( wxLongLong( caretPos ).ToString() ).c_str() ) );
+		//	AddMacroScript( wxString::Format( wxT( "Goto( %s )" ), ( wxLongLong( caretPos ).ToString() ).c_str() ) );
 		//}
 	}
 }
@@ -7755,7 +7742,7 @@ void MadEditFrame::OnToolsStopRecMacro( wxCommandEvent& event )
 			g_MPythonSelEndPos = g_ActiveMadEdit->GetSelectionEndPos();
 		}
 
-		g_MainFrame->AddMacroScript( wxString::Format( wxT( "Goto(%s)" ), ( wxLongLong( g_MPythonCaretPos ).ToString() ).c_str() ) );
+		g_MainFrame->AddMacroScript( wxString::Format( wxT( "Goto( %s )" ), ( wxLongLong( g_MPythonCaretPos ).ToString() ).c_str() ) );
 		g_MainFrame->AddMacroScript( wxT( "InsertStr(\"" ) + g_MPythonInputBuf + wxT( "\")" ), g_MPythonCaretPos, g_MPythonSelBegPos, g_MPythonSelEndPos );
 		g_MPythonInputBuf.Empty();
 	}
