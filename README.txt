@@ -135,6 +135,7 @@ Fix: Syntax highlight of Keyword should override special word prefix #164
 Fix: A multi-line search result bug(MadEdit can not display/copy multi-line result) #173
 Fix: Need to toggle the QuickSearch Bar more simply #172
 Fix: Macro recording should set position before recording the command #174
+Fix: Several issues of Macro Recording related to string input
 Update translation
 
 Mod v0.4.0

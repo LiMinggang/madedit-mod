@@ -5233,9 +5233,6 @@ void MadEditFrame::OnEditInsertDateTime( wxCommandEvent& event )
 	if( g_ActiveMadEdit )
 	{
 		g_ActiveMadEdit->InsertDateTime();
-
-		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "InsertDateTime()" ) ) );
 	}
 }
 
@@ -7758,10 +7755,11 @@ void MadEditFrame::OnToolsStopRecMacro( wxCommandEvent& event )
 			g_MPythonSelEndPos = g_ActiveMadEdit->GetSelectionEndPos();
 		}
 
+		g_MainFrame->AddMacroScript( wxString::Format( wxT( "Goto(%s)" ), ( wxLongLong( g_MPythonCaretPos ).ToString() ).c_str() ) );
 		g_MainFrame->AddMacroScript( wxT( "InsertStr(\"" ) + g_MPythonInputBuf + wxT( "\")" ), g_MPythonCaretPos, g_MPythonSelBegPos, g_MPythonSelEndPos );
+		g_MPythonInputBuf.Empty();
 	}
 
-	g_MPythonInputBuf.Empty();
 	g_MPythonCaretPos = -1;
 	SetMacroStopped();
 }
@@ -7773,7 +7771,7 @@ void MadEditFrame::OnToolsPlayRecMacro( wxCommandEvent& event )
 		size_t total = m_MadMacroScripts.GetCount();
 		wxString medit( wxT( "medit." ) ), pyscript;
 
-		if( total > 2 ) // Ignore the restore caret line and the comments
+		if( total > 0 )
 		{
 			if( g_SearchReplaceDialog )
 			{ g_SearchReplaceDialog->Show( false ); }
@@ -7793,9 +7791,9 @@ void MadEditFrame::OnToolsPlayRecMacro( wxCommandEvent& event )
 				if( g_ActiveMadEdit->GetInsertNewLineType() == nltUNIX ) { endline = wxT( "\n" ); }
 
 			pyscript = wxString( wxT( "#Create MadEdit Object for active edit" ) ) + endline + wxT( "medit = MadEdit()" ) + endline + endline;
-			pyscript += m_MadMacroScripts[0] + endline;
+			//pyscript += m_MadMacroScripts[0] + endline;
 
-			for( size_t i = 1; i < total; ++i )
+			for( size_t i = 0; i < total; ++i )
 			{ pyscript += ( medit + m_MadMacroScripts[i] + endline ); }
 
 			g_MadMacroDlg->SetPyScript( pyscript );

@@ -7786,9 +7786,9 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 				if( m_AutoCompletePair && m_EditMode==emTextMode && ( idx = m_Syntax->m_AutoCompleteLeftChar.Find( wxChar( uc ) ) ) >= 0 )
 				{
 					// insert the AutoCompleteLeftChar
-					InsertString( &uc, 1, true, true, false );
 					if((!m_SingleLineMode) && IsMacroRecording())
-						RecordAsMadMacro( this, wxString::Format( wxT( "%c" ), command, command ), true );
+						RecordAsMadMacro( this, wxString::Format( wxT( "%c" ), command ), true );
+					InsertString( &uc, 1, true, true, false );
 
 					MadCaretPos *send;
 
@@ -7811,10 +7811,10 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 					if( ( m_Lines->*NextUChar )( ucqueue ) == false || ( ucb = ucqueue.back().first ) <= 0x20 || m_Syntax->IsDelimiter( ucb ) )
 					{
 						NewAutoCompleteRightChar = m_Syntax->m_AutoCompleteRightChar[idx];
+						if((!m_SingleLineMode) && IsMacroRecording())
+							RecordAsMadMacro( this, wxString::Format( wxT( "%c" ), ( int )NewAutoCompleteRightChar ), true);
 						InsertString( &NewAutoCompleteRightChar, 1, true, false, false );
 						
-						if((!m_SingleLineMode) && IsMacroRecording())
-							RecordAsMadMacro( this, wxString::Format( wxT( "%c" ), ( int )NewAutoCompleteRightChar, ( int )NewAutoCompleteRightChar ), true);
 						m_AutoCompletePos = m_CaretPos.pos;
 					}
 				}
@@ -7876,10 +7876,17 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 							m_SelectionBegin->pos = m_SelectionBegin->pos - m_SelectionBegin->linepos + spos;
 							m_SelectionBegin->linepos = spos;
 							spaces.push_back( uc );
+							if((!m_SingleLineMode) && IsMacroRecording())
+							{
+								wxString tp;
+								for(int i = 0; i < spaces.size(); ++i)
+								{
+									tp << wxChar(spaces[i]);
+								}
+								RecordAsMadMacro( this, tp, true );
+							}
 							InsertString( &spaces[0], spaces.size(), true, false, false );
 							
-							if((!m_SingleLineMode) && IsMacroRecording())
-								RecordAsMadMacro( this, wxString::Format( wxT( "%c" ), ( int )spaces[0], ( int )spaces[0] ), true );
 							
 							inserted = true;
 						}
@@ -7887,9 +7894,9 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 
 					if( !inserted )
 					{
-						InsertString( &uc, 1, true, true, false );
 						if((!m_SingleLineMode) && IsMacroRecording())
-							RecordAsMadMacro( this, wxString::Format( wxT( "%c" ), ( int )uc, ( int )uc ), true );
+							RecordAsMadMacro( this, wxString::Format( wxT( "%c" ), ( int )uc ), true );
+						InsertString( &uc, 1, true, true, false );
 					}
 				}
 			}
@@ -8605,6 +8612,8 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 					{
 						if( m_Selection && ( m_SelectionPos1.lineid != m_SelectionPos2.lineid )  && m_EditMode==emTextMode)
 						{
+							if( IsMacroRecording() )
+								RecordAsMadMacro( this, wxString( wxT( "IncreaseDecreaseIndent(True)" ) ) );
 							IncreaseDecreaseIndent( true );
 						}
 						else
@@ -8623,6 +8632,15 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 
 								for( int i = 0; i < spaces; ++i )
 									sp[i] = 0x20;
+								if((!m_SingleLineMode) && IsMacroRecording())
+								{
+									wxString tp;
+									for(int i = 0; i < spaces; ++i)
+									{
+										tp << wxChar(sp[i]);
+									}
+									RecordAsMadMacro( this, tp, true );
+								}
 
 								InsertString( sp, spaces, true, true, false );
 								delete []sp;
@@ -8630,11 +8648,10 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 							else
 							{
 								ucs4_t tab = 0x09;
+								if((!m_SingleLineMode) && IsMacroRecording())
+									RecordAsMadMacro( this, wxString( wxT( "\\t" ) ), true );
 								InsertString( &tab, 1, true, true, false );
 							}
-							
-							if((!m_SingleLineMode) && IsMacroRecording())
-								RecordAsMadMacro( this, wxString( wxT( "\\t" ) ), true );
 					}
 
 					break;
@@ -8671,10 +8688,10 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 					if( !IsReadOnly() )
 					{
 						ucs4_t tab = 0x09;
-						InsertString( &tab, 1, true, true, false );
-						
 						if((!m_SingleLineMode) && IsMacroRecording())
 							RecordAsMadMacro( this, wxString( wxT( "\\t" ) ), true );
+						InsertString( &tab, 1, true, true, false );
+						
 					}
 
 					break;
@@ -9073,6 +9090,11 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 							bool inEnglish = false;
 							m_Config->Read( wxT( "/MadEdit/DateTimeInEnglish" ), &inEnglish );
 
+							if( IsMacroRecording() )
+							{
+								RecordAsMadMacro( this, wxString::Format( wxT( "Goto(%s)" ), ( wxLongLong( GetCaretPosition()).ToString() ).c_str() ));
+								RecordAsMadMacro( this, wxString( wxT( "InsertDateTime()" ) ) );
+							}
 							if( inEnglish )
 							{
 								strcpy( oldlocale, setlocale( LC_TIME, NULL ) );

@@ -484,7 +484,7 @@ public:
 
 		m_MadMacroScripts.Add( script );
 	}
-	bool HasRecordedScript() {return ( m_MadMacroScripts.GetCount() > 2 );}
+	bool HasRecordedScript() {return ( m_MadMacroScripts.GetCount() > 0 );}
 	wxArrayString& GetRecordedScripts() {return m_MadMacroScripts;}
 };
 
