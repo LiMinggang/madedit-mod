@@ -128,6 +128,7 @@ New: History files bar, open recent file list from tool bar #144
 New: Save user config of "quick search bar" #149
 New: New MadPython API WholeLineSelection and GetIndentCountByPos
 New: Support JSON highlighting by using JavaScript syntax
+New: Set Plain Text(*.txt) as default file extension while saving
 Fix: A bug in the "quick search bar" #143
 Fix: A bug in replace all introduced by code change for #119
 Fix: An issue of wxWidgets while scroll result window by mouse wheel
