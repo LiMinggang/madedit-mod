@@ -6304,11 +6304,11 @@ void MadEditFrame::OnSearchGoToLine( wxCommandEvent& event )
 		{
 			if( base == 16 )
 			{
-				RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "GoToLine(0x%X)" ), line ) );
+				RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "GoToLine( 0x%X )" ), line ) );
 			}
 			else
 			{
-				RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "GoToLine(%s)" ), ( wxLongLong( line ).ToString() ).c_str() ) );
+				RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "GoToLine( %s )" ), ( wxLongLong( line ).ToString() ).c_str() ) );
 			}
 		}
 	}

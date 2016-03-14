@@ -1387,7 +1387,7 @@ void DisplayFindAllResult( vector<wxFileOffset> &begpos, vector<wxFileOffset> &e
 		if( !filename.IsEmpty() )
 		{
 			size_t count = begpos.size(), idx = 0;
-			int line = -1, endline = -1, oldline;
+			int line = -1, endline = -1;
 			wxString linetext, loc;
 			results->Freeze();
 			wxString status = _( "Preparing %s of %s results..." );
@@ -1410,24 +1410,21 @@ void DisplayFindAllResult( vector<wxFileOffset> &begpos, vector<wxFileOffset> &e
 				multiline = false;
 				if( madedit->IsTextFile() )
 				{
-					oldline = line;
 					line = madedit->GetLineByPos( begpos[idx] );
 					endline = madedit->GetLineByPos( endpos[idx] );
 
-					if( line != oldline )
+					linetext.Empty();
+					if( line != endline )
 					{
-						linetext.Empty();
 						madedit->GetLine( linetext, line, 0xFFFF );
-						if(endline != line && (linetext.Len() < 0xFFFF)) // matched multipile lines
+						if((linetext.Len() < 0xFFFF)) // matched multipile lines
 						{
-							wxString linetmp;
 							int linett = line + 1;
 
 							while((linetext.Len() < 0xFFFF) && (linett <= endline))
 							{
-								linetmp.Empty();
-								madedit->GetLine( linetmp, linett, 0xFFFF );
-								linetext += (lend + linetmp);
+								linetext += lend;
+								madedit->GetLine( linetext, linett, (0xFFFF - linetext.Len()) );
 								++linett;
 							}
 						}
@@ -1435,7 +1432,10 @@ void DisplayFindAllResult( vector<wxFileOffset> &begpos, vector<wxFileOffset> &e
 						loc.Printf( _( "Line(%d-%d)" ), line + 1,  endline + 1 );
 					}
 					else
+					{
+						madedit->GetLine( linetext, line, 0xFFFF );
 						loc.Printf( _( "Line(%d)" ), line + 1 );
+					}
 					linetext += lend;
 				}
 				else
@@ -1460,14 +1460,13 @@ void DisplayFindAllResult( vector<wxFileOffset> &begpos, vector<wxFileOffset> &e
 					
 						case nltUNIX: fmt.Replace(wxT( "\n" ), wxT( "\\n" )); break;
 					
-						case nltMAC: fmt.Replace(wxT( "\n" ), wxT( "\\n" )); break;
+						case nltMAC: fmt.Replace(wxT( "\r" ), wxT( "\\r" )); break;
 					
 						default: break;
 					}
 				}
 				if( madedit->IsTextFile() )
 				{
-
 					linetext += lend;
 				}
 				g_MainFrame->AddItemToFindInFilesResults( fmt, linetext, idx, filename, pid, begpos[idx], endpos[idx] );
