@@ -1436,7 +1436,6 @@ void DisplayFindAllResult( vector<wxFileOffset> &begpos, vector<wxFileOffset> &e
 						madedit->GetLine( linetext, line, 0xFFFF );
 						loc.Printf( _( "Line(%d)" ), line + 1 );
 					}
-					linetext += lend;
 				}
 				else
 				{
