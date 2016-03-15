@@ -27,6 +27,12 @@
 #include <vector>
 //#include <set>
 
+#if __cplusplus <= 199711L
+#include <boost/shared_ptr.hpp>
+#else
+#include <memory>
+#endif
+
 #include "ucs4_t.h"
 #include "MadLines.h"
 
@@ -91,6 +97,7 @@ struct MadState
 class MadEdit;
 class MadEncoding;
 class wxFileConfig;
+class PersonalDictionary;
 
 class MadSyntax
 {
@@ -124,6 +131,11 @@ public:
 	static bool LoadScheme( const wxString &schname, MadSyntax *syn ); // apply scheme to syn
 	static bool SaveScheme( const wxString &schname, MadSyntax *syn ); // save scheme from syn
 	static bool DeleteScheme( const wxString &schname );
+#if __cplusplus <= 199711L
+    boost::shared_ptr<PersonalDictionary>& GetSyntaxDictionary() { return m_SyntaxKeywordDict; }
+#else
+    std::shared_ptr<PersonalDictionary>& GetSyntaxDictionary() { return m_SyntaxKeywordDict; }
+#endif
 
 private:
 	friend class MadEdit;
@@ -252,7 +264,12 @@ private: // for NextWord()
 	bool nw_EndOfLine;
 	wxColor nw_Color, nw_BgColor, nw_CurrentBgColor;
 	wxFont *nw_Font;
-
+#if __cplusplus <= 199711L
+    boost::shared_ptr<PersonalDictionary> m_SyntaxKeywordDict;
+#else
+    std::shared_ptr<PersonalDictionary> m_SyntaxKeywordDict;
+#endif
+ 
 	int FindStringCase( MadUCQueue & ucqueue, size_t first,
 						MadStringIterator begin, const MadStringIterator & end,
 						size_t & len );

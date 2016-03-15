@@ -23,10 +23,8 @@
 #include <map>
 #if __cplusplus <= 199711L
 #include <boost/shared_ptr.hpp>
-using boost::shared_ptr;
 #else
 #include <memory>
-using std::shared_ptr;
 #endif
 
 #include <wx/string.h>
@@ -34,7 +32,12 @@ using std::shared_ptr;
 class wxConfigBase;
 class wxSpellCheckEngineInterface;
 
-typedef std::map<wxString, shared_ptr<wxSpellCheckEngineInterface> > SpellCheckerMap;
+#if __cplusplus <= 199711L
+typedef std::map<wxString, boost::shared_ptr<wxSpellCheckEngineInterface> > SpellCheckerMap;
+#else
+typedef std::map<wxString, std::shared_ptr<wxSpellCheckEngineInterface> > SpellCheckerMap;
+#endif
+
 class SpellCheckerManager
 {
 private:
@@ -114,7 +117,11 @@ public:
     void SetThesaurusPath(const wxString &path){m_ThesPath = path;}
     void SetBitmapPath(const wxString &path){m_BitmPath = path;}
     const wxString GetPersonalDictionaryFilename()const;
-    shared_ptr<wxSpellCheckEngineInterface> &GetSpellChecker();
+#if __cplusplus <= 199711L
+    boost::shared_ptr<wxSpellCheckEngineInterface> &GetSpellChecker();
+#else
+    std::shared_ptr<wxSpellCheckEngineInterface> &GetSpellChecker();
+#endif
 private:
     const wxString GetRawDictionaryPath()const{return m_DictPath;}
     const wxString GetRawThesaurusPath()const{return m_ThesPath;}

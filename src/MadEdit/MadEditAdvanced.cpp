@@ -3612,7 +3612,6 @@ void MadEdit::SetSpellCheck( bool value )
 void MadEdit::AddtoDictionary( wxString & misSpell )
 {
 #ifndef PYMADEDIT_DLL
-
 	if( m_SingleLineMode || !m_SpellCheckerPtr ) return;
 
 	m_SpellCheckerPtr->AddWordToDictionary( misSpell );

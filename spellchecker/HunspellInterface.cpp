@@ -249,7 +249,7 @@ bool HunspellInterface::IsWordInDictionary(const wxString& strWord)
     wxCharBuffer wordCharBuffer = ConvertToUnicode(strWord);
     if ( wordCharBuffer.data() == NULL )
         return false;
-    return ((m_pHunspell->spell(wordCharBuffer) == 1) || (m_PersonalDictionary.IsWordInDictionary(strWord)));
+    return ((m_PersonalDictionary.IsWordInDictionary(strWord)) || (m_SyntaxKeywordDict && m_SyntaxKeywordDict->IsWordInDictionary(strWord)) || (m_pHunspell->spell(wordCharBuffer) == 1) );
 }
 
 bool HunspellInterface::IsWordInPersonalDictionary(const wxString& strWord)

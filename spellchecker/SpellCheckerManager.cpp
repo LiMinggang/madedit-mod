@@ -24,7 +24,11 @@
 #include <wx/confbase.h>
 
 #include "HunspellInterface.h"
-
+#if __cplusplus <= 199711L
+using boost::shared_ptr;
+#else
+using std::shared_ptr;
+#endif
 extern wxString g_MadEditHomeDir;
 
 #define CFG_SPELLCHECK_ENABLE_ONLINE_CHECK      _T("EnableOnlineChecker")

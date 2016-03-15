@@ -20,10 +20,17 @@
 #pragma warning(disable:4786)
 #endif
 
+#if __cplusplus <= 199711L
+#include <boost/shared_ptr.hpp>
+#else
+#include <memory>
+#endif
+
 WX_DECLARE_STRING_HASH_MAP(wxString, StringToStringMap);
 WX_DECLARE_STRING_HASH_MAP(SpellCheckEngineOption, OptionsMap);
 
 class wxSpellCheckUserInterface;
+class PersonalDictionary;
 
 class wxSpellCheckEngineInterface
 {
@@ -58,6 +65,11 @@ public:
     virtual int InitializeSpellCheckEngine() = 0;
     virtual int UninitializeSpellCheckEngine() = 0;
     virtual int SetOption(SpellCheckEngineOption& Option) = 0;
+#if __cplusplus <= 199711L
+    virtual void SetSyntaxDictionary(boost::shared_ptr<PersonalDictionary>& syntaxKeywordDict) = 0;
+#else
+    virtual void SetSyntaxDictionary(std::shared_ptr<PersonalDictionary>& syntaxKeywordDict) = 0;
+#endif
     virtual bool AddOptionToMap(SpellCheckEngineOption& option);
     virtual void ApplyOptions();  // Go through all the options in the options map and apply them to the spell check engine
     OptionsMap* GetOptions()

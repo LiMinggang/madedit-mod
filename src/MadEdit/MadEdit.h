@@ -24,10 +24,8 @@
 #include <string>
 #if __cplusplus <= 199711L
 	#include <boost/shared_ptr.hpp>
-	using boost::shared_ptr;
 #else
 	#include <memory>
-	using std::shared_ptr;
 #endif
 
 #include "MadLines.h"
@@ -424,7 +422,11 @@ private:
 	OnActivatePtr         m_OnActivate;
 
 	wxMilliClock_t m_lastDoubleClick;
-	shared_ptr<wxSpellCheckEngineInterface> m_SpellCheckerPtr;
+#if __cplusplus <= 199711L
+	boost::shared_ptr<wxSpellCheckEngineInterface> m_SpellCheckerPtr;
+#else
+	std::shared_ptr<wxSpellCheckEngineInterface> m_SpellCheckerPtr;
+#endif
 	bool           m_SpellCheck;
 	bool           m_BookmarkInSearch;
 
@@ -645,6 +647,11 @@ public: // basic functions
 	void SetSyntax( const wxString &title );
 	MadSyntax* GetSyntax() { return m_Syntax; }
 	wxString GetSyntaxTitle() { return m_Syntax->m_Title; }
+#if __cplusplus <= 199711L
+    boost::shared_ptr<PersonalDictionary>& GetSyntaxDictionary() { return m_Syntax->GetSyntaxDictionary(); }
+#else
+    std::shared_ptr<PersonalDictionary>& GetSyntaxDictionary() { return m_Syntax->GetSyntaxDictionary(); }
+#endif
 	void ApplySyntaxAttributes( MadSyntax *syn, bool matchTitle );
 	void LoadDefaultSyntaxScheme() { MadSyntax::LoadScheme( wxT( "Default" ), m_Syntax ); }
 
@@ -747,7 +754,11 @@ public: // basic functions
 	bool GetShowSpaceChar() { return m_ShowSpaceChar; }
 	bool GetMarkActiveLine() { return m_MarkActiveLine; }
 	bool GetSpellCheckStatus() { return m_SpellCheck; }
-	shared_ptr<wxSpellCheckEngineInterface> &GetSpellChecker() { return m_SpellCheckerPtr; }
+#if __cplusplus <= 199711L
+    boost::shared_ptr<wxSpellCheckEngineInterface> &GetSpellChecker() { return m_SpellCheckerPtr; }
+#else
+    std::shared_ptr<wxSpellCheckEngineInterface> &GetSpellChecker() { return m_SpellCheckerPtr; }
+#endif
 
 	void SetMarkBracePair( bool value );
 	bool GetMarkBracePair() { return m_MarkBracePair; }

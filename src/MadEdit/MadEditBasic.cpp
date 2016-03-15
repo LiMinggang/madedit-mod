@@ -19,6 +19,7 @@
 #include <wx/filename.h>
 #ifndef PYMADEDIT_DLL
 	#include "SpellCheckerManager.h"
+	#include "HunspellInterface.h"
 #endif
 
 #ifdef _DEBUG
@@ -147,6 +148,8 @@ void MadEdit::SetSyntax( const wxString &title )
 		m_Syntax->SetEncoding( m_Encoding );
 		m_Syntax->InitNextWord1( m_Lines, m_WordBuffer, m_WidthBuffer,
 								 m_TextFont->GetFaceName(), m_TextFont->GetPointSize(), m_TextFont->GetFamily() );
+		if(m_SpellCheckerPtr)
+			m_SpellCheckerPtr->SetSyntaxDictionary(m_Syntax->GetSyntaxDictionary());
 		m_Lines->m_Syntax = m_Syntax;
 
 		if( !m_LoadingFile )

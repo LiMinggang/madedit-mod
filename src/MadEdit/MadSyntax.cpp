@@ -16,6 +16,7 @@
 #include <wx/textfile.h>
 #include <wx/filename.h>
 
+#include "PersonalDictionary.h"
 
 #ifdef _DEBUG
 	#include <crtdbg.h>
@@ -23,7 +24,6 @@
 #endif
 
 extern wxString g_MadEditHomeDir;
-
 
 const wxChar *SystemAttributesName[] =
 {
@@ -943,6 +943,7 @@ void MadSyntax::ParseSyntax( const wxString &filename )
 										kw.MakeLower();
 
 									ck->m_Keywords.insert( kw );
+									m_SyntaxKeywordDict->AddWord(kw);
 									kw = tkz.GetNextToken();
 								}
 							}
@@ -1154,6 +1155,8 @@ void MadSyntax::Reset()
 		pat->style = fsNone;
 		++pat;
 	}
+
+	m_SyntaxKeywordDict.reset(new PersonalDictionary());
 }
 
 MadAttributes *MadSyntax::GetAttributes( const wxString &name )
@@ -1183,6 +1186,7 @@ MadSyntaxKeyword *MadSyntax::GetCustomKeyword( const wxString &name )
 
 	it = m_CustomKeyword.insert( m_CustomKeyword.end(), MadSyntaxKeyword() );
 	it->m_Name = name;
+
 	return &( *it );
 }
 

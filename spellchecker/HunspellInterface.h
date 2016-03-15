@@ -69,6 +69,14 @@ public:
     virtual wxArrayString GetWordListAsArray();
     void OpenPersonalDictionary(const wxString& strPersonalDictionaryFile=wxEmptyString);    
     virtual void SetEnablePersonalDictionary(bool enable);
+#if __cplusplus <= 199711L
+    virtual void SetSyntaxDictionary(boost::shared_ptr<PersonalDictionary>& syntaxKeywordDict)
+#else
+    virtual void SetSyntaxDictionary(std::shared_ptr<PersonalDictionary>& syntaxKeywordDict)
+#endif
+    {
+        m_SyntaxKeywordDict = syntaxKeywordDict;
+    }
     PersonalDictionary* GetPersonalDictionary()
     {
         return &m_PersonalDictionary;
@@ -97,6 +105,11 @@ private:
     wxString m_strDictionaryPath;
 
     PersonalDictionary m_PersonalDictionary;
+#if __cplusplus <= 199711L
+    boost::shared_ptr<PersonalDictionary> m_SyntaxKeywordDict;
+#else
+    std::shared_ptr<PersonalDictionary> m_SyntaxKeywordDict;
+#endif
     bool m_EnablePersonalDictionary;
 };
 
