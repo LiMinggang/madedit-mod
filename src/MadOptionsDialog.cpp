@@ -407,6 +407,9 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxCheckBoxAutoFillColumnPaste = new wxCheckBox( WxNoteBookPage2, ID_WXCHECKBOXAUTOFILLCOLUMN, _( "Auto fill in column paste" ), wxPoint( 24, 122 ), wxSize( 480, 20 ), 0, wxDefaultValidator, wxT( "WxCheckBoxAutoFillColumnPaste" ) );
 	WxBoxSizer12->Add( WxCheckBoxAutoFillColumnPaste, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
 	SET_CONTROLPARENT( WxCheckBoxAutoFillColumnPaste );
+	WxCheckBoxLockCaretYPos = new wxCheckBox( WxNoteBookPage2, ID_WXCHECKBOXLOCKCARETYPOS, _( "Lock caret line Y position" ), wxPoint( 24, 122 ), wxSize( 480, 20 ), 0, wxDefaultValidator, wxT( "WxCheckBoxLockCaretYPos" ) );
+	WxBoxSizer12->Add( WxCheckBoxLockCaretYPos, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
+	SET_CONTROLPARENT( WxCheckBoxLockCaretYPos );
 	WxNoteBookPage3 = new wxPanel( WxNotebook1, ID_WXNOTEBOOKPAGE3, wxPoint( 4, 24 ), wxSize( 692, 464 ) );
 	WxNotebook1->AddPage( WxNoteBookPage3, _( "Print" ) );
 	WxBoxSizer14 = new wxBoxSizer( wxHORIZONTAL );
@@ -1278,6 +1281,8 @@ void MadOptionsDialog::LoadOptions( void )
 	WxCheckBoxMiddleMouseToPaste->SetValue( bb );
 	cfg->Read( wxT( "AutoFillColumnPaste" ), &bb, true );
 	WxCheckBoxAutoFillColumnPaste->SetValue( bb );
+	cfg->Read( wxT( "LockCaretYPos" ), &bb, false );
+	WxCheckBoxLockCaretYPos->SetValue( bb );
 	extern bool g_DoNotSaveSettings;
 	WxCheckBoxDoNotSaveSettings->SetValue( g_DoNotSaveSettings );
 	cfg->Read( wxT( "ReloadFiles" ), &bb, true );

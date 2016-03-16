@@ -264,6 +264,7 @@ public:
 		wxBoxSizer *WxBoxSizer14;
 		wxPanel *WxNoteBookPage3;
 		wxCheckBox *WxCheckBoxAutoFillColumnPaste;
+		wxCheckBox *WxCheckBoxLockCaretYPos;
 		wxCheckBox *WxCheckBoxMiddleMouseToPaste;
 		wxCheckBox *WxCheckBoxCtrlWithMouseToSelect;
 		wxCheckBox *WxCheckBoxMouseSelectToCopy;
@@ -478,6 +479,7 @@ public:
 			ID_WXCHECKBOXPRINTSYNTAX = 1084,
 			ID_WXNOTEBOOKPAGE3 = 1062,
 			ID_WXCHECKBOXAUTOFILLCOLUMN = 1236,
+            ID_WXCHECKBOXLOCKCARETYPOS = 1228,
 			ID_WXCHECKBOXMIDDLEMOUSETOPASTE = 1127,
 			ID_WXCHECKBOXCTRLWITHMOUSE = 1237,
 			ID_WXCHECKBOXMOUSESELECTTOCOPY = 1159,
