@@ -429,6 +429,7 @@ private:
 #endif
 	bool           m_SpellCheck;
 	bool           m_BookmarkInSearch;
+    bool           m_LockCaretYPos;
 
 #ifdef __WXMSW__
 	bool m_IsWin98;
@@ -755,6 +756,9 @@ public: // basic functions
 	bool GetShowSpaceChar() { return m_ShowSpaceChar; }
 	bool GetMarkActiveLine() { return m_MarkActiveLine; }
 	bool GetSpellCheckStatus() { return m_SpellCheck; }
+	void LockCaretYPos() { m_LockCaretYPos = true; }
+	void UnlockCaretYPos() { m_LockCaretYPos = false; }
+	bool IsCaretYPosLocked() { return m_LockCaretYPos; }
 #if __cplusplus <= 199711L
     boost::shared_ptr<wxSpellCheckEngineInterface> &GetSpellChecker() { return m_SpellCheckerPtr; }
 #else

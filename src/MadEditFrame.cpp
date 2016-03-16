@@ -1479,6 +1479,7 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_UPDATE_UI( menuToolBars, MadEditFrame::OnUpdateUI_MenuViewToolbars )
 	EVT_UPDATE_UI( menuToolBarsToggleAll, MadEditFrame::OnUpdateUI_MenuViewToolbarsToggleAll )
 	EVT_UPDATE_UI_RANGE( menuToolBar1, menuToolBar99, MadEditFrame::OnUpdateUI_MenuViewToolbarList )
+	EVT_UPDATE_UI( menuLockCaretYPos, MadEditFrame::OnUpdateUI_MenuViewLockCaretYPos )
 	// tools
 	EVT_UPDATE_UI( menuByteOrderMark, MadEditFrame::OnUpdateUI_MenuToolsByteOrderMark )
 	EVT_UPDATE_UI( menuMadMacro, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
@@ -1635,6 +1636,7 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_MENU( menuTextMode, MadEditFrame::OnViewTextMode )
 	EVT_MENU( menuColumnMode, MadEditFrame::OnViewColumnMode )
 	EVT_MENU( menuHexMode, MadEditFrame::OnViewHexMode )
+	EVT_MENU( menuLockCaretYPos, MadEditFrame::OnViewLockCaretYPos )
 	EVT_MENU( menuSpellChecker, MadEditFrame::OnViewSpellChecker )
 	EVT_MENU( menuSpellIgnore, MadEditFrame::OnSpellCheckIgnore )
 	EVT_MENU( menuSpellAdd2Dict, MadEditFrame::OnSpellAdd2Dict )
@@ -2037,7 +2039,8 @@ CommandData CommandTable[] =
 	{ 0,              1, menuViewRightToLeft,   wxT( "menuViewRightToLeft" ),   _( "Right-to-left" ),        wxT( "Ctrl-Alt-R" ),   wxITEM_CHECK,     -1,                 0,                         _( "View text from Right-to-left" ), 0, 0, 0, false},
 	{ 0,              1, menuMarkActiveLine,    wxT( "menuMarkActiveLine" ),    _( "Mark Active Line" ),     wxT( "" ),             wxITEM_CHECK,     -1,                 0,                         _( "Mark the current line" ), 0, 0, 0, false},
 	{ 0,              1, menuMarkBracePair,     wxT( "menuMarkBracePair" ),     _( "Mark Brace Pair" ),      wxT( "" ),             wxITEM_CHECK,     -1,                 0,                         _( "Mark the BracePair under the caret" ), 0, 0, 0, false},
-	{ 0,              1, menuSpellChecker,      wxT( "menuSpellChecker" ),      _( "Spell Check" ),        wxT( "Ctrl-K" ),       wxITEM_CHECK,     spellchecker_xpm_idx,                 0,       _( "Turn on spell checker" ), 0, &g_tbTEXTVIEW_ptr, _( "Spell Check" ), false},
+	{ 0,              1, menuSpellChecker,      wxT( "menuSpellChecker" ),      _( "Spell Check" ),          wxT( "Ctrl-K" ),       wxITEM_CHECK,     spellchecker_xpm_idx,                 0,       _( "Turn on spell checker" ), 0, &g_tbTEXTVIEW_ptr, _( "Spell Check" ), false},
+	{ 0,              1, menuLockCaretYPos,     wxT( "menuLockCaretYPos" ),     _( "Lock Caret Line Pos" ),  wxT( "" ),             wxITEM_CHECK,     -1,                 0,                         _( "Lock caret line position on screen" ), 0, &g_tbTEXTVIEW_ptr, _( "Lock caret line pos" ), false},
 	{ 0,              1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0, 0, 0, 0, false},
 	{ 0,              1, menuToolBars,          wxT( "menuToolBar" ),           _( "Toolbars" ),             0,                   wxITEM_NORMAL,    -1,                 &g_Menu_Toolbars,          0, 0, 0, 0, false},
 	{ 0,              2, menuToolBarsToggleAll, wxT( "menuToolBarsToggleAll" ), _( "Toggle Main Toolbar" ),  0,                   wxITEM_CHECK,     -1,                 0,                         _( "Show/Hide Main Toolbar" ), 0, 0, 0, false},
@@ -4525,6 +4528,11 @@ void MadEditFrame::OnUpdateUI_MenuViewToolbarsToggleAll( wxUpdateUIEvent& event 
 	event.Enable( tbMAX != 0 );
 	event.Check( m_ToolbarStatus[tbMAX] );
 }
+void MadEditFrame::OnUpdateUI_MenuViewLockCaretYPos( wxUpdateUIEvent& event )
+{
+	event.Enable( g_ActiveMadEdit != NULL );
+	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->IsCaretYPosLocked() );
+}
 void MadEditFrame::OnUpdateUI_MenuViewToolbarList( wxUpdateUIEvent& event )
 {
 	int menuItemId = event.GetId();
@@ -5058,18 +5066,19 @@ void TempPrintDialog::OnPaint( wxPaintEvent &evt )
 
 void MadEditFrame::OnFilePrint( wxCommandEvent& event )
 {
-	if( g_ActiveMadEdit == NULL ) { return; }
-
-	// Hide Modaless Dialog
-	HideModalessDialogs();
+	if( g_ActiveMadEdit != NULL )
+	{ 
+		// Hide Modaless Dialog
+		HideModalessDialogs();
 #if defined(__WXMSW__)
-	// using a temp modal-dialog to avoid the user change the contents of Edit
-	TempPrintDialog *dlg = new TempPrintDialog( this );
-	dlg->ShowModal();
-	delete dlg;
+		// using a temp modal-dialog to avoid the user change the contents of Edit
+		TempPrintDialog *dlg = new TempPrintDialog( this );
+		dlg->ShowModal();
+		delete dlg;
 #else
-	PrintOut( this );
+		PrintOut( this );
 #endif
+	}
 }
 
 
@@ -6979,30 +6988,44 @@ void MadEditFrame::OnSpellAdd2Dict( wxCommandEvent& event )
 
 void MadEditFrame::OnViewTextMode( wxCommandEvent& event )
 {
-	if( g_ActiveMadEdit == NULL ) { return; }
+	if( g_ActiveMadEdit != NULL )
+	{
+		g_ActiveMadEdit->SetEditMode( emTextMode );
 
-	g_ActiveMadEdit->SetEditMode( emTextMode );
-
-	if( IsMacroRecording() )
-		RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetEditMode(MadEditMode.TextMode)" ) ) );
+		if( IsMacroRecording() )
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetEditMode(MadEditMode.TextMode)" ) ) );
+	}
 }
 void MadEditFrame::OnViewColumnMode( wxCommandEvent& event )
 {
-	if( g_ActiveMadEdit == NULL ) { return; }
+	if( g_ActiveMadEdit != NULL )
+	{
+		g_ActiveMadEdit->SetEditMode( emColumnMode );
 
-	g_ActiveMadEdit->SetEditMode( emColumnMode );
-
-	if( IsMacroRecording() )
-		RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetEditMode(MadEditMode.ColumnMode)" ) ) );
+		if( IsMacroRecording() )
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetEditMode(MadEditMode.ColumnMode)" ) ) );
+	}
 }
 void MadEditFrame::OnViewHexMode( wxCommandEvent& event )
 {
-	if( g_ActiveMadEdit == NULL ) { return; }
+	if( g_ActiveMadEdit != NULL )
+	{
+		g_ActiveMadEdit->SetEditMode( emHexMode );
 
-	g_ActiveMadEdit->SetEditMode( emHexMode );
+		if( IsMacroRecording() )
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetEditMode(MadEditMode.HexMode)" ) ) ); 
+	}
+}
 
-	if( IsMacroRecording() )
-		RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetEditMode(MadEditMode.HexMode)" ) ) );
+void MadEditFrame::OnViewLockCaretYPos( wxCommandEvent& event )
+{
+	if( g_ActiveMadEdit != NULL )
+	{
+		if(event.IsChecked())
+			g_ActiveMadEdit->LockCaretYPos( );
+		else
+			g_ActiveMadEdit->UnlockCaretYPos( );
+	}
 }
 
 void MadEditFrame::OnViewToolbars( wxCommandEvent& event )

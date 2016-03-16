@@ -130,6 +130,7 @@ New: New MadPython API WholeLineSelection and GetIndentCountByPos
 New: Support JSON highlighting by using JavaScript syntax
 New: Set Plain Text(*.txt) as default file extension while saving
 New: Add the keywords in the syntax file to personal dictionary in runtime
+New: AutoScroll or lock the cursor in a fixed line range in the window which user defined #170
 Fix: A bug in the "quick search bar" #143
 Fix: A bug in replace all introduced by code change for #119
 Fix: An issue of wxWidgets while scroll result window by mouse wheel

@@ -890,6 +890,7 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_LeftBrace_rowid   = m_RightBrace_rowid = -1;
 	m_SpellCheck = false;
 	m_BookmarkInSearch = false;
+	m_LockCaretYPos = false;
 #ifndef PYMADEDIT_DLL
 	m_Config->Read( wxT( "SpellCheck" ),   &m_SpellCheck, true );
 
@@ -8510,7 +8511,8 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 				case ecReturnNoIndent:
 					if( !IsReadOnly() && !m_SingleLineMode )
 					{
-						if((!m_SingleLineMode) && IsMacroRecording())
+						bool shouldLock = ((!m_Selection) && m_LockCaretYPos);
+						if(IsMacroRecording())
 							RecordAsMadMacro( this, wxString(wxT("ProcessCommand( MadEditCommand.Return )")));
 						if( m_Selection && m_EditMode == emColumnMode )
 						{
@@ -8622,6 +8624,14 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 							}
 
 							InsertString( &ucs[0], ucs.size(), false, true, false );
+						}
+						if(shouldLock) // simulate scroll line down
+						{
+							++m_TopRow;
+							UpdateScrollBarPos();
+							m_RepaintAll = true;
+							Refresh( false );
+							NewAutoCompleteRightChar = m_AutoCompleteRightChar;
 						}
 					}
 
