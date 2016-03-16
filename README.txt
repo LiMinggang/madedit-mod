@@ -118,29 +118,29 @@ Todo:
 FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.4.1
-New: Enhancement on Results(Delete items, collapse items) #138
-New: Improve syntax highlight function for non-English language Text file #142
-New: Create a new file by double click on the blank area of the Tab bar #144
-New: Full screen/Post-It Mode support #147
-New: Always on the top #146
-New: Use mouse wheel to scroll and activate the tabs on the tab bar. Click on any of the File name Tab to set the focus to the tab bar. Then use mouse wheel to scroll.The file would not be activated automatically #148
-New: History files bar, open recent file list from tool bar #144
-New: Save user config of "quick search bar" #149
-New: New MadPython API WholeLineSelection and GetIndentCountByPos
-New: Support JSON highlighting by using JavaScript syntax
-New: Set Plain Text(*.txt) as default file extension while saving
-New: Add the keywords in the syntax file to personal dictionary in runtime
-New: AutoScroll or lock the cursor in a fixed line range in the window which user defined #170
-Fix: A bug in the "quick search bar" #143
-Fix: A bug in replace all introduced by code change for #119
-Fix: An issue of wxWidgets while scroll result window by mouse wheel
-Fix: Not allow to change the size of SearchReplace dialog
-Fix: Syntax highlight of Keyword should override special word prefix #164
-Fix: A multi-line search result bug(MadEdit can not display/copy multi-line result) #173
-Fix: Need to toggle the QuickSearch Bar more simply #172
-Fix: Macro recording should set position before recording the command #174
-Fix: Several issues of Macro Recording related to string input
-Update translation
+1.New: Enhancement on Results(Delete items, collapse items) #138
+2.New: Improve syntax highlight function for non-English language Text file #142
+3.New: Create a new file by double click on the blank area of the Tab bar #144
+4.New: Full screen/Post-It Mode support #147
+5.New: Always on the top #146
+6.New: Use mouse wheel to scroll and activate the tabs on the tab bar. Click on any of the File name Tab to set the focus to the tab bar. Then use mouse wheel to scroll.The file would not be activated automatically #148
+7.New: History files bar, open recent file list from tool bar #144
+8.New: Save user config of "quick search bar" #149
+9.New: New MadPython API WholeLineSelection and GetIndentCountByPos
+10.New: Support JSON highlighting by using JavaScript syntax
+11.New: Set Plain Text(*.txt) as default file extension while saving
+12.New: Add the keywords in the syntax file to personal dictionary in runtime
+13.New: AutoScroll or lock the cursor in a fixed line range in the window which user defined #170
+14.Fix: A bug in the "quick search bar" #143
+15.Fix: A bug in replace all introduced by code change for #119
+16.Fix: An issue of wxWidgets while scroll result window by mouse wheel
+17.Fix: Not allow to change the size of SearchReplace dialog
+18.Fix: Syntax highlight of Keyword should override special word prefix #164
+19.Fix: A multi-line search result bug(MadEdit can not display/copy multi-line result) #173
+20.Fix: Need to toggle the QuickSearch Bar more simply #172
+21.Fix: Macro recording should set position before recording the command #174
+22.Fix: Several issues of Macro Recording related to string input
+23.Update translation
 
 Mod v0.4.0
 1.Improve performance of script recording
