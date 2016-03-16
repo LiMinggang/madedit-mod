@@ -165,7 +165,7 @@ void MadEdit::SetSyntax( const wxString &title )
 	}
 }
 
-inline void MadEdit::UpdateSyntaxDictionary()
+void MadEdit::UpdateSyntaxDictionary()
 {
 	if(m_SpellCheckerPtr)
 		m_SpellCheckerPtr->SetSyntaxDictionary(m_Syntax->GetSyntaxDictionary());

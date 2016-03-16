@@ -648,7 +648,7 @@ public: // basic functions
 	void SetSyntax( const wxString &title );
 	MadSyntax* GetSyntax() { return m_Syntax; }
 	wxString GetSyntaxTitle() { return m_Syntax->m_Title; }
-	inline void UpdateSyntaxDictionary();
+	void UpdateSyntaxDictionary();
 #if __cplusplus <= 199711L
     boost::shared_ptr<PersonalDictionary>& GetSyntaxDictionary() { return m_Syntax->GetSyntaxDictionary(); }
 #else

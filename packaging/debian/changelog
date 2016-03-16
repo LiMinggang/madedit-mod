@@ -24,7 +24,7 @@ madedit-mod (0.4.1-1) stable; urgency=low
   22.Fix: Several issues of Macro Recording related to string input
   23.Update translation
 
- -- Minggang Li <liminggang@gmail.com>  Wend, 16 March 2016 11:57:40 +0800
+ -- Minggang Li <liminggang@gmail.com>  Wed, 16 March 2016 11:57:40 +0800
 
 madedit-mod (0.4.0-1) stable; urgency=low
 
