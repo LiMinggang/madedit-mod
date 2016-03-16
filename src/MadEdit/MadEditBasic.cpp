@@ -148,8 +148,7 @@ void MadEdit::SetSyntax( const wxString &title )
 		m_Syntax->SetEncoding( m_Encoding );
 		m_Syntax->InitNextWord1( m_Lines, m_WordBuffer, m_WidthBuffer,
 								 m_TextFont->GetFaceName(), m_TextFont->GetPointSize(), m_TextFont->GetFamily() );
-		if(m_SpellCheckerPtr)
-			m_SpellCheckerPtr->SetSyntaxDictionary(m_Syntax->GetSyntaxDictionary());
+		UpdateSyntaxDictionary();
 		m_Lines->m_Syntax = m_Syntax;
 
 		if( !m_LoadingFile )
@@ -164,6 +163,12 @@ void MadEdit::SetSyntax( const wxString &title )
 			}
 		}
 	}
+}
+
+inline void MadEdit::UpdateSyntaxDictionary()
+{
+	if(m_SpellCheckerPtr)
+		m_SpellCheckerPtr->SetSyntaxDictionary(m_Syntax->GetSyntaxDictionary());
 }
 
 void MadEdit::ApplySyntaxAttributes( MadSyntax *syn, bool matchTitle )

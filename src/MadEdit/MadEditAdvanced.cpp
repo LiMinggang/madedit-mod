@@ -3592,7 +3592,10 @@ void MadEdit::SetSpellCheck( bool value )
 		m_SpellCheck = value;
 
 		if( m_SpellCheck )
+		{
 			m_SpellCheckerPtr = SpellCheckerManager::Instance().GetSpellChecker();
+			UpdateSyntaxDictionary();
+		}
 		else
 			m_SpellCheckerPtr.reset();
 

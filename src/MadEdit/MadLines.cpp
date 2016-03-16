@@ -3044,8 +3044,7 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 		wxFont *font = m_MadEdit->m_TextFont;
 		m_Syntax->InitNextWord1( m_MadEdit->m_Lines, m_MadEdit->m_WordBuffer, m_MadEdit->m_WidthBuffer, font->GetFaceName(), font->GetPointSize(), font->GetFamily() );
 		m_MadEdit->m_Syntax = m_Syntax;
-		if(m_MadEdit->GetSpellChecker())
-			(m_MadEdit->GetSpellChecker())->SetSyntaxDictionary(m_Syntax->GetSyntaxDictionary());
+		m_MadEdit->UpdateSyntaxDictionary();
 		m_MadEdit->m_LoadingFile = false;
 
 		if( m_Syntax->m_Encoding.IsEmpty() )
@@ -3148,8 +3147,7 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 	wxFont *font = m_MadEdit->m_TextFont;
 	m_Syntax->InitNextWord1( m_MadEdit->m_Lines, m_MadEdit->m_WordBuffer, m_MadEdit->m_WidthBuffer, font->GetFaceName(), font->GetPointSize(), font->GetFamily() );
 	m_MadEdit->m_Syntax = m_Syntax;
-	if(m_MadEdit->GetSpellChecker())
-		(m_MadEdit->GetSpellChecker())->SetSyntaxDictionary(m_Syntax->GetSyntaxDictionary());
+	m_MadEdit->UpdateSyntaxDictionary();
 	long maxtextfilesize;
 	wxString oldpath = m_MadEdit->m_Config->GetPath();
 	m_MadEdit->m_Config->Read( wxT( "/MadEdit/MaxTextFileSize" ), &maxtextfilesize, 10 * 1000 * 1000 );
@@ -3627,8 +3625,7 @@ bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 		wxFont *font = m_MadEdit->m_TextFont;
 		tmp_Syntax->InitNextWord1( m_MadEdit->m_Lines, m_MadEdit->m_WordBuffer, m_MadEdit->m_WidthBuffer, font->GetFaceName(), font->GetPointSize(), font->GetFamily() );
 		m_MadEdit->m_Syntax = tmp_Syntax;
-		if(m_MadEdit->GetSpellChecker())
-			(m_MadEdit->GetSpellChecker())->SetSyntaxDictionary(m_Syntax->GetSyntaxDictionary());
+		m_MadEdit->UpdateSyntaxDictionary();
 		m_MadEdit->ReformatAll();
 	}
 	else

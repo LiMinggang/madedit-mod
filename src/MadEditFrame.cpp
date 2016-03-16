@@ -3325,6 +3325,8 @@ void MadEditFrame::OnNotebookPageChanged( wxAuiNotebookEvent& event )
 	if( g_ActiveMadEdit != NULL )
 	{
 		//g_ActiveMadEdit->SetFocus();
+		
+		g_ActiveMadEdit->UpdateSyntaxDictionary();
 		wxString title = g_ActiveMadEdit->GetFileName();
 
 		if( title.IsEmpty() )
@@ -3409,6 +3411,8 @@ void MadEditFrame::OnNotebookPageClosed( bool bZeroPage )
 		if( g_ActiveMadEdit != madedit )
 		{
 			g_ActiveMadEdit = madedit;
+			
+			g_ActiveMadEdit->UpdateSyntaxDictionary();
 			OnEditSelectionChanged( g_ActiveMadEdit );
 			OnEditStatusChanged( g_ActiveMadEdit );
 			wxString title = g_ActiveMadEdit->GetFileName();
@@ -3890,6 +3894,8 @@ void MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 	if( g_ActiveMadEdit != madedit )
 	{
 		g_ActiveMadEdit = madedit;
+		
+		g_ActiveMadEdit->UpdateSyntaxDictionary();
 		OnEditSelectionChanged( g_ActiveMadEdit );
 		OnEditStatusChanged( g_ActiveMadEdit );
 	}
