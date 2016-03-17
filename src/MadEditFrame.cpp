@@ -1434,7 +1434,7 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_UPDATE_UI( menuFind, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
 	EVT_UPDATE_UI( menuFindNext, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
 	EVT_UPDATE_UI( menuFindPrevious, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
-	EVT_UPDATE_UI( menuToggleQuickFindBar, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
+	EVT_UPDATE_UI( menuShowQuickSearchBar, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
 	EVT_UPDATE_UI( menuReplace, MadEditFrame::OnUpdateUI_MenuCheckWritable )
 	EVT_UPDATE_UI( menuGoToLine, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
 	EVT_UPDATE_UI( menuGoToPosition, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
@@ -1591,7 +1591,7 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_MENU( menuFindPrevious, MadEditFrame::OnSearchFindPrevious )
 	EVT_MENU( menuQuickFindNext, MadEditFrame::OnSearchQuickFindNext )
 	EVT_MENU( menuQuickFindPrevious, MadEditFrame::OnSearchQuickFindPrevious )
-	EVT_MENU( menuToggleQuickFindBar, MadEditFrame::OnToggleSearchQuickFindBar )
+	EVT_MENU( menuShowQuickSearchBar, MadEditFrame::OnShowQuickSearchBar )
 	EVT_MENU( menuReplace, MadEditFrame::OnSearchReplace )
 	EVT_MENU( menuFindInFiles, MadEditFrame::OnSearchFindInFiles )
 	EVT_MENU( menuShowFindInFilesResults, MadEditFrame::OnSearchShowFindInFilesResults )
@@ -1855,7 +1855,7 @@ CommandData CommandTable[] =
 	{ 0,            1, menuFind,                   wxT( "menuFind" ),                   _( "&Find..." ),                                        wxT( "Ctrl-F" ),       wxITEM_NORMAL,    find_xpm_idx,     0, _( "Find a string" ), 0, &g_tbSEARCHREPLACE_ptr, _( "Find" ), false},
 	{ 0,            1, menuFindNext,               wxT( "menuFindNext" ),               _( "Find &Next" ),                                      wxT( "F3" ),           wxITEM_NORMAL,    findnext_xpm_idx, 0, _( "Find next occurrence" ), 0, &g_tbSEARCHREPLACE_ptr, _( "Find Next" ), false},
 	{ 0,            1, menuFindPrevious,           wxT( "menuFindPrevious" ),           _( "Find &Previous" ),                                  wxT( "Ctrl-F3" ),      wxITEM_NORMAL,    findprev_xpm_idx, 0, _( "Find previous occurrence" ), 0, &g_tbSEARCHREPLACE_ptr, _( "Find Previous" ), false},
-	{ 0,            1, menuToggleQuickFindBar,       wxT( "menuToggleQuickFindBar" ),       _( "&Quick Find" ),                                     wxT( "F8" ),           wxITEM_NORMAL,    -1,               0, _( "Find a string" ), 0, 0, 0, false},
+	{ 0,            1, menuShowQuickSearchBar,     wxT( "menuShowQuickSearchBar" ),     _( "&Quick Find" ),                                   wxT( "F8" ),           wxITEM_NORMAL,    -1,               0, _( "Find a string" ), 0, 0, 0, false},
 	{ 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0, 0, 0, 0, false},
 	{ 0,            1, menuReplace,                wxT( "menuReplace" ),                _( "&Replace..." ),                                     wxT( "Ctrl-H" ),       wxITEM_NORMAL,    replace_xpm_idx,  0, _( "Replace a string" ), 0, &g_tbSEARCHREPLACE_ptr, _( "Replace" ), false},
 	{ 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0, 0, 0, 0, false},
@@ -2318,6 +2318,7 @@ void MadEditFrame::CreateGUIControls( void )
 	g_ToolbarNames[tbMACRO] = _( "Macro" );
 	m_QuickSeachBar = new wxAuiToolBar( this, ID_WXTOOLBAR1 + tbQSEARCH, wxPoint( 0, 0 ), wxSize( 392, 29 ), MADTOOBAR_STYLE_NO_OVERFLOW );
 	m_QuickSeachBar->Connect( wxEVT_AUITOOLBAR_RIGHT_CLICK, wxAuiToolBarEventHandler( MadEditFrame::OnRightClickToolBar ), NULL, this );
+	m_QuickSeachBar->Connect( wxEVT_SET_FOCUS, wxFocusEventHandler( MadEditFrame::OnQuickSearchSetFocus ), NULL, this );
 	g_ToolbarNames[tbQSEARCH] = _( "Quick Search" );
 	WxToolBar[tbQSEARCH] = m_QuickSeachBar;
 	m_Notebook = new wxMadAuiNotebook( this, ID_NOTEBOOK, wxPoint( 0, 29 ), wxSize( 392, 320 ), wxWANTS_CHARS | wxAUI_NB_TOP | wxAUI_NB_TAB_SPLIT | wxAUI_NB_TAB_MOVE | wxAUI_NB_SCROLL_BUTTONS | wxAUI_NB_WINDOWLIST_BUTTON | wxAUI_NB_CLOSE_ON_ACTIVE_TAB );
@@ -8762,6 +8763,11 @@ void MadEditFrame::PurgeRecentEncodings()
 	{ m_RecentEncodings->RemoveFileFromHistory( ( size_t )i ); }
 }
 
+void MadEditFrame::OnQuickSearchSetFocus( wxFocusEvent& event )
+{
+	m_QuickSearch->SetFocus();
+}
+
 void MadEditFrame::OnRightClickToolBar( wxAuiToolBarEvent& event )
 {
 	wxContextMenuEvent ctEvt( wxEVT_AUITOOLBAR_RIGHT_CLICK, event.GetId(), event.GetClickPoint() );
@@ -8837,7 +8843,7 @@ void MadEditFrame::HideQuickFindBar()
 	{ m_ToolbarStatus[tbMAX] = false; }
 }
 
-void MadEditFrame::OnToggleSearchQuickFindBar( wxCommandEvent& event )
+void MadEditFrame::OnShowQuickSearchBar( wxCommandEvent& event )
 {
 	if( !m_AuiManager.GetPane( m_QuickSeachBar ).IsShown() )
 	{
@@ -8845,12 +8851,8 @@ void MadEditFrame::OnToggleSearchQuickFindBar( wxCommandEvent& event )
 		m_ToolbarStatus[tbQSEARCH] = true;
 		m_ToolbarStatus[tbMAX] = true;
 		m_AuiManager.Update();
-		//m_QuickSearch->SetFocus();
 	}
-	else
-	{
-		HideQuickFindBar();
-	}
+	m_QuickSeachBar->SetFocus();
 }
 
 void MadEditFrame::OnSearchQuickFind( wxCommandEvent& event )

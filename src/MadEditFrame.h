@@ -316,7 +316,7 @@ public:
 	void OnSearchQuickFind( wxCommandEvent& event );
 	void OnSearchQuickFindNext( wxCommandEvent& event );
 	void OnSearchQuickFindPrevious( wxCommandEvent& event );
-	void OnToggleSearchQuickFindBar( wxCommandEvent& event );
+	void OnShowQuickSearchBar( wxCommandEvent& event );
 
     void OnViewAlwaysOnTop( wxCommandEvent& event );
     void OnViewFullScreen( wxCommandEvent& event );
@@ -410,6 +410,7 @@ public:
 	void OnDeleteCurrResult( wxCommandEvent& event );
 	void OnCollapseCurrResult( wxCommandEvent& event );
     void OnRightClickToolBar( wxAuiToolBarEvent& event );
+    void OnQuickSearchSetFocus( wxFocusEvent& event );
 	void OnContextMenu( wxContextMenuEvent& event );
 private:
 	bool m_PageClosing; // prevent from reentry of CloseFile(), OnNotebookPageClosing()
@@ -579,7 +580,7 @@ enum   // menu id
 	menuFindNext,
 	menuFindPrevious,
 	menuFindInFiles,
-	menuToggleQuickFindBar,
+	menuShowQuickSearchBar,
 	menuQuickFindNext,
 	menuQuickFindPrevious,
 	menuShowFindInFilesResults,
