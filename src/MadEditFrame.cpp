@@ -2731,7 +2731,7 @@ void MadEditFrame::CreateGUIControls( void )
 
 	ResetAcceleratorTable();
 	/***/
-	m_RecentFiles = new MadRecentList();
+	m_RecentFiles = new MadRecentList( 20 );
 	m_RecentFiles->UseMenu( g_Menu_File_RecentFiles );
 	m_Config->SetPath( wxT( "/RecentFiles" ) );
 	m_RecentFiles->Load( *m_Config );
@@ -2904,27 +2904,26 @@ void MadEditFrame::CreateGUIControls( void )
 		for( size_t i = 1; i < count; ++i ) { m_QuickSearch->Append( g_RecentFindText->GetHistoryFile( i ) ); }
 	}
 
-
 	m_QuickSearch->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ), NULL, this );
 	m_QuickSeachBar->AddControl( m_QuickSearch );
 	m_QuickSeachBar->AddTool( menuQuickFindNext, wxT( "QuickFindNext" ), m_ImageList->GetBitmap( down_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _( "Find Next" ), _( "Find matched text next to caret" ), NULL );
 	m_QuickSeachBar->AddTool( menuQuickFindPrevious, wxT( "QuickFindPrevious" ), m_ImageList->GetBitmap( up_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _( "Find Previous" ), _( "Find matched text previous from caret" ), NULL );
-	m_CheckboxWholeWord = new wxCheckBox( m_QuickSeachBar, ID_QUICKSEARCHWHOLEWORD, _( "Whole Word" ) );
+	m_CheckboxWholeWord = new wxCheckBox( m_QuickSeachBar, ID_QUICKSEARCHWHOLEWORD, wxT( "[W]" ) );
 	m_Config->Read( wxT( "/MadEdit/QuickSearchWholeWord" ), &bb, false );
 	m_CheckboxWholeWord->SetValue( bb );
 	m_CheckboxWholeWord->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ), NULL, this );
 	m_QuickSeachBar->AddControl( m_CheckboxWholeWord );
-	m_CheckboxCaseSensitive = new wxCheckBox( m_QuickSeachBar, ID_QUICKSEARCHCASESENSITIVE, _( "Case Sensitive" ) );
+	m_CheckboxCaseSensitive = new wxCheckBox( m_QuickSeachBar, ID_QUICKSEARCHCASESENSITIVE, wxT( "Aa" ) );
 	m_Config->Read( wxT( "/MadEdit/QuickSearchCaseSensitive" ), &bb, false );
 	m_CheckboxCaseSensitive->SetValue( bb );
 	m_CheckboxCaseSensitive->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ), NULL, this );
 	m_QuickSeachBar->AddControl( m_CheckboxCaseSensitive );
-	m_CheckboxRegEx = new wxCheckBox( m_QuickSeachBar, ID_QUICKSEARCHREGEX, _( "Regular Expression" ) );
+	m_CheckboxRegEx = new wxCheckBox( m_QuickSeachBar, ID_QUICKSEARCHREGEX, wxT( "RE" ) );
 	m_Config->Read( wxT( "/MadEdit/QuickSearchRegEx" ), &bb, false );
 	m_CheckboxRegEx->SetValue( bb );
 	m_CheckboxRegEx->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ), NULL, this );
 	m_QuickSeachBar->AddControl( m_CheckboxRegEx );
-	m_CheckboxDotMatchNewline = new wxCheckBox( m_QuickSeachBar, ID_QUICKSEARCHDOTMATCHNEWLINE, _( ". Matches Newline" ) );
+	m_CheckboxDotMatchNewline = new wxCheckBox( m_QuickSeachBar, ID_QUICKSEARCHDOTMATCHNEWLINE, wxT( "?s:" ) );
 	m_Config->Read( wxT( "/MadEdit/QuickSearchDotMatchNewLine" ), &bb, false );
 	m_CheckboxDotMatchNewline->SetValue( bb );
 	m_CheckboxDotMatchNewline->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ), NULL, this );
