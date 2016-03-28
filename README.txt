@@ -117,6 +117,9 @@ Note: Not support wxWidgets 2.X anymore since 0.3.X
 Todo:
 FreeBSD packaging (with FreeBSD 10.01)
 
+Mod v0.4.2
+Fix: Recorded script(caret pos for inputting) would be wrong if user moved the caret #183
+
 Mod v0.4.1
 1.New: Enhancement on Results(Delete items, collapse items) #138
 2.New: Improve syntax highlight function for non-English language Text file #142

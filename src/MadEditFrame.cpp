@@ -363,14 +363,20 @@ inline void RecordAsMadMacro( MadEdit * edit, const wxString& script, bool input
 			}
 			else
 			{
-				g_MPythonInputBuf << script;
-
-				if( g_MPythonCaretPos == -1 )
+				bool breaked = ((g_MPythonCaretPos != -1) && ((g_MPythonCaretPos + g_MPythonInputBuf.Len()) != g_ActiveMadEdit->GetCaretPosition()));
+				if( g_MPythonCaretPos == -1 || breaked)
 				{
+					if(breaked)
+					{
+						g_MainFrame->AddMacroScript( wxString::Format( wxT( "Goto( %s )" ), ( wxLongLong( g_MPythonCaretPos ).ToString() ).c_str() ) );
+						g_MainFrame->AddMacroScript( wxT( "InsertStr(\"" ) + g_MPythonInputBuf + wxT( "\")" ), g_MPythonCaretPos, g_MPythonSelBegPos, g_MPythonSelEndPos );
+						g_MPythonInputBuf.Empty();
+					}
 					g_MPythonCaretPos = g_ActiveMadEdit->GetCaretPosition();
 					g_MPythonSelBegPos = g_ActiveMadEdit->GetSelectionBeginPos();
 					g_MPythonSelEndPos = g_ActiveMadEdit->GetSelectionEndPos();
 				}
+				g_MPythonInputBuf << script;
 			}
 		}
 	}
