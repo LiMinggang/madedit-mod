@@ -13,12 +13,12 @@
 	#include <wx/wx.h>
 #endif
 
-wxString g_MadEdit_Version( wxString( wxT( "MadEdit-Mod 0.4.1" ) )
+wxString g_MadEdit_Version( wxString( wxT( "MadEdit-Mod 0.4.2a" ) )
 #if defined(__WXMSW__)
 	#ifdef _WIN64
-		+ wxT( "win64" )
+		+ wxT( " win64" )
 	#else
-		+ wxT( "win32" )
+		+ wxT( " win32" )
 	#endif
 	#ifdef _MSC_VER
 		#if _MSC_VER == 1400
