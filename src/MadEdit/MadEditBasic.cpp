@@ -886,7 +886,7 @@ void MadEdit::SetInsertSpacesInsteadOfTab( bool value )
 
 void MadEdit::SetWordWrapMode( MadWordWrapMode mode )
 {
-	if( m_WordWrapMode != mode && !m_SingleLineMode )
+	if( m_WordWrapMode != mode/* && !m_SingleLineMode*/ )
 	{
 		m_WordWrapMode = mode;
 

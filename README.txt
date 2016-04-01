@@ -118,7 +118,9 @@ Todo:
 FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.4.2
+New: Hope MadEdit-Mod could load more open files history than 9 #179
 Fix: Recorded script(caret pos for inputting) would be wrong if user moved the caret #183
+Fix: The caret can't lock the y position when use word wrap function #178
 
 Mod v0.4.1
 1.New: Enhancement on Results(Delete items, collapse items) #138
