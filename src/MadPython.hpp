@@ -31,7 +31,7 @@
 	MadEdit *g_ActiveMadEdit = NULL;
 	wxFrame g_DummyWin;
 #endif
-extern void DisplayFindAllResult( vector<wxFileOffset> &begpos, vector<wxFileOffset> &endpos, MadEdit *madedit, bool expandresults = true, OnProgressUpdatePtr updater = NULL );
+extern void DisplayFindAllResult( wxTreeItemId &myroot, vector<wxFileOffset> &begpos, vector<wxFileOffset> &endpos, MadEdit *madedit, bool expandresults = true, OnProgressUpdatePtr updater = NULL );
 
 // Ugly bigger switch than bigger map
 bool FromCmdToString( wxString &cmdStr, int madCmd ) {
@@ -1447,7 +1447,9 @@ namespace mad_python {
 					static wxString text( _( "Search Results" ) );
 					int pid = g_MainFrame->m_InfoNotebook->GetPageIndex( g_MainFrame->m_FindInFilesResults );
 					g_MainFrame->m_InfoNotebook->SetPageText( pid, text );
-					DisplayFindAllResult( begpos, endpos, madedit );
+					wxString strtobesearch = _("Search \"") + expr + wxT("\" ") + wxString::Format( _("(%s hits in 1 file)"), ( wxLongLong( ok ).ToString().c_str() ) );
+					wxTreeItemId myroot = g_MainFrame->NewSearchSession(strtobesearch);
+					DisplayFindAllResult( myroot, begpos, endpos, madedit );
 				}
 			}
 
@@ -1468,7 +1470,10 @@ namespace mad_python {
 					static wxString text( _( "Search Results" ) );
 					int pid = g_MainFrame->m_InfoNotebook->GetPageIndex( g_MainFrame->m_FindInFilesResults );
 					g_MainFrame->m_InfoNotebook->SetPageText( pid, text );
-					DisplayFindAllResult( begpos, endpos, madedit );
+					
+					wxString strtobesearch = _("Search \"") + expr + wxT("\" ") + wxString::Format( _("(%s hits in 1 file)"), ( wxLongLong( ok ).ToString().c_str() ) );
+					wxTreeItemId myroot = g_MainFrame->NewSearchSession(strtobesearch);
+					DisplayFindAllResult( myroot, begpos, endpos, madedit );
 				}
 			}
 

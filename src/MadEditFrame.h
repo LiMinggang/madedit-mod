@@ -459,7 +459,8 @@ protected:
 
 public:
 	void ResetFindInFilesResults();
-	void AddItemToFindInFilesResults( const wxString &distext, const wxString &acttext, size_t index, const wxString &filename, int pageid, const wxFileOffset &begpos, wxFileOffset &endpos );
+	wxTreeItemId & NewSearchSession( const wxString &sessionLabel );
+	void AddItemToFindInFilesResults( wxTreeItemId & myroot, const wxString &distext, const wxString &acttext, size_t index, const wxString &filename, int pageid, const wxFileOffset &begpos, wxFileOffset &endpos );
 
 	void PurgeRecentFiles();
 	void PurgeRecentFonts();

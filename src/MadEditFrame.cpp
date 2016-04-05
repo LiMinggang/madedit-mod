@@ -3657,21 +3657,28 @@ void MadEditFrame::ResetFindInFilesResults()
 	m_FindInFilesResults->AddRoot( wxT( "Root" ) );
 }
 
-void MadEditFrame::AddItemToFindInFilesResults( const wxString &distext, const wxString &acttext, size_t index, const wxString &filename, int pageid, const wxFileOffset &begpos, wxFileOffset &endpos )
+wxTreeItemId & MadEditFrame::NewSearchSession( const wxString &sessionLabel )
+{
+	static wxTreeItemId myroot;
+	myroot = m_FindInFilesResults->AppendItem( m_FindInFilesResults->GetRootItem( ), sessionLabel );
+	return myroot;
+}
+
+void MadEditFrame::AddItemToFindInFilesResults( wxTreeItemId & myroot, const wxString &distext, const wxString &acttext, size_t index, const wxString &filename, int pageid, const wxFileOffset &begpos, wxFileOffset &endpos )
 {
 	static wxTreeItemId fileid;
 
 	if( index == 0 )
 	{
-		if( m_FindInFilesResults->GetChildrenCount( m_FindInFilesResults->GetRootItem(), false ) == 0 )
+		if( m_FindInFilesResults->GetChildrenCount( myroot, false ) == 0 )
 		{
-			fileid = m_FindInFilesResults->AppendItem( m_FindInFilesResults->GetRootItem(), filename );
+			fileid = m_FindInFilesResults->AppendItem( myroot, filename );
 		}
 		else
 		{
 			// sort the results
 			wxTreeItemIdValue cookie;
-			wxTreeItemId id = m_FindInFilesResults->GetFirstChild( m_FindInFilesResults->GetRootItem(), cookie );
+			wxTreeItemId id = m_FindInFilesResults->GetFirstChild( myroot, cookie );
 			size_t before = 0;
 
 			while( id.IsOk() )
@@ -3688,17 +3695,17 @@ void MadEditFrame::AddItemToFindInFilesResults( const wxString &distext, const w
 					break;
 				}
 
-				id = m_FindInFilesResults->GetNextChild( m_FindInFilesResults->GetRootItem(), cookie );
+				id = m_FindInFilesResults->GetNextChild( myroot, cookie );
 				++before;
 			}
 
 			if( !id.IsOk() ) // append item
 			{
-				fileid = m_FindInFilesResults->AppendItem( m_FindInFilesResults->GetRootItem(), filename );
+				fileid = m_FindInFilesResults->AppendItem( myroot, filename );
 			}
 			else // insert item
 			{
-				fileid = m_FindInFilesResults->InsertItem( m_FindInFilesResults->GetRootItem(), before, filename );
+				fileid = m_FindInFilesResults->InsertItem( myroot, before, filename );
 			}
 		}
 	}
@@ -8686,19 +8693,26 @@ void MadEditFrame::OnCopyAllResults( wxCommandEvent& event )
 			wxTreeItemIdValue cookie;
 			wxTreeItemId id = m_FindInFilesResults->GetFirstChild( m_FindInFilesResults->GetRootItem(), cookie );
 
-			while( id.IsOk() )// File
+			while( id.IsOk() )// Keywords
 			{
 				wxTreeItemIdValue tmpCookie;
 				wxTreeItemId tmpId = m_FindInFilesResults->GetFirstChild( id, tmpCookie );
 
-				while( tmpId.IsOk() )// Result
+				while( tmpId.IsOk() )// File
 				{
-					result = m_FindInFilesResults->GetItemText( tmpId );
-					int pos = result.Find(wxT(": "));
-					if(pos != wxNOT_FOUND)
+					wxTreeItemIdValue fileCookie;
+					wxTreeItemId itemId = m_FindInFilesResults->GetFirstChild( id, fileCookie );
+
+					while( itemId.IsOk() )// Result
 					{
-						CaretPosData *cpdata = ( CaretPosData* )m_FindInFilesResults->GetItemData( tmpId );
-						results += cpdata->matchstring;
+						result = m_FindInFilesResults->GetItemText( itemId );
+						int pos = result.Find(wxT(": "));
+						if(pos != wxNOT_FOUND)
+						{
+							CaretPosData *cpdata = ( CaretPosData* )m_FindInFilesResults->GetItemData( itemId );
+							results += cpdata->matchstring;
+						}
+						itemId = m_FindInFilesResults->GetNextChild( tmpId, fileCookie );
 					}
 					tmpId = m_FindInFilesResults->GetNextChild( id, tmpCookie );
 				}

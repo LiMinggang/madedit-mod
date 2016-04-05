@@ -1359,7 +1359,7 @@ void MadSearchReplaceDialog::WxButtonCountClick( wxCommandEvent& event )
 	}
 }
 
-void DisplayFindAllResult( vector<wxFileOffset> &begpos, vector<wxFileOffset> &endpos, MadEdit *madedit, bool expandresults = true, OnProgressUpdatePtr updater = NULL )
+void DisplayFindAllResult( wxTreeItemId &myroot, vector<wxFileOffset> &begpos, vector<wxFileOffset> &endpos, MadEdit *madedit, bool expandresults = true, OnProgressUpdatePtr updater = NULL )
 {
 	int ResultCount = 0;
 #if USE_GENERIC_TREECTRL
@@ -1468,7 +1468,7 @@ void DisplayFindAllResult( vector<wxFileOffset> &begpos, vector<wxFileOffset> &e
 				{
 					linetext += lend;
 				}
-				g_MainFrame->AddItemToFindInFilesResults( fmt, linetext, idx, filename, pid, begpos[idx], endpos[idx] );
+				g_MainFrame->AddItemToFindInFilesResults( myroot, fmt, linetext, idx, filename, pid, begpos[idx], endpos[idx] );
 				++ResultCount;
 
 				if( updater != NULL && ( count >= 2000 ) )
@@ -1546,6 +1546,7 @@ void MadSearchReplaceDialog::SearchAll( MadEdit * madedit, bool needRec/*=true*/
 
 	if( expr.Len() > 0 )
 	{
+		wxString strtobesearch = _("Search \"") + expr + wxT("\" ");
 		begpos.reserve( 128 * 1024 );
 		endpos.reserve( 128 * 1024 );
 		m_RecentFindText->AddFileToHistory( expr );
@@ -1622,6 +1623,14 @@ void MadSearchReplaceDialog::SearchAll( MadEdit * madedit, bool needRec/*=true*/
 
 		Show( false );
 
+		wxTreeItemId myroot; 
+
+		if( !WxCheckBoxBookmarkOnly->IsChecked() )
+		{
+			strtobesearch += wxString::Format( _("(%s hits in 1 file)"), ( wxLongLong( ok ).ToString().c_str() ) );
+			myroot = g_MainFrame->NewSearchSession(strtobesearch);
+		}
+
 		if( ok > 2000 )
 		{
 			wxString msg = _( "Found %s matched texts..." );
@@ -1640,7 +1649,7 @@ void MadSearchReplaceDialog::SearchAll( MadEdit * madedit, bool needRec/*=true*/
 				static wxString text( _( "Search Results" ) );
 				int pid = g_MainFrame->m_InfoNotebook->GetPageIndex( g_MainFrame->m_FindInFilesResults );
 				g_MainFrame->m_InfoNotebook->SetPageText( pid, text );
-				DisplayFindAllResult( begpos, endpos, madedit, true, &OnSearchProgressUpdate );
+				DisplayFindAllResult( myroot, begpos, endpos, madedit, true, &OnSearchProgressUpdate );
 			}
 
 			dialog.Update( ok );
@@ -1653,7 +1662,7 @@ void MadSearchReplaceDialog::SearchAll( MadEdit * madedit, bool needRec/*=true*/
 				static wxString text( _( "Search Results" ) );
 				int pid = g_MainFrame->m_InfoNotebook->GetPageIndex( g_MainFrame->m_FindInFilesResults );
 				g_MainFrame->m_InfoNotebook->SetPageText( pid, text );
-				DisplayFindAllResult( begpos, endpos, madedit, true );
+				DisplayFindAllResult( myroot, begpos, endpos, madedit, true );
 			}
 		}
 

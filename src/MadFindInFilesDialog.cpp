@@ -44,7 +44,7 @@
 MadFindInFilesDialog *g_FindInFilesDialog = NULL;
 extern wxStatusBar *g_StatusBar;
 extern MadEdit *g_ActiveMadEdit;
-extern void DisplayFindAllResult( vector<wxFileOffset> &begpos, vector<wxFileOffset> &endpos, MadEdit *madedit, bool expandresults = true, OnProgressUpdatePtr updater = NULL );
+extern void DisplayFindAllResult( wxTreeItemId &myroot, vector<wxFileOffset> &begpos, vector<wxFileOffset> &endpos, MadEdit *madedit, bool expandresults = true, OnProgressUpdatePtr updater = NULL );
 extern int MadMessageBox( const wxString& message,
                           const wxString& caption = wxMessageBoxCaptionStr,
                           long style = wxOK | wxCENTRE,
@@ -737,6 +737,11 @@ void MadFindInFilesDialog::FindReplaceInFiles( bool bReplace )
 		begpos.reserve( 128 * 1024 );
 		endpos.reserve( 128 * 1024 );
 
+		wxString tobes;
+		m_FindText->GetText( tobes );
+		wxString strtobesearch = _("Search \"") + tobes + wxT("\" ") + wxString::Format( _("(in %s files)"), ( wxLongLong( totalfiles ).ToString().c_str() ) );
+		wxTreeItemId myroot = g_MainFrame->NewSearchSession(strtobesearch);
+
 		for( size_t i = 0; i < totalfiles && cont; ++i )
 		{
 			MadEdit *madedit = NULL;
@@ -865,13 +870,13 @@ void MadFindInFilesDialog::FindReplaceInFiles( bool bReplace )
 				                            wxPD_APP_MODAL );
 				g_SearchProgressDialog = &tmpdialog;
 				dialog.Show( false );
-				DisplayFindAllResult( begpos, endpos, madedit, false, &OnSearchProgressUpdate );
+				DisplayFindAllResult( myroot, begpos, endpos, madedit, false, &OnSearchProgressUpdate );
 				g_SearchProgressDialog->Update( ok );
 				g_SearchProgressDialog = NULL;
 				dialog.Show( true );
 			}
 			else
-			{ DisplayFindAllResult( begpos, endpos, madedit, false ); }
+			{ DisplayFindAllResult( myroot, begpos, endpos, madedit, false ); }
 		}
 
 		if( tempedit ) { delete tempedit; }
