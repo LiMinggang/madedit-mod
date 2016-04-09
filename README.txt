@@ -122,6 +122,7 @@ New: Hope MadEdit-Mod could load more open files history than 9 #179
 New: Redesign of Search Results view----Hope to add search key words or expression on the result tree title on the left of the file path #137
 Fix: Recorded script(caret pos for inputting) would be wrong if user moved the caret #183
 Fix: The caret can't lock the y position when use word wrap function #178
+Fix: Change Mpython API WholeLineSelection to SelectWholeLine
 
 Mod v0.4.1
 1.New: Enhancement on Results(Delete items, collapse items) #138

@@ -1037,9 +1037,9 @@ namespace mad_python {
 			{ g_ActiveMadEdit->SetSelection( ( wxFileOffset )beginpos, ( wxFileOffset )endpos, bCaretAtBeginPos ); }
 		}
 
-		void WholeLineSelection() {
+		void SelectWholeLine() {
 			if( g_ActiveMadEdit )
-			{ g_ActiveMadEdit->WholeLineSelection(); }
+			{ g_ActiveMadEdit->SelectWholeLine(); }
 		}
 
 		int GetLineCount() {
@@ -1936,7 +1936,7 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.def( "XMLFormat", &PyMadEdit::XMLFormat, "" )
 	.def( "Markdown2Html", &PyMadEdit::Markdown2Html, "" )
 	.def( "Html2PlainText", &PyMadEdit::Html2PlainText, "" )
-	.def( "WholeLineSelection", &PyMadEdit::WholeLineSelection, "" )
+	.def( "SelectWholeLine", &PyMadEdit::SelectWholeLine, "" )
 	.def( "GetIndentCountByPos", &PyMadEdit::GetIndentCountByPos, "" )
 	.def( "FindTextNext", &PyMadEdit::FindTextNext, FindTextNext_member_overloads( args( "text", "bRegex", "bCaseSensitive", "bWholeWord", "bDotMatchNewline", "rangeFrom", "rangeTo" ), "Doc string" )[return_value_policy<return_by_value>()] )
 	.def( "FindTextPrevious", &PyMadEdit::FindTextPrevious, FindTextPrevious_member_overloads( args( "text", "bRegex", "bCaseSensitive", "bWholeWord", "bDotMatchNewline", "rangeFrom", "rangeTo" ), "Doc string" )[return_value_policy<return_by_value>()] )

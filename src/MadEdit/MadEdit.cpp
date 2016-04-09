@@ -1929,7 +1929,7 @@ int MadEdit::GetIndentCountByPos( wxFileOffset endpos )
 	return count;
 }
 
-void MadEdit::WholeLineSelection()
+void MadEdit::SelectWholeLine()
 {
 	SetSelection( m_SelectionBegin->pos - m_SelectionBegin->linepos, m_SelectionEnd->pos - m_SelectionEnd->linepos + m_SelectionEnd->iter->m_Size );
 }

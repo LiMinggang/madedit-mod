@@ -279,7 +279,7 @@ void XMLFormat()
 void Markdown2Html()
 void Html2PlainText()
 void SetColumnSelection(int startlineid, int startxpos, int hlines, int wlines)
-void WholeLineSelection()
+void SelectWholeLine()
 int GetIndentCountByPos( long endpos )
 
 MadEditCommand

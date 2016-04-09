@@ -871,7 +871,7 @@ public: // basic functions
 	int GetLineByPos( const wxFileOffset &pos );
 
 	int GetIndentCountByPos( wxFileOffset pos );
-	void WholeLineSelection();
+	void SelectWholeLine();
 	void ReplaceSelection( wxString &ws );
 	void GetSelHexString( wxString &ws, bool withSpace );
 

@@ -8384,7 +8384,7 @@ void MadEditFrame::OnToolsAstyleFormat( wxCommandEvent& event )
 		onlySelected = true;
 		// Ajust to select the whole line
 		leftBracesNumber = g_ActiveMadEdit->GetIndentCountByPos( g_ActiveMadEdit->GetSelectionBeginPos() );
-		g_ActiveMadEdit->WholeLineSelection();
+		g_ActiveMadEdit->SelectWholeLine();
 		g_ActiveMadEdit->GetSelText( seltext );
 
 		for( int i = 0; i < leftBracesNumber; ++i )
