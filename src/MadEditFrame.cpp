@@ -445,7 +445,6 @@ int MadMessageBox( const wxString& message, const wxString& caption, long style,
 class FileCaretPosManager
 {
 	int max_count;
-
 	struct FilePosData
 	{
 		wxString name;
@@ -454,9 +453,12 @@ class FileCaretPosManager
 		wxString encoding;
 		wxString fontname;
 		int fontsize;
+		int lspercent;
+		int wrapmode; /*wwmNoWrap, wwmWrapByWindow, wwmWrapByColumn*/
+		int editmode; /*emTextMode, emColumnMode, emHexMode*/
 
-		FilePosData( const wxString &n, const wxLongLong_t &p, unsigned long h, const wxString &e, const wxString &fn, int fs )
-			: name( n ), pos( p ), hash( h ), encoding( e ), fontname( fn ), fontsize( fs )
+		FilePosData( const wxString &n, const wxLongLong_t &p, unsigned long h, const wxString &e, const wxString &fn, int fs, int lsp, int wm, int em )
+			: name( n ), pos( p ), hash( h ), encoding( e ), fontname( fn ), fontsize( fs ), lspercent(lsp), wrapmode(wm), editmode(em)
 		{}
 		FilePosData()
 			: pos( 0 ), hash( 0 ), fontsize( 0 )
@@ -467,7 +469,7 @@ class FileCaretPosManager
 public:
 	FileCaretPosManager() : max_count( 40 ) {}
 
-	void Add( const wxString &name, const wxFileOffset &pos, const wxString &encoding, const wxString &fontname, int fontsize ) {
+	void Add( const wxString &name, const wxFileOffset &pos, const wxString &encoding, const wxString &fontname, int fontsize, int lspercent, int wrapmode, int editmode ) {
 #ifdef __WXMSW__
 		wxString name0( name.Upper() );
 #else
@@ -476,7 +478,7 @@ public:
 		unsigned long hash = wxStringHash::wxCharStringHash( name0 );
 
 		if( files.empty() ) {
-			files.push_back( FilePosData( name0, pos, hash, encoding, fontname, fontsize ) );
+			files.push_back( FilePosData( name0, pos, hash, encoding, fontname, fontsize, lspercent, wrapmode, editmode ) );
 		}
 		else {
 			std::list<FilePosData>::iterator it = files.begin();
@@ -490,13 +492,16 @@ public:
 			while( ++it != itend );
 
 			if( it == itend ) {
-				files.push_front( FilePosData( name0, pos, hash, encoding, fontname, fontsize ) );
+				files.push_front( FilePosData( name0, pos, hash, encoding, fontname, fontsize, lspercent, wrapmode, editmode ) );
 			}
 			else {
 				it->pos = pos;
 				it->encoding = encoding;
 				it->fontname = fontname;
 				it->fontsize = fontsize;
+				it->lspercent = lspercent;
+				it->wrapmode = wrapmode;
+				it->editmode = editmode; 
 				files.push_front( *it );
 				files.erase( it );
 			}
@@ -513,10 +518,14 @@ public:
 
 		if( !name.IsEmpty() ) {
 			wxString fontname;
+			wxFileOffset pos = madedit->GetCaretPosition();
+			int lspercent = (int)madedit->GetLineSpacing();
+			int wrapmode = madedit->GetWordWrapMode(); 
+			int editmode = madedit->GetEditMode(); /*emTextMode, emColumnMode, emHexMode*/
 			int fontsize;
 			madedit->GetTextFont( fontname, fontsize );
-			wxFileOffset pos = madedit->GetCaretPosition();
-			Add( name, pos, madedit->GetEncodingName(), fontname, fontsize );
+
+			Add( name, pos, madedit->GetEncodingName(), fontname, fontsize, lspercent, wrapmode, editmode );
 		}
 	}
 	void Save( wxConfigBase *cfg ) {
@@ -535,6 +544,12 @@ public:
 			text += it->fontname;
 			text += wxT( "|" );
 			text += wxLongLong( it->fontsize ).ToString();
+			text += wxT( "|" );
+			text += wxLongLong( it->lspercent ).ToString();
+			text += wxT( "|" );
+			text += wxLongLong( it->wrapmode ).ToString();
+			text += wxT( "|" );
+			text += wxLongLong( it->editmode ).ToString();
 			cfg->Write( entry + ( wxString() << ( idx + 1 ) ), text );
 			++idx;
 			++it;
@@ -551,8 +566,11 @@ public:
 
 			if( p != wxNOT_FOUND ) {
 				fpdata.pos = 0;
-				fpdata.fontsize = 0;
+				fpdata.fontsize = 8;
 				fpdata.encoding.Empty();
+				fpdata.lspercent = 100;
+				fpdata.wrapmode = wwmNoWrap; 
+				fpdata.editmode = -1;
 				wxInt64 i64;
 
 				if( StrToInt64( text.Left( p ), i64 ) ) {
@@ -573,9 +591,43 @@ public:
 							if( p != wxNOT_FOUND ) {
 								fpdata.fontname = text.Left( p );
 								text = text.Right( text.Len() - ( p + 1 ) );
+								p = text.Find(wxT("|"));
 
-								if( StrToInt64( text, i64 ) ) {
+								if( StrToInt64( text.Left( p ), i64 ) ) {
+									if(i64 < 0) i64 = 8;
+									else if (i64 > 72) i64 = 72;
 									fpdata.fontsize = i64;
+								}
+
+								text = text.Right( text.Len() - ( p + 1 ) );
+								p = text.Find( wxT( "|" ) );
+
+								if( p != wxNOT_FOUND ) {
+									if( StrToInt64( text.Left( p ), i64 ) ) {
+										if(i64 < 100) i64 = 100;
+										else if (i64 > 500) i64 = 500;
+										i64 = (i64/10)*10;
+										fpdata.lspercent = i64;
+									}
+									text = text.Right( text.Len() - ( p + 1 ) );
+									p = text.Find( wxT( "|" ) );
+
+									if( p != wxNOT_FOUND ) {
+										if( StrToInt64( text.Left( p ), i64 ) ) {
+											if(i64 < wwmNoWrap) i64 = wwmNoWrap;
+											else if (i64 > wwmWrapByColumn) i64 = wwmWrapByColumn;
+											fpdata.wrapmode = i64;
+										}
+										text = text.Right( text.Len() - ( p + 1 ) );
+
+										if( p != wxNOT_FOUND ) {
+											if( StrToInt64( text, i64 ) ) {
+												if(i64 < emTextMode) i64 = emTextMode;
+												else if (i64 > emHexMode) i64 = emHexMode;
+												fpdata.wrapmode = i64;
+											}
+										}
+									}
 								}
 							}
 							else {
@@ -598,7 +650,7 @@ public:
 			++idx;
 		}
 	}
-	wxFileOffset GetRestoreData( const wxString &name, wxString &encoding, wxString &fontname, int &fontsize ) {
+	wxFileOffset GetRestoreData( const wxString &name, wxString &encoding, wxString &fontname, int &fontsize, int& lspercent, int& wrapmode, int& editmode ) {
 #ifdef __WXMSW__
 		wxString name0( name.Upper() );
 #else
@@ -618,6 +670,9 @@ public:
 					encoding = it->encoding;
 					fontname = it->fontname;
 					fontsize = it->fontsize;
+					lspercent = it->lspercent;
+					wrapmode  = it->wrapmode;
+					editmode  = it->editmode;
 					break;
 				}
 			}
@@ -3874,13 +3929,21 @@ void MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 	{
 		wxString enc, fn;
 		wxFileOffset pos;
-		int fs;
-		pos = g_FileCaretPosManager.GetRestoreData( filename, enc, fn, fs );
+		int fs, lsp, wm, em;
+		pos = g_FileCaretPosManager.GetRestoreData( filename, enc, fn, fs, lsp, wm, em );
 
+		if(em >= emTextMode )
+			madedit->SetEditMode((MadEditMode)em);
 		if( !fn.IsEmpty() && fs > 0 )
 		{
-			madedit->SetTextFont( fn, fs, false );
+			if(madedit->GetEditMode() == emHexMode)
+				madedit->SetHexFont( fn, fs, false );
+			else
+				madedit->SetTextFont( fn, fs, false );
 		}
+
+		madedit->SetLineSpacing(lsp);
+		madedit->SetWordWrapMode((MadWordWrapMode)wm);
 
 		if( !madedit->LoadFromFile( filename, enc ) && mustExist )
 		{
