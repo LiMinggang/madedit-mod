@@ -7295,6 +7295,8 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		m_Config->Write( wxT( "AutoFillColumnPaste" ), afcp );
 		afcp = g_OptionsDialog->WxCheckBoxLockCaretYPos->GetValue();
 		m_Config->Write( wxT( "LockCaretYPos" ), afcp );
+		afcp = g_OptionsDialog->WxCheckBoxFixWidthMode->GetValue();
+		m_Config->Write( wxT( "FixedWidthMode" ), afcp );
 		extern bool g_DoNotSaveSettings;
 		g_DoNotSaveSettings = g_OptionsDialog->WxCheckBoxDoNotSaveSettings->GetValue();
 		m_Config->Write( wxT( "ReloadFiles" ), g_OptionsDialog->WxCheckBoxReloadFiles->GetValue() );

@@ -296,6 +296,7 @@ public:
 		wxCheckBox *WxCheckBoxDoNotSaveSettings;
 		wxCheckBox *WxCheckBoxRestoreCaretPos;
 		wxCheckBox *WxCheckBoxReloadFiles;
+		wxCheckBox* WxCheckBoxFixWidthMode;
 		wxBoxSizer *WxBoxSizer7;
 		wxStaticText *WxStaticText13;
 		wxComboBox *WxComboBoxEncoding;
@@ -328,6 +329,7 @@ public:
     //Try copy pasting the below block in your old Form header Files.
 	enum {
 ////GUI Enum Control ID Start
+            ID_WXCHECKBOXFIXWIDTHMODE = 1389,
 			ID_WXCHECKBOXSHOWQSEARCHBAR = 1388,
 			ID_WXEDITXMLINDENTSIZE = 1387,
 			ID_WXSTATICTEXT29 = 1386,
