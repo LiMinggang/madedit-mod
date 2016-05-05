@@ -3932,7 +3932,7 @@ void MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 		int fs, lsp, wm, em;
 		pos = g_FileCaretPosManager.GetRestoreData( filename, enc, fn, fs, lsp, wm, em );
 
-		if(em >= emTextMode )
+		if(!(em < emTextMode | em > emHexMode))
 			madedit->SetEditMode((MadEditMode)em);
 		if( !fn.IsEmpty() && fs > 0 )
 		{
