@@ -3,7 +3,7 @@
 	<object class="wxDialog" name="MadOptionsDialog">
 		<title>Options</title>
 		<centered>1</centered>
-		<size>553,438</size>
+		<size>534,469</size>
 		<id_arg>0</id_arg>
 		<style>wxCAPTION|wxSYSTEM_MENU|wxRESIZE_BORDER|wxCLOSE_BOX|wxDIALOG_NO_PARENT|wxMAXIMIZE_BOX</style>
 		<handler function="MadOptionsDialogClose" entry="EVT_CLOSE" />
@@ -16,7 +16,7 @@
 							<orient>wxVERTICAL</orient>
 							<object class="sizeritem">
 								<object class="wxAuiNotebook" name="ID_AUINOTEBOOK1" variable="AuiNotebook1" member="yes">
-									<size>-1,-1</size>
+									<size>450,275</size>
 									<object class="AuiNotebookPage">
 										<object class="wxPanel" name="ID_PANEL1" variable="Panel1" member="yes">
 											<style>0</style>
@@ -389,6 +389,13 @@
 														<object class="sizeritem">
 															<object class="wxCheckBox" name="ID_WXCHECKBOXLOCKCARETYPOS" variable="WxCheckBoxLockCaretYPos" member="yes">
 																<label>Lock caret line Y position</label>
+															</object>
+															<flag>wxALL|wxEXPAND</flag>
+															<border>2</border>
+														</object>
+														<object class="sizeritem">
+															<object class="wxCheckBox" name="ID_CHECKBOXFIXWIDTHMODE" variable="WxCheckBoxFixWidthMode" member="yes">
+																<label>Fix Width Mode</label>
 															</object>
 															<flag>wxALL|wxEXPAND</flag>
 															<border>2</border>
