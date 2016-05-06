@@ -594,8 +594,7 @@ public:
 								p = text.Find(wxT("|"));
 
 								if( StrToInt64( text.Left( p ), i64 ) ) {
-									if(i64 < 0) i64 = 8;
-									else if (i64 > 72) i64 = 72;
+									if((i64 < 0) || (i64 > 72)) i64 = 10;
 									fpdata.fontsize = i64;
 								}
 
@@ -604,8 +603,7 @@ public:
 
 								if( p != wxNOT_FOUND ) {
 									if( StrToInt64( text.Left( p ), i64 ) ) {
-										if(i64 < 100) i64 = 100;
-										else if (i64 > 500) i64 = 500;
+										if((i64 < 100) || (i64 > 500)) i64 = 100;
 										i64 = (i64/10)*10;
 										fpdata.lspercent = i64;
 									}
