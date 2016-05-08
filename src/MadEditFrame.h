@@ -666,7 +666,6 @@ enum   // menu id
 	menuTextMode,
 	menuColumnMode,
 	menuHexMode,
-    menuLockCaretYPos,
 	menuSpellChecker,
 	menuSpellIgnore,
 	menuSpellAdd2Dict,
@@ -696,7 +695,7 @@ enum   // menu id
 	menuMadScriptList,
 	menuEditMacroFile,
 	menuMadScrip1,
-	menuMadScrip1000 = menuMadScrip1 + 999, //1000 scripts, enough?
+	menuMadScrip1000 = menuMadScrip1 + 199, //200 scripts, enough?
 	menuPlugins,
 	menuByteOrderMark,
 	menuToggleBOM,
@@ -738,6 +737,8 @@ enum   // menu id
 	menuResetResult,
 	menuDeleteCurResult,
     menuCollapseCurResult,
+
+	menuLockCaretYPos,
 };
 
 enum MadPreviewType
