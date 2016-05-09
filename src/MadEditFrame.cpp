@@ -612,18 +612,14 @@ public:
 
 									if( p != wxNOT_FOUND ) {
 										if( StrToInt64( text.Left( p ), i64 ) ) {
-											if(i64 < wwmNoWrap) i64 = wwmNoWrap;
-											else if (i64 > wwmWrapByColumn) i64 = wwmWrapByColumn;
+											if((i64 < wwmNoWrap) || (i64 > wwmWrapByColumn)) i64 = wwmNoWrap;
 											fpdata.wrapmode = i64;
 										}
 										text = text.Right( text.Len() - ( p + 1 ) );
 
-										if( p != wxNOT_FOUND ) {
-											if( StrToInt64( text, i64 ) ) {
-												if(i64 < emTextMode) i64 = emTextMode;
-												else if (i64 > emHexMode) i64 = emHexMode;
-												fpdata.wrapmode = i64;
-											}
+										if( StrToInt64( text, i64 ) ) {
+											if((i64 < emTextMode) || (i64 > emHexMode)) i64 = emTextMode;
+											fpdata.wrapmode = i64;
 										}
 									}
 								}
@@ -657,6 +653,9 @@ public:
 		unsigned long hash = wxStringHash::wxCharStringHash( name0 );
 		wxFileOffset pos = 0;
 		fontsize = 0;
+		lspercent = 100;
+		wrapmode = wwmNoWrap; 
+		editmode = -1;
 
 		if( !files.empty() ) {
 			std::list<FilePosData>::iterator it = files.begin();
@@ -3940,8 +3939,10 @@ void MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 				madedit->SetTextFont( fn, fs, false );
 		}
 
-		madedit->SetLineSpacing(lsp);
-		madedit->SetWordWrapMode((MadWordWrapMode)wm);
+		if(lsp != 100)
+			madedit->SetLineSpacing(lsp);
+		if(wm != emTextMode)
+			madedit->SetWordWrapMode((MadWordWrapMode)wm);
 
 		if( !madedit->LoadFromFile( filename, enc ) && mustExist )
 		{
