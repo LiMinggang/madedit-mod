@@ -475,7 +475,7 @@ public:
 #else
 		const wxString &name0 = name;
 #endif
-		unsigned long hash = wxStringHash::wxCharStringHash( name0 );
+		unsigned long hash = wxStringHash::stringHash(( wchar_t * )name0.wx_str());
 
 		if( files.empty() ) {
 			files.push_back( FilePosData( name0, pos, hash, encoding, fontname, fontsize, lspercent, wrapmode, editmode ) );
@@ -636,7 +636,7 @@ public:
 						fpdata.name = text;
 					}
 
-					fpdata.hash = wxStringHash::wxCharStringHash( fpdata.name );
+					fpdata.hash = wxStringHash::stringHash( (wchar_t*)(fpdata.name.wx_str()) );
 					files.push_back( fpdata );
 				}
 			}
@@ -650,7 +650,7 @@ public:
 #else
 		const wxString &name0 = name;
 #endif
-		unsigned long hash = wxStringHash::wxCharStringHash( name0 );
+		unsigned long hash = wxStringHash::stringHash( (wchar_t*)(name0.wx_str()));
 		wxFileOffset pos = 0;
 		fontsize = 0;
 		lspercent = 100;
@@ -3929,7 +3929,7 @@ void MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 		int fs, lsp, wm, em;
 		pos = g_FileCaretPosManager.GetRestoreData( filename, enc, fn, fs, lsp, wm, em );
 
-		if(!(em < emTextMode | em > emHexMode))
+		if(!(em < emTextMode || em > emHexMode))
 			madedit->SetEditMode((MadEditMode)em);
 		if( !fn.IsEmpty() && fs > 0 )
 		{

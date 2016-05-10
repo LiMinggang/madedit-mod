@@ -11,6 +11,7 @@
 #include "formattersettings.h"
 #include "astylepredefinedstyles.h"
 //#include <configmanager.h>
+#include <wx/wx.h>
 #include <wx/confbase.h>
 
 FormatterSettings::FormatterSettings()

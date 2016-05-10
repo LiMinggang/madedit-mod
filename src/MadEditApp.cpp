@@ -128,7 +128,7 @@ public:
 		langinfo = wxLocale::FindLanguageInfo( dirName.AfterLast( wxFileName::GetPathSeparator() ) );
 
 		if( langinfo != NULL ) {
-			wxLogTrace( wxTraceMask(), _( "SEARCHING FOR %s" ),
+			wxLogTrace( _("MadTranslationHelper"), _( "SEARCHING FOR %s" ),
 						wxString( dirName + wxFileName::GetPathSeparator() +
 								  m_TransName + wxT( ".mo" ) ).GetData() );
 
