@@ -37,7 +37,7 @@ sed -i 's/^dist_doc_DATA/#dist_doc_DATA/' \
 
 %build
 sh ./autogen.sh
-%configure --with-boost=${HOME}/boost_1_60_0 --with-wxdir=${HOME}/wxWidgets-3.0.2
+%configure --with-boost=${HOME}/boost_1_60_0 --with-wxdir=${HOME}/wxWidgets-3.1.0
 make
 strip -s ./madedit
 
