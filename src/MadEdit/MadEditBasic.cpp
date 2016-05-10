@@ -886,11 +886,11 @@ void MadEdit::SetInsertSpacesInsteadOfTab( bool value )
 
 void MadEdit::SetWordWrapMode( MadWordWrapMode mode )
 {
-	if( m_WordWrapMode != mode/* && !m_SingleLineMode*/ )
+	if( m_WordWrapMode != mode )
 	{
 		m_WordWrapMode = mode;
 
-		if( m_StorePropertiesToGlobalConfig )
+		if( m_StorePropertiesToGlobalConfig && !m_SingleLineMode )
 		{
 			wxString oldpath = m_Config->GetPath();
 			m_Config->Write( wxT( "/MadEdit/WordWrapMode" ), ( long )mode );

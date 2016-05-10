@@ -74,6 +74,7 @@ const long MadSearchReplaceDialog::ID_WXCHECKBOXPURGEBOOKMARK = wxNewId();
 const long MadSearchReplaceDialog::ID_RADIOBUTTON1 = wxNewId();
 const long MadSearchReplaceDialog::ID_RADIOBUTTON2 = wxNewId();
 const long MadSearchReplaceDialog::ID_WXSLIDERTRANSDEGREE = wxNewId();
+const long MadSearchReplaceDialog::ID_WXSLIDERINPUTSIZER = wxNewId();
 const long MadSearchReplaceDialog::ID_WXBUTTONFINDNEXT = wxNewId();
 const long MadSearchReplaceDialog::ID_WXBUTTONFINDPREV = wxNewId();
 const long MadSearchReplaceDialog::ID_WXBUTTONFINDALL = wxNewId();
@@ -116,13 +117,12 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 {
 	m_EnableTransparency = CanSetTransparent();
 	//(*Initialize(MadSearchReplaceDialog)
-	wxBoxSizer* BoxSizer4;
 	wxStaticBoxSizer* StaticBoxSizer2;
 	wxBoxSizer* BoxSizer6;
-	wxBoxSizer* BoxSizer5;
 	wxBoxSizer* BoxSizer7;
 	wxBoxSizer* BoxSizer8;
 	wxBoxSizer* BoxSizer2;
+	wxStaticBoxSizer* StaticBoxSizer3;
 	wxBoxSizer* BoxSizer1;
 	wxBoxSizer* BoxSizer9;
 	wxStaticBoxSizer* StaticBoxSizer1;
@@ -134,10 +134,10 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	BoxSizer1 = new wxBoxSizer( wxVERTICAL );
 	BoxSizer8 = new wxBoxSizer( wxHORIZONTAL );
 	BoxSizer2 = new wxBoxSizer( wxVERTICAL );
-	BoxSizer4 = new wxBoxSizer( wxHORIZONTAL );
-	BoxSizer2->Add( BoxSizer4, 1, wxALL | wxEXPAND, 0 );
-	BoxSizer5 = new wxBoxSizer( wxHORIZONTAL );
-	BoxSizer2->Add( BoxSizer5, 1, wxALL | wxEXPAND, 0 );
+	BoxSizerSearch = new wxBoxSizer(wxHORIZONTAL);
+	BoxSizer2->Add(BoxSizerSearch, 1, wxALL|wxEXPAND, 0);
+	BoxSizerReplace = new wxBoxSizer(wxHORIZONTAL);
+	BoxSizer2->Add(BoxSizerReplace, 1, wxALL|wxEXPAND, 0);
 	BoxSizer6 = new wxBoxSizer( wxVERTICAL );
 	WxCheckBoxMoveFocus = new wxCheckBox( this, ID_WXCHECKBOXMOVEFOCUS, _( "&Move Focus to Editor Window" ), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T( "ID_WXCHECKBOXMOVEFOCUS" ) );
 	WxCheckBoxMoveFocus->SetValue( false );
@@ -177,7 +177,7 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	WxCheckBoxPurgeBookmark = new wxCheckBox( this, ID_WXCHECKBOXPURGEBOOKMARK, _( "Purge mark for each search session" ), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T( "ID_WXCHECKBOXPURGEBOOKMARK" ) );
 	WxCheckBoxPurgeBookmark->SetValue( false );
 	StaticBoxSizer1->Add( WxCheckBoxPurgeBookmark, 0, wxALL | wxEXPAND, 2 );
-	BoxSizer9->Add( StaticBoxSizer1, 0, wxALL | wxALIGN_CENTER_VERTICAL, 2 );
+	BoxSizer9->Add(StaticBoxSizer1, 0, wxALL|wxALIGN_TOP, 2);
 
 	if( m_EnableTransparency )
 	{
@@ -188,8 +188,15 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 		StaticBoxSizer2->Add( WxRadioAlways, 0, wxALL | wxEXPAND, 2 );
 		WxSliderTransDegree = new wxSlider( this, ID_WXSLIDERTRANSDEGREE, 30, 25, 255, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T( "ID_WXSLIDERTRANSDEGREE" ) );
 		StaticBoxSizer2->Add( WxSliderTransDegree, 0, wxALL | wxEXPAND, 2 );
-		BoxSizer9->Add( StaticBoxSizer2, 0, wxALL | wxALIGN_CENTER_HORIZONTAL | wxALIGN_CENTER_VERTICAL, 2 );
+		BoxSizer9->Add(StaticBoxSizer2, 0, wxALL|wxALIGN_TOP, 2);
 	}
+
+	StaticBoxSizer3 = new wxStaticBoxSizer(wxHORIZONTAL, this, _("Input Sizer"));
+	WxSliderInputSizer = new wxSlider(this, ID_WXSLIDERINPUTSIZER, 1, 1, 5, wxDefaultPosition, wxSize(69,24), 0, wxDefaultValidator, _T("ID_WXSLIDERINPUTSIZER"));
+	WxSliderInputSizer->SetPageSize(1);
+	WxSliderInputSizer->SetLineSize(1);
+	StaticBoxSizer3->Add(WxSliderInputSizer, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	BoxSizer9->Add(StaticBoxSizer3, 0, wxALL|wxALIGN_TOP, 2);
 
 	BoxSizer6->Add( BoxSizer9, 1, wxALL | wxEXPAND, 2 );
 	BoxSizer2->Add( BoxSizer6, 0, wxALL | wxEXPAND, 0 );
@@ -227,7 +234,8 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	Connect( ID_WXCHECKBOXSEARCHINSELECTION, wxEVT_COMMAND_CHECKBOX_CLICKED, ( wxObjectEventFunction )&MadSearchReplaceDialog::WxCheckBoxSearchInSelectionClick );
 	Connect( ID_RADIOBUTTON1, wxEVT_COMMAND_RADIOBUTTON_SELECTED, ( wxObjectEventFunction )&MadSearchReplaceDialog::WxRadioLosingFocusSelect );
 	Connect( ID_RADIOBUTTON2, wxEVT_COMMAND_RADIOBUTTON_SELECTED, ( wxObjectEventFunction )&MadSearchReplaceDialog::WxRadioAlwaysSelect );
-	Connect( ID_WXSLIDERTRANSDEGREE, wxEVT_SCROLL_TOP | wxEVT_SCROLL_BOTTOM | wxEVT_SCROLL_LINEUP | wxEVT_SCROLL_LINEDOWN | wxEVT_SCROLL_PAGEUP | wxEVT_SCROLL_PAGEDOWN | wxEVT_SCROLL_THUMBTRACK | wxEVT_SCROLL_THUMBRELEASE | wxEVT_SCROLL_CHANGED, ( wxObjectEventFunction )&MadSearchReplaceDialog::WxSliderTransDegreeScroll );
+	Connect( ID_WXSLIDERTRANSDEGREE, wxEVT_COMMAND_SLIDER_UPDATED, ( wxObjectEventFunction )&MadSearchReplaceDialog::WxSliderTransDegreeScroll );
+	Connect( ID_WXSLIDERINPUTSIZER, wxEVT_COMMAND_SLIDER_UPDATED,(wxObjectEventFunction)&MadSearchReplaceDialog::OnWxSliderInputSizerCmdScroll);
 	Connect( ID_WXBUTTONFINDNEXT, wxEVT_COMMAND_BUTTON_CLICKED, ( wxObjectEventFunction )&MadSearchReplaceDialog::WxButtonFindNextClick );
 	Connect( ID_WXBUTTONFINDPREV, wxEVT_COMMAND_BUTTON_CLICKED, ( wxObjectEventFunction )&MadSearchReplaceDialog::WxButtonFindPrevClick );
 	Connect( ID_WXBUTTONFINDALL, wxEVT_COMMAND_BUTTON_CLICKED, ( wxObjectEventFunction )&MadSearchReplaceDialog::WxButtonFindAllClick );
@@ -244,7 +252,8 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	int bw, bh;
 	// find
 	WxButtonFindNext->GetSize( &bw, &bh );
-	m_FindText = new MadEdit( this, ID_MADEDIT1, wxPoint( 0, 0 ), wxSize( 400, bh ) );
+	m_OriginInputSize = wxSize( 400, bh );
+	m_FindText = new MadEdit( this, ID_MADEDIT1, wxPoint( 0, 0 ), m_OriginInputSize );
 	m_FindText->SetSingleLineMode( true );
 
 	if( g_ActiveMadEdit )
@@ -258,11 +267,11 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	m_FindText->SetWantTab( false );
 	m_FindText->LoadDefaultSyntaxScheme();
 	m_FindText->SetMaxLineLength( DEFAULT_MAX_LINELEN );
-	BoxSizer4->Add( m_FindText, 1, wxEXPAND | wxALIGN_LEFT | wxALL, 2 );
-	BoxSizer4->SetItemMinSize( m_FindText, 400, bh );
+	BoxSizerSearch->Add( m_FindText, 1, wxEXPAND | wxALIGN_LEFT | wxALL, 2 );
+	BoxSizerSearch->SetItemMinSize( m_FindText, 400, bh );
 	wxBitmap WxBitmapButtonRecentFindText_BITMAP( down_xpm );
 	WxBitmapButtonRecentFindText = new wxBitmapButton( this, ID_WXBITMAPBUTTONRECENTFINDTEXT, WxBitmapButtonRecentFindText_BITMAP, wxPoint( 0, 0 ), wxSize( bh, bh ), wxBU_AUTODRAW, wxDefaultValidator, _( "WxBitmapButtonRecentFindText" ) );
-	BoxSizer4->Add( WxBitmapButtonRecentFindText, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 2 );
+	BoxSizerSearch->Add( WxBitmapButtonRecentFindText, 0, wxALL, 2 );
 	// replace
 	WxButtonReplace->GetSize( &bw, &bh );
 	m_ReplaceText = new MadEdit( this, ID_MADEDIT2, wxPoint( 0, 0 ), wxSize( 400, bh ) );
@@ -279,10 +288,10 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	m_ReplaceText->SetWantTab( false );
 	m_ReplaceText->LoadDefaultSyntaxScheme();
 	m_ReplaceText->SetMaxLineLength( DEFAULT_MAX_LINELEN );
-	BoxSizer5->Add( m_ReplaceText, 1, wxEXPAND | wxALIGN_LEFT | wxALL, 2 );
-	BoxSizer5->SetItemMinSize( m_ReplaceText, 400, bh );
+	BoxSizerReplace->Add( m_ReplaceText, 1, wxEXPAND | wxALIGN_LEFT | wxALL, 2 );
+	BoxSizerReplace->SetItemMinSize( m_ReplaceText, 400, bh );
 	WxBitmapButtonRecentReplaceText = new wxBitmapButton( this, ID_WXBITMAPBUTTONRECENTREPLACETEXT, WxBitmapButtonRecentFindText_BITMAP, wxPoint( 0, 0 ), wxSize( bh, bh ), wxBU_AUTODRAW, wxDefaultValidator, _( "WxBitmapButtonRecentReplaceText" ) );
-	BoxSizer5->Add( WxBitmapButtonRecentReplaceText, 0, wxALIGN_CENTER_HORIZONTAL | wxALL, 2 );
+	BoxSizerReplace->Add( WxBitmapButtonRecentReplaceText, 0, wxALL, 2 );
 	BoxSizer1->Fit( this );
 	BoxSizer1->SetSizeHints( this );
 	// connect to KeyDown event handler
@@ -1798,7 +1807,7 @@ void MadSearchReplaceDialog::WxRadioLosingFocusSelect( wxCommandEvent& event )
 /*
  * WxRadioAlwaysClick
  */
-void MadSearchReplaceDialog::WxRadioAlwaysSelect( wxCommandEvent&    event )
+void MadSearchReplaceDialog::WxRadioAlwaysSelect( wxCommandEvent& event )
 {
 	// insert your code here
 	if( m_EnableTransparency )
@@ -1853,4 +1862,23 @@ void MadSearchReplaceDialog::WxCheckBoxRegexClick( wxCommandEvent& event )
 		WxCheckBoxFindHex->Enable();
 		WxCheckBoxDotMatchNewLine->Disable();
 	}
+}
+
+void MadSearchReplaceDialog::OnWxSliderInputSizerCmdScroll(wxScrollEvent& event)
+{
+	int times = WxSliderInputSizer->GetValue();
+	BoxSizerSearch->SetItemMinSize( m_FindText, m_OriginInputSize.GetWidth(), m_OriginInputSize.GetHeight()*times );
+
+	if(times == 1)
+	{
+		m_FindText->SetWordWrapMode(wwmNoWrap);
+		m_ReplaceText->SetWordWrapMode(wwmNoWrap);
+	}
+	else
+	{
+		m_FindText->SetWordWrapMode(wwmWrapByWindow);
+		m_ReplaceText->SetWordWrapMode(wwmWrapByWindow);
+	}
+	GetSizer()->Fit( this );
+	GetSizer()->Layout ();
 }

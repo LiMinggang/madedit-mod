@@ -53,6 +53,7 @@ class MadSearchReplaceDialog: public wxDialog
 		wxButton* WxButtonReplaceAll;
 		wxCheckBox* WxCheckBoxMoveFocus;
 		wxCheckBox* WxCheckBoxCaseSensitive;
+		wxSlider* WxSliderInputSizer;
 		wxCheckBox* WxCheckBoxPurgeBookmark;
 		wxCheckBox* WxCheckBoxSearchInSelection;
 		wxMenu WxPopupMenuRecentFindText;
@@ -63,11 +64,13 @@ class MadSearchReplaceDialog: public wxDialog
 		wxMenu WxPopupMenuRecentReplaceText;
 		wxCheckBox* WxCheckBoxFindHex;
 		wxCheckBox* WxCheckBoxWholeWord;
+		wxBoxSizer* BoxSizerSearch;
 		wxButton* WxButtonReplaceAllInAll;
 		wxButton* WxButtonCount;
 		wxCheckBox* WxCheckBoxBookmarkOnly;
 		wxCheckBox* WxCheckBoxRegex;
 		wxCheckBox* WxCheckBoxWrapAround;
+		wxBoxSizer* BoxSizerReplace;
 		wxCheckBox* WxCheckBoxDotMatchNewLine;
 		wxButton* WxButtonReplaceExpand;
 		//*)
@@ -89,6 +92,7 @@ class MadSearchReplaceDialog: public wxDialog
 		static const long ID_RADIOBUTTON1;
 		static const long ID_RADIOBUTTON2;
 		static const long ID_WXSLIDERTRANSDEGREE;
+		static const long ID_WXSLIDERINPUTSIZER;
 		static const long ID_WXBUTTONFINDNEXT;
 		static const long ID_WXBUTTONFINDPREV;
 		static const long ID_WXBUTTONFINDALL;
@@ -119,6 +123,7 @@ class MadSearchReplaceDialog: public wxDialog
 		wxBitmapButton *WxBitmapButtonRecentFindText, *WxBitmapButtonRecentReplaceText;
 		MadRecentList *m_RecentFindText;
 		MadRecentList *m_RecentReplaceText;
+		wxSize m_OriginInputSize;
 
 		void ReadWriteSettings(bool bRead);
 		void UpdateCheckBoxByCBHex(bool check);
@@ -146,6 +151,7 @@ class MadSearchReplaceDialog: public wxDialog
 		void WxButtonReplaceAllInAllClick(wxCommandEvent& event);
 		void WxButtonFindAllClick(wxCommandEvent& event);
 		void WxButtonFindAllInAllClick(wxCommandEvent& event);
+		void OnWxSliderInputSizerCmdScroll(wxScrollEvent& event);
 		//*)
 
 		void MadSearchReplaceDialogActivate(wxActivateEvent& event);

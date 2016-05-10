@@ -2,8 +2,7 @@
 <wxsmith>
 	<object class="wxDialog" name="MadSearchReplaceDialog">
 		<centered>1</centered>
-		<pos_arg>1</pos_arg>
-		<size_arg>1</size_arg>
+		<id_arg>0</id_arg>
 		<style>wxCAPTION|wxSYSTEM_MENU|wxCLOSE_BOX</style>
 		<handler function="MadSearchReplaceDialogClose" entry="EVT_CLOSE" />
 		<handler function="MadSearchReplaceDialogKeyDown" entry="EVT_KEY_DOWN" />
@@ -15,12 +14,12 @@
 						<object class="wxBoxSizer" variable="BoxSizer2" member="no">
 							<orient>wxVERTICAL</orient>
 							<object class="sizeritem">
-								<object class="wxBoxSizer" variable="BoxSizer4" member="no" />
+								<object class="wxBoxSizer" variable="BoxSizerSearch" member="yes" />
 								<flag>wxALL|wxEXPAND</flag>
 								<option>1</option>
 							</object>
 							<object class="sizeritem">
-								<object class="wxBoxSizer" variable="BoxSizer5" member="no" />
+								<object class="wxBoxSizer" variable="BoxSizerReplace" member="yes" />
 								<flag>wxALL|wxEXPAND</flag>
 								<option>1</option>
 							</object>
@@ -124,7 +123,7 @@
 														<border>2</border>
 													</object>
 												</object>
-												<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+												<flag>wxALL|wxALIGN_TOP</flag>
 												<border>2</border>
 											</object>
 											<object class="sizeritem">
@@ -158,7 +157,28 @@
 														<border>2</border>
 													</object>
 												</object>
-												<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+												<flag>wxALL|wxALIGN_TOP</flag>
+												<border>2</border>
+											</object>
+											<object class="sizeritem">
+												<object class="wxStaticBoxSizer" variable="StaticBoxSizer3" member="no">
+													<label>Input Sizer</label>
+													<object class="sizeritem">
+														<object class="wxSlider" name="ID_WXSLIDERINPUTSIZER" variable="WxSliderInputSizer" member="yes">
+															<value>1</value>
+															<min>1</min>
+															<max>5</max>
+															<pagesize>1</pagesize>
+															<linesize>1</linesize>
+															<size>69,24</size>
+															<handler function="OnWxSliderInputSizerCmdScroll" entry="EVT_COMMAND_SCROLL" />
+														</object>
+														<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+														<border>2</border>
+														<option>1</option>
+													</object>
+												</object>
+												<flag>wxALL|wxALIGN_TOP</flag>
 												<border>2</border>
 											</object>
 										</object>
@@ -195,7 +215,7 @@
 							</object>
 							<object class="sizeritem">
 								<object class="wxButton" name="ID_WXBUTTONFINDALL" variable="WxButtonFindAll" member="yes">
-									<label>Find &amp;All</label>
+									<label>Find A&amp;ll</label>
 									<handler function="WxButtonFindAllClick" entry="EVT_BUTTON" />
 								</object>
 								<flag>wxALL|wxEXPAND</flag>

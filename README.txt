@@ -122,10 +122,13 @@ New: Hope MadEdit-Mod could load more open files history than 9 #179
 New: Redesign of Search Results view----Hope to add search key words or expression on the result tree title on the left of the file path #137
 New: Save LineSpacing, Line Wrap Mode and Edit Mode for opened files #186
 New: Enable config fix width mode in global config #184
+New: Wordwrap of input of search/replace dialog #175
 Fix: Recorded script(caret pos for inputting) would be wrong if user moved the caret #183
 Fix: The caret can't lock the y position when use word wrap function #178
 Fix: Change Mpython API WholeLineSelection to SelectWholeLine
 Fix: "New File" & "Open File" button in toolbar got unclickable when all editor tabs closed #190
+Fix: Not respond to wxSlider event(bug of CodeBlocks https://sourceforge.net/p/codeblocks/tickets/350/)
+Fix: Bug of wxGenericTreeCtrl(Fixed in wxWidgets 3.1) #136
 Update wxWidgets to 3.1.0
 Update translation
 
