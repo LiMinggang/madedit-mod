@@ -1877,7 +1877,10 @@ void MadSearchReplaceDialog::OnWxSliderInputSizerCmdScroll(wxScrollEvent& event)
 	else
 	{
 		m_FindText->SetWordWrapMode(wwmWrapByWindow);
-		m_ReplaceText->SetWordWrapMode(wwmWrapByWindow);
+		int w, h;
+		m_ReplaceText->GetSize(&w, &h);
+		if(m_OriginInputSize.GetHeight() < h )
+			m_ReplaceText->SetWordWrapMode(wwmWrapByWindow);
 	}
 	GetSizer()->Fit( this );
 	GetSizer()->Layout ();
