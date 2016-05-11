@@ -22,11 +22,11 @@ A. Linux, FreeBSD, and Unix-like OS (__WXGTK__):
 B. MS Windows (__WXMSW__):
    a. MinGW32/GNU C++ 3.x (wxDevCpp):
       Required Libraries to compile:
-      1. wxWidgets-3.0.2 or higher with Unicode and IPC enabled
+      1. wxWidgets-3.1.0 or higher with Unicode and IPC enabled
       2. Boost-1.56.0 or higher(build Boost-Python)(1.60 is recommended)
    b. Visual C++ 7.1 (VS.Net 2005) or higher:
       Required Libraries to compile:
-      1. wxWidgets-3.0.2 or higher with Unicode and IPC enabled
+      1. wxWidgets-3.1.0 or higher with Unicode and IPC enabled
       2. Boost-1.56.0 or higher(build Boost-Python)(1.60 is recommended)
       3. Set WXWIN and BOOST to the root directory of your local ones
 
@@ -45,10 +45,10 @@ MadEdit_Win2K is a build by VC++ 2005 express for Windows 2000.
 Example build under Linux
 Boost Python(1.60)
 ./bjam --with-python include="${HOME}/madedit-mod/minipython/Include" python-debugging=off threading=multi variant=release link=static runtime-link=static stage
-wxWidgets(3.0.2)
+wxWidgets(3.1.0)
 ./configure --enable-unicode --disable-shared --with-libpng=builtin --with-zlib=builtin --with-expat=builtin --with-gtk3=yes --with-libiconv=no
 MadEdit-Mod
-./configure --with-boost=${HOME}/boost_1_60_0 --with-wxdir=${HOME}/wxWidgets-3.0.2
+./configure --with-boost=${HOME}/boost_1_60_0 --with-wxdir=${HOME}/wxWidgets-3.1.0
 
 Syntax files, Locale files, Dictionaries and Settings:
 ---------------------------------------
