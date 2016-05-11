@@ -246,6 +246,9 @@
     <ClCompile Include="..\..\src\MadSearchReplaceDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\MadRuler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\spellchecker\HunspellInterface.h">
@@ -360,6 +363,9 @@
       <Filter>Source Files\Astyle</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\MadSearchReplaceDialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadRuler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -225,10 +225,7 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	BoxSizer3->Add( WxButtonClose, 0, wxALL | wxEXPAND, 2 );
 	BoxSizer8->Add( BoxSizer3, 0, wxALL | wxEXPAND, 0 );
 	BoxSizer1->Add( BoxSizer8, 1, wxALL | wxEXPAND, 0 );
-	SetSizer( BoxSizer1 );
-	BoxSizer1->Fit( this );
-	BoxSizer1->SetSizeHints( this );
-	Center();
+
 	Connect( ID_WXCHECKBOXREGEX, wxEVT_COMMAND_CHECKBOX_CLICKED, ( wxObjectEventFunction )&MadSearchReplaceDialog::WxCheckBoxRegexClick );
 	Connect( ID_WXCHECKBOXFINDHEX, wxEVT_COMMAND_CHECKBOX_CLICKED, ( wxObjectEventFunction )&MadSearchReplaceDialog::WxCheckBoxFindHexClick );
 	Connect( ID_WXCHECKBOXSEARCHINSELECTION, wxEVT_COMMAND_CHECKBOX_CLICKED, ( wxObjectEventFunction )&MadSearchReplaceDialog::WxCheckBoxSearchInSelectionClick );
@@ -387,6 +384,11 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 			m_ReplaceText->SetText( text );
 		}
 	}
+
+	SetSizer( BoxSizer1 );
+	BoxSizer1->Fit( this );
+	BoxSizer1->SetSizeHints( this );
+	Center();
 }
 
 MadSearchReplaceDialog::~MadSearchReplaceDialog()
