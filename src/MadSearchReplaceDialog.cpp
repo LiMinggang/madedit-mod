@@ -289,8 +289,7 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	BoxSizerReplace->SetItemMinSize( m_ReplaceText, 400, bh );
 	WxBitmapButtonRecentReplaceText = new wxBitmapButton( this, ID_WXBITMAPBUTTONRECENTREPLACETEXT, WxBitmapButtonRecentFindText_BITMAP, wxPoint( 0, 0 ), wxSize( bh, bh ), wxBU_AUTODRAW, wxDefaultValidator, _( "WxBitmapButtonRecentReplaceText" ) );
 	BoxSizerReplace->Add( WxBitmapButtonRecentReplaceText, 0, wxALL, 2 );
-	BoxSizer1->Fit( this );
-	BoxSizer1->SetSizeHints( this );
+
 	// connect to KeyDown event handler
 	m_FindText->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown ) );
 	m_ReplaceText->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown ) );
@@ -1218,6 +1217,9 @@ void MadSearchReplaceDialog::MadSearchReplaceDialogActivate( wxActivateEvent& ev
 		{
 			SetTransparent( wxIMAGE_ALPHA_OPAQUE );
 		}
+		
+		GetSizer()->Fit( this );
+		GetSizer()->Layout();
 	}
 }
 
@@ -1885,5 +1887,5 @@ void MadSearchReplaceDialog::OnWxSliderInputSizerCmdScroll(wxScrollEvent& event)
 			m_ReplaceText->SetWordWrapMode(wwmWrapByWindow);
 	}
 	GetSizer()->Fit( this );
-	GetSizer()->Layout ();
+	GetSizer()->Layout();
 }
