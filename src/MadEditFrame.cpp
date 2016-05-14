@@ -3952,8 +3952,7 @@ void MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 				madedit->SetTextFont( fn, fs, false );
 		}
 
-		if(lsp != 100)
-			madedit->SetLineSpacing(lsp);
+		madedit->SetLineSpacing(lsp);
 		if(wm != emTextMode)
 			madedit->SetWordWrapMode((MadWordWrapMode)wm);
 
