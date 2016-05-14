@@ -188,6 +188,7 @@ BEGIN_EVENT_TABLE( MadOptionsDialog, wxDialog )
 
 	EVT_RADIOBOX( ID_WXRADIOBOXBRACKETSTYLE, MadOptionsDialog::OnRadioBoxBracketStyleClick )
 	EVT_CHECKBOX( ID_WXCHECKBREAKLINES, MadOptionsDialog::OnFormattingBreakLinesClick )
+	EVT_CHECKBOX( ID_WXCHECKBOXENABLEAUTOSAVE, MadOptionsDialog::OnEnableAutoSaveClick )
 	EVT_CHECKBOX( ID_WXCHECKBREAKBLOCKS, MadOptionsDialog::OnPaddingBreakBlocksClick )
 END_EVENT_TABLE()
 ////Event Table End
@@ -1980,28 +1981,20 @@ void MadOptionsDialog::OnRadioBoxBracketStyleClick( wxCommandEvent& event )
 
 void MadOptionsDialog::OnFormattingBreakLinesClick( wxCommandEvent& event )
 {
-	if( WxCheckBreakLines->GetValue() )
-	{
-		WxEditSFMaxLineLength->Enable( true );
-		WxCheckBreakAfterLogical->Enable( true );
-	}
-	else
-	{
-		WxEditSFMaxLineLength->Enable( false );
-		WxCheckBreakAfterLogical->Enable( false );
-	}
+	bool bb = WxCheckBreakLines->GetValue();
+	WxEditSFMaxLineLength->Enable( bb );
+	WxCheckBreakAfterLogical->Enable( bb );
 }
 
 void MadOptionsDialog::OnPaddingBreakBlocksClick( wxCommandEvent& event )
 {
-	if( WxCheckBreakBlocks->GetValue() )
-	{
-		WxCheckBreakBlocksAll->Enable( true );
-	}
-	else
-	{
-		WxCheckBreakBlocksAll->Enable( false );
-	}
+	bool bb =  WxCheckBreakBlocks->GetValue();
+	WxCheckBreakBlocksAll->Enable( bb );
+}
+
+void MadOptionsDialog::OnEnableAutoSaveClick( wxCommandEvent& event )
+{
+	WxEditAutoSaveTimeout->Enable( WxCheckBoxEnableAutoSave->GetValue() );
 }
 
 #ifdef MADEDIT_ENABLE_STC

@@ -564,6 +564,7 @@ public:
     void OnRadioBoxBracketStyleClick(wxCommandEvent& event);
 	void OnFormattingBreakLinesClick(wxCommandEvent& event);
 	void OnPaddingBreakBlocksClick(wxCommandEvent& event);
+	void OnEnableAutoSaveClick(wxCommandEvent& event);
 #ifdef MADEDIT_ENABLE_STC
 	void OnMarginClick(wxStyledTextEvent &event);
 #endif
