@@ -343,7 +343,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	wxBoxSizer *BoxSizer52 = new wxBoxSizer( wxHORIZONTAL );
 	WxBoxSizer7->Add( BoxSizer52, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	BoxSizer52->Add(10,0,0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
-	WxStaticText30 = new wxStaticText( WxNoteBookPage1, ID_WXSTATICTEXT30, _( "Timeout(S)" ), wxPoint( 125, 2 ), wxSize( 70, 20 ), wxST_NO_AUTORESIZE, wxT( "WxStaticText30" ) );
+	WxStaticText30 = new wxStaticText( WxNoteBookPage1, ID_WXSTATICTEXT30, _( "Timeout(M)" ), wxPoint( 125, 2 ), wxSize( 70, 20 ), wxST_NO_AUTORESIZE, wxT( "WxStaticText30" ) );
 	BoxSizer52->Add( WxStaticText30, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 5 );
 	WxEditAutoSaveTimeout = new wxTextCtrl( WxNoteBookPage1, ID_WXEDITMAXSIZETOLOAD, wxT( "5" ), wxPoint( 190, 2 ), wxSize( 50, 17 ), 0, wxTextValidator( wxFILTER_NUMERIC ), wxT( "WxEditAutoSaveTimeout" ) );
 	BoxSizer52->Add( WxEditAutoSaveTimeout, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
