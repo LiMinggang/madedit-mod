@@ -124,6 +124,7 @@ New: Save LineSpacing, Line Wrap Mode and Edit Mode for opened files #186
 New: Enable config fix width mode in global config #184
 New: Wordwrap of input of search/replace dialog #175
 New: Use icons or symbols replace the words in the quicksearch bar #181
+New: Hope MadEdit-Mod could Autosave, Backup files, and have Autolink funciton #135
 Fix: Recorded script(caret pos for inputting) would be wrong if user moved the caret #183
 Fix: The caret can't lock the y position when use word wrap function #178
 Fix: Change Mpython API WholeLineSelection to SelectWholeLine

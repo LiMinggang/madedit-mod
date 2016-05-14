@@ -1406,6 +1406,8 @@ public:
 //----------------------------------------------------------------------------
 // MadEditFrame
 //----------------------------------------------------------------------------
+const long MadEditFrame::ID_WXTIMER = wxNewId();
+
 //Add Custom Events only in the appropriate Block.
 // Code added in  other places will be removed by wx-dvcpp
 ////Event Table Start
@@ -1416,6 +1418,7 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_AUINOTEBOOK_PAGE_CHANGED( ID_NOTEBOOK, MadEditFrame::OnNotebookPageChanged )
 	EVT_AUINOTEBOOK_PAGE_CLOSE( ID_NOTEBOOK, MadEditFrame::OnNotebookPageClosing )
 	EVT_AUINOTEBOOK_TAB_RIGHT_UP( ID_NOTEBOOK, MadEditFrame::OnNotebookPageRightUp )
+	EVT_TIMER(ID_WXTIMER, MadEditFrame::OnTimer)
 	//EVT_AUINOTEBOOK_PAGE_CLOSE(ID_NOTEBOOK, MadEditFrame::OnNotebookPageClosed)
 	//EVT_CHAR(MadEditFrame::OnChar)
 	// file
@@ -2285,7 +2288,7 @@ void LoadDefaultSettings( wxConfigBase *madConfig )
 }
 
 MadEditFrame::MadEditFrame( wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style )
-	: wxFrame( parent, id, title, position, size, style )
+	: wxFrame( parent, id, title, position, size, style ), m_AutoSaveTimer(this, ID_WXTIMER)
 {
 #ifndef __WXMSW__
 	wxConvFileName = &MadConvFileNameObj;
@@ -2330,10 +2333,17 @@ MadEditFrame::MadEditFrame( wxWindow *parent, wxWindowID id, const wxString &tit
 	m_HtmlPreview = 0;
 	m_PreviewType = ptPREVIEW_NONE;
 	g_MainFrame = this;
+
+	m_AutoSaveTimout = 0;
+	m_Config->Read( wxT( "AutoSaveTimeout" ), &m_AutoSaveTimout );
+	if(m_AutoSaveTimout) m_AutoSaveTimer.Start(m_AutoSaveTimout*60*1000);
 }
 
 MadEditFrame::~MadEditFrame()
-{}
+{
+	if(m_AutoSaveTimout)
+		m_AutoSaveTimer.Stop();
+}
 
 // not all ports have support for EVT_CONTEXT_MENU yet, don't define
 // USE_CONTEXT_MENU for those which don't
@@ -7239,6 +7249,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		m_Config->SetPath( wxT( "/MadEdit" ) );
 		bool rcm, isiot, ai, acp, msc, mscck, mmp, afcp;
 		wxString mc, tc, ic;
+		long ll;
 		m_Config->Write( wxT( "Language" ), g_OptionsDialog->WxComboBoxLanguage->GetValue() );
 		m_Config->Write( wxT( "SingleInstance" ), g_OptionsDialog->WxCheckBoxSingleInstance->GetValue() );
 		rcm = g_OptionsDialog->WxCheckBoxRecordCaretMovements->GetValue();
@@ -7246,6 +7257,18 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		m_Config->Write( wxT( "MaxSizeToLoad" ), g_OptionsDialog->WxEditMaxSizeToLoad->GetValue() );
 		m_Config->Write( wxT( "MaxTextFileSize" ), g_OptionsDialog->WxEditMaxTextFileSize->GetValue() );
 		m_Config->Write( wxT( "DefaultEncoding" ), g_OptionsDialog->WxComboBoxEncoding->GetValue() );
+		ll = 0;
+		if (g_OptionsDialog->WxCheckBoxEnableAutoSave->GetValue()) g_OptionsDialog->WxEditAutoSaveTimeout->GetValue().ToLong(&ll);
+		m_Config->Write( wxT( "AutoSaveTimeout" ), ll );
+		if(m_AutoSaveTimout != ll)
+		{
+			if(m_AutoSaveTimout)
+				m_AutoSaveTimer.Stop();
+			m_AutoSaveTimout = ll;
+			if(m_AutoSaveTimout)
+				m_AutoSaveTimer.Start(m_AutoSaveTimout*60*1000);
+		}
+			
 #ifdef __WXMSW__
 
 		if( g_OptionsDialog->WxCheckBoxRightClickMenu->GetValue() )
@@ -7311,7 +7334,6 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		else { g_ForcePurgeThisTime = false; }
 
 		bool bb;
-		long ll;
 		wxString ss;
 		bb = g_OptionsDialog->WxCheckBoxPrintSyntax->GetValue();
 		m_Config->Write( wxT( "PrintSyntax" ), bb );
@@ -9066,6 +9088,67 @@ void MadEditFrame::OnSearchQuickFindNext( wxCommandEvent& event )
 			//g_ActiveMadEdit->HighlightWords();
 		}
 	}
+}
+
+void MadEditFrame::OnTimer(wxTimerEvent& event)
+{
+	int selid = m_Notebook->GetSelection();
+
+	if( selid == -1 ) { return; } // no file was opened
+
+	MadEdit *madedit = ( MadEdit* )m_Notebook->GetPage( selid );
+	wxString name;
+
+	if( madedit->IsModified() )
+	{
+		name = m_Notebook->GetPageText( selid );
+
+		if( name[name.Len() - 1] == wxT( '*' ) )
+		{ name.Truncate( name.Len() - 1 ); }
+
+		if( wxFileExists(name ) && (madedit->Save( false, name, false ) == wxID_CANCEL ))
+		{ return; }
+	}
+
+	int count = int( m_Notebook->GetPageCount() );
+	int id = 0, sid = selid;
+
+	do
+	{
+		if( id != selid )
+		{
+			madedit = ( MadEdit* )m_Notebook->GetPage( id );
+
+			if( madedit->IsModified() )
+			{
+				if( madedit->GetFileName().IsEmpty() )
+				{
+					m_Notebook->SetSelection( id );
+					MadEdit *cme = ( MadEdit* )m_Notebook->GetPage( m_Notebook->GetSelection() );
+
+					if( cme != g_ActiveMadEdit )
+					{
+						wxAuiNotebookEvent event( wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGED, m_Notebook->GetId() );
+						event.SetSelection( id );
+						event.SetOldSelection( sid );
+						event.SetEventObject( this );
+						OnNotebookPageChanged( event );
+					}
+				}
+
+				name = m_Notebook->GetPageText( id );
+
+				if( name[name.Len() - 1] == wxT( '*' ) )
+				{ name.Truncate( name.Len() - 1 ); }
+
+				if( wxFileExists(name ) && ( madedit->Save( false, name, false ) == wxID_CANCEL ))
+				{ return; }
+
+				sid = id;
+			}
+		}
+	}
+	while( ++id < count );
 }
 
 #if USE_GENERIC_TREECTRL

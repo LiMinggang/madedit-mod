@@ -335,6 +335,21 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxCheckBoxPurgeHistory = new wxCheckBox( WxNoteBookPage1, ID_PURGEHISTORY, _( "Purge History while exiting" ), wxPoint( 2, 98 ), wxSize( 400, 20 ), 0, wxDefaultValidator, wxT( "WxCheckBoxPurgeHistory" ) );
 	WxBoxSizer7->Add( WxCheckBoxPurgeHistory, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
 	SET_CONTROLPARENT( WxCheckBoxPurgeHistory );
+	WxBoxSizer51 = new wxBoxSizer( wxHORIZONTAL );
+	WxBoxSizer7->Add( WxBoxSizer51, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
+	WxCheckBoxEnableAutoSave = new wxCheckBox( WxNoteBookPage1, ID_WXCHECKBOXENABLEAUTOSAVE, _( "Enable auto save" ), wxPoint( 2, 2 ), wxSize( 120, 20 ), 0, wxDefaultValidator, wxT( "WxCheckBoxEnableAutoSave" ) );;
+	WxBoxSizer51->Add( WxCheckBoxEnableAutoSave, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
+	SET_CONTROLPARENT( WxCheckBoxEnableAutoSave );
+	wxBoxSizer *BoxSizer52 = new wxBoxSizer( wxHORIZONTAL );
+	WxBoxSizer7->Add( BoxSizer52, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
+	BoxSizer52->Add(10,0,0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
+	WxStaticText30 = new wxStaticText( WxNoteBookPage1, ID_WXSTATICTEXT30, _( "Timeout(S)" ), wxPoint( 125, 2 ), wxSize( 70, 20 ), wxST_NO_AUTORESIZE, wxT( "WxStaticText30" ) );
+	BoxSizer52->Add( WxStaticText30, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 5 );
+	WxEditAutoSaveTimeout = new wxTextCtrl( WxNoteBookPage1, ID_WXEDITMAXSIZETOLOAD, wxT( "5" ), wxPoint( 190, 2 ), wxSize( 50, 17 ), 0, wxTextValidator( wxFILTER_NUMERIC ), wxT( "WxEditAutoSaveTimeout" ) );
+	BoxSizer52->Add( WxEditAutoSaveTimeout, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
+	SET_CONTROLPARENT( WxEditAutoSaveTimeout );
+	WxEditAutoSaveTimeout->Enable( false );
+
 	WxNoteBookPage2 = new wxPanel( WxNotebook1, ID_WXNOTEBOOKPAGE2, wxPoint( 4, 24 ), wxSize( 692, 464 ) );
 	WxNotebook1->AddPage( WxNoteBookPage2, _( "Edit" ) );
 	WxBoxSizer8 = new wxBoxSizer( wxVERTICAL );
@@ -1239,6 +1254,12 @@ void MadOptionsDialog::LoadOptions( void )
 	ss = _( "System Default" );
 	cfg->Read( wxT( "DefaultEncoding" ), &ss );
 	WxComboBoxEncoding->SetValue( ss );
+	cfg->Read( wxT( "AutoSaveTimeout" ), &ll );
+	bb = (ll != 0);
+	WxEditAutoSaveTimeout->Enable(bb);
+	WxCheckBoxEnableAutoSave->SetValue( bb );
+	if(!bb) ll = 5;
+	WxEditAutoSaveTimeout->SetValue( wxString() << ll );
 #ifdef __WXMSW__
 	wxRegKey *pRegKey = new wxRegKey( g_MadEditRegkeyPath + wxT( "*\\shell\\MadEdit-Mod\\command" ) );
 
@@ -1509,6 +1530,12 @@ void MadOptionsDialog::WxButtonOKClick( wxCommandEvent& event )
 	if( !WxEditIndentColumns->GetValue().ToLong( &lo ) || lo <= 0 )
 	{
 		wxLogError( errtext, WxStaticText6->GetLabel().c_str(), WxEditIndentColumns->GetValue().c_str() );
+		error = true;
+	}
+
+	if( !WxEditAutoSaveTimeout->GetValue().ToLong( &lo ) || ( lo < 5 || lo > 30 ))
+	{
+		wxLogError( errtext, WxStaticText30->GetLabel().c_str(), WxEditMaxSizeToLoad->GetValue().c_str() );
 		error = true;
 	}
 

@@ -3,10 +3,9 @@
 	<object class="wxDialog" name="MadOptionsDialog">
 		<title>Options</title>
 		<centered>1</centered>
-		<size>534,469</size>
+		<size>578,490</size>
 		<id_arg>0</id_arg>
 		<style>wxCAPTION|wxSYSTEM_MENU|wxRESIZE_BORDER|wxCLOSE_BOX|wxDIALOG_NO_PARENT|wxMAXIMIZE_BOX</style>
-		<handler function="MadOptionsDialogClose" entry="EVT_CLOSE" />
 		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
 			<orient>wxVERTICAL</orient>
 			<object class="sizeritem">
@@ -173,6 +172,34 @@
 														<object class="sizeritem">
 															<object class="wxCheckBox" name="ID_WSCHECKBOXMSRIGHTCCLICKMENU" variable="WxCheckBoxRightClickMenu" member="yes">
 																<label>Add MadEdit to the RightClickMenu of Explorer(Deselect to Remove the Entry from Windows Registry)</label>
+															</object>
+															<flag>wxALL|wxEXPAND</flag>
+															<border>2</border>
+														</object>
+														<object class="sizeritem">
+															<object class="wxBoxSizer" variable="BoxSizer37" member="no">
+																<object class="sizeritem">
+																	<object class="wxCheckBox" name="ID_WXCHECKBOXENABLEAUTOSAVE" variable="wxCheckBoxEnableAutoSave" member="yes">
+																		<label>Enable auto save</label>
+																	</object>
+																	<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+																	<border>2</border>
+																</object>
+																<object class="sizeritem">
+																	<object class="wxStaticText" name="ID_STATICTEXTENABLEAUTOSAVE" variable="wxStaticTextEnableAutoSave" member="yes">
+																		<label>Label</label>
+																	</object>
+																	<flag>wxALL|wxEXPAND</flag>
+																	<border>2</border>
+																</object>
+																<object class="sizeritem">
+																	<object class="wxTextCtrl" name="ID_TEXTCTRLAUTOSAVETIMEOUT" variable="wxTextCtrlAutoSaveTimeout" member="yes">
+																		<value>10</value>
+																		<maxlength>2</maxlength>
+																	</object>
+																	<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+																	<border>2</border>
+																</object>
 															</object>
 															<flag>wxALL|wxEXPAND</flag>
 															<border>2</border>

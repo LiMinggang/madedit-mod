@@ -456,7 +456,7 @@ protected:
 #ifdef __WXMSW__
 	WXLRESULT MSWWindowProc( WXUINT message, WXWPARAM wParam, WXLPARAM lParam );
 #endif
-
+	static const long ID_WXTIMER;
 public:
 	void ResetFindInFilesResults();
 	wxTreeItemId & NewSearchSession( const wxString &sessionLabel );
@@ -465,12 +465,15 @@ public:
 	void PurgeRecentFiles();
 	void PurgeRecentFonts();
 	void PurgeRecentEncodings();
+	void OnTimer(wxTimerEvent& event);
 private:
 	enum MadMacroMode
 	{ emMacroStopped = 0, emMacroRecoding, emMacroRunning };
 	MadMacroMode m_MadMacroStatus;
 	wxArrayString m_MadMacroScripts;
 	wxFileOffset m_LastSelBeg, m_LastSelEnd;
+	wxTimer m_AutoSaveTimer;
+	long m_AutoSaveTimout;
 public:
 	MadMacroMode GetMadMacroStatus() {return m_MadMacroStatus;}
 	bool IsMacroRunning() {return ( m_MadMacroStatus == emMacroRunning );}
