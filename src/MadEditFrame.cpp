@@ -3942,7 +3942,7 @@ void MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 		int fs, lsp, wm, em;
 		pos = g_FileCaretPosManager.GetRestoreData( filename, enc, fn, fs, lsp, wm, em );
 
-		if(!(em < emTextMode || em > emHexMode))
+		if((em >= emTextMode && em <= emHexMode) && ((MadEditMode)em != madedit->GetEditMode()))
 			madedit->SetEditMode((MadEditMode)em);
 		if( !fn.IsEmpty() && fs > 0 )
 		{
@@ -3952,9 +3952,9 @@ void MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 				madedit->SetTextFont( fn, fs, false );
 		}
 
-		if(lsp != madedit->GetLineSpacing())
+		if((lsp >=100 && lsp <= 500) && (lsp != madedit->GetLineSpacing()))
 			madedit->SetLineSpacing(lsp);
-		if((!(wm < wwmNoWrap || em > wwmWrapByColumn)) && (((MadWordWrapMode)wm) != madedit->GetWordWrapMode()))
+		if((wm >= wwmNoWrap && em <= wwmWrapByColumn) && (((MadWordWrapMode)wm) != madedit->GetWordWrapMode()))
 			madedit->SetWordWrapMode((MadWordWrapMode)wm);
 
 		if( !madedit->LoadFromFile( filename, enc ) && mustExist )
