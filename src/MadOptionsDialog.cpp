@@ -1255,10 +1255,10 @@ void MadOptionsDialog::LoadOptions( void )
 	cfg->Read( wxT( "DefaultEncoding" ), &ss );
 	WxComboBoxEncoding->SetValue( ss );
 	cfg->Read( wxT( "AutoSaveTimeout" ), &ll );
-	bb = (ll != 0);
-	WxEditAutoSaveTimeout->Enable(bb);
+	bb = ((ll >= 5) && (ll <= 30));
 	WxCheckBoxEnableAutoSave->SetValue( bb );
 	if(!bb) ll = 5;
+	WxEditAutoSaveTimeout->Enable(bb);
 	WxEditAutoSaveTimeout->SetValue( wxString() << ll );
 #ifdef __WXMSW__
 	wxRegKey *pRegKey = new wxRegKey( g_MadEditRegkeyPath + wxT( "*\\shell\\MadEdit-Mod\\command" ) );
@@ -1535,7 +1535,7 @@ void MadOptionsDialog::WxButtonOKClick( wxCommandEvent& event )
 
 	if( !WxEditAutoSaveTimeout->GetValue().ToLong( &lo ) || ( lo < 5 || lo > 30 ))
 	{
-		wxLogError( errtext, WxStaticText30->GetLabel().c_str(), WxEditMaxSizeToLoad->GetValue().c_str() );
+		wxLogError( errtext+_(": Should be 5~30"), WxStaticText30->GetLabel().c_str(), WxEditAutoSaveTimeout->GetValue().c_str() );
 		error = true;
 	}
 
