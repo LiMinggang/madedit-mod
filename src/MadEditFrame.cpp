@@ -5,6 +5,26 @@
 // Maintainer:  minggang.li@gmail.com
 // Licence:     GPL
 ///////////////////////////////////////////////////////////////////////////////
+#include <wx/config.h>
+#include <wx/aui/auibook.h>
+
+#include <wx/app.h>
+//#include <wx/dynload.h>
+#include <wx/tokenzr.h>
+#include <wx/fontenum.h>
+#include <wx/filename.h>
+#include <wx/filefn.h>
+#include <wx/dir.h>
+#include <wx/fontdlg.h>
+#include <wx/textdlg.h>
+#include <wx/msgdlg.h>
+#include <wx/dnd.h>
+#include <wx/printdlg.h>
+#include "wx/wxhtml.h"
+#include <wx/xml/xml.h>
+#include <wx/sstream.h>
+
+#include <algorithm>
 
 #include "MadEdit/MadEdit.h"
 #include "MadEdit/MadEditCommand.h"
@@ -30,27 +50,8 @@
 #include "MadUtils.h"
 #include "MadCommand.h"
 #include "MadRecentList.h"
+#include "MadWinListDialog.h"
 #include "plugin.h"
-#include <wx/config.h>
-#include <wx/aui/auibook.h>
-
-#include <wx/app.h>
-//#include <wx/dynload.h>
-#include <wx/tokenzr.h>
-#include <wx/fontenum.h>
-#include <wx/filename.h>
-#include <wx/filefn.h>
-#include <wx/dir.h>
-#include <wx/fontdlg.h>
-#include <wx/textdlg.h>
-#include <wx/msgdlg.h>
-#include <wx/dnd.h>
-#include <wx/printdlg.h>
-#include "wx/wxhtml.h"
-#include <wx/xml/xml.h>
-#include <wx/sstream.h>
-
-#include <algorithm>
 
 #include "EmbeddedPython.hpp"
 #include "SpellCheckerManager.h"
@@ -8698,6 +8699,9 @@ void MadEditFrame::OnHelpAbout( wxCommandEvent& event )
 	dlg.WxMemoCredits->SetInsertionPoint( 0 );
 	// Hide Modaless Dialog
 	HideModalessDialogs();
+
+	MadWinListDialog dlga(this);
+	dlga.ShowModal();
 
 	if( dlg.ShowModal() == wxID_OK )
 	{

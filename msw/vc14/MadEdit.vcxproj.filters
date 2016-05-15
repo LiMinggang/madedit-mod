@@ -225,6 +225,9 @@
     <ClInclude Include="..\..\src\MadPython.hpp">
       <Filter>Header files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\MadWinListDialog.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\MadAboutDialog.cpp">
@@ -439,6 +442,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\MadSearchReplaceDialog.cpp">
       <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadWinListDialog.cpp">
+      <Filter>Source files\MadEdit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
