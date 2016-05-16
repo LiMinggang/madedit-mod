@@ -8700,8 +8700,8 @@ void MadEditFrame::OnHelpAbout( wxCommandEvent& event )
 	// Hide Modaless Dialog
 	HideModalessDialogs();
 
-	MadWinListDialog dlga(this);
-	dlga.ShowModal();
+	if(g_WinListDialog == NULL) g_WinListDialog = new MadWinListDialog(this);
+	g_WinListDialog->Show(true);
 
 	if( dlg.ShowModal() == wxID_OK )
 	{

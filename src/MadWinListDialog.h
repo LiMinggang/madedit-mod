@@ -8,6 +8,8 @@
 #include <wx/dialog.h>
 //*)
 
+class MadEditFrame;
+
 class MadWinListDialog: public wxDialog
 {
 	public:
@@ -34,6 +36,7 @@ class MadWinListDialog: public wxDialog
 		static const long ID_BUTTONSORTTAB;
 		//*)
 
+		MadEditFrame * m_MainFrame;
 	private:
 
 		//(*Handlers(MadWinListDialog)
@@ -44,8 +47,10 @@ class MadWinListDialog: public wxDialog
 		void OnButtonOkClick(wxCommandEvent& event);
 		void OnMadWinListDialogClose(wxCloseEvent& event);
 		//*)
-
+		void MadWinListDialogActivate( wxActivateEvent& event );
+		void OnWinListSelectionChange(wxCommandEvent& event);
 		DECLARE_EVENT_TABLE()
 };
 
+extern MadWinListDialog *g_WinListDialog;
 #endif

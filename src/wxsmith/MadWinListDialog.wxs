@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <wxsmith>
 	<object class="wxDialog" name="MadWinListDialog">
+		<title>Windows</title>
+		<style>wxCAPTION|wxSYSTEM_MENU|wxCLOSE_BOX</style>
 		<handler function="OnMadWinListDialogClose" entry="EVT_CLOSE" />
 		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
 			<object class="sizeritem">
