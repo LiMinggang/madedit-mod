@@ -61,8 +61,8 @@ MadWinListDialog::MadWinListDialog(wxWindow* parent,wxWindowID id)
 	Connect(wxID_ANY,wxEVT_CLOSE_WINDOW,(wxObjectEventFunction)&MadWinListDialog::OnMadWinListDialogClose);
 	//*)
 
-	Connect(ID_LISTCTRLMADWINLIST,wxEVT_LIST_ITEM_SELECTED,(wxObjectEventFunction)&MadWinListDialog::OnWinListSelectionChange);
-	Connect(ID_LISTCTRLMADWINLIST,wxEVT_LIST_ITEM_DESELECTED,(wxObjectEventFunction)&MadWinListDialog::OnWinListSelectionChange);
+	Connect(ID_LISTCTRLMADWINLIST,wxEVT_LIST_ITEM_SELECTED,(wxObjectEventFunction)&MadWinListDialog::OnWinListSelected);
+	Connect(ID_LISTCTRLMADWINLIST,wxEVT_LIST_ITEM_DESELECTED,(wxObjectEventFunction)&MadWinListDialog::OnWinListDeselected);
 
 	SetDefaultItem(ButtonActivate);
 
@@ -138,9 +138,14 @@ void MadWinListDialog::OnMadWinListDialogClose(wxCloseEvent& event)
     Destroy();
 }
 
-MadWinListDialog::OnWinListSelectionChange(wxCommandEvent& event)
+void MadWinListDialog::OnWinListSelected(wxListEvent& event)
 {
 	bool enable = (MadWindowsList->GetSelectedItemCount() != 1);
 	ButtonActivate->Enable(enable);
 }
 
+void MadWinListDialog::OnWinListDeselected(wxListEvent& event)
+{
+	bool enable = (MadWindowsList->GetSelectedItemCount() != 1);
+	ButtonActivate->Enable(enable);
+}

@@ -1573,6 +1573,7 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_UPDATE_UI( menuToggleWindow, MadEditFrame::OnUpdateUI_MenuWindow_CheckCount )
 	EVT_UPDATE_UI( menuNextWindow, MadEditFrame::OnUpdateUI_MenuWindow_CheckCount )
 	EVT_UPDATE_UI( menuPreviousWindow, MadEditFrame::OnUpdateUI_MenuWindow_CheckCount )
+	EVT_UPDATE_UI( menuWindowList, MadEditFrame::OnUpdateUI_MenuWindow_CheckCount )
 	// file
 	EVT_MENU( menuNew, MadEditFrame::OnFileNew )
 	EVT_MENU( menuOpen, MadEditFrame::OnFileOpen )
@@ -1748,6 +1749,7 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_MENU( menuToggleWindow, MadEditFrame::OnWindowToggleWindow )
 	EVT_MENU( menuNextWindow, MadEditFrame::OnWindowNextWindow )
 	EVT_MENU( menuPreviousWindow, MadEditFrame::OnWindowPreviousWindow )
+	EVT_MENU( menuWindowList, MadEditFrame::OnWindowWindowList )
 	// help
 	EVT_MENU( menuAbout, MadEditFrame::OnHelpAbout )
 	////Manual Code End
@@ -8663,6 +8665,7 @@ void MadEditFrame::OnWindowPreviousWindow( wxCommandEvent& event )
 	g_CheckModTimeForReload = true;
 	g_ActiveMadEdit->ReloadByModificationTime();
 }
+
 void MadEditFrame::OnWindowNextWindow( wxCommandEvent& event )
 {
 	if( m_Notebook->GetPageCount() <= 1 ) { return; }
@@ -8685,6 +8688,12 @@ void MadEditFrame::OnWindowNextWindow( wxCommandEvent& event )
 	g_ActiveMadEdit->ReloadByModificationTime();
 }
 
+void MadEditFrame::OnWindowWindowList( wxCommandEvent& event )
+{
+	if(g_WinListDialog == NULL) g_WinListDialog = new MadWinListDialog(this);
+	g_WinListDialog->ShowModal();
+}
+
 void MadEditFrame::OnHelpAbout( wxCommandEvent& event )
 {
 	MadAboutDialog dlg( this );
@@ -8699,9 +8708,6 @@ void MadEditFrame::OnHelpAbout( wxCommandEvent& event )
 	dlg.WxMemoCredits->SetInsertionPoint( 0 );
 	// Hide Modaless Dialog
 	HideModalessDialogs();
-
-	if(g_WinListDialog == NULL) g_WinListDialog = new MadWinListDialog(this);
-	g_WinListDialog->Show(true);
 
 	if( dlg.ShowModal() == wxID_OK )
 	{

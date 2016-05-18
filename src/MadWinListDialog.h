@@ -48,7 +48,8 @@ class MadWinListDialog: public wxDialog
 		void OnMadWinListDialogClose(wxCloseEvent& event);
 		//*)
 		void MadWinListDialogActivate( wxActivateEvent& event );
-		void OnWinListSelectionChange(wxCommandEvent& event);
+		void OnWinListSelected(wxListEvent& event);
+		void OnWinListDeselected(wxListEvent& event);
 		DECLARE_EVENT_TABLE()
 };
 

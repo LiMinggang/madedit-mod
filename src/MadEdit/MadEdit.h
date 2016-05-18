@@ -430,7 +430,7 @@ private:
 	bool           m_SpellCheck;
 	bool           m_BookmarkInSearch;
     bool           m_LockCaretYPos;
-
+    bool           m_HasBackup;
 #ifdef __WXMSW__
 	bool m_IsWin98;
 	int  m_Win98LeadByte; // fixed that input DBCS char under win98
@@ -759,6 +759,8 @@ public: // basic functions
 	void LockCaretYPos() { m_LockCaretYPos = true; }
 	void UnlockCaretYPos() { m_LockCaretYPos = false; }
 	bool IsCaretYPosLocked() { return m_LockCaretYPos; }
+    bool HasBackup() {return m_HasBackup;}
+    bool SetHasBackup(bool bk) {m_HasBackup = bk;}
 #if __cplusplus <= 199711L
     boost::shared_ptr<wxSpellCheckEngineInterface> &GetSpellChecker() { return m_SpellCheckerPtr; }
 #else

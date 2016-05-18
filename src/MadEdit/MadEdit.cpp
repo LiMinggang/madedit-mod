@@ -891,6 +891,7 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_SpellCheck = false;
 	m_BookmarkInSearch = false;
 	m_LockCaretYPos  = m_Config->ReadBool( wxT( "LockCaretYPos" ),   false );
+	m_HasBackup = true;
 #ifndef PYMADEDIT_DLL
 	m_Config->Read( wxT( "SpellCheck" ),   &m_SpellCheck, true );
 

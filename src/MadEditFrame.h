@@ -400,6 +400,7 @@ public:
 	void OnWindowToggleWindow( wxCommandEvent& event );
 	void OnWindowPreviousWindow( wxCommandEvent& event );
 	void OnWindowNextWindow( wxCommandEvent& event );
+	void OnWindowWindowList( wxCommandEvent& event );
 
 	void OnHelpAbout( wxCommandEvent& event );
 
@@ -733,6 +734,7 @@ enum   // menu id
 	menuToggleWindow,
 	menuPreviousWindow,
 	menuNextWindow,
+	menuWindowList,
 
 	// results
 	menuCopyCurResult,
