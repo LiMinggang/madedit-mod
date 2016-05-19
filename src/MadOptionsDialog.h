@@ -268,7 +268,7 @@ public:
 		wxBoxSizer *WxBoxSizer14;
 		wxPanel *WxNoteBookPage3;
 		wxCheckBox *WxCheckBoxAutoFillColumnPaste;
-		wxCheckBox *WxCheckBoxLockCaretYPos;
+		wxCheckBox *WxCheckBoxTypewriterMode;
 		wxCheckBox *WxCheckBoxMiddleMouseToPaste;
 		wxCheckBox *WxCheckBoxCtrlWithMouseToSelect;
 		wxCheckBox *WxCheckBoxMouseSelectToCopy;

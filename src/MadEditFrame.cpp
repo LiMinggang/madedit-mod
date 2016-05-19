@@ -1541,7 +1541,7 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_UPDATE_UI( menuToolBars, MadEditFrame::OnUpdateUI_MenuViewToolbars )
 	EVT_UPDATE_UI( menuToolBarsToggleAll, MadEditFrame::OnUpdateUI_MenuViewToolbarsToggleAll )
 	EVT_UPDATE_UI_RANGE( menuToolBar1, menuToolBar99, MadEditFrame::OnUpdateUI_MenuViewToolbarList )
-	EVT_UPDATE_UI( menuLockCaretYPos, MadEditFrame::OnUpdateUI_MenuViewLockCaretYPos )
+	EVT_UPDATE_UI( menuTypewriterMode, MadEditFrame::OnUpdateUI_MenuViewTypewriterMode )
 	// tools
 	EVT_UPDATE_UI( menuByteOrderMark, MadEditFrame::OnUpdateUI_MenuToolsByteOrderMark )
 	EVT_UPDATE_UI( menuMadMacro, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
@@ -1700,7 +1700,7 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_MENU( menuTextMode, MadEditFrame::OnViewTextMode )
 	EVT_MENU( menuColumnMode, MadEditFrame::OnViewColumnMode )
 	EVT_MENU( menuHexMode, MadEditFrame::OnViewHexMode )
-	EVT_MENU( menuLockCaretYPos, MadEditFrame::OnViewLockCaretYPos )
+	EVT_MENU( menuTypewriterMode, MadEditFrame::OnViewTypewriterMode )
 	EVT_MENU( menuSpellChecker, MadEditFrame::OnViewSpellChecker )
 	EVT_MENU( menuSpellIgnore, MadEditFrame::OnSpellCheckIgnore )
 	EVT_MENU( menuSpellAdd2Dict, MadEditFrame::OnSpellAdd2Dict )
@@ -2105,7 +2105,7 @@ CommandData CommandTable[] =
 	{ 0,              1, menuMarkActiveLine,    wxT( "menuMarkActiveLine" ),    _( "Mark Active Line" ),     wxT( "" ),             wxITEM_CHECK,     -1,                 0,                         _( "Mark the current line" ), 0, 0, 0, false},
 	{ 0,              1, menuMarkBracePair,     wxT( "menuMarkBracePair" ),     _( "Mark Brace Pair" ),      wxT( "" ),             wxITEM_CHECK,     -1,                 0,                         _( "Mark the BracePair under the caret" ), 0, 0, 0, false},
 	{ 0,              1, menuSpellChecker,      wxT( "menuSpellChecker" ),      _( "Spell Check" ),          wxT( "Ctrl-K" ),       wxITEM_CHECK,     spellchecker_xpm_idx,                 0,       _( "Turn on spell checker" ), 0, &g_tbTEXTVIEW_ptr, _( "Spell Check" ), false},
-	{ 0,              1, menuLockCaretYPos,     wxT( "menuLockCaretYPos" ),     _( "Lock Caret Line Pos" ),  wxT( "" ),             wxITEM_CHECK,     -1,                 0,                         _( "Lock caret line position on screen" ), 0, 0, 0, false},
+	{ 0,              1, menuTypewriterMode,    wxT( "menuTypewriterMode" ),    _( "Typewriter Mode" ),      wxT( "" ),             wxITEM_CHECK,     -1,                 0,                         _( "Triditional Typewriter Mode" ), 0, 0, 0, false},
 	{ 0,              1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0, 0, 0, 0, false},
 	{ 0,              1, menuToolBars,          wxT( "menuToolBar" ),           _( "Toolbars" ),             0,                   wxITEM_NORMAL,    -1,                 &g_Menu_Toolbars,          0, 0, 0, 0, false},
 	{ 0,              2, menuToolBarsToggleAll, wxT( "menuToolBarsToggleAll" ), _( "Toggle Main Toolbar" ),  0,                   wxITEM_CHECK,     -1,                 0,                         _( "Show/Hide Main Toolbar" ), 0, 0, 0, false},
@@ -4620,10 +4620,10 @@ void MadEditFrame::OnUpdateUI_MenuViewToolbarsToggleAll( wxUpdateUIEvent& event 
 	event.Enable( tbMAX != 0 );
 	event.Check( m_ToolbarStatus[tbMAX] );
 }
-void MadEditFrame::OnUpdateUI_MenuViewLockCaretYPos( wxUpdateUIEvent& event )
+void MadEditFrame::OnUpdateUI_MenuViewTypewriterMode( wxUpdateUIEvent& event )
 {
 	event.Enable( g_ActiveMadEdit != NULL );
-	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->IsCaretYPosLocked() );
+	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->IsTypewriterMode() );
 }
 void MadEditFrame::OnUpdateUI_MenuViewToolbarList( wxUpdateUIEvent& event )
 {
@@ -7130,17 +7130,17 @@ void MadEditFrame::OnViewHexMode( wxCommandEvent& event )
 	}
 }
 
-void MadEditFrame::OnViewLockCaretYPos( wxCommandEvent& event )
+void MadEditFrame::OnViewTypewriterMode( wxCommandEvent& event )
 {
 	if( g_ActiveMadEdit != NULL )
 	{
 		if(event.IsChecked())
-			g_ActiveMadEdit->LockCaretYPos( );
+			g_ActiveMadEdit->TypewriterMode( );
 		else
-			g_ActiveMadEdit->UnlockCaretYPos( );
+			g_ActiveMadEdit->ResetTypewriterMode( );
 		
 		wxString oldpath = m_Config->GetPath();
-		m_Config->Write( wxT( "/MadEdit/LockCaretYPos" ), event.IsChecked() );
+		m_Config->Write( wxT( "/MadEdit/TypewriterMode" ), event.IsChecked() );
 		m_Config->SetPath( oldpath );
 	}
 }
@@ -7324,8 +7324,8 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		m_Config->Write( wxT( "MiddleMouseToPaste" ), mmp );
 		afcp = g_OptionsDialog->WxCheckBoxAutoFillColumnPaste->GetValue();
 		m_Config->Write( wxT( "AutoFillColumnPaste" ), afcp );
-		afcp = g_OptionsDialog->WxCheckBoxLockCaretYPos->GetValue();
-		m_Config->Write( wxT( "LockCaretYPos" ), afcp );
+		afcp = g_OptionsDialog->WxCheckBoxTypewriterMode->GetValue();
+		m_Config->Write( wxT( "TypewriterMode" ), afcp );
 		afcp = g_OptionsDialog->WxCheckBoxFixWidthMode->GetValue();
 		m_Config->Write( wxT( "FixedWidthMode" ), afcp );
 		extern bool g_DoNotSaveSettings;

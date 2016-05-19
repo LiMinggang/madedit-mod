@@ -890,7 +890,7 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_LeftBrace_rowid   = m_RightBrace_rowid = -1;
 	m_SpellCheck = false;
 	m_BookmarkInSearch = false;
-	m_LockCaretYPos  = m_Config->ReadBool( wxT( "LockCaretYPos" ),   false );
+	m_TypewriterMode  = m_Config->ReadBool( wxT( "TypewriterMode" ),   false );
 	m_HasBackup = true;
 #ifndef PYMADEDIT_DLL
 	m_Config->Read( wxT( "SpellCheck" ),   &m_SpellCheck, true );
@@ -5442,7 +5442,7 @@ void MadEdit::InsertString( const ucs4_t *ucs, size_t count, bool bColumnEditing
 				if( m_EditMode == emHexMode || oldrows != m_Lines->m_RowCount
 						|| oldlines != m_Lines->m_LineCount || count > 1 )
 				{
-					if((m_EditMode == emTextMode) && ((!m_Selection) && m_LockCaretYPos))
+					if((m_EditMode == emTextMode) && ((!m_Selection) && m_TypewriterMode))
 						++m_TopRow;
 					m_RepaintAll = true;
 				}
@@ -8515,7 +8515,7 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 				case ecReturnNoIndent:
 					if( !IsReadOnly() && !m_SingleLineMode )
 					{
-						bool shouldLock = ((!m_Selection) && m_LockCaretYPos);
+						bool shouldLock = ((!m_Selection) && m_TypewriterMode);
 						if(IsMacroRecording())
 							RecordAsMadMacro( this, wxString(wxT("ProcessCommand( MadEditCommand.Return )")));
 						if( m_Selection && m_EditMode == emColumnMode )

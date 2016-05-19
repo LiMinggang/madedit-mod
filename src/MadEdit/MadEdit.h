@@ -429,7 +429,7 @@ private:
 #endif
 	bool           m_SpellCheck;
 	bool           m_BookmarkInSearch;
-    bool           m_LockCaretYPos;
+    bool           m_TypewriterMode;
     bool           m_HasBackup;
 #ifdef __WXMSW__
 	bool m_IsWin98;
@@ -756,9 +756,9 @@ public: // basic functions
 	bool GetShowSpaceChar() { return m_ShowSpaceChar; }
 	bool GetMarkActiveLine() { return m_MarkActiveLine; }
 	bool GetSpellCheckStatus() { return m_SpellCheck; }
-	void LockCaretYPos() { m_LockCaretYPos = true; }
-	void UnlockCaretYPos() { m_LockCaretYPos = false; }
-	bool IsCaretYPosLocked() { return m_LockCaretYPos; }
+	void TypewriterMode() { m_TypewriterMode = true; }
+	void ResetTypewriterMode() { m_TypewriterMode = false; }
+	bool IsTypewriterMode() { return m_TypewriterMode; }
     bool HasBackup() {return m_HasBackup;}
     bool SetHasBackup(bool bk) {m_HasBackup = bk;}
 #if __cplusplus <= 199711L

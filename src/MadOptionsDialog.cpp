@@ -422,9 +422,9 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxCheckBoxAutoFillColumnPaste = new wxCheckBox( WxNoteBookPage2, ID_WXCHECKBOXAUTOFILLCOLUMN, _( "Auto fill in column paste" ), wxPoint( 24, 122 ), wxSize( 480, 20 ), 0, wxDefaultValidator, wxT( "WxCheckBoxAutoFillColumnPaste" ) );
 	WxBoxSizer12->Add( WxCheckBoxAutoFillColumnPaste, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
 	SET_CONTROLPARENT( WxCheckBoxAutoFillColumnPaste );
-	WxCheckBoxLockCaretYPos = new wxCheckBox( WxNoteBookPage2, ID_WXCHECKBOXLOCKCARETYPOS, _( "Lock caret line Y position" ), wxPoint( 24, 146 ), wxSize( 480, 20 ), 0, wxDefaultValidator, wxT( "WxCheckBoxLockCaretYPos" ) );
-	WxBoxSizer12->Add( WxCheckBoxLockCaretYPos, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
-	SET_CONTROLPARENT( WxCheckBoxLockCaretYPos );
+	WxCheckBoxTypewriterMode = new wxCheckBox( WxNoteBookPage2, ID_WXCHECKBOXLOCKCARETYPOS, _( "Lock caret line Y position" ), wxPoint( 24, 146 ), wxSize( 480, 20 ), 0, wxDefaultValidator, wxT( "WxCheckBoxTypewriterMode" ) );
+	WxBoxSizer12->Add( WxCheckBoxTypewriterMode, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
+	SET_CONTROLPARENT( WxCheckBoxTypewriterMode );
 	WxCheckBoxFixWidthMode = new wxCheckBox( WxNoteBookPage2, ID_WXCHECKBOXFIXWIDTHMODE, _( "Fix width mode" ), wxPoint( 24, 170 ), wxSize( 480, 20 ), 0, wxDefaultValidator, wxT( "WxCheckBoxFixWidthMode" ) );
 	WxBoxSizer12->Add( WxCheckBoxFixWidthMode, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
 	SET_CONTROLPARENT( WxCheckBoxFixWidthMode );
@@ -1305,8 +1305,8 @@ void MadOptionsDialog::LoadOptions( void )
 	WxCheckBoxMiddleMouseToPaste->SetValue( bb );
 	cfg->Read( wxT( "AutoFillColumnPaste" ), &bb, true );
 	WxCheckBoxAutoFillColumnPaste->SetValue( bb );
-	cfg->Read( wxT( "LockCaretYPos" ), &bb, false );
-	WxCheckBoxLockCaretYPos->SetValue( bb );
+	cfg->Read( wxT( "TypewriterMode" ), &bb, false );
+	WxCheckBoxTypewriterMode->SetValue( bb );
 	cfg->Read( wxT( "FixedWidthMode" ), &bb, false );
 	WxCheckBoxFixWidthMode->SetValue( bb );
 	extern bool g_DoNotSaveSettings;

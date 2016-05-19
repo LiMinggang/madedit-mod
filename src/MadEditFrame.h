@@ -205,7 +205,7 @@ public:
 	void OnUpdateUI_MenuViewToolbars( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuViewToolbarsToggleAll( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuViewToolbarList( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewLockCaretYPos( wxUpdateUIEvent& event );
+	void OnUpdateUI_MenuViewTypewriterMode( wxUpdateUIEvent& event );
 
 	void OnUpdateUI_MenuToolsByteOrderMark( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuToolsNewLineChar( wxUpdateUIEvent& event );
@@ -356,7 +356,7 @@ public:
 	void OnSpellCheckRemoveFromDict( wxCommandEvent& event );
 	void OnViewToolBarsToggleAll( wxCommandEvent& event );
 	void OnViewToolbars( wxCommandEvent& event );
-	void OnViewLockCaretYPos( wxCommandEvent& event );
+	void OnViewTypewriterMode( wxCommandEvent& event );
 
 	void OnToolsOptions( wxCommandEvent& event );
 	void OnToolsHighlighting( wxCommandEvent& event );
@@ -743,7 +743,7 @@ enum   // menu id
 	menuDeleteCurResult,
     menuCollapseCurResult,
 
-	menuLockCaretYPos,
+	menuTypewriterMode,
 };
 
 enum MadPreviewType
