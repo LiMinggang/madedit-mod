@@ -1,6 +1,7 @@
 #ifndef MADWINLISTDIALOG_H
 #define MADWINLISTDIALOG_H
 
+#include <set>
 //(*Headers(MadWinListDialog)
 #include <wx/listctrl.h>
 #include <wx/sizer.h>
@@ -22,6 +23,7 @@ class MadWinListDialog: public wxDialog
 		wxButton* ButtonActivate;
 		wxButton* ButtonSortTab;
 		wxButton* ButtonSave;
+		wxButton* ButtonSaveAs;
 		wxListCtrl* MadWindowsList;
 		wxButton* ButtonOk;
 		//*)
@@ -32,6 +34,7 @@ class MadWinListDialog: public wxDialog
 		static const long ID_LISTCTRLMADWINLIST;
 		static const long ID_BUTTONACTIVATE;
 		static const long ID_BUTTONSAVE;
+		static const long ID_BUTTONSAVEAS;
 		static const long ID_BUTTONCLOSEWINDOWS;
 		static const long ID_BUTTONSORTTAB;
 		//*)
@@ -48,8 +51,7 @@ class MadWinListDialog: public wxDialog
 		void OnMadWinListDialogClose(wxCloseEvent& event);
 		//*)
 		void MadWinListDialogActivate( wxActivateEvent& event );
-		void OnWinListSelected(wxListEvent& event);
-		void OnWinListDeselected(wxListEvent& event);
+		void OnWinListSelectionChanged(wxListEvent& event);
 		DECLARE_EVENT_TABLE()
 };
 

@@ -12,6 +12,7 @@
 const long MadWinListDialog::ID_LISTCTRLMADWINLIST = wxNewId();
 const long MadWinListDialog::ID_BUTTONACTIVATE = wxNewId();
 const long MadWinListDialog::ID_BUTTONSAVE = wxNewId();
+const long MadWinListDialog::ID_BUTTONSAVEAS = wxNewId();
 const long MadWinListDialog::ID_BUTTONCLOSEWINDOWS = wxNewId();
 const long MadWinListDialog::ID_BUTTONSORTTAB = wxNewId();
 //*)
@@ -42,6 +43,8 @@ MadWinListDialog::MadWinListDialog(wxWindow* parent,wxWindowID id)
 	BoxSizer3->Add(ButtonActivate, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	ButtonSave = new wxButton(this, ID_BUTTONSAVE, _("Save"), wxDefaultPosition, wxSize(110,27), 0, wxDefaultValidator, _T("ID_BUTTONSAVE"));
 	BoxSizer3->Add(ButtonSave, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	ButtonSaveAs = new wxButton(this, ID_BUTTONSAVEAS, _("Save As"), wxDefaultPosition, wxSize(110,27), 0, wxDefaultValidator, _T("ID_BUTTONSAVEAS"));
+	BoxSizer3->Add(ButtonSaveAs, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	ButtonCloseWindows = new wxButton(this, ID_BUTTONCLOSEWINDOWS, _("Close Window(s)"), wxDefaultPosition, wxSize(110,27), 0, wxDefaultValidator, _T("ID_BUTTONCLOSEWINDOWS"));
 	BoxSizer3->Add(ButtonCloseWindows, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	ButtonSortTab = new wxButton(this, ID_BUTTONSORTTAB, _("Sort Tab"), wxDefaultPosition, wxSize(110,27), 0, wxDefaultValidator, _T("ID_BUTTONSORTTAB"));
@@ -61,8 +64,8 @@ MadWinListDialog::MadWinListDialog(wxWindow* parent,wxWindowID id)
 	Connect(wxID_ANY,wxEVT_CLOSE_WINDOW,(wxObjectEventFunction)&MadWinListDialog::OnMadWinListDialogClose);
 	//*)
 
-	Connect(ID_LISTCTRLMADWINLIST,wxEVT_LIST_ITEM_SELECTED,(wxObjectEventFunction)&MadWinListDialog::OnWinListSelected);
-	Connect(ID_LISTCTRLMADWINLIST,wxEVT_LIST_ITEM_DESELECTED,(wxObjectEventFunction)&MadWinListDialog::OnWinListDeselected);
+	Connect(ID_LISTCTRLMADWINLIST,wxEVT_LIST_ITEM_SELECTED,(wxObjectEventFunction)&MadWinListDialog::OnWinListSelectionChanged);
+	Connect(ID_LISTCTRLMADWINLIST,wxEVT_LIST_ITEM_DESELECTED,(wxObjectEventFunction)&MadWinListDialog::OnWinListSelectionChanged);
 
 	SetDefaultItem(ButtonActivate);
 
@@ -85,13 +88,13 @@ MadWinListDialog::~MadWinListDialog()
 void MadWinListDialog::MadWinListDialogActivate( wxActivateEvent& event )
 {
 	wxAuiNotebook * notebookp = reinterpret_cast<wxAuiNotebook *>(m_MainFrame->m_Notebook);
-	int count = int( notebookp->GetPageCount() );
+	long count = (long) notebookp->GetPageCount();
+	long tmp;
 
 	MadWindowsList->Hide();
 	MadWindowsList->DeleteAllItems();
-	long tmp;
 
-	for( int id = 0; id < count; ++id )
+	for( long id = 0; id < count; ++id )
 	{
 		MadEdit * madedit = ( MadEdit* )notebookp->GetPage( id );
 		wxFileName fileName( madedit->GetFileName() );
@@ -112,15 +115,46 @@ void MadWinListDialog::MadWinListDialogActivate( wxActivateEvent& event )
 
 void MadWinListDialog::OnButtonActivateClick(wxCommandEvent& event)
 {
+	wxASSERT(MadWindowsList->GetSelectedItemCount() == 1);
+	long selRowId = MadWindowsList->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
+	wxASSERT ( selRowId != -1 );
+	long pageId = static_cast<long>(MadWindowsList->GetItemData(selRowId));
 	wxAuiNotebook * notebookp = reinterpret_cast<wxAuiNotebook *>(m_MainFrame->m_Notebook);
+	notebookp->SetSelection(pageId);
 }
 
 void MadWinListDialog::OnButtonSaveClick(wxCommandEvent& event)
 {
+	wxASSERT(MadWindowsList->GetSelectedItemCount() > 0);
+	long item = -1;
+	wxAuiNotebook * notebookp = reinterpret_cast<wxAuiNotebook *>(m_MainFrame->m_Notebook);
+	for ( ;; )
+	{
+		item = MadWindowsList->GetNextItem(item, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
+		if ( item == -1 )
+			break;
+
+		// this item is selected
+		long pageId = static_cast<long>(MadWindowsList->GetItemData(item));
+		m_MainFrame->SaveFile(pageId);
+	}
 }
 
 void MadWinListDialog::OnButtonCloseWindowsClick(wxCommandEvent& event)
 {
+	wxASSERT(MadWindowsList->GetSelectedItemCount() > 0);
+	long item = -1;
+	wxAuiNotebook * notebookp = reinterpret_cast<wxAuiNotebook *>(m_MainFrame->m_Notebook);
+	for ( ;; )
+	{
+		item = MadWindowsList->GetNextItem(item, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
+		if ( item == -1 )
+			break;
+
+		// this item is selected
+		long pageId = static_cast<long>(MadWindowsList->GetItemData(item));
+		m_MainFrame->CloseFile(pageId);
+	}
 }
 
 void MadWinListDialog::OnButtonSortTabClick(wxCommandEvent& event)
@@ -138,14 +172,14 @@ void MadWinListDialog::OnMadWinListDialogClose(wxCloseEvent& event)
     Destroy();
 }
 
-void MadWinListDialog::OnWinListSelected(wxListEvent& event)
+void MadWinListDialog::OnWinListSelectionChanged(wxListEvent& event)
 {
-	bool enable = (MadWindowsList->GetSelectedItemCount() != 1);
-	ButtonActivate->Enable(enable);
+	bool onlyOne = (MadWindowsList->GetSelectedItemCount() == 1);
+	bool selected = (MadWindowsList->GetSelectedItemCount() > 0);
+	ButtonActivate->Enable(onlyOne);
+	ButtonCloseWindows->Enable(selected);
+	ButtonSortTab->Enable(selected);
+	ButtonSave->Enable(selected);
+	ButtonSaveAs->Enable(selected);
 }
 
-void MadWinListDialog::OnWinListDeselected(wxListEvent& event)
-{
-	bool enable = (MadWindowsList->GetSelectedItemCount() != 1);
-	ButtonActivate->Enable(enable);
-}

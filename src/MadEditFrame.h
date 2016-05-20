@@ -419,7 +419,7 @@ public:
 	int OpenedFileCount();
 	void OpenFile( const wxString &filename, bool mustExist, bool changeSelection = true ); // if filename is empty, open a new file
 	void RunScriptWithFile( const wxString &filename, const wxString &script, bool mustExist, bool closeafterdone, bool ignorereadonly, bool activeFile );
-	void CloseFile( int pageId );
+	void CloseFile( long pageId );
 	void CloseAllFiles( bool force );
 	void MadEditFrameKeyDown( wxKeyEvent& event );
 	void SetPageFocus( int pageId );
@@ -427,6 +427,7 @@ public:
 	MadEdit *GetEditByFileName( const wxString &filename, int &id );
 	void ResetAcceleratorTable();
 	void HideQuickFindBar();
+    void SaveFile(long pageId, bool saveas = false);
 
 protected:
 	void MadEditFrameClose( wxCloseEvent& event );

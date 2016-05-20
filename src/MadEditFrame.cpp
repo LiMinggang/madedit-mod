@@ -4114,7 +4114,7 @@ void MadEditFrame::RunScriptWithFile( const wxString &filename, const wxString &
 	}
 }
 
-void MadEditFrame::CloseFile( int pageId )
+void MadEditFrame::CloseFile( long pageId )
 {
 	if( QueryCloseFile( pageId ) )
 	{
@@ -4842,19 +4842,28 @@ void MadEditFrame::OnFileOpen( wxCommandEvent& event )
 	filterIndex = dlg.GetFilterIndex();
 }
 
+void MadEditFrame::SaveFile(long pageId, bool saveas/* = false*/)
+{
+	wxString name = m_Notebook->GetPageText( pageId );
+	
+	if( name[name.Len() - 1] == wxT( '*' ) )
+	{ name.Truncate( name.Len() - 1 ); }
+	
+	// Hide Modaless Dialog
+	if(saveas)
+		HideModalessDialogs();
+
+	if( g_ActiveMadEdit->Save( false, name, saveas ) == wxID_YES )
+	{
+		m_RecentFiles->AddFileToHistory( g_ActiveMadEdit->GetFileName() );
+	}
+}
+
 void MadEditFrame::OnFileSave( wxCommandEvent& event )
 {
 	if( g_ActiveMadEdit != NULL )
 	{
-		wxString name = m_Notebook->GetPageText( m_Notebook->GetSelection() );
-
-		if( name[name.Len() - 1] == wxT( '*' ) )
-		{ name.Truncate( name.Len() - 1 ); }
-
-		if( g_ActiveMadEdit->Save( false, name, false ) == wxID_YES )
-		{
-			m_RecentFiles->AddFileToHistory( g_ActiveMadEdit->GetFileName() );
-		}
+		SaveFile( m_Notebook->GetSelection(), false );
 	}
 }
 
@@ -4862,18 +4871,7 @@ void MadEditFrame::OnFileSaveAs( wxCommandEvent& event )
 {
 	if( g_ActiveMadEdit != NULL )
 	{
-		wxString name = m_Notebook->GetPageText( m_Notebook->GetSelection() );
-
-		if( name[name.Len() - 1] == wxT( '*' ) )
-		{ name.Truncate( name.Len() - 1 ); }
-
-		// Hide Modaless Dialog
-		HideModalessDialogs();
-
-		if( g_ActiveMadEdit->Save( false, name, true ) == wxID_YES )
-		{
-			m_RecentFiles->AddFileToHistory( g_ActiveMadEdit->GetFileName() );
-		}
+		SaveFile( m_Notebook->GetSelection(), true );
 	}
 }
 
