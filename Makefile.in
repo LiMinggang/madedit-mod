@@ -118,6 +118,7 @@ am_madedit_OBJECTS = src/madedit-MadAboutDialog.$(OBJEXT) \
 	src/madedit-MadWordCountDialog.$(OBJEXT) \
 	src/madedit-MadPurgeHistoryDialog.$(OBJEXT) \
 	src/madedit-MadNumberDlg.$(OBJEXT) \
+	src/madedit-MadWinListDialog.$(OBJEXT) \
 	src/madedit-MadMacroDlg.$(OBJEXT) \
 	src/madedit-MadRecentList.$(OBJEXT) \
 	src/madedit-EmbeddedPython.$(OBJEXT) \
@@ -683,6 +684,8 @@ madedit_SOURCES = src/MadAboutDialog.cpp \
 	src/MadPurgeHistoryDialog.h \
 	src/MadNumberDlg.cpp \
 	src/MadNumberDlg.h \
+	src/MadWinListDialog.cpp \
+	src/MadWinListDialog.h \
 	src/MadMacroDlg.cpp \
 	src/MadMacroDlg.h \
 	src/MadRecentList.cpp \
@@ -1326,6 +1329,8 @@ src/madedit-MadWordCountDialog.$(OBJEXT): src/$(am__dirstamp) \
 src/madedit-MadPurgeHistoryDialog.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/madedit-MadNumberDlg.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+src/madedit-MadWinListDialog.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/madedit-MadMacroDlg.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)

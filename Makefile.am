@@ -41,6 +41,8 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	src/MadPurgeHistoryDialog.h \
 	src/MadNumberDlg.cpp \
 	src/MadNumberDlg.h \
+	src/MadWinListDialog.cpp \
+	src/MadWinListDialog.h \
 	src/MadMacroDlg.cpp \
 	src/MadMacroDlg.h \
 	src/MadRecentList.cpp \
