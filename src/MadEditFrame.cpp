@@ -7275,6 +7275,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 					m_AutoSaveTimer.Start(m_AutoSaveTimout*60*1000);
 			}
 		}
+		m_Config->Write( wxT( "AutoBackup" ), g_OptionsDialog->WxCheckBoxEnableAutoBackup->GetValue() );
 			
 #ifdef __WXMSW__
 

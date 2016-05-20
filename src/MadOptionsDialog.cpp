@@ -338,10 +338,12 @@ void MadOptionsDialog::CreateGUIControls( void )
 	SET_CONTROLPARENT( WxCheckBoxPurgeHistory );
 	WxBoxSizer51 = new wxBoxSizer( wxHORIZONTAL );
 	WxBoxSizer7->Add( WxBoxSizer51, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
-	WxCheckBoxEnableAutoSave = new wxCheckBox( WxNoteBookPage1, ID_WXCHECKBOXENABLEAUTOSAVE, _( "Enable auto save" ), wxPoint( 2, 2 ), wxSize( 120, 20 ), 0, wxDefaultValidator, wxT( "WxCheckBoxEnableAutoSave" ) );;
+	WxCheckBoxEnableAutoSave = new wxCheckBox( WxNoteBookPage1, ID_WXCHECKBOXENABLEAUTOSAVE, _( "Enable auto save" ), wxPoint( 2, 122 ), wxSize( 120, 20 ), 0, wxDefaultValidator, wxT( "WxCheckBoxEnableAutoSave" ) );;
 	WxBoxSizer51->Add( WxCheckBoxEnableAutoSave, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
 	SET_CONTROLPARENT( WxCheckBoxEnableAutoSave );
-	wxBoxSizer *BoxSizer52 = new wxBoxSizer( wxHORIZONTAL );
+	WxCheckBoxEnableAutoBackup = new wxCheckBox( WxNoteBookPage1, ID_WXCHECKBOXENABLEAUTOBACKUP, _( "Enable auto backup" ), wxPoint( 2, 146 ), wxSize( 120, 20 ), 0, wxDefaultValidator, wxT( "WxCheckBoxEnableAutoBackup" ) );;
+	WxBoxSizer51->Add( WxCheckBoxEnableAutoBackup, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
+	SET_CONTROLPARENT( WxCheckBoxEnableAutoBackup );	wxBoxSizer *BoxSizer52 = new wxBoxSizer( wxHORIZONTAL );
 	WxBoxSizer7->Add( BoxSizer52, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	BoxSizer52->Add(10,0,0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
 	WxStaticText30 = new wxStaticText( WxNoteBookPage1, ID_WXSTATICTEXT30, _( "Timeout(M)" ), wxPoint( 125, 2 ), wxSize( 70, 20 ), wxST_NO_AUTORESIZE, wxT( "WxStaticText30" ) );
@@ -1261,6 +1263,8 @@ void MadOptionsDialog::LoadOptions( void )
 	if(!bb) ll = 5;
 	WxEditAutoSaveTimeout->Enable(bb);
 	WxEditAutoSaveTimeout->SetValue( wxString() << ll );
+	cfg->Read( wxT( "AutoBackup" ), &bb );
+	WxCheckBoxEnableAutoBackup->SetValue( bb );
 #ifdef __WXMSW__
 	wxRegKey *pRegKey = new wxRegKey( g_MadEditRegkeyPath + wxT( "*\\shell\\MadEdit-Mod\\command" ) );
 

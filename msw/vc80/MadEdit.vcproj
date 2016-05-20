@@ -264,6 +264,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\MadWinListDialog.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\MadWordCountDialog.cpp"
 				>
 			</File>
@@ -603,6 +607,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\MadUtils.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\MadWinListDialog.h"
 				>
 			</File>
 			<File

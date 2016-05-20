@@ -92,6 +92,7 @@ public:
   //wx-devcpp will remove them. Try adding the custom code 
   //after the block.
   ////GUI Control Declaration Start
+        wxCheckBox *WxCheckBoxEnableAutoBackup;
   		wxCheckBox *WxCheckBoxEnableAutoSave;
 		wxTextCtrl *WxEditAutoSaveTimeout;
 		wxStaticText *WxStaticText30;
@@ -333,6 +334,8 @@ public:
     //Try copy pasting the below block in your old Form header Files.
 	enum {
 ////GUI Enum Control ID Start
+			ID_WXSTATICTEXT31 = 1394,
+			ID_WXCHECKBOXENABLEAUTOBACKUP = 1393,
 			ID_WXEDITAUTOSAVETIMEOUT = 1392,
 			ID_WXSTATICTEXT30 = 1391,
 			ID_WXCHECKBOXENABLEAUTOSAVE = 1390,
