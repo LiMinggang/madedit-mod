@@ -7,6 +7,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <boost/scoped_ptr.hpp>
+#include <wx/filefn.h>
 #include "MadEdit.h"
 #include "MadEditPv.h"
 
@@ -2422,6 +2423,7 @@ bool MadEdit::LoadFromFile( const wxString &filename, const wxString &encoding )
 	m_CaretPos.Reset( m_ValidPos_iter );
 	m_LastCaretXPos = 0;
 	m_DoRecountLineWidth = false;
+	m_HasBackup = false;
 
 	if( m_EditMode == emHexMode )
 	{
@@ -2491,6 +2493,7 @@ int MadEdit::Save( bool ask, const wxString &title, bool saveas ) // return YES,
 	int ret = wxID_YES;
 	bool refresh = false;
 	wxString filename = m_Lines->m_Name;
+	wxString oldfilename(filename);
 
 	if( filename.IsEmpty() )
 	{
@@ -2546,6 +2549,18 @@ int MadEdit::Save( bool ask, const wxString &title, bool saveas ) // return YES,
 
 		if( ret == wxID_YES )
 		{
+			if(!m_HasBackup)
+			{
+				bool bb = true;
+				m_Config->Read( wxT( "AutoBackup" ), &bb, false );
+				if(bb && (oldfilename == filename))
+				{
+					oldfilename += wxT(".bak");
+					wxRenameFile (filename, oldfilename);
+				}
+				m_HasBackup = true;
+			}
+
 			SaveToFile( filename );
 
 			if( refresh )
@@ -2554,6 +2569,7 @@ int MadEdit::Save( bool ask, const wxString &title, bool saveas ) // return YES,
 				Refresh( false );
 			}
 		}
+
 	}
 
 	return ret;
@@ -3323,7 +3339,7 @@ int MadEdit::ReplaceTextAll( const wxString &expr, const wxString &fmt,
 	{
 		// fmt is the wanted string
 		TranslateText( fmt.c_str(), fmt.Len(), &ucs, true );
-	
+
 		for( size_t i = 0, size = ucs.size(); i < size; ++i )
 		{
 			out += ucs[i] ;

@@ -2178,6 +2178,7 @@ CommandData CommandTable[] =
 	{ ecToggleWindow, 1, menuToggleWindow,   wxT( "menuToggleWindow" ),   _( "&Toggle Window" ),   wxT( "Ctrl-TAB" ), wxITEM_NORMAL, -1, 0, _( "Switch to the previous active window" ), 0, 0, 0, false},
 	{ 0,              1, menuPreviousWindow, wxT( "menuPreviousWindow" ), _( "&Previous Window" ), wxT( "F5" ),       wxITEM_NORMAL, -1, 0, _( "Activate the previous window" ), 0, 0, 0, false},
 	{ 0,              1, menuNextWindow,     wxT( "menuNextWindow" ),     _( "&Next Window" ),     wxT( "F6" ),       wxITEM_NORMAL, -1, 0, _( "Activate the next window" ), 0, 0, 0, false},
+	{ 0,              1, menuWindowList,     wxT( "menuWindowList" ),     _( "&Windows..." ),      0,                 wxITEM_NORMAL, -1, 0, _( "Window list" ), 0, 0, 0, false},
 
 	// Help
 	{ 0, 0, 0, 0, _( "&Help" ), 0, wxITEM_NORMAL, 0, &g_Menu_Help, 0, 0, 0, 0, false},
