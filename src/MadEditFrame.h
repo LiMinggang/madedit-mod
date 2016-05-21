@@ -427,7 +427,7 @@ public:
 	MadEdit *GetEditByFileName( const wxString &filename, int &id );
 	void ResetAcceleratorTable();
 	void HideQuickFindBar();
-    void SaveFile(long pageId, bool saveas = false);
+    void SaveFile(long pageId, bool saveas = false, bool hideDlg = true);
 
 protected:
 	void MadEditFrameClose( wxCloseEvent& event );

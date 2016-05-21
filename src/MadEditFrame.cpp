@@ -4845,20 +4845,27 @@ void MadEditFrame::OnFileOpen( wxCommandEvent& event )
 	filterIndex = dlg.GetFilterIndex();
 }
 
-void MadEditFrame::SaveFile(long pageId, bool saveas/* = false*/)
+void MadEditFrame::SaveFile(long pageId, bool saveas/* = false*/, bool hideDlg/* = true*/)
 {
-	wxString name = m_Notebook->GetPageText( pageId );
-	
-	if( name[name.Len() - 1] == wxT( '*' ) )
-	{ name.Truncate( name.Len() - 1 ); }
-	
-	// Hide Modaless Dialog
-	if(saveas)
-		HideModalessDialogs();
+	int count = int( m_Notebook->GetPageCount() );
 
-	if( g_ActiveMadEdit->Save( false, name, saveas ) == wxID_YES )
+	if(pageId >= 0 && pageId < count)
 	{
-		m_RecentFiles->AddFileToHistory( g_ActiveMadEdit->GetFileName() );
+		wxString name = m_Notebook->GetPageText( pageId );
+		
+		if( name[name.Len() - 1] == wxT( '*' ) )
+		{ name.Truncate( name.Len() - 1 ); }
+		
+		// Hide Modaless Dialog
+		if(hideDlg)
+			HideModalessDialogs();
+
+		MadEdit *madedit = ( MadEdit* )m_Notebook->GetPage(pageId);
+
+		if( madedit->Save( false, name, saveas ) == wxID_YES )
+		{
+			m_RecentFiles->AddFileToHistory( madedit->GetFileName() );
+		}
 	}
 }
 
@@ -4866,7 +4873,7 @@ void MadEditFrame::OnFileSave( wxCommandEvent& event )
 {
 	if( g_ActiveMadEdit != NULL )
 	{
-		SaveFile( m_Notebook->GetSelection(), false );
+		SaveFile( m_Notebook->GetSelection(), false, false );
 	}
 }
 
@@ -9110,69 +9117,19 @@ void MadEditFrame::OnSearchQuickFindNext( wxCommandEvent& event )
 
 void MadEditFrame::OnTimer(wxTimerEvent& event)
 {
-	int selid = m_Notebook->GetSelection();
-	wxString name;
-
-	if( selid == -1 ) { goto RESTART_TIMER; } // no file was opened
-
-	MadEdit *madedit = ( MadEdit* )m_Notebook->GetPage( selid );
-
-	if( madedit->IsModified() )
-	{
-		name = m_Notebook->GetPageText( selid );
-
-		if( name[name.Len() - 1] == wxT( '*' ) )
-		{ name.Truncate( name.Len() - 1 ); }
-
-		wxFileName fileName( madedit->GetFileName() );
-
-		if((name == fileName.GetFullName()) && (madedit->Save( false, name, false ) == wxID_CANCEL ))
-		{ goto RESTART_TIMER; }
-	}
-
 	int count = int( m_Notebook->GetPageCount() );
-	int id = 0, sid = selid;
+	int id = 0;
 
-	do
+	while(id < count )
 	{
-		if( id != selid )
+		MadEdit *madedit = ( MadEdit* )m_Notebook->GetPage( id );
+		if(!madedit->GetFileName().IsEmpty() )
 		{
-			madedit = ( MadEdit* )m_Notebook->GetPage( id );
-
-			if( madedit->IsModified() )
-			{
-				if( madedit->GetFileName().IsEmpty() )
-				{
-					m_Notebook->SetSelection( id );
-					MadEdit *cme = ( MadEdit* )m_Notebook->GetPage( m_Notebook->GetSelection() );
-
-					if( cme != g_ActiveMadEdit )
-					{
-						wxAuiNotebookEvent event( wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGED, m_Notebook->GetId() );
-						event.SetSelection( id );
-						event.SetOldSelection( sid );
-						event.SetEventObject( this );
-						OnNotebookPageChanged( event );
-					}
-				}
-
-				name = m_Notebook->GetPageText( id );
-
-				if( name[name.Len() - 1] == wxT( '*' ) )
-				{ name.Truncate( name.Len() - 1 ); }
-
-				wxFileName fileName( madedit->GetFileName() );
-				
-				if((name == fileName.GetFullName()) && (madedit->Save( false, name, false ) == wxID_CANCEL ))
-				{ goto RESTART_TIMER; }
-
-				sid = id;
-			}
+			SaveFile( id, false, false );
 		}
+		++id;
 	}
-	while( ++id < count );
 
-RESTART_TIMER:
 	m_AutoSaveTimer.StartOnce(m_AutoSaveTimout*MADMINUTES);
 }
 
