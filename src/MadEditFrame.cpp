@@ -200,6 +200,8 @@
 #include "../images/recentfiles.xpm"
 #define recentfiles_xpm_idx (closepreview_xpm_idx+1)
 
+#define MADMINUTES (60*1000)
+
 char ** g_MadIcons[] =
 {
 	&null_xpm[0], &new_xpm[0], &fileopen_xpm[0], &filesave_xpm[0], &saveall_xpm[0], &fileclose_xpm[0],
@@ -2339,9 +2341,9 @@ MadEditFrame::MadEditFrame( wxWindow *parent, wxWindowID id, const wxString &tit
 	g_MainFrame = this;
 
 	m_AutoSaveTimout = 0;
-	m_Config->Read( wxT( "AutoSaveTimeout" ), &m_AutoSaveTimout );
-	if(m_AutoSaveTimout >= 5 && m_AutoSaveTimout <= 30)
-		m_AutoSaveTimer.Start(m_AutoSaveTimout*60*1000);
+	m_Config->Read( wxT( "AutoSaveTimeout" ), &m_AutoSaveTimout, 10 );
+	if(m_AutoSaveTimout >= 10 && m_AutoSaveTimout <= 30)
+		m_AutoSaveTimer.StartOnce(m_AutoSaveTimout*MADMINUTES);
 	else
 		m_AutoSaveTimout = 0;
 }
@@ -7264,7 +7266,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		m_Config->Write( wxT( "DefaultEncoding" ), g_OptionsDialog->WxComboBoxEncoding->GetValue() );
 		ll = 0;
 		if (g_OptionsDialog->WxCheckBoxEnableAutoSave->GetValue()) g_OptionsDialog->WxEditAutoSaveTimeout->GetValue().ToLong(&ll);
-		if(ll >= 5 && ll <= 30)
+		if(ll >= 10 && ll <= 30)
 		{
 			m_Config->Write( wxT( "AutoSaveTimeout" ), ll );
 			if(m_AutoSaveTimout != ll)
@@ -7273,7 +7275,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 					m_AutoSaveTimer.Stop();
 				m_AutoSaveTimout = ll;
 				if(m_AutoSaveTimout)
-					m_AutoSaveTimer.Start(m_AutoSaveTimout*60*1000);
+					m_AutoSaveTimer.StartOnce(m_AutoSaveTimout*MADMINUTES);
 			}
 		}
 		m_Config->Write( wxT( "AutoBackup" ), g_OptionsDialog->WxCheckBoxEnableAutoBackup->GetValue() );
@@ -9109,11 +9111,11 @@ void MadEditFrame::OnSearchQuickFindNext( wxCommandEvent& event )
 void MadEditFrame::OnTimer(wxTimerEvent& event)
 {
 	int selid = m_Notebook->GetSelection();
+	wxString name;
 
-	if( selid == -1 ) { return; } // no file was opened
+	if( selid == -1 ) { goto RESTART_TIMER; } // no file was opened
 
 	MadEdit *madedit = ( MadEdit* )m_Notebook->GetPage( selid );
-	wxString name;
 
 	if( madedit->IsModified() )
 	{
@@ -9122,8 +9124,10 @@ void MadEditFrame::OnTimer(wxTimerEvent& event)
 		if( name[name.Len() - 1] == wxT( '*' ) )
 		{ name.Truncate( name.Len() - 1 ); }
 
-		if( wxFileExists(name ) && (madedit->Save( false, name, false ) == wxID_CANCEL ))
-		{ return; }
+		wxFileName fileName( madedit->GetFileName() );
+
+		if((name == fileName.GetFullName()) && (madedit->Save( false, name, false ) == wxID_CANCEL ))
+		{ goto RESTART_TIMER; }
 	}
 
 	int count = int( m_Notebook->GetPageCount() );
@@ -9157,14 +9161,19 @@ void MadEditFrame::OnTimer(wxTimerEvent& event)
 				if( name[name.Len() - 1] == wxT( '*' ) )
 				{ name.Truncate( name.Len() - 1 ); }
 
-				if( wxFileExists(name ) && ( madedit->Save( false, name, false ) == wxID_CANCEL ))
-				{ return; }
+				wxFileName fileName( madedit->GetFileName() );
+				
+				if((name == fileName.GetFullName()) && (madedit->Save( false, name, false ) == wxID_CANCEL ))
+				{ goto RESTART_TIMER; }
 
 				sid = id;
 			}
 		}
 	}
 	while( ++id < count );
+
+RESTART_TIMER:
+	m_AutoSaveTimer.StartOnce(m_AutoSaveTimout*MADMINUTES);
 }
 
 #if USE_GENERIC_TREECTRL

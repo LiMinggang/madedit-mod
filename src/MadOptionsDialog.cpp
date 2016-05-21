@@ -344,7 +344,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxBoxSizer51->Add(10,0,0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
 	WxStaticText30 = new wxStaticText( WxNoteBookPage1, ID_WXSTATICTEXT30, _( "Timeout(M)" ), wxPoint( 125, 2 ), wxSize( 70, 20 ), wxST_NO_AUTORESIZE, wxT( "WxStaticText30" ) );
 	WxBoxSizer51->Add( WxStaticText30, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 5 );
-	WxEditAutoSaveTimeout = new wxTextCtrl( WxNoteBookPage1, ID_WXEDITMAXSIZETOLOAD, wxT( "5" ), wxPoint( 190, 2 ), wxSize( 50, 17 ), 0, wxTextValidator( wxFILTER_NUMERIC ), wxT( "WxEditAutoSaveTimeout" ) );
+	WxEditAutoSaveTimeout = new wxTextCtrl( WxNoteBookPage1, ID_WXEDITMAXSIZETOLOAD, wxT( "10" ), wxPoint( 190, 2 ), wxSize( 50, 17 ), 0, wxTextValidator( wxFILTER_NUMERIC ), wxT( "WxEditAutoSaveTimeout" ) );
 	WxBoxSizer51->Add( WxEditAutoSaveTimeout, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
 	SET_CONTROLPARENT( WxEditAutoSaveTimeout );
 	WxEditAutoSaveTimeout->Enable( false );
@@ -1255,10 +1255,10 @@ void MadOptionsDialog::LoadOptions( void )
 	ss = _( "System Default" );
 	cfg->Read( wxT( "DefaultEncoding" ), &ss );
 	WxComboBoxEncoding->SetValue( ss );
-	cfg->Read( wxT( "AutoSaveTimeout" ), &ll );
-	bb = ((ll >= 5) && (ll <= 30));
+	cfg->Read( wxT( "AutoSaveTimeout" ), &ll, 10 );
+	bb = ((ll >= 10) && (ll <= 30));
 	WxCheckBoxEnableAutoSave->SetValue( bb );
-	if(!bb) ll = 5;
+	if(!bb) ll = 10;
 	WxEditAutoSaveTimeout->Enable(bb);
 	WxEditAutoSaveTimeout->SetValue( wxString() << ll );
 	cfg->Read( wxT( "AutoBackup" ), &bb, false );
@@ -1536,9 +1536,9 @@ void MadOptionsDialog::WxButtonOKClick( wxCommandEvent& event )
 		error = true;
 	}
 
-	if( !WxEditAutoSaveTimeout->GetValue().ToLong( &lo ) || ( lo < 5 || lo > 30 ))
+	if( !WxEditAutoSaveTimeout->GetValue().ToLong( &lo ) || ( lo < 10 || lo > 30 ))
 	{
-		wxLogError( errtext+_(": Should be 5~30"), WxStaticText30->GetLabel().c_str(), WxEditAutoSaveTimeout->GetValue().c_str() );
+		wxLogError( errtext+_(": Should be 10~30"), WxStaticText30->GetLabel().c_str(), WxEditAutoSaveTimeout->GetValue().c_str() );
 		error = true;
 	}
 
