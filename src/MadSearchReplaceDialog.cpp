@@ -155,7 +155,7 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	BoxSizer7->Add( 10, 0, 0, wxALL | wxALIGN_CENTER_VERTICAL, 0 );
 	WxCheckBoxDotMatchNewLine = new wxCheckBox( this, ID_WXCHECKBOXBOXDOTMATCHNEWLINE, _( "&. Matches Newline" ), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T( "ID_WXCHECKBOXBOXDOTMATCHNEWLINE" ) );
 	WxCheckBoxDotMatchNewLine->SetValue( false );
-	BoxSizer7->Add( WxCheckBoxDotMatchNewLine, 1, wxALL | wxEXPAND, 2 );
+	BoxSizer7->Add(WxCheckBoxDotMatchNewLine, 0, wxALL|wxEXPAND, 2);
 	BoxSizer6->Add( BoxSizer7, 0, wxALL | wxEXPAND, 0 );
 	WxCheckBoxFindHex = new wxCheckBox( this, ID_WXCHECKBOXFINDHEX, _( "Find &Hex String (Example: BE 00 3A or BE003A)" ), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T( "ID_WXCHECKBOXFINDHEX" ) );
 	WxCheckBoxFindHex->SetValue( false );

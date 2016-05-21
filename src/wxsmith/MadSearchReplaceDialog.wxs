@@ -67,7 +67,6 @@
 												</object>
 												<flag>wxALL|wxEXPAND</flag>
 												<border>2</border>
-												<option>1</option>
 											</object>
 										</object>
 										<flag>wxALL|wxEXPAND</flag>
