@@ -141,15 +141,12 @@ void MadWinListDialog::OnButtonActivateClick(wxCommandEvent& event)
 	long selRowId = MadWindowsList->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
 	wxASSERT ( selRowId != -1 );
 	long pageId = static_cast<long>(MadWindowsList->GetItemData(selRowId));
-	wxAuiNotebook * notebookp = reinterpret_cast<wxAuiNotebook *>(m_MainFrame->m_Notebook);
-	if(pageId != notebookp->GetSelection())
-		notebookp->SetSelection(pageId);
+	m_MainFrame->SetPageFocus( pageId );
 }
 
 void MadWinListDialog::SaveFile(bool saveas/* = false*/)
 {
 	long item = -1;
-	wxAuiNotebook * notebookp = reinterpret_cast<wxAuiNotebook *>(m_MainFrame->m_Notebook);
 	for ( ;; )
 	{
 		item = MadWindowsList->GetNextItem(item, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
@@ -178,7 +175,6 @@ void MadWinListDialog::OnButtonCloseWindowsClick(wxCommandEvent& event)
 	wxASSERT(MadWindowsList->GetSelectedItemCount() > 0);
 	std::vector<long> items;
 	long item = -1;
-	wxAuiNotebook * notebookp = reinterpret_cast<wxAuiNotebook *>(m_MainFrame->m_Notebook);
 	for ( ;; )
 	{
 		item = MadWindowsList->GetNextItem(item, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
@@ -260,7 +256,7 @@ void MadWinListDialog::SortTabs(long column)
 		{
 			notebookp->AddPage( medits[id], (*tabref)[id], false);
 		}
-		notebookp->SetSelection(0);
+		m_MainFrame->SetPageFocus( 0 );
 		InitWindowListIterms();
 	}
 }

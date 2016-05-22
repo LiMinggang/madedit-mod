@@ -47,6 +47,8 @@
 #define MadEditFrame_STYLE wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxCLOSE_BOX
 ////Frame Style End
 
+#define MAX_MADSCRIPT_LOAD 200
+
 class wxMadAuiNotebook;
 class wxAuiNotebookEvent;
 class MadEdit;
@@ -402,6 +404,7 @@ public:
 	void OnWindowPreviousWindow( wxCommandEvent& event );
 	void OnWindowNextWindow( wxCommandEvent& event );
 	void OnWindowWindowList( wxCommandEvent& event );
+	void OnWindowWindowActivate( wxCommandEvent& event );
 
 	void OnHelpAbout( wxCommandEvent& event );
 
@@ -701,7 +704,7 @@ enum   // menu id
 	menuMadScriptList,
 	menuEditMacroFile,
 	menuMadScrip1,
-	menuMadScrip1000 = menuMadScrip1 + 199, //200 scripts, enough?
+	menuMadScrip200 = menuMadScrip1 + (MAX_MADSCRIPT_LOAD -1), //200 scripts, enough?
 	menuPlugins,
 	menuByteOrderMark,
 	menuToggleBOM,
@@ -737,6 +740,8 @@ enum   // menu id
 	menuPreviousWindow,
 	menuNextWindow,
 	menuWindowList,
+	menuWindow1,
+	menuWindow100 = menuWindow1 + 99,
 
 	// results
 	menuCopyCurResult,

@@ -1723,7 +1723,7 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_MENU( menuPlayRecMacro, MadEditFrame::OnToolsPlayRecMacro )
 	EVT_MENU( menuSaveRecMacro, MadEditFrame::OnToolsSaveRecMacro )
 	EVT_MENU( menuEditMacroFile, MadEditFrame::OnToolsEditMacroFile )
-	EVT_MENU_RANGE( menuMadScrip1, menuMadScrip1000, MadEditFrame::OnToolsMadScriptList )
+	EVT_MENU_RANGE( menuMadScrip1, menuMadScrip200, MadEditFrame::OnToolsMadScriptList )
 	EVT_MENU( menuToggleBOM, MadEditFrame::OnToolsToggleBOM )
 	EVT_MENU( menuConvertToDOS, MadEditFrame::OnToolsConvertToDOS )
 	EVT_MENU( menuConvertToMAC, MadEditFrame::OnToolsConvertToMAC )
@@ -1752,6 +1752,7 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_MENU( menuNextWindow, MadEditFrame::OnWindowNextWindow )
 	EVT_MENU( menuPreviousWindow, MadEditFrame::OnWindowPreviousWindow )
 	EVT_MENU( menuWindowList, MadEditFrame::OnWindowWindowList )
+	EVT_MENU_RANGE( menuWindow1, menuWindow100, MadEditFrame::OnWindowWindowActivate )
 	// help
 	EVT_MENU( menuAbout, MadEditFrame::OnHelpAbout )
 	////Manual Code End
@@ -2957,7 +2958,7 @@ void MadEditFrame::CreateGUIControls( void )
 
 					g_Menu_MadMacro_Scripts->Append( menuMadScrip1 + int( i ), fn.GetName(), help );
 					g_tbMACRO_ptr->AddTool( menuMadScrip1 + int( i ), _T( "Macro" ), m_ImageList->GetBitmap( saverec_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, fn.GetName(), help, NULL );
-					++i;
+					if(++i > (MAX_MADSCRIPT_LOAD)) break;
 				}
 
 				cont = dir.GetNext( &filename );
@@ -3301,8 +3302,10 @@ void MadEditFrame::SetPageFocus( int pageId )
 {
 	int selid = m_Notebook->GetSelection();
 
-	if( pageId != selid && pageId >= 0 && pageId < int( m_Notebook->GetPageCount() ) )
+	if(( pageId != selid && pageId >= 0 ) && ( pageId < int( m_Notebook->GetPageCount() ))  && (pageId != selid))
 	{
+		g_CheckModTimeForReload = false;
+		g_PrevPageID = selid;
 		m_Notebook->SetSelection( pageId );
 		MadEdit *cme = ( MadEdit* )m_Notebook->GetPage( m_Notebook->GetSelection() );
 
@@ -3314,6 +3317,9 @@ void MadEditFrame::SetPageFocus( int pageId )
 			event.SetEventObject( this );
 			OnNotebookPageChanged( event );
 		}
+		g_CheckModTimeForReload = true;
+		
+		g_ActiveMadEdit->ReloadByModificationTime();
 	}
 }
 
@@ -8070,8 +8076,11 @@ void MadEditFrame::OnToolsSaveRecMacro( wxCommandEvent& event )
 					m_AuiManager.Update();
 				}
 
-				g_Menu_MadMacro_Scripts->Append( menuMadScrip1 + int( g_Menu_MadMacro_Scripts->GetMenuItemCount() ), fn.GetName(), help );
-				g_tbMACRO_ptr->AddTool( menuMadScrip1 + int( g_Menu_MadMacro_Scripts->GetMenuItemCount() ), _T( "Macro" ), m_ImageList->GetBitmap( saverec_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, fn.GetName(), help, NULL );
+				if(MAX_MADSCRIPT_LOAD >= g_Menu_MadMacro_Scripts->GetMenuItemCount())
+				{
+					g_Menu_MadMacro_Scripts->Append( menuMadScrip1 + int( g_Menu_MadMacro_Scripts->GetMenuItemCount() ), fn.GetName(), help );
+					g_tbMACRO_ptr->AddTool( menuMadScrip1 + int( g_Menu_MadMacro_Scripts->GetMenuItemCount() ), _T( "Macro" ), m_ImageList->GetBitmap( saverec_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, fn.GetName(), help, NULL );
+				}
 			}
 
 			scriptfile.Close();
@@ -8635,7 +8644,7 @@ void MadEditFrame::OnWindowToggleWindow( wxCommandEvent& event )
 	g_CheckModTimeForReload = false;
 
 	if( g_PrevPageID >= 0 &&
-			g_PrevPageID <  count &&
+			g_PrevPageID < count &&
 			g_PrevPageID != selid )
 	{
 		m_Notebook->SetSelection( g_PrevPageID );
@@ -8710,6 +8719,13 @@ void MadEditFrame::OnWindowWindowList( wxCommandEvent& event )
 {
 	if(g_WinListDialog == NULL) g_WinListDialog = new MadWinListDialog(this);
 	g_WinListDialog->ShowModal();
+}
+
+void MadEditFrame::OnWindowWindowActivate( wxCommandEvent& event )
+{
+	long pageId = event.GetId() - menuWindow1;
+	
+	SetPageFocus( pageId );
 }
 
 void MadEditFrame::OnHelpAbout( wxCommandEvent& event )

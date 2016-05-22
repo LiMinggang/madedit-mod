@@ -134,6 +134,7 @@ Fix: Not respond to wxSlider event(bug of CodeBlocks https://sourceforge.net/p/c
 Fix: Bug of wxGenericTreeCtrl(Fixed in wxWidgets 3.1) #136
 Fix: Initial size of the input box(SearchReplace dialog) is not updated #191
 Fix: File name in history list would be empty if you save a newly created file #192
+Fix various minor issues
 Update wxWidgets to 3.1.0
 Update translation
 
