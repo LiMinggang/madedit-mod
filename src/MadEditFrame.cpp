@@ -4853,6 +4853,7 @@ void MadEditFrame::OnFileOpen( wxCommandEvent& event )
 void MadEditFrame::SaveFile(long pageId, bool saveas/* = false*/, bool hideDlg/* = true*/)
 {
 	int count = int( m_Notebook->GetPageCount() );
+	DBOUT( "MadEditFrame::SaveFile("<<pageId<<", "<< saveas <<", "<<hideDlg<<")" );
 
 	if(pageId >= 0 && pageId < count)
 	{

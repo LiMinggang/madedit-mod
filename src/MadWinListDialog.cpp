@@ -150,7 +150,6 @@ void MadWinListDialog::SaveFile(bool saveas/* = false*/)
 {
 	long item = -1;
 	wxAuiNotebook * notebookp = reinterpret_cast<wxAuiNotebook *>(m_MainFrame->m_Notebook);
-	Show(false);
 	for ( ;; )
 	{
 		item = MadWindowsList->GetNextItem(item, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
@@ -161,7 +160,6 @@ void MadWinListDialog::SaveFile(bool saveas/* = false*/)
 		long pageId = static_cast<long>(MadWindowsList->GetItemData(item));
 		m_MainFrame->SaveFile(pageId, saveas);
 	}
-	Show(true);
 }
 void MadWinListDialog::OnButtonSaveClick(wxCommandEvent& event)
 {
