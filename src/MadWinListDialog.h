@@ -2,6 +2,7 @@
 #define MADWINLISTDIALOG_H
 
 #include <set>
+#include <map>
 //(*Headers(MadWinListDialog)
 #include <wx/listctrl.h>
 #include <wx/sizer.h>
@@ -20,8 +21,9 @@ class MadWinListDialog: public wxDialog
 
 		//(*Declarations(MadWinListDialog)
 		wxButton* ButtonCloseWindows;
+		wxButton* ButtonSortTabByPath;
 		wxButton* ButtonActivate;
-		wxButton* ButtonSortTab;
+		wxButton* ButtonSortTabByName;
 		wxButton* ButtonSave;
 		wxButton* ButtonSaveAs;
 		wxListCtrl* MadWindowsList;
@@ -36,22 +38,31 @@ class MadWinListDialog: public wxDialog
 		static const long ID_BUTTONSAVE;
 		static const long ID_BUTTONSAVEAS;
 		static const long ID_BUTTONCLOSEWINDOWS;
-		static const long ID_BUTTONSORTTAB;
+		static const long ID_BUTTONSORTTABBYNAME;
+		static const long ID_BUTTONSORTTABBYPATH;
 		//*)
 
+		static const long COL_TABNAME;
+		static const long COL_PATH;
 		MadEditFrame * m_MainFrame;
+		int m_SortColumn;
 	private:
 
 		//(*Handlers(MadWinListDialog)
 		void OnButtonActivateClick(wxCommandEvent& event);
 		void OnButtonSaveClick(wxCommandEvent& event);
 		void OnButtonCloseWindowsClick(wxCommandEvent& event);
-		void OnButtonSortTabClick(wxCommandEvent& event);
+		void OnButtonSortTabByNameClick(wxCommandEvent& event);
 		void OnButtonOkClick(wxCommandEvent& event);
 		void OnMadWinListDialogClose(wxCloseEvent& event);
+		void OnButtonSortTabByPathClick(wxCommandEvent& event);
+		void OnButtonSaveAsClick(wxCommandEvent& event);
 		//*)
 		void MadWinListDialogActivate( wxActivateEvent& event );
 		void OnWinListSelectionChanged(wxListEvent& event);
+		void InitWindowListIterms();
+		void SortTabs(long column);
+		void SaveFile(bool saveas = false);
 		DECLARE_EVENT_TABLE()
 };
 

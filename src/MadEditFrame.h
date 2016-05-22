@@ -211,6 +211,7 @@ public:
 	void OnUpdateUI_MenuToolsNewLineChar( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuToolsInsertNewLineChar( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuCheckWritable( wxUpdateUIEvent& event );
+	void OnUpdateUI_MenuCheckCanSave( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuToolsConvertEncoding( wxUpdateUIEvent& event );
 
 	void OnUpdateUI_MenuWindow_CheckCount( wxUpdateUIEvent& event );

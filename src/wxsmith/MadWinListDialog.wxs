@@ -9,7 +9,7 @@
 				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
 					<object class="sizeritem">
 						<object class="wxListCtrl" name="ID_LISTCTRLMADWINLIST" variable="MadWindowsList" member="yes">
-							<size>400,200</size>
+							<size>400,300</size>
 							<style>wxLC_REPORT|wxSIMPLE_BORDER|wxVSCROLL</style>
 						</object>
 						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
@@ -59,10 +59,19 @@
 						<border>5</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxButton" name="ID_BUTTONSORTTAB" variable="ButtonSortTab" member="yes">
-							<label>Sort Tab</label>
+						<object class="wxButton" name="ID_BUTTONSORTTABBYNAME" variable="ButtonSortTabByName" member="yes">
+							<label>Sort Tab(Name)</label>
 							<size>110,27</size>
-							<handler function="OnButtonSortTabClick" entry="EVT_BUTTON" />
+							<handler function="OnButtonSortTabByNameClick" entry="EVT_BUTTON" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxButton" name="ID_BUTTONSORTTABBYPATH" variable="ButtonSortTabByPath" member="yes">
+							<label>Sort Tab(Path)</label>
+							<minsize>110,27</minsize>
+							<handler function="OnButtonSortTabByPathClick" entry="EVT_BUTTON" />
 						</object>
 						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>5</border>

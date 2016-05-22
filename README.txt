@@ -133,6 +133,7 @@ Fix: "New File" & "Open File" button in toolbar got unclickable when all editor 
 Fix: Not respond to wxSlider event(bug of CodeBlocks https://sourceforge.net/p/codeblocks/tickets/350/)
 Fix: Bug of wxGenericTreeCtrl(Fixed in wxWidgets 3.1) #136
 Fix: Initial size of the input box(SearchReplace dialog) is not updated #191
+Fix: File name in history list would be empty if you save a newly created file #192
 Update wxWidgets to 3.1.0
 Update translation
 

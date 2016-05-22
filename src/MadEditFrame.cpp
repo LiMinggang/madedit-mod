@@ -1426,7 +1426,7 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	//EVT_CHAR(MadEditFrame::OnChar)
 	// file
 	EVT_ACTIVATE( MadEditFrame::OnActivate )
-	EVT_UPDATE_UI( menuSave, MadEditFrame::OnUpdateUI_MenuCheckWritable )
+	EVT_UPDATE_UI( menuSave, MadEditFrame::OnUpdateUI_MenuCheckCanSave )
 	EVT_UPDATE_UI( menuSaveAs, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
 	EVT_UPDATE_UI( menuSaveAll, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
 	EVT_UPDATE_UI( menuReload, MadEditFrame::OnUpdateUI_MenuFileReload )
@@ -4743,6 +4743,11 @@ void MadEditFrame::OnUpdateUI_MenuCheckWritable( wxUpdateUIEvent& event )
 	event.Enable( g_ActiveMadEdit != NULL && !g_ActiveMadEdit->IsReadOnly() );
 }
 
+void MadEditFrame::OnUpdateUI_MenuCheckCanSave( wxUpdateUIEvent& event )
+{
+	event.Enable( g_ActiveMadEdit != NULL && g_ActiveMadEdit->IsModified() );
+}
+
 void MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding( wxUpdateUIEvent& event )
 {
 	event.Enable( g_ActiveMadEdit != NULL &&
@@ -4864,7 +4869,9 @@ void MadEditFrame::SaveFile(long pageId, bool saveas/* = false*/, bool hideDlg/*
 
 		if( madedit->Save( false, name, saveas ) == wxID_YES )
 		{
-			m_RecentFiles->AddFileToHistory( madedit->GetFileName() );
+			wxString fname = madedit->GetFileName();
+			if(!fname.IsEmpty())
+				m_RecentFiles->AddFileToHistory( madedit->GetFileName() );
 		}
 	}
 }
@@ -4873,7 +4880,8 @@ void MadEditFrame::OnFileSave( wxCommandEvent& event )
 {
 	if( g_ActiveMadEdit != NULL )
 	{
-		SaveFile( m_Notebook->GetSelection(), false, false );
+		bool saveas = ( g_ActiveMadEdit->IsModified() && (g_ActiveMadEdit->GetFileName()).IsEmpty());
+		SaveFile( m_Notebook->GetSelection(), saveas, saveas );
 	}
 }
 
