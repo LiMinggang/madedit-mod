@@ -1457,9 +1457,9 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	//EVT_CHAR(MadEditFrame::OnChar)
 	// file
 	EVT_ACTIVATE( MadEditFrame::OnActivate )
-	EVT_UPDATE_UI( menuSave, MadEditFrame::OnUpdateUI_MenuCheckCanSave )
+	EVT_UPDATE_UI( menuSave, MadEditFrame::OnUpdateUI_MenuCheckIsThisModified )
 	EVT_UPDATE_UI( menuSaveAs, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
-	EVT_UPDATE_UI( menuSaveAll, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
+	EVT_UPDATE_UI( menuSaveAll, MadEditFrame::OnUpdateUI_MenuCheckIsAnyoneModified )
 	EVT_UPDATE_UI( menuReload, MadEditFrame::OnUpdateUI_MenuFileReload )
 	EVT_UPDATE_UI( menuClose, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
 	EVT_UPDATE_UI( menuCloseAll, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
@@ -4781,9 +4781,26 @@ void MadEditFrame::OnUpdateUI_MenuCheckWritable( wxUpdateUIEvent& event )
 	event.Enable( g_ActiveMadEdit != NULL && !g_ActiveMadEdit->IsReadOnly() );
 }
 
-void MadEditFrame::OnUpdateUI_MenuCheckCanSave( wxUpdateUIEvent& event )
+void MadEditFrame::OnUpdateUI_MenuCheckIsThisModified( wxUpdateUIEvent& event )
 {
 	event.Enable( g_ActiveMadEdit != NULL && g_ActiveMadEdit->IsModified() );
+}
+
+void MadEditFrame::OnUpdateUI_MenuCheckIsAnyoneModified( wxUpdateUIEvent& event )
+{
+	bool enable = false;
+	int count = m_Notebook->GetPageCount();
+	if(count)
+	{
+		
+		for( int id = 0; id < count; ++id )
+		{
+			MadEdit *me = ( MadEdit* )m_Notebook->GetPage( id );
+			enable = me->IsModified();
+			if(enable) break;
+		}
+	}
+	event.Enable( enable );
 }
 
 void MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding( wxUpdateUIEvent& event )
