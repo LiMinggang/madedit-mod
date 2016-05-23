@@ -1255,7 +1255,7 @@ void MadOptionsDialog::LoadOptions( void )
 	ss = _( "System Default" );
 	cfg->Read( wxT( "DefaultEncoding" ), &ss );
 	WxComboBoxEncoding->SetValue( ss );
-	cfg->Read( wxT( "AutoSaveTimeout" ), &ll, 10 );
+	cfg->Read( wxT( "AutoSaveTimeout" ), &ll, 0 );
 	bb = ((ll >= 10) && (ll <= 30));
 	WxCheckBoxEnableAutoSave->SetValue( bb );
 	if(!bb) ll = 10;

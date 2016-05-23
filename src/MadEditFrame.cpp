@@ -2374,7 +2374,7 @@ MadEditFrame::MadEditFrame( wxWindow *parent, wxWindowID id, const wxString &tit
 	g_MainFrame = this;
 
 	m_AutoSaveTimout = 0;
-	m_Config->Read( wxT( "AutoSaveTimeout" ), &m_AutoSaveTimout, 10 );
+	m_Config->Read( wxT( "AutoSaveTimeout" ), &m_AutoSaveTimout, 0 );
 	if(m_AutoSaveTimout >= 10 && m_AutoSaveTimout <= 30)
 		m_AutoSaveTimer.StartOnce(m_AutoSaveTimout*MADMINUTES);
 	else
