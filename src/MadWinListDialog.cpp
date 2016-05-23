@@ -157,6 +157,10 @@ void MadWinListDialog::SaveFile(bool saveas/* = false*/)
 		long pageId = static_cast<long>(MadWindowsList->GetItemData(item));
 		m_MainFrame->SaveFile(pageId, saveas);
 	}
+	ButtonActivate->Enable(false);
+	ButtonCloseWindows->Enable(false);
+	ButtonSaveAs->Enable(false);
+	ButtonSave->Enable(false);
 }
 void MadWinListDialog::OnButtonSaveClick(wxCommandEvent& event)
 {
@@ -191,6 +195,11 @@ void MadWinListDialog::OnButtonCloseWindowsClick(wxCommandEvent& event)
 	{
 		MadWindowsList->DeleteItem(items[i]);
 	}
+	
+	ButtonActivate->Enable(false);
+	ButtonCloseWindows->Enable(false);
+	ButtonSaveAs->Enable(false);
+	ButtonSave->Enable(false);
 }
 
 void MadWinListDialog::SortTabs(long column)
@@ -273,7 +282,7 @@ void MadWinListDialog::OnButtonSortTabByPathClick(wxCommandEvent& event)
 
 void MadWinListDialog::OnButtonOkClick(wxCommandEvent& event)
 {
-    Show( false );Show( false );Show( false );
+    Show( false );
 }
 
 void MadWinListDialog::OnMadWinListDialogClose(wxCloseEvent& event)
