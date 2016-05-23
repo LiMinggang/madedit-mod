@@ -288,7 +288,13 @@ void MadWinListDialog::OnWinListSelectionChanged(wxListEvent& event)
 	bool selected = (MadWindowsList->GetSelectedItemCount() > 0);
 	ButtonActivate->Enable(onlyone);
 	ButtonCloseWindows->Enable(selected);
-	ButtonSave->Enable(selected);
 	ButtonSaveAs->Enable(selected);
+	if(selected)
+	{
+		wxString fname = MadWindowsList->GetItemText(event.GetIndex());
+		selected = (fname[fname.Len() - 1] == wxT( '*' ));
+	}
+
+	ButtonSave->Enable(selected);
 }
 

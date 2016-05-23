@@ -217,6 +217,7 @@ public:
 	void OnUpdateUI_MenuToolsConvertEncoding( wxUpdateUIEvent& event );
 
 	void OnUpdateUI_MenuWindow_CheckCount( wxUpdateUIEvent& event );
+	void OnUpdateUI_MenuWindow_Window( wxUpdateUIEvent& event );
 
 	void OnUpdateUI_MenuToolsStartRecMacro( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuToolsStopRecMacro( wxUpdateUIEvent& event );

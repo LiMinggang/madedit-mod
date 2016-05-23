@@ -247,6 +247,7 @@ wxArrayString g_SpellSuggestions;
 astyle::ASFormatter * g_ASFormatter = NULL;
 
 bool g_CheckModTimeForReload = true;
+static int Menu_Window_Count = 4;
 
 wxMenu *g_Menu_File = NULL;
 wxMenu *g_Menu_FilePop = NULL;
@@ -1071,18 +1072,20 @@ bool GetActiveMadEditPathNameOrTitle( wxString &name )
 
 void ApplySyntaxAttributes( MadSyntax *syn )
 {
-	int count = int( g_MainFrame->m_Notebook->GetPageCount() );
+	wxMadAuiNotebook * notebook = g_MainFrame->m_Notebook;
+	int count = int( notebook->GetPageCount() );
 
 	for( int id = 0; id < count; ++id )
 	{
-		MadEdit *me = ( MadEdit* )g_MainFrame->m_Notebook->GetPage( id );
+		MadEdit *me = ( MadEdit* )notebook->GetPage( id );
 		me->ApplySyntaxAttributes( syn, true );
 	}
 }
 
 void OnEditSelectionChanged( MadEdit *madedit )
 {
-	g_MainFrame->m_Notebook->ConnectMouseClick();
+	wxMadAuiNotebook * notebook = g_MainFrame->m_Notebook;
+	notebook->ConnectMouseClick();
 
 	if( madedit == NULL )
 	{
@@ -1134,12 +1137,40 @@ void OnEditSelectionChanged( MadEdit *madedit )
 		g_StatusBar->SetStatusText( ssstr + s1, 3 );
 	}
 
+	while(g_Menu_Window->GetMenuItemCount() > Menu_Window_Count)
+	{
+		wxMenuItem * fmenu = g_Menu_Window->FindItemByPosition (Menu_Window_Count);
+		g_Menu_Window->Delete(fmenu);
+	}
+	
+	int count = int( notebook->GetPageCount() );
+	wxString fname;
+
+	if(count) g_Menu_Window->AppendSeparator();
+	for( int id = 0; id < count; ++id )
+	{
+		fname = notebook->GetPageText( id );
+	
+		if( fname[fname.Len() - 1] == wxT( '*' ) )
+		{ fname.Truncate( fname.Len() - 1 ); }
+		MadEdit *me = ( MadEdit* )notebook->GetPage( id );
+		g_Menu_Window->Append( menuWindow1 + id, fname, me->GetFileName(), wxITEM_CHECK);
+	}
+
+	if(g_Menu_Window->GetMenuItemCount() > Menu_Window_Count)
+	{
+		int id = notebook->GetSelection();
+		g_Menu_Window->Check(menuWindow1 + id, true);
+	}
+
 	g_StatusBar->Update(); // repaint immediately
 }
 
 void OnEditStatusChanged( MadEdit *madedit )
 {
-	g_MainFrame->m_Notebook->ConnectMouseClick();
+	wxMadAuiNotebook * notebook = g_MainFrame->m_Notebook;
+
+	notebook->ConnectMouseClick();
 
 	if( madedit == NULL )
 	{
@@ -1152,7 +1183,7 @@ void OnEditStatusChanged( MadEdit *madedit )
 	{
 		// check the title is changed or not
 		int selid = GetIdByEdit( madedit );
-		wxString oldtitle = g_MainFrame->m_Notebook->GetPageText( selid );
+		wxString oldtitle = notebook->GetPageText( selid );
 		wxString filename = madedit->GetFileName(), title;
 
 		if( !filename.IsEmpty() )
@@ -1183,7 +1214,7 @@ void OnEditStatusChanged( MadEdit *madedit )
 
 		if( title != oldtitle )
 		{
-			g_MainFrame->m_Notebook->SetPageText( selid, title );
+			notebook->SetPageText( selid, title );
 		}
 
 		if( madedit == g_ActiveMadEdit )
@@ -1571,11 +1602,12 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_UPDATE_UI( menuAstyleFormat, MadEditFrame::OnUpdateUI_MenuCheckWritable )
 	EVT_UPDATE_UI( menuXMLFormat, MadEditFrame::OnUpdateUI_MenuCheckWritable )
 	EVT_UPDATE_UI( menuWordCount, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
-	// window
+	// window, hardcode of Menu_Window_Count
 	EVT_UPDATE_UI( menuToggleWindow, MadEditFrame::OnUpdateUI_MenuWindow_CheckCount )
 	EVT_UPDATE_UI( menuNextWindow, MadEditFrame::OnUpdateUI_MenuWindow_CheckCount )
 	EVT_UPDATE_UI( menuPreviousWindow, MadEditFrame::OnUpdateUI_MenuWindow_CheckCount )
 	EVT_UPDATE_UI( menuWindowList, MadEditFrame::OnUpdateUI_MenuWindow_CheckCount )
+	EVT_UPDATE_UI_RANGE( menuWindow1, menuWindow100, MadEditFrame::OnUpdateUI_MenuWindow_Window )
 	// file
 	EVT_MENU( menuNew, MadEditFrame::OnFileNew )
 	EVT_MENU( menuOpen, MadEditFrame::OnFileOpen )
@@ -4763,6 +4795,13 @@ void MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding( wxUpdateUIEvent& event )
 void MadEditFrame::OnUpdateUI_MenuWindow_CheckCount( wxUpdateUIEvent& event )
 {
 	event.Enable( m_Notebook->GetPageCount() >= 2 );
+}
+
+void MadEditFrame::OnUpdateUI_MenuWindow_Window( wxUpdateUIEvent& event )
+{
+	int menuId = event.GetId();
+	bool check = ((menuId - menuWindow1) == m_Notebook->GetSelection());
+	g_Menu_Window->Check(menuId, check);
 }
 
 void MadEditFrame::OnUpdateUI_MenuToolsStartRecMacro( wxUpdateUIEvent& event )
