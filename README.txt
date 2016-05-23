@@ -118,25 +118,25 @@ Todo:
 FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.4.2
-New: Hope MadEdit-Mod could load more open files history than 9 #179
-New: Redesign of Search Results view----Hope to add search key words or expression on the result tree title on the left of the file path #137
-New: Save LineSpacing, Line Wrap Mode and Edit Mode for opened files #186
-New: Enable config fix width mode in global config #184
-New: Wordwrap of input of search/replace dialog #175
-New: Use icons or symbols replace the words in the quicksearch bar #181
-New: Hope MadEdit-Mod could Autosave, Backup files, and have Autolink funciton #135
-New: Window list function(Activate, Save, Save As and Close)
-Fix: Recorded script(caret pos for inputting) would be wrong if user moved the caret #183
-Fix: The caret can't lock the y position when use word wrap function #178
-Fix: Change Mpython API WholeLineSelection to SelectWholeLine
-Fix: "New File" & "Open File" button in toolbar got unclickable when all editor tabs closed #190
-Fix: Not respond to wxSlider event(bug of CodeBlocks https://sourceforge.net/p/codeblocks/tickets/350/)
-Fix: Bug of wxGenericTreeCtrl(Fixed in wxWidgets 3.1) #136
-Fix: Initial size of the input box(SearchReplace dialog) is not updated #191
-Fix: File name in history list would be empty if you save a newly created file #192
-Fix various minor issues
-Update wxWidgets to 3.1.0
-Update translation
+1.New: Hope MadEdit-Mod could load more open files history than 9 #179
+2.New: Redesign of Search Results view----Hope to add search key words or expression on the result tree title on the left of the file path #137
+3.New: Save LineSpacing, Line Wrap Mode and Edit Mode for opened files #186
+4.New: Enable config fix width mode in global config #184
+5.New: Wordwrap of input of search/replace dialog #175
+6.New: Use icons or symbols replace the words in the quicksearch bar #181
+7.New: Hope MadEdit-Mod could Autosave, Backup files, and have Autolink funciton #135
+8.New: Window list function(Activate, Save, Save As and Close)
+9.Fix: Recorded script(caret pos for inputting) would be wrong if user moved the caret #183
+10.Fix: The caret can't lock the y position when use word wrap function #178
+11.Fix: Change Mpython API WholeLineSelection to SelectWholeLine
+12.Fix: "New File" & "Open File" button in toolbar got unclickable when all editor tabs closed #190
+13.Fix: Not respond to wxSlider event(bug of CodeBlocks https://sourceforge.net/p/codeblocks/tickets/350/)
+14.Fix: Bug of wxGenericTreeCtrl(Fixed in wxWidgets 3.1) #136
+15.Fix: Initial size of the input box(SearchReplace dialog) is not updated #191
+16.Fix: File name in history list would be empty if you save a newly created file #192
+17.Fix various minor issues
+18.Update wxWidgets to 3.1.0
+19.Update translation
 
 Mod v0.4.1
 1.New: Enhancement on Results(Delete items, collapse items) #138
