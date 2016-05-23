@@ -63,6 +63,7 @@ class MadWinListDialog: public wxDialog
 		void InitWindowListIterms();
 		void SortTabs(long column);
 		void SaveFile(bool saveas = false);
+        void ResetButtonStatus();
 		DECLARE_EVENT_TABLE()
 };
 

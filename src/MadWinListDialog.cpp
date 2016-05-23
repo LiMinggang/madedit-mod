@@ -4,6 +4,7 @@
 //*)
 
 #include <wx/arrstr.h>
+#include <algorithm>  
 
 #include <wx/filename.h>
 #include "MadEdit/MadEdit.h"
@@ -78,10 +79,7 @@ MadWinListDialog::MadWinListDialog(wxWindow* parent,wxWindowID id)
 	Connect(ID_LISTCTRLMADWINLIST,wxEVT_LIST_ITEM_SELECTED,(wxObjectEventFunction)&MadWinListDialog::OnWinListSelectionChanged);
 	Connect(ID_LISTCTRLMADWINLIST,wxEVT_LIST_ITEM_DESELECTED,(wxObjectEventFunction)&MadWinListDialog::OnWinListSelectionChanged);
 
-	ButtonActivate->Enable(false);
-	ButtonCloseWindows->Enable(false);
-	ButtonSave->Enable(false);
-	ButtonSaveAs->Enable(false);
+	ResetButtonStatus();
 
 	SetDefaultItem(ButtonOk);
 
@@ -133,6 +131,7 @@ void MadWinListDialog::InitWindowListIterms()
 void MadWinListDialog::MadWinListDialogActivate( wxActivateEvent& event )
 {
 	InitWindowListIterms();
+	ResetButtonStatus();
 }
 
 void MadWinListDialog::OnButtonActivateClick(wxCommandEvent& event)
@@ -157,10 +156,6 @@ void MadWinListDialog::SaveFile(bool saveas/* = false*/)
 		long pageId = static_cast<long>(MadWindowsList->GetItemData(item));
 		m_MainFrame->SaveFile(pageId, saveas);
 	}
-	ButtonActivate->Enable(false);
-	ButtonCloseWindows->Enable(false);
-	ButtonSaveAs->Enable(false);
-	ButtonSave->Enable(false);
 }
 void MadWinListDialog::OnButtonSaveClick(wxCommandEvent& event)
 {
@@ -177,7 +172,7 @@ void MadWinListDialog::OnButtonSaveAsClick(wxCommandEvent& event)
 void MadWinListDialog::OnButtonCloseWindowsClick(wxCommandEvent& event)
 {
 	wxASSERT(MadWindowsList->GetSelectedItemCount() > 0);
-	std::vector<long> items;
+	std::vector<long> items, pages; 
 	long item = -1;
 	for ( ;; )
 	{
@@ -188,18 +183,17 @@ void MadWinListDialog::OnButtonCloseWindowsClick(wxCommandEvent& event)
 		items.push_back(item);
 		// this item is selected
 		long pageId = static_cast<long>(MadWindowsList->GetItemData(item));
-		m_MainFrame->CloseFile(pageId);
+		pages.push_back(pageId);
 	}
+
+	std::sort(items.begin(), items.end(), std::greater<long>());
+	std::sort(pages.begin(), pages.end(), std::greater<long>());
 
 	for(int i = 0; i < items.size(); ++i)
 	{
 		MadWindowsList->DeleteItem(items[i]);
+		m_MainFrame->CloseFile(pages[i]);
 	}
-	
-	ButtonActivate->Enable(false);
-	ButtonCloseWindows->Enable(false);
-	ButtonSaveAs->Enable(false);
-	ButtonSave->Enable(false);
 }
 
 void MadWinListDialog::SortTabs(long column)
@@ -305,5 +299,13 @@ void MadWinListDialog::OnWinListSelectionChanged(wxListEvent& event)
 	}
 
 	ButtonSave->Enable(selected);
+}
+
+void MadWinListDialog::ResetButtonStatus()
+{
+	ButtonActivate->Enable(false);
+	ButtonCloseWindows->Enable(false);
+	ButtonSaveAs->Enable(false);
+	ButtonSave->Enable(false);
 }
 
