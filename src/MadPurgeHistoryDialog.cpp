@@ -174,14 +174,14 @@ void MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown(wxKeyEvent& event)
     if(event.m_shiftDown) flags|=wxACCEL_SHIFT;
     if(event.m_controlDown) flags|=wxACCEL_CTRL;
 
-    if('o' == key && wxACCEL_ALT == flags)
+    if('O' == key && wxACCEL_ALT == flags)
     {
         wxCommandEvent e;
         this->WxButtonOKClick(e);
         return; // no skip
     }
 
-    if('c' == key && wxACCEL_ALT == flags)
+    if('C' == key && wxACCEL_ALT == flags)
     {
         wxCommandEvent e;
         this->WxButtonCancelClick(e);

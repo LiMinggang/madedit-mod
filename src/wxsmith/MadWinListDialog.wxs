@@ -4,6 +4,7 @@
 		<title>Windows</title>
 		<style>wxCAPTION|wxSYSTEM_MENU|wxCLOSE_BOX</style>
 		<handler function="OnMadWinListDialogClose" entry="EVT_CLOSE" />
+		<handler function="OnKeyDown" entry="EVT_KEY_DOWN" />
 		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
 			<object class="sizeritem">
 				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
@@ -45,6 +46,7 @@
 						<object class="wxButton" name="ID_BUTTONSAVEAS" variable="ButtonSaveAs" member="yes">
 							<label>Save As</label>
 							<size>110,27</size>
+							<handler function="OnButtonSaveAsClick" entry="EVT_BUTTON" />
 						</object>
 						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>5</border>

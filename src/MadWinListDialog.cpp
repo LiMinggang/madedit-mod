@@ -74,8 +74,10 @@ MadWinListDialog::MadWinListDialog(wxWindow* parent,wxWindowID id)
 	Connect(ID_BUTTONSORTTABBYPATH,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadWinListDialog::OnButtonSortTabByPathClick);
 	Connect(wxID_OK,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadWinListDialog::OnButtonOkClick);
 	Connect(wxID_ANY,wxEVT_CLOSE_WINDOW,(wxObjectEventFunction)&MadWinListDialog::OnMadWinListDialogClose);
+	Connect(wxEVT_KEY_DOWN,(wxObjectEventFunction)&MadWinListDialog::OnKeyDown);
 	//*)
 
+	MadWindowsList->Connect(wxEVT_KEY_DOWN,(wxObjectEventFunction)&MadWinListDialog::OnKeyDown);
 	Connect(ID_LISTCTRLMADWINLIST,wxEVT_LIST_ITEM_SELECTED,(wxObjectEventFunction)&MadWinListDialog::OnWinListSelectionChanged);
 	Connect(ID_LISTCTRLMADWINLIST,wxEVT_LIST_ITEM_DESELECTED,(wxObjectEventFunction)&MadWinListDialog::OnWinListSelectionChanged);
 
@@ -315,3 +317,38 @@ void MadWinListDialog::ResetButtonStatus()
 	ButtonSave->Enable(false);
 }
 
+void MadWinListDialog::OnKeyDown(wxKeyEvent& event)
+{
+	// insert your code here
+	int key=event.GetKeyCode();
+
+	switch(key)
+	{
+	case WXK_ESCAPE:
+		{
+			wxCommandEvent e;
+			this->OnButtonOkClick(e);
+			return;
+		}
+	default:
+		break;
+	}
+
+	int flags=wxACCEL_NORMAL;
+	if(event.m_controlDown) flags|=wxACCEL_CTRL;
+
+	if('A' == key && wxACCEL_CTRL == flags)
+	{
+		long item = -1;
+		for ( ;; )
+		{
+			item = MadWindowsList->GetNextItem(item, wxLIST_NEXT_ALL);
+			if ( item == -1 )
+				break;
+			MadWindowsList->SetItemState(item, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
+		}
+		return; // no skip
+	}
+
+	event.Skip();
+}

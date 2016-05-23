@@ -57,6 +57,7 @@ class MadWinListDialog: public wxDialog
 		void OnMadWinListDialogClose(wxCloseEvent& event);
 		void OnButtonSortTabByPathClick(wxCommandEvent& event);
 		void OnButtonSaveAsClick(wxCommandEvent& event);
+		void OnKeyDown(wxKeyEvent& event);
 		//*)
 		void MadWinListDialogActivate( wxActivateEvent& event );
 		void OnWinListSelectionChanged(wxListEvent& event);
