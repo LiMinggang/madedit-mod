@@ -327,7 +327,7 @@ void MadWinListDialog::OnKeyDown(wxKeyEvent& event)
 	case WXK_ESCAPE:
 		{
 			wxCommandEvent e;
-			this->OnButtonOkClick(e);
+			g_WinListDialog->OnButtonOkClick(e);
 			return;
 		}
 	default:
@@ -339,16 +339,21 @@ void MadWinListDialog::OnKeyDown(wxKeyEvent& event)
 
 	if('A' == key && wxACCEL_CTRL == flags)
 	{
-		long item = -1;
-		for ( ;; )
+		if(g_WinListDialog->MadWindowsList->GetSelectedItemCount() > 0)
 		{
-			item = MadWindowsList->GetNextItem(item, wxLIST_NEXT_ALL);
-			if ( item == -1 )
-				break;
-			MadWindowsList->SetItemState(item, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
+			long item = -1;
+			g_WinListDialog->MadWindowsList->Freeze();
+			for ( ;; )
+			{
+				item = g_WinListDialog->MadWindowsList->GetNextItem(item);
+				if ( item == -1 )
+					break;
+				g_WinListDialog->MadWindowsList->SetItemState(item, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
+			}
+			g_WinListDialog->MadWindowsList->Thaw();
 		}
 		return; // no skip
 	}
-
+	
 	event.Skip();
 }
