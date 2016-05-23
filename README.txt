@@ -117,6 +117,9 @@ Note: Not support wxWidgets 2.X anymore since 0.3.X
 Todo:
 FreeBSD packaging (with FreeBSD 10.01)
 
+Mod v0.4.3
+Fix: Multiple selection does not work with Save/SaveAs(Windows List dialog) #193
+
 Mod v0.4.2
 1.New: Hope MadEdit-Mod could load more open files history than 9 #179
 2.New: Redesign of Search Results view----Hope to add search key words or expression on the result tree title on the left of the file path #137

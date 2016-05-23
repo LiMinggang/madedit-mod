@@ -146,6 +146,7 @@ void MadWinListDialog::OnButtonActivateClick(wxCommandEvent& event)
 void MadWinListDialog::SaveFile(bool saveas/* = false*/)
 {
 	long item = -1;
+	std::vector<long> items;
 	for ( ;; )
 	{
 		item = MadWindowsList->GetNextItem(item, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
@@ -153,6 +154,11 @@ void MadWinListDialog::SaveFile(bool saveas/* = false*/)
 			break;
 
 		// this item is selected
+		items.push_back(item);
+	}
+	
+	for(int i = 0; i < items.size(); ++i)
+	{
 		long pageId = static_cast<long>(MadWindowsList->GetItemData(item));
 		m_MainFrame->SaveFile(pageId, saveas);
 	}
