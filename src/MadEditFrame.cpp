@@ -1137,32 +1137,6 @@ void OnEditSelectionChanged( MadEdit *madedit )
 		g_StatusBar->SetStatusText( ssstr + s1, 3 );
 	}
 
-	while(g_Menu_Window->GetMenuItemCount() > Menu_Window_Count)
-	{
-		wxMenuItem * fmenu = g_Menu_Window->FindItemByPosition (Menu_Window_Count);
-		g_Menu_Window->Delete(fmenu);
-	}
-	
-	int count = int( notebook->GetPageCount() );
-	wxString fname;
-
-	if(count) g_Menu_Window->AppendSeparator();
-	for( int id = 0; id < count; ++id )
-	{
-		fname = notebook->GetPageText( id );
-	
-		if( fname[fname.Len() - 1] == wxT( '*' ) )
-		{ fname.Truncate( fname.Len() - 1 ); }
-		MadEdit *me = ( MadEdit* )notebook->GetPage( id );
-		g_Menu_Window->Append( menuWindow1 + id, fname, me->GetFileName(), wxITEM_CHECK);
-	}
-
-	if(g_Menu_Window->GetMenuItemCount() > Menu_Window_Count)
-	{
-		int id = notebook->GetSelection();
-		g_Menu_Window->Check(menuWindow1 + id, true);
-	}
-
 	g_StatusBar->Update(); // repaint immediately
 }
 
@@ -3440,6 +3414,12 @@ void MadEditFrame::OnNotebookPageChanged( wxAuiNotebookEvent& event )
 		g_PrevPageID = old;
 	}
 
+	while(g_Menu_Window->GetMenuItemCount() > Menu_Window_Count)
+	{
+		wxMenuItem * fmenu = g_Menu_Window->FindItemByPosition (Menu_Window_Count);
+		g_Menu_Window->Delete(fmenu);
+	}
+	
 	//wxLogMessage( wxString()<<int(g_ActiveMadEdit));
 	if( g_ActiveMadEdit != NULL )
 	{
@@ -3482,6 +3462,26 @@ void MadEditFrame::OnNotebookPageChanged( wxAuiNotebookEvent& event )
 
 			m_HtmlPreview->SetPage( text );
 			g_ActiveMadEdit->Synced();
+		}
+		
+		int count = int( m_Notebook->GetPageCount() );
+		wxString fname;
+		
+		if(count) g_Menu_Window->AppendSeparator();
+		for( int id = 0; id < count; ++id )
+		{
+			fname = m_Notebook->GetPageText( id );
+		
+			if( fname[fname.Len() - 1] == wxT( '*' ) )
+			{ fname.Truncate( fname.Len() - 1 ); }
+			MadEdit *me = ( MadEdit* )m_Notebook->GetPage( id );
+			g_Menu_Window->Append( menuWindow1 + id, fname, me->GetFileName(), wxITEM_CHECK);
+		}
+		
+		if(g_Menu_Window->GetMenuItemCount() > Menu_Window_Count)
+		{
+			int id = m_Notebook->GetSelection();
+			g_Menu_Window->Check(menuWindow1 + id, true);
 		}
 	}
 	else
@@ -6919,6 +6919,7 @@ void MadEditFrame::OnViewNoWrap( wxCommandEvent& event )
 			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetWordWrapMode(MadWordWrapMode.NoWrap)" ) ) );
 	}
 }
+
 void MadEditFrame::OnViewWrapByWindow( wxCommandEvent& event )
 {
 	if( g_ActiveMadEdit != NULL )
