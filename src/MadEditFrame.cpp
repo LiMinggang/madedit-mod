@@ -7402,17 +7402,14 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		m_Config->Write( wxT( "DefaultEncoding" ), g_OptionsDialog->WxComboBoxEncoding->GetValue() );
 		ll = 0;
 		if (g_OptionsDialog->WxCheckBoxEnableAutoSave->GetValue()) g_OptionsDialog->WxEditAutoSaveTimeout->GetValue().ToLong(&ll);
-		if(ll >= 10 && ll <= 30)
+		m_Config->Write( wxT( "AutoSaveTimeout" ), ll );
+		if(m_AutoSaveTimout != ll)
 		{
-			m_Config->Write( wxT( "AutoSaveTimeout" ), ll );
-			if(m_AutoSaveTimout != ll)
-			{
-				if(m_AutoSaveTimout)
-					m_AutoSaveTimer.Stop();
-				m_AutoSaveTimout = ll;
-				if(m_AutoSaveTimout)
-					m_AutoSaveTimer.StartOnce(m_AutoSaveTimout*MADMINUTES);
-			}
+			if(m_AutoSaveTimout)
+				m_AutoSaveTimer.Stop();
+			m_AutoSaveTimout = ll;
+			if(m_AutoSaveTimout)
+				m_AutoSaveTimer.StartOnce(m_AutoSaveTimout*MADMINUTES);
 		}
 		m_Config->Write( wxT( "AutoBackup" ), g_OptionsDialog->WxCheckBoxEnableAutoBackup->GetValue() );
 			

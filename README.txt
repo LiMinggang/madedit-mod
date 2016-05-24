@@ -122,7 +122,8 @@ Mod v0.4.2.1
 2.New: Code performance improvement for Window list(Performance, menu blink and other issues)
 3.Fix: Multiple selection does not work with Save/SaveAs(Windows List dialog) #193
 4.Fix: Extra scroll issue while pressing enter key in Typewriter mode introduced by 0.4.2
-5.Increase input area by decreasing right margin of the single line edit
+5.Fix: Can't disable Autosave once enabled
+6.Increase input area by decreasing right margin of the single line edit
 
 Mod v0.4.2
 1.New: Hope MadEdit-Mod could load more open files history than 9 #179
