@@ -444,7 +444,7 @@
       <Filter>Source files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\MadWinListDialog.cpp">
-      <Filter>Source files\MadEdit</Filter>
+      <Filter>Source files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

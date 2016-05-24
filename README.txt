@@ -118,6 +118,8 @@ Todo:
 FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.4.3
+New: Ctrl-A to select all items in the Window List dialog
+New: Code performance improvement for Window list(Performance, menu blink issues)
 Fix: Multiple selection does not work with Save/SaveAs(Windows List dialog) #193
 
 Mod v0.4.2

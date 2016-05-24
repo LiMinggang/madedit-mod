@@ -3401,6 +3401,7 @@ void MadEditFrame::OnNotebookPageChanged( wxAuiNotebookEvent& event )
 	g_ActiveMadEdit = ( MadEdit* )m_Notebook->GetPage( m_Notebook->GetSelection() );
 	int now = event.GetSelection();
 	int old = event.GetOldSelection();
+	int count = int( m_Notebook->GetPageCount() );
 
 	if( event.GetEventObject() == this )
 	{
@@ -3414,9 +3415,10 @@ void MadEditFrame::OnNotebookPageChanged( wxAuiNotebookEvent& event )
 		g_PrevPageID = old;
 	}
 
-	while(g_Menu_Window->GetMenuItemCount() > Menu_Window_Count)
+	while(g_Menu_Window->GetMenuItemCount() > (Menu_Window_Count + count + 1 ))
 	{
 		wxMenuItem * fmenu = g_Menu_Window->FindItemByPosition (Menu_Window_Count);
+		wxASSERT(fmenu != 0);
 		g_Menu_Window->Delete(fmenu);
 	}
 	
@@ -3464,10 +3466,19 @@ void MadEditFrame::OnNotebookPageChanged( wxAuiNotebookEvent& event )
 			g_ActiveMadEdit->Synced();
 		}
 		
-		int count = int( m_Notebook->GetPageCount() );
-		wxString fname;
-		
-		if(count) g_Menu_Window->AppendSeparator();
+		wxString fname = wxT("EMPTY");
+
+		if(g_Menu_Window->GetMenuItemCount() == Menu_Window_Count)
+		{
+			g_Menu_Window->AppendSeparator();
+		}
+
+		int needadd = (Menu_Window_Count + count + 1) - g_Menu_Window->GetMenuItemCount();
+		for (int i = 0; i < needadd; ++i)
+		{
+			g_Menu_Window->Append( menuWindow1 + (i + count - 1), fname, wxEmptyString, wxITEM_CHECK);
+		}
+
 		for( int id = 0; id < count; ++id )
 		{
 			fname = m_Notebook->GetPageText( id );
@@ -3475,13 +3486,8 @@ void MadEditFrame::OnNotebookPageChanged( wxAuiNotebookEvent& event )
 			if( fname[fname.Len() - 1] == wxT( '*' ) )
 			{ fname.Truncate( fname.Len() - 1 ); }
 			MadEdit *me = ( MadEdit* )m_Notebook->GetPage( id );
-			g_Menu_Window->Append( menuWindow1 + id, fname, me->GetFileName(), wxITEM_CHECK);
-		}
-		
-		if(g_Menu_Window->GetMenuItemCount() > Menu_Window_Count)
-		{
-			int id = m_Notebook->GetSelection();
-			g_Menu_Window->Check(menuWindow1 + id, true);
+			g_Menu_Window->SetLabel(menuWindow1 + id, fname);
+			g_Menu_Window->SetHelpString(menuWindow1 + id, me->GetFileName());
 		}
 	}
 	else
