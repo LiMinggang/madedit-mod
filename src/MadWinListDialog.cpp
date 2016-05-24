@@ -276,7 +276,6 @@ void MadWinListDialog::SortTabs(long column)
 			tname = nameMap[colname[id]];
 			notebookp->AddPage( medits[id], tname, false);
 		}
-		m_MainFrame->SetPageFocus( 0 );
 		m_MainFrame->SetPageFocus( selid );
 		InitWindowListIterms();
 	}
