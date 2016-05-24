@@ -3415,13 +3415,6 @@ void MadEditFrame::OnNotebookPageChanged( wxAuiNotebookEvent& event )
 		g_PrevPageID = old;
 	}
 
-	while(g_Menu_Window->GetMenuItemCount() > (Menu_Window_Count + count + 1 ))
-	{
-		wxMenuItem * fmenu = g_Menu_Window->FindItemByPosition (Menu_Window_Count);
-		wxASSERT(fmenu != 0);
-		g_Menu_Window->Delete(fmenu);
-	}
-	
 	//wxLogMessage( wxString()<<int(g_ActiveMadEdit));
 	if( g_ActiveMadEdit != NULL )
 	{
@@ -3522,7 +3515,17 @@ void MadEditFrame::OnNotebookPageClosing( wxAuiNotebookEvent& event )
 
 void MadEditFrame::OnNotebookPageClosed( bool bZeroPage )
 {
-	if( bZeroPage || m_Notebook->GetPageCount() == 0 )
+	int count = m_Notebook->GetPageCount();
+	int todelete = g_Menu_Window->GetMenuItemCount() - (Menu_Window_Count + count);
+	while (todelete >= 0)
+	{
+		wxMenuItem * fmenu = g_Menu_Window->FindItemByPosition(g_Menu_Window->GetMenuItemCount() - 1);
+		wxASSERT(fmenu != 0);
+		g_Menu_Window->Delete(fmenu);
+		--todelete;
+	}
+
+	if( bZeroPage || count == 0 )
 	{
 		g_ActiveMadEdit = NULL;
 		SetTitle( wxString( wxT( "MadEdit " ) ) );
