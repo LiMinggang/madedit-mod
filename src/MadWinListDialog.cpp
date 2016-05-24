@@ -275,6 +275,10 @@ void MadWinListDialog::SortTabs(long column)
 		{
 			tname = nameMap[colname[id]];
 			notebookp->AddPage( medits[id], tname, false);
+			
+			wxString tmpname = (medits[id])->GetFileName();
+			if(tmpname.IsEmpty()) tmpname = tname;
+			notebookp->SetPageToolTip (id, tmpname);
 		}
 		m_MainFrame->SetPageFocus( selid );
 		InitWindowListIterms();

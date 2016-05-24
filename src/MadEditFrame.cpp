@@ -3999,9 +3999,9 @@ void MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 		int count = int( m_Notebook->GetPageCount() + 1 );
 		
 		int needadd = (Menu_Window_Count + count + 1) - g_Menu_Window->GetMenuItemCount();
-		for (int i = 0; i < needadd; ++i)
+		if(needadd>0)
 		{
-			g_Menu_Window->Append( menuWindow1 + (i + count - 1), title, madedit->GetFileName(), wxITEM_CHECK);
+			g_Menu_Window->Append( menuWindow1 + ( count - 1), title, madedit->GetFileName(), wxITEM_CHECK);
 		}
 
 		m_Notebook->AddPage( madedit, title, true );
@@ -4059,6 +4059,11 @@ void MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 	str = wxString( wxT( '[' ) ) + madedit->GetEncodingName() + wxT( "] " ) + wxGetTranslation( madedit->GetEncodingDescription().c_str() );
 	m_RecentEncodings->AddFileToHistory( str );
 	madedit->SetFocus();
+
+	wxString tmpname = madedit->GetFileName();
+	int myid = m_Notebook->GetPageCount() - 1;
+	if(tmpname.IsEmpty()) tmpname = m_Notebook->GetPageText(myid);
+	m_Notebook->SetPageToolTip (myid, tmpname);
 
 	if( g_ActiveMadEdit != madedit )
 	{
