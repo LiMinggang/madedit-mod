@@ -207,20 +207,17 @@ void MadWinListDialog::OnButtonCloseWindowsClick(wxCommandEvent& event)
 void MadWinListDialog::SortTabs(long column)
 {
 	wxArrayString colname, tabname;
-	wxArrayString * tabref = &colname;
 	std::map<wxString, MadEdit *> madEditMap;
+	std::map<wxString, wxString> nameMap;
 	bool need_tab_name = (column != COL_TABNAME);
 	wxString name;
 
 	wxAuiNotebook * notebookp = reinterpret_cast<wxAuiNotebook *>(m_MainFrame->m_Notebook);
 	std::vector<MadEdit *> oldmedits, medits;
 
-	if(need_tab_name)
-	{
-		tabref = &tabname;
-	}
-
 	long item = -1, seq = 0;
+	int selid = notebookp->GetSelection();
+	MadEdit * selmedit = 0;
 	for (; ;)
 	{
 		++seq;
@@ -229,18 +226,25 @@ void MadWinListDialog::SortTabs(long column)
 			break;
 
 		name = MadWindowsList->GetItemText(item, column);
+		if(column == COL_PATH)
+		{
+			wxString tname = MadWindowsList->GetItemText(item);
+			name += tname;
+		}
 		
 		long pageId = static_cast<long>(MadWindowsList->GetItemData(item));
 		MadEdit * madedit = ( MadEdit* )notebookp->GetPage( pageId );
 		if(name.IsEmpty())
-			name.Printf(wxT("*%4d"), seq);
+			name.Printf(wxT("*%04d"), seq);
 		colname.Add(name);
 		madEditMap[name] = madedit;
 		oldmedits.push_back(madedit);
+		if(selid == pageId)
+			selmedit = madedit;
 		if(need_tab_name)
 		{
-			name = MadWindowsList->GetItemText(item);
-			tabname.Add(name);
+			wxString tname = MadWindowsList->GetItemText(item);
+			nameMap[name] = tname;
 		}
 	}
 
@@ -254,6 +258,7 @@ void MadWinListDialog::SortTabs(long column)
 		it = madEditMap.find(colname[i]);
 		wxASSERT(it != madEditMap.end());
 		medits.push_back(it->second);
+		if(selmedit == it->second) selid = i;
 	}
 
 	if(oldmedits != medits)
@@ -263,11 +268,18 @@ void MadWinListDialog::SortTabs(long column)
 			notebookp->RemovePage( 0 );
 		}
 
+		wxString tname;
+
 		for( long id = 0; id < count; ++id )
 		{
-			notebookp->AddPage( medits[id], (*tabref)[id], false);
+			if(need_tab_name)
+				tname = nameMap[colname[id]];
+			else
+				tname = colname[id];
+			notebookp->AddPage( medits[id], tname, false);
 		}
 		m_MainFrame->SetPageFocus( 0 );
+		m_MainFrame->SetPageFocus( selid );
 		InitWindowListIterms();
 	}
 }
