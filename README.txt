@@ -117,11 +117,12 @@ Note: Not support wxWidgets 2.X anymore since 0.3.X
 Todo:
 FreeBSD packaging (with FreeBSD 10.01)
 
-Mod v0.4.3
-New: Ctrl-A to select all items in the Window List dialog
-New: Code performance improvement for Window list(Performance, menu blink issues)
-Fix: Multiple selection does not work with Save/SaveAs(Windows List dialog) #193
-Fix: Extra scroll issue while pressing enter key in Typewriter mode introduced by 0.4.2
+Mod v0.4.2.1
+1.New: Ctrl-A to select all items in the Window List dialog
+2.New: Code performance improvement for Window list(Performance, menu blink and other issues)
+3.Fix: Multiple selection does not work with Save/SaveAs(Windows List dialog) #193
+4.Fix: Extra scroll issue while pressing enter key in Typewriter mode introduced by 0.4.2
+5.Increase input area by decreasing right margin of the single line edit
 
 Mod v0.4.2
 1.New: Hope MadEdit-Mod could load more open files history than 9 #179

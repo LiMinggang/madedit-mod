@@ -161,7 +161,7 @@ void MadWinListDialog::SaveFile(bool saveas/* = false*/)
 	
 	for(int i = 0; i < items.size(); ++i)
 	{
-		long pageId = static_cast<long>(MadWindowsList->GetItemData(item));
+		long pageId = static_cast<long>(MadWindowsList->GetItemData(items[i]));
 		m_MainFrame->SaveFile(pageId, saveas);
 	}
 }

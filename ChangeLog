@@ -1,5 +1,13 @@
 2016-5-23  Minggang Li <minggang.li@gmail.com>
 
+	1.New: Ctrl-A to select all items in the Window List dialog
+	2.New: Code performance improvement for Window list(Performance, menu blink and other issues)
+	3.Fix: Multiple selection does not work with Save/SaveAs(Windows List dialog) #193
+	4.Fix: Extra scroll issue while pressing enter key in Typewriter mode introduced by 0.4.2
+	5.Increase input area by decreasing right margin of the single line edit
+
+2016-5-23  Minggang Li <minggang.li@gmail.com>
+
 	1.New: Hope MadEdit-Mod could load more open files history than 9 #179
 	2.New: Redesign of Search Results view----Hope to add search key words or expression on the result tree title on the left of the file path #137
 	3.New: Save LineSpacing, Line Wrap Mode and Edit Mode for opened files #186
