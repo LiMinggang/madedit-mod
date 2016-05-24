@@ -326,8 +326,16 @@ void MadEdit::SetTextFont( const wxString &name, int size, bool forceReset )
 			}
 
 			m_FixedWidthMode = ofwm;
-			m_LeftMarginWidth = ( m_TextFontAveCharWidth >> 1 ) - 1;
-			m_RightMarginWidth = m_TextFontAveCharWidth << 1;
+			if(m_SingleLineMode)
+			{
+				m_LeftMarginWidth = ( m_TextFontAveCharWidth >> 1 ) - 1;
+				m_RightMarginWidth = 0;
+			}
+			else
+			{
+				m_LeftMarginWidth = ( m_TextFontAveCharWidth >> 1 ) - 1;
+				m_RightMarginWidth = m_TextFontAveCharWidth << 1;
+			}
 			m_Syntax->InitNextWord1( m_Lines, m_WordBuffer, m_WidthBuffer,
 									 name, size, m_TextFont->GetFamily() );
 			// prepare m_Space_Points, m_EOF_Points
