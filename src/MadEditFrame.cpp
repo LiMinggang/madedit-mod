@@ -3461,17 +3461,6 @@ void MadEditFrame::OnNotebookPageChanged( wxAuiNotebookEvent& event )
 		
 		wxString fname = wxT("EMPTY");
 
-		if(g_Menu_Window->GetMenuItemCount() == Menu_Window_Count)
-		{
-			g_Menu_Window->AppendSeparator();
-		}
-
-		int needadd = (Menu_Window_Count + count + 1) - g_Menu_Window->GetMenuItemCount();
-		for (int i = 0; i < needadd; ++i)
-		{
-			g_Menu_Window->Append( menuWindow1 + (i + count - 1), fname, wxEmptyString, wxITEM_CHECK);
-		}
-
 		for( int id = 0; id < count; ++id )
 		{
 			fname = m_Notebook->GetPageText( id );
@@ -3516,14 +3505,6 @@ void MadEditFrame::OnNotebookPageClosing( wxAuiNotebookEvent& event )
 void MadEditFrame::OnNotebookPageClosed( bool bZeroPage )
 {
 	int count = m_Notebook->GetPageCount();
-	int todelete = g_Menu_Window->GetMenuItemCount() - (Menu_Window_Count + count);
-	while (todelete >= 0)
-	{
-		wxMenuItem * fmenu = g_Menu_Window->FindItemByPosition(g_Menu_Window->GetMenuItemCount() - 1);
-		wxASSERT(fmenu != 0);
-		g_Menu_Window->Delete(fmenu);
-		--todelete;
-	}
 
 	if( bZeroPage || count == 0 )
 	{
@@ -3847,16 +3828,16 @@ void MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 	{
 		int count = int( m_Notebook->GetPageCount() );
 		wxArrayString fnames;
-		wxString fname;
+		wxString tmname;
 
 		for( int id = 0; id < count; ++id )
 		{
-			fname = m_Notebook->GetPageText( id );
+			tmname = m_Notebook->GetPageText( id );
 
-			if( fname[fname.Len() - 1] == wxT( '*' ) )
-			{ fname.Truncate( fname.Len() - 1 ); }
+			if( tmname[tmname.Len() - 1] == wxT( '*' ) )
+			{ tmname.Truncate( tmname.Len() - 1 ); }
 
-			fnames.Add( fname );
+			fnames.Add( tmname );
 		}
 
 		bool nameNotOk = true;
@@ -4044,6 +4025,12 @@ void MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 		OnEditSelectionChanged( g_ActiveMadEdit );
 		OnEditStatusChanged( g_ActiveMadEdit );
 	}
+	else
+	{
+		int id = GetIdByEdit( g_ActiveMadEdit );
+		g_Menu_Window->SetLabel(menuWindow1 + id, m_Notebook->GetPageText( id ));
+		g_Menu_Window->SetHelpString(menuWindow1 + id, g_ActiveMadEdit->GetFileName());
+	}
 
 	title = g_ActiveMadEdit->GetFileName();
 
@@ -4059,6 +4046,19 @@ void MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 
 	if( linenum != -1 )
 	{ g_ActiveMadEdit->GoToLine( linenum ); }
+
+	if(g_Menu_Window->GetMenuItemCount() == Menu_Window_Count)
+	{
+		g_Menu_Window->AppendSeparator();
+	}
+
+	int count = int( m_Notebook->GetPageCount() );
+
+	int needadd = (Menu_Window_Count + count + 1) - g_Menu_Window->GetMenuItemCount();
+	for (int i = 0; i < needadd; ++i)
+	{
+		g_Menu_Window->Append( menuWindow1 + (i + count - 1), m_Notebook->GetPageText( GetIdByEdit( g_ActiveMadEdit )), title, wxITEM_CHECK);
+	}
 }
 
 void MadEditFrame::RunScriptWithFile( const wxString &filename, const wxString &script, bool mustExist, bool closeafterdone, bool ignorereadonly, bool activeFile )
@@ -4172,8 +4172,25 @@ void MadEditFrame::CloseFile( long pageId )
 		g_CheckModTimeForReload = false;
 		m_Notebook->DeletePage( pageId );
 
-		if( m_Notebook->GetPageCount() == 0 ) { OnNotebookPageClosed(); }
+		int count = m_Notebook->GetPageCount();
+		if( count == 0 ) { OnNotebookPageClosed(); }
 
+		int todelete = g_Menu_Window->GetMenuItemCount() - (Menu_Window_Count + count + 1);
+		while (todelete > 0)
+		{
+			wxMenuItem * fmenu = g_Menu_Window->FindItemByPosition(g_Menu_Window->GetMenuItemCount() - 1);
+			wxASSERT(fmenu != 0);
+			g_Menu_Window->Delete(fmenu);
+			--todelete;
+		}
+
+		if( count == 0 )
+		{
+			wxMenuItem * fmenu = g_Menu_Window->FindItemByPosition(g_Menu_Window->GetMenuItemCount() - 1);
+			wxASSERT(fmenu != 0);
+			g_Menu_Window->Delete(fmenu);
+		}
+	
 		g_CheckModTimeForReload = true;
 		m_PageClosing = false;
 	}
