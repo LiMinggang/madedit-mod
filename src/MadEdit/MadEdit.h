@@ -760,7 +760,7 @@ public: // basic functions
 	void ResetTypewriterMode() { m_TypewriterMode = false; }
 	bool IsTypewriterMode() { return m_TypewriterMode; }
     bool HasBackup() {return m_HasBackup;}
-    bool SetHasBackup(bool bk) {m_HasBackup = bk;}
+    void SetHasBackup(bool bk) {m_HasBackup = bk;}
 #if __cplusplus <= 199711L
     boost::shared_ptr<wxSpellCheckEngineInterface> &GetSpellChecker() { return m_SpellCheckerPtr; }
 #else

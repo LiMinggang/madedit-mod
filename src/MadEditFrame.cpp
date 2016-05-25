@@ -7553,7 +7553,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 			madedit->SetMiddleMouseToPaste( mmp );
 			madedit->SetAutoFillColumnPaste( afcp );
 			if(atbck != madedit->HasBackup())
-				madedit->SetHasBackup();
+				madedit->SetHasBackup(atbck);
 			long lo;
 
 			if( mc.ToLong( &lo ) ) { madedit->SetMaxColumns( lo ); }
