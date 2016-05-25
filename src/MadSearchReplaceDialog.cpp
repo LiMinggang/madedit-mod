@@ -1592,13 +1592,15 @@ void MadSearchReplaceDialog::SearchAll( MadEdit * madedit, bool needRec/*=true*/
 		// Root
 		wxTreeItemId rtid = results->GetRootItem();
 		wxASSERT(rtid.IsOk());
+		wxTreeItemIdValue rtck;
 		// First Level----search results summary
-		wxTreeItemId id = results->GetLastChild(rtid);
+		wxTreeItemId id = results->GetFirstChild(rtid, rtck);
 		if(id.IsOk())
 		{
 			// Second Level File results
-			wxTreeItemId lstid = results->GetLastChild(id);
-			if(lstid.IsOk())
+			wxTreeItemIdValue cookie;
+			wxTreeItemId lstid = results->GetFirstChild(id, cookie);
+			if(lstid.IsOk() && results->IsExpanded(lstid))
 				results->Collapse(lstid);
 		}
 
@@ -1709,13 +1711,16 @@ void MadSearchReplaceDialog::SearchAll( MadEdit * madedit, bool needRec/*=true*/
 
 			// Root
 			// First Level----search results summary
-			id = results->GetLastChild(rtid);
+			wxTreeItemIdValue cookie;
+			id = results->GetFirstChild(rtid, cookie);
 			if(id.IsOk())
 			{
-				results->Expand(id);
+				if(!results->IsExpanded(id))
+					results->Expand(id);
 				// Second Level File results
-				wxTreeItemId lstid = results->GetLastChild(id);
-				if(lstid.IsOk())
+				wxTreeItemIdValue ck;
+				wxTreeItemId lstid = results->GetFirstChild(id, ck);
+				if(lstid.IsOk() && !results->IsExpanded(lstid))
 					results->Expand(lstid);
 			}
 		}

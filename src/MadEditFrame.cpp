@@ -3777,7 +3777,8 @@ void MadEditFrame::ResetFindInFilesResults()
 wxTreeItemId & MadEditFrame::NewSearchSession( const wxString &sessionLabel )
 {
 	static wxTreeItemId myroot;
-	myroot = m_FindInFilesResults->AppendItem( m_FindInFilesResults->GetRootItem( ), sessionLabel );
+	//myroot = m_FindInFilesResults->AppendItem( m_FindInFilesResults->GetRootItem( ), sessionLabel );
+	myroot = m_FindInFilesResults->InsertItem( m_FindInFilesResults->GetRootItem( ), 0, sessionLabel );
 	return myroot;
 }
 
