@@ -7395,7 +7395,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		// save options
 		wxString oldpath = m_Config->GetPath();
 		m_Config->SetPath( wxT( "/MadEdit" ) );
-		bool rcm, isiot, ai, acp, msc, mscck, mmp, afcp;
+		bool rcm, isiot, ai, acp, msc, mscck, mmp, afcp, atbck;
 		wxString mc, tc, ic;
 		long ll;
 		m_Config->Write( wxT( "Language" ), g_OptionsDialog->WxComboBoxLanguage->GetValue() );
@@ -7416,7 +7416,8 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 			if(m_AutoSaveTimout)
 				m_AutoSaveTimer.StartOnce(m_AutoSaveTimout*MADMINUTES);
 		}
-		m_Config->Write( wxT( "AutoBackup" ), g_OptionsDialog->WxCheckBoxEnableAutoBackup->GetValue() );
+		atbck = g_OptionsDialog->WxCheckBoxEnableAutoBackup->GetValue();
+		m_Config->Write( wxT( "AutoBackup" ),  atbck);
 			
 #ifdef __WXMSW__
 
@@ -7551,6 +7552,8 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 			madedit->SetMouseSelectToCopyWithCtrlKey( mscck );
 			madedit->SetMiddleMouseToPaste( mmp );
 			madedit->SetAutoFillColumnPaste( afcp );
+			if(atbck != madedit->HasBackup())
+				madedit->SetHasBackup();
 			long lo;
 
 			if( mc.ToLong( &lo ) ) { madedit->SetMaxColumns( lo ); }
