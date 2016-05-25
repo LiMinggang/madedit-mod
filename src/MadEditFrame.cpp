@@ -657,8 +657,8 @@ public:
 		unsigned long hash = wxStringHash::stringHash( (wchar_t*)(name0.wx_str()));
 		wxFileOffset pos = 0;
 		fontsize = 0;
-		lspercent = 100;
-		wrapmode = wwmNoWrap; 
+		lspercent = 0;
+		wrapmode = -1; 
 		editmode = -1;
 
 		if( !files.empty() ) {
