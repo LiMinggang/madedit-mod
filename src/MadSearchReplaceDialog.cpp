@@ -1496,13 +1496,13 @@ void DisplayFindAllResult( wxTreeItemId &myroot, vector<wxFileOffset> &begpos, v
 			if( results->GetCount() )
 			{
 				if( expandresults )
-					{
-						wxTreeItemId rtid = results->GetRootItem();
-						wxASSERT(rtid.IsOk());
-						wxTreeItemId id = results->GetLastChild(rtid);
-						if(id.IsOk())
-							results->Expand(id);
-					}
+				{
+					wxTreeItemId rtid = results->GetRootItem();
+					wxASSERT(rtid.IsOk());
+					wxTreeItemId id = results->GetLastChild(rtid);
+					if(id.IsOk())
+						results->Expand(id);
+				}
 
 				g_MainFrame->m_AuiManager.GetPane( g_MainFrame->m_InfoNotebook ).Show();
 				g_MainFrame->m_AuiManager.Update();
@@ -1582,6 +1582,24 @@ void MadSearchReplaceDialog::SearchAll( MadEdit * madedit, bool needRec/*=true*/
 			//wxFileOffset caretpos = g_ActiveMadEdit->GetCaretPosition();
 			if( caretpos <= m_SearchFrom || caretpos >= m_SearchTo )
 				rangeFrom = m_SearchFrom;
+		}
+
+#if USE_GENERIC_TREECTRL
+		wxGenericTreeCtrl * results = g_MainFrame->m_FindInFilesResults;
+#else
+		wxTreeCtrl * results = g_MainFrame->m_FindInFilesResults;
+#endif
+		// Root
+		wxTreeItemId rtid = results->GetRootItem();
+		wxASSERT(rtid.IsOk());
+		// First Level----search results summary
+		wxTreeItemId id = results->GetLastChild(rtid);
+		if(id.IsOk())
+		{
+			// Second Level File results
+			wxTreeItemId lstid = results->GetLastChild(id);
+			if(lstid.IsOk())
+				results->Collapse(lstid);
 		}
 
 		if( WxCheckBoxFindHex->GetValue() )
@@ -1688,6 +1706,18 @@ void MadSearchReplaceDialog::SearchAll( MadEdit * madedit, bool needRec/*=true*/
 			wxString smsg;
 			smsg.Printf( _( "%s results" ), ( wxLongLong( ok ).ToString().c_str() ) );
 			g_StatusBar->SetStatusText( smsg, 0 );
+
+			// Root
+			// First Level----search results summary
+			id = results->GetLastChild(rtid);
+			if(id.IsOk())
+			{
+				results->Expand(id);
+				// Second Level File results
+				wxTreeItemId lstid = results->GetLastChild(id);
+				if(lstid.IsOk())
+					results->Expand(lstid);
+			}
 		}
 	}
 	else
