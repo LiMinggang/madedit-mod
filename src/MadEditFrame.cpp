@@ -573,7 +573,7 @@ public:
 				fpdata.fontsize = 8;
 				fpdata.encoding.Empty();
 				fpdata.lspercent = 100;
-				fpdata.wrapmode = wwmNoWrap; 
+				fpdata.wrapmode = -1; 
 				fpdata.editmode = -1;
 				wxInt64 i64;
 
@@ -623,7 +623,7 @@ public:
 
 										if( StrToInt64( text, i64 ) ) {
 											if((i64 < emTextMode) || (i64 > emHexMode)) i64 = emTextMode;
-											fpdata.wrapmode = i64;
+											fpdata.editmode = i64;
 										}
 									}
 								}
@@ -3777,8 +3777,7 @@ void MadEditFrame::ResetFindInFilesResults()
 wxTreeItemId & MadEditFrame::NewSearchSession( const wxString &sessionLabel )
 {
 	static wxTreeItemId myroot;
-	//myroot = m_FindInFilesResults->AppendItem( m_FindInFilesResults->GetRootItem( ), sessionLabel );
-	myroot = m_FindInFilesResults->InsertItem( m_FindInFilesResults->GetRootItem( ), 0, sessionLabel );
+	myroot = m_FindInFilesResults->AppendItem( m_FindInFilesResults->GetRootItem( ), sessionLabel );
 	return myroot;
 }
 
