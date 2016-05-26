@@ -2814,6 +2814,9 @@ void MadEditFrame::CreateGUIControls( void )
 		}
 	}
 
+	// For Windows list
+	g_Menu_Window->AppendSeparator();
+
 	ResetAcceleratorTable();
 	/***/
 	m_RecentFiles = new MadRecentList( 20 );
@@ -3458,19 +3461,6 @@ void MadEditFrame::OnNotebookPageChanged( wxAuiNotebookEvent& event )
 			m_HtmlPreview->SetPage( text );
 			g_ActiveMadEdit->Synced();
 		}
-		
-		wxString fname = wxT("EMPTY");
-
-		for( int id = 0; id < count; ++id )
-		{
-			fname = m_Notebook->GetPageText( id );
-		
-			if( fname[fname.Len() - 1] == wxT( '*' ) )
-			{ fname.Truncate( fname.Len() - 1 ); }
-			MadEdit *me = ( MadEdit* )m_Notebook->GetPage( id );
-			g_Menu_Window->SetLabel(menuWindow1 + id, fname);
-			g_Menu_Window->SetHelpString(menuWindow1 + id, me->GetFileName());
-		}
 	}
 	else
 	{
@@ -3482,6 +3472,8 @@ void MadEditFrame::OnNotebookPageClosing( wxAuiNotebookEvent& event )
 {
 	if( m_PageClosing )
 	{
+		int count = m_Notebook->GetPageCount();
+		g_Menu_Window->Delete(menuWindow1 + count - 1);
 		return;
 	}
 
@@ -3500,21 +3492,7 @@ void MadEditFrame::OnNotebookPageClosing( wxAuiNotebookEvent& event )
 		
 		int count = m_Notebook->GetPageCount();
 		
-		int todelete = g_Menu_Window->GetMenuItemCount() - (Menu_Window_Count + count);
-		while (todelete > 0)
-		{
-			wxMenuItem * fmenu = g_Menu_Window->FindItemByPosition(g_Menu_Window->GetMenuItemCount() - 1);
-			wxASSERT(fmenu != 0);
-			g_Menu_Window->Delete(fmenu);
-			--todelete;
-		}
-		
-		if( (count-1) == 0 )
-		{
-			wxMenuItem * fmenu = g_Menu_Window->FindItemByPosition(g_Menu_Window->GetMenuItemCount() - 1);
-			wxASSERT(fmenu != 0);
-			g_Menu_Window->Delete(fmenu);
-		}
+		g_Menu_Window->Delete(menuWindow1 + count - 1);
 	}
 
 	m_PageClosing = false;
@@ -3991,15 +3969,9 @@ void MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 		madedit->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ) );
 		g_PrevPageID = m_Notebook->GetSelection();
 
-		if(g_Menu_Window->GetMenuItemCount() == Menu_Window_Count)
-		{
-			g_Menu_Window->AppendSeparator();
-		}
-		
 		int count = int( m_Notebook->GetPageCount() + 1 );
 		
-		int needadd = (Menu_Window_Count + count + 1) - g_Menu_Window->GetMenuItemCount();
-		if(needadd>0)
+		if((Menu_Window_Count + count + 1) > g_Menu_Window->GetMenuItemCount())
 		{
 			g_Menu_Window->Append( menuWindow1 + ( count - 1), title, madedit->GetFileName(), wxITEM_CHECK);
 		}
@@ -4072,12 +4044,6 @@ void MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 		g_ActiveMadEdit->UpdateSyntaxDictionary();
 		OnEditSelectionChanged( g_ActiveMadEdit );
 		OnEditStatusChanged( g_ActiveMadEdit );
-	}
-	else
-	{
-		int id = GetIdByEdit( g_ActiveMadEdit );
-		g_Menu_Window->SetLabel(menuWindow1 + id, m_Notebook->GetPageText( id ));
-		g_Menu_Window->SetHelpString(menuWindow1 + id, g_ActiveMadEdit->GetFileName());
 	}
 
 	title = g_ActiveMadEdit->GetFileName();
@@ -4206,27 +4172,6 @@ void MadEditFrame::CloseFile( long pageId )
 		m_PageClosing = true;
 		g_CheckModTimeForReload = false;
 		m_Notebook->DeletePage( pageId );
-
-		int count = m_Notebook->GetPageCount();
-		if( count == 0 ) { OnNotebookPageClosed(); }
-
-		// Closing event will be ignored because of m_PageClosing = true, so...
-		int todelete = g_Menu_Window->GetMenuItemCount() - (Menu_Window_Count + count + 1);
-		while (todelete > 0)
-		{
-			wxMenuItem * fmenu = g_Menu_Window->FindItemByPosition(g_Menu_Window->GetMenuItemCount() - 1);
-			wxASSERT(fmenu != 0);
-			g_Menu_Window->Delete(fmenu);
-			--todelete;
-		}
-
-		if( count == 0 )
-		{
-			wxMenuItem * fmenu = g_Menu_Window->FindItemByPosition(g_Menu_Window->GetMenuItemCount() - 1);
-			wxASSERT(fmenu != 0);
-			g_Menu_Window->Delete(fmenu);
-		}
-
 		g_CheckModTimeForReload = true;
 		m_PageClosing = false;
 	}
@@ -4879,8 +4824,25 @@ void MadEditFrame::OnUpdateUI_MenuWindow_CheckCount( wxUpdateUIEvent& event )
 void MadEditFrame::OnUpdateUI_MenuWindow_Window( wxUpdateUIEvent& event )
 {
 	int menuId = event.GetId();
-	bool check = ((menuId - menuWindow1) == m_Notebook->GetSelection());
-	g_Menu_Window->Check(menuId, check);
+	int pgid = (menuId - menuWindow1);
+	event.Check(pgid == m_Notebook->GetSelection());
+	int psid = m_Notebook->GetPageIndex( g_ActiveMadEdit );
+	DBOUT( "WWindow:pgid:"<<pgid<<", psid:"<<psid<<", sel:"<<m_Notebook->GetSelection()<<'\n' );
+
+	MadEdit *me = ( MadEdit* )m_Notebook->GetPage( pgid );
+	wxString fname = m_Notebook->GetPageText( pgid );
+	wxString fpath = me->GetFileName();
+	if( fname[fname.Len() - 1] == wxT( '*' ) )
+	{ fname.Truncate( fname.Len() - 1 ); }
+	DBOUT( "WWindow:fpath"<<fpath.ToAscii()<<'\n' );
+	if(fpath != g_Menu_Window->GetHelpString(menuId))
+	{
+		g_Menu_Window->SetHelpString(menuId, fpath);
+	}
+	if( fname != g_Menu_Window->GetLabel(menuId))
+	{
+		g_Menu_Window->SetLabel(menuId, fname);
+	}
 }
 
 void MadEditFrame::OnUpdateUI_MenuToolsStartRecMacro( wxUpdateUIEvent& event )
@@ -4977,7 +4939,7 @@ void MadEditFrame::OnFileOpen( wxCommandEvent& event )
 void MadEditFrame::SaveFile(long pageId, bool saveas/* = false*/, bool hideDlg/* = true*/)
 {
 	int count = int( m_Notebook->GetPageCount() );
-	DBOUT( "MadEditFrame::SaveFile("<<pageId<<", "<< saveas <<", "<<hideDlg<<")" );
+	DBOUT( "MadEditFrame::SaveFile("<<pageId<<", "<< saveas <<", "<<hideDlg<<")\n" );
 
 	if(pageId >= 0 && pageId < count)
 	{
@@ -7463,9 +7425,9 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		m_Config->Write( wxT( "MiddleMouseToPaste" ), mmp );
 		afcp = g_OptionsDialog->WxCheckBoxAutoFillColumnPaste->GetValue();
 		m_Config->Write( wxT( "AutoFillColumnPaste" ), afcp );
-		afcp = g_OptionsDialog->WxCheckBoxTypewriterMode->GetValue();
+		twm = g_OptionsDialog->WxCheckBoxTypewriterMode->GetValue();
 		m_Config->Write( wxT( "TypewriterMode" ), twm );
-		afcp = g_OptionsDialog->WxCheckBoxFixWidthMode->GetValue();
+		fwm = g_OptionsDialog->WxCheckBoxFixWidthMode->GetValue();
 		m_Config->Write( wxT( "FixedWidthMode" ), fwm );
 		extern bool g_DoNotSaveSettings;
 		g_DoNotSaveSettings = g_OptionsDialog->WxCheckBoxDoNotSaveSettings->GetValue();
