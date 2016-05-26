@@ -120,6 +120,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 Mod v0.4.3
 New: Insert to the top instead of append to the bottom of search results, expand the last automatically and collapse the last
 Fix: 0.4.2.1 can not remember the word wrap setting #201
+Fix: The fix width in the Option menu can't Open #199
 
 Mod v0.4.2.1
 1.New: Ctrl-A to select all items in the Window List dialog

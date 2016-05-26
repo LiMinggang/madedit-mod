@@ -4726,7 +4726,7 @@ void MadEditFrame::OnUpdateUI_MenuViewToolbarsToggleAll( wxUpdateUIEvent& event 
 void MadEditFrame::OnUpdateUI_MenuViewTypewriterMode( wxUpdateUIEvent& event )
 {
 	event.Enable( g_ActiveMadEdit != NULL );
-	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->IsTypewriterMode() );
+	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetTypewriterMode() );
 }
 void MadEditFrame::OnUpdateUI_MenuViewToolbarList( wxUpdateUIEvent& event )
 {
@@ -7276,13 +7276,11 @@ void MadEditFrame::OnViewTypewriterMode( wxCommandEvent& event )
 {
 	if( g_ActiveMadEdit != NULL )
 	{
-		if(event.IsChecked())
-			g_ActiveMadEdit->TypewriterMode( );
-		else
-			g_ActiveMadEdit->ResetTypewriterMode( );
+		bool tmode = event.IsChecked();
+		g_ActiveMadEdit->SetTypewriterMode(tmode);
 		
 		wxString oldpath = m_Config->GetPath();
-		m_Config->Write( wxT( "/MadEdit/TypewriterMode" ), event.IsChecked() );
+		m_Config->Write( wxT( "/MadEdit/TypewriterMode" ), tmode );
 		m_Config->SetPath( oldpath );
 	}
 }
@@ -7395,7 +7393,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		// save options
 		wxString oldpath = m_Config->GetPath();
 		m_Config->SetPath( wxT( "/MadEdit" ) );
-		bool rcm, isiot, ai, acp, msc, mscck, mmp, afcp, atbck;
+		bool rcm, isiot, ai, acp, msc, mscck, mmp, afcp, fwm, twm, abck;
 		wxString mc, tc, ic;
 		long ll;
 		m_Config->Write( wxT( "Language" ), g_OptionsDialog->WxComboBoxLanguage->GetValue() );
@@ -7416,8 +7414,8 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 			if(m_AutoSaveTimout)
 				m_AutoSaveTimer.StartOnce(m_AutoSaveTimout*MADMINUTES);
 		}
-		atbck = g_OptionsDialog->WxCheckBoxEnableAutoBackup->GetValue();
-		m_Config->Write( wxT( "AutoBackup" ),  atbck);
+		abck = g_OptionsDialog->WxCheckBoxEnableAutoBackup->GetValue();
+		m_Config->Write( wxT( "AutoBackup" ),  abck);
 			
 #ifdef __WXMSW__
 
@@ -7466,9 +7464,9 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		afcp = g_OptionsDialog->WxCheckBoxAutoFillColumnPaste->GetValue();
 		m_Config->Write( wxT( "AutoFillColumnPaste" ), afcp );
 		afcp = g_OptionsDialog->WxCheckBoxTypewriterMode->GetValue();
-		m_Config->Write( wxT( "TypewriterMode" ), afcp );
+		m_Config->Write( wxT( "TypewriterMode" ), twm );
 		afcp = g_OptionsDialog->WxCheckBoxFixWidthMode->GetValue();
-		m_Config->Write( wxT( "FixedWidthMode" ), afcp );
+		m_Config->Write( wxT( "FixedWidthMode" ), fwm );
 		extern bool g_DoNotSaveSettings;
 		g_DoNotSaveSettings = g_OptionsDialog->WxCheckBoxDoNotSaveSettings->GetValue();
 		m_Config->Write( wxT( "ReloadFiles" ), g_OptionsDialog->WxCheckBoxReloadFiles->GetValue() );
@@ -7552,8 +7550,10 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 			madedit->SetMouseSelectToCopyWithCtrlKey( mscck );
 			madedit->SetMiddleMouseToPaste( mmp );
 			madedit->SetAutoFillColumnPaste( afcp );
-			if(atbck != madedit->HasBackup())
-				madedit->SetHasBackup(atbck);
+			madedit->SetFixedWidthMode( fwm );
+			madedit->SetTypewriterMode( twm );
+			if(abck != madedit->HasBackup())
+				madedit->SetHasBackup(abck);
 			long lo;
 
 			if( mc.ToLong( &lo ) ) { madedit->SetMaxColumns( lo ); }

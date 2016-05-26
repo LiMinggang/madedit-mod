@@ -756,9 +756,8 @@ public: // basic functions
 	bool GetShowSpaceChar() { return m_ShowSpaceChar; }
 	bool GetMarkActiveLine() { return m_MarkActiveLine; }
 	bool GetSpellCheckStatus() { return m_SpellCheck; }
-	void TypewriterMode() { m_TypewriterMode = true; }
-	void ResetTypewriterMode() { m_TypewriterMode = false; }
-	bool IsTypewriterMode() { return m_TypewriterMode; }
+	void SetTypewriterMode(bool mode) { m_TypewriterMode = mode; }
+	bool GetTypewriterMode() { return m_TypewriterMode; }
     bool HasBackup() {return m_HasBackup;}
     void SetHasBackup(bool bk) {m_HasBackup = bk;}
 #if __cplusplus <= 199711L
