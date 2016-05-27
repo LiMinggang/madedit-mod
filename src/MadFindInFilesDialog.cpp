@@ -125,26 +125,26 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID id,const 
 	BoxSizer8 = new wxBoxSizer(wxVERTICAL);
 	WxCheckBoxCaseSensitive = new wxCheckBox(this, ID_WXCHECKBOXCASESENSITIVE, _("&Case Sensitive"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXCASESENSITIVE"));
 	WxCheckBoxCaseSensitive->SetValue(false);
-	BoxSizer8->Add(WxCheckBoxCaseSensitive, 0, wxALL|wxALIGN_LEFT, 2);
+	BoxSizer8->Add(WxCheckBoxCaseSensitive, 0, wxALL|wxEXPAND, 2);
 	WxCheckBoxWholeWord = new wxCheckBox(this, ID_WXCHECKBOXWHOLEWORD, _("&Whole Word Only"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXWHOLEWORD"));
 	WxCheckBoxWholeWord->SetValue(false);
-	BoxSizer8->Add(WxCheckBoxWholeWord, 0, wxALL|wxALIGN_LEFT, 2);
+	BoxSizer8->Add(WxCheckBoxWholeWord, 0, wxALL|wxEXPAND, 2);
 	WxCheckBoxRegex = new wxCheckBox(this, ID_WXCHECKBOXREGEX, _("Use Regular E&xpressions"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXREGEX"));
 	WxCheckBoxRegex->SetValue(false);
-	BoxSizer8->Add(WxCheckBoxRegex, 0, wxALL|wxALIGN_LEFT, 2);
+	BoxSizer8->Add(WxCheckBoxRegex, 0, wxALL|wxEXPAND, 2);
 	BoxSizer9 = new wxBoxSizer(wxHORIZONTAL);
-	BoxSizer9->Add(10,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
+	BoxSizer9->Add(10,0,0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
 	WxCheckBoxDotMatchNewLine = new wxCheckBox(this, ID_CHECKBOXDOTMATCHNEWLINE, _("&. Matches Newline"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXDOTMATCHNEWLINE"));
 	WxCheckBoxDotMatchNewLine->SetValue(false);
-	BoxSizer9->Add(WxCheckBoxDotMatchNewLine, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	BoxSizer8->Add(BoxSizer9, 0, wxALL|wxALIGN_LEFT, 0);
+	BoxSizer9->Add(WxCheckBoxDotMatchNewLine, 0, wxALL|wxEXPAND, 2);
+	BoxSizer8->Add(BoxSizer9, 0, wxALL|wxEXPAND, 0);
 	WxCheckBoxFindHex = new wxCheckBox(this, ID_WXCHECKBOXFINDHEX, _("Find &Hex String (Example: BE 00 3A or BE003A)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXFINDHEX"));
 	WxCheckBoxFindHex->SetValue(false);
-	BoxSizer8->Add(WxCheckBoxFindHex, 0, wxALL|wxALIGN_LEFT, 2);
+	BoxSizer8->Add(WxCheckBoxFindHex, 0, wxALL|wxEXPAND, 2);
 	WxCheckBoxListFirstOnly = new wxCheckBox(this, ID_WXCHECKBOXLISTFIRSTONLY, _("&List the First Found Item Only"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXLISTFIRSTONLY"));
 	WxCheckBoxListFirstOnly->SetValue(false);
-	BoxSizer8->Add(WxCheckBoxListFirstOnly, 0, wxALL|wxALIGN_LEFT, 2);
-	BoxSizer4->Add(BoxSizer8, 0, wxALL|wxALIGN_LEFT, 0);
+	BoxSizer8->Add(WxCheckBoxListFirstOnly, 0, wxALL|wxEXPAND, 2);
+	BoxSizer4->Add(BoxSizer8, 0, wxALL|wxEXPAND, 0);
 	BoxSizer2->Add(BoxSizer4, 1, wxALL|wxALIGN_TOP, 0);
 	BoxSizer5 = new wxBoxSizer(wxVERTICAL);
 	WxButtonFind = new wxButton(this, ID_WXBUTTONFIND, _("&Find"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXBUTTONFIND"));
@@ -196,7 +196,7 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID id,const 
 	BoxSizer3->Add(FlexGridSizer1, 0, wxALL|wxEXPAND, 0);
 	WxCheckBoxSubDir = new wxCheckBox(this, ID_WXCHECKBOXSUBDIR, _("Include Subdirectories"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXSUBDIR"));
 	WxCheckBoxSubDir->SetValue(false);
-	BoxSizer3->Add(WxCheckBoxSubDir, 0, wxALL|wxALIGN_LEFT, 2);
+	BoxSizer3->Add(WxCheckBoxSubDir, 0, wxALL|wxEXPAND, 2);
 	BoxSizer1->Add(BoxSizer3, 1, wxALL|wxEXPAND, 0);
 	SetSizer(BoxSizer1);
 	BoxSizer1->Fit(this);
@@ -229,7 +229,7 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID id,const 
 
 	wxBitmap WxBitmapButtonRecentFindText_BITMAP (down_xpm);
 	WxBitmapButtonRecentFindText = new wxBitmapButton(this, ID_WXBITMAPBUTTONRECENTFINDTEXT, WxBitmapButtonRecentFindText_BITMAP, wxPoint(0,0), wxSize(bh,bh), wxBU_AUTODRAW, wxDefaultValidator, wxT("WxBitmapButtonRecentFindText"));
-	BoxSizer6->Add(WxBitmapButtonRecentFindText,0,wxALIGN_CENTER_HORIZONTAL | wxALL,2);
+	BoxSizer6->Add(WxBitmapButtonRecentFindText,0, wxALL,2);
 
 	// replace
 	WxButtonReplace->GetSize(&bw, &bh);
@@ -246,7 +246,7 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID id,const 
 	BoxSizer7->SetItemMinSize(m_ReplaceText, 400, bh);
 
 	WxBitmapButtonRecentReplaceText = new wxBitmapButton(this, ID_WXBITMAPBUTTONRECENTREPLACETEXT, WxBitmapButtonRecentFindText_BITMAP, wxPoint(0,0), wxSize(bh,bh), wxBU_AUTODRAW, wxDefaultValidator, _("WxBitmapButtonRecentReplaceText"));
-	BoxSizer7->Add(WxBitmapButtonRecentReplaceText,0,wxALIGN_CENTER_HORIZONTAL | wxALL,2);
+	BoxSizer7->Add(WxBitmapButtonRecentReplaceText,0, wxALL,2);
 	m_ReplaceText->Show(false);
 	WxBitmapButtonRecentReplaceText->Show(false);
 	WxButtonReplace->Show(false);

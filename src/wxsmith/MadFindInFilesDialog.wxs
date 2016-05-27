@@ -29,14 +29,14 @@
 										<object class="wxCheckBox" name="ID_WXCHECKBOXCASESENSITIVE" variable="WxCheckBoxCaseSensitive" member="yes">
 											<label>&amp;Case Sensitive</label>
 										</object>
-										<flag>wxALL|wxALIGN_LEFT</flag>
+										<flag>wxALL|wxEXPAND</flag>
 										<border>2</border>
 									</object>
 									<object class="sizeritem">
 										<object class="wxCheckBox" name="ID_WXCHECKBOXWHOLEWORD" variable="WxCheckBoxWholeWord" member="yes">
 											<label>&amp;Whole Word Only</label>
 										</object>
-										<flag>wxALL|wxALIGN_LEFT</flag>
+										<flag>wxALL|wxEXPAND</flag>
 										<border>2</border>
 									</object>
 									<object class="sizeritem">
@@ -44,42 +44,42 @@
 											<label>Use Regular E&amp;xpressions</label>
 											<handler function="WxCheckBoxRegexClick" entry="EVT_CHECKBOX" />
 										</object>
-										<flag>wxALL|wxALIGN_LEFT</flag>
+										<flag>wxALL|wxEXPAND</flag>
 										<border>2</border>
 									</object>
 									<object class="sizeritem">
 										<object class="wxBoxSizer" variable="BoxSizer9" member="no">
 											<object class="spacer">
-												<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+												<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
 												<size>10,0</size>
 											</object>
 											<object class="sizeritem">
 												<object class="wxCheckBox" name="ID_CHECKBOXDOTMATCHNEWLINE" variable="WxCheckBoxDotMatchNewLine" member="yes">
 													<label>&amp;. Matches Newline</label>
 												</object>
-												<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+												<flag>wxALL|wxEXPAND</flag>
 												<border>2</border>
 											</object>
 										</object>
-										<flag>wxALL|wxALIGN_LEFT</flag>
+										<flag>wxALL|wxEXPAND</flag>
 									</object>
 									<object class="sizeritem">
 										<object class="wxCheckBox" name="ID_WXCHECKBOXFINDHEX" variable="WxCheckBoxFindHex" member="yes">
 											<label>Find &amp;Hex String (Example: BE 00 3A or BE003A)</label>
 											<handler function="WxCheckBoxFindHexClick" entry="EVT_CHECKBOX" />
 										</object>
-										<flag>wxALL|wxALIGN_LEFT</flag>
+										<flag>wxALL|wxEXPAND</flag>
 										<border>2</border>
 									</object>
 									<object class="sizeritem">
 										<object class="wxCheckBox" name="ID_WXCHECKBOXLISTFIRSTONLY" variable="WxCheckBoxListFirstOnly" member="yes">
 											<label>&amp;List the First Found Item Only</label>
 										</object>
-										<flag>wxALL|wxALIGN_LEFT</flag>
+										<flag>wxALL|wxEXPAND</flag>
 										<border>2</border>
 									</object>
 								</object>
-								<flag>wxALL|wxALIGN_LEFT</flag>
+								<flag>wxALL|wxEXPAND</flag>
 							</object>
 						</object>
 						<flag>wxALL|wxALIGN_TOP</flag>
@@ -261,7 +261,7 @@
 						<object class="wxCheckBox" name="ID_WXCHECKBOXSUBDIR" variable="WxCheckBoxSubDir" member="yes">
 							<label>Include Subdirectories</label>
 						</object>
-						<flag>wxALL|wxALIGN_LEFT</flag>
+						<flag>wxALL|wxEXPAND</flag>
 						<border>2</border>
 					</object>
 				</object>
