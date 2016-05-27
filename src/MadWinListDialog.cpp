@@ -110,6 +110,7 @@ void MadWinListDialog::InitWindowListIterms()
 	MadWindowsList->Hide();
 	MadWindowsList->DeleteAllItems();
 
+	MadWindowsList->Freeze();
 	for( long id = 0; id < count; ++id )
 	{
 		MadEdit * madedit = ( MadEdit* )notebookp->GetPage( id );
@@ -120,6 +121,7 @@ void MadWinListDialog::InitWindowListIterms()
 		MadWindowsList->SetItemData(tmp, id);
 		MadWindowsList->SetItem(tmp, 1, fdir);
 	}
+	MadWindowsList->Thaw();
 
 	if(count)
 	{
@@ -266,6 +268,7 @@ void MadWinListDialog::SortTabs(long column)
 
 	if(oldmedits != medits)
 	{
+		m_MainFrame->WxMenuBar1->Freeze();
 		while(notebookp->GetPageCount())
 		{
 			notebookp->RemovePage( 0 );
@@ -280,6 +283,7 @@ void MadWinListDialog::SortTabs(long column)
 			if(tmpname.IsEmpty()) tmpname = tname;
 			notebookp->SetPageToolTip (id, tmpname);
 		}
+		m_MainFrame->WxMenuBar1->Thaw();
 		m_MainFrame->SetPageFocus( selid );
 		InitWindowListIterms();
 	}

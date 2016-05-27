@@ -1028,6 +1028,7 @@ void OnReceiveMessage( const wchar_t *msg, size_t size, bool activeFile/* = true
 		wxString strDelimiters = wxT( "|" );
 		wxStringTokenizer tkz2( files, strDelimiters );
 
+		g_MainFrame->WxMenuBar1->Freeze();
 		while( tkz2.HasMoreTokens() )
 		{
 			file = tkz2.GetNextToken();
@@ -1040,6 +1041,7 @@ void OnReceiveMessage( const wchar_t *msg, size_t size, bool activeFile/* = true
 			else
 			{ g_MainFrame->RunScriptWithFile( file, arg, false, silent, forceEdit, activeFile ); }
 		}
+		g_MainFrame->WxMenuBar1->Thaw();
 	}
 
 	if( exitS )
@@ -3034,7 +3036,7 @@ void MadEditFrame::CreateGUIControls( void )
 	m_Config->Read( wxT( "/MadEdit/InfoWindowStatus" ), &m_InfoNoteBookStatus );
 	wxSize nbsize( infoW, infoH );
 	m_InfoNotebook = new wxAuiNotebook( this, ID_OUTPUTNOTEBOOK, wxDefaultPosition, nbsize, wxAUI_NB_TOP | wxAUI_NB_SCROLL_BUTTONS );
-	m_FindInFilesResults = new MadTreeCtrl( m_InfoNotebook, ID_FINDINFILESRESULTS, wxDefaultPosition, wxSize( infoW, 4 ), wxTR_DEFAULT_STYLE | wxTR_HIDE_ROOT );
+	m_FindInFilesResults = new MadTreeCtrl( m_InfoNotebook, ID_FINDINFILESRESULTS, wxDefaultPosition, wxSize( infoW, 4 ), wxTR_HAS_BUTTONS | wxTR_HIDE_ROOT | wxTR_TWIST_BUTTONS );
 	m_FindInFilesResults->AddRoot( wxT( "Root" ) );
 	m_FindInFilesResults->Connect( wxEVT_LEFT_DCLICK, wxMouseEventHandler( MadEditFrame::OnFindInFilesResultsDClick ) );
 	m_InfoNotebook->AddPage( m_FindInFilesResults, _( "Search Results" ) );
@@ -4171,6 +4173,7 @@ void MadEditFrame::CloseFile( long pageId )
 	{
 		m_PageClosing = true;
 		g_CheckModTimeForReload = false;
+		g_Menu_Window->Delete(menuWindow1 + m_Notebook->GetPageCount() - 1);
 		m_Notebook->DeletePage( pageId );
 		g_CheckModTimeForReload = true;
 		m_PageClosing = false;
@@ -4823,25 +4826,29 @@ void MadEditFrame::OnUpdateUI_MenuWindow_CheckCount( wxUpdateUIEvent& event )
 
 void MadEditFrame::OnUpdateUI_MenuWindow_Window( wxUpdateUIEvent& event )
 {
+	DBOUT( "WWindow:pgid:"<<(event.GetId() - menuWindow1)<<'\n');
 	int menuId = event.GetId();
 	int pgid = (menuId - menuWindow1);
-	event.Check(pgid == m_Notebook->GetSelection());
-	int psid = m_Notebook->GetPageIndex( g_ActiveMadEdit );
-	DBOUT( "WWindow:pgid:"<<pgid<<", psid:"<<psid<<", sel:"<<m_Notebook->GetSelection()<<'\n' );
+	if(pgid < m_Notebook->GetPageCount())
+	{
+		event.Check(pgid == m_Notebook->GetSelection());
+		int psid = m_Notebook->GetPageIndex( g_ActiveMadEdit );
+		DBOUT( "WWindow:pgid:"<<pgid<<", psid:"<<psid<<", sel:"<<m_Notebook->GetSelection()<<'\n' );
 
-	MadEdit *me = ( MadEdit* )m_Notebook->GetPage( pgid );
-	wxString fname = m_Notebook->GetPageText( pgid );
-	wxString fpath = me->GetFileName();
-	if( fname[fname.Len() - 1] == wxT( '*' ) )
-	{ fname.Truncate( fname.Len() - 1 ); }
-	DBOUT( "WWindow:fpath"<<fpath.ToAscii()<<'\n' );
-	if(fpath != g_Menu_Window->GetHelpString(menuId))
-	{
-		g_Menu_Window->SetHelpString(menuId, fpath);
-	}
-	if( fname != g_Menu_Window->GetLabel(menuId))
-	{
-		g_Menu_Window->SetLabel(menuId, fname);
+		MadEdit *me = ( MadEdit* )m_Notebook->GetPage( pgid );
+		wxString fname = m_Notebook->GetPageText( pgid );
+		wxString fpath = me->GetFileName();
+		if( fname[fname.Len() - 1] == wxT( '*' ) )
+		{ fname.Truncate( fname.Len() - 1 ); }
+		DBOUT( "WWindow:fpath"<<fpath.ToAscii()<<'\n' );
+		if(fpath != g_Menu_Window->GetHelpString(menuId))
+		{
+			g_Menu_Window->SetHelpString(menuId, fpath);
+		}
+		if( fname != g_Menu_Window->GetLabel(menuId))
+		{
+			g_Menu_Window->SetLabel(menuId, fname);
+		}
 	}
 }
 
@@ -5083,6 +5090,7 @@ void MadEditFrame::OnFileCloseAll( wxCommandEvent& event )
 		//m_Notebook->DeleteAllPages();
 		while( m_Notebook->GetPageCount() != 0 )
 		{
+			g_Menu_Window->Delete(menuWindow1 + m_Notebook->GetPageCount() - 1);
 			m_Notebook->DeletePage( 0 );
 		}
 
