@@ -23,6 +23,7 @@
 #include "wx/wxhtml.h"
 #include <wx/xml/xml.h>
 #include <wx/sstream.h>
+#include <wx/datetime.h>
 
 #include <algorithm>
 
@@ -1436,6 +1437,7 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_UPDATE_UI( menuSave, MadEditFrame::OnUpdateUI_MenuCheckIsThisModified )
 	EVT_UPDATE_UI( menuSaveAs, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
 	EVT_UPDATE_UI( menuSaveAll, MadEditFrame::OnUpdateUI_MenuCheckIsAnyoneModified )
+	EVT_UPDATE_UI( menuSaveACopy, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
 	EVT_UPDATE_UI( menuReload, MadEditFrame::OnUpdateUI_MenuFileReload )
 	EVT_UPDATE_UI( menuClose, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
 	EVT_UPDATE_UI( menuCloseAll, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
@@ -1589,6 +1591,7 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_MENU( menuOpen, MadEditFrame::OnFileOpen )
 	EVT_MENU( menuSave, MadEditFrame::OnFileSave )
 	EVT_MENU( menuSaveAs, MadEditFrame::OnFileSaveAs )
+	EVT_MENU( menuSaveACopy, MadEditFrame::OnFileSaveACopy )
 	EVT_MENU( menuSaveAll, MadEditFrame::OnFileSaveAll )
 	EVT_MENU( menuReload, MadEditFrame::OnFileReload )
 	EVT_MENU( menuRecentFilesToolbar, MadEditFrame::OnRecentFilesPop )
@@ -1802,6 +1805,7 @@ CommandData CommandTable[] =
 	{ 0, 1, 0,                0,                       0,                      0,                   wxITEM_SEPARATOR, -1,                0,                        0, 0, 0, 0, false},
 	{ 0, 1, menuSave,         wxT( "menuSave" ),         _( "&Save File" ),        wxT( "Ctrl-S" ),       wxITEM_NORMAL,    filesave_xpm_idx,  0,                        _( "Save the file" ), &g_Menu_FilePop, &g_tbSTANDARD_ptr, _( "Save File" ), false},
 	{ 0, 1, menuSaveAs,       wxT( "menuSaveAs" ),       _( "Save &As..." ),       wxT( "" ),             wxITEM_NORMAL,    -1,                0,                        _( "Save the file with a new name" ), &g_Menu_FilePop, 0, 0, false},
+	{ 0, 1, menuSaveACopy, 	  wxT( "menuSaveACopy" ),	 _( "Save A Copy" ),	   wxT( "" ),			  wxITEM_NORMAL,	-1, 			   0,						 _( "Make a backup of the file" ), &g_Menu_FilePop, 0, 0, false},
 	{ 0, 1, menuSaveAll,      wxT( "menuSaveAll" ),      _( "Sa&ve All" ),         wxT( "Ctrl-Shift-S" ), wxITEM_NORMAL,    saveall_xpm_idx,   0,                        _( "Save all files" ), &g_Menu_FilePop, &g_tbSTANDARD_ptr, _( "Save All" ), false},
 	{ 0, 1, 0,                0,                       0,                      0,                   wxITEM_SEPARATOR, -1,                0,                        0, &g_Menu_FilePop, 0, 0, false},
 	{ 0, 1, menuReload,       wxT( "menuReload" ),       _( "&Reload File" ),      wxT( "Ctrl-R" ),       wxITEM_NORMAL,    -1,                0,                        _( "Reload the file" ), &g_Menu_FilePop, 0, 0, false},
@@ -4984,6 +4988,24 @@ void MadEditFrame::OnFileSaveAs( wxCommandEvent& event )
 	if( g_ActiveMadEdit != NULL )
 	{
 		SaveFile( m_Notebook->GetSelection(), true );
+	}
+}
+
+void MadEditFrame::OnFileSaveACopy( wxCommandEvent& event )
+{
+	if( g_ActiveMadEdit != NULL )
+	{
+		wxDateTime tmnow = wxDateTime::Now();
+		wxString timestr = tmnow.Format(wxT("%G%m%d%H%M%S"));
+		wxFileName fn(g_ActiveMadEdit->GetFileName());
+		wxString bakfname = fn.GetPathWithSep() + fn.GetName() + timestr + wxT(".") + fn.GetExt();
+		if(!wxCopyFile(fn.GetFullPath(), bakfname))
+		{
+			wxMessageDialog dlg( this, _( "Failed to backup the file. ") + fn.GetFullPath() + _(" might not exist." ),
+								 wxT( "MadEdit-Mod" ), wxOK | wxICON_ERROR );
+			dlg.SetOKLabel( wxMessageDialog::ButtonLabel( _( "&Ok" ) ) );
+			dlg.ShowModal();
+		}
 	}
 }
 
