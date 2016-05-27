@@ -37,3 +37,5 @@ diff -r d:\wxWidgets-3.0.2-org\src\generic\scrlwing.cpp d:\wxWidgets-3.0.2\src\g
 <     else if ( evType == wxEVT_MOUSEWHEEL )
 ---
 >     else if ((!processed) && evType == wxEVT_MOUSEWHEEL )
+
+4.Fix selection not changed in inner-tab drag/reposition
