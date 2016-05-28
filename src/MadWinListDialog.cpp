@@ -204,6 +204,7 @@ void MadWinListDialog::OnButtonCloseWindowsClick(wxCommandEvent& event)
 		MadWindowsList->DeleteItem(items[i]);
 		m_MainFrame->CloseFile(pages[i]);
 	}
+	InitWindowListIterms();
 }
 
 void MadWinListDialog::SortTabs(long column)
@@ -314,16 +315,21 @@ void MadWinListDialog::OnWinListSelectionChanged(wxListEvent& event)
 {
 	bool onlyone = (MadWindowsList->GetSelectedItemCount() == 1);
 	bool selected = (MadWindowsList->GetSelectedItemCount() > 0);
-	ButtonActivate->Enable(onlyone);
-	ButtonCloseWindows->Enable(selected);
-	ButtonSaveAs->Enable(selected);
+	if(ButtonActivate->IsEnabled() != onlyone)
+		ButtonActivate->Enable(onlyone);
+	
+	if(ButtonCloseWindows->IsEnabled() != selected)
+		ButtonCloseWindows->Enable(selected);
+	if(ButtonSaveAs->IsEnabled() != selected)
+		ButtonSaveAs->Enable(selected);
 	if(selected)
 	{
 		wxString fname = MadWindowsList->GetItemText(event.GetIndex());
 		selected = (fname[fname.Len() - 1] == wxT( '*' ));
 	}
 
-	ButtonSave->Enable(selected);
+	if(ButtonSave->IsEnabled() != selected)
+		ButtonSave->Enable(selected);
 }
 
 void MadWinListDialog::ResetButtonStatus()
