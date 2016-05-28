@@ -2412,7 +2412,7 @@ void MadEditFrame::CreateGUIControls( void )
 	m_QuickSeachBar->Connect( wxEVT_SET_FOCUS, wxFocusEventHandler( MadEditFrame::OnQuickSearchSetFocus ), NULL, this );
 	g_ToolbarNames[tbQSEARCH] = _( "Quick Search" );
 	WxToolBar[tbQSEARCH] = m_QuickSeachBar;
-	m_Notebook = new wxMadAuiNotebook( this, ID_NOTEBOOK, wxPoint( 0, 29 ), wxSize( 392, 320 ), wxWANTS_CHARS | wxAUI_NB_TOP | wxAUI_NB_TAB_SPLIT | wxAUI_NB_TAB_MOVE | wxAUI_NB_SCROLL_BUTTONS | wxAUI_NB_WINDOWLIST_BUTTON | wxAUI_NB_CLOSE_ON_ACTIVE_TAB );
+	m_Notebook = new wxMadAuiNotebook( this, ID_NOTEBOOK, wxPoint( 0, 29 ), wxSize( 392, 320 ), wxWANTS_CHARS | wxAUI_NB_TOP | wxAUI_NB_TAB_SPLIT | wxAUI_NB_TAB_MOVE | wxAUI_NB_SCROLL_BUTTONS | wxAUI_NB_WINDOWLIST_BUTTON | wxAUI_NB_CLOSE_BUTTON | wxAUI_NB_CLOSE_ON_ALL_TABS );
 	m_Notebook->wxControl::SetWindowStyleFlag( m_Notebook->wxControl::GetWindowStyleFlag() & ~wxTAB_TRAVERSAL );
 	m_Notebook->SetDropTarget( new DnDFile() );
 	m_Notebook->SetArtProvider( new wxAuiSimpleTabArt );
