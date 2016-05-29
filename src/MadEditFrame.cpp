@@ -4998,7 +4998,9 @@ void MadEditFrame::OnFileSaveACopy( wxCommandEvent& event )
 		wxDateTime tmnow = wxDateTime::Now();
 		wxString timestr = tmnow.Format(wxT("%G%m%d%H%M%S"));
 		wxFileName fn(g_ActiveMadEdit->GetFileName());
-		wxString bakfname = fn.GetPathWithSep() + fn.GetName() + timestr + wxT(".") + fn.GetExt();
+		wxString fext = fn.GetExt();
+		if(!fext.IsEmpty()) fext = wxT(".") + fext;
+		wxString bakfname = fn.GetPathWithSep() + fn.GetName() + timestr + fext;
 		if(!wxCopyFile(fn.GetFullPath(), bakfname))
 		{
 			wxMessageDialog dlg( this, _( "Failed to backup the file. ") + fn.GetFullPath() + _(" might not exist." ),
