@@ -120,6 +120,8 @@ FreeBSD packaging (with FreeBSD 10.01)
 Mod v0.4.3
 New: Insert to the top instead of append to the bottom of search results, expand the last automatically and collapse the last
 New: Let the user to do the backup selfly #198
+New: Use Icon to replace the checkbox on QuickSearch Bar #181
+New: Remember pos of QuickSearch Bar
 Fix: 0.4.2.1 can not remember the word wrap setting #201
 Fix: The fix width in the Option menu can't Open #199
 Fix: Improve windows list code, fix a bug of inner-tab drag/reposition(wxAuiNoteBook)

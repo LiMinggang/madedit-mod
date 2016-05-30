@@ -135,13 +135,11 @@ public:
 	wxHtmlWindow  *m_HtmlPreview;
 	int            m_PreviewType;
 	wxComboBox    *m_QuickSearch;
-	wxCheckBox    *m_CheckboxWholeWord;
-	wxCheckBox    *m_CheckboxRegEx;
-	wxCheckBox    *m_CheckboxDotMatchNewline;
-	wxCheckBox    *m_CheckboxCaseSensitive;
+	wxString      m_QuickSearchBarStatus;
 	bool           m_ReloadFiles;
 	bool           m_PurgeHistory;
 	bool           m_SearchDirectionNext;
+    wxFileOffset   m_QSearchBegPos, m_QSearchEndPos;
 	bool           m_ToolbarStatus[tbMAX + 1];
 	void OnUpdateUI_CheckFrameStyle( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuFile_CheckCount( wxUpdateUIEvent& event );
@@ -323,6 +321,7 @@ public:
 	void OnSearchQuickFindNext( wxCommandEvent& event );
 	void OnSearchQuickFindPrevious( wxCommandEvent& event );
 	void OnShowQuickSearchBar( wxCommandEvent& event );
+	void OnSearchQuickFindToggleOptions( wxCommandEvent& event );
 
     void OnViewAlwaysOnTop( wxCommandEvent& event );
     void OnViewFullScreen( wxCommandEvent& event );
@@ -594,9 +593,6 @@ enum   // menu id
 	menuFindNext,
 	menuFindPrevious,
 	menuFindInFiles,
-	menuShowQuickSearchBar,
-	menuQuickFindNext,
-	menuQuickFindPrevious,
 	menuShowFindInFilesResults,
     menuCollapseAllResults,
     menuGoToLine,
@@ -755,6 +751,14 @@ enum   // menu id
     menuCollapseCurResult,
 
 	menuTypewriterMode,
+	menuShowQuickSearchBar,
+	menuQuickFindNext,
+	menuQuickFindPrevious,
+    menuQuickFindWholeWord,
+    menuQuickFindRegex,
+    menuQuickFindCase,
+    menuQuickFindDotMatchNewLine,
+	menuMAXMENUITEMID,
 };
 
 enum MadPreviewType
