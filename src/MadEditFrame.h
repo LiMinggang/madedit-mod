@@ -459,9 +459,10 @@ protected:
     void HideAllToolBars();
     void ShowAllToolBars();
     void ToggleFullScreen(long style);
+    bool ResetNormalToolBarPos(wxWindow * toolbar, const wxChar * toolname, const wxChar * caption, int pos);
     bool ResetQuickSearchBarPos();
     bool ResetInformationWinPos();    
-    bool RestoreAuiPanel(wxWindow * win, wxString& toobar_status, bool gripper = false);
+    bool RestoreAuiPanel(wxWindow * toolbar, wxString& toobar_status, bool gripper = false);
 
 #ifdef __WXMSW__
 	WXLRESULT MSWWindowProc( WXUINT message, WXWPARAM wParam, WXLPARAM lParam );

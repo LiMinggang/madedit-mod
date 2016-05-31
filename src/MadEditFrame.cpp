@@ -2263,6 +2263,26 @@ CommandData CommandTable[] =
 	{ -1, -1, 0, 0, 0, 0, wxITEM_NORMAL, -1, 0, 0, 0, 0, 0, false},
 };
 
+/*
+{
+    int            toolbar_id;
+    const char *   status_config;
+    const char *   varname;
+    const char *   caption;
+    int pos;
+}
+*/
+ToolBarData ToolBarTable[] = 
+{
+	{tbSTANDARD,      wxT("/MadEdit/ShowToolbarStandard"),      wxT(""), wxT("MadToolBar0"), _("Starndard"),      0},
+	{tbEDITOR,        wxT("/MadEdit/ShowToolbarEditor"),        wxT(""), wxT("MadToolBar1"), _("Editor"),         1},
+	{tbSEARCHREPLACE, wxT("/MadEdit/ShowToolbarSearchReplace"), wxT(""), wxT("MadToolBar2"), _("Search/Replace"), 2},
+	{tbTEXTVIEW,      wxT("/MadEdit/ShowToolbarTextview"),      wxT(""), wxT("MadToolBar3"), _("Text View"),      3},
+	{tbEDITMODE,      wxT("/MadEdit/ShowToolbarEditMode"),      wxT(""), wxT("MadToolBar4"), _("Edit Mode"),      4},
+	{tbMACRO,         wxT("/MadEdit/ShowToolbarMacro"),         wxT(""), wxT("MadToolBar5"), _("Macro"),          5},
+	{-1, 0, 0, 0, 0, -1},
+};
+
 // restore the definition of _(s)
 #undef _
 #define _(s)    wxGetTranslation(_T(s))
@@ -2895,58 +2915,26 @@ void MadEditFrame::CreateGUIControls( void )
 	    }
 	}
 	*/
-	for( int tbId = tbSTANDARD; tbId <= tbMACRO; ++tbId )
-	{ WxToolBar[tbId]->Realize(); }
+	/*for( int tbId = tbSTANDARD; tbId <= tbMACRO; ++tbId )
+	{ WxToolBar[tbId]->Realize(); }*/
 
-	m_AuiManager.AddPane( WxToolBar[tbSTANDARD],      wxAuiPaneInfo().Name( wxT( "WxToolBar1" ) ).CloseButton( false ).Caption( wxT( "Starndard" ) ).Floatable().ToolbarPane().Top().Position( 0 ) );
-	m_AuiManager.AddPane( WxToolBar[tbEDITOR],        wxAuiPaneInfo().Name( wxT( "WxToolBar2" ) ).CloseButton( false ).Caption( wxT( "Editor" ) ).Floatable().ToolbarPane().Top().Position( 1 ) );
-	m_AuiManager.AddPane( WxToolBar[tbSEARCHREPLACE], wxAuiPaneInfo().Name( wxT( "WxToolBar3" ) ).CloseButton( false ).Caption( wxT( "Search/Replace" ) ).Floatable().ToolbarPane().Top().Position( 2 ) );
-	m_AuiManager.AddPane( WxToolBar[tbTEXTVIEW],      wxAuiPaneInfo().Name( wxT( "WxToolBar4" ) ).CloseButton( false ).Caption( wxT( "Text View" ) ).Floatable().ToolbarPane().Top().Position( 3 ) );
-	m_AuiManager.AddPane( WxToolBar[tbEDITMODE],      wxAuiPaneInfo().Name( wxT( "WxToolBar5" ) ).CloseButton( false ).Caption( wxT( "Edit Mode" ) ).Floatable().ToolbarPane().Top().Position( 4 ) );
-	m_AuiManager.AddPane( WxToolBar[tbMACRO],         wxAuiPaneInfo().Name( wxT( "WxToolBar6" ) ).CloseButton( false ).Caption( wxT( "Macro" ) ).Floatable().ToolbarPane().Top().Position( 5 ) );
+	ToolBarData * td = &ToolBarTable[0];
+
 	bool bb;
 	m_ToolbarStatus[tbMAX] = false;
-	m_Config->Read( wxT( "/MadEdit/ShowToolbarStandard" ), &bb, true );
-	m_ToolbarStatus[tbSTANDARD] = bb;
-	m_ToolbarStatus[tbMAX] = ( m_ToolbarStatus[tbMAX] | bb );
-
-	if( !bb )
-	{ m_AuiManager.GetPane( WxToolBar[tbSTANDARD] ).Hide(); }
-
-	m_Config->Read( wxT( "/MadEdit/ShowToolbarEditor" ), &bb, true );
-	m_ToolbarStatus[tbEDITOR] = bb;
-	m_ToolbarStatus[tbMAX] = ( m_ToolbarStatus[tbMAX] | bb );
-
-	if( !bb )
-	{ m_AuiManager.GetPane( WxToolBar[tbEDITOR] ).Hide(); }
-
-	m_Config->Read( wxT( "/MadEdit/ShowToolbarSearchReplace" ), &bb, true );
-	m_ToolbarStatus[tbSEARCHREPLACE] = bb;
-	m_ToolbarStatus[tbMAX] = ( m_ToolbarStatus[tbMAX] | bb );
-
-	if( !bb )
-	{ m_AuiManager.GetPane( WxToolBar[tbSEARCHREPLACE] ).Hide(); }
-
-	m_Config->Read( wxT( "/MadEdit/ShowToolbarTextview" ), &bb, true );
-	m_ToolbarStatus[tbTEXTVIEW] = bb;
-	m_ToolbarStatus[tbMAX] = ( m_ToolbarStatus[tbMAX] | bb );
-
-	if( !bb )
-	{ m_AuiManager.GetPane( WxToolBar[tbTEXTVIEW] ).Hide(); }
-
-	m_Config->Read( wxT( "/MadEdit/ShowToolbarEditMode" ), &bb, true );
-	m_ToolbarStatus[tbEDITMODE] = bb;
-	m_ToolbarStatus[tbMAX] = ( m_ToolbarStatus[tbMAX] | bb );
-
-	if( !bb )
-	{ m_AuiManager.GetPane( WxToolBar[tbEDITMODE] ).Hide(); }
-
-	m_Config->Read( wxT( "/MadEdit/ShowToolbarMacro" ), &bb, true );
-	m_ToolbarStatus[tbMACRO] = bb;
-	m_ToolbarStatus[tbMAX] = ( m_ToolbarStatus[tbMAX] | bb );
-
-	if( !bb )
-	{ m_AuiManager.GetPane( WxToolBar[tbMACRO] ).Hide(); }
+	while( td->toolbar_id >= 0 )
+	{
+		WxToolBar[td->toolbar_id]->Realize();
+		ResetNormalToolBarPos(WxToolBar[td->toolbar_id], td->toolbarid_name, td->caption, td->pos);
+		
+		m_Config->Read( td->showhide_status, &bb, true );
+		m_ToolbarStatus[td->toolbar_id] = bb;
+		m_ToolbarStatus[tbMAX] = ( m_ToolbarStatus[tbMAX] | bb );
+		
+		if( !bb )
+		{ m_AuiManager.GetPane( WxToolBar[td->toolbar_id] ).Hide(); }
+		++td;
+	}
 
 	{
 		// enum all madpython files under scripts
@@ -9353,6 +9341,11 @@ void MadEditFrame::OnTimer(wxTimerEvent& event)
 	m_AutoSaveTimer.StartOnce(m_AutoSaveTimout*MADMINUTES);
 }
 
+inline bool MadEditFrame::ResetNormalToolBarPos(wxWindow * toolbar, const wxChar * toolname, const wxChar * caption, int pos)
+{
+	return m_AuiManager.AddPane( toolbar, wxAuiPaneInfo().Name( toolname ).CloseButton( false ).Caption( caption ).Floatable().ToolbarPane().Top().Position( pos ) );
+}
+
 inline bool MadEditFrame::ResetQuickSearchBarPos()
 {
 	return m_AuiManager.AddPane( m_QuickSearchBar, wxAuiPaneInfo().Name( wxT( "QuickSeachBar" ) ).CloseButton( false ).Gripper( true ).Caption( _( "Quick Search" ) ).Floatable( true ).ToolbarPane().Top().Row( 2 ) );
@@ -9363,13 +9356,13 @@ inline bool MadEditFrame::ResetInformationWinPos()
 	return m_AuiManager.AddPane( m_InfoNotebook, wxBOTTOM, _( "Information Window" ) );
 }
 
-bool MadEditFrame::RestoreAuiPanel(wxWindow * win, wxString& toolbar_status, bool gripper/* = false*/)
+bool MadEditFrame::RestoreAuiPanel(wxWindow * toolbar, wxString& toolbar_status, bool gripper/* = false*/)
 {
 	
 	wxAuiPaneInfo pane_info;
 	m_AuiManager.LoadPaneInfo( toolbar_status, pane_info );
 	pane_info.Gripper( gripper ); // Make sure you can drag the panel
-	return m_AuiManager.AddPane( win, pane_info );
+	return m_AuiManager.AddPane( toolbar, pane_info );
 }
 
 #if USE_GENERIC_TREECTRL

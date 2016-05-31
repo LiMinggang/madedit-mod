@@ -29,6 +29,17 @@ struct CommandData
     bool           apd_toolbar_spr;
 };
 
+struct ToolBarData
+{
+    int            toolbar_id;
+    const wxChar * showhide_status;
+    const wxChar * panel_status;
+    const wxChar * toolbarid_name;
+    const wxChar * caption;
+    int            pos;
+};
+
 extern CommandData CommandTable[];
+extern ToolBarData ToolBarTable[];
 
 #endif
