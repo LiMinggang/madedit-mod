@@ -129,13 +129,11 @@ public:
 
 	wxAuiManager  m_AuiManager; // wxAUI
 	wxAuiNotebook *m_InfoNotebook; //
-	wxString      m_InfoNoteBookStatus;
 	//wxTreeCtrl *m_FindInFilesResults;
 	MadTreeCtrl   *m_FindInFilesResults;
 	wxHtmlWindow  *m_HtmlPreview;
 	int            m_PreviewType;
 	wxComboBox    *m_QuickSearch;
-	wxString      m_QuickSearchBarStatus;
 	bool           m_ReloadFiles;
 	bool           m_PurgeHistory;
 	bool           m_SearchDirectionNext;
@@ -461,6 +459,9 @@ protected:
     void HideAllToolBars();
     void ShowAllToolBars();
     void ToggleFullScreen(long style);
+    bool ResetQuickSearchBarPos();
+    bool ResetInformationWinPos();    
+    bool RestoreAuiPanel(wxWindow * win, wxString& toobar_status, bool gripper = false);
 
 #ifdef __WXMSW__
 	WXLRESULT MSWWindowProc( WXUINT message, WXWPARAM wParam, WXLPARAM lParam );

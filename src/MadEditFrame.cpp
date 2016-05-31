@@ -3050,18 +3050,13 @@ void MadEditFrame::CreateGUIControls( void )
 	m_QuickSearchBar->AddTool( menuRecentFilesToolbar, _( "Recent Files" ), m_ImageList->GetBitmap( recentfiles_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _("Recent file list"), _("List all recent opened files"), NULL );
 
 	m_QuickSearchBar->Realize();
-
-	m_Config->Read( wxT( "/MadEdit/QuickSearchBarStatus" ), &m_QuickSearchBarStatus );
+	wxString      panelStatus;
+	m_Config->Read( wxT( "/MadEdit/QuickSearchBarStatus" ), &panelStatus );
 	
-	if(m_QuickSearchBarStatus.IsEmpty())
-		m_AuiManager.AddPane( m_QuickSearchBar, wxAuiPaneInfo().Name( wxT( "QuickSeachBar" ) ).CloseButton( false ).Caption( _( "Quick Search" ) ).Floatable( true ).ToolbarPane().Top().Row( 2 ) );
+	if(panelStatus.IsEmpty())
+		ResetQuickSearchBarPos();
 	else
-	{
-		wxAuiPaneInfo pane_info;
-		m_AuiManager.LoadPaneInfo( m_QuickSearchBarStatus, pane_info );
-		pane_info.Floatable( true );
-		m_AuiManager.AddPane( m_QuickSearchBar, pane_info );
-	}
+		RestoreAuiPanel(m_QuickSearchBar, panelStatus, true);
 
 	bool showQsBar = m_Config->ReadBool( wxT( "/MadEdit/ShowQSearchBarOnStart" ), true );
 
@@ -3073,7 +3068,8 @@ void MadEditFrame::CreateGUIControls( void )
 	int infoW = 300, infoH = 130;
 	//m_Config->Read( wxT( "/MadEdit/InfoWindowWidth" ), &infoW );
 	//m_Config->Read( wxT( "/MadEdit/InfoWindowHeight" ), &infoH );
-	m_Config->Read( wxT( "/MadEdit/InfoWindowStatus" ), &m_InfoNoteBookStatus );
+	
+	m_Config->Read( wxT( "/MadEdit/InfoWindowStatus" ), &panelStatus );
 	wxSize nbsize( infoW, infoH );
 	m_InfoNotebook = new wxAuiNotebook( this, ID_OUTPUTNOTEBOOK, wxDefaultPosition, nbsize, wxAUI_NB_TOP | wxAUI_NB_SCROLL_BUTTONS );
 	m_FindInFilesResults = new MadTreeCtrl( m_InfoNotebook, ID_FINDINFILESRESULTS, wxDefaultPosition, wxSize( infoW, 4 ), wxTR_HAS_BUTTONS | wxTR_HIDE_ROOT | wxTR_TWIST_BUTTONS );
@@ -3087,14 +3083,11 @@ void MadEditFrame::CreateGUIControls( void )
 	m_AuiManager.SetDockSizeConstraint( 0.75, 0.75 );
 	m_AuiManager.AddPane( m_Notebook, wxCENTER );
 
-	if(m_InfoNoteBookStatus.IsEmpty())
-		m_AuiManager.AddPane( m_InfoNotebook, wxBOTTOM, _( "Information Window" ) );
+	if(panelStatus.IsEmpty())
+		ResetInformationWinPos();
 	else
-	{
-		wxAuiPaneInfo pane_info;
-		m_AuiManager.LoadPaneInfo( m_InfoNoteBookStatus, pane_info );
-		m_AuiManager.AddPane( m_InfoNotebook, pane_info );
-	}
+		RestoreAuiPanel(m_InfoNotebook, panelStatus);
+
 	//m_AuiManager.AddPane( m_InfoNotebook, m_InfoNoteBookStatus, _( "Information Window" ) );
 	m_AuiManager.GetPane( m_InfoNotebook ).Show( false );
 	m_AuiManager.Update();
@@ -3275,11 +3268,12 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 	m_Config->Write( wxT( "/MadEdit/QuickSearchRegEx" ), m_QuickSearchBar->GetToolToggled(menuQuickFindRegex) );
 	m_Config->Write( wxT( "/MadEdit/QuickSearchDotMatchNewLine" ), m_QuickSearchBar->GetToolToggled(menuQuickFindDotMatchNewLine) );
 
-	m_QuickSearchBarStatus = m_AuiManager.SavePaneInfo(m_AuiManager.GetPane( m_QuickSearchBar ));
-	g_MainFrame->m_Config->Write( wxT( "/MadEdit/QuickSearchBarStatus" ), m_QuickSearchBarStatus );
+	wxString infoNoteBookStatus;
+	infoNoteBookStatus = m_AuiManager.SavePaneInfo(m_AuiManager.GetPane( m_QuickSearchBar ));
+	g_MainFrame->m_Config->Write( wxT( "/MadEdit/QuickSearchBarStatus" ), infoNoteBookStatus );
 
-	m_InfoNoteBookStatus = m_AuiManager.SavePaneInfo(m_AuiManager.GetPane( m_InfoNotebook ));
-	g_MainFrame->m_Config->Write( wxT( "/MadEdit/InfoWindowStatus" ), m_InfoNoteBookStatus );
+	infoNoteBookStatus = m_AuiManager.SavePaneInfo(m_AuiManager.GetPane( m_InfoNotebook ));
+	g_MainFrame->m_Config->Write( wxT( "/MadEdit/InfoWindowStatus" ), infoNoteBookStatus );
 	delete m_RecentFiles;
 	m_RecentFiles = NULL;
 	delete m_RecentEncodings;
@@ -7948,6 +7942,7 @@ void MadEditFrame::OnToolsPurgeHistories( wxCommandEvent& event )
 			}
 
 			g_SearchReplaceDialog->PurgeRecentFindTexts();
+			m_QuickSearch->Clear();
 		}
 
 		if( dlg.wxCheckBoxRecentReplacedTexts->IsChecked() )
@@ -7996,7 +7991,18 @@ void MadEditFrame::OnToolsPurgeHistories( wxCommandEvent& event )
 			g_FileCaretPosManager.Clear( m_Config );
 		}
 
-		m_QuickSearch->Clear();
+		
+		if( dlg.wxCheckBoxResetSearchBarInfoWin->IsChecked() )
+		{
+			bool show = m_AuiManager.GetPane( m_InfoNotebook ).IsShown();
+			m_AuiManager.DetachPane(m_InfoNotebook);
+			ResetInformationWinPos();
+			m_AuiManager.GetPane( m_InfoNotebook ).Show(show);
+			show = m_AuiManager.GetPane( m_QuickSearchBar ).IsShown();
+			m_AuiManager.DetachPane(m_QuickSearchBar);
+			ResetQuickSearchBarPos();
+			m_AuiManager.GetPane( m_QuickSearchBar ).Show(show);
+		}
 	}
 }
 
@@ -9345,6 +9351,25 @@ void MadEditFrame::OnTimer(wxTimerEvent& event)
 	}
 
 	m_AutoSaveTimer.StartOnce(m_AutoSaveTimout*MADMINUTES);
+}
+
+inline bool MadEditFrame::ResetQuickSearchBarPos()
+{
+	return m_AuiManager.AddPane( m_QuickSearchBar, wxAuiPaneInfo().Name( wxT( "QuickSeachBar" ) ).CloseButton( false ).Gripper( true ).Caption( _( "Quick Search" ) ).Floatable( true ).ToolbarPane().Top().Row( 2 ) );
+}
+
+inline bool MadEditFrame::ResetInformationWinPos()
+{
+	return m_AuiManager.AddPane( m_InfoNotebook, wxBOTTOM, _( "Information Window" ) );
+}
+
+bool MadEditFrame::RestoreAuiPanel(wxWindow * win, wxString& toolbar_status, bool gripper/* = false*/)
+{
+	
+	wxAuiPaneInfo pane_info;
+	m_AuiManager.LoadPaneInfo( toolbar_status, pane_info );
+	pane_info.Gripper( gripper ); // Make sure you can drag the panel
+	return m_AuiManager.AddPane( win, pane_info );
 }
 
 #if USE_GENERIC_TREECTRL
