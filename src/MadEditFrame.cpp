@@ -223,7 +223,7 @@ char ** g_MadIcons[] =
 	&saverec_xpm[0], &bookmark_toggle_xpm[0], &bookmark_next_xpm[0], &bookmark_prev_xpm[0],
 	&bookmark_clear_xpm[0], &spellchecker_xpm[0], &showsymbol_xpm[0], &down_xpm[0], &up_xpm[0],
 	&alignleft_xpm[0], &alignright_xpm[0], &numbering_xpm[0], &refresh_xpm[0], &closepreview_xpm[0], &recentfiles_xpm[0],
-	&searchwholeword_xpm[0],&searchregex_xpm[0],&searchcase_xpm[0],&dotmatchnewline_xpm[0],
+	&searchwholeword_xpm[0], &searchregex_xpm[0], &searchcase_xpm[0], &dotmatchnewline_xpm[0],
 };
 
 extern void ScanForLocales();
