@@ -32,8 +32,9 @@ struct CommandData
 struct ToolBarData
 {
     int            toolbar_id;
+    long           toolbar_style;
     const wxChar * showhide_status;
-    const wxChar * panel_status;
+    const wxChar * panel_pos;
     const wxChar * toolbarid_name;
     const wxChar * caption;
     int            pos;
