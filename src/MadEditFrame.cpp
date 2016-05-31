@@ -1527,7 +1527,7 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_UPDATE_UI( menuGotoNextBookmark, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark )
 	EVT_UPDATE_UI( menuGotoPreviousBookmark, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark )
 	EVT_UPDATE_UI( menuClearAllBookmarks, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark )
-	EVT_UPDATE_UI_RANGE( menuQuickFindNext, menuQuickFindPrevious, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
+	EVT_UPDATE_UI_RANGE( menuQuickFindNext, menuQuickFindDotMatchNewLine, MadEditFrame::OnUpdateUI_MenuSearch_QuickBar )
 
 	// view
 	EVT_UPDATE_UI( menuAlwaysOnTop, MadEditFrame::OnUpdateUI_CheckFrameStyle )
@@ -1681,7 +1681,6 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_MENU( menuQuickFindNext, MadEditFrame::OnSearchQuickFindNext )
 	EVT_MENU( menuQuickFindPrevious, MadEditFrame::OnSearchQuickFindPrevious )
 	EVT_MENU( menuShowQuickSearchBar, MadEditFrame::OnShowQuickSearchBar )
-	EVT_MENU_RANGE( menuQuickFindWholeWord, menuQuickFindDotMatchNewLine, MadEditFrame::OnSearchQuickFindToggleOptions )
 	EVT_MENU( menuReplace, MadEditFrame::OnSearchReplace )
 	EVT_MENU( menuFindInFiles, MadEditFrame::OnSearchFindInFiles )
 	EVT_MENU( menuShowFindInFilesResults, MadEditFrame::OnSearchShowFindInFilesResults )
@@ -2421,11 +2420,11 @@ void MadEditFrame::CreateGUIControls( void )
 	WxToolBar[tbMACRO] = new wxAuiToolBar( this, ID_WXTOOLBAR1 + tbMACRO, wxPoint( 0, 0 ), wxSize( 392, 29 ), MADTOOBAR_STYLE_NO_OVERFLOW | wxAUI_TB_OVERFLOW );
 	WxToolBar[tbMACRO]->Connect( wxEVT_AUITOOLBAR_RIGHT_CLICK, wxAuiToolBarEventHandler( MadEditFrame::OnRightClickToolBar ), NULL, this );
 	g_ToolbarNames[tbMACRO] = _( "Macro" );
-	m_QuickSeachBar = new wxAuiToolBar( this, ID_WXTOOLBAR1 + tbQSEARCH, wxPoint( 0, 0 ), wxSize( 392, 29 ), MADTOOBAR_STYLE_NO_OVERFLOW );
-	m_QuickSeachBar->Connect( wxEVT_AUITOOLBAR_RIGHT_CLICK, wxAuiToolBarEventHandler( MadEditFrame::OnRightClickToolBar ), NULL, this );
-	m_QuickSeachBar->Connect( wxEVT_SET_FOCUS, wxFocusEventHandler( MadEditFrame::OnQuickSearchSetFocus ), NULL, this );
+	m_QuickSearchBar = new wxAuiToolBar( this, ID_WXTOOLBAR1 + tbQSEARCH, wxPoint( 0, 0 ), wxSize( 392, 29 ), MADTOOBAR_STYLE_NO_OVERFLOW );
+	m_QuickSearchBar->Connect( wxEVT_AUITOOLBAR_RIGHT_CLICK, wxAuiToolBarEventHandler( MadEditFrame::OnRightClickToolBar ), NULL, this );
+	m_QuickSearchBar->Connect( wxEVT_SET_FOCUS, wxFocusEventHandler( MadEditFrame::OnQuickSearchSetFocus ), NULL, this );
 	g_ToolbarNames[tbQSEARCH] = _( "Quick Search" );
-	WxToolBar[tbQSEARCH] = m_QuickSeachBar;
+	WxToolBar[tbQSEARCH] = m_QuickSearchBar;
 	m_Notebook = new wxMadAuiNotebook( this, ID_NOTEBOOK, wxPoint( 0, 29 ), wxSize( 392, 320 ), wxWANTS_CHARS | wxAUI_NB_TOP | wxAUI_NB_TAB_SPLIT | wxAUI_NB_TAB_MOVE | wxAUI_NB_SCROLL_BUTTONS | wxAUI_NB_WINDOWLIST_BUTTON | wxAUI_NB_CLOSE_BUTTON | wxAUI_NB_CLOSE_ON_ALL_TABS );
 	m_Notebook->wxControl::SetWindowStyleFlag( m_Notebook->wxControl::GetWindowStyleFlag() & ~wxTAB_TRAVERSAL );
 	m_Notebook->SetDropTarget( new DnDFile() );
@@ -2995,7 +2994,7 @@ void MadEditFrame::CreateGUIControls( void )
 		}
 	}
 
-	m_QuickSearch = new wxComboBox( m_QuickSeachBar, ID_QUICKSEARCH, wxEmptyString, wxDefaultPosition, wxSize( 200, 21 ) );
+	m_QuickSearch = new wxComboBox( m_QuickSearchBar, ID_QUICKSEARCH, wxEmptyString, wxDefaultPosition, wxSize( 200, 21 ) );
 	g_RecentFindText = new MadRecentList( 20, ID_RECENTFINDTEXT1, true ); //Should be freed in SearchDialog
 	wxString oldpath = m_Config->GetPath();
 	m_Config->SetPath( wxT( "/RecentFindText" ) );
@@ -3013,61 +3012,61 @@ void MadEditFrame::CreateGUIControls( void )
 	}
 
 	m_QuickSearch->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ), NULL, this );
-	m_QuickSeachBar->AddControl( m_QuickSearch );
-	m_QuickSeachBar->AddTool( menuQuickFindNext, wxT( "QuickFindNext" ), m_ImageList->GetBitmap( down_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _( "Find Next" ), _( "Find matched text next to caret" ), NULL );
-	m_QuickSeachBar->AddTool( menuQuickFindPrevious, wxT( "QuickFindPrevious" ), m_ImageList->GetBitmap( up_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _( "Find Previous" ), _( "Find matched text previous from caret" ), NULL );
-	m_QuickSeachBar->AddTool( menuQuickFindWholeWord, _( "Whole Word Only" ), m_ImageList->GetBitmap( searchwholeword_xpm_idx ), wxNullBitmap, wxITEM_CHECK, _("Whole Word Only"), _("Match Whole Word Only"), NULL );
+	m_QuickSearchBar->AddControl( m_QuickSearch );
+	m_QuickSearchBar->AddTool( menuQuickFindNext, wxT( "QuickFindNext" ), m_ImageList->GetBitmap( down_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _( "Find Next" ), _( "Find matched text next to caret" ), NULL );
+	m_QuickSearchBar->AddTool( menuQuickFindPrevious, wxT( "QuickFindPrevious" ), m_ImageList->GetBitmap( up_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _( "Find Previous" ), _( "Find matched text previous from caret" ), NULL );
+	m_QuickSearchBar->AddTool( menuQuickFindWholeWord, _( "Whole Word Only" ), m_ImageList->GetBitmap( searchwholeword_xpm_idx ), wxNullBitmap, wxITEM_CHECK, _("Whole Word Only"), _("Match Whole Word Only"), NULL );
 	bool bwholeword, bcase, bregex, bdotnewline = true;
 	m_Config->Read( wxT( "/MadEdit/QuickSearchWholeWord" ), &bwholeword, false );
 	m_Config->Read( wxT( "/MadEdit/QuickSearchCaseSensitive" ), &bcase, false );
 	m_Config->Read( wxT( "/MadEdit/QuickSearchRegEx" ), &bregex, false );
 	m_Config->Read( wxT( "/MadEdit/QuickSearchDotMatchNewLine" ), &bdotnewline, false );
 
-	if(bb) m_QuickSeachBar->ToggleTool(menuQuickFindWholeWord, bwholeword);
-	m_QuickSeachBar->AddTool( menuQuickFindCase, _( "Case Sensitive" ), m_ImageList->GetBitmap( searchcase_xpm_idx ), wxNullBitmap, wxITEM_CHECK, _("Case Sensitive"), _("Case Sensitive"), NULL );
-	if(bb) m_QuickSeachBar->ToggleTool(menuQuickFindCase, bcase);
-	m_QuickSeachBar->AddTool( menuQuickFindRegex, _( "Regular Expression" ), m_ImageList->GetBitmap( searchregex_xpm_idx ), wxNullBitmap, wxITEM_CHECK, _("Use Regular Expressions"), _("Use Regular E&xpressions"), NULL );
-	if(bb) m_QuickSeachBar->ToggleTool(menuQuickFindRegex, bregex);
-	m_QuickSeachBar->AddTool( menuQuickFindDotMatchNewLine, _( "Dot Match Newline" ), m_ImageList->GetBitmap( dotmatchnewline_xpm_idx ), wxNullBitmap, wxITEM_CHECK, _("Dot Match Newline in Regular Expressions"), _("Dot Match Newline in Regular Expressions"), NULL );
-	if(bb) m_QuickSeachBar->ToggleTool(menuQuickFindDotMatchNewLine, bdotnewline);
+	if(bb) m_QuickSearchBar->ToggleTool(menuQuickFindWholeWord, bwholeword);
+	m_QuickSearchBar->AddTool( menuQuickFindCase, _( "Case Sensitive" ), m_ImageList->GetBitmap( searchcase_xpm_idx ), wxNullBitmap, wxITEM_CHECK, _("Case Sensitive"), _("Case Sensitive"), NULL );
+	if(bb) m_QuickSearchBar->ToggleTool(menuQuickFindCase, bcase);
+	m_QuickSearchBar->AddTool( menuQuickFindRegex, _( "Regular Expression" ), m_ImageList->GetBitmap( searchregex_xpm_idx ), wxNullBitmap, wxITEM_CHECK, _("Use Regular Expressions"), _("Use Regular E&xpressions"), NULL );
+	if(bb) m_QuickSearchBar->ToggleTool(menuQuickFindRegex, bregex);
+	m_QuickSearchBar->AddTool( menuQuickFindDotMatchNewLine, _( "Dot Match Newline" ), m_ImageList->GetBitmap( dotmatchnewline_xpm_idx ), wxNullBitmap, wxITEM_CHECK, _("Dot Match Newline in Regular Expressions"), _("Dot Match Newline in Regular Expressions"), NULL );
+	if(bb) m_QuickSearchBar->ToggleTool(menuQuickFindDotMatchNewLine, bdotnewline);
 	if( bwholeword || bcase )
 	{
-		m_QuickSeachBar->EnableTool(menuQuickFindRegex, false);
-		m_QuickSeachBar->EnableTool(menuQuickFindDotMatchNewLine, false);
+		m_QuickSearchBar->EnableTool(menuQuickFindRegex, false);
+		m_QuickSearchBar->EnableTool(menuQuickFindDotMatchNewLine, false);
 	}
 	else
 	{
 		if(bregex)
 		{
-			m_QuickSeachBar->EnableTool(menuQuickFindWholeWord, false);
-			m_QuickSeachBar->EnableTool(menuQuickFindCase, false);
+			m_QuickSearchBar->EnableTool(menuQuickFindWholeWord, false);
+			m_QuickSearchBar->EnableTool(menuQuickFindCase, false);
 		}
 		else
 		{
-			m_QuickSeachBar->EnableTool(menuQuickFindDotMatchNewLine, false);
+			m_QuickSearchBar->EnableTool(menuQuickFindDotMatchNewLine, false);
 		}
 	}
-	m_QuickSeachBar->AddSeparator();
-	m_QuickSeachBar->AddTool( menuRecentFilesToolbar, _( "Recent Files" ), m_ImageList->GetBitmap( recentfiles_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _("Recent file list"), _("List all recent opened files"), NULL );
+	m_QuickSearchBar->AddSeparator();
+	m_QuickSearchBar->AddTool( menuRecentFilesToolbar, _( "Recent Files" ), m_ImageList->GetBitmap( recentfiles_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _("Recent file list"), _("List all recent opened files"), NULL );
 
-	m_QuickSeachBar->Realize();
+	m_QuickSearchBar->Realize();
 
 	m_Config->Read( wxT( "/MadEdit/QuickSearchBarStatus" ), &m_QuickSearchBarStatus );
 	
 	if(m_QuickSearchBarStatus.IsEmpty())
-		m_AuiManager.AddPane( m_QuickSeachBar, wxAuiPaneInfo().Name( wxT( "QuickSeachBar" ) ).CloseButton( false ).Caption( _( "Quick Search" ) ).Floatable( true ).ToolbarPane().Top().Row( 2 ) );
+		m_AuiManager.AddPane( m_QuickSearchBar, wxAuiPaneInfo().Name( wxT( "QuickSeachBar" ) ).CloseButton( false ).Caption( _( "Quick Search" ) ).Floatable( true ).ToolbarPane().Top().Row( 2 ) );
 	else
 	{
 		wxAuiPaneInfo pane_info;
 		m_AuiManager.LoadPaneInfo( m_QuickSearchBarStatus, pane_info );
 		pane_info.Floatable( true );
-		m_AuiManager.AddPane( m_QuickSeachBar, pane_info );
+		m_AuiManager.AddPane( m_QuickSearchBar, pane_info );
 	}
 
 	bool showQsBar = m_Config->ReadBool( wxT( "/MadEdit/ShowQSearchBarOnStart" ), true );
 
 	if( !showQsBar )
-	{ m_AuiManager.GetPane( m_QuickSeachBar ).Hide(); }
+	{ m_AuiManager.GetPane( m_QuickSearchBar ).Hide(); }
 
 	m_ToolbarStatus[tbQSEARCH] = showQsBar;
 	// information window
@@ -3271,12 +3270,12 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 	m_Config->Write( wxT( "/MadEdit/ShowToolbarMacro" ), m_ToolbarStatus[tbMACRO] );
 
 	// save quick search status
-	m_Config->Write( wxT( "/MadEdit/QuickSearchWholeWord" ), m_QuickSeachBar->GetToolToggled(menuQuickFindWholeWord) );
-	m_Config->Write( wxT( "/MadEdit/QuickSearchCaseSensitive" ), m_QuickSeachBar->GetToolToggled(menuQuickFindCase) );
-	m_Config->Write( wxT( "/MadEdit/QuickSearchRegEx" ), m_QuickSeachBar->GetToolToggled(menuQuickFindRegex) );
-	m_Config->Write( wxT( "/MadEdit/QuickSearchDotMatchNewLine" ), m_QuickSeachBar->GetToolToggled(menuQuickFindDotMatchNewLine) );
+	m_Config->Write( wxT( "/MadEdit/QuickSearchWholeWord" ), m_QuickSearchBar->GetToolToggled(menuQuickFindWholeWord) );
+	m_Config->Write( wxT( "/MadEdit/QuickSearchCaseSensitive" ), m_QuickSearchBar->GetToolToggled(menuQuickFindCase) );
+	m_Config->Write( wxT( "/MadEdit/QuickSearchRegEx" ), m_QuickSearchBar->GetToolToggled(menuQuickFindRegex) );
+	m_Config->Write( wxT( "/MadEdit/QuickSearchDotMatchNewLine" ), m_QuickSearchBar->GetToolToggled(menuQuickFindDotMatchNewLine) );
 
-	m_QuickSearchBarStatus = m_AuiManager.SavePaneInfo(m_AuiManager.GetPane( m_QuickSeachBar ));
+	m_QuickSearchBarStatus = m_AuiManager.SavePaneInfo(m_AuiManager.GetPane( m_QuickSearchBar ));
 	g_MainFrame->m_Config->Write( wxT( "/MadEdit/QuickSearchBarStatus" ), m_QuickSearchBarStatus );
 
 	m_InfoNoteBookStatus = m_AuiManager.SavePaneInfo(m_AuiManager.GetPane( m_InfoNotebook ));
@@ -4313,6 +4312,45 @@ bool MadEditFrame::QueryCloseAllFiles()
 void MadEditFrame::OnUpdateUI_MenuFile_CheckCount( wxUpdateUIEvent& event )
 {
 	event.Enable( g_ActiveMadEdit != NULL );
+}
+
+void MadEditFrame::OnUpdateUI_MenuSearch_QuickBar( wxUpdateUIEvent& event )
+{
+	bool enable = ( g_ActiveMadEdit != NULL );
+
+	switch(event.GetId())
+	{
+		case menuQuickFindWholeWord:
+		case menuQuickFindCase:
+			{
+				if(enable)
+				{
+					enable = (m_QuickSearchBar->GetToolToggled(menuQuickFindWholeWord) || m_QuickSearchBar->GetToolToggled(menuQuickFindCase));
+					if(!enable) enable = (!m_QuickSearchBar->GetToolToggled(menuQuickFindRegex));
+				}
+				break;
+			}
+		case menuQuickFindRegex:
+			{
+				if(enable)
+				{
+					enable = !(m_QuickSearchBar->GetToolToggled(menuQuickFindWholeWord) || m_QuickSearchBar->GetToolToggled(menuQuickFindCase));
+				}
+				break;
+			}
+		case menuQuickFindDotMatchNewLine:
+			{
+				if(enable)
+				{
+					enable = (!(m_QuickSearchBar->GetToolToggled(menuQuickFindWholeWord) || m_QuickSearchBar->GetToolToggled(menuQuickFindCase))
+						&& (m_QuickSearchBar->GetToolToggled(menuQuickFindRegex)));
+				}
+				break;
+			}
+		default:
+			break;
+	}
+	event.Enable( enable );
 }
 
 void MadEditFrame::OnUpdateUI_CheckFrameStyle( wxUpdateUIEvent& event )
@@ -9134,7 +9172,7 @@ void MadEditFrame::OnContextMenu( wxContextMenuEvent& event )
 
 void MadEditFrame::HideQuickFindBar()
 {
-	m_AuiManager.GetPane( m_QuickSeachBar ).Hide();
+	m_AuiManager.GetPane( m_QuickSearchBar ).Hide();
 	m_AuiManager.Update();
 	m_ToolbarStatus[tbQSEARCH] = false;
 	int i = tbSTANDARD;
@@ -9154,47 +9192,14 @@ void MadEditFrame::HideQuickFindBar()
 
 void MadEditFrame::OnShowQuickSearchBar( wxCommandEvent& event )
 {
-	if( !m_AuiManager.GetPane( m_QuickSeachBar ).IsShown() )
+	if( !m_AuiManager.GetPane( m_QuickSearchBar ).IsShown() )
 	{
-		m_AuiManager.GetPane( m_QuickSeachBar ).Show();
+		m_AuiManager.GetPane( m_QuickSearchBar ).Show();
 		m_ToolbarStatus[tbQSEARCH] = true;
 		m_ToolbarStatus[tbMAX] = true;
 		m_AuiManager.Update();
 	}
-	m_QuickSeachBar->SetFocus();
-}
-
-void MadEditFrame::OnSearchQuickFindToggleOptions( wxCommandEvent& event )
-{
-	int toolId = event.GetId();
-	bool status = m_QuickSeachBar->GetToolToggled(toolId);
-
-	switch(toolId)
-	{
-		case menuQuickFindWholeWord:
-		case menuQuickFindCase:
-			{
-				if(toolId == menuQuickFindWholeWord)
-					status |= m_QuickSeachBar->GetToolToggled(menuQuickFindCase);
-				else if(toolId == menuQuickFindCase)
-					status |= m_QuickSeachBar->GetToolToggled(menuQuickFindWholeWord);
-				m_QuickSeachBar->EnableTool(menuQuickFindRegex, !status);
-				if(status)
-					m_QuickSeachBar->EnableTool(menuQuickFindDotMatchNewLine, !status);
-				else
-					m_QuickSeachBar->EnableTool(menuQuickFindDotMatchNewLine, ((!status) && m_QuickSeachBar->GetToolToggled(menuQuickFindRegex)));
-				break;
-			}
-		case menuQuickFindRegex:
-			{
-				m_QuickSeachBar->EnableTool(menuQuickFindCase, !status);
-				m_QuickSeachBar->EnableTool(menuQuickFindWholeWord, !status);
-				m_QuickSeachBar->EnableTool(menuQuickFindDotMatchNewLine, status);
-				break;
-			}
-		default:
-			break;
-	}
+	m_QuickSearchBar->SetFocus();
 }
 
 void MadEditFrame::OnSearchQuickFind( wxCommandEvent& event )
@@ -9245,13 +9250,10 @@ void MadEditFrame::OnSearchQuickFindPrevious( wxCommandEvent& event )
 			reset_caretpos = false;
 		}
 
-		bool bRegex = (m_QuickSeachBar->GetToolEnabled(menuQuickFindRegex) &&  m_QuickSeachBar->GetToolToggled(menuQuickFindRegex)),
-			bWholeWord = (m_QuickSeachBar->GetToolEnabled(menuQuickFindWholeWord) &&  m_QuickSeachBar->GetToolToggled(menuQuickFindWholeWord)),
-			bDotMatchNewline = (m_QuickSeachBar->GetToolEnabled(menuQuickFindDotMatchNewLine) &&  m_QuickSeachBar->GetToolToggled(menuQuickFindDotMatchNewLine)),
-			bCase = (m_QuickSeachBar->GetToolEnabled(menuQuickFindCase) &&  m_QuickSeachBar->GetToolToggled(menuQuickFindCase));
-
-		//if( bRegex ) bWholeWord = false;
-		//else bDotMatchNewline = false;
+		bool bRegex = (m_QuickSearchBar->GetToolEnabled(menuQuickFindRegex) &&  m_QuickSearchBar->GetToolToggled(menuQuickFindRegex)),
+			bWholeWord = (m_QuickSearchBar->GetToolEnabled(menuQuickFindWholeWord) &&  m_QuickSearchBar->GetToolToggled(menuQuickFindWholeWord)),
+			bDotMatchNewline = (m_QuickSearchBar->GetToolEnabled(menuQuickFindDotMatchNewLine) &&  m_QuickSearchBar->GetToolToggled(menuQuickFindDotMatchNewLine)),
+			bCase = (m_QuickSearchBar->GetToolEnabled(menuQuickFindCase) &&  m_QuickSearchBar->GetToolToggled(menuQuickFindCase));
 
 		sr = g_ActiveMadEdit->FindTextPrevious( m_QuickSearch->GetValue(), bRegex,
 												bCase, bWholeWord, bDotMatchNewline, rangeFrom, rangeTo );
@@ -9265,7 +9267,6 @@ void MadEditFrame::OnSearchQuickFindPrevious( wxCommandEvent& event )
 		else
 		{
 			lastCaret = 0;
-			//g_ActiveMadEdit->HighlightWords();
 		}
 	}
 }
@@ -9307,13 +9308,10 @@ void MadEditFrame::OnSearchQuickFindNext( wxCommandEvent& event )
 			reset_caretpos = false;
 		}
 
-		bool bRegex = (m_QuickSeachBar->GetToolEnabled(menuQuickFindRegex) &&  m_QuickSeachBar->GetToolToggled(menuQuickFindRegex)),
-			bWholeWord = (m_QuickSeachBar->GetToolEnabled(menuQuickFindWholeWord) &&  m_QuickSeachBar->GetToolToggled(menuQuickFindWholeWord)),
-			bDotMatchNewline = (m_QuickSeachBar->GetToolEnabled(menuQuickFindDotMatchNewLine) &&  m_QuickSeachBar->GetToolToggled(menuQuickFindDotMatchNewLine)),
-			bCase = (m_QuickSeachBar->GetToolEnabled(menuQuickFindCase) &&  m_QuickSeachBar->GetToolToggled(menuQuickFindCase));
-
-		//if( bRegex ) bWholeWord = false;
-		//else bDotMatchNewline = false;
+		bool bRegex = (m_QuickSearchBar->GetToolEnabled(menuQuickFindRegex) &&  m_QuickSearchBar->GetToolToggled(menuQuickFindRegex)),
+			bWholeWord = (m_QuickSearchBar->GetToolEnabled(menuQuickFindWholeWord) &&  m_QuickSearchBar->GetToolToggled(menuQuickFindWholeWord)),
+			bDotMatchNewline = (m_QuickSearchBar->GetToolEnabled(menuQuickFindDotMatchNewLine) &&  m_QuickSearchBar->GetToolToggled(menuQuickFindDotMatchNewLine)),
+			bCase = (m_QuickSearchBar->GetToolEnabled(menuQuickFindCase) &&  m_QuickSearchBar->GetToolToggled(menuQuickFindCase));
 
 		sr = g_ActiveMadEdit->FindTextNext( m_QuickSearch->GetValue(), bRegex,
 											bCase, bWholeWord, bDotMatchNewline, rangeFrom, rangeTo );
@@ -9327,7 +9325,6 @@ void MadEditFrame::OnSearchQuickFindNext( wxCommandEvent& event )
 		else
 		{
 			lastCaret = g_ActiveMadEdit->GetFileSize();
-			//g_ActiveMadEdit->HighlightWords();
 		}
 	}
 }

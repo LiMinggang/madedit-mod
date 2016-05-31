@@ -86,7 +86,7 @@ public:
 	////GUI Control Declaration Start
 	wxMenuBar *WxMenuBar1;
 	wxAuiToolBar *WxToolBar[tbMAX];
-	wxAuiToolBar *m_QuickSeachBar;
+	wxAuiToolBar *m_QuickSearchBar;
 	wxAuiToolBar *m_RefreshView;
 	wxStatusBar *WxStatusBar1;
 	////GUI Control Declaration End
@@ -222,6 +222,8 @@ public:
 	void OnUpdateUI_MenuToolsStopRecMacro( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuToolsPlayRecMacro( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuToolsSaveRecMacro( wxUpdateUIEvent& event );
+	
+	void OnUpdateUI_MenuSearch_QuickBar( wxUpdateUIEvent& event );
 
 	void OnFileNew( wxCommandEvent& event );
 	void OnFileOpen( wxCommandEvent& event );
@@ -321,7 +323,6 @@ public:
 	void OnSearchQuickFindNext( wxCommandEvent& event );
 	void OnSearchQuickFindPrevious( wxCommandEvent& event );
 	void OnShowQuickSearchBar( wxCommandEvent& event );
-	void OnSearchQuickFindToggleOptions( wxCommandEvent& event );
 
     void OnViewAlwaysOnTop( wxCommandEvent& event );
     void OnViewFullScreen( wxCommandEvent& event );
