@@ -32,6 +32,12 @@
 	wxFrame g_DummyWin;
 #endif
 extern void DisplayFindAllResult( wxTreeItemId &myroot, vector<wxFileOffset> &begpos, vector<wxFileOffset> &endpos, MadEdit *madedit, bool expandresults = true, OnProgressUpdatePtr updater = NULL );
+extern int MadMessageBox( const wxString& message,
+						  const wxString& caption = wxMessageBoxCaptionStr,
+						  long style = wxOK | wxCENTRE,
+						  wxWindow *parent = NULL,
+						  int x = wxDefaultCoord, int y = wxDefaultCoord );
+
 
 // Ugly bigger switch than bigger map
 bool FromCmdToString( wxString &cmdStr, long madCmd ) {
@@ -1037,7 +1043,8 @@ namespace mad_python {
 			{ g_ActiveMadEdit->SetSelection( ( wxFileOffset )beginpos, ( wxFileOffset )endpos, bCaretAtBeginPos ); }
 		}
 
-		void SelectWholeLine() {
+		void SelectWholeLine() {
+
 			if( g_ActiveMadEdit )
 			{ g_ActiveMadEdit->SelectWholeLine(); }
 		}
@@ -1751,7 +1758,20 @@ namespace mad_python {
 			}
 		}
 	};
-}
+
+	int MsgBox(const std::string& message, const std::string& caption = "Message", long style = wxOK | wxCENTRE)
+	{
+		wxString wxMessage( message.c_str(), *wxConvCurrent ), wxCaption( caption.c_str(), *wxConvCurrent );
+		return MadMessageBox( wxMessage, wxCaption, style );
+	}
+
+	const std::string InputDlgBox(const std::string& message, const std::string& caption = "Input Text")
+	{
+		wxString wxMessage( message.c_str(), *wxConvCurrent ), wxCaption( caption.c_str(), *wxConvCurrent );
+		wxString input = wxGetTextFromUser( wxMessage, wxCaption );
+		return std::string( input.mb_str() );
+	}
+};
 
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( FindTextNext_member_overloads, FindTextNext, 4, 7 )
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( FindTextPrevious_member_overloads, FindTextPrevious, 4, 7 )
@@ -1771,6 +1791,8 @@ BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( GetLine_member_overloads, GetLine, 1, 3 
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( GetText_member_overloads, GetText, 0, 1 )
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( SetSelection_member_overloads, SetSelection, 2, 3 )
 
+BOOST_PYTHON_FUNCTION_OVERLOADS( InputDlgBox_overloads, mad_python::InputDlgBox, 1, 2 )
+BOOST_PYTHON_FUNCTION_OVERLOADS( MsgBox_overloads, mad_python::MsgBox, 1, 3 )
 
 BOOST_PYTHON_MODULE( madpython ) {
 	using namespace mad_python;
@@ -2080,5 +2102,7 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.value( "Left", naLeft )
 	.value( "Right", naRight )
 	;
+	def( "MsgBox", &MsgBox, MsgBox_overloads( args( "message", "caption", "style" ), "Doc string" ) );
+	def( "InputDlgBox", &InputDlgBox, InputDlgBox_overloads( args( "message", "caption" ), "Doc string" ) );
 }
 #endif //__MADPYTHON__
