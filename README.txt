@@ -122,6 +122,7 @@ New: Insert to the top instead of append to the bottom of search results, expand
 New: Let the user to do the backup selfly #198
 New: Use Icon to replace the checkbox on QuickSearch Bar #181
 New: Remember pos of all tool Bars
+New: Add InputDlgBox, MsgBox to MadPython so that user can get input or output some message
 Fix: 0.4.2.1 can not remember the word wrap setting #201
 Fix: The fix width in the Option menu can't Open #199
 Fix: Improve windows list code, fix a bug of inner-tab drag/reposition(wxAuiNoteBook)
