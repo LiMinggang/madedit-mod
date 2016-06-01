@@ -138,7 +138,6 @@ public:
 	bool           m_PurgeHistory;
 	bool           m_SearchDirectionNext;
     wxFileOffset   m_QSearchBegPos, m_QSearchEndPos;
-	bool           m_ToolbarStatus[tbMAX + 1];
 	void OnUpdateUI_CheckFrameStyle( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuFile_CheckCount( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuFileReload( wxUpdateUIEvent& event );
@@ -200,7 +199,6 @@ public:
 	void OnUpdateUI_MenuSpellIgnore( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuSpellAdd2Dict( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuSpellRemoveFromDict( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewToolbars( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuViewToolbarsToggleAll( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuViewToolbarList( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuViewTypewriterMode( wxUpdateUIEvent& event );

@@ -33,12 +33,12 @@ class MadPurgeHistoryDialog : public wxDialog
 
 		//(*Declarations(MadPurgeHistoryDialog)
 		wxCheckBox* wxCheckBoxRecentEncodings;
+		wxCheckBox* wxCheckBoxResetToolBarsInfoWin;
 		wxCheckBox* wxCheckBoxCaretPos;
 		wxCheckBox* wxCheckBoxRecentSearchedExcludeFilters;
 		wxCheckBox* wxCheckBoxAllAbove;
 		wxCheckBox* wxCheckBoxRecentFonts;
 		wxCheckBox* wxCheckBoxRecentSearchedDirectories;
-		wxCheckBox* wxCheckBoxResetSearchBarInfoWin;
 		wxButton* WxButtonCancel;
 		wxCheckBox* wxCheckBoxRecentSearchedTexts;
 		wxButton* WxButtonOK;
@@ -59,7 +59,7 @@ class MadPurgeHistoryDialog : public wxDialog
 		static const long ID_WXRECENTSEARCHEDFILEFILTERS;
 		static const long ID_WXCHECKBOXRECENTSEARCHEDEXCLUDEFILTERS;
 		static const long ID_WXCHECKBOXCARETPOS;
-		static const long ID_CHECKBOXRESETSEARCHBARINFOWIN;
+		static const long ID_CHECKBOXRESETTOOLBARSINFOWIN;
 		static const long ID_WXCHECKBOXALLABOVE;
 		//*)
 

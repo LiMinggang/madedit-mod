@@ -39,7 +39,7 @@ const long MadPurgeHistoryDialog::ID_WXCHECKBOXRECENTSEARCHEDDIRECTORIES = wxNew
 const long MadPurgeHistoryDialog::ID_WXRECENTSEARCHEDFILEFILTERS = wxNewId();
 const long MadPurgeHistoryDialog::ID_WXCHECKBOXRECENTSEARCHEDEXCLUDEFILTERS = wxNewId();
 const long MadPurgeHistoryDialog::ID_WXCHECKBOXCARETPOS = wxNewId();
-const long MadPurgeHistoryDialog::ID_CHECKBOXRESETSEARCHBARINFOWIN = wxNewId();
+const long MadPurgeHistoryDialog::ID_CHECKBOXRESETTOOLBARSINFOWIN = wxNewId();
 const long MadPurgeHistoryDialog::ID_WXCHECKBOXALLABOVE = wxNewId();
 //*)
 
@@ -85,9 +85,9 @@ MadPurgeHistoryDialog::MadPurgeHistoryDialog(wxWindow* parent,wxWindowID id,cons
 	wxCheckBoxCaretPos = new wxCheckBox(this, ID_WXCHECKBOXCARETPOS, _("Recent Caret Position"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXCARETPOS"));
 	wxCheckBoxCaretPos->SetValue(false);
 	StaticBoxSizer1->Add(wxCheckBoxCaretPos, 0, wxALL|wxEXPAND, 5);
-	wxCheckBoxResetSearchBarInfoWin = new wxCheckBox(this, ID_CHECKBOXRESETSEARCHBARINFOWIN, _("Reset Search Bar and Information Window Pos"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXRESETSEARCHBARINFOWIN"));
-	wxCheckBoxResetSearchBarInfoWin->SetValue(false);
-	StaticBoxSizer1->Add(wxCheckBoxResetSearchBarInfoWin, 0, wxALL|wxEXPAND, 5);
+	wxCheckBoxResetToolBarsInfoWin = new wxCheckBox(this, ID_CHECKBOXRESETTOOLBARSINFOWIN, _("Reset Tool Bars and Information Window Pos"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXRESETTOOLBARSINFOWIN"));
+	wxCheckBoxResetToolBarsInfoWin->SetValue(false);
+	StaticBoxSizer1->Add(wxCheckBoxResetToolBarsInfoWin, 0, wxALL|wxEXPAND, 5);
 	wxCheckBoxAllAbove = new wxCheckBox(this, ID_WXCHECKBOXALLABOVE, _("All Above"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXALLABOVE"));
 	wxCheckBoxAllAbove->SetValue(false);
 	StaticBoxSizer1->Add(wxCheckBoxAllAbove, 0, wxALL|wxEXPAND, 5);

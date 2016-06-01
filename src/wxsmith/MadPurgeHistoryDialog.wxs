@@ -76,8 +76,8 @@
 						<border>5</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxCheckBox" name="ID_CHECKBOXRESETSEARCHBARINFOWIN" variable="wxCheckBoxResetSearchBarInfoWin" member="yes">
-							<label>Reset Search Bar and Information Window Pos</label>
+						<object class="wxCheckBox" name="ID_CHECKBOXRESETTOOLBARSINFOWIN" variable="wxCheckBoxResetToolBarsInfoWin" member="yes">
+							<label>Reset Tool Bars and Information Window Pos</label>
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>

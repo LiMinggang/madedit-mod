@@ -1561,7 +1561,6 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_UPDATE_UI( menuSpellIgnore, MadEditFrame::OnUpdateUI_MenuSpellIgnore )
 	EVT_UPDATE_UI( menuSpellAdd2Dict, MadEditFrame::OnUpdateUI_MenuSpellAdd2Dict )
 	EVT_UPDATE_UI( menuSpellRemoveFromDict, MadEditFrame::OnUpdateUI_MenuSpellRemoveFromDict )
-	EVT_UPDATE_UI( menuToolBars, MadEditFrame::OnUpdateUI_MenuViewToolbars )
 	EVT_UPDATE_UI( menuToolBarsToggleAll, MadEditFrame::OnUpdateUI_MenuViewToolbarsToggleAll )
 	EVT_UPDATE_UI_RANGE( menuToolBar1, menuToolBar99, MadEditFrame::OnUpdateUI_MenuViewToolbarList )
 	EVT_UPDATE_UI( menuTypewriterMode, MadEditFrame::OnUpdateUI_MenuViewTypewriterMode )
@@ -2277,13 +2276,13 @@ CommandData CommandTable[] =
 
 ToolBarData ToolBarTable[] = 
 {
-	{tbSTANDARD,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/ShowToolbarStandard"),      wxT("/MadEdit/TBStandardPos"),      wxT("MadToolBar0"), _("Starndard"),      0},
-	{tbEDITOR,        MADTOOBAR_DEFAULT,  wxT("/MadEdit/ShowToolbarEditor"),        wxT("/MadEdit/TBEditorPos"),        wxT("MadToolBar1"), _("Editor"),         1},
-	{tbSEARCHREPLACE, MADTOOBAR_DEFAULT,  wxT("/MadEdit/ShowToolbarSearchReplace"), wxT("/MadEdit/TBSearchReplacePos"), wxT("MadToolBar2"), _("Search/Replace"), 2},
-	{tbTEXTVIEW,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/ShowToolbarTextview"),      wxT("/MadEdit/TBTextviewPos"),      wxT("MadToolBar3"), _("Text View"),      3},
-	{tbEDITMODE,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/ShowToolbarEditMode"),      wxT("/MadEdit/TBEditModePos"),      wxT("MadToolBar4"), _("Edit Mode"),      4},
-	{tbMACRO,         MADTOOBAR_OVERFLOW, wxT("/MadEdit/ShowToolbarMacro"),         wxT("/MadEdit/TBMacroPos"),         wxT("MadToolBar5"), _("Macro"),          5},
-	{-1, 0, 0, 0, 0, 0, -1},
+	{tbSTANDARD,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBStandardPos"),      wxT("MadToolBar0"), _("Starndard"),      0},
+	{tbEDITOR,        MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBEditorPos"),        wxT("MadToolBar1"), _("Editor"),         1},
+	{tbSEARCHREPLACE, MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBSearchReplacePos"), wxT("MadToolBar2"), _("Search/Replace"), 2},
+	{tbTEXTVIEW,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBTextviewPos"),      wxT("MadToolBar3"), _("Text View"),      3},
+	{tbEDITMODE,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBEditModePos"),      wxT("MadToolBar4"), _("Edit Mode"),      4},
+	{tbMACRO,         MADTOOBAR_OVERFLOW, wxT("/MadEdit/TBMacroPos"),         wxT("MadToolBar5"), _("Macro"),          5},
+	{-1, 0, 0, 0, 0, -1},
 };
 
 // restore the definition of _(s)
@@ -2913,10 +2912,8 @@ void MadEditFrame::CreateGUIControls( void )
 	/*for( int tbId = tbSTANDARD; tbId <= tbMACRO; ++tbId )
 	{ WxToolBar[tbId]->Realize(); }*/
 
-	bool bb;
 	td = &ToolBarTable[0];
 
-	m_ToolbarStatus[tbMAX] = false;
 	wxString toolbarpos;
 	while( td->toolbar_id >= 0 )
 	{
@@ -2928,12 +2925,6 @@ void MadEditFrame::CreateGUIControls( void )
 		else
 			RestoreAuiPanel(WxToolBar[td->toolbar_id], toolbarpos, true);
 		
-		m_Config->Read( td->showhide_status, &bb, true );
-		m_ToolbarStatus[td->toolbar_id] = bb;
-		m_ToolbarStatus[tbMAX] = ( m_ToolbarStatus[tbMAX] | bb );
-		
-		if( !bb )
-		{ m_AuiManager.GetPane( WxToolBar[td->toolbar_id] ).Hide(); }
 		++td;
 	}
 
@@ -3011,13 +3002,13 @@ void MadEditFrame::CreateGUIControls( void )
 	m_Config->Read( wxT( "/MadEdit/QuickSearchRegEx" ), &bregex, false );
 	m_Config->Read( wxT( "/MadEdit/QuickSearchDotMatchNewLine" ), &bdotnewline, false );
 
-	if(bb) m_QuickSearchBar->ToggleTool(menuQuickFindWholeWord, bwholeword);
+	m_QuickSearchBar->ToggleTool(menuQuickFindWholeWord, bwholeword);
 	m_QuickSearchBar->AddTool( menuQuickFindCase, _( "Case Sensitive" ), m_ImageList->GetBitmap( searchcase_xpm_idx ), wxNullBitmap, wxITEM_CHECK, _("Case Sensitive"), _("Case Sensitive"), NULL );
-	if(bb) m_QuickSearchBar->ToggleTool(menuQuickFindCase, bcase);
+	m_QuickSearchBar->ToggleTool(menuQuickFindCase, bcase);
 	m_QuickSearchBar->AddTool( menuQuickFindRegex, _( "Regular Expression" ), m_ImageList->GetBitmap( searchregex_xpm_idx ), wxNullBitmap, wxITEM_CHECK, _("Use Regular Expressions"), _("Use Regular E&xpressions"), NULL );
-	if(bb) m_QuickSearchBar->ToggleTool(menuQuickFindRegex, bregex);
+	m_QuickSearchBar->ToggleTool(menuQuickFindRegex, bregex);
 	m_QuickSearchBar->AddTool( menuQuickFindDotMatchNewLine, _( "Dot Match Newline" ), m_ImageList->GetBitmap( dotmatchnewline_xpm_idx ), wxNullBitmap, wxITEM_CHECK, _("Dot Match Newline in Regular Expressions"), _("Dot Match Newline in Regular Expressions"), NULL );
-	if(bb) m_QuickSearchBar->ToggleTool(menuQuickFindDotMatchNewLine, bdotnewline);
+	m_QuickSearchBar->ToggleTool(menuQuickFindDotMatchNewLine, bdotnewline);
 	if( bwholeword || bcase )
 	{
 		m_QuickSearchBar->EnableTool(menuQuickFindRegex, false);
@@ -3047,12 +3038,6 @@ void MadEditFrame::CreateGUIControls( void )
 	else
 		RestoreAuiPanel(m_QuickSearchBar, panelStatus, true);
 
-	bool showQsBar = m_Config->ReadBool( wxT( "/MadEdit/ShowQSearchBarOnStart" ), true );
-
-	if( !showQsBar )
-	{ m_AuiManager.GetPane( m_QuickSearchBar ).Hide(); }
-
-	m_ToolbarStatus[tbQSEARCH] = showQsBar;
 	// information window
 	int infoW = 300, infoH = 130;
 	//m_Config->Read( wxT( "/MadEdit/InfoWindowWidth" ), &infoW );
@@ -3249,7 +3234,6 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 	ToolBarData * td = &ToolBarTable[0];
 	while( td->toolbar_id >= 0 )
 	{
-		m_Config->Write( td->showhide_status, m_ToolbarStatus[td->toolbar_id] );
 		panelStatus = m_AuiManager.SavePaneInfo(m_AuiManager.GetPane( WxToolBar[td->toolbar_id] ));
 		m_Config->Write( td->panel_pos, panelStatus );
 		++td;
@@ -3320,7 +3304,7 @@ void MadEditFrame::MadEditFrameKeyDown( wxKeyEvent& event )
 			break;
 		}
 
-		if( g_MainFrame->m_ToolbarStatus[tbQSEARCH]
+		if( m_AuiManager.GetPane( WxToolBar[tbQSEARCH] ).IsShown()
 			&& ((wxWindow *)g_ActiveMadEdit) != wxWindow::FindFocus() )
 		{
 			//g_MainFrame->HideQuickFindBar();
@@ -4729,14 +4713,20 @@ void MadEditFrame::OnUpdateUI_MenuViewHexMode( wxUpdateUIEvent& event )
 	event.Enable( g_ActiveMadEdit != NULL && !IsMacroRecording() );
 	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() == emHexMode );
 }
-void MadEditFrame::OnUpdateUI_MenuViewToolbars( wxUpdateUIEvent& event )
-{
-	event.Enable( tbMAX != 0 );
-}
 void MadEditFrame::OnUpdateUI_MenuViewToolbarsToggleAll( wxUpdateUIEvent& event )
 {
-	event.Enable( tbMAX != 0 );
-	event.Check( m_ToolbarStatus[tbMAX] );
+	event.Enable( true );
+
+	bool check = (m_AuiManager.GetPane( WxToolBar[tbSTANDARD] ).IsShown()
+		|| m_AuiManager.GetPane( WxToolBar[tbEDITOR] ).IsShown()
+		|| m_AuiManager.GetPane( WxToolBar[tbSEARCHREPLACE] ).IsShown()
+		|| m_AuiManager.GetPane( WxToolBar[tbTEXTVIEW] ).IsShown()
+		|| m_AuiManager.GetPane( WxToolBar[tbEDITMODE] ).IsShown()
+		|| m_AuiManager.GetPane( WxToolBar[tbMACRO] ).IsShown()
+		|| m_AuiManager.GetPane( WxToolBar[tbEDITMODE] ).IsShown()
+	);
+
+	event.Check( check );
 }
 void MadEditFrame::OnUpdateUI_MenuViewTypewriterMode( wxUpdateUIEvent& event )
 {
@@ -4750,26 +4740,7 @@ void MadEditFrame::OnUpdateUI_MenuViewToolbarList( wxUpdateUIEvent& event )
 
 	if( toolbarId < tbMAX )
 	{
-		if( m_ToolbarStatus[tbMAX] )
-		{
-			g_Menu_Toolbars->Enable( menuItemId, true );
-
-			if( m_ToolbarStatus[toolbarId] )
-			{
-				if( !m_AuiManager.GetPane( WxToolBar[toolbarId] ).IsShown() )
-				{
-					m_ToolbarStatus[toolbarId] = false;
-				}
-
-				g_Menu_Toolbars->Check( menuItemId, m_ToolbarStatus[toolbarId] );
-			}
-			else
-			{
-				g_Menu_Toolbars->Check( menuItemId, false );
-			}
-		}
-		else
-		{ g_Menu_Toolbars->Enable( menuItemId, false ); }
+		g_Menu_Toolbars->Check( menuItemId, m_AuiManager.GetPane( WxToolBar[toolbarId] ).IsShown() );
 	}
 }
 
@@ -7349,38 +7320,7 @@ void MadEditFrame::OnViewToolbars( wxCommandEvent& event )
 
 	if( toolbarId < tbMAX )
 	{
-		if( m_ToolbarStatus[toolbarId] )
-		{
-			m_ToolbarStatus[toolbarId] = false;
-			int i = tbSTANDARD;
-
-			for( ; i < tbMAX; ++i )
-			{
-				if( m_ToolbarStatus[i] )
-				{
-					m_ToolbarStatus[tbMAX] = true;
-					break;
-				}
-			}
-
-			if( i == tbMAX )
-			{ m_ToolbarStatus[tbMAX] = false; }
-
-			m_AuiManager.GetPane( WxToolBar[toolbarId] ).Hide();
-
-			for( int i = toolbarId + 1; i < tbMAX; ++i )
-			{
-				m_AuiManager.GetPane( WxToolBar[i] ).Position( i - 1 );
-			}
-		}
-		else
-		{
-			m_AuiManager.GetPane( WxToolBar[toolbarId] ).Show( true );
-			m_ToolbarStatus[toolbarId] = true;
-
-			if( !m_ToolbarStatus[tbMAX] )
-			{ m_ToolbarStatus[tbMAX] = true; }
-		}
+		m_AuiManager.GetPane( WxToolBar[toolbarId] ).Show( !m_AuiManager.GetPane( WxToolBar[toolbarId] ).IsShown( ) );
 
 		m_AuiManager.Update();
 	}
@@ -7390,11 +7330,10 @@ void MadEditFrame::HideAllToolBars()
 
 	for( int toolbarId = tbSTANDARD; toolbarId < tbMAX; ++toolbarId )
 	{
-		if( m_ToolbarStatus[toolbarId] )
+		if( m_AuiManager.GetPane( WxToolBar[toolbarId] ).IsShown( ) )
 		{ m_AuiManager.GetPane( WxToolBar[toolbarId] ).Hide(); }
 	}
 	
-	m_ToolbarStatus[tbMAX] = false;
 	m_AuiManager.Update();
 }
 
@@ -7402,13 +7341,12 @@ void MadEditFrame::ShowAllToolBars()
 {
 	for( int toolbarId = tbSTANDARD; toolbarId < tbMAX; ++toolbarId )
 	{
-		if( m_ToolbarStatus[toolbarId] )
+		if( !m_AuiManager.GetPane( WxToolBar[toolbarId] ).IsShown( ) )
 		{
 			m_AuiManager.GetPane( WxToolBar[toolbarId] ).Show();
 		}
 	}
 	
-	m_ToolbarStatus[tbMAX] = true;
 	m_AuiManager.Update();
 }
 
@@ -7983,7 +7921,7 @@ void MadEditFrame::OnToolsPurgeHistories( wxCommandEvent& event )
 		}
 
 		
-		if( dlg.wxCheckBoxResetSearchBarInfoWin->IsChecked() )
+		if( dlg.wxCheckBoxResetToolBarsInfoWin->IsChecked() )
 		{
 			bool show = m_AuiManager.GetPane( m_InfoNotebook ).IsShown();
 			m_AuiManager.DetachPane(m_InfoNotebook);
@@ -7993,6 +7931,20 @@ void MadEditFrame::OnToolsPurgeHistories( wxCommandEvent& event )
 			m_AuiManager.DetachPane(m_QuickSearchBar);
 			ResetQuickSearchBarPos();
 			m_AuiManager.GetPane( m_QuickSearchBar ).Show(show);
+			ToolBarData * td = &ToolBarTable[0];
+
+			while( td->toolbar_id >= 0 )
+			{
+				m_AuiManager.DetachPane(WxToolBar[td->toolbar_id]);
+				++td;
+			}
+			td = &ToolBarTable[0];
+
+			while( td->toolbar_id >= 0 )
+			{
+				ResetNormalToolBarPos(WxToolBar[td->toolbar_id], td->toolbarid_name, td->caption, td->pos);
+				++td;
+			}
 		}
 	}
 }
@@ -9136,31 +9088,7 @@ void MadEditFrame::OnContextMenu( wxContextMenuEvent& event )
 
 	for( int i = tbSTANDARD; i < tbMAX; ++i )
 	{
-		int menuId = menuToolBar1 + i;
-
-		if( m_ToolbarStatus[tbMAX] )
-		{
-			if( !g_Menu_FrameContext->IsEnabled( menuId ) )
-			{ g_Menu_FrameContext->Enable( menuId, true ); }
-
-			if( m_ToolbarStatus[i] )
-			{
-				if( !m_AuiManager.GetPane( WxToolBar[i] ).IsShown() )
-				{
-					m_ToolbarStatus[i] = false;
-				}
-
-				g_Menu_FrameContext->Check( menuId, m_ToolbarStatus[i] );
-			}
-			else
-			{
-				g_Menu_FrameContext->Check( menuId, false );
-			}
-		}
-		else
-		{
-			g_Menu_FrameContext->Enable( menuId, false );
-		}
+		g_Menu_FrameContext->Check( menuToolBar1 + i, m_AuiManager.GetPane( WxToolBar[i] ).IsShown() );
 	}
 
 	PopupMenu( g_Menu_FrameContext );
@@ -9171,20 +9099,6 @@ void MadEditFrame::HideQuickFindBar()
 {
 	m_AuiManager.GetPane( m_QuickSearchBar ).Hide();
 	m_AuiManager.Update();
-	m_ToolbarStatus[tbQSEARCH] = false;
-	int i = tbSTANDARD;
-
-	for( ; i < tbMAX; ++i )
-	{
-		if( m_ToolbarStatus[i] )
-		{
-			m_ToolbarStatus[tbMAX] = true;
-			break;
-		}
-	}
-
-	if( i == tbMAX )
-	{ m_ToolbarStatus[tbMAX] = false; }
 }
 
 void MadEditFrame::OnShowQuickSearchBar( wxCommandEvent& event )
@@ -9192,8 +9106,6 @@ void MadEditFrame::OnShowQuickSearchBar( wxCommandEvent& event )
 	if( !m_AuiManager.GetPane( m_QuickSearchBar ).IsShown() )
 	{
 		m_AuiManager.GetPane( m_QuickSearchBar ).Show();
-		m_ToolbarStatus[tbQSEARCH] = true;
-		m_ToolbarStatus[tbMAX] = true;
 		m_AuiManager.Update();
 	}
 	m_QuickSearchBar->SetFocus();
