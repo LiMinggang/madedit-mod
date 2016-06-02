@@ -143,36 +143,16 @@ void MadSaveQueryDialog::OnButtonCancelClick(wxCommandEvent& event)
 
 void MadSaveQueryDialog::OnButtonSelectAllClick(wxCommandEvent& event)
 {
-	long item = -1;
 	MadFileList->Freeze();
-	for ( ;; )
-	{
-		item = MadFileList->GetNextItem(item);
-		if ( item == -1 )
-			break;
-		
-		if(MadFileList->GetItemState(item, wxLIST_STATE_SELECTED) != wxLIST_STATE_SELECTED)
-			MadFileList->SetItemState(item, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
-	}
+	MadFileList->CheckAll(true);
 	MadFileList->Thaw();
 }
 
 void MadSaveQueryDialog::OnButtonDselectAllClick(wxCommandEvent& event)
 {
-	if(MadFileList->GetSelectedItemCount() > 0)
-	{
-		long item = -1;
-		MadFileList->Freeze();
-		for ( ;; )
-		{
-			item = MadFileList->GetNextItem(item);
-			if ( item == -1 )
-				break;
-			if(MadFileList->GetItemState(item, wxLIST_STATE_SELECTED) == wxLIST_STATE_SELECTED)
-				MadFileList->SetItemState(item, 0, wxLIST_STATE_SELECTED);
-		}
-		MadFileList->Thaw();
-	}
+	MadFileList->Freeze();
+	MadFileList->CheckAll(false);
+	MadFileList->Thaw();
 }
 
 void MadSaveQueryDialog::OnButtonGoToClick(wxCommandEvent& event)
