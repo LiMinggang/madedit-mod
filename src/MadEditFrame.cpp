@@ -52,6 +52,7 @@
 #include "MadCommand.h"
 #include "MadRecentList.h"
 #include "MadWinListDialog.h"
+#include "MadSaveQueryDialog.h"
 #include "plugin.h"
 
 #include "EmbeddedPython.hpp"
@@ -8882,6 +8883,9 @@ void MadEditFrame::OnHelpAbout( wxCommandEvent& event )
 	dlg.WxMemoCredits->SetInsertionPoint( 0 );
 	// Hide Modaless Dialog
 	HideModalessDialogs();
+
+	MadSaveQueryDialog fdlg(this);
+	fdlg.ShowModal();
 
 	if( dlg.ShowModal() == wxID_OK )
 	{
