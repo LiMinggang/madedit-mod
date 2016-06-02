@@ -81,7 +81,7 @@ MadSaveQueryDialog::MadSaveQueryDialog(wxWindow* parent,wxWindowID id,const wxPo
 	itemCol.SetText(_("Path"));
 	itemCol.SetAlign(wxLIST_FORMAT_LEFT);
 	MadFileList->InsertColumn(1, itemCol);
-
+	InitWindowListIterms();
 }
 
 MadSaveQueryDialog::~MadSaveQueryDialog()
@@ -126,7 +126,7 @@ void MadSaveQueryDialog::InitWindowListIterms()
 
 void MadSaveQueryDialog::MadSaveQueryDialogActivate( wxActivateEvent& event )
 {
-	InitWindowListIterms();
+	//InitWindowListIterms();
 	//ResetButtonStatus();
 }
 

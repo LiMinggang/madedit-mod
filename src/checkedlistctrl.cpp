@@ -378,17 +378,39 @@ void wxCheckedListCtrl::OnMouseEvent(wxMouseEvent& event)
 		wxListEvent ev(wxEVT_NULL, GetId());
 		ev.m_itemIndex = item;		
 
+		wxArrayLong selectedItems;
+		bool sel = (GetItemState(item, wxLIST_STATE_SELECTED) == wxLIST_STATE_SELECTED);
+		bool checked = FALSE;
+		selectedItems.Add(item); //Make sure it's the first
+		if(sel) {
+
+			long selitem = -1;
+			for ( ;; ) {
+				selitem = GetNextItem(selitem, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
+				if ( selitem == -1 )
+					break;
+
+				if((item != selitem) && (IsChecked(item) == IsChecked(selitem)))
+					selectedItems.Add(selitem);
+			}
+		}
+
 		// send the check event
 		if (IsChecked(item)) {
 
 			ev.SetEventType(wxEVT_COMMAND_LIST_ITEM_UNCHECKED);
-			Check(item, FALSE);
-			AddPendingEvent(ev);
-
+			checked = false;
 		} else {
 
 			ev.SetEventType(wxEVT_COMMAND_LIST_ITEM_CHECKED);
-			Check(item, TRUE);
+			checked = true;
+		}
+
+		for(size_t i = 0; i < selectedItems.GetCount(); ++i) {
+
+			item = selectedItems[i];
+			ev.m_itemIndex = item;	
+			Check(item, checked);
 			AddPendingEvent(ev);
 		}
 	}
