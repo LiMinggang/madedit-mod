@@ -8,6 +8,8 @@
 #include <wx/dialog.h>
 //*)
 
+#include <set>
+
 class MadEditFrame;
 
 class MadSaveQueryDialog: public wxDialog
@@ -26,7 +28,7 @@ class MadSaveQueryDialog: public wxDialog
 		wxButton* ButtonCancel;
 		wxButton* ButtonSaveNone;
 		//*)
-        size_t GetCheckedItemsData(wxArrayLong& selectedItems);
+        void GetCheckedItemsData(std::set< long > & selectedItems);
 
 	protected:
 

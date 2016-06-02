@@ -118,10 +118,11 @@ Todo:
 FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.4.3
-New: Insert to the top instead of append to the bottom of search results, expand the last automatically and collapse the last
+New: Use dialog to let user choose one for all instead of annoying one by one dialogs
 New: Let the user to do the backup selfly #198
 New: Use Icon to replace the checkbox on QuickSearch Bar #181
 New: Remember pos of all tool Bars
+New: Insert to the top instead of append to the bottom of search results, expand the last automatically and collapse the last
 New: Reset tool bars position
 New: Add InputDlgBox, MsgBox to MadPython so that user can get input or output some message
 Fix: 0.4.2.1 can not remember the word wrap setting #201

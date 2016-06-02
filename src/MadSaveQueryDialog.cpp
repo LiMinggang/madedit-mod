@@ -170,17 +170,18 @@ void MadSaveQueryDialog::OnMadFileListItemSelectChange(wxListEvent& event)
 	ButtonGoTo->Enable(onlyone);
 }
 
-size_t MadSaveQueryDialog::GetCheckedItemsData(wxArrayLong& selectedItems)
+void MadSaveQueryDialog::GetCheckedItemsData(std::set< long > & selectedItems)
 {
-	long selitem = -1, pageId = -1;
+	long item = -1, pid = -1;
 	for ( ;; ) {
-		selitem = MadFileList->GetNextItem(selitem, wxLIST_NEXT_ALL, wxLIST_STATE_CHECKED);
-		if ( selitem == -1 )
+		item = MadFileList->GetNextItem(item, wxLIST_NEXT_ALL, wxLIST_STATE_DONTCARE);
+		if ( item == -1 )
 			break;
-		pageId = static_cast<long>(MadFileList->GetItemData(selitem));
-		selectedItems.Add(pageId);
+		if(MadFileList->IsChecked(item))
+		{
+			pid = static_cast<long>(MadFileList->GetItemData(item));
+			selectedItems.insert(pid);
+		}
 	}
-
-	return selectedItems.GetCount();
 }
 

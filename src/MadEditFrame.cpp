@@ -4198,15 +4198,22 @@ bool MadEditFrame::QueryCloseFile( int idx )
 	MadEdit *madedit = ( MadEdit* )m_Notebook->GetPage( idx );
 
 	if( madedit == NULL )
-	{ return false; }
+	{
+		wxASSERT( 0 );
+		return false;
+	}
 
-	wxString name = m_Notebook->GetPageText( idx );
+	if( madedit->IsModified() )
+	{
+		wxString fname = m_Notebook->GetPageText( idx );
 
-	if( name[name.Len() - 1] == wxT( '*' ) )
-	{ name.Truncate( name.Len() - 1 ); }
+		if( fname[fname.Len() - 1] == wxT( '*' ) )
+		{ fname.Truncate( fname.Len() - 1 ); }
 
-	if( madedit->Save( true, name, false ) == wxID_CANCEL )
-	{ return false; }
+		if( madedit->Save( true, fname, false ) == wxID_CANCEL )
+		{ return false; }
+
+	}
 
 	g_FileCaretPosManager.Add( madedit );
 	return true;
@@ -4220,18 +4227,37 @@ bool MadEditFrame::QueryCloseAllFiles()
 
 	if( selid == -1 ) { return true; }
 
-	MadEdit *madedit = ( MadEdit* )m_Notebook->GetPage( selid );
-	wxString name;
-
-	if( madedit->IsModified() )
+	std::set< long > selectedItems;
+	MadSaveQueryDialog fsqdlg(this);
+	if(fsqdlg.MadFileList->GetItemCount( ) > 0)
 	{
-		name = m_Notebook->GetPageText( selid );
+		if(wxID_CANCEL == fsqdlg.ShowModal())
+			return false;
 
-		if( name[name.Len() - 1] == wxT( '*' ) )
-		{ name.Truncate( name.Len() - 1 ); }
+		fsqdlg.GetCheckedItemsData(selectedItems);
+		if(selectedItems.empty())
+			return true; // Discard all
+	}
 
-		if( madedit->Save( true, name, false ) == wxID_CANCEL )
-		{ return false; }
+	// From now on, won't ask user
+	MadEdit *madedit = NULL;
+	wxString fname;
+	std::set< long >::iterator it = selectedItems.find(selid);
+	madedit = ( MadEdit* )m_Notebook->GetPage( selid );
+
+	if(it != selectedItems.end())
+	{
+		if( madedit->IsModified() )
+		{
+			fname = m_Notebook->GetPageText( selid );
+
+			if( fname[fname.Len() - 1] == wxT( '*' ) )
+			{ fname.Truncate( fname.Len() - 1 ); }
+
+			if( madedit->Save( false, fname, false ) == wxID_CANCEL )
+			{ return false; }
+		}
+		selectedItems.erase(it);
 	}
 
 	g_FileCaretPosManager.Add( madedit );
@@ -4244,29 +4270,34 @@ bool MadEditFrame::QueryCloseAllFiles()
 		{
 			madedit = ( MadEdit* )m_Notebook->GetPage( id );
 
-			if( madedit->IsModified() )
+			it = selectedItems.find(id);
+			if(it != selectedItems.end())
 			{
-				m_Notebook->SetSelection( id );
-				MadEdit *cme = ( MadEdit* )m_Notebook->GetPage( m_Notebook->GetSelection() );
-
-				if( cme != g_ActiveMadEdit )
+				if( madedit->IsModified() )
 				{
-					wxAuiNotebookEvent event( wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGED, m_Notebook->GetId() );
-					event.SetSelection( id );
-					event.SetOldSelection( sid );
-					event.SetEventObject( this );
-					OnNotebookPageChanged( event );
+					m_Notebook->SetSelection( id );
+					MadEdit *cme = ( MadEdit* )m_Notebook->GetPage( m_Notebook->GetSelection() );
+
+					if( cme != g_ActiveMadEdit )
+					{
+						wxAuiNotebookEvent event( wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGED, m_Notebook->GetId() );
+						event.SetSelection( id );
+						event.SetOldSelection( sid );
+						event.SetEventObject( this );
+						OnNotebookPageChanged( event );
+					}
+
+					fname = m_Notebook->GetPageText( id );
+
+					if( fname[fname.Len() - 1] == wxT( '*' ) )
+					{ fname.Truncate( fname.Len() - 1 ); }
+
+					if( madedit->Save( false, fname, false ) == wxID_CANCEL )
+					{ return false; }
+
+					sid = id;
 				}
-
-				name = m_Notebook->GetPageText( id );
-
-				if( name[name.Len() - 1] == wxT( '*' ) )
-				{ name.Truncate( name.Len() - 1 ); }
-
-				if( madedit->Save( true, name, false ) == wxID_CANCEL )
-				{ return false; }
-
-				sid = id;
+				selectedItems.erase(it);
 			}
 
 			g_FileCaretPosManager.Add( madedit );
@@ -8883,13 +8914,6 @@ void MadEditFrame::OnHelpAbout( wxCommandEvent& event )
 	dlg.WxMemoCredits->SetInsertionPoint( 0 );
 	// Hide Modaless Dialog
 	HideModalessDialogs();
-
-	MadSaveQueryDialog fdlg(this);
-	if( fdlg.ShowModal() == wxID_OK )
-	{
-		wxArrayLong selectedItems;
-		fdlg.GetCheckedItemsData(selectedItems);
-	}
 
 	if( dlg.ShowModal() == wxID_OK )
 	{
