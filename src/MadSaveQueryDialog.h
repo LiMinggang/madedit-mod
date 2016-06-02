@@ -26,11 +26,12 @@ class MadSaveQueryDialog: public wxDialog
 		wxButton* ButtonCancel;
 		wxButton* ButtonSaveNone;
 		//*)
+        size_t GetCheckedItemsData(wxArrayLong& selectedItems);
 
 	protected:
 
 		//(*Identifiers(MadSaveQueryDialog)
-		static const long ID_CHECKLISTBOXMADFILELIST;
+		static const long ID_LISTCTRLMADFILELIST;
 		static const long ID_BUTTONSAVENONE;
 		static const long ID_BUTTONSELECTALL;
 		static const long ID_BUTTONDSELECTALL;
@@ -47,10 +48,10 @@ class MadSaveQueryDialog: public wxDialog
 		void OnButtonSelectAllClick(wxCommandEvent& event);
 		void OnButtonDselectAllClick(wxCommandEvent& event);
 		void OnButtonGoToClick(wxCommandEvent& event);
+		void OnMadFileListItemSelectChange(wxListEvent& event);
 		//*)
 
         void InitWindowListIterms();
-        void MadSaveQueryDialogActivate( wxActivateEvent& event );
 		DECLARE_EVENT_TABLE()
 };
 

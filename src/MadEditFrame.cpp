@@ -8885,7 +8885,11 @@ void MadEditFrame::OnHelpAbout( wxCommandEvent& event )
 	HideModalessDialogs();
 
 	MadSaveQueryDialog fdlg(this);
-	fdlg.ShowModal();
+	if( fdlg.ShowModal() == wxID_OK )
+	{
+		wxArrayLong selectedItems;
+		fdlg.GetCheckedItemsData(selectedItems);
+	}
 
 	if( dlg.ShowModal() == wxID_OK )
 	{
