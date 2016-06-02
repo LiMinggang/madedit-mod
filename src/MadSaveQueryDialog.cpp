@@ -21,6 +21,7 @@ const long MadSaveQueryDialog::ID_BUTTONGOTO = wxNewId();
 //*)
 
 BEGIN_EVENT_TABLE(MadSaveQueryDialog,wxDialog)
+	EVT_ACTIVATE( MadSaveQueryDialog::MadSaveQueryDialogActivate )
 	//(*EventTable(MadSaveQueryDialog)
 	//*)
 END_EVENT_TABLE()
@@ -39,7 +40,7 @@ MadSaveQueryDialog::MadSaveQueryDialog(wxWindow* parent,wxWindowID id,const wxPo
 	Move(wxDefaultPosition);
 	BoxSizer1 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
-	MadFileList = new wxCheckedListCtrl(this, ID_CHECKLISTBOXMADFILELIST, wxDefaultPosition, wxSize(400,300), wxCLC_CHECK_WHEN_SELECTING, wxDefaultValidator, _T("ID_CHECKLISTBOXMADFILELIST"));
+	MadFileList = new wxCheckedListCtrl(this, ID_CHECKLISTBOXMADFILELIST, wxDefaultPosition, wxSize(400,300), wxLC_REPORT | wxSIMPLE_BORDER | wxVSCROLL, wxDefaultValidator, _T("ID_CHECKLISTBOXMADFILELIST"));
 	BoxSizer2->Add(MadFileList, 0, wxALL|wxEXPAND, 5);
 	BoxSizer1->Add(BoxSizer2, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	BoxSizer3 = new wxBoxSizer(wxVERTICAL);
@@ -70,6 +71,17 @@ MadSaveQueryDialog::MadSaveQueryDialog(wxWindow* parent,wxWindowID id,const wxPo
 	Connect(ID_BUTTONDSELECTALL,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadSaveQueryDialog::OnButtonDselectAllClick);
 	Connect(ID_BUTTONGOTO,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadSaveQueryDialog::OnButtonGoToClick);
 	//*)
+
+	SetDefaultItem(ButtonOK);
+	m_MainFrame = static_cast<MadEditFrame *>(parent);
+	wxListItem itemCol;
+	itemCol.SetText(_("Name"));
+	itemCol.SetAlign(wxLIST_FORMAT_LEFT);
+	MadFileList->InsertColumn(0, itemCol);
+	itemCol.SetText(_("Path"));
+	itemCol.SetAlign(wxLIST_FORMAT_LEFT);
+	MadFileList->InsertColumn(1, itemCol);
+
 }
 
 MadSaveQueryDialog::~MadSaveQueryDialog()
