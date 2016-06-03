@@ -44,7 +44,7 @@
 					</object>
 					<object class="sizeritem">
 						<object class="wxButton" name="ID_BUTTONSAVEAS" variable="ButtonSaveAs" member="yes">
-							<label>Save &amp;As</label>
+							<label>Save &amp;As...</label>
 							<size>110,27</size>
 							<handler function="OnButtonSaveAsClick" entry="EVT_BUTTON" />
 						</object>

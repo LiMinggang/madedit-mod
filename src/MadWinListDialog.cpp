@@ -50,7 +50,7 @@ MadWinListDialog::MadWinListDialog(wxWindow* parent,wxWindowID id)
 	BoxSizer3->Add(ButtonActivate, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	ButtonSave = new wxButton(this, ID_BUTTONSAVE, _("&Save"), wxDefaultPosition, wxSize(110,27), 0, wxDefaultValidator, _T("ID_BUTTONSAVE"));
 	BoxSizer3->Add(ButtonSave, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-	ButtonSaveAs = new wxButton(this, ID_BUTTONSAVEAS, _("Save &As"), wxDefaultPosition, wxSize(110,27), 0, wxDefaultValidator, _T("ID_BUTTONSAVEAS"));
+	ButtonSaveAs = new wxButton(this, ID_BUTTONSAVEAS, _("Save &As..."), wxDefaultPosition, wxSize(110,27), 0, wxDefaultValidator, _T("ID_BUTTONSAVEAS"));
 	BoxSizer3->Add(ButtonSaveAs, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	ButtonCloseWindows = new wxButton(this, ID_BUTTONCLOSEWINDOWS, _("&Close Window(s)"), wxDefaultPosition, wxSize(110,27), 0, wxDefaultValidator, _T("ID_BUTTONCLOSEWINDOWS"));
 	BoxSizer3->Add(ButtonCloseWindows, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);

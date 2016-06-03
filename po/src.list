@@ -41,6 +41,12 @@
 ../src/MadConvEncDialog.h
 ../src/MadWordCountDialog.cpp
 ../src/MadWordCountDialog.h
+../src/MadSaveQueryDialog.h
+../src/MadSaveQueryDialog.cpp
+../src/checkedlistctrl.cpp
+../src/checkedlistctrl.h
+../src/MadWinListDialog.cpp
+../src/MadWinListDialog.h
 ../src/MadAboutDialog.cpp
 ../src/MadAboutDialog.h
 ../src/MadNumberDlg.cpp
