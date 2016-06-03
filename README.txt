@@ -13,8 +13,8 @@ Supported Developing Platforms:
 A. Linux, FreeBSD, and Unix-like OS (__WXGTK__):
    a. GNU C++ 3.x/4.x:
       Required Libraries to compile:
-      1. wxWidgets-3.0.2 or higher with Unicode and IPC enabled
-      2. Boost-1.56.0 or higher(build Boost-Python)(1.60 is recommended)
+      1. wxWidgets-3.1.0 or higher with Unicode and IPC enabled
+      2. Boost-1.56.0 or higher(build Boost-Python)(1.61 is recommended)
 
       (install gtk2-devel gtext-devel automake rpm-build)
       copy wxwin.m4 to usr/share/acloXXX/ or install wxGTK-devel
@@ -23,11 +23,11 @@ B. MS Windows (__WXMSW__):
    a. MinGW32/GNU C++ 3.x (wxDevCpp):
       Required Libraries to compile:
       1. wxWidgets-3.1.0 or higher with Unicode and IPC enabled
-      2. Boost-1.56.0 or higher(build Boost-Python)(1.60 is recommended)
+      2. Boost-1.56.0 or higher(build Boost-Python)(1.61 is recommended)
    b. Visual C++ 7.1 (VS.Net 2005) or higher:
       Required Libraries to compile:
       1. wxWidgets-3.1.0 or higher with Unicode and IPC enabled
-      2. Boost-1.56.0 or higher(build Boost-Python)(1.60 is recommended)
+      2. Boost-1.56.0 or higher(build Boost-Python)(1.61 is recommended)
       3. Set WXWIN and BOOST to the root directory of your local ones
 
 P.S.: Please put the debug info(.pdb) under the App directory in case there was a 
@@ -43,12 +43,12 @@ P.S.: Please open a ticket for bug of MadEdit-Mod at
 MadEdit_Win2K is a build by VC++ 2005 express for Windows 2000.
 
 Example build under Linux
-Boost Python(1.60)
+Boost Python(1.61) add 'address-model=64' if build for 64 bit
 ./bjam --with-python include="${HOME}/madedit-mod/minipython/Include" python-debugging=off threading=multi variant=release link=static runtime-link=static stage
 wxWidgets(3.1.0)
 ./configure --enable-unicode --disable-shared --with-libpng=builtin --with-zlib=builtin --with-expat=builtin --with-gtk3=yes --with-libiconv=no
 MadEdit-Mod
-./configure --with-boost=${HOME}/boost_1_60_0 --with-wxdir=${HOME}/wxWidgets-3.1.0
+./configure --with-boost=${HOME}/boost_1_61_0 --with-wxdir=${HOME}/wxWidgets-3.1.0
 
 Syntax files, Locale files, Dictionaries and Settings:
 ---------------------------------------
@@ -100,10 +100,10 @@ Syntax files, Locale files, Dictionaries and Settings:
     Make sure you use Single Instance with -s, -x!!
 
 Known issues:
-The Macro recording function will save all your commands to one document which
+1. The Macro recording function will save all your commands to one document which
     means it will not record the "switching" between documents.
-Search in selection in column mode is not exact the selection highlighted.
-Regular expression which relies on characters before/after the matched string, 
+2. Search in selection in column mode is not exact the selection highlighted.
+3. Regular expression which relies on characters before/after the matched string, 
     Eg. (?<=.)\s(?=.), will has issue to be replaced one by one. It's tricky and
     NP++ has the same issue too.
 
@@ -129,6 +129,7 @@ Fix: 0.4.2.1 can not remember the word wrap setting #201
 Fix: The fix width in the Option menu can't Open #199
 Fix: Improve windows list code, fix a bug of inner-tab drag/reposition(wxAuiNoteBook)
 Fix: Assertion failure of FindInFilesDialog
+Upgrade boost to 1.61
 
 Mod v0.4.2.1
 1.New: Ctrl-A to select all items in the Window List dialog
