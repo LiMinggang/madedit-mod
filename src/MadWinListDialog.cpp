@@ -23,6 +23,7 @@ const long MadWinListDialog::ID_BUTTONSORTTABBYPATH = wxNewId();
 
 const long MadWinListDialog::COL_TABNAME = 0;
 const long MadWinListDialog::COL_PATH = 1;
+#define WINLIST_MIN_PATH_COL_WIDTH 80
 
 BEGIN_EVENT_TABLE(MadWinListDialog,wxDialog)
 	EVT_ACTIVATE( MadWinListDialog::MadWinListDialogActivate )
@@ -128,6 +129,12 @@ void MadWinListDialog::InitWindowListIterms()
 	    MadWindowsList->SetColumnWidth( 0, wxLIST_AUTOSIZE );
 		MadWindowsList->SetColumnWidth( 1, wxLIST_AUTOSIZE );
 	}
+
+	if(WINLIST_MIN_PATH_COL_WIDTH > MadWindowsList->GetColumnWidth(1))
+	{
+		MadWindowsList->SetColumnWidth( 1, WINLIST_MIN_PATH_COL_WIDTH );
+	}
+
 	MadWindowsList->Show();
 	GetSizer()->Fit( this );
 }

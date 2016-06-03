@@ -20,6 +20,8 @@ const long MadSaveQueryDialog::ID_BUTTONDSELECTALL = wxNewId();
 const long MadSaveQueryDialog::ID_BUTTONGOTO = wxNewId();
 //*)
 
+#define SAVEQUERY_MIN_PATH_COL_WIDTH 80
+
 BEGIN_EVENT_TABLE(MadSaveQueryDialog,wxDialog)
 	//(*EventTable(MadSaveQueryDialog)
 	//*)
@@ -122,6 +124,12 @@ void MadSaveQueryDialog::InitWindowListIterms()
 	    MadFileList->SetColumnWidth( 0, wxLIST_AUTOSIZE );
 		MadFileList->SetColumnWidth( 1, wxLIST_AUTOSIZE );
 	}
+
+	if(SAVEQUERY_MIN_PATH_COL_WIDTH > MadFileList->GetColumnWidth(1))
+	{
+		MadFileList->SetColumnWidth( 1, SAVEQUERY_MIN_PATH_COL_WIDTH );
+	}
+
 	MadFileList->Show();
 	GetSizer()->Fit( this );
 }

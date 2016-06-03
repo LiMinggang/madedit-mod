@@ -39,6 +39,7 @@ class MadSaveQueryDialog: public wxDialog
 		static const long ID_BUTTONDSELECTALL;
 		static const long ID_BUTTONGOTO;
 		//*)
+
 		MadEditFrame * m_MainFrame;
 
 	private:
