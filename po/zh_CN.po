@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.3.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-03 14:16+0800\n"
-"PO-Revision-Date: 2016-06-03 14:19+0800\n"
+"PO-Revision-Date: 2016-06-03 20:12+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit-mod@gmail.com>\n"
 "Language: zh_CN\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.8.1\n"
+"X-Generator: Poedit 1.8.8\n"
 
 #: wxstd.po.cpp:2
 msgid "Unicode 16 bit (UTF-16)"
@@ -1331,8 +1331,7 @@ msgid "Find next occurrence"
 msgstr "到字符串下一个出现的地方"
 
 #: ../src/MadEditFrame.cpp:1954 ../src/MadEditFrame.cpp:3003
-#: ../src/MadSearchReplaceDialog.cpp:553
-#: ../src/MadSearchReplaceDialog.cpp:1140
+#: ../src/MadSearchReplaceDialog.cpp:553 ../src/MadSearchReplaceDialog.cpp:1140
 msgid "Find Next"
 msgstr "查找下一个"
 
@@ -2560,11 +2559,10 @@ msgstr "预先定义的类型"
 msgid "<- Add Custom File Type"
 msgstr "<- 加入自定义文件类型"
 
-#: ../src/MadFileAssociationDialog.cpp:372
-#: ../src/MadHighlightingDialog.cpp:270 ../src/MadPurgeHistoryDialog.cpp:96
-#: ../src/MadOptionsDialog.cpp:968 ../src/MadConvEncDialog.cpp:71
-#: ../src/MadSaveQueryDialog.cpp:46 ../src/MadWinListDialog.cpp:62
-#: ../src/MadAboutDialog.cpp:90
+#: ../src/MadFileAssociationDialog.cpp:372 ../src/MadHighlightingDialog.cpp:270
+#: ../src/MadPurgeHistoryDialog.cpp:96 ../src/MadOptionsDialog.cpp:968
+#: ../src/MadConvEncDialog.cpp:71 ../src/MadSaveQueryDialog.cpp:46
+#: ../src/MadWinListDialog.cpp:62 ../src/MadAboutDialog.cpp:90
 msgid "&OK"
 msgstr "确定(&O)"
 
@@ -2875,8 +2873,7 @@ msgstr ""
 msgid "C&ount"
 msgstr "计算次数(&O)"
 
-#: ../src/MadSearchReplaceDialog.cpp:222
-#: ../src/MadSearchReplaceDialog.cpp:1282
+#: ../src/MadSearchReplaceDialog.cpp:222 ../src/MadSearchReplaceDialog.cpp:1282
 msgid "R&eplace >>"
 msgstr "替换(&E) >>"
 
@@ -2894,13 +2891,11 @@ msgstr "找不到匹配的字符串"
 msgid "Cannot find the matched string."
 msgstr "找不到符合的字符串。"
 
-#: ../src/MadSearchReplaceDialog.cpp:550
-#: ../src/MadSearchReplaceDialog.cpp:1137
+#: ../src/MadSearchReplaceDialog.cpp:550 ../src/MadSearchReplaceDialog.cpp:1137
 msgid "Do you want to find from begin of selection?"
 msgstr "要从所选取数据的开头重新找起吗？"
 
-#: ../src/MadSearchReplaceDialog.cpp:551
-#: ../src/MadSearchReplaceDialog.cpp:1138
+#: ../src/MadSearchReplaceDialog.cpp:551 ../src/MadSearchReplaceDialog.cpp:1138
 msgid "Do you want to find from begin of file?"
 msgstr "要从文件的开头重新找起吗？"
 
@@ -3759,7 +3754,7 @@ msgstr "保存全部已经改动的文件"
 
 #: ../src/MadSaveQueryDialog.cpp:48
 msgid "Save &None"
-msgstr "不保存文件(&N)"
+msgstr "不保存(&N)"
 
 #: ../src/MadSaveQueryDialog.cpp:55
 msgid "Dselect &All"
