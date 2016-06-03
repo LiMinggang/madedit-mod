@@ -807,6 +807,7 @@ public: // basic functions
 	// all are zero-based
 	void GetCaretPosition( int &line, int &subrow, wxFileOffset &column );
 	wxFileOffset GetCaretPosition() { return m_CaretPos.pos; }
+	wxFileOffset GetLastSavePointCaretPosition();
 
 	wxString GetFileName() { return m_Lines->m_Name; }
 	wxFileOffset GetFileSize() { return m_Lines->m_Size; }

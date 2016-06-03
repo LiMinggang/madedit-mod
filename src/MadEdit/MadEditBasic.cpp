@@ -1160,6 +1160,12 @@ void MadEdit::GetCaretPosition( int &line, int &subrow, wxFileOffset &column )
 		}
 }
 
+wxFileOffset MadEdit::GetLastSavePointCaretPosition()
+{
+	if(m_SavePoint == NULL) return wxFileOffset(-1);
+
+	return m_SavePoint->m_CaretPosAfter;
+}
 wxFileOffset MadEdit::GetSelectionSize()
 {
 	if( !m_Selection ) return 0;

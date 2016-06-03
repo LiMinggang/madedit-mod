@@ -535,6 +535,12 @@ public:
 		if( !name.IsEmpty() ) {
 			wxString fontname;
 			wxFileOffset pos = madedit->GetCaretPosition();
+			if(madedit->IsModified())
+			{
+				wxFileOffset bkpos = pos;
+				pos = madedit->GetLastSavePointCaretPosition();
+				if(-1 == pos) pos = bkpos;
+			}
 			int lspercent = (int)madedit->GetLineSpacing();
 			int wrapmode = madedit->GetWordWrapMode(); 
 			int editmode = madedit->GetEditMode(); /*emTextMode, emColumnMode, emHexMode*/
