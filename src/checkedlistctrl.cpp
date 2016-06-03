@@ -20,7 +20,7 @@
 // includes
 #include "checkedlistctrl.h"
 #include <wx/icon.h>
-
+#include <wx/settings.h>
 
 #if wxUSE_CHECKEDLISTCTRL
 
