@@ -192,6 +192,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\..\src\checkedlistctrl.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\EmbeddedPython.cpp"
 				>
 			</File>
@@ -249,6 +253,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\MadRecentList.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\MadSaveQueryDialog.cpp"
 				>
 			</File>
 			<File
@@ -550,6 +558,10 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath="..\..\src\checkedlistctrl.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\MadAboutDialog.h"
 				>
 			</File>
@@ -595,6 +607,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\MadRecentList.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\MadSaveQueryDialog.h"
 				>
 			</File>
 			<File
