@@ -212,6 +212,7 @@
     <ClInclude Include="..\..\spellchecker\SpellCheckEngineOption.h" />
     <ClInclude Include="..\..\spellchecker\SpellCheckerManager.h" />
     <ClInclude Include="..\..\spellchecker\SpellCheckUserInterface.h" />
+    <ClInclude Include="..\..\src\checkedlistctrl.h" />
     <ClInclude Include="..\..\src\MadAboutDialog.h" />
     <ClInclude Include="..\..\src\MadCommand.h" />
     <ClInclude Include="..\..\src\MadConvEncDialog.h" />
@@ -239,6 +240,7 @@
     <ClInclude Include="..\..\src\MadPurgeHistoryDialog.h" />
     <ClInclude Include="..\..\src\MadPython.hpp" />
     <ClInclude Include="..\..\src\MadRecentList.h" />
+    <ClInclude Include="..\..\src\MadSaveQueryDialog.h" />
     <ClInclude Include="..\..\src\MadSearchReplaceDialog.h" />
     <ClInclude Include="..\..\src\MadSortDialog.h" />
     <ClInclude Include="..\..\src\MadUtils.h" />
@@ -292,6 +294,7 @@
     <ClCompile Include="..\..\spellchecker\SpellCheckEngineOption.cpp" />
     <ClCompile Include="..\..\spellchecker\SpellCheckerManager.cpp" />
     <ClCompile Include="..\..\spellchecker\SpellCheckUserInterface.cpp" />
+    <ClCompile Include="..\..\src\checkedlistctrl.cpp" />
     <ClCompile Include="..\..\src\EmbeddedPython.cpp" />
     <ClCompile Include="..\..\src\MadAboutDialog.cpp" />
     <ClCompile Include="..\..\src\MadConvEncDialog.cpp" />
@@ -321,6 +324,7 @@
     <ClCompile Include="..\..\src\MadPrintout.cpp" />
     <ClCompile Include="..\..\src\MadPurgeHistoryDialog.cpp" />
     <ClCompile Include="..\..\src\MadRecentList.cpp" />
+    <ClCompile Include="..\..\src\MadSaveQueryDialog.cpp" />
     <ClCompile Include="..\..\src\MadSearchReplaceDialog.cpp" />
     <ClCompile Include="..\..\src\MadSortDialog.cpp" />
     <ClCompile Include="..\..\src\MadUtils.cpp" />

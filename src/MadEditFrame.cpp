@@ -4242,12 +4242,13 @@ bool MadEditFrame::QueryCloseAllFiles()
 	// From now on, won't ask user
 	MadEdit *madedit = NULL;
 	wxString fname;
-	std::set< long >::iterator it = selectedItems.find(selid);
+	std::set< long >::iterator it;
 	madedit = ( MadEdit* )m_Notebook->GetPage( selid );
 
-	if(it != selectedItems.end())
+	if( madedit->IsModified() )
 	{
-		if( madedit->IsModified() )
+		it = selectedItems.find(selid);
+		if(it != selectedItems.end())
 		{
 			fname = m_Notebook->GetPageText( selid );
 
@@ -4256,8 +4257,9 @@ bool MadEditFrame::QueryCloseAllFiles()
 
 			if( madedit->Save( false, fname, false ) == wxID_CANCEL )
 			{ return false; }
+
+			selectedItems.erase(it);
 		}
-		selectedItems.erase(it);
 	}
 
 	g_FileCaretPosManager.Add( madedit );
@@ -4270,10 +4272,10 @@ bool MadEditFrame::QueryCloseAllFiles()
 		{
 			madedit = ( MadEdit* )m_Notebook->GetPage( id );
 
-			it = selectedItems.find(id);
-			if(it != selectedItems.end())
+			if( madedit->IsModified() )
 			{
-				if( madedit->IsModified() )
+				it = selectedItems.find(id);
+				if(it != selectedItems.end())
 				{
 					m_Notebook->SetSelection( id );
 					MadEdit *cme = ( MadEdit* )m_Notebook->GetPage( m_Notebook->GetSelection() );
@@ -4296,8 +4298,8 @@ bool MadEditFrame::QueryCloseAllFiles()
 					{ return false; }
 
 					sid = id;
+					selectedItems.erase(it);
 				}
-				selectedItems.erase(it);
 			}
 
 			g_FileCaretPosManager.Add( madedit );

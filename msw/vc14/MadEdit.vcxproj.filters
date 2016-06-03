@@ -228,6 +228,12 @@
     <ClInclude Include="..\..\src\MadWinListDialog.h">
       <Filter>Header files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\checkedlistctrl.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadSaveQueryDialog.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\MadAboutDialog.cpp">
@@ -444,6 +450,12 @@
       <Filter>Source files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\MadWinListDialog.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\checkedlistctrl.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadSaveQueryDialog.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
   </ItemGroup>
