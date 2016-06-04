@@ -4,6 +4,7 @@
 //(*Headers(MadSaveQueryDialog)
 #include <wx/sizer.h>
 #include "checkedlistctrl.h"
+#include <wx/checkbox.h>
 #include <wx/button.h>
 #include <wx/dialog.h>
 //*)
@@ -26,6 +27,7 @@ class MadSaveQueryDialog: public wxDialog
 		wxButton* ButtonOK;
 		wxButton* ButtonGoTo;
 		wxButton* ButtonCancel;
+		wxCheckBox* CheckBoxConfirm;
 		wxButton* ButtonSaveNone;
 		//*)
         void GetCheckedItemsData(std::set< long > & selectedItems);
@@ -35,6 +37,7 @@ class MadSaveQueryDialog: public wxDialog
 		//(*Identifiers(MadSaveQueryDialog)
 		static const long ID_LISTCTRLMADFILELIST;
 		static const long ID_BUTTONSAVENONE;
+		static const long ID_CHECKBOXCONFIRM;
 		static const long ID_BUTTONSELECTALL;
 		static const long ID_BUTTONDSELECTALL;
 		static const long ID_BUTTONGOTO;

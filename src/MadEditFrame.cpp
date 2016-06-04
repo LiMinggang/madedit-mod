@@ -4234,6 +4234,7 @@ bool MadEditFrame::QueryCloseAllFiles()
 	if( selid == -1 ) { return true; }
 
 	std::set< long > selectedItems;
+	bool ask = false;
 	MadSaveQueryDialog fsqdlg(this);
 	if(fsqdlg.MadFileList->GetItemCount( ) > 0)
 	{
@@ -4241,8 +4242,10 @@ bool MadEditFrame::QueryCloseAllFiles()
 			return false;
 
 		fsqdlg.GetCheckedItemsData(selectedItems);
-		if(selectedItems.empty())
-			return true; // Discard all
+		if(!selectedItems.empty())
+		{
+			ask = fsqdlg.CheckBoxConfirm->GetValue();
+		}
 	}
 
 	// From now on, won't ask user
@@ -4261,7 +4264,7 @@ bool MadEditFrame::QueryCloseAllFiles()
 			if( fname[fname.Len() - 1] == wxT( '*' ) )
 			{ fname.Truncate( fname.Len() - 1 ); }
 
-			if( madedit->Save( false, fname, false ) == wxID_CANCEL )
+			if( madedit->Save( ask, fname, false ) == wxID_CANCEL )
 			{ return false; }
 
 			selectedItems.erase(it);
@@ -4300,7 +4303,7 @@ bool MadEditFrame::QueryCloseAllFiles()
 					if( fname[fname.Len() - 1] == wxT( '*' ) )
 					{ fname.Truncate( fname.Len() - 1 ); }
 
-					if( madedit->Save( false, fname, false ) == wxID_CANCEL )
+					if( madedit->Save( ask, fname, false ) == wxID_CANCEL )
 					{ return false; }
 
 					sid = id;

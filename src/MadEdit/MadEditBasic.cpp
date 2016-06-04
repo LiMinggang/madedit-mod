@@ -2062,6 +2062,13 @@ void MadEdit::Undo()
 		return;
 	}
 
+	if( undo == m_SavePoint )
+	{
+		wxString msg( _( "You are about to undo changes that have already been saved to disk.\n\nDo you want to continue?" ) );
+		if( wxCANCEL == MadMessageBox( msg, wxT( "MadEdit-Mod" ), wxOK | wxCANCEL | wxICON_QUESTION ) )
+			return;
+	}
+
 	SetNeedSync();
 	size_t oldrows = m_Lines->m_RowCount;
 	size_t oldlines = m_Lines->m_LineCount;
