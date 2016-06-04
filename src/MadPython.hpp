@@ -351,6 +351,31 @@ bool FromCmdToString( wxString &cmdStr, long madCmd ) {
 	return true;
 }
 
+enum MadMsgBoxStyle {
+	MAD_YES 					 = wxYES,
+	MAD_OK						 = wxOK,
+	MAD_NO						 = wxNO,
+	MAD_CANCEL					 = wxCANCEL,
+	MAD_APPLY					 = wxAPPLY,
+	MAD_CLOSE					 = wxCLOSE,
+	MAD_NO_DEFAULT				 = wxNO_DEFAULT,
+	MAD_CANCEL_DEFAULT			 = wxCANCEL_DEFAULT,
+	MAD_ICON_WARNING_EXCLAMATION = wxICON_WARNING,
+	MAD_ICON_ERROR_HAND_STOP	 = wxICON_ERROR,
+	MAD_ICON_QUESTION			 = wxICON_QUESTION,
+	MAD_ICON_INFORMATION		 = wxICON_INFORMATION,
+	MAD_ICON_NONE				 = wxICON_NONE,
+	MAD_CENTRE                   = wxCENTRE,
+};
+
+enum MadMsgBoxRet {
+	MADRET_OK  = wxID_OK,
+	MADRET_CANCEL = wxID_CANCEL,
+	MADRET_APPLY = wxID_APPLY,
+	MADRET_YES  = wxID_YES,
+	MADRET_NO = wxID_NO,
+};
+
 namespace mad_py = ::boost::python;
 namespace mad_python {
 	class PyMadEdit {
@@ -1765,7 +1790,7 @@ namespace mad_python {
 		return MadMessageBox( wxMessage, wxCaption, style );
 	}
 
-	const std::string InputDlgBox(const std::string& message, const std::string& caption = "Input Text")
+	const std::string InputBox(const std::string& message, const std::string& caption = "Input Text")
 	{
 		wxString wxMessage( message.c_str(), *wxConvCurrent ), wxCaption( caption.c_str(), *wxConvCurrent );
 		wxString input = wxGetTextFromUser( wxMessage, wxCaption );
@@ -1791,7 +1816,7 @@ BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( GetLine_member_overloads, GetLine, 1, 3 
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( GetText_member_overloads, GetText, 0, 1 )
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( SetSelection_member_overloads, SetSelection, 2, 3 )
 
-BOOST_PYTHON_FUNCTION_OVERLOADS( InputDlgBox_overloads, mad_python::InputDlgBox, 1, 2 )
+BOOST_PYTHON_FUNCTION_OVERLOADS( InputBox_overloads, mad_python::InputBox, 1, 2 )
 BOOST_PYTHON_FUNCTION_OVERLOADS( MsgBox_overloads, mad_python::MsgBox, 1, 3 )
 
 BOOST_PYTHON_MODULE( madpython ) {
@@ -2102,7 +2127,30 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.value( "Left", naLeft )
 	.value( "Right", naRight )
 	;
+	enum_<MadMsgBoxStyle>( "MadDlgStyle" )
+	.value( "YES",						MAD_YES 				  )
+	.value( "OK",						MAD_OK					  )
+	.value( "NO",						MAD_NO					  )
+	.value( "CANCEL",					MAD_CANCEL				  )
+	.value( "APPLY",					MAD_APPLY				  )
+	.value( "CLOSE",					MAD_CLOSE				  )
+	.value( "NO_DEFAULT",				MAD_NO_DEFAULT			   )/* only valid with wxYES_NO */ 
+	.value( "CANCEL_DEFAULT",			MAD_CANCEL_DEFAULT		   )/* only valid with wxCANCEL */ 
+	.value( "ICON_WARNING_EXCLAMATION", MAD_ICON_WARNING_EXCLAMATION)
+	.value( "ICON_ERROR_HAND_STOP", 	MAD_ICON_ERROR_HAND_STOP  )
+	.value( "ICON_QUESTION",			MAD_ICON_QUESTION		  )
+	.value( "ICON_INFORMATION", 		MAD_ICON_INFORMATION	  )
+	.value( "ICON_NONE",				MAD_ICON_NONE	)
+	.value( "CENTRE",				    MAD_CENTRE	)
+	;
+	enum_<MadMsgBoxRet>( "MadMsgBoxRet" )
+	.value( "OK", MADRET_OK )
+	.value( "CANCEL", MADRET_CANCEL )
+	.value( "APPLY", MADRET_APPLY )
+	.value( "YES", MADRET_YES )
+	.value( "NO", MADRET_NO )
+	;
 	def( "MsgBox", &MsgBox, MsgBox_overloads( args( "message", "caption", "style" ), "Doc string" ) );
-	def( "InputDlgBox", &InputDlgBox, InputDlgBox_overloads( args( "message", "caption" ), "Doc string" ) );
+	def( "InputBox", &InputBox, InputBox_overloads( args( "message", "caption" ), "Doc string" ) );
 }
 #endif //__MADPYTHON__

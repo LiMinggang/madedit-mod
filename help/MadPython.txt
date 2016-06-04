@@ -282,7 +282,7 @@ void SetColumnSelection(int startlineid, int startxpos, int hlines, int wlines)
 void SelectWholeLine()
 int GetIndentCountByPos( long endpos )
 int MsgBox(const std::string& message, const std::string& caption = "Message", long style = wxOK | wxCENTRE)
-const std::string InputDlgBox(const std::string& message, const std::string& caption = "Input Text")
+const std::string InputBox(const std::string& message, const std::string& caption = "Input Text")
 
 MadEditCommand
 ====
