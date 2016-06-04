@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.3.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-04 11:05+0800\n"
-"PO-Revision-Date: 2016-06-04 11:07+0800\n"
+"PO-Revision-Date: 2016-06-04 19:56+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit-mod@gmail.com>\n"
 "Language: zh_CN\n"
@@ -3792,7 +3792,7 @@ msgstr "关闭窗口(&C)"
 
 #: ../src/MadWinListDialog.cpp:58
 msgid "Sort Tab(&Name)"
-msgstr "按名字排序标签页(&N)"
+msgstr "按名字排序(&N)"
 
 #: ../src/MadWinListDialog.cpp:60
 msgid "Sort Tab(&Path)"

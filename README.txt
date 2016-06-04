@@ -130,6 +130,7 @@ Fix: 0.4.2.1 can not remember the word wrap setting #201
 Fix: The fix width in the Option menu can't Open #199
 Fix: Improve windows list code, fix a bug of inner-tab drag/reposition(wxAuiNoteBook)
 Fix: Assertion failure of FindInFilesDialog
+Fix: Assertion failure of MadMacroDlg
 Upgrade boost to 1.61
 
 Mod v0.4.2.1
