@@ -127,17 +127,13 @@ void MadMacroDlg::OnWxButtonRunClick(wxCommandEvent& event)
 				{
 					wxStreamToTextRedirector redirector((wxTextCtrl	*)WxMemoOutput);
 					g_MainFrame->SetMacroRunning();
-					//g_ActiveMadEdit->CaptureMouse();
 					g_EmbeddedPython->exec(std::string(pystr.mb_str()));
-					//g_ActiveMadEdit->ReleaseMouse();
 					g_MainFrame->SetMacroStopped();
 				}
 				else
 				{
 					g_MainFrame->SetMacroRunning();
-					//g_ActiveMadEdit->CaptureMouse();
 					g_EmbeddedPython->exec(std::string(pystr.mb_str()));
-					//g_ActiveMadEdit->ReleaseMouse();
 					g_MainFrame->SetMacroStopped();				   
 				}
 			}
