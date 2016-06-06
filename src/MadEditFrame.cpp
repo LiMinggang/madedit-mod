@@ -4245,7 +4245,7 @@ bool MadEditFrame::QueryCloseAllFiles()
 		if(wxID_CANCEL == fsqdlg.ShowModal())
 			return false;
 
-		fsqdlg.GetCheckedItemsData(selectedItems);
+		fsqdlg.GetCheckedItemsData(selectedItems, true);
 		if(!selectedItems.empty())
 		{
 			ask = fsqdlg.CheckBoxConfirm->GetValue();
@@ -4253,6 +4253,7 @@ bool MadEditFrame::QueryCloseAllFiles()
 	}
 	else
 	{
+		fsqdlg.GetCheckedItemsData(selectedItems, false);
 		ask = true;
 	}
 

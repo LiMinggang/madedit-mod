@@ -30,7 +30,7 @@ class MadSaveQueryDialog: public wxDialog
 		wxCheckBox* CheckBoxConfirm;
 		wxButton* ButtonSaveNone;
 		//*)
-        void GetCheckedItemsData(std::set< long > & selectedItems);
+        void GetCheckedItemsData(std::set< long > & selectedItems, bool checked);
 
 	protected:
 

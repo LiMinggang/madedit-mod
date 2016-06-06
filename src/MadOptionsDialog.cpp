@@ -186,6 +186,7 @@ BEGIN_EVENT_TABLE( MadOptionsDialog, wxDialog )
 	EVT_CHECKBOX( ID_WXCHECKBOXMOUSESELECTTOCOPY, MadOptionsDialog::OnMouseAutoCopyClicked )
 	EVT_BUTTON( ID_WXBUTTONDATETIME, MadOptionsDialog::WxButtonDateTimeClick )
 
+	EVT_CHECKBOX( ID_WXCHECKBOXAUTOCOMPLETEPAIR, MadOptionsDialog::OnAutoCompletePairClicked )
 	EVT_RADIOBOX( ID_WXRADIOBOXBRACKETSTYLE, MadOptionsDialog::OnRadioBoxBracketStyleClick )
 	EVT_CHECKBOX( ID_WXCHECKBREAKLINES, MadOptionsDialog::OnFormattingBreakLinesClick )
 	EVT_CHECKBOX( ID_WXCHECKBOXENABLEAUTOSAVE, MadOptionsDialog::OnEnableAutoSaveClick )
@@ -342,7 +343,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxBoxSizer51 = new wxBoxSizer( wxHORIZONTAL );
 	WxBoxSizer7->Add( WxBoxSizer51, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	WxBoxSizer51->Add(10,0,0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
-	WxStaticText30 = new wxStaticText( WxNoteBookPage1, ID_WXSTATICTEXT30, _( "Timeout(M)" ), wxPoint( 125, 2 ), wxSize( 130, 20 ), wxST_NO_AUTORESIZE, wxT( "WxStaticText30" ) );
+	WxStaticText30 = new wxStaticText( WxNoteBookPage1, ID_WXSTATICTEXT30, _( "Timeout(M)" ), wxPoint( 125, 2 ), wxSize( 100, 20 ), wxST_NO_AUTORESIZE, wxT( "WxStaticText30" ) );
 	WxBoxSizer51->Add( WxStaticText30, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 5 );
 	WxEditAutoSaveTimeout = new wxTextCtrl( WxNoteBookPage1, ID_WXEDITMAXSIZETOLOAD, wxT( "10" ), wxPoint( 190, 2 ), wxSize( 50, 17 ), 0, wxTextValidator( wxFILTER_NUMERIC ), wxT( "WxEditAutoSaveTimeout" ) );
 	WxBoxSizer51->Add( WxEditAutoSaveTimeout, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
@@ -409,12 +410,12 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxBoxSizer12->Add( WxCheckBoxAutoCompletePair, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
 	SET_CONTROLPARENT( WxCheckBoxAutoCompletePair );
 	WxBoxSizer52 = new wxBoxSizer(wxHORIZONTAL);
-	WxBoxSizer52->Add(0,0,0, wxALL, 2);
-	WxCheckBoxInsertPairForSelection = new wxCheckBox(this, ID_WXCHECKBOXINSERTPAIRFORSELECTION, _("Insert pair instead of replace selection"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("WxCheckBoxInsertPairForSelection"));
+	WxBoxSizer52->Add(10,0,0, wxALL, 0);
+	WxCheckBoxInsertPairForSelection = new wxCheckBox(WxNoteBookPage2, ID_WXCHECKBOXINSERTPAIRFORSELECTION, _("Insert pair instead of replace selection"), wxPoint( 15, 2 ), wxSize( 260, 20 ), 0, wxDefaultValidator, _T("WxCheckBoxInsertPairForSelection"));
 	WxCheckBoxInsertPairForSelection->SetValue(false);
-	SET_CONTROLPARENT( WxCheckBoxInsertPairForSelection );
 	WxBoxSizer52->Add(WxCheckBoxInsertPairForSelection, 0, wxALL|wxEXPAND, 2);
-	WxBoxSizer12->Add(WxBoxSizer52, 0, wxALL|wxEXPAND, 0);
+	SET_CONTROLPARENT( WxCheckBoxInsertPairForSelection );
+	WxBoxSizer12->Add(WxBoxSizer52, 0,  wxALIGN_LEFT | wxALL|wxEXPAND, 0);
 	WxBoxSizer28 = new wxBoxSizer( wxHORIZONTAL );
 	WxBoxSizer12->Add( WxBoxSizer28, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 0 );
 	WxCheckBoxMouseSelectToCopy = new wxCheckBox( WxNoteBookPage2, ID_WXCHECKBOXMOUSESELECTTOCOPY, _( "Auto copy the mouse-selected text to clipboard" ), wxPoint( 2, 2 ), wxSize( 260, 20 ), 0, wxDefaultValidator, wxT( "WxCheckBoxMouseSelectToCopy" ) );
@@ -1945,6 +1946,11 @@ void MadOptionsDialog::OnSelectDictionary( wxCommandEvent& event )
 void MadOptionsDialog::OnMouseAutoCopyClicked( wxCommandEvent& event )
 {
 	WxCheckBoxCtrlWithMouseToSelect->Enable( WxCheckBoxMouseSelectToCopy->GetValue() );
+}
+
+void MadOptionsDialog::OnAutoCompletePairClicked( wxCommandEvent& event )
+{
+	WxCheckBoxInsertPairForSelection->Enable( WxCheckBoxAutoCompletePair->GetValue() );
 }
 
 void MadOptionsDialog::OnRadioBoxBracketStyleClick( wxCommandEvent& event )

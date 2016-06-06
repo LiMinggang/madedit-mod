@@ -237,7 +237,7 @@ long wxCheckedListCtrl::InsertItem(wxListItem &info)
 	} else {
 
 		// we must shift all following items
-		for (int i=itemcount; i > info.m_itemId; i++)
+		for (int i=itemcount; i > info.m_itemId; ++i)
 			m_stateList[i] = m_stateList[i-1];
 		m_stateList[info.m_itemId] = additionalstate;
 	}
@@ -320,13 +320,13 @@ void wxCheckedListCtrl::Enable(long item, bool enable)
 
 void wxCheckedListCtrl::EnableAll(bool enable)
 {
-	for (int i=0; i < GetItemCount(); i++)
+	for (int i=0; i < GetItemCount(); ++i)
 		Enable(i, enable);
 }
 
 void wxCheckedListCtrl::CheckAll(bool check)
 {
-	for (int i=0; i < GetItemCount(); i++)
+	for (int i=0; i < GetItemCount(); ++i)
 		Check(i, check);
 }
 
@@ -343,9 +343,9 @@ bool wxCheckedListCtrl::DeleteItem(long item)
 int wxCheckedListCtrl::GetCheckedItemCount() const
 {
 	int res = 0;
-	for (int i=0; i<GetItemCount(); i++)
+	for (int i=0; i<GetItemCount(); ++i)
 		if (IsChecked(i))
-			res++;
+			++res;
 
 	return res;
 }
