@@ -126,6 +126,8 @@ New: Insert to the top instead of append to the bottom of search results, expand
 New: Reset tool bars position
 New: Add InputDlgBox, MsgBox to MadPython so that user can get input or output some message
 New: Confirm Undo at the first time if the changes had been saved to disk
+New: Add Scripts list to right click menu
+New: Remove file from recentlist if could not be opened
 Fix: 0.4.2.1 can not remember the word wrap setting #201
 Fix: The fix width in the Option menu can't Open #199
 Fix: Improve windows list code, fix a bug of inner-tab drag/reposition(wxAuiNoteBook)

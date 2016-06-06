@@ -2717,6 +2717,8 @@ void MadEditFrame::CreateGUIControls( void )
 	g_Menu_EditPop->AppendSubMenu( g_Menu_EditSubAdv, _( "Ad&vanced" ) );
 	g_Menu_EditPop->AppendSeparator();
 	g_Menu_EditPop->AppendSubMenu( g_Menu_EditSubSort, _( "&Sort" ) );
+	g_Menu_EditPop->AppendSeparator();
+	g_Menu_EditPop->AppendSubMenu( g_Menu_MadMacro_Scripts, _( "Run Scripts" ) );
 #if OUTPUT_MENU //Output all accel key to text file
 
 	if( MenuTable.IsOpened() )
@@ -3836,7 +3838,7 @@ int MadEditFrame::OpenedFileCount()
 	return ( int )m_Notebook->GetPageCount();
 }
 
-void MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeSelection /*= true*/ )
+bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeSelection /*= true*/ )
 {
 	wxString title, filename( fname ), linenumstr;
 	long linenum = -1;
@@ -3930,14 +3932,14 @@ void MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 					m_RecentFiles->AddFileToHistory( filename ); // bring the filename to top of list
 					g_ActiveMadEdit->SetFocus();
 				}
-				return;
+				return true;
 			}
 		}
 
 		if( MadDirExists( filename ) != 0 )
 		{
 			wxLogError( wxString( _( "This is a Directory:" ) ) + wxT( "\n\n" ) + filename );
-			return;
+			return false;
 		}
 
 		int utf8test = MadFileNameIsUTF8( filename );
@@ -3946,7 +3948,7 @@ void MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 		if( mustExist && !exists )
 		{
 			wxLogError( wxString( _( "This file does not exist:" ) ) + wxT( "\n\n" ) + filename );
-			return;
+			return false;
 		}
 
 		wxFileName fn( filename );
@@ -3956,7 +3958,7 @@ void MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 		if( MadDirExists( fn.GetPath( wxPATH_GET_VOLUME ) ) == 0 )
 		{
 			wxLogError( wxString( _( "The Parent Directory of this file does not exist:" ) ) + wxT( "\n\n" ) + filename );
-			return;
+			return false;
 		}
 
 		// test access mode
@@ -3965,7 +3967,7 @@ void MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 		if( exists && wxFile::Access( filename.c_str(), wxFile::read ) == false )
 		{
 			wxLogError( wxString( _( "Cannot access this file:" ) ) + wxT( "\n\n" ) + filename );
-			return;
+			return false;
 		}
 	}
 
@@ -4081,6 +4083,8 @@ void MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 
 	if( linenum != -1 )
 	{ g_ActiveMadEdit->GoToLine( linenum ); }
+
+	return true;
 }
 
 void MadEditFrame::RunScriptWithFile( const wxString &filename, const wxString &script, bool mustExist, bool closeafterdone, bool ignorereadonly, bool activeFile )
@@ -4234,7 +4238,7 @@ bool MadEditFrame::QueryCloseAllFiles()
 	std::set< long > selectedItems;
 	bool ask = false;
 	MadSaveQueryDialog fsqdlg(this);
-	if(fsqdlg.MadFileList->GetItemCount( ) > 0)
+	if(fsqdlg.MadFileList->GetItemCount( ) > 1)
 	{
 		if(wxID_CANCEL == fsqdlg.ShowModal())
 			return false;
@@ -4245,8 +4249,12 @@ bool MadEditFrame::QueryCloseAllFiles()
 			ask = fsqdlg.CheckBoxConfirm->GetValue();
 		}
 	}
+	else
+	{
+		ask = true;
+	}
 
-	// From now on, won't ask user
+	// From now on, won't ask user if ItemCount > 1 && ask = false
 	MadEdit *madedit = NULL;
 	wxString fname;
 	std::set< long >::iterator it;
@@ -5391,7 +5399,10 @@ void MadEditFrame::OnFileRecentFile( wxCommandEvent& event )
 
 	if( !file.IsEmpty() )
 	{
-		OpenFile( file, true );
+		if(!OpenFile( file, true ))
+		{
+			m_RecentFiles->RemoveFileFromHistory(idx);
+		}
 	}
 }
 

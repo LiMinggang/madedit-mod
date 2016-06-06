@@ -420,7 +420,7 @@ private:
 	bool m_PageClosing; // prevent from reentry of CloseFile(), OnNotebookPageClosing()
 public:
 	int OpenedFileCount();
-	void OpenFile( const wxString &filename, bool mustExist, bool changeSelection = true ); // if filename is empty, open a new file
+	bool OpenFile( const wxString &filename, bool mustExist, bool changeSelection = true ); // if filename is empty, open a new file
 	void RunScriptWithFile( const wxString &filename, const wxString &script, bool mustExist, bool closeafterdone, bool ignorereadonly, bool activeFile );
 	void CloseFile( long pageId );
 	void CloseAllFiles( bool force );
