@@ -408,6 +408,13 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxCheckBoxAutoCompletePair = new wxCheckBox( WxNoteBookPage2, ID_WXCHECKBOXAUTOCOMPLETEPAIR, _( "Auto complete character pair" ), wxPoint( 24, 50 ), wxSize( 480, 20 ), 0, wxDefaultValidator, wxT( "WxCheckBoxAutoCompletePair" ) );
 	WxBoxSizer12->Add( WxCheckBoxAutoCompletePair, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
 	SET_CONTROLPARENT( WxCheckBoxAutoCompletePair );
+	WxBoxSizer52 = new wxBoxSizer(wxHORIZONTAL);
+	WxBoxSizer52->Add(0,0,0, wxALL, 2);
+	WxCheckBoxInsertPairForSelection = new wxCheckBox(this, ID_WXCHECKBOXINSERTPAIRFORSELECTION, _("Insert pair instead of replace selection"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("WxCheckBoxInsertPairForSelection"));
+	WxCheckBoxInsertPairForSelection->SetValue(false);
+	SET_CONTROLPARENT( WxCheckBoxInsertPairForSelection );
+	WxBoxSizer52->Add(WxCheckBoxInsertPairForSelection, 0, wxALL|wxEXPAND, 2);
+	WxBoxSizer12->Add(WxBoxSizer52, 0, wxALL|wxEXPAND, 0);
 	WxBoxSizer28 = new wxBoxSizer( wxHORIZONTAL );
 	WxBoxSizer12->Add( WxBoxSizer28, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 0 );
 	WxCheckBoxMouseSelectToCopy = new wxCheckBox( WxNoteBookPage2, ID_WXCHECKBOXMOUSESELECTTOCOPY, _( "Auto copy the mouse-selected text to clipboard" ), wxPoint( 2, 2 ), wxSize( 260, 20 ), 0, wxDefaultValidator, wxT( "WxCheckBoxMouseSelectToCopy" ) );
@@ -1298,6 +1305,9 @@ void MadOptionsDialog::LoadOptions( void )
 	WxCheckBoxAutoIndent->SetValue( bb );
 	cfg->Read( wxT( "AutoCompletePair" ), &bb );
 	WxCheckBoxAutoCompletePair->SetValue( bb );
+	WxCheckBoxInsertPairForSelection->Enable(bb);
+	cfg->Read( wxT( "InsertPairForSelction" ), &bb );
+	WxCheckBoxInsertPairForSelection->SetValue( bb );
 	cfg->Read( wxT( "MouseSelectToCopy" ), &bb );
 	WxCheckBoxMouseSelectToCopy->SetValue( bb );
 	WxCheckBoxCtrlWithMouseToSelect->Enable( bb );

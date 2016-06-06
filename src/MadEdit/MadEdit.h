@@ -403,7 +403,7 @@ private:
 	int             m_LeftBrace_rowid, m_RightBrace_rowid;
 	BracePairIndex  m_LeftBrace, m_RightBrace;
 
-	bool            m_AutoCompletePair;
+	bool            m_AutoCompletePair, m_InsertPairForSelection;
 	ucs4_t          m_AutoCompleteRightChar;
 	wxFileOffset    m_AutoCompletePos;
 

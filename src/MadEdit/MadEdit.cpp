@@ -885,6 +885,7 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_MarkActiveLine    = m_Config->ReadBool( wxT( "MarkActiveLine" ),     true );
 	m_MarkBracePair     = m_Config->ReadBool( wxT( "MarkBracePair" ),      true );
 	m_AutoCompletePair  = m_Config->ReadBool( wxT( "AutoCompletePair" ),   false );
+	m_InsertPairForSelection = (m_AutoCompletePair && m_Config->ReadBool(wxT("InsertPairForSelction"), false));
 	m_AutoCompleteRightChar = 0;
 	m_AutoCompletePos = 0;
 	m_LeftBrace_rowid   = m_RightBrace_rowid = -1;
@@ -5113,9 +5114,18 @@ void MadEdit::InsertString( const ucs4_t *ucs, size_t count, bool bColumnEditing
 		{
 			if( !m_DragDrop )
 			{
+				bool replace = ((!m_InsertMode) || (!m_InsertPairForSelection));
 				MadOverwriteUndoData *oudata = new MadOverwriteUndoData();
 				oudata->m_Pos = m_SelectionBegin->pos;
-				oudata->m_DelSize = m_SelectionEnd->pos - m_SelectionBegin->pos;
+				if(replace)
+				{
+					oudata->m_DelSize = m_SelectionEnd->pos - m_SelectionBegin->pos;
+				}
+				else
+				{
+					oudata->m_DelSize = 0;
+				}
+
 				UCStoBlock( ucs, count, blk );
 				oudata->m_InsSize = blk.m_Size;
 				oudata->m_InsData.push_back( blk );
@@ -7814,6 +7824,12 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 					// insert the AutoCompleteLeftChar
 					if((!m_SingleLineMode) && IsMacroRecording())
 						RecordAsMadMacro( this, wxString::Format( wxT( "%c" ), command ), true );
+					bool inssel = m_Selection && m_InsertPairForSelection;
+					long sellen = 0;
+					if(inssel)
+					{
+						sellen = m_SelectionEnd->pos - m_SelectionBegin->pos;
+					}
 					InsertString( &uc, 1, true, true, false );
 
 					MadCaretPos *send;
@@ -7834,8 +7850,12 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 					MadUCQueue ucqueue;
 					ucs4_t ucb;
 
-					if( ( m_Lines->*NextUChar )( ucqueue ) == false || ( ucb = ucqueue.back().first ) <= 0x20 || m_Syntax->IsDelimiter( ucb ) )
+					if( inssel || ( m_Lines->*NextUChar )( ucqueue ) == false || ( ucb = ucqueue.back().first ) <= 0x20 || m_Syntax->IsDelimiter( ucb ) )
 					{
+						if (inssel)
+						{
+							SetCaretPosition(m_CaretPos.pos + sellen);
+						}
 						NewAutoCompleteRightChar = m_Syntax->m_AutoCompleteRightChar[idx];
 						if((!m_SingleLineMode) && IsMacroRecording())
 							RecordAsMadMacro( this, wxString::Format( wxT( "%c" ), ( int )NewAutoCompleteRightChar ), true);

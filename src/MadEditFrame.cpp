@@ -2279,8 +2279,8 @@ CommandData CommandTable[] =
 	int pos;
 }
 */
-#define MADTOOBAR_DEFAULT (wxAUI_TB_DEFAULT_STYLE | wxAUI_TB_HORIZONTAL)
-#define MADTOOBAR_OVERFLOW (wxAUI_TB_DEFAULT_STYLE | wxAUI_TB_HORIZONTAL | wxAUI_TB_OVERFLOW)
+#define MADTOOBAR_DEFAULT (wxAUI_TB_DEFAULT_STYLE | wxAUI_TB_HORIZONTAL | wxAUI_TB_PLAIN_BACKGROUND)
+#define MADTOOBAR_OVERFLOW (wxAUI_TB_DEFAULT_STYLE | wxAUI_TB_HORIZONTAL | wxAUI_TB_PLAIN_BACKGROUND | wxAUI_TB_OVERFLOW)
 
 ToolBarData ToolBarTable[] = 
 {
@@ -7442,7 +7442,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		// save options
 		wxString oldpath = m_Config->GetPath();
 		m_Config->SetPath( wxT( "/MadEdit" ) );
-		bool rcm, isiot, ai, acp, msc, mscck, mmp, afcp, fwm, twm, abck;
+		bool rcm, isiot, ai, acp, icp4sel, msc, mscck, mmp, afcp, fwm, twm, abck;
 		wxString mc, tc, ic;
 		long ll;
 		m_Config->Write( wxT( "Language" ), g_OptionsDialog->WxComboBoxLanguage->GetValue() );
@@ -7503,6 +7503,8 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		m_Config->Write( wxT( "AutoIndent" ), ai );
 		acp = g_OptionsDialog->WxCheckBoxAutoCompletePair->GetValue();
 		m_Config->Write( wxT( "AutoCompletePair" ), acp );
+		icp4sel = g_OptionsDialog->WxCheckBoxInsertPairForSelection->GetValue();
+		m_Config->Write( wxT( "InsertPairForSelction" ), icp4sel );
 		msc = g_OptionsDialog->WxCheckBoxMouseSelectToCopy->GetValue();
 		m_Config->Write( wxT( "MouseSelectToCopy" ), msc );
 		//mscck = g_OptionsDialog->WxCheckBoxWhenPressCtrlKey->GetValue();
