@@ -300,6 +300,7 @@ wxMenu *g_Menu_Tools_ConvertChineseChar = NULL;
 wxMenu *g_Menu_Tools_TextConvFormatter = NULL;
 wxMenu *g_Menu_MadMacro = NULL;
 wxMenu *g_Menu_MadMacro_Scripts = NULL;
+wxMenu *g_Menu_MadMacro_ScriptsPop = NULL;
 wxMenu *g_Menu_Toolbars = NULL;
 wxMenu *g_Menu_FrameContext = NULL;
 
@@ -315,8 +316,8 @@ wxMenu ** g_Menus[] =
 	&g_Menu_View_Font6, &g_Menu_View_FontSize, &g_Menu_View_TabColumn, &g_Menu_View_Preview,
 	&g_Menu_View_LineSpacing, &g_Menu_Tools_BOM, &g_Menu_Tools_NewLineChar,
 	&g_Menu_Tools_InsertNewLineChar, &g_Menu_Tools_ConvertChineseChar,
-	&g_Menu_Tools_TextConvFormatter, &g_Menu_MadMacro, &g_Menu_MadMacro_Scripts,
-	&g_Menu_Toolbars
+	&g_Menu_Tools_TextConvFormatter, &g_Menu_MadMacro, &g_Menu_MadMacro_Scripts, &g_Menu_MadMacro_ScriptsPop, 
+	&g_Menu_Toolbars, 
 };
 
 wxArrayString g_FontNames;
@@ -1278,12 +1279,12 @@ void OnEditStatusChanged( MadEdit *madedit )
 			g_StatusBar->Update(); // repaint immediately
 			/*if( g_SearchReplaceDialog != NULL )
 			{
-			    g_SearchReplaceDialog->UpdateCheckBoxByCBHex( g_SearchReplaceDialog->WxCheckBoxFindHex->GetValue() );
+				g_SearchReplaceDialog->UpdateCheckBoxByCBHex( g_SearchReplaceDialog->WxCheckBoxFindHex->GetValue() );
 			}
 
 			if( g_SearchReplaceDialog != NULL )
 			{
-			    g_SearchReplaceDialog->UpdateCheckBoxByCBHex( g_SearchReplaceDialog->WxCheckBoxFindHex->GetValue() );
+				g_SearchReplaceDialog->UpdateCheckBoxByCBHex( g_SearchReplaceDialog->WxCheckBoxFindHex->GetValue() );
 			}*/
 			g_ActiveMadEdit->Refresh( false );
 		}
@@ -2271,11 +2272,11 @@ CommandData CommandTable[] =
 
 /*
 {
-    int            toolbar_id;
-    const char *   status_config;
-    const char *   varname;
-    const char *   caption;
-    int pos;
+	int            toolbar_id;
+	const char *   status_config;
+	const char *   varname;
+	const char *   caption;
+	int pos;
 }
 */
 #define MADTOOBAR_DEFAULT (wxAUI_TB_DEFAULT_STYLE | wxAUI_TB_HORIZONTAL)
@@ -2718,7 +2719,7 @@ void MadEditFrame::CreateGUIControls( void )
 	g_Menu_EditPop->AppendSeparator();
 	g_Menu_EditPop->AppendSubMenu( g_Menu_EditSubSort, _( "&Sort" ) );
 	g_Menu_EditPop->AppendSeparator();
-	g_Menu_EditPop->AppendSubMenu( g_Menu_MadMacro_Scripts, _( "Run Scripts" ) );
+	g_Menu_EditPop->AppendSubMenu( g_Menu_MadMacro_ScriptsPop, _( "Run Scripts" ) );
 #if OUTPUT_MENU //Output all accel key to text file
 
 	if( MenuTable.IsOpened() )
@@ -2894,28 +2895,28 @@ void MadEditFrame::CreateGUIControls( void )
 	wxPluginLibrary *lib = wxPluginManager::LoadLibrary(wxT("./plugin"));
 	if(lib)
 	{
-	    wxLogWarning(wxString::Format(wxT("Loaded [ %s ]\n"), wxT("plugin")));
-	                      //wxString(path + filename).c_str()));
+		wxLogWarning(wxString::Format(wxT("Loaded [ %s ]\n"), wxT("plugin")));
+						  //wxString(path + filename).c_str()));
 
-	    if(lib->HasSymbol(wxT("PluginProc")))
-	    {
-	        //typedef const wchar_t* (*GetNameProc)();
-	        typedef int (*PluginProc_Proc)(int PluginID, int nMsg, void* pParam);
-	        PluginProc_Proc PluginProc=(PluginProc_Proc)lib->GetSymbol(wxT("PluginProc"));
+		if(lib->HasSymbol(wxT("PluginProc")))
+		{
+			//typedef const wchar_t* (*GetNameProc)();
+			typedef int (*PluginProc_Proc)(int PluginID, int nMsg, void* pParam);
+			PluginProc_Proc PluginProc=(PluginProc_Proc)lib->GetSymbol(wxT("PluginProc"));
 
-	        if(PluginProc)
-	        {
-	            wchar_t *name;
+			if(PluginProc)
+			{
+				wchar_t *name;
 
-	            PluginProc(0, PL_GET_NAME, (void*)&name);
-	            wxLogWarning(wxString::Format(wxT("GetName: [%s]\n"), name));
+				PluginProc(0, PL_GET_NAME, (void*)&name);
+				wxLogWarning(wxString::Format(wxT("GetName: [%s]\n"), name));
 
-	            char **xpm;
-	            PluginProc(0, PL_GET_XPM, (void*)&xpm);
-	            m_ImageList->Add(wxBitmap(xpm));
+				char **xpm;
+				PluginProc(0, PL_GET_XPM, (void*)&xpm);
+				m_ImageList->Add(wxBitmap(xpm));
 
-	        }
-	    }
+			}
+		}
 	}
 	*/
 	/*for( int tbId = tbSTANDARD; tbId <= tbMACRO; ++tbId )
@@ -2974,6 +2975,7 @@ void MadEditFrame::CreateGUIControls( void )
 					}
 
 					g_Menu_MadMacro_Scripts->Append( menuMadScrip1 + int( i ), fn.GetName(), help );
+					g_Menu_MadMacro_ScriptsPop->Append( menuMadScrip1 + int( g_Menu_MadMacro_Scripts->GetMenuItemCount() ), fn.GetName(), help );
 					g_tbMACRO_ptr->AddTool( menuMadScrip1 + int( i ), _T( "Macro" ), m_ImageList->GetBitmap( saverec_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, fn.GetName(), help, NULL );
 					if(++i > (MAX_MADSCRIPT_LOAD)) break;
 				}
@@ -8271,6 +8273,7 @@ void MadEditFrame::OnToolsSaveRecMacro( wxCommandEvent& event )
 				if(MAX_MADSCRIPT_LOAD >= g_Menu_MadMacro_Scripts->GetMenuItemCount())
 				{
 					g_Menu_MadMacro_Scripts->Append( menuMadScrip1 + int( g_Menu_MadMacro_Scripts->GetMenuItemCount() ), fn.GetName(), help );
+					g_Menu_MadMacro_ScriptsPop->Append( menuMadScrip1 + int( g_Menu_MadMacro_Scripts->GetMenuItemCount() ), fn.GetName(), help );
 					g_tbMACRO_ptr->AddTool( menuMadScrip1 + int( g_Menu_MadMacro_Scripts->GetMenuItemCount() ), _T( "Macro" ), m_ImageList->GetBitmap( saverec_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, fn.GetName(), help, NULL );
 				}
 			}
