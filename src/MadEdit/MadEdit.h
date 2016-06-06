@@ -779,6 +779,9 @@ public: // basic functions
 	void SetAutoCompletePair( bool value ) { m_AutoCompletePair = value; }
 	bool GetAutoCompletePair() { return m_AutoCompletePair; }
 
+	void SetInsertPairForSelection( bool value ) { m_InsertPairForSelection = value; }
+	bool GetInsertPairForSelection() { return m_InsertPairForSelection; }
+
 	void SetInsertMode( bool mode ); // true: insert, false: overwrite
 	bool GetInsertMode() {
 		//if(m_EditMode==emHexMode)

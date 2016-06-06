@@ -7598,6 +7598,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 			madedit->SetInsertSpacesInsteadOfTab( isiot );
 			madedit->SetAutoIndent( ai );
 			madedit->SetAutoCompletePair( acp );
+			madedit->SetInsertPairForSelection( acp && icp4sel );
 			madedit->SetMouseSelectToCopy( msc );
 			madedit->SetMouseSelectToCopyWithCtrlKey( mscck );
 			madedit->SetMiddleMouseToPaste( mmp );
