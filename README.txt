@@ -128,13 +128,14 @@ New: Add InputDlgBox, MsgBox to MadPython so that user can get input or output s
 New: Confirm Undo at the first time if the changes had been saved to disk
 New: Add Scripts list to right click menu
 New: Remove file from recentlist if could not be opened
-New: An Enhanced "Auto-complete" for selection #176
+New: An Enhanced "Auto-complete" for selection(Option->Edit) #176
 Fix: 0.4.2.1 can not remember the word wrap setting #201
 Fix: The fix width in the Option menu can't Open #199
 Fix: Improve windows list code, fix a bug of inner-tab drag/reposition(wxAuiNoteBook)
 Fix: Assertion failure of FindInFilesDialog
 Fix: Assertion failure of MadMacroDlg
 Upgrade boost to 1.61
+Update Chinese translation
 
 Mod v0.4.2.1
 1.New: Ctrl-A to select all items in the Window List dialog
