@@ -7830,7 +7830,7 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 					{
 						sellen = m_SelectionEnd->pos - m_SelectionBegin->pos;
 					}
-					InsertString( &uc, 1, true, true, false, true );
+					InsertString( &uc, 1, true, true, false, inssel );
 
 					MadCaretPos *send;
 
