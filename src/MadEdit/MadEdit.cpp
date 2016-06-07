@@ -7824,7 +7824,7 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 					// insert the AutoCompleteLeftChar
 					if((!m_SingleLineMode) && IsMacroRecording())
 						RecordAsMadMacro( this, wxString::Format( wxT( "%c" ), command ), true );
-					bool inssel = m_Selection && m_InsertPairForSelection;
+					bool inssel = (m_Selection && m_InsertPairForSelection);
 					long sellen = 0;
 					if(inssel)
 					{

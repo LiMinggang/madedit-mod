@@ -862,12 +862,27 @@ namespace mad_python {
 		void SetAutoCompletePair( bool value ) {
 			if( g_ActiveMadEdit )
 				g_ActiveMadEdit->SetAutoCompletePair( value );
-			}
+		}
+
 		bool GetAutoCompletePair() {
 			bool res = false;
 
 			if( g_ActiveMadEdit )
 			{ res = g_ActiveMadEdit->GetAutoCompletePair(); }
+
+			return res;
+		}
+
+		void SetInsertPairForSelection( bool value ) {
+			if( g_ActiveMadEdit )
+				g_ActiveMadEdit->SetInsertPairForSelection( value );
+		}
+
+		bool GetInsertPairForSelection() {
+			bool res = false;
+
+			if( g_ActiveMadEdit )
+			{ res = g_ActiveMadEdit->GetInsertPairForSelection(); }
 
 			return res;
 		}
@@ -1878,6 +1893,8 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.def( "SetAutoIndent", &PyMadEdit::SetAutoIndent, "" )
 	.def( "SetAutoCompletePair", &PyMadEdit::SetAutoCompletePair, "" )
 	.def( "GetAutoCompletePair", &PyMadEdit::GetAutoCompletePair, "" )
+	.def( "SetInsertPairForSelection", &PyMadEdit::SetInsertPairForSelection, "" )
+	.def( "GetInsertPairForSelection", &PyMadEdit::GetInsertPairForSelection, "" )
 	.def( "SetInsertMode", &PyMadEdit::SetInsertMode, "" )
 	.def( "GetInsertMode", &PyMadEdit::GetInsertMode, "" )
 	.def( "SetCaretType", &PyMadEdit::SetCaretType, "" )

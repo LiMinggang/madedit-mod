@@ -283,6 +283,9 @@ void SelectWholeLine()
 int GetIndentCountByPos( long endpos )
 int MsgBox(const std::string& message, const std::string& caption = "Message", long style = wxOK | wxCENTRE)
 const std::string InputBox(const std::string& message, const std::string& caption = "Input Text")
+void SetInsertPairForSelection( bool value )
+bool GetInsertPairForSelection() { return m_InsertPairForSelection; }
+
 
 MadEditCommand
 ====
@@ -417,7 +420,30 @@ MadNumberAlign
 Left
 Right
 
+MadDlgStyle
+====
+YES
+OK
+NO
+CANCEL
+APPLY
+CLOSE
+NO_DEFAULT
+CANCEL_DEFAULT
+ICON_WARNING_EXCLAMATION
+ICON_ERROR_HAND_STOP
+ICON_QUESTION
+ICON_INFORMATION
+ICON_NONE
+CENTRE
 
+MadMsgBoxRet
+====
+OK
+CANCEL
+APPLY
+YES
+NO
 
 Author:
 ====
