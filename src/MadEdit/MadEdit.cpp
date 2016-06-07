@@ -5048,7 +5048,7 @@ void MadEdit::UCStoBlock( const ucs4_t *ucs, size_t count, MadBlock & block )
 	while( --count > 0 );
 }
 
-void MadEdit::InsertString( const ucs4_t *ucs, size_t count, bool bColumnEditing, bool moveCaret, bool bSelText )
+void MadEdit::InsertString( const ucs4_t *ucs, size_t count, bool bColumnEditing, bool moveCaret, bool bSelText, bool insert = false )
 {
 	if( IsReadOnly() ) // || (m_EditMode == emHexMode && m_CaretAtHexArea))
 		return;
@@ -5114,7 +5114,7 @@ void MadEdit::InsertString( const ucs4_t *ucs, size_t count, bool bColumnEditing
 		{
 			if( !m_DragDrop )
 			{
-				bool replace = ((!m_InsertMode) || (!m_InsertPairForSelection));
+				bool replace = (!(insert && m_InsertMode && m_InsertPairForSelection&&m_Selection));
 				MadOverwriteUndoData *oudata = new MadOverwriteUndoData();
 				oudata->m_Pos = m_SelectionBegin->pos;
 				if(replace)

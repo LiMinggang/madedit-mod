@@ -539,7 +539,7 @@ protected:
 									  /*OUT*/ int *lineid = NULL );
 
 	void UCStoBlock( const ucs4_t *ucs, size_t count, MadBlock & block );
-	void InsertString( const ucs4_t *ucs, size_t count, bool bColumnEditing, bool moveCaret, bool bSelText );
+	void InsertString( const ucs4_t *ucs, size_t count, bool bColumnEditing, bool moveCaret, bool bSelText, bool insert = false );
 
 	wxFileOffset GetRowposXPos( int &xpos, MadLineIterator & lit,
 								int subrowid, wxFileOffset inssize );
