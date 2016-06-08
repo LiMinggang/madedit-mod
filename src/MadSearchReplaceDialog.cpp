@@ -291,7 +291,7 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	BoxSizerReplace->Add( WxBitmapButtonRecentReplaceText, 0, wxALL, 2 );
 
 	// connect to KeyDown event handler
-	/*m_FindText->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );
+	m_FindText->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );
 	m_ReplaceText->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );
 	WxBitmapButtonRecentFindText->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );
 	WxBitmapButtonRecentReplaceText->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );
@@ -313,7 +313,7 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	WxButtonReplace->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );
 	WxButtonReplaceAll->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );
 	WxButtonCount->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );
-	WxButtonClose->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );*/
+	WxButtonClose->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );
 	m_RecentFindText = g_RecentFindText; //new MadRecentList(20, ID_RECENTFINDTEXT1, true);
 	m_RecentFindText->UseMenu( &WxPopupMenuRecentFindText );
 	m_RecentFindText->AddFilesToMenu();
@@ -748,7 +748,7 @@ void MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown( wxKeyEvent& event )
 
 	case WXK_RETURN:
 	case WXK_NUMPAD_ENTER:
-		if( this->GetClassInfo()->GetClassName() != wxString( wxT( "wxButton" ) ) )
+		//if( this->GetClassInfo()->GetClassName() != wxString( wxT( "wxButton" ) ) )
 		{
 			wxCommandEvent e;
 			wxButton* default_btn = static_cast<wxButton*>( GetDefaultItem() );
@@ -762,7 +762,8 @@ void MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown( wxKeyEvent& event )
 		break;
 
 	case WXK_DOWN:
-		if( ( MadEdit* )this == m_FindText )
+		wxWindow * win = FindFocus();
+		if( win == (wxWindow *)m_FindText )
 		{
 			int x, y, w, h;
 			m_FindText->GetPosition( &x, &y );
@@ -771,7 +772,7 @@ void MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown( wxKeyEvent& event )
 			return;
 		}
 		else
-			if( ( MadEdit* )this == m_ReplaceText )
+			if( win == (wxWindow *)m_ReplaceText )
 			{
 				int x, y, w, h;
 				m_ReplaceText->GetPosition( &x, &y );
