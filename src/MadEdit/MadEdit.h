@@ -238,7 +238,22 @@ class MadEdit: public MadEditSuperClass
 	DECLARE_EVENT_TABLE()
 public:
 	static MadKeyBindings ms_KeyBindings;
-
+	enum {
+		VSCROLLHERE = 0,
+		VSCROLLTOP,
+		VSCROLLBOTTOM,
+		VSCROLLPAGEUP,
+		VSCROLLPAGEDOWN,
+		VSCROLLUP,
+		VSCROLLDOWN,
+		HSCROLLHERE,
+		HSCROLLLEFTEDGE,
+		HSCROLLRIGHTEDGE,
+		HSCROLLPAGELEFT,
+		HSCROLLPAGERIGHT,
+		HSCROLLLEFT,
+		HSCROLLRIGHT,
+	};
 private:
 	friend class MadSyntax;
 	friend class MadEncoding;
@@ -421,6 +436,7 @@ private:
 	OnToggleWindowPtr     m_OnToggleWindow;
 	OnMouseRightUpPtr     m_OnMouseRightUp;
 	OnMouseRightUpPtr     m_OnVSMouseRightUp;
+	OnMouseRightUpPtr     m_OnHSMouseRightUp;
 	OnActivatePtr         m_OnActivate;
 
 	wxMilliClock_t m_lastDoubleClick;
@@ -430,6 +446,7 @@ private:
 	std::shared_ptr<wxSpellCheckEngineInterface> m_SpellCheckerPtr;
 #endif
     long           m_VSMousePos;
+    long           m_HSMousePos;
 	bool           m_SpellCheck;
 	bool           m_BookmarkInSearch;
     bool           m_TypewriterMode;
@@ -603,7 +620,7 @@ protected:
 	void OnMouseRightUp( wxMouseEvent &evt );
 	void OnMouseMiddleUp( wxMouseEvent &evt );
 	void OnVSMouseRightUp( wxMouseEvent &evt );
-	void OnVScrollHere( wxCommandEvent &evt );
+	void OnHSMouseRightUp( wxMouseEvent &evt );
 
 	void OnSetFocus( wxFocusEvent &evt );
 	void OnKillFocus( wxFocusEvent &evt );
@@ -1065,6 +1082,9 @@ public:
 	void SetOnVSMouseRightUp( OnMouseRightUpPtr func ) {
 		m_OnVSMouseRightUp = func;
 	}
+	void SetOnHSMouseRightUp( OnMouseRightUpPtr func ) {
+		m_OnHSMouseRightUp = func;
+	}
 	void SetOnActivate( OnActivatePtr func ) {
 		m_OnActivate = func;
 	}
@@ -1072,6 +1092,10 @@ public:
 		m_UseDefaultSyntax = bUseDefaultSyntax;
 		m_SearchWholeWord = bSearchWholeWord;
 	}
+	void ScrollTo( int scrollcmd );
+    
+    long GetVSMousePos(){return m_VSMousePos;}
+    long GetHSMousePos(){return m_HSMousePos;}
 
 private: // Printing functions
 	int m_Printing;     // 0: no, <0: Text, >0: Hex
@@ -1103,7 +1127,6 @@ private: // Printing functions
 	int m_HexLineCountPerPage;
 	int m_PrintTotalHexLineCount;
 	MadEdit *m_PrintHexEdit;    // use a temporary MadEdit to print Hex-Data
-	wxMenu *m_VSMenuPop;
 
 public: // printing functions
 	void BeginPrint( const wxRect &printRect );
@@ -1137,13 +1160,7 @@ public: // utility functions
 	}
 
 	bool StringToHex( wxString ws, vector<wxByte> &hex );
-    static const long ID_VSCROLLHERE;
-    static const long ID_VSCROLLTOP;
-    static const long ID_VSCROLLBOTTOM;
-    static const long ID_VSCROLLPAGEUP;
-    static const long ID_VSCROLLPAGEDOWN;
-    static const long ID_VSCROLLUP;
-    static const long ID_VSCROLLDOWN;
+
 	friend class MadSearchReplaceDialog;
 	friend class mad_python::PyMadEdit;
 };

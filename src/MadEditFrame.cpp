@@ -303,8 +303,8 @@ wxMenu *g_Menu_MadMacro_Scripts = NULL;
 wxMenu *g_Menu_MadMacro_ScriptsPop = NULL;
 wxMenu *g_Menu_Toolbars = NULL;
 wxMenu *g_Menu_FrameContext = NULL;
-wxMenu *g_Menu_VSCrollPop = NULL;
-wxMenu *g_Menu_HSCrollPop = NULL;
+wxMenu *g_Menu_VScrollPop = NULL;
+wxMenu *g_Menu_HScrollPop = NULL;
 
 // Add menus that needs initialized at startup in this array
 wxMenu ** g_Menus[] =
@@ -319,7 +319,7 @@ wxMenu ** g_Menus[] =
 	&g_Menu_View_LineSpacing, &g_Menu_Tools_BOM, &g_Menu_Tools_NewLineChar,
 	&g_Menu_Tools_InsertNewLineChar, &g_Menu_Tools_ConvertChineseChar,
 	&g_Menu_Tools_TextConvFormatter, &g_Menu_MadMacro, &g_Menu_MadMacro_Scripts, &g_Menu_MadMacro_ScriptsPop, 
-	&g_Menu_Toolbars, &g_Menu_VSCrollPop, &g_Menu_HSCrollPop, 
+	&g_Menu_Toolbars, &g_Menu_VScrollPop, &g_Menu_HScrollPop, 
 };
 
 wxArrayString g_FontNames;
@@ -1376,9 +1376,31 @@ void OnEditMouseRightUp( MadEdit *madedit )
 
 void OnVScrollMouseRightUp( MadEdit *madedit )
 {
-	g_MainFrame->PopupMenu( g_Menu_VSCrollPop );
+	if(madedit)
+	{
+		long pos = madedit->GetVSMousePos();
+		if(pos >= 0)
+			g_Menu_VScrollPop->SetLabel(menuVScrollHere, wxString::Format(_("Scroll Here(%s)"), wxLongLong(pos).ToString()));
+	}
+	g_MainFrame->PopupMenu( g_Menu_VScrollPop );
 }
 
+void OnHScrollMouseRightUp( MadEdit *madedit )
+{
+	if(madedit)
+	{
+		long pos = madedit->GetHSMousePos();
+		if(pos >= 0)
+		{
+			wxString fontname;
+			int fsize;
+			madedit->GetFont( fontname, fsize );
+			if(fsize) pos /= fsize;
+			g_Menu_HScrollPop->SetLabel(menuHScrollHere, wxString::Format(_("Scroll Here(%s)"), wxLongLong(pos).ToString()));
+		}
+	}
+	g_MainFrame->PopupMenu( g_Menu_HScrollPop );
+}
 
 void UpdateMenus()
 {
@@ -2322,6 +2344,21 @@ PopMenuData VScrollBarPop [] =
 	{-1, 0, 0},
 };
 
+PopMenuData HScrollBarPop [] = 
+{
+	{menuHScrollHere, _("Scroll Here"),  _("Scrolls file according to vertical bar posistion")},
+	{0, 0, 0}, // Seperator
+	{menuHScrollLeftEdge, _("Scroll Left Edge"), _("Scrolls to beginning of the line")},
+	{menuHScrollRightEdge, _("Scroll Right Edge"), _("Scrolls to end of the line")},
+	{0, 0, 0},
+	{menuHScrollPageLeft, _("Page Left"), _("Scrolls left by a window full")},
+	{menuHScrollPageRight, _("Page Right"), _("Scrolls right by a window full")},
+	{0, 0, 0},
+	{menuHScrollLeft, _("Scroll Left"), _("Scrolls left by aprox. 1 tab stop")},
+    {menuHScrollRight, _("Scroll Right"), _("Scrolls right by aprox. 1 tab stop")},
+	{-1, 0, 0},
+};
+
 // restore the definition of _(s)
 #undef _
 #define _(s)    wxGetTranslation(_T(s))
@@ -3020,16 +3057,34 @@ void MadEditFrame::CreateGUIControls( void )
 	{
 		if(pd->menu_id)
 		{
-			wxMenuItem *mit = new wxMenuItem( g_Menu_VSCrollPop, pd->menu_id, wxGetTranslation(pd->text), wxGetTranslation( pd->hint ), wxITEM_NORMAL );
-			g_Menu_VSCrollPop->Append(mit);
+			wxMenuItem *mit = new wxMenuItem( g_Menu_VScrollPop, pd->menu_id, wxGetTranslation(pd->text), wxGetTranslation( pd->hint ), wxITEM_NORMAL );
+			g_Menu_VScrollPop->Append(mit);
 		}
 		else
 		{
-			g_Menu_VSCrollPop->AppendSeparator();
+			g_Menu_VScrollPop->AppendSeparator();
 		}
 		++pd;
 	}
-	/*g_Menu_HSCrollPop*/
+
+	pd = &HScrollBarPop[0];
+
+	while(pd->menu_id >= 0)
+	{
+		if(pd->menu_id)
+		{
+			wxMenuItem *mit = new wxMenuItem( g_Menu_HScrollPop, pd->menu_id, wxGetTranslation(pd->text), wxGetTranslation( pd->hint ), wxITEM_NORMAL );
+			g_Menu_HScrollPop->Append(mit);
+		}
+		else
+		{
+			g_Menu_HScrollPop->AppendSeparator();
+		}
+		++pd;
+	}
+
+	Bind(wxEVT_MENU, &MadEditFrame::OnScrollBarMenu, this, menuVScrollHere, menuHScrollRight);
+	/*g_Menu_HScrollPop*/
 
 	m_QuickSearch = new wxComboBox( m_QuickSearchBar, ID_QUICKSEARCH, wxEmptyString, wxDefaultPosition, wxSize( 200, 21 ) );
 	g_RecentFindText = new MadRecentList( 20, ID_RECENTFINDTEXT1, true ); //Should be freed in SearchDialog
@@ -4038,6 +4093,7 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 		madedit->SetOnToggleWindow( &OnEditToggleWindow );
 		madedit->SetOnMouseRightUp( &OnEditMouseRightUp );
 		madedit->SetOnVSMouseRightUp( &OnVScrollMouseRightUp );
+		madedit->SetOnHSMouseRightUp( &OnHScrollMouseRightUp );
 		madedit->Bind( wxEVT_KEY_DOWN, &MadEditFrame::MadEditFrameKeyDown, this );
 		g_PrevPageID = m_Notebook->GetSelection();
 
@@ -8679,6 +8735,14 @@ void MadEditFrame::OnToolsHtml2PlainText( wxCommandEvent& event )
 		g_ActiveMadEdit->SetText( text );
 		if( IsMacroRecording() )
 			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "Html2PlainText()" )) );
+	}
+}
+
+void MadEditFrame::OnScrollBarMenu( wxCommandEvent& event )
+{
+	if( g_ActiveMadEdit != NULL )
+	{ 
+		g_ActiveMadEdit->ScrollTo(event.GetId() - menuVScrollHere);
 	}
 }
 

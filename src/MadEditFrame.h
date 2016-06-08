@@ -416,6 +416,7 @@ public:
     void OnRightClickToolBar( wxAuiToolBarEvent& event );
     void OnQuickSearchSetFocus( wxFocusEvent& event );
 	void OnContextMenu( wxContextMenuEvent& event );
+	void OnScrollBarMenu( wxCommandEvent& event );
 private:
 	bool m_PageClosing; // prevent from reentry of CloseFile(), OnNotebookPageClosing()
 public:
