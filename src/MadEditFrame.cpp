@@ -303,6 +303,8 @@ wxMenu *g_Menu_MadMacro_Scripts = NULL;
 wxMenu *g_Menu_MadMacro_ScriptsPop = NULL;
 wxMenu *g_Menu_Toolbars = NULL;
 wxMenu *g_Menu_FrameContext = NULL;
+wxMenu *g_Menu_VSCrollPop = NULL;
+wxMenu *g_Menu_HSCrollPop = NULL;
 
 // Add menus that needs initialized at startup in this array
 wxMenu ** g_Menus[] =
@@ -317,7 +319,7 @@ wxMenu ** g_Menus[] =
 	&g_Menu_View_LineSpacing, &g_Menu_Tools_BOM, &g_Menu_Tools_NewLineChar,
 	&g_Menu_Tools_InsertNewLineChar, &g_Menu_Tools_ConvertChineseChar,
 	&g_Menu_Tools_TextConvFormatter, &g_Menu_MadMacro, &g_Menu_MadMacro_Scripts, &g_Menu_MadMacro_ScriptsPop, 
-	&g_Menu_Toolbars, 
+	&g_Menu_Toolbars, &g_Menu_VSCrollPop, &g_Menu_HSCrollPop, 
 };
 
 wxArrayString g_FontNames;
@@ -1371,6 +1373,11 @@ void OnEditMouseRightUp( MadEdit *madedit )
 	}
 }
 
+void OnVScrollMouseRightUp( MadEdit *madedit )
+{
+	g_MainFrame->PopupMenu( g_Menu_VSCrollPop );
+}
+
 
 void UpdateMenus()
 {
@@ -2293,6 +2300,27 @@ ToolBarData ToolBarTable[] =
 	{-1, 0, 0, 0, 0, -1},
 };
 
+/*
+int 		   menu_id;
+const wxChar   *text;
+const wxChar   *hint;
+const wxChar   *short_help;
+*/
+PopMenuData VScrollBarPop [] = 
+{
+	{menuVScrollHere, _("Scroll Here"),  _("Scrolls file according to vertical bar posistion")},
+	{0, 0, 0}, // Seperator
+	{menuVScrollTop, _("Scroll Top"), _("Scrolls to beginning of the file")},
+	{menuVScrollBottom, _("Scroll Bottom"), _("Scrolls to end of the file")},
+	{0, 0, 0},
+	{menuVScrollPageUp, _("Page Up"), _("Scrolls up by a window full")},
+	{menuVScrollPageDown, _("Page Down"), _("Scrolls down by a window full")},
+	{0, 0, 0},
+	{menuVScrollUp, _("Scroll Up"), _("Scrolls up by one line")},
+    {menuVScrollDown, _("Scroll Down"), _("Scrolls down by one line")},
+	{-1, 0, 0},
+};
+
 // restore the definition of _(s)
 #undef _
 #define _(s)    wxGetTranslation(_T(s))
@@ -2984,6 +3012,23 @@ void MadEditFrame::CreateGUIControls( void )
 			}
 		}
 	}
+
+	PopMenuData * pd = &VScrollBarPop[0];
+
+	while(pd->menu_id >= 0)
+	{
+		if(pd->menu_id)
+		{
+			wxMenuItem *mit = new wxMenuItem( g_Menu_VSCrollPop, pd->menu_id, wxGetTranslation(pd->text), wxGetTranslation( pd->hint ), wxITEM_NORMAL );
+			g_Menu_VSCrollPop->Append(mit);
+		}
+		else
+		{
+			g_Menu_VSCrollPop->AppendSeparator();
+		}
+		++pd;
+	}
+	/*g_Menu_HSCrollPop*/
 
 	m_QuickSearch = new wxComboBox( m_QuickSearchBar, ID_QUICKSEARCH, wxEmptyString, wxDefaultPosition, wxSize( 200, 21 ) );
 	g_RecentFindText = new MadRecentList( 20, ID_RECENTFINDTEXT1, true ); //Should be freed in SearchDialog
@@ -3991,6 +4036,7 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 		madedit->SetOnActivate( &OnEditActivate );
 		madedit->SetOnToggleWindow( &OnEditToggleWindow );
 		madedit->SetOnMouseRightUp( &OnEditMouseRightUp );
+		madedit->SetOnVSMouseRightUp( &OnVScrollMouseRightUp );
 		madedit->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ) );
 		g_PrevPageID = m_Notebook->GetSelection();
 
@@ -8000,7 +8046,7 @@ void MadEditFrame::OnToolsPurgeHistories( wxCommandEvent& event )
 
 			while( td->toolbar_id >= 0 )
 			{
-				ResetNormalToolBarPos(WxToolBar[td->toolbar_id], td->toolbarid_name, td->caption, td->pos);
+				ResetNormalToolBarPos(WxToolBar[td->toolbar_id], td->toolbarid_name, wxGetTranslation(td->caption), td->pos);
 				++td;
 			}
 		}

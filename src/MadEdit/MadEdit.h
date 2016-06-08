@@ -419,6 +419,7 @@ private:
 	OnStatusChangedPtr    m_OnStatusChanged;
 	OnToggleWindowPtr     m_OnToggleWindow;
 	OnMouseRightUpPtr     m_OnMouseRightUp;
+	OnMouseRightUpPtr     m_OnVSMouseRightUp;
 	OnActivatePtr         m_OnActivate;
 
 	wxMilliClock_t m_lastDoubleClick;
@@ -599,6 +600,7 @@ protected:
 	void OnMouseMotion( wxMouseEvent &evt );
 	void OnMouseRightUp( wxMouseEvent &evt );
 	void OnMouseMiddleUp( wxMouseEvent &evt );
+	void OnVSMouseRightUp( wxMouseEvent &evt );
 
 	void OnSetFocus( wxFocusEvent &evt );
 	void OnKillFocus( wxFocusEvent &evt );
@@ -1056,6 +1058,9 @@ public:
 	}
 	void SetOnMouseRightUp( OnMouseRightUpPtr func ) {
 		m_OnMouseRightUp = func;
+	}
+	void SetOnVSMouseRightUp( OnMouseRightUpPtr func ) {
+		m_OnVSMouseRightUp = func;
 	}
 	void SetOnActivate( OnActivatePtr func ) {
 		m_OnActivate = func;

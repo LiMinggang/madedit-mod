@@ -39,6 +39,13 @@ struct ToolBarData
     int            pos;
 };
 
+struct PopMenuData
+{
+    int            menu_id;
+    const wxChar   *text;
+    const wxChar   *hint;
+};
+
 extern CommandData CommandTable[];
 extern ToolBarData ToolBarTable[];
 

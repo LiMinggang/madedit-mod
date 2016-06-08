@@ -759,6 +759,21 @@ enum   // menu id
     menuQuickFindRegex,
     menuQuickFindCase,
     menuQuickFindDotMatchNewLine,
+
+    menuVScrollHere,
+    menuVScrollTop,
+    menuVScrollBottom,
+    menuVScrollPageUp,
+    menuVScrollPageDown,
+    menuVScrollUp,
+    menuVScrollDown,
+    menuHScrollHere,
+    menuHScrollLeftEdge,
+    menuHScrollRightEdge,
+    menuHScrollPageLeft,
+    menuHScrollPageRight,
+    menuHScrollLeft,
+    menuHScrollRight,
 	menuMAXMENUITEMID,
 };
 

@@ -778,6 +778,7 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_HScrollBar = new wxScrollBar( this, ID_HSCROLLBAR, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL );
 	m_VScrollBar->GetSize( &m_VSBWidth, &m_VSBHeight );
 	m_HScrollBar->GetSize( &m_HSBWidth, &m_HSBHeight );
+	m_VScrollBar->Connect(wxEVT_RIGHT_UP, wxMouseEventHandler(MadEdit::OnVSMouseRightUp));
 
 	if( !ArrowCursor.Ok() )
 	{
@@ -926,6 +927,7 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_OnStatusChanged = NULL;
 	m_OnToggleWindow = NULL;
 	m_OnMouseRightUp = NULL;
+	m_OnVSMouseRightUp = NULL;
 	m_OnActivate = NULL;
 	// set fonts
 	m_TextFontSpaceWidth = 10;
@@ -10378,6 +10380,14 @@ void MadEdit::OnMouseMiddleUp( wxMouseEvent &evt )
 #endif
 		evt.Skip();
 	}
+}
+
+void MadEdit::OnVSMouseRightUp( wxMouseEvent &evt )
+{
+	MadEdit * madedit = (MadEdit *)this->GetParent();
+	if(madedit->m_OnVSMouseRightUp)
+		madedit->m_OnVSMouseRightUp(madedit);
+	//evt.Skip();
 }
 
 void MadEdit::OnSetFocus( wxFocusEvent &evt )
