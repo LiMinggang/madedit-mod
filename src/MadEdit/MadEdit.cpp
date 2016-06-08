@@ -18,6 +18,7 @@
 #include <wx/image.h>
 #include <wx/dataobj.h>
 #include <wx/tokenzr.h>
+#include <wx/menu.h>
 
 #ifdef __WXGTK__
 	#   include "clipbrd_gtk.h"
@@ -93,6 +94,36 @@ extern const ucs4_t HexHeader[78] =
 	'7', ' ', '0', '8', ' ', '0', '9', ' ', '0', 'A', ' ', '0', 'B', ' ', '0', 'C',
 	' ', '0', 'D', ' ', '0', 'E', ' ', '0', 'F', ' ', '|', ' ', '0', '1', '2', '3',
 	'4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', '|', ':'
+};
+
+struct MadEditPopMenuData
+{
+    int            menu_id;
+    const wxChar   *text;
+    const wxChar   *hint;
+};
+
+const long MadEdit::ID_VSCROLLHERE = wxNewId();
+const long MadEdit::ID_VSCROLLTOP = wxNewId();
+const long MadEdit::ID_VSCROLLBOTTOM = wxNewId();
+const long MadEdit::ID_VSCROLLPAGEUP = wxNewId();
+const long MadEdit::ID_VSCROLLPAGEDOWN = wxNewId();
+const long MadEdit::ID_VSCROLLUP = wxNewId();
+const long MadEdit::ID_VSCROLLDOWN = wxNewId();
+
+MadEditPopMenuData VSPopup [] = 
+{
+	{MadEdit::ID_VSCROLLHERE, _("Scroll Here"),  _("Scrolls file according to vertical bar posistion")},
+	{0, 0, 0}, // Seperator
+	{MadEdit::ID_VSCROLLTOP, _("Scroll Top"), _("Scrolls to beginning of the file")},
+	{MadEdit::ID_VSCROLLBOTTOM, _("Scroll Bottom"), _("Scrolls to end of the file")},
+	{0, 0, 0},
+	{MadEdit::ID_VSCROLLPAGEUP, _("Page Up"), _("Scrolls up by a window full")},
+	{MadEdit::ID_VSCROLLPAGEDOWN, _("Page Down"), _("Scrolls down by a window full")},
+	{0, 0, 0},
+	{MadEdit::ID_VSCROLLUP, _("Scroll Up"), _("Scrolls up by one line")},
+    {MadEdit::ID_VSCROLLDOWN, _("Scroll Down"), _("Scrolls down by one line")},
+	{-1, 0, 0},
 };
 
 static wxCursor ArrowCursor, IBeamCursor, DragCopyCursor, DragMoveCursor, DragNoneCursor, RightArrowCursor;
@@ -895,6 +926,7 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_BookmarkInSearch = false;
 	m_TypewriterMode = m_Config->ReadBool( wxT( "TypewriterMode" ),   false );
 	m_HasBackup = true;
+	m_VSMenuPop = 0;
 #ifndef PYMADEDIT_DLL
 	m_Config->Read( wxT( "SpellCheck" ),   &m_SpellCheck, true );
 
@@ -999,6 +1031,7 @@ MadEdit::~MadEdit()
 	delete m_ClientBitmap;
 	delete m_MarkBitmap;
 	delete m_MouseMotionTimer;
+	if(m_VSMenuPop) delete m_VSMenuPop;
 }
 
 //==================================================
@@ -10385,10 +10418,48 @@ void MadEdit::OnMouseMiddleUp( wxMouseEvent &evt )
 
 void MadEdit::OnVSMouseRightUp( wxMouseEvent &evt )
 {
-	m_VSMousePos = m_ClientHeight * evt.m_y / m_VScrollBar->GetRange();
-	if(m_OnVSMouseRightUp)
-		m_OnVSMouseRightUp(this);
+	if(!m_VSMenuPop)
+	{
+		m_VSMenuPop = new wxMenu( ( long )0 );
+		
+		MadEditPopMenuData * pd = &VSPopup[0];
+		
+		while(pd->menu_id >= 0)
+		{
+			if(pd->menu_id)
+			{
+				wxMenuItem *mit = new wxMenuItem( m_VSMenuPop, pd->menu_id, wxGetTranslation(pd->text), wxGetTranslation( pd->hint ), wxITEM_NORMAL );
+				m_VSMenuPop->Append(mit);
+			}
+			else
+			{
+				m_VSMenuPop->AppendSeparator();
+			}
+			++pd;
+		}
+		
+		/*const long MadEdit::ID_VSCROLLHERE = wxNewId();
+		const long MadEdit::ID_VSCROLLTOP = wxNewId();
+		const long MadEdit::ID_VSCROLLBOTTOM = wxNewId();
+		const long MadEdit::ID_VSCROLLPAGEUP = wxNewId();
+		const long MadEdit::ID_VSCROLLPAGEDOWN = wxNewId();
+		const long MadEdit::ID_VSCROLLUP = wxNewId();
+		const long MadEdit::ID_VSCROLLDOWN = wxNewId();*/
+		Bind(wxEVT_MENU, &MadEdit::OnVScrollHere, this, ID_VSCROLLHERE);
+	}
+	m_VSMousePos = m_VScrollBar->GetRange() * evt.m_y / m_ClientHeight;
+	PopupMenu(m_VSMenuPop);
+	//if(m_OnVSMouseRightUp)
+	//	m_OnVSMouseRightUp(this);
 	//evt.Skip();
+}
+
+void MadEdit::OnVScrollHere( wxCommandEvent &evt )
+{
+	wxScrollEvent event;
+	event.SetPosition(m_VSMousePos);
+	OnVScroll( event );
+	UpdateScrollBarPos();
 }
 
 void MadEdit::OnSetFocus( wxFocusEvent &evt )

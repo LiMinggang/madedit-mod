@@ -58,6 +58,7 @@ namespace mad_python {
 	class PyMadEdit;
 }
 
+class wxMenu;
 class MadEdit;
 class MadSearchDialog;
 class MadReplaceDialog;
@@ -602,6 +603,7 @@ protected:
 	void OnMouseRightUp( wxMouseEvent &evt );
 	void OnMouseMiddleUp( wxMouseEvent &evt );
 	void OnVSMouseRightUp( wxMouseEvent &evt );
+	void OnVScrollHere( wxCommandEvent &evt );
 
 	void OnSetFocus( wxFocusEvent &evt );
 	void OnKillFocus( wxFocusEvent &evt );
@@ -1101,6 +1103,7 @@ private: // Printing functions
 	int m_HexLineCountPerPage;
 	int m_PrintTotalHexLineCount;
 	MadEdit *m_PrintHexEdit;    // use a temporary MadEdit to print Hex-Data
+	wxMenu *m_VSMenuPop;
 
 public: // printing functions
 	void BeginPrint( const wxRect &printRect );
@@ -1134,6 +1137,13 @@ public: // utility functions
 	}
 
 	bool StringToHex( wxString ws, vector<wxByte> &hex );
+    static const long ID_VSCROLLHERE;
+    static const long ID_VSCROLLTOP;
+    static const long ID_VSCROLLBOTTOM;
+    static const long ID_VSCROLLPAGEUP;
+    static const long ID_VSCROLLPAGEDOWN;
+    static const long ID_VSCROLLUP;
+    static const long ID_VSCROLLDOWN;
 	friend class MadSearchReplaceDialog;
 	friend class mad_python::PyMadEdit;
 };
