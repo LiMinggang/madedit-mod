@@ -2314,7 +2314,7 @@ CommandData CommandTable[] =
 
 ToolBarData ToolBarTable[] = 
 {
-	{tbSTANDARD,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBStandardPos"),      wxT("MadToolBar0"), _("Starndard"),      0},
+	{tbSTANDARD,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBStandardPos"),      wxT("MadToolBar0"), _("Standard"),      0},
 	{tbEDITOR,        MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBEditorPos"),        wxT("MadToolBar1"), _("Editor"),         1},
 	{tbSEARCHREPLACE, MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBSearchReplacePos"), wxT("MadToolBar2"), _("Search/Replace"), 2},
 	{tbTEXTVIEW,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBTextviewPos"),      wxT("MadToolBar3"), _("Text View"),      3},
@@ -2899,14 +2899,14 @@ void MadEditFrame::CreateGUIControls( void )
 	{
 		for( int i = 0; i < tbMAX; ++i )
 		{
-			g_Menu_Toolbars->Append( menuToolBar1 + i, g_ToolbarNames[i], wxEmptyString, wxITEM_CHECK );
+			g_Menu_Toolbars->Append( menuToolBar1 + i, wxGetTranslation(g_ToolbarNames[i]), wxEmptyString, wxITEM_CHECK );
 		}
 	}
 
 	{
 		for( int i = ptPREVIEW_HTML; i < ptPREVIEW_MAXTYPE; ++i )
 		{
-			g_Menu_View_Preview->Append( i, g_PreviewTypeNames[i], wxEmptyString, wxITEM_CHECK );
+			g_Menu_View_Preview->Append( i, wxGetTranslation(g_PreviewTypeNames[i]), wxEmptyString, wxITEM_CHECK );
 		}
 	}
 
@@ -2997,7 +2997,7 @@ void MadEditFrame::CreateGUIControls( void )
 		
 		m_Config->Read( td->panel_pos, &toolbarpos );
 		if(toolbarpos.IsEmpty())
-			ResetNormalToolBarPos(WxToolBar[td->toolbar_id], td->toolbarid_name, td->caption, td->pos);
+			ResetNormalToolBarPos(WxToolBar[td->toolbar_id], td->toolbarid_name, wxGetTranslation(td->caption), td->pos);
 		else
 			RestoreAuiPanel(WxToolBar[td->toolbar_id], toolbarpos, true);
 		
@@ -9250,7 +9250,7 @@ void MadEditFrame::OnContextMenu( wxContextMenuEvent& event )
 
 		for( int i = tbSTANDARD; i < tbMAX; ++i )
 		{
-			g_Menu_FrameContext->AppendCheckItem( menuToolBar1 + i, g_ToolbarNames[i] );
+			g_Menu_FrameContext->AppendCheckItem( menuToolBar1 + i, wxGetTranslation(g_ToolbarNames[i]) );
 		}
 	}
 
