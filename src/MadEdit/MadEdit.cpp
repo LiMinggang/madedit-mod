@@ -778,7 +778,7 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_HScrollBar = new wxScrollBar( this, ID_HSCROLLBAR, wxDefaultPosition, wxDefaultSize, wxSB_HORIZONTAL );
 	m_VScrollBar->GetSize( &m_VSBWidth, &m_VSBHeight );
 	m_HScrollBar->GetSize( &m_HSBWidth, &m_HSBHeight );
-	m_VScrollBar->Connect(wxEVT_RIGHT_UP, wxMouseEventHandler(MadEdit::OnVSMouseRightUp));
+	m_VScrollBar->Bind(wxEVT_RIGHT_UP, &MadEdit::OnVSMouseRightUp, this);
 
 	if( !ArrowCursor.Ok() )
 	{
@@ -889,10 +889,11 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_InsertPairForSelection = (m_AutoCompletePair && m_Config->ReadBool(wxT("InsertPairForSelction"), false));
 	m_AutoCompleteRightChar = 0;
 	m_AutoCompletePos = 0;
-	m_LeftBrace_rowid   = m_RightBrace_rowid = -1;
+	m_LeftBrace_rowid = m_RightBrace_rowid = -1;
+	m_VSMousePos = 0;
 	m_SpellCheck = false;
 	m_BookmarkInSearch = false;
-	m_TypewriterMode  = m_Config->ReadBool( wxT( "TypewriterMode" ),   false );
+	m_TypewriterMode = m_Config->ReadBool( wxT( "TypewriterMode" ),   false );
 	m_HasBackup = true;
 #ifndef PYMADEDIT_DLL
 	m_Config->Read( wxT( "SpellCheck" ),   &m_SpellCheck, true );
@@ -10384,9 +10385,9 @@ void MadEdit::OnMouseMiddleUp( wxMouseEvent &evt )
 
 void MadEdit::OnVSMouseRightUp( wxMouseEvent &evt )
 {
-	MadEdit * madedit = (MadEdit *)this->GetParent();
-	if(madedit->m_OnVSMouseRightUp)
-		madedit->m_OnVSMouseRightUp(madedit);
+	m_VSMousePos = m_ClientHeight * evt.m_y / m_VScrollBar->GetRange();
+	if(m_OnVSMouseRightUp)
+		m_OnVSMouseRightUp(this);
 	//evt.Skip();
 }
 
@@ -10580,6 +10581,7 @@ void MadEdit::OnSize( wxSizeEvent &evt )
 void MadEdit::OnVScroll( wxScrollEvent &evt )
 {
 	m_TopRow = evt.GetPosition();
+	DBOUT( "OnVScroll:"<<m_TopRow<<"\n" );
 
 	if( m_EditMode != emHexMode )
 	{

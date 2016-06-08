@@ -78,9 +78,9 @@ MadWinListDialog::MadWinListDialog(wxWindow* parent,wxWindowID id)
 	Connect(wxEVT_KEY_DOWN,(wxObjectEventFunction)&MadWinListDialog::OnKeyDown);
 	//*)
 
-	MadWindowsList->Connect(wxEVT_KEY_DOWN,(wxObjectEventFunction)&MadWinListDialog::OnKeyDown);
-	Connect(ID_LISTCTRLMADWINLIST,wxEVT_LIST_ITEM_SELECTED,(wxObjectEventFunction)&MadWinListDialog::OnWinListSelectionChanged);
-	Connect(ID_LISTCTRLMADWINLIST,wxEVT_LIST_ITEM_DESELECTED,(wxObjectEventFunction)&MadWinListDialog::OnWinListSelectionChanged);
+	MadWindowsList->Bind(wxEVT_KEY_DOWN, &MadWinListDialog::OnKeyDown, this);
+	Bind(wxEVT_LIST_ITEM_SELECTED, &MadWinListDialog::OnWinListSelectionChanged, this, ID_LISTCTRLMADWINLIST);
+	Bind(wxEVT_LIST_ITEM_DESELECTED, &MadWinListDialog::OnWinListSelectionChanged, this, ID_LISTCTRLMADWINLIST);
 
 	ResetButtonStatus();
 
@@ -357,7 +357,7 @@ void MadWinListDialog::OnKeyDown(wxKeyEvent& event)
 	case WXK_ESCAPE:
 		{
 			wxCommandEvent e;
-			g_WinListDialog->OnButtonOkClick(e);
+			OnButtonOkClick(e);
 			return;
 		}
 	default:
@@ -369,18 +369,18 @@ void MadWinListDialog::OnKeyDown(wxKeyEvent& event)
 
 	if('A' == key && wxACCEL_CTRL == flags)
 	{
-		if(g_WinListDialog->MadWindowsList->GetSelectedItemCount() > 0)
+		if(MadWindowsList->GetSelectedItemCount() > 0)
 		{
 			long item = -1;
-			g_WinListDialog->MadWindowsList->Freeze();
+			MadWindowsList->Freeze();
 			for ( ;; )
 			{
-				item = g_WinListDialog->MadWindowsList->GetNextItem(item);
+				item = MadWindowsList->GetNextItem(item);
 				if ( item == -1 )
 					break;
-				g_WinListDialog->MadWindowsList->SetItemState(item, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
+				MadWindowsList->SetItemState(item, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
 			}
-			g_WinListDialog->MadWindowsList->Thaw();
+			MadWindowsList->Thaw();
 		}
 		return; // no skip
 	}

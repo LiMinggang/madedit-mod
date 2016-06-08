@@ -103,7 +103,7 @@ MadWordCountDialog::MadWordCountDialog(wxWindow* parent,wxWindowID id,const wxPo
 	BoxSizer1->SetSizeHints(this);
 	Center();
 
-	Connect(wxID_ANY,wxEVT_CLOSE_WINDOW,(wxObjectEventFunction)&MadWordCountDialog::MadWordCountDialogClose);
+	Bind(wxEVT_CLOSE_WINDOW, &MadWordCountDialog::MadWordCountDialogClose, this);
 	//*)
 
 	extern MadEdit *g_ActiveMadEdit;

@@ -147,11 +147,11 @@ class MadSearchReplaceDialog: public wxDialog
 		void WxCheckBoxRegexClick(wxCommandEvent& event);
 		void WxRadioLosingFocusSelect(wxCommandEvent& event);
 		void WxRadioAlwaysSelect(wxCommandEvent& event);
-		void WxSliderTransDegreeScroll(wxScrollEvent& event);
+		void WxSliderTransDegreeScroll(wxCommandEvent& event);
 		void WxButtonReplaceAllInAllClick(wxCommandEvent& event);
 		void WxButtonFindAllClick(wxCommandEvent& event);
 		void WxButtonFindAllInAllClick(wxCommandEvent& event);
-		void OnWxSliderInputSizerCmdScroll(wxScrollEvent& event);
+		void OnWxSliderInputSizerCmdScroll(wxCommandEvent& event);
 		//*)
 
 		void MadSearchReplaceDialogActivate(wxActivateEvent& event);

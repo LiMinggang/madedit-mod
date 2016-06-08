@@ -917,9 +917,9 @@ public:
 	void ConnectMouseClick() {
 		if( GetPageCount() != 0 ) {
 			wxAuiTabCtrl *ctrl = GetActiveTabCtrl();
-			ctrl->Connect( wxEVT_LEFT_DCLICK, wxMouseEventHandler( wxMadAuiNotebook::OnMouseClick ) );
-			ctrl->Connect( wxEVT_MIDDLE_UP, wxMouseEventHandler( wxMadAuiNotebook::OnMouseClick ) );
-			ctrl->Connect( wxEVT_MOUSEWHEEL, wxMouseEventHandler( wxMadAuiNotebook::OnMouseWheel ) );
+			ctrl->Bind( wxEVT_LEFT_DCLICK, &wxMadAuiNotebook::OnMouseClick, this );
+			ctrl->Bind( wxEVT_MIDDLE_UP, &wxMadAuiNotebook::OnMouseClick, this );
+			ctrl->Bind( wxEVT_MOUSEWHEEL, &wxMadAuiNotebook::OnMouseWheel, this );
 		}
 	}
 
@@ -930,18 +930,19 @@ protected:
 		//((wxTopLevelWindow*)g_MainFrame)->SetLabel(s);
 		wxAuiTabCtrl *ctrl = ( wxAuiTabCtrl* )evt.GetEventObject();
 		wxWindow *win;
+		MadEditFrame * frame = dynamic_cast<MadEditFrame *>(GetParent());
 
 		if( ctrl->TabHitTest( evt.m_x, evt.m_y, &win ) ) {
-			g_MainFrame->CloseFile( g_MainFrame->m_Notebook->GetPageIndex( win ) );
+			frame->CloseFile( GetPageIndex( win ) );
 		}
 		else{
-			g_MainFrame->OpenFile( wxEmptyString, false );
+			frame->OpenFile( wxEmptyString, false );
 		}
 	}
 	void OnMouseWheel( wxMouseEvent &evt ) {
 		bool bForward = true;
 		if( evt.m_wheelRotation > 0 ) bForward = false;
-			g_MainFrame->m_Notebook->AdvanceSelection( bForward );
+			AdvanceSelection( bForward );
 	}
 };
 
@@ -2464,14 +2465,14 @@ void MadEditFrame::CreateGUIControls( void )
 	while( td->toolbar_id >= 0 )
 	{
 		WxToolBar[td->toolbar_id] = new wxAuiToolBar( this, ID_WXTOOLBAR1 + td->toolbar_id, wxPoint( 0, 0 ), wxSize( 392, 29 ), td->toolbar_style );
-		WxToolBar[td->toolbar_id]->Connect( wxEVT_AUITOOLBAR_RIGHT_CLICK, wxAuiToolBarEventHandler( MadEditFrame::OnRightClickToolBar ), NULL, this );
+		WxToolBar[td->toolbar_id]->Bind( wxEVT_AUITOOLBAR_RIGHT_CLICK, &MadEditFrame::OnRightClickToolBar, this );
 		g_ToolbarNames[td->toolbar_id] = td->caption;
 		++td;
 	}
 
 	m_QuickSearchBar = new wxAuiToolBar( this, ID_WXTOOLBAR1 + tbQSEARCH, wxPoint( 0, 0 ), wxSize( 392, 29 ), MADTOOBAR_DEFAULT );
-	m_QuickSearchBar->Connect( wxEVT_AUITOOLBAR_RIGHT_CLICK, wxAuiToolBarEventHandler( MadEditFrame::OnRightClickToolBar ), NULL, this );
-	m_QuickSearchBar->Connect( wxEVT_SET_FOCUS, wxFocusEventHandler( MadEditFrame::OnQuickSearchSetFocus ), NULL, this );
+	m_QuickSearchBar->Bind( wxEVT_AUITOOLBAR_RIGHT_CLICK, &MadEditFrame::OnRightClickToolBar, this );
+	m_QuickSearchBar->Bind( wxEVT_SET_FOCUS, &MadEditFrame::OnQuickSearchSetFocus, this );
 	g_ToolbarNames[tbQSEARCH] = _( "Quick Search" );
 	WxToolBar[tbQSEARCH] = m_QuickSearchBar;
 
@@ -2492,7 +2493,7 @@ void MadEditFrame::CreateGUIControls( void )
 	WxMenuBar1 = new wxMenuBar();
 	this->SetMenuBar( WxMenuBar1 );
 #if USE_CONTEXT_MENU && !defined(__WXGTK__) /*GTK+3 will show this while right clicking on editing erea*/
-	Connect( wxEVT_CONTEXT_MENU, wxContextMenuEventHandler( MadEditFrame::OnContextMenu ) );
+	Bind( wxEVT_CONTEXT_MENU, &MadEditFrame::OnContextMenu, this );
 #endif
 	//this->SetToolBar(WxToolBar[tbSTANDARD]);
 	this->SetStatusBar( WxStatusBar1 );
@@ -3047,7 +3048,7 @@ void MadEditFrame::CreateGUIControls( void )
 		for( size_t i = 1; i < count; ++i ) { m_QuickSearch->Append( g_RecentFindText->GetHistoryFile( i ) ); }
 	}
 
-	m_QuickSearch->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ), NULL, this );
+	m_QuickSearch->Bind( wxEVT_KEY_DOWN, &MadEditFrame::MadEditFrameKeyDown, this );
 	m_QuickSearchBar->AddControl( m_QuickSearch );
 	m_QuickSearchBar->AddTool( menuQuickFindNext, wxT( "QuickFindNext" ), m_ImageList->GetBitmap( down_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _( "Find Next" ), _( "Find matched text next to caret" ), NULL );
 	m_QuickSearchBar->AddTool( menuQuickFindPrevious, wxT( "QuickFindPrevious" ), m_ImageList->GetBitmap( up_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _( "Find Previous" ), _( "Find matched text previous from caret" ), NULL );
@@ -3104,7 +3105,7 @@ void MadEditFrame::CreateGUIControls( void )
 	m_InfoNotebook = new wxAuiNotebook( this, ID_OUTPUTNOTEBOOK, wxDefaultPosition, nbsize, wxAUI_NB_TOP | wxAUI_NB_SCROLL_BUTTONS );
 	m_FindInFilesResults = new MadTreeCtrl( m_InfoNotebook, ID_FINDINFILESRESULTS, wxDefaultPosition, wxSize( infoW, 4 ), wxTR_HAS_BUTTONS | wxTR_HIDE_ROOT | wxTR_TWIST_BUTTONS );
 	m_FindInFilesResults->AddRoot( wxT( "Root" ) );
-	m_FindInFilesResults->Connect( wxEVT_LEFT_DCLICK, wxMouseEventHandler( MadEditFrame::OnFindInFilesResultsDClick ) );
+	m_FindInFilesResults->Bind( wxEVT_LEFT_DCLICK, &MadEditFrame::OnFindInFilesResultsDClick, this );
 	m_InfoNotebook->AddPage( m_FindInFilesResults, _( "Search Results" ) );
 	//m_InfoNotebook->Connect( wxEVT_SIZE, wxSizeEventHandler( MadEditFrame::OnInfoNotebookSize ) );
 	// wxAUI
@@ -3129,7 +3130,7 @@ void MadEditFrame::CreateGUIControls( void )
 	}
 
 	// fixed for using wxAUI
-	WxStatusBar1->Connect( wxEVT_SIZE, wxSizeEventHandler( MadEditFrame::OnSize ) );
+	WxStatusBar1->Bind( wxEVT_SIZE, &MadEditFrame::OnSize, this );
 }
 
 void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
@@ -3618,7 +3619,7 @@ void MadEditFrame::OnSize( wxSizeEvent &evt )
 {
 	evt.Skip();
 #if (wxMAJOR_VERSION < 3)
-	int width0 = g_MainFrame->GetClientSize().GetWidth() - g_StatusWidth_1_6;
+	int width0 = GetClientSize().GetWidth() - g_StatusWidth_1_6;
 
 	if( width0 < 0 ) { width0 = 0; }
 
@@ -3626,7 +3627,7 @@ void MadEditFrame::OnSize( wxSizeEvent &evt )
 #else
 	g_StatusWidths[0] = -1;
 #endif
-	g_MainFrame->WxStatusBar1->SetFieldsCount( 7, g_StatusWidths );
+	WxStatusBar1->SetFieldsCount( 7, g_StatusWidths );
 	//static int n=0;
 	//g_MainFrame->SetTitle(wxString::Format(wxT("%d %d %d"), n++, g_MainFrame->GetClientSize().GetWidth(), width0));
 }
@@ -4037,7 +4038,7 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 		madedit->SetOnToggleWindow( &OnEditToggleWindow );
 		madedit->SetOnMouseRightUp( &OnEditMouseRightUp );
 		madedit->SetOnVSMouseRightUp( &OnVScrollMouseRightUp );
-		madedit->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadEditFrame::MadEditFrameKeyDown ) );
+		madedit->Bind( wxEVT_KEY_DOWN, &MadEditFrame::MadEditFrameKeyDown, this );
 		g_PrevPageID = m_Notebook->GetSelection();
 
 		int count = int( m_Notebook->GetPageCount() + 1 );
@@ -9170,7 +9171,7 @@ void MadEditFrame::OnQuickSearchSetFocus( wxFocusEvent& event )
 void MadEditFrame::OnRightClickToolBar( wxAuiToolBarEvent& event )
 {
 	wxContextMenuEvent ctEvt( wxEVT_AUITOOLBAR_RIGHT_CLICK, event.GetId(), event.GetClickPoint() );
-	g_MainFrame->OnContextMenu( ctEvt );
+	OnContextMenu( ctEvt );
 }
 
 void MadEditFrame::OnContextMenu( wxContextMenuEvent& event )

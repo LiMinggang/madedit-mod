@@ -428,6 +428,7 @@ private:
 #else
 	std::shared_ptr<wxSpellCheckEngineInterface> m_SpellCheckerPtr;
 #endif
+    long           m_VSMousePos;
 	bool           m_SpellCheck;
 	bool           m_BookmarkInSearch;
     bool           m_TypewriterMode;

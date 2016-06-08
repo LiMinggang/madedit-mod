@@ -226,25 +226,25 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	BoxSizer8->Add( BoxSizer3, 0, wxALL | wxEXPAND, 0 );
 	BoxSizer1->Add( BoxSizer8, 1, wxALL | wxEXPAND, 0 );
 
-	Connect( ID_WXCHECKBOXREGEX, wxEVT_COMMAND_CHECKBOX_CLICKED, ( wxObjectEventFunction )&MadSearchReplaceDialog::WxCheckBoxRegexClick );
-	Connect( ID_WXCHECKBOXFINDHEX, wxEVT_COMMAND_CHECKBOX_CLICKED, ( wxObjectEventFunction )&MadSearchReplaceDialog::WxCheckBoxFindHexClick );
-	Connect( ID_WXCHECKBOXSEARCHINSELECTION, wxEVT_COMMAND_CHECKBOX_CLICKED, ( wxObjectEventFunction )&MadSearchReplaceDialog::WxCheckBoxSearchInSelectionClick );
-	Connect( ID_RADIOBUTTON1, wxEVT_COMMAND_RADIOBUTTON_SELECTED, ( wxObjectEventFunction )&MadSearchReplaceDialog::WxRadioLosingFocusSelect );
-	Connect( ID_RADIOBUTTON2, wxEVT_COMMAND_RADIOBUTTON_SELECTED, ( wxObjectEventFunction )&MadSearchReplaceDialog::WxRadioAlwaysSelect );
-	Connect( ID_WXSLIDERTRANSDEGREE, wxEVT_COMMAND_SLIDER_UPDATED, ( wxObjectEventFunction )&MadSearchReplaceDialog::WxSliderTransDegreeScroll );
-	Connect( ID_WXSLIDERINPUTSIZER, wxEVT_COMMAND_SLIDER_UPDATED,(wxObjectEventFunction)&MadSearchReplaceDialog::OnWxSliderInputSizerCmdScroll);
-	Connect( ID_WXBUTTONFINDNEXT, wxEVT_COMMAND_BUTTON_CLICKED, ( wxObjectEventFunction )&MadSearchReplaceDialog::WxButtonFindNextClick );
-	Connect( ID_WXBUTTONFINDPREV, wxEVT_COMMAND_BUTTON_CLICKED, ( wxObjectEventFunction )&MadSearchReplaceDialog::WxButtonFindPrevClick );
-	Connect( ID_WXBUTTONFINDALL, wxEVT_COMMAND_BUTTON_CLICKED, ( wxObjectEventFunction )&MadSearchReplaceDialog::WxButtonFindAllClick );
-	Connect( ID_WXBUTTONFINDALLINALL, wxEVT_COMMAND_BUTTON_CLICKED, ( wxObjectEventFunction )&MadSearchReplaceDialog::WxButtonFindAllInAllClick );
-	Connect( ID_WXBUTTONREPLACE, wxEVT_COMMAND_BUTTON_CLICKED, ( wxObjectEventFunction )&MadSearchReplaceDialog::WxButtonReplaceClick );
-	Connect( ID_WXBUTTONREPLACEALL, wxEVT_COMMAND_BUTTON_CLICKED, ( wxObjectEventFunction )&MadSearchReplaceDialog::WxButtonReplaceAllClick );
-	Connect( ID_WXBUTTONREPLACEALLINALL, wxEVT_COMMAND_BUTTON_CLICKED, ( wxObjectEventFunction )&MadSearchReplaceDialog::WxButtonReplaceAllInAllClick );
-	Connect( ID_WXBUTTONCOUNT, wxEVT_COMMAND_BUTTON_CLICKED, ( wxObjectEventFunction )&MadSearchReplaceDialog::WxButtonCountClick );
-	Connect( ID_WXBUTTONREPLACEEXPAND, wxEVT_COMMAND_BUTTON_CLICKED, ( wxObjectEventFunction )&MadSearchReplaceDialog::WxButtonReplaceExpandClick );
-	Connect( wxID_CANCEL, wxEVT_COMMAND_BUTTON_CLICKED, ( wxObjectEventFunction )&MadSearchReplaceDialog::WxButtonCloseClick );
-	Connect( wxID_ANY, wxEVT_CLOSE_WINDOW, ( wxObjectEventFunction )&MadSearchReplaceDialog::MadSearchReplaceDialogClose );
-	Connect( wxEVT_KEY_DOWN, ( wxObjectEventFunction )&MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown );
+	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED,     &MadSearchReplaceDialog::WxCheckBoxRegexClick, this,             ID_WXCHECKBOXREGEX              );
+	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED,     &MadSearchReplaceDialog::WxCheckBoxFindHexClick, this,           ID_WXCHECKBOXFINDHEX            );
+	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED,     &MadSearchReplaceDialog::WxCheckBoxSearchInSelectionClick, this, ID_WXCHECKBOXSEARCHINSELECTION  );
+	Bind( wxEVT_COMMAND_RADIOBUTTON_SELECTED, &MadSearchReplaceDialog::WxRadioLosingFocusSelect, this,         ID_RADIOBUTTON1                 );
+	Bind( wxEVT_COMMAND_RADIOBUTTON_SELECTED, &MadSearchReplaceDialog::WxRadioAlwaysSelect, this,              ID_RADIOBUTTON2                 );
+	Bind( wxEVT_SLIDER,       &MadSearchReplaceDialog::WxSliderTransDegreeScroll, this,        ID_WXSLIDERTRANSDEGREE          );
+	Bind( wxEVT_SLIDER,       &MadSearchReplaceDialog::OnWxSliderInputSizerCmdScroll, this,    ID_WXSLIDERINPUTSIZER           );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonFindNextClick, this,            ID_WXBUTTONFINDNEXT             );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonFindPrevClick, this,            ID_WXBUTTONFINDPREV             );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonFindAllClick, this,             ID_WXBUTTONFINDALL              );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonFindAllInAllClick, this,        ID_WXBUTTONFINDALLINALL         );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonReplaceClick, this,             ID_WXBUTTONREPLACE              );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonReplaceAllClick, this,          ID_WXBUTTONREPLACEALL           );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonReplaceAllInAllClick, this,     ID_WXBUTTONREPLACEALLINALL      );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonCountClick, this,               ID_WXBUTTONCOUNT                );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonReplaceExpandClick, this,       ID_WXBUTTONREPLACEEXPAND        );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonCloseClick, this,               wxID_CANCEL                     );
+	Bind( wxEVT_CLOSE_WINDOW,                 &MadSearchReplaceDialog::MadSearchReplaceDialogClose, this);
+	Bind( wxEVT_KEY_DOWN,                     &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this);
 	//*)
 	int bw, bh;
 	// find
@@ -291,29 +291,29 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	BoxSizerReplace->Add( WxBitmapButtonRecentReplaceText, 0, wxALL, 2 );
 
 	// connect to KeyDown event handler
-	m_FindText->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown ) );
-	m_ReplaceText->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown ) );
-	WxBitmapButtonRecentFindText->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown ) );
-	WxBitmapButtonRecentReplaceText->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown ) );
-	WxCheckBoxMoveFocus->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown ) );
-	WxCheckBoxCaseSensitive->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown ) );
-	WxCheckBoxWholeWord->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown ) );
-	WxCheckBoxRegex->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown ) );
-	WxCheckBoxFindHex->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown ) );
-	WxCheckBoxWrapAround->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown ) );
-	WxCheckBoxSearchInSelection->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown ) );
-	WxCheckBoxBookmarkLine->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown ) );
-	WxCheckBoxBookmarkOnly->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown ) );
-	WxCheckBoxPurgeBookmark->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown ) );
-	//WxEditFrom->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown));
-	//WxEditTo->Connect(wxEVT_KEY_DOWN, wxKeyEventHandler(MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown));
-	WxButtonFindNext->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown ) );
-	WxButtonFindPrev->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown ) );
-	WxButtonFindAll->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown ) );
-	WxButtonReplace->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown ) );
-	WxButtonReplaceAll->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown ) );
-	WxButtonCount->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown ) );
-	WxButtonClose->Connect( wxEVT_KEY_DOWN, wxKeyEventHandler( MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown ) );
+	/*m_FindText->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );
+	m_ReplaceText->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );
+	WxBitmapButtonRecentFindText->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );
+	WxBitmapButtonRecentReplaceText->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );
+	WxCheckBoxMoveFocus->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );
+	WxCheckBoxCaseSensitive->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );
+	WxCheckBoxWholeWord->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );
+	WxCheckBoxRegex->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );
+	WxCheckBoxFindHex->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );
+	WxCheckBoxWrapAround->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );
+	WxCheckBoxSearchInSelection->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );
+	WxCheckBoxBookmarkLine->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );
+	WxCheckBoxBookmarkOnly->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );
+	WxCheckBoxPurgeBookmark->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );
+	//WxEditFrom->Bind(wxEVT_KEY_DOWN, wxKeyEventHandler(MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown));
+	//WxEditTo->Bind(wxEVT_KEY_DOWN, wxKeyEventHandler(MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown));
+	WxButtonFindNext->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );
+	WxButtonFindPrev->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );
+	WxButtonFindAll->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );
+	WxButtonReplace->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );
+	WxButtonReplaceAll->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );
+	WxButtonCount->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );
+	WxButtonClose->Bind( wxEVT_KEY_DOWN, &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this );*/
 	m_RecentFindText = g_RecentFindText; //new MadRecentList(20, ID_RECENTFINDTEXT1, true);
 	m_RecentFindText->UseMenu( &WxPopupMenuRecentFindText );
 	m_RecentFindText->AddFilesToMenu();
@@ -738,12 +738,12 @@ void MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown( wxKeyEvent& event )
 {
 	int key = event.GetKeyCode();
 
-	//g_SearchReplaceDialog->SetTitle(wxString()<<key);
+	//SetTitle(wxString()<<key);
 
 	switch( key )
 	{
 	case WXK_ESCAPE:
-		g_SearchReplaceDialog->Show( false );
+		Show( false );
 		return;
 
 	case WXK_RETURN:
@@ -751,32 +751,32 @@ void MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown( wxKeyEvent& event )
 		if( this->GetClassInfo()->GetClassName() != wxString( wxT( "wxButton" ) ) )
 		{
 			wxCommandEvent e;
-			wxButton* default_btn = static_cast<wxButton*>( g_SearchReplaceDialog->GetDefaultItem() );
+			wxButton* default_btn = static_cast<wxButton*>( GetDefaultItem() );
 
-			if( default_btn == g_SearchReplaceDialog->WxButtonReplace )
-				return g_SearchReplaceDialog->WxButtonReplaceClick( e ); // no skip
+			if( default_btn == WxButtonReplace )
+				return WxButtonReplaceClick( e ); // no skip
 
-			return g_SearchReplaceDialog->WxButtonFindNextClick( e ); // no skip
+			return WxButtonFindNextClick( e ); // no skip
 		}
 
 		break;
 
 	case WXK_DOWN:
-		if( ( MadEdit* )this == g_SearchReplaceDialog->m_FindText )
+		if( ( MadEdit* )this == m_FindText )
 		{
 			int x, y, w, h;
-			g_SearchReplaceDialog->m_FindText->GetPosition( &x, &y );
-			g_SearchReplaceDialog->m_FindText->GetSize( &w, &h );
-			g_SearchReplaceDialog->PopupMenu( &g_SearchReplaceDialog->WxPopupMenuRecentFindText, x, y + h );
+			m_FindText->GetPosition( &x, &y );
+			m_FindText->GetSize( &w, &h );
+			PopupMenu( &WxPopupMenuRecentFindText, x, y + h );
 			return;
 		}
 		else
-			if( ( MadEdit* )this == g_SearchReplaceDialog->m_ReplaceText )
+			if( ( MadEdit* )this == m_ReplaceText )
 			{
 				int x, y, w, h;
-				g_SearchReplaceDialog->m_ReplaceText->GetPosition( &x, &y );
-				g_SearchReplaceDialog->m_ReplaceText->GetSize( &w, &h );
-				g_SearchReplaceDialog->PopupMenu( &g_SearchReplaceDialog->WxPopupMenuRecentReplaceText, x, y + h );
+				m_ReplaceText->GetPosition( &x, &y );
+				m_ReplaceText->GetSize( &w, &h );
+				PopupMenu( &WxPopupMenuRecentReplaceText, x, y + h );
 				return;
 			}
 
@@ -795,14 +795,14 @@ void MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown( wxKeyEvent& event )
 	if( g_AccelFindNext.GetKeyCode() == key && g_AccelFindNext.GetFlags() == flags )
 	{
 		wxCommandEvent e;
-		g_SearchReplaceDialog->WxButtonFindNextClick( e );
+		WxButtonFindNextClick( e );
 		return; // no skip
 	}
 
 	if( g_AccelFindPrev.GetKeyCode() == key && g_AccelFindPrev.GetFlags() == flags )
 	{
 		wxCommandEvent e;
-		g_SearchReplaceDialog->WxButtonFindPrevClick( e );
+		WxButtonFindPrevClick( e );
 		return; // no skip
 	}
 
@@ -1870,7 +1870,7 @@ void MadSearchReplaceDialog::SetTransparency()
 /*
  * WxSliderTransDegreeScroll
  */
-void MadSearchReplaceDialog::WxSliderTransDegreeScroll( wxScrollEvent& event )
+void MadSearchReplaceDialog::WxSliderTransDegreeScroll( wxCommandEvent& event )
 {
 	// insert your code here
 	wxByte trans = wxIMAGE_ALPHA_OPAQUE;
@@ -1903,7 +1903,7 @@ void MadSearchReplaceDialog::WxCheckBoxRegexClick( wxCommandEvent& event )
 	}
 }
 
-void MadSearchReplaceDialog::OnWxSliderInputSizerCmdScroll(wxScrollEvent& event)
+void MadSearchReplaceDialog::OnWxSliderInputSizerCmdScroll(wxCommandEvent& event)
 {
 	int times = WxSliderInputSizer->GetValue();
 	BoxSizerSearch->SetItemMinSize( m_FindText, m_OriginInputSize.GetWidth(), m_OriginInputSize.GetHeight()*times );
