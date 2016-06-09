@@ -122,9 +122,9 @@ New: Use dialog to let user choose one for all instead of annoying one by one di
 New: Let the user to do the backup selfly #198
 New: Use Icon to replace the checkbox on QuickSearch Bar #181
 New: Remember pos of all tool Bars
-New: Insert to the top instead of append to the bottom of search results, expand the last automatically and collapse the last
 New: Reset tool bars position
-New: Add InputDlgBox, MsgBox to MadPython so that user can get input or output some message
+New: Insert to the top instead of append to the bottom of search results, expand the last automatically and collapse the last
+New: Add InputBox, MsgBox to MadPython so that user can get input or output some message
 New: Confirm Undo at the first time if the changes had been saved to disk
 New: Add Scripts list to right click menu
 New: Remove file from recentlist if could not be opened
