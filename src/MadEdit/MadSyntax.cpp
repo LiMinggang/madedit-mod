@@ -1923,6 +1923,7 @@ _NEXTUCHAR_:
 	if( IsSpace( uc ) )
 	{
 		SetAttributes( aeSpace );
+		int tabwidth = nw_MadEdit->m_TabColumns * nw_MadEdit->GetUCharWidth( 0x20 );
 
 		do
 		{
@@ -1932,12 +1933,12 @@ _NEXTUCHAR_:
 
 			if( uc == 0x09 )
 			{
-				int tabwidth = nw_MadEdit->m_TabColumns * nw_MadEdit->GetUCharWidth( 0x20 );
+				int tbwidth = tabwidth;
 				width = nw_RowIndexIter->m_Width - nw_LineWidth;
-				tabwidth -= ( nw_LineWidth % tabwidth );
+				tbwidth -= ( nw_LineWidth % tbwidth );
 
-				if( tabwidth < width )
-					width = tabwidth;
+				if( tbwidth < width )
+					width = tbwidth;
 			}
 
 			nw_Widths[idx] = width;

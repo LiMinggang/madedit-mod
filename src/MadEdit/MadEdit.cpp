@@ -10482,12 +10482,12 @@ void MadEdit::ScrollTo( int scollcmd )
 		}
 		case HSCROLLLEFT:
 		{
-			--hpos;
+			hpos -= (m_TabColumns * m_TextFontSpaceWidth);
 			break;
 		}
 		case HSCROLLRIGHT:
 		{
-			++hpos;
+			hpos += (m_TabColumns * m_TextFontSpaceWidth);
 			break;
 		}
 		default:
