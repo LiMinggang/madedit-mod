@@ -3044,7 +3044,7 @@ void MadEditFrame::CreateGUIControls( void )
 
 					scriptfname = fn.GetName();
 					g_Menu_MadMacro_Scripts->Append( menuMadScrip1 + int( i ), scriptfname, help );
-					g_Menu_MadMacro_ScriptsPop->Append( menuMadScrip1 + int( g_Menu_MadMacro_Scripts->GetMenuItemCount() ), scriptfname, help );
+					g_Menu_MadMacro_ScriptsPop->Append( menuMadScrip1 + int( i ), scriptfname, help );
 					g_tbMACRO_ptr->AddTool( menuMadScrip1 + int( i ), _T( "Macro" ), m_ImageList->GetBitmap( saverec_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, scriptfname, help, NULL );
 					if(++i > (MAX_MADSCRIPT_LOAD)) break;
 				}
