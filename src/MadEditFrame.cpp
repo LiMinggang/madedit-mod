@@ -2331,7 +2331,7 @@ const wxChar   *short_help;
 */
 PopMenuData VScrollBarPop [] = 
 {
-	{menuVScrollHere, _("Scroll Here"),  _("Scrolls file according to vertical bar posistion")},
+	{menuVScrollHere, _("Scroll Here"),  _("Scrolls text according to vertical bar posistion")},
 	{0, 0, 0}, // Seperator
 	{menuVScrollTop, _("Scroll Top"), _("Scrolls to beginning of the file")},
 	{menuVScrollBottom, _("Scroll Bottom"), _("Scrolls to end of the file")},
@@ -2346,7 +2346,7 @@ PopMenuData VScrollBarPop [] =
 
 PopMenuData HScrollBarPop [] = 
 {
-	{menuHScrollHere, _("Scroll Here"),  _("Scrolls file according to vertical bar posistion")},
+	{menuHScrollHere, _("Scroll Here"),  _("Scrolls text according to horizontal bar posistion")},
 	{0, 0, 0}, // Seperator
 	{menuHScrollLeftEdge, _("Scroll Left Edge"), _("Scrolls to beginning of the line")},
 	{menuHScrollRightEdge, _("Scroll Right Edge"), _("Scrolls to end of the line")},

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.3.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-09 00:14+0800\n"
+"POT-Creation-Date: 2016-06-09 09:31+0800\n"
 "PO-Revision-Date: 2015-11-24 19:35+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
@@ -1358,8 +1358,7 @@ msgid "Find next occurrence"
 msgstr "Ricerca la successiva occorrenza"
 
 #: ../src/MadEditFrame.cpp:1985 ../src/MadEditFrame.cpp:3108
-#: ../src/MadSearchReplaceDialog.cpp:553
-#: ../src/MadSearchReplaceDialog.cpp:1141
+#: ../src/MadSearchReplaceDialog.cpp:553 ../src/MadSearchReplaceDialog.cpp:1141
 msgid "Find Next"
 msgstr "Trova Successivo"
 
@@ -2280,8 +2279,8 @@ msgstr ""
 msgid "Scroll Here"
 msgstr "Scorri Testo a Sinistra"
 
-#: ../src/MadEditFrame.cpp:2334 ../src/MadEditFrame.cpp:2349
-msgid "Scrolls file according to vertical bar posistion"
+#: ../src/MadEditFrame.cpp:2334
+msgid "Scrolls text according to vertical bar posistion"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:2336
@@ -2338,6 +2337,10 @@ msgstr ""
 #, fuzzy
 msgid "Scrolls down by one line"
 msgstr "Scorri Testo giu di una Linea "
+
+#: ../src/MadEditFrame.cpp:2349
+msgid "Scrolls text according to horizontal bar posistion"
+msgstr ""
 
 #: ../src/MadEditFrame.cpp:2351
 #, fuzzy
@@ -2739,11 +2742,10 @@ msgstr ""
 msgid "<- Add Custom File Type"
 msgstr ""
 
-#: ../src/MadFileAssociationDialog.cpp:372
-#: ../src/MadHighlightingDialog.cpp:270 ../src/MadPurgeHistoryDialog.cpp:96
-#: ../src/MadOptionsDialog.cpp:976 ../src/MadConvEncDialog.cpp:71
-#: ../src/MadSaveQueryDialog.cpp:49 ../src/MadWinListDialog.cpp:63
-#: ../src/MadAboutDialog.cpp:90
+#: ../src/MadFileAssociationDialog.cpp:372 ../src/MadHighlightingDialog.cpp:270
+#: ../src/MadPurgeHistoryDialog.cpp:96 ../src/MadOptionsDialog.cpp:976
+#: ../src/MadConvEncDialog.cpp:71 ../src/MadSaveQueryDialog.cpp:49
+#: ../src/MadWinListDialog.cpp:63 ../src/MadAboutDialog.cpp:90
 msgid "&OK"
 msgstr "&OK"
 
@@ -3066,8 +3068,7 @@ msgstr "Trova &Successivo"
 msgid "C&ount"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:222
-#: ../src/MadSearchReplaceDialog.cpp:1283
+#: ../src/MadSearchReplaceDialog.cpp:222 ../src/MadSearchReplaceDialog.cpp:1283
 #, fuzzy
 msgid "R&eplace >>"
 msgstr "&Sostituisci >>"
@@ -3087,13 +3088,11 @@ msgstr "Nessuna Stringa trovata."
 msgid "Cannot find the matched string."
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:550
-#: ../src/MadSearchReplaceDialog.cpp:1138
+#: ../src/MadSearchReplaceDialog.cpp:550 ../src/MadSearchReplaceDialog.cpp:1138
 msgid "Do you want to find from begin of selection?"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:551
-#: ../src/MadSearchReplaceDialog.cpp:1139
+#: ../src/MadSearchReplaceDialog.cpp:551 ../src/MadSearchReplaceDialog.cpp:1139
 #, fuzzy
 msgid "Do you want to find from begin of file?"
 msgstr "Vuoi salvare questo File?"

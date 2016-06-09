@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.3.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-09 00:14+0800\n"
-"PO-Revision-Date: 2016-06-09 00:15+0800\n"
+"POT-Creation-Date: 2016-06-09 09:31+0800\n"
+"PO-Revision-Date: 2016-06-09 21:12+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit-mod@gmail.com>\n"
 "Language: zh_CN\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.8.1\n"
+"X-Generator: Poedit 1.8.8\n"
 
 #: wxstd.po.cpp:2
 msgid "Unicode 16 bit (UTF-16)"
@@ -708,7 +708,7 @@ msgstr "' 从字典中"
 #: ../src/MadEditFrame.cpp:1383 ../src/MadEditFrame.cpp:1399
 #, c-format
 msgid "Scroll Here(%s)"
-msgstr ""
+msgstr "滚动至此(%s)"
 
 #: ../src/MadEditFrame.cpp:1851
 msgid "&File"
@@ -1346,8 +1346,7 @@ msgid "Find next occurrence"
 msgstr "到字符串下一个出现的地方"
 
 #: ../src/MadEditFrame.cpp:1985 ../src/MadEditFrame.cpp:3108
-#: ../src/MadSearchReplaceDialog.cpp:553
-#: ../src/MadSearchReplaceDialog.cpp:1141
+#: ../src/MadSearchReplaceDialog.cpp:553 ../src/MadSearchReplaceDialog.cpp:1141
 msgid "Find Next"
 msgstr "查找下一个"
 
@@ -2253,124 +2252,112 @@ msgid "Macro"
 msgstr "宏"
 
 #: ../src/MadEditFrame.cpp:2334 ../src/MadEditFrame.cpp:2349
-#, fuzzy
 msgid "Scroll Here"
-msgstr "向左滚动"
+msgstr "滚动至此"
 
-#: ../src/MadEditFrame.cpp:2334 ../src/MadEditFrame.cpp:2349
-msgid "Scrolls file according to vertical bar posistion"
-msgstr ""
+#: ../src/MadEditFrame.cpp:2334
+msgid "Scrolls text according to vertical bar posistion"
+msgstr "根据垂直滚动条的位置滚动文本"
 
 #: ../src/MadEditFrame.cpp:2336
 msgid "Scroll Top"
-msgstr ""
+msgstr "滚动到顶部"
 
 #: ../src/MadEditFrame.cpp:2336
-#, fuzzy
 msgid "Scrolls to beginning of the file"
-msgstr "跳到行的开头"
+msgstr "跳到文件的开头"
 
 #: ../src/MadEditFrame.cpp:2337
-#, fuzzy
 msgid "Scroll Bottom"
-msgstr "向左滚动"
+msgstr "滚动到底部"
 
 #: ../src/MadEditFrame.cpp:2337
-#, fuzzy
 msgid "Scrolls to end of the file"
-msgstr "已经过了文件末尾"
+msgstr "滚动到文件末尾"
 
 #: ../src/MadEditFrame.cpp:2339
-#, fuzzy
 msgid "Page Up"
-msgstr "第 %d 页"
+msgstr "向上翻页"
 
 #: ../src/MadEditFrame.cpp:2339
 msgid "Scrolls up by a window full"
-msgstr ""
+msgstr "向上翻一个窗口"
 
 #: ../src/MadEditFrame.cpp:2340
-#, fuzzy
 msgid "Page Down"
-msgstr "第 %d 页"
+msgstr "向下翻页"
 
 #: ../src/MadEditFrame.cpp:2340
 msgid "Scrolls down by a window full"
-msgstr ""
+msgstr "向下翻一个窗口"
 
 #: ../src/MadEditFrame.cpp:2342
 msgid "Scroll Up"
-msgstr ""
+msgstr "向上滚动"
 
 #: ../src/MadEditFrame.cpp:2342
-#, fuzzy
 msgid "Scrolls up by one line"
 msgstr "向上滚动一行"
 
 #: ../src/MadEditFrame.cpp:2343
 msgid "Scroll Down"
-msgstr ""
+msgstr "向下滚动"
 
 #: ../src/MadEditFrame.cpp:2343
-#, fuzzy
 msgid "Scrolls down by one line"
 msgstr "向下滚动一行"
 
+#: ../src/MadEditFrame.cpp:2349
+msgid "Scrolls text according to horizontal bar posistion"
+msgstr "根据水平滚动条的位置滚动文本"
+
 #: ../src/MadEditFrame.cpp:2351
-#, fuzzy
 msgid "Scroll Left Edge"
-msgstr "向左滚动"
+msgstr "左边缘"
 
 #: ../src/MadEditFrame.cpp:2351
-#, fuzzy
 msgid "Scrolls to beginning of the line"
-msgstr "跳到行的开头"
+msgstr "滚动到行的开头"
 
 #: ../src/MadEditFrame.cpp:2352
-#, fuzzy
 msgid "Scroll Right Edge"
-msgstr "向右滚动"
+msgstr "右边缘"
 
 #: ../src/MadEditFrame.cpp:2352
-#, fuzzy
 msgid "Scrolls to end of the line"
-msgstr "跳到行的结尾"
+msgstr "滚动到最长行的结尾"
 
 #: ../src/MadEditFrame.cpp:2354
-#, fuzzy
 msgid "Page Left"
-msgstr "页面设置"
+msgstr "向左翻页"
 
 #: ../src/MadEditFrame.cpp:2354
 msgid "Scrolls left by a window full"
-msgstr ""
+msgstr "向左翻一个窗口宽度"
 
 #: ../src/MadEditFrame.cpp:2355
-#, fuzzy
 msgid "Page Right"
-msgstr "右对齐"
+msgstr "向右翻页"
 
 #: ../src/MadEditFrame.cpp:2355
 msgid "Scrolls right by a window full"
-msgstr ""
+msgstr "向右翻一个窗口宽度"
 
 #: ../src/MadEditFrame.cpp:2357
-#, fuzzy
 msgid "Scroll Left"
 msgstr "向左滚动"
 
 #: ../src/MadEditFrame.cpp:2357
 msgid "Scrolls left by aprox. 1 tab stop"
-msgstr ""
+msgstr "向左滚动约一个Tab的宽度"
 
 #: ../src/MadEditFrame.cpp:2358
-#, fuzzy
 msgid "Scroll Right"
 msgstr "向右滚动"
 
 #: ../src/MadEditFrame.cpp:2358
 msgid "Scrolls right by aprox. 1 tab stop"
-msgstr ""
+msgstr "向右滚动约一个Tab的宽度"
 
 #: ../src/MadEditFrame.cpp:2513 ../src/MadEditFrame.cpp:9434
 msgid "Quick Search"
@@ -2699,11 +2686,10 @@ msgstr "预先定义的类型"
 msgid "<- Add Custom File Type"
 msgstr "<- 加入自定义文件类型"
 
-#: ../src/MadFileAssociationDialog.cpp:372
-#: ../src/MadHighlightingDialog.cpp:270 ../src/MadPurgeHistoryDialog.cpp:96
-#: ../src/MadOptionsDialog.cpp:976 ../src/MadConvEncDialog.cpp:71
-#: ../src/MadSaveQueryDialog.cpp:49 ../src/MadWinListDialog.cpp:63
-#: ../src/MadAboutDialog.cpp:90
+#: ../src/MadFileAssociationDialog.cpp:372 ../src/MadHighlightingDialog.cpp:270
+#: ../src/MadPurgeHistoryDialog.cpp:96 ../src/MadOptionsDialog.cpp:976
+#: ../src/MadConvEncDialog.cpp:71 ../src/MadSaveQueryDialog.cpp:49
+#: ../src/MadWinListDialog.cpp:63 ../src/MadAboutDialog.cpp:90
 msgid "&OK"
 msgstr "确定(&O)"
 
@@ -3014,8 +3000,7 @@ msgstr ""
 msgid "C&ount"
 msgstr "计算次数(&O)"
 
-#: ../src/MadSearchReplaceDialog.cpp:222
-#: ../src/MadSearchReplaceDialog.cpp:1283
+#: ../src/MadSearchReplaceDialog.cpp:222 ../src/MadSearchReplaceDialog.cpp:1283
 msgid "R&eplace >>"
 msgstr "替换(&E) >>"
 
@@ -3033,13 +3018,11 @@ msgstr "找不到匹配的字符串"
 msgid "Cannot find the matched string."
 msgstr "找不到符合的字符串。"
 
-#: ../src/MadSearchReplaceDialog.cpp:550
-#: ../src/MadSearchReplaceDialog.cpp:1138
+#: ../src/MadSearchReplaceDialog.cpp:550 ../src/MadSearchReplaceDialog.cpp:1138
 msgid "Do you want to find from begin of selection?"
 msgstr "要从所选取数据的开头重新找起吗？"
 
-#: ../src/MadSearchReplaceDialog.cpp:551
-#: ../src/MadSearchReplaceDialog.cpp:1139
+#: ../src/MadSearchReplaceDialog.cpp:551 ../src/MadSearchReplaceDialog.cpp:1139
 msgid "Do you want to find from begin of file?"
 msgstr "要从文件的开头重新找起吗？"
 

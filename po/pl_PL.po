@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.3.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-09 00:14+0800\n"
+"POT-Creation-Date: 2016-06-09 09:31+0800\n"
 "PO-Revision-Date: 2015-03-31 14:56+0100\n"
 "Last-Translator: Adam Massalski <massaada@wp.pl>\n"
 "Language-Team: Adam Massalski <massaada@wp.pl>\n"
@@ -1418,8 +1418,7 @@ msgid "Find next occurrence"
 msgstr "Znajdź następne wystąpienie"
 
 #: ../src/MadEditFrame.cpp:1985 ../src/MadEditFrame.cpp:3108
-#: ../src/MadSearchReplaceDialog.cpp:553
-#: ../src/MadSearchReplaceDialog.cpp:1141
+#: ../src/MadSearchReplaceDialog.cpp:553 ../src/MadSearchReplaceDialog.cpp:1141
 msgid "Find Next"
 msgstr "Znajdź następny"
 
@@ -2360,8 +2359,8 @@ msgstr ""
 msgid "Scroll Here"
 msgstr "Przewiń w lewo tekstu"
 
-#: ../src/MadEditFrame.cpp:2334 ../src/MadEditFrame.cpp:2349
-msgid "Scrolls file according to vertical bar posistion"
+#: ../src/MadEditFrame.cpp:2334
+msgid "Scrolls text according to vertical bar posistion"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:2336
@@ -2418,6 +2417,10 @@ msgstr ""
 #, fuzzy
 msgid "Scrolls down by one line"
 msgstr "Przewiń tekst w dół o jedną linię"
+
+#: ../src/MadEditFrame.cpp:2349
+msgid "Scrolls text according to horizontal bar posistion"
+msgstr ""
 
 #: ../src/MadEditFrame.cpp:2351
 #, fuzzy
@@ -2824,11 +2827,10 @@ msgstr "Predefiniowane typy plików:"
 msgid "<- Add Custom File Type"
 msgstr "<- Dodaj niestandardowy typ pliku"
 
-#: ../src/MadFileAssociationDialog.cpp:372
-#: ../src/MadHighlightingDialog.cpp:270 ../src/MadPurgeHistoryDialog.cpp:96
-#: ../src/MadOptionsDialog.cpp:976 ../src/MadConvEncDialog.cpp:71
-#: ../src/MadSaveQueryDialog.cpp:49 ../src/MadWinListDialog.cpp:63
-#: ../src/MadAboutDialog.cpp:90
+#: ../src/MadFileAssociationDialog.cpp:372 ../src/MadHighlightingDialog.cpp:270
+#: ../src/MadPurgeHistoryDialog.cpp:96 ../src/MadOptionsDialog.cpp:976
+#: ../src/MadConvEncDialog.cpp:71 ../src/MadSaveQueryDialog.cpp:49
+#: ../src/MadWinListDialog.cpp:63 ../src/MadAboutDialog.cpp:90
 msgid "&OK"
 msgstr "&OK"
 
@@ -3150,8 +3152,7 @@ msgstr ""
 msgid "C&ount"
 msgstr "Zlicz"
 
-#: ../src/MadSearchReplaceDialog.cpp:222
-#: ../src/MadSearchReplaceDialog.cpp:1283
+#: ../src/MadSearchReplaceDialog.cpp:222 ../src/MadSearchReplaceDialog.cpp:1283
 #, fuzzy
 msgid "R&eplace >>"
 msgstr "&Zamień >>"
@@ -3171,14 +3172,12 @@ msgstr "Nie można znaleźć poszukiwanego ciągu."
 msgid "Cannot find the matched string."
 msgstr "Nie można znaleźć poszukiwanego ciągu."
 
-#: ../src/MadSearchReplaceDialog.cpp:550
-#: ../src/MadSearchReplaceDialog.cpp:1138
+#: ../src/MadSearchReplaceDialog.cpp:550 ../src/MadSearchReplaceDialog.cpp:1138
 #, fuzzy
 msgid "Do you want to find from begin of selection?"
 msgstr "Czy chcesz wczytać ponownie?"
 
-#: ../src/MadSearchReplaceDialog.cpp:551
-#: ../src/MadSearchReplaceDialog.cpp:1139
+#: ../src/MadSearchReplaceDialog.cpp:551 ../src/MadSearchReplaceDialog.cpp:1139
 #, fuzzy
 msgid "Do you want to find from begin of file?"
 msgstr "Czy chcesz zapisać ten plik?"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-09 00:14+0800\n"
+"POT-Creation-Date: 2016-06-09 09:31+0800\n"
 "PO-Revision-Date: 2015-11-24 19:32+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
@@ -1347,8 +1347,7 @@ msgid "Find next occurrence"
 msgstr "到字串下一次出現的位置"
 
 #: ../src/MadEditFrame.cpp:1985 ../src/MadEditFrame.cpp:3108
-#: ../src/MadSearchReplaceDialog.cpp:553
-#: ../src/MadSearchReplaceDialog.cpp:1141
+#: ../src/MadSearchReplaceDialog.cpp:553 ../src/MadSearchReplaceDialog.cpp:1141
 msgid "Find Next"
 msgstr "尋找下一個"
 
@@ -2266,8 +2265,8 @@ msgstr ""
 msgid "Scroll Here"
 msgstr "向左捲動"
 
-#: ../src/MadEditFrame.cpp:2334 ../src/MadEditFrame.cpp:2349
-msgid "Scrolls file according to vertical bar posistion"
+#: ../src/MadEditFrame.cpp:2334
+msgid "Scrolls text according to vertical bar posistion"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:2336
@@ -2324,6 +2323,10 @@ msgstr ""
 #, fuzzy
 msgid "Scrolls down by one line"
 msgstr "向下捲動一行"
+
+#: ../src/MadEditFrame.cpp:2349
+msgid "Scrolls text according to horizontal bar posistion"
+msgstr ""
 
 #: ../src/MadEditFrame.cpp:2351
 #, fuzzy
@@ -2721,11 +2724,10 @@ msgstr "預先定義的類型"
 msgid "<- Add Custom File Type"
 msgstr "<- 增加自定檔案類型"
 
-#: ../src/MadFileAssociationDialog.cpp:372
-#: ../src/MadHighlightingDialog.cpp:270 ../src/MadPurgeHistoryDialog.cpp:96
-#: ../src/MadOptionsDialog.cpp:976 ../src/MadConvEncDialog.cpp:71
-#: ../src/MadSaveQueryDialog.cpp:49 ../src/MadWinListDialog.cpp:63
-#: ../src/MadAboutDialog.cpp:90
+#: ../src/MadFileAssociationDialog.cpp:372 ../src/MadHighlightingDialog.cpp:270
+#: ../src/MadPurgeHistoryDialog.cpp:96 ../src/MadOptionsDialog.cpp:976
+#: ../src/MadConvEncDialog.cpp:71 ../src/MadSaveQueryDialog.cpp:49
+#: ../src/MadWinListDialog.cpp:63 ../src/MadAboutDialog.cpp:90
 msgid "&OK"
 msgstr "確定(&O)"
 
@@ -3046,8 +3048,7 @@ msgstr "尋找所有的(&A)"
 msgid "C&ount"
 msgstr "計算次數(&O)"
 
-#: ../src/MadSearchReplaceDialog.cpp:222
-#: ../src/MadSearchReplaceDialog.cpp:1283
+#: ../src/MadSearchReplaceDialog.cpp:222 ../src/MadSearchReplaceDialog.cpp:1283
 #, fuzzy
 msgid "R&eplace >>"
 msgstr "取代(&R) >>"
@@ -3066,13 +3067,11 @@ msgstr "找不到符合的字串。"
 msgid "Cannot find the matched string."
 msgstr "找不到符合的字串。"
 
-#: ../src/MadSearchReplaceDialog.cpp:550
-#: ../src/MadSearchReplaceDialog.cpp:1138
+#: ../src/MadSearchReplaceDialog.cpp:550 ../src/MadSearchReplaceDialog.cpp:1138
 msgid "Do you want to find from begin of selection?"
 msgstr "要從選擇的開頭查找嗎？"
 
-#: ../src/MadSearchReplaceDialog.cpp:551
-#: ../src/MadSearchReplaceDialog.cpp:1139
+#: ../src/MadSearchReplaceDialog.cpp:551 ../src/MadSearchReplaceDialog.cpp:1139
 msgid "Do you want to find from begin of file?"
 msgstr "要從文件開頭尋找嗎？"
 
