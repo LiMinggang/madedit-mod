@@ -61,7 +61,7 @@ MadSortDialog::MadSortDialog(wxWindow* parent)
 	BoxSizer1->SetSizeHints(this);
 	Center();
 
-	Connect(wxID_ANY,wxEVT_CLOSE_WINDOW,(wxObjectEventFunction)&MadSortDialog::MadSortDialogClose);
+	Bind(wxEVT_CLOSE_WINDOW, &MadSortDialog::MadSortDialogClose, this, wxID_ANY);
 	//*)
 }
 

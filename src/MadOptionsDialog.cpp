@@ -766,7 +766,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxTextSample->SetKeyWords( 0, wxT( "if else return for while break continue" ) );
 	WxTextSample->SetKeyWords( 1, wxT( "const int float void char double bool" ) );
 	WxTextSample->SetReadOnly( true );
-	WxTextSample->Connect( wxEVT_STC_MARGINCLICK, wxStyledTextEventHandler( MadOptionsDialog::OnMarginClick ), NULL, this );
+	WxTextSample->Bind( wxEVT_STC_MARGINCLICK, &MadOptionsDialog::OnMarginClick, this );
 #else
 	WxTextSample = new wxTextCtrl( WxAuiNoteBookPage1, ID_WXRICHTEXTSAMPLE, wxT( "" ), wxPoint( 19, 47 ), wxSize( 219, 300 ), wxTE_MULTILINE | wxVSCROLL | wxHSCROLL | wxTE_READONLY, wxDefaultValidator, wxT( "WxTextSample" ) );
 	//WxTextSample->SetMaxLength(0);

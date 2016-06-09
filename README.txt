@@ -135,6 +135,7 @@ Fix: The fix width in the Option menu can't Open #199
 Fix: Improve windows list code, fix a bug of inner-tab drag/reposition(wxAuiNoteBook)
 Fix: Assertion failure of FindInFilesDialog
 Fix: Assertion failure of MadMacroDlg
+Other code improvement
 Upgrade boost to 1.61
 Update Chinese translation
 

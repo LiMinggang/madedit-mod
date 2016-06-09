@@ -104,11 +104,11 @@ MadPurgeHistoryDialog::MadPurgeHistoryDialog(wxWindow* parent,wxWindowID id,cons
 	BoxSizer1->SetSizeHints(this);
 	Center();
 
-	Connect(ID_WXCHECKBOXALLABOVE,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&MadPurgeHistoryDialog::wxCheckBoxAllAboveClick);
-	Connect(wxID_OK,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadPurgeHistoryDialog::WxButtonOKClick);
-	Connect(wxID_CANCEL,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadPurgeHistoryDialog::WxButtonCancelClick);
-	Connect(wxID_ANY,wxEVT_CLOSE_WINDOW,(wxObjectEventFunction)&MadPurgeHistoryDialog::MadPurgeHistoryDialogClose);
-	Connect(wxEVT_KEY_DOWN,(wxObjectEventFunction)&MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown);
+	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED, &MadPurgeHistoryDialog::wxCheckBoxAllAboveClick, this, ID_WXCHECKBOXALLABOVE );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadPurgeHistoryDialog::WxButtonOKClick, this, wxID_OK );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadPurgeHistoryDialog::WxButtonCancelClick, this, wxID_CANCEL );
+	Bind( wxEVT_CLOSE_WINDOW, &MadPurgeHistoryDialog::MadPurgeHistoryDialogClose, this, wxID_ANY );
+	Bind(wxEVT_KEY_DOWN, &MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown, this, wxID_ANY );
 	//*)
 }
 
@@ -151,24 +151,9 @@ void MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown(wxKeyEvent& event)
     case WXK_ESCAPE:
         {
             wxCommandEvent e;
-            this->WxButtonCancelClick(e);
+            WxButtonCancelClick(e);
             return;
         }
-    case WXK_RETURN:
-    case WXK_NUMPAD_ENTER:
-        if ((wxButton*)this != this->WxButtonCancel)
-        {
-            wxCommandEvent e;
-            this->WxButtonOKClick(e);
-            return; // no skip
-        }
-        else
-        {
-            wxCommandEvent e;
-            this->WxButtonCancelClick(e);
-            return; // no skip
-        }
-        break;
     default:
         break;
     }
@@ -181,14 +166,14 @@ void MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown(wxKeyEvent& event)
     if('O' == key && wxACCEL_ALT == flags)
     {
         wxCommandEvent e;
-        this->WxButtonOKClick(e);
+        WxButtonOKClick(e);
         return; // no skip
     }
 
     if('C' == key && wxACCEL_ALT == flags)
     {
         wxCommandEvent e;
-        this->WxButtonCancelClick(e);
+        WxButtonCancelClick(e);
         return; // no skip
     }
 

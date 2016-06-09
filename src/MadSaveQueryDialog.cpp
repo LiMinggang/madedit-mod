@@ -70,14 +70,14 @@ MadSaveQueryDialog::MadSaveQueryDialog(wxWindow* parent,wxWindowID id,const wxPo
 	BoxSizer1->SetSizeHints(this);
 	Center();
 
-	Connect(ID_LISTCTRLMADFILELIST,wxEVT_COMMAND_LIST_ITEM_SELECTED,(wxObjectEventFunction)&MadSaveQueryDialog::OnMadFileListItemSelectChange);
-	Connect(ID_LISTCTRLMADFILELIST,wxEVT_COMMAND_LIST_ITEM_DESELECTED,(wxObjectEventFunction)&MadSaveQueryDialog::OnMadFileListItemSelectChange);
-	Connect(wxID_OK,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadSaveQueryDialog::OnButtonOKClick);
-	Connect(ID_BUTTONSAVENONE,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadSaveQueryDialog::OnButtonSaveNoneClick);
-	Connect(wxID_CANCEL,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadSaveQueryDialog::OnButtonCancelClick);
-	Connect(ID_BUTTONSELECTALL,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadSaveQueryDialog::OnButtonSelectAllClick);
-	Connect(ID_BUTTONDSELECTALL,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadSaveQueryDialog::OnButtonDselectAllClick);
-	Connect(ID_BUTTONGOTO,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadSaveQueryDialog::OnButtonGoToClick);
+	Bind( wxEVT_COMMAND_LIST_ITEM_SELECTED, &MadSaveQueryDialog::OnMadFileListItemSelectChange, this, ID_LISTCTRLMADFILELIST );
+	Bind( wxEVT_COMMAND_LIST_ITEM_DESELECTED, &MadSaveQueryDialog::OnMadFileListItemSelectChange, this, ID_LISTCTRLMADFILELIST );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadSaveQueryDialog::OnButtonOKClick, this, wxID_OK );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadSaveQueryDialog::OnButtonSaveNoneClick, this, ID_BUTTONSAVENONE );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadSaveQueryDialog::OnButtonCancelClick, this, wxID_CANCEL );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadSaveQueryDialog::OnButtonSelectAllClick, this, ID_BUTTONSELECTALL );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadSaveQueryDialog::OnButtonDselectAllClick, this, ID_BUTTONDSELECTALL );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadSaveQueryDialog::OnButtonGoToClick, this, ID_BUTTONGOTO );
 	//*)
 
 	SetDefaultItem(ButtonOK);

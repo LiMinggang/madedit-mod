@@ -279,19 +279,19 @@ MadHighlightingDialog::MadHighlightingDialog(wxWindow* parent,wxWindowID id,cons
 	BoxSizer1->SetSizeHints(this);
 	Center();
 
-	Connect(ID_WXLISTBOXSYNTAX,wxEVT_COMMAND_LISTBOX_SELECTED,(wxObjectEventFunction)&MadHighlightingDialog::WxListBoxSyntaxSelected);
-	Connect(ID_WXBUTTONLOAD,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadHighlightingDialog::WxButtonLoadClick);
-	Connect(ID_WXBUTTONSAVE,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadHighlightingDialog::WxButtonSaveClick);
-	Connect(ID_WXBUTTONDELETE,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadHighlightingDialog::WxButtonDeleteClick);
-	Connect(ID_WXLISTCTRLKEYWORD,wxEVT_COMMAND_LIST_ITEM_SELECTED,(wxObjectEventFunction)&MadHighlightingDialog::WxListCtrlKeywordSelected);
-	Connect(ID_WXCHECKBOXBOLD,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&MadHighlightingDialog::WxCheckBoxBoldClick);
-	Connect(ID_WXCHECKBOXITALIC,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&MadHighlightingDialog::WxCheckBoxItalicClick);
-	Connect(ID_WXCHECKBOXUNDERLINE,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&MadHighlightingDialog::WxCheckBoxUnderlineClick);
-	Connect(ID_WXLISTCTRLFC,wxEVT_COMMAND_LIST_ITEM_SELECTED,(wxObjectEventFunction)&MadHighlightingDialog::WxListCtrlFCSelected);
-	Connect(ID_WXBUTTONFC,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadHighlightingDialog::WxButtonFCClick);
-	Connect(ID_WXLISTCTRLBC,wxEVT_COMMAND_LIST_ITEM_SELECTED,(wxObjectEventFunction)&MadHighlightingDialog::WxListCtrlBCSelected);
-	Connect(ID_WXBUTTONBC,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadHighlightingDialog::WxButtonBCClick);
-	Connect(wxID_ANY,wxEVT_CLOSE_WINDOW,(wxObjectEventFunction)&MadHighlightingDialog::MadHighlightingDialogClose);
+	Bind( wxEVT_COMMAND_LISTBOX_SELECTED, &MadHighlightingDialog::WxListBoxSyntaxSelected, this, ID_WXLISTBOXSYNTAX );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadHighlightingDialog::WxButtonLoadClick, this, ID_WXBUTTONLOAD );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadHighlightingDialog::WxButtonSaveClick, this, ID_WXBUTTONSAVE );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadHighlightingDialog::WxButtonDeleteClick, this, ID_WXBUTTONDELETE );
+	Bind( wxEVT_COMMAND_LIST_ITEM_SELECTED, &MadHighlightingDialog::WxListCtrlKeywordSelected, this, ID_WXLISTCTRLKEYWORD );
+	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED, &MadHighlightingDialog::WxCheckBoxBoldClick, this, ID_WXCHECKBOXBOLD );
+	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED, &MadHighlightingDialog::WxCheckBoxItalicClick, this, ID_WXCHECKBOXITALIC );
+	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED, &MadHighlightingDialog::WxCheckBoxUnderlineClick, this, ID_WXCHECKBOXUNDERLINE );
+	Bind( wxEVT_COMMAND_LIST_ITEM_SELECTED, &MadHighlightingDialog::WxListCtrlFCSelected, this, ID_WXLISTCTRLFC );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadHighlightingDialog::WxButtonFCClick, this, ID_WXBUTTONFC );
+	Bind( wxEVT_COMMAND_LIST_ITEM_SELECTED, &MadHighlightingDialog::WxListCtrlBCSelected, this, ID_WXLISTCTRLBC );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadHighlightingDialog::WxButtonBCClick, this, ID_WXBUTTONBC );
+	Bind( wxEVT_CLOSE_WINDOW, &MadHighlightingDialog::MadHighlightingDialogClose, this, wxID_ANY );
 	//*)
 
 #ifdef __WXMSW__

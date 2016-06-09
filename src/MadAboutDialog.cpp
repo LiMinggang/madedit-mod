@@ -98,7 +98,7 @@ MadAboutDialog::MadAboutDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos
 	BoxSizer1->SetSizeHints(this);
 	Center();
 
-	Connect(wxID_ANY,wxEVT_CLOSE_WINDOW,(wxObjectEventFunction)&MadAboutDialog::MadAboutDialogClose);
+	Bind(wxEVT_CLOSE_WINDOW,(wxObjectEventFunction)&MadAboutDialog::MadAboutDialogClose, this, wxID_ANY);
 	//*)
 	WxStaticBitmap1->SetBitmap(wxBitmap(Mad_xpm));
 	WxStaticBitmap1->Enable(true);

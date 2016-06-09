@@ -81,10 +81,10 @@ MadMacroDlg::MadMacroDlg(wxWindow* parent,wxWindowID id,const wxPoint& pos,const
 	BoxSizer1->Fit(this);
 	BoxSizer1->SetSizeHints(this);
 
-	Connect(wxID_OK,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadMacroDlg::OnWxButtonRunClick);
-	Connect(wxID_CANCEL,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadMacroDlg::OnWxButtonCloseClick);
-	Connect(ID_WXBUTTONTOGGLERESULT,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadMacroDlg::OnWxButtonResultClick);
-	Connect(wxID_ANY,wxEVT_CLOSE_WINDOW,(wxObjectEventFunction)&MadMacroDlg::MadMacroDlgClose);
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadMacroDlg::OnWxButtonRunClick, this, wxID_OK );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadMacroDlg::OnWxButtonCloseClick, this, wxID_CANCEL );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadMacroDlg::OnWxButtonResultClick, this, ID_WXBUTTONTOGGLERESULT );
+	Bind( wxEVT_CLOSE_WINDOW, &MadMacroDlg::MadMacroDlgClose, this, wxID_ANY );
 	//*)
 	m_Pymacro->SetFocus();
 }

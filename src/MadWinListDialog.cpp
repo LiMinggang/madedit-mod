@@ -67,15 +67,15 @@ MadWinListDialog::MadWinListDialog(wxWindow* parent,wxWindowID id)
 	BoxSizer1->Fit(this);
 	BoxSizer1->SetSizeHints(this);
 
-	Connect(ID_BUTTONACTIVATE,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadWinListDialog::OnButtonActivateClick);
-	Connect(ID_BUTTONSAVE,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadWinListDialog::OnButtonSaveClick);
-	Connect(ID_BUTTONSAVEAS,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadWinListDialog::OnButtonSaveAsClick);
-	Connect(ID_BUTTONCLOSEWINDOWS,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadWinListDialog::OnButtonCloseWindowsClick);
-	Connect(ID_BUTTONSORTTABBYNAME,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadWinListDialog::OnButtonSortTabByNameClick);
-	Connect(ID_BUTTONSORTTABBYPATH,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadWinListDialog::OnButtonSortTabByPathClick);
-	Connect(wxID_OK,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadWinListDialog::OnButtonOkClick);
-	Connect(wxID_ANY,wxEVT_CLOSE_WINDOW,(wxObjectEventFunction)&MadWinListDialog::OnMadWinListDialogClose);
-	Connect(wxEVT_KEY_DOWN,(wxObjectEventFunction)&MadWinListDialog::OnKeyDown);
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonActivateClick, this, ID_BUTTONACTIVATE );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonSaveClick, this, ID_BUTTONSAVE );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonSaveAsClick, this, ID_BUTTONSAVEAS );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonCloseWindowsClick, this, ID_BUTTONCLOSEWINDOWS );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonSortTabByNameClick, this, ID_BUTTONSORTTABBYNAME );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonSortTabByPathClick, this, ID_BUTTONSORTTABBYPATH );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonOkClick, this, wxID_OK );
+	Bind( wxEVT_CLOSE_WINDOW, &MadWinListDialog::OnMadWinListDialogClose, this, wxID_ANY );
+	Bind( wxEVT_KEY_DOWN, &MadWinListDialog::OnKeyDown, this, wxID_ANY );
 	//*)
 
 	MadWindowsList->Bind(wxEVT_KEY_DOWN, &MadWinListDialog::OnKeyDown, this);

@@ -203,13 +203,13 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID id,const 
 	BoxSizer1->SetSizeHints(this);
 	Center();
 
-	Connect(ID_WXCHECKBOXREGEX,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&MadFindInFilesDialog::WxCheckBoxRegexClick);
-	Connect(ID_WXCHECKBOXFINDHEX,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&MadFindInFilesDialog::WxCheckBoxFindHexClick);
-	Connect(ID_WXBUTTONFIND,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadFindInFilesDialog::WxButtonFindClick);
-	Connect(ID_WXBUTTONREPLACE,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadFindInFilesDialog::WxButtonReplaceClick);
-	Connect(ID_WXCHECKBOXENABLEREPLACE,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&MadFindInFilesDialog::WxCheckBoxEnableReplaceClick);
-	Connect(ID_WXBUTTONDIR,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadFindInFilesDialog::WxButtonDirClick);
-	Connect(ID_WXBUTTONACTIVEDIR,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadFindInFilesDialog::WxButtonActiveDirClick);
+	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED, &MadFindInFilesDialog::WxCheckBoxRegexClick, this, ID_WXCHECKBOXREGEX );
+	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED, &MadFindInFilesDialog::WxCheckBoxFindHexClick, this, ID_WXCHECKBOXFINDHEX );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadFindInFilesDialog::WxButtonFindClick, this, ID_WXBUTTONFIND );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadFindInFilesDialog::WxButtonReplaceClick, this, ID_WXBUTTONREPLACE );
+	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED, &MadFindInFilesDialog::WxCheckBoxEnableReplaceClick, this, ID_WXCHECKBOXENABLEREPLACE );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadFindInFilesDialog::WxButtonDirClick, this, ID_WXBUTTONDIR );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadFindInFilesDialog::WxButtonActiveDirClick, this, ID_WXBUTTONACTIVEDIR );
 	//*)
 
 	int bw, bh;

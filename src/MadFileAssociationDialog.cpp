@@ -380,12 +380,12 @@ MadFileAssociationDialog::MadFileAssociationDialog(wxWindow* parent,wxWindowID i
 	BoxSizer1->SetSizeHints(this);
 	Center();
 
-	Connect(ID_WXLISTBOXASSOCIATED,wxEVT_COMMAND_LISTBOX_DOUBLECLICKED,(wxObjectEventFunction)&MadFileAssociationDialog::WxListBoxAssociatedDoubleClicked);
-	Connect(ID_WXBUTTONADD,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadFileAssociationDialog::WxButtonAddClick);
-	Connect(ID_WXBUTTONREMOVE,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadFileAssociationDialog::WxButtonRemoveClick);
-	Connect(ID_WXLISTBOXPREDEFINED,wxEVT_COMMAND_LISTBOX_DOUBLECLICKED,(wxObjectEventFunction)&MadFileAssociationDialog::WxListBoxPredefinedDoubleClicked);
-	Connect(ID_WXBUTTONADDCUSTOM,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadFileAssociationDialog::WxButtonAddCustomClick);
-	Connect(wxID_OK,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadFileAssociationDialog::WxButtonOKClick);
+	Bind( wxEVT_COMMAND_LISTBOX_DOUBLECLICKED, &MadFileAssociationDialog::WxListBoxAssociatedDoubleClicked, this, ID_WXLISTBOXASSOCIATED );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadFileAssociationDialog::WxButtonAddClick, this, ID_WXBUTTONADD );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadFileAssociationDialog::WxButtonRemoveClick, this, ID_WXBUTTONREMOVE );
+	Bind( wxEVT_COMMAND_LISTBOX_DOUBLECLICKED, &MadFileAssociationDialog::WxListBoxPredefinedDoubleClicked, this, ID_WXLISTBOXPREDEFINED );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadFileAssociationDialog::WxButtonAddCustomClick, this, ID_WXBUTTONADDCUSTOM );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadFileAssociationDialog::WxButtonOKClick, this, wxID_OK );
 	//*)
 
 	wxArrayString as_predefined(g_PredefinedTypes_Count, g_PredefinedTypes);
