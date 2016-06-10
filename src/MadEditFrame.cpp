@@ -1380,7 +1380,9 @@ void OnVScrollMouseRightUp( MadEdit *madedit )
 	{
 		long pos = madedit->GetVSMousePos();
 		if(pos >= 0)
-			g_Menu_VScrollPop->SetLabel(menuVScrollHere, wxString::Format(_("Scroll Here(%s)"), wxLongLong(pos).ToString()));
+			g_Menu_VScrollPop->SetLabel(menuVScrollHere, wxString::Format(_("Scroll Here(%s)"), wxLongLong(pos+1).ToString()));
+		else
+			g_Menu_VScrollPop->SetLabel(menuVScrollHere, _("Scroll Here"));
 	}
 	g_MainFrame->PopupMenu( g_Menu_VScrollPop );
 }
@@ -1396,8 +1398,10 @@ void OnHScrollMouseRightUp( MadEdit *madedit )
 			int fsize;
 			madedit->GetFont( fontname, fsize );
 			if(fsize) pos /= fsize;
-			g_Menu_HScrollPop->SetLabel(menuHScrollHere, wxString::Format(_("Scroll Here(%s)"), wxLongLong(pos).ToString()));
+			g_Menu_HScrollPop->SetLabel(menuHScrollHere, wxString::Format(_("Scroll Here(%s)"), wxLongLong(pos+1).ToString()));
 		}
+		else
+			g_Menu_HScrollPop->SetLabel(menuHScrollHere, _("Scroll Here"));
 	}
 	g_MainFrame->PopupMenu( g_Menu_HScrollPop );
 }
