@@ -3493,7 +3493,7 @@ void MadEdit::InsertIncrementalNumber( int initial, int step, int total, MadNumb
 			if( colcount > 1 )
 			{
 				int cc = colcount;
-				bool linear = ( stepType == nstLinear );
+				bool linear = ( stepType == mnstLinear );
 				const char * strbuff = 0;
 				char buffer[33];
 

@@ -61,7 +61,7 @@
 #include "markdown.h"
 #include "formattersettings.h"
 #include "asstreamiterator.h"
-
+#include "MadRuler.h"
 #ifdef __WXMSW__
 	#include <io.h>
 #else
@@ -6240,7 +6240,7 @@ void MadEditFrame::OnEditInsertNumbers( wxCommandEvent& event )
 
 		if( g_MadNumberDlg->ShowModal() == wxID_OK )
 		{
-			MadNumberingStepType numStepType = nstLinear;
+			MadNumberingStepType numStepType = mnstLinear;
 			MadNumberFormat numFormat = nfDEC;
 			MadNumberAlign numAlign = naLeft;
 			wxString strStepType( wxT( "MadNumberingStepType.Linear" ) ),
@@ -6250,7 +6250,7 @@ void MadEditFrame::OnEditInsertNumbers( wxCommandEvent& event )
 
 			switch( sel )
 			{
-			case 1: numStepType = nstExponential; break;
+			case 1: numStepType = mnstExponential; break;
 
 			default: break;
 			}
@@ -9058,6 +9058,15 @@ void MadEditFrame::OnHelpAbout( wxCommandEvent& event )
 	dlg.WxMemoCredits->SetInsertionPoint( 0 );
 	// Hide Modaless Dialog
 	HideModalessDialogs();
+
+     RulerPanel * mFreqRuler  = new RulerPanel(this, wxID_ANY);
+     mFreqRuler->ruler.SetBounds(0, 0, 100, 100); // Ruler can't handle small sizes
+     mFreqRuler->ruler.SetOrientation(wxHORIZONTAL);
+     mFreqRuler->ruler.SetLog(true);
+     mFreqRuler->ruler.SetRange(0, 50);
+     mFreqRuler->ruler.SetFormat(MadRuler::IntFormat);
+     mFreqRuler->ruler.SetUnits(_("Hz"));
+	m_AuiManager.AddPane( mFreqRuler, wxCENTER );
 
 	if( dlg.ShowModal() == wxID_OK )
 	{

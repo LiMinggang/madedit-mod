@@ -148,8 +148,8 @@ enum
 
 enum MadNumberingStepType
 {
-	nstLinear,
-	nstExponential
+	mnstLinear,
+	mnstExponential
 };
 
 enum MadNumberFormat

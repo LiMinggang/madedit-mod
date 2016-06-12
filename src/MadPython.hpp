@@ -2131,8 +2131,8 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.value( "C2JK", cefC2JK ) // Trad&Simp Chinese   ==> Japanese Kanji
 	;
 	enum_<MadNumberingStepType>( "MadNumberingStepType" )
-	.value( "Linear", nstLinear )
-	.value( "Exponential", nstExponential )
+	.value( "Linear", mnstLinear )
+	.value( "Exponential", mnstExponential )
 	;
 	enum_<MadNumberFormat>( "MadNumberFormat" )
 	.value( "DEC", nfDEC )
