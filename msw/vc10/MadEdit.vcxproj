@@ -221,7 +221,6 @@
     <ClCompile Include="..\..\src\MadPrintout.cpp" />
     <ClCompile Include="..\..\src\MadPurgeHistoryDialog.cpp" />
     <ClCompile Include="..\..\src\MadRecentList.cpp" />
-    <ClCompile Include="..\..\src\MadRuler.cpp" />
     <ClCompile Include="..\..\src\MadSaveQueryDialog.cpp" />
     <ClCompile Include="..\..\src\MadSearchReplaceDialog.cpp" />
     <ClCompile Include="..\..\src\MadSortDialog.cpp" />
