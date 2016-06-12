@@ -13,7 +13,6 @@
     <ClInclude Include="..\..\spellchecker\hunspell\src\hunspell\atypes.hxx" />
     <ClInclude Include="..\..\spellchecker\hunspell\src\hunspell\baseaffix.hxx" />
     <ClInclude Include="..\..\spellchecker\hunspell\src\hunspell\csutil.hxx" />
-    <ClInclude Include="..\..\spellchecker\hunspell\src\hunspell\dictmgr.hxx" />
     <ClInclude Include="..\..\spellchecker\hunspell\src\hunspell\filemgr.hxx" />
     <ClInclude Include="..\..\spellchecker\hunspell\src\hunspell\hashmgr.hxx" />
     <ClInclude Include="..\..\spellchecker\hunspell\src\hunspell\htypes.hxx" />
@@ -35,7 +34,6 @@
     <ClCompile Include="..\..\spellchecker\hunspell\src\hunspell\affentry.cxx" />
     <ClCompile Include="..\..\spellchecker\hunspell\src\hunspell\affixmgr.cxx" />
     <ClCompile Include="..\..\spellchecker\hunspell\src\hunspell\csutil.cxx" />
-    <ClCompile Include="..\..\spellchecker\hunspell\src\hunspell\dictmgr.cxx" />
     <ClCompile Include="..\..\spellchecker\hunspell\src\hunspell\filemgr.cxx" />
     <ClCompile Include="..\..\spellchecker\hunspell\src\hunspell\hashmgr.cxx" />
     <ClCompile Include="..\..\spellchecker\hunspell\src\hunspell\hunspell.cxx" />
@@ -43,6 +41,5 @@
     <ClCompile Include="..\..\spellchecker\hunspell\src\hunspell\phonet.cxx" />
     <ClCompile Include="..\..\spellchecker\hunspell\src\hunspell\replist.cxx" />
     <ClCompile Include="..\..\spellchecker\hunspell\src\hunspell\suggestmgr.cxx" />
-    <ClCompile Include="..\..\spellchecker\hunspell\src\hunspell\utf_info.cxx" />
   </ItemGroup>
 </Project>
