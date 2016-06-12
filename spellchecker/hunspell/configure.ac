@@ -4,12 +4,12 @@
 m4_pattern_allow
 
 AC_PREREQ(2.59)
-AC_INIT([hunspell],[1.3.3],[nemeth@numbertext.org])
+AC_INIT([hunspell],[1.4.0],[nemeth@numbertext.org])
 
 AC_CANONICAL_SYSTEM
 AC_SUBST(XFAILED)
 
-AM_INIT_AUTOMAKE(hunspell, 1.3.3)
+AM_INIT_AUTOMAKE(hunspell, 1.4.0)
 HUNSPELL_VERSION_MAJOR=`echo $VERSION | cut -d"." -f1`
 HUNSPELL_VERSION_MINOR=`echo $VERSION | cut -d"." -f2`
 AC_SUBST(HUNSPELL_VERSION_MAJOR)
@@ -28,7 +28,7 @@ AC_LIBTOOL_WIN32_DLL
 
 # Checks for header files.
 
-AC_CHECK_HEADERS([fcntl.h libintl.h locale.h unistd.h error.h])
+AC_CHECK_HEADERS([fcntl.h libintl.h locale.h unistd.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
@@ -45,10 +45,6 @@ AM_GNU_GETTEXT_VERSION(0.17)
 
 AC_ARG_WITH(warnings,[  --with-warnings         compile with warning messages], [
      AC_DEFINE(HUNSPELL_WARNING_ON,1,"Define if you need warning messages")
-])
-
-AC_ARG_WITH(experimental,[  --with-experimental     compile with some extra functions], [
-     AC_DEFINE(HUNSPELL_EXPERIMENTAL,1,"Define if you use exterimental functions")
 ])
 
 CURSESLIB=""

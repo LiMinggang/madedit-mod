@@ -408,14 +408,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\spellchecker\hunspell\src\hunspell\dictmgr.cxx"
-				>
-			</File>
-			<File
-				RelativePath="..\..\spellchecker\hunspell\src\hunspell\dictmgr.hxx"
-				>
-			</File>
-			<File
 				RelativePath="..\..\spellchecker\hunspell\src\hunspell\filemgr.cxx"
 				>
 			</File>
@@ -485,10 +477,6 @@
 			</File>
 			<File
 				RelativePath="..\..\spellchecker\hunspell\src\hunspell\suggestmgr.hxx"
-				>
-			</File>
-			<File
-				RelativePath="..\..\spellchecker\hunspell\src\hunspell\utf_info.cxx"
 				>
 			</File>
 			<File

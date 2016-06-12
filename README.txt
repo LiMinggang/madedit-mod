@@ -137,6 +137,7 @@ Fix: Assertion failure of FindInFilesDialog
 Fix: Assertion failure of MadMacroDlg
 Other code improvement
 Upgrade boost to 1.61
+Update hunspell to 1.41
 Update Chinese translation
 
 Mod v0.4.2.1
