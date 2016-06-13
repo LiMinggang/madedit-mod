@@ -2419,7 +2419,7 @@ void LoadDefaultSettings( wxConfigBase *madConfig )
 }
 
 MadEditFrame::MadEditFrame( wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style )
-	: wxFrame( parent, id, title, position, size, style ), m_AutoSaveTimer(this, ID_WXTIMER)
+	: wxFrame( parent, id, title, position, size, style ), m_AutoSaveTimer(this, ID_WXTIMER), m_ResetToolBars(false)
 {
 #ifndef __WXMSW__
 	wxConvFileName = &MadConvFileNameObj;
@@ -3000,20 +3000,14 @@ void MadEditFrame::CreateGUIControls( void )
 	{
 		WxToolBar[td->toolbar_id]->Realize();
 
-		m_Config->Read( td->panel_pos, &toolbarpos );
+		m_Config->Read( td->panel_pos, &toolbarpos, wxEmptyString );
 		if(toolbarpos.IsEmpty())
 			ResetNormalToolBarPos(WxToolBar[td->toolbar_id], td->toolbarid_name, wxGetTranslation(td->caption), td->pos);
 		else
 			RestoreAuiPanel(WxToolBar[td->toolbar_id], toolbarpos, true);
 
-		if(tbMACRO == td->toolbar_id)
-		{
-			m_AuiManager.GetPane( WxToolBar[tbMACRO] ).Resizable();
-		}
-
 		++td;
 	}
-	m_AuiManager.Update();
 
 	{
 		// enum all madpython files under scripts
@@ -3356,25 +3350,28 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 	m_Config->Write( wxT( "/MadEdit/SearchFrom" ), wxEmptyString );
 	m_Config->Write( wxT( "/MadEdit/SearchTo" ), wxEmptyString );
 
-	wxString panelStatus;
-	ToolBarData * td = &ToolBarTable[0];
-	while( td->toolbar_id >= 0 )
-	{
-		panelStatus = m_AuiManager.SavePaneInfo(m_AuiManager.GetPane( WxToolBar[td->toolbar_id] ));
-		m_Config->Write( td->panel_pos, panelStatus );
-		++td;
-	}
-
 	// save quick search status
 	m_Config->Write( wxT( "/MadEdit/QuickSearchWholeWord" ), m_QuickSearchBar->GetToolToggled(menuQuickFindWholeWord) );
 	m_Config->Write( wxT( "/MadEdit/QuickSearchCaseSensitive" ), m_QuickSearchBar->GetToolToggled(menuQuickFindCase) );
 	m_Config->Write( wxT( "/MadEdit/QuickSearchRegEx" ), m_QuickSearchBar->GetToolToggled(menuQuickFindRegex) );
 	m_Config->Write( wxT( "/MadEdit/QuickSearchDotMatchNewLine" ), m_QuickSearchBar->GetToolToggled(menuQuickFindDotMatchNewLine) );
-	panelStatus = m_AuiManager.SavePaneInfo(m_AuiManager.GetPane( m_QuickSearchBar ));
-	m_Config->Write( wxT( "/MadEdit/QuickSearchBarStatus" ), panelStatus );
 
-	panelStatus = m_AuiManager.SavePaneInfo(m_AuiManager.GetPane( m_InfoNotebook ));
-	m_Config->Write( wxT( "/MadEdit/InfoWindowStatus" ), panelStatus );
+	if(!m_ResetToolBars)
+	{
+		wxString panelStatus;
+		ToolBarData * td = &ToolBarTable[0];
+		while( td->toolbar_id >= 0 )
+		{
+			panelStatus = m_AuiManager.SavePaneInfo(m_AuiManager.GetPane( WxToolBar[td->toolbar_id] ));
+			m_Config->Write( td->panel_pos, panelStatus );
+			++td;
+		}
+		panelStatus = m_AuiManager.SavePaneInfo(m_AuiManager.GetPane( m_QuickSearchBar ));
+		m_Config->Write( wxT( "/MadEdit/QuickSearchBarStatus" ), panelStatus );
+		panelStatus = m_AuiManager.SavePaneInfo(m_AuiManager.GetPane( m_InfoNotebook ));
+		m_Config->Write( wxT( "/MadEdit/InfoWindowStatus" ), panelStatus );
+	}
+
 	delete m_RecentFiles;
 	m_RecentFiles = NULL;
 	delete m_RecentEncodings;
@@ -8095,7 +8092,6 @@ void MadEditFrame::OnToolsPurgeHistories( wxCommandEvent& event )
 			g_FileCaretPosManager.Clear( m_Config );
 		}
 
-		
 		if( dlg.wxCheckBoxResetToolBarsInfoWin->IsChecked() )
 		{
 			bool show = m_AuiManager.GetPane( m_InfoNotebook ).IsShown();
@@ -8103,13 +8099,17 @@ void MadEditFrame::OnToolsPurgeHistories( wxCommandEvent& event )
 			if(show)
 				m_AuiManager.GetPane( m_InfoNotebook ).Hide();
 			ResetInformationWinPos();
+			m_Config->DeleteEntry(wxT( "/MadEdit/InfoWindowStatus" ));
 			m_AuiManager.GetPane( m_InfoNotebook ).Show(show);
 			show = m_AuiManager.GetPane( m_QuickSearchBar ).IsShown();
 			if(show)
 				m_AuiManager.GetPane( m_QuickSearchBar ).Hide();
 			m_AuiManager.DetachPane(m_QuickSearchBar);
 			ResetQuickSearchBarPos();
+			
+			m_Config->DeleteEntry(wxT( "/MadEdit/QuickSearchBarStatus" ));
 			m_AuiManager.GetPane( m_QuickSearchBar ).Show(show);
+
 			ToolBarData * td = &ToolBarTable[0];
 
 			std::vector<bool> status_vec;
@@ -8130,9 +8130,11 @@ void MadEditFrame::OnToolsPurgeHistories( wxCommandEvent& event )
 			{
 				ResetNormalToolBarPos(WxToolBar[td->toolbar_id], td->toolbarid_name, wxGetTranslation(td->caption), td->pos);
 				m_AuiManager.GetPane( m_QuickSearchBar ).Show(status_vec[n++]);
+				m_Config->DeleteEntry(td->panel_pos);
 				++td;
 			}
 			m_AuiManager.Update();
+			m_ResetToolBars = true;
 		}
 	}
 }

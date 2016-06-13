@@ -136,6 +136,7 @@ public:
 	wxComboBox    *m_QuickSearch;
 	bool           m_ReloadFiles;
 	bool           m_PurgeHistory;
+	bool           m_ResetToolBars;
 	bool           m_SearchDirectionNext;
     wxFileOffset   m_QSearchBegPos, m_QSearchEndPos;
 	void OnUpdateUI_CheckFrameStyle( wxUpdateUIEvent& event );
