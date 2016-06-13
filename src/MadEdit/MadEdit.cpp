@@ -3526,7 +3526,7 @@ void MadEdit::UpdateAppearance()
 
 	m_VisibleRowCount = m_CompleteRowCount;
 
-	if( m_VisibleRowCount * m_RowHeight < m_ClientHeight )   ++m_VisibleRowCount;
+	if( m_VisibleRowCount * m_RowHeight < m_ClientHeight ) ++m_VisibleRowCount;
 
 	m_PageRowCount = m_CompleteRowCount;
 

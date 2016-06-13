@@ -2313,8 +2313,8 @@ CommandData CommandTable[] =
 	int pos;
 }
 */
-#define MADTOOBAR_DEFAULT (wxAUI_TB_DEFAULT_STYLE | wxAUI_TB_HORIZONTAL | wxAUI_TB_PLAIN_BACKGROUND)
-#define MADTOOBAR_OVERFLOW (wxAUI_TB_DEFAULT_STYLE | wxAUI_TB_HORIZONTAL | wxAUI_TB_PLAIN_BACKGROUND | wxAUI_TB_OVERFLOW)
+#define MADTOOBAR_DEFAULT (wxAUI_TB_HORIZONTAL | wxAUI_TB_PLAIN_BACKGROUND | wxAUI_TB_GRIPPER)
+#define MADTOOBAR_OVERFLOW (wxAUI_TB_HORIZONTAL | wxAUI_TB_PLAIN_BACKGROUND | wxAUI_TB_GRIPPER | wxAUI_TB_OVERFLOW)
 
 ToolBarData ToolBarTable[] = 
 {
@@ -2995,18 +2995,25 @@ void MadEditFrame::CreateGUIControls( void )
 	td = &ToolBarTable[0];
 
 	wxString toolbarpos;
+	wxSize tbsize;
 	while( td->toolbar_id >= 0 )
 	{
 		WxToolBar[td->toolbar_id]->Realize();
-		
+
 		m_Config->Read( td->panel_pos, &toolbarpos );
 		if(toolbarpos.IsEmpty())
 			ResetNormalToolBarPos(WxToolBar[td->toolbar_id], td->toolbarid_name, wxGetTranslation(td->caption), td->pos);
 		else
 			RestoreAuiPanel(WxToolBar[td->toolbar_id], toolbarpos, true);
-		
+
+		if(tbMACRO == td->toolbar_id)
+		{
+			m_AuiManager.GetPane( WxToolBar[tbMACRO] ).Resizable();
+		}
+
 		++td;
 	}
+	m_AuiManager.Update();
 
 	{
 		// enum all madpython files under scripts
@@ -8093,26 +8100,39 @@ void MadEditFrame::OnToolsPurgeHistories( wxCommandEvent& event )
 		{
 			bool show = m_AuiManager.GetPane( m_InfoNotebook ).IsShown();
 			m_AuiManager.DetachPane(m_InfoNotebook);
+			if(show)
+				m_AuiManager.GetPane( m_InfoNotebook ).Hide();
 			ResetInformationWinPos();
 			m_AuiManager.GetPane( m_InfoNotebook ).Show(show);
 			show = m_AuiManager.GetPane( m_QuickSearchBar ).IsShown();
+			if(show)
+				m_AuiManager.GetPane( m_QuickSearchBar ).Hide();
 			m_AuiManager.DetachPane(m_QuickSearchBar);
 			ResetQuickSearchBarPos();
 			m_AuiManager.GetPane( m_QuickSearchBar ).Show(show);
 			ToolBarData * td = &ToolBarTable[0];
 
+			std::vector<bool> status_vec;
 			while( td->toolbar_id >= 0 )
 			{
+				show = m_AuiManager.GetPane( WxToolBar[td->toolbar_id] ).IsShown();
+				status_vec.push_back(show);
 				m_AuiManager.DetachPane(WxToolBar[td->toolbar_id]);
+				if(show)
+					m_AuiManager.GetPane( WxToolBar[td->toolbar_id] ).Hide();
 				++td;
 			}
+
 			td = &ToolBarTable[0];
 
+			size_t n = 0;
 			while( td->toolbar_id >= 0 )
 			{
 				ResetNormalToolBarPos(WxToolBar[td->toolbar_id], td->toolbarid_name, wxGetTranslation(td->caption), td->pos);
+				m_AuiManager.GetPane( m_QuickSearchBar ).Show(status_vec[n++]);
 				++td;
 			}
+			m_AuiManager.Update();
 		}
 	}
 }
