@@ -8986,6 +8986,12 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 							UpdateScrollBarPos();
 							m_LastCaretXPos = m_CaretPos.xpos;
 							DoSelectionChanged();
+							
+							if(m_TypewriterMode && (m_EditMode == emTextMode))
+							{
+								--m_TopRow;
+								if( m_TopRow < 0 ) m_TopRow = 0;
+							}
 						}
 						else
 						{
@@ -9045,6 +9051,12 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 							}
 
 							DeleteSelection( true, NULL, true );
+							
+							if(m_TypewriterMode && (m_EditMode == emTextMode))
+							{
+								m_TopRow += (m_CaretPos.lineid - oldlineid) + (m_CaretPos.subrowid - oldsubrowid);
+								if( m_TopRow < 0 ) m_TopRow = 0;
+							}
 						}
 						else                // no Selection
 						{
@@ -9122,6 +9134,12 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 												DoSelectionChanged();
 												DoStatusChanged();
 											}
+											
+											if(m_TypewriterMode && (m_EditMode == emTextMode))
+											{
+												--m_TopRow;
+												if( m_TopRow < 0 ) m_TopRow = 0;
+											}
 									}
 									else          // in middle of row
 									{
@@ -9149,6 +9167,12 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 										if( oldrows != m_Lines->m_RowCount
 												|| oldlines != m_Lines->m_LineCount || count > 1 )
 										{
+											if(m_TypewriterMode && (m_EditMode == emTextMode))
+											{
+												--m_TopRow;
+												if( m_TopRow < 0 ) m_TopRow = 0;
+											}
+
 											m_RepaintAll = true;
 										}
 										else
@@ -9165,12 +9189,6 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 									}
 								}
 							}
-						}
-
-						if(m_TypewriterMode && (m_EditMode == emTextMode))
-						{
-							m_TopRow += (m_CaretPos.lineid - oldlineid) + (m_CaretPos.subrowid - oldsubrowid);
-							if( m_TopRow < 0 ) m_TopRow = 0;
 						}
 					}
 
