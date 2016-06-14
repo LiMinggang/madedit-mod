@@ -5120,7 +5120,7 @@ void MadEdit::InsertString( const ucs4_t *ucs, size_t count, bool bColumnEditing
 		{
 			if( !m_DragDrop )
 			{
-				bool replace = (!(insert && m_InsertMode && m_InsertPairForSelection && m_Selection));
+				bool replace = (!(insert && m_InsertMode && m_InsertPairForSelection && m_Selection)), seled = m_Selection;
 				MadOverwriteUndoData *oudata = new MadOverwriteUndoData();
 				oudata->m_Pos = m_SelectionBegin->pos;
 				if(replace)
@@ -5467,7 +5467,7 @@ void MadEdit::InsertString( const ucs4_t *ucs, size_t count, bool bColumnEditing
 				{
 					if(m_TypewriterMode && (m_EditMode == emTextMode)) //Wrapped
 					{
-						m_TopRow += (m_CaretPos.lineid - oldlineid) + (m_CaretPos.subrowid - subrowid);
+						++m_TopRow;
 					}
 					m_RepaintAll = true;
 				}
