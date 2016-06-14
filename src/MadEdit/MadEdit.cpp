@@ -8792,12 +8792,21 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 								EndUpdateSelection( true );
 							}
 
+							int oldsubrowid = m_CaretPos.subrowid, oldlineid = m_CaretPos.lineid;
+
 							DeleteSelection( true, NULL, true );
+							
+							if(m_TypewriterMode && (m_EditMode == emTextMode))
+							{
+								m_TopRow += (m_CaretPos.lineid - oldlineid) + (m_CaretPos.subrowid - oldsubrowid);
+								if( m_TopRow < 0 ) m_TopRow = 0;
+							}
 						}
 						else                // no Selection
 						{
 							if( m_CaretPos.pos < m_Lines->m_Size )
 							{
+								int oldsubrowid = m_CaretPos.subrowid, oldlineid = m_CaretPos.lineid;
 								// at End of Line
 								if( m_CaretPos.extraspaces == 0 &&
 										m_CaretPos.linepos == m_CaretPos.iter->m_Size - m_CaretPos.iter->m_NewLineSize )
@@ -8926,6 +8935,7 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 							else //ecCutLine
 								RecordAsMadMacro( this, wxString( wxT( "CutLine()" ) ) );
 						}
+
 						if( !m_Selection )
 						{
 							m_SelectionPos1 = m_CaretPos;
@@ -8965,6 +8975,7 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 							++m_SelectionEnd->subrowid;
 						}
 
+						int oldsubrowid = m_CaretPos.subrowid, oldlineid = m_CaretPos.lineid;
 						if( m_SelectionBegin->pos == m_SelectionEnd->pos )
 						{
 							m_Selection = false;
@@ -8988,7 +8999,13 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 
 							DeleteSelection( true, NULL, false );
 							m_EditMode = em;
+							if(m_TypewriterMode && (m_EditMode == emTextMode))
+							{
+								m_TopRow += (m_CaretPos.lineid - oldlineid) + (m_CaretPos.subrowid - oldsubrowid);
+								if( m_TopRow < 0 ) m_TopRow = 0;
+							}
 						}
+						
 					}
 
 					break;
@@ -9000,6 +9017,9 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 						{
 							RecordAsMadMacro( this, wxString(wxT("ProcessCommand( MadEditCommand.BackSpace )")));
 						}
+
+						int oldsubrowid = m_CaretPos.subrowid, oldlineid = m_CaretPos.lineid;
+
 						if( m_Selection )
 						{
 							if( m_EditMode == emColumnMode && GetSelectionSize() == 0 && m_SelLeftXPos != 0 )
@@ -9145,6 +9165,12 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 									}
 								}
 							}
+						}
+
+						if(m_TypewriterMode && (m_EditMode == emTextMode))
+						{
+							m_TopRow += (m_CaretPos.lineid - oldlineid) + (m_CaretPos.subrowid - oldsubrowid);
+							if( m_TopRow < 0 ) m_TopRow = 0;
 						}
 					}
 

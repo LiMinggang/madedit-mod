@@ -131,6 +131,7 @@ New: Remove file from recentlist if could not be opened
 New: An Enhanced "Auto-complete" for selection(Option->Edit) #176
 New: Scroll function on Righ click menu of scroll bars #157
 New: Support selection replace in Typewriter mode
+New: Hope typewrite mode could work when use "Backspace" or "Delete" #203
 Fix: 0.4.2.1 can not remember the word wrap setting #201
 Fix: The fix width in the Option menu can't Open #199
 Fix: Improve windows list code, fix a bug of inner-tab drag/reposition(wxAuiNoteBook)
