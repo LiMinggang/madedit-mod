@@ -5162,9 +5162,16 @@ void MadEdit::InsertString( const ucs4_t *ucs, size_t count, bool bColumnEditing
 				if( IsTextFile() )
 				{
 					m_Lines->Reformat( lit, lit );
+					int oldsubrowid = m_CaretPos.subrowid, oldlineid = m_CaretPos.lineid;
 					m_CaretPos.pos = undo->m_CaretPosAfter;
 					UpdateCaretByPos( m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
 					AppearCaret();
+					
+					if(m_TypewriterMode && (m_EditMode == emTextMode))
+					{
+						m_TopRow += (m_CaretPos.lineid - oldlineid) + (m_CaretPos.subrowid - oldsubrowid);
+					}
+
 					UpdateScrollBarPos();
 
 					if( m_EditMode == emHexMode )
@@ -5451,16 +5458,17 @@ void MadEdit::InsertString( const ucs4_t *ucs, size_t count, bool bColumnEditing
 			if( IsTextFile() )
 			{
 				size_t count = m_Lines->Reformat( lit, lit );
-				int subrowid = m_CaretPos.subrowid, oldrowid = m_CaretPos.rowid, oldlineid = m_CaretPos.lineid;
+				int subrowid = m_CaretPos.subrowid, oldlineid = m_CaretPos.lineid;
 				m_CaretPos.pos = undo->m_CaretPosAfter;
 				UpdateCaretByPos( m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
 
 				if( m_EditMode == emHexMode || oldrows != m_Lines->m_RowCount
 						|| oldlines != m_Lines->m_LineCount || count > 1 )
 				{
-					if((m_EditMode == emTextMode) && ((!m_Selection) && m_TypewriterMode) 
-						&& ((oldlineid == m_CaretPos.lineid) && (oldrowid != m_CaretPos.rowid))) //Wrapped
-						++m_TopRow;
+					if(m_TypewriterMode && (m_EditMode == emTextMode)) //Wrapped
+					{
+						m_TopRow += (m_CaretPos.lineid - oldlineid) + (m_CaretPos.subrowid - subrowid);
+					}
 					m_RepaintAll = true;
 				}
 				else
@@ -8542,9 +8550,11 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 				case ecReturnNoIndent:
 					if( !IsReadOnly() && !m_SingleLineMode )
 					{
-						bool shouldLock = ((!m_Selection) && m_TypewriterMode);
 						if(IsMacroRecording())
 							RecordAsMadMacro( this, wxString(wxT("ProcessCommand( MadEditCommand.Return )")));
+						
+						int oldsubrowid = m_CaretPos.subrowid, oldlineid = m_CaretPos.lineid;
+
 						if( m_Selection && m_EditMode == emColumnMode )
 						{
 							DeleteSelection( true, NULL, false );
@@ -8655,14 +8665,6 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 							}
 
 							InsertString( &ucs[0], ucs.size(), false, true, false );
-						}
-						if(shouldLock) // simulate scroll line down
-						{
-							++m_TopRow;
-							UpdateScrollBarPos();
-							m_RepaintAll = true;
-							Refresh( false );
-							NewAutoCompleteRightChar = m_AutoCompleteRightChar;
 						}
 					}
 
@@ -10405,12 +10407,14 @@ void MadEdit::OnHSMouseRightUp( wxMouseEvent &evt )
 	}
 	//evt.Skip();
 }
+
+/*No caret activity*/
 void MadEdit::ScrollTo( int scollcmd )
 {
 	wxScrollEvent event;
 	bool vertical = false;
 	int vpos = m_TopRow, hpos = m_DrawingXPos;
-	
+
 	switch(scollcmd)
 	{
 		case VSCROLLHERE:
