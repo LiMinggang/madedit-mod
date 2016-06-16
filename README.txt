@@ -137,6 +137,7 @@ Fix: The fix width in the Option menu can't Open #199
 Fix: Improve windows list code, fix a bug of inner-tab drag/reposition(wxAuiNoteBook)
 Fix: Assertion failure of FindInFilesDialog
 Fix: Assertion failure of MadMacroDlg
+Fix: Improve 80 column indicator
 Other code improvement
 Upgrade boost to 1.61
 Update hunspell to 1.41

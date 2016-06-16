@@ -2537,7 +2537,7 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 
 		if( !InPrinting() && m_Display80ColHint )
 		{
-			int width = 80 * wspace;
+			int width = 80 * m_TextFontAveCharWidth;
 			x1 += width + m_LeftMarginWidth - m_DrawingXPos;
 
 			if( x1 > minleft )
