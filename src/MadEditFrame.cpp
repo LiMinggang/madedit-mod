@@ -7559,7 +7559,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		// save options
 		wxString oldpath = m_Config->GetPath();
 		m_Config->SetPath( wxT( "/MadEdit" ) );
-		bool rcm, isiot, ai, acp, icp4sel, msc, mscck, mmp, afcp, fwm, twm, abck;
+		bool rcm, isiot, ai, acp, icp4sel, msc, mscck, mmp, afcp, fwm, twm, abck, ldch;
 		wxString mc, tc, ic;
 		long ll;
 		m_Config->Write( wxT( "Language" ), g_OptionsDialog->WxComboBoxLanguage->GetValue() );
@@ -7631,6 +7631,8 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		m_Config->Write( wxT( "MiddleMouseToPaste" ), mmp );
 		afcp = g_OptionsDialog->WxCheckBoxAutoFillColumnPaste->GetValue();
 		m_Config->Write( wxT( "AutoFillColumnPaste" ), afcp );
+		ldch = g_OptionsDialog->WxCheckBoxLDClickHighlight->GetValue();
+		m_Config->Write( wxT( "LDoubleClickHighlight" ), ldch );
 		twm = g_OptionsDialog->WxCheckBoxTypewriterMode->GetValue();
 		m_Config->Write( wxT( "TypewriterMode" ), twm );
 		fwm = g_OptionsDialog->WxCheckBoxFixWidthMode->GetValue();
@@ -7721,6 +7723,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 			madedit->SetAutoFillColumnPaste( afcp );
 			madedit->SetFixedWidthMode( fwm );
 			madedit->SetTypewriterMode( twm );
+			madedit->SetLDClickHighlight( ldch );
 			if(abck != madedit->HasBackup())
 				madedit->SetHasBackup(abck);
 			long lo;

@@ -896,6 +896,7 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_SpellCheck = false;
 	m_BookmarkInSearch = false;
 	m_TypewriterMode = m_Config->ReadBool( wxT( "TypewriterMode" ),   false );
+	m_LDClickHighlight = m_Config->ReadBool( wxT( "LDoubleClickHighlight" ),   true );
 	m_HasBackup = true;
 #ifndef PYMADEDIT_DLL
 	m_Config->Read( wxT( "SpellCheck" ),   &m_SpellCheck, true );
@@ -10254,7 +10255,12 @@ void MadEdit::OnMouseLeftDClick( wxMouseEvent &evt )
 	m_DoubleClickY = evt.m_y;
 	m_MouseLeftDoubleClick = true;
 	m_MouseLeftDown = true;
+	
 	SelectWordFromCaretPos( NULL );
+	if(m_LDClickHighlight)
+	{
+		HighlightWords();
+	}
 	m_lastDoubleClick = wxGetLocalTimeMillis();
 	CaptureMouse();
 

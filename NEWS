@@ -1,29 +1,26 @@
-Mod v0.4.2.1
-1.New: Ctrl-A to select all items in the Window List dialog
-2.New: Code performance improvement for Window list(Performance, menu blink and other issues)
-3.New: Tip information about the file while mouse hovering over the file tab
-4.Fix: Multiple selection does not work with Save/SaveAs(Windows List dialog) #193
-5.Fix: Extra scroll issue while pressing enter key in Typewriter mode introduced by 0.4.2
-6.Fix: Can't disable Autosave once enabled
-7.Increase input area by decreasing right margin of the single line edit
-
-Mod v0.4.2
-1.New: Hope MadEdit-Mod could load more open files history than 9 #179
-2.New: Redesign of Search Results view----Hope to add search key words or expression on the result tree title on the left of the file path #137
-3.New: Save LineSpacing, Line Wrap Mode and Edit Mode for opened files #186
-4.New: Enable config fix width mode in global config #184
-5.New: Wordwrap of input of search/replace dialog #175
-6.New: Use icons or symbols replace the words in the quicksearch bar #181
-7.New: Hope MadEdit-Mod could Autosave, Backup files, and have Autolink funciton #135
-8.New: Window list function(Activate, Save, Save As and Close)
-9.Fix: Recorded script(caret pos for inputting) would be wrong if user moved the caret #183
-10.Fix: The caret can't lock the y position when use word wrap function #178
-11.Fix: Change Mpython API WholeLineSelection to SelectWholeLine
-12.Fix: "New File" & "Open File" button in toolbar got unclickable when all editor tabs closed #190
-13.Fix: Not respond to wxSlider event(bug of CodeBlocks https://sourceforge.net/p/codeblocks/tickets/350/)
-14.Fix: Bug of wxGenericTreeCtrl(Fixed in wxWidgets 3.1) #136
-15.Fix: Initial size of the input box(SearchReplace dialog) is not updated #191
-16.Fix: File name in history list would be empty if you save a newly created file #192
-17.Fix various minor issues
-18.Update wxWidgets to 3.1.0
-19.Update translation
+Mod v0.4.3
+1.New: Use dialog to let user choose one for all instead of annoying one by one dialogs
+2.New: Let the user to do the backup selfly #198
+3.New: Use Icon to replace the checkbox on QuickSearch Bar #181
+4.New: Remember pos of all tool Bars
+5.New: Reset tool bars position
+6.New: Insert to the top instead of append to the bottom of search results, expand the last automatically and collapse the last
+7.New: Add InputBox, MsgBox to MadPython so that user can get input or output some message
+8.New: Confirm Undo at the first time if the changes had been saved to disk
+9.New: Add Scripts list to right click menu
+10.New: Remove file from recentlist if could not be opened
+11.New: An Enhanced "Auto-complete" for selection(Option->Edit) #176
+12.New: Scroll function on Righ click menu of scroll bars #157
+13.New: Support selection replace in Typewriter mode
+14.New: Hope typewrite mode could work when use "Backspace" or "Delete" #203
+15.New: Double click to highlight word
+16.Fix: 0.4.2.1 can not remember the word wrap setting #201
+17.Fix: The fix width in the Option menu can't Open #199
+18.Fix: Improve windows list code, fix a bug of inner-tab drag/reposition(wxAuiNoteBook)
+19.Fix: Assertion failure of FindInFilesDialog
+20.Fix: Assertion failure of MadMacroDlg
+21.Fix: Improve 80 column indicator
+22.Other code improvement
+23.Upgrade boost to 1.61
+24.Update hunspell to 1.41
+25.Update Chinese translation

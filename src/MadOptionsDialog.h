@@ -304,6 +304,7 @@ public:
 		wxCheckBox *WxCheckBoxRestoreCaretPos;
 		wxCheckBox *WxCheckBoxReloadFiles;
 		wxCheckBox* WxCheckBoxFixWidthMode;
+		wxCheckBox* WxCheckBoxLDClickHighlight; 
 		wxBoxSizer *WxBoxSizer7;
 		wxStaticText *WxStaticText13;
 		wxComboBox *WxComboBoxEncoding;
@@ -336,6 +337,7 @@ public:
     //Try copy pasting the below block in your old Form header Files.
 	enum {
 ////GUI Enum Control ID Start
+            ID_WXCHECKBOXDCLICKHIGHLIGHT = 1396,
 			ID_WXCHECKBOXINSERTPAIRFORSELECTION = 1395,
 			ID_WXSTATICTEXT31 = 1394,
 			ID_WXCHECKBOXENABLEAUTOBACKUP = 1393,
@@ -494,7 +496,7 @@ public:
 			ID_WXCHECKBOXPRINTSYNTAX = 1084,
 			ID_WXNOTEBOOKPAGE3 = 1062,
 			ID_WXCHECKBOXAUTOFILLCOLUMN = 1236,
-            ID_WXCHECKBOXLOCKCARETYPOS = 1228,
+            ID_WXCHECKBOXTYPEWRITERMODE = 1228,
 			ID_WXCHECKBOXMIDDLEMOUSETOPASTE = 1127,
 			ID_WXCHECKBOXCTRLWITHMOUSE = 1237,
 			ID_WXCHECKBOXMOUSESELECTTOCOPY = 1159,

@@ -430,10 +430,13 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxCheckBoxAutoFillColumnPaste = new wxCheckBox( WxNoteBookPage2, ID_WXCHECKBOXAUTOFILLCOLUMN, _( "Auto fill in column paste" ), wxPoint( 24, 122 ), wxSize( 480, 20 ), 0, wxDefaultValidator, wxT( "WxCheckBoxAutoFillColumnPaste" ) );
 	WxBoxSizer12->Add( WxCheckBoxAutoFillColumnPaste, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
 	SET_CONTROLPARENT( WxCheckBoxAutoFillColumnPaste );
-	WxCheckBoxTypewriterMode = new wxCheckBox( WxNoteBookPage2, ID_WXCHECKBOXLOCKCARETYPOS, _( "Typewriter mode" ), wxPoint( 24, 146 ), wxSize( 480, 20 ), 0, wxDefaultValidator, wxT( "WxCheckBoxTypewriterMode" ) );
+	WxCheckBoxLDClickHighlight = new wxCheckBox( WxNoteBookPage2, ID_WXCHECKBOXDCLICKHIGHLIGHT, _( "Left double click to highlight" ), wxPoint( 24, 146 ), wxSize( 480, 20 ), 0, wxDefaultValidator, wxT( "WxCheckBoxLDClickHighlight" ) );
+	WxBoxSizer12->Add( WxCheckBoxLDClickHighlight, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
+	SET_CONTROLPARENT( WxCheckBoxLDClickHighlight );
+	WxCheckBoxTypewriterMode = new wxCheckBox( WxNoteBookPage2, ID_WXCHECKBOXTYPEWRITERMODE, _( "Typewriter mode" ), wxPoint( 24, 170 ), wxSize( 480, 20 ), 0, wxDefaultValidator, wxT( "WxCheckBoxTypewriterMode" ) );
 	WxBoxSizer12->Add( WxCheckBoxTypewriterMode, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
 	SET_CONTROLPARENT( WxCheckBoxTypewriterMode );
-	WxCheckBoxFixWidthMode = new wxCheckBox( WxNoteBookPage2, ID_WXCHECKBOXFIXWIDTHMODE, _( "Fix width mode" ), wxPoint( 24, 170 ), wxSize( 480, 20 ), 0, wxDefaultValidator, wxT( "WxCheckBoxFixWidthMode" ) );
+	WxCheckBoxFixWidthMode = new wxCheckBox( WxNoteBookPage2, ID_WXCHECKBOXFIXWIDTHMODE, _( "Fix width mode" ), wxPoint( 24, 194 ), wxSize( 480, 20 ), 0, wxDefaultValidator, wxT( "WxCheckBoxFixWidthMode" ) );
 	WxBoxSizer12->Add( WxCheckBoxFixWidthMode, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
 	SET_CONTROLPARENT( WxCheckBoxFixWidthMode );
 	WxNoteBookPage3 = new wxPanel( WxNotebook1, ID_WXNOTEBOOKPAGE3, wxPoint( 4, 24 ), wxSize( 692, 464 ) );
@@ -1318,6 +1321,8 @@ void MadOptionsDialog::LoadOptions( void )
 	WxCheckBoxMiddleMouseToPaste->SetValue( bb );
 	cfg->Read( wxT( "AutoFillColumnPaste" ), &bb, true );
 	WxCheckBoxAutoFillColumnPaste->SetValue( bb );
+	cfg->Read( wxT( "LDoubleClickHighlight" ), &bb, true );
+	WxCheckBoxLDClickHighlight->SetValue( bb );
 	cfg->Read( wxT( "TypewriterMode" ), &bb, false );
 	WxCheckBoxTypewriterMode->SetValue( bb );
 	cfg->Read( wxT( "FixedWidthMode" ), &bb, false );

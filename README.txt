@@ -118,31 +118,32 @@ Todo:
 FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.4.3
-New: Use dialog to let user choose one for all instead of annoying one by one dialogs
-New: Let the user to do the backup selfly #198
-New: Use Icon to replace the checkbox on QuickSearch Bar #181
-New: Remember pos of all tool Bars
-New: Reset tool bars position
-New: Insert to the top instead of append to the bottom of search results, expand the last automatically and collapse the last
-New: Add InputBox, MsgBox to MadPython so that user can get input or output some message
-New: Confirm Undo at the first time if the changes had been saved to disk
-New: Add Scripts list to right click menu
-New: Remove file from recentlist if could not be opened
-New: An Enhanced "Auto-complete" for selection(Option->Edit) #176
-New: Scroll function on Righ click menu of scroll bars #157
-New: Support selection replace in Typewriter mode
-New: Hope typewrite mode could work when use "Backspace" or "Delete" #203
-New: Enlarge input area of single mode
-Fix: 0.4.2.1 can not remember the word wrap setting #201
-Fix: The fix width in the Option menu can't Open #199
-Fix: Improve windows list code, fix a bug of inner-tab drag/reposition(wxAuiNoteBook)
-Fix: Assertion failure of FindInFilesDialog
-Fix: Assertion failure of MadMacroDlg
-Fix: Improve 80 column indicator
-Other code improvement
-Upgrade boost to 1.61
-Update hunspell to 1.41
-Update Chinese translation
+1.New: Use dialog to let user choose one for all instead of annoying one by one dialogs
+2.New: Let the user to do the backup selfly #198
+3.New: Use Icon to replace the checkbox on QuickSearch Bar #181
+4.New: Remember pos of all tool Bars
+5.New: Reset tool bars position
+6.New: Insert to the top instead of append to the bottom of search results, expand the last automatically and collapse the last
+7.New: Add InputBox, MsgBox to MadPython so that user can get input or output some message
+8.New: Confirm Undo at the first time if the changes had been saved to disk
+9.New: Add Scripts list to right click menu
+10.New: Remove file from recentlist if could not be opened
+11.New: An Enhanced "Auto-complete" for selection(Option->Edit) #176
+12.New: Scroll function on Righ click menu of scroll bars #157
+13.New: Support selection replace in Typewriter mode
+14.New: Hope typewrite mode could work when use "Backspace" or "Delete" #203
+15.New: Double click to highlight word
+16.New: Enlarge input area of single mode
+17.Fix: 0.4.2.1 can not remember the word wrap setting #201
+18.Fix: The fix width in the Option menu can't Open #199
+19.Fix: Improve windows list code, fix a bug of inner-tab drag/reposition(wxAuiNoteBook)
+20.Fix: Assertion failure of FindInFilesDialog
+21.Fix: Assertion failure of MadMacroDlg
+22.Fix: Improve 80 column indicator
+23.Other code improvement
+24.Upgrade boost to 1.61
+25.Update hunspell to 1.41
+26.Update Chinese translation
 
 Mod v0.4.2.1
 1.New: Ctrl-A to select all items in the Window List dialog

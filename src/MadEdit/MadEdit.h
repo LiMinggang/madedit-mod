@@ -450,6 +450,7 @@ private:
 	bool           m_SpellCheck;
 	bool           m_BookmarkInSearch;
     bool           m_TypewriterMode;
+    bool           m_LDClickHighlight;
     bool           m_HasBackup;
 #ifdef __WXMSW__
 	bool m_IsWin98;
@@ -780,6 +781,8 @@ public: // basic functions
 	bool GetSpellCheckStatus() { return m_SpellCheck; }
 	void SetTypewriterMode(bool mode) { m_TypewriterMode = mode; }
 	bool GetTypewriterMode() { return m_TypewriterMode; }
+	void SetLDClickHighlight(bool mode) { m_LDClickHighlight = mode; }
+	bool GetLDClickHighlight() { return m_LDClickHighlight; }
     bool HasBackup() {return m_HasBackup;}
     void SetHasBackup(bool bk) {m_HasBackup = bk;}
 #if __cplusplus <= 199711L
