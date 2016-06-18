@@ -846,6 +846,7 @@ void MadEdit::SetSingleLineMode( bool mode )
 			m_HScrollBar->Show( false );
 			SetDisplayBookmark( false );
 			SetDisplay80ColHint( false );
+			m_RightMarginWidth = 0;
 		}
 
 		m_SingleLineMode = mode;
