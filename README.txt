@@ -138,7 +138,7 @@ Mod v0.4.3
 17.New: Enhancement for Post-It mode #182
 18.Fix: 0.4.2.1 can not remember the word wrap setting #201
 19.Fix: The fix width in the Option menu can't Open #199
-20.Fix: Improve windows list code, fix a bug of inner-tab drag/reposition(wxAuiNoteBook)
+20.Fix: Improve windows list code, fix a bug of inner-tab drag/reposition(wxAuiNoteBook, http://trac.wxwidgets.org/ticket/17551)
 21.Fix: Assertion failure of FindInFilesDialog
 22.Fix: Assertion failure of MadMacroDlg
 23.Fix: Improve 80 column indicator
