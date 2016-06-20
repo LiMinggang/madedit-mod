@@ -143,7 +143,6 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	spellchecker/hunspell/src/hunspell/affentry.cxx \
 	spellchecker/hunspell/src/hunspell/affixmgr.cxx \
 	spellchecker/hunspell/src/hunspell/csutil.cxx \
-	spellchecker/hunspell/src/hunspell/dictmgr.cxx \
 	spellchecker/hunspell/src/hunspell/filemgr.cxx \
 	spellchecker/hunspell/src/hunspell/hashmgr.cxx \
 	spellchecker/hunspell/src/hunspell/hunspell.cxx \
@@ -151,7 +150,6 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	spellchecker/hunspell/src/hunspell/phonet.cxx \
 	spellchecker/hunspell/src/hunspell/replist.cxx \
 	spellchecker/hunspell/src/hunspell/suggestmgr.cxx \
-	spellchecker/hunspell/src/hunspell/utf_info.cxx \
 	spellchecker/config.h \
 	spellchecker/hunspell/src/win_api/hunspelldll.h \
 	spellchecker/hunspell/src/hunspell/affentry.hxx \
