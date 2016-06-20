@@ -106,6 +106,7 @@ Known issues:
 3. Regular expression which relies on characters before/after the matched string, 
     Eg. (?<=.)\s(?=.), will has issue to be replaced one by one. It's tricky and
     NP++ has the same issue too.
+4. HighlightWord would not work if the caret is at the end of the line
 
 Feature/issues to be released
 -----------------------------
