@@ -134,16 +134,17 @@ Mod v0.4.3
 14.New: Hope typewrite mode could work when use "Backspace" or "Delete" #203
 15.New: Double click to highlight word
 16.New: Enlarge input area of single mode
-17.Fix: 0.4.2.1 can not remember the word wrap setting #201
-18.Fix: The fix width in the Option menu can't Open #199
-19.Fix: Improve windows list code, fix a bug of inner-tab drag/reposition(wxAuiNoteBook)
-20.Fix: Assertion failure of FindInFilesDialog
-21.Fix: Assertion failure of MadMacroDlg
-22.Fix: Improve 80 column indicator
-23.Other code improvement
-24.Upgrade boost to 1.61
-25.Update hunspell to 1.41
-26.Update Chinese translation
+17.New: Enhancement for Post-It mode #182
+18.Fix: 0.4.2.1 can not remember the word wrap setting #201
+19.Fix: The fix width in the Option menu can't Open #199
+20.Fix: Improve windows list code, fix a bug of inner-tab drag/reposition(wxAuiNoteBook)
+21.Fix: Assertion failure of FindInFilesDialog
+22.Fix: Assertion failure of MadMacroDlg
+23.Fix: Improve 80 column indicator
+24.Other code improvement
+25.Upgrade boost to 1.61
+26.Update hunspell to 1.41
+27.Update Chinese translation
 
 Mod v0.4.2.1
 1.New: Ctrl-A to select all items in the Window List dialog

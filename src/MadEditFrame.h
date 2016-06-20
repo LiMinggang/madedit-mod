@@ -458,7 +458,7 @@ protected:
 	void OnFindInFilesResultsDClick( wxMouseEvent& event );
     void HideAllToolBars();
     void ShowAllToolBars();
-    void ToggleFullScreen(long style);
+    void ToggleFullScreen(long style, bool maxmize);
     bool ResetNormalToolBarPos(wxWindow * toolbar, const wxChar * toolname, const wxChar * caption, int pos);
     bool ResetQuickSearchBarPos();
     bool ResetInformationWinPos();    

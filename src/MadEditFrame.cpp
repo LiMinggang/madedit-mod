@@ -6828,10 +6828,11 @@ void MadEditFrame::OnSearchGoToRightBrace( wxCommandEvent& event )
 	}
 }
 
-void MadEditFrame::ToggleFullScreen(long style)
+void MadEditFrame::ToggleFullScreen(long style, bool maxmize)
 {
 	wxTopLevelWindow * topWin = (wxTopLevelWindow*)this;
-	bool fullScrn = true;
+	int x =0,  y = 0, w = 0, h = 0;
+	bool fullScrn = true, resize = false;
 	if(topWin->IsFullScreen())
 	{
 		fullScrn = false;
@@ -6849,8 +6850,23 @@ void MadEditFrame::ToggleFullScreen(long style)
 		else if (m_Notebook->GetTabCtrlHeight() == 0)
 			m_Notebook->SetTabCtrlHeight(m_NoteBookTabHeight);
 		m_FullScreenStyle = style;
+
+		if(!maxmize && !topWin->IsMaximized()) //From wxWidgets ShowFullScreen
+		{
+	        GetPosition(&x, &y);
+	        GetSize(&w, &h);
+			resize = true;
+		}
 	}
+
 	topWin->ShowFullScreen( fullScrn, style );
+	if(resize)
+	{
+		int w2 = 0, h2 = 0;
+		GetSize(&w2, &h2);
+		if(w2 != w || h2 != h)
+			SetSize(x, y, w, h);
+	}
 }
 
 void MadEditFrame::OnViewAlwaysOnTop( wxCommandEvent& event )
@@ -6865,13 +6881,15 @@ void MadEditFrame::OnViewFullScreen( wxCommandEvent& event )
 	static long style = wxFULLSCREEN_NOMENUBAR | wxFULLSCREEN_NOTOOLBAR | wxFULLSCREEN_NOBORDER | wxFULLSCREEN_NOCAPTION;
 
 	if((m_FullScreenStyle == 0) || (m_FullScreenStyle == style))
-		ToggleFullScreen(style);
+	{
+		ToggleFullScreen(style, true);
+	}
 }
 
 void MadEditFrame::OnViewPostIt( wxCommandEvent& event )
 {
 	if((m_FullScreenStyle == 0) || (m_FullScreenStyle == wxFULLSCREEN_ALL))
-		ToggleFullScreen(wxFULLSCREEN_ALL);
+		ToggleFullScreen(wxFULLSCREEN_ALL, false);
 }
 
 void MadEditFrame::OnViewEncoding( wxCommandEvent& event )
