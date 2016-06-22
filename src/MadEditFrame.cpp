@@ -211,6 +211,11 @@
 #include "../images/dotmatchnewline.xpm"
 #define dotmatchnewline_xpm_idx (searchcase_xpm_idx+1)
 
+#include "../images/lock.xpm"
+#define lock_xpm_idx (dotmatchnewline_xpm_idx+1)
+#include "../images/lock_open.xpm"
+#define lock_open_xpm_idx (lock_xpm_idx+1)
+
 #define MADMINUTES (60*1000)
 
 char ** g_MadIcons[] =
@@ -224,7 +229,7 @@ char ** g_MadIcons[] =
 	&saverec_xpm[0], &bookmark_toggle_xpm[0], &bookmark_next_xpm[0], &bookmark_prev_xpm[0],
 	&bookmark_clear_xpm[0], &spellchecker_xpm[0], &showsymbol_xpm[0], &down_xpm[0], &up_xpm[0],
 	&alignleft_xpm[0], &alignright_xpm[0], &numbering_xpm[0], &refresh_xpm[0], &closepreview_xpm[0], &recentfiles_xpm[0],
-	&searchwholeword_xpm[0], &searchregex_xpm[0], &searchcase_xpm[0], &dotmatchnewline_xpm[0],
+	&searchwholeword_xpm[0], &searchregex_xpm[0], &searchcase_xpm[0], &dotmatchnewline_xpm[0], &lock_xpm[0], &lock_open_xpm[0],
 };
 
 extern void ScanForLocales();
@@ -1869,7 +1874,7 @@ CommandData CommandTable[] =
 	{ 0, 1, menuCloseAllToTheLeft,   wxT( "menuCloseAllToTheLeft" ),  _( "Close All To The Left" ),  wxT( "" ),  wxITEM_NORMAL,    -1,         0,                        _( "Close all files to the left" ), &g_Menu_FilePop, 0, 0, false},
 	{ 0, 1, menuCloseAllToTheRight,  wxT( "menuCloseAllToTheRight" ), _( "Close All To The Right" ), wxT( "" ),  wxITEM_NORMAL,    -1,         0,                        _( "Close all files to the right" ), &g_Menu_FilePop, 0, 0, false},
 	{ 0, 1, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0, &g_Menu_FilePop, 0, 0, false},
-	{ 0, 1, menuToggleReadOnly,      wxT( "menuToggleReadOnly" ),     _( "Set/Clear ReadOnly Flag" ), wxT( "" ), wxITEM_NORMAL,    -1,         0,                        _( "Set/Clear ReadOnly flag of the file" ), &g_Menu_FilePop, 0, 0, false},
+	{ 0, 1, menuToggleReadOnly,      wxT( "menuToggleReadOnly" ),     _( "Set/Clear ReadOnly Flag" ), wxT( "" ), wxITEM_NORMAL,    lock_open_xpm_idx,         0,         _( "Set/Clear ReadOnly flag of the file" ), &g_Menu_FilePop, 0, 0, false},
 	{ 0, 1, 0,                0,                       0,                      0,                   wxITEM_SEPARATOR, -1,                0,                        0, &g_Menu_FilePop, 0, 0, false},
 	{ 0, 1, menuPageSetup,    wxT( "menuPageSetup" ),    _( "Page Set&up..." ),    wxT( "" ),             wxITEM_NORMAL,    -1,                0,                        _( "Setup the pages for printing" ), &g_Menu_FilePop, 0, 0, false},
 	{ 0, 1, menuPrintPreview, wxT( "menuPrintPreview" ), _( "Print Previe&w..." ), wxT( "" ),             wxITEM_NORMAL,    preview_xpm_idx,   0,                        _( "Preview the result of printing" ), &g_Menu_FilePop, 0, 0, false},

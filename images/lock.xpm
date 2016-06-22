@@ -1,5 +1,5 @@
 /* XPM */
-static const char *lock_xpm[] = {
+static char *lock_xpm[] = {
 /* columns rows colors chars-per-pixel */
 "16 15 92 1",
 "  c None",
