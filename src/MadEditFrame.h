@@ -154,6 +154,7 @@ public:
 	void OnUpdateUI_Menu_CheckSize( wxUpdateUIEvent& event );
 	void OnUpdateUI_Menu_CheckTextFileSize( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuEditStartEndSelction( wxUpdateUIEvent& event );
+	void OnUpdateUI_MenuFile_Readonly( wxUpdateUIEvent& event );
 
 	// add: gogo, 21.09.2009
 	void OnUpdateUI_MenuEditToggleBookmark( wxUpdateUIEvent& event );

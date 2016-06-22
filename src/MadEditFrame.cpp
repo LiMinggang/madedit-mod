@@ -1505,7 +1505,7 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_UPDATE_UI( menuPrint, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
 	EVT_UPDATE_UI( menuRecentFiles, MadEditFrame::OnUpdateUI_MenuFileRecentFiles )
 	EVT_UPDATE_UI( menuRecentFilesToolbar, MadEditFrame::OnUpdateUI_MenuFileRecentFiles )
-	EVT_UPDATE_UI( menuToggleReadOnly, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
+	EVT_UPDATE_UI( menuToggleReadOnly, MadEditFrame::OnUpdateUI_MenuFile_Readonly )
 	// edit
 	EVT_UPDATE_UI( menuUndo, MadEditFrame::OnUpdateUI_MenuEditUndo )
 	EVT_UPDATE_UI( menuRedo, MadEditFrame::OnUpdateUI_MenuEditRedo )
@@ -4574,6 +4574,19 @@ void MadEditFrame::OnUpdateUI_MenuEditStartEndSelction( wxUpdateUIEvent& event )
 {
 	event.Enable( g_ActiveMadEdit != NULL );
 	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->IsSelecting() );
+}
+
+void MadEditFrame::OnUpdateUI_MenuFile_Readonly( wxUpdateUIEvent& event )
+{
+	event.Enable( g_ActiveMadEdit != NULL );
+	wxMenuItem * mit = g_Menu_File->FindItem(event.GetId());
+	if(mit)
+	{
+		if(g_ActiveMadEdit->IsReadOnly())
+			mit->SetBitmap( m_ImageList->GetBitmap( lock_xpm_idx ) );
+		else
+			mit->SetBitmap( m_ImageList->GetBitmap( lock_open_xpm_idx ) );
+	}
 }
 
 // add: gogo, 21.09.2009
