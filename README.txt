@@ -118,6 +118,9 @@ Note: Not support wxWidgets 2.X anymore since 0.3.X
 Todo:
 FreeBSD packaging (with FreeBSD 10.01)
 
+Mod v0.4.4
+New: Set toolbar to 3 columns to let user who has a small display have a chance to re-org the toolbars
+
 Mod v0.4.3
 1.New: Use dialog to let user choose one for all instead of annoying one by one dialogs
 2.New: Let the user to do the backup selfly #198

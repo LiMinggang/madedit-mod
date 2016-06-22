@@ -2318,12 +2318,12 @@ CommandData CommandTable[] =
 
 ToolBarData ToolBarTable[] = 
 {
-	{tbSTANDARD,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBStandardPos"),      wxT("MadToolBar0"), _("Standard"),      0},
+	{tbSTANDARD,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBStandardPos"),      wxT("MadToolBar0"), _("Standard"),       1},
 	{tbEDITOR,        MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBEditorPos"),        wxT("MadToolBar1"), _("Editor"),         1},
 	{tbSEARCHREPLACE, MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBSearchReplacePos"), wxT("MadToolBar2"), _("Search/Replace"), 2},
-	{tbTEXTVIEW,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBTextviewPos"),      wxT("MadToolBar3"), _("Text View"),      3},
-	{tbEDITMODE,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBEditModePos"),      wxT("MadToolBar4"), _("Edit Mode"),      4},
-	{tbMACRO,         MADTOOBAR_OVERFLOW, wxT("/MadEdit/TBMacroPos"),         wxT("MadToolBar5"), _("Macro"),          5},
+	{tbTEXTVIEW,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBTextviewPos"),      wxT("MadToolBar3"), _("Text View"),      2},
+	{tbEDITMODE,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBEditModePos"),      wxT("MadToolBar4"), _("Edit Mode"),      2},
+	{tbMACRO,         MADTOOBAR_OVERFLOW, wxT("/MadEdit/TBMacroPos"),         wxT("MadToolBar5"), _("Macro"),          2},
 	{-1, 0, 0, 0, 0, -1},
 };
 
@@ -3002,7 +3002,7 @@ void MadEditFrame::CreateGUIControls( void )
 
 		m_Config->Read( td->panel_pos, &toolbarpos, wxEmptyString );
 		if(toolbarpos.IsEmpty())
-			ResetNormalToolBarPos(WxToolBar[td->toolbar_id], td->toolbarid_name, wxGetTranslation(td->caption), td->pos);
+			ResetNormalToolBarPos(WxToolBar[td->toolbar_id], td->toolbarid_name, wxGetTranslation(td->caption), td->row);
 		else
 			RestoreAuiPanel(WxToolBar[td->toolbar_id], toolbarpos, true);
 
@@ -8151,7 +8151,7 @@ void MadEditFrame::OnToolsPurgeHistories( wxCommandEvent& event )
 			size_t n = 0;
 			while( td->toolbar_id >= 0 )
 			{
-				ResetNormalToolBarPos(WxToolBar[td->toolbar_id], td->toolbarid_name, wxGetTranslation(td->caption), td->pos);
+				ResetNormalToolBarPos(WxToolBar[td->toolbar_id], td->toolbarid_name, wxGetTranslation(td->caption), td->row);
 				m_AuiManager.GetPane( m_QuickSearchBar ).Show(status_vec[n++]);
 				m_Config->DeleteEntry(td->panel_pos);
 				++td;
@@ -9477,14 +9477,14 @@ void MadEditFrame::OnTimer(wxTimerEvent& event)
 	m_AutoSaveTimer.StartOnce(m_AutoSaveTimout*MADMINUTES);
 }
 
-inline bool MadEditFrame::ResetNormalToolBarPos(wxWindow * toolbar, const wxChar * toolname, const wxChar * caption, int pos)
+inline bool MadEditFrame::ResetNormalToolBarPos(wxWindow * toolbar, const wxChar * toolname, const wxChar * caption, int row)
 {
-	return m_AuiManager.AddPane( toolbar, wxAuiPaneInfo().Name( toolname ).CloseButton( false ).Caption( caption ).Floatable().ToolbarPane().Top().Position( pos ) );
+	return m_AuiManager.AddPane( toolbar, wxAuiPaneInfo().Name( toolname ).CloseButton( false ).Caption( caption ).Floatable().ToolbarPane().Top().Row(row));
 }
 
 inline bool MadEditFrame::ResetQuickSearchBarPos()
 {
-	return m_AuiManager.AddPane( m_QuickSearchBar, wxAuiPaneInfo().Name( wxT( "QuickSeachBar" ) ).CloseButton( false ).Gripper( true ).Caption( _( "Quick Search" ) ).Floatable( true ).ToolbarPane().Top().Row( 2 ) );
+	return m_AuiManager.AddPane( m_QuickSearchBar, wxAuiPaneInfo().Name( wxT( "QuickSeachBar" ) ).CloseButton( false ).Gripper( true ).Caption( _( "Quick Search" ) ).Floatable( true ).ToolbarPane().Top().Row( 3 ) );
 }
 
 inline bool MadEditFrame::ResetInformationWinPos()
