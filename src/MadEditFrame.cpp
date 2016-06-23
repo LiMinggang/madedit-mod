@@ -2424,7 +2424,7 @@ void LoadDefaultSettings( wxConfigBase *madConfig )
 }
 
 MadEditFrame::MadEditFrame( wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style )
-	: wxFrame( parent, id, title, position, size, style ), m_AutoSaveTimer(this, ID_WXTIMER), m_ResetToolBars(false)
+	: wxFrame( parent, id, title, position, size, style ), m_AutoSaveTimer(this, ID_WXTIMER), m_ResetToolBars(false), m_ToggleReadOnly(0)
 {
 #ifndef __WXMSW__
 	wxConvFileName = &MadConvFileNameObj;
@@ -4579,13 +4579,17 @@ void MadEditFrame::OnUpdateUI_MenuEditStartEndSelction( wxUpdateUIEvent& event )
 void MadEditFrame::OnUpdateUI_MenuFile_Readonly( wxUpdateUIEvent& event )
 {
 	event.Enable( g_ActiveMadEdit != NULL );
-	wxMenuItem * mit = g_Menu_File->FindItem(event.GetId());
-	if(mit)
+	if(!m_ToggleReadOnly)
 	{
-		if(g_ActiveMadEdit->IsReadOnly())
-			mit->SetBitmap( m_ImageList->GetBitmap( lock_xpm_idx ) );
+		m_ToggleReadOnly = g_Menu_File->FindItem(event.GetId());
+	}
+
+	if(m_ToggleReadOnly)
+	{
+		if(g_ActiveMadEdit && g_ActiveMadEdit->IsReadOnly())
+			m_ToggleReadOnly->SetBitmap( m_ImageList->GetBitmap( lock_xpm_idx ) );
 		else
-			mit->SetBitmap( m_ImageList->GetBitmap( lock_open_xpm_idx ) );
+			m_ToggleReadOnly->SetBitmap( m_ImageList->GetBitmap( lock_open_xpm_idx ) );
 	}
 }
 

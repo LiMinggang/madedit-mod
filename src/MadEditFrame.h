@@ -486,6 +486,7 @@ private:
 	wxFileOffset m_LastSelBeg, m_LastSelEnd;
 	wxTimer m_AutoSaveTimer;
 	long m_AutoSaveTimout;
+    wxMenuItem * m_ToggleReadOnly;
 public:
 	MadMacroMode GetMadMacroStatus() {return m_MadMacroStatus;}
 	bool IsMacroRunning() {return ( m_MadMacroStatus == emMacroRunning );}
