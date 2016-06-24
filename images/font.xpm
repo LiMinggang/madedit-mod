@@ -1,7 +1,7 @@
 /* XPM */
 static char *font_xpm[] = {
 /* columns rows colors chars-per-pixel */
-"16 15 19 1",
+"16 16 19 1",
 "o c Black",
 "= c #7F0000",
 "; c #5F2020",
@@ -36,5 +36,6 @@ static char *font_xpm[] = {
 "&;$%%@**@$,%    ",
 "@$    @%$o,:  >@",
 "          ><$$:$",
-"           @%%$ "
+"           @%%$ ",
+"                ",
 };

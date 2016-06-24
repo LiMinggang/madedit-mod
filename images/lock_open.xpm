@@ -1,6 +1,6 @@
 /* XPM */ 
 static char * lock_open_xpm[] = {
-"16 15 100 2",
+"16 16 100 2",
 "  	c None",
 "! 	c black",
 "# 	c #DEDDDD",
@@ -115,4 +115,6 @@ static char * lock_open_xpm[] = {
 "      i j k l m n o p q r       ",
 "      s t u v w x y z { |       ",
 "      } ~  !!!#!$!%!&!'!(!      ",
-"                                "};
+"                                ",
+"                                ",
+};

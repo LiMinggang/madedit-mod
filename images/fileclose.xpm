@@ -1,7 +1,7 @@
 /* XPM */
 static char *fileclose_xpm[] = {
 /* columns rows colors chars-per-pixel */
-"16 15 63 1",
+"16 16 63 1",
 "l c Black",
 "s c #0F0F0F",
 "p c #1E1E1E",
@@ -80,5 +80,6 @@ static char *fileclose_xpm[] = {
 "  lz2xc  :v-bl  ",
 "  d-nm    MN-B  ",
 " VeCM      *Z3A ",
-" S<          Dp "
+" S<          Dp ",
+"                ",
 };

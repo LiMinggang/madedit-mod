@@ -1,7 +1,7 @@
 /* XPM */
 static char *searchregex_xpm[] = {
 /* columns rows colors chars-per-pixel */
-"16 15 44 1",
+"16 16 44 1",
 "a c Black",
 "> c #0F0F0F",
 "1 c #D9D9D9",
@@ -60,6 +60,7 @@ static char *searchregex_xpm[] = {
 "  pas           ",
 "  daf           ",
 "  rgh           ",
+"                ",
 "                ",
 "                "
 };

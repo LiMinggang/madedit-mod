@@ -1,6 +1,6 @@
 /* XPM */ 
 static char * tchinese_xpm[] = {
-"16 15 89 1",
+"16 16 89 1",
 " 	c None",
 "!	c black",
 "#	c #7C7C7C",
@@ -104,4 +104,5 @@ static char * tchinese_xpm[] = {
 "  mnop  q`rb sY ",
 " tu`  vw$ rx,   ",
 "     oyz   :{r  ",
+"                ",
 "                "};

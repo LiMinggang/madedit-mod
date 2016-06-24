@@ -1,7 +1,7 @@
 /* XPM */
 static char *searchcase_xpm[] = {
 /* columns rows colors chars-per-pixel */
-"16 15 96 2",
+"16 16 96 2",
 "+  c Black",
 "u  c #CACACA",
 "P  c #1E1E1E",
@@ -113,5 +113,6 @@ static char *searchcase_xpm[] = {
 "  1 / v   $ ( S ) _ ` ' 4 ] t   ",
 "  l [       { P } |  .6 ..X.o.  ",
 "                    a ,         ",
+"                                ",
 "                                "
 };

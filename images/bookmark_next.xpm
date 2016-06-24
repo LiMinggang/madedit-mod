@@ -1,7 +1,7 @@
 /* XPM */
 static char *bookmark_next_xpm[] = {
 /* columns rows colors chars-per-pixel */
-"16 15 97 2",
+"16 16 97 2",
 "+  c #C82513",
 "I  c #99C4FF",
 "P  c #A3C9FF",
@@ -114,5 +114,6 @@ static char *bookmark_next_xpm[] = {
 "    . #   ] m j [ { } |  .      ",
 "    . #           l ..X.        ",
 "    . #           o.O.          ",
+"    . #                         ",
 "                                "
 };

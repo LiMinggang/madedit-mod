@@ -1,7 +1,7 @@
 /* XPM */
 static char *wrapbywin_xpm[] = {
 /* columns rows colors chars-per-pixel */
-"16 15 9 1",
+"16 16 9 1",
 ". c Black",
 "  c None",
 "o c #CCCCCC",
@@ -13,6 +13,7 @@ static char *wrapbywin_xpm[] = {
 "X c #333333",
 /* pixels */
 " .XXXXXXXXXXXXX ",
+" XoooooooooooooX",
 " XoooooooooooooX",
 " XoO+++++++++ooX",
 " XoooooooooooooX",

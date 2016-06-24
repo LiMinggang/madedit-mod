@@ -1,7 +1,7 @@
 /* XPM */
 static char *case_xpm[] = {
 /* columns rows colors chars-per-pixel */
-"16 15 115 2",
+"16 16 115 2",
 "@. c #EE344F",
 "3  c #FEE0AD",
 "}  c #FDE5F8",
@@ -131,6 +131,7 @@ static char *case_xpm[] = {
 "T R E W     Q ! ~ ^ / ( ) _ ` ' ",
 "] [ { }   |  ...X.o.O.+.@.#.$.%.",
 "&.*.=.-.  ;.:.>.,.<.  1.>.2.3.4.",
+"                                ",
 "                                ",
 "                                "
 };

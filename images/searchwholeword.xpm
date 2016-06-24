@@ -1,7 +1,7 @@
 /* XPM */
 static char *searchwholeword_xpm[] = {
 /* columns rows colors chars-per-pixel */
-"16 15 62 1",
+"16 16 62 1",
 "> c #5B767E",
 "= c #FFFFE7",
 "% c #FFFFF3",
@@ -78,6 +78,7 @@ static char *searchwholeword_xpm[] = {
 " %BV @CZAS* =-; ",
 "            =-; ",
 "  ..............",
+"                ",
 "                ",
 "                "
 };

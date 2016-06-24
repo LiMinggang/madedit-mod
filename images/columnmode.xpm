@@ -1,7 +1,7 @@
 /* XPM */
 static char *columnmode_xpm[] = {
 /* columns rows colors chars-per-pixel */
-"16 15 10 1",
+"16 16 10 1",
 ". c Black",
 "$ c #3C3C3C",
 "  c None",
@@ -15,6 +15,7 @@ static char *columnmode_xpm[] = {
 /* pixels */
 " .XXXXXXXXXXXXX ",
 " XoooooooooooooX",
+" XoooooooooooooX",
 " XoOOOOOOOOOOooX",
 " XoooooooooooooX",
 " Xo+++++oooooooX",
@@ -27,5 +28,5 @@ static char *columnmode_xpm[] = {
 " XoooooooooooooX",
 " XoOOXXXXXXXXooX",
 " XoooooooooooooX",
-"  XXXXXXXXXXXXX "
+"  XXXXXXXXXXXXX ",
 };

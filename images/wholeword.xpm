@@ -1,7 +1,7 @@
 /* XPM */
 static char *wholeword_xpm[] = {
 /* columns rows colors chars-per-pixel */
-"16 15 26 1",
+"16 16 26 1",
 "6 c #FFFFE4",
 "$ c #DBFFFF",
 "1 c #90908E",
@@ -40,6 +40,7 @@ static char *wholeword_xpm[] = {
 "  .%$ ;>1>2 .%$ ",
 "  .%$ 3oO42 .%$ ",
 "  .X5      67o$ ",
+"                ",
 "                ",
 "                ",
 "                ",

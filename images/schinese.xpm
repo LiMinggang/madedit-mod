@@ -1,6 +1,6 @@
 /* XPM */ 
 static char * schinese_xpm[] = {
-"16 15 73 1",
+"16 16 73 1",
 " 	c None",
 "!	c black",
 "#	c #959595",
@@ -87,5 +87,6 @@ static char * schinese_xpm[] = {
 " [!!]$*L^  _!!`a",
 "  bcdefg    h!!i",
 "             jk ",
+"                ",
 "                ",
 "                "};

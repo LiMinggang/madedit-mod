@@ -1,7 +1,7 @@
 /* XPM */
 static char *preview_xpm[] = {
 /* columns rows colors chars-per-pixel */
-"16 15 4 1",
+"16 16 4 1",
 "  c Black",
 "X c #FFFFFF",
 "o c #00FFFF",
@@ -21,5 +21,6 @@ static char *preview_xpm[] = {
 " XXXXXX  ..   ..",
 " XXXXXXX       .",
 " XXXXXXXXXX .   ",
-"            ..  "
+"            ..  ",
+"                ",
 };

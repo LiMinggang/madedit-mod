@@ -1,6 +1,6 @@
 /* XPM */ 
 static char * options_xpm[] = {
-"16 15 15 1",
+"16 16 15 1",
 " 	c None",
 "!	c black",
 "#	c #607C8A",
@@ -30,4 +30,6 @@ static char * options_xpm[] = {
 "  ###.'         ",
 " ## #0          ",
 " *###           ",
-"  *#            "};
+"  *#            ",
+"                ",
+};

@@ -1,7 +1,7 @@
 /* XPM */
 static char *print_xpm[] = {
 /* columns rows colors chars-per-pixel */
-"16 15 39 1",
+"16 16 39 1",
 "< c #E3E4E6",
 "+ c #C3C3C4",
 "i c #FFFFFF",
@@ -56,5 +56,6 @@ static char *print_xpm[] = {
 "633paiiiiii%336 ",
 "XXX*iiiiiii%XXX ",
 "   6iiiiiii%    ",
-"   $XXXXXXX#    "
+"   $XXXXXXX#    ",
+"                ",
 };

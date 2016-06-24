@@ -1,7 +1,7 @@
 /* XPM */
 static char *showsymbol_xpm[] = {
 /* columns rows colors chars-per-pixel */
-"16 15 25 1",
+"16 16 25 1",
 "% c Black",
 ": c #F7F7F7",
 "2 c #3C3C3C",
@@ -35,6 +35,7 @@ static char *showsymbol_xpm[] = {
 "   -%%%% %      ",
 "    ;%%% %      ",
 "    :>;% %      ",
+"       % %      ",
 "       % %      ",
 "       % %      ",
 "       % %      ",

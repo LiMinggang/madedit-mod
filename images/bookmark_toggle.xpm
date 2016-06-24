@@ -1,7 +1,7 @@
 /* XPM */
 static char *bookmark_toggle_xpm[] = {
 /* columns rows colors chars-per-pixel */
-"16 15 69 1",
+"16 16 69 1",
 "+ c #C82513",
 "L c #8E0F02",
 "1 c #9F1506",
@@ -83,6 +83,8 @@ static char *bookmark_toggle_xpm[] = {
 "  .XmmMNBVCZA   ",
 "  .X   SDFGH3   ",
 "  .X    JKL3    ",
+"  .X            ",
+"  .X            ",
 "  .X            ",
 "  .X            ",
 "  .X            ",

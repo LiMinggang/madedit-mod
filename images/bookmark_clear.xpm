@@ -1,7 +1,7 @@
 /* XPM */
 static char *bookmark_clear_xpm[] = {
 /* columns rows colors chars-per-pixel */
-"16 15 89 1",
+"16 16 89 1",
 "+ c #C82513",
 "g c #6E6D6D",
 "3 c #9F1506",
@@ -106,5 +106,6 @@ static char *bookmark_clear_xpm[] = {
 "  .#   REWQx!   ",
 "  .#  ~^/  ()_  ",
 "  .#  `'    ][  ",
+"  .#            ",
 "                "
 };

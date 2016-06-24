@@ -1,11 +1,12 @@
 /* XPM */
 static char * down_xpm[] = {
-"16 15 3 1",
+"16 16 3 1",
 " 	c None",
 ".	c Black",
 "X	c #9c9c9c",
 "                ",
 "     ......     ",
+"     .XXXX.     ",
 "     .XXXX.     ",
 "     .XXXX.     ",
 "     .XXXX.     ",

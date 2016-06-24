@@ -1,6 +1,6 @@
 /* XPM */
 static char * up_xpm[] = {
-"16 15 3 1",
+"16 16 3 1",
 " 	c None",
 ".	c Black",
 "X	c #9c9c9c",
@@ -11,6 +11,7 @@ static char * up_xpm[] = {
 "    .XXXXXX.    ",
 "   .XXXXXXXX.   ",
 "  ....XXXX....  ",
+"     .XXXX.     ",
 "     .XXXX.     ",
 "     .XXXX.     ",
 "     .XXXX.     ",

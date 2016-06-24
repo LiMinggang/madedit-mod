@@ -1,6 +1,6 @@
 /* XPM */ 
 static char * japanese_xpm[] = {
-"16 15 102 2",
+"16 16 102 2",
 "  	c None",
 "! 	c black",
 "# 	c #D9D4CB",
@@ -117,4 +117,5 @@ static char * japanese_xpm[] = {
 "    q r     s t     u v w x     ",
 "    y z { | } ~      !!!#!$!    ",
 "      %!&!'!(!)!      *!        ",
+"                                ",
 "                                "};

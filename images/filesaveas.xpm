@@ -1,7 +1,7 @@
 /* XPM */
 static char *filesaveas_xpm[] = {
 /* columns rows colors chars-per-pixel */
-"16 15 23 1",
+"16 16 23 1",
 "X c Black",
 "+ c #FFFFFF",
 "< c #D5D6D8",
@@ -40,5 +40,6 @@ static char *filesaveas_xpm[] = {
 " ##&*o>>,<1+&# @",
 " ##&*o>>234+&# @",
 " ##&224+++++&# @",
-"@             @@"
+"@             @@",
+"                "
 };

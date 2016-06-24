@@ -1,7 +1,7 @@
 /* XPM */
 static char *runscript_xpm[] = {
 /* columns rows colors chars-per-pixel */
-"16 15 99 2",
+"16 16 99 2",
 "~  c #CACAC9",
 "M  c #938F8F",
 "{  c #C5C3C3",
@@ -102,6 +102,7 @@ static char *runscript_xpm[] = {
 "4  c #7F7C7C",
 "f  c #8E8B8A",
 /* pixels */
+"                                ",
 "                    . X o O     ",
 "              +     @ # # $     ",
 "          % & * =   - ; : > ,   ",

@@ -229,6 +229,9 @@
 #include "../images/footprint.xpm"
 #define footprint_xpm_idx (options_xpm_idx+1)
 
+#include "../images/mpython.xpm"
+#define mpython_xpm_idx (footprint_xpm_idx+1)
+
 #define MADMINUTES (60*1000)
 
 char ** g_MadIcons[] =
@@ -243,7 +246,7 @@ char ** g_MadIcons[] =
 	&bookmark_clear_xpm[0], &spellchecker_xpm[0], &showsymbol_xpm[0], &down_xpm[0], &up_xpm[0],
 	&alignleft_xpm[0], &alignright_xpm[0], &numbering_xpm[0], &refresh_xpm[0], &closepreview_xpm[0], &recentfiles_xpm[0],
 	&searchwholeword_xpm[0], &searchregex_xpm[0], &searchcase_xpm[0], &dotmatchnewline_xpm[0], &lock_xpm[0], &lock_open_xpm[0],
-	&tchinese_xpm[0], &schinese_xpm[0], &japanese_xpm[0], &options_xpm[0], &footprint_xpm[0]
+	&tchinese_xpm[0], &schinese_xpm[0], &japanese_xpm[0], &options_xpm[0], &footprint_xpm[0], &mpython_xpm[0],
 };
 
 extern void ScanForLocales();
@@ -276,6 +279,8 @@ int g_PrevPageID = -1;
 wxStatusBar *g_StatusBar = NULL;
 wxArrayString g_SpellSuggestions;
 astyle::ASFormatter * g_ASFormatter = NULL;
+const int IconWidth = 16;
+const int IconHeight = 16;
 
 bool g_CheckModTimeForReload = true;
 static int Menu_Window_Count = 4;
@@ -2607,7 +2612,7 @@ void MadEditFrame::CreateGUIControls( void )
 	}
 
 	//m_ImageList
-	m_ImageList = new wxImageList( 16, 15 );
+	m_ImageList = new wxImageList( IconWidth, IconHeight );
 
 	for( int i = 0; i < ( sizeof( g_MadIcons ) / sizeof( g_MadIcons[0] ) ); ++i )
 	{ m_ImageList->Add( wxBitmap( g_MadIcons[i] ) ); }
@@ -3069,7 +3074,7 @@ void MadEditFrame::CreateGUIControls( void )
 					scriptfname = fn.GetName();
 					g_Menu_MadMacro_Scripts->Append( menuMadScrip1 + int( i ), scriptfname, help );
 					g_Menu_MadMacro_ScriptsPop->Append( menuMadScrip1 + int( i ), scriptfname, help );
-					g_tbMACRO_ptr->AddTool( menuMadScrip1 + int( i ), _T( "Macro" ), m_ImageList->GetBitmap( saverec_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, scriptfname, help, NULL );
+					g_tbMACRO_ptr->AddTool( menuMadScrip1 + int( i ), _T( "Macro" ), m_ImageList->GetBitmap( mpython_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, scriptfname, help, NULL );
 					if(++i > (MAX_MADSCRIPT_LOAD)) break;
 				}
 
@@ -8470,7 +8475,7 @@ void MadEditFrame::OnToolsSaveRecMacro( wxCommandEvent& event )
 					wxString fname = fn.GetName();
 					g_Menu_MadMacro_Scripts->Append( menuMadScrip1 + int( g_Menu_MadMacro_Scripts->GetMenuItemCount() ), fname, help );
 					g_Menu_MadMacro_ScriptsPop->Append( menuMadScrip1 + int( g_Menu_MadMacro_Scripts->GetMenuItemCount() ), fname, help );
-					g_tbMACRO_ptr->AddTool( menuMadScrip1 + int( g_Menu_MadMacro_Scripts->GetMenuItemCount() ), _T( "Macro" ), m_ImageList->GetBitmap( saverec_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, fname, help, NULL );
+					g_tbMACRO_ptr->AddTool( menuMadScrip1 + int( g_Menu_MadMacro_Scripts->GetMenuItemCount() ), _T( "Macro" ), m_ImageList->GetBitmap( mpython_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, fname, help, NULL );
 				}
 			}
 

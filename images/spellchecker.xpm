@@ -1,7 +1,7 @@
 /* XPM */
 static char *spellchecker_xpm[] = {
 /* columns rows colors chars-per-pixel */
-"16 15 15 1",
+"16 16 15 1",
 ". c Black",
 "o c #808080",
 "- c #E04040",
@@ -31,6 +31,7 @@ static char *spellchecker_xpm[] = {
 "*%--====-------%",
 "%=--=&==--& ;=-%",
 " &==  %&&$    % ",
+"                ",
 "                ",
 "                "
 };

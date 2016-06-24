@@ -1,7 +1,7 @@
 /* XPM */
 static char *Mad_16x15_xpm[] = {
 /* columns rows colors chars-per-pixel */
-"16 15 165 2",
+"16 16 165 2",
 "n. c #FCFBF4",
 "9  c #413D32",
 "a  c #464136",
@@ -183,5 +183,5 @@ static char *Mad_16x15_xpm[] = {
 "c.v.b.n.m.M.N.s.B.V.C.Z.A.S.    ",
 "            D.F.G.H.J.K.L.}     ",
 "            P.I.U.              ",
-//"              Y.                "
+"              Y.                ",
 };

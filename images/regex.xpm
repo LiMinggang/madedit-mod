@@ -1,7 +1,7 @@
 /* XPM */
 static char *regex_xpm[] = {
 /* columns rows colors chars-per-pixel */
-"16 15 15 1",
+"16 16 15 1",
 "o c Black",
 ". c #FFDB90",
 "O c #00003A",
@@ -30,6 +30,7 @@ static char *regex_xpm[] = {
 " .X#*=-   .&+   ",
 " .X# $@   .&+   ",
 " .X# *o   ;Xoo% ",
+"                ",
 "                ",
 "                ",
 "                "

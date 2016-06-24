@@ -1,7 +1,7 @@
 /* XPM */
 static char *hexmode_xpm[] = {
 /* columns rows colors chars-per-pixel */
-"16 15 8 1",
+"16 16 8 1",
 ". c Black",
 "  c None",
 "+ c #727263",
@@ -12,6 +12,7 @@ static char *hexmode_xpm[] = {
 "X c #333333",
 /* pixels */
 " .............. ",
+" XoooooooooooooX",
 " XoooOOoooOooooX",
 " XooOooOoOOooooX",
 " XooOooOooOooooX",
@@ -25,5 +26,6 @@ static char *hexmode_xpm[] = {
 " XoOoOoOo@oOOOoX",
 " XOOoO#OOO+OoOOX",
 " XoooooooooooooX",
-"  XXXXXXXXXXXXX "
+"  XXXXXXXXXXXXX ",
+
 };

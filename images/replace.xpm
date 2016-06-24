@@ -1,7 +1,7 @@
 /* XPM */
 static char *replace_xpm[] = {
 /* columns rows colors chars-per-pixel */
-"16 15 3 1",
+"16 16 3 1",
 ". c Black",
 "X c #808080",
 "  c None",
@@ -20,5 +20,6 @@ static char *replace_xpm[] = {
 "  .     ..  XXX ",
 "    . . ... X  X",
 "        ..  X  X",
-"        .   XXX "
+"        .   XXX ",
+"                ",
 };

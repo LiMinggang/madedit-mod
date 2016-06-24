@@ -1,7 +1,7 @@
 /* XPM */
 static char *redo_xpm[] = {
 /* columns rows colors chars-per-pixel */
-"16 15 37 1",
+"16 16 37 1",
 "4 c #9BACC2",
 "; c #4C7398",
 "3 c #547B99",
@@ -40,6 +40,7 @@ static char *redo_xpm[] = {
 "q c #A2B3C5",
 "$ c #8FB0C3",
 /* pixels */
+"                ",
 "   .XoooO       ",
 "  +o@@@@@o#    +",
 " $@%%&@&%%&@  +o",

@@ -1,7 +1,7 @@
 /* XPM */
 static char *dotnewline_xpm[] = {
 /* columns rows colors chars-per-pixel */
-"16 15 25 1",
+"16 16 25 1",
 "6 c #B7FFFF",
 "3 c #FFBE94",
 "4 c #3C5313",
@@ -40,6 +40,7 @@ static char *dotnewline_xpm[] = {
 "       >,X#     ",
 " >,o  &#O$%>,*= ",
 " >,o  34X56>,*= ",
+"                ",
 "                ",
 "                ",
 "                "

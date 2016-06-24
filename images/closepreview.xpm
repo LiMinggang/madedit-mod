@@ -1,7 +1,7 @@
 /* XPM */
 static char *closepreview_xpm[] = {
 /* columns rows colors chars-per-pixel */
-"16 15 137 2",
+"16 16 137 2",
 "   c None",
 "X. c #DF483E",
 "F  c #FBE5E7",
@@ -154,5 +154,6 @@ static char *closepreview_xpm[] = {
 "    %.&.*.=.-.;.:.>.,.<.1.2.    ",
 "    3.4.5.6.7.8.9.0.q.w.e.r.    ",
 "    t.y.u.i.p.a.s.d.f.g.h.j.    ",
+"                                ",
 "                                "
 };

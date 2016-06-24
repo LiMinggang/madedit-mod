@@ -1,7 +1,7 @@
 /* XPM */
 static char *alignleft_xpm[] = {
 /* columns rows colors chars-per-pixel */
-"16 15 64 1",
+"16 16 64 1",
 "F c #0F0F0F",
 "A c #1E1E1E",
 "N c #3C3C3C",
@@ -81,5 +81,6 @@ static char *alignleft_xpm[] = {
 "                ",
 "  NBVCZASDF     ",
 "                ",
+"  4567890qwert  ",
 "                "
 };

@@ -1,7 +1,7 @@
 /* XPM */
 static char *refresh_xpm[] = {
 /* columns rows colors chars-per-pixel */
-"16 15 136 2",
+"16 16 136 2",
 "   c None",
 "~  c #000001",
 "[  c #263852",
@@ -153,5 +153,6 @@ static char *refresh_xpm[] = {
 "    %.&.*.=.-.;.:.>.,.<.1.2.    ",
 "    3.4.5.6.7.8.9.0.q.w.e.r.    ",
 "    t.y.u.i.p.a.s.d d.f.O.      ",
-"    g.          h..             "
+"    g.          h..             ",
+"                                ",
 };

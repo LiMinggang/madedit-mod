@@ -1,7 +1,7 @@
 /* XPM */
 static char *searchselectedonly_xpm[] = {
 /* columns rows colors chars-per-pixel */
-"16 15 125 2",
+"16 16 125 2",
 "6. c #191A19",
 "   c None",
 ".. c #737A82",
@@ -142,5 +142,6 @@ static char *searchselectedonly_xpm[] = {
 "    -.;.:.>.,.<.1.2.3.4.5.      ",
 "    6.7.7.8.8.9.0.q.w.7 e.      ",
 "                r.r.r.r.r.      ",
+"                                ",
 "                                "
 };
