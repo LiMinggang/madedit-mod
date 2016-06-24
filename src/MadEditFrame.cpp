@@ -216,6 +216,19 @@
 #include "../images/lock_open.xpm"
 #define lock_open_xpm_idx (lock_xpm_idx+1)
 
+#include "../images/tchinese.xpm"
+#define tchinese_xpm_idx (lock_open_xpm_idx+1)
+#include "../images/schinese.xpm"
+#define schinese_xpm_idx (tchinese_xpm_idx+1)
+#include "../images/japanese.xpm"
+#define japanese_xpm_idx (schinese_xpm_idx+1)
+
+#include "../images/options.xpm"
+#define options_xpm_idx (japanese_xpm_idx+1)
+
+#include "../images/footprint.xpm"
+#define footprint_xpm_idx (options_xpm_idx+1)
+
 #define MADMINUTES (60*1000)
 
 char ** g_MadIcons[] =
@@ -230,6 +243,7 @@ char ** g_MadIcons[] =
 	&bookmark_clear_xpm[0], &spellchecker_xpm[0], &showsymbol_xpm[0], &down_xpm[0], &up_xpm[0],
 	&alignleft_xpm[0], &alignright_xpm[0], &numbering_xpm[0], &refresh_xpm[0], &closepreview_xpm[0], &recentfiles_xpm[0],
 	&searchwholeword_xpm[0], &searchregex_xpm[0], &searchcase_xpm[0], &dotmatchnewline_xpm[0], &lock_xpm[0], &lock_open_xpm[0],
+	&tchinese_xpm[0], &schinese_xpm[0], &japanese_xpm[0], &options_xpm[0], &footprint_xpm[0]
 };
 
 extern void ScanForLocales();
@@ -2203,12 +2217,12 @@ CommandData CommandTable[] =
 
 	// Tools
 	{ 0, 0, 0, 0, _( "&Tools" ), 0, wxITEM_NORMAL, 0, &g_Menu_Tools, 0, 0, 0, 0, false},
-	{ 0,               1, menuOptions,            wxT( "menuOptions" ),            _( "&Options..." ),                                   wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Change the configuration" ), 0, 0, 0, false},
+	{ 0,               1, menuOptions,            wxT( "menuOptions" ),            _( "&Options..." ),                                   wxT( "" ),       wxITEM_NORMAL,    options_xpm_idx, 0,                   _( "Change the configuration" ), 0, 0, 0, false},
 	{ 0,               1, menuHighlighting,       wxT( "menuHighlighting" ),       _( "&Syntax Highlighting Settings..." ),              wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Change syntax highlighting settings" ), 0, 0, 0, false},
 #ifdef __WXMSW__
 	{ 0,               1, menuFileAssociation,    wxT( "menuFileAssociation" ),    _( "&File Type Associations..." ),                    wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Change file type associations" ), 0, 0, 0, false},
 #endif
-	{ 0,               1, menuPurgeHistories,     wxT( "menuPurgeHistories" ),     _( "&Purge Histories..." ),                           wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Clearing out your history" ), 0, 0, 0, false},
+	{ 0,               1, menuPurgeHistories,     wxT( "menuPurgeHistories" ),     _( "&Purge Histories..." ),                           wxT( "" ),       wxITEM_NORMAL,    footprint_xpm_idx, 0,                 _( "Clearing out your history" ), 0, 0, 0, false},
 	{ 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0, 0, 0, 0, false},
 	{ 0,               1, menuByteOrderMark,      wxT( "menuByteOrderMark" ),      _( "Has Unicode BOM (Byte-Order Mark)" ),             0,             wxITEM_NORMAL,    -1, &g_Menu_Tools_BOM,                0, 0, 0, 0, false},
 	{ 0,               2, menuToggleBOM,          wxT( "menuToggleBOM" ),          _( "Add/Remove BOM" ),                                wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Add/Remove Unicode BOM" ), 0, 0, 0, false},
@@ -2225,17 +2239,17 @@ CommandData CommandTable[] =
 	{ 0,               1, menuConvertEncoding,    wxT( "menuConvertEncoding" ),    _( "Convert File &Encoding..." ),                     0,               wxITEM_NORMAL,    -1, 0,                                _( "Convert to the specified encoding" ), 0, 0, 0, false},
 	{ 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0, 0, 0, 0, false},
 	{ 0,               1, menuConvertChineseChar,     wxT( "menuConvertChineseChar" ),     _( "Convert &Chinese Char" ),                                 0,             wxITEM_NORMAL,    -1, &g_Menu_Tools_ConvertChineseChar, 0, 0, 0, 0, false},
-	{ 0,               2, menuSimp2TradChinese,       wxT( "menuSimp2TradChinese" ),       _( "File: Simplified Chinese to &Traditional Chinese" ),      0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert simplified Chinese chars to traditional Chinese chars in the file" ), 0, 0, 0, false},
-	{ 0,               2, menuTrad2SimpChinese,       wxT( "menuTrad2SimpChinese" ),       _( "File: Traditional Chinese to &Simplified Chinese" ),      0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert traditional Chinese chars to simplified Chinese chars in the file" ), 0, 0, 0, false},
-	{ 0,               2, menuKanji2TradChinese,      wxT( "menuKanji2TradChinese" ),      _( "File: Japanese Kanji to Tr&aditional Chinese" ),          0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert Japanese Kanji to traditional Chinese chars in the file" ), 0, 0, 0, false},
-	{ 0,               2, menuKanji2SimpChinese,      wxT( "menuKanji2SimpChinese" ),      _( "File: Japanese Kanji to Si&mplified Chinese" ),           0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert Japanese Kanji to simplified Chinese chars in the file" ), 0, 0, 0, false},
-	{ 0,               2, menuChinese2Kanji,          wxT( "menuChinese2Kanji" ),          _( "File: Chinese to &Japanese Kanji" ),                      0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert Chinese chars to Japanese Kanji in the file" ), 0, 0, 0, false},
+	{ 0,               2, menuSimp2TradChinese,       wxT( "menuSimp2TradChinese" ),       _( "File: Simplified Chinese to &Traditional Chinese" ),      0,             wxITEM_NORMAL,    tchinese_xpm_idx, 0,    _( "Convert simplified Chinese chars to traditional Chinese chars in the file" ), 0, 0, 0, false},
+	{ 0,               2, menuTrad2SimpChinese,       wxT( "menuTrad2SimpChinese" ),       _( "File: Traditional Chinese to &Simplified Chinese" ),      0,             wxITEM_NORMAL,    schinese_xpm_idx, 0,    _( "Convert traditional Chinese chars to simplified Chinese chars in the file" ), 0, 0, 0, false},
+	{ 0,               2, menuKanji2TradChinese,      wxT( "menuKanji2TradChinese" ),      _( "File: Japanese Kanji to Tr&aditional Chinese" ),          0,             wxITEM_NORMAL,    tchinese_xpm_idx, 0,    _( "Convert Japanese Kanji to traditional Chinese chars in the file" ), 0, 0, 0, false},
+	{ 0,               2, menuKanji2SimpChinese,      wxT( "menuKanji2SimpChinese" ),      _( "File: Japanese Kanji to Si&mplified Chinese" ),           0,             wxITEM_NORMAL,    schinese_xpm_idx, 0,    _( "Convert Japanese Kanji to simplified Chinese chars in the file" ), 0, 0, 0, false},
+	{ 0,               2, menuChinese2Kanji,          wxT( "menuChinese2Kanji" ),          _( "File: Chinese to &Japanese Kanji" ),                      0,             wxITEM_NORMAL,    japanese_xpm_idx, 0,    _( "Convert Chinese chars to Japanese Kanji in the file" ), 0, 0, 0, false},
 	{ 0,               2, 0,                          0,                                 0,                                                          0,             wxITEM_SEPARATOR, -1, 0,                                0, 0, 0, 0, false},
-	{ 0,               2, menuSimp2TradClipboard,     wxT( "menuSimp2TradClipboard" ),     _( "Clipboard: Simplified Chinese to T&raditional Chinese" ), 0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert simplified Chinese chars to traditional Chinese chars in the clipboard" ), 0, 0, 0, false},
-	{ 0,               2, menuTrad2SimpClipboard,     wxT( "menuTrad2SimpClipboard" ),     _( "Clipboard: Traditional Chinese to S&implified Chinese" ), 0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert traditional Chinese chars to simplified Chinese chars in the clipboard" ), 0, 0, 0, false},
-	{ 0,               2, menuKanji2TradClipboard,    wxT( "menuKanji2TradClipboard" ),    _( "Clipboard: Japanese Kanji to Tra&ditional Chinese" ),     0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert Japanese Kanji to traditional Chinese chars in the clipboard" ), 0, 0, 0, false},
-	{ 0,               2, menuKanji2SimpClipboard,    wxT( "menuKanji2SimpClipboard" ),    _( "Clipboard: Japanese Kanji to Sim&plified Chinese" ),      0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert Japanese Kanji to simplified Chinese chars in the clipboard" ), 0, 0, 0, false},
-	{ 0,               2, menuChinese2KanjiClipboard, wxT( "menuChinese2KanjiClipboard" ), _( "Clipboard: Chinese to Japanese &Kanji" ),                 0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert Chinese chars to Japanese Kanji in the clipboard" ), 0, 0, 0, false},
+	{ 0,               2, menuSimp2TradClipboard,     wxT( "menuSimp2TradClipboard" ),     _( "Clipboard: Simplified Chinese to T&raditional Chinese" ), 0,             wxITEM_NORMAL,    tchinese_xpm_idx, 0,    _( "Convert simplified Chinese chars to traditional Chinese chars in the clipboard" ), 0, 0, 0, false},
+	{ 0,               2, menuTrad2SimpClipboard,     wxT( "menuTrad2SimpClipboard" ),     _( "Clipboard: Traditional Chinese to S&implified Chinese" ), 0,             wxITEM_NORMAL,    schinese_xpm_idx, 0,    _( "Convert traditional Chinese chars to simplified Chinese chars in the clipboard" ), 0, 0, 0, false},
+	{ 0,               2, menuKanji2TradClipboard,    wxT( "menuKanji2TradClipboard" ),    _( "Clipboard: Japanese Kanji to Tra&ditional Chinese" ),     0,             wxITEM_NORMAL,    tchinese_xpm_idx, 0,    _( "Convert Japanese Kanji to traditional Chinese chars in the clipboard" ), 0, 0, 0, false},
+	{ 0,               2, menuKanji2SimpClipboard,    wxT( "menuKanji2SimpClipboard" ),    _( "Clipboard: Japanese Kanji to Sim&plified Chinese" ),      0,             wxITEM_NORMAL,    schinese_xpm_idx, 0,    _( "Convert Japanese Kanji to simplified Chinese chars in the clipboard" ), 0, 0, 0, false},
+	{ 0,               2, menuChinese2KanjiClipboard, wxT( "menuChinese2KanjiClipboard" ), _( "Clipboard: Chinese to Japanese &Kanji" ),                 0,             wxITEM_NORMAL,    japanese_xpm_idx, 0,    _( "Convert Chinese chars to Japanese Kanji in the clipboard" ), 0, 0, 0, false},
 	{ 0,               1, 0,                          0,                                 0,                                                          0,             wxITEM_SEPARATOR, -1, 0,                                0, 0, 0, 0, false},
 	{ 0,               1, menuTextConvFormatter,      wxT( "menuTextConvFormatter" ),      _( "Text Converter/Formatter" ),                              0,             wxITEM_NORMAL,    -1, &g_Menu_Tools_TextConvFormatter, 0, 0, 0, 0, false},
 	{ 0,               2, menuMarkdown2Html,          wxT( "menuMarkdown2Html" ),          _( "&Markdown to HTML" ),                                     0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert Markdown to HTML" ), 0, 0, 0, false},

@@ -362,7 +362,7 @@ bool MadEditApp::OnInit()
 
 			if( !m_AppServer->Create( g_MadServerStr ) )
 			{
-				wxLogDebug( _( "Failed to create an IPC service." ) );
+				wxLogDebug( wxGetTranslation(wxT( "Failed to create an IPC service." ) ));
 			}
 		}
 		else
@@ -408,7 +408,7 @@ bool MadEditApp::OnInit()
 			}
 			else
 			{
-				MadMessageBox( _( "Sorry, the existing instance may be too busy too respond.\nPlease close any open dialogs and retry." ),
+				MadMessageBox( wxGetTranslation(wxT( "Sorry, the existing instance may be too busy too respond.\nPlease close any open dialogs and retry." )),
 							   wxT( "MadEdit-Mod" ), wxICON_INFORMATION | wxOK );
 			}
 

@@ -2580,7 +2580,6 @@ void wxAuiNotebook::OnTabDragMotion(wxAuiNotebookEvent& evt)
             dest_tabs->MovePage(src_tab, dest_idx);
             m_tabs.MovePage(m_tabs.GetPage(src_idx).window, dest_idx);
             dest_tabs->SetActivePage((size_t)dest_idx);
-			SetSelectionToPage(m_tabs.GetPage(dest_idx));
             dest_tabs->DoShowHide();
             dest_tabs->Refresh();
             m_lastDragX = pt.x;
@@ -2679,7 +2678,10 @@ void wxAuiNotebook::OnTabEndDrag(wxAuiNotebookEvent& evt)
     wxPoint mouse_screen_pt = ::wxGetMousePosition();
     wxPoint mouse_client_pt = ScreenToClient(mouse_screen_pt);
 
-
+    // Update our selection (it may be updated again below but the code below
+    // can also return without doing anything else and this ensures that the
+    // selection is updated even then).
+    m_curPage = src_tabs->GetActivePage();
 
     // check for an external move
     if (m_flags & wxAUI_NB_TAB_EXTERNAL_MOVE)
