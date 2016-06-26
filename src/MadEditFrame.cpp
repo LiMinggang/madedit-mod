@@ -166,10 +166,10 @@
 #define record_xpm_idx (runscript_xpm_idx+1)
 #include "../images/stop.xpm"
 #define stop_xpm_idx (record_xpm_idx+1)
-#include "../images/play.xpm"
-#define play_xpm_idx (stop_xpm_idx+1)
+#include "../images/playback.xpm"
+#define playback_xpm_idx (stop_xpm_idx+1)
 #include "../images/saverec.xpm"
-#define saverec_xpm_idx (play_xpm_idx+1)
+#define saverec_xpm_idx (playback_xpm_idx+1)
 
 #include "../images/bookmark_toggle.xpm"
 #define bookmark_toggle_xpm_idx (saverec_xpm_idx+1)
@@ -2215,7 +2215,7 @@ CommandData CommandTable[] =
 	{ 0,               1, menuRunMacroFile,       wxT( "menuRunMacroFile" ),       _( "Load Saved MacroScript..." ),                     wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Load saved macro script" ), 0, 0, 0, false},
 	{ 0,               1, menuStartRecMacro,      wxT( "menuStartRecMacro" ),      _( "Start Recording" ),                               wxT( "" ),       wxITEM_NORMAL,    record_xpm_idx,  0,                   _( "Start Recording" ), 0, &g_tbMACRO_ptr, _( "Start Recording" ), false},
 	{ 0,               1, menuStopRecMacro,       wxT( "menuStopRecMacro" ),       _( "Stop Recording" ),                                wxT( "" ),       wxITEM_NORMAL,    stop_xpm_idx,    0,                   _( "Stop Recording" ), 0, &g_tbMACRO_ptr, _( "Stop Recording" ), false},
-	{ 0,               1, menuPlayRecMacro,       wxT( "menuPlayRecMacro" ),       _( "Playback" ),                                      wxT( "" ),       wxITEM_NORMAL,    play_xpm_idx,    0,                   _( "Playback" ), 0, &g_tbMACRO_ptr, _( "Playback" ), false},
+	{ 0,               1, menuPlayRecMacro,       wxT( "menuPlayRecMacro" ),       _( "Playback" ),                                      wxT( "" ),       wxITEM_NORMAL,    playback_xpm_idx,    0,                   _( "Playback" ), 0, &g_tbMACRO_ptr, _( "Playback" ), false},
 	{ 0,               1, menuSaveRecMacro,       wxT( "menuSaveRecMacro" ),       _( "Save Currently Recorded Macro..." ),              wxT( "" ),       wxITEM_NORMAL,    saverec_xpm_idx, 0,                   _( "Save Currently Recorded Macro" ), 0, &g_tbMACRO_ptr, _( "Save Recorded Macro" ), false},
 	{ 0,               1, menuMadScriptList,      wxT( "menuMadScriptList" ),      _( "Local Script List" ),                             wxT( "" ),       wxITEM_NORMAL,    -1, &g_Menu_MadMacro_Scripts,    0, 0, 0, 0, false},
 	{ 0,               2, menuEditMacroFile,      wxT( "menuEditMacroFile" ),      _( "Edit Saved MacroScript..." ),                     wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Edit saved macro script" ), 0, 0, 0, false},
