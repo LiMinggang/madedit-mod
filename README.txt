@@ -1005,4 +1005,5 @@ wxWidgets: http://www.wxwidgets.org
 wxDevCpp: http://wxdsgn.sourceforge.net
 Boost: http://www.boost.org
 Open Clip Art Library: http://www.openclipart.org
+Silk Icon set: http://www.famfamfam.com/
 
