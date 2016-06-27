@@ -121,9 +121,11 @@ FreeBSD packaging (with FreeBSD 10.01)
 Mod v0.4.4
 New: Set toolbar to 3 columns to let user who has a small display have a chance to re-org the toolbars
 New: Use icon to mark readonly flag
-New: Replace toolbar icons with Silk icon set from Mark James(www.famfamfam.com)
+New: Replace toolbar icons with Silk icon set from Mark James(www.famfamfam.com) and Fugue(http://p.yusukekamiyamane.com/)
 Fix: Move recent files tool bar item from Quick search to Standard
 Add more Icons
+Note: The Quick search bar would be larger than expected because of removing the recent file list button. Please reset the
+toolbar (and re-arrange it---it would be saved) by Tools->Purge History->Reset Toolbar pos
 
 Mod v0.4.3
 1.New: Use dialog to let user choose one for all instead of annoying one by one dialogs
