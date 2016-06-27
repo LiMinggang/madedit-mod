@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * footprint_xpm[] = {
+static FFFchar * footprint_xpm[] = {
 "16 16 50 1",
 " 	c None",
 "!	c black",
@@ -66,5 +66,4 @@ static char * footprint_xpm[] = {
 "OKL:      P     ",
 "QK?3            ",
 "ORS             ",
-"                ",
-};
+"                "};
