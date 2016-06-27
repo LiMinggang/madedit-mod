@@ -2009,7 +2009,7 @@ CommandData CommandTable[] =
 		wxITEM_NORMAL,    -1,                0,                     _( "Insert a Tab char at current position" ), &g_Menu_EditPop, 0, 0, false
 	},
 
-	{ ecInsertDateTime, 1, menuInsertDateTime,           wxT( "menuInsertDateTime" ),           _( "Insert Dat&e and Time" ),                   wxT( "F7" ),           wxITEM_NORMAL,    -1,                0,                     _( "Insert date and time at current position" ), &g_Menu_EditPop, 0, 0, false},
+	{ ecInsertDateTime, 1, menuInsertDateTime,           wxT( "menuInsertDateTime" ),           _( "Insert Dat&e and Time" ),                   wxT( "F7" ),           wxITEM_NORMAL,    dateadd_xpm_idx, 0,                     _( "Insert date and time at current position" ), &g_Menu_EditPop, 0, 0, false},
 
 	// add: gogo, 21.09.2009
 	{ 0,                1, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0, 0, 0, 0, false},
