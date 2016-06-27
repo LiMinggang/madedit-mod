@@ -278,6 +278,16 @@
 #define qfind_xpm_idx (filehandle_xpm_idx+1)
 #include "../images/goposition.xpm"
 #define goposition_xpm_idx (qfind_xpm_idx+1)
+#include "../images/cplusplus.xpm"
+#define cplusplus_xpm_idx (goposition_xpm_idx+1)
+#include "../images/markdown.xpm"
+#define markdown_xpm_idx (cplusplus_xpm_idx+1)
+#include "../images/html.xpm"
+#define html_xpm_idx (markdown_xpm_idx+1)
+#include "../images/xml.xpm"
+#define xml_xpm_idx (html_xpm_idx+1)
+#include "../images/plaintext.xpm"
+#define plaintext_xpm_idx (xml_xpm_idx+1)
 
 /*#include "../images/.xpm"
 #define _xpm_idx (_xpm_idx+1)*/
@@ -300,7 +310,8 @@ char ** g_MadIcons[] =
 	&delete_xpm[0], &dateadd_xpm[0], &touppercase_xpm[0], &tolowercase_xpm[0], &reload_xpm[0], &saveas_xpm[0], &winlist_xpm[0],
 	&pagesetup_xpm[0], &fullscreen_xpm[0], &scriptedit_xpm[0], &syntax_xpm[0], &folderfind_xpm[0], &post_it_xpm[0],
 	&report_xpm[0], &scriptcode_xpm[0], &encoding_xpm[0], &help_xpm[0], &linux_xpm[0], &mac_xpm[0], &windows_xpm[0],
-	&filehandle_xpm[0], &qfind_xpm[0], &goposition_xpm[0],
+	&filehandle_xpm[0], &qfind_xpm[0], &goposition_xpm[0], &cplusplus_xpm[0], &markdown_xpm[0], &html_xpm[0], &xml_xpm[0],
+	&plaintext_xpm[0],
 };
 
 extern void ScanForLocales();
@@ -2311,11 +2322,11 @@ CommandData CommandTable[] =
 	{ 0,               2, menuChinese2KanjiClipboard, wxT( "menuChinese2KanjiClipboard" ), _( "Clipboard: Chinese to Japanese &Kanji" ),                 0,             wxITEM_NORMAL,    japanese_xpm_idx, 0,    _( "Convert Chinese chars to Japanese Kanji in the clipboard" ), 0, 0, 0, false},
 	{ 0,               1, 0,                          0,                                 0,                                                          0,             wxITEM_SEPARATOR, -1, 0,                                0, 0, 0, 0, false},
 	{ 0,               1, menuTextConvFormatter,      wxT( "menuTextConvFormatter" ),      _( "Text Converter/Formatter" ),                              0,             wxITEM_NORMAL,    -1, &g_Menu_Tools_TextConvFormatter, 0, 0, 0, 0, false},
-	{ 0,               2, menuMarkdown2Html,          wxT( "menuMarkdown2Html" ),          _( "&Markdown to HTML" ),                                     0,             wxITEM_NORMAL,    -1, 0,                  _( "Convert Markdown to HTML" ), 0, 0, 0, false},
-	{ 0,               2, menuHtml2PlainText,         wxT( "menuHtml2PlainText" ),         _( "&HTML to Plain Text" ),                                   0,             wxITEM_NORMAL,    -1, 0,                  _( "Convert HTML to Plain Text" ), 0, 0, 0, false},
+	{ 0,               2, menuMarkdown2Html,          wxT( "menuMarkdown2Html" ),          _( "&Markdown to HTML" ),                                     0,             wxITEM_NORMAL,    html_xpm_idx, 0,        _( "Convert Markdown to HTML" ), 0, 0, 0, false},
+	{ 0,               2, menuHtml2PlainText,         wxT( "menuHtml2PlainText" ),         _( "&HTML to Plain Text" ),                                   0,             wxITEM_NORMAL,    plaintext_xpm_idx, 0,                  _( "Convert HTML to Plain Text" ), 0, 0, 0, false},
 	{ 0,               2, 0,                          0,                                 0,                                                          0,             wxITEM_SEPARATOR, -1, 0,                                0, 0, 0, 0, false},
-	{ 0,               2, menuAstyleFormat,           wxT( "menuAstyleFormat" ),           _( "&Astyle(C++/C#/Java/ObjC)" ),         wxT( "Ctrl-Shift-K" ),             wxITEM_NORMAL,    -1, 0,                  _( "Format selection or whole file(C++/C#/Java)" ), 0, 0, 0, false},
-	{ 0,               2, menuXMLFormat,              wxT( "menuXMLFormat" ),              _( "&XML Formatter" ),                                        0,             wxITEM_NORMAL,    -1, 0,                  _( "Format XML(whole file)" ), 0, 0, 0, false},
+	{ 0,               2, menuAstyleFormat,           wxT( "menuAstyleFormat" ),           _( "&Astyle(C++/C#/Java/ObjC)" ),         wxT( "Ctrl-Shift-K" ),             wxITEM_NORMAL,    cplusplus_xpm_idx, 0,   _( "Format selection or whole file(C++/C#/Java)" ), 0, 0, 0, false},
+	{ 0,               2, menuXMLFormat,              wxT( "menuXMLFormat" ),              _( "&XML Formatter" ),                                        0,             wxITEM_NORMAL,    xml_xpm_idx, 0,         _( "Format XML(whole file)" ), 0, 0, 0, false},
 	{ 0,               1, 0,                          0,                                 0,                                                          0,             wxITEM_SEPARATOR, -1, 0,                                0, 0, 0, 0, false},
 	{ 0,               1, menuWordCount,              wxT( "menuWordCount" ),              _( "&Word Count..." ),                                        0,             wxITEM_NORMAL,    report_xpm_idx, 0,      _( "Count the words and chars of the file or selection" ), 0, 0, 0, false},
 
