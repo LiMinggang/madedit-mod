@@ -122,6 +122,7 @@ Mod v0.4.4
 New: Set toolbar to 3 columns to let user who has a small display have a chance to re-org the toolbars
 New: Use icon to mark readonly flag
 New: Replace toolbar icons with Silk icon set from Mark James(www.famfamfam.com)
+Fix: Move recent files tool bar item from Quick search to Standard
 Add more Icons
 
 Mod v0.4.3

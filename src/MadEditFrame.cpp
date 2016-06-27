@@ -2073,7 +2073,7 @@ CommandData CommandTable[] =
 
 	// View
 	{ 0, 0, 0, 0, _( "&View" ), 0, wxITEM_NORMAL, 0, &g_Menu_View, 0, 0, 0, 0, false},
-	{ 0,            1, menuAlwaysOnTop,       wxT( "menuAlwaysOnTop" ),     _( "Always on Top" ),          wxT( "Ctrl-F11" ),   wxITEM_CHECK,     -1,                 0,     0, 0, 0, 0, false},
+	{ 0,            1, menuAlwaysOnTop,       wxT( "menuAlwaysOnTop" ),     _( "Always on Top" ),          wxT( "Ctrl-F11" ),   wxITEM_CHECK,     -1,     0,     0, 0, 0, 0, false},
 	{ 0,            1, menuFullScreen,        wxT( "menuFullScreen" ),      _( "Toggle Full Screen Mode" ),wxT( "F11" ),        wxITEM_NORMAL,    fullscreen_xpm_idx, 0,     0, 0, 0, 0, false},
 	{ 0,            1, menuPostIt,            wxT( "menuPostIt" ),          _( "Post-It" ),                wxT( "F12" ),        wxITEM_NORMAL,    post_it_xpm_idx,    0,     0, 0, 0, 0, false},
 	{ 0,            1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0, 0, 0, 0, false},
