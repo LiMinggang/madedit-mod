@@ -1,5 +1,5 @@
 /* XPM */ 
-static FFFchar * touppercase_xpm[] = {
+static char * touppercase_xpm[] = {
 "16 16 116 2",
 "  	c None",
 "! 	c black",

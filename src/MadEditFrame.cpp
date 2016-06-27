@@ -232,6 +232,41 @@
 #include "../images/mpython.xpm"
 #define mpython_xpm_idx (footprint_xpm_idx+1)
 
+#include "../images/delete.xpm"
+#define delete_xpm_idx (mpython_xpm_idx+1)
+#include "../images/dateadd.xpm"
+#define dateadd_xpm_idx (delete_xpm_idx+1)
+#include "../images/touppercase.xpm"
+#define touppercase_xpm_idx (dateadd_xpm_idx+1)
+#include "../images/tolowercase.xpm"
+#define tolowercase_xpm_idx (touppercase_xpm_idx+1)
+#include "../images/reload.xpm"
+#define reload_xpm_idx (tolowercase_xpm_idx+1)
+#include "../images/saveas.xpm"
+#define saveas_xpm_idx (reload_xpm_idx+1)
+#include "../images/winlist.xpm"
+#define winlist_xpm_idx (saveas_xpm_idx+1)
+#include "../images/pagesetup.xpm"
+#define pagesetup_xpm_idx (winlist_xpm_idx+1)
+#include "../images/fullscreen.xpm"
+#define fullscreen_xpm_idx (pagesetup_xpm_idx+1)
+#include "../images/scriptedit.xpm"
+#define scriptedit_xpm_idx (fullscreen_xpm_idx+1)
+#include "../images/syntax.xpm"
+#define syntax_xpm_idx (scriptedit_xpm_idx+1)
+#include "../images/folderfind.xpm"
+#define folderfind_xpm_idx (syntax_xpm_idx+1)
+#include "../images/post_it.xpm"
+#define post_it_xpm_idx (folderfind_xpm_idx+1)
+#include "../images/report.xpm"
+#define report_xpm_idx (post_it_xpm_idx+1)
+#include "../images/scriptcode.xpm"
+#define scriptcode_xpm_idx (report_xpm_idx+1)
+#include "../images/encoding.xpm"
+#define encoding_xpm_idx (scriptcode_xpm_idx+1)
+/*#include "../images/.xpm"
+#define _xpm_idx (_xpm_idx+1)*/
+
 #define MADMINUTES (60*1000)
 
 char ** g_MadIcons[] =
@@ -247,6 +282,9 @@ char ** g_MadIcons[] =
 	&alignleft_xpm[0], &alignright_xpm[0], &numbering_xpm[0], &refresh_xpm[0], &closepreview_xpm[0], &recentfiles_xpm[0],
 	&searchwholeword_xpm[0], &searchregex_xpm[0], &searchcase_xpm[0], &dotmatchnewline_xpm[0], &lock_xpm[0], &lock_open_xpm[0],
 	&tchinese_xpm[0], &schinese_xpm[0], &japanese_xpm[0], &options_xpm[0], &footprint_xpm[0], &mpython_xpm[0],
+	&delete_xpm[0], &dateadd_xpm[0], &touppercase_xpm[0], &tolowercase_xpm[0], &reload_xpm[0], &saveas_xpm[0], &winlist_xpm[0],
+	&pagesetup_xpm[0], &fullscreen_xpm[0], &scriptedit_xpm[0], &syntax_xpm[0], &folderfind_xpm[0], &post_it_xpm[0],
+	&report_xpm[0], &scriptcode_xpm[0], &encoding_xpm[0],
 };
 
 extern void ScanForLocales();
@@ -1881,11 +1919,11 @@ CommandData CommandTable[] =
 	{ 0, 1, menuOpen,         wxT( "menuOpen" ),         _( "&Open File..." ),     wxT( "Ctrl-O" ),       wxITEM_NORMAL,    fileopen_xpm_idx,  0,                        _( "Open an existing file" ), 0, &g_tbSTANDARD_ptr, _( "Open File" ), false},
 	{ 0, 1, 0,                0,                       0,                      0,                   wxITEM_SEPARATOR, -1,                0,                        0, 0, 0, 0, false},
 	{ 0, 1, menuSave,         wxT( "menuSave" ),         _( "&Save File" ),        wxT( "Ctrl-S" ),       wxITEM_NORMAL,    filesave_xpm_idx,  0,                        _( "Save the file" ), &g_Menu_FilePop, &g_tbSTANDARD_ptr, _( "Save File" ), false},
-	{ 0, 1, menuSaveAs,       wxT( "menuSaveAs" ),       _( "Save &As..." ),       wxT( "" ),             wxITEM_NORMAL,    -1,                0,                        _( "Save the file with a new name" ), &g_Menu_FilePop, 0, 0, false},
+	{ 0, 1, menuSaveAs,       wxT( "menuSaveAs" ),       _( "Save &As..." ),       wxT( "" ),             wxITEM_NORMAL,    saveas_xpm_idx,    0,                        _( "Save the file with a new name" ), &g_Menu_FilePop, 0, 0, false},
 	{ 0, 1, menuSaveACopy, 	  wxT( "menuSaveACopy" ),	 _( "Save A Copy" ),	   wxT( "" ),			  wxITEM_NORMAL,	-1, 			   0,						 _( "Make a backup of the file" ), &g_Menu_FilePop, 0, 0, false},
 	{ 0, 1, menuSaveAll,      wxT( "menuSaveAll" ),      _( "Sa&ve All" ),         wxT( "Ctrl-Shift-S" ), wxITEM_NORMAL,    saveall_xpm_idx,   0,                        _( "Save all files" ), &g_Menu_FilePop, &g_tbSTANDARD_ptr, _( "Save All" ), false},
 	{ 0, 1, 0,                0,                       0,                      0,                   wxITEM_SEPARATOR, -1,                0,                        0, &g_Menu_FilePop, 0, 0, false},
-	{ 0, 1, menuReload,       wxT( "menuReload" ),       _( "&Reload File" ),      wxT( "Ctrl-R" ),       wxITEM_NORMAL,    -1,                0,                        _( "Reload the file" ), &g_Menu_FilePop, 0, 0, false},
+	{ 0, 1, menuReload,       wxT( "menuReload" ),       _( "&Reload File" ),      wxT( "Ctrl-R" ),       wxITEM_NORMAL,    reload_xpm_idx,    0,                        _( "Reload the file" ), &g_Menu_FilePop, 0, 0, false},
 	{ 0, 1, 0,                0,                       0,                      0,                   wxITEM_SEPARATOR, -1,                0,                        0, &g_Menu_FilePop, 0, 0, false},
 	{ 0, 1, menuClose,        wxT( "menuClose" ),        _( "&Close File" ),       wxT( "Ctrl-F4" ),      wxITEM_NORMAL,    fileclose_xpm_idx, 0,                        _( "Close the file" ), &g_Menu_FilePop, &g_tbSTANDARD_ptr, _( "Close File" ), false},
 	{ 0, 1, menuCloseAll,     wxT( "menuCloseAll" ),     _( "C&lose All" ),        wxT( "" ),             wxITEM_NORMAL,    closeall_xpm_idx,  0,                        _( "Close all files" ), &g_Menu_FilePop, &g_tbSTANDARD_ptr, _( "Close All" ), true},
@@ -1895,7 +1933,7 @@ CommandData CommandTable[] =
 	{ 0, 1, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0, &g_Menu_FilePop, 0, 0, false},
 	{ 0, 1, menuToggleReadOnly,      wxT( "menuToggleReadOnly" ),     _( "Set/Clear ReadOnly Flag" ), wxT( "" ), wxITEM_NORMAL,    lock_open_xpm_idx,         0,         _( "Set/Clear ReadOnly flag of the file" ), &g_Menu_FilePop, 0, 0, false},
 	{ 0, 1, 0,                0,                       0,                      0,                   wxITEM_SEPARATOR, -1,                0,                        0, &g_Menu_FilePop, 0, 0, false},
-	{ 0, 1, menuPageSetup,    wxT( "menuPageSetup" ),    _( "Page Set&up..." ),    wxT( "" ),             wxITEM_NORMAL,    -1,                0,                        _( "Setup the pages for printing" ), &g_Menu_FilePop, 0, 0, false},
+	{ 0, 1, menuPageSetup,    wxT( "menuPageSetup" ),    _( "Page Set&up..." ),    wxT( "" ),             wxITEM_NORMAL,    pagesetup_xpm_idx, 0,                        _( "Setup the pages for printing" ), &g_Menu_FilePop, 0, 0, false},
 	{ 0, 1, menuPrintPreview, wxT( "menuPrintPreview" ), _( "Print Previe&w..." ), wxT( "" ),             wxITEM_NORMAL,    preview_xpm_idx,   0,                        _( "Preview the result of printing" ), &g_Menu_FilePop, 0, 0, false},
 	{ 0, 1, menuPrint,        wxT( "menuPrint" ),        _( "&Print..." ),         wxT( "Ctrl-P" ),       wxITEM_NORMAL,    print_xpm_idx,     0,                        _( "Print the file" ), &g_Menu_FilePop, &g_tbSTANDARD_ptr, _( "Print" ), true},
 	{ 0, 1, 0,                0,                       0,                      0,                   wxITEM_SEPARATOR, -1,                0,                        0, 0, 0, 0, false},
@@ -1921,7 +1959,7 @@ CommandData CommandTable[] =
 	{ ecCut,            1, menuCut,                      wxT( "menuCut" ),                      _( "Cu&t" ),                                    wxT( "Ctrl-X" ),       wxITEM_NORMAL,    cut_xpm_idx,       0,                     _( "Cut the selection and put it on the Clipboard" ), &g_Menu_EditPop, &g_tbSTANDARD_ptr, _( "Cut" ), false},
 	{ ecCopy,           1, menuCopy,                     wxT( "menuCopy" ),                     _( "&Copy" ),                                   wxT( "Ctrl-C" ),       wxITEM_NORMAL,    copy_xpm_idx,      0,                     _( "Copy the selection and put it on the Clipboard" ), &g_Menu_EditPop, &g_tbSTANDARD_ptr, _( "Copy" ), false},
 	{ ecPaste,          1, menuPaste,                    wxT( "menuPaste" ),                    _( "&Paste" ),                                  wxT( "Ctrl-V" ),       wxITEM_NORMAL,    paste_xpm_idx,     0,                     _( "Insert data from the Clipboard" ), &g_Menu_EditPop, &g_tbSTANDARD_ptr, _( "Paste" ), false},
-	{ ecDelete,         1, menuDelete,                   wxT( "menuDelete" ),                   _( "&Delete" ),                                 wxT( "DEL" ),          wxITEM_NORMAL,    -1,                0,                     _( "Delete data" ), &g_Menu_EditPop, 0, 0, false},
+	{ ecDelete,         1, menuDelete,                   wxT( "menuDelete" ),                   _( "&Delete" ),                                 wxT( "DEL" ),          wxITEM_NORMAL,    delete_xpm_idx,    0,                     _( "Delete data" ), &g_Menu_EditPop, 0, 0, false},
 	{ 0,                1, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0, &g_Menu_EditPop, 0, 0, false},
 	{ ecCutLine,        1, menuCutLine,                  wxT( "menuCutLine" ),                  _( "Cut L&ine" ),                               wxT( "Ctrl-Shift-L" ), wxITEM_NORMAL,    -1,                0,                     _( "Cut the selected lines and put it on the Clipboard" ), &g_Menu_EditPop, 0, 0, false},
 
@@ -1980,8 +2018,8 @@ CommandData CommandTable[] =
 	{ 0,                2, menuWordWrapToNewLine,        wxT( "menuWordWrapToNewLine" ),        _( "WordWraps To NewLine Chars" ),              wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Convert WordWraps to NewLine chars in the file or selection" ), &g_Menu_EditSubAdv, 0, 0, false},
 	{ 0,                2, menuNewLineToWordWrap,        wxT( "menuNewLineToWordWrap" ),        _( "NewLine Chars To WordWraps" ),              wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Convert NewLine chars to WordWraps in the selection" ), &g_Menu_EditSubAdv, 0, 0, false},
 	{ 0,                2, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0, &g_Menu_EditSubAdv, 0, 0, false},
-	{ ecToUpperCase,    2, menuToUpperCase,              wxT( "menuToUpperCase" ),              _( "To U&PPERCASE" ),                           wxT( "Ctrl-U" ),       wxITEM_NORMAL,    -1,                0,                     _( "Convert the selection to uppercase" ), &g_Menu_EditSubAdv, 0, 0, false},
-	{ ecToLowerCase,    2, menuToLowerCase,              wxT( "menuToLowerCase" ),              _( "To l&owerCase" ),                           wxT( "Ctrl-Shift-U" ), wxITEM_NORMAL,    -1,                0,                     _( "Convert the selection to lowercase" ), &g_Menu_EditSubAdv, 0, 0, false},
+	{ ecToUpperCase,    2, menuToUpperCase,              wxT( "menuToUpperCase" ),              _( "To U&PPERCASE" ),                           wxT( "Ctrl-U" ),       wxITEM_NORMAL,    touppercase_xpm_idx, 0,                   _( "Convert the selection to uppercase" ), &g_Menu_EditSubAdv, 0, 0, false},
+	{ ecToLowerCase,    2, menuToLowerCase,              wxT( "menuToLowerCase" ),              _( "To l&owerCase" ),                           wxT( "Ctrl-Shift-U" ), wxITEM_NORMAL,    tolowercase_xpm_idx, 0,                   _( "Convert the selection to lowercase" ), &g_Menu_EditSubAdv, 0, 0, false},
 	{ ecInvertCase,     2, menuInvertCase,               wxT( "menuInvertCase" ),               _( "Inver&t Case" ),                            wxT( "Ctrl-Alt-U" ),   wxITEM_NORMAL,    -1,                0,                     _( "Invert the case of the selection" ), &g_Menu_EditSubAdv, 0, 0, false},
 	{ 0,                2, menuCapitalize,               wxT( "menuCapitalize" ),               _( "Capitalize" ),                              0,                     wxITEM_NORMAL,    -1,                0,                     _( "Capitalize words of the selection" ), &g_Menu_EditSubAdv, 0, 0, false},
 	{ 0,                2, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0, &g_Menu_EditSubAdv, 0, 0, false},
@@ -2012,13 +2050,13 @@ CommandData CommandTable[] =
 	{ 0,            1, menuFind,                   wxT( "menuFind" ),                   _( "&Find..." ),                                        wxT( "Ctrl-F" ),       wxITEM_NORMAL,    find_xpm_idx,     0, _( "Find a string" ), 0, &g_tbSEARCHREPLACE_ptr, _( "Find" ), false},
 	{ 0,            1, menuFindNext,               wxT( "menuFindNext" ),               _( "Find &Next" ),                                      wxT( "F3" ),           wxITEM_NORMAL,    findnext_xpm_idx, 0, _( "Find next occurrence" ), 0, &g_tbSEARCHREPLACE_ptr, _( "Find Next" ), false},
 	{ 0,            1, menuFindPrevious,           wxT( "menuFindPrevious" ),           _( "Find &Previous" ),                                  wxT( "Ctrl-F3" ),      wxITEM_NORMAL,    findprev_xpm_idx, 0, _( "Find previous occurrence" ), 0, &g_tbSEARCHREPLACE_ptr, _( "Find Previous" ), false},
-	{ 0,            1, menuShowQuickSearchBar,     wxT( "menuShowQuickSearchBar" ),     _( "&Quick Find" ),                                   wxT( "F8" ),           wxITEM_NORMAL,    -1,               0, _( "Find a string" ), 0, 0, 0, false},
+	{ 0,            1, menuShowQuickSearchBar,     wxT( "menuShowQuickSearchBar" ),     _( "&Quick Find" ),                                   wxT( "F8" ),             wxITEM_NORMAL,    -1,               0, _( "Find a string" ), 0, 0, 0, false},
 	{ 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0, 0, 0, 0, false},
 	{ 0,            1, menuReplace,                wxT( "menuReplace" ),                _( "&Replace..." ),                                     wxT( "Ctrl-H" ),       wxITEM_NORMAL,    replace_xpm_idx,  0, _( "Replace a string" ), 0, &g_tbSEARCHREPLACE_ptr, _( "Replace" ), false},
 	{ 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0, 0, 0, 0, false},
-	{ 0,            1, menuFindInFiles,            wxT( "menuFindInFiles" ),            _( "Fin&d/Replace in Files..." ),                       wxT( "Ctrl-Shift-F" ), wxITEM_NORMAL,    -1,               0, _( "Find or replace a string in files" ), 0, 0, 0, false},
+	{ 0,            1, menuFindInFiles,            wxT( "menuFindInFiles" ),            _( "Fin&d/Replace in Files..." ),                       wxT( "Ctrl-Shift-F" ), wxITEM_NORMAL,  folderfind_xpm_idx, 0, _( "Find or replace a string in files" ), 0, 0, 0, false},
 	{ 0,            1, menuShowFindInFilesResults, wxT( "menuShowFindInFilesResults" ), _( "&Show/Hide the Results of Find/Replace in Files" ), wxT( "Ctrl-Shift-R" ), wxITEM_NORMAL,    -1,               0, _( "Show or hide the results of find or replace a string in files" ), 0, 0, 0, false},
-	{ 0,            1, menuCollapseAllResults,      wxT( "menuCollapseAllResults" ),      _( "Collapse &All Results" ),                          wxT( "Alt--" ),        wxITEM_NORMAL,    -1,               0, _( "Collapse all results of find or replace a string in files" ), 0, 0, 0, false},
+	{ 0,            1, menuCollapseAllResults,      wxT( "menuCollapseAllResults" ),      _( "Collapse &All Results" ),                          wxT( "Alt--" ),       wxITEM_NORMAL,    -1,               0, _( "Collapse all results of find or replace a string in files" ), 0, 0, 0, false},
 	{ 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0, 0, 0, 0, false},
 	{ 0,            1, menuGoToLine,               wxT( "menuGoToLine" ),               _( "&Go To Line..." ),                                  wxT( "Ctrl-G" ),       wxITEM_NORMAL,    -1,               0, _( "Go to the specified line" ), 0, 0, 0, false},
 	{ 0,            1, menuGoToPosition,           wxT( "menuGoToPosition" ),           _( "G&o To Position..." ),                              wxT( "Ctrl-Shift-G" ), wxITEM_NORMAL,    -1,               0, _( "Go to the specified position" ), 0, 0, 0, false},
@@ -2034,8 +2072,8 @@ CommandData CommandTable[] =
 	// View
 	{ 0, 0, 0, 0, _( "&View" ), 0, wxITEM_NORMAL, 0, &g_Menu_View, 0, 0, 0, 0, false},
 	{ 0,            1, menuAlwaysOnTop,       wxT( "menuAlwaysOnTop" ),     _( "Always on Top" ),          wxT( "Ctrl-F11" ),   wxITEM_CHECK,     -1,                 0,     0, 0, 0, 0, false},
-	{ 0,            1, menuFullScreen,        wxT( "menuFullScreen" ),      _( "Toggle Full Screen Mode" ),wxT( "F11" ),        wxITEM_NORMAL,    -1,                 0,     0, 0, 0, 0, false},
-	{ 0,            1, menuPostIt,            wxT( "menuPostIt" ),          _( "Post-It" ),                wxT( "F12" ),        wxITEM_NORMAL,    -1,                 0,     0, 0, 0, 0, false},
+	{ 0,            1, menuFullScreen,        wxT( "menuFullScreen" ),      _( "Toggle Full Screen Mode" ),wxT( "F11" ),        wxITEM_NORMAL,    fullscreen_xpm_idx, 0,     0, 0, 0, 0, false},
+	{ 0,            1, menuPostIt,            wxT( "menuPostIt" ),          _( "Post-It" ),                wxT( "F12" ),        wxITEM_NORMAL,    post_it_xpm_idx,    0,     0, 0, 0, 0, false},
 	{ 0,            1, 0,                     0,                            0,                         0,                   wxITEM_SEPARATOR, -1,                 0,                         0, 0, 0, 0, false},
 	{ 0,            1, menuEncoding,          wxT( "menuEncoding" ),          _( "Encoding: " ),           0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_Encoding,     0, 0, 0, 0, false},
 	{ 0,            2, menuAllEncodings,      wxT( "menuAllEncodings" ),      _( "All Encodings" ),        0,                   wxITEM_NORMAL,    -1,                 &g_Menu_View_AllEncodings, 0, 0, 0, 0, false},
@@ -2212,18 +2250,18 @@ CommandData CommandTable[] =
 	// Macro
 	{ 0, 0, 0, 0, _( "&Macro" ), 0, wxITEM_NORMAL, 0, &g_Menu_MadMacro, 0, 0, 0, 0, false},
 	{ 0,               1, menuRunTempMacro,       wxT( "menuRunTempMacro" ),       _( "Run TemporayMacro" ),                             wxT( "" ),       wxITEM_NORMAL,    runscript_xpm_idx, 0,                 _( "Run temporary macro" ), 0, &g_tbMACRO_ptr, _( "Run temporary macro" ), false},
-	{ 0,               1, menuRunMacroFile,       wxT( "menuRunMacroFile" ),       _( "Load Saved MacroScript..." ),                     wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Load saved macro script" ), 0, 0, 0, false},
+	{ 0,               1, menuRunMacroFile,       wxT( "menuRunMacroFile" ),       _( "Load Saved MacroScript..." ),                     wxT( "" ),       wxITEM_NORMAL,    scriptcode_xpm_idx, 0,                _( "Load saved macro script" ), 0, 0, 0, false},
 	{ 0,               1, menuStartRecMacro,      wxT( "menuStartRecMacro" ),      _( "Start Recording" ),                               wxT( "" ),       wxITEM_NORMAL,    record_xpm_idx,  0,                   _( "Start Recording" ), 0, &g_tbMACRO_ptr, _( "Start Recording" ), false},
 	{ 0,               1, menuStopRecMacro,       wxT( "menuStopRecMacro" ),       _( "Stop Recording" ),                                wxT( "" ),       wxITEM_NORMAL,    stop_xpm_idx,    0,                   _( "Stop Recording" ), 0, &g_tbMACRO_ptr, _( "Stop Recording" ), false},
-	{ 0,               1, menuPlayRecMacro,       wxT( "menuPlayRecMacro" ),       _( "Playback" ),                                      wxT( "" ),       wxITEM_NORMAL,    playback_xpm_idx,    0,                   _( "Playback" ), 0, &g_tbMACRO_ptr, _( "Playback" ), false},
+	{ 0,               1, menuPlayRecMacro,       wxT( "menuPlayRecMacro" ),       _( "Playback" ),                                      wxT( "" ),       wxITEM_NORMAL,    playback_xpm_idx,    0,               _( "Playback" ), 0, &g_tbMACRO_ptr, _( "Playback" ), false},
 	{ 0,               1, menuSaveRecMacro,       wxT( "menuSaveRecMacro" ),       _( "Save Currently Recorded Macro..." ),              wxT( "" ),       wxITEM_NORMAL,    saverec_xpm_idx, 0,                   _( "Save Currently Recorded Macro" ), 0, &g_tbMACRO_ptr, _( "Save Recorded Macro" ), false},
-	{ 0,               1, menuMadScriptList,      wxT( "menuMadScriptList" ),      _( "Local Script List" ),                             wxT( "" ),       wxITEM_NORMAL,    -1, &g_Menu_MadMacro_Scripts,    0, 0, 0, 0, false},
-	{ 0,               2, menuEditMacroFile,      wxT( "menuEditMacroFile" ),      _( "Edit Saved MacroScript..." ),                     wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Edit saved macro script" ), 0, 0, 0, false},
+	{ 0,               1, menuMadScriptList,      wxT( "menuMadScriptList" ),      _( "Local Script List" ),                             wxT( "" ),       wxITEM_NORMAL,    -1, &g_Menu_MadMacro_Scripts,        0, 0, 0, 0, false},
+	{ 0,               2, menuEditMacroFile,      wxT( "menuEditMacroFile" ),      _( "Edit Saved MacroScript..." ),                     wxT( "" ),       wxITEM_NORMAL,    scriptedit_xpm_idx, 0,                _( "Edit saved macro script" ), 0, 0, 0, false},
 
 	// Tools
 	{ 0, 0, 0, 0, _( "&Tools" ), 0, wxITEM_NORMAL, 0, &g_Menu_Tools, 0, 0, 0, 0, false},
 	{ 0,               1, menuOptions,            wxT( "menuOptions" ),            _( "&Options..." ),                                   wxT( "" ),       wxITEM_NORMAL,    options_xpm_idx, 0,                   _( "Change the configuration" ), 0, 0, 0, false},
-	{ 0,               1, menuHighlighting,       wxT( "menuHighlighting" ),       _( "&Syntax Highlighting Settings..." ),              wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Change syntax highlighting settings" ), 0, 0, 0, false},
+	{ 0,               1, menuHighlighting,       wxT( "menuHighlighting" ),       _( "&Syntax Highlighting Settings..." ),              wxT( "" ),       wxITEM_NORMAL,    syntax_xpm_idx, 0,                    _( "Change syntax highlighting settings" ), 0, 0, 0, false},
 #ifdef __WXMSW__
 	{ 0,               1, menuFileAssociation,    wxT( "menuFileAssociation" ),    _( "&File Type Associations..." ),                    wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Change file type associations" ), 0, 0, 0, false},
 #endif
@@ -2241,7 +2279,7 @@ CommandData CommandTable[] =
 	{ 0,               2, menuInsertMAC,          wxT( "menuInsertMAC" ),          _( "Insert CR/0D (Old &MAC)" ),                       wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Insert CR char when pressing Enter key" ), 0, 0, 0, false},
 	{ 0,               2, menuInsertUNIX,         wxT( "menuInsertUNIX" ),         _( "Insert LF/0A (&UNIX/OSX)" ),                      wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Insert LF char when pressing Enter key" ), 0, 0, 0, false},
 	{ 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0, 0, 0, 0, false},
-	{ 0,               1, menuConvertEncoding,    wxT( "menuConvertEncoding" ),    _( "Convert File &Encoding..." ),                     0,               wxITEM_NORMAL,    -1, 0,                                _( "Convert to the specified encoding" ), 0, 0, 0, false},
+	{ 0,               1, menuConvertEncoding,    wxT( "menuConvertEncoding" ),    _( "Convert File &Encoding..." ),                     0,               wxITEM_NORMAL,    encoding_xpm_idx, 0,                  _( "Convert to the specified encoding" ), 0, 0, 0, false},
 	{ 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0, 0, 0, 0, false},
 	{ 0,               1, menuConvertChineseChar,     wxT( "menuConvertChineseChar" ),     _( "Convert &Chinese Char" ),                                 0,             wxITEM_NORMAL,    -1, &g_Menu_Tools_ConvertChineseChar, 0, 0, 0, 0, false},
 	{ 0,               2, menuSimp2TradChinese,       wxT( "menuSimp2TradChinese" ),       _( "File: Simplified Chinese to &Traditional Chinese" ),      0,             wxITEM_NORMAL,    tchinese_xpm_idx, 0,    _( "Convert simplified Chinese chars to traditional Chinese chars in the file" ), 0, 0, 0, false},
@@ -2257,20 +2295,20 @@ CommandData CommandTable[] =
 	{ 0,               2, menuChinese2KanjiClipboard, wxT( "menuChinese2KanjiClipboard" ), _( "Clipboard: Chinese to Japanese &Kanji" ),                 0,             wxITEM_NORMAL,    japanese_xpm_idx, 0,    _( "Convert Chinese chars to Japanese Kanji in the clipboard" ), 0, 0, 0, false},
 	{ 0,               1, 0,                          0,                                 0,                                                          0,             wxITEM_SEPARATOR, -1, 0,                                0, 0, 0, 0, false},
 	{ 0,               1, menuTextConvFormatter,      wxT( "menuTextConvFormatter" ),      _( "Text Converter/Formatter" ),                              0,             wxITEM_NORMAL,    -1, &g_Menu_Tools_TextConvFormatter, 0, 0, 0, 0, false},
-	{ 0,               2, menuMarkdown2Html,          wxT( "menuMarkdown2Html" ),          _( "&Markdown to HTML" ),                                     0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert Markdown to HTML" ), 0, 0, 0, false},
-	{ 0,               2, menuHtml2PlainText,         wxT( "menuHtml2PlainText" ),         _( "&HTML to Plain Text" ),                                   0,             wxITEM_NORMAL,    -1, 0,                                _( "Convert HTML to Plain Text" ), 0, 0, 0, false},
+	{ 0,               2, menuMarkdown2Html,          wxT( "menuMarkdown2Html" ),          _( "&Markdown to HTML" ),                                     0,             wxITEM_NORMAL,    -1, 0,                  _( "Convert Markdown to HTML" ), 0, 0, 0, false},
+	{ 0,               2, menuHtml2PlainText,         wxT( "menuHtml2PlainText" ),         _( "&HTML to Plain Text" ),                                   0,             wxITEM_NORMAL,    -1, 0,                  _( "Convert HTML to Plain Text" ), 0, 0, 0, false},
 	{ 0,               2, 0,                          0,                                 0,                                                          0,             wxITEM_SEPARATOR, -1, 0,                                0, 0, 0, 0, false},
-	{ 0,               2, menuAstyleFormat,           wxT( "menuAstyleFormat" ),           _( "&Astyle(C++/C#/Java/ObjC)" ),         wxT( "Ctrl-Shift-K" ),             wxITEM_NORMAL,    -1, 0,                                _( "Format selection or whole file(C++/C#/Java)" ), 0, 0, 0, false},
-	{ 0,               2, menuXMLFormat,              wxT( "menuXMLFormat" ),              _( "&XML Formatter" ),                                        0,             wxITEM_NORMAL,    -1, 0,                                _( "Format XML(whole file)" ), 0, 0, 0, false},
+	{ 0,               2, menuAstyleFormat,           wxT( "menuAstyleFormat" ),           _( "&Astyle(C++/C#/Java/ObjC)" ),         wxT( "Ctrl-Shift-K" ),             wxITEM_NORMAL,    -1, 0,                  _( "Format selection or whole file(C++/C#/Java)" ), 0, 0, 0, false},
+	{ 0,               2, menuXMLFormat,              wxT( "menuXMLFormat" ),              _( "&XML Formatter" ),                                        0,             wxITEM_NORMAL,    -1, 0,                  _( "Format XML(whole file)" ), 0, 0, 0, false},
 	{ 0,               1, 0,                          0,                                 0,                                                          0,             wxITEM_SEPARATOR, -1, 0,                                0, 0, 0, 0, false},
-	{ 0,               1, menuWordCount,              wxT( "menuWordCount" ),              _( "&Word Count..." ),                                        0,             wxITEM_NORMAL,    -1, 0,                                _( "Count the words and chars of the file or selection" ), 0, 0, 0, false},
+	{ 0,               1, menuWordCount,              wxT( "menuWordCount" ),              _( "&Word Count..." ),                                        0,             wxITEM_NORMAL,    report_xpm_idx, 0,      _( "Count the words and chars of the file or selection" ), 0, 0, 0, false},
 
 	// Window
 	{ 0, 0, 0, 0, _( "&Window" ), 0, wxITEM_NORMAL, 0, &g_Menu_Window, 0, 0, 0, 0, false},
 	{ ecToggleWindow, 1, menuToggleWindow,   wxT( "menuToggleWindow" ),   _( "&Toggle Window" ),   wxT( "Ctrl-TAB" ), wxITEM_NORMAL, -1, 0, _( "Switch to the previous active window" ), 0, 0, 0, false},
 	{ 0,              1, menuPreviousWindow, wxT( "menuPreviousWindow" ), _( "&Previous Window" ), wxT( "F5" ),       wxITEM_NORMAL, -1, 0, _( "Activate the previous window" ), 0, 0, 0, false},
 	{ 0,              1, menuNextWindow,     wxT( "menuNextWindow" ),     _( "&Next Window" ),     wxT( "F6" ),       wxITEM_NORMAL, -1, 0, _( "Activate the next window" ), 0, 0, 0, false},
-	{ 0,              1, menuWindowList,     wxT( "menuWindowList" ),     _( "&Windows..." ),      0,                 wxITEM_NORMAL, -1, 0, _( "Window list" ), 0, 0, 0, false},
+	{ 0,              1, menuWindowList,     wxT( "menuWindowList" ),     _( "&Windows..." ),      0,                 wxITEM_NORMAL, winlist_xpm_idx, 0, _( "Window list" ), 0, 0, 0, false},
 
 	// Help
 	{ 0, 0, 0, 0, _( "&Help" ), 0, wxITEM_NORMAL, 0, &g_Menu_Help, 0, 0, 0, 0, false},

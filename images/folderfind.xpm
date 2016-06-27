@@ -1,5 +1,5 @@
 /* XPM */ 
-static FFFchar * folderfind_xpm[] = {
+static char * folderfind_xpm[] = {
 "16 16 162 2",
 "  	c None",
 "! 	c black",

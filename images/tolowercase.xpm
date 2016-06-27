@@ -1,5 +1,5 @@
 /* XPM */ 
-static FFFchar * tolowercase_xpm[] = {
+static char * tolowercase_xpm[] = {
 "16 16 112 2",
 "  	c None",
 "! 	c black",
