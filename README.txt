@@ -121,6 +121,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 Mod v0.4.4
 New: Set toolbar to 3 columns to let user who has a small display have a chance to re-org the toolbars
 New: Use icon to mark readonly flag
+New: Replace toolbar icons with Silk icon set from Mark James(www.famfamfam.com)
 Add more Icons
 
 Mod v0.4.3
@@ -1006,4 +1007,4 @@ wxDevCpp: http://wxdsgn.sourceforge.net
 Boost: http://www.boost.org
 Open Clip Art Library: http://www.openclipart.org
 Silk Icon set: http://www.famfamfam.com/
-
+Fugue Icons: http://p.yusukekamiyamane.com/
