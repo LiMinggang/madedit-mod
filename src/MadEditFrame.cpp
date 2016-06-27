@@ -266,6 +266,19 @@
 #define encoding_xpm_idx (scriptcode_xpm_idx+1)
 #include "../images/help.xpm"
 #define help_xpm_idx (encoding_xpm_idx+1)
+#include "../images/linux.xpm"
+#define linux_xpm_idx (help_xpm_idx+1)
+#include "../images/mac.xpm"
+#define mac_xpm_idx (linux_xpm_idx+1)
+#include "../images/windows.xpm"
+#define windows_xpm_idx (mac_xpm_idx+1)
+#include "../images/filehandle.xpm"
+#define filehandle_xpm_idx (windows_xpm_idx+1)
+#include "../images/qfind.xpm"
+#define qfind_xpm_idx (filehandle_xpm_idx+1)
+#include "../images/goposition.xpm"
+#define goposition_xpm_idx (qfind_xpm_idx+1)
+
 /*#include "../images/.xpm"
 #define _xpm_idx (_xpm_idx+1)*/
 
@@ -286,7 +299,8 @@ char ** g_MadIcons[] =
 	&tchinese_xpm[0], &schinese_xpm[0], &japanese_xpm[0], &options_xpm[0], &footprint_xpm[0], &mpython_xpm[0],
 	&delete_xpm[0], &dateadd_xpm[0], &touppercase_xpm[0], &tolowercase_xpm[0], &reload_xpm[0], &saveas_xpm[0], &winlist_xpm[0],
 	&pagesetup_xpm[0], &fullscreen_xpm[0], &scriptedit_xpm[0], &syntax_xpm[0], &folderfind_xpm[0], &post_it_xpm[0],
-	&report_xpm[0], &scriptcode_xpm[0], &encoding_xpm[0], &help_xpm[0],
+	&report_xpm[0], &scriptcode_xpm[0], &encoding_xpm[0], &help_xpm[0], &linux_xpm[0], &mac_xpm[0], &windows_xpm[0],
+	&filehandle_xpm[0], &qfind_xpm[0], &goposition_xpm[0],
 };
 
 extern void ScanForLocales();
@@ -2052,16 +2066,16 @@ CommandData CommandTable[] =
 	{ 0,            1, menuFind,                   wxT( "menuFind" ),                   _( "&Find..." ),                                        wxT( "Ctrl-F" ),       wxITEM_NORMAL,    find_xpm_idx,     0, _( "Find a string" ), 0, &g_tbSEARCHREPLACE_ptr, _( "Find" ), false},
 	{ 0,            1, menuFindNext,               wxT( "menuFindNext" ),               _( "Find &Next" ),                                      wxT( "F3" ),           wxITEM_NORMAL,    findnext_xpm_idx, 0, _( "Find next occurrence" ), 0, &g_tbSEARCHREPLACE_ptr, _( "Find Next" ), false},
 	{ 0,            1, menuFindPrevious,           wxT( "menuFindPrevious" ),           _( "Find &Previous" ),                                  wxT( "Ctrl-F3" ),      wxITEM_NORMAL,    findprev_xpm_idx, 0, _( "Find previous occurrence" ), 0, &g_tbSEARCHREPLACE_ptr, _( "Find Previous" ), false},
-	{ 0,            1, menuShowQuickSearchBar,     wxT( "menuShowQuickSearchBar" ),     _( "&Quick Find" ),                                   wxT( "F8" ),             wxITEM_NORMAL,    -1,               0, _( "Find a string" ), 0, 0, 0, false},
+	{ 0,            1, menuShowQuickSearchBar,     wxT( "menuShowQuickSearchBar" ),     _( "&Quick Find" ),                                     wxT( "F8" ),           wxITEM_NORMAL,    qfind_xpm_idx,    0, _( "Find a string instantly" ), 0, 0, 0, false},
 	{ 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0, 0, 0, 0, false},
 	{ 0,            1, menuReplace,                wxT( "menuReplace" ),                _( "&Replace..." ),                                     wxT( "Ctrl-H" ),       wxITEM_NORMAL,    replace_xpm_idx,  0, _( "Replace a string" ), 0, &g_tbSEARCHREPLACE_ptr, _( "Replace" ), false},
 	{ 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0, 0, 0, 0, false},
 	{ 0,            1, menuFindInFiles,            wxT( "menuFindInFiles" ),            _( "Fin&d/Replace in Files..." ),                       wxT( "Ctrl-Shift-F" ), wxITEM_NORMAL,  folderfind_xpm_idx, 0, _( "Find or replace a string in files" ), 0, 0, 0, false},
 	{ 0,            1, menuShowFindInFilesResults, wxT( "menuShowFindInFilesResults" ), _( "&Show/Hide the Results of Find/Replace in Files" ), wxT( "Ctrl-Shift-R" ), wxITEM_NORMAL,    -1,               0, _( "Show or hide the results of find or replace a string in files" ), 0, 0, 0, false},
-	{ 0,            1, menuCollapseAllResults,      wxT( "menuCollapseAllResults" ),      _( "Collapse &All Results" ),                          wxT( "Alt--" ),       wxITEM_NORMAL,    -1,               0, _( "Collapse all results of find or replace a string in files" ), 0, 0, 0, false},
+	{ 0,            1, menuCollapseAllResults,      wxT( "menuCollapseAllResults" ),      _( "Collapse &All Results" ),                         wxT( "Alt--" ),        wxITEM_NORMAL,    -1,               0, _( "Collapse all results of find or replace a string in files" ), 0, 0, 0, false},
 	{ 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0, 0, 0, 0, false},
 	{ 0,            1, menuGoToLine,               wxT( "menuGoToLine" ),               _( "&Go To Line..." ),                                  wxT( "Ctrl-G" ),       wxITEM_NORMAL,    -1,               0, _( "Go to the specified line" ), 0, 0, 0, false},
-	{ 0,            1, menuGoToPosition,           wxT( "menuGoToPosition" ),           _( "G&o To Position..." ),                              wxT( "Ctrl-Shift-G" ), wxITEM_NORMAL,    -1,               0, _( "Go to the specified position" ), 0, 0, 0, false},
+	{ 0,            1, menuGoToPosition,           wxT( "menuGoToPosition" ),           _( "G&o To Position..." ),                              wxT( "Ctrl-Shift-G" ), wxITEM_NORMAL,    goposition_xpm_idx, 0, _( "Go to the specified position" ), 0, 0, 0, false},
 	{ 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0, 0, 0, 0, false},
 	{ ecLeftBrace,  1, menuLeftBrace,              wxT( "menuLeftBrace" ),              _( "Go To L&eft Brace" ),                               wxT( "Ctrl-[" ),       wxITEM_NORMAL,    -1,               0, _( "Go to left brace" ), 0, 0, 0, false},
 	{ ecRightBrace, 1, menuRightBrace,             wxT( "menuRightBrace" ),             _( "Go To R&ight Brace" ),                              wxT( "Ctrl-]" ),       wxITEM_NORMAL,    -1,               0, _( "Go to right brace" ), 0, 0, 0, false},
@@ -2265,7 +2279,7 @@ CommandData CommandTable[] =
 	{ 0,               1, menuOptions,            wxT( "menuOptions" ),            _( "&Options..." ),                                   wxT( "" ),       wxITEM_NORMAL,    options_xpm_idx, 0,                   _( "Change the configuration" ), 0, 0, 0, false},
 	{ 0,               1, menuHighlighting,       wxT( "menuHighlighting" ),       _( "&Syntax Highlighting Settings..." ),              wxT( "" ),       wxITEM_NORMAL,    syntax_xpm_idx, 0,                    _( "Change syntax highlighting settings" ), 0, 0, 0, false},
 #ifdef __WXMSW__
-	{ 0,               1, menuFileAssociation,    wxT( "menuFileAssociation" ),    _( "&File Type Associations..." ),                    wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Change file type associations" ), 0, 0, 0, false},
+	{ 0,               1, menuFileAssociation,    wxT( "menuFileAssociation" ),    _( "&File Type Associations..." ),                    wxT( "" ),       wxITEM_NORMAL,    filehandle_xpm_idx, 0,                _( "Change file type associations" ), 0, 0, 0, false},
 #endif
 	{ 0,               1, menuPurgeHistories,     wxT( "menuPurgeHistories" ),     _( "&Purge Histories..." ),                           wxT( "" ),       wxITEM_NORMAL,    footprint_xpm_idx, 0,                 _( "Clearing out your history" ), 0, 0, 0, false},
 	{ 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0, 0, 0, 0, false},
@@ -2273,13 +2287,13 @@ CommandData CommandTable[] =
 	{ 0,               2, menuToggleBOM,          wxT( "menuToggleBOM" ),          _( "Add/Remove BOM" ),                                wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Add/Remove Unicode BOM" ), 0, 0, 0, false},
 	{ 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0, 0, 0, 0, false},
 	{ 0,               1, menuNewLineChar,        wxT( "menuNewLineChar" ),        _( "NewLine Char (File Format): " ),                  0,             wxITEM_NORMAL,    -1, &g_Menu_Tools_NewLineChar,        0, 0, 0, 0, false},
-	{ 0,               2, menuConvertToDOS,       wxT( "menuConvertToDOS" ),       _( "Convert To CRLF/0D0A (&DOS)" ),                   wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Convert the file format to DOS format" ), 0, 0, 0, false},
-	{ 0,               2, menuConvertToMAC,       wxT( "menuConvertToMAC" ),       _( "Convert To CR/0D (Old &MAC)" ),                   wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Convert the file format to MAC format" ), 0, 0, 0, false},
-	{ 0,               2, menuConvertToUNIX,      wxT( "menuConvertToUNIX" ),      _( "Convert To LF/0A (&UNIX/OSX)" ),                  wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Convert the file format to UNIX format" ), 0, 0, 0, false},
+	{ 0,               2, menuConvertToDOS,       wxT( "menuConvertToDOS" ),       _( "Convert To CRLF/0D0A (&DOS)" ),                   wxT( "" ),       wxITEM_NORMAL, windows_xpm_idx, 0,                      _( "Convert the file format to DOS format" ), 0, 0, 0, false},
+	{ 0,               2, menuConvertToMAC,       wxT( "menuConvertToMAC" ),       _( "Convert To CR/0D (Old &MAC)" ),                   wxT( "" ),       wxITEM_NORMAL, mac_xpm_idx, 0,                          _( "Convert the file format to MAC format" ), 0, 0, 0, false},
+	{ 0,               2, menuConvertToUNIX,      wxT( "menuConvertToUNIX" ),      _( "Convert To LF/0A (&UNIX/OSX)" ),                  wxT( "" ),       wxITEM_NORMAL, linux_xpm_idx, 0,                        _( "Convert the file format to UNIX format" ), 0, 0, 0, false},
 	{ 0,               1, menuInsertNewLineChar,  wxT( "menuInsertNewLineChar" ),  _( "Press Enter to Insert NewLine Char: " ),          0,             wxITEM_NORMAL,    -1, &g_Menu_Tools_InsertNewLineChar,  0, 0, 0, 0, false},
-	{ 0,               2, menuInsertDOS,          wxT( "menuInsertDOS" ),          _( "Insert CRLF/0D0A (&DOS)" ),                       wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Insert CR&LF chars when pressing Enter key" ), 0, 0, 0, false},
-	{ 0,               2, menuInsertMAC,          wxT( "menuInsertMAC" ),          _( "Insert CR/0D (Old &MAC)" ),                       wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Insert CR char when pressing Enter key" ), 0, 0, 0, false},
-	{ 0,               2, menuInsertUNIX,         wxT( "menuInsertUNIX" ),         _( "Insert LF/0A (&UNIX/OSX)" ),                      wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Insert LF char when pressing Enter key" ), 0, 0, 0, false},
+	{ 0,               2, menuInsertDOS,          wxT( "menuInsertDOS" ),          _( "Insert CRLF/0D0A (&DOS)" ),                       wxT( "" ),       wxITEM_NORMAL, windows_xpm_idx, 0,                      _( "Insert CR&LF chars when pressing Enter key" ), 0, 0, 0, false},
+	{ 0,               2, menuInsertMAC,          wxT( "menuInsertMAC" ),          _( "Insert CR/0D (Old &MAC)" ),                       wxT( "" ),       wxITEM_NORMAL, mac_xpm_idx, 0,                          _( "Insert CR char when pressing Enter key" ), 0, 0, 0, false},
+	{ 0,               2, menuInsertUNIX,         wxT( "menuInsertUNIX" ),         _( "Insert LF/0A (&UNIX/OSX)" ),                      wxT( "" ),       wxITEM_NORMAL, linux_xpm_idx, 0,                        _( "Insert LF char when pressing Enter key" ), 0, 0, 0, false},
 	{ 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0, 0, 0, 0, false},
 	{ 0,               1, menuConvertEncoding,    wxT( "menuConvertEncoding" ),    _( "Convert File &Encoding..." ),                     0,               wxITEM_NORMAL,    encoding_xpm_idx, 0,                  _( "Convert to the specified encoding" ), 0, 0, 0, false},
 	{ 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0, 0, 0, 0, false},
