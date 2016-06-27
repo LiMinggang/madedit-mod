@@ -264,6 +264,8 @@
 #define scriptcode_xpm_idx (report_xpm_idx+1)
 #include "../images/encoding.xpm"
 #define encoding_xpm_idx (scriptcode_xpm_idx+1)
+#include "../images/help.xpm"
+#define help_xpm_idx (encoding_xpm_idx+1)
 /*#include "../images/.xpm"
 #define _xpm_idx (_xpm_idx+1)*/
 
@@ -284,7 +286,7 @@ char ** g_MadIcons[] =
 	&tchinese_xpm[0], &schinese_xpm[0], &japanese_xpm[0], &options_xpm[0], &footprint_xpm[0], &mpython_xpm[0],
 	&delete_xpm[0], &dateadd_xpm[0], &touppercase_xpm[0], &tolowercase_xpm[0], &reload_xpm[0], &saveas_xpm[0], &winlist_xpm[0],
 	&pagesetup_xpm[0], &fullscreen_xpm[0], &scriptedit_xpm[0], &syntax_xpm[0], &folderfind_xpm[0], &post_it_xpm[0],
-	&report_xpm[0], &scriptcode_xpm[0], &encoding_xpm[0],
+	&report_xpm[0], &scriptcode_xpm[0], &encoding_xpm[0], &help_xpm[0],
 };
 
 extern void ScanForLocales();
@@ -2312,7 +2314,7 @@ CommandData CommandTable[] =
 
 	// Help
 	{ 0, 0, 0, 0, _( "&Help" ), 0, wxITEM_NORMAL, 0, &g_Menu_Help, 0, 0, 0, 0, false},
-	{ 0, 1, menuAbout, wxT( "menuAbout" ), _( "&About MadEdit-Mod..." ), wxT( "" ),       wxITEM_NORMAL, Mad_16x15_xpm_idx, 0, wxT( "" ), 0, 0, 0, false},
+	{ 0, 1, menuAbout, wxT( "menuAbout" ), _( "&About MadEdit-Mod..." ), wxT( "" ),       wxITEM_NORMAL, help_xpm_idx, 0, wxT( "" ), 0, 0, 0, false},
 	// end menu
 
 	// begin editor
@@ -2836,6 +2838,11 @@ void MadEditFrame::CreateGUIControls( void )
 				{
 					( *( cd->toolbar_ptr ) )->AddTool( cd->menu_id, memLabel, m_ImageList->GetBitmap( cd->image_idx ), wxNullBitmap, cd->kind, wxGetTranslation( cd->short_help ), wxGetTranslation( cd->hint ), NULL );
 
+					if( menuCloseAll == cd->menu_id)
+					{
+						( *( cd->toolbar_ptr ) )->AddTool( menuRecentFilesToolbar, _( "Recent Files" ), m_ImageList->GetBitmap( recentfiles_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _("Recent file list"), _("List all recent opened files"), NULL );
+					}
+
 					if( cd->apd_toolbar_spr )
 					{ ( *( cd->toolbar_ptr ) )->AddSeparator(); }
 				}
@@ -3208,8 +3215,8 @@ void MadEditFrame::CreateGUIControls( void )
 			m_QuickSearchBar->EnableTool(menuQuickFindDotMatchNewLine, false);
 		}
 	}
-	m_QuickSearchBar->AddSeparator();
-	m_QuickSearchBar->AddTool( menuRecentFilesToolbar, _( "Recent Files" ), m_ImageList->GetBitmap( recentfiles_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _("Recent file list"), _("List all recent opened files"), NULL );
+	//m_QuickSearchBar->AddSeparator();
+	//m_QuickSearchBar->AddTool( menuRecentFilesToolbar, _( "Recent Files" ), m_ImageList->GetBitmap( recentfiles_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _("Recent file list"), _("List all recent opened files"), NULL );
 
 	m_QuickSearchBar->Realize();
 	wxString      panelStatus;
