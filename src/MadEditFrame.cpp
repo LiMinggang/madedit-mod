@@ -2407,13 +2407,13 @@ CommandData CommandTable[] =
 
 ToolBarData ToolBarTable[] = 
 {
-	{tbSTANDARD,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBStandardPos"),      wxT("MadToolBar0"), _("Standard"),       1},
-	{tbEDITOR,        MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBEditorPos"),        wxT("MadToolBar1"), _("Editor"),         1},
-	{tbSEARCHREPLACE, MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBSearchReplacePos"), wxT("MadToolBar2"), _("Search/Replace"), 2},
-	{tbTEXTVIEW,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBTextviewPos"),      wxT("MadToolBar3"), _("Text View"),      2},
-	{tbEDITMODE,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBEditModePos"),      wxT("MadToolBar4"), _("Edit Mode"),      2},
-	{tbMACRO,         MADTOOBAR_OVERFLOW, wxT("/MadEdit/TBMacroPos"),         wxT("MadToolBar5"), _("Macro"),          2},
-	{-1, 0, 0, 0, 0, -1},
+	{tbSTANDARD,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBStandardPos"),      wxT("MadToolBar0"), _("Standard"),       1, 0},
+	{tbEDITOR,        MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBEditorPos"),        wxT("MadToolBar1"), _("Editor"),         1, 1},
+	{tbSEARCHREPLACE, MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBSearchReplacePos"), wxT("MadToolBar2"), _("Search/Replace"), 2, 0},
+	{tbTEXTVIEW,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBTextviewPos"),      wxT("MadToolBar3"), _("Text View"),      2, 1},
+	{tbEDITMODE,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBEditModePos"),      wxT("MadToolBar4"), _("Edit Mode"),      2, 2},
+	{tbMACRO,         MADTOOBAR_OVERFLOW, wxT("/MadEdit/TBMacroPos"),         wxT("MadToolBar5"), _("Macro"),          2, 3},
+	{-1, 0, 0, 0, 0, -1, 0},
 };
 
 /*
@@ -9588,9 +9588,9 @@ void MadEditFrame::OnTimer(wxTimerEvent& event)
 	m_AutoSaveTimer.StartOnce(m_AutoSaveTimout*MADMINUTES);
 }
 
-inline bool MadEditFrame::ResetNormalToolBarPos(wxWindow * toolbar, const wxChar * toolname, const wxChar * caption, int row)
+inline bool MadEditFrame::ResetNormalToolBarPos(wxWindow * toolbar, const wxChar * toolname, const wxChar * caption, int row, int xpos/* = 0*/)
 {
-	return m_AuiManager.AddPane( toolbar, wxAuiPaneInfo().Name( toolname ).CloseButton( false ).Caption( caption ).Floatable().ToolbarPane().Top().Row(row));
+	return m_AuiManager.AddPane( toolbar, wxAuiPaneInfo().Name( toolname ).CloseButton( false ).Caption( caption ).Floatable().ToolbarPane().Top().Row(row).Position(xpos));
 }
 
 inline bool MadEditFrame::ResetQuickSearchBarPos()

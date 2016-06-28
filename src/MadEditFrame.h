@@ -460,7 +460,7 @@ protected:
     void HideAllToolBars();
     void ShowAllToolBars();
     void ToggleFullScreen(long style, bool maxmize);
-    bool ResetNormalToolBarPos(wxWindow * toolbar, const wxChar * toolname, const wxChar * caption, int pos);
+    bool ResetNormalToolBarPos(wxWindow * toolbar, const wxChar * toolname, const wxChar * caption, int row, int xpos = 0);
     bool ResetQuickSearchBarPos();
     bool ResetInformationWinPos();    
     bool RestoreAuiPanel(wxWindow * toolbar, wxString& toobar_status, bool gripper = false);

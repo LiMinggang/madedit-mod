@@ -37,6 +37,7 @@ struct ToolBarData
     const wxChar * toolbarid_name;
     const wxChar * caption;
     int            row;
+    int            xpos;
 };
 
 struct PopMenuData
