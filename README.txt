@@ -123,9 +123,11 @@ New: Set toolbar to 3 columns to let user who has a small display have a chance 
 New: Use icon to mark readonly flag
 New: Replace toolbar icons with Silk icon set from Mark James(www.famfamfam.com) and Fugue(http://p.yusukekamiyamane.com/)
 Fix: Move recent files tool bar item from Quick search to Standard
+Fix: Apply AuiNoteBook fix from wxWidgets dev(http://trac.wxwidgets.org/ticket/17551)
+Fix: Display replace all result on Status bar instead of an annoying dialog
 Add more Icons
 Note: The Quick search bar would be larger than expected because of removing the recent file list button. Please reset the
-toolbar (and re-arrange it---it would be saved) by Tools->Purge History->Reset Toolbar pos
+toolbar (and re-arrange it---it would be saved) by Tools->Purge History->Reset Toolbar position
 
 Mod v0.4.3
 1.New: Use dialog to let user choose one for all instead of annoying one by one dialogs

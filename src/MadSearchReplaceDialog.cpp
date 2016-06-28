@@ -1823,9 +1823,7 @@ void MadSearchReplaceDialog::ReplaceAll( MadEdit * madedit, bool needRec/*=true*
 			else
 				msg = wxString::Format( _( "%s string(s) were replaced." ), ( wxLongLong( count ).ToString().c_str() ) );
 
-			wxMessageDialog dlg( this, msg, wxT( "MadEdit-Mod" ) );
-			dlg.SetYesNoLabels( wxMessageDialog::ButtonLabel( _( "&Yes" ) ), wxMessageDialog::ButtonLabel( _( "&No" ) ) );
-			dlg.ShowModal();
+			g_StatusBar->SetStatusText( msg, 0 );
 		}
 
 		m_FindText->SetFocus();
