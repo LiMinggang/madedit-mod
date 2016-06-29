@@ -976,5 +976,4 @@ void MadFindInFilesDialog::WxCheckBoxRegexClick(wxCommandEvent& event)
 		WxCheckBoxFindHex->Enable();
 		WxCheckBoxDotMatchNewLine->Disable();
 	}
-
 }
