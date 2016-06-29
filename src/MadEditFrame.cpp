@@ -3148,8 +3148,14 @@ void MadEditFrame::CreateGUIControls( void )
 					}
 
 					scriptfname = fn.GetName();
-					g_Menu_MadMacro_Scripts->Append( menuMadScrip1 + int( i ), scriptfname, help );
-					g_Menu_MadMacro_ScriptsPop->Append( menuMadScrip1 + int( i ), scriptfname, help );
+					wxMenuItem * mit = new wxMenuItem( g_Menu_MadMacro_Scripts, menuMadScrip1 + int( i ), scriptfname, help, wxITEM_NORMAL );
+					mit->SetBitmap( m_ImageList->GetBitmap( mpython_xpm_idx ) );
+					g_Menu_MadMacro_Scripts->Append( mit );
+					//g_Menu_MadMacro_Scripts->Append( menuMadScrip1 + int( i ), scriptfname, help );
+					mit = new wxMenuItem( g_Menu_MadMacro_ScriptsPop, menuMadScrip1 + int( i ), scriptfname, help, wxITEM_NORMAL );
+					mit->SetBitmap( m_ImageList->GetBitmap( mpython_xpm_idx ) );
+					g_Menu_MadMacro_ScriptsPop->Append( mit );
+					//g_Menu_MadMacro_ScriptsPop->Append( menuMadScrip1 + int( i ), scriptfname, help );
 					g_tbMACRO_ptr->AddTool( menuMadScrip1 + int( i ), _T( "Macro" ), m_ImageList->GetBitmap( mpython_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, scriptfname, help, NULL );
 					if(++i > (MAX_MADSCRIPT_LOAD)) break;
 				}
@@ -8549,8 +8555,15 @@ void MadEditFrame::OnToolsSaveRecMacro( wxCommandEvent& event )
 				if(MAX_MADSCRIPT_LOAD >= g_Menu_MadMacro_Scripts->GetMenuItemCount())
 				{
 					wxString fname = fn.GetName();
-					g_Menu_MadMacro_Scripts->Append( menuMadScrip1 + int( g_Menu_MadMacro_Scripts->GetMenuItemCount() ), fname, help );
-					g_Menu_MadMacro_ScriptsPop->Append( menuMadScrip1 + int( g_Menu_MadMacro_Scripts->GetMenuItemCount() ), fname, help );
+					
+					wxMenuItem * mit = new wxMenuItem( g_Menu_MadMacro_Scripts, menuMadScrip1 + int( g_Menu_MadMacro_Scripts->GetMenuItemCount() ), fname, help, wxITEM_NORMAL );
+					mit->SetBitmap( m_ImageList->GetBitmap( mpython_xpm_idx ) );
+					g_Menu_MadMacro_Scripts->Append( mit );
+					//g_Menu_MadMacro_Scripts->Append( menuMadScrip1 + int( g_Menu_MadMacro_Scripts->GetMenuItemCount() ), fname, help );
+					mit = new wxMenuItem( g_Menu_MadMacro_ScriptsPop, menuMadScrip1 + int( g_Menu_MadMacro_Scripts->GetMenuItemCount() ), fname, help, wxITEM_NORMAL );
+					mit->SetBitmap( m_ImageList->GetBitmap( mpython_xpm_idx ) );
+					g_Menu_MadMacro_ScriptsPop->Append( mit );
+					//g_Menu_MadMacro_ScriptsPop->Append( menuMadScrip1 + int( g_Menu_MadMacro_Scripts->GetMenuItemCount() ), fname, help );
 					g_tbMACRO_ptr->AddTool( menuMadScrip1 + int( g_Menu_MadMacro_Scripts->GetMenuItemCount() ), _T( "Macro" ), m_ImageList->GetBitmap( mpython_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, fname, help, NULL );
 				}
 			}
