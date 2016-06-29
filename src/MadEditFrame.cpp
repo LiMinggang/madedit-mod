@@ -266,14 +266,14 @@
 #define encoding_xpm_idx (scriptcode_xpm_idx+1)
 #include "../images/help.xpm"
 #define help_xpm_idx (encoding_xpm_idx+1)
-#include "../images/linux.xpm"
-#define linux_xpm_idx (help_xpm_idx+1)
-#include "../images/mac.xpm"
-#define mac_xpm_idx (linux_xpm_idx+1)
-#include "../images/windows.xpm"
-#define windows_xpm_idx (mac_xpm_idx+1)
+#include "../images/linuxlogo.xpm"
+#define linuxlogo_xpm_idx (help_xpm_idx+1)
+#include "../images/maclogo.xpm"
+#define maclogo_xpm_idx (linuxlogo_xpm_idx+1)
+#include "../images/windowslogo.xpm"
+#define windowslogo_xpm_idx (maclogo_xpm_idx+1)
 #include "../images/filehandle.xpm"
-#define filehandle_xpm_idx (windows_xpm_idx+1)
+#define filehandle_xpm_idx (windowslogo_xpm_idx+1)
 #include "../images/qfind.xpm"
 #define qfind_xpm_idx (filehandle_xpm_idx+1)
 #include "../images/goposition.xpm"
@@ -309,7 +309,7 @@ char ** g_MadIcons[] =
 	&tchinese_xpm[0], &schinese_xpm[0], &japanese_xpm[0], &options_xpm[0], &footprint_xpm[0], &mpython_xpm[0],
 	&delete_xpm[0], &dateadd_xpm[0], &touppercase_xpm[0], &tolowercase_xpm[0], &reload_xpm[0], &saveas_xpm[0], &winlist_xpm[0],
 	&pagesetup_xpm[0], &fullscreen_xpm[0], &scriptedit_xpm[0], &syntax_xpm[0], &folderfind_xpm[0], &post_it_xpm[0],
-	&report_xpm[0], &scriptcode_xpm[0], &encoding_xpm[0], &help_xpm[0], &linux_xpm[0], &mac_xpm[0], &windows_xpm[0],
+	&report_xpm[0], &scriptcode_xpm[0], &encoding_xpm[0], &help_xpm[0], &linuxlogo_xpm[0], &maclogo_xpm[0], &windowslogo_xpm[0],
 	&filehandle_xpm[0], &qfind_xpm[0], &goposition_xpm[0], &cplusplus_xpm[0], &markdown_xpm[0], &html_xpm[0], &xml_xpm[0],
 	&plaintext_xpm[0],
 };
@@ -2298,13 +2298,13 @@ CommandData CommandTable[] =
 	{ 0,               2, menuToggleBOM,          wxT( "menuToggleBOM" ),          _( "Add/Remove BOM" ),                                wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Add/Remove Unicode BOM" ), 0, 0, 0, false},
 	{ 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0, 0, 0, 0, false},
 	{ 0,               1, menuNewLineChar,        wxT( "menuNewLineChar" ),        _( "NewLine Char (File Format): " ),                  0,             wxITEM_NORMAL,    -1, &g_Menu_Tools_NewLineChar,        0, 0, 0, 0, false},
-	{ 0,               2, menuConvertToDOS,       wxT( "menuConvertToDOS" ),       _( "Convert To CRLF/0D0A (&DOS)" ),                   wxT( "" ),       wxITEM_NORMAL, windows_xpm_idx, 0,                      _( "Convert the file format to DOS format" ), 0, 0, 0, false},
-	{ 0,               2, menuConvertToMAC,       wxT( "menuConvertToMAC" ),       _( "Convert To CR/0D (Old &MAC)" ),                   wxT( "" ),       wxITEM_NORMAL, mac_xpm_idx, 0,                          _( "Convert the file format to MAC format" ), 0, 0, 0, false},
-	{ 0,               2, menuConvertToUNIX,      wxT( "menuConvertToUNIX" ),      _( "Convert To LF/0A (&UNIX/OSX)" ),                  wxT( "" ),       wxITEM_NORMAL, linux_xpm_idx, 0,                        _( "Convert the file format to UNIX format" ), 0, 0, 0, false},
+	{ 0,               2, menuConvertToDOS,       wxT( "menuConvertToDOS" ),       _( "Convert To CRLF/0D0A (&DOS)" ),                   wxT( "" ),       wxITEM_NORMAL, windowslogo_xpm_idx, 0,                      _( "Convert the file format to DOS format" ), 0, 0, 0, false},
+	{ 0,               2, menuConvertToMAC,       wxT( "menuConvertToMAC" ),       _( "Convert To CR/0D (Old &MAC)" ),                   wxT( "" ),       wxITEM_NORMAL, maclogo_xpm_idx, 0,                          _( "Convert the file format to MAC format" ), 0, 0, 0, false},
+	{ 0,               2, menuConvertToUNIX,      wxT( "menuConvertToUNIX" ),      _( "Convert To LF/0A (&UNIX/OSX)" ),                  wxT( "" ),       wxITEM_NORMAL, linuxlogo_xpm_idx, 0,                        _( "Convert the file format to UNIX format" ), 0, 0, 0, false},
 	{ 0,               1, menuInsertNewLineChar,  wxT( "menuInsertNewLineChar" ),  _( "Press Enter to Insert NewLine Char: " ),          0,             wxITEM_NORMAL,    -1, &g_Menu_Tools_InsertNewLineChar,  0, 0, 0, 0, false},
-	{ 0,               2, menuInsertDOS,          wxT( "menuInsertDOS" ),          _( "Insert CRLF/0D0A (&DOS)" ),                       wxT( "" ),       wxITEM_NORMAL, windows_xpm_idx, 0,                      _( "Insert CR&LF chars when pressing Enter key" ), 0, 0, 0, false},
-	{ 0,               2, menuInsertMAC,          wxT( "menuInsertMAC" ),          _( "Insert CR/0D (Old &MAC)" ),                       wxT( "" ),       wxITEM_NORMAL, mac_xpm_idx, 0,                          _( "Insert CR char when pressing Enter key" ), 0, 0, 0, false},
-	{ 0,               2, menuInsertUNIX,         wxT( "menuInsertUNIX" ),         _( "Insert LF/0A (&UNIX/OSX)" ),                      wxT( "" ),       wxITEM_NORMAL, linux_xpm_idx, 0,                        _( "Insert LF char when pressing Enter key" ), 0, 0, 0, false},
+	{ 0,               2, menuInsertDOS,          wxT( "menuInsertDOS" ),          _( "Insert CRLF/0D0A (&DOS)" ),                       wxT( "" ),       wxITEM_NORMAL, windowslogo_xpm_idx, 0,                      _( "Insert CR&LF chars when pressing Enter key" ), 0, 0, 0, false},
+	{ 0,               2, menuInsertMAC,          wxT( "menuInsertMAC" ),          _( "Insert CR/0D (Old &MAC)" ),                       wxT( "" ),       wxITEM_NORMAL, maclogo_xpm_idx, 0,                          _( "Insert CR char when pressing Enter key" ), 0, 0, 0, false},
+	{ 0,               2, menuInsertUNIX,         wxT( "menuInsertUNIX" ),         _( "Insert LF/0A (&UNIX/OSX)" ),                      wxT( "" ),       wxITEM_NORMAL, linuxlogo_xpm_idx, 0,                        _( "Insert LF char when pressing Enter key" ), 0, 0, 0, false},
 	{ 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0, 0, 0, 0, false},
 	{ 0,               1, menuConvertEncoding,    wxT( "menuConvertEncoding" ),    _( "Convert File &Encoding..." ),                     0,               wxITEM_NORMAL,    encoding_xpm_idx, 0,                  _( "Convert to the specified encoding" ), 0, 0, 0, false},
 	{ 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0, 0, 0, 0, false},
