@@ -343,16 +343,8 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 		wxASSERT( WxSliderTransDegree != 0 );
 		long trans = 30;
 
-		if( g_SearchReplaceDialog )
-		{
-			bb = g_SearchReplaceDialog->WxRadioAlways->GetValue();
-			trans = g_SearchReplaceDialog->WxSliderTransDegree->GetValue();
-		}
-		else
-		{
-			m_Config->Read( wxT( "/MadEdit/AlwaysTransparent" ), &bb, false );
-			m_Config->Read( wxT( "/MadEdit/Transparency" ), &trans );
-		}
+		m_Config->Read( wxT( "/MadEdit/AlwaysTransparent" ), &bb, false );
+		m_Config->Read( wxT( "/MadEdit/Transparency" ), &trans );
 
 		WxRadioAlways->SetValue( bb );
 		WxRadioLosingFocus->SetValue( !bb );
@@ -1008,7 +1000,7 @@ void MadSearchReplaceDialog::WxButtonReplaceClick( wxCommandEvent& event )
 	{
 		wxString reptext;
 		m_ReplaceText->GetText( reptext, true );
-		g_SearchReplaceDialog->m_RecentFindText->AddFileToHistory( text );
+		m_RecentFindText->AddFileToHistory( text );
 
 		if( reptext.Len() > 0 )
 		{
@@ -1749,7 +1741,7 @@ void MadSearchReplaceDialog::ReplaceAll( MadEdit * madedit, bool needRec/*=true*
 	{
 		wxString reptext;
 		m_ReplaceText->GetText( reptext, true );
-		g_SearchReplaceDialog->m_RecentFindText->AddFileToHistory( text );
+		m_RecentFindText->AddFileToHistory( text );
 
 		if( reptext.Len() > 0 )
 		{
@@ -1814,7 +1806,7 @@ void MadSearchReplaceDialog::ReplaceAll( MadEdit * madedit, bool needRec/*=true*
 			}
 		}
 
-		if( count >= 0 )
+		if(( count >= 0 )&& (g_ActiveMadEdit == madedit))
 		{
 			wxString msg;
 
