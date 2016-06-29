@@ -288,6 +288,12 @@
 #define xml_xpm_idx (html_xpm_idx+1)
 #include "../images/plaintext.xpm"
 #define plaintext_xpm_idx (xml_xpm_idx+1)
+#include "../images/togglewin.xpm"
+#define togglewin_xpm_idx (plaintext_xpm_idx+1)
+#include "../images/prevwin.xpm"
+#define prevwin_xpm_idx (togglewin_xpm_idx+1)
+#include "../images/nextwin.xpm"
+#define nextwin_xpm_idx (prevwin_xpm_idx+1)
 
 /*#include "../images/.xpm"
 #define _xpm_idx (_xpm_idx+1)*/
@@ -311,7 +317,7 @@ char ** g_MadIcons[] =
 	&pagesetup_xpm[0], &fullscreen_xpm[0], &scriptedit_xpm[0], &syntax_xpm[0], &folderfind_xpm[0], &post_it_xpm[0],
 	&report_xpm[0], &scriptcode_xpm[0], &encoding_xpm[0], &help_xpm[0], &linuxlogo_xpm[0], &maclogo_xpm[0], &windowslogo_xpm[0],
 	&filehandle_xpm[0], &qfind_xpm[0], &goposition_xpm[0], &cplusplus_xpm[0], &markdown_xpm[0], &html_xpm[0], &xml_xpm[0],
-	&plaintext_xpm[0],
+	&plaintext_xpm[0], &togglewin_xpm[0], &prevwin_xpm[0], &nextwin_xpm[0],
 };
 
 extern void ScanForLocales();
@@ -2332,9 +2338,9 @@ CommandData CommandTable[] =
 
 	// Window
 	{ 0, 0, 0, 0, _( "&Window" ), 0, wxITEM_NORMAL, 0, &g_Menu_Window, 0, 0, 0, 0, false},
-	{ ecToggleWindow, 1, menuToggleWindow,   wxT( "menuToggleWindow" ),   _( "&Toggle Window" ),   wxT( "Ctrl-TAB" ), wxITEM_NORMAL, -1, 0, _( "Switch to the previous active window" ), 0, 0, 0, false},
-	{ 0,              1, menuPreviousWindow, wxT( "menuPreviousWindow" ), _( "&Previous Window" ), wxT( "F5" ),       wxITEM_NORMAL, -1, 0, _( "Activate the previous window" ), 0, 0, 0, false},
-	{ 0,              1, menuNextWindow,     wxT( "menuNextWindow" ),     _( "&Next Window" ),     wxT( "F6" ),       wxITEM_NORMAL, -1, 0, _( "Activate the next window" ), 0, 0, 0, false},
+	{ ecToggleWindow, 1, menuToggleWindow,   wxT( "menuToggleWindow" ),   _( "&Toggle Window" ),   wxT( "Ctrl-TAB" ), wxITEM_NORMAL, togglewin_xpm_idx, 0, _( "Switch to the previous active window" ), 0, 0, 0, false},
+	{ 0,              1, menuPreviousWindow, wxT( "menuPreviousWindow" ), _( "&Previous Window" ), wxT( "F5" ),       wxITEM_NORMAL, prevwin_xpm_idx, 0, _( "Activate the previous window" ), 0, 0, 0, false},
+	{ 0,              1, menuNextWindow,     wxT( "menuNextWindow" ),     _( "&Next Window" ),     wxT( "F6" ),       wxITEM_NORMAL, nextwin_xpm_idx, 0, _( "Activate the next window" ), 0, 0, 0, false},
 	{ 0,              1, menuWindowList,     wxT( "menuWindowList" ),     _( "&Windows..." ),      0,                 wxITEM_NORMAL, winlist_xpm_idx, 0, _( "Window list" ), 0, 0, 0, false},
 
 	// Help
