@@ -3428,7 +3428,7 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 		m_Config->Write( wxT( "/MadEdit/SearchWinTop" ), y );
 		m_Config->Write( wxT( "/MadEdit/SearchWrapAround" ), g_SearchReplaceDialog->WxCheckBoxWrapAround->GetValue() );
 
-		if( CanSetTransparent() )
+		if( g_SearchReplaceDialog->m_EnableTransparency )
 		{
 			m_Config->Write( wxT( "/MadEdit/AlwaysTransparent" ), g_SearchReplaceDialog->WxRadioAlways->GetValue() );
 			long trans = 25;
