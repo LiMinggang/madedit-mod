@@ -186,6 +186,6 @@ AC_TYPE_SIZE_T
 #AC_HEADER_STDC
 AC_CHECK_FUNCS([dup2])
 
-AC_CONFIG_FILES([Makefile syntax/Makefile po/Makefile.in])
+AC_CONFIG_FILES([Makefile syntax/Makefile scripts/Makefile po/Makefile.in])
 
 AC_OUTPUT
