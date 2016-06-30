@@ -85,9 +85,9 @@ subdir = .
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/configure $(am__configure_deps) \
 	$(srcdir)/config.h.in mkinstalldirs depcomp $(dist_doc_DATA) \
-	$(noinst_HEADERS) ABOUT-NLS AUTHORS COPYING ChangeLog INSTALL \
-	NEWS README compile config.guess config.rpath config.sub \
-	install-sh missing
+	$(noinst_HEADERS) ABOUT-NLS AUTHORS ChangeLog NEWS README \
+	compile config.guess config.rpath config.sub install-sh \
+	missing
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
@@ -119,6 +119,8 @@ am_madedit_OBJECTS = src/madedit-MadAboutDialog.$(OBJEXT) \
 	src/madedit-MadPurgeHistoryDialog.$(OBJEXT) \
 	src/madedit-MadNumberDlg.$(OBJEXT) \
 	src/madedit-MadWinListDialog.$(OBJEXT) \
+	src/madedit-MadSaveQueryDialog.$(OBJEXT) \
+	src/madedit-checkedlistctrl.$(OBJEXT) \
 	src/madedit-MadMacroDlg.$(OBJEXT) \
 	src/madedit-MadRecentList.$(OBJEXT) \
 	src/madedit-EmbeddedPython.$(OBJEXT) \
@@ -171,7 +173,6 @@ am_madedit_OBJECTS = src/madedit-MadAboutDialog.$(OBJEXT) \
 	spellchecker/hunspell/src/hunspell/madedit-affentry.$(OBJEXT) \
 	spellchecker/hunspell/src/hunspell/madedit-affixmgr.$(OBJEXT) \
 	spellchecker/hunspell/src/hunspell/madedit-csutil.$(OBJEXT) \
-	spellchecker/hunspell/src/hunspell/madedit-dictmgr.$(OBJEXT) \
 	spellchecker/hunspell/src/hunspell/madedit-filemgr.$(OBJEXT) \
 	spellchecker/hunspell/src/hunspell/madedit-hashmgr.$(OBJEXT) \
 	spellchecker/hunspell/src/hunspell/madedit-hunspell.$(OBJEXT) \
@@ -179,7 +180,6 @@ am_madedit_OBJECTS = src/madedit-MadAboutDialog.$(OBJEXT) \
 	spellchecker/hunspell/src/hunspell/madedit-phonet.$(OBJEXT) \
 	spellchecker/hunspell/src/hunspell/madedit-replist.$(OBJEXT) \
 	spellchecker/hunspell/src/hunspell/madedit-suggestmgr.$(OBJEXT) \
-	spellchecker/hunspell/src/hunspell/madedit-utf_info.$(OBJEXT) \
 	markdown/madedit-markdown-tokens.$(OBJEXT) \
 	markdown/madedit-markdown.$(OBJEXT) \
 	minipython/Modules/_codecsmodule.$(OBJEXT) \
@@ -686,6 +686,10 @@ madedit_SOURCES = src/MadAboutDialog.cpp \
 	src/MadNumberDlg.h \
 	src/MadWinListDialog.cpp \
 	src/MadWinListDialog.h \
+	src/MadSaveQueryDialog.h \
+	src/MadSaveQueryDialog.cpp \
+	src/checkedlistctrl.cpp \
+	src/checkedlistctrl.h \
 	src/MadMacroDlg.cpp \
 	src/MadMacroDlg.h \
 	src/MadRecentList.cpp \
@@ -782,7 +786,6 @@ madedit_SOURCES = src/MadAboutDialog.cpp \
 	spellchecker/hunspell/src/hunspell/affentry.cxx \
 	spellchecker/hunspell/src/hunspell/affixmgr.cxx \
 	spellchecker/hunspell/src/hunspell/csutil.cxx \
-	spellchecker/hunspell/src/hunspell/dictmgr.cxx \
 	spellchecker/hunspell/src/hunspell/filemgr.cxx \
 	spellchecker/hunspell/src/hunspell/hashmgr.cxx \
 	spellchecker/hunspell/src/hunspell/hunspell.cxx \
@@ -790,7 +793,6 @@ madedit_SOURCES = src/MadAboutDialog.cpp \
 	spellchecker/hunspell/src/hunspell/phonet.cxx \
 	spellchecker/hunspell/src/hunspell/replist.cxx \
 	spellchecker/hunspell/src/hunspell/suggestmgr.cxx \
-	spellchecker/hunspell/src/hunspell/utf_info.cxx \
 	spellchecker/config.h \
 	spellchecker/hunspell/src/win_api/hunspelldll.h \
 	spellchecker/hunspell/src/hunspell/affentry.hxx \
@@ -1332,6 +1334,10 @@ src/madedit-MadNumberDlg.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/madedit-MadWinListDialog.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
+src/madedit-MadSaveQueryDialog.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
+src/madedit-checkedlistctrl.$(OBJEXT): src/$(am__dirstamp) \
+	src/$(DEPDIR)/$(am__dirstamp)
 src/madedit-MadMacroDlg.$(OBJEXT): src/$(am__dirstamp) \
 	src/$(DEPDIR)/$(am__dirstamp)
 src/madedit-MadRecentList.$(OBJEXT): src/$(am__dirstamp) \
@@ -1508,9 +1514,6 @@ spellchecker/hunspell/src/hunspell/madedit-affixmgr.$(OBJEXT):  \
 spellchecker/hunspell/src/hunspell/madedit-csutil.$(OBJEXT):  \
 	spellchecker/hunspell/src/hunspell/$(am__dirstamp) \
 	spellchecker/hunspell/src/hunspell/$(DEPDIR)/$(am__dirstamp)
-spellchecker/hunspell/src/hunspell/madedit-dictmgr.$(OBJEXT):  \
-	spellchecker/hunspell/src/hunspell/$(am__dirstamp) \
-	spellchecker/hunspell/src/hunspell/$(DEPDIR)/$(am__dirstamp)
 spellchecker/hunspell/src/hunspell/madedit-filemgr.$(OBJEXT):  \
 	spellchecker/hunspell/src/hunspell/$(am__dirstamp) \
 	spellchecker/hunspell/src/hunspell/$(DEPDIR)/$(am__dirstamp)
@@ -1530,9 +1533,6 @@ spellchecker/hunspell/src/hunspell/madedit-replist.$(OBJEXT):  \
 	spellchecker/hunspell/src/hunspell/$(am__dirstamp) \
 	spellchecker/hunspell/src/hunspell/$(DEPDIR)/$(am__dirstamp)
 spellchecker/hunspell/src/hunspell/madedit-suggestmgr.$(OBJEXT):  \
-	spellchecker/hunspell/src/hunspell/$(am__dirstamp) \
-	spellchecker/hunspell/src/hunspell/$(DEPDIR)/$(am__dirstamp)
-spellchecker/hunspell/src/hunspell/madedit-utf_info.$(OBJEXT):  \
 	spellchecker/hunspell/src/hunspell/$(am__dirstamp) \
 	spellchecker/hunspell/src/hunspell/$(DEPDIR)/$(am__dirstamp)
 markdown/$(am__dirstamp):
@@ -2127,7 +2127,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@spellchecker/hunspell/src/hunspell/$(DEPDIR)/madedit-affentry.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@spellchecker/hunspell/src/hunspell/$(DEPDIR)/madedit-affixmgr.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@spellchecker/hunspell/src/hunspell/$(DEPDIR)/madedit-csutil.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@spellchecker/hunspell/src/hunspell/$(DEPDIR)/madedit-dictmgr.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@spellchecker/hunspell/src/hunspell/$(DEPDIR)/madedit-filemgr.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@spellchecker/hunspell/src/hunspell/$(DEPDIR)/madedit-hashmgr.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@spellchecker/hunspell/src/hunspell/$(DEPDIR)/madedit-hunspell.Po@am__quote@
@@ -2135,7 +2134,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@spellchecker/hunspell/src/hunspell/$(DEPDIR)/madedit-phonet.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@spellchecker/hunspell/src/hunspell/$(DEPDIR)/madedit-replist.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@spellchecker/hunspell/src/hunspell/$(DEPDIR)/madedit-suggestmgr.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@spellchecker/hunspell/src/hunspell/$(DEPDIR)/madedit-utf_info.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/madedit-EmbeddedPython.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/madedit-MadAboutDialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/madedit-MadConvEncDialog.Po@am__quote@
@@ -2151,10 +2149,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/madedit-MadPrintout.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/madedit-MadPurgeHistoryDialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/madedit-MadRecentList.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/madedit-MadSaveQueryDialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/madedit-MadSearchReplaceDialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/madedit-MadSortDialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/madedit-MadUtils.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/madedit-MadWinListDialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/madedit-MadWordCountDialog.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/madedit-checkedlistctrl.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/madedit-version.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/MadEdit/$(DEPDIR)/madedit-MadEdit.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/MadEdit/$(DEPDIR)/madedit-MadEditAdvanced.Po@am__quote@
@@ -2425,6 +2426,48 @@ src/madedit-MadNumberDlg.obj: src/MadNumberDlg.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/MadNumberDlg.cpp' object='src/madedit-MadNumberDlg.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o src/madedit-MadNumberDlg.obj `if test -f 'src/MadNumberDlg.cpp'; then $(CYGPATH_W) 'src/MadNumberDlg.cpp'; else $(CYGPATH_W) '$(srcdir)/src/MadNumberDlg.cpp'; fi`
+
+src/madedit-MadWinListDialog.o: src/MadWinListDialog.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT src/madedit-MadWinListDialog.o -MD -MP -MF src/$(DEPDIR)/madedit-MadWinListDialog.Tpo -c -o src/madedit-MadWinListDialog.o `test -f 'src/MadWinListDialog.cpp' || echo '$(srcdir)/'`src/MadWinListDialog.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/$(DEPDIR)/madedit-MadWinListDialog.Tpo src/$(DEPDIR)/madedit-MadWinListDialog.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/MadWinListDialog.cpp' object='src/madedit-MadWinListDialog.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o src/madedit-MadWinListDialog.o `test -f 'src/MadWinListDialog.cpp' || echo '$(srcdir)/'`src/MadWinListDialog.cpp
+
+src/madedit-MadWinListDialog.obj: src/MadWinListDialog.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT src/madedit-MadWinListDialog.obj -MD -MP -MF src/$(DEPDIR)/madedit-MadWinListDialog.Tpo -c -o src/madedit-MadWinListDialog.obj `if test -f 'src/MadWinListDialog.cpp'; then $(CYGPATH_W) 'src/MadWinListDialog.cpp'; else $(CYGPATH_W) '$(srcdir)/src/MadWinListDialog.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/$(DEPDIR)/madedit-MadWinListDialog.Tpo src/$(DEPDIR)/madedit-MadWinListDialog.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/MadWinListDialog.cpp' object='src/madedit-MadWinListDialog.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o src/madedit-MadWinListDialog.obj `if test -f 'src/MadWinListDialog.cpp'; then $(CYGPATH_W) 'src/MadWinListDialog.cpp'; else $(CYGPATH_W) '$(srcdir)/src/MadWinListDialog.cpp'; fi`
+
+src/madedit-MadSaveQueryDialog.o: src/MadSaveQueryDialog.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT src/madedit-MadSaveQueryDialog.o -MD -MP -MF src/$(DEPDIR)/madedit-MadSaveQueryDialog.Tpo -c -o src/madedit-MadSaveQueryDialog.o `test -f 'src/MadSaveQueryDialog.cpp' || echo '$(srcdir)/'`src/MadSaveQueryDialog.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/$(DEPDIR)/madedit-MadSaveQueryDialog.Tpo src/$(DEPDIR)/madedit-MadSaveQueryDialog.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/MadSaveQueryDialog.cpp' object='src/madedit-MadSaveQueryDialog.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o src/madedit-MadSaveQueryDialog.o `test -f 'src/MadSaveQueryDialog.cpp' || echo '$(srcdir)/'`src/MadSaveQueryDialog.cpp
+
+src/madedit-MadSaveQueryDialog.obj: src/MadSaveQueryDialog.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT src/madedit-MadSaveQueryDialog.obj -MD -MP -MF src/$(DEPDIR)/madedit-MadSaveQueryDialog.Tpo -c -o src/madedit-MadSaveQueryDialog.obj `if test -f 'src/MadSaveQueryDialog.cpp'; then $(CYGPATH_W) 'src/MadSaveQueryDialog.cpp'; else $(CYGPATH_W) '$(srcdir)/src/MadSaveQueryDialog.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/$(DEPDIR)/madedit-MadSaveQueryDialog.Tpo src/$(DEPDIR)/madedit-MadSaveQueryDialog.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/MadSaveQueryDialog.cpp' object='src/madedit-MadSaveQueryDialog.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o src/madedit-MadSaveQueryDialog.obj `if test -f 'src/MadSaveQueryDialog.cpp'; then $(CYGPATH_W) 'src/MadSaveQueryDialog.cpp'; else $(CYGPATH_W) '$(srcdir)/src/MadSaveQueryDialog.cpp'; fi`
+
+src/madedit-checkedlistctrl.o: src/checkedlistctrl.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT src/madedit-checkedlistctrl.o -MD -MP -MF src/$(DEPDIR)/madedit-checkedlistctrl.Tpo -c -o src/madedit-checkedlistctrl.o `test -f 'src/checkedlistctrl.cpp' || echo '$(srcdir)/'`src/checkedlistctrl.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/$(DEPDIR)/madedit-checkedlistctrl.Tpo src/$(DEPDIR)/madedit-checkedlistctrl.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/checkedlistctrl.cpp' object='src/madedit-checkedlistctrl.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o src/madedit-checkedlistctrl.o `test -f 'src/checkedlistctrl.cpp' || echo '$(srcdir)/'`src/checkedlistctrl.cpp
+
+src/madedit-checkedlistctrl.obj: src/checkedlistctrl.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT src/madedit-checkedlistctrl.obj -MD -MP -MF src/$(DEPDIR)/madedit-checkedlistctrl.Tpo -c -o src/madedit-checkedlistctrl.obj `if test -f 'src/checkedlistctrl.cpp'; then $(CYGPATH_W) 'src/checkedlistctrl.cpp'; else $(CYGPATH_W) '$(srcdir)/src/checkedlistctrl.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/$(DEPDIR)/madedit-checkedlistctrl.Tpo src/$(DEPDIR)/madedit-checkedlistctrl.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/checkedlistctrl.cpp' object='src/madedit-checkedlistctrl.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o src/madedit-checkedlistctrl.obj `if test -f 'src/checkedlistctrl.cpp'; then $(CYGPATH_W) 'src/checkedlistctrl.cpp'; else $(CYGPATH_W) '$(srcdir)/src/checkedlistctrl.cpp'; fi`
 
 src/madedit-MadMacroDlg.o: src/MadMacroDlg.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT src/madedit-MadMacroDlg.o -MD -MP -MF src/$(DEPDIR)/madedit-MadMacroDlg.Tpo -c -o src/madedit-MadMacroDlg.o `test -f 'src/MadMacroDlg.cpp' || echo '$(srcdir)/'`src/MadMacroDlg.cpp
@@ -3154,20 +3197,6 @@ spellchecker/hunspell/src/hunspell/madedit-csutil.obj: spellchecker/hunspell/src
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o spellchecker/hunspell/src/hunspell/madedit-csutil.obj `if test -f 'spellchecker/hunspell/src/hunspell/csutil.cxx'; then $(CYGPATH_W) 'spellchecker/hunspell/src/hunspell/csutil.cxx'; else $(CYGPATH_W) '$(srcdir)/spellchecker/hunspell/src/hunspell/csutil.cxx'; fi`
 
-spellchecker/hunspell/src/hunspell/madedit-dictmgr.o: spellchecker/hunspell/src/hunspell/dictmgr.cxx
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT spellchecker/hunspell/src/hunspell/madedit-dictmgr.o -MD -MP -MF spellchecker/hunspell/src/hunspell/$(DEPDIR)/madedit-dictmgr.Tpo -c -o spellchecker/hunspell/src/hunspell/madedit-dictmgr.o `test -f 'spellchecker/hunspell/src/hunspell/dictmgr.cxx' || echo '$(srcdir)/'`spellchecker/hunspell/src/hunspell/dictmgr.cxx
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) spellchecker/hunspell/src/hunspell/$(DEPDIR)/madedit-dictmgr.Tpo spellchecker/hunspell/src/hunspell/$(DEPDIR)/madedit-dictmgr.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='spellchecker/hunspell/src/hunspell/dictmgr.cxx' object='spellchecker/hunspell/src/hunspell/madedit-dictmgr.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o spellchecker/hunspell/src/hunspell/madedit-dictmgr.o `test -f 'spellchecker/hunspell/src/hunspell/dictmgr.cxx' || echo '$(srcdir)/'`spellchecker/hunspell/src/hunspell/dictmgr.cxx
-
-spellchecker/hunspell/src/hunspell/madedit-dictmgr.obj: spellchecker/hunspell/src/hunspell/dictmgr.cxx
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT spellchecker/hunspell/src/hunspell/madedit-dictmgr.obj -MD -MP -MF spellchecker/hunspell/src/hunspell/$(DEPDIR)/madedit-dictmgr.Tpo -c -o spellchecker/hunspell/src/hunspell/madedit-dictmgr.obj `if test -f 'spellchecker/hunspell/src/hunspell/dictmgr.cxx'; then $(CYGPATH_W) 'spellchecker/hunspell/src/hunspell/dictmgr.cxx'; else $(CYGPATH_W) '$(srcdir)/spellchecker/hunspell/src/hunspell/dictmgr.cxx'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) spellchecker/hunspell/src/hunspell/$(DEPDIR)/madedit-dictmgr.Tpo spellchecker/hunspell/src/hunspell/$(DEPDIR)/madedit-dictmgr.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='spellchecker/hunspell/src/hunspell/dictmgr.cxx' object='spellchecker/hunspell/src/hunspell/madedit-dictmgr.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o spellchecker/hunspell/src/hunspell/madedit-dictmgr.obj `if test -f 'spellchecker/hunspell/src/hunspell/dictmgr.cxx'; then $(CYGPATH_W) 'spellchecker/hunspell/src/hunspell/dictmgr.cxx'; else $(CYGPATH_W) '$(srcdir)/spellchecker/hunspell/src/hunspell/dictmgr.cxx'; fi`
-
 spellchecker/hunspell/src/hunspell/madedit-filemgr.o: spellchecker/hunspell/src/hunspell/filemgr.cxx
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT spellchecker/hunspell/src/hunspell/madedit-filemgr.o -MD -MP -MF spellchecker/hunspell/src/hunspell/$(DEPDIR)/madedit-filemgr.Tpo -c -o spellchecker/hunspell/src/hunspell/madedit-filemgr.o `test -f 'spellchecker/hunspell/src/hunspell/filemgr.cxx' || echo '$(srcdir)/'`spellchecker/hunspell/src/hunspell/filemgr.cxx
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) spellchecker/hunspell/src/hunspell/$(DEPDIR)/madedit-filemgr.Tpo spellchecker/hunspell/src/hunspell/$(DEPDIR)/madedit-filemgr.Po
@@ -3265,20 +3294,6 @@ spellchecker/hunspell/src/hunspell/madedit-suggestmgr.obj: spellchecker/hunspell
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='spellchecker/hunspell/src/hunspell/suggestmgr.cxx' object='spellchecker/hunspell/src/hunspell/madedit-suggestmgr.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o spellchecker/hunspell/src/hunspell/madedit-suggestmgr.obj `if test -f 'spellchecker/hunspell/src/hunspell/suggestmgr.cxx'; then $(CYGPATH_W) 'spellchecker/hunspell/src/hunspell/suggestmgr.cxx'; else $(CYGPATH_W) '$(srcdir)/spellchecker/hunspell/src/hunspell/suggestmgr.cxx'; fi`
-
-spellchecker/hunspell/src/hunspell/madedit-utf_info.o: spellchecker/hunspell/src/hunspell/utf_info.cxx
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT spellchecker/hunspell/src/hunspell/madedit-utf_info.o -MD -MP -MF spellchecker/hunspell/src/hunspell/$(DEPDIR)/madedit-utf_info.Tpo -c -o spellchecker/hunspell/src/hunspell/madedit-utf_info.o `test -f 'spellchecker/hunspell/src/hunspell/utf_info.cxx' || echo '$(srcdir)/'`spellchecker/hunspell/src/hunspell/utf_info.cxx
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) spellchecker/hunspell/src/hunspell/$(DEPDIR)/madedit-utf_info.Tpo spellchecker/hunspell/src/hunspell/$(DEPDIR)/madedit-utf_info.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='spellchecker/hunspell/src/hunspell/utf_info.cxx' object='spellchecker/hunspell/src/hunspell/madedit-utf_info.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o spellchecker/hunspell/src/hunspell/madedit-utf_info.o `test -f 'spellchecker/hunspell/src/hunspell/utf_info.cxx' || echo '$(srcdir)/'`spellchecker/hunspell/src/hunspell/utf_info.cxx
-
-spellchecker/hunspell/src/hunspell/madedit-utf_info.obj: spellchecker/hunspell/src/hunspell/utf_info.cxx
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT spellchecker/hunspell/src/hunspell/madedit-utf_info.obj -MD -MP -MF spellchecker/hunspell/src/hunspell/$(DEPDIR)/madedit-utf_info.Tpo -c -o spellchecker/hunspell/src/hunspell/madedit-utf_info.obj `if test -f 'spellchecker/hunspell/src/hunspell/utf_info.cxx'; then $(CYGPATH_W) 'spellchecker/hunspell/src/hunspell/utf_info.cxx'; else $(CYGPATH_W) '$(srcdir)/spellchecker/hunspell/src/hunspell/utf_info.cxx'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) spellchecker/hunspell/src/hunspell/$(DEPDIR)/madedit-utf_info.Tpo spellchecker/hunspell/src/hunspell/$(DEPDIR)/madedit-utf_info.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='spellchecker/hunspell/src/hunspell/utf_info.cxx' object='spellchecker/hunspell/src/hunspell/madedit-utf_info.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o spellchecker/hunspell/src/hunspell/madedit-utf_info.obj `if test -f 'spellchecker/hunspell/src/hunspell/utf_info.cxx'; then $(CYGPATH_W) 'spellchecker/hunspell/src/hunspell/utf_info.cxx'; else $(CYGPATH_W) '$(srcdir)/spellchecker/hunspell/src/hunspell/utf_info.cxx'; fi`
 
 markdown/madedit-markdown-tokens.o: markdown/markdown-tokens.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT markdown/madedit-markdown-tokens.o -MD -MP -MF markdown/$(DEPDIR)/madedit-markdown-tokens.Tpo -c -o markdown/madedit-markdown-tokens.o `test -f 'markdown/markdown-tokens.cpp' || echo '$(srcdir)/'`markdown/markdown-tokens.cpp

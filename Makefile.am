@@ -1,4 +1,4 @@
-SUBDIRS = syntax po
+SUBDIRS = syntax po scripts
 
 bin_PROGRAMS = madedit
 AM_CPPFLAGS = -I$(top_srcdir)/charset-detector/include -I$(top_srcdir)/charset-detector/src \
@@ -157,7 +157,6 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	spellchecker/hunspell/src/hunspell/atypes.hxx \
 	spellchecker/hunspell/src/hunspell/baseaffix.hxx \
 	spellchecker/hunspell/src/hunspell/csutil.hxx \
-	spellchecker/hunspell/src/hunspell/dictmgr.hxx \
 	spellchecker/hunspell/src/hunspell/filemgr.hxx \
 	spellchecker/hunspell/src/hunspell/hashmgr.hxx \
 	spellchecker/hunspell/src/hunspell/htypes.hxx \
@@ -487,45 +486,120 @@ noinst_HEADERS =	description-pak \
 	image2xpm/image2xpmFrm.xml \
 	image2xpm/image2xpm_private.h \
 	image2xpm/image2xpm_private.rc \
+	images/alignleft.xpm \
+	images/alignright.xpm \
+	images/bookmark_clear.xpm \
+	images/bookmark_next.xpm \
+	images/bookmark_prev.xpm \
+	images/bookmark_toggle.xpm \
+	images/checked.xpm \
+	images/checked_dis.xpm \
 	images/closeall.xpm \
+	images/closepreview.xpm \
 	images/columnmode.xpm \
 	images/comment.xpm \
 	images/copy.xpm \
+	images/cplusplus.xpm \
 	images/cut.xpm \
+	images/dateadd.xpm \
+	images/delete.xpm \
+	images/dnd_copy.cur \
+	images/dnd_copy.xpm \
+	images/dnd_move.cur \
+	images/dnd_move.xpm \
+	images/dnd_none.cur \
+	images/dnd_none.xpm \
+	images/dotmatchnewline.xpm \
+	images/dotnewline.xpm \
 	images/down.xpm \
+	images/encoding.xpm \
 	images/fileclose.xpm \
+	images/filehandle.xpm \
 	images/fileopen.xpm \
 	images/filesave.xpm \
 	images/filesaveas.xpm \
 	images/find.xpm \
 	images/findnext.xpm \
 	images/findprev.xpm \
+	images/folderfind.xpm \
 	images/font.xpm \
 	images/fontname.xpm \
 	images/fontsize.xpm \
+	images/footprint.xpm \
+	images/fullscreen.xpm \
+	images/goposition.xpm \
+	images/help.xpm \
 	images/hexmode.xpm \
+	images/html.xpm \
 	images/indent.xpm \
+	images/japanese.xpm \
+	images/linuxlogo.xpm \
+	images/lock.xpm \
+	images/lock_open.xpm \
+	images/maclogo.xpm \
 	images/Mad.ico \
-	images/Mad2.ico \
 	images/Mad.xpm \
+	images/Mad2.ico \
 	images/Mad2.xpm \
 	images/Mad_16x15.xpm \
+	images/markdown.xpm \
+	images/mpython.xpm \
 	images/new.xpm \
+	images/nextwin.xpm \
 	images/nowrap.xpm \
 	images/null.xpm \
+	images/numbering.xpm \
+	images/options.xpm \
+	images/pagesetup.xpm \
 	images/paste.xpm \
+	images/plaintext.xpm \
+	images/playback.xpm \
+	images/post_it.xpm \
 	images/preview.xpm \
+	images/prevwin.xpm \
 	images/print.xpm \
+	images/qfind.xpm \
 	images/quit.xpm \
+	images/recentfiles.xpm \
+	images/record.xpm \
 	images/redo.xpm \
+	images/refresh.xpm \
+	images/reload.xpm \
 	images/replace.xpm \
+	images/report.xpm \
+	images/runscript.xpm \
 	images/saveall.xpm \
+	images/saveas.xpm \
+	images/saverec.xpm \
+	images/schinese.xpm \
+	images/scriptcode.xpm \
+	images/scriptedit.xpm \
+	images/searchcase.xpm \
+	images/searchregex.xpm \
+	images/searchselectedonly.xpm \
+	images/searchwholeword.xpm \
+	images/settop.xpm \
+	images/showsymbol.xpm \
+	images/spellchecker.xpm \
+	images/stop.xpm \
+	images/syntax.xpm \
+	images/tchinese.xpm \
 	images/textmode.xpm \
+	images/togglewin.xpm \
+	images/tolowercase.xpm \
+	images/touppercase.xpm \
+	images/unchecked.xpm \
+	images/unchecked_dis.xpm \
 	images/uncomment.xpm \
 	images/undo.xpm \
 	images/unindent.xpm \
+	images/up.xpm \
+	images/wholeword.xpm \
+	images/windowslogo.xpm \
+	images/winlist.xpm \
 	images/wrapbycol.xpm \
 	images/wrapbywin.xpm \
+	images/xml.xpm \
 	makefiles/Makefile.mac \
 	makefiles/Makefile.mingw \
 	makefiles/Makefile.install \
