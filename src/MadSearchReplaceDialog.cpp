@@ -115,7 +115,7 @@ END_EVENT_TABLE()
 
 MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size )
 {
-	m_EnableTransparency = CanSetTransparent();
+	m_EnableTransparency = true;/*CanSetTransparent();*/
 	//(*Initialize(MadSearchReplaceDialog)
 	wxStaticBoxSizer* StaticBoxSizer2;
 	wxBoxSizer* BoxSizer6;
