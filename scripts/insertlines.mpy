@@ -1,6 +1,7 @@
 #Create MadEdit Object for the active edit
 medit = MadEdit()
 
+
 newline = '\r'
 if medit.GetInsertNewLineType() == MadNewLineType.DOS:
     newline += '\n'
@@ -9,15 +10,21 @@ elif medit.GetInsertNewLineType() == MadNewLineType.Unix:
 
 result = InputBox("Please input how many lines you want to insert:", "Input lines")
 try:
-    num = int(result)
-    if num > 0:
-        lines = newline * num
-        medit.InsertStr(lines)
-    else :
-        MsgBox("Input Wrong numbers", "ERROR", MadDlgStyle.ICON_ERROR_HAND_STOP | MadDlgStyle.OK)
+    if len(result) > 0:
+        ng = result[0]
+        neg = False
+        if ng == '-':
+            result = result[1:]
+            neg = True
+        num = int(result)
+        if num > 0:
+            if neg == False:
+                lines = newline * num
+                medit.InsertStr(lines)
+            else :
+                if num != 0:
+                    for i in range(num):
+                        medit.DeleteLine()
+            #MsgBox("Input Wrong numbers: "+result, "ERROR", MadDlgStyle.ICON_ERROR_HAND_STOP | MadDlgStyle.OK)
 except:
-    MsgBox("Input Wrong numbers", "ERROR", MadDlgStyle.ICON_ERROR_HAND_STOP | MadDlgStyle.OK)
-
-print '===='
-print lines
-print '===='
+    MsgBox("Input Wrong numbers: "+result, "ERROR", MadDlgStyle.ICON_ERROR_HAND_STOP | MadDlgStyle.OK)
