@@ -117,6 +117,9 @@ Note: Not support wxWidgets 2.X anymore since 0.3.X
 
 Todo:
 FreeBSD packaging (with FreeBSD 10.01)
+1. configure CC=gcc CXX=g++
+2. aclocal version in aclocal.m4
+3. stdc++ version
 
 Mod v0.4.4
 New: Set toolbar to 3 columns to let user who has a small display have a chance to re-org the toolbars
