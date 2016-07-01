@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: madedit-mod 002\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-01 15:48+0300\n"
-"PO-Revision-Date: 2016-07-01 16:42+0300\n"
+"PO-Revision-Date: 2016-07-01 17:11+0300\n"
 "Last-Translator: nikos papadopoulos <nikos569@yahoo.com>\n"
 "Language-Team: greek <http://www.mageia-gr.org/forum/>\n"
 "Language: el\n"
@@ -191,7 +191,7 @@ msgstr "Ακύρωση"
 #, c-format
 msgid "File '%s' already exists, do you really want to overwrite it?"
 msgstr ""
-"Υπάρχει, ήδη, το αρχείο '%s'. \n"
+"Υπάρχει, ήδη, το αρχείο «%s». \n"
 "\n"
 "Θέλεις, σίγουρα, να απανωγραφεί;"
 
@@ -607,7 +607,7 @@ msgstr "Βρέθηκαν %d κείμενα που ταιριάζουν..."
 #: ../src/MadEdit/MadEditSearch.cpp:721
 #, c-format
 msgid "'%s' is not a valid regular expression.(Or empty (), [] or {})"
-msgstr "Το « %s » δεν είναι έγκυρη κανονική έκφραση.(ή άδεια (), [] ή {})"
+msgstr "Το «%s» δεν είναι έγκυρη κανονική έκφραση.(ή άδεια (), [] ή {})"
 
 #: ../src/MadEdit/MadEditSearch.cpp:852
 msgid ""
@@ -1487,7 +1487,7 @@ msgstr "Προ&βολή"
 
 #: ../src/MadEditFrame.cpp:2101
 msgid "Always on Top"
-msgstr "Πάντα Στην Κορυφή"
+msgstr "Πάντα στην Κορυφή"
 
 #: ../src/MadEditFrame.cpp:2102
 msgid "Toggle Full Screen Mode"
@@ -1872,7 +1872,7 @@ msgstr "Μετατροπή της μορφής του αρχείου σε μορ
 
 #: ../src/MadEditFrame.cpp:2302
 msgid "Convert To CR/0D (Old &MAC)"
-msgstr "Μετατροπή σε CR/0D (Παλιό &MAC)"
+msgstr "&Μετατροπή σε CR/0D (Παλιό MAC)"
 
 #: ../src/MadEditFrame.cpp:2302
 msgid "Convert the file format to MAC format"
@@ -2797,7 +2797,7 @@ msgstr "Φίλτρα Αρχείων:"
 
 #: ../src/MadFindInFilesDialog.cpp:184
 msgid "Exclude Filters:"
-msgstr "Εξαίρεση Φίλτρων:"
+msgstr "Φίλτρα Αποκλεισμού:"
 
 #: ../src/MadFindInFilesDialog.cpp:192
 msgid "File Encoding:"
@@ -2822,9 +2822,9 @@ msgid "Choose a directory"
 msgstr "Επιλογή ενός καταλόγου"
 
 #: ../src/MadFindInFilesDialog.cpp:594
-#, fuzzy, c-format
+#, c-format
 msgid "Found %s file(s) matched the filters..."
-msgstr "Βρέθηκαν %d αρχείο(-α) που τεριάζουν στα φίλτρα..."
+msgstr "Πλήθος αρχείων που ταιριάζουν στα φίλτρα: %s ..."
 
 #: ../src/MadFindInFilesDialog.cpp:623
 msgid "The selected directory does not exist."
@@ -2928,7 +2928,7 @@ msgstr "Εκκαθάριση των Ιστορικών"
 
 #: ../src/MadPurgeHistoryDialog.cpp:61
 msgid "Recent &Files"
-msgstr "Πρόσφατα Α&ρχεία"
+msgstr "Πρόσ&φατα Αρχεία"
 
 #: ../src/MadPurgeHistoryDialog.cpp:64
 msgid "Recent Fon&ts"
@@ -2948,7 +2948,7 @@ msgstr "Π&ρόσφατα Αντικαταστημένα Κείμενα"
 
 #: ../src/MadPurgeHistoryDialog.cpp:76
 msgid "Recent Searched &Directories"
-msgstr "Πρόσ&φατοι Αναζητημένοι Κατάλογοι"
+msgstr "Πρόσφατοι Ανα&ζητημένοι Κατάλογοι"
 
 #: ../src/MadPurgeHistoryDialog.cpp:79
 msgid "Recent Searched File Fi&lters"
@@ -3117,9 +3117,9 @@ msgid "Preparing %s of %s results..."
 msgstr "Προετοιμασία %s από %s αποτελέσματα..."
 
 #: ../src/MadSearchReplaceDialog.cpp:1446
-#, fuzzy, c-format
+#, c-format
 msgid "Line(%d-%d)"
-msgstr "Γραμμή(%d): "
+msgstr "Γραμμή(%d-%d)"
 
 #: ../src/MadSearchReplaceDialog.cpp:1451
 #, fuzzy, c-format
@@ -3746,9 +3746,8 @@ msgid "[%b] Abbreviated month name"
 msgstr "[%b] Η συντομογραφία του ονόματος του μήνα"
 
 #: ../src/MadOptionsDialog.cpp:993
-#, fuzzy
 msgid "[%B] Full month name"
-msgstr "[%b] Η συντομογραφία του ονόματος του μήνα"
+msgstr "[%B] Ολόκληρο το όνομα του μήνα"
 
 #: ../src/MadOptionsDialog.cpp:994
 #, c-format
@@ -3832,9 +3831,8 @@ msgid "[%z] Time-zone name"
 msgstr "[%z] Το όνομα της ωρολογιακής ζώνης"
 
 #: ../src/MadOptionsDialog.cpp:1011
-#, fuzzy
 msgid "[%Z] Time-zone abbreviation"
-msgstr "[%z] Το όνομα της ωρολογιακής ζώνης"
+msgstr "[%Z] Συντομογραφία της ωρολογιακής ζώνης"
 
 #: ../src/MadOptionsDialog.cpp:1013
 #, c-format
