@@ -8536,7 +8536,7 @@ void MadEditFrame::OnToolsSaveRecMacro( wxCommandEvent& event )
 			if( total )
 			{
 				scriptfile.AddLine( wxT( "####====Todo:Add some help string for this====" ) );
-				scriptfile.AddLine( wxT( "#Use ####! as the prefix of the hotkey, eg ####!Ctrl-Shift-1, Ctrl, Shift, Alt" ) );
+				scriptfile.AddLine( wxT( "#Use ####! as the prefix of the hotkey, eg ####!Ctrl-Shift-1 Ctrl, Shift, Alt are keys" ) );
 				scriptfile.AddLine( wxT( "#Create MadEdit Object for active edit" ) );
 				scriptfile.AddLine( wxT( "medit = MadEdit()" ) );
 				scriptfile.AddLine( wxT( "" ) );
