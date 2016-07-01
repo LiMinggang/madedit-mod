@@ -279,7 +279,7 @@ public:
 			m_ShortCutMap->insert(MadKeyBindingMap::value_type(shortcut, kb));
 		}
 	}
-	void Add(MadEditShortCut shortcut, MadEditCommand cmd, bool	overwrite, bool	first =	false)
+	void Add(MadEditShortCut shortcut, MadEditCommand cmd, bool overwrite, bool first = false)
 	{
 		MadKeyBindingMap::iterator scit	= m_ShortCutMap->find(shortcut);
 		if(scit	== m_ShortCutMap->end())

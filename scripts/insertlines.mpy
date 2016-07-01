@@ -1,3 +1,6 @@
+####Insert/remove empty lines
+####!Ctrl-Shift-1
+
 #Create MadEdit Object for the active edit
 medit = MadEdit()
 

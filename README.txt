@@ -126,6 +126,7 @@ New: Set toolbar to 3 columns to let user who has a small display have a chance 
 New: Use icon to mark readonly flag
 New: Replace toolbar icons with Silk icon set from Mark James(www.famfamfam.com) and Fugue(http://p.yusukekamiyamane.com/)
 New: Change default color of space/tab/carrige/return to Gray
+New: Use hotkey to launch the macro saved #208
 Fix: Move recent files tool bar item from Quick search to Standard
 Fix: Apply AuiNoteBook fix from wxWidgets dev(http://trac.wxwidgets.org/ticket/17551)
 Fix: Display replace all result on Status bar instead of an annoying dialog
