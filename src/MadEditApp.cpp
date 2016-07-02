@@ -571,13 +571,13 @@ bool MadEditApp::OnCmdLineParsed( wxCmdLineParser& cmdParser )
 	m_ForceEdit  = cmdParser.Found( wxT( "f" ) );
 	cmdParser.Found( wxT( "m" ), &m_MadPythonScript );
 
-	if( !m_MadPythonScript.IsEmpty() )
+	/*if( !m_MadPythonScript.IsEmpty() )
 	{
 		filename = m_MadPythonScript;
 
 		if( ( filename.GetPath() ).IsEmpty() )
 			m_MadPythonScript = g_MadEditHomeDir + wxT( "scripts" ) + wxFILE_SEP_PATH +  m_MadPythonScript;
-	}
+	}*/
 
 	// parse commandline to filenames, every file is with a trailing char '|', ex: filename1|filename2|
 	m_FileNames.Empty();

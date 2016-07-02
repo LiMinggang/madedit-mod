@@ -1120,6 +1120,34 @@ void OnReceiveMessage( const wchar_t *msg, size_t size, bool activeFile/* = true
 	if( mpScript.IsEmpty() ) { use_script = false; }
 	else
 	{
+		wxFileName filename = mpScript;
+		
+		if( ( filename.GetPath() ).IsEmpty() )
+		{
+			wxString mfilename = g_MadEditAppDir + wxT( "scripts" ) + wxFILE_SEP_PATH +  mpScript;
+			if(wxFileExists(mfilename))
+			{
+				mpScript = mfilename;
+			}
+			else
+			{
+				mfilename = g_MadEditHomeDir + wxT( "scripts" ) + wxFILE_SEP_PATH +  mpScript;
+				if(wxFileExists(mfilename))
+				{
+					mpScript = mfilename;
+				}
+#if defined (DATA_DIR)
+				else
+				{
+					mfilename = wxT( DATA_DIR"/scripts" ) + wxFILE_SEP_PATH +  mpScript;
+					if(wxFileExists(mfilename))
+					{
+						mpScript = mfilename;
+					}
+				}
+#endif
+			}
+		}
 		wxTextFile scriptfile( mpScript );
 		scriptfile.Open( wxConvFile );
 		use_script = false;
@@ -1137,6 +1165,10 @@ void OnReceiveMessage( const wchar_t *msg, size_t size, bool activeFile/* = true
 			{ use_script = true;}
 
 			scriptfile.Close();
+		}
+		else
+		{
+			use_script = false;
 		}
 	}
 
@@ -3111,76 +3143,92 @@ void MadEditFrame::CreateGUIControls( void )
 
 	{
 		// enum all madpython files under scripts
-		wxString scriptsLibDir = g_MadEditHomeDir + wxT( "scripts" ) + wxFILE_SEP_PATH, filename;
-
-		if( wxDirExists( scriptsLibDir ) )
+		wxString scriptsLibDir, filename;
+		wxArrayString scriptsLibDirs;
+#if defined(__WXMSW__)
+		scriptsLibDirs.Add(g_MadEditAppDir + wxT( "scripts" ) + wxFILE_SEP_PATH);
+#elif defined(__WXGTK__) // linux
+		scriptsLibDirs.Add(g_MadEditAppDir + wxT( "scripts" ) + wxFILE_SEP_PATH);
+		scriptsLibDirs.Add(g_MadEditHomeDir + wxT( "scripts" ) + wxFILE_SEP_PATH);
+#if defined (DATA_DIR)
+		scriptsLibDirs.Add( wxT( DATA_DIR"/madedit-mod/scripts/" ) );
+#else
+		scriptsLibDirs.Add( wxT( "/usr/share/madedit-mod/scripts/" ) );
+#endif
+#endif
+		size_t count = scriptsLibDirs.GetCount();
+		for(size_t j = 0; j < count; ++j)
 		{
-			wxDir dir( scriptsLibDir );
-			static wxString hlp_prefix( wxT( "####" ) ), hotkey_prefix( wxT( "####!" ) );
-			size_t i = 0;
-			//bool hasHelp = false;
-			bool cont = dir.GetFirst( &filename, wxT( "*.mpy" ), wxDIR_FILES );
-
-			if( cont )
+			scriptsLibDir = scriptsLibDirs[j];
+			if( wxDirExists( scriptsLibDir ) )
 			{
-				g_Menu_MadMacro_Scripts->AppendSeparator();
-				g_tbMACRO_ptr->AddSeparator();
-			}
+				wxDir dir( scriptsLibDir );
+				static wxString hlp_prefix( wxT( "####" ) ), hotkey_prefix( wxT( "####!" ) );
+				size_t i = 0;
+				//bool hasHelp = false;
+				bool cont = dir.GetFirst( &filename, wxT( "*.mpy" ), wxDIR_FILES );
 
-			wxString scriptfname;
-			wxString help, firstLine, hotkey, mid_name;
-			int menuid = 0;
-			while( cont )
-			{
-				filename = scriptsLibDir + filename;
-				wxFileName fn( filename );
-				wxTextFile scriptfile( filename );
-				scriptfile.Open( wxConvFile );
-				menuid = menuMadScrip1 + int( i );
-				//hasHelp = false;
-
-				if( scriptfile.IsOpened() )
+				if( cont )
 				{
-					help.Empty();
-					firstLine = scriptfile.GetFirstLine();
+					g_Menu_MadMacro_Scripts->AppendSeparator();
+					g_tbMACRO_ptr->AddSeparator();
+				}
 
-					if( !firstLine.StartsWith( hlp_prefix, &help ) )
+				wxString scriptfname;
+				wxString help, firstLine, hotkey, mid_name;
+				int menuid = 0;
+				while( cont )
+				{
+					filename = scriptsLibDir + filename;
+					wxFileName fn( filename );
+					wxTextFile scriptfile( filename );
+					scriptfile.Open( wxConvFile );
+					menuid = menuMadScrip1 + int( i );
+					//hasHelp = false;
+
+					if( scriptfile.IsOpened() )
 					{
 						help.Empty();
-						if( !firstLine.StartsWith( hotkey_prefix, &hotkey ) )
+						firstLine = scriptfile.GetFirstLine();
+
+						if( !firstLine.StartsWith( hlp_prefix, &help ) )
 						{
-							hotkey.Empty();
-						}
-					}
-					else
-					{
-						firstLine = scriptfile.GetNextLine();
-						if( !firstLine.StartsWith( hotkey_prefix, &hotkey ) )
-						{
-							hotkey.Empty();
+							help.Empty();
+							if( !firstLine.StartsWith( hotkey_prefix, &hotkey ) )
+							{
+								hotkey.Empty();
+							}
 						}
 						else
 						{
-							mid_name.Printf(wxT("menuMadScrip%s"), (wxLongLong( i ).ToString() ).c_str());
-							hotkey = GetMenuKey(mid_name, hotkey);
+							firstLine = scriptfile.GetNextLine();
+							if( !firstLine.StartsWith( hotkey_prefix, &hotkey ) )
+							{
+								hotkey.Empty();
+							}
+							else
+							{
+								mid_name.Printf(wxT("menuMadScrip%s"), (wxLongLong( i ).ToString() ).c_str());
+								hotkey = GetMenuKey(mid_name, hotkey);
+							}
 						}
+
+						scriptfile.Close();
+						scriptfname = fn.GetName();
+						wxMenuItem * mit = new wxMenuItem( g_Menu_MadMacro_Scripts, menuid, scriptfname+hotkey, help, wxITEM_NORMAL );
+						mit->SetBitmap( m_ImageList->GetBitmap( mpython_xpm_idx ) );
+						g_Menu_MadMacro_Scripts->Append( mit );
+						//g_Menu_MadMacro_Scripts->Append( menuMadScrip1 + int( i ), scriptfname, help );
+						mit = new wxMenuItem( g_Menu_MadMacro_ScriptsPop, menuid, scriptfname+hotkey, help, wxITEM_NORMAL );
+						mit->SetBitmap( m_ImageList->GetBitmap( mpython_xpm_idx ) );
+						g_Menu_MadMacro_ScriptsPop->Append( mit );
+						//g_Menu_MadMacro_ScriptsPop->Append( menuMadScrip1 + int( i ), scriptfname, help );
+						g_tbMACRO_ptr->AddTool( menuid, _T( "Macro" ), m_ImageList->GetBitmap( mpython_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, scriptfname, help, NULL );
+						if(++i > (MAX_MADSCRIPT_LOAD)) break;
 					}
 
-					scriptfile.Close();
-					scriptfname = fn.GetName();
-					wxMenuItem * mit = new wxMenuItem( g_Menu_MadMacro_Scripts, menuid, scriptfname+hotkey, help, wxITEM_NORMAL );
-					mit->SetBitmap( m_ImageList->GetBitmap( mpython_xpm_idx ) );
-					g_Menu_MadMacro_Scripts->Append( mit );
-					//g_Menu_MadMacro_Scripts->Append( menuMadScrip1 + int( i ), scriptfname, help );
-					mit = new wxMenuItem( g_Menu_MadMacro_ScriptsPop, menuid, scriptfname+hotkey, help, wxITEM_NORMAL );
-					mit->SetBitmap( m_ImageList->GetBitmap( mpython_xpm_idx ) );
-					g_Menu_MadMacro_ScriptsPop->Append( mit );
-					//g_Menu_MadMacro_ScriptsPop->Append( menuMadScrip1 + int( i ), scriptfname, help );
-					g_tbMACRO_ptr->AddTool( menuid, _T( "Macro" ), m_ImageList->GetBitmap( mpython_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, scriptfname, help, NULL );
-					if(++i > (MAX_MADSCRIPT_LOAD)) break;
+					cont = dir.GetNext( &filename );
 				}
-
-				cont = dir.GetNext( &filename );
 			}
 		}
 	}
