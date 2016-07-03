@@ -8694,10 +8694,12 @@ void MadEditFrame::OnToolsMadScriptList( wxCommandEvent& event )
 {
 	if( g_ActiveMadEdit != NULL )
 	{ 
-		wxString filename = g_MadEditAppDir + wxT( "scripts" ) + wxFILE_SEP_PATH;
+		wxString scriptdir = g_MadEditAppDir + wxT( "scripts" ) + wxFILE_SEP_PATH;
 		int menuId = event.GetId();
-		filename += g_Menu_MadMacro_Scripts->GetLabelText( menuId ) + wxT( ".mpy" );
-		wxTextFile scriptfile( filename );
+		wxString filename = g_Menu_MadMacro_Scripts->GetLabelText( menuId ) + wxT( ".mpy" );
+		wxString scripfile = scriptdir + filename;
+		if(!wxFileExists(scripfile)) scripfile = g_MadEditHomeDir + wxT( "scripts" ) + wxFILE_SEP_PATH + filename;
+		wxTextFile scriptfile( scripfile );
 		scriptfile.Open( wxConvFile );
 
 		if( scriptfile.IsOpened() )

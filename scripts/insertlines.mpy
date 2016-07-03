@@ -14,20 +14,15 @@ elif medit.GetInsertNewLineType() == MadNewLineType.Unix:
 result = InputBox("Please input how many lines you want to insert:", "Input lines")
 try:
     if len(result) > 0:
-        ng = result[0]
-        neg = False
-        if ng == '-':
-            result = result[1:]
-            neg = True
         num = int(result)
         if num > 0:
-            if neg == False:
-                lines = newline * num
-                medit.InsertStr(lines)
-            else :
-                if num != 0:
-                    for i in range(num):
-                        medit.DeleteLine()
+            lines = newline * num
+            medit.InsertStr(lines)
+        else :
+            if num != 0:
+                num = 0 - num
+                for i in range(num):
+                    medit.DeleteLine()
             #MsgBox("Input Wrong numbers: "+result, "ERROR", MadDlgStyle.ICON_ERROR_HAND_STOP | MadDlgStyle.OK)
 except:
     MsgBox("Input Wrong numbers: "+result, "ERROR", MadDlgStyle.ICON_ERROR_HAND_STOP | MadDlgStyle.OK)
