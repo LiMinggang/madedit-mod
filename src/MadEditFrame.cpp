@@ -8699,6 +8699,17 @@ void MadEditFrame::OnToolsMadScriptList( wxCommandEvent& event )
 		wxString filename = g_Menu_MadMacro_Scripts->GetLabelText( menuId ) + wxT( ".mpy" );
 		wxString scripfile = scriptdir + filename;
 		if(!wxFileExists(scripfile)) scripfile = g_MadEditHomeDir + wxT( "scripts" ) + wxFILE_SEP_PATH + filename;
+		if(!wxFileExists(scripfile)) 
+		{
+			scripfile = 
+#if defined (DATA_DIR)
+				wxT( DATA_DIR"/madedit-mod/scripts/" ) +
+#else
+			 	wxT( "/usr/share/madedit-mod/scripts/" ) +
+#endif
+			filename;
+		}
+
 		wxTextFile scriptfile( scripfile );
 		scriptfile.Open( wxConvFile );
 

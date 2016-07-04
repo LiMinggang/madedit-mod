@@ -16,7 +16,7 @@ A. Linux, FreeBSD, and Unix-like OS (__WXGTK__):
       1. wxWidgets-3.1.0 or higher with Unicode and IPC enabled
       2. Boost-1.56.0 or higher(build Boost-Python)(1.61 is recommended)
 
-      (install gtk2-devel gtext-devel automake rpm-build)
+      (install gtk2-devel/libgtk-3-dev gtext-devel automake rpm-build)
       copy wxwin.m4 to usr/share/acloXXX/ or install wxGTK-devel
 
 B. MS Windows (__WXMSW__):
@@ -133,6 +133,7 @@ Fix: Apply AuiNoteBook fix from wxWidgets dev(http://trac.wxwidgets.org/ticket/1
 Fix: Display replace all result on Status bar instead of an annoying dialog
 Fix: Add default pos to tool bars in order that tool bar would be in the pos expected
 Add more Icons
+Update license information
 Note: The Quick search bar would be larger than expected because of removing the recent file list button. Please reset the
 toolbar (and re-arrange it---it would be saved) by Tools->Purge History->Reset Toolbar position
 
