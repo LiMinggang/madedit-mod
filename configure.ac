@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
-AC_INIT([madedit-mod], [0.3.9], [minggang.li@gmail.com])
+AC_INIT([madedit-mod], [0.4.4], [minggang.li@gmail.com])
 AC_CONFIG_SRCDIR([src/MadEditApp.cpp])
 AC_CONFIG_HEADER([config.h])
 AC_PREFIX_DEFAULT([/usr])
@@ -19,7 +19,7 @@ AC_PROG_CXX
 AC_PROG_INSTALL
 AC_LANG(C++)
 
-CXXFLAGS="-O2 -Wno-write-strings -fno-strict-aliasing"
+CXXFLAGS="-O2 -Wno-write-strings -fno-strict-aliasing -fPIC "
 
 # Checks for MacOS
 IS_MACOS=

@@ -16,7 +16,7 @@ A. Linux, FreeBSD, and Unix-like OS (__WXGTK__):
       1. wxWidgets-3.1.0 or higher with Unicode and IPC enabled
       2. Boost-1.56.0 or higher(build Boost-Python)(1.61 is recommended)
 
-      (install gtk2-devel/libgtk-3-dev gtext-devel automake rpm-build)
+      (install gtk2-devel/libgtk-3-dev(Ubuntu)/gtk3-devel(Fedora) gtext-devel automake rpm-build)
       copy wxwin.m4 to usr/share/acloXXX/ or install wxGTK-devel
 
 B. MS Windows (__WXMSW__):
@@ -43,8 +43,9 @@ P.S.: Please open a ticket for bug of MadEdit-Mod at
 MadEdit_Win2K is a build by VC++ 2005 express for Windows 2000.
 
 Example build under Linux
-Boost Python(1.61) add 'address-model=64' if build for 64 bit
-./bjam --with-python include="${HOME}/madedit-mod/minipython/Include" python-debugging=off threading=multi variant=release link=static runtime-link=static stage
+Boost Python(1.61) add 'address-model=64' if build for 64 bit and add ' cflags=-fPIC cxxflags=-fPIC ' if you got ". /usr/bin/ld: /usr/local/lib/libboost_python.a(list.o): relocation R_X86_64_32 against `.rodata.str1.1' can not be used when making a shared object; recompile with -fPIC
+/usr/local/lib/libboost_python.a: could not read symbols: Bad value"
+./b2 -j2 --with-python include="${HOME}/madedit-mod/minipython/Include" python-debugging=off threading=multi variant=release link=static runtime-link=static stage
 wxWidgets(3.1.0)
 ./configure --enable-unicode --disable-shared --with-libpng=builtin --with-zlib=builtin --with-expat=builtin --with-gtk3=yes --with-libiconv=no
 MadEdit-Mod
