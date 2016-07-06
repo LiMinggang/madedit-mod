@@ -12,7 +12,7 @@ About:
 MadPython is a minimized Python which is used as an embedded macro script for 
 automation of MadEdit-Mod. The Python is based on the work of Adie
 (http://www.adintr.com/article/blog/embedpython_source.html) and was updated 
-to Python 2.7.11. Lots of Python modules were removed to reduce the size of it. 
+to Python 2.7.12. Lots of Python modules were removed to reduce the size of it. 
 So, you may get errors while importing some of the standard modules. However, 
 I don't think it's a problem for the purpose to use it as a macro script language.
 
