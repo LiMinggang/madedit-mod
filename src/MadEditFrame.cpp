@@ -3134,7 +3134,7 @@ void MadEditFrame::CreateGUIControls( void )
 
 		m_Config->Read( td->panel_pos, &toolbarpos, wxEmptyString );
 		if(toolbarpos.IsEmpty())
-			ResetNormalToolBarPos(WxToolBar[td->toolbar_id], td->toolbarid_name, wxGetTranslation(td->caption), td->row);
+			ResetNormalToolBarPos(WxToolBar[td->toolbar_id], td->toolbarid_name, wxGetTranslation(td->caption), td->row, td->xpos);
 		else
 			RestoreAuiPanel(WxToolBar[td->toolbar_id], toolbarpos, true);
 
@@ -8342,7 +8342,7 @@ void MadEditFrame::OnToolsPurgeHistories( wxCommandEvent& event )
 			size_t n = 0;
 			while( td->toolbar_id >= 0 )
 			{
-				ResetNormalToolBarPos(WxToolBar[td->toolbar_id], td->toolbarid_name, wxGetTranslation(td->caption), td->row);
+				ResetNormalToolBarPos(WxToolBar[td->toolbar_id], td->toolbarid_name, wxGetTranslation(td->caption), td->row, td->xpos);
 				m_AuiManager.GetPane( m_QuickSearchBar ).Show(status_vec[n++]);
 				m_Config->DeleteEntry(td->panel_pos);
 				++td;
