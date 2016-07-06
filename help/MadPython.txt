@@ -32,6 +32,10 @@ Note:
 
     Not supported Python internal ojbects: bytearray, memoryobject
 
+Note:
+    You can still extend MadPython by writing a module for it just like the 
+    extention module for Python. Eg. https://docs.python.org/2/tutorial/modules.html
+
 C++ Key word|In Python's world
 ------------|------------------
 void        |No return value
