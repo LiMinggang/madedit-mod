@@ -28,6 +28,7 @@ MadEdit-Mod supports many useful functions, e.g. Bookmark, SyntaxHighlightings, 
 
 MadEdit-Mod is a continually maintained text/hex editor with bug fixes and improvements.
 
+%global debug_package %{nil}
 
 %prep
 %setup
