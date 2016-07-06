@@ -33,7 +33,6 @@
 
 #define SIGCHECK(PyTryBlock) 
 
-
 /* Normalize (remove leading zeros from) a long int object.
    Doesn't attempt to free the storage--in most cases, due to the nature
    of the algorithms used, this could save at most be one word anyway. */
@@ -4063,7 +4062,7 @@ long_subtype_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
     tmp = (PyLongObject *)long_new(&PyLong_Type, args, kwds);
     if (tmp == NULL)
         return NULL;
-    assert(PyLong_CheckExact(tmp));
+    assert(PyLong_Check(tmp));
     n = Py_SIZE(tmp);
     if (n < 0)
         n = -n;

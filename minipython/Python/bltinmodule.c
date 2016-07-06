@@ -552,7 +552,6 @@ builtin_compile(PyObject *self, PyObject *args, PyObject *kwds)
         length = PyString_GET_SIZE(tmp);
     }
 #endif
-
     else if (!PyObject_AsReadBuffer(cmd, (const void **)&str, &length)) {
         /* Copy to NUL-terminated buffer. */
         tmp = PyString_FromStringAndSize(str, length);
@@ -626,7 +625,7 @@ builtin_divmod(PyObject *self, PyObject *args)
 PyDoc_STRVAR(divmod_doc,
 "divmod(x, y) -> (quotient, remainder)\n\
 \n\
-Return the tuple ((x-x%y)/y, x%y).  Invariant: div*y + mod == x.");
+Return the tuple (x//y, x%y).  Invariant: div*y + mod == x.");
 
 
 static PyObject *

@@ -436,8 +436,7 @@ int _PyUnicode_Resize(PyUnicodeObject **unicode, Py_ssize_t length)
             return -1;
         Py_UNICODE_COPY(w->str, v->str,
                         length < v->length ? length : v->length);
-        Py_DECREF(*unicode);
-        *unicode = w;
+        Py_SETREF(*unicode, w);
         return 0;
     }
 
@@ -1205,12 +1204,12 @@ PyObject *PyUnicode_FromEncodedObject(register PyObject *obj,
         s = PyString_AS_STRING(obj);
         len = PyString_GET_SIZE(obj);
     }
-    //else if (PyByteArray_Check(obj)) {
-    //    /* Python 2.x specific */
-    //    PyErr_Format(PyExc_TypeError,
-    //                 "decoding bytearray is not supported");
-    //    return NULL;
-    //} 
+//    else if (PyByteArray_Check(obj)) {
+//        /* Python 2.x specific */
+//        PyErr_Format(PyExc_TypeError,
+//                     "decoding bytearray is not supported");
+//        return NULL;
+//    }
     else if (PyObject_AsCharBuffer(obj, &s, &len)) {
         /* Overwrite the error message with something more useful in
            case of a TypeError. */
@@ -1287,6 +1286,9 @@ PyObject *PyUnicode_AsDecodedObject(PyObject *unicode,
         PyErr_BadArgument();
         goto onError;
     }
+
+    if (PyErr_WarnPy3k("decoding Unicode is not supported in 3.x", 1) < 0)
+        goto onError;
 
     if (encoding == NULL)
         encoding = PyUnicode_GetDefaultEncoding();
@@ -3913,7 +3915,7 @@ static int is_dbcs_lead_byte(const char *s, int offset)
     const char *curr = s + offset;
 
     if (IsDBCSLeadByte(*curr)) {
-        const char *prev = (const char *)CharPrev((LPCSTR)s, (LPCSTR)curr);
+        const char *prev = CharPrev(s, curr);
         return (prev == curr) || !IsDBCSLeadByte(*prev) || (curr - prev == 2);
     }
     return 0;
@@ -6644,7 +6646,7 @@ unicode_hash(PyUnicodeObject *self)
     register long x;
 
 #ifdef Py_DEBUG
-//    assert(_Py_HashSecret_Initialized);
+    assert(_Py_HashSecret_Initialized);
 #endif
     if (self->hash != -1)
         return self->hash;
@@ -8630,7 +8632,10 @@ PyObject *PyUnicode_Format(PyObject *format,
                     }
                     else {
                         iobj = PyNumber_Int(v);
-                        if (iobj==NULL) iobj = PyNumber_Long(v);
+                        if (iobj==NULL) {
+                            PyErr_Clear();
+                            iobj = PyNumber_Long(v);
+                        }
                     }
                     if (iobj!=NULL) {
                         if (PyInt_Check(iobj)) {
