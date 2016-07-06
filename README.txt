@@ -135,6 +135,7 @@ Fix: Display replace all result on Status bar instead of an annoying dialog
 Fix: Add default pos to tool bars in order that tool bar would be in the pos expected
 Add more Icons
 Update license information
+Update MiniPython to Python 2.7.12
 Note: The Quick search bar would be larger than expected because of removing the recent file list button. Please reset the
 toolbar (and re-arrange it---it would be saved) by Tools->Purge History->Reset Toolbar position
 
