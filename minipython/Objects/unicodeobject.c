@@ -3915,7 +3915,7 @@ static int is_dbcs_lead_byte(const char *s, int offset)
     const char *curr = s + offset;
 
     if (IsDBCSLeadByte(*curr)) {
-        const char *prev = CharPrev(s, curr);
+        const char *prev = (const char *)CharPrev((LPCSTR)s, (LPCSTR)curr);
         return (prev == curr) || !IsDBCSLeadByte(*prev) || (curr - prev == 2);
     }
     return 0;
@@ -6646,7 +6646,7 @@ unicode_hash(PyUnicodeObject *self)
     register long x;
 
 #ifdef Py_DEBUG
-    assert(_Py_HashSecret_Initialized);
+//    assert(_Py_HashSecret_Initialized);
 #endif
     if (self->hash != -1)
         return self->hash;

@@ -1267,7 +1267,7 @@ string_hash(PyStringObject *a)
     register long x;
 
 #ifdef Py_DEBUG
-    assert(_Py_HashSecret_Initialized);
+ //   assert(_Py_HashSecret_Initialized);
 #endif
     if (a->ob_shash != -1)
         return a->ob_shash;
