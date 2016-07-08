@@ -108,6 +108,7 @@ Known issues:
     Eg. (?<=.)\s(?=.), will has issue to be replaced one by one. It's tricky and
     NP++ has the same issue too.
 4. HighlightWord would not work if the caret is at the end of the line
+5. Scroll function on Righ click menu of scroll bars #157(Only working on Windows)
 
 Feature/issues to be released
 -----------------------------
