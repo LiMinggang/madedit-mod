@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: madedit-mod 002\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-01 15:48+0300\n"
-"PO-Revision-Date: 2016-07-10 00:33+0300\n"
+"PO-Revision-Date: 2016-07-10 21:38+0300\n"
 "Last-Translator: Nikos Papadopoulos <nikos569@yahoo.com>\n"
 "Language-Team: Greek <231036448@freemail.gr>\n"
 "Language: el\n"
@@ -1901,7 +1901,7 @@ msgstr "Εισ&αγωγή LF/0A (UNIX/OSX)"
 #: ../src/MadEditFrame.cpp:2307
 msgid "Insert LF char when pressing Enter key"
 msgstr ""
-"Εισαγωγή του χαρακτήρα LF όταν πατιέται το κλειδί της εισαγωγής (Enter)"
+"Εισαγωγή του χαρακτήρα LF όταν πατιέται το κλειδί της Εισαγωγής (Enter)"
 
 #: ../src/MadEditFrame.cpp:2309
 msgid "Convert File &Encoding..."
@@ -2109,19 +2109,19 @@ msgstr "&Σχετικά με το MadEdit-Mod..."
 
 #: ../src/MadEditFrame.cpp:2346
 msgid "Move caret left one char"
-msgstr "Μετακίνηση της περισπωμένης αριστερά κατά ένα χαρακτήρα"
+msgstr "Μετακίνηση της περισπωμένης αριστερά, κατά ένα χαρακτήρα"
 
 #: ../src/MadEditFrame.cpp:2347
 msgid "Move caret right one char"
-msgstr "Μετακίνηση της περισπωμένης δεξιά κατά ένα χαρακτήρα"
+msgstr "Μετακίνηση της περισπωμένης δεξιά, κατά ένα χαρακτήρα"
 
 #: ../src/MadEditFrame.cpp:2348
 msgid "Move caret up one line"
-msgstr "Μετακίνηση της περισπωμένης πάνω κατά μία γραμμή"
+msgstr "Μετακίνηση της περισπωμένης πάνω, κατά μία γραμμή"
 
 #: ../src/MadEditFrame.cpp:2349
 msgid "Move caret down one line"
-msgstr "Μετακίνηση της περισπωμένης κάτω κατά μία γραμμή"
+msgstr "Μετακίνηση της περισπωμένης κάτω, κατά μία γραμμή"
 
 #: ../src/MadEditFrame.cpp:2350
 msgid "Go to begin of line"
@@ -2157,19 +2157,19 @@ msgstr "Μετάβαση στην επόμενη λέξη"
 
 #: ../src/MadEditFrame.cpp:2359
 msgid "Move caret left one char and select"
-msgstr "Μετακίνηση της περισπωμένης αριστερά κατά ένα χαρακτήρα και επέλεξε"
+msgstr "Μετακίνηση της περισπωμένης αριστερά, κατά ένα χαρακτήρα, και επέλεξε"
 
 #: ../src/MadEditFrame.cpp:2360
 msgid "Move caret right one char and select"
-msgstr "Μετακίνηση της περισπωμένης δεξιά κατά ένα χαρακτήρα και επέλεξε"
+msgstr "Μετακίνηση της περισπωμένης δεξιά, κατά ένα χαρακτήρα, και επέλεξε"
 
 #: ../src/MadEditFrame.cpp:2361
 msgid "Move caret up one line and select"
-msgstr "Μετακίνηση της περισπωμένης πάνω κατά μία γραμμή και επέλεξε"
+msgstr "Μετακίνηση της περισπωμένης πάνω, κατά μία γραμμή, και επέλεξε"
 
 #: ../src/MadEditFrame.cpp:2362
 msgid "Move caret down one line and select"
-msgstr "Μετακίνηση της περισπωμένης κάτω κατά μία γραμμή και επέλεξε"
+msgstr "Μετακίνηση της περισπωμένης κάτω, κατά μία γραμμή, και επέλεξε"
 
 #: ../src/MadEditFrame.cpp:2363
 msgid "Go to begin of line and select"
@@ -2429,11 +2429,11 @@ msgstr "Τρέξιμο Σεναρίων Εντολών"
 
 #: ../src/MadEditFrame.cpp:3210
 msgid "Find matched text next to caret"
-msgstr "Αναζήτηση του κειμένου που ταιριάζει μετά την περισπωμένη"
+msgstr "Αναζήτηση του κειμένου που ταιριάζει, μετά την περισπωμένη"
 
 #: ../src/MadEditFrame.cpp:3211
 msgid "Find matched text previous from caret"
-msgstr "Αναζήτηση του κειμένου που ταιριάζει πριν από την περισπωμένη"
+msgstr "Αναζήτηση του κειμένου που ταιριάζει, πριν από την περισπωμένη"
 
 #: ../src/MadEditFrame.cpp:3212
 msgid "Whole Word Only"
@@ -2596,7 +2596,7 @@ msgstr "Μετάβαση σε Γραμμή"
 #: ../src/MadEditFrame.cpp:6884
 #, c-format
 msgid "Position(0~%s): (you can input HexNumber: 0xNNN)"
-msgstr "Θέση(0~%s): (μπορείς να εισάγεις ΔεκαεξαδικόΑριθμό9: 0xNNN)"
+msgstr "Θέση(0~%s): (μπορείς να εισάγεις ΔεκαεξαδικόΑριθμό: 0xNNN)"
 
 #: ../src/MadEditFrame.cpp:6884
 msgid "Go To Position"
@@ -2857,7 +2857,7 @@ msgstr "Χρωματικό Θέμα:"
 
 #: ../src/MadHighlightingDialog.cpp:208
 msgid "You cannot modify the scheme with * sign."
-msgstr "Δεν μπορείς να μετατρέψεις ένα χρωματικό θέμα με το σύμβολο *"
+msgstr "Δεν μπορείς να μετατρέψεις το χρωματικό θέμα με το σύμβολο *"
 
 #: ../src/MadHighlightingDialog.cpp:212
 msgid "&Load"
@@ -3189,7 +3189,8 @@ msgstr "Μία Υπόσταση (απαιτείται επανεκκίνηση �
 
 #: ../src/MadOptionsDialog.cpp:298
 msgid "Record caret movements in undo list"
-msgstr "Καταγραφή των μετακινήσεων της περισπωμένης στο κατάστιχο αναιρέσεων"
+msgstr ""
+"Καταγραφή των μετακινήσεων της περισπωμένης στο κατάστιχο των αναιρέσεων"
 
 #: ../src/MadOptionsDialog.cpp:306
 msgid "Max file size to load whole file into memory"
@@ -3543,7 +3544,7 @@ msgstr ""
 #: ../src/MadOptionsDialog.cpp:841
 msgid "Indent multi-line preprocessor definitions ending with a backslash"
 msgstr ""
-"Εσοχή στους πολύ-γραμμους προσδιορισμούς προεπεξεργαστή, που τελειώνουν με "
+"Εσοχή στους πολλών γραμμών προσδιορισμούς προεπεξεργαστή, που τελειώνουν με "
 "πισωκάθετο"
 
 #: ../src/MadOptionsDialog.cpp:844
@@ -3557,7 +3558,8 @@ msgstr "Εσοχή στα σχόλια C++ που ξεκινούν στην στ
 #: ../src/MadOptionsDialog.cpp:851
 msgid "Minimal indent added when a header is built of multiple lines:"
 msgstr ""
-"Ελάχιστη εσοχή προστίθεται όταν μια κεφαλίδα χτίζεται από πολλαπλές γραμμές:"
+"Ελάχιστη εσοχή που προστίθεται όταν μια κεφαλίδα χτίζεται από πολλαπλές "
+"γραμμές:"
 
 #: ../src/MadOptionsDialog.cpp:858
 msgid "Maximum of # spaces to indent a continuation line (max. 120):"
@@ -3585,14 +3587,14 @@ msgstr "Προσθήκη αγκύλων σε υποθετικές δηλώσει
 
 #: ../src/MadOptionsDialog.cpp:877
 msgid "Add one line brackets to unbracketed one line conditional statements"
-msgstr "Προσθήκη αγκύλων μίας γραμμής σε υποθετικές δηλώσεις  χωρίς αγκύλες"
+msgstr "Προσθήκη αγκύλων μίας γραμμής σε υποθετικές δηλώσεις χωρίς αγκύλες"
 
 #: ../src/MadOptionsDialog.cpp:880
 msgid ""
 "Remove brackets from conditional statements (single statement on a single "
 "line)"
 msgstr ""
-"Απομάκρυνση των αγκύλων από υποθετικές δηλώσεις (μία δήλωση   σε μονή γραμμή)"
+"Απομάκρυνση των αγκύλων από υποθετικές δηλώσεις (μία δήλωση σε μονή γραμμή)"
 
 #: ../src/MadOptionsDialog.cpp:883
 msgid "Don't break one-line blocks"
@@ -3671,7 +3673,8 @@ msgstr ""
 
 #: ../src/MadOptionsDialog.cpp:944
 msgid "Remove extra space padding around parenthesis"
-msgstr "Απομάκρυνση του επιπλέον γεμίσματος διαστήματος γύρω από παρενθέσεις"
+msgstr ""
+"Απομάκρυνση του πλεονάζοντος γεμίσματος διαστήματος γύρω από παρενθέσεις"
 
 #: ../src/MadOptionsDialog.cpp:947
 msgid "Delete empty lines within a function or method"
@@ -4122,7 +4125,7 @@ msgstr "Μορφή"
 
 #: ../src/MadNumberDlg.cpp:108
 msgid "DEC"
-msgstr "ΔΕΚ"
+msgstr "ΔΕΚΑΔ"
 
 #: ../src/MadNumberDlg.cpp:109
 msgid "HEX"
