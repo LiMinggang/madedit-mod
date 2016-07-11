@@ -295,7 +295,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxCheckBoxSingleInstance = new wxCheckBox( WxNoteBookPage1, ID_WXCHECKBOXSINGLEINSTANCE, _( "Single Instance (must restart MadEdit)" ), wxPoint( 2, 2 ), wxSize( 300, 20 ), 0, wxDefaultValidator, wxT( "WxCheckBoxSingleInstance" ) );
 	WxBoxSizer4->Add( WxCheckBoxSingleInstance, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
 	SET_CONTROLPARENT( WxCheckBoxSingleInstance );
-	WxCheckBoxRecordCaretMovements = new wxCheckBox( WxNoteBookPage1, ID_WXCHECKBOXRECORDCARETMOVEMENTS, _( "Record caret movements in undo list" ), wxPoint( 2, 26 ), wxSize( 300, 20 ), 0, wxDefaultValidator, wxT( "WxCheckBoxRecordCaretMovements" ) );
+	WxCheckBoxRecordCaretMovements = new wxCheckBox( WxNoteBookPage1, ID_WXCHECKBOXRECORDCARETMOVEMENTS, _( "Record caret movements" ), wxPoint( 2, 26 ), wxSize( 300, 20 ), 0, wxDefaultValidator, wxT( "WxCheckBoxRecordCaretMovements" ) );
 	WxBoxSizer4->Add( WxCheckBoxRecordCaretMovements, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
 	SET_CONTROLPARENT( WxCheckBoxRecordCaretMovements );
 	WxBoxSizer5 = new wxBoxSizer( wxHORIZONTAL );
