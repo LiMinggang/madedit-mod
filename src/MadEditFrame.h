@@ -170,6 +170,9 @@ public:
 	void OnUpdateUI_MenuIndent( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuComment( wxUpdateUIEvent& event );
 
+	void OnUpdateUI_MenuSearchGoBack( wxUpdateUIEvent& event );
+	void OnUpdateUI_MenuSearchGoForward( wxUpdateUIEvent& event );
+
 	void OnUpdateUI_MenuSearchGoToBrace( wxUpdateUIEvent& event );
 
 	void OnUpdateUI_MenuViewEncoding( wxUpdateUIEvent& event );
@@ -315,6 +318,8 @@ public:
 	void OnSearchShowFindInFilesResults( wxCommandEvent& event );
 	void OnSearchGoToLine( wxCommandEvent& event );
 	void OnSearchGoToPosition( wxCommandEvent& event );
+	void OnSearchGoBack( wxCommandEvent& event );
+	void OnSearchGoForward( wxCommandEvent& event );
 	void OnSearchGoToLeftBrace( wxCommandEvent& event );
 	void OnSearchGoToRightBrace( wxCommandEvent& event );
 	void OnSearchQuickFind( wxCommandEvent& event );
@@ -602,6 +607,8 @@ enum   // menu id
     menuCollapseAllResults,
     menuGoToLine,
 	menuGoToPosition,
+    menuGoBack,
+    menuGoForward,
 	menuLeftBrace,
 	menuRightBrace,
 	menuToggleBookmark,       // add: gogo, 21.09.2009

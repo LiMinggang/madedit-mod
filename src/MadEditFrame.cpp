@@ -294,9 +294,13 @@
 #define prevwin_xpm_idx (togglewin_xpm_idx+1)
 #include "../images/nextwin.xpm"
 #define nextwin_xpm_idx (prevwin_xpm_idx+1)
+#include "../images/goback.xpm"
+#define goback_xpm_idx (nextwin_xpm_idx+1)
+#include "../images/goforward.xpm"
+#define goforward_xpm_idx (goback_xpm_idx+1)
 
 /*#include "../images/.xpm"
-#define _xpm_idx (_xpm_idx+1)*/
+#define _xpm_idx (navifwd_xpm_idx+1)*/
 
 #define MADMINUTES (60*1000)
 
@@ -317,7 +321,7 @@ char ** g_MadIcons[] =
 	&pagesetup_xpm[0], &fullscreen_xpm[0], &scriptedit_xpm[0], &syntax_xpm[0], &folderfind_xpm[0], &post_it_xpm[0],
 	&report_xpm[0], &scriptcode_xpm[0], &encoding_xpm[0], &help_xpm[0], &linuxlogo_xpm[0], &maclogo_xpm[0], &windowslogo_xpm[0],
 	&filehandle_xpm[0], &qfind_xpm[0], &goposition_xpm[0], &cplusplus_xpm[0], &markdown_xpm[0], &html_xpm[0], &xml_xpm[0],
-	&plaintext_xpm[0], &togglewin_xpm[0], &prevwin_xpm[0], &nextwin_xpm[0],
+	&plaintext_xpm[0], &togglewin_xpm[0], &prevwin_xpm[0], &nextwin_xpm[0], &goback_xpm[0], &goforward_xpm[0],
 };
 
 extern void ScanForLocales();
@@ -1690,6 +1694,8 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_UPDATE_UI( menuReplace, MadEditFrame::OnUpdateUI_MenuCheckWritable )
 	EVT_UPDATE_UI( menuGoToLine, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
 	EVT_UPDATE_UI( menuGoToPosition, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
+	EVT_UPDATE_UI( menuGoBack, MadEditFrame::OnUpdateUI_MenuSearchGoBack )
+	EVT_UPDATE_UI( menuGoForward, MadEditFrame::OnUpdateUI_MenuSearchGoForward )
 	EVT_UPDATE_UI( menuLeftBrace, MadEditFrame::OnUpdateUI_MenuSearchGoToBrace )
 	EVT_UPDATE_UI( menuRightBrace, MadEditFrame::OnUpdateUI_MenuSearchGoToBrace )
 	EVT_UPDATE_UI( menuToggleBookmark, MadEditFrame::OnUpdateUI_Menu_CheckTextFile )
@@ -1854,6 +1860,8 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_MENU( menuShowFindInFilesResults, MadEditFrame::OnSearchShowFindInFilesResults )
 	EVT_MENU( menuGoToLine, MadEditFrame::OnSearchGoToLine )
 	EVT_MENU( menuGoToPosition, MadEditFrame::OnSearchGoToPosition )
+	EVT_MENU( menuGoBack, MadEditFrame::OnSearchGoBack )
+	EVT_MENU( menuGoForward, MadEditFrame::OnSearchGoForward )
 	EVT_MENU( menuLeftBrace, MadEditFrame::OnSearchGoToLeftBrace )
 	EVT_MENU( menuRightBrace, MadEditFrame::OnSearchGoToRightBrace )
 	EVT_MENU( menuToggleBookmark, MadEditFrame::OnSearchToggleBookmark )
@@ -2098,7 +2106,7 @@ CommandData CommandTable[] =
 	{ 0,                2, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0, &g_Menu_EditSubAdv, 0, 0, false},
 	{ 0,                2, menuInsertNumbers,            wxT( "menuInsertNumbers" ),            _( "Insert Incremental numbers..." ),           wxT( "Ctrl-Shift-N" ), wxITEM_NORMAL,    numbering_xpm_idx, 0,                     _( "Insert incremental numbers with step and padding at current caret" ), &g_Menu_EditSubAdv, &g_tbEDITOR_ptr, _( "Numbering and Bullets" ), false},
 	{ 0,                2, menuColumnAlignLeft,          wxT( "menuColumnAlignLeft" ),          _( "Column Align Left" ),                       wxT( "" ),             wxITEM_NORMAL,    alignleft_xpm_idx, 0,                     _( "Align selection to the left" ), &g_Menu_EditSubAdv, &g_tbEDITOR_ptr, _( "Align Left" ), false},
-	{ 0,                2, menuColumnAlignRight,         wxT( "menuColumnAlignRight" ),         _( "Column Align Right" ),                      wxT( "" ),             wxITEM_NORMAL,    alignright_xpm_idx, 0,                     _( "Align selection to the right" ), &g_Menu_EditSubAdv, &g_tbEDITOR_ptr, _( "Align Right" ), true},
+	{ 0,                2, menuColumnAlignRight,         wxT( "menuColumnAlignRight" ),         _( "Column Align Right" ),                      wxT( "" ),             wxITEM_NORMAL,    alignright_xpm_idx, 0,                     _( "Align selection to the right" ), &g_Menu_EditSubAdv, &g_tbEDITOR_ptr, _( "Align Right" ), false},
 	{ 0,                1, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0, 0, 0, 0, false},
 	{ 0,                1, menuSort,                     wxT( "menuSort" ),                     _( "&Sort" ),                                   0,                     wxITEM_NORMAL,    -1,                &g_Menu_Edit_Sort,     0, 0, 0, 0, false},
 	{ 0,                2, menuSortAscending,            wxT( "menuSortAscending" ),            _( "Sort Lines (&Ascending)" ),                 wxT( "" ),             wxITEM_NORMAL,    -1,                0,                     _( "Sort the selected or all lines in ascending order" ), &g_Menu_EditSubSort, 0, 0, false},
@@ -2117,7 +2125,7 @@ CommandData CommandTable[] =
 	{ 0,            1, menuFindPrevious,           wxT( "menuFindPrevious" ),           _( "Find &Previous" ),                                  wxT( "Ctrl-F3" ),      wxITEM_NORMAL,    findprev_xpm_idx, 0, _( "Find previous occurrence" ), 0, &g_tbSEARCHREPLACE_ptr, _( "Find Previous" ), false},
 	{ 0,            1, menuShowQuickSearchBar,     wxT( "menuShowQuickSearchBar" ),     _( "&Quick Find" ),                                     wxT( "F8" ),           wxITEM_NORMAL,    qfind_xpm_idx,    0, _( "Find a string instantly" ), 0, 0, 0, false},
 	{ 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0, 0, 0, 0, false},
-	{ 0,            1, menuReplace,                wxT( "menuReplace" ),                _( "&Replace..." ),                                     wxT( "Ctrl-H" ),       wxITEM_NORMAL,    replace_xpm_idx,  0, _( "Replace a string" ), 0, &g_tbSEARCHREPLACE_ptr, _( "Replace" ), false},
+	{ 0,            1, menuReplace,                wxT( "menuReplace" ),                _( "&Replace..." ),                                     wxT( "Ctrl-H" ),       wxITEM_NORMAL,    replace_xpm_idx,  0, _( "Replace a string" ), 0, &g_tbSEARCHREPLACE_ptr, _( "Replace" ), true},
 	{ 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0, 0, 0, 0, false},
 	{ 0,            1, menuFindInFiles,            wxT( "menuFindInFiles" ),            _( "Fin&d/Replace in Files..." ),                       wxT( "Ctrl-Shift-F" ), wxITEM_NORMAL,  folderfind_xpm_idx, 0, _( "Find or replace a string in files" ), 0, 0, 0, false},
 	{ 0,            1, menuShowFindInFilesResults, wxT( "menuShowFindInFilesResults" ), _( "&Show/Hide the Results of Find/Replace in Files" ), wxT( "Ctrl-Shift-R" ), wxITEM_NORMAL,    -1,               0, _( "Show or hide the results of find or replace a string in files" ), 0, 0, 0, false},
@@ -2126,13 +2134,16 @@ CommandData CommandTable[] =
 	{ 0,            1, menuGoToLine,               wxT( "menuGoToLine" ),               _( "&Go To Line..." ),                                  wxT( "Ctrl-G" ),       wxITEM_NORMAL,    -1,               0, _( "Go to the specified line" ), 0, 0, 0, false},
 	{ 0,            1, menuGoToPosition,           wxT( "menuGoToPosition" ),           _( "G&o To Position..." ),                              wxT( "Ctrl-Shift-G" ), wxITEM_NORMAL,    goposition_xpm_idx, 0, _( "Go to the specified position" ), 0, 0, 0, false},
 	{ 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0, 0, 0, 0, false},
+	{ 0,            1, menuGoBack,                 wxT( "menuGoBack" ),                 _( "Go Back" ),                                         wxT( "Alt-," ),        wxITEM_NORMAL,    goback_xpm_idx,    0, _( "Moves the caret to the previous location in the Selection History" ), 0, &g_tbSEARCHREPLACE_ptr, _( "Go Back(Alt-,)" ), false},
+	{ 0,            1, menuGoForward,              wxT( "menuGoForward" ),              _( "Go Forward" ),                                      wxT( "Alt-." ),        wxITEM_NORMAL,    goforward_xpm_idx, 0, _( "Moves the caret to the next location in the Selection History" ), 0, &g_tbSEARCHREPLACE_ptr, _( "Go Forward(Alt-.)" ), true},
+	{ 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0, 0, 0, 0, false},
 	{ ecLeftBrace,  1, menuLeftBrace,              wxT( "menuLeftBrace" ),              _( "Go To L&eft Brace" ),                               wxT( "Ctrl-[" ),       wxITEM_NORMAL,    -1,               0, _( "Go to left brace" ), 0, 0, 0, false},
 	{ ecRightBrace, 1, menuRightBrace,             wxT( "menuRightBrace" ),             _( "Go To R&ight Brace" ),                              wxT( "Ctrl-]" ),       wxITEM_NORMAL,    -1,               0, _( "Go to right brace" ), 0, 0, 0, false},
 	{ 0,            1, 0,                          0,                                 0,                                                    0,                   wxITEM_SEPARATOR, -1,               0, 0, 0, 0, 0, false},
-	{ 0,            1, menuToggleBookmark,         wxT( "menuToggleBookmark" ),         _( "Toggle/Remove Bookmark" ),                          wxT( "Ctrl-F2" ),      wxITEM_NORMAL,    bookmark_toggle_xpm_idx, 0,               _( "Toggle Bookmark at current line" ), 0, &g_tbEDITOR_ptr, _( "Toggle/Remove Bookmark" ), false},
-	{ 0,            1, menuGotoNextBookmark,       wxT( "menuGotoNextBookmark" ),       _( "Go To Next Bookmark" ),                             wxT( "F2" ),           wxITEM_NORMAL,    bookmark_next_xpm_idx,   0,               _( "Go to the next bookmark" ), 0, &g_tbEDITOR_ptr, _( "Go To Next Bookmark" ), false},
-	{ 0,            1, menuGotoPreviousBookmark,   wxT( "menuGotoPreviousBookmark" ),   _( "Go To Previous Bookmark" ),                         wxT( "Shift-F2" ),     wxITEM_NORMAL,    bookmark_prev_xpm_idx,   0,               _( "Go to the previous bookmark" ), 0, &g_tbEDITOR_ptr, _( "Go To Previous Bookmark" ), false},
-	{ 0,            1, menuClearAllBookmarks,      wxT( "menuClearAllBookmarks" ),      _( "Clear All Bookmarks" ),                             wxT( "" ),             wxITEM_NORMAL,    bookmark_clear_xpm_idx,  0,               _( "Clear All Bookmarks" ), 0, &g_tbEDITOR_ptr, _( "Clear All Bookmarks" ), false},
+	{ 0,            1, menuToggleBookmark,         wxT( "menuToggleBookmark" ),         _( "Toggle/Remove Bookmark" ),                          wxT( "Ctrl-F2" ),      wxITEM_NORMAL,    bookmark_toggle_xpm_idx, 0,               _( "Toggle Bookmark at current line" ), 0, &g_tbSEARCHREPLACE_ptr, _( "Toggle/Remove Bookmark" ), false},
+	{ 0,            1, menuGotoNextBookmark,       wxT( "menuGotoNextBookmark" ),       _( "Go To Next Bookmark" ),                             wxT( "F2" ),           wxITEM_NORMAL,    bookmark_next_xpm_idx,   0,               _( "Go to the next bookmark" ), 0, &g_tbSEARCHREPLACE_ptr, _( "Go To Next Bookmark" ), false},
+	{ 0,            1, menuGotoPreviousBookmark,   wxT( "menuGotoPreviousBookmark" ),   _( "Go To Previous Bookmark" ),                         wxT( "Shift-F2" ),     wxITEM_NORMAL,    bookmark_prev_xpm_idx,   0,               _( "Go to the previous bookmark" ), 0, &g_tbSEARCHREPLACE_ptr, _( "Go To Previous Bookmark" ), false},
+	{ 0,            1, menuClearAllBookmarks,      wxT( "menuClearAllBookmarks" ),      _( "Clear All Bookmarks" ),                             wxT( "" ),             wxITEM_NORMAL,    bookmark_clear_xpm_idx,  0,               _( "Clear All Bookmarks" ), 0, &g_tbSEARCHREPLACE_ptr, _( "Clear All Bookmarks" ), false},
 
 	// View
 	{ 0, 0, 0, 0, _( "&View" ), 0, wxITEM_NORMAL, 0, &g_Menu_View, 0, 0, 0, 0, false},
@@ -4817,6 +4828,16 @@ void MadEditFrame::OnUpdateUI_MenuSearchGoToBrace( wxUpdateUIEvent& event )
 	event.Enable( g_ActiveMadEdit != NULL && g_ActiveMadEdit->GetEditMode() != emHexMode && g_ActiveMadEdit->HasBracePair() );
 }
 
+void MadEditFrame::OnUpdateUI_MenuSearchGoBack( wxUpdateUIEvent& event )
+{
+	event.Enable( g_ActiveMadEdit && g_ActiveMadEdit->CanGoBack() );
+}
+
+void MadEditFrame::OnUpdateUI_MenuSearchGoForward( wxUpdateUIEvent& event )
+{
+	event.Enable( g_ActiveMadEdit && g_ActiveMadEdit->CanGoForward() );
+}
+
 void MadEditFrame::OnUpdateUI_MenuViewEncoding( wxUpdateUIEvent& event )
 {
 	if( g_ActiveMadEdit )
@@ -6995,6 +7016,28 @@ void MadEditFrame::OnSearchGoToPosition( wxCommandEvent& event )
 			if( IsMacroRecording() )
 				RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SetCaretPosition(%s)" ), ( wxPos1.ToString() ).c_str() ) );
 		}
+	}
+}
+
+void MadEditFrame::OnSearchGoBack( wxCommandEvent& event )
+{
+	if( g_ActiveMadEdit )
+	{
+		g_ActiveMadEdit->GoBack();
+
+		if( IsMacroRecording() )
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "GoBack()" ) ) );
+	}
+}
+
+void MadEditFrame::OnSearchGoForward( wxCommandEvent& event )
+{
+	if( g_ActiveMadEdit )
+	{
+		g_ActiveMadEdit->GoForward();
+
+		if( IsMacroRecording() )
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "GoForward()" ) ) );
 	}
 }
 

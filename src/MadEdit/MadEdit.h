@@ -275,6 +275,7 @@ private:
 	MadUndoBuffer   *m_UndoBuffer;
 	MadUndo         *m_SavePoint;
 	bool            m_RecordCaretMovements;
+	MadUndoBuffer   *m_CaretTracker;
 
 	bool            m_NeedSync;
 
@@ -934,13 +935,22 @@ public: // basic functions
 	void CopyToClipboard( const wxString & text ) {PutTextToClipboard( text );}
 
 	bool CanUndo() {
-		return m_UndoBuffer->CanUndo( !m_RecordCaretMovements );
+		return m_UndoBuffer->CanUndo( true/*!m_RecordCaretMovements*/ );
 	}
 	bool CanRedo() {
-		return m_UndoBuffer->CanRedo( !m_RecordCaretMovements );
+		return m_UndoBuffer->CanRedo( true/*!m_RecordCaretMovements*/ );
+	}
+
+	bool CanGoBack() {
+		return m_CaretTracker->CanUndo( false );
+	}
+	bool CanGoForward() {
+		return m_CaretTracker->CanRedo( false );
 	}
 	void Undo();
 	void Redo();
+    void GoBack();
+    void GoForward();
 
 	bool NeedSync() {return m_NeedSync;}
 	void SetNeedSync() {m_NeedSync = true;}

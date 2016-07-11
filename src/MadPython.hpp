@@ -1334,6 +1334,16 @@ namespace mad_python {
 			{ g_ActiveMadEdit->SetCaretPosition( ( wxFileOffset )pos, ( wxFileOffset )selbeg, ( wxFileOffset )selend ); }
 		}
 
+		void GoBack() {
+			if( g_ActiveMadEdit )
+			{ g_ActiveMadEdit->GoBack(); }
+		}
+
+		void GoForward() {
+			if( g_ActiveMadEdit )
+			{ g_ActiveMadEdit->GoForward(); }
+		}
+		
 		bool HasBracePair() {
 			if( g_ActiveMadEdit )
 			{ return g_ActiveMadEdit->HasBracePair(); }
@@ -1952,6 +1962,8 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.def( "HasBracePair", &PyMadEdit::HasBracePair, return_value_policy<return_by_value>(), "" )
 	.def( "GoToLeftBrace", &PyMadEdit::GoToLeftBrace, "" )
 	.def( "GoToRightBrace", &PyMadEdit::GoToRightBrace, "" )
+	.def( "GoBack", &PyMadEdit::GoBack, "" )
+	.def( "GoForward", &PyMadEdit::GoForward, "" )
 	.def( "SaveToFile", &PyMadEdit::SaveToFile, "" )
 	.def( "Reload", &PyMadEdit::Reload, "" )
 	.def( "ReloadByModificationTime", &PyMadEdit::ReloadByModificationTime, "" )

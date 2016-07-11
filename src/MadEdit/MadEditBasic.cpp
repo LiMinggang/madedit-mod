@@ -2410,6 +2410,39 @@ void MadEdit::SetCaretPosition( wxFileOffset pos, wxFileOffset selbeg, wxFileOff
 	DoSelectionChanged();
 }
 
+void MadEdit::GoBack()
+{
+	MadUndo *undo = m_CaretTracker->Undo( false );
+
+	if( undo == NULL )
+		return;
+
+	if( undo->m_Undos.empty() ) // caret movement undo
+	{
+		bool oldrcm = m_RecordCaretMovements;
+		m_RecordCaretMovements = false;
+		SetCaretPosition( undo->m_CaretPosBefore );
+		m_RecordCaretMovements = oldrcm;
+		return;
+	}
+}
+
+void MadEdit::GoForward()
+{
+	MadUndo *redo = m_CaretTracker->Redo( false );
+
+	if( redo == NULL )
+		return;
+
+	if( redo->m_Undos.empty() ) // caret movement redo
+	{
+		bool oldrcm = m_RecordCaretMovements;
+		m_RecordCaretMovements = false;
+		SetCaretPosition( redo->m_CaretPosAfter );
+		m_RecordCaretMovements = oldrcm;
+		return;
+	}
+}
 
 bool MadEdit::LoadFromFile( const wxString &filename, const wxString &encoding )
 {

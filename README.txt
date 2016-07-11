@@ -130,10 +130,12 @@ New: Replace toolbar icons with Silk icon set from Mark James(www.famfamfam.com)
 New: Change default color of space/tab/carrige/return to Gray
 New: Use hotkey to launch the macro saved #208
 New: Add app dir to script searching directories
+New: Seperate "goto the last edit position" and ¡°goto the next edit position¡±function from Undo #169 
 Fix: Move recent files tool bar item from Quick search to Standard
 Fix: Apply AuiNoteBook fix from wxWidgets dev(http://trac.wxwidgets.org/ticket/17551)
 Fix: Display replace all result on Status bar instead of an annoying dialog
 Fix: Add default pos to tool bars in order that tool bar would be in the pos expected
+Fix: Group Bookmark tools to SearchReplace Toolbar
 Add more Icons
 Update license information
 Update MiniPython to Python 2.7.12

@@ -810,8 +810,9 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_Config->ReadLong( wxT( "MaxSizeToLoad" ), 20 * 1000 * 1000 );
 	m_Config->ReadLong( wxT( "MaxTextFileSize" ), 10 * 1000 * 1000 );
 	m_UndoBuffer = new MadUndoBuffer();
+	m_CaretTracker = new MadUndoBuffer();
 	m_SavePoint = NULL;
-	m_RecordCaretMovements = m_Config->ReadBool( wxT( "RecordCaretMovements" ), false );
+	m_RecordCaretMovements = m_Config->ReadBool( wxT( "RecordCaretMovements" ), true );
 	m_Modified = false;
 	m_ModificationTime = 0;
 	m_ReadOnly = false;
@@ -991,6 +992,7 @@ MadEdit::~MadEdit()
 	delete m_Encoding;
 	delete m_Syntax;
 	delete m_UndoBuffer;
+	delete m_CaretTracker;
 	delete []m_WordBuffer;
 #ifdef __WXMSW__
 	delete []m_WCWordBuffer;
@@ -3831,7 +3833,7 @@ void MadEdit::SetSelection( wxFileOffset beginpos, wxFileOffset endpos, bool bCa
 
 	if( m_RecordCaretMovements && oldCaretPos != m_CaretPos.pos )
 	{
-		m_UndoBuffer->Add( oldCaretPos, m_CaretPos.pos );
+		m_CaretTracker->Add( oldCaretPos, m_CaretPos.pos );
 	}
 }
 
@@ -9736,7 +9738,7 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 			command > ecCaretCommandFirst && command < ecSelCommandLast &&
 			oldCaretPos != m_CaretPos.pos )
 	{
-		m_UndoBuffer->Add( oldCaretPos, m_CaretPos.pos );
+		m_CaretTracker->Add( oldCaretPos, m_CaretPos.pos );
 	}
 
 	m_AutoCompleteRightChar = NewAutoCompleteRightChar;
@@ -10144,7 +10146,7 @@ void MadEdit::OnMouseLeftDown( wxMouseEvent &evt )
 
 		if( m_RecordCaretMovements && oldCaretPos != m_CaretPos.pos )
 		{
-			m_UndoBuffer->Add( oldCaretPos, m_CaretPos.pos );
+			m_CaretTracker->Add( oldCaretPos, m_CaretPos.pos );
 		}
 	}
 
@@ -10266,7 +10268,7 @@ void MadEdit::OnMouseLeftDClick( wxMouseEvent &evt )
 
 	if( m_RecordCaretMovements && oldCaretPos != m_CaretPos.pos )
 	{
-		m_UndoBuffer->Add( oldCaretPos, m_CaretPos.pos );
+		m_CaretTracker->Add( oldCaretPos, m_CaretPos.pos );
 	}
 
 	evt.Skip();
@@ -10401,7 +10403,7 @@ void MadEdit::OnMouseMotion( wxMouseEvent &evt )
 
 			if( m_RecordCaretMovements && oldCaretPos != m_CaretPos.pos )
 			{
-				m_UndoBuffer->Add( oldCaretPos, m_CaretPos.pos );
+				m_CaretTracker->Add( oldCaretPos, m_CaretPos.pos );
 			}
 		}
 	}

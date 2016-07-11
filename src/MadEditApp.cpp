@@ -434,7 +434,6 @@ bool MadEditApp::OnInit()
 			dup2( fdnull, STDERR_FILENO );
 		}
 	}
-
 #endif
 
 	// init locale
