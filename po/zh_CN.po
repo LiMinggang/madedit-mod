@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.3.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-11 19:40+0800\n"
-"PO-Revision-Date: 2016-07-11 19:41+0800\n"
+"PO-Revision-Date: 2016-07-11 21:04+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit-mod@gmail.com>\n"
 "Language: zh_CN\n"
@@ -1418,27 +1418,27 @@ msgstr "跳到指定的位置"
 
 #: ../src/MadEditFrame.cpp:2137
 msgid "Go Back"
-msgstr ""
+msgstr "后退"
 
 #: ../src/MadEditFrame.cpp:2137
 msgid "Moves the caret to the previous location in the Selection History"
-msgstr ""
+msgstr "移动光标到上一个历史选中的位置"
 
 #: ../src/MadEditFrame.cpp:2137
 msgid "Go Back(Alt-,)"
-msgstr ""
+msgstr "后退(Alt-,)"
 
 #: ../src/MadEditFrame.cpp:2138
 msgid "Go Forward"
-msgstr ""
+msgstr "前进"
 
 #: ../src/MadEditFrame.cpp:2138
 msgid "Moves the caret to the next location in the Selection History"
-msgstr ""
+msgstr "移动光标到下一个历史选中的位置"
 
 #: ../src/MadEditFrame.cpp:2138
 msgid "Go Forward(Alt-.)"
-msgstr ""
+msgstr "前进(Alt-.)"
 
 #: ../src/MadEditFrame.cpp:2140
 msgid "Go To L&eft Brace"
