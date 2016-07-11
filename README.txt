@@ -76,7 +76,7 @@ Syntax files, Locale files, Dictionaries and Settings:
     Chinese Simplified (zh_CN)
     Chinese Traditional(zh_TW) (Not done)
     German(de_DE)              (Not done)
-    Greek(el)                  (Not done)
+    Greek(el)
     Italian(it_IT)             (Not done)
     Japanese(ja_JP)            (Not done)
     Polish(pl_PL)              (Not done)
@@ -138,6 +138,7 @@ Fix: Add default pos to tool bars in order that tool bar would be in the pos exp
 Fix: Group Bookmark tools to SearchReplace Toolbar
 Add more Icons
 Update license information
+Update Greek Translation
 Update MiniPython to Python 2.7.12
 Note: The Quick search bar would be larger than expected because of removing the recent file list button. Please reset the
 toolbar (and re-arrange it---it would be saved) by Tools->Purge History->Reset Toolbar position
