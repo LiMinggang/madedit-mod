@@ -5461,7 +5461,6 @@ void MadEdit::InsertString( const ucs4_t *ucs, size_t count, bool bColumnEditing
 			if( IsTextFile() )
 			{
 				size_t count = m_Lines->Reformat( lit, lit );
-				int subrowid = m_CaretPos.subrowid, oldlineid = m_CaretPos.lineid;
 				m_CaretPos.pos = undo->m_CaretPosAfter;
 				UpdateCaretByPos( m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
 
@@ -5470,7 +5469,7 @@ void MadEdit::InsertString( const ucs4_t *ucs, size_t count, bool bColumnEditing
 				{
 					if(m_TypewriterMode && (m_EditMode == emTextMode)) //Wrapped
 					{
-						++m_TopRow;
+						m_TopRow += (m_Lines->m_RowCount - oldrows);
 					}
 					m_RepaintAll = true;
 				}
