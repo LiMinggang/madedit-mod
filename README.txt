@@ -108,7 +108,7 @@ Known issues:
     Eg. (?<=.)\s(?=.), will has issue to be replaced one by one. It's tricky and
     NP++ has the same issue too.
 4. HighlightWord would not work if the caret is at the end of the line
-5. Scroll function on Righ click menu of scroll bars #157(Only working on Windows)
+5. Scroll function on Right click menu of scroll bars #157(Only working on Windows)
 
 Feature/issues to be released
 -----------------------------
@@ -128,15 +128,15 @@ New: Set toolbar to 3 columns to let user who has a small display have a chance 
 New: Use icon to mark readonly flag
 New: Replace toolbar icons with Silk icon set from Mark James(www.famfamfam.com) and Fugue(http://p.yusukekamiyamane.com/)
 New: Change default color of space/tab/carrige/return to Gray
-New: Use hotkey to launch the macro saved #208
+New: Use hot key to launch the macro saved #208
 New: Add app dir to script searching directories
-New: Seperate "goto the last edit position" and ¡°goto the next edit position¡±function from Undo #169 
+New: Separate "goto the last edit position" and ¡°goto the next edit position¡±function from Undo #169 
 Fix: Move recent files tool bar item from Quick search to Standard
 Fix: Apply AuiNoteBook fix from wxWidgets dev(http://trac.wxwidgets.org/ticket/17551)
 Fix: Display replace all result on Status bar instead of an annoying dialog
 Fix: Add default pos to tool bars in order that tool bar would be in the pos expected
 Fix: Group Bookmark tools to SearchReplace Toolbar
-Fix: Some config would be overidded
+Fix: Some config would be overridden
 Fix: When I paste some lines, the typewrite mode is not working #209 
 Add more Icons
 Update license information
