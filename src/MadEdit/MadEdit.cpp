@@ -2426,12 +2426,12 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 
 							if( !InPrinting() && reverseLineNum )
 							{
-								for( int i = 0; i < ncount; ++i, l += m_TextFontMaxDigitWidth )
+								for( unsigned int i = 0; i < ncount; ++i, l += m_TextFontMaxDigitWidth )
 								{
 									if( wcstr[i] != 0x20 ) break;
 								}
 
-								for( int i = ncount; i > 0; --i, l += m_TextFontMaxDigitWidth )
+								for(unsigned int i = ncount; i > 0; --i, l += m_TextFontMaxDigitWidth )
 								{
 									if( wcstr[i - 1] != 0x20 )
 									{
@@ -2443,7 +2443,7 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 							}
 							else
 							{
-								for( int i = 0; i < ncount; ++i, l += m_TextFontMaxDigitWidth )
+								for(unsigned int i = 0; i < ncount; ++i, l += m_TextFontMaxDigitWidth )
 								{
 									if( wcstr[i] != 0x20 )
 									{

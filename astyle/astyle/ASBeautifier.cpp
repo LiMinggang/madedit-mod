@@ -1,18 +1,28 @@
 // ASBeautifier.cpp
-// Copyright (c) 2015 by Jim Pattee <jimp03@email.com>.
-// Licensed under the MIT license.
+// Copyright (c) 2016 by Jim Pattee <jimp03@email.com>.
+// This code is licensed under the MIT License.
 // License.txt describes the conditions under which this software may be distributed.
 
+//-----------------------------------------------------------------------------
+// headers
+//-----------------------------------------------------------------------------
 
 #include "astyle.h"
 
 #include <algorithm>
 
+//-----------------------------------------------------------------------------
+// astyle namespace
+//-----------------------------------------------------------------------------
 
 namespace astyle {
-
+//
 // this must be global
 static int g_preprocessorCppExternCBracket;
+
+//-----------------------------------------------------------------------------
+// ASBeautifier class
+//-----------------------------------------------------------------------------
 
 /**
  * ASBeautifier's constructor
@@ -956,7 +966,7 @@ string ASBeautifier::beautify(const string& originalLine)
 		{
 			if (isInIndentablePreprocBlock)
 				return preLineWS(preprocBlockIndent, 0);
-			else if (!headerStack->empty() || isInEnum)
+			if (!headerStack->empty() || isInEnum)
 				return preLineWS(prevFinalLineIndentCount, prevFinalLineSpaceIndentCount);
 			// must fall thru here
 		}
@@ -1066,10 +1076,8 @@ string ASBeautifier::beautify(const string& originalLine)
 		// and then remove it from the active beautifier stack and delete it.
 		if (!backslashEndsPrevLine && isInDefineDefinition && !isInDefine)
 		{
-			ASBeautifier* defineBeautifier;
-
 			isInDefineDefinition = false;
-			defineBeautifier = activeBeautifierStack->back();
+			ASBeautifier* defineBeautifier = activeBeautifierStack->back();
 			activeBeautifierStack->pop_back();
 
 			string indentedLine = defineBeautifier->beautify(line);
@@ -1244,7 +1252,6 @@ string ASBeautifier::preLineWS(int lineIndentCount, int lineSpaceIndentCount) co
 void ASBeautifier::registerInStatementIndent(const string& line, int i, int spaceTabCount_,
                                              int tabIncrementIn, int minIndent, bool updateParenStack)
 {
-	int inStatementIndent;
 	int remainingCharNum = line.length() - i;
 	int nextNonWSChar = getNextProgramCharDistance(line, i);
 
@@ -1276,7 +1283,7 @@ void ASBeautifier::registerInStatementIndent(const string& line, int i, int spac
 			tabIncrement += convertTabToSpaces(j, tabIncrement);
 	}
 
-	inStatementIndent = i + nextNonWSChar + spaceTabCount_ + tabIncrement;
+	int inStatementIndent = i + nextNonWSChar + spaceTabCount_ + tabIncrement;
 
 	// check for run-in statement
 	if (i > 0 && line[0] == '{')
@@ -1371,7 +1378,7 @@ int ASBeautifier::getNextProgramCharDistance(const string& line, int i) const
 		{
 			if (line.compare(i + charDistance, 2, "//") == 0)
 				return remainingCharNum;
-			else if (line.compare(i + charDistance, 2, "/*") == 0)
+			if (line.compare(i + charDistance, 2, "/*") == 0)
 			{
 				charDistance++;
 				inComment = true;
@@ -1456,8 +1463,7 @@ int ASBeautifier::indexOf(vector<const string*>& container, const string* elemen
 	where = find(container.begin(), container.end(), element);
 	if (where == container.end())
 		return -1;
-	else
-		return (int) (where - container.begin());
+	return (int) (where - container.begin());
 }
 
 /**
@@ -1480,7 +1486,6 @@ int ASBeautifier::convertTabToSpaces(int i, int tabIncrementIn) const
  */
 string ASBeautifier::trim(const string& str) const
 {
-
 	int start = 0;
 	int end = str.length() - 1;
 
@@ -1680,7 +1685,8 @@ bool ASBeautifier::statementEndsWithComma(const string& line, int index) const
 			continue;
 		}
 
-		if (ch == '"' || ch == '\'')
+		if (ch == '"'
+		        || (ch == '\'' && !isDigitSeparator(line, i)))
 		{
 			isInQuote_ = true;
 			quoteChar_ = ch;
@@ -1960,14 +1966,12 @@ void ASBeautifier::processPreprocessor(const string& preproc, const string& line
 	{
 		if (!isInDefineDefinition)
 		{
-			ASBeautifier* defineBeautifier;
-
 			// this is the original beautifier
 			isInDefineDefinition = true;
 
 			// push a new beautifier into the active stack
 			// this beautifier will be used for the indentation of this define
-			defineBeautifier = new ASBeautifier(*this);
+			ASBeautifier* defineBeautifier = new ASBeautifier(*this);
 			activeBeautifierStack->push_back(defineBeautifier);
 		}
 		else
@@ -2007,8 +2011,8 @@ void ASBeautifier::processPreprocessor(const string& preproc, const string& line
 	}
 	else if (preproc == "endif")
 	{
-		int stackLength;
-		ASBeautifier* beautifier;
+		int stackLength = 0;
+		ASBeautifier* beautifier = NULL;
 
 		if (waitingBeautifierStackLengthStack != NULL && !waitingBeautifierStackLengthStack->empty())
 		{
@@ -2140,7 +2144,7 @@ void ASBeautifier::computePreliminaryIndentation()
 	        && (*headerStack)[headerStack->size() - 2] == &AS_CLASS
 	        && (*headerStack)[headerStack->size() - 1] == &AS_OPEN_BRACKET
 	        && lineBeginsWithCloseBracket
-	        && bracketBlockStateStack->back() == true)
+	        && bracketBlockStateStack->back())
 		--indentCount;
 
 	// unindent an indented switch closing bracket...
@@ -2377,7 +2381,9 @@ void ASBeautifier::parseCurrentLine(const string& line)
 			continue;
 
 		// handle quotes (such as 'x' and "Hello Dolly")
-		if (!(isInComment || isInLineComment) && (ch == '"' || ch == '\''))
+		if (!(isInComment || isInLineComment)
+		        && (ch == '"'
+		            || (ch == '\'' && !isDigitSeparator(line, i))))
 		{
 			if (!isInQuote)
 			{
@@ -3475,6 +3481,5 @@ void ASBeautifier::parseCurrentLine(const string& line)
 		}
 	}	// end of for loop * end of for loop * end of for loop * end of for loop * end of for loop *
 }
-
 
 }   // end namespace astyle

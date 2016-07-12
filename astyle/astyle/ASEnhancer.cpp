@@ -1,13 +1,23 @@
 // ASEnhancer.cpp
-// Copyright (c) 2015 by Jim Pattee <jimp03@email.com>.
-// Licensed under the MIT license.
+// Copyright (c) 2016 by Jim Pattee <jimp03@email.com>.
+// This code is licensed under the MIT License.
 // License.txt describes the conditions under which this software may be distributed.
 
+//-----------------------------------------------------------------------------
+// headers
+//-----------------------------------------------------------------------------
 
 #include "astyle.h"
 
+//-----------------------------------------------------------------------------
+// astyle namespace
+//-----------------------------------------------------------------------------
 
 namespace astyle {
+//
+//-----------------------------------------------------------------------------
+// ASEnhancer class
+//-----------------------------------------------------------------------------
 
 /**
  * ASEnhancer constructor
@@ -217,7 +227,8 @@ size_t ASEnhancer::findCaseColon(string& line, size_t caseIndex) const
 				continue;                           // must close quote before continuing
 			}
 		}
-		if (line[i] == '\'' || line[i] == '\"')		// check opening quote
+		if (line[i] == '"' 		// check opening quote
+		        || (line[i] == '\'' && !isDigitSeparator(line, i)))
 		{
 			isInQuote_ = true;
 			quoteChar_ = line[i];
@@ -248,7 +259,7 @@ int ASEnhancer::indentLine(string& line, int indent) const
 	        && !emptyLineFill)
 		return 0;
 
-	size_t charsToInsert;
+	size_t charsToInsert = 0;
 
 	if (forceTab && indentLength != tabLength)
 	{
@@ -418,7 +429,8 @@ bool ASEnhancer::isOneLineBlockReached(string& line, int startChar) const
 			continue;
 		}
 
-		if (ch == '"' || ch == '\'')
+		if (ch == '"'
+		        || (ch == '\'' && !isDigitSeparator(line, i)))
 		{
 			isInQuote_ = true;
 			quoteChar_ = ch;
@@ -481,7 +493,9 @@ void ASEnhancer::parseCurrentLine(string& line, bool isInPreprocessor, bool isIn
 		}
 
 		// handle quotes (such as 'x' and "Hello Dolly")
-		if (!isInComment && (ch == '"' || ch == '\''))
+		if (!isInComment
+		        && (ch == '"'
+		            || (ch == '\'' && !isDigitSeparator(line, i))))
 		{
 			if (!isInQuote)
 			{
@@ -778,6 +792,5 @@ int ASEnhancer::unindentLine(string& line, int unindent) const
 
 	return charsToErase;
 }
-
 
 }   // end namespace astyle

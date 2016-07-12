@@ -1,15 +1,21 @@
 // ASResource.cpp
-// Copyright (c) 2015 by Jim Pattee <jimp03@email.com>.
-// Licensed under the MIT license.
+// Copyright (c) 2016 by Jim Pattee <jimp03@email.com>.
+// This code is licensed under the MIT License.
 // License.txt describes the conditions under which this software may be distributed.
 
+//-----------------------------------------------------------------------------
+// headers
+//-----------------------------------------------------------------------------
 
 #include "astyle.h"
 #include <algorithm>
 
+//-----------------------------------------------------------------------------
+// astyle namespace
+//-----------------------------------------------------------------------------
 
 namespace astyle {
-
+//
 const string ASResource::AS_IF = string("if");
 const string ASResource::AS_ELSE = string("else");
 const string ASResource::AS_FOR = string("for");
@@ -570,7 +576,7 @@ bool ASBase::findKeyword(const string& line, int i, const string& keyword) const
 	if (isLegalNameChar(line[wordEnd]))
 		return false;
 	// is not a keyword if part of a definition
-	const char peekChar = peekNextChar(line, wordEnd - 1);
+	const char peekChar = peekNextChar(line, (int)wordEnd - 1);
 	if (peekChar == ',' || peekChar == ')')
 		return false;
 	return true;
@@ -589,6 +595,73 @@ string ASBase::getCurrentWord(const string& line, size_t index) const
 			break;
 	}
 	return line.substr(index, i - index);
+}
+
+// check if a specific character can be used in a legal variable/method/class name
+bool ASBase::isLegalNameChar(char ch) const
+{
+	if (isWhiteSpace(ch)) return false;
+	if ((unsigned) ch > 127) return false;
+	return (isalnum((unsigned char) ch)
+	        || ch == '.' || ch == '_'
+	        || (isJavaStyle() && ch == '$')
+	        || (isSharpStyle() && ch == '@'));  // may be used as a prefix
+}
+
+// check if a specific character can be part of a header
+bool ASBase::isCharPotentialHeader(const string& line, size_t i) const
+{
+	assert(!isWhiteSpace(line[i]));
+	char prevCh = ' ';
+	if (i > 0) prevCh = line[i - 1];
+	if (!isLegalNameChar(prevCh) && isLegalNameChar(line[i]))
+		return true;
+	return false;
+}
+
+// check if a specific character can be part of an operator
+bool ASBase::isCharPotentialOperator(char ch) const
+{
+	assert(!isWhiteSpace(ch));
+	if ((unsigned) ch > 127) return false;
+	return (ispunct((unsigned char) ch)
+	        && ch != '{' && ch != '}'
+	        && ch != '(' && ch != ')'
+	        && ch != '[' && ch != ']'
+	        && ch != ';' && ch != ','
+	        && ch != '#' && ch != '\\'
+	        && ch != '\'' && ch != '\"');
+}
+
+// check if a specific character is a digit
+// NOTE: Visual C isdigit() gives assert error if char > 256
+bool ASBase::isDigit(char ch) const
+{
+	return (ch >= '0' && ch <= '9');
+}
+
+// check if a specific character is a digit separator
+bool ASBase::isDigitSeparator(const string& line, int i) const
+{
+	assert(line[i] == '\'');
+	// casting to (unsigned char) eliminates negative characters
+	// will get a "Debug Assertion Failed" if not cast
+	bool foundDigitSeparator = i > 0
+	                           && isxdigit((unsigned char) line[i - 1])
+	                           && i < (int) line.length() - 1
+	                           && isxdigit((unsigned char) line[i + 1]);
+	return foundDigitSeparator;
+}
+
+// peek at the next unread character.
+char ASBase::peekNextChar(const string& line, int i) const
+{
+	char ch = ' ';
+	size_t peekNum = line.find_first_not_of(" \t", i + 1);
+	if (peekNum == string::npos)
+		return ch;
+	ch = line[peekNum];
+	return ch;
 }
 
 }   // end namespace astyle
