@@ -693,8 +693,9 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxStaticBoxSizer7->Add(WxStaticText27, 0, wxALIGN_LEFT | wxALIGN_TOP | wxALL, 5);
 #ifdef MADEDIT_ENABLE_MADEDIT
 	WxTextSample = new MadEdit(WxAuiNoteBookPage1, ID_WXRICHTEXTSAMPLE, wxPoint(19, 47), wxSize(300, 300));
+	WxTextSample->SetStorePropertiesToGlobalConfig(false);
 	WxTextSample->SetEncoding(wxT("UTF-32LE"));
-	WxTextSample->SetFixedWidthMode(false);
+	WxTextSample->SetFixedWidthMode(true);
 	WxTextSample->SetRecordCaretMovements(false);
 	WxTextSample->SetInsertSpacesInsteadOfTab(false);
 	WxTextSample->SetWantTab(false);
@@ -1256,9 +1257,9 @@ void MadOptionsDialog::LoadOptions( void )
 	ss = g_LanguageString[0];
 	cfg->Read( wxT( "Language" ), &ss );
 	WxComboBoxLanguage->SetValue( ss );
-	cfg->Read( wxT( "SingleInstance" ), &bb );
+	cfg->Read( wxT( "SingleInstance" ), &bb, false );
 	WxCheckBoxSingleInstance->SetValue( bb );
-	cfg->Read( wxT( "RecordCaretMovements" ), &bb );
+	cfg->Read( wxT( "RecordCaretMovements" ), &bb, true );
 	WxCheckBoxRecordCaretMovements->SetValue( bb );
 	cfg->Read( wxT( "MaxSizeToLoad" ), &ll );
 	WxEditMaxSizeToLoad->SetValue( wxString() << ll );

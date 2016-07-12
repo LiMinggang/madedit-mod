@@ -136,6 +136,7 @@ Fix: Apply AuiNoteBook fix from wxWidgets dev(http://trac.wxwidgets.org/ticket/1
 Fix: Display replace all result on Status bar instead of an annoying dialog
 Fix: Add default pos to tool bars in order that tool bar would be in the pos expected
 Fix: Group Bookmark tools to SearchReplace Toolbar
+Fix: Some config would be overidded
 Add more Icons
 Update license information
 Update Greek Translation
