@@ -124,25 +124,25 @@ FreeBSD packaging (with FreeBSD 10.01)
 3. stdc++ version
 
 Mod v0.4.4
-New: Set toolbar to 3 columns to let user who has a small display have a chance to re-org the toolbars
-New: Use icon to mark readonly flag
-New: Replace toolbar icons with Silk icon set from Mark James(www.famfamfam.com) and Fugue(http://p.yusukekamiyamane.com/)
-New: Change default color of space/tab/carrige/return to Gray
-New: Use hot key to launch the macro saved #208
-New: Add app dir to script searching directories
-New: Separate "goto the last edit position" and ¡°goto the next edit position¡±function from Undo #169 
-Fix: Move recent files tool bar item from Quick search to Standard
-Fix: Apply AuiNoteBook fix from wxWidgets dev(http://trac.wxwidgets.org/ticket/17551)
-Fix: Display replace all result on Status bar instead of an annoying dialog
-Fix: Add default pos to tool bars in order that tool bar would be in the pos expected
-Fix: Group Bookmark tools to SearchReplace Toolbar
-Fix: Some config would be overridden
-Fix: When I paste some lines, the typewrite mode is not working #209 
-Add more Icons
-Update license information
-Update Greek Translation
-Update MiniPython to Python 2.7.12
-Update Astyle code to latest
+1.New: Set toolbar to 3 columns to let user who has a small display have a chance to re-org the toolbars
+2.New: Use icon to mark readonly flag
+3.New: Replace toolbar icons with Silk icon set from Mark James(www.famfamfam.com) and Fugue(http://p.yusukekamiyamane.com/)
+4.New: Change default color of space/tab/carrige/return to Gray
+5.New: Use hotkey to launch the macro saved #208
+6.New: Add app dir to script searching directories
+7.New: Seperate "goto the last edit position" and ¡°goto the next edit position¡±function from Undo #169 
+8.Fix: Move recent files tool bar item from Quick search to Standard
+9.Fix: Apply AuiNoteBook fix from wxWidgets dev(http://trac.wxwidgets.org/ticket/17551)
+10.Fix: Display replace all result on Status bar instead of an annoying dialog
+11.Fix: Add default pos to tool bars in order that tool bar would be in the pos expected
+12.Fix: Group Bookmark tools to SearchReplace Toolbar
+13.Fix: Some config would be overidded
+14.Fix: When I paste some lines, the typewrite mode is not working #209 
+15.Add more Icons
+16.Update license information
+17.Update Greek Translation
+18.Update MiniPython to Python 2.7.12
+19. Upadate Astyle to latest
 Note: The Quick search bar would be larger than expected because of removing the recent file list button. Please reset the
 toolbar (and re-arrange it---it would be saved) by Tools->Purge History->Reset Toolbar position
 
