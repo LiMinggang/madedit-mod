@@ -142,7 +142,7 @@ Mod v0.4.4
 16.Update license information
 17.Update Greek Translation
 18.Update MiniPython to Python 2.7.12
-19. Upadate Astyle to latest
+19.Upadate Astyle to latest
 Note: The Quick search bar would be larger than expected because of removing the recent file list button. Please reset the
 toolbar (and re-arrange it---it would be saved) by Tools->Purge History->Reset Toolbar position
 
