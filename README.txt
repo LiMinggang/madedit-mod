@@ -123,6 +123,10 @@ FreeBSD packaging (with FreeBSD 10.01)
 2. aclocal version in aclocal.m4
 3. stdc++ version
 
+Mod v0.4.5
+New: File history dialog
+Other improvments
+
 Mod v0.4.4
 1.New: Set toolbar to 3 columns to let user who has a small display have a chance to re-org the toolbars
 2.New: Use icon to mark readonly flag

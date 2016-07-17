@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <wxsmith>
-	<object class="wxDialog" name="MadSaveQueryDialog">
-		<title>Save Modified Files</title>
+	<object class="wxDialog" name="MadFileHistoryDialog">
+		<title>Recent Opened Files</title>
 		<centered>1</centered>
 		<pos_arg>1</pos_arg>
 		<size_arg>1</size_arg>
@@ -35,30 +35,11 @@
 						<border>2</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxButton" name="ID_BUTTONSAVENONE" variable="ButtonSaveNone" member="yes">
-							<label>Save &amp;None</label>
-							<handler function="OnButtonSaveNoneClick" entry="EVT_BUTTON" />
-						</object>
-						<flag>wxALL|wxEXPAND</flag>
-						<border>2</border>
-					</object>
-					<object class="sizeritem">
 						<object class="wxButton" name="wxID_CANCEL" variable="ButtonCancel" member="yes">
 							<label>&amp;Cancel</label>
 							<handler function="OnButtonCancelClick" entry="EVT_BUTTON" />
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
-						<border>2</border>
-					</object>
-					<object class="sizeritem">
-						<object class="wxCheckBox" name="ID_CHECKBOXCONFIRM" variable="CheckBoxConfirm" member="yes">
-							<label>Confirm</label>
-						</object>
-						<flag>wxALL|wxEXPAND</flag>
-						<border>2</border>
-					</object>
-					<object class="spacer">
-						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>2</border>
 					</object>
 					<object class="sizeritem">
@@ -73,18 +54,6 @@
 						<object class="wxButton" name="ID_BUTTONDSELECTALL" variable="ButtonDselectAll" member="yes">
 							<label>&amp;Dselect All</label>
 							<handler function="OnButtonDselectAllClick" entry="EVT_BUTTON" />
-						</object>
-						<flag>wxALL|wxEXPAND</flag>
-						<border>2</border>
-					</object>
-					<object class="spacer">
-						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
-						<border>2</border>
-					</object>
-					<object class="sizeritem">
-						<object class="wxButton" name="ID_BUTTONGOTO" variable="ButtonGoTo" member="yes">
-							<label>&amp;Go To</label>
-							<handler function="OnButtonGoToClick" entry="EVT_BUTTON" />
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
 						<border>2</border>

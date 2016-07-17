@@ -236,6 +236,7 @@
     <ClInclude Include="..\..\src\MadEdit\TradSimp.h" />
     <ClInclude Include="..\..\src\MadEdit\ucs4_t.h" />
     <ClInclude Include="..\..\src\MadFileAssociationDialog.h" />
+    <ClInclude Include="..\..\src\MadFileHistoryDialog.h" />
     <ClInclude Include="..\..\src\MadFindInFilesDialog.h" />
     <ClInclude Include="..\..\src\MadHighlightingDialog.h" />
     <ClInclude Include="..\..\src\MadMacroDlg.h" />
@@ -321,6 +322,7 @@
     <ClCompile Include="..\..\src\MadEdit\MadUndo.cpp" />
     <ClCompile Include="..\..\src\MadEdit\TradSimp.cpp" />
     <ClCompile Include="..\..\src\MadFileAssociationDialog.cpp" />
+    <ClCompile Include="..\..\src\MadFileHistoryDialog.cpp" />
     <ClCompile Include="..\..\src\MadFindInFilesDialog.cpp" />
     <ClCompile Include="..\..\src\MadHighlightingDialog.cpp" />
     <ClCompile Include="..\..\src\MadMacroDlg.cpp" />

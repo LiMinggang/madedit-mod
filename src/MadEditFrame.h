@@ -233,6 +233,7 @@ public:
 	void OnFileSaveAll( wxCommandEvent& event );
 	void OnFileSaveACopy( wxCommandEvent& event );
 	void OnFileReload( wxCommandEvent& event );
+	void OnRecentFilesList( wxCommandEvent& event );
 	void OnRecentFilesPop( wxCommandEvent& event );
 	void OnFileClose( wxCommandEvent& event );
 	void OnFileCloseAll( wxCommandEvent& event );
@@ -541,6 +542,7 @@ enum   // menu id
     menuSaveACopy,
 	menuReload,
 	menuRecentFiles,
+	menuRecentFilesList,
 	menuRecentFilesToolbar,
 	menuCopyFilePath,
 	menuCopyFileName,

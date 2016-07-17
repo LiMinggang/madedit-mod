@@ -53,7 +53,8 @@
 #include "MadRecentList.h"
 #include "MadWinListDialog.h"
 #include "MadSaveQueryDialog.h"
-#include "plugin.h"
+#include "MadFileHistoryDialog.h"
+//#include "plugin.h"
 
 #include "EmbeddedPython.hpp"
 #include "SpellCheckerManager.h"
@@ -1622,6 +1623,7 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_UPDATE_UI( menuSaveAll, MadEditFrame::OnUpdateUI_MenuCheckIsAnyoneModified )
 	EVT_UPDATE_UI( menuSaveACopy, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
 	EVT_UPDATE_UI( menuReload, MadEditFrame::OnUpdateUI_MenuFileReload )
+	EVT_UPDATE_UI( menuRecentFilesList, MadEditFrame::OnUpdateUI_MenuFileRecentFiles )
 	EVT_UPDATE_UI( menuClose, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
 	EVT_UPDATE_UI( menuCloseAll, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
 	EVT_UPDATE_UI( menuCloseAllButThis, MadEditFrame::OnUpdateUI_MenuWindow_CheckCount )
@@ -1780,6 +1782,7 @@ BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
 	EVT_MENU( menuSaveACopy, MadEditFrame::OnFileSaveACopy )
 	EVT_MENU( menuSaveAll, MadEditFrame::OnFileSaveAll )
 	EVT_MENU( menuReload, MadEditFrame::OnFileReload )
+	EVT_MENU( menuRecentFilesList, MadEditFrame::OnRecentFilesList )
 	EVT_MENU( menuRecentFilesToolbar, MadEditFrame::OnRecentFilesPop )
 	EVT_MENU( menuClose, MadEditFrame::OnFileClose )
 	EVT_MENU( menuCloseAll, MadEditFrame::OnFileCloseAll )
@@ -2011,6 +2014,7 @@ CommandData CommandTable[] =
 	{ 0, 1, menuPrint,        wxT( "menuPrint" ),        _( "&Print..." ),         wxT( "Ctrl-P" ),       wxITEM_NORMAL,    print_xpm_idx,     0,                        _( "Print the file" ), &g_Menu_FilePop, &g_tbSTANDARD_ptr, _( "Print" ), true},
 	{ 0, 1, 0,                0,                       0,                      0,                   wxITEM_SEPARATOR, -1,                0,                        0, 0, 0, 0, false},
 	{ 0, 1, menuRecentFiles,  wxT( "menuRecentFiles" ),  _( "Recent Files" ),      wxT( "" ),             wxITEM_NORMAL,    -1,                &g_Menu_File_RecentFiles, 0, 0, 0, 0, false},
+	{ 0, 1, menuRecentFilesList, wxT( "menuRecentFilesList" ), _( "Recent Files List..." ), wxT( "F9" ),  wxITEM_NORMAL,	-1, 			   0,                        _( "List all files had been opened before" ), 0, 0, _( "Recent Files" ), false},
 	{ 0, 1, 0,                0,                       0,                      0,                   wxITEM_SEPARATOR, -1,                0,                        0, 0, 0, 0, false},
 	{ 0, 1, menuExit,         wxT( "menuExit" ),         _( "E&xit" ),             wxT( "" ),             wxITEM_NORMAL,    quit_xpm_idx,      0,                        _( "Quit MadEdit" ), 0, 0, 0, false},
 
@@ -2019,7 +2023,7 @@ CommandData CommandTable[] =
 	{ ecUndo,           1, menuUndo,                     wxT( "menuUndo" ),                     _( "&Undo" ),                                   wxT( "Ctrl-Z" ),       wxITEM_NORMAL,    undo_xpm_idx,      0,                     _( "Undo the last action" ), 0, &g_tbSTANDARD_ptr, _( "Undo" ), false},
 
 	{
-		ecRedo,           1, menuRedo,                     wxT( "menuRedo" ),                     _( "&Redo" ),
+		ecRedo,           1, menuRedo,                   wxT( "menuRedo" ),                     _( "&Redo" ),
 #ifdef __WXMSW__
 		wxT( "Ctrl-Y" ),
 #else
@@ -5491,6 +5495,26 @@ void MadEditFrame::OnFileReload( wxCommandEvent& event )
 	if( g_ActiveMadEdit )
 	{
 		g_ActiveMadEdit->Reload();
+	}
+}
+
+void MadEditFrame::OnRecentFilesList( wxCommandEvent& event )
+{
+	if(g_RecentOpenedFileListDialog == NULL)
+	{
+		g_RecentOpenedFileListDialog = new MadFileHistoryDialog(this);
+	}
+
+	if(g_RecentOpenedFileListDialog->ShowModal() == wxID_OK)
+	{
+		wxArrayString filenames;
+		g_RecentOpenedFileListDialog->GetCheckedItemsData( filenames );
+		size_t count = filenames.GetCount();
+		
+		for( size_t i = 0; i < count; ++i )
+		{
+			OpenFile( filenames[i], false );
+		}
 	}
 }
 

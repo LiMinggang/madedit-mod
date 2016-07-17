@@ -1,0 +1,179 @@
+#include "MadFileHistoryDialog.h"
+
+//(*InternalHeaders(MadFileHistoryDialog)
+#include <wx/intl.h>
+#include <wx/string.h>
+//*)
+
+#include <wx/arrstr.h>
+#include <algorithm>  
+
+#include <wx/filename.h>
+#include "MadEdit/MadEdit.h"
+#include "MadEditFrame.h"
+#include "MadRecentList.h"
+
+//(*IdInit(MadFileHistoryDialog)
+const long MadFileHistoryDialog::ID_CHECKLISTBOXMADFILELIST = wxNewId();
+const long MadFileHistoryDialog::ID_BUTTONSELECTALL = wxNewId();
+const long MadFileHistoryDialog::ID_BUTTONDSELECTALL = wxNewId();
+//*)
+
+#define FILEHISTORY_MIN_PATH_COL_WIDTH 80
+
+BEGIN_EVENT_TABLE(MadFileHistoryDialog,wxDialog)
+	EVT_ACTIVATE( MadFileHistoryDialog::MadFileHistoryDialogActivate )
+	//(*EventTable(MadFileHistoryDialog)
+	//*)
+END_EVENT_TABLE()
+
+MadFileHistoryDialog *g_RecentOpenedFileListDialog = NULL;
+
+MadFileHistoryDialog::MadFileHistoryDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)
+{
+	//(*Initialize(MadFileHistoryDialog)
+	wxBoxSizer* BoxSizer2;
+	wxBoxSizer* BoxSizer1;
+	wxBoxSizer* BoxSizer3;
+
+	Create(parent, id, _("Recent Opened Files"), wxDefaultPosition, wxDefaultSize, wxSTAY_ON_TOP|wxCAPTION|wxCLOSE_BOX|wxSIMPLE_BORDER, _T("id"));
+	SetClientSize(wxDefaultSize);
+	Move(wxDefaultPosition);
+	BoxSizer1 = new wxBoxSizer(wxHORIZONTAL);
+	BoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
+	MadFileList = new wxCheckedListCtrl(this, ID_CHECKLISTBOXMADFILELIST, wxDefaultPosition, wxSize(400, 300), wxLC_REPORT | wxSIMPLE_BORDER | wxVSCROLL, wxDefaultValidator, _T("ID_LISTCTRLMADFILELIST"));
+	BoxSizer2->Add(MadFileList, 0, wxALL|wxEXPAND, 5);
+	BoxSizer1->Add(BoxSizer2, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	BoxSizer3 = new wxBoxSizer(wxVERTICAL);
+	ButtonOK = new wxButton(this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_OK"));
+	ButtonOK->SetDefault();
+	BoxSizer3->Add(ButtonOK, 0, wxALL|wxEXPAND, 2);
+	ButtonCancel = new wxButton(this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_CANCEL"));
+	BoxSizer3->Add(ButtonCancel, 0, wxALL|wxEXPAND, 2);
+	ButtonSelectAll = new wxButton(this, ID_BUTTONSELECTALL, _("Select &All"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTONSELECTALL"));
+	BoxSizer3->Add(ButtonSelectAll, 0, wxALL|wxEXPAND, 2);
+	ButtonDselectAll = new wxButton(this, ID_BUTTONDSELECTALL, _("&Dselect All"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTONDSELECTALL"));
+	BoxSizer3->Add(ButtonDselectAll, 0, wxALL|wxEXPAND, 2);
+	BoxSizer1->Add(BoxSizer3, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5);
+	SetSizer(BoxSizer1);
+	BoxSizer1->Fit(this);
+	BoxSizer1->SetSizeHints(this);
+	Center();
+
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadFileHistoryDialog::OnButtonOKClick, this, wxID_OK);
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadFileHistoryDialog::OnButtonCancelClick, this, wxID_CANCEL);
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadFileHistoryDialog::OnButtonSelectAllClick, this, ID_BUTTONSELECTALL);
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadFileHistoryDialog::OnButtonDselectAllClick, this, ID_BUTTONDSELECTALL);
+	Bind( wxEVT_CLOSE_WINDOW, &MadFileHistoryDialog::MadFileHistoryDialogClose, this, wxID_ANY);
+	//*)
+
+	SetDefaultItem(ButtonOK);
+	m_MainFrame = static_cast<MadEditFrame *>(parent);
+	wxASSERT(m_MainFrame && m_MainFrame->m_RecentFiles);	
+	m_RecentFiles = m_MainFrame->m_RecentFiles;
+	wxListItem itemCol;
+	itemCol.SetText(_("Name"));
+	itemCol.SetAlign(wxLIST_FORMAT_LEFT);
+	MadFileList->InsertColumn(0, itemCol);
+	itemCol.SetText(_("Path"));
+	itemCol.SetAlign(wxLIST_FORMAT_LEFT);
+	MadFileList->InsertColumn(1, itemCol);
+}
+
+MadFileHistoryDialog::~MadFileHistoryDialog()
+{
+	//(*Destroy(MadFileHistoryDialog)
+	//*)
+}
+
+void MadFileHistoryDialog::MadFileHistoryDialogActivate( wxActivateEvent& event )
+{
+	InitWindowListIterms();
+}
+
+void MadFileHistoryDialog::InitWindowListIterms()
+{
+	wxAuiNotebook * notebookp = reinterpret_cast<wxAuiNotebook *>(m_MainFrame->m_Notebook);
+	size_t count = m_RecentFiles->GetCount();
+	long tmp;
+	wxString fname;
+	wxString fdir;
+
+	MadFileList->Hide();
+	MadFileList->DeleteAllItems();
+	if( count )
+	{
+		MadFileList->Freeze();
+		for( size_t id = 0; id < count; ++id )
+		{
+			wxFileName fileName( m_RecentFiles->GetHistoryFile( id ) );
+			if(fileName.Exists())
+			{
+				fname = fileName.GetFullName();
+				fdir = fileName.GetPath();
+				tmp = MadFileList->InsertItem(id, fname);
+				//MadFileList->SetItemData(tmp, id);
+				MadFileList->SetItem(tmp, 1, fdir);
+			}
+		}
+		MadFileList->Thaw();
+	    MadFileList->SetColumnWidth( 0, wxLIST_AUTOSIZE );
+		MadFileList->SetColumnWidth( 1, wxLIST_AUTOSIZE );
+	}
+
+	if(FILEHISTORY_MIN_PATH_COL_WIDTH > MadFileList->GetColumnWidth(1))
+	{
+		MadFileList->SetColumnWidth( 1, FILEHISTORY_MIN_PATH_COL_WIDTH );
+	}
+
+	MadFileList->Show();
+	GetSizer()->Fit( this );
+}
+
+void MadFileHistoryDialog::OnButtonOKClick(wxCommandEvent& event)
+{
+	EndModal(wxID_OK);
+}
+
+void MadFileHistoryDialog::OnButtonCancelClick(wxCommandEvent& event)
+{
+	EndModal(wxID_CANCEL);
+}
+
+void MadFileHistoryDialog::OnButtonSelectAllClick(wxCommandEvent& event)
+{
+	MadFileList->Freeze();
+	MadFileList->CheckAll(true);
+	MadFileList->Thaw();
+}
+
+void MadFileHistoryDialog::OnButtonDselectAllClick(wxCommandEvent& event)
+{
+	MadFileList->Freeze();
+	MadFileList->CheckAll(false);
+	MadFileList->Thaw();
+}
+
+void MadFileHistoryDialog::GetCheckedItemsData(wxArrayString & selectedItems, bool checked)
+{
+	long item = -1, pid = -1;
+	wxString fname;
+	wxString fdir;
+	for ( ;; ) {
+		item = MadFileList->GetNextItem(item, wxLIST_NEXT_ALL, wxLIST_STATE_DONTCARE);
+		if ( item == -1 )
+			break;
+		if((!checked) || (checked && (MadFileList->IsChecked(item))))
+		{
+			fname = MadFileList->GetItemText(item, 0);
+			fdir = MadFileList->GetItemText(item, 1);
+			selectedItems.Add(fdir + wxFILE_SEP_PATH + fname);
+		}
+	}
+}
+
+void MadFileHistoryDialog::MadFileHistoryDialogClose(wxCloseEvent& event)
+{
+	g_RecentOpenedFileListDialog = NULL;
+	Destroy();
+}

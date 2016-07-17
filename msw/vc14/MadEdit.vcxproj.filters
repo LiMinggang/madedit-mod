@@ -234,6 +234,9 @@
     <ClInclude Include="..\..\src\MadSaveQueryDialog.h">
       <Filter>Header files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\MadFileHistoryDialog.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\MadAboutDialog.cpp">
@@ -456,6 +459,9 @@
       <Filter>Source files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\MadSaveQueryDialog.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadFileHistoryDialog.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
   </ItemGroup>

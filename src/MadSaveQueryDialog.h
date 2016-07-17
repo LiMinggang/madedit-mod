@@ -61,6 +61,4 @@ class MadSaveQueryDialog: public wxDialog
 		DECLARE_EVENT_TABLE()
 };
 
-extern MadSaveQueryDialog *g_ModifiedFileListDialog;
-
 #endif

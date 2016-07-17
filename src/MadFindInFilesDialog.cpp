@@ -224,6 +224,7 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID id,const 
 	m_FindText->SetInsertSpacesInsteadOfTab( false );
 	m_FindText->SetWantTab( false );
 	m_FindText->LoadDefaultSyntaxScheme();
+	m_FindText->SetShowEndOfLine(false);
 	BoxSizer6->Add(m_FindText,1,wxEXPAND|wxALIGN_LEFT | wxALL,2);
 	BoxSizer6->SetItemMinSize(m_FindText, 400, bh);
 
@@ -242,6 +243,7 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID id,const 
 	m_ReplaceText->SetInsertSpacesInsteadOfTab( false );
 	m_ReplaceText->SetWantTab( false );
 	m_ReplaceText->LoadDefaultSyntaxScheme();
+	m_FindText->SetShowEndOfLine(false);
 	BoxSizer7->Add(m_ReplaceText,1,wxEXPAND|wxALIGN_LEFT | wxALL,2);
 	BoxSizer7->SetItemMinSize(m_ReplaceText, 400, bh);
 
