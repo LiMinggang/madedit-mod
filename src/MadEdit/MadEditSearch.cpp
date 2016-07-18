@@ -849,7 +849,7 @@ MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 	}
 	catch( regex_error )
 	{
-		wxMessageDialog dlg( this, _( "Catched a exception of 'regex_error'.\nMaybe the regular expression is invalid." ),
+		wxMessageDialog dlg( this, _( "Caught an exception of 'regex_error'.\nMaybe the regular expression is invalid." ),
 							 wxT( "MadEdit-Mod" ), wxOK | wxICON_ERROR );
 		dlg.SetOKLabel( wxMessageDialog::ButtonLabel( _( "&Ok" ) ) );
 		dlg.ShowModal();

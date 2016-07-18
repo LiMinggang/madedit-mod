@@ -125,6 +125,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.4.5
 New: File history dialog
+Fix: Two typos #82
 Other improvments
 
 Mod v0.4.4
