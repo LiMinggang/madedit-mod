@@ -580,7 +580,7 @@ class FileCaretPosManager
 			: name( n ), pos( p ), hash( h ), encoding( e ), fontname( fn ), fontsize( fs ), lspercent(lsp), wrapmode(wm), editmode(em)
 		{}
 		FilePosData()
-			: pos( 0 ), hash( 0 ), fontsize( 0 )
+			: pos( 0 ), hash( 0 ), fontsize( 0 ), lspercent( 0 ), wrapmode( -1 ), editmode( -1 )
 		{}
 	};
 	std::list<FilePosData> files;

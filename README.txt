@@ -128,6 +128,7 @@ New: File history dialog
 Fix: Size issue of some UI items #215
 Fix: Two typos #82
 Fix: Don't show EOF in Search/Replace Dialog
+Fix: CPPCheck warnings
 Other improvements
 
 Mod v0.4.4
