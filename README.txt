@@ -5,7 +5,7 @@ About:
 -----
 MadEdit is a cross-platform Text/Hex Editor written in C++ & wxWidgets.
 MadEdit supports many useful functions, e.g. SyntaxHighlightings, WordWraps,
-Encodings, Column/Hex Modes, and a Plugin system(not work yet).
+Encodings, Column/Hex Modes, and a Plugin system(Python).
 In HexMode, MadEdit can open large files which size is up to 32GB (INT_MAX*16).
 
 Supported Developing Platforms:
@@ -127,7 +127,8 @@ Mod v0.4.5
 New: File history dialog
 Fix: Size issue of some UI items #215
 Fix: Two typos #82
-Other improvments
+Fix: Don't show EOF in Search/Replace Dialog
+Other improvements
 
 Mod v0.4.4
 1.New: Set toolbar to 3 columns to let user who has a small display have a chance to re-org the toolbars
