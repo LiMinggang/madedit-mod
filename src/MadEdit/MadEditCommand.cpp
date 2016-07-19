@@ -165,24 +165,24 @@ wxString MadKeyBindings::MenuIdToText(int menuid)
 	return wxEmptyString;
 }
 
-int	MadKeyBindings::TextToMenuId(const wxString	&text)
+int	MadKeyBindings::TextToMenuId(const wxString &text)
 {
 	MadTextCommandMap::iterator	it;
-	if((it=ms_TextMenuIdMap->find(text)) !=	ms_TextMenuIdMap->end())
+	if((it=ms_TextMenuIdMap->find(text)) !=	 ms_TextMenuIdMap->end())
 	{
 		return it->second;
 	}
 	return 0;
 }
 
-void MadKeyBindings::AddMenuTextCommand(int	menuid,	const wxString &text, MadEditCommand cmd)
+void MadKeyBindings::AddMenuTextCommand(int menuid, const wxString &text, MadEditCommand cmd)
 {
 	ms_MenuIdTextMap->insert(MadCommandTextMap::value_type(menuid, text));
 	ms_TextMenuIdMap->insert(MadTextCommandMap::value_type(text, menuid));
 	ms_MenuIdCommandMap->insert(MadMenuCommandMap::value_type(menuid, cmd));
 }
 
-MadEditCommand MadKeyBindings::GetCommandFromMenuId(int	menuid)
+MadEditCommand MadKeyBindings::GetCommandFromMenuId(int menuid)
 {
 	MadMenuCommandMap::iterator	it=ms_MenuIdCommandMap->find(menuid);
 	if(it != ms_MenuIdCommandMap->end())
@@ -194,7 +194,7 @@ MadEditCommand MadKeyBindings::GetCommandFromMenuId(int	menuid)
 
 //---------------------------------------------------------------------------
 
-MadEditShortCut	StringToShortCut(const wxString	&text)
+MadEditShortCut	StringToShortCut(const wxString &text)
 {
 	// wxPrintf( wxT("text %s\n"), text.c_str()	);
 
@@ -791,7 +791,7 @@ void MadKeyBindings::AddDefaultBindings(bool overwrite)
 	//ecToFullWidth
 }
 
-void MadKeyBindings::RemoveByCommand(MadEditCommand	cmd)
+void MadKeyBindings::RemoveByCommand(MadEditCommand cmd)
 {
 	MadKeyBindingMap::iterator ecit	= m_EditCommandMap->find(cmd);
 	if(ecit==m_EditCommandMap->end()) return;
@@ -828,7 +828,7 @@ void MadKeyBindings::RemoveByCommand(MadEditCommand	cmd)
 	delete kb;
 }
 
-void MadKeyBindings::RemoveByMenuId(int	menuid)
+void MadKeyBindings::RemoveByMenuId(int menuid)
 {
 	MadKeyBindingMap::iterator mit = m_MenuIdMap->find(menuid);
 	if(mit==m_MenuIdMap->end())	return;
@@ -865,7 +865,7 @@ void MadKeyBindings::RemoveByMenuId(int	menuid)
 	delete kb;
 }
 
-wxString MadKeyBindings::GetKeyByMenuText(const	wxString &text)
+wxString MadKeyBindings::GetKeyByMenuText(const wxString &text)
 {
 	int	menuid=TextToMenuId(text);
 	if(menuid!=0)

@@ -200,7 +200,7 @@ WX_DECLARE_HASH_MAP( int,				// menuid or editcmd or	shortcut
 
 //---------------------------------------------------------------------------
 
-inline MadEditShortCut ShortCut(int	flags, int keyCode)
+inline MadEditShortCut ShortCut(int flags, int keyCode)
 {
 	return (flags<<16) | keyCode;
 }
