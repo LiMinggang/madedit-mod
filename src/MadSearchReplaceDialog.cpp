@@ -264,6 +264,8 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	m_FindText->SetWantTab( false );
 	m_FindText->LoadDefaultSyntaxScheme();
 	m_FindText->SetMaxLineLength( DEFAULT_MAX_LINELEN );
+	m_FindText->SetShowEndOfLine(false);
+	m_FindText->SetShowTabChar( true );
 	BoxSizerSearch->Add( m_FindText, 1, wxEXPAND | wxALIGN_LEFT | wxALL, 2 );
 	BoxSizerSearch->SetItemMinSize( m_FindText, 400, bh );
 	wxBitmap WxBitmapButtonRecentFindText_BITMAP( down_xpm );
@@ -285,6 +287,8 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	m_ReplaceText->SetWantTab( false );
 	m_ReplaceText->LoadDefaultSyntaxScheme();
 	m_ReplaceText->SetMaxLineLength( DEFAULT_MAX_LINELEN );
+	m_ReplaceText->SetShowEndOfLine(false);
+	m_ReplaceText->SetShowTabChar( true );
 	BoxSizerReplace->Add( m_ReplaceText, 1, wxEXPAND | wxALIGN_LEFT | wxALL, 2 );
 	BoxSizerReplace->SetItemMinSize( m_ReplaceText, 400, bh );
 	WxBitmapButtonRecentReplaceText = new wxBitmapButton( this, ID_WXBITMAPBUTTONRECENTREPLACETEXT, WxBitmapButtonRecentFindText_BITMAP, wxPoint( 0, 0 ), wxSize( bh, bh ), wxBU_AUTODRAW, wxDefaultValidator, _( "WxBitmapButtonRecentReplaceText" ) );

@@ -127,7 +127,7 @@ Mod v0.4.5
 New: File history dialog
 Fix: Size issue of some UI items #215
 Fix: Two typos #82
-Fix: Don't show EOF in Search/Replace Dialog
+Fix: Don't show EOF but Space/Tab in Search/Replace Dialog
 Fix: CPPCheck warnings
 Other improvements
 
