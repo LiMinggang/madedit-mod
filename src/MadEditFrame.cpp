@@ -5504,6 +5504,10 @@ void MadEditFrame::OnRecentFilesList( wxCommandEvent& event )
 	{
 		g_RecentOpenedFileListDialog = new MadFileHistoryDialog(this);
 	}
+	else
+	{
+		g_RecentOpenedFileListDialog->ResetWindowListIterms();
+	}
 
 	if(g_RecentOpenedFileListDialog->ShowModal() == wxID_OK)
 	{

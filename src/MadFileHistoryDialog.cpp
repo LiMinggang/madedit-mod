@@ -14,7 +14,7 @@
 #include "MadRecentList.h"
 
 //(*IdInit(MadFileHistoryDialog)
-const long MadFileHistoryDialog::ID_CHECKLISTBOXMADFILELIST = wxNewId();
+const long MadFileHistoryDialog::ID_CHECKLISTMADHISFILELIST = wxNewId();
 const long MadFileHistoryDialog::ID_BUTTONSELECTALL = wxNewId();
 const long MadFileHistoryDialog::ID_BUTTONDSELECTALL = wxNewId();
 //*)
@@ -22,7 +22,6 @@ const long MadFileHistoryDialog::ID_BUTTONDSELECTALL = wxNewId();
 #define FILEHISTORY_MIN_PATH_COL_WIDTH 80
 
 BEGIN_EVENT_TABLE(MadFileHistoryDialog,wxDialog)
-	EVT_ACTIVATE( MadFileHistoryDialog::MadFileHistoryDialogActivate )
 	//(*EventTable(MadFileHistoryDialog)
 	//*)
 END_EVENT_TABLE()
@@ -41,11 +40,11 @@ MadFileHistoryDialog::MadFileHistoryDialog(wxWindow* parent,wxWindowID id,const 
 	Move(wxDefaultPosition);
 	BoxSizer1 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
-	MadFileList = new wxCheckedListCtrl(this, ID_CHECKLISTBOXMADFILELIST, wxDefaultPosition, wxSize(400, 300), wxLC_REPORT | wxSIMPLE_BORDER | wxVSCROLL, wxDefaultValidator, _T("ID_LISTCTRLMADFILELIST"));
+	MadFileList = new wxCheckedListCtrl(this, ID_CHECKLISTMADHISFILELIST, wxDefaultPosition, wxSize(480, 300), wxLC_REPORT | wxSIMPLE_BORDER | wxVSCROLL, wxDefaultValidator, _T("ID_CHECKLISTMADHISFILELIST"));
 	BoxSizer2->Add(MadFileList, 0, wxALL|wxEXPAND, 5);
 	BoxSizer1->Add(BoxSizer2, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	BoxSizer3 = new wxBoxSizer(wxVERTICAL);
-	ButtonOK = new wxButton(this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_OK"));
+	ButtonOK = new wxButton(this, wxID_OK, _("&Open"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_OK"));
 	ButtonOK->SetDefault();
 	BoxSizer3->Add(ButtonOK, 0, wxALL|wxEXPAND, 2);
 	ButtonCancel = new wxButton(this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_CANCEL"));
@@ -78,6 +77,7 @@ MadFileHistoryDialog::MadFileHistoryDialog(wxWindow* parent,wxWindowID id,const 
 	itemCol.SetText(_("Path"));
 	itemCol.SetAlign(wxLIST_FORMAT_LEFT);
 	MadFileList->InsertColumn(1, itemCol);
+	ResetWindowListIterms();
 }
 
 MadFileHistoryDialog::~MadFileHistoryDialog()
@@ -86,12 +86,7 @@ MadFileHistoryDialog::~MadFileHistoryDialog()
 	//*)
 }
 
-void MadFileHistoryDialog::MadFileHistoryDialogActivate( wxActivateEvent& event )
-{
-	InitWindowListIterms();
-}
-
-void MadFileHistoryDialog::InitWindowListIterms()
+void MadFileHistoryDialog::ResetWindowListIterms()
 {
 	wxAuiNotebook * notebookp = reinterpret_cast<wxAuiNotebook *>(m_MainFrame->m_Notebook);
 	size_t count = m_RecentFiles->GetCount();

@@ -255,6 +255,9 @@
     <ClCompile Include="..\..\src\checkedlistctrl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\MadFileHistoryDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\spellchecker\HunspellInterface.h">
@@ -378,6 +381,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\checkedlistctrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadFileHistoryDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

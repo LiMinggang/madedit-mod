@@ -27,11 +27,12 @@ class MadFileHistoryDialog: public wxDialog
 		wxButton* ButtonCancel;
 		//*)
         void GetCheckedItemsData(wxArrayString & selectedItems, bool checked = true);
+        void ResetWindowListIterms();
 
 	protected:
 
 		//(*Identifiers(MadFileHistoryDialog)
-		static const long ID_CHECKLISTBOXMADFILELIST;
+		static const long ID_CHECKLISTMADHISFILELIST;
 		static const long ID_BUTTONSELECTALL;
 		static const long ID_BUTTONDSELECTALL;
 		//*)
@@ -50,7 +51,6 @@ class MadFileHistoryDialog: public wxDialog
 		//*)
 		void MadFileHistoryDialogActivate( wxActivateEvent& event );
 
-        void InitWindowListIterms();
 		DECLARE_EVENT_TABLE()
 };
 
