@@ -60,7 +60,7 @@ MadWinListDialog::MadWinListDialog(wxWindow* parent,wxWindowID id)
 	ButtonSortTabByPath = new wxButton(this, ID_BUTTONSORTTABBYPATH, _("Sort Tab(&Path)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTONSORTTABBYPATH"));
 	ButtonSortTabByPath->SetMinSize(wxSize(110,27));
 	BoxSizer3->Add(ButtonSortTabByPath, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-	ButtonOk = new wxButton(this, wxID_OK, _("&OK"), wxDefaultPosition, wxSize(110,27), 0, wxDefaultValidator, _T("wxID_OK"));
+	ButtonOk = new wxButton(this, wxID_OK, _("&Open"), wxDefaultPosition, wxSize(110,27), 0, wxDefaultValidator, _T("wxID_OK"));
 	BoxSizer3->Add(ButtonOk, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	BoxSizer1->Add(BoxSizer3, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	SetSizer(BoxSizer1);
