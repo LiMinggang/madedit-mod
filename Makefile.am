@@ -20,6 +20,8 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	src/MadEditFrame.h \
 	src/MadFindInFilesDialog.cpp \
 	src/MadFindInFilesDialog.h \
+	src/MadFileHistoryDialog.cpp \
+	src/MadFileHistoryDialog.h \
 	src/MadHighlightingDialog.cpp \
 	src/MadHighlightingDialog.h \
 	src/MadOptionsDialog.cpp \
