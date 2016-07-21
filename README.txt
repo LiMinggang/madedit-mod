@@ -129,6 +129,7 @@ Fix: Size issue of some UI items #215
 Fix: Two typos #82
 Fix: Don't show EOF but Space/Tab in Search/Replace Dialog
 Fix: CPPCheck warnings
+Fix: Change shortcuts of Go Back/Forward
 Other improvements
 
 Mod v0.4.4
