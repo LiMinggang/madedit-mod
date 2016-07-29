@@ -11966,7 +11966,7 @@ int MadEdit::GetUCharType( ucs4_t uc )
 //
 void MadEdit::ToggleBookmark()
 {
-	m_Lines->m_LineList.ToggleBookmark( m_CaretPos.iter );
+	m_Lines->m_LineList.SetBookmark( m_CaretPos.iter );
 	m_RepaintAll = true;
 	Refresh( false );
 }

@@ -2804,7 +2804,7 @@ MadSearchResult MadEdit::FindTextNext( const wxString &text,
 		if (endpos != epos.pos)
 			m_CaretPos = epos;
 
-		if (IsTextFile() && m_BookmarkInSearch && !(m_Lines->m_LineList.IsBookmarked(bpos.iter))) m_Lines->m_LineList.ToggleBookmark(bpos.iter);
+		if (IsTextFile() && m_BookmarkInSearch && !(m_Lines->m_LineList.IsBookmarked(bpos.iter))) m_Lines->m_LineList.SetBookmark(bpos.iter);
 	}
 
 	return state;
@@ -2912,7 +2912,7 @@ MadSearchResult MadEdit::FindTextPrevious( const wxString &text,
 
 			SetSelection( bp.pos, ep.pos, true );
 
-			if( IsTextFile() && m_BookmarkInSearch && !( m_Lines->m_LineList.IsBookmarked( bp.iter ) ) ) m_Lines->m_LineList.ToggleBookmark( bp.iter );
+			if( IsTextFile() && m_BookmarkInSearch && !( m_Lines->m_LineList.IsBookmarked( bp.iter ) ) ) m_Lines->m_LineList.SetBookmark( bp.iter );
 
 			return SR_YES;
 		}
@@ -3050,7 +3050,7 @@ MadSearchResult MadEdit::FindHexNext( const wxString &hexstr,
 	{
 		SetSelection( bpos.pos, epos.pos );
 
-		if( IsTextFile() && m_BookmarkInSearch && !( m_Lines->m_LineList.IsBookmarked( bpos.iter ) ) ) m_Lines->m_LineList.ToggleBookmark( bpos.iter );
+		if( IsTextFile() && m_BookmarkInSearch && !( m_Lines->m_LineList.IsBookmarked( bpos.iter ) ) ) m_Lines->m_LineList.SetBookmark( bpos.iter );
 
 		return SR_YES;
 	}
@@ -3151,7 +3151,7 @@ MadSearchResult MadEdit::FindHexPrevious( const wxString &hexstr,
 
 			SetSelection( bp.pos, ep.pos, true );
 
-			if( IsTextFile() && m_BookmarkInSearch && !( m_Lines->m_LineList.IsBookmarked( bp.iter ) ) ) m_Lines->m_LineList.ToggleBookmark( bp.iter );
+			if( IsTextFile() && m_BookmarkInSearch && !( m_Lines->m_LineList.IsBookmarked( bp.iter ) ) ) m_Lines->m_LineList.SetBookmark( bp.iter );
 
 			return SR_YES;
 		}
@@ -3690,7 +3690,7 @@ int MadEdit::FindTextAll( const wxString &expr,
 
 		++count;
 
-		if( IsTextFile() && m_BookmarkInSearch && !( m_Lines->m_LineList.IsBookmarked( bpos.iter ) ) ) m_Lines->m_LineList.ToggleBookmark( bpos.iter );
+		if( IsTextFile() && m_BookmarkInSearch && !( m_Lines->m_LineList.IsBookmarked( bpos.iter ) ) ) m_Lines->m_LineList.SetBookmark( bpos.iter );
 
 		if( bFirstOnly ) break;
 
@@ -3765,7 +3765,7 @@ int MadEdit::FindHexAll( const wxString &expr, bool bFirstOnly,
 
 		++count;
 
-		if( IsTextFile() && m_BookmarkInSearch && !( m_Lines->m_LineList.IsBookmarked( bpos.iter ) ) ) m_Lines->m_LineList.ToggleBookmark( bpos.iter );
+		if( IsTextFile() && m_BookmarkInSearch && !( m_Lines->m_LineList.IsBookmarked( bpos.iter ) ) ) m_Lines->m_LineList.SetBookmark( bpos.iter );
 
 		if( bFirstOnly ) break;
 

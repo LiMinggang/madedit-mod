@@ -321,7 +321,8 @@ class MadLineList : public list <MadLine>
 public:
 	MadLineList();
 
-	void ToggleBookmark( MadLineIterator position );     // toggle or remove bookmark from given position
+	void SetBookmark( MadLineIterator position, bool toggle = true );     // toggle or remove bookmark from given position
+	void RemoveBookmark( MadLineIterator position );     // remove bookmark from given position
 	int  GetNextBookmark( MadLineIterator position ); // return line number, or -1 if no bookmars
 	int  GetPreviousBookmark( MadLineIterator position ); // return line number from the end to the beginning, or -1
 	bool IsBookmarked( MadLineIterator position );
