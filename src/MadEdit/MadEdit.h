@@ -1029,7 +1029,7 @@ public: // basic functions
 	void ClearAllBookmarks();
 	bool HasBookMark() {return m_Lines->m_LineList.HasBookMark();};
 	//----------
-	void SetBookmarkInSearch( bool bookmark ) {m_BookmarkInSearch = bookmark;}
+	void ToggleBookmarkInSearch( bool bookmark ) {m_BookmarkInSearch = bookmark;}
 	bool IsSelecting() {return m_SelectionStart;}
 	void StartEndSelction();
 public: // advanced functions

@@ -448,7 +448,7 @@ void MadSearchReplaceDialog::WxButtonFindNextClick( wxCommandEvent& event )
 				rangeFrom = m_SearchFrom;
 		}
 
-		g_ActiveMadEdit->SetBookmarkInSearch( WxCheckBoxBookmarkLine->IsChecked() );
+		g_ActiveMadEdit->ToggleBookmarkInSearch( WxCheckBoxBookmarkLine->IsChecked() );
 
 		for( ;; )
 		{
@@ -611,7 +611,7 @@ void MadSearchReplaceDialog::WxButtonFindPrevClick( wxCommandEvent& event )
 				rangeFrom = m_SearchFrom;
 		}
 
-		g_ActiveMadEdit->SetBookmarkInSearch( WxCheckBoxBookmarkLine->IsChecked() );
+		g_ActiveMadEdit->ToggleBookmarkInSearch( WxCheckBoxBookmarkLine->IsChecked() );
 
 		for( ;; )
 		{
@@ -1560,7 +1560,7 @@ void MadSearchReplaceDialog::SearchAll( MadEdit * madedit, bool needRec/*=true*/
 		begpos.reserve( 128 * 1024 );
 		endpos.reserve( 128 * 1024 );
 		m_RecentFindText->AddFileToHistory( expr );
-		madedit->SetBookmarkInSearch( WxCheckBoxBookmarkLine->IsChecked() );
+		madedit->ToggleBookmarkInSearch( WxCheckBoxBookmarkLine->IsChecked() );
 
 		if( WxCheckBoxPurgeBookmark->IsChecked() )
 			madedit->ClearAllBookmarks();
