@@ -1023,7 +1023,7 @@ public: // basic functions
 	int Save( bool ask, const wxString &title, bool saveas );
 
 	// add: gogo, 21.09.2009
-	void SetBookmark();
+	void ToggleBookmark();
 	void GotoNextBookmark();
 	void GotoPreviousBookmark();
 	void ClearAllBookmarks();

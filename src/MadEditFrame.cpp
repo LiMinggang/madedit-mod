@@ -5954,10 +5954,10 @@ void MadEditFrame::OnSearchToggleBookmark( wxCommandEvent& event )
 {
 	if( g_ActiveMadEdit )
 	{
-		g_ActiveMadEdit->SetBookmark();
+		g_ActiveMadEdit->ToggleBookmark();
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetBookmark()" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "ToggleBookmark()" ) ) );
 	}
 }
 

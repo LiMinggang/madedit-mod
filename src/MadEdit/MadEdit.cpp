@@ -10001,7 +10001,7 @@ void MadEdit::OnMouseLeftDown( wxMouseEvent &evt )
 			if( evt.m_x <= m_LineNumberAreaWidth )
 				SelectLineFromCaretPos();
 			else
-				SetBookmark();
+				ToggleBookmark();
 		}
 
 		//m_CaretPos.pos = m_SelectionEnd->pos;
@@ -11964,9 +11964,9 @@ int MadEdit::GetUCharType( ucs4_t uc )
 
 // add: gogo, 21.09.2009
 //
-void MadEdit::SetBookmark()
+void MadEdit::ToggleBookmark()
 {
-	m_Lines->m_LineList.SetBookmark( m_CaretPos.iter );
+	m_Lines->m_LineList.ToggleBookmark( m_CaretPos.iter );
 	m_RepaintAll = true;
 	Refresh( false );
 }

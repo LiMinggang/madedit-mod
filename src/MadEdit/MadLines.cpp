@@ -3997,7 +3997,7 @@ MadLineList::MadLineList()
 // Toggle or remove bookmark from given position.
 // If there is a bookmark on the given position, remove it. If there is not, add it.
 //
-void MadLineList::SetBookmark( MadLineIterator position )
+void MadLineList::ToggleBookmark( MadLineIterator position )
 {
 	if( m_BookmarkList.empty() )
 	{

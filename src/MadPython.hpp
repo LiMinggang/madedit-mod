@@ -1594,9 +1594,9 @@ namespace mad_python {
 		}
 
 		// add: gogo, 21.09.2009
-		void SetBookmark() {
+		void ToggleBookmark() {
 			if( g_ActiveMadEdit )
-			{ g_ActiveMadEdit->SetBookmark(); }
+			{ g_ActiveMadEdit->ToggleBookmark(); }
 		}
 
 		void GotoNextBookmark() {
@@ -1969,7 +1969,7 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.def( "ReloadByModificationTime", &PyMadEdit::ReloadByModificationTime, "" )
 	.def( "RestorePosition", &PyMadEdit::RestorePosition, "" )
 	.def( "Save", &PyMadEdit::Save, "" )
-	.def( "SetBookmark", &PyMadEdit::SetBookmark, "" )
+	.def( "ToggleBookmark", &PyMadEdit::ToggleBookmark, "" )
 	.def( "GotoNextBookmark", &PyMadEdit::GotoNextBookmark, "" )
 	.def( "GotoPreviousBookmark", &PyMadEdit::GotoPreviousBookmark, "" )
 	.def( "ConvertEncoding", &PyMadEdit::ConvertEncoding, "" )
