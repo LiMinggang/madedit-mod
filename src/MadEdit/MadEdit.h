@@ -453,12 +453,6 @@ private:
     bool           m_TypewriterMode;
     bool           m_LDClickHighlight;
     bool           m_HasBackup;
-#ifdef __WXMSW__
-	bool m_IsWin98;
-	int  m_Win98LeadByte; // fixed that input DBCS char under win98
-	bool m_ProcessWin98LeadByte;
-#endif
-
 protected:
 
 	// GetLineByXXX() will get the wanted line from the nearest position(begin of lines, end of lines, or m_ValidPos)

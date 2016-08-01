@@ -130,6 +130,8 @@ Fix: Two typos #82
 Fix: Don't show EOF but Space/Tab in Search/Replace Dialog
 Fix: CPPCheck warnings
 Fix: Change shortcuts of Go Back/Forward
+Fix: some greek symbols that require the Alt+ compination don't get created #214
+Fix: Remove support for Win98
 Other improvements
 
 Mod v0.4.4

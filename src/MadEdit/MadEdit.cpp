@@ -968,11 +968,6 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_LastPaintBitmap = -1;
 	m_UseDefaultSyntax = false;
 	m_SearchWholeWord = false;
-#ifdef __WXMSW__
-	m_IsWin98 = ( wxGetOsVersion() == wxOS_WINDOWS_9X );
-	m_Win98LeadByte = -1;
-	m_ProcessWin98LeadByte = true;
-#endif
 #ifdef __WXGTK__
 	ConnectToFixedKeyPressHandler();
 #endif
@@ -7576,16 +7571,6 @@ void MadEdit::FindBracePairUnderCaretPos()
 
 void MadEdit::ProcessCommand( MadEditCommand command )
 {
-#ifdef __WXMSW__
-
-	if( m_Win98LeadByte >= 0 && m_ProcessWin98LeadByte )
-	{
-		MadEditCommand ch = m_Win98LeadByte;
-		m_Win98LeadByte = -1;
-		ProcessCommand( ch );
-	}
-
-#endif
 	ucs4_t NewAutoCompleteRightChar = 0;
 
 	if( command == m_AutoCompleteRightChar && m_CaretPos.pos == m_AutoCompletePos && m_EditMode == emTextMode )
@@ -9788,77 +9773,14 @@ void MadEdit::OnChar( wxKeyEvent& evt )
 		DoToggleWindow();
 	}
 
-#ifdef __WXMSW__
+	if( key == MADK_NONE || ( ucs4 >= ( ucs4_t )0x100 || ( ( ( !evt.HasModifiers() ) || ( evt.GetModifiers() == wxMOD_SHIFT ) ) && ucs4 >= ( ucs4_t )ecCharFirst ) ) )
+	{
+		ProcessCommand( ucs4 );
+	}
 	else
-		if( key == MADK_NONE || ( ucs4 == key && ( ucs4 >= 0x100 || ( ( ( !evt.HasModifiers() ) || ( evt.GetModifiers() == wxMOD_SHIFT ) ) && ucs4 >= ecCharFirst ) ) ) )
-		{
-			m_ProcessWin98LeadByte = false;
-			bool processed = false;
-
-			if( m_IsWin98 && ucs4 < 0x100 )
-			{
-				MadEncoding *enc = MadEncoding::GetSystemEncoding();
-
-				if( enc->GetType() == etDoubleByte )
-				{
-					if( m_Win98LeadByte >= 0 )
-					{
-						wxByte db[2] = { wxByte(m_Win98LeadByte), wxByte(ucs4)};
-						ucs4_t uc = enc->DBtoUCS4( db );
-
-						if( uc > 0 )
-						{
-							m_Win98LeadByte = -1;
-							ProcessCommand( uc );
-							processed = true;
-						}
-						else
-						{
-							ProcessCommand( m_Win98LeadByte );
-							m_Win98LeadByte = -1;
-						}
-					}
-
-					if( !processed )
-					{
-						wxByte db[2] = { wxByte(ucs4), 0};
-						ucs4_t uc = enc->DBtoUCS4( db );
-
-						if( uc != 0 ) // is a valid single-byte char
-						{
-							ProcessCommand( uc );
-							processed = true;
-						}
-						else
-							if( enc->IsLeadByte( wxByte( ucs4 ) ) )
-							{
-								m_Win98LeadByte = ucs4;
-								processed = true;
-							}
-					}
-				}
-			}
-
-			if( !processed )
-			{
-				ProcessCommand( ucs4 );
-			}
-
-			m_ProcessWin98LeadByte = true;
-		}
-
-#else
-	else
-		if( key == MADK_NONE || ( ucs4 >= ( ucs4_t )0x100 || ( !evt.HasModifiers() && ucs4 >= ( ucs4_t )ecCharFirst ) ) )
-		{
-			ProcessCommand( ucs4 );
-		}
-
-#endif
-		else
-		{
-			evt.Skip();
-		}
+	{
+		evt.Skip();
+	}
 }
 
 void MadEdit::OnKeyDown( wxKeyEvent& evt )
