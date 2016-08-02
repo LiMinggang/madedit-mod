@@ -9772,8 +9772,7 @@ void MadEdit::OnChar( wxKeyEvent& evt )
 		wxLogDebug( wxT( "edit toggle window" ) );
 		DoToggleWindow();
 	}
-
-	if( key == MADK_NONE || ( ucs4 >= ( ucs4_t )0x100 || ( ( ( !evt.HasModifiers() ) || ( evt.GetModifiers() == wxMOD_SHIFT ) ) && ucs4 >= ( ucs4_t )ecCharFirst ) ) )
+	else if(key == MADK_NONE || ucs4 >= ( ucs4_t )0x100 || ( ( ( !evt.HasModifiers() ) || ( evt.GetModifiers() == wxMOD_SHIFT ) ) && ucs4 >= ( ucs4_t )ecCharFirst ) )
 	{
 		ProcessCommand( ucs4 );
 	}
