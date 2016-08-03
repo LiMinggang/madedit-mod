@@ -4055,7 +4055,6 @@ void MadLineList::RemoveBookmark( MadLineIterator position )
 	}
 }
 
-
 // Return line number, or -1 if there are no bookmars.
 //
 int MadLineList::GetNextBookmark( MadLineIterator position )
