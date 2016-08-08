@@ -968,7 +968,8 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_LastPaintBitmap = -1;
 	m_UseDefaultSyntax = false;
 	m_SearchWholeWord = false;
-#ifdef __WXGTK__
+#if 0
+//#ifdef __WXGTK__
 	ConnectToFixedKeyPressHandler();
 #endif
 	m_lastDoubleClick = 0;
@@ -9772,7 +9773,7 @@ void MadEdit::OnChar( wxKeyEvent& evt )
 		wxLogDebug( wxT( "edit toggle window" ) );
 		DoToggleWindow();
 	}
-	else if(key == MADK_NONE || ucs4 >= ( ucs4_t )0x100 || ( ( ( !evt.HasModifiers() ) || ( evt.GetModifiers() == wxMOD_SHIFT ) ) && ucs4 >= ( ucs4_t )ecCharFirst ) )
+	else if(key == MADK_NONE || ucs4 >= ( ucs4_t )0x80 || ( ( ( !evt.HasModifiers() ) || ( evt.GetModifiers() == wxMOD_SHIFT ) ) && ucs4 >= ( ucs4_t )ecCharFirst ) )
 	{
 		ProcessCommand( ucs4 );
 	}
@@ -11616,7 +11617,8 @@ void MadEdit::DisplayCaret( bool moveonly )
 				xpos >= ( m_LineNumberAreaWidth + m_BookmarkWidth ) && xpos < m_ClientWidth && ypos >= 0 && ypos < m_ClientHeight )
 		{
 			caret->Move( xpos, ypos );
-#ifdef __WXGTK__
+//#ifdef __WXGTK__
+#if 0
 			extern GtkIMContext *GetWindowIMContext( wxWindow * win );
 			GdkRectangle rect = {xpos, ypos + m_TextFontHeight, 0, 0};
 			gtk_im_context_set_cursor_location( GetWindowIMContext( this ), &rect );
@@ -11659,7 +11661,8 @@ void MadEdit::DisplayCaret( bool moveonly )
 			xpos -= m_DrawingXPos;
 			int ypos = ( int )( row - m_TopRow + 1 ) * m_RowHeight;
 			caret->Move( xpos, ypos );
-#ifdef __WXGTK__
+//#ifdef __WXGTK__
+#if 0
 			extern GtkIMContext *GetWindowIMContext( wxWindow * win );
 			GdkRectangle rect = {xpos, ypos + m_RowHeight, 0, 0};
 			gtk_im_context_set_cursor_location( GetWindowIMContext( this ), &rect );

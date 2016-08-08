@@ -69,7 +69,6 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	src/MadEdit/MadEditCommand.cpp \
 	src/MadEdit/MadEditCommand.h \
 	src/MadEdit/MadEditSearch.cpp \
-	src/MadEdit/MadEdit_gtk.cpp \
 	src/MadEdit/MadEncoding.cpp \
 	src/MadEdit/MadEncoding.h \
 	src/MadEdit/MadLines.cpp \
