@@ -130,8 +130,13 @@ Fix: Two typos #82
 Fix: Don't show EOF but Space/Tab in Search/Replace Dialog
 Fix: CPPCheck warnings
 Fix: Change shortcuts of Go Back/Forward
-Fix: some greek symbols that require the Alt+ compination don't get created #214
+Fix: Some greek symbols that require the Alt+ compination don't get created #214
+    with Greek extended keyboard layout
+    Madeit-Mod -------------------> result <------------ IceApe
+    RightAlt+Shift+r --------------> U+00AE <----------------- RightAlt+r
+    RightAlt+Shift+[2 times ; ] --> ¡§ <------------------ [couldn't find it]
 Fix: Remove support for Win98
+Fix: Some illegal chars in file name(eg, 0xFFF0~0xFFFF) would cause wxWidgets crash
 Other improvements
 
 Mod v0.4.4

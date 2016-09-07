@@ -4271,7 +4271,15 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 
 		if( exists && wxFile::Access( filename.c_str(), wxFile::read ) == false )
 		{
-			wxLogError( wxString( _( "Cannot access this file:" ) ) + wxT( "\n\n" ) + filename );
+			// Oops! In case something wrong with the file name causing crash of wxWidgets(not privilege issue)
+			wxString normalfilename;
+			for(size_t i = 0; i<filename.size(); ++i)
+			{
+				ucs4_t nm = filename[i];
+				if(( nm >= 0xFFF0 )&& ( nm <= 0xFFFF)) nm = 0xFFFD;
+				normalfilename << wxUniChar(nm);
+			}
+			wxLogError( wxString( _( "Cannot access this file:" ) ) + wxT( "\n\n" ) + normalfilename );
 			return false;
 		}
 	}
