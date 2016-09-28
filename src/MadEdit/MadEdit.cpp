@@ -11346,7 +11346,7 @@ WXLRESULT MadEdit::MSWWindowProc( WXUINT message, WXWPARAM wParam, WXLPARAM lPar
 
 					if( paint )
 					{
-						wxClientDC dc( this );
+						/*wxClientDC dc( this );
 						wxRect rect( 0, row * m_RowHeight, m_ClientWidth, m_RowHeight );
 
 						if( m_EditMode != emHexMode )
@@ -11359,7 +11359,9 @@ WXLRESULT MadEdit::MSWWindowProc( WXUINT message, WXWPARAM wParam, WXLPARAM lPar
 						}
 
 						m_RepaintAll = false;
-						Refresh( false );
+						Refresh( false );*/
+						wxPaintEvent evt;
+						OnPaint( evt );
 						return 0;
 					}
 				}

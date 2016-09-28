@@ -137,6 +137,7 @@ Fix: Some greek symbols that require the Alt+ compination don't get created #214
     RightAlt+Shift+[2 times ; ] --> ¡§ <------------------ [couldn't find it]
 Fix: Remove support for Win98
 Fix: Some illegal chars in file name(eg, 0xFFF0~0xFFFF) would cause wxWidgets crash
+Fix: a bug when move up #217
 Other improvements
 
 Mod v0.4.4
