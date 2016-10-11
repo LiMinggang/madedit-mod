@@ -1502,7 +1502,7 @@ namespace mad_python {
 
 				if( ok >= 0 && showresults ) {
 					static wxString text( _( "Search Results" ) );
-					long pid = g_MainFrame->m_InfoNotebook->GetPageIndex( g_MainFrame->m_FindInFilesResults );
+					int pid = g_MainFrame->m_InfoNotebook->GetPageIndex( g_MainFrame->m_FindInFilesResults );
 					g_MainFrame->m_InfoNotebook->SetPageText( pid, text );
 					wxString strtobesearch = _("Search \"") + expr + wxT("\" ") + wxString::Format( _("(%s hits in 1 file)"), ( wxLongLong( ok ).ToString().c_str() ) );
 					wxTreeItemId myroot = g_MainFrame->NewSearchSession(strtobesearch);
@@ -1525,7 +1525,7 @@ namespace mad_python {
 
 				if( ok >= 0 && showresults ) {
 					static wxString text( _( "Search Results" ) );
-					long pid = g_MainFrame->m_InfoNotebook->GetPageIndex( g_MainFrame->m_FindInFilesResults );
+					int pid = g_MainFrame->m_InfoNotebook->GetPageIndex( g_MainFrame->m_FindInFilesResults );
 					g_MainFrame->m_InfoNotebook->SetPageText( pid, text );
 					
 					wxString strtobesearch = _("Search \"") + expr + wxT("\" ") + wxString::Format( _("(%s hits in 1 file)"), ( wxLongLong( ok ).ToString().c_str() ) );

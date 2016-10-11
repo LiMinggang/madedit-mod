@@ -1385,7 +1385,7 @@ void DisplayFindAllResult( wxTreeItemId &myroot, vector<wxFileOffset> &begpos, v
 
 		if( filename.IsEmpty() )
 		{
-			if( pid >= 0 )
+			if( pid != wxNOT_FOUND )
 			{
 				filename = ( ( wxAuiNotebook* )g_MainFrame->m_Notebook )->GetPageText( pid );
 

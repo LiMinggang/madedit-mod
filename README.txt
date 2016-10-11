@@ -138,6 +138,7 @@ Fix: Some greek symbols that require the Alt+ compination don't get created #214
 Fix: Remove support for Win98
 Fix: Some illegal chars in file name(eg, 0xFFF0~0xFFFF) would cause wxWidgets crash
 Fix: a bug when move up #217
+Fix: Crash if close the last file by double click page tab #218
 Other improvements
 
 Mod v0.4.4

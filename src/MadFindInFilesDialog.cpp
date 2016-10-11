@@ -830,7 +830,7 @@ void MadFindInFilesDialog::FindReplaceInFiles( bool bReplace )
 				expr = madedit->GetFileName();
 				int id = ( ( wxAuiNotebook* )g_MainFrame->m_Notebook )->GetPageIndex( madedit );
 
-				if( madedit->IsModified() && !expr.IsEmpty() && id < 0 )
+				if( madedit->IsModified() && !expr.IsEmpty() && id == wxNOT_FOUND )
 				{
 					madedit->SaveToFile( expr );
 				}

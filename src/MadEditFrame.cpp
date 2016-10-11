@@ -4513,6 +4513,11 @@ void MadEditFrame::CloseFile( long pageId )
 		m_Notebook->DeletePage( pageId );
 		g_CheckModTimeForReload = true;
 		m_PageClosing = false;
+
+		if( m_Notebook->GetPageCount() == 0 )
+		{
+			g_ActiveMadEdit = NULL;
+		}
 	}
 }
 
@@ -4548,7 +4553,7 @@ bool MadEditFrame::QueryCloseAllFiles()
 
 	int selid = m_Notebook->GetSelection();
 
-	if( selid == -1 ) { return true; }
+	if( selid == wxNOT_FOUND ) { return true; }
 
 	std::set< long > selectedItems;
 	bool ask = false;
