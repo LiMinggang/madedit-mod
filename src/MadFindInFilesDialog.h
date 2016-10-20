@@ -131,6 +131,7 @@ class MadFindInFilesDialog: public wxDialog
 		void WxButtonDirClick(wxCommandEvent& event);
 		void WxButtonActiveDirClick(wxCommandEvent& event);
 		void WxCheckBoxRegexClick(wxCommandEvent& event);
+		void MadFindInFilesDialogKeyDown(wxKeyEvent& event);
 		//*)
 
 		void MadFindInFilesDialogActivate(wxActivateEvent& event);

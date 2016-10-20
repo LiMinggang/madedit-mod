@@ -246,6 +246,10 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID id,const 
 	m_ReplaceText->LoadDefaultSyntaxScheme();
 	m_ReplaceText->SetShowEndOfLine(false);
 	m_ReplaceText->SetShowTabChar( true );
+	
+	// connect to KeyDown event handler
+	m_FindText->Bind( wxEVT_KEY_DOWN, &MadFindInFilesDialog::MadFindInFilesDialogKeyDown, this );
+	m_ReplaceText->Bind( wxEVT_KEY_DOWN, &MadFindInFilesDialog::MadFindInFilesDialogKeyDown, this );
 	BoxSizer7->Add(m_ReplaceText,1,wxEXPAND|wxALIGN_LEFT | wxALL,2);
 	BoxSizer7->SetItemMinSize(m_ReplaceText, 400, bh);
 
@@ -316,6 +320,7 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID id,const 
 	Center();
 
 	//
+	wxASSERT(g_SearchReplaceDialog != NULL);
 	if( g_SearchReplaceDialog->m_RecentFindText->GetCount() > 0 )
 	{
 		m_FindText->SetText( g_SearchReplaceDialog->m_RecentFindText->GetHistoryFile( 0 ) );
@@ -386,17 +391,22 @@ void MadFindInFilesDialog::UpdateCheckBoxByCBHex( bool check )
 
 void MadFindInFilesDialog::WxBitmapButtonRecentFindTextClick( wxCommandEvent& event )
 {
+	wxASSERT(g_SearchReplaceDialog != NULL);
+
 	PopupMenu( &g_SearchReplaceDialog->WxPopupMenuRecentFindText );
 }
 
 void MadFindInFilesDialog::WxBitmapButtonRecentReplaceTextClick( wxCommandEvent& event )
 {
+	wxASSERT(g_SearchReplaceDialog != NULL);
+
 	PopupMenu( &g_SearchReplaceDialog->WxPopupMenuRecentReplaceText );
 }
 
 void MadFindInFilesDialog::OnRecentFindText( wxCommandEvent& event )
 {
 	int idx = event.GetId() - ID_RECENTFINDTEXT1;
+	wxASSERT(g_SearchReplaceDialog != NULL);
 	wxString text = g_SearchReplaceDialog->m_RecentFindText->GetHistoryFile( idx );
 
 	if( !text.IsEmpty() )
@@ -409,6 +419,7 @@ void MadFindInFilesDialog::OnRecentFindText( wxCommandEvent& event )
 void MadFindInFilesDialog::OnRecentReplaceText( wxCommandEvent& event )
 {
 	int idx = event.GetId() - ID_RECENTREPLACETEXT1;
+	wxASSERT(g_SearchReplaceDialog != NULL);
 	wxString text = g_SearchReplaceDialog->m_RecentReplaceText->GetHistoryFile( idx );
 
 	if( !text.IsEmpty() )
@@ -436,6 +447,7 @@ void MadFindInFilesDialog::WxButtonFindClick( wxCommandEvent& event )
 
 	if( !text.IsEmpty() )
 	{
+		wxASSERT(g_SearchReplaceDialog != NULL);
 		g_SearchReplaceDialog->m_RecentFindText->AddFileToHistory( text );
 		FindReplaceInFiles( false );
 	}
@@ -452,6 +464,7 @@ void MadFindInFilesDialog::WxButtonReplaceClick( wxCommandEvent& event )
 
 	if( !text.IsEmpty() )
 	{
+		wxASSERT(g_SearchReplaceDialog != NULL);
 		g_SearchReplaceDialog->m_RecentFindText->AddFileToHistory( text );
 
 		if( !text2.IsEmpty() )
@@ -548,6 +561,7 @@ public:
 
 		if( delta.ToLong() >= 350 ) {
 			g_Time = t;
+			wxASSERT(g_ProgressDialog != NULL);
 			g_Continue = g_ProgressDialog->Update( 0, wxString::Format( fmtmsg1, ( wxLongLong( g_FileNameList.size() ).ToString() ).c_str() ) );
 
 			if( !g_Continue ) { return wxDIR_STOP; }
@@ -981,3 +995,59 @@ void MadFindInFilesDialog::WxCheckBoxRegexClick(wxCommandEvent& event)
 		WxCheckBoxDotMatchNewLine->Disable();
 	}
 }
+
+void MadFindInFilesDialog::MadFindInFilesDialogKeyDown(wxKeyEvent& event)
+{
+	int key = event.GetKeyCode();
+
+	//SetTitle(wxString()<<key);
+
+	switch( key )
+	{
+	case WXK_ESCAPE:
+		Show( false );
+		return;
+
+	case WXK_RETURN:
+	case WXK_NUMPAD_ENTER:
+		//if( this->GetClassInfo()->GetClassName() != wxString( wxT( "wxButton" ) ) )
+		{
+			wxCommandEvent e;
+			wxButton* default_btn = static_cast<wxButton*>( GetDefaultItem() );
+
+			if( default_btn == WxButtonReplace )
+				return WxButtonReplaceClick( e ); // no skip
+
+			return WxButtonFindClick( e ); // no skip
+		}
+
+		break;
+
+	case WXK_DOWN:
+		wxWindow * win = FindFocus();
+		if( win == (wxWindow *)m_FindText )
+		{
+			int x, y, w, h;
+			m_FindText->GetPosition( &x, &y );
+			m_FindText->GetSize( &w, &h );
+			wxASSERT(g_SearchReplaceDialog != NULL);
+			PopupMenu( &g_SearchReplaceDialog->WxPopupMenuRecentFindText, x, y + h );
+			return;
+		}
+		else
+			if( win == (wxWindow *)m_ReplaceText )
+			{
+				int x, y, w, h;
+				m_ReplaceText->GetPosition( &x, &y );
+				m_ReplaceText->GetSize( &w, &h );
+				wxASSERT(g_SearchReplaceDialog != NULL);
+				PopupMenu( &g_SearchReplaceDialog->WxPopupMenuRecentReplaceText, x, y + h );
+				return;
+			}
+
+		break;
+	}
+
+	event.Skip();
+}
+
