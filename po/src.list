@@ -27,6 +27,8 @@
 ../src/MadFileAssociationDialog.h
 ../src/MadFindInFilesDialog.cpp
 ../src/MadFindInFilesDialog.h
+../src/MadFileHistoryDialog.cpp
+../src/MadFileHistoryDialog.h
 ../src/MadHighlightingDialog.cpp
 ../src/MadHighlightingDialog.h
 ../src/MadPurgeHistoryDialog.cpp
@@ -60,6 +62,8 @@
 ../src/plugin.h
 ../src/MadPrintout.cpp
 ../src/MadPrintout.h
+../src/version.cpp
+../src/MadPython.hpp
 ../spellchecker/HunspellInterface.cpp
 ../spellchecker/PersonalDictionary.cpp
 ../spellchecker/SpellCheckEngineInterface.cpp

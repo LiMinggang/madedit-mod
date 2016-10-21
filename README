@@ -123,6 +123,26 @@ FreeBSD packaging (with FreeBSD 10.01)
 2. aclocal version in aclocal.m4
 3. stdc++ version
 
+Mod v0.4.5
+1.New: File history dialog
+2.New: Add default key, down key support(the same as Search Dialog) for FindInFiles Dialog
+3.Fix: Size issue of some UI items #215
+4.Fix: Two typos #82
+5.Fix: Don't show EOF but Space/Tab in Search/Replace Dialog
+6.Fix: CPPCheck warnings
+7.Fix: Change shortcuts of Go Back/Forward
+8.Fix: Some greek symbols that require the Alt+ compination don't get created #214
+    with Greek extended keyboard layout
+    Madeit-Mod -------------------> result <------------ IceApe
+    RightAlt+Shift+r --------------> U+00AE <----------------- RightAlt+r
+    RightAlt+Shift+[2 times ; ] --> ¡§ <------------------ [couldn't find it]
+9.Fix: Remove support for Win98
+10.Fix: Some illegal chars in file name(eg, 0xFFF0~0xFFFF) would cause wxWidgets crash
+11.Fix: a bug when move up #217
+12.Fix: Crash if close the last file by double clicking page tab #218
+13.Other improvements
+14.Update translation
+
 Mod v0.4.4
 1.New: Set toolbar to 3 columns to let user who has a small display have a chance to re-org the toolbars
 2.New: Use icon to mark readonly flag
