@@ -125,6 +125,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.4.6 alpha
 New: Spell check for SearchReplaceDialog would change according to active window
+Fix: Toolbar issue
 
 Mod v0.4.5
 1.New: File history dialog

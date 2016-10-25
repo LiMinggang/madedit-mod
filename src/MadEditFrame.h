@@ -538,7 +538,7 @@ enum   // menu id
 	menuAbout = wxID_ABOUT,
 
 	// file
-	menuSaveAll = 1100,
+	menuSaveAll = 1000,
     menuSaveACopy,
 	menuReload,
 	menuRecentFiles,
