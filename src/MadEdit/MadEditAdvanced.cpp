@@ -3580,13 +3580,9 @@ void MadEdit::InsertIncrementalNumber( int initial, int step, int total, MadNumb
 	}
 }
 
-
 void MadEdit::SetSpellCheck( bool value )
 {
 #ifndef PYMADEDIT_DLL
-
-	if( m_SingleLineMode ) return;
-
 	if( value != m_SpellCheck )
 	{
 		m_SpellCheck = value;

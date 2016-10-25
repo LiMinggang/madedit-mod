@@ -123,6 +123,9 @@ FreeBSD packaging (with FreeBSD 10.01)
 2. aclocal version in aclocal.m4
 3. stdc++ version
 
+Mod v0.4.6 alpha
+New: Spell check for SearchReplaceDialog would change according to active window
+
 Mod v0.4.5
 1.New: File history dialog
 2.New: Add default key, down key support(the same as Search Dialog) for FindInFiles Dialog
