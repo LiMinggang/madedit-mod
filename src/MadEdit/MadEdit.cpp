@@ -10736,16 +10736,29 @@ void MadEdit::OnMouseWheel( wxMouseEvent &evt )
 	if( m_SingleLineMode )
 		return;
 
-	if( evt.ControlDown() && (! evt.ShiftDown() )) // inc/dec font size
+	// Alt is igored so far
+	if( evt.ControlDown()) // inc/dec font size
 	{
-		wxString name;
-		int size;
-		GetFont( name, size );
+		if(! evt.ShiftDown() )
+		{
+			wxString name;
+			int size;
+			GetFont( name, size );
 
-		if( evt.m_wheelRotation < 0 )
-			SetFont( name, size - 1 );
+			if( evt.m_wheelRotation < 0 )
+				SetFont( name, size - 1 );
+			else
+				SetFont( name, size + 1 );
+			return;
+		}
 		else
-			SetFont( name, size + 1 );
+		{
+			int scrollsize = m_PageRowCount;
+			if( evt.m_wheelRotation < 0 )
+				m_TopRow += scrollsize;
+			else
+				m_TopRow -= scrollsize;
+		}
 	}
 	else
 	{
@@ -10766,11 +10779,13 @@ void MadEdit::OnMouseWheel( wxMouseEvent &evt )
 			else
 				m_TopRow -= 3;
 		}
-		UpdateScrollBarPos();
-		m_RepaintAll = true;
-		Refresh( false );
 	}
 
+	// for (Ctrl(+Shift)+)Wheel
+	UpdateScrollBarPos();
+	m_RepaintAll = true;
+	Refresh( false );
+	// end for (Ctrl(+Shift)+)Wheel
 	//evt.Skip();
 }
 

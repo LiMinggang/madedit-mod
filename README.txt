@@ -123,8 +123,9 @@ FreeBSD packaging (with FreeBSD 10.01)
 2. aclocal version in aclocal.m4
 3. stdc++ version
 
-Mod v0.4.6 alpha
+Mod v0.4.6
 New: Spell check for SearchReplaceDialog would change according to active window
+New: Ctrl+Shift+Wheel as shortcut for Page Up/Down
 Fix: Toolbar issue
 
 Mod v0.4.5
