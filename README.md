@@ -57,39 +57,44 @@ Current Feature list(comparing to the original Madedit@sourceforge)
 
 News
 =======
-Mod v0.4.3
-1.New: Use dialog to let user choose one for all instead of annoying one by one dialogs
-2.New: Let the user to do the backup selfly #198
-3.New: Use Icon to replace the checkbox on QuickSearch Bar #181
-4.New: Remember pos of all tool Bars
-5.New: Reset tool bars position
-6.New: Insert to the top instead of append to the bottom of search results, expand the last automatically and collapse the last
-7.New: Add InputBox, MsgBox to MadPython so that user can get input or output some message
-8.New: Confirm Undo at the first time if the changes had been saved to disk
-9.New: Add Scripts list to right click menu
-10.New: Remove file from recentlist if could not be opened
-11.New: An Enhanced "Auto-complete" for selection(Option->Edit) #176
-12.New: Scroll function on Righ click menu of scroll bars #157
-13.New: Support selection replace in Typewriter mode
-14.New: Hope typewrite mode could work when use "Backspace" or "Delete" #203
-15.New: Double click to highlight word
-16.New: Enlarge input area of single mode
-17.New: Enhancement for Post-It mode #182
-18.Fix: 0.4.2.1 can not remember the word wrap setting #201
-19.Fix: The fix width in the Option menu can't Open #199
-20.Fix: Improve windows list code, fix a bug of inner-tab drag/reposition(wxAuiNoteBook, http://trac.wxwidgets.org/ticket/17551)
-21.Fix: Assertion failure of FindInFilesDialog
-22.Fix: Assertion failure of MadMacroDlg
-23.Fix: Improve 80 column indicator
-24.Other code improvement
-25.Upgrade boost to 1.61
-26.Update hunspell to 1.41
-27.Update Chinese translation
+Todo:
+FreeBSD packaging (with FreeBSD 10.01)
+1. configure CC=gcc CXX=g++
+2. aclocal version in aclocal.m4
+3. stdc++ version
+
+Mod v0.4.6
+* New: Spell check for SearchReplaceDialog would change according to active window
+* New: Ctrl+Shift+Wheel as shortcut for Page Up/Down
+* Fix: Toolbar issue
+
+Mod v0.4.5
+* New: File history dialog
+* New: Add default key, down key support(the same as Search Dialog) for FindInFiles Dialog
+* Fix: Size issue of some UI items #215
+* Fix: Two typos #82
+* Fix: Don't show EOF but Space/Tab in Search/Replace Dialog
+* Fix: CPPCheck warnings
+* Fix: Change shortcuts of Go Back/Forward
+* Fix: Some greek symbols that require the Alt+ compination don't get created #214
+    with Greek extended keyboard layout
+    Madeit-Mod -------------------> result <------------ IceApe
+    RightAlt+Shift+r --------------> U+00AE <----------------- RightAlt+r
+    RightAlt+Shift+[2 times ; ] --> ¡§ <------------------ [couldn't find it]
+* Fix: Remove support for Win98
+* Fix: Some illegal chars in file name(eg, 0xFFF0~0xFFFF) would cause wxWidgets crash
+* Fix: a bug when move up #217
+* Fix: Crash if close the last file by double clicking page tab #218
+* Other improvements
+* Update translation
 
 Todo:
 =====
 * Partial load for large text files which was mentioned by the original author but never getting done.
 * FreeBSD packaging (with FreeBSD 10.01)
+1. configure CC=gcc CXX=g++
+2. aclocal version in aclocal.m4
+3. stdc++ version
 
 Known issues:
 =============
@@ -100,3 +105,7 @@ Known issues:
     Eg. (?<=.)\s(?=.), will has issue to be replaced one by one. It's tricky and
     NP++ has the same issue too.
 4. HighlightWord would not work if the caret is at the end of the line
+
+Download:
+=============
+[Madedit-Mod@sf](https://sourceforge.net/projects/madedit-mod/files/?source=navbar)
