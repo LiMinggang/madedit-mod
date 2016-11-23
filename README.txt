@@ -127,6 +127,7 @@ Mod v0.4.6
 New: Spell check for SearchReplaceDialog would change according to active window
 New: Ctrl+Shift+Wheel as shortcut for Page Up/Down
 Fix: Toolbar issue
+Update Simplified Chinese translation
 
 Mod v0.4.5
 1.New: File history dialog
