@@ -400,8 +400,8 @@ void MadSearchReplaceDialog::MadSearchReplaceDialogClose( wxCloseEvent& event )
 	if( event.CanVeto() )
 	{
 		event.Veto();
-		Show( false );
-		return;
+		wxCommandEvent evt;
+		return WxButtonCloseClick( evt );
 	}
 
 	g_SearchReplaceDialog = NULL;

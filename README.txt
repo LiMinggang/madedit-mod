@@ -128,6 +128,7 @@ New: Spell check for SearchReplaceDialog would change according to active window
 New: Ctrl+Shift+Wheel as shortcut for Page Up/Down
 Fix: Toolbar issue
 Fix: Regex search bug #224
+Fix: Caret position is not updated if close search dialog by click 'X' instead of close button
 Update Simplified Chinese translation
 
 Mod v0.4.5
