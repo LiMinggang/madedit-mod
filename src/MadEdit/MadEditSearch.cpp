@@ -1180,3 +1180,25 @@ bool MadEdit::NextRegexSearchingPos( MadCaretPos& cp, const wxString &expr )
 	return true;
 }
 
+bool MadEdit::MoveToNextRegexSearchingPos( const wxString &expr )
+{
+	MadCaretPos& cp = m_CaretPos;
+	if( expr.find_first_of( wxT( '^' ) ) != wxString::npos || expr.find_last_of( wxT( '$' ) ) != wxString::npos )
+	{
+		wxFileOffset len = cp.iter->m_Size - cp.linepos - 1;
+		cp.pos += len;
+		cp.linepos += len;
+	}
+
+	if( cp.pos == UCIterator::s_endpos )
+	{ return false; }
+
+	UCIterator it( cp.pos, cp.iter, cp.linepos );
+	++it;
+	cp.pos = it.pos;
+	cp.iter = it.lit;
+	cp.linepos = it.linepos;
+	return true;
+}
+
+

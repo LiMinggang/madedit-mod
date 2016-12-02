@@ -993,6 +993,7 @@ public: // basic functions
 					   wxFileOffset rangeFrom = -1, wxFileOffset rangeTo = -1 );
 
 	bool NextRegexSearchingPos( MadCaretPos& cp, const wxString &expr );
+    bool MoveToNextRegexSearchingPos( const wxString &expr );
 
 	// list the matched data to pbegpos & pendpos
 	// return the found count or SR_EXPR_ERROR

@@ -521,6 +521,7 @@ void MadSearchReplaceDialog::WxButtonFindNextClick( wxCommandEvent& event )
 				if( ThrEndOfFile )
 					g_StatusBar->SetStatusText( _( "Passed the end of the file" ), 0 );
 
+				g_ActiveMadEdit->MoveToNextRegexSearchingPos( text );
 				break;
 			}
 
