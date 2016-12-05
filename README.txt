@@ -130,6 +130,7 @@ Fix: Toolbar issue
 Fix: Regex search bug #224
 Fix: Caret position is not updated if close search dialog by click 'X' instead of close button
 Update Simplified Chinese translation
+Update boost to 1.62
 
 Mod v0.4.5
 1.New: File history dialog
