@@ -1890,12 +1890,14 @@ void MadSearchReplaceDialog::WxCheckBoxRegexClick( wxCommandEvent& event )
 		WxCheckBoxWholeWord->Disable();
 		WxCheckBoxFindHex->Disable();
 		WxCheckBoxDotMatchNewLine->Enable();
+		WxButtonFindPrev->Disable();
 	}
 	else
 	{
 		WxCheckBoxWholeWord->Enable();
 		WxCheckBoxFindHex->Enable();
 		WxCheckBoxDotMatchNewLine->Disable();
+		WxButtonFindPrev->Enable();
 	}
 }
 
