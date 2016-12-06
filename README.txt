@@ -43,13 +43,17 @@ P.S.: Please open a ticket for bug of MadEdit-Mod at
 MadEdit_Win2K is a build by VC++ 2005 express for Windows 2000.
 
 Example build under Linux
-Boost Python(1.61) add 'address-model=64' if build for 64 bit and add ' cflags=-fPIC cxxflags=-fPIC ' if you got ". /usr/bin/ld: /usr/local/lib/libboost_python.a(list.o): relocation R_X86_64_32 against `.rodata.str1.1' can not be used when making a shared object; recompile with -fPIC
+Boost Python(1.62) add 'address-model=64' if build for 64 bit and add ' cflags=-fPIC cxxflags=-fPIC ' if you got ". /usr/bin/ld: /usr/local/lib/libboost_python.a(list.o): relocation R_X86_64_32 against `.rodata.str1.1' can not be used when making a shared object; recompile with -fPIC
 /usr/local/lib/libboost_python.a: could not read symbols: Bad value"
 ./b2 -j2 --with-python include="${HOME}/madedit-mod/minipython/Include" python-debugging=off threading=multi variant=release link=static runtime-link=static stage
 wxWidgets(3.1.0) (CXXFLAGS=-fPIC CPPFLAGS=-fPIC CFLAGS=-fPIC, x64)
 ./configure --enable-unicode --disable-shared --with-libpng=builtin --with-zlib=builtin --with-expat=builtin --with-gtk3=yes --with-libiconv=no
 MadEdit-Mod
 ./configure --with-boost=${HOME}/boost_1_61_0 --with-wxdir=${HOME}/wxWidgets-3.1.0
+
+Example build under Windows
+Boost(1.62)
+.\bjam.exe --user-config=user-config.jam --with-python python-debugging=off threading=multi variant=release link=static address-model=64 runtime-link=static stage
 
 Syntax files, Locale files, Dictionaries and Settings:
 ---------------------------------------
