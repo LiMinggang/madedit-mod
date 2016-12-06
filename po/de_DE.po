@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.3.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-06 16:51+0800\n"
+"POT-Creation-Date: 2016-12-06 19:53+0800\n"
 "PO-Revision-Date: 2015-04-18 00:14+0100\n"
 "Last-Translator: Ronny Steiner <post@sirsteiner.de>\n"
 "Language-Team: \n"
@@ -550,8 +550,12 @@ msgid ""
 "Invalid Markdown format!!"
 msgstr ""
 
-#: ../src/MadEdit/MadEdit.cpp:11956
+#: ../src/MadEdit/MadEdit.cpp:11959
 msgid "Zero Length Match"
+msgstr ""
+
+#: ../src/MadEdit/MadEdit.cpp:11962
+msgid "^ Zero Length Match"
 msgstr ""
 
 #: ../src/MadEdit/MadEditAdvanced.cpp:1856

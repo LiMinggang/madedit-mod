@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-06 16:54+0800\n"
+"POT-Creation-Date: 2016-12-06 19:53+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -501,8 +501,12 @@ msgid ""
 "Invalid Markdown format!!"
 msgstr ""
 
-#: ../src/MadEdit/MadEdit.cpp:11956
+#: ../src/MadEdit/MadEdit.cpp:11959
 msgid "Zero Length Match"
+msgstr ""
+
+#: ../src/MadEdit/MadEdit.cpp:11962
+msgid "^ Zero Length Match"
 msgstr ""
 
 #: ../src/MadEdit/MadEditAdvanced.cpp:1856

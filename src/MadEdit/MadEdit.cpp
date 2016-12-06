@@ -53,8 +53,10 @@
 	#include "HunspellInterface.h"
 #endif
 
+#ifdef __WXMSW__
 #include "../../images/zerolen.xpm"
 #define zerolen_xpm_idx 0
+#endif
 
 using std::vector;
 using std::list;
@@ -11953,11 +11955,19 @@ void MadEdit::ShowZeroLenSelIndicator()
 	if(m_ZeroLenSelIndicator == NULL)
 	{
 		m_ZeroLenSelIndicator = new wxMenu( ( long )0 );
-		wxMenuItem * mit =m_ZeroLenSelIndicator->Append( wxNewId(),  _( "Zero Length Match" ) );
+#ifdef __WXMSW__
+		wxMenuItem * mit = m_ZeroLenSelIndicator->Append( wxNewId(),  _( "Zero Length Match" ) );
 		mit->SetBitmap( wxBitmap( zerolen_xpm ) );
+#else
+		wxMenuItem * mit = m_ZeroLenSelIndicator->Append( wxNewId(),  _( "^ Zero Length Match" ) );
+#endif
 	}
 
+#ifdef __WXMSW__
 	int xpos = m_LineNumberAreaWidth + m_BookmarkWidth + m_LeftMarginWidth + m_CaretPos.xpos - m_DrawingXPos - 16;
+#else
+	int xpos = m_LineNumberAreaWidth + m_BookmarkWidth + m_LeftMarginWidth + m_CaretPos.xpos - m_DrawingXPos - (m_TextFontSpaceWidth+1)/2;
+#endif
 	int ypos = ( int )( m_CaretPos.rowid - m_TopRow ) * m_RowHeight + ( ( m_RowHeight - m_TextFontHeight ) >> 1 );
 	if((ypos + 2 * m_RowHeight) >= m_MaxHeight) ypos -= m_RowHeight;
 	else ypos += m_RowHeight;

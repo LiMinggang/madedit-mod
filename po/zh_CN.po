@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-06 16:51+0800\n"
-"PO-Revision-Date: 2016-12-06 16:56+0800\n"
+"POT-Creation-Date: 2016-12-06 19:53+0800\n"
+"PO-Revision-Date: 2016-12-06 19:55+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit-mod@gmail.com>\n"
 "Language: zh_CN\n"
@@ -506,9 +506,13 @@ msgstr ""
 "\n"
 "无效的Markdown格式！！"
 
-#: ../src/MadEdit/MadEdit.cpp:11956
+#: ../src/MadEdit/MadEdit.cpp:11959
 msgid "Zero Length Match"
 msgstr "零长度匹配"
+
+#: ../src/MadEdit/MadEdit.cpp:11962
+msgid "^ Zero Length Match"
+msgstr "^ 零长度匹配"
 
 #: ../src/MadEdit/MadEditAdvanced.cpp:1856
 msgid "Invalid Unicode Characters"
