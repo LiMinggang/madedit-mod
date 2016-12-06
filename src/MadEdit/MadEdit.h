@@ -1105,6 +1105,7 @@ public:
     
     long GetVSMousePos(){return m_VSMousePos;}
     long GetHSMousePos(){return m_HSMousePos;}
+    void ShowZeroLenSelIndicator();
 
 private: // Printing functions
 	int m_Printing;     // 0: no, <0: Text, >0: Hex
@@ -1136,6 +1137,7 @@ private: // Printing functions
 	int m_HexLineCountPerPage;
 	int m_PrintTotalHexLineCount;
 	MadEdit *m_PrintHexEdit;    // use a temporary MadEdit to print Hex-Data
+	static wxMenu * m_ZeroLenSelIndicator;
 
 public: // printing functions
 	void BeginPrint( const wxRect &printRect );

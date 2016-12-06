@@ -2801,6 +2801,7 @@ MadSearchResult MadEdit::FindTextNext( const wxString &text,
 		if ((epos.linepos > (epos.iter->m_Size - epos.iter->m_NewLineSize)) && (epos.linepos < epos.iter->m_Size))
 			endpos += (epos.linepos + epos.iter->m_NewLineSize - epos.iter->m_Size);
 		SetSelection(beginpos, endpos);
+		if(!m_Selection) ShowZeroLenSelIndicator();
 		if (endpos != epos.pos)
 			m_CaretPos = epos;
 

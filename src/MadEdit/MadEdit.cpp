@@ -53,6 +53,9 @@
 	#include "HunspellInterface.h"
 #endif
 
+#include "../../images/zerolen.xpm"
+#define zerolen_xpm_idx 0
+
 using std::vector;
 using std::list;
 
@@ -766,6 +769,7 @@ void FontWidthManager::FreeMem()
 //==================================================
 
 int MadEdit::ms_Count = 0;
+wxMenu * MadEdit::m_ZeroLenSelIndicator = NULL; // When to delete?
 
 #include "../../images/dnd_copy.xpm"
 #include "../../images/dnd_move.xpm"
@@ -11943,4 +11947,27 @@ void MadEdit::OnCheckModificationTime( wxCommandEvent& evt )
 	if(m_ModReloaded == false )
 		ReloadByModificationTime();
 }
+
+void MadEdit::ShowZeroLenSelIndicator()
+{
+	if(m_ZeroLenSelIndicator == NULL)
+	{
+		m_ZeroLenSelIndicator = new wxMenu( ( long )0 );
+		wxMenuItem * mit =m_ZeroLenSelIndicator->Append( wxNewId(),  _( "Zero Length Match" ) );
+		mit->SetBitmap( wxBitmap( zerolen_xpm ) );
+	}
+
+	int xpos = m_LineNumberAreaWidth + m_BookmarkWidth + m_LeftMarginWidth + m_CaretPos.xpos - m_DrawingXPos - 16;
+	int ypos = ( int )( m_CaretPos.rowid - m_TopRow ) * m_RowHeight + ( ( m_RowHeight - m_TextFontHeight ) >> 1 );
+	if((ypos + 2 * m_RowHeight) >= m_MaxHeight) ypos -= m_RowHeight;
+	else ypos += m_RowHeight;
+
+	if(xpos <= 0) xpos = 0;
+	if(ypos <= 0) ypos = 0;
+
+	wxPoint pos(xpos, ypos);
+
+	PopupMenu( m_ZeroLenSelIndicator, pos );
+}
+
 

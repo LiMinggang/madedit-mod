@@ -130,6 +130,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 Mod v0.4.6
 New: Spell check for SearchReplaceDialog would change according to active window
 New: Ctrl+Shift+Wheel as shortcut for Page Up/Down
+New: Indicator for zero length match in Regex search
 Fix: Toolbar issue
 Fix: Regex search bug #224
 Fix: Caret position is not updated if close search dialog by click 'X' instead of close button

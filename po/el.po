@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: madedit-mod 003\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-21 14:15+0800\n"
+"POT-Creation-Date: 2016-12-06 16:51+0800\n"
 "PO-Revision-Date: 2016-07-12 23:47+0300\n"
 "Last-Translator: Nikos Papadopoulos <nikos569@yahoo.com>\n"
 "Language-Team: Greek <231036448@freemail.gr>\n"
@@ -509,6 +509,10 @@ msgstr ""
 "\n"
 "Μη έγκυρη μορφή Markdown!!"
 
+#: ../src/MadEdit/MadEdit.cpp:11956
+msgid "Zero Length Match"
+msgstr ""
+
 #: ../src/MadEdit/MadEditAdvanced.cpp:1856
 msgid "Invalid Unicode Characters"
 msgstr "Μη Έγκυροι Χαρακτήρες Unicode"
@@ -547,8 +551,8 @@ msgstr "Ο Γονικός Κατάλογος αυτού του αρχείου δ
 msgid "Cannot save this file:"
 msgstr "Αδυναμία αποθήκευσης αυτού του αρχείου:"
 
-#: ../src/MadEdit/MadEditBasic.cpp:2532 ../src/MadEdit/MadEditBasic.cpp:2977
-#: ../src/MadEdit/MadEditBasic.cpp:2990 ../src/MadEdit/MadEditSearch.cpp:854
+#: ../src/MadEdit/MadEditBasic.cpp:2532 ../src/MadEdit/MadEditBasic.cpp:2978
+#: ../src/MadEdit/MadEditBasic.cpp:2991 ../src/MadEdit/MadEditSearch.cpp:854
 #: ../src/MadEdit/MadEditSearch.cpp:950 ../src/MadEdit/MadEditSearch.cpp:1003
 #: ../src/MadEditFrame.cpp:529 ../src/MadEditFrame.cpp:534
 #: ../src/MadEditFrame.cpp:5439
@@ -600,11 +604,11 @@ msgstr "Αυτό το αρχείο έχει αλλαχτεί από μια άλ�
 msgid "Do you want to reload it?"
 msgstr "Θέλεις να γίνει επαναφόρτωση του αρχείου;"
 
-#: ../src/MadEdit/MadEditBasic.cpp:2968
+#: ../src/MadEdit/MadEditBasic.cpp:2969
 msgid "The input string is not a valid Hex-String:"
 msgstr "Ο εισηγμένος στίχος δεν είναι έγκυρος Hex-Στίχος:"
 
-#: ../src/MadEdit/MadEditBasic.cpp:3682
+#: ../src/MadEdit/MadEditBasic.cpp:3683
 #, c-format
 msgid "Found %d matched texts..."
 msgstr "Βρέθηκαν %d κείμενα που ταιριάζουν..."
@@ -1363,7 +1367,7 @@ msgid "Find next occurrence"
 msgstr "Εύρεση της επόμενης ύπαρξης"
 
 #: ../src/MadEditFrame.cpp:2128 ../src/MadEditFrame.cpp:3305
-#: ../src/MadSearchReplaceDialog.cpp:549 ../src/MadSearchReplaceDialog.cpp:1137
+#: ../src/MadSearchReplaceDialog.cpp:550 ../src/MadSearchReplaceDialog.cpp:1138
 msgid "Find Next"
 msgstr "Επόμενο"
 
@@ -1376,7 +1380,7 @@ msgid "Find previous occurrence"
 msgstr "Εύρεση της προηγούμενης ύπαρξης"
 
 #: ../src/MadEditFrame.cpp:2129 ../src/MadEditFrame.cpp:3306
-#: ../src/MadSearchReplaceDialog.cpp:705
+#: ../src/MadSearchReplaceDialog.cpp:706
 msgid "Find Previous"
 msgstr "Προηγούμενο"
 
@@ -1396,7 +1400,7 @@ msgstr "Α&ντικατάσταση"
 msgid "Replace a string"
 msgstr "Αντικατάσταση στίχου"
 
-#: ../src/MadEditFrame.cpp:2132 ../src/MadSearchReplaceDialog.cpp:1262
+#: ../src/MadEditFrame.cpp:2132 ../src/MadSearchReplaceDialog.cpp:1263
 msgid "Replace"
 msgstr "Αντικατάσταση"
 
@@ -2501,8 +2505,8 @@ msgstr "Η Κουκκίδα Ταιριάζει Νέα Γραμμή"
 msgid "Dot Match Newline in Regular Expressions"
 msgstr "Η Κουκκίδα Ταιριάζει Νέα Γραμμή στις Κανονικές Εκφράσεις"
 
-#: ../src/MadEditFrame.cpp:3361 ../src/MadSearchReplaceDialog.cpp:1679
-#: ../src/MadSearchReplaceDialog.cpp:1692 ../src/MadPython.hpp:1504
+#: ../src/MadEditFrame.cpp:3361 ../src/MadSearchReplaceDialog.cpp:1680
+#: ../src/MadSearchReplaceDialog.cpp:1693 ../src/MadPython.hpp:1504
 #: ../src/MadPython.hpp:1527
 msgid "Search Results"
 msgstr "Αποτελέσματα Αναζήτησης"
@@ -2693,7 +2697,7 @@ msgid "Passed the begin of the file/selection"
 msgstr "Πέρασε την αρχή του αρχείου ή της επιλογής"
 
 #: ../src/MadEditFrame.cpp:9750 ../src/MadSearchReplaceDialog.cpp:522
-#: ../src/MadSearchReplaceDialog.cpp:678
+#: ../src/MadSearchReplaceDialog.cpp:679
 msgid "Passed the end of the file"
 msgstr "Πέρασε το τέλος του αρχείου ή της επιλογής"
 
@@ -2860,7 +2864,7 @@ msgstr "Ο επιλεγμένος κατάλογος δεν υπάρχει."
 msgid "Processing %s of %s files..."
 msgstr "Επεξεργασία %s από %s αρχεία..."
 
-#: ../src/MadFindInFilesDialog.cpp:760 ../src/MadSearchReplaceDialog.cpp:1559
+#: ../src/MadFindInFilesDialog.cpp:760 ../src/MadSearchReplaceDialog.cpp:1560
 #: ../src/MadPython.hpp:1507 ../src/MadPython.hpp:1531
 msgid "Search \""
 msgstr "Αναζήτηση \""
@@ -2870,12 +2874,12 @@ msgstr "Αναζήτηση \""
 msgid "(in %s files)"
 msgstr "(σε %s αρχεία)"
 
-#: ../src/MadFindInFilesDialog.cpp:880 ../src/MadSearchReplaceDialog.cpp:1666
+#: ../src/MadFindInFilesDialog.cpp:880 ../src/MadSearchReplaceDialog.cpp:1667
 #, c-format
 msgid "Found %s matched texts..."
 msgstr "Βρέθηκαν %s κείμενα που ταιριάζουν..."
 
-#: ../src/MadFindInFilesDialog.cpp:882 ../src/MadSearchReplaceDialog.cpp:1668
+#: ../src/MadFindInFilesDialog.cpp:882 ../src/MadSearchReplaceDialog.cpp:1669
 msgid "Preparing Results"
 msgstr "Προετοιμασία των Αποτελεσμάτων"
 
@@ -3093,7 +3097,7 @@ msgstr ""
 msgid "C&ount"
 msgstr "Καταμέτ&ρηση"
 
-#: ../src/MadSearchReplaceDialog.cpp:222 ../src/MadSearchReplaceDialog.cpp:1279
+#: ../src/MadSearchReplaceDialog.cpp:222 ../src/MadSearchReplaceDialog.cpp:1280
 msgid "R&eplace >>"
 msgstr "Α&ντ/ση >>"
 
@@ -3101,38 +3105,38 @@ msgstr "Α&ντ/ση >>"
 msgid "WxBitmapButtonRecentFindText"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:532 ../src/MadSearchReplaceDialog.cpp:688
-#: ../src/MadSearchReplaceDialog.cpp:1512
-#: ../src/MadSearchReplaceDialog.cpp:1701
+#: ../src/MadSearchReplaceDialog.cpp:533 ../src/MadSearchReplaceDialog.cpp:689
+#: ../src/MadSearchReplaceDialog.cpp:1513
+#: ../src/MadSearchReplaceDialog.cpp:1702
 msgid "Cannot find the matched string"
 msgstr "Αδυναμία εύρεσης στίχου που ταιριάζει"
 
-#: ../src/MadSearchReplaceDialog.cpp:543 ../src/MadSearchReplaceDialog.cpp:699
+#: ../src/MadSearchReplaceDialog.cpp:544 ../src/MadSearchReplaceDialog.cpp:700
 msgid "Cannot find the matched string."
 msgstr "Αδυναμία εύρεσης στίχου που ταιριάζει."
 
-#: ../src/MadSearchReplaceDialog.cpp:546 ../src/MadSearchReplaceDialog.cpp:1134
+#: ../src/MadSearchReplaceDialog.cpp:547 ../src/MadSearchReplaceDialog.cpp:1135
 msgid "Do you want to find from begin of selection?"
 msgstr "Θέλεις να γίνει αναζήτηση από την αρχή της επιλογής;"
 
-#: ../src/MadSearchReplaceDialog.cpp:547 ../src/MadSearchReplaceDialog.cpp:1135
+#: ../src/MadSearchReplaceDialog.cpp:548 ../src/MadSearchReplaceDialog.cpp:1136
 msgid "Do you want to find from begin of file?"
 msgstr "Θέλεις να γίνει αναζήτηση από την αρχή του αρχείου;"
 
-#: ../src/MadSearchReplaceDialog.cpp:572 ../src/MadSearchReplaceDialog.cpp:719
-#: ../src/MadSearchReplaceDialog.cpp:1727
+#: ../src/MadSearchReplaceDialog.cpp:573 ../src/MadSearchReplaceDialog.cpp:720
+#: ../src/MadSearchReplaceDialog.cpp:1728
 msgid "Empty expression"
 msgstr "Άδεια έκφραση"
 
-#: ../src/MadSearchReplaceDialog.cpp:702
+#: ../src/MadSearchReplaceDialog.cpp:703
 msgid "Do you want to find from end of selection?"
 msgstr "Θέλεις να γίνει αναζήτηση από το τέλος της επιλογής;"
 
-#: ../src/MadSearchReplaceDialog.cpp:703
+#: ../src/MadSearchReplaceDialog.cpp:704
 msgid "Do you want to find from end of file?"
 msgstr "Θέλεις να γίνει αναζήτηση από το τέλος του αρχείου;"
 
-#: ../src/MadSearchReplaceDialog.cpp:1131
+#: ../src/MadSearchReplaceDialog.cpp:1132
 msgid ""
 "Cannot find the matched string.\n"
 "Replace is finished."
@@ -3140,63 +3144,63 @@ msgstr ""
 "Αδυναμία εύρεσης στίχου που να ταιριάζει.\n"
 "Η αντικατάσταση τελείωσε."
 
-#: ../src/MadSearchReplaceDialog.cpp:1253
+#: ../src/MadSearchReplaceDialog.cpp:1254
 msgid "Search <<"
 msgstr "Αναζήτηση <<"
 
-#: ../src/MadSearchReplaceDialog.cpp:1283
+#: ../src/MadSearchReplaceDialog.cpp:1284
 msgid "Search"
 msgstr "Αναζήτηση"
 
-#: ../src/MadSearchReplaceDialog.cpp:1367
+#: ../src/MadSearchReplaceDialog.cpp:1368
 #, c-format
 msgid "'%s' was found %d times."
 msgstr "Το '%s' βρέθηκε %d φορές."
 
-#: ../src/MadSearchReplaceDialog.cpp:1403
+#: ../src/MadSearchReplaceDialog.cpp:1404
 #, c-format
 msgid "Preparing %s of %s results..."
 msgstr "Προετοιμασία %s από %s αποτελέσματα..."
 
-#: ../src/MadSearchReplaceDialog.cpp:1442
+#: ../src/MadSearchReplaceDialog.cpp:1443
 #, c-format
 msgid "Line(%d-%d)"
 msgstr "Γραμμή(%d-%d)"
 
-#: ../src/MadSearchReplaceDialog.cpp:1447
+#: ../src/MadSearchReplaceDialog.cpp:1448
 #, c-format
 msgid "Line(%d)"
 msgstr "Γραμμή (%d)"
 
-#: ../src/MadSearchReplaceDialog.cpp:1452
+#: ../src/MadSearchReplaceDialog.cpp:1453
 #, c-format
 msgid "Offset(%s)"
 msgstr "Απόκλιση (%s)"
 
-#: ../src/MadSearchReplaceDialog.cpp:1453
+#: ../src/MadSearchReplaceDialog.cpp:1454
 msgid "Binary file matches"
 msgstr "Ταιριάσματα δυαδικού αρχείου"
 
-#: ../src/MadSearchReplaceDialog.cpp:1516
+#: ../src/MadSearchReplaceDialog.cpp:1517
 msgid " results"
 msgstr " αποτελέσματα"
 
-#: ../src/MadSearchReplaceDialog.cpp:1660 ../src/MadPython.hpp:1507
+#: ../src/MadSearchReplaceDialog.cpp:1661 ../src/MadPython.hpp:1507
 #: ../src/MadPython.hpp:1531
 #, c-format
 msgid "(%s hits in 1 file)"
 msgstr "(%s επιτυχίες σε 1 αρχείο)"
 
-#: ../src/MadSearchReplaceDialog.cpp:1706
+#: ../src/MadSearchReplaceDialog.cpp:1707
 #, c-format
 msgid "%s results"
 msgstr "%s αποτελέσματα"
 
-#: ../src/MadSearchReplaceDialog.cpp:1818
+#: ../src/MadSearchReplaceDialog.cpp:1819
 msgid "Cannot find any matched string."
 msgstr "Αδυναμία εύρεσης οποιουδήποτε στίχου που να ταιριάζει."
 
-#: ../src/MadSearchReplaceDialog.cpp:1820
+#: ../src/MadSearchReplaceDialog.cpp:1821
 #, c-format
 msgid "%s string(s) were replaced."
 msgstr ""
