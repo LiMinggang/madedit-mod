@@ -11964,7 +11964,7 @@ void MadEdit::ShowZeroLenSelIndicator()
 	}
 
 #ifdef __WXMSW__
-	int xpos = m_LineNumberAreaWidth + m_BookmarkWidth + m_LeftMarginWidth + m_CaretPos.xpos - m_DrawingXPos - 16;
+	int xpos = m_LineNumberAreaWidth + m_BookmarkWidth + m_LeftMarginWidth + m_CaretPos.xpos - m_DrawingXPos - 14;
 #else
 	int xpos = m_LineNumberAreaWidth + m_BookmarkWidth + m_LeftMarginWidth + m_CaretPos.xpos - m_DrawingXPos - (m_TextFontSpaceWidth+1)/2;
 #endif
