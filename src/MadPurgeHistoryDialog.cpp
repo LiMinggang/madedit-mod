@@ -191,8 +191,9 @@ void MadPurgeHistoryDialog::wxCheckBoxAllAboveClick(wxCommandEvent& event)
         wxCheckBoxRecentSearchedTexts->SetValue(true);
         wxCheckBoxRecentEncodings->SetValue(true);
         wxCheckBoxRecentFonts->SetValue(true);
-        wxCheckBoxRecentFiles->SetValue(true); 
-		wxCheckBoxCaretPos->SetValue(true); 
+        wxCheckBoxRecentFiles->SetValue(true);
+		wxCheckBoxCaretPos->SetValue(true);
+		wxCheckBoxResetToolBarsInfoWin->SetValue(true);
     }
     else
     {
@@ -204,6 +205,7 @@ void MadPurgeHistoryDialog::wxCheckBoxAllAboveClick(wxCommandEvent& event)
         wxCheckBoxRecentEncodings->SetValue(false);
         wxCheckBoxRecentFonts->SetValue(false);
         wxCheckBoxRecentFiles->SetValue(false);
-		wxCheckBoxCaretPos->SetValue(false); 
+		wxCheckBoxCaretPos->SetValue(false);
+		wxCheckBoxResetToolBarsInfoWin->SetValue(false);
     }
 }
