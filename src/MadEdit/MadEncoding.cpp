@@ -6,9 +6,10 @@
 // Licence:     GPL
 ///////////////////////////////////////////////////////////////////////////////
 
+#include <wx/config.h>
 #include "MadEncoding.h"
 #include "chardetect.h"
-#include <wx/config.h>
+#include "MadCSConv.h"
 
 using std::vector;
 using std::map;
@@ -533,6 +534,20 @@ void MadEncoding::InitEncodings()
 			EncodingsTable.push_back( MadEncodingInfo( enc, name.Upper(), desc, type, fontname, encGrp ) );
 		}
 	}
+
+#ifdef __MAD_ENCODING_EXTENDED__
+	{
+		encGrp.clear();
+		wxString name = wxT( "GB18030" );
+		wxString fontname( wxT( "Courier New" ) );
+		wxString desc(wxT("Chinese Simplified"));
+		MadEncodingType type = etGB18030;
+		MSW_GET_FONT_NAME( wxT( "54936" ), fontname );
+		encGrp.push_back( ENCG_EASTASIA );
+		EncodingsTable.push_back( MadEncodingInfo( MAD_FONTENCODING_GB18030, name.Upper(), desc, type, fontname, encGrp ) );
+	}
+#endif //__MAD_ENCODING_EXTENDED__
+
 }
 
 void MadEncoding::FreeEncodings()
@@ -591,7 +606,7 @@ const std::vector<int>& MadEncoding::GetEncodingGrps( size_t idx )
 	return EncodingsTable[idx].m_GrpIdVec;
 }
 
-wxString MadEncoding::EncodingToName( wxFontEncoding enc )
+wxString MadEncoding::EncodingToName( int enc )
 {
 	size_t idx;
 
@@ -606,7 +621,7 @@ wxString MadEncoding::EncodingToName( wxFontEncoding enc )
 	return EncodingsTable[ms_SystemEncodingIndex].m_Name;
 }
 
-wxFontEncoding MadEncoding::NameToEncoding( const wxString &name )
+int MadEncoding::NameToEncoding( const wxString &name )
 {
 	size_t idx;
 	wxString uname( name.Upper() );
@@ -637,7 +652,7 @@ MadEncoding::MadEncoding( size_t idx )
 	Create( idx );
 }
 
-MadEncoding::MadEncoding( wxFontEncoding enc )
+MadEncoding::MadEncoding( int enc )
 {
 	size_t idx;
 
@@ -691,9 +706,9 @@ void MadEncoding::Create( size_t idx )
 	else
 	{
 #if defined(__WXGTK__)
-		m_CSConv = new wxCSConv( m_Info->m_Name.c_str() );
+		m_CSConv = new MadCSConv( m_Info->m_Name.c_str() );
 #else //#elif defined(__WXMSW__) || defined(__WXMAC__)
-		m_CSConv = new wxCSConv( m_Info->m_Encoding );
+		m_CSConv = new MadCSConv( m_Info->m_Encoding );
 #endif
 		m_Info->m_CSConv = m_CSConv;
 
@@ -772,6 +787,10 @@ void MadEncoding::Create( size_t idx )
 
 	case etUTF32BE:
 		UCS4toMultiByte = &MadEncoding::UCS4toUTF32BE;
+		break;
+
+	case etGB18030:
+		UCS4toMultiByte = &MadEncoding::UCS4toGB18030;
 		break;
 
 	default:
@@ -971,6 +990,11 @@ size_t MadEncoding::UCS4toUTF32BE( ucs4_t ucs4, wxByte *buf )
 	return 4;
 }
 
+size_t MadEncoding::UCS4toGB18030(ucs4_t ucs4, wxByte *buf)
+{
+	return m_CSConv->WC2MB( ( char* )buf, (wchar_t *)(&ucs4), 4 );
+}
+
 ucs4_t MadEncoding::SBtoUCS4( wxByte b1 )  // Single-Byte to UCS4
 {
 	return m_MBtoWC_Table[ b1 ];
@@ -984,6 +1008,13 @@ ucs4_t MadEncoding::DBtoUCS4( wxByte *buf )  // Double-Byte to UCS4
 
 	register unsigned int w = ( ( ( unsigned int )buf[0] ) << 8 ) | buf[1];
 	return m_MBtoWC_Table[w];
+}
+
+ucs4_t MadEncoding::GB18030toUCS4(wxByte *buf, size_t &len)
+{
+	ucs4_t ucs4 = 0;
+	len = m_CSConv->MB2WC ((wchar_t *)(&ucs4), (const char *)buf, 4);
+	return ucs4;
 }
 
 bool MadEncoding::IsLeadByte( wxByte byte )
@@ -1031,7 +1062,6 @@ bool MadEncoding::IsLeadByte( wxByte byte )
 
 	return m_LeadByte_Table[byte] == 1;
 }
-
 
 //==================================================
 
@@ -1290,7 +1320,7 @@ bool IsBinaryData( wxByte *data, int size )
 	return false;
 }
 
-void DetectChineseEncoding( const wxByte *text, int count, wxFontEncoding &enc )
+void DetectChineseEncoding( const wxByte *text, int count, int &enc )
 {
 	// detect by punctuation marks
 	int i = 0;
@@ -1420,7 +1450,7 @@ void DetectChineseEncoding( const wxByte *text, int count, wxFontEncoding &enc )
 		if( cp936 > cp950 ) enc = wxFONTENCODING_CP936;
 }
 
-void DetectJapaneseEncoding( const wxByte *text, int count, wxFontEncoding &enc )
+void DetectJapaneseEncoding( const wxByte *text, int count, int &enc )
 {
 	wxByte c;
 	int i = 0;
@@ -1492,7 +1522,7 @@ void DetectJapaneseEncoding( const wxByte *text, int count, wxFontEncoding &enc 
 		enc = xenc;
 }
 
-void DetectEncoding( const wxByte *text, int count, wxFontEncoding &enc )
+void DetectEncoding( const wxByte *text, int count, int &enc )
 {
 	chardet_t det = NULL;
 	char encoding_name[CHARDET_MAX_ENCODING_NAME];
@@ -1519,7 +1549,7 @@ void DetectEncoding( const wxByte *text, int count, wxFontEncoding &enc )
 			{
 				if( value == 2 ) //1252 or ?
 				{
-					wxFontEncoding def = wxFONTENCODING_DEFAULT;
+					int def = wxFONTENCODING_DEFAULT;
 
 					if( enc == wxFONTENCODING_CP950 || wxFONTENCODING_CP936 )
 					{

@@ -211,6 +211,7 @@
     <ClCompile Include="..\..\src\MadConvEncDialog.cpp" />
     <ClCompile Include="..\..\src\MadEditApp.cpp" />
     <ClCompile Include="..\..\src\MadEditFrame.cpp" />
+    <ClCompile Include="..\..\src\MadEdit\MadCSConv.cpp" />
     <ClCompile Include="..\..\src\MadFileAssociationDialog.cpp" />
     <ClCompile Include="..\..\src\MadFileHistoryDialog.cpp" />
     <ClCompile Include="..\..\src\MadFindInFilesDialog.cpp" />
@@ -290,6 +291,18 @@
     <ClInclude Include="..\..\src\MadConvEncDialog.h" />
     <ClInclude Include="..\..\src\MadEditApp.h" />
     <ClInclude Include="..\..\src\MadEditFrame.h" />
+    <ClInclude Include="..\..\src\MadEdit\ascii.h" />
+    <ClInclude Include="..\..\src\MadEdit\converters.h" />
+    <ClInclude Include="..\..\src\MadEdit\cp936ext.h" />
+    <ClInclude Include="..\..\src\MadEdit\gb18030.h" />
+    <ClInclude Include="..\..\src\MadEdit\gb18030ext.h" />
+    <ClInclude Include="..\..\src\MadEdit\gb18030uni.h" />
+    <ClInclude Include="..\..\src\MadEdit\gb2312.h" />
+    <ClInclude Include="..\..\src\MadEdit\gbk.h" />
+    <ClInclude Include="..\..\src\MadEdit\gbkext1.h" />
+    <ClInclude Include="..\..\src\MadEdit\gbkext2.h" />
+    <ClInclude Include="..\..\src\MadEdit\gbkext_inv.h" />
+    <ClInclude Include="..\..\src\MadEdit\MadCSConv.h" />
     <ClInclude Include="..\..\src\MadFileAssociationDialog.h" />
     <ClInclude Include="..\..\src\MadFileHistoryDialog.h" />
     <ClInclude Include="..\..\src\MadFindInFilesDialog.h" />

@@ -425,6 +425,7 @@ private:  // NextUChar()
 	bool NextUChar_UTF16BE( MadUCQueue &ucqueue );
 	bool NextUChar_UTF32LE( MadUCQueue &ucqueue );
 	bool NextUChar_UTF32BE( MadUCQueue &ucqueue );
+    bool NextUChar_GB18030( MadUCQueue &ucqueue );
 
 	bool NextUCharIs0x0A( void );
 

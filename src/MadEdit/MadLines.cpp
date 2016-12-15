@@ -957,6 +957,10 @@ void MadLines::SetEncoding( MadEncoding *encoding )
 	case etUTF32BE:
 		NextUChar = &MadLines::NextUChar_UTF32BE;
 		break;
+
+	case etGB18030:
+		NextUChar = &MadLines::NextUChar_GB18030;
+		break;
 	}
 }
 
@@ -1432,6 +1436,47 @@ bool MadLines::NextUChar_UTF32BE( MadUCQueue &ucqueue )
 	m_NextUChar_BufferSize -= size_t( rest );
 	return true;
 }
+
+bool MadLines::NextUChar_GB18030( MadUCQueue &ucqueue )
+{
+	wxFileOffset rest = m_NextUChar_LineSize - m_NextUChar_Pos;
+
+	if( rest <= 0 ) return false;
+
+	//check buffersize
+	if( m_NextUChar_BufferNextPos != m_NextUChar_LineSize && m_NextUChar_BufferSize < 4 )
+	{
+		LoadNewBuffer();
+	}
+
+	int cnt = 4;
+	if( rest < 4 ) cnt = rest;
+
+	wxByte *buf = m_NextUChar_Buffer + m_NextUChar_BufferStart;
+	wxByte db[4] = {0,0,0,0};
+	for(int i = 0; i < cnt; ++i)
+	{
+		db[i] = buf[i];
+	}
+
+	size_t len = 0;
+	ucs4_t ucs4 = m_Encoding->GB18030toUCS4 (db, len);
+	if (len)
+	{
+		ucqueue.push_back( MadUCPair( ucs4, len ) );
+		m_NextUChar_Pos += len;
+		m_NextUChar_BufferStart += len;
+		m_NextUChar_BufferSize -= len;
+		return true;
+	}
+
+	ucqueue.push_back( MadUCPair( '?', MadUCPair::second_type( cnt ) ) );
+	m_NextUChar_Pos += cnt;
+	m_NextUChar_BufferStart += size_t( cnt );
+	m_NextUChar_BufferSize -= size_t( cnt );
+	return true;
+}
+
 
 bool MadLines::NextUCharIs0x0A( void )
 {
@@ -3217,7 +3262,7 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 			}
 			else
 			{
-				wxFontEncoding enc = m_MadEdit->m_Encoding->GetEncoding();
+				int enc = m_MadEdit->m_Encoding->GetEncoding();
 
 				if( enc == wxFONTENCODING_UTF8 ||
 						enc == wxFONTENCODING_UTF16LE ||

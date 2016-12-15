@@ -258,6 +258,9 @@
     <ClCompile Include="..\..\src\MadFileHistoryDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\MadEdit\MadCSConv.cpp">
+      <Filter>Source Files\MadEdit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\spellchecker\HunspellInterface.h">
@@ -380,11 +383,47 @@
     <ClInclude Include="..\..\src\MadSaveQueryDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\checkedlistctrl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\MadFileHistoryDialog.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\MadCSConv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\gbkext_inv.h">
+      <Filter>Header Files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ascii.h">
+      <Filter>Header Files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\checkedlistctrl.h">
+      <Filter>Header Files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\converters.h">
+      <Filter>Header Files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\cp936ext.h">
+      <Filter>Header Files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\gb18030.h">
+      <Filter>Header Files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\gb18030ext.h">
+      <Filter>Header Files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\gb18030uni.h">
+      <Filter>Header Files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\gb2312.h">
+      <Filter>Header Files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\gbk.h">
+      <Filter>Header Files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\gbkext1.h">
+      <Filter>Header Files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\gbkext2.h">
+      <Filter>Header Files\MadEdit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

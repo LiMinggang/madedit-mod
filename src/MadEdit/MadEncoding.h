@@ -26,8 +26,10 @@
 #include <vector>
 #include <map>
 
+class MadCSConv;
+
 enum MadEncodingType
-{ etSingleByte,	etDoubleByte, etUTF8, etUTF16LE, etUTF16BE,	etUTF32LE, etUTF32BE };
+{ etSingleByte,	etDoubleByte, etUTF8, etUTF16LE, etUTF16BE,	etUTF32LE, etUTF32BE, etGB18030 };
 
 enum MadEncodingGrp
 {
@@ -53,18 +55,18 @@ enum MadEncodingGrp
 
 struct MadEncodingInfo
 {
-	wxFontEncoding	m_Encoding;
+	int         	m_Encoding;
 	wxString		m_Name;
 	wxString		m_Description;
 	wxString		m_FontName;
 	MadEncodingType	m_Type;
-	wxCSConv	   *m_CSConv;
+	MadCSConv	   *m_CSConv;
 	ucs2_t		   *m_MBtoWC_Table;		 //	MultiByte To WideChar table
 	wxWord		   *m_WCtoMB_Table;		 //	WideChar To	MultiByte table
 	wxByte		   *m_LeadByte_Table;	 //	DBCS Lead-Byte table
 	std::vector<int>  m_GrpIdVec; //Filter Ids
 
-	MadEncodingInfo(wxFontEncoding e, const	wxString &n, const wxString	&de, MadEncodingType t,	const wxString &fn,	std::vector<int>& grp)
+	MadEncodingInfo(int e, const	wxString &n, const wxString	&de, MadEncodingType t,	const wxString &fn,	std::vector<int>& grp)
 		:m_Encoding(e),	m_Name(n), m_Description(de), m_FontName(fn), m_Type(t),
 		m_CSConv(NULL),	m_MBtoWC_Table(NULL), m_WCtoMB_Table(NULL),	m_LeadByte_Table(NULL),	m_GrpIdVec(grp)
 	{
@@ -88,8 +90,8 @@ public:
 	static wxString	GetEncodingDescription(size_t idx);
 	static wxString	GetEncodingFontName(size_t idx);
 	static const std::vector<int>& GetEncodingGrps(size_t idx);
-	static wxString	EncodingToName(wxFontEncoding enc);
-	static wxFontEncoding NameToEncoding(const wxString	&name);
+	static wxString	EncodingToName(int enc);
+	static int NameToEncoding(const wxString &name);
 	static MadEncoding *GetSystemEncoding();
 	static wxString	GetGroupNameById(int id)
 	{
@@ -99,7 +101,7 @@ public:
 
 private:
 	MadEncodingInfo	*m_Info;
-	wxCSConv		*m_CSConv;
+	MadCSConv		*m_CSConv;
 	ucs2_t			*m_MBtoWC_Table;	// MultiByte To	WideChar table
 	wxWord			*m_WCtoMB_Table;	// WideChar	To MultiByte table
 	wxByte			*m_LeadByte_Table;	// DBCS	Lead-Byte table, 0:unset, 1:IsLeadByte,	0xFF:NotLeadByte
@@ -108,7 +110,7 @@ private:
 
 public:
 	MadEncoding(size_t idx);
-	MadEncoding(wxFontEncoding enc);
+	MadEncoding(int enc);
 	MadEncoding(const wxString &name);
 	~MadEncoding();
 
@@ -120,9 +122,11 @@ public:
 	size_t UCS4toUTF16BE(ucs4_t	ucs4, wxByte *buf);
 	size_t UCS4toUTF32LE(ucs4_t	ucs4, wxByte *buf);
 	size_t UCS4toUTF32BE(ucs4_t	ucs4, wxByte *buf);
+	size_t UCS4toGB18030(ucs4_t	ucs4, wxByte *buf);
 
 	ucs4_t SBtoUCS4(wxByte b1);		// Single-Byte to UCS4
 	ucs4_t DBtoUCS4(wxByte *buf);	// Double-Byte to UCS4
+    ucs4_t GB18030toUCS4(wxByte *buf, size_t &len);
 
 	bool IsLeadByte(wxByte byte);	// for DBCS	only
 
@@ -133,7 +137,7 @@ public:
 	wxString GetDescription() {	return m_Info->m_Description; }
 	MadEncodingType	GetType() {	return m_Info->m_Type; }
 	wxString GetFontName() { return	m_Info->m_FontName;	}
-	wxFontEncoding GetEncoding() { return m_Info->m_Encoding; }
+	int GetEncoding() { return m_Info->m_Encoding; }
 };
 
 
@@ -143,8 +147,8 @@ bool IsTextUTF16LE(wxByte *text, int size);
 bool IsTextUTF16BE(wxByte *text, int size);
 bool IsTextUTF8(wxByte *text, int size);
 bool IsBinaryData(wxByte *data,	int	size);
-void DetectChineseEncoding(const wxByte	*text, int count, wxFontEncoding &enc);
-void DetectJapaneseEncoding(const wxByte *text,	int	count, wxFontEncoding &enc);
-void DetectEncoding(const wxByte *text,	int	count, wxFontEncoding &enc);
+void DetectChineseEncoding(const wxByte	*text, int count, int &enc);
+void DetectJapaneseEncoding(const wxByte *text,	int	count, int &enc);
+void DetectEncoding(const wxByte *text,	int	count, int &enc);
 
 #endif
