@@ -237,6 +237,42 @@
     <ClInclude Include="..\..\src\MadFileHistoryDialog.h">
       <Filter>Header files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ascii.h">
+      <Filter>Header files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\converters.h">
+      <Filter>Header files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\cp936ext.h">
+      <Filter>Header files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\gb2312.h">
+      <Filter>Header files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\gb18030.h">
+      <Filter>Header files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\gb18030ext.h">
+      <Filter>Header files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\gb18030uni.h">
+      <Filter>Header files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\gbk.h">
+      <Filter>Header files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\gbkext_inv.h">
+      <Filter>Header files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\gbkext1.h">
+      <Filter>Header files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\gbkext2.h">
+      <Filter>Header files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\MadCSConv.h">
+      <Filter>Header files\MadEdit</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\MadAboutDialog.cpp">
@@ -463,6 +499,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\MadFileHistoryDialog.cpp">
       <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadEdit\MadCSConv.cpp">
+      <Filter>Source files\MadEdit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
