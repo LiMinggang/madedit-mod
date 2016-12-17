@@ -57,10 +57,23 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	src/EmbeddedPython.cpp \
 	src/EmbeddedPython.hpp \
 	src/plugin.h \
+	src/MadEdit/ExtEncodings/gbkext_inv.h \
+	src/MadEdit/ExtEncodings/gbkext2.h \
+	src/MadEdit/ExtEncodings/gbkext1.h \
+	src/MadEdit/ExtEncodings/gb2312.h \
+	src/MadEdit/ExtEncodings/gbk.h \
+	src/MadEdit/ExtEncodings/gb18030ext.h \
+	src/MadEdit/ExtEncodings/gb18030uni.h \
+	src/MadEdit/ExtEncodings/cp936ext.h \
+	src/MadEdit/ExtEncodings/gb18030.h \
+	src/MadEdit/ExtEncodings/ascii.h \
+	src/MadEdit/ExtEncodings/converters.h \
 	src/MadEdit/caret_new.cpp \
 	src/MadEdit/caret_new.h \
 	src/MadEdit/clipbrd_gtk.cpp \
 	src/MadEdit/clipbrd_gtk.h \
+	src/MadEdit/MadCSConv.cpp \
+	src/MadEdit/MadCSConv.h \
 	src/MadEdit/MadDeque.hpp \
 	src/MadEdit/MadEdit.cpp \
 	src/MadEdit/MadEdit.h \
