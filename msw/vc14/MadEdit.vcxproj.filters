@@ -34,6 +34,9 @@
     <Filter Include="Source files\Astyle">
       <UniqueIdentifier>{2f2d5553-279c-4b1a-907b-b0414e85ef76}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header files\MadEdit\ExtEncodings">
+      <UniqueIdentifier>{2f54f988-e633-4484-85cc-3660f7bd1ce1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\MadAboutDialog.h">
@@ -237,41 +240,38 @@
     <ClInclude Include="..\..\src\MadFileHistoryDialog.h">
       <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\MadEdit\ascii.h">
-      <Filter>Header files\MadEdit</Filter>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ascii.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\MadEdit\converters.h">
-      <Filter>Header files\MadEdit</Filter>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\converters.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\MadEdit\cp936ext.h">
-      <Filter>Header files\MadEdit</Filter>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\cp936ext.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\MadEdit\gb2312.h">
-      <Filter>Header files\MadEdit</Filter>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gb2312.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\MadEdit\gb18030.h">
-      <Filter>Header files\MadEdit</Filter>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gb18030.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\MadEdit\gb18030ext.h">
-      <Filter>Header files\MadEdit</Filter>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gb18030ext.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\MadEdit\gb18030uni.h">
-      <Filter>Header files\MadEdit</Filter>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gb18030uni.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\MadEdit\gbk.h">
-      <Filter>Header files\MadEdit</Filter>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gbk.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\MadEdit\gbkext_inv.h">
-      <Filter>Header files\MadEdit</Filter>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gbkext_inv.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\MadEdit\gbkext1.h">
-      <Filter>Header files\MadEdit</Filter>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gbkext1.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\MadEdit\gbkext2.h">
-      <Filter>Header files\MadEdit</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\MadEdit\MadCSConv.h">
-      <Filter>Header files\MadEdit</Filter>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gbkext2.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

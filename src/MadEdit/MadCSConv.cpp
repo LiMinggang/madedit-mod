@@ -10,7 +10,7 @@
 
 #include "MadCSConv.h"
 #ifdef __MAD_ENCODING_EXTENDED__
-#include "converters.h"
+#include "ExtEncodings/converters.h"
 #endif //__MAD_ENCODING_EXTENDED__
 
 static const wxString CHARSET_GB18030(_T("GB18030"));
