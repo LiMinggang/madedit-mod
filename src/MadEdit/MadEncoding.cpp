@@ -376,6 +376,34 @@ void MadEncoding::InitEncodings()
 			}
 			break;
 
+		case wxFONTENCODING_KOI8:
+			name = wxT( "KOI8-R" );
+			testwc = 0x2553;
+			testmb[0] = 0xA4;
+			encGrp.push_back( ENCG_CYRILLIC );
+			break;
+
+		case wxFONTENCODING_KOI8_U:
+			name = wxT( "KOI8-U" );
+			testwc = 0x0454;
+			testmb[0] = 0xA4;
+			encGrp.push_back( ENCG_CYRILLIC );
+			break;
+
+		case wxFONTENCODING_CP866:
+			name = wxT( "CP866" );
+			testwc = 0x0434;
+			testmb[0] = 0xA4;
+			encGrp.push_back( ENCG_CYRILLIC );
+			break;
+
+		case wxFONTENCODING_CP855:
+			name = wxT( "CP855" );
+			testwc = 0x0446;
+			testmb[0] = 0xA4;
+			encGrp.push_back( ENCG_CYRILLIC );
+			break;
+
 		default:
 			if( enc >= wxFONTENCODING_ISO8859_2 && enc <= wxFONTENCODING_ISO8859_15 )
 			{
@@ -540,7 +568,7 @@ void MadEncoding::InitEncodings()
 		encGrp.clear();
 		wxString name = wxT( "GB18030" );
 		wxString fontname( wxT( "Courier New" ) );
-		wxString desc(wxT("Chinese Simplified"));
+		wxString desc(_("Chinese Simplified(UTF-PRC)"));
 		MadEncodingType type = etGB18030;
 		MSW_GET_FONT_NAME( wxT( "54936" ), fontname );
 		encGrp.push_back( ENCG_EASTASIA );

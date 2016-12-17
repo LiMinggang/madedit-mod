@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.3.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-06 19:53+0800\n"
+"POT-Creation-Date: 2016-12-17 16:14+0800\n"
 "PO-Revision-Date: 2015-04-18 00:14+0100\n"
 "Last-Translator: Ronny Steiner <post@sirsteiner.de>\n"
 "Language-Team: \n"
@@ -357,85 +357,85 @@ msgstr "bis:"
 msgid "Top margin (mm):"
 msgstr "Oberer Rand (mm):"
 
-#: wxstd.po.cpp:81 ../src/MadEdit/MadEncoding.cpp:128
+#: wxstd.po.cpp:81 ../src/MadEdit/MadEncoding.cpp:129
 #, fuzzy
 msgid "Western European"
 msgstr "Westeuropäisch "
 
-#: wxstd.po.cpp:82 ../src/MadEdit/MadEncoding.cpp:129
+#: wxstd.po.cpp:82 ../src/MadEdit/MadEncoding.cpp:130
 #, fuzzy
 msgid "Central European"
 msgstr "Zentraleuropäisch "
 
-#: wxstd.po.cpp:83 ../src/MadEdit/MadEncoding.cpp:130
+#: wxstd.po.cpp:83 ../src/MadEdit/MadEncoding.cpp:131
 #, fuzzy
 msgid "South European"
 msgstr "Südeuropäisch "
 
-#: wxstd.po.cpp:84 ../src/MadEdit/MadEncoding.cpp:131
+#: wxstd.po.cpp:84 ../src/MadEdit/MadEncoding.cpp:132
 #, fuzzy
 msgid "North European"
 msgstr "Nordeuropäisch "
 
-#: wxstd.po.cpp:85 ../src/MadEdit/MadEncoding.cpp:132
+#: wxstd.po.cpp:85 ../src/MadEdit/MadEncoding.cpp:133
 msgid "Cyrillic"
 msgstr "Kyrillisch"
 
-#: wxstd.po.cpp:86 ../src/MadEdit/MadEncoding.cpp:133
+#: wxstd.po.cpp:86 ../src/MadEdit/MadEncoding.cpp:134
 msgid "Arabic"
 msgstr "Arabisch"
 
-#: wxstd.po.cpp:87 ../src/MadEdit/MadEncoding.cpp:134
+#: wxstd.po.cpp:87 ../src/MadEdit/MadEncoding.cpp:135
 #, fuzzy
 msgid "Greek"
 msgstr "Griechisch "
 
-#: wxstd.po.cpp:88 ../src/MadEdit/MadEncoding.cpp:135
+#: wxstd.po.cpp:88 ../src/MadEdit/MadEncoding.cpp:136
 msgid "Hebrew"
 msgstr "Hebräisch"
 
-#: wxstd.po.cpp:89 ../src/MadEdit/MadEncoding.cpp:136
+#: wxstd.po.cpp:89 ../src/MadEdit/MadEncoding.cpp:137
 #, fuzzy
 msgid "Turkish"
 msgstr "Türkisch "
 
-#: wxstd.po.cpp:90 ../src/MadEdit/MadEncoding.cpp:137
+#: wxstd.po.cpp:90 ../src/MadEdit/MadEncoding.cpp:138
 #, fuzzy
 msgid "Baltic"
 msgstr "Baltisch "
 
-#: wxstd.po.cpp:91 ../src/MadEdit/MadEncoding.cpp:138
+#: wxstd.po.cpp:91 ../src/MadEdit/MadEncoding.cpp:139
 #, fuzzy
 msgid "East Asian"
 msgstr "Ostasiatisch "
 
-#: wxstd.po.cpp:92 ../src/MadEdit/MadEncoding.cpp:139
+#: wxstd.po.cpp:92 ../src/MadEdit/MadEncoding.cpp:140
 #, fuzzy
 msgid "Southeast Asian"
 msgstr "Südostasiatisch "
 
-#: wxstd.po.cpp:93 ../src/MadEdit/MadEncoding.cpp:140
+#: wxstd.po.cpp:93 ../src/MadEdit/MadEncoding.cpp:141
 #, fuzzy
 msgid "Unicode"
 msgstr "Unicode "
 
-#: wxstd.po.cpp:94 ../src/MadEdit/MadEncoding.cpp:141
+#: wxstd.po.cpp:94 ../src/MadEdit/MadEncoding.cpp:142
 #, fuzzy
 msgid "ISO-8859"
 msgstr "ISO-8859 "
 
-#: wxstd.po.cpp:95 ../src/MadEdit/MadEncoding.cpp:142
+#: wxstd.po.cpp:95 ../src/MadEdit/MadEncoding.cpp:143
 #: ../src/MadWinListDialog.cpp:43
 #, fuzzy
 msgid "Windows"
 msgstr "Windows "
 
-#: wxstd.po.cpp:96 ../src/MadEdit/MadEncoding.cpp:143
+#: wxstd.po.cpp:96 ../src/MadEdit/MadEncoding.cpp:144
 #, fuzzy
 msgid "OEM"
 msgstr "OEM "
 
-#: wxstd.po.cpp:97 ../src/MadEdit/MadEncoding.cpp:144
+#: wxstd.po.cpp:97 ../src/MadEdit/MadEncoding.cpp:145
 #, fuzzy
 msgid "Other"
 msgstr "Andere "
@@ -679,9 +679,14 @@ msgstr "'%s' ist kein gültiger regulärer Ausdruck."
 msgid "The format of '%s' is invalid."
 msgstr "Das Format von '%s' ist ungültig."
 
-#: ../src/MadEdit/MadEncoding.cpp:145
+#: ../src/MadEdit/MadEncoding.cpp:146
 msgid "Invalid"
 msgstr ""
+
+#: ../src/MadEdit/MadEncoding.cpp:571
+#, fuzzy
+msgid "Chinese Simplified(UTF-PRC)"
+msgstr "Windows Vereinfachtes Chinesisch "
 
 #: ../src/MadEditApp.cpp:131
 #, c-format
