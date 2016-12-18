@@ -141,6 +141,7 @@ void MadEncoding::InitEncodings()
 	MadEncodingGrpName[ENCG_UNICODE      ] = _( "Unicode" );
 	MadEncodingGrpName[ENCG_ISO8859      ] = _( "ISO-8859" );
 	MadEncodingGrpName[ENCG_WINDOWS      ] = _( "Windows" );
+	MadEncodingGrpName[ENCG_MACINTOSH    ] = _( "Macintosh" );
 	MadEncodingGrpName[ENCG_OEM          ] = _( "OEM" );
 	MadEncodingGrpName[ENCG_DEFAULT      ] = _( "Other" );
 	MadEncodingGrpName[ENCG_MAX          ] = _( "Invalid" );
@@ -530,6 +531,35 @@ void MadEncoding::InitEncodings()
 						MSW_GET_FONT_NAME( wxT( "874" ), fontname );
 						encGrp.push_back( ENCG_WINDOWS );
 						encGrp.push_back( ENCG_SOUTHEASTASIA );
+					}
+					if( enc >= wxFONTENCODING_MACROMAN && enc <= wxFONTENCODING_MACROMANIAN )
+					{
+					/*  static wxChar wctable[] = {0xF8FF, , , , 0x0646, 0x011e, 0x00d7, 0x0152, 0x00a8, 0x20AB};
+						static wxByte mbtable[] = {0xF0,   , , ,   0xE6,   0xd0,   0xaa,   0x8c,   0x8d,   0xFE};
+						testwc    = wctable[enc - wxFONTENCODING_MACROMAN];
+						testmb[0] = mbtable[enc - wxFONTENCODING_MACROMAN];*/
+						encGrp.push_back( ENCG_MACINTOSH );
+
+						switch( enc )
+						{
+							case wxFONTENCODING_MACROMAN:		break;
+							case wxFONTENCODING_MACJAPANESE:	encGrp.push_back( ENCG_EASTASIA ); break;
+							case wxFONTENCODING_MACCHINESETRAD: encGrp.push_back( ENCG_EASTASIA ); break;
+							case wxFONTENCODING_MACKOREAN:		encGrp.push_back( ENCG_EASTASIA ); break;
+							case wxFONTENCODING_MACARABIC:		encGrp.push_back( ENCG_ARABIC ); break;
+							case wxFONTENCODING_MACHEBREW:		encGrp.push_back( ENCG_HEBREW ); break;
+							case wxFONTENCODING_MACGREEK:		encGrp.push_back( ENCG_GREEK ); break;
+							case wxFONTENCODING_MACCYRILLIC:	encGrp.push_back( ENCG_CYRILLIC ); break;
+							case wxFONTENCODING_MACTHAI:		encGrp.push_back( ENCG_SOUTHEASTASIA ); break;
+							case wxFONTENCODING_MACCHINESESIMP: encGrp.push_back( ENCG_EASTASIA ); break;
+							case wxFONTENCODING_MACCENTRALEUR:	encGrp.push_back( ENCG_CENTRALEUROPE ); break;
+							case wxFONTENCODING_MACCROATIAN:	encGrp.push_back( ENCG_SOUTHEUROPE ); break;
+							case wxFONTENCODING_MACICELANDIC:	encGrp.push_back( ENCG_NORTHEUROPE ); break;
+							case wxFONTENCODING_MACROMANIAN:	encGrp.push_back( ENCG_SOUTHEUROPE ); break;
+
+						default:
+							break;
+						}
 					}
 					else
 						if( name == wxT( "default" ) || name == wxGetTranslation( wxT( "default" ) ) ) // unnecessary

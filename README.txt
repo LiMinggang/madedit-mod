@@ -133,6 +133,7 @@ New: Ctrl+Shift+Wheel as shortcut for Page Up/Down
 New: Indicator for zero length match in Regex search
 New: GB18030 support
 New: KOI-R, KOI-U and CP866 support
+New: Macintosh encodings(Roman, Japanese, Chinese-trad, Korean, Arabic, Hebrew, Greek, Cyrillic, Thai, Chinese-simp, Central-Eur, Croatian, Icelandic, Romanian) support
 New: Mark unsupported unicode char with {}
 Fix: Toolbar issue
 Fix: Regex search bug #224
