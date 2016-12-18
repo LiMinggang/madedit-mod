@@ -472,10 +472,10 @@ void MadEncoding::InitEncodings()
 				}
 			}
 			else
-				if( enc >= wxFONTENCODING_CP1250 && enc <= wxFONTENCODING_CP1257 )
+				if( enc >= wxFONTENCODING_CP1250 && enc <= wxFONTENCODING_CP1258 )
 				{
-					static wxChar wctable[] = {0x0102, 0x0401, 0x0152, 0x0192, 0x011e, 0x00d7, 0x0152, 0x00a8/*, 0x20AB*/};
-					static wxByte mbtable[] = {0xc3,   0xa8,   0x8c,   0x83,   0xd0,   0xaa,   0x8c,   0x8d/*,   0xFE*/};
+					static wxChar wctable[] = {0x0102, 0x0401, 0x0152, 0x0192, 0x011e, 0x00d7, 0x0152, 0x00a8, 0x20AB};
+					static wxByte mbtable[] = {0xc3,   0xa8,   0x8c,   0x83,   0xd0,   0xaa,   0x8c,   0x8d,   0xFE};
 					testwc    = wctable[enc - wxFONTENCODING_CP1250];
 					testmb[0] = mbtable[enc - wxFONTENCODING_CP1250];
 					encGrp.push_back( ENCG_WINDOWS );

@@ -133,6 +133,7 @@ New: Ctrl+Shift+Wheel as shortcut for Page Up/Down
 New: Indicator for zero length match in Regex search
 New: GB18030 support
 New: KOI-R, KOI-U and CP866 support
+New: Mark unsupported unicode char with {}
 Fix: Toolbar issue
 Fix: Regex search bug #224
 Fix: Caret position is not updated if close search dialog by click 'X' instead of close button
