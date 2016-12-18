@@ -532,33 +532,92 @@ void MadEncoding::InitEncodings()
 						encGrp.push_back( ENCG_WINDOWS );
 						encGrp.push_back( ENCG_SOUTHEASTASIA );
 					}
-					if( enc >= wxFONTENCODING_MACROMAN && enc <= wxFONTENCODING_MACROMANIAN )
+					else if( enc >= wxFONTENCODING_MACROMAN && enc <= wxFONTENCODING_MACROMANIAN )
 					{
-					/*  static wxChar wctable[] = {0xF8FF, , , , 0x0646, 0x011e, 0x00d7, 0x0152, 0x00a8, 0x20AB};
-						static wxByte mbtable[] = {0xF0,   , , ,   0xE6,   0xd0,   0xaa,   0x8c,   0x8d,   0xFE};
-						testwc    = wctable[enc - wxFONTENCODING_MACROMAN];
-						testmb[0] = mbtable[enc - wxFONTENCODING_MACROMAN];*/
 						encGrp.push_back( ENCG_MACINTOSH );
 
 						switch( enc )
 						{
-							case wxFONTENCODING_MACROMAN:		break;
-							case wxFONTENCODING_MACJAPANESE:	encGrp.push_back( ENCG_EASTASIA ); break;
-							case wxFONTENCODING_MACCHINESETRAD: encGrp.push_back( ENCG_EASTASIA ); break;
-							case wxFONTENCODING_MACKOREAN:		encGrp.push_back( ENCG_EASTASIA ); break;
-							case wxFONTENCODING_MACARABIC:		encGrp.push_back( ENCG_ARABIC ); break;
-							case wxFONTENCODING_MACHEBREW:		encGrp.push_back( ENCG_HEBREW ); break;
-							case wxFONTENCODING_MACGREEK:		encGrp.push_back( ENCG_GREEK ); break;
-							case wxFONTENCODING_MACCYRILLIC:	encGrp.push_back( ENCG_CYRILLIC ); break;
-							case wxFONTENCODING_MACTHAI:		encGrp.push_back( ENCG_SOUTHEASTASIA ); break;
-							case wxFONTENCODING_MACCHINESESIMP: encGrp.push_back( ENCG_EASTASIA ); break;
-							case wxFONTENCODING_MACCENTRALEUR:	encGrp.push_back( ENCG_CENTRALEUROPE ); break;
-							case wxFONTENCODING_MACCROATIAN:	encGrp.push_back( ENCG_SOUTHEUROPE ); break;
-							case wxFONTENCODING_MACICELANDIC:	encGrp.push_back( ENCG_NORTHEUROPE ); break;
-							case wxFONTENCODING_MACROMANIAN:	encGrp.push_back( ENCG_SOUTHEUROPE ); break;
+							case wxFONTENCODING_MACROMAN:
+								testwc    = 0x00B0;
+								testmb[0] = 0xA1;
+								break;
+							case wxFONTENCODING_MACJAPANESE:
+								type = etDoubleByte;
+								testwc	  = 0x4E9C;
+								testmb[0] = 0x88;
+								testmb[1] = 0x9F;
+								encGrp.push_back( ENCG_EASTASIA );
+								break;
+							case wxFONTENCODING_MACCHINESETRAD:
+								type = etDoubleByte;
+								testwc	  = 0x3000;
+								testmb[0] = 0xA1;
+								testmb[1] = 0x40;
+								encGrp.push_back( ENCG_EASTASIA );
+								break;
+							case wxFONTENCODING_MACKOREAN:
+								type = etDoubleByte;
+								testwc	  = 0x3000;
+								testmb[0] = 0xA1;
+								testmb[1] = 0xA1;
+								encGrp.push_back( ENCG_EASTASIA );
+								break;
+							case wxFONTENCODING_MACCHINESESIMP:
+								type = etDoubleByte;
+								testwc	  = 0x3000;
+								testmb[0] = 0xA1;
+								testmb[1] = 0xA1;
+								encGrp.push_back( ENCG_EASTASIA );
+								break;
+							case wxFONTENCODING_MACARABIC:
+								encGrp.push_back( ENCG_ARABIC );
+								testwc	  = 0x0621;
+								testmb[0] = 0xC1;
+								break;
+							case wxFONTENCODING_MACHEBREW:
+								encGrp.push_back( ENCG_HEBREW );
+								testwc	  = 0x00C4;
+								testmb[0] = 0x80;
+								break;
+							case wxFONTENCODING_MACGREEK:
+								encGrp.push_back( ENCG_GREEK );
+								testwc	  = 0x0393;
+								testmb[0] = 0xA1;
+								break;
+							case wxFONTENCODING_MACCYRILLIC:
+								encGrp.push_back( ENCG_CYRILLIC );
+								testwc	  = 0x042F;
+								testmb[0] = 0x9F;
+								break;
+							case wxFONTENCODING_MACTHAI:
+								encGrp.push_back( ENCG_SOUTHEASTASIA );
+								testwc	  = 0x0E01;
+								testmb[0] = 0xA1;
+								break;
+							case wxFONTENCODING_MACCENTRALEUR:
+								encGrp.push_back( ENCG_CENTRALEUROPE );
+								testwc	  = 0x012B;
+								testmb[0] = 0xB4;
+								break;
+							case wxFONTENCODING_MACCROATIAN:
+								encGrp.push_back( ENCG_SOUTHEUROPE );
+								testwc	  = 0x25CA;
+								testmb[0] = 0xD7;
+								break;
+							case wxFONTENCODING_MACICELANDIC:
+								encGrp.push_back( ENCG_NORTHEUROPE );
+								testwc	  = 0x2014;
+								testmb[0] = 0xD1;
+								break;
+							case wxFONTENCODING_MACROMANIAN:
+								encGrp.push_back( ENCG_SOUTHEUROPE );
+								testwc	  = 0x2014;
+								testmb[0] = 0xD1;
+								break;
 
-						default:
-							break;
+							default:
+								break;
 						}
 					}
 					else
@@ -582,7 +641,6 @@ void MadEncoding::InitEncodings()
 			{
 				ignore = ! wxFontMapper::Get()->IsEncodingAvailable( enc );
 			}
-
 #endif
 		}
 
@@ -592,7 +650,6 @@ void MadEncoding::InitEncodings()
 			{
 				ms_SystemEncodingIndex = EncodingsTable.size();
 			}
-
 			EncodingsTable.push_back( MadEncodingInfo( enc, name.Upper(), desc, type, fontname, encGrp ) );
 		}
 	}
