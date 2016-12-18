@@ -715,6 +715,7 @@ void MadEdit::SetEditMode( MadEditMode mode )
 					DoSelectionChanged();
 
 				DoStatusChanged();
+				
 				//SetInsertMode(m_InsertMode);
 			}
 			else //HexMode
@@ -761,6 +762,7 @@ void MadEdit::SetEditMode( MadEditMode mode )
 					DoSelectionChanged();
 
 				DoStatusChanged();
+				
 				//SetInsertMode(m_InsertMode);
 			}
 			else                      //HexMode
@@ -917,6 +919,10 @@ void MadEdit::SetWordWrapMode( MadWordWrapMode mode )
 			UpdateScrollBarPos();
 			m_RepaintAll = true;
 			Refresh( false );
+			
+			wxCommandEvent event( UPDATE_HSCROLL_POS );
+			event.SetEventObject( this );
+			AddPendingEvent( event );
 		}
 		else
 		{

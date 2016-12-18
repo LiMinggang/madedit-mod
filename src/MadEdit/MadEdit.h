@@ -65,6 +65,7 @@ class MadReplaceDialog;
 class wxSpellCheckEngineInterface;
 
 wxDECLARE_EVENT( CHECK_MODIFICATION_TIME, wxCommandEvent );
+wxDECLARE_EVENT( UPDATE_HSCROLL_POS, wxCommandEvent );
 
 typedef void ( *OnSelectionChangedPtr )( MadEdit *madedit );
 typedef void ( *OnStatusChangedPtr )( MadEdit *madedit );
@@ -629,6 +630,7 @@ protected:
 	void OnMouseLeaveWindow( wxMouseEvent &evt );
 	void OnMouseCaptureLost( wxMouseCaptureLostEvent &evt );
 	void OnCheckModificationTime( wxCommandEvent& evt );
+	void OnUpdateHScrollPos( wxCommandEvent& evt );
 
 	void OnEraseBackground( wxEraseEvent &evt );
 	void OnPaint( wxPaintEvent &evt );

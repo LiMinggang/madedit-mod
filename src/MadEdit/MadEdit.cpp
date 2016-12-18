@@ -236,10 +236,12 @@ public:
 
 //==================================================
 wxDEFINE_EVENT( CHECK_MODIFICATION_TIME, wxCommandEvent );
+wxDEFINE_EVENT( UPDATE_HSCROLL_POS, wxCommandEvent );
 
 BEGIN_EVENT_TABLE( MadEdit, MadEditSuperClass )
 
 	EVT_COMMAND( wxID_ANY, CHECK_MODIFICATION_TIME, MadEdit::OnCheckModificationTime )
+	EVT_COMMAND( wxID_ANY, UPDATE_HSCROLL_POS, MadEdit::OnUpdateHScrollPos )
 
 	EVT_CHAR( MadEdit::OnChar )
 	EVT_KEY_DOWN( MadEdit::OnKeyDown )
@@ -11950,6 +11952,13 @@ void MadEdit::OnCheckModificationTime( wxCommandEvent& evt )
 	DBOUT( "OnCheckModificationTime\n" );
 	if(m_ModReloaded == false )
 		ReloadByModificationTime();
+}
+
+void MadEdit::OnUpdateHScrollPos( wxCommandEvent& evt )
+{
+	DBOUT( "OnUpdateHScrollPos\n" );
+	AppearCaret();
+	UpdateScrollBarPos();
 }
 
 void MadEdit::ShowZeroLenSelIndicator()

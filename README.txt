@@ -141,6 +141,7 @@ Fix: Regex search bug #224
 Fix: Caret position is not updated if close search dialog by click 'X' instead of close button
 Fix: Disable Find Previous in Regex search
 Fix: Add ResetToolBarsInfoWin to All above in PurgeHisoryDialog
+Fix: Not stay in current line when switch between modes #226
 Update Simplified Chinese translation
 Update boost to 1.62
 
