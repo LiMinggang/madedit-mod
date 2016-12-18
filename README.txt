@@ -128,22 +128,22 @@ FreeBSD packaging (with FreeBSD 10.01)
 3. stdc++ version
 
 Mod v0.4.6
-New: Spell check for SearchReplaceDialog would change according to active window
-New: Ctrl+Shift+Wheel as shortcut for Page Up/Down
-New: Indicator for zero length match in Regex search
-New: Add GB18030 support
-New: Add KOI8-R, KOI8-U and CP866 support
-New: Add Macintosh encodings(Roman, Japanese, Chinese-trad, Korean, Arabic, Hebrew, Greek, Cyrillic, Thai, Chinese-simp, Central-Eur, Croatian, Icelandic, Romanian) support
-New: Add CP874 Windows Thai support
-New: Mark unsupported unicode char with {}
-Fix: Toolbar issue
-Fix: Regex search bug #224
-Fix: Caret position is not updated if close search dialog by click 'X' instead of close button
-Fix: Disable Find Previous in Regex search
-Fix: Add ResetToolBarsInfoWin to All above in PurgeHisoryDialog
-Fix: Not stay in current line when switch between modes #226
-Update Simplified Chinese translation
-Update boost to 1.62
+1.New: Spell check for SearchReplaceDialog would change according to active window
+2.New: Ctrl+Shift+Wheel as shortcut for Page Up/Down
+3.New: Indicator for zero length match in Regex search
+4.New: Add GB18030 support
+5.New: Add KOI8-R, KOI8-U and CP866 support
+6.New: Add Macintosh encodings(Roman, Japanese, Chinese-trad, Korean, Arabic, Hebrew, Greek, Cyrillic, Thai, Chinese-simp, Central-Eur, Croatian, Icelandic, Romanian) support
+7.New: Add CP874 Windows Thai support
+8.New: Mark unsupported unicode char with {}
+9.Fix: Toolbar issue
+10.Fix: Regex search bug #224
+11.Fix: Caret position is not updated if close search dialog by click 'X' instead of close button
+12.Fix: Disable Find Previous in Regex search
+13.Fix: Add ResetToolBarsInfoWin to All above in PurgeHisoryDialog
+14.Fix: Not stay in current line when switch between modes #226
+15.Update Simplified Chinese translation
+16.Update boost to 1.62
 
 Mod v0.4.5
 1.New: File history dialog

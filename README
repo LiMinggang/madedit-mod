@@ -123,6 +123,23 @@ FreeBSD packaging (with FreeBSD 10.01)
 2. aclocal version in aclocal.m4
 3. stdc++ version
 
+Mod v0.4.6
+1.New: Spell check for SearchReplaceDialog would change according to active window
+2.New: Ctrl+Shift+Wheel as shortcut for Page Up/Down
+3.New: Indicator for zero length match in Regex search
+4.New: Add GB18030 support
+5.New: Add KOI8-R, KOI8-U and CP866 support
+6.New: Add Macintosh encodings(Roman, Japanese, Chinese-trad, Korean, Arabic, Hebrew, Greek, Cyrillic, Thai, Chinese-simp, Central-Eur, Croatian, Icelandic, Romanian) support
+7.New: Add CP874 Windows Thai support
+8.New: Mark unsupported unicode char with {}
+9.Fix: Toolbar issue
+10.Fix: Regex search bug #224
+11.Fix: Caret position is not updated if close search dialog by click 'X' instead of close button
+12.Fix: Disable Find Previous in Regex search
+13.Fix: Add ResetToolBarsInfoWin to All above in PurgeHisoryDialog
+14.Fix: Not stay in current line when switch between modes #226
+15.Update Simplified Chinese translation
+
 Mod v0.4.5
 1.New: File history dialog
 2.New: Add default key, down key support(the same as Search Dialog) for FindInFiles Dialog
