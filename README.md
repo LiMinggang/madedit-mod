@@ -12,7 +12,7 @@ NOTE: The release marked as Selfuse is a bloody edge and buggy one with a lot of
 Current Feature list(comparing to the original Madedit@sourceforge)
 ===================================================================
 * Original features from MadEdit(Hex Edit, Column Edit, many encodings support, etc) with lots of bug fixes
-* More encodings supported, eg, GB18030, CP874, KOI-R, KOI-U and CP866, Macintosh encodings(Roman, Japanese, Chinese-trad, Korean, Arabic, Hebrew, Greek, Cyrillic, Thai, Chinese-simp, Central-Eur, Croatian, Icelandic, Romanian)
+* More encodings supported, eg, GB18030, CP874, CP866, KOI8-R and KOI8-U Macintosh encodings(Roman, Japanese, Chinese-trad, Korean, Arabic, Hebrew, Greek, Cyrillic, Thai, Chinese-simp, Central-Eur, Croatian, Icelandic, Romanian)
 * Drag&Drop Edit(Cross platform)
 * Bookmark(From Gogo)
 * Bookmark enhancement:Edit functions(Copy/Cut/Delete/Replace bookmarked lines), Bookmark in search
