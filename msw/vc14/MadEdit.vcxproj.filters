@@ -317,9 +317,6 @@
     <ClCompile Include="..\..\src\MadEdit\caret_new.cpp">
       <Filter>Source files\MadEdit</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\MadEdit\clipbrd_gtk.cpp">
-      <Filter>Source files\MadEdit</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\MadEdit\MadEdit.cpp">
       <Filter>Source files\MadEdit</Filter>
     </ClCompile>

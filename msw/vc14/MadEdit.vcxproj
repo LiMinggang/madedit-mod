@@ -318,7 +318,6 @@
     <ClCompile Include="..\..\src\MadEditApp.cpp" />
     <ClCompile Include="..\..\src\MadEditFrame.cpp" />
     <ClCompile Include="..\..\src\MadEdit\caret_new.cpp" />
-    <ClCompile Include="..\..\src\MadEdit\clipbrd_gtk.cpp" />
     <ClCompile Include="..\..\src\MadEdit\MadCSConv.cpp" />
     <ClCompile Include="..\..\src\MadEdit\MadEdit.cpp" />
     <ClCompile Include="..\..\src\MadEdit\MadEditAdvanced.cpp" />
