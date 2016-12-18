@@ -203,8 +203,8 @@ void MadEncoding::InitEncodings()
 					name = wxT( "GBK" );
 					type = etDoubleByte;
 					testwc = 0x3000;
-					testmb[0] = 0xa1;
-					testmb[1] = 0xa1;
+					testmb[0] = 0xA1;
+					testmb[1] = 0xA1;
 					MSW_GET_FONT_NAME( wxT( "936" ), fontname );
 					added = true;
 					encGrp.push_back( ENCG_WINDOWS );
@@ -227,8 +227,8 @@ void MadEncoding::InitEncodings()
 					name = wxT( "EUC-KR" );
 					type = etDoubleByte;
 					testwc = 0x3000;
-					testmb[0] = 0xa1;
-					testmb[1] = 0xa1;
+					testmb[0] = 0xA1;
+					testmb[1] = 0xA1;
 					MSW_GET_FONT_NAME( wxT( "949" ), fontname );
 					added = true;
 					encGrp.push_back( ENCG_WINDOWS );
@@ -251,7 +251,7 @@ void MadEncoding::InitEncodings()
 					name = wxT( "BIG5" );
 					type = etDoubleByte;
 					testwc = 0x3000;
-					testmb[0] = 0xa1;
+					testmb[0] = 0xA1;
 					testmb[1] = 0x40;
 					MSW_GET_FONT_NAME( wxT( "950" ), fontname );
 					added = true;
@@ -275,8 +275,8 @@ void MadEncoding::InitEncodings()
 					name = wxT( "EUC-JP" );
 					type = etDoubleByte;
 					testwc = 0x3000;
-					testmb[0] = 0xa1;
-					testmb[1] = 0xa1;
+					testmb[0] = 0xA1;
+					testmb[1] = 0xA1;
 					MSW_GET_FONT_NAME( wxT( "51932" ), fontname );
 					added = true;
 					encGrp.push_back( ENCG_WINDOWS );
@@ -292,8 +292,8 @@ void MadEncoding::InitEncodings()
 
 		case wxFONTENCODING_CP437:
 			name = wxT( "CP437" );
-			testwc = 0xa0;
-			testmb[0] = 0xff;
+			testwc = 0xA0;
+			testmb[0] = 0xFF;
 			encGrp.push_back( ENCG_OEM );
 			break;
 
@@ -395,6 +395,7 @@ void MadEncoding::InitEncodings()
 			name = wxT( "CP866" );
 			testwc = 0x0434;
 			testmb[0] = 0xA4;
+			encGrp.push_back( ENCG_WINDOWS );
 			encGrp.push_back( ENCG_CYRILLIC );
 			break;
 
@@ -402,7 +403,16 @@ void MadEncoding::InitEncodings()
 			name = wxT( "CP855" );
 			testwc = 0x0446;
 			testmb[0] = 0xA4;
+			encGrp.push_back( ENCG_WINDOWS );
 			encGrp.push_back( ENCG_CYRILLIC );
+			break;
+
+		case wxFONTENCODING_CP874:
+			name = wxT( "CP874" );
+			testwc = 0x0E5B;
+			testmb[0] = 0xFB;
+			encGrp.push_back( ENCG_WINDOWS );
+			encGrp.push_back( ENCG_SOUTHEASTASIA );
 			break;
 
 		default:

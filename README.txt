@@ -131,9 +131,10 @@ Mod v0.4.6
 New: Spell check for SearchReplaceDialog would change according to active window
 New: Ctrl+Shift+Wheel as shortcut for Page Up/Down
 New: Indicator for zero length match in Regex search
-New: GB18030 support
-New: KOI-R, KOI-U and CP866 support
-New: Macintosh encodings(Roman, Japanese, Chinese-trad, Korean, Arabic, Hebrew, Greek, Cyrillic, Thai, Chinese-simp, Central-Eur, Croatian, Icelandic, Romanian) support
+New: Add GB18030 support
+New: Add KOI-R, KOI-U and CP866 support
+New: Add Macintosh encodings(Roman, Japanese, Chinese-trad, Korean, Arabic, Hebrew, Greek, Cyrillic, Thai, Chinese-simp, Central-Eur, Croatian, Icelandic, Romanian) support
+New: Add CP874 Windows Thai support
 New: Mark unsupported unicode char with {}
 Fix: Toolbar issue
 Fix: Regex search bug #224
