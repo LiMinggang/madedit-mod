@@ -6,7 +6,7 @@ AM_CPPFLAGS = -I$(top_srcdir)/charset-detector/include -I$(top_srcdir)/charset-d
 -I$(top_srcdir)/spellchecker/hunspell/src/hunspell -I$(top_srcdir)/spellchecker/hunspell/src/win_api \
 -I$(top_srcdir)/minipython/Include -I$(top_srcdir)/minipython/Python \
 -I$(top_srcdir)/minipython/Modules/zlib -I$(top_srcdir)/markdown -I$(top_srcdir)/astyle \
--I$(top_srcdir)/astyle/astyle
+-I$(top_srcdir)/astyle/astyle -I$(top_srcdir)/src/MadEdit
 
 madedit_CXXFLAGS = -DDATA_DIR=\"${datadir}\"
 madedit_SOURCES =	src/MadAboutDialog.cpp \
