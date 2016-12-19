@@ -34,6 +34,9 @@
     <Filter Include="Source Files\Astyle">
       <UniqueIdentifier>{fab3ae52-7fc0-4177-83a5-138779940783}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\ExtEncodings">
+      <UniqueIdentifier>{4d02b3cd-de5e-486e-bd65-78083f40a197}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\EmbeddedPython.cpp">
@@ -424,6 +427,39 @@
     </ClInclude>
     <ClInclude Include="..\..\src\MadEdit\gbkext2.h">
       <Filter>Header Files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ascii.h">
+      <Filter>Header Files\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\converters.h">
+      <Filter>Header Files\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\cp936ext.h">
+      <Filter>Header Files\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gb2312.h">
+      <Filter>Header Files\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gb18030.h">
+      <Filter>Header Files\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gb18030ext.h">
+      <Filter>Header Files\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gb18030uni.h">
+      <Filter>Header Files\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gbk.h">
+      <Filter>Header Files\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gbkext_inv.h">
+      <Filter>Header Files\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gbkext1.h">
+      <Filter>Header Files\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gbkext2.h">
+      <Filter>Header Files\ExtEncodings</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

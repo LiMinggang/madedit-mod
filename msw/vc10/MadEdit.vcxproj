@@ -294,6 +294,17 @@
     <ClInclude Include="..\..\src\MadEdit\ascii.h" />
     <ClInclude Include="..\..\src\MadEdit\converters.h" />
     <ClInclude Include="..\..\src\MadEdit\cp936ext.h" />
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ascii.h" />
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\converters.h" />
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\cp936ext.h" />
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gb18030.h" />
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gb18030ext.h" />
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gb18030uni.h" />
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gb2312.h" />
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gbk.h" />
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gbkext1.h" />
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gbkext2.h" />
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gbkext_inv.h" />
     <ClInclude Include="..\..\src\MadEdit\gb18030.h" />
     <ClInclude Include="..\..\src\MadEdit\gb18030ext.h" />
     <ClInclude Include="..\..\src\MadEdit\gb18030uni.h" />
