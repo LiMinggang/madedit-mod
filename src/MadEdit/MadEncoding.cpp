@@ -183,7 +183,7 @@ void MadEncoding::InitEncodings()
 					testmb[1] = 0x40;
 					MSW_GET_FONT_NAME( wxT( "932" ), fontname );
 					added = true;
-					encGrp.push_back( ENCG_WINDOWS );
+					encGrp.push_back( ENCG_OEM );
 					encGrp.push_back( ENCG_EASTASIA );
 				}
 				else
@@ -207,7 +207,7 @@ void MadEncoding::InitEncodings()
 					testmb[1] = 0xA1;
 					MSW_GET_FONT_NAME( wxT( "936" ), fontname );
 					added = true;
-					encGrp.push_back( ENCG_WINDOWS );
+					encGrp.push_back( ENCG_OEM );
 					encGrp.push_back( ENCG_EASTASIA );
 				}
 				else
@@ -231,7 +231,7 @@ void MadEncoding::InitEncodings()
 					testmb[1] = 0xA1;
 					MSW_GET_FONT_NAME( wxT( "949" ), fontname );
 					added = true;
-					encGrp.push_back( ENCG_WINDOWS );
+					encGrp.push_back( ENCG_OEM );
 					encGrp.push_back( ENCG_EASTASIA );
 				}
 				else
@@ -255,7 +255,7 @@ void MadEncoding::InitEncodings()
 					testmb[1] = 0x40;
 					MSW_GET_FONT_NAME( wxT( "950" ), fontname );
 					added = true;
-					encGrp.push_back( ENCG_WINDOWS );
+					encGrp.push_back( ENCG_OEM );
 					encGrp.push_back( ENCG_EASTASIA );
 				}
 				else
@@ -395,7 +395,7 @@ void MadEncoding::InitEncodings()
 			name = wxT( "CP866" );
 			testwc = 0x0434;
 			testmb[0] = 0xA4;
-			encGrp.push_back( ENCG_WINDOWS );
+			encGrp.push_back( ENCG_OEM );
 			encGrp.push_back( ENCG_CYRILLIC );
 			break;
 
@@ -403,7 +403,7 @@ void MadEncoding::InitEncodings()
 			name = wxT( "CP855" );
 			testwc = 0x0446;
 			testmb[0] = 0xA4;
-			encGrp.push_back( ENCG_WINDOWS );
+			encGrp.push_back( ENCG_OEM );
 			encGrp.push_back( ENCG_CYRILLIC );
 			break;
 
@@ -411,7 +411,7 @@ void MadEncoding::InitEncodings()
 			name = wxT( "CP874" );
 			testwc = 0x0E5B;
 			testmb[0] = 0xFB;
-			encGrp.push_back( ENCG_WINDOWS );
+			encGrp.push_back( ENCG_OEM );
 			encGrp.push_back( ENCG_SOUTHEASTASIA );
 			break;
 
@@ -539,10 +539,11 @@ void MadEncoding::InitEncodings()
 						testwc = 0x0e50;
 						testmb[0] = 0xf0;
 						MSW_GET_FONT_NAME( wxT( "874" ), fontname );
+						encGrp.push_back( ENCG_OEM );
 						encGrp.push_back( ENCG_WINDOWS );
 						encGrp.push_back( ENCG_SOUTHEASTASIA );
 					}
-					else if( enc >= wxFONTENCODING_MACROMAN && enc <= wxFONTENCODING_MACROMANIAN )
+					else if( enc >= wxFONTENCODING_MACMIN && enc <= wxFONTENCODING_MACMAX )
 					{
 						encGrp.push_back( ENCG_MACINTOSH );
 
@@ -631,11 +632,16 @@ void MadEncoding::InitEncodings()
 						}
 					}
 					else
-						if( name == wxT( "default" ) || name == wxGetTranslation( wxT( "default" ) ) ) // unnecessary
+						if((enc >= wxFONTENCODING_CP437) && ((enc < wxFONTENCODING_CP12_MAX)))
 						{
-							ignore = true;
-							dotest = false;
+							encGrp.push_back( ENCG_OEM );
 						}
+						else
+							if( name == wxT( "default" ) || name == wxGetTranslation( wxT( "default" ) ) ) // unnecessary
+							{
+								ignore = true;
+								dotest = false;
+							}
 		}
 
 		// test the encoding is supported in the system

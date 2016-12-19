@@ -2916,10 +2916,10 @@ void MadEditFrame::CreateGUIControls( void )
 				{
 					( *( cd->toolbar_ptr ) )->AddTool( cd->menu_id, memLabel, m_ImageList->GetBitmap( cd->image_idx ), wxNullBitmap, cd->kind, wxGetTranslation( cd->short_help ), wxGetTranslation( cd->hint ), NULL );
 
-					if( menuCloseAll == cd->menu_id)
-					{
-						( *( cd->toolbar_ptr ) )->AddTool( menuRecentFilesToolbar, _( "Recent Files" ), m_ImageList->GetBitmap( recentfiles_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _("Recent file list"), _("List all recent opened files"), NULL );
-					}
+					//if( menuCloseAll == cd->menu_id)
+					//{
+					//	( *( cd->toolbar_ptr ) )->AddTool( menuRecentFilesToolbar, _( "Recent Files" ), m_ImageList->GetBitmap( recentfiles_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _("Recent file list"), _("List all recent opened files"), NULL );
+					//}
 
 					if( cd->apd_toolbar_spr )
 					{ ( *( cd->toolbar_ptr ) )->AddSeparator(); }
@@ -3335,8 +3335,8 @@ void MadEditFrame::CreateGUIControls( void )
 			m_QuickSearchBar->EnableTool(menuQuickFindDotMatchNewLine, false);
 		}
 	}
-	//m_QuickSearchBar->AddSeparator();
-	//m_QuickSearchBar->AddTool( menuRecentFilesToolbar, _( "Recent Files" ), m_ImageList->GetBitmap( recentfiles_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _("Recent file list"), _("List all recent opened files"), NULL );
+	m_QuickSearchBar->AddSeparator();
+	m_QuickSearchBar->AddTool( menuRecentFilesToolbar, _( "Recent Files" ), m_ImageList->GetBitmap( recentfiles_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _("Recent file list"), _("List all recent opened files"), NULL );
 
 	m_QuickSearchBar->Realize();
 	wxString      panelStatus;

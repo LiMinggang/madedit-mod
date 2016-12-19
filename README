@@ -138,7 +138,10 @@ Mod v0.4.6
 12.Fix: Disable Find Previous in Regex search
 13.Fix: Add ResetToolBarsInfoWin to All above in PurgeHisoryDialog
 14.Fix: Not stay in current line when switch between modes #226
-15.Update Simplified Chinese translation
+15.Fix: Adjust encoding group according to MSDN
+16.Update Simplified Chinese translation
+17.Adjust toolbar position #225
+18.Fix: Update boost to 1.62
 
 Mod v0.4.5
 1.New: File history dialog

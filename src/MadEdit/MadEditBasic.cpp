@@ -916,7 +916,7 @@ void MadEdit::SetWordWrapMode( MadWordWrapMode mode )
 
 			UpdateAppearance();
 			RecountLineWidth( true );
-			UpdateScrollBarPos();
+			//UpdateScrollBarPos(); //Waiting for the event to UpdateScrollBarPos
 			m_RepaintAll = true;
 			Refresh( false );
 			
