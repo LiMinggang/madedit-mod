@@ -1553,6 +1553,11 @@ void DetectChineseEncoding( const wxByte *text, int count, int &enc )
 							return;
 						}
 					}
+					else if((b1 <= 0x39) && (b1 >= 0x30) && (b0 >= 0x81) && (b0 <= 0xFE))
+						{
+							enc = MAD_FONTENCODING_GB18030; // [0x81~0xFE][0x30~0x39] are invalid in big5 and GBK
+							return;
+						}
 					else
 					{
 						int w = ( b0 << 8 ) + b1;
