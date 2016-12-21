@@ -416,16 +416,20 @@ void MadEncoding::InitEncodings()
 			break;
 
 		default:
-			if( enc >= wxFONTENCODING_ISO8859_2 && enc <= wxFONTENCODING_ISO8859_15 )
+			if( enc >= wxFONTENCODING_ISO8859_1 && enc <= wxFONTENCODING_ISO8859_15 )
 			{
-				static wxChar wctable[] = {0x0102, 0x0108, 0x0100, 0x00a7, 0x060c, 0x03ce, 0x00d7, 0x011e, 0x0100, 0x0e01,    0, 0x00c6, 0x010a, 0x0152};
-				static wxByte mbtable[] = {0xc3,   0xc6,   0xc0,   0xfd,   0xac,   0xfe,   0xaa,   0xd0,   0xc0,   0xa1,      0, 0xaf,   0xa4,   0xbc};
-				testwc    = wctable[enc - wxFONTENCODING_ISO8859_2];
-				testmb[0] = mbtable[enc - wxFONTENCODING_ISO8859_2];
+				static wxChar wctable[] = {0x00A1, 0x0102, 0x0108, 0x0100, 0x00a7, 0x060c, 0x03ce, 0x00d7, 0x011e, 0x0100, 0x0e01,    0, 0x00c6, 0x010a, 0x0152};
+				static wxByte mbtable[] = {0xA1,   0xc3,   0xc6,   0xc0,   0xfd,   0xac,   0xfe,   0xaa,   0xd0,   0xc0,   0xa1,      0, 0xaf,   0xa4,   0xbc};
+				testwc    = wctable[enc - wxFONTENCODING_ISO8859_1];
+				testmb[0] = mbtable[enc - wxFONTENCODING_ISO8859_1];
 				encGrp.push_back( ENCG_ISO8859 );
 
 				switch( enc )
 				{
+				case wxFONTENCODING_ISO8859_1:
+					encGrp.push_back( ENCG_WESTERNEUROPE );
+					break;
+
 				case wxFONTENCODING_ISO8859_2:
 					encGrp.push_back( ENCG_CENTRALEUROPE );
 					break;
