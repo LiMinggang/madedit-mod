@@ -7,12 +7,15 @@ Based on [madedit@sf](https://sourceforge.net/projects/madedit/). Patched a lot 
 
 Anyway, just for fun!
 
+You're encouraged to translate MadEdit-Mod into your native language if there's not already a translation.
+
 NOTE: The release marked as Selfuse is a bloody edge and buggy one with a lot of enhancement without carefully tested(Eg. Drag and Drop(cross-platform), bookmark, etc). Try it at your own risk. From 2.9.1, the implementation of single instance has to be changed and not compatible with 2.8.x, which means madedit.exe could not behave correctly if another madedit.exe(complied with wxwidgets 2.8.x) were running.
+
 
 Current Feature list(comparing to the original Madedit@sourceforge)
 ===================================================================
 * Original features from MadEdit(Hex Edit, Column Edit, many encodings support, etc) with lots of bug fixes
-* More encodings supported, eg, GB18030, CP874, CP866, KOI8-R and KOI8-U Macintosh encodings(Roman, Japanese, Chinese-trad, Korean, Arabic, Hebrew, Greek, Cyrillic, Thai, Chinese-simp, Central-Eur, Croatian, Icelandic, Romanian)
+* More encodings supported, eg, GB18030, CP874, CP866, KOI8-R and KOI8-U Macintosh encodings(Roman, Japanese, Chinese-trad, Korean, Arabic, Hebrew, Greek, Cyrillic, Thai, Chinese-simp, Central-Eur, Croatian, Icelandic, Romanian) if your system supported
 * Drag&Drop Edit(Cross platform)
 * Bookmark(From Gogo)
 * Bookmark enhancement:Edit functions(Copy/Cut/Delete/Replace bookmarked lines), Bookmark in search
