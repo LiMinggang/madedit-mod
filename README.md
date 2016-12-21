@@ -70,27 +70,22 @@ FreeBSD packaging (with FreeBSD 10.01)
 Mod v0.4.6
 * New: Spell check for SearchReplaceDialog would change according to active window
 * New: Ctrl+Shift+Wheel as shortcut for Page Up/Down
+* New: Indicator for zero length match in Regex search
+* New: Add GB18030 support
+* New: Add KOI8-R, KOI8-U and CP866 support
+* New: Add Macintosh encodings(Roman, Japanese, Chinese-trad, Korean, Arabic, Hebrew, Greek, Cyrillic, Thai, Chinese-simp, Central-Eur, Croatian, Icelandic, Romanian) support
+* New: Add CP874 Windows Thai support
+* New: Mark unsupported unicode char with {}
 * Fix: Toolbar issue
-
-Mod v0.4.5
-* New: File history dialog
-* New: Add default key, down key support(the same as Search Dialog) for FindInFiles Dialog
-* Fix: Size issue of some UI items #215
-* Fix: Two typos #82
-* Fix: Don't show EOF but Space/Tab in Search/Replace Dialog
-* Fix: CPPCheck warnings
-* Fix: Change shortcuts of Go Back/Forward
-* Fix: Some greek symbols that require the Alt+ compination don't get created #214
-    with Greek extended keyboard layout
-    Madeit-Mod -------------------> result <------------ IceApe
-    RightAlt+Shift+r --------------> U+00AE <----------------- RightAlt+r
-    RightAlt+Shift+[2 times ; ] --> ¡§ <------------------ [couldn't find it]
-* Fix: Remove support for Win98
-* Fix: Some illegal chars in file name(eg, 0xFFF0~0xFFFF) would cause wxWidgets crash
-* Fix: a bug when move up #217
-* Fix: Crash if close the last file by double clicking page tab #218
-* Other improvements
-* Update translation
+* Fix: Regex search bug #224
+* Fix: Caret position is not updated if close search dialog by click 'X' instead of close button
+* Fix: Disable Find Previous in Regex search
+* Fix: Add ResetToolBarsInfoWin to All above in PurgeHisoryDialog
+* Fix: Not stay in current line when switch between modes #226
+* Fix: Adjust encoding group according to MSDN
+* Fix: Adjust toolbar position #225
+* Update Simplified Chinese translation
+* Update boost to 1.62
 
 Todo:
 =====
