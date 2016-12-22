@@ -4673,7 +4673,7 @@ void MadEditFrame::OnUpdateUI_MenuSearch_QuickBar( wxUpdateUIEvent& event )
 			{
 				if(enable)
 				{
-					enable = !(m_QuickSearchBar->GetToolToggled(menuQuickFindWholeWord) || m_QuickSearchBar->GetToolToggled(menuQuickFindCase));
+					enable = !(m_QuickSearchBar->GetToolToggled(menuQuickFindWholeWord) || m_QuickSearchBar->GetToolToggled(menuQuickFindCase) || (!m_SearchDirectionNext));
 				}
 				break;
 			}
