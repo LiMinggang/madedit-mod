@@ -9647,17 +9647,18 @@ void MadEditFrame::OnSearchQuickFindPrevious( wxCommandEvent& event )
 
 	if( m_QuickSearch && g_ActiveMadEdit )
 	{
-		if( m_QuickSearch->GetValue().IsEmpty() )
+		wxString text = m_QuickSearch->GetValue();
+		if( text.IsEmpty() )
 		{
 			return;
 		}
 
 		if( event.GetEventType() == wxEVT_TEXT_ENTER )
 		{
-			if( wxNOT_FOUND == m_QuickSearch->FindString( m_QuickSearch->GetValue(), true ) )
+			if( wxNOT_FOUND == m_QuickSearch->FindString( text, true ) )
 			{
-				m_QuickSearch->Insert( m_QuickSearch->GetValue(), 0 );
-				g_RecentFindText->AddFileToHistory( m_QuickSearch->GetValue() );
+				m_QuickSearch->Insert( text), 0 );
+				g_RecentFindText->AddFileToHistory( text );
 			}
 		}
 
@@ -9683,7 +9684,7 @@ void MadEditFrame::OnSearchQuickFindPrevious( wxCommandEvent& event )
 			bDotMatchNewline = (m_QuickSearchBar->GetToolEnabled(menuQuickFindDotMatchNewLine) &&  m_QuickSearchBar->GetToolToggled(menuQuickFindDotMatchNewLine)),
 			bCase = (m_QuickSearchBar->GetToolEnabled(menuQuickFindCase) &&  m_QuickSearchBar->GetToolToggled(menuQuickFindCase));
 
-		sr = g_ActiveMadEdit->FindTextPrevious( m_QuickSearch->GetValue(), bRegex,
+		sr = g_ActiveMadEdit->FindTextPrevious( text, bRegex,
 												bCase, bWholeWord, bDotMatchNewline, rangeFrom, rangeTo );
 
 		if( sr == SR_NO )
@@ -9705,17 +9706,19 @@ void MadEditFrame::OnSearchQuickFindNext( wxCommandEvent& event )
 
 	if( m_QuickSearch && g_ActiveMadEdit )
 	{
-		if( m_QuickSearch->GetValue().IsEmpty() )
+		wxString text = m_QuickSearch->GetValue();
+		if( text.IsEmpty() )
 		{
 			return;
 		}
 
+		wxString text = 
 		if( event.GetEventType() == wxEVT_TEXT_ENTER )
 		{
-			if( wxNOT_FOUND == m_QuickSearch->FindString( m_QuickSearch->GetValue(), true ) )
+			if( wxNOT_FOUND == m_QuickSearch->FindString( text, true ) )
 			{
-				m_QuickSearch->Insert( m_QuickSearch->GetValue(), 0 );
-				g_RecentFindText->AddFileToHistory( m_QuickSearch->GetValue() );
+				m_QuickSearch->Insert( text, 0 );
+				g_RecentFindText->AddFileToHistory( text) );
 			}
 		}
 
@@ -9741,7 +9744,7 @@ void MadEditFrame::OnSearchQuickFindNext( wxCommandEvent& event )
 			bDotMatchNewline = (m_QuickSearchBar->GetToolEnabled(menuQuickFindDotMatchNewLine) &&  m_QuickSearchBar->GetToolToggled(menuQuickFindDotMatchNewLine)),
 			bCase = (m_QuickSearchBar->GetToolEnabled(menuQuickFindCase) &&  m_QuickSearchBar->GetToolToggled(menuQuickFindCase));
 
-		sr = g_ActiveMadEdit->FindTextNext( m_QuickSearch->GetValue(), bRegex,
+		sr = g_ActiveMadEdit->FindTextNext( text, bRegex,
 											bCase, bWholeWord, bDotMatchNewline, rangeFrom, rangeTo );
 
 		if( sr == SR_NO )
@@ -9749,6 +9752,9 @@ void MadEditFrame::OnSearchQuickFindNext( wxCommandEvent& event )
 			reset_caretpos = true;
 			g_StatusBar->SetStatusText( _( "Passed the end of the file" ), 0 );
 			lastCaret = rangeFrom;
+
+			if(bRegex)
+				g_ActiveMadEdit->MoveToNextRegexSearchingPos( text );
 		}
 		else
 		{
