@@ -9657,7 +9657,7 @@ void MadEditFrame::OnSearchQuickFindPrevious( wxCommandEvent& event )
 		{
 			if( wxNOT_FOUND == m_QuickSearch->FindString( text, true ) )
 			{
-				m_QuickSearch->Insert( text), 0 );
+				m_QuickSearch->Insert( text, 0 );
 				g_RecentFindText->AddFileToHistory( text );
 			}
 		}
@@ -9712,13 +9712,12 @@ void MadEditFrame::OnSearchQuickFindNext( wxCommandEvent& event )
 			return;
 		}
 
-		wxString text = 
 		if( event.GetEventType() == wxEVT_TEXT_ENTER )
 		{
 			if( wxNOT_FOUND == m_QuickSearch->FindString( text, true ) )
 			{
 				m_QuickSearch->Insert( text, 0 );
-				g_RecentFindText->AddFileToHistory( text) );
+				g_RecentFindText->AddFileToHistory( text );
 			}
 		}
 
@@ -9752,13 +9751,12 @@ void MadEditFrame::OnSearchQuickFindNext( wxCommandEvent& event )
 			reset_caretpos = true;
 			g_StatusBar->SetStatusText( _( "Passed the end of the file" ), 0 );
 			lastCaret = rangeFrom;
-
-			if(bRegex)
-				g_ActiveMadEdit->MoveToNextRegexSearchingPos( text );
 		}
 		else
 		{
 			lastCaret = g_ActiveMadEdit->GetFileSize();
+			if(bRegex)
+				g_ActiveMadEdit->MoveToNextRegexSearchingPos( text );
 		}
 	}
 }
