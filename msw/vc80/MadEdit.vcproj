@@ -147,7 +147,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/ignore:4217 /ignore:4049"
-				AdditionalDependencies="wxmsw31u_core.lib wxbase31u.lib wxmsw31u_aui.lib wxbase31u_xml.lib wxmsw31u_html.lib wxexpat.lib wxpng.lib wxzlib.lib python27.lib libboost_python-vc80-mt-s-1_61.lib libhunspell.lib comctl32.lib rpcrt4.lib User32.Lib Gdi32.Lib Shell32.Lib AdvAPI32.Lib Ole32.Lib OleAut32.Lib ComDlg32.Lib Winspool.lib"
+				AdditionalDependencies="wxmsw31u_core.lib wxbase31u.lib wxmsw31u_aui.lib wxbase31u_xml.lib wxmsw31u_html.lib wxexpat.lib wxpng.lib wxzlib.lib python27.lib libboost_python-vc80-mt-s-1_62.lib libhunspell.lib comctl32.lib rpcrt4.lib User32.Lib Gdi32.Lib Shell32.Lib AdvAPI32.Lib Ole32.Lib OleAut32.Lib ComDlg32.Lib Winspool.lib"
 				OutputFile="$(OutDir)/MadEdit.exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="&quot;$(WXWIN3)\lib\vc_lib\&quot;;&quot;$(TargetDir)&quot;;&quot;$(BOOST)\stage\lib&quot;;$(NOINHERIT)"
@@ -290,6 +290,10 @@
 			<Filter
 				Name="MadEdit"
 				>
+				<File
+					RelativePath="..\..\src\MadEdit\MadCSConv.cpp"
+					>
+				</File>
 				<File
 					RelativePath="..\..\src\MadEdit\MadEdit.cpp"
 					>
@@ -645,6 +649,10 @@
 				Name="MadEdit"
 				>
 				<File
+					RelativePath="..\..\src\MadEdit\MadCSConv.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\src\MadEdit\MadEdit.h"
 					>
 				</File>
@@ -680,6 +688,54 @@
 					RelativePath="..\..\src\MadEdit\ucs4_t.h"
 					>
 				</File>
+				<Filter
+					Name="ExtEncodings"
+					>
+					<File
+						RelativePath="..\..\src\MadEdit\ExtEncodings\ascii.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\src\MadEdit\ExtEncodings\converters.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\src\MadEdit\ExtEncodings\cp936ext.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\src\MadEdit\ExtEncodings\gb18030.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\src\MadEdit\ExtEncodings\gb18030ext.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\src\MadEdit\ExtEncodings\gb18030uni.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\src\MadEdit\ExtEncodings\gb2312.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\src\MadEdit\ExtEncodings\gbk.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\src\MadEdit\ExtEncodings\gbkext1.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\src\MadEdit\ExtEncodings\gbkext2.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\src\MadEdit\ExtEncodings\gbkext_inv.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="charset-detector"
