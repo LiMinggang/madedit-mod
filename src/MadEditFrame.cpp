@@ -9743,6 +9743,8 @@ void MadEditFrame::OnSearchQuickFindNext( wxCommandEvent& event )
 			bDotMatchNewline = (m_QuickSearchBar->GetToolEnabled(menuQuickFindDotMatchNewLine) &&  m_QuickSearchBar->GetToolToggled(menuQuickFindDotMatchNewLine)),
 			bCase = (m_QuickSearchBar->GetToolEnabled(menuQuickFindCase) &&  m_QuickSearchBar->GetToolToggled(menuQuickFindCase));
 
+		if( bRegex ) bWholeWord = false;
+
 		sr = g_ActiveMadEdit->FindTextNext( text, bRegex,
 											bCase, bWholeWord, bDotMatchNewline, rangeFrom, rangeTo );
 

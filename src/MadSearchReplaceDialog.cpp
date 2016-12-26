@@ -452,7 +452,9 @@ void MadSearchReplaceDialog::WxButtonFindNextClick( wxCommandEvent& event )
 
 		for( ;; )
 		{
-			if( WxCheckBoxFindHex->GetValue() )
+			bool bHex = WxCheckBoxFindHex->GetValue();
+			bool bRegex = ((!bHex) && WxCheckBoxRegex->GetValue());
+			if( bHex )
 			{
 				sr = g_ActiveMadEdit->FindHexNext( text, rangeFrom, rangeTo );
 
@@ -465,7 +467,7 @@ void MadSearchReplaceDialog::WxButtonFindNextClick( wxCommandEvent& event )
 			}
 			else
 			{
-				bool bRegex = WxCheckBoxRegex->GetValue(), bWholeWord = WxCheckBoxWholeWord->GetValue(), bDotMatchNewline = WxCheckBoxDotMatchNewLine->GetValue();
+				bool bWholeWord = WxCheckBoxWholeWord->GetValue(), bDotMatchNewline = WxCheckBoxDotMatchNewLine->GetValue();
 
 				if( bRegex ) bWholeWord = false;
 				else bDotMatchNewline = false;
@@ -518,11 +520,13 @@ void MadSearchReplaceDialog::WxButtonFindNextClick( wxCommandEvent& event )
 				}
 
 				// add: gogo, 19.09.2009
+				bool c_find = true;
 				if( ThrEndOfFile )
 					g_StatusBar->SetStatusText( _( "Passed the end of the file" ), 0 );
-
-				g_ActiveMadEdit->MoveToNextRegexSearchingPos( text );
-				break;
+				else if(bRegex)
+					c_find = g_ActiveMadEdit->MoveToNextRegexSearchingPos( text );
+				if(c_find)
+					break;
 			}
 
 			// add: gogo, 19.09.2009
@@ -1215,7 +1219,15 @@ void MadSearchReplaceDialog::MadSearchReplaceDialogActivate( wxActivateEvent& ev
 		{
 			SetTransparent( wxIMAGE_ALPHA_OPAQUE );
 		}
-		
+
+		if(WxCheckBoxRegex->GetValue())
+		{
+			WxButtonFindPrev->Disable();
+		}
+		else
+		{
+			WxButtonFindPrev->Enable();
+		}
 		GetSizer()->Fit( this );
 		GetSizer()->Layout();
 	}

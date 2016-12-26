@@ -859,6 +859,7 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_ValidPos_pos = 0;
 	m_UpdateValidPos = 0;
 	m_Selection = false;
+	m_ZeroSelection = false;
 	m_SelectionStart = false;
 	m_SelectionStartPos = -1;
 	m_SelFirstRow = INT_MAX;
@@ -1537,6 +1538,7 @@ void MadEdit::UpdateSelectionPos()
 	UpdateCaretByPos( m_SelectionPos1, ucharQueue, widthArray, ucharPos );
 	UpdateCaretByPos( m_SelectionPos2, ucharQueue, widthArray, ucharPos );
 
+	m_ZeroSelection = false;
 	if( m_SelectionPos1.pos == m_SelectionPos2.pos )
 	{
 		m_Selection = false;
@@ -3674,6 +3676,7 @@ void MadEdit::BeginUpdateSelection()
 		m_SelectionPos1 = m_CaretPos;
 	}
 
+	m_ZeroSelection = false;
 	if( int( m_CaretPos.rowid ) < m_SelFirstRow )
 		m_SelFirstRow = m_CaretPos.rowid;
 
@@ -3729,6 +3732,7 @@ void MadEdit::EndUpdateSelection( bool bSelection )
 		m_RepaintSelection = true;
 		Refresh( false );
 	}
+	m_ZeroSelection = false;
 }
 
 void MadEdit::SetSelection( wxFileOffset beginpos, wxFileOffset endpos, bool bCaretAtBeginPos )
@@ -3774,10 +3778,12 @@ void MadEdit::SetSelection( wxFileOffset beginpos, wxFileOffset endpos, bool bCa
 	if( m_SelectionPos1.pos == m_SelectionPos2.pos )
 	{
 		m_Selection = false;
+		m_ZeroSelection = true;
 	}
 	else
 	{
 		m_Selection = true;
+		m_ZeroSelection = false;
 		m_RepaintSelection = true;
 		m_SelFirstRow = m_SelectionBegin->rowid;
 		m_SelLastRow = m_SelectionEnd->rowid;
@@ -3966,6 +3972,7 @@ wxFileOffset MadEdit::GetColumnSelection( wxString *ws )
 void MadEdit::SelectWordFromCaretPos( wxString *ws, MadCaretPos * cpos/* = NULL*/, bool bSelection/* = false*/ )
 {
 	MadCaretPos * caretPos = cpos;
+	m_ZeroSelection = false;
 
 	if( cpos == NULL ) caretPos = &m_CaretPos;
 
@@ -4174,6 +4181,7 @@ void MadEdit::GetWordFromCaretPos( wxString &ws )
 
 void MadEdit::SelectLineFromCaretPos( wxString *ws, bool caretToBegOfSel )
 {
+	m_ZeroSelection = false;
 	if( m_EditMode == emColumnMode && m_CaretPos.extraspaces )
 		return;
 
@@ -5093,6 +5101,7 @@ void MadEdit::InsertString( const ucs4_t *ucs, size_t count, bool bColumnEditing
 	}
 
 	MadBlock blk( m_Lines->m_MemData, -1, 0 );
+	m_ZeroSelection = false;
 
 	if( m_Selection )
 	{
@@ -5608,6 +5617,7 @@ void MadEdit::InsertColumnString( const ucs4_t *ucs, size_t count, int linecount
 	int lines = linecount;
 	bool oldModified = m_Modified;
 
+	m_ZeroSelection = false;
 	// delete selection
 	if( m_Selection )
 	{
@@ -5733,6 +5743,7 @@ void MadEdit::InsertColumnString( const ucs4_t *ucs, size_t count, int linecount
 		if( bSelText )
 		{
 			m_Selection = true;
+			m_ZeroSelection = false;
 			m_SelectionPos1.pos = cpos;
 			m_SelectionPos2.pos = undo->m_CaretPosAfter;
 			UpdateSelectionPos();
@@ -6331,6 +6342,8 @@ void MadEdit::DecreaseIndentSpaces( vector <ucs4_t> &spaces )
 
 MadUndo *MadEdit::DeleteSelection( bool bCorrectCaretPos, vector <int> *rpos, bool bColumnEditing )
 {
+	m_ZeroSelection = false;
+
 	if( !m_Selection || IsReadOnly() )
 		return NULL;
 
@@ -6774,6 +6787,7 @@ void MadEdit::InsertHexData( wxByte *hex, size_t count )
 	MadBlock blk( m_Lines->m_MemData, 0, count );
 	blk.m_Pos = m_Lines->m_MemData->Put( hex, count );
 
+	m_ZeroSelection = false;
 	if( m_Selection || !m_InsertMode )
 	{
 		MadOverwriteUndoData *oudata = new MadOverwriteUndoData();
@@ -7008,6 +7022,7 @@ void MadEdit::OverwriteDataSingle( vector<wxFileOffset> &del_bpos, vector<wxFile
 	bool sc = ( oldModified == false );
 	m_Modified = true;
 	m_Selection = false;
+	m_ZeroSelection = false;
 	m_RepaintAll = true;
 	Refresh( false );
 
@@ -7143,6 +7158,7 @@ void MadEdit::OverwriteDataMultiple( vector<wxFileOffset> &del_bpos, vector<wxFi
 	bool sc = ( oldModified == false );
 	m_Modified = true;
 	m_Selection = false;
+	m_ZeroSelection = false;
 	m_RepaintAll = true;
 	Refresh( false );
 
@@ -7583,6 +7599,7 @@ void MadEdit::FindBracePairUnderCaretPos()
 void MadEdit::ProcessCommand( MadEditCommand command )
 {
 	ucs4_t NewAutoCompleteRightChar = 0;
+	m_ZeroSelection = false;
 
 	if( command == m_AutoCompleteRightChar && m_CaretPos.pos == m_AutoCompletePos && m_EditMode == emTextMode )
 	{
@@ -10531,6 +10548,7 @@ void MadEdit::OnKillFocus( wxFocusEvent &evt )
 		if( m_SingleLineMode && m_Selection )
 		{
 			m_Selection = false;
+			m_ZeroSelection = false;
 			m_RepaintAll = true;
 			Refresh();
 		}

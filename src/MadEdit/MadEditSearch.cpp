@@ -632,7 +632,7 @@ extern wxString MadStrLower( const wxString & );
 MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadCaretPos &endpos,
 		const wxString &text, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline/* = false*/, /*IN_OUT*/ucs4string *fmt/*= NULL*/, ucs4string *out/* = NULL*/ )
 {
-	if( beginpos.pos >= endpos.pos || text.IsEmpty() )
+	if((( beginpos.pos >= endpos.pos) && (!m_ZeroSelection) )|| text.IsEmpty() )
 	{ return SR_NO; }
 
 	regex_constants::syntax_option_type opt = regex_constants::ECMAScript;
@@ -1185,7 +1185,12 @@ bool MadEdit::MoveToNextRegexSearchingPos( const wxString &expr )
 	MadCaretPos& cp = m_CaretPos;
 	if( expr.find_first_of( wxT( '^' ) ) != wxString::npos || expr.find_last_of( wxT( '$' ) ) != wxString::npos )
 	{
+		//wxASSERT((cp.iter->m_Size - cp.linepos - 1) >= 0);
 		wxFileOffset len = cp.iter->m_Size - cp.linepos - 1;
+		if(len < 0)
+		{
+			return false;
+		}
 		cp.pos += len;
 		cp.linepos += len;
 	}
@@ -1199,6 +1204,29 @@ bool MadEdit::MoveToNextRegexSearchingPos( const wxString &expr )
 	cp.iter = it.lit;
 	cp.linepos = it.linepos;
 	return true;
+}
+
+wxFileOffset MadEdit::GetLineBeginPos(int line )
+{
+	MadCaretPos caret = m_CaretPos;
+	--line;
+
+	if( line < 0 ) line = 0;
+	else
+		if( line >= int( m_Lines->m_LineCount ) ) line = int( m_Lines->m_LineCount - 1 );
+
+	m_UpdateValidPos = -1;
+	caret.rowid = GetLineByLine( caret.iter, caret.pos, line );
+	caret.lineid = line;
+	caret.subrowid = 0;
+	caret.linepos = 0;
+	caret.xpos = 0;
+	caret.extraspaces = 0;
+	int ucharPos = 0;
+	vector<int> widthArray;
+	MadUCQueue ucharQueue;
+	UpdateCaret( caret, ucharQueue, widthArray, ucharPos);
+	return caret.pos;
 }
 
 

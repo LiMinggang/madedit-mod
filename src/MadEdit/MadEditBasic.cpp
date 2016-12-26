@@ -1375,6 +1375,7 @@ void MadEdit::SetText( const wxString &ws )
 	undo->m_CaretPosBefore = m_CaretPos.pos;
 	m_Modified = true;
 	m_Selection = false;
+	m_ZeroSelection = false;
 	m_RepaintAll = true;
 	Refresh( false );
 
@@ -1694,6 +1695,7 @@ void MadEdit::SelectAll()
 
 		DoSelectionChanged();
 	}
+	m_ZeroSelection = false;
 }
 
 void MadEdit::StartEndSelction()
@@ -2176,6 +2178,7 @@ void MadEdit::Undo()
 	}
 
 	m_Selection = false;
+	m_ZeroSelection = false;
 	bool oldmod = m_Modified;
 
 	if( m_UndoBuffer->GetPrevUndo() == m_SavePoint )
@@ -2307,6 +2310,7 @@ void MadEdit::Redo()
 	}
 
 	m_Selection = false;
+	m_ZeroSelection = false;
 	bool oldmod = m_Modified;
 
 	if( m_UndoBuffer->GetPrevUndo() == m_SavePoint )
@@ -2405,6 +2409,7 @@ void MadEdit::SetCaretPosition( wxFileOffset pos, wxFileOffset selbeg, wxFileOff
 		UpdateSelectionPos();
 	}
 
+	m_ZeroSelection = false;
 	m_RepaintAll = true;
 	Refresh( false );
 
@@ -2471,6 +2476,7 @@ bool MadEdit::LoadFromFile( const wxString &filename, const wxString &encoding )
 	m_ReadOnly = false; // use IsReadOnly() to check ReadOnly or not
 	m_InsertNewLineType = m_NewLineType;
 	m_Selection = false;
+	m_ZeroSelection = false;
 	m_SelFirstRow = INT_MAX;
 	m_SelLastRow = -1;
 	m_TopRow = 0;
@@ -2494,9 +2500,6 @@ bool MadEdit::LoadFromFile( const wxString &filename, const wxString &encoding )
 		UpdateCaret( m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
 	}
 
-	m_Selection = false;
-	m_SelFirstRow = INT_MAX;
-	m_SelLastRow = -1;
 	m_SelectionPos1 = m_CaretPos;
 	m_SelectionPos2 = m_CaretPos;
 	m_SelectionBegin = &m_SelectionPos1;
@@ -2770,6 +2773,7 @@ MadSearchResult MadEdit::FindTextNext( const wxString &text,
 	vector<int> widthArray;
 	int tmp;
 
+
 	if( rangeFrom < 0 )
 	{
 		bpos = m_CaretPos;
@@ -2795,6 +2799,24 @@ MadSearchResult MadEdit::FindTextNext( const wxString &text,
 
 		epos.pos = rangeTo;
 		UpdateCaretByPos( epos, ucharQueue, widthArray, tmp );
+	}
+
+	if( bRegex )
+	{
+		if(text.find_first_of( wxT( '^' ) ) != wxString::npos)
+		{
+			if(bpos.linepos)
+			{
+				int maxLines = GetLineCount();
+				if ((bpos.lineid + 1) >= maxLines) { return SR_NO;}
+				else
+				{
+					rangeFrom = GetLineBeginPos(bpos.lineid + 1 + 1); //line is 1 based
+					bpos.pos = rangeFrom;
+					UpdateCaretByPos(bpos, ucharQueue, widthArray, tmp);
+				}
+			}
+		}
 	}
 
 	MadSearchResult state = Search( bpos, epos, text, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
@@ -3214,7 +3236,7 @@ MadReplaceResult MadEdit::ReplaceText( const wxString &expr, const wxString &fmt
 	MadCaretPos epos = *m_SelectionEnd;
 	int state = SR_EXPR_ERROR;
 
-	if( m_Selection ) // test the selection is wanted text
+	if( m_Selection || m_ZeroSelection ) // test the selection is wanted text
 	{
 		state = Search( bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
 
@@ -3253,6 +3275,7 @@ MadReplaceResult MadEdit::ReplaceText( const wxString &expr, const wxString &fmt
 		return RR_EXPR_ERROR;
 	}
 
+	bool bZeroLenSel = m_ZeroSelection;
 	if( out.length() == 0 )
 	{
 		DeleteSelection( true, NULL, false );
@@ -3262,7 +3285,24 @@ MadReplaceResult MadEdit::ReplaceText( const wxString &expr, const wxString &fmt
 		InsertString( out.c_str(), out.length(), false, true, false );
 	}
 
-	if( SR_NO == FindTextNext( expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, -1, rangeTo ) )
+	rangeFrom = -1;
+	if( bRegex && bZeroLenSel)
+	{
+		if(expr.find_last_of( wxT( '$' ) ) != wxString::npos)
+		{
+			MadUCQueue ucharQueue;
+			vector<int> widthArray;
+			int tmp;
+				int maxLines = GetLineCount();
+			if ((bpos.lineid + 1) >= maxLines) { return RR_REP_NNEXT;}
+			else
+			{
+				rangeFrom = GetLineBeginPos(bpos.lineid + 1 + 1); //line is 1 based
+			}
+		}
+	}
+
+	if( SR_NO == FindTextNext( expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, rangeFrom, rangeTo ) )
 		return RR_REP_NNEXT;
 
 	return RR_REP_NEXT;

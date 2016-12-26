@@ -310,6 +310,7 @@ private:
 	int             m_UpdateValidPos;   // ==0: no update; <0 update always; >0 update if newpos<oldpos
 
 	bool            m_Selection;
+	bool            m_ZeroSelection;
 	MadCaretPos     m_SelectionPos1, m_SelectionPos2;
 	MadCaretPos     *m_SelectionBegin, *m_SelectionEnd;
 	bool            m_SelectionStart;
@@ -839,6 +840,7 @@ public: // basic functions
 	wxFileOffset GetFileSize() { return m_Lines->m_Size; }
 
 	bool IsSelected() { return m_Selection; }
+	bool IsZeroSelected() { return m_ZeroSelection; }
 	wxFileOffset GetSelectionSize();
 	wxFileOffset GetSelectionBeginPos() { return m_Selection ? m_SelectionBegin->pos : -1; }
 	wxFileOffset GetSelectionEndPos() { return m_Selection ? m_SelectionEnd->pos : -1; }
@@ -897,6 +899,7 @@ public: // basic functions
 	bool GetLine( wxString &ws, int line, size_t maxlen = 0, bool ignoreBOM = true );
 	bool GetLine( wxString &ws, MadLineIterator lit, size_t maxlen = 0, bool ignoreBOM = true );
 	int GetLineByPos( const wxFileOffset &pos );
+	wxFileOffset MadEdit::GetLineBeginPos( int line );
 
 	int GetIndentCountByPos( wxFileOffset pos );
 	void SelectWholeLine();

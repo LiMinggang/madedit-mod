@@ -415,6 +415,7 @@ void MadEdit::ConvertNewLineType( MadNewLineType type )
 		m_Selection = false;
 		m_RepaintSelection = true;
 	}
+	m_ZeroSelection = false;
 
 	m_RepaintAll = true;
 	Refresh( false );
@@ -635,6 +636,7 @@ void MadEdit::IncreaseDecreaseIndent( bool incIndent )
 	m_CaretPos.pos = oudata->m_Pos;
 	UpdateCaretByPos( m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
 	m_Selection = true;
+	m_ZeroSelection = false;
 	m_SelectionPos2.pos = m_SelectionPos1.pos + blk.m_Size;
 	UpdateSelectionPos();
 	m_SelectionBegin = &m_SelectionPos1;
@@ -816,6 +818,7 @@ void MadEdit::CommentUncomment( bool comment )
 	m_CaretPos.pos = oudata->m_Pos;
 	UpdateCaretByPos( m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
 	m_Selection = true;
+	m_ZeroSelection = false;
 	m_SelectionPos2.pos = m_SelectionPos1.pos + blk.m_Size;
 	UpdateSelectionPos();
 	m_SelectionBegin = &m_SelectionPos1;
@@ -2454,6 +2457,7 @@ void MadEdit::SortLines( MadSortFlags flags, int beginline, int endline )
 	bool sc = ( oldModified == false );
 	m_Modified = true;
 	m_Selection = false;
+	m_ZeroSelection = false;
 	m_RepaintAll = true;
 	Refresh( false );
 
@@ -3229,6 +3233,8 @@ void MadEdit::ColumnAlignLeft()
 
 		ReplaceTextAll( wxT( "^[ \t]+" ), wxT( "" ), true, true, false, false, NULL, NULL, rangeFrom, rangeTo );
 	}
+	
+	m_ZeroSelection = false;
 }
 
 void MadEdit::ColumnAlignRight()
@@ -3442,6 +3448,7 @@ void MadEdit::ColumnAlignRight()
 		m_RepaintAll = true;
 		Refresh( false );
 	}
+	m_ZeroSelection = false;
 }
 
 
@@ -3578,6 +3585,8 @@ void MadEdit::InsertIncrementalNumber( int initial, int step, int total, MadNumb
 			InsertString( out.c_str(), out.length(), false, true, false );
 		}
 	}
+	
+	m_ZeroSelection = false;
 }
 
 void MadEdit::SetSpellCheck( bool value )
@@ -3822,6 +3831,7 @@ void MadEdit::CutDelBookmarkedLines( bool copyLines/*= false*/ )
 
 		Refresh( false );
 	}
+	m_ZeroSelection = false;
 }
 
 void MadEdit::DeleteUnmarkedLines()
@@ -3897,6 +3907,7 @@ void MadEdit::DeleteUnmarkedLines()
 
 		Refresh( false );
 	}
+	m_ZeroSelection = false;
 }
 
 void MadEdit::ReplaceBookmarkedLines()
@@ -3990,6 +4001,7 @@ void MadEdit::ReplaceBookmarkedLines()
 
 		Refresh( false );
 	}
+	m_ZeroSelection = false;
 }
 
 void MadEdit::SetColumnSelection( int startlineid, int startxpos, int hlines, int wlines )
