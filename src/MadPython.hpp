@@ -1031,6 +1031,24 @@ namespace mad_python {
 			return res;
 		}
 
+		bool IsZeroSelected() {
+			bool res = false;
+
+			if( g_ActiveMadEdit )
+			{ res = g_ActiveMadEdit->IsSelected(); }
+
+			return res;
+		}
+
+		long GetLineBeginPos( int line )	{
+			long res = 0;
+
+			if( g_ActiveMadEdit )
+			{ res = ( long )g_ActiveMadEdit->GetLineBeginPos( line ); }
+
+			return res;
+		}
+
 		long GetSelectionSize() {
 			long res = 0;
 
@@ -1923,6 +1941,8 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.def( "GetFileName", &PyMadEdit::GetFileName, return_value_policy<return_by_value>(), "" )
 	.def( "GetFileSize", &PyMadEdit::GetFileSize, return_value_policy<return_by_value>(), "" )
 	.def( "IsSelected", &PyMadEdit::IsSelected, "" )
+	.def( "IsZeroSelected", &PyMadEdit::IsZeroSelected, "" )
+	.def( "GetLineBeginPos", &PyMadEdit::GetLineBeginPos, return_value_policy<return_by_value>(), "" )
 	.def( "GetSelectionSize", &PyMadEdit::GetSelectionSize, return_value_policy<return_by_value>(), "" )
 	.def( "GetSelectionBeginPos", &PyMadEdit::GetSelectionBeginPos, return_value_policy<return_by_value>(), "" )
 	.def( "GetSelectionEndPos", &PyMadEdit::GetSelectionEndPos, return_value_policy<return_by_value>(), "" )

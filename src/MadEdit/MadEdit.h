@@ -899,7 +899,7 @@ public: // basic functions
 	bool GetLine( wxString &ws, int line, size_t maxlen = 0, bool ignoreBOM = true );
 	bool GetLine( wxString &ws, MadLineIterator lit, size_t maxlen = 0, bool ignoreBOM = true );
 	int GetLineByPos( const wxFileOffset &pos );
-	wxFileOffset MadEdit::GetLineBeginPos( int line );
+	wxFileOffset GetLineBeginPos( int line );
 
 	int GetIndentCountByPos( wxFileOffset pos );
 	void SelectWholeLine();

@@ -39,7 +39,7 @@ Note:
 C++ Key word|In Python's world
 ------------|------------------
 void        |No return value
-int         |integer
+int/long    |integer
 string      |string
 tuple       |tuple
 bool        |bool
@@ -94,7 +94,7 @@ void LoadDefaultSyntaxScheme()
 void SetEncoding(const wxString &encname)
 std::string GetEncodingName()
 std::string GetEncodingDescription()
-int GetEncodingType()
+long GetEncodingType()
 bool GetRecordCaretMovements()
 void SetRecordCaretMovements(bool value)
 void SetTextFont(const std::string &name, int size, bool forceReset)
@@ -108,7 +108,7 @@ bool GetFixedWidthMode()
 void SetLineSpacing(int percent)
 long GetLineSpacing()
 void SetEditMode(MadEditMode mode)
-int GetEditMode()
+long GetEditMode()
 void SetSingleLineMode(bool mode)
 void SetTabColumns(long value)
 long GetTabColumns()
@@ -119,7 +119,7 @@ bool GetInsertSpacesInsteadOfTab()
 void SetWantTab(bool value)
 bool GetWantTab()
 void SetWordWrapMode(int mode)
-int GetWordWrapMode()
+long GetWordWrapMode()
 void SetShowEndOfLine(bool value)
 void SetShowTabChar(bool value)
 void SetShowSpaceChar(bool value)
@@ -149,26 +149,28 @@ bool GetMouseSelectToCopyWithCtrlKey()
 void SetMouseSelectToCopyWithCtrlKey(bool value)
 bool GetMiddleMouseToPaste()
 void SetMiddleMouseToPaste(bool value)
-int GetMaxWordWrapWidth()
-int GetUCharWidth(int uc)
-int GetHexUCharWidth(int uc)
-int GetUCharType(int uc)
+long GetMaxWordWrapWidth()
+long GetUCharWidth(int uc)
+long GetHexUCharWidth(int uc)
+long GetUCharType(int uc)
 // all are zero-based
 mad_py::tuple GetCaretPositionA()
-int GetCaretPositionB()
+long GetCaretPositionB()
 std::string GetFileName()
-int GetFileSize()
+long GetFileSize()
 bool IsSelected()
-int GetSelectionSize()
-int GetSelectionBeginPos()
-int GetSelectionEndPos()
+bool IsZeroSelected()
+long GetLineBeginPos( int line )
+long GetSelectionSize()
+long GetSelectionBeginPos()
+long GetSelectionEndPos()
 // return -1 for no selection
 mad_py::tuple GetSelectionLineId()
-int GetLineCount()
+long GetLineCount()
 void ConvertNewLineType(MadNewLineType type)
 void SetInsertNewLineType(MadNewLineType type)
-int GetNewLineType()
-int GetInsertNewLineType()
+long GetNewLineType()
+long GetInsertNewLineType()
 bool IsModified()
 long GetModificationTime()
 void SetReadOnly(bool value)
@@ -180,7 +182,7 @@ void SetText(const std::string &ws)
 // line: zero based
 // return true for full line, false for partial line
 mad_py::tuple GetLine(int line, size_t maxlen = 0, bool ignoreBOM = true)
-int GetLineByPos(int pos)
+long GetLineByPos(int pos)
 const std::string GetSelHexString(bool withSpace)
 const std::string GetWordFromCaretPos()
 void Delete()
@@ -211,33 +213,33 @@ bool HasBracePair()
 void GoToLeftBrace()
 void GoToRightBrace()
 // search in [rangeFrom, rangeTo], default in [CaretPos, EndOfDoc]
-int FindTextNext(const std::string &text,
+long FindTextNext(const std::string &text,
                         bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false,
                         int rangeFrom = -1, int rangeTo = -1)
 // search in [rangeFrom, rangeTo], rangeFrom > rangeTo, default in [CaretPos, BeginOfDoc]
-int FindTextPrevious(const std::string &text,
+long FindTextPrevious(const std::string &text,
                             bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false,
                             int rangeFrom = -1, int rangeTo = -1)
 // search in [rangeFrom, rangeTo], default in [CaretPos, EndOfDoc]
-int FindHexNext(const std::string &hexstr, int rangeFrom = -1, int rangeTo = -1)
+long FindHexNext(const std::string &hexstr, int rangeFrom = -1, int rangeTo = -1)
 // search in [rangeFrom, rangeTo], rangeFrom > rangeTo, default in [CaretPos, BeginOfDoc]
-int FindHexPrevious(const std::string &hexstr, int rangeFrom = -1, int rangeTo = -1)
+long FindHexPrevious(const std::string &hexstr, int rangeFrom = -1, int rangeTo = -1)
 // replace the selected text that must match expr
-int ReplaceText(const std::string &expr, const std::string &fmt,
+long ReplaceText(const std::string &expr, const std::string &fmt,
                              bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false,
                              int rangeFrom = -1, int rangeTo = -1)
-int ReplaceHex(const std::string &expr, const std::string &fmt,
+long ReplaceHex(const std::string &expr, const std::string &fmt,
                              int rangeFrom = -1, int rangeTo = -1)
 // return the replaced count or SR_EXPR_ERROR
-int ReplaceTextAll(const std::string &expr, const std::string &fmt,
+long ReplaceTextAll(const std::string &expr, const std::string &fmt,
                     bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false,
                     int rangeFrom = -1, int rangeTo = -1)
-int ReplaceHexAll(const std::string &expr, const std::string &fmt,
+long ReplaceHexAll(const std::string &expr, const std::string &fmt,
                     int rangeFrom = -1, int rangeTo = -1)
 // list the matched data to pbegpos & pendpos
 // return the found count or SR_EXPR_ERROR
-int FindTextAll(const std::string &expr, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false)
-int FindHexAll(const std::string &expr)
+long FindTextAll(const std::string &expr, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false)
+long FindHexAll(const std::string &expr)
 bool LoadFromFile(const std::string &filename, const std::string &encoding=std::string(""))
 bool SaveToFile(const std::string &filename)
 bool Reload()
@@ -248,7 +250,7 @@ void RestorePosition(int pos, int toprow)
 // write back to the original FileName
 // if FileName is empty, ask the user to get filename
 // return wxID_YES(Saved), wxID_NO(Not Saved), or wxID_CANCEL
-int Save(bool ask, const std::string &title, bool saveas)
+long Save(bool ask, const std::string &title, bool saveas)
 void SetBookmark()
 void GotoNextBookmark()
 void GotoPreviousBookmark()
@@ -289,7 +291,7 @@ void Markdown2Html()
 void Html2PlainText()
 void SetColumnSelection(int startlineid, int startxpos, int hlines, int wlines)
 void SelectWholeLine()
-int GetIndentCountByPos( long endpos )
+long GetIndentCountByPos( long endpos )
 int MsgBox(const std::string& message, const std::string& caption = "Message", long style = wxOK | wxCENTRE)
 const std::string InputBox(const std::string& message, const std::string& caption = "Input Text")
 void SetInsertPairForSelection( bool value )
