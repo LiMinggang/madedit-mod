@@ -9644,6 +9644,7 @@ void MadEditFrame::OnSearchQuickFind( wxCommandEvent& event )
 void MadEditFrame::OnSearchQuickFindPrevious( wxCommandEvent& event )
 {
 	m_SearchDirectionNext = false;
+	m_QuickSearchBar->EnableTool(menuQuickFindRegex, false);
 
 	if( m_QuickSearch && g_ActiveMadEdit )
 	{
@@ -9703,6 +9704,7 @@ void MadEditFrame::OnSearchQuickFindPrevious( wxCommandEvent& event )
 void MadEditFrame::OnSearchQuickFindNext( wxCommandEvent& event )
 {
 	m_SearchDirectionNext = true;
+	m_QuickSearchBar->EnableTool(menuQuickFindRegex, true);
 
 	if( m_QuickSearch && g_ActiveMadEdit )
 	{
