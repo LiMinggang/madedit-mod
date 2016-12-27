@@ -9759,7 +9759,7 @@ void MadEditFrame::OnSearchQuickFindNext( wxCommandEvent& event )
 		else
 		{
 			lastCaret = g_ActiveMadEdit->GetFileSize();
-			if(bRegex)
+			if(bRegex && g_ActiveMadEdit->IsZeroSelected())
 				g_ActiveMadEdit->MoveToNextRegexSearchingPos( text );
 		}
 	}

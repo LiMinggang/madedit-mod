@@ -523,8 +523,11 @@ void MadSearchReplaceDialog::WxButtonFindNextClick( wxCommandEvent& event )
 				bool c_find = true;
 				if( ThrEndOfFile )
 					g_StatusBar->SetStatusText( _( "Passed the end of the file" ), 0 );
-				else if(bRegex)
+				else if(bRegex && g_ActiveMadEdit->IsZeroSelected())
+				{
+					g_ActiveMadEdit->ShowZeroLenSelIndicator();
 					c_find = g_ActiveMadEdit->MoveToNextRegexSearchingPos( text );
+				}
 				if(c_find)
 					break;
 			}

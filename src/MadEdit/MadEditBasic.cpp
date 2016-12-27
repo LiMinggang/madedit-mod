@@ -2801,24 +2801,6 @@ MadSearchResult MadEdit::FindTextNext( const wxString &text,
 		UpdateCaretByPos( epos, ucharQueue, widthArray, tmp );
 	}
 
-	if( bRegex )
-	{
-		if(text.find_first_of( wxT( '^' ) ) != wxString::npos)
-		{
-			if(bpos.linepos)
-			{
-				int maxLines = GetLineCount();
-				if ((bpos.lineid + 1) >= maxLines) { return SR_NO;}
-				else
-				{
-					rangeFrom = GetLineBeginPos(bpos.lineid + 1 + 1); //line is 1 based
-					bpos.pos = rangeFrom;
-					UpdateCaretByPos(bpos, ucharQueue, widthArray, tmp);
-				}
-			}
-		}
-	}
-
 	MadSearchResult state = Search( bpos, epos, text, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
 
 	if( state == SR_YES )
@@ -2829,7 +2811,6 @@ MadSearchResult MadEdit::FindTextNext( const wxString &text,
 		if ((epos.linepos > (epos.iter->m_Size - epos.iter->m_NewLineSize)) && (epos.linepos < epos.iter->m_Size))
 			endpos += (epos.linepos + epos.iter->m_NewLineSize - epos.iter->m_Size);
 		SetSelection(beginpos, endpos);
-		if(!m_Selection) ShowZeroLenSelIndicator();
 		if (endpos != epos.pos)
 			m_CaretPos = epos;
 
