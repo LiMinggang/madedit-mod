@@ -65,6 +65,7 @@ Mod v0.4.6
 * New: Spell check for SearchReplaceDialog would change according to active window
 * New: Ctrl+Shift+Wheel as shortcut for Page Up/Down
 * New: Indicator for zero length match in Regex search
+* New: Support Replace of '^' and '$' in Regex
 * New: Add GB18030 support
 * New: Add KOI8-R, KOI8-U and CP866 support
 * New: Add Macintosh encodings(Roman, Japanese, Chinese-trad, Korean, Arabic, Hebrew, Greek, Cyrillic, Thai, Chinese-simp, Central-Eur, Croatian, Icelandic, Romanian) support
