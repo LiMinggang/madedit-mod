@@ -2801,6 +2801,18 @@ MadSearchResult MadEdit::FindTextNext( const wxString &text,
 		UpdateCaretByPos( epos, ucharQueue, widthArray, tmp );
 	}
 
+	if( bRegex && (bpos.linepos != 0) && (text[0] == '^' ))
+	{
+		int maxLines = GetLineCount();
+		if ((bpos.lineid + 1) >= maxLines) { return SR_NO;}
+		else
+		{
+			rangeFrom = GetLineBeginPos(bpos.lineid + 1 + 1); //line is 1 based
+			bpos.pos = rangeFrom;
+			UpdateCaretByPos(bpos, ucharQueue, widthArray, tmp);
+		}
+	}
+
 	MadSearchResult state = Search( bpos, epos, text, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
 
 	if( state == SR_YES )
