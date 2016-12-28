@@ -341,7 +341,6 @@ private:
 	bool            m_StorePropertiesToGlobalConfig;
 
 	bool            m_FixedWidthMode;
-	bool            m_ReplaceNoDoubleCheck;
 
 	bool            m_RepaintAll;
 	bool            m_RepaintSelection;
@@ -734,8 +733,6 @@ public: // basic functions
 
 	void SetFixedWidthMode( bool mode );
 	bool GetFixedWidthMode() {return m_FixedWidthMode; }
-	void SetReplaceNoDoubleCheck( bool nocheck );
-	bool IsReplaceNoDoubleCheck() {return m_ReplaceNoDoubleCheck; }
 
 	void SetLineSpacing( int percent );
 	long GetLineSpacing() { return m_LineSpacing; }
