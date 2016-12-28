@@ -634,6 +634,19 @@ namespace mad_python {
 
 			return mode;
 		}
+		void SetReplaceNoDoubleCheck( bool nocheck ) {
+			if( g_ActiveMadEdit )
+			{ g_ActiveMadEdit->SetReplaceNoDoubleCheck( nocheck ); }
+		}
+
+		bool IsReplaceNoDoubleCheck() {
+			bool check = false;
+
+			if( g_ActiveMadEdit )
+			{ check = g_ActiveMadEdit->IsReplaceNoDoubleCheck(); }
+
+			return check;
+		}
 
 		void SetLineSpacing( long percent ) {
 			if( g_ActiveMadEdit )
@@ -1459,6 +1472,24 @@ namespace mad_python {
 			return g_ActiveMadEdit->ReplaceText( wxExpr, wxFmt, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, from, to );
 		}
 
+		// replace the selected text that must match expr
+		long ReplaceTextNoDoubleCheck( const std::string &expr, const std::string &fmt,
+						 bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false,
+						 long rangeFrom = -1, long rangeTo = -1 ) {
+			if( expr.empty() )
+			{ return RR_EXPR_ERROR; }
+
+			if( !( g_ActiveMadEdit ) || g_ActiveMadEdit->IsReadOnly() )
+			{ return RR_NREP_NNEXT; }
+
+			wxString wxExpr( expr.c_str(), *wxConvCurrent ), wxFmt( fmt.c_str(), *wxConvCurrent );
+			wxFileOffset from = ( wxFileOffset )rangeFrom, to = ( wxFileOffset )rangeTo;
+			
+			if(bRegex) bWholeWord = false;
+			else bDotMatchNewline = false;
+			return g_ActiveMadEdit->ReplaceTextNoDoubleCheck( wxExpr, wxFmt, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, from, to );
+		}
+
 		long ReplaceHex( const std::string &expr, const std::string &fmt,
 						long rangeFrom = -1, long rangeTo = -1 ) {
 			if( expr.empty() )
@@ -1888,6 +1919,8 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.def( "GetFontNameSize", &PyMadEdit::GetFontNameSize, return_value_policy<return_by_value>(), "Doc" )
 	.def( "SetFixedWidthMode", &PyMadEdit::SetFixedWidthMode, "" )
 	.def( "GetFixedWidthMode", &PyMadEdit::GetFixedWidthMode, "" )
+	.def( "SetReplaceNoDoubleCheck", &PyMadEdit::SetReplaceNoDoubleCheck, "" )
+	.def( "IsReplaceNoDoubleCheck", &PyMadEdit::IsReplaceNoDoubleCheck, "" )
 	.def( "SetLineSpacing", &PyMadEdit::SetLineSpacing, "" )
 	.def( "GetLineSpacing", &PyMadEdit::GetLineSpacing, "" )
 	.def( "SetEditMode", &PyMadEdit::SetEditMode, "" )
@@ -2039,6 +2072,7 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.def( "FindHexNext", &PyMadEdit::FindHexNext, FindHexNext_member_overloads( args( "hexstr", "rangeFrom", "rangeTo" ), "Doc string" )[return_value_policy<return_by_value>()] )
 	.def( "FindHexPrevious", &PyMadEdit::FindHexPrevious, FindHexPrevious_member_overloads( args( "hexstr", "rangeFrom", "rangeTo" ), "Doc string" )[return_value_policy<return_by_value>()] )
 	.def( "ReplaceText", &PyMadEdit::ReplaceText, ReplaceText_member_overloads( args( "expr", "fmt", "bRegex", "bCaseSensitive", "bWholeWord", "bDotMatchNewline", "rangeFrom", "rangeTo" ), "Doc string" )[return_value_policy<return_by_value>()] )
+	.def( "ReplaceTextNoDoubleCheck", &PyMadEdit::ReplaceTextNoDoubleCheck, ReplaceText_member_overloads( args( "expr", "fmt", "bRegex", "bCaseSensitive", "bWholeWord", "bDotMatchNewline", "rangeFrom", "rangeTo" ), "Doc string" )[return_value_policy<return_by_value>()] )
 	.def( "ReplaceHex", &PyMadEdit::ReplaceHex, ReplaceHex_member_overloads( args( "expr", "fmt" ), "Doc string" )[return_value_policy<return_by_value>()] )
 	.def( "ReplaceTextAll", &PyMadEdit::ReplaceTextAll, ReplaceTextAll_member_overloads( args( "expr", "fmt", "bRegex", "bCaseSensitive", "bWholeWord", "bDotMatchNewline", "rangeFrom", "rangeTo" ), "Doc string" )[return_value_policy<return_by_value>()] )
 	.def( "ReplaceHexAll", &PyMadEdit::ReplaceHexAll, ReplaceHexAll_member_overloads( args( "expr", "fmt", "rangeFrom", "rangeTo" ), "Doc string" )[return_value_policy<return_by_value>()] )

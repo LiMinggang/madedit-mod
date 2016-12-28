@@ -228,6 +228,9 @@ long FindHexPrevious(const std::string &hexstr, int rangeFrom = -1, int rangeTo 
 long ReplaceText(const std::string &expr, const std::string &fmt,
                              bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false,
                              int rangeFrom = -1, int rangeTo = -1)
+long ReplaceTextNoDoubleCheck(const std::string &expr, const std::string &fmt,
+                             bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false,
+                             int rangeFrom = -1, int rangeTo = -1)
 long ReplaceHex(const std::string &expr, const std::string &fmt,
                              int rangeFrom = -1, int rangeTo = -1)
 // return the replaced count or SR_EXPR_ERROR
@@ -295,8 +298,10 @@ long GetIndentCountByPos( long endpos )
 int MsgBox(const std::string& message, const std::string& caption = "Message", long style = wxOK | wxCENTRE)
 const std::string InputBox(const std::string& message, const std::string& caption = "Input Text")
 void SetInsertPairForSelection( bool value )
-bool GetInsertPairForSelection() { return m_InsertPairForSelection; }
-
+bool GetInsertPairForSelection()
+void SetReplaceNoDoubleCheck( bool nocheck )
+bool IsReplaceNoDoubleCheck()
+bool IsZeroSelected()
 
 MadEditCommand
 ====
