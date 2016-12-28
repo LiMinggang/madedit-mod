@@ -27,7 +27,7 @@ MadCSConv::MadCSConv(const wxString &charset):m_Charset(charset.Upper())
 	else if(m_Charset.IsSameAs(CHARSET_GB18030))
 	{
 		m_Encoding = MAD_FONTENCODING_GB18030;
-		m_CSConv.reset(new wxCSConv( wxFONTENCODING_CP936));
+		//m_CSConv.reset(new wxCSConv( wxFONTENCODING_CP936));
 	}
 #endif //__MAD_ENCODING_EXTENDED__
 	else
@@ -45,7 +45,7 @@ MadCSConv::MadCSConv(int encoding):m_Charset(_T("UNKNOWN_CHARSET")), m_Encoding(
 #ifdef __MAD_ENCODING_EXTENDED__
 	else if(m_Encoding == MAD_FONTENCODING_GB18030)
 	{
-		m_CSConv.reset(new wxCSConv( wxFONTENCODING_CP936));
+		;//m_CSConv.reset(new wxCSConv( wxFONTENCODING_CP936));
 	}
 #endif //__MAD_ENCODING_EXTENDED__
 	else

@@ -97,10 +97,8 @@ Known issues:
 1. The Macro recording function will save all your commands to one document which
     means it will not record the "switching" between documents.
 2. Search in selection in column mode is not exact the selection highlighted.
-3. Regular expression which relies on characters before/after the matched string, 
-    Eg. (?<=.)\s(?=.), will has issue to be replaced one by one. It's tricky and
-    NP++ has the same issue too.
-4. HighlightWord would not work if the caret is at the end of the line
+3. HighlightWord would not work if the caret is at the end of the line
+4. Scroll function on Right click menu of scroll bars only works with Windows
 
 Download:
 =============

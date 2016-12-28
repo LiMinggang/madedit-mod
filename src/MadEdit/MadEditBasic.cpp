@@ -3486,14 +3486,6 @@ MadReplaceResult MadEdit::ReplaceTextNoDoubleCheck( const wxString &expr, const 
 		ins_ucs.push_back( str.c_str() );
 		ins_len.push_back( str.length() );
 
-		if( bpos.iter != epos.iter )
-			++multi;
-	}
-
-	if( state == SR_EXPR_ERROR ) return RR_EXPR_ERROR;
-
-	if( state == SR_YES )
-	{
 		res = RR_REP_NNEXT;
 		if(!( bpos.pos == epos.pos && !NextRegexSearchingPos( epos, expr ) ))
 		{
@@ -3507,11 +3499,13 @@ MadReplaceResult MadEdit::ReplaceTextNoDoubleCheck( const wxString &expr, const 
 		}
 	}
 
+	if( state == SR_EXPR_ERROR ) return RR_EXPR_ERROR;
+
 	if( del_bpos.size() > 0 )
 	{
 		wxFileOffset size = del_epos.back() - del_bpos.front();
 
-		if( ( size <= 2 * 1024 * 1024 ) || ( multi >= 40 && size <= 10 * 1024 * 1024 ) )
+		if( size <= 2 * 1024 * 1024 )
 		{
 			OverwriteDataSingle( del_bpos, del_epos, &ins_ucs, NULL, ins_len );
 		}
