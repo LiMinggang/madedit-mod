@@ -1054,7 +1054,7 @@ void MadSearchReplaceDialog::WxButtonReplaceClick( wxCommandEvent& event )
 				if( bRegex ) bWholeWord = false;
 				else bDotMatchNewline = false;
 
-				if(g_ActiveMadEdit->IsReplaceNoDoubleCheck())
+				if(bRegex && g_ActiveMadEdit->IsReplaceNoDoubleCheck())
 				{
 					ret = g_ActiveMadEdit->ReplaceTextNoDoubleCheck( text, reptext,
 																 bRegex,

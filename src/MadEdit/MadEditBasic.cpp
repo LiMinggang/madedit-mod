@@ -3492,20 +3492,6 @@ MadReplaceResult MadEdit::ReplaceTextNoDoubleCheck( const wxString &expr, const 
 
 	if( state == SR_EXPR_ERROR ) return RR_EXPR_ERROR;
 
-	if( del_bpos.size() > 0 )
-	{
-		wxFileOffset size = del_epos.back() - del_bpos.front();
-
-		if( ( size <= 2 * 1024 * 1024 ) || ( multi >= 40 && size <= 10 * 1024 * 1024 ) )
-		{
-			OverwriteDataSingle( del_bpos, del_epos, &ins_ucs, NULL, ins_len );
-		}
-		else
-		{
-			OverwriteDataMultiple( del_bpos, del_epos, &ins_ucs, NULL, ins_len );
-		}
-	}
-
 	if( state == SR_YES )
 	{
 		res = RR_REP_NNEXT;
@@ -3518,6 +3504,20 @@ MadReplaceResult MadEdit::ReplaceTextNoDoubleCheck( const wxString &expr, const 
 				out.clear();
 			if( ( state = Search( bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, fmtstr.get(), &out) ) == SR_YES )
 				res = RR_REP_NEXT;
+		}
+	}
+
+	if( del_bpos.size() > 0 )
+	{
+		wxFileOffset size = del_epos.back() - del_bpos.front();
+
+		if( ( size <= 2 * 1024 * 1024 ) || ( multi >= 40 && size <= 10 * 1024 * 1024 ) )
+		{
+			OverwriteDataSingle( del_bpos, del_epos, &ins_ucs, NULL, ins_len );
+		}
+		else
+		{
+			OverwriteDataMultiple( del_bpos, del_epos, &ins_ucs, NULL, ins_len );
 		}
 	}
 
