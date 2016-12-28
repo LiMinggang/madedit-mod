@@ -304,7 +304,6 @@ public:
 		wxCheckBox *WxCheckBoxRestoreCaretPos;
 		wxCheckBox *WxCheckBoxReloadFiles;
 		wxCheckBox* WxCheckBoxFixWidthMode;
-		wxCheckBox* WxCheckBoxReplaceNoDoubleCheck;
 		wxCheckBox* WxCheckBoxLDClickHighlight; 
 		wxBoxSizer *WxBoxSizer7;
 		wxStaticText *WxStaticText13;
@@ -338,7 +337,6 @@ public:
     //Try copy pasting the below block in your old Form header Files.
 	enum {
 ////GUI Enum Control ID Start
-            ID_WXCHECKBOXREPLACENODOUBLECHECK = 1397,
             ID_WXCHECKBOXDCLICKHIGHLIGHT = 1396,
 			ID_WXCHECKBOXINSERTPAIRFORSELECTION = 1395,
 			ID_WXSTATICTEXT31 = 1394,

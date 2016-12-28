@@ -299,8 +299,6 @@ int MsgBox(const std::string& message, const std::string& caption = "Message", l
 const std::string InputBox(const std::string& message, const std::string& caption = "Input Text")
 void SetInsertPairForSelection( bool value )
 bool GetInsertPairForSelection()
-void SetReplaceNoDoubleCheck( bool nocheck )
-bool IsReplaceNoDoubleCheck()
 bool IsZeroSelected()
 
 MadEditCommand

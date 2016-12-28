@@ -439,9 +439,6 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxCheckBoxFixWidthMode = new wxCheckBox( WxNoteBookPage2, ID_WXCHECKBOXFIXWIDTHMODE, _( "Fix width mode" ), wxPoint( 24, 194 ), wxSize( 480, 20 ), 0, wxDefaultValidator, wxT( "WxCheckBoxFixWidthMode" ) );
 	WxBoxSizer12->Add( WxCheckBoxFixWidthMode, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
 	SET_CONTROLPARENT( WxCheckBoxFixWidthMode );
-	WxCheckBoxReplaceNoDoubleCheck = new wxCheckBox( WxNoteBookPage2, ID_WXCHECKBOXREPLACENODOUBLECHECK, _( "Replace Directly(To fix Regex dilema in Replace)" ), wxPoint( 24, 218 ), wxSize( 480, 20 ), 0, wxDefaultValidator, wxT( "WxCheckBoxReplaceNoDoubleCheck" ) );
-	WxBoxSizer12->Add( WxCheckBoxReplaceNoDoubleCheck, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
-	SET_CONTROLPARENT( WxCheckBoxReplaceNoDoubleCheck );
 	WxNoteBookPage3 = new wxPanel( WxNotebook1, ID_WXNOTEBOOKPAGE3, wxPoint( 4, 24 ), wxSize( 792, 464 ) );
 	WxNotebook1->AddPage( WxNoteBookPage3, _( "Print" ) );
 	WxBoxSizer14 = new wxBoxSizer( wxHORIZONTAL );
@@ -1332,8 +1329,6 @@ void MadOptionsDialog::LoadOptions( void )
 	WxCheckBoxTypewriterMode->SetValue( bb );
 	cfg->Read( wxT( "FixedWidthMode" ), &bb, false );
 	WxCheckBoxFixWidthMode->SetValue( bb );
-	cfg->Read( wxT( "ReplaceNoDoubleCheck" ), &bb, false );
-	WxCheckBoxReplaceNoDoubleCheck->SetValue( bb );
 	extern bool g_DoNotSaveSettings;
 	WxCheckBoxDoNotSaveSettings->SetValue( g_DoNotSaveSettings );
 	cfg->Read( wxT( "ReloadFiles" ), &bb, true );

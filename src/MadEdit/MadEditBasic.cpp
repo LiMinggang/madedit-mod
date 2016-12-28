@@ -3217,21 +3217,6 @@ MadSearchResult MadEdit::FindHexPrevious( const wxString &hexstr,
 	return SR_NO;
 }
 
-void MadEdit::SetReplaceNoDoubleCheck( bool nocheck )
-{
-	if( nocheck != m_ReplaceNoDoubleCheck )
-	{
-		m_ReplaceNoDoubleCheck = nocheck;
-
-		if( m_StorePropertiesToGlobalConfig )
-		{
-			wxString oldpath = m_Config->GetPath();
-			m_Config->Write( wxT( "/MadEdit/ReplaceNoDoubleCheck" ), nocheck );
-			m_Config->SetPath( oldpath );
-		}
-	}
-}
-
 MadReplaceResult MadEdit::ReplaceText( const wxString &expr, const wxString &fmt,
 									   bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
 									   wxFileOffset rangeFrom, wxFileOffset rangeTo )

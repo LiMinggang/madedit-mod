@@ -634,19 +634,6 @@ namespace mad_python {
 
 			return mode;
 		}
-		void SetReplaceNoDoubleCheck( bool nocheck ) {
-			if( g_ActiveMadEdit )
-			{ g_ActiveMadEdit->SetReplaceNoDoubleCheck( nocheck ); }
-		}
-
-		bool IsReplaceNoDoubleCheck() {
-			bool check = false;
-
-			if( g_ActiveMadEdit )
-			{ check = g_ActiveMadEdit->IsReplaceNoDoubleCheck(); }
-
-			return check;
-		}
 
 		void SetLineSpacing( long percent ) {
 			if( g_ActiveMadEdit )
@@ -1919,8 +1906,6 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.def( "GetFontNameSize", &PyMadEdit::GetFontNameSize, return_value_policy<return_by_value>(), "Doc" )
 	.def( "SetFixedWidthMode", &PyMadEdit::SetFixedWidthMode, "" )
 	.def( "GetFixedWidthMode", &PyMadEdit::GetFixedWidthMode, "" )
-	.def( "SetReplaceNoDoubleCheck", &PyMadEdit::SetReplaceNoDoubleCheck, "" )
-	.def( "IsReplaceNoDoubleCheck", &PyMadEdit::IsReplaceNoDoubleCheck, "" )
 	.def( "SetLineSpacing", &PyMadEdit::SetLineSpacing, "" )
 	.def( "GetLineSpacing", &PyMadEdit::GetLineSpacing, "" )
 	.def( "SetEditMode", &PyMadEdit::SetEditMode, "" )
