@@ -44,6 +44,7 @@ class MadSearchReplaceDialog: public wxDialog
 		virtual ~MadSearchReplaceDialog();
 
 		//(*Declarations(MadSearchReplaceDialog)
+		wxBoxSizer* BoxSizer4;
 		wxSlider* WxSliderTransDegree;
 		wxButton* WxButtonReplace;
 		wxButton* WxButtonFindPrev;
@@ -56,6 +57,7 @@ class MadSearchReplaceDialog: public wxDialog
 		wxSlider* WxSliderInputSizer;
 		wxCheckBox* WxCheckBoxPurgeBookmark;
 		wxCheckBox* WxCheckBoxSearchInSelection;
+		wxCheckBox* wxCheckBoxReplaceNoDoubleCheck;
 		wxMenu WxPopupMenuRecentFindText;
 		wxCheckBox* WxCheckBoxBookmarkLine;
 		wxButton* WxButtonFindAllInAll;
@@ -83,6 +85,7 @@ class MadSearchReplaceDialog: public wxDialog
 		static const long ID_WXCHECKBOXWHOLEWORD;
 		static const long ID_WXCHECKBOXREGEX;
 		static const long ID_WXCHECKBOXBOXDOTMATCHNEWLINE;
+		static const long ID_CHECKBOXREPLACENODOUBLECHECK;
 		static const long ID_WXCHECKBOXFINDHEX;
 		static const long ID_WXCHECKBOXSEARCHINSELECTION;
 		static const long ID_WXCHECKBOXWRAPAROUND;

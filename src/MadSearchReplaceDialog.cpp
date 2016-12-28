@@ -65,6 +65,7 @@ const long MadSearchReplaceDialog::ID_WXCHECKBOXCASESENSITIVE = wxNewId();
 const long MadSearchReplaceDialog::ID_WXCHECKBOXWHOLEWORD = wxNewId();
 const long MadSearchReplaceDialog::ID_WXCHECKBOXREGEX = wxNewId();
 const long MadSearchReplaceDialog::ID_WXCHECKBOXBOXDOTMATCHNEWLINE = wxNewId();
+const long MadSearchReplaceDialog::ID_CHECKBOXREPLACENODOUBLECHECK = wxNewId();
 const long MadSearchReplaceDialog::ID_WXCHECKBOXFINDHEX = wxNewId();
 const long MadSearchReplaceDialog::ID_WXCHECKBOXSEARCHINSELECTION = wxNewId();
 const long MadSearchReplaceDialog::ID_WXCHECKBOXWRAPAROUND = wxNewId();
@@ -157,6 +158,12 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	WxCheckBoxDotMatchNewLine->SetValue( false );
 	BoxSizer7->Add(WxCheckBoxDotMatchNewLine, 0, wxALL|wxEXPAND, 2);
 	BoxSizer6->Add( BoxSizer7, 0, wxALL | wxEXPAND, 0 );
+	BoxSizer4 = new wxBoxSizer(wxHORIZONTAL);
+	BoxSizer4->Add(10,0,0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
+	wxCheckBoxReplaceNoDoubleCheck = new wxCheckBox(this, ID_CHECKBOXREPLACENODOUBLECHECK, _("Replace Directly(Fix Regex dilema)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXREPLACENODOUBLECHECK"));
+	wxCheckBoxReplaceNoDoubleCheck->SetValue(false);
+	BoxSizer4->Add(wxCheckBoxReplaceNoDoubleCheck, 0, wxALL|wxEXPAND, 2);
+	BoxSizer6->Add(BoxSizer4, 0, wxALL|wxEXPAND, 0);
 	WxCheckBoxFindHex = new wxCheckBox( this, ID_WXCHECKBOXFINDHEX, _( "Find &Hex String (Example: BE 00 3A or BE003A)" ), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T( "ID_WXCHECKBOXFINDHEX" ) );
 	WxCheckBoxFindHex->SetValue( false );
 	BoxSizer6->Add( WxCheckBoxFindHex, 0, wxALL | wxEXPAND, 2 );
@@ -1286,6 +1293,7 @@ void MadSearchReplaceDialog::ShowReplaceUI()
 	WxButtonReplaceAll->Show( true );
 	WxButtonReplaceAllInAll->Show( true );
 	WxButtonReplace->SetDefault();
+	BoxSizer4->Show(true);
 	GetSizer()->Fit( this );
 	GetSizer()->SetSizeHints( this );
 	SetTitle( _( "Replace" ) );
@@ -1302,6 +1310,7 @@ void MadSearchReplaceDialog::ShowFindUI()
 	WxButtonReplace->Show( false );
 	WxButtonReplaceAll->Show( false );
 	WxButtonReplaceAllInAll->Show( false );
+	BoxSizer4->Show(false);
 	WxButtonFindAllInAll->Show( true );
 	WxButtonFindAll->Show( true );
 	//WxButtonReplaceExpand->Show(true);
@@ -1918,6 +1927,7 @@ void MadSearchReplaceDialog::WxCheckBoxRegexClick( wxCommandEvent& event )
 		WxCheckBoxWholeWord->Disable();
 		WxCheckBoxFindHex->Disable();
 		WxCheckBoxDotMatchNewLine->Enable();
+		wxCheckBoxReplaceNoDoubleCheck->Enable();
 		WxButtonFindPrev->Disable();
 	}
 	else
@@ -1925,6 +1935,7 @@ void MadSearchReplaceDialog::WxCheckBoxRegexClick( wxCommandEvent& event )
 		WxCheckBoxWholeWord->Enable();
 		WxCheckBoxFindHex->Enable();
 		WxCheckBoxDotMatchNewLine->Disable();
+		wxCheckBoxReplaceNoDoubleCheck->Disable();
 		WxButtonFindPrev->Enable();
 	}
 }
