@@ -223,18 +223,16 @@ wxArrayString HunspellInterface::GetSuggestions(const wxString& strMisspelledWor
 
     if (m_pHunspell)
     {
-        char **wlst;
-
         wxCharBuffer misspelledWordCharBuffer = ConvertToUnicode(strMisspelledWord);
         if ( misspelledWordCharBuffer.data() != NULL)
         {
-            int ns = m_pHunspell->suggest(&wlst, misspelledWordCharBuffer);
-            for (int i=0; i < ns; i++)
+            std::vector<std::string> wlst;
+            std::string misspelledWord(misspelledWordCharBuffer.data());
+            wlst = m_pHunspell->suggest(misspelledWord);
+            for (int i=0; i < wlst.size(); i++)
             {
-                wxReturnArray.Add(ConvertFromUnicode(wlst[i]));
-                free(wlst[i]);
+                wxReturnArray.Add(ConvertFromUnicode(wlst[i].c_str()));
             }
-            free(wlst);
         }
     }
 
@@ -249,7 +247,8 @@ bool HunspellInterface::IsWordInDictionary(const wxString& strWord)
     wxCharBuffer wordCharBuffer = ConvertToUnicode(strWord);
     if ( wordCharBuffer.data() == NULL )
         return false;
-    return ((m_pHunspell->spell(wordCharBuffer) == 1) || (m_SyntaxKeywordDict && m_SyntaxKeywordDict->IsWordInDictionary(strWord)) || (m_PersonalDictionary.IsWordInDictionary(strWord)) );
+    std::string word(wordCharBuffer.data());
+    return ((m_pHunspell->spell(word)) || (m_SyntaxKeywordDict && m_SyntaxKeywordDict->IsWordInDictionary(strWord)) || (m_PersonalDictionary.IsWordInDictionary(strWord)) );
 }
 
 bool HunspellInterface::IsWordInPersonalDictionary(const wxString& strWord)
