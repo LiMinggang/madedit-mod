@@ -74,7 +74,7 @@ Mod v0.4.6
 * New: Mark unsupported unicode char with {}
 * Fix: Toolbar issue
 * Fix: Regex search bug #224
-* Fix: Regular expression (?<=.)\s(?=.) replacement issue #119
+* Fix: Regular expression (?<=.)\s(?=.) replacement issue(Enable "Replace Directly" in Options) #119
 * Fix: Caret position is not updated if close search dialog by click 'X' instead of close button
 * Fix: Disable Find Previous in Regex search
 * Fix: Add ResetToolBarsInfoWin to All above in PurgeHisoryDialog

@@ -11,7 +11,7 @@
 	9.New: Mark unsupported unicode char with {}
 	10.Fix: Toolbar issue
 	11.Fix: Regex search bug #224
-	12.Fix: Regular expression (?<=.)\s(?=.) replacement issue #119
+	12.Fix: Regular expression (?<=.)\s(?=.) replacement issue(Enable "Replace Directly" in Options) #119
 	13.Fix: Caret position is not updated if close search dialog by click 'X' instead of close button
 	14.Fix: Disable Find Previous in Regex search
 	15.Fix: Add ResetToolBarsInfoWin to All above in PurgeHisoryDialog
