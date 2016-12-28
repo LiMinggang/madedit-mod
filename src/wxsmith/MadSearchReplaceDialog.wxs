@@ -72,6 +72,22 @@
 										<flag>wxALL|wxEXPAND</flag>
 									</object>
 									<object class="sizeritem">
+										<object class="wxBoxSizer" variable="BoxSizer4" member="yes">
+											<object class="spacer">
+												<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+												<size>10,0</size>
+											</object>
+											<object class="sizeritem">
+												<object class="wxCheckBox" name="ID_CHECKBOXREPLACENODOUBLECHECK" variable="wxCheckBoxReplaceNoDoubleCheck" member="yes">
+													<label>Replace Directly(Fix Regex dilema)</label>
+												</object>
+												<flag>wxALL|wxEXPAND</flag>
+												<border>2</border>
+											</object>
+										</object>
+										<flag>wxALL|wxEXPAND</flag>
+									</object>
+									<object class="sizeritem">
 										<object class="wxCheckBox" name="ID_WXCHECKBOXFINDHEX" variable="WxCheckBoxFindHex" member="yes">
 											<label>Find &amp;Hex String (Example: BE 00 3A or BE003A)</label>
 											<handler function="WxCheckBoxFindHexClick" entry="EVT_CHECKBOX" />
