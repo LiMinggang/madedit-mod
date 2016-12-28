@@ -873,6 +873,7 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_RepaintAll = true;
 	m_RepaintSelection = false;
 	m_FixedWidthMode = m_Config->ReadBool( wxT( "FixedWidthMode" ), true );
+	m_ReplaceNoDoubleCheck = m_Config->ReadBool( wxT( "ReplaceNoDoubleCheck" ), false );
 	m_EditMode = emTextMode;
 	m_DoRecountLineWidth = false;
 	m_OldWidth = m_OldHeight = 0;

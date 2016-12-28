@@ -341,6 +341,7 @@ private:
 	bool            m_StorePropertiesToGlobalConfig;
 
 	bool            m_FixedWidthMode;
+	bool            m_ReplaceNoDoubleCheck;
 
 	bool            m_RepaintAll;
 	bool            m_RepaintSelection;
@@ -733,6 +734,8 @@ public: // basic functions
 
 	void SetFixedWidthMode( bool mode );
 	bool GetFixedWidthMode() {return m_FixedWidthMode; }
+	void SetReplaceNoDoubleCheck( bool nocheck );
+	bool IsReplaceNoDoubleCheck() {return m_ReplaceNoDoubleCheck; }
 
 	void SetLineSpacing( int percent );
 	long GetLineSpacing() { return m_LineSpacing; }
@@ -987,6 +990,10 @@ public: // basic functions
 								  wxFileOffset rangeFrom = -1, wxFileOffset rangeTo = -1 );
 	MadReplaceResult ReplaceHex( const wxString &expr, const wxString &fmt,
 								 wxFileOffset rangeFrom = -1, wxFileOffset rangeTo = -1 );
+
+    MadReplaceResult ReplaceTextNoDoubleCheck( const wxString &expr, const wxString &fmt,
+                                 bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
+                                 wxFileOffset rangeFrom, wxFileOffset rangeTo );
 
 	// return the replaced count or SR_EXPR_ERROR
 	int ReplaceTextAll( const wxString &expr, const wxString &fmt,

@@ -7852,7 +7852,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		// save options
 		wxString oldpath = m_Config->GetPath();
 		m_Config->SetPath( wxT( "/MadEdit" ) );
-		bool rcm, isiot, ai, acp, icp4sel, msc, mscck, mmp, afcp, fwm, twm, abck, ldch;
+		bool rcm, isiot, ai, acp, icp4sel, msc, mscck, mmp, afcp, fwm, rndc, twm, abck, ldch;
 		wxString mc, tc, ic;
 		long ll;
 		m_Config->Write( wxT( "Language" ), g_OptionsDialog->WxComboBoxLanguage->GetValue() );
@@ -7930,6 +7930,8 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		m_Config->Write( wxT( "TypewriterMode" ), twm );
 		fwm = g_OptionsDialog->WxCheckBoxFixWidthMode->GetValue();
 		m_Config->Write( wxT( "FixedWidthMode" ), fwm );
+		rndc = g_OptionsDialog->WxCheckBoxReplaceNoDoubleCheck->GetValue();
+		m_Config->Write( wxT( "ReplaceNoDoubleCheck" ), rndc );
 		extern bool g_DoNotSaveSettings;
 		g_DoNotSaveSettings = g_OptionsDialog->WxCheckBoxDoNotSaveSettings->GetValue();
 		m_Config->Write( wxT( "ReloadFiles" ), g_OptionsDialog->WxCheckBoxReloadFiles->GetValue() );
@@ -8015,6 +8017,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 			madedit->SetMiddleMouseToPaste( mmp );
 			madedit->SetAutoFillColumnPaste( afcp );
 			madedit->SetFixedWidthMode( fwm );
+			madedit->SetReplaceNoDoubleCheck( rndc );
 			madedit->SetTypewriterMode( twm );
 			madedit->SetLDClickHighlight( ldch );
 			if(abck != madedit->HasBackup())

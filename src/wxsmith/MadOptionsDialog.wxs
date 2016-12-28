@@ -425,6 +425,14 @@
 																<label>Fix Width Mode</label>
 															</object>
 															<flag>wxALL|wxEXPAND</flag>
+															<border>5</border>
+															<option>1</option>
+														</object>
+														<object class="sizeritem">
+															<object class="wxCheckBox" name="ID_WXCHECKBOXREPLACENODOUBLECHECK" variable="WxCheckBoxReplaceNoDoubleCheck" member="yes">
+																<label>Replace Directly(To fix Regex dilema in Replace)</label>
+															</object>
+															<flag>wxALL|wxEXPAND</flag>
 															<border>2</border>
 														</object>
 													</object>

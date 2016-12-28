@@ -3217,6 +3217,21 @@ MadSearchResult MadEdit::FindHexPrevious( const wxString &hexstr,
 	return SR_NO;
 }
 
+void MadEdit::SetReplaceNoDoubleCheck( bool nocheck )
+{
+	if( nocheck != m_ReplaceNoDoubleCheck )
+	{
+		m_ReplaceNoDoubleCheck = nocheck;
+
+		if( m_StorePropertiesToGlobalConfig )
+		{
+			wxString oldpath = m_Config->GetPath();
+			m_Config->Write( wxT( "/MadEdit/ReplaceNoDoubleCheck" ), nocheck );
+			m_Config->SetPath( oldpath );
+		}
+	}
+}
+
 MadReplaceResult MadEdit::ReplaceText( const wxString &expr, const wxString &fmt,
 									   bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
 									   wxFileOffset rangeFrom, wxFileOffset rangeTo )
@@ -3285,8 +3300,7 @@ MadReplaceResult MadEdit::ReplaceText( const wxString &expr, const wxString &fmt
 		{
 			MadUCQueue ucharQueue;
 			vector<int> widthArray;
-			int tmp;
-				int maxLines = GetLineCount();
+			int maxLines = GetLineCount();
 			if ((bpos.lineid + 1) >= maxLines) { return RR_REP_NNEXT;}
 			else
 			{
@@ -3364,6 +3378,151 @@ MadReplaceResult MadEdit::ReplaceHex( const wxString &expr, const wxString &fmt,
 	return RR_REP_NEXT;
 }
 
+MadReplaceResult MadEdit::ReplaceTextNoDoubleCheck( const wxString &expr, const wxString &fmt,
+							 bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
+							 wxFileOffset rangeFrom, wxFileOffset rangeTo )
+{
+	if( expr.IsEmpty() )
+		return RR_EXPR_ERROR;
+
+	vector<wxFileOffset> del_bpos;
+	vector<wxFileOffset> del_epos;
+	vector<const ucs4_t*> ins_ucs;
+	vector<wxFileOffset> ins_len;
+	list<ucs4string> outs;
+	MadCaretPos bpos, epos, endpos, obpos, oepos;
+	boost::scoped_ptr< ucs4string > fmtstr;
+	MadReplaceResult res = RR_NREP_NNEXT;
+
+	if( rangeFrom <= 0 )
+	{
+		bpos.iter = m_Lines->m_LineList.begin();
+		bpos.pos = bpos.iter->m_RowIndices[0].m_Start;
+
+		if( m_CaretPos.pos < bpos.pos || m_EditMode == emHexMode )
+		{
+			bpos.pos = 0;
+		}
+
+		bpos.linepos = bpos.pos;
+	}
+	else
+	{
+		MadUCQueue ucharQueue;
+		vector<int> widthArray;
+		int tmp;
+
+		if( rangeFrom > GetFileSize() ) rangeFrom = GetFileSize();
+
+		bpos.pos = rangeFrom;
+		UpdateCaretByPos( bpos, ucharQueue, widthArray, tmp );
+	}
+
+	if( rangeTo < 0 )
+	{
+		epos.pos = m_Lines->m_Size;
+		epos.iter = m_Lines->m_LineList.end();
+		--epos.iter;
+		epos.linepos = epos.iter->m_Size;
+	}
+	else
+	{
+		MadUCQueue ucharQueue;
+		vector<int> widthArray;
+		int tmp;
+
+		if( rangeTo > GetFileSize() ) rangeTo = GetFileSize();
+
+		epos.pos = rangeTo;
+		UpdateCaretByPos( epos, ucharQueue, widthArray, tmp );
+	}
+
+	if( bpos.pos >= epos.pos ) return res;
+
+	endpos=epos;
+	int multi = 0;
+	int state;
+	ucs4string out;
+
+	vector<ucs4_t> ucs;
+
+	if(!bRegex)
+	{
+		// fmt is the wanted string
+		TranslateText( fmt.c_str(), fmt.Len(), &ucs, true );
+
+		for( size_t i = 0, size = ucs.size(); i < size; ++i )
+		{
+			out += ucs[i] ;
+		}
+	}
+	else
+	{
+#ifdef __WXMSW__
+		ucs4_t *puc = 0;
+		if( !fmt.IsEmpty() )
+		{
+			TranslateText( fmt.c_str(), fmt.Len(), &ucs, true );
+			puc = &ucs[0];
+		}
+		fmtstr.reset(new ucs4string( puc, puc + ucs.size() ));
+#else
+		const ucs4_t *puc = 0;
+		if( !fmt.IsEmpty() )
+		{
+			puc = fmt.c_str();
+		}
+
+		fmtstr.reset(new ucs4string( puc, puc + fmt.Len() ));
+#endif
+	}
+
+	if( ( state = Search( bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, fmtstr.get(), &out) ) == SR_YES )
+	{
+		del_bpos.push_back( bpos.pos );
+		del_epos.push_back( epos.pos );
+		outs.push_back( out );
+		ucs4string &str = outs.back();
+		ins_ucs.push_back( str.c_str() );
+		ins_len.push_back( str.length() );
+
+		if( bpos.iter != epos.iter )
+			++multi;
+	}
+
+	if( state == SR_EXPR_ERROR ) return RR_EXPR_ERROR;
+
+	if( del_bpos.size() > 0 )
+	{
+		wxFileOffset size = del_epos.back() - del_bpos.front();
+
+		if( ( size <= 2 * 1024 * 1024 ) || ( multi >= 40 && size <= 10 * 1024 * 1024 ) )
+		{
+			OverwriteDataSingle( del_bpos, del_epos, &ins_ucs, NULL, ins_len );
+		}
+		else
+		{
+			OverwriteDataMultiple( del_bpos, del_epos, &ins_ucs, NULL, ins_len );
+		}
+	}
+
+	if( state == SR_YES )
+	{
+		res = RR_REP_NNEXT;
+		if(!( bpos.pos == epos.pos && !NextRegexSearchingPos( epos, expr ) ))
+		{
+			bpos=epos;
+			epos=endpos;
+			
+			if(bRegex)
+				out.clear();
+			if( ( state = Search( bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, fmtstr.get(), &out) ) == SR_YES )
+				res = RR_REP_NEXT;
+		}
+	}
+
+	return res;
+}
 
 int MadEdit::ReplaceTextAll( const wxString &expr, const wxString &fmt,
 							 bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,

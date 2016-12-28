@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: madedit-mod 003\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-17 16:14+0800\n"
+"POT-Creation-Date: 2016-12-28 16:05+0800\n"
 "PO-Revision-Date: 2016-07-12 23:47+0300\n"
 "Last-Translator: Nikos Papadopoulos <nikos569@yahoo.com>\n"
 "Language-Team: Greek <231036448@freemail.gr>\n"
@@ -396,11 +396,11 @@ msgstr "ISO-8859"
 msgid "Windows"
 msgstr "Microsoft Windows"
 
-#: wxstd.po.cpp:96 ../src/MadEdit/MadEncoding.cpp:144
+#: wxstd.po.cpp:96 ../src/MadEdit/MadEncoding.cpp:145
 msgid "OEM"
 msgstr "Κωδικοσελίδα OEM"
 
-#: wxstd.po.cpp:97 ../src/MadEdit/MadEncoding.cpp:145
+#: wxstd.po.cpp:97 ../src/MadEdit/MadEncoding.cpp:146
 msgid "Other"
 msgstr "Άλλo"
 
@@ -421,7 +421,7 @@ msgid "Please wait while printing..."
 msgstr "Παρακαλώ περιμένετε όσο διαρκεί η εκτύπωση..."
 
 #: wxstd.po.cpp:102 ../src/MadEditFrame.cpp:2014
-#: ../src/MadOptionsDialog.cpp:443
+#: ../src/MadOptionsDialog.cpp:446
 msgid "Print"
 msgstr "Εκτύπωση"
 
@@ -493,7 +493,7 @@ msgstr "Σελίδα %d από τις %d"
 msgid "Page %d"
 msgstr "Σελίδα %d"
 
-#: wxstd.po.cpp:120 wxstd.po.cpp:121 ../src/MadOptionsDialog.cpp:1041
+#: wxstd.po.cpp:120 wxstd.po.cpp:121 ../src/MadOptionsDialog.cpp:1044
 msgid "Options"
 msgstr "Επιλογές"
 
@@ -509,15 +509,15 @@ msgstr ""
 "\n"
 "Μη έγκυρη μορφή Markdown!!"
 
-#: ../src/MadEdit/MadEdit.cpp:11959
+#: ../src/MadEdit/MadEdit.cpp:11989
 msgid "Zero Length Match"
 msgstr ""
 
-#: ../src/MadEdit/MadEdit.cpp:11962
+#: ../src/MadEdit/MadEdit.cpp:11992
 msgid "^ Zero Length Match"
 msgstr ""
 
-#: ../src/MadEdit/MadEditAdvanced.cpp:1856
+#: ../src/MadEdit/MadEditAdvanced.cpp:1859
 msgid "Invalid Unicode Characters"
 msgstr "Μη Έγκυροι Χαρακτήρες Unicode"
 
@@ -536,7 +536,7 @@ msgstr ""
 msgid "Hex Mode to Text/Column Mode"
 msgstr "Από Δεκαεξαδική Λειτουργία σε Λειτουργία Κειμένου/Στηλών"
 
-#: ../src/MadEdit/MadEditBasic.cpp:2068
+#: ../src/MadEdit/MadEditBasic.cpp:2076
 msgid ""
 "You are about to undo changes that have already been saved to disk.\n"
 "\n"
@@ -546,73 +546,73 @@ msgstr ""
 "\n"
 "Θέλεις να συνεχίσεις;"
 
-#: ../src/MadEdit/MadEditBasic.cpp:2453 ../src/MadEdit/MadEditBasic.cpp:2513
+#: ../src/MadEdit/MadEditBasic.cpp:2464 ../src/MadEdit/MadEditBasic.cpp:2522
 #: ../src/MadEditFrame.cpp:4265
 msgid "The Parent Directory of this file does not exist:"
 msgstr "Ο Γονικός Κατάλογος αυτού του αρχείου δεν υπάρχει:"
 
-#: ../src/MadEdit/MadEditBasic.cpp:2530
+#: ../src/MadEdit/MadEditBasic.cpp:2539
 msgid "Cannot save this file:"
 msgstr "Αδυναμία αποθήκευσης αυτού του αρχείου:"
 
-#: ../src/MadEdit/MadEditBasic.cpp:2532 ../src/MadEdit/MadEditBasic.cpp:2978
-#: ../src/MadEdit/MadEditBasic.cpp:2991 ../src/MadEdit/MadEditSearch.cpp:854
+#: ../src/MadEdit/MadEditBasic.cpp:2541 ../src/MadEdit/MadEditBasic.cpp:2999
+#: ../src/MadEdit/MadEditBasic.cpp:3012 ../src/MadEdit/MadEditSearch.cpp:854
 #: ../src/MadEdit/MadEditSearch.cpp:950 ../src/MadEdit/MadEditSearch.cpp:1003
 #: ../src/MadEditFrame.cpp:529 ../src/MadEditFrame.cpp:534
 #: ../src/MadEditFrame.cpp:5439
 msgid "&Ok"
 msgstr "&Εντάξει"
 
-#: ../src/MadEdit/MadEditBasic.cpp:2562
+#: ../src/MadEdit/MadEditBasic.cpp:2571
 msgid "Do you want to save this file?"
 msgstr "Θέλεις να αποθηκεύσεις αυτό το αρχείο;"
 
-#: ../src/MadEdit/MadEditBasic.cpp:2564 ../src/MadEdit/MadEditBasic.cpp:2643
-#: ../src/MadEdit/MadEditBasic.cpp:2701 ../src/MadEditFrame.cpp:518
+#: ../src/MadEdit/MadEditBasic.cpp:2573 ../src/MadEdit/MadEditBasic.cpp:2652
+#: ../src/MadEdit/MadEditBasic.cpp:2710 ../src/MadEditFrame.cpp:518
 #: ../src/MadEditFrame.cpp:524
 msgid "&Yes"
 msgstr "&Ναι"
 
-#: ../src/MadEdit/MadEditBasic.cpp:2565 ../src/MadEdit/MadEditBasic.cpp:2643
-#: ../src/MadEdit/MadEditBasic.cpp:2701 ../src/MadEditFrame.cpp:519
+#: ../src/MadEdit/MadEditBasic.cpp:2574 ../src/MadEdit/MadEditBasic.cpp:2652
+#: ../src/MadEdit/MadEditBasic.cpp:2710 ../src/MadEditFrame.cpp:519
 #: ../src/MadEditFrame.cpp:524
 msgid "&No"
 msgstr "Ό&χι"
 
-#: ../src/MadEdit/MadEditBasic.cpp:2565 ../src/MadEditFrame.cpp:519
+#: ../src/MadEdit/MadEditBasic.cpp:2574 ../src/MadEditFrame.cpp:519
 #: ../src/MadEditFrame.cpp:529 ../src/MadFileAssociationDialog.cpp:374
 #: ../src/MadFileHistoryDialog.cpp:50 ../src/MadHighlightingDialog.cpp:272
-#: ../src/MadPurgeHistoryDialog.cpp:98 ../src/MadOptionsDialog.cpp:983
+#: ../src/MadPurgeHistoryDialog.cpp:98 ../src/MadOptionsDialog.cpp:986
 #: ../src/MadConvEncDialog.cpp:73 ../src/MadSaveQueryDialog.cpp:52
 #: ../src/MadAboutDialog.cpp:98
 msgid "&Cancel"
 msgstr "&Ακύρωση"
 
-#: ../src/MadEdit/MadEditBasic.cpp:2575
+#: ../src/MadEdit/MadEditBasic.cpp:2584
 msgid "Save File As"
 msgstr "Αποθήκευση του Αρχείου Ως"
 
-#: ../src/MadEdit/MadEditBasic.cpp:2579 ../src/MadEditFrame.cpp:1997
+#: ../src/MadEdit/MadEditBasic.cpp:2588 ../src/MadEditFrame.cpp:1997
 msgid "Save File"
 msgstr "Αποθήκευση του Αρχείου"
 
-#: ../src/MadEdit/MadEditBasic.cpp:2642
+#: ../src/MadEdit/MadEditBasic.cpp:2651
 msgid "Do you want to discard changes?"
 msgstr "Να απορριφθούν οι αλλαγές;"
 
-#: ../src/MadEdit/MadEditBasic.cpp:2698
+#: ../src/MadEdit/MadEditBasic.cpp:2707
 msgid "This file has been changed by another application."
 msgstr "Αυτό το αρχείο έχει αλλαχτεί από μια άλλη εφαρμογή."
 
-#: ../src/MadEdit/MadEditBasic.cpp:2699
+#: ../src/MadEdit/MadEditBasic.cpp:2708
 msgid "Do you want to reload it?"
 msgstr "Θέλεις να γίνει επαναφόρτωση του αρχείου;"
 
-#: ../src/MadEdit/MadEditBasic.cpp:2969
+#: ../src/MadEdit/MadEditBasic.cpp:2990
 msgid "The input string is not a valid Hex-String:"
 msgstr "Ο εισηγμένος στίχος δεν είναι έγκυρος Hex-Στίχος:"
 
-#: ../src/MadEdit/MadEditBasic.cpp:3683
+#: ../src/MadEdit/MadEditBasic.cpp:3881
 #, c-format
 msgid "Found %d matched texts..."
 msgstr "Βρέθηκαν %d κείμενα που ταιριάζουν..."
@@ -641,11 +641,15 @@ msgstr "Το « %s » δεν είναι έγκυρη κανονική έκφρα
 msgid "The format of '%s' is invalid."
 msgstr "Η μορφή του «%s» δεν είναι έγκυρη."
 
-#: ../src/MadEdit/MadEncoding.cpp:146
+#: ../src/MadEdit/MadEncoding.cpp:144
+msgid "Macintosh"
+msgstr ""
+
+#: ../src/MadEdit/MadEncoding.cpp:147
 msgid "Invalid"
 msgstr "Μη έγκυρο"
 
-#: ../src/MadEdit/MadEncoding.cpp:571
+#: ../src/MadEdit/MadEncoding.cpp:682
 #, fuzzy
 msgid "Chinese Simplified(UTF-PRC)"
 msgstr "Γουίντοουζ Απλοποιημένο Κινέζικο (CP 936)"
@@ -875,7 +879,7 @@ msgid "Print the file"
 msgstr "Εκτύπωση του αρχείου"
 
 #: ../src/MadEditFrame.cpp:2016 ../src/MadEditFrame.cpp:2017
-#: ../src/MadEditFrame.cpp:2921
+#: ../src/MadEditFrame.cpp:3339
 msgid "Recent Files"
 msgstr "Πρόσφατα Αρχεία"
 
@@ -1376,7 +1380,7 @@ msgid "Find next occurrence"
 msgstr "Εύρεση της επόμενης ύπαρξης"
 
 #: ../src/MadEditFrame.cpp:2128 ../src/MadEditFrame.cpp:3305
-#: ../src/MadSearchReplaceDialog.cpp:550 ../src/MadSearchReplaceDialog.cpp:1138
+#: ../src/MadSearchReplaceDialog.cpp:557 ../src/MadSearchReplaceDialog.cpp:1158
 msgid "Find Next"
 msgstr "Επόμενο"
 
@@ -1389,7 +1393,7 @@ msgid "Find previous occurrence"
 msgstr "Εύρεση της προηγούμενης ύπαρξης"
 
 #: ../src/MadEditFrame.cpp:2129 ../src/MadEditFrame.cpp:3306
-#: ../src/MadSearchReplaceDialog.cpp:706
+#: ../src/MadSearchReplaceDialog.cpp:713
 msgid "Find Previous"
 msgstr "Προηγούμενο"
 
@@ -1409,7 +1413,7 @@ msgstr "Α&ντικατάσταση"
 msgid "Replace a string"
 msgstr "Αντικατάσταση στίχου"
 
-#: ../src/MadEditFrame.cpp:2132 ../src/MadSearchReplaceDialog.cpp:1263
+#: ../src/MadEditFrame.cpp:2132 ../src/MadSearchReplaceDialog.cpp:1291
 msgid "Replace"
 msgstr "Αντικατάσταση"
 
@@ -1738,7 +1742,7 @@ msgstr "Παραδοσιακή Λειτουργία Γραφομηχανής"
 msgid "Toolbars"
 msgstr "Γραμμές Εργαλείων"
 
-#: ../src/MadEditFrame.cpp:2321 ../src/MadEditFrame.cpp:9599
+#: ../src/MadEditFrame.cpp:2321 ../src/MadEditFrame.cpp:9602
 msgid "Toggle Main Toolbar"
 msgstr "Εναλλαγή της Κύριας Γραμμής Εργαλείων"
 
@@ -1754,7 +1758,7 @@ msgstr "Λει&τουργία Κειμένου"
 msgid "Change the editing mode to Text-Mode"
 msgstr "Αλλαγή της λειτουργίας επεξεργασίας σε Λειτουργία-Κειμένου"
 
-#: ../src/MadEditFrame.cpp:2324 ../src/MadOptionsDialog.cpp:449
+#: ../src/MadEditFrame.cpp:2324 ../src/MadOptionsDialog.cpp:452
 msgid "Text Mode"
 msgstr "Λειτουργία Κειμένου"
 
@@ -1778,7 +1782,7 @@ msgstr "Δεκαε&ξαδική Λειτουργία"
 msgid "Change the editing mode to Hex-Mode"
 msgstr "Αλλαγή της λειτουργίας επεξεργασίας σε Δεκαε&ξαδική Λειτουργία"
 
-#: ../src/MadEditFrame.cpp:2326 ../src/MadOptionsDialog.cpp:470
+#: ../src/MadEditFrame.cpp:2326 ../src/MadOptionsDialog.cpp:473
 msgid "Hex Mode"
 msgstr "Δεκαεξαδική Λειτουργία"
 
@@ -2313,7 +2317,7 @@ msgstr "Εναλλαγή της Λειτουργίας Εισαγωγής/Απα
 msgid "Standard"
 msgstr "Τυπικό"
 
-#: ../src/MadEditFrame.cpp:2464 ../src/MadOptionsDialog.cpp:1147
+#: ../src/MadEditFrame.cpp:2464 ../src/MadOptionsDialog.cpp:1150
 msgid "Editor"
 msgstr "Επεξεργαστής"
 
@@ -2437,7 +2441,7 @@ msgstr "Κύλιση Δεξιά"
 msgid "Scrolls right by aprox. 1 tab stop"
 msgstr "Κυλά δεξιά κατά περίπου 1 πινακωτή"
 
-#: ../src/MadEditFrame.cpp:2659 ../src/MadEditFrame.cpp:9785
+#: ../src/MadEditFrame.cpp:2659 ../src/MadEditFrame.cpp:9799
 msgid "Quick Search"
 msgstr "Γρήγορη Αναζήτηση"
 
@@ -2460,14 +2464,6 @@ msgstr "Αντιγραφή ολόκληρου του ονόματος του α�
 #: ../src/MadEditFrame.cpp:2911
 msgid "Copy directory name"
 msgstr "Αντιγραφή του ονόματος του καταλόγου"
-
-#: ../src/MadEditFrame.cpp:2921
-msgid "Recent file list"
-msgstr "Κατάστιχο πρόσφατων αρχείων"
-
-#: ../src/MadEditFrame.cpp:2921
-msgid "List all recent opened files"
-msgstr "Καταλογίζει όλα τα πρόσφατα ανοιγμένα αρχεία"
 
 #: ../src/MadEditFrame.cpp:2939
 msgid "Run Scripts"
@@ -2514,9 +2510,17 @@ msgstr "Η Κουκκίδα Ταιριάζει Νέα Γραμμή"
 msgid "Dot Match Newline in Regular Expressions"
 msgstr "Η Κουκκίδα Ταιριάζει Νέα Γραμμή στις Κανονικές Εκφράσεις"
 
-#: ../src/MadEditFrame.cpp:3361 ../src/MadSearchReplaceDialog.cpp:1680
-#: ../src/MadSearchReplaceDialog.cpp:1693 ../src/MadPython.hpp:1504
-#: ../src/MadPython.hpp:1527
+#: ../src/MadEditFrame.cpp:3339
+msgid "Recent file list"
+msgstr "Κατάστιχο πρόσφατων αρχείων"
+
+#: ../src/MadEditFrame.cpp:3339
+msgid "List all recent opened files"
+msgstr "Καταλογίζει όλα τα πρόσφατα ανοιγμένα αρχεία"
+
+#: ../src/MadEditFrame.cpp:3361 ../src/MadSearchReplaceDialog.cpp:1708
+#: ../src/MadSearchReplaceDialog.cpp:1721 ../src/MadPython.hpp:1522
+#: ../src/MadPython.hpp:1545
 msgid "Search Results"
 msgstr "Αποτελέσματα Αναζήτησης"
 
@@ -2541,7 +2545,7 @@ msgstr "Αδυναμία πρόσβασης σε αυτό το αρχείο:"
 msgid "Cannot load this file:"
 msgstr "Αδυναμία φόρτωσης αυτού του αρχείου:"
 
-#: ../src/MadEditFrame.cpp:4476 ../src/MadEditFrame.cpp:8810
+#: ../src/MadEditFrame.cpp:4476 ../src/MadEditFrame.cpp:8813
 msgid "Memory allocation failed"
 msgstr "Η δέσμευση μνήμης απέτυχε"
 
@@ -2549,8 +2553,8 @@ msgstr "Η δέσμευση μνήμης απέτυχε"
 #: ../src/MadEditFrame.cpp:4901 ../src/MadEditFrame.cpp:4917
 #: ../src/MadEditFrame.cpp:4937 ../src/MadEditFrame.cpp:4943
 #: ../src/MadEditFrame.cpp:5005 ../src/MadEditFrame.cpp:5193
-#: ../src/MadEditFrame.cpp:5220 ../src/MadOptionsDialog.cpp:474
-#: ../src/MadOptionsDialog.cpp:959 ../src/MadOptionsDialog.cpp:970
+#: ../src/MadEditFrame.cpp:5220 ../src/MadOptionsDialog.cpp:477
+#: ../src/MadOptionsDialog.cpp:962 ../src/MadOptionsDialog.cpp:973
 #: ../src/MadConvEncDialog.cpp:60
 msgid "None"
 msgstr "Κανένα"
@@ -2668,28 +2672,28 @@ msgstr "Κλείσιμο της Προεπισκόπησης"
 msgid "Close preveiw windows"
 msgstr "Κλείσιμο των παραθύρων της προεπισκόπησης"
 
-#: ../src/MadEditFrame.cpp:8493
+#: ../src/MadEditFrame.cpp:8496
 msgid "Open Mad Macro File"
 msgstr "Άνοιγμα Αρχείου Μακροεντολών του Μαντ"
 
-#: ../src/MadEditFrame.cpp:8643
+#: ../src/MadEditFrame.cpp:8646
 msgid "Mad Macro"
 msgstr "Μακροεντολή Μαντ"
 
-#: ../src/MadEditFrame.cpp:8651
+#: ../src/MadEditFrame.cpp:8654
 #, c-format
 msgid "Do you want to overwrite %s"
 msgstr "Θέλεις να απανωγραφεί το %s"
 
-#: ../src/MadEditFrame.cpp:8651
+#: ../src/MadEditFrame.cpp:8654
 msgid "Warning"
 msgstr "Προειδοποίηση"
 
-#: ../src/MadEditFrame.cpp:8754
+#: ../src/MadEditFrame.cpp:8757
 msgid "Edit Mad Macro File"
 msgstr "Επεξεργασία Ενός Αρχείου Μακροεντολών Μαντ"
 
-#: ../src/MadEditFrame.cpp:9395
+#: ../src/MadEditFrame.cpp:9398
 msgid ""
 "Download dictionary at\n"
 "http://extensions.openoffice.org/"
@@ -2697,48 +2701,48 @@ msgstr ""
 "Λήψη του λεξικού από το\n"
 "http://extensions.openoffice.org/"
 
-#: ../src/MadEditFrame.cpp:9396
+#: ../src/MadEditFrame.cpp:9399
 msgid "Press OK to visit our HomePage."
 msgstr "Κλίκαρε στο  «Εντάξει» για να επισκεφτείς την ΑρχικήΣελίδα"
 
-#: ../src/MadEditFrame.cpp:9692
+#: ../src/MadEditFrame.cpp:9697
 msgid "Passed the begin of the file/selection"
 msgstr "Πέρασε την αρχή του αρχείου ή της επιλογής"
 
-#: ../src/MadEditFrame.cpp:9750 ../src/MadSearchReplaceDialog.cpp:522
-#: ../src/MadSearchReplaceDialog.cpp:679
+#: ../src/MadEditFrame.cpp:9759 ../src/MadSearchReplaceDialog.cpp:525
+#: ../src/MadSearchReplaceDialog.cpp:686
 msgid "Passed the end of the file"
 msgstr "Πέρασε το τέλος του αρχείου ή της επιλογής"
 
-#: ../src/MadEditFrame.cpp:9790
+#: ../src/MadEditFrame.cpp:9804
 msgid "Information Window"
 msgstr "Παράθυρο Πληροφοριών"
 
-#: ../src/MadEditFrame.cpp:9828
+#: ../src/MadEditFrame.cpp:9842
 msgid "Invalid item"
 msgstr "Μη έγκυρο αντικείμενο"
 
-#: ../src/MadEditFrame.cpp:9841
+#: ../src/MadEditFrame.cpp:9855
 msgid "&Collapse All"
 msgstr "Σύμπτυ&ξη Όλων"
 
-#: ../src/MadEditFrame.cpp:9842
+#: ../src/MadEditFrame.cpp:9856
 msgid "Copy &All"
 msgstr "&Αντιγραφή Όλων"
 
-#: ../src/MadEditFrame.cpp:9843
+#: ../src/MadEditFrame.cpp:9857
 msgid "&Reset Results"
 msgstr "Επαναφο&ρά των Αποτελέσματων"
 
-#: ../src/MadEditFrame.cpp:9845
+#: ../src/MadEditFrame.cpp:9859
 msgid "&Collapse Selected"
 msgstr "Σύμπτυ&ξη των Επιλεγμένων"
 
-#: ../src/MadEditFrame.cpp:9846
+#: ../src/MadEditFrame.cpp:9860
 msgid "&Copy Selected"
 msgstr "Αντι&γραφή Επιλεγμένων"
 
-#: ../src/MadEditFrame.cpp:9847
+#: ../src/MadEditFrame.cpp:9861
 msgid "&Delete Selected"
 msgstr "&Διαγραφή Των Επιλεγμένων"
 
@@ -2767,7 +2771,7 @@ msgid "<- Add Custom File Type"
 msgstr "<- Προσθήκη Προσαρμοσμένης Μορφής Αρχείου"
 
 #: ../src/MadFileAssociationDialog.cpp:372 ../src/MadHighlightingDialog.cpp:270
-#: ../src/MadPurgeHistoryDialog.cpp:96 ../src/MadOptionsDialog.cpp:980
+#: ../src/MadPurgeHistoryDialog.cpp:96 ../src/MadOptionsDialog.cpp:983
 #: ../src/MadConvEncDialog.cpp:71 ../src/MadSaveQueryDialog.cpp:47
 #: ../src/MadAboutDialog.cpp:95
 msgid "&OK"
@@ -2854,8 +2858,8 @@ msgstr ""
 msgid "Automatic Detection"
 msgstr "Αυτόματη Ανίχνευση"
 
-#: ../src/MadFindInFilesDialog.cpp:488 ../src/MadOptionsDialog.cpp:1890
-#: ../src/MadOptionsDialog.cpp:1907
+#: ../src/MadFindInFilesDialog.cpp:488 ../src/MadOptionsDialog.cpp:1895
+#: ../src/MadOptionsDialog.cpp:1912
 msgid "Choose a directory"
 msgstr "Επιλογή ενός καταλόγου"
 
@@ -2873,8 +2877,8 @@ msgstr "Ο επιλεγμένος κατάλογος δεν υπάρχει."
 msgid "Processing %s of %s files..."
 msgstr "Επεξεργασία %s από %s αρχεία..."
 
-#: ../src/MadFindInFilesDialog.cpp:760 ../src/MadSearchReplaceDialog.cpp:1560
-#: ../src/MadPython.hpp:1507 ../src/MadPython.hpp:1531
+#: ../src/MadFindInFilesDialog.cpp:760 ../src/MadSearchReplaceDialog.cpp:1588
+#: ../src/MadPython.hpp:1525 ../src/MadPython.hpp:1549
 msgid "Search \""
 msgstr "Αναζήτηση \""
 
@@ -2883,12 +2887,12 @@ msgstr "Αναζήτηση \""
 msgid "(in %s files)"
 msgstr "(σε %s αρχεία)"
 
-#: ../src/MadFindInFilesDialog.cpp:880 ../src/MadSearchReplaceDialog.cpp:1667
+#: ../src/MadFindInFilesDialog.cpp:880 ../src/MadSearchReplaceDialog.cpp:1695
 #, c-format
 msgid "Found %s matched texts..."
 msgstr "Βρέθηκαν %s κείμενα που ταιριάζουν..."
 
-#: ../src/MadFindInFilesDialog.cpp:882 ../src/MadSearchReplaceDialog.cpp:1669
+#: ../src/MadFindInFilesDialog.cpp:882 ../src/MadSearchReplaceDialog.cpp:1697
 msgid "Preparing Results"
 msgstr "Προετοιμασία των Αποτελεσμάτων"
 
@@ -2906,8 +2910,8 @@ msgstr ""
 msgid "&Dselect All"
 msgstr "&Αποεπιλογή Όλων"
 
-#: ../src/MadFileHistoryDialog.cpp:74 ../src/MadOptionsDialog.cpp:962
-#: ../src/MadOptionsDialog.cpp:973 ../src/MadSaveQueryDialog.cpp:84
+#: ../src/MadFileHistoryDialog.cpp:74 ../src/MadOptionsDialog.cpp:965
+#: ../src/MadOptionsDialog.cpp:976 ../src/MadSaveQueryDialog.cpp:84
 #: ../src/MadWinListDialog.cpp:91
 msgid "Name"
 msgstr "Όνομα"
@@ -3106,7 +3110,7 @@ msgstr ""
 msgid "C&ount"
 msgstr "Καταμέτ&ρηση"
 
-#: ../src/MadSearchReplaceDialog.cpp:222 ../src/MadSearchReplaceDialog.cpp:1280
+#: ../src/MadSearchReplaceDialog.cpp:222 ../src/MadSearchReplaceDialog.cpp:1308
 msgid "R&eplace >>"
 msgstr "Α&ντ/ση >>"
 
@@ -3114,38 +3118,38 @@ msgstr "Α&ντ/ση >>"
 msgid "WxBitmapButtonRecentFindText"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:533 ../src/MadSearchReplaceDialog.cpp:689
-#: ../src/MadSearchReplaceDialog.cpp:1513
-#: ../src/MadSearchReplaceDialog.cpp:1702
+#: ../src/MadSearchReplaceDialog.cpp:540 ../src/MadSearchReplaceDialog.cpp:696
+#: ../src/MadSearchReplaceDialog.cpp:1541
+#: ../src/MadSearchReplaceDialog.cpp:1730
 msgid "Cannot find the matched string"
 msgstr "Αδυναμία εύρεσης στίχου που ταιριάζει"
 
-#: ../src/MadSearchReplaceDialog.cpp:544 ../src/MadSearchReplaceDialog.cpp:700
+#: ../src/MadSearchReplaceDialog.cpp:551 ../src/MadSearchReplaceDialog.cpp:707
 msgid "Cannot find the matched string."
 msgstr "Αδυναμία εύρεσης στίχου που ταιριάζει."
 
-#: ../src/MadSearchReplaceDialog.cpp:547 ../src/MadSearchReplaceDialog.cpp:1135
+#: ../src/MadSearchReplaceDialog.cpp:554 ../src/MadSearchReplaceDialog.cpp:1155
 msgid "Do you want to find from begin of selection?"
 msgstr "Θέλεις να γίνει αναζήτηση από την αρχή της επιλογής;"
 
-#: ../src/MadSearchReplaceDialog.cpp:548 ../src/MadSearchReplaceDialog.cpp:1136
+#: ../src/MadSearchReplaceDialog.cpp:555 ../src/MadSearchReplaceDialog.cpp:1156
 msgid "Do you want to find from begin of file?"
 msgstr "Θέλεις να γίνει αναζήτηση από την αρχή του αρχείου;"
 
-#: ../src/MadSearchReplaceDialog.cpp:573 ../src/MadSearchReplaceDialog.cpp:720
-#: ../src/MadSearchReplaceDialog.cpp:1728
+#: ../src/MadSearchReplaceDialog.cpp:580 ../src/MadSearchReplaceDialog.cpp:727
+#: ../src/MadSearchReplaceDialog.cpp:1756
 msgid "Empty expression"
 msgstr "Άδεια έκφραση"
 
-#: ../src/MadSearchReplaceDialog.cpp:703
+#: ../src/MadSearchReplaceDialog.cpp:710
 msgid "Do you want to find from end of selection?"
 msgstr "Θέλεις να γίνει αναζήτηση από το τέλος της επιλογής;"
 
-#: ../src/MadSearchReplaceDialog.cpp:704
+#: ../src/MadSearchReplaceDialog.cpp:711
 msgid "Do you want to find from end of file?"
 msgstr "Θέλεις να γίνει αναζήτηση από το τέλος του αρχείου;"
 
-#: ../src/MadSearchReplaceDialog.cpp:1132
+#: ../src/MadSearchReplaceDialog.cpp:1152
 msgid ""
 "Cannot find the matched string.\n"
 "Replace is finished."
@@ -3153,63 +3157,63 @@ msgstr ""
 "Αδυναμία εύρεσης στίχου που να ταιριάζει.\n"
 "Η αντικατάσταση τελείωσε."
 
-#: ../src/MadSearchReplaceDialog.cpp:1254
+#: ../src/MadSearchReplaceDialog.cpp:1282
 msgid "Search <<"
 msgstr "Αναζήτηση <<"
 
-#: ../src/MadSearchReplaceDialog.cpp:1284
+#: ../src/MadSearchReplaceDialog.cpp:1312
 msgid "Search"
 msgstr "Αναζήτηση"
 
-#: ../src/MadSearchReplaceDialog.cpp:1368
+#: ../src/MadSearchReplaceDialog.cpp:1396
 #, c-format
 msgid "'%s' was found %d times."
 msgstr "Το '%s' βρέθηκε %d φορές."
 
-#: ../src/MadSearchReplaceDialog.cpp:1404
+#: ../src/MadSearchReplaceDialog.cpp:1432
 #, c-format
 msgid "Preparing %s of %s results..."
 msgstr "Προετοιμασία %s από %s αποτελέσματα..."
 
-#: ../src/MadSearchReplaceDialog.cpp:1443
+#: ../src/MadSearchReplaceDialog.cpp:1471
 #, c-format
 msgid "Line(%d-%d)"
 msgstr "Γραμμή(%d-%d)"
 
-#: ../src/MadSearchReplaceDialog.cpp:1448
+#: ../src/MadSearchReplaceDialog.cpp:1476
 #, c-format
 msgid "Line(%d)"
 msgstr "Γραμμή (%d)"
 
-#: ../src/MadSearchReplaceDialog.cpp:1453
+#: ../src/MadSearchReplaceDialog.cpp:1481
 #, c-format
 msgid "Offset(%s)"
 msgstr "Απόκλιση (%s)"
 
-#: ../src/MadSearchReplaceDialog.cpp:1454
+#: ../src/MadSearchReplaceDialog.cpp:1482
 msgid "Binary file matches"
 msgstr "Ταιριάσματα δυαδικού αρχείου"
 
-#: ../src/MadSearchReplaceDialog.cpp:1517
+#: ../src/MadSearchReplaceDialog.cpp:1545
 msgid " results"
 msgstr " αποτελέσματα"
 
-#: ../src/MadSearchReplaceDialog.cpp:1661 ../src/MadPython.hpp:1507
-#: ../src/MadPython.hpp:1531
+#: ../src/MadSearchReplaceDialog.cpp:1689 ../src/MadPython.hpp:1525
+#: ../src/MadPython.hpp:1549
 #, c-format
 msgid "(%s hits in 1 file)"
 msgstr "(%s επιτυχίες σε 1 αρχείο)"
 
-#: ../src/MadSearchReplaceDialog.cpp:1707
+#: ../src/MadSearchReplaceDialog.cpp:1735
 #, c-format
 msgid "%s results"
 msgstr "%s αποτελέσματα"
 
-#: ../src/MadSearchReplaceDialog.cpp:1819
+#: ../src/MadSearchReplaceDialog.cpp:1847
 msgid "Cannot find any matched string."
 msgstr "Αδυναμία εύρεσης οποιουδήποτε στίχου που να ταιριάζει."
 
-#: ../src/MadSearchReplaceDialog.cpp:1821
+#: ../src/MadSearchReplaceDialog.cpp:1849
 #, c-format
 msgid "%s string(s) were replaced."
 msgstr ""
@@ -3388,285 +3392,289 @@ msgstr "Λειτουργία γραφομηχανής"
 msgid "Fix width mode"
 msgstr "Λειτουργία σταθερού πλάτους"
 
-#: ../src/MadOptionsDialog.cpp:452
+#: ../src/MadOptionsDialog.cpp:442
+msgid "Replace Directly(To fix Regex dilema in Replace)"
+msgstr ""
+
+#: ../src/MadOptionsDialog.cpp:455
 msgid "Print Syntax Highlighter"
 msgstr "Εκτύπωση του Χρωματιστή του Κειμένου"
 
-#: ../src/MadOptionsDialog.cpp:455
+#: ../src/MadOptionsDialog.cpp:458
 msgid "Print Line Number"
 msgstr "Εκτύπωση της Αρίθμησης των Γραμμών"
 
-#: ../src/MadOptionsDialog.cpp:458
+#: ../src/MadOptionsDialog.cpp:461
 msgid "Print Bookmark"
 msgstr "Εκτύπωση του Σελιδοδείκτη"
 
-#: ../src/MadOptionsDialog.cpp:461
+#: ../src/MadOptionsDialog.cpp:464
 msgid "Print End of Line"
 msgstr "Εκτύπωση του Τέλους της Γραμμής"
 
-#: ../src/MadOptionsDialog.cpp:464
+#: ../src/MadOptionsDialog.cpp:467
 msgid "Print Tab Char"
 msgstr "Εκτύπωση του Χαρακτήρα Πινακωτής"
 
-#: ../src/MadOptionsDialog.cpp:467
+#: ../src/MadOptionsDialog.cpp:470
 msgid "Print Space Char"
 msgstr "Εκτύπωση του Χαρακτήρα του Διαστήματος"
 
-#: ../src/MadOptionsDialog.cpp:475
+#: ../src/MadOptionsDialog.cpp:478
 msgid "First Page Only"
 msgstr "Μόνο η Πρώτη Σελίδα"
 
-#: ../src/MadOptionsDialog.cpp:476
+#: ../src/MadOptionsDialog.cpp:479
 msgid "Every Page"
 msgstr "Κάθε Σελίδα"
 
-#: ../src/MadOptionsDialog.cpp:477
+#: ../src/MadOptionsDialog.cpp:480
 msgid "Print Offset Header"
 msgstr "Εκτύπωση Της Κεφαλίδας Απόκλισης"
 
-#: ../src/MadOptionsDialog.cpp:483
+#: ../src/MadOptionsDialog.cpp:486
 msgid "Page Header"
 msgstr "Κεφαλίδα Σελίδας"
 
-#: ../src/MadOptionsDialog.cpp:486
+#: ../src/MadOptionsDialog.cpp:489
 msgid "Print Page Header"
 msgstr "Εκτύπωση της Κεφαλίδας της Σελίδας"
 
-#: ../src/MadOptionsDialog.cpp:491 ../src/MadOptionsDialog.cpp:523
+#: ../src/MadOptionsDialog.cpp:494 ../src/MadOptionsDialog.cpp:526
 msgid "Left:"
 msgstr "Αριστερά:"
 
-#: ../src/MadOptionsDialog.cpp:499 ../src/MadOptionsDialog.cpp:531
+#: ../src/MadOptionsDialog.cpp:502 ../src/MadOptionsDialog.cpp:534
 msgid "Center:"
 msgstr "Κέντρο:"
 
-#: ../src/MadOptionsDialog.cpp:507 ../src/MadOptionsDialog.cpp:539
+#: ../src/MadOptionsDialog.cpp:510 ../src/MadOptionsDialog.cpp:542
 msgid "Right:"
 msgstr "Δεξιά:"
 
-#: ../src/MadOptionsDialog.cpp:515
+#: ../src/MadOptionsDialog.cpp:518
 msgid "Page Footer"
 msgstr "Υποσέλιδο"
 
-#: ../src/MadOptionsDialog.cpp:518
+#: ../src/MadOptionsDialog.cpp:521
 msgid "Print Page Footer"
 msgstr "Εκτύπωση του Υποσέλιδου"
 
-#: ../src/MadOptionsDialog.cpp:548
+#: ../src/MadOptionsDialog.cpp:551
 msgid "Keys"
 msgstr "Πλήκτρα"
 
-#: ../src/MadOptionsDialog.cpp:561
+#: ../src/MadOptionsDialog.cpp:564
 msgid "Hint:"
 msgstr "Υπόδειξη:"
 
-#: ../src/MadOptionsDialog.cpp:571
+#: ../src/MadOptionsDialog.cpp:574
 msgid "Assigned Keys:"
 msgstr "Ανατεθειμένα Πλήκτρα:"
 
-#: ../src/MadOptionsDialog.cpp:579
+#: ../src/MadOptionsDialog.cpp:582
 msgid "New Key:"
 msgstr "Νέο Πλήκτρο:"
 
-#: ../src/MadOptionsDialog.cpp:588
+#: ../src/MadOptionsDialog.cpp:591
 msgid "<== Add Key"
 msgstr "<== Προσθήκη Πλήκτρου"
 
-#: ../src/MadOptionsDialog.cpp:591
+#: ../src/MadOptionsDialog.cpp:594
 msgid "==> Delete Key"
 msgstr "==> Διαγραφή Πλήκτρου"
 
-#: ../src/MadOptionsDialog.cpp:594
+#: ../src/MadOptionsDialog.cpp:597
 msgid "Show the Key in Menu"
 msgstr "Εμφάνιση του Πλήκτρου στο Μενού"
 
-#: ../src/MadOptionsDialog.cpp:599
+#: ../src/MadOptionsDialog.cpp:602
 msgid "Reset all keys to default (must restart MadEdit)"
 msgstr ""
 "Επαναφορά όλων των πλήκτρων στα προεπιλεγμένα (απαιτείται επανεκκίνηση του "
 "ΜαντΈντιτ)"
 
-#: ../src/MadOptionsDialog.cpp:603
+#: ../src/MadOptionsDialog.cpp:606
 msgid "SpellChecker"
 msgstr "Ορθογραφία"
 
-#: ../src/MadOptionsDialog.cpp:609
+#: ../src/MadOptionsDialog.cpp:612
 msgid "Enable Personal Dictionary"
 msgstr "Ενεργοποίηση του Προσωπικού Λεξικού"
 
-#: ../src/MadOptionsDialog.cpp:612
+#: ../src/MadOptionsDialog.cpp:615
 msgid "Language"
 msgstr "Γλώσσα"
 
-#: ../src/MadOptionsDialog.cpp:615
+#: ../src/MadOptionsDialog.cpp:618
 msgid "Dictionary:"
 msgstr "Λεξικό:"
 
-#: ../src/MadOptionsDialog.cpp:622
+#: ../src/MadOptionsDialog.cpp:625
 msgid "Path Setting"
 msgstr "Ορισμός Διαδρομής"
 
-#: ../src/MadOptionsDialog.cpp:633
+#: ../src/MadOptionsDialog.cpp:636
 msgid "Dictionary"
 msgstr "Λεξικό"
 
-#: ../src/MadOptionsDialog.cpp:644
+#: ../src/MadOptionsDialog.cpp:647
 msgid "Thesauri"
 msgstr "Θησαυρός Λέξεων"
 
-#: ../src/MadOptionsDialog.cpp:654
+#: ../src/MadOptionsDialog.cpp:657
 msgid "BitMap"
 msgstr "BitMap"
 
-#: ../src/MadOptionsDialog.cpp:658
+#: ../src/MadOptionsDialog.cpp:661
 msgid "Source Formatter"
 msgstr "Μορφοποιητής Πηγαίου Κώδικα"
 
-#: ../src/MadOptionsDialog.cpp:665
+#: ../src/MadOptionsDialog.cpp:668
 msgid "Style"
 msgstr "Τεχνοτροπία"
 
-#: ../src/MadOptionsDialog.cpp:685
+#: ../src/MadOptionsDialog.cpp:688
 msgid "Bracket Style"
 msgstr "Τεχνοτροπία Αγκύλων"
 
-#: ../src/MadOptionsDialog.cpp:689
+#: ../src/MadOptionsDialog.cpp:692
 msgid "Sample"
 msgstr "Δείγμα"
 
-#: ../src/MadOptionsDialog.cpp:692
+#: ../src/MadOptionsDialog.cpp:695
 msgid "Sample of the bracket style option chosen to use:"
 msgstr ""
 "Δείγμα της επιλογής της τεχνοτροπίας των αγκύλων προς επιλογή για χρήση:"
 
-#: ../src/MadOptionsDialog.cpp:786
+#: ../src/MadOptionsDialog.cpp:789
 msgid "Brackets"
 msgstr "Αγκύλες"
 
-#: ../src/MadOptionsDialog.cpp:790
+#: ../src/MadOptionsDialog.cpp:793
 msgid "Attach Classes"
 msgstr "Προσκόλληση Τάξεων"
 
-#: ../src/MadOptionsDialog.cpp:793
+#: ../src/MadOptionsDialog.cpp:796
 msgid "Attach Extern C"
 msgstr "Προσκόλληση Extern C"
 
-#: ../src/MadOptionsDialog.cpp:796
+#: ../src/MadOptionsDialog.cpp:799
 msgid "Attach Namespaces"
 msgstr "Προσκόλληση ΟνομάτωνΠεδίων"
 
-#: ../src/MadOptionsDialog.cpp:798
+#: ../src/MadOptionsDialog.cpp:801
 msgid "Attach Inlines"
 msgstr "Προσκόλληση Εσώγραμμων"
 
-#: ../src/MadOptionsDialog.cpp:802
+#: ../src/MadOptionsDialog.cpp:805
 msgid "Indentation"
 msgstr "Εσοχές"
 
-#: ../src/MadOptionsDialog.cpp:808
+#: ../src/MadOptionsDialog.cpp:811
 msgid "Indentation size (in spaces):"
 msgstr "Μέγεθος εσοχών (σε διαστήματα):"
 
-#: ../src/MadOptionsDialog.cpp:815
+#: ../src/MadOptionsDialog.cpp:818
 msgid "Use TABs instead of spaces"
 msgstr "Χρήση ΠΙΝΑΚΩΤΗΣ αντί για διαστήματα"
 
-#: ../src/MadOptionsDialog.cpp:818
+#: ../src/MadOptionsDialog.cpp:821
 msgid "Force using TABs"
 msgstr "Εξαναγκασμός χρήσης των ΠΙΝΑΚΩΤΩΝ"
 
-#: ../src/MadOptionsDialog.cpp:821
+#: ../src/MadOptionsDialog.cpp:824
 msgid "Indent case: statement in switches (commands under case:)"
 msgstr ""
 "Περίπτωση εσοχής: δήλωση στους εναλλάκτες (εντολές κατά την περίπτωση:)"
 
-#: ../src/MadOptionsDialog.cpp:824
+#: ../src/MadOptionsDialog.cpp:827
 msgid "Indent classes (keywords public:, protected: and private:)"
 msgstr "Τάξεις εσοχών (λέξεις-κλειδιά public:, protected: και private:)"
 
-#: ../src/MadOptionsDialog.cpp:827
+#: ../src/MadOptionsDialog.cpp:830
 msgid "Indent labels"
 msgstr "Εσοχή στις ετικέτες"
 
-#: ../src/MadOptionsDialog.cpp:830
+#: ../src/MadOptionsDialog.cpp:833
 msgid "Indent modifiers"
 msgstr "Εσοχή στους μετατροπείς"
 
-#: ../src/MadOptionsDialog.cpp:833
+#: ../src/MadOptionsDialog.cpp:836
 msgid "Indent namespaces"
 msgstr "Εσοχή στα ονόματα-πεδία"
 
-#: ../src/MadOptionsDialog.cpp:836
+#: ../src/MadOptionsDialog.cpp:839
 msgid "Indent switches"
 msgstr "Εσοχή στους εναλλάκτες"
 
-#: ../src/MadOptionsDialog.cpp:839
+#: ../src/MadOptionsDialog.cpp:842
 msgid ""
 "Indent preprocessor blocks at bracket level zero, and within a namespace"
 msgstr ""
 "Εσοχή στα τμήματα προεπεξεργαστή στο επίπεδο αγκύλης μηδέν, και εντός των "
 "ονομάτων-πεδίων"
 
-#: ../src/MadOptionsDialog.cpp:842
+#: ../src/MadOptionsDialog.cpp:845
 msgid "Indent multi-line preprocessor definitions ending with a backslash"
 msgstr ""
 "Εσοχή στους πολλών γραμμών προσδιορισμούς προεπεξεργαστή, που τελειώνουν με "
 "πισωκάθετο"
 
-#: ../src/MadOptionsDialog.cpp:845
+#: ../src/MadOptionsDialog.cpp:848
 msgid "Indent preprocessor conditionals"
 msgstr "Εσοχή στις υποθέσεις προεπεξεργαστή"
 
-#: ../src/MadOptionsDialog.cpp:847
+#: ../src/MadOptionsDialog.cpp:850
 msgid "Indent C++ comments beginning in column one"
 msgstr "Εσοχή στα σχόλια C++ που ξεκινούν στην στήλη ένα"
 
-#: ../src/MadOptionsDialog.cpp:852
+#: ../src/MadOptionsDialog.cpp:855
 msgid "Minimal indent added when a header is built of multiple lines:"
 msgstr ""
 "Ελάχιστη εσοχή που προστίθεται όταν μια κεφαλίδα χτίζεται από πολλαπλές "
 "γραμμές:"
 
-#: ../src/MadOptionsDialog.cpp:859
+#: ../src/MadOptionsDialog.cpp:862
 msgid "Maximum of # spaces to indent a continuation line (max. 120):"
 msgstr ""
 "Μέγιστο πλήθος από διαστήματα # , για να τοποθετηθεί εσοχή σε μια γραμμή "
 "συνέχειας (μεγ. 120):"
 
-#: ../src/MadOptionsDialog.cpp:865
+#: ../src/MadOptionsDialog.cpp:868
 msgid "Formatting"
 msgstr "Μορφοποίηση"
 
-#: ../src/MadOptionsDialog.cpp:869
+#: ../src/MadOptionsDialog.cpp:872
 msgid "Break closing headers from their immediately preceding closing brackets"
 msgstr ""
 "Σπάσιμο των κεφαλίδων κλεισίματος από τις άμεσα προηγούμενες αγκύλες "
 "κλεισίματος"
 
-#: ../src/MadOptionsDialog.cpp:872
+#: ../src/MadOptionsDialog.cpp:875
 msgid "Break 'else if()' header combinations into seperate lines"
 msgstr "Σπάσιμο των συνδυασμών κεφαλίδας «else if()» σε ξεχωριστές γραμμές"
 
-#: ../src/MadOptionsDialog.cpp:875
+#: ../src/MadOptionsDialog.cpp:878
 msgid "Add brackets to unbracketed one line conditional statements"
 msgstr "Προσθήκη αγκύλων σε υποθετικές δηλώσεις μίας γραμμής χωρίς αγκύλες"
 
-#: ../src/MadOptionsDialog.cpp:878
+#: ../src/MadOptionsDialog.cpp:881
 msgid "Add one line brackets to unbracketed one line conditional statements"
 msgstr "Προσθήκη αγκύλων μίας γραμμής σε υποθετικές δηλώσεις χωρίς αγκύλες"
 
-#: ../src/MadOptionsDialog.cpp:881
+#: ../src/MadOptionsDialog.cpp:884
 msgid ""
 "Remove brackets from conditional statements (single statement on a single "
 "line)"
 msgstr ""
 "Απομάκρυνση των αγκύλων από υποθετικές δηλώσεις (μία δήλωση σε μονή γραμμή)"
 
-#: ../src/MadOptionsDialog.cpp:884
+#: ../src/MadOptionsDialog.cpp:887
 msgid "Don't break one-line blocks"
 msgstr "Να μην σπάσουν τμήματα μίας-γραμμής"
 
-#: ../src/MadOptionsDialog.cpp:887
+#: ../src/MadOptionsDialog.cpp:890
 msgid ""
 "Don't break complex statements and multiple statements residing in a single "
 "line"
@@ -3674,170 +3682,170 @@ msgstr ""
 "Να μην σπάσουν πολύπλοκες δηλώσεις και πολλαπλές δηλώσεις που ενυπάρχουν σε "
 "μονή γραμμή"
 
-#: ../src/MadOptionsDialog.cpp:890
+#: ../src/MadOptionsDialog.cpp:893
 msgid "Convert TABs to spaces"
 msgstr "Μετατροπή των ΠΙΝΑΚΩΤΩΝ σε διαστήματα"
 
-#: ../src/MadOptionsDialog.cpp:893
+#: ../src/MadOptionsDialog.cpp:896
 msgid "Closes whitespace in the angle brackets of template definitions"
 msgstr ""
 "Κλείνει το κενό διάστημα σε γωνιακές αγκύλες των προσδιορισμών των προτύπων"
 
-#: ../src/MadOptionsDialog.cpp:896
+#: ../src/MadOptionsDialog.cpp:899
 msgid "Remove the preceding '*' in a multi-line comment that begins a line"
 msgstr ""
 "Απομάκρυνση του προηγούμενου «*» σε ένα σχόλιο πολλών γραμμών, που ξεκινά "
 "μία γραμμή"
 
-#: ../src/MadOptionsDialog.cpp:899
+#: ../src/MadOptionsDialog.cpp:902
 msgid "Enable line breaking"
 msgstr "Ενεργοποίηση του σπασίματος της γραμμής"
 
-#: ../src/MadOptionsDialog.cpp:905
+#: ../src/MadOptionsDialog.cpp:908
 msgid "Break lines after amount of chars (range: 50-200)"
 msgstr "Σπάσιμο των γραμμών μετά το πλήθος των χαρακτήρων (εύρος: 50-200)"
 
-#: ../src/MadOptionsDialog.cpp:914
+#: ../src/MadOptionsDialog.cpp:917
 msgid "Break logical conditionals to be placed last on the previous line"
 msgstr ""
 "Σπάσιμο των λογικών υποθέσεων ,ώστε να τοποθετηθούν τελευταία στην "
 "προηγούμενη γραμμή"
 
-#: ../src/MadOptionsDialog.cpp:919
+#: ../src/MadOptionsDialog.cpp:922
 msgid "Padding"
 msgstr "Γέμισμα"
 
-#: ../src/MadOptionsDialog.cpp:923
+#: ../src/MadOptionsDialog.cpp:926
 msgid "Pad empty lines around header blocks (e.g. 'if', 'while'...)"
 msgstr ""
 "Γέμισμα άδειων γραμμών γύρω από τμήματα κεφαλίδων (πχ «if», «while»...)"
 
-#: ../src/MadOptionsDialog.cpp:929
+#: ../src/MadOptionsDialog.cpp:932
 msgid ""
 "Treat closing header blocks (e.g. 'else', 'catch') as stand-alone blocks"
 msgstr ""
 "Αντιμετώπιση τμημάτων κεφαλίδας κλεισίματος (πχ «else», «catch») ως αυτόνομα "
 "τμήματα"
 
-#: ../src/MadOptionsDialog.cpp:933
+#: ../src/MadOptionsDialog.cpp:936
 msgid "Insert space padding around operators"
 msgstr "Εισαγωγή γεμίσματος διαστημάτων γύρω από χειριστές"
 
-#: ../src/MadOptionsDialog.cpp:936
+#: ../src/MadOptionsDialog.cpp:939
 msgid "Insert space padding around parenthesies on the outside"
 msgstr "Εισαγωγή γεμίσματος διαστημάτων γύρω από παρενθέσεις, εξωτερικά"
 
-#: ../src/MadOptionsDialog.cpp:939
+#: ../src/MadOptionsDialog.cpp:942
 msgid "Insert space padding around parenthesies on the inside"
 msgstr "Εισαγωγή γεμίσματος διαστημάτων γύρω από παρενθέσεις, εσωτερικά"
 
-#: ../src/MadOptionsDialog.cpp:942
+#: ../src/MadOptionsDialog.cpp:945
 msgid "Insert space padding between a header and the following parenthesis"
 msgstr ""
 "Εισαγωγή γεμίσματος διαστημάτων ανάμεσα σε μία κεφαλίδα και την ακόλουθη "
 "παρένθεση"
 
-#: ../src/MadOptionsDialog.cpp:945
+#: ../src/MadOptionsDialog.cpp:948
 msgid "Remove extra space padding around parenthesis"
 msgstr ""
 "Απομάκρυνση του πλεονάζοντος γεμίσματος διαστήματος γύρω από παρενθέσεις"
 
-#: ../src/MadOptionsDialog.cpp:948
+#: ../src/MadOptionsDialog.cpp:951
 msgid "Delete empty lines within a function or method"
 msgstr "Διαγραφή των κενών γραμμών μέσα σε μια διαδικασία ή μέθοδο"
 
-#: ../src/MadOptionsDialog.cpp:951
+#: ../src/MadOptionsDialog.cpp:954
 msgid "Fill empty lines with the whitespace of their previous lines"
 msgstr ""
 "Συμπλήρωση των κενών γραμμών με τα κενά διαστήματα των προηγούμενών τους "
 "γραμμών"
 
-#: ../src/MadOptionsDialog.cpp:956
+#: ../src/MadOptionsDialog.cpp:959
 msgid "Pointer alignment:"
 msgstr "Στοίχιση δείκτη:"
 
-#: ../src/MadOptionsDialog.cpp:960 ../src/MadOptionsDialog.cpp:971
+#: ../src/MadOptionsDialog.cpp:963 ../src/MadOptionsDialog.cpp:974
 msgid "Type"
 msgstr "Είδος"
 
-#: ../src/MadOptionsDialog.cpp:961 ../src/MadOptionsDialog.cpp:972
+#: ../src/MadOptionsDialog.cpp:964 ../src/MadOptionsDialog.cpp:975
 msgid "Middle"
 msgstr "Μεσαίο"
 
-#: ../src/MadOptionsDialog.cpp:967
+#: ../src/MadOptionsDialog.cpp:970
 msgid "Reference alignment"
 msgstr "Στοίχιση της Αναφοράς"
 
-#: ../src/MadOptionsDialog.cpp:987
+#: ../src/MadOptionsDialog.cpp:990
 msgid "[%Y/%m/%d %I:%M:%S %p] 2007/02/24 08:30:55 AM"
 msgstr "[%Y/%m/%d %I:%M:%S %p] 2007/02/24 08:30:55 πμ"
 
-#: ../src/MadOptionsDialog.cpp:989
+#: ../src/MadOptionsDialog.cpp:992
 msgid "[%a, %d %b %Y %H:%M:%S %z] RFC822 timestamp"
 msgstr "[%a, %d %b %Y %H:%M:%S %z] RFC822 χρονοένδειξη"
 
-#: ../src/MadOptionsDialog.cpp:991
+#: ../src/MadOptionsDialog.cpp:994
 #, c-format
 msgid "[%a] Abbreviated weekday name"
 msgstr "[%a] Η συντομογραφία του ονόματος της ημέρας της εβδομάδας"
 
-#: ../src/MadOptionsDialog.cpp:992
+#: ../src/MadOptionsDialog.cpp:995
 #, c-format
 msgid "[%A] Full weekday name"
 msgstr "[%A] Το πλήρες όνομα της ημέρας της εβδομάδας"
 
-#: ../src/MadOptionsDialog.cpp:993
+#: ../src/MadOptionsDialog.cpp:996
 msgid "[%b] Abbreviated month name"
 msgstr "[%b] Η συντομογραφία του ονόματος του μήνα"
 
-#: ../src/MadOptionsDialog.cpp:994
+#: ../src/MadOptionsDialog.cpp:997
 msgid "[%B] Full month name"
 msgstr "[%B] Ολόκληρο το όνομα του μήνα"
 
-#: ../src/MadOptionsDialog.cpp:995
+#: ../src/MadOptionsDialog.cpp:998
 #, c-format
 msgid "[%c] Date and time representation appropriate for locale"
 msgstr ""
 "[%c] Αποτύπωση της ημερομηνίας και της ώρας, ανάλογη για την τοπικοποίηση"
 
-#: ../src/MadOptionsDialog.cpp:996
+#: ../src/MadOptionsDialog.cpp:999
 #, c-format
 msgid "[%d] Day of month as decimal number (01 - 31)"
 msgstr "[%d] Η ημέρα του μήνα, ως δεκαδικός αριθμός (01 - 31)"
 
-#: ../src/MadOptionsDialog.cpp:997
+#: ../src/MadOptionsDialog.cpp:1000
 msgid "[%H] Hour in 24-hour format (00 - 23)"
 msgstr "[%H] Η ώρα, σε 24ωρη μορφή (00 - 23)"
 
-#: ../src/MadOptionsDialog.cpp:998
+#: ../src/MadOptionsDialog.cpp:1001
 msgid "[%I] Hour in 12-hour format (01 - 12)"
 msgstr "[%I] Η ώρα σε 12ωρη μορφή (01 - 12)"
 
-#: ../src/MadOptionsDialog.cpp:999
+#: ../src/MadOptionsDialog.cpp:1002
 msgid "[%j] Day of year as decimal number (001 - 366)"
 msgstr "[%j] Η ημέρα του χρόνου, ως δεκαδικός αριθμός (001 - 366)"
 
-#: ../src/MadOptionsDialog.cpp:1000
+#: ../src/MadOptionsDialog.cpp:1003
 #, c-format
 msgid "[%m] Month as decimal number (01 - 12)"
 msgstr "[%m] Ο μήνας, ως δεκαδικός αριθμός (01 - 12)"
 
-#: ../src/MadOptionsDialog.cpp:1001
+#: ../src/MadOptionsDialog.cpp:1004
 msgid "[%M] Minute as decimal number (00 - 59)"
 msgstr "[%M] Το λεπτό, ως δεκαδικός αριθμός (00 - 59)"
 
-#: ../src/MadOptionsDialog.cpp:1002
+#: ../src/MadOptionsDialog.cpp:1005
 #, c-format
 msgid "[%p] Current locale's A.M./P.M. indicator for 12-hour clock"
 msgstr ""
 "[%p] Η ένδειξη «πμ» ή «μμ», της τωρινής τοπικοποίησης, για το 12ωρο ρολόι"
 
-#: ../src/MadOptionsDialog.cpp:1003
+#: ../src/MadOptionsDialog.cpp:1006
 #, c-format
 msgid "[%S] Second as decimal number (00 - 59)"
 msgstr "[%S] Το δευτερόλεπτο, ως δεκαδικός αριθμός (00 - 59)"
 
-#: ../src/MadOptionsDialog.cpp:1004
+#: ../src/MadOptionsDialog.cpp:1007
 msgid ""
 "[%U] Week of year as decimal number, with Sunday as first day of week (00 - "
 "53)"
@@ -3845,12 +3853,12 @@ msgstr ""
 "[%U] Εβδομάδα του χρόνου, ως  δεκαδικός αριθμός, με την Κυριακή σαν πρώτη "
 "ημέρα της εβδομάδας (00 - 53)"
 
-#: ../src/MadOptionsDialog.cpp:1005
+#: ../src/MadOptionsDialog.cpp:1008
 msgid "[%w] Weekday as decimal number (0 - 6; Sunday is 0)"
 msgstr ""
 "[%w] Ημέρα της εβδομάδας, ως δεκαδικός αριθμός (0 - 6; Η Κυριακή είναι 0)"
 
-#: ../src/MadOptionsDialog.cpp:1006
+#: ../src/MadOptionsDialog.cpp:1009
 msgid ""
 "[%W] Week of year as decimal number, with Monday as first day of week (00 - "
 "53)"
@@ -3858,74 +3866,74 @@ msgstr ""
 "[%W] Εβδομάδα του χρόνου, ως δεκαδικός αριθμός, με τη Δευτέρα σαν πρώτη "
 "ημέρα της εβδομάδας (00 - 53)"
 
-#: ../src/MadOptionsDialog.cpp:1007
+#: ../src/MadOptionsDialog.cpp:1010
 #, c-format
 msgid "[%x] Date representation for current locale"
 msgstr "[%x] Αποτύπωση της ημερομηνίας για την τωρινή τοπικοποίηση"
 
-#: ../src/MadOptionsDialog.cpp:1008
+#: ../src/MadOptionsDialog.cpp:1011
 #, c-format
 msgid "[%X] Time representation for current locale"
 msgstr "[%X] Αποτύπωση της ώρας για την τωρινή τοπικοποίηση"
 
-#: ../src/MadOptionsDialog.cpp:1009
+#: ../src/MadOptionsDialog.cpp:1012
 msgid "[%y] Year without century, as decimal number (00 - 99)"
 msgstr "[%y] Χρόνος, χωρίς αιώνα, ως δεκαδικός αριθμός (00 - 99)"
 
-#: ../src/MadOptionsDialog.cpp:1010
+#: ../src/MadOptionsDialog.cpp:1013
 msgid "[%Y] Year with century, as decimal number"
 msgstr "[%Y] Χρόνος, με αιώνα, ως δεκαδικός αριθμός"
 
-#: ../src/MadOptionsDialog.cpp:1011
+#: ../src/MadOptionsDialog.cpp:1014
 msgid "[%z] Time-zone name"
 msgstr "[%z] Το όνομα της ωρολογιακής ζώνης"
 
-#: ../src/MadOptionsDialog.cpp:1012
+#: ../src/MadOptionsDialog.cpp:1015
 msgid "[%Z] Time-zone abbreviation"
 msgstr "[%Z] Συντομογραφία της ωρολογιακής ζώνης"
 
-#: ../src/MadOptionsDialog.cpp:1014
+#: ../src/MadOptionsDialog.cpp:1017
 #, c-format
 msgid "[%f] &File Name"
 msgstr "[%f] Το Όν&ομα του Αρχείου"
 
-#: ../src/MadOptionsDialog.cpp:1015
+#: ../src/MadOptionsDialog.cpp:1018
 #, c-format
 msgid "[%p] &Path Name"
 msgstr "[%p] Το Όνομα της &Διαδρομής"
 
-#: ../src/MadOptionsDialog.cpp:1017
+#: ../src/MadOptionsDialog.cpp:1020
 #, c-format
 msgid "[%n] Page &Number"
 msgstr "[%n] Η Αρίθμηση της &Σελίδας"
 
-#: ../src/MadOptionsDialog.cpp:1018
+#: ../src/MadOptionsDialog.cpp:1021
 #, c-format
 msgid "[%s] Total Page&s"
 msgstr "[%s] Το Πλήθος των &Σελίδων"
 
-#: ../src/MadOptionsDialog.cpp:1020
+#: ../src/MadOptionsDialog.cpp:1023
 #, c-format
 msgid "[%d] &Date"
 msgstr "[%d] &Ημερομηνία"
 
-#: ../src/MadOptionsDialog.cpp:1021
+#: ../src/MadOptionsDialog.cpp:1024
 msgid "[%t] &Time"
 msgstr "[%t] &Χρόνος"
 
-#: ../src/MadOptionsDialog.cpp:1029
+#: ../src/MadOptionsDialog.cpp:1032
 msgid "XML version:"
 msgstr "Έκδοση της XML:"
 
-#: ../src/MadOptionsDialog.cpp:1036
+#: ../src/MadOptionsDialog.cpp:1039
 msgid "Indentation size(in spaces):"
 msgstr "Μέγεθος εσοχών (σε διαστήματα):"
 
-#: ../src/MadOptionsDialog.cpp:1046 ../src/MadOptionsDialog.cpp:1268
+#: ../src/MadOptionsDialog.cpp:1049 ../src/MadOptionsDialog.cpp:1271
 msgid "System Default"
 msgstr "Προεπιλογή του Συστήματος"
 
-#: ../src/MadOptionsDialog.cpp:1125
+#: ../src/MadOptionsDialog.cpp:1128
 msgid ""
 "Add MadEdit to the RightClickMenu of Explorer(Deselect to Remove the Entry "
 "from Windows Registry)"
@@ -3933,32 +3941,32 @@ msgstr ""
 "Προσθήκη του ΜαντΈντιτ στο RightClickMenu του Explorer (Αποεπέλεξε για να "
 "Απομακρυνθεί η Εισαγωγή Από το Registry των Windows)"
 
-#: ../src/MadOptionsDialog.cpp:1145
+#: ../src/MadOptionsDialog.cpp:1148
 msgid "Commands"
 msgstr "Εντολές"
 
-#: ../src/MadOptionsDialog.cpp:1146
+#: ../src/MadOptionsDialog.cpp:1149
 msgid "Menu"
 msgstr "Μενού"
 
-#: ../src/MadOptionsDialog.cpp:1521
+#: ../src/MadOptionsDialog.cpp:1526
 #, c-format
 msgid "Invalid value of \"%s(%s)\""
 msgstr "Μη έγκυρη τιμή του \"%s(%s)\""
 
-#: ../src/MadOptionsDialog.cpp:1566
+#: ../src/MadOptionsDialog.cpp:1571
 msgid ": Should be 10~30"
 msgstr ": Θα πρέπει να είναι 10~30"
 
-#: ../src/MadOptionsDialog.cpp:1632
+#: ../src/MadOptionsDialog.cpp:1637
 msgid "Cannot assign key to this item"
 msgstr "Αδυναμία ανάθεσης κλειδιού σε αυτό το αντικείμενο"
 
-#: ../src/MadOptionsDialog.cpp:1738
+#: ../src/MadOptionsDialog.cpp:1743
 msgid "This key is not assigned"
 msgstr "Αυτό το κλειδί δεν έχει ανατεθεί"
 
-#: ../src/MadOptionsDialog.cpp:1765
+#: ../src/MadOptionsDialog.cpp:1770
 #, c-format
 msgid "This key is assigned to [%s]"
 msgstr "Αυτό το κλειδί έχει ανατεθεί στο [%s]"
@@ -4070,8 +4078,9 @@ msgid "Sort Tab(&Path)"
 msgstr "Καρτέλα Ταξινόμησης (&Διαδρομή)"
 
 #: ../src/MadAboutDialog.cpp:38
+#, fuzzy
 msgid ""
-"Copyright (C) 2012-2016  Minggang Li <minggang.li@gmail.com>\n"
+"Copyright (C) 2012-2017  Minggang Li <minggang.li@gmail.com>\n"
 "\n"
 "    This program is free software: you can redistribute it and/or modify it "
 "under the terms of the GNU General Public License as published by the Free "

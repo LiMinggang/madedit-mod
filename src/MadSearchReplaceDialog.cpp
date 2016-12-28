@@ -1054,12 +1054,25 @@ void MadSearchReplaceDialog::WxButtonReplaceClick( wxCommandEvent& event )
 				if( bRegex ) bWholeWord = false;
 				else bDotMatchNewline = false;
 
-				ret = g_ActiveMadEdit->ReplaceText( text, reptext,
-													bRegex,
-													WxCheckBoxCaseSensitive->GetValue(),
-													bWholeWord,
-													bDotMatchNewline,
-													rangeFrom, rangeTo );
+				if(g_ActiveMadEdit->IsReplaceNoDoubleCheck())
+				{
+					ret = g_ActiveMadEdit->ReplaceTextNoDoubleCheck( text, reptext,
+																 bRegex,
+																 WxCheckBoxCaseSensitive->GetValue(),
+																 bWholeWord,
+																 bDotMatchNewline,
+																 rangeFrom, rangeTo );
+				}
+				else
+				{
+					ret = g_ActiveMadEdit->ReplaceText( text, reptext,
+														bRegex,
+														WxCheckBoxCaseSensitive->GetValue(),
+														bWholeWord,
+														bDotMatchNewline,
+														rangeFrom, rangeTo );
+				}
+
 
 				if( ( ret == RR_REP_NEXT || ret == RR_NREP_NEXT ) && ( IsMacroRecording() ) )
 				{

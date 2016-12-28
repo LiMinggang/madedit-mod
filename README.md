@@ -62,6 +62,7 @@ Current Feature list(comparing to the original Madedit@sourceforge)
 News
 =======
 Mod v0.4.6
+* This release is mainly for more encodings support, especially GB18030 and Regex bug fix
 * New: Spell check for SearchReplaceDialog would change according to active window
 * New: Ctrl+Shift+Wheel as shortcut for Page Up/Down
 * New: Indicator for zero length match in Regex search
@@ -73,6 +74,7 @@ Mod v0.4.6
 * New: Mark unsupported unicode char with {}
 * Fix: Toolbar issue
 * Fix: Regex search bug #224
+* Fix: Regular expression (?<=.)\s(?=.) replacement issue #119
 * Fix: Caret position is not updated if close search dialog by click 'X' instead of close button
 * Fix: Disable Find Previous in Regex search
 * Fix: Add ResetToolBarsInfoWin to All above in PurgeHisoryDialog

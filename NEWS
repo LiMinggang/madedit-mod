@@ -1,4 +1,5 @@
 Mod v0.4.6
+This release is mainly for more encodings support, especially GB18030 and Regex bug fix
 1.New: Spell check for SearchReplaceDialog would change according to active window
 2.New: Ctrl+Shift+Wheel as shortcut for Page Up/Down
 3.New: Indicator for zero length match in Regex search
@@ -10,11 +11,12 @@ Mod v0.4.6
 9.New: Mark unsupported unicode char with {}
 10.Fix: Toolbar issue
 11.Fix: Regex search bug #224
-12.Fix: Caret position is not updated if close search dialog by click 'X' instead of close button
-13.Fix: Disable Find Previous in Regex search
-14.Fix: Add ResetToolBarsInfoWin to All above in PurgeHisoryDialog
-15.Fix: Not stay in current line when switch between modes #226
-16.Fix: Adjust encoding group according to MSDN
-17.Fix: Adjust toolbar position #225
-18.Update Simplified Chinese translation
-19.Update boost to 1.62
+12.Fix: Regular expression (?<=.)\s(?=.) replacement issue #119
+13.Fix: Caret position is not updated if close search dialog by click 'X' instead of close button
+14.Fix: Disable Find Previous in Regex search
+15.Fix: Add ResetToolBarsInfoWin to All above in PurgeHisoryDialog
+16.Fix: Not stay in current line when switch between modes #226
+17.Fix: Adjust encoding group according to MSDN
+18.Fix: Adjust toolbar position #225
+19.Update Simplified Chinese translation
+20.Update boost to 1.62
