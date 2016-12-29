@@ -8193,8 +8193,6 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		m_Config->Write( wxT( "add_brackets" ), bb );
 		bb = g_OptionsDialog->WxCheckAddOneLineBrackets->GetValue();
 		m_Config->Write( wxT( "add_one_line_brackets" ), bb );
-		bb = g_OptionsDialog->WxCheckKeepComplex->GetValue();
-		m_Config->Write( wxT( "keep_complex" ), bb );
 		bb = g_OptionsDialog->WxCheckRemoveBrackets->GetValue();
 		m_Config->Write( wxT( "remove_brackets" ), bb );
 		bb = g_OptionsDialog->WxCheckKeepBlocks->GetValue();

@@ -162,7 +162,6 @@ public:
 		wxCheckBox *WxCheckRemoveCommentPrefix;
 		wxCheckBox *WxCheckCloseTemplates;
 		wxCheckBox *WxCheckConvertTabs;
-		wxCheckBox *WxCheckKeepComplex;
 		wxCheckBox *WxCheckKeepBlocks;
 		wxCheckBox *WxCheckRemoveBrackets;
 		wxCheckBox *WxCheckAddOneLineBrackets;
@@ -428,7 +427,6 @@ public:
 			ID_WXCHECKREMOVECOMMENTPREFIX = 1337,
 			ID_WXCHECKCLOSETEMPLATES = 1335,
 			ID_WXCHECKCONVERTTABS = 1334,
-			ID_WXCHECKKEEPCOMPLEX = 1333,
 			ID_WXCHECKKEEPBLOCKS = 1332,
 			ID_WXCHECKBOX17 = 1331,
 			ID_WXCHECKADDONELINEBRACKETS = 1330,

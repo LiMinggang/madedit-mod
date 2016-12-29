@@ -124,7 +124,6 @@ void FormatterSettings::ApplyTo(astyle::ASFormatter& formatter)
   formatter.setBreakElseIfsMode(cfg->ReadBool(wxT("break_elseifs"), true));
   formatter.setAddBracketsMode(cfg->ReadBool(wxT("add_brackets"), false));
   formatter.setAddOneLineBracketsMode(cfg->ReadBool(wxT("add_one_line_brackets"), true));
-  formatter.setSingleStatementsMode(!cfg->ReadBool(wxT("keep_complex"), true));
   formatter.setRemoveBracketsMode(cfg->ReadBool(wxT("remove_brackets"), false));
   formatter.setBreakOneLineBlocksMode(!cfg->ReadBool(wxT("keep_blocks"), true));
   formatter.setTabSpaceConversionMode(cfg->ReadBool(wxT("convert_tabs"), true));
