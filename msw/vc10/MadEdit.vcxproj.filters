@@ -40,6 +40,9 @@
     <Filter Include="Header Files\charset-detector">
       <UniqueIdentifier>{d9ec83c7-03b0-4136-817c-e27fa6bb81b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Astyle">
+      <UniqueIdentifier>{60924d98-d272-4fe0-aa48-4a9416d4e0fe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\EmbeddedPython.cpp">
@@ -434,18 +437,6 @@
     <ClInclude Include="..\..\markdown\markdown-tokens.h">
       <Filter>Source Files\MarkDown</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\astyle\asstreamiterator.h">
-      <Filter>Source Files\Astyle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\astyle\astylepredefinedstyles.h">
-      <Filter>Source Files\Astyle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\astyle\formattersettings.h">
-      <Filter>Source Files\Astyle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\astyle\astyle\astyle.h">
-      <Filter>Source Files\Astyle</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\MadSearchReplaceDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -532,6 +523,84 @@
     </ClInclude>
     <ClInclude Include="..\..\charset-detector\src\uchardet.h">
       <Filter>Header Files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\CharDistribution.h">
+      <Filter>Header Files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\JpCntx.h">
+      <Filter>Header Files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsBig5Prober.h">
+      <Filter>Header Files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsCharSetProber.h">
+      <Filter>Header Files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsCodingStateMachine.h">
+      <Filter>Header Files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nscore.h">
+      <Filter>Header Files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsEscCharsetProber.h">
+      <Filter>Header Files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsEUCJPProber.h">
+      <Filter>Header Files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsEUCKRProber.h">
+      <Filter>Header Files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsEUCTWProber.h">
+      <Filter>Header Files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsGB2312Prober.h">
+      <Filter>Header Files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsHebrewProber.h">
+      <Filter>Header Files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsLatin1Prober.h">
+      <Filter>Header Files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsMBCSGroupProber.h">
+      <Filter>Header Files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsPkgInt.h">
+      <Filter>Header Files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsSBCharSetProber.h">
+      <Filter>Header Files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsSBCSGroupProber.h">
+      <Filter>Header Files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsSJISProber.h">
+      <Filter>Header Files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsUniversalDetector.h">
+      <Filter>Header Files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsUTF8Prober.h">
+      <Filter>Header Files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\prmem.h">
+      <Filter>Header Files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\astyle\asstreamiterator.h">
+      <Filter>Header Files\Astyle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\astyle\astylepredefinedstyles.h">
+      <Filter>Header Files\Astyle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\astyle\formattersettings.h">
+      <Filter>Header Files\Astyle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\astyle\astyle\ASLocalizer.h">
+      <Filter>Header Files\Astyle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\astyle\astyle\astyle.h">
+      <Filter>Header Files\Astyle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

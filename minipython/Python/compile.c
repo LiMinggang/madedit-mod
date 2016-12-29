@@ -1889,7 +1889,7 @@ compiler_import_as(struct compiler *c, identifier name, identifier asname)
             attr = PyString_FromStringAndSize(src,
                                 dot ? dot - src : strlen(src));
             if (!attr)
-                return -1;
+                return 0;
             ADDOP_O(c, LOAD_ATTR, attr, names);
             Py_DECREF(attr);
             src = dot + 1;
@@ -3147,7 +3147,7 @@ compiler_push_fblock(struct compiler *c, enum fblocktype t, basicblock *b)
 {
     struct fblockinfo *f;
     if (c->u->u_nfblocks >= CO_MAXBLOCKS) {
-        PyErr_SetString(PyExc_SystemError,
+        PyErr_SetString(PyExc_SyntaxError,
                         "too many statically nested blocks");
         return 0;
     }

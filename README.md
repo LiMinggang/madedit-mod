@@ -85,8 +85,10 @@ This release is mainly for more encodings support, especially GB18030 and Regex 
 * Fix: UI issue of Source formatter tab in Option dialog
 * Update Simplified Chinese translation
 * Update boost to 1.62
-* Update chardetector to latest uchardet
+* Update chardetector to latest uchardet v0.0.6
 * Update Hunspell to 1.6
+* Update Python to 2.7.13
+* Other minor improvements
 
 Todo:
 =====

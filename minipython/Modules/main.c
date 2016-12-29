@@ -27,7 +27,7 @@
 
 #include "pygetopt.h"
 
-#define COPYRIGHT  "A Mini Python for embed to C++, Base on 2.7.10 [www.adintr.com]"
+#define COPYRIGHT  "A Mini Python for embed to C++, Base on 2.7.13 [www.adintr.com]"
 
 #ifdef __cplusplus
 extern "C" {
@@ -151,15 +151,15 @@ static void RunStartupFile(PyCompilerFlags *cf)
             (void) PyRun_SimpleFileExFlags(fp, startup, 0, cf);
             PyErr_Clear();
             fclose(fp);
-           } else {
-                    int save_errno;
-                    save_errno = errno;
-                    PySys_WriteStderr("Could not open PYTHONSTARTUP\n");
-                    errno = save_errno;
-                    PyErr_SetFromErrnoWithFilename(PyExc_IOError,
-                                                   startup);
-                    PyErr_Print();
-                    PyErr_Clear();
+        } else {
+            int save_errno;
+            save_errno = errno;
+            PySys_WriteStderr("Could not open PYTHONSTARTUP\n");
+            errno = save_errno;
+            PyErr_SetFromErrnoWithFilename(PyExc_IOError,
+                                           startup);
+            PyErr_Print();
+            PyErr_Clear();
         }
     }
 }
@@ -354,7 +354,7 @@ Py_Main(int argc, char **argv)
             break;
 
         case 'E':
-            Py_IgnoreEnvironmentFlag++;
+            /* Already handled above */
             break;
 
         case 't':

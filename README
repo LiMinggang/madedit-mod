@@ -146,8 +146,10 @@ This release is mainly for more encodings support, especially GB18030 and Regex 
 19.Fix: UI issue of Source formatter tab in Option dialog
 20.Update Simplified Chinese translation
 21.Update boost to 1.62
-22.Update chardetector to latest uchardet
+22.Update chardetector to latest uchardet v0.0.6
 23.Update Hunspell to 1.6
+24.Update Python to 2.7.13
+25.Other minor improvements
 
 Mod v0.4.5
 1.New: File history dialog
