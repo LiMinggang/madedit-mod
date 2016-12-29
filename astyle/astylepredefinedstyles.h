@@ -20,6 +20,7 @@ enum AStylePredefinedStyle
   aspsHorstmann,
   asps1TBS,
   aspsGoogle,
+  aspsMozilla,
   aspsPico,
   aspsLisp,
   aspsCustom

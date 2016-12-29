@@ -58,6 +58,7 @@ static wxString bracket_style[aspsCustom + 1] =
 	wxT( "#include <iostream>\n\nint Foo(bool isBar)\n{  if (isBar)\n   {  bar();\n      return 1;\n   }\n   else\n      return 0;\n}\n" ),
 	wxT( "#include <iostream>\n\nint Foo(bool isBar)\n{\n    if (isFoo) {\n        bar();\n        return 1;\n    } else {\n        return 0;\n    }\n}\n" ),
 	wxT( "#include <iostream>\n\nint Foo(bool isBar) {\n    if (isBar) {\n        bar();\n        return 1;\n    }\n    else\n        return 0;\n}\n" ),
+	wxT( "#include <iostream>\n\nint Foo( bool isBar )\n{\n    if( isBar ) {\n        bar();\n        return 1;\n    }\n    else\n    { return 0; }\n}\n" ),
 	wxT( "#include <iostream>\n\nint Foo(bool isBar)\n{  if (isBar)\n   {  bar();\n      return 1; }\n    else\n      return 0; }\n" ),
 	wxT( "#include <iostream>\n\nint Foo(bool isBar) {\n    if (isBar) {\n        bar()\n        return 1; }\n    else\n        return 0; }\n" ),
 	wxT( "#include <iostream>\n\nint Foo(bool isBar) {\n    if (isBar) {\n        bar()\n        return 1; }\n    else\n        return 0; }\n" ),
@@ -679,6 +680,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	arrayStringFor_WxRadioBoxBracketStyle.Add( wxT( "Horstmann" ) );
 	arrayStringFor_WxRadioBoxBracketStyle.Add( wxT( "1TBS" ) );
 	arrayStringFor_WxRadioBoxBracketStyle.Add( wxT( "Google" ) );
+	arrayStringFor_WxRadioBoxBracketStyle.Add( wxT( "Mozilla" ) );
 	arrayStringFor_WxRadioBoxBracketStyle.Add( wxT( "Pico" ) );
 	arrayStringFor_WxRadioBoxBracketStyle.Add( wxT( "Lisp" ) );
 	arrayStringFor_WxRadioBoxBracketStyle.Add( wxT( "Custom" ) );
@@ -1984,6 +1986,7 @@ void MadOptionsDialog::OnRadioBoxBracketStyleClick( wxCommandEvent& event )
 	case aspsHorstmann: // Horstmann
 	case asps1TBS: // 1TBS
 	case aspsGoogle: // Google
+	case aspsMozilla: // Mozilla
 	case aspsPico: // Pico
 	case aspsLisp: // Lisp
 #ifndef MADEDIT_ENABLE_MADEDIT
