@@ -22,13 +22,13 @@
 #include <string>
 #include <vector>
 
+#ifdef __GNUC__
+	#include <cstring>              // need both string and cstring for GCC
+#endif
+
 //-----------------------------------------------------------------------------
 // declarations
 //-----------------------------------------------------------------------------
-
-#ifdef __GNUC__
-	#include <string.h>             // need both string and string.h for GCC
-#endif
 
 #ifdef _MSC_VER
 	#pragma warning(disable: 4267)  // conversion from size_t to int
@@ -79,6 +79,7 @@ enum FormatStyle
 	STYLE_HORSTMANN,
 	STYLE_1TBS,
 	STYLE_GOOGLE,
+	STYLE_MOZILLA,
 	STYLE_PICO,
 	STYLE_LISP
 };
@@ -89,25 +90,27 @@ enum BracketMode
 	ATTACH_MODE,
 	BREAK_MODE,
 	LINUX_MODE,
-	STROUSTRUP_MODE,
-	RUN_IN_MODE
+	RUN_IN_MODE		// broken brackets
 };
 
+// maximun value for int is 16,384 (total value of 32,767)
 enum BracketType
 {
-	NULL_TYPE = 0,
-	NAMESPACE_TYPE = 1,			// also a DEFINITION_TYPE
-	CLASS_TYPE = 2,				// also a DEFINITION_TYPE
-	STRUCT_TYPE = 4,			// also a DEFINITION_TYPE
-	INTERFACE_TYPE = 8,			// also a DEFINITION_TYPE
-	DEFINITION_TYPE = 16,
-	COMMAND_TYPE = 32,
-	ARRAY_NIS_TYPE = 64,		// also an ARRAY_TYPE
-	ENUM_TYPE = 128,			// also an ARRAY_TYPE
-	INIT_TYPE = 256,			// also an ARRAY_TYPE
-	ARRAY_TYPE = 512,
-	EXTERN_TYPE = 1024,			// extern "C", not a command type extern
-	SINGLE_LINE_TYPE = 2048
+	NULL_TYPE        = 0,
+	NAMESPACE_TYPE   = 1,		// also a DEFINITION_TYPE
+	CLASS_TYPE       = 2,		// also a DEFINITION_TYPE
+	STRUCT_TYPE      = 4,		// also a DEFINITION_TYPE
+	INTERFACE_TYPE   = 8,		// also a DEFINITION_TYPE
+	DEFINITION_TYPE  = 16,
+	COMMAND_TYPE     = 32,
+	ARRAY_NIS_TYPE   = 64,		// also an ARRAY_TYPE
+	ENUM_TYPE        = 128,		// also an ARRAY_TYPE
+	INIT_TYPE        = 256,		// also an ARRAY_TYPE
+	ARRAY_TYPE       = 512,
+	EXTERN_TYPE      = 1024,	// extern "C", not a command type extern
+	EMPTY_BLOCK_TYPE = 2048,	// also a SINGLE_LINE_TYPE
+	BREAK_BLOCK_TYPE = 4096,	// also a SINGLE_LINE_TYPE
+	SINGLE_LINE_TYPE = 8192
 };
 
 enum MinConditional
@@ -138,10 +141,10 @@ enum PointerAlign
 
 enum ReferenceAlign
 {
-	REF_ALIGN_NONE = PTR_ALIGN_NONE,
-	REF_ALIGN_TYPE = PTR_ALIGN_TYPE,
+	REF_ALIGN_NONE   = PTR_ALIGN_NONE,
+	REF_ALIGN_TYPE   = PTR_ALIGN_TYPE,
 	REF_ALIGN_MIDDLE = PTR_ALIGN_MIDDLE,
-	REF_ALIGN_NAME = PTR_ALIGN_NAME,
+	REF_ALIGN_NAME   = PTR_ALIGN_NAME,
 	REF_SAME_AS_PTR
 };
 
@@ -216,10 +219,11 @@ public:
 	static const string _AS_TRY, _AS_FINALLY, _AS_EXCEPT;
 	static const string AS_PUBLIC, AS_PROTECTED, AS_PRIVATE;
 	static const string AS_CLASS, AS_STRUCT, AS_UNION, AS_INTERFACE, AS_NAMESPACE;
+	static const string AS_MODULE;
 	static const string AS_END;
 	static const string AS_SELECTOR;
 	static const string AS_EXTERN, AS_ENUM;
-	static const string AS_STATIC, AS_CONST, AS_SEALED, AS_OVERRIDE, AS_VOLATILE, AS_NEW;
+	static const string AS_STATIC, AS_CONST, AS_SEALED, AS_OVERRIDE, AS_VOLATILE, AS_NEW, AS_DELETE;
 	static const string AS_NOEXCEPT, AS_INTERRUPT, AS_AUTORELEASEPOOL;
 	static const string AS_WHERE, AS_LET, AS_SYNCHRONIZED;
 	static const string AS_OPERATOR, AS_TEMPLATE;
@@ -232,8 +236,8 @@ public:
 	static const string AS_DIV_ASSIGN, AS_MOD_ASSIGN, AS_XOR_ASSIGN, AS_OR_ASSIGN, AS_AND_ASSIGN;
 	static const string AS_GR_GR_ASSIGN, AS_LS_LS_ASSIGN, AS_GR_GR_GR_ASSIGN, AS_LS_LS_LS_ASSIGN;
 	static const string AS_GCC_MIN_ASSIGN, AS_GCC_MAX_ASSIGN;
-	static const string AS_EQUAL, AS_PLUS_PLUS, AS_MINUS_MINUS, AS_NOT_EQUAL, AS_GR_EQUAL, AS_GR_GR_GR, AS_GR_GR;
-	static const string AS_LS_EQUAL, AS_LS_LS_LS, AS_LS_LS;
+	static const string AS_EQUAL, AS_PLUS_PLUS, AS_MINUS_MINUS, AS_NOT_EQUAL, AS_GR_EQUAL;
+	static const string AS_LS_EQUAL, AS_LS_LS_LS, AS_LS_LS, AS_GR_GR_GR, AS_GR_GR;
 	static const string AS_QUESTION_QUESTION, AS_LAMBDA;
 	static const string AS_ARROW, AS_AND, AS_OR;
 	static const string AS_SCOPE_RESOLUTION;
@@ -292,9 +296,10 @@ public:
 	ASBeautifier();
 	virtual ~ASBeautifier();
 	virtual void init(ASSourceIterator* iter);
-	virtual string beautify(const string& line);
+	virtual string beautify(const string& originalLine);
 	void setCaseIndent(bool state);
 	void setClassIndent(bool state);
+	void setContinuationIndentation(int indent = 1);
 	void setCStyle();
 	void setDefaultTabLength();
 	void setEmptyLineFill(bool state);
@@ -316,22 +321,22 @@ public:
 	void setPreprocConditionalIndent(bool state);
 	int  getBeautifierFileType() const;
 	int  getFileType() const;
-	int  getIndentLength(void) const;
-	int  getTabLength(void) const;
-	string getIndentString(void) const;
+	int  getIndentLength() const;
+	int  getTabLength() const;
+	string getIndentString() const;
 	string getNextWord(const string& line, size_t currPos) const;
-	bool getAlignMethodColon(void) const;
-	bool getBracketIndent(void) const;
-	bool getBlockIndent(void) const;
-	bool getCaseIndent(void) const;
-	bool getClassIndent(void) const;
-	bool getEmptyLineFill(void) const;
-	bool getForceTabIndentation(void) const;
-	bool getModeManuallySet(void) const;
-	bool getModifierIndent(void) const;
-	bool getNamespaceIndent(void) const;
-	bool getPreprocDefineIndent(void) const;
-	bool getSwitchIndent(void) const;
+	bool getAlignMethodColon() const;
+	bool getBracketIndent() const;
+	bool getBlockIndent() const;
+	bool getCaseIndent() const;
+	bool getClassIndent() const;
+	bool getEmptyLineFill() const;
+	bool getForceTabIndentation() const;
+	bool getModeManuallySet() const;
+	bool getModifierIndent() const;
+	bool getNamespaceIndent() const;
+	bool getPreprocDefineIndent() const;
+	bool getSwitchIndent() const;
 
 protected:
 	void deleteBeautifierVectors();
@@ -365,15 +370,17 @@ protected:
 	bool isInIndentablePreproc;
 
 private:  // functions
-	ASBeautifier(const ASBeautifier& copy);     // inline functions
+	ASBeautifier(const ASBeautifier& other);     // inline functions
 	ASBeautifier& operator=(ASBeautifier&);     // not to be implemented
 
+	void adjustObjCMethodDefinitionIndentation(const string& line_);
+	void adjustObjCMethodCallIndentation(const string& line_);
 	void adjustParsedLineIndentation(size_t iPrelim, bool isInExtraHeaderIndent);
 	void computePreliminaryIndentation();
 	void parseCurrentLine(const string& line);
 	void popLastInStatementIndent();
 	void processPreprocessor(const string& preproc, const string& line);
-	void registerInStatementIndent(const string& line, int i, int spaceIndentCount,
+	void registerInStatementIndent(const string& line, int i, int spaceIndentCount_,
 	                               int tabIncrementIn, int minIndent, bool updateParenStack);
 	void registerInStatementIndentColon(const string& line, int i, int tabIncrementIn);
 	void initVectors();
@@ -383,16 +390,18 @@ private:  // functions
 	void deleteBeautifierContainer(vector<ASBeautifier*>*& container);
 	void deleteTempStacksContainer(vector<vector<const string*>*>*& container);
 	int  adjustIndentCountForBreakElseIfComments() const;
-	int  computeObjCColonAlignment(string& line, int colonAlignPosition) const;
+	int  computeObjCColonAlignment(const string& line, int colonAlignPosition) const;
 	int  convertTabToSpaces(int i, int tabIncrementIn) const;
 	int  getInStatementIndentAssign(const string& line, size_t currPos) const;
 	int  getInStatementIndentComma(const string& line, size_t currPos) const;
+	int  getObjCFollowingKeyword(const string& line, int BracketPos) const;
 	bool isIndentedPreprocessor(const string& line, size_t currPos) const;
 	bool isLineEndComment(const string& line, int startPos) const;
 	bool isPreprocessorConditionalCplusplus(const string& line) const;
 	bool isInPreprocessorUnterminatedComment(const string& line);
 	bool statementEndsWithComma(const string& line, int index) const;
 	string& getIndentedLineReturn(string& newLine, const string& originalLine) const;
+	string getIndentedSpaceEquivalent(const string& line_) const;
 	string preLineWS(int lineIndentCount, int lineSpaceIndentCount) const;
 	template<typename T> void deleteContainer(T& container);
 	template<typename T> void initContainer(T& container, T value);
@@ -454,7 +463,10 @@ private:  // variables
 	bool isInClassInitializer;		// is in a class after the ':' initializer
 	bool isInClass;					// is in a class after the opening bracket
 	bool isInObjCMethodDefinition;
+	bool isInObjCMethodCall;
+	bool isInObjCMethodCallFirst;
 	bool isImmediatelyPostObjCMethodDefinition;
+	bool isImmediatelyPostObjCMethodCall;
 	bool isInIndentablePreprocBlock;
 	bool isInObjCInterface;
 	bool isInEnum;
@@ -493,8 +505,9 @@ private:  // variables
 	bool shouldIndentPreprocConditional;
 	int  indentCount;
 	int  spaceIndentCount;
-	int  spaceIndentObjCMethodDefinition;
-	int  colonIndentObjCMethodDefinition;
+	int  spaceIndentObjCMethodAlignment;
+	int  bracketPosObjCMethodAlignment;
+	int  colonIndentObjCMethodAlignment;
 	int  lineOpeningBlocksNum;
 	int  lineClosingBlocksNum;
 	int  fileType;
@@ -503,11 +516,12 @@ private:  // variables
 	int  parenDepth;
 	int  indentLength;
 	int  tabLength;
+	int  continuationIndent;
 	int  blockTabCount;
 	int  maxInStatementIndent;
 	int  classInitializerIndents;
 	int  templateDepth;
-	int  squareBracketCount;
+	int  blockParenCount;
 	int  prevFinalLineSpaceIndentCount;
 	int  prevFinalLineIndentCount;
 	int  defineIndentCount;
@@ -539,7 +553,7 @@ private:  // functions
 	int     indentLine(string&  line, int indent) const;
 	bool    isBeginDeclareSectionSQL(string&  line, size_t index) const;
 	bool    isEndDeclareSectionSQL(string&  line, size_t index) const;
-	bool    isOneLineBlockReached(string& line, int startChar) const;
+	bool    isOneLineBlockReached(const string& line, int startChar) const;
 	void    parseCurrentLine(string& line, bool isInPreprocessor, bool isInSQL);
 	size_t  processSwitchBlock(string&  line, size_t index);
 	int     unindentLine(string&  line, int unindent) const;
@@ -573,15 +587,15 @@ private:
 
 	// struct used by ParseFormattedLine function
 	// contains variables used to unindent the case blocks
-	struct switchVariables
+	struct SwitchVariables
 	{
 		int  switchBracketCount;
 		int  unindentDepth;
 		bool unindentCase;
 	};
 
-	switchVariables sw;                      // switch variables struct
-	vector<switchVariables> switchStack;     // stack vector of switch variables
+	SwitchVariables sw;                      // switch variables struct
+	vector<SwitchVariables> switchStack;     // stack vector of switch variables
 
 	// event table variables
 	bool nextLineIsEventIndent;             // begin event table indent is reached
@@ -603,7 +617,7 @@ class ASFormatter : public ASBeautifier
 public:	// functions
 	ASFormatter();
 	virtual ~ASFormatter();
-	virtual void init(ASSourceIterator* iter);
+	virtual void init(ASSourceIterator* si);
 	virtual bool hasMoreLines() const;
 	virtual string nextLine();
 	LineEndFormat getLineEndFormat() const;
@@ -623,10 +637,14 @@ public:	// functions
 	void setBreakClosingHeaderBlocksMode(bool state);
 	void setBreakElseIfsMode(bool state);
 	void setBreakOneLineBlocksMode(bool state);
+	void setBreakOneLineHeadersMode(bool state);
+	void setBreakOneLineStatementsMode(bool state);
 	void setMethodPrefixPaddingMode(bool state);
 	void setMethodPrefixUnPaddingMode(bool state);
 	void setReturnTypePaddingMode(bool state);
 	void setReturnTypeUnPaddingMode(bool state);
+	void setParamTypePaddingMode(bool state);
+	void setParamTypeUnPaddingMode(bool state);
 	void setCloseTemplatesMode(bool state);
 	void setCommaPaddingMode(bool state);
 	void setDeleteEmptyLinesMode(bool state);
@@ -634,16 +652,15 @@ public:	// functions
 	void setLineEndFormat(LineEndFormat fmt);
 	void setMaxCodeLength(int max);
 	void setObjCColonPaddingMode(ObjCColonPad mode);
-	void setOperatorPaddingMode(bool mode);
-	void setParensOutsidePaddingMode(bool mode);
-	void setParensFirstPaddingMode(bool mode);
-	void setParensInsidePaddingMode(bool mode);
-	void setParensHeaderPaddingMode(bool mode);
+	void setOperatorPaddingMode(bool state);
+	void setParensOutsidePaddingMode(bool state);
+	void setParensFirstPaddingMode(bool state);
+	void setParensInsidePaddingMode(bool state);
+	void setParensHeaderPaddingMode(bool state);
 	void setParensUnPaddingMode(bool state);
 	void setPointerAlignment(PointerAlign alignment);
 	void setPreprocBlockIndent(bool state);
 	void setReferenceAlignment(ReferenceAlign alignment);
-	void setSingleStatementsMode(bool state);
 	void setStripCommentPrefix(bool state);
 	void setTabSpaceConversionMode(bool state);
 	size_t getChecksumIn() const;
@@ -679,6 +696,7 @@ private:  // functions
 	bool isExecSQL(string& line, size_t index) const;
 	bool isEmptyLine(const string& line) const;
 	bool isExternC() const;
+	bool isMultiStatementLine() const;
 	bool isNextWordSharpNonParenHeader(int startChar) const;
 	bool isNonInStatementArrayBracket() const;
 	bool isOkToSplitFormattedLine();
@@ -688,7 +706,7 @@ private:  // functions
 	bool isSharpStyleWithParen(const string* header) const;
 	bool isStructAccessModified(string& firstLine, size_t index) const;
 	bool isIndentablePreprocessorBlock(string& firstLine, size_t index);
-	bool isNDefPreprocStatement(string& firstLine, string& preproc) const;
+	bool isNDefPreprocStatement(string& nextLine_, string& preproc) const;
 	bool isUnaryOperator() const;
 	bool isUniformInitializerBracket() const;
 	bool isImmediatelyPostCast() const;
@@ -701,7 +719,7 @@ private:  // functions
 	int  findObjCColonAlignment() const;
 	int  getCurrentLineCommentAdjustment();
 	int  getNextLineCommentAdjustment();
-	int  isOneLineBlockReached(string& line, int startChar) const;
+	int  isOneLineBlockReached(const string& line, int startChar) const;
 	void adjustComments();
 	void appendChar(char ch, bool canBreakLine);
 	void appendCharInsideComments();
@@ -740,9 +758,11 @@ private:  // functions
 	void initContainer(vector<BracketType>*& container, vector<BracketType>* value);
 	void initNewLine();
 	void padObjCMethodColon();
+	void padObjCMethodPrefix();
+	void padObjCParamType();
+	void padObjCReturnType();
 	void padOperators(const string* newOperator);
 	void padParens();
-	void padParenObjC(void);
 	void processPreprocessor();
 	void resetEndOfStatement();
 	void setAttachClosingBracketMode(bool state);
@@ -797,7 +817,7 @@ private:  // variables
 	int  spacePadNum;
 	int  tabIncrementIn;
 	int  templateDepth;
-	int  squareBracketCount;
+	int  blockParenCount;
 	size_t checksumIn;
 	size_t checksumOut;
 	size_t currentLineFirstBracketNum;	// first bracket location on currentLine
@@ -826,6 +846,7 @@ private:  // variables
 	ObjCColonPad objCColonPadMode;
 	LineEndFormat lineEnd;
 	bool isVirgin;
+	bool isInVirginLine;
 	bool shouldPadCommas;
 	bool shouldPadOperators;
 	bool shouldPadParensOutside;
@@ -896,6 +917,7 @@ private:  // variables
 	bool isCharImmediatelyPostTemplate;
 	bool isCharImmediatelyPostReturn;
 	bool isCharImmediatelyPostThrow;
+	bool isCharImmediatelyPostNewDelete;
 	bool isCharImmediatelyPostOperator;
 	bool isCharImmediatelyPostPointerOrReference;
 	bool isInObjCMethodDefinition;
@@ -904,11 +926,11 @@ private:  // variables
 	bool isInObjCSelector;
 	bool breakCurrentOneLineBlock;
 	bool shouldRemoveNextClosingBracket;
-	bool isInHorstmannRunIn;
+	bool isInBracketRunIn;
 	bool currentLineBeginsWithBracket;
 	bool attachClosingBracketMode;
 	bool shouldBreakOneLineBlocks;
-	bool shouldReparseCurrentChar;
+	bool shouldBreakOneLineHeaders;
 	bool shouldBreakOneLineStatements;
 	bool shouldBreakClosingHeaderBrackets;
 	bool shouldBreakElseIfs;
@@ -918,9 +940,12 @@ private:  // variables
 	bool shouldRemoveBrackets;
 	bool shouldPadMethodColon;
 	bool shouldPadMethodPrefix;
+	bool shouldReparseCurrentChar;
 	bool shouldUnPadMethodPrefix;
 	bool shouldPadReturnType;
 	bool shouldUnPadReturnType;
+	bool shouldPadParamType;
+	bool shouldUnPadParamType;
 	bool shouldDeleteEmptyLines;
 	bool needHeaderOpeningBracket;
 	bool shouldBreakLineAtNextChar;
@@ -936,6 +961,7 @@ private:  // variables
 	bool isImmediatelyPostPreprocessor;
 	bool isImmediatelyPostReturn;
 	bool isImmediatelyPostThrow;
+	bool isImmediatelyPostNewDelete;
 	bool isImmediatelyPostOperator;
 	bool isImmediatelyPostTemplate;
 	bool isImmediatelyPostPointerOrReference;

@@ -391,7 +391,7 @@ bool ASEnhancer::isEndDeclareSectionSQL(string& line, size_t index) const
  * @return     false = one-line bracket has not been reached.
  *             true  = one-line bracket has been reached.
  */
-bool ASEnhancer::isOneLineBlockReached(string& line, int startChar) const
+bool ASEnhancer::isOneLineBlockReached(const string& line, int startChar) const
 {
 	assert(line[startChar] == '{');
 

@@ -3,8 +3,8 @@
 // This code is licensed under the MIT License.
 // License.txt describes the conditions under which this software may be distributed.
 //
-// File encoding for this file is UTF-8 WITHOUT a byte order mark(BOM).
-//  русский    中文（简体）    日本語    한국의
+// File encoding for this file is UTF-8 WITHOUT a byte order mark (BOM).
+//    русский     中文（简体）    日本語     한국의
 //
 // Windows:
 // Add the required "Language" to the system.
@@ -13,7 +13,7 @@
 // Change both the "Format" and the "Current Language..." settings.
 // A restart is required if the codepage has changed.
 //		Windows problems:
-//		Hindi    -no available locale, language pack removed
+//		Hindi    - no available locale, language pack removed
 //		Japanese - language pack install error
 //		Ukranian - displays a ? instead of i
 //
@@ -58,8 +58,8 @@
 
 #include <cstdio>
 #include <iostream>
-#include <locale.h>		// needed by some compilers
-#include <stdlib.h>
+#include <clocale>		// needed by some compilers
+#include <cstdlib>
 #include <typeinfo>
 
 #ifdef _MSC_VER
@@ -225,16 +225,14 @@ void ASLocalizer::setLanguageFromName(const char* langID)
 //      de_DE.iso88591@euro
 {
 	// the constants describing the format of lang_LANG locale string
-	static const size_t LEN_LANG = 2;
-
 	m_lcid = 0;
 	string langStr = langID;
-	m_langID = langStr.substr(0, LEN_LANG);
+	m_langID = langStr.substr(0, 2);
 
 	// need the sublang for chinese
-	if (m_langID == "zh" && langStr[LEN_LANG] == '_')
+	if (m_langID == "zh" && langStr[2] == '_')
 	{
-		string subLang = langStr.substr(LEN_LANG + 1, LEN_LANG);
+		string subLang = langStr.substr(3, 2);
 		if (subLang == "CN" || subLang == "SG")
 			m_subLangID = "CHS";
 		else
@@ -341,7 +339,7 @@ string Translation::convertToMultiByte(const wstring& wideStr) const
 		return "";
 	}
 	// convert the characters
-	char* mbStr = new(nothrow) char[mbLen + 1];
+	char* mbStr = new (nothrow) char[mbLen + 1];
 	if (mbStr == NULL)
 	{
 		if (!msgDisplayed)
@@ -354,7 +352,7 @@ string Translation::convertToMultiByte(const wstring& wideStr) const
 	wcstombs(mbStr, wideStr.c_str(), mbLen + 1);
 	// return the string
 	string mbTranslation = mbStr;
-	delete [] mbStr;
+	delete[] mbStr;
 	return mbTranslation;
 }
 
