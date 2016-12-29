@@ -144,10 +144,11 @@ This release is mainly for more encodings support, especially GB18030 and Regex 
 16.Fix: Not stay in current line when switch between modes #226
 17.Fix: Adjust encoding group according to MSDN
 18.Fix: Adjust toolbar position #225
-19.Update Simplified Chinese translation
-20.Update boost to 1.62
-21.Update chardetector to latest uchardet
-22.Update Hunspell to 1.6
+19.Fix: UI issue of Source formatter tab in Option dialog
+20.Update Simplified Chinese translation
+21.Update boost to 1.62
+22.Update chardetector to latest uchardet
+23.Update Hunspell to 1.6
 
 Mod v0.4.5
 1.New: File history dialog

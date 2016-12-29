@@ -82,6 +82,7 @@ This release is mainly for more encodings support, especially GB18030 and Regex 
 * Fix: Not stay in current line when switch between modes #226
 * Fix: Adjust encoding group according to MSDN
 * Fix: Adjust toolbar position #225
+* Fix: UI issue of Source formatter tab in Option dialog
 * Update Simplified Chinese translation
 * Update boost to 1.62
 * Update chardetector to latest uchardet
