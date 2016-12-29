@@ -939,22 +939,24 @@ void MadSearchReplaceDialog::UpdateCheckBoxByCBHex( bool check )
 		WxCheckBoxWholeWord->Disable();
 		WxCheckBoxRegex->Disable();
 		WxCheckBoxDotMatchNewLine->Disable();
+		wxCheckBoxReplaceNoDoubleCheck->Disable();
 	}
 	else
 	{
 		WxCheckBoxCaseSensitive->Enable();
 		WxCheckBoxRegex->Enable();
-		WxCheckBoxDotMatchNewLine->Enable();
 
 		if( WxCheckBoxRegex->GetValue() )
 		{
 			WxCheckBoxDotMatchNewLine->Enable();
+			wxCheckBoxReplaceNoDoubleCheck->Enable();
 			WxCheckBoxWholeWord->Disable();
 		}
 		else
 		{
 			WxCheckBoxWholeWord->Enable();
 			WxCheckBoxDotMatchNewLine->Disable();
+			wxCheckBoxReplaceNoDoubleCheck->Disable();
 		}
 	}
 }
