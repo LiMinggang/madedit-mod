@@ -659,12 +659,11 @@ noinst_HEADERS =	description-pak \
 	charset-detector/test/Makefile \
 	charset-detector/test/test-chardetect.c \
 	charset-detector/src/Makefile \
-	charset-detector/src/tables/Big5Freq.tab \
-	charset-detector/src/tables/EUCKRFreq.tab \
-	charset-detector/src/tables/EUCTWFreq.tab \
-	charset-detector/src/tables/GB2312Freq.tab \
-	charset-detector/src/tables/JISFreq.tab \
-	charset-detector/src/entry/export-symbol.list
+	charset-detector/src/Big5Freq.tab \
+	charset-detector/src/EUCKRFreq.tab \
+	charset-detector/src/EUCTWFreq.tab \
+	charset-detector/src/GB2312Freq.tab \
+	charset-detector/src/JISFreq.tab \
 
 DOMAIN = madedit-mod
 podir = $(top_srcdir)/po
