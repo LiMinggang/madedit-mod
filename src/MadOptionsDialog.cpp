@@ -684,7 +684,8 @@ void MadOptionsDialog::CreateGUIControls( void )
 	arrayStringFor_WxRadioBoxBracketStyle.Add( wxT( "Pico" ) );
 	arrayStringFor_WxRadioBoxBracketStyle.Add( wxT( "Lisp" ) );
 	arrayStringFor_WxRadioBoxBracketStyle.Add( wxT( "Custom" ) );
-	WxRadioBoxBracketStyle = new wxRadioBox( WxAuiNoteBookPage1, ID_WXRADIOBOXBRACKETSTYLE, _( "Bracket Style" ), wxPoint( 2, 28 ), wxSize( 124, 400 ), arrayStringFor_WxRadioBoxBracketStyle, 1, wxRA_SPECIFY_COLS, wxDefaultValidator, wxT( "WxRadioBoxBracketStyle" ) );
+	WxRadioBoxBracketStyle = new wxRadioBox( WxAuiNoteBookPage1, ID_WXRADIOBOXBRACKETSTYLE, _( "Bracket Style" ), wxPoint( 2, 28 ), wxDefaultSize, arrayStringFor_WxRadioBoxBracketStyle, 1, wxRA_SPECIFY_COLS, wxDefaultValidator, wxT( "WxRadioBoxBracketStyle" ) );
+	WxRadioBoxBracketStyle->InvalidateBestSize();
 	WxRadioBoxBracketStyle->SetSelection( 0 );
 	WxBoxSizer47->Add( WxRadioBoxBracketStyle, 0, wxALIGN_LEFT | wxALIGN_TOP | wxALL, 2 );
 	SET_CONTROLPARENT( WxRadioBoxBracketStyle );
