@@ -1,8 +1,8 @@
 SUBDIRS = syntax po scripts
 
 bin_PROGRAMS = madedit
-AM_CPPFLAGS = -I$(top_srcdir)/charset-detector/include -I$(top_srcdir)/charset-detector/src \
--I$(top_srcdir)/charset-detector/src/tables -I$(top_srcdir)/spellchecker -I$(top_srcdir)/spellchecker/hunspell/src \
+AM_CPPFLAGS = -I$(top_srcdir)/charset-detector/src \
+-I$(top_srcdir)/spellchecker -I$(top_srcdir)/spellchecker/hunspell/src \
 -I$(top_srcdir)/spellchecker/hunspell/src/hunspell -I$(top_srcdir)/spellchecker/hunspell/src/win_api \
 -I$(top_srcdir)/minipython/Include -I$(top_srcdir)/minipython/Python \
 -I$(top_srcdir)/minipython/Modules/zlib -I$(top_srcdir)/markdown -I$(top_srcdir)/astyle \
