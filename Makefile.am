@@ -663,7 +663,7 @@ noinst_HEADERS =	description-pak \
 	charset-detector/src/EUCKRFreq.tab \
 	charset-detector/src/EUCTWFreq.tab \
 	charset-detector/src/GB2312Freq.tab \
-	charset-detector/src/JISFreq.tab \
+	charset-detector/src/JISFreq.tab
 
 DOMAIN = madedit-mod
 podir = $(top_srcdir)/po

@@ -3,4 +3,4 @@
 aclocal
 autoheader
 automake --foreign --add-missing --copy
-autoconf
+autoreconf --install
