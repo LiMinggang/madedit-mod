@@ -62,7 +62,8 @@ Current Feature list(comparing to the original Madedit@sourceforge)
 News
 =======
 Mod v0.4.6
-* This release is mainly for more encodings support, especially GB18030 and Regex bug fix
+
+This release is mainly for more encodings support, especially GB18030 and Regex bug fix
 * New: Spell check for SearchReplaceDialog would change according to active window
 * New: Ctrl+Shift+Wheel as shortcut for Page Up/Down
 * New: Indicator for zero length match in Regex search
@@ -83,6 +84,8 @@ Mod v0.4.6
 * Fix: Adjust toolbar position #225
 * Update Simplified Chinese translation
 * Update boost to 1.62
+* Update chardetector to latest uchardet
+* Update Hunspell to 1.6
 
 Todo:
 =====

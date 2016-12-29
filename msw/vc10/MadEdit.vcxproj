@@ -171,7 +171,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Release|x64'">
     <ClCompile>
       <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
-      <AdditionalIncludeDirectories>$(WXWIN3)\lib\vc_x64_lib\mswu;$(WXWIN3)\include;$(BOOST);..\..\charset-detector\include;..\..\charset-detector\src;..\..\charset-detector\src\tables;..\..\minipython\Include;..\..\minipython\PC;$(SolutionDir)\..\..\spellchecker;$(SolutionDir)\..\..\spellchecker\hunspell\src;$(SolutionDir)\..\..\markdown;..\..\astyle;..\..\astyle\astyle;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(WXWIN3)\lib\vc_x64_lib\mswu;$(WXWIN3)\include;$(BOOST);..\..\charset-detector\src;..\..\minipython\Include;..\..\minipython\PC;$(SolutionDir)\..\..\spellchecker;$(SolutionDir)\..\..\spellchecker\hunspell\src;$(SolutionDir)\..\..\markdown;..\..\astyle;..\..\astyle\astyle;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WIN64;NDEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;HUNSPELL_STATIC;Py_NO_ENABLE_SHARED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PrecompiledHeader>
@@ -203,6 +203,36 @@
     <ClCompile Include="..\..\astyle\astyle\ASFormatter.cpp" />
     <ClCompile Include="..\..\astyle\astyle\ASResource.cpp" />
     <ClCompile Include="..\..\astyle\formattersettings.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangArabicModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangBulgarianModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangCroatianModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangCzechModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangDanishModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangEsperantoModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangEstonianModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangFinnishModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangFrenchModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangGermanModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangGreekModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangHebrewModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangHungarianModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangIrishModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangItalianModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangLatvianModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangLithuanianModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangMalteseModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangPolishModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangPortugueseModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangRomanianModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangRussianModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangSlovakModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangSloveneModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangSpanishModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangSwedishModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangThaiModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangTurkishModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangVietnameseModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\uchardet.cpp" />
     <ClCompile Include="..\..\markdown\markdown-tokens.cpp" />
     <ClCompile Include="..\..\markdown\markdown.cpp" />
     <ClCompile Include="..\..\src\checkedlistctrl.cpp" />
@@ -240,14 +270,7 @@
     <ClCompile Include="..\..\src\MadEdit\MadUndo.cpp" />
     <ClCompile Include="..\..\src\MadEdit\TradSimp.cpp" />
     <ClCompile Include="..\..\charset-detector\src\CharDistribution.cpp" />
-    <ClCompile Include="..\..\charset-detector\src\entry\impl.cpp" />
     <ClCompile Include="..\..\charset-detector\src\JpCntx.cpp" />
-    <ClCompile Include="..\..\charset-detector\src\LangBulgarianModel.cpp" />
-    <ClCompile Include="..\..\charset-detector\src\LangCyrillicModel.cpp" />
-    <ClCompile Include="..\..\charset-detector\src\LangGreekModel.cpp" />
-    <ClCompile Include="..\..\charset-detector\src\LangHebrewModel.cpp" />
-    <ClCompile Include="..\..\charset-detector\src\LangHungarianModel.cpp" />
-    <ClCompile Include="..\..\charset-detector\src\LangThaiModel.cpp" />
     <ClCompile Include="..\..\charset-detector\src\nsBig5Prober.cpp" />
     <ClCompile Include="..\..\charset-detector\src\nsCharSetProber.cpp" />
     <ClCompile Include="..\..\charset-detector\src\nsEscCharsetProber.cpp" />
@@ -278,6 +301,7 @@
     <ClInclude Include="..\..\astyle\astylepredefinedstyles.h" />
     <ClInclude Include="..\..\astyle\astyle\astyle.h" />
     <ClInclude Include="..\..\astyle\formattersettings.h" />
+    <ClInclude Include="..\..\charset-detector\src\uchardet.h" />
     <ClInclude Include="..\..\markdown\markdown-tokens.h" />
     <ClInclude Include="..\..\markdown\markdown.h" />
     <ClInclude Include="..\..\spellchecker\HunspellInterface.h" />
@@ -338,7 +362,6 @@
     <ClInclude Include="..\..\src\plugin.h" />
     <ClInclude Include="..\..\src\MadEdit\TradSimp.h" />
     <ClInclude Include="..\..\src\MadEdit\ucs4_t.h" />
-    <ClInclude Include="..\..\charset-detector\include\chardetect.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\src\MadEditApp.rc">

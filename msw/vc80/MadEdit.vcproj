@@ -125,7 +125,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				FavorSizeOrSpeed="1"
-				AdditionalIncludeDirectories="&quot;$(WXWIN3)\lib\vc_lib\mswu&quot;;&quot;$(WXWIN3)\include&quot;;&quot;$(BOOST)&quot;;&quot;$(SolutionDir)..\..\charset-detector\include&quot;;&quot;$(SolutionDir)..\..\charset-detector\src&quot;;&quot;$(SolutionDir)..\..\charset-detector\src\tables&quot;;&quot;$(SolutionDir)..\..\minipython\Include&quot;;&quot;$(SolutionDir)..\..\minipython\PC&quot;;&quot;$(SolutionDir)..\..\spellchecker&quot;;&quot;$(SolutionDir)..\..\spellchecker\hunspell\src&quot;;&quot;$(SolutionDir)..\..\markdown&quot;;&quot;$(SolutionDir)..\..\astyle&quot;;&quot;$(SolutionDir)..\..\astyle\astyle&quot;"
+				AdditionalIncludeDirectories="&quot;$(WXWIN3)\lib\vc_lib\mswu&quot;;&quot;$(WXWIN3)\include&quot;;&quot;$(BOOST)&quot;;&quot;$(SolutionDir)..\..\charset-detector\src&quot;;&quot;$(SolutionDir)..\..\minipython\Include&quot;;&quot;$(SolutionDir)..\..\minipython\PC&quot;;&quot;$(SolutionDir)..\..\spellchecker&quot;;&quot;$(SolutionDir)..\..\spellchecker\hunspell\src&quot;;&quot;$(SolutionDir)..\..\markdown&quot;;&quot;$(SolutionDir)..\..\astyle&quot;;&quot;$(SolutionDir)..\..\astyle\astyle&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;HUNSPELL_STATIC;Py_NO_ENABLE_SHARED"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="0"
@@ -343,35 +343,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\charset-detector\src\entry\impl.cpp"
-					>
-				</File>
-				<File
 					RelativePath="..\..\charset-detector\src\JpCntx.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\charset-detector\src\LangBulgarianModel.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\charset-detector\src\LangCyrillicModel.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\charset-detector\src\LangGreekModel.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\charset-detector\src\LangHebrewModel.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\charset-detector\src\LangHungarianModel.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\charset-detector\src\LangThaiModel.cpp"
 					>
 				</File>
 				<File
@@ -442,6 +414,130 @@
 					RelativePath="..\..\charset-detector\src\nsUTF8Prober.cpp"
 					>
 				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\uchardet.cpp"
+					>
+				</File>
+				<Filter
+					Name="LangModels"
+					>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangArabicModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangBulgarianModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangCroatianModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangCzechModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangDanishModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangEsperantoModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangEstonianModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangFinnishModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangFrenchModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangGermanModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangGreekModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangHebrewModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangHungarianModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangIrishModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangItalianModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangLatvianModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangLithuanianModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangMalteseModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangPolishModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangPortugueseModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangRomanianModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangRussianModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangSlovakModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangSloveneModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangSpanishModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangSwedishModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangThaiModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangTurkishModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangVietnameseModel.cpp"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="SpellChecker"
@@ -741,7 +837,7 @@
 				Name="charset-detector"
 				>
 				<File
-					RelativePath="..\..\charset-detector\include\chardetect.h"
+					RelativePath="..\..\charset-detector\src\uchardet.h"
 					>
 				</File>
 			</Filter>

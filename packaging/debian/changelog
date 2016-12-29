@@ -20,6 +20,8 @@ madedit-mod (0.4.6-1) stable; urgency=low
   18.Fix: Adjust toolbar position #225
   19.Update Simplified Chinese translation
   20.Update boost to 1.62
+  21.Update chardetector to latest uchardet
+  22.Update Hunspell to 1.6
 
  -- Minggang Li <liminggang@gmail.com>  Wed, 28 Dec 2016 17:07:40 +0800
 

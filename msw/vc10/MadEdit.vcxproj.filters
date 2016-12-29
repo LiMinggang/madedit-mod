@@ -21,9 +21,6 @@
     <Filter Include="Header Files\MadEdit">
       <UniqueIdentifier>{47d1fee2-d210-4e9c-b93e-e783ba697258}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\charset-detector">
-      <UniqueIdentifier>{cca6c47f-71bf-4b91-894d-a088045d02cc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx</Extensions>
@@ -36,6 +33,12 @@
     </Filter>
     <Filter Include="Header Files\ExtEncodings">
       <UniqueIdentifier>{4d02b3cd-de5e-486e-bd65-78083f40a197}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\charset-detector\LangModels">
+      <UniqueIdentifier>{9164dccc-260b-4c5b-88c8-57e2b88d8847}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\charset-detector">
+      <UniqueIdentifier>{d9ec83c7-03b0-4136-817c-e27fa6bb81b4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -126,28 +129,7 @@
     <ClCompile Include="..\..\charset-detector\src\CharDistribution.cpp">
       <Filter>Source Files\charset-detector</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\charset-detector\src\entry\impl.cpp">
-      <Filter>Source Files\charset-detector</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\charset-detector\src\JpCntx.cpp">
-      <Filter>Source Files\charset-detector</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\charset-detector\src\LangBulgarianModel.cpp">
-      <Filter>Source Files\charset-detector</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\charset-detector\src\LangCyrillicModel.cpp">
-      <Filter>Source Files\charset-detector</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\charset-detector\src\LangGreekModel.cpp">
-      <Filter>Source Files\charset-detector</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\charset-detector\src\LangHebrewModel.cpp">
-      <Filter>Source Files\charset-detector</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\charset-detector\src\LangHungarianModel.cpp">
-      <Filter>Source Files\charset-detector</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\charset-detector\src\LangThaiModel.cpp">
       <Filter>Source Files\charset-detector</Filter>
     </ClCompile>
     <ClCompile Include="..\..\charset-detector\src\nsBig5Prober.cpp">
@@ -264,6 +246,96 @@
     <ClCompile Include="..\..\src\MadEdit\MadCSConv.cpp">
       <Filter>Source Files\MadEdit</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangArabicModel.cpp">
+      <Filter>Source Files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangBulgarianModel.cpp">
+      <Filter>Source Files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangCroatianModel.cpp">
+      <Filter>Source Files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangCzechModel.cpp">
+      <Filter>Source Files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangDanishModel.cpp">
+      <Filter>Source Files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangEsperantoModel.cpp">
+      <Filter>Source Files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangEstonianModel.cpp">
+      <Filter>Source Files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangFinnishModel.cpp">
+      <Filter>Source Files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangFrenchModel.cpp">
+      <Filter>Source Files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangGermanModel.cpp">
+      <Filter>Source Files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangGreekModel.cpp">
+      <Filter>Source Files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangHebrewModel.cpp">
+      <Filter>Source Files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangHungarianModel.cpp">
+      <Filter>Source Files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangIrishModel.cpp">
+      <Filter>Source Files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangItalianModel.cpp">
+      <Filter>Source Files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangLatvianModel.cpp">
+      <Filter>Source Files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangLithuanianModel.cpp">
+      <Filter>Source Files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangMalteseModel.cpp">
+      <Filter>Source Files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangPolishModel.cpp">
+      <Filter>Source Files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangPortugueseModel.cpp">
+      <Filter>Source Files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangRomanianModel.cpp">
+      <Filter>Source Files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangRussianModel.cpp">
+      <Filter>Source Files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangSlovakModel.cpp">
+      <Filter>Source Files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangSloveneModel.cpp">
+      <Filter>Source Files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangSpanishModel.cpp">
+      <Filter>Source Files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangSwedishModel.cpp">
+      <Filter>Source Files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangThaiModel.cpp">
+      <Filter>Source Files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangTurkishModel.cpp">
+      <Filter>Source Files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangVietnameseModel.cpp">
+      <Filter>Source Files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\uchardet.cpp">
+      <Filter>Source Files\charset-detector</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\spellchecker\HunspellInterface.h">
@@ -355,9 +427,6 @@
     </ClInclude>
     <ClInclude Include="..\..\src\MadEdit\ucs4_t.h">
       <Filter>Header Files\MadEdit</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\charset-detector\include\chardetect.h">
-      <Filter>Header Files\charset-detector</Filter>
     </ClInclude>
     <ClInclude Include="..\..\markdown\markdown.h">
       <Filter>Source Files\MarkDown</Filter>
@@ -460,6 +529,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gbkext2.h">
       <Filter>Header Files\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\uchardet.h">
+      <Filter>Header Files\charset-detector</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

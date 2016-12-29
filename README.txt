@@ -146,6 +146,8 @@ This release is mainly for more encodings support, especially GB18030 and Regex 
 18.Fix: Adjust toolbar position #225
 19.Update Simplified Chinese translation
 20.Update boost to 1.62
+21.Update chardetector to latest uchardet
+22.Update Hunspell to 1.6
 
 Mod v0.4.5
 1.New: File history dialog

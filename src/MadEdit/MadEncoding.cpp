@@ -8,7 +8,7 @@
 
 #include <wx/config.h>
 #include "MadEncoding.h"
-#include "chardetect.h"
+#include "uchardet.h"
 #include "MadCSConv.h"
 
 using std::vector;
@@ -1668,14 +1668,12 @@ void DetectJapaneseEncoding( const wxByte *text, int count, int &enc )
 
 void DetectEncoding( const wxByte *text, int count, int &enc )
 {
-	chardet_t det = NULL;
-	char encoding_name[CHARDET_MAX_ENCODING_NAME];
-	chardet_create( &det );
-	chardet_handle_data( det, ( const char* )text, count );
-	chardet_data_end( det );
-	chardet_get_charset( det, encoding_name, CHARDET_MAX_ENCODING_NAME );
-	chardet_destroy( det );
-	wxString name( encoding_name, wxConvLocal ), rest;
+	uchardet_t det = NULL;
+	det = uchardet_new();
+	uchardet_handle_data( det, ( const char* )text, count );
+	uchardet_data_end( det );
+	wxString name( uchardet_get_charset( det ), wxConvLocal ), rest;
+	uchardet_delete( det );
 	name.MakeUpper();
 	long value;
 

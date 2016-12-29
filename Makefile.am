@@ -98,12 +98,6 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	charset-detector/src/CharDistribution.h \
 	charset-detector/src/JpCntx.cpp \
 	charset-detector/src/JpCntx.h \
-	charset-detector/src/LangBulgarianModel.cpp \
-	charset-detector/src/LangCyrillicModel.cpp \
-	charset-detector/src/LangGreekModel.cpp \
-	charset-detector/src/LangHebrewModel.cpp \
-	charset-detector/src/LangHungarianModel.cpp \
-	charset-detector/src/LangThaiModel.cpp \
 	charset-detector/src/nsBig5Prober.cpp \
 	charset-detector/src/nsBig5Prober.h \
 	charset-detector/src/nsCharSetProber.cpp \
@@ -140,8 +134,37 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	charset-detector/src/nsUTF8Prober.cpp \
 	charset-detector/src/nsUTF8Prober.h \
 	charset-detector/src/prmem.h \
-	charset-detector/src/entry/impl.cpp \
-	charset-detector/include/chardetect.h \
+	charset-detector/src/uchardet.cpp \
+	charset-detector/src/uchardet.h \
+	charset-detector/src/LangModels/LangVietnameseModel.cpp \
+	charset-detector/src/LangModels/LangThaiModel.cpp \
+	charset-detector/src/LangModels/LangTurkishModel.cpp \
+	charset-detector/src/LangModels/LangSpanishModel.cpp \
+	charset-detector/src/LangModels/LangSwedishModel.cpp \
+	charset-detector/src/LangModels/LangSloveneModel.cpp \
+	charset-detector/src/LangModels/LangRussianModel.cpp \
+	charset-detector/src/LangModels/LangSlovakModel.cpp \
+	charset-detector/src/LangModels/LangRomanianModel.cpp \
+	charset-detector/src/LangModels/LangPolishModel.cpp \
+	charset-detector/src/LangModels/LangPortugueseModel.cpp \
+	charset-detector/src/LangModels/LangMalteseModel.cpp \
+	charset-detector/src/LangModels/LangLatvianModel.cpp \
+	charset-detector/src/LangModels/LangLithuanianModel.cpp \
+	charset-detector/src/LangModels/LangItalianModel.cpp \
+	charset-detector/src/LangModels/LangHungarianModel.cpp \
+	charset-detector/src/LangModels/LangIrishModel.cpp \
+	charset-detector/src/LangModels/LangGreekModel.cpp \
+	charset-detector/src/LangModels/LangHebrewModel.cpp \
+	charset-detector/src/LangModels/LangGermanModel.cpp \
+	charset-detector/src/LangModels/LangFinnishModel.cpp \
+	charset-detector/src/LangModels/LangFrenchModel.cpp \
+	charset-detector/src/LangModels/LangEstonianModel.cpp \
+	charset-detector/src/LangModels/LangDanishModel.cpp \
+	charset-detector/src/LangModels/LangEsperantoModel.cpp \
+	charset-detector/src/LangModels/LangCzechModel.cpp \
+	charset-detector/src/LangModels/LangBulgarianModel.cpp \
+	charset-detector/src/LangModels/LangCroatianModel.cpp \
+	charset-detector/src/LangModels/LangArabicModel.cpp \
 	spellchecker/HunspellInterface.cpp \
 	spellchecker/HunspellInterface.h \
 	spellchecker/PersonalDictionary.cpp \

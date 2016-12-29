@@ -21,6 +21,7 @@
  *
  * Contributor(s):
  *          Shy Shalom <shooshX@gmail.com>
+ *			Proofpoint, Inc.
  *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -35,37 +36,45 @@
  * the terms of any one of the MPL, the GPL or the LGPL.
  *
  * ***** END LICENSE BLOCK ***** */
-
-#pragma GCC visibility push(hidden)
-
 #include <stdio.h>
-#include "prmem.h"
 
 #include "nsMBCSGroupProber.h"
+#include "nsUniversalDetector.h"
 
-#ifdef DEBUG_chardet
-char *ProberName[] = 
+#if defined(DEBUG_chardet) || defined(DEBUG_jgmyers)
+const char *ProberName[] = 
 {
-  "UTF8",
+  "UTF-8",
   "SJIS",
-  "EUCJP",
+  "EUC-JP",
   "GB18030",
-  "EUCKR",
+  "EUC-KR",
   "Big5",
-  "EUCTW",
+  "EUC-TW",
 };
 
 #endif
 
-nsMBCSGroupProber::nsMBCSGroupProber()
+nsMBCSGroupProber::nsMBCSGroupProber(PRUint32 aLanguageFilter)
 {
+  for (PRUint32 i = 0; i < NUM_OF_PROBERS; i++)
+    mProbers[i] = nsnull;
+
   mProbers[0] = new nsUTF8Prober();
-  mProbers[1] = new nsSJISProber();
-  mProbers[2] = new nsEUCJPProber();
-  mProbers[3] = new nsGB18030Prober();
-  mProbers[4] = new nsEUCKRProber();
-  mProbers[5] = new nsBig5Prober();
-  mProbers[6] = new nsEUCTWProber();
+  if (aLanguageFilter & NS_FILTER_JAPANESE) 
+  {
+    mProbers[1] = new nsSJISProber(aLanguageFilter == NS_FILTER_JAPANESE);
+    mProbers[2] = new nsEUCJPProber(aLanguageFilter == NS_FILTER_JAPANESE);
+  }
+  if (aLanguageFilter & NS_FILTER_CHINESE_SIMPLIFIED)
+    mProbers[3] = new nsGB18030Prober(aLanguageFilter == NS_FILTER_CHINESE_SIMPLIFIED);
+  if (aLanguageFilter & NS_FILTER_KOREAN)
+    mProbers[4] = new nsEUCKRProber(aLanguageFilter == NS_FILTER_KOREAN);
+  if (aLanguageFilter & NS_FILTER_CHINESE_TRADITIONAL) 
+  {
+    mProbers[5] = new nsBig5Prober(aLanguageFilter == NS_FILTER_CHINESE_TRADITIONAL);
+    mProbers[6] = new nsEUCTWProber(aLanguageFilter == NS_FILTER_CHINESE_TRADITIONAL);
+  }
   Reset();
 }
 
@@ -104,62 +113,59 @@ void  nsMBCSGroupProber::Reset(void)
   }
   mBestGuess = -1;
   mState = eDetecting;
+  mKeepNext = 0;
 }
 
 nsProbingState nsMBCSGroupProber::HandleData(const char* aBuf, PRUint32 aLen)
 {
   nsProbingState st;
-  PRUint32 i;
+  PRUint32 start = 0;
+  PRUint32 keepNext = mKeepNext;
 
   //do filtering to reduce load to probers
-  char *highbyteBuf;
-  char *hptr;
-  PRBool keepNext = PR_TRUE;   //assume previous is not ascii, it will do no harm except add some noise
-  hptr = highbyteBuf = (char*)PR_Malloc(aLen);
-  if (!hptr)
-      return mState;
-  for (i = 0; i < aLen; i++)
+  for (PRUint32 pos = 0; pos < aLen; ++pos)
   {
-    if (aBuf[i] & 0x80)
+    if (aBuf[pos] & 0x80)
     {
-      *hptr++ = aBuf[i];
-      keepNext = PR_TRUE;
+      if (!keepNext)
+        start = pos;
+      keepNext = 2;
     }
-    else
+    else if (keepNext)
     {
-      //if previous is highbyte, keep this even it is a ASCII
-      if (keepNext)
+      if (--keepNext == 0)
       {
-          *hptr++ = aBuf[i];
-          keepNext = PR_FALSE;
+        for (PRUint32 i = 0; i < NUM_OF_PROBERS; i++)
+        {
+          if (!mIsActive[i])
+            continue;
+          st = mProbers[i]->HandleData(aBuf + start, pos + 1 - start);
+          if (st == eFoundIt)
+          {
+            mBestGuess = i;
+            mState = eFoundIt;
+            return mState;
+          }
+        }
       }
     }
   }
 
-  for (i = 0; i < NUM_OF_PROBERS; i++)
-  {
-     if (!mIsActive[i])
-       continue;
-     st = mProbers[i]->HandleData(highbyteBuf, hptr - highbyteBuf);
-     if (st == eFoundIt)
-     {
-       mBestGuess = i;
-       mState = eFoundIt;
-       break;
-     }
-     else if (st == eNotMe)
-     {
-       mIsActive[i] = PR_FALSE;
-       mActiveNum--;
-       if (mActiveNum <= 0)
-       {
-         mState = eNotMe;
-         break;
-       }
-     }
+  if (keepNext) {
+    for (PRUint32 i = 0; i < NUM_OF_PROBERS; i++)
+    {
+      if (!mIsActive[i])
+        continue;
+      st = mProbers[i]->HandleData(aBuf + start, aLen - start);
+      if (st == eFoundIt)
+      {
+        mBestGuess = i;
+        mState = eFoundIt;
+        return mState;
+      }
+    }
   }
-
-  PR_FREEIF(highbyteBuf);
+  mKeepNext = keepNext;
 
   return mState;
 }
@@ -211,5 +217,14 @@ void nsMBCSGroupProber::DumpStatus()
 }
 #endif
 
-#pragma GCC visibility pop
-
+#ifdef DEBUG_jgmyers
+void nsMBCSGroupProber::GetDetectorState(nsUniversalDetector::DetectorState (&states)[nsUniversalDetector::NumDetectors], PRUint32 &offset)
+{
+  for (PRUint32 i = 0; i < NUM_OF_PROBERS; ++i) {
+    states[offset].name = ProberName[i];
+    states[offset].isActive = mIsActive[i];
+    states[offset].confidence = mIsActive[i] ? mProbers[i]->GetConfidence() : 0.0;
+    ++offset;
+  }
+}
+#endif /* DEBUG_jgmyers */

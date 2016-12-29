@@ -40,16 +40,14 @@
 // 2, kana character often exist in group
 // 3, certain combination of kana is never used in japanese language
 
-#pragma GCC visibility push(hidden)
-
 #include "nsEUCJPProber.h"
 
 void  nsEUCJPProber::Reset(void)
 {
   mCodingSM->Reset(); 
   mState = eDetecting;
-  mContextAnalyser.Reset();
-  mDistributionAnalyser.Reset();
+  mContextAnalyser.Reset(mIsPreferredLanguage);
+  mDistributionAnalyser.Reset(mIsPreferredLanguage);
 }
 
 nsProbingState nsEUCJPProber::HandleData(const char* aBuf, PRUint32 aLen)
@@ -59,11 +57,6 @@ nsProbingState nsEUCJPProber::HandleData(const char* aBuf, PRUint32 aLen)
   for (PRUint32 i = 0; i < aLen; i++)
   {
     codingState = mCodingSM->NextState(aBuf[i]);
-    if (codingState == eError)
-    {
-      mState = eNotMe;
-      break;
-    }
     if (codingState == eItsMe)
     {
       mState = eFoundIt;
@@ -103,6 +96,4 @@ float nsEUCJPProber::GetConfidence(void)
 
   return (contxtCf > distribCf ? contxtCf : distribCf);
 }
-
-#pragma GCC visibility pop
 

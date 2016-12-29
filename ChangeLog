@@ -20,6 +20,8 @@
 	18.Fix: Adjust toolbar position #225
 	19.Update Simplified Chinese translation
 	20.Update boost to 1.62
+	21.Update chardetector to latest uchardet
+	22.Update Hunspell to 1.6
 
 2016-10-21  Minggang Li <minggang.li@gmail.com>
 	1.New: File history dialog

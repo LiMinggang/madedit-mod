@@ -20,6 +20,7 @@
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
+ *			Proofpoint, Inc.
  *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -50,17 +51,20 @@
 
 class nsMBCSGroupProber: public nsCharSetProber {
 public:
-  nsMBCSGroupProber();
+  nsMBCSGroupProber(PRUint32 aLanguageFilter);
   virtual ~nsMBCSGroupProber();
   nsProbingState HandleData(const char* aBuf, PRUint32 aLen);
   const char* GetCharSetName();
-  nsProbingState GetState(void) {return mState;};
+  nsProbingState GetState(void) {return mState;}
   void      Reset(void);
   float     GetConfidence(void);
-  void      SetOpion() {};
+  void      SetOpion() {}
 
 #ifdef DEBUG_chardet
   void  DumpStatus();
+#endif
+#ifdef DEBUG_jgmyers
+  void GetDetectorState(nsUniversalDetector::DetectorState (&states)[nsUniversalDetector::NumDetectors], PRUint32 &offset);
 #endif
 
 protected:
@@ -69,6 +73,7 @@ protected:
   PRBool          mIsActive[NUM_OF_PROBERS];
   PRInt32 mBestGuess;
   PRUint32 mActiveNum;
+  PRUint32 mKeepNext;
 };
 
 #endif /* nsMBCSGroupProber_h__ */
