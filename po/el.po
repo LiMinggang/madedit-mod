@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: madedit-mod 003\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-28 22:46+0800\n"
+"POT-Creation-Date: 2016-12-29 11:42+0800\n"
 "PO-Revision-Date: 2016-07-12 23:47+0300\n"
 "Last-Translator: Nikos Papadopoulos <nikos569@yahoo.com>\n"
 "Language-Team: Greek <231036448@freemail.gr>\n"
@@ -509,11 +509,11 @@ msgstr ""
 "\n"
 "Μη έγκυρη μορφή Markdown!!"
 
-#: ../src/MadEdit/MadEdit.cpp:11989
+#: ../src/MadEdit/MadEdit.cpp:11988
 msgid "Zero Length Match"
 msgstr ""
 
-#: ../src/MadEdit/MadEdit.cpp:11992
+#: ../src/MadEdit/MadEdit.cpp:11991
 msgid "^ Zero Length Match"
 msgstr ""
 
