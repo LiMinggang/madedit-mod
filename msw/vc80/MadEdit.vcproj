@@ -547,15 +547,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\spellchecker\HunspellInterface.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\spellchecker\PersonalDictionary.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\spellchecker\PersonalDictionary.h"
 					>
 				</File>
 				<File
@@ -571,23 +563,11 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\spellchecker\SpellCheckEngineOption.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\spellchecker\SpellCheckerManager.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\spellchecker\SpellCheckerManager.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\spellchecker\SpellCheckUserInterface.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\spellchecker\SpellCheckUserInterface.h"
 					>
 				</File>
 			</Filter>
@@ -635,23 +615,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\astyle\asstreamiterator.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\astyle\astyle\astyle.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\astyle\astylepredefinedstyles.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\astyle\formattersettings.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\astyle\formattersettings.h"
 					>
 				</File>
 			</Filter>
@@ -837,7 +801,139 @@
 				Name="charset-detector"
 				>
 				<File
+					RelativePath="..\..\charset-detector\src\CharDistribution.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\JpCntx.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsBig5Prober.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsCharSetProber.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsCodingStateMachine.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nscore.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsEscCharsetProber.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsEUCJPProber.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsEUCKRProber.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsEUCTWProber.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsGB2312Prober.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsHebrewProber.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsLatin1Prober.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsMBCSGroupProber.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsPkgInt.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsSBCharSetProber.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsSBCSGroupProber.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsSJISProber.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsUniversalDetector.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsUTF8Prober.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\prmem.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\charset-detector\src\uchardet.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Astyle"
+				>
+				<File
+					RelativePath="..\..\astyle\astyle\ASLocalizer.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\astyle\asstreamiterator.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\astyle\astyle\astyle.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\astyle\astylepredefinedstyles.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\astyle\formattersettings.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="SpellChecker"
+				>
+				<File
+					RelativePath="..\..\spellchecker\HunspellInterface.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\spellchecker\PersonalDictionary.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\spellchecker\SpellCheckEngineOption.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\spellchecker\SpellCheckerManager.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\spellchecker\SpellCheckUserInterface.h"
 					>
 				</File>
 			</Filter>
