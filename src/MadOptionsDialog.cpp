@@ -1246,7 +1246,6 @@ void MadOptionsDialog::MadOptionsDialogActivate( wxActivateEvent& event )
 
 void MadOptionsDialog::LoadOptions( void )
 {
-	static bool first_time = true;
 	wxConfigBase *cfg = wxConfigBase::Get( false );
 	wxString oldpath = cfg->GetPath();
 	cfg->SetPath( wxT( "/MadEdit" ) );
@@ -1441,11 +1440,8 @@ void MadOptionsDialog::LoadOptions( void )
 
 	if( bb )
 	{
-		if(!first_time)
-		{
-			WxEditSFMaxLineLength->Enable( true );
-			WxCheckBreakAfterLogical->Enable( true );
-		}
+		WxEditSFMaxLineLength->Enable( true );
+		WxCheckBreakAfterLogical->Enable( true );
 		WxEditSFMaxLineLength->SetValue( cfg->Read( wxT( "max_line_length" ), wxString( wxT( "200" ) ) ) );
 		WxCheckBreakAfterLogical->SetValue( cfg->ReadBool( wxT( "break_after_mode" ), false ) );
 	}
@@ -1459,10 +1455,7 @@ void MadOptionsDialog::LoadOptions( void )
 
 	if( WxCheckBreakBlocks->GetValue() )
 	{
-		if(!first_time)
-		{
-			WxCheckBreakBlocksAll->Enable( true );
-		}
+		WxCheckBreakBlocksAll->Enable( true );
 		WxCheckBreakBlocksAll->SetValue( cfg->ReadBool( wxT( "break_blocks_all" ), false ) );
 	}
 	else
@@ -1507,7 +1500,6 @@ void MadOptionsDialog::LoadOptions( void )
 	WxEditXmlIndentSize->SetValue( wxString() << cfg->ReadLong( wxT( "indentation" ), 4 ) );
 	WxEditXMLversion->SetValue( cfg->Read( wxT( "version" ), wxString( wxT( "1.0" ) ) ) );
 	cfg->SetPath( oldpath );
-	first_time = false;
 }
 
 /*

@@ -8204,7 +8204,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		bb = g_OptionsDialog->WxCheckRemoveCommentPrefix->GetValue();
 		m_Config->Write( wxT( "remove_comment_prefix" ), bb );
 		bb = g_OptionsDialog->WxCheckBreakLines->GetValue();
-		bb = m_Config->Write( wxT( "break_lines" ), bb );
+		m_Config->Write( wxT( "break_lines" ), bb );
 
 		if( bb )
 		{
