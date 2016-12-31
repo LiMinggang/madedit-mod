@@ -123,6 +123,7 @@ void FormatterSettings::ApplyTo(astyle::ASFormatter& formatter)
   formatter.setIndentCol1CommentsMode(cfg->ReadBool(wxT("indent_col1_comments"), true));
   formatter.setMinConditionalIndentOption(cfg->ReadLong(wxT("min_conditional_indent"), 2));
   formatter.setMaxInStatementIndentLength(cfg->ReadLong(wxT("max_instatement_indent"), 40));
+  formatter.setContinuationIndentation(cfg->ReadLong(wxT("indent_continuation"), 1));
 
   formatter.setBreakClosingHeaderBracketsMode(cfg->ReadBool(wxT("break_closing"), true));
   formatter.setBreakElseIfsMode(cfg->ReadBool(wxT("break_elseifs"), true));
@@ -133,6 +134,7 @@ void FormatterSettings::ApplyTo(astyle::ASFormatter& formatter)
   formatter.setTabSpaceConversionMode(cfg->ReadBool(wxT("convert_tabs"), true));
   formatter.setCloseTemplatesMode(cfg->ReadBool(wxT("close_templates"), false));
   formatter.setStripCommentPrefix(cfg->ReadBool(wxT("remove_comment_prefix"), false));
+  formatter.setBreakOneLineHeadersMode(cfg->ReadBool(wxT("break_one_line_headers"), false));
 
   if (cfg->ReadBool(wxT("break_lines"), false))
   {
@@ -140,8 +142,11 @@ void FormatterSettings::ApplyTo(astyle::ASFormatter& formatter)
     formatter.setBreakAfterMode(cfg->ReadBool(wxT("break_after_mode"), false));
   }
   else
-    //formatter.setMaxCodeLength(INT_MAX);
-    formatter.setMaxCodeLength(4096); //DEFAULT_MAX_LINELEN
+  {
+	  //formatter.setMaxCodeLength(INT_MAX);
+	  int maxCodeLength = cfg->ReadLong(wxT("/MadEdit/MaxLineLength"), 4096);
+	  formatter.setMaxCodeLength(maxCodeLength); //DEFAULT_MAX_LINELEN
+  }
 
   formatter.setBreakBlocksMode(cfg->ReadBool(wxT("break_blocks"), true));
   formatter.setBreakClosingHeaderBlocksMode(cfg->ReadBool(wxT("break_blocks_all"), false));
@@ -152,6 +157,11 @@ void FormatterSettings::ApplyTo(astyle::ASFormatter& formatter)
   formatter.setParensUnPaddingMode(cfg->ReadBool(wxT("unpad_parentheses"), true));
   formatter.setDeleteEmptyLinesMode(cfg->ReadBool(wxT("delete_empty_lines"), true));
   formatter.setEmptyLineFill(cfg->ReadBool(wxT("fill_empty_lines"), false));
+  formatter.setCommaPaddingMode(cfg->ReadBool(wxT("pad_comma"), false));
+  formatter.setReturnTypePaddingMode(cfg->ReadBool(wxT("pad_return_type"), false));
+  formatter.setReturnTypeUnPaddingMode(cfg->ReadBool(wxT("unpad_return_type"), false));
+  formatter.setParamTypePaddingMode(cfg->ReadBool(wxT("pad_param_type"), false));
+  formatter.setParamTypeUnPaddingMode(cfg->ReadBool(wxT("unpad_param_type"), false));
 
   wxString pointerAlign = cfg->Read(wxT("pointer_align"), wxEmptyString);
   if      (pointerAlign == wxT("Type"))

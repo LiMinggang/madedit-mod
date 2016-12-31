@@ -8208,8 +8208,8 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 
 		if( bb )
 		{
-			wxString maxLine = g_OptionsDialog->WxEditSFMaxLineLength->GetValue();
-			m_Config->Read( wxT( "max_line_length" ), maxLine );
+			g_OptionsDialog->WxEditSFMaxLineLength->GetValue().ToLong( &ll );
+			m_Config->Write( wxT( "max_line_length" ), ll );
 			bb = g_OptionsDialog->WxCheckBreakAfterLogical->GetValue();
 			m_Config->Write( wxT( "break_after_mode" ), bb );
 		}
@@ -8218,6 +8218,8 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		m_Config->Write( wxT( "break_blocks" ), bb );
 		bb = g_OptionsDialog->WxCheckBreakBlocksAll->GetValue();
 		m_Config->Write( wxT( "break_blocks_all" ), bb );
+		bb = g_OptionsDialog->WxCheckBreakOneLineHeaders->GetValue();
+		m_Config->Write( wxT( "break_one_line_headers" ), bb );
 		bb = g_OptionsDialog->WxCheckPadOperators->GetValue();
 		m_Config->Write( wxT( "pad_operators" ), bb );
 		bb = g_OptionsDialog->WxCheckPadParensOut->GetValue();
@@ -8232,6 +8234,21 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		m_Config->Write( wxT( "delete_empty_lines" ), bb );
 		bb = g_OptionsDialog->WxCheckFillEmptyLines->GetValue();
 		m_Config->Write( wxT( "fill_empty_lines" ), bb );
+		bb = g_OptionsDialog->WxCheckPadComma->GetValue();
+		m_Config->Write( wxT( "pad_comma" ), bb );
+		bb = g_OptionsDialog->WxCheckPadReturnType->GetValue();
+		m_Config->Write( wxT( "pad_return_type" ), bb );
+		bb = g_OptionsDialog->WxCheckUnpadReturnType->GetValue();
+		m_Config->Write( wxT( "unpad_return_type" ), bb );
+		bb = g_OptionsDialog->WxCheckPadParamType->GetValue();
+		m_Config->Write( wxT( "pad_param_type" ), bb );
+		bb = g_OptionsDialog->WxCheckUnpadParamType->GetValue();
+		m_Config->Write( wxT( "unpad_param_type" ), bb );
+		
+		g_OptionsDialog->WxEditIndentContinuation->GetValue().ToLong( &ll );
+		m_Config->Write( wxT( "indent_continuation" ), ll );
+
+
 		wxString pointerAlign( wxT( "None" ) );
 
 		switch( g_OptionsDialog->WxChoicePointerAlign->GetSelection() )

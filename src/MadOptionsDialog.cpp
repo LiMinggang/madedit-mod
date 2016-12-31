@@ -864,6 +864,14 @@ void MadOptionsDialog::CreateGUIControls( void )
 	SET_CONTROLPARENT( WxEditMaxInStatementIndent );
 	WxStaticText23 = new wxStaticText( WxAuiNoteBookPage3, ID_WXSTATICTEXT23, _( "Maximum of # spaces to indent a continuation line (max. 120)" ), wxPoint( 61, 2 ), wxSize( 500, 17 ), 0, wxT( "WxStaticText23" ) );
 	WxBoxSizer41->Add( WxStaticText23, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
+	WxBoxSizer53 = new wxBoxSizer( wxHORIZONTAL );
+	WxBoxSizer39->Add( WxBoxSizer53, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
+	WxEditIndentContinuation = new wxTextCtrl( WxAuiNoteBookPage3, ID_WXCHECKINDENTCONTINUATION, wxT( "1" ), wxPoint( 1, 1 ), wxSize( 60, 19 ), 0, wxTextValidator( wxFILTER_NUMERIC, NULL ), wxT( "WxEditIndentContinuation" ) );
+	WxBoxSizer53->Add( WxEditIndentContinuation, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
+	SET_CONTROLPARENT( WxEditIndentContinuation );
+	WxStaticText32 = new wxStaticText( WxAuiNoteBookPage3, ID_WXSTATICTEXT32, _( "Indent a continuation line (default 1)" ), wxPoint( 61, 2 ), wxSize( 500, 17 ), 0, wxT( "WxStaticText31" ) );
+	WxBoxSizer53->Add( WxStaticText32, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
+
 	WxAuiNoteBookPage4 = new wxPanel( WxAuiNotebook1, ID_WXAUINOTEBOOKPAGE4, wxPoint( 4, 24 ), wxSize( 792, 464 ) );
 	WxAuiNotebook1->AddPage( WxAuiNoteBookPage4, _( "Formatting" ) );
 	WxBoxSizer42 = new wxBoxSizer( wxVERTICAL );
@@ -896,9 +904,14 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxCheckRemoveCommentPrefix = new wxCheckBox( WxAuiNoteBookPage4, ID_WXCHECKREMOVECOMMENTPREFIX, _( "Remove the preceding '*' in a multi-line comment that begins a line" ), wxPoint( 2, 170 ), wxSize( 790, 17 ), 0, wxDefaultValidator, wxT( "WxCheckRemoveCommentPrefix" ) );
 	WxBoxSizer42->Add( WxCheckRemoveCommentPrefix, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
 	SET_CONTROLPARENT( WxCheckRemoveCommentPrefix );
-	WxCheckBreakLines = new wxCheckBox( WxAuiNoteBookPage4, ID_WXCHECKBREAKLINES, _( "Enable line breaking" ), wxPoint( 2, 191 ), wxSize( 790, 17 ), 0, wxDefaultValidator, wxT( "WxCheckBreakLines" ) );
+	WxCheckBreakOneLineHeaders = new wxCheckBox( WxAuiNoteBookPage4, ID_WXCHECKBREAKONELINEHEADERS, _( "Break one line headers" ), wxPoint( 2, 191 ), wxSize( 790, 17 ), 0, wxDefaultValidator, wxT( "WxCheckBreakOneLineHeaders" ) );
+	WxBoxSizer42->Add( WxCheckBreakOneLineHeaders, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
+	SET_CONTROLPARENT( WxCheckBreakOneLineHeaders );
+
+	WxCheckBreakLines = new wxCheckBox( WxAuiNoteBookPage4, ID_WXCHECKBREAKLINES, _( "Enable line breaking" ), wxPoint( 2, 212 ), wxSize( 790, 17 ), 0, wxDefaultValidator, wxT( "WxCheckBreakLines" ) );
 	WxBoxSizer42->Add( WxCheckBreakLines, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
 	SET_CONTROLPARENT( WxCheckBreakLines );
+
 	WxBoxSizer43 = new wxBoxSizer( wxHORIZONTAL );
 	WxBoxSizer42->Add( WxBoxSizer43, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	WxBoxSizer43->Add(10,0,0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
@@ -915,6 +928,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxCheckBreakAfterLogical->Enable( false );
 	WxBoxSizer44->Add( WxCheckBreakAfterLogical, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	SET_CONTROLPARENT( WxCheckBreakAfterLogical );
+	
 	WxAuiNoteBookPage5 = new wxPanel( WxAuiNotebook1, ID_WXAUINOTEBOOKPAGE5, wxPoint( 4, 24 ), wxSize( 792, 464 ) );
 	WxAuiNotebook1->AddPage( WxAuiNoteBookPage5, _( "Padding" ) );
 	WxBoxSizer45 = new wxBoxSizer( wxVERTICAL );
@@ -951,6 +965,22 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxCheckFillEmptyLines = new wxCheckBox( WxAuiNoteBookPage5, ID_WXCHECKFILLEMPTYLINES, _( "Fill empty lines with the whitespace of their previous lines" ), wxPoint( 167, 170 ), wxSize( 790, 17 ), 0, wxDefaultValidator, wxT( "WxCheckFillEmptyLines" ) );
 	WxBoxSizer45->Add( WxCheckFillEmptyLines, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
 	SET_CONTROLPARENT( WxCheckFillEmptyLines );
+	
+	WxCheckPadComma = new wxCheckBox( WxAuiNoteBookPage5, ID_WXCHECKPADCOMMA, _( "Pad comma" ), wxPoint( 167, 191 ), wxSize( 790, 17 ), 0, wxDefaultValidator, wxT( "WxCheckPadComma" ) );
+	WxBoxSizer45->Add( WxCheckPadComma, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
+	SET_CONTROLPARENT( WxCheckPadComma );
+	WxCheckPadReturnType = new wxCheckBox( WxAuiNoteBookPage5, ID_WXCHECKPADRETURNTYPE, _( "Pad return type(Object-C)" ), wxPoint( 167, 212 ), wxSize( 790, 17 ), 0, wxDefaultValidator, wxT( "WxCheckPadReturnType" ) );
+	WxBoxSizer45->Add( WxCheckPadReturnType, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
+	SET_CONTROLPARENT( WxCheckPadReturnType );
+	WxCheckUnpadReturnType = new wxCheckBox( WxAuiNoteBookPage5, ID_WXCHECKUNPADRETURNTYPE, _( "Unpad return type(Object-C)" ), wxPoint( 167, 233 ), wxSize( 790, 17 ), 0, wxDefaultValidator, wxT( "WxCheckUnpadReturnType" ) );
+	WxBoxSizer45->Add( WxCheckUnpadReturnType, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
+	SET_CONTROLPARENT( WxCheckUnpadReturnType );
+	WxCheckPadParamType = new wxCheckBox( WxAuiNoteBookPage5, ID_WXCHECKPADPARAMTYPE, _( "Pad param type(Object-C)" ), wxPoint( 167, 254 ), wxSize( 790, 17 ), 0, wxDefaultValidator, wxT( "WxCheckPadParamType" ) );
+	WxBoxSizer45->Add( WxCheckPadParamType, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
+	SET_CONTROLPARENT( WxCheckPadParamType );
+	WxCheckUnpadParamType = new wxCheckBox( WxAuiNoteBookPage5, ID_WXCHECKUNPADPARAMTYPE, _( "Unpad param type(Object-C)" ), wxPoint( 167, 275 ), wxSize( 790, 17 ), 0, wxDefaultValidator, wxT( "WxCheckUnpadParamTypeUn" ) );
+	WxBoxSizer45->Add( WxCheckUnpadParamType, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
+	SET_CONTROLPARENT( WxCheckUnpadParamType );
 	WxBoxSizer46 = new wxBoxSizer( wxHORIZONTAL );
 	WxBoxSizer45->Add( WxBoxSizer46, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
 	WxStaticText25 = new wxStaticText( WxAuiNoteBookPage5, ID_WXSTATICTEXT25, _( "Pointer alignment:" ), wxPoint( 5, 7 ), wxDefaultSize, 0, wxT( "WxStaticText25" ) );
@@ -1426,6 +1456,7 @@ void MadOptionsDialog::LoadOptions( void )
 	WxCheckIndentCol1Comments->SetValue( cfg->ReadBool( wxT( "indent_col1_comments" ), true ) );
 	WxSpinMinConditionalEvent->SetValue( cfg->ReadLong( wxT( "min_conditional_indent" ), 2 ) );
 	WxEditMaxInStatementIndent->SetValue( wxString() << cfg->ReadLong( wxT( "max_instatement_indent" ), 40 ) );
+	WxEditIndentContinuation->SetValue( wxString() << cfg->ReadLong( wxT( "indent_continuation" ), 1 ) );
 	WxCheckBreakClosing->SetValue( cfg->ReadBool( wxT( "break_closing" ), true ) );
 	WxCheckBreakElseIfs->SetValue( cfg->ReadBool( wxT( "break_elseifs" ), true ) );
 	WxCheckAddBrackets->SetValue( cfg->ReadBool( wxT( "add_brackets" ), false ) );

@@ -124,6 +124,11 @@ FreeBSD packaging (with FreeBSD 10.01)
 2. aclocal version in aclocal.m4
 3. stdc++ version
 
+Mod v0.4.7
+New: Astyle 2.06 new option support
+Fix: UI issues of source formatter config tab
+Update Simplified Chinese translation
+
 Mod v0.4.6
 This release is mainly for more encodings support, especially GB18030 and Regex bug fix
 1.New: Spell check for SearchReplaceDialog would change according to active window
@@ -151,7 +156,6 @@ This release is mainly for more encodings support, especially GB18030 and Regex 
 23.Update Hunspell to 1.6
 24.Update Python to 2.7.13
 25.Other minor improvements
-
 
 Mod v0.4.5
 1.New: File history dialog
