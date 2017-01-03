@@ -3419,10 +3419,8 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 	}
 
 	m_Config->Write( wxT( "/MadEdit/ReloadFilesList" ), files );
-	bb = m_PurgeHistory;
 
-	//m_Config->Read(wxT("/MadEdit/PurgeHistory"), &bb);
-	if( bb )
+	if( m_PurgeHistory )
 	{
 		PurgeRecentFiles();
 		PurgeRecentFonts();
