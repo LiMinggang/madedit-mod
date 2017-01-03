@@ -49,7 +49,7 @@ Boost Python(1.62) add 'address-model=64' if build for 64 bit and add ' cflags=-
 wxWidgets(3.1.0) (CXXFLAGS=-fPIC CPPFLAGS=-fPIC CFLAGS=-fPIC, x64)
 ./configure --enable-unicode --disable-shared --with-libpng=builtin --with-zlib=builtin --with-expat=builtin --with-gtk3=yes --with-libiconv=no
 MadEdit-Mod
-./configure --with-boost=${HOME}/boost_1_61_0 --with-wxdir=${HOME}/wxWidgets-3.1.0
+./configure --with-boost=${HOME}/boost_1_62_0 --with-wxdir=${HOME}/wxWidgets-3.1.0
 
 Example build under Windows
 Boost(1.62)
