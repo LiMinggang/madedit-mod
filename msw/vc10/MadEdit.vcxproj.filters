@@ -43,6 +43,12 @@
     <Filter Include="Header Files\Astyle">
       <UniqueIdentifier>{60924d98-d272-4fe0-aa48-4a9416d4e0fe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\SpellChecker">
+      <UniqueIdentifier>{2e0b5e1b-746b-453f-b651-c4dcd6d48f09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MarkDown">
+      <UniqueIdentifier>{be93ec1e-bd59-4714-8b6d-aafa82b1168f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\EmbeddedPython.cpp">
@@ -341,22 +347,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\spellchecker\HunspellInterface.h">
-      <Filter>Source Files\SpellChecker</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\spellchecker\PersonalDictionary.h">
-      <Filter>Source Files\SpellChecker</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\spellchecker\SpellCheckEngineInterface.h">
-      <Filter>Source Files\SpellChecker</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\spellchecker\SpellCheckEngineOption.h">
-      <Filter>Source Files\SpellChecker</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\spellchecker\SpellCheckerManager.h">
-      <Filter>Source Files\SpellChecker</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\spellchecker\SpellCheckUserInterface.h">
       <Filter>Source Files\SpellChecker</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\MadAboutDialog.h">
@@ -430,12 +421,6 @@
     </ClInclude>
     <ClInclude Include="..\..\src\MadEdit\ucs4_t.h">
       <Filter>Header Files\MadEdit</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\markdown\markdown.h">
-      <Filter>Source Files\MarkDown</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\markdown\markdown-tokens.h">
-      <Filter>Source Files\MarkDown</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\MadSearchReplaceDialog.h">
       <Filter>Header Files</Filter>
@@ -601,6 +586,27 @@
     </ClInclude>
     <ClInclude Include="..\..\astyle\astyle\astyle.h">
       <Filter>Header Files\Astyle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\spellchecker\HunspellInterface.h">
+      <Filter>Header Files\SpellChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\spellchecker\PersonalDictionary.h">
+      <Filter>Header Files\SpellChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\spellchecker\SpellCheckEngineInterface.h">
+      <Filter>Header Files\SpellChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\spellchecker\SpellCheckerManager.h">
+      <Filter>Header Files\SpellChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\spellchecker\SpellCheckUserInterface.h">
+      <Filter>Header Files\SpellChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\markdown\markdown.h">
+      <Filter>Header Files\MarkDown</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\markdown\markdown-tokens.h">
+      <Filter>Header Files\MarkDown</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
