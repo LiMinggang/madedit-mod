@@ -40,6 +40,15 @@
     <Filter Include="Source files\charset-detector\LangModels">
       <UniqueIdentifier>{6e32b77f-3ecb-47d9-8a2c-051192054210}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header files\Astyle">
+      <UniqueIdentifier>{17c00da0-040e-4bfc-9d5e-06e6043a2925}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\MarkDown">
+      <UniqueIdentifier>{e2f38beb-21a6-4b1e-b70c-140f1d87681c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\SpellChecker">
+      <UniqueIdentifier>{28fad63d-7a8a-4941-b866-42d854384d4c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\MadAboutDialog.h">
@@ -192,36 +201,6 @@
     <ClInclude Include="..\..\src\MadRecentList.h">
       <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\spellchecker\HunspellInterface.h">
-      <Filter>Source files\SpellChecker</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\spellchecker\PersonalDictionary.h">
-      <Filter>Source files\SpellChecker</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\spellchecker\SpellCheckEngineInterface.h">
-      <Filter>Source files\SpellChecker</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\spellchecker\SpellCheckEngineOption.h">
-      <Filter>Source files\SpellChecker</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\spellchecker\SpellCheckUserInterface.h">
-      <Filter>Source files\SpellChecker</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\spellchecker\SpellCheckerManager.h">
-      <Filter>Source files\SpellChecker</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\markdown\markdown.h">
-      <Filter>Source files\Markdown</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\markdown\markdown-tokens.h">
-      <Filter>Source files\Markdown</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\astyle\asstreamiterator.h">
-      <Filter>Source files\Astyle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\astyle\formattersettings.h">
-      <Filter>Source files\Astyle</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\MadSearchReplaceDialog.h">
       <Filter>Header files</Filter>
     </ClInclude>
@@ -275,6 +254,45 @@
     </ClInclude>
     <ClInclude Include="..\..\charset-detector\src\uchardet.h">
       <Filter>Header files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\astyle\asstreamiterator.h">
+      <Filter>Header files\Astyle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\astyle\astylepredefinedstyles.h">
+      <Filter>Header files\Astyle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\astyle\formattersettings.h">
+      <Filter>Header files\Astyle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\astyle\astyle\ASLocalizer.h">
+      <Filter>Header files\Astyle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\astyle\astyle\astyle.h">
+      <Filter>Header files\Astyle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\markdown\markdown.h">
+      <Filter>Header files\MarkDown</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\markdown\markdown-tokens.h">
+      <Filter>Header files\MarkDown</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\spellchecker\HunspellInterface.h">
+      <Filter>Header files\SpellChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\spellchecker\PersonalDictionary.h">
+      <Filter>Header files\SpellChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\spellchecker\SpellCheckEngineInterface.h">
+      <Filter>Header files\SpellChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\spellchecker\SpellCheckEngineOption.h">
+      <Filter>Header files\SpellChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\spellchecker\SpellCheckerManager.h">
+      <Filter>Header files\SpellChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\spellchecker\SpellCheckUserInterface.h">
+      <Filter>Header files\SpellChecker</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
