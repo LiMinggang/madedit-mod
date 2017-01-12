@@ -1757,6 +1757,14 @@ void MadSearchReplaceDialog::SearchAll( MadEdit * madedit, bool needRec/*=true*/
 						results->Expand(lstid);
 				}
 			}
+			if(WxCheckBoxBookmarkLine->IsChecked())
+			{
+				if( g_ActiveMadEdit != NULL )
+				{
+					g_ActiveMadEdit->Refresh( false );					
+					g_ActiveMadEdit->SetFocus();
+				}
+			}
 		}
 	}
 	else

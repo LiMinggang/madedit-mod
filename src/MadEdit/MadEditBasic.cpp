@@ -3868,7 +3868,11 @@ int MadEdit::FindTextAll( const wxString &expr,
 
 		++count;
 
-		if( IsTextFile() && m_BookmarkInSearch && !( m_Lines->m_LineList.IsBookmarked( bpos.iter ) ) ) m_Lines->m_LineList.SetBookmark( bpos.iter );
+		if( IsTextFile() && m_BookmarkInSearch && !( m_Lines->m_LineList.IsBookmarked( bpos.iter ) ) )
+		{
+			m_Lines->m_LineList.SetBookmark( bpos.iter );
+			m_RepaintAll = true;
+		}
 
 		if( bFirstOnly ) break;
 
