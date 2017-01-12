@@ -1742,17 +1742,20 @@ void MadSearchReplaceDialog::SearchAll( MadEdit * madedit, bool needRec/*=true*/
 
 			// Root
 			// First Level----search results summary
-			wxTreeItemIdValue cookie;
-			id = results->GetFirstChild(rtid, cookie);
-			if(id.IsOk())
+			if( !WxCheckBoxBookmarkOnly->IsChecked() )
 			{
-				if(!results->IsExpanded(id))
-					results->Expand(id);
-				// Second Level File results
-				wxTreeItemIdValue ck;
-				wxTreeItemId lstid = results->GetFirstChild(id, ck);
-				if(lstid.IsOk() && !results->IsExpanded(lstid))
-					results->Expand(lstid);
+				wxTreeItemIdValue cookie;
+				id = results->GetFirstChild(rtid, cookie);
+				if(id.IsOk())
+				{
+					if(!results->IsExpanded(id))
+						results->Expand(id);
+					// Second Level File results
+					wxTreeItemIdValue ck;
+					wxTreeItemId lstid = results->GetFirstChild(id, ck);
+					if(lstid.IsOk() && !results->IsExpanded(lstid))
+						results->Expand(lstid);
+				}
 			}
 		}
 	}
