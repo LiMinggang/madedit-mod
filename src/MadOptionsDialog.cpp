@@ -475,7 +475,8 @@ void MadOptionsDialog::CreateGUIControls( void )
 	arrayStringFor_WxRadioBoxPrintOffset.Add( _( "None" ) );
 	arrayStringFor_WxRadioBoxPrintOffset.Add( _( "First Page Only" ) );
 	arrayStringFor_WxRadioBoxPrintOffset.Add( _( "Every Page" ) );
-	WxRadioBoxPrintOffset = new wxRadioBox( WxNoteBookPage3, ID_WXRADIOBOXPRINTOFFSET, _( "Print Offset Header" ), wxPoint( 6, 16 ), wxSize( 200, 130 ), arrayStringFor_WxRadioBoxPrintOffset, 1, wxRA_SPECIFY_COLS, wxDefaultValidator, wxT( "WxRadioBoxPrintOffset" ) );
+	WxRadioBoxPrintOffset = new wxRadioBox( WxNoteBookPage3, ID_WXRADIOBOXPRINTOFFSET, _( "Print Offset Header" ), wxPoint( 6, 16 ), wxDefaultSize, arrayStringFor_WxRadioBoxPrintOffset, 1, wxRA_SPECIFY_COLS, wxDefaultValidator, wxT( "WxRadioBoxPrintOffset" ) );
+	WxRadioBoxPrintOffset->InvalidateBestSize();
 	WxRadioBoxPrintOffset->SetSelection( 0 );
 	WxStaticBoxSizer2->Add( WxRadioBoxPrintOffset, 1, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	SET_CONTROLPARENT( WxRadioBoxPrintOffset );
@@ -687,7 +688,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxRadioBoxBracketStyle = new wxRadioBox( WxAuiNoteBookPage1, ID_WXRADIOBOXBRACKETSTYLE, _( "Bracket Style" ), wxPoint( 2, 28 ), wxDefaultSize, arrayStringFor_WxRadioBoxBracketStyle, 1, wxRA_SPECIFY_COLS, wxDefaultValidator, wxT( "WxRadioBoxBracketStyle" ) );
 	WxRadioBoxBracketStyle->InvalidateBestSize();
 	WxRadioBoxBracketStyle->SetSelection( 0 );
-	WxBoxSizer47->Add( WxRadioBoxBracketStyle, 0, wxALIGN_LEFT | wxALIGN_TOP | wxALL, 2 );
+	WxBoxSizer47->Add( WxRadioBoxBracketStyle, 0, wxALIGN_LEFT | wxALIGN_TOP | wxALL, 5 );
 	SET_CONTROLPARENT( WxRadioBoxBracketStyle );
 	wxStaticBox* WxStaticBoxSizer7_StaticBoxObj = new wxStaticBox( WxAuiNoteBookPage1, wxID_ANY, _( "Sample" ) );
 	WxStaticBoxSizer7 = new wxStaticBoxSizer( WxStaticBoxSizer7_StaticBoxObj, wxVERTICAL );

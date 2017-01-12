@@ -186,6 +186,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\astyle\asstreamiterator.h" />
+    <ClInclude Include="..\..\astyle\astylepredefinedstyles.h" />
+    <ClInclude Include="..\..\astyle\astyle\ASLocalizer.h" />
+    <ClInclude Include="..\..\astyle\astyle\astyle.h" />
     <ClInclude Include="..\..\astyle\formattersettings.h" />
     <ClInclude Include="..\..\charset-detector\src\CharDistribution.h" />
     <ClInclude Include="..\..\charset-detector\src\JpCntx.h" />

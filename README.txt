@@ -80,7 +80,7 @@ Syntax files, Locale files, Dictionaries and Settings:
     Chinese Simplified (zh_CN)
     Chinese Traditional(zh_TW) (Not done)
     German(de_DE)              (Not done)
-    Greek(el)
+    Greek(el)                  (Almost done)
     Italian(it_IT)             (Not done)
     Japanese(ja_JP)            (Not done)
     Polish(pl_PL)              (Not done)
@@ -1081,6 +1081,11 @@ MadEdit-Mod: http://sourceforge.net/projects/madedit-mod/
 wxWidgets: http://www.wxwidgets.org
 wxDevCpp: http://wxdsgn.sourceforge.net
 Boost: http://www.boost.org
+Python: http://www.python.org
 Open Clip Art Library: http://www.openclipart.org
+CPP-Markdown: http://sourceforge.net/projects/cpp-markdown/
+Hunspell: https://sourceforge.net/projects/hunspell/
+Astyle: https://sourceforge.net/projects/astyle/
+Uchardet: https://github.com/freedesktop/uchardet
 Silk Icon set: http://www.famfamfam.com/
 Fugue Icons: http://p.yusukekamiyamane.com/
