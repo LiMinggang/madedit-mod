@@ -178,6 +178,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DisableSpecificWarnings>4706;4068;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <Optimization>Full</Optimization>
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(WXWIN3)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>

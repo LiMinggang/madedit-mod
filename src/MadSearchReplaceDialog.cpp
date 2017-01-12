@@ -1701,6 +1701,8 @@ void MadSearchReplaceDialog::SearchAll( MadEdit * madedit, bool needRec/*=true*/
 			myroot = g_MainFrame->NewSearchSession(strtobesearch);
 		}
 
+		OnProgressUpdatePtr progressUpdatePtr = NULL;
+
 		if( ok > 2000 )
 		{
 			wxString msg = _( "Found %s matched texts..." );
@@ -1714,26 +1716,18 @@ void MadSearchReplaceDialog::SearchAll( MadEdit * madedit, bool needRec/*=true*/
 									 wxPD_APP_MODAL );
 			g_SearchProgressDialog = &dialog;
 
-			if( !WxCheckBoxBookmarkOnly->IsChecked() )
-			{
-				static wxString text( _( "Search Results" ) );
-				int pid = g_MainFrame->m_InfoNotebook->GetPageIndex( g_MainFrame->m_FindInFilesResults );
-				g_MainFrame->m_InfoNotebook->SetPageText( pid, text );
-				DisplayFindAllResult( myroot, begpos, endpos, madedit, true, &OnSearchProgressUpdate );
-			}
+			progressUpdatePtr = &OnSearchProgressUpdate;
 
 			dialog.Update( ok );
 			g_SearchProgressDialog = NULL;
 		}
-		else
+
+		if( !WxCheckBoxBookmarkOnly->IsChecked() )
 		{
-			if( !WxCheckBoxBookmarkOnly->IsChecked() )
-			{
-				static wxString text( _( "Search Results" ) );
-				int pid = g_MainFrame->m_InfoNotebook->GetPageIndex( g_MainFrame->m_FindInFilesResults );
-				g_MainFrame->m_InfoNotebook->SetPageText( pid, text );
-				DisplayFindAllResult( myroot, begpos, endpos, madedit, true );
-			}
+			static wxString text( _( "Search Results" ) );
+			int pid = g_MainFrame->m_InfoNotebook->GetPageIndex( g_MainFrame->m_FindInFilesResults );
+			g_MainFrame->m_InfoNotebook->SetPageText( pid, text );
+			DisplayFindAllResult( myroot, begpos, endpos, madedit, true, progressUpdatePtr );
 		}
 
 		if( !ok )
