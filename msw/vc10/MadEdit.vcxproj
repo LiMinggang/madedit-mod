@@ -126,7 +126,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalOptions>/ignore:4217 /ignore:4049 /ignore:4204 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>wxmsw31ud_core.lib;wxbase31ud.lib;wxmsw31ud_aui.lib;wxbase31ud_xml.lib;wxexpatd.lib;wxmsw31ud_html.lib;wxpngd.lib;wxzlibd.lib;python27_d.lib;libboost_python-vc100-mt-sgyd-1_62.lib;libhunspell.lib;comctl32.lib;uuid.lib;rpcrt4.lib;User32.Lib;Gdi32.Lib;Shell32.Lib;AdvAPI32.Lib;Ole32.Lib;OleAut32.Lib;ComDlg32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>wxmsw31ud_core.lib;wxbase31ud.lib;wxmsw31ud_aui.lib;wxbase31ud_xml.lib;wxexpatd.lib;wxmsw31ud_html.lib;wxpngd.lib;wxzlibd.lib;boostpython.lib;python27_d.lib;libhunspell.lib;comctl32.lib;uuid.lib;rpcrt4.lib;User32.Lib;Gdi32.Lib;Shell32.Lib;AdvAPI32.Lib;Ole32.Lib;OleAut32.Lib;ComDlg32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)MadEdit.exe</OutputFile>
       <AdditionalLibraryDirectories>$(WXWIN3)\lib\vc_x64_lib;$(TargetDir);$(BOOST)\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -184,7 +184,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalOptions>/ignore:4217 /ignore:4049 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>wxmsw31u_core.lib;wxbase31u.lib;wxmsw31u_aui.lib;wxbase31u_xml.lib;wxexpat.lib;wxmsw31u_html.lib;wxpng.lib;wxzlib.lib;python27.lib;libboost_python-vc100-mt-s-1_62.lib;libhunspell.lib;comctl32.lib;rpcrt4.lib;User32.Lib;Gdi32.Lib;Shell32.Lib;AdvAPI32.Lib;Ole32.Lib;OleAut32.Lib;ComDlg32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>wxmsw31u_core.lib;wxbase31u.lib;wxmsw31u_aui.lib;wxbase31u_xml.lib;wxexpat.lib;wxmsw31u_html.lib;wxpng.lib;wxzlib.lib;python27.lib;boostpython.lib;libhunspell.lib;comctl32.lib;rpcrt4.lib;User32.Lib;Gdi32.Lib;Shell32.Lib;AdvAPI32.Lib;Ole32.Lib;OleAut32.Lib;ComDlg32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)MadEdit.exe</OutputFile>
       <AdditionalLibraryDirectories>$(WXWIN3)\lib\vc_x64_lib;$(TargetDir);$(BOOST)\stage\lib</AdditionalLibraryDirectories>
       <SubSystem>Windows</SubSystem>
@@ -391,6 +391,9 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="boostpython.vcxproj">
+      <Project>{1296e799-d8a5-411a-81b6-6aaf79986070}</Project>
+    </ProjectReference>
     <ProjectReference Include="libhunspell.vcxproj">
       <Project>{53609bb3-d874-465c-af7b-df626db0d89b}</Project>
     </ProjectReference>
