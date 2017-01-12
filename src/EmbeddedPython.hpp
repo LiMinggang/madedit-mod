@@ -11,7 +11,7 @@
 #include <Python.h>
 
 #define BOOST_PYTHON_STATIC_LIB
-#include <boost/python.hpp>
+#include "../python/include/boost/python.hpp"
 #include <boost/function.hpp>
 
 #include <iostream>

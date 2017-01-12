@@ -44,6 +44,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/Zm200 "
+				Optimization="3"
 				AdditionalIncludeDirectories="..\..\minipython\Python;..\..\minipython\Modules\zlib;"
 				PreprocessorDefinitions="Py_BUILD_CORE;Py_NO_ENABLE_SHARED;WIN32"
 				RuntimeLibrary="0"
