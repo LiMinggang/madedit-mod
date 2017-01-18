@@ -465,12 +465,6 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	python/src/object/function.cpp \
 	python/src/object/class.cpp \
 	python/src/object/enum.cpp \
-	python/src/numpy/ufunc.cpp \
-	python/src/numpy/scalars.cpp \
-	python/src/numpy/ndarray.cpp \
-	python/src/numpy/numpy.cpp \
-	python/src/numpy/matrix.cpp \
-	python/src/numpy/dtype.cpp \
 	python/src/module.cpp \
 	python/src/numeric.cpp \
 	python/src/long.cpp \
