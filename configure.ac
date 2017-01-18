@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
-AC_INIT([madedit-mod], [0.4.4], [minggang.li@gmail.com])
+AC_INIT([madedit-mod], [0.4.7], [minggang.li@gmail.com])
 AC_CONFIG_SRCDIR([src/MadEditApp.cpp])
 AC_CONFIG_HEADER([config.h])
 AC_PREFIX_DEFAULT([/usr])
@@ -108,12 +108,11 @@ AC_ARG_WITH(xpressive,
     [CXXFLAGS="$CXXFLAGS -I\$(top_srcdir)/xpressive"])
 
 # option for additional Boost lib
-AC_ARG_WITH(boost, 
-    [  --with-boost=PATH       use additional Boost library path,
-                          otherwise use system include path],
-    [CXXFLAGS="$CXXFLAGS -I$withval"]
-    [LIBS="$LIBS $withval/stage/lib/libboost_python.a"])
-
+#AC_ARG_WITH(boost, 
+#    [  --with-boost=PATH       use additional Boost library path,
+#                          otherwise use system include path],
+#    [CXXFLAGS="$CXXFLAGS -I$withval"]
+#    [LIBS="$LIBS $withval/stage/lib/libboost_python.a"])
 
 # Checks for wxWidgets library
 WX_LIBS_set="0"
