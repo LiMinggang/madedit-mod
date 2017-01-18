@@ -111,7 +111,7 @@ AC_ARG_WITH(xpressive,
 AC_ARG_WITH(boost, 
     [  --with-boost=PATH       use additional Boost library path,
                           otherwise use system include path],
-    [CXXFLAGS="$CXXFLAGS -I$withval"]
+    [CXXFLAGS="$CXXFLAGS -I$withval"])
 #    [LIBS="$LIBS $withval/stage/lib/libboost_python.a"])
 
 # Checks for wxWidgets library
