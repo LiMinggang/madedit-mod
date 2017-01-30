@@ -3400,6 +3400,8 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 		}
 	}
 
+	wxTheApp->DeletePendingEvents();
+
 	// save ReloadFilesList
 	wxString files;
 	int count = int( m_Notebook->GetPageCount() );
