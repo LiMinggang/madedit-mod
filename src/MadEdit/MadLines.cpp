@@ -212,7 +212,7 @@ wxByte MadMemData::Get( const wxFileOffset &pos )
 
 void MadMemData::Get( const wxFileOffset &pos, wxByte *buffer, size_t size )
 {
-	wxASSERT( ( pos >= 0 ) && ( size > 0 ) && ( ( pos + size ) <= m_Size ) );
+	wxASSERT( ( pos >= 0 ) && ( size > 0 ) && ( ( pos + (wxFileOffset)size ) <= m_Size ) );
 	int buf = pos >> BUFFER_BITS;    //pos / BUFFER_SIZE;
 	int idx = pos & BUFFER_MASK;    //pos % BUFFER_SIZE;
 	size_t buf_size = BUFFER_SIZE - idx;
@@ -467,7 +467,7 @@ wxByte MadFileData::Get( const wxFileOffset &pos )
 
 void MadFileData::Get( const wxFileOffset &pos, wxByte * buffer, size_t size )
 {
-	wxASSERT( ( pos >= 0 ) && ( size > 0 ) && ( ( pos + size ) <= m_Size ) );
+	wxASSERT( ( pos >= 0 ) && ( size > 0 ) && ( ((wxFileOffset)( pos + size )) <= m_Size ) );
 	wxFileOffset idx;
 
 	if( m_Buf1Pos >= 0 )
@@ -494,7 +494,7 @@ void MadFileData::Get( const wxFileOffset &pos, wxByte * buffer, size_t size )
 
 	idx = pos & BUFFER_BASE_MASK; //(pos >> BUFFER_BITS) << BUFFER_BITS;        //(pos / BUFFER_SIZE) * BUFFER_SIZE;
 
-	if( pos + size <= idx + BUFFER_SIZE )              // wanted bytes in one block
+	if( ((wxFileOffset)(pos + size)) <= idx + BUFFER_SIZE )              // wanted bytes in one block
 	{
 		if( m_Buf1Pos >= 0 )
 		{
@@ -2930,7 +2930,7 @@ void MadLines::RecountLineWidth( void )
 
 				if( bpi != NULL )
 				{
-					wxASSERT( bracepos <= bpi->LinePos );
+					wxASSERT( (wxFileOffset)bracepos <= bpi->LinePos );
 
 					if( bpi->LinePos == bracepos )
 					{
@@ -3907,7 +3907,7 @@ bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 					}
 					else
 					{
-						wxASSERT( pos0 <= tempmemdata->m_Buffers.size()*BUFFER_SIZE );
+						wxASSERT( pos0 <= ((wxFileOffset)(tempmemdata->m_Buffers.size()*BUFFER_SIZE)) );
 						tempmemdata->m_Size = pos0;
 					}
 

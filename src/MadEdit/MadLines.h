@@ -282,7 +282,7 @@ struct MadLine
 			cnt = size;
 
 			//wxLogDebug(wxT("Before:m_size[%d], m_data[%p]"), biter->m_Size, biter->m_Data);
-			if( pos + cnt > biter->m_Size ) { cnt = biter->m_Size - pos; }
+			if( ((wxFileOffset)(pos + cnt)) > biter->m_Size ) { cnt = (size_t)(biter->m_Size - pos); }
 
 			biter->Get( pos, buf, cnt );
 

@@ -16,7 +16,7 @@ A. Linux, FreeBSD, and Unix-like OS (__WXGTK__):
       1. wxWidgets-3.1.0 or higher with Unicode and IPC enabled
       2. Boost-1.56.0 or higher(build Boost-Python)(1.62 is recommended)
 
-      (install gtk2-devel/libgtk-3-dev(Ubuntu)/gtk3-devel(Fedora) gtext-devel automake rpm-build)
+      (install gtk2-devel/libgtk-3-dev(Ubuntu)/gtk3-devel(Fedora) gettext-devel automake rpm-build)
       copy wxwin.m4 to usr/share/acloXXX/ or install wxGTK-devel
 
 B. MS Windows (__WXMSW__):

@@ -6930,11 +6930,11 @@ void MadEdit::OverwriteDataSingle( vector<wxFileOffset> &del_bpos, vector<wxFile
 				{
 					size_t len = 256 * 1024;
 
-					if( len > size ) len = size;
+					if( len > (size_t)size ) len = (size_t)size;
 
 					wxFileOffset ll = lit->m_Size - lpos;
 
-					if( len > ll ) len = ll;
+					if( len > (size_t)ll ) len = (size_t)ll;
 
 					if( len > buffer.size() )
 					{

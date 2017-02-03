@@ -2945,11 +2945,11 @@ MadSearchResult MadEdit::FindTextPrevious( const wxString &text,
 		epos = bpos;
 		size_t s = text.Len() * 4;
 
-		if( epos.pos + s > epos1.pos )
+		if( ((wxFileOffset)(epos.pos + s)) > epos1.pos )
 		{
 			s = text.Len();
 
-			if( epos.pos + s > epos1.pos )
+			if(((wxFileOffset)( epos.pos + s)) > epos1.pos )
 			{
 				s = 0;
 			}
@@ -2963,7 +2963,7 @@ MadSearchResult MadEdit::FindTextPrevious( const wxString &text,
 			{
 				len = epos.iter->m_Size - epos.linepos;
 
-				if( len > s ) len = s;
+				if( len > (wxFileOffset)s ) len = (wxFileOffset)s;
 
 				if( ( epos.linepos += len ) == epos.iter->m_Size )
 				{
@@ -3184,11 +3184,11 @@ MadSearchResult MadEdit::FindHexPrevious( const wxString &hexstr,
 		epos = bpos;
 		size_t s = hexstr.Len() * 4;
 
-		if( epos.pos + s > epos1.pos )
+		if( ((wxFileOffset)(epos.pos + s)) > epos1.pos )
 		{
 			s = hexstr.Len();
 
-			if( epos.pos + s > epos1.pos )
+			if(((wxFileOffset)(epos.pos + s)) > epos1.pos )
 			{
 				s = 0;
 			}
@@ -3202,7 +3202,7 @@ MadSearchResult MadEdit::FindHexPrevious( const wxString &hexstr,
 			{
 				len = epos.iter->m_Size - epos.linepos;
 
-				if( len > s ) len = s;
+				if( len > (wxFileOffset)s ) len = (wxFileOffset)s;
 
 				if( ( epos.linepos += len ) == epos.iter->m_Size )
 				{

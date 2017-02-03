@@ -384,7 +384,7 @@ void MadEdit::ConvertNewLineType( MadNewLineType type )
 				{
 					len = m_CaretPos.linepos - len;
 
-					if( len >= newlinesize )
+					if( len >= (wxFileOffset)newlinesize )
 					{
 						wxFileOffset newlen = newlinesize - 1;
 						newCaretPos -= ( len - newlen );
