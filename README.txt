@@ -121,6 +121,7 @@ Mod v0.4.7
 New: Astyle 2.06 new option support
 Fix: UI issues of source formatter config tab
 Fix: Bookmark tag show up issue in Find and Bookmark
+Fix: Crash while opening file history dialog by hitting F9
 Use standalone boost python to replace boost one(No need to compile boost anymore)
 Update Simplified Chinese translation
 

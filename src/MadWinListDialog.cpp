@@ -112,14 +112,20 @@ void MadWinListDialog::InitWindowListIterms()
 	MadWindowsList->DeleteAllItems();
 
 	MadWindowsList->Freeze();
+	wxListItem info;
 	for( long id = 0; id < count; ++id )
 	{
 		MadEdit * madedit = ( MadEdit* )notebookp->GetPage( id );
 		wxFileName fileName( madedit->GetFileName() );
 		wxString fname = notebookp->GetPageText( id );
 		wxString fdir = fileName.GetPath();
-		tmp = MadWindowsList->InsertItem(id, fname);
-		MadWindowsList->SetItemData(tmp, id);
+		
+		info.Clear();
+		info.m_text = fname;
+		info.m_mask = wxLIST_MASK_TEXT;
+		info.m_itemId = MadWindowsList->GetItemCount();
+		tmp = MadWindowsList->InsertItem(info);
+		MadWindowsList->SetItemData(tmp, info.m_itemId);
 		MadWindowsList->SetItem(tmp, 1, fdir);
 	}
 	MadWindowsList->Thaw();

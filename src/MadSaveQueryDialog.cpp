@@ -106,7 +106,8 @@ void MadSaveQueryDialog::InitWindowListIterms()
 	MadFileList->DeleteAllItems();
 
 	MadFileList->Freeze();
-	long index = 0;
+	
+	wxListItem info;
 	for( long id = 0; id < count; ++id )
 	{
 		MadEdit * madedit = ( MadEdit* )notebookp->GetPage( id );
@@ -115,8 +116,13 @@ void MadSaveQueryDialog::InitWindowListIterms()
 			wxFileName fileName( madedit->GetFileName() );
 			wxString fname = notebookp->GetPageText( id );
 			wxString fdir = fileName.GetPath();
-			tmp = MadFileList->InsertItem(index++, fname);
-			MadFileList->SetItemData(tmp, id);
+			
+			info.Clear();
+			info.m_text = fname;
+			info.m_mask = wxLIST_MASK_TEXT;
+			info.m_itemId = MadFileList->GetItemCount();
+			tmp = MadFileList->InsertItem(info);
+			MadFileList->SetItemData(tmp, info.m_itemId);
 			MadFileList->SetItem(tmp, 1, fdir);
 		}
 	}
