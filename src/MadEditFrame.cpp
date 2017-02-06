@@ -2560,6 +2560,9 @@ void LoadDefaultSettings( wxConfigBase *madConfig )
 	g_FileCaretPosManager.Load( madConfig );
 }
 
+
+bool MadEditFrame::m_Closing = false;
+
 MadEditFrame::MadEditFrame( wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style )
 	: wxFrame( parent, id, title, position, size, style ), m_AutoSaveTimer(this, ID_WXTIMER), m_ResetToolBars(false), m_ToggleReadOnly(0)
 {
@@ -3389,6 +3392,12 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 {
 	// --> Don't use Close with a Frame,
 	// use Destroy instead.
+	if(m_Closing)
+	{
+		return;
+	}
+
+	m_Closing = true;
 	g_CheckModTimeForReload = false;
 
 	if( event.CanVeto() )

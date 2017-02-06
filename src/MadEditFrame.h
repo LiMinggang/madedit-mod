@@ -493,6 +493,7 @@ private:
 	wxTimer m_AutoSaveTimer;
 	long m_AutoSaveTimout;
     wxMenuItem * m_ToggleReadOnly;
+	static bool m_Closing;
 public:
 	MadMacroMode GetMadMacroStatus() {return m_MadMacroStatus;}
 	bool IsMacroRunning() {return ( m_MadMacroStatus == emMacroRunning );}
