@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../../python/include&quot;;&quot;$(SolutionDir)/../../minipython/Include&quot;;&quot;$(BOOST)&quot;"
-				PreprocessorDefinitions="BOOST_PYTHON_STATIC_LIB"
+				PreprocessorDefinitions="BOOST_PYTHON_STATIC_LIB;BOOST_ALL_NO_LIB"
 				RuntimeLibrary="1"
 			/>
 			<Tool
@@ -99,7 +99,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="3"
 				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../../python/include&quot;;&quot;$(SolutionDir)/../../minipython/Include&quot;;&quot;$(BOOST)&quot;"
-				PreprocessorDefinitions="BOOST_PYTHON_STATIC_LIB;Py_NO_ENABLE_SHARED"
+				PreprocessorDefinitions="BOOST_PYTHON_STATIC_LIB;Py_NO_ENABLE_SHARED;BOOST_ALL_NO_LIB"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
