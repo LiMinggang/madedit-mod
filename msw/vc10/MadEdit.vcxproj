@@ -80,8 +80,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(WXWIN3)\lib\vc_lib\mswud;$(WXWIN3)\include;$(BOOST);..\..\charset-detector\include;..\..\charset-detector\src;..\..\charset-detector\src\tables;$(SolutionDir)\..\..\minipython\Include;$(SolutionDir)\..\..\minipython\PC;$(SolutionDir)\..\..\spellchecker;$(SolutionDir)\..\..\spellchecker\hunspell\src;..\..\markdown;..\..\astyle;..\..\astyle\astyle;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;HUNSPELL_STATIC;Py_NO_ENABLE_SHARED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(WXWIN3)\lib\vc_lib\mswud;$(WXWIN3)\include;..\..\python\include\;..\..\charset-detector\include;..\..\python\include\;..\..\charset-detector\src;..\..\charset-detector\src\tables;$(SolutionDir)\..\..\minipython\include;..\..\python\include\;$(BOOST);$(SolutionDir)\..\..\minipython\PC;$(SolutionDir)\..\..\spellchecker;$(SolutionDir)\..\..\spellchecker\hunspell\src;..\..\markdown;..\..\astyle;..\..\astyle\astyle;$(BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;HUNSPELL_STATIC;Py_NO_ENABLE_SHARED;BOOST_ALL_NO_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -94,13 +94,13 @@
       <DisableSpecificWarnings>4068;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>$(WXWIN3)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(WXWIN3)\include;..\..\python\include\;$(BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
       <AdditionalOptions>/ignore:4217 /ignore:4049 /ignore:4204 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>wxmsw31ud_core.lib;wxbase31ud.lib;wxmsw31ud_aui.lib;wxbase31ud_xml.lib;wxexpatd.lib;wxmsw31ud_html.lib;wxpngd.lib;wxzlibd.lib;libboost_python-vc100-mt-sgyd-1_62.lib;python27_d.lib;libhunspell.lib;comctl32.lib;uuid.lib;rpcrt4.lib;User32.Lib;Gdi32.Lib;Shell32.Lib;AdvAPI32.Lib;Ole32.Lib;OleAut32.Lib;ComDlg32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>wxmsw31ud_core.lib;wxbase31ud.lib;wxmsw31ud_aui.lib;wxbase31ud_xml.lib;wxexpatd.lib;wxmsw31ud_html.lib;wxpngd.lib;wxzlibd.lib;boostpython.lib;python27_d.lib;libhunspell.lib;comctl32.lib;uuid.lib;rpcrt4.lib;User32.Lib;Gdi32.Lib;Shell32.Lib;AdvAPI32.Lib;Ole32.Lib;OleAut32.Lib;ComDlg32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)MadEdit.exe</OutputFile>
-      <AdditionalLibraryDirectories>$(WXWIN3)\lib\vc_lib;$(TargetDir);$(BOOST)\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(WXWIN3)\lib\vc_lib;$(TargetDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
@@ -109,8 +109,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(WXWIN3)\lib\vc_x64_lib\mswud;$(WXWIN3)\include;$(BOOST);..\..\charset-detector\include;..\..\charset-detector\src;..\..\charset-detector\src\tables;..\..\minipython\Include;..\..\minipython\PC;..\..\spellchecker;..\..\spellchecker\hunspell\src;..\..\markdown;..\..\astyle;..\..\astyle\astyle;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_WIN64;_DEBUG;_WINDOWS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;HUNSPELL_STATIC;Py_NO_ENABLE_SHARED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(WXWIN3)\lib\vc_x64_lib\mswud;$(WXWIN3)\include;..\..\python\include\;..\..\charset-detector\include;..\..\python\include\;$(BOOST);..\..\charset-detector\src;..\..\charset-detector\src\tables;..\..\minipython\include;..\..\python\include\;$(BOOST);..\..\minipython\PC;..\..\spellchecker;..\..\spellchecker\hunspell\src;..\..\markdown;..\..\astyle;..\..\astyle\astyle;$(BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WIN64;_DEBUG;_WINDOWS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;HUNSPELL_STATIC;Py_NO_ENABLE_SHARED;BOOST_ALL_NO_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeaderFile>
@@ -122,13 +122,13 @@
       <DisableSpecificWarnings>4068</DisableSpecificWarnings>
     </ClCompile>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>$(WXWIN)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(WXWIN)\include;..\..\python\include\;$(BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
       <AdditionalOptions>/ignore:4217 /ignore:4049 /ignore:4204 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalDependencies>wxmsw31ud_core.lib;wxbase31ud.lib;wxmsw31ud_aui.lib;wxbase31ud_xml.lib;wxexpatd.lib;wxmsw31ud_html.lib;wxpngd.lib;wxzlibd.lib;boostpython.lib;python27_d.lib;libhunspell.lib;comctl32.lib;uuid.lib;rpcrt4.lib;User32.Lib;Gdi32.Lib;Shell32.Lib;AdvAPI32.Lib;Ole32.Lib;OleAut32.Lib;ComDlg32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)MadEdit.exe</OutputFile>
-      <AdditionalLibraryDirectories>$(WXWIN3)\lib\vc_x64_lib;$(TargetDir);$(BOOST)\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(WXWIN3)\lib\vc_x64_lib;$(TargetDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
     </Link>
@@ -140,8 +140,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">
     <ClCompile>
       <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
-      <AdditionalIncludeDirectories>$(WXWIN3)\lib\vc_lib\mswu;$(WXWIN3)\include;$(BOOST);..\..\charset-detector\include;..\..\charset-detector\src;..\..\charset-detector\src\tables;..\..\minipython\Include;..\..\minipython\PC;$(SolutionDir)\..\..\spellchecker;$(SolutionDir)\..\..\spellchecker\hunspell\src;..\..\markdown;..\..\astyle;..\..\astyle\astyle;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;HUNSPELL_STATIC;Py_NO_ENABLE_SHARED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(WXWIN3)\lib\vc_lib\mswu;$(WXWIN3)\include;..\..\python\include\;..\..\charset-detector\include;..\..\python\include\;..\..\charset-detector\src;..\..\charset-detector\src\tables;..\..\minipython\include;..\..\python\include\;$(BOOST);..\..\minipython\PC;$(SolutionDir)\..\..\spellchecker;$(SolutionDir)\..\..\spellchecker\hunspell\src;..\..\markdown;..\..\astyle;..\..\astyle\astyle;$(BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;HUNSPELL_STATIC;Py_NO_ENABLE_SHARED;BOOST_ALL_NO_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PrecompiledHeader>
       </PrecompiledHeader>
@@ -151,11 +151,11 @@
       <Optimization>MaxSpeed</Optimization>
     </ClCompile>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>$(WXWIN)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(WXWIN)\include;..\..\python\include\;$(BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
       <AdditionalOptions>/ignore:4217 /ignore:4049 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>wxmsw31u_core.lib;wxbase31u.lib;wxmsw31u_aui.lib;wxbase31u_xml.lib;wxexpat.lib;wxmsw31u_html.lib;wxpng.lib;wxzlib.lib;python27.lib;libboost_python-vc100-mt-s-1_62.lib;libhunspell.lib;comctl32.lib;rpcrt4.lib;User32.Lib;Gdi32.Lib;Shell32.Lib;AdvAPI32.Lib;Ole32.Lib;OleAut32.Lib;ComDlg32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>wxmsw31u_core.lib;wxbase31u.lib;wxmsw31u_aui.lib;wxbase31u_xml.lib;wxexpat.lib;wxmsw31u_html.lib;wxpng.lib;wxzlib.lib;python27.lib;boostpython.lib;libhunspell.lib;comctl32.lib;rpcrt4.lib;User32.Lib;Gdi32.Lib;Shell32.Lib;AdvAPI32.Lib;Ole32.Lib;OleAut32.Lib;ComDlg32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)MadEdit.exe</OutputFile>
       <AdditionalLibraryDirectories>$(WXWIN3)\lib\vc_lib;$(TargetDir);$(BOOST)\stage\lib</AdditionalLibraryDirectories>
       <SubSystem>Windows</SubSystem>
@@ -171,8 +171,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Unicode Release|x64'">
     <ClCompile>
       <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
-      <AdditionalIncludeDirectories>$(WXWIN3)\lib\vc_x64_lib\mswu;$(WXWIN3)\include;$(BOOST);..\..\charset-detector\src;..\..\minipython\Include;..\..\minipython\PC;$(SolutionDir)\..\..\spellchecker;$(SolutionDir)\..\..\spellchecker\hunspell\src;$(SolutionDir)\..\..\markdown;..\..\astyle;..\..\astyle\astyle;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_WIN64;NDEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;HUNSPELL_STATIC;Py_NO_ENABLE_SHARED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(WXWIN3)\lib\vc_x64_lib\mswu;$(WXWIN3)\include;..\..\python\include\;..\..\charset-detector\src;..\..\minipython\include;..\..\python\include\;$(BOOST);..\..\minipython\PC;$(SolutionDir)\..\..\spellchecker;$(SolutionDir)\..\..\spellchecker\hunspell\src;$(SolutionDir)\..\..\markdown;..\..\astyle;..\..\astyle\astyle;$(BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WIN64;NDEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;HUNSPELL_STATIC;Py_NO_ENABLE_SHARED;BOOST_ALL_NO_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PrecompiledHeader>
       </PrecompiledHeader>
@@ -181,7 +181,7 @@
       <Optimization>Full</Optimization>
     </ClCompile>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>$(WXWIN3)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(WXWIN3)\include;..\..\python\include\;$(BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
       <AdditionalOptions>/ignore:4217 /ignore:4049 %(AdditionalOptions)</AdditionalOptions>
@@ -388,7 +388,7 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\src\MadEditApp.rc">
-      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">$(WXWIN3)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Unicode Release|Win32'">$(WXWIN3)\include;..\..\python\include\;$(BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>

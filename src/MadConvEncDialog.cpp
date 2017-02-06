@@ -6,6 +6,11 @@
 // Licence: 	GPL
 ///////////////////////////////////////////////////////////////////////////////
 
+#ifdef _MSC_VER
+# pragma warning( push )
+# pragma warning( disable : 4996 )
+#endif
+// disable 4996 {
 #include "MadConvEncDialog.h"
 #include "MadEdit/MadEncoding.h"
 #include <wx/config.h>
