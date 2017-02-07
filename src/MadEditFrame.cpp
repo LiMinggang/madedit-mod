@@ -4318,7 +4318,7 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 
 		int count = int( m_Notebook->GetPageCount() + 1 );
 		
-		if((Menu_Window_Count + count + 1) > g_Menu_Window->GetMenuItemCount())
+		if((size_t)(Menu_Window_Count + count + 1) > g_Menu_Window->GetMenuItemCount())
 		{
 			g_Menu_Window->Append( menuWindow1 + ( count - 1), title, madedit->GetFileName(), wxITEM_CHECK);
 		}
@@ -5273,7 +5273,7 @@ void MadEditFrame::OnUpdateUI_MenuWindow_Window( wxUpdateUIEvent& event )
 	DBOUT( "WWindow:pgid:"<<(event.GetId() - menuWindow1)<<'\n');
 	int menuId = event.GetId();
 	int pgid = (menuId - menuWindow1);
-	if(pgid < m_Notebook->GetPageCount())
+	if((size_t)pgid < m_Notebook->GetPageCount())
 	{
 		event.Check(pgid == m_Notebook->GetSelection());
 		int psid = m_Notebook->GetPageIndex( g_ActiveMadEdit );
@@ -6333,7 +6333,7 @@ void MadEditFrame::OnEditToHalfWidthByOptions( wxCommandEvent& event )
 	{
 		bool ascii = false, japanese = false, korean = false, other = false;
 
-		for( size_t i = 0; i < sels; ++i )
+		for( size_t i = 0; i < (size_t)sels; ++i )
 		{
 			switch( selections[i] )
 			{
@@ -6399,7 +6399,7 @@ void MadEditFrame::OnEditToFullWidthByOptions( wxCommandEvent& event )
 	{
 		bool ascii = false, japanese = false, korean = false, other = false;
 
-		for( size_t i = 0; i < sels; ++i )
+		for( size_t i = 0; i < (size_t)sels; ++i )
 		{
 			switch( selections[i] )
 			{

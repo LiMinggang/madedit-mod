@@ -229,7 +229,7 @@ wxArrayString HunspellInterface::GetSuggestions(const wxString& strMisspelledWor
             std::vector<std::string> wlst;
             std::string misspelledWord(misspelledWordCharBuffer.data());
             wlst = m_pHunspell->suggest(misspelledWord);
-            for (int i=0; i < wlst.size(); i++)
+            for (size_t i=0; i < wlst.size(); i++)
             {
                 wxReturnArray.Add(ConvertFromUnicode(wlst[i].c_str()));
             }
