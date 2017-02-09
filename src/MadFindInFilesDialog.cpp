@@ -483,7 +483,7 @@ void MadFindInFilesDialog::WxButtonDirClick( wxCommandEvent& event )
 {
 	wxString defdir = WxComboBoxDir->GetValue();
 
-	if( defdir.IsEmpty() ) { defdir = wxGetCwd(); }
+	if( defdir.IsEmpty() || ( wxDirExists( defdir ) == false)) { defdir = wxGetCwd(); }
 
 	wxDirDialog dlg( this, _( "Choose a directory" ), defdir );
 
