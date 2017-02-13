@@ -3226,7 +3226,7 @@ bool ASFormatter::isInSwitchStatement() const
  */
 bool ASFormatter::isInExponent() const
 {
-	assert(currentChar == '+' || currentChar == '-');
+	assert(currentChar == '+' || currentChar == '-' || currentChar == '?');
 
 	if (charNum >= 2)
 	{

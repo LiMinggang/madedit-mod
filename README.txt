@@ -123,6 +123,7 @@ Fix: UI issues of source formatter config tab
 Fix: Bookmark tag show up issue in Find and Bookmark
 Fix: Crash while opening file history dialog by hitting F9
 Fix: Crash while Windows shutdown(wxWidgets issue)
+Fix: Crash because of Astyle assertion failure at line 3229, ASFormatter.cpp(https://sourceforge.net/p/astyle/bugs/422/)
 Use standalone boost python to replace boost one(No need to compile boost anymore)
 Update Simplified Chinese translation
 
