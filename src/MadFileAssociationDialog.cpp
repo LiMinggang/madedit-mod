@@ -105,7 +105,7 @@ const wxChar *g_PredefinedTypes[] =
 
 const int g_PredefinedTypes_Count = sizeof(g_PredefinedTypes) / sizeof(g_PredefinedTypes[0]);
 
-bool DetectType(wxString type)
+bool DetectType(const wxString& type)
 {
 	wxLogNull nolog; // disable error log
 	wxString value;
@@ -136,7 +136,7 @@ bool DetectType(wxString type)
 	return false;
 }
 
-void AddType( wxString type )
+void AddType( const wxString& type )
 {
 	wxString value;
 	wxString madedit_type = wxString( wxT( "MadEdit-Mod" ) ) + type;
@@ -198,7 +198,7 @@ void AddType( wxString type )
 	delete pRegKey;
 }
 
-void RemoveType( wxString type )
+void RemoveType( const wxString& type )
 {
 	if( type.IsEmpty() ) { return; }
 
