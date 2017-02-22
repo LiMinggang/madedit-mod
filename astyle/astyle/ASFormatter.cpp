@@ -3226,7 +3226,7 @@ bool ASFormatter::isInSwitchStatement() const
  */
 bool ASFormatter::isInExponent() const
 {
-	assert(currentChar == '+' || currentChar == '-' || currentChar == '?');
+	assert(currentChar == '+' || currentChar == '-');
 
 	if (charNum >= 2)
 	{
@@ -6940,7 +6940,8 @@ void ASFormatter::updateFormattedLineSplitPointsOperator(const string& sequence)
 	else if (sequence == "+" || sequence == "-" || sequence == "?")
 	{
 		if (charNum > 0
-		        && !isInExponent()
+		        && !(sequence == "+" && isInExponent())
+		        && !(sequence == "-" && isInExponent())
 		        && (isLegalNameChar(currentLine[charNum - 1])
 		            || currentLine[charNum - 1] == ')'
 		            || currentLine[charNum - 1] == ']'
