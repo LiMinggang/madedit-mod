@@ -134,7 +134,7 @@ void MadMacroDlg::OnWxButtonRunClick(wxCommandEvent& event)
 				{
 					g_MainFrame->SetMacroRunning();
 					g_EmbeddedPython->exec(std::string(pystr.mb_str()));
-					g_MainFrame->SetMacroStopped();				   
+					g_MainFrame->SetMacroStopped();
 				}
 			}
 		}
