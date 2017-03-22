@@ -857,7 +857,6 @@ private:
 	//     OTOH, if you don't want it you may omit the next line - this will
 	//     make default (alphabetical) sorting much faster under wxMSW.
 	//DECLARE_DYNAMIC_CLASS(MadTreeCtrl)
-	DECLARE_EVENT_TABLE()
 };
 
 #endif
