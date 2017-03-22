@@ -125,6 +125,7 @@ Fix: Crash while opening file history dialog by hitting F9
 Fix: Crash while Windows shutdown(wxWidgets issue)
 Fix: Crash because of Astyle assertion failure at line 3229, ASFormatter.cpp(https://sourceforge.net/p/astyle/bugs/422/)
 Use standalone boost python to replace boost one(No need to compile boost anymore)
+Use Bind to replace event table in MadEditframe to fix potentail issues
 Update Simplified Chinese translation
 
 Mod v0.4.6

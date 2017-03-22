@@ -1603,377 +1603,372 @@ public:
 //----------------------------------------------------------------------------
 const long MadEditFrame::ID_WXTIMER = wxNewId();
 
-//Add Custom Events only in the appropriate Block.
-// Code added in  other places will be removed by wx-dvcpp
-////Event Table Start
-BEGIN_EVENT_TABLE( MadEditFrame, wxFrame )
-	////Manual Code Start
-	//EVT_SIZE(MadEditFrame::OnSize)
-	EVT_AUINOTEBOOK_PAGE_CHANGING( ID_NOTEBOOK, MadEditFrame::OnNotebookPageChanging )
-	EVT_AUINOTEBOOK_PAGE_CHANGED( ID_NOTEBOOK, MadEditFrame::OnNotebookPageChanged )
-	EVT_AUINOTEBOOK_PAGE_CLOSE( ID_NOTEBOOK, MadEditFrame::OnNotebookPageClosing )
-	EVT_AUINOTEBOOK_TAB_RIGHT_UP( ID_NOTEBOOK, MadEditFrame::OnNotebookPageRightUp )
-	EVT_TIMER(ID_WXTIMER, MadEditFrame::OnTimer)
-	//EVT_AUINOTEBOOK_PAGE_CLOSE(ID_NOTEBOOK, MadEditFrame::OnNotebookPageClosed)
-	//EVT_CHAR(MadEditFrame::OnChar)
+MadEditFrame::wxCmdEvtHandlerMap_t MadEditFrame::m_menu_evt_map[] =
+{
 	// file
-	EVT_ACTIVATE( MadEditFrame::OnActivate )
-	EVT_UPDATE_UI( menuSave, MadEditFrame::OnUpdateUI_MenuCheckIsThisModified )
-	EVT_UPDATE_UI( menuSaveAs, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
-	EVT_UPDATE_UI( menuSaveAll, MadEditFrame::OnUpdateUI_MenuCheckIsAnyoneModified )
-	EVT_UPDATE_UI( menuSaveACopy, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
-	EVT_UPDATE_UI( menuReload, MadEditFrame::OnUpdateUI_MenuFileReload )
-	EVT_UPDATE_UI( menuRecentFilesList, MadEditFrame::OnUpdateUI_MenuFileRecentFiles )
-	EVT_UPDATE_UI( menuClose, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
-	EVT_UPDATE_UI( menuCloseAll, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
-	EVT_UPDATE_UI( menuCloseAllButThis, MadEditFrame::OnUpdateUI_MenuWindow_CheckCount )
-	EVT_UPDATE_UI( menuCloseAllToTheLeft, MadEditFrame::OnUpdateUI_MenuWindow_CheckCount )
-	EVT_UPDATE_UI( menuCloseAllToTheRight, MadEditFrame::OnUpdateUI_MenuWindow_CheckCount )
-	EVT_UPDATE_UI( menuPrintPreview, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
-	EVT_UPDATE_UI( menuPrint, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
-	EVT_UPDATE_UI( menuRecentFiles, MadEditFrame::OnUpdateUI_MenuFileRecentFiles )
-	EVT_UPDATE_UI( menuRecentFilesToolbar, MadEditFrame::OnUpdateUI_MenuFileRecentFiles )
-	EVT_UPDATE_UI( menuToggleReadOnly, MadEditFrame::OnUpdateUI_MenuFile_Readonly )
+	{ menuNew, &MadEditFrame::OnFileNew },
+	{ menuOpen, &MadEditFrame::OnFileOpen },
+	{ menuSave, &MadEditFrame::OnFileSave },
+	{ menuSaveAs, &MadEditFrame::OnFileSaveAs },
+	{ menuSaveACopy, &MadEditFrame::OnFileSaveACopy },
+	{ menuSaveAll, &MadEditFrame::OnFileSaveAll },
+	{ menuReload, &MadEditFrame::OnFileReload },
+	{ menuRecentFilesList, &MadEditFrame::OnRecentFilesList },
+	{ menuRecentFilesToolbar, &MadEditFrame::OnRecentFilesPop },
+	{ menuClose, &MadEditFrame::OnFileClose },
+	{ menuCloseAll, &MadEditFrame::OnFileCloseAll },
+	{ menuCloseAllButThis, &MadEditFrame::OnFileCloseAllButThis },
+	{ menuCloseAllToTheLeft, &MadEditFrame::OnFileCloseAllToTheLeft },
+	{ menuCloseAllToTheRight, &MadEditFrame::OnFileCloseAllToTheRight },
+	{ menuPageSetup, &MadEditFrame::OnFilePageSetup },
+	{ menuPrintPreview, &MadEditFrame::OnFilePrintPreview },
+	{ menuPrint, &MadEditFrame::OnFilePrint },
+	{ menuExit, &MadEditFrame::OnFileExit },
+	{ menuCopyFilePath, &MadEditFrame::OnCopyFilePath },
+	{ menuCopyFileName, &MadEditFrame::OnCopyFileName },
+	{ menuCopyFileDir, &MadEditFrame::OnCopyFileDir },
+	{ menuToggleReadOnly, &MadEditFrame::OnFileToggleReadOnly },
+	
 	// edit
-	EVT_UPDATE_UI( menuUndo, MadEditFrame::OnUpdateUI_MenuEditUndo )
-	EVT_UPDATE_UI( menuRedo, MadEditFrame::OnUpdateUI_MenuEditRedo )
-	EVT_UPDATE_UI( menuCut, MadEditFrame::OnUpdateUI_MenuEditCut )
-	EVT_UPDATE_UI( menuCopy, MadEditFrame::OnUpdateUI_MenuEditCopy )
-	EVT_UPDATE_UI( menuPaste, MadEditFrame::OnUpdateUI_MenuEditPaste )
-	EVT_UPDATE_UI( menuDelete, MadEditFrame::OnUpdateUI_MenuEditDelete )
-	EVT_UPDATE_UI( menuCutLine, MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile )
-	EVT_UPDATE_UI( menuDeleteLine, MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile )
-	EVT_UPDATE_UI( menuSelectAll, MadEditFrame::OnUpdateUI_Menu_CheckSize )
-	EVT_UPDATE_UI( menuStartEndSelction, MadEditFrame::OnUpdateUI_MenuEditStartEndSelction )
-	EVT_UPDATE_UI( menuInsertTabChar, MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile )
-	EVT_UPDATE_UI( menuInsertDateTime, MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile )
-	EVT_UPDATE_UI( menuSortAscending, MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile )
-	EVT_UPDATE_UI( menuSortDescending, MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile )
-	EVT_UPDATE_UI( menuSortAscendingCase, MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile )
-	EVT_UPDATE_UI( menuSortDescendingCase, MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile )
-	EVT_UPDATE_UI( menuSortByOptions, MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile )
-	EVT_UPDATE_UI( menuSortOptions, MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile )
-	EVT_UPDATE_UI( menuSort, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
-	EVT_UPDATE_UI( menuAdvanced, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
-	EVT_UPDATE_UI( menuCopyAsHexString, MadEditFrame::OnUpdateUI_MenuEditCopyAsHexString )
-	EVT_UPDATE_UI( menuCopyAsHexStringWithSpace, MadEditFrame::OnUpdateUI_MenuEditCopyAsHexString )
-	EVT_UPDATE_UI( menuCopyRevertHex, MadEditFrame::OnUpdateUI_MenuEditCopyAsHexString )
-	EVT_UPDATE_UI( menuIncreaseIndent, MadEditFrame::OnUpdateUI_MenuIndent )
-	EVT_UPDATE_UI( menuDecreaseIndent, MadEditFrame::OnUpdateUI_MenuIndent )
-	EVT_UPDATE_UI( menuComment, MadEditFrame::OnUpdateUI_MenuComment )
-	EVT_UPDATE_UI( menuUncomment, MadEditFrame::OnUpdateUI_MenuComment )
-	EVT_UPDATE_UI( menuWordWrapToNewLine, MadEditFrame::OnUpdateUI_Menu_CheckTextFileSize )
-	EVT_UPDATE_UI( menuNewLineToWordWrap, MadEditFrame::OnUpdateUI_Menu_CheckTextFileSize )
-	EVT_UPDATE_UI( menuToUpperCase, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize )
-	EVT_UPDATE_UI( menuToLowerCase, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize )
-	EVT_UPDATE_UI( menuInvertCase, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize )
-	EVT_UPDATE_UI( menuCapitalize, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize )
-	EVT_UPDATE_UI( menuToHalfWidth, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize )
-	EVT_UPDATE_UI( menuToHalfWidthByOptions, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize )
-	EVT_UPDATE_UI( menuToFullWidth, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize )
-	EVT_UPDATE_UI( menuToFullWidthByOptions, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize )
-	EVT_UPDATE_UI( menuTabToSpace, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize )
-	EVT_UPDATE_UI( menuSpaceToTab, MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize )
-	EVT_UPDATE_UI( menuTrimTrailingSpaces, MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile )
-	EVT_UPDATE_UI( menuTrimLeadingSpaces, MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile )
-	EVT_UPDATE_UI( menuDeleteEmptyLines, MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile )
-	EVT_UPDATE_UI( menuDeleteEmptyLinesWithSpaces, MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile )
-	EVT_UPDATE_UI( menuJoinLines, MadEditFrame::OnUpdateUI_Menu_JoinLines )
-	EVT_UPDATE_UI( menuInsertNumbers, MadEditFrame::OnUpdateUI_Menu_CheckColumnMode )
-	EVT_UPDATE_UI( menuColumnAlignLeft, MadEditFrame::OnUpdateUI_Menu_CheckColumnMode )
-	EVT_UPDATE_UI( menuColumnAlignRight, MadEditFrame::OnUpdateUI_Menu_CheckColumnMode )
-	EVT_UPDATE_UI( menuBookmark, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark )
-	EVT_UPDATE_UI( menuBookmarkCopy, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark )
-	EVT_UPDATE_UI( menuBookmarkCut, MadEditFrame::OnUpdateUI_MenuEditCheckBookmarkWritable )
-	EVT_UPDATE_UI( menuBookmarkDel, MadEditFrame::OnUpdateUI_MenuEditCheckBookmarkWritable )
-	EVT_UPDATE_UI( menuBookmarkDelUnmarked, MadEditFrame::OnUpdateUI_MenuEditCheckBookmarkWritable )
-	EVT_UPDATE_UI( menuBookmarkReplace, MadEditFrame::OnUpdateUI_MenuEditCheckBookmarkWritable )
+	{ menuUndo, &MadEditFrame::OnEditUndo },
+	{ menuRedo, &MadEditFrame::OnEditRedo },
+	{ menuCut, &MadEditFrame::OnEditCut },
+	{ menuCopy, &MadEditFrame::OnEditCopy },
+	{ menuPaste, &MadEditFrame::OnEditPaste },
+	{ menuDelete, &MadEditFrame::OnEditDelete },
+	{ menuCutLine, &MadEditFrame::OnEditCutLine },
+	{ menuDeleteLine, &MadEditFrame::OnEditDeleteLine },
+	{ menuSelectAll, &MadEditFrame::OnEditSelectAll },
+	{ menuStartEndSelction, &MadEditFrame::OnEditStartEndSelction },
+	{ menuInsertTabChar, &MadEditFrame::OnEditInsertTabChar },
+	{ menuInsertDateTime, &MadEditFrame::OnEditInsertDateTime },
+	{ menuSortAscending, &MadEditFrame::OnEditSortAscending },
+	{ menuSortDescending, &MadEditFrame::OnEditSortDescending },
+	{ menuSortAscendingCase, &MadEditFrame::OnEditSortAscendingCase },
+	{ menuSortDescendingCase, &MadEditFrame::OnEditSortDescendingCase },
+	{ menuSortByOptions, &MadEditFrame::OnEditSortByOptions },
+	{ menuSortOptions, &MadEditFrame::OnEditSortOptions },
+	{ menuCopyAsHexString, &MadEditFrame::OnEditCopyAsHexString },
+	{ menuCopyAsHexStringWithSpace, &MadEditFrame::OnEditCopyAsHexStringWithSpace },
+	{ menuCopyRevertHex, &MadEditFrame::OnEditCopyRevertHex },
+	{ menuIncreaseIndent, &MadEditFrame::OnEditIncIndent },
+	{ menuDecreaseIndent, &MadEditFrame::OnEditDecIndent },
+	{ menuComment, &MadEditFrame::OnEditComment },
+	{ menuUncomment, &MadEditFrame::OnEditUncomment },
+	{ menuWordWrapToNewLine, &MadEditFrame::OnEditWordWrapToNewLine },
+	{ menuNewLineToWordWrap, &MadEditFrame::OnEditNewLineToWordWrap },
+	{ menuToUpperCase, &MadEditFrame::OnEditToUpperCase },
+	{ menuToLowerCase, &MadEditFrame::OnEditToLowerCase },
+	{ menuInvertCase, &MadEditFrame::OnEditInvertCase },
+	{ menuCapitalize, &MadEditFrame::OnEditCapitalize },
+	{ menuToHalfWidth, &MadEditFrame::OnEditToHalfWidth },
+	{ menuToHalfWidthByOptions, &MadEditFrame::OnEditToHalfWidthByOptions },
+	{ menuToFullWidth, &MadEditFrame::OnEditToFullWidth },
+	{ menuToFullWidthByOptions, &MadEditFrame::OnEditToFullWidthByOptions },
+	{ menuTabToSpace, &MadEditFrame::OnEditTabToSpace },
+	{ menuSpaceToTab, &MadEditFrame::OnEditSpaceToTab },
+	{ menuTrimTrailingSpaces, &MadEditFrame::OnEditTrimTrailingSpaces },
+	{ menuTrimLeadingSpaces, &MadEditFrame::OnEditTrimLeadingSpaces },
+	{ menuDeleteEmptyLines, &MadEditFrame::OnEditDeleteEmptyLines },
+	{ menuDeleteEmptyLinesWithSpaces, &MadEditFrame::OnEditDeleteEmptyLinesWithSpaces },
+	{ menuJoinLines, &MadEditFrame::OnEditJoinLines },
+	{ menuInsertNumbers, &MadEditFrame::OnEditInsertNumbers },
+	{ menuColumnAlignLeft, &MadEditFrame::OnEditColumnAlignLeft },
+	{ menuColumnAlignRight, &MadEditFrame::OnEditColumnAlignRight },
+	{ menuBookmarkCopy, &MadEditFrame::OnEditBookmarkCopy },
+	{ menuBookmarkCut, &MadEditFrame::OnEditBookmarkCut },
+	{ menuBookmarkDel, &MadEditFrame::OnEditBookmarkDel },
+	{ menuBookmarkDelUnmarked, &MadEditFrame::OnEditBookmarkDelUnmarked },
+	{ menuBookmarkReplace, &MadEditFrame::OnEditBookmarkReplace },
+	
 	// search
-	EVT_UPDATE_UI( menuFind, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
-	EVT_UPDATE_UI( menuFindNext, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
-	EVT_UPDATE_UI( menuFindPrevious, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
-	EVT_UPDATE_UI( menuShowQuickSearchBar, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
-	EVT_UPDATE_UI( menuReplace, MadEditFrame::OnUpdateUI_MenuCheckWritable )
-	EVT_UPDATE_UI( menuGoToLine, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
-	EVT_UPDATE_UI( menuGoToPosition, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
-	EVT_UPDATE_UI( menuGoBack, MadEditFrame::OnUpdateUI_MenuSearchGoBack )
-	EVT_UPDATE_UI( menuGoForward, MadEditFrame::OnUpdateUI_MenuSearchGoForward )
-	EVT_UPDATE_UI( menuLeftBrace, MadEditFrame::OnUpdateUI_MenuSearchGoToBrace )
-	EVT_UPDATE_UI( menuRightBrace, MadEditFrame::OnUpdateUI_MenuSearchGoToBrace )
-	EVT_UPDATE_UI( menuToggleBookmark, MadEditFrame::OnUpdateUI_Menu_CheckTextFile )
-	EVT_UPDATE_UI( menuGotoNextBookmark, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark )
-	EVT_UPDATE_UI( menuGotoPreviousBookmark, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark )
-	EVT_UPDATE_UI( menuClearAllBookmarks, MadEditFrame::OnUpdateUI_MenuEditCheckBookmark )
-	EVT_UPDATE_UI_RANGE( menuQuickFindNext, menuQuickFindDotMatchNewLine, MadEditFrame::OnUpdateUI_MenuSearch_QuickBar )
+	{ menuFind, &MadEditFrame::OnSearchFind },
+	{ menuFindNext, &MadEditFrame::OnSearchFindNext },
+	{ menuFindPrevious, &MadEditFrame::OnSearchFindPrevious },
+	{ menuQuickFindNext, &MadEditFrame::OnSearchQuickFindNext },
+	{ menuQuickFindPrevious, &MadEditFrame::OnSearchQuickFindPrevious },
+	{ menuShowQuickSearchBar, &MadEditFrame::OnShowQuickSearchBar },
+	{ menuReplace, &MadEditFrame::OnSearchReplace },
+	{ menuFindInFiles, &MadEditFrame::OnSearchFindInFiles },
+	{ menuShowFindInFilesResults, &MadEditFrame::OnSearchShowFindInFilesResults },
+	{ menuGoToLine, &MadEditFrame::OnSearchGoToLine },
+	{ menuGoToPosition, &MadEditFrame::OnSearchGoToPosition },
+	{ menuGoBack, &MadEditFrame::OnSearchGoBack },
+	{ menuGoForward, &MadEditFrame::OnSearchGoForward },
+	{ menuLeftBrace, &MadEditFrame::OnSearchGoToLeftBrace },
+	{ menuRightBrace, &MadEditFrame::OnSearchGoToRightBrace },
+	{ menuToggleBookmark, &MadEditFrame::OnSearchToggleBookmark },
+	{ menuGotoNextBookmark, &MadEditFrame::OnSearchGotoNextBookmark },
+	{ menuGotoPreviousBookmark, &MadEditFrame::OnSearchGotoPreviousBookmark },
+	{ menuClearAllBookmarks, &MadEditFrame::OnSearchClearAllBookmarks },
+	{ menuAlwaysOnTop, &MadEditFrame::OnViewAlwaysOnTop },
 
 	// view
-	EVT_UPDATE_UI( menuAlwaysOnTop, MadEditFrame::OnUpdateUI_CheckFrameStyle )
-	EVT_UPDATE_UI( menuEncoding, MadEditFrame::OnUpdateUI_MenuViewEncoding )
-	EVT_UPDATE_UI( menuSyntax, MadEditFrame::OnUpdateUI_MenuViewSyntax )
-	EVT_UPDATE_UI( menuFontName, MadEditFrame::OnUpdateUI_MenuViewFontName )
-	EVT_UPDATE_UI( menuFontSize, MadEditFrame::OnUpdateUI_MenuViewFontSize )
-	EVT_UPDATE_UI( menuSetFont, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
-	EVT_UPDATE_UI( menuFixedWidthMode, MadEditFrame::OnUpdateUI_MenuViewFixedWidthMode )
-	EVT_UPDATE_UI( menuTabColumn, MadEditFrame::OnUpdateUI_MenuViewTabColumn )
-	EVT_UPDATE_UI( menuLineSpacing, MadEditFrame::OnUpdateUI_MenuViewLineSpacing )
-	EVT_UPDATE_UI( menuNoWrap, MadEditFrame::OnUpdateUI_MenuViewNoWrap )
-	EVT_UPDATE_UI( menuWrapByWindow, MadEditFrame::OnUpdateUI_MenuViewWrapByWindow )
-	EVT_UPDATE_UI( menuWrapByColumn, MadEditFrame::OnUpdateUI_MenuViewWrapByColumn )
-	EVT_UPDATE_UI( menuDisplayLineNumber, MadEditFrame::OnUpdateUI_MenuViewDisplayLineNumber )
-	EVT_UPDATE_UI( menuDisplayBookmark, MadEditFrame::OnUpdateUI_MenuViewDisplayBookmark )
-	EVT_UPDATE_UI( menuDisplay80ColHint, MadEditFrame::OnUpdateUI_MenuViewDisplay80ColHint )
-	EVT_UPDATE_UI( menuShowEndOfLine, MadEditFrame::OnUpdateUI_MenuViewShowEndOfLine )
-	EVT_UPDATE_UI( menuShowTabChar, MadEditFrame::OnUpdateUI_MenuViewShowTabChar )
-	EVT_UPDATE_UI( menuShowSpaceChar, MadEditFrame::OnUpdateUI_MenuViewShowSpaceChar )
-	EVT_UPDATE_UI( menuShowAllChars, MadEditFrame::OnUpdateUI_MenuViewShowAllChars )
-	EVT_UPDATE_UI( menuViewRightToLeft, MadEditFrame::OnUpdateUI_MenuViewRightToLeft )
-	EVT_UPDATE_UI( menuMarkActiveLine, MadEditFrame::OnUpdateUI_MenuViewMarkActiveLine )
-	EVT_UPDATE_UI( menuMarkBracePair, MadEditFrame::OnUpdateUI_MenuViewMarkBracePair )
-	EVT_UPDATE_UI( menuTextMode, MadEditFrame::OnUpdateUI_MenuViewTextMode )
-	EVT_UPDATE_UI( menuColumnMode, MadEditFrame::OnUpdateUI_MenuViewColumnMode )
-	EVT_UPDATE_UI( menuHexMode, MadEditFrame::OnUpdateUI_MenuViewHexMode )
-	EVT_UPDATE_UI( menuPreview, MadEditFrame::OnUpdateUI_MenuViewPreview )
-	EVT_UPDATE_UI_RANGE( menuPreview1, menuPreview16, MadEditFrame::OnUpdateUI_MenuViewPreviewList )
-	EVT_UPDATE_UI( menuSpellChecker, MadEditFrame::OnUpdateUI_MenuViewSpellChecker )
-	EVT_UPDATE_UI( menuSpellIgnore, MadEditFrame::OnUpdateUI_MenuSpellIgnore )
-	EVT_UPDATE_UI( menuSpellAdd2Dict, MadEditFrame::OnUpdateUI_MenuSpellAdd2Dict )
-	EVT_UPDATE_UI( menuSpellRemoveFromDict, MadEditFrame::OnUpdateUI_MenuSpellRemoveFromDict )
-	EVT_UPDATE_UI( menuToolBarsToggleAll, MadEditFrame::OnUpdateUI_MenuViewToolbarsToggleAll )
-	EVT_UPDATE_UI_RANGE( menuToolBar1, menuToolBar99, MadEditFrame::OnUpdateUI_MenuViewToolbarList )
-	EVT_UPDATE_UI( menuTypewriterMode, MadEditFrame::OnUpdateUI_MenuViewTypewriterMode )
+	{ menuFullScreen, &MadEditFrame::OnViewFullScreen },
+	{ menuPostIt, &MadEditFrame::OnViewPostIt },
+	{ menuSetFont, &MadEditFrame::OnViewSetFont },
+	{ menuFixedWidthMode, &MadEditFrame::OnViewFixedWidthMode },
+	{ menuRefreshPreview, &MadEditFrame::OnRefreshPreview },
+	{ menuClosePreview, &MadEditFrame::OnClosePreview },
+	{ menuNoWrap, &MadEditFrame::OnViewNoWrap },
+	{ menuWrapByWindow, &MadEditFrame::OnViewWrapByWindow },
+	{ menuWrapByColumn, &MadEditFrame::OnViewWrapByColumn },
+	{ menuDisplayLineNumber, &MadEditFrame::OnViewDisplayLineNumber },
+	{ menuDisplayBookmark, &MadEditFrame::OnViewDisplayBookmark },
+	{ menuDisplay80ColHint, &MadEditFrame::OnViewDisplay80ColHint },
+	{ menuShowEndOfLine, &MadEditFrame::OnViewShowEndOfLine },
+	{ menuShowTabChar, &MadEditFrame::OnViewShowTabChar },
+	{ menuShowSpaceChar, &MadEditFrame::OnViewShowSpaceChar },
+	{ menuShowAllChars, &MadEditFrame::OnViewShowAllChars },
+	{ menuViewRightToLeft, &MadEditFrame::OnViewRightToLeft },
+	{ menuMarkActiveLine, &MadEditFrame::OnViewMarkActiveLine },
+	{ menuMarkBracePair, &MadEditFrame::OnViewMarkBracePair },
+	{ menuTextMode, &MadEditFrame::OnViewTextMode },
+	{ menuColumnMode, &MadEditFrame::OnViewColumnMode },
+	{ menuHexMode, &MadEditFrame::OnViewHexMode },
+	{ menuTypewriterMode, &MadEditFrame::OnViewTypewriterMode },
+	{ menuSpellChecker, &MadEditFrame::OnViewSpellChecker },
+	{ menuSpellIgnore, &MadEditFrame::OnSpellCheckIgnore },
+	{ menuSpellAdd2Dict, &MadEditFrame::OnSpellAdd2Dict },
+	{ menuSpellRemoveFromDict, &MadEditFrame::OnSpellCheckRemoveFromDict },
+	{ menuToolBarsToggleAll, &MadEditFrame::OnViewToolBarsToggleAll },
+
 	// tools
-	EVT_UPDATE_UI( menuByteOrderMark, MadEditFrame::OnUpdateUI_MenuToolsByteOrderMark )
-	EVT_UPDATE_UI( menuMadMacro, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
-	EVT_UPDATE_UI( menuRunTempMacro, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
-	EVT_UPDATE_UI( menuRunMacroFile, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
-	EVT_UPDATE_UI( menuEditMacroFile, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
-	EVT_UPDATE_UI( menuStartRecMacro, MadEditFrame::OnUpdateUI_MenuToolsStartRecMacro )
-	EVT_UPDATE_UI( menuStopRecMacro, MadEditFrame::OnUpdateUI_MenuToolsStopRecMacro )
-	EVT_UPDATE_UI( menuPlayRecMacro, MadEditFrame::OnUpdateUI_MenuToolsPlayRecMacro )
-	EVT_UPDATE_UI( menuSaveRecMacro, MadEditFrame::OnUpdateUI_MenuToolsSaveRecMacro )
-	EVT_UPDATE_UI( menuMadScriptList, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
-	EVT_UPDATE_UI( menuInsertNewLineChar, MadEditFrame::OnUpdateUI_MenuToolsInsertNewLineChar )
-	EVT_UPDATE_UI( menuNewLineChar, MadEditFrame::OnUpdateUI_MenuCheckWritable )
-	EVT_UPDATE_UI( menuConvertToDOS, MadEditFrame::OnUpdateUI_MenuCheckWritable )
-	EVT_UPDATE_UI( menuConvertToMAC, MadEditFrame::OnUpdateUI_MenuCheckWritable )
-	EVT_UPDATE_UI( menuConvertToUNIX, MadEditFrame::OnUpdateUI_MenuCheckWritable )
-	EVT_UPDATE_UI( menuConvertEncoding, MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding )
-	EVT_UPDATE_UI( menuSimp2TradChinese, MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding )
-	EVT_UPDATE_UI( menuTrad2SimpChinese, MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding )
-	EVT_UPDATE_UI( menuKanji2TradChinese, MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding )
-	EVT_UPDATE_UI( menuKanji2SimpChinese, MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding )
-	EVT_UPDATE_UI( menuChinese2Kanji, MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding )
-	EVT_UPDATE_UI( menuMarkdown2Html, MadEditFrame::OnUpdateUI_MenuCheckWritable )
-	EVT_UPDATE_UI( menuHtml2PlainText, MadEditFrame::OnUpdateUI_MenuCheckWritable )
-	EVT_UPDATE_UI( menuAstyleFormat, MadEditFrame::OnUpdateUI_MenuCheckWritable )
-	EVT_UPDATE_UI( menuXMLFormat, MadEditFrame::OnUpdateUI_MenuCheckWritable )
-	EVT_UPDATE_UI( menuWordCount, MadEditFrame::OnUpdateUI_MenuFile_CheckCount )
-	// window, hardcode of Menu_Window_Count
-	EVT_UPDATE_UI( menuToggleWindow, MadEditFrame::OnUpdateUI_MenuWindow_CheckCount )
-	EVT_UPDATE_UI( menuNextWindow, MadEditFrame::OnUpdateUI_MenuWindow_CheckCount )
-	EVT_UPDATE_UI( menuPreviousWindow, MadEditFrame::OnUpdateUI_MenuWindow_CheckCount )
-	EVT_UPDATE_UI( menuWindowList, MadEditFrame::OnUpdateUI_MenuWindow_CheckCount )
-	EVT_UPDATE_UI_RANGE( menuWindow1, menuWindow100, MadEditFrame::OnUpdateUI_MenuWindow_Window )
-	// file
-	EVT_MENU( menuNew, MadEditFrame::OnFileNew )
-	EVT_MENU( menuOpen, MadEditFrame::OnFileOpen )
-	EVT_MENU( menuSave, MadEditFrame::OnFileSave )
-	EVT_MENU( menuSaveAs, MadEditFrame::OnFileSaveAs )
-	EVT_MENU( menuSaveACopy, MadEditFrame::OnFileSaveACopy )
-	EVT_MENU( menuSaveAll, MadEditFrame::OnFileSaveAll )
-	EVT_MENU( menuReload, MadEditFrame::OnFileReload )
-	EVT_MENU( menuRecentFilesList, MadEditFrame::OnRecentFilesList )
-	EVT_MENU( menuRecentFilesToolbar, MadEditFrame::OnRecentFilesPop )
-	EVT_MENU( menuClose, MadEditFrame::OnFileClose )
-	EVT_MENU( menuCloseAll, MadEditFrame::OnFileCloseAll )
-	EVT_MENU( menuCloseAllButThis, MadEditFrame::OnFileCloseAllButThis )
-	EVT_MENU( menuCloseAllToTheLeft, MadEditFrame::OnFileCloseAllToTheLeft )
-	EVT_MENU( menuCloseAllToTheRight, MadEditFrame::OnFileCloseAllToTheRight )
-	EVT_MENU( menuPageSetup, MadEditFrame::OnFilePageSetup )
-	EVT_MENU( menuPrintPreview, MadEditFrame::OnFilePrintPreview )
-	EVT_MENU( menuPrint, MadEditFrame::OnFilePrint )
-	EVT_MENU_RANGE( wxID_FILE1, wxID_FILE9, MadEditFrame::OnFileRecentFile )
-	EVT_MENU_RANGE( wxID_FILE9+1, wxID_FILE9+11, MadEditFrame::OnFileRecentFile )
-	EVT_MENU( menuExit, MadEditFrame::OnFileExit )
-	EVT_MENU( menuCopyFilePath, MadEditFrame::OnCopyFilePath )
-	EVT_MENU( menuCopyFileName, MadEditFrame::OnCopyFileName )
-	EVT_MENU( menuCopyFileDir, MadEditFrame::OnCopyFileDir )
-	EVT_MENU( menuToggleReadOnly, MadEditFrame::OnFileToggleReadOnly )
-	// edit
-	EVT_MENU( menuUndo, MadEditFrame::OnEditUndo )
-	EVT_MENU( menuRedo, MadEditFrame::OnEditRedo )
-	EVT_MENU( menuCut, MadEditFrame::OnEditCut )
-	EVT_MENU( menuCopy, MadEditFrame::OnEditCopy )
-	EVT_MENU( menuPaste, MadEditFrame::OnEditPaste )
-	EVT_MENU( menuDelete, MadEditFrame::OnEditDelete )
-	EVT_MENU( menuCutLine, MadEditFrame::OnEditCutLine )
-	EVT_MENU( menuDeleteLine, MadEditFrame::OnEditDeleteLine )
-	EVT_MENU( menuSelectAll, MadEditFrame::OnEditSelectAll )
-	EVT_MENU( menuStartEndSelction, MadEditFrame::OnEditStartEndSelction )
-	EVT_MENU( menuInsertTabChar, MadEditFrame::OnEditInsertTabChar )
-	EVT_MENU( menuInsertDateTime, MadEditFrame::OnEditInsertDateTime )
-	EVT_MENU( menuSortAscending, MadEditFrame::OnEditSortAscending )
-	EVT_MENU( menuSortDescending, MadEditFrame::OnEditSortDescending )
-	EVT_MENU( menuSortAscendingCase, MadEditFrame::OnEditSortAscendingCase )
-	EVT_MENU( menuSortDescendingCase, MadEditFrame::OnEditSortDescendingCase )
-	EVT_MENU( menuSortByOptions, MadEditFrame::OnEditSortByOptions )
-	EVT_MENU( menuSortOptions, MadEditFrame::OnEditSortOptions )
-	EVT_MENU( menuCopyAsHexString, MadEditFrame::OnEditCopyAsHexString )
-	EVT_MENU( menuCopyAsHexStringWithSpace, MadEditFrame::OnEditCopyAsHexStringWithSpace )
-	EVT_MENU( menuCopyRevertHex, MadEditFrame::OnEditCopyRevertHex )
-	EVT_MENU( menuIncreaseIndent, MadEditFrame::OnEditIncIndent )
-	EVT_MENU( menuDecreaseIndent, MadEditFrame::OnEditDecIndent )
-	EVT_MENU( menuComment, MadEditFrame::OnEditComment )
-	EVT_MENU( menuUncomment, MadEditFrame::OnEditUncomment )
-	EVT_MENU( menuWordWrapToNewLine, MadEditFrame::OnEditWordWrapToNewLine )
-	EVT_MENU( menuNewLineToWordWrap, MadEditFrame::OnEditNewLineToWordWrap )
-	EVT_MENU( menuToUpperCase, MadEditFrame::OnEditToUpperCase )
-	EVT_MENU( menuToLowerCase, MadEditFrame::OnEditToLowerCase )
-	EVT_MENU( menuInvertCase, MadEditFrame::OnEditInvertCase )
-	EVT_MENU( menuCapitalize, MadEditFrame::OnEditCapitalize )
-	EVT_MENU( menuToHalfWidth, MadEditFrame::OnEditToHalfWidth )
-	EVT_MENU( menuToHalfWidthByOptions, MadEditFrame::OnEditToHalfWidthByOptions )
-	EVT_MENU( menuToFullWidth, MadEditFrame::OnEditToFullWidth )
-	EVT_MENU( menuToFullWidthByOptions, MadEditFrame::OnEditToFullWidthByOptions )
-	EVT_MENU( menuTabToSpace, MadEditFrame::OnEditTabToSpace )
-	EVT_MENU( menuSpaceToTab, MadEditFrame::OnEditSpaceToTab )
-	EVT_MENU( menuTrimTrailingSpaces, MadEditFrame::OnEditTrimTrailingSpaces )
-	EVT_MENU( menuTrimLeadingSpaces, MadEditFrame::OnEditTrimLeadingSpaces )
-	EVT_MENU( menuDeleteEmptyLines, MadEditFrame::OnEditDeleteEmptyLines )
-	EVT_MENU( menuDeleteEmptyLinesWithSpaces, MadEditFrame::OnEditDeleteEmptyLinesWithSpaces )
-	EVT_MENU( menuJoinLines, MadEditFrame::OnEditJoinLines )
-	EVT_MENU( menuInsertNumbers, MadEditFrame::OnEditInsertNumbers )
-	EVT_MENU( menuColumnAlignLeft, MadEditFrame::OnEditColumnAlignLeft )
-	EVT_MENU( menuColumnAlignRight, MadEditFrame::OnEditColumnAlignRight )
-	EVT_MENU_RANGE( menuSpellOption1, menuSpellOption99, MadEditFrame::OnEditSpellCheck )
-	EVT_MENU( menuBookmarkCopy, MadEditFrame::OnEditBookmarkCopy )
-	EVT_MENU( menuBookmarkCut, MadEditFrame::OnEditBookmarkCut )
-	EVT_MENU( menuBookmarkDel, MadEditFrame::OnEditBookmarkDel )
-	EVT_MENU( menuBookmarkDelUnmarked, MadEditFrame::OnEditBookmarkDelUnmarked )
-	EVT_MENU( menuBookmarkReplace, MadEditFrame::OnEditBookmarkReplace )
-	// search
-	EVT_MENU( menuFind, MadEditFrame::OnSearchFind )
-	EVT_MENU( menuFindNext, MadEditFrame::OnSearchFindNext )
-	EVT_MENU( menuFindPrevious, MadEditFrame::OnSearchFindPrevious )
-	EVT_MENU( menuQuickFindNext, MadEditFrame::OnSearchQuickFindNext )
-	EVT_MENU( menuQuickFindPrevious, MadEditFrame::OnSearchQuickFindPrevious )
-	EVT_MENU( menuShowQuickSearchBar, MadEditFrame::OnShowQuickSearchBar )
-	EVT_MENU( menuReplace, MadEditFrame::OnSearchReplace )
-	EVT_MENU( menuFindInFiles, MadEditFrame::OnSearchFindInFiles )
-	EVT_MENU( menuShowFindInFilesResults, MadEditFrame::OnSearchShowFindInFilesResults )
-	EVT_MENU( menuGoToLine, MadEditFrame::OnSearchGoToLine )
-	EVT_MENU( menuGoToPosition, MadEditFrame::OnSearchGoToPosition )
-	EVT_MENU( menuGoBack, MadEditFrame::OnSearchGoBack )
-	EVT_MENU( menuGoForward, MadEditFrame::OnSearchGoForward )
-	EVT_MENU( menuLeftBrace, MadEditFrame::OnSearchGoToLeftBrace )
-	EVT_MENU( menuRightBrace, MadEditFrame::OnSearchGoToRightBrace )
-	EVT_MENU( menuToggleBookmark, MadEditFrame::OnSearchToggleBookmark )
-	EVT_MENU( menuGotoNextBookmark, MadEditFrame::OnSearchGotoNextBookmark )
-	EVT_MENU( menuGotoPreviousBookmark, MadEditFrame::OnSearchGotoPreviousBookmark )
-	EVT_MENU( menuClearAllBookmarks, MadEditFrame::OnSearchClearAllBookmarks )
-	// view
-	EVT_MENU( menuAlwaysOnTop, MadEditFrame::OnViewAlwaysOnTop )
-	EVT_MENU( menuFullScreen, MadEditFrame::OnViewFullScreen )
-	EVT_MENU( menuPostIt, MadEditFrame::OnViewPostIt )
-	EVT_MENU_RANGE( menuEncoding1, menuEncoding99, MadEditFrame::OnViewEncoding )
-	EVT_MENU_RANGE( menuRecentEncoding1, menuRecentEncoding9, MadEditFrame::OnViewRecentEncoding )
-	EVT_MENU_RANGE( menuSyntax1, menuSyntax199, MadEditFrame::OnViewSyntax )
-	EVT_MENU_RANGE( menuFontName1, menuFontName999, MadEditFrame::OnViewFontName )
-	EVT_MENU_RANGE( menuRecentFont1, menuRecentFont9, MadEditFrame::OnViewRecentFont )
-	EVT_MENU_RANGE( menuFontSize1, menuFontSize99, MadEditFrame::OnViewFontSize )
-	EVT_MENU( menuSetFont, MadEditFrame::OnViewSetFont )
-	EVT_MENU( menuFixedWidthMode, MadEditFrame::OnViewFixedWidthMode )
-	EVT_MENU_RANGE( menuTabColumn1, menuTabColumn16, MadEditFrame::OnViewTabColumn )
-	EVT_MENU_RANGE( menuPreview1, menuPreview16, MadEditFrame::OnViewPreview )
-	EVT_MENU( menuRefreshPreview, MadEditFrame::OnRefreshPreview )
-	EVT_MENU( menuClosePreview, MadEditFrame::OnClosePreview )
-	EVT_MENU_RANGE( menuLineSpacing100, menuLineSpacing250, MadEditFrame::OnViewLineSpacing )
-	EVT_MENU( menuNoWrap, MadEditFrame::OnViewNoWrap )
-	EVT_MENU( menuWrapByWindow, MadEditFrame::OnViewWrapByWindow )
-	EVT_MENU( menuWrapByColumn, MadEditFrame::OnViewWrapByColumn )
-	EVT_MENU( menuDisplayLineNumber, MadEditFrame::OnViewDisplayLineNumber )
-	EVT_MENU( menuDisplayBookmark, MadEditFrame::OnViewDisplayBookmark )
-	EVT_MENU( menuDisplay80ColHint, MadEditFrame::OnViewDisplay80ColHint )
-	EVT_MENU( menuShowEndOfLine, MadEditFrame::OnViewShowEndOfLine )
-	EVT_MENU( menuShowTabChar, MadEditFrame::OnViewShowTabChar )
-	EVT_MENU( menuShowSpaceChar, MadEditFrame::OnViewShowSpaceChar )
-	EVT_MENU( menuShowAllChars, MadEditFrame::OnViewShowAllChars )
-	EVT_MENU( menuViewRightToLeft, MadEditFrame::OnViewRightToLeft )
-	EVT_MENU( menuMarkActiveLine, MadEditFrame::OnViewMarkActiveLine )
-	EVT_MENU( menuMarkBracePair, MadEditFrame::OnViewMarkBracePair )
-	EVT_MENU( menuTextMode, MadEditFrame::OnViewTextMode )
-	EVT_MENU( menuColumnMode, MadEditFrame::OnViewColumnMode )
-	EVT_MENU( menuHexMode, MadEditFrame::OnViewHexMode )
-	EVT_MENU( menuTypewriterMode, MadEditFrame::OnViewTypewriterMode )
-	EVT_MENU( menuSpellChecker, MadEditFrame::OnViewSpellChecker )
-	EVT_MENU( menuSpellIgnore, MadEditFrame::OnSpellCheckIgnore )
-	EVT_MENU( menuSpellAdd2Dict, MadEditFrame::OnSpellAdd2Dict )
-	EVT_MENU( menuSpellRemoveFromDict, MadEditFrame::OnSpellCheckRemoveFromDict )
-	EVT_MENU( menuToolBarsToggleAll, MadEditFrame::OnViewToolBarsToggleAll )
-	EVT_MENU_RANGE( menuToolBar1, menuToolBar99, MadEditFrame::OnViewToolbars )
-	// tools
-	EVT_MENU( menuOptions, MadEditFrame::OnToolsOptions )
-	EVT_MENU( menuHighlighting, MadEditFrame::OnToolsHighlighting )
-#ifdef __WXMSW__
-	EVT_MENU( menuFileAssociation, MadEditFrame::OnToolsFileAssociation )
-#endif
-	EVT_MENU( menuPurgeHistories, MadEditFrame::OnToolsPurgeHistories )
-	EVT_MENU( menuRunTempMacro, MadEditFrame::OnToolsRunTempMacro )
-	EVT_MENU( menuRunMacroFile, MadEditFrame::OnToolsRunMacroFile )
-	EVT_MENU( menuStartRecMacro, MadEditFrame::OnToolsStartRecMacro )
-	EVT_MENU( menuStopRecMacro, MadEditFrame::OnToolsStopRecMacro )
-	EVT_MENU( menuPlayRecMacro, MadEditFrame::OnToolsPlayRecMacro )
-	EVT_MENU( menuSaveRecMacro, MadEditFrame::OnToolsSaveRecMacro )
-	EVT_MENU( menuEditMacroFile, MadEditFrame::OnToolsEditMacroFile )
-	EVT_MENU_RANGE( menuMadScrip1, menuMadScrip200, MadEditFrame::OnToolsMadScriptList )
-	EVT_MENU( menuToggleBOM, MadEditFrame::OnToolsToggleBOM )
-	EVT_MENU( menuConvertToDOS, MadEditFrame::OnToolsConvertToDOS )
-	EVT_MENU( menuConvertToMAC, MadEditFrame::OnToolsConvertToMAC )
-	EVT_MENU( menuConvertToUNIX, MadEditFrame::OnToolsConvertToUNIX )
-	EVT_MENU( menuInsertDOS, MadEditFrame::OnToolsInsertDOS )
-	EVT_MENU( menuInsertMAC, MadEditFrame::OnToolsInsertMAC )
-	EVT_MENU( menuInsertUNIX, MadEditFrame::OnToolsInsertUNIX )
-	EVT_MENU( menuConvertEncoding, MadEditFrame::OnToolsConvertEncoding )
-	EVT_MENU( menuSimp2TradChinese, MadEditFrame::OnToolsSimp2TradChinese )
-	EVT_MENU( menuTrad2SimpChinese, MadEditFrame::OnToolsTrad2SimpChinese )
-	EVT_MENU( menuKanji2TradChinese, MadEditFrame::OnToolsKanji2TradChinese )
-	EVT_MENU( menuKanji2SimpChinese, MadEditFrame::OnToolsKanji2SimpChinese )
-	EVT_MENU( menuChinese2Kanji, MadEditFrame::OnToolsChinese2Kanji )
-	EVT_MENU( menuSimp2TradClipboard, MadEditFrame::OnToolsSimp2TradClipboard )
-	EVT_MENU( menuTrad2SimpClipboard, MadEditFrame::OnToolsTrad2SimpClipboard )
-	EVT_MENU( menuKanji2TradClipboard, MadEditFrame::OnToolsKanji2TradClipboard )
-	EVT_MENU( menuKanji2SimpClipboard, MadEditFrame::OnToolsKanji2SimpClipboard )
-	EVT_MENU( menuChinese2KanjiClipboard, MadEditFrame::OnToolsChinese2KanjiClipboard )
-	EVT_MENU( menuMarkdown2Html, MadEditFrame::OnToolsMarkdown2Html )
-	EVT_MENU( menuHtml2PlainText, MadEditFrame::OnToolsHtml2PlainText )
-	EVT_MENU( menuAstyleFormat, MadEditFrame::OnToolsAstyleFormat )
-	EVT_MENU( menuXMLFormat, MadEditFrame::OnToolsXMLFormat )
-	EVT_MENU( menuWordCount, MadEditFrame::OnToolsWordCount )
+	{ menuOptions, &MadEditFrame::OnToolsOptions },
+	{ menuHighlighting, &MadEditFrame::OnToolsHighlighting },
+	{ menuFileAssociation, &MadEditFrame::OnToolsFileAssociation },
+	{ menuPurgeHistories, &MadEditFrame::OnToolsPurgeHistories },
+	{ menuRunTempMacro, &MadEditFrame::OnToolsRunTempMacro },
+	{ menuRunMacroFile, &MadEditFrame::OnToolsRunMacroFile },
+	{ menuStartRecMacro, &MadEditFrame::OnToolsStartRecMacro },
+	{ menuStopRecMacro, &MadEditFrame::OnToolsStopRecMacro },
+	{ menuPlayRecMacro, &MadEditFrame::OnToolsPlayRecMacro },
+	{ menuSaveRecMacro, &MadEditFrame::OnToolsSaveRecMacro },
+	{ menuEditMacroFile, &MadEditFrame::OnToolsEditMacroFile },
+	{ menuToggleBOM, &MadEditFrame::OnToolsToggleBOM },
+	{ menuConvertToDOS, &MadEditFrame::OnToolsConvertToDOS },
+	{ menuConvertToMAC, &MadEditFrame::OnToolsConvertToMAC },
+	{ menuConvertToUNIX, &MadEditFrame::OnToolsConvertToUNIX },
+	{ menuInsertDOS, &MadEditFrame::OnToolsInsertDOS },
+	{ menuInsertMAC, &MadEditFrame::OnToolsInsertMAC },
+	{ menuInsertUNIX, &MadEditFrame::OnToolsInsertUNIX },
+	{ menuConvertEncoding, &MadEditFrame::OnToolsConvertEncoding },
+	{ menuSimp2TradChinese, &MadEditFrame::OnToolsSimp2TradChinese },
+	{ menuTrad2SimpChinese, &MadEditFrame::OnToolsTrad2SimpChinese },
+	{ menuKanji2TradChinese, &MadEditFrame::OnToolsKanji2TradChinese },
+	{ menuKanji2SimpChinese, &MadEditFrame::OnToolsKanji2SimpChinese },
+	{ menuChinese2Kanji, &MadEditFrame::OnToolsChinese2Kanji },
+	{ menuSimp2TradClipboard, &MadEditFrame::OnToolsSimp2TradClipboard },
+	{ menuTrad2SimpClipboard, &MadEditFrame::OnToolsTrad2SimpClipboard },
+	{ menuKanji2TradClipboard, &MadEditFrame::OnToolsKanji2TradClipboard },
+	{ menuKanji2SimpClipboard, &MadEditFrame::OnToolsKanji2SimpClipboard },
+	{ menuChinese2KanjiClipboard, &MadEditFrame::OnToolsChinese2KanjiClipboard },
+	{ menuMarkdown2Html, &MadEditFrame::OnToolsMarkdown2Html },
+	{ menuHtml2PlainText, &MadEditFrame::OnToolsHtml2PlainText },
+	{ menuAstyleFormat, &MadEditFrame::OnToolsAstyleFormat },
+	{ menuXMLFormat, &MadEditFrame::OnToolsXMLFormat },
+	{ menuWordCount, &MadEditFrame::OnToolsWordCount },
+
 	// window
-	EVT_MENU( menuToggleWindow, MadEditFrame::OnWindowToggleWindow )
-	EVT_MENU( menuNextWindow, MadEditFrame::OnWindowNextWindow )
-	EVT_MENU( menuPreviousWindow, MadEditFrame::OnWindowPreviousWindow )
-	EVT_MENU( menuWindowList, MadEditFrame::OnWindowWindowList )
-	EVT_MENU_RANGE( menuWindow1, menuWindow100, MadEditFrame::OnWindowWindowActivate )
+	{ menuToggleWindow, &MadEditFrame::OnWindowToggleWindow },
+	{ menuNextWindow, &MadEditFrame::OnWindowNextWindow },
+	{ menuPreviousWindow, &MadEditFrame::OnWindowPreviousWindow },
+	{ menuWindowList, &MadEditFrame::OnWindowWindowList },
+
 	// help
-	EVT_MENU( menuAbout, MadEditFrame::OnHelpAbout )
-	////Manual Code End
+	{ menuAbout, &MadEditFrame::OnHelpAbout },
 
-	EVT_CLOSE( MadEditFrame::MadEditFrameClose )
-	EVT_KEY_DOWN( MadEditFrame::MadEditFrameKeyDown )
+	// Advanced
+	{ menuCollapseAllResults, &MadEditFrame::CollapseAllResults },
+	{ menuCopyCurResult, &MadEditFrame::OnCopyCurrResult },
+	{ menuCopyAllResults, &MadEditFrame::OnCopyAllResults },
+	{ menuResetResult, &MadEditFrame::OnResetResult },
+	{ menuDeleteCurResult, &MadEditFrame::OnDeleteCurrResult },
+	{ menuCollapseCurResult, &MadEditFrame::OnCollapseCurrResult },
+};
 
-	EVT_MENU( menuCollapseAllResults, MadEditFrame::CollapseAllResults )
-	EVT_MENU( menuCopyCurResult, MadEditFrame::OnCopyCurrResult )
-	EVT_MENU( menuCopyAllResults, MadEditFrame::OnCopyAllResults )
-	EVT_MENU( menuResetResult, MadEditFrame::OnResetResult )
-	EVT_MENU( menuDeleteCurResult, MadEditFrame::OnDeleteCurrResult )
-	EVT_MENU( menuCollapseCurResult, MadEditFrame::OnCollapseCurrResult )
-	EVT_TEXT( ID_QUICKSEARCH, MadEditFrame::OnSearchQuickFind )
-	EVT_TEXT_ENTER( ID_QUICKSEARCH, MadEditFrame::OnSearchQuickFind )
-END_EVENT_TABLE()
-////Event Table End
+MadEditFrame::wxCmdEvtHandlerRangeMap_t MadEditFrame::m_menu_evt_range_map[] = 
+{
+	{ wxID_FILE1, wxID_FILE9, &MadEditFrame::OnFileRecentFile },
+	{ wxID_FILE9 + 1, wxID_FILE9 + 11, &MadEditFrame::OnFileRecentFile },
+	{ menuEncoding1, menuEncoding99, &MadEditFrame::OnViewEncoding },
+	{ menuRecentEncoding1, menuRecentEncoding9, &MadEditFrame::OnViewRecentEncoding },
+	{ menuSyntax1, menuSyntax199, &MadEditFrame::OnViewSyntax },
+	{ menuFontName1, menuFontName999, &MadEditFrame::OnViewFontName },
+	{ menuRecentFont1, menuRecentFont9, &MadEditFrame::OnViewRecentFont },
+	{ menuFontSize1, menuFontSize99, &MadEditFrame::OnViewFontSize },
+	{ menuTabColumn1, menuTabColumn16, &MadEditFrame::OnViewTabColumn },
+	{ menuSpellOption1, menuSpellOption99, &MadEditFrame::OnEditSpellCheck },
+	{ menuPreview1, menuPreview16, &MadEditFrame::OnViewPreview },
+	{ menuLineSpacing100, menuLineSpacing250, &MadEditFrame::OnViewLineSpacing },
+	{ menuToolBar1, menuToolBar99, &MadEditFrame::OnViewToolbars },
+	{ menuMadScrip1, menuMadScrip200, &MadEditFrame::OnToolsMadScriptList },
+	{ menuWindow1, menuWindow100, &MadEditFrame::OnWindowWindowActivate },
+};
 
+MadEditFrame::wxUIUpdateEvtHandlerMap_t MadEditFrame::m_menu_ui_updater_map[] =
+{
+	{ menuSave, &MadEditFrame::OnUpdateUI_MenuCheckIsThisModified },
+	{ menuSaveAs, &MadEditFrame::OnUpdateUI_MenuFile_CheckCount },
+	{ menuSaveAll, &MadEditFrame::OnUpdateUI_MenuCheckIsAnyoneModified },
+	{ menuSaveACopy, &MadEditFrame::OnUpdateUI_MenuFile_CheckCount },
+	{ menuReload, &MadEditFrame::OnUpdateUI_MenuFileReload },
+	{ menuRecentFilesList, &MadEditFrame::OnUpdateUI_MenuFileRecentFiles },
+	{ menuClose, &MadEditFrame::OnUpdateUI_MenuFile_CheckCount },
+	{ menuCloseAll, &MadEditFrame::OnUpdateUI_MenuFile_CheckCount },
+	{ menuCloseAllButThis, &MadEditFrame::OnUpdateUI_MenuWindow_CheckCount },
+	{ menuCloseAllToTheLeft, &MadEditFrame::OnUpdateUI_MenuWindow_CheckCount },
+	{ menuCloseAllToTheRight, &MadEditFrame::OnUpdateUI_MenuWindow_CheckCount },
+	{ menuPrintPreview, &MadEditFrame::OnUpdateUI_MenuFile_CheckCount },
+	{ menuPrint, &MadEditFrame::OnUpdateUI_MenuFile_CheckCount },
+	{ menuRecentFiles, &MadEditFrame::OnUpdateUI_MenuFileRecentFiles },
+	{ menuRecentFilesToolbar, &MadEditFrame::OnUpdateUI_MenuFileRecentFiles },
+	{ menuToggleReadOnly, &MadEditFrame::OnUpdateUI_MenuFile_Readonly },
+	// edit
+	{ menuUndo, &MadEditFrame::OnUpdateUI_MenuEditUndo },
+	{ menuRedo, &MadEditFrame::OnUpdateUI_MenuEditRedo },
+	{ menuCut, &MadEditFrame::OnUpdateUI_MenuEditCut },
+	{ menuCopy, &MadEditFrame::OnUpdateUI_MenuEditCopy },
+	{ menuPaste, &MadEditFrame::OnUpdateUI_MenuEditPaste },
+	{ menuDelete, &MadEditFrame::OnUpdateUI_MenuEditDelete },
+	{ menuCutLine, &MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile },
+	{ menuDeleteLine, &MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile },
+	{ menuSelectAll, &MadEditFrame::OnUpdateUI_Menu_CheckSize },
+	{ menuStartEndSelction, &MadEditFrame::OnUpdateUI_MenuEditStartEndSelction },
+	{ menuInsertTabChar, &MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile },
+	{ menuInsertDateTime, &MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile },
+	{ menuSortAscending, &MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile },
+	{ menuSortDescending, &MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile },
+	{ menuSortAscendingCase, &MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile },
+	{ menuSortDescendingCase, &MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile },
+	{ menuSortByOptions, &MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile },
+	{ menuSortOptions, &MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile },
+	{ menuSort, &MadEditFrame::OnUpdateUI_MenuFile_CheckCount },
+	{ menuAdvanced, &MadEditFrame::OnUpdateUI_MenuFile_CheckCount },
+	{ menuCopyAsHexString, &MadEditFrame::OnUpdateUI_MenuEditCopyAsHexString },
+	{ menuCopyAsHexStringWithSpace, &MadEditFrame::OnUpdateUI_MenuEditCopyAsHexString },
+	{ menuCopyRevertHex, &MadEditFrame::OnUpdateUI_MenuEditCopyAsHexString },
+	{ menuIncreaseIndent, &MadEditFrame::OnUpdateUI_MenuIndent },
+	{ menuDecreaseIndent, &MadEditFrame::OnUpdateUI_MenuIndent },
+	{ menuComment, &MadEditFrame::OnUpdateUI_MenuComment },
+	{ menuUncomment, &MadEditFrame::OnUpdateUI_MenuComment },
+	{ menuWordWrapToNewLine, &MadEditFrame::OnUpdateUI_Menu_CheckTextFileSize },
+	{ menuNewLineToWordWrap, &MadEditFrame::OnUpdateUI_Menu_CheckTextFileSize },
+	{ menuToUpperCase, &MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize },
+	{ menuToLowerCase, &MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize },
+	{ menuInvertCase, &MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize },
+	{ menuCapitalize, &MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize },
+	{ menuToHalfWidth, &MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize },
+	{ menuToHalfWidthByOptions, &MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize },
+	{ menuToFullWidth, &MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize },
+	{ menuToFullWidthByOptions, &MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize },
+	{ menuTabToSpace, &MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize },
+	{ menuSpaceToTab, &MadEditFrame::OnUpdateUI_MenuEdit_CheckSelSize },
+	{ menuTrimTrailingSpaces, &MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile },
+	{ menuTrimLeadingSpaces, &MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile },
+	{ menuDeleteEmptyLines, &MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile },
+	{ menuDeleteEmptyLinesWithSpaces, &MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile },
+	{ menuJoinLines, &MadEditFrame::OnUpdateUI_Menu_JoinLines },
+	{ menuInsertNumbers, &MadEditFrame::OnUpdateUI_Menu_CheckColumnMode },
+	{ menuColumnAlignLeft, &MadEditFrame::OnUpdateUI_Menu_CheckColumnMode },
+	{ menuColumnAlignRight, &MadEditFrame::OnUpdateUI_Menu_CheckColumnMode },
+	{ menuBookmark, &MadEditFrame::OnUpdateUI_MenuEditCheckBookmark },
+	{ menuBookmarkCopy, &MadEditFrame::OnUpdateUI_MenuEditCheckBookmark },
+	{ menuBookmarkCut, &MadEditFrame::OnUpdateUI_MenuEditCheckBookmarkWritable },
+	{ menuBookmarkDel, &MadEditFrame::OnUpdateUI_MenuEditCheckBookmarkWritable },
+	{ menuBookmarkDelUnmarked, &MadEditFrame::OnUpdateUI_MenuEditCheckBookmarkWritable },
+	{ menuBookmarkReplace, &MadEditFrame::OnUpdateUI_MenuEditCheckBookmarkWritable },
+	// search
+	{ menuFind, &MadEditFrame::OnUpdateUI_MenuFile_CheckCount },
+	{ menuFindNext, &MadEditFrame::OnUpdateUI_MenuFile_CheckCount },
+	{ menuFindPrevious, &MadEditFrame::OnUpdateUI_MenuFile_CheckCount },
+	{ menuShowQuickSearchBar, &MadEditFrame::OnUpdateUI_MenuFile_CheckCount },
+	{ menuReplace, &MadEditFrame::OnUpdateUI_MenuCheckWritable },
+	{ menuGoToLine, &MadEditFrame::OnUpdateUI_MenuFile_CheckCount },
+	{ menuGoToPosition, &MadEditFrame::OnUpdateUI_MenuFile_CheckCount },
+	{ menuGoBack, &MadEditFrame::OnUpdateUI_MenuSearchGoBack },
+	{ menuGoForward, &MadEditFrame::OnUpdateUI_MenuSearchGoForward },
+	{ menuLeftBrace, &MadEditFrame::OnUpdateUI_MenuSearchGoToBrace },
+	{ menuRightBrace, &MadEditFrame::OnUpdateUI_MenuSearchGoToBrace },
+	{ menuToggleBookmark, &MadEditFrame::OnUpdateUI_Menu_CheckTextFile },
+	{ menuGotoNextBookmark, &MadEditFrame::OnUpdateUI_MenuEditCheckBookmark },
+	{ menuGotoPreviousBookmark, &MadEditFrame::OnUpdateUI_MenuEditCheckBookmark },
+	{ menuClearAllBookmarks, &MadEditFrame::OnUpdateUI_MenuEditCheckBookmark },
 
+	// view
+	{ menuAlwaysOnTop, &MadEditFrame::OnUpdateUI_CheckFrameStyle },
+	{ menuEncoding, &MadEditFrame::OnUpdateUI_MenuViewEncoding },
+	{ menuSyntax, &MadEditFrame::OnUpdateUI_MenuViewSyntax },
+	{ menuFontName, &MadEditFrame::OnUpdateUI_MenuViewFontName },
+	{ menuFontSize, &MadEditFrame::OnUpdateUI_MenuViewFontSize },
+	{ menuSetFont, &MadEditFrame::OnUpdateUI_MenuFile_CheckCount },
+	{ menuFixedWidthMode, &MadEditFrame::OnUpdateUI_MenuViewFixedWidthMode },
+	{ menuTabColumn, &MadEditFrame::OnUpdateUI_MenuViewTabColumn },
+	{ menuLineSpacing, &MadEditFrame::OnUpdateUI_MenuViewLineSpacing },
+	{ menuNoWrap, &MadEditFrame::OnUpdateUI_MenuViewNoWrap },
+	{ menuWrapByWindow, &MadEditFrame::OnUpdateUI_MenuViewWrapByWindow },
+	{ menuWrapByColumn, &MadEditFrame::OnUpdateUI_MenuViewWrapByColumn },
+	{ menuDisplayLineNumber, &MadEditFrame::OnUpdateUI_MenuViewDisplayLineNumber },
+	{ menuDisplayBookmark, &MadEditFrame::OnUpdateUI_MenuViewDisplayBookmark },
+	{ menuDisplay80ColHint, &MadEditFrame::OnUpdateUI_MenuViewDisplay80ColHint },
+	{ menuShowEndOfLine, &MadEditFrame::OnUpdateUI_MenuViewShowEndOfLine },
+	{ menuShowTabChar, &MadEditFrame::OnUpdateUI_MenuViewShowTabChar },
+	{ menuShowSpaceChar, &MadEditFrame::OnUpdateUI_MenuViewShowSpaceChar },
+	{ menuShowAllChars, &MadEditFrame::OnUpdateUI_MenuViewShowAllChars },
+	{ menuViewRightToLeft, &MadEditFrame::OnUpdateUI_MenuViewRightToLeft },
+	{ menuMarkActiveLine, &MadEditFrame::OnUpdateUI_MenuViewMarkActiveLine },
+	{ menuMarkBracePair, &MadEditFrame::OnUpdateUI_MenuViewMarkBracePair },
+	{ menuTextMode, &MadEditFrame::OnUpdateUI_MenuViewTextMode },
+	{ menuColumnMode, &MadEditFrame::OnUpdateUI_MenuViewColumnMode },
+	{ menuHexMode, &MadEditFrame::OnUpdateUI_MenuViewHexMode },
+	{ menuPreview, &MadEditFrame::OnUpdateUI_MenuViewPreview },
+	{ menuSpellChecker, &MadEditFrame::OnUpdateUI_MenuViewSpellChecker },
+	{ menuSpellIgnore, &MadEditFrame::OnUpdateUI_MenuSpellIgnore },
+	{ menuSpellAdd2Dict, &MadEditFrame::OnUpdateUI_MenuSpellAdd2Dict },
+	{ menuSpellRemoveFromDict, &MadEditFrame::OnUpdateUI_MenuSpellRemoveFromDict },
+	{ menuToolBarsToggleAll, &MadEditFrame::OnUpdateUI_MenuViewToolbarsToggleAll },
+	{ menuTypewriterMode, &MadEditFrame::OnUpdateUI_MenuViewTypewriterMode },
+	// tools
+	{ menuByteOrderMark, &MadEditFrame::OnUpdateUI_MenuToolsByteOrderMark },
+	{ menuMadMacro, &MadEditFrame::OnUpdateUI_MenuFile_CheckCount },
+	{ menuRunTempMacro, &MadEditFrame::OnUpdateUI_MenuFile_CheckCount },
+	{ menuRunMacroFile, &MadEditFrame::OnUpdateUI_MenuFile_CheckCount },
+	{ menuEditMacroFile, &MadEditFrame::OnUpdateUI_MenuFile_CheckCount },
+	{ menuStartRecMacro, &MadEditFrame::OnUpdateUI_MenuToolsStartRecMacro },
+	{ menuStopRecMacro, &MadEditFrame::OnUpdateUI_MenuToolsStopRecMacro },
+	{ menuPlayRecMacro, &MadEditFrame::OnUpdateUI_MenuToolsPlayRecMacro },
+	{ menuSaveRecMacro, &MadEditFrame::OnUpdateUI_MenuToolsSaveRecMacro },
+	{ menuMadScriptList, &MadEditFrame::OnUpdateUI_MenuFile_CheckCount },
+	{ menuInsertNewLineChar, &MadEditFrame::OnUpdateUI_MenuToolsInsertNewLineChar },
+	{ menuNewLineChar, &MadEditFrame::OnUpdateUI_MenuCheckWritable },
+	{ menuConvertToDOS, &MadEditFrame::OnUpdateUI_MenuCheckWritable },
+	{ menuConvertToMAC, &MadEditFrame::OnUpdateUI_MenuCheckWritable },
+	{ menuConvertToUNIX, &MadEditFrame::OnUpdateUI_MenuCheckWritable },
+	{ menuConvertEncoding, &MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding },
+	{ menuSimp2TradChinese, &MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding },
+	{ menuTrad2SimpChinese, &MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding },
+	{ menuKanji2TradChinese, &MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding },
+	{ menuKanji2SimpChinese, &MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding },
+	{ menuChinese2Kanji, &MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding },
+	{ menuMarkdown2Html, &MadEditFrame::OnUpdateUI_MenuCheckWritable },
+	{ menuHtml2PlainText, &MadEditFrame::OnUpdateUI_MenuCheckWritable },
+	{ menuAstyleFormat, &MadEditFrame::OnUpdateUI_MenuCheckWritable },
+	{ menuXMLFormat, &MadEditFrame::OnUpdateUI_MenuCheckWritable },
+	{ menuWordCount, &MadEditFrame::OnUpdateUI_MenuFile_CheckCount },
+	// window, hardcode of Menu_Window_Count
+	{ menuToggleWindow, &MadEditFrame::OnUpdateUI_MenuWindow_CheckCount },
+	{ menuNextWindow, &MadEditFrame::OnUpdateUI_MenuWindow_CheckCount },
+	{ menuPreviousWindow, &MadEditFrame::OnUpdateUI_MenuWindow_CheckCount },
+	{ menuWindowList, &MadEditFrame::OnUpdateUI_MenuWindow_CheckCount },
+};
+
+MadEditFrame::wxCmdUpdaterRangeMap_t MadEditFrame::m_menu_ui_updater_range_map[] =
+{
+	{ menuPreview1, menuPreview16, &MadEditFrame::OnUpdateUI_MenuViewPreviewList },
+	{ menuToolBar1, menuToolBar99, &MadEditFrame::OnUpdateUI_MenuViewToolbarList },
+	{ menuWindow1, menuWindow100, &MadEditFrame::OnUpdateUI_MenuWindow_Window },
+	{ menuQuickFindNext, menuQuickFindDotMatchNewLine, &MadEditFrame::OnUpdateUI_MenuSearch_QuickBar },
+};
 
 //==========================================================
 // do not use wxGetTranslation() now
@@ -2616,6 +2611,40 @@ MadEditFrame::MadEditFrame( wxWindow *parent, wxWindowID id, const wxString &tit
 		m_AutoSaveTimer.StartOnce(m_AutoSaveTimout*MADMINUTES);
 	else
 		m_AutoSaveTimout = 0;
+
+	for(size_t i = 0; i < sizeof(m_menu_evt_map)/sizeof(m_menu_evt_map[0]); ++i)
+	{
+		Bind( wxEVT_MENU, m_menu_evt_map[i].method, this, m_menu_evt_map[i].evtTag );
+	}
+
+	for(size_t i = 0; i < sizeof(m_menu_evt_range_map)/sizeof(m_menu_evt_range_map[0]); ++i)
+	{
+		Bind( wxEVT_MENU, m_menu_evt_range_map[i].method, this, m_menu_evt_range_map[i].evtStartTag, m_menu_evt_range_map[i].evtEndTag );
+	}
+
+	for(size_t i = 0; i < sizeof(m_menu_ui_updater_map)/sizeof(m_menu_ui_updater_map[0]); ++i)
+	{
+		Bind( wxEVT_UPDATE_UI, m_menu_ui_updater_map[i].method, this, m_menu_ui_updater_map[i].evtTag );
+	}
+    
+	for(size_t i = 0; i < sizeof(m_menu_ui_updater_range_map)/sizeof(m_menu_ui_updater_range_map[0]); ++i)
+	{
+		Bind( wxEVT_UPDATE_UI, m_menu_ui_updater_range_map[i].method, this, m_menu_ui_updater_range_map[i].evtStartTag, m_menu_ui_updater_range_map[i].evtEndTag );
+	}
+
+	Bind( wxEVT_AUINOTEBOOK_PAGE_CHANGING, &MadEditFrame::OnNotebookPageChanging, this, ID_NOTEBOOK );
+	Bind( wxEVT_AUINOTEBOOK_PAGE_CHANGED, &MadEditFrame::OnNotebookPageChanged, this, ID_NOTEBOOK );
+	Bind( wxEVT_AUINOTEBOOK_PAGE_CLOSE, &MadEditFrame::OnNotebookPageClosing, this, ID_NOTEBOOK );
+	Bind( wxEVT_AUINOTEBOOK_TAB_RIGHT_UP, &MadEditFrame::OnNotebookPageRightUp, this, ID_NOTEBOOK );
+	Bind( wxEVT_TIMER, &MadEditFrame::OnTimer, this, ID_WXTIMER );
+	//EVT_AUINOTEBOOK_PAGE_CLOSE(ID_NOTEBOOK, MadEditFrame::OnNotebookPageClosed)
+	//EVT_CHAR(MadEditFrame::OnChar)
+	Bind( wxEVT_ACTIVATE, &MadEditFrame::OnActivate, this );
+
+	Bind(wxEVT_CLOSE_WINDOW, &MadEditFrame::MadEditFrameClose, this );
+	Bind( wxEVT_KEY_DOWN, &MadEditFrame::MadEditFrameKeyDown, this );
+	Bind( wxEVT_TEXT, &MadEditFrame::OnSearchQuickFind, this, ID_QUICKSEARCH );
+	Bind( wxEVT_TEXT_ENTER, &MadEditFrame::OnSearchQuickFind, this, ID_QUICKSEARCH );
 }
 
 MadEditFrame::~MadEditFrame()

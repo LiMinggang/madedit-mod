@@ -71,8 +71,6 @@ enum MadToolBarType
 
 class MadEditFrame : public wxFrame
 {
-private:
-	DECLARE_EVENT_TABLE()
 public:
 	MadEditFrame( wxWindow *parent, wxWindowID id = 1, const wxString &title = wxT( "MadEdit-Mod" ),
 	              const wxPoint& pos = wxDefaultPosition,
@@ -139,6 +137,7 @@ public:
 	bool           m_ResetToolBars;
 	bool           m_SearchDirectionNext;
     wxFileOffset   m_QSearchBegPos, m_QSearchEndPos;
+private:
 	void OnUpdateUI_CheckFrameStyle( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuFile_CheckCount( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuFileReload( wxUpdateUIEvent& event );
@@ -402,12 +401,7 @@ public:
 	void OnToolsKanji2SimpClipboard( wxCommandEvent& event );
 	void OnToolsChinese2KanjiClipboard( wxCommandEvent& event );
 	void OnToolsWordCount( wxCommandEvent& event );
-	void OnToolsMarkdown2Html( wxCommandEvent& event );
-	void OnToolsHtml2PlainText( wxCommandEvent& event );
-	void OnToolsAstyleFormat( wxCommandEvent& event );
-	void OnToolsXMLFormat( wxCommandEvent& event );
 
-	void OnWindowToggleWindow( wxCommandEvent& event );
 	void OnWindowPreviousWindow( wxCommandEvent& event );
 	void OnWindowNextWindow( wxCommandEvent& event );
 	void OnWindowWindowList( wxCommandEvent& event );
@@ -425,9 +419,16 @@ public:
     void OnQuickSearchSetFocus( wxFocusEvent& event );
 	void OnContextMenu( wxContextMenuEvent& event );
 	void OnScrollBarMenu( wxCommandEvent& event );
+public:
+	void OnWindowToggleWindow( wxCommandEvent& event );
+	void OnToolsMarkdown2Html( wxCommandEvent& event );
+	void OnToolsHtml2PlainText( wxCommandEvent& event );
+	void OnToolsAstyleFormat( wxCommandEvent& event );
+	void OnToolsXMLFormat( wxCommandEvent& event );
 private:
 	bool m_PageClosing; // prevent from reentry of CloseFile(), OnNotebookPageClosing()
 public:
+    
 	int OpenedFileCount();
 	bool OpenFile( const wxString &filename, bool mustExist, bool changeSelection = true ); // if filename is empty, open a new file
 	void RunScriptWithFile( const wxString &filename, const wxString &script, bool mustExist, bool closeafterdone, bool ignorereadonly, bool activeFile );
@@ -494,6 +495,33 @@ private:
 	long m_AutoSaveTimout;
     wxMenuItem * m_ToggleReadOnly;
 	static bool m_Closing;
+
+	typedef struct 
+	{
+		const long evtTag;
+		void (MadEditFrame::*method)( wxCommandEvent &);
+	} wxCmdEvtHandlerMap_t;
+    static wxCmdEvtHandlerMap_t m_menu_evt_map[];
+	typedef struct 
+	{
+		const long evtStartTag;
+		const long evtEndTag;
+		void (MadEditFrame::*method)( wxCommandEvent &);
+	} wxCmdEvtHandlerRangeMap_t;
+    static wxCmdEvtHandlerRangeMap_t m_menu_evt_range_map[];
+	typedef struct 
+	{
+		const long evtTag;
+		void (MadEditFrame::*method)( wxUpdateUIEvent &);
+	} wxUIUpdateEvtHandlerMap_t;
+	static wxUIUpdateEvtHandlerMap_t m_menu_ui_updater_map[];
+	typedef struct 
+	{
+		const long evtStartTag;
+		const long evtEndTag;
+		void (MadEditFrame::*method)( wxUpdateUIEvent &);
+	} wxCmdUpdaterRangeMap_t;
+    static wxCmdUpdaterRangeMap_t m_menu_ui_updater_range_map[];
 public:
 	MadMacroMode GetMadMacroStatus() {return m_MadMacroStatus;}
 	bool IsMacroRunning() {return ( m_MadMacroStatus == emMacroRunning );}
@@ -768,11 +796,11 @@ enum   // menu id
 	menuTypewriterMode,
 	menuShowQuickSearchBar,
 	menuQuickFindNext,
-	menuQuickFindPrevious,
-    menuQuickFindWholeWord,
-    menuQuickFindRegex,
-    menuQuickFindCase,
-    menuQuickFindDotMatchNewLine,
+	menuQuickFindPrevious = menuQuickFindNext+1,
+    menuQuickFindWholeWord = menuQuickFindNext+2,
+    menuQuickFindRegex = menuQuickFindNext+3,
+    menuQuickFindCase = menuQuickFindNext+4,
+    menuQuickFindDotMatchNewLine = menuQuickFindNext+5,
 
     menuVScrollHere,
     menuVScrollTop,
