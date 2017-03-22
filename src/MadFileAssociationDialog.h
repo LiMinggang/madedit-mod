@@ -74,8 +74,6 @@ class MadFileAssociationDialog: public wxDialog
 		void WxListBoxAssociatedDoubleClicked(wxCommandEvent& event);
 		void WxListBoxPredefinedDoubleClicked(wxCommandEvent& event);
 		//*)
-
-		DECLARE_EVENT_TABLE()
 };
 
 #endif //__WXMSW__

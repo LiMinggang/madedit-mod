@@ -20,11 +20,6 @@ const long MadSortDialog::ID_WXCHECKBOXNUMERIC = wxNewId();
 const long MadSortDialog::ID_WXCHECKBOXREMOVEDUP = wxNewId();
 //*)
 
-BEGIN_EVENT_TABLE(MadSortDialog,wxDialog)
-	//(*EventTable(MadSortDialog)
-	//*)
-END_EVENT_TABLE()
-
 MadSortDialog::MadSortDialog(wxWindow* parent)
 {
 	//(*Initialize(MadSortDialog)

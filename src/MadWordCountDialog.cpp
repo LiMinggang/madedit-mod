@@ -50,11 +50,6 @@ const long MadWordCountDialog::ID_STATICTEXT7 = wxNewId();
 const long MadWordCountDialog::ID_WXMEMO1 = wxNewId();
 //*)
 
-BEGIN_EVENT_TABLE(MadWordCountDialog,wxDialog)
-	//(*EventTable(MadWordCountDialog)
-	//*)
-END_EVENT_TABLE()
-
 MadWordCountDialog::MadWordCountDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)
 {
 	//(*Initialize(MadWordCountDialog)

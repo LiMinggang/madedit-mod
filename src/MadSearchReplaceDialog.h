@@ -171,7 +171,6 @@ class MadSearchReplaceDialog: public wxDialog
 		void ShowReplaceUI();
 		void SetTransparency();
 		void ShowFindUI();
-		DECLARE_EVENT_TABLE()
 };
 
 extern MadSearchReplaceDialog *g_SearchReplaceDialog;

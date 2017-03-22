@@ -171,12 +171,6 @@ const long MadHighlightingDialog::ID_WXLISTCTRLBC = wxNewId();
 const long MadHighlightingDialog::ID_WXBUTTONBC = wxNewId();
 //*)
 
-BEGIN_EVENT_TABLE(MadHighlightingDialog,wxDialog)
-	//(*EventTable(MadHighlightingDialog)
-	//*)
-	EVT_ACTIVATE(MadHighlightingDialog::MadHighlightingDialogActivate)
-END_EVENT_TABLE()
-
 MadHighlightingDialog::MadHighlightingDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)
 	: m_Syntax(NULL)
 {
@@ -291,7 +285,8 @@ MadHighlightingDialog::MadHighlightingDialog(wxWindow* parent,wxWindowID id,cons
 	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadHighlightingDialog::WxButtonFCClick, this, ID_WXBUTTONFC );
 	Bind( wxEVT_COMMAND_LIST_ITEM_SELECTED, &MadHighlightingDialog::WxListCtrlBCSelected, this, ID_WXLISTCTRLBC );
 	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadHighlightingDialog::WxButtonBCClick, this, ID_WXBUTTONBC );
-	Bind( wxEVT_CLOSE_WINDOW, &MadHighlightingDialog::MadHighlightingDialogClose, this, wxID_ANY );
+	Bind( wxEVT_CLOSE_WINDOW, &MadHighlightingDialog::MadHighlightingDialogClose, this );
+	Bind( wxEVT_ACTIVATE, &MadHighlightingDialog::MadHighlightingDialogActivate, this );
 	//*)
 
 #ifdef __WXMSW__

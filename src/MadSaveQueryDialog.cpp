@@ -23,11 +23,6 @@ const long MadSaveQueryDialog::ID_BUTTONGOTO = wxNewId();
 
 #define SAVEQUERY_MIN_PATH_COL_WIDTH 80
 
-BEGIN_EVENT_TABLE(MadSaveQueryDialog,wxDialog)
-	//(*EventTable(MadSaveQueryDialog)
-	//*)
-END_EVENT_TABLE()
-
 MadSaveQueryDialog::MadSaveQueryDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)
 {
 	//(*Initialize(MadSaveQueryDialog)

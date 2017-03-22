@@ -27,11 +27,6 @@ const long MadAboutDialog::ID_WXMEMOLICENSE = wxNewId();
 const long MadAboutDialog::ID_WXAUINOTEBOOKABOUT = wxNewId();
 //*)
 
-BEGIN_EVENT_TABLE(MadAboutDialog,wxDialog)
-	//(*EventTable(MadAboutDialog)
-	//*)
-END_EVENT_TABLE()
-
 wxString g_MadEdit_URL(wxT("http://sourceforge.net/projects/madedit/ or http://sourceforge.net/projects/madedit-mod/"));
 wxString g_MadEditMod_URL(wxT("https://sourceforge.net/p/madedit-mod/wiki/MadEdi-Mod/"));
 wxString g_MadEditModLicense (

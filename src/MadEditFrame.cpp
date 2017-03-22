@@ -9863,18 +9863,6 @@ bool MadEditFrame::RestoreAuiPanel(wxWindow * toolbar, wxString& toolbar_status,
 	return m_AuiManager.AddPane( toolbar, pane_info );
 }
 
-#if USE_GENERIC_TREECTRL
-	BEGIN_EVENT_TABLE( MadTreeCtrl, wxGenericTreeCtrl )
-#else
-	BEGIN_EVENT_TABLE( MadTreeCtrl, wxTreeCtrl )
-#endif
-	// EVT_TREE_ITEM_MENU is the preferred event for creating context menus
-	// on a tree control, because it includes the point of the click or item,
-	// meaning that no additional placement calculations are required.
-	EVT_TREE_ITEM_MENU( MadEditFrame::ID_FINDINFILESRESULTS, MadTreeCtrl::OnItemMenu )
-	EVT_MOUSEWHEEL( MadTreeCtrl::OnMouseWheel )
-END_EVENT_TABLE()
-
 MadTreeCtrl::MadTreeCtrl( wxWindow *parent, const wxWindowID id,
 						  const wxPoint& pos, const wxSize& size,
 						  long style )
@@ -9884,6 +9872,9 @@ MadTreeCtrl::MadTreeCtrl( wxWindow *parent, const wxWindowID id,
 	: wxTreeCtrl( parent, id, pos, size, style )
 #endif
 {
+	Bind( wxEVT_TREE_ITEM_MENU, &MadTreeCtrl::OnItemMenu, this, MadEditFrame::ID_FINDINFILESRESULTS );
+	Bind( wxEVT_MOUSEWHEEL, &MadTreeCtrl::OnMouseWheel, this );
+
 }
 
 void MadTreeCtrl::OnItemMenu( wxTreeEvent& event )

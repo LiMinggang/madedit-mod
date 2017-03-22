@@ -31,9 +31,6 @@
 #include "../images/unchecked_dis.xpm"
 
 IMPLEMENT_CLASS(wxCheckedListCtrl, wxListCtrl)
-BEGIN_EVENT_TABLE(wxCheckedListCtrl, wxListCtrl)
-    EVT_LEFT_DOWN(wxCheckedListCtrl::OnMouseEvent)
-END_EVENT_TABLE()
 
 DEFINE_EVENT_TYPE(wxEVT_COMMAND_LIST_ITEM_CHECKED);
 DEFINE_EVENT_TYPE(wxEVT_COMMAND_LIST_ITEM_UNCHECKED);
@@ -44,19 +41,37 @@ DEFINE_EVENT_TYPE(wxEVT_COMMAND_LIST_ITEM_UNCHECKED);
 // wxCHECKEDLISTCTRL
 // ------------------
 
+wxCheckedListCtrl::wxCheckedListCtrl()
+	: wxListCtrl(), m_imageList(16, 16, TRUE)
+{
+	Bind( wxEVT_LEFT_DOWN, &wxCheckedListCtrl::OnMouseEvent, this );
+}
+
+wxCheckedListCtrl::wxCheckedListCtrl(wxWindow *parent, wxWindowID id/* = -1*/,
+					const wxPoint& pt/* = wxDefaultPosition*/,
+					const wxSize& sz/* = wxDefaultSize*/,
+					long style/* = wxCLC_CHECK_WHEN_SELECTING*/,
+					const wxValidator& validator/* = wxDefaultValidator*/,
+					const wxString& name/* = wxListCtrlNameStr*/)
+					: wxListCtrl(), m_imageList(16, 16, TRUE)
+{
+	Create(parent, id, pt, sz, style, validator, name);
+	Bind( wxEVT_LEFT_DOWN, &wxCheckedListCtrl::OnMouseEvent, this );
+}
+
 bool wxCheckedListCtrl::Create(wxWindow* parent, wxWindowID id, const wxPoint& pt,
         const wxSize& sz, long style, const wxValidator& validator, const wxString& name)
 {
 	if (!wxListCtrl::Create(parent, id, pt, sz, style, validator, name))
 		return FALSE;
 
-    SetImageList(&m_imageList, wxIMAGE_LIST_SMALL);
+	SetImageList(&m_imageList, wxIMAGE_LIST_SMALL);
 
 	// the add order must respect the wxCLC_XXX_IMGIDX defines in the headers !
-    m_imageList.Add(wxIcon(unchecked_xpm));
-    m_imageList.Add(wxIcon(checked_xpm));
-    m_imageList.Add(wxIcon(unchecked_dis_xpm));
-    m_imageList.Add(wxIcon(checked_dis_xpm));
+	m_imageList.Add(wxIcon(unchecked_xpm));
+	m_imageList.Add(wxIcon(checked_xpm));
+	m_imageList.Add(wxIcon(unchecked_dis_xpm));
+	m_imageList.Add(wxIcon(checked_dis_xpm));
 
 	return TRUE;
 }

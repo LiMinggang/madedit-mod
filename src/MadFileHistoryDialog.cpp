@@ -21,11 +21,6 @@ const long MadFileHistoryDialog::ID_BUTTONDSELECTALL = wxNewId();
 
 #define FILEHISTORY_MIN_PATH_COL_WIDTH 80
 
-BEGIN_EVENT_TABLE(MadFileHistoryDialog,wxDialog)
-	//(*EventTable(MadFileHistoryDialog)
-	//*)
-END_EVENT_TABLE()
-
 MadFileHistoryDialog *g_RecentOpenedFileListDialog = NULL;
 
 MadFileHistoryDialog::MadFileHistoryDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)

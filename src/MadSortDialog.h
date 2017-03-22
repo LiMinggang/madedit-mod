@@ -39,8 +39,6 @@ class MadSortDialog: public wxDialog
 		//(*Handlers(MadSortDialog)
 		void MadSortDialogClose(wxCloseEvent& event);
 		//*)
-
-		DECLARE_EVENT_TABLE()
 };
 
 #endif

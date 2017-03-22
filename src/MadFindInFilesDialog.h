@@ -144,8 +144,6 @@ class MadFindInFilesDialog: public wxDialog
 		void PurgeRecentFindDirs();
 		void PurgeRecentFindFilters();
 		void PurgeRecentFindExcludes();
-
-		DECLARE_EVENT_TABLE()
 };
 
 extern MadFindInFilesDialog *g_FindInFilesDialog;

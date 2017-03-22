@@ -321,11 +321,6 @@ const long MadFileAssociationDialog::ID_WXEDITCUSTOMTYPE = wxNewId();
 const long MadFileAssociationDialog::ID_WXBUTTONADDCUSTOM = wxNewId();
 //*)
 
-BEGIN_EVENT_TABLE(MadFileAssociationDialog,wxDialog)
-	//(*EventTable(MadFileAssociationDialog)
-	//*)
-END_EVENT_TABLE()
-
 MadFileAssociationDialog::MadFileAssociationDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)
 {
 	//(*Initialize(MadFileAssociationDialog)

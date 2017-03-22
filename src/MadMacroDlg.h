@@ -52,8 +52,6 @@ class MadMacroDlg: public wxDialog
 		void OnWxButtonResultClick(wxCommandEvent& event);
 		void MadMacroDlgClose(wxCloseEvent& event);
 		//*)
-
-		DECLARE_EVENT_TABLE()
 };
 extern MadMacroDlg *g_MadMacroDlg;
 #endif //__MADMACRODLG_H__

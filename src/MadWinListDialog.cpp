@@ -25,12 +25,6 @@ const long MadWinListDialog::COL_TABNAME = 0;
 const long MadWinListDialog::COL_PATH = 1;
 #define WINLIST_MIN_PATH_COL_WIDTH 80
 
-BEGIN_EVENT_TABLE(MadWinListDialog,wxDialog)
-	EVT_ACTIVATE( MadWinListDialog::MadWinListDialogActivate )
-	//(*EventTable(MadWinListDialog)
-	//*)
-END_EVENT_TABLE()
-
 MadWinListDialog *g_WinListDialog = NULL;
 
 MadWinListDialog::MadWinListDialog(wxWindow* parent,wxWindowID id)
@@ -94,6 +88,7 @@ MadWinListDialog::MadWinListDialog(wxWindow* parent,wxWindowID id)
 	itemCol.SetText(_("Path"));
 	itemCol.SetAlign(wxLIST_FORMAT_LEFT);
 	MadWindowsList->InsertColumn(1, itemCol);
+	Bind( wxEVT_ACTIVATE, &MadWinListDialog::MadWinListDialogActivate, this );
 }
 
 MadWinListDialog::~MadWinListDialog()

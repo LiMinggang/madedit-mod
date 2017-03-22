@@ -50,8 +50,6 @@ class MadFileHistoryDialog: public wxDialog
 		void MadFileHistoryDialogClose(wxCloseEvent& event);
 		//*)
 		void MadFileHistoryDialogActivate( wxActivateEvent& event );
-
-		DECLARE_EVENT_TABLE()
 };
 
 extern MadFileHistoryDialog *g_RecentOpenedFileListDialog;

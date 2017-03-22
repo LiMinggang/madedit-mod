@@ -58,7 +58,6 @@ class MadSaveQueryDialog: public wxDialog
 		//*)
 
         void InitWindowListIterms();
-		DECLARE_EVENT_TABLE()
 };
 
 #endif

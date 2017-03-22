@@ -89,17 +89,6 @@ const long MadFindInFilesDialog::ID_RECENTFINDTEXT20 = MadUniqueIDReserver::Inst
 const long MadFindInFilesDialog::ID_RECENTREPLACETEXT1 = MadUniqueIDReserver::Instance().RecentReplaceTextID1();
 const long MadFindInFilesDialog::ID_RECENTREPLACETEXT20 = MadUniqueIDReserver::Instance().RecentReplaceTextID20();
 
-BEGIN_EVENT_TABLE(MadFindInFilesDialog,wxDialog)
-	//(*EventTable(MadFindInFilesDialog)
-	//*)
-	EVT_ACTIVATE(MadFindInFilesDialog::MadFindInFilesDialogActivate)
-
-	EVT_BUTTON(ID_WXBITMAPBUTTONRECENTFINDTEXT, MadFindInFilesDialog::WxBitmapButtonRecentFindTextClick)
-	EVT_BUTTON(ID_WXBITMAPBUTTONRECENTREPLACETEXT, MadFindInFilesDialog::WxBitmapButtonRecentReplaceTextClick)
-	EVT_MENU_RANGE( ID_RECENTFINDTEXT1, ID_RECENTFINDTEXT20, MadFindInFilesDialog::OnRecentFindText )
-	EVT_MENU_RANGE( ID_RECENTREPLACETEXT1, ID_RECENTREPLACETEXT20, MadFindInFilesDialog::OnRecentReplaceText )
-END_EVENT_TABLE()
-
 MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)
 {
 	//(*Initialize(MadFindInFilesDialog)
@@ -210,6 +199,13 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID id,const 
 	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED, &MadFindInFilesDialog::WxCheckBoxEnableReplaceClick, this, ID_WXCHECKBOXENABLEREPLACE );
 	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadFindInFilesDialog::WxButtonDirClick, this, ID_WXBUTTONDIR );
 	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadFindInFilesDialog::WxButtonActiveDirClick, this, ID_WXBUTTONACTIVEDIR );
+	
+	Bind( wxEVT_ACTIVATE, &MadFindInFilesDialog::MadFindInFilesDialogActivate, this );
+
+	Bind( wxEVT_BUTTON, &MadFindInFilesDialog::WxBitmapButtonRecentFindTextClick, this, ID_WXBITMAPBUTTONRECENTFINDTEXT );
+	Bind( wxEVT_BUTTON, &MadFindInFilesDialog::WxBitmapButtonRecentReplaceTextClick, this, ID_WXBITMAPBUTTONRECENTREPLACETEXT );
+	Bind( wxEVT_MENU, &MadFindInFilesDialog::OnRecentFindText, this, ID_RECENTFINDTEXT1, ID_RECENTFINDTEXT20 );
+	Bind( wxEVT_MENU, &MadFindInFilesDialog::OnRecentReplaceText, this, ID_RECENTREPLACETEXT1, ID_RECENTREPLACETEXT20 );
 	//*)
 
 	int bw, bh;

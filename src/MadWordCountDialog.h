@@ -78,8 +78,6 @@ class MadWordCountDialog: public wxDialog
 		//(*Handlers(MadWordCountDialog)
 		void MadWordCountDialogClose(wxCloseEvent& event);
 		//*)
-
-		DECLARE_EVENT_TABLE()
 };
 
 #endif

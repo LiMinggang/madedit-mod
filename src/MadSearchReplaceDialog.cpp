@@ -103,16 +103,6 @@ const long MadSearchReplaceDialog::ID_RECENTREPLACETEXT20 = MadUniqueIDReserver:
 //Add Custom Events only in the appropriate Block.
 // Code added in  other places will be removed by wx-dvcpp
 ////Event Table Start
-BEGIN_EVENT_TABLE( MadSearchReplaceDialog, wxDialog )
-	//(*EventTable(MadSearchReplaceDialog)
-	//*)
-	EVT_ACTIVATE( MadSearchReplaceDialog::MadSearchReplaceDialogActivate )
-
-	EVT_BUTTON( ID_WXBITMAPBUTTONRECENTFINDTEXT, MadSearchReplaceDialog::WxBitmapButtonRecentFindTextClick )
-	EVT_BUTTON( ID_WXBITMAPBUTTONRECENTREPLACETEXT, MadSearchReplaceDialog::WxBitmapButtonRecentReplaceTextClick )
-	EVT_MENU_RANGE( ID_RECENTFINDTEXT1, ID_RECENTFINDTEXT20, MadSearchReplaceDialog::OnRecentFindText )
-	EVT_MENU_RANGE( ID_RECENTREPLACETEXT1, ID_RECENTREPLACETEXT20, MadSearchReplaceDialog::OnRecentReplaceText )
-END_EVENT_TABLE()
 
 MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size )
 {
@@ -233,25 +223,6 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	BoxSizer8->Add( BoxSizer3, 0, wxALL | wxEXPAND, 0 );
 	BoxSizer1->Add( BoxSizer8, 1, wxALL | wxEXPAND, 0 );
 
-	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED,     &MadSearchReplaceDialog::WxCheckBoxRegexClick, this,             ID_WXCHECKBOXREGEX              );
-	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED,     &MadSearchReplaceDialog::WxCheckBoxFindHexClick, this,           ID_WXCHECKBOXFINDHEX            );
-	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED,     &MadSearchReplaceDialog::WxCheckBoxSearchInSelectionClick, this, ID_WXCHECKBOXSEARCHINSELECTION  );
-	Bind( wxEVT_COMMAND_RADIOBUTTON_SELECTED, &MadSearchReplaceDialog::WxRadioLosingFocusSelect, this,         ID_RADIOBUTTON1                 );
-	Bind( wxEVT_COMMAND_RADIOBUTTON_SELECTED, &MadSearchReplaceDialog::WxRadioAlwaysSelect, this,              ID_RADIOBUTTON2                 );
-	Bind( wxEVT_SLIDER,       &MadSearchReplaceDialog::WxSliderTransDegreeScroll, this,        ID_WXSLIDERTRANSDEGREE          );
-	Bind( wxEVT_SLIDER,       &MadSearchReplaceDialog::OnWxSliderInputSizerCmdScroll, this,    ID_WXSLIDERINPUTSIZER           );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonFindNextClick, this,            ID_WXBUTTONFINDNEXT             );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonFindPrevClick, this,            ID_WXBUTTONFINDPREV             );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonFindAllClick, this,             ID_WXBUTTONFINDALL              );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonFindAllInAllClick, this,        ID_WXBUTTONFINDALLINALL         );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonReplaceClick, this,             ID_WXBUTTONREPLACE              );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonReplaceAllClick, this,          ID_WXBUTTONREPLACEALL           );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonReplaceAllInAllClick, this,     ID_WXBUTTONREPLACEALLINALL      );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonCountClick, this,               ID_WXBUTTONCOUNT                );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonReplaceExpandClick, this,       ID_WXBUTTONREPLACEEXPAND        );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonCloseClick, this,               wxID_CANCEL                     );
-	Bind( wxEVT_CLOSE_WINDOW,                 &MadSearchReplaceDialog::MadSearchReplaceDialogClose, this);
-	Bind( wxEVT_KEY_DOWN,                     &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this);
 	//*)
 	int bw, bh;
 	// find
@@ -391,6 +362,33 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	BoxSizer1->Fit( this );
 	BoxSizer1->SetSizeHints( this );
 	Center();
+
+	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED,     &MadSearchReplaceDialog::WxCheckBoxRegexClick, this,             ID_WXCHECKBOXREGEX              );
+	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED,     &MadSearchReplaceDialog::WxCheckBoxFindHexClick, this,           ID_WXCHECKBOXFINDHEX            );
+	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED,     &MadSearchReplaceDialog::WxCheckBoxSearchInSelectionClick, this, ID_WXCHECKBOXSEARCHINSELECTION  );
+	Bind( wxEVT_COMMAND_RADIOBUTTON_SELECTED, &MadSearchReplaceDialog::WxRadioLosingFocusSelect, this,         ID_RADIOBUTTON1                 );
+	Bind( wxEVT_COMMAND_RADIOBUTTON_SELECTED, &MadSearchReplaceDialog::WxRadioAlwaysSelect, this,              ID_RADIOBUTTON2                 );
+	Bind( wxEVT_SLIDER,       &MadSearchReplaceDialog::WxSliderTransDegreeScroll, this,        ID_WXSLIDERTRANSDEGREE          );
+	Bind( wxEVT_SLIDER,       &MadSearchReplaceDialog::OnWxSliderInputSizerCmdScroll, this,    ID_WXSLIDERINPUTSIZER           );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonFindNextClick, this,            ID_WXBUTTONFINDNEXT             );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonFindPrevClick, this,            ID_WXBUTTONFINDPREV             );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonFindAllClick, this,             ID_WXBUTTONFINDALL              );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonFindAllInAllClick, this,        ID_WXBUTTONFINDALLINALL         );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonReplaceClick, this,             ID_WXBUTTONREPLACE              );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonReplaceAllClick, this,          ID_WXBUTTONREPLACEALL           );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonReplaceAllInAllClick, this,     ID_WXBUTTONREPLACEALLINALL      );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonCountClick, this,               ID_WXBUTTONCOUNT                );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonReplaceExpandClick, this,       ID_WXBUTTONREPLACEEXPAND        );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonCloseClick, this,               wxID_CANCEL                     );
+	Bind( wxEVT_CLOSE_WINDOW,                 &MadSearchReplaceDialog::MadSearchReplaceDialogClose, this);
+	Bind( wxEVT_KEY_DOWN,                     &MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown, this);
+	
+	Bind( wxEVT_ACTIVATE, &MadSearchReplaceDialog::MadSearchReplaceDialogActivate, this );
+
+	Bind( wxEVT_BUTTON, &MadSearchReplaceDialog::WxBitmapButtonRecentFindTextClick, this, ID_WXBITMAPBUTTONRECENTFINDTEXT );
+	Bind( wxEVT_BUTTON, &MadSearchReplaceDialog::WxBitmapButtonRecentReplaceTextClick, this, ID_WXBITMAPBUTTONRECENTREPLACETEXT );
+	Bind( wxEVT_MENU, &MadSearchReplaceDialog::OnRecentFindText, this, ID_RECENTFINDTEXT1, ID_RECENTFINDTEXT20 );
+	Bind( wxEVT_MENU, &MadSearchReplaceDialog::OnRecentReplaceText, this, ID_RECENTREPLACETEXT1, ID_RECENTREPLACETEXT20 );
 }
 
 MadSearchReplaceDialog::~MadSearchReplaceDialog()

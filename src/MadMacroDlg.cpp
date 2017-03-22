@@ -21,11 +21,6 @@ const long MadMacroDlg::ID_WXBUTTONTOGGLERESULT = wxNewId();
 const long MadMacroDlg::ID_TEXTCTRLRESULT = wxNewId();
 //*)
 
-BEGIN_EVENT_TABLE(MadMacroDlg,wxDialog)
-	//(*EventTable(MadMacroDlg)
-	//*)
-END_EVENT_TABLE()
-
 extern MadEdit *g_ActiveMadEdit;
 extern int MadMessageBox(const wxString& message,
 								 const wxString& caption = wxMessageBoxCaptionStr,

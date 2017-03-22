@@ -43,11 +43,6 @@ const long MadPurgeHistoryDialog::ID_CHECKBOXRESETTOOLBARSINFOWIN = wxNewId();
 const long MadPurgeHistoryDialog::ID_WXCHECKBOXALLABOVE = wxNewId();
 //*)
 
-BEGIN_EVENT_TABLE(MadPurgeHistoryDialog,wxDialog)
-	//(*EventTable(MadPurgeHistoryDialog)
-	//*)
-END_EVENT_TABLE()
-
 MadPurgeHistoryDialog::MadPurgeHistoryDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)
 {
 	//(*Initialize(MadPurgeHistoryDialog)

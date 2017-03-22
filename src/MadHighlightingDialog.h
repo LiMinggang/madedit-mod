@@ -134,8 +134,6 @@ class MadHighlightingDialog : public wxDialog
 		//*)
 
 		void MadHighlightingDialogActivate(wxActivateEvent& event);
-
-		DECLARE_EVENT_TABLE()
 };
 
 extern MadHighlightingDialog *g_HighlightingDialog;

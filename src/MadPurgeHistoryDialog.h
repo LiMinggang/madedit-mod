@@ -73,8 +73,6 @@ class MadPurgeHistoryDialog : public wxDialog
 		void wxCheckBoxAllAboveClick(wxCommandEvent& event);
 		void MadPurgeHistoryDialogKeyDown(wxKeyEvent& event);
 		//*)
-
-		DECLARE_EVENT_TABLE()
 };
 
 #endif

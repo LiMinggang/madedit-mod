@@ -77,17 +77,14 @@ protected:
     wxImageList m_imageList;
 
 public:
-    wxCheckedListCtrl()
-        : wxListCtrl(), m_imageList(16, 16, TRUE) {}
+    wxCheckedListCtrl();
 
     wxCheckedListCtrl(wxWindow *parent, wxWindowID id = -1,
                         const wxPoint& pt = wxDefaultPosition,
                         const wxSize& sz = wxDefaultSize,
                         long style = wxCLC_CHECK_WHEN_SELECTING,
                         const wxValidator& validator = wxDefaultValidator,
-                        const wxString& name = wxListCtrlNameStr)
-                        : wxListCtrl(), m_imageList(16, 16, TRUE)
-        { Create(parent, id, pt, sz, style, validator, name); }
+                        const wxString& name = wxListCtrlNameStr);
 
     bool Create(wxWindow *parent, wxWindowID id = -1,
                         const wxPoint& pt = wxDefaultPosition,
@@ -161,7 +158,6 @@ protected:		// internal utilities
 
 private:
     DECLARE_CLASS(wxCheckedListCtrl)
-    DECLARE_EVENT_TABLE()
 };
 
 
