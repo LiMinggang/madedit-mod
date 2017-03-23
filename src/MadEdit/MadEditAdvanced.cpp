@@ -3717,9 +3717,12 @@ void MadEdit::CutDelBookmarkedLines( bool copyLines/*= false*/ )
 	MadUCQueue ucqueue;
 	wxFileOffset pos = 0;
 
-	if( GetInsertNewLineType() == nltDOS ) newline += wxT( "\n" );
-	else
-		if( GetInsertNewLineType() == nltUNIX ) newline = wxT( "\n" );
+	if(copyLines)
+	{
+		if( GetInsertNewLineType() == nltDOS ) newline += wxT( "\n" );
+		else
+			if( GetInsertNewLineType() == nltUNIX ) newline = wxT( "\n" );
+	}
 
 	while( !lineList.empty() )
 	{
@@ -3788,6 +3791,7 @@ void MadEdit::CutDelBookmarkedLines( bool copyLines/*= false*/ )
 			MadDeleteUndoData *dudata = new MadDeleteUndoData;
 			dudata->m_Pos = lit->m_Blocks[0].m_Pos;
 			dudata->m_Size = lit->m_Size;
+			wxASSERT(lit->m_Size>0);
 			DeleteInsertData( dudata->m_Pos, dudata->m_Size, &dudata->m_Data, 0, NULL );
 
 			if( undo == NULL )
