@@ -236,7 +236,6 @@ enum MadReplaceResult
 
 class MadEdit: public MadEditSuperClass
 {
-	DECLARE_EVENT_TABLE()
 public:
 	static MadKeyBindings ms_KeyBindings;
 	enum {

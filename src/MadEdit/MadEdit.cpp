@@ -238,40 +238,6 @@ public:
 wxDEFINE_EVENT( CHECK_MODIFICATION_TIME, wxCommandEvent );
 wxDEFINE_EVENT( UPDATE_HSCROLL_POS, wxCommandEvent );
 
-BEGIN_EVENT_TABLE( MadEdit, MadEditSuperClass )
-
-	EVT_COMMAND( wxID_ANY, CHECK_MODIFICATION_TIME, MadEdit::OnCheckModificationTime )
-	EVT_COMMAND( wxID_ANY, UPDATE_HSCROLL_POS, MadEdit::OnUpdateHScrollPos )
-
-	EVT_CHAR( MadEdit::OnChar )
-	EVT_KEY_DOWN( MadEdit::OnKeyDown )
-	EVT_KEY_UP( MadEdit::OnKeyUp )
-
-	EVT_LEFT_DOWN( MadEdit::OnMouseLeftDown )
-	EVT_LEFT_UP( MadEdit::OnMouseLeftUp )
-	EVT_LEFT_DCLICK( MadEdit::OnMouseLeftDClick )
-	EVT_MOTION( MadEdit::OnMouseMotion )
-	EVT_RIGHT_UP( MadEdit::OnMouseRightUp )
-	EVT_MIDDLE_UP( MadEdit::OnMouseMiddleUp )
-
-	EVT_SET_FOCUS( MadEdit::OnSetFocus )
-	EVT_KILL_FOCUS( MadEdit::OnKillFocus )
-
-	EVT_SIZE( MadEdit::OnSize )
-	EVT_COMMAND_SCROLL( ID_VSCROLLBAR, MadEdit::OnVScroll )
-	EVT_COMMAND_SCROLL( ID_HSCROLLBAR, MadEdit::OnHScroll )
-	EVT_MOUSEWHEEL( MadEdit::OnMouseWheel )
-	EVT_ENTER_WINDOW( MadEdit::OnMouseEnterWindow )
-	EVT_LEAVE_WINDOW( MadEdit::OnMouseLeaveWindow )
-	EVT_MOUSE_CAPTURE_LOST( MadEdit::OnMouseCaptureLost )
-
-	EVT_ERASE_BACKGROUND( MadEdit::OnEraseBackground )
-	EVT_PAINT( MadEdit::OnPaint )
-
-END_EVENT_TABLE()
-
-
-
 #if defined(__WXGTK20__) && (wxMAJOR_VERSION < 3)
 void GTK2_DrawText( wxMemoryDC *dc, MadEncoding *encoding, const int *widths,
 					const wxString &text, wxCoord x, wxCoord y )
@@ -982,6 +948,50 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	ConnectToFixedKeyPressHandler();
 #endif
 	m_lastDoubleClick = 0;
+
+	Bind(CHECK_MODIFICATION_TIME, &MadEdit::OnCheckModificationTime, this );
+	Bind(UPDATE_HSCROLL_POS, &MadEdit::OnUpdateHScrollPos, this );
+
+	Bind( wxEVT_CHAR, &MadEdit::OnChar, this );
+	Bind( wxEVT_KEY_DOWN, &MadEdit::OnKeyDown, this );
+	Bind( wxEVT_KEY_UP, &MadEdit::OnKeyUp, this );
+
+	Bind( wxEVT_LEFT_DOWN, &MadEdit::OnMouseLeftDown, this );
+	Bind( wxEVT_LEFT_UP, &MadEdit::OnMouseLeftUp, this );
+	Bind( wxEVT_LEFT_DCLICK, &MadEdit::OnMouseLeftDClick, this );
+	Bind( wxEVT_MOTION, &MadEdit::OnMouseMotion, this );
+	Bind( wxEVT_RIGHT_UP, &MadEdit::OnMouseRightUp, this );
+	Bind( wxEVT_MIDDLE_UP, &MadEdit::OnMouseMiddleUp, this );
+
+	Bind( wxEVT_SET_FOCUS, &MadEdit::OnSetFocus, this );
+	Bind( wxEVT_KILL_FOCUS, &MadEdit::OnKillFocus, this );
+
+	Bind( wxEVT_SIZE, &MadEdit::OnSize, this );
+	Bind( wxEVT_SCROLL_TOP, &MadEdit::OnVScroll, this, ID_VSCROLLBAR);
+	Bind( wxEVT_SCROLL_BOTTOM, &MadEdit::OnVScroll, this, ID_VSCROLLBAR);
+	Bind( wxEVT_SCROLL_LINEUP, &MadEdit::OnVScroll, this, ID_VSCROLLBAR);
+	Bind( wxEVT_SCROLL_LINEDOWN, &MadEdit::OnVScroll, this, ID_VSCROLLBAR);
+	Bind( wxEVT_SCROLL_PAGEUP, &MadEdit::OnVScroll, this, ID_VSCROLLBAR);
+	Bind( wxEVT_SCROLL_PAGEDOWN, &MadEdit::OnVScroll, this, ID_VSCROLLBAR);
+	Bind( wxEVT_SCROLL_THUMBTRACK, &MadEdit::OnVScroll, this, ID_VSCROLLBAR);
+	Bind( wxEVT_SCROLL_THUMBRELEASE, &MadEdit::OnVScroll, this, ID_VSCROLLBAR);
+	Bind( wxEVT_SCROLL_CHANGED, &MadEdit::OnVScroll, this, ID_VSCROLLBAR);
+	Bind( wxEVT_SCROLL_TOP, &MadEdit::OnHScroll, this, ID_HSCROLLBAR);
+	Bind( wxEVT_SCROLL_BOTTOM, &MadEdit::OnHScroll, this, ID_HSCROLLBAR);
+	Bind( wxEVT_SCROLL_LINEUP, &MadEdit::OnHScroll, this, ID_HSCROLLBAR);
+	Bind( wxEVT_SCROLL_LINEDOWN, &MadEdit::OnHScroll, this, ID_HSCROLLBAR);
+	Bind( wxEVT_SCROLL_PAGEUP, &MadEdit::OnHScroll, this, ID_HSCROLLBAR);
+	Bind( wxEVT_SCROLL_PAGEDOWN, &MadEdit::OnHScroll, this, ID_HSCROLLBAR);
+	Bind( wxEVT_SCROLL_THUMBTRACK, &MadEdit::OnHScroll, this, ID_HSCROLLBAR);
+	Bind( wxEVT_SCROLL_THUMBRELEASE, &MadEdit::OnHScroll, this, ID_HSCROLLBAR);
+	Bind( wxEVT_SCROLL_CHANGED, &MadEdit::OnHScroll, this, ID_HSCROLLBAR);
+	Bind( wxEVT_MOUSEWHEEL, &MadEdit::OnMouseWheel, this );
+	Bind( wxEVT_ENTER_WINDOW, &MadEdit::OnMouseEnterWindow, this );
+	Bind( wxEVT_LEAVE_WINDOW, &MadEdit::OnMouseLeaveWindow, this );
+	Bind( wxEVT_MOUSE_CAPTURE_LOST, &MadEdit::OnMouseCaptureLost, this );
+
+	Bind( wxEVT_ERASE_BACKGROUND, &MadEdit::OnEraseBackground, this );
+	Bind( wxEVT_PAINT, &MadEdit::OnPaint, this );
 }
 
 MadEdit::~MadEdit()
@@ -10567,7 +10577,6 @@ void MadEdit::OnKillFocus( wxFocusEvent &evt )
 	evt.Skip();
 }
 
-
 void MadEdit::OnSize( wxSizeEvent &evt )
 {
 	int w, h;
@@ -10697,7 +10706,6 @@ void MadEdit::OnSize( wxSizeEvent &evt )
 	Refresh( false );
 	evt.Skip();
 }
-
 
 void MadEdit::OnVScroll( wxScrollEvent &evt )
 {
@@ -12008,5 +12016,3 @@ void MadEdit::ShowZeroLenSelIndicator()
 
 	PopupMenu( m_ZeroLenSelIndicator, pos );
 }
-
-

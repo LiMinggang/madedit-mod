@@ -58,8 +58,6 @@ class MadConvEncDialog : public wxDialog
 		//(*Handlers(MadConvEncDialog)
 		void MadConvEncDialogClose(wxCloseEvent& event);
 		//*)
-
-		DECLARE_EVENT_TABLE()
 };
 
 extern MadConvEncDialog *g_ConvEncDialog;

@@ -5753,23 +5753,20 @@ void PrintOut( wxWindow *parentWin )
 class TempPrintDialog : public wxDialog
 {
 private:
-	DECLARE_EVENT_TABLE()
 public:
 	TempPrintDialog( wxWindow *parent, wxWindowID id = 1, const wxString &title = wxT( "TopPrintDialog" ),
 					 const wxPoint& pos = wxPoint( 10, 10 ), //wxDefaultPosition,
 					 const wxSize& size = wxSize( 1, 1 ), //wxDefaultSize,
 					 long style = wxDIALOG_NO_PARENT )
-		: wxDialog( parent, id, title, pos, size, style ), m_Printed( false ) { }
+		: wxDialog( parent, id, title, pos, size, style ), m_Printed( false ) {
+		Bind( wxEVT_PAINT, &TempPrintDialog::OnPaint, this );
+	}
 	virtual ~TempPrintDialog() { }
 
 	void OnPaint( wxPaintEvent &evt );
 
 	bool m_Printed;
 };
-
-BEGIN_EVENT_TABLE( TempPrintDialog, wxDialog )
-	EVT_PAINT( TempPrintDialog::OnPaint )
-END_EVENT_TABLE()
 
 void TempPrintDialog::OnPaint( wxPaintEvent &evt )
 {

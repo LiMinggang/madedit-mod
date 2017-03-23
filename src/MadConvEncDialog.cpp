@@ -1,9 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 // Name:        MadConvEncDialog.cpp
 // Description:
-// Author:		madedit@gmail.com
-// Maintainer:	minggang.li@gmail.com
-// Licence: 	GPL
+// Author:      madedit@gmail.com
+// Maintainer:  minggang.li@gmail.com
+// Licence:     GPL
 ///////////////////////////////////////////////////////////////////////////////
 
 #ifdef _MSC_VER
@@ -11,15 +11,15 @@
 # pragma warning( disable : 4996 )
 #endif
 // disable 4996 {
-#include "MadConvEncDialog.h"
-#include "MadEdit/MadEncoding.h"
-#include <wx/config.h>
-
 //(*InternalHeaders(MadConvEncDialog)
+#include <wx/config.h>
 #include <wx/intl.h>
 #include <wx/string.h>
 //*)
 // disable 4996 }
+#include "MadConvEncDialog.h"
+#include "MadEdit/MadEncoding.h"
+
 #ifdef _MSC_VER
 # pragma warning( pop )
 #endif
@@ -35,11 +35,6 @@ const long MadConvEncDialog::ID_STATICTEXT1 = wxNewId();
 const long MadConvEncDialog::ID_WXCOMBOBOXENCODING = wxNewId();
 const long MadConvEncDialog::ID_WXRADIOBOXOPTION = wxNewId();
 //*)
-
-BEGIN_EVENT_TABLE(MadConvEncDialog,wxDialog)
-	//(*EventTable(MadConvEncDialog)
-	//*)
-END_EVENT_TABLE()
 
 MadConvEncDialog::MadConvEncDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)
 {
@@ -69,6 +64,7 @@ MadConvEncDialog::MadConvEncDialog(wxWindow* parent,wxWindowID id,const wxPoint&
 		_("Japanese Kanji => Simplified Chinese"),
 		_("Chinese => Japanese Kanji")
 	};
+
 	WxRadioBoxOption = new wxRadioBox(this, ID_WXRADIOBOXOPTION, _("Addtional Option"), wxDefaultPosition, wxDefaultSize, 6, __wxRadioBoxChoices_1, 1, wxRA_SPECIFY_COLS, wxDefaultValidator, _T("ID_WXRADIOBOXOPTION"));
 	WxRadioBoxOption->InvalidateBestSize();
 	BoxSizer3->Add(WxRadioBoxOption, 1, wxALL|wxEXPAND, 5);
@@ -86,21 +82,21 @@ MadConvEncDialog::MadConvEncDialog(wxWindow* parent,wxWindowID id,const wxPoint&
 	Center();
 	//*)
 
-    size_t cnt=MadEncoding::GetEncodingsCount();
-    for(size_t i=0;i<cnt;++i)
-    {
-        WxComboBoxEncoding->Append(MadEncoding::GetEncodingName(i));//enc+des);
-    }
+	size_t cnt=MadEncoding::GetEncodingsCount();
+	for(size_t i=0;i<cnt;++i)
+	{
+		WxComboBoxEncoding->Append(MadEncoding::GetEncodingName(i));//enc+des);
+	}
 	BoxSizer1->Fit(this);
 	BoxSizer1->SetSizeHints(this);
 	Center();
 
-    wxString convenc=MadEncoding::GetEncodingName(0);
-    wxConfigBase *cfg=wxConfigBase::Get(false);
-    wxString oldpath=cfg->GetPath();
-    cfg->Read(wxT("/MadEdit/ConvertEncoding"), &convenc);
-    cfg->SetPath(oldpath);
-    WxComboBoxEncoding->SetValue(convenc);
+	wxString convenc=MadEncoding::GetEncodingName(0);
+	wxConfigBase *cfg=wxConfigBase::Get(false);
+	wxString oldpath=cfg->GetPath();
+	cfg->Read(wxT("/MadEdit/ConvertEncoding"), &convenc);
+	cfg->SetPath(oldpath);
+	WxComboBoxEncoding->SetValue(convenc);
 
 	WxButtonCancel->SetFocus();
 }
@@ -121,6 +117,6 @@ void MadConvEncDialog::MadConvEncDialogClose(wxCloseEvent& event)
 		return;
 	}
 
-    g_ConvEncDialog=NULL;
+	g_ConvEncDialog=NULL;
 	Destroy();
 }

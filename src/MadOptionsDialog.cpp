@@ -30,6 +30,201 @@ enum
 };
 #endif
 
+const long MadOptionsDialog::ID_WXCHECKPADCOMMA = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKPADRETURNTYPE = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKUNPADRETURNTYPE = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKPADPARAMTYPE = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKUNPADPARAMTYPE = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBREAKONELINEHEADERS = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXT32 = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKINDENTCONTINUATION = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOXDCLICKHIGHLIGHT = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOXINSERTPAIRFORSELECTION = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXT31 = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOXENABLEAUTOBACKUP = wxNewId();
+const long MadOptionsDialog::ID_WXEDITAUTOSAVETIMEOUT = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXT30 = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOXENABLEAUTOSAVE = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOXFIXWIDTHMODE = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOXSHOWQSEARCHBAR = wxNewId();
+const long MadOptionsDialog::ID_WXEDITXMLINDENTSIZE = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXT29 = wxNewId();
+const long MadOptionsDialog::ID_WXEDITXMLVERSION = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXT28 = wxNewId();
+const long MadOptionsDialog::ID_WXAUINOTEBOOKPAGE6 = wxNewId();
+const long MadOptionsDialog::ID_WXEDITMAXINSTATEMENTINDENT = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXT23 = wxNewId();
+const long MadOptionsDialog::ID_WXSPINCTRLMININDENT = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXT22 = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKINDENETCPPCOMMENTS = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKINDENTPREPCOND = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKINDENTMULTIPREP = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKINDENTPREP = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKINDENTSWITCHS = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKINDENTNS = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKINDENTMODIFIERS = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKINDENTLABELS = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKINDENETCLASSES = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKINDENTCASE = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKFORCETABS = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKUSETABOVERSPACES = wxNewId();
+const long MadOptionsDialog::ID_WXSPINCTRLINDENTSIZE = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXT17 = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOXPRINTBOOKMARK = wxNewId();
+const long MadOptionsDialog::ID_MNU___Y__M__D_I__M__S_P_2007_02_2408_30_55AM_1191 = wxNewId();
+const long MadOptionsDialog::ID_MNU___D__M__Y_24_02_2007_1192 = wxNewId();
+const long MadOptionsDialog::ID_MNU___A__D_B_Y_H__M__S_Z_RFC822TIMESTAMP_1195 = wxNewId();
+const long MadOptionsDialog::ID_MNU_MENUITEM1_1170 = wxNewId();
+const long MadOptionsDialog::ID_MNU___A_FULLWEEKDAYNAME_1171 = wxNewId();
+const long MadOptionsDialog::ID_MNU___B_ABBREVIATEDMONTHNAME_1172 = wxNewId();
+const long MadOptionsDialog::ID_MNU___B_FULLMONTHNAME_1173 = wxNewId();
+const long MadOptionsDialog::ID_MNU___C_DATEANDTIMEREPRESENTATIONAPPROPRIATEFORLOCALE_1174 = wxNewId();
+const long MadOptionsDialog::ID_MNU___D_DAYOFMONTHASDECIMALNUMBER_01_31__1175 = wxNewId();
+const long MadOptionsDialog::ID_MNU___H_HOURIN24_HOURFORMAT_00_23__1176 = wxNewId();
+const long MadOptionsDialog::ID_MNU___I_HOURIN12_HOURFORMAT_01_12__1177 = wxNewId();
+const long MadOptionsDialog::ID_MNU___J_DAYOFYEARASDECIMALNUMBER_001_366__1178 = wxNewId();
+const long MadOptionsDialog::ID_MNU___M_MONTHASDECIMALNUMBER_01_12__1179 = wxNewId();
+const long MadOptionsDialog::ID_MNU___M_MINUTEASDECIMALNUMBER_00_59__1180 = wxNewId();
+const long MadOptionsDialog::ID_MNU___P_CURRENTLOCALESA_M__P_M_INDICATORFOR12_HOURCLOCK_1181 = wxNewId();
+const long MadOptionsDialog::ID_MNU___S_SECONDASDECIMALNUMBER_00_59__1182 = wxNewId();
+const long MadOptionsDialog::ID_MNU___U_WEEKOFYEARASDECIMALNUMBER_WITHSUNDAYASFIRSTDAYOFWEEK_00_53__1183 = wxNewId();
+const long MadOptionsDialog::ID_MNU___W_WEEKDAYASDECIMALNUMBER_0_6_SUNDAYIS0__1184 = wxNewId();
+const long MadOptionsDialog::ID_MNU___W_WEEKOFYEARASDECIMALNUMBER_WITHMONDAYASFIRSTDAYOFWEEK_00_53__1185 = wxNewId();
+const long MadOptionsDialog::ID_MNU___X_DATEREPRESENTATIONFORCURRENTLOCALE_1186 = wxNewId();
+const long MadOptionsDialog::ID_MNU___X_TIMEREPRESENTATIONFORCURRENTLOCALE_1187 = wxNewId();
+const long MadOptionsDialog::ID_MNU___Y_YEARWITHOUTCENTURY_ASDECIMALNUMBER_00_99__1188 = wxNewId();
+const long MadOptionsDialog::ID_MNU___Y_YEARWITHCENTURY_ASDECIMALNUMBER_1189 = wxNewId();
+const long MadOptionsDialog::ID_MNU___Z_TIME_ZONENAME_1193 = wxNewId();
+const long MadOptionsDialog::ID_MNU___Z_TIME_ZONEABBREVIATION_1194 = wxNewId();
+
+const long MadOptionsDialog::ID_MNU_MENUITEM1_1110 = wxNewId();
+const long MadOptionsDialog::ID_MNU___P__PATHNAME_1111 = wxNewId();
+const long MadOptionsDialog::ID_MNU_MENUITEM3_1112 = wxNewId();
+const long MadOptionsDialog::ID_MNU___N_PAGE_NUMBER_1113 = wxNewId();
+const long MadOptionsDialog::ID_MNU___S__TOTALPAGES_1114 = wxNewId();
+const long MadOptionsDialog::ID_MNU_MENUITEM6_1115 = wxNewId();
+const long MadOptionsDialog::ID_MNU___D__DATE_1116 = wxNewId();
+const long MadOptionsDialog::ID_MNU___T__TIME_1117 = wxNewId();
+
+const long MadOptionsDialog::ID_WXBUTTONCANCEL = wxNewId();
+const long MadOptionsDialog::ID_WXBUTTONOK = wxNewId();
+const long MadOptionsDialog::ID_WXCHOICEREFERENCEALIGN = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXT26 = wxNewId();
+const long MadOptionsDialog::ID_WXCHOICEPOINTERALIGN = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXT25 = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKFILLEMPTYLINES = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKDELEMPTYLINE = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKUNPADPARENS = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKPADHEADER = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKPADPARENSIN = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKPADPARENSOUT = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKPADOPERATORS = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBREAKBLOCKSALL = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBREAKBLOCKS = wxNewId();
+const long MadOptionsDialog::ID_WXAUINOTEBOOKPAGE5 = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBREAKAFTERLOGICAL = wxNewId();
+const long MadOptionsDialog::ID_WXEDITSFMAXLINELENGTH = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXT24 = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBREAKLINES = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKREMOVECOMMENTPREFIX = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKCLOSETEMPLATES = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKCONVERTTABS = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKKEEPBLOCKS = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOX17 = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKADDONELINEBRACKETS = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKADDBRACKETS = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBREAKELSEIFS = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBREAKCLOSING = wxNewId();
+const long MadOptionsDialog::ID_WXAUINOTEBOOKPAGE4 = wxNewId();
+const long MadOptionsDialog::ID_WXAUINOTEBOOKPAGE3 = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKATTACHINLINES = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKATTACHNAMESPACES = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKATTACHEXTERNC = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKATTACHCLASSES = wxNewId();
+const long MadOptionsDialog::ID_WXAUINOTEBOOKPAGE2 = wxNewId();
+const long MadOptionsDialog::ID_WXRICHTEXTSAMPLE = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXT27 = wxNewId();
+const long MadOptionsDialog::ID_WXRADIOBOXBRACKETSTYLE = wxNewId();
+const long MadOptionsDialog::ID_WXAUINOTEBOOKPAGE1 = wxNewId();
+const long MadOptionsDialog::ID_WXAUINOTEBOOK1 = wxNewId();
+const long MadOptionsDialog::ID_WXNOTEBOOKPAGE6 = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXT21 = wxNewId();
+const long MadOptionsDialog::ID_WXBITMAP_DIR = wxNewId();
+const long MadOptionsDialog::ID_WXEDITBITMAPDIR = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXT20 = wxNewId();
+const long MadOptionsDialog::ID_WXTHESAURI_DIR = wxNewId();
+const long MadOptionsDialog::ID_WXEDITTHESAURI = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXT19 = wxNewId();
+const long MadOptionsDialog::ID_WXDICTIONARY_DIR = wxNewId();
+const long MadOptionsDialog::ID_WXEDITDICTIONARYDIR = wxNewId();
+const long MadOptionsDialog::ID_WXCHOICEDICTIONARY = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXT18 = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOXPERSONALDICT = wxNewId();
+const long MadOptionsDialog::ID_WXNOTEBOOKPAGE5 = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOXRESETALLKEYS = wxNewId();
+const long MadOptionsDialog::ID_WXBUTTONSHOWINMENU = wxNewId();
+const long MadOptionsDialog::ID_WXBUTTONDELETEKEY = wxNewId();
+const long MadOptionsDialog::ID_WXBUTTONADDKEY = wxNewId();
+const long MadOptionsDialog::ID_WXEDITKEYHINT = wxNewId();
+const long MadOptionsDialog::ID_WXEDITKEY = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXT15 = wxNewId();
+const long MadOptionsDialog::ID_WXLISTBOXKEYS = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXT14 = wxNewId();
+const long MadOptionsDialog::ID_WXEDITHINT = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXTCOMMANDHINT = wxNewId();
+const long MadOptionsDialog::ID_WXTREECTRL1 = wxNewId();
+const long MadOptionsDialog::ID_WXNOTEBOOKPAGE4 = wxNewId();
+
+const long MadOptionsDialog::ID_WXCHECKBOXPRINTPAGEFOOTER = wxNewId();
+const long MadOptionsDialog::ID_WXEDITHEADERRIGHT = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXT9 = wxNewId();
+const long MadOptionsDialog::ID_WXEDITHEADERCENTER = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXT8 = wxNewId();
+const long MadOptionsDialog::ID_WXEDITHEADERLEFT = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXT7 = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOXPRINTPAGEHEADER = wxNewId();
+const long MadOptionsDialog::ID_WXRADIOBOXPRINTOFFSET = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOXPRINTSPACECHAR = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOXPRINTTABCHAR = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOXPRINTENDOFLINE = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOXPRINTLINENUMBER = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOXPRINTSYNTAX = wxNewId();
+const long MadOptionsDialog::ID_WXNOTEBOOKPAGE3 = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOXAUTOFILLCOLUMN = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOXTYPEWRITERMODE = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOXMIDDLEMOUSETOPASTE = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOXCTRLWITHMOUSE = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOXMOUSESELECTTOCOPY = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOXAUTOCOMPLETEPAIR = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOXAUTOINDENT = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOXTABORSPACES = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOXDATETIMEINENGLISH = wxNewId();
+const long MadOptionsDialog::ID_WXBUTTONDATETIME = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXTDATETIME = wxNewId();
+const long MadOptionsDialog::ID_WXEDITDATETIME = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXT5 = wxNewId();
+const long MadOptionsDialog::ID_WXEDITTABCOLUMNS = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXT4 = wxNewId();
+const long MadOptionsDialog::ID_WXEDITMAXCOLUMNS = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXT3 = wxNewId();
+const long MadOptionsDialog::ID_WXEDITMAXLINELENGTH = wxNewId();
+const long MadOptionsDialog::ID_WXNOTEBOOKPAGE2 = wxNewId();
+const long MadOptionsDialog::ID_PURGEHISTORY = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOXDONOTSAVESETTINGS = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOXRESTORECARETPOS = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOXRELOADFILES = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXT13 = wxNewId();
+const long MadOptionsDialog::ID_WXCOMBOBOXENCODING = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXT2 = wxNewId();
+const long MadOptionsDialog::ID_WXEDITMAXTEXTFILESIZE = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXT1 = wxNewId();
+const long MadOptionsDialog::ID_WXEDITMAXSIZETOLOAD = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOXRECORDCARETMOVEMENTS = wxNewId();
+const long MadOptionsDialog::ID_WXCHECKBOXSINGLEINSTANCE = wxNewId();
+const long MadOptionsDialog::ID_WXSTATICTEXT16 = wxNewId();
+const long MadOptionsDialog::ID_WXCOMBOBOXLANGUAGE = wxNewId();
+const long MadOptionsDialog::ID_WXNOTEBOOKPAGE1 = wxNewId();
+const long MadOptionsDialog::ID_WXNOTEBOOK1 = wxNewId();
 
 //Do not add custom headers.
 //wx-dvcpp designer will remove them
@@ -65,7 +260,6 @@ static wxString bracket_style[aspsCustom + 1] =
 };
 class KeyTextCtrl : public wxTextCtrl
 {
-	DECLARE_EVENT_TABLE()
 public:
 	KeyTextCtrl( wxWindow *parent, wxWindowID id,
 				 const wxString& value = wxEmptyString,
@@ -75,6 +269,9 @@ public:
 				 const wxValidator& validator = wxDefaultValidator,
 				 const wxString& name = wxTextCtrlNameStr )
 		: wxTextCtrl( parent, id, value, pos, size, style, validator, name ) {
+		Bind( wxEVT_KEY_DOWN, &KeyTextCtrl::OnKeyDown, this);
+		Bind( wxEVT_SET_FOCUS, &KeyTextCtrl::OnSetFocus, this);
+		Bind( wxEVT_KILL_FOCUS, &KeyTextCtrl::OnKillFocus, this);
 	}
 
 	void OnKeyDown( wxKeyEvent& evt ) {
@@ -114,94 +311,107 @@ public:
 	}
 };
 
-BEGIN_EVENT_TABLE( KeyTextCtrl, wxTextCtrl )
-	EVT_KEY_DOWN( KeyTextCtrl::OnKeyDown )
-	EVT_SET_FOCUS( KeyTextCtrl::OnSetFocus )
-	EVT_KILL_FOCUS( KeyTextCtrl::OnKillFocus )
-END_EVENT_TABLE()
+MadOptionsDialog::wxCmdEvtHandlerMap_t MadOptionsDialog::m_menu_evt_map[] = 
+{
+	{ ID_MNU___Y__M__D_I__M__S_P_2007_02_2408_30_55AM_1191, &MadOptionsDialog::DateTimeMarkClick },
+	{ ID_MNU___D__M__Y_24_02_2007_1192, &MadOptionsDialog::DateTimeMarkClick },
+	{ ID_MNU___A__D_B_Y_H__M__S_Z_RFC822TIMESTAMP_1195, &MadOptionsDialog::DateTimeMarkClick },
+	{ ID_MNU_MENUITEM1_1170, &MadOptionsDialog::DateTimeMarkClick },
+	{ ID_MNU___A_FULLWEEKDAYNAME_1171, &MadOptionsDialog::DateTimeMarkClick },
+	{ ID_MNU___B_ABBREVIATEDMONTHNAME_1172, &MadOptionsDialog::DateTimeMarkClick },
+	{ ID_MNU___B_FULLMONTHNAME_1173, &MadOptionsDialog::DateTimeMarkClick },
+	{ ID_MNU___C_DATEANDTIMEREPRESENTATIONAPPROPRIATEFORLOCALE_1174, &MadOptionsDialog::DateTimeMarkClick },
+	{ ID_MNU___D_DAYOFMONTHASDECIMALNUMBER_01_31__1175, &MadOptionsDialog::DateTimeMarkClick },
+	{ ID_MNU___H_HOURIN24_HOURFORMAT_00_23__1176, &MadOptionsDialog::DateTimeMarkClick },
+	{ ID_MNU___I_HOURIN12_HOURFORMAT_01_12__1177, &MadOptionsDialog::DateTimeMarkClick },
+	{ ID_MNU___J_DAYOFYEARASDECIMALNUMBER_001_366__1178, &MadOptionsDialog::DateTimeMarkClick },
+	{ ID_MNU___M_MONTHASDECIMALNUMBER_01_12__1179, &MadOptionsDialog::DateTimeMarkClick },
+	{ ID_MNU___M_MINUTEASDECIMALNUMBER_00_59__1180, &MadOptionsDialog::DateTimeMarkClick },
+	{ ID_MNU___P_CURRENTLOCALESA_M__P_M_INDICATORFOR12_HOURCLOCK_1181, &MadOptionsDialog::DateTimeMarkClick },
+	{ ID_MNU___S_SECONDASDECIMALNUMBER_00_59__1182, &MadOptionsDialog::DateTimeMarkClick },
+	{ ID_MNU___U_WEEKOFYEARASDECIMALNUMBER_WITHSUNDAYASFIRSTDAYOFWEEK_00_53__1183, &MadOptionsDialog::DateTimeMarkClick },
+	{ ID_MNU___W_WEEKDAYASDECIMALNUMBER_0_6_SUNDAYIS0__1184, &MadOptionsDialog::DateTimeMarkClick },
+	{ ID_MNU___W_WEEKOFYEARASDECIMALNUMBER_WITHMONDAYASFIRSTDAYOFWEEK_00_53__1185, &MadOptionsDialog::DateTimeMarkClick },
+	{ ID_MNU___X_DATEREPRESENTATIONFORCURRENTLOCALE_1186, &MadOptionsDialog::DateTimeMarkClick },
+	{ ID_MNU___X_TIMEREPRESENTATIONFORCURRENTLOCALE_1187, &MadOptionsDialog::DateTimeMarkClick },
+	{ ID_MNU___Y_YEARWITHOUTCENTURY_ASDECIMALNUMBER_00_99__1188, &MadOptionsDialog::DateTimeMarkClick },
+	{ ID_MNU___Y_YEARWITHCENTURY_ASDECIMALNUMBER_1189, &MadOptionsDialog::DateTimeMarkClick },
+	{ ID_MNU___Z_TIME_ZONENAME_1193, &MadOptionsDialog::DateTimeMarkClick },
+	{ ID_MNU___Z_TIME_ZONEABBREVIATION_1194, &MadOptionsDialog::DateTimeMarkClick },
+	{ ID_MNU_MENUITEM1_1110, &MadOptionsDialog::PrintMarkClick },
+	{ ID_MNU___P__PATHNAME_1111, &MadOptionsDialog::PrintMarkClick },
+	{ ID_MNU___N_PAGE_NUMBER_1113, &MadOptionsDialog::PrintMarkClick },
+	{ ID_MNU___S__TOTALPAGES_1114, &MadOptionsDialog::PrintMarkClick },
+	{ ID_MNU___D__DATE_1116, &MadOptionsDialog::PrintMarkClick },
+	{ ID_MNU___T__TIME_1117, &MadOptionsDialog::PrintMarkClick },
+};
 
+MadOptionsDialog::wxCmdEvtHandlerMap_t MadOptionsDialog::m_button_evt_map[] = 
+{
+	{ ID_WXBUTTON1, &MadOptionsDialog::PrintMarkButtonClick },
+	{ ID_WXBUTTON2, &MadOptionsDialog::PrintMarkButtonClick },
+	{ ID_WXBUTTON3, &MadOptionsDialog::PrintMarkButtonClick },
+	{ ID_WXBUTTON4, &MadOptionsDialog::PrintMarkButtonClick },
+	{ ID_WXBUTTON5, &MadOptionsDialog::PrintMarkButtonClick },
+	{ ID_WXBUTTON6, &MadOptionsDialog::PrintMarkButtonClick },
+	{ wxID_CANCEL, &MadOptionsDialog::WxButtonCancelClick },
+	{ ID_WXBUTTONCANCEL, &MadOptionsDialog::WxButtonCancelClick },
+	{ ID_WXBUTTONOK, &MadOptionsDialog::WxButtonOKClick },
+	//  {ID_WXBITMAP_DIR,&MadOptionsDialog::WxButtonBitmapDirClick},
+	//  {ID_WXTHESAURI_DIR,&MadOptionsDialog::WxButtonThesauriDirClick},
+	{ ID_WXDICTIONARY_DIR, &MadOptionsDialog::WxButtonDictionaryDirClick },
+	{ ID_WXBUTTONSHOWINMENU, &MadOptionsDialog::WxButtonShowInMenuClick },
+	{ ID_WXBUTTONDELETEKEY, &MadOptionsDialog::WxButtonDeleteKeyClick },
+	{ ID_WXBUTTONADDKEY, &MadOptionsDialog::WxButtonAddKeyClick },
+	{ ID_WXBUTTONDATETIME, &MadOptionsDialog::WxButtonDateTimeClick },
+};
+
+MadOptionsDialog::wxCmdEvtHandlerMap_t MadOptionsDialog::m_checkbox_evt_map[] =
+{
+	{ ID_WXCHECKBOXMOUSESELECTTOCOPY, &MadOptionsDialog::OnMouseAutoCopyClicked },
+
+	{ ID_WXCHECKBOXAUTOCOMPLETEPAIR, &MadOptionsDialog::OnAutoCompletePairClicked },
+	{ ID_WXCHECKBREAKLINES, &MadOptionsDialog::OnFormattingBreakLinesClick },
+	{ ID_WXCHECKBOXENABLEAUTOSAVE, &MadOptionsDialog::OnEnableAutoSaveClick },
+	{ ID_WXCHECKBREAKBLOCKS, &MadOptionsDialog::OnPaddingBreakBlocksClick },
+};
 
 //----------------------------------------------------------------------------
 // MadOptionsDialog
 //----------------------------------------------------------------------------
 //Add Custom Events only in the appropriate Block.
 // Code added in  other places will be removed by wx-dvcpp
-////Event Table Start
-BEGIN_EVENT_TABLE( MadOptionsDialog, wxDialog )
-	////Manual Code Start
-	EVT_BUTTON( ID_WXBUTTON1, MadOptionsDialog::PrintMarkButtonClick )
-	EVT_BUTTON( ID_WXBUTTON2, MadOptionsDialog::PrintMarkButtonClick )
-	EVT_BUTTON( ID_WXBUTTON3, MadOptionsDialog::PrintMarkButtonClick )
-	EVT_BUTTON( ID_WXBUTTON4, MadOptionsDialog::PrintMarkButtonClick )
-	EVT_BUTTON( ID_WXBUTTON5, MadOptionsDialog::PrintMarkButtonClick )
-	EVT_BUTTON( ID_WXBUTTON6, MadOptionsDialog::PrintMarkButtonClick )
-	EVT_BUTTON( wxID_CANCEL, MadOptionsDialog::WxButtonCancelClick )
-	////Manual Code End
-
-	EVT_CLOSE( MadOptionsDialog::MadOptionsDialogClose )
-	EVT_ACTIVATE( MadOptionsDialog::MadOptionsDialogActivate )
-	EVT_MENU( ID_MNU___Y__M__D_I__M__S_P_2007_02_2408_30_55AM_1191, MadOptionsDialog::DateTimeMarkClick )
-	EVT_MENU( ID_MNU___D__M__Y_24_02_2007_1192, MadOptionsDialog::DateTimeMarkClick )
-	EVT_MENU( ID_MNU___A__D_B_Y_H__M__S_Z_RFC822TIMESTAMP_1195, MadOptionsDialog::DateTimeMarkClick )
-	EVT_MENU( ID_MNU_MENUITEM1_1170, MadOptionsDialog::DateTimeMarkClick )
-	EVT_MENU( ID_MNU___A_FULLWEEKDAYNAME_1171, MadOptionsDialog::DateTimeMarkClick )
-	EVT_MENU( ID_MNU___B_ABBREVIATEDMONTHNAME_1172, MadOptionsDialog::DateTimeMarkClick )
-	EVT_MENU( ID_MNU___B_FULLMONTHNAME_1173, MadOptionsDialog::DateTimeMarkClick )
-	EVT_MENU( ID_MNU___C_DATEANDTIMEREPRESENTATIONAPPROPRIATEFORLOCALE_1174, MadOptionsDialog::DateTimeMarkClick )
-	EVT_MENU( ID_MNU___D_DAYOFMONTHASDECIMALNUMBER_01_31__1175, MadOptionsDialog::DateTimeMarkClick )
-	EVT_MENU( ID_MNU___H_HOURIN24_HOURFORMAT_00_23__1176, MadOptionsDialog::DateTimeMarkClick )
-	EVT_MENU( ID_MNU___I_HOURIN12_HOURFORMAT_01_12__1177, MadOptionsDialog::DateTimeMarkClick )
-	EVT_MENU( ID_MNU___J_DAYOFYEARASDECIMALNUMBER_001_366__1178, MadOptionsDialog::DateTimeMarkClick )
-	EVT_MENU( ID_MNU___M_MONTHASDECIMALNUMBER_01_12__1179, MadOptionsDialog::DateTimeMarkClick )
-	EVT_MENU( ID_MNU___M_MINUTEASDECIMALNUMBER_00_59__1180, MadOptionsDialog::DateTimeMarkClick )
-	EVT_MENU( ID_MNU___P_CURRENTLOCALESA_M__P_M_INDICATORFOR12_HOURCLOCK_1181, MadOptionsDialog::DateTimeMarkClick )
-	EVT_MENU( ID_MNU___S_SECONDASDECIMALNUMBER_00_59__1182, MadOptionsDialog::DateTimeMarkClick )
-	EVT_MENU( ID_MNU___U_WEEKOFYEARASDECIMALNUMBER_WITHSUNDAYASFIRSTDAYOFWEEK_00_53__1183, MadOptionsDialog::DateTimeMarkClick )
-	EVT_MENU( ID_MNU___W_WEEKDAYASDECIMALNUMBER_0_6_SUNDAYIS0__1184, MadOptionsDialog::DateTimeMarkClick )
-	EVT_MENU( ID_MNU___W_WEEKOFYEARASDECIMALNUMBER_WITHMONDAYASFIRSTDAYOFWEEK_00_53__1185, MadOptionsDialog::DateTimeMarkClick )
-	EVT_MENU( ID_MNU___X_DATEREPRESENTATIONFORCURRENTLOCALE_1186, MadOptionsDialog::DateTimeMarkClick )
-	EVT_MENU( ID_MNU___X_TIMEREPRESENTATIONFORCURRENTLOCALE_1187, MadOptionsDialog::DateTimeMarkClick )
-	EVT_MENU( ID_MNU___Y_YEARWITHOUTCENTURY_ASDECIMALNUMBER_00_99__1188, MadOptionsDialog::DateTimeMarkClick )
-	EVT_MENU( ID_MNU___Y_YEARWITHCENTURY_ASDECIMALNUMBER_1189, MadOptionsDialog::DateTimeMarkClick )
-	EVT_MENU( ID_MNU___Z_TIME_ZONENAME_1193, MadOptionsDialog::DateTimeMarkClick )
-	EVT_MENU( ID_MNU___Z_TIME_ZONEABBREVIATION_1194, MadOptionsDialog::DateTimeMarkClick )
-	EVT_MENU( ID_MNU_MENUITEM1_1110, MadOptionsDialog::PrintMarkClick )
-	EVT_MENU( ID_MNU___P__PATHNAME_1111, MadOptionsDialog::PrintMarkClick )
-	EVT_MENU( ID_MNU___N_PAGE_NUMBER_1113, MadOptionsDialog::PrintMarkClick )
-	EVT_MENU( ID_MNU___S__TOTALPAGES_1114, MadOptionsDialog::PrintMarkClick )
-	EVT_MENU( ID_MNU___D__DATE_1116, MadOptionsDialog::PrintMarkClick )
-	EVT_MENU( ID_MNU___T__TIME_1117, MadOptionsDialog::PrintMarkClick )
-	EVT_BUTTON( ID_WXBUTTONCANCEL, MadOptionsDialog::WxButtonCancelClick )
-	EVT_BUTTON( ID_WXBUTTONOK, MadOptionsDialog::WxButtonOKClick )
-	//  EVT_BUTTON(ID_WXBITMAP_DIR,MadOptionsDialog::WxButtonBitmapDirClick)
-	//  EVT_BUTTON(ID_WXTHESAURI_DIR,MadOptionsDialog::WxButtonThesauriDirClick)
-	EVT_BUTTON( ID_WXDICTIONARY_DIR, MadOptionsDialog::WxButtonDictionaryDirClick )
-	EVT_TEXT_ENTER( ID_WXEDITDICTIONARYDIR, MadOptionsDialog::OnDictionaryDirChange )
-	EVT_CHOICE( ID_WXCHOICEDICTIONARY, MadOptionsDialog::OnSelectDictionary )
-	EVT_BUTTON( ID_WXBUTTONSHOWINMENU, MadOptionsDialog::WxButtonShowInMenuClick )
-	EVT_BUTTON( ID_WXBUTTONDELETEKEY, MadOptionsDialog::WxButtonDeleteKeyClick )
-	EVT_BUTTON( ID_WXBUTTONADDKEY, MadOptionsDialog::WxButtonAddKeyClick )
-	EVT_LISTBOX( ID_WXLISTBOXKEYS, MadOptionsDialog::WxListBoxKeysSelected )
-
-	EVT_TREE_SEL_CHANGED( ID_WXTREECTRL1, MadOptionsDialog::WxTreeCtrl1SelChanged )
-	EVT_CHECKBOX( ID_WXCHECKBOXMOUSESELECTTOCOPY, MadOptionsDialog::OnMouseAutoCopyClicked )
-	EVT_BUTTON( ID_WXBUTTONDATETIME, MadOptionsDialog::WxButtonDateTimeClick )
-
-	EVT_CHECKBOX( ID_WXCHECKBOXAUTOCOMPLETEPAIR, MadOptionsDialog::OnAutoCompletePairClicked )
-	EVT_RADIOBOX( ID_WXRADIOBOXBRACKETSTYLE, MadOptionsDialog::OnRadioBoxBracketStyleClick )
-	EVT_CHECKBOX( ID_WXCHECKBREAKLINES, MadOptionsDialog::OnFormattingBreakLinesClick )
-	EVT_CHECKBOX( ID_WXCHECKBOXENABLEAUTOSAVE, MadOptionsDialog::OnEnableAutoSaveClick )
-	EVT_CHECKBOX( ID_WXCHECKBREAKBLOCKS, MadOptionsDialog::OnPaddingBreakBlocksClick )
-END_EVENT_TABLE()
-////Event Table End
-
-
 
 MadOptionsDialog::MadOptionsDialog( wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style )
 	: wxDialog( parent, id, title, position, size, style )
 {
 	ButtonID = 0;
 	CreateGUIControls();
+
+	for(size_t i = 0; i < sizeof(m_menu_evt_map)/sizeof(m_menu_evt_map[0]); ++i)
+	{
+		Bind( wxEVT_MENU, m_menu_evt_map[i].method, this, m_menu_evt_map[i].evtTag );
+	}
+
+	for(size_t i = 0; i < sizeof(m_button_evt_map)/sizeof(m_button_evt_map[0]); ++i)
+	{
+		Bind( wxEVT_BUTTON, m_button_evt_map[i].method, this, m_button_evt_map[i].evtTag );
+	}
+
+	for(size_t i = 0; i < sizeof(m_checkbox_evt_map)/sizeof(m_checkbox_evt_map[0]); ++i)
+	{
+		Bind( wxEVT_CHECKBOX, m_checkbox_evt_map[i].method, this, m_checkbox_evt_map[i].evtTag );
+	}
+
+	Bind( wxEVT_CLOSE_WINDOW, &MadOptionsDialog::MadOptionsDialogClose , this );
+	Bind( wxEVT_ACTIVATE, &MadOptionsDialog::MadOptionsDialogActivate , this );
+
+	Bind( wxEVT_TEXT_ENTER, &MadOptionsDialog::OnDictionaryDirChange , this, ID_WXEDITDICTIONARYDIR );
+	Bind( wxEVT_CHOICE, &MadOptionsDialog::OnSelectDictionary , this, ID_WXCHOICEDICTIONARY );
+	Bind( wxEVT_LISTBOX, &MadOptionsDialog::WxListBoxKeysSelected , this, ID_WXLISTBOXKEYS );
+
+	Bind( wxEVT_TREE_SEL_CHANGED, &MadOptionsDialog::WxTreeCtrl1SelChanged , this, ID_WXTREECTRL1 );
+	Bind( wxEVT_RADIOBOX, &MadOptionsDialog::OnRadioBoxBracketStyleClick , this, ID_WXRADIOBOXBRACKETSTYLE );
 }
 
 MadOptionsDialog::~MadOptionsDialog()
