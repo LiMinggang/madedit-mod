@@ -1736,7 +1736,9 @@ MadEditFrame::wxCmdEvtHandlerMap_t MadEditFrame::m_menu_evt_map[] =
 	// tools
 	{ menuOptions, &MadEditFrame::OnToolsOptions },
 	{ menuHighlighting, &MadEditFrame::OnToolsHighlighting },
+#ifdef __WXMSW__
 	{ menuFileAssociation, &MadEditFrame::OnToolsFileAssociation },
+#endif
 	{ menuPurgeHistories, &MadEditFrame::OnToolsPurgeHistories },
 	{ menuRunTempMacro, &MadEditFrame::OnToolsRunTempMacro },
 	{ menuRunMacroFile, &MadEditFrame::OnToolsRunMacroFile },
