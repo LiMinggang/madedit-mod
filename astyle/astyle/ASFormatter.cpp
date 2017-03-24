@@ -1595,8 +1595,13 @@ string ASFormatter::nextLine()
 				{
 					// must determine if newHeader is an assignment operator
 					// do NOT use findOperator - the length must be exact!!!
+#if __cplusplus <= 199711L
+					if (find(assignmentOperators->begin(), assignmentOperators->end(), newHeader)
+					        != assignmentOperators->end())
+#else
 					if (find(begin(*assignmentOperators), end(*assignmentOperators), newHeader)
 					        != end(*assignmentOperators))
+#endif
 					{
 						foundPreCommandHeader = false;
 						char peekedChar = peekNextChar();
@@ -5364,7 +5369,7 @@ bool ASFormatter::commentAndHeaderFollows()
 
 	// is the next line a comment
 #if __cplusplus <= 199711L
-	auto stream = boost::make_shared<ASPeekStream>(sourceIterator);
+	boost::shared_ptr<ASPeekStream> stream = boost::make_shared<ASPeekStream>(sourceIterator);
 #else
 	auto stream = std::make_shared<ASPeekStream>(sourceIterator);
 #endif
@@ -6393,7 +6398,7 @@ bool ASFormatter::isIndentablePreprocessorBlock(const string& firstLine, size_t 
 	int  lineParenCount = 0;
 	string nextLine_ = firstLine.substr(index);
 #if __cplusplus <= 199711L
-	auto stream = boost::make_shared<ASPeekStream>(sourceIterator);
+	boost::shared_ptr<ASPeekStream> stream = boost::make_shared<ASPeekStream>(sourceIterator);
 #else
 	auto stream = std::make_shared<ASPeekStream>(sourceIterator);
 #endif

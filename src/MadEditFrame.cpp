@@ -2663,7 +2663,7 @@ MadEditFrame::~MadEditFrame()
 
 void MadEditFrame::CreateGUIControls( void )
 {
-	wxASSERT((menuMAXMENUITEMID < wxID_LOWEST));
+	wxASSERT(((enum wxStandardID)menuMAXMENUITEMID < wxID_LOWEST));
 	WxStatusBar1 = new wxStatusBar( this, ID_WXSTATUSBAR1 );
 	g_StatusBar = WxStatusBar1;
 #if defined(__WXGTK__)

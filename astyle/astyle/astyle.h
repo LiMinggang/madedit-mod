@@ -19,7 +19,9 @@
 
 #if __cplusplus <= 199711L
 #include <boost/shared_ptr.hpp>
-#include <boost/make_shared.hpp> 
+#include <boost/make_shared.hpp>
+#define emplace_back push_back
+#define nullptr (0)
 #endif
 
 #include <cctype>
@@ -823,7 +825,7 @@ private:  // functions
 	string peekNextText(const string& firstLine,
 	                    bool endOnEmptyLine = false,
 #if __cplusplus <= 199711L
-                        boost::shared_ptr<ASPeekStream> streamArg = nullptr) const;
+                        boost::shared_ptr<ASPeekStream> streamArg = boost::shared_ptr<ASPeekStream>()) const;
 #else
                         std::shared_ptr<ASPeekStream> streamArg = nullptr) const;
 #endif
