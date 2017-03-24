@@ -1,28 +1,12 @@
-Mod v0.4.6
-This release is mainly for more encodings support, especially GB18030 and Regex bug fix
-1.New: Spell check for SearchReplaceDialog would change according to active window
-2.New: Ctrl+Shift+Wheel as shortcut for Page Up/Down
-3.New: Indicator for zero length match in Regex search
-4.New: Support Replace of '^' and '$' in Regex
-5.New: Add GB18030 support
-6.New: Add KOI8-R, KOI8-U and CP866 support
-7.New: Add Macintosh encodings(Roman, Japanese, Chinese-trad, Korean, Arabic, Hebrew, Greek, Cyrillic, Thai, Chinese-simp, Central-Eur, Croatian, Icelandic, Romanian) support
-8.New: Add CP874 Windows Thai support
-9.New: Mark unsupported unicode char with {}
-10.Fix: Toolbar issue
-11.Fix: Regex search bug #224
-12.Fix: Regular expression (?<=.)\s(?=.) replacement issue(Enable "Replace Directly" in Options) #119
-13.Fix: Caret position is not updated if close search dialog by click 'X' instead of close button
-14.Fix: Disable Find Previous in Regex search
-15.Fix: Add ResetToolBarsInfoWin to All above in PurgeHisoryDialog
-16.Fix: Not stay in current line when switch between modes #226
-17.Fix: Adjust encoding group according to MSDN
-18.Fix: Adjust toolbar position #225
-19.Fix: UI issue of Source formatter tab in Option dialog
-20.Update Simplified Chinese translation
-21.Update boost to 1.62
-22.Update chardetector to latest uchardet v0.0.6
-23.Update Hunspell to 1.6
-24.Update Python to 2.7.13
-25.Other minor improvements
+Mod v0.4.7
+New: Astyle 2.06 new option support
+Fix: UI issues of source formatter config tab
+Fix: Bookmark tag show up issue in Find and Bookmark
+Fix: Crash while opening file history dialog by hitting F9
+Fix: Crash while Windows shutdown(wxWidgets issue)
+Fix: Crash because of Astyle assertion failure at line 3229, ASFormatter.cpp(https://sourceforge.net/p/astyle/bugs/422/)
+Fix: Cannot open documents on the network server #228
+Use standalone boost python to replace boost one(No need to compile boost anymore)
+Use Bind to replace event table in MadEditframe to fix potentail issues
+Update Simplified Chinese translation
 

@@ -118,16 +118,16 @@ FreeBSD packaging (with FreeBSD 10.01)
 3. stdc++ version
 
 Mod v0.4.7
-New: Astyle 2.06 new option support
-Fix: UI issues of source formatter config tab
-Fix: Bookmark tag show up issue in Find and Bookmark
-Fix: Crash while opening file history dialog by hitting F9
-Fix: Crash while Windows shutdown(wxWidgets issue)
-Fix: Crash because of Astyle assertion failure at line 3229, ASFormatter.cpp(https://sourceforge.net/p/astyle/bugs/422/)
-Fix: Cannot open documents on the network server #228
-Use standalone boost python to replace boost one(No need to compile boost anymore)
-Use Bind to replace event table in MadEditframe to fix potentail issues
-Update Simplified Chinese translation
+1.New: Astyle 2.06 new option support
+2.Fix: UI issues of source formatter config tab
+3.Fix: Bookmark tag show up issue in Find and Bookmark
+4.Fix: Crash while opening file history dialog by hitting F9
+5.Fix: Crash while Windows shutdown(wxWidgets issue)
+6.Fix: Crash because of Astyle assertion failure at line 3229, ASFormatter.cpp(https://sourceforge.net/p/astyle/bugs/422/)
+7.Fix: Cannot open documents on the network server #228
+8.Use standalone boost python to replace boost one(No need to compile boost anymore)
+9.Use Bind to replace event table in MadEditframe to fix potentail issues
+10.Update Simplified Chinese translation
 
 Mod v0.4.6
 This release is mainly for more encodings support, especially GB18030 and Regex bug fix
