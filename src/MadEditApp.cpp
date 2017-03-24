@@ -564,7 +564,6 @@ void MadEditApp::OnInitCmdLine( wxCmdLineParser& cmdParser )
 
 bool MadEditApp::OnCmdLineParsed( wxCmdLineParser& cmdParser )
 {
-	wxFileName filename;
 	m_SilentMode = cmdParser.Found( wxT( "s" ) );
 	m_Exit = cmdParser.Found( wxT( "x" ) );
 	m_ForceEdit  = cmdParser.Found( wxT( "f" ) );
@@ -587,8 +586,7 @@ bool MadEditApp::OnCmdLineParsed( wxCmdLineParser& cmdParser )
 	for( size_t i = 0; i < cmdParser.GetParamCount(); i++ )
 	{
 		fname = cmdParser.GetParam( i );
-		fname.Replace(wxT("\\\\"), wxT("\\"));
-		filename = fname;
+		wxFileName filename(fname);
 
 		filename.MakeAbsolute();
 		fname = filename.GetFullName();
