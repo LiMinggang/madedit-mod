@@ -4381,7 +4381,7 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 
 		if((lsp >=100 && lsp <= 500) && (lsp != madedit->GetLineSpacing()))
 			madedit->SetLineSpacing(lsp);
-		if((wm >= wwmNoWrap && em <= wwmWrapByColumn) && (((MadWordWrapMode)wm) != madedit->GetWordWrapMode()))
+		if((wm >= wwmNoWrap && wm <= wwmWrapByColumn) && (((MadWordWrapMode)wm) != madedit->GetWordWrapMode()))
 			madedit->SetWordWrapMode((MadWordWrapMode)wm);
 
 		if( !madedit->LoadFromFile( filename, enc ) && mustExist )

@@ -117,6 +117,9 @@ FreeBSD packaging (with FreeBSD 10.01)
 2. aclocal version in aclocal.m4
 3. stdc++ version
 
+Mod v0.4.8
+Fix: Minor bug on OpenFile again
+
 Mod v0.4.7
 1.New: Astyle 2.06 new option support
 2.Fix: UI issues of source formatter config tab
