@@ -294,6 +294,9 @@
     <ClInclude Include="..\..\spellchecker\SpellCheckUserInterface.h">
       <Filter>Header files\SpellChecker</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\resource.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\MadAboutDialog.cpp">
@@ -595,5 +598,78 @@
     <ResourceCompile Include="..\..\src\MadEditApp.rc">
       <Filter>Resource files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\images\Mad2.ico">
+      <Filter>Resource files</Filter>
+    </Image>
+    <Image Include="..\..\images\Mad.ico">
+      <Filter>Resource files</Filter>
+    </Image>
+    <Image Include="..\..\src\wx\msw\std.ico">
+      <Filter>Resource files</Filter>
+    </Image>
+    <Image Include="..\..\src\wx\msw\folder1.ico">
+      <Filter>Resource files</Filter>
+    </Image>
+    <Image Include="..\..\src\wx\msw\folder2.ico">
+      <Filter>Resource files</Filter>
+    </Image>
+    <Image Include="..\..\src\wx\msw\file1.ico">
+      <Filter>Resource files</Filter>
+    </Image>
+    <Image Include="..\..\src\wx\msw\computer.ico">
+      <Filter>Resource files</Filter>
+    </Image>
+    <Image Include="..\..\src\wx\msw\drive.ico">
+      <Filter>Resource files</Filter>
+    </Image>
+    <Image Include="..\..\src\wx\msw\cdrom.ico">
+      <Filter>Resource files</Filter>
+    </Image>
+    <Image Include="..\..\src\wx\msw\floppy.ico">
+      <Filter>Resource files</Filter>
+    </Image>
+    <Image Include="..\..\src\wx\msw\removble.ico">
+      <Filter>Resource files</Filter>
+    </Image>
+    <Image Include="..\..\src\wx\msw\csquery.bmp">
+      <Filter>Resource files</Filter>
+    </Image>
+    <Image Include="..\..\src\wx\msw\colours.bmp">
+      <Filter>Resource files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\src\wx\msw\hand.cur">
+      <Filter>Resource files</Filter>
+    </None>
+    <None Include="..\..\src\wx\msw\bullseye.cur">
+      <Filter>Resource files</Filter>
+    </None>
+    <None Include="..\..\src\wx\msw\pencil.cur">
+      <Filter>Resource files</Filter>
+    </None>
+    <None Include="..\..\src\wx\msw\magnif1.cur">
+      <Filter>Resource files</Filter>
+    </None>
+    <None Include="..\..\src\wx\msw\roller.cur">
+      <Filter>Resource files</Filter>
+    </None>
+    <None Include="..\..\src\wx\msw\pbrush.cur">
+      <Filter>Resource files</Filter>
+    </None>
+    <None Include="..\..\src\wx\msw\pntleft.cur">
+      <Filter>Resource files</Filter>
+    </None>
+    <None Include="..\..\src\wx\msw\pntright.cur">
+      <Filter>Resource files</Filter>
+    </None>
+    <None Include="..\..\src\wx\msw\blank.cur">
+      <Filter>Resource files</Filter>
+    </None>
+    <None Include="..\..\src\wx\msw\cross.cur">
+      <Filter>Resource files</Filter>
+    </None>
   </ItemGroup>
 </Project>

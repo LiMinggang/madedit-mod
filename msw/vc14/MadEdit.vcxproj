@@ -266,6 +266,7 @@
     <ClInclude Include="..\..\src\MadUtils.h" />
     <ClInclude Include="..\..\src\MadWinListDialog.h" />
     <ClInclude Include="..\..\src\MadWordCountDialog.h" />
+    <ClInclude Include="..\..\src\resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\astyle\asstreamiterator.cpp" />
@@ -380,6 +381,33 @@
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(WXWIN)\include</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(WXWIN)\include</AdditionalIncludeDirectories>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\images\Mad.ico" />
+    <Image Include="..\..\images\Mad2.ico" />
+    <Image Include="..\..\src\wx\msw\cdrom.ico" />
+    <Image Include="..\..\src\wx\msw\colours.bmp" />
+    <Image Include="..\..\src\wx\msw\computer.ico" />
+    <Image Include="..\..\src\wx\msw\csquery.bmp" />
+    <Image Include="..\..\src\wx\msw\drive.ico" />
+    <Image Include="..\..\src\wx\msw\file1.ico" />
+    <Image Include="..\..\src\wx\msw\floppy.ico" />
+    <Image Include="..\..\src\wx\msw\folder1.ico" />
+    <Image Include="..\..\src\wx\msw\folder2.ico" />
+    <Image Include="..\..\src\wx\msw\removble.ico" />
+    <Image Include="..\..\src\wx\msw\std.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\src\wx\msw\blank.cur" />
+    <None Include="..\..\src\wx\msw\bullseye.cur" />
+    <None Include="..\..\src\wx\msw\cross.cur" />
+    <None Include="..\..\src\wx\msw\hand.cur" />
+    <None Include="..\..\src\wx\msw\magnif1.cur" />
+    <None Include="..\..\src\wx\msw\pbrush.cur" />
+    <None Include="..\..\src\wx\msw\pencil.cur" />
+    <None Include="..\..\src\wx\msw\pntleft.cur" />
+    <None Include="..\..\src\wx\msw\pntright.cur" />
+    <None Include="..\..\src\wx\msw\roller.cur" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
