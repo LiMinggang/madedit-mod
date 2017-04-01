@@ -321,58 +321,6 @@
 	</References>
 	<Files>
 		<Filter
-			Name="_Main"
-			>
-			<File
-				RelativePath="..\..\spellchecker\hunspell\src\win_api\config.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\spellchecker\hunspell\src\win_api\Hunspell.rc"
-				>
-			</File>
-			<File
-				RelativePath="..\..\spellchecker\hunspell\src\win_api\hunspelldll.c"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release_dll|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug_dll|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath="..\..\spellchecker\hunspell\src\win_api\hunspelldll.h"
-				>
-			</File>
-		</Filter>
-		<Filter
 			Name="hunspell"
 			>
 			<File
