@@ -100,6 +100,7 @@ morph.test \
 1975530.test \
 fullstrip.test \
 iconv.test \
+iconv2.test \
 oconv.test \
 encoding.test \
 korean.test \
@@ -115,6 +116,8 @@ opentaal_cpdpat2.test \
 2999225.test \
 onlyincompound2.test \
 forceucase.test \
+nepali.test \
+hu.test \
 warn.test
 
 # infixes.test
@@ -599,6 +602,10 @@ iconv.aff \
 iconv.dic \
 iconv.good \
 iconv.test \
+iconv2.aff \
+iconv2.dic \
+iconv2.good \
+iconv2.test \
 oconv.aff \
 oconv.dic \
 oconv.good \
@@ -682,6 +689,14 @@ forceucase.good \
 forceucase.sug \
 forceucase.wrong \
 forceucase.test \
+nepali.aff \
+nepali.dic \
+nepali.good \
+nepali.test \
+hu.aff \
+hu.dic \
+hu.good \
+hu.test \
 warn.aff \
 warn.dic \
 warn.good \

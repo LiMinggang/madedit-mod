@@ -1,6 +1,8 @@
 /* ***** BEGIN LICENSE BLOCK *****
  * Version: MPL 1.1/GPL 2.0/LGPL 2.1
  *
+ * Copyright (C) 2002-2017 Németh László
+ *
  * The contents of this file are subject to the Mozilla Public License Version
  * 1.1 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -11,12 +13,7 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is Hunspell, based on MySpell.
- *
- * The Initial Developers of the Original Code are
- * Kevin Hendricks (MySpell) and Németh László (Hunspell).
- * Portions created by the Initial Developers are Copyright (C) 2002-2005
- * the Initial Developers. All Rights Reserved.
+ * Hunspell is based on MySpell which is Copyright (C) 2002 Kevin Hendricks.
  *
  * Contributor(s): David Einstein, Davide Prina, Giuseppe Modugno,
  * Gianluca Turconi, Simon Brouwer, Noll János, Bíró Árpád,
@@ -129,20 +126,20 @@ static struct {
 #define PATTERN_LEN (sizeof(PATTERN) / sizeof(PATTERN[0]))
 
 LaTeXParser::LaTeXParser(const char* wordchars)
-    : pattern_num(0), depth(0), arg(0), opt(0) {
-  init(wordchars);
+    : TextParser(wordchars)
+    , pattern_num(0), depth(0), arg(0), opt(0) {
 }
 
 LaTeXParser::LaTeXParser(const w_char* wordchars, int len)
-    : pattern_num(0), depth(0), arg(0), opt(0) {
-  init(wordchars, len);
+    : TextParser(wordchars, len)
+    , pattern_num(0), depth(0), arg(0), opt(0) {
 }
 
 LaTeXParser::~LaTeXParser() {}
 
 int LaTeXParser::look_pattern(int col) {
   for (unsigned int i = 0; i < PATTERN_LEN; i++) {
-    char* j = line[actual] + head;
+    const char* j = line[actual].c_str() + head;
     const char* k = PATTERN[i].pat[col];
     if (!k)
       continue;
@@ -168,7 +165,8 @@ int LaTeXParser::look_pattern(int col) {
  *
  */
 
-char* LaTeXParser::next_token() {
+bool LaTeXParser::next_token(std::string& t) {
+  t.clear();
   int i;
   int slash = 0;
   int apostrophe;
@@ -190,7 +188,7 @@ char* LaTeXParser::next_token() {
           head += strlen(PATTERN[pattern_num].pat[0]) - 1;
         } else if (line[actual][head] == '%') {
           state = 5;
-        } else if (is_wordchar(line[actual] + head)) {
+        } else if (is_wordchar(line[actual].c_str() + head)) {
           state = 1;
           token = head;
         } else if (line[actual][head] == '\\') {
@@ -201,22 +199,19 @@ char* LaTeXParser::next_token() {
             break;
           }
           state = 3;
-        } else if (line[actual][head] == '%') {
-          if ((head == 0) || (line[actual][head - 1] != '\\'))
-            state = 5;
         }
         break;
       case 1:  // wordchar
         apostrophe = 0;
-        if (!is_wordchar(line[actual] + head) ||
+        if (!is_wordchar(line[actual].c_str() + head) ||
             (line[actual][head] == '\'' && line[actual][head + 1] == '\'' &&
              ++apostrophe)) {
           state = 0;
-          char* t = alloc_token(token, &head);
+          bool ok = alloc_token(token, &head, t);
           if (apostrophe)
             head += 2;
-          if (t)
-            return t;
+          if (ok)
+            return true;
         }
         break;
       case 2:  // comment, labels, etc
@@ -257,10 +252,10 @@ char* LaTeXParser::next_token() {
         } else if (line[actual][head] == ']')
           depth--;
     }  // case
-    if (next_char(line[actual], &head)) {
+    if (next_char(line[actual].c_str(), &head)) {
       if (state == 5)
         state = 0;
-      return NULL;
+      return false;
     }
   }
 }

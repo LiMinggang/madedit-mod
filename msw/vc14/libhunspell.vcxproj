@@ -163,7 +163,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\spellchecker\hunspell\src\win_api\config.h" />
-    <ClInclude Include="..\..\spellchecker\hunspell\src\win_api\hunspelldll.h" />
     <ClInclude Include="..\..\spellchecker\hunspell\src\hunspell\affentry.hxx" />
     <ClInclude Include="..\..\spellchecker\hunspell\src\hunspell\affixmgr.hxx" />
     <ClInclude Include="..\..\spellchecker\hunspell\src\hunspell\atypes.hxx" />
@@ -183,15 +182,6 @@
     <ClInclude Include="..\..\spellchecker\hunspell\src\hunspell\w_char.hxx" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\..\spellchecker\hunspell\src\win_api\Hunspell.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\spellchecker\hunspell\src\win_api\hunspelldll.c">
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsCpp</CompileAs>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CompileAsCpp</CompileAs>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">CompileAsCpp</CompileAs>
-    </ClCompile>
     <ClCompile Include="..\..\spellchecker\hunspell\src\hunspell\affentry.cxx" />
     <ClCompile Include="..\..\spellchecker\hunspell\src\hunspell\affixmgr.cxx">
       <DisableSpecificWarnings Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4706</DisableSpecificWarnings>

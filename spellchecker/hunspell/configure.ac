@@ -4,12 +4,12 @@
 m4_pattern_allow
 
 AC_PREREQ(2.59)
-AC_INIT([hunspell],[1.4.0],[nemeth@numbertext.org])
+AC_INIT([hunspell],[1.6.1],[nemeth@numbertext.org])
 
-AC_CANONICAL_SYSTEM
+AC_CANONICAL_HOST
 AC_SUBST(XFAILED)
 
-AM_INIT_AUTOMAKE(hunspell, 1.4.0)
+AM_INIT_AUTOMAKE(hunspell, 1.6.1)
 HUNSPELL_VERSION_MAJOR=`echo $VERSION | cut -d"." -f1`
 HUNSPELL_VERSION_MINOR=`echo $VERSION | cut -d"." -f2`
 AC_SUBST(HUNSPELL_VERSION_MAJOR)
@@ -41,7 +41,7 @@ AC_CHECK_FUNCS([memchr setlocale strchr strstr])
 
 dnl internationalization macros
 AM_GNU_GETTEXT
-AM_GNU_GETTEXT_VERSION(0.17)
+AM_GNU_GETTEXT_REQUIRE_VERSION(0.17)
 
 AC_ARG_WITH(warnings,[  --with-warnings         compile with warning messages], [
      AC_DEFINE(HUNSPELL_WARNING_ON,1,"Define if you need warning messages")
@@ -102,13 +102,11 @@ AC_CONFIG_FILES([Makefile
                  man/hu/Makefile
                  intl/Makefile
                  po/Makefile.in
-                 m4/Makefile
 		 src/Makefile
 		 src/hunspell/Makefile
 		 src/hunspell/hunvisapi.h
 		 src/parsers/Makefile
 		 src/tools/Makefile
-		 src/win_api/Makefile
                  tests/Makefile
                  tests/suggestiontest/Makefile])
 AC_OUTPUT

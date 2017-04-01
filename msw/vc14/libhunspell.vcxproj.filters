@@ -7,7 +7,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\spellchecker\hunspell\src\win_api\config.h" />
-    <ClInclude Include="..\..\spellchecker\hunspell\src\win_api\hunspelldll.h" />
     <ClInclude Include="..\..\spellchecker\hunspell\src\hunspell\affentry.hxx" />
     <ClInclude Include="..\..\spellchecker\hunspell\src\hunspell\affixmgr.hxx" />
     <ClInclude Include="..\..\spellchecker\hunspell\src\hunspell\atypes.hxx" />
@@ -27,10 +26,6 @@
     <ClInclude Include="..\..\spellchecker\hunspell\src\hunspell\w_char.hxx" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\..\spellchecker\hunspell\src\win_api\Hunspell.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\spellchecker\hunspell\src\win_api\hunspelldll.c" />
     <ClCompile Include="..\..\spellchecker\hunspell\src\hunspell\affentry.cxx" />
     <ClCompile Include="..\..\spellchecker\hunspell\src\hunspell\affixmgr.cxx" />
     <ClCompile Include="..\..\spellchecker\hunspell\src\hunspell\csutil.cxx" />

@@ -119,6 +119,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.4.8
 Fix: Minor bug on OpenFile again
+Update Hunspell to 1.6.1
 
 Mod v0.4.7
 1.New: Astyle 2.06 new option support
