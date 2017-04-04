@@ -13,7 +13,7 @@
 	#include <wx/wx.h>
 #endif
 
-wxString g_MadEdit_Version( wxString( wxT( "MadEdit-Mod 0.4.7" ) )
+wxString g_MadEdit_Version( wxString( wxT( "MadEdit-Mod 0.4.8" ) )
 #if defined(__WXMSW__)
 	#ifdef _WIN64
 		+ wxT( " win64" )
@@ -33,8 +33,10 @@ wxString g_MadEdit_Version( wxString( wxT( "MadEdit-Mod 0.4.7" ) )
 			+ wxT( " Visual Studio 2013" )
 		#elif _MSC_VER == 1900
 			+ wxT( " Visual Studio 2015" )
+		#elif _MSC_VER == 1910
+			+ wxT( " Visual Studio 2017" )
 		#else
-			#   pragma message("Please update to recognize this VC++ version")
+			#pragma message("Please update to recognize this VC++ version")
 		#endif
 	#else
 		#ifdef __GNUC__
