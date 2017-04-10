@@ -1626,6 +1626,7 @@ MadEditFrame::wxCmdEvtHandlerMap_t MadEditFrame::m_menu_evt_map[] =
 	{ menuExit, &MadEditFrame::OnFileExit },
 	{ menuCopyFilePath, &MadEditFrame::OnCopyFilePath },
 	{ menuCopyFileName, &MadEditFrame::OnCopyFileName },
+	{ menuCopyFileNameNoExt, &MadEditFrame::OnCopyFileName },
 	{ menuCopyFileDir, &MadEditFrame::OnCopyFileDir },
 	{ menuToggleReadOnly, &MadEditFrame::OnFileToggleReadOnly },
 	
@@ -2942,6 +2943,7 @@ void MadEditFrame::CreateGUIControls( void )
 						( *( cd->popmenu_ptr ) )->AppendSeparator();
 						( *( cd->popmenu_ptr ) )->Append( menuCopyFilePath,       _( "Copy full path name" ) );
 						( *( cd->popmenu_ptr ) )->Append( menuCopyFileName,       _( "Copy full file name" ) );
+						( *( cd->popmenu_ptr ) )->Append( menuCopyFileNameNoExt,  _( "Copy full file name without extention" ) );
 						( *( cd->popmenu_ptr ) )->Append( menuCopyFileDir,        _( "Copy directory name" ) );
 					}
 				}
@@ -5834,7 +5836,10 @@ void MadEditFrame::OnCopyFileName( wxCommandEvent& event )
 	if( g_ActiveMadEdit )
 	{
 		wxFileName fileName( g_ActiveMadEdit->GetFileName() );
-		g_ActiveMadEdit->CopyToClipboard( fileName.GetFullName() );
+		if(event.GetId() == menuCopyFileName)
+			g_ActiveMadEdit->CopyToClipboard( fileName.GetFullName() );
+		else
+			g_ActiveMadEdit->CopyToClipboard( fileName.GetName() );
 	}
 }
 

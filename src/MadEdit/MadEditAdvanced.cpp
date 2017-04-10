@@ -436,7 +436,7 @@ void MadEdit::GetSelHexString( wxString &ws, bool withSpace )
 
 	do
 	{
-		int b = lit->Get( linepos );
+		unsigned char b = lit->Get( linepos );
 		ws << wxChar( ToHex( b >> 4 ) );
 		ws << wxChar( ToHex( b & 0xf ) );
 

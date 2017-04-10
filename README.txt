@@ -118,6 +118,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 3. stdc++ version
 
 Mod v0.4.8
+New: Copy file name without extention
 Fix: Minor bug on OpenFile again
 Update Hunspell to 1.6.1
 

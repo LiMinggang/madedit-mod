@@ -575,6 +575,7 @@ enum   // menu id
 	menuRecentFilesToolbar,
 	menuCopyFilePath,
 	menuCopyFileName,
+	menuCopyFileNameNoExt,
 	menuCopyFileDir,
 	menuCloseAllButThis,
 	menuCloseAllToTheLeft,
