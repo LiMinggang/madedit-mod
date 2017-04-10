@@ -254,7 +254,7 @@ void RestorePosition(int pos, int toprow)
 // if FileName is empty, ask the user to get filename
 // return wxID_YES(Saved), wxID_NO(Not Saved), or wxID_CANCEL
 long Save(bool ask, const std::string &title, bool saveas)
-void SetBookmark()
+void ToggleBookmark()
 void GotoNextBookmark()
 void GotoPreviousBookmark()
 void ConvertEncoding(const std::string &newenc, int flag)
