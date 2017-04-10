@@ -575,23 +575,31 @@ namespace mad_python {
 		}
 
 		mad_py::tuple GetTextFont() {
-			wxString name;
-			int size = 0;
-
 			if( g_ActiveMadEdit )
-			{ g_ActiveMadEdit->GetTextFont( name, size ); }
+			{
+				int size = 0;
+				wxString name;
+				g_ActiveMadEdit->GetTextFont( name, size );
 
-			return mad_py::make_tuple( std::string( name.mb_str() ), size );
+				if(name.size())
+					return mad_py::make_tuple( std::string( name.mb_str() ), size );
+			}
+
+			return mad_py::make_tuple( std::string( "" ), 0 );
 		}
 
 		mad_py::tuple GetHexFont() {
-			wxString name;
-			int size = 0;
-
 			if( g_ActiveMadEdit )
-			{ g_ActiveMadEdit->GetHexFont( name, size ); }
+			{
+				int size = 0;
+				wxString name;
+				g_ActiveMadEdit->GetHexFont( name, size );
 
-			return mad_py::make_tuple( std::string( name.mb_str() ), size );
+				if(name.size())
+					return mad_py::make_tuple( std::string( name.mb_str() ), size );
+			}
+
+			return mad_py::make_tuple( std::string( "" ), 0 );
 		}
 
 		/*wxFont GetFont()
@@ -600,13 +608,17 @@ namespace mad_python {
 		}*/
 
 		mad_py::tuple GetFontNameSize() {
-			wxString name;
-			int size = 0;
-
 			if( g_ActiveMadEdit )
-			{ g_ActiveMadEdit->GetFont( name, size ); }
+			{
+				int size = 0;
+				wxString name;
+				g_ActiveMadEdit->GetFont( name, size );
 
-			return mad_py::make_tuple( std::string( name.mb_str() ), size );
+				if(name.size())
+					return mad_py::make_tuple( std::string( name.mb_str() ), size );
+			}
+
+			return mad_py::make_tuple( std::string( "" ), 0 );
 		}
 
 		void SetFontA( const std::string &name, long size ) {
@@ -1005,12 +1017,15 @@ namespace mad_python {
 		}
 
 		const std::string GetFileName() {
-			wxString name;
-
 			if( g_ActiveMadEdit )
-			{ name = g_ActiveMadEdit->GetFileName(); }
+			{
+				wxString name;
+				name = g_ActiveMadEdit->GetFileName();
+				if(name.size())
+					return std::string( name.mb_str() );
+			}
 
-			return std::string( name.mb_str() );
+			return std::string( "" );
 		}
 
 		long GetFileSize() {
@@ -1102,7 +1117,6 @@ namespace mad_python {
 		}
 
 		void SelectWholeLine() {
-
 			if( g_ActiveMadEdit )
 			{ g_ActiveMadEdit->SelectWholeLine(); }
 		}
@@ -1181,21 +1195,25 @@ namespace mad_python {
 		}
 
 		const std::string GetSelText() {
-			wxString ws;
-
 			if( g_ActiveMadEdit )
-			{ g_ActiveMadEdit->GetSelText( ws ); }
-
-			return std::string( ws.mb_str() );
+			{
+				wxString ws;
+				g_ActiveMadEdit->GetSelText( ws );
+				if(ws.size())
+					return std::string( ws.mb_str() );
+			}
+			return std::string("");
 		}
 
 		const std::string GetText( bool ignoreBOM = true ) {
-			wxString ws;
-
 			if( g_ActiveMadEdit )
-			{ g_ActiveMadEdit->GetText( ws, ignoreBOM ); }
-
-			return std::string( ws.mb_str() );
+			{
+				wxString ws;
+				g_ActiveMadEdit->GetText( ws, ignoreBOM );
+				if(ws.size())
+					return std::string( ws.mb_str() );
+			}
+			return std::string("");
 		}
 
 		void SetText( const std::string &ws ) {
@@ -1208,13 +1226,16 @@ namespace mad_python {
 		// line: zero based
 		// return true for full line, false for partial line
 		mad_py::tuple GetLine( long line, size_t maxlen = 0, bool ignoreBOM = true ) {
-			wxString wxWs;
-			bool ret = false;
-
 			if( g_ActiveMadEdit )
-			{ ret = g_ActiveMadEdit->GetLine( wxWs, line, maxlen, ignoreBOM ); }
+			{
+				bool ret = false;
+				wxString wxWs;
+				ret = g_ActiveMadEdit->GetLine( wxWs, line, maxlen, ignoreBOM );
+				if(wxWs.size())
+					return mad_py::make_tuple( std::string( wxWs.mb_str() ), ret );
+			}
 
-			return mad_py::make_tuple( std::string( wxWs.mb_str() ), ret );
+			return mad_py::make_tuple( std::string( "" ), false );
 		}
 
 		long GetLineByPos( long pos ) {
