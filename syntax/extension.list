@@ -120,3 +120,8 @@ vhdl	syntax_vhdl.syn
 tcl syntax_tcl.syn
 S	syntax_gnuasm.syn
 s	syntax_gnuasm.syn
+
+YAML	syntax_cpp.syn
+yaml	syntax_cpp.syn
+YML	syntax_cpp.syn
+yml	syntax_cpp.syn
