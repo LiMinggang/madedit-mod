@@ -59,10 +59,10 @@ ActiveLineColor=Fuchsia
 BookmarkColor=0000FF
 
 
-[1.YAML_Keywords]
+[1.Keywords]
 Color=Black
 Style=Bold
-InRange=1
+InRange=0
 Keyword=false null true
 
 

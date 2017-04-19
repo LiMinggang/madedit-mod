@@ -119,7 +119,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.4.8
 New: Copy file name without extention
-New: Syntax highlight support for YAML
+New: Syntax highlight support for YAML, YANG
 Fix: Minor bug on OpenFile again
 Update Hunspell to 1.6.1
 
