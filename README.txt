@@ -121,6 +121,7 @@ Mod v0.4.8
 New: Copy file name without extention
 New: Syntax highlight support for YAML, YANG
 Fix: Minor bug on OpenFile again
+Fix: Can not copy the first item in Copy All results
 Update Hunspell to 1.6.1
 
 Mod v0.4.7

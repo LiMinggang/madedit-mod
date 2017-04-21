@@ -9553,7 +9553,7 @@ void MadEditFrame::OnCopyAllResults( wxCommandEvent& event )
 				while( tmpId.IsOk() )// File
 				{
 					wxTreeItemIdValue fileCookie;
-					wxTreeItemId itemId = m_FindInFilesResults->GetFirstChild( id, fileCookie );
+					wxTreeItemId itemId = m_FindInFilesResults->GetFirstChild( tmpId, fileCookie );
 
 					while( itemId.IsOk() )// Result
 					{
@@ -9569,7 +9569,7 @@ void MadEditFrame::OnCopyAllResults( wxCommandEvent& event )
 					tmpId = m_FindInFilesResults->GetNextChild( id, tmpCookie );
 				}
 
-				id = m_FindInFilesResults->GetNextChild( m_FindInFilesResults->GetRootItem(), cookie );
+				id = m_FindInFilesResults->GetNextChild( RootId, cookie );
 			}
 		}
 
