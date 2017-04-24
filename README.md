@@ -61,34 +61,24 @@ Current Feature list(comparing to the original Madedit@sourceforge)
 
 News
 =======
-Mod v0.4.6
+Mod v0.4.8
+* New: Copy file name without extention
+* New: Syntax highlight support for YAML, YANG
+* Fix: Minor bug on OpenFile again
+* Fix: Can not copy the first item in Copy All results
+* Update Hunspell to 1.6.1
 
-This release is mainly for more encodings support, especially GB18030 and Regex bug fix
-* New: Spell check for SearchReplaceDialog would change according to active window
-* New: Ctrl+Shift+Wheel as shortcut for Page Up/Down
-* New: Indicator for zero length match in Regex search
-* New: Support Replace of '^' and '$' in Regex
-* New: Add GB18030 support
-* New: Add KOI8-R, KOI8-U and CP866 support
-* New: Add Macintosh encodings(Roman, Japanese, Chinese-trad, Korean, Arabic, Hebrew, Greek, Cyrillic, Thai, Chinese-simp, Central-Eur, Croatian, Icelandic, Romanian) support
-* New: Add CP874 Windows Thai support
-* New: Mark unsupported unicode char with {}
-* Fix: Toolbar issue
-* Fix: Regex search bug #224
-* Fix: Regular expression (?<=.)\s(?=.) replacement issue(Enable "Replace Directly" in Options) #119
-* Fix: Caret position is not updated if close search dialog by click 'X' instead of close button
-* Fix: Disable Find Previous in Regex search
-* Fix: Add ResetToolBarsInfoWin to All above in PurgeHisoryDialog
-* Fix: Not stay in current line when switch between modes #226
-* Fix: Adjust encoding group according to MSDN
-* Fix: Adjust toolbar position #225
-* Fix: UI issue of Source formatter tab in Option dialog
+Mod v0.4.7
+* New: Astyle 2.06 new option support
+* Fix: UI issues of source formatter config tab
+* Fix: Bookmark tag show up issue in Find and Bookmark
+* Fix: Crash while opening file history dialog by hitting F9
+* Fix: Crash while Windows shutdown(wxWidgets issue)
+* Fix: Crash because of Astyle assertion failure at line 3229, ASFormatter.cpp(https://sourceforge.net/p/astyle/bugs/422/)
+* Fix: Cannot open documents on the network server #228
+* Use standalone boost python to replace boost one(No need to compile boost anymore)
+* Use Bind to replace event table in MadEditframe to fix potentail issues
 * Update Simplified Chinese translation
-* Update boost to 1.62
-* Update chardetector to latest uchardet v0.0.6
-* Update Hunspell to 1.6
-* Update Python to 2.7.13
-* Other minor improvements
 
 Todo:
 =====
