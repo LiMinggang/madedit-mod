@@ -134,6 +134,7 @@ public:
 	wxCheckBox *WxCheckIndentClasses;
 	wxCheckBox *WxCheckIndentCase;
 	wxCheckBox *WxCheckForceUseTabs;
+	wxCheckBox *WxCheckIndentAfterParens;
 	wxCheckBox *WxCheckUseTab;
 	wxBoxSizer *WxBoxSizer38;
 	wxSpinCtrl *WxSpinIndentation;
@@ -172,14 +173,15 @@ public:
 	wxCheckBox *WxCheckCloseTemplates;
 	wxCheckBox *WxCheckConvertTabs;
 	wxCheckBox *WxCheckKeepBlocks;
-	wxCheckBox *WxCheckRemoveBrackets;
-	wxCheckBox *WxCheckAddOneLineBrackets;
-	wxCheckBox *WxCheckAddBrackets;
+	wxCheckBox *WxCheckRemoveBraces;
+	wxCheckBox *WxCheckAddOneLineBraces;
+	wxCheckBox *WxCheckAddBraces;
 	wxCheckBox *WxCheckBreakElseIfs;
 	wxCheckBox *WxCheckBreakClosing;
 	wxBoxSizer *WxBoxSizer42;
 	wxPanel *WxAuiNoteBookPage4;
 	wxPanel *WxAuiNoteBookPage3;
+	wxCheckBox *WxCheckAttachClosingWhile;
 	wxCheckBox *WxCheckAttachInlines;
 	wxCheckBox *WxCheckAttachNamespaces;
 	wxCheckBox *WxCheckAttachExternC;
@@ -454,8 +456,8 @@ private:
 	static const long ID_WXCHECKCONVERTTABS;
 	static const long ID_WXCHECKKEEPBLOCKS;
 	static const long ID_WXCHECKBOX17;
-	static const long ID_WXCHECKADDONELINEBRACKETS;
-	static const long ID_WXCHECKADDBRACKETS;
+	static const long ID_WXCHECKADDONELINEBRACES;
+	static const long ID_WXCHECKADDBRACES;
 	static const long ID_WXCHECKBREAKELSEIFS;
 	static const long ID_WXCHECKBREAKCLOSING;
 	static const long ID_WXAUINOTEBOOKPAGE4;
@@ -547,6 +549,8 @@ private:
 	static const long ID_WXCOMBOBOXLANGUAGE;
 	static const long ID_WXNOTEBOOKPAGE1;
 	static const long ID_WXNOTEBOOK1;
+	static const long ID_WXCHECKINDENTAFTERPARENS;
+	static const long ID_WXCHECKATTACHCLOSINGWHILE;
 
 public:
     int ButtonID;

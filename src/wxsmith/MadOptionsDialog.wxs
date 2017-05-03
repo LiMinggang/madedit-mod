@@ -1048,6 +1048,13 @@
 																		<flag>wxALL|wxEXPAND</flag>
 																		<border>5</border>
 																	</object>
+																	<object class="sizeritem">
+																		<object class="wxCheckBox" name="ID_CHECKATTACHCLOSINGWHILE" variable="WxCheckAttachClosingWhile" member="yes">
+																			<label>Attach Closing While</label>
+																		</object>
+																		<flag>wxALL|wxEXPAND</flag>
+																		<border>5</border>
+																	</object>
 																</object>
 															</object>
 															<label>Brackets</label>
@@ -1166,6 +1173,14 @@
 																		<border>2</border>
 																	</object>
 																	<object class="sizeritem">
+																		<object class="wxCheckBox" name="ID_CHECKINDENTAFTERPARENS" variable="WxCheckIndentAfterParens" member="yes">
+																			<label>Indent after parens</label>
+																		</object>
+																		<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+																		<border>5</border>
+																		<option>1</option>
+																	</object>
+																	<object class="sizeritem">
 																		<object class="wxFlexGridSizer" variable="FlexGridSizer3" member="no">
 																			<cols>2</cols>
 																			<growablecols>0</growablecols>
@@ -1195,7 +1210,7 @@
 																				<option>1</option>
 																			</object>
 																			<object class="sizeritem">
-																				<object class="wxTextCtrl" name="ID_WXEDITMAXINSTATEMENTINDENT" variable="WxEditMaxInStatementIndent" member="yes">
+																				<object class="wxTextCtrl" name="ID_WXEDITMAXCONTINUATIONINDENT" variable="WxEditMaxContinuationIndent" member="yes">
 																					<value>40</value>
 																				</object>
 																				<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
@@ -1218,7 +1233,7 @@
 																	<orient>wxVERTICAL</orient>
 																	<object class="sizeritem">
 																		<object class="wxCheckBox" name="ID_WXCHECKBREAKCLOSING" variable="WxCheckBreakClosing" member="yes">
-																			<label>Break closing headers from their immediately preceding closing brackets</label>
+																			<label>Break closing headers from their immediately preceding closing braces</label>
 																		</object>
 																		<flag>wxALL|wxEXPAND</flag>
 																		<border>2</border>
@@ -1231,22 +1246,22 @@
 																		<border>2</border>
 																	</object>
 																	<object class="sizeritem">
-																		<object class="wxCheckBox" name="ID_WXCHECKADDBRACKETS" variable="WxCheckAddBrackets" member="yes">
-																			<label>Add brackets to unbracketed one line conditional statements</label>
+																		<object class="wxCheckBox" name="ID_WXCHECKADDBRACKETS" variable="WxCheckAddBraces" member="yes">
+																			<label>Add braces to unbraced one line conditional statements</label>
 																		</object>
 																		<flag>wxALL|wxEXPAND</flag>
 																		<border>2</border>
 																	</object>
 																	<object class="sizeritem">
-																		<object class="wxCheckBox" name="ID_WXCHECKADDONELINEBRACKETS" variable="WxCheckAddOneLineBrackets" member="yes">
-																			<label>Add one line brackets to unbracketed one line conditional statements</label>
+																		<object class="wxCheckBox" name="ID_WXCHECKADDONELINEBRACKETS" variable="WxCheckAddOneLineBraces" member="yes">
+																			<label>Add one line braces to unbraced one line conditional statements</label>
 																		</object>
 																		<flag>wxALL|wxEXPAND</flag>
 																		<border>2</border>
 																	</object>
 																	<object class="sizeritem">
-																		<object class="wxCheckBox" name="ID_WXCHECKBOXREMOVEBRACKETS" variable="WxCheckRemoveBrackets" member="yes">
-																			<label>Remove brackets from conditional statements (single statement on a single line</label>
+																		<object class="wxCheckBox" name="ID_WXCHECKBOXREMOVEBRACKETS" variable="WxCheckRemoveBraces" member="yes">
+																			<label>Remove braces from conditional statements (single statement on a single line</label>
 																		</object>
 																		<flag>wxALL|wxEXPAND</flag>
 																		<border>2</border>

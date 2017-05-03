@@ -8197,6 +8197,8 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		m_Config->Write( wxT( "attach_namespaces" ), bb );
 		bb = g_OptionsDialog->WxCheckAttachInlines->GetValue();
 		m_Config->Write( wxT( "attach_inlines" ), bb );
+		bb = g_OptionsDialog->WxCheckAttachClosingWhile->GetValue();
+		m_Config->Write( wxT( "attach_closing_while" ), bb );
 		bb = g_OptionsDialog->WxCheckForceUseTabs->GetValue();
 		m_Config->Write( wxT( "force_tabs" ), bb );
 		ll = g_OptionsDialog->WxSpinIndentation->GetValue();
@@ -8223,6 +8225,8 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		m_Config->Write( wxT( "indent_preproc_cond" ), bb );
 		bb = g_OptionsDialog->WxCheckIndentCol1Comments->GetValue();
 		m_Config->Write( wxT( "indent_col1_comments" ), bb );
+		bb = g_OptionsDialog->WxCheckIndentAfterParens->GetValue();
+		m_Config->Write( wxT( "indent_after_parens" ), bb );
 		ll = g_OptionsDialog->WxSpinMinConditionalEvent->GetValue();
 		m_Config->Write( wxT( "min_conditional_indent" ), ll );
 		g_OptionsDialog->WxEditMaxInStatementIndent->GetValue().ToLong( &ll );
@@ -8231,11 +8235,11 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		m_Config->Write( wxT( "break_closing" ), bb );
 		bb = g_OptionsDialog->WxCheckBreakElseIfs->GetValue();
 		m_Config->Write( wxT( "break_elseifs" ), bb );
-		bb = g_OptionsDialog->WxCheckAddBrackets->GetValue();
+		bb = g_OptionsDialog->WxCheckAddBraces->GetValue();
 		m_Config->Write( wxT( "add_brackets" ), bb );
-		bb = g_OptionsDialog->WxCheckAddOneLineBrackets->GetValue();
+		bb = g_OptionsDialog->WxCheckAddOneLineBraces->GetValue();
 		m_Config->Write( wxT( "add_one_line_brackets" ), bb );
-		bb = g_OptionsDialog->WxCheckRemoveBrackets->GetValue();
+		bb = g_OptionsDialog->WxCheckRemoveBraces->GetValue();
 		m_Config->Write( wxT( "remove_brackets" ), bb );
 		bb = g_OptionsDialog->WxCheckKeepBlocks->GetValue();
 		m_Config->Write( wxT( "keep_blocks" ), bb );

@@ -120,10 +120,13 @@ FreeBSD packaging (with FreeBSD 10.01)
 Mod v0.4.8
 New: Copy file name without extention
 New: Syntax highlight support for YAML, YANG
+New: New Astyle options support(indent-after-parens, attach-closing-while)
 Fix: Minor bug on OpenFile again
 Fix: Can not copy the first item in Copy All results
+FIx: Change Astyle config according to official change(bracket to brace)
 Update Hunspell to 1.6.1
 Update Astyle to 3.0
+Update Simplified Chinese translation
 
 Mod v0.4.7
 1.New: Astyle 2.06 new option support

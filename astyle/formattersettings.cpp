@@ -103,6 +103,7 @@ void FormatterSettings::ApplyTo(astyle::ASFormatter& formatter)
   formatter.setAttachExternC(cfg->ReadBool(wxT("attach_extern_c"), true));
   formatter.setAttachNamespace(cfg->ReadBool(wxT("attach_namespaces"), true));
   formatter.setAttachInline(cfg->ReadBool(wxT("attach_inlines"), true));
+  formatter.setAttachClosingWhile(cfg->ReadBool(wxT("attach_closing_while"), false));
 
   bool value = cfg->ReadBool(wxT("force_tabs"), false);
   long spaceNum = cfg->ReadLong(wxT("indentation"), 4);
@@ -121,6 +122,7 @@ void FormatterSettings::ApplyTo(astyle::ASFormatter& formatter)
   formatter.setPreprocDefineIndent(cfg->ReadBool(wxT("indent_preproc_define"), false));
   formatter.setPreprocConditionalIndent(cfg->ReadBool(wxT("indent_preproc_cond"), false));
   formatter.setIndentCol1CommentsMode(cfg->ReadBool(wxT("indent_col1_comments"), true));
+  formatter.setAfterParenIndent(cfg->ReadBool(wxT("indent_after_parens"), false));
   formatter.setMinConditionalIndentOption(cfg->ReadLong(wxT("min_conditional_indent"), 2));
   formatter.setMaxInStatementIndentLength(cfg->ReadLong(wxT("max_instatement_indent"), 40));
   formatter.setContinuationIndentation(cfg->ReadLong(wxT("indent_continuation"), 1));
