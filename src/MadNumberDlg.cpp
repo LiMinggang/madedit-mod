@@ -202,10 +202,10 @@ void MadNumberDlg::WxOKButtonClick(wxCommandEvent& event)
 	
 	long lo;
 	bool error=false;
-	wxString errtext(_("Invalid	value of \"%s:%s\""));
+	wxString errtext(_("Invalid value of \"%s:%s\""));
 	if(!WxEditNumberOfChars->GetValue().ToLong(&lo)	|| lo<0	|| lo>NUMBERING_MAX_CHARS) //HardCode
 	{
-		wxString Err = WxEditNumberOfChars->GetValue() + _(": Valid	range is 0~512,	0 means	NO PADDING");
+		wxString Err = WxEditNumberOfChars->GetValue() + _(": Valid range is 0~512, 0 means NO PADDING");
 		wxLogError(errtext,	WxStaticText5->GetLabel().c_str(), Err.c_str());
 		error=true;
 	}
@@ -242,7 +242,7 @@ void MadNumberDlg::WxEditPrefixUpdated(wxCommandEvent& event)
 	{	
 		wxString preview((WxCheckPrefix->GetValue()?WxEditPrefix->GetValue():wxT(""))+WxEditInitialNumber->GetValue());
 		if(WxCheckPostfix->GetValue())
-			preview	+= WxEditPostfix->GetValue();
+			preview += WxEditPostfix->GetValue();
 		WxStaticTextPreview->SetLabel(preview);
 	}
 }
@@ -256,16 +256,16 @@ void MadNumberDlg::WxEditItialnumberUpdated(wxCommandEvent&	event)
 		if(WxCheckPrefix->GetValue())
 		{
 			if(WxCheckPrefix->GetValue())
-				preview	+= WxEditPrefix->GetValue();
+				preview += WxEditPrefix->GetValue();
 			
-			preview	+= WxEditInitialNumber->GetValue();
+			preview += WxEditInitialNumber->GetValue();
 		}
 		else
 		{
 			preview	= WxEditInitialNumber->GetValue();
 		}
 		if(WxCheckPostfix->GetValue())
-			preview	+= WxEditPostfix->GetValue();
+			preview += WxEditPostfix->GetValue();
 		WxStaticTextPreview->SetLabel(preview);
 	}
 }
@@ -280,11 +280,11 @@ void MadNumberDlg::WxEditPostfixUpdated(wxCommandEvent&	event)
 	{	
 		wxString preview;
 		if(WxCheckPrefix->GetValue())
-			preview	+= WxEditPrefix->GetValue();
+			preview += WxEditPrefix->GetValue();
 		
-		preview	+= WxEditInitialNumber->GetValue();
+		preview += WxEditInitialNumber->GetValue();
 		if(WxCheckPostfix->GetValue())
-			preview	+= WxEditPostfix->GetValue();
+			preview += WxEditPostfix->GetValue();
 		WxStaticTextPreview->SetLabel(preview);
 	}
 }
@@ -299,16 +299,16 @@ void MadNumberDlg::WxCheckPrefixClick(wxCommandEvent& event)
 	if(WxCheckPrefix->GetValue())
 	{
 		WxEditPrefix->Enable(true);
-		preview	+= WxEditPrefix->GetValue()+WxEditInitialNumber->GetValue();
+		preview += WxEditPrefix->GetValue()+WxEditInitialNumber->GetValue();
 		if(WxCheckPostfix->GetValue())
-			preview	+= WxEditPostfix->GetValue();
+			preview += WxEditPostfix->GetValue();
 	}
 	else
 	{
 		WxEditPrefix->Enable(false);
-		preview	+= WxEditInitialNumber->GetValue();
+		preview += WxEditInitialNumber->GetValue();
 		if(WxCheckPostfix->GetValue())
-			preview	+= WxEditPostfix->GetValue();
+			preview += WxEditPostfix->GetValue();
 	}
 	WxStaticTextPreview->SetLabel(preview);
 }
@@ -324,17 +324,17 @@ void MadNumberDlg::WxCheckPostfixClick(wxCommandEvent& event)
 	{
 		WxEditPostfix->Enable(true);
 		if(WxCheckPrefix->GetValue())
-			preview	+= WxEditPrefix->GetValue();
+			preview += WxEditPrefix->GetValue();
 		
-		preview	+= WxEditInitialNumber->GetValue() + WxEditPostfix->GetValue();
+		preview += WxEditInitialNumber->GetValue() + WxEditPostfix->GetValue();
 	}
 	else
 	{
 		WxEditPostfix->Enable(false);
 		if(WxCheckPrefix->GetValue())
-			preview	+= WxEditPrefix->GetValue();
+			preview += WxEditPrefix->GetValue();
 		
-		preview	+= WxEditInitialNumber->GetValue();
+		preview += WxEditInitialNumber->GetValue();
 	}
 	WxStaticTextPreview->SetLabel(preview);
 }
