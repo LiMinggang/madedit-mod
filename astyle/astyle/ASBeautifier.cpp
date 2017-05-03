@@ -3423,9 +3423,10 @@ void ASBeautifier::parseCurrentLine(const string& line)
 					// do not need 'where' in the headerStack
 					// do not need second 'class' statement in a row
 					else if (!(newHeader == &AS_WHERE
-					           || (newHeader == &AS_CLASS
+					           || ((newHeader == &AS_CLASS || newHeader == &AS_STRUCT)
 					               && !headerStack->empty()
-					               && headerStack->back() == &AS_CLASS)))
+					               && (headerStack->back() == &AS_CLASS
+					                   || headerStack->back() == &AS_STRUCT))))
 						headerStack->emplace_back(newHeader);
 
 					if (!headerStack->empty())

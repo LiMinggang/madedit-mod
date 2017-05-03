@@ -123,6 +123,7 @@ New: Syntax highlight support for YAML, YANG
 Fix: Minor bug on OpenFile again
 Fix: Can not copy the first item in Copy All results
 Update Hunspell to 1.6.1
+Update Astyle to 3.0
 
 Mod v0.4.7
 1.New: Astyle 2.06 new option support

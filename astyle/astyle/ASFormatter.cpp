@@ -344,6 +344,7 @@ void ASFormatter::fixOptionVariableConflicts()
 	else if (formattingStyle == STYLE_STROUSTRUP)
 	{
 		setBraceFormatMode(LINUX_MODE);
+		setBreakClosingHeaderBracesMode(true);
 	}
 	else if (formattingStyle == STYLE_WHITESMITH)
 	{
@@ -1105,8 +1106,13 @@ string ASFormatter::nextLine()
 			}
 			else if (isCharImmediatelyPostCloseBlock
 			         && shouldBreakOneLineStatements
-			         && (isLegalNameChar(currentChar) && currentChar != '.')
-			         && !isCharImmediatelyPostComment)
+			         && !isCharImmediatelyPostComment
+			         && ((isLegalNameChar(currentChar) && currentChar != '.')
+			             || currentChar == '+'
+			             || currentChar == '-'
+			             || currentChar == '*'
+			             || currentChar == '&'
+			             || currentChar == '('))
 			{
 				previousCommandChar = ' ';
 				isInLineBreak = true;
@@ -1149,13 +1155,31 @@ string ASFormatter::nextLine()
 			{
 				foundClosingHeader = isClosingHeader(newHeader);
 
-				if (!foundClosingHeader
-				        && ((newHeader == &AS_WHILE && currentHeader == &AS_DO)
-				            || (newHeader == &_AS_FINALLY && currentHeader == &_AS_TRY)
-				            || (newHeader == &_AS_EXCEPT && currentHeader == &_AS_TRY)
-				            || (newHeader == &AS_SET && currentHeader == &AS_GET)
-				            || (newHeader == &AS_REMOVE && currentHeader == &AS_ADD)))
-					foundClosingHeader = true;
+				if (!foundClosingHeader)
+				{
+					// these are closing headers
+					if ((newHeader == &AS_WHILE && currentHeader == &AS_DO)
+					        || (newHeader == &_AS_FINALLY && currentHeader == &_AS_TRY)
+					        || (newHeader == &_AS_EXCEPT && currentHeader == &_AS_TRY))
+						foundClosingHeader = true;
+					// don't append empty block for these related headers
+					else if (isSharpStyle()
+					         && previousNonWSChar == '}'
+					         && ((newHeader == &AS_SET && currentHeader == &AS_GET)
+					             || (newHeader == &AS_REMOVE && currentHeader == &AS_ADD))
+					         && isOkToBreakBlock(braceTypeStack->back()))
+						isAppendPostBlockEmptyLineRequested = false;
+				}
+
+				// TODO: this can be removed in a future release
+				// version 3.0 - break erroneous attached header from previous versions
+				if (isSharpStyle()
+				        && ((newHeader == &AS_SET && currentHeader == &AS_GET)
+				            || (newHeader == &AS_REMOVE && currentHeader == &AS_ADD))
+				        && !isBraceType(braceTypeStack->back(), SINGLE_LINE_TYPE)
+				        && currentLine[currentLine.find_first_not_of(" \t")] == '}')
+					isInLineBreak = true;
+				// END TODO
 
 				const string* previousHeader = currentHeader;
 				currentHeader = newHeader;
@@ -3603,7 +3627,7 @@ string ASFormatter::peekNextText(const string& firstLine,
 #else
 	std::shared_ptr<ASPeekStream> stream = streamArg;
 #endif
-	if (stream == nullptr)
+	if (stream == nullptr)							// Borland may need == 0
 #if __cplusplus <= 199711L
 		stream = boost::make_shared<ASPeekStream>(sourceIterator);
 #else
@@ -3757,6 +3781,7 @@ void ASFormatter::padOperators(const string* newOperator)
 	assert(shouldPadOperators);
 	assert(newOperator != nullptr);
 
+	char nextNonWSChar = ASBase::peekNextChar(currentLine, charNum);
 	bool shouldPad = (newOperator != &AS_SCOPE_RESOLUTION
 	                  && newOperator != &AS_PLUS_PLUS
 	                  && newOperator != &AS_MINUS_MINUS
@@ -3775,7 +3800,6 @@ void ASFormatter::padOperators(const string* newOperator)
 	                           || previousNonWSChar == ','
 	                           || previousNonWSChar == ':'
 	                           || previousNonWSChar == '{'))
-	                  && !isCharImmediatelyPostOperator
 //?                   // commented out in release 2.05.1 - doesn't seem to do anything???
 //x                   && !((newOperator == &AS_MULT || newOperator == &AS_BIT_AND || newOperator == &AS_AND)
 //x                        && isPointerOrReference())
@@ -3789,9 +3813,15 @@ void ASFormatter::padOperators(const string* newOperator)
 	                       && ASBase::peekNextChar(currentLine, charNum + 1) == '>')
 	                  && !(newOperator == &AS_GR && previousNonWSChar == '?')
 	                  && !(newOperator == &AS_QUESTION			// check for Java wildcard
+	                       && isJavaStyle()
 	                       && (previousNonWSChar == '<'
-	                           || ASBase::peekNextChar(currentLine, charNum) == '>'
-	                           || ASBase::peekNextChar(currentLine, charNum) == '.'))
+	                           || nextNonWSChar == '>'
+	                           || nextNonWSChar == '.'))
+	                  && !(newOperator == &AS_QUESTION			// check for C# null conditional operator
+	                       && isSharpStyle()
+	                       && (nextNonWSChar == '.'
+	                           || nextNonWSChar == '['))
+	                  && !isCharImmediatelyPostOperator
 	                  && !isInCase
 	                  && !isInAsm
 	                  && !isInAsmOneLine
@@ -3844,10 +3874,12 @@ void ASFormatter::formatPointerOrReference()
 	int itemAlignment = (currentChar == '*' || currentChar == '^') ? pa : ((ra == REF_SAME_AS_PTR) ? pa : ra);
 
 	// check for ** and &&
+	int ptrLength = 1;
 	char peekedChar = peekNextChar();
 	if ((currentChar == '*' && peekedChar == '*')
 	        || (currentChar == '&' && peekedChar == '&'))
 	{
+		ptrLength = 2;
 		size_t nextChar = currentLine.find_first_not_of(" \t", charNum + 2);
 		if (nextChar == string::npos)
 			peekedChar = ' ';
@@ -3885,7 +3917,9 @@ void ASFormatter::formatPointerOrReference()
 	}
 	else	// pointerAlignment == PTR_ALIGN_NONE
 	{
-		formattedLine.append(1, currentChar);
+		formattedLine.append(ptrLength, currentChar);
+		if (ptrLength > 1)
+			goForward(ptrLength - 1);
 	}
 }
 
@@ -4283,7 +4317,7 @@ void ASFormatter::padParens()
 						prevIsParenHeader = true;
 					else if (isCStyle() && prevWord == AS_THROW && shouldPadHeader) // don't unpad
 						prevIsParenHeader = true;
-					else if (prevWord == "and" || prevWord == "or")  // don't unpad
+					else if (prevWord == "and" || prevWord == "or" || prevWord == "in")  // don't unpad
 						prevIsParenHeader = true;
 					// don't unpad variables
 					else if (prevWord == "bool"
@@ -5435,6 +5469,7 @@ bool ASFormatter::isCurrentBraceBroken() const
 	if (shouldAttachInline
 	        && isCStyle()			// for C++ only
 	        && braceFormatMode != RUN_IN_MODE
+	        && !(currentLineBeginsWithBrace && peekNextChar() == '/')
 	        && isBraceType((*braceTypeStack)[stackEnd], COMMAND_TYPE))
 	{
 		size_t i;
@@ -6796,6 +6831,7 @@ void ASFormatter::checkIfTemplateOpener()
 					continue;
 				// this is not a template -> leave...
 				isInTemplate = false;
+				templateDepth = 0;
 				return;
 			}
 			else if (nextLine_.compare(i, 2, AS_AND) == 0
@@ -6803,6 +6839,7 @@ void ASFormatter::checkIfTemplateOpener()
 			{
 				// this is not a template -> leave...
 				isInTemplate = false;
+				templateDepth = 0;
 				return;
 			}
 			else if (currentChar_ == ','  // comma,     e.g. A<int, char>

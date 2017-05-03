@@ -94,7 +94,7 @@ namespace astyle {
 	jmethodID g_mid;
 #endif
 
-const char* g_version = "3.0 beta";
+const char* g_version = "3.0";
 
 //-----------------------------------------------------------------------------
 // ASStreamIterator class
@@ -488,6 +488,18 @@ void ASConsole::error(const char* why, const char* what) const
  */
 void ASConsole::formatCinToCout()
 {
+	// check for files from --stdin= and --stdout=
+	if (!stdPathIn.empty())
+	{
+		if (!freopen(stdPathIn.c_str(), "r", stdin))
+			error("Cannot open input file", stdPathIn.c_str());
+	}
+	if (!stdPathOut.empty())
+	{
+		if (!freopen(stdPathOut.c_str(), "w", stdout))
+			error("Cannot open output file", stdPathOut.c_str());
+
+	}
 	// Using cin.tellg() causes problems with both Windows and Linux.
 	// The Windows problem occurs when the input is not Windows line-ends.
 	// The tellg() will be out of sequence with the get() statements.
@@ -498,7 +510,7 @@ void ASConsole::formatCinToCout()
 	stringstream outStream;
 	char ch;
 	inStream->get(ch);
-	while (!inStream->eof())
+	while (!inStream->eof() && !inStream->fail())
 	{
 		outStream.put(ch);
 		inStream->get(ch);
@@ -735,6 +747,14 @@ bool ASConsole::getPreserveDate() const
 { return preserveDate; }
 
 // for unit testing
+string ASConsole::getStdPathIn() const
+{ return stdPathIn; }
+
+// for unit testing
+string ASConsole::getStdPathOut() const
+{ return stdPathOut; }
+
+// for unit testing
 void ASConsole::setBypassBrowserOpen(bool state)
 { bypassBrowserOpen = state; }
 
@@ -853,6 +873,12 @@ void ASConsole::setOrigSuffix(const string& suffix)
 
 void ASConsole::setPreserveDate(bool state)
 { preserveDate = state; }
+
+void ASConsole::setStdPathIn(const string& path)
+{ stdPathIn = path; }
+
+void ASConsole::setStdPathOut(const string& path)
+{ stdPathOut = path; }
 
 // set outputEOL variable
 void ASConsole::setOutputEOL(LineEndFormat lineEndFormat, const string& currentEOL)
@@ -1700,7 +1726,7 @@ void ASConsole::printHelp() const
 	cout << "    Attach braces to an extern \"C\" statement.\n";
 	cout << endl;
 	cout << "    --attach-closing-while  OR  -xV\n";
-	cout << "    Attach closing while of do-while to the preceeding brace.\n";
+	cout << "    Attach closing while of do-while to the closing brace.\n";
 	cout << endl;
 	cout << "Indentation Options:\n";
 	cout << "--------------------\n";
@@ -1724,8 +1750,8 @@ void ASConsole::printHelp() const
 	cout << "    Indent the contents of namespace blocks.\n";
 	cout << endl;
 	cout << "    --indent-after-parens  OR  -xU\n";
-	cout << "    Indent continuation lines after a paren instead of aligning.\n";
-	cout << "    after the paren on a previous line.\n";
+	cout << "    Indent, instead of align, continuation lines following lines\n";
+	cout << "    that contain an opening paren '(' or an assignment '='. \n";
 	cout << endl;
 	cout << "    --indent-continuation=#  OR  -xt#\n";
 	cout << "    Indent continuation lines an additional # indents.\n";
@@ -2356,7 +2382,7 @@ void ASConsole::updateExcludeVector(const string& suffixParam)
 {
 	excludeVector.emplace_back(suffixParam);
 	standardizePath(excludeVector.back(), true);
-	excludeHitsVector.emplace_back(false);
+	excludeHitsVector.push_back(false);
 }
 
 int ASConsole::waitForRemove(const char* newFileName) const
@@ -3335,6 +3361,18 @@ void ASOptions::parseOption(const string& arg, const string& errorInfo)
 		else if (lineendType == 3)
 			formatter.setLineEndFormat(LINEEND_MACOLD);
 	}
+	else if ( isParamOption(arg, "stdin=") )
+	{
+		string path = getParam(arg, "stdin=");
+		console.standardizePath(path);
+		console.setStdPathIn(path);
+	}
+	else if ( isParamOption(arg, "stdout=") )
+	{
+		string path = getParam(arg, "stdout=");
+		console.standardizePath(path);
+		console.setStdPathOut(path);
+	}
 	else
 		isOptionError(arg, errorInfo);
 #endif
@@ -3941,10 +3979,10 @@ int main(int argc, char** argv)
 	console->processOptions(argvOptions);
 
 	// if no files have been given, use cin for input and cout for output
-	if (console->fileNameVectorIsEmpty())
-		console->formatCinToCout();
-	else
+	if (!console->fileNameVectorIsEmpty())
 		console->processFiles();
+	else
+		console->formatCinToCout();
 
 	return EXIT_SUCCESS;
 }

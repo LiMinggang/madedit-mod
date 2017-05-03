@@ -698,7 +698,6 @@ const string* ASBase::findHeader(const string& line, int i,
 			break;
 		return header;
 	}
-
 	return nullptr;
 }
 

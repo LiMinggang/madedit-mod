@@ -267,6 +267,8 @@ private:    // variables
 	string prevEOL;                     // previous line end
 	string optionsFileName;             // file path and name of the options file to use
 	string origSuffix;                  // suffix= option
+	string stdPathIn;                   // path to input from stdin=
+	string stdPathOut;                  // path to output from stdout=
 	string targetDirectory;             // path to the directory being processed
 	string targetFilename;              // file name being processed
 
@@ -305,10 +307,12 @@ public:     // functions
 	string getNumberFormat(int num, const char* groupingArg, const char* separator) const;
 	string getOptionsFileName() const;
 	string getOrigSuffix() const;
+	string getStdPathIn() const;
+	string getStdPathOut() const;
 	void processFiles();
 	void processOptions(const vector<string>& argvOptions);
 	void setBypassBrowserOpen(bool state);
-	void setErrorStream(ostream* errStream);
+	void setErrorStream(ostream* errStreamPtr);
 	void setIgnoreExcludeErrors(bool state);
 	void setIgnoreExcludeErrorsAndDisplay(bool state);
 	void setIsDryRun(bool state);
@@ -320,6 +324,8 @@ public:     // functions
 	void setOptionsFileName(const string& name);
 	void setOrigSuffix(const string& suffix);
 	void setPreserveDate(bool state);
+	void setStdPathIn(const string& path);
+	void setStdPathOut(const string& path);
 	void standardizePath(string& path, bool removeBeginningSeparator = false) const;
 	bool stringEndsWith(const string& str, const string& suffix) const;
 	void updateExcludeVector(const string& suffixParam);
@@ -331,7 +337,8 @@ public:     // functions
 	vector<string> getFileName() const;
 
 private:	// functions
-	ASConsole& operator=(ASConsole&);          // not to be implemented
+	ASConsole(const ASConsole&);           // copy constructor not to be implemented
+	ASConsole& operator=(ASConsole&);      // assignment operator not to be implemented
 	void correctMixedLineEnds(ostringstream& out);
 	void formatFile(const string& fileName_);
 	string getCurrentDirectory(const string& fileName_) const;
@@ -375,7 +382,7 @@ public:
 	// virtual functions are mocked in testing
 	utf16_t* formatUtf16(const utf16_t*, const utf16_t*, fpError, fpAlloc) const;
 	virtual utf16_t* convertUtf8ToUtf16(const char* utf8In, fpAlloc fpMemoryAlloc) const;
-	virtual char* convertUtf16ToUtf8(const utf16_t* pSourceIn) const;
+	virtual char* convertUtf16ToUtf8(const utf16_t* utf16In) const;
 
 private:
 	static char* STDCALL tempMemoryAllocation(unsigned long memoryNeeded);
@@ -424,10 +431,10 @@ utf16_t* STDCALL AStyleMainUtf16(const utf16_t* pSourceIn,
 // they are called externally and are NOT part of the namespace
 //-----------------------------------------------------------------------------
 #ifdef ASTYLE_LIB
-extern "C" EXPORT char* STDCALL AStyleMain(const char* sourceIn,
-                                           const char* optionsIn,
-                                           fpError errorHandler,
-                                           fpAlloc memoryAlloc);
+extern "C" EXPORT char* STDCALL AStyleMain(const char* pSourceIn,
+                                           const char* pOptions,
+                                           fpError fpErrorHandler,
+                                           fpAlloc fpMemoryAlloc);
 extern "C" EXPORT const char* STDCALL AStyleGetVersion(void);
 #endif	// ASTYLE_LIB
 
