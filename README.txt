@@ -124,6 +124,7 @@ New: New Astyle options support(indent-after-parens, attach-closing-while)
 Fix: Minor bug on OpenFile again
 Fix: Can not copy the first item in Copy All results
 FIx: Change Astyle config according to official change(bracket to brace)
+Code improvement for 64 bits system
 Update Hunspell to 1.6.1
 Update Astyle to 3.0
 Update Simplified Chinese translation

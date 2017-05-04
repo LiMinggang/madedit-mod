@@ -4192,11 +4192,11 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 
 	if( filename.IsEmpty() )
 	{
-		int count = int( m_Notebook->GetPageCount() );
+		size_t count = m_Notebook->GetPageCount();
 		wxArrayString fnames;
 		wxString tmname;
 
-		for( int id = 0; id < count; ++id )
+		for( size_t id = 0; id < count; ++id )
 		{
 			tmname = m_Notebook->GetPageText( id );
 
@@ -4242,9 +4242,9 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 
 		int selid = m_Notebook->GetSelection();
 		// check this file is opened or not
-		int count = int( m_Notebook->GetPageCount() );
+		size_t count = m_Notebook->GetPageCount();
 
-		for( int id = 0; id < count; ++id )
+		for( size_t id = 0; id < count; ++id )
 		{
 			MadEdit *me = ( MadEdit* )m_Notebook->GetPage( id );
 #ifdef __WXMSW__
@@ -4349,8 +4349,8 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 		madedit->Bind( wxEVT_KEY_DOWN, &MadEditFrame::MadEditFrameKeyDown, this );
 		g_PrevPageID = m_Notebook->GetSelection();
 
-		int count = int( m_Notebook->GetPageCount() + 1 );
-		
+		size_t count = m_Notebook->GetPageCount() + 1;
+
 		if((size_t)(Menu_Window_Count + count + 1) > g_Menu_Window->GetMenuItemCount())
 		{
 			g_Menu_Window->Append( menuWindow1 + ( count - 1), title, madedit->GetFileName(), wxITEM_CHECK);
