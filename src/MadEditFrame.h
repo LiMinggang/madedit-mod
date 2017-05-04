@@ -432,12 +432,12 @@ public:
 	int OpenedFileCount();
 	bool OpenFile( const wxString &filename, bool mustExist, bool changeSelection = true ); // if filename is empty, open a new file
 	void RunScriptWithFile( const wxString &filename, const wxString &script, bool mustExist, bool closeafterdone, bool ignorereadonly, bool activeFile );
-	void CloseFile( long pageId );
+	void CloseFile( size_t pageId );
 	void CloseAllFiles( bool force );
 	void MadEditFrameKeyDown( wxKeyEvent& event );
-	void SetPageFocus( int pageId );
+	void SetPageFocus( size_t pageId );
 	int GetPageFocus( );
-	MadEdit *GetEditByFileName( const wxString &filename, int &id );
+	MadEdit *GetEditByFileName( const wxString &filename, size_t &id );
 	void ResetAcceleratorTable();
 	void HideQuickFindBar();
     void SaveFile(long pageId, bool saveas = false, bool hideDlg = true);
@@ -456,7 +456,7 @@ protected:
 	//void OnChar(wxKeyEvent& evt);
 	void OnActivate( wxActivateEvent &evt );
 
-	bool QueryCloseFile( int idx );
+	bool QueryCloseFile( size_t idx );
 	bool QueryCloseAllFiles();
 
 	void LoadMenuKeys( wxConfigBase *config );

@@ -3675,11 +3675,11 @@ void MadEditFrame::MadEditFrameKeyDown( wxKeyEvent& event )
 	event.Skip();
 }
 
-void MadEditFrame::SetPageFocus( int pageId )
+void MadEditFrame::SetPageFocus( size_t pageId )
 {
 	int selid = m_Notebook->GetSelection();
 
-	if(( pageId != selid && pageId >= 0 ) && ( pageId < int( m_Notebook->GetPageCount() ))  && (pageId != selid))
+	if(( pageId != selid ) && ( pageId < m_Notebook->GetPageCount())  && (pageId != selid))
 	{
 		g_CheckModTimeForReload = false;
 		g_PrevPageID = selid;
@@ -3706,9 +3706,9 @@ int MadEditFrame::GetPageFocus( )
 	return m_Notebook->GetSelection();
 }
 
-MadEdit *MadEditFrame::GetEditByFileName( const wxString &filename, int &id )
+MadEdit *MadEditFrame::GetEditByFileName( const wxString &filename, size_t &id )
 {
-	int count = int( m_Notebook->GetPageCount() );
+	size_t count = m_Notebook->GetPageCount();
 	wxString fn;
 
 	for( id = 0; id < count; ++id )
@@ -4474,7 +4474,7 @@ void MadEditFrame::RunScriptWithFile( const wxString &filename, const wxString &
 
 			if( g_MainFrame )
 			{
-				int id;
+				size_t id;
 				madedit = g_MainFrame->GetEditByFileName( filename, id );
 			}
 
@@ -4526,7 +4526,7 @@ void MadEditFrame::RunScriptWithFile( const wxString &filename, const wxString &
 					g_MainFrame->SetMacroStopped();
 				}
 
-				wxString name = m_Notebook->GetPageText( idx );
+				wxString name = m_Notebook->GetPageText( (size_t)idx );
 
 				if( name[name.Len() - 1] == wxT( '*' ) )
 				{ name.Truncate( name.Len() - 1 ); }
@@ -4545,7 +4545,7 @@ void MadEditFrame::RunScriptWithFile( const wxString &filename, const wxString &
 	}
 }
 
-void MadEditFrame::CloseFile( long pageId )
+void MadEditFrame::CloseFile( size_t pageId )
 {
 	if( QueryCloseFile( pageId ) )
 	{
@@ -4563,7 +4563,7 @@ void MadEditFrame::CloseFile( long pageId )
 	}
 }
 
-bool MadEditFrame::QueryCloseFile( int idx )
+bool MadEditFrame::QueryCloseFile( size_t idx )
 {
 	MadEdit *madedit = ( MadEdit* )m_Notebook->GetPage( idx );
 
@@ -4641,8 +4641,8 @@ bool MadEditFrame::QueryCloseAllFiles()
 	}
 
 	g_FileCaretPosManager.Add( madedit );
-	int count = int( m_Notebook->GetPageCount() );
-	int id = 0, sid = selid;
+	size_t count = m_Notebook->GetPageCount();
+	size_t id = 0, sid = (size_t)selid;
 
 	do
 	{

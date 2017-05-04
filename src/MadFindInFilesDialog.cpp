@@ -767,7 +767,7 @@ void MadFindInFilesDialog::FindReplaceInFiles( bool bReplace )
 			}
 			else
 			{
-				int id;
+				size_t id;
 				madedit = g_MainFrame->GetEditByFileName( *fnit, id );
 
 				if( madedit == NULL )
