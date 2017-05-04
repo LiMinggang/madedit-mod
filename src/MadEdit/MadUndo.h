@@ -41,7 +41,7 @@ struct MadInsertUndoData:MadUndoData
 	wxFileOffset m_Size;
 	MadBlockVector m_Data;
 
-	MadInsertUndoData()
+	MadInsertUndoData() : m_Size(0)
 	{
 		m_Type = udtInsert;
 	}
@@ -52,7 +52,7 @@ struct MadDeleteUndoData:MadUndoData
 	wxFileOffset m_Size;
 	MadBlockVector m_Data;
 
-	MadDeleteUndoData()
+	MadDeleteUndoData() : m_Size(0)
 	{
 		m_Type = udtDelete;
 	}
@@ -63,7 +63,7 @@ struct MadOverwriteUndoData:MadUndoData
 	wxFileOffset m_DelSize,	m_InsSize;
 	MadBlockVector m_DelData, m_InsData;
 
-	MadOverwriteUndoData()
+	MadOverwriteUndoData() : m_DelSize(0), m_InsSize(0)
 	{
 		m_Type = udtOverwrite;
 	}
@@ -79,7 +79,7 @@ struct MadUndo
 	vector < MadUndoData* >	m_Undos;
 	wxFileOffset m_CaretPosBefore, m_CaretPosAfter;
 
-	MadUndo() {}
+	MadUndo() :m_CaretPosBefore(0), m_CaretPosAfter(0) {}
 	MadUndo(wxFileOffset caretPosBefore, wxFileOffset caretPosAfter)
 		:m_CaretPosBefore(caretPosBefore), m_CaretPosAfter(caretPosAfter)
 	{}

@@ -76,7 +76,7 @@ bool PersonalDictionary::SavePersonalDictionary()
     }
 
     //DictFile.Clear();
-    for (unsigned int i=0; i<m_DictionaryWords.GetCount(); i++)
+    for (size_t i=0; i<m_DictionaryWords.GetCount(); i++)
         DictFile.AddLine(m_DictionaryWords[i]);
 
     DictFile.Write();

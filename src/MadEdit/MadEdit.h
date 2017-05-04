@@ -86,7 +86,7 @@ public:
 		int fontsize;
 		wxUint16 *widths;
 
-		FontWidthBuffer() {}
+		FontWidthBuffer() : fontsize(0), widths(nullptr) {}
 		FontWidthBuffer( const wxString &fn, int fs, wxUint16 *ws )
 			: fontsize( fs ), widths( ws ) {
 			size_t count = fn.Length();

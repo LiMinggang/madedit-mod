@@ -217,7 +217,7 @@ void MadWinListDialog::OnButtonCloseWindowsClick(wxCommandEvent& event)
 
 void MadWinListDialog::SortTabs(long column)
 {
-	wxArrayString colname, tabname;
+	wxArrayString colname;
 	std::map<wxString, MadEdit *> madEditMap;
 	std::map<wxString, MadEdit *>::iterator it;
 	std::map<wxString, wxString> nameMap;

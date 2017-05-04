@@ -1588,7 +1588,7 @@ void MadSearchReplaceDialog::SearchAll( MadEdit * madedit, bool needRec/*=true*/
 {
 	vector<wxFileOffset> begpos, endpos;
 	// get all matched data in madedit
-	wxString expr, fmt;
+	wxString expr;
 	int ok;
 	m_FindText->GetText( expr );
 
@@ -1724,6 +1724,7 @@ void MadSearchReplaceDialog::SearchAll( MadEdit * madedit, bool needRec/*=true*/
 		{
 			static wxString text( _( "Search Results" ) );
 			int pid = g_MainFrame->m_InfoNotebook->GetPageIndex( g_MainFrame->m_FindInFilesResults );
+			wxASSERT(pid != wxNOT_FOUND);
 			g_MainFrame->m_InfoNotebook->SetPageText( pid, text );
 			DisplayFindAllResult( myroot, begpos, endpos, madedit, true, progressUpdatePtr );
 		}

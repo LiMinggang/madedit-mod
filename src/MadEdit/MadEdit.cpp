@@ -109,7 +109,7 @@ wxString MadStrLower( const wxString& ws )
 {
 #ifdef __WXMSW__
 	wchar_t buf[BUF_LEN + 1];
-	wxString result, tmp;
+	wxString result;
 	size_t len = ws.Len(), beg = 0;
 
 	do
@@ -409,7 +409,7 @@ list<FontWidthManager::VerifiedFlag> FontWidthManager::VerifiedFlagList;
 template <class T>
 void memset_t( void * buf, int value, size_t buf_len )
 {
-	int len = buf_len / sizeof( T ), ord_len = buf_len % sizeof( T );
+	size_t len = buf_len / sizeof( T ), ord_len = buf_len % sizeof( T );
 	T * p1 = ( T * )buf;
 	char * p2 = ( char * )buf + buf_len - ord_len;
 
@@ -3023,7 +3023,7 @@ void MadEdit::PrepareHexRowIndex( int toprow, int count )
 
 	if( m_HexRowIndex.size() < size_t( count ) )
 	{
-		m_HexRowIndex.resize( count );
+		m_HexRowIndex.resize(size_t(count));
 	}
 
 	hexrowpos = toprow;
@@ -4318,7 +4318,7 @@ int MadEdit::TranslateText( const wxChar *pwcs, size_t count, vector<ucs4_t> *uc
 {
 	ucs4_t uc;
 	size_t i = 0;
-	int linecount = 0;
+	size_t linecount = 0;
 
 	if( count != 0 ) ++linecount;
 
@@ -4492,7 +4492,7 @@ int MadEdit::GetColumnDataFromClipboard( vector <ucs4_t> *ucs )
 		{
 			rowcount -= linecount;
 			linecount += rowcount;
-			unsigned i = 0;
+			size_t i = 0;
 
 			while( rowcount > 0 )
 			{

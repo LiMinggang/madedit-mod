@@ -358,7 +358,7 @@ void HunspellInterface::PopulateDictionaryMap(StringToStringMap* pLookupMap, con
     while (start != stop)
     {
         AddDictionaryElement(pLookupMap, strDictionaryPath, (*start).first, (*start).second);
-        start++;
+        ++start;
     }
 }
 
@@ -375,7 +375,7 @@ void HunspellInterface::UpdatePossibleValues(SpellCheckEngineOption& OptionDepen
         while (start != stop)
         {
             OptionToUpdate.AddPossibleValue((*start).first);
-            start++;
+            ++start;
         }
     }
     else
