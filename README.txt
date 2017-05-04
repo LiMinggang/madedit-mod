@@ -130,38 +130,38 @@ Update Astyle to 3.0
 Update Simplified Chinese translation
 
 Mod v0.4.7
-1.New: Astyle 2.06 new option support
-2.Fix: UI issues of source formatter config tab
-3.Fix: Bookmark tag show up issue in Find and Bookmark
-4.Fix: Crash while opening file history dialog by hitting F9
-5.Fix: Crash while Windows shutdown(wxWidgets issue)
-6.Fix: Crash because of Astyle assertion failure at line 3229, ASFormatter.cpp(https://sourceforge.net/p/astyle/bugs/422/)
-7.Fix: Cannot open documents on the network server #228
+1. New: Astyle 2.06 new option support
+2. Fix: UI issues of source formatter config tab
+3. Fix: Bookmark tag show up issue in Find and Bookmark
+4. Fix: Crash while opening file history dialog by hitting F9
+5. Fix: Crash while Windows shutdown(wxWidgets issue)
+6. Fix: Crash because of Astyle assertion failure at line 3229, ASFormatter.cpp(https://sourceforge.net/p/astyle/bugs/422/)
+7. Fix: Cannot open documents on the network server #228
 8.Use standalone boost python to replace boost one(No need to compile boost anymore)
 9.Use Bind to replace event table in MadEditframe to fix potentail issues
 10.Update Simplified Chinese translation
 
 Mod v0.4.6
 This release is mainly for more encodings support, especially GB18030 and Regex bug fix
-1.New: Spell check for SearchReplaceDialog would change according to active window
-2.New: Ctrl+Shift+Wheel as shortcut for Page Up/Down
-3.New: Indicator for zero length match in Regex search
-4.New: Support Replace of '^' and '$' in Regex
-5.New: Add GB18030 support
-6.New: Add KOI8-R, KOI8-U and CP866 support
-7.New: Add Macintosh encodings(Roman, Japanese, Chinese-trad, Korean, Arabic, Hebrew, Greek, Cyrillic, Thai, Chinese-simp, Central-Eur, Croatian, Icelandic, Romanian) support
-8.New: Add CP874 Windows Thai support
-9.New: Mark unsupported unicode char with {}
-10.Fix: Toolbar issue
-11.Fix: Regex search bug #224
-12.Fix: Regular expression (?<=.)\s(?=.) replacement issue(Enable "Replace Directly" in Options) #119
-13.Fix: Caret position is not updated if close search dialog by click 'X' instead of close button
-14.Fix: Disable Find Previous in Regex search
-15.Fix: Add ResetToolBarsInfoWin to All above in PurgeHisoryDialog
-16.Fix: Not stay in current line when switch between modes #226
-17.Fix: Adjust encoding group according to MSDN
-18.Fix: Adjust toolbar position #225
-19.Fix: UI issue of Source formatter tab in Option dialog
+1. New: Spell check for SearchReplaceDialog would change according to active window
+2. New: Ctrl+Shift+Wheel as shortcut for Page Up/Down
+3. New: Indicator for zero length match in Regex search
+4. New: Support Replace of '^' and '$' in Regex
+5. New: Add GB18030 support
+6. New: Add KOI8-R, KOI8-U and CP866 support
+7. New: Add Macintosh encodings(Roman, Japanese, Chinese-trad, Korean, Arabic, Hebrew, Greek, Cyrillic, Thai, Chinese-simp, Central-Eur, Croatian, Icelandic, Romanian) support
+8. New: Add CP874 Windows Thai support
+9. New: Mark unsupported unicode char with {}
+10. Fix: Toolbar issue
+11. Fix: Regex search bug #224
+12. Fix: Regular expression (?<=.)\s(?=.) replacement issue(Enable "Replace Directly" in Options) #119
+13. Fix: Caret position is not updated if close search dialog by click 'X' instead of close button
+14. Fix: Disable Find Previous in Regex search
+15. Fix: Add ResetToolBarsInfoWin to All above in PurgeHisoryDialog
+16. Fix: Not stay in current line when switch between modes #226
+17. Fix: Adjust encoding group according to MSDN
+18. Fix: Adjust toolbar position #225
+19. Fix: UI issue of Source formatter tab in Option dialog
 20.Update Simplified Chinese translation
 21.Update boost to 1.62
 22.Update chardetector to latest uchardet v0.0.6
@@ -170,40 +170,40 @@ This release is mainly for more encodings support, especially GB18030 and Regex 
 25.Other minor improvements
 
 Mod v0.4.5
-1.New: File history dialog
-2.New: Add default key, down key support(the same as Search Dialog) for FindInFiles Dialog
-3.Fix: Size issue of some UI items #215
-4.Fix: Two typos #82
-5.Fix: Don't show EOF but Space/Tab in Search/Replace Dialog
-6.Fix: CPPCheck warnings
-7.Fix: Change shortcuts of Go Back/Forward
-8.Fix: Some greek symbols that require the Alt+ compination don't get created #214
+1. New: File history dialog
+2. New: Add default key, down key support(the same as Search Dialog) for FindInFiles Dialog
+3. Fix: Size issue of some UI items #215
+4. Fix: Two typos #82
+5. Fix: Don't show EOF but Space/Tab in Search/Replace Dialog
+6. Fix: CPPCheck warnings
+7. Fix: Change shortcuts of Go Back/Forward
+8. Fix: Some greek symbols that require the Alt+ compination don't get created #214
     with Greek extended keyboard layout
     Madeit-Mod -------------------> result <------------ IceApe
     RightAlt+Shift+r --------------> U+00AE <----------------- RightAlt+r
     RightAlt+Shift+[2 times ; ] --> ¡§ <------------------ [couldn't find it]
-9.Fix: Remove support for Win98
-10.Fix: Some illegal chars in file name(eg, 0xFFF0~0xFFFF) would cause wxWidgets crash
-11.Fix: a bug when move up #217
-12.Fix: Crash if close the last file by double clicking page tab #218
+9. Fix: Remove support for Win98
+10. Fix: Some illegal chars in file name(eg, 0xFFF0~0xFFFF) would cause wxWidgets crash
+11. Fix: a bug when move up #217
+12. Fix: Crash if close the last file by double clicking page tab #218
 13.Other improvements
 14.Update translation
 
 Mod v0.4.4
-1.New: Set toolbar to 3 columns to let user who has a small display have a chance to re-org the toolbars
-2.New: Use icon to mark readonly flag
-3.New: Replace toolbar icons with Silk icon set from Mark James(www.famfamfam.com) and Fugue(http://p.yusukekamiyamane.com/)
-4.New: Change default color of space/tab/carrige/return to Gray
-5.New: Use hotkey to launch the macro saved #208
-6.New: Add app dir to script searching directories
-7.New: Seperate "goto the last edit position" and ¡°goto the next edit position¡±function from Undo #169 
-8.Fix: Move recent files tool bar item from Quick search to Standard
-9.Fix: Apply AuiNoteBook fix from wxWidgets dev(http://trac.wxwidgets.org/ticket/17551)
-10.Fix: Display replace all result on Status bar instead of an annoying dialog
-11.Fix: Add default pos to tool bars in order that tool bar would be in the pos expected
-12.Fix: Group Bookmark tools to SearchReplace Toolbar
-13.Fix: Some config would be overidded
-14.Fix: When I paste some lines, the typewrite mode is not working #209 
+1. New: Set toolbar to 3 columns to let user who has a small display have a chance to re-org the toolbars
+2. New: Use icon to mark readonly flag
+3. New: Replace toolbar icons with Silk icon set from Mark James(www.famfamfam.com) and Fugue(http://p.yusukekamiyamane.com/)
+4. New: Change default color of space/tab/carrige/return to Gray
+5. New: Use hotkey to launch the macro saved #208
+6. New: Add app dir to script searching directories
+7. New: Seperate "goto the last edit position" and ¡°goto the next edit position¡±function from Undo #169 
+8. Fix: Move recent files tool bar item from Quick search to Standard
+9. Fix: Apply AuiNoteBook fix from wxWidgets dev(http://trac.wxwidgets.org/ticket/17551)
+10. Fix: Display replace all result on Status bar instead of an annoying dialog
+11. Fix: Add default pos to tool bars in order that tool bar would be in the pos expected
+12. Fix: Group Bookmark tools to SearchReplace Toolbar
+13. Fix: Some config would be overidded
+14. Fix: When I paste some lines, the typewrite mode is not working #209 
 15.Add more Icons
 16.Update license information
 17.Update Greek Translation
@@ -213,87 +213,87 @@ Note: The Quick search bar would be larger than expected because of removing the
 toolbar (and re-arrange it---it would be saved) by Tools->Purge History->Reset Toolbar position
 
 Mod v0.4.3
-1.New: Use dialog to let user choose one for all instead of annoying one by one dialogs
-2.New: Let the user to do the backup selfly #198
-3.New: Use Icon to replace the checkbox on QuickSearch Bar #181
-4.New: Remember pos of all tool Bars
-5.New: Reset tool bars position
-6.New: Insert to the top instead of append to the bottom of search results, expand the last automatically and collapse the last
-7.New: Add InputBox, MsgBox to MadPython so that user can get input or output some message
-8.New: Confirm Undo at the first time if the changes had been saved to disk
-9.New: Add Scripts list to right click menu
-10.New: Remove file from recentlist if could not be opened
-11.New: An Enhanced "Auto-complete" for selection(Option->Edit) #176
-12.New: Scroll function on Righ click menu of scroll bars #157
-13.New: Support selection replace in Typewriter mode
-14.New: Hope typewrite mode could work when use "Backspace" or "Delete" #203
-15.New: Double click to highlight word
-16.New: Enlarge input area of single mode
-17.New: Enhancement for Post-It mode #182
-18.Fix: 0.4.2.1 can not remember the word wrap setting #201
-19.Fix: The fix width in the Option menu can't Open #199
-20.Fix: Improve windows list code, fix a bug of inner-tab drag/reposition(wxAuiNoteBook, http://trac.wxwidgets.org/ticket/17551)
-21.Fix: Assertion failure of FindInFilesDialog
-22.Fix: Assertion failure of MadMacroDlg
-23.Fix: Improve 80 column indicator
+1. New: Use dialog to let user choose one for all instead of annoying one by one dialogs
+2. New: Let the user to do the backup selfly #198
+3. New: Use Icon to replace the checkbox on QuickSearch Bar #181
+4. New: Remember pos of all tool Bars
+5. New: Reset tool bars position
+6. New: Insert to the top instead of append to the bottom of search results, expand the last automatically and collapse the last
+7. New: Add InputBox, MsgBox to MadPython so that user can get input or output some message
+8. New: Confirm Undo at the first time if the changes had been saved to disk
+9. New: Add Scripts list to right click menu
+10. New: Remove file from recentlist if could not be opened
+11. New: An Enhanced "Auto-complete" for selection(Option->Edit) #176
+12. New: Scroll function on Righ click menu of scroll bars #157
+13. New: Support selection replace in Typewriter mode
+14. New: Hope typewrite mode could work when use "Backspace" or "Delete" #203
+15. New: Double click to highlight word
+16. New: Enlarge input area of single mode
+17. New: Enhancement for Post-It mode #182
+18. Fix: 0.4.2.1 can not remember the word wrap setting #201
+19. Fix: The fix width in the Option menu can't Open #199
+20. Fix: Improve windows list code, fix a bug of inner-tab drag/reposition(wxAuiNoteBook, http://trac.wxwidgets.org/ticket/17551)
+21. Fix: Assertion failure of FindInFilesDialog
+22. Fix: Assertion failure of MadMacroDlg
+23. Fix: Improve 80 column indicator
 24.Other code improvement
 25.Upgrade boost to 1.61
 26.Update hunspell to 1.41
 27.Update Chinese translation
 
 Mod v0.4.2.1
-1.New: Ctrl-A to select all items in the Window List dialog
-2.New: Code performance improvement for Window list(Performance, menu blink and other issues)
-3.New: Tip information about the file while mouse hovering over the file tab
-4.Fix: Multiple selection does not work with Save/SaveAs(Windows List dialog) #193
-5.Fix: Extra scroll issue while pressing enter key in Typewriter mode introduced by 0.4.2
-6.Fix: Can't disable Autosave once enabled
+1. New: Ctrl-A to select all items in the Window List dialog
+2. New: Code performance improvement for Window list(Performance, menu blink and other issues)
+3. New: Tip information about the file while mouse hovering over the file tab
+4. Fix: Multiple selection does not work with Save/SaveAs(Windows List dialog) #193
+5. Fix: Extra scroll issue while pressing enter key in Typewriter mode introduced by 0.4.2
+6. Fix: Can't disable Autosave once enabled
 7.Increase input area by decreasing right margin of the single line edit
 
 Mod v0.4.2
-1.New: Hope MadEdit-Mod could load more open files history than 9 #179
-2.New: Redesign of Search Results view----Hope to add search key words or expression on the result tree title on the left of the file path #137
-3.New: Save LineSpacing, Line Wrap Mode and Edit Mode for opened files #186
-4.New: Enable config fix width mode in global config #184
-5.New: Wordwrap of input of search/replace dialog #175
-6.New: Use icons or symbols replace the words in the quicksearch bar #181
-7.New: Hope MadEdit-Mod could Autosave, Backup files, and have Autolink funciton #135
-8.New: Window list function(Activate, Save, Save As and Close)
-9.Fix: Recorded script(caret pos for inputting) would be wrong if user moved the caret #183
-10.Fix: The caret can't lock the y position when use word wrap function #178
-11.Fix: Change Mpython API WholeLineSelection to SelectWholeLine
-12.Fix: "New File" & "Open File" button in toolbar got unclickable when all editor tabs closed #190
-13.Fix: Not respond to wxSlider event(bug of CodeBlocks https://sourceforge.net/p/codeblocks/tickets/350/)
-14.Fix: Bug of wxGenericTreeCtrl(Fixed in wxWidgets 3.1) #136
-15.Fix: Initial size of the input box(SearchReplace dialog) is not updated #191
-16.Fix: File name in history list would be empty if you save a newly created file #192
+1. New: Hope MadEdit-Mod could load more open files history than 9 #179
+2. New: Redesign of Search Results view----Hope to add search key words or expression on the result tree title on the left of the file path #137
+3. New: Save LineSpacing, Line Wrap Mode and Edit Mode for opened files #186
+4. New: Enable config fix width mode in global config #184
+5. New: Wordwrap of input of search/replace dialog #175
+6. New: Use icons or symbols replace the words in the quicksearch bar #181
+7. New: Hope MadEdit-Mod could Autosave, Backup files, and have Autolink funciton #135
+8. New: Window list function(Activate, Save, Save As and Close)
+9. Fix: Recorded script(caret pos for inputting) would be wrong if user moved the caret #183
+10. Fix: The caret can't lock the y position when use word wrap function #178
+11. Fix: Change Mpython API WholeLineSelection to SelectWholeLine
+12. Fix: "New File" & "Open File" button in toolbar got unclickable when all editor tabs closed #190
+13. Fix: Not respond to wxSlider event(bug of CodeBlocks https://sourceforge.net/p/codeblocks/tickets/350/)
+14. Fix: Bug of wxGenericTreeCtrl(Fixed in wxWidgets 3.1) #136
+15. Fix: Initial size of the input box(SearchReplace dialog) is not updated #191
+16. Fix: File name in history list would be empty if you save a newly created file #192
 17.Fix various minor issues
 18.Update wxWidgets to 3.1.0
 19.Update translation
 
 Mod v0.4.1
-1.New: Enhancement on Results(Delete items, collapse items) #138
-2.New: Improve syntax highlight function for non-English language Text file #142
-3.New: Create a new file by double click on the blank area of the Tab bar #144
-4.New: Full screen/Post-It Mode support #147
-5.New: Always on the top #146
-6.New: Use mouse wheel to scroll and activate the tabs on the tab bar. Click on any of the File name Tab to set the focus to the tab bar. Then use mouse wheel to scroll.The file would not be activated automatically #148
-7.New: History files bar, open recent file list from tool bar #144
-8.New: Save user config of "quick search bar" #149
-9.New: New MadPython API WholeLineSelection and GetIndentCountByPos
-10.New: Support JSON highlighting by using JavaScript syntax
-11.New: Set Plain Text(*.txt) as default file extension while saving
-12.New: Add the keywords in the syntax file to personal dictionary in runtime
-13.New: AutoScroll or lock the cursor in a fixed line range in the window which user defined #170
-14.Fix: A bug in the "quick search bar" #143
-15.Fix: A bug in replace all introduced by code change for #119
-16.Fix: An issue of wxWidgets while scroll result window by mouse wheel
-17.Fix: Not allow to change the size of SearchReplace dialog
-18.Fix: Syntax highlight of Keyword should override special word prefix #164
-19.Fix: A multi-line search result bug(MadEdit can not display/copy multi-line result) #173
-20.Fix: Need to toggle the QuickSearch Bar more simply #172
-21.Fix: Macro recording should set position before recording the command #174
-22.Fix: Several issues of Macro Recording related to string input
+1. New: Enhancement on Results(Delete items, collapse items) #138
+2. New: Improve syntax highlight function for non-English language Text file #142
+3. New: Create a new file by double click on the blank area of the Tab bar #144
+4. New: Full screen/Post-It Mode support #147
+5. New: Always on the top #146
+6. New: Use mouse wheel to scroll and activate the tabs on the tab bar. Click on any of the File name Tab to set the focus to the tab bar. Then use mouse wheel to scroll.The file would not be activated automatically #148
+7. New: History files bar, open recent file list from tool bar #144
+8. New: Save user config of "quick search bar" #149
+9. New: New MadPython API WholeLineSelection and GetIndentCountByPos
+10. New: Support JSON highlighting by using JavaScript syntax
+11. New: Set Plain Text(*.txt) as default file extension while saving
+12. New: Add the keywords in the syntax file to personal dictionary in runtime
+13. New: AutoScroll or lock the cursor in a fixed line range in the window which user defined #170
+14. Fix: A bug in the "quick search bar" #143
+15. Fix: A bug in replace all introduced by code change for #119
+16. Fix: An issue of wxWidgets while scroll result window by mouse wheel
+17. Fix: Not allow to change the size of SearchReplace dialog
+18. Fix: Syntax highlight of Keyword should override special word prefix #164
+19. Fix: A multi-line search result bug(MadEdit can not display/copy multi-line result) #173
+20. Fix: Need to toggle the QuickSearch Bar more simply #172
+21. Fix: Macro recording should set position before recording the command #174
+22. Fix: Several issues of Macro Recording related to string input
 23.Update translation
 
 Mod v0.4.0
@@ -302,69 +302,69 @@ Mod v0.4.0
 3.Improve syntax highlighting performance
 4.Improve ReloadByModificationTime event handling
 5.Improve performance of ReplaceTextAll(non-regex)
-6.New: Add new MadPython API Goto(pos)
-7.New: New short cut(Alt--) to collapse all results in Results window #131
-8.New: Restore the last position of the Search result window #132
-9.Fix: The tab of the selected page could not be seen if a lot of files were opened #115
-10.Fix: Can't select the whole line by Triple click or click on Line number area if the line was wrapped #116
-11.Fix: Negative match was not supported in Regex with case insensitive(Issue 2) #117
-12.Fix: Number was not highlighted correctly in Text file(Issue 1) #117
-13.Fix: Caret and selection would have issue while '\W' matching \r or \n #121
-14.Fix: To use shift + middle mouse wheel to horizontal scrolling #123
-15.Fix: Regular expression (?<=.)\s(?=.) replacement issue(Case 1: ReplaceAll) #119
-16.Fix: Restore the transparence configuration of the search window #129
-17.Fix: Another bug about number highlight in 0.4.0 preview #127
-18.Fix: Enhanced ctrl+g & ctrl+shift+g and more #128 Support '+/-' as relative offset to current caret position/line
-19.Fix: Can't work with CPPCheck 1.72 #134
+6. New: Add new MadPython API Goto(pos)
+7. New: New short cut(Alt--) to collapse all results in Results window #131
+8. New: Restore the last position of the Search result window #132
+9. Fix: The tab of the selected page could not be seen if a lot of files were opened #115
+10. Fix: Can't select the whole line by Triple click or click on Line number area if the line was wrapped #116
+11. Fix: Negative match was not supported in Regex with case insensitive(Issue 2) #117
+12. Fix: Number was not highlighted correctly in Text file(Issue 1) #117
+13. Fix: Caret and selection would have issue while '\W' matching \r or \n #121
+14. Fix: To use shift + middle mouse wheel to horizontal scrolling #123
+15. Fix: Regular expression (?<=.)\s(?=.) replacement issue(Case 1: ReplaceAll) #119
+16. Fix: Restore the transparence configuration of the search window #129
+17. Fix: Another bug about number highlight in 0.4.0 preview #127
+18. Fix: Enhanced ctrl+g & ctrl+shift+g and more #128 Support '+/-' as relative offset to current caret position/line
+19. Fix: Can't work with CPPCheck 1.72 #134
 20.Add documents(CN) for Python simplification
 21.Update boost to 1.60
 22.Update Python to 2.7.11
 23.Other minor improvements
 
 Mod v0.3.10
-1.New: Support "Dot(".") match new line", default behavior is changed to NOT match new line #98
-2.New: Dot match newline for Quick Search bar #103
-3.New: Show main frame after everything was done #107
-4.New: Optimization on MadPython---using InsertStr instead of InsertWChar #112
-5.Fix: Find Hex should be gray out if Regular expression was enabled(SearchReplaceDialog) #97
-6.Fix: Find Hex should be gray out if Regular expression was enabled(SearchReplaceInFilesDialog) #99
-7.Fix: Match whole words should be gray out if Regular expression was enabled(SearchReplaceDialog/SearchReplaceInFilesDialog) #100
-8.Fix: Match whole word and dot match newline should be overridden according to Search RegEx #101
-9.Fix: Extra '\' was added to recorded MadPython while searching with RegEx #102
-10.Fix: Caret pos should be at the last while opening the Macro dialog #94 #104
-11.Fix: English was missing in the language list #105
-12.Fix: Should not call Reload on exiting #109
-13.Fix: Should rarely need to use wxConvLocal directly in MadPython #111
-14.Fix: Tab/Return/BackSpace was not recorded in MadPython #114
+1. New: Support "Dot(".") match new line", default behavior is changed to NOT match new line #98
+2. New: Dot match newline for Quick Search bar #103
+3. New: Show main frame after everything was done #107
+4. New: Optimization on MadPython---using InsertStr instead of InsertWChar #112
+5. Fix: Find Hex should be gray out if Regular expression was enabled(SearchReplaceDialog) #97
+6. Fix: Find Hex should be gray out if Regular expression was enabled(SearchReplaceInFilesDialog) #99
+7. Fix: Match whole words should be gray out if Regular expression was enabled(SearchReplaceDialog/SearchReplaceInFilesDialog) #100
+8. Fix: Match whole word and dot match newline should be overridden according to Search RegEx #101
+9. Fix: Extra '\' was added to recorded MadPython while searching with RegEx #102
+10. Fix: Caret pos should be at the last while opening the Macro dialog #94 #104
+11. Fix: English was missing in the language list #105
+12. Fix: Should not call Reload on exiting #109
+13. Fix: Should rarely need to use wxConvLocal directly in MadPython #111
+14. Fix: Tab/Return/BackSpace was not recorded in MadPython #114
 15.Improve performance of script recording
 16.Update Astyle to latest code
 17.Update translations
 
 Mod v0.3.9
 1.Improve on change syntax on save as
-2.New: Check available translation at start time and refresh on opening Option dialog(New translation will automatically listed at runtime)
-3.New: Add API SetColumnSelection
-4.New: Use default script directory if not specified
-5.New: Greek translation(Thanks nikoss(https://github.com/nikoss))
-6.New: Add Credits and License information to About Dialog
-7.New: Toggle hide/show replace UI items by checkbox for FindReplaceInFilesDialog
-8.New: Add German and Polish translations(based on wxMedit)
-9.New: Syntax highlight support in Source formatter tab
-10.New: Debian 8.2 X64 build
-11.Fix: Improve mark brace issue(#15 in 0.3.8)
-12.Fix: Purge recent caret position history
-13.Fix: Typo on Option dialog(Dictionary settings) #82
-14.Fix: Not enough space for translated string(Greek) #83
-15.Fix: Can't convert Chinese(simplified) to Japanese #88
-16.Fix: Incorrect behavior of MadEdit when Ctrl-Backspace pressed at beginning of a text file OR at zero-width selection in column mode #89
-17.Fix: Update MadPython Syntax
-18.Fix: Update Translations
-19.Fix: Update Documents
+2. New: Check available translation at start time and refresh on opening Option dialog(New translation will automatically listed at runtime)
+3. New: Add API SetColumnSelection
+4. New: Use default script directory if not specified
+5. New: Greek translation(Thanks nikoss(https://github.com/nikoss))
+6. New: Add Credits and License information to About Dialog
+7. New: Toggle hide/show replace UI items by checkbox for FindReplaceInFilesDialog
+8. New: Add German and Polish translations(based on wxMedit)
+9. New: Syntax highlight support in Source formatter tab
+10. New: Debian 8.2 X64 build
+11. Fix: Improve mark brace issue(#15 in 0.3.8)
+12. Fix: Purge recent caret position history
+13. Fix: Typo on Option dialog(Dictionary settings) #82
+14. Fix: Not enough space for translated string(Greek) #83
+15. Fix: Can't convert Chinese(simplified) to Japanese #88
+16. Fix: Incorrect behavior of MadEdit when Ctrl-Backspace pressed at beginning of a text file OR at zero-width selection in column mode #89
+17. Fix: Update MadPython Syntax
+18. Fix: Update Translations
+19. Fix: Update Documents
 20.Other minor improvements
 
 Mod v0.3.8
-1.New: Upgrade boost to 1.59
-2.New: Silent mode which can be used in scripting(Only file names would be passed to
+1. New: Upgrade boost to 1.59
+2. New: Silent mode which can be used in scripting(Only file names would be passed to
      running instance in single instance mode)
      Run MadEdit-Mod without show GUI and use a MadPython to handle the files to
      be opened. So, you can use the Astyle/XML formatter/HTML tools the same as 
@@ -379,113 +379,113 @@ Mod v0.3.8
      [-w], wildcard, Enable wildcard support in file name(line number would be disabled because it used '*')
      [files], File(s) to be opened
      Eg: madedit -s -m madpytho.mpy ./1.txt /tmp/2.txt
-3.New: Automatically advance number for new file in NoNameXX if already opened a file with the same name
-4.New: Change insert mode to insertion while changing from hex to text mode
-5.New: Use indent size of current line instead of the last line that has non-space/tab char
-6.New: Add Spanish dictionary in release since a lot of downloads from Spanish
-7.New: Improve UI for Mad-Macro list
-8.New: Auto indent support for Python
-9.New: Purge Caret position history
-10.New: Add brief help documents(Basic introduction, Key mapping and help for Regex)
-11.New: Switch between Right-to-left and Left-to-right language
-12.New: Toggle back from Replace Dialog to Find Dialog
-13.New: Add VS 2015 support
-14.New: RTL support
-15.Fix: Match brace pair has bug if it was in comment or string(From MadEdit)
-16.Fix: Select contents between a brace pair has bug
-17.Fix: Size of the dictionary selection and path is too small under Ubuntu
-18.Fix: Remove some of the code for compatible with wxWidgets 2.8.x
-19.Fix: Missing menu items for Copy file path/name/directory after refactor
-20.Fix: Fix Mouse event(LDown LDClick) handle issue(Since the beginning of MadEdit)
-21.Fix: Don't need "(R)" on windows title to mark read only file
-22.Fix: Assertion failure of search/replace results display(string conversion)
-23.Fix: Spellchecker would insert instead of replace the word if the caret is at the end of a word(Issue #61)
-24.Fix: Horizontal scroll paint issue
-25.Fix: Right click menu string
-26.Fix: OnPaint issue in RTL
-27.Fix: The last char was not displayed while scrolling to the right most
-28.Fix: Line number would be reversed in printing while enable RTL
-29.Fix: Fix Astyle config could not be saved
-30.Fix: Add Readonly check in MadPython before actually run
-31.Fix: Assertion failure at MadLines.cpp:2829
+3. New: Automatically advance number for new file in NoNameXX if already opened a file with the same name
+4. New: Change insert mode to insertion while changing from hex to text mode
+5. New: Use indent size of current line instead of the last line that has non-space/tab char
+6. New: Add Spanish dictionary in release since a lot of downloads from Spanish
+7. New: Improve UI for Mad-Macro list
+8. New: Auto indent support for Python
+9. New: Purge Caret position history
+10. New: Add brief help documents(Basic introduction, Key mapping and help for Regex)
+11. New: Switch between Right-to-left and Left-to-right language
+12. New: Toggle back from Replace Dialog to Find Dialog
+13. New: Add VS 2015 support
+14. New: RTL support
+15. Fix: Match brace pair has bug if it was in comment or string(From MadEdit)
+16. Fix: Select contents between a brace pair has bug
+17. Fix: Size of the dictionary selection and path is too small under Ubuntu
+18. Fix: Remove some of the code for compatible with wxWidgets 2.8.x
+19. Fix: Missing menu items for Copy file path/name/directory after refactor
+20. Fix: Fix Mouse event(LDown LDClick) handle issue(Since the beginning of MadEdit)
+21. Fix: Don't need "(R)" on windows title to mark read only file
+22. Fix: Assertion failure of search/replace results display(string conversion)
+23. Fix: Spellchecker would insert instead of replace the word if the caret is at the end of a word(Issue #61)
+24. Fix: Horizontal scroll paint issue
+25. Fix: Right click menu string
+26. Fix: OnPaint issue in RTL
+27. Fix: The last char was not displayed while scrolling to the right most
+28. Fix: Line number would be reversed in printing while enable RTL
+29. Fix: Fix Astyle config could not be saved
+30. Fix: Add Readonly check in MadPython before actually run
+31. Fix: Assertion failure at MadLines.cpp:2829
 32.Other minor improvements
 
 Mod v0.3.7
-1.New: Column Align Right(Selected text would be aligned according to right)
-2.New: Prefix, postfix and preview of numbering(enhanced numbering)
-3.New: Search All in All Opened documents
-4.New: Replace All in All Opened documents
-5.New: Indicate "Empty expression" on status bar if user did not fill the search box and hit Search
-6.New: TrimLeadingSpaces----remove leading space and tab chars of lines
-7.New: Selection support in TrimTrailingSpaces, TrimLeadingSpaces, DeleteEmptyLines, DeleteEmptyLinesWithSpaces and JoinLines
-8.New: Selected text copying to search text while searching with regex
-9.New: Tool button for Numbering(Insert incremental numbers)
-10.New: Update preview while editing initial number in Numbering dialog
-11.New: Config item for Quick Search bar in option dialog
-12.New: Refactor of popup memu/toolbar code
-13.New: ReadOnly flag on title and GUI update for ReadOnly mode(disable edit icon/menu in ReadOnly mode)
-14.New: New toolbar for refresh/close preview window
-15.New: Transparency supported in Search/Replace dialog
-16.New: Merge Search/Replace dialog
-17.New: Toggle macro result by button
-18.Fix: Assertion failure MadEditFrame.cpp:3403
-19.Fix: Rollback changes in Search/Replace(since 0.3.5)
-20.Fix: Assertion failure at MadEditFrame.cpp:5692 under x86_x64 linux
-21.Fix: Fix dictionary download link of OpenOffice on About Dialog
-22.Fix: Link warning of VS project
-23.Fix: Show search results by default
-24.Fix: Set default page of Option dialog to "General"
-25.Fix: Move encoding update and config update from MainFrame to search/replace dialog
-26.Fix: Reverse order toolbars under linux
-27.Fix: Remove extra overflow icon from Toolbars
-28.Fix: Crash in ColumnAlign while reverse selection
-29.Fix: Column align will has issue if you select beyond the EOF
-30.Fix: File name was not marked as "modified*" in ColumnAlign
-31.Fix: Minor fix in menu help text
-32.Fix: Improve simplified Chinese translation
-33.Fix: Wrong dnd cursor if no selection
-34.Fix: Improvement on GUI update for menu and toolbar
-35.Fix: UI update issue of toggle toolbars
-36.Fix: Remove no parent from the style of Replace dialog
-37.Fix: Remove duplicated code lines
-38.Fix: Bookmark would be toggled if there were multiple instance found in one line
-39.Fix: Remove macro debug menu item
+1. New: Column Align Right(Selected text would be aligned according to right)
+2. New: Prefix, postfix and preview of numbering(enhanced numbering)
+3. New: Search All in All Opened documents
+4. New: Replace All in All Opened documents
+5. New: Indicate "Empty expression" on status bar if user did not fill the search box and hit Search
+6. New: TrimLeadingSpaces----remove leading space and tab chars of lines
+7. New: Selection support in TrimTrailingSpaces, TrimLeadingSpaces, DeleteEmptyLines, DeleteEmptyLinesWithSpaces and JoinLines
+8. New: Selected text copying to search text while searching with regex
+9. New: Tool button for Numbering(Insert incremental numbers)
+10. New: Update preview while editing initial number in Numbering dialog
+11. New: Config item for Quick Search bar in option dialog
+12. New: Refactor of popup memu/toolbar code
+13. New: ReadOnly flag on title and GUI update for ReadOnly mode(disable edit icon/menu in ReadOnly mode)
+14. New: New toolbar for refresh/close preview window
+15. New: Transparency supported in Search/Replace dialog
+16. New: Merge Search/Replace dialog
+17. New: Toggle macro result by button
+18. Fix: Assertion failure MadEditFrame.cpp:3403
+19. Fix: Rollback changes in Search/Replace(since 0.3.5)
+20. Fix: Assertion failure at MadEditFrame.cpp:5692 under x86_x64 linux
+21. Fix: Fix dictionary download link of OpenOffice on About Dialog
+22. Fix: Link warning of VS project
+23. Fix: Show search results by default
+24. Fix: Set default page of Option dialog to "General"
+25. Fix: Move encoding update and config update from MainFrame to search/replace dialog
+26. Fix: Reverse order toolbars under linux
+27. Fix: Remove extra overflow icon from Toolbars
+28. Fix: Crash in ColumnAlign while reverse selection
+29. Fix: Column align will has issue if you select beyond the EOF
+30. Fix: File name was not marked as "modified*" in ColumnAlign
+31. Fix: Minor fix in menu help text
+32. Fix: Improve simplified Chinese translation
+33. Fix: Wrong dnd cursor if no selection
+34. Fix: Improvement on GUI update for menu and toolbar
+35. Fix: UI update issue of toggle toolbars
+36. Fix: Remove no parent from the style of Replace dialog
+37. Fix: Remove duplicated code lines
+38. Fix: Bookmark would be toggled if there were multiple instance found in one line
+39. Fix: Remove macro debug menu item
 
 Mod v0.3.6
-1.New: Create scripts directory if not exists while saving recorded script
-2.New: Shortcut for Insert numbers(Ctrl-Shift-N)
-3.New: Print function parameter information while dumping(Windows only)
-4.Fix: Memory leak in MadEditFrame::OnToolsAstyleFormat
-5.Fix: Use global astyle::ASFormatter formatter for performance in MadEditFrame::OnToolsAstyleFormat enhancement
-6.Fix: Out-of-bounds issue in toolbar init
-7.Fix: Improve in MadLines::MadLines()
-8.Fix: Randomly crash under Fedora 22 in initializing
-9.Fix: Build issue of FreeBSD
-10.Fix: Assertion in FindAll on 64bit Windows
-11.Fix: Move caret to the beginning of the line instead of end while left click to select
-12.Fix: Update VS projects
-13.Fix: Triple click to select whole row not working after the fix above
-14.Fix: Diable a warning for libhunspell in VS2013
-15.Fix: Fix Assertion failure in MadEdit::UpdateCaret
+1. New: Create scripts directory if not exists while saving recorded script
+2. New: Shortcut for Insert numbers(Ctrl-Shift-N)
+3. New: Print function parameter information while dumping(Windows only)
+4. Fix: Memory leak in MadEditFrame::OnToolsAstyleFormat
+5. Fix: Use global astyle::ASFormatter formatter for performance in MadEditFrame::OnToolsAstyleFormat enhancement
+6. Fix: Out-of-bounds issue in toolbar init
+7. Fix: Improve in MadLines::MadLines()
+8. Fix: Randomly crash under Fedora 22 in initializing
+9. Fix: Build issue of FreeBSD
+10. Fix: Assertion in FindAll on 64bit Windows
+11. Fix: Move caret to the beginning of the line instead of end while left click to select
+12. Fix: Update VS projects
+13. Fix: Triple click to select whole row not working after the fix above
+14. Fix: Diable a warning for libhunspell in VS2013
+15. Fix: Fix Assertion failure in MadEdit::UpdateCaret
 
 Mod v0.3.5
-1.New: MadMacro local script list on Toolbar
-2.New: Open/edit saved MadMacro script
-3.New: Build time shown on About Dialog
-4.New: Copy the first word instead of the whole selection for search/replace/spell check
+1. New: MadMacro local script list on Toolbar
+2. New: Open/edit saved MadMacro script
+3. New: Build time shown on About Dialog
+4. New: Copy the first word instead of the whole selection for search/replace/spell check
 5.Update translation
-6.Fix: Enable line breaking to enable disable 2 belows
-7.Fix: Pad empty lines function in Astyle configs
-8.Fix: XML formatting config GUI
-9.Fix: Ctrl-Shift-K for Astyle formatter
-10.Fix: Assertion if the string was not found in Translation
-11.Fix: Macro Recording, missed escape slash char '\' while searching '"'
-12.Fix: Remove duplicated recoring string in ProcessCommand
-13.Fix: Part of the line would not be see if "show line number" is checked in WordWrap mode
-14.Fix: wxGetSelectedChoices compatable issue(crash if you close ToHalfWidth/ToFullWidth dialog directly)
-15.Fix: Hang/crash on opening saved script if ${MADEDIT_HOME}/scripts not existing
-16.Fix: Crash on opening saved script if the script was not saved under ${MADEDIT_HOME}/scripts
-17.Fix: Script file would not listed if you saved it under directory other than ${MADEDIT_HOME}/scripts
+6. Fix: Enable line breaking to enable disable 2 belows
+7. Fix: Pad empty lines function in Astyle configs
+8. Fix: XML formatting config GUI
+9. Fix: Ctrl-Shift-K for Astyle formatter
+10. Fix: Assertion if the string was not found in Translation
+11. Fix: Macro Recording, missed escape slash char '\' while searching '"'
+12. Fix: Remove duplicated recoring string in ProcessCommand
+13. Fix: Part of the line would not be see if "show line number" is checked in WordWrap mode
+14. Fix: wxGetSelectedChoices compatable issue(crash if you close ToHalfWidth/ToFullWidth dialog directly)
+15. Fix: Hang/crash on opening saved script if ${MADEDIT_HOME}/scripts not existing
+16. Fix: Crash on opening saved script if the script was not saved under ${MADEDIT_HOME}/scripts
+17. Fix: Script file would not listed if you saved it under directory other than ${MADEDIT_HOME}/scripts
 
 Mod v0.3.4.1
 1. Fix: Saved config of Astyle don't take effect
@@ -494,11 +494,11 @@ Mod v0.3.4.1
 4. Updated translation
 
 Mod v0.3.4
-1.Fix: Record string issue in FindNext, FindPrev, Replace, ReplaceAll while Regex
+1. Fix: Record string issue in FindNext, FindPrev, Replace, ReplaceAll while Regex
     was enabled
-2.New: Automatically raise window after closing Search/Replace/FindInFiles dialog
-3.New: GTK+ version selection supported(--with-gtk=[VERSION]), 2 and 3 are supported
-4.New: Astyle is integrated for formatting C/C++/C#/Java code(Ctrl-Shift-K)
+2. New: Automatically raise window after closing Search/Replace/FindInFiles dialog
+3. New: GTK+ version selection supported(--with-gtk=[VERSION]), 2 and 3 are supported
+4. New: Astyle is integrated for formatting C/C++/C#/Java code(Ctrl-Shift-K)
 5.Updated Simplified Chinese
 
 
@@ -644,18 +644,18 @@ Mod v0.2.6
 6. Update Simplified Chinese
 
 What's new from v0.2.5
-Enhanced bookmark edit functions(copy/cut/delete/replace) under Edit menu
-Move Toggle/Goto/clear bookmarks to Search because they are not edit functions
-Start/End select to mark a start and end of selection by menu
-Capitalize words in selection
-Add Capitalize to MadPython
-Multiple dictionary supported, Add/Remove word from Personal dictionary
-Clear/Set ReadOnly flag of the file
-ColumnAlign to align the 'short line'
-Add GNU ASM syntax file
-Fix build issue with WX 3.0 under Fedora Core 17
-Add shortcut to Show/Hide All Chars(Space, Tab and EOL)
-Bug fixes
+1. Enhanced bookmark edit functions(copy/cut/delete/replace) under Edit menu
+2. Move Toggle/Goto/clear bookmarks to Search because they are not edit functions
+3. Start/End select to mark a start and end of selection by menu
+4. Capitalize words in selection
+5. Add Capitalize to MadPython
+6. Multiple dictionary supported, Add/Remove word from Personal dictionary
+7. Clear/Set ReadOnly flag of the file
+8. ColumnAlign to align the 'short line'
+9. Add GNU ASM syntax file
+10. Fix build issue with WX 3.0 under Fedora Core 17
+11. Add shortcut to Show/Hide All Chars(Space, Tab and EOL)
+12. Bug fixes
 
 Mod v0.2.5.5
 1. Add shortcut to Show All Chars(Space, Tab and EOL)
@@ -878,17 +878,17 @@ Mod v0.1.2
 
 2014.01.26
 1. Added support for open file and go to #line by command line arguments, use "FileName*linnum".
-   '*' can not be used as filename in all OS for it's a wildcard char.
-   This feature can be used for multiple files open function in Madedit, eg.
-   "FileName1*linnum1|FileName2*linnum2|FileName3*linnum3|..."
+  '*' can not be used as filename in all OS for it's a wildcard char.
+  This feature can be used for multiple files open function in Madedit, eg.
+  "FileName1*linnum1|FileName2*linnum2|FileName3*linnum3|..."
 
 2012.07.05
-1.Fixed issues in Search/Replace in Selection
-2.Removed the confusing From/To on Search/Replace dialog
+1. Fixed issues in Search/Replace in Selection
+2. Removed the confusing From/To on Search/Replace dialog
 
 v0.2.9 Mod
-1.Fixed several critical/crash bugs in Madedit 0.2.9.
-2.New features added.
+1. Fixed several critical/crash bugs in Madedit 0.2.9.
+2. New features added.
     Drag&Drop Edit
     Bookmark
     Highlight words(shift+F8)
@@ -897,175 +897,175 @@ v0.2.9 Mod
 
 ----------
 v0.2.9:
-1.added that restore the encoding and font(name, size) of a file when reopening it.
-2.added that use Ctrl+MouseWheel to decrease or increase the font size.
-3.added Japanese language. Thank Tilt for the translations.
-4.fixed a bug when converting between Tab and Space char in wordwrap mode.
-5.modified that the dialogs will stay on top of main window, not top of all windows.
-6.modified the action when associating file types
-7.some minor changes.
+1. added that restore the encoding and font(name, size) of a file when reopening it.
+2. added that use Ctrl+MouseWheel to decrease or increase the font size.
+3. added Japanese language. Thank Tilt for the translations.
+4. fixed a bug when converting between Tab and Space char in wordwrap mode.
+5. modified that the dialogs will stay on top of main window, not top of all windows.
+6. modified the action when associating file types
+7. some minor changes.
 
 v0.2.8:
-1.added Japanese Kanji supporting for converting Chinese characters.
-2.added the function to split window into multiple Tab Controls (by using wxAuiNotebook)
+1. added Japanese Kanji supporting for converting Chinese characters.
+2. added the function to split window into multiple Tab Controls (by using wxAuiNotebook)
   ScreenShot: http://madedit.sourceforge.net/screenshot06.png
-3.added the function to convert between WordWraps and NewLine chars.
-4.added File-Type Associations Dialog under win32.
-5.added Search-In-Selection function when searching and replaceing.
-6.added Count function in SearchDialog.
-7.added ToHalfWidthByOptions, ToFullWidthByOptions to choose the characters(ASCII,Japanese,Korean)
+3. added the function to convert between WordWraps and NewLine chars.
+4. added File-Type Associations Dialog under win32.
+5. added Search-In-Selection function when searching and replaceing.
+6. added Count function in SearchDialog.
+7. added ToHalfWidthByOptions, ToFullWidthByOptions to choose the characters(ASCII,Japanese,Korean)
   you want to convert.
-8.added ConvertSpaceToTab and ConvertTabToSpace functions.
-9.added new syntax files for D, SQL, Verilog and VHDL.
-10.fixed that cannot replace text in Hex-Mode.
-11.many bug-fixes and changes.
+8. added ConvertSpaceToTab and ConvertTabToSpace functions.
+9. added new syntax files for D, SQL, Verilog and VHDL.
+10. fixed that cannot replace text in Hex-Mode.
+11. many bug-fixes and changes.
 
 v0.2.7:
-1.fixed that ISO-8859-7 charset doesn't available under Win32.
-2.fixed that incorrectly handle Japanese halfwidth characters in Shift-JIS charset.
-3.supported XIM Over-The-Spot feature under Linux/FreeBSD(wxGTK).
-4.added options to set Date/Time format.
-5.added a option to reload files previously open on startup.
-6.added a option to restore previous caret position when files are opened.
-7.fixed a crashing bug that incorrectly detect MAC/DOS new-line char on HTML/PHP files.
-8.changed for showing CR, LF, CRLF and EOF in different marks.
+1. fixed that ISO-8859-7 charset doesn't available under Win32.
+2. fixed that incorrectly handle Japanese halfwidth characters in Shift-JIS charset.
+3. supported XIM Over-The-Spot feature under Linux/FreeBSD(wxGTK).
+4. added options to set Date/Time format.
+5. added a option to reload files previously open on startup.
+6. added a option to restore previous caret position when files are opened.
+7. fixed a crashing bug that incorrectly detect MAC/DOS new-line char on HTML/PHP files.
+8. changed for showing CR, LF, CRLF and EOF in different marks.
 
 v0.2.6:
-1.improved the redraw speed under Linux (wxGTK).
-2.added charset-detector, a port to C of "universalchardet", for detecting the encoding of files.
+1. improved the redraw speed under Linux (wxGTK).
+2. added charset-detector, a port to C of "universalchardet", for detecting the encoding of files.
   Thanks Jserv (http://blog.linux.org.tw/~jserv/archives/001672.html).
-3.improved the speed of FindInFiles function.
-4.fixed crashing bug when opening a file begins with a 0x0b/0x0c character.
-5.added new syntax files for Fortran, TeX/LaTeX, Squirrel, C#, Visual Basic, ASP(VBScript).
-6.many misc changes and bug-fixes.
+3. improved the speed of FindInFiles function.
+4. fixed crashing bug when opening a file begins with a 0x0b/0x0c character.
+5. added new syntax files for Fortran, TeX/LaTeX, Squirrel, C#, Visual Basic, ASP(VBScript).
+6. many misc changes and bug-fixes.
 
 v0.2.5:
-1.fixed crashes when copying and pasting data between TextMode and ColumnMode under Linux.
-2.fixed sometimes crashes when using FindInFiles function under Linux.
-3.added a dockable Information Window for listing the results of FindInFiles.
-4.added Exclude Filters in FindInFiles dialog.
-5.added a button ("<<") to get the path of the editing document in FindInFiles dialog.
-6.added support for multiple shortcuts on all menu and editor commands.
-7.added support for Mouse-Over-Get-Word of StarDict under Win32.
-8.added Trim Trialing Spaces function.
-9.added Sort Lines function.
-10.added a new option to temporary disable or enable MouseSelectToCopy function when pressing Ctrl key.
-11.added a new option to choose the Language of UI.
-12.added Italian language. Thank Contardi Angelo for the translations.
+1. fixed crashes when copying and pasting data between TextMode and ColumnMode under Linux.
+2. fixed sometimes crashes when using FindInFiles function under Linux.
+3. added a dockable Information Window for listing the results of FindInFiles.
+4. added Exclude Filters in FindInFiles dialog.
+5. added a button ("<<") to get the path of the editing document in FindInFiles dialog.
+6. added support for multiple shortcuts on all menu and editor commands.
+7. added support for Mouse-Over-Get-Word of StarDict under Win32.
+8. added Trim Trialing Spaces function.
+9. added Sort Lines function.
+10. added a new option to temporary disable or enable MouseSelectToCopy function when pressing Ctrl key.
+11. added a new option to choose the Language of UI.
+12. added Italian language. Thank Contardi Angelo for the translations.
 
 v0.2.4-2:
-1.fixed that lost the last byte of clipboard data (Linux version only).
+1. fixed that lost the last byte of clipboard data (Linux version only).
 
 v0.2.4:
-1.added custom Syntax Highlighting settings.
-2.added Find/Replace In Files function.
-3.some minor changes.
+1. added custom Syntax Highlighting settings.
+2. added Find/Replace In Files function.
+3. some minor changes.
 
 v0.2.3:
-1.improved the loading speed for the files contain U+10000~U+10FFFF widechars.
-2.improved the repaint speed when the lines are very long(>1MB).
-3.added ToHalfWidth, ToFullWidth functions.
-4.added WordCount function.
-5.added InsertDataTime function.
-6.added ecReturnNoIndent(Shift-Enter) to insert NewLine char without indentation.
-7.now 'ESC' key can be used in custom keybindings.
-8.some minor changes.
+1. improved the loading speed for the files contain U+10000~U+10FFFF widechars.
+2. improved the repaint speed when the lines are very long(>1MB).
+3. added ToHalfWidth, ToFullWidth functions.
+4. added WordCount function.
+5. added InsertDataTime function.
+6. added ecReturnNoIndent(Shift-Enter) to insert NewLine char without indentation.
+7. now 'ESC' key can be used in custom keybindings.
+8. some minor changes.
 
 v0.2.2:
-1.fixed that menu icons will cause crash under Win98.
-2.fixed that input incorrect CJK chars under Win98.
-3.fixed that copy and then paste data in Column/Hex modes will cause crash under Win98.
-4.added a messagebox to notify that madedit cannot find the matched string.
-5.added ToUpperCase, ToLowerCase, InvertCase functions.
-6.some misc changes.
+1. fixed that menu icons will cause crash under Win98.
+2. fixed that input incorrect CJK chars under Win98.
+3. fixed that copy and then paste data in Column/Hex modes will cause crash under Win98.
+4. added a messagebox to notify that madedit cannot find the matched string.
+5. added ToUpperCase, ToLowerCase, InvertCase functions.
+6. some misc changes.
 
 v0.2.1-2:
-1.fixed that it will crash when close ConvertEncodingDialog by pressing top-right 'X' button.
-2.fixed the bug of AutoCompletePair function.
+1. fixed that it will crash when close ConvertEncodingDialog by pressing top-right 'X' button.
+2. fixed the bug of AutoCompletePair function.
 
 v0.2.1:
-1.fixed copy/paste text to/from PrimarySelection when use mouse under Linux.
-2.added ConvertEncoding function.
-3.added ConvertChineseChar(Simplified<=>Traditional) in both of file and clipboard.
-4.added AutoCompletePair function. The AutoCompletePair must be defined in syntax files.
-5.improved AutoIndent function. The IndentChar and UnindentChar must be defined in syntax files.
+1. fixed copy/paste text to/from PrimarySelection when use mouse under Linux.
+2. added ConvertEncoding function.
+3. added ConvertChineseChar(Simplified<=>Traditional) in both of file and clipboard.
+4. added AutoCompletePair function. The AutoCompletePair must be defined in syntax files.
+5. improved AutoIndent function. The IndentChar and UnindentChar must be defined in syntax files.
 
 v0.2.0:
-1.fixed syntax parsing error in non-global range(ex: PHP, JavaScript).
-2.fixed that reopen the same file under Win32 because compare filename with case sensitive.
-3.added new option of custom KeyBindings.
-4.added MouseSelectToCopy and MiddleMouseToPaste functions.
-5.added new syntax files for CSS, Windows Registry File, XML.
+1. fixed syntax parsing error in non-global range(ex: PHP, JavaScript).
+2. fixed that reopen the same file under Win32 because compare filename with case sensitive.
+3. added new option of custom KeyBindings.
+4. added MouseSelectToCopy and MiddleMouseToPaste functions.
+5. added new syntax files for CSS, Windows Registry File, XML.
 
 v0.1.9.9:
-1.fixed the incorrect searching result on some search patterns.
-2.added SaveAll function.
-3.some misc changes.
+1. fixed the incorrect searching result on some search patterns.
+2. added SaveAll function.
+3. some misc changes.
 
 v0.1.9:
-1.replaced Boost.Regex with Boost.Xpressive for searching & replacing Regular Expressions.
+1. replaced Boost.Regex with Boost.Xpressive for searching & replacing Regular Expressions.
   now we can use wxDevCpp with the precompiled wxWidgets library(*.devpak, Unicode version)
   on www.devpaks.org to build MadEdit under win32.
-2.added a new function for Multi-Line Editing in Column Mode.
-3.several misc changes & bug-fixs.
+2. added a new function for Multi-Line Editing in Column Mode.
+3. several misc changes & bug-fixs.
 
 v0.1.8:
-1.fixed that randomly crash when quit MadEdit for Linux version.
-2.fixed EscapeChar syntax checking.
-3.fixed that Print/Preview incorrectly when the position of Horizontal-ScrollBar is not 0.
-4.added a new option of 'Default Encoding'.
-5.added automatically detect the encoding of FileName under Linux by current locale.
+1. fixed that randomly crash when quit MadEdit for Linux version.
+2. fixed EscapeChar syntax checking.
+3. fixed that Print/Preview incorrectly when the position of Horizontal-ScrollBar is not 0.
+4. added a new option of 'Default Encoding'.
+5. added automatically detect the encoding of FileName under Linux by current locale.
   When save a file, MadEdit will use UTF8 as default encoding of the FileName.
-6.added new syntax files for diff/patch, JavaScript and Ruby.
+6. added new syntax files for diff/patch, JavaScript and Ruby.
 
 v0.1.7:
-1.fixed several misc bugs.
-2.fixed MultiByte Encoding <==> Unicode converting error in v0.1.6 under Linux.
-3.removed the linking to the unnecessary libs(e.g. libtiff, libjpeg and libpng) for Linux version.
-4.added Print&PrintPreview functions. (Known bug: cannot print/preview correctly on the papers
+1. fixed several misc bugs.
+2. fixed MultiByte Encoding <==> Unicode converting error in v0.1.6 under Linux.
+3. removed the linking to the unnecessary libs(e.g. libtiff, libjpeg and libpng) for Linux version.
+4. added Print&PrintPreview functions. (Known bug: cannot print/preview correctly on the papers
  with landscape orientation.)
-5.added Comment(Ctrl-M)/Uncomment(Ctrl-Shift-M) functions. MadEdit will add/remove LineComment
+5. added Comment(Ctrl-M)/Uncomment(Ctrl-Shift-M) functions. MadEdit will add/remove LineComment
  string to the selected lines, the LineComment must be defined in the syntax files.
 
 v0.1.6:
-1.fixed that cannot search U+10000~U+10FFFF ucs4 char under win32.
-2.added Increase&Decrease Indent functions.
+1. fixed that cannot search U+10000~U+10FFFF ucs4 char under win32.
+2. added Increase&Decrease Indent functions.
 When select multi-lines and press 'Tab' will Inc-Indent, and press 'Shift-Tab' will Dec-Indent.
 
 v0.1.5:
-1.fixed several bugs.
-2.now MadEdit will open the same files once only.
-3.improved Reload() function, and MadEdit will reload the files which were changed by another app.
+1. fixed several bugs.
+2. now MadEdit will open the same files once only.
+3. improved Reload() function, and MadEdit will reload the files which were changed by another app.
 
 v0.1.4:
-1.fixed the bug of Mark Brace incorrect position when use WordWrap.
-2.fixed several misc. bugs.
-3.used a new approach to determine file types:
+1. fixed the bug of Mark Brace incorrect position when use WordWrap.
+2. fixed several misc. bugs.
+3. used a new approach to determine file types:
   (a)by file extension (b)by the context of first line (c)by file name.
-4.added a setting of "Do Not Save Settings to MadEdit.cfg after MadEdit Finish",
+4. added a setting of "Do Not Save Settings to MadEdit.cfg after MadEdit Finish",
   it's useful when you edit 'MadEdit.cfg' by MadEdit.
 
 v0.1.3:
-1.fixed several bugs.
-2.added Mark Brace Pair.
-3.added Go To Left/Right Brace (Ctrl-[ and Ctrl-], press Shift to select).
+1. fixed several bugs.
+2. added Mark Brace Pair.
+3. added Go To Left/Right Brace (Ctrl-[ and Ctrl-], press Shift to select).
   the Brace-Pair must be defined in syntax_*.syn files.
-4.added Cut Line (Ctrl-Shift-L).
-5.added Insert Tab Char (Ctrl-~ or Ctrl-`).
-6.supported Drop Files from window-manager under Linux.
-7.improved the speed of repaint in HexMode.
+4. added Cut Line (Ctrl-Shift-L).
+5. added Insert Tab Char (Ctrl-~ or Ctrl-`).
+6. supported Drop Files from window-manager under Linux.
+7. improved the speed of repaint in HexMode.
 
 v0.1.2:
-1.fixed several bugs.
-2.added Replace Text/Hex functions.
-3.added some fine improvements.
+1. fixed several bugs.
+2. added Replace Text/Hex functions.
+3. added some fine improvements.
 
 v0.1.1:
-  fixed some bugs.
-  added RightClick Popup Menu.
-  added new syntax files.
-  added FindPrevious & FindHexNext/Previous functions.
-  changed ShortCuts of Text/Column/HexMode to Alt-1, Alt-2, Alt-3.
+1. fixed some bugs.
+2. added RightClick Popup Menu.
+3. added new syntax files.
+4. added FindPrevious & FindHexNext/Previous functions.
+5. changed ShortCuts of Text/Column/HexMode to Alt-1, Alt-2, Alt-3.
 
 v0.1:
   added Edit & Search functions.
