@@ -88,7 +88,7 @@ void MadPrintout::OnPreparePrinting()
 }
 
 
-void MadPrintout::GetPageInfo(int *minPage, int *maxPage, int *pageFrom, int *pageTo)
+void MadPrintout::GetPageInfo(size_t *minPage, size_t *maxPage, size_t *pageFrom, size_t *pageTo)
 {
     // get info from g_ActiveMadEdit
     *maxPage = *pageTo = g_ActiveMadEdit->GetPageCount();
@@ -105,7 +105,7 @@ void MadPrintout::GetPageInfo(int *minPage, int *maxPage, int *pageFrom, int *pa
 bool MadPrintout::HasPage(int page)
 {
     // get info from g_ActiveMadEdit
-    int count=g_ActiveMadEdit->GetPageCount();
+    size_t count=g_ActiveMadEdit->GetPageCount();
     return (page>=1 && page<=count);
 }
 

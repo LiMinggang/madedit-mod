@@ -94,7 +94,7 @@ MadSaveQueryDialog::~MadSaveQueryDialog()
 void MadSaveQueryDialog::InitWindowListIterms()
 {
 	wxAuiNotebook * notebookp = reinterpret_cast<wxAuiNotebook *>(m_MainFrame->m_Notebook);
-	long count = (long) notebookp->GetPageCount();
+	size_t count = notebookp->GetPageCount();
 	long tmp;
 
 	MadFileList->Hide();
@@ -103,7 +103,7 @@ void MadSaveQueryDialog::InitWindowListIterms()
 	MadFileList->Freeze();
 	
 	wxListItem info;
-	for( long id = 0; id < count; ++id )
+	for( size_t id = 0; id < count; ++id )
 	{
 		MadEdit * madedit = ( MadEdit* )notebookp->GetPage( id );
 		if(madedit->IsModified())

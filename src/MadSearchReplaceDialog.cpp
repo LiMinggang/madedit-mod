@@ -1205,9 +1205,9 @@ void MadSearchReplaceDialog::WxButtonReplaceAllClick( wxCommandEvent& event )
 
 void MadSearchReplaceDialog::WxButtonReplaceAllInAllClick( wxCommandEvent& event )
 {
-	int count = int( ( ( wxAuiNotebook* )g_MainFrame->m_Notebook )->GetPageCount() );
+	size_t count = ( ( wxAuiNotebook* )g_MainFrame->m_Notebook )->GetPageCount();
 
-	for( int id = 0; id < count; ++id )
+	for( size_t id = 0; id < count; ++id )
 	{
 		MadEdit *madedit = ( MadEdit* )( ( wxAuiNotebook* )g_MainFrame->m_Notebook )->GetPage( id );
 		ReplaceAll( madedit, madedit == g_ActiveMadEdit );
@@ -1567,9 +1567,9 @@ void MadSearchReplaceDialog::WxButtonFindAllClick( wxCommandEvent& event )
 void MadSearchReplaceDialog::WxButtonFindAllInAllClick( wxCommandEvent& event )
 {
 	extern MadEdit *g_ActiveMadEdit;
-	int count = int( ( ( wxAuiNotebook* )g_MainFrame->m_Notebook )->GetPageCount() );
+	size_t count = ( ( wxAuiNotebook* )g_MainFrame->m_Notebook )->GetPageCount();
 
-	for( int id = 0; id < count; ++id )
+	for( size_t id = 0; id < count; ++id )
 	{
 		MadEdit *madedit = ( MadEdit* )( ( wxAuiNotebook* )g_MainFrame->m_Notebook )->GetPage( id );
 		SearchAll( madedit, madedit == g_ActiveMadEdit );

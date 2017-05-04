@@ -100,7 +100,7 @@ MadWinListDialog::~MadWinListDialog()
 void MadWinListDialog::InitWindowListIterms()
 {
 	wxAuiNotebook * notebookp = reinterpret_cast<wxAuiNotebook *>(m_MainFrame->m_Notebook);
-	long count = (long) notebookp->GetPageCount();
+	size_t count = (long) notebookp->GetPageCount();
 	long tmp;
 
 	MadWindowsList->Hide();
@@ -108,7 +108,7 @@ void MadWinListDialog::InitWindowListIterms()
 
 	MadWindowsList->Freeze();
 	wxListItem info;
-	for( long id = 0; id < count; ++id )
+	for( size_t id = 0; id < count; ++id )
 	{
 		MadEdit * madedit = ( MadEdit* )notebookp->GetPage( id );
 		wxFileName fileName( madedit->GetFileName() );

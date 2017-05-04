@@ -429,7 +429,7 @@ private:
 	bool m_PageClosing; // prevent from reentry of CloseFile(), OnNotebookPageClosing()
 public:
     
-	int OpenedFileCount();
+	size_t OpenedFileCount();
 	bool OpenFile( const wxString &filename, bool mustExist, bool changeSelection = true ); // if filename is empty, open a new file
 	void RunScriptWithFile( const wxString &filename, const wxString &script, bool mustExist, bool closeafterdone, bool ignorereadonly, bool activeFile );
 	void CloseFile( size_t pageId );
@@ -440,7 +440,7 @@ public:
 	MadEdit *GetEditByFileName( const wxString &filename, size_t &id );
 	void ResetAcceleratorTable();
 	void HideQuickFindBar();
-    void SaveFile(long pageId, bool saveas = false, bool hideDlg = true);
+    void SaveFile(size_t pageId, bool saveas = false, bool hideDlg = true);
 
 protected:
 	void MadEditFrameClose( wxCloseEvent& event );

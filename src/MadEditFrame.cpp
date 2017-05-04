@@ -963,8 +963,8 @@ public:
 		return pages_list;
 	}
 
-	int GetFilesList( wxString &files ) {
-		int count = 0;
+	size_t GetFilesList( wxString &files ) {
+		size_t count = 0;
 		list<PageData> pages_list = GetPagesList();
 		size_t page_count = pages_list.size();
 		list<PageData>::iterator it = pages_list.begin();
@@ -991,9 +991,7 @@ public:
 	};
 
 	void AdvanceSelection( bool bForward ) {
-		int count = ( int )GetPageCount();
-
-		if( count <= 1 ) { return; }
+		if( GetPageCount() <= 1 ) { return; }
 
 		list<PageData> pages_list = GetPagesList();
 		wxWindow* win = GetPage( GetSelection() );
@@ -1229,9 +1227,9 @@ bool GetActiveMadEditPathNameOrTitle( wxString &name )
 void ApplySyntaxAttributes( MadSyntax *syn )
 {
 	wxMadAuiNotebook * notebook = g_MainFrame->m_Notebook;
-	int count = int( notebook->GetPageCount() );
+	size_t count = notebook->GetPageCount();
 
-	for( int id = 0; id < count; ++id )
+	for( size_t id = 0; id < count; ++id )
 	{
 		MadEdit *me = ( MadEdit* )notebook->GetPage( id );
 		me->ApplySyntaxAttributes( syn, true );
@@ -3446,7 +3444,7 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 
 	// save ReloadFilesList
 	wxString files;
-	int count = int( m_Notebook->GetPageCount() );
+	size_t count = m_Notebook->GetPageCount();
 	bool bb = m_ReloadFiles;
 
 	//m_Config->Read(wxT("ReloadFiles"), &bb);
@@ -3772,7 +3770,7 @@ void MadEditFrame::OnNotebookPageChanged( wxAuiNotebookEvent& event )
 	g_ActiveMadEdit = ( MadEdit* )m_Notebook->GetPage( m_Notebook->GetSelection() );
 	int now = event.GetSelection();
 	int old = event.GetOldSelection();
-	int count = int( m_Notebook->GetPageCount() );
+	//int count = int( m_Notebook->GetPageCount() );
 
 	if( event.GetEventObject() == this )
 	{
@@ -3840,7 +3838,7 @@ void MadEditFrame::OnNotebookPageClosing( wxAuiNotebookEvent& event )
 {
 	if( m_PageClosing )
 	{
-		int count = m_Notebook->GetPageCount();
+		size_t count = m_Notebook->GetPageCount();
 		g_Menu_Window->Delete(menuWindow1 + count - 1);
 		return;
 	}
@@ -3858,7 +3856,7 @@ void MadEditFrame::OnNotebookPageClosing( wxAuiNotebookEvent& event )
 			OnNotebookPageClosed( true );
 		}
 		
-		int count = m_Notebook->GetPageCount();
+		size_t count = m_Notebook->GetPageCount();
 		
 		g_Menu_Window->Delete(menuWindow1 + count - 1);
 	}
@@ -3868,7 +3866,7 @@ void MadEditFrame::OnNotebookPageClosing( wxAuiNotebookEvent& event )
 
 void MadEditFrame::OnNotebookPageClosed( bool bZeroPage )
 {
-	int count = m_Notebook->GetPageCount();
+	size_t count = m_Notebook->GetPageCount();
 
 	if( bZeroPage || count == 0 )
 	{
@@ -4070,7 +4068,7 @@ void MadEditFrame::OnFindInFilesResultsDClick( wxMouseEvent& event )
 
 		if( cpdata )
 		{
-			int count = int( g_MainFrame->m_Notebook->GetPageCount() );
+			size_t count = g_MainFrame->m_Notebook->GetPageCount();
 
 			if( cpdata->pageid >= 0 && cpdata->pageid < count )
 			{
@@ -4180,9 +4178,9 @@ void MadEditFrame::AddItemToFindInFilesResults( wxTreeItemId & myroot, const wxS
 
 //---------------------------------------------------------------------------
 
-int MadEditFrame::OpenedFileCount()
+size_t MadEditFrame::OpenedFileCount()
 {
-	return ( int )m_Notebook->GetPageCount();
+	return m_Notebook->GetPageCount();
 }
 
 bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeSelection /*= true*/ )
@@ -4413,7 +4411,8 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 	madedit->SetFocus();
 
 	wxString tmpname = madedit->GetFileName();
-	int myid = m_Notebook->GetPageCount() - 1;
+	wxASSERT(m_Notebook->GetPageCount() > 0);
+	size_t myid = m_Notebook->GetPageCount() - 1;
 	if(tmpname.IsEmpty()) tmpname = m_Notebook->GetPageText(myid);
 	m_Notebook->SetPageToolTip (myid, tmpname);
 
@@ -5276,11 +5275,11 @@ void MadEditFrame::OnUpdateUI_MenuCheckIsThisModified( wxUpdateUIEvent& event )
 void MadEditFrame::OnUpdateUI_MenuCheckIsAnyoneModified( wxUpdateUIEvent& event )
 {
 	bool enable = false;
-	int count = m_Notebook->GetPageCount();
-	if(count)
+	size_t count = m_Notebook->GetPageCount();
+	if(count > 0)
 	{
 		
-		for( int id = 0; id < count; ++id )
+		for( size_t id = 0; id < count; ++id )
 		{
 			MadEdit *me = ( MadEdit* )m_Notebook->GetPage( id );
 			enable = me->IsModified();
@@ -5420,9 +5419,9 @@ void MadEditFrame::OnFileOpen( wxCommandEvent& event )
 	filterIndex = dlg.GetFilterIndex();
 }
 
-void MadEditFrame::SaveFile(long pageId, bool saveas/* = false*/, bool hideDlg/* = true*/)
+void MadEditFrame::SaveFile(size_t pageId, bool saveas/* = false*/, bool hideDlg/* = true*/)
 {
-	int count = int( m_Notebook->GetPageCount() );
+	size_t count = m_Notebook->GetPageCount();
 	DBOUT( "MadEditFrame::SaveFile("<<pageId<<", "<< saveas <<", "<<hideDlg<<")\n" );
 
 	if(pageId >= 0 && pageId < count)
@@ -5504,8 +5503,8 @@ void MadEditFrame::OnFileSaveAll( wxCommandEvent& event )
 		{ return; }
 	}
 
-	int count = int( m_Notebook->GetPageCount() );
-	int id = 0, sid = selid;
+	size_t count = m_Notebook->GetPageCount();
+	size_t id = 0, sid = selid;
 
 	do
 	{
@@ -8042,7 +8041,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 
 		// SpellChecker
 		SpellCheckerManager::Instance().Save();
-		int count = int( m_Notebook->GetPageCount() );
+		size_t count = m_Notebook->GetPageCount();
 
 		for( int i = 0; i < count; ++i )
 		{
@@ -9356,7 +9355,7 @@ void MadEditFrame::OnToolsXMLFormat( wxCommandEvent& event )
 
 void MadEditFrame::OnWindowToggleWindow( wxCommandEvent& event )
 {
-	int count = int( m_Notebook->GetPageCount() );
+	size_t count = m_Notebook->GetPageCount();
 
 	if( count <= 1 ) { return; }
 
@@ -9831,8 +9830,8 @@ void MadEditFrame::OnSearchQuickFindNext( wxCommandEvent& event )
 
 void MadEditFrame::OnTimer(wxTimerEvent& event)
 {
-	int count = int( m_Notebook->GetPageCount() );
-	int id = 0;
+	size_t count = m_Notebook->GetPageCount();
+	size_t id = 0;
 
 	while(id < count )
 	{
