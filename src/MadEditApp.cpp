@@ -582,10 +582,24 @@ bool MadEditApp::OnCmdLineParsed( wxCmdLineParser& cmdParser )
 	// to get at your unnamed parameters use GetParam
 	int flags = wxDIR_FILES | wxDIR_HIDDEN;
 	wxString fname;
+#ifdef __WXMSW__
+	wxString escape(wxT("\\\\")),tfname;
+#endif
 
 	for( size_t i = 0; i < cmdParser.GetParamCount(); i++ )
 	{
 		fname = cmdParser.GetParam( i );
+#ifdef __WXMSW__
+		if( fname.StartsWith(escape, &tfname) )
+		{
+			tfname.Replace(escape, wxString(wxT("\\")));
+			fname = escape + tfname;
+		}
+		else
+		{
+			fname.Replace(escape, wxString(wxT("\\")));
+		}
+#endif
 		wxFileName filename(fname);
 
 		filename.MakeAbsolute();

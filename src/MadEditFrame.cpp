@@ -3436,6 +3436,7 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 		if( QueryCloseAllFiles() == false )
 		{
 			event.Veto( true );
+			m_Closing = false;
 			return;
 		}
 	}
@@ -3770,7 +3771,6 @@ void MadEditFrame::OnNotebookPageChanged( wxAuiNotebookEvent& event )
 	g_ActiveMadEdit = ( MadEdit* )m_Notebook->GetPage( m_Notebook->GetSelection() );
 	int now = event.GetSelection();
 	int old = event.GetOldSelection();
-	//int count = int( m_Notebook->GetPageCount() );
 
 	if( event.GetEventObject() == this )
 	{

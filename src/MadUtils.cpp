@@ -168,7 +168,7 @@ HtmlColor HtmlColorTable[]=
 	{ wxT("Yellow"),			   255,255,0 },
 	{ wxT("YellowGreen"),		   154,205,50 }
 };
-const int HtmlColorTableCount= sizeof(HtmlColorTable) /	sizeof(HtmlColor);
+const int HtmlColorTableCount= sizeof(HtmlColorTable) / sizeof(HtmlColor);
 
 void SetHtmlColors()
 {
@@ -228,7 +228,6 @@ wxString GetExecutablePath()
 
 	return path;
 }
-
 
 static long MadNewIDRange(long begin, size_t count)
 {

@@ -123,7 +123,8 @@ New: Syntax highlight support for YAML, YANG
 New: New Astyle options support(indent-after-parens, attach-closing-while)
 Fix: Minor bug on OpenFile again
 Fix: Can not copy the first item in Copy All results
-FIx: Change Astyle config according to official change(bracket to brace)
+Fix: Change Astyle config according to official change(bracket to brace)
+Fix: Could not close MadEdit-Mod if you canceled in the first time
 Code improvement for 64 bits system
 Update Hunspell to 1.6.1
 Update Astyle to 3.0
@@ -137,9 +138,9 @@ Mod v0.4.7
 5. Fix: Crash while Windows shutdown(wxWidgets issue)
 6. Fix: Crash because of Astyle assertion failure at line 3229, ASFormatter.cpp(https://sourceforge.net/p/astyle/bugs/422/)
 7. Fix: Cannot open documents on the network server #228
-8.Use standalone boost python to replace boost one(No need to compile boost anymore)
-9.Use Bind to replace event table in MadEditframe to fix potentail issues
-10.Update Simplified Chinese translation
+8. Use standalone boost python to replace boost one(No need to compile boost anymore)
+9. Use Bind to replace event table in MadEditframe to fix potentail issues
+10. Update Simplified Chinese translation
 
 Mod v0.4.6
 This release is mainly for more encodings support, especially GB18030 and Regex bug fix
@@ -162,12 +163,12 @@ This release is mainly for more encodings support, especially GB18030 and Regex 
 17. Fix: Adjust encoding group according to MSDN
 18. Fix: Adjust toolbar position #225
 19. Fix: UI issue of Source formatter tab in Option dialog
-20.Update Simplified Chinese translation
-21.Update boost to 1.62
-22.Update chardetector to latest uchardet v0.0.6
-23.Update Hunspell to 1.6
-24.Update Python to 2.7.13
-25.Other minor improvements
+20. Update Simplified Chinese translation
+21. Update boost to 1.62
+22. Update chardetector to latest uchardet v0.0.6
+23. Update Hunspell to 1.6
+24. Update Python to 2.7.13
+25. Other minor improvements
 
 Mod v0.4.5
 1. New: File history dialog
@@ -186,8 +187,8 @@ Mod v0.4.5
 10. Fix: Some illegal chars in file name(eg, 0xFFF0~0xFFFF) would cause wxWidgets crash
 11. Fix: a bug when move up #217
 12. Fix: Crash if close the last file by double clicking page tab #218
-13.Other improvements
-14.Update translation
+13. Other improvements
+14. Update translation
 
 Mod v0.4.4
 1. New: Set toolbar to 3 columns to let user who has a small display have a chance to re-org the toolbars
@@ -204,11 +205,11 @@ Mod v0.4.4
 12. Fix: Group Bookmark tools to SearchReplace Toolbar
 13. Fix: Some config would be overidded
 14. Fix: When I paste some lines, the typewrite mode is not working #209 
-15.Add more Icons
-16.Update license information
-17.Update Greek Translation
-18.Update MiniPython to Python 2.7.12
-19.Upadate Astyle to latest
+15. Add more Icons
+16. Update license information
+17. Update Greek Translation
+18. Update MiniPython to Python 2.7.12
+19. Upadate Astyle to latest
 Note: The Quick search bar would be larger than expected because of removing the recent file list button. Please reset the
 toolbar (and re-arrange it---it would be saved) by Tools->Purge History->Reset Toolbar position
 
@@ -236,10 +237,10 @@ Mod v0.4.3
 21. Fix: Assertion failure of FindInFilesDialog
 22. Fix: Assertion failure of MadMacroDlg
 23. Fix: Improve 80 column indicator
-24.Other code improvement
-25.Upgrade boost to 1.61
-26.Update hunspell to 1.41
-27.Update Chinese translation
+24. Other code improvement
+25. Upgrade boost to 1.61
+26. Update hunspell to 1.41
+27. Update Chinese translation
 
 Mod v0.4.2.1
 1. New: Ctrl-A to select all items in the Window List dialog
@@ -248,7 +249,7 @@ Mod v0.4.2.1
 4. Fix: Multiple selection does not work with Save/SaveAs(Windows List dialog) #193
 5. Fix: Extra scroll issue while pressing enter key in Typewriter mode introduced by 0.4.2
 6. Fix: Can't disable Autosave once enabled
-7.Increase input area by decreasing right margin of the single line edit
+7. Increase input area by decreasing right margin of the single line edit
 
 Mod v0.4.2
 1. New: Hope MadEdit-Mod could load more open files history than 9 #179
@@ -267,9 +268,9 @@ Mod v0.4.2
 14. Fix: Bug of wxGenericTreeCtrl(Fixed in wxWidgets 3.1) #136
 15. Fix: Initial size of the input box(SearchReplace dialog) is not updated #191
 16. Fix: File name in history list would be empty if you save a newly created file #192
-17.Fix various minor issues
-18.Update wxWidgets to 3.1.0
-19.Update translation
+17. Fix various minor issues
+18. Update wxWidgets to 3.1.0
+19. Update translation
 
 Mod v0.4.1
 1. New: Enhancement on Results(Delete items, collapse items) #138
@@ -294,7 +295,7 @@ Mod v0.4.1
 20. Fix: Need to toggle the QuickSearch Bar more simply #172
 21. Fix: Macro recording should set position before recording the command #174
 22. Fix: Several issues of Macro Recording related to string input
-23.Update translation
+23. Update translation
 
 Mod v0.4.0
 1.Improve performance of script recording
@@ -316,10 +317,10 @@ Mod v0.4.0
 17. Fix: Another bug about number highlight in 0.4.0 preview #127
 18. Fix: Enhanced ctrl+g & ctrl+shift+g and more #128 Support '+/-' as relative offset to current caret position/line
 19. Fix: Can't work with CPPCheck 1.72 #134
-20.Add documents(CN) for Python simplification
-21.Update boost to 1.60
-22.Update Python to 2.7.11
-23.Other minor improvements
+20. Add documents(CN) for Python simplification
+21. Update boost to 1.60
+22. Update Python to 2.7.11
+23. Other minor improvements
 
 Mod v0.3.10
 1. New: Support "Dot(".") match new line", default behavior is changed to NOT match new line #98
@@ -336,9 +337,9 @@ Mod v0.3.10
 12. Fix: Should not call Reload on exiting #109
 13. Fix: Should rarely need to use wxConvLocal directly in MadPython #111
 14. Fix: Tab/Return/BackSpace was not recorded in MadPython #114
-15.Improve performance of script recording
-16.Update Astyle to latest code
-17.Update translations
+15. Improve performance of script recording
+16. Update Astyle to latest code
+17. Update translations
 
 Mod v0.3.9
 1.Improve on change syntax on save as
@@ -360,7 +361,7 @@ Mod v0.3.9
 17. Fix: Update MadPython Syntax
 18. Fix: Update Translations
 19. Fix: Update Documents
-20.Other minor improvements
+20. Other minor improvements
 
 Mod v0.3.8
 1. New: Upgrade boost to 1.59
@@ -408,7 +409,7 @@ Mod v0.3.8
 29. Fix: Fix Astyle config could not be saved
 30. Fix: Add Readonly check in MadPython before actually run
 31. Fix: Assertion failure at MadLines.cpp:2829
-32.Other minor improvements
+32. Other minor improvements
 
 Mod v0.3.7
 1. New: Column Align Right(Selected text would be aligned according to right)
@@ -473,7 +474,7 @@ Mod v0.3.5
 2. New: Open/edit saved MadMacro script
 3. New: Build time shown on About Dialog
 4. New: Copy the first word instead of the whole selection for search/replace/spell check
-5.Update translation
+5. Update translation
 6. Fix: Enable line breaking to enable disable 2 belows
 7. Fix: Pad empty lines function in Astyle configs
 8. Fix: XML formatting config GUI
@@ -499,8 +500,7 @@ Mod v0.3.4
 2. New: Automatically raise window after closing Search/Replace/FindInFiles dialog
 3. New: GTK+ version selection supported(--with-gtk=[VERSION]), 2 and 3 are supported
 4. New: Astyle is integrated for formatting C/C++/C#/Java code(Ctrl-Shift-K)
-5.Updated Simplified Chinese
-
+5. Updated Simplified Chinese
 
 Mod v0.3.3.1
 1. Fix: ReplaceTextAll being recorded as FindTextAll
