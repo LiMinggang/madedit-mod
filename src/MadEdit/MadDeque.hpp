@@ -359,7 +359,6 @@ public:
 			++m_begin_iterator;
 		}
 		m_size = 0;
-		m_last_buffer = m_first_buffer,
 		m_begin_iterator.buf = m_first_buffer;
 		m_begin_iterator.ptr = m_first_buffer->begin;
 		m_end_iterator = m_begin_iterator;
