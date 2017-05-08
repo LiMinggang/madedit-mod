@@ -559,7 +559,7 @@ void MadHighlightingDialog::WxListCtrlKeywordSelected(wxListEvent& event)
         WxButtonFC->Enable();
         WxListCtrlBC->Disable();
         WxButtonBC->Disable();
-        bgc==wxNullColour;
+        bgc=wxNullColour;
         break;
     case kindRange:
         WxCheckBoxBold->SetValue(false);

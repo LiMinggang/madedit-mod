@@ -12,11 +12,11 @@ template <typename T>
 class MadDeque
 {
 public:
-	typedef	T value_type;
-	typedef	T& reference;
-	typedef	const T& const_reference;
-	typedef	T* pointer;
-	typedef	size_t size_type;
+	typedef T value_type;
+	typedef T& reference;
+	typedef const T& const_reference;
+	typedef T* pointer;
+	typedef size_t size_type;
 
 private:
 	struct buffer
@@ -25,8 +25,8 @@ private:
 		MadDeque<T> *mdeque;
 		T* begin;
 		T* end;
-		buffer*	prev;
-		buffer*	next;
+		buffer* prev;
+		buffer* next;
 		buffer(MadDeque<T> *d) :
 			mdeque(d),
 			begin( (T*) operator new(N * sizeof(T))),
@@ -44,18 +44,18 @@ private:
 public:
 	struct iterator
 	{
-		typedef	typename MadDeque::value_type value_type;
-		typedef	typename MadDeque::reference reference;
-		typedef	typename MadDeque::const_reference const_reference;
-		typedef	typename MadDeque::pointer pointer;
-		typedef	typename MadDeque::size_type size_type;
-		typedef	size_type difference_type;
-		typedef	std::random_access_iterator_tag	iterator_category;
+		typedef typename MadDeque::value_type value_type;
+		typedef typename MadDeque::reference reference;
+		typedef typename MadDeque::const_reference const_reference;
+		typedef typename MadDeque::pointer pointer;
+		typedef typename MadDeque::size_type size_type;
+		typedef size_type difference_type;
+		typedef std::random_access_iterator_tag iterator_category;
 
 		buffer *buf;
 		T* ptr;
 
-		iterator() : buf(NULL),	ptr(NULL) {}
+		iterator() : buf(NULL), ptr(NULL) {}
 		iterator(buffer *b, T* p) : buf(b), ptr(p) {}
 		iterator(const iterator& it) : buf(it.buf), ptr(it.ptr) {}
 
@@ -79,7 +79,6 @@ public:
 		{
 			return (ptr != it.ptr) || (buf != it.buf);
 		}
-
 		iterator& operator+=(difference_type off)
 		{
 			if(off != 0)
@@ -145,7 +144,6 @@ public:
 			--(*this);
 			return it;
 		}
-
 		iterator operator+(difference_type off)
 		{
 			iterator it = *this;
@@ -234,7 +232,7 @@ public:
 	}
 
 private:
-	void init(const	MadDeque& d)
+	void init(const MadDeque& d)
 	{
 		clear(); // destroy old T
 		if(!d.empty())
@@ -275,14 +273,12 @@ public:
 		}
 		free_buffer();
 	}
-
 	MadDeque& operator=(const MadDeque& d)
 	{
 		init(d);
 		return *this;
 	}
-
-	bool operator==(const MadDeque&	d) const
+	bool operator==(const MadDeque& d) const
 	{
 		if(m_size != d.m_size) return false;
 		if(m_size == 0)	return true;
@@ -300,7 +296,6 @@ public:
 	{
 		return !this->operator==(d);
 	}
-
 	iterator begin() const
 	{
 		return m_begin_iterator;
@@ -321,7 +316,7 @@ public:
 	{
 		return *get_pointer(n);
 	}
-	const_reference	operator[](size_type n) const
+	const_reference operator[](size_type n) const
 	{
 		return *get_pointer(n);
 	}
@@ -334,7 +329,7 @@ public:
 		iterator it = m_end_iterator;
 		return *--it;
 	}
-	void push_back(const T&	x)
+	void push_back(const T& x)
 	{
 		new(m_end_iterator.ptr) T(x);
 		++m_end_iterator;
@@ -364,6 +359,7 @@ public:
 			++m_begin_iterator;
 		}
 		m_size = 0;
+		m_last_buffer = m_first_buffer,
 		m_begin_iterator.buf = m_first_buffer;
 		m_begin_iterator.ptr = m_first_buffer->begin;
 		m_end_iterator = m_begin_iterator;

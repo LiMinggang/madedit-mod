@@ -912,7 +912,7 @@ public:
 	{
 		int x, y, idx;
 		MadEdit *madedit;
-		PageData() {}
+		PageData(): x( 0 ), y( 0 ), idx( 0 ), madedit( nullptr ) {}
 		PageData( int xx, int yy, int ii, MadEdit *mm )
 			: x( xx ), y( yy ), idx( ii ), madedit( mm )
 		{}

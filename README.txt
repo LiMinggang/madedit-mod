@@ -125,7 +125,8 @@ Fix: Minor bug on OpenFile again
 Fix: Can not copy the first item in Copy All results
 Fix: Change Astyle config according to official change(bracket to brace)
 Fix: Could not close MadEdit-Mod if you canceled in the first time
-Fix: Double backslash in path(Windows)
+Fix: Bugs found by CppCheck
+Fix: Can't open file having double backslash in path(Windows)
 Code improvement for 64 bits system
 Update Hunspell to 1.6.1
 Update Astyle to 3.0

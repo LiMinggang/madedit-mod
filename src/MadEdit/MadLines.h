@@ -214,7 +214,7 @@ struct BracePairIndex
 	wxByte       LeftPair;   // non-zero: leftpair, zero: rightpair
 	char         BraceIndex; //
 
-	BracePairIndex()
+	BracePairIndex(): XPos( 0 ), Width( 0 ), LinePos( 0 ), Length( 0 ), LeftPair( 0 ), BraceIndex( 0 )
 	{}
 
 	BracePairIndex( int xpos, wxUint16 wid, wxFileOffset lpos, wxUint16 len, wxByte lp, char bi )

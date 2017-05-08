@@ -1301,10 +1301,13 @@ namespace mad_python {
 		}
 
 		void CutToClipboard() {
-			if( ( g_ActiveMadEdit ) && ( !g_ActiveMadEdit->IsReadOnly() ) )
-			{ g_ActiveMadEdit->CutToClipboard(); }
-			else
-			{ g_ActiveMadEdit->CopyToClipboard(); }
+			if( g_ActiveMadEdit )
+			{
+				if( !g_ActiveMadEdit->IsReadOnly() )
+				{ g_ActiveMadEdit->CutToClipboard(); }
+				else
+				{ g_ActiveMadEdit->CopyToClipboard(); }
+			}
 		}
 
 		void CopyToClipboardA() {
@@ -1406,7 +1409,7 @@ namespace mad_python {
 						  long rangeFrom = -1, long rangeTo = -1 ) {
 			long ok = SR_EXPR_ERROR;
 
-			if( ( !text.empty() ) && ( g_ActiveMadEdit ) ) {
+			if( ( g_ActiveMadEdit ) && ( !text.empty() ) ) {
 				wxString wxText( text.c_str(), *wxConvCurrent );
 				wxFileOffset from = ( wxFileOffset )rangeFrom, to = ( wxFileOffset )rangeTo;
 				
@@ -1424,7 +1427,7 @@ namespace mad_python {
 							  long rangeFrom = -1, long rangeTo = -1 ) {
 			long ok = SR_EXPR_ERROR;
 
-			if( ( !text.empty() ) && ( g_ActiveMadEdit ) ) {
+			if( ( g_ActiveMadEdit ) && ( !text.empty() ) ) {
 				wxString wxText( text.c_str(), *wxConvCurrent );
 				wxFileOffset from = ( wxFileOffset )rangeFrom, to = ( wxFileOffset )rangeTo;
 				
@@ -1440,7 +1443,7 @@ namespace mad_python {
 		long FindHexNext( const std::string &hexstr, long rangeFrom = -1, long rangeTo = -1 ) {
 			long ok = SR_EXPR_ERROR;
 
-			if( ( !hexstr.empty() ) && ( g_ActiveMadEdit ) ) {
+			if( ( g_ActiveMadEdit ) && ( !hexstr.empty() ) ) {
 				wxString wxHexExpr( hexstr.c_str(), *wxConvCurrent );
 				wxFileOffset from = ( wxFileOffset )rangeFrom, to = ( wxFileOffset )rangeTo;
 				ok = g_ActiveMadEdit->FindHexNext( wxHexExpr, from, to );
@@ -1453,7 +1456,7 @@ namespace mad_python {
 		long FindHexPrevious( const std::string &hexstr, long rangeFrom = -1, long rangeTo = -1 ) {
 			long ok = SR_EXPR_ERROR;
 
-			if( ( !hexstr.empty() ) && ( g_ActiveMadEdit ) ) {
+			if( ( g_ActiveMadEdit ) && ( !hexstr.empty() ) ) {
 				wxString wxHexExpr( hexstr.c_str(), *wxConvCurrent );
 				wxFileOffset from = ( wxFileOffset )rangeFrom, to = ( wxFileOffset )rangeTo;
 				ok = g_ActiveMadEdit->FindHexPrevious( wxHexExpr, from, to );
@@ -1517,7 +1520,7 @@ namespace mad_python {
 							long rangeFrom = -1, long rangeTo = -1 ) {
 			long ok = 0;
 
-			if( ( !expr.empty() ) && ( g_ActiveMadEdit ) && ( !g_ActiveMadEdit->IsReadOnly() ) ) {
+			if( ( g_ActiveMadEdit ) && ( !expr.empty() ) && ( !g_ActiveMadEdit->IsReadOnly() ) ) {
 				wxString wxExpr( expr.c_str(), *wxConvCurrent ), wxFmt( fmt.c_str(), *wxConvCurrent );
 				
 				if(bRegex) bWholeWord = false;
@@ -1533,7 +1536,7 @@ namespace mad_python {
 						   long rangeFrom = -1, long rangeTo = -1 ) {
 			long ok = 0;
 
-			if( ( !expr.empty() ) && ( g_ActiveMadEdit ) && ( !g_ActiveMadEdit->IsReadOnly() ) ) {
+			if( ( g_ActiveMadEdit ) && ( !expr.empty() ) && ( !g_ActiveMadEdit->IsReadOnly() ) ) {
 				wxString wxExpr( expr.c_str(), *wxConvCurrent ), wxFmt( fmt.c_str(), *wxConvCurrent );
 				ok = g_ActiveMadEdit->ReplaceHexAll( wxExpr, wxFmt, NULL, NULL, ( wxFileOffset )rangeFrom, ( wxFileOffset )rangeTo );
 			}
