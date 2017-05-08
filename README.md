@@ -64,9 +64,17 @@ News
 Mod v0.4.8
 * New: Copy file name without extention
 * New: Syntax highlight support for YAML, YANG
+* New: New Astyle options support(indent-after-parens, attach-closing-while)
 * Fix: Minor bug on OpenFile again
 * Fix: Can not copy the first item in Copy All results
+* Fix: Change Astyle config according to official change(bracket to brace)
+* Fix: Could not close MadEdit-Mod if you canceled in the first time
+* Fix: Bugs found by CppCheck
+* Fix: Can't open file having double backslash in path(Windows)
+* Code improvement for 64 bits system
 * Update Hunspell to 1.6.1
+* Update Astyle to 3.0
+* Update Simplified Chinese translation
 
 Mod v0.4.7
 * New: Astyle 2.06 new option support
