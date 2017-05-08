@@ -583,7 +583,7 @@ bool MadEditApp::OnCmdLineParsed( wxCmdLineParser& cmdParser )
 	int flags = wxDIR_FILES | wxDIR_HIDDEN;
 	wxString fname;
 #ifdef __WXMSW__
-	wxString escape(wxT("\\\\")),tfname;
+	wxString escape(wxT("\\\\")), tfname, backslash(wxT("\\"));
 #endif
 
 	for( size_t i = 0; i < cmdParser.GetParamCount(); i++ )
@@ -592,12 +592,12 @@ bool MadEditApp::OnCmdLineParsed( wxCmdLineParser& cmdParser )
 #ifdef __WXMSW__
 		if( fname.StartsWith(escape, &tfname) )
 		{
-			tfname.Replace(escape, wxString(wxT("\\")));
+			tfname.Replace(escape, backslash);
 			fname = escape + tfname;
 		}
 		else
 		{
-			fname.Replace(escape, wxString(wxT("\\")));
+			fname.Replace(escape, backslash);
 		}
 #endif
 		wxFileName filename(fname);
