@@ -169,7 +169,7 @@ void MadWinListDialog::SaveFile(bool saveas/* = false*/)
 		items.push_back(item);
 	}
 	
-	for(int i = 0; i < items.size(); ++i)
+	for(size_t i = 0; i < items.size(); ++i)
 	{
 		long pageId = static_cast<long>(MadWindowsList->GetItemData(items[i]));
 		m_MainFrame->SaveFile(pageId, saveas);
@@ -207,7 +207,7 @@ void MadWinListDialog::OnButtonCloseWindowsClick(wxCommandEvent& event)
 	std::sort(items.begin(), items.end(), std::greater<long>());
 	std::sort(pages.begin(), pages.end(), std::greater<long>());
 
-	for(int i = 0; i < items.size(); ++i)
+	for(size_t i = 0; i < items.size(); ++i)
 	{
 		MadWindowsList->DeleteItem(items[i]);
 		m_MainFrame->CloseFile(pages[i]);
@@ -283,7 +283,7 @@ void MadWinListDialog::SortTabs(long column)
 			notebookp->RemovePage( 0 );
 		}
 
-		for( long id = 0; id < count; ++id )
+		for( size_t id = 0; id < count; ++id )
 		{
 			tname = nameMap[colname[id]];
 			notebookp->AddPage( medits[id], tname, false);

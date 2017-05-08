@@ -7964,7 +7964,7 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 							if((!m_SingleLineMode) && IsMacroRecording())
 							{
 								wxString tp;
-								for(int i = 0; i < spaces.size(); ++i)
+								for(size_t i = 0; i < spaces.size(); ++i)
 								{
 									tp << wxChar(spaces[i]);
 								}
