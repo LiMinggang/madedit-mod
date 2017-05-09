@@ -1812,7 +1812,7 @@ void MadEdit::PaintText( wxDC *dc, int x, int y, const ucs4_t *text, const int *
 			*pwc = uc;
 			*pwcw = ucw;
 
-			if( nowleftend == false && nowleft + ucw < minleft )
+			if(( nowleftend == false ) && (( nowleft + ucw ) < minleft ))
 			{
 				nowleft += ucw ;
 				wcstart++;
@@ -1831,7 +1831,7 @@ void MadEdit::PaintText( wxDC *dc, int x, int y, const ucs4_t *text, const int *
 			*pwcw = 0;
 			++wcount;
 
-			if( nowleftend == false && nowleft + ucw < minleft )
+			if(( nowleftend == false ) && (( nowleft + ucw ) < minleft ))
 			{
 				nowleft += ucw ;
 				wcstart += 2;
@@ -1871,7 +1871,7 @@ void MadEdit::PaintText( wxDC *dc, int x, int y, const ucs4_t *text, const int *
 			int ucw = *pw++;
 			totalwidth += ucw;
 
-			if( nowleftend == false && nowleft + ucw < minleft )
+			if(( nowleftend == false ) && (( nowleft + ucw ) < minleft ))
 			{
 				nowleft += ucw ;
 				++wcstart;

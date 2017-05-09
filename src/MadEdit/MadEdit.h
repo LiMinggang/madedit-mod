@@ -24,6 +24,9 @@
 #include <string>
 #if __cplusplus <= 199711L
 	#include <boost/shared_ptr.hpp>
+#ifndef nullptr
+	#define nullptr (0)
+#endif
 #else
 	#include <memory>
 #endif

@@ -20,8 +20,12 @@
 #if __cplusplus <= 199711L
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
+#ifndef emplace_back
 #define emplace_back push_back
+#endif
+#ifndef nullptr
 #define nullptr (0)
+#endif
 #endif
 
 #include <cctype>

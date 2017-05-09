@@ -51,8 +51,8 @@ wxString MadRecentList::NormalizeFileName(const wxFileName& fn)
 #endif
 // Recent List management
 void MadRecentList::AddFileToHistory(const wxString& file)
-#if (wxMAJOR_VERSION < 3)
 {
+#if (wxMAJOR_VERSION < 3)
     size_t i;
 
     // Check we don't already have this item
@@ -118,9 +118,7 @@ void MadRecentList::AddFileToHistory(const wxString& file)
             }
         }
     }
-}
 #else
-{
     // Check if we don't already have this file. Notice that we avoid
     // wxFileName::operator==(wxString) here as it converts the string to
     // wxFileName and then normalizes it using all normalizations which is too
@@ -192,6 +190,6 @@ void MadRecentList::AddFileToHistory(const wxString& file)
             menu->SetLabel(m_idBase + i, GetMRUEntryLabel(i, pathInMenu));
         }
     }
-}
 #endif
+}
 
