@@ -71,10 +71,12 @@ Mod v0.4.8
 * Fix: Could not close MadEdit-Mod if you canceled in the first time
 * Fix: Bugs found by CppCheck
 * Fix: Can't open file having double backslash in path(Windows)
+* Fix: Caret is not correctly displayed(0.4.7, WinX64) #231
 * Code improvement for 64 bits system
 * Update Hunspell to 1.6.1
 * Update Astyle to 3.0
 * Update Simplified Chinese translation
+
 
 Mod v0.4.7
 * New: Astyle 2.06 new option support
