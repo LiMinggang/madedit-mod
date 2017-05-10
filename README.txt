@@ -127,7 +127,7 @@ Fix: Change Astyle config according to official change(bracket to brace)
 Fix: Could not close MadEdit-Mod if you canceled in the first time
 Fix: Bugs found by CppCheck
 Fix: Can't open file having double backslash in path(Windows)
-Fix: Caret is not correctly drawed(0.4.7) #231
+Fix: Caret is not correctly displayed(0.4.7, WinX64) #231
 Code improvement for 64 bits system
 Update Hunspell to 1.6.1
 Update Astyle to 3.0
