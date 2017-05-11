@@ -247,7 +247,7 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	BoxSizerSearch->Add( m_FindText, 1, wxEXPAND | wxALIGN_LEFT | wxALL, 2 );
 	BoxSizerSearch->SetItemMinSize( m_FindText, 400, bh );
 	wxBitmap WxBitmapButtonRecentFindText_BITMAP( down_xpm );
-	WxBitmapButtonRecentFindText = new wxBitmapButton( this, ID_WXBITMAPBUTTONRECENTFINDTEXT, WxBitmapButtonRecentFindText_BITMAP, wxPoint( 0, 0 ), wxSize( bh, bh ), wxBU_AUTODRAW, wxDefaultValidator, _( "WxBitmapButtonRecentFindText" ) );
+	WxBitmapButtonRecentFindText = new wxBitmapButton( this, ID_WXBITMAPBUTTONRECENTFINDTEXT, WxBitmapButtonRecentFindText_BITMAP, wxPoint( 0, 0 ), wxSize( bh, bh ), wxBU_AUTODRAW, wxDefaultValidator, _T( "WxBitmapButtonRecentFindText" ) );
 	BoxSizerSearch->Add( WxBitmapButtonRecentFindText, 0, wxALL, 2 );
 	// replace
 	WxButtonReplace->GetSize( &bw, &bh );
@@ -269,7 +269,7 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	m_ReplaceText->SetShowTabChar( true );
 	BoxSizerReplace->Add( m_ReplaceText, 1, wxEXPAND | wxALIGN_LEFT | wxALL, 2 );
 	BoxSizerReplace->SetItemMinSize( m_ReplaceText, 400, bh );
-	WxBitmapButtonRecentReplaceText = new wxBitmapButton( this, ID_WXBITMAPBUTTONRECENTREPLACETEXT, WxBitmapButtonRecentFindText_BITMAP, wxPoint( 0, 0 ), wxSize( bh, bh ), wxBU_AUTODRAW, wxDefaultValidator, _( "WxBitmapButtonRecentReplaceText" ) );
+	WxBitmapButtonRecentReplaceText = new wxBitmapButton( this, ID_WXBITMAPBUTTONRECENTREPLACETEXT, WxBitmapButtonRecentFindText_BITMAP, wxPoint( 0, 0 ), wxSize( bh, bh ), wxBU_AUTODRAW, wxDefaultValidator, _T( "WxBitmapButtonRecentReplaceText" ) );
 	BoxSizerReplace->Add( WxBitmapButtonRecentReplaceText, 0, wxALL, 2 );
 
 	// connect to KeyDown event handler
