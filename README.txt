@@ -131,6 +131,7 @@ Fix: Caret is not correctly displayed(0.4.7, WinX64) #231
 Code improvement for 64 bits system
 Update Hunspell to 1.6.1
 Update Astyle to 3.0
+Update boost_python to boost 1.64
 Update Simplified Chinese translation
 
 Mod v0.4.7
