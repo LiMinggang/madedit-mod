@@ -5424,7 +5424,7 @@ void MadEditFrame::SaveFile(size_t pageId, bool saveas/* = false*/, bool hideDlg
 	size_t count = m_Notebook->GetPageCount();
 	DBOUT( "MadEditFrame::SaveFile("<<pageId<<", "<< saveas <<", "<<hideDlg<<")\n" );
 
-	if(pageId >= 0 && pageId < count)
+	if(/*pageId >= 0 && */pageId < count)
 	{
 		wxString name = m_Notebook->GetPageText( pageId );
 		

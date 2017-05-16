@@ -528,6 +528,7 @@ bool MadEditApp::OnInit()
 			}
 		}
 
+		SetTopWindow(myFrame);
 		if( !bSingleInstance )
 		{
 			OnExit(); // Clean up
