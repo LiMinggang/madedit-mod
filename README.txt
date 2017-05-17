@@ -128,7 +128,7 @@ Fix: Could not close MadEdit-Mod if you canceled in the first time
 Fix: Bugs found by CppCheck
 Fix: Can't open file having double backslash in path(Windows)
 Fix: Caret is not correctly displayed(0.4.7, WinX64) #231
-Fix: Caret in column mode is not a line if linespacing greater than 100%
+Fix: Bug 101030 & 101031of uchardet
 Code improvement for 64 bits system
 Update Hunspell to 1.6.1
 Update Astyle to 3.0
