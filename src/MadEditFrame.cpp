@@ -419,7 +419,7 @@ wxMenu ** g_Menus[] =
 	&g_Menu_View_LineSpacing, &g_Menu_Tools_BOM, &g_Menu_Tools_NewLineChar,
 	&g_Menu_Tools_InsertNewLineChar, &g_Menu_Tools_ConvertChineseChar,
 	&g_Menu_Tools_TextConvFormatter, &g_Menu_MadMacro, &g_Menu_MadMacro_Scripts, &g_Menu_MadMacro_ScriptsPop, 
-	&g_Menu_Toolbars, &g_Menu_VScrollPop, &g_Menu_HScrollPop, 
+	&g_Menu_Toolbars, 
 };
 
 wxArrayString g_FontNames;
@@ -1506,6 +1506,9 @@ void OnEditMouseRightUp( MadEdit *madedit )
 
 void OnVScrollMouseRightUp( MadEdit *madedit )
 {
+	if(!g_Menu_VScrollPop)
+		g_MainFrame->InitMenu_VScrollPop();
+
 	if(madedit)
 	{
 		long pos = madedit->GetVSMousePos();
@@ -1519,6 +1522,8 @@ void OnVScrollMouseRightUp( MadEdit *madedit )
 
 void OnHScrollMouseRightUp( MadEdit *madedit )
 {
+	if(!g_Menu_HScrollPop)
+		g_MainFrame->InitMenu_HScrollPop();
 	if(madedit)
 	{
 		long pos = madedit->GetHSMousePos();
@@ -2558,6 +2563,44 @@ void LoadDefaultSettings( wxConfigBase *madConfig )
 
 
 bool MadEditFrame::m_Closing = false;
+void MadEditFrame::InitMenu_HScrollPop()
+{
+	PopMenuData * pd = &HScrollBarPop[0];
+	g_Menu_HScrollPop = new wxMenu( ( long )0 ); 
+
+	while(pd->menu_id >= 0)
+	{
+		if(pd->menu_id)
+		{
+			wxMenuItem *mit = new wxMenuItem( g_Menu_HScrollPop, pd->menu_id, wxGetTranslation(pd->text), wxGetTranslation( pd->hint ), wxITEM_NORMAL );
+			g_Menu_HScrollPop->Append(mit);
+		}
+		else
+		{
+			g_Menu_HScrollPop->AppendSeparator();
+		}
+		++pd;
+	}
+}
+
+void MadEditFrame::InitMenu_VScrollPop()
+{
+	PopMenuData * pd = &VScrollBarPop[0];
+	g_Menu_VScrollPop = new wxMenu( ( long )0 ); 
+	while(pd->menu_id >= 0)
+	{
+		if(pd->menu_id)
+		{
+			wxMenuItem *mit = new wxMenuItem( g_Menu_VScrollPop, pd->menu_id, wxGetTranslation(pd->text), wxGetTranslation( pd->hint ), wxITEM_NORMAL );
+			g_Menu_VScrollPop->Append(mit);
+		}
+		else
+		{
+			g_Menu_VScrollPop->AppendSeparator();
+		}
+		++pd;
+	}
+}
 
 MadEditFrame::MadEditFrame( wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style )
 	: wxFrame( parent, id, title, position, size, style ), m_AutoSaveTimer(this, ID_WXTIMER), m_ResetToolBars(false), m_ToggleReadOnly(0)
@@ -2652,6 +2695,7 @@ MadEditFrame::~MadEditFrame()
 {
 	if(m_AutoSaveTimout)
 		m_AutoSaveTimer.Stop();
+	if(g_PageSetupData) delete g_PageSetupData;
 }
 
 // not all ports have support for EVT_CONTEXT_MENU yet, don't define
@@ -3280,38 +3324,6 @@ void MadEditFrame::CreateGUIControls( void )
 				}
 			}
 		}
-	}
-
-	PopMenuData * pd = &VScrollBarPop[0];
-
-	while(pd->menu_id >= 0)
-	{
-		if(pd->menu_id)
-		{
-			wxMenuItem *mit = new wxMenuItem( g_Menu_VScrollPop, pd->menu_id, wxGetTranslation(pd->text), wxGetTranslation( pd->hint ), wxITEM_NORMAL );
-			g_Menu_VScrollPop->Append(mit);
-		}
-		else
-		{
-			g_Menu_VScrollPop->AppendSeparator();
-		}
-		++pd;
-	}
-
-	pd = &HScrollBarPop[0];
-
-	while(pd->menu_id >= 0)
-	{
-		if(pd->menu_id)
-		{
-			wxMenuItem *mit = new wxMenuItem( g_Menu_HScrollPop, pd->menu_id, wxGetTranslation(pd->text), wxGetTranslation( pd->hint ), wxITEM_NORMAL );
-			g_Menu_HScrollPop->Append(mit);
-		}
-		else
-		{
-			g_Menu_HScrollPop->AppendSeparator();
-		}
-		++pd;
 	}
 
 	Bind(wxEVT_MENU, &MadEditFrame::OnScrollBarMenu, this, menuVScrollHere, menuHScrollRight);

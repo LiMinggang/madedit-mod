@@ -11490,12 +11490,7 @@ void MadEdit::SetCaretType( MadCaretType type )
 	{
 	case ctVerticalLine:
 		if( m_EditMode != emHexMode )
-		{
-			if( m_EditMode == emTextMode )
-				GetCaret()->SetSize( 2, m_TextFontHeight );
-			else
-				GetCaret()->SetSize( 2, m_RowHeight );
-		}
+			GetCaret()->SetSize( 2, m_TextFontHeight );
 		else
 			GetCaret()->SetSize( 2, m_HexFontHeight );
 

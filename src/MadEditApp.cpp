@@ -529,7 +529,7 @@ bool MadEditApp::OnInit()
 		}
 
 		SetTopWindow(myFrame);
-		if( !bSingleInstance )
+		if( !bSingleInstance || m_Exit)
 		{
 			OnExit(); // Clean up
 			return false;
@@ -538,7 +538,8 @@ bool MadEditApp::OnInit()
 		// Waiting for -x to close
 	}
 
-	return true;
+	if(m_Exit) OnExit(); // Clean up
+	return !m_Exit;
 }
 
 int MadEditApp::OnExit()
@@ -546,12 +547,15 @@ int MadEditApp::OnExit()
 	// save settings in FrameClose();
 	if( m_SigleAppChecker )
 		delete m_SigleAppChecker;
+	m_SigleAppChecker = nullptr;
 
 	if( m_AppServer )
 		delete m_AppServer;
 
+	m_AppServer = nullptr;
 	if( g_Locale )
 		wxDELETE( g_Locale );
+	g_Locale = nullptr;
 
 	return 0;
 }
