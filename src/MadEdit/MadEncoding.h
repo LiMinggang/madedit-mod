@@ -19,7 +19,11 @@
 // Include your	minimal	set	of headers here, or	wx.h
 #include <wx/wx.h>
 #endif
-
+#if __cplusplus <= 199711L
+#ifndef nullptr
+#define nullptr (0)
+#endif
+#endif
 #include <wx/fontmap.h>
 #include <wx/string.h>
 #include "ucs4_t.h"
@@ -67,9 +71,15 @@ struct MadEncodingInfo
 	wxByte		   *m_LeadByte_Table;	 //	DBCS Lead-Byte table
 	std::vector<int>  m_GrpIdVec; //Filter Ids
 
+	MadEncodingInfo()
+		:m_Encoding(-1), m_Type(etUTF8),
+		m_CSConv(nullptr), m_MBtoWC_Table(nullptr), m_WCtoMB_Table(nullptr), m_LeadByte_Table(nullptr)
+	{
+	}
+
 	MadEncodingInfo(int e, const	wxString &n, const wxString	&de, MadEncodingType t,	const wxString &fn,	std::vector<int>& grp)
 		:m_Encoding(e),	m_Name(n), m_Description(de), m_FontName(fn), m_Type(t),
-		m_CSConv(NULL),	m_MBtoWC_Table(NULL), m_WCtoMB_Table(NULL),	m_LeadByte_Table(NULL),	m_GrpIdVec(grp)
+		m_CSConv(nullptr),	m_MBtoWC_Table(nullptr), m_WCtoMB_Table(nullptr),	m_LeadByte_Table(nullptr),	m_GrpIdVec(grp)
 	{
 	}
 };

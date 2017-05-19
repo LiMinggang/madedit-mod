@@ -370,14 +370,8 @@ wxFileOffset MadMemData::Put( wxByte * buffer, size_t size )
 // MadFileData
 //===========================================================================
 
-MadFileData::MadFileData( const wxString &name )
+MadFileData::MadFileData( const wxString &name ) : m_Size(0), m_OpenSuccess(true), m_Name(name), m_ReadOnly(false), m_Buffer1(nullptr), m_Buffer2(nullptr), m_Buf1Pos(-1), m_Buf2Pos(-1)
 {
-	m_Name = name;
-	m_Size = 0;
-	m_OpenSuccess = true;
-	m_ReadOnly = false;
-	m_Buffer1 = NULL;
-	m_Buffer2 = NULL;
 	int utf8test = MadFileNameIsUTF8( name );
 
 	if( utf8test == 0 ) // this file/dir is not exist

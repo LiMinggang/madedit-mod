@@ -4210,7 +4210,7 @@ bool MadEdit::PrintPage( wxDC *dc, int pageNum )
 	}
 	else //HexPrinting()
 	{
-		int toprow, rowcount;
+		int toprow = 0, rowcount = 0;
 
 		switch( m_PrintOffsetHeader )
 		{

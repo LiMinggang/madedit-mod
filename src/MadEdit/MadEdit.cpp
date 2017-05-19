@@ -1661,8 +1661,10 @@ void MadEdit::InvertRectManual( wxDC *dc, int x, int y, int w, int h )
 	wxImage img = bmp->ConvertToImage();
 	// invert data
 	unsigned char* olddata = img.GetData();
+	wxASSERT(olddata != NULL);
 	int size = w * h * 3;
 	unsigned char* newdata = ( unsigned char* )malloc( size );
+	wxASSERT(newdata != NULL);
 	int* pold = ( int* )olddata;
 	int* pnew = ( int* )newdata;
 
@@ -7462,7 +7464,7 @@ void MadEdit::FindBracePairUnderCaretPos()
 	vector <BracePairIndex>::iterator bit = m_CaretPos.iter->m_BracePairIndices.begin();
 	vector <BracePairIndex>::iterator bitend = m_CaretPos.iter->m_BracePairIndices.end();
 	wxFileOffset &linepos = m_CaretPos.linepos;
-	wxFileOffset rightpos;
+	wxFileOffset rightpos = -1;
 
 	while( bit != bitend )
 	{
