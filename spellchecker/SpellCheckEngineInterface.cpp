@@ -146,7 +146,7 @@ bool wxSpellCheckEngineInterface::AddOptionToMap(SpellCheckEngineOption& option)
 
 void wxSpellCheckEngineInterface::ApplyOptions()
 {
-    for (OptionsMap::iterator it = m_Options.begin(); it != m_Options.end(); it++)
+    for (OptionsMap::iterator it = m_Options.begin(); it != m_Options.end(); ++it)
     {
         SetOption(it->second);
     }
