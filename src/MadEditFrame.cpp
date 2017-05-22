@@ -4666,7 +4666,7 @@ bool MadEditFrame::QueryCloseAllFiles()
 				it = selectedItems.find(id);
 				if(it != selectedItems.end())
 				{
-					m_Notebook->SetSelection( id );
+					/*m_Notebook->SetSelection( id );
 					MadEdit *cme = ( MadEdit* )m_Notebook->GetPage( m_Notebook->GetSelection() );
 
 					if( cme != g_ActiveMadEdit )
@@ -4676,7 +4676,7 @@ bool MadEditFrame::QueryCloseAllFiles()
 						event.SetOldSelection( sid );
 						event.SetEventObject( this );
 						OnNotebookPageChanged( event );
-					}
+					}*/
 
 					fname = m_Notebook->GetPageText( id );
 
