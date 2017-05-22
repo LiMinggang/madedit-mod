@@ -786,12 +786,12 @@ MadEncoding *MadEncoding::GetSystemEncoding()
 	return ms_SystemEncoding;
 }
 
-MadEncoding::MadEncoding( size_t idx )
+MadEncoding::MadEncoding( size_t idx ) : m_Info(nullptr), m_CSConv(nullptr), m_MBtoWC_Table(nullptr), m_WCtoMB_Table(nullptr), m_LeadByte_Table(nullptr)
 {
 	Create( idx );
 }
 
-MadEncoding::MadEncoding( int enc )
+MadEncoding::MadEncoding( int enc ) : m_Info(nullptr), m_CSConv(nullptr), m_MBtoWC_Table(nullptr), m_WCtoMB_Table(nullptr), m_LeadByte_Table(nullptr)
 {
 	size_t idx;
 
@@ -810,7 +810,7 @@ MadEncoding::MadEncoding( int enc )
 	}
 }
 
-MadEncoding::MadEncoding( const wxString &name )
+MadEncoding::MadEncoding( const wxString &name ) : m_Info(nullptr), m_CSConv(nullptr), m_MBtoWC_Table(nullptr), m_WCtoMB_Table(nullptr), m_LeadByte_Table(nullptr)
 {
 	size_t idx;
 	wxString uname( name.Upper() );

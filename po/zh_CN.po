@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-11 12:19+0800\n"
-"PO-Revision-Date: 2017-05-11 12:26+0800\n"
+"PO-Revision-Date: 2017-05-19 12:46+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit-Mod <minggang.li@gmail.com>\n"
 "Language: zh_CN\n"
@@ -1548,7 +1548,7 @@ msgstr "语法类型："
 #: ../src/MadEditFrame.cpp:2159 ../src/MadEditFrame.cpp:4937
 #: ../src/MadEditFrame.cpp:4942
 msgid "Font Name: "
-msgstr "字型名称："
+msgstr "字体名称： "
 
 #: ../src/MadEditFrame.cpp:2166
 msgid "[other]"

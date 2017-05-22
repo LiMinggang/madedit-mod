@@ -1382,7 +1382,8 @@ void MadSyntax::InitNextWord2( MadLineIterator &lit, size_t row )
 		if( ( nw_State.rangeid = state.RangeId ) != 0 )
 		{
 			nw_SynRange = GetSyntaxRange( nw_State.rangeid );
-			nw_CurrentBgColor = nw_SynRange->bgcolor; // set bgcolor for empty lines
+			if(nw_SynRange)
+				nw_CurrentBgColor = nw_SynRange->bgcolor; // set bgcolor for empty lines
 
 			if( nw_CurrentBgColor == wxNullColour )
 			{

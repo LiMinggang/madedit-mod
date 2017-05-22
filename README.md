@@ -72,9 +72,11 @@ Mod v0.4.8
 * Fix: Bugs found by CppCheck
 * Fix: Can't open file having double backslash in path(Windows)
 * Fix: Caret is not correctly displayed(0.4.7, WinX64) #231
+* Fix: Bug 101030 & 101031 of uchardet
 * Code improvement for 64 bits system
 * Update Hunspell to 1.6.1
 * Update Astyle to 3.0
+* Update boost_python to boost 1.64
 * Update Simplified Chinese translation
 
 

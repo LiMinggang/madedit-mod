@@ -1852,11 +1852,11 @@ void MadEdit::WordCount( bool selection, int &wordCount, int &charCount, int &sp
 											   UnicodeBlocks[idx].begin, UnicodeBlocks[idx].end, wxGetTranslation( UnicodeBlocks[idx].description ) ) );
 			}
 		}
-	}
 
-	if( counts[UnicodeBlocksCount] > 0 )
-	{
-		detail->Add( wxString::Format( wxT( "%s %d    ? - ? %s" ), PrefixString( counts[idx] ).c_str(), counts[idx], _( "Invalid Unicode Characters" ) ) );
+		if( counts[UnicodeBlocksCount] > 0 )
+		{
+			detail->Add( wxString::Format( wxT( "%s %d    ? - ? %s" ), PrefixString( counts[idx] ).c_str(), counts[idx], _( "Invalid Unicode Characters" ) ) );
+		}
 	}
 }
 
@@ -1961,7 +1961,7 @@ MadLines *SortLineData::s_lines = NULL;
 MadLines::NextUCharFuncPtr SortLineData::s_NextUChar = NULL;
 
 SortLineData::SortLineData( const MadLineIterator& l, int id )
-	: lit( l ), lineid( id ), ucdata(), int_begin( -1 ), frac_begin( -1 ), negative( false )
+	: lit( l ), lineid( id ), ucdata(), int_begin( -1 ), int_len(-1), frac_begin( -1 ), frac_len(-1), negative( false )
 {
 	enum { NUM_SIGN, NUM_INT, NUM_FRAC, NUM_END};
 	int numstep = NUM_SIGN;
