@@ -10702,6 +10702,7 @@ void MadEdit::OnSize( wxSizeEvent &evt )
 		m_DrawingXPos = 0;
 	}
 
+	AppearCaret();
 	UpdateScrollBarPos();
 	Refresh( false );
 	evt.Skip();
