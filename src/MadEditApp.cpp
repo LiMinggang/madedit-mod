@@ -706,6 +706,16 @@ void MadEditApp::ShowMainFrame( MadEditFrame *mainFrame, bool maximize )
 	{
 		// reload files previously opened
 		wxString files;
+		wxConfigBase *cfg = wxConfigBase::Get( false );
+		cfg->Read( wxT( "/MadEdit/ReloadFilesList" ), &files );
+
+		if( !files.IsEmpty() )
+		{
+			// use OnReceiveMessage() to open the files
+			OnReceiveMessage( files.c_str(), ( files.size() + 1 )*sizeof( wxChar ), false );
+		}
+
+		files.Empty();
 
 		for( size_t i = 0; i < m_FileNames.GetCount(); ++i )
 		{
@@ -729,6 +739,12 @@ void MadEditApp::ShowMainFrame( MadEditFrame *mainFrame, bool maximize )
 			OnReceiveMessage( files.c_str(), ( files.size() + 1 )*sizeof( wxChar ), false );
 		}
 
+		int pages = mainFrame->OpenedFileCount();
+		
+		if( pages == 0 )
+		{
+			mainFrame->OpenFile( wxEmptyString, false );
+		}
 		SetTopWindow( mainFrame );
 #ifdef __WXMSW__
 		//if(maximize)    // removed: gogo, 30.08.2009
@@ -742,22 +758,19 @@ void MadEditApp::ShowMainFrame( MadEditFrame *mainFrame, bool maximize )
 			SetWindowPlacement( ( HWND )mainFrame->GetHWND(), &wp );
 		}
 #endif
-		mainFrame->Show( true );
-		files.Empty();
-		wxConfigBase *cfg = wxConfigBase::Get( false );
-		cfg->Read( wxT( "/MadEdit/ReloadFilesList" ), &files );
-		
-		if( !files.IsEmpty() )
+		int selId = mainFrame->GetPageFocus( );
+
+		bool changeFocus = (pages > 5);
+		//Forcely flash pages
+		if(changeFocus)
 		{
-			// use OnReceiveMessage() to open the files
-			OnReceiveMessage( files.c_str(), ( files.size() + 1 )*sizeof( wxChar ), false );
+			if(selId == (pages - 2)) ++pages;
+			mainFrame->SetPageFocus( pages - 2 );
 		}
-		
-		int pages = mainFrame->OpenedFileCount();
-		
-		if( pages == 0 )
+		mainFrame->Show( true );
+		if(changeFocus)
 		{
-			mainFrame->OpenFile( wxEmptyString, false );
+			mainFrame->SetPageFocus( selId );
 		}
 	}
 }
