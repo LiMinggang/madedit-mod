@@ -578,14 +578,14 @@ void MadEdit::IncreaseDecreaseIndent( bool incIndent )
 		}
 
 		// writeback the indent-spaces and rest content of line
-		if( spaces.size() != 0 || ( uc != 0x0D && uc != 0x0A ) ) // this line is not a empty line
+		if( (!spaces.empty()) || ( uc != 0x0D && uc != 0x0A ) ) // this line is not a empty line
 		{
 			if( incIndent )
 				IncreaseIndentSpaces( spaces );
 			else
 				DecreaseIndentSpaces( spaces );
 
-			if( spaces.size() != 0 )
+			if(!spaces.empty())
 				UCStoBlock( &spaces[0], spaces.size(), blk );
 		}
 
@@ -768,7 +768,7 @@ void MadEdit::CommentUncomment( bool comment )
 			}
 		}
 
-		if( spaces.size() != 0 )
+		if(!spaces.empty())
 			UCStoBlock( &spaces[0], spaces.size(), blk );
 
 		size_t size = lit->m_Size - nonspacepos;
@@ -2540,7 +2540,7 @@ void MadEdit::ConvertWordWrapToNewLine()
 	}
 	while( pos < endpos );
 
-	if( del_pos.size() == 0 ) return; // there is no wrapped-line
+	if( del_pos.empty() ) return; // there is no wrapped-line
 
 	MadBlock blk( m_Lines->m_MemData, -1, 0 );
 	ucs4_t newline[2] = { 0x0D, 0x0A };
@@ -2624,7 +2624,7 @@ void MadEdit::ConvertNewLineToWordWrap()
 		++lit1;
 	}
 
-	if( del_bpos.size() == 0 ) return;
+	if( del_bpos.empty() ) return;
 
 	vector<wxByte*> ins_data;
 	vector<wxFileOffset> ins_len;
@@ -3400,7 +3400,7 @@ void MadEdit::ColumnAlignRight()
 					}
 				}
 
-				if( ucs.size() )
+				if(!ucs.empty())
 				{
 					UCStoBlock( &ucs[0], ucs.size(), blk );
 					oudata->m_InsSize = blk.m_Size;

@@ -96,6 +96,7 @@ void MadSaveQueryDialog::InitWindowListIterms()
 	wxAuiNotebook * notebookp = reinterpret_cast<wxAuiNotebook *>(m_MainFrame->m_Notebook);
 	size_t count = notebookp->GetPageCount();
 	long tmp;
+	bool hasdata = false;
 
 	MadFileList->Hide();
 	MadFileList->DeleteAllItems();
@@ -111,19 +112,20 @@ void MadSaveQueryDialog::InitWindowListIterms()
 			wxFileName fileName( madedit->GetFileName() );
 			wxString fname = notebookp->GetPageText( id );
 			wxString fdir = fileName.GetPath();
-			
+
 			info.Clear();
 			info.m_text = fname;
 			info.m_mask = wxLIST_MASK_TEXT;
 			info.m_itemId = MadFileList->GetItemCount();
 			tmp = MadFileList->InsertItem(info);
-			MadFileList->SetItemData(tmp, info.m_itemId);
+			MadFileList->SetItemData(tmp, id);
 			MadFileList->SetItem(tmp, 1, fdir);
+			hasdata = true;
 		}
 	}
 	MadFileList->Thaw();
 
-	if(count)
+	if(hasdata)
 	{
 	    MadFileList->SetColumnWidth( 0, wxLIST_AUTOSIZE );
 		MadFileList->SetColumnWidth( 1, wxLIST_AUTOSIZE );

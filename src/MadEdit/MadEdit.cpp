@@ -171,7 +171,7 @@ public:
 	{}
 
 	bool GetColumnData( wxString &str, int &linecount ) {
-		if( data.size() == 0 ) return false;
+		if( data.empty() ) return false;
 
 		char *buf = &data[0];
 		linecount = *( ( int* )buf );
@@ -202,7 +202,7 @@ public:
 	}
 
 	bool GetHexData( void *buf ) {
-		if( data.size() == 0 ) return false;
+		if( data.empty() ) return false;
 
 		memcpy( buf, &data[0], data.size() );
 		return true;
@@ -680,7 +680,7 @@ wxUint16 *FontWidthManager::GetFontWidths( int index, const wxString &fontname, 
 
 void FontWidthManager::Save()
 {
-	if( FontWidthBuffersVector.size() == 0 )
+	if( FontWidthBuffersVector.empty() )
 		return;
 
 	for( int idx = 0; idx <= 16; ++idx )
@@ -716,7 +716,7 @@ void FontWidthManager::Save()
 
 void FontWidthManager::FreeMem()
 {
-	if( FontWidthBuffersVector.size() == 0 )
+	if( FontWidthBuffersVector.empty() )
 		return;
 
 	for( int idx = 0; idx <= 16; ++idx )
@@ -4456,7 +4456,7 @@ int MadEdit::GetColumnDataFromClipboard( vector <ucs4_t> *ucs )
 		wxTheClipboard->Close();
 	}
 
-	if( ucs->size() == 0 )
+	if( ucs->empty() )
 	{
 		linecount = GetTextFromClipboard( ucs );
 
@@ -4567,7 +4567,7 @@ void MadEdit::GetHexDataFromClipboard( vector <char> *cs )
 		wxTheClipboard->Close();
 	}
 
-	if( cs->size() == 0 )
+	if( cs->empty() )
 	{
 		vector<ucs4_t> ucs;
 		GetTextFromClipboard( &ucs );
