@@ -758,6 +758,7 @@ void MadEditApp::ShowMainFrame( MadEditFrame *mainFrame, bool maximize )
 			SetWindowPlacement( ( HWND )mainFrame->GetHWND(), &wp );
 		}
 #endif
+		mainFrame->Show( true );
 	}
 }
 
