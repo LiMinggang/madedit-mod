@@ -65,6 +65,7 @@ Mod v0.4.8
 * New: Copy file name without extention
 * New: Syntax highlight support for YAML, YANG
 * New: New Astyle options support(indent-after-parens, attach-closing-while)
+* New: Caret will keep in window after resize(Fix issue of alwasys showing file at the beginning on loading maximized)
 * Fix: Minor bug on OpenFile again
 * Fix: Can not copy the first item in Copy All results
 * Fix: Change Astyle config according to official change(bracket to brace)
@@ -73,6 +74,7 @@ Mod v0.4.8
 * Fix: Can't open file having double backslash in path(Windows)
 * Fix: Caret is not correctly displayed(0.4.7, WinX64) #231
 * Fix: Bug 101030 & 101031 of uchardet
+* Fix: Possible char type cast issue(Windows)
 * Code improvement for 64 bits system
 * Update Hunspell to 1.6.1
 * Update Astyle to 3.0
