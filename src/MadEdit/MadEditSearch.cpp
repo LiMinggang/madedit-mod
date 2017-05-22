@@ -36,8 +36,8 @@ inline char_type xtolower( char_type ch )
 	if( ch < 0 || ch > 0xFFFF ) { return ch; }
 
 #if defined(__WXMSW__)
-	ucs4_t tch = ( ucs4_t )ch;
-	return ( char_type )CharLowerW( ( LPWSTR )tch );
+	LPWSTR tch = (LPWSTR)ch;
+	return ( char_type )CharLowerW( tch );
 #else
 	return std::towlower( wchar_t( ch ) );
 #endif
@@ -47,8 +47,8 @@ template<>
 inline wchar_t xtolower( wchar_t ch )
 {
 #if defined(__WXMSW__)
-	ucs4_t tch = ( ucs4_t )ch;
-	return ( wchar_t )CharLowerW( ( LPWSTR )tch );
+	LPWSTR tch = (LPWSTR)ch;
+	return ( wchar_t )CharLowerW( tch );
 #else
 	return std::towlower( wchar_t( ch ) );
 #endif
@@ -304,16 +304,16 @@ struct ucs4_regex_traits: public null_regex_traits<ucs4_t>
 		if( ch < 0 || ch > 0xFFFF ) { return ch; }
 
 #if defined(__WXMSW__)
-		ucs4_t tch = ( ucs4_t )ch;
-		return ( char_type2 )CharLowerW( ( LPWSTR )tch );
+		LPWSTR tch = (LPWSTR)ch;
+		return ( char_type2 )CharLowerW( tch );
 #else
 		return std::towlower( wchar_t( ch ) );
 #endif
 	}
 	static wchar_t tolower( wchar_t ch ) {
 #if defined(__WXMSW__)
-		ucs4_t tch = ( ucs4_t )ch;
-		return ( wchar_t )CharLowerW( ( LPWSTR )tch );
+		LPWSTR tch = (LPWSTR)ch;
+		return ( wchar_t )CharLowerW( tch );
 #else
 		return std::towlower( ch );
 #endif
@@ -324,16 +324,16 @@ struct ucs4_regex_traits: public null_regex_traits<ucs4_t>
 		if( ch < 0 || ch > 0xFFFF ) { return ch; }
 
 #if defined(__WXMSW__)
-		ucs4_t tch = ( ucs4_t )ch;
-		return ( char_type2 )CharUpperW( ( LPWSTR )tch );
+		LPWSTR tch = (LPWSTR)ch;
+		return ( char_type2 )CharUpperW( tch );
 #else
 		return std::towupper( wchar_t( ch ) );
 #endif
 	}
 	static wchar_t toupper( wchar_t ch ) {
 #if defined(__WXMSW__)
-		ucs4_t tch = ( ucs4_t )ch;
-		return ( wchar_t )CharUpperW( ( LPWSTR )tch );
+		LPWSTR tch = (LPWSTR)ch;
+		return ( wchar_t )CharUpperW( tch );
 #else
 		return std::towupper( wchar_t( ch ) );
 #endif
@@ -655,9 +655,9 @@ MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 				else
 				{
 #ifdef __WXMSW__
-					TCHAR singleChar = text[i];
-					singleChar = (TCHAR)CharLowerW( (LPTSTR)singleChar );
-					text_lower << singleChar;
+					LPWSTR singleChar = (LPTSTR)((TCHAR)text[i]);
+					singleChar = CharLowerW( singleChar );
+					text_lower << (TCHAR)singleChar;
 #else
 					text_lower << towlower(text[i]);
 #endif
