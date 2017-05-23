@@ -37,6 +37,10 @@
 #if __cplusplus <= 199711L
 	#include <boost/shared_ptr.hpp>
 	using boost::shared_ptr;
+	
+#ifndef nullptr
+	#define nullptr (0)
+#endif
 #else
 	#include <memory>
 	using std::shared_ptr;
@@ -496,6 +500,7 @@ private:
 	wxTimer m_AutoSaveTimer;
 	long m_AutoSaveTimout;
     wxMenuItem * m_ToggleReadOnly;
+    wxMenuItem * m_SetSelecting;
 	static bool m_Closing;
 
 	typedef struct 

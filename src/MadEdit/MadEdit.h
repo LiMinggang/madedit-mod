@@ -527,10 +527,10 @@ protected:
 
 	wxFileOffset GetColumnSelection( wxString *ws );
 
-	// if(ws==NULL) SelectWord only;
+	// if(ws==nullptr) SelectWord only;
 	// else GetWord to ws;
-	void SelectWordFromCaretPos( wxString *ws, MadCaretPos * pos = NULL, bool bSelection = false );
-	void SelectLineFromCaretPos( wxString *ws = NULL, bool caretToBegOfSel = true );
+	void SelectWordFromCaretPos( wxString *ws, MadCaretPos * pos = nullptr, bool bSelection = false );
+	void SelectLineFromCaretPos( wxString *ws = nullptr, bool caretToBegOfSel = true );
 
 	bool PutTextToClipboard( const wxString &ws );
 	bool PutColumnDataToClipboard( const wxString &ws, int linecount );
@@ -552,11 +552,11 @@ protected:
 
 	void CopyFileDataToMem( MadBlockIterator begin, MadBlockIterator end );
 
-	// return the line-iterator and and lineid (if it is not NULL) by the pos
+	// return the line-iterator and and lineid (if it is not nullptr) by the pos
 	MadLineIterator DeleteInsertData( wxFileOffset pos,
 									  wxFileOffset delsize, /*OUT*/ MadBlockVector *deldata,
 									  wxFileOffset inssize, /*IN*/  MadBlockVector *insdata,
-									  /*OUT*/ int *lineid = NULL );
+									  /*OUT*/ int *lineid = nullptr );
 
 	void UCStoBlock( const ucs4_t *ucs, size_t count, MadBlock & block );
 	void InsertString( const ucs4_t *ucs, size_t count, bool bColumnEditing, bool moveCaret, bool bSelText, bool insert = false );
@@ -578,7 +578,7 @@ protected:
 	void InsertHexData( wxByte *hex, size_t count );
 
 	MadSearchResult Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadCaretPos &endpos,
-									  const wxString &text, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false, /*IN_OUT*/ucs4string *fmt = NULL, ucs4string *out = NULL );
+									  const wxString &text, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false, /*IN_OUT*/ucs4string *fmt = nullptr, ucs4string *out = nullptr );
 
 	MadSearchResult SearchHex( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadCaretPos &endpos,
 										 const wxByte *hex, size_t count );
@@ -997,10 +997,10 @@ public: // basic functions
 	// return the replaced count or SR_EXPR_ERROR
 	int ReplaceTextAll( const wxString &expr, const wxString &fmt,
 						bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
-						vector<wxFileOffset> *pbegpos = NULL, vector<wxFileOffset> *pendpos = NULL,
+						vector<wxFileOffset> *pbegpos = nullptr, vector<wxFileOffset> *pendpos = nullptr,
 						wxFileOffset rangeFrom = -1, wxFileOffset rangeTo = -1 );
 	int ReplaceHexAll( const wxString &expr, const wxString &fmt,
-					   vector<wxFileOffset> *pbegpos = NULL, vector<wxFileOffset> *pendpos = NULL,
+					   vector<wxFileOffset> *pbegpos = nullptr, vector<wxFileOffset> *pendpos = nullptr,
 					   wxFileOffset rangeFrom = -1, wxFileOffset rangeTo = -1 );
 
 	bool NextRegexSearchingPos( MadCaretPos& cp, const wxString &expr );

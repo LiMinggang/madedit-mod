@@ -32,7 +32,7 @@ extern const ucs4_t HexHeader[];
 extern int MadMessageBox( const wxString& message,
 						  const wxString& caption = wxMessageBoxCaptionStr,
 						  long style = wxOK | wxCENTRE,
-						  wxWindow *parent = NULL,
+						  wxWindow *parent = nullptr,
 						  int x = wxDefaultCoord, int y = wxDefaultCoord );
 
 //==============================================================================
@@ -181,7 +181,7 @@ void MadEdit::ApplySyntaxAttributes( MadSyntax *syn, bool matchTitle )
 		if( m_EditMode == emHexMode && m_HexDigitBitmap )
 		{
 			delete m_HexDigitBitmap;
-			m_HexDigitBitmap = NULL;
+			m_HexDigitBitmap = nullptr;
 		}
 
 		m_RepaintAll = true;
@@ -493,7 +493,7 @@ void MadEdit::SetHexFont( const wxString &name, int size, bool forceReset )
 		if( m_HexDigitBitmap )
 		{
 			delete m_HexDigitBitmap;
-			m_HexDigitBitmap = NULL;
+			m_HexDigitBitmap = nullptr;
 		}
 
 		if( m_EditMode == emHexMode )
@@ -1169,7 +1169,7 @@ void MadEdit::GetCaretPosition( int &line, int &subrow, wxFileOffset &column )
 
 wxFileOffset MadEdit::GetLastSavePointCaretPosition()
 {
-	if(m_SavePoint == NULL) return wxFileOffset(-1);
+	if(m_SavePoint == nullptr) return wxFileOffset(-1);
 
 	return m_SavePoint->m_CaretPosAfter;
 }
@@ -1179,7 +1179,7 @@ wxFileOffset MadEdit::GetSelectionSize()
 
 	if( m_EditMode == emColumnMode )
 	{
-		return GetColumnSelection( NULL );
+		return GetColumnSelection( nullptr );
 	}
 
 	return m_SelectionEnd->pos - m_SelectionBegin->pos;
@@ -1321,7 +1321,7 @@ void MadEdit::SetText( const wxString &ws )
 		size = sss;
 	}
 
-	MadUndo *undo = NULL;
+	MadUndo *undo = nullptr;
 
 	if( m_Lines->m_Size )
 	{
@@ -1330,7 +1330,7 @@ void MadEdit::SetText( const wxString &ws )
 			MadDeleteUndoData *dudata = new MadDeleteUndoData;
 			dudata->m_Pos = 0;
 			dudata->m_Size = m_Lines->m_Size;
-			lit = DeleteInsertData( 0, dudata->m_Size, &dudata->m_Data, 0, NULL );
+			lit = DeleteInsertData( 0, dudata->m_Size, &dudata->m_Data, 0, nullptr );
 			undo = m_UndoBuffer->Add();
 			SetNeedSync();
 			undo->m_Undos.push_back( dudata );
@@ -1366,7 +1366,7 @@ void MadEdit::SetText( const wxString &ws )
 		insud->m_Pos = 0;
 		insud->m_Size = blk.m_Size;
 		insud->m_Data.push_back( blk );
-		lit = DeleteInsertData( 0, 0, NULL, insud->m_Size, &insud->m_Data );
+		lit = DeleteInsertData( 0, 0, nullptr, insud->m_Size, &insud->m_Data );
 		undo = m_UndoBuffer->Add();
 		SetNeedSync();
 		undo->m_Undos.push_back( insud );
@@ -1738,7 +1738,7 @@ void MadEdit::CutToClipboard()
 	if( m_Selection )
 	{
 		CopyToClipboard();
-		DeleteSelection( true, NULL, true );
+		DeleteSelection( true, nullptr, true );
 	}
 }
 
@@ -2044,7 +2044,7 @@ void MadEdit::DndDrop()
 						UpdateSelectionPos();
 					}
 
-					DeleteSelection(false, NULL, false);
+					DeleteSelection(false, nullptr, false);
 					SetCaretPosition(OldCaretPos-SelectionLen);
 				}*/
 			}
@@ -2059,7 +2059,7 @@ void MadEdit::Undo()
 {
 	MadUndo *undo = m_UndoBuffer->Undo( !m_RecordCaretMovements );
 
-	if( undo == NULL )
+	if( undo == nullptr )
 		return;
 
 	if( undo->m_Undos.empty() ) // caret movement undo
@@ -2095,21 +2095,21 @@ void MadEdit::Undo()
 		case udtInsert:
 			{
 				MadInsertUndoData *iudata = ( MadInsertUndoData * )( *it );
-				lit = DeleteInsertData( pos, iudata->m_Size, NULL, 0, NULL, &lineid );
+				lit = DeleteInsertData( pos, iudata->m_Size, nullptr, 0, nullptr, &lineid );
 			}
 			break;
 
 		case udtDelete:
 			{
 				MadDeleteUndoData *dudata = ( MadDeleteUndoData * )( *it );
-				lit = DeleteInsertData( pos, 0, NULL, dudata->m_Size, &dudata->m_Data, &lineid );
+				lit = DeleteInsertData( pos, 0, nullptr, dudata->m_Size, &dudata->m_Data, &lineid );
 			}
 			break;
 
 		case udtOverwrite:
 			{
 				MadOverwriteUndoData *oudata = ( MadOverwriteUndoData * )( *it );
-				lit = DeleteInsertData( pos, oudata->m_InsSize, NULL,
+				lit = DeleteInsertData( pos, oudata->m_InsSize, nullptr,
 										oudata->m_DelSize, &oudata->m_DelData,
 										&lineid );
 			}
@@ -2198,7 +2198,7 @@ void MadEdit::Redo()
 {
 	MadUndo *redo = m_UndoBuffer->Redo( !m_RecordCaretMovements );
 
-	if( redo == NULL )
+	if( redo == nullptr )
 		return;
 
 	if( redo->m_Undos.empty() ) // caret movement redo
@@ -2227,21 +2227,21 @@ void MadEdit::Redo()
 		case udtInsert:
 			{
 				MadInsertUndoData *iudata = ( MadInsertUndoData * )( *it );
-				lit = DeleteInsertData( pos, 0, NULL, iudata->m_Size, &iudata->m_Data, &lineid );
+				lit = DeleteInsertData( pos, 0, nullptr, iudata->m_Size, &iudata->m_Data, &lineid );
 			}
 			break;
 
 		case udtDelete:
 			{
 				MadDeleteUndoData *dudata = ( MadDeleteUndoData * )( *it );
-				lit = DeleteInsertData( pos, dudata->m_Size, NULL, 0, NULL, &lineid );
+				lit = DeleteInsertData( pos, dudata->m_Size, nullptr, 0, nullptr, &lineid );
 			}
 			break;
 
 		case udtOverwrite:
 			{
 				MadOverwriteUndoData *oudata = ( MadOverwriteUndoData * )( *it );
-				lit = DeleteInsertData( pos, oudata->m_DelSize, NULL,
+				lit = DeleteInsertData( pos, oudata->m_DelSize, nullptr,
 										oudata->m_InsSize, &oudata->m_InsData,
 										&lineid );
 			}
@@ -2425,7 +2425,7 @@ void MadEdit::GoBack()
 {
 	MadUndo *undo = m_CaretTracker->Undo( false );
 
-	if( undo == NULL )
+	if( undo == nullptr )
 		return;
 
 	if( undo->m_Undos.empty() ) // caret movement undo
@@ -2442,7 +2442,7 @@ void MadEdit::GoForward()
 {
 	MadUndo *redo = m_CaretTracker->Redo( false );
 
-	if( redo == NULL )
+	if( redo == nullptr )
 		return;
 
 	if( redo->m_Undos.empty() ) // caret movement redo
@@ -2470,7 +2470,7 @@ bool MadEdit::LoadFromFile( const wxString &filename, const wxString &encoding )
 
 	m_UndoBuffer->Clear();
 	SetNeedSync();
-	m_SavePoint = NULL;
+	m_SavePoint = nullptr;
 	m_Modified = false;
 	m_ModificationTime = wxFileModificationTime( filename );
 	m_ReadOnly = false; // use IsReadOnly() to check ReadOnly or not
@@ -2994,7 +2994,7 @@ bool MadEdit::StringToHex( wxString ws, vector<wxByte> &hex )
 	{
 		if( len < 2 )
 		{
-			wxMessageDialog dlg( NULL, errmsg + wxT( "\n\n" ) + ws,
+			wxMessageDialog dlg( nullptr, errmsg + wxT( "\n\n" ) + ws,
 								 wxT( "MadEdit-Mod" ), wxOK | wxICON_ERROR );
 			dlg.SetOKLabel( wxMessageDialog::ButtonLabel( _( "&Ok" ) ) );
 			dlg.ShowModal();
@@ -3007,7 +3007,7 @@ bool MadEdit::StringToHex( wxString ws, vector<wxByte> &hex )
 
 		if( b0 < 0 || b1 < 0 )
 		{
-			wxMessageDialog dlg( NULL, errmsg + wxT( "\n\n" ) + ws,
+			wxMessageDialog dlg( nullptr, errmsg + wxT( "\n\n" ) + ws,
 								 wxT( "MadEdit-Mod" ), wxOK | wxICON_ERROR );
 			dlg.SetOKLabel( wxMessageDialog::ButtonLabel( _( "&Ok" ) ) );
 			dlg.ShowModal();
@@ -3271,7 +3271,7 @@ MadReplaceResult MadEdit::ReplaceText( const wxString &expr, const wxString &fmt
 	bool bZeroLenSel = m_ZeroSelection;
 	if( out.length() == 0 )
 	{
-		DeleteSelection( true, NULL, false );
+		DeleteSelection( true, nullptr, false );
 	}
 	else
 	{
@@ -3350,7 +3350,7 @@ MadReplaceResult MadEdit::ReplaceHex( const wxString &expr, const wxString &fmt,
 
 	if( fmthex.empty() )
 	{
-		DeleteSelection( true, NULL, false );
+		DeleteSelection( true, nullptr, false );
 	}
 	else
 	{
@@ -3492,11 +3492,11 @@ MadReplaceResult MadEdit::ReplaceTextNoDoubleCheck( const wxString &expr, const 
 
 		if( size <= 2 * 1024 * 1024 )
 		{
-			OverwriteDataSingle( del_bpos, del_epos, &ins_ucs, NULL, ins_len );
+			OverwriteDataSingle( del_bpos, del_epos, &ins_ucs, nullptr, ins_len );
 		}
 		else
 		{
-			OverwriteDataMultiple( del_bpos, del_epos, &ins_ucs, NULL, ins_len );
+			OverwriteDataMultiple( del_bpos, del_epos, &ins_ucs, nullptr, ins_len );
 		}
 	}
 
@@ -3647,11 +3647,11 @@ int MadEdit::ReplaceTextAll( const wxString &expr, const wxString &fmt,
 
 		if( ( size <= 2 * 1024 * 1024 ) || ( multi >= 40 && size <= 10 * 1024 * 1024 ) )
 		{
-			OverwriteDataSingle( del_bpos, del_epos, &ins_ucs, NULL, ins_len );
+			OverwriteDataSingle( del_bpos, del_epos, &ins_ucs, nullptr, ins_len );
 		}
 		else
 		{
-			OverwriteDataMultiple( del_bpos, del_epos, &ins_ucs, NULL, ins_len );
+			OverwriteDataMultiple( del_bpos, del_epos, &ins_ucs, nullptr, ins_len );
 		}
 
 		if( pbegpos != 0 && pendpos != 0 )
@@ -3770,11 +3770,11 @@ int MadEdit::ReplaceHexAll( const wxString &expr, const wxString &fmt,
 
 		if( IsTextFile() && ( ( size <= 2 * 1024 * 1024 ) || ( multi >= 40 && size <= 10 * 1024 * 1024 ) ) )
 		{
-			OverwriteDataSingle( del_bpos, del_epos, NULL, &ins_data, ins_len );
+			OverwriteDataSingle( del_bpos, del_epos, nullptr, &ins_data, ins_len );
 		}
 		else
 		{
-			OverwriteDataMultiple( del_bpos, del_epos, NULL, &ins_data, ins_len );
+			OverwriteDataMultiple( del_bpos, del_epos, nullptr, &ins_data, ins_len );
 		}
 
 		if( pbegpos != 0 && pendpos != 0 )
@@ -4150,7 +4150,7 @@ void MadEdit::EndPrint()
 	{
 		m_CaretAtHexArea = m_old_CaretAtHexArea;
 		delete m_PrintHexEdit;
-		m_PrintHexEdit = NULL;
+		m_PrintHexEdit = nullptr;
 	}
 
 	m_Printing = 0;

@@ -109,7 +109,7 @@ void MadEdit::ToggleBOM()
 		MadDeleteUndoData *dudata = new MadDeleteUndoData;
 		dudata->m_Pos = 0;
 		dudata->m_Size = len;
-		MadLineIterator lit = DeleteInsertData( dudata->m_Pos, dudata->m_Size, &dudata->m_Data, 0, NULL );
+		MadLineIterator lit = DeleteInsertData( dudata->m_Pos, dudata->m_Size, &dudata->m_Data, 0, nullptr );
 		MadUndo *undo = m_UndoBuffer->Add();
 		SetNeedSync();
 		undo->m_CaretPosBefore = m_CaretPos.pos;
@@ -145,7 +145,7 @@ void MadEdit::ToggleBOM()
 		undo->m_CaretPosBefore = m_CaretPos.pos;
 		undo->m_CaretPosAfter = m_CaretPos.pos + blk.m_Size;
 		undo->m_Undos.push_back( insud );
-		MadLineIterator lit = DeleteInsertData( insud->m_Pos, 0, NULL, insud->m_Size, &insud->m_Data );
+		MadLineIterator lit = DeleteInsertData( insud->m_Pos, 0, nullptr, insud->m_Size, &insud->m_Data );
 		m_Lines->Reformat( lit, lit );
 		m_CaretPos.pos = undo->m_CaretPosAfter;
 		UpdateCaretByPos( m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
@@ -172,7 +172,7 @@ void MadEdit::ToggleBOM()
 
 wxString *ConvertTextToNewString( const wxString& text, MadConvertChineseFlag flag )
 {
-	wxString *ptext = NULL;
+	wxString *ptext = nullptr;
 
 	if( text.Len() != 0 )
 	{
@@ -230,7 +230,7 @@ void MadEdit::ConvertEncoding( const wxString &newenc, MadConvertEncodingFlag fl
 		ignoreBOM = false;
 	}
 
-	wxString text, *ptext = NULL;
+	wxString text, *ptext = nullptr;
 	GetText( text, ignoreBOM );
 
 	if( flag != cefNone )
@@ -274,7 +274,7 @@ void MadEdit::ConvertChinese( MadConvertEncodingFlag flag )
 
 	wxFileOffset caretpos = m_CaretPos.pos;
 	int toprow = m_TopRow;
-	wxString text, *ptext = NULL;
+	wxString text, *ptext = nullptr;
 	GetText( text, false );
 
 	if( flag != cefNone )
@@ -294,7 +294,7 @@ void MadEdit::ConvertChinese( MadConvertEncodingFlag flag )
 		}
 	}
 
-	if( ptext != NULL )
+	if( ptext != nullptr )
 	{
 		SetText( *ptext );
 		delete ptext;
@@ -339,7 +339,7 @@ void MadEdit::ConvertNewLineType( MadNewLineType type )
 	size_t newlinesize = newline_blk.m_Size;
 	m_Lines->m_MemData->Get( newline_blk.m_Pos, newlinedata, newlinesize );
 	vector<wxByte> buffervector;
-	wxByte *buf = NULL;
+	wxByte *buf = nullptr;
 	MadBlock blk( m_Lines->m_MemData, m_Lines->m_MemData->m_Size, 0 );
 	MadLineIterator lit = m_Lines->m_LineList.begin();
 	int lineid = 0;
@@ -1356,9 +1356,9 @@ void InitFullwidthTable( ucs2_t *Fullwidth_Table, ucs2_t *hftable )
 
 ucs2_t *GetHalfwidthTable( bool ascii, bool japanese, bool korean, bool other )
 {
-	static ucs2_t *Halfwidth_Table = NULL; // halfwidth-char to fullwidth-char table
+	static ucs2_t *Halfwidth_Table = nullptr; // halfwidth-char to fullwidth-char table
 
-	if( Halfwidth_Table == NULL )
+	if( Halfwidth_Table == nullptr )
 	{
 		Halfwidth_Table = new ucs2_t[65536];
 	}
@@ -1378,9 +1378,9 @@ ucs2_t *GetHalfwidthTable( bool ascii, bool japanese, bool korean, bool other )
 
 ucs2_t *GetFullwidthTable( bool ascii, bool japanese, bool korean, bool other )
 {
-	static ucs2_t *Fullwidth_Table = NULL; // fullwidth-char to halfwidth-char table
+	static ucs2_t *Fullwidth_Table = nullptr; // fullwidth-char to halfwidth-char table
 
-	if( Fullwidth_Table == NULL )
+	if( Fullwidth_Table == nullptr )
 	{
 		Fullwidth_Table = new ucs2_t[65536];
 	}
@@ -1842,7 +1842,7 @@ void MadEdit::WordCount( bool selection, int &wordCount, int &charCount, int &sp
 		previdx = idx;
 	}
 
-	if( detail != NULL )
+	if( detail != nullptr )
 	{
 		for( idx = 0; idx < UnicodeBlocksCount; ++idx )
 		{
@@ -1883,7 +1883,7 @@ void MadEdit::TrimLeadingSpaces()
 	}
 
 	// use Regular Expressions to trim all trailing spaces
-	ReplaceTextAll( wxT( "^[ \t]+" ), wxT( "" ), true, true, false, false, NULL, NULL, rangeFrom, rangeTo );
+	ReplaceTextAll( wxT( "^[ \t]+" ), wxT( "" ), true, true, false, false, nullptr, nullptr, rangeFrom, rangeTo );
 }
 
 void MadEdit::DeleteEmptyLines()
@@ -1900,7 +1900,7 @@ void MadEdit::DeleteEmptyLines()
 	}
 
 	// use Regular Expressions to delete all empty lines
-	ReplaceTextAll( wxT( "^(\r\n|\r|\n|$)" ), wxT( "" ), true, true, false, false, NULL, NULL, rangeFrom, rangeTo );
+	ReplaceTextAll( wxT( "^(\r\n|\r|\n|$)" ), wxT( "" ), true, true, false, false, nullptr, nullptr, rangeFrom, rangeTo );
 }
 
 void MadEdit::DeleteEmptyLinesWithSpaces()
@@ -1917,7 +1917,7 @@ void MadEdit::DeleteEmptyLinesWithSpaces()
 	}
 
 	// use Regular Expressions to delete all empty lines(with spcaces)
-	ReplaceTextAll( wxT( "^[ \t]+(\r\n|\r|\n|$)" ), wxT( "" ), true, true, false, false, NULL, NULL, rangeFrom, rangeTo );
+	ReplaceTextAll( wxT( "^[ \t]+(\r\n|\r|\n|$)" ), wxT( "" ), true, true, false, false, nullptr, nullptr, rangeFrom, rangeTo );
 }
 
 void MadEdit::JoinLines()
@@ -1934,7 +1934,7 @@ void MadEdit::JoinLines()
 	}
 
 	// use Regular Expressions to join all selected lines
-	ReplaceTextAll( wxT( "(\r\n|\r|\n)" ), wxT( " " ), true, true, false, false, NULL, NULL, rangeFrom, rangeTo );
+	ReplaceTextAll( wxT( "(\r\n|\r|\n)" ), wxT( " " ), true, true, false, false, nullptr, nullptr, rangeFrom, rangeTo );
 }
 
 //==============================================================================
@@ -1957,8 +1957,8 @@ struct SortLineData
 };
 bool SortLineData::s_casesensitive = false;
 bool SortLineData::s_numeric = false;
-MadLines *SortLineData::s_lines = NULL;
-MadLines::NextUCharFuncPtr SortLineData::s_NextUChar = NULL;
+MadLines *SortLineData::s_lines = nullptr;
+MadLines::NextUCharFuncPtr SortLineData::s_NextUChar = nullptr;
 
 SortLineData::SortLineData( const MadLineIterator& l, int id )
 	: lit( l ), lineid( id ), ucdata(), int_begin( -1 ), int_len(-1), frac_begin( -1 ), frac_len(-1), negative( false )
@@ -2156,7 +2156,7 @@ struct SortLineComp
 	static bool s_numeric;
 	SortLineData *data;
 
-	SortLineComp() : data( NULL ) {}
+	SortLineComp() : data( nullptr ) {}
 	SortLineComp( SortLineData *d ) : data( d ) {}
 
 	bool operator<( const SortLineComp& it ) const {
@@ -2334,16 +2334,16 @@ void MadEdit::SortLines( MadSortFlags flags, int beginline, int endline )
 	// put the sorted lines to MemData
 	MadBlock blk( m_Lines->m_MemData, m_Lines->m_MemData->m_Size, 0 );
 	vector<wxByte> buffervector;
-	wxByte *buf = NULL;
+	wxByte *buf = nullptr;
 	std::vector<SortLineComp>::iterator slit = lines.begin();
 	std::vector<SortLineComp>::iterator slitend = lines.end();
 	std::vector<SortLineComp>::reverse_iterator slrit = lines.rbegin();
 	std::vector<SortLineComp>::reverse_iterator slritend = lines.rend();
-	SortLineData *dupdata = NULL;
+	SortLineData *dupdata = nullptr;
 
 	do
 	{
-		SortLineData *data = NULL;
+		SortLineData *data = nullptr;
 
 		if( bDescending )
 		{
@@ -2359,10 +2359,10 @@ void MadEdit::SortLines( MadSortFlags flags, int beginline, int endline )
 
 		if( bRemoveDup )
 		{
-			if( dupdata != NULL && dupdata->Equal( data ) )
+			if( dupdata != nullptr && dupdata->Equal( data ) )
 			{
 				dupdata = data;
-				data = NULL;
+				data = nullptr;
 
 				if( slit == slitend )
 				{
@@ -2375,7 +2375,7 @@ void MadEdit::SortLines( MadSortFlags flags, int beginline, int endline )
 			}
 		}
 
-		if( data != NULL )
+		if( data != nullptr )
 		{
 			lit = data->lit;
 			wxFileOffset spos = lit->m_RowIndices[0].m_Start;
@@ -2585,11 +2585,11 @@ void MadEdit::ConvertWordWrapToNewLine()
 
 	if( ( size <= 2 * 1024 * 1024 ) || ( del_pos.size() >= 40 && size <= 10 * 1024 * 1024 ) )
 	{
-		OverwriteDataSingle( del_pos, del_pos, NULL, &ins_data, ins_len );
+		OverwriteDataSingle( del_pos, del_pos, nullptr, &ins_data, ins_len );
 	}
 	else
 	{
-		OverwriteDataMultiple( del_pos, del_pos, NULL, &ins_data, ins_len );
+		OverwriteDataMultiple( del_pos, del_pos, nullptr, &ins_data, ins_len );
 	}
 }
 
@@ -2641,11 +2641,11 @@ void MadEdit::ConvertNewLineToWordWrap()
 
 	if( ( size <= 2 * 1024 * 1024 ) || ( del_bpos.size() >= 40 && size <= 10 * 1024 * 1024 ) )
 	{
-		OverwriteDataSingle( del_bpos, del_epos, NULL, &ins_data, ins_len );
+		OverwriteDataSingle( del_bpos, del_epos, nullptr, &ins_data, ins_len );
 	}
 	else
 	{
-		OverwriteDataMultiple( del_bpos, del_epos, NULL, &ins_data, ins_len );
+		OverwriteDataMultiple( del_bpos, del_epos, nullptr, &ins_data, ins_len );
 	}
 }
 
@@ -3056,7 +3056,7 @@ void MadEdit::ColumnAlignLeft()
 
 	if( ( m_EditMode == emColumnMode ) && ( m_Selection && m_SelectionBegin->xpos && m_SelectionBegin->lineid != m_SelectionEnd->lineid ) )
 	{
-		MadUndo *undo = NULL;
+		MadUndo *undo = nullptr;
 		MadLineIterator lit, lastlit, firstlit;
 		size_t count;
 		bool SelEndAtBOL = false;
@@ -3146,9 +3146,9 @@ void MadEdit::ColumnAlignLeft()
 					MadDeleteUndoData *dudata = new MadDeleteUndoData;
 					dudata->m_Pos = pos + rowpos;
 					dudata->m_Size = delsize;
-					lit = DeleteInsertData( dudata->m_Pos, dudata->m_Size, &dudata->m_Data, 0, NULL );
+					lit = DeleteInsertData( dudata->m_Pos, dudata->m_Size, &dudata->m_Data, 0, nullptr );
 
-					if( undo == NULL )
+					if( undo == nullptr )
 					{
 						undo = m_UndoBuffer->Add();
 						SetNeedSync();
@@ -3178,9 +3178,9 @@ void MadEdit::ColumnAlignLeft()
 				indata->m_Pos = pos + rowpos;
 				indata->m_Size = blk.m_Size;
 				indata->m_Data.push_back( blk );
-				lit = DeleteInsertData( indata->m_Pos, 0, NULL, indata->m_Size, &indata->m_Data );
+				lit = DeleteInsertData( indata->m_Pos, 0, nullptr, indata->m_Size, &indata->m_Data );
 
-				if( undo == NULL )
+				if( undo == nullptr )
 				{
 					undo = m_UndoBuffer->Add();
 					SetNeedSync();
@@ -3231,7 +3231,7 @@ void MadEdit::ColumnAlignLeft()
 			rangeTo = rangeFrom + m_CaretPos.iter->m_Size - m_CaretPos.linepos;
 		}
 
-		ReplaceTextAll( wxT( "^[ \t]+" ), wxT( "" ), true, true, false, false, NULL, NULL, rangeFrom, rangeTo );
+		ReplaceTextAll( wxT( "^[ \t]+" ), wxT( "" ), true, true, false, false, nullptr, nullptr, rangeFrom, rangeTo );
 	}
 	
 	m_ZeroSelection = false;
@@ -3247,7 +3247,7 @@ void MadEdit::ColumnAlignRight()
 
 	if( m_Selection && m_SelectionBegin->xpos /*&& m_SelectionBegin->lineid!=m_SelectionEnd->lineid*/ )
 	{
-		MadUndo *undo = NULL;
+		MadUndo *undo = nullptr;
 		MadLineIterator lit, lastlit, firstlit;
 		size_t count;
 		bool SelEndAtBOL = false;
@@ -3358,9 +3358,9 @@ void MadEdit::ColumnAlignRight()
 				MadDeleteUndoData *dudata = new MadDeleteUndoData;
 				dudata->m_Pos = pos + startpos;
 				dudata->m_Size = delsize;
-				lit = DeleteInsertData( dudata->m_Pos, dudata->m_Size, &dudata->m_Data, 0, NULL );
+				lit = DeleteInsertData( dudata->m_Pos, dudata->m_Size, &dudata->m_Data, 0, nullptr );
 
-				if( undo == NULL )
+				if( undo == nullptr )
 				{
 					undo = m_UndoBuffer->Add();
 					SetNeedSync();
@@ -3415,7 +3415,7 @@ void MadEdit::ColumnAlignRight()
 								  oudata->m_DelSize, &oudata->m_DelData,
 								  oudata->m_InsSize, &oudata->m_InsData );
 
-				if( undo == NULL )
+				if( undo == nullptr )
 				{
 					undo = m_UndoBuffer->Add();
 					SetNeedSync();
@@ -3704,7 +3704,7 @@ void MadEdit::CopyBookmarkedLines()
 
 void MadEdit::CutDelBookmarkedLines( bool copyLines/*= false*/ )
 {
-	MadUndo *undo = NULL;
+	MadUndo *undo = nullptr;
 
 	if( !m_Lines->m_LineList.HasBookMark() ) return;
 
@@ -3792,9 +3792,9 @@ void MadEdit::CutDelBookmarkedLines( bool copyLines/*= false*/ )
 			dudata->m_Pos = lit->m_Blocks[0].m_Pos;
 			dudata->m_Size = lit->m_Size;
 			wxASSERT(lit->m_Size>0);
-			DeleteInsertData( dudata->m_Pos, dudata->m_Size, &dudata->m_Data, 0, NULL );
+			DeleteInsertData( dudata->m_Pos, dudata->m_Size, &dudata->m_Data, 0, nullptr );
 
-			if( undo == NULL )
+			if( undo == nullptr )
 			{
 				undo = m_UndoBuffer->Add();
 				SetNeedSync();
@@ -3840,7 +3840,7 @@ void MadEdit::CutDelBookmarkedLines( bool copyLines/*= false*/ )
 
 void MadEdit::DeleteUnmarkedLines()
 {
-	MadUndo *undo = NULL;
+	MadUndo *undo = nullptr;
 
 	if( !m_Lines->m_LineList.HasBookMark() ) return;
 
@@ -3862,9 +3862,9 @@ void MadEdit::DeleteUnmarkedLines()
 			dudata->m_Pos = posBeg;
 			dudata->m_Size = posEnd - posBeg;
 			posEnd = lit->m_Blocks[0].m_Pos;
-			DeleteInsertData( dudata->m_Pos, dudata->m_Size, &dudata->m_Data, 0, NULL );
+			DeleteInsertData( dudata->m_Pos, dudata->m_Size, &dudata->m_Data, 0, nullptr );
 
-			if( undo == NULL )
+			if( undo == nullptr )
 			{
 				undo = m_UndoBuffer->Add();
 				SetNeedSync();
@@ -3885,9 +3885,9 @@ void MadEdit::DeleteUnmarkedLines()
 		MadDeleteUndoData *dudata = new MadDeleteUndoData;
 		dudata->m_Pos = 0;
 		dudata->m_Size = posEnd;
-		DeleteInsertData( dudata->m_Pos, dudata->m_Size, &dudata->m_Data, 0, NULL );
+		DeleteInsertData( dudata->m_Pos, dudata->m_Size, &dudata->m_Data, 0, nullptr );
 
-		if( undo == NULL )
+		if( undo == nullptr )
 		{
 			undo = m_UndoBuffer->Add();
 			SetNeedSync();
@@ -3916,7 +3916,7 @@ void MadEdit::DeleteUnmarkedLines()
 
 void MadEdit::ReplaceBookmarkedLines()
 {
-	MadUndo *undo = NULL;
+	MadUndo *undo = nullptr;
 	bool oldModified = m_Modified;
 	MadLineIterator lit;
 	MadMemData *md = m_Lines->m_MemData;
@@ -3977,7 +3977,7 @@ void MadEdit::ReplaceBookmarkedLines()
 						  oudata->m_DelSize, &oudata->m_DelData,
 						  oudata->m_InsSize, &oudata->m_InsData );
 
-		if( undo == NULL )
+		if( undo == nullptr )
 		{
 			undo = m_UndoBuffer->Add();
 			SetNeedSync();

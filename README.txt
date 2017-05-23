@@ -122,6 +122,7 @@ New: Copy file name without extention
 New: Syntax highlight support for YAML, YANG
 New: New Astyle options support(indent-after-parens, attach-closing-while)
 New: Caret will keep in window after resize(Fix issue of alwasys showing file at the beginning on loading maximized)
+New: Update toggle-able menu items according to context(ReadOnly flag and Set selection)
 Fix: Minor bug on OpenFile again
 Fix: Can not copy the first item in Copy All results
 Fix: Change Astyle config according to official change(bracket to brace)
@@ -136,6 +137,7 @@ Code improvement for 64 bits system
 Update Hunspell to 1.6.1
 Update Astyle to 3.0
 Update boost_python to boost 1.64
+C++ 11 transform
 Update Simplified Chinese translation
 
 Mod v0.4.7

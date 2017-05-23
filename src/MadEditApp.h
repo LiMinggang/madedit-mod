@@ -19,6 +19,11 @@
 #endif
 #include <wx/ipc.h>
 #include <wx/stackwalk.h>
+#if __cplusplus <= 199711L
+#ifndef nullptr
+	#define nullptr (0)
+#endif
+#endif
 
 class wxFile;
 class wxSingleInstanceChecker;

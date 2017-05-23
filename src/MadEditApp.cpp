@@ -30,7 +30,7 @@ IMPLEMENT_APP( MadEditApp )
 extern int MadMessageBox( const wxString& message,
 						  const wxString& caption = wxMessageBoxCaptionStr,
 						  long style = wxOK | wxCENTRE,
-						  wxWindow *parent = NULL,
+						  wxWindow *parent = nullptr,
 						  int x = wxDefaultCoord, int y = wxDefaultCoord );
 
 #ifdef _DEBUG
@@ -101,7 +101,7 @@ static const wxCmdLineEntryDesc g_cmdLineDesc [] =
 	{ wxCMD_LINE_SWITCH, "x", "eXit", "Exit GUI if it was in silent mode" },
 	{ wxCMD_LINE_SWITCH, "w", "wildcard", "Enable wildcard support in file name\n(line number would be disabled becasue it used '*')" },
 	{ wxCMD_LINE_OPTION, "m", "madpython", "Specify MadPython file to be run on the file" },
-	{ wxCMD_LINE_PARAM, NULL, NULL, "File(s) to be opened", wxCMD_LINE_VAL_STRING,  wxCMD_LINE_PARAM_OPTIONAL | wxCMD_LINE_PARAM_MULTIPLE },
+	{ wxCMD_LINE_PARAM, nullptr, nullptr, "File(s) to be opened", wxCMD_LINE_VAL_STRING,  wxCMD_LINE_PARAM_OPTIONAL | wxCMD_LINE_PARAM_MULTIPLE },
 
 	{ wxCMD_LINE_NONE }
 };
@@ -127,7 +127,7 @@ public:
 		const wxLanguageInfo * langinfo;
 		langinfo = wxLocale::FindLanguageInfo( dirName.AfterLast( wxFileName::GetPathSeparator() ) );
 
-		if( langinfo != NULL ) {
+		if( langinfo != nullptr ) {
 			wxLogTrace( wxT("MadTranslationHelper"), _( "SEARCHING FOR %s" ),
 						wxString( dirName + wxFileName::GetPathSeparator() +
 								  m_TransName + wxT( ".mo" ) ).GetData() );
@@ -162,7 +162,7 @@ public:
 #endif
 
 Atom g_MadEdit_atom;
-Display *g_Display = NULL;
+Display *g_Display = nullptr;
 
 static GdkFilterReturn my_gdk_filter( GdkXEvent *xevent,
 									  GdkEvent *event,
@@ -248,7 +248,7 @@ void DeleteConfig()
 	MadEdit::ms_KeyBindings.FreeCommandTextMap();
 	FontWidthManager::Save();
 	FontWidthManager::FreeMem();
-	wxFileConfig::Set( NULL );
+	wxFileConfig::Set( nullptr );
 }
 
 wxConnectionBase *MadAppSrv::OnAcceptConnection( const wxString& topic )
@@ -264,7 +264,7 @@ wxConnectionBase *MadAppSrv::OnAcceptConnection( const wxString& topic )
 
 			if( dialog && dialog->IsModal() )
 			{
-				return NULL;
+				return nullptr;
 			}
 
 			node = node->GetNext();
@@ -273,7 +273,7 @@ wxConnectionBase *MadAppSrv::OnAcceptConnection( const wxString& topic )
 		return new MadAppConn();
 	}
 	else
-		return NULL;
+		return nullptr;
 }
 
 // Opens a file passed from another instance
@@ -493,7 +493,7 @@ bool MadEditApp::OnInit()
 
 	FontWidthManager::Init( g_MadEditHomeDir );
 	// create the main frame
-	MadEditFrame *myFrame = new MadEditFrame( NULL, 1, wxEmptyString, pos, size );
+	MadEditFrame *myFrame = new MadEditFrame( nullptr, 1, wxEmptyString, pos, size );
 
 	if( !m_SilentMode )
 	{
