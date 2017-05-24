@@ -133,6 +133,7 @@ Fix: Caret is not correctly displayed(0.4.7, WinX64) #231
 Fix: Bug 101030 & 101031 of uchardet
 Fix: Possible char type cast issue(Windows)
 Fix: Bug of query to save files(some file will not be queried)
+Fix: Associated file does not show MadEdit ICON
 Code improvement for 64 bits system
 Update Hunspell to 1.6.1
 Update Astyle to 3.0
