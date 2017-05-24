@@ -492,7 +492,7 @@ struct wxGtkIMData
     wxGtkIMData()
     {
         context = gtk_im_multicontext_new();
-        lastKeyEvent = NULL;
+        lastKeyEvent = nullptr;
     }
     ~wxGtkIMData()
     {
@@ -539,13 +539,13 @@ gtk_window_key_press_callback( GtkWidget *widget,
     // widgets has both IM context and input focus, the event should be filtered
     // by gtk_im_context_filter_keypress().
     // Then, we should, according to GTK+ 2.0 API doc, return whatever it returns.
-    if ((!ret) && (win->m_imData != NULL) && ( wxWindow::FindFocus() == win ))
+    if ((!ret) && (win->m_imData != nullptr) && ( wxWindow::FindFocus() == win ))
     {
         // We should let GTK+ IM filter key event first. According to GTK+ 2.0 API
         // docs, if IM filter returns true, no further processing should be done.
         // we should send the key_down event anyway.
         bool intercepted_by_IM = gtk_im_context_filter_keypress(win->m_imData->context, gdk_event);
-        win->m_imData->lastKeyEvent = NULL;
+        win->m_imData->lastKeyEvent = nullptr;
         if (intercepted_by_IM)
         {
             wxLogTrace(TRACE_KEYS, _T("Key event intercepted by IM"));
@@ -1223,7 +1223,7 @@ bool SendCharHookEvent(const wxKeyEvent& event, wxWindow *win)
     // which typically closes when Esc key is pressed in any of its controls)
     // to handle key events in all of its children unless the mouse is captured
     // in which case we consider that the keyboard should be "captured" too.
-    // Fixme: Assume g_captureWindow always NULL because it's static in gtk/window.cpp
+    // Fixme: Assume g_captureWindow always nullptr because it's static in gtk/window.cpp
     //if ( !g_captureWindow )
     {
         wxKeyEvent eventCharHook(wxEVT_CHAR_HOOK, event);
@@ -1358,7 +1358,7 @@ gtk_window_key_press_callback( GtkWidget *WXUNUSED(widget),
         // we should send the key_down event anyway.
         const int intercepted_by_IM = win->GTKIMFilterKeypress(gdk_event);
 
-        win->m_imKeyEvent = NULL;
+        win->m_imKeyEvent = nullptr;
 
         if ( intercepted_by_IM )
         {
@@ -1501,12 +1501,12 @@ void MadEdit::ConnectToFixedKeyPressHandler()
         isSourceAttached = true;
         static GSourceFuncs funcs = {
             source_prepare, source_check, source_dispatch,
-            NULL, NULL, NULL
+            nullptr, nullptr, nullptr
         };
         GSource* source = g_source_new(&funcs, sizeof(GSource));
         // priority slightly higher than GDK_PRIORITY_EVENTS
         g_source_set_priority(source, GDK_PRIORITY_EVENTS - 1);
-        g_source_attach(source, NULL);
+        g_source_attach(source, nullptr);
     }
 #endif
     

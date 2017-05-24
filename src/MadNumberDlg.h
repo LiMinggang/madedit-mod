@@ -30,6 +30,12 @@
 #include <wx/sizer.h>
 ////Header Include End
 
+#if __cplusplus <= 199711L
+#ifndef nullptr
+	#define nullptr (0)
+#endif
+#endif
+
 ////Dialog Style Start
 #undef MadNumberDlg_STYLE
 #define	MadNumberDlg_STYLE wxCAPTION | wxSYSTEM_MENU | wxDIALOG_NO_PARENT |	wxCLOSE_BOX

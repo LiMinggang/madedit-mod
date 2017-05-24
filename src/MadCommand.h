@@ -8,6 +8,12 @@
 #ifndef _MADCOMMAND_H_
 #define _MADCOMMAND_H_
 
+#if __cplusplus <= 199711L
+#ifndef nullptr
+	#define nullptr (0)
+#endif
+#endif
+
 #include "MadEdit/MadEditCommand.h"
 class wxAuiToolBar;
 

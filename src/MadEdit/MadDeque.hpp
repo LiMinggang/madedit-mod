@@ -7,6 +7,11 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <cstddef>
+#if __cplusplus <= 199711L
+#ifndef nullptr
+	#define nullptr (0)
+#endif
+#endif
 
 template <typename T>
 class MadDeque
@@ -31,8 +36,8 @@ private:
 			mdeque(d),
 			begin( (T*) operator new(N * sizeof(T))),
 			end(begin + N),
-			prev(NULL),
-			next(NULL)
+			prev(nullptr),
+			next(nullptr)
 		{
 		}
 		~buffer()
@@ -55,7 +60,7 @@ public:
 		buffer *buf;
 		T* ptr;
 
-		iterator() : buf(NULL), ptr(NULL) {}
+		iterator() : buf(nullptr), ptr(nullptr) {}
 		iterator(buffer *b, T* p) : buf(b), ptr(p) {}
 		iterator(const iterator& it) : buf(it.buf), ptr(it.ptr) {}
 
@@ -109,7 +114,7 @@ public:
 		{
 			if(++ptr == buf->end)
 			{
-				if(buf->next == NULL)
+				if(buf->next == nullptr)
 				{
 					//assert(buf==buf->mdeque->m_last_buffrt);
 					buf->mdeque->add_buffer_back();
@@ -176,7 +181,7 @@ public:
 			buffer *tmp = m_first_buffer->next;
 			delete m_first_buffer;
 			m_first_buffer = tmp;
-			m_first_buffer->prev = NULL;
+			m_first_buffer->prev = nullptr;
 		}
 	}
 	void free_buffer()
@@ -187,8 +192,8 @@ public:
 			tmp = m_first_buffer->next;
 			delete m_first_buffer;
 			m_first_buffer = tmp;
-		}while(m_first_buffer != NULL);
-		m_last_buffer = NULL;
+		}while(m_first_buffer != nullptr);
+		m_last_buffer = nullptr;
 	}
 	pointer	get_pointer(size_type index) const
 	{

@@ -41,14 +41,14 @@
 
 #include "../images/down.xpm"
 
-MadFindInFilesDialog *g_FindInFilesDialog = NULL;
+MadFindInFilesDialog *g_FindInFilesDialog = nullptr;
 extern wxStatusBar *g_StatusBar;
 extern MadEdit *g_ActiveMadEdit;
-extern void DisplayFindAllResult( wxTreeItemId &myroot, vector<wxFileOffset> &begpos, vector<wxFileOffset> &endpos, MadEdit *madedit, bool expandresults = true, OnProgressUpdatePtr updater = NULL );
+extern void DisplayFindAllResult( wxTreeItemId &myroot, vector<wxFileOffset> &begpos, vector<wxFileOffset> &endpos, MadEdit *madedit, bool expandresults = true, OnProgressUpdatePtr updater = nullptr );
 extern int MadMessageBox( const wxString& message,
                           const wxString& caption = wxMessageBoxCaptionStr,
                           long style = wxOK | wxCENTRE,
-                          wxWindow *parent = NULL,
+                          wxWindow *parent = nullptr,
                           int x = wxDefaultCoord, int y = wxDefaultCoord );
 
 //(*IdInit(MadFindInFilesDialog)
@@ -316,7 +316,7 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID id,const 
 	Center();
 
 	//
-	wxASSERT(g_SearchReplaceDialog != NULL);
+	wxASSERT(g_SearchReplaceDialog != nullptr);
 	if( g_SearchReplaceDialog->m_RecentFindText->GetCount() > 0 )
 	{
 		m_FindText->SetText( g_SearchReplaceDialog->m_RecentFindText->GetHistoryFile( 0 ) );
@@ -347,7 +347,7 @@ void MadFindInFilesDialog::MadFindInFilesDialogClose(wxCloseEvent& event)
 		Show(false);
 		( ( wxFrame* )wxTheApp->GetTopWindow() )->Raise();
 
-		if( g_ActiveMadEdit != NULL )
+		if( g_ActiveMadEdit != nullptr )
 		{
 			g_ActiveMadEdit->Refresh( false );
 			g_ActiveMadEdit->SetFocus();
@@ -355,7 +355,7 @@ void MadFindInFilesDialog::MadFindInFilesDialogClose(wxCloseEvent& event)
 		return;
 	}
 
-	g_FindInFilesDialog = NULL;
+	g_FindInFilesDialog = nullptr;
 	Destroy();
 }
 
@@ -387,14 +387,14 @@ void MadFindInFilesDialog::UpdateCheckBoxByCBHex( bool check )
 
 void MadFindInFilesDialog::WxBitmapButtonRecentFindTextClick( wxCommandEvent& event )
 {
-	wxASSERT(g_SearchReplaceDialog != NULL);
+	wxASSERT(g_SearchReplaceDialog != nullptr);
 
 	PopupMenu( &g_SearchReplaceDialog->WxPopupMenuRecentFindText );
 }
 
 void MadFindInFilesDialog::WxBitmapButtonRecentReplaceTextClick( wxCommandEvent& event )
 {
-	wxASSERT(g_SearchReplaceDialog != NULL);
+	wxASSERT(g_SearchReplaceDialog != nullptr);
 
 	PopupMenu( &g_SearchReplaceDialog->WxPopupMenuRecentReplaceText );
 }
@@ -402,7 +402,7 @@ void MadFindInFilesDialog::WxBitmapButtonRecentReplaceTextClick( wxCommandEvent&
 void MadFindInFilesDialog::OnRecentFindText( wxCommandEvent& event )
 {
 	int idx = event.GetId() - ID_RECENTFINDTEXT1;
-	wxASSERT(g_SearchReplaceDialog != NULL);
+	wxASSERT(g_SearchReplaceDialog != nullptr);
 	wxString text = g_SearchReplaceDialog->m_RecentFindText->GetHistoryFile( idx );
 
 	if( !text.IsEmpty() )
@@ -415,7 +415,7 @@ void MadFindInFilesDialog::OnRecentFindText( wxCommandEvent& event )
 void MadFindInFilesDialog::OnRecentReplaceText( wxCommandEvent& event )
 {
 	int idx = event.GetId() - ID_RECENTREPLACETEXT1;
-	wxASSERT(g_SearchReplaceDialog != NULL);
+	wxASSERT(g_SearchReplaceDialog != nullptr);
 	wxString text = g_SearchReplaceDialog->m_RecentReplaceText->GetHistoryFile( idx );
 
 	if( !text.IsEmpty() )
@@ -443,7 +443,7 @@ void MadFindInFilesDialog::WxButtonFindClick( wxCommandEvent& event )
 
 	if( !text.IsEmpty() )
 	{
-		wxASSERT(g_SearchReplaceDialog != NULL);
+		wxASSERT(g_SearchReplaceDialog != nullptr);
 		g_SearchReplaceDialog->m_RecentFindText->AddFileToHistory( text );
 		FindReplaceInFiles( false );
 	}
@@ -460,7 +460,7 @@ void MadFindInFilesDialog::WxButtonReplaceClick( wxCommandEvent& event )
 
 	if( !text.IsEmpty() )
 	{
-		wxASSERT(g_SearchReplaceDialog != NULL);
+		wxASSERT(g_SearchReplaceDialog != nullptr);
 		g_SearchReplaceDialog->m_RecentFindText->AddFileToHistory( text );
 
 		if( !text2.IsEmpty() )
@@ -537,7 +537,7 @@ void MadFindInFilesDialog::MadFindInFilesDialogActivate( wxActivateEvent& event 
 
 //=========================================================
 
-wxProgressDialog *g_ProgressDialog = NULL;
+wxProgressDialog *g_ProgressDialog = nullptr;
 bool g_Continue;
 wxLongLong g_Time;
 
@@ -557,7 +557,7 @@ public:
 
 		if( delta.ToLong() >= 350 ) {
 			g_Time = t;
-			wxASSERT(g_ProgressDialog != NULL);
+			wxASSERT(g_ProgressDialog != nullptr);
 			g_Continue = g_ProgressDialog->Update( 0, wxString::Format( fmtmsg1, ( wxLongLong( g_FileNameList.size() ).ToString() ).c_str() ) );
 
 			if( !g_Continue ) { return wxDIR_STOP; }
@@ -600,7 +600,7 @@ public:
 };
 
 extern wxProgressDialog *g_SearchProgressDialog;
-extern bool OnSearchProgressUpdate( int value, const wxString &newmsg = wxEmptyString, bool *skip = NULL );
+extern bool OnSearchProgressUpdate( int value, const wxString &newmsg = wxEmptyString, bool *skip = nullptr );
 void MadFindInFilesDialog::FindReplaceInFiles( bool bReplace )
 {
 	//wxLogNull nolog;
@@ -731,7 +731,7 @@ void MadFindInFilesDialog::FindReplaceInFiles( bool bReplace )
 
 	if( g_Continue )
 	{
-		MadEdit *tempedit = NULL;
+		MadEdit *tempedit = nullptr;
 
 		if( WxRadioButtonDir->GetValue() )
 		{
@@ -758,7 +758,7 @@ void MadFindInFilesDialog::FindReplaceInFiles( bool bReplace )
 
 		for( size_t i = 0; i < totalfiles && cont; ++i )
 		{
-			MadEdit *madedit = NULL;
+			MadEdit *madedit = nullptr;
 
 			// prepare madedit
 			if( WxRadioButtonOpenedFiles->GetValue() )
@@ -770,7 +770,7 @@ void MadFindInFilesDialog::FindReplaceInFiles( bool bReplace )
 				size_t id;
 				madedit = g_MainFrame->GetEditByFileName( *fnit, id );
 
-				if( madedit == NULL )
+				if( madedit == nullptr )
 				{
 					madedit = tempedit;
 					wxString enc = WxComboBoxEncoding->GetValue();
@@ -886,7 +886,7 @@ void MadFindInFilesDialog::FindReplaceInFiles( bool bReplace )
 				dialog.Show( false );
 				DisplayFindAllResult( myroot, begpos, endpos, madedit, false, &OnSearchProgressUpdate );
 				g_SearchProgressDialog->Update( ok );
-				g_SearchProgressDialog = NULL;
+				g_SearchProgressDialog = nullptr;
 				dialog.Show( true );
 			}
 			else
@@ -898,7 +898,7 @@ void MadFindInFilesDialog::FindReplaceInFiles( bool bReplace )
 
 	dialog.Update( max );
 	Show( true );
-	g_ProgressDialog = NULL;
+	g_ProgressDialog = nullptr;
 	g_FileNameList.clear();
 }
 
@@ -933,7 +933,7 @@ void MadFindInFilesDialog::WxButtonActiveDirClick( wxCommandEvent& event )
 {
 	extern MadEdit *g_ActiveMadEdit;
 
-	if( g_ActiveMadEdit != NULL )
+	if( g_ActiveMadEdit != nullptr )
 	{
 		wxString str = g_ActiveMadEdit->GetFileName();
 
@@ -1026,7 +1026,7 @@ void MadFindInFilesDialog::MadFindInFilesDialogKeyDown(wxKeyEvent& event)
 			int x, y, w, h;
 			m_FindText->GetPosition( &x, &y );
 			m_FindText->GetSize( &w, &h );
-			wxASSERT(g_SearchReplaceDialog != NULL);
+			wxASSERT(g_SearchReplaceDialog != nullptr);
 			PopupMenu( &g_SearchReplaceDialog->WxPopupMenuRecentFindText, x, y + h );
 			return;
 		}
@@ -1036,7 +1036,7 @@ void MadFindInFilesDialog::MadFindInFilesDialogKeyDown(wxKeyEvent& event)
 				int x, y, w, h;
 				m_ReplaceText->GetPosition( &x, &y );
 				m_ReplaceText->GetSize( &w, &h );
-				wxASSERT(g_SearchReplaceDialog != NULL);
+				wxASSERT(g_SearchReplaceDialog != nullptr);
 				PopupMenu( &g_SearchReplaceDialog->WxPopupMenuRecentReplaceText, x, y + h );
 				return;
 			}

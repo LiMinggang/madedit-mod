@@ -5,29 +5,29 @@ wxSpellCheckEngineInterface::wxSpellCheckEngineInterface()
 {
     m_AlwaysReplaceMap.clear();
     m_AlwaysIgnoreList.IsEmpty();
-    m_pSpellUserInterface = NULL;
+    m_pSpellUserInterface = nullptr;
     m_bPersonalDictionaryModified = false;
     m_bEngineInitialized = false;
 }
 
 wxSpellCheckEngineInterface::~wxSpellCheckEngineInterface()
 {
-    if (m_pSpellUserInterface != NULL)
+    if (m_pSpellUserInterface != nullptr)
     {
         delete m_pSpellUserInterface;
-        m_pSpellUserInterface = NULL;
+        m_pSpellUserInterface = nullptr;
     }
 }
 
 void wxSpellCheckEngineInterface::SetSpellCheckUserInterface(wxSpellCheckUserInterface* pDlg)
 {
     // delete the old user interface
-    if (m_pSpellUserInterface != NULL)
+    if (m_pSpellUserInterface != nullptr)
         delete m_pSpellUserInterface;
 
     // set the new user interface and tell it that this is it's spell check engine
     m_pSpellUserInterface = pDlg;
-    if (m_pSpellUserInterface != NULL)
+    if (m_pSpellUserInterface != nullptr)
         pDlg->SetSpellCheckEngine(this);
 }
 

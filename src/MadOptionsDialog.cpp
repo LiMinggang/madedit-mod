@@ -233,13 +233,13 @@ const long MadOptionsDialog::ID_WXCHECKATTACHCLOSINGWHILE = wxNewId();
 ////Header Include Start
 ////Header Include End
 
-MadOptionsDialog *g_OptionsDialog = NULL;
+MadOptionsDialog *g_OptionsDialog = nullptr;
 extern wxArrayString g_LanguageString;
 extern wxString g_MadEditAppDir;
 
-TreeItemData *g_SelectedCommandItem = NULL;
+TreeItemData *g_SelectedCommandItem = nullptr;
 int g_SelectedKeyId = -1;
-TreeItemData *g_CommandItemOfNewKey = NULL;
+TreeItemData *g_CommandItemOfNewKey = nullptr;
 #define ENABLE_BITMAP_THUARI 0
 static wxString bracket_style[aspsCustom + 1] =
 {
@@ -838,7 +838,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxBoxSizer29->Add( WxStaticBoxSizer6, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 5 );
 	WxBoxSizer30 = new wxBoxSizer( wxHORIZONTAL );
 	WxStaticBoxSizer6->Add( WxBoxSizer30, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 5 );
-	WxEditDictionaryDir = new wxTextCtrl( WxNoteBookPage5, ID_WXEDITDICTIONARYDIR, wxT( "" ), wxPoint( 5, 8 ), wxSize( 240, 25 ), 0, wxTextValidator( wxFILTER_NONE, NULL ), wxT( "WxEditDictionaryDir" ) );
+	WxEditDictionaryDir = new wxTextCtrl( WxNoteBookPage5, ID_WXEDITDICTIONARYDIR, wxT( "" ), wxPoint( 5, 8 ), wxSize( 240, 25 ), 0, wxTextValidator( wxFILTER_NONE, nullptr ), wxT( "WxEditDictionaryDir" ) );
 	WxBoxSizer30->Add( WxEditDictionaryDir, 0, wxALIGN_CENTER | wxALL, 5 );
 	SET_CONTROLPARENT( WxEditDictionaryDir );
 	WxButtonDictionaryDir = new wxButton( WxNoteBookPage5, ID_WXDICTIONARY_DIR, wxT( "..." ), wxPoint( 255, 5 ), wxSize( 75, 25 ), 0, wxDefaultValidator, wxT( "WxButtonDictionaryDir" ) );
@@ -849,7 +849,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 #if ENABLE_BITMAP_THUARI
 	WxBoxSizer31 = new wxBoxSizer( wxHORIZONTAL );
 	WxStaticBoxSizer6->Add( WxBoxSizer31, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 5 );
-	WxEditThesauriDir = new wxTextCtrl( WxNoteBookPage5, ID_WXEDITTHESAURI, wxT( "" ), wxPoint( 5, 8 ), wxSize( 240, 19 ), 0, wxTextValidator( wxFILTER_NONE, NULL ), wxT( "WxEditThesauriDir" ) );
+	WxEditThesauriDir = new wxTextCtrl( WxNoteBookPage5, ID_WXEDITTHESAURI, wxT( "" ), wxPoint( 5, 8 ), wxSize( 240, 19 ), 0, wxTextValidator( wxFILTER_NONE, nullptr ), wxT( "WxEditThesauriDir" ) );
 	WxBoxSizer31->Add( WxEditThesauriDir, 0, wxALIGN_CENTER | wxALL, 5 );
 	SET_CONTROLPARENT( WxEditThesauriDir );
 	WxButtonThesauriDir = new wxButton( WxNoteBookPage5, ID_WXTHESAURI_DIR, wxT( "..." ), wxPoint( 255, 5 ), wxSize( 75, 25 ), 0, wxDefaultValidator, wxT( "WxButtonThesauriDir" ) );
@@ -859,7 +859,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxBoxSizer31->Add( WxStaticText20, 0, wxALIGN_CENTER | wxALL, 5 );
 	WxBoxSizer32 = new wxBoxSizer( wxHORIZONTAL );
 	WxStaticBoxSizer6->Add( WxBoxSizer32, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 5 );
-	WxEditBitMapDir = new wxTextCtrl( WxNoteBookPage5, ID_WXEDITBITMAPDIR, wxT( "" ), wxPoint( 5, 8 ), wxSize( 240, 19 ), 0, wxTextValidator( wxFILTER_NONE, NULL ), wxT( "WxEditBitMapDir" ) );
+	WxEditBitMapDir = new wxTextCtrl( WxNoteBookPage5, ID_WXEDITBITMAPDIR, wxT( "" ), wxPoint( 5, 8 ), wxSize( 240, 19 ), 0, wxTextValidator( wxFILTER_NONE, nullptr ), wxT( "WxEditBitMapDir" ) );
 	WxBoxSizer32->Add( WxEditBitMapDir, 0, wxALIGN_CENTER | wxALL, 5 );
 	SET_CONTROLPARENT( WxEditBitMapDir );
 	WxButtonBitmapDir = new wxButton( WxNoteBookPage5, ID_WXBITMAP_DIR, wxT( "..." ), wxPoint( 255, 5 ), wxSize( 75, 25 ), 0, wxDefaultValidator, wxT( "WxButtonBitmapDir" ) );
@@ -1078,14 +1078,14 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxBoxSizer40->Add( WxStaticText22, 0, wxALIGN_LEFT | wxALIGN_BOTTOM | wxALL, 1 );
 	WxBoxSizer41 = new wxBoxSizer( wxHORIZONTAL );
 	WxBoxSizer39->Add( WxBoxSizer41, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
-	WxEditMaxInStatementIndent = new wxTextCtrl( WxAuiNoteBookPage3, ID_WXEDITMAXINSTATEMENTINDENT, wxT( "40" ), wxPoint( 1, 1 ), wxSize( 60, 19 ), 0, wxTextValidator( wxFILTER_NUMERIC, NULL ), wxT( "WxEditMaxInStatementIndent" ) );
+	WxEditMaxInStatementIndent = new wxTextCtrl( WxAuiNoteBookPage3, ID_WXEDITMAXINSTATEMENTINDENT, wxT( "40" ), wxPoint( 1, 1 ), wxSize( 60, 19 ), 0, wxTextValidator( wxFILTER_NUMERIC, nullptr ), wxT( "WxEditMaxInStatementIndent" ) );
 	WxBoxSizer41->Add( WxEditMaxInStatementIndent, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	SET_CONTROLPARENT( WxEditMaxInStatementIndent );
 	WxStaticText23 = new wxStaticText( WxAuiNoteBookPage3, ID_WXSTATICTEXT23, _( "Maximum of # spaces to indent a continuation line (max. 120)" ), wxPoint( 61, 2 ), wxSize( 500, 17 ), 0, wxT( "WxStaticText23" ) );
 	WxBoxSizer41->Add( WxStaticText23, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	WxBoxSizer53 = new wxBoxSizer( wxHORIZONTAL );
 	WxBoxSizer39->Add( WxBoxSizer53, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
-	WxEditIndentContinuation = new wxTextCtrl( WxAuiNoteBookPage3, ID_WXCHECKINDENTCONTINUATION, wxT( "1" ), wxPoint( 1, 1 ), wxSize( 60, 19 ), 0, wxTextValidator( wxFILTER_NUMERIC, NULL ), wxT( "WxEditIndentContinuation" ) );
+	WxEditIndentContinuation = new wxTextCtrl( WxAuiNoteBookPage3, ID_WXCHECKINDENTCONTINUATION, wxT( "1" ), wxPoint( 1, 1 ), wxSize( 60, 19 ), 0, wxTextValidator( wxFILTER_NUMERIC, nullptr ), wxT( "WxEditIndentContinuation" ) );
 	WxBoxSizer53->Add( WxEditIndentContinuation, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	SET_CONTROLPARENT( WxEditIndentContinuation );
 	WxStaticText32 = new wxStaticText( WxAuiNoteBookPage3, ID_WXSTATICTEXT32, _( "Indent a continuation line (default 1)" ), wxPoint( 61, 2 ), wxSize( 500, 17 ), 0, wxT( "WxStaticText31" ) );
@@ -1134,7 +1134,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxBoxSizer43 = new wxBoxSizer( wxHORIZONTAL );
 	WxBoxSizer42->Add( WxBoxSizer43, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	WxBoxSizer43->Add(10,0,0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
-	WxEditSFMaxLineLength = new wxTextCtrl( WxAuiNoteBookPage4, ID_WXEDITSFMAXLINELENGTH, wxT( "200" ), wxPoint( 15, 1 ), wxSize( 60, 19 ), 0, wxTextValidator( wxFILTER_NUMERIC, NULL ), wxT( "WxEditSFMaxLineLength" ) );
+	WxEditSFMaxLineLength = new wxTextCtrl( WxAuiNoteBookPage4, ID_WXEDITSFMAXLINELENGTH, wxT( "200" ), wxPoint( 15, 1 ), wxSize( 60, 19 ), 0, wxTextValidator( wxFILTER_NUMERIC, nullptr ), wxT( "WxEditSFMaxLineLength" ) );
 	WxEditSFMaxLineLength->Enable( false );
 	WxBoxSizer43->Add( WxEditSFMaxLineLength, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 1 );
 	SET_CONTROLPARENT( WxEditSFMaxLineLength );
@@ -1275,14 +1275,14 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxAuiNoteBookPage6->SetAutoLayout( true );
 	WxBoxSizer49 = new wxBoxSizer( wxHORIZONTAL );
 	WxBoxSizer48->Add( WxBoxSizer49, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
-	WxEditXMLversion = new wxTextCtrl( WxAuiNoteBookPage6, ID_WXEDITXMLVERSION, wxT( "1.0" ), wxPoint( 5, 5 ), wxSize( 49, 19 ), 0, wxTextValidator( wxFILTER_ASCII, NULL ), wxT( "WxEditXMLversion" ) );
+	WxEditXMLversion = new wxTextCtrl( WxAuiNoteBookPage6, ID_WXEDITXMLVERSION, wxT( "1.0" ), wxPoint( 5, 5 ), wxSize( 49, 19 ), 0, wxTextValidator( wxFILTER_ASCII, nullptr ), wxT( "WxEditXMLversion" ) );
 	WxBoxSizer49->Add( WxEditXMLversion, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
 	SET_CONTROLPARENT( WxEditXMLversion );
 	WxStaticText28 = new wxStaticText( WxAuiNoteBookPage6, ID_WXSTATICTEXT28, _( "XML version" ), wxPoint( 55, 6 ), wxDefaultSize, 0, wxT( "WxStaticText28" ) );
 	WxBoxSizer49->Add( WxStaticText28, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
 	WxBoxSizer50 = new wxBoxSizer( wxHORIZONTAL );
 	WxBoxSizer48->Add( WxBoxSizer50, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
-	WxEditXmlIndentSize = new wxTextCtrl( WxAuiNoteBookPage6, ID_WXEDITXMLINDENTSIZE, wxT( "4" ), wxPoint( 5, 5 ), wxSize( 49, 19 ), 0, wxTextValidator( wxFILTER_NUMERIC, NULL ), wxT( "WxEditXmlIndentSize" ) );
+	WxEditXmlIndentSize = new wxTextCtrl( WxAuiNoteBookPage6, ID_WXEDITXMLINDENTSIZE, wxT( "4" ), wxPoint( 5, 5 ), wxSize( 49, 19 ), 0, wxTextValidator( wxFILTER_NUMERIC, nullptr ), wxT( "WxEditXmlIndentSize" ) );
 	WxBoxSizer50->Add( WxEditXmlIndentSize, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
 	SET_CONTROLPARENT( WxEditXmlIndentSize );
 	WxStaticText29 = new wxStaticText( WxAuiNoteBookPage6, ID_WXSTATICTEXT29, _( "Indentation size(in spaces)" ), wxPoint( 55, 6 ), wxDefaultSize, 0, wxT( "WxStaticText29" ) );
@@ -1471,7 +1471,7 @@ void MadOptionsDialog::MadOptionsDialogClose( wxCloseEvent& event )
 		return;
 	}
 
-	g_OptionsDialog = NULL;
+	g_OptionsDialog = nullptr;
 	Destroy();
 }
 
@@ -1483,7 +1483,7 @@ void MadOptionsDialog::MadOptionsDialogActivate( wxActivateEvent& event )
 {
 	if( event.GetActive() )
 	{
-		if( FindFocus() == NULL )
+		if( FindFocus() == nullptr )
 		{
 			SetReturnCode( wxID_CANCEL );
 			WxButtonCancel->SetFocus();
@@ -1641,7 +1641,7 @@ void MadOptionsDialog::LoadOptions( void )
 	}
 	while( ++tidit != tiditend );
 
-	g_SelectedCommandItem = NULL;
+	g_SelectedCommandItem = nullptr;
 	g_SelectedKeyId = -1;
 	WxEditCommandHint->Clear();
 	WxListBoxKeys->Clear();
@@ -1830,7 +1830,7 @@ void MadOptionsDialog::PrintMarkButtonClick( wxCommandEvent& event )
 void MadOptionsDialog::PrintMarkClick( wxCommandEvent& event )
 {
 	wxString str = WxPopupMenuPrintMark->GetLabel( event.GetId() );
-	wxTextCtrl *edit = NULL;
+	wxTextCtrl *edit = nullptr;
 
 	switch( ButtonID )
 	{
@@ -1847,7 +1847,7 @@ void MadOptionsDialog::PrintMarkClick( wxCommandEvent& event )
 	case ID_WXBUTTON6: edit = WxEditFooterRight; break;
 	}
 
-	if( edit != NULL && str[0] == wxT( '[' ) && str[3] == wxT( ']' ) )
+	if( edit != nullptr && str[0] == wxT( '[' ) && str[3] == wxT( ']' ) )
 	{
 		wxString text = edit->GetValue();
 		edit->SetValue( text + str.Mid( 1, 2 ) );
@@ -1869,7 +1869,7 @@ void MadOptionsDialog::WxTreeCtrl1SelChanged( wxTreeEvent& event )
 	g_SelectedCommandItem = ( TreeItemData* )WxTreeCtrl1->GetItemData( id );
 	g_SelectedKeyId = -1;
 
-	if( g_SelectedCommandItem == NULL )
+	if( g_SelectedCommandItem == nullptr )
 	{
 		WxListBoxKeys->Clear();
 		WxEditCommandHint->SetValue( _( "Cannot assign key to this item" ) );
@@ -1941,7 +1941,7 @@ TreeItemData* MadOptionsDialog::FindKeyInList( const wxString &key )
 		++tidit;
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 bool MadOptionsDialog::FindItemInList( TreeItemData* tid, const list<TreeItemData*> &tlist )
@@ -1965,7 +1965,7 @@ bool MadOptionsDialog::FindItemInList( TreeItemData* tid, const list<TreeItemDat
 void MadOptionsDialog::UpdateKeyHint()
 {
 	wxString scstr = WxEditKey->GetValue();
-	g_CommandItemOfNewKey = NULL;
+	g_CommandItemOfNewKey = nullptr;
 
 	if( scstr.IsEmpty() )
 	{
@@ -1976,7 +1976,7 @@ void MadOptionsDialog::UpdateKeyHint()
 		// find the key is assigned to which command
 		TreeItemData *tid = g_OptionsDialog->FindKeyInList( scstr );
 
-		if( tid == NULL )
+		if( tid == nullptr )
 		{
 			g_OptionsDialog->WxEditKeyHint->SetValue( _( "This key is not assigned" ) );
 		}
@@ -2016,11 +2016,11 @@ void MadOptionsDialog::UpdateKeyHint()
  */
 void MadOptionsDialog::WxButtonAddKeyClick( wxCommandEvent& event )
 {
-	if( g_SelectedCommandItem != NULL && g_SelectedCommandItem != g_CommandItemOfNewKey )
+	if( g_SelectedCommandItem != nullptr && g_SelectedCommandItem != g_CommandItemOfNewKey )
 	{
 		wxString key = WxEditKey->GetValue();
 
-		if( g_CommandItemOfNewKey != NULL ) // new key is assigned to another command
+		if( g_CommandItemOfNewKey != nullptr ) // new key is assigned to another command
 		{
 			/*
 			wxMessageDialog dlg(this, key +wxT(": ") +WxEditKeyHint->GetValue() +wxT("\n\n") + wxString(_("Do you want to reassign this key?")),
@@ -2060,7 +2060,7 @@ void MadOptionsDialog::WxButtonAddKeyClick( wxCommandEvent& event )
  */
 void MadOptionsDialog::WxButtonDeleteKeyClick( wxCommandEvent& event )
 {
-	if( g_SelectedCommandItem != NULL && g_SelectedKeyId >= 0 )
+	if( g_SelectedCommandItem != nullptr && g_SelectedKeyId >= 0 )
 	{
 		g_SelectedCommandItem->keys.RemoveAt( g_SelectedKeyId );
 		WxListBoxKeys->Set( g_SelectedCommandItem->keys );
@@ -2081,7 +2081,7 @@ void MadOptionsDialog::WxButtonDeleteKeyClick( wxCommandEvent& event )
 void MadOptionsDialog::WxButtonShowInMenuClick( wxCommandEvent& event )
 {
 	// move the selected key to first element of WxListBoxKeys
-	if( g_SelectedCommandItem != NULL && g_SelectedCommandItem->cmddata->menu_id > 0 && g_SelectedKeyId > 0 )
+	if( g_SelectedCommandItem != nullptr && g_SelectedCommandItem->cmddata->menu_id > 0 && g_SelectedKeyId > 0 )
 	{
 		wxString key = g_SelectedCommandItem->keys[g_SelectedKeyId];
 		g_SelectedCommandItem->keys.RemoveAt( g_SelectedKeyId );

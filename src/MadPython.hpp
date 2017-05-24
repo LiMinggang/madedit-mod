@@ -19,6 +19,12 @@
 #include <string>
 #include <memory>
 
+#if __cplusplus <= 199711L
+#ifndef nullptr
+	#define nullptr (0)
+#endif
+#endif
+
 #include "MadEdit/MadEncoding.h"
 #include "MadEdit/MadEdit.h"
 #include "MadEdit/MadEditCommand.h"
@@ -28,14 +34,14 @@
 	extern wxStatusBar *g_StatusBar;
 	extern MadEdit *g_ActiveMadEdit;
 #else
-	MadEdit *g_ActiveMadEdit = NULL;
+	MadEdit *g_ActiveMadEdit = nullptr;
 	wxFrame g_DummyWin;
 #endif
-extern void DisplayFindAllResult( wxTreeItemId &myroot, vector<wxFileOffset> &begpos, vector<wxFileOffset> &endpos, MadEdit *madedit, bool expandresults = true, OnProgressUpdatePtr updater = NULL );
+extern void DisplayFindAllResult( wxTreeItemId &myroot, vector<wxFileOffset> &begpos, vector<wxFileOffset> &endpos, MadEdit *madedit, bool expandresults = true, OnProgressUpdatePtr updater = nullptr );
 extern int MadMessageBox( const wxString& message,
 						  const wxString& caption = wxMessageBoxCaptionStr,
 						  long style = wxOK | wxCENTRE,
-						  wxWindow *parent = NULL,
+						  wxWindow *parent = nullptr,
 						  int x = wxDefaultCoord, int y = wxDefaultCoord );
 
 
@@ -1526,7 +1532,7 @@ namespace mad_python {
 				if(bRegex) bWholeWord = false;
 				else bDotMatchNewline = false;
 				ok = g_ActiveMadEdit->ReplaceTextAll( wxExpr, wxFmt, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline,
-					NULL, NULL, ( wxFileOffset )rangeFrom, ( wxFileOffset )rangeTo );
+					nullptr, nullptr, ( wxFileOffset )rangeFrom, ( wxFileOffset )rangeTo );
 			}
 
 			return ok;
@@ -1538,7 +1544,7 @@ namespace mad_python {
 
 			if( ( g_ActiveMadEdit ) && ( !expr.empty() ) && ( !g_ActiveMadEdit->IsReadOnly() ) ) {
 				wxString wxExpr( expr.c_str(), *wxConvCurrent ), wxFmt( fmt.c_str(), *wxConvCurrent );
-				ok = g_ActiveMadEdit->ReplaceHexAll( wxExpr, wxFmt, NULL, NULL, ( wxFileOffset )rangeFrom, ( wxFileOffset )rangeTo );
+				ok = g_ActiveMadEdit->ReplaceHexAll( wxExpr, wxFmt, nullptr, nullptr, ( wxFileOffset )rangeFrom, ( wxFileOffset )rangeTo );
 			}
 
 			return ok;

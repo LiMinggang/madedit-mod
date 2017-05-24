@@ -16,9 +16,14 @@
 
 #ifdef _DEBUG
 #include <crtdbg.h>
-#define	new	new(_NORMAL_BLOCK ,__FILE__, __LINE__)
+#define new new(_NORMAL_BLOCK ,__FILE__, __LINE__)
 #endif
 
+#if !defined(__cplusplus) || __cplusplus <= 199711L
+#ifndef nullptr
+	#define nullptr (0)
+#endif
+#endif
 
 ucs2_t Simp2Trad_Table[]=
 {
@@ -11489,15 +11494,15 @@ ucs2_t Chinese2Kanji_Table[]=
 0
 };
 
-ucs2_t *Simp2TradTable=NULL;
-ucs2_t *Trad2SimpTable=NULL;
-ucs2_t *Kanji2TradTable=NULL;
-ucs2_t *Kanji2SimpTable=NULL;
-ucs2_t *Chinese2KanjiTable=NULL;
+ucs2_t *Simp2TradTable=nullptr;
+ucs2_t *Trad2SimpTable=nullptr;
+ucs2_t *Kanji2TradTable=nullptr;
+ucs2_t *Kanji2SimpTable=nullptr;
+ucs2_t *Chinese2KanjiTable=nullptr;
 
 void BuildConvertTable(ucs2_t* &ucs2_table,	ucs2_t tab[])
 {
-	if(ucs2_table==NULL)
+	if(ucs2_table==nullptr)
 	{
 		ucs2_table = new ucs2_t[65536];
 		memset(ucs2_table, 0, sizeof(ucs2_t)*65536);
@@ -11515,27 +11520,27 @@ void FreeConvertChineseTable()
 	if(Simp2TradTable)
 	{
 		delete []Simp2TradTable;
-		Simp2TradTable=NULL;
+		Simp2TradTable=nullptr;
 	}
 	if(Trad2SimpTable)
 	{
 		delete []Trad2SimpTable;
-		Trad2SimpTable=NULL;
+		Trad2SimpTable=nullptr;
 	}
 	if(Kanji2TradTable)
 	{
 		delete []Kanji2TradTable;
-		Kanji2TradTable=NULL;
+		Kanji2TradTable=nullptr;
 	}
 	if(Kanji2SimpTable)
 	{
 		delete []Kanji2SimpTable;
-		Kanji2SimpTable=NULL;
+		Kanji2SimpTable=nullptr;
 	}
 	if(Chinese2KanjiTable)
 	{
 		delete []Chinese2KanjiTable;
-		Chinese2KanjiTable=NULL;
+		Chinese2KanjiTable=nullptr;
 	}
 }
 

@@ -46,9 +46,16 @@
 
 #include <wx/dialog.h>
 
-#include "MadCommand.h"
 #include <list>
 using std::list;
+
+#if __cplusplus <= 199711L
+#ifndef nullptr
+	#define nullptr (0)
+#endif
+#endif
+
+#include "MadCommand.h"
 
 //Compatibility for 2.4.x code
 #ifndef wxCLOSE_BOX

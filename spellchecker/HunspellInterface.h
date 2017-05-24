@@ -33,6 +33,12 @@
 #include "wx/txtstrm.h"
 #include "wx/file.h"
 
+#if __cplusplus <= 199711L
+#ifndef nullptr
+	#define nullptr (0)
+#endif
+#endif
+
 #include "SpellCheckUserInterface.h"
 #include "PersonalDictionary.h"
 
@@ -46,7 +52,7 @@ class Hunspell;
 class HunspellInterface : public wxSpellCheckEngineInterface
 {
 public:
-    HunspellInterface(wxSpellCheckUserInterface* pDlg = NULL);
+    HunspellInterface(wxSpellCheckUserInterface* pDlg = nullptr);
     ~HunspellInterface();
 
     // Spell Checker functions

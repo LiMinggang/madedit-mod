@@ -33,6 +33,12 @@ using std::list;
 using std::deque;
 using std::pair;
 
+#if __cplusplus <= 199711L
+#ifndef nullptr
+	#define nullptr (0)
+#endif
+#endif
+
 #include "ucs4_t.h"
 #include "MadDeque.hpp"
 
@@ -152,13 +158,13 @@ struct MadBlock//:public Loki::SmallObject <>
 	wxFileOffset m_Pos;
 	wxFileOffset m_Size;
 
-	MadBlock(): m_Data( NULL ), m_Pos( 0 ), m_Size( 0 ) {
+	MadBlock(): m_Data( nullptr ), m_Pos( 0 ), m_Size( 0 ) {
 	}
 	MadBlock( MadInData *data, const wxFileOffset &pos, const wxFileOffset &size )
 		: m_Data( data ), m_Pos( pos ), m_Size( size ) {
 	}
 	void Reset() {
-		m_Data = NULL;
+		m_Data = nullptr;
 		m_Pos = 0;
 		m_Size = 0;
 	}
@@ -391,7 +397,7 @@ private:
 	// append lit2 after lit1
 	void Append( const MadLineIterator &lit1, const MadLineIterator &lit2 );
 
-	// write to fd or file if which one isn't NULL
+	// write to fd or file if which one isn't nullptr
 	void WriteBlockToData( MadOutData *fd, const MadBlockIterator &bit );
 	void WriteToFile( wxFile &file, MadFileData *oldfd, MadFileData *newfd );
 

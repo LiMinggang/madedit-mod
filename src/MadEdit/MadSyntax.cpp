@@ -338,7 +338,7 @@ MadSyntax* MadSyntax::GetSyntaxByExt( const wxString &ext )
 		}
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 MadSyntax* MadSyntax::GetSyntaxByFirstLine( wxByte *data, int size )
@@ -390,7 +390,7 @@ MadSyntax* MadSyntax::GetSyntaxByFirstLine( wxByte *data, int size )
 		}
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 MadSyntax* MadSyntax::GetSyntaxByFileName( const wxString &filename )
@@ -416,7 +416,7 @@ MadSyntax* MadSyntax::GetSyntaxByFileName( const wxString &filename )
 		}
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 size_t MadSyntax::GetSchemeCount()
@@ -496,7 +496,7 @@ bool MadSyntax::LoadScheme( const wxString &schname, MadSyntax *syn )
 
 bool MadSyntax::SaveScheme( const wxString &schname, MadSyntax *syn )
 {
-	wxASSERT( syn != NULL );
+	wxASSERT( syn != nullptr );
 	wxString name = schname;
 
 	if( name.Right( 1 ) == wxT( '*' ) ) name = schname.Left( schname.Len() - 1 );
@@ -555,7 +555,7 @@ bool MadSyntax::SaveScheme( const wxString &schname, MadSyntax *syn )
 bool MadSyntax::DeleteScheme( const wxString &schname )
 {
 	bool star;
-	wxString schfile = GetSchemeFileByName( schname, NULL, star );
+	wxString schfile = GetSchemeFileByName( schname, nullptr, star );
 
 	if( star || schfile.IsEmpty() ) return false;
 
@@ -1167,7 +1167,7 @@ MadAttributes *MadSyntax::GetAttributes( const wxString &name )
 			return &m_SystemAttributes[i];
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 MadSyntaxKeyword *MadSyntax::GetCustomKeyword( const wxString &name )
@@ -1295,7 +1295,7 @@ MadSyntaxRange *MadSyntax::GetSyntaxRange( int rangeid )
 		while( it != m_CustomRange.end() );
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 wxString MadSyntax::GetAttributeName( MadAttributeElement ae )

@@ -11,6 +11,11 @@
 
 #include <wx/defs.h>
 #include <boost/noncopyable.hpp>
+#if __cplusplus <= 199711L
+#ifndef nullptr
+	#define nullptr (0)
+#endif
+#endif
 
 struct HtmlColor
 {

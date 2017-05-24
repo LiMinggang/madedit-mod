@@ -90,7 +90,7 @@ public:
         wxASSERT_MSG( clipboard == ms_clipboard,
                         wxT("got notification for alien clipboard") );
 
-        ms_clipboard = NULL;
+        ms_clipboard = nullptr;
     }
 
     // this method should be called if it's possible that no async clipboard
@@ -110,7 +110,7 @@ private:
     wxDECLARE_NO_COPY_CLASS(wxClipboardGtkSync);
 };
 
-wxClipboardGtk *wxClipboardGtkSync::ms_clipboard = NULL;
+wxClipboardGtk *wxClipboardGtkSync::ms_clipboard = nullptr;
 
 // ============================================================================
 // clipboard callbacks implementation
@@ -439,7 +439,7 @@ wxClipboardGtk::wxClipboardGtk()
 
     m_dataPrimary =
     m_dataClipboard =
-    m_receivedData = NULL;
+    m_receivedData = nullptr;
 
     m_formatSupported = false;
     m_targetRequested = 0;
@@ -466,7 +466,7 @@ wxClipboardGtk::wxClipboardGtk()
                       G_CALLBACK (selection_received), this);
 
     g_signal_connect (m_clipboardWidget, "selection_clear_event",
-                      G_CALLBACK (selection_clear_clip), NULL);
+                      G_CALLBACK (selection_clear_clip), nullptr);
 
     // initialize atoms we use if not done yet
     if ( !g_clipboardAtom )
@@ -509,7 +509,7 @@ bool wxClipboardGtk::SetSelectionOwner(bool set)
 {
     bool rc = gtk_selection_owner_set
               (
-                set ? m_clipboardWidget : NULL,
+                set ? m_clipboardWidget : nullptr,
                 GTKGetClipboardAtom(),
                 (guint32)GDK_CURRENT_TIME
               ) != 0;
@@ -768,14 +768,14 @@ wxDataObject* wxClipboardGtk::GTKGetDataObject( GdkAtom atom )
     }
     else // some other selection, we're not concerned
     {
-        return (wxDataObject*)NULL;
+        return (wxDataObject*)nullptr;
     }
 }
 
-wxClipboardGtk *g_ClipboardGtk=NULL;
+wxClipboardGtk *g_ClipboardGtk=nullptr;
 wxClipboardGtk *GetClipboardGtk()
 {
-    if(g_ClipboardGtk==NULL)
+    if(g_ClipboardGtk==nullptr)
     {
         g_ClipboardGtk=new wxClipboardGtk;
     }

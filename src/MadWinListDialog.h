@@ -9,6 +9,11 @@
 #include <wx/button.h>
 #include <wx/dialog.h>
 //*)
+#if __cplusplus <= 199711L
+#ifndef nullptr
+	#define nullptr (0)
+#endif
+#endif
 
 class MadEditFrame;
 

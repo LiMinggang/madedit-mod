@@ -190,7 +190,7 @@ wxString GetExecutablePath()
 
 		wxChar buf[512];
 		*buf = wxT('\0');
-		GetModuleFileName(NULL,	buf, 511);
+		GetModuleFileName(nullptr, buf, 511);
 		path = buf;
 
 #elif defined(__WXMAC__)
@@ -199,10 +199,10 @@ wxString GetExecutablePath()
 		ProcessSerialNumber	procno ;
 		FSSpec fsSpec;
 
-		procno.highLongOfPSN = NULL	;
+		procno.highLongOfPSN = nullptr;
 		procno.lowLongOfPSN	= kCurrentProcess ;
 		processinfo.processInfoLength =	sizeof(ProcessInfoRec);
-		processinfo.processName	= NULL;
+		processinfo.processName	= nullptr;
 		processinfo.processAppSpec = &fsSpec;
 
 		GetProcessInformation( &procno , &processinfo )	;

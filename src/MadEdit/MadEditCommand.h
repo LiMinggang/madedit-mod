@@ -293,7 +293,7 @@ public:
 		}
 		if(overwrite)
 		{
-			MadKeyBinding *kb=NULL;
+			MadKeyBinding *kb=nullptr;
 			MadKeyBindingMap::iterator ecit	= m_EditCommandMap->find(cmd);
 			if(ecit	!= m_EditCommandMap->end())
 			{

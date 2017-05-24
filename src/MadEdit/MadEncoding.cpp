@@ -121,7 +121,7 @@ void MSW_GetFontName( wxChar *codepage, wxString &fontname )
 #endif
 
 size_t MadEncoding::ms_SystemEncodingIndex = 0;
-MadEncoding *MadEncoding::ms_SystemEncoding = NULL;
+MadEncoding *MadEncoding::ms_SystemEncoding = nullptr;
 
 void MadEncoding::InitEncodings()
 {
@@ -691,7 +691,7 @@ void MadEncoding::InitEncodings()
 
 void MadEncoding::FreeEncodings()
 {
-	if( ms_SystemEncoding != NULL )
+	if( ms_SystemEncoding != nullptr )
 	{
 		delete ms_SystemEncoding;
 	}
@@ -778,7 +778,7 @@ int MadEncoding::NameToEncoding( const wxString &name )
 
 MadEncoding *MadEncoding::GetSystemEncoding()
 {
-	if( ms_SystemEncoding == NULL )
+	if( ms_SystemEncoding == nullptr )
 	{
 		ms_SystemEncoding = new MadEncoding( ms_SystemEncodingIndex );
 	}
@@ -836,7 +836,7 @@ void MadEncoding::Create( size_t idx )
 	m_Info = &EncodingsTable[idx];
 	m_CSConv = m_Info->m_CSConv;
 
-	if( m_CSConv != NULL )
+	if( m_CSConv != nullptr )
 	{
 		m_MBtoWC_Table = m_Info->m_MBtoWC_Table;
 		m_WCtoMB_Table = m_Info->m_WCtoMB_Table;
@@ -1668,7 +1668,7 @@ void DetectJapaneseEncoding( const wxByte *text, int count, int &enc )
 
 void DetectEncoding( const wxByte *text, int count, int &enc )
 {
-	uchardet_t det = NULL;
+	uchardet_t det = nullptr;
 	det = uchardet_new();
 	uchardet_handle_data( det, ( const char* )text, count );
 	uchardet_data_end( det );

@@ -25,9 +25,9 @@ extern MadEdit *g_ActiveMadEdit;
 extern int MadMessageBox(const wxString& message,
 								 const wxString& caption = wxMessageBoxCaptionStr,
 								 long style	= wxOK | wxCENTRE,
-								 wxWindow *parent =	NULL,
+								 wxWindow *parent = nullptr,
 								 int x = wxDefaultCoord, int y = wxDefaultCoord);
-MadMacroDlg *g_MadMacroDlg = NULL;
+MadMacroDlg *g_MadMacroDlg = nullptr;
 MadMacroDlg::MadMacroDlg(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)
 {
 	wxSize pymacro(640, 240);
@@ -88,7 +88,7 @@ MadMacroDlg::~MadMacroDlg()
 {
 	//(*Destroy(MadMacroDlg)
 	//*)
-	g_MadMacroDlg =	NULL;
+	g_MadMacroDlg =	nullptr;
 }
 
 void MadMacroDlg::SetPyScript(wxString & pyscript)
@@ -157,5 +157,5 @@ void MadMacroDlg::OnWxButtonResultClick(wxCommandEvent& event)
 void MadMacroDlg::MadMacroDlgClose(wxCloseEvent& event)
 {
     Destroy();
-	g_MadMacroDlg =	NULL;
+	g_MadMacroDlg =	nullptr;
 }

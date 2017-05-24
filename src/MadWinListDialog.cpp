@@ -25,7 +25,7 @@ const long MadWinListDialog::COL_TABNAME = 0;
 const long MadWinListDialog::COL_PATH = 1;
 #define WINLIST_MIN_PATH_COL_WIDTH 80
 
-MadWinListDialog *g_WinListDialog = NULL;
+MadWinListDialog *g_WinListDialog = nullptr;
 
 MadWinListDialog::MadWinListDialog(wxWindow* parent,wxWindowID id)
 {
@@ -315,7 +315,7 @@ void MadWinListDialog::OnButtonOkClick(wxCommandEvent& event)
 
 void MadWinListDialog::OnMadWinListDialogClose(wxCloseEvent& event)
 {
-	g_WinListDialog = NULL;
+	g_WinListDialog = nullptr;
     Destroy();
 }
 

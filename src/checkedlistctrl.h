@@ -16,6 +16,11 @@
 // wxWidgets headers
 #include <wx/listctrl.h>
 #include <wx/imaglist.h>
+#if __cplusplus <= 199711L
+#ifndef nullptr
+	#define nullptr (0)
+#endif
+#endif
 
 #ifndef wxUSE_CHECKEDLISTCTRL
     #define wxUSE_CHECKEDLISTCTRL                   1
@@ -49,7 +54,7 @@ DECLARE_EXPORTED_EVENT_TYPE(WXEXPORT, wxEVT_COMMAND_LIST_ITEM_UNCHECKED, -1);
     DECLARE_EVENT_TABLE_ENTRY( \
         wxEVT_COMMAND_LIST_ITEM_CHECKED, id, -1, \
         (wxObjectEventFunction)(wxEventFunction)(wxListEventFunction)&fn, \
-        (wxObject *) NULL \
+        (wxObject *) nullptr \
     ),
 #endif
 #ifndef EVT_LIST_ITEM_UNCHECKED
@@ -58,7 +63,7 @@ DECLARE_EXPORTED_EVENT_TYPE(WXEXPORT, wxEVT_COMMAND_LIST_ITEM_UNCHECKED, -1);
     DECLARE_EVENT_TABLE_ENTRY( \
         wxEVT_COMMAND_LIST_ITEM_UNCHECKED, id, -1, \
         (wxObjectEventFunction)(wxEventFunction)(wxListEventFunction)&fn, \
-        (wxObject *) NULL \
+        (wxObject *) nullptr \
     ),
 
 #endif

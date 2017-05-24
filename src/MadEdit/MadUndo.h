@@ -25,6 +25,12 @@
 using std::vector;
 using std::list;
 
+#if __cplusplus <= 199711L
+#ifndef nullptr
+	#define nullptr (0)
+#endif
+#endif
+
 #include "MadLines.h"
 
 

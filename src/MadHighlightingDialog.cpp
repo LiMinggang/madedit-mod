@@ -33,11 +33,11 @@
 extern int MadMessageBox(const wxString& message,
                              const wxString& caption = wxMessageBoxCaptionStr,
                              long style = wxOK | wxCENTRE,
-                             wxWindow *parent = NULL,
+                             wxWindow *parent = nullptr,
                              int x = wxDefaultCoord, int y = wxDefaultCoord);
 extern void ApplySyntaxAttributes(MadSyntax *syn);
 
-MadHighlightingDialog *g_HighlightingDialog=NULL;
+MadHighlightingDialog *g_HighlightingDialog=nullptr;
 
 enum
 {
@@ -56,13 +56,13 @@ struct KeywordInfo
 };
 vector<KeywordInfo> g_KeywordInfoTable;
 long g_Index=-1;
-MadSyntax *g_Syntax=NULL;
-wxColourDialog *g_ColourDialog=NULL;
+MadSyntax *g_Syntax=nullptr;
+wxColourDialog *g_ColourDialog=nullptr;
 int g_DefaultFontSize;
 
 wxColour GetColourFromUser(const wxColour& colInit, const wxString& caption)
 {
-    if(g_ColourDialog==NULL)
+    if(g_ColourDialog==nullptr)
     {
         wxColourData *data=new wxColourData;
         data->SetChooseFull(true);
@@ -172,7 +172,7 @@ const long MadHighlightingDialog::ID_WXBUTTONBC = wxNewId();
 //*)
 
 MadHighlightingDialog::MadHighlightingDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)
-	: m_Syntax(NULL)
+	: m_Syntax(nullptr)
 {
 	//(*Initialize(MadHighlightingDialog)
 	wxBoxSizer* BoxSizer4;
@@ -370,7 +370,7 @@ void MadHighlightingDialog::MadHighlightingDialogClose(wxCloseEvent& event)
     }
 
     FreeSyntax(false);
-    g_HighlightingDialog=NULL;
+    g_HighlightingDialog=nullptr;
     if(g_ColourDialog) delete g_ColourDialog;
     Destroy();
 }
@@ -393,7 +393,7 @@ void MadHighlightingDialog::WxListBoxSyntaxSelected(wxCommandEvent& event)
         MadAttributes *attr = g_Syntax->GetAttributes((MadAttributeElement)ae);
         int kind=kindSysAttr1;
         if(ae==aeActiveLine || ae==aeBookmark) kind=kindSysAttr2;
-        g_KeywordInfoTable.push_back(KeywordInfo(kind, attr, NULL));
+        g_KeywordInfoTable.push_back(KeywordInfo(kind, attr, nullptr));
 
         if(ae==aeText)
         {
@@ -414,7 +414,7 @@ void MadHighlightingDialog::WxListBoxSyntaxSelected(wxCommandEvent& event)
         text.Printf(wxT("Range %s %s"), g_Syntax->m_CustomRange[i].begin.c_str(), g_Syntax->m_CustomRange[i].end.c_str());
         long item = WxListCtrlKeyword->InsertItem(index++, text);
         wxColour *bg = &(g_Syntax->m_CustomRange[i].bgcolor);
-        g_KeywordInfoTable.push_back( KeywordInfo(kindRange, NULL, bg) );
+        g_KeywordInfoTable.push_back( KeywordInfo(kindRange, nullptr, bg) );
         SetItemColour(WxListCtrlKeyword, item, g_KeywordInfoTable[0].attr->color, *bg);
     }
     
@@ -423,7 +423,7 @@ void MadHighlightingDialog::WxListBoxSyntaxSelected(wxCommandEvent& event)
     {
         long item = WxListCtrlKeyword->InsertItem(index++, g_Syntax->m_CustomKeyword[i].m_Name);
         MadAttributes *attr = &(g_Syntax->m_CustomKeyword[i].m_Attr);
-        g_KeywordInfoTable.push_back(KeywordInfo(kindKeyword, attr, NULL));
+        g_KeywordInfoTable.push_back(KeywordInfo(kindKeyword, attr, nullptr));
 
         SetItemColour(WxListCtrlKeyword, item, attr->color, attr->bgcolor);
         wxFont font=GetItemFont(WxListCtrlKeyword, item);
@@ -740,7 +740,7 @@ void MadHighlightingDialog::MadHighlightingDialogActivate(wxActivateEvent& event
 
         m_InitSetting.Empty();
 
-        if(FindFocus()==NULL)
+        if(FindFocus()==nullptr)
         {
             WxButtonCancel->SetFocus();
         }
@@ -769,7 +769,7 @@ void MadHighlightingDialog::SetToModifiedSyntax(MadSyntax *syn)
     if(syn==m_Syntax)
     {
         m_ModifiedSyntax.push_back(syn);
-        m_Syntax=NULL;
+        m_Syntax=nullptr;
     }
     ApplySyntaxAttributes(syn);// apply syntax attributes to editor
 }
@@ -889,7 +889,7 @@ void MadHighlightingDialog::FreeSyntax(bool restore)
     if(m_Syntax) 
     {
         delete m_Syntax;
-        m_Syntax=NULL;
+        m_Syntax=nullptr;
     }
 
     for(size_t i=0; i<m_ModifiedSyntax.size(); ++i)

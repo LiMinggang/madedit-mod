@@ -36,7 +36,7 @@ const long MadNumberDlg::ID_WXSTATICTEXT8 = wxNewId();
 const long MadNumberDlg::ID_WXEDITINITIALNUMBER = wxNewId();
 const long MadNumberDlg::ID_WXSTATICTEXT1 = wxNewId();
 
-MadNumberDlg * g_MadNumberDlg = NULL;
+MadNumberDlg * g_MadNumberDlg = nullptr;
 
 MadNumberDlg::MadNumberDlg(wxWindow *parent, wxWindowID id, const wxString &title, const wxPoint &position, const wxSize& size, long style)
 : wxDialog(parent, id, title, position,	size, style)
@@ -81,19 +81,19 @@ void MadNumberDlg::CreateGUIControls()
 	WxStaticText1 =	new	wxStaticText(this, ID_WXSTATICTEXT1, _("Intial Number"), wxPoint(32, 5), wxDefaultSize,	0, wxT("WxStaticText1"));
 	WxBoxSizer11->Add(WxStaticText1, 0,	wxALIGN_LEFT | wxALL, 5);
 
-	WxEditInitialNumber	= new wxTextCtrl(this, ID_WXEDITINITIALNUMBER, wxT("0"), wxPoint(10, 34), wxSize(122, 23), 0, wxTextValidator(wxFILTER_NUMERIC,	NULL), wxT("WxEditInitialNumber"));
+	WxEditInitialNumber	= new wxTextCtrl(this, ID_WXEDITINITIALNUMBER, wxT("0"), wxPoint(10, 34), wxSize(122, 23), 0, wxTextValidator(wxFILTER_NUMERIC,	nullptr), wxT("WxEditInitialNumber"));
 	WxBoxSizer11->Add(WxEditInitialNumber, 0, wxALIGN_LEFT | wxALL,	5);
 
 	WxStaticText8 =	new	wxStaticText(this, ID_WXSTATICTEXT8, _("Numbering Step"), wxPoint(25, 62), wxDefaultSize, 0, wxT("WxStaticText8"));
 	WxBoxSizer11->Add(WxStaticText8, 0,	wxALIGN_LEFT | wxALL, 5);
 
-	WxEditNumberingStep	= new wxTextCtrl(this, ID_EDITNUMBERINGSTEP, wxT("1"), wxPoint(10, 91),	wxSize(121,	23), 0,	wxTextValidator(wxFILTER_NUMERIC, NULL), wxT("WxEditNumberingStep"));
+	WxEditNumberingStep	= new wxTextCtrl(this, ID_EDITNUMBERINGSTEP, wxT("1"), wxPoint(10, 91),	wxSize(121,	23), 0,	wxTextValidator(wxFILTER_NUMERIC, nullptr), wxT("WxEditNumberingStep"));
 	WxBoxSizer11->Add(WxEditNumberingStep, 0, wxALIGN_LEFT | wxALL,	5);
 
 	WxStaticText5 =	new	wxStaticText(this, ID_WXSTATICTEXT5, _("Number of Chars"), wxPoint(23, 120), wxDefaultSize,	0, wxT("WxStaticText5"));
 	WxBoxSizer11->Add(WxStaticText5, 0,	wxALIGN_LEFT | wxALL, 5);
 
-	WxEditNumberOfChars = new wxTextCtrl(this, ID_WXEDITNUMBEROFCHARS, wxT("0"), wxPoint(9,	149), wxSize(124, 23), 0, wxTextValidator(wxFILTER_NUMERIC,	NULL), wxT("WxEditNumberOfChars"));
+	WxEditNumberOfChars = new wxTextCtrl(this, ID_WXEDITNUMBEROFCHARS, wxT("0"), wxPoint(9,	149), wxSize(124, 23), 0, wxTextValidator(wxFILTER_NUMERIC,	nullptr), wxT("WxEditNumberOfChars"));
 	WxBoxSizer11->Add(WxEditNumberOfChars, 0, wxALIGN_LEFT | wxALL,	5);
 
 	WxPadChar = new wxCheckBox(this, ID_PADWITH, _("Pad	With Zero"), wxPoint(5,	176), wxSize(132, 15), 0, wxDefaultValidator,	wxT("WxPadChar"));
@@ -190,7 +190,7 @@ void MadNumberDlg::CreateGUIControls()
 void MadNumberDlg::OnClose(wxCloseEvent& /*event*/)
 {
 	Destroy();
-	g_MadNumberDlg = NULL;
+	g_MadNumberDlg = nullptr;
 }
 
 /*
