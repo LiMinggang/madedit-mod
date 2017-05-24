@@ -2367,7 +2367,7 @@ _NOCHECK_:
 						wordwidth = ucwidth;
 					}
 					else
-						if( ( ( firstuc < 0x100 ) && ( !m_Syntax->IsSpace( firstuc ) ) ) /* m_Syntax->IsNotDelimiter( firstuc )*/ )
+						if( ( ( firstuc < 0x100 ) && ( !MadSyntax::sSpace( firstuc ) ) ) /* m_Syntax->IsNotDelimiter( firstuc )*/ )
 						{
 							wordisdelimiter = -1;
 							wordlength = firstuclen;
@@ -2385,7 +2385,7 @@ _NOCHECK_:
 							wordwidth = ucwidth;
 						}
 						else
-							if( ( ( firstuc < 0x100 ) && ( !m_Syntax->IsSpace( firstuc ) ) ) /* m_Syntax->IsNotDelimiter( firstuc )*/ )
+							if( ( ( firstuc < 0x100 ) && ( !MadSyntax::sSpace( firstuc ) ) ) /* m_Syntax->IsNotDelimiter( firstuc )*/ )
 							{
 								wordlength += firstuclen;
 								wordwidth += ucwidth;
@@ -2406,7 +2406,7 @@ _NOCHECK_:
 								wordwidth += ucwidth;
 							}
 							else
-								if( ( ( firstuc < 0x100 ) && ( !m_Syntax->IsSpace( firstuc ) ) ) /* m_Syntax->IsNotDelimiter( firstuc )*/ )
+								if( ( ( firstuc < 0x100 ) && ( !MadSyntax::sSpace( firstuc ) ) ) /* m_Syntax->IsNotDelimiter( firstuc )*/ )
 								{
 									wordisdelimiter = -1;
 									wordlength = firstuclen;
@@ -2863,7 +2863,7 @@ void MadLines::RecountLineWidth( void )
 						wordwidth = ucwidth;
 					}
 					else
-						if( ( firstuc < 0x100 ) && ( !m_Syntax->IsSpace( firstuc ) ) /*m_Syntax->IsNotDelimiter( firstuc )*/ )
+						if( ( firstuc < 0x100 ) && ( !MadSyntax::sSpace( firstuc ) ) /*m_Syntax->IsNotDelimiter( firstuc )*/ )
 						{
 							wordisdelimiter = -1;
 							wordlength = firstuclen;
@@ -2881,7 +2881,7 @@ void MadLines::RecountLineWidth( void )
 							wordwidth = ucwidth;
 						}
 						else
-							if( ( firstuc < 0x100 ) && ( !m_Syntax->IsSpace( firstuc ) ) /*m_Syntax->IsNotDelimiter( firstuc )*/ )
+							if( ( firstuc < 0x100 ) && ( !MadSyntax::sSpace( firstuc ) ) /*m_Syntax->IsNotDelimiter( firstuc )*/ )
 							{
 								wordlength += firstuclen;
 								wordwidth += ucwidth;
@@ -2902,7 +2902,7 @@ void MadLines::RecountLineWidth( void )
 								wordwidth += ucwidth;
 							}
 							else
-								if( ( firstuc < 0x100 ) && ( !m_Syntax->IsSpace( firstuc ) ) /*m_Syntax->IsNotDelimiter( firstuc )*/ )
+								if( ( firstuc < 0x100 ) && ( !MadSyntax::sSpace( firstuc ) ) /*m_Syntax->IsNotDelimiter( firstuc )*/ )
 								{
 									wordisdelimiter = -1;
 									wordlength = firstuclen;

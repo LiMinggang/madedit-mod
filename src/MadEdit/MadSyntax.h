@@ -210,7 +210,7 @@ public:
 	}
 	static wxString GetAttributeName( MadAttributeElement ae );
 
-	bool IsSpace( ucs4_t uc ) {
+	static bool IsSpace( ucs4_t uc ) {
 		return ( uc == 0x20 || ( uc <= 0x0D && uc >= 0x09 ) );
 	}
 
