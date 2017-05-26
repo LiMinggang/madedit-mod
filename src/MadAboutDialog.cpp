@@ -46,6 +46,7 @@ _("Minggang Li\t\tCurrent maintainer of MadEdit-Mod\n\
 Alston Chen\t\tAuthor of MadEdit\n\
 JiaYanwei\t\tPatch contributer for MadEdit\n\
 nikoss\t\t\tGreek Translation\n\
+zhtw2013\t\tTraditional Chinese Translation\n\
 Others\t\t\tTranslation/patch contributers")
 );
 

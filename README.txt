@@ -71,7 +71,7 @@ Syntax files, Locale files, Dictionaries and Settings:
   Currently supported Languages:
     English
     Chinese Simplified (zh_CN)
-    Chinese Traditional(zh_TW) (Not done)
+    Chinese Traditional(zh_TW)
     German(de_DE)              (Not done)
     Greek(el)                  (Almost done)
     Italian(it_IT)             (Not done)
@@ -140,6 +140,7 @@ Update Astyle to 3.0
 Update boost_python to boost 1.64
 C++ 11 transform
 Update Simplified Chinese translation
+Update Traditional Chinese translation(Thanks zhtw2013@gmail.com)
 
 Mod v0.4.7
 1. New: Astyle 2.06 new option support

@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MadEdit-Mod 0.3.9\n"
+"Project-Id-Version: MadEdit-Mod 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-23 21:24+0800\n"
+"POT-Creation-Date: 2017-05-26 20:44+0800\n"
 "PO-Revision-Date: 2015-03-31 14:56+0100\n"
 "Last-Translator: Adam Massalski <massaada@wp.pl>\n"
 "Language-Team: Adam Massalski <massaada@wp.pl>\n"
@@ -2625,7 +2625,7 @@ msgid "List all recent opened files"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:3407 ../src/MadSearchReplaceDialog.cpp:1725
-#: ../src/MadPython.hpp:1564 ../src/MadPython.hpp:1588
+#: ../src/MadPython.hpp:1570 ../src/MadPython.hpp:1594
 #, fuzzy
 msgid "Search Results"
 msgstr "Szukaj"
@@ -3018,7 +3018,7 @@ msgid "Processing %s of %s files..."
 msgstr "Przetwarzanie %d z %d plików..."
 
 #: ../src/MadFindInFilesDialog.cpp:756 ../src/MadSearchReplaceDialog.cpp:1597
-#: ../src/MadPython.hpp:1568 ../src/MadPython.hpp:1593
+#: ../src/MadPython.hpp:1574 ../src/MadPython.hpp:1599
 #, fuzzy
 msgid "Search \""
 msgstr "Szukaj"
@@ -3347,8 +3347,8 @@ msgstr "Porównanie binarne plików"
 msgid " results"
 msgstr "%d wyników"
 
-#: ../src/MadSearchReplaceDialog.cpp:1698 ../src/MadPython.hpp:1568
-#: ../src/MadPython.hpp:1593
+#: ../src/MadSearchReplaceDialog.cpp:1698 ../src/MadPython.hpp:1574
+#: ../src/MadPython.hpp:1599
 #, c-format
 msgid "(%s hits in 1 file)"
 msgstr ""
@@ -4353,7 +4353,7 @@ msgstr ""
 msgid "Previw: "
 msgstr "Podgląd"
 
-#: ../src/MadNumberDlg.cpp:179 ../src/MadNumberDlg.h:45
+#: ../src/MadNumberDlg.cpp:179 ../src/MadNumberDlg.h:51
 #, fuzzy
 msgid "Numbering Configuration"
 msgstr "Konfiguracja UNIX"
@@ -4394,7 +4394,7 @@ msgstr ""
 msgid "Results <<"
 msgstr "%d wyników"
 
-#: ../src/MadPrintout.h:16
+#: ../src/MadPrintout.h:21
 #, fuzzy
 msgid "MadEdit-Mod Printout"
 msgstr "Wydruk MadEdit"
