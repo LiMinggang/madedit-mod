@@ -1,3 +1,31 @@
+madedit-mod (0.4.8-1) stable; urgency=low
+  1.New: Copy file name without extention
+  2.New: Syntax highlight support for YAML, YANG
+  3.New: New Astyle options support(indent-after-parens, attach-closing-while)
+  4.New: Caret will keep in window after resize(Fix issue of alwasys showing file at the beginning on loading maximized)
+  5.New: Update toggle-able menu items according to context(ReadOnly flag and Set selection)
+  6.Fix: Minor bug on OpenFile again
+  7.Fix: Can not copy the first item in Copy All results
+  8.Fix: Change Astyle config according to official change(bracket to brace)
+  9.Fix: Could not close MadEdit-Mod if you canceled in the first time
+  10.Fix: Bugs found by CppCheck
+  11.Fix: Can't open file having double backslash in path(Windows)
+  12.Fix: Caret is not correctly displayed(0.4.7, WinX64) #231
+  13.Fix: Bug 101030 & 101031 of uchardet
+  14.Fix: Possible char type cast issue(Windows)
+  15.Fix: Bug of query to save files(some file will not be queried)
+  16.Fix: Associated file does not show MadEdit ICON
+  17.Code improvement for 64 bits system
+  18.Update Hunspell to 1.6.1
+  19.Update Astyle to 3.0
+  20.Update boost_python to boost 1.64
+  21.C++ 11 transform
+  22.Update Simplified Chinese translation
+  23.Update Traditional Chinese translation(Thanks zhtw2013@gmail.com)
+
+ -- Minggang Li <liminggang@gmail.com>  Sat, 27 May 2017 14:07:40 +0800
+
+
 madedit-mod (0.4.7-1) stable; urgency=low
   1.New: Astyle 2.06 new option support
   2.Fix: UI issues of source formatter config tab

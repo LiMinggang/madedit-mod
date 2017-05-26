@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-26 20:44+0800\n"
-"PO-Revision-Date: 2017-05-23 21:28+0800\n"
+"PO-Revision-Date: 2017-05-26 22:21+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit-Mod <minggang.li@gmail.com>\n"
 "Language: zh_CN\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.0.2\n"
 
 #: wxstd.po.cpp:2
 msgid "Unicode 16 bit (UTF-16)"
@@ -3876,7 +3876,7 @@ msgstr "XML版本号"
 
 #: ../src/MadOptionsDialog.cpp:1288
 msgid "Indentation size(in spaces)"
-msgstr "缩进尺寸（空格数）："
+msgstr "缩进尺寸（空格数）"
 
 #: ../src/MadOptionsDialog.cpp:1295 ../src/MadOptionsDialog.cpp:1516
 msgid "System Default"
