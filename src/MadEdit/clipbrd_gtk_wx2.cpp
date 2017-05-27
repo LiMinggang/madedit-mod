@@ -18,7 +18,6 @@
 
 #if wxUSE_CLIPBOARD
 
-#include "clipbrd_gtk.h"
 
 #ifndef WX_PRECOMP
     #include <wx/log.h>
@@ -30,6 +29,9 @@
 #include <glib.h>
 #include <gdk/gdk.h>
 #include <gtk/gtk.h>
+
+#include "clipbrd_gtk.h"
+
 class _wxGtkString_
 {
 public:

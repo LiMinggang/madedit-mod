@@ -20,7 +20,6 @@
 
 #if wxUSE_CLIPBOARD
 
-#include "clipbrd_gtk.h"
 
 #ifndef WX_PRECOMP
     #include <wx/app.h>
@@ -34,6 +33,8 @@
 #include <wx/evtloop.h>
 
 #include <wx/gtk/private.h>
+
+#include "clipbrd_gtk.h"
 
 typedef wxScopedArray<wxDataFormat> wxDataFormatArray;
 
