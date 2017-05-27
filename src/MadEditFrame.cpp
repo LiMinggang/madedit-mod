@@ -1286,7 +1286,25 @@ void OnEditSelectionChanged( MadEdit *madedit )
 		g_StatusBar->SetStatusText( text, 1 );
 		s1 = FormatThousands( wxLongLong( madedit->GetCaretPosition() ).ToString() );
 		s2 = FormatThousands( wxLongLong( madedit->GetFileSize() ).ToString() );
-		g_StatusBar->SetStatusText( fpstr + s1 + sepstr + s2, 2 );
+		char buff[9];
+		buff[8] = 0;
+		size_t hex = madedit->GetCaretPosition();
+		int i = 7; 
+
+		for(; i >= 0; --i )
+		{
+			int d = ( hex & 0x0F );
+			
+			if( d < 10 )
+				buff[i] = '0' + d;
+			else buff[i] = 'A' + d - 10;
+			hex >>= 4;
+			if(hex == 0) break;
+		}
+
+		wxString s3((const char *)&buff[i]);
+		s3 << "H|";
+		g_StatusBar->SetStatusText( fpstr + s3 + s1 + sepstr + s2, 2 );
 		s1 = FormatThousands( wxLongLong( madedit->GetSelectionSize() ).ToString() );
 		g_StatusBar->SetStatusText( ssstr + s1, 3 );
 	}
