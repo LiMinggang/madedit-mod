@@ -20,7 +20,7 @@
 
 #if wxUSE_CLIPBOARD
 
-#include "clipbrd_gtk_wx3.h"
+#include "clipbrd_gtk.h"
 
 #ifndef WX_PRECOMP
     #include <wx/app.h>

@@ -758,7 +758,6 @@ bool wxClipboardGtk::GetData( wxDataObject& data )
     return false;
 }
 
-
 wxClipboardGtk *g_ClipboardGtk=nullptr;
 wxClipboardGtk *GetClipboardGtk()
 {
