@@ -25,6 +25,13 @@
 #include <wx/hashset.h>
 #include <vector>
 #include <list>
+
+#if __cplusplus <= 199711L
+#ifndef nullptr
+	#define nullptr (0)
+#endif
+#endif
+
 using std::vector;
 using std::list;
 
