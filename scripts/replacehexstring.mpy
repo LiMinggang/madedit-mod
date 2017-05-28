@@ -1,0 +1,19 @@
+#### Example script to replace hex string
+####!Ctrl+Shift+E
+# This is an example script. '#' is used for line comment which is Python's
+# """ is for block comment
+# #### in the first line is used for help string which would be shown at the status bar
+# ####! is for customized key shortcut
+
+#Create MadEdit Object for active edit
+medit = MadEdit()
+
+# Replace 'b\r\n' with 'e\n' and 'a\r' with 'e\n', '\r' is for carriage return, '\n' is for new line
+# you should keep the number of items in oldStr and newStr equal
+oldStr = ["620d0a", "610d", ]
+newStr = ["650a",   "660a", ]
+
+ridx = 0
+for ostr in oldStr:
+    medit.ReplaceHexAll(ostr, newStr[ridx], -1, -1) ## (oldstr, new, start_pos(-1 or 0 is file start), end_pos(-1 or filesize is endof file))
+    ridx = ridx +1
