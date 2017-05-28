@@ -62,7 +62,7 @@ Current Feature list(comparing to the original Madedit@sourceforge)
 News
 =======
 Mod v0.4.8
-* New: Copy file name without extention
+* New: Copy file name without extension
 * New: Syntax highlight support for YAML, YANG
 * New: New Astyle options support(indent-after-parens, attach-closing-while)
 * New: Caret will keep in window after resize(Fix issue of alwasys showing file at the beginning on loading maximized)

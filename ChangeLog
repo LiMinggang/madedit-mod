@@ -1,5 +1,5 @@
 2017-05-27  Minggang Li <minggang.li@gmail.com>
-	1.New: Copy file name without extention
+	1.New: Copy file name without extension
 	2.New: Syntax highlight support for YAML, YANG
 	3.New: New Astyle options support(indent-after-parens, attach-closing-while)
 	4.New: Caret will keep in window after resize(Fix issue of alwasys showing file at the beginning on loading maximized)
