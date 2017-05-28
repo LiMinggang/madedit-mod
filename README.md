@@ -67,6 +67,7 @@ Mod v0.4.8
 * New: New Astyle options support(indent-after-parens, attach-closing-while)
 * New: Caret will keep in window after resize(Fix issue of alwasys showing file at the beginning on loading maximized)
 * New: Update toggle-able menu items according to context(ReadOnly flag and Set selection)
+* New: Hex offset of char position
 * Fix: Minor bug on OpenFile again
 * Fix: Can not copy the first item in Copy All results
 * Fix: Change Astyle config according to official change(bracket to brace)
@@ -78,6 +79,7 @@ Mod v0.4.8
 * Fix: Possible char type cast issue(Windows)
 * Fix: Bug of query to save files(some file will not be queried)
 * Fix: Associated file does not show MadEdit ICON
+* Fix: Weird scrollbar thumb(Windows)
 * Code improvement for 64 bits system
 * Update Hunspell to 1.6.1
 * Update Astyle to 3.0
@@ -85,18 +87,6 @@ Mod v0.4.8
 * C++ 11 transform
 * Update Simplified Chinese translation
 * Update Traditional Chinese translation(Thanks zhtw2013@gmail.com)
-
-Mod v0.4.7
-* New: Astyle 2.06 new option support
-* Fix: UI issues of source formatter config tab
-* Fix: Bookmark tag show up issue in Find and Bookmark
-* Fix: Crash while opening file history dialog by hitting F9
-* Fix: Crash while Windows shutdown(wxWidgets issue)
-* Fix: Crash because of Astyle assertion failure at line 3229, ASFormatter.cpp(https://sourceforge.net/p/astyle/bugs/422/)
-* Fix: Cannot open documents on the network server #228
-* Use standalone boost python to replace boost one(No need to compile boost anymore)
-* Use Bind to replace event table in MadEditframe to fix potentail issues
-* Update Simplified Chinese translation
 
 Todo:
 =====
