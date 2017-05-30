@@ -106,8 +106,8 @@ Known issues:
 
 Thanks:
 =============
-Nikoss   Greek Translation
-ZhTw2013 Traditional Chinese Translation
+* Nikoss   Greek Translation
+* ZhTw2013 Traditional Chinese Translation
 
 Download:
 =============
