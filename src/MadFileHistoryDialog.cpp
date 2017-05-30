@@ -46,7 +46,7 @@ MadFileHistoryDialog::MadFileHistoryDialog(wxWindow* parent,wxWindowID id,const 
 	BoxSizer3->Add(ButtonCancel, 0, wxALL|wxEXPAND, 2);
 	ButtonSelectAll = new wxButton(this, ID_BUTTONSELECTALL, _("Select &All"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTONSELECTALL"));
 	BoxSizer3->Add(ButtonSelectAll, 0, wxALL|wxEXPAND, 2);
-	ButtonDselectAll = new wxButton(this, ID_BUTTONDSELECTALL, _("&Dselect All"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTONDSELECTALL"));
+	ButtonDselectAll = new wxButton(this, ID_BUTTONDSELECTALL, _("&Deselect All"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTONDSELECTALL"));
 	BoxSizer3->Add(ButtonDselectAll, 0, wxALL|wxEXPAND, 2);
 	BoxSizer1->Add(BoxSizer3, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5);
 	SetSizer(BoxSizer1);

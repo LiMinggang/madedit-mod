@@ -73,7 +73,7 @@ Syntax files, Locale files, Dictionaries and Settings:
     Chinese Simplified (zh_CN)
     Chinese Traditional(zh_TW)
     German(de_DE)              (Not done)
-    Greek(el)                  (Almost done)
+    Greek(el)
     Italian(it_IT)             (Not done)
     Japanese(ja_JP)            (Not done)
     Polish(pl_PL)              (Not done)
@@ -92,7 +92,7 @@ Syntax files, Locale files, Dictionaries and Settings:
     [-f], force, Edit and save file ignoring the ReadOnly flag
     [-m], madpython, Specify MadPython file to be run on the file
     [-r], recursive, Recursively run on files of subdirectories
-    [-w], wildcard, Enable wildcard support in file name\n(line number would be disabled because it used '*')
+    [-w], wildcard, Enable wildcard support in file name(line number would be disabled because it used '*')
     [files], File(s) to be opened
     Eg: madedit -s -m madpytho.mpy ./1.txt /tmp/2.txt
     Make sure you use Single Instance with -s, -x!!
@@ -121,7 +121,7 @@ Mod v0.4.8
 1.New: Copy file name without extension
 2.New: Syntax highlight support for YAML, YANG
 3.New: New Astyle options support(indent-after-parens, attach-closing-while)
-4.New: Caret will keep in window after resize(Fix issue of alwasys showing file at the beginning on loading maximized)
+4.New: Caret will keep in window after resize(Fix issue of always showing file at the beginning on loading maximized)
 5.New: Update toggle-able menu items according to context(ReadOnly flag and Set selection)
 6.New: Hex offset of char position
 7.Fix: Minor bug on OpenFile again
@@ -143,6 +143,7 @@ Mod v0.4.8
 23.C++ 11 transform
 24.Update Simplified Chinese translation
 25.Update Traditional Chinese translation(Thanks zhtw2013@gmail.com)
+26.Update Greek translation(Thanks Nikoss)
 
 Mod v0.4.7
 1. New: Astyle 2.06 new option support
@@ -1099,6 +1100,11 @@ MadEdit
 Alston Chen <madedit@gmail.com>
 MadEdit-Mod
 Minggang Li <minggang.li@gmail.com>
+
+Thanks:
+------
+Nikoss   Greek Translation
+ZhTw2013 Traditional Chinese Translation
 
 Links:
 -----

@@ -2033,7 +2033,7 @@ CommandData CommandTable[] =
 	{ 0, 1, menuPrint,        wxT( "menuPrint" ),        _( "&Print..." ),         wxT( "Ctrl-P" ),       wxITEM_NORMAL,    print_xpm_idx,     0,                        _( "Print the file" ), &g_Menu_FilePop, &g_tbSTANDARD_ptr, _( "Print" ), true},
 	{ 0, 1, 0,                0,                       0,                      0,                   wxITEM_SEPARATOR, -1,                0,                        0, 0, 0, 0, false},
 	{ 0, 1, menuRecentFiles,  wxT( "menuRecentFiles" ),  _( "Recent Files" ),      wxT( "" ),             wxITEM_NORMAL,    -1,                &g_Menu_File_RecentFiles, 0, 0, 0, 0, false},
-	{ 0, 1, menuRecentFilesList, wxT( "menuRecentFilesList" ), _( "Recent Files List..." ), wxT( "F9" ),  wxITEM_NORMAL,	-1, 			   0,                        _( "List all files had been opened before" ), 0, 0, _( "Recent Files" ), false},
+	{ 0, 1, menuRecentFilesList, wxT( "menuRecentFilesList" ), _( "Recent Files List..." ), wxT( "F9" ),  wxITEM_NORMAL,	-1, 			   0,                        _( "List all files that had been opened before" ), 0, 0, _( "Recent Files" ), false},
 	{ 0, 1, 0,                0,                       0,                      0,                   wxITEM_SEPARATOR, -1,                0,                        0, 0, 0, 0, false},
 	{ 0, 1, menuExit,         wxT( "menuExit" ),         _( "E&xit" ),             wxT( "" ),             wxITEM_NORMAL,    quit_xpm_idx,      0,                        _( "Quit MadEdit" ), 0, 0, 0, false},
 
@@ -3003,7 +3003,7 @@ void MadEditFrame::CreateGUIControls( void )
 						( *( cd->popmenu_ptr ) )->AppendSeparator();
 						( *( cd->popmenu_ptr ) )->Append( menuCopyFilePath,       _( "Copy full path name" ) );
 						( *( cd->popmenu_ptr ) )->Append( menuCopyFileName,       _( "Copy full file name" ) );
-						( *( cd->popmenu_ptr ) )->Append( menuCopyFileNameNoExt,  _( "Copy full file name without extention" ) );
+						( *( cd->popmenu_ptr ) )->Append( menuCopyFileNameNoExt,  _( "Copy full file name without extension" ) );
 						( *( cd->popmenu_ptr ) )->Append( menuCopyFileDir,        _( "Copy directory name" ) );
 					}
 				}

@@ -24,6 +24,7 @@ madedit-mod (0.4.8-1) stable; urgency=low
   23.C++ 11 transform
   24.Update Simplified Chinese translation
   25.Update Traditional Chinese translation(Thanks zhtw2013@gmail.com)
+  26.Update Greek translation(Thanks Nikoss)
 
  -- Minggang Li <liminggang@gmail.com>  Sun, 28 May 2017 21:07:40 +0800
 

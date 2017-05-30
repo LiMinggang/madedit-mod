@@ -52,7 +52,7 @@ MadSaveQueryDialog::MadSaveQueryDialog(wxWindow* parent,wxWindowID id,const wxPo
 	BoxSizer3->Add(-1,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	ButtonSelectAll = new wxButton(this, ID_BUTTONSELECTALL, _("Select &All"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTONSELECTALL"));
 	BoxSizer3->Add(ButtonSelectAll, 0, wxALL|wxEXPAND, 2);
-	ButtonDselectAll = new wxButton(this, ID_BUTTONDSELECTALL, _("&Dselect All"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTONDSELECTALL"));
+	ButtonDselectAll = new wxButton(this, ID_BUTTONDSELECTALL, _("&Deselect All"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTONDSELECTALL"));
 	BoxSizer3->Add(ButtonDselectAll, 0, wxALL|wxEXPAND, 2);
 	BoxSizer3->Add(-1,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	ButtonGoTo = new wxButton(this, ID_BUTTONGOTO, _("&Go To"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTONGOTO"));

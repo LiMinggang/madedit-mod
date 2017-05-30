@@ -65,7 +65,7 @@ Mod v0.4.8
 * New: Copy file name without extension
 * New: Syntax highlight support for YAML, YANG
 * New: New Astyle options support(indent-after-parens, attach-closing-while)
-* New: Caret will keep in window after resize(Fix issue of alwasys showing file at the beginning on loading maximized)
+* New: Caret will keep in window after resize(Fix issue of always showing file at the beginning on loading maximized)
 * New: Update toggle-able menu items according to context(ReadOnly flag and Set selection)
 * New: Hex offset of char position
 * Fix: Minor bug on OpenFile again
@@ -104,6 +104,12 @@ Known issues:
 3. HighlightWord would not work if the caret is at the end of the line
 4. Scroll function on Right click menu of scroll bars only works with Windows
 
+Thanks:
+=============
+Nikoss   Greek Translation
+ZhTw2013 Traditional Chinese Translation
+
 Download:
 =============
 [Madedit-Mod@sf](https://sourceforge.net/projects/madedit-mod/files/?source=navbar)
+
