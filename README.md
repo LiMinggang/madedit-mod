@@ -87,6 +87,7 @@ Mod v0.4.8
 * C++ 11 transform
 * Update Simplified Chinese translation
 * Update Traditional Chinese translation(Thanks zhtw2013@gmail.com)
+* Update Greek translation(Thanks Nikoss)
 
 Todo:
 =====
