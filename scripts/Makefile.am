@@ -6,7 +6,6 @@ scripts_DATA =	deletstring.mpy \
 	regex_patch.mpy \
 	replaceall.mpy \
 	replacehexstring.mpy \
-	dosdir2unix.mpy \
-	deletstring.mpy
+	dosdir2unix.mpy
 
 EXTRA_DIST = $(scripts_DATA)
