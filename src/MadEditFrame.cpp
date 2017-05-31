@@ -5829,7 +5829,7 @@ class TempPrintDialog : public wxDialog
 {
 private:
 public:
-	TempPrintDialog( wxWindow *parent, wxWindowID id = 1, const wxString &title = wxT( "TopPrintDialog" ),
+	TempPrintDialog( wxWindow *parent, wxWindowID id = wxID_ANY, const wxString &title = wxT( "TopPrintDialog" ),
 					 const wxPoint& pos = wxPoint( 10, 10 ), //wxDefaultPosition,
 					 const wxSize& size = wxSize( 1, 1 ), //wxDefaultSize,
 					 long style = wxDIALOG_NO_PARENT )

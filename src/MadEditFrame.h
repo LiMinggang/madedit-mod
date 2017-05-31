@@ -76,7 +76,7 @@ enum MadToolBarType
 class MadEditFrame : public wxFrame
 {
 public:
-	MadEditFrame( wxWindow *parent, wxWindowID id = 1, const wxString &title = wxT( "MadEdit-Mod" ),
+	MadEditFrame( wxWindow *parent, wxWindowID id = wxID_ANY, const wxString &title = wxT( "MadEdit-Mod" ),
 	              const wxPoint& pos = wxDefaultPosition,
 	              const wxSize& size = wxDefaultSize,
 	              long style = MadEditFrame_STYLE );

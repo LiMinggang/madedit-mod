@@ -227,6 +227,12 @@ const long MadOptionsDialog::ID_WXNOTEBOOKPAGE1 = wxNewId();
 const long MadOptionsDialog::ID_WXNOTEBOOK1 = wxNewId();
 const long MadOptionsDialog::ID_WXCHECKINDENTAFTERPARENS = wxNewId();
 const long MadOptionsDialog::ID_WXCHECKATTACHCLOSINGWHILE = wxNewId();
+const long MadOptionsDialog::ID_WXBUTTON1 = wxNewId();
+const long MadOptionsDialog::ID_WXBUTTON2 = wxNewId();
+const long MadOptionsDialog::ID_WXBUTTON3 = wxNewId();
+const long MadOptionsDialog::ID_WXBUTTON4 = wxNewId();
+const long MadOptionsDialog::ID_WXBUTTON5 = wxNewId();
+const long MadOptionsDialog::ID_WXBUTTON6 = wxNewId();
 
 //Do not add custom headers.
 //wx-dvcpp designer will remove them
@@ -308,7 +314,7 @@ public:
 		g_OptionsDialog->SetWindowStyleFlag( g_OptionsDialog->GetWindowStyleFlag() | wxTAB_TRAVERSAL );
 		g_OptionsDialog->WxNotebook1->wxControl::SetWindowStyleFlag( g_OptionsDialog->WxNotebook1->wxControl::GetWindowStyleFlag() | wxTAB_TRAVERSAL );
 		g_OptionsDialog->WxNoteBookPage4->SetWindowStyleFlag( g_OptionsDialog->WxNoteBookPage4->GetWindowStyleFlag() | wxTAB_TRAVERSAL );
-		g_OptionsDialog->WxButtonCancel->SetId( wxID_CANCEL );
+		g_OptionsDialog->WxButtonCancel->SetId( MadOptionsDialog::ID_WXBUTTONCANCEL );
 		evt.Skip();
 	}
 };
@@ -356,7 +362,6 @@ MadOptionsDialog::wxCmdEvtHandlerMap_t MadOptionsDialog::m_button_evt_map[] =
 	{ ID_WXBUTTON4, &MadOptionsDialog::PrintMarkButtonClick },
 	{ ID_WXBUTTON5, &MadOptionsDialog::PrintMarkButtonClick },
 	{ ID_WXBUTTON6, &MadOptionsDialog::PrintMarkButtonClick },
-	{ wxID_CANCEL, &MadOptionsDialog::WxButtonCancelClick },
 	{ ID_WXBUTTONCANCEL, &MadOptionsDialog::WxButtonCancelClick },
 	{ ID_WXBUTTONOK, &MadOptionsDialog::WxButtonOKClick },
 	//  {ID_WXBITMAP_DIR,&MadOptionsDialog::WxButtonBitmapDirClick},
@@ -1832,20 +1837,13 @@ void MadOptionsDialog::PrintMarkClick( wxCommandEvent& event )
 	wxString str = WxPopupMenuPrintMark->GetLabel( event.GetId() );
 	wxTextCtrl *edit = nullptr;
 
-	switch( ButtonID )
-	{
-	case ID_WXBUTTON1: edit = WxEditHeaderLeft; break;
-
-	case ID_WXBUTTON2: edit = WxEditHeaderCenter; break;
-
-	case ID_WXBUTTON3: edit = WxEditHeaderRight; break;
-
-	case ID_WXBUTTON4: edit = WxEditFooterLeft; break;
-
-	case ID_WXBUTTON5: edit = WxEditFooterCenter; break;
-
-	case ID_WXBUTTON6: edit = WxEditFooterRight; break;
-	}
+	if (ButtonID == ID_WXBUTTON1) { edit = WxEditHeaderLeft; }
+	else if (ButtonID == ID_WXBUTTON2) { edit = WxEditHeaderCenter; }
+	else if (ButtonID == ID_WXBUTTON3) { edit = WxEditHeaderRight; }
+	else if (ButtonID == ID_WXBUTTON4) { edit = WxEditFooterLeft; }
+	else if (ButtonID == ID_WXBUTTON5) { edit = WxEditFooterCenter; }
+	else if (ButtonID == ID_WXBUTTON6) { edit = WxEditFooterRight; }
+	else { ; }
 
 	if( edit != nullptr && str[0] == wxT( '[' ) && str[3] == wxT( ']' ) )
 	{

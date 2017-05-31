@@ -80,6 +80,7 @@ Mod v0.4.8
 * Fix: Bug of query to save files(some file will not be queried)
 * Fix: Associated file does not show MadEdit ICON
 * Fix: Weird scrollbar thumb(Windows)
+* Fix: Assertion on Option dialog(Linux)
 * Code improvement for 64 bits system
 * Update Hunspell to 1.6.1
 * Update Astyle to 3.0

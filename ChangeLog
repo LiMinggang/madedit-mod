@@ -1,4 +1,4 @@
-2017-05-27  Minggang Li <minggang.li@gmail.com>
+2017-05-31  Minggang Li <minggang.li@gmail.com>
 	1.New: Copy file name without extension
 	2.New: Syntax highlight support for YAML, YANG
 	3.New: New Astyle options support(indent-after-parens, attach-closing-while)
@@ -17,14 +17,15 @@
 	16.Fix: Bug of query to save files(some file will not be queried)
 	17.Fix: Associated file does not show MadEdit ICON
 	18.Fix: Weird scrollbar thumb(Windows)
-	19.Code improvement for 64 bits system
-	20.Update Hunspell to 1.6.1
-	21.Update Astyle to 3.0
-	22.Update boost_python to boost 1.64
-	23.C++ 11 transform
-	24.Update Simplified Chinese translation
-	25.Update Traditional Chinese translation(Thanks zhtw2013@gmail.com)
-	26.Update Greek translation(Thanks Nikoss)
+	19.Fix: Assertion on Option dialog(Linux)
+	20.Code improvement for 64 bits system
+	21.Update Hunspell to 1.6.1
+	22.Update Astyle to 3.0
+	23.Update boost_python to boost 1.64
+	24.C++ 11 transform
+	25.Update Simplified Chinese translation
+	26.Update Traditional Chinese translation(Thanks zhtw2013@gmail.com)
+	27.Update Greek translation(Thanks Nikoss)
 
 2017-03-24  Minggang Li <minggang.li@gmail.com>
 	1.New: Astyle 2.06 new option support

@@ -67,7 +67,7 @@ using std::list;
 
 ////Dialog Style Start
 #undef MadOptionsDialog_STYLE
-#define MadOptionsDialog_STYLE wxCAPTION | wxSYSTEM_MENU | wxCLOSE_BOX
+#define MadOptionsDialog_STYLE wxCAPTION | wxSYSTEM_MENU | wxRESIZE_BORDER | wxCLOSE_BOX
 ////Dialog Style End
 
 
@@ -87,7 +87,7 @@ class MadEdit;
 class MadOptionsDialog : public wxDialog
 {
 public:
-    MadOptionsDialog( wxWindow *parent, wxWindowID id = 1, const wxString &title = wxT("Options"),
+    MadOptionsDialog( wxWindow *parent, wxWindowID id = wxID_ANY, const wxString &title = wxT("Options"),
         const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxDefaultSize,
         long style = MadOptionsDialog_STYLE);
@@ -346,14 +346,6 @@ public:
   static const long ID_WXBUTTONCANCEL;
 
 private:
-	enum{
-		ID_WXBUTTON1 = 197453,
-		ID_WXBUTTON2,
-		ID_WXBUTTON3,
-		ID_WXBUTTON4,
-		ID_WXBUTTON5,
-		ID_WXBUTTON6,
-	};
 	typedef struct 
 	{
 		const long evtTag;
@@ -558,6 +550,12 @@ private:
 	static const long ID_WXNOTEBOOK1;
 	static const long ID_WXCHECKINDENTAFTERPARENS;
 	static const long ID_WXCHECKATTACHCLOSINGWHILE;
+	static const long ID_WXBUTTON1;
+	static const long ID_WXBUTTON2;
+	static const long ID_WXBUTTON3;
+	static const long ID_WXBUTTON4;
+	static const long ID_WXBUTTON5;
+	static const long ID_WXBUTTON6;
 
 public:
     int ButtonID;

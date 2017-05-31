@@ -84,14 +84,14 @@ protected:
 public:
     wxCheckedListCtrl();
 
-    wxCheckedListCtrl(wxWindow *parent, wxWindowID id = -1,
+    wxCheckedListCtrl(wxWindow *parent, wxWindowID id = wxID_ANY,
                         const wxPoint& pt = wxDefaultPosition,
                         const wxSize& sz = wxDefaultSize,
                         long style = wxCLC_CHECK_WHEN_SELECTING,
                         const wxValidator& validator = wxDefaultValidator,
                         const wxString& name = wxListCtrlNameStr);
 
-    bool Create(wxWindow *parent, wxWindowID id = -1,
+    bool Create(wxWindow *parent, wxWindowID id = wxID_ANY,
                         const wxPoint& pt = wxDefaultPosition,
                         const wxSize& sz = wxDefaultSize,
                         long style = wxCLC_CHECK_WHEN_SELECTING,
