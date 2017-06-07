@@ -447,10 +447,6 @@ bool MadEditApp::OnInit()
 	InitLocale();
 	// set colors
 	SetHtmlColors();
-	bool maximize = false;
-#ifdef __WXMSW__
-	cfg->Read( wxT( "/MadEdit/WindowMaximize" ), &maximize, false );
-#endif
 	wxPoint pos = wxDefaultPosition;
 	wxSize size( 1024, 768 );
 
@@ -497,6 +493,11 @@ bool MadEditApp::OnInit()
 
 	if( !m_SilentMode )
 	{
+		bool maximize = false;
+#ifdef __WXMSW__
+		cfg->Read( wxT( "/MadEdit/WindowMaximize" ), &maximize, false );
+#endif
+
 		ShowMainFrame( myFrame, maximize );
 	}
 	else
