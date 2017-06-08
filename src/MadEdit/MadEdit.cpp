@@ -10422,13 +10422,13 @@ void MadEdit::OnHSMouseRightUp( wxMouseEvent &evt )
 }
 
 /*No caret activity*/
-void MadEdit::ScrollTo( int scollcmd )
+void MadEdit::ScrollTo( int scrollcmd )
 {
 	wxScrollEvent event;
 	bool vertical = false;
 	int vpos = m_TopRow, hpos = m_DrawingXPos;
 
-	switch(scollcmd)
+	switch(scrollcmd)
 	{
 		case VSCROLLHERE:
 		{

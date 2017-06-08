@@ -227,7 +227,9 @@ void DeleteConfig()
 {
 	if( g_DoNotSaveSettings == false )
 	{
-		wxFileConfig *cfg = ( wxFileConfig * )wxFileConfig::Get( false );
+		wxFileConfig *cfg = dynamic_cast< wxFileConfig * >(wxFileConfig::Get( false ));
+		if(!cfg)
+			return;
 
 		if( g_ResetAllKeys == false )
 		{

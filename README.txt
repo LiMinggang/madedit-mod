@@ -118,6 +118,10 @@ FreeBSD packaging (with FreeBSD 10.01)
 3. stdc++ version
 
 Mod v0.4.8
+Update C++ syntex to C++11
+Minor code improvement
+
+Mod v0.4.8
 1.New: Copy file name without extension
 2.New: Syntax highlight support for YAML, YANG
 3.New: New Astyle options support(indent-after-parens, attach-closing-while)
