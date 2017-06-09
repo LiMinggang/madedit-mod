@@ -1134,7 +1134,7 @@ size_t MadEncoding::UCS4toGB18030(ucs4_t ucs4, wxByte *buf)
 	return m_CSConv->WC2MB( ( char* )buf, (wchar_t *)(&ucs4), 4 );
 }
 
-ucs4_t MadEncoding::SBtoUCS4( wxByte b1 )  // Single-Byte to UCS4
+ucs4_t MadEncoding::SBtoUCS4( wxByte b1 )    // Single-Byte to UCS4
 {
 	return m_MBtoWC_Table[ b1 ];
 }

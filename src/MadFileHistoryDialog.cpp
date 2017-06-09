@@ -83,7 +83,6 @@ MadFileHistoryDialog::~MadFileHistoryDialog()
 
 void MadFileHistoryDialog::ResetWindowListIterms()
 {
-	wxAuiNotebook * notebookp = reinterpret_cast<wxAuiNotebook *>(m_MainFrame->m_Notebook);
 	size_t count = m_RecentFiles->GetCount();
 	long tmp;
 	wxString fname;
@@ -158,7 +157,7 @@ void MadFileHistoryDialog::GetCheckedItemsData(wxArrayString & selectedItems, bo
 		item = MadFileList->GetNextItem(item, wxLIST_NEXT_ALL, wxLIST_STATE_DONTCARE);
 		if ( item == -1 )
 			break;
-		if((!checked) || (checked && (MadFileList->IsChecked(item))))
+		if((!checked) || (MadFileList->IsChecked(item)))
 		{
 			fname = MadFileList->GetItemText(item, 0);
 			fdir = MadFileList->GetItemText(item, 1);

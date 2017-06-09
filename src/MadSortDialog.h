@@ -13,7 +13,7 @@ class MadSortDialog: public wxDialog
 {
 	public:
 
-		MadSortDialog(wxWindow* parent);
+		explicit MadSortDialog(wxWindow* parent);
 		virtual ~MadSortDialog();
 
 		//(*Declarations(MadSortDialog)

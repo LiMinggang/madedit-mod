@@ -120,9 +120,9 @@ private:
 	void Create(size_t idx);
 
 public:
-	MadEncoding(size_t idx);
-	MadEncoding(int enc);
-	MadEncoding(const wxString &name);
+	explicit MadEncoding(size_t idx);
+	explicit MadEncoding(int enc);
+	explicit MadEncoding(const wxString &name);
 	~MadEncoding();
 
 	// return the converted	length of buf
@@ -135,7 +135,7 @@ public:
 	size_t UCS4toUTF32BE(ucs4_t	ucs4, wxByte *buf);
 	size_t UCS4toGB18030(ucs4_t	ucs4, wxByte *buf);
 
-	ucs4_t SBtoUCS4(wxByte b1);		// Single-Byte to UCS4
+	ucs4_t SBtoUCS4(wxByte b1);    // Single-Byte to UCS4
 	ucs4_t DBtoUCS4(wxByte *buf);	// Double-Byte to UCS4
     ucs4_t GB18030toUCS4(wxByte *buf, size_t &len);
 

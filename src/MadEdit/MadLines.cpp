@@ -1759,7 +1759,7 @@ void MadLines::Reformat( /*IN*/MadLineIterator &iter,/*IN*/int maxwrapwidth, /*I
 	const size_t maxlinelength = m_MadEdit->m_MaxLineLength;
 	//int maxwidth = m_MadEdit->GetMaxWordWrapWidth();
 	size_t bomlen = 0;
-	
+
 	ucs4_t firstuc, lastuc, prevuc;
 	int index, notSpaceCount;
 	size_t firstuclen, length, eatUCharCount, bracepos;
@@ -2277,7 +2277,7 @@ _NOCHECK_:
 				{
 					m_MadEdit->m_HasTab = true;
 
-					tabwidth = orgtabwidth; 
+					tabwidth = orgtabwidth;
 
 					ucwidth = maxwrapwidth - rowidx.m_Width;
 
@@ -2573,10 +2573,10 @@ size_t MadLines::Reformat( MadLineIterator first, MadLineIterator last )
 		ReformatCount = 1;
 		first->m_BracePairIndices.clear();
 		/*====End of being moved from Reformat() above for performance====*/
-		
+
 		if( first->m_Size != 0 ) // not an empty line
 			Reformat( first, iMaxWrapWidth, lTabWidth, state);
-		else			
+		else
 			state = first->m_State;
 
 		count += ReformatCount;
@@ -2613,7 +2613,7 @@ size_t MadLines::Reformat( MadLineIterator first, MadLineIterator last )
 			break;
 		}
 	}
-	while( bContinue | bStateIsNotOkay );
+	while( bContinue || bStateIsNotOkay );
 
 	return count;
 }

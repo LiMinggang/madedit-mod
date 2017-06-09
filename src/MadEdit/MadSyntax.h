@@ -193,7 +193,7 @@ public:
 
 public:
 	MadSyntax( const wxString &filename, bool loadAttr = true );
-	MadSyntax( bool loadAttr = true );
+	explicit MadSyntax( bool loadAttr = true );
 	~MadSyntax();
 
 	void LoadFromFile( const wxString &filename );

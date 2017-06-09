@@ -118,6 +118,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 3. stdc++ version
 
 Mod v0.4.8
+Fix: Bugs found by CPPCheck
 Update C++ syntex to C++11
 Minor code improvement
 

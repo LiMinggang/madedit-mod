@@ -508,7 +508,7 @@ int MadMessageBox( const wxString& message, const wxString& caption, long style,
 	// wxICON_NONE
 	if( !( style & wxICON_NONE ) && !( style & wxICON_MASK ) )
 	{
-		style |= style & wxYES ? wxICON_QUESTION : wxICON_INFORMATION;
+		style |= (style & wxYES) ? wxICON_QUESTION : wxICON_INFORMATION;
 	}
 
 	wxMessageDialog dialog( parent, message, caption, style );
@@ -985,7 +985,7 @@ public:
 	struct FunctorA
 	{
 		MadEdit *madedit;
-		bool operator()( PageData &pd ) {
+		bool operator()( PageData &pd ) const {
 			return madedit == pd.madedit;
 		}
 	};

@@ -32,7 +32,7 @@ private:
 		T* end;
 		buffer* prev;
 		buffer* next;
-		buffer(MadDeque<T> *d) :
+		explicit buffer(MadDeque<T> *d) :
 			mdeque(d),
 			begin( (T*) operator new(N * sizeof(T))),
 			end(begin + N),

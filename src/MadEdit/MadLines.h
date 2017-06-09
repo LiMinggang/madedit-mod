@@ -60,7 +60,7 @@ extern bool g_MB2WC_check_dir_filename;//check dir, filename separately
 class MadConvFileName_WC2MB_UseLibc
 {
 public:
-	MadConvFileName_WC2MB_UseLibc( bool uselibc ) {
+	explicit MadConvFileName_WC2MB_UseLibc( bool uselibc ) {
 		g_WC2MB_2_utf8 = !uselibc;
 	}
 	~MadConvFileName_WC2MB_UseLibc() {
@@ -135,7 +135,7 @@ private:
 	bool Rename( const wxString &name );
 
 public:
-	MadFileData( const wxString &name );
+	explicit MadFileData( const wxString &name );
 	virtual ~MadFileData();
 	virtual wxByte Get( const wxFileOffset &pos );
 	virtual void Get( const wxFileOffset &pos, wxByte *buffer, size_t size );
@@ -220,11 +220,11 @@ struct BracePairIndex
 	wxByte       LeftPair;   // non-zero: leftpair, zero: rightpair
 	char         BraceIndex; //
 
-	BracePairIndex(): XPos( 0 ), Width( 0 ), LinePos( 0 ), Length( 0 ), LeftPair( 0 ), BraceIndex( 0 )
+	BracePairIndex(): LinePos( 0 ), XPos( 0 ), Width( 0 ), Length( 0 ), LeftPair( 0 ), BraceIndex( 0 )
 	{}
 
 	BracePairIndex( int xpos, wxUint16 wid, wxFileOffset lpos, wxUint16 len, wxByte lp, char bi )
-		: XPos( xpos ), Width( wid ), LinePos( lpos ), Length( len ), LeftPair( lp ), BraceIndex( bi )
+		: LinePos( lpos ), XPos( xpos ), Width( wid ), Length( len ), LeftPair( lp ), BraceIndex( bi )
 	{}
 };
 
@@ -404,7 +404,7 @@ private:
 	wxFileOffset GetMaxTempSize( const wxString &filename );
 
 public:
-	MadLines( MadEdit *madedit );
+	explicit MadLines( MadEdit *madedit );
 	~MadLines();
 
 	bool LoadFromFile( const wxString &filename, const wxString &encoding = wxEmptyString );

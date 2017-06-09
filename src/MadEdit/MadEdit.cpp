@@ -130,7 +130,7 @@ wxString MadStrLower( const wxString& ws )
 class MadDataObject : public wxDataObjectSimple
 {
 public:
-	MadDataObject( const wxChar *fmt ) {
+	explicit MadDataObject( const wxChar *fmt ) {
 		SetFormat( fmt );
 	}
 
@@ -221,7 +221,7 @@ class MadMouseMotionTimer : public wxTimer
 private:
 	MadEdit *m_madedit;
 public:
-	MadMouseMotionTimer( MadEdit *madedit ): m_madedit( madedit )
+	explicit MadMouseMotionTimer( MadEdit *madedit ): m_madedit( madedit )
 	{}
 
 	virtual void Notify() {
@@ -409,7 +409,7 @@ list<FontWidthManager::VerifiedFlag> FontWidthManager::VerifiedFlagList;
 template <class T>
 void memset_t( void * buf, int value, size_t buf_len )
 {
-	size_t len = buf_len / sizeof( T ), ord_len = buf_len % sizeof( T );
+	size_t ord_len = buf_len % sizeof( T );
 	T * p1 = ( T * )buf;
 	char * p2 = ( char * )buf + buf_len - ord_len;
 
@@ -1947,12 +1947,12 @@ bool IsTheSame( vector< T >& First, T * Second, size_t Len )
 	return true;
 }
 
-int MadEdit::GetIndentCountByPos( wxFileOffset endpos )
+int MadEdit::GetIndentCountByPos( wxFileOffset pos )
 {
 	MadLineIterator lineiter, lit;
-	int endrow = -1, count = 0;
+	int row = -1, count = 0;
 	vector <ucs4_t> spaces;
-	int lineid = GetLineByPos( lit, endpos, endrow );
+	int lineid = GetLineByPos( lit, pos, row );
 	GetIndentSpaces( lineid, lit, spaces, true, false );
 	count = spaces.size() / GetIndentColumns();
 	return count;
@@ -6207,7 +6207,6 @@ void MadEdit::GetIndentSpaces( int lineid, MadLineIterator lit, vector <ucs4_t> 
 		else
 			if( uc == 0x0D || uc == 0x0A )
 			{
-				break;
 				ucqueue.clear();
 
 				if( lineid == 0 ) // first line
@@ -11999,7 +11998,7 @@ void MadEdit::ShowZeroLenSelIndicator()
 		wxMenuItem * mit = m_ZeroLenSelIndicator->Append( wxNewId(),  _( "Zero Length Match" ) );
 		mit->SetBitmap( wxBitmap( zerolen_xpm ) );
 #else
-		wxMenuItem * mit = m_ZeroLenSelIndicator->Append( wxNewId(),  _( "^ Zero Length Match" ) );
+		m_ZeroLenSelIndicator->Append( wxNewId(),  _( "^ Zero Length Match" ) );
 #endif
 	}
 

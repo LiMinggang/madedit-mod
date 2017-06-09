@@ -259,7 +259,7 @@ bool MadPrintout::OnPrintPage(int page)
     return true;
 }
 
-void MadPrintout::CalcPrintInfo(wxPageSetupData *pPageSetupData, double &xScale, double &yScale, wxRect &paintRect)
+void MadPrintout::CalcPrintInfo(wxPageSetupData *pPageSetupData, double &xScale, double &yScale, wxRect &printRect)
 {
     wxDC *dc = GetDC();
     int dcw, dch;
@@ -277,17 +277,17 @@ void MadPrintout::CalcPrintInfo(wxPageSetupData *pPageSetupData, double &xScale,
     double px = double(pagesize_x)/25.4 * double(sx);
     double py = double(pagesize_y)/25.4 * double(sy);
 
-    // calc paintRect scale
+    // calc printRect scale
     double top    = double(pttl.y)/double(pagesize_y);
     double left   = double(pttl.x)/double(pagesize_x);
     double bottom = double(ptbr.y)/double(pagesize_y);
     double right  = double(ptbr.x)/double(pagesize_x);
     
-    // calc the pixel-size of paintRect
-    paintRect.x = int(left * px);
-    paintRect.y = int(top  * py);
-    paintRect.width  = int(px) - int(right * px) - paintRect.x;
-    paintRect.height = int(py) - int(bottom * py) - paintRect.y;
+    // calc the pixel-size of printRect
+    printRect.x = int(left * px);
+    printRect.y = int(top  * py);
+    printRect.width  = int(px) - int(right * px) - printRect.x;
+    printRect.height = int(py) - int(bottom * py) - printRect.y;
 
     // calc scaling factor
     xScale = double(dcw) / px;

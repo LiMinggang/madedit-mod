@@ -192,7 +192,7 @@ void MadSaveQueryDialog::GetCheckedItemsData(std::set< long > & selectedItems, b
 		item = MadFileList->GetNextItem(item, wxLIST_NEXT_ALL, wxLIST_STATE_DONTCARE);
 		if ( item == -1 )
 			break;
-		if((!checked) || (checked && (MadFileList->IsChecked(item))))
+		if((!checked) || (MadFileList->IsChecked(item)))
 		{
 			pid = static_cast<long>(MadFileList->GetItemData(item));
 			selectedItems.insert(pid);

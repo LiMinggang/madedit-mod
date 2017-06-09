@@ -48,7 +48,7 @@ class MadNumberDlg : public	wxDialog
 	private:
 		
 	public:
-		MadNumberDlg(wxWindow *parent, wxWindowID id = wxID_ANY, const	wxString &title	= _("Numbering Configuration"),	const wxPoint& pos = wxDefaultPosition,	const wxSize& size = wxDefaultSize,	long style = MadNumberDlg_STYLE);
+		MadNumberDlg(wxWindow *parent, wxWindowID id = wxID_ANY, const	wxString &title	= _("Numbering Configuration"), const wxPoint& position = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = MadNumberDlg_STYLE);
 		virtual	~MadNumberDlg();
 		void WxOKButtonClick(wxCommandEvent& event);		
 	

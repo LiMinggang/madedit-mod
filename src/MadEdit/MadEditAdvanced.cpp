@@ -474,7 +474,6 @@ void MadEdit::CopyRevertHex( wxString &delimiters )
 	if( strLen < 2 ) return;
 
 	wxStringTokenizer tkz( strText, delimiters );
-	bool noToken = false;
 	std::string locStr;
 
 	if( tkz.HasMoreTokens() )
@@ -2157,7 +2156,7 @@ struct SortLineComp
 	SortLineData *data;
 
 	SortLineComp() : data( nullptr ) {}
-	SortLineComp( SortLineData *d ) : data( d ) {}
+	explicit SortLineComp( SortLineData *d ) : data( d ) {}
 
 	bool operator<( const SortLineComp& it ) const {
 		if( s_numeric ) { // compare number

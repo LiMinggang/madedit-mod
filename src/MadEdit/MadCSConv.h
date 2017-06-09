@@ -29,8 +29,8 @@ class wxCSConv;
 class MadCSConv
 {
 public:
-	MadCSConv(const wxString &charset);
-	MadCSConv(int encoding);
+	explicit MadCSConv(const wxString &charset);
+	explicit MadCSConv(int encoding);
 	~MadCSConv() {}
 
 	size_t MB2WC (wchar_t *out, const char *in, size_t outLen) const; 
