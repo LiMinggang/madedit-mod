@@ -59,7 +59,7 @@ Current Feature list(comparing to the original Madedit@sourceforge)
 * Interactive scripting(Message box and Input dialog suppored)
 * 64 Bit build (Win64 and x86_x64), GTK+3 support
 
-Currently supported Languages
+Translations
 =============================
 * English
 * Chinese Simplified (zh_CN)
