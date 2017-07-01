@@ -5,7 +5,7 @@ medit = MadEdit()
 #Restore caret position
 res = 1
 while res != 0:
-    res = medit.FindTextNext("AAAA", False, False, False, -1, -1)
+    res = medit.FindTextNext("AAAA", False, False, False, False, -1, -1)
     if res != 0:
         pos1 = medit.GetSelectionBeginPos()
         res = medit.FindHexNext("A1A1", -1, -1)

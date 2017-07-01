@@ -117,10 +117,11 @@ FreeBSD packaging (with FreeBSD 10.01)
 2. aclocal version in aclocal.m4
 3. stdc++ version
 
-Mod v0.4.8
+Mod v0.4.9
 Fix: Bugs found by CPPCheck
 Update C++ syntex to C++11
 Minor code improvement
+Minor issue in MadPython scripts
 
 Mod v0.4.8
 1.New: Copy file name without extension
