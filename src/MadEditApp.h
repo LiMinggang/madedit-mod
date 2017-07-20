@@ -38,7 +38,7 @@ public:
 							int WXUNUSED(size),
 #else
 							const void * data,
-							size_t WXUNUSED(size),
+							size_t size,
 #endif
 							wxIPCFormat WXUNUSED(format));
 };

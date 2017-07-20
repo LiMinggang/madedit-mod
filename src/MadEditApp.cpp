@@ -108,7 +108,11 @@ static const wxCmdLineEntryDesc g_cmdLineDesc [] =
 
 extern const size_t g_LanguageCount = sizeof( g_LanguageValue ) / sizeof( int );
 //wxIMPLEMENT_APP(MadEditApp);
+#ifdef __WXMSW__
 const wxString g_MadServerStr = wxT( "MadMainApp" );
+#else  //Linux
+const wxString g_MadServerStr = wxT( "/tmp/MadMainApp" );
+#endif
 const wxString g_MadTopicStr = wxT( "single-instance" );
 
 class MadTranslationHelper : public wxDirTraverser
@@ -282,16 +286,20 @@ wxConnectionBase *MadAppSrv::OnAcceptConnection( const wxString& topic )
 bool MadAppConn::OnExecute( const wxString& topic,
 #if wxMAJOR_VERSION < 2 || (wxMAJOR_VERSION == 2 && wxMINOR_VERSION < 9)
 	wxChar* data,
-	int WXUNUSED( size ),
+	int WXUNUSED(size),
 #else
 	const void * data,
-	size_t WXUNUSED( size ),
+	size_t size,
 #endif
 	wxIPCFormat WXUNUSED( format ) )
 {
 	MadEditFrame* frame = wxDynamicCast( wxGetApp().GetTopWindow(), MadEditFrame );
+	if( size == 0 ) return false;
+#ifdef __WXMSW__
 	wxString filename( ( wxChar* )data );
-
+#else
+	wxString filename( wxString::FromUTF8(( const char * )data, size ));
+#endif
 	if( filename.IsEmpty() )
 	{
 		// Just raise the main window
@@ -404,7 +412,12 @@ bool MadEditApp::OnInit()
 					fnames += wxT( "*m" ) + m_MadPythonScript;
 				}
 
+#ifdef __WXMSW__
 				connection->Execute( fnames );
+#else
+				const wxScopedCharBuffer buf = fnames.utf8_str();
+				connection->Execute(buf, buf.length() + 1, wxIPC_UTF8TEXT);
+#endif
 				connection->Disconnect();
 				delete connection;
 			}
