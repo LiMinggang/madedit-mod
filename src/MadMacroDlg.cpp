@@ -42,7 +42,7 @@ MadMacroDlg::MadMacroDlg(wxWindow* parent,wxWindowID id,const wxPoint& pos,const
 	Move(wxDefaultPosition);
 	BoxSizer1 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
-    m_debug	= false;
+    m_debug = false;
 	m_Pymacro=new MadEdit(this, ID_MADEDIT, wxPoint(0, 0), pymacro);
 	m_Pymacro->SetFixedWidthMode(false);
 	m_Pymacro->SetRecordCaretMovements(false);
@@ -88,12 +88,17 @@ MadMacroDlg::~MadMacroDlg()
 {
 	//(*Destroy(MadMacroDlg)
 	//*)
-	g_MadMacroDlg =	nullptr;
+	g_MadMacroDlg = nullptr;
 }
 
 void MadMacroDlg::SetPyScript(wxString & pyscript)
 {
 	m_Pymacro->SetText(pyscript);
+}
+
+void MadMacroDlg::SetEncoding(const wxString &encname)
+{
+	m_Pymacro->SetEncoding(encname);
 }
 
 void MadMacroDlg::OnWxButtonRunClick(wxCommandEvent& event)
@@ -122,13 +127,13 @@ void MadMacroDlg::OnWxButtonRunClick(wxCommandEvent& event)
 				{
 					wxStreamToTextRedirector redirector((wxTextCtrl	*)WxMemoOutput);
 					g_MainFrame->SetMacroRunning();
-					g_EmbeddedPython->exec(std::string(pystr.mb_str()));
+					g_EmbeddedPython->exec(std::string(pystr.mb_str(wxConvUTF8)));
 					g_MainFrame->SetMacroStopped();
 				}
 				else
 				{
 					g_MainFrame->SetMacroRunning();
-					g_EmbeddedPython->exec(std::string(pystr.mb_str()));
+					g_EmbeddedPython->exec(std::string(pystr.mb_str(wxConvUTF8)));
 					g_MainFrame->SetMacroStopped();
 				}
 			}
@@ -144,7 +149,7 @@ void MadMacroDlg::OnWxButtonCloseClick(wxCommandEvent& event)
 
 void MadMacroDlg::OnWxButtonResultClick(wxCommandEvent& event)
 {
-    m_debug	= !m_debug;
+	m_debug= !m_debug;
 	WxMemoOutput->Show(m_debug);
 	GetSizer()->Fit(this);
 	GetSizer()->SetSizeHints(this);
@@ -156,6 +161,6 @@ void MadMacroDlg::OnWxButtonResultClick(wxCommandEvent& event)
 
 void MadMacroDlg::MadMacroDlgClose(wxCloseEvent& event)
 {
-    Destroy();
+	Destroy();
 	g_MadMacroDlg =	nullptr;
 }

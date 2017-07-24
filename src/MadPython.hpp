@@ -1416,7 +1416,7 @@ namespace mad_python {
 			long ok = SR_EXPR_ERROR;
 
 			if( ( g_ActiveMadEdit ) && ( !text.empty() ) ) {
-				wxString wxText( text.c_str(), *wxConvCurrent );
+				wxString wxText( text.c_str(), wxConvUTF8 );
 				wxFileOffset from = ( wxFileOffset )rangeFrom, to = ( wxFileOffset )rangeTo;
 				
 				if(bRegex) bWholeWord = false;
@@ -1434,7 +1434,7 @@ namespace mad_python {
 			long ok = SR_EXPR_ERROR;
 
 			if( ( g_ActiveMadEdit ) && ( !text.empty() ) ) {
-				wxString wxText( text.c_str(), *wxConvCurrent );
+				wxString wxText( text.c_str(), wxConvUTF8 );
 				wxFileOffset from = ( wxFileOffset )rangeFrom, to = ( wxFileOffset )rangeTo;
 				
 				if(bRegex) bWholeWord = false;
@@ -1481,7 +1481,7 @@ namespace mad_python {
 			if( !( g_ActiveMadEdit ) || g_ActiveMadEdit->IsReadOnly() )
 			{ return RR_NREP_NNEXT; }
 
-			wxString wxExpr( expr.c_str(), *wxConvCurrent ), wxFmt( fmt.c_str(), *wxConvCurrent );
+			wxString wxExpr( expr.c_str(), wxConvUTF8 ), wxFmt( fmt.c_str(), *wxConvCurrent );
 			wxFileOffset from = ( wxFileOffset )rangeFrom, to = ( wxFileOffset )rangeTo;
 			
 			if(bRegex) bWholeWord = false;
@@ -1499,7 +1499,7 @@ namespace mad_python {
 			if( !( g_ActiveMadEdit ) || g_ActiveMadEdit->IsReadOnly() )
 			{ return RR_NREP_NNEXT; }
 
-			wxString wxExpr( expr.c_str(), *wxConvCurrent ), wxFmt( fmt.c_str(), *wxConvCurrent );
+			wxString wxExpr( expr.c_str(), wxConvUTF8 ), wxFmt( fmt.c_str(), *wxConvCurrent );
 			wxFileOffset from = ( wxFileOffset )rangeFrom, to = ( wxFileOffset )rangeTo;
 			
 			if(bRegex) bWholeWord = false;
@@ -1527,7 +1527,7 @@ namespace mad_python {
 			long ok = 0;
 
 			if( ( g_ActiveMadEdit ) && ( !expr.empty() ) && ( !g_ActiveMadEdit->IsReadOnly() ) ) {
-				wxString wxExpr( expr.c_str(), *wxConvCurrent ), wxFmt( fmt.c_str(), *wxConvCurrent );
+				wxString wxExpr( expr.c_str(), wxConvUTF8 ), wxFmt( fmt.c_str(), *wxConvCurrent );
 				
 				if(bRegex) bWholeWord = false;
 				else bDotMatchNewline = false;
@@ -1557,7 +1557,7 @@ namespace mad_python {
 			long ok = SR_EXPR_ERROR;
 
 			if( ( !expr.empty() ) && ( g_ActiveMadEdit ) ) {
-				wxString wxExpr( expr.c_str(), *wxConvCurrent );
+				wxString wxExpr( expr.c_str(), wxConvUTF8 );
 				vector<wxFileOffset> begpos, endpos;
 				MadEdit *madedit = ( g_ActiveMadEdit );
 				//wxTreeCtrl * results = g_MainFrame->m_FindInFilesResults;

@@ -8576,6 +8576,8 @@ void MadEditFrame::OnToolsRunTempMacro( wxCommandEvent& event )
 		g_MadMacroDlg = new MadMacroDlg( this );
 	}
 
+	g_MadMacroDlg->SetEncoding(g_ActiveMadEdit->GetEncodingName());
+
 	if( g_SearchReplaceDialog != nullptr )
 	{ g_SearchReplaceDialog->Show( false ); }
 
@@ -8651,6 +8653,7 @@ void MadEditFrame::OnToolsRunMacroFile( wxCommandEvent& event )
 				{
 					g_MadMacroDlg = new MadMacroDlg( this );
 				}
+				g_MadMacroDlg->SetEncoding(g_ActiveMadEdit->GetEncodingName());
 
 				g_MadMacroDlg->SetPyScript( str );
 				g_MadMacroDlg->ShowModal();
@@ -8725,6 +8728,7 @@ void MadEditFrame::OnToolsPlayRecMacro( wxCommandEvent& event )
 			{
 				g_MadMacroDlg = new MadMacroDlg( this );
 			}
+			g_MadMacroDlg->SetEncoding(g_ActiveMadEdit->GetEncodingName());
 
 			wxString endline( wxT( "\r" ) );
 

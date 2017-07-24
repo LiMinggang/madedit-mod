@@ -33,6 +33,7 @@ class MadMacroDlg: public wxDialog
 		virtual ~MadMacroDlg();
 		void SetPyScript(wxString &	pyscript);
 		bool IsDebugOn() {return m_debug;}
+		void SetEncoding(const wxString &encname);
 
 		//(*Declarations(MadMacroDlg)
 		wxTextCtrl* WxMemoOutput;
