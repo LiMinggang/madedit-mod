@@ -77,7 +77,7 @@ public:
 #ifdef _MSC_VER
 		m_charset = _strdup("");
 #else
-		m_charset = strdup("");
+        m_charset = strdup("");
 #endif
     }
 

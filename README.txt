@@ -123,6 +123,7 @@ Fix: Bugs found by CPPCheck
 Fix: MadPython can't take chars not encoded by current ecoding
 New: Change editor encoding of MadPython dialog according to current active edit
 Update C++ syntax to C++11
+Update uchardet to latest version
 Minor code improvement
 Minor issue in MadPython scripts
 
