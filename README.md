@@ -103,7 +103,7 @@ Mod v0.4.8
 * Update Traditional Chinese translation(Thanks zhtw2013@gmail.com)
 * Update Greek translation(Thanks Nikoss)
 
-Todo:
+Todo
 =====
 * Partial load for large text files which was mentioned by the original author but never getting done.
 * FreeBSD packaging (with FreeBSD 10.01)
@@ -111,7 +111,7 @@ Todo:
 2. aclocal version in aclocal.m4
 3. stdc++ version
 
-Known issues:
+Known issues
 =============
 1. The Macro recording function will save all your commands to one document which
     means it will not record the "switching" between documents.
@@ -119,12 +119,12 @@ Known issues:
 3. HighlightWord would not work if the caret is at the end of the line
 4. Scroll function on Right click menu of scroll bars only works with Windows
 
-Thanks:
+Thanks
 =============
 * Nikoss   Greek Translation
 * ZhTw2013 Traditional Chinese Translation
 
-Download:
+Download
 =============
 [Madedit-Mod@sf](https://sourceforge.net/projects/madedit-mod/files/?source=navbar)
 
