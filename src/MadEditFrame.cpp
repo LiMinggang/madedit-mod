@@ -8789,7 +8789,7 @@ void MadEditFrame::OnToolsSaveRecMacro( wxCommandEvent& event )
 
 		if( scriptfile.Exists() )
 		{
-			if( wxNO == MadMessageBox( wxString::Format( _( "Do you want to overwrite %s" ), filename.c_str() ), _( "Warning" ), wxICON_WARNING | wxYES_NO ) )
+			if( wxNO == MadMessageBox( wxString::Format( _( "Do you want to overwrite %s ?" ), filename.c_str() ), _( "Warning" ), wxICON_WARNING | wxYES_NO ) )
 			{ return; }
 
 			scriptfile.Open( wxConvFile );
