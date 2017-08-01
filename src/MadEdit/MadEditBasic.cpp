@@ -1198,6 +1198,64 @@ void MadEdit::GetSelectionLineId( int &beginline, int &endline )
 	}
 }
 
+void MadEdit::GetRangeText( wxString &ws, MadCaretPos *begpos, MadCaretPos *endpos )
+{
+	wxFileOffset pos = begpos->pos;
+	MadUCQueue ucqueue;
+	MadLineIterator lit = begpos->iter;
+	m_Lines->InitNextUChar( lit, begpos->linepos );
+	MadLines::NextUCharFuncPtr NextUChar = m_Lines->NextUChar;
+
+	do
+	{
+		if( !( m_Lines->*NextUChar )( ucqueue ) )
+		{
+			++lit;
+			m_Lines->InitNextUChar( lit, 0 );
+			( m_Lines->*NextUChar )( ucqueue );
+		}
+
+#ifdef __WXMSW__
+		ucs4_t uc = ucqueue.back().first;
+
+		if( uc >= 0x10000 )
+		{
+			wchar_t wbuf[2];
+			m_Encoding->UCS4toUTF16LE_U10000( uc, ( wxByte* )wbuf );
+			ws << wbuf[0];
+			ws << wbuf[1];
+		}
+		else
+		{
+			ws << wxChar( uc );
+		}
+
+#else
+		ws << wxChar( ucqueue.back().first );
+#endif
+		pos += ucqueue.back().second;
+	}
+	while( pos < endpos->pos );
+}
+
+void MadEdit::GetRangeText( wxString &ws, wxFileOffset &begpos, wxFileOffset &endpos )
+{
+	MadCaretPos bpos, epos;
+	if( begpos < 0 ) begpos = 0;
+	else
+		if( begpos > m_Lines->m_Size ) begpos = m_Lines->m_Size;
+	if( endpos < 0 ) endpos = 0;
+	else
+		if( endpos > m_Lines->m_Size ) endpos = m_Lines->m_Size;
+
+	bpos.pos = begpos;
+	UpdateCaretByPos( bpos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
+	epos.pos = endpos;
+	UpdateCaretByPos( epos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
+
+	GetRangeText(ws, &bpos, &epos);
+}
+
 void MadEdit::GetSelText( wxString &ws )
 {
 	if( !m_Selection )
@@ -1209,42 +1267,7 @@ void MadEdit::GetSelText( wxString &ws )
 	}
 	else
 	{
-		wxFileOffset pos = m_SelectionBegin->pos;
-		MadUCQueue ucqueue;
-		MadLineIterator lit = m_SelectionBegin->iter;
-		m_Lines->InitNextUChar( lit, m_SelectionBegin->linepos );
-		MadLines::NextUCharFuncPtr NextUChar = m_Lines->NextUChar;
-
-		do
-		{
-			if( !( m_Lines->*NextUChar )( ucqueue ) )
-			{
-				++lit;
-				m_Lines->InitNextUChar( lit, 0 );
-				( m_Lines->*NextUChar )( ucqueue );
-			}
-
-#ifdef __WXMSW__
-			ucs4_t uc = ucqueue.back().first;
-
-			if( uc >= 0x10000 )
-			{
-				wchar_t wbuf[2];
-				m_Encoding->UCS4toUTF16LE_U10000( uc, ( wxByte* )wbuf );
-				ws << wbuf[0];
-				ws << wbuf[1];
-			}
-			else
-			{
-				ws << wxChar( uc );
-			}
-
-#else
-			ws << wxChar( ucqueue.back().first );
-#endif
-			pos += ucqueue.back().second;
-		}
-		while( pos < m_SelectionEnd->pos );
+		GetRangeText( ws, m_SelectionBegin, m_SelectionEnd );
 	}
 }
 

@@ -1419,6 +1419,7 @@ void DisplayFindAllResult( wxTreeItemId &myroot, vector<wxFileOffset> &begpos, v
 	if( !begpos.empty() ) // found data
 	{
 		int pid = ( ( wxAuiNotebook* )g_MainFrame->m_Notebook )->GetPageIndex( madedit );
+		int maxdisplay = madedit->GetMaxDisplaySize();
 		wxString fmt, filename = madedit->GetFileName();
 
 		if( filename.IsEmpty() )
@@ -1494,9 +1495,9 @@ void DisplayFindAllResult( wxTreeItemId &myroot, vector<wxFileOffset> &begpos, v
 				loc += wxT(": "); //As delimiter
 
 				fmt = loc + linetext;
-				if(fmt.Len() > 1024)
+				if(fmt.Len() > maxdisplay)
 				{
-					fmt.Remove(1020);
+					fmt.Remove(maxdisplay-4);
 					fmt += wxT("...");
 				}
 				if(multiline)

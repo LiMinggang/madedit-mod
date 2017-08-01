@@ -943,6 +943,7 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_LastPaintBitmap = -1;
 	m_UseDefaultSyntax = false;
 	m_SearchWholeWord = false;
+	m_MaxDisplaySize = m_Config->ReadLong( wxT( "MaxDisplaySize" ), 256 );
 #if 0
 //#ifdef __WXGTK__
 	ConnectToFixedKeyPressHandler();
@@ -3859,25 +3860,39 @@ void MadEdit::SetSelection( wxFileOffset beginpos, wxFileOffset endpos, bool bCa
 	}
 }
 
-wxFileOffset MadEdit::GetColumnSelection( wxString *ws )
+wxFileOffset MadEdit::GetColumnRange( wxString *ws, MadCaretPos *begpos, MadCaretPos *endpos )
 {
 	wxASSERT( m_EditMode == emColumnMode );
-	wxFileOffset selsize = 0;
-	size_t firstrow = m_SelectionBegin->rowid;
-	size_t subrowid = m_SelectionBegin->subrowid;
-	MadLineIterator lit = m_SelectionBegin->iter;
-	wxFileOffset pos = m_SelectionBegin->pos - m_SelectionBegin->linepos;
-	size_t lastrow = m_SelectionEnd->rowid;
+	wxFileOffset rangesize = 0;
+	size_t firstrow = begpos->rowid;
+	size_t subrowid = begpos->subrowid;
+	MadLineIterator lit = begpos->iter;
+	wxFileOffset pos = begpos->pos - begpos->linepos;
+	size_t lastrow = endpos->rowid;
 	MadUCQueue ucqueue;
 	MadLines::NextUCharFuncPtr NextUChar = m_Lines->NextUChar;
+	
+	int leftxpos = -1;
+	int rightxpos = -1;
+
+	if( begpos->xpos < endpos->xpos )
+	{
+		leftxpos = begpos->xpos;
+		rightxpos = endpos->xpos;
+	}
+	else
+	{
+		leftxpos = endpos->xpos;
+		rightxpos = begpos->xpos;
+	}
 
 	for( ;; )
 	{
 		int rowwidth = lit->m_RowIndices[subrowid].m_Width;
 		int nowxpos = 0;
-		int xpos1 = m_SelLeftXPos, xpos2 = m_SelRightXPos;
+		int xpos1 = leftxpos, xpos2 = rightxpos;
 
-		if( m_SelLeftXPos < rowwidth )
+		if( leftxpos < rowwidth )
 		{
 			wxFileOffset rowpos = lit->m_RowIndices[subrowid].m_Start;
 			wxFileOffset rowendpos = lit->m_RowIndices[subrowid + 1].m_Start;
@@ -3922,7 +3937,7 @@ wxFileOffset MadEdit::GetColumnSelection( wxString *ws )
 
 					if( xpos2 > uchw )
 					{
-						selsize += ucqueue.back().second;
+						rangesize += ucqueue.back().second;
 
 						if( ws )
 						{
@@ -3978,7 +3993,12 @@ wxFileOffset MadEdit::GetColumnSelection( wxString *ws )
 		}
 	}
 
-	return selsize;
+	return rangesize;
+}
+
+wxFileOffset MadEdit::GetColumnSelection( wxString *ws )
+{
+	return GetColumnRange( ws, m_SelectionBegin, m_SelectionEnd );
 }
 
 void MadEdit::SelectWordFromCaretPos( wxString *ws, MadCaretPos * cpos/* = nullptr*/, bool bSelection/* = false*/ )

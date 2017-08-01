@@ -7966,7 +7966,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		wxString oldpath = m_Config->GetPath();
 		m_Config->SetPath( wxT( "/MadEdit" ) );
 		bool rcm, isiot, ai, acp, icp4sel, msc, mscck, mmp, afcp, fwm, twm, abck, ldch;
-		wxString mc, tc, ic;
+		wxString mc, tc, ic, mds;
 		long ll;
 		m_Config->Write( wxT( "Language" ), g_OptionsDialog->WxComboBoxLanguage->GetValue() );
 		m_Config->Write( wxT( "SingleInstance" ), g_OptionsDialog->WxCheckBoxSingleInstance->GetValue() );
@@ -7974,6 +7974,8 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		m_Config->Write( wxT( "RecordCaretMovements" ), rcm );
 		m_Config->Write( wxT( "MaxSizeToLoad" ), g_OptionsDialog->WxEditMaxSizeToLoad->GetValue() );
 		m_Config->Write( wxT( "MaxTextFileSize" ), g_OptionsDialog->WxEditMaxTextFileSize->GetValue() );
+		mds = g_OptionsDialog->WxEditMaxDisplaySize->GetValue();
+		m_Config->Write( wxT( "MaxDisplaySize" ), mds );
 		m_Config->Write( wxT( "DefaultEncoding" ), g_OptionsDialog->WxComboBoxEncoding->GetValue() );
 		ll = 0;
 		if (g_OptionsDialog->WxCheckBoxEnableAutoSave->GetValue()) g_OptionsDialog->WxEditAutoSaveTimeout->GetValue().ToLong(&ll);
@@ -8118,6 +8120,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		for( int i = 0; i < count; ++i )
 		{
 			MadEdit *madedit = ( MadEdit* )m_Notebook->GetPage( i );
+			wxASSERT(madedit != 0);
 			madedit->SetRecordCaretMovements( rcm );
 			madedit->SetInsertSpacesInsteadOfTab( isiot );
 			madedit->SetAutoIndent( ai );
@@ -8139,6 +8142,8 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 			if( tc.ToLong( &lo ) ) { madedit->SetTabColumns( lo ); }
 
 			if( ic.ToLong( &lo ) ) { madedit->SetIndentColumns( lo ); }
+
+			if( mds.ToLong( &lo ) ) { madedit->SetMaxDisplaySize( lo ); }
 		}
 
 		extern bool g_ResetAllKeys;

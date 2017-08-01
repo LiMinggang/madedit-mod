@@ -99,6 +99,9 @@ public:
   //wx-devcpp will remove them. Try adding the custom code 
   //after the block.
   ////GUI Control Declaration Start
+	wxTextCtrl *WxEditMaxDisplaySize;
+	wxStaticText *WxStaticText33;
+	wxBoxSizer *WxBoxSizer54;
 	wxCheckBox *WxCheckPadComma;
 	wxCheckBox *WxCheckPadReturnType;
 	wxCheckBox *WxCheckUnpadReturnType;
@@ -550,6 +553,7 @@ private:
 	static const long ID_WXNOTEBOOK1;
 	static const long ID_WXCHECKINDENTAFTERPARENS;
 	static const long ID_WXCHECKATTACHCLOSINGWHILE;
+	static const long ID_WXSTATICTEXT33;
 	static const long ID_WXBUTTON1;
 	static const long ID_WXBUTTON2;
 	static const long ID_WXBUTTON3;

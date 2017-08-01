@@ -4021,4 +4021,19 @@ void MadEdit::SetColumnSelection( int startlineid, int startxpos, int hlines, in
 	Refresh( false );
 }
 
+void MadEdit::SetMaxDisplaySize( int maxsize )
+{
+	if( m_MaxDisplaySize != maxsize && maxsize >= 128 && maxsize <= 1024 )
+	{
+		m_MaxDisplaySize = maxsize;
+
+		if( m_StorePropertiesToGlobalConfig )
+		{
+			wxString oldpath = m_Config->GetPath();
+			m_Config->Write( wxT( "/MadEdit/MaxDisplaySize" ), maxsize );
+			m_Config->SetPath( oldpath );
+		}
+	}
+}
+
 

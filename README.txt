@@ -119,6 +119,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.4.9
 New: Change editor encoding of MadPython dialog according to current active edit
+New: Customizable search result display length #233
 Fix: IPC failure on Linux #234
 Fix: Bugs found by CPPCheck
 Fix: MadPython can't take chars not encoded by current ecoding

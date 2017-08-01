@@ -89,7 +89,7 @@ public:
 		int fontsize;
 		wxUint16 *widths;
 
-		FontWidthBuffer() : fontsize(0), widths(nullptr) {}
+		FontWidthBuffer() : fontsize(0), widths(nullptr) {fontname[0] = '\0';}
 		FontWidthBuffer( const wxString &fn, int fs, wxUint16 *ws )
 			: fontsize( fs ), widths( ws ) {
 			size_t count = fn.Length();
@@ -452,6 +452,7 @@ private:
 #endif
     long           m_VSMousePos;
     long           m_HSMousePos;
+    int            m_MaxDisplaySize;
 	bool           m_SpellCheck;
 	bool           m_BookmarkInSearch;
     bool           m_TypewriterMode;
@@ -526,6 +527,7 @@ protected:
 	void SetSelection( wxFileOffset beginpos, wxFileOffset endpos, bool bCaretAtBeginPos = false );
 
 	wxFileOffset GetColumnSelection( wxString *ws );
+	wxFileOffset GetColumnRange( wxString *ws, MadCaretPos *begpos, MadCaretPos *endpos );
 
 	// if(ws==nullptr) SelectWord only;
 	// else GetWord to ws;
@@ -893,6 +895,8 @@ public: // basic functions
 	bool IsTextFile() { return m_Lines->m_MaxLineWidth >= 0; }
 
 	void GetSelText( wxString &ws );
+	void GetRangeText( wxString &ws, MadCaretPos *begpos, MadCaretPos *endpos );
+	void GetRangeText( wxString &ws, wxFileOffset &begpos, wxFileOffset &endpos );
 	void GetText( wxString &ws, bool ignoreBOM = true );
 	void SetText( const wxString &ws );
 
@@ -1117,6 +1121,9 @@ public:
     long GetVSMousePos(){return m_VSMousePos;}
     long GetHSMousePos(){return m_HSMousePos;}
     void ShowZeroLenSelIndicator();
+
+	int GetMaxDisplaySize() { return m_MaxDisplaySize; }
+	void SetMaxDisplaySize( int maxchars );
 
 private: // Printing functions
 	int m_Printing;     // 0: no, <0: Text, >0: Hex
