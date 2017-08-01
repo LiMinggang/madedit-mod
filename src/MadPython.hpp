@@ -1211,6 +1211,19 @@ namespace mad_python {
 			return std::string("");
 		}
 
+		const std::string GetRangeText( long begpos, long endpos )
+		{
+			if( g_ActiveMadEdit )
+			{
+				wxString ws;
+				wxFileOffset bpos = begpos, epos = endpos;
+				g_ActiveMadEdit->GetRangeText( ws, bpos, epos );
+				if(ws.size())
+					return std::string( ws.mb_str() );
+			}
+			return std::string("");
+		}
+
 		const std::string GetText( bool ignoreBOM = true ) {
 			if( g_ActiveMadEdit )
 			{
@@ -2008,6 +2021,7 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.def( "IsReadOnly", &PyMadEdit::IsReadOnly, "" )
 	.def( "IsTextFile", &PyMadEdit::IsTextFile, "" )
 	.def( "GetSelText", &PyMadEdit::GetSelText, return_value_policy<return_by_value>(), "" )
+	.def( "GetRangeText", &PyMadEdit::GetRangeText, return_value_policy<return_by_value>(), "" )
 	.def( "SetText", &PyMadEdit::SetText, "" )
 	.def( "Goto", &PyMadEdit::Goto, "" )
 	.def( "GetLineByPos", &PyMadEdit::GetLineByPos, "" )
@@ -2228,20 +2242,20 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.value( "Right", naRight )
 	;
 	enum_<MadMsgBoxStyle>( "MadDlgStyle" )
-	.value( "YES",						MAD_YES 				  )
-	.value( "OK",						MAD_OK					  )
-	.value( "NO",						MAD_NO					  )
-	.value( "CANCEL",					MAD_CANCEL				  )
-	.value( "APPLY",					MAD_APPLY				  )
-	.value( "CLOSE",					MAD_CLOSE				  )
-	.value( "NO_DEFAULT",				MAD_NO_DEFAULT			   )/* only valid with wxYES_NO */ 
-	.value( "CANCEL_DEFAULT",			MAD_CANCEL_DEFAULT		   )/* only valid with wxCANCEL */ 
-	.value( "ICON_WARNING_EXCLAMATION", MAD_ICON_WARNING_EXCLAMATION)
-	.value( "ICON_ERROR_HAND_STOP", 	MAD_ICON_ERROR_HAND_STOP  )
-	.value( "ICON_QUESTION",			MAD_ICON_QUESTION		  )
-	.value( "ICON_INFORMATION", 		MAD_ICON_INFORMATION	  )
-	.value( "ICON_NONE",				MAD_ICON_NONE	)
-	.value( "CENTRE",				    MAD_CENTRE	)
+	.value( "YES",                      MAD_YES )
+	.value( "OK",                       MAD_OK )
+	.value( "NO",                       MAD_NO )
+	.value( "CANCEL",                   MAD_CANCEL )
+	.value( "APPLY",                    MAD_APPLY )
+	.value( "CLOSE",                    MAD_CLOSE )
+	.value( "NO_DEFAULT",               MAD_NO_DEFAULT )/* only valid with wxYES_NO */ 
+	.value( "CANCEL_DEFAULT",           MAD_CANCEL_DEFAULT )/* only valid with wxCANCEL */ 
+	.value( "ICON_WARNING_EXCLAMATION", MAD_ICON_WARNING_EXCLAMATION )
+	.value( "ICON_ERROR_HAND_STOP",     MAD_ICON_ERROR_HAND_STOP )
+	.value( "ICON_QUESTION",            MAD_ICON_QUESTION )
+	.value( "ICON_INFORMATION",         MAD_ICON_INFORMATION )
+	.value( "ICON_NONE",                MAD_ICON_NONE )
+	.value( "CENTRE",                   MAD_CENTRE )
 	;
 	enum_<MadMsgBoxRet>( "MadMsgBoxRet" )
 	.value( "OK", MADRET_OK )

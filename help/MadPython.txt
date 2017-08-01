@@ -2,7 +2,7 @@ MadPython for MadEdit Mod
 ====
 Backgroud:
 ====
-MadEdit is a cross-platform Text/Hex Editor written in C++ & wxWidgets.
+MadEdit is a cross-platform Text/Hex Editor written in C++  wxWidgets.
 MadEdit supports many useful functions, e.g. SyntaxHighlightings, WordWraps, 
 Encodings, Column/Hex Modes, and a Plugin system(not work yet).
 In HexMode, MadEdit can open large files which size is up to 32GB (INT_MAX*16).
@@ -76,7 +76,7 @@ Supported method list:
 ====
 void ProcessCommand(int command)
 void InsertWChar(int key)
-void InsertStr(const std::string &str)
+void InsertStr(std::string str)
 void InsertIncrementalNumber(int initial, int step, int total, int stepType,
                         int fmt, int align, bool zeroPad)
 void ScrollLineUp()
@@ -88,21 +88,21 @@ void ScrollRight()
 void GoToLine(int line)
 void Goto(long pos)
 void GoToLineColumn(int line, int column)
-void SetSyntax(const std::string &title)
+void SetSyntax(std::string title)
 std::string GetSyntaxTitle()
 void LoadDefaultSyntaxScheme()
-void SetEncoding(const wxString &encname)
+void SetEncoding(std::string encname)
 std::string GetEncodingName()
 std::string GetEncodingDescription()
 long GetEncodingType()
 bool GetRecordCaretMovements()
 void SetRecordCaretMovements(bool value)
-void SetTextFont(const std::string &name, int size, bool forceReset)
-void SetHexFont(const std::string &name, int size, bool forceReset)
+void SetTextFont(std::string name, int size, bool forceReset)
+void SetHexFont(std::string name, int size, bool forceReset)
 mad_py::tuple GetTextFont()
 mad_py::tuple GetHexFont()
 mad_py::tuple GetFontNameSize()
-void SetFontA(const std::string &name, int size)
+void SetFontA(std::string name, int size)
 void SetFixedWidthMode(bool mode)
 bool GetFixedWidthMode()
 void SetLineSpacing(int percent)
@@ -177,14 +177,15 @@ void SetReadOnly(bool value)
 bool IsReadOnly()
 bool IsTextFile()
 std::string GetSelText()
+std::string GetRangeText( long begpos, long endpos )
 std::string GetText(bool ignoreBOM = true)
-void SetText(const std::string &ws)
+void SetText(std::string ws)
 // line: zero based
 // return true for full line, false for partial line
 mad_py::tuple GetLine(int line, size_t maxlen = 0, bool ignoreBOM = true)
 long GetLineByPos(int pos)
-const std::string GetSelHexString(bool withSpace)
-const std::string GetWordFromCaretPos()
+std::string GetSelHexString(bool withSpace)
+std::string GetWordFromCaretPos()
 void Delete()
 void CutLine()
 void DeleteLine()
@@ -198,7 +199,7 @@ void PasteFromClipboard()
 void DndBegDrag()
 void DndDrop()
 bool CanPaste()
-void CopyToClipboardB(std::string &txt)
+void CopyToClipboardB(std::string txt)
 bool CanUndo()
 bool CanRedo()
 void Undo()
@@ -213,38 +214,38 @@ bool HasBracePair()
 void GoToLeftBrace()
 void GoToRightBrace()
 // search in [rangeFrom, rangeTo], default in [CaretPos, EndOfDoc]
-long FindTextNext(const std::string &text,
+long FindTextNext(std::string text,
                         bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false,
                         int rangeFrom = -1, int rangeTo = -1)
 // search in [rangeFrom, rangeTo], rangeFrom > rangeTo, default in [CaretPos, BeginOfDoc]
-long FindTextPrevious(const std::string &text,
+long FindTextPrevious(std::string text,
                             bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false,
                             int rangeFrom = -1, int rangeTo = -1)
 // search in [rangeFrom, rangeTo], default in [CaretPos, EndOfDoc]
-long FindHexNext(const std::string &hexstr, int rangeFrom = -1, int rangeTo = -1)
+long FindHexNext(std::string hexstr, int rangeFrom = -1, int rangeTo = -1)
 // search in [rangeFrom, rangeTo], rangeFrom > rangeTo, default in [CaretPos, BeginOfDoc]
-long FindHexPrevious(const std::string &hexstr, int rangeFrom = -1, int rangeTo = -1)
+long FindHexPrevious(std::string hexstr, int rangeFrom = -1, int rangeTo = -1)
 // replace the selected text that must match expr
-long ReplaceText(const std::string &expr, const std::string &fmt,
+long ReplaceText(std::string expr, std::string fmt,
                              bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false,
                              int rangeFrom = -1, int rangeTo = -1)
-long ReplaceTextNoDoubleCheck(const std::string &expr, const std::string &fmt,
+long ReplaceTextNoDoubleCheck(std::string expr, std::string fmt,
                              bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false,
                              int rangeFrom = -1, int rangeTo = -1)
-long ReplaceHex(const std::string &expr, const std::string &fmt,
+long ReplaceHex(std::string expr, std::string fmt,
                              int rangeFrom = -1, int rangeTo = -1)
 // return the replaced count or SR_EXPR_ERROR
-long ReplaceTextAll(const std::string &expr, const std::string &fmt,
+long ReplaceTextAll(std::string expr, std::string fmt,
                     bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false,
                     int rangeFrom = -1, int rangeTo = -1)
-long ReplaceHexAll(const std::string &expr, const std::string &fmt,
+long ReplaceHexAll(std::string expr, std::string fmt,
                     int rangeFrom = -1, int rangeTo = -1)
-// list the matched data to pbegpos & pendpos
+// list the matched data to pbegpos  pendpos
 // return the found count or SR_EXPR_ERROR
-long FindTextAll(const std::string &expr, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false)
-long FindHexAll(const std::string &expr)
-bool LoadFromFile(const std::string &filename, const std::string &encoding=std::string(""))
-bool SaveToFile(const std::string &filename)
+long FindTextAll(std::string expr, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false)
+long FindHexAll(std::string expr)
+bool LoadFromFile(std::string filename, std::string encoding=std::string(""))
+bool SaveToFile(std::string filename)
 bool Reload()
 // if the file is modified by another app, reload it.
 bool ReloadByModificationTime()
@@ -253,11 +254,11 @@ void RestorePosition(int pos, int toprow)
 // write back to the original FileName
 // if FileName is empty, ask the user to get filename
 // return wxID_YES(Saved), wxID_NO(Not Saved), or wxID_CANCEL
-long Save(bool ask, const std::string &title, bool saveas)
+long Save(bool ask, std::string title, bool saveas)
 void ToggleBookmark()
 void GotoNextBookmark()
 void GotoPreviousBookmark()
-void ConvertEncoding(const std::string &newenc, int flag)
+void ConvertEncoding(std::string newenc, int flag)
 void ConvertChineseA(int flag)
 bool HasBOM()
 void ToggleBOM()
@@ -283,11 +284,11 @@ void ConvertNewLineToWordWrap()
 void ConvertSpaceToTab()
 void ConvertTabToSpace()
 void CopyAsHexString(bool withSpace)
-void CopyRevertHex(const std::string &delimiters)
+void CopyRevertHex(std::string delimiters)
 mad_py::tuple WordCount(bool selection)
 void ColumnAlignLeft()
 void ColumnAlignRight()
-void InsertIncrementalNumber(int initial, int step, int total, int stepType, int fmt, int align, bool zeroPad, std::string &prefix, std::string & postfix)
+void InsertIncrementalNumber(int initial, int step, int total, int stepType, int fmt, int align, bool zeroPad, std::string prefix, std::string  postfix)
 void Astyle()
 void XMLFormat()
 void Markdown2Html()
@@ -295,8 +296,8 @@ void Html2PlainText()
 void SetColumnSelection(int startlineid, int startxpos, int hlines, int wlines)
 void SelectWholeLine()
 long GetIndentCountByPos( long endpos )
-int MsgBox(const std::string& message, const std::string& caption = "Message", long style = wxOK | wxCENTRE)
-const std::string InputBox(const std::string& message, const std::string& caption = "Input Text")
+int MsgBox(std::string message, std::string caption = "Message", long style = wxOK | wxCENTRE)
+std::string InputBox(std::string message, std::string caption = "Input Text")
 void SetInsertPairForSelection( bool value )
 bool GetInsertPairForSelection()
 bool IsZeroSelected()
@@ -415,7 +416,7 @@ SC2TC// Simplified Chinese  ==> Traditional Chinese
 TC2SC// Traditional Chinese ==> Simplified Chinese
 JK2TC// Japanese Kanji      ==> Traditional Chinese
 JK2SC// Japanese Kanji      ==> Simplified Chinese
-C2JK  // Trad&Simp Chinese   ==> Japanese Kanji
+C2JK  // TradSimp Chinese   ==> Japanese Kanji
 
 MadNumberingStepType
 ====
