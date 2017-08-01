@@ -104,7 +104,7 @@ MadWordCountDialog::MadWordCountDialog(wxWindow* parent,wxWindowID id,const wxPo
 	extern MadEdit *g_ActiveMadEdit;
 	int	words, chars, spaces, lines, halfwidths, fullwidths;
 	wxArrayString detail;
-	g_ActiveMadEdit->WordCount(g_ActiveMadEdit->IsSelected(), words, chars,	spaces,	halfwidths,	fullwidths,	lines, &detail);
+	g_ActiveMadEdit->WordCount(g_ActiveMadEdit->IsSelected(), words, chars, spaces, halfwidths, fullwidths, lines, &detail);
 	if( IsMacroRecording() )
 		RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("WordCount(%s)"), g_ActiveMadEdit->IsSelected()?wxT("True"):wxT("False")));
 

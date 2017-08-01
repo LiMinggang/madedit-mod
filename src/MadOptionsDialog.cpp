@@ -1008,8 +1008,8 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxTextSample->SetFocus();
 #ifndef MADEDIT_ENABLE_MADEDIT
 	WxTextSample->SetInsertionPointEnd();
-	SET_CONTROLPARENT( WxTextSample );
 #endif
+	SET_CONTROLPARENT( WxTextSample );
 	WxStaticBoxSizer7->Add( WxTextSample, 1, wxALIGN_LEFT | wxEXPAND | wxALL, 5 );
 	WxAuiNoteBookPage2 = new wxPanel( WxAuiNotebook1, ID_WXAUINOTEBOOKPAGE2, wxPoint( 4, 24 ), wxSize( 792, 464 ) );
 	WxAuiNotebook1->AddPage( WxAuiNoteBookPage2, _( "Brackets" ) );

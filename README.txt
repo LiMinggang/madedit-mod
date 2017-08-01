@@ -123,8 +123,9 @@ New: Customizable search result display length #233
 New: New MadPython API GetRangeText
 Fix: IPC failure on Linux #234
 Fix: Bugs found by CPPCheck
-Fix: MadPython can't take chars not encoded by current ecoding
+Fix: MadPython can't take chars not encoded by current encoding
 Fix: Restore default behavior of click on line number area
+Fix: Hang on closing Option Dialog if click Code preview edit on Source formatter tab
 Update C++ syntax to C++11
 Update uchardet to latest version
 Update Astyle to 3.0.1
