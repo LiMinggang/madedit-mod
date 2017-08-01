@@ -124,6 +124,7 @@ New: New MadPython API GetRangeText
 Fix: IPC failure on Linux #234
 Fix: Bugs found by CPPCheck
 Fix: MadPython can't take chars not encoded by current ecoding
+Fix: Restore default behavior of click on line number area
 Update C++ syntax to C++11
 Update uchardet to latest version
 Update Astyle to 3.0.1

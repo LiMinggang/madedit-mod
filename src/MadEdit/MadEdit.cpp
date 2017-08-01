@@ -9958,6 +9958,8 @@ void MadEdit::OnMouseLeftDown( wxMouseEvent &evt )
 		if( ( evt.m_x <= m_LineNumberAreaWidth ) && evt.m_controlDown )
 		{
 			SelectAll();
+			evt.Skip();
+			return;
 		}
 		else
 		{
@@ -9979,15 +9981,18 @@ void MadEdit::OnMouseLeftDown( wxMouseEvent &evt )
 							   m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
 			m_LastCaretXPos = m_CaretPos.xpos;
 
-			if( evt.m_x <= m_LineNumberAreaWidth )
-				SelectLineFromCaretPos();
-			else
+			//if( evt.m_x <= m_LineNumberAreaWidth )
+			//	SelectLineFromCaretPos();
+			//else
+			if( evt.m_x > m_LineNumberAreaWidth )
+			{
 				ToggleBookmark();
+				//m_CaretPos.pos = m_SelectionEnd->pos;
+				evt.Skip();
+				return;
+			}
 		}
 
-		//m_CaretPos.pos = m_SelectionEnd->pos;
-		evt.Skip();
-		return;
 	}
 
 	ProcessCommand( ecMouseNotify );
