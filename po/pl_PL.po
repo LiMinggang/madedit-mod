@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-01 13:19+0800\n"
+"POT-Creation-Date: 2017-08-08 10:33+0800\n"
 "PO-Revision-Date: 2015-03-31 14:56+0100\n"
 "Last-Translator: Adam Massalski <massaada@wp.pl>\n"
 "Language-Team: Adam Massalski <massaada@wp.pl>\n"
@@ -552,11 +552,11 @@ msgid ""
 "Invalid Markdown format!!"
 msgstr ""
 
-#: ../src/MadEdit/MadEdit.cpp:12018
+#: ../src/MadEdit/MadEdit.cpp:12023
 msgid "Zero Length Match"
 msgstr ""
 
-#: ../src/MadEdit/MadEdit.cpp:12021
+#: ../src/MadEdit/MadEdit.cpp:12026
 msgid "^ Zero Length Match"
 msgstr ""
 
@@ -627,7 +627,7 @@ msgstr "NKo"
 #: ../src/MadFileHistoryDialog.cpp:45 ../src/MadHighlightingDialog.cpp:266
 #: ../src/MadPurgeHistoryDialog.cpp:93 ../src/MadOptionsDialog.cpp:1245
 #: ../src/MadConvEncDialog.cpp:75 ../src/MadSaveQueryDialog.cpp:47
-#: ../src/MadAboutDialog.cpp:94
+#: ../src/MadAboutDialog.cpp:95
 msgid "&Cancel"
 msgstr "&Anuluj"
 
@@ -2625,7 +2625,7 @@ msgid "List all recent opened files"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:3425 ../src/MadSearchReplaceDialog.cpp:1726
-#: ../src/MadPython.hpp:1570 ../src/MadPython.hpp:1594
+#: ../src/MadPython.hpp:1583 ../src/MadPython.hpp:1607
 #, fuzzy
 msgid "Search Results"
 msgstr "Szukaj"
@@ -2830,7 +2830,7 @@ msgstr ""
 
 #: ../src/MadEditFrame.cpp:8792
 #, fuzzy, c-format
-msgid "Do you want to overwrite %s"
+msgid "Do you want to overwrite %s ?"
 msgstr "Czy chcesz wczytać ponownie?"
 
 #: ../src/MadEditFrame.cpp:8792
@@ -2925,7 +2925,7 @@ msgstr "<- Dodaj niestandardowy typ pliku"
 #: ../src/MadFileAssociationDialog.cpp:367 ../src/MadHighlightingDialog.cpp:264
 #: ../src/MadPurgeHistoryDialog.cpp:91 ../src/MadOptionsDialog.cpp:1242
 #: ../src/MadConvEncDialog.cpp:73 ../src/MadSaveQueryDialog.cpp:42
-#: ../src/MadAboutDialog.cpp:91
+#: ../src/MadAboutDialog.cpp:92
 msgid "&OK"
 msgstr "&OK"
 
@@ -3018,7 +3018,7 @@ msgid "Processing %s of %s files..."
 msgstr "Przetwarzanie %d z %d plików..."
 
 #: ../src/MadFindInFilesDialog.cpp:756 ../src/MadSearchReplaceDialog.cpp:1598
-#: ../src/MadPython.hpp:1574 ../src/MadPython.hpp:1599
+#: ../src/MadPython.hpp:1587 ../src/MadPython.hpp:1612
 #, fuzzy
 msgid "Search \""
 msgstr "Szukaj"
@@ -3053,7 +3053,7 @@ msgstr "Zaznacz wszystko"
 
 #: ../src/MadFileHistoryDialog.cpp:69 ../src/MadOptionsDialog.cpp:1224
 #: ../src/MadOptionsDialog.cpp:1235 ../src/MadSaveQueryDialog.cpp:79
-#: ../src/MadWinListDialog.cpp:85
+#: ../src/MadWinListDialog.cpp:85 ../src/MadAboutDialog.cpp:114
 #, fuzzy
 msgid "Name"
 msgstr "BezNazwy%d"
@@ -3347,8 +3347,8 @@ msgstr "Porównanie binarne plików"
 msgid " results"
 msgstr "%d wyników"
 
-#: ../src/MadSearchReplaceDialog.cpp:1699 ../src/MadPython.hpp:1574
-#: ../src/MadPython.hpp:1599
+#: ../src/MadSearchReplaceDialog.cpp:1699 ../src/MadPython.hpp:1587
+#: ../src/MadPython.hpp:1612
 #, c-format
 msgid "(%s hits in 1 file)"
 msgstr ""
@@ -4256,37 +4256,54 @@ msgid ""
 "with this program.  If not, see <http://www.gnu.org/licenses/>.\n"
 msgstr ""
 
-#: ../src/MadAboutDialog.cpp:44
-msgid ""
-"Minggang Li\t\tCurrent maintainer of MadEdit-Mod\n"
-"===========================================\n"
-"Alston Chen\t\tAuthor of MadEdit\n"
-"JiaYanwei\t\tPatch contributer for MadEdit\n"
-"nikoss\t\t\tGreek Translation\n"
-"zhtw2013\t\tTraditional Chinese Translation\n"
-"Others\t\t\tTranslation/patch contributers"
+#: ../src/MadAboutDialog.cpp:47
+#, fuzzy
+msgid "Current maintainer"
+msgstr "Obecny opiekun MadEdit"
+
+#: ../src/MadAboutDialog.cpp:48
+#, fuzzy
+msgid "Author of MadEdit"
+msgstr "Twórca MadEdit"
+
+#: ../src/MadAboutDialog.cpp:49
+#, fuzzy
+msgid "Greek Translation"
+msgstr "Ogólna interpunkcja"
+
+#: ../src/MadAboutDialog.cpp:50
+#, fuzzy
+msgid "Traditional Chinese Translation"
+msgstr "Tradycyjny chiński => Uproszczony chiński"
+
+#: ../src/MadAboutDialog.cpp:51
+msgid "Translation/patch contributers"
 msgstr ""
 
-#: ../src/MadAboutDialog.cpp:62
+#: ../src/MadAboutDialog.cpp:63
 #, fuzzy
 msgid "About MadEdit-Mod"
 msgstr "O MadEdit"
 
-#: ../src/MadAboutDialog.cpp:79
+#: ../src/MadAboutDialog.cpp:80
 msgid "GNU General Public License"
 msgstr ""
 
-#: ../src/MadAboutDialog.cpp:85
+#: ../src/MadAboutDialog.cpp:86
 msgid "About"
 msgstr "O"
 
-#: ../src/MadAboutDialog.cpp:86
+#: ../src/MadAboutDialog.cpp:87
 msgid "Credits"
 msgstr "Twórcy"
 
-#: ../src/MadAboutDialog.cpp:87
+#: ../src/MadAboutDialog.cpp:88
 msgid "License"
 msgstr "Licencja"
+
+#: ../src/MadAboutDialog.cpp:117
+msgid "Role"
+msgstr ""
 
 #: ../src/MadNumberDlg.cpp:81
 #, fuzzy
@@ -4624,12 +4641,6 @@ msgstr ""
 #~ msgid "If Possible"
 #~ msgstr "Jeżeli możliwe"
 
-#~ msgid "Current maintainer of MadEdit"
-#~ msgstr "Obecny opiekun MadEdit"
-
-#~ msgid "Creator of MadEdit"
-#~ msgstr "Twórca MadEdit"
-
 #~ msgid "Translator for Japanese"
 #~ msgstr "Tłumacz dla Japończyków"
 
@@ -4854,9 +4865,6 @@ msgstr ""
 
 #~ msgid "Greek Extended"
 #~ msgstr "Greckie rozszerzony"
-
-#~ msgid "General Punctuation"
-#~ msgstr "Ogólna interpunkcja"
 
 #~ msgid "Superscripts and Subscripts"
 #~ msgstr "Indeksy górne i dolne"

@@ -20,7 +20,7 @@ const long MadAboutDialog::ID_STATICBITMAP1 = wxNewId();
 const long MadAboutDialog::ID_STATICBITMAP2 = wxNewId();
 const long MadAboutDialog::ID_WXMEMOABOUT = wxNewId();
 const long MadAboutDialog::ID_WXPANELABOUT = wxNewId();
-const long MadAboutDialog::ID_WXMEMOCREDITS = wxNewId();
+const long MadAboutDialog::ID_LISTCREDITS = wxNewId();
 const long MadAboutDialog::ID_WXPANELCREDITS = wxNewId();
 const long MadAboutDialog::ID_TEXTCTRL1 = wxNewId();
 const long MadAboutDialog::ID_WXMEMOLICENSE = wxNewId();
@@ -40,24 +40,25 @@ _("Copyright (C) 2012-2017  Minggang Li <minggang.li@gmail.com>\n\n\
     You should have received a copy of the GNU General Public License\
  along with this program.  If not, see <http://www.gnu.org/licenses/>.\n")
 );
-wxString g_MadEditModCredits(
-_("Minggang Li\t\tCurrent maintainer of MadEdit-Mod\n\
-===========================================\n\
-Alston Chen\t\tAuthor of MadEdit\n\
-JiaYanwei\t\tPatch contributer for MadEdit\n\
-nikoss\t\t\tGreek Translation\n\
-zhtw2013\t\tTraditional Chinese Translation\n\
-Others\t\t\tTranslation/patch contributers")
-);
+
+const int g_num_contributers = 5;
+
+const wxChar   * g_MadEditModCredits[g_num_contributers][2] = {
+	wxT("Minggang Li"), _("Current maintainer"),
+	wxT("Alston Chen"), _("Author of MadEdit"),
+	wxT("nikoss"), _("Greek Translation"),
+	wxT("zhtw2013"), _("Traditional Chinese Translation"),
+	wxT("Others"), _("Translation/patch contributers"),
+};
 
 MadAboutDialog::MadAboutDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)
 {
 	//(*Initialize(MadAboutDialog)
-	wxBoxSizer* BoxSizer4;
-	wxBoxSizer* BoxSizer2;
 	wxBoxSizer* BoxSizer1;
-	wxStaticBoxSizer* StaticBoxSizer1;
+	wxBoxSizer* BoxSizer2;
 	wxBoxSizer* BoxSizer3;
+	wxBoxSizer* BoxSizer4;
+	wxStaticBoxSizer* StaticBoxSizer1;
 
 	Create(parent, id, _("About MadEdit-Mod"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxSYSTEM_MENU|wxCLOSE_BOX, _T("id"));
 	SetClientSize(wxDefaultSize);
@@ -74,7 +75,7 @@ MadAboutDialog::MadAboutDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos
 	WxPanelAbout = new wxPanel(WxAuiNotebookAbout, ID_WXPANELABOUT, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_WXPANELABOUT"));
 	WxMemoAbout = new wxTextCtrl(WxPanelAbout, ID_WXMEMOABOUT, wxEmptyString, wxDefaultPosition, wxSize(435,200), wxTE_MULTILINE|wxTE_READONLY|wxTE_AUTO_URL|wxTE_WORDWRAP|wxDOUBLE_BORDER|wxVSCROLL, wxDefaultValidator, _T("ID_WXMEMOABOUT"));
 	WxPanelCredits = new wxPanel(WxAuiNotebookAbout, ID_WXPANELCREDITS, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_WXPANELCREDITS"));
-	WxMemoCredits = new wxTextCtrl(WxPanelCredits, ID_WXMEMOCREDITS, wxEmptyString, wxDefaultPosition, wxSize(435,200), wxTE_MULTILINE|wxTE_READONLY|wxTE_AUTO_URL|wxTE_WORDWRAP|wxDOUBLE_BORDER|wxVSCROLL, wxDefaultValidator, _T("ID_WXMEMOCREDITS"));
+	WxListCredits = new wxListCtrl(WxPanelCredits, ID_LISTCREDITS, wxPoint(0,0), wxSize(400,300), wxLC_REPORT|wxNO_BORDER, wxDefaultValidator, _T("ID_LISTCREDITS"));
 	WxPanelLicense = new wxPanel(WxAuiNotebookAbout, ID_WXMEMOLICENSE, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_WXMEMOLICENSE"));
 	StaticBoxSizer1 = new wxStaticBoxSizer(wxHORIZONTAL, WxPanelLicense, _("GNU General Public License"));
 	WxMemoLicense = new wxTextCtrl(WxPanelLicense, ID_TEXTCTRL1, wxEmptyString, wxDefaultPosition, wxSize(435,200), wxTE_MULTILINE|wxTE_READONLY|wxTE_AUTO_URL|wxTE_WORDWRAP|wxVSCROLL, wxDefaultValidator, _T("ID_TEXTCTRL1"));
@@ -85,7 +86,7 @@ MadAboutDialog::MadAboutDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos
 	WxAuiNotebookAbout->AddPage(WxPanelAbout, _("About"), true);
 	WxAuiNotebookAbout->AddPage(WxPanelCredits, _("Credits"));
 	WxAuiNotebookAbout->AddPage(WxPanelLicense, _("License"));
-	BoxSizer2->Add(WxAuiNotebookAbout, 0, wxALL|wxEXPAND, 5);
+	BoxSizer2->Add(WxAuiNotebookAbout, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	BoxSizer1->Add(BoxSizer2, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	BoxSizer4 = new wxBoxSizer(wxHORIZONTAL);
 	WxButtonOK = new wxButton(this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_OK"));
@@ -108,6 +109,37 @@ MadAboutDialog::MadAboutDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos
 
 	WxAuiNotebookAbout->SetSelection(0);
 	SetDefaultItem(WxButtonCancel);
+
+	wxListItem itemCol;
+	itemCol.SetText(_("Name"));
+	itemCol.SetAlign(wxLIST_FORMAT_LEFT);
+	WxListCredits->InsertColumn(0, itemCol);
+	itemCol.SetText(_("Role"));
+	itemCol.SetAlign(wxLIST_FORMAT_LEFT);
+	WxListCredits->InsertColumn(1, itemCol);
+
+	WxListCredits->Freeze();
+	wxListItem info;
+	long tmp;
+	for( size_t id = 0; id < g_num_contributers; ++id )
+	{
+		wxString name(g_MadEditModCredits[ id ][0]);
+		wxString role(wxGetTranslation(g_MadEditModCredits[ id ][1]));
+		
+		info.Clear();
+		info.m_text = name;
+		info.m_mask = wxLIST_MASK_TEXT;
+		info.m_itemId = WxListCredits->GetItemCount();
+		tmp = WxListCredits->InsertItem(info);
+		WxListCredits->SetItem(tmp, 1, role);
+	}
+	WxListCredits->Thaw();
+
+	if(g_num_contributers)
+	{
+	    WxListCredits->SetColumnWidth( 0, wxLIST_AUTOSIZE );
+		WxListCredits->SetColumnWidth( 1, wxLIST_AUTOSIZE );
+	}
 }
 
 MadAboutDialog::~MadAboutDialog()

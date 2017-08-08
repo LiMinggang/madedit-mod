@@ -9538,8 +9538,8 @@ void MadEditFrame::OnHelpAbout( wxCommandEvent& event )
 	dlg.WxMemoAbout->SetInsertionPoint( 0 );
 	dlg.WxMemoLicense->AppendText( g_MadEditModLicense );
 	dlg.WxMemoLicense->SetInsertionPoint( 0 );
-	dlg.WxMemoCredits->AppendText( g_MadEditModCredits );
-	dlg.WxMemoCredits->SetInsertionPoint( 0 );
+	//dlg.WxMemoCredits->AppendText( g_MadEditModCredits );
+	//dlg.WxMemoCredits->SetInsertionPoint( 0 );
 	// Hide Modaless Dialog
 	HideModalessDialogs();
 

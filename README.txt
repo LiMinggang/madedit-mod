@@ -129,6 +129,8 @@ Fix: Hang on closing Option Dialog if click Code preview edit on Source formatte
 Update C++ syntax to C++11
 Update uchardet to latest version
 Update Astyle to 3.0.1
+Update Credits on About Dialog
+Update Translations
 Minor code improvement
 Minor issue in MadPython scripts
 
