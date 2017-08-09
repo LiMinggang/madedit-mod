@@ -798,6 +798,8 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	SetCaret( caret );
 	//caret->Show();    // first Show() in OnPaint()
 	m_MaxLineLength = m_Config->ReadLong( wxT( "MaxLineLength" ), DEFAULT_MAX_LINELEN );
+	if(m_MaxLineLength < 80 ) m_MaxLineLength = 80;
+	if(m_MaxLineLength > DEFAULT_MAX_LINELEN) m_MaxLineLength = DEFAULT_MAX_LINELEN;
 
 	if( m_MaxLineLength < 80 ) m_MaxLineLength = 80;
 
@@ -843,15 +845,22 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_DoRecountLineWidth = false;
 	m_OldWidth = m_OldHeight = 0;
 	m_WordWrapMode = (MadWordWrapMode) m_Config->ReadLong( wxT( "WordWrapMode" ), ( long )wwmNoWrap );
+	if(m_WordWrapMode < wwmNoWrap || m_WordWrapMode > wwmWrapByColumn) m_WordWrapMode = wwmNoWrap;
 	m_TopRow = 0;
 	m_DrawingXPos = 0;
 	m_LineSpacing = m_Config->ReadLong( wxT( "LineSpacing" ), 100 );
 	m_MaxColumns = m_Config->ReadLong( wxT( "MaxColumns" ), 80 );
+	if(m_MaxColumns < 0) m_MaxColumns = 80;
+	if(m_MaxColumns > DEFAULT_MAX_LINELEN) m_MaxColumns = DEFAULT_MAX_LINELEN;
 	m_MaxWidth = m_MaxHeight = 0;
 	m_NewLineType = m_InsertNewLineType = nltDefault;
 	m_HasTab = false;
-	m_TabColumns = m_Config->ReadLong( wxT( "TabColumns" ), 8 );
-	m_IndentColumns = m_Config->ReadLong( wxT( "IndentColumns" ), 8 );
+	m_TabColumns = m_Config->ReadLong( wxT( "TabColumns" ), 4 );
+	if(m_TabColumns < 0) m_TabColumns = 8;
+	if(m_TabColumns > 1024) m_TabColumns = 1024;
+	m_IndentColumns = m_Config->ReadLong( wxT( "IndentColumns" ), 4 );
+	if(m_IndentColumns < 0) m_IndentColumns = 8;
+	if(m_IndentColumns > 1024) m_IndentColumns = 1024;
 	m_InsertSpacesInsteadOfTab = m_Config->ReadBool( wxT( "InsertSpacesInsteadOfTab" ), false );
 	m_WantTab = true;
 	m_AutoIndent        = m_Config->ReadBool( wxT( "AutoIndent" ),         true );
@@ -918,6 +927,8 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	int fontsize;
 	fontname = m_Config->Read( wxString( wxT( "/Fonts/" ) ) + m_Encoding->GetName(), m_Encoding->GetFontName() );
 	fontsize = m_Config->ReadLong( wxT( "TextFontSize" ), 12 );
+	if(fontsize < 0) fontsize = 12;
+	if(fontsize > 1024) fontsize = 1024;
 	SetTextFont( fontname, fontsize, true );
 #ifdef __WXMSW__
 	fontname = wxT( "Courier New" );
@@ -944,6 +955,8 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_UseDefaultSyntax = false;
 	m_SearchWholeWord = false;
 	m_MaxDisplaySize = m_Config->ReadLong( wxT( "MaxDisplaySize" ), 256 );
+	if(m_MaxDisplaySize < 128 || m_MaxDisplaySize > 1024)
+		m_MaxDisplaySize = 256;
 #if 0
 //#ifdef __WXGTK__
 	ConnectToFixedKeyPressHandler();

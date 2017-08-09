@@ -121,6 +121,7 @@ Mod v0.4.9
 New: Change editor encoding of MadPython dialog according to current active edit
 New: Customizable search result display length #233
 New: New MadPython API GetRangeText
+New: More checks on numbers reading from config file, more stable code
 Fix: IPC failure on Linux #234
 Fix: Bugs found by CPPCheck
 Fix: MadPython can't take chars not encoded by current encoding

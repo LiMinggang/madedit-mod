@@ -20,6 +20,12 @@
 #include "MadConvEncDialog.h"
 #include "MadEdit/MadEncoding.h"
 
+#if __cplusplus <= 199711L
+#ifndef nullptr
+	#define nullptr (0)
+#endif
+#endif
+
 #ifdef _MSC_VER
 # pragma warning( pop )
 #endif
@@ -29,7 +35,7 @@
 #define new new(_NORMAL_BLOCK ,__FILE__, __LINE__)
 #endif
 
-MadConvEncDialog *g_ConvEncDialog=NULL;
+MadConvEncDialog *g_ConvEncDialog=nullptr;
 //(*IdInit(MadConvEncDialog)
 const long MadConvEncDialog::ID_STATICTEXT1 = wxNewId();
 const long MadConvEncDialog::ID_WXCOMBOBOXENCODING = wxNewId();
@@ -117,6 +123,6 @@ void MadConvEncDialog::MadConvEncDialogClose(wxCloseEvent& event)
 		return;
 	}
 
-	g_ConvEncDialog=NULL;
+	g_ConvEncDialog=nullptr;
 	Destroy();
 }

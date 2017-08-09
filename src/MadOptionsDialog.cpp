@@ -1780,48 +1780,47 @@ void MadOptionsDialog::WxButtonOKClick( wxCommandEvent& event )
 
 	if( !WxEditMaxSizeToLoad->GetValue().ToLong( &lo ) || lo < 0 )
 	{
-		wxLogError( errtext, WxStaticText1->GetLabel().c_str(), WxEditMaxSizeToLoad->GetValue().c_str() );
+		wxLogError( errtext + _(": Should be greater than zero"), WxStaticText1->GetLabel().c_str(), WxEditMaxSizeToLoad->GetValue().c_str() );
 		error = true;
 	}
 
 	if( !WxEditMaxTextFileSize->GetValue().ToLong( &lo ) || lo < 0 )
 	{
-		wxLogError( errtext, WxStaticText2->GetLabel().c_str(), WxEditMaxTextFileSize->GetValue().c_str() );
+		wxLogError( errtext + _(": Should be greater than zero"), WxStaticText2->GetLabel().c_str(), WxEditMaxTextFileSize->GetValue().c_str() );
 		error = true;
 	}
 
 #if PATCH_MAXLINELENGTH == 1
-
 	if( !WxEditMaxLineLength->GetValue().ToLong( &lo ) || lo < 80 || lo > 4096 )
 #else
 	if( !WxEditMaxLineLength->GetValue().ToLong( &lo ) || lo < 80 )
 #endif
 	{
-		wxLogError( errtext, WxStaticText3->GetLabel().c_str(), WxEditMaxLineLength->GetValue().c_str() );
+		wxLogError( errtext + _(": Should be 1~4096"), WxStaticText3->GetLabel().c_str(), WxEditMaxLineLength->GetValue().c_str() );
 		error = true;
 	}
 
-	if( !WxEditMaxColumns->GetValue().ToLong( &lo ) || lo <= 0 )
+	if( !WxEditMaxColumns->GetValue().ToLong( &lo ) || lo <= 0 || lo > 4096 )
 	{
-		wxLogError( errtext, WxStaticText4->GetLabel().c_str(), WxEditMaxColumns->GetValue().c_str() );
+		wxLogError( errtext + _(": Should be 1~4096"), WxStaticText4->GetLabel().c_str(), WxEditMaxColumns->GetValue().c_str() );
 		error = true;
 	}
 
-	if( !WxEditTabColumns->GetValue().ToLong( &lo ) || lo <= 0 )
+	if( !WxEditTabColumns->GetValue().ToLong( &lo ) || lo <= 0 || lo > 256 )
 	{
-		wxLogError( errtext, WxStaticText5->GetLabel().c_str(), WxEditTabColumns->GetValue().c_str() );
+		wxLogError( errtext + _(": Should be 1~256"), WxStaticText5->GetLabel().c_str(), WxEditTabColumns->GetValue().c_str() );
 		error = true;
 	}
 
-	if( !WxEditIndentColumns->GetValue().ToLong( &lo ) || lo <= 0 )
+	if( !WxEditIndentColumns->GetValue().ToLong( &lo ) || lo <= 0 || lo > 256 )
 	{
-		wxLogError( errtext, WxStaticText6->GetLabel().c_str(), WxEditIndentColumns->GetValue().c_str() );
+		wxLogError( errtext + _(": Should be 1~256"), WxStaticText6->GetLabel().c_str(), WxEditIndentColumns->GetValue().c_str() );
 		error = true;
 	}
 
 	if( !WxEditAutoSaveTimeout->GetValue().ToLong( &lo ) || ( lo < 10 || lo > 30 ))
 	{
-		wxLogError( errtext+_(": Should be 10~30"), WxStaticText30->GetLabel().c_str(), WxEditAutoSaveTimeout->GetValue().c_str() );
+		wxLogError( errtext + _(": Should be 10~30"), WxStaticText30->GetLabel().c_str(), WxEditAutoSaveTimeout->GetValue().c_str() );
 		error = true;
 	}
 
