@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-08 10:33+0800\n"
-"PO-Revision-Date: 2017-08-08 16:59+0800\n"
+"POT-Creation-Date: 2017-08-10 14:45+0800\n"
+"PO-Revision-Date: 2017-08-10 14:47+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit-Mod <minggang.li@gmail.com>\n"
 "Language: zh_CN\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.2\n"
+"X-Generator: Poedit 2.0.3\n"
 
 #: wxstd.po.cpp:2
 msgid "Unicode 16 bit (UTF-16)"
@@ -506,11 +506,11 @@ msgstr ""
 "\n"
 "无效的Markdown格式！！"
 
-#: ../src/MadEdit/MadEdit.cpp:12023
+#: ../src/MadEdit/MadEdit.cpp:12049
 msgid "Zero Length Match"
 msgstr "零长度匹配"
 
-#: ../src/MadEdit/MadEdit.cpp:12026
+#: ../src/MadEdit/MadEdit.cpp:12052
 msgid "^ Zero Length Match"
 msgstr "^ 零长度匹配"
 
@@ -580,7 +580,7 @@ msgstr "否(&N)"
 #: ../src/MadEditFrame.cpp:529 ../src/MadFileAssociationDialog.cpp:369
 #: ../src/MadFileHistoryDialog.cpp:45 ../src/MadHighlightingDialog.cpp:266
 #: ../src/MadPurgeHistoryDialog.cpp:93 ../src/MadOptionsDialog.cpp:1245
-#: ../src/MadConvEncDialog.cpp:75 ../src/MadSaveQueryDialog.cpp:47
+#: ../src/MadConvEncDialog.cpp:81 ../src/MadSaveQueryDialog.cpp:47
 #: ../src/MadAboutDialog.cpp:95
 msgid "&Cancel"
 msgstr "取消(&C)"
@@ -2556,7 +2556,7 @@ msgstr "设置文件的只读标志"
 #: ../src/MadEditFrame.cpp:5118 ../src/MadEditFrame.cpp:5306
 #: ../src/MadEditFrame.cpp:5333 ../src/MadOptionsDialog.cpp:700
 #: ../src/MadOptionsDialog.cpp:1221 ../src/MadOptionsDialog.cpp:1232
-#: ../src/MadConvEncDialog.cpp:60
+#: ../src/MadConvEncDialog.cpp:66
 msgid "None"
 msgstr "无"
 
@@ -2771,7 +2771,7 @@ msgstr "<- 加入自定义文件类型"
 
 #: ../src/MadFileAssociationDialog.cpp:367 ../src/MadHighlightingDialog.cpp:264
 #: ../src/MadPurgeHistoryDialog.cpp:91 ../src/MadOptionsDialog.cpp:1242
-#: ../src/MadConvEncDialog.cpp:73 ../src/MadSaveQueryDialog.cpp:42
+#: ../src/MadConvEncDialog.cpp:79 ../src/MadSaveQueryDialog.cpp:42
 #: ../src/MadAboutDialog.cpp:92
 msgid "&OK"
 msgstr "确定(&O)"
@@ -2845,8 +2845,8 @@ msgstr "包含子目录"
 msgid "Automatic Detection"
 msgstr "自动检测"
 
-#: ../src/MadFindInFilesDialog.cpp:484 ../src/MadOptionsDialog.cpp:2141
-#: ../src/MadOptionsDialog.cpp:2158
+#: ../src/MadFindInFilesDialog.cpp:484 ../src/MadOptionsDialog.cpp:2140
+#: ../src/MadOptionsDialog.cpp:2157
 msgid "Choose a directory"
 msgstr "选择目录"
 
@@ -3906,52 +3906,64 @@ msgstr "菜单"
 msgid "Invalid value of \"%s(%s)\""
 msgstr "\"%s（%s）\" 不是正确的值"
 
-#: ../src/MadOptionsDialog.cpp:1824
+#: ../src/MadOptionsDialog.cpp:1783 ../src/MadOptionsDialog.cpp:1789
+msgid ": Should be greater than zero"
+msgstr "：应该大于0"
+
+#: ../src/MadOptionsDialog.cpp:1799 ../src/MadOptionsDialog.cpp:1805
+msgid ": Should be 1~4096"
+msgstr "：正确范围1~4096"
+
+#: ../src/MadOptionsDialog.cpp:1811 ../src/MadOptionsDialog.cpp:1817
+msgid ": Should be 1~256"
+msgstr "：正确范围1~256"
+
+#: ../src/MadOptionsDialog.cpp:1823
 msgid ": Should be 10~30"
 msgstr "：正确范围10~30"
 
-#: ../src/MadOptionsDialog.cpp:1883
+#: ../src/MadOptionsDialog.cpp:1882
 msgid "Cannot assign key to this item"
 msgstr "无法指定按键到此项目"
 
-#: ../src/MadOptionsDialog.cpp:1989
+#: ../src/MadOptionsDialog.cpp:1988
 msgid "This key is not assigned"
 msgstr "这个按键尚未指定"
 
-#: ../src/MadOptionsDialog.cpp:2016
+#: ../src/MadOptionsDialog.cpp:2015
 #, c-format
 msgid "This key is assigned to [%s]"
 msgstr "这个按键已指定给 [%s]"
 
-#: ../src/MadConvEncDialog.cpp:47
+#: ../src/MadConvEncDialog.cpp:53
 msgid "Convert Encoding"
 msgstr "转换编码"
 
-#: ../src/MadConvEncDialog.cpp:52
+#: ../src/MadConvEncDialog.cpp:58
 msgid "New Encoding:"
 msgstr "新的编码："
 
-#: ../src/MadConvEncDialog.cpp:61
+#: ../src/MadConvEncDialog.cpp:67
 msgid "Simplified Chinese => Traditional Chinese"
 msgstr "简体中文 => 繁体中文"
 
-#: ../src/MadConvEncDialog.cpp:62
+#: ../src/MadConvEncDialog.cpp:68
 msgid "Traditional Chinese => Simplified Chinese"
 msgstr "繁体中文 => 简体中文"
 
-#: ../src/MadConvEncDialog.cpp:63
+#: ../src/MadConvEncDialog.cpp:69
 msgid "Japanese Kanji => Traditional Chinese"
 msgstr "日文汉字 => 繁体中文"
 
-#: ../src/MadConvEncDialog.cpp:64
+#: ../src/MadConvEncDialog.cpp:70
 msgid "Japanese Kanji => Simplified Chinese"
 msgstr "日文汉字 => 简体中文"
 
-#: ../src/MadConvEncDialog.cpp:65
+#: ../src/MadConvEncDialog.cpp:71
 msgid "Chinese => Japanese Kanji"
 msgstr "中文字 => 日文汉字"
 
-#: ../src/MadConvEncDialog.cpp:68
+#: ../src/MadConvEncDialog.cpp:74
 msgid "Addtional Option"
 msgstr "额外的选项"
 
@@ -4046,7 +4058,7 @@ msgid ""
 "    You should have received a copy of the GNU General Public License along "
 "with this program.  If not, see <http://www.gnu.org/licenses/>.\n"
 msgstr ""
-"著作权所有(C) 2012-2015 Minggang Li <minggang.li@gmail.com>\n"
+"著作权所有(C) 2012-2017 Minggang Li <minggang.li@gmail.com>\n"
 "\n"
 "本程序为自由软件；您可依据自由软件基金会所发表的GNU通用公共授权条款规定，就本"
 "程序再为发布与／或修改；无论您依据的是本授权的第二版或（您自行选择的）任一日"

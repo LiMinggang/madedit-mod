@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-08 10:33+0800\n"
+"POT-Creation-Date: 2017-08-10 14:45+0800\n"
 "PO-Revision-Date: 2015-09-22 13:00+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
@@ -502,11 +502,11 @@ msgid ""
 "Invalid Markdown format!!"
 msgstr ""
 
-#: ../src/MadEdit/MadEdit.cpp:12023
+#: ../src/MadEdit/MadEdit.cpp:12049
 msgid "Zero Length Match"
 msgstr ""
 
-#: ../src/MadEdit/MadEdit.cpp:12026
+#: ../src/MadEdit/MadEdit.cpp:12052
 msgid "^ Zero Length Match"
 msgstr ""
 
@@ -573,7 +573,7 @@ msgstr ""
 #: ../src/MadEditFrame.cpp:529 ../src/MadFileAssociationDialog.cpp:369
 #: ../src/MadFileHistoryDialog.cpp:45 ../src/MadHighlightingDialog.cpp:266
 #: ../src/MadPurgeHistoryDialog.cpp:93 ../src/MadOptionsDialog.cpp:1245
-#: ../src/MadConvEncDialog.cpp:75 ../src/MadSaveQueryDialog.cpp:47
+#: ../src/MadConvEncDialog.cpp:81 ../src/MadSaveQueryDialog.cpp:47
 #: ../src/MadAboutDialog.cpp:95
 msgid "&Cancel"
 msgstr "&Cancelar"
@@ -2606,7 +2606,7 @@ msgstr "Aumenta sangria de líneas seleccionadas"
 #: ../src/MadEditFrame.cpp:5118 ../src/MadEditFrame.cpp:5306
 #: ../src/MadEditFrame.cpp:5333 ../src/MadOptionsDialog.cpp:700
 #: ../src/MadOptionsDialog.cpp:1221 ../src/MadOptionsDialog.cpp:1232
-#: ../src/MadConvEncDialog.cpp:60
+#: ../src/MadConvEncDialog.cpp:66
 msgid "None"
 msgstr "Nada"
 
@@ -2825,7 +2825,7 @@ msgstr "<- Añadir archivo personalizado"
 
 #: ../src/MadFileAssociationDialog.cpp:367 ../src/MadHighlightingDialog.cpp:264
 #: ../src/MadPurgeHistoryDialog.cpp:91 ../src/MadOptionsDialog.cpp:1242
-#: ../src/MadConvEncDialog.cpp:73 ../src/MadSaveQueryDialog.cpp:42
+#: ../src/MadConvEncDialog.cpp:79 ../src/MadSaveQueryDialog.cpp:42
 #: ../src/MadAboutDialog.cpp:92
 msgid "&OK"
 msgstr "&Aceptar"
@@ -2899,8 +2899,8 @@ msgstr "Incluir subdirectorios"
 msgid "Automatic Detection"
 msgstr "Detección automática"
 
-#: ../src/MadFindInFilesDialog.cpp:484 ../src/MadOptionsDialog.cpp:2141
-#: ../src/MadOptionsDialog.cpp:2158
+#: ../src/MadFindInFilesDialog.cpp:484 ../src/MadOptionsDialog.cpp:2140
+#: ../src/MadOptionsDialog.cpp:2157
 msgid "Choose a directory"
 msgstr "Elija un directorio"
 
@@ -4006,52 +4006,64 @@ msgstr "Menú"
 msgid "Invalid value of \"%s(%s)\""
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:1824
+#: ../src/MadOptionsDialog.cpp:1783 ../src/MadOptionsDialog.cpp:1789
+msgid ": Should be greater than zero"
+msgstr ""
+
+#: ../src/MadOptionsDialog.cpp:1799 ../src/MadOptionsDialog.cpp:1805
+msgid ": Should be 1~4096"
+msgstr ""
+
+#: ../src/MadOptionsDialog.cpp:1811 ../src/MadOptionsDialog.cpp:1817
+msgid ": Should be 1~256"
+msgstr ""
+
+#: ../src/MadOptionsDialog.cpp:1823
 msgid ": Should be 10~30"
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:1883
+#: ../src/MadOptionsDialog.cpp:1882
 msgid "Cannot assign key to this item"
 msgstr "No se puede asignar a la clave a este objeto"
 
-#: ../src/MadOptionsDialog.cpp:1989
+#: ../src/MadOptionsDialog.cpp:1988
 msgid "This key is not assigned"
 msgstr "No es asignada esta clave"
 
-#: ../src/MadOptionsDialog.cpp:2016
+#: ../src/MadOptionsDialog.cpp:2015
 #, c-format
 msgid "This key is assigned to [%s]"
 msgstr "Esta clave se asigna a [%s]"
 
-#: ../src/MadConvEncDialog.cpp:47
+#: ../src/MadConvEncDialog.cpp:53
 msgid "Convert Encoding"
 msgstr "Convertir codificación"
 
-#: ../src/MadConvEncDialog.cpp:52
+#: ../src/MadConvEncDialog.cpp:58
 msgid "New Encoding:"
 msgstr "Nueva codificación:"
 
-#: ../src/MadConvEncDialog.cpp:61
+#: ../src/MadConvEncDialog.cpp:67
 msgid "Simplified Chinese => Traditional Chinese"
 msgstr "Chino simplificado => Chino tradicional"
 
-#: ../src/MadConvEncDialog.cpp:62
+#: ../src/MadConvEncDialog.cpp:68
 msgid "Traditional Chinese => Simplified Chinese"
 msgstr "Chino tradicional => Chino simplificado"
 
-#: ../src/MadConvEncDialog.cpp:63
+#: ../src/MadConvEncDialog.cpp:69
 msgid "Japanese Kanji => Traditional Chinese"
 msgstr "Japonés Kanji => Chino tradicional"
 
-#: ../src/MadConvEncDialog.cpp:64
+#: ../src/MadConvEncDialog.cpp:70
 msgid "Japanese Kanji => Simplified Chinese"
 msgstr "Japonés Kanji => Chino simplificado"
 
-#: ../src/MadConvEncDialog.cpp:65
+#: ../src/MadConvEncDialog.cpp:71
 msgid "Chinese => Japanese Kanji"
 msgstr "Chino => Japonés Kanji"
 
-#: ../src/MadConvEncDialog.cpp:68
+#: ../src/MadConvEncDialog.cpp:74
 msgid "Addtional Option"
 msgstr "Opción adicional"
 

@@ -119,6 +119,16 @@ Known issues
 3. HighlightWord would not work if the caret is at the end of the line
 4. Scroll function on Right click menu of scroll bars only works with Windows
 
+License
+=============
+* Mixed
+1. GPL for the code from MadEdit and developed by me
+2. MIT License for the code from Astyle
+3. Boost Software License for boost.python
+4. Python License for miniPython
+5. LGPL for hunspell
+6. Others by the original authors
+
 Thanks
 =============
 * Nikoss   Greek Translation

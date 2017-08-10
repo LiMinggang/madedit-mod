@@ -9536,7 +9536,7 @@ void MadEditFrame::OnHelpAbout( wxCommandEvent& event )
 								 _( "Download dictionary at\nhttp://extensions.openoffice.org/" ) + wxT( "\n\n" ) +
 								 _( "Press OK to visit our HomePage." ) );
 	dlg.WxMemoAbout->SetInsertionPoint( 0 );
-	dlg.WxMemoLicense->AppendText( g_MadEditModLicense );
+	dlg.WxMemoLicense->AppendText( wxGetTranslation(g_MadEditModLicense) );
 	dlg.WxMemoLicense->SetInsertionPoint( 0 );
 	//dlg.WxMemoCredits->AppendText( g_MadEditModCredits );
 	//dlg.WxMemoCredits->SetInsertionPoint( 0 );
