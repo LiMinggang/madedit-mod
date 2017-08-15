@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-15 15:58+0800\n"
-"PO-Revision-Date: 2017-05-30 20:56+0800\n"
-"Last-Translator: zhtw2013 <zhtw2013@gmail.com>\n"
+"PO-Revision-Date: 2017-08-15 23:23+0800\n"
+"Last-Translator: zhtw <zhtw2013@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.2\n"
+"X-Generator: Poedit 2.0.3\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Language: zh_TW\n"
 "X-Source-Language: C\n"
@@ -2683,7 +2683,7 @@ msgid "Mad Macro"
 msgstr "Mad巨集語言"
 
 #: ../src/MadEditFrame.cpp:8792
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want to overwrite %s ?"
 msgstr "要覆寫%s嗎？"
 
@@ -3227,7 +3227,7 @@ msgstr "一般"
 
 #: ../src/MadOptionsDialog.cpp:510
 msgid "Language of User Interface (must restart MadEdit)"
-msgstr "Language of User Interface (must restart MadEdit)"
+msgstr "使用者介面語言（必須重啟才能生效）"
 
 #: ../src/MadOptionsDialog.cpp:514
 msgid "Single Instance (must restart MadEdit)"
@@ -3247,7 +3247,7 @@ msgstr "以文字檔案方式開啟的最大檔案長度，超過時以十六進
 
 #: ../src/MadOptionsDialog.cpp:539
 msgid "Max chars displayed in search results"
-msgstr ""
+msgstr "在搜尋結果中最多顯示的字元數"
 
 #: ../src/MadOptionsDialog.cpp:547
 msgid ""
@@ -3911,17 +3911,15 @@ msgstr "\"%s（%s）\" 不是正確的值"
 
 #: ../src/MadOptionsDialog.cpp:1783 ../src/MadOptionsDialog.cpp:1789
 msgid ": Should be greater than zero"
-msgstr ""
+msgstr "：應該大於0"
 
 #: ../src/MadOptionsDialog.cpp:1799 ../src/MadOptionsDialog.cpp:1805
-#, fuzzy
 msgid ": Should be 1~4096"
-msgstr "：正確範圍10~30"
+msgstr "：正確範圍1~4096"
 
 #: ../src/MadOptionsDialog.cpp:1811 ../src/MadOptionsDialog.cpp:1817
-#, fuzzy
 msgid ": Should be 1~256"
-msgstr "：正確範圍10~30"
+msgstr "：正確範圍1~256"
 
 #: ../src/MadOptionsDialog.cpp:1823
 msgid ": Should be 10~30"
@@ -4063,7 +4061,7 @@ msgid ""
 "    You should have received a copy of the GNU General Public License along "
 "with this program.  If not, see <http://www.gnu.org/licenses/>.\n"
 msgstr ""
-"著作權所有(C) 2012-2015 Minggang Li <minggang.li@gmail.com>\n"
+"著作權所有(C) 2012-2017 Minggang Li <minggang.li@gmail.com>\n"
 "\n"
 "本程式為自由軟體；您可依據自由軟體基金會所發表的GNU通用公共授權條款規定，就本"
 "程式再為發佈與／或變更；無論您依據的是本授權的第二版或（您自行選擇的）任一日"
@@ -4076,27 +4074,24 @@ msgstr ""
 "org/licenses/>。\n"
 
 #: ../src/MadAboutDialog.cpp:47
-#, fuzzy
 msgid "Current maintainer"
-msgstr "wxMEdit 目前維護人"
+msgstr "現維護者"
 
 #: ../src/MadAboutDialog.cpp:48
-#, fuzzy
 msgid "Author of MadEdit"
-msgstr "MadEdit 創始人"
+msgstr "MadEdit 原作者"
 
 #: ../src/MadAboutDialog.cpp:49
 msgid "Greek Translation"
-msgstr ""
+msgstr "希臘語翻譯"
 
 #: ../src/MadAboutDialog.cpp:50
-#, fuzzy
 msgid "Traditional Chinese Translation"
-msgstr "繁體中文 => 簡體中文"
+msgstr "正體中文翻譯"
 
 #: ../src/MadAboutDialog.cpp:51
 msgid "Translation/patch contributers"
-msgstr ""
+msgstr "翻譯或修正檔案提供者"
 
 #: ../src/MadAboutDialog.cpp:63
 msgid "About MadEdit-Mod"
@@ -4120,7 +4115,7 @@ msgstr "授權許可"
 
 #: ../src/MadAboutDialog.cpp:117
 msgid "Role"
-msgstr ""
+msgstr "角色"
 
 #: ../src/MadNumberDlg.cpp:81
 msgid "Intial Number"
@@ -4135,7 +4130,6 @@ msgid "Number of Chars"
 msgstr "總字元數"
 
 #: ../src/MadNumberDlg.cpp:99
-#, fuzzy
 msgid "Pad With Zero"
 msgstr "用 0 填充"
 
