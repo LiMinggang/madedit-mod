@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-10 14:45+0800\n"
+"POT-Creation-Date: 2017-08-15 15:58+0800\n"
 "PO-Revision-Date: 2015-11-24 19:34+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
@@ -565,7 +565,7 @@ msgid "&No"
 msgstr ""
 
 #: ../src/MadEdit/MadEditBasic.cpp:2597 ../src/MadEditFrame.cpp:519
-#: ../src/MadEditFrame.cpp:529 ../src/MadFileAssociationDialog.cpp:369
+#: ../src/MadEditFrame.cpp:529 ../src/MadFileAssociationDialog.cpp:374
 #: ../src/MadFileHistoryDialog.cpp:45 ../src/MadHighlightingDialog.cpp:266
 #: ../src/MadPurgeHistoryDialog.cpp:93 ../src/MadOptionsDialog.cpp:1245
 #: ../src/MadConvEncDialog.cpp:81 ../src/MadSaveQueryDialog.cpp:47
@@ -1746,7 +1746,7 @@ msgstr ""
 msgid "Toolbars"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2340 ../src/MadEditFrame.cpp:9740
+#: ../src/MadEditFrame.cpp:2340 ../src/MadEditFrame.cpp:9743
 msgid "Toggle Main Toolbar"
 msgstr ""
 
@@ -2441,7 +2441,7 @@ msgstr "テキストの右にスクロール"
 msgid "Scrolls right by aprox. 1 tab stop"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2754 ../src/MadEditFrame.cpp:9937
+#: ../src/MadEditFrame.cpp:2754 ../src/MadEditFrame.cpp:9940
 msgid "Quick Search"
 msgstr ""
 
@@ -2748,87 +2748,87 @@ msgstr ""
 msgid "Edit Mad Macro File"
 msgstr "ファイルを開く..."
 
-#: ../src/MadEditFrame.cpp:9536
+#: ../src/MadEditFrame.cpp:9539
 msgid ""
 "Download dictionary at\n"
 "http://extensions.openoffice.org/"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:9537
+#: ../src/MadEditFrame.cpp:9540
 msgid "Press OK to visit our HomePage."
 msgstr "OK でホームページに移動します"
 
-#: ../src/MadEditFrame.cpp:9835
+#: ../src/MadEditFrame.cpp:9838
 #, fuzzy
 msgid "Passed the begin of the file/selection"
 msgstr "選択された行のインデントを増加"
 
-#: ../src/MadEditFrame.cpp:9897 ../src/MadSearchReplaceDialog.cpp:530
+#: ../src/MadEditFrame.cpp:9900 ../src/MadSearchReplaceDialog.cpp:530
 #: ../src/MadSearchReplaceDialog.cpp:691
 #, fuzzy
 msgid "Passed the end of the file"
 msgstr "選択された行のインデントを増加"
 
-#: ../src/MadEditFrame.cpp:9942
+#: ../src/MadEditFrame.cpp:9945
 msgid "Information Window"
 msgstr "情報ウィンドウ"
 
-#: ../src/MadEditFrame.cpp:9971
+#: ../src/MadEditFrame.cpp:9974
 msgid "Invalid item"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:9984
+#: ../src/MadEditFrame.cpp:9987
 #, fuzzy
 msgid "&Collapse All"
 msgstr "すべて閉じる(&L)"
 
-#: ../src/MadEditFrame.cpp:9985
+#: ../src/MadEditFrame.cpp:9988
 msgid "Copy &All"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:9986
+#: ../src/MadEditFrame.cpp:9989
 msgid "&Reset Results"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:9988
+#: ../src/MadEditFrame.cpp:9991
 #, fuzzy
 msgid "&Collapse Selected"
 msgstr "すべて閉じる(&L)"
 
-#: ../src/MadEditFrame.cpp:9989
+#: ../src/MadEditFrame.cpp:9992
 msgid "&Copy Selected"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:9990
+#: ../src/MadEditFrame.cpp:9993
 #, fuzzy
 msgid "&Delete Selected"
 msgstr "選択された行を削除"
 
-#: ../src/MadFileAssociationDialog.cpp:336
+#: ../src/MadFileAssociationDialog.cpp:341
 msgid "File Type Associations"
 msgstr "ファイル形式の関連付け"
 
-#: ../src/MadFileAssociationDialog.cpp:341
+#: ../src/MadFileAssociationDialog.cpp:346
 msgid "Associated File Types:"
 msgstr "関連付けられたファイル形式:"
 
-#: ../src/MadFileAssociationDialog.cpp:347
+#: ../src/MadFileAssociationDialog.cpp:352
 msgid "<- Add"
 msgstr "<- 追加"
 
-#: ../src/MadFileAssociationDialog.cpp:349
+#: ../src/MadFileAssociationDialog.cpp:354
 msgid "Remove ->"
 msgstr "除去 ->"
 
-#: ../src/MadFileAssociationDialog.cpp:353
+#: ../src/MadFileAssociationDialog.cpp:358
 msgid "Predefined File Types:"
 msgstr "定義済みのファイル形式:"
 
-#: ../src/MadFileAssociationDialog.cpp:362
+#: ../src/MadFileAssociationDialog.cpp:367
 msgid "<- Add Custom File Type"
 msgstr "<- カスタムファイル形式に追加"
 
-#: ../src/MadFileAssociationDialog.cpp:367 ../src/MadHighlightingDialog.cpp:264
+#: ../src/MadFileAssociationDialog.cpp:372 ../src/MadHighlightingDialog.cpp:264
 #: ../src/MadPurgeHistoryDialog.cpp:91 ../src/MadOptionsDialog.cpp:1242
 #: ../src/MadConvEncDialog.cpp:79 ../src/MadSaveQueryDialog.cpp:42
 #: ../src/MadAboutDialog.cpp:92

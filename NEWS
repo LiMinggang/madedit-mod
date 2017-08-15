@@ -1,28 +1,18 @@
-Mod v0.4.8
-1.New: Copy file name without extension
-2.New: Syntax highlight support for YAML, YANG
-3.New: New Astyle options support(indent-after-parens, attach-closing-while)
-4.New: Caret will keep in window after resize(Fix issue of alwasys showing file at the beginning on loading maximized)
-5.New: Update toggle-able menu items according to context(ReadOnly flag and Set selection)
-6.New: Hex offset of char position
-7.Fix: Minor bug on OpenFile again
-8.Fix: Can not copy the first item in Copy All results
-9.Fix: Change Astyle config according to official change(bracket to brace)
-10.Fix: Could not close MadEdit-Mod if you canceled in the first time
-11.Fix: Bugs found by CppCheck
-12.Fix: Can't open file having double backslash in path(Windows)
-13.Fix: Caret is not correctly displayed(0.4.7, WinX64) #231
-14.Fix: Bug 101030 & 101031 of uchardet
-15.Fix: Possible char type cast issue(Windows)
-16.Fix: Bug of query to save files(some file will not be queried)
-17.Fix: Associated file does not show MadEdit ICON
-18.Fix: Weird scrollbar thumb(Windows)
-19.Fix: Assertion on Option dialog(Linux)
-20.Code improvement for 64 bits system
-21.Update Hunspell to 1.6.1
-22.Update Astyle to 3.0
-23.Update boost_python to boost 1.64
-24.C++ 11 transform
-25.Update Simplified Chinese translation
-26.Update Traditional Chinese translation(Thanks zhtw2013@gmail.com)
-27.Update Greek translation(Thanks Nikoss)
+Mod v0.4.9
+1.New: Change editor encoding of MadPython dialog according to current active edit
+2.New: Customizable search result display length #233
+3.New: New MadPython API GetRangeText
+4.New: More checks on numbers reading from config file, more robust code
+5.New: New predefined file associations(.tcl, .yaml, etc)
+6.Fix: IPC failure on Linux #234
+7.Fix: Bugs found by CPPCheck
+8.Fix: MadPython can't take chars not encoded by current encoding
+9.Fix: Restore default behavior of click on line number area
+10.Fix: Hang on closing Option Dialog if click Code preview edit on Source formatter tab
+11.Update C++ syntax to C++11
+12.Update uchardet to latest version
+13.Update Astyle to 3.0.1
+14.Update Credits on About Dialog
+15.Update Translations
+16.Minor code improvement
+17.Minor issue in MadPython scripts

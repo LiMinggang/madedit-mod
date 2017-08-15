@@ -74,34 +74,24 @@ Translations
 
 News
 =======
-Mod v0.4.8
-* New: Copy file name without extension
-* New: Syntax highlight support for YAML, YANG
-* New: New Astyle options support(indent-after-parens, attach-closing-while)
-* New: Caret will keep in window after resize(Fix issue of always showing file at the beginning on loading maximized)
-* New: Update toggle-able menu items according to context(ReadOnly flag and Set selection)
-* New: Hex offset of char position
-* Fix: Minor bug on OpenFile again
-* Fix: Can not copy the first item in Copy All results
-* Fix: Change Astyle config according to official change(bracket to brace)
-* Fix: Could not close MadEdit-Mod if you canceled in the first time
-* Fix: Bugs found by CppCheck
-* Fix: Can't open file having double backslash in path(Windows)
-* Fix: Caret is not correctly displayed(0.4.7, WinX64) #231
-* Fix: Bug 101030 & 101031 of uchardet
-* Fix: Possible char type cast issue(Windows)
-* Fix: Bug of query to save files(some file will not be queried)
-* Fix: Associated file does not show MadEdit ICON
-* Fix: Weird scrollbar thumb(Windows)
-* Fix: Assertion on Option dialog(Linux)
-* Code improvement for 64 bits system
-* Update Hunspell to 1.6.1
-* Update Astyle to 3.0
-* Update boost_python to boost 1.64
-* C++ 11 transform
-* Update Simplified Chinese translation
-* Update Traditional Chinese translation(Thanks zhtw2013@gmail.com)
-* Update Greek translation(Thanks Nikoss)
+Mod v0.4.9
+* New: Change editor encoding of MadPython dialog according to current active edit
+* New: Customizable search result display length #233
+* New: New MadPython API GetRangeText
+* New: More checks on numbers reading from config file, more robust code
+* New: New predefined file associations(.tcl, .yaml, etc)
+* Fix: IPC failure on Linux #234
+* Fix: Bugs found by CPPCheck
+* Fix: MadPython can't take chars not encoded by current encoding
+* Fix: Restore default behavior of click on line number area
+* Fix: Hang on closing Option Dialog if click Code preview edit on Source formatter tab
+* Update C++ syntax to C++11
+* Update uchardet to latest version
+* Update Astyle to 3.0.1
+* Update Credits on About Dialog
+* Update Translations
+* Minor code improvement
+* Minor issue in MadPython scripts
 
 Todo
 =====

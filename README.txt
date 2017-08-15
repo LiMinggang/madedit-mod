@@ -118,22 +118,23 @@ FreeBSD packaging (with FreeBSD 10.01)
 3. stdc++ version
 
 Mod v0.4.9
-New: Change editor encoding of MadPython dialog according to current active edit
-New: Customizable search result display length #233
-New: New MadPython API GetRangeText
-New: More checks on numbers reading from config file, more stable code
-Fix: IPC failure on Linux #234
-Fix: Bugs found by CPPCheck
-Fix: MadPython can't take chars not encoded by current encoding
-Fix: Restore default behavior of click on line number area
-Fix: Hang on closing Option Dialog if click Code preview edit on Source formatter tab
-Update C++ syntax to C++11
-Update uchardet to latest version
-Update Astyle to 3.0.1
-Update Credits on About Dialog
-Update Translations
-Minor code improvement
-Minor issue in MadPython scripts
+1.New: Change editor encoding of MadPython dialog according to current active edit
+2.New: Customizable search result display length #233
+3.New: New MadPython API GetRangeText
+4.New: More checks on numbers reading from config file, more robust code
+5.New: New predefined file associations(.tcl, .yaml, etc)
+6.Fix: IPC failure on Linux #234
+7.Fix: Bugs found by CPPCheck
+8.Fix: MadPython can't take chars not encoded by current encoding
+9.Fix: Restore default behavior of click on line number area
+10.Fix: Hang on closing Option Dialog if click Code preview edit on Source formatter tab
+11.Update C++ syntax to C++11
+12.Update uchardet to latest version
+13.Update Astyle to 3.0.1
+14.Update Credits on About Dialog
+15.Update Translations
+16.Minor code improvement
+17.Minor issue in MadPython scripts
 
 Mod v0.4.8
 1.New: Copy file name without extension

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: madedit-mod 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-10 14:45+0800\n"
+"POT-Creation-Date: 2017-08-15 15:58+0800\n"
 "PO-Revision-Date: 2017-05-30 21:00+0800\n"
 "Last-Translator: nikos <nikos769@yahoo.gr>\n"
 "Language-Team: Greek <nikos769@yahoo.gr>\n"
@@ -580,7 +580,7 @@ msgid "&No"
 msgstr "Ό&χι"
 
 #: ../src/MadEdit/MadEditBasic.cpp:2597 ../src/MadEditFrame.cpp:519
-#: ../src/MadEditFrame.cpp:529 ../src/MadFileAssociationDialog.cpp:369
+#: ../src/MadEditFrame.cpp:529 ../src/MadFileAssociationDialog.cpp:374
 #: ../src/MadFileHistoryDialog.cpp:45 ../src/MadHighlightingDialog.cpp:266
 #: ../src/MadPurgeHistoryDialog.cpp:93 ../src/MadOptionsDialog.cpp:1245
 #: ../src/MadConvEncDialog.cpp:81 ../src/MadSaveQueryDialog.cpp:47
@@ -1751,7 +1751,7 @@ msgstr "Παραδοσιακή Λειτουργία Γραφομηχανής"
 msgid "Toolbars"
 msgstr "Γραμμές Εργαλείων"
 
-#: ../src/MadEditFrame.cpp:2340 ../src/MadEditFrame.cpp:9740
+#: ../src/MadEditFrame.cpp:2340 ../src/MadEditFrame.cpp:9743
 msgid "Toggle Main Toolbar"
 msgstr "Εναλλαγή της Κύριας Γραμμής Εργαλείων"
 
@@ -2450,7 +2450,7 @@ msgstr "Κύλιση Δεξιά"
 msgid "Scrolls right by aprox. 1 tab stop"
 msgstr "Κυλά δεξιά κατά περίπου 1 πινακωτή"
 
-#: ../src/MadEditFrame.cpp:2754 ../src/MadEditFrame.cpp:9937
+#: ../src/MadEditFrame.cpp:2754 ../src/MadEditFrame.cpp:9940
 msgid "Quick Search"
 msgstr "Γρήγορη Αναζήτηση"
 
@@ -2737,7 +2737,7 @@ msgstr "Προειδοποίηση"
 msgid "Edit Mad Macro File"
 msgstr "Επεξεργασία Ενός Αρχείου Μακροεντολών Μαντ"
 
-#: ../src/MadEditFrame.cpp:9536
+#: ../src/MadEditFrame.cpp:9539
 msgid ""
 "Download dictionary at\n"
 "http://extensions.openoffice.org/"
@@ -2745,76 +2745,76 @@ msgstr ""
 "Λήψη του λεξικού από το\n"
 "http://extensions.openoffice.org/"
 
-#: ../src/MadEditFrame.cpp:9537
+#: ../src/MadEditFrame.cpp:9540
 msgid "Press OK to visit our HomePage."
 msgstr "Κλίκαρε στο  «Εντάξει» για να επισκεφτείς την Αρχική Ιστοσελίδα."
 
-#: ../src/MadEditFrame.cpp:9835
+#: ../src/MadEditFrame.cpp:9838
 msgid "Passed the begin of the file/selection"
 msgstr "Πέρασε την αρχή του αρχείου ή της επιλογής"
 
-#: ../src/MadEditFrame.cpp:9897 ../src/MadSearchReplaceDialog.cpp:530
+#: ../src/MadEditFrame.cpp:9900 ../src/MadSearchReplaceDialog.cpp:530
 #: ../src/MadSearchReplaceDialog.cpp:691
 msgid "Passed the end of the file"
 msgstr "Πέρασε το τέλος του αρχείου ή της επιλογής"
 
-#: ../src/MadEditFrame.cpp:9942
+#: ../src/MadEditFrame.cpp:9945
 msgid "Information Window"
 msgstr "Παράθυρο Πληροφοριών"
 
-#: ../src/MadEditFrame.cpp:9971
+#: ../src/MadEditFrame.cpp:9974
 msgid "Invalid item"
 msgstr "Μη έγκυρο αντικείμενο"
 
-#: ../src/MadEditFrame.cpp:9984
+#: ../src/MadEditFrame.cpp:9987
 msgid "&Collapse All"
 msgstr "Σύμπτυ&ξη Όλων"
 
-#: ../src/MadEditFrame.cpp:9985
+#: ../src/MadEditFrame.cpp:9988
 msgid "Copy &All"
 msgstr "&Αντιγραφή Όλων"
 
-#: ../src/MadEditFrame.cpp:9986
+#: ../src/MadEditFrame.cpp:9989
 msgid "&Reset Results"
 msgstr "Επαναφο&ρά των Αποτελέσματων"
 
-#: ../src/MadEditFrame.cpp:9988
+#: ../src/MadEditFrame.cpp:9991
 msgid "&Collapse Selected"
 msgstr "Σύμπτυ&ξη των Επιλεγμένων"
 
-#: ../src/MadEditFrame.cpp:9989
+#: ../src/MadEditFrame.cpp:9992
 msgid "&Copy Selected"
 msgstr "Αντι&γραφή Επιλεγμένων"
 
-#: ../src/MadEditFrame.cpp:9990
+#: ../src/MadEditFrame.cpp:9993
 msgid "&Delete Selected"
 msgstr "&Διαγραφή Των Επιλεγμένων"
 
-#: ../src/MadFileAssociationDialog.cpp:336
+#: ../src/MadFileAssociationDialog.cpp:341
 msgid "File Type Associations"
 msgstr "Συσχετίσεις Μορφών Αρχείων"
 
-#: ../src/MadFileAssociationDialog.cpp:341
+#: ../src/MadFileAssociationDialog.cpp:346
 msgid "Associated File Types:"
 msgstr "Συσχετισμένες Μορφές Αρχείων:"
 
-#: ../src/MadFileAssociationDialog.cpp:347
+#: ../src/MadFileAssociationDialog.cpp:352
 msgid "<- Add"
 msgstr "<- Προσθήκη"
 
-#: ../src/MadFileAssociationDialog.cpp:349
+#: ../src/MadFileAssociationDialog.cpp:354
 msgid "Remove ->"
 msgstr "Αφαίρεση ->"
 
-#: ../src/MadFileAssociationDialog.cpp:353
+#: ../src/MadFileAssociationDialog.cpp:358
 msgid "Predefined File Types:"
 msgstr "Προκαθορισμένες Μορφές Αρχείων:"
 
-#: ../src/MadFileAssociationDialog.cpp:362
+#: ../src/MadFileAssociationDialog.cpp:367
 msgid "<- Add Custom File Type"
 msgstr "<- Προσθήκη Προσαρμοσμένης Μορφής Αρχείου"
 
-#: ../src/MadFileAssociationDialog.cpp:367 ../src/MadHighlightingDialog.cpp:264
+#: ../src/MadFileAssociationDialog.cpp:372 ../src/MadHighlightingDialog.cpp:264
 #: ../src/MadPurgeHistoryDialog.cpp:91 ../src/MadOptionsDialog.cpp:1242
 #: ../src/MadConvEncDialog.cpp:79 ../src/MadSaveQueryDialog.cpp:42
 #: ../src/MadAboutDialog.cpp:92

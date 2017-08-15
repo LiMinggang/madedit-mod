@@ -44,8 +44,10 @@ const wxChar *g_PredefinedTypes[] =
 	wxT( ".cxx" ),
 	wxT( ".h" ),
 	wxT( ".hpp" ),
+	wxT( ".hxx" ),
 	wxT( ".d" ),
 	wxT( ".asm" ),
+	wxT( ".s" ),
 	wxT( ".java" ),
 	//    wxT(".htm"),
 	//    wxT(".html"),
@@ -101,6 +103,9 @@ const wxChar *g_PredefinedTypes[] =
 	wxT( ".syn" ),
 	wxT( ".sch" ),
 	wxT( ".att" ),
+	wxT( ".tcl" ),
+	wxT( ".yaml" ),
+	wxT( ".yang" ),
 };
 
 const int g_PredefinedTypes_Count = sizeof(g_PredefinedTypes) / sizeof(g_PredefinedTypes[0]);
