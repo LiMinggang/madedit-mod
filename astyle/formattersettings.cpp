@@ -107,6 +107,8 @@ void FormatterSettings::ApplyTo(astyle::ASFormatter& formatter)
 
   bool value = cfg->ReadBool(wxT("force_tabs"), false);
   long spaceNum = cfg->ReadLong(wxT("indentation"), 4);
+  if(spaceNum < 0) spaceNum = 4;
+  if(spaceNum > 1024) spaceNum = 1024;
   if (cfg->ReadBool(wxT("use_tabs"), false))
     formatter.setTabIndentation(spaceNum, value);
   else
@@ -123,9 +125,18 @@ void FormatterSettings::ApplyTo(astyle::ASFormatter& formatter)
   formatter.setPreprocConditionalIndent(cfg->ReadBool(wxT("indent_preproc_cond"), false));
   formatter.setIndentCol1CommentsMode(cfg->ReadBool(wxT("indent_col1_comments"), true));
   formatter.setAfterParenIndent(cfg->ReadBool(wxT("indent_after_parens"), false));
-  formatter.setMinConditionalIndentOption(cfg->ReadLong(wxT("min_conditional_indent"), 2));
-  formatter.setMaxInStatementIndentLength(cfg->ReadLong(wxT("max_instatement_indent"), 40));
-  formatter.setContinuationIndentation(cfg->ReadLong(wxT("indent_continuation"), 1));
+  long indent = cfg->ReadLong(wxT("min_conditional_indent"), 2);
+  if(indent < 0) indent = 2;
+  if(indent > 1024) indent = 1024;
+  formatter.setMinConditionalIndentOption(indent);
+  indent = cfg->ReadLong(wxT("max_instatement_indent"), 40);
+  if(indent < 0) indent = 40;
+  if(indent > 1024) indent = 1024;
+  formatter.setMaxInStatementIndentLength(indent);
+  indent = cfg->ReadLong(wxT("indent_continuation"), 1);
+  if(indent < 0) indent = 1;
+  if(indent > 1024) indent = 1024;
+  formatter.setContinuationIndentation(indent);
 
   formatter.setBreakClosingHeaderBracketsMode(cfg->ReadBool(wxT("break_closing"), true));
   formatter.setBreakElseIfsMode(cfg->ReadBool(wxT("break_elseifs"), true));
@@ -145,9 +156,7 @@ void FormatterSettings::ApplyTo(astyle::ASFormatter& formatter)
   }
   else
   {
-	  //formatter.setMaxCodeLength(INT_MAX);
-	  int maxCodeLength = cfg->ReadLong(wxT("/MadEdit/MaxLineLength"), 4096);
-	  formatter.setMaxCodeLength(maxCodeLength); //DEFAULT_MAX_LINELEN
+    formatter.setMaxCodeLength(INT_MAX);
   }
 
   formatter.setBreakBlocksMode(cfg->ReadBool(wxT("break_blocks"), true));

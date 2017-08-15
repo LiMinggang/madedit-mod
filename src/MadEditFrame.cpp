@@ -9415,6 +9415,9 @@ void MadEditFrame::OnToolsXMLFormat( wxCommandEvent& event )
 				wxString oldpath = cfg->GetPath();
 				cfg->SetPath( wxT( "/xml" ) );
 				long indentsize = cfg->ReadLong( wxT( "indentation" ), 4 );
+				
+				if(indentsize < 0) indentsize = 8;
+				if(indentsize > 1024) indentsize = 1024;
 				wxString xmlver( xmlDoc.GetVersion() );
 
 				if( xmlver.IsEmpty() )
