@@ -5,58 +5,64 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: MadEdit-Mod 0.4.8\n"
+"Project-Id-Version: MadEdit 2.9.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-15 15:58+0800\n"
-"PO-Revision-Date: 2015-09-22 13:00+0800\n"
-"Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
-"Language-Team: MadEdit <madedit@gmail.com>\n"
-"Language: zh_CN\n"
+"POT-Creation-Date: 2017-08-16 10:33+0800\n"
+"PO-Revision-Date: 2017-08-16 10:35+0800\n"
+"Last-Translator: \n"
+"Language-Team: <carlos1994sanchez@gmail.com>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.8.1\n"
+"X-Generator: Poedit 2.0.3\n"
 
 #: wxstd.po.cpp:2
 msgid "Unicode 16 bit (UTF-16)"
 msgstr "Unicode 16 bit (UTF-16)"
 
 #: wxstd.po.cpp:3
+#, fuzzy
 msgid "Unicode 16 bit Big Endian (UTF-16BE)"
-msgstr "Unicode 16 bit Big Endian (UTF-16BE)"
+msgstr "Unicode 16 bit Big Endian "
 
 #: wxstd.po.cpp:4
+#, fuzzy
 msgid "Unicode 16 bit Little Endian (UTF-16LE)"
-msgstr "Unicode 16 bit Little Endian (UTF-16LE)"
+msgstr "Unicode 16 bit Little Endian "
 
 #: wxstd.po.cpp:5
 msgid "Unicode 32 bit (UTF-32)"
 msgstr "Unicode 32 bit (UTF-32)"
 
 #: wxstd.po.cpp:6
+#, fuzzy
 msgid "Unicode 32 bit Big Endian (UTF-32BE)"
-msgstr "Unicode 32 bit Big Endian (UTF-32BE)"
+msgstr "Unicode 32 bit Big Endian "
 
 #: wxstd.po.cpp:7
+#, fuzzy
 msgid "Unicode 32 bit Little Endian (UTF-32LE)"
-msgstr "Unicode 32 bit Little Endian (UTF-32LE)"
+msgstr "Unicode 32 bit Little Endian "
 
 #: wxstd.po.cpp:8
 msgid "Unicode 7 bit (UTF-7)"
 msgstr "Unicode 7 bit (UTF-7)"
 
 #: wxstd.po.cpp:9
+#, fuzzy
 msgid "Unicode 8 bit (UTF-8)"
-msgstr "Unicode 8 bit (UTF-8)"
+msgstr "Unicode 7 bit (UTF-7)"
 
 #: wxstd.po.cpp:10
+#, fuzzy
 msgid "Western European (ISO-8859-1)"
-msgstr "Europa Occidental (ISO-8859-1)"
+msgstr "Europa occidental "
 
 #: wxstd.po.cpp:11
+#, fuzzy
 msgid "Central European (ISO-8859-2)"
-msgstr "Central Europeo (ISO-8859-2)"
+msgstr "Europa central "
 
 #: wxstd.po.cpp:12
 msgid "Esperanto (ISO-8859-3)"
@@ -67,116 +73,140 @@ msgid "Baltic (old) (ISO-8859-4)"
 msgstr "Báltico (antiguo) (ISO-8859-4)"
 
 #: wxstd.po.cpp:14
+#, fuzzy
 msgid "Cyrillic (ISO-8859-5)"
-msgstr "Cirílico (ISO-8859-5)"
+msgstr "Báltico (antiguo) (ISO-8859-4)"
 
 #: wxstd.po.cpp:15
+#, fuzzy
 msgid "Arabic (ISO-8859-6)"
-msgstr "Árabe (ISO-8859-6)"
+msgstr "Esperanto (ISO-8859-3)"
 
 #: wxstd.po.cpp:16
+#, fuzzy
 msgid "Greek (ISO-8859-7)"
-msgstr "Griego (ISO-8859-7)"
+msgstr "Esperanto (ISO-8859-3)"
 
 #: wxstd.po.cpp:17
+#, fuzzy
 msgid "Hebrew (ISO-8859-8)"
-msgstr "Hebreo (ISO-8859-8)"
+msgstr "Esperanto (ISO-8859-3)"
 
 #: wxstd.po.cpp:18
+#, fuzzy
 msgid "Turkish (ISO-8859-9)"
-msgstr "Turco (ISO-8859-9)"
+msgstr "Indio (ISO-8859-12)"
 
 #: wxstd.po.cpp:19
+#, fuzzy
 msgid "Nordic (ISO-8859-10)"
-msgstr "Nórdico (ISO-8859-10)"
+msgstr "Indio (ISO-8859-12)"
 
 #: wxstd.po.cpp:20
+#, fuzzy
 msgid "Thai (ISO-8859-11)"
-msgstr "Tailandés (ISO-8859-11)"
+msgstr "Indio (ISO-8859-12)"
 
 #: wxstd.po.cpp:21
 msgid "Indian (ISO-8859-12)"
 msgstr "Indio (ISO-8859-12)"
 
 #: wxstd.po.cpp:22
+#, fuzzy
 msgid "Baltic (ISO-8859-13)"
-msgstr "Báltico (ISO-8859-13)"
+msgstr "Báltico (antiguo) (ISO-8859-4)"
 
 #: wxstd.po.cpp:23
+#, fuzzy
 msgid "Celtic (ISO-8859-14)"
-msgstr "Celta (ISO-8859-14)"
+msgstr "Báltico (antiguo) (ISO-8859-4)"
 
 #: wxstd.po.cpp:24
+#, fuzzy
 msgid "Western European with Euro (ISO-8859-15)"
-msgstr "Europa occidental con Euro (ISO-8859-15)"
+msgstr "Europa occidental con Euro "
 
 #: wxstd.po.cpp:25
 msgid "KOI8-R"
-msgstr "KOI8-R"
+msgstr ""
 
 #: wxstd.po.cpp:26
 msgid "KOI8-U"
-msgstr "KOI8-U"
+msgstr ""
 
 #: wxstd.po.cpp:27
+#, fuzzy
 msgid "Windows Thai (CP 874)"
-msgstr "Windows Tailandés (CP 874)"
+msgstr "Windows Tailandés "
 
 #: wxstd.po.cpp:28
+#, fuzzy
 msgid "Windows Central European (CP 1250)"
-msgstr "Windows Europa Central (CP 1250)"
+msgstr "Windows Europa central "
 
 #: wxstd.po.cpp:29
+#, fuzzy
 msgid "Windows Cyrillic (CP 1251)"
-msgstr "Windows Cirílico (CP 1251)"
+msgstr "Windows Cirílico "
 
 #: wxstd.po.cpp:30
+#, fuzzy
 msgid "Windows Western European (CP 1252)"
-msgstr "Windows Europa Occidental (CP 1252)"
+msgstr "Windows Europa occidental "
 
 #: wxstd.po.cpp:31
+#, fuzzy
 msgid "Windows Greek (CP 1253)"
-msgstr "Windows Griego (CP 1253)"
+msgstr "Windows Griego "
 
 #: wxstd.po.cpp:32
+#, fuzzy
 msgid "Windows Turkish (CP 1254)"
-msgstr "Windows Turco (CP 1254)"
+msgstr "Windows Turco "
 
 #: wxstd.po.cpp:33
+#, fuzzy
 msgid "Windows Hebrew (CP 1255)"
-msgstr "Windows Hebreo (CP 1255)"
+msgstr "Windows Hebreo "
 
 #: wxstd.po.cpp:34
+#, fuzzy
 msgid "Windows Arabic (CP 1256)"
-msgstr "Windows Árabe (CP 1256)"
+msgstr "Windows Árabe "
 
 #: wxstd.po.cpp:35
+#, fuzzy
 msgid "Windows Baltic (CP 1257)"
-msgstr "Windows Báltico (CP 1257)"
+msgstr "Windows Báltico "
 
 #: wxstd.po.cpp:36
+#, fuzzy
 msgid "Windows Japanese (CP 932)"
-msgstr "Windows Japonés (CP 932)"
+msgstr "Windows Japonés "
 
 #: wxstd.po.cpp:37
+#, fuzzy
 msgid "Windows Chinese Simplified (CP 936)"
-msgstr "Windows Chino Simplificado (CP 936)"
+msgstr "Windows Chino Simplificado "
 
 #: wxstd.po.cpp:38
+#, fuzzy
 msgid "Windows Korean (CP 949)"
-msgstr "Windows Coreano (CP 949)"
+msgstr "Windows Coreano "
 
 #: wxstd.po.cpp:39
+#, fuzzy
 msgid "Windows Chinese Traditional (CP 950)"
-msgstr "Windows Chino Tradicional (CP 950)"
+msgstr "Windows Chino Tradicional "
 
 #: wxstd.po.cpp:40
 msgid "Extended Unix Codepage for Japanese (EUC-JP)"
 msgstr "Codificación Unix extendido para Japonés"
 
 #: wxstd.po.cpp:41
+#, fuzzy
 msgid "Windows/DOS OEM (CP 437)"
-msgstr "Windows/DOS OEM (CP 437)"
+msgstr "Windows/DOS OEM "
 
 #: wxstd.po.cpp:42 ../src/MadNumberDlg.cpp:167
 msgid "OK"
@@ -333,20 +363,24 @@ msgid "Top margin (mm):"
 msgstr "Margen superior (mm):"
 
 #: wxstd.po.cpp:81 ../src/MadEdit/MadEncoding.cpp:129
+#, fuzzy
 msgid "Western European"
-msgstr ""
+msgstr "Europa occidental "
 
 #: wxstd.po.cpp:82 ../src/MadEdit/MadEncoding.cpp:130
+#, fuzzy
 msgid "Central European"
-msgstr ""
+msgstr "Europa central "
 
 #: wxstd.po.cpp:83 ../src/MadEdit/MadEncoding.cpp:131
+#, fuzzy
 msgid "South European"
-msgstr ""
+msgstr "Europa del sur "
 
 #: wxstd.po.cpp:84 ../src/MadEdit/MadEncoding.cpp:132
+#, fuzzy
 msgid "North European"
-msgstr ""
+msgstr "Europa del norte "
 
 #: wxstd.po.cpp:85 ../src/MadEdit/MadEncoding.cpp:133
 msgid "Cyrillic"
@@ -357,65 +391,79 @@ msgid "Arabic"
 msgstr "Árabe"
 
 #: wxstd.po.cpp:87 ../src/MadEdit/MadEncoding.cpp:135
+#, fuzzy
 msgid "Greek"
-msgstr "Griego"
+msgstr "Griego "
 
 #: wxstd.po.cpp:88 ../src/MadEdit/MadEncoding.cpp:136
 msgid "Hebrew"
 msgstr "Hebreo"
 
 #: wxstd.po.cpp:89 ../src/MadEdit/MadEncoding.cpp:137
+#, fuzzy
 msgid "Turkish"
-msgstr "Turco"
+msgstr "Turco "
 
 #: wxstd.po.cpp:90 ../src/MadEdit/MadEncoding.cpp:138
+#, fuzzy
 msgid "Baltic"
-msgstr "Báltico"
+msgstr "Báltico "
 
 #: wxstd.po.cpp:91 ../src/MadEdit/MadEncoding.cpp:139
+#, fuzzy
 msgid "East Asian"
-msgstr ""
+msgstr "Asia oriental "
 
 #: wxstd.po.cpp:92 ../src/MadEdit/MadEncoding.cpp:140
+#, fuzzy
 msgid "Southeast Asian"
-msgstr ""
+msgstr "Sudeste Asiático "
 
 #: wxstd.po.cpp:93 ../src/MadEdit/MadEncoding.cpp:141
+#, fuzzy
 msgid "Unicode"
-msgstr "Unicode"
+msgstr "Unicode "
 
 #: wxstd.po.cpp:94 ../src/MadEdit/MadEncoding.cpp:142
+#, fuzzy
 msgid "ISO-8859"
-msgstr ""
+msgstr "ISO-8859 "
 
 #: wxstd.po.cpp:95 ../src/MadEdit/MadEncoding.cpp:143
 #: ../src/MadWinListDialog.cpp:37
+#, fuzzy
 msgid "Windows"
-msgstr ""
+msgstr "Windows "
 
 #: wxstd.po.cpp:96 ../src/MadEdit/MadEncoding.cpp:145
+#, fuzzy
 msgid "OEM"
-msgstr ""
+msgstr "OEM "
 
 #: wxstd.po.cpp:97 ../src/MadEdit/MadEncoding.cpp:146
+#, fuzzy
 msgid "Other"
-msgstr "Otros"
+msgstr "Otros "
 
 #: wxstd.po.cpp:98
+#, fuzzy
 msgid "Generic PostScript"
-msgstr ""
+msgstr "Archivo PostScript"
 
 #: wxstd.po.cpp:99
+#, fuzzy
 msgid "Ready"
-msgstr ""
+msgstr "Sólo lectura"
 
 #: wxstd.po.cpp:100
+#, fuzzy
 msgid "Printing Error"
-msgstr ""
+msgstr "Imprimiendo "
 
 #: wxstd.po.cpp:101
+#, fuzzy
 msgid "Please wait while printing..."
-msgstr ""
+msgstr "Por favor espere mientras se imprime\n"
 
 #: wxstd.po.cpp:102 ../src/MadEditFrame.cpp:2033
 #: ../src/MadOptionsDialog.cpp:669
@@ -423,8 +471,9 @@ msgid "Print"
 msgstr "Imprimir"
 
 #: wxstd.po.cpp:103
+#, fuzzy
 msgid "Document:"
-msgstr ""
+msgstr "Comentar"
 
 #: wxstd.po.cpp:104
 msgid "Progress:"
@@ -435,26 +484,29 @@ msgid "Preparing"
 msgstr ""
 
 #: wxstd.po.cpp:106
-#, c-format
+#, fuzzy, c-format
 msgid "Printing page %d of %d"
-msgstr ""
+msgstr "Página(s) %d de %d"
 
 #: wxstd.po.cpp:107
-#, c-format
+#, fuzzy, c-format
 msgid " (copy %d of %d)"
-msgstr ""
+msgstr "Página(s) %d de %d"
 
 #: wxstd.po.cpp:108
+#, fuzzy
 msgid "First page"
-msgstr ""
+msgstr "Sólo la primera página"
 
 #: wxstd.po.cpp:109
+#, fuzzy
 msgid "Previous page"
-msgstr ""
+msgstr "Ir a la página anterior"
 
 #: wxstd.po.cpp:110
+#, fuzzy
 msgid "Next page"
-msgstr ""
+msgstr "Ir a la página siguiente"
 
 #: wxstd.po.cpp:111
 msgid "Last page"
@@ -477,8 +529,9 @@ msgid "Sorry, not enough memory to create a preview."
 msgstr ""
 
 #: wxstd.po.cpp:116
+#, fuzzy
 msgid "Print Preview Failure"
-msgstr ""
+msgstr "Imprimir &vista previa..."
 
 #: wxstd.po.cpp:117
 #, c-format
@@ -486,9 +539,9 @@ msgid "Page %d of %d"
 msgstr "Página(s) %d de %d"
 
 #: wxstd.po.cpp:118
-#, c-format
+#, fuzzy, c-format
 msgid "Page %d"
-msgstr ""
+msgstr "Página(s) %d de %d"
 
 #: wxstd.po.cpp:120 wxstd.po.cpp:121 ../src/MadOptionsDialog.cpp:1303
 msgid "Options"
@@ -550,8 +603,9 @@ msgstr "No es posible guardar el archivo:"
 #: ../src/MadEdit/MadEditSearch.cpp:950 ../src/MadEdit/MadEditSearch.cpp:1003
 #: ../src/MadEditFrame.cpp:529 ../src/MadEditFrame.cpp:534
 #: ../src/MadEditFrame.cpp:5552
+#, fuzzy
 msgid "&Ok"
-msgstr ""
+msgstr "&Aceptar"
 
 #: ../src/MadEdit/MadEditBasic.cpp:2594
 msgid "Do you want to save this file?"
@@ -566,8 +620,9 @@ msgstr ""
 #: ../src/MadEdit/MadEditBasic.cpp:2597 ../src/MadEdit/MadEditBasic.cpp:2675
 #: ../src/MadEdit/MadEditBasic.cpp:2733 ../src/MadEditFrame.cpp:519
 #: ../src/MadEditFrame.cpp:524
+#, fuzzy
 msgid "&No"
-msgstr ""
+msgstr "NKo"
 
 #: ../src/MadEdit/MadEditBasic.cpp:2597 ../src/MadEditFrame.cpp:519
 #: ../src/MadEditFrame.cpp:529 ../src/MadFileAssociationDialog.cpp:374
@@ -603,14 +658,14 @@ msgid "The input string is not a valid Hex-String:"
 msgstr "La cadena introducida no es una cadena hexadecimal válida:"
 
 #: ../src/MadEdit/MadEditBasic.cpp:3883
-#, c-format
+#, fuzzy, c-format
 msgid "Found %d matched texts..."
-msgstr ""
+msgstr "Se ha encontrado %d archivo(s) que coincide(n) con los filtros..."
 
 #: ../src/MadEdit/MadEditSearch.cpp:721
-#, c-format
+#, fuzzy, c-format
 msgid "'%s' is not a valid regular expression.(Or empty (), [] or {})"
-msgstr ""
+msgstr "'%s' no es una expresión regular válida."
 
 #: ../src/MadEdit/MadEditSearch.cpp:852
 #, fuzzy
@@ -642,7 +697,7 @@ msgstr ""
 #: ../src/MadEdit/MadEncoding.cpp:682
 #, fuzzy
 msgid "Chinese Simplified(UTF-PRC)"
-msgstr "Windows Chino Simplificado (CP 936)"
+msgstr "Windows Chino Simplificado "
 
 #: ../src/MadEditApp.cpp:135
 #, c-format
@@ -708,8 +763,9 @@ msgid "' to dictionary"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:1509
+#, fuzzy
 msgid "Remove '"
-msgstr ""
+msgstr "Quitar ->"
 
 #: ../src/MadEditFrame.cpp:1509
 msgid "' from dictionary"
@@ -760,7 +816,7 @@ msgstr "&Guardar archivo"
 
 #: ../src/MadEditFrame.cpp:2016
 msgid "Save the file"
-msgstr "Guarde el archivo"
+msgstr "Guarda archivo"
 
 #: ../src/MadEditFrame.cpp:2017 ../src/MadWinListDialog.cpp:48
 msgid "Save &As..."
@@ -768,7 +824,7 @@ msgstr "G&uardar como..."
 
 #: ../src/MadEditFrame.cpp:2017
 msgid "Save the file with a new name"
-msgstr "Guarda el archivo con un nuevo nombre"
+msgstr "Guarda archivo con otro nombre"
 
 #: ../src/MadEditFrame.cpp:2018
 #, fuzzy
@@ -776,9 +832,8 @@ msgid "Save A Copy"
 msgstr "Guardar &todo"
 
 #: ../src/MadEditFrame.cpp:2018
-#, fuzzy
 msgid "Make a backup of the file"
-msgstr "Aumenta sangria de líneas seleccionadas"
+msgstr ""
 
 #: ../src/MadEditFrame.cpp:2019
 msgid "Sa&ve All"
@@ -799,7 +854,7 @@ msgstr "&Recargar archivo"
 
 #: ../src/MadEditFrame.cpp:2021
 msgid "Reload the file"
-msgstr "Vuelva a cargar el archivo"
+msgstr "Vuelva a cargar archivo"
 
 #: ../src/MadEditFrame.cpp:2023
 msgid "&Close File"
@@ -807,7 +862,7 @@ msgstr "&Cerrar archivo"
 
 #: ../src/MadEditFrame.cpp:2023
 msgid "Close the file"
-msgstr "Cierra el archivo"
+msgstr "Cierra archivo"
 
 #: ../src/MadEditFrame.cpp:2023
 msgid "Close File"
@@ -827,28 +882,34 @@ msgid "Close All"
 msgstr "C&errar todo"
 
 #: ../src/MadEditFrame.cpp:2025
+#, fuzzy
 msgid "Close All But This"
-msgstr ""
+msgstr "Cerrar todo PERO este"
 
 #: ../src/MadEditFrame.cpp:2025
+#, fuzzy
 msgid "Close all files but this"
-msgstr ""
+msgstr "Cierra todos los archivos"
 
 #: ../src/MadEditFrame.cpp:2026
+#, fuzzy
 msgid "Close All To The Left"
-msgstr ""
+msgstr "Cerrar todo a la &Izquierda"
 
 #: ../src/MadEditFrame.cpp:2026
+#, fuzzy
 msgid "Close all files to the left"
-msgstr ""
+msgstr "Cierre todos los archivos excepto el actual"
 
 #: ../src/MadEditFrame.cpp:2027
+#, fuzzy
 msgid "Close All To The Right"
-msgstr ""
+msgstr "Cerrar todo a la &Derecha"
 
 #: ../src/MadEditFrame.cpp:2027
+#, fuzzy
 msgid "Close all files to the right"
-msgstr ""
+msgstr "Cierre todos los archivos excepto el actual"
 
 #: ../src/MadEditFrame.cpp:2029 ../src/MadEditFrame.cpp:4899
 msgid "Set/Clear ReadOnly Flag"
@@ -864,7 +925,7 @@ msgstr "C&onfigurar página..."
 
 #: ../src/MadEditFrame.cpp:2031
 msgid "Setup the pages for printing"
-msgstr "Configura las páginas a imprimir"
+msgstr "Configura páginas a imprimir"
 
 #: ../src/MadEditFrame.cpp:2032
 msgid "Print Previe&w..."
@@ -872,7 +933,7 @@ msgstr "Imprimir &vista previa..."
 
 #: ../src/MadEditFrame.cpp:2032
 msgid "Preview the result of printing"
-msgstr "Muestra el resultado de la impresión"
+msgstr "Muestra resultado de impresión"
 
 #: ../src/MadEditFrame.cpp:2033
 msgid "&Print..."
@@ -880,7 +941,7 @@ msgstr "&Imprimir..."
 
 #: ../src/MadEditFrame.cpp:2033
 msgid "Print the file"
-msgstr "Imprime el archivo"
+msgstr "Imprime archivo"
 
 #: ../src/MadEditFrame.cpp:2035 ../src/MadEditFrame.cpp:2036
 #: ../src/MadEditFrame.cpp:3403
@@ -903,7 +964,7 @@ msgstr "&Salir"
 #: ../src/MadEditFrame.cpp:2038
 #, fuzzy
 msgid "Quit MadEdit"
-msgstr "Cierra wxMEdit"
+msgstr "Cierra MadEdit"
 
 #: ../src/MadEditFrame.cpp:2041
 msgid "&Edit"
@@ -915,7 +976,7 @@ msgstr "&Deshacer"
 
 #: ../src/MadEditFrame.cpp:2042
 msgid "Undo the last action"
-msgstr "Deshace la última acción"
+msgstr "Deshace última acción"
 
 #: ../src/MadEditFrame.cpp:2042
 msgid "Undo"
@@ -927,7 +988,7 @@ msgstr "&Rehacer"
 
 #: ../src/MadEditFrame.cpp:2051
 msgid "Redo the previously undone action"
-msgstr "Rehace la acción deshecha anteriormente"
+msgstr "Rehace acción deshecha"
 
 #: ../src/MadEditFrame.cpp:2051
 msgid "Redo"
@@ -939,7 +1000,7 @@ msgstr "Cor&tar"
 
 #: ../src/MadEditFrame.cpp:2055
 msgid "Cut the selection and put it on the Clipboard"
-msgstr "Corta la selección"
+msgstr "Corta selección"
 
 #: ../src/MadEditFrame.cpp:2055
 msgid "Cut"
@@ -951,7 +1012,7 @@ msgstr "&Copiar"
 
 #: ../src/MadEditFrame.cpp:2056
 msgid "Copy the selection and put it on the Clipboard"
-msgstr "Copia la selección"
+msgstr "Copia selección"
 
 #: ../src/MadEditFrame.cpp:2056
 msgid "Copy"
@@ -963,7 +1024,7 @@ msgstr "&Pegar"
 
 #: ../src/MadEditFrame.cpp:2057
 msgid "Insert data from the Clipboard"
-msgstr "Inserta los datos del portapapeles"
+msgstr "Inserta datos del portapapeles"
 
 #: ../src/MadEditFrame.cpp:2057
 msgid "Paste"
@@ -975,7 +1036,7 @@ msgstr "&Eliminar"
 
 #: ../src/MadEditFrame.cpp:2058
 msgid "Delete data"
-msgstr "Elimina los datos seleccionados"
+msgstr "Elimina selección"
 
 #: ../src/MadEditFrame.cpp:2060
 msgid "Cut L&ine"
@@ -983,7 +1044,7 @@ msgstr "Cortar &línea"
 
 #: ../src/MadEditFrame.cpp:2060
 msgid "Cut the selected lines and put it on the Clipboard"
-msgstr "Corta las líneas seleccionadas"
+msgstr "Corta líneas seleccionadas"
 
 #: ../src/MadEditFrame.cpp:2063
 msgid "Delete &Line"
@@ -991,15 +1052,17 @@ msgstr "Eliminar lí&nea"
 
 #: ../src/MadEditFrame.cpp:2069
 msgid "Delete the selected lines"
-msgstr "Elimina las líneas seleccionadas"
+msgstr "Elimina líneas seleccionadas"
 
 #: ../src/MadEditFrame.cpp:2072
+#, fuzzy
 msgid "Delete Empty Lines"
-msgstr ""
+msgstr "Eliminar lí&nea"
 
 #: ../src/MadEditFrame.cpp:2072
+#, fuzzy
 msgid "Delete empty lines"
-msgstr ""
+msgstr "Elimina líneas seleccionadas"
 
 #: ../src/MadEditFrame.cpp:2073
 msgid "Delete Empty Lines With Spaces"
@@ -1010,12 +1073,14 @@ msgid "Delete empty lines with spaces"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:2074
+#, fuzzy
 msgid "Join Lines"
-msgstr ""
+msgstr "Líneas"
 
 #: ../src/MadEditFrame.cpp:2074
+#, fuzzy
 msgid "Join selected lines into one"
-msgstr ""
+msgstr "Descomenta líneas seleccionadas"
 
 #: ../src/MadEditFrame.cpp:2075
 msgid "Tri&m Trailing Spaces"
@@ -1042,16 +1107,15 @@ msgstr "&Seleccionar todo"
 
 #: ../src/MadEditFrame.cpp:2078
 msgid "Select all data"
-msgstr "Selecciona todos los datos"
+msgstr "Selecciona todo"
 
 #: ../src/MadEditFrame.cpp:2079 ../src/MadEditFrame.cpp:4867
 msgid "Begin/End Selecting"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:2079 ../src/MadEditFrame.cpp:4868
-#, fuzzy
 msgid "Begin/End selecting text"
-msgstr "Convierte selección a ancho medio"
+msgstr ""
 
 #: ../src/MadEditFrame.cpp:2083
 msgid "Insert Ta&b Char"
@@ -1082,16 +1146,19 @@ msgid "Cut Bookmarked Lines"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:2099
+#, fuzzy
 msgid "Delete Bookmarked Lines"
-msgstr ""
+msgstr "Eliminar lí&nea"
 
 #: ../src/MadEditFrame.cpp:2100
+#, fuzzy
 msgid "Delete Unmarked Lines"
-msgstr ""
+msgstr "Eliminar lí&nea"
 
 #: ../src/MadEditFrame.cpp:2101
+#, fuzzy
 msgid "Replace Bookmarked Lines"
-msgstr ""
+msgstr "Reemplaza una cadena"
 
 #: ../src/MadEditFrame.cpp:2103 ../src/MadEditFrame.cpp:3031
 msgid "Ad&vanced"
@@ -1114,12 +1181,14 @@ msgid "Copy the selection as hex-string with space"
 msgstr "Copia selección como cadena hexadecimal con espacio"
 
 #: ../src/MadEditFrame.cpp:2106
+#, fuzzy
 msgid "Copy Value &Reverted from Hex String"
-msgstr ""
+msgstr "Copiar como hexadecimal"
 
 #: ../src/MadEditFrame.cpp:2106
+#, fuzzy
 msgid "Copy the selection reverted from hex-string"
-msgstr ""
+msgstr "Copia selección como cadena hexadecimal"
 
 #: ../src/MadEditFrame.cpp:2108
 msgid "&Increase Indent"
@@ -1215,8 +1284,9 @@ msgid "Capitalize"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:2120
+#, fuzzy
 msgid "Capitalize words of the selection"
-msgstr ""
+msgstr "Invierte el caso de la selección"
 
 #: ../src/MadEditFrame.cpp:2122
 msgid "To H&alfwidth"
@@ -1278,9 +1348,8 @@ msgid "Insert incremental numbers with step and padding at current caret"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:2130
-#, fuzzy
 msgid "Numbering and Bullets"
-msgstr "Número"
+msgstr ""
 
 #: ../src/MadEditFrame.cpp:2131
 msgid "Column Align Left"
@@ -1403,8 +1472,9 @@ msgid "Find Previous"
 msgstr "Buscar anterior"
 
 #: ../src/MadEditFrame.cpp:2149
+#, fuzzy
 msgid "&Quick Find"
-msgstr ""
+msgstr "&Buscar"
 
 #: ../src/MadEditFrame.cpp:2149
 #, fuzzy
@@ -1503,38 +1573,38 @@ msgid "Toggle/Remove Bookmark"
 msgstr "Alternar Marcador"
 
 #: ../src/MadEditFrame.cpp:2166
+#, fuzzy
 msgid "Toggle Bookmark at current line"
-msgstr "Alternar marcador en la línea actual"
+msgstr "Cambia marcador en línea actual"
 
 #: ../src/MadEditFrame.cpp:2167
-#, fuzzy
 msgid "Go To Next Bookmark"
 msgstr "Ir al marcador siguiente"
 
 #: ../src/MadEditFrame.cpp:2167
 msgid "Go to the next bookmark"
-msgstr "Ir al marcador siguiente"
+msgstr "Va al marcador siguiente"
 
 #: ../src/MadEditFrame.cpp:2168
-#, fuzzy
 msgid "Go To Previous Bookmark"
 msgstr "Ir al marcador anterior"
 
 #: ../src/MadEditFrame.cpp:2168
 msgid "Go to the previous bookmark"
-msgstr "Ir al marcador anterior"
+msgstr "Va al marcador anterior"
 
 #: ../src/MadEditFrame.cpp:2169
 msgid "Clear All Bookmarks"
-msgstr ""
+msgstr "Borrar todos los marcadores"
 
 #: ../src/MadEditFrame.cpp:2172
 msgid "&View"
 msgstr "&Ver"
 
 #: ../src/MadEditFrame.cpp:2173
+#, fuzzy
 msgid "Always on Top"
-msgstr ""
+msgstr "Siempre"
 
 #: ../src/MadEditFrame.cpp:2174
 msgid "Toggle Full Screen Mode"
@@ -1657,16 +1727,18 @@ msgid "Display &Bookmark"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:2327
+#, fuzzy
 msgid "Display the Bookmark sign"
-msgstr ""
+msgstr "Muestra los números de línea"
 
 #: ../src/MadEditFrame.cpp:2328
 msgid "Display 80th Cols &Hint"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:2328
+#, fuzzy
 msgid "Display the 80th columns hint"
-msgstr ""
+msgstr "Muestra los números de línea"
 
 #: ../src/MadEditFrame.cpp:2329
 msgid "Show End Of Line"
@@ -1693,12 +1765,14 @@ msgid "Show the sign of Space char"
 msgstr "Muestra el signo del caracter de espacion"
 
 #: ../src/MadEditFrame.cpp:2332
+#, fuzzy
 msgid "Show All Chars"
-msgstr ""
+msgstr "Mostrar caracter tabulador"
 
 #: ../src/MadEditFrame.cpp:2332
+#, fuzzy
 msgid "Show the sign of all characters"
-msgstr ""
+msgstr "Muestra el signo del caracter tabulador"
 
 #: ../src/MadEditFrame.cpp:2333
 msgid "Right-to-left"
@@ -1742,12 +1816,14 @@ msgid "Triditional Typewriter Mode"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:2339
+#, fuzzy
 msgid "Toolbars"
-msgstr ""
+msgstr "&Herramientas"
 
 #: ../src/MadEditFrame.cpp:2340 ../src/MadEditFrame.cpp:9743
+#, fuzzy
 msgid "Toggle Main Toolbar"
-msgstr ""
+msgstr "Alternar Marcador"
 
 #: ../src/MadEditFrame.cpp:2340
 msgid "Show/Hide Main Toolbar"
@@ -1790,8 +1866,9 @@ msgid "Hex Mode"
 msgstr "Modo hexadecimal"
 
 #: ../src/MadEditFrame.cpp:2347 ../src/MadEditFrame.cpp:5081
+#, fuzzy
 msgid "Preview as: "
-msgstr ""
+msgstr "Previsualizando"
 
 #: ../src/MadEditFrame.cpp:2350
 msgid "&Macro"
@@ -1910,16 +1987,18 @@ msgid "Convert the file format to DOS format"
 msgstr "Convierte formato de archivo a formato DOS"
 
 #: ../src/MadEditFrame.cpp:2374
+#, fuzzy
 msgid "Convert To CR/0D (Old &MAC)"
-msgstr ""
+msgstr "Convertir a CR/0D (&MAC)"
 
 #: ../src/MadEditFrame.cpp:2374
 msgid "Convert the file format to MAC format"
 msgstr "Convierte formato de archivo a formato MAC"
 
 #: ../src/MadEditFrame.cpp:2375
+#, fuzzy
 msgid "Convert To LF/0A (&UNIX/OSX)"
-msgstr ""
+msgstr "Convertir a LF/0A (&UNIX)"
 
 #: ../src/MadEditFrame.cpp:2375
 msgid "Convert the file format to UNIX format"
@@ -1938,16 +2017,18 @@ msgid "Insert CR&LF chars when pressing Enter key"
 msgstr "Inserta caracter CR&LF al pulsar Intro"
 
 #: ../src/MadEditFrame.cpp:2378
+#, fuzzy
 msgid "Insert CR/0D (Old &MAC)"
-msgstr ""
+msgstr "Insertar CR/0D (&MAC)"
 
 #: ../src/MadEditFrame.cpp:2378
 msgid "Insert CR char when pressing Enter key"
 msgstr "Inserta caracter CR al pulsar Intro"
 
 #: ../src/MadEditFrame.cpp:2379
+#, fuzzy
 msgid "Insert LF/0A (&UNIX/OSX)"
-msgstr ""
+msgstr "Insertar LF/0A (&UNIX)"
 
 #: ../src/MadEditFrame.cpp:2379
 msgid "Insert LF char when pressing Enter key"
@@ -2064,8 +2145,9 @@ msgid "Convert Markdown to HTML"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:2398
+#, fuzzy
 msgid "&HTML to Plain Text"
-msgstr ""
+msgstr "Texto Plano"
 
 #: ../src/MadEditFrame.cpp:2398
 msgid "Convert HTML to Plain Text"
@@ -2088,8 +2170,9 @@ msgid "Format XML(whole file)"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:2403
+#, fuzzy
 msgid "&Word Count..."
-msgstr ""
+msgstr "Contar palabras"
 
 #: ../src/MadEditFrame.cpp:2403
 msgid "Count the words and chars of the file or selection"
@@ -2131,15 +2214,16 @@ msgstr "Ve&ntana"
 #: ../src/MadEditFrame.cpp:2410
 #, fuzzy
 msgid "Window list"
-msgstr "Archivo de Registro de Windows"
+msgstr "Windows "
 
 #: ../src/MadEditFrame.cpp:2413
 msgid "&Help"
 msgstr "A&yuda"
 
 #: ../src/MadEditFrame.cpp:2414
+#, fuzzy
 msgid "&About MadEdit-Mod..."
-msgstr ""
+msgstr "&Acerca de MadEdit..."
 
 #: ../src/MadEditFrame.cpp:2418
 msgid "Move caret left one char"
@@ -2306,16 +2390,19 @@ msgid "Editor"
 msgstr "Editor"
 
 #: ../src/MadEditFrame.cpp:2484
+#, fuzzy
 msgid "Search/Replace"
-msgstr ""
+msgstr "Reemplazar"
 
 #: ../src/MadEditFrame.cpp:2485
+#, fuzzy
 msgid "Text View"
-msgstr ""
+msgstr "Modo texto"
 
 #: ../src/MadEditFrame.cpp:2486
+#, fuzzy
 msgid "Edit Mode"
-msgstr ""
+msgstr "Modo texto"
 
 #: ../src/MadEditFrame.cpp:2487
 msgid "Macro"
@@ -2342,7 +2429,7 @@ msgstr "Desplazar el texto a la izquierda"
 #: ../src/MadEditFrame.cpp:2502
 #, fuzzy
 msgid "Scrolls to end of the file"
-msgstr "Aumenta sangria de líneas seleccionadas"
+msgstr "Ir al final de línea"
 
 #: ../src/MadEditFrame.cpp:2504
 #, fuzzy
@@ -2441,8 +2528,9 @@ msgid "Scrolls right by aprox. 1 tab stop"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:2754 ../src/MadEditFrame.cpp:9940
+#, fuzzy
 msgid "Quick Search"
-msgstr ""
+msgstr "Buscar"
 
 #: ../src/MadEditFrame.cpp:2763 ../src/MadEditFrame.cpp:5063
 msgid "HTML"
@@ -2455,15 +2543,17 @@ msgstr ""
 #: ../src/MadEditFrame.cpp:3004
 #, fuzzy
 msgid "Copy full path name"
-msgstr "[%B] Nombre completo del mes"
+msgstr "Copiar ruta completa"
 
 #: ../src/MadEditFrame.cpp:3005
+#, fuzzy
 msgid "Copy full file name"
-msgstr ""
+msgstr "Copiar &nombre de archivo"
 
 #: ../src/MadEditFrame.cpp:3006
+#, fuzzy
 msgid "Copy full file name without extension"
-msgstr ""
+msgstr "Copia ruta completa de archivo al portapapeles"
 
 #: ../src/MadEditFrame.cpp:3007
 #, fuzzy
@@ -2486,32 +2576,32 @@ msgstr ""
 #: ../src/MadEditFrame.cpp:3371
 #, fuzzy
 msgid "Whole Word Only"
-msgstr "&Sólo palabras completas"
+msgstr "Sólo &palabras completas"
 
 #: ../src/MadEditFrame.cpp:3371
 #, fuzzy
 msgid "Match Whole Word Only"
-msgstr "&Sólo palabras completas"
+msgstr "Sólo &palabras completas"
 
 #: ../src/MadEditFrame.cpp:3379
 #, fuzzy
 msgid "Case Sensitive"
-msgstr "Sensible a MAYÚSCULAS/minúsculas"
+msgstr "Sensible a &MAYÚSCULAS/minúsculas"
 
 #: ../src/MadEditFrame.cpp:3381
 #, fuzzy
 msgid "Regular Expression"
-msgstr "Usar e&xpresiones regulares"
+msgstr "&Usar expresiones regulares"
 
 #: ../src/MadEditFrame.cpp:3381
 #, fuzzy
 msgid "Use Regular Expressions"
-msgstr "Usar e&xpresiones regulares"
+msgstr "&Usar expresiones regulares"
 
 #: ../src/MadEditFrame.cpp:3381 ../src/MadFindInFilesDialog.cpp:121
 #: ../src/MadSearchReplaceDialog.cpp:142
 msgid "Use Regular E&xpressions"
-msgstr "Usar e&xpresiones regulares"
+msgstr "&Usar expresiones regulares"
 
 #: ../src/MadEditFrame.cpp:3383
 msgid "Dot Match Newline"
@@ -2520,7 +2610,7 @@ msgstr ""
 #: ../src/MadEditFrame.cpp:3383
 #, fuzzy
 msgid "Dot Match Newline in Regular Expressions"
-msgstr "Usar e&xpresiones regulares"
+msgstr "&Usar expresiones regulares"
 
 #: ../src/MadEditFrame.cpp:3403
 #, fuzzy
@@ -2533,8 +2623,9 @@ msgstr ""
 
 #: ../src/MadEditFrame.cpp:3425 ../src/MadSearchReplaceDialog.cpp:1726
 #: ../src/MadPython.hpp:1583 ../src/MadPython.hpp:1607
+#, fuzzy
 msgid "Search Results"
-msgstr ""
+msgstr "Buscar"
 
 #: ../src/MadEditFrame.cpp:4243 ../src/MadEditFrame.cpp:4252
 #, c-format
@@ -2564,31 +2655,28 @@ msgstr ""
 #: ../src/MadEditFrame.cpp:4856
 #, fuzzy
 msgid "End Selecting"
-msgstr "Buscar tambien en la &selección"
+msgstr "&Buscar en selección"
 
 #: ../src/MadEditFrame.cpp:4857
-#, fuzzy
 msgid "End selecting text"
-msgstr "Convierte selección a ancho medio"
+msgstr ""
 
 #: ../src/MadEditFrame.cpp:4861
 #, fuzzy
 msgid "Begin Selecting "
-msgstr "Buscar tambien en la &selección"
+msgstr "&Buscar en selección"
 
 #: ../src/MadEditFrame.cpp:4862
-#, fuzzy
 msgid "Begin selecting text"
-msgstr "Convierte selección a ancho medio"
+msgstr ""
 
 #: ../src/MadEditFrame.cpp:4886
 msgid "Clear ReadOnly Flag"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:4887
-#, fuzzy
 msgid "Clear ReadOnly flag of the file"
-msgstr "Aumenta sangria de líneas seleccionadas"
+msgstr ""
 
 #: ../src/MadEditFrame.cpp:4894
 #, fuzzy
@@ -2596,9 +2684,8 @@ msgid "Set ReadOnly Flag"
 msgstr "Sólo lectura"
 
 #: ../src/MadEditFrame.cpp:4895
-#, fuzzy
 msgid "Set ReadOnly flag of the file"
-msgstr "Aumenta sangria de líneas seleccionadas"
+msgstr ""
 
 #: ../src/MadEditFrame.cpp:4983 ../src/MadEditFrame.cpp:4997
 #: ../src/MadEditFrame.cpp:5014 ../src/MadEditFrame.cpp:5030
@@ -2635,8 +2722,9 @@ msgid "Previewing"
 msgstr "Previsualizando"
 
 #: ../src/MadEditFrame.cpp:5793
+#, fuzzy
 msgid "MadEdit Print Preview"
-msgstr ""
+msgstr "MadEdit vista previa de impresión"
 
 #: ../src/MadEditFrame.cpp:5817
 msgid ""
@@ -2651,12 +2739,14 @@ msgid "Printing"
 msgstr "Imprimiendo"
 
 #: ../src/MadEditFrame.cpp:6275
+#, fuzzy
 msgid "Delimiters:"
-msgstr ""
+msgstr "Delimitador"
 
 #: ../src/MadEditFrame.cpp:6275
+#, fuzzy
 msgid "Revert Hex String"
-msgstr ""
+msgstr "Copiar como hexadecimal"
 
 #: ../src/MadEditFrame.cpp:6423 ../src/MadEditFrame.cpp:6489
 msgid "ASCII characters"
@@ -2693,9 +2783,9 @@ msgid "Go To Line"
 msgstr "Ir a la línea"
 
 #: ../src/MadEditFrame.cpp:7139
-#, c-format
+#, fuzzy, c-format
 msgid "Position(0~%s): (you can input HexNumber: 0xNNN)"
-msgstr ""
+msgstr "Posición: (puede introducir numero hexadecimal: 0xNNN)"
 
 #: ../src/MadEditFrame.cpp:7139
 msgid "Go To Position"
@@ -2716,15 +2806,16 @@ msgstr ""
 #: ../src/MadEditFrame.cpp:7495
 #, fuzzy
 msgid "Close Preveiw"
-msgstr "Cerrar archivo"
+msgstr "Cerrar Más"
 
 #: ../src/MadEditFrame.cpp:7495
 msgid "Close preveiw windows"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:8632
+#, fuzzy
 msgid "Open Mad Macro File"
-msgstr ""
+msgstr "Abrir archivo"
 
 #: ../src/MadEditFrame.cpp:8784
 msgid "Mad Macro"
@@ -2756,7 +2847,7 @@ msgstr "Pulse \"Aceptar\" para visitar nuestra página web."
 #: ../src/MadEditFrame.cpp:9838
 #, fuzzy
 msgid "Passed the begin of the file/selection"
-msgstr "Aumenta sangria de líneas seleccionadas"
+msgstr "Invierte el caso de la selección"
 
 #: ../src/MadEditFrame.cpp:9900 ../src/MadSearchReplaceDialog.cpp:530
 #: ../src/MadSearchReplaceDialog.cpp:691
@@ -2778,8 +2869,9 @@ msgid "&Collapse All"
 msgstr "C&errar todo"
 
 #: ../src/MadEditFrame.cpp:9988
+#, fuzzy
 msgid "Copy &All"
-msgstr ""
+msgstr "Copiar ruta completa"
 
 #: ../src/MadEditFrame.cpp:9989
 msgid "&Reset Results"
@@ -2788,7 +2880,7 @@ msgstr ""
 #: ../src/MadEditFrame.cpp:9991
 #, fuzzy
 msgid "&Collapse Selected"
-msgstr "C&errar todo"
+msgstr "Sensible a &MAYÚSCULAS/minúsculas"
 
 #: ../src/MadEditFrame.cpp:9992
 msgid "&Copy Selected"
@@ -2797,7 +2889,7 @@ msgstr ""
 #: ../src/MadEditFrame.cpp:9993
 #, fuzzy
 msgid "&Delete Selected"
-msgstr "Elimina las líneas seleccionadas"
+msgstr "Elimina líneas seleccionadas"
 
 #: ../src/MadFileAssociationDialog.cpp:341
 msgid "File Type Associations"
@@ -2837,11 +2929,11 @@ msgstr "Buscar/Reemplazar en archivos"
 #: ../src/MadFindInFilesDialog.cpp:115 ../src/MadSearchReplaceDialog.cpp:136
 #: ../src/MadSortDialog.cpp:39
 msgid "&Case Sensitive"
-msgstr "Sensible a MAYÚSCULAS/minúsculas"
+msgstr "Sensible a &MAYÚSCULAS/minúsculas"
 
 #: ../src/MadFindInFilesDialog.cpp:118 ../src/MadSearchReplaceDialog.cpp:139
 msgid "&Whole Word Only"
-msgstr "&Sólo palabras completas"
+msgstr "Sólo &palabras completas"
 
 #: ../src/MadFindInFilesDialog.cpp:126 ../src/MadSearchReplaceDialog.cpp:147
 msgid "&. Matches Newline"
@@ -2849,7 +2941,7 @@ msgstr ""
 
 #: ../src/MadFindInFilesDialog.cpp:130 ../src/MadSearchReplaceDialog.cpp:157
 msgid "Find &Hex String (Example: BE 00 3A or BE003A)"
-msgstr "Buscar cadena &Hex (Ejemplo: BE 00 3A o BE003A)"
+msgstr "Buscar cadena &hexadecimal (Ejemplo: BE 00 3A o BE003A)"
 
 #: ../src/MadFindInFilesDialog.cpp:133
 msgid "&List the First Found Item Only"
@@ -2869,7 +2961,7 @@ msgstr "Cerrar"
 
 #: ../src/MadFindInFilesDialog.cpp:146
 msgid "&Enable Replace"
-msgstr "Activar R&eemplazar"
+msgstr "&Activar Reemplazar"
 
 #: ../src/MadFindInFilesDialog.cpp:154
 msgid "Opened Files in Editor"
@@ -3033,37 +3125,30 @@ msgid "Recent &Files"
 msgstr "&Archivos recientes"
 
 #: ../src/MadPurgeHistoryDialog.cpp:59
-#, fuzzy
 msgid "Recent Fon&ts"
 msgstr "&Fuentes recientes"
 
 #: ../src/MadPurgeHistoryDialog.cpp:62
-#, fuzzy
 msgid "Recent &Encodings"
 msgstr "&Codificaciones recientes"
 
 #: ../src/MadPurgeHistoryDialog.cpp:65
-#, fuzzy
 msgid "Recent &Searched Texts"
 msgstr "&Busqueda de textos recientes"
 
 #: ../src/MadPurgeHistoryDialog.cpp:68
-#, fuzzy
 msgid "Recent &Replaced Texts"
 msgstr "&Reemplazo de textos recientes"
 
 #: ../src/MadPurgeHistoryDialog.cpp:71
-#, fuzzy
 msgid "Recent Searched &Directories"
 msgstr "Busqueda de &directorios recientes"
 
 #: ../src/MadPurgeHistoryDialog.cpp:74
-#, fuzzy
 msgid "Recent Searched File Fi&lters"
 msgstr "F&iltros de busqueda de archivos recientes"
 
 #: ../src/MadPurgeHistoryDialog.cpp:77
-#, fuzzy
 msgid "Recent Searched E&xclude Filters"
 msgstr "Filtros de busqueda de archivos a &excluir recientes"
 
@@ -3077,12 +3162,13 @@ msgid "Reset Tool Bars and Information Window Pos"
 msgstr "Ventana de información"
 
 #: ../src/MadPurgeHistoryDialog.cpp:86
+#, fuzzy
 msgid "All Above"
-msgstr ""
+msgstr "Todo "
 
 #: ../src/MadSearchReplaceDialog.cpp:133
 msgid "&Move Focus to Editor Window"
-msgstr "&Mover el foco a la ventana editor"
+msgstr "Mover &foco a la ventana del editor"
 
 #: ../src/MadSearchReplaceDialog.cpp:153
 msgid "Replace Directly(Fix Regex dilema)"
@@ -3090,20 +3176,20 @@ msgstr ""
 
 #: ../src/MadSearchReplaceDialog.cpp:160
 msgid "Search In &Selection"
-msgstr "Buscar tambien en la &selección"
+msgstr "&Buscar en selección"
 
 #: ../src/MadSearchReplaceDialog.cpp:163
-#, fuzzy
 msgid "Wrap aroun&d"
-msgstr "Envolver"
+msgstr "&Envolver alrededor"
 
 #: ../src/MadSearchReplaceDialog.cpp:167
 msgid "Bookmark in Searching"
 msgstr ""
 
 #: ../src/MadSearchReplaceDialog.cpp:168
+#, fuzzy
 msgid "Bookmark line"
-msgstr ""
+msgstr "Marcador"
 
 #: ../src/MadSearchReplaceDialog.cpp:171
 msgid "Bookmark only(Find All in Current)"
@@ -3123,7 +3209,7 @@ msgstr ""
 
 #: ../src/MadSearchReplaceDialog.cpp:184
 msgid "Always"
-msgstr ""
+msgstr "Siempre"
 
 #: ../src/MadSearchReplaceDialog.cpp:191
 #, fuzzy
@@ -3136,26 +3222,24 @@ msgid "Find A&ll"
 msgstr "Buscar &siguiente"
 
 #: ../src/MadSearchReplaceDialog.cpp:209
-#, fuzzy
 msgid ""
 "Find All in All\n"
 "Opened"
-msgstr "Buscar &siguiente"
+msgstr ""
 
 #: ../src/MadSearchReplaceDialog.cpp:213
 msgid "Replace &All"
-msgstr "Reempl&azar todo"
+msgstr "Reemplazar &todo"
 
 #: ../src/MadSearchReplaceDialog.cpp:215
-#, fuzzy
 msgid ""
 "Repl All in All\n"
 "Opened"
-msgstr "Buscar &siguiente"
+msgstr ""
 
 #: ../src/MadSearchReplaceDialog.cpp:217
 msgid "C&ount"
-msgstr "C&ontar"
+msgstr "&Contar"
 
 #: ../src/MadSearchReplaceDialog.cpp:219 ../src/MadSearchReplaceDialog.cpp:1317
 #, fuzzy
@@ -3295,12 +3379,12 @@ msgstr "General"
 #: ../src/MadOptionsDialog.cpp:510
 #, fuzzy
 msgid "Language of User Interface (must restart MadEdit)"
-msgstr "Idioma de interfaz de usuario (debe reiniciar wxMEdit)"
+msgstr "Idioma de interfaz de usuario (debe reiniciar MadEdit)"
 
 #: ../src/MadOptionsDialog.cpp:514
 #, fuzzy
 msgid "Single Instance (must restart MadEdit)"
-msgstr "Instancia sola (debe reiniciar wxMEdit)"
+msgstr "Instancia sola (debe reiniciar MadEdit)"
 
 #: ../src/MadOptionsDialog.cpp:517
 #, fuzzy
@@ -3325,12 +3409,12 @@ msgid ""
 "Use this encoding to create new file or when MadEdit cannot determine the "
 "encoding of old file"
 msgstr ""
-"Codificación de nuevo archivo o cuando wxMEdit no puede determinar "
-"codificación del archivo antiguo"
+"Codificación de nuevo archivo o cuando no se determina codificación de "
+"archivo viejo"
 
 #: ../src/MadOptionsDialog.cpp:551
 msgid "Reload files previously open on startup"
-msgstr "Recargar los archivos que haya abierto anteriormente al arranque"
+msgstr "Recargar los archivos anteriormente abiertos al inicio"
 
 #: ../src/MadOptionsDialog.cpp:554
 msgid "Restore previous caret position when files are opened"
@@ -3345,12 +3429,13 @@ msgstr ""
 msgid ""
 "Do not save settings to MadEdit.cfg when MadEdit closed (this session only)"
 msgstr ""
-"No guardar la configuración en wxmedit.cfg cuando wxMEdit es cerrado (sólo "
+"No guardar la configuración en MadEdit.cfg cuando MadEdit es cerrado (sólo "
 "esta sesión)"
 
 #: ../src/MadOptionsDialog.cpp:563
+#, fuzzy
 msgid "Purge History while exiting"
-msgstr ""
+msgstr "Purgar historial"
 
 #: ../src/MadOptionsDialog.cpp:566
 #, fuzzy
@@ -3374,7 +3459,7 @@ msgstr "Editar"
 msgid "Max line length before Line-Wrap (must restart MadEdit)"
 msgstr ""
 "Longitud máxima de la línea antes del ajuste de línea (debe reiniciar "
-"wxMEdit)"
+"MadEdit)"
 
 #: ../src/MadOptionsDialog.cpp:598
 msgid "Columns of Wrap-By-Column"
@@ -3394,7 +3479,7 @@ msgstr "Formato de Fecha/Hora"
 
 #: ../src/MadOptionsDialog.cpp:624
 msgid "Use English instead of current locale"
-msgstr "Usar Inglés en lugar de la configuración regional actual"
+msgstr "Usar Inglés en lugar de ajuste regional actual"
 
 #: ../src/MadOptionsDialog.cpp:629
 msgid "Insert Space char instead of Tab char"
@@ -3434,9 +3519,8 @@ msgid "Left double click to highlight"
 msgstr ""
 
 #: ../src/MadOptionsDialog.cpp:662
-#, fuzzy
 msgid "Typewriter mode"
-msgstr "Modo texto"
+msgstr ""
 
 #: ../src/MadOptionsDialog.cpp:665
 #, fuzzy
@@ -3538,7 +3622,7 @@ msgstr "Mostrar la clave en el menú"
 #: ../src/MadOptionsDialog.cpp:826
 #, fuzzy
 msgid "Reset all keys to default (must restart MadEdit)"
-msgstr "Restablecer todas las claves por defecto (debe reiniciar wxMEdit)"
+msgstr "Restablecer todas las claves por defecto (debe reiniciar MadEdit)"
 
 #: ../src/MadOptionsDialog.cpp:830
 msgid "SpellChecker"
@@ -3628,7 +3712,7 @@ msgstr ""
 #: ../src/MadOptionsDialog.cpp:1047
 #, fuzzy
 msgid "Use TABs instead of spaces"
-msgstr "Usar Inglés en lugar de la configuración regional actual"
+msgstr "Usar Inglés en lugar de ajuste regional actual"
 
 #: ../src/MadOptionsDialog.cpp:1050
 msgid "Force using TABs"
@@ -3676,9 +3760,8 @@ msgid "Indent C++ comments beginning in column one"
 msgstr ""
 
 #: ../src/MadOptionsDialog.cpp:1082
-#, fuzzy
 msgid "Indent after parens"
-msgstr "Orientación"
+msgstr ""
 
 #: ../src/MadOptionsDialog.cpp:1090
 msgid "Minimal indent added when a header is built of multiple lines"
@@ -3990,8 +4073,8 @@ msgid ""
 "Add MadEdit to the RightClickMenu of Explorer(Deselect to Remove the Entry "
 "from Windows Registry)"
 msgstr ""
-"Añadir wxMEdit al menú de clic derecho del Explorador (Anular la selección "
-"para eliminar la entrada del registro de Windows)"
+"Añadir MadEdit al menú contextual del Explorador (Desmarque para eliminar "
+"del registro de Windows)"
 
 #: ../src/MadOptionsDialog.cpp:1407
 msgid "Commands"
@@ -4002,9 +4085,9 @@ msgid "Menu"
 msgstr "Menú"
 
 #: ../src/MadOptionsDialog.cpp:1779
-#, c-format
+#, fuzzy, c-format
 msgid "Invalid value of \"%s(%s)\""
-msgstr ""
+msgstr "Valor no válido de \"%s\""
 
 #: ../src/MadOptionsDialog.cpp:1783 ../src/MadOptionsDialog.cpp:1789
 msgid ": Should be greater than zero"
@@ -4024,7 +4107,7 @@ msgstr ""
 
 #: ../src/MadOptionsDialog.cpp:1882
 msgid "Cannot assign key to this item"
-msgstr "No se puede asignar a la clave a este objeto"
+msgstr "No se puede asignar clave a este objeto"
 
 #: ../src/MadOptionsDialog.cpp:1988
 msgid "This key is not assigned"
@@ -4110,8 +4193,9 @@ msgid "Detail Information of Characters:"
 msgstr "Información detallada de caracteres:"
 
 #: ../src/MadWordCountDialog.cpp:113
+#, fuzzy
 msgid "Word Count(Selected Text)"
-msgstr ""
+msgstr "Contar palabras (Texto Seleccionado)"
 
 #: ../src/MadSaveQueryDialog.cpp:33
 #, fuzzy
@@ -4171,7 +4255,7 @@ msgstr ""
 #: ../src/MadAboutDialog.cpp:47
 #, fuzzy
 msgid "Current maintainer"
-msgstr "Mantenedor actual de wxMEdit"
+msgstr "Mantenedor actual de MadEdit"
 
 #: ../src/MadAboutDialog.cpp:48
 #, fuzzy
@@ -4193,8 +4277,9 @@ msgid "Translation/patch contributers"
 msgstr ""
 
 #: ../src/MadAboutDialog.cpp:63
+#, fuzzy
 msgid "About MadEdit-Mod"
-msgstr ""
+msgstr "Acerca de MadEdit"
 
 #: ../src/MadAboutDialog.cpp:80
 msgid "GNU General Public License"
@@ -4217,16 +4302,19 @@ msgid "Role"
 msgstr ""
 
 #: ../src/MadNumberDlg.cpp:81
+#, fuzzy
 msgid "Intial Number"
-msgstr ""
+msgstr "Imprimir número de línea"
 
 #: ../src/MadNumberDlg.cpp:87
+#, fuzzy
 msgid "Numbering Step"
-msgstr ""
+msgstr "Número"
 
 #: ../src/MadNumberDlg.cpp:93
+#, fuzzy
 msgid "Number of Chars"
-msgstr ""
+msgstr "Números de formas"
 
 #: ../src/MadNumberDlg.cpp:99
 msgid "Pad With Zero"
@@ -4237,8 +4325,9 @@ msgid "Numbering Step Type"
 msgstr ""
 
 #: ../src/MadNumberDlg.cpp:110
+#, fuzzy
 msgid "Linear"
-msgstr ""
+msgstr "Líneas"
 
 #: ../src/MadNumberDlg.cpp:111
 msgid "Exponential"
@@ -4257,8 +4346,9 @@ msgid "HEX"
 msgstr ""
 
 #: ../src/MadNumberDlg.cpp:122
+#, fuzzy
 msgid "BIN"
-msgstr ""
+msgstr "INS"
 
 #: ../src/MadNumberDlg.cpp:123
 msgid "OCT"
@@ -4282,8 +4372,9 @@ msgid "Previw: "
 msgstr "Previsualizando"
 
 #: ../src/MadNumberDlg.cpp:179 ../src/MadNumberDlg.h:51
+#, fuzzy
 msgid "Numbering Configuration"
-msgstr ""
+msgstr "Configuración de UNIX"
 
 #: ../src/MadNumberDlg.cpp:205
 #, fuzzy, c-format
@@ -4321,8 +4412,9 @@ msgid "Results <<"
 msgstr "%d resultados"
 
 #: ../src/MadPrintout.h:21
+#, fuzzy
 msgid "MadEdit-Mod Printout"
-msgstr ""
+msgstr "MadEdit Printout"
 
 #: ../spellchecker/HunspellInterface.cpp:385
 #, c-format
@@ -4336,6 +4428,9 @@ msgstr ""
 #~ msgid "<<"
 #~ msgstr "<<"
 
+#~ msgid "WxBitmapButtonRecentFindText"
+#~ msgstr "WxBitmapButtonRecentFindText"
+
 #~ msgid "WxBitmapButtonRecentReplaceText"
 #~ msgstr "WxBitmapButtonRecentReplaceText"
 
@@ -4345,32 +4440,274 @@ msgstr ""
 #~ msgid "WxStaticTextBCName"
 #~ msgstr "WxStaticTextBCName"
 
-#~ msgid "WxBitmapButtonRecentFindText"
-#~ msgstr "WxBitmapButtonRecentFindText"
+#~ msgid "Select histories to purge"
+#~ msgstr "Seleccionar historial a purgar"
 
-#, fuzzy
-#~ msgid "Save &As"
-#~ msgstr "G&uardar como..."
+#~ msgid "&Purge"
+#~ msgstr "&Purgar"
 
-#, fuzzy
-#~ msgid "Calapse &All Results of Find/Replace in Files"
-#~ msgstr "&Mostrar/Ocultar los resultados"
+#~ msgid "End of selection reached, search from beginning."
+#~ msgstr "Fin de selección alcanzado, buscando desde el principio."
 
-#, fuzzy
+#~ msgid "End of file reached, search from beginning."
+#~ msgstr "Fin de archivo alcanzado, buscando desde el principio."
+
+#~ msgid "The value of 'From' is incorrect."
+#~ msgstr "El valor de \"De\" es incorrecto."
+
+#~ msgid "The value of 'To' is incorrect."
+#~ msgstr "El valor de \"A\" es incorrecto."
+
+#~ msgid "Beginning of selection reached, search from end."
+#~ msgstr "Inicio de selección alcanzado, buscando desde el final."
+
+#~ msgid "Beginning of file reached, search from end."
+#~ msgstr "Inicio de archivo alcanzado, buscando desde el final."
+
+#~ msgid "End of selection reached, replace from beginning."
+#~ msgstr "Fin de selección alcanzado, reemplazando desde el principio."
+
+#~ msgid "End of file reached, replace from beginning."
+#~ msgstr "Fin de archivo alcanzado, reemplazando desde el principio."
+
+#~ msgid "Bytes"
+#~ msgstr "Bytes"
+
+#~ msgid "Characters (all)"
+#~ msgstr "Caracteres (todos)"
+
+#~ msgid "Space Characters"
+#~ msgstr "Caracteres de espacio"
+
+#~ msgid "Control Characters"
+#~ msgstr "Caracteres de control"
+
+#~ msgid "Fullwidth Characters (with East Asian Ambiguous Width Characters)"
+#~ msgstr ""
+#~ "Caracteres de ancho completo (con Caracacteres de Ancho Ambiguo de Asia "
+#~ "Oriental)"
+
+#~ msgid "Fullwidth Characters (without East Asian Ambiguous Width Characters)"
+#~ msgstr ""
+#~ "Caracteres de ancho completo (sin Caracacteres de Ancho Ambiguo de Asia "
+#~ "Oriental)"
+
+#~ msgid "Automatically check for new versions: "
+#~ msgstr "Comprobar automáticamente si hay nuevas versiones:"
+
+#~ msgid "Check &now"
+#~ msgstr "Comprobar ahora"
+
+#~ msgid "Check for new versions including &prereleases"
+#~ msgstr "Comprobar si hay nuevas versiones incluyendo versiones preliminares"
+
+#~ msgid "0"
+#~ msgstr "0"
+
+#~ msgid "Behavior of copying in hex editing area:"
+#~ msgstr "Comportamiento de copia en el área de edición hexadecimal:"
+
+#~ msgid "Treat clipboard text as Hex String when pasting in hex area:"
+#~ msgstr ""
+#~ "Tratar texto del portapapeles como Hex al pegar en área hexadecimal:"
+
+#~ msgid ">>"
+#~ msgstr ">>"
+
+#~ msgid "Misc"
+#~ msgstr "Diverso"
+
+#~ msgid "[%d/%m/%Y] 24/02/2007"
+#~ msgstr "[%d/%m/%Y] 24/02/2007"
+
 #~ msgid ""
-#~ "Find &All in\n"
-#~ "Current"
-#~ msgstr "Buscar &siguiente"
+#~ "Place configuration files into application data directory of current user "
+#~ "(%APPDATA%\\MadEdit) rather than MadEdit executable directory"
+#~ msgstr ""
+#~ "Colocar configuración en el directorio de datos de aplicación de usuario "
+#~ "actual (%APPDATA%\\MadEdit)"
 
-#, fuzzy
+#~ msgid "Cyrillic "
+#~ msgstr "Cirílico "
+
+#~ msgid "Arabic "
+#~ msgstr "Árabe "
+
+#~ msgid "Hebrew "
+#~ msgstr "Hebreo "
+
+#~ msgid "Nordic "
+#~ msgstr "Nórdico "
+
+#~ msgid "Thai "
+#~ msgstr "Tailandés "
+
+#~ msgid "Celtic "
+#~ msgstr "Celta "
+
+#~ msgid "South-Eastern European "
+#~ msgstr "Europa sudoriental "
+
+#~ msgid "Windows Vietnamese "
+#~ msgstr "Windows Vietnamita "
+
+#~ msgid "CP437 Variant for ASCII Art "
+#~ msgstr "Variante CP437 para arte ASCII "
+
+#~ msgid "Windows/DOS OEM - Latin 1 "
+#~ msgstr "Windows/DOS OEM - Latín 1 "
+
+#~ msgid "Windows/DOS OEM - Latin 2 "
+#~ msgstr "Windows/DOS OEM - Latin 2 "
+
+#~ msgid "Windows/DOS OEM - Cyrillic "
+#~ msgstr "Windows/DOS OEM - Cirílico "
+
+#~ msgid "EUC-JP Double-Byte Edition of Windows "
+#~ msgstr "EUC-JP edición doble byte de Windows "
+
+#~ msgid "Unicode/Chinese Simplified "
+#~ msgstr "Unicode/Chino simplificado "
+
+#~ msgid "Unicode 8 bit "
+#~ msgstr "Unicode 8 bit "
+
+#~ msgid "[EMPTY]"
+#~ msgstr "[VACIO]"
+
+#~ msgid "Cannot check for new version!"
+#~ msgstr "¡No se puede comprobar nueva versión!"
+
+#~ msgid "MadEdit is already the newest version."
+#~ msgstr "Esta es la versión más reciente de MadEdit."
+
+#~ msgid "MadEdit - New version available"
+#~ msgstr "MadEdit - Nueva versión disponible"
+
 #~ msgid ""
-#~ "Replace A&ll in\n"
-#~ "Current"
-#~ msgstr "Buscar &siguiente"
+#~ "MadEdit %s is available. \n"
+#~ "Click OK to open the download page."
+#~ msgstr ""
+#~ "MadEdit %s está disponible. \n"
+#~ "Haga clic en Aceptar para abrir la página de descarga."
 
-#, fuzzy
-#~ msgid "Results\t>>"
-#~ msgstr "%d resultados"
+#~ msgid "every day"
+#~ msgstr "todos los días"
+
+#~ msgid "every week"
+#~ msgstr "todas las semanas"
+
+#~ msgid "every month"
+#~ msgstr "todos los meses"
+
+#~ msgid "never"
+#~ msgstr "nunca"
+
+#~ msgid "Copy as Raw Bytes"
+#~ msgstr "Copiar como bytes puros"
+
+#~ msgid "Copy as Regular Text"
+#~ msgstr "Copiar como texto normal"
+
+#~ msgid "Copy as Hex String with Spaces"
+#~ msgstr "Copiar como hexadecimal con espacios"
+
+#~ msgid "Never"
+#~ msgstr "Nunca"
+
+#~ msgid "According To Copying Behavior"
+#~ msgstr "Según el comportamiento de copia"
+
+#~ msgid "If Possible"
+#~ msgstr "Si es posible"
+
+#~ msgid "Translator for Japanese"
+#~ msgstr "Traducción al Japonés"
+
+#~ msgid "Translator for Italian"
+#~ msgstr "Traducción al Italiano"
+
+#~ msgid "Translator for Spanish"
+#~ msgstr "Traducción al Español"
+
+#~ msgid "Translator for Traditional Chinese"
+#~ msgstr "Traducción al Chino Tradicional"
+
+#~ msgid "Translator for Russian"
+#~ msgstr "Traducción al Ruso"
+
+#~ msgid "Patch submitter for MadEdit/MadEdit"
+#~ msgstr "Remitente de parche para MadEdit/MadEdit"
+
+#~ msgid "Creator of MadEdit package in AUR"
+#~ msgstr "Creador del paquete MadEdit en AUR"
+
+#~ msgid "Creator of Gentoo package MadEdit"
+#~ msgstr "Creador del paquete Gentoo MadEdit"
+
+#~ msgid "Close All under &Folder..."
+#~ msgstr "Cerrar todo en la carpeta..."
+
+#~ msgid "Close all files in given folder and in all the subfolders"
+#~ msgstr ""
+#~ "Cerrar todos los archivos en la carpeta dada y en todas las subcarpetas"
+
+#~ msgid "Close all files at the left side of current one"
+#~ msgstr "Cerrar todos los archivos a la izquierda del actual"
+
+#~ msgid "Close all files at the right side of current one"
+#~ msgstr "Cerrar todos los archivos a la derecha del actual"
+
+#~ msgid "Copy File Pat&h"
+#~ msgstr "Copiar &ruta de archivo"
+
+#~ msgid "Copy file name to clipboard"
+#~ msgstr "Copia nombre de archivo al portapapeles"
+
+#~ msgid "Copy Containing &Directory"
+#~ msgstr "Copiar directorio que contiene"
+
+#~ msgid "Copy containing directory to clipboard"
+#~ msgstr "Copia directorio que contiene al portapapeles"
+
+#~ msgid "Paste with Over&writing"
+#~ msgstr "Pegar con Sobreescritura"
+
+#~ msgid "Overwrite data from the Clipboard"
+#~ msgstr "Sobrescribe desde Portapapeles"
+
+#~ msgid "To U&pperCase"
+#~ msgstr "A mayúsculas"
+
+#~ msgid "Clear all bookmarks from current file"
+#~ msgstr "Borrar todos los marcadores de archivo actual"
+
+#~ msgid "[@]"
+#~ msgstr "[@]"
+
+#~ msgid "[ABCDE]"
+#~ msgstr "[ABCDE]"
+
+#~ msgid "[FGHIJ]"
+#~ msgstr "[FGHIJ]"
+
+#~ msgid "[KLMNO]"
+#~ msgstr "[KLMNO]"
+
+#~ msgid "[PQRST]"
+#~ msgstr "[PQRST]"
+
+#~ msgid "[UVWXYZ]"
+#~ msgstr "[UVWXYZ]"
+
+#~ msgid "&Check for updates..."
+#~ msgstr "Comprobar actualizaciones..."
+
+#~ msgid "Check for new versions of MadEdit"
+#~ msgstr "Comprueba si hay actualizaciones de MadEdit"
+
+#~ msgid "Show about dialog"
+#~ msgstr "Mostrar diálogo Acerca de..."
 
 #~ msgid "No Line Wrap"
 #~ msgstr "No ajustar líneas"
@@ -4381,18 +4718,17 @@ msgstr ""
 #~ msgid "Wrap Lines by Max Columns"
 #~ msgstr "Ajustar líneas por columna"
 
-#~ msgid "To U&pperCase"
-#~ msgstr "A mayúsculas"
+#~ msgid "Close all files in this foler and in all the subfolers:"
+#~ msgstr "Cerrar todos los archivos en esta carpeta y todas las subcarpetas:"
 
-#~ msgid "Java"
-#~ msgstr "Java"
+#~ msgid "MadEdit, a cross-platform Text/Hex Editor"
+#~ msgstr "MadEdit, un editor de Texto/Hexadecimal multiplataforma"
 
-#, fuzzy
-#~ msgid "Whitesmith"
-#~ msgstr "Blanco"
+#~ msgid "Press OK to view the license online version.\n"
+#~ msgstr "Pulse Aceptar para ver la versión en línea de la licencia.\n"
 
-#~ msgid "Control Characters"
-#~ msgstr "Caracteres de control"
+#~ msgid "No_Block"
+#~ msgstr "No_Bloquear"
 
 #~ msgid "Basic Latin"
 #~ msgstr "Latín básico"
@@ -4418,17 +4754,11 @@ msgstr ""
 #~ msgid "Greek and Coptic"
 #~ msgstr "Griego y Copto"
 
-#~ msgid "Cyrillic Supplement"
-#~ msgstr "Suplemento Cirílico"
-
 #~ msgid "Armenian"
 #~ msgstr "Armenio"
 
 #~ msgid "Syriac"
 #~ msgstr "Siríaco"
-
-#~ msgid "Arabic Supplement"
-#~ msgstr "Suplemento Árabe"
 
 #~ msgid "Thaana"
 #~ msgstr "Thaana"
@@ -4484,9 +4814,6 @@ msgstr ""
 #~ msgid "Ethiopic"
 #~ msgstr "Etíope"
 
-#~ msgid "Ethiopic Supplement"
-#~ msgstr "Suplemento Etíope"
-
 #~ msgid "Cherokee"
 #~ msgstr "Cherokee"
 
@@ -4499,47 +4826,11 @@ msgstr ""
 #~ msgid "Runic"
 #~ msgstr "Rúnico"
 
-#~ msgid "Tagalog"
-#~ msgstr "Tagalog"
-
-#~ msgid "Hanunoo"
-#~ msgstr "Hanunoo"
-
-#~ msgid "Buhid"
-#~ msgstr "Buhid"
-
-#~ msgid "Tagbanwa"
-#~ msgstr "Tagbanwa"
-
 #~ msgid "Khmer"
 #~ msgstr "Khmer"
 
 #~ msgid "Mongolian"
 #~ msgstr "Mongoliano"
-
-#~ msgid "Limbu"
-#~ msgstr "Limbu"
-
-#~ msgid "Tai Le"
-#~ msgstr "ai Le"
-
-#~ msgid "New Tai Lue"
-#~ msgstr "Nuevo Tai Lue"
-
-#~ msgid "Khmer Symbols"
-#~ msgstr "Símbolos Khmer"
-
-#~ msgid "Buginese"
-#~ msgstr "Buginese"
-
-#~ msgid "Phonetic Extensions"
-#~ msgstr "Extensiones fonéticas"
-
-#~ msgid "Phonetic Extensions Supplement"
-#~ msgstr "Suplemento de extensiones fonéticas"
-
-#~ msgid "Combining Diacritical Marks Supplement"
-#~ msgstr "Combinar suplemento de marcas diacríticas"
 
 #~ msgid "Latin Extended Additional"
 #~ msgstr "Latin extendido adicional"
@@ -4558,9 +4849,6 @@ msgstr ""
 
 #~ msgid "Letterlike Symbols"
 #~ msgstr "Letras como símbolos"
-
-#~ msgid "Number Forms"
-#~ msgstr "Números de formas"
 
 #~ msgid "Arrows"
 #~ msgstr "Flechas"
@@ -4595,44 +4883,8 @@ msgstr ""
 #~ msgid "Dingbats"
 #~ msgstr "Simbolos"
 
-#~ msgid "Miscellaneous Mathematical Symbols-A"
-#~ msgstr "Símbolos matemáticos misceláneos A"
-
-#~ msgid "Supplemental Arrows-A"
-#~ msgstr "Flechas complementarias A"
-
 #~ msgid "Braille Patterns"
 #~ msgstr "Patrones braille"
-
-#~ msgid "Supplemental Arrows-B"
-#~ msgstr "Flechas complementarias B"
-
-#~ msgid "Miscellaneous Mathematical Symbols-B"
-#~ msgstr "Símbolos matemáticos misceláneos B"
-
-#~ msgid "Supplemental Mathematical Operators"
-#~ msgstr "Operadores matemáticos suplementarios"
-
-#~ msgid "Miscellaneous Symbols and Arrows"
-#~ msgstr "Símbolos y flechas misceláneos"
-
-#~ msgid "Glagolitic"
-#~ msgstr "Glagolítica"
-
-#~ msgid "Coptic"
-#~ msgstr "Copto"
-
-#~ msgid "Georgian Supplement"
-#~ msgstr "Suplemento Georgiano"
-
-#~ msgid "Tifinagh"
-#~ msgstr "Tifinagh"
-
-#~ msgid "Ethiopic Extended"
-#~ msgstr "Etíope extendido"
-
-#~ msgid "Supplemental Punctuation"
-#~ msgstr "Puntuacion suplementaria"
 
 #~ msgid "CJK Radicals Supplement"
 #~ msgstr "Suplementos CJK radicales"
@@ -4664,12 +4916,6 @@ msgstr ""
 #~ msgid "Bopomofo Extended"
 #~ msgstr "Bopomofo extendido"
 
-#~ msgid "CJK Strokes"
-#~ msgstr "Trazos CJK"
-
-#~ msgid "Katakana Phonetic Extensions"
-#~ msgstr "Extensiones fonéticas Katakana"
-
 #~ msgid "Enclosed CJK Letters and Months"
 #~ msgstr "Letras y meses CJK cerrados"
 
@@ -4679,9 +4925,6 @@ msgstr ""
 #~ msgid "CJK Unified Ideographs Extension A"
 #~ msgstr "Ideogramas CJK Unificado Extensión A"
 
-#~ msgid "Yijing Hexagram Symbols"
-#~ msgstr "Símbolos de hexagrama Yijing"
-
 #~ msgid "CJK Unified Ideographs"
 #~ msgstr "Ideogramas CJK Unificado"
 
@@ -4690,12 +4933,6 @@ msgstr ""
 
 #~ msgid "Yi Radicals"
 #~ msgstr "Radicales Yi"
-
-#~ msgid "Modifier Tone Letters"
-#~ msgstr "Modificador de tono de letras"
-
-#~ msgid "Syloti Nagri"
-#~ msgstr "Syloti Nagri"
 
 #~ msgid "Hangul Syllables"
 #~ msgstr "Sílabas Hangul"
@@ -4721,12 +4958,6 @@ msgstr ""
 #~ msgid "Arabic Presentation Forms-A"
 #~ msgstr "Formas de presentación alfabética"
 
-#~ msgid "Variation Selectors"
-#~ msgstr "Selectores de Variación"
-
-#~ msgid "Vertical Forms"
-#~ msgstr "Formas verticales"
-
 #~ msgid "Combining Half Marks"
 #~ msgstr "Combinar la mitad de las marcas"
 
@@ -4739,23 +4970,11 @@ msgstr ""
 #~ msgid "Arabic Presentation Forms-B"
 #~ msgstr "Presentación árabe Formas-B"
 
-#~ msgid "Halfwidth and Fullwidth Forms"
-#~ msgstr "Formas de ancho medio y ancho completo"
-
 #~ msgid "Specials"
 #~ msgstr "Especiales"
 
-#~ msgid "Linear B Syllabary"
-#~ msgstr "Silabario Lineal B"
-
-#~ msgid "Linear B Ideograms"
-#~ msgstr "Ideogramas Lineal B "
-
-#~ msgid "Aegean Numbers"
-#~ msgstr "Números del Egeo"
-
-#~ msgid "Ancient Greek Numbers"
-#~ msgstr "Números Griegos antiguos"
+#~ msgid "Halfwidth and Fullwidth Forms"
+#~ msgstr "Formas de ancho medio y ancho completo"
 
 #~ msgid "Old Italic"
 #~ msgstr "Curiva antigua"
@@ -4763,38 +4982,14 @@ msgstr ""
 #~ msgid "Gothic"
 #~ msgstr "Gótico"
 
-#~ msgid "Ugaritic"
-#~ msgstr "Ugaritic"
-
-#~ msgid "Old Persian"
-#~ msgstr "Persa antiguo"
-
 #~ msgid "Deseret"
 #~ msgstr "Deseret"
-
-#~ msgid "Shavian"
-#~ msgstr "Shavian"
-
-#~ msgid "Osmanya"
-#~ msgstr "Osmanya"
-
-#~ msgid "Cypriot Syllabary"
-#~ msgstr "Silabario chipriota"
-
-#~ msgid "Kharoshthi"
-#~ msgstr "Kharoshthi"
 
 #~ msgid "Byzantine Musical Symbols"
 #~ msgstr "Símbolos musicales Bizantinos"
 
 #~ msgid "Musical Symbols"
 #~ msgstr "Símbolos musicales"
-
-#~ msgid "Ancient Greek Musical Notation"
-#~ msgstr "Antigua notación musical Griega"
-
-#~ msgid "Tai Xuan Jing Symbols"
-#~ msgstr "Símbolos Tai Xuan Jing"
 
 #~ msgid "Mathematical Alphanumeric Symbols"
 #~ msgstr "Símbolos alfanuméricos matemáticos"
@@ -4808,8 +5003,41 @@ msgstr ""
 #~ msgid "Tags"
 #~ msgstr "Etiquetas"
 
-#~ msgid "Variation Selectors Supplement"
-#~ msgstr "Selectores de variación de suplemento"
+#~ msgid "Cyrillic Supplement"
+#~ msgstr "Suplemento Cirílico"
+
+#~ msgid "Tagalog"
+#~ msgstr "Tagalog"
+
+#~ msgid "Hanunoo"
+#~ msgstr "Hanunoo"
+
+#~ msgid "Buhid"
+#~ msgstr "Buhid"
+
+#~ msgid "Tagbanwa"
+#~ msgstr "Tagbanwa"
+
+#~ msgid "Miscellaneous Mathematical Symbols-A"
+#~ msgstr "Símbolos matemáticos misceláneos A"
+
+#~ msgid "Supplemental Arrows-A"
+#~ msgstr "Flechas complementarias A"
+
+#~ msgid "Supplemental Arrows-B"
+#~ msgstr "Flechas complementarias B"
+
+#~ msgid "Miscellaneous Mathematical Symbols-B"
+#~ msgstr "Símbolos matemáticos misceláneos B"
+
+#~ msgid "Supplemental Mathematical Operators"
+#~ msgstr "Operadores matemáticos suplementarios"
+
+#~ msgid "Katakana Phonetic Extensions"
+#~ msgstr "Extensiones fonéticas Katakana"
+
+#~ msgid "Variation Selectors"
+#~ msgstr "Selectores de Variación"
 
 #~ msgid "Supplementary Private Use Area-A"
 #~ msgstr "Área-A de uso privado complementario"
@@ -4817,76 +5045,110 @@ msgstr ""
 #~ msgid "Supplementary Private Use Area-B"
 #~ msgstr "Área-B de uso privado complementario"
 
-#~ msgid "[@]"
-#~ msgstr "[@]"
+#~ msgid "Limbu"
+#~ msgstr "Limbu"
 
-#~ msgid "[ABCDE]"
-#~ msgstr "[ABCDE]"
+#~ msgid "Tai Le"
+#~ msgstr "ai Le"
 
-#~ msgid "[FGHIJ]"
-#~ msgstr "[FGHIJ]"
+#~ msgid "Khmer Symbols"
+#~ msgstr "Símbolos Khmer"
 
-#~ msgid "[KLMNO]"
-#~ msgstr "[KLMNO]"
+#~ msgid "Phonetic Extensions"
+#~ msgstr "Extensiones fonéticas"
 
-#~ msgid "[PQRST]"
-#~ msgstr "[PQRST]"
+#~ msgid "Miscellaneous Symbols and Arrows"
+#~ msgstr "Símbolos y flechas misceláneos"
 
-#~ msgid "[UVWXYZ]"
-#~ msgstr "[UVWXYZ]"
+#~ msgid "Yijing Hexagram Symbols"
+#~ msgstr "Símbolos de hexagrama Yijing"
 
-#~ msgid "Convert To CR/0D (&MAC)"
-#~ msgstr "Convertir a CR/0D (&MAC)"
+#~ msgid "Linear B Syllabary"
+#~ msgstr "Silabario Lineal B"
 
-#~ msgid "Convert To LF/0A (&UNIX)"
-#~ msgstr "Convertir a LF/0A (&UNIX)"
+#~ msgid "Linear B Ideograms"
+#~ msgstr "Ideogramas Lineal B "
 
-#~ msgid "Insert CR/0D (&MAC)"
-#~ msgstr "Insertar CR/0D (&MAC)"
+#~ msgid "Aegean Numbers"
+#~ msgstr "Números del Egeo"
 
-#~ msgid "Insert LF/0A (&UNIX)"
-#~ msgstr "Insertar LF/0A (&UNIX)"
+#~ msgid "Ugaritic"
+#~ msgstr "Ugaritic"
 
-#~ msgid "&Word Count"
-#~ msgstr "Contar palabras"
+#~ msgid "Shavian"
+#~ msgstr "Shavian"
 
-#, fuzzy
-#~ msgid "&About MadEdit..."
-#~ msgstr "&Acerca de wxMEdit..."
+#~ msgid "Osmanya"
+#~ msgstr "Osmanya"
 
-#~ msgid "Position: (you can input HexNumber: 0xNNN)"
-#~ msgstr "Posición: (puede introducir numero hexadecimal: 0xNNN)"
+#~ msgid "Cypriot Syllabary"
+#~ msgstr "Silabario chipriota"
 
-#~ msgid "Auto copy the mouse-selected text to clipboard  ("
-#~ msgstr "Auto copiar el texto seleccionado del ratón al portapapeles ("
+#~ msgid "Tai Xuan Jing Symbols"
+#~ msgstr "Símbolos Tai Xuan Jing"
 
-#~ msgid "Enable"
-#~ msgstr "Habilitar"
+#~ msgid "Variation Selectors Supplement"
+#~ msgstr "Selectores de variación de suplemento"
 
-#~ msgid "Disable"
-#~ msgstr "Deshabilitar"
+#~ msgid "Ancient Greek Musical Notation"
+#~ msgstr "Antigua notación musical Griega"
 
-#~ msgid "when pressing Ctrl key)"
-#~ msgstr "al pulsar la tecla Ctrl)"
+#~ msgid "Ancient Greek Numbers"
+#~ msgstr "Números Griegos antiguos"
 
-#~ msgid "[%d/%m/%Y] 24/02/2007"
-#~ msgstr "[%d/%m/%Y] 24/02/2007"
+#~ msgid "Arabic Supplement"
+#~ msgstr "Suplemento Árabe"
 
-#~ msgid "Word Count (Selected Text)"
-#~ msgstr "Contar palabras (Texto Seleccionado)"
+#~ msgid "Buginese"
+#~ msgstr "Buginese"
 
-#, fuzzy
-#~ msgid "About MadEdit"
-#~ msgstr "Acerca de wxMEdit"
+#~ msgid "CJK Strokes"
+#~ msgstr "Trazos CJK"
 
-#~ msgid "Paper size"
-#~ msgstr "Tamaño del papel"
+#~ msgid "Combining Diacritical Marks Supplement"
+#~ msgstr "Combinar suplemento de marcas diacríticas"
 
-#~ msgid "No_Block"
-#~ msgstr "No_Bloquear"
+#~ msgid "Coptic"
+#~ msgstr "Copto"
 
-#~ msgid "NKo"
-#~ msgstr "NKo"
+#~ msgid "Ethiopic Extended"
+#~ msgstr "Etíope extendido"
+
+#~ msgid "Ethiopic Supplement"
+#~ msgstr "Suplemento Etíope"
+
+#~ msgid "Georgian Supplement"
+#~ msgstr "Suplemento Georgiano"
+
+#~ msgid "Glagolitic"
+#~ msgstr "Glagolítica"
+
+#~ msgid "Kharoshthi"
+#~ msgstr "Kharoshthi"
+
+#~ msgid "Modifier Tone Letters"
+#~ msgstr "Modificador de tono de letras"
+
+#~ msgid "New Tai Lue"
+#~ msgstr "Nuevo Tai Lue"
+
+#~ msgid "Old Persian"
+#~ msgstr "Persa antiguo"
+
+#~ msgid "Phonetic Extensions Supplement"
+#~ msgstr "Suplemento de extensiones fonéticas"
+
+#~ msgid "Supplemental Punctuation"
+#~ msgstr "Puntuacion suplementaria"
+
+#~ msgid "Syloti Nagri"
+#~ msgstr "Syloti Nagri"
+
+#~ msgid "Tifinagh"
+#~ msgstr "Tifinagh"
+
+#~ msgid "Vertical Forms"
+#~ msgstr "Formas verticales"
 
 #~ msgid "Balinese"
 #~ msgstr "Bali"
@@ -5110,11 +5372,11 @@ msgstr ""
 #~ msgid "Takri"
 #~ msgstr "Takri"
 
+#~ msgid "Paper size"
+#~ msgstr "Tamaño del papel"
+
 #~ msgid "Text"
 #~ msgstr "Texto"
-
-#~ msgid "Delimiter"
-#~ msgstr "Delimitador"
 
 #~ msgid "Space"
 #~ msgstr "Espacio"
@@ -5548,6 +5810,9 @@ msgstr ""
 #~ msgid "Wheat"
 #~ msgstr "Trigo"
 
+#~ msgid "White"
+#~ msgstr "Blanco"
+
 #~ msgid "WhiteSmoke"
 #~ msgstr "Humo Blanco"
 
@@ -5556,9 +5821,6 @@ msgstr ""
 
 #~ msgid "YellowGreen"
 #~ msgstr "Amarillo Verde"
-
-#~ msgid "Plain Text"
-#~ msgstr "Texto Plano"
 
 #~ msgid "ASCII Art"
 #~ msgstr "Arte ASCII"
@@ -5596,6 +5858,9 @@ msgstr ""
 #~ msgid "FreeBASIC"
 #~ msgstr "FreeBASIC"
 
+#~ msgid "Java"
+#~ msgstr "Java"
+
 #~ msgid "JavaScript"
 #~ msgstr "JavaScript"
 
@@ -5632,9 +5897,6 @@ msgstr ""
 #~ msgid "TeX/LaTeX"
 #~ msgstr "TeX/LaTeX"
 
-#~ msgid "UNIX Configuration"
-#~ msgstr "Configuración de UNIX"
-
 #~ msgid "UNIX Shell Script"
 #~ msgstr "UNIX Shell Script"
 
@@ -5647,8 +5909,11 @@ msgstr ""
 #~ msgid "Visual Basic"
 #~ msgstr "Visual Basic"
 
-#~ msgid "wxMEdit Syntax"
-#~ msgstr "Sintaxis de wxMEdit"
+#~ msgid "Windows Registry File"
+#~ msgstr "Archivo de Registro de Windows"
+
+#~ msgid "MadEdit Syntax"
+#~ msgstr "Sintaxis de MadEdit"
 
 #~ msgid "x86 Assembly"
 #~ msgstr "Ensamblador x86"
@@ -5656,195 +5921,23 @@ msgstr ""
 #~ msgid "XML"
 #~ msgstr "XML"
 
-#~ msgid "South European (ISO-8859-3)"
-#~ msgstr "Europa del sur (ISO-8859-3)"
-
-#~ msgid "North European (ISO-8859-4)"
-#~ msgstr "Europa del norte (ISO-8859-4)"
-
-#~ msgid "South-Eastern European (ISO-8859-16)"
-#~ msgstr "Europa sudoriental (ISO-8859-16)"
-
-#~ msgid "Windows Vietnamese (CP 1258)"
-#~ msgstr "Windows Vietnamita (CP 1258)"
-
-#~ msgid "CP437 Variant for ASCII Art"
-#~ msgstr "Variante CP437 para arte ASCII"
-
-#~ msgid "Windows/DOS OEM - Latin 1 (CP 850)"
-#~ msgstr "Windows/DOS OEM - Latín 1 (CP 850)"
-
-#~ msgid "Windows/DOS OEM - Latin 2 (CP 852)"
-#~ msgstr "Windows/DOS OEM - Latin 2 (CP 852)"
-
-#~ msgid "Windows/DOS OEM - Cyrillic (CP 855)"
-#~ msgstr "Windows/DOS OEM - Cirílico (CP 855)"
-
-#~ msgid "Windows/DOS OEM - Cyrillic (CP 866)"
-#~ msgstr "Windows/DOS OEM - Cirílico (CP 856)"
-
-#~ msgid "Cyrillic (KOI8-R)"
-#~ msgstr "Cirílico (KOI8-R)"
-
-#~ msgid "Cyrillic (KOI8-U)"
-#~ msgstr "Cirílico (KOI8-U)"
-
-#~ msgid "EUC-JP Double-Byte Edition of Windows (CP 20932)"
-#~ msgstr "EUC-JP edición doble byte de Windows (CP 20932)"
-
-#~ msgid "Unicode/Chinese Simplified (GB18030)"
-#~ msgstr "Unicode/Chino simplificado (GB18030)"
-
-#~ msgid "Western Europe"
-#~ msgstr "Europa Occidental"
-
-#~ msgid "Central Europe"
-#~ msgstr "Europa Central"
-
-#~ msgid "South Europe"
-#~ msgstr "Europa del Sur"
-
-#~ msgid "North Europe"
-#~ msgstr "Europa del Norte"
-
 #~ msgid "East Asia"
 #~ msgstr "Asia del Este"
 
 #~ msgid "Southeast Asia"
 #~ msgstr "Asia del Sudeste"
 
-#~ msgid "Translator for Japanese"
-#~ msgstr "Traducción al japonés"
-
-#~ msgid "Translator for Spanish"
-#~ msgstr "Traducción al Español"
-
-#~ msgid "Translator for Traditional Chinese"
-#~ msgstr "Traducción al Chino Tradicional"
-
-#~ msgid "Translator for Russian"
-#~ msgstr "Traducción al Ruso"
-
-#~ msgid "Patch submitter for wxMEdit/MadEdit"
-#~ msgstr "Presentador de parche para wxMEdit/MadEdit"
-
-#~ msgid "Creator of wxmedit package in AUR"
-#~ msgstr "Creador del paquete wxmedit en AUR"
-
-#~ msgid "&Check for updates..."
-#~ msgstr "Comprobar actualizaciones..."
-
-#~ msgid "Check for new versions of wxMEdit"
-#~ msgstr "Comprueba si hay nuevas versiones de wxMEdit"
-
-#~ msgid "Show about dialog"
-#~ msgstr "Mostrar diálogo Acerca de..."
-
-#~ msgid "wxMEdit Print Preview"
-#~ msgstr "wxMEdit vista previa de impresión"
-
-#~ msgid "wxMEdit, a cross-platform Text/Hex Editor"
-#~ msgstr "wxMEdit, un editor de Texto/Hex multiplataforma"
-
-#~ msgid "Press OK to view the license online version.\n"
-#~ msgstr "Pulse Aceptar para ver la versión en línea de la licencia.\n"
-
-#~ msgid "End of selection reached, search from beginning."
-#~ msgstr "Fin de selección alcanzado, buscando desde el principio."
-
-#~ msgid "End of file reached, search from beginning."
-#~ msgstr "Fin de archivo alcanzado, buscando desde el principio."
-
-#~ msgid "The value of 'From' is incorrect."
-#~ msgstr "El valor de \"De\" es incorrecto."
-
-#~ msgid "The value of 'To' is incorrect."
-#~ msgstr "El valor de \"A\" es incorrecto."
-
-#~ msgid "Beginning of selection reached, search from end."
-#~ msgstr "Inicio de selección alcanzado, buscando desde el final."
-
-#~ msgid "Beginning of file reached, search from end."
-#~ msgstr "Inicio de archivo alcanzado, buscando desde el final."
-
-#~ msgid "End of selection reached, replace from beginning."
-#~ msgstr "Fin de selección alcanzado, reemplazando desde el principio."
-
-#~ msgid "End of file reached, replace from beginning."
-#~ msgstr "Fin de archivo alcanzado, reemplazando desde el principio."
-
-#~ msgid "Automatically check for new versions: "
-#~ msgstr "Comprobar automáticamente si hay nuevas versiones:"
-
-#~ msgid "Check &now"
-#~ msgstr "Comprobar ahora"
-
-#~ msgid "Check for new versions including &prereleases"
-#~ msgstr "Comprobar si hay nuevas versiones incluyendo prereleases"
-
-#~ msgid "0"
-#~ msgstr "0"
-
-#~ msgid "Behavior of copying in hex editing area:"
-#~ msgstr "Comportamiento de copia en el área de edición hexadecimal:"
-
-#~ msgid ">>"
-#~ msgstr ">>"
-
-#~ msgid "Misc"
-#~ msgstr "Diverso"
-
-#~ msgid "Select histories to purge"
-#~ msgstr "Seleccionar historial a purgar"
-
-#~ msgid "&Purge"
-#~ msgstr "&Purgar"
-
-#~ msgid "Characters (all)"
-#~ msgstr "Caracteres (todos)"
-
-#~ msgid "Copy as Raw Bytes"
-#~ msgstr "Copiar como bytes puros"
-
-#~ msgid "Copy as Regular Text"
-#~ msgstr "Copiar como texto normal"
-
-#~ msgid "Copy as Hex String"
-#~ msgstr "Copiar como cadena hexadecimal"
-
-#~ msgid "Copy as Hex String with Spaces"
-#~ msgstr "Copiar como cadena hexadecimal con espacios"
-
-#~ msgid "wxMEdit Printout"
-#~ msgstr "wxMEdit Printout"
-
-#~ msgid "wxMEdit - New version available"
-#~ msgstr "wxMEdit - Nueva versión disponible"
-
-#~ msgid ""
-#~ "wxMEdit %s is available. \n"
-#~ "Click OK to open the download page."
-#~ msgstr ""
-#~ "wxMEdit %s está disponible. \n"
-#~ "Haga clic en Aceptar para abrir la página de descarga."
-
-#~ msgid "wxMEdit is already the newest version."
-#~ msgstr "Es la versión más reciente de wxMEdit ."
-
-#~ msgid "every day"
-#~ msgstr "cada día"
-
-#~ msgid "every week"
-#~ msgstr "cada semana"
-
-#~ msgid "every month"
-#~ msgstr "cada mes"
-
-#~ msgid "never"
-#~ msgstr "nunca"
-
-#~ msgid "[EMPTY]"
-#~ msgstr "[VACIO]"
-
 #~ msgid "Press OK to visit the license online version.\n"
 #~ msgstr "Pulse Aceptar para visitar la versión en línea de la licencia.\n"
+
+#~ msgid "Auto copy the mouse-selected text to clipboard  ("
+#~ msgstr "Auto copiar el texto seleccionado del ratón al portapapeles ("
+
+#~ msgid "Enable"
+#~ msgstr "Habilitar"
+
+#~ msgid "Disable"
+#~ msgstr "Deshabilitar"
+
+#~ msgid "when pressing Ctrl key)"
+#~ msgstr "al pulsar la tecla Ctrl)"
