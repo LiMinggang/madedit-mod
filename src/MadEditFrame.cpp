@@ -36,6 +36,7 @@
 #include "MadSearchReplaceDialog.h"
 #include "MadFindInFilesDialog.h"
 #include "MadOptionsDialog.h"
+#include "MadSourceFormatDialog.h"
 #include "MadHighlightingDialog.h"
 #ifdef __WXMSW__
 	#include "MadFileAssociationDialog.h"
@@ -7944,7 +7945,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 	size_t lang_count = g_LanguageString.GetCount();
 	ScanForLocales();
 
-	if( g_OptionsDialog == nullptr ) { g_OptionsDialog = new MadOptionsDialog( this ); }
+	if (g_OptionsDialog == nullptr) { g_OptionsDialog = new MadOptionsDialog(this); }
 	else
 	{
 		// update languages
@@ -9533,6 +9534,8 @@ void MadEditFrame::OnWindowWindowActivate( wxCommandEvent& event )
 
 void MadEditFrame::OnHelpAbout( wxCommandEvent& event )
 {
+	MadSourceFormatDialog test(this);
+	test.ShowModal();
 	MadAboutDialog dlg( this );
 	dlg.WxMemoAbout->AppendText( g_MadEdit_Version + wxT( "\n" ) +
 								 g_MadEditMod_URL + wxT( "\n\n" ) +

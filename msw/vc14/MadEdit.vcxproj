@@ -267,6 +267,7 @@
     <ClInclude Include="..\..\src\MadSaveQueryDialog.h" />
     <ClInclude Include="..\..\src\MadSearchReplaceDialog.h" />
     <ClInclude Include="..\..\src\MadSortDialog.h" />
+    <ClInclude Include="..\..\src\MadSourceFormatDialog.h" />
     <ClInclude Include="..\..\src\MadUtils.h" />
     <ClInclude Include="..\..\src\MadWinListDialog.h" />
     <ClInclude Include="..\..\src\MadWordCountDialog.h" />
@@ -373,6 +374,7 @@
     <ClCompile Include="..\..\src\MadSaveQueryDialog.cpp" />
     <ClCompile Include="..\..\src\MadSearchReplaceDialog.cpp" />
     <ClCompile Include="..\..\src\MadSortDialog.cpp" />
+    <ClCompile Include="..\..\src\MadSourceFormatDialog.cpp" />
     <ClCompile Include="..\..\src\MadUtils.cpp" />
     <ClCompile Include="..\..\src\MadWinListDialog.cpp" />
     <ClCompile Include="..\..\src\MadWordCountDialog.cpp" />

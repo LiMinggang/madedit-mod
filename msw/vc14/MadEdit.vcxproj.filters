@@ -297,6 +297,9 @@
     <ClInclude Include="..\..\src\resource.h">
       <Filter>Header files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\MadSourceFormatDialog.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\MadAboutDialog.cpp">
@@ -592,6 +595,9 @@
     </ClCompile>
     <ClCompile Include="..\..\charset-detector\src\LangModels\LangVietnameseModel.cpp">
       <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadSourceFormatDialog.cpp">
+      <Filter>Source files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
