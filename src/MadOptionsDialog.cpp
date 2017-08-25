@@ -379,9 +379,9 @@ MadOptionsDialog::wxCmdEvtHandlerMap_t MadOptionsDialog::m_checkbox_evt_map[] =
 	{ ID_WXCHECKBOXMOUSESELECTTOCOPY, &MadOptionsDialog::OnMouseAutoCopyClicked },
 
 	{ ID_WXCHECKBOXAUTOCOMPLETEPAIR, &MadOptionsDialog::OnAutoCompletePairClicked },
-	{ ID_WXCHECKBREAKLINES, &MadOptionsDialog::OnFormattingBreakLinesClick },
+//	{ ID_WXCHECKBREAKLINES, &MadOptionsDialog::OnFormattingBreakLinesClick },
 	{ ID_WXCHECKBOXENABLEAUTOSAVE, &MadOptionsDialog::OnEnableAutoSaveClick },
-	{ ID_WXCHECKBREAKBLOCKS, &MadOptionsDialog::OnPaddingBreakBlocksClick },
+//	{ ID_WXCHECKBREAKBLOCKS, &MadOptionsDialog::OnPaddingBreakBlocksClick },
 };
 
 //----------------------------------------------------------------------------
@@ -419,7 +419,7 @@ MadOptionsDialog::MadOptionsDialog( wxWindow *parent, wxWindowID id, const wxStr
 	Bind( wxEVT_LISTBOX, &MadOptionsDialog::WxListBoxKeysSelected , this, ID_WXLISTBOXKEYS );
 
 	Bind( wxEVT_TREE_SEL_CHANGED, &MadOptionsDialog::WxTreeCtrl1SelChanged , this, ID_WXTREECTRL1 );
-	Bind( wxEVT_RADIOBOX, &MadOptionsDialog::OnRadioBoxBracketStyleClick , this, ID_WXRADIOBOXBRACKETSTYLE );
+	//Bind( wxEVT_RADIOBOX, &MadOptionsDialog::OnRadioBoxBracketStyleClick , this, ID_WXRADIOBOXBRACKETSTYLE );
 }
 
 MadOptionsDialog::~MadOptionsDialog()
@@ -881,6 +881,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxStaticText21 = new wxStaticText( WxNoteBookPage5, ID_WXSTATICTEXT21, _( "BitMap" ), wxPoint( 340, 9 ), wxDefaultSize, 0, wxT( "WxStaticText21" ) );
 	WxBoxSizer32->Add( WxStaticText21, 0, wxALIGN_CENTER | wxALL, 5 );
 #endif
+#if 0
 	WxNoteBookPage6 = new wxPanel( WxNotebook1, ID_WXNOTEBOOKPAGE6, wxPoint( 4, 24 ), wxSize( 792, 464 ) );
 	WxNotebook1->AddPage( WxNoteBookPage6, _( "Source Formatter" ) );
 	WxBoxSizer34 = new wxBoxSizer( wxHORIZONTAL );
@@ -1237,6 +1238,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxChoiceReferenceAlign->SetSelection( 0 );
 	WxBoxSizer46->Add( WxChoiceReferenceAlign, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 5 );
 	SET_CONTROLPARENT( WxChoiceReferenceAlign );
+#endif
 	WxBoxSizer2 = new wxBoxSizer( wxHORIZONTAL );
 	WxBoxSizer1->Add( WxBoxSizer2, 0, wxALIGN_CENTER | wxALL, 5 );
 	WxButtonOK = new wxButton( this, ID_WXBUTTONOK, _( "&OK" ), wxPoint( 5, 5 ), wxSize( 85, 30 ), 0, wxDefaultValidator, wxT( "WxButtonOK" ) );
@@ -1281,7 +1283,8 @@ void MadOptionsDialog::CreateGUIControls( void )
 	WxPopupMenuPrintMark->AppendSeparator();
 	WxPopupMenuPrintMark->Append( ID_MNU___D__DATE_1116, _( "[%d] &Date" ), wxT( "" ), wxITEM_NORMAL );
 	WxPopupMenuPrintMark->Append( ID_MNU___T__TIME_1117, _( "[%t] &Time" ), wxT( "" ), wxITEM_NORMAL );
-	WxAuiNoteBookPage6 = new wxPanel( WxAuiNotebook1, ID_WXAUINOTEBOOKPAGE6, wxPoint( 4, 24 ), wxSize( 792, 464 ) );
+#if 0
+	WxAuiNoteBookPage6 = new wxPanel( WxAuiNotebook1, ID_WXAUINOTEBOOKPAGE6, wxPoint( 4, 24 ), wxSize( 792, 464 ) );	
 	WxAuiNotebook1->AddPage( WxAuiNoteBookPage6, wxT( "XML" ) );
 	WxBoxSizer48 = new wxBoxSizer( wxVERTICAL );
 	WxAuiNoteBookPage6->SetSizer( WxBoxSizer48 );
@@ -1300,6 +1303,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	SET_CONTROLPARENT( WxEditXmlIndentSize );
 	WxStaticText29 = new wxStaticText( WxAuiNoteBookPage6, ID_WXSTATICTEXT29, _( "Indentation size(in spaces)" ), wxPoint( 55, 6 ), wxDefaultSize, 0, wxT( "WxStaticText29" ) );
 	WxBoxSizer50->Add( WxStaticText29, 0, wxALIGN_LEFT | wxEXPAND | wxALL, 2 );
+#endif
 	SetTitle( _( "Options" ) );
 	SetIcon( wxNullIcon );
 	GetSizer()->Layout();
@@ -1668,7 +1672,7 @@ void MadOptionsDialog::LoadOptions( void )
 		WxTreeCtrl1->Unselect();
 		WxTreeCtrl1->SelectItem( selid, true );
 	}
-
+#if 0
 	cfg->SetPath( wxT( "/astyle" ) );
 	WxRadioBoxBracketStyle->SetSelection( cfg->ReadLong( wxT( "style" ), aspsAllman ) );
 	WxCheckAttachClasses->SetValue( cfg->ReadBool( wxT( "attach_classes" ), false ) );
@@ -1766,6 +1770,7 @@ void MadOptionsDialog::LoadOptions( void )
 	cfg->SetPath( wxT( "/xml" ) );
 	WxEditXmlIndentSize->SetValue( wxString() << cfg->ReadLong( wxT( "indentation" ), 4 ) );
 	WxEditXMLversion->SetValue( cfg->Read( wxT( "version" ), wxString( wxT( "1.0" ) ) ) );
+#endif
 	cfg->SetPath( oldpath );
 }
 
@@ -2217,6 +2222,7 @@ void MadOptionsDialog::OnAutoCompletePairClicked( wxCommandEvent& event )
 	WxCheckBoxInsertPairForSelection->Enable( WxCheckBoxAutoCompletePair->GetValue() );
 }
 
+#if 0
 void MadOptionsDialog::OnRadioBoxBracketStyleClick( wxCommandEvent& event )
 {
 	long style = WxRadioBoxBracketStyle->GetSelection();
@@ -2274,7 +2280,7 @@ void MadOptionsDialog::OnPaddingBreakBlocksClick( wxCommandEvent& event )
 	bool bb =  WxCheckBreakBlocks->GetValue();
 	WxCheckBreakBlocksAll->Enable( bb );
 }
-
+#endif
 void MadOptionsDialog::OnEnableAutoSaveClick( wxCommandEvent& event )
 {
 	WxEditAutoSaveTimeout->Enable( WxCheckBoxEnableAutoSave->GetValue() );

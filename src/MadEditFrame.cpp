@@ -1762,6 +1762,7 @@ MadEditFrame::wxCmdEvtHandlerMap_t MadEditFrame::m_menu_evt_map[] =
 #ifdef __WXMSW__
 	{ menuFileAssociation, &MadEditFrame::OnToolsFileAssociation },
 #endif
+	{ menuSourceFormator, &MadEditFrame::OnToolsSourceFormator },
 	{ menuPurgeHistories, &MadEditFrame::OnToolsPurgeHistories },
 	{ menuRunTempMacro, &MadEditFrame::OnToolsRunTempMacro },
 	{ menuRunMacroFile, &MadEditFrame::OnToolsRunMacroFile },
@@ -2365,6 +2366,7 @@ CommandData CommandTable[] =
 #ifdef __WXMSW__
 	{ 0,               1, menuFileAssociation,    wxT( "menuFileAssociation" ),    _( "&File Type Associations..." ),                    wxT( "" ),       wxITEM_NORMAL,    filehandle_xpm_idx, 0,                _( "Change file type associations" ), 0, 0, 0, false},
 #endif
+	{ 0,               1, menuSourceFormator,     wxT( "menuSourceFormator" ),     _( "&Source Formator Settings..." ),                  wxT( "" ),       wxITEM_NORMAL,    -1, 0,                    _( "Change source formator settings" ), 0, 0, 0, false},
 	{ 0,               1, menuPurgeHistories,     wxT( "menuPurgeHistories" ),     _( "&Purge Histories..." ),                           wxT( "" ),       wxITEM_NORMAL,    footprint_xpm_idx, 0,                 _( "Clearing out your history" ), 0, 0, 0, false},
 	{ 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0, 0, 0, 0, false},
 	{ 0,               1, menuByteOrderMark,      wxT( "menuByteOrderMark" ),      _( "Has Unicode BOM (Byte-Order Mark)" ),             0,             wxITEM_NORMAL,    -1, &g_Menu_Tools_BOM,                0, 0, 0, 0, false},
@@ -8455,6 +8457,14 @@ void MadEditFrame::OnToolsFileAssociation( wxCommandEvent& event )
 }
 #endif
 
+void MadEditFrame::OnToolsSourceFormator( wxCommandEvent& event )
+{
+	// Hide Modaless Dialog
+	HideModalessDialogs();
+	MadSourceFormatDialog sfDialog(this);
+	sfDialog.ShowModal();
+}
+
 void MadEditFrame::OnToolsPurgeHistories( wxCommandEvent& event )
 {
 	MadPurgeHistoryDialog dlg( this );
@@ -9534,8 +9544,6 @@ void MadEditFrame::OnWindowWindowActivate( wxCommandEvent& event )
 
 void MadEditFrame::OnHelpAbout( wxCommandEvent& event )
 {
-	MadSourceFormatDialog test(this);
-	test.ShowModal();
 	MadAboutDialog dlg( this );
 	dlg.WxMemoAbout->AppendText( g_MadEdit_Version + wxT( "\n" ) +
 								 g_MadEditMod_URL + wxT( "\n\n" ) +
