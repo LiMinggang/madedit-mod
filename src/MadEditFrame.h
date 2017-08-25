@@ -376,7 +376,7 @@ private:
 #ifdef __WXMSW__
 	void OnToolsFileAssociation( wxCommandEvent& event );
 #endif
-	void OnToolsSourceFormator( wxCommandEvent& event );
+	void OnToolsSourceFormatter( wxCommandEvent& event );
 	void OnToolsPurgeHistories( wxCommandEvent& event );
 	void OnToolsRunTempMacro( wxCommandEvent& event );
 	void OnToolsRunMacroFile( wxCommandEvent& event );
@@ -745,7 +745,7 @@ enum   // menu id
 #ifdef __WXMSW__
 	menuFileAssociation,
 #endif
-	menuSourceFormator,
+	menuSourceFormatter,
 	menuPurgeHistories,
 	menuMadMacro,
 	menuRunTempMacro,
