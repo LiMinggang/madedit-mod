@@ -471,7 +471,7 @@ wxString FilterChar( const wxChar *ws )
 	return str;
 }
 
-#if defined(__WXMSW__) && (wxMAJOR_VERSION >= 3)
+#if 0 && defined(__WXMSW__) && (wxMAJOR_VERSION >= 3)
 #define SET_CONTROLPARENT(pWin) \
     {\
         LONG exStyle = wxGetWindowExStyle((wxWindow *)(pWin));\

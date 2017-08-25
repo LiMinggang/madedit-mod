@@ -546,7 +546,7 @@ void MadSourceFormatDialog::LoadSettings(void)
 	wxConfigBase *cfg = wxConfigBase::Get( false );
 	wxString oldpath = cfg->GetPath();
 	cfg->SetPath( wxT( "/MadEdit" ) );
-	long ll;
+//	long ll;
 	bool bb;
 	wxString ss;
 	cfg->SetPath( wxT( "/astyle" ) );
