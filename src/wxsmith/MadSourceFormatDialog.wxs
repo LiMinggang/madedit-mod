@@ -2,7 +2,6 @@
 <wxsmith>
 	<object class="wxDialog" name="MadSourceFormatDialog">
 		<title>Source Formator</title>
-		<size>400,380</size>
 		<maxsize>-1,-1</maxsize>
 		<id_arg>0</id_arg>
 		<style>wxCAPTION|wxCLOSE_BOX</style>
@@ -10,10 +9,11 @@
 			<orient>wxVERTICAL</orient>
 			<object class="sizeritem">
 				<object class="wxAuiNotebook" name="ID_AUINOTEBOOK1" variable="AuiNotebook1" member="yes">
-					<size>480,400</size>
+					<size>800,492</size>
 					<style>wxAUI_NB_TOP</style>
 					<object class="AuiNotebookPage">
-						<object class="wxPanel" name="ID_PANEL1" variable="Panel1" member="yes">
+						<object class="wxPanel" name="ID_PANEL1" variable="Panel1" member="no">
+							<size>792,464</size>
 							<style>0</style>
 							<object class="wxGridSizer" variable="GridSizer1" member="no">
 								<cols>2</cols>
@@ -71,7 +71,8 @@
 						<label>Style</label>
 					</object>
 					<object class="AuiNotebookPage">
-						<object class="wxPanel" name="ID_PANEL2" variable="Panel2" member="yes">
+						<object class="wxPanel" name="ID_PANEL2" variable="Panel2" member="no">
+							<size>792,464</size>
 							<style>0</style>
 							<object class="wxBoxSizer" variable="BoxSizer3" member="no">
 								<orient>wxVERTICAL</orient>
@@ -115,7 +116,8 @@
 						<label>Brackets</label>
 					</object>
 					<object class="AuiNotebookPage">
-						<object class="wxPanel" name="ID_PANEL3" variable="Panel3" member="yes">
+						<object class="wxPanel" name="ID_PANEL3" variable="Panel3" member="no">
+							<size>792,464</size>
 							<style>0</style>
 							<object class="wxBoxSizer" variable="BoxSizer4" member="no">
 								<orient>wxVERTICAL</orient>
@@ -282,14 +284,15 @@
 											<border>2</border>
 										</object>
 									</object>
-									<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+									<flag>wxALL|wxALIGN_LEFT</flag>
 								</object>
 							</object>
 						</object>
 						<label>Indentation</label>
 					</object>
 					<object class="AuiNotebookPage">
-						<object class="wxPanel" name="ID_PANEL4" variable="Panel4" member="yes">
+						<object class="wxPanel" name="ID_PANEL4" variable="Panel4" member="no">
+							<size>792,464</size>
 							<style>0</style>
 							<object class="wxBoxSizer" variable="BoxSizer5" member="no">
 								<orient>wxVERTICAL</orient>
@@ -415,7 +418,8 @@
 						<label>Formatting</label>
 					</object>
 					<object class="AuiNotebookPage">
-						<object class="wxPanel" name="ID_PANEL5" variable="Panel5" member="yes">
+						<object class="wxPanel" name="ID_PANEL5" variable="Panel5" member="no">
+							<size>792,-1</size>
 							<style>0</style>
 							<object class="wxBoxSizer" variable="BoxSizer9" member="no">
 								<orient>wxVERTICAL</orient>
@@ -498,7 +502,7 @@
 										<cols>4</cols>
 										<object class="sizeritem">
 											<object class="wxStaticText" name="wxID_ANY" variable="StaticText6" member="no">
-												<label>Reference alignment</label>
+												<label>Pointer alignment</label>
 											</object>
 											<flag>wxALL|wxEXPAND</flag>
 											<border>2</border>
@@ -545,7 +549,8 @@
 						<label>Padding</label>
 					</object>
 					<object class="AuiNotebookPage">
-						<object class="wxPanel" name="ID_PANEL6" variable="Panel6" member="yes">
+						<object class="wxPanel" name="ID_PANEL6" variable="Panel6" member="no">
+							<size>792,464</size>
 							<style>0</style>
 							<object class="wxBoxSizer" variable="BoxSizer8" member="no">
 								<orient>wxVERTICAL</orient>

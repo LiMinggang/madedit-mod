@@ -2,16 +2,16 @@
 #define MADSOURCEFORMATDIALOG_H
 
 //(*Headers(MadSourceFormatDialog)
-#include <wx/aui/aui.h>
+#include <wx/sizer.h>
+#include <wx/stattext.h>
+#include <wx/radiobox.h>
+#include <wx/textctrl.h>
 #include <wx/checkbox.h>
+#include <wx/spinctrl.h>
+#include <wx/aui/aui.h>
+#include <wx/panel.h>
 #include <wx/choice.h>
 #include <wx/dialog.h>
-#include <wx/panel.h>
-#include <wx/radiobox.h>
-#include <wx/sizer.h>
-#include <wx/spinctrl.h>
-#include <wx/stattext.h>
-#include <wx/textctrl.h>
 //*)
 
 #define MADEDIT_USE_MADEDIT
@@ -32,62 +32,56 @@ class MadSourceFormatDialog: public wxDialog
 		virtual ~MadSourceFormatDialog();
 
 		//(*Declarations(MadSourceFormatDialog)
-		wxAuiNotebook* AuiNotebook1;
-		wxCheckBox* CheckAddBraces;
+		wxCheckBox* CheckIndentAfterParens;
+		wxTextCtrl* EditMaxContinuationIndent;
 		wxCheckBox* CheckAddOneLineBraces;
-		wxCheckBox* CheckAttachClasses;
-		wxCheckBox* CheckAttachClosingWhile;
-		wxCheckBox* CheckAttachExternC;
-		wxCheckBox* CheckAttachInlines;
-		wxCheckBox* CheckAttachNamespaces;
-		wxCheckBox* CheckBreakAfterLogical;
-		wxCheckBox* CheckBreakBlocks;
-		wxCheckBox* CheckBreakBlocksAll;
+		wxCheckBox* CheckIndentPreprocCond;
+		wxCheckBox* CheckIndentPreprocBlock;
+		wxCheckBox* CheckPadHeader;
+		wxCheckBox* CheckAddBraces;
+		wxChoice* ChoicePointerAlign;
+		wxCheckBox* CheckIndentClasses;
+		wxSpinCtrl* SpinMinConditionalEvent;
+		wxCheckBox* CheckForceUseTabs;
+		wxChoice* ChoiceReferenceAlign;
+		wxCheckBox* CheckDelEmptyLine;
 		wxCheckBox* CheckBreakClosing;
+		wxCheckBox* CheckBreakAfterLogical;
+		wxCheckBox* CheckAttachInlines;
+		wxCheckBox* CheckAttachExternC;
+		wxCheckBox* CheckRemoveBraces;
+		wxCheckBox* CheckIndentLabels;
+		wxCheckBox* CheckKeepComplex;
+		wxCheckBox* CheckIndentPreprocDefine;
+		wxCheckBox* CheckUseTab;
+		wxCheckBox* CheckKeepBlocks;
 		wxCheckBox* CheckBreakElseIfs;
+		wxCheckBox* CheckIndentCol1Comments;
+		wxCheckBox* CheckPadParensOut;
+		wxCheckBox* CheckPadParensIn;
+		wxCheckBox* CheckIndentSwitches;
+		wxCheckBox* CheckFillEmptyLines;
+		wxCheckBox* CheckRemoveCommentPrefix;
 		wxCheckBox* CheckBreakLines;
 		wxCheckBox* CheckCloseTemplates;
-		wxCheckBox* CheckConvertTabs;
-		wxCheckBox* CheckDelEmptyLine;
-		wxCheckBox* CheckFillEmptyLines;
-		wxCheckBox* CheckForceUseTabs;
-		wxCheckBox* CheckIndentAfterParens;
-		wxCheckBox* CheckIndentCase;
-		wxCheckBox* CheckIndentClasses;
-		wxCheckBox* CheckIndentCol1Comments;
-		wxCheckBox* CheckIndentLabels;
-		wxCheckBox* CheckIndentModifiers;
-		wxCheckBox* CheckIndentNamespaces;
-		wxCheckBox* CheckIndentPreprocBlock;
-		wxCheckBox* CheckIndentPreprocCond;
-		wxCheckBox* CheckIndentPreprocDefine;
-		wxCheckBox* CheckIndentSwitches;
-		wxCheckBox* CheckKeepBlocks;
-		wxCheckBox* CheckKeepComplex;
-		wxCheckBox* CheckPadHeader;
 		wxCheckBox* CheckPadOperators;
-		wxCheckBox* CheckPadParensIn;
-		wxCheckBox* CheckPadParensOut;
-		wxCheckBox* CheckRemoveBraces;
-		wxCheckBox* CheckRemoveCommentPrefix;
-		wxCheckBox* CheckUnpadParens;
-		wxCheckBox* CheckUseTab;
-		wxChoice* ChoicePointerAlign;
-		wxChoice* ChoiceReferenceAlign;
-		wxPanel* Panel1;
-		wxPanel* Panel2;
-		wxPanel* Panel3;
-		wxPanel* Panel4;
-		wxPanel* Panel5;
-		wxPanel* Panel6;
+		wxCheckBox* CheckConvertTabs;
 		wxRadioBox* RadioBoxBracketStyle;
+		wxAuiNotebook* AuiNotebook1;
 		wxSpinCtrl* SpinIndentation;
-		wxSpinCtrl* SpinMinConditionalEvent;
-		wxTextCtrl* EditIndentContinuation;
-		wxTextCtrl* EditMaxContinuationIndent;
+		wxCheckBox* CheckAttachClasses;
 		wxTextCtrl* EditSFMaxLineLength;
+		wxCheckBox* CheckBreakBlocks;
 		wxTextCtrl* EditXMLversion;
+		wxCheckBox* CheckUnpadParens;
+		wxTextCtrl* EditIndentContinuation;
+		wxCheckBox* CheckAttachNamespaces;
+		wxCheckBox* CheckBreakBlocksAll;
+		wxCheckBox* CheckIndentNamespaces;
 		wxTextCtrl* EditXmlIndentSize;
+		wxCheckBox* CheckIndentCase;
+		wxCheckBox* CheckAttachClosingWhile;
+		wxCheckBox* CheckIndentModifiers;
 #ifdef MADEDIT_USE_MADEDIT
 		MadEdit *TextSample;
 #elif MADEDIT_USE_STC
