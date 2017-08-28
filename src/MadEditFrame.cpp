@@ -2366,20 +2366,20 @@ CommandData CommandTable[] =
 #ifdef __WXMSW__
 	{ 0,               1, menuFileAssociation,    wxT( "menuFileAssociation" ),    _( "&File Type Associations..." ),                    wxT( "" ),       wxITEM_NORMAL,    filehandle_xpm_idx, 0,                _( "Change file type associations" ), 0, 0, 0, false},
 #endif
-	{ 0,               1, menuSourceFormatter,     wxT( "menuSourceFormatter" ),     _( "&Source Formatter Settings..." ),                  wxT( "" ),       wxITEM_NORMAL,    -1, 0,                    _( "Change source formatter settings" ), 0, 0, 0, false},
+	{ 0,               1, menuSourceFormatter,    wxT( "menuSourceFormatter" ),    _( "&Source Formatter Settings..." ),                 wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Change source formatter settings" ), 0, 0, 0, false},
 	{ 0,               1, menuPurgeHistories,     wxT( "menuPurgeHistories" ),     _( "&Purge Histories..." ),                           wxT( "" ),       wxITEM_NORMAL,    footprint_xpm_idx, 0,                 _( "Clearing out your history" ), 0, 0, 0, false},
 	{ 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0, 0, 0, 0, false},
 	{ 0,               1, menuByteOrderMark,      wxT( "menuByteOrderMark" ),      _( "Has Unicode BOM (Byte-Order Mark)" ),             0,             wxITEM_NORMAL,    -1, &g_Menu_Tools_BOM,                0, 0, 0, 0, false},
 	{ 0,               2, menuToggleBOM,          wxT( "menuToggleBOM" ),          _( "Add/Remove BOM" ),                                wxT( "" ),       wxITEM_NORMAL,    -1, 0,                                _( "Add/Remove Unicode BOM" ), 0, 0, 0, false},
 	{ 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0, 0, 0, 0, false},
 	{ 0,               1, menuNewLineChar,        wxT( "menuNewLineChar" ),        _( "NewLine Char (File Format): " ),                  0,             wxITEM_NORMAL,    -1, &g_Menu_Tools_NewLineChar,        0, 0, 0, 0, false},
-	{ 0,               2, menuConvertToDOS,       wxT( "menuConvertToDOS" ),       _( "Convert To CRLF/0D0A (&DOS)" ),                   wxT( "" ),       wxITEM_NORMAL, windowslogo_xpm_idx, 0,                      _( "Convert the file format to DOS format" ), 0, 0, 0, false},
-	{ 0,               2, menuConvertToMAC,       wxT( "menuConvertToMAC" ),       _( "Convert To CR/0D (Old &MAC)" ),                   wxT( "" ),       wxITEM_NORMAL, maclogo_xpm_idx, 0,                          _( "Convert the file format to MAC format" ), 0, 0, 0, false},
-	{ 0,               2, menuConvertToUNIX,      wxT( "menuConvertToUNIX" ),      _( "Convert To LF/0A (&UNIX/OSX)" ),                  wxT( "" ),       wxITEM_NORMAL, linuxlogo_xpm_idx, 0,                        _( "Convert the file format to UNIX format" ), 0, 0, 0, false},
+	{ 0,               2, menuConvertToDOS,       wxT( "menuConvertToDOS" ),       _( "Convert To CRLF/0D0A (&DOS)" ),                   wxT( "" ),       wxITEM_NORMAL, windowslogo_xpm_idx, 0,                  _( "Convert the file format to DOS format" ), 0, 0, 0, false},
+	{ 0,               2, menuConvertToMAC,       wxT( "menuConvertToMAC" ),       _( "Convert To CR/0D (Old &MAC)" ),                   wxT( "" ),       wxITEM_NORMAL, maclogo_xpm_idx, 0,                      _( "Convert the file format to MAC format" ), 0, 0, 0, false},
+	{ 0,               2, menuConvertToUNIX,      wxT( "menuConvertToUNIX" ),      _( "Convert To LF/0A (&UNIX/OSX)" ),                  wxT( "" ),       wxITEM_NORMAL, linuxlogo_xpm_idx, 0,                    _( "Convert the file format to UNIX format" ), 0, 0, 0, false},
 	{ 0,               1, menuInsertNewLineChar,  wxT( "menuInsertNewLineChar" ),  _( "Press Enter to Insert NewLine Char: " ),          0,             wxITEM_NORMAL,    -1, &g_Menu_Tools_InsertNewLineChar,  0, 0, 0, 0, false},
-	{ 0,               2, menuInsertDOS,          wxT( "menuInsertDOS" ),          _( "Insert CRLF/0D0A (&DOS)" ),                       wxT( "" ),       wxITEM_NORMAL, windowslogo_xpm_idx, 0,                      _( "Insert CR&LF chars when pressing Enter key" ), 0, 0, 0, false},
-	{ 0,               2, menuInsertMAC,          wxT( "menuInsertMAC" ),          _( "Insert CR/0D (Old &MAC)" ),                       wxT( "" ),       wxITEM_NORMAL, maclogo_xpm_idx, 0,                          _( "Insert CR char when pressing Enter key" ), 0, 0, 0, false},
-	{ 0,               2, menuInsertUNIX,         wxT( "menuInsertUNIX" ),         _( "Insert LF/0A (&UNIX/OSX)" ),                      wxT( "" ),       wxITEM_NORMAL, linuxlogo_xpm_idx, 0,                        _( "Insert LF char when pressing Enter key" ), 0, 0, 0, false},
+	{ 0,               2, menuInsertDOS,          wxT( "menuInsertDOS" ),          _( "Insert CRLF/0D0A (&DOS)" ),                       wxT( "" ),       wxITEM_NORMAL, windowslogo_xpm_idx, 0,                  _( "Insert CR&LF chars when pressing Enter key" ), 0, 0, 0, false},
+	{ 0,               2, menuInsertMAC,          wxT( "menuInsertMAC" ),          _( "Insert CR/0D (Old &MAC)" ),                       wxT( "" ),       wxITEM_NORMAL, maclogo_xpm_idx, 0,                      _( "Insert CR char when pressing Enter key" ), 0, 0, 0, false},
+	{ 0,               2, menuInsertUNIX,         wxT( "menuInsertUNIX" ),         _( "Insert LF/0A (&UNIX/OSX)" ),                      wxT( "" ),       wxITEM_NORMAL, linuxlogo_xpm_idx, 0,                    _( "Insert LF char when pressing Enter key" ), 0, 0, 0, false},
 	{ 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0, 0, 0, 0, false},
 	{ 0,               1, menuConvertEncoding,    wxT( "menuConvertEncoding" ),    _( "Convert File &Encoding..." ),                     0,               wxITEM_NORMAL,    encoding_xpm_idx, 0,                  _( "Convert to the specified encoding" ), 0, 0, 0, false},
 	{ 0,               1, 0,                      0,                             0,                                                  0,             wxITEM_SEPARATOR, -1, 0,                                0, 0, 0, 0, false},
@@ -8264,161 +8264,6 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 			ResetAcceleratorTable();
 		}
 
-		//Write config for Astyle
-		m_Config->SetPath( wxT( "/astyle" ) );
-		ll = g_OptionsDialog->WxRadioBoxBracketStyle->GetSelection();
-		m_Config->Write( wxT( "style" ), ll );
-		bb = g_OptionsDialog->WxCheckAttachClasses->GetValue();
-		m_Config->Write( wxT( "attach_classes" ), bb );
-		bb = g_OptionsDialog->WxCheckAttachExternC->GetValue();
-		m_Config->Write( wxT( "attach_extern_c" ), bb );
-		bb = g_OptionsDialog->WxCheckAttachNamespaces->GetValue();
-		m_Config->Write( wxT( "attach_namespaces" ), bb );
-		bb = g_OptionsDialog->WxCheckAttachInlines->GetValue();
-		m_Config->Write( wxT( "attach_inlines" ), bb );
-		bb = g_OptionsDialog->WxCheckAttachClosingWhile->GetValue();
-		m_Config->Write( wxT( "attach_closing_while" ), bb );
-		bb = g_OptionsDialog->WxCheckForceUseTabs->GetValue();
-		m_Config->Write( wxT( "force_tabs" ), bb );
-		ll = g_OptionsDialog->WxSpinIndentation->GetValue();
-		m_Config->Write( wxT( "indentation" ), ll );
-		bb = g_OptionsDialog->WxCheckUseTab->GetValue();
-		m_Config->Write( wxT( "use_tabs" ), bb );
-		bb = g_OptionsDialog->WxCheckIndentCase->GetValue();
-		m_Config->Write( wxT( "indent_case" ), bb );
-		bb = g_OptionsDialog->WxCheckIndentClasses->GetValue();
-		m_Config->Write( wxT( "indent_classes" ), bb );
-		bb = g_OptionsDialog->WxCheckIndentLabels->GetValue();
-		m_Config->Write( wxT( "indent_labels" ), bb );
-		bb = g_OptionsDialog->WxCheckIndentModifiers->GetValue();
-		m_Config->Write( wxT( "indent_modifiers" ), bb );
-		bb = g_OptionsDialog->WxCheckIndentNamespaces->GetValue();
-		m_Config->Write( wxT( "indent_namespaces" ), bb );
-		bb = g_OptionsDialog->WxCheckIndentSwitches->GetValue();
-		m_Config->Write( wxT( "indent_switches" ), bb );
-		bb = g_OptionsDialog->WxCheckIndentPreprocBlock->GetValue();
-		m_Config->Write( wxT( "indent_preproc_block" ), bb );
-		bb = g_OptionsDialog->WxCheckIndentPreprocDefine->GetValue();
-		m_Config->Write( wxT( "indent_preproc_define" ), bb );
-		bb = g_OptionsDialog->WxCheckIndentPreprocCond->GetValue();
-		m_Config->Write( wxT( "indent_preproc_cond" ), bb );
-		bb = g_OptionsDialog->WxCheckIndentCol1Comments->GetValue();
-		m_Config->Write( wxT( "indent_col1_comments" ), bb );
-		bb = g_OptionsDialog->WxCheckIndentAfterParens->GetValue();
-		m_Config->Write( wxT( "indent_after_parens" ), bb );
-		ll = g_OptionsDialog->WxSpinMinConditionalEvent->GetValue();
-		m_Config->Write( wxT( "min_conditional_indent" ), ll );
-		g_OptionsDialog->WxEditMaxInStatementIndent->GetValue().ToLong( &ll );
-		m_Config->Write( wxT( "max_instatement_indent" ), ll );
-		bb = g_OptionsDialog->WxCheckBreakClosing->GetValue();
-		m_Config->Write( wxT( "break_closing" ), bb );
-		bb = g_OptionsDialog->WxCheckBreakElseIfs->GetValue();
-		m_Config->Write( wxT( "break_elseifs" ), bb );
-		bb = g_OptionsDialog->WxCheckAddBraces->GetValue();
-		m_Config->Write( wxT( "add_brackets" ), bb );
-		bb = g_OptionsDialog->WxCheckAddOneLineBraces->GetValue();
-		m_Config->Write( wxT( "add_one_line_brackets" ), bb );
-		bb = g_OptionsDialog->WxCheckRemoveBraces->GetValue();
-		m_Config->Write( wxT( "remove_brackets" ), bb );
-		bb = g_OptionsDialog->WxCheckKeepBlocks->GetValue();
-		m_Config->Write( wxT( "keep_blocks" ), bb );
-		bb = g_OptionsDialog->WxCheckConvertTabs->GetValue();
-		m_Config->Write( wxT( "convert_tabs" ), bb );
-		bb = g_OptionsDialog->WxCheckCloseTemplates->GetValue();
-		m_Config->Write( wxT( "closewxTemplates" ), bb );
-		bb = g_OptionsDialog->WxCheckRemoveCommentPrefix->GetValue();
-		m_Config->Write( wxT( "remove_comment_prefix" ), bb );
-		bb = g_OptionsDialog->WxCheckBreakLines->GetValue();
-		m_Config->Write( wxT( "break_lines" ), bb );
-
-		if( bb )
-		{
-			g_OptionsDialog->WxEditSFMaxLineLength->GetValue().ToLong( &ll );
-			m_Config->Write( wxT( "max_line_length" ), ll );
-			bb = g_OptionsDialog->WxCheckBreakAfterLogical->GetValue();
-			m_Config->Write( wxT( "break_after_mode" ), bb );
-		}
-
-		bb = g_OptionsDialog->WxCheckBreakBlocks->GetValue();
-		m_Config->Write( wxT( "break_blocks" ), bb );
-		bb = g_OptionsDialog->WxCheckBreakBlocksAll->GetValue();
-		m_Config->Write( wxT( "break_blocks_all" ), bb );
-		bb = g_OptionsDialog->WxCheckBreakOneLineHeaders->GetValue();
-		m_Config->Write( wxT( "break_one_line_headers" ), bb );
-		bb = g_OptionsDialog->WxCheckPadOperators->GetValue();
-		m_Config->Write( wxT( "pad_operators" ), bb );
-		bb = g_OptionsDialog->WxCheckPadParensOut->GetValue();
-		m_Config->Write( wxT( "pad_parentheses_out" ), bb );
-		bb = g_OptionsDialog->WxCheckPadParensIn->GetValue();
-		m_Config->Write( wxT( "pad_parentheses_in" ), bb );
-		bb = g_OptionsDialog->WxCheckPadHeader->GetValue();
-		m_Config->Write( wxT( "pad_header" ), bb );
-		bb = g_OptionsDialog->WxCheckUnpadParens ->GetValue();
-		m_Config->Write( wxT( "unpad_parentheses" ), bb );
-		bb = g_OptionsDialog->WxCheckDelEmptyLine->GetValue();
-		m_Config->Write( wxT( "delete_empty_lines" ), bb );
-		bb = g_OptionsDialog->WxCheckFillEmptyLines->GetValue();
-		m_Config->Write( wxT( "fill_empty_lines" ), bb );
-		bb = g_OptionsDialog->WxCheckPadComma->GetValue();
-		m_Config->Write( wxT( "pad_comma" ), bb );
-		bb = g_OptionsDialog->WxCheckPadReturnType->GetValue();
-		m_Config->Write( wxT( "pad_return_type" ), bb );
-		bb = g_OptionsDialog->WxCheckUnpadReturnType->GetValue();
-		m_Config->Write( wxT( "unpad_return_type" ), bb );
-		bb = g_OptionsDialog->WxCheckPadParamType->GetValue();
-		m_Config->Write( wxT( "pad_param_type" ), bb );
-		bb = g_OptionsDialog->WxCheckUnpadParamType->GetValue();
-		m_Config->Write( wxT( "unpad_param_type" ), bb );
-		
-		g_OptionsDialog->WxEditIndentContinuation->GetValue().ToLong( &ll );
-		m_Config->Write( wxT( "indent_continuation" ), ll );
-
-
-		wxString pointerAlign( wxT( "None" ) );
-
-		switch( g_OptionsDialog->WxChoicePointerAlign->GetSelection() )
-		{
-		case astyle::PTR_ALIGN_TYPE:
-			pointerAlign = wxString( wxT( "Type" ) );
-			break;
-
-		case astyle::PTR_ALIGN_MIDDLE:
-			pointerAlign = wxString( wxT( "Middle" ) );
-			break;
-
-		case astyle::PTR_ALIGN_NAME:
-			pointerAlign = wxString( wxT( "Name" ) );
-			break;
-
-		default :
-			break;
-		}
-
-		m_Config->Write( wxT( "pointer_align" ), pointerAlign );
-		wxString referenceAlign( wxT( "None" ) );
-
-		switch( g_OptionsDialog->WxChoiceReferenceAlign->GetSelection() )
-		{
-		case astyle::REF_ALIGN_TYPE:
-			referenceAlign = wxString( wxT( "Type" ) );
-			break;
-
-		case astyle::REF_ALIGN_MIDDLE:
-			referenceAlign = wxString( wxT( "Middle" ) );
-			break;
-
-		case astyle::REF_ALIGN_NAME:
-			referenceAlign = wxString( wxT( "Name" ) );
-			break;
-
-		default :
-			break;
-		}
-
-		m_Config->Write( wxT( "reference_align" ), referenceAlign );
-		m_Config->SetPath( wxT( "/xml" ) );
-		m_Config->Write( wxT( "indentation" ), g_OptionsDialog->WxEditXmlIndentSize->GetValue() );
-		m_Config->Write( wxT( "version" ), g_OptionsDialog->WxEditXMLversion->GetValue() );
 		m_Config->SetPath( oldpath );
 	}
 }
@@ -8462,7 +8307,169 @@ void MadEditFrame::OnToolsSourceFormatter( wxCommandEvent& event )
 	// Hide Modaless Dialog
 	HideModalessDialogs();
 	MadSourceFormatDialog sfDialog(this);
-	sfDialog.ShowModal();
+	sfDialog.LoadSettings();
+	if(sfDialog.ShowModal() == wxID_OK )
+	{
+		//Write config for Astyle
+		wxString oldpath = m_Config->GetPath();
+		long ll = 0;
+		bool bb = false;
+
+		m_Config->SetPath( wxT( "/astyle" ) );
+		ll = sfDialog.RadioBoxBracketStyle->GetSelection();
+		m_Config->Write( wxT( "style" ), ll );
+		bb = sfDialog.CheckAttachClasses->GetValue();
+		m_Config->Write( wxT( "attach_classes" ), bb );
+		bb = sfDialog.CheckAttachExternC->GetValue();
+		m_Config->Write( wxT( "attach_extern_c" ), bb );
+		bb = sfDialog.CheckAttachNamespaces->GetValue();
+		m_Config->Write( wxT( "attach_namespaces" ), bb );
+		bb = sfDialog.CheckAttachInlines->GetValue();
+		m_Config->Write( wxT( "attach_inlines" ), bb );
+		bb = sfDialog.CheckAttachClosingWhile->GetValue();
+		m_Config->Write( wxT( "attach_closing_while" ), bb );
+		bb = sfDialog.CheckForceUseTabs->GetValue();
+		m_Config->Write( wxT( "force_tabs" ), bb );
+		ll = sfDialog.SpinIndentation->GetValue();
+		m_Config->Write( wxT( "indentation" ), ll );
+		bb = sfDialog.CheckUseTab->GetValue();
+		m_Config->Write( wxT( "use_tabs" ), bb );
+		bb = sfDialog.CheckIndentCase->GetValue();
+		m_Config->Write( wxT( "indent_case" ), bb );
+		bb = sfDialog.CheckIndentClasses->GetValue();
+		m_Config->Write( wxT( "indent_classes" ), bb );
+		bb = sfDialog.CheckIndentLabels->GetValue();
+		m_Config->Write( wxT( "indent_labels" ), bb );
+		bb = sfDialog.CheckIndentModifiers->GetValue();
+		m_Config->Write( wxT( "indent_modifiers" ), bb );
+		bb = sfDialog.CheckIndentNamespaces->GetValue();
+		m_Config->Write( wxT( "indent_namespaces" ), bb );
+		bb = sfDialog.CheckIndentSwitches->GetValue();
+		m_Config->Write( wxT( "indent_switches" ), bb );
+		bb = sfDialog.CheckIndentPreprocBlock->GetValue();
+		m_Config->Write( wxT( "indent_preproc_block" ), bb );
+		bb = sfDialog.CheckIndentPreprocDefine->GetValue();
+		m_Config->Write( wxT( "indent_preproc_define" ), bb );
+		bb = sfDialog.CheckIndentPreprocCond->GetValue();
+		m_Config->Write( wxT( "indent_preproc_cond" ), bb );
+		bb = sfDialog.CheckIndentCol1Comments->GetValue();
+		m_Config->Write( wxT( "indent_col1_comments" ), bb );
+		bb = sfDialog.CheckIndentAfterParens->GetValue();
+		m_Config->Write( wxT( "indent_after_parens" ), bb );
+		ll = sfDialog.SpinMinConditionalEvent->GetValue();
+		m_Config->Write( wxT( "min_conditional_indent" ), ll );
+		sfDialog.EditMaxContinuationIndent->GetValue().ToLong( &ll );
+		m_Config->Write( wxT( "max_continuation_indent" ), ll );
+		bb = sfDialog.CheckBreakClosing->GetValue();
+		m_Config->Write( wxT( "break_closing" ), bb );
+		bb = sfDialog.CheckBreakElseIfs->GetValue();
+		m_Config->Write( wxT( "break_elseifs" ), bb );
+		bb = sfDialog.CheckAddBraces->GetValue();
+		m_Config->Write( wxT( "add_brackets" ), bb );
+		bb = sfDialog.CheckAddOneLineBraces->GetValue();
+		m_Config->Write( wxT( "add_one_line_brackets" ), bb );
+		bb = sfDialog.CheckRemoveBraces->GetValue();
+		m_Config->Write( wxT( "remove_brackets" ), bb );
+		bb = sfDialog.CheckKeepBlocks->GetValue();
+		m_Config->Write( wxT( "keep_blocks" ), bb );
+		bb = sfDialog.CheckConvertTabs->GetValue();
+		m_Config->Write( wxT( "convert_tabs" ), bb );
+		bb = sfDialog.CheckCloseTemplates->GetValue();
+		m_Config->Write( wxT( "closewxTemplates" ), bb );
+		bb = sfDialog.CheckRemoveCommentPrefix->GetValue();
+		m_Config->Write( wxT( "remove_comment_prefix" ), bb );
+		bb = sfDialog.CheckBreakLines->GetValue();
+		m_Config->Write( wxT( "break_lines" ), bb );
+
+		if( bb )
+		{
+			sfDialog.EditSFMaxLineLength->GetValue().ToLong( &ll );
+			m_Config->Write( wxT( "max_line_length" ), ll );
+			bb = sfDialog.CheckBreakAfterLogical->GetValue();
+			m_Config->Write( wxT( "break_after_mode" ), bb );
+		}
+
+		bb = sfDialog.CheckBreakBlocks->GetValue();
+		m_Config->Write( wxT( "break_blocks" ), bb );
+		bb = sfDialog.CheckBreakBlocksAll->GetValue();
+		m_Config->Write( wxT( "break_blocks_all" ), bb );
+		bb = sfDialog.CheckBreakOneLineHeaders->GetValue();
+		m_Config->Write( wxT( "break_one_line_headers" ), bb );
+		bb = sfDialog.CheckPadOperators->GetValue();
+		m_Config->Write( wxT( "pad_operators" ), bb );
+		bb = sfDialog.CheckPadParensOut->GetValue();
+		m_Config->Write( wxT( "pad_parentheses_out" ), bb );
+		bb = sfDialog.CheckPadParensIn->GetValue();
+		m_Config->Write( wxT( "pad_parentheses_in" ), bb );
+		bb = sfDialog.CheckPadHeader->GetValue();
+		m_Config->Write( wxT( "pad_header" ), bb );
+		bb = sfDialog.CheckUnpadParens ->GetValue();
+		m_Config->Write( wxT( "unpad_parentheses" ), bb );
+		bb = sfDialog.CheckDelEmptyLine->GetValue();
+		m_Config->Write( wxT( "delete_empty_lines" ), bb );
+		bb = sfDialog.CheckFillEmptyLines->GetValue();
+		m_Config->Write( wxT( "fill_empty_lines" ), bb );
+		bb = sfDialog.CheckPadComma->GetValue();
+		m_Config->Write( wxT( "pad_comma" ), bb );
+		bb = sfDialog.CheckPadReturnType->GetValue();
+		m_Config->Write( wxT( "pad_return_type" ), bb );
+		bb = sfDialog.CheckUnpadReturnType->GetValue();
+		m_Config->Write( wxT( "unpad_return_type" ), bb );
+		bb = sfDialog.CheckPadParamType->GetValue();
+		m_Config->Write( wxT( "pad_param_type" ), bb );
+		bb = sfDialog.CheckUnpadParamType->GetValue();
+		m_Config->Write( wxT( "unpad_param_type" ), bb );
+		
+		sfDialog.EditIndentContinuation->GetValue().ToLong( &ll );
+		m_Config->Write( wxT( "indent_continuation" ), ll );
+
+		wxString pointerAlign( wxT( "None" ) );
+
+		switch( sfDialog.ChoicePointerAlign->GetSelection() )
+		{
+		case astyle::PTR_ALIGN_TYPE:
+			pointerAlign = wxString( wxT( "Type" ) );
+			break;
+
+		case astyle::PTR_ALIGN_MIDDLE:
+			pointerAlign = wxString( wxT( "Middle" ) );
+			break;
+
+		case astyle::PTR_ALIGN_NAME:
+			pointerAlign = wxString( wxT( "Name" ) );
+			break;
+
+		default :
+			break;
+		}
+
+		m_Config->Write( wxT( "pointer_align" ), pointerAlign );
+		wxString referenceAlign( wxT( "None" ) );
+
+		switch( sfDialog.ChoiceReferenceAlign->GetSelection() )
+		{
+		case astyle::REF_ALIGN_TYPE:
+			referenceAlign = wxString( wxT( "Type" ) );
+			break;
+
+		case astyle::REF_ALIGN_MIDDLE:
+			referenceAlign = wxString( wxT( "Middle" ) );
+			break;
+
+		case astyle::REF_ALIGN_NAME:
+			referenceAlign = wxString( wxT( "Name" ) );
+			break;
+
+		default :
+			break;
+		}
+
+		m_Config->Write( wxT( "reference_align" ), referenceAlign );
+		m_Config->SetPath( wxT( "/xml" ) );
+		m_Config->Write( wxT( "indentation" ), sfDialog.EditXmlIndentSize->GetValue() );
+		m_Config->Write( wxT( "version" ), sfDialog.EditXMLversion->GetValue() );
+		m_Config->SetPath( oldpath );
+	}
 }
 
 void MadEditFrame::OnToolsPurgeHistories( wxCommandEvent& event )

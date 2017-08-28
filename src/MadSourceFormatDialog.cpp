@@ -4,8 +4,8 @@
 #include "astylepredefinedstyles.h"
 
 //(*InternalHeaders(MadSourceFormatDialog)
-#include <wx/intl.h>
 #include <wx/button.h>
+#include <wx/intl.h>
 #include <wx/string.h>
 //*)
 
@@ -47,6 +47,7 @@ const long MadSourceFormatDialog::ID_CHECKKEEPCOMPLEX = wxNewId();
 const long MadSourceFormatDialog::ID_CHECKCONVERTTABS = wxNewId();
 const long MadSourceFormatDialog::ID_CHECKCLOSETEMPLATES = wxNewId();
 const long MadSourceFormatDialog::ID_CHECKREMOVECOMMENTPREFIX = wxNewId();
+const long MadSourceFormatDialog::ID_CHECKBREAKONELINEHEADERS = wxNewId();
 const long MadSourceFormatDialog::ID_CHECKBREAKLINES = wxNewId();
 const long MadSourceFormatDialog::ID_EDITSFMAXLINELENGTH = wxNewId();
 const long MadSourceFormatDialog::ID_CHECKBREAKAFTERLOGICAL = wxNewId();
@@ -60,8 +61,12 @@ const long MadSourceFormatDialog::ID_CHECKPADHEADER = wxNewId();
 const long MadSourceFormatDialog::ID_CHECKUNPADPARENS = wxNewId();
 const long MadSourceFormatDialog::ID_CHECKDELEMPTYLINE = wxNewId();
 const long MadSourceFormatDialog::ID_CHECKFILLEMPTYLINES = wxNewId();
+const long MadSourceFormatDialog::ID_CHECKPADCOMMA = wxNewId();
+const long MadSourceFormatDialog::ID_CHECKPADRETURNTYPE = wxNewId();
+const long MadSourceFormatDialog::ID_CHECKUNPADRETURNTYPE = wxNewId();
+const long MadSourceFormatDialog::ID_CHECKPADPARAMTYPE = wxNewId();
+const long MadSourceFormatDialog::ID_CHECKUNPADPARAMTYPE = wxNewId();
 const long MadSourceFormatDialog::ID_CHOICEPOINTERALIGN = wxNewId();
-const long MadSourceFormatDialog::ID_STATICTEXT7 = wxNewId();
 const long MadSourceFormatDialog::ID_CHOICEREFERENCEALIGN = wxNewId();
 const long MadSourceFormatDialog::ID_PANEL5 = wxNewId();
 const long MadSourceFormatDialog::ID_EDITXMLVERSION = wxNewId();
@@ -98,44 +103,45 @@ static wxString bracket_style[aspsCustom + 1] =
 MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)
 {
 	//(*Initialize(MadSourceFormatDialog)
-	wxStaticText* StaticText10;
+	wxAuiNotebook* AuiNotebook1;
+	wxBoxSizer* BoxSizer1;
+	wxBoxSizer* BoxSizer2;
+	wxBoxSizer* BoxSizer3;
 	wxBoxSizer* BoxSizer4;
-	wxStaticText* StaticText9;
-	wxBoxSizer* BoxSizer6;
-	wxGridSizer* GridSizer4;
-	wxPanel* Panel5;
 	wxBoxSizer* BoxSizer5;
+	wxBoxSizer* BoxSizer6;
 	wxBoxSizer* BoxSizer7;
 	wxBoxSizer* BoxSizer8;
-	wxStaticText* StaticText2;
-	wxPanel* Panel4;
-	wxFlexGridSizer* FlexGridSizer3;
-	wxStaticText* StaticText6;
-	wxStaticText* StaticText8;
-	wxPanel* Panel1;
-	wxStaticText* StaticText1;
-	wxBoxSizer* BoxSizer2;
-	wxStaticText* StaticText3;
-	wxPanel* Panel6;
-	wxPanel* Panel3;
-	wxGridSizer* GridSizer1;
-	wxStaticText* StaticText5;
-	wxStaticText* StaticText7;
-	wxGridSizer* GridSizer3;
-	wxBoxSizer* BoxSizer1;
 	wxBoxSizer* BoxSizer9;
-	wxPanel* Panel2;
-	wxStaticBoxSizer* StaticBoxSizer1;
-	wxBoxSizer* BoxSizer3;
-	wxStaticText* StaticText4;
+	wxFlexGridSizer* FlexGridSizer3;
+	wxGridSizer* GridSizer1;
 	wxGridSizer* GridSizer2;
+	wxGridSizer* GridSizer3;
+	wxGridSizer* GridSizer4;
+	wxPanel* Panel1;
+	wxPanel* Panel2;
+	wxPanel* Panel3;
+	wxPanel* Panel4;
+	wxPanel* Panel5;
+	wxPanel* Panel6;
+	wxStaticBoxSizer* StaticBoxSizer1;
+	wxStaticText* StaticText10;
+	wxStaticText* StaticText1;
+	wxStaticText* StaticText2;
+	wxStaticText* StaticText3;
+	wxStaticText* StaticText4;
+	wxStaticText* StaticText5;
+	wxStaticText* StaticText6;
+	wxStaticText* StaticText7;
+	wxStaticText* StaticText8;
+	wxStaticText* StaticText9;
 	wxStdDialogButtonSizer* StdDialogButtonSizer1;
 
-	Create(parent, wxID_ANY, _("Source Formator"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxCLOSE_BOX, _T("wxID_ANY"));
+	Create(parent, wxID_ANY, _("Source Formator"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxRESIZE_BORDER|wxCLOSE_BOX, _T("wxID_ANY"));
 	SetClientSize(wxSize(800,500));
 	SetMaxSize(wxSize(-1,-1));
 	BoxSizer1 = new wxBoxSizer(wxVERTICAL);
-	AuiNotebook1 = new wxAuiNotebook(this, ID_AUINOTEBOOK1, wxDefaultPosition, wxSize(800,492), wxAUI_NB_TOP);
+	AuiNotebook1 = new wxAuiNotebook(this, ID_AUINOTEBOOK1, wxDefaultPosition, wxSize(800,500), wxAUI_NB_TOP);
 	Panel1 = new wxPanel(AuiNotebook1, ID_PANEL1, wxDefaultPosition, wxSize(792,464), 0, _T("ID_PANEL1"));
 	GridSizer1 = new wxGridSizer(0, 2, 0, 0);
 	wxString __wxRadioBoxChoices_1[15] =
@@ -282,8 +288,8 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID id,cons
 	GridSizer4->Add(StaticText2, 0, wxALL|wxEXPAND, 2);
 	SpinIndentation = new wxSpinCtrl(Panel3, ID_SPINCTRLINDENTSIZE, _T("4"), wxDefaultPosition, wxDefaultSize, 0, 2, 8, 4, _T("ID_SPINCTRLINDENTSIZE"));
 	SpinIndentation->SetValue(_T("4"));
-	GridSizer4->Add(SpinIndentation, 1, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 2);
-	BoxSizer4->Add(GridSizer4, 0, wxALL|wxEXPAND, 2);
+	GridSizer4->Add(SpinIndentation, 0, wxALL, 2);
+	BoxSizer4->Add(GridSizer4, 0, wxALL, 2);
 	CheckUseTab = new wxCheckBox(Panel3, ID_CHECKUSETABOVERSPACES, _("Use TABs instead of spaces"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKUSETABOVERSPACES"));
 	CheckUseTab->SetValue(false);
 	BoxSizer4->Add(CheckUseTab, 0, wxALL|wxEXPAND, 2);
@@ -325,20 +331,20 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID id,cons
 	BoxSizer4->Add(CheckIndentAfterParens, 0, wxALL|wxEXPAND, 2);
 	FlexGridSizer3 = new wxFlexGridSizer(0, 2, 0, 0);
 	FlexGridSizer3->AddGrowableCol(0);
-	SpinMinConditionalEvent = new wxSpinCtrl(Panel3, ID_SPINCTRLMININDENT, _T("2"), wxDefaultPosition, wxDefaultSize, 0, 0, 3, 2, _T("ID_SPINCTRLMININDENT"));
-	SpinMinConditionalEvent->SetValue(_T("2"));
-	FlexGridSizer3->Add(SpinMinConditionalEvent, 0, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 2);
 	StaticText3 = new wxStaticText(Panel3, wxID_ANY, _("Minimal indent added when a header is built of multiple lines:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	FlexGridSizer3->Add(StaticText3, 0, wxALL|wxEXPAND, 2);
-	EditMaxContinuationIndent = new wxTextCtrl(Panel3, ID_EDITMAXCONTINUATIONINDENT, _("40"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITMAXCONTINUATIONINDENT"));
-	FlexGridSizer3->Add(EditMaxContinuationIndent, 0, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 2);
+	SpinMinConditionalEvent = new wxSpinCtrl(Panel3, ID_SPINCTRLMININDENT, _T("2"), wxDefaultPosition, wxDefaultSize, 0, 0, 3, 2, _T("ID_SPINCTRLMININDENT"));
+	SpinMinConditionalEvent->SetValue(_T("2"));
+	FlexGridSizer3->Add(SpinMinConditionalEvent, 0, wxALL|wxEXPAND, 2);
 	StaticText4 = new wxStaticText(Panel3, wxID_ANY, _("Maximum of # spaces to indent a continuation line (max. 120):"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	FlexGridSizer3->Add(StaticText4, 0, wxALL|wxEXPAND, 2);
-	EditIndentContinuation = new wxTextCtrl(Panel3, ID_EDITINDENTCONTINUATION, _("1"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITINDENTCONTINUATION"));
-	FlexGridSizer3->Add(EditIndentContinuation, 0, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 2);
+	EditMaxContinuationIndent = new wxTextCtrl(Panel3, ID_EDITMAXCONTINUATIONINDENT, _("40"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITMAXCONTINUATIONINDENT"));
+	FlexGridSizer3->Add(EditMaxContinuationIndent, 0, wxALL|wxEXPAND, 2);
 	StaticText10 = new wxStaticText(Panel3, wxID_ANY, _("Indent a continuation line (default 1)"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	FlexGridSizer3->Add(StaticText10, 0, wxALL|wxEXPAND, 2);
-	BoxSizer4->Add(FlexGridSizer3, 0, wxALL|wxALIGN_LEFT, 0);
+	EditIndentContinuation = new wxTextCtrl(Panel3, ID_EDITINDENTCONTINUATION, _("1"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITINDENTCONTINUATION"));
+	FlexGridSizer3->Add(EditIndentContinuation, 0, wxALL|wxEXPAND, 2);
+	BoxSizer4->Add(FlexGridSizer3, 0, wxALL, 0);
 	Panel3->SetSizer(BoxSizer4);
 	BoxSizer4->Fit(Panel3);
 	BoxSizer4->SetSizeHints(Panel3);
@@ -374,6 +380,9 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID id,cons
 	CheckRemoveCommentPrefix = new wxCheckBox(Panel4, ID_CHECKREMOVECOMMENTPREFIX, _("Remove the preceding \'*\' in a multi-line comment that begins a line"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKREMOVECOMMENTPREFIX"));
 	CheckRemoveCommentPrefix->SetValue(false);
 	BoxSizer5->Add(CheckRemoveCommentPrefix, 0, wxALL|wxEXPAND, 2);
+	CheckBreakOneLineHeaders = new wxCheckBox(Panel4, ID_CHECKBREAKONELINEHEADERS, _("Break one line headers"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBREAKONELINEHEADERS"));
+	CheckBreakOneLineHeaders->SetValue(false);
+	BoxSizer5->Add(CheckBreakOneLineHeaders, 0, wxALL|wxEXPAND, 2);
 	CheckBreakLines = new wxCheckBox(Panel4, ID_CHECKBREAKLINES, _("Enable line breaking"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBREAKLINES"));
 	CheckBreakLines->SetValue(false);
 	BoxSizer5->Add(CheckBreakLines, 0, wxALL|wxEXPAND, 2);
@@ -393,7 +402,7 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID id,cons
 	Panel4->SetSizer(BoxSizer5);
 	BoxSizer5->Fit(Panel4);
 	BoxSizer5->SetSizeHints(Panel4);
-	Panel5 = new wxPanel(AuiNotebook1, ID_PANEL5, wxDefaultPosition, wxSize(792,-1), 0, _T("ID_PANEL5"));
+	Panel5 = new wxPanel(AuiNotebook1, ID_PANEL5, wxDefaultPosition, wxSize(792,464), 0, _T("ID_PANEL5"));
 	BoxSizer9 = new wxBoxSizer(wxVERTICAL);
 	CheckBreakBlocks = new wxCheckBox(Panel5, ID_CHECKBREAKBLOCKS, _("Pad empty lines around header blocks (e.g. \'if\', \'while\'...)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBREAKBLOCKS"));
 	CheckBreakBlocks->SetValue(false);
@@ -425,16 +434,31 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID id,cons
 	CheckFillEmptyLines = new wxCheckBox(Panel5, ID_CHECKFILLEMPTYLINES, _("Fill empty lines with the whitespace of their previous lines"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKFILLEMPTYLINES"));
 	CheckFillEmptyLines->SetValue(false);
 	BoxSizer9->Add(CheckFillEmptyLines, 0, wxALL|wxEXPAND, 2);
+	CheckPadComma = new wxCheckBox(Panel5, ID_CHECKPADCOMMA, _("Pad comma"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKPADCOMMA"));
+	CheckPadComma->SetValue(false);
+	BoxSizer9->Add(CheckPadComma, 0, wxALL|wxEXPAND, 2);
+	CheckPadReturnType = new wxCheckBox(Panel5, ID_CHECKPADRETURNTYPE, _("Pad return type(Object-C)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKPADRETURNTYPE"));
+	CheckPadReturnType->SetValue(false);
+	BoxSizer9->Add(CheckPadReturnType, 0, wxALL|wxEXPAND, 2);
+	CheckUnpadReturnType = new wxCheckBox(Panel5, ID_CHECKUNPADRETURNTYPE, _("Unpad return type(Object-C)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKUNPADRETURNTYPE"));
+	CheckUnpadReturnType->SetValue(false);
+	BoxSizer9->Add(CheckUnpadReturnType, 0, wxALL|wxEXPAND, 2);
+	CheckPadParamType = new wxCheckBox(Panel5, ID_CHECKPADPARAMTYPE, _("Pad param type(Object-C)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKPADPARAMTYPE"));
+	CheckPadParamType->SetValue(false);
+	BoxSizer9->Add(CheckPadParamType, 0, wxALL|wxEXPAND, 2);
+	CheckUnpadParamType = new wxCheckBox(Panel5, ID_CHECKUNPADPARAMTYPE, _("Unpad param type(Object-C)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKUNPADPARAMTYPE"));
+	CheckUnpadParamType->SetValue(false);
+	BoxSizer9->Add(CheckUnpadParamType, 0, wxALL|wxEXPAND, 2);
 	GridSizer3 = new wxGridSizer(0, 4, 0, 0);
 	StaticText6 = new wxStaticText(Panel5, wxID_ANY, _("Pointer alignment"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
-	GridSizer3->Add(StaticText6, 0, wxALL|wxEXPAND, 2);
+	GridSizer3->Add(StaticText6, 2, wxALL|wxEXPAND, 0);
 	ChoicePointerAlign = new wxChoice(Panel5, ID_CHOICEPOINTERALIGN, wxDefaultPosition, wxDefaultSize, 0, 0, 0, wxDefaultValidator, _T("ID_CHOICEPOINTERALIGN"));
 	ChoicePointerAlign->SetSelection( ChoicePointerAlign->Append(_("None")) );
 	ChoicePointerAlign->Append(_("Type"));
 	ChoicePointerAlign->Append(_("Middle"));
 	ChoicePointerAlign->Append(_("Name"));
 	GridSizer3->Add(ChoicePointerAlign, 0, wxALL|wxEXPAND, 2);
-	StaticText7 = new wxStaticText(Panel5, ID_STATICTEXT7, _("Reference alignment"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT7"));
+	StaticText7 = new wxStaticText(Panel5, wxID_ANY, _("Reference alignment"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	GridSizer3->Add(StaticText7, 0, wxALL|wxEXPAND, 2);
 	ChoiceReferenceAlign = new wxChoice(Panel5, ID_CHOICEREFERENCEALIGN, wxDefaultPosition, wxDefaultSize, 0, 0, 0, wxDefaultValidator, _T("ID_CHOICEREFERENCEALIGN"));
 	ChoiceReferenceAlign->SetSelection( ChoiceReferenceAlign->Append(_("None")) );
@@ -442,7 +466,7 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID id,cons
 	ChoiceReferenceAlign->Append(_("Middle"));
 	ChoiceReferenceAlign->Append(_("Name"));
 	GridSizer3->Add(ChoiceReferenceAlign, 0, wxALL|wxEXPAND, 2);
-	BoxSizer9->Add(GridSizer3, 0, wxALL|wxEXPAND, 2);
+	BoxSizer9->Add(GridSizer3, 0, wxALL, 2);
 	Panel5->SetSizer(BoxSizer9);
 	BoxSizer9->Fit(Panel5);
 	BoxSizer9->SetSizeHints(Panel5);
@@ -475,6 +499,7 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID id,cons
 	BoxSizer1->Add(StdDialogButtonSizer1, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	SetSizer(BoxSizer1);
 	BoxSizer1->Fit(this);
+	BoxSizer1->SetSizeHints(this);
 	Layout();
 
 	Connect(ID_RADIOBOXBRACKETSTYLE,wxEVT_COMMAND_RADIOBOX_SELECTED,(wxObjectEventFunction)&MadSourceFormatDialog::OnRadioBoxBracketStyleSelect);
@@ -577,8 +602,8 @@ void MadSourceFormatDialog::LoadSettings(void)
 	CheckIndentCol1Comments->SetValue( cfg->ReadBool( wxT( "indent_col1_comments" ), true ) );
 	CheckIndentAfterParens->SetValue( cfg->ReadBool( wxT( "indent_after_parens" ), false ) );
 	SpinMinConditionalEvent->SetValue( cfg->ReadLong( wxT( "min_conditional_indent" ), 2 ) );
-	EditIndentContinuation->SetValue( wxString() << cfg->ReadLong( wxT( "max_instatement_indent" ), 40 ) );
-	EditMaxContinuationIndent->SetValue( wxString() << cfg->ReadLong( wxT( "indent_continuation" ), 1 ) );
+	EditMaxContinuationIndent->SetValue( wxString() << cfg->ReadLong( wxT( "max_continuation_indent" ), 40 ) );
+	EditIndentContinuation->SetValue( wxString() << cfg->ReadLong( wxT( "indent_continuation" ), 1 ) );
 	CheckBreakClosing->SetValue( cfg->ReadBool( wxT( "break_closing" ), true ) );
 	CheckBreakElseIfs->SetValue( cfg->ReadBool( wxT( "break_elseifs" ), true ) );
 	CheckAddBraces->SetValue( cfg->ReadBool( wxT( "add_brackets" ), false ) );

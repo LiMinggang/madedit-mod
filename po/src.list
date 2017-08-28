@@ -35,6 +35,8 @@
 ../src/MadPurgeHistoryDialog.h
 ../src/MadSearchReplaceDialog.cpp
 ../src/MadSearchReplaceDialog.h
+../src/MadSourceFormatDialog.cpp
+../src/MadSourceFormatDialog.h
 ../src/MadSortDialog.cpp
 ../src/MadSortDialog.h
 ../src/MadOptionsDialog.cpp

@@ -129,7 +129,7 @@ void FormatterSettings::ApplyTo(astyle::ASFormatter& formatter)
   if(indent < 0) indent = 2;
   if(indent > 1024) indent = 1024;
   formatter.setMinConditionalIndentOption(indent);
-  indent = cfg->ReadLong(wxT("max_instatement_indent"), 40);
+  indent = cfg->ReadLong(wxT("max_continuation_indent"), 40);
   if(indent < 0) indent = 40;
   if(indent > 1024) indent = 1024;
   formatter.setMaxInStatementIndentLength(indent);
