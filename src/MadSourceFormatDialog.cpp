@@ -132,6 +132,7 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID id,cons
 	wxStdDialogButtonSizer* StdDialogButtonSizer1;
 
 	Create(parent, wxID_ANY, _("Source Formator"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxCLOSE_BOX, _T("wxID_ANY"));
+	SetClientSize(wxSize(800,500));
 	SetMaxSize(wxSize(-1,-1));
 	BoxSizer1 = new wxBoxSizer(wxVERTICAL);
 	AuiNotebook1 = new wxAuiNotebook(this, ID_AUINOTEBOOK1, wxDefaultPosition, wxSize(800,492), wxAUI_NB_TOP);
@@ -252,8 +253,8 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID id,cons
 	StaticBoxSizer1->Add(TextSample, 0, wxALL|wxEXPAND, 5);
 	GridSizer1->Add(StaticBoxSizer1, 1, wxALL|wxEXPAND, 5);
 	Panel1->SetSizer(GridSizer1);
-	SetSizer(GridSizer1);
-	Layout();
+	GridSizer1->Fit(Panel1);
+	GridSizer1->SetSizeHints(Panel1);
 	Panel2 = new wxPanel(AuiNotebook1, ID_PANEL2, wxDefaultPosition, wxSize(792,464), 0, _T("ID_PANEL2"));
 	BoxSizer3 = new wxBoxSizer(wxVERTICAL);
 	CheckAttachClasses = new wxCheckBox(Panel2, ID_CHECKATTACHCLASSES, _("Attach Classes"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKATTACHCLASSES"));
