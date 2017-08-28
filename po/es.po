@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit 2.9.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-28 17:43+0800\n"
+"POT-Creation-Date: 2017-08-28 17:54+0800\n"
 "PO-Revision-Date: 2017-08-16 10:35+0800\n"
 "Last-Translator: \n"
 "Language-Team: <carlos1994sanchez@gmail.com>\n"
@@ -2701,7 +2701,8 @@ msgstr ""
 #: ../src/MadEditFrame.cpp:5017 ../src/MadEditFrame.cpp:5033
 #: ../src/MadEditFrame.cpp:5053 ../src/MadEditFrame.cpp:5059
 #: ../src/MadEditFrame.cpp:5121 ../src/MadEditFrame.cpp:5309
-#: ../src/MadEditFrame.cpp:5336 ../src/MadOptionsDialog.cpp:628
+#: ../src/MadEditFrame.cpp:5336 ../src/MadSourceFormatDialog.cpp:456
+#: ../src/MadSourceFormatDialog.cpp:464 ../src/MadOptionsDialog.cpp:628
 #: ../src/MadConvEncDialog.cpp:66
 msgid "None"
 msgstr "Nada"
@@ -3053,7 +3054,8 @@ msgstr ""
 msgid "&Deselect All"
 msgstr "&Seleccionar todo"
 
-#: ../src/MadFileHistoryDialog.cpp:69 ../src/MadSaveQueryDialog.cpp:79
+#: ../src/MadFileHistoryDialog.cpp:69 ../src/MadSourceFormatDialog.cpp:459
+#: ../src/MadSourceFormatDialog.cpp:467 ../src/MadSaveQueryDialog.cpp:79
 #: ../src/MadWinListDialog.cpp:85 ../src/MadAboutDialog.cpp:114
 #, fuzzy
 msgid "Name"
@@ -3355,6 +3357,363 @@ msgstr "No se encuentra ninguna cadena coincidente."
 #, fuzzy, c-format
 msgid "%s string(s) were replaced."
 msgstr "%d cadena(s) reemplazada(s)"
+
+#: ../src/MadSourceFormatDialog.cpp:140
+#, fuzzy
+msgid "Source Formator"
+msgstr "Cambia la configuración de fuente"
+
+#: ../src/MadSourceFormatDialog.cpp:149
+msgid "Allman(ANSI)"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:150
+msgid "Java"
+msgstr "Java"
+
+#: ../src/MadSourceFormatDialog.cpp:151
+msgid "Kr"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:152
+msgid "Stroustrup"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:153
+#, fuzzy
+msgid "Whitesmith"
+msgstr "Blanco"
+
+#: ../src/MadSourceFormatDialog.cpp:154
+msgid "VTK"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:155
+msgid "Banner"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:156
+msgid "Gnu"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:157
+msgid "Linux"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:158
+msgid "Horstmann"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:159
+msgid "1TBS"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:160
+msgid "Google"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:161
+msgid "Pico"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:162
+msgid "Lisp"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:163
+msgid "Custom"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:165
+msgid "Bracket Style"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:167
+msgid "Sample"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:168
+msgid "Sample of the bracket style option chosen to use:"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:266
+msgid "Attach Classes"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:269
+msgid "Attach Extern C"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:272
+msgid "Attach Namespaces"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:275
+msgid "Attach Inlines"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:278
+msgid "Attach Closing While"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:287
+msgid "Indentation size (in spaces):"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:293
+#, fuzzy
+msgid "Use TABs instead of spaces"
+msgstr "Usar Inglés en lugar de ajuste regional actual"
+
+#: ../src/MadSourceFormatDialog.cpp:296
+msgid "Force using TABs"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:299
+msgid "Indent case: statement in switches (commands under case:)"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:302
+msgid "Indent classes (keywords public:, protected: and private:)"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:305
+msgid "Indent labels"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:308
+msgid "Indent modifiers"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:311
+msgid "Indent namespaces"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:314
+msgid "Indent switches"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:317
+msgid ""
+"Indent preprocessor blocks at bracket level zero, and within a namespace"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:320
+msgid "Indent multi-line preprocessor definitions ending with a backslash"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:323
+msgid "Indent preprocessor conditionals"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:326
+msgid "Indent C++ comments beginning in column one"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:329
+#, fuzzy
+msgid "Indent after parens"
+msgstr "Orientación"
+
+#: ../src/MadSourceFormatDialog.cpp:334
+msgid "Minimal indent added when a header is built of multiple lines:"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:339
+msgid "Maximum of # spaces to indent a continuation line (max. 120):"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:341
+#, fuzzy
+msgid "40"
+msgstr "0"
+
+#: ../src/MadSourceFormatDialog.cpp:343
+msgid "Indent a continuation line (default 1)"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:345
+msgid "1"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:353
+msgid "Break closing headers from their immediately preceding closing braces"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:356
+msgid "Break 'else if()' header combinations into seperate lines"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:359
+msgid "Add braces to unbraced one line conditional statements"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:362
+msgid "Add one line braces to unbraced one line conditional statements"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:365
+msgid ""
+"Remove braces from conditional statements (single statement on a single line"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:368
+msgid "Don't break one-line blocks"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:371
+msgid ""
+"Don't break complex statements and multiple statements residing in a single "
+"line"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:374
+#, fuzzy
+msgid "Convert TABs to spaces"
+msgstr "Usar Inglés en lugar de ajuste regional actual"
+
+#: ../src/MadSourceFormatDialog.cpp:377
+msgid "Closes whitespace in the angle brackets of template definitions"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:380
+msgid "Remove the preceding '*' in a multi-line comment that begins a line"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:383
+msgid "Break one line headers"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:386
+#, fuzzy
+msgid "Enable line breaking"
+msgstr "Ajusta interlineado"
+
+#: ../src/MadSourceFormatDialog.cpp:391
+msgid "Break lines after amount of chars (range: 50-200)"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:393
+msgid "200"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:398
+msgid "Break logical conditionals to be placed last on the previous line"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:407
+msgid "Pad empty lines around header blocks (e.g. 'if', 'while'...)"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:412
+msgid ""
+"Treat closing header blocks (e.g. 'else', 'catch') as stand-alone blocks"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:416
+msgid "Insert space padding around operators"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:419
+msgid "Insert space padding around parenthesies on the outside"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:422
+msgid "Insert space padding around parenthesies on the inside"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:425
+msgid "Insert space padding between a header and the following parenthesis"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:428
+msgid "Remove extra space padding around parenthesis"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:431
+msgid "Delete empty lines within a function or method"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:434
+msgid "Fill empty lines with the whitespace of their previous lines"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:437
+msgid "Pad comma"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:440
+msgid "Pad return type(Object-C)"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:443
+msgid "Unpad return type(Object-C)"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:446
+msgid "Pad param type(Object-C)"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:449
+msgid "Unpad param type(Object-C)"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:453
+msgid "Pointer alignment"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:457 ../src/MadSourceFormatDialog.cpp:465
+msgid "Type"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:458 ../src/MadSourceFormatDialog.cpp:466
+msgid "Middle"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:461
+msgid "Reference alignment"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:476
+msgid "XML version:"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:478
+msgid "1.0"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:480
+msgid "Indentation size(in spaces):"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:482
+msgid "4"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:488
+msgid "Style"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:489
+msgid "Brackets"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:490
+#, fuzzy
+msgid "Indentation"
+msgstr "Orientación"
+
+#: ../src/MadSourceFormatDialog.cpp:491
+msgid "Formatting"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:492
+msgid "Padding"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:493
+msgid "XML"
+msgstr "XML"
 
 #: ../src/MadSortDialog.cpp:29
 msgid "Sort Options"
@@ -4168,18 +4527,6 @@ msgid ""
 "Unsure how to update the possible values for %s based on the value of %s"
 msgstr ""
 
-#, fuzzy
-#~ msgid "Indentation"
-#~ msgstr "Orientación"
-
-#, fuzzy
-#~ msgid "Use TABs instead of spaces"
-#~ msgstr "Usar Inglés en lugar de ajuste regional actual"
-
-#, fuzzy
-#~ msgid "Enable line breaking"
-#~ msgstr "Ajusta interlineado"
-
 #~ msgid "..."
 #~ msgstr "..."
 
@@ -4258,9 +4605,6 @@ msgstr ""
 
 #~ msgid "Check for new versions including &prereleases"
 #~ msgstr "Comprobar si hay nuevas versiones incluyendo versiones preliminares"
-
-#~ msgid "0"
-#~ msgstr "0"
 
 #~ msgid "Behavior of copying in hex editing area:"
 #~ msgstr "Comportamiento de copia en el área de edición hexadecimal:"
@@ -5568,9 +5912,6 @@ msgstr ""
 #~ msgid "Wheat"
 #~ msgstr "Trigo"
 
-#~ msgid "White"
-#~ msgstr "Blanco"
-
 #~ msgid "WhiteSmoke"
 #~ msgstr "Humo Blanco"
 
@@ -5615,9 +5956,6 @@ msgstr ""
 
 #~ msgid "FreeBASIC"
 #~ msgstr "FreeBASIC"
-
-#~ msgid "Java"
-#~ msgstr "Java"
 
 #~ msgid "JavaScript"
 #~ msgstr "JavaScript"
@@ -5675,9 +6013,6 @@ msgstr ""
 
 #~ msgid "x86 Assembly"
 #~ msgstr "Ensamblador x86"
-
-#~ msgid "XML"
-#~ msgstr "XML"
 
 #~ msgid "East Asia"
 #~ msgstr "Asia del Este"

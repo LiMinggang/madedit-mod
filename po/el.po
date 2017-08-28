@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: madedit-mod 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-28 17:43+0800\n"
+"POT-Creation-Date: 2017-08-28 17:54+0800\n"
 "PO-Revision-Date: 2017-08-28 17:44+0800\n"
 "Last-Translator: nikos <nikos769@yahoo.gr>\n"
 "Language-Team: Greek <nikos769@yahoo.gr>\n"
@@ -2607,7 +2607,8 @@ msgstr "Ορισμός της σημαίας ΜόνοΑνάγνωσης του �
 #: ../src/MadEditFrame.cpp:5017 ../src/MadEditFrame.cpp:5033
 #: ../src/MadEditFrame.cpp:5053 ../src/MadEditFrame.cpp:5059
 #: ../src/MadEditFrame.cpp:5121 ../src/MadEditFrame.cpp:5309
-#: ../src/MadEditFrame.cpp:5336 ../src/MadOptionsDialog.cpp:628
+#: ../src/MadEditFrame.cpp:5336 ../src/MadSourceFormatDialog.cpp:456
+#: ../src/MadSourceFormatDialog.cpp:464 ../src/MadOptionsDialog.cpp:628
 #: ../src/MadConvEncDialog.cpp:66
 msgid "None"
 msgstr "Κανένα"
@@ -2949,7 +2950,8 @@ msgstr "&Άνοιγμα"
 msgid "&Deselect All"
 msgstr "&Αποεπιλογή Όλων"
 
-#: ../src/MadFileHistoryDialog.cpp:69 ../src/MadSaveQueryDialog.cpp:79
+#: ../src/MadFileHistoryDialog.cpp:69 ../src/MadSourceFormatDialog.cpp:459
+#: ../src/MadSourceFormatDialog.cpp:467 ../src/MadSaveQueryDialog.cpp:79
 #: ../src/MadWinListDialog.cpp:85 ../src/MadAboutDialog.cpp:114
 msgid "Name"
 msgstr "Όνομα"
@@ -3249,6 +3251,394 @@ msgid "%s string(s) were replaced."
 msgstr ""
 "Στίχοι που αντικαταστάθηκαν:\n"
 " %s"
+
+#: ../src/MadSourceFormatDialog.cpp:140
+#, fuzzy
+msgid "Source Formator"
+msgstr "Μορφοποιητής Πηγαίου Κώδικα"
+
+#: ../src/MadSourceFormatDialog.cpp:149
+msgid "Allman(ANSI)"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:150
+msgid "Java"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:151
+msgid "Kr"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:152
+msgid "Stroustrup"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:153
+msgid "Whitesmith"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:154
+msgid "VTK"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:155
+msgid "Banner"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:156
+msgid "Gnu"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:157
+msgid "Linux"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:158
+msgid "Horstmann"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:159
+msgid "1TBS"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:160
+msgid "Google"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:161
+msgid "Pico"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:162
+msgid "Lisp"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:163
+msgid "Custom"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:165
+msgid "Bracket Style"
+msgstr "Τεχνοτροπία Αγκύλων"
+
+#: ../src/MadSourceFormatDialog.cpp:167
+msgid "Sample"
+msgstr "Δείγμα"
+
+#: ../src/MadSourceFormatDialog.cpp:168
+msgid "Sample of the bracket style option chosen to use:"
+msgstr ""
+"Δείγμα της επιλογής της τεχνοτροπίας των αγκύλων προς επιλογή για χρήση:"
+
+#: ../src/MadSourceFormatDialog.cpp:266
+msgid "Attach Classes"
+msgstr "Προσκόλληση Τάξεων"
+
+#: ../src/MadSourceFormatDialog.cpp:269
+msgid "Attach Extern C"
+msgstr "Προσκόλληση Extern C"
+
+#: ../src/MadSourceFormatDialog.cpp:272
+msgid "Attach Namespaces"
+msgstr "Προσκόλληση ΟνομάτωνΠεδίων"
+
+#: ../src/MadSourceFormatDialog.cpp:275
+msgid "Attach Inlines"
+msgstr "Προσκόλληση Εσώγραμμων"
+
+#: ../src/MadSourceFormatDialog.cpp:278
+msgid "Attach Closing While"
+msgstr "Προσκόλληση «Ενού» Κλεισίματος"
+
+#: ../src/MadSourceFormatDialog.cpp:287
+#, fuzzy
+msgid "Indentation size (in spaces):"
+msgstr "Μέγεθος δημιουργίας εσοχών (σε διαστήματα)"
+
+#: ../src/MadSourceFormatDialog.cpp:293
+msgid "Use TABs instead of spaces"
+msgstr "Χρήση ΠΙΝΑΚΩΤΗΣ αντί για διαστήματα"
+
+#: ../src/MadSourceFormatDialog.cpp:296
+msgid "Force using TABs"
+msgstr "Εξαναγκασμός χρήσης των ΠΙΝΑΚΩΤΩΝ"
+
+#: ../src/MadSourceFormatDialog.cpp:299
+msgid "Indent case: statement in switches (commands under case:)"
+msgstr ""
+"Περίπτωση εσοχής: δήλωση στους εναλλάκτες (εντολές κατά την περίπτωση:)"
+
+#: ../src/MadSourceFormatDialog.cpp:302
+msgid "Indent classes (keywords public:, protected: and private:)"
+msgstr "Τάξεις εσοχών (λέξεις-κλειδιά public:, protected: και private:)"
+
+#: ../src/MadSourceFormatDialog.cpp:305
+msgid "Indent labels"
+msgstr "Εσοχή στις ετικέτες"
+
+#: ../src/MadSourceFormatDialog.cpp:308
+msgid "Indent modifiers"
+msgstr "Εσοχή στους μετατροπείς"
+
+#: ../src/MadSourceFormatDialog.cpp:311
+msgid "Indent namespaces"
+msgstr "Εσοχή στα ονόματα-πεδία"
+
+#: ../src/MadSourceFormatDialog.cpp:314
+msgid "Indent switches"
+msgstr "Εσοχή στους εναλλάκτες"
+
+#: ../src/MadSourceFormatDialog.cpp:317
+msgid ""
+"Indent preprocessor blocks at bracket level zero, and within a namespace"
+msgstr ""
+"Εσοχή στα τμήματα προεπεξεργαστή στο επίπεδο αγκύλης μηδέν, και εντός των "
+"ονομάτων-πεδίων"
+
+#: ../src/MadSourceFormatDialog.cpp:320
+msgid "Indent multi-line preprocessor definitions ending with a backslash"
+msgstr ""
+"Εσοχή στους πολλών γραμμών προσδιορισμούς προεπεξεργαστή, που τελειώνουν με "
+"πισωκάθετο"
+
+#: ../src/MadSourceFormatDialog.cpp:323
+msgid "Indent preprocessor conditionals"
+msgstr "Εσοχή στις υποθέσεις προεπεξεργαστή"
+
+#: ../src/MadSourceFormatDialog.cpp:326
+msgid "Indent C++ comments beginning in column one"
+msgstr "Εσοχή στα σχόλια C++ που ξεκινούν στην στήλη ένα"
+
+#: ../src/MadSourceFormatDialog.cpp:329
+msgid "Indent after parens"
+msgstr "Εσοχή στα ονόματα-πεδία"
+
+#: ../src/MadSourceFormatDialog.cpp:334
+#, fuzzy
+msgid "Minimal indent added when a header is built of multiple lines:"
+msgstr ""
+"Ελάχιστη εσοχή που προστίθεται, όταν μια κεφαλίδα χτίζεται από πολλαπλές "
+"γραμμές"
+
+#: ../src/MadSourceFormatDialog.cpp:339
+#, fuzzy
+msgid "Maximum of # spaces to indent a continuation line (max. 120):"
+msgstr ""
+"Μέγιστο πλήθος από διαστήματα # , για να τοποθετηθεί εσοχή σε μια γραμμή "
+"συνέχειας (μεγ. 120)"
+
+#: ../src/MadSourceFormatDialog.cpp:341
+msgid "40"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:343
+msgid "Indent a continuation line (default 1)"
+msgstr "Να τοποθετηθεί εσοχή σε μια γραμμή συνέχειας (προεπιλογή το 1)"
+
+#: ../src/MadSourceFormatDialog.cpp:345
+msgid "1"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:353
+msgid "Break closing headers from their immediately preceding closing braces"
+msgstr ""
+"Σπάσιμο των κεφαλίδων που κλείνουν από τις άμεσα προηγούμενες αγκύλες "
+"κλεισίματος"
+
+#: ../src/MadSourceFormatDialog.cpp:356
+msgid "Break 'else if()' header combinations into seperate lines"
+msgstr "Σπάσιμο των συνδυασμών κεφαλίδας «else if()» σε ξεχωριστές γραμμές"
+
+#: ../src/MadSourceFormatDialog.cpp:359
+#, fuzzy
+msgid "Add braces to unbraced one line conditional statements"
+msgstr "Προσθήκη αγκύλων σε υποθετικές δηλώσεις μίας γραμμής χωρίς παρένθεση"
+
+#: ../src/MadSourceFormatDialog.cpp:362
+#, fuzzy
+msgid "Add one line braces to unbraced one line conditional statements"
+msgstr "Προσθήκη αγκύλων μίας γραμμής σε υποθετικές δηλώσεις χωρίς αγκύλες"
+
+#: ../src/MadSourceFormatDialog.cpp:365
+#, fuzzy
+msgid ""
+"Remove braces from conditional statements (single statement on a single line"
+msgstr ""
+"Απομάκρυνση των αγκύλων από υποθετικές δηλώσεις (μία δήλωση σε κάθε μία "
+"γραμμή)"
+
+#: ../src/MadSourceFormatDialog.cpp:368
+msgid "Don't break one-line blocks"
+msgstr "Να μην σπάσουν τμήματα μίας-γραμμής"
+
+#: ../src/MadSourceFormatDialog.cpp:371
+msgid ""
+"Don't break complex statements and multiple statements residing in a single "
+"line"
+msgstr ""
+"Να μην σπάσουν πολύπλοκες δηλώσεις και πολλαπλές δηλώσεις που ενυπάρχουν σε "
+"μονή γραμμή"
+
+#: ../src/MadSourceFormatDialog.cpp:374
+msgid "Convert TABs to spaces"
+msgstr "Μετατροπή των ΠΙΝΑΚΩΤΩΝ σε διαστήματα"
+
+#: ../src/MadSourceFormatDialog.cpp:377
+msgid "Closes whitespace in the angle brackets of template definitions"
+msgstr ""
+"Κλείνει το κενό διάστημα σε γωνιακές αγκύλες των προσδιορισμών των προτύπων"
+
+#: ../src/MadSourceFormatDialog.cpp:380
+msgid "Remove the preceding '*' in a multi-line comment that begins a line"
+msgstr ""
+"Απομάκρυνση του προηγούμενου «*» σε ένα σχόλιο πολλών γραμμών, που ξεκινά "
+"μία γραμμή"
+
+#: ../src/MadSourceFormatDialog.cpp:383
+msgid "Break one line headers"
+msgstr "Σπάσιμο των κεφαλίδων μίας γραμμής"
+
+#: ../src/MadSourceFormatDialog.cpp:386
+msgid "Enable line breaking"
+msgstr "Ενεργοποίηση του σπασίματος της γραμμής"
+
+#: ../src/MadSourceFormatDialog.cpp:391
+msgid "Break lines after amount of chars (range: 50-200)"
+msgstr "Σπάσιμο των γραμμών μετά το πλήθος των χαρακτήρων (εύρος: 50-200)"
+
+#: ../src/MadSourceFormatDialog.cpp:393
+msgid "200"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:398
+msgid "Break logical conditionals to be placed last on the previous line"
+msgstr ""
+"Σπάσιμο των λογικών υποθέσεων ,ώστε να τοποθετηθούν τελευταία στην "
+"προηγούμενη γραμμή"
+
+#: ../src/MadSourceFormatDialog.cpp:407
+msgid "Pad empty lines around header blocks (e.g. 'if', 'while'...)"
+msgstr ""
+"Γέμισμα άδειων γραμμών γύρω από τμήματα κεφαλίδων (πχ «if», «while»...)"
+
+#: ../src/MadSourceFormatDialog.cpp:412
+msgid ""
+"Treat closing header blocks (e.g. 'else', 'catch') as stand-alone blocks"
+msgstr ""
+"Αντιμετώπιση τμημάτων κεφαλίδας κλεισίματος (πχ «else», «catch») ως αυτόνομα "
+"τμήματα"
+
+#: ../src/MadSourceFormatDialog.cpp:416
+msgid "Insert space padding around operators"
+msgstr "Εισαγωγή γεμίσματος διαστημάτων γύρω από χειριστές"
+
+#: ../src/MadSourceFormatDialog.cpp:419
+msgid "Insert space padding around parenthesies on the outside"
+msgstr "Εισαγωγή γεμίσματος διαστημάτων γύρω από παρενθέσεις, εξωτερικά"
+
+#: ../src/MadSourceFormatDialog.cpp:422
+msgid "Insert space padding around parenthesies on the inside"
+msgstr "Εισαγωγή γεμίσματος διαστημάτων γύρω από παρενθέσεις, εσωτερικά"
+
+#: ../src/MadSourceFormatDialog.cpp:425
+msgid "Insert space padding between a header and the following parenthesis"
+msgstr ""
+"Εισαγωγή γεμίσματος διαστημάτων ανάμεσα σε μία κεφαλίδα και την ακόλουθη "
+"παρένθεση"
+
+#: ../src/MadSourceFormatDialog.cpp:428
+msgid "Remove extra space padding around parenthesis"
+msgstr ""
+"Απομάκρυνση του πλεονάζοντος γεμίσματος διαστήματος γύρω από παρενθέσεις"
+
+#: ../src/MadSourceFormatDialog.cpp:431
+msgid "Delete empty lines within a function or method"
+msgstr "Διαγραφή των κενών γραμμών μέσα σε μια διαδικασία ή μέθοδο"
+
+#: ../src/MadSourceFormatDialog.cpp:434
+msgid "Fill empty lines with the whitespace of their previous lines"
+msgstr ""
+"Συμπλήρωση των κενών γραμμών με τα κενά διαστήματα των προηγούμενών τους "
+"γραμμών"
+
+#: ../src/MadSourceFormatDialog.cpp:437
+msgid "Pad comma"
+msgstr "Γέμισμα του κόμματος"
+
+#: ../src/MadSourceFormatDialog.cpp:440
+msgid "Pad return type(Object-C)"
+msgstr "Γέμισμα του τύπου επιστροφής (Object-C)"
+
+#: ../src/MadSourceFormatDialog.cpp:443
+msgid "Unpad return type(Object-C)"
+msgstr "Απο-γέμισμα του τύπου επιστροφής (Object-C)"
+
+#: ../src/MadSourceFormatDialog.cpp:446
+msgid "Pad param type(Object-C)"
+msgstr "Γέμισμα του τύπου παραμέτρου (Object-C)"
+
+#: ../src/MadSourceFormatDialog.cpp:449
+msgid "Unpad param type(Object-C)"
+msgstr "Απο-γέμισμα του τύπου παραμέτρου (Object-C)"
+
+#: ../src/MadSourceFormatDialog.cpp:453
+#, fuzzy
+msgid "Pointer alignment"
+msgstr "Στοίχιση δείκτη:"
+
+#: ../src/MadSourceFormatDialog.cpp:457 ../src/MadSourceFormatDialog.cpp:465
+msgid "Type"
+msgstr "Είδος"
+
+#: ../src/MadSourceFormatDialog.cpp:458 ../src/MadSourceFormatDialog.cpp:466
+msgid "Middle"
+msgstr "Μεσαίο"
+
+#: ../src/MadSourceFormatDialog.cpp:461
+msgid "Reference alignment"
+msgstr "Στοίχιση της Αναφοράς"
+
+#: ../src/MadSourceFormatDialog.cpp:476
+#, fuzzy
+msgid "XML version:"
+msgstr "Έκδοση της XML"
+
+#: ../src/MadSourceFormatDialog.cpp:478
+msgid "1.0"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:480
+#, fuzzy
+msgid "Indentation size(in spaces):"
+msgstr "Μέγεθος της εσοχής (σε διαστήματα)"
+
+#: ../src/MadSourceFormatDialog.cpp:482
+msgid "4"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:488
+msgid "Style"
+msgstr "Τεχνοτροπία"
+
+#: ../src/MadSourceFormatDialog.cpp:489
+msgid "Brackets"
+msgstr "Αγκύλες"
+
+#: ../src/MadSourceFormatDialog.cpp:490
+msgid "Indentation"
+msgstr "Εσοχές"
+
+#: ../src/MadSourceFormatDialog.cpp:491
+msgid "Formatting"
+msgstr "Μορφοποίηση"
+
+#: ../src/MadSourceFormatDialog.cpp:492
+msgid "Padding"
+msgstr "Γέμισμα"
+
+#: ../src/MadSourceFormatDialog.cpp:493
+msgid "XML"
+msgstr ""
 
 #: ../src/MadSortDialog.cpp:29
 msgid "Sort Options"
@@ -4054,232 +4444,6 @@ msgstr ""
 "Αβέβαιο το πως θα ενημερώσω τις πιθανές τιμές για το %s βασιζόμενος στην "
 "τιμή του %s"
 
-#~ msgid "Source Formatter"
-#~ msgstr "Μορφοποιητής Πηγαίου Κώδικα"
-
-#~ msgid "Style"
-#~ msgstr "Τεχνοτροπία"
-
-#~ msgid "Bracket Style"
-#~ msgstr "Τεχνοτροπία Αγκύλων"
-
-#~ msgid "Sample"
-#~ msgstr "Δείγμα"
-
-#~ msgid "Sample of the bracket style option chosen to use:"
-#~ msgstr ""
-#~ "Δείγμα της επιλογής της τεχνοτροπίας των αγκύλων προς επιλογή για χρήση:"
-
-#~ msgid "Brackets"
-#~ msgstr "Αγκύλες"
-
-#~ msgid "Attach Classes"
-#~ msgstr "Προσκόλληση Τάξεων"
-
-#~ msgid "Attach Extern C"
-#~ msgstr "Προσκόλληση Extern C"
-
-#~ msgid "Attach Namespaces"
-#~ msgstr "Προσκόλληση ΟνομάτωνΠεδίων"
-
-#~ msgid "Attach Inlines"
-#~ msgstr "Προσκόλληση Εσώγραμμων"
-
-#~ msgid "Attach Closing While"
-#~ msgstr "Προσκόλληση «Ενού» Κλεισίματος"
-
-#~ msgid "Indentation"
-#~ msgstr "Εσοχές"
-
-#~ msgid "Indentation size (in spaces)"
-#~ msgstr "Μέγεθος δημιουργίας εσοχών (σε διαστήματα)"
-
-#~ msgid "Use TABs instead of spaces"
-#~ msgstr "Χρήση ΠΙΝΑΚΩΤΗΣ αντί για διαστήματα"
-
-#~ msgid "Force using TABs"
-#~ msgstr "Εξαναγκασμός χρήσης των ΠΙΝΑΚΩΤΩΝ"
-
-#~ msgid "Indent case: statement in switches (commands under case:)"
-#~ msgstr ""
-#~ "Περίπτωση εσοχής: δήλωση στους εναλλάκτες (εντολές κατά την περίπτωση:)"
-
-#~ msgid "Indent classes (keywords public:, protected: and private:)"
-#~ msgstr "Τάξεις εσοχών (λέξεις-κλειδιά public:, protected: και private:)"
-
-#~ msgid "Indent labels"
-#~ msgstr "Εσοχή στις ετικέτες"
-
-#~ msgid "Indent modifiers"
-#~ msgstr "Εσοχή στους μετατροπείς"
-
-#~ msgid "Indent namespaces"
-#~ msgstr "Εσοχή στα ονόματα-πεδία"
-
-#~ msgid "Indent switches"
-#~ msgstr "Εσοχή στους εναλλάκτες"
-
-#~ msgid ""
-#~ "Indent preprocessor blocks at bracket level zero, and within a namespace"
-#~ msgstr ""
-#~ "Εσοχή στα τμήματα προεπεξεργαστή στο επίπεδο αγκύλης μηδέν, και εντός των "
-#~ "ονομάτων-πεδίων"
-
-#~ msgid "Indent multi-line preprocessor definitions ending with a backslash"
-#~ msgstr ""
-#~ "Εσοχή στους πολλών γραμμών προσδιορισμούς προεπεξεργαστή, που τελειώνουν "
-#~ "με πισωκάθετο"
-
-#~ msgid "Indent preprocessor conditionals"
-#~ msgstr "Εσοχή στις υποθέσεις προεπεξεργαστή"
-
-#~ msgid "Indent C++ comments beginning in column one"
-#~ msgstr "Εσοχή στα σχόλια C++ που ξεκινούν στην στήλη ένα"
-
-#~ msgid "Indent after parens"
-#~ msgstr "Εσοχή στα ονόματα-πεδία"
-
-#~ msgid "Minimal indent added when a header is built of multiple lines"
-#~ msgstr ""
-#~ "Ελάχιστη εσοχή που προστίθεται, όταν μια κεφαλίδα χτίζεται από πολλαπλές "
-#~ "γραμμές"
-
-#~ msgid "Maximum of # spaces to indent a continuation line (max. 120)"
-#~ msgstr ""
-#~ "Μέγιστο πλήθος από διαστήματα # , για να τοποθετηθεί εσοχή σε μια γραμμή "
-#~ "συνέχειας (μεγ. 120)"
-
-#~ msgid "Indent a continuation line (default 1)"
-#~ msgstr "Να τοποθετηθεί εσοχή σε μια γραμμή συνέχειας (προεπιλογή το 1)"
-
-#~ msgid "Formatting"
-#~ msgstr "Μορφοποίηση"
-
-#~ msgid ""
-#~ "Break closing headers from their immediately preceding closing braces"
-#~ msgstr ""
-#~ "Σπάσιμο των κεφαλίδων που κλείνουν από τις άμεσα προηγούμενες αγκύλες "
-#~ "κλεισίματος"
-
-#~ msgid "Break 'else if()' header combinations into seperate lines"
-#~ msgstr "Σπάσιμο των συνδυασμών κεφαλίδας «else if()» σε ξεχωριστές γραμμές"
-
-#~ msgid "Add braces to unbracketed one line conditional statements"
-#~ msgstr ""
-#~ "Προσθήκη αγκύλων σε υποθετικές δηλώσεις μίας γραμμής χωρίς παρένθεση"
-
-#~ msgid "Add one line brackets to unbracketed one line conditional statements"
-#~ msgstr "Προσθήκη αγκύλων μίας γραμμής σε υποθετικές δηλώσεις χωρίς αγκύλες"
-
-#~ msgid ""
-#~ "Remove braces from conditional statements (single statement on a single "
-#~ "line)"
-#~ msgstr ""
-#~ "Απομάκρυνση των αγκύλων από υποθετικές δηλώσεις (μία δήλωση σε κάθε μία "
-#~ "γραμμή)"
-
-#~ msgid "Don't break one-line blocks"
-#~ msgstr "Να μην σπάσουν τμήματα μίας-γραμμής"
-
-#~ msgid "Convert TABs to spaces"
-#~ msgstr "Μετατροπή των ΠΙΝΑΚΩΤΩΝ σε διαστήματα"
-
-#~ msgid "Closes whitespace in the angle brackets of template definitions"
-#~ msgstr ""
-#~ "Κλείνει το κενό διάστημα σε γωνιακές αγκύλες των προσδιορισμών των "
-#~ "προτύπων"
-
-#~ msgid "Remove the preceding '*' in a multi-line comment that begins a line"
-#~ msgstr ""
-#~ "Απομάκρυνση του προηγούμενου «*» σε ένα σχόλιο πολλών γραμμών, που ξεκινά "
-#~ "μία γραμμή"
-
-#~ msgid "Break one line headers"
-#~ msgstr "Σπάσιμο των κεφαλίδων μίας γραμμής"
-
-#~ msgid "Enable line breaking"
-#~ msgstr "Ενεργοποίηση του σπασίματος της γραμμής"
-
-#~ msgid "Break lines after amount of chars (range: 50-200)"
-#~ msgstr "Σπάσιμο των γραμμών μετά το πλήθος των χαρακτήρων (εύρος: 50-200)"
-
-#~ msgid "Break logical conditionals to be placed last on the previous line"
-#~ msgstr ""
-#~ "Σπάσιμο των λογικών υποθέσεων ,ώστε να τοποθετηθούν τελευταία στην "
-#~ "προηγούμενη γραμμή"
-
-#~ msgid "Padding"
-#~ msgstr "Γέμισμα"
-
-#~ msgid "Pad empty lines around header blocks (e.g. 'if', 'while'...)"
-#~ msgstr ""
-#~ "Γέμισμα άδειων γραμμών γύρω από τμήματα κεφαλίδων (πχ «if», «while»...)"
-
-#~ msgid ""
-#~ "Treat closing header blocks (e.g. 'else', 'catch') as stand-alone blocks"
-#~ msgstr ""
-#~ "Αντιμετώπιση τμημάτων κεφαλίδας κλεισίματος (πχ «else», «catch») ως "
-#~ "αυτόνομα τμήματα"
-
-#~ msgid "Insert space padding around operators"
-#~ msgstr "Εισαγωγή γεμίσματος διαστημάτων γύρω από χειριστές"
-
-#~ msgid "Insert space padding around parenthesies on the outside"
-#~ msgstr "Εισαγωγή γεμίσματος διαστημάτων γύρω από παρενθέσεις, εξωτερικά"
-
-#~ msgid "Insert space padding around parenthesies on the inside"
-#~ msgstr "Εισαγωγή γεμίσματος διαστημάτων γύρω από παρενθέσεις, εσωτερικά"
-
-#~ msgid "Insert space padding between a header and the following parenthesis"
-#~ msgstr ""
-#~ "Εισαγωγή γεμίσματος διαστημάτων ανάμεσα σε μία κεφαλίδα και την ακόλουθη "
-#~ "παρένθεση"
-
-#~ msgid "Remove extra space padding around parenthesis"
-#~ msgstr ""
-#~ "Απομάκρυνση του πλεονάζοντος γεμίσματος διαστήματος γύρω από παρενθέσεις"
-
-#~ msgid "Delete empty lines within a function or method"
-#~ msgstr "Διαγραφή των κενών γραμμών μέσα σε μια διαδικασία ή μέθοδο"
-
-#~ msgid "Fill empty lines with the whitespace of their previous lines"
-#~ msgstr ""
-#~ "Συμπλήρωση των κενών γραμμών με τα κενά διαστήματα των προηγούμενών τους "
-#~ "γραμμών"
-
-#~ msgid "Pad comma"
-#~ msgstr "Γέμισμα του κόμματος"
-
-#~ msgid "Pad return type(Object-C)"
-#~ msgstr "Γέμισμα του τύπου επιστροφής (Object-C)"
-
-#~ msgid "Unpad return type(Object-C)"
-#~ msgstr "Απο-γέμισμα του τύπου επιστροφής (Object-C)"
-
-#~ msgid "Pad param type(Object-C)"
-#~ msgstr "Γέμισμα του τύπου παραμέτρου (Object-C)"
-
-#~ msgid "Unpad param type(Object-C)"
-#~ msgstr "Απο-γέμισμα του τύπου παραμέτρου (Object-C)"
-
-#~ msgid "Pointer alignment:"
-#~ msgstr "Στοίχιση δείκτη:"
-
-#~ msgid "Type"
-#~ msgstr "Είδος"
-
-#~ msgid "Middle"
-#~ msgstr "Μεσαίο"
-
-#~ msgid "Reference alignment"
-#~ msgstr "Στοίχιση της Αναφοράς"
-
-#~ msgid "XML version"
-#~ msgstr "Έκδοση της XML"
-
-#~ msgid "Indentation size(in spaces)"
-#~ msgstr "Μέγεθος της εσοχής (σε διαστήματα)"
-
 #, fuzzy
 #~ msgid ""
 #~ "Minggang Li\t\tCurrent maintainer of MadEdit-Mod\n"
@@ -4302,13 +4466,6 @@ msgstr ""
 
 #~ msgid "<<"
 #~ msgstr "<<"
-
-#~ msgid ""
-#~ "Don't break complex statements and multiple statements residing in a "
-#~ "single line"
-#~ msgstr ""
-#~ "Να μην σπάσουν πολύπλοκες δηλώσεις και πολλαπλές δηλώσεις που ενυπάρχουν "
-#~ "σε μονή γραμμή"
 
 #~ msgid "Go Back(Alt-,)"
 #~ msgstr "Μετακίνηση Πίσω(Alt-,)"

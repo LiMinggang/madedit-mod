@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-28 17:43+0800\n"
+"POT-Creation-Date: 2017-08-28 17:54+0800\n"
 "PO-Revision-Date: 2017-08-28 17:44+0800\n"
 "Last-Translator: zhtw <zhtw2013@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
@@ -2565,7 +2565,8 @@ msgstr "設定檔案的唯讀標幟"
 #: ../src/MadEditFrame.cpp:5017 ../src/MadEditFrame.cpp:5033
 #: ../src/MadEditFrame.cpp:5053 ../src/MadEditFrame.cpp:5059
 #: ../src/MadEditFrame.cpp:5121 ../src/MadEditFrame.cpp:5309
-#: ../src/MadEditFrame.cpp:5336 ../src/MadOptionsDialog.cpp:628
+#: ../src/MadEditFrame.cpp:5336 ../src/MadSourceFormatDialog.cpp:456
+#: ../src/MadSourceFormatDialog.cpp:464 ../src/MadOptionsDialog.cpp:628
 #: ../src/MadConvEncDialog.cpp:66
 msgid "None"
 msgstr "無"
@@ -2905,7 +2906,8 @@ msgstr "開啟(&O)"
 msgid "&Deselect All"
 msgstr "取消全部(&D)"
 
-#: ../src/MadFileHistoryDialog.cpp:69 ../src/MadSaveQueryDialog.cpp:79
+#: ../src/MadFileHistoryDialog.cpp:69 ../src/MadSourceFormatDialog.cpp:459
+#: ../src/MadSourceFormatDialog.cpp:467 ../src/MadSaveQueryDialog.cpp:79
 #: ../src/MadWinListDialog.cpp:85 ../src/MadAboutDialog.cpp:114
 msgid "Name"
 msgstr "名稱"
@@ -3202,6 +3204,368 @@ msgstr "找不到符合的字串。"
 #, c-format
 msgid "%s string(s) were replaced."
 msgstr "%s 個字串已被取代。"
+
+#: ../src/MadSourceFormatDialog.cpp:140
+#, fuzzy
+msgid "Source Formator"
+msgstr "來源檔案格式化工具"
+
+#: ../src/MadSourceFormatDialog.cpp:149
+msgid "Allman(ANSI)"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:150
+msgid "Java"
+msgstr "Java"
+
+#: ../src/MadSourceFormatDialog.cpp:151
+msgid "Kr"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:152
+msgid "Stroustrup"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:153
+#, fuzzy
+msgid "Whitesmith"
+msgstr "白"
+
+#: ../src/MadSourceFormatDialog.cpp:154
+msgid "VTK"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:155
+msgid "Banner"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:156
+msgid "Gnu"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:157
+msgid "Linux"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:158
+msgid "Horstmann"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:159
+msgid "1TBS"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:160
+msgid "Google"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:161
+msgid "Pico"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:162
+msgid "Lisp"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:163
+msgid "Custom"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:165
+msgid "Bracket Style"
+msgstr "花括號樣式"
+
+#: ../src/MadSourceFormatDialog.cpp:167
+msgid "Sample"
+msgstr "範例"
+
+#: ../src/MadSourceFormatDialog.cpp:168
+msgid "Sample of the bracket style option chosen to use:"
+msgstr "所選擇使用的花括號格式樣例"
+
+#: ../src/MadSourceFormatDialog.cpp:266
+msgid "Attach Classes"
+msgstr "類名後跟著花括號"
+
+#: ../src/MadSourceFormatDialog.cpp:269
+msgid "Attach Extern C"
+msgstr "Extern C後跟著花括號"
+
+#: ../src/MadSourceFormatDialog.cpp:272
+msgid "Attach Namespaces"
+msgstr "命名空間後跟著花括號"
+
+#: ../src/MadSourceFormatDialog.cpp:275
+msgid "Attach Inlines"
+msgstr "Inline後跟著花括號"
+
+#: ../src/MadSourceFormatDialog.cpp:278
+msgid "Attach Closing While"
+msgstr "\"do-while\"花括號後跟著while"
+
+#: ../src/MadSourceFormatDialog.cpp:287
+#, fuzzy
+msgid "Indentation size (in spaces):"
+msgstr "縮排尺寸（空格數）"
+
+#: ../src/MadSourceFormatDialog.cpp:293
+msgid "Use TABs instead of spaces"
+msgstr "使用定位字元（Tab）而非空格"
+
+#: ../src/MadSourceFormatDialog.cpp:296
+msgid "Force using TABs"
+msgstr "強制使用定位字元（Tab）"
+
+#: ../src/MadSourceFormatDialog.cpp:299
+msgid "Indent case: statement in switches (commands under case:)"
+msgstr "case縮排：分支內的語句（case包含的命令）"
+
+#: ../src/MadSourceFormatDialog.cpp:302
+msgid "Indent classes (keywords public:, protected: and private:)"
+msgstr "縮排類（public:，protected:，和private:關鍵字）"
+
+#: ../src/MadSourceFormatDialog.cpp:305
+msgid "Indent labels"
+msgstr "縮排標籤"
+
+#: ../src/MadSourceFormatDialog.cpp:308
+msgid "Indent modifiers"
+msgstr "縮排修飾字元"
+
+#: ../src/MadSourceFormatDialog.cpp:311
+msgid "Indent namespaces"
+msgstr "縮排命名空間"
+
+#: ../src/MadSourceFormatDialog.cpp:314
+msgid "Indent switches"
+msgstr "縮排switch語句"
+
+#: ../src/MadSourceFormatDialog.cpp:317
+msgid ""
+"Indent preprocessor blocks at bracket level zero, and within a namespace"
+msgstr "縮排零級花括號以及命名空間內的預編譯運算子語句"
+
+#: ../src/MadSourceFormatDialog.cpp:320
+msgid "Indent multi-line preprocessor definitions ending with a backslash"
+msgstr "縮排以反斜線（\\）結尾的多行預處理運算子定義"
+
+#: ../src/MadSourceFormatDialog.cpp:323
+msgid "Indent preprocessor conditionals"
+msgstr "縮排條件預處理運算子"
+
+#: ../src/MadSourceFormatDialog.cpp:326
+msgid "Indent C++ comments beginning in column one"
+msgstr "縮排從第一列開始的C++註解"
+
+#: ../src/MadSourceFormatDialog.cpp:329
+msgid "Indent after parens"
+msgstr "括號後縮排"
+
+#: ../src/MadSourceFormatDialog.cpp:334
+#, fuzzy
+msgid "Minimal indent added when a header is built of multiple lines:"
+msgstr "當一個語句頭是由多行構成時加入的最小縮排"
+
+#: ../src/MadSourceFormatDialog.cpp:339
+#, fuzzy
+msgid "Maximum of # spaces to indent a continuation line (max. 120):"
+msgstr "一個續行時最多縮排幾個空格"
+
+#: ../src/MadSourceFormatDialog.cpp:341
+#, fuzzy
+msgid "40"
+msgstr "0"
+
+#: ../src/MadSourceFormatDialog.cpp:343
+msgid "Indent a continuation line (default 1)"
+msgstr "一個續行時縮排幾個空格"
+
+#: ../src/MadSourceFormatDialog.cpp:345
+msgid "1"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:353
+msgid "Break closing headers from their immediately preceding closing braces"
+msgstr "把閉合的語句頭從前面的閉合花括號處中斷"
+
+#: ../src/MadSourceFormatDialog.cpp:356
+msgid "Break 'else if()' header combinations into seperate lines"
+msgstr "把'else if()'語句頭組合中斷成單獨的多行"
+
+#: ../src/MadSourceFormatDialog.cpp:359
+#, fuzzy
+msgid "Add braces to unbraced one line conditional statements"
+msgstr "給沒有花括號的單行語句加上花括號"
+
+#: ../src/MadSourceFormatDialog.cpp:362
+#, fuzzy
+msgid "Add one line braces to unbraced one line conditional statements"
+msgstr "給沒有花括號的單行條件語句加上單行花括號"
+
+#: ../src/MadSourceFormatDialog.cpp:365
+#, fuzzy
+msgid ""
+"Remove braces from conditional statements (single statement on a single line"
+msgstr "去掉條件語句的花括號（單行語句）"
+
+#: ../src/MadSourceFormatDialog.cpp:368
+msgid "Don't break one-line blocks"
+msgstr "不要中斷單行程式塊"
+
+#: ../src/MadSourceFormatDialog.cpp:371
+#, fuzzy
+msgid ""
+"Don't break complex statements and multiple statements residing in a single "
+"line"
+msgstr "去掉條件語句的花括號（單行語句）"
+
+#: ../src/MadSourceFormatDialog.cpp:374
+msgid "Convert TABs to spaces"
+msgstr "TAB定位字元轉換成空格"
+
+#: ../src/MadSourceFormatDialog.cpp:377
+msgid "Closes whitespace in the angle brackets of template definitions"
+msgstr "去掉範本定義的尖括號裡的空格"
+
+#: ../src/MadSourceFormatDialog.cpp:380
+msgid "Remove the preceding '*' in a multi-line comment that begins a line"
+msgstr "去掉多行註解中的行開始的前導'*'"
+
+#: ../src/MadSourceFormatDialog.cpp:383
+msgid "Break one line headers"
+msgstr "單行頭檔案斷行"
+
+#: ../src/MadSourceFormatDialog.cpp:386
+msgid "Enable line breaking"
+msgstr "允許斷行"
+
+#: ../src/MadSourceFormatDialog.cpp:391
+msgid "Break lines after amount of chars (range: 50-200)"
+msgstr "在多少字元後就中斷成多行（範圍：50-200）"
+
+#: ../src/MadSourceFormatDialog.cpp:393
+msgid "200"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:398
+msgid "Break logical conditionals to be placed last on the previous line"
+msgstr "中斷前一行最後面的邏輯條件"
+
+#: ../src/MadSourceFormatDialog.cpp:407
+msgid "Pad empty lines around header blocks (e.g. 'if', 'while'...)"
+msgstr "在語句頭塊（例如'if'，'while'等等）周圍填充空行"
+
+#: ../src/MadSourceFormatDialog.cpp:412
+msgid ""
+"Treat closing header blocks (e.g. 'else', 'catch') as stand-alone blocks"
+msgstr "把閉合語句頭語句塊（例如'else'，'catch'）作為獨立的語句塊"
+
+#: ../src/MadSourceFormatDialog.cpp:416
+msgid "Insert space padding around operators"
+msgstr "在運算子周圍插入空格做填充"
+
+#: ../src/MadSourceFormatDialog.cpp:419
+msgid "Insert space padding around parenthesies on the outside"
+msgstr "在括號外部周圍插入空格做填充"
+
+#: ../src/MadSourceFormatDialog.cpp:422
+msgid "Insert space padding around parenthesies on the inside"
+msgstr "在括號內部周圍插入空格做填充"
+
+#: ../src/MadSourceFormatDialog.cpp:425
+msgid "Insert space padding between a header and the following parenthesis"
+msgstr "在語句頭和後面跟著的括號之間插入空格做填充"
+
+#: ../src/MadSourceFormatDialog.cpp:428
+msgid "Remove extra space padding around parenthesis"
+msgstr "刪除括號前後的填充空格"
+
+#: ../src/MadSourceFormatDialog.cpp:431
+msgid "Delete empty lines within a function or method"
+msgstr "刪除函數或方法內部的空行"
+
+#: ../src/MadSourceFormatDialog.cpp:434
+msgid "Fill empty lines with the whitespace of their previous lines"
+msgstr "用空格按照前面的語法行填充空白行"
+
+#: ../src/MadSourceFormatDialog.cpp:437
+msgid "Pad comma"
+msgstr "在逗號周圍填充"
+
+#: ../src/MadSourceFormatDialog.cpp:440
+msgid "Pad return type(Object-C)"
+msgstr "在返回類型周圍填充（Object-C）"
+
+#: ../src/MadSourceFormatDialog.cpp:443
+msgid "Unpad return type(Object-C)"
+msgstr "去除返回類型周圍填充（Object-C）"
+
+#: ../src/MadSourceFormatDialog.cpp:446
+msgid "Pad param type(Object-C)"
+msgstr "在參數類型周圍填充（Object-C）"
+
+#: ../src/MadSourceFormatDialog.cpp:449
+msgid "Unpad param type(Object-C)"
+msgstr "去除參數類型周圍填充（Object-C）"
+
+#: ../src/MadSourceFormatDialog.cpp:453
+#, fuzzy
+msgid "Pointer alignment"
+msgstr "指標對齊"
+
+#: ../src/MadSourceFormatDialog.cpp:457 ../src/MadSourceFormatDialog.cpp:465
+msgid "Type"
+msgstr "類型"
+
+#: ../src/MadSourceFormatDialog.cpp:458 ../src/MadSourceFormatDialog.cpp:466
+msgid "Middle"
+msgstr "中間"
+
+#: ../src/MadSourceFormatDialog.cpp:461
+msgid "Reference alignment"
+msgstr "參照對齊"
+
+#: ../src/MadSourceFormatDialog.cpp:476
+#, fuzzy
+msgid "XML version:"
+msgstr "XML版本號"
+
+#: ../src/MadSourceFormatDialog.cpp:478
+msgid "1.0"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:480
+#, fuzzy
+msgid "Indentation size(in spaces):"
+msgstr "縮排尺寸（空格數）："
+
+#: ../src/MadSourceFormatDialog.cpp:482
+msgid "4"
+msgstr ""
+
+#: ../src/MadSourceFormatDialog.cpp:488
+msgid "Style"
+msgstr "樣式"
+
+#: ../src/MadSourceFormatDialog.cpp:489
+msgid "Brackets"
+msgstr "花括號"
+
+#: ../src/MadSourceFormatDialog.cpp:490
+msgid "Indentation"
+msgstr "縮排"
+
+#: ../src/MadSourceFormatDialog.cpp:491
+msgid "Formatting"
+msgstr "格式化"
+
+#: ../src/MadSourceFormatDialog.cpp:492
+msgid "Padding"
+msgstr "填充"
+
+#: ../src/MadSourceFormatDialog.cpp:493
+msgid "XML"
+msgstr "XML"
 
 #: ../src/MadSortDialog.cpp:29
 msgid "Sort Options"
@@ -3975,203 +4339,6 @@ msgid ""
 "Unsure how to update the possible values for %s based on the value of %s"
 msgstr "不確定如何更新%s的可能值（依據%s的值）"
 
-#~ msgid "Source Formatter"
-#~ msgstr "來源檔案格式化工具"
-
-#~ msgid "Style"
-#~ msgstr "樣式"
-
-#~ msgid "Bracket Style"
-#~ msgstr "花括號樣式"
-
-#~ msgid "Sample"
-#~ msgstr "範例"
-
-#~ msgid "Sample of the bracket style option chosen to use:"
-#~ msgstr "所選擇使用的花括號格式樣例"
-
-#~ msgid "Brackets"
-#~ msgstr "花括號"
-
-#~ msgid "Attach Classes"
-#~ msgstr "類名後跟著花括號"
-
-#~ msgid "Attach Extern C"
-#~ msgstr "Extern C後跟著花括號"
-
-#~ msgid "Attach Namespaces"
-#~ msgstr "命名空間後跟著花括號"
-
-#~ msgid "Attach Inlines"
-#~ msgstr "Inline後跟著花括號"
-
-#~ msgid "Attach Closing While"
-#~ msgstr "\"do-while\"花括號後跟著while"
-
-#~ msgid "Indentation"
-#~ msgstr "縮排"
-
-#~ msgid "Indentation size (in spaces)"
-#~ msgstr "縮排尺寸（空格數）"
-
-#~ msgid "Use TABs instead of spaces"
-#~ msgstr "使用定位字元（Tab）而非空格"
-
-#~ msgid "Force using TABs"
-#~ msgstr "強制使用定位字元（Tab）"
-
-#~ msgid "Indent case: statement in switches (commands under case:)"
-#~ msgstr "case縮排：分支內的語句（case包含的命令）"
-
-#~ msgid "Indent classes (keywords public:, protected: and private:)"
-#~ msgstr "縮排類（public:，protected:，和private:關鍵字）"
-
-#~ msgid "Indent labels"
-#~ msgstr "縮排標籤"
-
-#~ msgid "Indent modifiers"
-#~ msgstr "縮排修飾字元"
-
-#~ msgid "Indent namespaces"
-#~ msgstr "縮排命名空間"
-
-#~ msgid "Indent switches"
-#~ msgstr "縮排switch語句"
-
-#~ msgid ""
-#~ "Indent preprocessor blocks at bracket level zero, and within a namespace"
-#~ msgstr "縮排零級花括號以及命名空間內的預編譯運算子語句"
-
-#~ msgid "Indent multi-line preprocessor definitions ending with a backslash"
-#~ msgstr "縮排以反斜線（\\）結尾的多行預處理運算子定義"
-
-#~ msgid "Indent preprocessor conditionals"
-#~ msgstr "縮排條件預處理運算子"
-
-#~ msgid "Indent C++ comments beginning in column one"
-#~ msgstr "縮排從第一列開始的C++註解"
-
-#~ msgid "Indent after parens"
-#~ msgstr "括號後縮排"
-
-#~ msgid "Minimal indent added when a header is built of multiple lines"
-#~ msgstr "當一個語句頭是由多行構成時加入的最小縮排"
-
-#~ msgid "Maximum of # spaces to indent a continuation line (max. 120)"
-#~ msgstr "一個續行時最多縮排幾個空格"
-
-#~ msgid "Indent a continuation line (default 1)"
-#~ msgstr "一個續行時縮排幾個空格"
-
-#~ msgid "Formatting"
-#~ msgstr "格式化"
-
-#~ msgid ""
-#~ "Break closing headers from their immediately preceding closing braces"
-#~ msgstr "把閉合的語句頭從前面的閉合花括號處中斷"
-
-#~ msgid "Break 'else if()' header combinations into seperate lines"
-#~ msgstr "把'else if()'語句頭組合中斷成單獨的多行"
-
-#~ msgid "Add braces to unbracketed one line conditional statements"
-#~ msgstr "給沒有花括號的單行語句加上花括號"
-
-#~ msgid "Add one line brackets to unbracketed one line conditional statements"
-#~ msgstr "給沒有花括號的單行條件語句加上單行花括號"
-
-#~ msgid ""
-#~ "Remove braces from conditional statements (single statement on a single "
-#~ "line)"
-#~ msgstr "去掉條件語句的花括號（單行語句）"
-
-#~ msgid "Don't break one-line blocks"
-#~ msgstr "不要中斷單行程式塊"
-
-#~ msgid "Convert TABs to spaces"
-#~ msgstr "TAB定位字元轉換成空格"
-
-#~ msgid "Closes whitespace in the angle brackets of template definitions"
-#~ msgstr "去掉範本定義的尖括號裡的空格"
-
-#~ msgid "Remove the preceding '*' in a multi-line comment that begins a line"
-#~ msgstr "去掉多行註解中的行開始的前導'*'"
-
-#~ msgid "Break one line headers"
-#~ msgstr "單行頭檔案斷行"
-
-#~ msgid "Enable line breaking"
-#~ msgstr "允許斷行"
-
-#~ msgid "Break lines after amount of chars (range: 50-200)"
-#~ msgstr "在多少字元後就中斷成多行（範圍：50-200）"
-
-#~ msgid "Break logical conditionals to be placed last on the previous line"
-#~ msgstr "中斷前一行最後面的邏輯條件"
-
-#~ msgid "Padding"
-#~ msgstr "填充"
-
-#~ msgid "Pad empty lines around header blocks (e.g. 'if', 'while'...)"
-#~ msgstr "在語句頭塊（例如'if'，'while'等等）周圍填充空行"
-
-#~ msgid ""
-#~ "Treat closing header blocks (e.g. 'else', 'catch') as stand-alone blocks"
-#~ msgstr "把閉合語句頭語句塊（例如'else'，'catch'）作為獨立的語句塊"
-
-#~ msgid "Insert space padding around operators"
-#~ msgstr "在運算子周圍插入空格做填充"
-
-#~ msgid "Insert space padding around parenthesies on the outside"
-#~ msgstr "在括號外部周圍插入空格做填充"
-
-#~ msgid "Insert space padding around parenthesies on the inside"
-#~ msgstr "在括號內部周圍插入空格做填充"
-
-#~ msgid "Insert space padding between a header and the following parenthesis"
-#~ msgstr "在語句頭和後面跟著的括號之間插入空格做填充"
-
-#~ msgid "Remove extra space padding around parenthesis"
-#~ msgstr "刪除括號前後的填充空格"
-
-#~ msgid "Delete empty lines within a function or method"
-#~ msgstr "刪除函數或方法內部的空行"
-
-#~ msgid "Fill empty lines with the whitespace of their previous lines"
-#~ msgstr "用空格按照前面的語法行填充空白行"
-
-#~ msgid "Pad comma"
-#~ msgstr "在逗號周圍填充"
-
-#~ msgid "Pad return type(Object-C)"
-#~ msgstr "在返回類型周圍填充（Object-C）"
-
-#~ msgid "Unpad return type(Object-C)"
-#~ msgstr "去除返回類型周圍填充（Object-C）"
-
-#~ msgid "Pad param type(Object-C)"
-#~ msgstr "在參數類型周圍填充（Object-C）"
-
-#~ msgid "Unpad param type(Object-C)"
-#~ msgstr "去除參數類型周圍填充（Object-C）"
-
-#~ msgid "Pointer alignment:"
-#~ msgstr "指標對齊"
-
-#~ msgid "Type"
-#~ msgstr "類型"
-
-#~ msgid "Middle"
-#~ msgstr "中間"
-
-#~ msgid "Reference alignment"
-#~ msgstr "參照對齊"
-
-#~ msgid "XML version"
-#~ msgstr "XML版本號"
-
-#~ msgid "Indentation size(in spaces)"
-#~ msgstr "縮排尺寸（空格數）："
-
 #~ msgid ""
 #~ "Minggang Li\t\tCurrent maintainer of MadEdit-Mod\n"
 #~ "===========================================\n"
@@ -4248,13 +4415,6 @@ msgstr "不確定如何更新%s的可能值（依據%s的值）"
 
 #~ msgid "To U&pperCase"
 #~ msgstr "轉為大寫(&U)"
-
-#~ msgid "Java"
-#~ msgstr "Java"
-
-#, fuzzy
-#~ msgid "Whitesmith"
-#~ msgstr "白"
 
 #~ msgid "Paper size"
 #~ msgstr "紙張大小"
@@ -4870,9 +5030,6 @@ msgstr "不確定如何更新%s的可能值（依據%s的值）"
 #~ msgid "x86 Assembly"
 #~ msgstr "x86 組合語言"
 
-#~ msgid "XML"
-#~ msgstr "XML"
-
 #~ msgid "South European (ISO-8859-3)"
 #~ msgstr "南歐語系 (ISO-8859-3)"
 
@@ -4995,9 +5152,6 @@ msgstr "不確定如何更新%s的可能值（依據%s的值）"
 
 #~ msgid "Check for new versions including &prereleases"
 #~ msgstr "檢查新版本包括預發佈版(&P)"
-
-#~ msgid "0"
-#~ msgstr "0"
 
 #~ msgid "Behavior of copying in hex editing area:"
 #~ msgstr "十六進位編輯區複製行為："
