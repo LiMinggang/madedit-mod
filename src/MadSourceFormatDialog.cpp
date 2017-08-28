@@ -362,7 +362,7 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID id,cons
 	CheckAddOneLineBraces = new wxCheckBox(Panel4, ID_CHECKADDONELINEBRACKETS, _("Add one line braces to unbraced one line conditional statements"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKADDONELINEBRACKETS"));
 	CheckAddOneLineBraces->SetValue(false);
 	BoxSizer5->Add(CheckAddOneLineBraces, 0, wxALL|wxEXPAND, 2);
-	CheckRemoveBraces = new wxCheckBox(Panel4, ID_CHECKBOXREMOVEBRACKETS, _("Remove braces from conditional statements (single statement on a single line"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXREMOVEBRACKETS"));
+	CheckRemoveBraces = new wxCheckBox(Panel4, ID_CHECKBOXREMOVEBRACKETS, _("Remove braces from conditional statements (single statement on a single line)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXREMOVEBRACKETS"));
 	CheckRemoveBraces->SetValue(false);
 	BoxSizer5->Add(CheckRemoveBraces, 0, wxALL|wxEXPAND, 2);
 	CheckKeepBlocks = new wxCheckBox(Panel4, ID_CHECKKEEPBLOCKS, _("Don\'t break one-line blocks"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKKEEPBLOCKS"));
