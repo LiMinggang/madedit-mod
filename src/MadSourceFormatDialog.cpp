@@ -162,7 +162,7 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID id,cons
 		_T("Lisp"),
 		_T("Custom")
 	};
-	RadioBoxBracketStyle = new wxRadioBox(Panel1, ID_RADIOBOXBRACKETSTYLE, _("Bracket Style"), wxDefaultPosition, wxDefaultSize, 15, __wxRadioBoxChoices_1, 1, 0, wxDefaultValidator, _T("ID_RADIOBOXBRACKETSTYLE"));
+	RadioBoxBracketStyle = new wxRadioBox(Panel1, ID_RADIOBOXBRACKETSTYLE, _("Bracket Style"), wxDefaultPosition, wxDefaultSize, 15, __wxRadioBoxChoices_1, 1, wxRA_SPECIFY_COLS, wxDefaultValidator, _T("ID_RADIOBOXBRACKETSTYLE"));
 	GridSizer1->Add(RadioBoxBracketStyle, 0, wxALL|wxEXPAND, 2);
 	StaticBoxSizer1 = new wxStaticBoxSizer(wxVERTICAL, Panel1, _("Sample"));
 	StaticText1 = new wxStaticText(Panel1, wxID_ANY, _("Sample of the bracket style option chosen to use:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));

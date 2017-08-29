@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <wxsmith>
 	<object class="wxDialog" name="MadSourceFormatDialog">
-		<title>Source Formator</title>
+		<title>Source Formatter</title>
 		<maxsize>-1,-1</maxsize>
 		<id_arg>0</id_arg>
 		<size_arg>1</size_arg>
@@ -39,6 +39,7 @@
 											<item>Custom</item>
 										</content>
 										<default>-1</default>
+										<style>wxRA_SPECIFY_COLS</style>
 										<handler function="OnRadioBoxBracketStyleSelect" entry="EVT_RADIOBOX" />
 									</object>
 									<flag>wxALL|wxEXPAND</flag>
