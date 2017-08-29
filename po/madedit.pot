@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-28 19:34+0800\n"
+"POT-Creation-Date: 2017-08-29 10:26+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3176,67 +3176,7 @@ msgid "%s string(s) were replaced."
 msgstr ""
 
 #: ../src/MadSourceFormatDialog.cpp:140
-msgid "Source Formator"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:149
-msgid "Allman(ANSI)"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:150
-msgid "Java"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:151
-msgid "Kr"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:152
-msgid "Stroustrup"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:153
-msgid "Whitesmith"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:154
-msgid "VTK"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:155
-msgid "Banner"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:156
-msgid "Gnu"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:157
-msgid "Linux"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:158
-msgid "Horstmann"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:159
-msgid "1TBS"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:160
-msgid "Google"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:161
-msgid "Pico"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:162
-msgid "Lisp"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:163
-msgid "Custom"
+msgid "Source Formatter"
 msgstr ""
 
 #: ../src/MadSourceFormatDialog.cpp:165
@@ -3271,8 +3211,8 @@ msgstr ""
 msgid "Attach Closing While"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:287
-msgid "Indentation size (in spaces):"
+#: ../src/MadSourceFormatDialog.cpp:287 ../src/MadSourceFormatDialog.cpp:480
+msgid "Indentation size(in spaces):"
 msgstr ""
 
 #: ../src/MadSourceFormatDialog.cpp:293
@@ -3336,16 +3276,8 @@ msgstr ""
 msgid "Maximum of # spaces to indent a continuation line (max. 120):"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:341
-msgid "40"
-msgstr ""
-
 #: ../src/MadSourceFormatDialog.cpp:343
 msgid "Indent a continuation line (default 1)"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:345
-msgid "1"
 msgstr ""
 
 #: ../src/MadSourceFormatDialog.cpp:353
@@ -3366,7 +3298,7 @@ msgstr ""
 
 #: ../src/MadSourceFormatDialog.cpp:365
 msgid ""
-"Remove braces from conditional statements (single statement on a single line"
+"Remove braces from conditional statements (single statement on a single line)"
 msgstr ""
 
 #: ../src/MadSourceFormatDialog.cpp:368
@@ -3401,10 +3333,6 @@ msgstr ""
 
 #: ../src/MadSourceFormatDialog.cpp:391
 msgid "Break lines after amount of chars (range: 50-200)"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:393
-msgid "200"
 msgstr ""
 
 #: ../src/MadSourceFormatDialog.cpp:398
@@ -3488,18 +3416,6 @@ msgstr ""
 msgid "XML version:"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:478
-msgid "1.0"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:480
-msgid "Indentation size(in spaces):"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:482
-msgid "4"
-msgstr ""
-
 #: ../src/MadSourceFormatDialog.cpp:488
 msgid "Style"
 msgstr ""
@@ -3518,10 +3434,6 @@ msgstr ""
 
 #: ../src/MadSourceFormatDialog.cpp:492
 msgid "Padding"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:493
-msgid "XML"
 msgstr ""
 
 #: ../src/MadSortDialog.cpp:29

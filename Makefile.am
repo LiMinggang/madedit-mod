@@ -31,6 +31,8 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	src/MadPrintout.h \
 	src/MadSearchReplaceDialog.cpp \
 	src/MadSearchReplaceDialog.h \
+	src/MadSourceFormatDialog.cpp \
+	src/MadSourceFormatDialog.h \
 	src/MadSortDialog.cpp \
 	src/MadSortDialog.h \
 	src/MadUtils.cpp \

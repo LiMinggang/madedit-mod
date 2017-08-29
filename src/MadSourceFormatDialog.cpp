@@ -137,7 +137,7 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID id,cons
 	wxStaticText* StaticText9;
 	wxStdDialogButtonSizer* StdDialogButtonSizer1;
 
-	Create(parent, wxID_ANY, _("Source Formator"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxRESIZE_BORDER|wxCLOSE_BOX, _T("wxID_ANY"));
+	Create(parent, wxID_ANY, _("Source Formatter"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxRESIZE_BORDER|wxCLOSE_BOX, _T("wxID_ANY"));
 	SetClientSize(wxSize(800,500));
 	SetMaxSize(wxSize(-1,-1));
 	BoxSizer1 = new wxBoxSizer(wxVERTICAL);
@@ -146,21 +146,21 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID id,cons
 	GridSizer1 = new wxGridSizer(0, 2, 0, 0);
 	wxString __wxRadioBoxChoices_1[15] =
 	{
-		_("Allman(ANSI)"),
-		_("Java"),
-		_("Kr"),
-		_("Stroustrup"),
-		_("Whitesmith"),
-		_("VTK"),
-		_("Banner"),
-		_("Gnu"),
-		_("Linux"),
-		_("Horstmann"),
-		_("1TBS"),
-		_("Google"),
-		_("Pico"),
-		_("Lisp"),
-		_("Custom")
+		_T("Allman(ANSI)"),
+		_T("Java"),
+		_T("Kr"),
+		_T("Stroustrup"),
+		_T("Whitesmith"),
+		_T("VTK"),
+		_T("Banner"),
+		_T("Gnu"),
+		_T("Linux"),
+		_T("Horstmann"),
+		_T("1TBS"),
+		_T("Google"),
+		_T("Pico"),
+		_T("Lisp"),
+		_T("Custom")
 	};
 	RadioBoxBracketStyle = new wxRadioBox(Panel1, ID_RADIOBOXBRACKETSTYLE, _("Bracket Style"), wxDefaultPosition, wxDefaultSize, 15, __wxRadioBoxChoices_1, 1, 0, wxDefaultValidator, _T("ID_RADIOBOXBRACKETSTYLE"));
 	GridSizer1->Add(RadioBoxBracketStyle, 0, wxALL|wxEXPAND, 2);
@@ -284,7 +284,7 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID id,cons
 	Panel3 = new wxPanel(AuiNotebook1, ID_PANEL3, wxDefaultPosition, wxSize(792,464), 0, _T("ID_PANEL3"));
 	BoxSizer4 = new wxBoxSizer(wxVERTICAL);
 	GridSizer4 = new wxGridSizer(0, 2, 0, 0);
-	StaticText2 = new wxStaticText(Panel3, wxID_ANY, _("Indentation size (in spaces):"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	StaticText2 = new wxStaticText(Panel3, wxID_ANY, _("Indentation size(in spaces):"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	GridSizer4->Add(StaticText2, 0, wxALL|wxEXPAND, 2);
 	SpinIndentation = new wxSpinCtrl(Panel3, ID_SPINCTRLINDENTSIZE, _T("4"), wxDefaultPosition, wxDefaultSize, 0, 2, 8, 4, _T("ID_SPINCTRLINDENTSIZE"));
 	SpinIndentation->SetValue(_T("4"));
@@ -338,11 +338,11 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID id,cons
 	FlexGridSizer3->Add(SpinMinConditionalEvent, 0, wxALL|wxEXPAND, 2);
 	StaticText4 = new wxStaticText(Panel3, wxID_ANY, _("Maximum of # spaces to indent a continuation line (max. 120):"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	FlexGridSizer3->Add(StaticText4, 0, wxALL|wxEXPAND, 2);
-	EditMaxContinuationIndent = new wxTextCtrl(Panel3, ID_EDITMAXCONTINUATIONINDENT, _("40"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITMAXCONTINUATIONINDENT"));
+	EditMaxContinuationIndent = new wxTextCtrl(Panel3, ID_EDITMAXCONTINUATIONINDENT, _T("40"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITMAXCONTINUATIONINDENT"));
 	FlexGridSizer3->Add(EditMaxContinuationIndent, 0, wxALL|wxEXPAND, 2);
 	StaticText10 = new wxStaticText(Panel3, wxID_ANY, _("Indent a continuation line (default 1)"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	FlexGridSizer3->Add(StaticText10, 0, wxALL|wxEXPAND, 2);
-	EditIndentContinuation = new wxTextCtrl(Panel3, ID_EDITINDENTCONTINUATION, _("1"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITINDENTCONTINUATION"));
+	EditIndentContinuation = new wxTextCtrl(Panel3, ID_EDITINDENTCONTINUATION, _T("1"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITINDENTCONTINUATION"));
 	FlexGridSizer3->Add(EditIndentContinuation, 0, wxALL|wxEXPAND, 2);
 	BoxSizer4->Add(FlexGridSizer3, 0, wxALL, 0);
 	Panel3->SetSizer(BoxSizer4);
@@ -390,7 +390,7 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID id,cons
 	BoxSizer6->Add(10,0,0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
 	StaticText5 = new wxStaticText(Panel4, wxID_ANY, _("Break lines after amount of chars (range: 50-200)"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	BoxSizer6->Add(StaticText5, 0, wxALL|wxEXPAND, 2);
-	EditSFMaxLineLength = new wxTextCtrl(Panel4, ID_EDITSFMAXLINELENGTH, _("200"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITSFMAXLINELENGTH"));
+	EditSFMaxLineLength = new wxTextCtrl(Panel4, ID_EDITSFMAXLINELENGTH, _T("200"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITSFMAXLINELENGTH"));
 	BoxSizer6->Add(EditSFMaxLineLength, 0, wxALL, 2);
 	BoxSizer5->Add(BoxSizer6, 0, wxALL|wxEXPAND, 0);
 	BoxSizer7 = new wxBoxSizer(wxHORIZONTAL);
@@ -475,11 +475,11 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID id,cons
 	GridSizer2 = new wxGridSizer(0, 2, 0, 0);
 	StaticText8 = new wxStaticText(Panel6, wxID_ANY, _("XML version:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	GridSizer2->Add(StaticText8, 0, wxALL|wxEXPAND, 2);
-	EditXMLversion = new wxTextCtrl(Panel6, ID_EDITXMLVERSION, _("1.0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITXMLVERSION"));
+	EditXMLversion = new wxTextCtrl(Panel6, ID_EDITXMLVERSION, _T("1.0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITXMLVERSION"));
 	GridSizer2->Add(EditXMLversion, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	StaticText9 = new wxStaticText(Panel6, wxID_ANY, _("Indentation size(in spaces):"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	GridSizer2->Add(StaticText9, 0, wxALL|wxEXPAND, 2);
-	EditXmlIndentSize = new wxTextCtrl(Panel6, ID_EDITXMLINDENTSIZE, _("4"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITXMLINDENTSIZE"));
+	EditXmlIndentSize = new wxTextCtrl(Panel6, ID_EDITXMLINDENTSIZE, _T("4"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITXMLINDENTSIZE"));
 	GridSizer2->Add(EditXmlIndentSize, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer8->Add(GridSizer2, 0, wxALL|wxALIGN_LEFT, 2);
 	Panel6->SetSizer(BoxSizer8);
@@ -490,7 +490,7 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID id,cons
 	AuiNotebook1->AddPage(Panel3, _("Indentation"));
 	AuiNotebook1->AddPage(Panel4, _("Formatting"));
 	AuiNotebook1->AddPage(Panel5, _("Padding"));
-	AuiNotebook1->AddPage(Panel6, _("XML"));
+	AuiNotebook1->AddPage(Panel6, _T("XML"));
 	BoxSizer1->Add(AuiNotebook1, 1, wxALL|wxEXPAND, 5);
 	StdDialogButtonSizer1 = new wxStdDialogButtonSizer();
 	StdDialogButtonSizer1->AddButton(new wxButton(this, wxID_OK, wxEmptyString));

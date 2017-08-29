@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: madedit-mod 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-28 17:54+0800\n"
+"POT-Creation-Date: 2017-08-29 10:26+0800\n"
 "PO-Revision-Date: 2017-08-28 17:44+0800\n"
 "Last-Translator: nikos <nikos769@yahoo.gr>\n"
 "Language-Team: Greek <nikos769@yahoo.gr>\n"
@@ -3254,68 +3254,8 @@ msgstr ""
 
 #: ../src/MadSourceFormatDialog.cpp:140
 #, fuzzy
-msgid "Source Formator"
+msgid "Source Formatter"
 msgstr "Μορφοποιητής Πηγαίου Κώδικα"
-
-#: ../src/MadSourceFormatDialog.cpp:149
-msgid "Allman(ANSI)"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:150
-msgid "Java"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:151
-msgid "Kr"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:152
-msgid "Stroustrup"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:153
-msgid "Whitesmith"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:154
-msgid "VTK"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:155
-msgid "Banner"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:156
-msgid "Gnu"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:157
-msgid "Linux"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:158
-msgid "Horstmann"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:159
-msgid "1TBS"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:160
-msgid "Google"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:161
-msgid "Pico"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:162
-msgid "Lisp"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:163
-msgid "Custom"
-msgstr ""
 
 #: ../src/MadSourceFormatDialog.cpp:165
 msgid "Bracket Style"
@@ -3350,10 +3290,10 @@ msgstr "Προσκόλληση Εσώγραμμων"
 msgid "Attach Closing While"
 msgstr "Προσκόλληση «Ενού» Κλεισίματος"
 
-#: ../src/MadSourceFormatDialog.cpp:287
+#: ../src/MadSourceFormatDialog.cpp:287 ../src/MadSourceFormatDialog.cpp:480
 #, fuzzy
-msgid "Indentation size (in spaces):"
-msgstr "Μέγεθος δημιουργίας εσοχών (σε διαστήματα)"
+msgid "Indentation size(in spaces):"
+msgstr "Μέγεθος της εσοχής (σε διαστήματα)"
 
 #: ../src/MadSourceFormatDialog.cpp:293
 msgid "Use TABs instead of spaces"
@@ -3427,17 +3367,9 @@ msgstr ""
 "Μέγιστο πλήθος από διαστήματα # , για να τοποθετηθεί εσοχή σε μια γραμμή "
 "συνέχειας (μεγ. 120)"
 
-#: ../src/MadSourceFormatDialog.cpp:341
-msgid "40"
-msgstr ""
-
 #: ../src/MadSourceFormatDialog.cpp:343
 msgid "Indent a continuation line (default 1)"
 msgstr "Να τοποθετηθεί εσοχή σε μια γραμμή συνέχειας (προεπιλογή το 1)"
-
-#: ../src/MadSourceFormatDialog.cpp:345
-msgid "1"
-msgstr ""
 
 #: ../src/MadSourceFormatDialog.cpp:353
 msgid "Break closing headers from their immediately preceding closing braces"
@@ -3462,7 +3394,7 @@ msgstr "Προσθήκη αγκύλων μίας γραμμής σε υποθε�
 #: ../src/MadSourceFormatDialog.cpp:365
 #, fuzzy
 msgid ""
-"Remove braces from conditional statements (single statement on a single line"
+"Remove braces from conditional statements (single statement on a single line)"
 msgstr ""
 "Απομάκρυνση των αγκύλων από υποθετικές δηλώσεις (μία δήλωση σε κάθε μία "
 "γραμμή)"
@@ -3505,10 +3437,6 @@ msgstr "Ενεργοποίηση του σπασίματος της γραμμή
 #: ../src/MadSourceFormatDialog.cpp:391
 msgid "Break lines after amount of chars (range: 50-200)"
 msgstr "Σπάσιμο των γραμμών μετά το πλήθος των χαρακτήρων (εύρος: 50-200)"
-
-#: ../src/MadSourceFormatDialog.cpp:393
-msgid "200"
-msgstr ""
 
 #: ../src/MadSourceFormatDialog.cpp:398
 msgid "Break logical conditionals to be placed last on the previous line"
@@ -3603,19 +3531,6 @@ msgstr "Στοίχιση της Αναφοράς"
 msgid "XML version:"
 msgstr "Έκδοση της XML"
 
-#: ../src/MadSourceFormatDialog.cpp:478
-msgid "1.0"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:480
-#, fuzzy
-msgid "Indentation size(in spaces):"
-msgstr "Μέγεθος της εσοχής (σε διαστήματα)"
-
-#: ../src/MadSourceFormatDialog.cpp:482
-msgid "4"
-msgstr ""
-
 #: ../src/MadSourceFormatDialog.cpp:488
 msgid "Style"
 msgstr "Τεχνοτροπία"
@@ -3635,10 +3550,6 @@ msgstr "Μορφοποίηση"
 #: ../src/MadSourceFormatDialog.cpp:492
 msgid "Padding"
 msgstr "Γέμισμα"
-
-#: ../src/MadSourceFormatDialog.cpp:493
-msgid "XML"
-msgstr ""
 
 #: ../src/MadSortDialog.cpp:29
 msgid "Sort Options"
@@ -4443,6 +4354,10 @@ msgid ""
 msgstr ""
 "Αβέβαιο το πως θα ενημερώσω τις πιθανές τιμές για το %s βασιζόμενος στην "
 "τιμή του %s"
+
+#, fuzzy
+#~ msgid "Indentation size (in spaces):"
+#~ msgstr "Μέγεθος δημιουργίας εσοχών (σε διαστήματα)"
 
 #, fuzzy
 #~ msgid ""

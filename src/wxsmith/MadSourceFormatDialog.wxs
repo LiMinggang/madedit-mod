@@ -2,8 +2,8 @@
 <wxsmith>
 	<object class="wxDialog" name="MadSourceFormatDialog">
 		<title>Source Formator</title>
-		<maxsize>-1,-1</maxsize>
 		<id_arg>0</id_arg>
+		<size_arg>1</size_arg>
 		<style>wxCAPTION|wxCLOSE_BOX</style>
 		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
 			<orient>wxVERTICAL</orient>

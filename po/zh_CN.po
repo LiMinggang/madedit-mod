@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-28 17:54+0800\n"
-"PO-Revision-Date: 2017-08-25 17:15+0800\n"
+"POT-Creation-Date: 2017-08-29 10:26+0800\n"
+"PO-Revision-Date: 2017-08-29 10:27+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit-Mod <minggang.li@gmail.com>\n"
 "Language: zh_CN\n"
@@ -672,7 +672,7 @@ msgstr "行："
 
 #: ../src/MadEditFrame.cpp:1272
 msgid "Sub:"
-msgstr "次行："
+msgstr "子行："
 
 #: ../src/MadEditFrame.cpp:1275
 msgid "Col:"
@@ -1891,7 +1891,7 @@ msgstr "插入/删除 Unicode BOM"
 
 #: ../src/MadEditFrame.cpp:2375 ../src/MadEditFrame.cpp:5287
 msgid "NewLine Char (File Format): "
-msgstr "换行字符(文件格式): "
+msgstr "换行字符(文件格式)： "
 
 #: ../src/MadEditFrame.cpp:2376
 msgid "Convert To CRLF/0D0A (&DOS)"
@@ -1919,7 +1919,7 @@ msgstr "转换文件格式为 UNIX 的格式"
 
 #: ../src/MadEditFrame.cpp:2379 ../src/MadEditFrame.cpp:5314
 msgid "Press Enter to Insert NewLine Char: "
-msgstr "按Enter插入的换行字符: "
+msgstr "按Enter插入的换行字符："
 
 #: ../src/MadEditFrame.cpp:2380
 msgid "Insert CRLF/0D0A (&DOS)"
@@ -2803,7 +2803,7 @@ msgstr "&. 匹配换行符"
 
 #: ../src/MadFindInFilesDialog.cpp:130 ../src/MadSearchReplaceDialog.cpp:157
 msgid "Find &Hex String (Example: BE 00 3A or BE003A)"
-msgstr "查找十六进制字符串(例子: BE 00 3A 或 BE003A)(&H)"
+msgstr "查找十六进制字符串(例子： BE 00 3A 或 BE003A)(&H)"
 
 #: ../src/MadFindInFilesDialog.cpp:133
 msgid "&List the First Found Item Only"
@@ -3203,69 +3203,8 @@ msgid "%s string(s) were replaced."
 msgstr "%s 个字符串已被替换。"
 
 #: ../src/MadSourceFormatDialog.cpp:140
-#, fuzzy
-msgid "Source Formator"
+msgid "Source Formatter"
 msgstr "源文件格式化工具"
-
-#: ../src/MadSourceFormatDialog.cpp:149
-msgid "Allman(ANSI)"
-msgstr "Allman(ANSI)"
-
-#: ../src/MadSourceFormatDialog.cpp:150
-msgid "Java"
-msgstr "Java"
-
-#: ../src/MadSourceFormatDialog.cpp:151
-msgid "Kr"
-msgstr "Kr"
-
-#: ../src/MadSourceFormatDialog.cpp:152
-msgid "Stroustrup"
-msgstr "Stroustrup"
-
-#: ../src/MadSourceFormatDialog.cpp:153
-msgid "Whitesmith"
-msgstr "Whitesmith"
-
-#: ../src/MadSourceFormatDialog.cpp:154
-msgid "VTK"
-msgstr "VTK\n"
-
-#: ../src/MadSourceFormatDialog.cpp:155
-msgid "Banner"
-msgstr "Banner"
-
-#: ../src/MadSourceFormatDialog.cpp:156
-msgid "Gnu"
-msgstr "Gnu"
-
-#: ../src/MadSourceFormatDialog.cpp:157
-msgid "Linux"
-msgstr "Linux"
-
-#: ../src/MadSourceFormatDialog.cpp:158
-msgid "Horstmann"
-msgstr "Horstmann"
-
-#: ../src/MadSourceFormatDialog.cpp:159
-msgid "1TBS"
-msgstr "1TBS"
-
-#: ../src/MadSourceFormatDialog.cpp:160
-msgid "Google"
-msgstr "Google"
-
-#: ../src/MadSourceFormatDialog.cpp:161
-msgid "Pico"
-msgstr "Pico"
-
-#: ../src/MadSourceFormatDialog.cpp:162
-msgid "Lisp"
-msgstr "Lisp"
-
-#: ../src/MadSourceFormatDialog.cpp:163
-msgid "Custom"
-msgstr "自定义"
 
 #: ../src/MadSourceFormatDialog.cpp:165
 msgid "Bracket Style"
@@ -3299,10 +3238,9 @@ msgstr "Inline后跟着花括号"
 msgid "Attach Closing While"
 msgstr "\"do-while\"花括号后跟着while"
 
-#: ../src/MadSourceFormatDialog.cpp:287
-#, fuzzy
-msgid "Indentation size (in spaces):"
-msgstr "缩进尺寸（空格数）"
+#: ../src/MadSourceFormatDialog.cpp:287 ../src/MadSourceFormatDialog.cpp:480
+msgid "Indentation size(in spaces):"
+msgstr "缩进尺寸（空格数）："
 
 #: ../src/MadSourceFormatDialog.cpp:293
 msgid "Use TABs instead of spaces"
@@ -3358,27 +3296,16 @@ msgid "Indent after parens"
 msgstr "括号后缩进"
 
 #: ../src/MadSourceFormatDialog.cpp:334
-#, fuzzy
 msgid "Minimal indent added when a header is built of multiple lines:"
-msgstr "当一个语句头是由多行构成时添加的最小缩进"
+msgstr "当一个语句头是由多行构成时添加的最小缩进："
 
 #: ../src/MadSourceFormatDialog.cpp:339
-#, fuzzy
 msgid "Maximum of # spaces to indent a continuation line (max. 120):"
-msgstr "一个续行时最多缩进几个空格"
-
-#: ../src/MadSourceFormatDialog.cpp:341
-#, fuzzy
-msgid "40"
-msgstr "0"
+msgstr "一个续行时最多缩进几个空格（最多120）："
 
 #: ../src/MadSourceFormatDialog.cpp:343
 msgid "Indent a continuation line (default 1)"
 msgstr "一个续行时缩进几个空格"
-
-#: ../src/MadSourceFormatDialog.cpp:345
-msgid "1"
-msgstr ""
 
 #: ../src/MadSourceFormatDialog.cpp:353
 msgid "Break closing headers from their immediately preceding closing braces"
@@ -3389,20 +3316,17 @@ msgid "Break 'else if()' header combinations into seperate lines"
 msgstr "把'else if()'语句头组合断开成单独的多行"
 
 #: ../src/MadSourceFormatDialog.cpp:359
-#, fuzzy
 msgid "Add braces to unbraced one line conditional statements"
 msgstr "给没有花括号的单行语句加上花括号"
 
 #: ../src/MadSourceFormatDialog.cpp:362
-#, fuzzy
 msgid "Add one line braces to unbraced one line conditional statements"
 msgstr "给没有花括号的单行条件语句加上单行花括号"
 
 #: ../src/MadSourceFormatDialog.cpp:365
-#, fuzzy
 msgid ""
-"Remove braces from conditional statements (single statement on a single line"
-msgstr "去掉条件语句的花括号（单行语句）"
+"Remove braces from conditional statements (single statement on a single line)"
+msgstr "去掉条件语句的花括号（单行单语句）"
 
 #: ../src/MadSourceFormatDialog.cpp:368
 msgid "Don't break one-line blocks"
@@ -3437,10 +3361,6 @@ msgstr "允许断行"
 #: ../src/MadSourceFormatDialog.cpp:391
 msgid "Break lines after amount of chars (range: 50-200)"
 msgstr "在多少字符后就断开成多行（范围：50-200）"
-
-#: ../src/MadSourceFormatDialog.cpp:393
-msgid "200"
-msgstr ""
 
 #: ../src/MadSourceFormatDialog.cpp:398
 msgid "Break logical conditionals to be placed last on the previous line"
@@ -3504,7 +3424,6 @@ msgid "Unpad param type(Object-C)"
 msgstr "去除参数类型周围填充（Object-C）"
 
 #: ../src/MadSourceFormatDialog.cpp:453
-#, fuzzy
 msgid "Pointer alignment"
 msgstr "指针对齐"
 
@@ -3521,22 +3440,8 @@ msgid "Reference alignment"
 msgstr "引用对齐"
 
 #: ../src/MadSourceFormatDialog.cpp:476
-#, fuzzy
 msgid "XML version:"
-msgstr "XML版本号"
-
-#: ../src/MadSourceFormatDialog.cpp:478
-msgid "1.0"
-msgstr ""
-
-#: ../src/MadSourceFormatDialog.cpp:480
-#, fuzzy
-msgid "Indentation size(in spaces):"
-msgstr "缩进尺寸（空格数）"
-
-#: ../src/MadSourceFormatDialog.cpp:482
-msgid "4"
-msgstr ""
+msgstr "XML版本号："
 
 #: ../src/MadSourceFormatDialog.cpp:488
 msgid "Style"
@@ -3557,10 +3462,6 @@ msgstr "格式化"
 #: ../src/MadSourceFormatDialog.cpp:492
 msgid "Padding"
 msgstr "填充"
-
-#: ../src/MadSourceFormatDialog.cpp:493
-msgid "XML"
-msgstr ""
 
 #: ../src/MadSortDialog.cpp:29
 msgid "Sort Options"
@@ -4333,6 +4234,59 @@ msgstr "MadEdit-Mod预览打印"
 msgid ""
 "Unsure how to update the possible values for %s based on the value of %s"
 msgstr "不确定如何更新%s的可能值（基于%s的值）"
+
+#, fuzzy
+#~ msgid "Indentation size (in spaces):"
+#~ msgstr "缩进尺寸（空格数）"
+
+#~ msgid "Allman(ANSI)"
+#~ msgstr "Allman(ANSI)"
+
+#~ msgid "Java"
+#~ msgstr "Java"
+
+#~ msgid "Kr"
+#~ msgstr "Kr"
+
+#~ msgid "Stroustrup"
+#~ msgstr "Stroustrup"
+
+#~ msgid "Whitesmith"
+#~ msgstr "Whitesmith"
+
+#~ msgid "VTK"
+#~ msgstr "VTK\n"
+
+#~ msgid "Banner"
+#~ msgstr "Banner"
+
+#~ msgid "Gnu"
+#~ msgstr "Gnu"
+
+#~ msgid "Linux"
+#~ msgstr "Linux"
+
+#~ msgid "Horstmann"
+#~ msgstr "Horstmann"
+
+#~ msgid "1TBS"
+#~ msgstr "1TBS"
+
+#~ msgid "Google"
+#~ msgstr "Google"
+
+#~ msgid "Pico"
+#~ msgstr "Pico"
+
+#~ msgid "Lisp"
+#~ msgstr "Lisp"
+
+#~ msgid "Custom"
+#~ msgstr "自定义"
+
+#, fuzzy
+#~ msgid "40"
+#~ msgstr "0"
 
 #~ msgid ""
 #~ "Minggang Li\t\tCurrent maintainer of MadEdit-Mod\n"
