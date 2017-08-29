@@ -175,8 +175,6 @@ class MadSourceFormatDialog: public wxDialog
 		//*)
 	public:
 		void LoadSettings(void);
-
-		DECLARE_EVENT_TABLE()
 };
 
 #endif

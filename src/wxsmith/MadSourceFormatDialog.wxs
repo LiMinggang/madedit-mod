@@ -293,7 +293,7 @@
 					</object>
 					<object class="AuiNotebookPage">
 						<object class="wxPanel" name="ID_PANEL4" variable="Panel4" member="no">
-							<size>792,464</size>
+							<size>792,490</size>
 							<style>0</style>
 							<object class="wxBoxSizer" variable="BoxSizer5" member="no">
 								<orient>wxVERTICAL</orient>
@@ -327,7 +327,7 @@
 								</object>
 								<object class="sizeritem">
 									<object class="wxCheckBox" name="ID_CHECKBOXREMOVEBRACKETS" variable="CheckRemoveBraces" member="yes">
-										<label>Remove braces from conditional statements (single statement on a single line</label>
+										<label>Remove braces from conditional statements (single statement on a single line)</label>
 									</object>
 									<flag>wxALL|wxEXPAND</flag>
 									<border>2</border>
@@ -427,7 +427,7 @@
 					</object>
 					<object class="AuiNotebookPage">
 						<object class="wxPanel" name="ID_PANEL5" variable="Panel5" member="no">
-							<size>792,464</size>
+							<size>792,490</size>
 							<style>0</style>
 							<object class="wxBoxSizer" variable="BoxSizer9" member="no">
 								<orient>wxVERTICAL</orient>
@@ -593,7 +593,7 @@
 					</object>
 					<object class="AuiNotebookPage">
 						<object class="wxPanel" name="ID_PANEL6" variable="Panel6" member="no">
-							<size>792,464</size>
+							<size>792,490</size>
 							<style>0</style>
 							<object class="wxBoxSizer" variable="BoxSizer8" member="no">
 								<orient>wxVERTICAL</orient>
