@@ -127,14 +127,16 @@ Mod v0.4.9
 7.Fix: Bugs found by CPPCheck
 8.Fix: MadPython can't take chars not encoded by current encoding
 9.Fix: Restore default behavior of click on line number area
-10.Fix: Hang on closing Option Dialog if click Code preview edit on Source formatter tab
-11.Update C++ syntax to C++11
-12.Update uchardet to latest version
-13.Update Astyle to 3.0.1
-14.Update Credits on About Dialog
-15.Update Translations
-16.Minor code improvement
-17.Minor issue in MadPython scripts
+10.Fix: Hang on closing Option Dialog if click Code preview edit on Source formatter tab #235
+11.Fix: Left double click would move caret forward
+12.Fix: Merge Hunspell latest fix
+13.Update C++ syntax to C++11
+14.Update uchardet to latest version
+15.Update Astyle to 3.0.1
+16.Update Credits on About Dialog
+17.Update Translations
+18.Minor code improvement
+19.Minor issue in MadPython scripts
 
 Mod v0.4.8
 1.New: Copy file name without extension

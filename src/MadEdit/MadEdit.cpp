@@ -10268,7 +10268,24 @@ void MadEdit::OnMouseLeftDClick( wxMouseEvent &evt )
 	m_DoubleClickY = evt.m_y;
 	m_MouseLeftDoubleClick = true;
 	m_MouseLeftDown = true;
-	
+
+	int row = evt.m_y / m_RowHeight;
+	// update current caretpos
+	row += m_TopRow;
+
+	if( row >= int( m_Lines->m_RowCount ) )
+		row = int( m_Lines->m_RowCount - 1 );
+
+	m_CaretPos.rowid = row;
+	m_CaretPos.lineid = GetLineByRow( m_CaretPos.iter, m_CaretPos.pos, row );
+	m_CaretPos.subrowid = m_CaretPos.rowid - row;
+	MadRowIndexIterator riter = m_CaretPos.iter->m_RowIndices.begin();
+	std::advance( riter, m_CaretPos.subrowid );
+	m_CaretPos.linepos = riter->m_Start;
+	m_CaretPos.pos += m_CaretPos.linepos;
+	UpdateCaretByXPos( evt.m_x + m_DrawingXPos - m_LineNumberAreaWidth - m_BookmarkWidth - m_LeftMarginWidth,
+					   m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
+
 	SelectWordFromCaretPos( nullptr );
 	if(m_LDClickHighlight)
 	{

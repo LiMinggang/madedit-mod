@@ -84,7 +84,9 @@ Mod v0.4.9
 * Fix: Bugs found by CPPCheck
 * Fix: MadPython can't take chars not encoded by current encoding
 * Fix: Restore default behavior of click on line number area
-* Fix: Hang on closing Option Dialog if click Code preview edit on Source formatter tab
+* Fix: Hang on closing Option Dialog if click Code preview edit on Source formatter tab #235
+* Fix: Left double click would move caret forward
+* Fix: Merge Hunspell latest fix
 * Update C++ syntax to C++11
 * Update uchardet to latest version
 * Update Astyle to 3.0.1

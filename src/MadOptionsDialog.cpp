@@ -19,8 +19,6 @@
 #include "MadUtils.h"
 #include "MadEdit/MadEditPv.h"
 #include "SpellCheckerManager.h"
-#include "astyle/astyle.h"
-#include "astylepredefinedstyles.h"
 
 #ifdef MADEDIT_ENABLE_STC
 enum
@@ -176,25 +174,7 @@ TreeItemData *g_SelectedCommandItem = nullptr;
 int g_SelectedKeyId = -1;
 TreeItemData *g_CommandItemOfNewKey = nullptr;
 #define ENABLE_BITMAP_THUARI 0
-static wxString bracket_style[aspsCustom + 1] =
-{
-	wxT( "#include <iostream>\n\nint Foo(bool isBar)\n{\n    if (isBar)\n    {\n        bar();\n        return 1;\n    }\n    else\n        return 0;\n}\n" ),
-	wxT( "#include <iostream>\n\nint Foo(bool isBar) {\n    if (isBar) {\n        bar();\n        return 1;\n    } else\n        return 0;\n}\n" ),
-	wxT( "#include <iostream>\n\nint Foo(bool isBar)\n{\n    if (isBar) {\n        bar();\n        return 1;\n    } else\n        return 0;\n}\n" ),
-	wxT( "#include <iostream>\n\nint Foo(bool isBar)\n{\n     if (isBar) {\n          bar();\n          return 1;\n     } else\n          return 0;\n}" ),
-	wxT( "#include <iostream>\n\nint Foo(bool isBar)\n    {\n    if (isBar)\n        {\n        bar();\n        return 1;\n        }\n    else\n        return 0;\n    }\n" ),
-	wxT( "#include <iostream>\n\nint Foo(bool isBar)\n    {\n        if (isBar)\n            {\n            bar();\n            return 1;\n            }\n        else\n            return 0;\n    }\n" ),
-	wxT( "#include <iostream>\n\nint Foo(bool isBar) {\n    if (isBar) {\n        bar();\n        return 1;\n        }\n    else\n        return 0;\n    }\n" ),
-	wxT( "#include <iostream>\n\nint Foo(bool isBar)\n{\n  if (isBar)\n    {\n      bar();\n      return 1;\n    }\n  else\n    return 0;\n}\n" ),
-	wxT( "#include <iostream>\n\nint Foo(bool isBar)\n{\n        if (isBar) {\n                bar();\n                return 1;\n        } else\n                return 0;\n}\n" ),
-	wxT( "#include <iostream>\n\nint Foo(bool isBar)\n{  if (isBar)\n   {  bar();\n      return 1;\n   }\n   else\n      return 0;\n}\n" ),
-	wxT( "#include <iostream>\n\nint Foo(bool isBar)\n{\n    if (isFoo) {\n        bar();\n        return 1;\n    } else {\n        return 0;\n    }\n}\n" ),
-	wxT( "#include <iostream>\n\nint Foo(bool isBar) {\n    if (isBar) {\n        bar();\n        return 1;\n    }\n    else\n        return 0;\n}\n" ),
-	wxT( "#include <iostream>\n\nint Foo( bool isBar )\n{\n    if( isBar ) {\n        bar();\n        return 1;\n    }\n    else\n    { return 0; }\n}\n" ),
-	wxT( "#include <iostream>\n\nint Foo(bool isBar)\n{  if (isBar)\n   {  bar();\n      return 1; }\n    else\n      return 0; }\n" ),
-	wxT( "#include <iostream>\n\nint Foo(bool isBar) {\n    if (isBar) {\n        bar()\n        return 1; }\n    else\n        return 0; }\n" ),
-	wxT( "#include <iostream>\n\nint Foo(bool isBar) {\n    if (isBar) {\n        bar()\n        return 1; }\n    else\n        return 0; }\n" ),
-};
+
 class KeyTextCtrl : public wxTextCtrl
 {
 public:

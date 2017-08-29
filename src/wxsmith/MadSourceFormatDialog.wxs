@@ -2,14 +2,15 @@
 <wxsmith>
 	<object class="wxDialog" name="MadSourceFormatDialog">
 		<title>Source Formator</title>
+		<maxsize>-1,-1</maxsize>
 		<id_arg>0</id_arg>
 		<size_arg>1</size_arg>
-		<style>wxCAPTION|wxCLOSE_BOX</style>
+		<style>wxCAPTION|wxRESIZE_BORDER|wxCLOSE_BOX</style>
 		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
 			<orient>wxVERTICAL</orient>
 			<object class="sizeritem">
-				<object class="wxAuiNotebook" name="ID_AUINOTEBOOK1" variable="AuiNotebook1" member="yes">
-					<size>800,492</size>
+				<object class="wxAuiNotebook" name="ID_AUINOTEBOOK1" variable="AuiNotebook1" member="no">
+					<size>800,500</size>
 					<style>wxAUI_NB_TOP</style>
 					<object class="AuiNotebookPage">
 						<object class="wxPanel" name="ID_PANEL1" variable="Panel1" member="no">
@@ -137,12 +138,11 @@
 												<min>2</min>
 												<max>8</max>
 											</object>
-											<flag>wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL</flag>
+											<flag>wxALL</flag>
 											<border>2</border>
-											<option>1</option>
 										</object>
 									</object>
-									<flag>wxALL|wxEXPAND</flag>
+									<flag>wxALL</flag>
 									<border>2</border>
 								</object>
 								<object class="sizeritem">
@@ -241,14 +241,6 @@
 										<cols>2</cols>
 										<growablecols>0</growablecols>
 										<object class="sizeritem">
-											<object class="wxSpinCtrl" name="ID_SPINCTRLMININDENT" variable="SpinMinConditionalEvent" member="yes">
-												<value>2</value>
-												<max>3</max>
-											</object>
-											<flag>wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL</flag>
-											<border>2</border>
-										</object>
-										<object class="sizeritem">
 											<object class="wxStaticText" name="wxID_ANY" variable="StaticText3" member="no">
 												<label>Minimal indent added when a header is built of multiple lines:</label>
 											</object>
@@ -256,10 +248,11 @@
 											<border>2</border>
 										</object>
 										<object class="sizeritem">
-											<object class="wxTextCtrl" name="ID_EDITMAXCONTINUATIONINDENT" variable="EditMaxContinuationIndent" member="yes">
-												<value>40</value>
+											<object class="wxSpinCtrl" name="ID_SPINCTRLMININDENT" variable="SpinMinConditionalEvent" member="yes">
+												<value>2</value>
+												<max>3</max>
 											</object>
-											<flag>wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL</flag>
+											<flag>wxALL|wxEXPAND</flag>
 											<border>2</border>
 										</object>
 										<object class="sizeritem">
@@ -270,10 +263,10 @@
 											<border>2</border>
 										</object>
 										<object class="sizeritem">
-											<object class="wxTextCtrl" name="ID_EDITINDENTCONTINUATION" variable="EditIndentContinuation" member="yes">
-												<value>1</value>
+											<object class="wxTextCtrl" name="ID_EDITMAXCONTINUATIONINDENT" variable="EditMaxContinuationIndent" member="yes">
+												<value>40</value>
 											</object>
-											<flag>wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL</flag>
+											<flag>wxALL|wxEXPAND</flag>
 											<border>2</border>
 										</object>
 										<object class="sizeritem">
@@ -283,8 +276,15 @@
 											<flag>wxALL|wxEXPAND</flag>
 											<border>2</border>
 										</object>
+										<object class="sizeritem">
+											<object class="wxTextCtrl" name="ID_EDITINDENTCONTINUATION" variable="EditIndentContinuation" member="yes">
+												<value>1</value>
+											</object>
+											<flag>wxALL|wxEXPAND</flag>
+											<border>2</border>
+										</object>
 									</object>
-									<flag>wxALL|wxALIGN_LEFT</flag>
+									<flag>wxALL</flag>
 								</object>
 							</object>
 						</object>
@@ -367,6 +367,13 @@
 									<border>2</border>
 								</object>
 								<object class="sizeritem">
+									<object class="wxCheckBox" name="ID_CHECKBREAKONELINEHEADERS" variable="CheckBreakOneLineHeaders" member="yes">
+										<label>Break one line headers</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
 									<object class="wxCheckBox" name="ID_CHECKBREAKLINES" variable="CheckBreakLines" member="yes">
 										<label>Enable line breaking</label>
 										<handler function="OnCheckBreakLinesClick" entry="EVT_CHECKBOX" />
@@ -419,7 +426,7 @@
 					</object>
 					<object class="AuiNotebookPage">
 						<object class="wxPanel" name="ID_PANEL5" variable="Panel5" member="no">
-							<size>792,-1</size>
+							<size>792,464</size>
 							<style>0</style>
 							<object class="wxBoxSizer" variable="BoxSizer9" member="no">
 								<orient>wxVERTICAL</orient>
@@ -498,6 +505,41 @@
 									<border>2</border>
 								</object>
 								<object class="sizeritem">
+									<object class="wxCheckBox" name="ID_CHECKPADCOMMA" variable="CheckPadComma" member="yes">
+										<label>Pad comma</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="ID_CHECKPADRETURNTYPE" variable="CheckPadReturnType" member="yes">
+										<label>Pad return type(Object-C)</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="ID_CHECKUNPADRETURNTYPE" variable="CheckUnpadReturnType" member="yes">
+										<label>Unpad return type(Object-C)</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="ID_CHECKPADPARAMTYPE" variable="CheckPadParamType" member="yes">
+										<label>Pad param type(Object-C)</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="ID_CHECKUNPADPARAMTYPE" variable="CheckUnpadParamType" member="yes">
+										<label>Unpad param type(Object-C)</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
 									<object class="wxGridSizer" variable="GridSizer3" member="no">
 										<cols>4</cols>
 										<object class="sizeritem">
@@ -505,7 +547,7 @@
 												<label>Pointer alignment</label>
 											</object>
 											<flag>wxALL|wxEXPAND</flag>
-											<border>2</border>
+											<option>2</option>
 										</object>
 										<object class="sizeritem">
 											<object class="wxChoice" name="ID_CHOICEPOINTERALIGN" variable="ChoicePointerAlign" member="yes">
@@ -521,7 +563,7 @@
 											<border>2</border>
 										</object>
 										<object class="sizeritem">
-											<object class="wxStaticText" name="ID_STATICTEXT7" variable="StaticText7" member="no">
+											<object class="wxStaticText" name="wxID_ANY" variable="StaticText7" member="no">
 												<label>Reference alignment</label>
 											</object>
 											<flag>wxALL|wxEXPAND</flag>
@@ -541,7 +583,7 @@
 											<border>2</border>
 										</object>
 									</object>
-									<flag>wxALL|wxEXPAND</flag>
+									<flag>wxALL</flag>
 									<border>2</border>
 								</object>
 							</object>
