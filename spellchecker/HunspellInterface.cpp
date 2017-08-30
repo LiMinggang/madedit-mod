@@ -24,6 +24,10 @@
 #include <wx/textfile.h>
 #include <wx/config.h>
 
+#ifndef __WXMSW__
+extern wxString g_MadEditHomeDir;
+#endif
+
 HunspellInterface::HunspellInterface(wxSpellCheckUserInterface* pDlg /* = nullptr */)
 {
     m_pSpellUserInterface = pDlg;
@@ -512,7 +516,11 @@ void HunspellInterface::SetEnablePersonalDictionary(bool enable)
         wxFileName sPath(GetDictionaryFileName());
         sPath.MakeAbsolute();
         wxString dictName = wxT("MadDict.")+sPath.GetName();
+#ifdef __WXMSW__
         m_PersonalDictionary.SetDictionaryFileName(sPath.GetPath() + wxFILE_SEP_PATH + dictName);
+#else
+        m_PersonalDictionary.SetDictionaryFileName(g_MadEditHomeDir + wxFILE_SEP_PATH + dictName);
+#endif
         wxTextFile DictFile(m_PersonalDictionary.GetDictionaryFileName());
         if (!DictFile.Exists())
         {

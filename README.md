@@ -87,6 +87,7 @@ Mod v0.4.9
 * Fix: Hang on closing Option Dialog if click Code preview edit on Source formatter tab #235
 * Fix: Left double click would move caret forward
 * Fix: Merge Hunspell latest fix
+* Fix: Can't enable personal dictionary on Mageia/Linux #238
 * Update C++ syntax to C++11
 * Update uchardet to latest version
 * Update Astyle to 3.0.1
