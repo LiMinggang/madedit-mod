@@ -272,6 +272,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\MadSourceFormatDialog.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\MadUtils.cpp"
 				>
 			</File>
@@ -691,6 +695,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\MadSortDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\MadSourceFormatDialog.h"
 				>
 			</File>
 			<File
