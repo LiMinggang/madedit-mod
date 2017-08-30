@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-29 17:27+0800\n"
-"PO-Revision-Date: 2017-08-29 10:27+0800\n"
+"POT-Creation-Date: 2017-08-30 23:19+0800\n"
+"PO-Revision-Date: 2017-08-30 23:20+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit-Mod <minggang.li@gmail.com>\n"
 "Language: zh_CN\n"
@@ -3595,7 +3595,7 @@ msgid "Auto complete character pair"
 msgstr "自动完成字符配对"
 
 #: ../src/MadOptionsDialog.cpp:548
-msgid "Insert pair instead of replace selection"
+msgid "Insert pair instead of replacing selection"
 msgstr "插入自动匹配字符而不是替换选择区域"
 
 #: ../src/MadOptionsDialog.cpp:555
@@ -4185,8 +4185,8 @@ msgid "Postfix"
 msgstr "后缀"
 
 #: ../src/MadNumberDlg.cpp:173
-msgid "Previw: "
-msgstr "预览 "
+msgid "Preview: "
+msgstr "预览："
 
 #: ../src/MadNumberDlg.cpp:179 ../src/MadNumberDlg.h:51
 msgid "Numbering Configuration"
@@ -4229,7 +4229,7 @@ msgstr "隐藏结果 <<"
 msgid "MadEdit-Mod Printout"
 msgstr "MadEdit-Mod预览打印"
 
-#: ../spellchecker/HunspellInterface.cpp:385
+#: ../spellchecker/HunspellInterface.cpp:389
 #, c-format
 msgid ""
 "Unsure how to update the possible values for %s based on the value of %s"

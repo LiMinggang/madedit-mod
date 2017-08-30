@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: madedit-mod 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-29 17:27+0800\n"
-"PO-Revision-Date: 2017-08-28 17:44+0800\n"
+"POT-Creation-Date: 2017-08-30 23:19+0800\n"
+"PO-Revision-Date: 2017-08-30 23:23+0800\n"
 "Last-Translator: nikos <nikos769@yahoo.gr>\n"
 "Language-Team: Greek <nikos769@yahoo.gr>\n"
 "Language: el\n"
@@ -3350,14 +3350,14 @@ msgstr "Εσοχή στα ονόματα-πεδία"
 #: ../src/MadSourceFormatDialog.cpp:329
 msgid "Minimal indent added when a header is built of multiple lines:"
 msgstr ""
-"Ελάχιστη εσοχή που προστίθεται, όταν μια κεφαλίδα χτίζεται από πολλαπλές"
-" γραμμές:"
+"Ελάχιστη εσοχή που προστίθεται, όταν μια κεφαλίδα χτίζεται από πολλαπλές "
+"γραμμές:"
 
 #: ../src/MadSourceFormatDialog.cpp:334
 msgid "Maximum of # spaces to indent a continuation line (max. 120):"
 msgstr ""
-"Μέγιστο πλήθος από διαστήματα # , για να τοποθετηθεί εσοχή σε μια γραμμή"
-" συνέχειας (μεγ. 120):"
+"Μέγιστο πλήθος από διαστήματα # , για να τοποθετηθεί εσοχή σε μια γραμμή "
+"συνέχειας (μεγ. 120):"
 
 #: ../src/MadSourceFormatDialog.cpp:338
 msgid "Indent a continuation line (default 1)"
@@ -3387,8 +3387,8 @@ msgstr "Προσθήκη αγκύλων μίας γραμμής σε υποθε�
 msgid ""
 "Remove braces from conditional statements (single statement on a single line)"
 msgstr ""
-"Απομάκρυνση των αγκύλων από υποθετικές δηλώσεις (μία δήλωση σε κάθε μία"
-" γραμμή)"
+"Απομάκρυνση των αγκύλων από υποθετικές δηλώσεις (μία δήλωση σε κάθε μία "
+"γραμμή)"
 
 #: ../src/MadSourceFormatDialog.cpp:363
 msgid "Don't break one-line blocks"
@@ -3607,7 +3607,8 @@ msgstr ""
 #: ../src/MadOptionsDialog.cpp:459
 msgid "Reload files previously open on startup"
 msgstr ""
-"Κατά την εκκίνηση, επαναφόρτωση αρχείων, που ήταν την προηγούμενη φορά ανοιχτά"
+"Κατά την εκκίνηση, επαναφόρτωση αρχείων, που ήταν την προηγούμενη φορά "
+"ανοιχτά"
 
 #: ../src/MadOptionsDialog.cpp:462
 msgid "Restore previous caret position when files are opened"
@@ -3685,7 +3686,7 @@ msgid "Auto complete character pair"
 msgstr "Αυτόματη συμπλήρωση του ζευγαριού των χαρακτήρων"
 
 #: ../src/MadOptionsDialog.cpp:548
-msgid "Insert pair instead of replace selection"
+msgid "Insert pair instead of replacing selection"
 msgstr "Εισαγωγή ζευγαριού, αντί για αντικατάσταση της επιλογής"
 
 #: ../src/MadOptionsDialog.cpp:555
@@ -4293,7 +4294,7 @@ msgid "Postfix"
 msgstr "Κατάληξη"
 
 #: ../src/MadNumberDlg.cpp:173
-msgid "Previw: "
+msgid "Preview: "
 msgstr "Προεπισκόπηση: "
 
 #: ../src/MadNumberDlg.cpp:179 ../src/MadNumberDlg.h:51
@@ -4337,7 +4338,7 @@ msgstr "Αποτελέσματα <<"
 msgid "MadEdit-Mod Printout"
 msgstr "Εκτύπωση του ΜαντΈντιτ-Μοντ"
 
-#: ../spellchecker/HunspellInterface.cpp:385
+#: ../spellchecker/HunspellInterface.cpp:389
 #, c-format
 msgid ""
 "Unsure how to update the possible values for %s based on the value of %s"

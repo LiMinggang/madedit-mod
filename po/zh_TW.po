@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-29 17:27+0800\n"
-"PO-Revision-Date: 2017-08-28 19:35+0800\n"
+"POT-Creation-Date: 2017-08-30 23:19+0800\n"
+"PO-Revision-Date: 2017-08-30 23:22+0800\n"
 "Last-Translator: zhtw <zhtw2013@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
 "Language: zh_TW\n"
@@ -3206,7 +3206,6 @@ msgid "%s string(s) were replaced."
 msgstr "%s 個字串已被取代。"
 
 #: ../src/MadSourceFormatDialog.cpp:135
-#, fuzzy
 msgid "Source Formatter"
 msgstr "來源檔案格式化工具"
 
@@ -3243,7 +3242,6 @@ msgid "Attach Closing While"
 msgstr "\"do-while\"花括號後跟著while"
 
 #: ../src/MadSourceFormatDialog.cpp:282 ../src/MadSourceFormatDialog.cpp:475
-#, fuzzy
 msgid "Indentation size(in spaces):"
 msgstr "縮排尺寸（空格數）："
 
@@ -3301,14 +3299,12 @@ msgid "Indent after parens"
 msgstr "括號後縮排"
 
 #: ../src/MadSourceFormatDialog.cpp:329
-#, fuzzy
 msgid "Minimal indent added when a header is built of multiple lines:"
-msgstr "當一個語句頭是由多行構成時加入的最小縮排"
+msgstr "當一個語句頭是由多行構成時加入的最小縮排："
 
 #: ../src/MadSourceFormatDialog.cpp:334
-#, fuzzy
 msgid "Maximum of # spaces to indent a continuation line (max. 120):"
-msgstr "一個續行時最多縮排幾個空格"
+msgstr "一個續行時最多縮排幾個空格（最多120）："
 
 #: ../src/MadSourceFormatDialog.cpp:338
 msgid "Indent a continuation line (default 1)"
@@ -3323,17 +3319,14 @@ msgid "Break 'else if()' header combinations into seperate lines"
 msgstr "把'else if()'語句頭組合中斷成單獨的多行"
 
 #: ../src/MadSourceFormatDialog.cpp:354
-#, fuzzy
 msgid "Add braces to unbraced one line conditional statements"
 msgstr "給沒有花括號的單行語句加上花括號"
 
 #: ../src/MadSourceFormatDialog.cpp:357
-#, fuzzy
 msgid "Add one line braces to unbraced one line conditional statements"
 msgstr "給沒有花括號的單行條件語句加上單行花括號"
 
 #: ../src/MadSourceFormatDialog.cpp:360
-#, fuzzy
 msgid ""
 "Remove braces from conditional statements (single statement on a single line)"
 msgstr "去掉條件語句的花括號（單行語句）"
@@ -3435,7 +3428,6 @@ msgid "Unpad param type(Object-C)"
 msgstr "去除參數類型周圍填充（Object-C）"
 
 #: ../src/MadSourceFormatDialog.cpp:448
-#, fuzzy
 msgid "Pointer alignment"
 msgstr "指標對齊"
 
@@ -3452,9 +3444,8 @@ msgid "Reference alignment"
 msgstr "參照對齊"
 
 #: ../src/MadSourceFormatDialog.cpp:471
-#, fuzzy
 msgid "XML version:"
-msgstr "XML版本號"
+msgstr "XML版本號："
 
 #: ../src/MadSourceFormatDialog.cpp:483
 msgid "Style"
@@ -3608,7 +3599,7 @@ msgid "Auto complete character pair"
 msgstr "自動完成字元配對"
 
 #: ../src/MadOptionsDialog.cpp:548
-msgid "Insert pair instead of replace selection"
+msgid "Insert pair instead of replacing selection"
 msgstr "插入自動符合字元而不是取代選擇區域"
 
 #: ../src/MadOptionsDialog.cpp:555
@@ -4198,8 +4189,8 @@ msgid "Postfix"
 msgstr "尾碼"
 
 #: ../src/MadNumberDlg.cpp:173
-msgid "Previw: "
-msgstr "預覽 "
+msgid "Preview: "
+msgstr "預覽："
 
 #: ../src/MadNumberDlg.cpp:179 ../src/MadNumberDlg.h:51
 msgid "Numbering Configuration"
@@ -4242,7 +4233,7 @@ msgstr "隱藏結果 <<"
 msgid "MadEdit-Mod Printout"
 msgstr "MadEdit-Mod預覽列印"
 
-#: ../spellchecker/HunspellInterface.cpp:385
+#: ../spellchecker/HunspellInterface.cpp:389
 #, c-format
 msgid ""
 "Unsure how to update the possible values for %s based on the value of %s"

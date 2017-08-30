@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-29 17:27+0800\n"
+"POT-Creation-Date: 2017-08-30 23:19+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3568,7 +3568,7 @@ msgid "Auto complete character pair"
 msgstr ""
 
 #: ../src/MadOptionsDialog.cpp:548
-msgid "Insert pair instead of replace selection"
+msgid "Insert pair instead of replacing selection"
 msgstr ""
 
 #: ../src/MadOptionsDialog.cpp:555
@@ -4146,7 +4146,7 @@ msgid "Postfix"
 msgstr ""
 
 #: ../src/MadNumberDlg.cpp:173
-msgid "Previw: "
+msgid "Preview: "
 msgstr ""
 
 #: ../src/MadNumberDlg.cpp:179 ../src/MadNumberDlg.h:51
@@ -4190,7 +4190,7 @@ msgstr ""
 msgid "MadEdit-Mod Printout"
 msgstr ""
 
-#: ../spellchecker/HunspellInterface.cpp:385
+#: ../spellchecker/HunspellInterface.cpp:389
 #, c-format
 msgid ""
 "Unsure how to update the possible values for %s based on the value of %s"

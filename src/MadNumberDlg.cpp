@@ -170,7 +170,7 @@ void MadNumberDlg::CreateGUIControls()
 	WxCancelButton = new wxButton(this, wxID_CANCEL, _("Cancel"), wxPoint(90, 5), wxSize(75, 25), 0, wxDefaultValidator, wxT("WxCancelButton"));
 	WxBoxSizer5->Add(WxCancelButton, 0, wxALIGN_CENTER | wxALL, 5);
 
-	WxStaticText6 = new wxStaticText(this, ID_WXSTATICTEXT6, _("Previw: "), wxPoint(5, 5), wxDefaultSize, 0, wxT("WxStaticText6"));
+	WxStaticText6 = new wxStaticText(this, ID_WXSTATICTEXT6, _("Preview: "), wxPoint(5, 5), wxDefaultSize, 0, wxT("WxStaticText6"));
 	WxBoxSizer8->Add(WxStaticText6, 0, wxALIGN_LEFT | wxALL, 5);
 
 	WxStaticTextPreview = new wxStaticText(this, ID_WXSTATICTEXTPREVIEW, wxT("0"), wxPoint(63, 5), wxDefaultSize, 0, wxT("WxStaticTextPreview"));

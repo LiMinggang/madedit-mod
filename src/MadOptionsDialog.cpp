@@ -545,7 +545,7 @@ void MadOptionsDialog::CreateGUIControls( void )
 	SET_CONTROLPARENT( WxCheckBoxAutoCompletePair );
 	WxBoxSizer52 = new wxBoxSizer(wxHORIZONTAL);
 	WxBoxSizer52->Add(10,0,0, wxALL, 0);
-	WxCheckBoxInsertPairForSelection = new wxCheckBox(WxNoteBookPage2, ID_WXCHECKBOXINSERTPAIRFORSELECTION, _("Insert pair instead of replace selection"), wxPoint( 15, 2 ), wxSize( 260, 20 ), 0, wxDefaultValidator, _T("WxCheckBoxInsertPairForSelection"));
+	WxCheckBoxInsertPairForSelection = new wxCheckBox(WxNoteBookPage2, ID_WXCHECKBOXINSERTPAIRFORSELECTION, _("Insert pair instead of replacing selection"), wxPoint( 15, 2 ), wxSize( 260, 20 ), 0, wxDefaultValidator, _T("WxCheckBoxInsertPairForSelection"));
 	WxCheckBoxInsertPairForSelection->SetValue(false);
 	WxBoxSizer52->Add(WxCheckBoxInsertPairForSelection, 0, wxALL|wxEXPAND, 2);
 	SET_CONTROLPARENT( WxCheckBoxInsertPairForSelection );

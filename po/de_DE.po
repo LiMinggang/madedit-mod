@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-29 17:27+0800\n"
+"POT-Creation-Date: 2017-08-30 23:19+0800\n"
 "PO-Revision-Date: 2015-04-18 00:14+0100\n"
 "Last-Translator: Ronny Steiner <post@sirsteiner.de>\n"
 "Language-Team: \n"
@@ -3812,7 +3812,7 @@ msgstr ""
 
 #: ../src/MadOptionsDialog.cpp:548
 #, fuzzy
-msgid "Insert pair instead of replace selection"
+msgid "Insert pair instead of replacing selection"
 msgstr "Groß- in Klein- und Klein- in Großbuchstaben der Auswahl umwandeln"
 
 #: ../src/MadOptionsDialog.cpp:555
@@ -4418,7 +4418,7 @@ msgstr ""
 
 #: ../src/MadNumberDlg.cpp:173
 #, fuzzy
-msgid "Previw: "
+msgid "Preview: "
 msgstr "Vorschau"
 
 #: ../src/MadNumberDlg.cpp:179 ../src/MadNumberDlg.h:51
@@ -4467,7 +4467,7 @@ msgstr "%d Ergebnisse"
 msgid "MadEdit-Mod Printout"
 msgstr "MadEdit Ausdruck"
 
-#: ../spellchecker/HunspellInterface.cpp:385
+#: ../spellchecker/HunspellInterface.cpp:389
 #, c-format
 msgid ""
 "Unsure how to update the possible values for %s based on the value of %s"
