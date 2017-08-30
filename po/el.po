@@ -1275,12 +1275,12 @@ msgstr ""
 
 #: ../src/MadEditFrame.cpp:2132
 msgid "Insert Incremental numbers..."
-msgstr "Εισαγωγή Αυξόντων αριθμών..."
+msgstr "Εισαγωγή Αυξανόμενων αριθμών..."
 
 #: ../src/MadEditFrame.cpp:2132
 msgid "Insert incremental numbers with step and padding at current caret"
 msgstr ""
-"Εισαγωγή αυξόντων αριθμών με βηματισμό και γέμισμα στην τωρινή περισπωμένη"
+"Εισαγωγή αυξανόμενων αριθμών με βηματισμό και γέμισμα στον τωρινό δρομέα"
 
 #: ../src/MadEditFrame.cpp:2132
 msgid "Numbering and Bullets"
@@ -1479,8 +1479,7 @@ msgstr "Μετακίνηση Πίσω"
 #: ../src/MadEditFrame.cpp:2162
 msgid "Moves the caret to the previous location in the Selection History"
 msgstr ""
-"Μετακινεί την περισπωμένη στην προηγούμενη τοποθεσία στο Ιστορικό των "
-"Επιλογών"
+"Μετακινεί τον δρομέα στην προηγούμενη τοποθεσία στο Ιστορικό των Επιλογών"
 
 #: ../src/MadEditFrame.cpp:2163
 msgid "Go Forward"
@@ -1488,8 +1487,7 @@ msgstr "Μετακίνηση Εμπρός"
 
 #: ../src/MadEditFrame.cpp:2163
 msgid "Moves the caret to the next location in the Selection History"
-msgstr ""
-"Μετακινεί την περισπωμένη στην επόμενη τοποθεσία στο Ιστορικό των Επιλογών"
+msgstr "Μετακινεί τον δρομέα στην επόμενη τοποθεσία στο Ιστορικό των Επιλογών"
 
 #: ../src/MadEditFrame.cpp:2165
 msgid "Go To L&eft Brace"
@@ -1669,7 +1667,7 @@ msgstr "Εμφάνιση του συμβόλου των Σελιδιδεικτώ
 
 #: ../src/MadEditFrame.cpp:2330
 msgid "Display 80th Cols &Hint"
-msgstr "Προβολή Ένδειξης 80ής Στήλ&ης"
+msgstr "Προβολή της Ένδειξης της 80ής Στήλ&ης"
 
 #: ../src/MadEditFrame.cpp:2330
 msgid "Display the 80th columns hint"
@@ -1685,7 +1683,7 @@ msgstr "Εμφάνιση του συμβόλου του τέλους της γρ
 
 #: ../src/MadEditFrame.cpp:2332
 msgid "Show Tab Char"
-msgstr "Εμφάνιση Χαρακτήρα Πινακωτής"
+msgstr "Εμφάνιση του Χαρακτήρα της Πινακωτής"
 
 #: ../src/MadEditFrame.cpp:2332
 msgid "Show the sign of Tab char"
@@ -1709,7 +1707,7 @@ msgstr "Εμφάνιση των συμβόλων για όλους τους χα
 
 #: ../src/MadEditFrame.cpp:2335
 msgid "Right-to-left"
-msgstr "Από-τα-δεξιά-στα-αριστερά"
+msgstr "Από-τα-δεξιά-προς-τα-αριστερά"
 
 #: ../src/MadEditFrame.cpp:2335
 msgid "View text from Right-to-left"
@@ -1717,7 +1715,7 @@ msgstr "Προβολή του κειμένου Από-τα-δεξιά-στα-α�
 
 #: ../src/MadEditFrame.cpp:2336
 msgid "Mark Active Line"
-msgstr "Σημάδεμα της Ενεργούς Γραμμής"
+msgstr "Σημάδεμα της Ενεργής Γραμμής"
 
 #: ../src/MadEditFrame.cpp:2336
 msgid "Mark the current line"
@@ -1725,11 +1723,11 @@ msgstr "Σημάδεμα της τρέχουσα γραμμής"
 
 #: ../src/MadEditFrame.cpp:2337
 msgid "Mark Brace Pair"
-msgstr "Σημάδεμα Ζευγαριού Αγκύλων"
+msgstr "Σημάδεμα του Ζευγαριού Αγκύλων"
 
 #: ../src/MadEditFrame.cpp:2337
 msgid "Mark the BracePair under the caret"
-msgstr "Σημάδεμα του ΖευγαριούΑγκύλων κάτω από την περισπωμένη"
+msgstr "Σημάδεμα του ΖευγαριούΑγκύλων κάτω από τον δρομέα"
 
 #: ../src/MadEditFrame.cpp:2338
 msgid "Spell Check"
@@ -1797,7 +1795,7 @@ msgstr "Δεκαεξαδική Λειτουργία"
 
 #: ../src/MadEditFrame.cpp:2349 ../src/MadEditFrame.cpp:5084
 msgid "Preview as: "
-msgstr "Προεπισκόπηση ως:"
+msgstr "Προεπισκόπηση ως: "
 
 #: ../src/MadEditFrame.cpp:2352
 msgid "&Macro"
@@ -1884,14 +1882,12 @@ msgid "Change file type associations"
 msgstr "Αλλαγή των συσχετίσεων των μορφών των αρχείων"
 
 #: ../src/MadEditFrame.cpp:2369
-#, fuzzy
 msgid "&Source Formatter Settings..."
-msgstr "Μορφοποιητής Πηγαίου Κώδικα"
+msgstr "Ρυθμί&σεις του Μορφοποιητή του Πηγαίου Κώδικα"
 
 #: ../src/MadEditFrame.cpp:2369
-#, fuzzy
 msgid "Change source formatter settings"
-msgstr "Αλλαγή των ρυθμίσεων των γραμματοσειρών"
+msgstr "Αλλαγή των ρυθμίσεων του μορφοποιητή της πηγής"
 
 #: ../src/MadEditFrame.cpp:2370
 msgid "&Purge Histories..."
@@ -2178,19 +2174,19 @@ msgstr "&Σχετικά με το MadEdit-Mod..."
 
 #: ../src/MadEditFrame.cpp:2421
 msgid "Move caret left one char"
-msgstr "Μετακίνηση της περισπωμένης αριστερά, κατά ένα χαρακτήρα"
+msgstr "Μετακίνηση του δρομέα αριστερά, κατά ένα χαρακτήρα"
 
 #: ../src/MadEditFrame.cpp:2422
 msgid "Move caret right one char"
-msgstr "Μετακίνηση της περισπωμένης δεξιά, κατά ένα χαρακτήρα"
+msgstr "Μετακίνηση του δρομέα δεξιά, κατά ένα χαρακτήρα"
 
 #: ../src/MadEditFrame.cpp:2423
 msgid "Move caret up one line"
-msgstr "Μετακίνηση της περισπωμένης πάνω, κατά μία γραμμή"
+msgstr "Μετακίνηση του δρομέα πάνω, κατά μία γραμμή"
 
 #: ../src/MadEditFrame.cpp:2424
 msgid "Move caret down one line"
-msgstr "Μετακίνηση της περισπωμένης κάτω, κατά μία γραμμή"
+msgstr "Μετακίνηση του δρομέα κάτω, κατά μία γραμμή"
 
 #: ../src/MadEditFrame.cpp:2425
 msgid "Go to begin of line"
@@ -2226,19 +2222,19 @@ msgstr "Μετάβαση στην επόμενη λέξη"
 
 #: ../src/MadEditFrame.cpp:2434
 msgid "Move caret left one char and select"
-msgstr "Μετακίνηση της περισπωμένης αριστερά, κατά ένα χαρακτήρα, και επέλεξε"
+msgstr "Μετακίνηση του δρομέα αριστερά, κατά ένα χαρακτήρα, και επέλεξε"
 
 #: ../src/MadEditFrame.cpp:2435
 msgid "Move caret right one char and select"
-msgstr "Μετακίνηση της περισπωμένης δεξιά, κατά ένα χαρακτήρα, και επέλεξε"
+msgstr "Μετακίνηση του δρομέα δεξιά, κατά ένα χαρακτήρα, και επέλεξε"
 
 #: ../src/MadEditFrame.cpp:2436
 msgid "Move caret up one line and select"
-msgstr "Μετακίνηση της περισπωμένης πάνω, κατά μία γραμμή, και επέλεξε"
+msgstr "Μετακίνηση του δρομέα πάνω, κατά μία γραμμή, και επέλεξε"
 
 #: ../src/MadEditFrame.cpp:2437
 msgid "Move caret down one line and select"
-msgstr "Μετακίνηση της περισπωμένης κάτω, κατά μία γραμμή, και επέλεξε"
+msgstr "Μετακίνηση του δρομέα κάτω, κατά μία γραμμή, και επέλεξε"
 
 #: ../src/MadEditFrame.cpp:2438
 msgid "Go to begin of line and select"
@@ -2318,15 +2314,15 @@ msgstr "Εισαγωγή ενός χαρακτήρα Πινακωτής ή εσ�
 
 #: ../src/MadEditFrame.cpp:2459
 msgid "Delete one char to the left of the caret"
-msgstr "Διαγραφή ενός χαρακτήρα στα αριστερά της περισπωμένης"
+msgstr "Διαγραφή ενός χαρακτήρα στα αριστερά του δρομέα"
 
 #: ../src/MadEditFrame.cpp:2462
 msgid "Delete a word left from the caret"
-msgstr "Διαγραφή μιας λέξης στα αριστερά της περισπωμένης"
+msgstr "Διαγραφή μιας λέξης στα αριστερά του δρομέα"
 
 #: ../src/MadEditFrame.cpp:2463
 msgid "Delete a word right from the caret"
-msgstr "Διαγραφή μιας λέξης στα δεξιά της περισπωμένης"
+msgstr "Διαγραφή μιας λέξης στα δεξιά του δρομέα"
 
 #: ../src/MadEditFrame.cpp:2465
 msgid "Toggle Insert/Overwrite Mode"
@@ -2494,11 +2490,11 @@ msgstr "Τρέξιμο Σεναρίων Εντολών"
 
 #: ../src/MadEditFrame.cpp:3372
 msgid "Find matched text next to caret"
-msgstr "Αναζήτηση του κειμένου που ταιριάζει, μετά την περισπωμένη"
+msgstr "Αναζήτηση του κειμένου που ταιριάζει, μετά τον δρομέα"
 
 #: ../src/MadEditFrame.cpp:3373
 msgid "Find matched text previous from caret"
-msgstr "Αναζήτηση του κειμένου που ταιριάζει, πριν από την περισπωμένη"
+msgstr "Αναζήτηση του κειμένου που ταιριάζει, πριν από τον δρομέα"
 
 #: ../src/MadEditFrame.cpp:3374
 msgid "Whole Word Only"
@@ -2639,7 +2635,7 @@ msgstr "Προεπισκόπηση"
 
 #: ../src/MadEditFrame.cpp:5796
 msgid "MadEdit Print Preview"
-msgstr "Προεπισκόπηση Εκτύπωσης του ΜαντΈντιτ"
+msgstr "Προεπισκόπηση thw Εκτύπωσης του ΜαντΈντιτ"
 
 #: ../src/MadEditFrame.cpp:5820
 msgid ""
@@ -3059,7 +3055,7 @@ msgstr "Πρόσφατα Αναζητημένα Φίλτρα Αποκλ&ισμο
 
 #: ../src/MadPurgeHistoryDialog.cpp:80
 msgid "Recent Caret Position"
-msgstr "Πρόσφατη Θέση Περισπωμένης"
+msgstr "Πρόσφατη Θέση Δρομέα"
 
 #: ../src/MadPurgeHistoryDialog.cpp:83
 msgid "Reset Tool Bars and Information Window Pos"
@@ -3253,7 +3249,6 @@ msgstr ""
 " %s"
 
 #: ../src/MadSourceFormatDialog.cpp:135
-#, fuzzy
 msgid "Source Formatter"
 msgstr "Μορφοποιητής Πηγαίου Κώδικα"
 
@@ -3291,13 +3286,12 @@ msgid "Attach Closing While"
 msgstr "Προσκόλληση «Ενού» Κλεισίματος"
 
 #: ../src/MadSourceFormatDialog.cpp:282 ../src/MadSourceFormatDialog.cpp:475
-#, fuzzy
 msgid "Indentation size(in spaces):"
-msgstr "Μέγεθος της εσοχής (σε διαστήματα)"
+msgstr "Μέγεθος της εσοχής (σε διαστήματα):"
 
 #: ../src/MadSourceFormatDialog.cpp:288
 msgid "Use TABs instead of spaces"
-msgstr "Χρήση ΠΙΝΑΚΩΤΗΣ αντί για διαστήματα"
+msgstr "Χρήση ΠΙΝΑΚΩΤΗΣ, αντί για διαστήματα"
 
 #: ../src/MadSourceFormatDialog.cpp:291
 msgid "Force using TABs"
@@ -3354,18 +3348,16 @@ msgid "Indent after parens"
 msgstr "Εσοχή στα ονόματα-πεδία"
 
 #: ../src/MadSourceFormatDialog.cpp:329
-#, fuzzy
 msgid "Minimal indent added when a header is built of multiple lines:"
 msgstr ""
-"Ελάχιστη εσοχή που προστίθεται, όταν μια κεφαλίδα χτίζεται από πολλαπλές "
-"γραμμές"
+"Ελάχιστη εσοχή που προστίθεται, όταν μια κεφαλίδα χτίζεται από πολλαπλές"
+" γραμμές:"
 
 #: ../src/MadSourceFormatDialog.cpp:334
-#, fuzzy
 msgid "Maximum of # spaces to indent a continuation line (max. 120):"
 msgstr ""
-"Μέγιστο πλήθος από διαστήματα # , για να τοποθετηθεί εσοχή σε μια γραμμή "
-"συνέχειας (μεγ. 120)"
+"Μέγιστο πλήθος από διαστήματα # , για να τοποθετηθεί εσοχή σε μια γραμμή"
+" συνέχειας (μεγ. 120):"
 
 #: ../src/MadSourceFormatDialog.cpp:338
 msgid "Indent a continuation line (default 1)"
@@ -3392,12 +3384,11 @@ msgid "Add one line braces to unbraced one line conditional statements"
 msgstr "Προσθήκη αγκύλων μίας γραμμής σε υποθετικές δηλώσεις χωρίς αγκύλες"
 
 #: ../src/MadSourceFormatDialog.cpp:360
-#, fuzzy
 msgid ""
 "Remove braces from conditional statements (single statement on a single line)"
 msgstr ""
-"Απομάκρυνση των αγκύλων από υποθετικές δηλώσεις (μία δήλωση σε κάθε μία "
-"γραμμή)"
+"Απομάκρυνση των αγκύλων από υποθετικές δηλώσεις (μία δήλωση σε κάθε μία"
+" γραμμή)"
 
 #: ../src/MadSourceFormatDialog.cpp:363
 msgid "Don't break one-line blocks"
@@ -3510,9 +3501,8 @@ msgid "Unpad param type(Object-C)"
 msgstr "Απο-γέμισμα του τύπου παραμέτρου (Object-C)"
 
 #: ../src/MadSourceFormatDialog.cpp:448
-#, fuzzy
 msgid "Pointer alignment"
-msgstr "Στοίχιση δείκτη:"
+msgstr "Στοίχιση δείκτη"
 
 #: ../src/MadSourceFormatDialog.cpp:452 ../src/MadSourceFormatDialog.cpp:460
 msgid "Type"
@@ -3527,9 +3517,8 @@ msgid "Reference alignment"
 msgstr "Στοίχιση της Αναφοράς"
 
 #: ../src/MadSourceFormatDialog.cpp:471
-#, fuzzy
 msgid "XML version:"
-msgstr "Έκδοση της XML"
+msgstr "Έκδοση της XML:"
 
 #: ../src/MadSourceFormatDialog.cpp:483
 msgid "Style"
@@ -3591,7 +3580,7 @@ msgstr "Μία Υπόσταση (απαιτείται επανεκκίνηση �
 
 #: ../src/MadOptionsDialog.cpp:425
 msgid "Record caret movements"
-msgstr "Καταγραφή των μετακινήσεων της περισπωμένης"
+msgstr "Καταγραφή των μετακινήσεων του δρομέα"
 
 #: ../src/MadOptionsDialog.cpp:433
 msgid "Max file size to load whole file into memory"
@@ -3618,16 +3607,16 @@ msgstr ""
 #: ../src/MadOptionsDialog.cpp:459
 msgid "Reload files previously open on startup"
 msgstr ""
-"Κατά την εκκίνηση, επαναφόρτωση αρχείων που ήταν την προηγούμενη φορά ανοιχτά"
+"Κατά την εκκίνηση, επαναφόρτωση αρχείων, που ήταν την προηγούμενη φορά ανοιχτά"
 
 #: ../src/MadOptionsDialog.cpp:462
 msgid "Restore previous caret position when files are opened"
 msgstr ""
-"Αποκατάσταση της προηγούμενης θέσης της περισπωμένης όταν ανοίγουν αρχεία"
+"Αποκατάσταση της προηγούμενης θέσης του δρομέα, όταν ανοίγουν τα αρχεία"
 
 #: ../src/MadOptionsDialog.cpp:465
 msgid "Show quick search bar on startup"
-msgstr "Εμφάνιση της γραμμή αργαλείων γρήγορης αναζήτησης κατά την εκίννηση"
+msgstr "Εμφάνιση της γραμμή εργαλείων γρήγορης αναζήτησης κατά την εκκίνηση"
 
 #: ../src/MadOptionsDialog.cpp:468
 msgid ""
@@ -3646,7 +3635,7 @@ msgstr "Αυτόματη αποθήκευση"
 
 #: ../src/MadOptionsDialog.cpp:480
 msgid "Timeout(M)"
-msgstr "Κάθε(Λ)"
+msgstr "Κάθε (λ)"
 
 #: ../src/MadOptionsDialog.cpp:486
 msgid "Auto backup"
@@ -3684,7 +3673,8 @@ msgstr "Χρήση των Αγγλικών αντί της τωρινής τοπ
 
 #: ../src/MadOptionsDialog.cpp:537
 msgid "Insert Space char instead of Tab char"
-msgstr "Εισαγωγή του χαρακτήρα Διαστήματος αντί για το χαρακτήρα Πινακωτής"
+msgstr ""
+"Εισαγωγή του χαρακτήρα Διαστήματος, αντί για το χαρακτήρα Πινακωτής (TAB)"
 
 #: ../src/MadOptionsDialog.cpp:540
 msgid "Auto Indent"
@@ -3696,7 +3686,7 @@ msgstr "Αυτόματη συμπλήρωση του ζευγαριού των �
 
 #: ../src/MadOptionsDialog.cpp:548
 msgid "Insert pair instead of replace selection"
-msgstr "Εισαγωγή ζευγαριού αντί για αντικατάσταση της επιλογής"
+msgstr "Εισαγωγή ζευγαριού, αντί για αντικατάσταση της επιλογής"
 
 #: ../src/MadOptionsDialog.cpp:555
 msgid "Auto copy the mouse-selected text to clipboard"
