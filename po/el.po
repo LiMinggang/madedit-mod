@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: madedit-mod 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-30 23:19+0800\n"
-"PO-Revision-Date: 2017-09-01 01:52+0200\n"
+"PO-Revision-Date: 2017-09-01 02:00+0200\n"
 "Last-Translator: nikos <nikos569@yahoo.com>\n"
 "Language-Team: Greek <nikos769@yahoo.gr>\n"
 "Language: el\n"
@@ -3379,7 +3379,9 @@ msgstr "Προσθήκη αγκύλων σε υποθετικές δηλώσει
 
 #: ../src/MadSourceFormatDialog.cpp:357
 msgid "Add one line braces to unbraced one line conditional statements"
-msgstr "Προσθήκη αγκύλων, μίας γραμμής, σε υποθετικές δηλώσεις χωρίς αγκύλες"
+msgstr ""
+"Προσθήκη αγκύλων, μίας γραμμής, σε υποθετικές δηλώσεις, μίας γραμμής, χωρίς"
+" αγκύλες"
 
 #: ../src/MadSourceFormatDialog.cpp:360
 msgid ""
