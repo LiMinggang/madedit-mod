@@ -60,9 +60,6 @@
     <ClCompile Include="..\..\python\src\module.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\python\src\numeric.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\python\src\object_operators.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -249,9 +246,6 @@
       <Filter>Header Files\boost\python</Filter>
     </ClInclude>
     <ClInclude Include="..\..\python\include\boost\python\module_init.hpp">
-      <Filter>Header Files\boost\python</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\python\include\boost\python\numeric.hpp">
       <Filter>Header Files\boost\python</Filter>
     </ClInclude>
     <ClInclude Include="..\..\python\include\boost\python\numpy.hpp">

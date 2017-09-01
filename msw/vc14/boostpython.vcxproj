@@ -141,7 +141,6 @@
     <ClCompile Include="..\..\python\src\list.cpp" />
     <ClCompile Include="..\..\python\src\long.cpp" />
     <ClCompile Include="..\..\python\src\module.cpp" />
-    <ClCompile Include="..\..\python\src\numeric.cpp" />
     <ClCompile Include="..\..\python\src\object_operators.cpp" />
     <ClCompile Include="..\..\python\src\object_protocol.cpp" />
     <ClCompile Include="..\..\python\src\slice.cpp" />
@@ -206,7 +205,6 @@
     <ClInclude Include="..\..\python\include\boost\python\manage_new_object.hpp" />
     <ClInclude Include="..\..\python\include\boost\python\module.hpp" />
     <ClInclude Include="..\..\python\include\boost\python\module_init.hpp" />
-    <ClInclude Include="..\..\python\include\boost\python\numeric.hpp" />
     <ClInclude Include="..\..\python\include\boost\python\numpy.hpp" />
     <ClInclude Include="..\..\python\include\boost\python\object.hpp" />
     <ClInclude Include="..\..\python\include\boost\python\object_attributes.hpp" />
