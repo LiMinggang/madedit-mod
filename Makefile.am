@@ -1420,7 +1420,7 @@ loc:
 	for lang in $$linguas; do \
 		dir=./locale/$$lang; \
 		$(mkinstalldirs) $$dir; \
-		if test -r $(podir)/$$lang.gmo; then \
+		if test -r $(podir)/$$lang.po; then \
 			msgmerge -U $(podir)/$$lang.po $(podir)/madedit.pot; \
 			msgfmt -o $(podir)/$$lang.gmo $(podir)/$$lang.po; \
 			cp $(podir)/$$lang.gmo $$dir/$(DOMAIN).mo; \
