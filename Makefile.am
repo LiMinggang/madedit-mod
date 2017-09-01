@@ -932,7 +932,6 @@ noinst_HEADERS =	description-pak \
 	python/test/test_cltree.py \
 	python/test/test_builtin_converters.py \
 	python/test/string_literal.cpp \
-	python/test/test_builtin_converters.cpp \
 	python/test/str.py \
 	python/test/stl_iterator.py \
 	python/test/str.cpp \
