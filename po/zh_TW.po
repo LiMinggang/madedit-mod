@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-30 23:19+0800\n"
-"PO-Revision-Date: 2017-08-30 23:22+0800\n"
+"PO-Revision-Date: 2017-09-01 11:12+0800\n"
 "Last-Translator: zhtw <zhtw2013@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
 "Language: zh_TW\n"
@@ -1718,7 +1718,7 @@ msgstr "拼字檢查"
 
 #: ../src/MadEditFrame.cpp:2338
 msgid "Turn on spell checker"
-msgstr "啟用拼写检查"
+msgstr "啟用拼字檢查"
 
 #: ../src/MadEditFrame.cpp:2339
 msgid "Typewriter Mode"
@@ -3336,11 +3336,10 @@ msgid "Don't break one-line blocks"
 msgstr "不要中斷單行程式塊"
 
 #: ../src/MadSourceFormatDialog.cpp:366
-#, fuzzy
 msgid ""
 "Don't break complex statements and multiple statements residing in a single "
 "line"
-msgstr "去掉條件語句的花括號（單行語句）"
+msgstr "不要中斷複雜語句和多條語句構成的單行語法"
 
 #: ../src/MadSourceFormatDialog.cpp:369
 msgid "Convert TABs to spaces"
@@ -4086,7 +4085,7 @@ msgstr ""
 
 #: ../src/MadAboutDialog.cpp:47
 msgid "Current maintainer"
-msgstr "現維護者"
+msgstr "現任維護者"
 
 #: ../src/MadAboutDialog.cpp:48
 msgid "Author of MadEdit"
@@ -4094,7 +4093,7 @@ msgstr "MadEdit 原作者"
 
 #: ../src/MadAboutDialog.cpp:49
 msgid "Greek Translation"
-msgstr "希臘語翻譯"
+msgstr "希臘文翻譯"
 
 #: ../src/MadAboutDialog.cpp:50
 msgid "Traditional Chinese Translation"

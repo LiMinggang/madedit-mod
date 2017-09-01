@@ -4,11 +4,11 @@
 # Nikos Papadopoulos <nikos <nikos769@yahoo.gr>>, 2016, 2017.
 msgid ""
 msgstr ""
-"Project-Id-Version: madedit-mod 0.4.8\n"
+"Project-Id-Version: madedit-mod 0.4.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-30 23:19+0800\n"
-"PO-Revision-Date: 2017-08-30 23:23+0800\n"
-"Last-Translator: nikos <nikos769@yahoo.gr>\n"
+"PO-Revision-Date: 2017-09-01 12:00+0800\n"
+"Last-Translator: nikos <nikos569@yahoo.com>\n"
 "Language-Team: Greek <nikos769@yahoo.gr>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
@@ -3374,14 +3374,14 @@ msgid "Break 'else if()' header combinations into seperate lines"
 msgstr "Σπάσιμο των συνδυασμών κεφαλίδας «else if()» σε ξεχωριστές γραμμές"
 
 #: ../src/MadSourceFormatDialog.cpp:354
-#, fuzzy
 msgid "Add braces to unbraced one line conditional statements"
-msgstr "Προσθήκη αγκύλων σε υποθετικές δηλώσεις μίας γραμμής χωρίς παρένθεση"
+msgstr "Προσθήκη αγκύλων σε υποθετικές δηλώσεις, μίας γραμμής, χωρίς αγκύλες"
 
 #: ../src/MadSourceFormatDialog.cpp:357
-#, fuzzy
 msgid "Add one line braces to unbraced one line conditional statements"
-msgstr "Προσθήκη αγκύλων μίας γραμμής σε υποθετικές δηλώσεις χωρίς αγκύλες"
+msgstr ""
+"Προσθήκη αγκύλων, μίας γραμμής, σε υποθετικές δηλώσεις, μίας γραμμής, χωρίς "
+"αγκύλες"
 
 #: ../src/MadSourceFormatDialog.cpp:360
 msgid ""
