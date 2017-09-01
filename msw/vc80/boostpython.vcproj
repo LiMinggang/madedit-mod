@@ -179,10 +179,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\python\src\numeric.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\..\python\src\object_operators.cpp"
 				>
 			</File>
@@ -448,10 +444,6 @@
 					</File>
 					<File
 						RelativePath="..\..\python\include\boost\python\module_init.hpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\python\include\boost\python\numeric.hpp"
 						>
 					</File>
 					<File

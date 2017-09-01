@@ -468,7 +468,6 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	python/src/object/class.cpp \
 	python/src/object/enum.cpp \
 	python/src/module.cpp \
-	python/src/numeric.cpp \
 	python/src/long.cpp \
 	python/src/import.cpp \
 	python/src/list.cpp \
@@ -565,7 +564,6 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	python/include/boost/python/numpy/invoke_matching.hpp \
 	python/include/boost/python/numpy/dtype.hpp \
 	python/include/boost/python/numpy/internal.hpp \
-	python/include/boost/python/numeric.hpp \
 	python/include/boost/python/numpy.hpp \
 	python/include/boost/python/module_init.hpp \
 	python/include/boost/python/manage_new_object.hpp \
@@ -1153,7 +1151,6 @@ noinst_HEADERS =	description-pak \
 	python/doc/reference/opaque_pointer_converter.qbk \
 	python/doc/reference/operators.qbk \
 	python/doc/reference/objects.qbk \
-	python/doc/reference/numeric.qbk \
 	python/doc/reference/object.qbk \
 	python/doc/reference/module.qbk \
 	python/doc/reference/make_function.qbk \
