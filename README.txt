@@ -117,6 +117,9 @@ FreeBSD packaging (with FreeBSD 10.01)
 2. aclocal version in aclocal.m4
 3. stdc++ version
 
+Mod v0.4.10
+New: Refactor Option dialog with wxSmith
+
 Mod v0.4.9
 1.New: Change editor encoding of MadPython dialog according to current active edit
 2.New: Customizable search result display length #233

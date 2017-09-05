@@ -7951,12 +7951,12 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 	else
 	{
 		// update languages
-		wxString lang = g_OptionsDialog->WxComboBoxLanguage->GetValue();
-		g_OptionsDialog->WxComboBoxLanguage->Clear();
-		g_OptionsDialog->WxComboBoxLanguage->Append( g_LanguageString );
+		wxString lang = g_OptionsDialog->ComboBoxLanguage->GetValue();
+		g_OptionsDialog->ComboBoxLanguage->Clear();
+		g_OptionsDialog->ComboBoxLanguage->Append( g_LanguageString );
 
-		if( wxNOT_FOUND == g_LanguageString.Index( lang ) ) g_OptionsDialog->WxComboBoxLanguage->SetValue( g_LanguageString[0] );
-		else g_OptionsDialog->WxComboBoxLanguage->SetValue( lang );
+		if( wxNOT_FOUND == g_LanguageString.Index( lang ) ) g_OptionsDialog->ComboBoxLanguage->SetValue( g_LanguageString[0] );
+		else g_OptionsDialog->ComboBoxLanguage->SetValue( lang );
 	}
 
 	// Hide Modaless Dialog
@@ -7971,17 +7971,17 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		bool rcm, isiot, ai, acp, icp4sel, msc, mscck, mmp, afcp, fwm, twm, abck, ldch;
 		wxString mc, tc, ic, mds;
 		long ll;
-		m_Config->Write( wxT( "Language" ), g_OptionsDialog->WxComboBoxLanguage->GetValue() );
-		m_Config->Write( wxT( "SingleInstance" ), g_OptionsDialog->WxCheckBoxSingleInstance->GetValue() );
-		rcm = g_OptionsDialog->WxCheckBoxRecordCaretMovements->GetValue();
+		m_Config->Write( wxT( "Language" ), g_OptionsDialog->ComboBoxLanguage->GetValue() );
+		m_Config->Write( wxT( "SingleInstance" ), g_OptionsDialog->CheckBoxSingleInstance->GetValue() );
+		rcm = g_OptionsDialog->CheckBoxRecordCaretMovements->GetValue();
 		m_Config->Write( wxT( "RecordCaretMovements" ), rcm );
-		m_Config->Write( wxT( "MaxSizeToLoad" ), g_OptionsDialog->WxEditMaxSizeToLoad->GetValue() );
-		m_Config->Write( wxT( "MaxTextFileSize" ), g_OptionsDialog->WxEditMaxTextFileSize->GetValue() );
-		mds = g_OptionsDialog->WxEditMaxDisplaySize->GetValue();
+		m_Config->Write( wxT( "MaxSizeToLoad" ), g_OptionsDialog->EditMaxSizeToLoad->GetValue() );
+		m_Config->Write( wxT( "MaxTextFileSize" ), g_OptionsDialog->EditMaxTextFileSize->GetValue() );
+		mds = g_OptionsDialog->EditMaxDisplaySize->GetValue();
 		m_Config->Write( wxT( "MaxDisplaySize" ), mds );
-		m_Config->Write( wxT( "DefaultEncoding" ), g_OptionsDialog->WxComboBoxEncoding->GetValue() );
+		m_Config->Write( wxT( "DefaultEncoding" ), g_OptionsDialog->ComboBoxEncoding->GetValue() );
 		ll = 0;
-		if (g_OptionsDialog->WxCheckBoxEnableAutoSave->GetValue()) g_OptionsDialog->WxEditAutoSaveTimeout->GetValue().ToLong(&ll);
+		if (g_OptionsDialog->CheckBoxEnableAutoSave->GetValue()) g_OptionsDialog->EditAutoSaveTimeout->GetValue().ToLong(&ll);
 		m_Config->Write( wxT( "AutoSaveTimeout" ), ll );
 		if(m_AutoSaveTimout != ll)
 		{
@@ -7991,12 +7991,12 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 			if(m_AutoSaveTimout)
 				m_AutoSaveTimer.StartOnce(m_AutoSaveTimout*MADMINUTES);
 		}
-		abck = g_OptionsDialog->WxCheckBoxEnableAutoBackup->GetValue();
+		abck = g_OptionsDialog->CheckBoxEnableAutoBackup->GetValue();
 		m_Config->Write( wxT( "AutoBackup" ),  abck);
 			
 #ifdef __WXMSW__
 
-		if( g_OptionsDialog->WxCheckBoxRightClickMenu->GetValue() )
+		if( g_OptionsDialog->CheckBoxRightClickMenu->GetValue() )
 		{
 			wxRegKey *pRegKeyMad = new wxRegKey( g_MadEditRegkeyPath + wxT( "*\\shell\\MadEdit-Mod" ) );
 			pRegKeyMad->Create();
@@ -8016,85 +8016,85 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		}
 
 #endif
-		m_Config->Write( wxT( "MaxLineLength" ), g_OptionsDialog->WxEditMaxLineLength->GetValue() );
-		mc = g_OptionsDialog->WxEditMaxColumns->GetValue();
+		m_Config->Write( wxT( "MaxLineLength" ), g_OptionsDialog->EditMaxLineLength->GetValue() );
+		mc = g_OptionsDialog->EditMaxColumns->GetValue();
 		m_Config->Write( wxT( "MaxColumns" ), mc );
-		tc = g_OptionsDialog->WxEditTabColumns->GetValue();
+		tc = g_OptionsDialog->EditTabColumns->GetValue();
 		m_Config->Write( wxT( "TabColumns" ), tc );
-		ic = g_OptionsDialog->WxEditIndentColumns->GetValue();
+		ic = g_OptionsDialog->EditIndentColumns->GetValue();
 		m_Config->Write( wxT( "IndentColumns" ), ic );
-		m_Config->Write( wxT( "DateTimeFormat" ), g_OptionsDialog->WxEditDateTime->GetValue() );
-		m_Config->Write( wxT( "DateTimeInEnglish" ), g_OptionsDialog->WxCheckBoxDateTimeInEnglish->GetValue() );
-		isiot = g_OptionsDialog->WxCheckBoxTabOrSpaces->GetValue();
+		m_Config->Write( wxT( "DateTimeFormat" ), g_OptionsDialog->EditDateTime->GetValue() );
+		m_Config->Write( wxT( "DateTimeInEnglish" ), g_OptionsDialog->CheckBoxDateTimeInEnglish->GetValue() );
+		isiot = g_OptionsDialog->CheckBoxTabOrSpaces->GetValue();
 		m_Config->Write( wxT( "InsertSpacesInsteadOfTab" ), isiot );
-		ai = g_OptionsDialog->WxCheckBoxAutoIndent->GetValue();
+		ai = g_OptionsDialog->CheckBoxAutoIndent->GetValue();
 		m_Config->Write( wxT( "AutoIndent" ), ai );
-		acp = g_OptionsDialog->WxCheckBoxAutoCompletePair->GetValue();
+		acp = g_OptionsDialog->CheckBoxAutoCompletePair->GetValue();
 		m_Config->Write( wxT( "AutoCompletePair" ), acp );
-		icp4sel = g_OptionsDialog->WxCheckBoxInsertPairForSelection->GetValue();
+		icp4sel = g_OptionsDialog->CheckBoxInsertPairForSelection->GetValue();
 		m_Config->Write( wxT( "InsertPairForSelction" ), icp4sel );
-		msc = g_OptionsDialog->WxCheckBoxMouseSelectToCopy->GetValue();
+		msc = g_OptionsDialog->CheckBoxMouseSelectToCopy->GetValue();
 		m_Config->Write( wxT( "MouseSelectToCopy" ), msc );
-		//mscck = g_OptionsDialog->WxCheckBoxWhenPressCtrlKey->GetValue();
-		mscck = g_OptionsDialog->WxCheckBoxCtrlWithMouseToSelect->GetValue();
+		//mscck = g_OptionsDialog->CheckBoxWhenPressCtrlKey->GetValue();
+		mscck = g_OptionsDialog->CheckBoxCtrlWithMouseToSelect->GetValue();
 		m_Config->Write( wxT( "MouseSelectToCopyWithCtrlKey" ), mscck );
-		mmp = g_OptionsDialog->WxCheckBoxMiddleMouseToPaste->GetValue();
+		mmp = g_OptionsDialog->CheckBoxMiddleMouseToPaste->GetValue();
 		m_Config->Write( wxT( "MiddleMouseToPaste" ), mmp );
-		afcp = g_OptionsDialog->WxCheckBoxAutoFillColumnPaste->GetValue();
+		afcp = g_OptionsDialog->CheckBoxAutoFillColumnPaste->GetValue();
 		m_Config->Write( wxT( "AutoFillColumnPaste" ), afcp );
-		ldch = g_OptionsDialog->WxCheckBoxLDClickHighlight->GetValue();
+		ldch = g_OptionsDialog->CheckBoxLDClickHighlight->GetValue();
 		m_Config->Write( wxT( "LDoubleClickHighlight" ), ldch );
-		twm = g_OptionsDialog->WxCheckBoxTypewriterMode->GetValue();
+		twm = g_OptionsDialog->CheckBoxTypewriterMode->GetValue();
 		m_Config->Write( wxT( "TypewriterMode" ), twm );
-		fwm = g_OptionsDialog->WxCheckBoxFixWidthMode->GetValue();
+		fwm = g_OptionsDialog->CheckBoxFixWidthMode->GetValue();
 		m_Config->Write( wxT( "FixedWidthMode" ), fwm );
 		extern bool g_DoNotSaveSettings;
-		g_DoNotSaveSettings = g_OptionsDialog->WxCheckBoxDoNotSaveSettings->GetValue();
-		m_Config->Write( wxT( "ReloadFiles" ), g_OptionsDialog->WxCheckBoxReloadFiles->GetValue() );
-		m_ReloadFiles  = g_OptionsDialog->WxCheckBoxReloadFiles->GetValue();
-		m_Config->Write( wxT( "RestoreCaretPos" ), g_OptionsDialog->WxCheckBoxRestoreCaretPos->GetValue() );
+		g_DoNotSaveSettings = g_OptionsDialog->CheckBoxDoNotSaveSettings->GetValue();
+		m_Config->Write( wxT( "ReloadFiles" ), g_OptionsDialog->CheckBoxReloadFiles->GetValue() );
+		m_ReloadFiles  = g_OptionsDialog->CheckBoxReloadFiles->GetValue();
+		m_Config->Write( wxT( "RestoreCaretPos" ), g_OptionsDialog->CheckBoxRestoreCaretPos->GetValue() );
 		extern bool g_ForcePurgeThisTime;
 		m_Config->Read( wxT( "PurgeHistory" ), g_ForcePurgeThisTime );
-		m_PurgeHistory = g_OptionsDialog->WxCheckBoxPurgeHistory->GetValue();
-		m_Config->Write( wxT( "PurgeHistory" ), g_OptionsDialog->WxCheckBoxPurgeHistory->GetValue() );
-		m_Config->Write( wxT( "ShowQSearchBarOnStart" ), g_OptionsDialog->WxCheckBoxShowQSearchBar->GetValue() );
+		m_PurgeHistory = g_OptionsDialog->CheckBoxPurgeHistory->GetValue();
+		m_Config->Write( wxT( "PurgeHistory" ), g_OptionsDialog->CheckBoxPurgeHistory->GetValue() );
+		m_Config->Write( wxT( "ShowQSearchBarOnStart" ), g_OptionsDialog->CheckBoxShowQSearchBar->GetValue() );
 
-		if( !g_ForcePurgeThisTime ) { g_ForcePurgeThisTime = g_OptionsDialog->WxCheckBoxPurgeHistory->GetValue(); }
+		if( !g_ForcePurgeThisTime ) { g_ForcePurgeThisTime = g_OptionsDialog->CheckBoxPurgeHistory->GetValue(); }
 		else { g_ForcePurgeThisTime = false; }
 
 		bool bb;
 		wxString ss;
-		bb = g_OptionsDialog->WxCheckBoxPrintSyntax->GetValue();
+		bb = g_OptionsDialog->CheckBoxPrintSyntax->GetValue();
 		m_Config->Write( wxT( "PrintSyntax" ), bb );
-		bb = g_OptionsDialog->WxCheckBoxPrintLineNumber->GetValue();
+		bb = g_OptionsDialog->CheckBoxPrintLineNumber->GetValue();
 		m_Config->Write( wxT( "PrintLineNumber" ), bb );
-		bb = g_OptionsDialog->WxCheckBoxPrintBookmark->GetValue();
+		bb = g_OptionsDialog->CheckBoxPrintBookmark->GetValue();
 		m_Config->Write( wxT( "PrintBookmark" ), bb );
-		bb = g_OptionsDialog->WxCheckBoxPrintEndOfLine->GetValue();
+		bb = g_OptionsDialog->CheckBoxPrintEndOfLine->GetValue();
 		m_Config->Write( wxT( "PrintEndOfLine" ), bb );
-		bb = g_OptionsDialog->WxCheckBoxPrintTabChar->GetValue();
+		bb = g_OptionsDialog->CheckBoxPrintTabChar->GetValue();
 		m_Config->Write( wxT( "PrintTabChar" ), bb );
-		bb = g_OptionsDialog->WxCheckBoxPrintSpaceChar->GetValue();
+		bb = g_OptionsDialog->CheckBoxPrintSpaceChar->GetValue();
 		m_Config->Write( wxT( "PrintSpaceChar" ), bb );
-		ll = g_OptionsDialog->WxRadioBoxPrintOffset->GetSelection();
+		ll = g_OptionsDialog->RadioBoxPrintOffset->GetSelection();
 		m_Config->Write( wxT( "PrintOffsetHeader" ), ll );
-		bb = g_OptionsDialog->WxCheckBoxPrintPageHeader->GetValue();
+		bb = g_OptionsDialog->CheckBoxPrintPageHeader->GetValue();
 		m_Config->Write( wxT( "PrintPageHeader" ), bb );
-		ss = g_OptionsDialog->WxEditHeaderLeft->GetValue();
+		ss = g_OptionsDialog->EditHeaderLeft->GetValue();
 		m_Config->Write( wxT( "PageHeaderLeft" ), ss );
-		ss = g_OptionsDialog->WxEditHeaderCenter->GetValue();
+		ss = g_OptionsDialog->EditHeaderCenter->GetValue();
 		m_Config->Write( wxT( "PageHeaderCenter" ), ss );
-		ss = g_OptionsDialog->WxEditHeaderRight->GetValue();
+		ss = g_OptionsDialog->EditHeaderRight->GetValue();
 		m_Config->Write( wxT( "PageHeaderRight" ), ss );
-		bb = g_OptionsDialog->WxCheckBoxPrintPageFooter->GetValue();
+		bb = g_OptionsDialog->CheckBoxPrintPageFooter->GetValue();
 		m_Config->Write( wxT( "PrintPageFooter" ), bb );
-		ss = g_OptionsDialog->WxEditFooterLeft->GetValue();
+		ss = g_OptionsDialog->EditFooterLeft->GetValue();
 		m_Config->Write( wxT( "PageFooterLeft" ), ss );
-		ss = g_OptionsDialog->WxEditFooterCenter->GetValue();
+		ss = g_OptionsDialog->EditFooterCenter->GetValue();
 		m_Config->Write( wxT( "PageFooterCenter" ), ss );
-		ss = g_OptionsDialog->WxEditFooterRight->GetValue();
+		ss = g_OptionsDialog->EditFooterRight->GetValue();
 		m_Config->Write( wxT( "PageFooterRight" ), ss );
-		wxString path = g_OptionsDialog->WxEditDictionaryDir->GetValue();
+		wxString path = g_OptionsDialog->EditDictionaryDir->GetValue();
 
 		if( wxDir::Exists( path ) )
 		{
@@ -8102,7 +8102,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 			SpellCheckerManager::Instance().ScanForDictionaries();
 		}
 
-		wxString dictDesc = g_OptionsDialog->WxChoiceDictionary->GetString( g_OptionsDialog->WxChoiceDictionary->GetSelection() );
+		wxString dictDesc = g_OptionsDialog->ChoiceDictionary->GetString( g_OptionsDialog->ChoiceDictionary->GetSelection() );
 		wxString dictName = SpellCheckerManager::Instance().GetDictionaryName( dictDesc );
 
 		if( !dictName.IsEmpty() )
@@ -8111,9 +8111,9 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		}
 
 		if( SpellCheckerManager::Instance().GetEnablePersonalDictionary()
-				!= g_OptionsDialog->WxCheckBoxPersonalDict->GetValue() )
+				!= g_OptionsDialog->CheckBoxPersonalDict->GetValue() )
 		{
-			SpellCheckerManager::Instance().SetEnablePersonalDictionary( g_OptionsDialog->WxCheckBoxPersonalDict->GetValue() );
+			SpellCheckerManager::Instance().SetEnablePersonalDictionary( g_OptionsDialog->CheckBoxPersonalDict->GetValue() );
 		}
 
 		// SpellChecker
@@ -8150,7 +8150,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		}
 
 		extern bool g_ResetAllKeys;
-		g_ResetAllKeys = g_OptionsDialog->WxCheckBoxResetAllKeys->GetValue();
+		g_ResetAllKeys = g_OptionsDialog->CheckBoxResetAllKeys->GetValue();
 
 		// apply the changed keybindings
 		if( g_OptionsDialog->ChangedTreeItemDataList.size() != 0 )

@@ -23,6 +23,13 @@
 #ifdef MADEDIT_USE_MADEDIT
 class MadEdit;
 #endif
+#ifdef MADEDIT_ENABLE_STC
+enum
+{
+	MARGIN_LINE_NUMBERS,
+	MARGIN_FOLD
+};
+#endif
 
 class MadSourceFormatDialog: public wxDialog
 {
