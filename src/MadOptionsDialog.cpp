@@ -422,7 +422,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	BoxSizer7 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer38 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer38->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	EditMaxSizeToLoad = new wxTextCtrl(Panel1, ID_EDITMAXSIZETOLOAD, _("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITMAXSIZETOLOAD"));
+	EditMaxSizeToLoad = new wxTextCtrl(Panel1, ID_EDITMAXSIZETOLOAD, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITMAXSIZETOLOAD"));
 	EditMaxSizeToLoad->SetMaxLength(128);
 	SET_CONTROLPARENT(EditMaxSizeToLoad);
 	BoxSizer38->Add(EditMaxSizeToLoad, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
@@ -431,7 +431,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	BoxSizer7->Add(BoxSizer38, 0, wxALL|wxEXPAND, 2);
 	BoxSizer17 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer17->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	EditMaxTextFileSize = new wxTextCtrl(Panel1, ID_EDITMAXTEXTFILESIZE, _("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITMAXTEXTFILESIZE"));
+	EditMaxTextFileSize = new wxTextCtrl(Panel1, ID_EDITMAXTEXTFILESIZE, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITMAXTEXTFILESIZE"));
 	EditMaxTextFileSize->SetMaxLength(128);
 	SET_CONTROLPARENT(EditMaxTextFileSize);
 	BoxSizer17->Add(EditMaxTextFileSize, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
@@ -440,7 +440,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	BoxSizer7->Add(BoxSizer17, 0, wxALL|wxEXPAND, 2);
 	BoxSizer6 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer6->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	EditMaxDisplaySize = new wxTextCtrl(Panel1, ID_MAXDISPLAYSIZE, _("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_MAXDISPLAYSIZE"));
+	EditMaxDisplaySize = new wxTextCtrl(Panel1, ID_MAXDISPLAYSIZE, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_MAXDISPLAYSIZE"));
 	EditMaxDisplaySize->SetMaxLength(5);
 	SET_CONTROLPARENT(EditMaxDisplaySize);
 	BoxSizer6->Add(EditMaxDisplaySize, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
@@ -481,13 +481,13 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	BoxSizer7->Add(CheckBoxEnableAutoSave, 0, wxALL|wxEXPAND, 2);
 	BoxSizer37 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer37->Add(10,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	EditAutoSaveTimeout = new wxTextCtrl(Panel1, ID_TEXTCTRLAUTOSAVETIMEOUT, _("10"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRLAUTOSAVETIMEOUT"));
+	EditAutoSaveTimeout = new wxTextCtrl(Panel1, ID_TEXTCTRLAUTOSAVETIMEOUT, _T("10"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRLAUTOSAVETIMEOUT"));
 	EditAutoSaveTimeout->SetMaxLength(2);
 	SET_CONTROLPARENT(EditAutoSaveTimeout);
-	BoxSizer37->Add(EditAutoSaveTimeout, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	BoxSizer37->Add(EditAutoSaveTimeout, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	StaticTextAutoSaveTimeout = new wxStaticText(Panel1, wxID_ANY, _("Timeout(M)"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
-	BoxSizer37->Add(StaticTextAutoSaveTimeout, 0, wxALL|wxEXPAND, 2);
-	BoxSizer7->Add(BoxSizer37, 1, wxALL|wxALIGN_LEFT, 0);
+	BoxSizer37->Add(StaticTextAutoSaveTimeout, 0, wxALL|wxEXPAND, 0);
+	BoxSizer7->Add(BoxSizer37, 0, wxALL|wxEXPAND, 2);
 	CheckBoxEnableAutoBackup = new wxCheckBox(Panel1, ID_CHECKBOX1, _("Auto backup"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOX1"));
 	CheckBoxEnableAutoBackup->SetValue(false);
 	SET_CONTROLPARENT(CheckBoxEnableAutoBackup);
