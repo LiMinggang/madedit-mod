@@ -139,7 +139,6 @@
 															</object>
 															<flag>wxALL|wxEXPAND</flag>
 															<border>2</border>
-															<option>1</option>
 														</object>
 														<object class="sizeritem">
 															<object class="wxCheckBox" name="ID_CHECKBOXSINGLEINSTANCE" variable="CheckBoxSingleInstance" member="yes">
@@ -215,7 +214,7 @@
 																	<object class="wxStaticText" name="wxID_ANY" variable="StaticTextAutoSaveTimeout" member="yes">
 																		<label>Timeout(M)</label>
 																	</object>
-																	<flag>wxALL|wxEXPAND</flag>
+																	<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 																</object>
 															</object>
 															<flag>wxALL|wxEXPAND</flag>
