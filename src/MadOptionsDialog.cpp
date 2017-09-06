@@ -446,7 +446,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	BoxSizer6->Add(EditMaxDisplaySize, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	StaticText18 = new wxStaticText(Panel1, ID_STATICTEXT18, _("Max chars displayed in search results"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT18"));
 	BoxSizer6->Add(StaticText18, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	BoxSizer7->Add(BoxSizer6, 1, wxALL|wxEXPAND, 2);
+	BoxSizer7->Add(BoxSizer6, 0, wxALL|wxEXPAND, 2);
 	CheckBoxSingleInstance = new wxCheckBox(Panel1, ID_CHECKBOXSINGLEINSTANCE, _("Single Instance (must restart MadEdit)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXSINGLEINSTANCE"));
 	CheckBoxSingleInstance->SetValue(false);
 	SET_CONTROLPARENT(CheckBoxSingleInstance);
