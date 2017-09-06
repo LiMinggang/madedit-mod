@@ -544,7 +544,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	StaticTextDateTime = new wxStaticText(Panel2, ID_STATICTEXTDATETIME, _("Format of Date/Time"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXTDATETIME"));
 	BoxSizer5->Add(StaticTextDateTime, 0, wxALL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer5->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	ButtonDateTime = new wxButton(Panel2, ID_BUTTONDATETIME, _(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTONDATETIME"));
+	ButtonDateTime = new wxButton(Panel2, ID_BUTTONDATETIME, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTONDATETIME"));
 	SET_CONTROLPARENT(ButtonDateTime);
 	BoxSizer5->Add(ButtonDateTime, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
 	CheckBoxDateTimeInEnglish = new wxCheckBox(Panel2, ID_CHECKBOXDATETIMEINENGLISH, _("Use English instead of current locale"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXDATETIMEINENGLISH"));
@@ -659,7 +659,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	EditHeaderLeft = new wxTextCtrl(Panel3, ID_EDITHEADERLEFT, wxEmptyString, wxDefaultPosition, wxSize(240,-1), 0, wxDefaultValidator, _T("ID_EDITHEADERLEFT"));
 	SET_CONTROLPARENT(EditHeaderLeft);
 	FlexGridSizer1->Add(EditHeaderLeft, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	Button1 = new wxButton(Panel3, ID_BUTTON1, _(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON1"));
+	Button1 = new wxButton(Panel3, ID_BUTTON1, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON1"));
 	SET_CONTROLPARENT(Button1);
 	FlexGridSizer1->Add(Button1, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
 	StaticText8 = new wxStaticText(Panel3, ID_STATICTEXT8, _("Center:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT8"));
@@ -667,7 +667,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	EditHeaderCenter = new wxTextCtrl(Panel3, ID_EDITHEADERCENTER, wxEmptyString, wxDefaultPosition, wxSize(240,-1), 0, wxDefaultValidator, _T("ID_EDITHEADERCENTER"));
 	SET_CONTROLPARENT(EditHeaderCenter);
 	FlexGridSizer1->Add(EditHeaderCenter, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	Button2 = new wxButton(Panel3, ID_BUTTON2, _(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON2"));
+	Button2 = new wxButton(Panel3, ID_BUTTON2, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON2"));
 	SET_CONTROLPARENT(Button2);
 	FlexGridSizer1->Add(Button2, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
 	StaticText9 = new wxStaticText(Panel3, ID_STATICTEXT9, _("Right:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT9"));
@@ -675,7 +675,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	EditHeaderRight = new wxTextCtrl(Panel3, ID_EDITHEADERRIGHT, wxEmptyString, wxDefaultPosition, wxSize(240,-1), 0, wxDefaultValidator, _T("ID_EDITHEADERRIGHT"));
 	SET_CONTROLPARENT(EditHeaderRight);
 	FlexGridSizer1->Add(EditHeaderRight, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	Button3 = new wxButton(Panel3, ID_BUTTON3, _(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON3"));
+	Button3 = new wxButton(Panel3, ID_BUTTON3, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON3"));
 	SET_CONTROLPARENT(Button3);
 	FlexGridSizer1->Add(Button3, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
 	StaticBoxSizer3->Add(FlexGridSizer1, 0, wxALL|wxEXPAND, 2);
@@ -691,7 +691,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	EditFooterLeft = new wxTextCtrl(Panel3, ID_EDITFOOTERLEFT, wxEmptyString, wxDefaultPosition, wxSize(240,-1), 0, wxDefaultValidator, _T("ID_EDITFOOTERLEFT"));
 	SET_CONTROLPARENT(EditFooterLeft);
 	FlexGridSizer2->Add(EditFooterLeft, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	Button4 = new wxButton(Panel3, ID_BUTTON4, _(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON4"));
+	Button4 = new wxButton(Panel3, ID_BUTTON4, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON4"));
 	SET_CONTROLPARENT(Button4);
 	FlexGridSizer2->Add(Button4, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
 	StaticText11 = new wxStaticText(Panel3, ID_STATICTEXT11, _("Center:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT11"));
@@ -699,7 +699,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	EditFooterCenter = new wxTextCtrl(Panel3, ID_EDITFOOTERLEFTCENTER, wxEmptyString, wxDefaultPosition, wxSize(240,-1), 0, wxDefaultValidator, _T("ID_EDITFOOTERLEFTCENTER"));
 	SET_CONTROLPARENT(EditFooterCenter);
 	FlexGridSizer2->Add(EditFooterCenter, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	Button5 = new wxButton(Panel3, ID_BUTTON5, _(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON5"));
+	Button5 = new wxButton(Panel3, ID_BUTTON5, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON5"));
 	SET_CONTROLPARENT(Button5);
 	FlexGridSizer2->Add(Button5, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
 	StaticText12 = new wxStaticText(Panel3, ID_STATICTEXT12, _("Right:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT12"));
@@ -707,7 +707,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	EditFooterRight = new wxTextCtrl(Panel3, ID_EDITFOOTERRIGHT, wxEmptyString, wxDefaultPosition, wxSize(240,-1), 0, wxDefaultValidator, _T("ID_EDITFOOTERRIGHT"));
 	SET_CONTROLPARENT(EditFooterRight);
 	FlexGridSizer2->Add(EditFooterRight, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	Button6 = new wxButton(Panel3, ID_BUTTON6, _(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON6"));
+	Button6 = new wxButton(Panel3, ID_BUTTON6, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON6"));
 	SET_CONTROLPARENT(Button6);
 	FlexGridSizer2->Add(Button6, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
 	StaticBoxSizer4->Add(FlexGridSizer2, 0, wxALL|wxEXPAND, 2);
@@ -790,7 +790,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	EditDictionaryDir = new wxTextCtrl(Panel5, ID_EDITDICTIONARYDIR, wxEmptyString, wxDefaultPosition, wxSize(200,-1), 0, wxDefaultValidator, _T("ID_EDITDICTIONARYDIR"));
 	SET_CONTROLPARENT(EditDictionaryDir);
 	StaticBoxSizer6->Add(EditDictionaryDir, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	ButtonDictionaryDir = new wxButton(Panel5, ID_DICTIONARY_DIR, _("..."), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_DICTIONARY_DIR"));
+	ButtonDictionaryDir = new wxButton(Panel5, ID_DICTIONARY_DIR, _T("..."), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_DICTIONARY_DIR"));
 	SET_CONTROLPARENT(ButtonDictionaryDir);
 	StaticBoxSizer6->Add(ButtonDictionaryDir, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer36->Add(StaticBoxSizer6, 0, wxALL|wxEXPAND, 2);
