@@ -25,6 +25,7 @@
 #include <wx/menu.h>
 #include <wx/panel.h>
 #include <wx/radiobox.h>
+#include <wx/radiobut.h>
 #include <wx/sizer.h>
 #include <wx/stattext.h>
 #include <wx/textctrl.h>
@@ -91,6 +92,7 @@ class MadOptionsDialog: public wxDialog
 		wxCheckBox* CheckBoxDoNotSaveSettings;
 		wxCheckBox* CheckBoxEnableAutoBackup;
 		wxCheckBox* CheckBoxEnableAutoSave;
+		wxCheckBox* CheckBoxEncUTF8WithBOM;
 		wxCheckBox* CheckBoxFixWidthMode;
 		wxCheckBox* CheckBoxInsertPairForSelection;
 		wxCheckBox* CheckBoxLDClickHighlight;
@@ -118,8 +120,10 @@ class MadOptionsDialog: public wxDialog
 		wxCheckBox* CheckBoxTabOrSpaces;
 		wxCheckBox* CheckBoxTypewriterMode;
 		wxChoice* ChoiceDictionary;
+		wxComboBox* ComboBoxEncOther;
 		wxComboBox* ComboBoxEncoding;
 		wxComboBox* ComboBoxLanguage;
+		wxComboBox* ComboBoxSyntax;
 		wxListBox* ListBoxKeys;
 		wxMenu PopupMenuDateTimeMark;
 		wxMenu PopupMenuPrintMark;
@@ -128,7 +132,14 @@ class MadOptionsDialog: public wxDialog
 		wxPanel* Panel3;
 		wxPanel* Panel4;
 		wxPanel* Panel5;
+		wxPanel* Panel7;
 		wxRadioBox* RadioBoxPrintOffset;
+		wxRadioButton* RadioButtonEncOther;
+		wxRadioButton* RadioButtonEncSystemDefault;
+		wxRadioButton* RadioButtonEncUTF8;
+		wxRadioButton* RadioButtonLineEndingCR;
+		wxRadioButton* RadioButtonLineEndingCRLF;
+		wxRadioButton* RadioButtonLineEndingLF;
 		wxStaticText* StaticText10;
 		wxStaticText* StaticText11;
 		wxStaticText* StaticText12;
@@ -220,6 +231,16 @@ class MadOptionsDialog: public wxDialog
 		static const long ID_CHECKBOXLOCKCARETYPOS;
 		static const long ID_CHECKBOXFIXWIDTHMODE;
 		static const long ID_PANEL2;
+		static const long ID_RADIOBUTTONLINEENDINGCRLF;
+		static const long ID_RADIOBUTTONLINEENDINGLF;
+		static const long ID_RADIOBUTTONLINEENDINGCR;
+		static const long ID_COMBOBOXSYNTAX;
+		static const long ID_RADIOBUTTONENCSYSTEMDEFAULT;
+		static const long ID_RADIOBUTTONENCUTF8;
+		static const long ID_CHECKBOXENCUTF8WITHBOM;
+		static const long ID_RADIOBUTTONENCOTHER;
+		static const long ID_COMBOBOXENCOTHER;
+		static const long ID_PANEL7;
 		static const long ID_CHECKBOXPRINTSYNTAX;
 		static const long ID_CHECKBOXPRINTLINENUMBER;
 		static const long ID_CHECKBOXPRINTBOOKMARK;
@@ -326,6 +347,8 @@ class MadOptionsDialog: public wxDialog
 		void EnableAutoSaveClick(wxCommandEvent& event);
 		void ChoiceDictionarySelect(wxCommandEvent& event);
 		void EditDictionaryDirTextEnter(wxCommandEvent& event);
+		void RadioButtonEncSelect(wxCommandEvent& event);
+		void RadioButtonLineEndingSelect(wxCommandEvent& event);
 		//*)
 
 		void MadOptionsDialogActivate(wxActivateEvent& event);
@@ -343,18 +366,21 @@ private:
 	static wxCmdEvtHandlerMap_t m_menu_evt_map[];
 	static wxCmdEvtHandlerMap_t m_button_evt_map[];
 	static wxCmdEvtHandlerMap_t m_checkbox_evt_map[];
+	static wxCmdEvtHandlerMap_t m_radiobutton_evt_map[];
 
 public:
 	void LoadOptions(void);
 
-    int ButtonID;
-    list<TreeItemData*> TreeItemDataList; // list of all TreeItemData
-    list<TreeItemData*> ChangedTreeItemDataList;
-    
-    TreeItemData* FindKeyInList(const wxString &key); // find key in TreeItemDataList
-    bool FindItemInList(TreeItemData* tid, const list<TreeItemData*> &tlist);
-    void UpdateKeyHint();
-    void InitDictionaryChoice(const wxString &path = wxEmptyString);
+	int ButtonID;
+	list<TreeItemData*> TreeItemDataList; // list of all TreeItemData
+	list<TreeItemData*> ChangedTreeItemDataList;
+	
+	TreeItemData* FindKeyInList(const wxString &key); // find key in TreeItemDataList
+	bool FindItemInList(TreeItemData* tid, const list<TreeItemData*> &tlist);
+	void UpdateKeyHint();
+	void InitDictionaryChoice(const wxString &path = wxEmptyString);
+	int m_NewDocEncoding;
+	int m_NewDocLineEndig;
 
 private:
 };

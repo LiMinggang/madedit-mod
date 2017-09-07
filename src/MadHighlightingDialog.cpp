@@ -305,7 +305,7 @@ MadHighlightingDialog::MadHighlightingDialog(wxWindow* parent,wxWindowID id,cons
 
     {   // build syntax type list
         size_t cnt=MadSyntax::GetSyntaxCount();
-        for(size_t i=0;i<cnt;i++)
+        for(size_t i=0;i<cnt;++i)
         {
             WxListBoxSyntax->Append(MadSyntax::GetSyntaxTitle(i));
         }
