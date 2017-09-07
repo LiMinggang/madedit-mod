@@ -940,7 +940,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 
 	for(size_t i = 0; i < sizeof(m_radiobutton_evt_map)/sizeof(m_radiobutton_evt_map[0]); ++i)
 	{
-		Bind( wxEVT_COMMAND_RADIOBUTTON_SELECTED, m_checkbox_evt_map[i].method, this, m_checkbox_evt_map[i].evtTag );
+		Bind( wxEVT_COMMAND_RADIOBUTTON_SELECTED, m_radiobutton_evt_map[i].method, this, m_radiobutton_evt_map[i].evtTag );
 	}
 
 	Bind( wxEVT_CLOSE_WINDOW, &MadOptionsDialog::MadOptionsDialogClose , this );
@@ -1831,8 +1831,7 @@ void MadOptionsDialog::RadioButtonEncSelect(wxCommandEvent& event)
 	{
 		CheckBoxEncUTF8WithBOM->Enable(false);
 		if(ID_RADIOBUTTONENCOTHER == event.GetId())
-		{
-			ComboBoxEncOther->Enable(true);
+		{			ComboBoxEncOther->Enable(true);
 		}
 		else
 		{
