@@ -178,6 +178,7 @@ const long MadOptionsDialog::ID_CHECKBOXDCLICKHIGHLIGHT = wxNewId();
 const long MadOptionsDialog::ID_CHECKBOXLOCKCARETYPOS = wxNewId();
 const long MadOptionsDialog::ID_CHECKBOXFIXWIDTHMODE = wxNewId();
 const long MadOptionsDialog::ID_PANEL2 = wxNewId();
+const long MadOptionsDialog::ID_RADIOBUTTONLINEENDINGDEFAULT = wxNewId();
 const long MadOptionsDialog::ID_RADIOBUTTONLINEENDINGCRLF = wxNewId();
 const long MadOptionsDialog::ID_RADIOBUTTONLINEENDINGLF = wxNewId();
 const long MadOptionsDialog::ID_RADIOBUTTONLINEENDINGCR = wxNewId();
@@ -512,7 +513,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	SET_CONTROLPARENT(EditAutoSaveTimeout);
 	BoxSizer37->Add(EditAutoSaveTimeout, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	StaticTextAutoSaveTimeout = new wxStaticText(Panel1, wxID_ANY, _("Timeout(M)"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
-	BoxSizer37->Add(StaticTextAutoSaveTimeout, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	BoxSizer37->Add(StaticTextAutoSaveTimeout, 0, wxALL|wxEXPAND, 2);
 	BoxSizer7->Add(BoxSizer37, 0, wxALL|wxEXPAND, 2);
 	CheckBoxEnableAutoBackup = new wxCheckBox(Panel1, ID_CHECKBOX1, _("Auto backup"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOX1"));
 	CheckBoxEnableAutoBackup->SetValue(false);
@@ -636,7 +637,10 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	GridSizer2 = new wxGridSizer(0, 2, 0, 0);
 	BoxSizer44 = new wxBoxSizer(wxVERTICAL);
 	StaticBoxSizer7 = new wxStaticBoxSizer(wxVERTICAL, Panel7, _("Line Ending"));
-	RadioButtonLineEndingCRLF = new wxRadioButton(Panel7, ID_RADIOBUTTONLINEENDINGCRLF, _("Windows(CR LF)"), wxDefaultPosition, wxDefaultSize, wxRB_GROUP, wxDefaultValidator, _T("ID_RADIOBUTTONLINEENDINGCRLF"));
+	RadioButtonLineEndingDefault = new wxRadioButton(Panel7, ID_RADIOBUTTONLINEENDINGDEFAULT, _("System Default"), wxDefaultPosition, wxDefaultSize, wxRB_GROUP, wxDefaultValidator, _T("ID_RADIOBUTTONLINEENDINGDEFAULT"));
+	SET_CONTROLPARENT(RadioButtonLineEndingDefault);
+	StaticBoxSizer7->Add(RadioButtonLineEndingDefault, 0, wxALL|wxEXPAND, 2);
+	RadioButtonLineEndingCRLF = new wxRadioButton(Panel7, ID_RADIOBUTTONLINEENDINGCRLF, _("Windows(CR LF)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONLINEENDINGCRLF"));
 	SET_CONTROLPARENT(RadioButtonLineEndingCRLF);
 	StaticBoxSizer7->Add(RadioButtonLineEndingCRLF, 0, wxALL|wxEXPAND, 2);
 	RadioButtonLineEndingLF = new wxRadioButton(Panel7, ID_RADIOBUTTONLINEENDINGLF, _("Unix(LF)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONLINEENDINGLF"));
@@ -1001,6 +1005,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	}
 
 	ComboBoxEncoding->SetValue(systemenc);
+
 	/*for(i=0; i<g_LanguageString.GetCount(); ++i)
 	{
 	ComboBoxLanguage->Append(g_LanguageString[i]);
@@ -1012,6 +1017,9 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	{
 		ComboBoxSyntax->Append(MadSyntax::GetSyntaxTitle(i));
 	}
+	m_NewDocEncoding = wxFONTENCODING_DEFAULT;
+	m_AddBOM = false;
+	m_NewDocLineEndig = nltDefault;
 
 	wxSize sz1 = BoxSizer3->CalcMin();
 	wxSize sz2 = BoxSizer8->CalcMin();
@@ -1831,7 +1839,8 @@ void MadOptionsDialog::RadioButtonEncSelect(wxCommandEvent& event)
 	{
 		CheckBoxEncUTF8WithBOM->Enable(false);
 		if(ID_RADIOBUTTONENCOTHER == event.GetId())
-		{			ComboBoxEncOther->Enable(true);
+		{
+			ComboBoxEncOther->Enable(true);
 		}
 		else
 		{
@@ -1842,4 +1851,20 @@ void MadOptionsDialog::RadioButtonEncSelect(wxCommandEvent& event)
 
 void MadOptionsDialog::RadioButtonLineEndingSelect(wxCommandEvent& event)
 {
+	if (event.GetId() == ID_RADIOBUTTONLINEENDINGCRLF)
+	{
+		m_NewDocLineEndig = nltDOS;
+	}
+	else if (event.GetId() == ID_RADIOBUTTONLINEENDINGLF)
+	{
+		m_NewDocLineEndig = nltUNIX;
+	}
+	else if (event.GetId() == ID_RADIOBUTTONLINEENDINGCR)
+	{
+		m_NewDocLineEndig = nltMAC;
+	}
+	else
+	{
+		m_NewDocLineEndig = nltDefault;
+	}
 }

@@ -139,6 +139,7 @@ class MadOptionsDialog: public wxDialog
 		wxRadioButton* RadioButtonEncUTF8;
 		wxRadioButton* RadioButtonLineEndingCR;
 		wxRadioButton* RadioButtonLineEndingCRLF;
+		wxRadioButton* RadioButtonLineEndingDefault;
 		wxRadioButton* RadioButtonLineEndingLF;
 		wxStaticText* StaticText10;
 		wxStaticText* StaticText11;
@@ -231,6 +232,7 @@ class MadOptionsDialog: public wxDialog
 		static const long ID_CHECKBOXLOCKCARETYPOS;
 		static const long ID_CHECKBOXFIXWIDTHMODE;
 		static const long ID_PANEL2;
+		static const long ID_RADIOBUTTONLINEENDINGDEFAULT;
 		static const long ID_RADIOBUTTONLINEENDINGCRLF;
 		static const long ID_RADIOBUTTONLINEENDINGLF;
 		static const long ID_RADIOBUTTONLINEENDINGCR;
@@ -379,8 +381,9 @@ public:
 	bool FindItemInList(TreeItemData* tid, const list<TreeItemData*> &tlist);
 	void UpdateKeyHint();
 	void InitDictionaryChoice(const wxString &path = wxEmptyString);
-	int m_NewDocEncoding;
 	int m_NewDocLineEndig;
+	int m_NewDocEncoding;
+	bool m_AddBOM;
 
 private:
 };

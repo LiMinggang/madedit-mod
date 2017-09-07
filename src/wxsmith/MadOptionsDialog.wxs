@@ -505,9 +505,16 @@
 																<label>Line Ending</label>
 																<orient>wxVERTICAL</orient>
 																<object class="sizeritem">
+																	<object class="wxRadioButton" name="ID_RADIOBUTTONLINEENDINGDEFAULT" variable="RadioButtonLineEndingDefault" member="yes">
+																		<label>System Default</label>
+																		<style>wxRB_GROUP</style>
+																	</object>
+																	<flag>wxALL|wxEXPAND</flag>
+																	<border>2</border>
+																</object>
+																<object class="sizeritem">
 																	<object class="wxRadioButton" name="ID_RADIOBUTTONLINEENDINGCRLF" variable="RadioButtonLineEndingCRLF" member="yes">
 																		<label>Windows(CR LF)</label>
-																		<style>wxRB_GROUP</style>
 																		<handler function="RadioButtonLineEndingSelect" entry="EVT_RADIOBUTTON" />
 																	</object>
 																	<flag>wxALL|wxEXPAND</flag>
