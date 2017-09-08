@@ -545,7 +545,7 @@
 																<orient>wxVERTICAL</orient>
 																<object class="sizeritem">
 																	<object class="wxStaticText" name="wxID_ANY" variable="StaticText20" member="no">
-																		<label>Language:</label>
+																		<label>Syntax:</label>
 																	</object>
 																	<flag>wxALL|wxEXPAND</flag>
 																	<border>2</border>
@@ -593,7 +593,7 @@
 																		</object>
 																		<object class="sizeritem">
 																			<object class="wxCheckBox" name="ID_CHECKBOXENCUTF8WITHBOM" variable="CheckBoxEncUTF8WithBOM" member="yes">
-																				<label>With BOM</label>
+																				<label>with BOM</label>
 																			</object>
 																			<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 																			<border>2</border>

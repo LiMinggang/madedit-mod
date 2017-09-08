@@ -382,8 +382,7 @@ public:
 	void UpdateKeyHint();
 	void InitDictionaryChoice(const wxString &path = wxEmptyString);
 	int m_NewDocLineEndig;
-	int m_NewDocEncoding;
-	bool m_AddBOM;
+	wxString m_NewDocEncoding;
 
 private:
 };

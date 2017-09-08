@@ -4393,6 +4393,8 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 		{
 			m_Notebook->SetSelection( m_Notebook->GetPageCount() - 1 );
 		}
+		
+		madedit->ConfigNewDocument();
 	}
 
 	if( !filename.IsEmpty() )
@@ -8062,6 +8064,13 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		if( !g_ForcePurgeThisTime ) { g_ForcePurgeThisTime = g_OptionsDialog->CheckBoxPurgeHistory->GetValue(); }
 		else { g_ForcePurgeThisTime = false; }
 
+		//New Document
+		m_Config->Write( wxT( "NewDocumentLineEnding" ), g_OptionsDialog->m_NewDocLineEndig );
+		m_Config->Write( wxT( "NewDocumentEncoding" ), g_OptionsDialog->m_NewDocEncoding );
+		m_Config->Write( wxT( "NewDocumentEncodingUTF8WithBOM" ), g_OptionsDialog->CheckBoxEncUTF8WithBOM->GetValue() );
+		m_Config->Write( wxT( "NewDocumentSyntax" ), g_OptionsDialog->ComboBoxSyntax->GetValue() );
+
+		//Print
 		bool bb;
 		wxString ss;
 		bb = g_OptionsDialog->CheckBoxPrintSyntax->GetValue();

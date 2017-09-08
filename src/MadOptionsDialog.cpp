@@ -640,19 +640,19 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	RadioButtonLineEndingDefault = new wxRadioButton(Panel7, ID_RADIOBUTTONLINEENDINGDEFAULT, _("System Default"), wxDefaultPosition, wxDefaultSize, wxRB_GROUP, wxDefaultValidator, _T("ID_RADIOBUTTONLINEENDINGDEFAULT"));
 	SET_CONTROLPARENT(RadioButtonLineEndingDefault);
 	StaticBoxSizer7->Add(RadioButtonLineEndingDefault, 0, wxALL|wxEXPAND, 2);
-	RadioButtonLineEndingCRLF = new wxRadioButton(Panel7, ID_RADIOBUTTONLINEENDINGCRLF, _("Windows(CR LF)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONLINEENDINGCRLF"));
+	RadioButtonLineEndingCRLF = new wxRadioButton(Panel7, ID_RADIOBUTTONLINEENDINGCRLF, _T("Windows(CR LF)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONLINEENDINGCRLF"));
 	SET_CONTROLPARENT(RadioButtonLineEndingCRLF);
 	StaticBoxSizer7->Add(RadioButtonLineEndingCRLF, 0, wxALL|wxEXPAND, 2);
-	RadioButtonLineEndingLF = new wxRadioButton(Panel7, ID_RADIOBUTTONLINEENDINGLF, _("Unix(LF)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONLINEENDINGLF"));
+	RadioButtonLineEndingLF = new wxRadioButton(Panel7, ID_RADIOBUTTONLINEENDINGLF, _T("Unix(LF)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONLINEENDINGLF"));
 	SET_CONTROLPARENT(RadioButtonLineEndingLF);
 	//SET_CONTROLPARENT(RadioBoxLineEnding);
 	StaticBoxSizer7->Add(RadioButtonLineEndingLF, 0, wxALL|wxEXPAND, 2);
-	RadioButtonLineEndingCR = new wxRadioButton(Panel7, ID_RADIOBUTTONLINEENDINGCR, _("Macintosh"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONLINEENDINGCR"));
+	RadioButtonLineEndingCR = new wxRadioButton(Panel7, ID_RADIOBUTTONLINEENDINGCR, _T("Macintosh"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONLINEENDINGCR"));
 	SET_CONTROLPARENT(RadioButtonLineEndingCR);
 	StaticBoxSizer7->Add(RadioButtonLineEndingCR, 0, wxALL|wxEXPAND, 2);
 	BoxSizer44->Add(StaticBoxSizer7, 0, wxALL|wxALIGN_LEFT, 5);
 	BoxSizer45 = new wxBoxSizer(wxVERTICAL);
-	StaticText20 = new wxStaticText(Panel7, wxID_ANY, _("Language:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	StaticText20 = new wxStaticText(Panel7, wxID_ANY, _("Syntax:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	BoxSizer45->Add(StaticText20, 0, wxALL|wxEXPAND, 2);
 	ComboBoxSyntax = new wxComboBox(Panel7, ID_COMBOBOXSYNTAX, wxEmptyString, wxDefaultPosition, wxSize(160,-1), 0, 0, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXSYNTAX"));
 	SET_CONTROLPARENT(ComboBoxSyntax);
@@ -667,10 +667,10 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	SET_CONTROLPARENT(RadioButtonEncSystemDefault);
 	StaticBoxSizer8->Add(RadioButtonEncSystemDefault, 0, wxALL|wxEXPAND, 2);
 	GridSizer1 = new wxGridSizer(0, 2, 0, 0);
-	RadioButtonEncUTF8 = new wxRadioButton(Panel7, ID_RADIOBUTTONENCUTF8, _("UTF8"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONENCUTF8"));
+	RadioButtonEncUTF8 = new wxRadioButton(Panel7, ID_RADIOBUTTONENCUTF8, _T("UTF8"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONENCUTF8"));
 	SET_CONTROLPARENT(RadioButtonEncUTF8);
 	GridSizer1->Add(RadioButtonEncUTF8, 0, wxALL|wxEXPAND, 2);
-	CheckBoxEncUTF8WithBOM = new wxCheckBox(Panel7, ID_CHECKBOXENCUTF8WITHBOM, _("With BOM"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXENCUTF8WITHBOM"));
+	CheckBoxEncUTF8WithBOM = new wxCheckBox(Panel7, ID_CHECKBOXENCUTF8WITHBOM, _("with BOM"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXENCUTF8WITHBOM"));
 	CheckBoxEncUTF8WithBOM->SetValue(false);
 	SET_CONTROLPARENT(CheckBoxEncUTF8WithBOM);
 	GridSizer1->Add(CheckBoxEncUTF8WithBOM, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
@@ -956,45 +956,44 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 
 	Bind( wxEVT_TREE_SEL_CHANGED, &MadOptionsDialog::TreeCtrl1SelChanged , this, ID_TREECTRL1 );
 
-	PopupMenuPrintMark.Append(ID_MNU_MENUITEM1_1110, _("[%f] &File Name"), _(""), wxITEM_NORMAL);
-	PopupMenuPrintMark.Append(ID_MNU___P__PATHNAME_1111, _("[%p] &Path Name"), _(""), wxITEM_NORMAL);
+	PopupMenuPrintMark.Append(ID_MNU_MENUITEM1_1110, _("[%f] &File Name"), _T(""), wxITEM_NORMAL);
+	PopupMenuPrintMark.Append(ID_MNU___P__PATHNAME_1111, _("[%p] &Path Name"), _T(""), wxITEM_NORMAL);
 	PopupMenuPrintMark.AppendSeparator();
-	PopupMenuPrintMark.Append(ID_MNU___N_PAGE_NUMBER_1113, _("[%n] Page &Number"), _(""), wxITEM_NORMAL);
-	PopupMenuPrintMark.Append(ID_MNU___S__TOTALPAGES_1114, _("[%s] Total Page&s"), _(""), wxITEM_NORMAL);
+	PopupMenuPrintMark.Append(ID_MNU___N_PAGE_NUMBER_1113, _("[%n] Page &Number"), _T(""), wxITEM_NORMAL);
+	PopupMenuPrintMark.Append(ID_MNU___S__TOTALPAGES_1114, _("[%s] Total Page&s"), _T(""), wxITEM_NORMAL);
 	PopupMenuPrintMark.AppendSeparator();
-	PopupMenuPrintMark.Append(ID_MNU___D__DATE_1116, _("[%d] &Date"), _(""), wxITEM_NORMAL);
-	PopupMenuPrintMark.Append(ID_MNU___T__TIME_1117, _("[%t] &Time"), _(""), wxITEM_NORMAL);
+	PopupMenuPrintMark.Append(ID_MNU___D__DATE_1116, _("[%d] &Date"), _T(""), wxITEM_NORMAL);
+	PopupMenuPrintMark.Append(ID_MNU___T__TIME_1117, _("[%t] &Time"), _T(""), wxITEM_NORMAL);
 
-	PopupMenuDateTimeMark.Append(ID_MNU___Y__M__D_I__M__S_P_2007_02_2408_30_55AM_1191, _("[%Y/%m/%d %I:%M:%S %p] 2007/02/24 08:30:55 AM"), _(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___D__M__Y_24_02_2007_1192, _("[%d/%m/%Y] 24/02/2007"), _(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___A__D_B_Y_H__M__S_Z_RFC822TIMESTAMP_1195, _("[%a, %d %b %Y %H:%M:%S %z] RFC822 timestamp"), _(""), wxITEM_NORMAL);
+	PopupMenuDateTimeMark.Append(ID_MNU___Y__M__D_I__M__S_P_2007_02_2408_30_55AM_1191, _("[%Y/%m/%d %I:%M:%S %p] 2007/02/24 08:30:55 AM"), _T(""), wxITEM_NORMAL);
+	PopupMenuDateTimeMark.Append(ID_MNU___D__M__Y_24_02_2007_1192, _("[%d/%m/%Y] 24/02/2007"), _T(""), wxITEM_NORMAL);
+	PopupMenuDateTimeMark.Append(ID_MNU___A__D_B_Y_H__M__S_Z_RFC822TIMESTAMP_1195, _("[%a, %d %b %Y %H:%M:%S %z] RFC822 timestamp"), _T(""), wxITEM_NORMAL);
 	PopupMenuDateTimeMark.AppendSeparator();
-	PopupMenuDateTimeMark.Append(ID_MNU_MENUITEM1_1170, _("[%a] Abbreviated weekday name"), _(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___A_FULLWEEKDAYNAME_1171, _("[%A] Full weekday name"), _(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___B_ABBREVIATEDMONTHNAME_1172, _("[%b] Abbreviated month name"), _(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___B_FULLMONTHNAME_1173, _("[%B] Full month name"), _(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___C_DATEANDTIMEREPRESENTATIONAPPROPRIATEFORLOCALE_1174, _("[%c] Date and time representation appropriate for locale"), _(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___D_DAYOFMONTHASDECIMALNUMBER_01_31__1175, _("[%d] Day of month as decimal number (01 - 31)"), _(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___H_HOURIN24_HOURFORMAT_00_23__1176, _("[%H] Hour in 24-hour format (00 - 23)"), _(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___I_HOURIN12_HOURFORMAT_01_12__1177, _("[%I] Hour in 12-hour format (01 - 12)"), _(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___J_DAYOFYEARASDECIMALNUMBER_001_366__1178, _("[%j] Day of year as decimal number (001 - 366)"), _(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___M_MONTHASDECIMALNUMBER_01_12__1179, _("[%m] Month as decimal number (01 - 12)"), _(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___M_MINUTEASDECIMALNUMBER_00_59__1180, _("[%M] Minute as decimal number (00 - 59)"), _(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___P_CURRENTLOCALESA_M__P_M_INDICATORFOR12_HOURCLOCK_1181, _("[%p] Current locale's A.M./P.M. indicator for 12-hour clock"), _(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___S_SECONDASDECIMALNUMBER_00_59__1182, _("[%S] Second as decimal number (00 - 59)"), _(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___U_WEEKOFYEARASDECIMALNUMBER_WITHSUNDAYASFIRSTDAYOFWEEK_00_53__1183, _("[%U] Week of year as decimal number, with Sunday as first day of week (00 - 53)"), _(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___W_WEEKDAYASDECIMALNUMBER_0_6_SUNDAYIS0__1184, _("[%w] Weekday as decimal number (0 - 6; Sunday is 0)"), _(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___W_WEEKOFYEARASDECIMALNUMBER_WITHMONDAYASFIRSTDAYOFWEEK_00_53__1185, _("[%W] Week of year as decimal number, with Monday as first day of week (00 - 53)"), _(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___X_DATEREPRESENTATIONFORCURRENTLOCALE_1186, _("[%x] Date representation for current locale"), _(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___X_TIMEREPRESENTATIONFORCURRENTLOCALE_1187, _("[%X] Time representation for current locale"), _(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___Y_YEARWITHOUTCENTURY_ASDECIMALNUMBER_00_99__1188, _("[%y] Year without century, as decimal number (00 - 99)"), _(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___Y_YEARWITHCENTURY_ASDECIMALNUMBER_1189, _("[%Y] Year with century, as decimal number"), _(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___Z_TIME_ZONENAME_1193, _("[%z] Time-zone name"), _(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___Z_TIME_ZONEABBREVIATION_1194, _("[%Z] Time-zone abbreviation"), _(""), wxITEM_NORMAL);
+	PopupMenuDateTimeMark.Append(ID_MNU_MENUITEM1_1170, _("[%a] Abbreviated weekday name"), _T(""), wxITEM_NORMAL);
+	PopupMenuDateTimeMark.Append(ID_MNU___A_FULLWEEKDAYNAME_1171, _("[%A] Full weekday name"), _T(""), wxITEM_NORMAL);
+	PopupMenuDateTimeMark.Append(ID_MNU___B_ABBREVIATEDMONTHNAME_1172, _("[%b] Abbreviated month name"), _T(""), wxITEM_NORMAL);
+	PopupMenuDateTimeMark.Append(ID_MNU___B_FULLMONTHNAME_1173, _("[%B] Full month name"), _T(""), wxITEM_NORMAL);
+	PopupMenuDateTimeMark.Append(ID_MNU___C_DATEANDTIMEREPRESENTATIONAPPROPRIATEFORLOCALE_1174, _("[%c] Date and time representation appropriate for locale"), _T(""), wxITEM_NORMAL);
+	PopupMenuDateTimeMark.Append(ID_MNU___D_DAYOFMONTHASDECIMALNUMBER_01_31__1175, _("[%d] Day of month as decimal number (01 - 31)"), _T(""), wxITEM_NORMAL);
+	PopupMenuDateTimeMark.Append(ID_MNU___H_HOURIN24_HOURFORMAT_00_23__1176, _("[%H] Hour in 24-hour format (00 - 23)"), _T(""), wxITEM_NORMAL);
+	PopupMenuDateTimeMark.Append(ID_MNU___I_HOURIN12_HOURFORMAT_01_12__1177, _("[%I] Hour in 12-hour format (01 - 12)"), _T(""), wxITEM_NORMAL);
+	PopupMenuDateTimeMark.Append(ID_MNU___J_DAYOFYEARASDECIMALNUMBER_001_366__1178, _("[%j] Day of year as decimal number (001 - 366)"), _T(""), wxITEM_NORMAL);
+	PopupMenuDateTimeMark.Append(ID_MNU___M_MONTHASDECIMALNUMBER_01_12__1179, _("[%m] Month as decimal number (01 - 12)"), _T(""), wxITEM_NORMAL);
+	PopupMenuDateTimeMark.Append(ID_MNU___M_MINUTEASDECIMALNUMBER_00_59__1180, _("[%M] Minute as decimal number (00 - 59)"), _T(""), wxITEM_NORMAL);
+	PopupMenuDateTimeMark.Append(ID_MNU___P_CURRENTLOCALESA_M__P_M_INDICATORFOR12_HOURCLOCK_1181, _("[%p] Current locale's A.M./P.M. indicator for 12-hour clock"), _T(""), wxITEM_NORMAL);
+	PopupMenuDateTimeMark.Append(ID_MNU___S_SECONDASDECIMALNUMBER_00_59__1182, _("[%S] Second as decimal number (00 - 59)"), _T(""), wxITEM_NORMAL);
+	PopupMenuDateTimeMark.Append(ID_MNU___U_WEEKOFYEARASDECIMALNUMBER_WITHSUNDAYASFIRSTDAYOFWEEK_00_53__1183, _("[%U] Week of year as decimal number, with Sunday as first day of week (00 - 53)"), _T(""), wxITEM_NORMAL);
+	PopupMenuDateTimeMark.Append(ID_MNU___W_WEEKDAYASDECIMALNUMBER_0_6_SUNDAYIS0__1184, _("[%w] Weekday as decimal number (0 - 6; Sunday is 0)"), _T(""), wxITEM_NORMAL);
+	PopupMenuDateTimeMark.Append(ID_MNU___W_WEEKOFYEARASDECIMALNUMBER_WITHMONDAYASFIRSTDAYOFWEEK_00_53__1185, _("[%W] Week of year as decimal number, with Monday as first day of week (00 - 53)"), _T(""), wxITEM_NORMAL);
+	PopupMenuDateTimeMark.Append(ID_MNU___X_DATEREPRESENTATIONFORCURRENTLOCALE_1186, _("[%x] Date representation for current locale"), _T(""), wxITEM_NORMAL);
+	PopupMenuDateTimeMark.Append(ID_MNU___X_TIMEREPRESENTATIONFORCURRENTLOCALE_1187, _("[%X] Time representation for current locale"), _T(""), wxITEM_NORMAL);
+	PopupMenuDateTimeMark.Append(ID_MNU___Y_YEARWITHOUTCENTURY_ASDECIMALNUMBER_00_99__1188, _("[%y] Year without century, as decimal number (00 - 99)"), _T(""), wxITEM_NORMAL);
+	PopupMenuDateTimeMark.Append(ID_MNU___Y_YEARWITHCENTURY_ASDECIMALNUMBER_1189, _("[%Y] Year with century, as decimal number"), _T(""), wxITEM_NORMAL);
+	PopupMenuDateTimeMark.Append(ID_MNU___Z_TIME_ZONENAME_1193, _("[%z] Time-zone name"), _T(""), wxITEM_NORMAL);
+	PopupMenuDateTimeMark.Append(ID_MNU___Z_TIME_ZONEABBREVIATION_1194, _("[%Z] Time-zone abbreviation"), _T(""), wxITEM_NORMAL);
 
 	wxString systemenc(_("System Default"));
 	ComboBoxEncoding->Append(systemenc);
-	ComboBoxEncOther->Append(systemenc);
 	size_t cnt = MadEncoding::GetEncodingsCount();
 	size_t i;
 
@@ -1017,8 +1016,10 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	{
 		ComboBoxSyntax->Append(MadSyntax::GetSyntaxTitle(i));
 	}
-	m_NewDocEncoding = wxFONTENCODING_DEFAULT;
-	m_AddBOM = false;
+	int index = ComboBoxSyntax->FindString(_T("Plain Text"));
+	if(index != wxNOT_FOUND)
+		ComboBoxSyntax->SetSelection(index);
+	m_NewDocEncoding = _("System Default");
 	m_NewDocLineEndig = nltDefault;
 
 	wxSize sz1 = BoxSizer3->CalcMin();
@@ -1233,6 +1234,82 @@ void MadOptionsDialog::LoadOptions(void)
 	CheckBoxShowQSearchBar->SetValue( bb );
 	cfg->Read( wxT( "RestoreCaretPos" ), &bb, true );
 	CheckBoxRestoreCaretPos->SetValue( bb );
+
+	// New Document
+	cfg->Read( wxT( "NewDocumentLineEnding" ), &m_NewDocLineEndig );
+	switch(m_NewDocLineEndig)
+	{
+	case nltDefault:
+		RadioButtonLineEndingCR->SetValue(false);
+		RadioButtonLineEndingCRLF->SetValue(false);
+		RadioButtonLineEndingDefault->SetValue(true);
+		RadioButtonLineEndingLF->SetValue(false);
+		break;
+	case nltDOS:
+		RadioButtonLineEndingCR->SetValue(false);
+		RadioButtonLineEndingCRLF->SetValue(true);
+		RadioButtonLineEndingDefault->SetValue(false);
+		RadioButtonLineEndingLF->SetValue(false);
+		break;
+	case nltUNIX:
+		RadioButtonLineEndingCR->SetValue(false);
+		RadioButtonLineEndingCRLF->SetValue(false);
+		RadioButtonLineEndingDefault->SetValue(false);
+		RadioButtonLineEndingLF->SetValue(true);
+		break;
+	case nltMAC:
+		RadioButtonLineEndingCR->SetValue(true);
+		RadioButtonLineEndingCRLF->SetValue(false);
+		RadioButtonLineEndingDefault->SetValue(false);
+		RadioButtonLineEndingLF->SetValue(false);
+		break;
+	default:
+		wxASSERT(0);
+	}
+
+	ss = wxT("Plain Text");
+	cfg->Read( wxT( "NewDocumentSyntax" ), &ss );
+	int index = ComboBoxSyntax->FindString(ss);
+	if(index == wxNOT_FOUND) index = 0;
+	ComboBoxSyntax->SetSelection(index);
+
+	m_NewDocEncoding = _( "System Default" );
+	cfg->Read( wxT( "NewDocumentEncoding" ), &m_NewDocEncoding );
+	wxFontEncoding enc = wxFontMapper::GetEncodingFromName( m_NewDocEncoding );
+	index = ComboBoxEncOther->FindString(m_NewDocEncoding);
+	if (wxFONTENCODING_MAX == enc || wxFONTENCODING_DEFAULT == enc || index == wxNOT_FOUND)
+		enc = wxFONTENCODING_SYSTEM;
+
+	if(wxFONTENCODING_UTF8 == enc)
+	{
+		CheckBoxEncUTF8WithBOM->Enable(true);
+		ComboBoxEncOther->Enable(false);
+		
+		RadioButtonEncOther->SetValue(false);
+		RadioButtonEncSystemDefault->SetValue(false);
+		RadioButtonEncUTF8->SetValue(true);
+	}
+	else
+	{
+		CheckBoxEncUTF8WithBOM->Enable(false);
+		RadioButtonEncUTF8->SetValue(false);
+		if(wxFONTENCODING_SYSTEM == enc)
+		{
+			ComboBoxEncOther->Enable(false);
+			RadioButtonEncOther->SetValue(false);
+			RadioButtonEncSystemDefault->SetValue(true);
+		}
+		else
+		{
+			ComboBoxEncOther->Enable(true);
+			ComboBoxEncOther->SetSelection(index);
+			RadioButtonEncOther->SetValue(true);
+			RadioButtonEncSystemDefault->SetValue(false);
+		}
+	}
+	cfg->Read( wxT( "NewDocumentEncodingUTF8WithBOM" ), &bb, false );
+	CheckBoxEncUTF8WithBOM->SetValue( bb );
+
 	// Print page
 	cfg->Read( wxT( "PrintSyntax" ), &bb );
 	CheckBoxPrintSyntax->SetValue( bb );
@@ -1299,105 +1376,7 @@ void MadOptionsDialog::LoadOptions(void)
 		TreeCtrl1->Unselect();
 		TreeCtrl1->SelectItem( selid, true );
 	}
-#if 0
-	cfg->SetPath( wxT( "/astyle" ) );
-	RadioBoxBracketStyle->SetSelection( cfg->ReadLong( wxT( "style" ), aspsAllman ) );
-	CheckAttachClasses->SetValue( cfg->ReadBool( wxT( "attach_classes" ), false ) );
-	CheckAttachExternC->SetValue( cfg->ReadBool( wxT( "attach_extern_c" ), true ) );
-	CheckAttachNamespaces->SetValue( cfg->ReadBool( wxT( "attach_namespaces" ), true ) );
-	CheckAttachInlines->SetValue( cfg->ReadBool( wxT( "attach_inlines" ), true ) );
-	CheckAttachClosingWhile->SetValue( cfg->ReadBool( wxT( "attach_closing_while" ), false ) );
-	CheckForceUseTabs->SetValue( cfg->ReadBool( wxT( "force_tabs" ), false ) );
-	SpinIndentation->SetValue( cfg->ReadLong( wxT( "indentation" ), 4 ) );
-	CheckUseTab->SetValue( cfg->ReadBool( wxT( "use_tabs" ), false ) );
-	CheckIndentCase->SetValue( cfg->ReadBool( wxT( "indent_case" ), true ) );
-	CheckIndentClasses->SetValue( cfg->ReadBool( wxT( "indent_classes" ), false ) );
-	CheckIndentLabels->SetValue( cfg->ReadBool( wxT( "indent_labels" ), false ) );
-	CheckIndentModifiers->SetValue( cfg->ReadBool( wxT( "indent_modifiers" ), false ) );
-	CheckIndentNamespaces->SetValue( cfg->ReadBool( wxT( "indent_namespaces" ), true ) );
-	CheckIndentSwitches->SetValue( cfg->ReadBool( wxT( "indent_switches" ), false ) );
-	CheckIndentPreprocBlock->SetValue( cfg->ReadBool( wxT( "indent_preproc_block" ), true ) );
-	CheckIndentPreprocDefine->SetValue( cfg->ReadBool( wxT( "indent_preproc_define" ), false ) );
-	CheckIndentPreprocCond->SetValue( cfg->ReadBool( wxT( "indent_preproc_cond" ), false ) );
-	CheckIndentCol1Comments->SetValue( cfg->ReadBool( wxT( "indent_col1_comments" ), true ) );
-	CheckIndentAfterParens->SetValue( cfg->ReadBool( wxT( "indent_after_parens" ), false ) );
-	SpinMinConditionalEvent->SetValue( cfg->ReadLong( wxT( "min_conditional_indent" ), 2 ) );
-	EditMaxInStatementIndent->SetValue( wxString() << cfg->ReadLong( wxT( "max_continuation_indent" ), 40 ) );
-	EditIndentContinuation->SetValue( wxString() << cfg->ReadLong( wxT( "indent_continuation" ), 1 ) );
-	CheckBreakClosing->SetValue( cfg->ReadBool( wxT( "break_closing" ), true ) );
-	CheckBreakElseIfs->SetValue( cfg->ReadBool( wxT( "break_elseifs" ), true ) );
-	CheckAddBraces->SetValue( cfg->ReadBool( wxT( "add_brackets" ), false ) );
-	CheckAddOneLineBraces->SetValue( cfg->ReadBool( wxT( "add_one_line_brackets" ), true ) );
-	CheckRemoveBraces->SetValue( cfg->ReadBool( wxT( "remove_brackets" ), false ) );
-	CheckKeepBlocks->SetValue( cfg->ReadBool( wxT( "keep_blocks" ), true ) );
-	CheckConvertTabs->SetValue( cfg->ReadBool( wxT( "convert_tabs" ), true ) );
-	CheckCloseTemplates->SetValue( cfg->ReadBool( wxT( "close_templates" ), false ) );
-	CheckRemoveCommentPrefix->SetValue( cfg->ReadBool( wxT( "remove_comment_prefix" ), false ) );
-	bb = cfg->ReadBool( wxT( "break_lines" ), false );
-	CheckBreakLines->SetValue( bb );
 
-	if( bb )
-	{
-		EditSFMaxLineLength->Enable( true );
-		CheckBreakAfterLogical->Enable( true );
-		EditSFMaxLineLength->SetValue( cfg->Read( wxT( "max_line_length" ), wxString( wxT( "200" ) ) ) );
-		CheckBreakAfterLogical->SetValue( cfg->ReadBool( wxT( "break_after_mode" ), false ) );
-	}
-	else
-	{
-		EditSFMaxLineLength->Enable( false );
-		CheckBreakAfterLogical->Enable( false );
-	}
-
-	CheckBreakBlocks->SetValue( cfg->ReadBool( wxT( "break_blocks" ), true ) );
-
-	if( CheckBreakBlocks->GetValue() )
-	{
-		CheckBreakBlocksAll->Enable( true );
-		CheckBreakBlocksAll->SetValue( cfg->ReadBool( wxT( "break_blocks_all" ), false ) );
-	}
-	else
-	{
-		CheckBreakBlocksAll->Enable( false );
-	}
-
-	CheckPadOperators->SetValue( cfg->ReadBool( wxT( "pad_operators" ), true ) );
-	CheckPadParensOut->SetValue( cfg->ReadBool( wxT( "pad_parentheses_out" ), false ) );
-	CheckPadParensIn->SetValue( cfg->ReadBool( wxT( "pad_parentheses_in" ), true ) );
-	CheckPadHeader->SetValue( cfg->ReadBool( wxT( "pad_header" ), false ) );
-	CheckUnpadParens ->SetValue( cfg->ReadBool( wxT( "unpad_parentheses" ), true ) );
-	CheckDelEmptyLine->SetValue( cfg->ReadBool( wxT( "delete_empty_lines" ), true ) );
-	CheckFillEmptyLines->SetValue( cfg->ReadBool( wxT( "fill_empty_lines" ), false ) );
-	wxString pointerAlign = cfg->Read( wxT( "pointer_align" ), wxEmptyString );
-
-	if( pointerAlign == wxT( "Type" ) )
-	{ ChoicePointerAlign->SetSelection( astyle::PTR_ALIGN_TYPE ); }
-	else
-		if( pointerAlign == wxT( "Middle" ) )
-		{ ChoicePointerAlign->SetSelection( astyle::PTR_ALIGN_MIDDLE ); }
-		else
-			if( pointerAlign == wxT( "Name" ) )
-			{ ChoicePointerAlign->SetSelection( astyle::PTR_ALIGN_NAME ); }
-			else
-			{ ChoicePointerAlign->SetSelection( astyle::PTR_ALIGN_NONE ); }
-
-	wxString referenceAlign = cfg->Read( wxT( "reference_align" ), wxEmptyString );
-
-	if( referenceAlign == wxT( "Type" ) )
-	{ ChoiceReferenceAlign->SetSelection( astyle::REF_ALIGN_TYPE ); }
-	else
-		if( referenceAlign == wxT( "Middle" ) )
-		{ ChoiceReferenceAlign->SetSelection( astyle::REF_ALIGN_MIDDLE ); }
-		else
-			if( referenceAlign == wxT( "Name" ) )
-			{ ChoiceReferenceAlign->SetSelection( astyle::REF_ALIGN_NAME ); }
-			else
-			{ ChoiceReferenceAlign->SetSelection( astyle::REF_ALIGN_NONE ); }
-
-	cfg->SetPath( wxT( "/xml" ) );
-	EditXmlIndentSize->SetValue( wxString() << cfg->ReadLong( wxT( "indentation" ), 4 ) );
-	EditXMLversion->SetValue( cfg->Read( wxT( "version" ), wxString( wxT( "1.0" ) ) ) );
-#endif
 	cfg->SetPath( oldpath );
 }
 
@@ -1834,6 +1813,7 @@ void MadOptionsDialog::RadioButtonEncSelect(wxCommandEvent& event)
 	{
 		CheckBoxEncUTF8WithBOM->Enable(true);
 		ComboBoxEncOther->Enable(false);
+		m_NewDocEncoding = wxFontMapper::GetEncodingName(wxFONTENCODING_UTF8);
 	}
 	else
 	{
@@ -1841,10 +1821,12 @@ void MadOptionsDialog::RadioButtonEncSelect(wxCommandEvent& event)
 		if(ID_RADIOBUTTONENCOTHER == event.GetId())
 		{
 			ComboBoxEncOther->Enable(true);
+			m_NewDocEncoding = ComboBoxEncOther->GetString(ComboBoxEncOther->GetSelection());
 		}
 		else
 		{
 			ComboBoxEncOther->Enable(false);
+			m_NewDocEncoding = _("System Default");
 		}
 	}
 }

@@ -118,7 +118,8 @@ FreeBSD packaging (with FreeBSD 10.01)
 3. stdc++ version
 
 Mod v0.4.10
-New: Refactor Option dialog with wxSmith
+New: Settings for new document in Options
+Fix: Refactor Option dialog with wxSmith
 
 Mod v0.4.9
 1.New: Change editor encoding of MadPython dialog according to current active edit

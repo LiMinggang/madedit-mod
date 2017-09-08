@@ -12086,3 +12086,30 @@ void MadEdit::ShowZeroLenSelIndicator()
 
 	PopupMenu( m_ZeroLenSelIndicator, pos );
 }
+
+void MadEdit::ConfigNewDocument()
+{
+	long ll;
+	bool bb;
+	wxString enc(wxT("System Default")), ss = wxT("Plain Text");
+	m_Config->Read( wxT( "NewDocumentLineEnding" ), &ll, nltDefault );
+	m_NewLineType = (MadNewLineType)ll;
+	m_InsertNewLineType = (MadNewLineType)ll;
+
+	m_Config->Read( wxT( "NewDocumentEncoding" ), &enc);
+	SetEncoding(enc);
+
+	if(wxFONTENCODING_UTF8 == wxFontMapper::GetEncodingFromName( enc ))
+	{
+		m_Config->Read( wxT( "NewDocumentEncodingUTF8WithBOM" ), &bb, false );
+		if(0 == m_Lines->m_LineList.begin()->m_RowIndices[0].m_Start)
+		{
+			ToggleBOM();
+		}
+	}
+
+	m_Config->Read( wxT( "NewDocumentSyntax" ), &ss );
+	if(MadSyntax::GetSyntaxByTitle( ss ) == nullptr) ss = wxT("Plain Text");
+	SetSyntax(ss);
+}
+
