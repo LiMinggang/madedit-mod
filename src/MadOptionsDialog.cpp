@@ -459,7 +459,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	BoxSizer3->Add(BoxSizer4, 0, wxALL|wxEXPAND, 2);
 	BoxSizer35 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer35->Add(3,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	ComboBoxDefaultFont = new wxComboBox(Panel1, ID_COMBOBOXDEFAULTFONT, wxEmptyString, wxDefaultPosition, wxSize(160,-1), 0, 0, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXDEFAULTFONT"));
+	ComboBoxDefaultFont = new wxComboBox(Panel1, ID_COMBOBOXDEFAULTFONT, wxEmptyString, wxDefaultPosition, wxSize(160,-1), g_FontNames, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXDEFAULTFONT"));
 	SET_CONTROLPARENT(ComboBoxDefaultFont);
 	BoxSizer35->Add(ComboBoxDefaultFont, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	StaticText19 = new wxStaticText(Panel1, wxID_ANY, _("Default font"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
@@ -683,6 +683,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	StaticText23 = new wxStaticText(Panel6, wxID_ANY, _("Syntax:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	BoxSizer49->Add(StaticText23, 0, wxALL|wxEXPAND, 2);
 	ComboBoxNewDocSyntax = new wxComboBox(Panel6, ID_COMBOBOXNEWDOCSYNTAX, wxEmptyString, wxDefaultPosition, wxSize(160,-1), 0, 0, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXNEWDOCSYNTAX"));
+	SET_CONTROLPARENT(ComboBoxNewDocSyntax);
 	BoxSizer49->Add(ComboBoxNewDocSyntax, 0, wxALL|wxEXPAND, 2);
 	BoxSizer43->Add(BoxSizer49, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	BoxSizer42->Add(BoxSizer43, 0, wxALL|wxALIGN_TOP, 5);
@@ -712,7 +713,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	BoxSizer51 = new wxBoxSizer(wxVERTICAL);
 	StaticText24 = new wxStaticText(Panel6, wxID_ANY, _("Font:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	BoxSizer51->Add(StaticText24, 0, wxALL|wxEXPAND, 2);
-	ComboBoxNewDocFont = new wxComboBox(Panel6, ID_COMBOBOXNEWDOCFONT, wxEmptyString, wxDefaultPosition, wxSize(160,-1), 0, 0, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXNEWDOCFONT"));
+	ComboBoxNewDocFont = new wxComboBox(Panel6, ID_COMBOBOXNEWDOCFONT, wxEmptyString, wxDefaultPosition, wxSize(160,-1), g_FontNames, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXNEWDOCFONT"));
 	SET_CONTROLPARENT(ComboBoxNewDocFont);
 	BoxSizer51->Add(ComboBoxNewDocFont, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer47->Add(BoxSizer51, 0, wxALL|wxALIGN_LEFT, 5);
