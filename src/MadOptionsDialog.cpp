@@ -15,8 +15,8 @@
 #endif
 // disable 4996 {
 //(*InternalHeaders(MadOptionsDialog)
-#include <wx/intl.h>
 #include <wx/settings.h>
+#include <wx/intl.h>
 #include <wx/string.h>
 //*)
 // disable 4996 }
@@ -48,6 +48,7 @@
 MadOptionsDialog *g_OptionsDialog = nullptr;
 extern wxArrayString g_LanguageString;
 extern wxString g_MadEditAppDir;
+extern wxArrayString g_FontNames;
 
 TreeItemData *g_SelectedCommandItem = nullptr;
 int g_SelectedKeyId = -1;
@@ -136,12 +137,11 @@ const long MadOptionsDialog::ID_COMBOBOXLANGUAGE = wxNewId();
 const long MadOptionsDialog::ID_STATICTEXT16 = wxNewId();
 const long MadOptionsDialog::ID_COMBOBOXENCODING = wxNewId();
 const long MadOptionsDialog::ID_STATICTEXT13 = wxNewId();
+const long MadOptionsDialog::ID_COMBOBOXDEFAULTFONT = wxNewId();
+const long MadOptionsDialog::ID_TEXTCTRLDEFAULTFONTSIZE = wxNewId();
 const long MadOptionsDialog::ID_EDITMAXSIZETOLOAD = wxNewId();
-const long MadOptionsDialog::ID_STATICTEXT1 = wxNewId();
 const long MadOptionsDialog::ID_EDITMAXTEXTFILESIZE = wxNewId();
-const long MadOptionsDialog::ID_STATICTEXT2 = wxNewId();
 const long MadOptionsDialog::ID_MAXDISPLAYSIZE = wxNewId();
-const long MadOptionsDialog::ID_STATICTEXT18 = wxNewId();
 const long MadOptionsDialog::ID_CHECKBOXSINGLEINSTANCE = wxNewId();
 const long MadOptionsDialog::ID_CHECKBOXRELOADFILES = wxNewId();
 const long MadOptionsDialog::ID_CHECKBOXRECORDCARETMOVEMENTS = wxNewId();
@@ -178,17 +178,19 @@ const long MadOptionsDialog::ID_CHECKBOXDCLICKHIGHLIGHT = wxNewId();
 const long MadOptionsDialog::ID_CHECKBOXLOCKCARETYPOS = wxNewId();
 const long MadOptionsDialog::ID_CHECKBOXFIXWIDTHMODE = wxNewId();
 const long MadOptionsDialog::ID_PANEL2 = wxNewId();
-const long MadOptionsDialog::ID_RADIOBUTTONLINEENDINGDEFAULT = wxNewId();
-const long MadOptionsDialog::ID_RADIOBUTTONLINEENDINGCRLF = wxNewId();
-const long MadOptionsDialog::ID_RADIOBUTTONLINEENDINGLF = wxNewId();
-const long MadOptionsDialog::ID_RADIOBUTTONLINEENDINGCR = wxNewId();
-const long MadOptionsDialog::ID_COMBOBOXSYNTAX = wxNewId();
-const long MadOptionsDialog::ID_RADIOBUTTONENCSYSTEMDEFAULT = wxNewId();
-const long MadOptionsDialog::ID_RADIOBUTTONENCUTF8 = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXENCUTF8WITHBOM = wxNewId();
-const long MadOptionsDialog::ID_RADIOBUTTONENCOTHER = wxNewId();
-const long MadOptionsDialog::ID_COMBOBOXENCOTHER = wxNewId();
-const long MadOptionsDialog::ID_PANEL7 = wxNewId();
+const long MadOptionsDialog::ID_RADIOBUTTONNEWDOCLINEENDINGDEFAULT = wxNewId();
+const long MadOptionsDialog::ID_RADIOBUTTONNEWDOCLINEENDINGCRLF = wxNewId();
+const long MadOptionsDialog::ID_RADIOBUTTONNEWDOCLINEENDINGLF = wxNewId();
+const long MadOptionsDialog::ID_RADIOBUTTONNEWDOCLINEENDINGCR = wxNewId();
+const long MadOptionsDialog::ID_COMBOBOXNEWDOCSYNTAX = wxNewId();
+const long MadOptionsDialog::ID_RADIOBUTTONNEWDOCENCSYSTEMDEFAULT = wxNewId();
+const long MadOptionsDialog::ID_RADIOBUTTONNEWDOCENCUTF8 = wxNewId();
+const long MadOptionsDialog::ID_CHECKBOXNEWDOCENCUTF8WITHBOM = wxNewId();
+const long MadOptionsDialog::ID_RADIOBUTTONNEWDOCENCOTHER = wxNewId();
+const long MadOptionsDialog::ID_COMBOBOXNEWDOCENCOTHER = wxNewId();
+const long MadOptionsDialog::ID_COMBOBOXNEWDOCFONT = wxNewId();
+const long MadOptionsDialog::ID_TEXTCTRLNEWDOCFONTSIZE = wxNewId();
+const long MadOptionsDialog::ID_PANEL6 = wxNewId();
 const long MadOptionsDialog::ID_CHECKBOXPRINTSYNTAX = wxNewId();
 const long MadOptionsDialog::ID_CHECKBOXPRINTLINENUMBER = wxNewId();
 const long MadOptionsDialog::ID_CHECKBOXPRINTBOOKMARK = wxNewId();
@@ -341,12 +343,12 @@ MadOptionsDialog::wxCmdEvtHandlerMap_t MadOptionsDialog::m_checkbox_evt_map[] =
 
 MadOptionsDialog::wxCmdEvtHandlerMap_t MadOptionsDialog::m_radiobutton_evt_map[] = 
 {
-	{ ID_RADIOBUTTONENCSYSTEMDEFAULT, &MadOptionsDialog::RadioButtonEncSelect },
-	{ ID_RADIOBUTTONENCUTF8, &MadOptionsDialog::RadioButtonEncSelect },
-	{ ID_RADIOBUTTONENCOTHER, &MadOptionsDialog::RadioButtonEncSelect },
-	{ ID_RADIOBUTTONLINEENDINGCRLF, &MadOptionsDialog::RadioButtonLineEndingSelect },
-	{ ID_RADIOBUTTONLINEENDINGLF, &MadOptionsDialog::RadioButtonLineEndingSelect },
-	{ ID_RADIOBUTTONLINEENDINGCR, &MadOptionsDialog::RadioButtonLineEndingSelect },
+	{ ID_RADIOBUTTONNEWDOCENCSYSTEMDEFAULT, &MadOptionsDialog::RadioButtonNewDocEncSelect },
+	{ ID_RADIOBUTTONNEWDOCENCUTF8, &MadOptionsDialog::RadioButtonNewDocEncSelect },
+	{ ID_RADIOBUTTONNEWDOCENCOTHER, &MadOptionsDialog::RadioButtonNewDocEncSelect },
+	{ ID_RADIOBUTTONNEWDOCLINEENDINGCRLF, &MadOptionsDialog::RadioButtonNewDocLineEndingSelect },
+	{ ID_RADIOBUTTONNEWDOCLINEENDINGLF, &MadOptionsDialog::RadioButtonNewDocLineEndingSelect },
+	{ ID_RADIOBUTTONNEWDOCLINEENDINGCR, &MadOptionsDialog::RadioButtonNewDocLineEndingSelect },
 };
 
 #if defined(__WXMSW__) && (wxMAJOR_VERSION >= 3)
@@ -365,63 +367,72 @@ MadOptionsDialog::wxCmdEvtHandlerMap_t MadOptionsDialog::m_radiobutton_evt_map[]
 MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 {
 	//(*Initialize(MadOptionsDialog)
-	wxBoxSizer* BoxSizer10;
-	wxBoxSizer* BoxSizer11;
-	wxBoxSizer* BoxSizer12;
-	wxBoxSizer* BoxSizer13;
-	wxBoxSizer* BoxSizer14;
-	wxBoxSizer* BoxSizer15;
-	wxBoxSizer* BoxSizer16;
-	wxBoxSizer* BoxSizer17;
-	wxBoxSizer* BoxSizer18;
-	wxBoxSizer* BoxSizer19;
-	wxBoxSizer* BoxSizer1;
-	wxBoxSizer* BoxSizer20;
-	wxBoxSizer* BoxSizer21;
-	wxBoxSizer* BoxSizer22;
-	wxBoxSizer* BoxSizer23;
-	wxBoxSizer* BoxSizer24;
-	wxBoxSizer* BoxSizer25;
-	wxBoxSizer* BoxSizer26;
-	wxBoxSizer* BoxSizer27;
-	wxBoxSizer* BoxSizer28;
-	wxBoxSizer* BoxSizer29;
-	wxBoxSizer* BoxSizer2;
-	wxBoxSizer* BoxSizer30;
-	wxBoxSizer* BoxSizer31;
-	wxBoxSizer* BoxSizer32;
-	wxBoxSizer* BoxSizer33;
-	wxBoxSizer* BoxSizer34;
-	wxBoxSizer* BoxSizer36;
-	wxBoxSizer* BoxSizer37;
-	wxBoxSizer* BoxSizer38;
-	wxBoxSizer* BoxSizer3;
-	wxBoxSizer* BoxSizer44;
-	wxBoxSizer* BoxSizer45;
-	wxBoxSizer* BoxSizer46;
-	wxBoxSizer* BoxSizer48;
 	wxBoxSizer* BoxSizer4;
-	wxBoxSizer* BoxSizer5;
+	wxStaticBoxSizer* StaticBoxSizer2;
 	wxBoxSizer* BoxSizer6;
+	wxBoxSizer* BoxSizer29;
+	wxBoxSizer* BoxSizer51;
+	wxStaticText* StaticText20;
+	wxBoxSizer* BoxSizer19;
+	wxBoxSizer* BoxSizer15;
+	wxBoxSizer* BoxSizer20;
+	wxBoxSizer* BoxSizer50;
+	wxBoxSizer* BoxSizer52;
+	wxBoxSizer* BoxSizer43;
+	wxBoxSizer* BoxSizer5;
+	wxBoxSizer* BoxSizer10;
 	wxBoxSizer* BoxSizer7;
 	wxBoxSizer* BoxSizer8;
-	wxBoxSizer* BoxSizer9;
-	wxFlexGridSizer* FlexGridSizer1;
-	wxFlexGridSizer* FlexGridSizer2;
-	wxGridSizer* GridSizer1;
-	wxGridSizer* GridSizer2;
-	wxStaticBoxSizer* StaticBoxSizer1;
-	wxStaticBoxSizer* StaticBoxSizer2;
-	wxStaticBoxSizer* StaticBoxSizer3;
+	wxBoxSizer* BoxSizer39;
+	wxBoxSizer* BoxSizer21;
+	wxBoxSizer* BoxSizer13;
 	wxStaticBoxSizer* StaticBoxSizer4;
-	wxStaticBoxSizer* StaticBoxSizer5;
+	wxBoxSizer* BoxSizer36;
+	wxBoxSizer* BoxSizer37;
+	wxBoxSizer* BoxSizer42;
+	wxStaticText* StaticText19;
+	wxBoxSizer* BoxSizer49;
+	wxStaticText* StaticText18;
+	wxFlexGridSizer* FlexGridSizer2;
+	wxBoxSizer* BoxSizer23;
+	wxStaticBoxSizer* StaticBoxSizer9;
+	wxBoxSizer* BoxSizer2;
+	wxBoxSizer* BoxSizer11;
+	wxBoxSizer* BoxSizer16;
+	wxBoxSizer* BoxSizer30;
+	wxBoxSizer* BoxSizer18;
+	wxBoxSizer* BoxSizer12;
+	wxBoxSizer* BoxSizer28;
+	wxStaticText* StaticText23;
+	wxStaticText* StaticText24;
+	wxStaticBoxSizer* StaticBoxSizer10;
+	wxBoxSizer* BoxSizer38;
+	wxBoxSizer* BoxSizer14;
+	wxStaticBoxSizer* StaticBoxSizer3;
 	wxStaticBoxSizer* StaticBoxSizer6;
-	wxStaticBoxSizer* StaticBoxSizer7;
-	wxStaticBoxSizer* StaticBoxSizer8;
-	wxStaticText* StaticText20;
+	wxGridSizer* GridSizer3;
+	wxBoxSizer* BoxSizer27;
+	wxBoxSizer* BoxSizer31;
+	wxBoxSizer* BoxSizer17;
+	wxBoxSizer* BoxSizer24;
+	wxBoxSizer* BoxSizer26;
+	wxBoxSizer* BoxSizer32;
+	wxBoxSizer* BoxSizer1;
+	wxBoxSizer* BoxSizer9;
+	wxBoxSizer* BoxSizer47;
+	wxStaticBoxSizer* StaticBoxSizer1;
+	wxBoxSizer* BoxSizer33;
+	wxBoxSizer* BoxSizer34;
+	wxBoxSizer* BoxSizer22;
+	wxFlexGridSizer* FlexGridSizer1;
+	wxBoxSizer* BoxSizer35;
+	wxStaticText* StaticText25;
+	wxBoxSizer* BoxSizer3;
+	wxStaticBoxSizer* StaticBoxSizer5;
+	wxBoxSizer* BoxSizer25;
 
-	Create(parent, wxID_ANY, _("Options"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxSYSTEM_MENU|wxRESIZE_BORDER|wxCLOSE_BOX|wxDIALOG_NO_PARENT, _T("wxID_ANY"));
-	SetClientSize(wxSize(575,466));
+	Create(parent, wxID_ANY, _("Options"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxSYSTEM_MENU|wxRESIZE_BORDER|wxCLOSE_BOX, _T("wxID_ANY"));
+	SetClientSize(wxSize(575,486));
 	BoxSizer1 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer30 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer31 = new wxBoxSizer(wxVERTICAL);
@@ -446,14 +457,31 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	StaticText13 = new wxStaticText(Panel1, ID_STATICTEXT13, _("Use this encoding to create new file or when MadEdit cannot determine the encoding of old file"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT13"));
 	BoxSizer4->Add(StaticText13, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer3->Add(BoxSizer4, 0, wxALL|wxEXPAND, 2);
+	BoxSizer35 = new wxBoxSizer(wxHORIZONTAL);
+	BoxSizer35->Add(3,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
+	ComboBoxDefaultFont = new wxComboBox(Panel1, ID_COMBOBOXDEFAULTFONT, wxEmptyString, wxDefaultPosition, wxSize(160,-1), 0, 0, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXDEFAULTFONT"));
+	SET_CONTROLPARENT(ComboBoxDefaultFont);
+	BoxSizer35->Add(ComboBoxDefaultFont, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
+	StaticText19 = new wxStaticText(Panel1, wxID_ANY, _("Default font"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	BoxSizer35->Add(StaticText19, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	BoxSizer3->Add(BoxSizer35, 0, wxALL|wxEXPAND, 2);
 	BoxSizer7 = new wxBoxSizer(wxVERTICAL);
+	BoxSizer39 = new wxBoxSizer(wxHORIZONTAL);
+	BoxSizer39->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
+	EditDefaultFontSize = new wxTextCtrl(Panel1, ID_TEXTCTRLDEFAULTFONTSIZE, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRLDEFAULTFONTSIZE"));
+	SET_CONTROLPARENT(EditDefaultFontSize);
+	EditDefaultFontSize->SetMaxLength(2);
+	BoxSizer39->Add(EditDefaultFontSize, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
+	StaticText20 = new wxStaticText(Panel1, wxID_ANY, _("Default font size"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	BoxSizer39->Add(StaticText20, 0, wxALL|wxEXPAND, 2);
+	BoxSizer7->Add(BoxSizer39, 0, wxALL|wxEXPAND, 2);
 	BoxSizer38 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer38->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	EditMaxSizeToLoad = new wxTextCtrl(Panel1, ID_EDITMAXSIZETOLOAD, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITMAXSIZETOLOAD"));
 	EditMaxSizeToLoad->SetMaxLength(128);
 	SET_CONTROLPARENT(EditMaxSizeToLoad);
 	BoxSizer38->Add(EditMaxSizeToLoad, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticText1 = new wxStaticText(Panel1, ID_STATICTEXT1, _("Max file size to load whole file into memory"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT1"));
+	StaticText1 = new wxStaticText(Panel1, wxID_ANY, _("Max file size to load whole file into memory"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	BoxSizer38->Add(StaticText1, 0, wxALL|wxEXPAND, 2);
 	BoxSizer7->Add(BoxSizer38, 0, wxALL|wxEXPAND, 2);
 	BoxSizer17 = new wxBoxSizer(wxHORIZONTAL);
@@ -462,7 +490,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	EditMaxTextFileSize->SetMaxLength(128);
 	SET_CONTROLPARENT(EditMaxTextFileSize);
 	BoxSizer17->Add(EditMaxTextFileSize, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticText2 = new wxStaticText(Panel1, ID_STATICTEXT2, _("Max file size to load as a text file"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT2"));
+	StaticText2 = new wxStaticText(Panel1, wxID_ANY, _("Max file size to load as a text file"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	BoxSizer17->Add(StaticText2, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer7->Add(BoxSizer17, 0, wxALL|wxEXPAND, 2);
 	BoxSizer6 = new wxBoxSizer(wxHORIZONTAL);
@@ -471,7 +499,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	EditMaxDisplaySize->SetMaxLength(5);
 	SET_CONTROLPARENT(EditMaxDisplaySize);
 	BoxSizer6->Add(EditMaxDisplaySize, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticText18 = new wxStaticText(Panel1, ID_STATICTEXT18, _("Max chars displayed in search results"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT18"));
+	StaticText18 = new wxStaticText(Panel1, wxID_ANY, _("Max chars displayed in search results"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	BoxSizer6->Add(StaticText18, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer7->Add(BoxSizer6, 0, wxALL|wxEXPAND, 2);
 	CheckBoxSingleInstance = new wxCheckBox(Panel1, ID_CHECKBOXSINGLEINSTANCE, _("Single Instance (must restart MadEdit)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXSINGLEINSTANCE"));
@@ -524,7 +552,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	CheckBoxRightClickMenu->SetValue(false);
 	SET_CONTROLPARENT(CheckBoxRightClickMenu);
 	BoxSizer7->Add(CheckBoxRightClickMenu, 0, wxALL|wxEXPAND, 2);
-	BoxSizer3->Add(BoxSizer7, 0, wxALL|wxALIGN_LEFT, 2);
+	BoxSizer3->Add(BoxSizer7, 0, wxALL|wxEXPAND, 2);
 #endif
 	Panel1->SetSizer(BoxSizer3);
 	BoxSizer3->Fit(Panel1);
@@ -633,61 +661,73 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	Panel2->SetSizer(BoxSizer8);
 	BoxSizer8->Fit(Panel2);
 	BoxSizer8->SetSizeHints(Panel2);
-	Panel7 = new wxPanel(AuiNotebook1, ID_PANEL7, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_PANEL7"));
-	GridSizer2 = new wxGridSizer(0, 2, 0, 0);
-	BoxSizer44 = new wxBoxSizer(wxVERTICAL);
-	StaticBoxSizer7 = new wxStaticBoxSizer(wxVERTICAL, Panel7, _("Line Ending"));
-	RadioButtonLineEndingDefault = new wxRadioButton(Panel7, ID_RADIOBUTTONLINEENDINGDEFAULT, _("System Default"), wxDefaultPosition, wxDefaultSize, wxRB_GROUP, wxDefaultValidator, _T("ID_RADIOBUTTONLINEENDINGDEFAULT"));
-	SET_CONTROLPARENT(RadioButtonLineEndingDefault);
-	StaticBoxSizer7->Add(RadioButtonLineEndingDefault, 0, wxALL|wxEXPAND, 2);
-	RadioButtonLineEndingCRLF = new wxRadioButton(Panel7, ID_RADIOBUTTONLINEENDINGCRLF, _T("Windows(CR LF)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONLINEENDINGCRLF"));
-	SET_CONTROLPARENT(RadioButtonLineEndingCRLF);
-	StaticBoxSizer7->Add(RadioButtonLineEndingCRLF, 0, wxALL|wxEXPAND, 2);
-	RadioButtonLineEndingLF = new wxRadioButton(Panel7, ID_RADIOBUTTONLINEENDINGLF, _T("Unix(LF)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONLINEENDINGLF"));
-	SET_CONTROLPARENT(RadioButtonLineEndingLF);
+	Panel6 = new wxPanel(AuiNotebook1, ID_PANEL6, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_PANEL6"));
+	BoxSizer42 = new wxBoxSizer(wxHORIZONTAL);
+	BoxSizer43 = new wxBoxSizer(wxVERTICAL);
+	StaticBoxSizer9 = new wxStaticBoxSizer(wxVERTICAL, Panel6, _("Line Ending"));
+	RadioButtonNewDocLineEndingDefault = new wxRadioButton(Panel6, ID_RADIOBUTTONNEWDOCLINEENDINGDEFAULT, _("System Default"), wxDefaultPosition, wxDefaultSize, wxRB_GROUP, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCLINEENDINGDEFAULT"));
+	SET_CONTROLPARENT(RadioButtonNewDocLineEndingDefault);
+	StaticBoxSizer9->Add(RadioButtonNewDocLineEndingDefault, 0, wxALL|wxEXPAND, 2);
+	RadioButtonNewDocLineEndingCRLF = new wxRadioButton(Panel6, ID_RADIOBUTTONNEWDOCLINEENDINGCRLF, _("Windows(CR LF)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCLINEENDINGCRLF"));
+	SET_CONTROLPARENT(RadioButtonNewDocLineEndingCRLF);
+	StaticBoxSizer9->Add(RadioButtonNewDocLineEndingCRLF, 0, wxALL|wxEXPAND, 2);
+	RadioButtonNewDocLineEndingLF = new wxRadioButton(Panel6, ID_RADIOBUTTONNEWDOCLINEENDINGLF, _("Unix(LF)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCLINEENDINGLF"));
+	SET_CONTROLPARENT(RadioButtonNewDocLineEndingLF);
 	//SET_CONTROLPARENT(RadioBoxLineEnding);
-	StaticBoxSizer7->Add(RadioButtonLineEndingLF, 0, wxALL|wxEXPAND, 2);
-	RadioButtonLineEndingCR = new wxRadioButton(Panel7, ID_RADIOBUTTONLINEENDINGCR, _T("Macintosh"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONLINEENDINGCR"));
-	SET_CONTROLPARENT(RadioButtonLineEndingCR);
-	StaticBoxSizer7->Add(RadioButtonLineEndingCR, 0, wxALL|wxEXPAND, 2);
-	BoxSizer44->Add(StaticBoxSizer7, 0, wxALL|wxALIGN_LEFT, 5);
-	BoxSizer45 = new wxBoxSizer(wxVERTICAL);
-	StaticText20 = new wxStaticText(Panel7, wxID_ANY, _("Syntax:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
-	BoxSizer45->Add(StaticText20, 0, wxALL|wxEXPAND, 2);
-	ComboBoxSyntax = new wxComboBox(Panel7, ID_COMBOBOXSYNTAX, wxEmptyString, wxDefaultPosition, wxSize(160,-1), 0, 0, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXSYNTAX"));
-	SET_CONTROLPARENT(ComboBoxSyntax);
-	BoxSizer45->Add(ComboBoxSyntax, 0, wxALL|wxEXPAND, 2);
-	BoxSizer44->Add(BoxSizer45, 0, wxALL|wxALIGN_LEFT, 0);
-
-	GridSizer2->Add(BoxSizer44, 0, wxALL|wxALIGN_LEFT, 2);
-
-	BoxSizer46 = new wxBoxSizer(wxHORIZONTAL);
-	StaticBoxSizer8 = new wxStaticBoxSizer(wxVERTICAL, Panel7, _("Encoding"));
-	RadioButtonEncSystemDefault = new wxRadioButton(Panel7, ID_RADIOBUTTONENCSYSTEMDEFAULT, _("System Default"), wxDefaultPosition, wxDefaultSize, wxRB_GROUP, wxDefaultValidator, _T("ID_RADIOBUTTONENCSYSTEMDEFAULT"));
-	SET_CONTROLPARENT(RadioButtonEncSystemDefault);
-	StaticBoxSizer8->Add(RadioButtonEncSystemDefault, 0, wxALL|wxEXPAND, 2);
-	GridSizer1 = new wxGridSizer(0, 2, 0, 0);
-	RadioButtonEncUTF8 = new wxRadioButton(Panel7, ID_RADIOBUTTONENCUTF8, _T("UTF8"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONENCUTF8"));
-	SET_CONTROLPARENT(RadioButtonEncUTF8);
-	GridSizer1->Add(RadioButtonEncUTF8, 0, wxALL|wxEXPAND, 2);
-	CheckBoxEncUTF8WithBOM = new wxCheckBox(Panel7, ID_CHECKBOXENCUTF8WITHBOM, _("with BOM"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXENCUTF8WITHBOM"));
-	CheckBoxEncUTF8WithBOM->SetValue(false);
-	SET_CONTROLPARENT(CheckBoxEncUTF8WithBOM);
-	GridSizer1->Add(CheckBoxEncUTF8WithBOM, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	StaticBoxSizer8->Add(GridSizer1, 1, wxALL|wxALIGN_LEFT, 0);
-	BoxSizer48 = new wxBoxSizer(wxHORIZONTAL);
-	RadioButtonEncOther = new wxRadioButton(Panel7, ID_RADIOBUTTONENCOTHER, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONENCOTHER"));
-	SET_CONTROLPARENT(RadioButtonEncOther);
-	BoxSizer48->Add(RadioButtonEncOther, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	ComboBoxEncOther = new wxComboBox(Panel7, ID_COMBOBOXENCOTHER, wxEmptyString, wxDefaultPosition, wxSize(160,-1), 0, 0, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXENCOTHER"));
-	SET_CONTROLPARENT(ComboBoxEncOther);
-	BoxSizer48->Add(ComboBoxEncOther, 0, wxALL|wxEXPAND, 2);
-	StaticBoxSizer8->Add(BoxSizer48, 0, wxALL|wxEXPAND, 0);
-	BoxSizer46->Add(StaticBoxSizer8, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5);
-	GridSizer2->Add(BoxSizer46, 0, wxALL|wxALIGN_LEFT|wxALIGN_TOP, 2);
-	Panel7->SetSizer(GridSizer2);
-	GridSizer2->Fit(Panel7);
-	GridSizer2->SetSizeHints(Panel7);
+	StaticBoxSizer9->Add(RadioButtonNewDocLineEndingLF, 0, wxALL|wxEXPAND, 2);
+	RadioButtonNewDocLineEndingCR = new wxRadioButton(Panel6, ID_RADIOBUTTONNEWDOCLINEENDINGCR, _("Macintosh"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCLINEENDINGCR"));
+	SET_CONTROLPARENT(RadioButtonNewDocLineEndingCR);
+	StaticBoxSizer9->Add(RadioButtonNewDocLineEndingCR, 0, wxALL|wxEXPAND, 2);
+	BoxSizer43->Add(StaticBoxSizer9, 0, wxALL|wxALIGN_LEFT, 5);
+	BoxSizer49 = new wxBoxSizer(wxVERTICAL);
+	StaticText23 = new wxStaticText(Panel6, wxID_ANY, _("Syntax:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	BoxSizer49->Add(StaticText23, 0, wxALL|wxEXPAND, 2);
+	ComboBoxNewDocSyntax = new wxComboBox(Panel6, ID_COMBOBOXNEWDOCSYNTAX, wxEmptyString, wxDefaultPosition, wxSize(160,-1), 0, 0, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXNEWDOCSYNTAX"));
+	BoxSizer49->Add(ComboBoxNewDocSyntax, 0, wxALL|wxEXPAND, 2);
+	BoxSizer43->Add(BoxSizer49, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	BoxSizer42->Add(BoxSizer43, 0, wxALL|wxALIGN_TOP, 5);
+	BoxSizer47 = new wxBoxSizer(wxVERTICAL);
+	StaticBoxSizer10 = new wxStaticBoxSizer(wxVERTICAL, Panel6, _("Encoding"));
+	RadioButtonNewDocEncSystemDefault = new wxRadioButton(Panel6, ID_RADIOBUTTONNEWDOCENCSYSTEMDEFAULT, _("System Default"), wxDefaultPosition, wxDefaultSize, wxRB_GROUP, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCENCSYSTEMDEFAULT"));
+	SET_CONTROLPARENT(RadioButtonNewDocEncSystemDefault);
+	StaticBoxSizer10->Add(RadioButtonNewDocEncSystemDefault, 0, wxALL|wxEXPAND, 2);
+	GridSizer3 = new wxGridSizer(0, 2, 0, 0);
+	RadioButtonNewDocEncUTF8 = new wxRadioButton(Panel6, ID_RADIOBUTTONNEWDOCENCUTF8, _("UTF8"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCENCUTF8"));
+	SET_CONTROLPARENT(RadioButtonNewDocEncUTF8);
+	GridSizer3->Add(RadioButtonNewDocEncUTF8, 0, wxALL|wxEXPAND, 2);
+	CheckBoxNewDocEncUTF8WithBOM = new wxCheckBox(Panel6, ID_CHECKBOXNEWDOCENCUTF8WITHBOM, _("with BOM"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXNEWDOCENCUTF8WITHBOM"));
+	CheckBoxNewDocEncUTF8WithBOM->SetValue(false);
+	SET_CONTROLPARENT(CheckBoxNewDocEncUTF8WithBOM);
+	GridSizer3->Add(CheckBoxNewDocEncUTF8WithBOM, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	StaticBoxSizer10->Add(GridSizer3, 1, wxALL|wxALIGN_LEFT, 0);
+	BoxSizer50 = new wxBoxSizer(wxHORIZONTAL);
+	RadioButtonNewDocEncOther = new wxRadioButton(Panel6, ID_RADIOBUTTONNEWDOCENCOTHER, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCENCOTHER"));
+	SET_CONTROLPARENT(RadioButtonNewDocEncOther);
+	BoxSizer50->Add(RadioButtonNewDocEncOther, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	ComboBoxNewDocEncOther = new wxComboBox(Panel6, ID_COMBOBOXNEWDOCENCOTHER, wxEmptyString, wxDefaultPosition, wxSize(160,-1), 0, 0, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXNEWDOCENCOTHER"));
+	SET_CONTROLPARENT(ComboBoxNewDocEncOther);
+	BoxSizer50->Add(ComboBoxNewDocEncOther, 0, wxALL|wxEXPAND, 2);
+	StaticBoxSizer10->Add(BoxSizer50, 0, wxALL|wxEXPAND, 0);
+	BoxSizer47->Add(StaticBoxSizer10, 0, wxALL|wxALIGN_LEFT, 5);
+	BoxSizer51 = new wxBoxSizer(wxVERTICAL);
+	StaticText24 = new wxStaticText(Panel6, wxID_ANY, _("Font:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	BoxSizer51->Add(StaticText24, 0, wxALL|wxEXPAND, 2);
+	ComboBoxNewDocFont = new wxComboBox(Panel6, ID_COMBOBOXNEWDOCFONT, wxEmptyString, wxDefaultPosition, wxSize(160,-1), 0, 0, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXNEWDOCFONT"));
+	SET_CONTROLPARENT(ComboBoxNewDocFont);
+	BoxSizer51->Add(ComboBoxNewDocFont, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	BoxSizer47->Add(BoxSizer51, 0, wxALL|wxALIGN_LEFT, 5);
+	BoxSizer52 = new wxBoxSizer(wxVERTICAL);
+	StaticText25 = new wxStaticText(Panel6, wxID_ANY, _("Font Size:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	BoxSizer52->Add(StaticText25, 0, wxALL|wxEXPAND, 2);
+	EditNewDocFontSize = new wxTextCtrl(Panel6, ID_TEXTCTRLNEWDOCFONTSIZE, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRLNEWDOCFONTSIZE"));
+	EditNewDocFontSize->SetMaxLength(2);
+	SET_CONTROLPARENT(EditNewDocFontSize);
+	BoxSizer52->Add(EditNewDocFontSize, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	BoxSizer47->Add(BoxSizer52, 0, wxALL|wxALIGN_LEFT, 5);
+	BoxSizer42->Add(BoxSizer47, 0, wxALL|wxALIGN_TOP, 5);
+	Panel6->SetSizer(BoxSizer42);
+	BoxSizer42->Fit(Panel6);
+	BoxSizer42->SetSizeHints(Panel6);
 	Panel3 = new wxPanel(AuiNotebook1, ID_PANEL3, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_PANEL3"));
 	BoxSizer14 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer15 = new wxBoxSizer(wxVERTICAL);
@@ -862,7 +902,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	BoxSizer34->Add(CheckBoxPersonalDict, 0, wxALL|wxEXPAND, 2);
 	BoxSizer36->Add(BoxSizer34, 0, wxALL|wxALIGN_LEFT, 2);
 	StaticBoxSizer5 = new wxStaticBoxSizer(wxHORIZONTAL, Panel5, _("Language"));
-	ChoiceDictionary = new wxChoice(Panel5, ID_CHOICEDICTIONARY, wxDefaultPosition, wxSize(200,21), 0, 0, 0, wxDefaultValidator, _T("ID_CHOICEDICTIONARY"));
+	ChoiceDictionary = new wxChoice(Panel5, ID_CHOICEDICTIONARY, wxDefaultPosition, wxSize(200,-1), 0, 0, 0, wxDefaultValidator, _T("ID_CHOICEDICTIONARY"));
 	StaticBoxSizer5->Add(ChoiceDictionary, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	SET_CONTROLPARENT(ChoiceDictionary);
 	StaticText17 = new wxStaticText(Panel5, ID_STATICTEXT17, _("Dictionary"), wxDefaultPosition, wxSize(200,-1), 0, _T("ID_STATICTEXT17"));
@@ -881,7 +921,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	BoxSizer36->SetSizeHints(Panel5);
 	AuiNotebook1->AddPage(Panel1, _("General"));
 	AuiNotebook1->AddPage(Panel2, _("Edit"));
-	AuiNotebook1->AddPage(Panel7, _("New Document"));
+	AuiNotebook1->AddPage(Panel6, _("New Document"));
 	AuiNotebook1->AddPage(Panel3, _("Print"));
 	AuiNotebook1->AddPage(Panel4, _("Keys"));
 	AuiNotebook1->AddPage(Panel5, _("SpellChecker"));
@@ -908,12 +948,12 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	Connect(ID_BUTTONDATETIME,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadOptionsDialog::ButtonDateTimeClick);
 	Connect(ID_CHECKBOXAUTOCOMPLETEPAIR,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&MadOptionsDialog::CheckBoxAutoCompletePairClick);
 	Connect(ID_CHECKBOXMOUSESELECTTOCOPY,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&MadOptionsDialog::CheckBoxMouseSelectToCopyClick);
-	Connect(ID_RADIOBUTTONLINEENDINGCRLF,wxEVT_COMMAND_RADIOBUTTON_SELECTED,(wxObjectEventFunction)&MadOptionsDialog::RadioButtonLineEndingSelect);
-	Connect(ID_RADIOBUTTONLINEENDINGLF,wxEVT_COMMAND_RADIOBUTTON_SELECTED,(wxObjectEventFunction)&MadOptionsDialog::RadioButtonLineEndingSelect);
-	Connect(ID_RADIOBUTTONLINEENDINGCR,wxEVT_COMMAND_RADIOBUTTON_SELECTED,(wxObjectEventFunction)&MadOptionsDialog::RadioButtonLineEndingSelect);
-	Connect(ID_RADIOBUTTONENCSYSTEMDEFAULT,wxEVT_COMMAND_RADIOBUTTON_SELECTED,(wxObjectEventFunction)&MadOptionsDialog::RadioButtonEncSelect);
-	Connect(ID_RADIOBUTTONENCUTF8,wxEVT_COMMAND_RADIOBUTTON_SELECTED,(wxObjectEventFunction)&MadOptionsDialog::RadioButtonEncSelect);
-	Connect(ID_RADIOBUTTONENCOTHER,wxEVT_COMMAND_RADIOBUTTON_SELECTED,(wxObjectEventFunction)&MadOptionsDialog::RadioButtonEncSelect);
+	Connect(ID_RADIOBUTTONNEWDOCLINEENDINGCRLF,wxEVT_COMMAND_RADIOBUTTON_SELECTED,(wxObjectEventFunction)&MadOptionsDialog::RadioButtonNewDocLineEndingSelect);
+	Connect(ID_RADIOBUTTONNEWDOCLINEENDINGLF,wxEVT_COMMAND_RADIOBUTTON_SELECTED,(wxObjectEventFunction)&MadOptionsDialog::RadioButtonNewDocLineEndingSelect);
+	Connect(ID_RADIOBUTTONNEWDOCLINEENDINGCR,wxEVT_COMMAND_RADIOBUTTON_SELECTED,(wxObjectEventFunction)&MadOptionsDialog::RadioButtonNewDocLineEndingSelect);
+	Connect(ID_RADIOBUTTONNEWDOCENCSYSTEMDEFAULT,wxEVT_COMMAND_RADIOBUTTON_SELECTED,(wxObjectEventFunction)&MadOptionsDialog::RadioButtonNewDocEncSelect);
+	Connect(ID_RADIOBUTTONNEWDOCENCUTF8,wxEVT_COMMAND_RADIOBUTTON_SELECTED,(wxObjectEventFunction)&MadOptionsDialog::RadioButtonNewDocEncSelect);
+	Connect(ID_RADIOBUTTONNEWDOCENCOTHER,wxEVT_COMMAND_RADIOBUTTON_SELECTED,(wxObjectEventFunction)&MadOptionsDialog::RadioButtonNewDocEncSelect);
 	Connect(ID_TREECTRL1,wxEVT_COMMAND_TREE_SEL_CHANGED,(wxObjectEventFunction)&MadOptionsDialog::TreeCtrl1SelChanged);
 	Connect(ID_LISTBOXKEYS,wxEVT_COMMAND_LISTBOX_SELECTED,(wxObjectEventFunction)&MadOptionsDialog::ListBoxKeysSelected);
 	Connect(ID_BUTTONADDKEY,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadOptionsDialog::ButtonAddKeyClick);
@@ -1000,7 +1040,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	for (i = 0; i < cnt; ++i)
 	{
 		ComboBoxEncoding->Append(MadEncoding::GetEncodingName(i)); //enc+des);
-		ComboBoxEncOther->Append(MadEncoding::GetEncodingName(i));
+		ComboBoxNewDocEncOther->Append(MadEncoding::GetEncodingName(i));
 	}
 
 	ComboBoxEncoding->SetValue(systemenc);
@@ -1014,13 +1054,26 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	cnt=MadSyntax::GetSyntaxCount();
 	for(size_t i=0; i<cnt; ++i)
 	{
-		ComboBoxSyntax->Append(MadSyntax::GetSyntaxTitle(i));
+		ComboBoxNewDocSyntax->Append(MadSyntax::GetSyntaxTitle(i));
 	}
-	int index = ComboBoxSyntax->FindString(_T("Plain Text"));
+	int index = ComboBoxNewDocSyntax->FindString(_T("Plain Text"));
 	if(index != wxNOT_FOUND)
-		ComboBoxSyntax->SetSelection(index);
+		ComboBoxNewDocSyntax->SetSelection(index);
 	m_NewDocEncoding = _("System Default");
-	m_NewDocLineEndig = nltDefault;
+	m_NewDocLineEnding = nltDefault;
+	index = ComboBoxNewDocSyntax->FindString(_T("Plain Text"));
+
+#ifdef __WXMSW__
+	wxString fontname( wxT( "Courier New" ) );
+#elif defined(__APPLE__) && defined(__MACH__)
+	wxString fontname( wxT( "Monaco" ) );
+#else
+	wxString fontname( wxT( "Monospace" ) );
+#endif
+	index = ComboBoxDefaultFont->FindString(fontname);
+	if(index != wxNOT_FOUND) ComboBoxDefaultFont->SetSelection(index);
+	index = ComboBoxNewDocFont->FindString(fontname);
+	if(index != wxNOT_FOUND) ComboBoxNewDocFont->SetSelection(index);
 
 	wxSize sz1 = BoxSizer3->CalcMin();
 	wxSize sz2 = BoxSizer8->CalcMin();
@@ -1146,6 +1199,13 @@ void MadOptionsDialog::LoadOptions(void)
 	long ll;
 	bool bb;
 	wxString ss;
+#ifdef __WXMSW__
+	wxString fontname( wxT( "Courier New" ) );
+#elif defined(__APPLE__) && defined(__MACH__)
+	wxString fontname( wxT( "Monaco" ) );
+#else
+	wxString fontname( wxT( "Monospace" ) );
+#endif
 	// General page
 	ss = g_LanguageString[0];
 	cfg->Read( wxT( "Language" ), &ss );
@@ -1163,6 +1223,15 @@ void MadOptionsDialog::LoadOptions(void)
 	ss = _( "System Default" );
 	cfg->Read( wxT( "DefaultEncoding" ), &ss );
 	ComboBoxEncoding->SetValue( ss );
+
+	cfg->Read( wxT( "DefaultTextFont" ), &fontname );
+	int index = ComboBoxDefaultFont->FindString(fontname);
+	if(index != wxNOT_FOUND) ComboBoxDefaultFont->SetSelection(index);
+	cfg->Read( wxT( "DefaultTextFontSize" ), &ll, DEFAULT_FONT_SIZE );
+	if(ll < 0) ll = DEFAULT_FONT_SIZE;
+	if(ll > MAX_FONT_SIZE) ll = MAX_FONT_SIZE;
+	EditDefaultFontSize->SetValue( wxString() << ll );
+
 	cfg->Read( wxT( "AutoSaveTimeout" ), &ll, 0 );
 	bb = ((ll >= 10) && (ll <= 30));
 	CheckBoxEnableAutoSave->SetValue( bb );
@@ -1187,6 +1256,7 @@ void MadOptionsDialog::LoadOptions(void)
 
 	delete pRegKey;
 #endif
+
 	// Edit page
 	cfg->Read( wxT( "MaxLineLength" ), &ll );
 	EditMaxLineLength->SetValue( wxString() << ll );
@@ -1236,32 +1306,32 @@ void MadOptionsDialog::LoadOptions(void)
 	CheckBoxRestoreCaretPos->SetValue( bb );
 
 	// New Document
-	cfg->Read( wxT( "NewDocumentLineEnding" ), &m_NewDocLineEndig );
-	switch(m_NewDocLineEndig)
+	cfg->Read( wxT( "NewDocumentLineEnding" ), &m_NewDocLineEnding );
+	switch(m_NewDocLineEnding)
 	{
 	case nltDefault:
-		RadioButtonLineEndingCR->SetValue(false);
-		RadioButtonLineEndingCRLF->SetValue(false);
-		RadioButtonLineEndingDefault->SetValue(true);
-		RadioButtonLineEndingLF->SetValue(false);
+		RadioButtonNewDocLineEndingCR->SetValue(false);
+		RadioButtonNewDocLineEndingCRLF->SetValue(false);
+		RadioButtonNewDocLineEndingDefault->SetValue(true);
+		RadioButtonNewDocLineEndingLF->SetValue(false);
 		break;
 	case nltDOS:
-		RadioButtonLineEndingCR->SetValue(false);
-		RadioButtonLineEndingCRLF->SetValue(true);
-		RadioButtonLineEndingDefault->SetValue(false);
-		RadioButtonLineEndingLF->SetValue(false);
+		RadioButtonNewDocLineEndingCR->SetValue(false);
+		RadioButtonNewDocLineEndingCRLF->SetValue(true);
+		RadioButtonNewDocLineEndingDefault->SetValue(false);
+		RadioButtonNewDocLineEndingLF->SetValue(false);
 		break;
 	case nltUNIX:
-		RadioButtonLineEndingCR->SetValue(false);
-		RadioButtonLineEndingCRLF->SetValue(false);
-		RadioButtonLineEndingDefault->SetValue(false);
-		RadioButtonLineEndingLF->SetValue(true);
+		RadioButtonNewDocLineEndingCR->SetValue(false);
+		RadioButtonNewDocLineEndingCRLF->SetValue(false);
+		RadioButtonNewDocLineEndingDefault->SetValue(false);
+		RadioButtonNewDocLineEndingLF->SetValue(true);
 		break;
 	case nltMAC:
-		RadioButtonLineEndingCR->SetValue(true);
-		RadioButtonLineEndingCRLF->SetValue(false);
-		RadioButtonLineEndingDefault->SetValue(false);
-		RadioButtonLineEndingLF->SetValue(false);
+		RadioButtonNewDocLineEndingCR->SetValue(true);
+		RadioButtonNewDocLineEndingCRLF->SetValue(false);
+		RadioButtonNewDocLineEndingDefault->SetValue(false);
+		RadioButtonNewDocLineEndingLF->SetValue(false);
 		break;
 	default:
 		wxASSERT(0);
@@ -1269,46 +1339,63 @@ void MadOptionsDialog::LoadOptions(void)
 
 	ss = wxT("Plain Text");
 	cfg->Read( wxT( "NewDocumentSyntax" ), &ss );
-	int index = ComboBoxSyntax->FindString(ss);
+	index = ComboBoxNewDocSyntax->FindString(ss);
 	if(index == wxNOT_FOUND) index = 0;
-	ComboBoxSyntax->SetSelection(index);
+	ComboBoxNewDocSyntax->SetSelection(index);
 
 	m_NewDocEncoding = _( "System Default" );
 	cfg->Read( wxT( "NewDocumentEncoding" ), &m_NewDocEncoding );
 	wxFontEncoding enc = wxFontMapper::GetEncodingFromName( m_NewDocEncoding );
-	index = ComboBoxEncOther->FindString(m_NewDocEncoding);
+	index = ComboBoxNewDocEncOther->FindString(m_NewDocEncoding);
 	if (wxFONTENCODING_MAX == enc || wxFONTENCODING_DEFAULT == enc || index == wxNOT_FOUND)
 		enc = wxFONTENCODING_SYSTEM;
 
 	if(wxFONTENCODING_UTF8 == enc)
 	{
-		CheckBoxEncUTF8WithBOM->Enable(true);
-		ComboBoxEncOther->Enable(false);
+		CheckBoxNewDocEncUTF8WithBOM->Enable(true);
+		ComboBoxNewDocEncOther->Enable(false);
 		
-		RadioButtonEncOther->SetValue(false);
-		RadioButtonEncSystemDefault->SetValue(false);
-		RadioButtonEncUTF8->SetValue(true);
+		RadioButtonNewDocEncOther->SetValue(false);
+		RadioButtonNewDocEncSystemDefault->SetValue(false);
+		RadioButtonNewDocEncUTF8->SetValue(true);
 	}
 	else
 	{
-		CheckBoxEncUTF8WithBOM->Enable(false);
-		RadioButtonEncUTF8->SetValue(false);
+		CheckBoxNewDocEncUTF8WithBOM->Enable(false);
+		RadioButtonNewDocEncUTF8->SetValue(false);
 		if(wxFONTENCODING_SYSTEM == enc)
 		{
-			ComboBoxEncOther->Enable(false);
-			RadioButtonEncOther->SetValue(false);
-			RadioButtonEncSystemDefault->SetValue(true);
+			ComboBoxNewDocEncOther->Enable(false);
+			RadioButtonNewDocEncOther->SetValue(false);
+			RadioButtonNewDocEncSystemDefault->SetValue(true);
 		}
 		else
 		{
-			ComboBoxEncOther->Enable(true);
-			ComboBoxEncOther->SetSelection(index);
-			RadioButtonEncOther->SetValue(true);
-			RadioButtonEncSystemDefault->SetValue(false);
+			ComboBoxNewDocEncOther->Enable(true);
+			ComboBoxNewDocEncOther->SetSelection(index);
+			RadioButtonNewDocEncOther->SetValue(true);
+			RadioButtonNewDocEncSystemDefault->SetValue(false);
 		}
 	}
+
 	cfg->Read( wxT( "NewDocumentEncodingUTF8WithBOM" ), &bb, false );
-	CheckBoxEncUTF8WithBOM->SetValue( bb );
+	CheckBoxNewDocEncUTF8WithBOM->SetValue( bb );
+
+#ifdef __WXMSW__
+	fontname = wxString( wxT( "Courier New" ) );
+#elif defined(__APPLE__) && defined(__MACH__)
+	fontname = wxString( wxT( "Monaco" ) );
+#else
+	fontname = wxString( wxT( "Monospace" ) );
+#endif
+	cfg->Read( wxT( "NewDocumentTextFont" ), &fontname );
+	index = ComboBoxNewDocFont->FindString(fontname);
+	if(index != wxNOT_FOUND) ComboBoxNewDocFont->SetSelection(index);
+
+	cfg->Read( wxT( "NewDocumentTextFontSize" ), &ll, DEFAULT_FONT_SIZE );
+	if(ll < 0) ll = DEFAULT_FONT_SIZE;
+	if(ll > MAX_FONT_SIZE) ll = MAX_FONT_SIZE;
+	EditNewDocFontSize->SetValue( wxString() << ll );
 
 	// Print page
 	cfg->Read( wxT( "PrintSyntax" ), &bb );
@@ -1807,46 +1894,46 @@ void MadOptionsDialog::OnMarginClick( wxStyledTextEvent &event )
 }
 #endif
 
-void MadOptionsDialog::RadioButtonEncSelect(wxCommandEvent& event)
+void MadOptionsDialog::RadioButtonNewDocEncSelect(wxCommandEvent& event)
 {
-	if(ID_RADIOBUTTONENCUTF8 == event.GetId())
+	if(ID_RADIOBUTTONNEWDOCENCUTF8 == event.GetId())
 	{
-		CheckBoxEncUTF8WithBOM->Enable(true);
-		ComboBoxEncOther->Enable(false);
+		CheckBoxNewDocEncUTF8WithBOM->Enable(true);
+		ComboBoxNewDocEncOther->Enable(false);
 		m_NewDocEncoding = wxFontMapper::GetEncodingName(wxFONTENCODING_UTF8);
 	}
 	else
 	{
-		CheckBoxEncUTF8WithBOM->Enable(false);
-		if(ID_RADIOBUTTONENCOTHER == event.GetId())
+		CheckBoxNewDocEncUTF8WithBOM->Enable(false);
+		if(ID_RADIOBUTTONNEWDOCENCOTHER == event.GetId())
 		{
-			ComboBoxEncOther->Enable(true);
-			m_NewDocEncoding = ComboBoxEncOther->GetString(ComboBoxEncOther->GetSelection());
+			ComboBoxNewDocEncOther->Enable(true);
+			m_NewDocEncoding = ComboBoxNewDocEncOther->GetString(ComboBoxNewDocEncOther->GetSelection());
 		}
 		else
 		{
-			ComboBoxEncOther->Enable(false);
+			ComboBoxNewDocEncOther->Enable(false);
 			m_NewDocEncoding = _("System Default");
 		}
 	}
 }
 
-void MadOptionsDialog::RadioButtonLineEndingSelect(wxCommandEvent& event)
+void MadOptionsDialog::RadioButtonNewDocLineEndingSelect(wxCommandEvent& event)
 {
-	if (event.GetId() == ID_RADIOBUTTONLINEENDINGCRLF)
+	if (event.GetId() == ID_RADIOBUTTONNEWDOCLINEENDINGCRLF)
 	{
-		m_NewDocLineEndig = nltDOS;
+		m_NewDocLineEnding = nltDOS;
 	}
-	else if (event.GetId() == ID_RADIOBUTTONLINEENDINGLF)
+	else if (event.GetId() == ID_RADIOBUTTONNEWDOCLINEENDINGLF)
 	{
-		m_NewDocLineEndig = nltUNIX;
+		m_NewDocLineEnding = nltUNIX;
 	}
-	else if (event.GetId() == ID_RADIOBUTTONLINEENDINGCR)
+	else if (event.GetId() == ID_RADIOBUTTONNEWDOCLINEENDINGCR)
 	{
-		m_NewDocLineEndig = nltMAC;
+		m_NewDocLineEnding = nltMAC;
 	}
 	else
 	{
-		m_NewDocLineEndig = nltDefault;
+		m_NewDocLineEnding = nltDefault;
 	}
 }

@@ -7981,7 +7981,11 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		m_Config->Write( wxT( "MaxTextFileSize" ), g_OptionsDialog->EditMaxTextFileSize->GetValue() );
 		mds = g_OptionsDialog->EditMaxDisplaySize->GetValue();
 		m_Config->Write( wxT( "MaxDisplaySize" ), mds );
-		m_Config->Write( wxT( "DefaultEncoding" ), g_OptionsDialog->ComboBoxEncoding->GetValue() );
+		m_Config->Write( wxT( "DefaultEncoding" ), g_OptionsDialog->ComboBoxEncoding->GetValue() );		
+		m_Config->Write( wxT( "DefaultTextFont" ), g_OptionsDialog->ComboBoxDefaultFont->GetValue() );
+		ll = 0;
+		g_OptionsDialog->EditDefaultFontSize->GetValue().ToLong(&ll);
+		m_Config->Write(wxT("DefaultTextFontSize"), ll);
 		ll = 0;
 		if (g_OptionsDialog->CheckBoxEnableAutoSave->GetValue()) g_OptionsDialog->EditAutoSaveTimeout->GetValue().ToLong(&ll);
 		m_Config->Write( wxT( "AutoSaveTimeout" ), ll );
@@ -8065,10 +8069,11 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		else { g_ForcePurgeThisTime = false; }
 
 		//New Document
-		m_Config->Write( wxT( "NewDocumentLineEnding" ), g_OptionsDialog->m_NewDocLineEndig );
+		m_Config->Write( wxT( "NewDocumentLineEnding" ), g_OptionsDialog->m_NewDocLineEnding );
 		m_Config->Write( wxT( "NewDocumentEncoding" ), g_OptionsDialog->m_NewDocEncoding );
-		m_Config->Write( wxT( "NewDocumentEncodingUTF8WithBOM" ), g_OptionsDialog->CheckBoxEncUTF8WithBOM->GetValue() );
-		m_Config->Write( wxT( "NewDocumentSyntax" ), g_OptionsDialog->ComboBoxSyntax->GetValue() );
+		m_Config->Write( wxT( "NewDocumentEncodingUTF8WithBOM" ), g_OptionsDialog->CheckBoxNewDocEncUTF8WithBOM->GetValue() );
+		m_Config->Write( wxT( "NewDocumentSyntax" ), g_OptionsDialog->ComboBoxNewDocSyntax->GetValue() );
+		m_Config->Write( wxT( "NewDocumentTextFont" ), g_OptionsDialog->ComboBoxNewDocFont->GetValue() );
 
 		//Print
 		bool bb;

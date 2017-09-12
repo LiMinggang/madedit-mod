@@ -15,21 +15,21 @@
 #endif
 // disable 4996 {
 //(*Headers(MadOptionsDialog)
-#include <wx/aui/aui.h>
-#include <wx/button.h>
-#include <wx/checkbox.h>
-#include <wx/choice.h>
-#include <wx/combobox.h>
-#include <wx/dialog.h>
-#include <wx/listbox.h>
-#include <wx/menu.h>
-#include <wx/panel.h>
-#include <wx/radiobox.h>
-#include <wx/radiobut.h>
+#include <wx/treectrl.h>
 #include <wx/sizer.h>
 #include <wx/stattext.h>
+#include <wx/radiobox.h>
+#include <wx/menu.h>
 #include <wx/textctrl.h>
-#include <wx/treectrl.h>
+#include <wx/checkbox.h>
+#include <wx/listbox.h>
+#include <wx/aui/aui.h>
+#include <wx/radiobut.h>
+#include <wx/panel.h>
+#include <wx/choice.h>
+#include <wx/button.h>
+#include <wx/dialog.h>
+#include <wx/combobox.h>
 //*)
 // disable 4996 }
 #ifdef _MSC_VER
@@ -69,118 +69,121 @@ class MadOptionsDialog: public wxDialog
 		virtual ~MadOptionsDialog();
 
 		//(*Declarations(MadOptionsDialog)
-		KeyTextCtrl* EditKey;
-		wxAuiNotebook* AuiNotebook1;
-		wxButton* Button1;
-		wxButton* Button2;
-		wxButton* Button3;
-		wxButton* Button4;
-		wxButton* Button5;
-		wxButton* Button6;
-		wxButton* ButtonAddKey;
-		wxButton* ButtonCancel;
-		wxButton* ButtonDateTime;
-		wxButton* ButtonDeleteKey;
-		wxButton* ButtonDictionaryDir;
-		wxButton* ButtonOK;
-		wxButton* ButtonShowInMenu;
-		wxCheckBox* CheckBoxAutoCompletePair;
-		wxCheckBox* CheckBoxAutoFillColumnPaste;
-		wxCheckBox* CheckBoxAutoIndent;
-		wxCheckBox* CheckBoxCtrlWithMouseToSelect;
-		wxCheckBox* CheckBoxDateTimeInEnglish;
-		wxCheckBox* CheckBoxDoNotSaveSettings;
-		wxCheckBox* CheckBoxEnableAutoBackup;
-		wxCheckBox* CheckBoxEnableAutoSave;
-		wxCheckBox* CheckBoxEncUTF8WithBOM;
-		wxCheckBox* CheckBoxFixWidthMode;
-		wxCheckBox* CheckBoxInsertPairForSelection;
-		wxCheckBox* CheckBoxLDClickHighlight;
-		wxCheckBox* CheckBoxMiddleMouseToPaste;
-		wxCheckBox* CheckBoxMouseSelectToCopy;
-		wxCheckBox* CheckBoxPersonalDict;
-		wxCheckBox* CheckBoxPrintBookmark;
-		wxCheckBox* CheckBoxPrintEndOfLine;
-		wxCheckBox* CheckBoxPrintLineNumber;
-		wxCheckBox* CheckBoxPrintPageFooter;
-		wxCheckBox* CheckBoxPrintPageHeader;
-		wxCheckBox* CheckBoxPrintSpaceChar;
-		wxCheckBox* CheckBoxPrintSyntax;
-		wxCheckBox* CheckBoxPrintTabChar;
-		wxCheckBox* CheckBoxPurgeHistory;
-		wxCheckBox* CheckBoxRecordCaretMovements;
-		wxCheckBox* CheckBoxReloadFiles;
-		wxCheckBox* CheckBoxResetAllKeys;
-		wxCheckBox* CheckBoxRestoreCaretPos;
-#ifdef __WXMSW__
-		wxCheckBox *CheckBoxRightClickMenu;
-#endif
-		wxCheckBox* CheckBoxShowQSearchBar;
-		wxCheckBox* CheckBoxSingleInstance;
-		wxCheckBox* CheckBoxTabOrSpaces;
-		wxCheckBox* CheckBoxTypewriterMode;
-		wxChoice* ChoiceDictionary;
-		wxComboBox* ComboBoxEncOther;
-		wxComboBox* ComboBoxEncoding;
-		wxComboBox* ComboBoxLanguage;
-		wxComboBox* ComboBoxSyntax;
-		wxListBox* ListBoxKeys;
-		wxMenu PopupMenuDateTimeMark;
-		wxMenu PopupMenuPrintMark;
-		wxPanel* Panel1;
-		wxPanel* Panel2;
-		wxPanel* Panel3;
-		wxPanel* Panel4;
-		wxPanel* Panel5;
-		wxPanel* Panel7;
-		wxRadioBox* RadioBoxPrintOffset;
-		wxRadioButton* RadioButtonEncOther;
-		wxRadioButton* RadioButtonEncSystemDefault;
-		wxRadioButton* RadioButtonEncUTF8;
-		wxRadioButton* RadioButtonLineEndingCR;
-		wxRadioButton* RadioButtonLineEndingCRLF;
-		wxRadioButton* RadioButtonLineEndingDefault;
-		wxRadioButton* RadioButtonLineEndingLF;
 		wxStaticText* StaticText10;
-		wxStaticText* StaticText11;
-		wxStaticText* StaticText12;
-		wxStaticText* StaticText13;
-		wxStaticText* StaticText14;
-		wxStaticText* StaticText15;
-		wxStaticText* StaticText16;
-		wxStaticText* StaticText17;
-		wxStaticText* StaticText18;
-		wxStaticText* StaticText1;
-		wxStaticText* StaticText2;
-		wxStaticText* StaticText3;
-		wxStaticText* StaticText4;
-		wxStaticText* StaticText5;
-		wxStaticText* StaticText6;
-		wxStaticText* StaticText7;
-		wxStaticText* StaticText8;
+		wxComboBox* ComboBoxEncoding;
 		wxStaticText* StaticText9;
-		wxStaticText* StaticTextAutoSaveTimeout;
-		wxStaticText* StaticTextCommandHint;
-		wxStaticText* StaticTextDateTime;
 		wxTextCtrl* EditAutoSaveTimeout;
+#ifdef __WXMSW__
+		wxCheckBox* CheckBoxRightClickMenu;
+#endif
+		wxTextCtrl* EditDefaultFontSize;
+		wxCheckBox* CheckBoxRecordCaretMovements;
+		wxPanel* Panel5;
+		wxMenu PopupMenuDateTimeMark;
+		wxCheckBox* CheckBoxAutoIndent;
+		wxCheckBox* CheckBoxNewDocEncUTF8WithBOM;
+		wxButton* Button4;
+		wxCheckBox* CheckBoxRestoreCaretPos;
+		wxCheckBox* CheckBoxAutoFillColumnPaste;
+		wxTextCtrl* EditTabColumns;
+		wxComboBox* ComboBoxNewDocFont;
+		wxStaticText* StaticText13;
+		wxStaticText* StaticText2;
+		wxPanel* Panel4;
+		wxListBox* ListBoxKeys;
+		wxTextCtrl* EditMaxLineLength;
+		wxStaticText* StaticText14;
+		wxTextCtrl* EditMaxColumns;
+		wxRadioButton* RadioButtonNewDocEncSystemDefault;
 		wxTextCtrl* EditCommandHint;
-		wxTextCtrl* EditDateTime;
-		wxTextCtrl* EditDictionaryDir;
+		wxButton* Button1;
+		wxStaticText* StaticText6;
+		wxCheckBox* CheckBoxPrintPageHeader;
+		wxComboBox* ComboBoxLanguage;
+		wxMenu PopupMenuPrintMark;
+		wxButton* ButtonOK;
+		wxCheckBox* CheckBoxDateTimeInEnglish;
+		wxStaticText* StaticTextAutoSaveTimeout;
+		wxRadioBox* RadioBoxPrintOffset;
+		wxButton* ButtonDateTime;
+		wxStaticText* StaticText8;
+		wxStaticText* StaticText11;
 		wxTextCtrl* EditFooterCenter;
+		wxCheckBox* CheckBoxPrintTabChar;
+		wxButton* ButtonDeleteKey;
+		wxTextCtrl* EditHeaderLeft;
+		wxRadioButton* RadioButtonNewDocLineEndingLF;
+		wxPanel* Panel1;
+		wxCheckBox* CheckBoxInsertPairForSelection;
+		wxStaticText* StaticText1;
+		wxCheckBox* CheckBoxPrintPageFooter;
+		wxCheckBox* CheckBoxDoNotSaveSettings;
+		wxStaticText* StaticText3;
+		wxButton* ButtonShowInMenu;
+		wxRadioButton* RadioButtonNewDocLineEndingDefault;
+		wxButton* Button2;
+		wxPanel* Panel6;
+		wxPanel* Panel3;
+		wxTextCtrl* EditMaxSizeToLoad;
+		wxButton* Button6;
+		wxTextCtrl* EditIndentColumns;
+		wxCheckBox* CheckBoxSingleInstance;
+		wxButton* ButtonDictionaryDir;
+		wxStaticText* StaticTextDateTime;
+		wxCheckBox* CheckBoxPersonalDict;
+		wxCheckBox* CheckBoxPrintSyntax;
+		wxButton* ButtonCancel;
+		wxButton* Button5;
+		wxRadioButton* RadioButtonNewDocEncUTF8;
+		wxRadioButton* RadioButtonNewDocLineEndingCRLF;
+		wxCheckBox* CheckBoxMiddleMouseToPaste;
+		wxButton* ButtonAddKey;
+		wxButton* Button3;
+		wxTextCtrl* EditMaxDisplaySize;
+		wxStaticText* StaticText5;
+		wxStaticText* StaticText7;
+		wxCheckBox* CheckBoxTypewriterMode;
+		wxCheckBox* CheckBoxCtrlWithMouseToSelect;
+		wxRadioButton* RadioButtonNewDocEncOther;
+		wxTreeCtrl* TreeCtrl1;
+		wxCheckBox* CheckBoxFixWidthMode;
+		wxCheckBox* CheckBoxShowQSearchBar;
+		wxAuiNotebook* AuiNotebook1;
+		wxRadioButton* RadioButtonNewDocLineEndingCR;
+		wxCheckBox* CheckBoxTabOrSpaces;
+		wxTextCtrl* EditDictionaryDir;
+		wxChoice* ChoiceDictionary;
+		wxTextCtrl* EditDateTime;
+		wxStaticText* StaticText15;
+		wxStaticText* StaticText12;
 		wxTextCtrl* EditFooterLeft;
+		wxCheckBox* CheckBoxPrintBookmark;
+		wxCheckBox* CheckBoxReloadFiles;
+		wxPanel* Panel2;
+		wxTextCtrl* EditNewDocFontSize;
+		wxCheckBox* CheckBoxLDClickHighlight;
+		wxCheckBox* CheckBoxEnableAutoBackup;
+		wxComboBox* ComboBoxNewDocSyntax;
+		wxCheckBox* CheckBoxAutoCompletePair;
+		wxCheckBox* CheckBoxPrintEndOfLine;
+		wxCheckBox* CheckBoxPrintSpaceChar;
+		wxCheckBox* CheckBoxPrintLineNumber;
+		wxStaticText* StaticText17;
+		wxTextCtrl* EditHeaderRight;
+		wxStaticText* StaticText4;
+		KeyTextCtrl* EditKey;
+		wxComboBox* ComboBoxNewDocEncOther;
+		wxComboBox* ComboBoxDefaultFont;
+		wxCheckBox* CheckBoxResetAllKeys;
+		wxCheckBox* CheckBoxPurgeHistory;
+		wxCheckBox* CheckBoxMouseSelectToCopy;
+		wxStaticText* StaticText16;
+		wxStaticText* StaticTextCommandHint;
+		wxTextCtrl* EditMaxTextFileSize;
+		wxTextCtrl* EditKeyHint;
 		wxTextCtrl* EditFooterRight;
 		wxTextCtrl* EditHeaderCenter;
-		wxTextCtrl* EditHeaderLeft;
-		wxTextCtrl* EditHeaderRight;
-		wxTextCtrl* EditIndentColumns;
-		wxTextCtrl* EditKeyHint;
-		wxTextCtrl* EditMaxColumns;
-		wxTextCtrl* EditMaxDisplaySize;
-		wxTextCtrl* EditMaxLineLength;
-		wxTextCtrl* EditMaxSizeToLoad;
-		wxTextCtrl* EditMaxTextFileSize;
-		wxTextCtrl* EditTabColumns;
-		wxTreeCtrl* TreeCtrl1;
+		wxCheckBox* CheckBoxEnableAutoSave;
 		//*)
 
 	protected:
@@ -190,12 +193,11 @@ class MadOptionsDialog: public wxDialog
 		static const long ID_STATICTEXT16;
 		static const long ID_COMBOBOXENCODING;
 		static const long ID_STATICTEXT13;
+		static const long ID_COMBOBOXDEFAULTFONT;
+		static const long ID_TEXTCTRLDEFAULTFONTSIZE;
 		static const long ID_EDITMAXSIZETOLOAD;
-		static const long ID_STATICTEXT1;
 		static const long ID_EDITMAXTEXTFILESIZE;
-		static const long ID_STATICTEXT2;
 		static const long ID_MAXDISPLAYSIZE;
-		static const long ID_STATICTEXT18;
 		static const long ID_CHECKBOXSINGLEINSTANCE;
 		static const long ID_CHECKBOXRELOADFILES;
 		static const long ID_CHECKBOXRECORDCARETMOVEMENTS;
@@ -232,17 +234,19 @@ class MadOptionsDialog: public wxDialog
 		static const long ID_CHECKBOXLOCKCARETYPOS;
 		static const long ID_CHECKBOXFIXWIDTHMODE;
 		static const long ID_PANEL2;
-		static const long ID_RADIOBUTTONLINEENDINGDEFAULT;
-		static const long ID_RADIOBUTTONLINEENDINGCRLF;
-		static const long ID_RADIOBUTTONLINEENDINGLF;
-		static const long ID_RADIOBUTTONLINEENDINGCR;
-		static const long ID_COMBOBOXSYNTAX;
-		static const long ID_RADIOBUTTONENCSYSTEMDEFAULT;
-		static const long ID_RADIOBUTTONENCUTF8;
-		static const long ID_CHECKBOXENCUTF8WITHBOM;
-		static const long ID_RADIOBUTTONENCOTHER;
-		static const long ID_COMBOBOXENCOTHER;
-		static const long ID_PANEL7;
+		static const long ID_RADIOBUTTONNEWDOCLINEENDINGDEFAULT;
+		static const long ID_RADIOBUTTONNEWDOCLINEENDINGCRLF;
+		static const long ID_RADIOBUTTONNEWDOCLINEENDINGLF;
+		static const long ID_RADIOBUTTONNEWDOCLINEENDINGCR;
+		static const long ID_COMBOBOXNEWDOCSYNTAX;
+		static const long ID_RADIOBUTTONNEWDOCENCSYSTEMDEFAULT;
+		static const long ID_RADIOBUTTONNEWDOCENCUTF8;
+		static const long ID_CHECKBOXNEWDOCENCUTF8WITHBOM;
+		static const long ID_RADIOBUTTONNEWDOCENCOTHER;
+		static const long ID_COMBOBOXNEWDOCENCOTHER;
+		static const long ID_COMBOBOXNEWDOCFONT;
+		static const long ID_TEXTCTRLNEWDOCFONTSIZE;
+		static const long ID_PANEL6;
 		static const long ID_CHECKBOXPRINTSYNTAX;
 		static const long ID_CHECKBOXPRINTLINENUMBER;
 		static const long ID_CHECKBOXPRINTBOOKMARK;
@@ -342,15 +346,14 @@ class MadOptionsDialog: public wxDialog
 		void ButtonShowInMenuClick(wxCommandEvent& event);
 		void ListBoxKeysSelected(wxCommandEvent& event);
 		void TreeCtrl1SelChanged(wxTreeEvent& event);
-		void ButtonCheckNowClick(wxCommandEvent& event);
 		void CheckBoxMouseSelectToCopyClick(wxCommandEvent& event);
 		void ButtonDictionaryDirClick(wxCommandEvent& event);
 		void CheckBoxAutoCompletePairClick(wxCommandEvent& event);
 		void EnableAutoSaveClick(wxCommandEvent& event);
 		void ChoiceDictionarySelect(wxCommandEvent& event);
 		void EditDictionaryDirTextEnter(wxCommandEvent& event);
-		void RadioButtonEncSelect(wxCommandEvent& event);
-		void RadioButtonLineEndingSelect(wxCommandEvent& event);
+		void RadioButtonNewDocEncSelect(wxCommandEvent& event);
+		void RadioButtonNewDocLineEndingSelect(wxCommandEvent& event);
 		//*)
 
 		void MadOptionsDialogActivate(wxActivateEvent& event);
@@ -381,7 +384,7 @@ public:
 	bool FindItemInList(TreeItemData* tid, const list<TreeItemData*> &tlist);
 	void UpdateKeyHint();
 	void InitDictionaryChoice(const wxString &path = wxEmptyString);
-	int m_NewDocLineEndig;
+	int m_NewDocLineEnding;
 	wxString m_NewDocEncoding;
 
 private:

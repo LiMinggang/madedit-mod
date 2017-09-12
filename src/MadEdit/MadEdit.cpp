@@ -933,11 +933,15 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	memset( m_HexFontWidths, 0, sizeof( m_HexFontWidths ) );
 	wxString fontname;
 	int fontsize;
-	fontname = m_Config->Read( wxString( wxT( "/Fonts/" ) ) + m_Encoding->GetName(), m_Encoding->GetFontName() );
-	fontsize = m_Config->ReadLong( wxT( "TextFontSize" ), 12 );
-	if(fontsize < 0) fontsize = 12;
-	if(fontsize > 1024) fontsize = 1024;
-	m_Config->Write( wxT( "TextFontSize" ),  fontsize); // Make sure	
+	m_Config->Read( wxString( wxT( "DefaultTextFont" ) ), &fontname );
+	if(fontname.IsEmpty())
+	{
+		fontname = m_Config->Read( wxString( wxT( "/Fonts/" ) ) + m_Encoding->GetName(), m_Encoding->GetFontName() );
+	}
+	fontsize = m_Config->ReadLong( wxT( "DefaultTextFontSize" ), DEFAULT_FONT_SIZE );
+	if(fontsize < 0) fontsize = DEFAULT_FONT_SIZE;
+	if(fontsize > MAX_FONT_SIZE) fontsize = MAX_FONT_SIZE;
+	m_Config->Write( wxT( "TextFontSize" ),  fontsize); // Make sure
 	SetTextFont( fontname, fontsize, true );
 #ifdef __WXMSW__
 	fontname = wxT( "Courier New" );
@@ -947,9 +951,9 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	fontname = wxT( "Monospace" );
 #endif
 	fontname = m_Config->Read( wxString( wxT( "HexFontName" ) ), fontname );
-	m_Config->Read( wxT( "HexFontSize" ), &fontsize, 12 );
-	if(fontsize < 0) fontsize = 12;
-	if(fontsize > 1024) fontsize = 1024;
+	m_Config->Read( wxT( "HexFontSize" ), &fontsize, DEFAULT_FONT_SIZE );
+	if(fontsize < 0) fontsize = DEFAULT_FONT_SIZE;
+	if(fontsize > MAX_FONT_SIZE) fontsize = MAX_FONT_SIZE;
 	m_Config->Write( wxT( "HexFontSize" ),  fontsize); // Make sure	
 	SetHexFont( fontname, fontsize, true );
 	m_Printing = 0;
@@ -12111,5 +12115,12 @@ void MadEdit::ConfigNewDocument()
 	m_Config->Read( wxT( "NewDocumentSyntax" ), &ss );
 	if(MadSyntax::GetSyntaxByTitle( ss ) == nullptr) ss = wxT("Plain Text");
 	SetSyntax(ss);
+	ss.Empty();
+	m_Config->Read( wxT( "NewDocumentTextFont" ), &ss );
+	if (!ss.IsEmpty())
+	{
+		m_Config->Read(wxT("NewDocumentTextSize"), &ll, DEFAULT_FONT_SIZE);
+		SetTextFont(ss, ll, true);
+	}
 }
 

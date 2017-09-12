@@ -3,9 +3,9 @@
 	<object class="wxDialog" name="MadOptionsDialog">
 		<title>Options</title>
 		<centered>1</centered>
-		<size>575,466</size>
+		<size>765,405</size>
 		<id_arg>0</id_arg>
-		<style>wxCAPTION|wxSYSTEM_MENU|wxRESIZE_BORDER|wxCLOSE_BOX|wxDIALOG_NO_PARENT</style>
+		<style>wxCAPTION|wxSYSTEM_MENU|wxRESIZE_BORDER|wxCLOSE_BOX</style>
 		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
 			<orient>wxVERTICAL</orient>
 			<object class="sizeritem">
@@ -68,8 +68,56 @@
 													<border>2</border>
 												</object>
 												<object class="sizeritem">
+													<object class="wxBoxSizer" variable="BoxSizer35" member="no">
+														<object class="spacer">
+															<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+															<size>3,-1</size>
+														</object>
+														<object class="sizeritem">
+															<object class="wxComboBox" name="ID_COMBOBOXDEFAULTFONT" variable="ComboBoxDefaultFont" member="yes">
+																<size>160,-1</size>
+																<style>wxCB_READONLY|wxCB_DROPDOWN</style>
+															</object>
+															<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+														</object>
+														<object class="sizeritem">
+															<object class="wxStaticText" name="wxID_ANY" variable="StaticText19" member="no">
+																<label>Default font</label>
+															</object>
+															<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+															<border>2</border>
+														</object>
+													</object>
+													<flag>wxALL|wxEXPAND</flag>
+													<border>2</border>
+												</object>
+												<object class="sizeritem">
 													<object class="wxBoxSizer" variable="BoxSizer7" member="no">
 														<orient>wxVERTICAL</orient>
+														<object class="sizeritem">
+															<object class="wxBoxSizer" variable="BoxSizer39" member="no">
+																<object class="spacer">
+																	<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+																	<size>3,0</size>
+																</object>
+																<object class="sizeritem">
+																	<object class="wxTextCtrl" name="ID_TEXTCTRLDEFAULTFONTSIZE" variable="EditDefaultFontSize" member="yes">
+																		<value>0</value>
+																		<maxlength>2</maxlength>
+																	</object>
+																	<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+																</object>
+																<object class="sizeritem">
+																	<object class="wxStaticText" name="wxID_ANY" variable="StaticText20" member="no">
+																		<label>Default font size</label>
+																	</object>
+																	<flag>wxALL|wxEXPAND</flag>
+																	<border>2</border>
+																</object>
+															</object>
+															<flag>wxALL|wxEXPAND</flag>
+															<border>2</border>
+														</object>
 														<object class="sizeritem">
 															<object class="wxBoxSizer" variable="BoxSizer38" member="no">
 																<object class="spacer">
@@ -84,7 +132,7 @@
 																	<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
 																</object>
 																<object class="sizeritem">
-																	<object class="wxStaticText" name="ID_STATICTEXT1" variable="StaticText1" member="yes">
+																	<object class="wxStaticText" name="wxID_ANY" variable="StaticText1" member="yes">
 																		<label>Max file size to load whole file into memory</label>
 																	</object>
 																	<flag>wxALL|wxEXPAND</flag>
@@ -108,7 +156,7 @@
 																	<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 																</object>
 																<object class="sizeritem">
-																	<object class="wxStaticText" name="ID_STATICTEXT2" variable="StaticText2" member="yes">
+																	<object class="wxStaticText" name="wxID_ANY" variable="StaticText2" member="yes">
 																		<label>Max file size to load as a text file</label>
 																	</object>
 																	<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
@@ -132,7 +180,7 @@
 																	<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 																</object>
 																<object class="sizeritem">
-																	<object class="wxStaticText" name="ID_STATICTEXT18" variable="StaticText18" member="yes">
+																	<object class="wxStaticText" name="wxID_ANY" variable="StaticText18" member="no">
 																		<label>Max chars displayed in search results</label>
 																	</object>
 																	<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
@@ -238,7 +286,7 @@
 															<border>2</border>
 														</object>
 													</object>
-													<flag>wxALL|wxALIGN_LEFT</flag>
+													<flag>wxALL|wxEXPAND</flag>
 													<border>2</border>
 												</object>
 											</object>
@@ -494,18 +542,17 @@
 										<label>Edit</label>
 									</object>
 									<object class="AuiNotebookPage">
-										<object class="wxPanel" name="ID_PANEL7" variable="Panel7" member="yes">
-											<object class="wxGridSizer" variable="GridSizer2" member="no">
-												<cols>2</cols>
+										<object class="wxPanel" name="ID_PANEL6" variable="Panel6" member="yes">
+											<object class="wxBoxSizer" variable="BoxSizer42" member="no">
 												<object class="sizeritem">
-													<object class="wxBoxSizer" variable="BoxSizer44" member="no">
+													<object class="wxBoxSizer" variable="BoxSizer43" member="no">
 														<orient>wxVERTICAL</orient>
 														<object class="sizeritem">
-															<object class="wxStaticBoxSizer" variable="StaticBoxSizer7" member="no">
+															<object class="wxStaticBoxSizer" variable="StaticBoxSizer9" member="no">
 																<label>Line Ending</label>
 																<orient>wxVERTICAL</orient>
 																<object class="sizeritem">
-																	<object class="wxRadioButton" name="ID_RADIOBUTTONLINEENDINGDEFAULT" variable="RadioButtonLineEndingDefault" member="yes">
+																	<object class="wxRadioButton" name="ID_RADIOBUTTONNEWDOCLINEENDINGDEFAULT" variable="RadioButtonNewDocLineEndingDefault" member="yes">
 																		<label>System Default</label>
 																		<style>wxRB_GROUP</style>
 																	</object>
@@ -513,25 +560,25 @@
 																	<border>2</border>
 																</object>
 																<object class="sizeritem">
-																	<object class="wxRadioButton" name="ID_RADIOBUTTONLINEENDINGCRLF" variable="RadioButtonLineEndingCRLF" member="yes">
+																	<object class="wxRadioButton" name="ID_RADIOBUTTONNEWDOCLINEENDINGCRLF" variable="RadioButtonNewDocLineEndingCRLF" member="yes">
 																		<label>Windows(CR LF)</label>
-																		<handler function="RadioButtonLineEndingSelect" entry="EVT_RADIOBUTTON" />
+																		<handler function="RadioButtonNewDocLineEndingSelect" entry="EVT_RADIOBUTTON" />
 																	</object>
 																	<flag>wxALL|wxEXPAND</flag>
 																	<border>2</border>
 																</object>
 																<object class="sizeritem">
-																	<object class="wxRadioButton" name="ID_RADIOBUTTONLINEENDINGLF" variable="RadioButtonLineEndingLF" member="yes">
+																	<object class="wxRadioButton" name="ID_RADIOBUTTONNEWDOCLINEENDINGLF" variable="RadioButtonNewDocLineEndingLF" member="yes">
 																		<label>Unix(LF)</label>
-																		<handler function="RadioButtonLineEndingSelect" entry="EVT_RADIOBUTTON" />
+																		<handler function="RadioButtonNewDocLineEndingSelect" entry="EVT_RADIOBUTTON" />
 																	</object>
 																	<flag>wxALL|wxEXPAND</flag>
 																	<border>2</border>
 																</object>
 																<object class="sizeritem">
-																	<object class="wxRadioButton" name="ID_RADIOBUTTONLINEENDINGCR" variable="RadioButtonLineEndingCR" member="yes">
+																	<object class="wxRadioButton" name="ID_RADIOBUTTONNEWDOCLINEENDINGCR" variable="RadioButtonNewDocLineEndingCR" member="yes">
 																		<label>Macintosh</label>
-																		<handler function="RadioButtonLineEndingSelect" entry="EVT_RADIOBUTTON" />
+																		<handler function="RadioButtonNewDocLineEndingSelect" entry="EVT_RADIOBUTTON" />
 																	</object>
 																	<flag>wxALL|wxEXPAND</flag>
 																	<border>2</border>
@@ -541,17 +588,17 @@
 															<border>5</border>
 														</object>
 														<object class="sizeritem">
-															<object class="wxBoxSizer" variable="BoxSizer45" member="no">
+															<object class="wxBoxSizer" variable="BoxSizer49" member="no">
 																<orient>wxVERTICAL</orient>
 																<object class="sizeritem">
-																	<object class="wxStaticText" name="wxID_ANY" variable="StaticText20" member="no">
+																	<object class="wxStaticText" name="wxID_ANY" variable="StaticText23" member="no">
 																		<label>Syntax:</label>
 																	</object>
 																	<flag>wxALL|wxEXPAND</flag>
 																	<border>2</border>
 																</object>
 																<object class="sizeritem">
-																	<object class="wxComboBox" name="ID_COMBOBOXSYNTAX" variable="ComboBoxSyntax" member="yes">
+																	<object class="wxComboBox" name="ID_COMBOBOXNEWDOCSYNTAX" variable="ComboBoxNewDocSyntax" member="yes">
 																		<size>160,-1</size>
 																		<style>wxCB_READONLY|wxCB_DROPDOWN</style>
 																	</object>
@@ -559,40 +606,42 @@
 																	<border>2</border>
 																</object>
 															</object>
-															<flag>wxALL|wxALIGN_LEFT</flag>
+															<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+															<border>5</border>
 														</object>
 													</object>
-													<flag>wxALL|wxALIGN_LEFT</flag>
-													<border>2</border>
+													<flag>wxALL|wxALIGN_TOP</flag>
+													<border>5</border>
 												</object>
 												<object class="sizeritem">
-													<object class="wxBoxSizer" variable="BoxSizer46" member="no">
+													<object class="wxBoxSizer" variable="BoxSizer47" member="no">
+														<orient>wxVERTICAL</orient>
 														<object class="sizeritem">
-															<object class="wxStaticBoxSizer" variable="StaticBoxSizer8" member="no">
+															<object class="wxStaticBoxSizer" variable="StaticBoxSizer10" member="no">
 																<label>Encoding</label>
 																<orient>wxVERTICAL</orient>
 																<object class="sizeritem">
-																	<object class="wxRadioButton" name="ID_RADIOBUTTONENCSYSTEMDEFAULT" variable="RadioButtonEncSystemDefault" member="yes">
+																	<object class="wxRadioButton" name="ID_RADIOBUTTONNEWDOCENCSYSTEMDEFAULT" variable="RadioButtonNewDocEncSystemDefault" member="yes">
 																		<label>System Default</label>
 																		<style>wxRB_GROUP</style>
-																		<handler function="RadioButtonEncSelect" entry="EVT_RADIOBUTTON" />
+																		<handler function="RadioButtonNewDocEncSelect" entry="EVT_RADIOBUTTON" />
 																	</object>
 																	<flag>wxALL|wxEXPAND</flag>
 																	<border>2</border>
 																</object>
 																<object class="sizeritem">
-																	<object class="wxGridSizer" variable="GridSizer1" member="no">
+																	<object class="wxGridSizer" variable="GridSizer3" member="no">
 																		<cols>2</cols>
 																		<object class="sizeritem">
-																			<object class="wxRadioButton" name="ID_RADIOBUTTONENCUTF8" variable="RadioButtonEncUTF8" member="yes">
+																			<object class="wxRadioButton" name="ID_RADIOBUTTONNEWDOCENCUTF8" variable="RadioButtonNewDocEncUTF8" member="yes">
 																				<label>UTF8</label>
-																				<handler function="RadioButtonEncSelect" entry="EVT_RADIOBUTTON" />
+																				<handler function="RadioButtonNewDocEncSelect" entry="EVT_RADIOBUTTON" />
 																			</object>
 																			<flag>wxALL|wxEXPAND</flag>
 																			<border>2</border>
 																		</object>
 																		<object class="sizeritem">
-																			<object class="wxCheckBox" name="ID_CHECKBOXENCUTF8WITHBOM" variable="CheckBoxEncUTF8WithBOM" member="yes">
+																			<object class="wxCheckBox" name="ID_CHECKBOXNEWDOCENCUTF8WITHBOM" variable="CheckBoxNewDocEncUTF8WithBOM" member="yes">
 																				<label>with BOM</label>
 																			</object>
 																			<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
@@ -603,17 +652,17 @@
 																	<option>1</option>
 																</object>
 																<object class="sizeritem">
-																	<object class="wxBoxSizer" variable="BoxSizer48" member="no">
+																	<object class="wxBoxSizer" variable="BoxSizer50" member="no">
 																		<object class="sizeritem">
-																			<object class="wxRadioButton" name="ID_RADIOBUTTONENCOTHER" variable="RadioButtonEncOther" member="yes">
+																			<object class="wxRadioButton" name="ID_RADIOBUTTONNEWDOCENCOTHER" variable="RadioButtonNewDocEncOther" member="yes">
 																				<label></label>
-																				<handler function="RadioButtonEncSelect" entry="EVT_RADIOBUTTON" />
+																				<handler function="RadioButtonNewDocEncSelect" entry="EVT_RADIOBUTTON" />
 																			</object>
 																			<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 																			<border>2</border>
 																		</object>
 																		<object class="sizeritem">
-																			<object class="wxComboBox" name="ID_COMBOBOXENCOTHER" variable="ComboBoxEncOther" member="yes">
+																			<object class="wxComboBox" name="ID_COMBOBOXNEWDOCENCOTHER" variable="ComboBoxNewDocEncOther" member="yes">
 																				<size>160,-1</size>
 																				<style>wxCB_READONLY|wxCB_DROPDOWN</style>
 																			</object>
@@ -624,12 +673,56 @@
 																	<flag>wxALL|wxEXPAND</flag>
 																</object>
 															</object>
-															<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+															<flag>wxALL|wxALIGN_LEFT</flag>
+															<border>5</border>
+														</object>
+														<object class="sizeritem">
+															<object class="wxBoxSizer" variable="BoxSizer51" member="no">
+																<orient>wxVERTICAL</orient>
+																<object class="sizeritem">
+																	<object class="wxStaticText" name="wxID_ANY" variable="StaticText24" member="no">
+																		<label>Font:</label>
+																	</object>
+																	<flag>wxALL|wxEXPAND</flag>
+																	<border>2</border>
+																</object>
+																<object class="sizeritem">
+																	<object class="wxComboBox" name="ID_COMBOBOXNEWDOCFONT" variable="ComboBoxNewDocFont" member="yes">
+																		<size>160,-1</size>
+																		<style>wxCB_READONLY|wxCB_DROPDOWN</style>
+																	</object>
+																	<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+																	<border>2</border>
+																</object>
+															</object>
+															<flag>wxALL|wxALIGN_LEFT</flag>
+															<border>5</border>
+														</object>
+														<object class="sizeritem">
+															<object class="wxBoxSizer" variable="BoxSizer52" member="no">
+																<orient>wxVERTICAL</orient>
+																<object class="sizeritem">
+																	<object class="wxStaticText" name="wxID_ANY" variable="StaticText25" member="no">
+																		<label>Font Size:</label>
+																	</object>
+																	<flag>wxALL|wxEXPAND</flag>
+																	<border>2</border>
+																</object>
+																<object class="sizeritem">
+																	<object class="wxTextCtrl" name="ID_TEXTCTRLNEWDOCFONTSIZE" variable="EditNewDocFontSize" member="yes">
+																		<value>0</value>
+																		<maxlength>2</maxlength>
+																	</object>
+																	<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+																	<border>2</border>
+																</object>
+															</object>
+															<flag>wxALL|wxALIGN_LEFT</flag>
 															<border>5</border>
 														</object>
 													</object>
-													<flag>wxALL|wxALIGN_LEFT|wxALIGN_TOP</flag>
-													<border>2</border>
+													<flag>wxALL|wxALIGN_TOP</flag>
+													<border>5</border>
 												</object>
 											</object>
 										</object>
