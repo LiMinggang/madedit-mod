@@ -668,14 +668,14 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	RadioButtonNewDocLineEndingDefault = new wxRadioButton(Panel6, ID_RADIOBUTTONNEWDOCLINEENDINGDEFAULT, _("System Default"), wxDefaultPosition, wxDefaultSize, wxRB_GROUP, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCLINEENDINGDEFAULT"));
 	SET_CONTROLPARENT(RadioButtonNewDocLineEndingDefault);
 	StaticBoxSizer9->Add(RadioButtonNewDocLineEndingDefault, 0, wxALL|wxEXPAND, 2);
-	RadioButtonNewDocLineEndingCRLF = new wxRadioButton(Panel6, ID_RADIOBUTTONNEWDOCLINEENDINGCRLF, _("Windows(CR LF)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCLINEENDINGCRLF"));
+	RadioButtonNewDocLineEndingCRLF = new wxRadioButton(Panel6, ID_RADIOBUTTONNEWDOCLINEENDINGCRLF, _T("Windows(CR LF)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCLINEENDINGCRLF"));
 	SET_CONTROLPARENT(RadioButtonNewDocLineEndingCRLF);
 	StaticBoxSizer9->Add(RadioButtonNewDocLineEndingCRLF, 0, wxALL|wxEXPAND, 2);
-	RadioButtonNewDocLineEndingLF = new wxRadioButton(Panel6, ID_RADIOBUTTONNEWDOCLINEENDINGLF, _("Unix(LF)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCLINEENDINGLF"));
+	RadioButtonNewDocLineEndingLF = new wxRadioButton(Panel6, ID_RADIOBUTTONNEWDOCLINEENDINGLF, _T("Unix(LF)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCLINEENDINGLF"));
 	SET_CONTROLPARENT(RadioButtonNewDocLineEndingLF);
 	//SET_CONTROLPARENT(RadioBoxLineEnding);
 	StaticBoxSizer9->Add(RadioButtonNewDocLineEndingLF, 0, wxALL|wxEXPAND, 2);
-	RadioButtonNewDocLineEndingCR = new wxRadioButton(Panel6, ID_RADIOBUTTONNEWDOCLINEENDINGCR, _("Macintosh"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCLINEENDINGCR"));
+	RadioButtonNewDocLineEndingCR = new wxRadioButton(Panel6, ID_RADIOBUTTONNEWDOCLINEENDINGCR, _T("Macintosh"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCLINEENDINGCR"));
 	SET_CONTROLPARENT(RadioButtonNewDocLineEndingCR);
 	StaticBoxSizer9->Add(RadioButtonNewDocLineEndingCR, 0, wxALL|wxEXPAND, 2);
 	BoxSizer43->Add(StaticBoxSizer9, 0, wxALL|wxALIGN_LEFT, 5);
@@ -693,7 +693,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	SET_CONTROLPARENT(RadioButtonNewDocEncSystemDefault);
 	StaticBoxSizer10->Add(RadioButtonNewDocEncSystemDefault, 0, wxALL|wxEXPAND, 2);
 	GridSizer3 = new wxGridSizer(0, 2, 0, 0);
-	RadioButtonNewDocEncUTF8 = new wxRadioButton(Panel6, ID_RADIOBUTTONNEWDOCENCUTF8, _("UTF8"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCENCUTF8"));
+	RadioButtonNewDocEncUTF8 = new wxRadioButton(Panel6, ID_RADIOBUTTONNEWDOCENCUTF8, _T("UTF8"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCENCUTF8"));
 	SET_CONTROLPARENT(RadioButtonNewDocEncUTF8);
 	GridSizer3->Add(RadioButtonNewDocEncUTF8, 0, wxALL|wxEXPAND, 2);
 	CheckBoxNewDocEncUTF8WithBOM = new wxCheckBox(Panel6, ID_CHECKBOXNEWDOCENCUTF8WITHBOM, _("with BOM"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXNEWDOCENCUTF8WITHBOM"));

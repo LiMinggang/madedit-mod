@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-08 14:54+0800\n"
+"POT-Creation-Date: 2017-09-12 20:01+0800\n"
 "PO-Revision-Date: 2017-08-16 10:31+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
@@ -413,7 +413,7 @@ msgid "Please wait while printing..."
 msgstr ""
 
 #: wxstd.po.cpp:102 ../src/MadEditFrame.cpp:2035
-#: ../src/MadOptionsDialog.cpp:885
+#: ../src/MadOptionsDialog.cpp:926
 msgid "Print"
 msgstr "印刷"
 
@@ -485,7 +485,7 @@ msgstr "ページ %d / %d"
 msgid "Page %d"
 msgstr ""
 
-#: wxstd.po.cpp:120 wxstd.po.cpp:121 ../src/MadOptionsDialog.cpp:423
+#: wxstd.po.cpp:120 wxstd.po.cpp:121 ../src/MadOptionsDialog.cpp:434
 msgid "Options"
 msgstr "オプション"
 
@@ -497,11 +497,11 @@ msgid ""
 "Invalid Markdown format!!"
 msgstr ""
 
-#: ../src/MadEdit/MadEdit.cpp:12066
+#: ../src/MadEdit/MadEdit.cpp:12070
 msgid "Zero Length Match"
 msgstr ""
 
-#: ../src/MadEdit/MadEdit.cpp:12069
+#: ../src/MadEdit/MadEdit.cpp:12073
 msgid "^ Zero Length Match"
 msgstr ""
 
@@ -567,7 +567,7 @@ msgstr ""
 #: ../src/MadEdit/MadEditBasic.cpp:2597 ../src/MadEditFrame.cpp:520
 #: ../src/MadEditFrame.cpp:530 ../src/MadFileAssociationDialog.cpp:374
 #: ../src/MadFileHistoryDialog.cpp:45 ../src/MadHighlightingDialog.cpp:266
-#: ../src/MadPurgeHistoryDialog.cpp:93 ../src/MadOptionsDialog.cpp:900
+#: ../src/MadPurgeHistoryDialog.cpp:93 ../src/MadOptionsDialog.cpp:941
 #: ../src/MadConvEncDialog.cpp:81 ../src/MadSaveQueryDialog.cpp:47
 #: ../src/MadAboutDialog.cpp:95
 msgid "&Cancel"
@@ -1746,7 +1746,7 @@ msgstr ""
 msgid "Toolbars"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2342 ../src/MadEditFrame.cpp:9770
+#: ../src/MadEditFrame.cpp:2342 ../src/MadEditFrame.cpp:9775
 msgid "Toggle Main Toolbar"
 msgstr ""
 
@@ -1762,7 +1762,7 @@ msgstr "テキストモード&"
 msgid "Change the editing mode to Text-Mode"
 msgstr "編集モードをテキストモードに変更"
 
-#: ../src/MadEditFrame.cpp:2345 ../src/MadOptionsDialog.cpp:694
+#: ../src/MadEditFrame.cpp:2345 ../src/MadOptionsDialog.cpp:735
 msgid "Text Mode"
 msgstr "テキストモード"
 
@@ -1786,7 +1786,7 @@ msgstr "16進モード&"
 msgid "Change the editing mode to Hex-Mode"
 msgstr "編集モードを 16 進モードに変更"
 
-#: ../src/MadEditFrame.cpp:2347 ../src/MadOptionsDialog.cpp:720
+#: ../src/MadEditFrame.cpp:2347 ../src/MadOptionsDialog.cpp:761
 msgid "Hex Mode"
 msgstr "16 進モード"
 
@@ -2312,7 +2312,7 @@ msgstr "挿入/上書きモードの切替"
 msgid "Standard"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2486 ../src/MadOptionsDialog.cpp:1045
+#: ../src/MadEditFrame.cpp:2486 ../src/MadOptionsDialog.cpp:1099
 msgid "Editor"
 msgstr "編集"
 
@@ -2451,7 +2451,7 @@ msgstr "テキストの右にスクロール"
 msgid "Scrolls right by aprox. 1 tab stop"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2757 ../src/MadEditFrame.cpp:9967
+#: ../src/MadEditFrame.cpp:2757 ../src/MadEditFrame.cpp:9972
 msgid "Quick Search"
 msgstr ""
 
@@ -2570,7 +2570,7 @@ msgstr "ファイルにアクセス出来ません:"
 msgid "Cannot load this file:"
 msgstr "ファイルを読み込めません:"
 
-#: ../src/MadEditFrame.cpp:4552 ../src/MadEditFrame.cpp:8978
+#: ../src/MadEditFrame.cpp:4552 ../src/MadEditFrame.cpp:8983
 msgid "Memory allocation failed"
 msgstr ""
 
@@ -2618,7 +2618,7 @@ msgstr "選択された行のインデントを増加"
 #: ../src/MadEditFrame.cpp:5055 ../src/MadEditFrame.cpp:5061
 #: ../src/MadEditFrame.cpp:5123 ../src/MadEditFrame.cpp:5311
 #: ../src/MadEditFrame.cpp:5338 ../src/MadSourceFormatDialog.cpp:451
-#: ../src/MadSourceFormatDialog.cpp:459 ../src/MadOptionsDialog.cpp:723
+#: ../src/MadSourceFormatDialog.cpp:459 ../src/MadOptionsDialog.cpp:764
 #: ../src/MadConvEncDialog.cpp:66
 msgid "None"
 msgstr "なし"
@@ -2735,81 +2735,81 @@ msgstr "ファイルを閉じる"
 msgid "Close preveiw windows"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8659
+#: ../src/MadEditFrame.cpp:8664
 #, fuzzy
 msgid "Open Mad Macro File"
 msgstr "ファイルを開く..."
 
-#: ../src/MadEditFrame.cpp:8811
+#: ../src/MadEditFrame.cpp:8816
 msgid "Mad Macro"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8819
+#: ../src/MadEditFrame.cpp:8824
 #, fuzzy, c-format
 msgid "Do you want to overwrite %s ?"
 msgstr "再読み込みしますか?"
 
-#: ../src/MadEditFrame.cpp:8819
+#: ../src/MadEditFrame.cpp:8824
 msgid "Warning"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:8922
+#: ../src/MadEditFrame.cpp:8927
 #, fuzzy
 msgid "Edit Mad Macro File"
 msgstr "ファイルを開く..."
 
-#: ../src/MadEditFrame.cpp:9566
+#: ../src/MadEditFrame.cpp:9571
 msgid ""
 "Download dictionary at\n"
 "http://extensions.openoffice.org/"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:9567
+#: ../src/MadEditFrame.cpp:9572
 msgid "Press OK to visit our HomePage."
 msgstr "OK でホームページに移動します"
 
-#: ../src/MadEditFrame.cpp:9865
+#: ../src/MadEditFrame.cpp:9870
 #, fuzzy
 msgid "Passed the begin of the file/selection"
 msgstr "選択された行のインデントを増加"
 
-#: ../src/MadEditFrame.cpp:9927 ../src/MadSearchReplaceDialog.cpp:530
+#: ../src/MadEditFrame.cpp:9932 ../src/MadSearchReplaceDialog.cpp:530
 #: ../src/MadSearchReplaceDialog.cpp:691
 #, fuzzy
 msgid "Passed the end of the file"
 msgstr "選択された行のインデントを増加"
 
-#: ../src/MadEditFrame.cpp:9972
+#: ../src/MadEditFrame.cpp:9977
 msgid "Information Window"
 msgstr "情報ウィンドウ"
 
-#: ../src/MadEditFrame.cpp:10001
+#: ../src/MadEditFrame.cpp:10006
 msgid "Invalid item"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:10014
+#: ../src/MadEditFrame.cpp:10019
 #, fuzzy
 msgid "&Collapse All"
 msgstr "すべて閉じる(&L)"
 
-#: ../src/MadEditFrame.cpp:10015
+#: ../src/MadEditFrame.cpp:10020
 msgid "Copy &All"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:10016
+#: ../src/MadEditFrame.cpp:10021
 msgid "&Reset Results"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:10018
+#: ../src/MadEditFrame.cpp:10023
 #, fuzzy
 msgid "&Collapse Selected"
 msgstr "すべて閉じる(&L)"
 
-#: ../src/MadEditFrame.cpp:10019
+#: ../src/MadEditFrame.cpp:10024
 msgid "&Copy Selected"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:10020
+#: ../src/MadEditFrame.cpp:10025
 #, fuzzy
 msgid "&Delete Selected"
 msgstr "選択された行を削除"
@@ -2839,7 +2839,7 @@ msgid "<- Add Custom File Type"
 msgstr "<- カスタムファイル形式に追加"
 
 #: ../src/MadFileAssociationDialog.cpp:372 ../src/MadHighlightingDialog.cpp:264
-#: ../src/MadPurgeHistoryDialog.cpp:91 ../src/MadOptionsDialog.cpp:898
+#: ../src/MadPurgeHistoryDialog.cpp:91 ../src/MadOptionsDialog.cpp:939
 #: ../src/MadConvEncDialog.cpp:79 ../src/MadSaveQueryDialog.cpp:42
 #: ../src/MadAboutDialog.cpp:92
 msgid "&OK"
@@ -2914,8 +2914,8 @@ msgstr "サブディレクトリを含む"
 msgid "Automatic Detection"
 msgstr "自動検出"
 
-#: ../src/MadFindInFilesDialog.cpp:484 ../src/MadOptionsDialog.cpp:1710
-#: ../src/MadOptionsDialog.cpp:1727
+#: ../src/MadFindInFilesDialog.cpp:484 ../src/MadOptionsDialog.cpp:1798
+#: ../src/MadOptionsDialog.cpp:1815
 msgid "Choose a directory"
 msgstr "ディレクトリを選択"
 
@@ -3573,11 +3573,11 @@ msgstr "数字でソート(&N)"
 msgid "&Remove Duplicates"
 msgstr "重複を除去(&R)"
 
-#: ../src/MadOptionsDialog.cpp:438
+#: ../src/MadOptionsDialog.cpp:449
 msgid "Language of User Interface (must restart MadEdit)"
 msgstr "ユーザインターフェース言語 (MadEdit の再起動が必要)"
 
-#: ../src/MadOptionsDialog.cpp:446
+#: ../src/MadOptionsDialog.cpp:457
 #, fuzzy
 msgid ""
 "Use this encoding to create new file or when MadEdit cannot determine the "
@@ -3586,63 +3586,73 @@ msgstr ""
 "エンコード設定なしで新規ファイルを作成した場合は、前回のエンコードが使用され"
 "ます。"
 
-#: ../src/MadOptionsDialog.cpp:456
+#: ../src/MadOptionsDialog.cpp:465
+#, fuzzy
+msgid "Default font"
+msgstr "デフォルトプリンタ"
+
+#: ../src/MadOptionsDialog.cpp:475
+#, fuzzy
+msgid "Default font size"
+msgstr "デフォルトプリンタ"
+
+#: ../src/MadOptionsDialog.cpp:484
 msgid "Max file size to load whole file into memory"
 msgstr "ファイル全体をメモリに読み込む時の最大サイズ"
 
-#: ../src/MadOptionsDialog.cpp:465
+#: ../src/MadOptionsDialog.cpp:493
 msgid "Max file size to load as a text file"
 msgstr "テキストファイルとして読み込む最大サイズ"
 
-#: ../src/MadOptionsDialog.cpp:474
+#: ../src/MadOptionsDialog.cpp:502
 msgid "Max chars displayed in search results"
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:477
+#: ../src/MadOptionsDialog.cpp:505
 msgid "Single Instance (must restart MadEdit)"
 msgstr "複数起動を禁止 (MadEdit の再起動が必要)"
 
-#: ../src/MadOptionsDialog.cpp:481
+#: ../src/MadOptionsDialog.cpp:509
 msgid "Reload files previously open on startup"
 msgstr "起動時に、前回開いていたファイルを再読み込み"
 
-#: ../src/MadOptionsDialog.cpp:485
+#: ../src/MadOptionsDialog.cpp:513
 #, fuzzy
 msgid "Record caret movements"
 msgstr "キャレットの動きをアンドゥリストに記録"
 
-#: ../src/MadOptionsDialog.cpp:489
+#: ../src/MadOptionsDialog.cpp:517
 msgid "Restore previous caret position when files are opened"
 msgstr "ファイルを開いた時に、前回のキャレット位置を復元"
 
-#: ../src/MadOptionsDialog.cpp:493
+#: ../src/MadOptionsDialog.cpp:521
 msgid "Show quick search bar on startup"
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:497
+#: ../src/MadOptionsDialog.cpp:525
 msgid ""
 "Do not save settings to MadEdit.cfg when MadEdit closed (this session only)"
 msgstr ""
 "MadEdit を閉じる時に、設定を MadEdit.cfg に保存しない(このセッションのみ)"
 
-#: ../src/MadOptionsDialog.cpp:501
+#: ../src/MadOptionsDialog.cpp:529
 msgid "Purge History while exiting"
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:505
+#: ../src/MadOptionsDialog.cpp:533
 #, fuzzy
 msgid "Auto save"
 msgstr "オートインデント"
 
-#: ../src/MadOptionsDialog.cpp:515
+#: ../src/MadOptionsDialog.cpp:543
 msgid "Timeout(M)"
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:518
+#: ../src/MadOptionsDialog.cpp:546
 msgid "Auto backup"
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:523
+#: ../src/MadOptionsDialog.cpp:551
 msgid ""
 "Add MadEdit to the RightClickMenu of Explorer(Deselect to Remove the Entry "
 "from Windows Registry)"
@@ -3650,411 +3660,421 @@ msgstr ""
 "MadEdit のメニューをエクスプローラに追加(削除する時は、レジストリエントリを手"
 "動で除去する必要があります)"
 
-#: ../src/MadOptionsDialog.cpp:539
+#: ../src/MadOptionsDialog.cpp:567
 msgid "Max line length before Line-Wrap (must restart MadEdit)"
 msgstr "行折り返しの最大長 (MadEdit の再起動が必要)"
 
-#: ../src/MadOptionsDialog.cpp:547
+#: ../src/MadOptionsDialog.cpp:575
 msgid "Columns of Wrap-By-Column"
 msgstr "列の折り返し"
 
-#: ../src/MadOptionsDialog.cpp:555
+#: ../src/MadOptionsDialog.cpp:583
 msgid "Columns of Tab"
 msgstr "列のタブ幅"
 
-#: ../src/MadOptionsDialog.cpp:563
+#: ../src/MadOptionsDialog.cpp:591
 msgid "Columns of Indent"
 msgstr "列のインデント"
 
-#: ../src/MadOptionsDialog.cpp:571
+#: ../src/MadOptionsDialog.cpp:599
 msgid "Format of Date/Time"
 msgstr "日付/時間の書式"
 
-#: ../src/MadOptionsDialog.cpp:577
+#: ../src/MadOptionsDialog.cpp:605
 msgid "Use English instead of current locale"
 msgstr "現在の locale の代わりに英語を使用"
 
-#: ../src/MadOptionsDialog.cpp:583
+#: ../src/MadOptionsDialog.cpp:611
 msgid "Insert Space char instead of Tab char"
 msgstr "TAB に空白を挿入"
 
-#: ../src/MadOptionsDialog.cpp:587
+#: ../src/MadOptionsDialog.cpp:615
 msgid "Auto Indent"
 msgstr "オートインデント"
 
-#: ../src/MadOptionsDialog.cpp:591
+#: ../src/MadOptionsDialog.cpp:619
 msgid "Auto complete character pair"
 msgstr "オートコンプリート"
 
-#: ../src/MadOptionsDialog.cpp:597
+#: ../src/MadOptionsDialog.cpp:625
 #, fuzzy
 msgid "Insert pair instead of replacing selection"
 msgstr "選択範囲の大文字小文字を反転"
 
-#: ../src/MadOptionsDialog.cpp:603
+#: ../src/MadOptionsDialog.cpp:631
 msgid "Auto copy the mouse-selected text to clipboard"
 msgstr "マウスで選択したテキストを自動的にクリップボードにコピー"
 
-#: ../src/MadOptionsDialog.cpp:607
+#: ../src/MadOptionsDialog.cpp:635
 msgid "when pressing Ctrl key"
 msgstr "Ctrl キーが押されている時のみ"
 
-#: ../src/MadOptionsDialog.cpp:612
+#: ../src/MadOptionsDialog.cpp:640
 msgid "Paste text from clipboard when pressing middle mouse button"
 msgstr "マウス中ボタンクリックで、クリップボードのテキストを貼り付け"
 
-#: ../src/MadOptionsDialog.cpp:616
+#: ../src/MadOptionsDialog.cpp:644
 msgid "Auto fill in column paste"
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:620
+#: ../src/MadOptionsDialog.cpp:648
 msgid "Left double click to highlight"
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:624
+#: ../src/MadOptionsDialog.cpp:652
 #, fuzzy
 msgid "Typewriter mode"
 msgstr "テキストモード"
 
-#: ../src/MadOptionsDialog.cpp:628
+#: ../src/MadOptionsDialog.cpp:656
 #, fuzzy
 msgid "Fix width mode"
 msgstr "幅固定モード&"
 
-#: ../src/MadOptionsDialog.cpp:639
+#: ../src/MadOptionsDialog.cpp:667
 #, fuzzy
 msgid "Line Ending"
 msgstr "ファイルのエンコーディング:"
 
-#: ../src/MadOptionsDialog.cpp:640 ../src/MadOptionsDialog.cpp:666
-#: ../src/MadOptionsDialog.cpp:995 ../src/MadOptionsDialog.cpp:1022
-#: ../src/MadOptionsDialog.cpp:1163 ../src/MadOptionsDialog.cpp:1276
-#: ../src/MadOptionsDialog.cpp:1829
+#: ../src/MadOptionsDialog.cpp:668 ../src/MadOptionsDialog.cpp:692
+#: ../src/MadOptionsDialog.cpp:1036 ../src/MadOptionsDialog.cpp:1063
+#: ../src/MadOptionsDialog.cpp:1224 ../src/MadOptionsDialog.cpp:1347
+#: ../src/MadOptionsDialog.cpp:1917
 msgid "System Default"
 msgstr "システムデフォルト"
 
-#: ../src/MadOptionsDialog.cpp:655
+#: ../src/MadOptionsDialog.cpp:683
 #, fuzzy
 msgid "Syntax:"
 msgstr "現在の構文:  "
 
-#: ../src/MadOptionsDialog.cpp:665
+#: ../src/MadOptionsDialog.cpp:691
 #, fuzzy
 msgid "Encoding"
 msgstr "エンコーディング: "
 
-#: ../src/MadOptionsDialog.cpp:673
+#: ../src/MadOptionsDialog.cpp:699
 msgid "with BOM"
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:695
+#: ../src/MadOptionsDialog.cpp:714
+#, fuzzy
+msgid "Font:"
+msgstr "フォント名: "
+
+#: ../src/MadOptionsDialog.cpp:721
+#, fuzzy
+msgid "Font Size:"
+msgstr "フォントサイズ: "
+
+#: ../src/MadOptionsDialog.cpp:736
 msgid "Print Syntax Highlighter"
 msgstr "構文強調を印刷"
 
-#: ../src/MadOptionsDialog.cpp:699
+#: ../src/MadOptionsDialog.cpp:740
 msgid "Print Line Number"
 msgstr "行番号を印刷"
 
-#: ../src/MadOptionsDialog.cpp:703
+#: ../src/MadOptionsDialog.cpp:744
 msgid "Print Bookmark"
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:707
+#: ../src/MadOptionsDialog.cpp:748
 msgid "Print End of Line"
 msgstr "END 行を印刷"
 
-#: ../src/MadOptionsDialog.cpp:711
+#: ../src/MadOptionsDialog.cpp:752
 msgid "Print Tab Char"
 msgstr "TAB 文字を印刷"
 
-#: ../src/MadOptionsDialog.cpp:715
+#: ../src/MadOptionsDialog.cpp:756
 msgid "Print Space Char"
 msgstr "空白文字を印刷"
 
-#: ../src/MadOptionsDialog.cpp:724
+#: ../src/MadOptionsDialog.cpp:765
 msgid "First Page Only"
 msgstr "最初のページのみ"
 
-#: ../src/MadOptionsDialog.cpp:725
+#: ../src/MadOptionsDialog.cpp:766
 msgid "Every Page"
 msgstr "あらゆるページ"
 
-#: ../src/MadOptionsDialog.cpp:727
+#: ../src/MadOptionsDialog.cpp:768
 msgid "Print Offset Header"
 msgstr "印刷ヘッダのオフセット"
 
-#: ../src/MadOptionsDialog.cpp:733
+#: ../src/MadOptionsDialog.cpp:774
 msgid "Page Header"
 msgstr "ページヘッダ"
 
-#: ../src/MadOptionsDialog.cpp:734
+#: ../src/MadOptionsDialog.cpp:775
 msgid "Print Page Header"
 msgstr "ページヘッダを印刷"
 
-#: ../src/MadOptionsDialog.cpp:739 ../src/MadOptionsDialog.cpp:771
+#: ../src/MadOptionsDialog.cpp:780 ../src/MadOptionsDialog.cpp:812
 msgid "Left:"
 msgstr "左:"
 
-#: ../src/MadOptionsDialog.cpp:747 ../src/MadOptionsDialog.cpp:779
+#: ../src/MadOptionsDialog.cpp:788 ../src/MadOptionsDialog.cpp:820
 msgid "Center:"
 msgstr "中央:"
 
-#: ../src/MadOptionsDialog.cpp:755 ../src/MadOptionsDialog.cpp:787
+#: ../src/MadOptionsDialog.cpp:796 ../src/MadOptionsDialog.cpp:828
 msgid "Right:"
 msgstr "右:"
 
-#: ../src/MadOptionsDialog.cpp:765
+#: ../src/MadOptionsDialog.cpp:806
 msgid "Page Footer"
 msgstr "ページフッタ"
 
-#: ../src/MadOptionsDialog.cpp:766
+#: ../src/MadOptionsDialog.cpp:807
 msgid "Print Page Footer"
 msgstr "ページフッタを印刷"
 
-#: ../src/MadOptionsDialog.cpp:809
+#: ../src/MadOptionsDialog.cpp:850
 msgid "Hint:"
 msgstr "ヒント:"
 
-#: ../src/MadOptionsDialog.cpp:818
+#: ../src/MadOptionsDialog.cpp:859
 msgid "Assigned Keys:"
 msgstr "キーの割り当て:"
 
-#: ../src/MadOptionsDialog.cpp:824
+#: ../src/MadOptionsDialog.cpp:865
 msgid "New Key:"
 msgstr "新規キー:"
 
-#: ../src/MadOptionsDialog.cpp:833
+#: ../src/MadOptionsDialog.cpp:874
 msgid "<== Add Key"
 msgstr "<== キーを追加"
 
-#: ../src/MadOptionsDialog.cpp:836
+#: ../src/MadOptionsDialog.cpp:877
 msgid "==> Delete Key"
 msgstr "==> キーを削除"
 
-#: ../src/MadOptionsDialog.cpp:839
+#: ../src/MadOptionsDialog.cpp:880
 msgid "Show the Key in Menu"
 msgstr "メニューにキーを表示"
 
-#: ../src/MadOptionsDialog.cpp:846
+#: ../src/MadOptionsDialog.cpp:887
 msgid "Reset all keys to default (must restart MadEdit)"
 msgstr "すべてのキーを初期値にリセット (MadEdit の再起動が必要)"
 
-#: ../src/MadOptionsDialog.cpp:859
+#: ../src/MadOptionsDialog.cpp:900
 msgid "Enable Personal Dictionary"
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:864
+#: ../src/MadOptionsDialog.cpp:905
 msgid "Language"
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:868
+#: ../src/MadOptionsDialog.cpp:909
 msgid "Dictionary"
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:871
+#: ../src/MadOptionsDialog.cpp:912
 msgid "Path Setting"
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:882
+#: ../src/MadOptionsDialog.cpp:923
 msgid "General"
 msgstr "一般"
 
-#: ../src/MadOptionsDialog.cpp:883
+#: ../src/MadOptionsDialog.cpp:924
 msgid "Edit"
 msgstr "編集"
 
-#: ../src/MadOptionsDialog.cpp:884
+#: ../src/MadOptionsDialog.cpp:925
 msgid "New Document"
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:886
+#: ../src/MadOptionsDialog.cpp:927
 msgid "Keys"
 msgstr "キー"
 
-#: ../src/MadOptionsDialog.cpp:887
+#: ../src/MadOptionsDialog.cpp:928
 msgid "SpellChecker"
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:959
+#: ../src/MadOptionsDialog.cpp:1000
 #, c-format
 msgid "[%f] &File Name"
 msgstr "[%f] ファイル名(&F)"
 
-#: ../src/MadOptionsDialog.cpp:960
+#: ../src/MadOptionsDialog.cpp:1001
 #, c-format
 msgid "[%p] &Path Name"
 msgstr "[%p] パス名(&P)"
 
-#: ../src/MadOptionsDialog.cpp:962
+#: ../src/MadOptionsDialog.cpp:1003
 #, c-format
 msgid "[%n] Page &Number"
 msgstr "[%n] ページ番号(&P)"
 
-#: ../src/MadOptionsDialog.cpp:963
+#: ../src/MadOptionsDialog.cpp:1004
 #, c-format
 msgid "[%s] Total Page&s"
 msgstr "[%s] 合計ページ(&T)"
 
-#: ../src/MadOptionsDialog.cpp:965
+#: ../src/MadOptionsDialog.cpp:1006
 #, c-format
 msgid "[%d] &Date"
 msgstr "[%d] 日付(&D)"
 
-#: ../src/MadOptionsDialog.cpp:966
+#: ../src/MadOptionsDialog.cpp:1007
 msgid "[%t] &Time"
 msgstr "[%t] 時間(&T)"
 
-#: ../src/MadOptionsDialog.cpp:968
+#: ../src/MadOptionsDialog.cpp:1009
 msgid "[%Y/%m/%d %I:%M:%S %p] 2007/02/24 08:30:55 AM"
 msgstr "[%Y/%m/%d %I:%M:%S %p] 2007/02/24 08:30:55 AM"
 
-#: ../src/MadOptionsDialog.cpp:969
+#: ../src/MadOptionsDialog.cpp:1010
 msgid "[%d/%m/%Y] 24/02/2007"
 msgstr "[%d/%m/%Y] 24/02/2007"
 
-#: ../src/MadOptionsDialog.cpp:970
+#: ../src/MadOptionsDialog.cpp:1011
 msgid "[%a, %d %b %Y %H:%M:%S %z] RFC822 timestamp"
 msgstr "[%a, %d %b %Y %H:%M:%S %z] RFC822 タイムスタンプ"
 
-#: ../src/MadOptionsDialog.cpp:972
+#: ../src/MadOptionsDialog.cpp:1013
 #, c-format
 msgid "[%a] Abbreviated weekday name"
 msgstr "[%a] 平日の名前の省略形"
 
-#: ../src/MadOptionsDialog.cpp:973
+#: ../src/MadOptionsDialog.cpp:1014
 #, c-format
 msgid "[%A] Full weekday name"
 msgstr "[%A] すべての平日の名前"
 
-#: ../src/MadOptionsDialog.cpp:974
+#: ../src/MadOptionsDialog.cpp:1015
 msgid "[%b] Abbreviated month name"
 msgstr "[%b] 月の名前の省略形"
 
-#: ../src/MadOptionsDialog.cpp:975
+#: ../src/MadOptionsDialog.cpp:1016
 msgid "[%B] Full month name"
 msgstr "[%B] すべての月の名前"
 
-#: ../src/MadOptionsDialog.cpp:976
+#: ../src/MadOptionsDialog.cpp:1017
 #, c-format
 msgid "[%c] Date and time representation appropriate for locale"
 msgstr "[%c] locale に合わせて適切な日時の表記"
 
-#: ../src/MadOptionsDialog.cpp:977
+#: ../src/MadOptionsDialog.cpp:1018
 #, c-format
 msgid "[%d] Day of month as decimal number (01 - 31)"
 msgstr "[%d] 月の日を10進数で表記 (01 - 31)"
 
-#: ../src/MadOptionsDialog.cpp:978
+#: ../src/MadOptionsDialog.cpp:1019
 msgid "[%H] Hour in 24-hour format (00 - 23)"
 msgstr "[%H] 時間を 24 時間形式で表記 (00 - 23)"
 
-#: ../src/MadOptionsDialog.cpp:979
+#: ../src/MadOptionsDialog.cpp:1020
 msgid "[%I] Hour in 12-hour format (01 - 12)"
 msgstr "[%I] 時間を 12 時間形式で表記 (01 - 12)"
 
-#: ../src/MadOptionsDialog.cpp:980
+#: ../src/MadOptionsDialog.cpp:1021
 msgid "[%j] Day of year as decimal number (001 - 366)"
 msgstr "[%j] 年の日を10進数で表記 (001 - 366)"
 
-#: ../src/MadOptionsDialog.cpp:981
+#: ../src/MadOptionsDialog.cpp:1022
 #, c-format
 msgid "[%m] Month as decimal number (01 - 12)"
 msgstr "[%m] 月を10進数で表記 (01 - 12)"
 
-#: ../src/MadOptionsDialog.cpp:982
+#: ../src/MadOptionsDialog.cpp:1023
 msgid "[%M] Minute as decimal number (00 - 59)"
 msgstr "[%M] 分を10進数で表記 (00 - 59)"
 
-#: ../src/MadOptionsDialog.cpp:983
+#: ../src/MadOptionsDialog.cpp:1024
 #, c-format
 msgid "[%p] Current locale's A.M./P.M. indicator for 12-hour clock"
 msgstr "[%p] 現在の locale A.M./P.M. 12 時間表記"
 
-#: ../src/MadOptionsDialog.cpp:984
+#: ../src/MadOptionsDialog.cpp:1025
 #, c-format
 msgid "[%S] Second as decimal number (00 - 59)"
 msgstr "[%S] 秒を10進数で表記 (00 - 59)"
 
-#: ../src/MadOptionsDialog.cpp:985
+#: ../src/MadOptionsDialog.cpp:1026
 msgid ""
 "[%U] Week of year as decimal number, with Sunday as first day of week (00 - "
 "53)"
 msgstr "[%U] 週の最初を日曜日として、年の週を10進数で表記 (00 - 53)"
 
-#: ../src/MadOptionsDialog.cpp:986
+#: ../src/MadOptionsDialog.cpp:1027
 msgid "[%w] Weekday as decimal number (0 - 6; Sunday is 0)"
 msgstr "[%w] 週を10進数で表記 (0 - 6; 日曜 = 0)"
 
-#: ../src/MadOptionsDialog.cpp:987
+#: ../src/MadOptionsDialog.cpp:1028
 msgid ""
 "[%W] Week of year as decimal number, with Monday as first day of week (00 - "
 "53)"
 msgstr "[%W] 週の最初を月曜日として、年の週を10進数で表記 (00 - 53)"
 
-#: ../src/MadOptionsDialog.cpp:988
+#: ../src/MadOptionsDialog.cpp:1029
 #, c-format
 msgid "[%x] Date representation for current locale"
 msgstr "[%x] 現在の locale での日付の表記"
 
-#: ../src/MadOptionsDialog.cpp:989
+#: ../src/MadOptionsDialog.cpp:1030
 #, c-format
 msgid "[%X] Time representation for current locale"
 msgstr "[%X] 現在の locale の時間表記"
 
-#: ../src/MadOptionsDialog.cpp:990
+#: ../src/MadOptionsDialog.cpp:1031
 msgid "[%y] Year without century, as decimal number (00 - 99)"
 msgstr "[%y] 世紀を除いて10進数で年を表記 (00 - 99)"
 
-#: ../src/MadOptionsDialog.cpp:991
+#: ../src/MadOptionsDialog.cpp:1032
 msgid "[%Y] Year with century, as decimal number"
 msgstr "[%Y] 年を世紀で、10進数で表記"
 
-#: ../src/MadOptionsDialog.cpp:992
+#: ../src/MadOptionsDialog.cpp:1033
 msgid "[%z] Time-zone name"
 msgstr "[%z] タイムゾーンの名前"
 
-#: ../src/MadOptionsDialog.cpp:993
+#: ../src/MadOptionsDialog.cpp:1034
 msgid "[%Z] Time-zone abbreviation"
 msgstr "[%Z] タイムゾーン 省略形"
 
-#: ../src/MadOptionsDialog.cpp:1042
+#: ../src/MadOptionsDialog.cpp:1096
 msgid "Commands"
 msgstr "コマンド"
 
-#: ../src/MadOptionsDialog.cpp:1044
+#: ../src/MadOptionsDialog.cpp:1098
 msgid "Menu"
 msgstr "メニュー"
 
-#: ../src/MadOptionsDialog.cpp:1387
+#: ../src/MadOptionsDialog.cpp:1475
 #, fuzzy, c-format
 msgid "Invalid value of \"%s(%s)\""
 msgstr "値 \"%s\" は無効です"
 
-#: ../src/MadOptionsDialog.cpp:1391 ../src/MadOptionsDialog.cpp:1397
+#: ../src/MadOptionsDialog.cpp:1479 ../src/MadOptionsDialog.cpp:1485
 msgid ": Should be greater than zero"
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:1407 ../src/MadOptionsDialog.cpp:1413
+#: ../src/MadOptionsDialog.cpp:1495 ../src/MadOptionsDialog.cpp:1501
 msgid ": Should be 1~4096"
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:1419 ../src/MadOptionsDialog.cpp:1425
+#: ../src/MadOptionsDialog.cpp:1507 ../src/MadOptionsDialog.cpp:1513
 msgid ": Should be 1~256"
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:1431
+#: ../src/MadOptionsDialog.cpp:1519
 msgid ": Should be 10~30"
 msgstr ""
 
-#: ../src/MadOptionsDialog.cpp:1480
+#: ../src/MadOptionsDialog.cpp:1568
 msgid "Cannot assign key to this item"
 msgstr "アイテムにキーを割り当てられません"
 
-#: ../src/MadOptionsDialog.cpp:1575
+#: ../src/MadOptionsDialog.cpp:1663
 msgid "This key is not assigned"
 msgstr "このキーは割り当てられていません"
 
-#: ../src/MadOptionsDialog.cpp:1599
+#: ../src/MadOptionsDialog.cpp:1687
 #, c-format
 msgid "This key is assigned to [%s]"
 msgstr "キーを割り当て [%s]"
