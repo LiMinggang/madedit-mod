@@ -156,6 +156,9 @@ void MadEncoding::InitEncodings()
 	wxString fontname( wxT( "Monospace" ) );
 #endif
 
+	wxConfigBase *cfg = wxConfigBase::Get( false );
+	cfg->Read( wxT( "/MadEdit/DefaultTextFont" ), &fontname );
+
 	for( size_t idx = 0; idx < count; ++idx )
 	{
 		wxFontEncoding enc = wxFontMapper::GetEncoding( idx );
