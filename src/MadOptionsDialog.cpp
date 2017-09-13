@@ -469,7 +469,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	BoxSizer3->Add(BoxSizer35, 0, wxALL|wxEXPAND, 2);
 	BoxSizer40 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer40->Add(10,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	CheckBoxOverrideEncodingFont = new wxCheckBox(Panel1, ID_CHECKBOXOVERRIDEENCODINGFONT, _("Override the default font of default encoding"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXOVERRIDEENCODINGFONT"));
+	CheckBoxOverrideEncodingFont = new wxCheckBox(Panel1, ID_CHECKBOXOVERRIDEENCODINGFONT, _("Override the default font of encoding"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXOVERRIDEENCODINGFONT"));
 	SET_CONTROLPARENT(CheckBoxOverrideEncodingFont);
 	CheckBoxOverrideEncodingFont->SetValue(false);
 	BoxSizer40->Add(CheckBoxOverrideEncodingFont, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
