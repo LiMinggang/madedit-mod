@@ -7981,8 +7981,10 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		m_Config->Write( wxT( "MaxTextFileSize" ), g_OptionsDialog->EditMaxTextFileSize->GetValue() );
 		mds = g_OptionsDialog->EditMaxDisplaySize->GetValue();
 		m_Config->Write( wxT( "MaxDisplaySize" ), mds );
-		m_Config->Write( wxT( "DefaultEncoding" ), g_OptionsDialog->ComboBoxEncoding->GetValue() );		
+		m_Config->Write( wxT( "DefaultEncoding" ), g_OptionsDialog->ComboBoxEncoding->GetValue() );
 		m_Config->Write( wxT( "DefaultTextFont" ), g_OptionsDialog->ComboBoxDefaultFont->GetValue() );
+		m_Config->Write( wxT( "OverrideEncodingTextFont" ), g_OptionsDialog->CheckBoxOverrideEncodingFont->GetValue() );
+
 		ll = 0;
 		g_OptionsDialog->EditDefaultFontSize->GetValue().ToLong(&ll);
 		m_Config->Write(wxT("DefaultTextFontSize"), ll);

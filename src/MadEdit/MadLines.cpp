@@ -3092,6 +3092,21 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 		else
 			m_MadEdit->SetEncoding( m_Syntax->m_Encoding );
 
+		bool bb;
+		m_MadEdit->m_Config->Read( wxString( wxT( "OverrideEncodingTextFont" ) ), &bb, false );
+		if(bb)
+		{
+			wxString fontname;
+			m_MadEdit->m_Config->Read( wxString( wxT( "DefaultTextFont" ) ), &fontname );
+			if(!fontname.IsEmpty())
+			{
+				long fontsize = m_MadEdit->m_Config->ReadLong( wxT( "DefaultTextFontSize" ), DEFAULT_FONT_SIZE );
+				if(fontsize < 0) fontsize = DEFAULT_FONT_SIZE;
+				if(fontsize > MAX_FONT_SIZE) fontsize = MAX_FONT_SIZE;
+				m_MadEdit->SetTextFont( fontname, fontsize, true );
+			}
+		}
+
 		return true;
 	}
 
@@ -3311,6 +3326,20 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 		}
 		else
 		{
+			bool bb;
+			m_MadEdit->m_Config->Read(wxString(wxT("OverrideEncodingTextFont")), &bb, false);
+			if (bb)
+			{
+				wxString fontname;
+				m_MadEdit->m_Config->Read(wxString(wxT("DefaultTextFont")), &fontname);
+				if (!fontname.IsEmpty())
+				{
+					long fontsize = m_MadEdit->m_Config->ReadLong(wxT("DefaultTextFontSize"), DEFAULT_FONT_SIZE);
+					if (fontsize < 0) fontsize = DEFAULT_FONT_SIZE;
+					if (fontsize > MAX_FONT_SIZE) fontsize = MAX_FONT_SIZE;
+					m_MadEdit->SetTextFont(fontname, fontsize, true);
+				}
+			}
 			Reformat( iter, iter );
 		}
 	}

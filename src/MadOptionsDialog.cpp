@@ -138,6 +138,7 @@ const long MadOptionsDialog::ID_STATICTEXT16 = wxNewId();
 const long MadOptionsDialog::ID_COMBOBOXENCODING = wxNewId();
 const long MadOptionsDialog::ID_STATICTEXT13 = wxNewId();
 const long MadOptionsDialog::ID_COMBOBOXDEFAULTFONT = wxNewId();
+const long MadOptionsDialog::ID_CHECKBOXOVERRIDEENCODINGFONT = wxNewId();
 const long MadOptionsDialog::ID_TEXTCTRLDEFAULTFONTSIZE = wxNewId();
 const long MadOptionsDialog::ID_EDITMAXSIZETOLOAD = wxNewId();
 const long MadOptionsDialog::ID_EDITMAXTEXTFILESIZE = wxNewId();
@@ -430,6 +431,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	wxBoxSizer* BoxSizer3;
 	wxStaticBoxSizer* StaticBoxSizer5;
 	wxBoxSizer* BoxSizer25;
+	wxBoxSizer* BoxSizer40;
 
 	Create(parent, wxID_ANY, _("Options"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxSYSTEM_MENU|wxRESIZE_BORDER|wxCLOSE_BOX, _T("wxID_ANY"));
 	SetClientSize(wxSize(575,486));
@@ -463,8 +465,15 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	SET_CONTROLPARENT(ComboBoxDefaultFont);
 	BoxSizer35->Add(ComboBoxDefaultFont, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	StaticText19 = new wxStaticText(Panel1, wxID_ANY, _("Default font"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
-	BoxSizer35->Add(StaticText19, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	BoxSizer35->Add(StaticText19, 0, wxALL|wxEXPAND, 2);
 	BoxSizer3->Add(BoxSizer35, 0, wxALL|wxEXPAND, 2);
+	BoxSizer40 = new wxBoxSizer(wxHORIZONTAL);
+	BoxSizer40->Add(10,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
+	CheckBoxOverrideEncodingFont = new wxCheckBox(Panel1, ID_CHECKBOXOVERRIDEENCODINGFONT, _("Override the default font of default encoding"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXOVERRIDEENCODINGFONT"));
+	SET_CONTROLPARENT(CheckBoxOverrideEncodingFont);
+	CheckBoxOverrideEncodingFont->SetValue(false);
+	BoxSizer40->Add(CheckBoxOverrideEncodingFont, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	BoxSizer3->Add(BoxSizer40, 0, wxALL|wxEXPAND, 2);
 	BoxSizer7 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer39 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer39->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
@@ -1228,6 +1237,8 @@ void MadOptionsDialog::LoadOptions(void)
 	cfg->Read( wxT( "DefaultTextFont" ), &fontname );
 	int index = ComboBoxDefaultFont->FindString(fontname);
 	if(index != wxNOT_FOUND) ComboBoxDefaultFont->SetSelection(index);
+	cfg->Read( wxT( "OverrideEncodingTextFont" ), &bb, false );
+	CheckBoxOverrideEncodingFont->SetValue( bb );
 	cfg->Read( wxT( "DefaultTextFontSize" ), &ll, DEFAULT_FONT_SIZE );
 	if(ll < 0) ll = DEFAULT_FONT_SIZE;
 	if(ll > MAX_FONT_SIZE) ll = MAX_FONT_SIZE;
