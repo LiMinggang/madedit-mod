@@ -148,6 +148,13 @@ void MadEncoding::InitEncodings()
 	wxFontEncoding sysenc = wxLocale::GetSystemEncoding();
 	size_t count = wxFontMapper::GetSupportedEncodingsCount();
 	std::vector<int> encGrp;
+#ifdef __WXMSW__
+	wxString fontname( wxT( "Courier New" ) );
+#elif defined(__APPLE__) && defined(__MACH__)
+	wxString fontname( wxT( "Monaco" ) );
+#else
+	wxString fontname( wxT( "Monospace" ) );
+#endif
 
 	for( size_t idx = 0; idx < count; ++idx )
 	{
@@ -155,13 +162,6 @@ void MadEncoding::InitEncodings()
 		wxString name = wxFontMapper::GetEncodingName( enc );
 		wxString desc = wxFontMapper::GetEncodingDescription( enc );
 		MadEncodingType type = etSingleByte;
-#ifdef __WXMSW__
-		wxString fontname( wxT( "Courier New" ) );
-#elif defined(__APPLE__) && defined(__MACH__)
-		wxString fontname( wxT( "Monaco" ) );
-#else
-		wxString fontname( wxT( "Monospace" ) );
-#endif
 		bool ignore = false;
 		bool dotest = true;    // test the encoding if is supported in this machine
 		wxChar testwc = 0;
@@ -678,7 +678,7 @@ void MadEncoding::InitEncodings()
 	{
 		encGrp.clear();
 		wxString name = wxT( "GB18030" );
-		wxString fontname( wxT( "Courier New" ) );
+//		wxString fontname( wxT( "Courier New" ) );
 		wxString desc(_("Chinese Simplified(UTF-PRC)"));
 		MadEncodingType type = etGB18030;
 		MSW_GET_FONT_NAME( wxT( "54936" ), fontname );
