@@ -92,23 +92,6 @@
 													<border>2</border>
 												</object>
 												<object class="sizeritem">
-													<object class="wxBoxSizer" variable="BoxSizer40" member="no">
-														<object class="spacer">
-															<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
-															<size>10,-1</size>
-														</object>
-														<object class="sizeritem">
-															<object class="wxCheckBox" name="ID_CHECKBOXOVERRIDEENCODINGFONT" variable="CheckBoxOverrideEncodingFont" member="yes">
-																<label>Override the default font of encoding</label>
-															</object>
-															<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
-															<border>2</border>
-														</object>
-													</object>
-													<flag>wxALL|wxEXPAND</flag>
-													<border>2</border>
-												</object>
-												<object class="sizeritem">
 													<object class="wxBoxSizer" variable="BoxSizer7" member="no">
 														<orient>wxVERTICAL</orient>
 														<object class="sizeritem">

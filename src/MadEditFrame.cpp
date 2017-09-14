@@ -7982,8 +7982,13 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		mds = g_OptionsDialog->EditMaxDisplaySize->GetValue();
 		m_Config->Write( wxT( "MaxDisplaySize" ), mds );
 		m_Config->Write( wxT( "DefaultEncoding" ), g_OptionsDialog->ComboBoxEncoding->GetValue() );
-		m_Config->Write( wxT( "DefaultTextFont" ), g_OptionsDialog->ComboBoxDefaultFont->GetValue() );
-		m_Config->Write( wxT( "OverrideEncodingTextFont" ), g_OptionsDialog->CheckBoxOverrideEncodingFont->GetValue() );
+		wxString ss;
+		m_Config->Read( wxT( "DefaultTextFont" ), &ss );
+		if(g_OptionsDialog->ComboBoxDefaultFont->GetValue() != ss)
+		{
+			m_Config->Write( wxT( "DefaultTextFont" ), g_OptionsDialog->ComboBoxDefaultFont->GetValue() );
+			MadEncoding::UpdateEncodingDefaultFont(g_OptionsDialog->ComboBoxDefaultFont->GetValue());
+		}
 
 		ll = 0;
 		g_OptionsDialog->EditDefaultFontSize->GetValue().ToLong(&ll);
@@ -8079,7 +8084,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 
 		//Print
 		bool bb;
-		wxString ss;
+		ss = wxT("0");
 		bb = g_OptionsDialog->CheckBoxPrintSyntax->GetValue();
 		m_Config->Write( wxT( "PrintSyntax" ), bb );
 		bb = g_OptionsDialog->CheckBoxPrintLineNumber->GetValue();

@@ -60,16 +60,16 @@ enum MadEncodingGrp
 
 struct MadEncodingInfo
 {
-	int         	m_Encoding;
-	wxString		m_Name;
-	wxString		m_Description;
-	wxString		m_FontName;
-	MadEncodingType	m_Type;
-	MadCSConv	   *m_CSConv;
-	ucs2_t		   *m_MBtoWC_Table;		 //	MultiByte To WideChar table
-	wxWord		   *m_WCtoMB_Table;		 //	WideChar To	MultiByte table
-	wxByte		   *m_LeadByte_Table;	 //	DBCS Lead-Byte table
-	std::vector<int>  m_GrpIdVec; //Filter Ids
+	int             m_Encoding;
+	wxString        m_Name;
+	wxString        m_Description;
+	wxString        m_FontName;
+	MadEncodingType m_Type;
+	MadCSConv      *m_CSConv;
+	ucs2_t         *m_MBtoWC_Table;         //    MultiByte To WideChar table
+	wxWord         *m_WCtoMB_Table;         //    WideChar To    MultiByte table
+	wxByte         *m_LeadByte_Table;     //    DBCS Lead-Byte table
+	std::vector<int> m_GrpIdVec; //Filter Ids
 
 	MadEncodingInfo()
 		:m_Encoding(-1), m_Type(etUTF8),
@@ -77,9 +77,9 @@ struct MadEncodingInfo
 	{
 	}
 
-	MadEncodingInfo(int e, const	wxString &n, const wxString	&de, MadEncodingType t,	const wxString &fn,	std::vector<int>& grp)
-		:m_Encoding(e),	m_Name(n), m_Description(de), m_FontName(fn), m_Type(t),
-		m_CSConv(nullptr),	m_MBtoWC_Table(nullptr), m_WCtoMB_Table(nullptr),	m_LeadByte_Table(nullptr),	m_GrpIdVec(grp)
+	MadEncodingInfo(int e, const wxString &n, const wxString &de, MadEncodingType t, const wxString &fn, std::vector<int>& grp)
+		:m_Encoding(e), m_Name(n), m_Description(de), m_FontName(fn), m_Type(t),
+		m_CSConv(nullptr), m_MBtoWC_Table(nullptr), m_WCtoMB_Table(nullptr), m_LeadByte_Table(nullptr), m_GrpIdVec(grp)
 	{
 	}
 };
@@ -93,18 +93,19 @@ private:
 	static std::map<int, wxString>MadEncodingGrpName;
 
 public:
-	static void		InitEncodings(); //	must call this before use MadEncoding
-	static void		FreeEncodings(); //
+	static void InitEncodings(); // must call this before use MadEncoding
+	static void UpdateEncodingDefaultFont(wxString & font);
+	static void FreeEncodings(); //
 
-	static size_t	GetEncodingsCount();
-	static wxString	GetEncodingName(size_t idx);
-	static wxString	GetEncodingDescription(size_t idx);
-	static wxString	GetEncodingFontName(size_t idx);
+	static size_t GetEncodingsCount();
+	static wxString GetEncodingName(size_t idx);
+	static wxString GetEncodingDescription(size_t idx);
+	static wxString GetEncodingFontName(size_t idx);
 	static const std::vector<int>& GetEncodingGrps(size_t idx);
-	static wxString	EncodingToName(int enc);
+	static wxString EncodingToName(int enc);
 	static int NameToEncoding(const wxString &name);
 	static MadEncoding *GetSystemEncoding();
-	static wxString	GetGroupNameById(int id)
+	static wxString GetGroupNameById(int id)
 	{
 		if(id<ENCG_WESTERNEUROPE ||	id>=ENCG_MAX) return wxEmptyString;
 		return MadEncodingGrpName[id];

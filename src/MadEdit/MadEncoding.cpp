@@ -716,6 +716,17 @@ void MadEncoding::FreeEncodings()
 	}
 }
 
+void MadEncoding::UpdateEncodingDefaultFont(wxString & font)
+{
+	vector<MadEncodingInfo>::iterator it = EncodingsTable.begin();
+	vector<MadEncodingInfo>::iterator itend = EncodingsTable.end();
+
+	while( it != itend )
+	{
+		it->m_FontName = font;
+		++it;
+	}
+}
 
 size_t MadEncoding::GetEncodingsCount()
 {

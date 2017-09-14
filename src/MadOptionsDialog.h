@@ -115,7 +115,6 @@ class MadOptionsDialog: public wxDialog
 		wxRadioButton* RadioButtonNewDocLineEndingLF;
 		wxPanel* Panel1;
 		wxCheckBox* CheckBoxInsertPairForSelection;
-		wxCheckBox* CheckBoxOverrideEncodingFont;
 		wxStaticText* StaticText1;
 		wxCheckBox* CheckBoxPrintPageFooter;
 		wxCheckBox* CheckBoxDoNotSaveSettings;
@@ -195,7 +194,6 @@ class MadOptionsDialog: public wxDialog
 		static const long ID_COMBOBOXENCODING;
 		static const long ID_STATICTEXT13;
 		static const long ID_COMBOBOXDEFAULTFONT;
-		static const long ID_CHECKBOXOVERRIDEENCODINGFONT;
 		static const long ID_TEXTCTRLDEFAULTFONTSIZE;
 		static const long ID_EDITMAXSIZETOLOAD;
 		static const long ID_EDITMAXTEXTFILESIZE;

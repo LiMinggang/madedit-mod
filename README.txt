@@ -119,6 +119,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.4.10
 New: Settings for new document in Options
+New: Default font for document
 Fix: Refactor Option dialog with wxSmith
 
 Mod v0.4.9
