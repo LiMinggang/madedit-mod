@@ -350,6 +350,7 @@ MadOptionsDialog::wxCmdEvtHandlerMap_t MadOptionsDialog::m_radiobutton_evt_map[]
 	{ ID_RADIOBUTTONNEWDOCLINEENDINGCRLF, &MadOptionsDialog::RadioButtonNewDocLineEndingSelect },
 	{ ID_RADIOBUTTONNEWDOCLINEENDINGLF, &MadOptionsDialog::RadioButtonNewDocLineEndingSelect },
 	{ ID_RADIOBUTTONNEWDOCLINEENDINGCR, &MadOptionsDialog::RadioButtonNewDocLineEndingSelect },
+	{ ID_RADIOBUTTONNEWDOCLINEENDINGDEFAULT, &MadOptionsDialog::RadioButtonNewDocLineEndingSelect },
 };
 
 #if defined(__WXMSW__) && (wxMAJOR_VERSION >= 3)
@@ -1318,7 +1319,7 @@ void MadOptionsDialog::LoadOptions(void)
 	CheckBoxRestoreCaretPos->SetValue( bb );
 
 	// New Document
-	cfg->Read( wxT( "NewDocumentLineEnding" ), &m_NewDocLineEnding );
+	cfg->Read( wxT( "NewDocumentLineEnding" ), &m_NewDocLineEnding, nltDefault );
 	switch(m_NewDocLineEnding)
 	{
 	case nltDefault:
