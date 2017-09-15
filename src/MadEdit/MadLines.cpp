@@ -3009,6 +3009,7 @@ void MadLines::Append( const MadLineIterator &lit1, const MadLineIterator &lit2 
 bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding )
 {
 	MadFileData *fd = new MadFileData( filename );
+	wxString useencoding = encoding;
 
 	if( !fd->OpenSuccess() )
 	{
@@ -3052,13 +3053,17 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 
 	wxString defaultenc;
 
-	if( encoding.IsEmpty() )
+	bool bb = false;
+	m_MadEdit->m_Config->Read( wxT( "/MadEdit/EnforceDefaultEncoding" ), &bb, false );
+	if(bb) m_MadEdit->m_Config->Read( wxT( "/MadEdit/DefaultEncoding" ), &useencoding ); 
+
+	if( useencoding.IsEmpty()  )
 	{
 		m_MadEdit->m_Config->Read( wxT( "/MadEdit/DefaultEncoding" ), &defaultenc );
 	}
 	else
 	{
-		defaultenc = encoding;
+		defaultenc = useencoding;
 	}
 
 	if( s == 0 )
@@ -3201,9 +3206,9 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 	}
 	else
 	{
-		if( !encoding.IsEmpty() )
+		if( !useencoding.IsEmpty() )
 		{
-			m_MadEdit->SetEncoding( encoding );
+			m_MadEdit->SetEncoding( useencoding );
 			Reformat( iter, iter );
 			ok = true;
 		}
@@ -3246,9 +3251,9 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 
 	if( !ok )
 	{
-		if( !encoding.IsEmpty() )
+		if( !useencoding.IsEmpty() )
 		{
-			m_MadEdit->SetEncoding( encoding );
+			m_MadEdit->SetEncoding( useencoding );
 		}
 		else
 			if( !m_Syntax->m_Encoding.IsEmpty() )

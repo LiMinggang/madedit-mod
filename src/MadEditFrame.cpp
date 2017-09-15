@@ -7982,6 +7982,8 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		mds = g_OptionsDialog->EditMaxDisplaySize->GetValue();
 		m_Config->Write( wxT( "MaxDisplaySize" ), mds );
 		m_Config->Write( wxT( "DefaultEncoding" ), g_OptionsDialog->ComboBoxEncoding->GetValue() );
+		m_Config->Write( wxT( "EnforceDefaultEncoding" ), g_OptionsDialog->CheckBoxSkipAutoEncoding->GetValue() );
+		
 		wxString ss;
 		m_Config->Read( wxT( "DefaultTextFont" ), &ss );
 		if(g_OptionsDialog->ComboBoxDefaultFont->GetValue() != ss)

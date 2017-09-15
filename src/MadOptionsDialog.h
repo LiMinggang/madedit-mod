@@ -77,6 +77,7 @@ class MadOptionsDialog: public wxDialog
 		wxCheckBox* CheckBoxRightClickMenu;
 #endif
 		wxTextCtrl* EditDefaultFontSize;
+		wxCheckBox* CheckBoxSkipAutoEncoding;
 		wxCheckBox* CheckBoxRecordCaretMovements;
 		wxPanel* Panel5;
 		wxMenu PopupMenuDateTimeMark;
@@ -193,6 +194,7 @@ class MadOptionsDialog: public wxDialog
 		static const long ID_STATICTEXT16;
 		static const long ID_COMBOBOXENCODING;
 		static const long ID_STATICTEXT13;
+		static const long ID_CHECKBOXSKIPAUTOENCODING;
 		static const long ID_COMBOBOXDEFAULTFONT;
 		static const long ID_TEXTCTRLDEFAULTFONTSIZE;
 		static const long ID_EDITMAXSIZETOLOAD;
