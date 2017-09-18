@@ -679,7 +679,6 @@ size_t ASEnhancer::processSwitchBlock(string& line, size_t index)
 	if (line[i] == '}')
 	{
 		sw.switchBraceCount--;
-		assert(sw.switchBraceCount <= braceCount);
 		if (sw.switchBraceCount == 0)                 // if end of switch statement
 		{
 			int lineUnindent = sw.unindentDepth;

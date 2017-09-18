@@ -57,9 +57,9 @@
 	#pragma warning(disable: 4996)  // secure version deprecation warnings
 #endif
 
-// for namespace problem in version 5.0
-#if defined(_MSC_VER) && _MSC_VER < 1200        // check for V6.0
-	#error - Use Microsoft compiler version 6 or higher
+// for Visual Studio supported C++11 standard
+#if defined(_MSC_VER) && _MSC_VER < 1600
+	#error Use Microsoft Visual Studio 2010 or higher
 #endif
 
 #ifdef __clang__
@@ -101,8 +101,6 @@
 		#endif
 	#endif	// #ifdef _WIN32
 
-	// define utf-16 bit text for the platform
-	typedef unsigned short utf16_t;
 	// define pointers to callback error handler and memory allocation
 	typedef void (STDCALL* fpError)(int errorNumber, const char* errorMessage);
 	typedef char* (STDCALL* fpAlloc)(unsigned long memoryNeeded);
@@ -167,7 +165,7 @@ public:	// inline functions
 class ASEncoding
 {
 private:
-	typedef unsigned short utf16; // 16 bits
+	typedef char16_t utf16;       // 16 bits unsigned
 	typedef unsigned char utf8;   // 8 bits
 	typedef unsigned char ubyte;  // 8 bits
 	enum { SURROGATE_LEAD_FIRST = 0xD800 };
@@ -203,7 +201,7 @@ public:
 	ASOptions(ASFormatter& formatterArg, ASConsole& consoleArg);
 #endif
 	string getOptionErrors() const;
-	void importOptions(istream& in, vector<string>& optionsVector);
+	void importOptions(stringstream& in, vector<string>& optionsVector);
 	bool parseOptions(vector<string>& optionsVector, const string& errorInfo);
 
 private:
@@ -261,7 +259,7 @@ private:    // variables
 	bool lineEndsMixed;                 // output has mixed line ends
 	int  linesOut;                      // number of output lines
 
-	ASEncoding utf8_16;                 // utf8/16 conversion methods
+	ASEncoding encode;                  // file encoding conversion
 
 	string outputEOL;                   // current line end
 	string prevEOL;                     // previous line end
@@ -380,15 +378,15 @@ public:
 	ASLibrary() {}
 	virtual ~ASLibrary() {}
 	// virtual functions are mocked in testing
-	utf16_t* formatUtf16(const utf16_t*, const utf16_t*, fpError, fpAlloc) const;
-	virtual utf16_t* convertUtf8ToUtf16(const char* utf8In, fpAlloc fpMemoryAlloc) const;
-	virtual char* convertUtf16ToUtf8(const utf16_t* utf16In) const;
+	char16_t* formatUtf16(const char16_t*, const char16_t*, fpError, fpAlloc) const;
+	virtual char16_t* convertUtf8ToUtf16(const char* utf8In, fpAlloc fpMemoryAlloc) const;
+	virtual char* convertUtf16ToUtf8(const char16_t* utf16In) const;
 
 private:
 	static char* STDCALL tempMemoryAllocation(unsigned long memoryNeeded);
 
 private:
-	ASEncoding utf8_16;         // utf8/16 conversion methods
+	ASEncoding encode;             // file encoding conversion
 };
 
 #endif	// ASTYLE_LIB
@@ -420,10 +418,10 @@ jstring STDCALL Java_AStyleInterface_AStyleMain(JNIEnv* env,
 //----------------------------------------------------------------------------
 #ifdef ASTYLE_LIB
 extern "C" EXPORT
-utf16_t* STDCALL AStyleMainUtf16(const utf16_t* pSourceIn,
-                                 const utf16_t* pOptions,
-                                 fpError fpErrorHandler,
-                                 fpAlloc fpMemoryAlloc);
+char16_t* STDCALL AStyleMainUtf16(const char16_t* pSourceIn,
+                                  const char16_t* pOptions,
+                                  fpError fpErrorHandler,
+                                  fpAlloc fpMemoryAlloc);
 #endif	// ASTYLE_LIB
 
 //-----------------------------------------------------------------------------

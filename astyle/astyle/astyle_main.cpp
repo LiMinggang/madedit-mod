@@ -206,6 +206,15 @@ string ASStreamIterator<T>::nextLine(bool emptyLineWasDeleted)
 		inStream->clear();
 	}
 
+	// has not detected an input end of line
+	if (!eolWindows && !eolLinux && !eolMacOld)
+	{
+#ifdef _WIN32
+		eolWindows++;
+#else
+		eolLinux++;
+#endif
+	}
 	// set output end of line characters
 	if (eolWindows >= eolLinux)
 	{
@@ -454,7 +463,9 @@ FileEncoding ASConsole::detectEncoding(const char* data, size_t dataSize) const
 {
 	FileEncoding encoding = ENCODING_8BIT;
 
-	if (dataSize >= 4 && memcmp(data, "\x00\x00\xFE\xFF", 4) == 0)
+	if (dataSize >= 3 && memcmp(data, "\xEF\xBB\xBF", 3) == 0)
+		encoding = UTF_8BOM;
+	else if (dataSize >= 4 && memcmp(data, "\x00\x00\xFE\xFF", 4) == 0)
 		encoding = UTF_32BE;
 	else if (dataSize >= 4 && memcmp(data, "\xFF\xFE\x00\x00", 4) == 0)
 		encoding = UTF_32LE;
@@ -801,13 +812,13 @@ FileEncoding ASConsole::readFile(const string& fileName_, stringstream& in) cons
 	const int blockSize = 65536;	// 64 KB
 	ifstream fin(fileName_.c_str(), ios::binary);
 	if (!fin)
-		error("Cannot open input file", fileName_.c_str());
+		error("Cannot open file", fileName_.c_str());
 	char* data = new (nothrow) char[blockSize];
 	if (data == nullptr)
-		error("Cannot allocate memory for input file", fileName_.c_str());
+		error("Cannot allocate memory to open file", fileName_.c_str());
 	fin.read(data, blockSize);
 	if (fin.bad())
-		error("Cannot read input file", fileName_.c_str());
+		error("Cannot read file", fileName_.c_str());
 	size_t dataSize = static_cast<size_t>(fin.gcount());
 	FileEncoding encoding = detectEncoding(data, dataSize);
 	if (encoding == UTF_32BE || encoding == UTF_32LE)
@@ -819,12 +830,12 @@ FileEncoding ASConsole::readFile(const string& fileName_, stringstream& in) cons
 		if (encoding == UTF_16LE || encoding == UTF_16BE)
 		{
 			// convert utf-16 to utf-8
-			size_t utf8Size = utf8_16.utf8LengthFromUtf16(data, dataSize, isBigEndian);
+			size_t utf8Size = encode.utf8LengthFromUtf16(data, dataSize, isBigEndian);
 			char* utf8Out = new (nothrow) char[utf8Size];
 			if (utf8Out == nullptr)
 				error("Cannot allocate memory for utf-8 conversion", fileName_.c_str());
-			size_t utf8Len = utf8_16.utf16ToUtf8(data, dataSize, isBigEndian, firstBlock, utf8Out);
-			assert(utf8Len == utf8Size);
+			size_t utf8Len = encode.utf16ToUtf8(data, dataSize, isBigEndian, firstBlock, utf8Out);
+			assert(utf8Len <= utf8Size);
 			in << string(utf8Out, utf8Len);
 			delete[] utf8Out;
 		}
@@ -832,7 +843,7 @@ FileEncoding ASConsole::readFile(const string& fileName_, stringstream& in) cons
 			in << string(data, dataSize);
 		fin.read(data, blockSize);
 		if (fin.bad())
-			error("Cannot read input file", fileName_.c_str());
+			error("Cannot read file", fileName_.c_str());
 		dataSize = static_cast<size_t>(fin.gcount());
 		firstBlock = false;
 	}
@@ -1600,7 +1611,7 @@ void ASConsole::printHelp() const
 	cout << "    2. The file called .astylerc in the directory pointed to by the\n";
 	cout << "       HOME environment variable ( i.e. $HOME/.astylerc ).\n";
 	cout << "    3. The file called astylerc in the directory pointed to by the\n";
-	cout << "       USERPROFILE environment variable (i.e. %USERPROFILE%\\astylerc).\n";
+	cout << "       APPDATA environment variable (i.e. %APPDATA%\\astylerc).\n";
 	cout << "    If a default options file is found, the options in this file will\n";
 	cout << "    be parsed BEFORE the command-line options.\n";
 	cout << "    Long options within the default option file may be written without\n";
@@ -2121,43 +2132,66 @@ void ASConsole::processOptions(const vector<string>& argvOptions)
 		{
 			char* env = getenv("ARTISTIC_STYLE_OPTIONS");
 			if (env != nullptr)
+			{
 				setOptionsFileName(env);
+				standardizePath(optionsFileName);
+			}
 		}
 		if (optionsFileName.empty())
 		{
 			char* env = getenv("HOME");
 			if (env != nullptr)
-				setOptionsFileName(string(env) + "/.astylerc");
+			{
+				string name = string(env) + "/.astylerc";
+				struct stat buffer;
+				if (stat (name.c_str(), &buffer) == 0)
+					setOptionsFileName(name);
+			}
+		}
+		if (optionsFileName.empty())
+		{
+			char* env = getenv("APPDATA");
+			if (env != nullptr)
+			{
+				string name = string(env) + "\\astylerc";
+				struct stat buffer;
+				if (stat (name.c_str(), &buffer) == 0)
+					setOptionsFileName(name);
+			}
 		}
 		if (optionsFileName.empty())
 		{
 			char* env = getenv("USERPROFILE");
 			if (env != nullptr)
-				setOptionsFileName(string(env) + "/astylerc");
+			{
+				string name = string(env) + "\\astylerc";
+				struct stat buffer;
+				if (stat (name.c_str(), &buffer) == 0)
+					setOptionsFileName(name);
+			}
 		}
-		if (!optionsFileName.empty())
-			standardizePath(optionsFileName);
 	}
 
 	// create the options file vector and parse the options for errors
 	ASOptions options(formatter, *this);
 	if (!optionsFileName.empty())
 	{
-		ifstream optionsIn(optionsFileName.c_str());
-		if (optionsIn)
+		stringstream optionsIn;
+		FileEncoding encoding = readFile(optionsFileName, optionsIn);
+		// bypass a BOM, all BOMs have been converted to utf-8
+		if (encoding == UTF_8BOM || encoding == UTF_16LE || encoding == UTF_16BE)
 		{
+			char buf[4];
+			optionsIn.get(buf, 4);
+			assert(strcmp(buf, "\xEF\xBB\xBF") == 0);
+		}
 			options.importOptions(optionsIn, fileOptionsVector);
 			ok = options.parseOptions(fileOptionsVector,
 			                          string(_("Invalid option file options:")));
 		}
-		else
-		{
-			if (optionsFileRequired)
-				error(_("Cannot open options file"), optionsFileName.c_str());
-			optionsFileName.clear();
-		}
-		optionsIn.close();
-	}
+	else if (optionsFileRequired)
+		error(_("Cannot open options file"), optionsFileName.c_str());
+
 	if (!ok)
 	{
 		(*errorStream) << options.getOptionErrors() << endl;
@@ -2313,6 +2347,14 @@ void ASConsole::printVerboseHeader() const
 	// print options file
 	if (!optionsFileName.empty())
 		printf(_("Using default options file %s\n"), optionsFileName.c_str());
+	// NOTE: depreciated with release 3.1, remove when appropriate
+	if (!optionsFileName.empty())
+	{
+		char* env = getenv("USERPROFILE");
+		if (env != nullptr && optionsFileName == string(env) + "\\astylerc")
+			printf("The above options file has been DEPRECIATED\n");
+	}
+	// end depreciated
 }
 
 void ASConsole::printVerboseStats(clock_t startTime) const
@@ -2485,11 +2527,11 @@ void ASConsole::writeFile(const string& fileName_, FileEncoding encoding, ostrin
 	{
 		// convert utf-8 to utf-16
 		bool isBigEndian = (encoding == UTF_16BE);
-		size_t utf16Size = utf8_16.utf16LengthFromUtf8(out.str().c_str(), out.str().length());
+		size_t utf16Size = encode.utf16LengthFromUtf8(out.str().c_str(), out.str().length());
 		char* utf16Out = new char[utf16Size];
-		size_t utf16Len = utf8_16.utf8ToUtf16(const_cast<char*>(out.str().c_str()),
-		                                      out.str().length(), isBigEndian, utf16Out);
-		assert(utf16Len == utf16Size);
+		size_t utf16Len = encode.utf8ToUtf16(const_cast<char*>(out.str().c_str()),
+		                                     out.str().length(), isBigEndian, utf16Out);
+		assert(utf16Len <= utf16Size);
 		fout << string(utf16Out, utf16Len);
 		delete[] utf16Out;
 	}
@@ -2527,8 +2569,8 @@ void ASConsole::writeFile(const string& fileName_, FileEncoding encoding, ostrin
 // used by shared object (DLL) calls
 //-----------------------------------------------------------------------------
 
-utf16_t* ASLibrary::formatUtf16(const utf16_t* pSourceIn,		// the source to be formatted
-                                const utf16_t* pOptions,		// AStyle options
+char16_t* ASLibrary::formatUtf16(const char16_t* pSourceIn,		// the source to be formatted
+                                 const char16_t* pOptions,		// AStyle options
                                 fpError fpErrorHandler,			// error handler function
                                 fpAlloc fpMemoryAlloc) const	// memory allocation function)
 {
@@ -2560,7 +2602,7 @@ utf16_t* ASLibrary::formatUtf16(const utf16_t* pSourceIn,		// the source to be f
 	if (utf8Out == nullptr)
 		return nullptr;
 	// convert text to wide char and return it
-	utf16_t* utf16Out = convertUtf8ToUtf16(utf8Out, fpMemoryAlloc);
+	char16_t* utf16Out = convertUtf8ToUtf16(utf8Out, fpMemoryAlloc);
 	delete[] utf8Out;
 	utf8Out = nullptr;
 	if (utf16Out == nullptr)
@@ -2584,26 +2626,26 @@ char* STDCALL ASLibrary::tempMemoryAllocation(unsigned long memoryNeeded)
  * Memory is allocated by the calling program memory allocation function.
  * The calling function must check for errors.
  */
-utf16_t* ASLibrary::convertUtf8ToUtf16(const char* utf8In, fpAlloc fpMemoryAlloc) const
+char16_t* ASLibrary::convertUtf8ToUtf16(const char* utf8In, fpAlloc fpMemoryAlloc) const
 {
 	if (utf8In == nullptr)
 		return nullptr;
 	char* data = const_cast<char*>(utf8In);
 	size_t dataSize = strlen(utf8In);
-	bool isBigEndian = utf8_16.getBigEndian();
-	// return size is in number of CHARs, not utf16_t
-	size_t utf16Size = (utf8_16.utf16LengthFromUtf8(data, dataSize) + sizeof(utf16_t));
+	bool isBigEndian = encode.getBigEndian();
+	// return size is in number of CHARs, not char16_t
+	size_t utf16Size = (encode.utf16LengthFromUtf8(data, dataSize) + sizeof(char16_t));
 	char* utf16Out = fpMemoryAlloc((long)utf16Size);
 	if (utf16Out == nullptr)
 		return nullptr;
 #ifdef NDEBUG
-	utf8_16.utf8ToUtf16(data, dataSize + 1, isBigEndian, utf16Out);
+	encode.utf8ToUtf16(data, dataSize + 1, isBigEndian, utf16Out);
 #else
-	size_t utf16Len = utf8_16.utf8ToUtf16(data, dataSize + 1, isBigEndian, utf16Out);
+	size_t utf16Len = encode.utf8ToUtf16(data, dataSize + 1, isBigEndian, utf16Out);
 	assert(utf16Len == utf16Size);
 #endif
-	assert(utf16Size == (utf8_16.utf16len(reinterpret_cast<utf16_t*>(utf16Out)) + 1) * sizeof(utf16_t));
-	return reinterpret_cast<utf16_t*>(utf16Out);
+	assert(utf16Size == (encode.utf16len(reinterpret_cast<char16_t*>(utf16Out)) + 1) * sizeof(char16_t));
+	return reinterpret_cast<char16_t*>(utf16Out);
 }
 
 /**
@@ -2611,22 +2653,22 @@ utf16_t* ASLibrary::convertUtf8ToUtf16(const char* utf8In, fpAlloc fpMemoryAlloc
  * The calling function must check for errors and delete the
  * allocated memory.
  */
-char* ASLibrary::convertUtf16ToUtf8(const utf16_t* utf16In) const
+char* ASLibrary::convertUtf16ToUtf8(const char16_t* utf16In) const
 {
 	if (utf16In == nullptr)
 		return nullptr;
-	char* data = reinterpret_cast<char*>(const_cast<utf16_t*>(utf16In));
+	char* data = reinterpret_cast<char*>(const_cast<char16_t*>(utf16In));
 	// size must be in chars
-	size_t dataSize = utf8_16.utf16len(utf16In) * sizeof(utf16_t);
-	bool isBigEndian = utf8_16.getBigEndian();
-	size_t utf8Size = utf8_16.utf8LengthFromUtf16(data, dataSize, isBigEndian) + 1;
+	size_t dataSize = encode.utf16len(utf16In) * sizeof(char16_t);
+	bool isBigEndian = encode.getBigEndian();
+	size_t utf8Size = encode.utf8LengthFromUtf16(data, dataSize, isBigEndian) + 1;
 	char* utf8Out = new (nothrow) char[utf8Size];
 	if (utf8Out == nullptr)
 		return nullptr;
 #ifdef NDEBUG
-	utf8_16.utf16ToUtf8(data, dataSize + 1, isBigEndian, true, utf8Out);
+	encode.utf16ToUtf8(data, dataSize + 1, isBigEndian, true, utf8Out);
 #else
-	size_t utf8Len = utf8_16.utf16ToUtf8(data, dataSize + 1, isBigEndian, true, utf8Out);
+	size_t utf8Len = encode.utf16ToUtf8(data, dataSize + 1, isBigEndian, true, utf8Out);
 	assert(utf8Len == utf8Size);
 #endif
 	assert(utf8Size == strlen(utf8Out) + 1);
@@ -3379,7 +3421,7 @@ void ASOptions::parseOption(const string& arg, const string& errorInfo)
 }	// End of parseOption function
 
 // Parse options from the options file.
-void ASOptions::importOptions(istream& in, vector<string>& optionsVector)
+void ASOptions::importOptions(stringstream& in, vector<string>& optionsVector)
 {
 	char ch;
 	bool isInQuote = false;
@@ -3481,7 +3523,7 @@ bool ASOptions::isParamOption(const string& arg, const char* option1, const char
 // Return true if an int is big endian.
 bool ASEncoding::getBigEndian() const
 {
-	short int word = 0x0001;
+	char16_t word = 0x0001;
 	char* byte = (char*) &word;
 	return (byte[0] ? false : true);
 }
@@ -3510,16 +3552,16 @@ size_t ASEncoding::utf16len(const utf16* utf16In) const
 size_t ASEncoding::utf8LengthFromUtf16(const char* utf16In, size_t inLen, bool isBigEndian) const
 {
 	size_t len = 0;
-	size_t wcharLen = inLen / 2;
-	const short* uptr = reinterpret_cast<const short*>(utf16In);
-	for (size_t i = 0; i < wcharLen && uptr[i];)
+	size_t wcharLen = (inLen / 2) + (inLen % 2);
+	const char16_t* uptr = reinterpret_cast<const char16_t*>(utf16In);
+	for (size_t i = 0; i < wcharLen;)
 	{
 		size_t uch = isBigEndian ? swap16bit(uptr[i]) : uptr[i];
 		if (uch < 0x80)
 			len++;
 		else if (uch < 0x800)
 			len += 2;
-		else if ((uch >= SURROGATE_LEAD_FIRST) && (uch <= SURROGATE_TRAIL_LAST))
+		else if ((uch >= SURROGATE_LEAD_FIRST) && (uch <= SURROGATE_LEAD_LAST))
 		{
 			len += 4;
 			i++;
@@ -3828,8 +3870,8 @@ char* STDCALL javaMemoryAlloc(unsigned long memoryNeeded)
 *           /EXPORT:AStyleGetVersion=_AStyleGetVersion@0
 * No /EXPORT is required for x64
 */
-extern "C" EXPORT utf16_t* STDCALL AStyleMainUtf16(const utf16_t* pSourceIn,	// the source to be formatted
-                                                   const utf16_t* pOptions,		// AStyle options
+extern "C" EXPORT char16_t* STDCALL AStyleMainUtf16(const char16_t* pSourceIn,	// the source to be formatted
+                                                    const char16_t* pOptions,	// AStyle options
                                                    fpError fpErrorHandler,		// error handler function
                                                    fpAlloc fpMemoryAlloc)		// memory allocation function
 {
@@ -3854,15 +3896,15 @@ extern "C" EXPORT utf16_t* STDCALL AStyleMainUtf16(const utf16_t* pSourceIn,	// 
 #ifndef _WIN32
 	// check size of utf16_t on Linux
 	int sizeCheck = 2;
-	if (sizeof(utf16_t) != sizeCheck)
+	if (sizeof(char16_t) != sizeCheck)
 	{
-		fpErrorHandler(104, "Unsigned short is not the correct size.");
+		fpErrorHandler(104, "char16_t is not the correct size.");
 		return nullptr;
 	}
 #endif
 
 	ASLibrary library;
-	utf16_t* utf16Out = library.formatUtf16(pSourceIn, pOptions, fpErrorHandler, fpMemoryAlloc);
+	char16_t* utf16Out = library.formatUtf16(pSourceIn, pOptions, fpErrorHandler, fpMemoryAlloc);
 	return utf16Out;
 }
 
@@ -3904,7 +3946,7 @@ extern "C" EXPORT char* STDCALL AStyleMain(const char* pSourceIn,		// the source
 	ASOptions options(formatter);
 
 	vector<string> optionsVector;
-	istringstream opt(pOptions);
+	stringstream opt(pOptions);
 
 	options.importOptions(opt, optionsVector);
 
@@ -3912,8 +3954,8 @@ extern "C" EXPORT char* STDCALL AStyleMain(const char* pSourceIn,		// the source
 	if (!ok)
 		fpErrorHandler(130, options.getOptionErrors().c_str());
 
-	istringstream in(pSourceIn);
-	ASStreamIterator<istringstream> streamIterator(&in);
+	stringstream in(pSourceIn);
+	ASStreamIterator<stringstream> streamIterator(&in);
 	ostringstream out;
 	formatter.init(&streamIterator);
 
@@ -3970,7 +4012,7 @@ int main(int argc, char** argv)
 {
 	// create objects
 	ASFormatter formatter;
-	auto console = make_shared<ASConsole>(formatter);
+	unique_ptr<ASConsole> console(new ASConsole(formatter));
 
 	// process command line and options file
 	// build the vectors fileNameVector, optionsVector, and fileOptionsVector

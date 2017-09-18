@@ -781,6 +781,8 @@ bool ASBase::isCharPotentialHeader(const string& line, size_t i) const
 	char prevCh = ' ';
 	if (i > 0)
 		prevCh = line[i - 1];
+	if (i > 1 && line[i - 2] == '\\')
+		prevCh = ' ';
 	if (!isLegalNameChar(prevCh) && isLegalNameChar(line[i]))
 		return true;
 	return false;

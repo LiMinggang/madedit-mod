@@ -122,6 +122,8 @@ New: Settings for new document in Options
 New: Default font for document
 New: Enforce default encoding
 Fix: Refactor Option dialog with wxSmith
+Update Astyle to latest code
+Update translations
 
 Mod v0.4.9
 1.New: Change editor encoding of MadPython dialog according to current active edit

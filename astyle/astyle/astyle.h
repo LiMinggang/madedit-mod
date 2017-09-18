@@ -167,6 +167,7 @@ enum ReferenceAlign
 enum FileEncoding
 {
 	ENCODING_8BIT,
+	UTF_8BOM,       // UTF-8 with BOM
 	UTF_16BE,
 	UTF_16LE,     // Windows default
 	UTF_32BE,
@@ -754,6 +755,7 @@ private:  // functions
 	bool isMultiStatementLine() const;
 	bool isNextWordSharpNonParenHeader(int startChar) const;
 	bool isNonInStatementArrayBrace() const;
+	bool isNumericVariable(string word) const;
 	bool isOkToSplitFormattedLine();
 	bool isPointerOrReference() const;
 	bool isPointerOrReferenceCentered() const;
@@ -986,6 +988,7 @@ private:  // variables
 	bool isInObjCMethodDefinition;
 	bool isInObjCInterface;
 	bool isInObjCReturnType;
+	bool isInObjCParam;
 	bool isInObjCSelector;
 	bool breakCurrentOneLineBlock;
 	bool shouldRemoveNextClosingBrace;

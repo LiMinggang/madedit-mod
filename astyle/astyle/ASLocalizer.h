@@ -10,6 +10,12 @@
 #include <string>
 #include <vector>
 
+// library builds do not need ASLocalizer
+#ifdef ASTYLE_JNI
+	#ifndef ASTYLE_LIB    // ASTYLE_LIB must be defined for ASTYLE_JNI
+		#define ASTYLE_LIB
+	#endif
+#endif  //  ASTYLE_JNI
 namespace astyle {
 
 using namespace std;
