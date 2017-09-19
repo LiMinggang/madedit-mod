@@ -15,8 +15,8 @@
 #endif
 // disable 4996 {
 //(*InternalHeaders(MadOptionsDialog)
-#include <wx/settings.h>
 #include <wx/intl.h>
+#include <wx/settings.h>
 #include <wx/string.h>
 //*)
 // disable 4996 }
@@ -369,73 +369,74 @@ MadOptionsDialog::wxCmdEvtHandlerMap_t MadOptionsDialog::m_radiobutton_evt_map[]
 MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 {
 	//(*Initialize(MadOptionsDialog)
-	wxBoxSizer* BoxSizer4;
-	wxStaticBoxSizer* StaticBoxSizer2;
-	wxBoxSizer* BoxSizer6;
-	wxBoxSizer* BoxSizer29;
-	wxBoxSizer* BoxSizer51;
-	wxStaticText* StaticText20;
-	wxBoxSizer* BoxSizer19;
-	wxBoxSizer* BoxSizer15;
-	wxBoxSizer* BoxSizer20;
-	wxBoxSizer* BoxSizer50;
-	wxBoxSizer* BoxSizer52;
-	wxBoxSizer* BoxSizer43;
-	wxBoxSizer* BoxSizer5;
 	wxBoxSizer* BoxSizer10;
-	wxBoxSizer* BoxSizer7;
-	wxBoxSizer* BoxSizer8;
-	wxBoxSizer* BoxSizer39;
-	wxBoxSizer* BoxSizer21;
-	wxBoxSizer* BoxSizer13;
-	wxStaticBoxSizer* StaticBoxSizer4;
-	wxBoxSizer* BoxSizer36;
-	wxBoxSizer* BoxSizer37;
-	wxBoxSizer* BoxSizer42;
-	wxStaticText* StaticText19;
-	wxBoxSizer* BoxSizer49;
-	wxStaticText* StaticText18;
-	wxFlexGridSizer* FlexGridSizer2;
-	wxBoxSizer* BoxSizer23;
-	wxStaticBoxSizer* StaticBoxSizer9;
-	wxBoxSizer* BoxSizer2;
 	wxBoxSizer* BoxSizer11;
-	wxBoxSizer* BoxSizer16;
-	wxBoxSizer* BoxSizer30;
-	wxBoxSizer* BoxSizer18;
 	wxBoxSizer* BoxSizer12;
-	wxBoxSizer* BoxSizer28;
-	wxStaticText* StaticText23;
-	wxStaticText* StaticText24;
-	wxStaticBoxSizer* StaticBoxSizer10;
-	wxBoxSizer* BoxSizer38;
+	wxBoxSizer* BoxSizer13;
 	wxBoxSizer* BoxSizer14;
-	wxStaticBoxSizer* StaticBoxSizer3;
-	wxStaticBoxSizer* StaticBoxSizer6;
-	wxGridSizer* GridSizer3;
-	wxBoxSizer* BoxSizer27;
-	wxBoxSizer* BoxSizer31;
+	wxBoxSizer* BoxSizer15;
+	wxBoxSizer* BoxSizer16;
 	wxBoxSizer* BoxSizer17;
-	wxBoxSizer* BoxSizer24;
-	wxBoxSizer* BoxSizer26;
-	wxBoxSizer* BoxSizer32;
+	wxBoxSizer* BoxSizer18;
+	wxBoxSizer* BoxSizer19;
 	wxBoxSizer* BoxSizer1;
-	wxBoxSizer* BoxSizer9;
-	wxBoxSizer* BoxSizer47;
-	wxStaticBoxSizer* StaticBoxSizer1;
+	wxBoxSizer* BoxSizer20;
+	wxBoxSizer* BoxSizer21;
+	wxBoxSizer* BoxSizer22;
+	wxBoxSizer* BoxSizer23;
+	wxBoxSizer* BoxSizer24;
+	wxBoxSizer* BoxSizer25;
+	wxBoxSizer* BoxSizer26;
+	wxBoxSizer* BoxSizer27;
+	wxBoxSizer* BoxSizer28;
+	wxBoxSizer* BoxSizer29;
+	wxBoxSizer* BoxSizer2;
+	wxBoxSizer* BoxSizer30;
+	wxBoxSizer* BoxSizer31;
+	wxBoxSizer* BoxSizer32;
 	wxBoxSizer* BoxSizer33;
 	wxBoxSizer* BoxSizer34;
-	wxBoxSizer* BoxSizer22;
-	wxFlexGridSizer* FlexGridSizer1;
 	wxBoxSizer* BoxSizer35;
-	wxStaticText* StaticText25;
+	wxBoxSizer* BoxSizer36;
+	wxBoxSizer* BoxSizer37;
+	wxBoxSizer* BoxSizer38;
+	wxBoxSizer* BoxSizer39;
 	wxBoxSizer* BoxSizer3;
-	wxStaticBoxSizer* StaticBoxSizer5;
-	wxBoxSizer* BoxSizer25;
 	wxBoxSizer* BoxSizer40;
+	wxBoxSizer* BoxSizer42;
+	wxBoxSizer* BoxSizer43;
+	wxBoxSizer* BoxSizer47;
+	wxBoxSizer* BoxSizer49;
+	wxBoxSizer* BoxSizer4;
+	wxBoxSizer* BoxSizer50;
+	wxBoxSizer* BoxSizer51;
+	wxBoxSizer* BoxSizer52;
+	wxBoxSizer* BoxSizer5;
+	wxBoxSizer* BoxSizer6;
+	wxBoxSizer* BoxSizer7;
+	wxBoxSizer* BoxSizer8;
+	wxBoxSizer* BoxSizer9;
+	wxFlexGridSizer* FlexGridSizer1;
+	wxFlexGridSizer* FlexGridSizer2;
+	wxGridSizer* GridSizer3;
+	wxStaticBoxSizer* StaticBoxSizer10;
+	wxStaticBoxSizer* StaticBoxSizer1;
+	wxStaticBoxSizer* StaticBoxSizer2;
+	wxStaticBoxSizer* StaticBoxSizer3;
+	wxStaticBoxSizer* StaticBoxSizer4;
+	wxStaticBoxSizer* StaticBoxSizer5;
+	wxStaticBoxSizer* StaticBoxSizer6;
+	wxStaticBoxSizer* StaticBoxSizer9;
+	wxStaticText* StaticText18;
+	wxStaticText* StaticText19;
+	wxStaticText* StaticText20;
+	wxStaticText* StaticText23;
+	wxStaticText* StaticText24;
+	wxStaticText* StaticText25;
 
 	Create(parent, wxID_ANY, _("Options"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxSYSTEM_MENU|wxRESIZE_BORDER|wxCLOSE_BOX, _T("wxID_ANY"));
-	SetClientSize(wxSize(583,486));
+	SetClientSize(wxSize(800,480));
+	SetMaxSize(wxSize(-1,-1));
 	BoxSizer1 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer30 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer31 = new wxBoxSizer(wxVERTICAL);
@@ -952,13 +953,14 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	BoxSizer2->Add(ButtonCancel, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	BoxSizer1->Add(BoxSizer2, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	SetSizer(BoxSizer1);
+#if 0
 	Layout();
 	Center();
-#if 0
 	Connect(ID_CHECKBOXENABLEAUTOSAVE,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&MadOptionsDialog::EnableAutoSaveClick);
 	Connect(ID_BUTTONDATETIME,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadOptionsDialog::ButtonDateTimeClick);
 	Connect(ID_CHECKBOXAUTOCOMPLETEPAIR,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&MadOptionsDialog::CheckBoxAutoCompletePairClick);
 	Connect(ID_CHECKBOXMOUSESELECTTOCOPY,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&MadOptionsDialog::CheckBoxMouseSelectToCopyClick);
+	Connect(ID_RADIOBUTTONNEWDOCLINEENDINGDEFAULT,wxEVT_COMMAND_RADIOBUTTON_SELECTED,(wxObjectEventFunction)&MadOptionsDialog::RadioButtonNewDocLineEndingSelect);
 	Connect(ID_RADIOBUTTONNEWDOCLINEENDINGCRLF,wxEVT_COMMAND_RADIOBUTTON_SELECTED,(wxObjectEventFunction)&MadOptionsDialog::RadioButtonNewDocLineEndingSelect);
 	Connect(ID_RADIOBUTTONNEWDOCLINEENDINGLF,wxEVT_COMMAND_RADIOBUTTON_SELECTED,(wxObjectEventFunction)&MadOptionsDialog::RadioButtonNewDocLineEndingSelect);
 	Connect(ID_RADIOBUTTONNEWDOCLINEENDINGCR,wxEVT_COMMAND_RADIOBUTTON_SELECTED,(wxObjectEventFunction)&MadOptionsDialog::RadioButtonNewDocLineEndingSelect);
@@ -1096,7 +1098,6 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 
 	BoxSizer33->Add(0, hh + AuiNotebook1->GetTabCtrlHeight() + 2, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	BoxSizer32->Add(ww + 2, 0, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-
 	BoxSizer1->Fit(this);
 	BoxSizer1->SetSizeHints(this);
 	Center();
