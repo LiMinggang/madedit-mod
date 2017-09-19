@@ -246,7 +246,6 @@ void MadEdit::SetRecordCaretMovements( bool value )
 	}
 }
 
-
 void MadEdit::SetTextFont( const wxString &name, int size, bool forceReset )
 {
 	if( size < 1 ) size = 1;
@@ -280,6 +279,7 @@ void MadEdit::SetTextFont( const wxString &name, int size, bool forceReset )
 			if( m_TextFontHeight == 0 ) m_TextFontHeight = 19;
 
 			bool ofwm = m_FixedWidthMode;
+			m_TextFontSpaceWidth = GetUCharWidth( 0x20 );
 			m_FixedWidthMode = false; // avoid effecting on GetUCharWidth();
 			m_TextFontAveCharWidth = m_TextFontSpaceWidth/*GetUCharWidth( 0x20 )*/; //GetCharWidth();
 			int w;
@@ -467,8 +467,6 @@ void MadEdit::SetTextFont( const wxString &name, int size, bool forceReset )
 			}
 		}
 	}
-
-	m_TextFontSpaceWidth = GetUCharWidth( 0x20 );
 }
 
 void MadEdit::SetHexFont( const wxString &name, int size, bool forceReset )
