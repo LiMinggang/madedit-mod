@@ -1100,6 +1100,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	BoxSizer32->Add(ww + 2, 0, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	BoxSizer1->Fit(this);
 	BoxSizer1->SetSizeHints(this);
+	Layout();
 	Center();
 
 	// build Command Tree
