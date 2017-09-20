@@ -10117,7 +10117,7 @@ void MadEdit::OnMouseLeftDown( wxMouseEvent &evt )
 
 		if( !evt.m_shiftDown )
 		{
-			if( ( m_Selection ) && ( m_CaretPos.pos > m_SelectionBegin->pos && m_CaretPos.pos < m_SelectionEnd->pos ) && ( m_EditMode != emHexMode ) && ( ( m_EditMode == emTextMode ) ||
+			if( ( m_Selection ) && ( evt.m_x > ( m_LineNumberAreaWidth + m_BookmarkWidth ) ) && ( m_CaretPos.pos > m_SelectionBegin->pos && m_CaretPos.pos < m_SelectionEnd->pos ) && ( m_EditMode != emHexMode ) && ( ( m_EditMode == emTextMode ) ||
 					( ( m_EditMode == emColumnMode ) && ( m_SelectionBegin->xpos != m_SelectionEnd->xpos ) && ( m_CaretPos.xpos > m_SelectionBegin->xpos && m_CaretPos.xpos < m_SelectionEnd->xpos ) ) ) )
 			{
 				m_DragDrop = true;
