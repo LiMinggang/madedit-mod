@@ -125,6 +125,7 @@ Fix: Restore select the whole line by left click #240
 Fix: Refactor Option dialog with wxSmith
 Fix: Font size issue of fix width mode in switching between different fonts
 Fix: Incorrect displaying DND mouse ICON while clicking line number area in selection
+Fix: Wrong file filter of Open File dialog
 Update Astyle to latest code
 Update translations
 

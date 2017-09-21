@@ -1193,6 +1193,7 @@ public: // utility functions
 
 	bool StringToHex( wxString ws, vector<wxByte> &hex );
 
+	static wxString m_FileFilter;
 	friend class MadSearchReplaceDialog;
 	friend class mad_python::PyMadEdit;
 };
