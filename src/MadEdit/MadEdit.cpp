@@ -745,8 +745,8 @@ wxMenu * MadEdit::m_ZeroLenSelIndicator = nullptr; // When to delete?
 #include "../../images/dnd_move.xpm"
 //#include "../../images/dnd_none.xpm"
 
-wxString MadEdit::m_FileFilter = wxString( wxT( "All files(*;*.*)|" ) ) + wxFileSelectorDefaultWildcardStr + wxT( "|Plain Text (*.txt)|*.txt|68k Assembly (*.68k)|*.68k|" )
-					  wxT( "ActionScript (*.as;*.asc;*.mx)|*.as;*.asc;*.mx|Ada (*.a;*.ada;*.adb;*.ads)|*.a;*.ada;*.adb;*.ads|Apache Conf (*.conf;*.htaccess)|" )
+wxString MadEdit::m_FileFilter = wxString( wxGetTranslation(_T( "All files (*;*.*)" ))) + wxT("|") + wxFileSelectorDefaultWildcardStr + wxT("|") + wxGetTranslation(_T( "Plain Text (*.txt)")) +
+					  wxT("|*.txt|68k Assembly (*.68k)|*.68k|ActionScript (*.as;*.asc;*.mx)|*.as;*.asc;*.mx|Ada (*.a;*.ada;*.adb;*.ads)|*.a;*.ada;*.adb;*.ads|Apache Conf (*.conf;*.htaccess)|" )
 					  wxT( "*.conf;*.htaccess|Bash Shell Script (*.bsh;*.configure;*.sh)|*.bsh;*.configure;*.sh|Boo (*.boo)|*.boo|C (*.c;*.h)|*.c;*.h|" )
 					  wxT( "C# (*.cs)|*.cs|C-Shell Script (*.csh)|*.csh|Caml (*.ml;*.mli)|*.ml;*.mli|Cascading Style Sheet (*.css)|*.css|" )
 					  wxT( "Cilk (*.cilk;*.cilkh)|*.cilk;*.cilkh|Cobra (*.cobra)|*.cobra|ColdFusion (*.cfc;*.cfm;*.cfml;*.dbm)|*.cfc;*.cfm;*.cfml;*.dbm|" )

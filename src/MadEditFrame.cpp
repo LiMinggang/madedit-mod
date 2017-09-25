@@ -300,6 +300,10 @@
 #define goback_xpm_idx (nextwin_xpm_idx+1)
 #include "../images/goforward.xpm"
 #define goforward_xpm_idx (goback_xpm_idx+1)
+#include "../images/fontsizeinc.xpm"
+#define fontsizeinc_xpm_idx (goforward_xpm_idx+1)
+#include "../images/fontsizedec.xpm"
+#define fontsizedec_xpm_idx (fontsizeinc_xpm_idx+1)
 
 /*#include "../images/.xpm"
 #define _xpm_idx (navifwd_xpm_idx+1)*/
@@ -324,6 +328,7 @@ char ** g_MadIcons[] =
 	&report_xpm[0], &scriptcode_xpm[0], &encoding_xpm[0], &help_xpm[0], &linuxlogo_xpm[0], &maclogo_xpm[0], &windowslogo_xpm[0],
 	&filehandle_xpm[0], &qfind_xpm[0], &goposition_xpm[0], &cplusplus_xpm[0], &markdown_xpm[0], &html_xpm[0], &xml_xpm[0],
 	&plaintext_xpm[0], &togglewin_xpm[0], &prevwin_xpm[0], &nextwin_xpm[0], &goback_xpm[0], &goforward_xpm[0],
+	&fontsizeinc_xpm[0], &fontsizedec_xpm[0],
 };
 
 extern void ScanForLocales();
@@ -1755,6 +1760,8 @@ MadEditFrame::wxCmdEvtHandlerMap_t MadEditFrame::m_menu_evt_map[] =
 	{ menuSpellAdd2Dict, &MadEditFrame::OnSpellAdd2Dict },
 	{ menuSpellRemoveFromDict, &MadEditFrame::OnSpellCheckRemoveFromDict },
 	{ menuToolBarsToggleAll, &MadEditFrame::OnViewToolBarsToggleAll },
+	{ menuIncFontSize, &MadEditFrame::OnIncDecFontSize },
+	{ menuDecFontSize, &MadEditFrame::OnIncDecFontSize },
 
 	// tools
 	{ menuOptions, &MadEditFrame::OnToolsOptions },
@@ -2484,10 +2491,11 @@ ToolBarData ToolBarTable[] =
 {
 	{tbSTANDARD,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBStandardPos"),      wxT("MadToolBar0"), _("Standard"),       1, 0},
 	{tbEDITOR,        MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBEditorPos"),        wxT("MadToolBar1"), _("Editor"),         1, 1},
-	{tbSEARCHREPLACE, MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBSearchReplacePos"), wxT("MadToolBar2"), _("Search/Replace"), 2, 0},
-	{tbTEXTVIEW,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBTextviewPos"),      wxT("MadToolBar3"), _("Text View"),      2, 1},
-	{tbEDITMODE,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBEditModePos"),      wxT("MadToolBar4"), _("Edit Mode"),      2, 2},
-	{tbMACRO,         MADTOOBAR_OVERFLOW, wxT("/MadEdit/TBMacroPos"),         wxT("MadToolBar5"), _("Macro"),          2, 3},
+	{tbFONTENCODING,  MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBFontEncodingPos"),  wxT("MadToolBar6"), _("Font/Encoding"),  2, 0},
+	{tbSEARCHREPLACE, MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBSearchReplacePos"), wxT("MadToolBar2"), _("Search/Replace"), 2, 1},
+	{tbTEXTVIEW,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBTextviewPos"),      wxT("MadToolBar3"), _("Text View"),      2, 2},
+	{tbEDITMODE,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBEditModePos"),      wxT("MadToolBar4"), _("Edit Mode"),      2, 3},
+	{tbMACRO,         MADTOOBAR_OVERFLOW, wxT("/MadEdit/TBMacroPos"),         wxT("MadToolBar5"), _("Macro"),          2, 4},
 	{-1, 0, 0, 0, 0, -1, 0},
 };
 
@@ -2710,6 +2718,7 @@ MadEditFrame::MadEditFrame( wxWindow *parent, wxWindowID id, const wxString &tit
 	Bind( wxEVT_KEY_DOWN, &MadEditFrame::MadEditFrameKeyDown, this );
 	Bind( wxEVT_TEXT, &MadEditFrame::OnSearchQuickFind, this, ID_QUICKSEARCH );
 	Bind( wxEVT_TEXT_ENTER, &MadEditFrame::OnSearchQuickFind, this, ID_QUICKSEARCH );
+	UpdateFontEncoding();
 }
 
 MadEditFrame::~MadEditFrame()
@@ -2913,6 +2922,8 @@ void MadEditFrame::CreateGUIControls( void )
 	}
 
 #endif
+	wxArrayString encodings, fontsize, linespaces, syntaxs;
+
 	list<wxMenu*> menu_stack;
 	CommandData *cd = &CommandTable[0];
 
@@ -3076,6 +3087,7 @@ void MadEditFrame::CreateGUIControls( void )
 			wxString enc = wxString( wxT( '[' ) ) + MadEncoding::GetEncodingName( i ) + wxT( "] " );
 			wxString des = wxGetTranslation( MadEncoding::GetEncodingDescription( i ).c_str() );
 			g_Menu_View_AllEncodings->Append( menuEncoding1 + int( i ), enc + des );
+			encodings.Add(MadEncoding::GetEncodingName( i ));
 			const std::vector<int>& encGrps = MadEncoding::GetEncodingGrps( i );
 
 			for( size_t j = 0; j < encGrps.size(); ++j )
@@ -3103,7 +3115,8 @@ void MadEditFrame::CreateGUIControls( void )
 
 		for( size_t i = 0; i < cnt; ++i )
 		{
-			g_Menu_View_Syntax->Append( menuSyntax1 + int( i ), MadSyntax::GetSyntaxTitle( i ) );
+			g_Menu_View_Syntax->Append( menuSyntax1 + int( i ), wxGetTranslation(MadSyntax::GetSyntaxTitle( i )) );
+			syntaxs.Add(wxGetTranslation(MadSyntax::GetSyntaxTitle( i )));
 		}
 	}
 
@@ -3237,6 +3250,42 @@ void MadEditFrame::CreateGUIControls( void )
 	*/
 	/*for( int tbId = tbSTANDARD; tbId <= tbMACRO; ++tbId )
 	{ WxToolBar[tbId]->Realize(); }*/
+
+	wxAuiToolBar * fontEoncodingBar = WxToolBar[tbFONTENCODING];
+	m_Encodings = new wxComboBox( fontEoncodingBar, ID_ENCODINGS, wxEmptyString, wxDefaultPosition, wxSize( 150, 21 ), encodings, wxCB_READONLY );
+	fontEoncodingBar->AddControl( m_Encodings );
+	m_Syntaxs = new wxComboBox( fontEoncodingBar, ID_SYNTAXS, wxEmptyString, wxDefaultPosition, wxSize( 150, 21 ), syntaxs, wxCB_READONLY );
+	fontEoncodingBar->AddControl( m_Syntaxs );
+	m_Fonts = new wxComboBox( fontEoncodingBar, ID_FONTS, wxEmptyString, wxDefaultPosition, wxSize( 150, 21 ), g_FontNames, wxCB_READONLY );
+	fontEoncodingBar->AddControl( m_Fonts );
+	wxString mystring;
+	for( int i = 1; i < 73; ++i)
+	{
+		mystring << i;
+		fontsize.Add(mystring);
+		mystring.Empty();
+	}
+	
+	m_FontSizes = new wxComboBox( fontEoncodingBar, ID_FONTSIZES, wxEmptyString, wxDefaultPosition, wxSize( 50, 21 ), fontsize, wxCB_READONLY );
+	fontEoncodingBar->AddControl( m_FontSizes );
+	fontEoncodingBar->AddTool( menuIncFontSize, wxT( "menuIncFontSize" ), m_ImageList->GetBitmap( fontsizeinc_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _( "Increase Font Size" ), _( "Make your text a bit bigger" ), nullptr );
+	fontEoncodingBar->AddTool( menuDecFontSize, wxT( "menuDecFontSize" ), m_ImageList->GetBitmap( fontsizedec_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _( "Decrease Font Size" ), _( "Make your text a bit smaller" ), nullptr );
+
+	for( int i = 100; i < 251; i += 5)
+	{
+  		mystring = wxString::Format(wxT("%i%%"),i);
+		linespaces.Add(mystring);
+		mystring.Empty();
+	}
+	
+	m_LineSpaces = new wxComboBox( fontEoncodingBar, ID_LINESPACES, wxEmptyString, wxDefaultPosition, wxSize( 50, 21 ), linespaces, wxCB_READONLY );
+	fontEoncodingBar->AddControl( m_LineSpaces );
+	m_Encodings->Bind( wxEVT_COMBOBOX, &MadEditFrame::OnFontEncoding, this );
+	m_Syntaxs->Bind( wxEVT_COMBOBOX, &MadEditFrame::OnFontEncoding, this );
+	m_Fonts->Bind( wxEVT_COMBOBOX, &MadEditFrame::OnFontEncoding, this );
+	m_FontSizes->Bind( wxEVT_COMBOBOX, &MadEditFrame::OnFontEncoding, this );
+	m_LineSpaces->Bind( wxEVT_COMBOBOX, &MadEditFrame::OnFontEncoding, this );
+	fontEoncodingBar->Realize();
 
 	td = &ToolBarTable[0];
 
@@ -3865,6 +3914,8 @@ void MadEditFrame::OnNotebookPageChanged( wxAuiNotebookEvent& event )
 	{
 		SetTitle( wxString( wxT( "MadEdit-Mod " ) ) );
 	}
+
+	UpdateFontEncoding();
 }
 
 void MadEditFrame::OnNotebookPageClosing( wxAuiNotebookEvent& event )
@@ -3907,6 +3958,7 @@ void MadEditFrame::OnNotebookPageClosed( bool bZeroPage )
 		SetTitle( wxString( wxT( "MadEdit " ) ) );
 		OnEditSelectionChanged( nullptr );
 		OnEditStatusChanged( nullptr );
+		UpdateFontEncoding();
 	}
 	else
 	{
@@ -3919,6 +3971,7 @@ void MadEditFrame::OnNotebookPageClosed( bool bZeroPage )
 			g_ActiveMadEdit->UpdateSyntaxDictionary();
 			OnEditSelectionChanged( g_ActiveMadEdit );
 			OnEditStatusChanged( g_ActiveMadEdit );
+			UpdateFontEncoding();
 			wxString title = g_ActiveMadEdit->GetFileName();
 
 			if( title.IsEmpty() )
@@ -4310,6 +4363,7 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 					m_RecentFiles->AddFileToHistory( filename ); // bring the filename to top of list
 					g_ActiveMadEdit->SetFocus();
 				}
+				UpdateFontEncoding();
 				return true;
 			}
 		}
@@ -4475,6 +4529,7 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 	if( linenum != -1 )
 	{ g_ActiveMadEdit->GoToLine( linenum ); }
 
+	UpdateFontEncoding();
 	return true;
 }
 
@@ -4593,6 +4648,7 @@ void MadEditFrame::CloseFile( size_t pageId )
 		if( m_Notebook->GetPageCount() == 0 )
 		{
 			g_ActiveMadEdit = nullptr;
+			UpdateFontEncoding();
 		}
 	}
 }
@@ -4994,7 +5050,7 @@ void MadEditFrame::OnUpdateUI_MenuViewSyntax( wxUpdateUIEvent& event )
 	if( g_ActiveMadEdit )
 	{
 		event.Enable( g_ActiveMadEdit->GetEditMode() != emHexMode );
-		event.SetText( wxString( _( "Syntax Type: " ) ) + g_ActiveMadEdit->GetSyntaxTitle() );
+		event.SetText( wxString( _( "Syntax Type: " ) ) + wxGetTranslation(g_ActiveMadEdit->GetSyntaxTitle()) );
 	}
 	else
 	{
@@ -5670,6 +5726,7 @@ void MadEditFrame::OnFileCloseAll( wxCommandEvent& event )
 		SetTitle( wxString( wxT( "MadEdit " ) ) );
 		OnEditSelectionChanged( nullptr );
 		OnEditStatusChanged( nullptr );
+		UpdateFontEncoding();
 	}
 }
 
@@ -7877,10 +7934,134 @@ void MadEditFrame::OnViewToolbars( wxCommandEvent& event )
 	if( toolbarId < tbMAX )
 	{
 		m_AuiManager.GetPane( WxToolBar[toolbarId] ).Show( !m_AuiManager.GetPane( WxToolBar[toolbarId] ).IsShown( ) );
-
 		m_AuiManager.Update();
 	}
 }
+
+void MadEditFrame::UpdateFontEncoding(  )
+{
+	if( g_ActiveMadEdit )
+	{
+		m_Encodings->SetSelection(m_Encodings->FindString(g_ActiveMadEdit->GetEncodingName()));
+		m_Syntaxs->SetSelection(m_Syntaxs->FindString(wxGetTranslation(g_ActiveMadEdit->GetSyntaxTitle())));
+		wxString name;
+		int size;
+		g_ActiveMadEdit->GetFont( name, size );
+		m_Fonts->SetSelection(m_Fonts->FindString(name));
+		name.Empty();
+		name << size;
+		m_FontSizes->SetSelection(m_FontSizes->FindString(name));
+		wxString spacing;
+		spacing << g_ActiveMadEdit->GetLineSpacing() << wxT( '%' );
+		m_LineSpaces->SetSelection(m_LineSpaces->FindString(spacing));
+	}
+	else
+	{
+		m_Encodings->SetSelection(wxNOT_FOUND);
+		m_Syntaxs->SetSelection(wxNOT_FOUND);
+		m_Fonts->SetSelection(wxNOT_FOUND);
+		m_FontSizes->SetSelection(wxNOT_FOUND);
+		m_LineSpaces->SetSelection(wxNOT_FOUND);
+	}
+}
+
+void MadEditFrame::OnFontEncoding( wxCommandEvent& event )
+{
+	wxCommandEvent evt = event;
+	switch(event.GetId())
+	{
+		case ID_ENCODINGS:
+			{
+				int sel = m_Encodings->GetSelection();
+				if(wxNOT_FOUND != sel)
+				{
+					evt.SetId(sel+menuEncoding1);
+					OnViewEncoding( evt );
+				}
+				break;
+			}
+		case ID_SYNTAXS:
+			{
+				int sel = m_Syntaxs->GetSelection();
+				if(wxNOT_FOUND != sel)
+				{
+					evt.SetId(sel+menuSyntax1);
+					OnViewSyntax( evt );
+				}
+				break;
+			}
+		case ID_FONTS:
+			{
+				int sel = m_Fonts->GetSelection();
+				if(wxNOT_FOUND != sel)
+				{
+					evt.SetId(sel+menuFontName1);
+					OnViewFontName( evt );
+				}
+				break;
+			}
+		case ID_FONTSIZES:
+			{
+				int sel = m_FontSizes->GetSelection();
+				if(wxNOT_FOUND != sel)
+				{
+					evt.SetId(sel+menuFontSize1);
+					OnViewFontSize( evt );
+				}
+				break;
+			}
+		case ID_LINESPACES:
+			{
+				int sel = m_LineSpaces->GetSelection();
+				if(wxNOT_FOUND != sel)
+				{
+					evt.SetId(sel+menuLineSpacing100);
+					OnViewLineSpacing( evt );
+				}
+				break;
+			}
+			break;
+		default:
+			wxASSERT(0);
+	}
+}
+
+void MadEditFrame::OnIncDecFontSize( wxCommandEvent& event )
+{
+	wxCommandEvent evt = event;
+	int sel = m_FontSizes->GetSelection();
+	if(event.GetId() == menuIncFontSize)
+	{
+		if(wxNOT_FOUND == sel)
+		{
+			sel = menuFontSize1;
+		}
+		else if ( m_FontSizes->GetCount() == (sel + 1))
+		{
+			sel = menuFontSize1 + m_FontSizes->GetCount() - 1;
+		}
+		else
+		{
+			sel = menuFontSize1 + sel + 1;
+		}
+	}
+	else //(event.GetId() == menuDecFontSize)
+	{
+		if((wxNOT_FOUND == sel) || ( 0 == sel ) )
+		{
+			sel = menuFontSize1;
+		}
+		else
+		{
+			sel = menuFontSize1 + sel - 1;
+		}
+	}
+	
+	evt.SetId(sel);
+	m_FontSizes->SetSelection(sel - menuFontSize1);
+	OnViewFontSize( evt );
+}
+
 void MadEditFrame::HideAllToolBars()
 {
 

@@ -121,6 +121,7 @@ Mod v0.4.10
 New: Settings for new document in Options
 New: Default font for document
 New: Enforce default encoding
+New: Toolbar for Encoding/Font/Font Size/Line Spacing
 Fix: Restore select the whole line by left click #240
 Fix: Refactor Option dialog with wxSmith
 Fix: Font size issue of fix width mode in switching between different fonts

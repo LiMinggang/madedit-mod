@@ -65,12 +65,294 @@ enum MadToolBarType
 {
 	tbSTANDARD = 0,
 	tbEDITOR,
+	tbFONTENCODING,
 	tbSEARCHREPLACE,
 	tbTEXTVIEW,
 	tbEDITMODE,
 	tbMACRO,
 	tbQSEARCH,
 	tbMAX,
+};
+
+
+enum   // menu id
+{
+	menuNew = wxID_NEW,
+	menuOpen = wxID_OPEN,
+	menuSave = wxID_SAVE,
+	menuSaveAs = wxID_SAVEAS,
+	menuClose = wxID_CLOSE,
+	menuCloseAll = wxID_CLOSE_ALL,
+	menuPageSetup = wxID_PRINT_SETUP,
+	menuPrintPreview = wxID_PREVIEW,
+	menuPrint = wxID_PRINT,
+	menuExit = wxID_EXIT,
+	menuUndo = wxID_UNDO,
+	menuRedo = wxID_REDO,
+	menuCut = wxID_CUT,
+	menuCopy = wxID_COPY,
+	menuPaste = wxID_PASTE,
+	menuDelete = wxID_DELETE,
+	menuSelectAll = wxID_SELECTALL,
+	menuFind = wxID_FIND,
+	menuReplace = wxID_REPLACE,
+	menuAbout = wxID_ABOUT,
+
+	// file
+	menuSaveAll = 1000,
+    menuSaveACopy,
+	menuReload,
+	menuRecentFiles,
+	menuRecentFilesList,
+	menuRecentFilesToolbar,
+	menuCopyFilePath,
+	menuCopyFileName,
+	menuCopyFileNameNoExt,
+	menuCopyFileDir,
+	menuCloseAllButThis,
+	menuCloseAllToTheLeft,
+	menuCloseAllToTheRight,
+
+	// edit
+	menuCutLine,
+	menuDeleteLine,
+	menuInsertTabChar,
+	menuInsertDateTime,
+	menuBookmark,
+	menuBookmarkCopy,
+	menuBookmarkCut,
+	menuBookmarkDel,
+	menuBookmarkDelUnmarked,
+	menuBookmarkReplace,
+	menuSort,
+	menuSortAscending,
+	menuSortDescending,
+	menuSortAscendingCase,
+	menuSortDescendingCase,
+	menuSortByOptions,
+	menuSortOptions,
+	menuAdvanced,
+	menuToggleReadOnly,
+	menuStartEndSelction,
+
+	menuCopyAsHexString,
+	menuCopyAsHexStringWithSpace,
+	menuCopyRevertHex,
+	menuIncreaseIndent,
+	menuDecreaseIndent,
+	menuComment,
+	menuUncomment,
+	menuWordWrapToNewLine,
+	menuNewLineToWordWrap,
+	menuToUpperCase,
+	menuToLowerCase,
+	menuInvertCase,
+	menuCapitalize,
+	menuToHalfWidth,
+	menuToHalfWidthByOptions,
+	menuToFullWidth,
+	menuToFullWidthByOptions,
+	menuTabToSpace,
+	menuSpaceToTab,
+	menuTrimTrailingSpaces,
+	menuTrimLeadingSpaces,
+	menuDeleteEmptyLines,
+	menuDeleteEmptyLinesWithSpaces,
+	menuJoinLines,
+	menuInsertNumbers,
+	menuColumnAlignLeft,
+	menuColumnAlignRight,
+
+	// search
+	menuFindNext,
+	menuFindPrevious,
+	menuFindInFiles,
+	menuShowFindInFilesResults,
+    menuCollapseAllResults,
+    menuGoToLine,
+	menuGoToPosition,
+    menuGoBack,
+    menuGoForward,
+	menuLeftBrace,
+	menuRightBrace,
+	menuToggleBookmark,       // add: gogo, 21.09.2009
+	menuGotoNextBookmark,     // add: gogo, 21.09.2009
+	menuGotoPreviousBookmark, // add: gogo, 21.09.2009
+	menuClearAllBookmarks,
+
+	// view
+	menuAlwaysOnTop,
+	menuFullScreen,
+    menuPostIt,
+	menuEncoding,
+	menuAllEncodings,
+	menuEncodingGroup1,
+	menuEncodingGroup32 = menuEncodingGroup1 + 31,
+
+	menuEncoding1,
+	menuEncoding99 = menuEncoding1 + 98,
+
+	menuRecentEncoding1,
+	menuRecentEncoding9 = menuRecentEncoding1 + 8,
+
+	menuSyntax,
+	menuSyntax1,
+	menuSyntax199 = menuSyntax1 + 198,
+
+	menuFontName,
+	menuFontName1,
+	menuFontName999 = menuFontName1 + 998,
+
+	menuFont0, //[@]
+	menuFont1, //[ABCDE]
+	menuFont2, //[FGHIJ]
+	menuFont3, //[KLMNO]
+	menuFont4, //[PQRST]
+	menuFont5, //[UVWXYZ]
+	menuFont6, //[Other]
+
+	menuRecentFonts,
+	menuRecentFont1,
+	menuRecentFont9 = menuRecentFont1 + 8,
+
+	menuFontSize,
+	menuFontSize1,
+	menuFontSize99 = menuFontSize1 + 98,
+
+	menuSetFont,
+	menuFixedWidthMode,
+
+	menuTabColumn,
+	menuTabColumn1,
+	menuTabColumn16 = menuTabColumn1 + 15,
+
+	menuLineSpacing,
+	menuLineSpacing100,
+	menuLineSpacing250 = menuLineSpacing100 + 30,
+
+	menuNoWrap,
+	menuWrapByWindow,
+	menuWrapByColumn,
+	menuDisplayLineNumber,
+	menuDisplayBookmark,
+	menuDisplay80ColHint,
+	menuShowEndOfLine,
+	menuShowTabChar,
+	menuShowSpaceChar,
+	menuViewRightToLeft,
+	menuPreview,
+	menuPreview1,
+	menuPreview16 = menuPreview1 + 15,
+	menuRefreshPreview,
+	menuClosePreview,
+	menuShowAllChars,
+	menuMarkActiveLine,
+	menuMarkBracePair,
+	menuTextMode,
+	menuColumnMode,
+	menuHexMode,
+	menuSpellChecker,
+	menuSpellIgnore,
+	menuSpellAdd2Dict,
+	menuSpellRemoveFromDict,
+	menuSpellOption1,
+	menuSpellOption99 = menuSpellOption1 + 98,
+	// ToolBar
+	menuToolBars,
+	menuToolBarsToggleAll,
+	menuToolBar1,
+	menuToolBar99 = menuToolBar1 + 98,
+
+	// tools
+	menuOptions,
+	menuHighlighting,
+#ifdef __WXMSW__
+	menuFileAssociation,
+#endif
+	menuSourceFormatter,
+	menuPurgeHistories,
+	menuMadMacro,
+	menuRunTempMacro,
+	menuRunMacroFile,
+	menuStartRecMacro,
+	menuStopRecMacro,
+	menuPlayRecMacro,
+	menuSaveRecMacro,
+	menuMadScriptList,
+	menuEditMacroFile,
+	menuMadScrip1,
+	menuMadScrip200 = menuMadScrip1 + (MAX_MADSCRIPT_LOAD -1), //200 scripts, enough?
+	menuPlugins,
+	menuByteOrderMark,
+	menuToggleBOM,
+	menuNewLineChar,
+	menuConvertToDOS,
+	menuConvertToMAC,
+	menuConvertToUNIX,
+	menuInsertNewLineChar,
+	menuInsertDOS,
+	menuInsertMAC,
+	menuInsertUNIX,
+	menuConvertEncoding,
+	menuConvertChineseChar,
+	menuSimp2TradChinese,
+	menuTrad2SimpChinese,
+	menuKanji2TradChinese,
+	menuKanji2SimpChinese,
+	menuChinese2Kanji,
+	menuSimp2TradClipboard,
+	menuTrad2SimpClipboard,
+	menuKanji2TradClipboard,
+	menuKanji2SimpClipboard,
+	menuChinese2KanjiClipboard,
+	menuMarkdown2Html,
+	menuHtml2PlainText,
+	menuTextConvFormatter,
+	menuAstyleFormat,
+	menuXMLFormat,
+	menuWordCount,
+
+	// window
+	menuToggleWindow,
+	menuPreviousWindow,
+	menuNextWindow,
+	menuWindowList,
+	menuWindow1,
+	menuWindow100 = menuWindow1 + 99,
+
+	// results
+	menuCopyCurResult,
+	menuCopyAllResults,
+	menuResetResult,
+	menuDeleteCurResult,
+    menuCollapseCurResult,
+
+	menuTypewriterMode,
+	menuShowQuickSearchBar,
+	menuQuickFindNext,
+	menuQuickFindPrevious = menuQuickFindNext+1,
+    menuQuickFindWholeWord = menuQuickFindNext+2,
+    menuQuickFindRegex = menuQuickFindNext+3,
+    menuQuickFindCase = menuQuickFindNext+4,
+    menuQuickFindDotMatchNewLine = menuQuickFindNext+5,
+
+    menuVScrollHere,
+    menuVScrollTop,
+    menuVScrollBottom,
+    menuVScrollPageUp,
+    menuVScrollPageDown,
+    menuVScrollUp,
+    menuVScrollDown,
+    menuHScrollHere,
+    menuHScrollLeftEdge,
+    menuHScrollRightEdge,
+    menuHScrollPageLeft,
+    menuHScrollPageRight,
+    menuHScrollLeft,
+    menuHScrollRight,
+    menuIncFontSize,
+    menuDecFontSize,
+	menuMAXMENUITEMID,
 };
 
 class MadEditFrame : public wxFrame
@@ -101,14 +383,19 @@ public:
 	enum
 	{
 		////GUI Enum Control ID Start
-		ID_WXSTATUSBAR1 = 3003,
-		ID_WXTOOLBAR1 = 3005, //NextValue should be (ID_WXTOOLBAR1+tbTOOLBAR_MAX)
+		ID_WXSTATUSBAR1 = menuMAXMENUITEMID,
+		ID_WXTOOLBAR1, //NextValue should be (ID_WXTOOLBAR1+tbTOOLBAR_MAX)
 		////GUI Enum Control ID End
 
 		ID_NOTEBOOK = ( ID_WXTOOLBAR1 + tbMAX ), // for wxAuiNotebook m_Notebook
 		ID_OUTPUTNOTEBOOK,
 		ID_FINDINFILESRESULTS,
 		//ID_WXTOOLBARQUICKSEARCH,
+		ID_ENCODINGS,
+		ID_SYNTAXS,
+		ID_FONTS,
+		ID_FONTSIZES,
+		ID_LINESPACES,
 		ID_QUICKSEARCH,
 		ID_QUICKSEARCHWHOLEWORD,
 		ID_QUICKSEARCHREGEX,
@@ -136,6 +423,11 @@ public:
 	wxHtmlWindow  *m_HtmlPreview;
 	int            m_PreviewType;
 	wxComboBox    *m_QuickSearch;
+	wxComboBox    *m_Encodings;
+	wxComboBox    *m_Syntaxs;
+	wxComboBox    *m_Fonts;
+	wxComboBox    *m_FontSizes;
+	wxComboBox    *m_LineSpaces;
 	bool           m_ReloadFiles;
 	bool           m_PurgeHistory;
 	bool           m_ResetToolBars;
@@ -371,6 +663,10 @@ private:
 	void OnViewToolbars( wxCommandEvent& event );
 	void OnViewTypewriterMode( wxCommandEvent& event );
 
+	void OnFontEncoding( wxCommandEvent& event );
+	void OnIncDecFontSize( wxCommandEvent& event );
+	void UpdateFontEncoding(  );
+
 	void OnToolsOptions( wxCommandEvent& event );
 	void OnToolsHighlighting( wxCommandEvent& event );
 #ifdef __WXMSW__
@@ -549,284 +845,6 @@ public:
 	}
 	bool HasRecordedScript() {return ( m_MadMacroScripts.GetCount() > 0 );}
 	wxArrayString& GetRecordedScripts() {return m_MadMacroScripts;}
-};
-
-enum   // menu id
-{
-	menuNew = wxID_NEW,
-	menuOpen = wxID_OPEN,
-	menuSave = wxID_SAVE,
-	menuSaveAs = wxID_SAVEAS,
-	menuClose = wxID_CLOSE,
-	menuCloseAll = wxID_CLOSE_ALL,
-	menuPageSetup = wxID_PRINT_SETUP,
-	menuPrintPreview = wxID_PREVIEW,
-	menuPrint = wxID_PRINT,
-	menuExit = wxID_EXIT,
-	menuUndo = wxID_UNDO,
-	menuRedo = wxID_REDO,
-	menuCut = wxID_CUT,
-	menuCopy = wxID_COPY,
-	menuPaste = wxID_PASTE,
-	menuDelete = wxID_DELETE,
-	menuSelectAll = wxID_SELECTALL,
-	menuFind = wxID_FIND,
-	menuReplace = wxID_REPLACE,
-	menuAbout = wxID_ABOUT,
-
-	// file
-	menuSaveAll = 1000,
-    menuSaveACopy,
-	menuReload,
-	menuRecentFiles,
-	menuRecentFilesList,
-	menuRecentFilesToolbar,
-	menuCopyFilePath,
-	menuCopyFileName,
-	menuCopyFileNameNoExt,
-	menuCopyFileDir,
-	menuCloseAllButThis,
-	menuCloseAllToTheLeft,
-	menuCloseAllToTheRight,
-
-	// edit
-	menuCutLine,
-	menuDeleteLine,
-	menuInsertTabChar,
-	menuInsertDateTime,
-	menuBookmark,
-	menuBookmarkCopy,
-	menuBookmarkCut,
-	menuBookmarkDel,
-	menuBookmarkDelUnmarked,
-	menuBookmarkReplace,
-	menuSort,
-	menuSortAscending,
-	menuSortDescending,
-	menuSortAscendingCase,
-	menuSortDescendingCase,
-	menuSortByOptions,
-	menuSortOptions,
-	menuAdvanced,
-	menuToggleReadOnly,
-	menuStartEndSelction,
-
-	menuCopyAsHexString,
-	menuCopyAsHexStringWithSpace,
-	menuCopyRevertHex,
-	menuIncreaseIndent,
-	menuDecreaseIndent,
-	menuComment,
-	menuUncomment,
-	menuWordWrapToNewLine,
-	menuNewLineToWordWrap,
-	menuToUpperCase,
-	menuToLowerCase,
-	menuInvertCase,
-	menuCapitalize,
-	menuToHalfWidth,
-	menuToHalfWidthByOptions,
-	menuToFullWidth,
-	menuToFullWidthByOptions,
-	menuTabToSpace,
-	menuSpaceToTab,
-	menuTrimTrailingSpaces,
-	menuTrimLeadingSpaces,
-	menuDeleteEmptyLines,
-	menuDeleteEmptyLinesWithSpaces,
-	menuJoinLines,
-	menuInsertNumbers,
-	menuColumnAlignLeft,
-	menuColumnAlignRight,
-
-	// search
-	menuFindNext,
-	menuFindPrevious,
-	menuFindInFiles,
-	menuShowFindInFilesResults,
-    menuCollapseAllResults,
-    menuGoToLine,
-	menuGoToPosition,
-    menuGoBack,
-    menuGoForward,
-	menuLeftBrace,
-	menuRightBrace,
-	menuToggleBookmark,       // add: gogo, 21.09.2009
-	menuGotoNextBookmark,     // add: gogo, 21.09.2009
-	menuGotoPreviousBookmark, // add: gogo, 21.09.2009
-	menuClearAllBookmarks,
-
-	// view
-	menuAlwaysOnTop,
-	menuFullScreen,
-    menuPostIt,
-	menuEncoding,
-	menuAllEncodings,
-	menuEncodingGroup1,
-	menuEncodingGroup99 = menuEncodingGroup1 + 98,
-
-	menuEncoding1,
-	menuEncoding99 = menuEncoding1 + 98,
-
-	menuRecentEncoding1,
-	menuRecentEncoding9 = menuRecentEncoding1 + 8,
-
-	menuSyntax,
-	menuSyntax1,
-	menuSyntax199 = menuSyntax1 + 198,
-
-	menuFontName,
-	menuFontName1,
-	menuFontName999 = menuFontName1 + 998,
-
-	menuFont0, //[@]
-	menuFont1, //[ABCDE]
-	menuFont2, //[FGHIJ]
-	menuFont3, //[KLMNO]
-	menuFont4, //[PQRST]
-	menuFont5, //[UVWXYZ]
-	menuFont6, //[Other]
-
-	menuRecentFonts,
-	menuRecentFont1,
-	menuRecentFont9 = menuRecentFont1 + 8,
-
-	menuFontSize,
-	menuFontSize1,
-	menuFontSize99 = menuFontSize1 + 98,
-
-	menuSetFont,
-	menuFixedWidthMode,
-
-	menuTabColumn,
-	menuTabColumn1,
-	menuTabColumn16 = menuTabColumn1 + 15,
-
-	menuLineSpacing,
-	menuLineSpacing100,
-	menuLineSpacing250 = menuLineSpacing100 + 30,
-
-	menuNoWrap,
-	menuWrapByWindow,
-	menuWrapByColumn,
-	menuDisplayLineNumber,
-	menuDisplayBookmark,
-	menuDisplay80ColHint,
-	menuShowEndOfLine,
-	menuShowTabChar,
-	menuShowSpaceChar,
-	menuViewRightToLeft,
-	menuPreview,
-	menuPreview1,
-	menuPreview16 = menuPreview1 + 15,
-	menuRefreshPreview,
-	menuClosePreview,
-	menuShowAllChars,
-	menuMarkActiveLine,
-	menuMarkBracePair,
-	menuTextMode,
-	menuColumnMode,
-	menuHexMode,
-	menuSpellChecker,
-	menuSpellIgnore,
-	menuSpellAdd2Dict,
-	menuSpellRemoveFromDict,
-	menuSpellOption1,
-	menuSpellOption99 = menuSpellOption1 + 98,
-	// ToolBar
-	menuToolBars,
-	menuToolBarsToggleAll,
-	menuToolBar1,
-	menuToolBar99 = menuToolBar1 + 98,
-
-	// tools
-	menuOptions,
-	menuHighlighting,
-#ifdef __WXMSW__
-	menuFileAssociation,
-#endif
-	menuSourceFormatter,
-	menuPurgeHistories,
-	menuMadMacro,
-	menuRunTempMacro,
-	menuRunMacroFile,
-	menuStartRecMacro,
-	menuStopRecMacro,
-	menuPlayRecMacro,
-	menuSaveRecMacro,
-	menuMadScriptList,
-	menuEditMacroFile,
-	menuMadScrip1,
-	menuMadScrip200 = menuMadScrip1 + (MAX_MADSCRIPT_LOAD -1), //200 scripts, enough?
-	menuPlugins,
-	menuByteOrderMark,
-	menuToggleBOM,
-	menuNewLineChar,
-	menuConvertToDOS,
-	menuConvertToMAC,
-	menuConvertToUNIX,
-	menuInsertNewLineChar,
-	menuInsertDOS,
-	menuInsertMAC,
-	menuInsertUNIX,
-	menuConvertEncoding,
-	menuConvertChineseChar,
-	menuSimp2TradChinese,
-	menuTrad2SimpChinese,
-	menuKanji2TradChinese,
-	menuKanji2SimpChinese,
-	menuChinese2Kanji,
-	menuSimp2TradClipboard,
-	menuTrad2SimpClipboard,
-	menuKanji2TradClipboard,
-	menuKanji2SimpClipboard,
-	menuChinese2KanjiClipboard,
-	menuMarkdown2Html,
-	menuHtml2PlainText,
-	menuTextConvFormatter,
-	menuAstyleFormat,
-	menuXMLFormat,
-	menuWordCount,
-
-	// window
-	menuToggleWindow,
-	menuPreviousWindow,
-	menuNextWindow,
-	menuWindowList,
-	menuWindow1,
-	menuWindow100 = menuWindow1 + 99,
-
-	// results
-	menuCopyCurResult,
-	menuCopyAllResults,
-	menuResetResult,
-	menuDeleteCurResult,
-    menuCollapseCurResult,
-
-	menuTypewriterMode,
-	menuShowQuickSearchBar,
-	menuQuickFindNext,
-	menuQuickFindPrevious = menuQuickFindNext+1,
-    menuQuickFindWholeWord = menuQuickFindNext+2,
-    menuQuickFindRegex = menuQuickFindNext+3,
-    menuQuickFindCase = menuQuickFindNext+4,
-    menuQuickFindDotMatchNewLine = menuQuickFindNext+5,
-
-    menuVScrollHere,
-    menuVScrollTop,
-    menuVScrollBottom,
-    menuVScrollPageUp,
-    menuVScrollPageDown,
-    menuVScrollUp,
-    menuVScrollDown,
-    menuHScrollHere,
-    menuHScrollLeftEdge,
-    menuHScrollRightEdge,
-    menuHScrollPageLeft,
-    menuHScrollPageRight,
-    menuHScrollLeft,
-    menuHScrollRight,
-	menuMAXMENUITEMID,
 };
 
 enum MadPreviewType
