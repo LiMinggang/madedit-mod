@@ -2489,11 +2489,11 @@ ToolBarData ToolBarTable[] =
 {
 	{tbSTANDARD,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBStandardPos"),      wxT("MadToolBar0"), _("Standard"),       1, 0},
 	{tbEDITOR,        MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBEditorPos"),        wxT("MadToolBar1"), _("Editor"),         1, 1},
-	{tbFONTENCODING,  MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBFontEncodingPos"),  wxT("MadToolBar6"), _("Font/Encoding"),  2, 0},
-	{tbSEARCHREPLACE, MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBSearchReplacePos"), wxT("MadToolBar2"), _("Search/Replace"), 2, 1},
-	{tbTEXTVIEW,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBTextviewPos"),      wxT("MadToolBar3"), _("Text View"),      2, 2},
-	{tbEDITMODE,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBEditModePos"),      wxT("MadToolBar4"), _("Edit Mode"),      2, 3},
-	{tbMACRO,         MADTOOBAR_OVERFLOW, wxT("/MadEdit/TBMacroPos"),         wxT("MadToolBar5"), _("Macro"),          2, 4},
+	{tbSEARCHREPLACE, MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBSearchReplacePos"), wxT("MadToolBar2"), _("Search/Replace"), 2, 0},
+	{tbTEXTVIEW,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBTextviewPos"),      wxT("MadToolBar3"), _("Text View"),      2, 1},
+	{tbEDITMODE,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBEditModePos"),      wxT("MadToolBar4"), _("Edit Mode"),      2, 2},
+	{tbMACRO,         MADTOOBAR_OVERFLOW, wxT("/MadEdit/TBMacroPos"),         wxT("MadToolBar5"), _("Macro"),          2, 3},
+	{tbFONTENCODING,  MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBFontEncodingPos"),  wxT("MadToolBar6"), _("Font/Encoding"),  3, 0},
 	{-1, 0, 0, 0, 0, -1, 0},
 };
 
@@ -10136,7 +10136,7 @@ inline bool MadEditFrame::ResetNormalToolBarPos(wxWindow * toolbar, const wxChar
 
 inline bool MadEditFrame::ResetQuickSearchBarPos()
 {
-	return m_AuiManager.AddPane( m_QuickSearchBar, wxAuiPaneInfo().Name( wxT( "QuickSeachBar" ) ).CloseButton( false ).Gripper( true ).Caption( _( "Quick Search" ) ).Floatable( true ).ToolbarPane().Top().Row( 3 ) );
+	return m_AuiManager.AddPane( m_QuickSearchBar, wxAuiPaneInfo().Name( wxT( "QuickSeachBar" ) ).CloseButton( false ).Gripper( true ).Caption( _( "Quick Search" ) ).Floatable( true ).ToolbarPane().Top().Row( 4 ) );
 }
 
 inline bool MadEditFrame::ResetInformationWinPos()
