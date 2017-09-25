@@ -1597,7 +1597,6 @@ class MadFontEnumerator : public wxFontEnumerator
 {
 	wxArrayString m_facenames_lowercase;
 public:
-
 	virtual bool OnFacename( const wxString& facename ) {
 		size_t count = m_facenames_lowercase.Count();
 
@@ -1622,7 +1621,6 @@ public:
 
 		return true;
 	}
-
 };
 
 //----------------------------------------------------------------------------
@@ -7977,6 +7975,11 @@ void MadEditFrame::OnFontEncoding( wxCommandEvent& event )
 				{
 					evt.SetId(sel+menuEncoding1);
 					OnViewEncoding( evt );
+
+					wxString name;
+					int size;
+					g_ActiveMadEdit->GetFont( name, size );
+					m_Fonts->SetSelection(m_Fonts->FindString(name));
 				}
 				break;
 			}
