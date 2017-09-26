@@ -712,13 +712,15 @@ MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 
 			expression = ucs4comp.compile( exprstr, opt );
 		}
-		catch( regex_error & )
+		catch( regex_error & e )
 		{
 			//wxMessageDialog dlg( this, wxString::Format( _( "'%s' is not a valid regular expression.(Or empty (), [] or {})" ), text.c_str() ),
 			//					 wxT( "MadEdit-Mod" ), wxOK | wxICON_ERROR );
 			//dlg.SetOKLabel( wxMessageDialog::ButtonLabel( _( "&Ok" ) ) );
 			//dlg.ShowModal();
-			g_StatusBar->SetStatusText( wxString::Format( _( "'%s' is not a valid regular expression.(Or empty (), [] or {})" ), text.c_str() ), 0 );
+			wxString regErr(_("Regex error:"));
+			regErr << e.what();
+			g_StatusBar->SetStatusText( regErr, 0 );
 			return SR_EXPR_ERROR;
 		}
 	}
@@ -819,7 +821,17 @@ MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 					endpos.linepos = what[0].second.linepos;
 					if(fmt)
 					{
-						*out = what.format<ucs4string, ucs4string::iterator>(*fmt);
+#if defined(_DEBUG) && defined(__WXMSW__)
+						for (int i = 0; i < (*fmt).size(); ++i)
+							DBOUT((wchar_t)(*fmt)[i]);
+						DBOUT('\n');
+#endif
+						*out = what.format<ucs4string, ucs4string::iterator>(*fmt, regex_constants::format_perl);
+#if defined(_DEBUG) && defined(__WXMSW__)
+						for (int i = 0; i < (*out).size(); ++i)
+							DBOUT((wchar_t)(*out)[i]);
+						DBOUT('\n');
+#endif
 						*out = ConvertEscape( *out );
 					}
 				}
@@ -847,9 +859,11 @@ MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 			}
 		}
 	}
-	catch( regex_error )
+	catch( regex_error & e )
 	{
-		wxMessageDialog dlg( this, _( "Caught an exception of 'regex_error'.\nMaybe the regular expression is invalid." ),
+		wxString regErr(_("Regex error:"));
+		regErr << e.what();
+		wxMessageDialog dlg( this, regErr,
 							 wxT( "MadEdit-Mod" ), wxOK | wxICON_ERROR );
 		dlg.SetOKLabel( wxMessageDialog::ButtonLabel( _( "&Ok" ) ) );
 		dlg.ShowModal();
@@ -943,9 +957,11 @@ MadSearchResult MadEdit::Replace( ucs4string &out, const MadCaretPos &beginpos, 
 	{
 		expression = ucs4comp.compile( exprstr, opt );
 	}
-	catch( regex_error )
+	catch( regex_error & e )
 	{
-		wxMessageDialog dlg( this, wxString::Format( _( "'%s' is not a valid regular expression." ), expr.c_str() ),
+		wxString regErr(_("Regex error:"));
+		regErr << e.what();
+		wxMessageDialog dlg( this, regErr,
 							 wxT( "MadEdit-Mod" ), wxOK | wxICON_ERROR );
 		dlg.SetOKLabel( wxMessageDialog::ButtonLabel( _( "&Ok" ) ) );
 		dlg.ShowModal();
@@ -996,17 +1012,19 @@ MadSearchResult MadEdit::Replace( ucs4string &out, const MadCaretPos &beginpos, 
 		out = regex_replace( str, expression, fmtstr, regex_constants::format_perl );
 #if defined(_DEBUG) && defined(__WXMSW__)
 		for (int i = 0; i < fmtstr.size(); ++i)
-			DBOUT(fmtstr[i]);
+			DBOUT((wchar_t)fmtstr[i]);
 		DBOUT('\n');
 		for(int i = 0; i < out.size(); ++i)
-			DBOUT( out[i] );
+			DBOUT((wchar_t)out[i] );
 		DBOUT('\n');
 #endif
 		out = ConvertEscape( out );
 	}
-	catch( regex_error )
+	catch( regex_error & e )
 	{
-		wxMessageDialog dlg( this, wxString::Format( _( "The format of '%s' is invalid." ), fmt.c_str() ),
+		wxString regErr(_("Regex error:"));
+		regErr << e.what();
+		wxMessageDialog dlg( this, regErr,
 							 wxT( "MadEdit-Mod" ), wxOK | wxICON_ERROR );
 		dlg.SetOKLabel( wxMessageDialog::ButtonLabel( _( "&Ok" ) ) );
 		dlg.ShowModal();
