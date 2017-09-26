@@ -563,8 +563,8 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	CheckBoxRightClickMenu->SetValue(false);
 	SET_CONTROLPARENT(CheckBoxRightClickMenu);
 	BoxSizer7->Add(CheckBoxRightClickMenu, 0, wxALL|wxEXPAND, 2);
-	BoxSizer3->Add(BoxSizer7, 0, wxALL|wxEXPAND, 2);
 #endif
+	BoxSizer3->Add(BoxSizer7, 0, wxALL|wxEXPAND, 2);
 	Panel1->SetSizer(BoxSizer3);
 	BoxSizer3->Fit(Panel1);
 	BoxSizer3->SetSizeHints(Panel1);
