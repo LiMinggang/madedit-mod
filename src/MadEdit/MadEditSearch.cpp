@@ -993,7 +993,15 @@ MadSearchResult MadEdit::Replace( ucs4string &out, const MadCaretPos &beginpos, 
 
 	try
 	{
-		out = regex_replace( str, expression, fmtstr );
+		out = regex_replace( str, expression, fmtstr, regex_constants::format_perl );
+#if defined(_DEBUG) && defined(__WXMSW__)
+		for (int i = 0; i < fmtstr.size(); ++i)
+			DBOUT(fmtstr[i]);
+		DBOUT('\n');
+		for(int i = 0; i < out.size(); ++i)
+			DBOUT( out[i] );
+		DBOUT('\n');
+#endif
 		out = ConvertEscape( out );
 	}
 	catch( regex_error )
