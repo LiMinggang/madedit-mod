@@ -94,7 +94,7 @@ private:
 
 public:
 	static void InitEncodings(); // must call this before use MadEncoding
-	static void UpdateEncodingDefaultFont(wxString & font);
+	static void UpdateEncodingDefaultFont(const wxString & font);
 	static void FreeEncodings(); //
 
 	static size_t GetEncodingsCount();

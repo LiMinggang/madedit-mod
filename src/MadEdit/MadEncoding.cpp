@@ -716,7 +716,7 @@ void MadEncoding::FreeEncodings()
 	}
 }
 
-void MadEncoding::UpdateEncodingDefaultFont(wxString & font)
+void MadEncoding::UpdateEncodingDefaultFont(const wxString & font)
 {
 	vector<MadEncodingInfo>::iterator it = EncodingsTable.begin();
 	vector<MadEncodingInfo>::iterator itend = EncodingsTable.end();
