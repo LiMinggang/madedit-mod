@@ -3823,6 +3823,7 @@ void MadEdit::CutDelBookmarkedLines( bool copyLines/*= false*/ )
 
 	if( undo )
 	{
+		ClearAllBookmarks();
 		ReformatAll();
 		m_Modified = true;
 		m_Selection = false;
@@ -3899,6 +3900,7 @@ void MadEdit::DeleteUnmarkedLines()
 
 	if( undo )
 	{
+		ClearAllBookmarks();
 		ReformatAll();
 		m_Modified = true;
 		m_Selection = false;
