@@ -9114,7 +9114,6 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 								if( m_TopRow < 0 ) m_TopRow = 0;
 							}
 						}
-						
 					}
 
 					break;
