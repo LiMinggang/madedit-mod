@@ -1730,7 +1730,7 @@ void MadSearchReplaceDialog::SearchAll( MadEdit * madedit, bool needRec/*=true*/
 
 		wxTreeItemId myroot; 
 
-		if( !WxCheckBoxBookmarkOnly->IsChecked() )
+		if( (!WxCheckBoxBookmarkLine->IsChecked()) || !WxCheckBoxBookmarkOnly->IsChecked() )
 		{
 			strtobesearch += wxString::Format( _("(%s hits in 1 file)"), ( wxLongLong( ok ).ToString().c_str() ) );
 			myroot = g_MainFrame->NewSearchSession(strtobesearch);
@@ -1757,7 +1757,7 @@ void MadSearchReplaceDialog::SearchAll( MadEdit * madedit, bool needRec/*=true*/
 			g_SearchProgressDialog = nullptr;
 		}
 
-		if( !WxCheckBoxBookmarkOnly->IsChecked() )
+		if( (!WxCheckBoxBookmarkLine->IsChecked()) || !WxCheckBoxBookmarkOnly->IsChecked() )
 		{
 			static wxString text( _( "Search Results" ) );
 			int pid = g_MainFrame->m_InfoNotebook->GetPageIndex( g_MainFrame->m_FindInFilesResults );
@@ -1778,7 +1778,7 @@ void MadSearchReplaceDialog::SearchAll( MadEdit * madedit, bool needRec/*=true*/
 
 			// Root
 			// First Level----search results summary
-			if( !WxCheckBoxBookmarkOnly->IsChecked() )
+			if( (!WxCheckBoxBookmarkLine->IsChecked()) || !WxCheckBoxBookmarkOnly->IsChecked() )
 			{
 				wxTreeItemIdValue cookie;
 				id = results->GetFirstChild(rtid, cookie);
