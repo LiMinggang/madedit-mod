@@ -129,6 +129,7 @@ Fix: Refactor Option dialog with wxSmith
 Fix: Font size issue of fix width mode in switching between different fonts
 Fix: Incorrect displaying DND mouse ICON while clicking line number area in selection
 Fix: Wrong file filter of Open File dialog
+Fix: Bookmark Only in search dialog does not work
 Update Astyle to latest code
 Update translations
 

@@ -931,7 +931,10 @@ public: // basic functions
 	void HighlightWords();
 	void CopyBookmarkedLines();
 	void CutDelBookmarkedLines( bool copyLines = false );
-	void DeleteUnmarkedLines();
+	void DeleteUnmarkedLines() { CopyCutDeleteUnmarkedLines( false, true );}
+	void CopyUnmarkedLines() { CopyCutDeleteUnmarkedLines( true, false );}
+	void CutUnmarkedLines() { CopyCutDeleteUnmarkedLines( true, true );}
+	void CopyCutDeleteUnmarkedLines( bool copyLines = false, bool deleteLines = false );
 	void ReplaceBookmarkedLines();
 	void SelectAll();
 	void CutToClipboard();

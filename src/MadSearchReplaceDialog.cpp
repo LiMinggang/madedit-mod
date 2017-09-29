@@ -1599,7 +1599,7 @@ void MadSearchReplaceDialog::SearchAll( MadEdit * madedit, bool needRec/*=true*/
 		begpos.reserve( 128 * 1024 );
 		endpos.reserve( 128 * 1024 );
 		m_RecentFindText->AddFileToHistory( expr );
-		madedit->ToggleBookmarkInSearch( WxCheckBoxBookmarkLine->IsChecked() );
+		madedit->ToggleBookmarkInSearch( WxCheckBoxBookmarkLine->IsChecked() || WxCheckBoxBookmarkOnly->IsChecked() );
 
 		if( WxCheckBoxPurgeBookmark->IsChecked() )
 			madedit->ClearAllBookmarks();
@@ -1757,7 +1757,7 @@ void MadSearchReplaceDialog::SearchAll( MadEdit * madedit, bool needRec/*=true*/
 						results->Expand(lstid);
 				}
 			}
-			if(WxCheckBoxBookmarkLine->IsChecked())
+			if(WxCheckBoxBookmarkLine->IsChecked() || WxCheckBoxBookmarkOnly->IsChecked() )
 			{
 				if( g_ActiveMadEdit != nullptr )
 				{

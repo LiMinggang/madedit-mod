@@ -3450,7 +3450,6 @@ void MadEdit::ColumnAlignRight()
 	m_ZeroSelection = false;
 }
 
-
 void MadEdit::InsertIncrementalNumber( int initial, int step, int total, MadNumberingStepType stepType,
 									   MadNumberFormat fmt, MadNumberAlign align, bool zeroPad, const wxString& prefix, const wxString& postfix )
 {
@@ -3844,10 +3843,10 @@ void MadEdit::CutDelBookmarkedLines( bool copyLines/*= false*/ )
 	m_ZeroSelection = false;
 }
 
-void MadEdit::DeleteUnmarkedLines()
+void MadEdit::CopyCutDeleteUnmarkedLines( bool copyLines /*= false*/, bool deleteLines /*= false*/ )
 {
-
 	if( !m_Lines->m_LineList.HasBookMark() ) return;
+	if( copyLines == false && deleteLines == false) return;
 
 	MadUndo *undo = nullptr;
 	list<MadLineIterator> &lineList = m_Lines->m_LineList.GetBookmarkedLines();
@@ -3886,6 +3885,7 @@ void MadEdit::DeleteUnmarkedLines()
 
 	if(!linebegpos.empty())
 	{
+		wxString ws;
 		wxFileOffset curpos = m_Lines->m_Size, msize = 0; //0 ~ fsize-1
 		for (int i = (int)(linebegpos.size() - 1); i >= 0; --i )
 		{
@@ -3893,10 +3893,40 @@ void MadEdit::DeleteUnmarkedLines()
 			wxASSERT(msize >= 0 );
 			if(msize > 0)
 			{
+				pos = (curpos - msize);
+				if(deleteLines)
+				{
+					MadDeleteUndoData *dudata = new MadDeleteUndoData;
+					dudata->m_Pos = (curpos - msize);
+					dudata->m_Size = msize;
+					wxASSERT(linesize[i] > 0);
+					DeleteInsertData(dudata->m_Pos, dudata->m_Size, &dudata->m_Data, 0, nullptr);
+					if (undo == nullptr)
+					{
+						undo = m_UndoBuffer->Add();
+						SetNeedSync();
+						undo->m_CaretPosBefore = m_CaretPos.pos;
+					}
+					undo->m_Undos.push_back(dudata);
+					m_CaretPos.pos = dudata->m_Pos;
+				}
+
+				if(copyLines) 
+				{
+					GetRangeText(ws, pos, curpos);
+				}
+			}
+			curpos = linebegpos[i];
+		}
+
+		if( curpos > 0 )
+		{
+			pos = 0;
+			if(deleteLines)
+			{
 				MadDeleteUndoData *dudata = new MadDeleteUndoData;
-				dudata->m_Pos = ( curpos - msize );
-				dudata->m_Size = msize;
-				wxASSERT(linesize[i]>0);
+				dudata->m_Pos = pos;
+				dudata->m_Size = curpos;
 				DeleteInsertData(dudata->m_Pos, dudata->m_Size, &dudata->m_Data, 0, nullptr);
 				if (undo == nullptr)
 				{
@@ -3904,29 +3934,17 @@ void MadEdit::DeleteUnmarkedLines()
 					SetNeedSync();
 					undo->m_CaretPosBefore = m_CaretPos.pos;
 				}
-
 				undo->m_Undos.push_back(dudata);
 				m_CaretPos.pos = dudata->m_Pos;
 			}
-			curpos = linebegpos[i];
-		}
 
-		if( curpos > 0 )
-		{
-			MadDeleteUndoData *dudata = new MadDeleteUndoData;
-			dudata->m_Pos = 0;
-			dudata->m_Size = curpos;
-			DeleteInsertData( dudata->m_Pos, dudata->m_Size, &dudata->m_Data, 0, nullptr );
-			if (undo == nullptr)
+			if(copyLines) 
 			{
-				undo = m_UndoBuffer->Add();
-				SetNeedSync();
-				undo->m_CaretPosBefore = m_CaretPos.pos;
+				GetRangeText(ws, pos, curpos);
 			}
-
-			undo->m_Undos.push_back(dudata);
-			m_CaretPos.pos = dudata->m_Pos;
 		}
+
+		if( !ws.IsEmpty() ) PutTextToClipboard( ws );
 	}
 
 	if( undo )
@@ -4103,5 +4121,3 @@ void MadEdit::SetMaxDisplaySize( int maxsize )
 		}
 	}
 }
-
-
