@@ -1704,6 +1704,8 @@ MadEditFrame::wxCmdEvtHandlerMap_t MadEditFrame::m_menu_evt_map[] =
 	{ menuBookmarkCopy, &MadEditFrame::OnEditBookmarkCopy },
 	{ menuBookmarkCut, &MadEditFrame::OnEditBookmarkCut },
 	{ menuBookmarkDel, &MadEditFrame::OnEditBookmarkDel },
+	{ menuBookmarkCopyUnmarked, &MadEditFrame::OnEditBookmarkCopyUnmarked },
+	{ menuBookmarkCutUnmarked, &MadEditFrame::OnEditBookmarkCutUnmarked },
 	{ menuBookmarkDelUnmarked, &MadEditFrame::OnEditBookmarkDelUnmarked },
 	{ menuBookmarkReplace, &MadEditFrame::OnEditBookmarkReplace },
 	
@@ -1907,6 +1909,8 @@ MadEditFrame::wxUIUpdateEvtHandlerMap_t MadEditFrame::m_menu_ui_updater_map[] =
 	{ menuBookmarkCopy, &MadEditFrame::OnUpdateUI_MenuEditCheckBookmark },
 	{ menuBookmarkCut, &MadEditFrame::OnUpdateUI_MenuEditCheckBookmarkWritable },
 	{ menuBookmarkDel, &MadEditFrame::OnUpdateUI_MenuEditCheckBookmarkWritable },
+	{ menuBookmarkCopyUnmarked, &MadEditFrame::OnUpdateUI_MenuEditCheckBookmarkWritable },
+	{ menuBookmarkCutUnmarked, &MadEditFrame::OnUpdateUI_MenuEditCheckBookmarkWritable },
 	{ menuBookmarkDelUnmarked, &MadEditFrame::OnUpdateUI_MenuEditCheckBookmarkWritable },
 	{ menuBookmarkReplace, &MadEditFrame::OnUpdateUI_MenuEditCheckBookmarkWritable },
 	// search
@@ -2104,6 +2108,8 @@ CommandData CommandTable[] =
 	{ 0,                2, menuBookmarkCopy,             wxT( "menuBookmarkCopy" ),             _( "Copy Bookmarked Lines" ),                   0,                   wxITEM_NORMAL,    -1,                0,                     _( "Copy Bookmarked Lines" ), 0, 0, 0, false},
 	{ 0,                2, menuBookmarkCut,              wxT( "menuBookmarkCut" ),              _( "Cut Bookmarked Lines" ),                    0,                   wxITEM_NORMAL,    -1,                0,                     _( "Cut Bookmarked Lines" ), 0, 0, 0, false},
 	{ 0,                2, menuBookmarkDel,              wxT( "menuBookmarkDel" ),              _( "Delete Bookmarked Lines" ),                 0,                   wxITEM_NORMAL,    -1,                0,                     _( "Delete Bookmarked Lines" ), 0, 0, 0, false},
+	{ 0,                2, menuBookmarkCopyUnmarked,     wxT( "menuBookmarkCopyUnmarked" ),     _( "Copy Unmarked Lines" ),                     0,                   wxITEM_NORMAL,    -1,                0,                     _( "Copy Unmarked Lines" ), 0, 0, 0, false},
+	{ 0,                2, menuBookmarkCutUnmarked,      wxT( "menuBookmarkCutUnmarked" ),      _( "Cut Unmarked Lines" ),                      0,                   wxITEM_NORMAL,    -1,                0,                     _( "Cut Unmarked Lines" ), 0, 0, 0, false},
 	{ 0,                2, menuBookmarkDelUnmarked,      wxT( "menuBookmarkDelUnmarked" ),      _( "Delete Unmarked Lines" ),                   0,                   wxITEM_NORMAL,    -1,                0,                     _( "Delete Unmarked Lines" ), 0, 0, 0, false},
 	{ 0,                2, menuBookmarkReplace,          wxT( "menuBookmarkReplace" ),          _( "Replace Bookmarked Lines" ),                0,                   wxITEM_NORMAL,    -1,                0,                     _( "Replace Bookmarked Lines" ), 0, 0, 0, false},
 	{ 0,                1, 0,                            0,                                   0,                                            0,                   wxITEM_SEPARATOR, -1,                0,                     0, 0, 0, 0, false},
@@ -6779,6 +6785,22 @@ void MadEditFrame::OnEditBookmarkDel( wxCommandEvent& event )
 	if( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() != emHexMode )
 	{
 		g_ActiveMadEdit->CutDelBookmarkedLines();
+	}
+}
+
+void MadEditFrame::OnEditBookmarkCopyUnmarked( wxCommandEvent& event )
+{
+	if( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() != emHexMode )
+	{
+		g_ActiveMadEdit->CopyUnmarkedLines();
+	}
+}
+
+void MadEditFrame::OnEditBookmarkCutUnmarked( wxCommandEvent& event )
+{
+	if( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() != emHexMode )
+	{
+		g_ActiveMadEdit->CutUnmarkedLines();
 	}
 }
 

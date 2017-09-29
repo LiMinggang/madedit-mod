@@ -3850,22 +3850,19 @@ void MadEdit::CopyCutDeleteUnmarkedLines( bool copyLines /*= false*/, bool delet
 
 	MadUndo *undo = nullptr;
 	list<MadLineIterator> &lineList = m_Lines->m_LineList.GetBookmarkedLines();
+	list<MadLineIterator>::iterator it = lineList.begin();
 	MadLineIterator lineit = m_Lines->m_LineList.begin();
 	bool oldModified = m_Modified;
-	MadLineIterator lit;
 	MadUCQueue ucqueue;
 	wxFileOffset posBeg = 0, posEnd = m_Lines->m_Size;
 	wxFileOffset pos = 0, msize = 0;
 	vector<wxFileOffset> linebegpos, linesize;
 	wxFileOffset curpos = 0, lastpos = 0;
 
-	while( !lineList.empty() )
+	while( it != lineList.end() )
 	{
 		wxASSERT(lineit != m_Lines->m_LineList.end());
-		lit = lineList.front();
-		lineList.pop_front();
-	
-		if( lit->m_Size != 0 ) // this line is not a empty line
+		if( (*it)->m_Size != 0 ) // this line is not a empty line
 		{
 			while (( lineit != m_Lines->m_LineList.end() ))
 			{
@@ -3873,7 +3870,7 @@ void MadEdit::CopyCutDeleteUnmarkedLines( bool copyLines /*= false*/, bool delet
 				curpos += lineit->m_Size;
 				msize = lineit->m_Size;
 	
-				if ( lineit++ == lit )
+				if ( lineit++ == (*it) )
 				{
 					linebegpos.push_back(lastpos);
 					linesize.push_back(msize);
@@ -3881,11 +3878,12 @@ void MadEdit::CopyCutDeleteUnmarkedLines( bool copyLines /*= false*/, bool delet
 				}
 			}
 		}
+		++it;
 	}
 
 	if(!linebegpos.empty())
 	{
-		wxString ws;
+		wxString ws, tmp;
 		wxFileOffset curpos = m_Lines->m_Size, msize = 0; //0 ~ fsize-1
 		for (int i = (int)(linebegpos.size() - 1); i >= 0; --i )
 		{
@@ -3894,10 +3892,17 @@ void MadEdit::CopyCutDeleteUnmarkedLines( bool copyLines /*= false*/, bool delet
 			if(msize > 0)
 			{
 				pos = (curpos - msize);
+				if (copyLines)
+				{
+					tmp.Empty();
+					GetRangeText(tmp, pos, curpos);
+					ws = tmp + ws;
+				}
+
 				if(deleteLines)
 				{
 					MadDeleteUndoData *dudata = new MadDeleteUndoData;
-					dudata->m_Pos = (curpos - msize);
+					dudata->m_Pos = pos;
 					dudata->m_Size = msize;
 					wxASSERT(linesize[i] > 0);
 					DeleteInsertData(dudata->m_Pos, dudata->m_Size, &dudata->m_Data, 0, nullptr);
@@ -3910,11 +3915,6 @@ void MadEdit::CopyCutDeleteUnmarkedLines( bool copyLines /*= false*/, bool delet
 					undo->m_Undos.push_back(dudata);
 					m_CaretPos.pos = dudata->m_Pos;
 				}
-
-				if(copyLines) 
-				{
-					GetRangeText(ws, pos, curpos);
-				}
 			}
 			curpos = linebegpos[i];
 		}
@@ -3922,6 +3922,13 @@ void MadEdit::CopyCutDeleteUnmarkedLines( bool copyLines /*= false*/, bool delet
 		if( curpos > 0 )
 		{
 			pos = 0;
+			if (copyLines)
+			{
+				tmp.Empty();
+				GetRangeText(tmp, pos, curpos);
+				ws = tmp + ws;
+			}
+
 			if(deleteLines)
 			{
 				MadDeleteUndoData *dudata = new MadDeleteUndoData;
@@ -3937,11 +3944,6 @@ void MadEdit::CopyCutDeleteUnmarkedLines( bool copyLines /*= false*/, bool delet
 				undo->m_Undos.push_back(dudata);
 				m_CaretPos.pos = dudata->m_Pos;
 			}
-
-			if(copyLines) 
-			{
-				GetRangeText(ws, pos, curpos);
-			}
 		}
 
 		if( !ws.IsEmpty() ) PutTextToClipboard( ws );
@@ -3949,7 +3951,8 @@ void MadEdit::CopyCutDeleteUnmarkedLines( bool copyLines /*= false*/, bool delet
 
 	if( undo )
 	{
-		ClearAllBookmarks();
+		if(deleteLines)
+			ClearAllBookmarks();
 		ReformatAll();
 		m_Modified = true;
 		m_Selection = false;

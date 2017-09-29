@@ -108,16 +108,16 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 {
 	m_EnableTransparency = true;/*CanSetTransparent();*/
 	//(*Initialize(MadSearchReplaceDialog)
-	wxStaticBoxSizer* StaticBoxSizer2;
+	wxBoxSizer* BoxSizer1;
+	wxBoxSizer* BoxSizer2;
+	wxBoxSizer* BoxSizer3;
 	wxBoxSizer* BoxSizer6;
 	wxBoxSizer* BoxSizer7;
 	wxBoxSizer* BoxSizer8;
-	wxBoxSizer* BoxSizer2;
-	wxStaticBoxSizer* StaticBoxSizer3;
-	wxBoxSizer* BoxSizer1;
 	wxBoxSizer* BoxSizer9;
 	wxStaticBoxSizer* StaticBoxSizer1;
-	wxBoxSizer* BoxSizer3;
+	wxStaticBoxSizer* StaticBoxSizer2;
+	wxStaticBoxSizer* StaticBoxSizer3;
 
 	Create(parent, id, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxCAPTION|wxSYSTEM_MENU|wxCLOSE_BOX, _T("id"));
 	SetClientSize( wxDefaultSize );
@@ -222,7 +222,33 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	BoxSizer3->Add( WxButtonClose, 0, wxALL | wxEXPAND, 2 );
 	BoxSizer8->Add( BoxSizer3, 0, wxALL | wxEXPAND, 0 );
 	BoxSizer1->Add( BoxSizer8, 1, wxALL | wxEXPAND, 0 );
+	SetSizer(BoxSizer1);
+	BoxSizer1->Fit(this);
+	BoxSizer1->SetSizeHints(this);
+	Center();
 
+#if 0
+	Connect(ID_WXCHECKBOXREGEX,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&MadSearchReplaceDialog::WxCheckBoxRegexClick);
+	Connect(ID_WXCHECKBOXFINDHEX,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&MadSearchReplaceDialog::WxCheckBoxFindHexClick);
+	Connect(ID_WXCHECKBOXSEARCHINSELECTION,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&MadSearchReplaceDialog::WxCheckBoxSearchInSelectionClick);
+	Connect(ID_WXCHECKBOXBOOKMARKLINE,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&MadSearchReplaceDialog::WxCheckBoxBookmarkLineClick);
+	Connect(ID_RADIOBUTTON1,wxEVT_COMMAND_RADIOBUTTON_SELECTED,(wxObjectEventFunction)&MadSearchReplaceDialog::WxRadioLosingFocusSelect);
+	Connect(ID_RADIOBUTTON2,wxEVT_COMMAND_RADIOBUTTON_SELECTED,(wxObjectEventFunction)&MadSearchReplaceDialog::WxRadioAlwaysSelect);
+	Connect(ID_WXSLIDERTRANSDEGREE,wxEVT_SCROLL_TOP|wxEVT_SCROLL_BOTTOM|wxEVT_SCROLL_LINEUP|wxEVT_SCROLL_LINEDOWN|wxEVT_SCROLL_PAGEUP|wxEVT_SCROLL_PAGEDOWN|wxEVT_SCROLL_THUMBTRACK|wxEVT_SCROLL_THUMBRELEASE|wxEVT_SCROLL_CHANGED,(wxObjectEventFunction)&MadSearchReplaceDialog::WxSliderTransDegreeScroll);
+	Connect(ID_WXSLIDERINPUTSIZER,wxEVT_SCROLL_TOP|wxEVT_SCROLL_BOTTOM|wxEVT_SCROLL_LINEUP|wxEVT_SCROLL_LINEDOWN|wxEVT_SCROLL_PAGEUP|wxEVT_SCROLL_PAGEDOWN|wxEVT_SCROLL_THUMBTRACK|wxEVT_SCROLL_THUMBRELEASE|wxEVT_SCROLL_CHANGED,(wxObjectEventFunction)&MadSearchReplaceDialog::OnWxSliderInputSizerCmdScroll);
+	Connect(ID_WXBUTTONFINDNEXT,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadSearchReplaceDialog::WxButtonFindNextClick);
+	Connect(ID_WXBUTTONFINDPREV,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadSearchReplaceDialog::WxButtonFindPrevClick);
+	Connect(ID_WXBUTTONFINDALL,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadSearchReplaceDialog::WxButtonFindAllClick);
+	Connect(ID_WXBUTTONFINDALLINALL,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadSearchReplaceDialog::WxButtonFindAllInAllClick);
+	Connect(ID_WXBUTTONREPLACE,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadSearchReplaceDialog::WxButtonReplaceClick);
+	Connect(ID_WXBUTTONREPLACEALL,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadSearchReplaceDialog::WxButtonReplaceAllClick);
+	Connect(ID_WXBUTTONREPLACEALLINALL,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadSearchReplaceDialog::WxButtonReplaceAllInAllClick);
+	Connect(ID_WXBUTTONCOUNT,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadSearchReplaceDialog::WxButtonCountClick);
+	Connect(ID_WXBUTTONREPLACEEXPAND,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadSearchReplaceDialog::WxButtonReplaceExpandClick);
+	Connect(wxID_CANCEL,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadSearchReplaceDialog::WxButtonCloseClick);
+	Connect(wxID_ANY,wxEVT_CLOSE_WINDOW,(wxObjectEventFunction)&MadSearchReplaceDialog::MadSearchReplaceDialogClose);
+	Connect(wxEVT_KEY_DOWN,(wxObjectEventFunction)&MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown);
+#endif
 	//*)
 	int bw, bh;
 	// find
@@ -366,6 +392,7 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED,     &MadSearchReplaceDialog::WxCheckBoxRegexClick, this,             ID_WXCHECKBOXREGEX              );
 	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED,     &MadSearchReplaceDialog::WxCheckBoxFindHexClick, this,           ID_WXCHECKBOXFINDHEX            );
 	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED,     &MadSearchReplaceDialog::WxCheckBoxSearchInSelectionClick, this, ID_WXCHECKBOXSEARCHINSELECTION  );
+	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED,     &MadSearchReplaceDialog::WxCheckBoxBookmarkLineClick, this, ID_WXCHECKBOXBOOKMARKLINE  );
 	Bind( wxEVT_COMMAND_RADIOBUTTON_SELECTED, &MadSearchReplaceDialog::WxRadioLosingFocusSelect, this,         ID_RADIOBUTTON1                 );
 	Bind( wxEVT_COMMAND_RADIOBUTTON_SELECTED, &MadSearchReplaceDialog::WxRadioAlwaysSelect, this,              ID_RADIOBUTTON2                 );
 	Bind( wxEVT_SLIDER,       &MadSearchReplaceDialog::WxSliderTransDegreeScroll, this,        ID_WXSLIDERTRANSDEGREE          );
@@ -887,6 +914,15 @@ void MadSearchReplaceDialog::ReadWriteSettings( bool bRead )
 		WxCheckBoxBookmarkLine->SetValue( bb );
 		m_Config->Read( wxT( "/MadEdit/SearchBookmarkOnly" ), &bb, false );
 		WxCheckBoxBookmarkOnly->SetValue( bb );
+		if(WxCheckBoxBookmarkLine->GetValue() )
+		{
+			WxCheckBoxBookmarkOnly->Enable();
+		}
+		else
+		{
+			WxCheckBoxBookmarkOnly->Disable();
+		}
+
 		m_Config->Read( wxT( "/MadEdit/SearchPurgeBookmark" ), &bb, false );
 		WxCheckBoxPurgeBookmark->SetValue( bb );
 		if(m_EnableTransparency)
@@ -1599,7 +1635,7 @@ void MadSearchReplaceDialog::SearchAll( MadEdit * madedit, bool needRec/*=true*/
 		begpos.reserve( 128 * 1024 );
 		endpos.reserve( 128 * 1024 );
 		m_RecentFindText->AddFileToHistory( expr );
-		madedit->ToggleBookmarkInSearch( WxCheckBoxBookmarkLine->IsChecked() || WxCheckBoxBookmarkOnly->IsChecked() );
+		madedit->ToggleBookmarkInSearch( WxCheckBoxBookmarkLine->IsChecked() );
 
 		if( WxCheckBoxPurgeBookmark->IsChecked() )
 			madedit->ClearAllBookmarks();
@@ -1757,7 +1793,7 @@ void MadSearchReplaceDialog::SearchAll( MadEdit * madedit, bool needRec/*=true*/
 						results->Expand(lstid);
 				}
 			}
-			if(WxCheckBoxBookmarkLine->IsChecked() || WxCheckBoxBookmarkOnly->IsChecked() )
+			if(WxCheckBoxBookmarkLine->IsChecked())
 			{
 				if( g_ActiveMadEdit != nullptr )
 				{
@@ -1967,4 +2003,16 @@ void MadSearchReplaceDialog::OnWxSliderInputSizerCmdScroll(wxCommandEvent& event
 	}
 	GetSizer()->Fit( this );
 	GetSizer()->Layout();
+}
+
+void MadSearchReplaceDialog::WxCheckBoxBookmarkLineClick(wxCommandEvent& event)
+{
+	if( event.IsChecked() )
+	{
+		WxCheckBoxBookmarkOnly->Enable();
+	}
+	else
+	{
+		WxCheckBoxBookmarkOnly->Disable();
+	}
 }

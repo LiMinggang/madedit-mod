@@ -15,13 +15,13 @@
 #endif
 // disable 4996 {
 //(*Headers(MadSearchReplaceDialog)
-#include <wx/sizer.h>
-#include <wx/menu.h>
-#include <wx/checkbox.h>
-#include <wx/radiobut.h>
-#include <wx/slider.h>
 #include <wx/button.h>
+#include <wx/checkbox.h>
 #include <wx/dialog.h>
+#include <wx/menu.h>
+#include <wx/radiobut.h>
+#include <wx/sizer.h>
+#include <wx/slider.h>
 //*)
 // disable 4996 }
 #ifdef _MSC_VER
@@ -51,36 +51,36 @@ class MadSearchReplaceDialog: public wxDialog
 
 		//(*Declarations(MadSearchReplaceDialog)
 		wxBoxSizer* BoxSizer4;
-		wxSlider* WxSliderTransDegree;
-		wxButton* WxButtonReplace;
-		wxButton* WxButtonFindPrev;
-		wxButton* WxButtonFindNext;
+		wxBoxSizer* BoxSizerReplace;
+		wxBoxSizer* BoxSizerSearch;
+		wxButton* WxButtonClose;
+		wxButton* WxButtonCount;
 		wxButton* WxButtonFindAll;
-		wxRadioButton* WxRadioAlways;
+		wxButton* WxButtonFindAllInAll;
+		wxButton* WxButtonFindNext;
+		wxButton* WxButtonFindPrev;
+		wxButton* WxButtonReplace;
 		wxButton* WxButtonReplaceAll;
-		wxCheckBox* WxCheckBoxMoveFocus;
+		wxButton* WxButtonReplaceAllInAll;
+		wxButton* WxButtonReplaceExpand;
+		wxCheckBox* WxCheckBoxBookmarkLine;
+		wxCheckBox* WxCheckBoxBookmarkOnly;
 		wxCheckBox* WxCheckBoxCaseSensitive;
-		wxSlider* WxSliderInputSizer;
+		wxCheckBox* WxCheckBoxDotMatchNewLine;
+		wxCheckBox* WxCheckBoxFindHex;
+		wxCheckBox* WxCheckBoxMoveFocus;
 		wxCheckBox* WxCheckBoxPurgeBookmark;
+		wxCheckBox* WxCheckBoxRegex;
 		wxCheckBox* WxCheckBoxSearchInSelection;
+		wxCheckBox* WxCheckBoxWholeWord;
+		wxCheckBox* WxCheckBoxWrapAround;
 		wxCheckBox* wxCheckBoxReplaceNoDoubleCheck;
 		wxMenu WxPopupMenuRecentFindText;
-		wxCheckBox* WxCheckBoxBookmarkLine;
-		wxButton* WxButtonFindAllInAll;
-		wxButton* WxButtonClose;
-		wxRadioButton* WxRadioLosingFocus;
 		wxMenu WxPopupMenuRecentReplaceText;
-		wxCheckBox* WxCheckBoxFindHex;
-		wxCheckBox* WxCheckBoxWholeWord;
-		wxBoxSizer* BoxSizerSearch;
-		wxButton* WxButtonReplaceAllInAll;
-		wxButton* WxButtonCount;
-		wxCheckBox* WxCheckBoxBookmarkOnly;
-		wxCheckBox* WxCheckBoxRegex;
-		wxCheckBox* WxCheckBoxWrapAround;
-		wxBoxSizer* BoxSizerReplace;
-		wxCheckBox* WxCheckBoxDotMatchNewLine;
-		wxButton* WxButtonReplaceExpand;
+		wxRadioButton* WxRadioAlways;
+		wxRadioButton* WxRadioLosingFocus;
+		wxSlider* WxSliderInputSizer;
+		wxSlider* WxSliderTransDegree;
 		//*)
 
 	protected:
@@ -161,6 +161,7 @@ class MadSearchReplaceDialog: public wxDialog
 		void WxButtonFindAllClick(wxCommandEvent& event);
 		void WxButtonFindAllInAllClick(wxCommandEvent& event);
 		void OnWxSliderInputSizerCmdScroll(wxCommandEvent& event);
+		void WxCheckBoxBookmarkLineClick(wxCommandEvent& event);
 		//*)
 
 		void MadSearchReplaceDialogActivate(wxActivateEvent& event);

@@ -122,6 +122,8 @@ enum   // menu id
 	menuBookmarkCopy,
 	menuBookmarkCut,
 	menuBookmarkDel,
+	menuBookmarkCopyUnmarked,
+	menuBookmarkCutUnmarked,
 	menuBookmarkDelUnmarked,
 	menuBookmarkReplace,
 	menuSort,
@@ -603,6 +605,8 @@ private:
 	void OnEditBookmarkCopy( wxCommandEvent& event );
 	void OnEditBookmarkCut( wxCommandEvent& event );
 	void OnEditBookmarkDel( wxCommandEvent& event );
+	void OnEditBookmarkCopyUnmarked( wxCommandEvent& event );
+	void OnEditBookmarkCutUnmarked( wxCommandEvent& event );
 	void OnEditBookmarkDelUnmarked( wxCommandEvent& event );
 	void OnEditBookmarkReplace( wxCommandEvent& event );
 
