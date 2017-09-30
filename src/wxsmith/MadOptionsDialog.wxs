@@ -68,6 +68,25 @@
 													<border>2</border>
 												</object>
 												<object class="sizeritem">
+													<object class="wxBoxSizer" variable="BoxSizer40" member="no">
+														<object class="spacer">
+															<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+															<border>2</border>
+															<size>10,-1</size>
+														</object>
+														<object class="sizeritem">
+															<object class="wxCheckBox" name="ID_CHECKBOXSKIPAUTOENCODING" variable="CheckBoxSkipAutoEncoding" member="yes">
+																<label>Enforce default encoding</label>
+															</object>
+															<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+															<border>2</border>
+															<option>1</option>
+														</object>
+													</object>
+													<flag>wxALL|wxEXPAND</flag>
+													<border>2</border>
+												</object>
+												<object class="sizeritem">
 													<object class="wxBoxSizer" variable="BoxSizer35" member="no">
 														<object class="spacer">
 															<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
@@ -272,7 +291,7 @@
 															<border>2</border>
 														</object>
 														<object class="sizeritem">
-															<object class="wxCheckBox" name="ID_CHECKBOX1" variable="CheckBoxEnableAutoBackup" member="yes">
+															<object class="wxCheckBox" name="ID_CHECKBOXAUTOBACKUP" variable="CheckBoxEnableAutoBackup" member="yes">
 																<label>Auto backup</label>
 															</object>
 															<flag>wxALL|wxEXPAND</flag>
@@ -555,6 +574,7 @@
 																	<object class="wxRadioButton" name="ID_RADIOBUTTONNEWDOCLINEENDINGDEFAULT" variable="RadioButtonNewDocLineEndingDefault" member="yes">
 																		<label>System Default</label>
 																		<style>wxRB_GROUP</style>
+																		<handler function="RadioButtonNewDocLineEndingSelect" entry="EVT_RADIOBUTTON" />
 																	</object>
 																	<flag>wxALL|wxEXPAND</flag>
 																	<border>2</border>

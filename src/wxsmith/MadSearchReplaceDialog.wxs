@@ -2,8 +2,7 @@
 <wxsmith>
 	<object class="wxDialog" name="MadSearchReplaceDialog">
 		<centered>1</centered>
-		<id_arg>0</id_arg>
-		<style>wxCAPTION|wxSYSTEM_MENU|wxCLOSE_BOX</style>
+		<style>wxCAPTION|wxSYSTEM_MENU|wxRESIZE_BORDER|wxCLOSE_BOX</style>
 		<handler function="MadSearchReplaceDialogClose" entry="EVT_CLOSE" />
 		<handler function="MadSearchReplaceDialogKeyDown" entry="EVT_KEY_DOWN" />
 		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
@@ -119,6 +118,7 @@
 													<object class="sizeritem">
 														<object class="wxCheckBox" name="ID_WXCHECKBOXBOOKMARKLINE" variable="WxCheckBoxBookmarkLine" member="yes">
 															<label>Bookmark line</label>
+															<handler function="WxCheckBoxBookmarkLineClick" entry="EVT_CHECKBOX" />
 														</object>
 														<flag>wxALL|wxEXPAND</flag>
 														<border>2</border>

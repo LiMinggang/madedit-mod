@@ -124,6 +124,7 @@ New: Enforce default encoding
 New: Toolbar for Encoding/Font/Font Size/Line Spacing
 New: Perl style regex match in Replace
 New: Copy/Cut unbookmarked lines
+New: Enable resize of search/replace input
 Fix: Crash in Cut/Delete/Replace bookmarked/unbookmarked lines
 Fix: Restore select the whole line by left click #240
 Fix: Refactor Option dialog with wxSmith

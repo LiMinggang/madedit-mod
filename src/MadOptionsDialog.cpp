@@ -152,7 +152,7 @@ const long MadOptionsDialog::ID_CHECKBOXDONOTSAVESETTINGS = wxNewId();
 const long MadOptionsDialog::ID_CHECKBOXPURGEHISTORY = wxNewId();
 const long MadOptionsDialog::ID_CHECKBOXENABLEAUTOSAVE = wxNewId();
 const long MadOptionsDialog::ID_TEXTCTRLAUTOSAVETIMEOUT = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOX1 = wxNewId();
+const long MadOptionsDialog::ID_CHECKBOXAUTOBACKUP = wxNewId();
 const long MadOptionsDialog::ID_WSCHECKBOXMSRIGHTCCLICKMENU = wxNewId();
 const long MadOptionsDialog::ID_PANEL1 = wxNewId();
 const long MadOptionsDialog::ID_EDITMAXLINELENGTH = wxNewId();
@@ -435,7 +435,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	wxStaticText* StaticText25;
 
 	Create(parent, wxID_ANY, _("Options"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxSYSTEM_MENU|wxRESIZE_BORDER|wxCLOSE_BOX, _T("wxID_ANY"));
-	SetClientSize(wxSize(800,480));
+	SetClientSize(wxSize(900,385));
 	SetMaxSize(wxSize(-1,-1));
 	BoxSizer1 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer30 = new wxBoxSizer(wxHORIZONTAL);
@@ -554,7 +554,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	StaticTextAutoSaveTimeout = new wxStaticText(Panel1, wxID_ANY, _("Timeout(M)"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	BoxSizer37->Add(StaticTextAutoSaveTimeout, 0, wxALL|wxEXPAND, 2);
 	BoxSizer7->Add(BoxSizer37, 0, wxALL|wxEXPAND, 2);
-	CheckBoxEnableAutoBackup = new wxCheckBox(Panel1, ID_CHECKBOX1, _("Auto backup"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOX1"));
+	CheckBoxEnableAutoBackup = new wxCheckBox(Panel1, ID_CHECKBOXAUTOBACKUP, _("Auto backup"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXAUTOBACKUP"));
 	CheckBoxEnableAutoBackup->SetValue(false);
 	SET_CONTROLPARENT(CheckBoxEnableAutoBackup);
 	BoxSizer7->Add(CheckBoxEnableAutoBackup, 0, wxALL|wxEXPAND, 2);
@@ -562,7 +562,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	CheckBoxRightClickMenu = new wxCheckBox(Panel1, ID_WSCHECKBOXMSRIGHTCCLICKMENU, _("Add MadEdit to the RightClickMenu of Explorer(Deselect to Remove the Entry from Windows Registry)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WSCHECKBOXMSRIGHTCCLICKMENU"));
 	CheckBoxRightClickMenu->SetValue(false);
 	SET_CONTROLPARENT(CheckBoxRightClickMenu);
-	BoxSizer7->Add(CheckBoxRightClickMenu, 0, wxALL|wxEXPAND, 2);
+	BoxSizer7->Add(CheckBoxRightClickMenu, 0, wxALL, 2);
 #endif
 	BoxSizer3->Add(BoxSizer7, 0, wxALL|wxEXPAND, 2);
 	Panel1->SetSizer(BoxSizer3);

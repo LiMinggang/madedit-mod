@@ -209,7 +209,7 @@ class MadOptionsDialog: public wxDialog
 		static const long ID_CHECKBOXPURGEHISTORY;
 		static const long ID_CHECKBOXENABLEAUTOSAVE;
 		static const long ID_TEXTCTRLAUTOSAVETIMEOUT;
-		static const long ID_CHECKBOX1;
+		static const long ID_CHECKBOXAUTOBACKUP;
 		static const long ID_WSCHECKBOXMSRIGHTCCLICKMENU;
 		static const long ID_PANEL1;
 		static const long ID_EDITMAXLINELENGTH;

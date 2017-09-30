@@ -119,7 +119,7 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	wxStaticBoxSizer* StaticBoxSizer2;
 	wxStaticBoxSizer* StaticBoxSizer3;
 
-	Create(parent, id, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxCAPTION|wxSYSTEM_MENU|wxCLOSE_BOX, _T("id"));
+	Create(parent, id, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxCAPTION|wxSYSTEM_MENU|wxRESIZE_BORDER|wxCLOSE_BOX, _T("id"));
 	SetClientSize( wxDefaultSize );
 	Move( wxDefaultPosition );
 	BoxSizer1 = new wxBoxSizer( wxVERTICAL );
@@ -1986,7 +1986,9 @@ void MadSearchReplaceDialog::WxCheckBoxRegexClick( wxCommandEvent& event )
 void MadSearchReplaceDialog::OnWxSliderInputSizerCmdScroll(wxCommandEvent& event)
 {
 	int times = WxSliderInputSizer->GetValue();
-	BoxSizerSearch->SetItemMinSize( m_FindText, m_OriginInputSize.GetWidth(), m_OriginInputSize.GetHeight()*times );
+	int width, height = 0;
+	m_FindText->GetSize (&width, &height);
+	BoxSizerSearch->SetItemMinSize( m_FindText, width, m_OriginInputSize.GetHeight()*times );
 
 	if(times == 1)
 	{
