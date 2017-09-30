@@ -126,6 +126,7 @@ New: Perl style regex match in Replace
 New: Copy/Cut unbookmarked lines
 New: Enable resize of search/replace input
 Fix: Crash in Cut/Delete/Replace bookmarked/unbookmarked lines
+Fix: Disable resize of Option dialog(hang UI)
 Fix: Restore select the whole line by left click #240
 Fix: Refactor Option dialog with wxSmith
 Fix: Font size issue of fix width mode in switching between different fonts

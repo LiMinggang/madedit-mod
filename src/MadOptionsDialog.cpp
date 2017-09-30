@@ -434,7 +434,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	wxStaticText* StaticText24;
 	wxStaticText* StaticText25;
 
-	Create(parent, wxID_ANY, _("Options"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxSYSTEM_MENU|wxRESIZE_BORDER|wxCLOSE_BOX, _T("wxID_ANY"));
+	Create(parent, wxID_ANY, _("Options"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxSYSTEM_MENU|wxCLOSE_BOX, _T("wxID_ANY"));
 	SetClientSize(wxSize(900,385));
 	SetMaxSize(wxSize(-1,-1));
 	BoxSizer1 = new wxBoxSizer(wxVERTICAL);
