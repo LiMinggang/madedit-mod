@@ -30,7 +30,7 @@ B. MS Windows (__WXMSW__):
       2. Boost-1.56.0 or higher(build Boost-Python)(1.62 is recommended)
       3. Set WXWIN and BOOST to the root directory of your local ones
 
-P.S.: Please put the debug info(.pdb) under the App directory in case there was a 
+P.S.: Please put the debug info(.pdb) under the App directory in case there was a
       crash happened. Paste the call stack and open a ticket
 P.S.: Don't forget to Copy wxwin.m4 to /usr/share/aclocal folder if you use your
       own build of wxWidgets
@@ -132,7 +132,7 @@ Fix: Refactor Option dialog with wxSmith
 Fix: Font size issue of fix width mode in switching between different fonts
 Fix: Incorrect displaying DND mouse ICON while clicking line number area in selection
 Fix: Wrong file filter of Open File dialog
-Fix: Bookmark Only in search dialog does not work
+Fix: Bookmark Only in search dialog does not work correctly
 Update Astyle to latest code
 Update translations
 
@@ -254,14 +254,14 @@ Mod v0.4.4
 4. New: Change default color of space/tab/carrige/return to Gray
 5. New: Use hotkey to launch the macro saved #208
 6. New: Add app dir to script searching directories
-7. New: Seperate "goto the last edit position" and ¡°goto the next edit position¡±function from Undo #169 
+7. New: Seperate "goto the last edit position" and ¡°goto the next edit position¡±function from Undo #169
 8. Fix: Move recent files tool bar item from Quick search to Standard
 9. Fix: Apply AuiNoteBook fix from wxWidgets dev(http://trac.wxwidgets.org/ticket/17551)
 10. Fix: Display replace all result on Status bar instead of an annoying dialog
 11. Fix: Add default pos to tool bars in order that tool bar would be in the pos expected
 12. Fix: Group Bookmark tools to SearchReplace Toolbar
 13. Fix: Some config would be overidded
-14. Fix: When I paste some lines, the typewrite mode is not working #209 
+14. Fix: When I paste some lines, the typewrite mode is not working #209
 15. Add more Icons
 16. Update license information
 17. Update Greek Translation
@@ -425,7 +425,7 @@ Mod v0.3.8
 2. New: Silent mode which can be used in scripting(Only file names would be passed to
      running instance in single instance mode)
      Run MadEdit-Mod without show GUI and use a MadPython to handle the files to
-     be opened. So, you can use the Astyle/XML formatter/HTML tools the same as 
+     be opened. So, you can use the Astyle/XML formatter/HTML tools the same as
      the original ones, eg, call it in a script to handle a lot of files.
      Furthermore, you can use MadPython to do more!!!
      [-h], help, Displays help on the command line parameters
@@ -642,7 +642,7 @@ Mod v0.3.0
 16. Fix the issue that should not do DND when user dropped the selection at the end/begin of the selection
 17. Fix some wrong status of menus when there is no active edit
 18. Fix wrong result title of FindAll in MadPython
-19. Fix the issue that FindReplaceInFiles would reset the Enable Replace while activating again 
+19. Fix the issue that FindReplaceInFiles would reset the Enable Replace while activating again
 20. Update Simplified Chinese
 
 Mod v0.2.9
@@ -671,7 +671,7 @@ Mod v0.2.8
 9. Add shortcut for Spell Check(Ctrl-K)
 10. Add shortcut for Show All Symbols(Ctrl-Alt-A)
 11. Move Macro menu group from Tools to top level
-12. Fix translation issue with wx3.0(Some text wx3.0 of was not translated, eg. print dialog) 
+12. Fix translation issue with wx3.0(Some text wx3.0 of was not translated, eg. print dialog)
 13. Update Translation for wx3.0, MadPython
 
 Mod v0.2.7
@@ -842,7 +842,7 @@ This would be 0.2.0 if no critical issue found
 1. Fixed Known issue(wxStyledTextCtrl bug in beta 2) by replacing wxStyledTextCtrl with MadEdit
 2. Fixed MadPython insert char issue in column mode
 3. Change behave while string has illegal zero. ie. change 0x00(NUL) to 0x2400 Unicode NUL
-4. Fixed Caret issue of search/replace(introduced by MadEdit): Caret would blink on wrong place, which 
+4. Fixed Caret issue of search/replace(introduced by MadEdit): Caret would blink on wrong place, which
 would be shown in right place if you iconize/restore the window
 5. Added MadPython syntax file and MadPython API added in the file
 
