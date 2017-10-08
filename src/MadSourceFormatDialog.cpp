@@ -147,7 +147,7 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID id,cons
 		_T("Stroustrup"),
 		_T("Whitesmith"),
 		_T("VTK"),
-		_T("Banner"),
+		_T("Ratliff"),
 		_T("Gnu"),
 		_T("Linux"),
 		_T("Horstmann"),
