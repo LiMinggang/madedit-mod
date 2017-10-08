@@ -1131,6 +1131,7 @@ string ASBeautifier::beautify(const string& originalLine)
 		if (!backslashEndsPrevLine && isInDefineDefinition && !isInDefine)
 		{
 			isInDefineDefinition = false;
+			// this could happen with invalid input
 			if (activeBeautifierStack->empty())
 				return originalLine;
 			ASBeautifier* defineBeautifier = activeBeautifierStack->back();
@@ -3008,7 +3009,7 @@ void ASBeautifier::parseCurrentLine(const string& line)
 				if (newHeader == &AS_IF && lastLineHeader == &AS_ELSE)
 				{
 					if (!headerStack->empty())
-					headerStack->pop_back();
+						headerStack->pop_back();
 				}
 
 				// take care of 'else'
@@ -3140,7 +3141,7 @@ void ASBeautifier::parseCurrentLine(const string& line)
 			if (findHeader(line, i, preCommandHeaders) != nullptr)
 				// must be after function arguments
 				if (prevNonSpaceCh == ')')
-				foundPreCommandHeader = true;
+					foundPreCommandHeader = true;
 
 			// Objective-C NSException macros are preCommandHeaders
 			if (isCStyle() && findKeyword(line, i, AS_NS_DURING))
@@ -3427,7 +3428,7 @@ void ASBeautifier::parseCurrentLine(const string& line)
 			if (!isInTemplate && !(isCStyle() && parenDepth > 0))
 			{
 				const string* newHeader = findHeader(line, i, preBlockStatements);
-				// handle CORBA IDL module
+				// CORBA IDL module
 				if (newHeader == &AS_MODULE)
 				{
 					char nextChar = peekNextChar(line, i + newHeader->length() - 1);

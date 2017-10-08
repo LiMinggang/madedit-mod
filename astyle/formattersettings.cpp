@@ -60,7 +60,7 @@ void FormatterSettings::ApplyTo(astyle::ASFormatter& formatter)
       break;
 
     case aspsBanner: // Banner
-      formatter.setFormattingStyle(astyle::STYLE_BANNER);
+      formatter.setFormattingStyle(astyle::STYLE_RATLIFF);
       break;
 
     case aspsGnu: // GNU

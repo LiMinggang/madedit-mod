@@ -16,6 +16,7 @@
 		#define ASTYLE_LIB
 	#endif
 #endif  //  ASTYLE_JNI
+
 namespace astyle {
 
 using namespace std;
@@ -69,6 +70,7 @@ public:
 	Translation() {}
 	virtual ~Translation() {}
 	string convertToMultiByte(const wstring& wideStr) const;
+	string getTranslationString(size_t i) const;
 	size_t getTranslationVectorSize() const;
 	bool getWideTranslation(const string& stringIn, wstring& wideOut) const;
 	string& translate(const string& stringIn) const;

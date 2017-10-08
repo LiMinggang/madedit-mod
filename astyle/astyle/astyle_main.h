@@ -115,8 +115,9 @@ namespace astyle {
 //
 //----------------------------------------------------------------------------
 // ASStreamIterator class
-// typename will be istringstream for GUI and istream otherwise
-// ASSourceIterator is an abstract class defined in astyle.h
+// typename will be stringstream for AStyle
+// it could be istream or wxChar for plug-ins
+// ASSourceIterator is an inherited abstract class defined in astyle.h
 //----------------------------------------------------------------------------
 
 template<typename T>
@@ -247,7 +248,6 @@ private:    // variables
 	bool isFormattedOnly;               // formatted lines only option
 	bool ignoreExcludeErrors;           // don't abort on unmatched excludes
 	bool ignoreExcludeErrorsDisplay;    // don't display unmatched excludes
-	bool optionsFileRequired;           // options= option
 	bool useAscii;                      // ascii option
 	// other variables
 	bool bypassBrowserOpen;             // don't open the browser on html options
@@ -263,8 +263,9 @@ private:    // variables
 
 	string outputEOL;                   // current line end
 	string prevEOL;                     // previous line end
-	string optionsFileName;             // file path and name of the options file to use
+	string optionFileName;              // file path and name of the options file
 	string origSuffix;                  // suffix= option
+	string projectOptionFileName;       // file path and name of the project options file
 	string stdPathIn;                   // path to input from stdin=
 	string stdPathOut;                  // path to output from stdout=
 	string targetDirectory;             // path to the directory being processed
@@ -274,6 +275,7 @@ private:    // variables
 	vector<bool>   excludeHitsVector;   // exclude flags for error reporting
 	vector<string> fileNameVector;      // file paths and names from the command line
 	vector<string> optionsVector;       // options from the command line
+	vector<string> projectOptionsVector;// project options from the project options file
 	vector<string> fileOptionsVector;   // options from the options file
 	vector<string> fileName;            // files to be processed including path
 
@@ -286,6 +288,7 @@ public:     // functions
 	void error(const char* why, const char* what) const;
 	void formatCinToCout();
 	vector<string> getArgvOptions(int argc, char** argv) const;
+	bool fileExists(const char* file) const;
 	bool fileNameVectorIsEmpty() const;
 	ostream* getErrorStream() const;
 	bool getFilesAreIdentical() const;
@@ -303,7 +306,7 @@ public:     // functions
 	string getLanguageID() const;
 	string getNumberFormat(int num, size_t lcid = 0) const;
 	string getNumberFormat(int num, const char* groupingArg, const char* separator) const;
-	string getOptionsFileName() const;
+	string getOptionFileName() const;
 	string getOrigSuffix() const;
 	string getStdPathIn() const;
 	string getStdPathOut() const;
@@ -319,9 +322,10 @@ public:     // functions
 	void setIsRecursive(bool state);
 	void setIsVerbose(bool state);
 	void setNoBackup(bool state);
-	void setOptionsFileName(const string& name);
+	void setOptionFileName(const string& name);
 	void setOrigSuffix(const string& suffix);
 	void setPreserveDate(bool state);
+	void setProjectOptionFileName(const string& name);
 	void setStdPathIn(const string& path);
 	void setStdPathOut(const string& path);
 	void standardizePath(string& path, bool removeBeginningSeparator = false) const;
@@ -331,6 +335,7 @@ public:     // functions
 	vector<bool>   getExcludeHitsVector() const;
 	vector<string> getFileNameVector() const;
 	vector<string> getOptionsVector() const;
+	vector<string> getProjectOptionsVector() const;
 	vector<string> getFileOptionsVector() const;
 	vector<string> getFileName() const;
 
@@ -339,10 +344,14 @@ private:	// functions
 	ASConsole& operator=(ASConsole&);      // assignment operator not to be implemented
 	void correctMixedLineEnds(ostringstream& out);
 	void formatFile(const string& fileName_);
+	string getParentDirectory(const string& absPath) const;
+	string findProjectOptionFilePath(const string& fileName_) const;
 	string getCurrentDirectory(const string& fileName_) const;
 	void getFileNames(const string& directory, const string& wildcard);
 	void getFilePaths(const string& filePath);
+	string getFullPathName(const string& relativePath) const;
 	string getParam(const string& arg, const char* op);
+	bool isHomeOrInvalidAbsPath(const string& absPath) const;
 	void initializeOutputEOL(LineEndFormat lineEndFormat);
 	bool isOption(const string& arg, const char* op);
 	bool isOption(const string& arg, const char* a, const char* b);

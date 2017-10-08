@@ -361,7 +361,7 @@ void ASFormatter::fixOptionVariableConflicts()
 		setBraceIndentVtk(true);		// sets both braceIndent and braceIndentVtk
 		setSwitchIndent(true);			// avoid hanging indent with case statements
 	}
-	else if (formattingStyle == STYLE_BANNER)
+	else if (formattingStyle == STYLE_RATLIFF)
 	{
 		// attached braces can have hanging indents with the closing brace
 		setBraceFormatMode(ATTACH_MODE);
@@ -516,7 +516,7 @@ string ASFormatter::nextLine()
 			if (isInLineBreak)			// is true if not the first line
 				breakLine();
 			formattedLine = currentLine;
-			charNum = (int)currentLine.length() - 1;
+			charNum = (int) currentLine.length() - 1;
 			continue;
 		}
 
@@ -1125,12 +1125,14 @@ string ASFormatter::nextLine()
 		// reset block handling flags
 		isImmediatelyPostEmptyBlock = false;
 
+		// Objective-C method prefix with no return type
 		if (isImmediatelyPostObjCMethodPrefix && currentChar != '(')
 		{
 			if (shouldPadMethodPrefix || shouldUnPadMethodPrefix)
 				padObjCMethodPrefix();
 			isImmediatelyPostObjCMethodPrefix = false;
 		}
+
 		// look for headers
 		bool isPotentialHeader = isCharPotentialHeader(currentLine, charNum);
 
@@ -1330,7 +1332,7 @@ string ASFormatter::nextLine()
 			}
 			else if ((newHeader = findHeader(preCommandHeaders)) != nullptr)
 			{
-				// a 'const' variable is not a preCommandHeader
+				// must be after function arguments
 				if (previousNonWSChar == ')')
 					foundPreCommandHeader = true;
 			}
@@ -1413,7 +1415,7 @@ string ASFormatter::nextLine()
 			         && !foundPreDefinitionHeader   // not in a definition block
 			         && previousCommandChar != ')'  // not after closing paren of a method header
 			         && !foundPreCommandHeader      // not after a 'noexcept'
-			         && squareBracketCount == 0        // not in objC method call
+			         && squareBracketCount == 0     // not in objC method call
 			         && !isInObjCMethodDefinition   // not objC '-' or '+' method
 			         && !isInObjCInterface          // not objC @interface
 			         && !isInObjCSelector           // not objC @selector
@@ -1917,7 +1919,6 @@ void ASFormatter::setBreakClosingHeaderBracketsMode(bool state)
 {
 	setBreakClosingHeaderBracesMode(state);
 }
-
 
 /**
  * set the brace formatting mode.
@@ -2919,6 +2920,7 @@ BraceType ASFormatter::getBraceType()
 
 	return returnVal;
 }
+
 bool ASFormatter::isNumericVariable(string word) const
 {
 	if (word == "bool"
@@ -2931,6 +2933,11 @@ bool ASFormatter::isNumericVariable(string word) const
 	        || word == "float"
 	        || (word.length() >= 4     // check end of word for _t
 	            && word.compare(word.length() - 2, 2, "_t") == 0)
+// removed release 3.1
+//	        || word == "Int32"
+//	        || word == "UInt32"
+//	        || word == "Int64"
+//	        || word == "UInt64"
 	        || word == "BOOL"
 	        || word == "DWORD"
 	        || word == "HWND"
@@ -3225,7 +3232,7 @@ bool ASFormatter::isDereferenceOrAddressOf() const
 			return true;
 	}
 
-	// check for reference to a pointer *& (cannot have &*)
+	// check for reference to a pointer *&
 	if ((currentChar == '*' && nextChar == '&')
 	        || (previousNonWSChar == '*' && currentChar == '&'))
 		return false;
@@ -3343,6 +3350,7 @@ bool ASFormatter::isUnaryOperator() const
 			return false;
 		return true;
 	}
+
 	return ((isCharImmediatelyPostReturn || !isLegalNameChar(previousCommandChar))
 	        && previousCommandChar != '.'
 	        && previousCommandChar != '\"'
@@ -4062,9 +4070,9 @@ void ASFormatter::formatPointerOrReferenceToMiddle()
 		for (size_t i = charNum + 1; currentLine.length() > i; i++)
 		{
 			if (currentLine[i] == sequenceToInsert[0])
-	{
+			{
 				sequenceToInsert.append(1, currentLine[i]);
-		goForward(1);
+				goForward(1);
 				continue;
 			}
 			break;
@@ -4382,16 +4390,16 @@ void ASFormatter::padParens()
 					        && isCharPotentialHeader(prevWord, 0))
 						prevWordH = ASBase::findHeader(prevWord, 0, headers);
 					if (prevWordH != nullptr)
-						prevIsParenHeader = true;
-					else if (prevWord == AS_RETURN)  // don't unpad
-						prevIsParenHeader = true;
+						prevIsParenHeader = true;    // don't unpad
+					else if (prevWord == AS_RETURN)
+						prevIsParenHeader = true;    // don't unpad
 					else if ((prevWord == AS_NEW || prevWord == AS_DELETE)
-					         && shouldPadHeader)  // don't unpad
-						prevIsParenHeader = true;
-					else if (isCStyle() && prevWord == AS_THROW && shouldPadHeader) // don't unpad
-						prevIsParenHeader = true;
-					else if (prevWord == "and" || prevWord == "or" || prevWord == "in")  // don't unpad
-						prevIsParenHeader = true;
+					         && shouldPadHeader)
+						prevIsParenHeader = true;    // don't unpad
+					else if (isCStyle() && prevWord == AS_THROW && shouldPadHeader)
+						prevIsParenHeader = true;    // don't unpad
+					else if (prevWord == "and" || prevWord == "or" || prevWord == "in")
+						prevIsParenHeader = true;    // don't unpad
 					// don't unpad variables
 					else if (isNumericVariable(prevWord))
 						prevIsParenHeader = true;    // don't unpad
@@ -4521,7 +4529,8 @@ void ASFormatter::padParens()
 }
 
 /**
-* add or remove space padding to objective-c parens
+* add or remove space padding to objective-c method prefix (- or +)
+* if this is a '(' it begins a return type
 * these options have precedence over the padParens methods
 * the padParens method has already been called, this method adjusts
 */
@@ -7674,7 +7683,7 @@ void ASFormatter::padObjCMethodColon()
 	{
 		// pad space after
 		int nextText = currentLine.find_first_not_of(" \t", charNum + 1);
-		if (nextText == (int)string::npos)
+		if (nextText == (int) string::npos)
 			nextText = currentLine.length();
 		int spaces = nextText - charNum - 1;
 		if (spaces == 0)
