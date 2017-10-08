@@ -134,6 +134,7 @@ Fix: Incorrect displaying DND mouse ICON while clicking line number area in sele
 Fix: Wrong file filter of Open File dialog
 Fix: Bookmark Only in search dialog does not work correctly
 Update Astyle to latest code
+Update Hunspell to latest code
 Update translations
 
 Mod v0.4.9
