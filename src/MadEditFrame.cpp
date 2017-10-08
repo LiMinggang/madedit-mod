@@ -431,11 +431,11 @@ wxMenu ** g_Menus[] =
 wxArrayString g_FontNames;
 
 #ifdef __WXMSW__
-int g_StatusWidth_1_6 = ( 215 + 215 + 135 + 121 + 60 + ( 40 + 18 ) );
-int g_StatusWidths[7] = { 0, 215, 215, 135, 121, 60, ( 40 + 18 )};
+	static int g_StatusWidth_1_6 =     (220+ 235+ 135+ 155+ 65+ (50 + 10)*2);
+	static int g_StatusWidths[7] = { 0, 220, 235, 135, 155, 65, (50 + 10) };
 #else
-int g_StatusWidth_1_6 = ( 220 + 235 + 135 + 155 + 65 + ( 40 + 0 ) );
-int g_StatusWidths[7] = { 0, 220, 235, 135, 155, 65, ( 40 + 0 )};
+	static int g_StatusWidth_1_6 =     (220+ 235+ 135+ 155+ 65+ (50 + 0));
+	static int g_StatusWidths[7] = { 0, 220, 235, 135, 155, 65, (50 + 0)};
 #endif
 
 std::map<int, wxString>g_ToolbarNames;
@@ -3208,21 +3208,6 @@ void MadEditFrame::CreateGUIControls( void )
 	m_RecentFonts->UseMenu( g_Menu_View_FontName );
 	m_Config->SetPath( wxT( "/RecentFonts" ) );
 	m_RecentFonts->Load( *m_Config );
-	// status bar field widths
-#if (wxMAJOR_VERSION < 3)
-	int width0 = GetClientSize().GetWidth() - g_StatusWidth_1_6;
-
-	if( width0 < 0 ) { width0 = 0; }
-
-	g_StatusWidths[0] = width0;
-#else
-	g_StatusWidths[0] = -1;
-#endif
-	WxStatusBar1->SetFieldsCount( 7, g_StatusWidths );
-
-	//WxStatusBar1->SetFieldsCount(7, g_StatusWidths);
-	//int styles[7]={wxSB_RAISED, wxSB_RAISED, wxSB_RAISED, wxSB_RAISED, wxSB_RAISED, wxSB_RAISED, wxSB_RAISED};
-	//WxStatusBar1->SetStatusStyles(7, styles);
 	/*
 	// load plugins
 	wxPluginLibrary *lib = wxPluginManager::LoadLibrary(wxT("./plugin"));
@@ -3503,6 +3488,16 @@ void MadEditFrame::CreateGUIControls( void )
 
 	// fixed for using wxAUI
 	WxStatusBar1->Bind( wxEVT_SIZE, &MadEditFrame::OnSize, this );
+	
+	// status bar field widths
+	int width0 = GetClientSize().GetWidth() - g_StatusWidth_1_6;
+	if( width0 < 0 ) { width0 = 0; }
+	g_StatusWidths[0] = width0;
+	WxStatusBar1->SetFieldsCount( 7, g_StatusWidths );
+
+	//WxStatusBar1->SetFieldsCount(7, g_StatusWidths);
+	//int styles[7]={wxSB_RAISED, wxSB_RAISED, wxSB_RAISED, wxSB_RAISED, wxSB_RAISED, wxSB_RAISED, wxSB_RAISED};
+	//WxStatusBar1->SetStatusStyles(7, styles);
 }
 
 void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
@@ -4003,15 +3998,9 @@ void MadEditFrame::OnNotebookPageRightUp( wxAuiNotebookEvent& event )
 void MadEditFrame::OnSize( wxSizeEvent &evt )
 {
 	evt.Skip();
-#if (wxMAJOR_VERSION < 3)
 	int width0 = GetClientSize().GetWidth() - g_StatusWidth_1_6;
-
 	if( width0 < 0 ) { width0 = 0; }
-
 	g_StatusWidths[0] = width0;
-#else
-	g_StatusWidths[0] = -1;
-#endif
 	WxStatusBar1->SetFieldsCount( 7, g_StatusWidths );
 	//static int n=0;
 	//g_MainFrame->SetTitle(wxString::Format(wxT("%d %d %d"), n++, g_MainFrame->GetClientSize().GetWidth(), width0));
