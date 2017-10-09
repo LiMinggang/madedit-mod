@@ -562,7 +562,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	CheckBoxRightClickMenu = new wxCheckBox(Panel1, ID_WSCHECKBOXMSRIGHTCCLICKMENU, _("Add MadEdit to the RightClickMenu of Explorer(Deselect to Remove the Entry from Windows Registry)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WSCHECKBOXMSRIGHTCCLICKMENU"));
 	CheckBoxRightClickMenu->SetValue(false);
 	SET_CONTROLPARENT(CheckBoxRightClickMenu);
-	BoxSizer7->Add(CheckBoxRightClickMenu, 0, wxALL, 2);
+	BoxSizer7->Add(CheckBoxRightClickMenu, 0, wxALL|wxEXPAND, 2);
 #endif
 	BoxSizer3->Add(BoxSizer7, 0, wxALL|wxEXPAND, 2);
 	Panel1->SetSizer(BoxSizer3);
@@ -863,7 +863,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	EditCommandHint = new wxTextCtrl(Panel4, ID_EDITHINT, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_EDITHINT"));
 	SET_CONTROLPARENT(EditCommandHint);
 	EditCommandHint->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BTNFACE));
-	BoxSizer24->Add(EditCommandHint, 1, wxALL|wxEXPAND, 5);
+	BoxSizer24->Add(EditCommandHint, 0, wxALL|wxEXPAND, 5);
 	BoxSizer20->Add(BoxSizer24, 0, wxALL|wxEXPAND, 2);
 	BoxSizer21 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer22 = new wxBoxSizer(wxVERTICAL);

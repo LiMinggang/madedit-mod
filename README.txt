@@ -133,6 +133,7 @@ Fix: Font size issue of fix width mode in switching between different fonts
 Fix: Incorrect displaying DND mouse ICON while clicking line number area in selection
 Fix: Wrong file filter of Open File dialog
 Fix: Bookmark Only in search dialog does not work correctly
+Fix: Enable 80 columns hint only if it's in fix width mode
 Update Astyle to latest code
 Update Hunspell to latest code
 Update translations

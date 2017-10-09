@@ -562,75 +562,75 @@ void MadEncoding::InitEncodings()
 								break;
 							case wxFONTENCODING_MACJAPANESE:
 								type = etDoubleByte;
-								testwc	  = 0x4E9C;
+								testwc    = 0x4E9C;
 								testmb[0] = 0x88;
 								testmb[1] = 0x9F;
 								encGrp.push_back( ENCG_EASTASIA );
 								break;
 							case wxFONTENCODING_MACCHINESETRAD:
 								type = etDoubleByte;
-								testwc	  = 0x3000;
+								testwc    = 0x3000;
 								testmb[0] = 0xA1;
 								testmb[1] = 0x40;
 								encGrp.push_back( ENCG_EASTASIA );
 								break;
 							case wxFONTENCODING_MACKOREAN:
 								type = etDoubleByte;
-								testwc	  = 0x3000;
+								testwc    = 0x3000;
 								testmb[0] = 0xA1;
 								testmb[1] = 0xA1;
 								encGrp.push_back( ENCG_EASTASIA );
 								break;
 							case wxFONTENCODING_MACCHINESESIMP:
 								type = etDoubleByte;
-								testwc	  = 0x3000;
+								testwc    = 0x3000;
 								testmb[0] = 0xA1;
 								testmb[1] = 0xA1;
 								encGrp.push_back( ENCG_EASTASIA );
 								break;
 							case wxFONTENCODING_MACARABIC:
 								encGrp.push_back( ENCG_ARABIC );
-								testwc	  = 0x0621;
+								testwc    = 0x0621;
 								testmb[0] = 0xC1;
 								break;
 							case wxFONTENCODING_MACHEBREW:
 								encGrp.push_back( ENCG_HEBREW );
-								testwc	  = 0x00C4;
+								testwc    = 0x00C4;
 								testmb[0] = 0x80;
 								break;
 							case wxFONTENCODING_MACGREEK:
 								encGrp.push_back( ENCG_GREEK );
-								testwc	  = 0x0393;
+								testwc    = 0x0393;
 								testmb[0] = 0xA1;
 								break;
 							case wxFONTENCODING_MACCYRILLIC:
 								encGrp.push_back( ENCG_CYRILLIC );
-								testwc	  = 0x042F;
+								testwc    = 0x042F;
 								testmb[0] = 0x9F;
 								break;
 							case wxFONTENCODING_MACTHAI:
 								encGrp.push_back( ENCG_SOUTHEASTASIA );
-								testwc	  = 0x0E01;
+								testwc    = 0x0E01;
 								testmb[0] = 0xA1;
 								break;
 							case wxFONTENCODING_MACCENTRALEUR:
 								encGrp.push_back( ENCG_CENTRALEUROPE );
-								testwc	  = 0x012B;
+								testwc    = 0x012B;
 								testmb[0] = 0xB4;
 								break;
 							case wxFONTENCODING_MACCROATIAN:
 								encGrp.push_back( ENCG_SOUTHEUROPE );
-								testwc	  = 0x25CA;
+								testwc    = 0x25CA;
 								testmb[0] = 0xD7;
 								break;
 							case wxFONTENCODING_MACICELANDIC:
 								encGrp.push_back( ENCG_NORTHEUROPE );
-								testwc	  = 0x2014;
+								testwc    = 0x2014;
 								testmb[0] = 0xD1;
 								break;
 							case wxFONTENCODING_MACROMANIAN:
 								encGrp.push_back( ENCG_SOUTHEUROPE );
-								testwc	  = 0x2014;
+								testwc    = 0x2014;
 								testmb[0] = 0xD1;
 								break;
 
@@ -1021,11 +1021,11 @@ size_t MadEncoding::UCS4toUTF8( ucs4_t ucs4, wxByte *buf )
 
 	UTF8-octets = *( UTF8-char )
 	UTF8-char   = UTF8-1 / UTF8-2 / UTF8-3 / UTF8-4
-	UTF8-1      = %x00-7F
-	UTF8-2      = %xC2-DF UTF8-tail
-	UTF8-3      = %xE0 %xA0-BF UTF8-tail / %xE1-EC 2( UTF8-tail ) /
+	UTF8-1    = %x00-7F
+	UTF8-2    = %xC2-DF UTF8-tail
+	UTF8-3    = %xE0 %xA0-BF UTF8-tail / %xE1-EC 2( UTF8-tail ) /
 	              %xED %x80-9F UTF8-tail / %xEE-EF 2( UTF8-tail )
-	UTF8-4      = %xF0 %x90-BF 2( UTF8-tail ) / %xF1-F3 3( UTF8-tail ) /
+	UTF8-4    = %xF0 %x90-BF 2( UTF8-tail ) / %xF1-F3 3( UTF8-tail ) /
 	              %xF4 %x80-8F 2( UTF8-tail )
 	UTF8-tail   = %x80-BF
 	***/

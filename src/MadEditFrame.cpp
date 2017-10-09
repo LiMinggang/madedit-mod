@@ -5200,7 +5200,7 @@ void MadEditFrame::OnUpdateUI_MenuViewDisplayBookmark( wxUpdateUIEvent& event )
 }
 void MadEditFrame::OnUpdateUI_MenuViewDisplay80ColHint( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != nullptr && g_ActiveMadEdit->GetEditMode() != emHexMode );
+	event.Enable( g_ActiveMadEdit != nullptr && g_ActiveMadEdit->GetEditMode() != emHexMode && g_ActiveMadEdit->GetFixedWidthMode());
 	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetDisplay80ColHint() );
 }
 void MadEditFrame::OnUpdateUI_MenuViewShowEndOfLine( wxUpdateUIEvent& event )
@@ -7695,7 +7695,7 @@ void MadEditFrame::OnViewDisplayBookmark( wxCommandEvent& event )
 
 void MadEditFrame::OnViewDisplay80ColHint( wxCommandEvent& event )
 {
-	if( g_ActiveMadEdit != nullptr )
+	if( g_ActiveMadEdit != nullptr && g_ActiveMadEdit->GetFixedWidthMode())
 	{ 
 		g_ActiveMadEdit->SetDisplay80ColHint( event.IsChecked() );
 
