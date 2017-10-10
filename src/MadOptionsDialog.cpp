@@ -864,7 +864,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	EditCommandHint = new wxTextCtrl(Panel4, ID_EDITHINT, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_EDITHINT"));
 	SET_CONTROLPARENT(EditCommandHint);
 	EditCommandHint->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BTNFACE));
-	BoxSizer24->Add(EditCommandHint, 0, wxALL|wxEXPAND, 5);
+	BoxSizer24->Add(EditCommandHint, 1, wxALL|wxEXPAND, 5);
 	BoxSizer20->Add(BoxSizer24, 0, wxALL|wxEXPAND, 2);
 	BoxSizer21 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer22 = new wxBoxSizer(wxVERTICAL);
