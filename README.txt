@@ -14,7 +14,7 @@ A. Linux, FreeBSD, and Unix-like OS (__WXGTK__):
    a. GNU C++ 3.x/4.x:
       Required Libraries to compile:
       1. wxWidgets-3.1.0 or higher with Unicode and IPC enabled
-      2. Boost-1.56.0 or higher(build Boost-Python)(1.62 is recommended)
+      2. Boost-1.56.0 or higher(build Boost-Python)(1.65 is recommended)
 
       (install gtk2-devel/libgtk-3-dev(Ubuntu)/gtk3-devel(Fedora) gettext-devel automake rpm-build)
       copy wxwin.m4 to usr/share/acloXXX/ or install wxGTK-devel
@@ -23,11 +23,11 @@ B. MS Windows (__WXMSW__):
    a. MinGW32/GNU C++ 3.x (wxDevCpp):
       Required Libraries to compile:
       1. wxWidgets-3.1.0 or higher with Unicode and IPC enabled
-      2. Boost-1.56.0 or higher(build Boost-Python)(1.62 is recommended)
+      2. Boost-1.56.0 or higher(build Boost-Python)(1.65 is recommended)
    b. Visual C++ 7.1 (VS.Net 2005) or higher:
       Required Libraries to compile:
       1. wxWidgets-3.1.0 or higher with Unicode and IPC enabled
-      2. Boost-1.56.0 or higher(build Boost-Python)(1.62 is recommended)
+      2. Boost-1.56.0 or higher(build Boost-Python)(1.65 is recommended)
       3. Set WXWIN and BOOST to the root directory of your local ones
 
 P.S.: Please put the debug info(.pdb) under the App directory in case there was a
@@ -46,7 +46,7 @@ Example build under Linux
 wxWidgets(3.1.0) (CXXFLAGS=-fPIC CPPFLAGS=-fPIC CFLAGS=-fPIC, x64)
 ./configure --enable-unicode --disable-shared --with-libpng=builtin --with-zlib=builtin --with-expat=builtin --with-gtk3=yes --with-libiconv=no
 MadEdit-Mod
-./configure --with-boost=${HOME}/boost_1_62_0 --with-wxdir=${HOME}/wxWidgets-3.1.0
+./configure --with-boost=${HOME}/boost_1_65_0 --with-wxdir=${HOME}/wxWidgets-3.1.0
 
 Syntax files, Locale files, Dictionaries and Settings:
 ---------------------------------------
@@ -103,6 +103,7 @@ Known issues:
 2. Search in selection in column mode is not exact the selection highlighted.
 3. HighlightWord would not work if the caret is at the end of the line
 4. Scroll function on Right click menu of scroll bars only works with Windows
+5. Ubuntu build with GTK3 would have issue on different GTK themes other than default, eg, double title bar and shadow border. It's a bug of wxWidgets(#17971)
 
 Feature/issues to be released
 -----------------------------
