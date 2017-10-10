@@ -833,7 +833,7 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 
 #if PATCH_MAXLINELENGTH == 1
 
-	if( m_MaxLineLength > 4096 ) m_MaxLineLength = DEFAULT_MAX_LINELEN;
+	if( m_MaxLineLength > DEFAULT_MAX_LINELEN ) m_MaxLineLength = DEFAULT_MAX_LINELEN;
 
 #endif
 	m_WordBuffer = new ucs4_t[m_MaxLineLength + 1];

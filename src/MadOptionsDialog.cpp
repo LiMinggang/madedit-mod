@@ -434,8 +434,8 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	wxStaticText* StaticText24;
 	wxStaticText* StaticText25;
 
-	Create(parent, wxID_ANY, _("Options"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxSYSTEM_MENU|wxCLOSE_BOX, _T("wxID_ANY"));
-	SetClientSize(wxSize(900,385));
+	Create(parent, wxID_ANY, _("Options"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxSYSTEM_MENU|wxRESIZE_BORDER|wxCLOSE_BOX, _T("wxID_ANY"));
+	SetSize(wxSize(900,385));
 	SetMaxSize(wxSize(-1,-1));
 	BoxSizer1 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer30 = new wxBoxSizer(wxHORIZONTAL);
@@ -854,6 +854,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	BoxSizer18 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer19 = new wxBoxSizer(wxHORIZONTAL);
 	TreeCtrl1 = new wxTreeCtrl(Panel4, ID_TREECTRL1, wxDefaultPosition, wxDefaultSize, wxTR_HAS_BUTTONS|wxTR_DEFAULT_STYLE, wxDefaultValidator, _T("ID_TREECTRL1"));
+	SET_CONTROLPARENT(TreeCtrl1);
 	BoxSizer19->Add(TreeCtrl1, 1, wxALL|wxEXPAND, 3);
 	BoxSizer18->Add(BoxSizer19, 2, wxALL|wxEXPAND, 4);
 	BoxSizer20 = new wxBoxSizer(wxVERTICAL);
