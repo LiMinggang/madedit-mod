@@ -236,7 +236,7 @@ MadHighlightingDialog::MadHighlightingDialog(wxWindow* parent,wxWindowID id,cons
 	BoxSizer11->Add(WxStaticText3, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 3);
 	WxStaticTextFCName = new wxStaticText(this, ID_WXSTATICTEXTFCNAME, _T("WxStaticTextFCName"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_WXSTATICTEXTFCNAME"));
 	BoxSizer11->Add(WxStaticTextFCName, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 3);
-	WxPanelFC = new wxPanel(this, ID_WXPANELFC, wxDefaultPosition, wxSize(85,20), wxSIMPLE_BORDER, _T("ID_WXPANELFC"));
+	WxPanelFC = new wxPanel(this, ID_WXPANELFC, wxDefaultPosition, wxSize(85,-1), wxSIMPLE_BORDER, _T("ID_WXPANELFC"));
 	BoxSizer11->Add(WxPanelFC, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	WxListCtrlFC = new wxListCtrl(this, ID_WXLISTCTRLFC, wxDefaultPosition, wxSize(160,140), wxLC_REPORT|wxLC_NO_HEADER|wxLC_SINGLE_SEL, wxDefaultValidator, _T("ID_WXLISTCTRLFC"));
 	BoxSizer11->Add(WxListCtrlFC, 0, wxALL|wxEXPAND, 2);
@@ -250,7 +250,7 @@ MadHighlightingDialog::MadHighlightingDialog(wxWindow* parent,wxWindowID id,cons
 	BoxSizer12->Add(WxStaticText4, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 3);
 	WxStaticTextBCName = new wxStaticText(this, ID_WXSTATICTEXTBCNAME, _T("WxStaticTextBCName"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_WXSTATICTEXTBCNAME"));
 	BoxSizer12->Add(WxStaticTextBCName, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 3);
-	WxPanelBC = new wxPanel(this, ID_WXPANELBC, wxDefaultPosition, wxSize(85,20), wxSIMPLE_BORDER, _T("ID_WXPANELBC"));
+	WxPanelBC = new wxPanel(this, ID_WXPANELBC, wxDefaultPosition, wxSize(85,-1), wxSIMPLE_BORDER, _T("ID_WXPANELBC"));
 	BoxSizer12->Add(WxPanelBC, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	WxListCtrlBC = new wxListCtrl(this, ID_WXLISTCTRLBC, wxDefaultPosition, wxSize(160,140), wxLC_REPORT|wxLC_NO_HEADER|wxLC_SINGLE_SEL, wxDefaultValidator, _T("ID_WXLISTCTRLBC"));
 	BoxSizer12->Add(WxListCtrlBC, 0, wxALL|wxEXPAND, 2);

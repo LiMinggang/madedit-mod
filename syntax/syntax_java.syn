@@ -52,7 +52,8 @@ LineNumberBgColor=A0A0A0
 LineNumberStyle=
 
 ActiveLineColor=Fuchsia
-BookmarkColor=0000FF
+BookmarkColor=DeepSkyBlue
+BookmarkBgColor=MediumBlue
 
 # User Defined Keywords
 [1.Keywords]
