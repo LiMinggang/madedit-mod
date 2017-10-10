@@ -433,15 +433,15 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	wxStaticText* StaticText23;
 	wxStaticText* StaticText24;
 	wxStaticText* StaticText25;
-
 	Create(parent, wxID_ANY, _("Options"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxSYSTEM_MENU|wxRESIZE_BORDER|wxCLOSE_BOX, _T("wxID_ANY"));
-	SetSize(wxSize(900,385));
+	SetClientSize(wxSize(900,400));
+
 	SetMaxSize(wxSize(-1,-1));
 	BoxSizer1 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer30 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer31 = new wxBoxSizer(wxVERTICAL);
 	AuiNotebook1 = new wxAuiNotebook(this, ID_AUINOTEBOOK1, wxDefaultPosition, wxDefaultSize, wxAUI_NB_DEFAULT_STYLE);
-	Panel1 = new wxPanel(AuiNotebook1, ID_PANEL1, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_PANEL1"));
+	Panel1 = new wxPanel(AuiNotebook1, ID_PANEL1, wxDefaultPosition, wxSize(792,400), wxTAB_TRAVERSAL, _T("ID_PANEL1"));
 	BoxSizer3 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer27 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer27->Add(3,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
@@ -568,14 +568,14 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	Panel1->SetSizer(BoxSizer3);
 	BoxSizer3->Fit(Panel1);
 	BoxSizer3->SetSizeHints(Panel1);
-	Panel2 = new wxPanel(AuiNotebook1, ID_PANEL2, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_PANEL2"));
+	Panel2 = new wxPanel(AuiNotebook1, ID_PANEL2, wxDefaultPosition, wxSize(792,400), wxTAB_TRAVERSAL, _T("ID_PANEL2"));
 	BoxSizer8 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer9 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer9->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	EditMaxLineLength = new wxTextCtrl(Panel2, ID_EDITMAXLINELENGTH, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITMAXLINELENGTH"));
 	SET_CONTROLPARENT(EditMaxLineLength);
 	BoxSizer9->Add(EditMaxLineLength, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticText3 = new wxStaticText(Panel2, ID_STATICTEXT3, _("Max line length before Line-Wrap (must restart MadEdit)"), wxDefaultPosition, wxSize(330,13), 0, _T("ID_STATICTEXT3"));
+	StaticText3 = new wxStaticText(Panel2, ID_STATICTEXT3, _("Max line length before Line-Wrap (must restart MadEdit)"), wxDefaultPosition, wxSize(330,-1), 0, _T("ID_STATICTEXT3"));
 	BoxSizer9->Add(StaticText3, 0, wxALL|wxEXPAND, 2);
 	BoxSizer8->Add(BoxSizer9, 0, wxALL|wxEXPAND, 2);
 	BoxSizer10 = new wxBoxSizer(wxHORIZONTAL);
@@ -583,7 +583,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	EditMaxColumns = new wxTextCtrl(Panel2, ID_EDITMAXCOLUMNS, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITMAXCOLUMNS"));
 	SET_CONTROLPARENT(EditMaxColumns);
 	BoxSizer10->Add(EditMaxColumns, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticText4 = new wxStaticText(Panel2, ID_STATICTEXT4, _("Columns of Wrap-By-Column"), wxDefaultPosition, wxSize(323,13), 0, _T("ID_STATICTEXT4"));
+	StaticText4 = new wxStaticText(Panel2, ID_STATICTEXT4, _("Columns of Wrap-By-Column"), wxDefaultPosition, wxSize(323,-1), 0, _T("ID_STATICTEXT4"));
 	BoxSizer10->Add(StaticText4, 0, wxALL|wxEXPAND, 2);
 	BoxSizer8->Add(BoxSizer10, 0, wxALL|wxEXPAND, 2);
 	BoxSizer11 = new wxBoxSizer(wxHORIZONTAL);
@@ -591,7 +591,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	EditTabColumns = new wxTextCtrl(Panel2, ID_EDITTABCOLUMNS, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITTABCOLUMNS"));
 	SET_CONTROLPARENT(EditTabColumns);
 	BoxSizer11->Add(EditTabColumns, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticText5 = new wxStaticText(Panel2, ID_STATICTEXT5, _("Columns of Tab"), wxDefaultPosition, wxSize(312,13), 0, _T("ID_STATICTEXT5"));
+	StaticText5 = new wxStaticText(Panel2, ID_STATICTEXT5, _("Columns of Tab"), wxDefaultPosition, wxSize(312,-1), 0, _T("ID_STATICTEXT5"));
 	BoxSizer11->Add(StaticText5, 0, wxALL|wxEXPAND, 2);
 	BoxSizer8->Add(BoxSizer11, 0, wxALL|wxEXPAND, 2);
 	BoxSizer13 = new wxBoxSizer(wxHORIZONTAL);
@@ -599,7 +599,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	EditIndentColumns = new wxTextCtrl(Panel2, ID_EDITINDENTCOLUMNS, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITINDENTCOLUMNS"));
 	SET_CONTROLPARENT(EditIndentColumns);
 	BoxSizer13->Add(EditIndentColumns, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticText6 = new wxStaticText(Panel2, ID_STATICTEXT6, _("Columns of Indent"), wxDefaultPosition, wxSize(305,13), 0, _T("ID_STATICTEXT6"));
+	StaticText6 = new wxStaticText(Panel2, ID_STATICTEXT6, _("Columns of Indent"), wxDefaultPosition, wxSize(305,-1), 0, _T("ID_STATICTEXT6"));
 	BoxSizer13->Add(StaticText6, 0, wxALL|wxEXPAND, 2);
 	BoxSizer8->Add(BoxSizer13, 0, wxALL|wxEXPAND, 2);
 	BoxSizer5 = new wxBoxSizer(wxHORIZONTAL);
@@ -672,7 +672,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	Panel2->SetSizer(BoxSizer8);
 	BoxSizer8->Fit(Panel2);
 	BoxSizer8->SetSizeHints(Panel2);
-	Panel6 = new wxPanel(AuiNotebook1, ID_PANEL6, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_PANEL6"));
+	Panel6 = new wxPanel(AuiNotebook1, ID_PANEL6, wxDefaultPosition, wxSize(792,400), wxTAB_TRAVERSAL, _T("ID_PANEL6"));
 	BoxSizer42 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer43 = new wxBoxSizer(wxVERTICAL);
 	StaticBoxSizer9 = new wxStaticBoxSizer(wxVERTICAL, Panel6, _("Line Ending"));
@@ -740,7 +740,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	Panel6->SetSizer(BoxSizer42);
 	BoxSizer42->Fit(Panel6);
 	BoxSizer42->SetSizeHints(Panel6);
-	Panel3 = new wxPanel(AuiNotebook1, ID_PANEL3, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_PANEL3"));
+	Panel3 = new wxPanel(AuiNotebook1, ID_PANEL3, wxDefaultPosition, wxSize(792,400), wxTAB_TRAVERSAL, _T("ID_PANEL3"));
 	BoxSizer14 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer15 = new wxBoxSizer(wxVERTICAL);
 	StaticBoxSizer1 = new wxStaticBoxSizer(wxVERTICAL, Panel3, _("Text Mode"));
@@ -850,7 +850,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	Panel3->SetSizer(BoxSizer14);
 	BoxSizer14->Fit(Panel3);
 	BoxSizer14->SetSizeHints(Panel3);
-	Panel4 = new wxPanel(AuiNotebook1, ID_PANEL4, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_PANEL4"));
+	Panel4 = new wxPanel(AuiNotebook1, ID_PANEL4, wxDefaultPosition, wxSize(792,400), wxTAB_TRAVERSAL, _T("ID_PANEL4"));
 	BoxSizer18 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer19 = new wxBoxSizer(wxHORIZONTAL);
 	TreeCtrl1 = new wxTreeCtrl(Panel4, ID_TREECTRL1, wxDefaultPosition, wxDefaultSize, wxTR_HAS_BUTTONS|wxTR_DEFAULT_STYLE, wxDefaultValidator, _T("ID_TREECTRL1"));
@@ -905,7 +905,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	Panel4->SetSizer(BoxSizer18);
 	BoxSizer18->Fit(Panel4);
 	BoxSizer18->SetSizeHints(Panel4);
-	Panel5 = new wxPanel(AuiNotebook1, ID_PANEL5, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_PANEL5"));
+	Panel5 = new wxPanel(AuiNotebook1, ID_PANEL5, wxDefaultPosition, wxSize(792,400), wxTAB_TRAVERSAL, _T("ID_PANEL5"));
 	BoxSizer36 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer34 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer34->Add(3,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);

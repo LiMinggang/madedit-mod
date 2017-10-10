@@ -189,7 +189,7 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	}
 
 	StaticBoxSizer3 = new wxStaticBoxSizer(wxHORIZONTAL, this, _("Input Sizer"));
-	WxSliderInputSizer = new wxSlider(this, ID_WXSLIDERINPUTSIZER, 1, 1, 5, wxDefaultPosition, wxSize(69,24), 0, wxDefaultValidator, _T("ID_WXSLIDERINPUTSIZER"));
+	WxSliderInputSizer = new wxSlider(this, ID_WXSLIDERINPUTSIZER, 1, 1, 5, wxDefaultPosition, wxSize(69,-1), 0, wxDefaultValidator, _T("ID_WXSLIDERINPUTSIZER"));
 	WxSliderInputSizer->SetPageSize(1);
 	WxSliderInputSizer->SetLineSize(1);
 	StaticBoxSizer3->Add(WxSliderInputSizer, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);

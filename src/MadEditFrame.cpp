@@ -2758,13 +2758,13 @@ void MadEditFrame::CreateGUIControls( void )
 	ToolBarData * td = &ToolBarTable[0];
 	while( td->toolbar_id >= 0 )
 	{
-		WxToolBar[td->toolbar_id] = new wxAuiToolBar( this, ID_WXTOOLBAR1 + td->toolbar_id, wxPoint( 0, 0 ), wxSize( 392, 29 ), td->toolbar_style );
+		WxToolBar[td->toolbar_id] = new wxAuiToolBar( this, ID_WXTOOLBAR1 + td->toolbar_id, wxPoint( 0, 0 ), wxSize( 392, -1 ), td->toolbar_style );
 		WxToolBar[td->toolbar_id]->Bind( wxEVT_AUITOOLBAR_RIGHT_CLICK, &MadEditFrame::OnRightClickToolBar, this );
 		g_ToolbarNames[td->toolbar_id] = td->caption;
 		++td;
 	}
 
-	m_QuickSearchBar = new wxAuiToolBar( this, ID_WXTOOLBAR1 + tbQSEARCH, wxPoint( 0, 0 ), wxSize( 392, 29 ), MADTOOBAR_DEFAULT );
+	m_QuickSearchBar = new wxAuiToolBar( this, ID_WXTOOLBAR1 + tbQSEARCH, wxPoint( 0, 0 ), wxSize( 392, -1 ), MADTOOBAR_DEFAULT );
 	m_QuickSearchBar->Bind( wxEVT_AUITOOLBAR_RIGHT_CLICK, &MadEditFrame::OnRightClickToolBar, this );
 	m_QuickSearchBar->Bind( wxEVT_SET_FOCUS, &MadEditFrame::OnQuickSearchSetFocus, this );
 	g_ToolbarNames[tbQSEARCH] = _( "Quick Search" );
@@ -7535,7 +7535,7 @@ void MadEditFrame::OnViewPreview( wxCommandEvent& event )
 											  wxSize( 400, 300 ) );
 			m_AuiManager.AddPane( m_HtmlPreview, wxAuiPaneInfo().Name( wxT( "Markdown/HTML Preview" ) ).Caption( _( "Markdown/HTML Preview" ) ).Floatable( false ).Right().CloseButton( false ) );
 			long style = wxAUI_TB_NO_TOOLTIPS;
-			m_RefreshView = new wxAuiToolBar( this, ID_WXTOOLBAR1 + tbMAX + 1, wxPoint( 0, 0 ), wxSize( 392, 29 ), style );
+			m_RefreshView = new wxAuiToolBar( this, ID_WXTOOLBAR1 + tbMAX + 1, wxPoint( 0, 0 ), wxSize( -1, -1 ), style );
 			m_RefreshView->AddTool( menuRefreshPreview, wxT( "RefreshPreview" ), m_ImageList->GetBitmap( refresh_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _( "Refresh" ), _( "Refresh prviewed text" ), nullptr );
 			m_RefreshView->AddTool( menuClosePreview, wxT( "ClosePreview" ), m_ImageList->GetBitmap( closepreview_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _( "Close Preveiw" ), _( "Close preveiw windows" ), nullptr );
 			m_RefreshView->Realize();
