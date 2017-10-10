@@ -52,6 +52,10 @@
 ////Frame Style End
 
 #define MAX_MADSCRIPT_LOAD 200
+#define MAX_RECENTFILS      20
+#define MAX_RECENTSEARCHS   20
+#define MAX_RECENTFONTS     9
+#define MAX_RECENTENCODINGS 9
 
 class wxMadAuiNotebook;
 class wxAuiNotebookEvent;

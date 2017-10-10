@@ -40,7 +40,7 @@ P.S.: madedit.pot/po has been uploaded to the top directory. Any translation for
 P.S.: Please open a ticket for bug of MadEdit-Mod at
       https://github.com/LiMinggang/madedit-mod/issues/
 
-MadEdit_Win2K is a build by VC++ 2005 express for Windows 2000.
+MadEdit_Win2K is a build by VC++ 2005 express for Windows 2000/XP.
 
 Example build under Linux
 wxWidgets(3.1.0) (CXXFLAGS=-fPIC CPPFLAGS=-fPIC CFLAGS=-fPIC, x64)

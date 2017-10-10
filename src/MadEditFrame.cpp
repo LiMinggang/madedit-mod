@@ -3195,16 +3195,16 @@ void MadEditFrame::CreateGUIControls( void )
 
 	ResetAcceleratorTable();
 	/***/
-	m_RecentFiles = new MadRecentList( 20 );
+	m_RecentFiles = new MadRecentList( MAX_RECENTFILS );
 	m_RecentFiles->UseMenu( g_Menu_File_RecentFiles );
 	m_Config->SetPath( wxT( "/RecentFiles" ) );
 	m_RecentFiles->Load( *m_Config );
 	
-	m_RecentEncodings = new MadRecentList( 9, menuRecentEncoding1 );
+	m_RecentEncodings = new MadRecentList( MAX_RECENTENCODINGS, menuRecentEncoding1 );
 	m_RecentEncodings->UseMenu( g_Menu_View_Encoding );
 	m_Config->SetPath( wxT( "/RecentEncodings" ) );
 	m_RecentEncodings->Load( *m_Config );
-	m_RecentFonts = new MadRecentList( 9, menuRecentFont1 );
+	m_RecentFonts = new MadRecentList( MAX_RECENTFONTS, menuRecentFont1 );
 	m_RecentFonts->UseMenu( g_Menu_View_FontName );
 	m_Config->SetPath( wxT( "/RecentFonts" ) );
 	m_RecentFonts->Load( *m_Config );
@@ -3255,7 +3255,7 @@ void MadEditFrame::CreateGUIControls( void )
 		mystring.Empty();
 	}
 	
-	m_FontSizes = new wxComboBox( fontEoncodingBar, ID_FONTSIZES, wxEmptyString, wxDefaultPosition, wxSize( 50, 21 ), fontsize, wxCB_READONLY );
+	m_FontSizes = new wxComboBox( fontEoncodingBar, ID_FONTSIZES, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), fontsize, wxCB_READONLY );
 	fontEoncodingBar->AddControl( m_FontSizes );
 	fontEoncodingBar->AddTool( menuIncFontSize, wxT( "menuIncFontSize" ), m_ImageList->GetBitmap( fontsizeinc_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _( "Increase Font Size" ), _( "Make your text a bit bigger" ), nullptr );
 	fontEoncodingBar->AddTool( menuDecFontSize, wxT( "menuDecFontSize" ), m_ImageList->GetBitmap( fontsizedec_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _( "Decrease Font Size" ), _( "Make your text a bit smaller" ), nullptr );
@@ -3267,7 +3267,7 @@ void MadEditFrame::CreateGUIControls( void )
 		mystring.Empty();
 	}
 	
-	m_LineSpaces = new wxComboBox( fontEoncodingBar, ID_LINESPACES, wxEmptyString, wxDefaultPosition, wxSize( 50, 21 ), linespaces, wxCB_READONLY );
+	m_LineSpaces = new wxComboBox( fontEoncodingBar, ID_LINESPACES, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), linespaces, wxCB_READONLY );
 	fontEoncodingBar->AddControl( m_LineSpaces );
 	m_Encodings->Bind( wxEVT_COMBOBOX, &MadEditFrame::OnFontEncoding, this );
 	m_Syntaxs->Bind( wxEVT_COMBOBOX, &MadEditFrame::OnFontEncoding, this );
@@ -3388,8 +3388,8 @@ void MadEditFrame::CreateGUIControls( void )
 	Bind(wxEVT_MENU, &MadEditFrame::OnScrollBarMenu, this, menuVScrollHere, menuHScrollRight);
 	/*g_Menu_HScrollPop*/
 
-	m_QuickSearch = new wxComboBox( m_QuickSearchBar, ID_QUICKSEARCH, wxEmptyString, wxDefaultPosition, wxSize( 211, 21 ) );
-	g_RecentFindText = new MadRecentList( 20, ID_RECENTFINDTEXT1, true ); //Should be freed in SearchDialog
+	m_QuickSearch = new wxComboBox( m_QuickSearchBar, ID_QUICKSEARCH, wxEmptyString, wxDefaultPosition, wxSize( 211, -1 ) );
+	g_RecentFindText = new MadRecentList( MAX_RECENTSEARCHS, ID_RECENTFINDTEXT1, true ); //Should be freed in SearchDialog
 	wxString oldpath = m_Config->GetPath();
 	m_Config->SetPath( wxT( "/RecentFindText" ) );
 	g_RecentFindText->Load( *m_Config );
