@@ -3241,11 +3241,11 @@ void MadEditFrame::CreateGUIControls( void )
 	{ WxToolBar[tbId]->Realize(); }*/
 
 	wxAuiToolBar * fontEoncodingBar = WxToolBar[tbFONTENCODING];
-	m_Encodings = new wxComboBox( fontEoncodingBar, ID_ENCODINGS, wxEmptyString, wxDefaultPosition, wxSize( 150, 21 ), encodings, wxCB_READONLY );
+	m_Encodings = new wxComboBox( fontEoncodingBar, ID_ENCODINGS, wxEmptyString, wxDefaultPosition, wxSize( 150, -1 ), encodings, wxCB_READONLY );
 	fontEoncodingBar->AddControl( m_Encodings );
-	m_Syntaxs = new wxComboBox( fontEoncodingBar, ID_SYNTAXS, wxEmptyString, wxDefaultPosition, wxSize( 150, 21 ), syntaxs, wxCB_READONLY );
+	m_Syntaxs = new wxComboBox( fontEoncodingBar, ID_SYNTAXS, wxEmptyString, wxDefaultPosition, wxSize( 150, -1 ), syntaxs, wxCB_READONLY );
 	fontEoncodingBar->AddControl( m_Syntaxs );
-	m_Fonts = new wxComboBox( fontEoncodingBar, ID_FONTS, wxEmptyString, wxDefaultPosition, wxSize( 150, 21 ), g_FontNames, wxCB_READONLY );
+	m_Fonts = new wxComboBox( fontEoncodingBar, ID_FONTS, wxEmptyString, wxDefaultPosition, wxSize( 150, -1 ), g_FontNames, wxCB_READONLY );
 	fontEoncodingBar->AddControl( m_Fonts );
 	wxString mystring;
 	for( int i = 1; i < 73; ++i)
