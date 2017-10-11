@@ -364,6 +364,8 @@ astyle::ASFormatter * g_ASFormatter = nullptr;
 const int IconWidth = 16;
 const int IconHeight = 16;
 
+wxUniChar g_MadConfigSeparator(0x1F);
+
 bool g_CheckModTimeForReload = true;
 static int Menu_Window_Count = 4;
 
@@ -667,19 +669,19 @@ public:
 
 		while( idx < count ) {
 			text = wxLongLong( it->pos ).ToString();
-			text += wxT( "|" );
+			text += g_MadConfigSeparator;
 			text += it->name;
-			text += wxT( "|" );
+			text += g_MadConfigSeparator;
 			text += it->encoding;
-			text += wxT( "|" );
+			text += g_MadConfigSeparator;
 			text += it->fontname;
-			text += wxT( "|" );
+			text += g_MadConfigSeparator;
 			text += wxLongLong( it->fontsize ).ToString();
-			text += wxT( "|" );
+			text += g_MadConfigSeparator;
 			text += wxLongLong( it->lspercent ).ToString();
-			text += wxT( "|" );
+			text += g_MadConfigSeparator;
 			text += wxLongLong( it->wrapmode ).ToString();
-			text += wxT( "|" );
+			text += g_MadConfigSeparator;
 			text += wxLongLong( it->editmode ).ToString();
 			cfg->Write( entry + ( wxString() << ( idx + 1 ) ), text );
 			++idx;
@@ -691,9 +693,17 @@ public:
 		FilePosData fpdata;
 		wxString entry( wxT( "file" ) ), text;
 		int idx = 1;
+		bool firsttry = true;
+		wxUniChar sep(g_MadConfigSeparator);
 
 		while( idx <= max_count && cfg->Read( entry + ( wxString() << idx ), &text ) ) {
-			int p = text.Find( wxT( "|" ) );
+			int p = text.Find( sep );
+			if(p == wxNOT_FOUND && firsttry)
+			{
+				firsttry = false;
+				sep = '|';
+				p = text.Find( sep );
+			}
 
 			if( p != wxNOT_FOUND ) {
 				fpdata.pos = 0;
@@ -707,22 +717,22 @@ public:
 				if( StrToInt64( text.Left( p ), i64 ) ) {
 					fpdata.pos = i64;
 					text = text.Right( text.Len() - ( p + 1 ) );
-					p = text.Find( wxT( "|" ) );
+					p = text.Find( sep );
 
 					if( p != wxNOT_FOUND ) {
 						fpdata.name = text.Left( p );
 						text = text.Right( text.Len() - ( p + 1 ) );
-						p = text.Find( wxT( "|" ) );
+						p = text.Find( sep );
 
 						if( p != wxNOT_FOUND ) {
 							fpdata.encoding = text.Left( p );
 							text = text.Right( text.Len() - ( p + 1 ) );
-							p = text.Find( wxT( "|" ) );
+							p = text.Find( sep );
 
 							if( p != wxNOT_FOUND ) {
 								fpdata.fontname = text.Left( p );
 								text = text.Right( text.Len() - ( p + 1 ) );
-								p = text.Find(wxT("|"));
+								p = text.Find( sep );
 
 								if( StrToInt64( text.Left( p ), i64 ) ) {
 									if((i64 < 0) || (i64 > 72)) i64 = 10;
@@ -730,7 +740,7 @@ public:
 								}
 
 								text = text.Right( text.Len() - ( p + 1 ) );
-								p = text.Find( wxT( "|" ) );
+								p = text.Find( sep );
 
 								if( p != wxNOT_FOUND ) {
 									if( StrToInt64( text.Left( p ), i64 ) ) {
@@ -739,7 +749,7 @@ public:
 										fpdata.lspercent = i64;
 									}
 									text = text.Right( text.Len() - ( p + 1 ) );
-									p = text.Find( wxT( "|" ) );
+									p = text.Find( sep );
 
 									if( p != wxNOT_FOUND ) {
 										if( StrToInt64( text.Left( p ), i64 ) ) {
@@ -980,7 +990,7 @@ public:
 
 			if( !name.IsEmpty() ) {
 				files += name;
-				files += wxUniChar( MAD_FILESEPERATOR ) ;
+				files += g_MadConfigSeparator ;
 				++count;
 			}
 		}
@@ -1086,8 +1096,7 @@ void OnReceiveMessage( const wchar_t *msg, size_t size, bool activeFile/* = true
 	wxString files, file, args( msg ), arg, mpScript;
 	bool use_script = false, forceEdit = false, silent = false, exitS = false;
 	/* filename1|filename2| *s *f *m mpython.mpy */
-	wxUniChar dm(MAD_FILESEPERATOR);
-	files = args.BeforeLast( dm, &arg );
+	files = args.BeforeLast( g_MadConfigSeparator, &arg );
 	args = arg;
 
 	if( !args.IsEmpty() )
@@ -1184,7 +1193,7 @@ void OnReceiveMessage( const wchar_t *msg, size_t size, bool activeFile/* = true
 
 	if( ( !silent ) || ( use_script == true ) )
 	{
-		wxString strDelimiters(wxUniChar( MAD_FILESEPERATOR ));
+		wxString strDelimiters(g_MadConfigSeparator);
 		wxStringTokenizer tkz2( files, strDelimiters );
 
 		g_MainFrame->WxMenuBar1->Freeze();
@@ -3539,7 +3548,7 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 		if( count != 1 && !selname.IsEmpty() )
 		{
 			files += selname; // append selname to activate it
-			files += wxUniChar( MAD_FILESEPERATOR );
+			files += g_MadConfigSeparator;
 		}
 	}
 

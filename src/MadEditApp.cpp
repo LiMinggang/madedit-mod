@@ -395,7 +395,7 @@ bool MadEditApp::OnInit()
 				for( size_t i = 0; i < m_FileNames.GetCount(); ++i )
 				{
 					//The name is what follows the last \ or /
-					fnames +=  m_FileNames[i] + wxUniChar( MAD_FILESEPERATOR );
+					fnames +=  m_FileNames[i] + g_MadConfigSeparator;
 				}
 
 				if( !m_MadPythonScript.IsEmpty() )
@@ -598,7 +598,7 @@ bool MadEditApp::OnCmdLineParsed( wxCmdLineParser& cmdParser )
 			m_MadPythonScript = g_MadEditHomeDir + wxT( "scripts" ) + wxFILE_SEP_PATH +  m_MadPythonScript;
 	}*/
 
-	// parse commandline to filenames, every file is with a trailing char '|', ex: filename1|filename2|
+	// parse commandline to filenames, every file is with a trailing char g_MadConfigSeparator, ex: filename1|filename2|
 	m_FileNames.Empty();
 	// to get at your unnamed parameters use GetParam
 	int flags = wxDIR_FILES | wxDIR_HIDDEN;
@@ -725,14 +725,13 @@ void MadEditApp::ShowMainFrame( MadEditFrame *mainFrame, bool maximize )
 		wxConfigBase *cfg = wxConfigBase::Get( false );
 		cfg->Read( wxT( "/MadEdit/ReloadFilesList" ), &files );
 
-		wxUniChar newdm(MAD_FILESEPERATOR);
 		if( !files.IsEmpty() )
 		{
 			// backward comptability
 			wxUniChar dm(files.Last());
-			if(dm != newdm)
+			if(dm != g_MadConfigSeparator)
 			{
-				files.Replace(wxString(dm), wxString(newdm));
+				files.Replace(wxString(dm), wxString(g_MadConfigSeparator));
 			}
 
 			// use OnReceiveMessage() to open the files
@@ -744,7 +743,7 @@ void MadEditApp::ShowMainFrame( MadEditFrame *mainFrame, bool maximize )
 		for( size_t i = 0; i < m_FileNames.GetCount(); ++i )
 		{
 			//The name is what follows the last \ or /
-			files +=  m_FileNames[i] + newdm;
+			files +=  m_FileNames[i] + g_MadConfigSeparator;
 		}
 
 		if( !files.IsEmpty() )
