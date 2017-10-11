@@ -130,7 +130,7 @@ New: Merge bookmark to line number area(From wxMedit), use Alt+LeftClick to togg
 Fix: Crash in Cut/Delete/Replace bookmarked/unbookmarked lines
 Fix: Disable resize of Option dialog(hang UI)
 Fix: Restore select the whole line by left click #240
-Fix: Refactor Option dialog with wxSmith
+Fix: Refactor Option dialog with wxSmith and allow resize
 Fix: Font size issue of fix width mode in switching between different fonts
 Fix: Incorrect displaying DND mouse ICON while clicking line number area in selection
 Fix: Wrong file filter of Open File dialog
