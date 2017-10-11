@@ -989,8 +989,8 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_Painted = false;
 	m_LineNumberAreaWidth = GetLineNumberAreaWidth( 0 );
 
-	if( m_DisplayBookmark )
-		m_BookmarkWidth = m_RowHeight;
+	if( m_DisplayBookmark && m_LineNumberAreaWidth == 0 )
+		m_BookmarkWidth = m_RowHeight/2;
 	else
 		m_BookmarkWidth = 0;
 
@@ -2246,7 +2246,7 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 						else
 						{
 							//static ucs4_t data[] = {117, 115, 101 ,114};//"user"
-							if( !m_HighlightWords.empty() && ( wordlength == m_HighlightWords.size() ) && IsTheSame<ucs4_t>( m_HighlightWords, m_WordBuffer,    m_HighlightWords.size() ) )
+							if( !m_HighlightWords.empty() && ( wordlength == m_HighlightWords.size() ) && IsTheSame<ucs4_t>( m_HighlightWords, m_WordBuffer, m_HighlightWords.size() ) )
 							{
 								static wxColour bgColor( 0x0, 0xff, 0xff );
 								current_bgcolor = bgColor;//wxTheColourDatabase->Find(wxString(wxT("PALE GREEN")));
@@ -2476,16 +2476,17 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 			{
 				int l = rect.GetLeft();
 
-				if( m_DisplayLineNumber )
+				if( m_DisplayLineNumber  || (displaylinenumber && m_DisplayBookmark ) )
 				{
 					// paint bg
 					m_Syntax->SetAttributes( aeLineNumber );
 
+					int lwidth = m_LineNumberAreaWidth + m_BookmarkWidth;
 					if( m_DrawingXPos && m_Syntax->nw_BgColor != bgcolor )
 					{
 						dc->SetPen( *wxThePenList->FindOrCreatePen( m_Syntax->nw_BgColor, 1, wxPENSTYLE_SOLID ) );
 						dc->SetBrush( *wxTheBrushList->FindOrCreateBrush( m_Syntax->nw_BgColor ) );
-						dc->DrawRectangle( l, row_top, m_LineNumberAreaWidth, m_RowHeight );
+						dc->DrawRectangle( l, row_top, lwidth, m_RowHeight );
 					}
 
 					if( m_DisplayBookmark )
@@ -2501,7 +2502,7 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 							dc->SetPen(*wxThePenList->FindOrCreatePen(attr->color, b, wxPENSTYLE_SOLID));
 							dc->SetBrush(*wxTheBrushList->FindOrCreateBrush(attr->bgcolor));
 							
-							wxRect rdrect(l +b / 2, row_top + b, m_LineNumberAreaWidth - b, m_RowHeight - b * 3 / 2);
+							wxRect rdrect(l +b / 2, row_top + b, lwidth - b, m_RowHeight - b * 3 / 2);
 							double r = m_RowHeight < 18 ? 3.0 : m_RowHeight / 6.0;
 							dc->DrawRoundedRectangle(rdrect, r);
 						}
@@ -2608,14 +2609,13 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 			// draw a line between LineNumberArea and Text
 			if( m_DisplayLineNumber )
 				x1 += m_LineNumberAreaWidth;
-
-			if( m_DisplayBookmark )
+			else if( m_DisplayBookmark )
 				x1 += m_BookmarkWidth;
 
 			dc->DrawLine( x1, y, x1, y + rect.GetHeight() );
 		}
 
-		if( !InPrinting() && m_Display80ColHint )
+		if( !InPrinting() && m_Display80ColHint && m_FixedWidthMode )
 		{
 			int width = 80 * m_TextFontAveCharWidth;
 			x1 += width + m_LeftMarginWidth - m_DrawingXPos;
@@ -3590,8 +3590,10 @@ void MadEdit::UpdateAppearance()
 	{
 		m_RowHeight = ( m_LineSpacing * m_TextFontHeight ) / 100;
 
-		if( m_DisplayBookmark )
-			m_BookmarkWidth = m_RowHeight;
+		if( m_DisplayBookmark && m_LineNumberAreaWidth == 0 )
+			m_BookmarkWidth = m_RowHeight/2;
+		else
+			m_BookmarkWidth = 0;
 	}
 	else
 	{
@@ -10012,7 +10014,7 @@ void MadEdit::OnMouseLeftDown( wxMouseEvent &evt )
 
 	if( ( m_EditMode != emHexMode ) && evt.m_x >= 0 && evt.m_x <= ( m_LineNumberAreaWidth + m_BookmarkWidth ) )
 	{
-		if( ( evt.m_x <= m_LineNumberAreaWidth ) && evt.m_controlDown )
+		if( evt.m_controlDown )
 		{
 			SelectAll();
 			evt.Skip();
@@ -10041,7 +10043,7 @@ void MadEdit::OnMouseLeftDown( wxMouseEvent &evt )
 			//if( evt.m_x <= m_LineNumberAreaWidth )
 			//	SelectLineFromCaretPos();
 			//else
-			if( evt.m_x > m_LineNumberAreaWidth )
+			if( evt.m_altDown )
 			{
 				ToggleBookmark();
 				//m_CaretPos.pos = m_SelectionEnd->pos;
@@ -10049,7 +10051,6 @@ void MadEdit::OnMouseLeftDown( wxMouseEvent &evt )
 				return;
 			}
 		}
-
 	}
 
 	ProcessCommand( ecMouseNotify );

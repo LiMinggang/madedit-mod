@@ -126,6 +126,7 @@ New: Toolbar for Encoding/Font/Font Size/Line Spacing
 New: Perl style regex match in Replace
 New: Copy/Cut unbookmarked lines
 New: Enable resize of search/replace input
+New: Merge bookmark to line number area(From wxMedit), use Alt+LeftClick to toggle
 Fix: Crash in Cut/Delete/Replace bookmarked/unbookmarked lines
 Fix: Disable resize of Option dialog(hang UI)
 Fix: Restore select the whole line by left click #240
@@ -135,6 +136,7 @@ Fix: Incorrect displaying DND mouse ICON while clicking line number area in sele
 Fix: Wrong file filter of Open File dialog
 Fix: Bookmark Only in search dialog does not work correctly
 Fix: Enable 80 columns hint only if it's in fix width mode
+Fix: Use GTK2 for Ubuntu release to fix the issue of wxWidgets with GTK3
 Update Astyle to latest code
 Update Hunspell to latest code
 Update translations

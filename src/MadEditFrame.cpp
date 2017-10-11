@@ -7487,6 +7487,8 @@ void MadEditFrame::OnViewFixedWidthMode( wxCommandEvent& event )
 	if( g_ActiveMadEdit != nullptr )
 	{ 
 		g_ActiveMadEdit->SetFixedWidthMode( event.IsChecked() );
+		if(!event.IsChecked())
+			g_ActiveMadEdit->SetDisplay80ColHint(false);
 
 		if( IsMacroRecording() )
 		{

@@ -952,6 +952,14 @@ void MadEdit::SetDisplayLineNumber( bool value )
 			UpdateScrollBarPos();
 		}
 
+		if( m_DisplayLineNumber )
+		{
+			m_BookmarkWidth = 0;
+		}
+		else
+		{
+			m_BookmarkWidth = m_RowHeight/2;
+		}
 		m_RepaintAll = true;
 		Refresh( false );
 	}
@@ -963,7 +971,7 @@ void MadEdit::SetDisplayBookmark( bool value )
 	{
 		m_DisplayBookmark = value;
 
-		if( m_DisplayBookmark ) m_BookmarkWidth = m_RowHeight;
+		if( m_DisplayBookmark && ( !m_DisplayLineNumber ) ) m_BookmarkWidth = m_RowHeight/2;
 		else m_BookmarkWidth = 0;
 
 		if( m_StorePropertiesToGlobalConfig )
@@ -4210,9 +4218,9 @@ bool MadEdit::PrintPage( wxDC *dc, int pageNum )
 			m_LineNumberAreaWidth = 0;
 		}
 
-		if( m_DisplayBookmark )
+		if( m_DisplayBookmark && m_LineNumberAreaWidth == 0 )
 		{
-			m_BookmarkWidth = m_RowHeight;
+			m_BookmarkWidth = m_RowHeight/2;
 		}
 		else
 		{
