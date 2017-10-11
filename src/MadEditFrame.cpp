@@ -365,6 +365,7 @@ const int IconWidth = 16;
 const int IconHeight = 16;
 
 wxUniChar g_MadConfigSeparator(0x1F);
+wxUniChar g_MadBmSeparator(0x0B);
 
 bool g_CheckModTimeForReload = true;
 static int Menu_Window_Count = 4;
@@ -579,6 +580,7 @@ class FileCaretPosManager
 		unsigned long hash; // hash value of filename
 		wxString encoding;
 		wxString fontname;
+		std::vector<int> bmlinenums;
 		int fontsize;
 		int lspercent;
 		int wrapmode; /*wwmNoWrap, wwmWrapByWindow, wwmWrapByColumn*/
@@ -697,7 +699,25 @@ public:
 		wxUniChar sep(g_MadConfigSeparator);
 
 		while( idx <= max_count && cfg->Read( entry + ( wxString() << idx ), &text ) ) {
+			if(text.IsEmpty()) {
+				++idx;
+				continue;
+			}
+
+			int bmp = text.Find(g_MadBmSeparator);
+			if(bmp != wxNOT_FOUND) {
+				wxString bms = text.Right( text.Len() - ( bmp + 1 ) );
+				text = text.Left( bmp );
+				wxArrayString bmks = wxStringTokenize( bms, wxString(g_MadBmSeparator) );
+				wxInt64 i64;
+				for(size_t i = 0; i < bmks.GetCount(); ++i) {
+					StrToInt64( bmks[i], i64 );
+					fpdata.bmlinenums.push_back(i64);
+				}
+			}
 			int p = text.Find( sep );
+
+			// Backward compatibility
 			if(p == wxNOT_FOUND && firsttry)
 			{
 				firsttry = false;

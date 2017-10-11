@@ -52,6 +52,7 @@
 ////Frame Style End
 
 extern wxUniChar g_MadConfigSeparator;
+extern wxUniChar g_MadBmSeparator;
 #define MAX_MADSCRIPT_LOAD  200
 #define MAX_RECENTFILS      20
 #define MAX_RECENTSEARCHS   20
