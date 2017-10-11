@@ -395,7 +395,7 @@ bool MadEditApp::OnInit()
 				for( size_t i = 0; i < m_FileNames.GetCount(); ++i )
 				{
 					//The name is what follows the last \ or /
-					fnames +=  m_FileNames[i] + wxT( '|' );
+					fnames +=  m_FileNames[i] + wxUniChar( MAD_FILESEPERATOR );
 				}
 
 				if( !m_MadPythonScript.IsEmpty() )
@@ -725,8 +725,16 @@ void MadEditApp::ShowMainFrame( MadEditFrame *mainFrame, bool maximize )
 		wxConfigBase *cfg = wxConfigBase::Get( false );
 		cfg->Read( wxT( "/MadEdit/ReloadFilesList" ), &files );
 
+		wxUniChar newdm(MAD_FILESEPERATOR);
 		if( !files.IsEmpty() )
 		{
+			// backward comptability
+			wxUniChar dm(files.Last());
+			if(dm != newdm)
+			{
+				files.Replace(wxString(dm), wxString(newdm));
+			}
+
 			// use OnReceiveMessage() to open the files
 			OnReceiveMessage( files.c_str(), ( files.size() + 1 )*sizeof( wxChar ), false );
 		}
@@ -736,7 +744,7 @@ void MadEditApp::ShowMainFrame( MadEditFrame *mainFrame, bool maximize )
 		for( size_t i = 0; i < m_FileNames.GetCount(); ++i )
 		{
 			//The name is what follows the last \ or /
-			files +=  m_FileNames[i] + wxT( '|' );
+			files +=  m_FileNames[i] + newdm;
 		}
 
 		if( !files.IsEmpty() )

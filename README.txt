@@ -97,13 +97,12 @@ Syntax files, Locale files, Dictionaries and Settings:
     Eg: madedit -s -m madpytho.mpy ./1.txt /tmp/2.txt
     Make sure you use Single Instance with -s, -x!!
 
-Known issues:
-1. The Macro recording function will save all your commands to one document which
-    means it will not record the "switching" between documents.
+Known issues(that may not be fixed in future releases):
+1. The Macro recording function will save all your commands to one document which means it will not record the "switching" between documents.
 2. Search in selection in column mode is not exact the selection highlighted.
 3. HighlightWord would not work if the caret is at the end of the line
 4. Scroll function on Right click menu of scroll bars only works with Windows
-5. Ubuntu build with GTK3 would have issue on different GTK themes other than default, eg, double title bar and shadow border. It's a bug of wxWidgets(#17971)
+5. '|', '*', and '?' are allowed in file names under Linux/Unix but are used as delimiter for file name and line number
 
 Feature/issues to be released
 -----------------------------

@@ -980,7 +980,7 @@ public:
 
 			if( !name.IsEmpty() ) {
 				files += name;
-				files += wxT( '|' );
+				files += wxUniChar( MAD_FILESEPERATOR ) ;
 				++count;
 			}
 		}
@@ -1086,7 +1086,8 @@ void OnReceiveMessage( const wchar_t *msg, size_t size, bool activeFile/* = true
 	wxString files, file, args( msg ), arg, mpScript;
 	bool use_script = false, forceEdit = false, silent = false, exitS = false;
 	/* filename1|filename2| *s *f *m mpython.mpy */
-	files = args.BeforeLast( '|', &arg );
+	wxUniChar dm(MAD_FILESEPERATOR);
+	files = args.BeforeLast( dm, &arg );
 	args = arg;
 
 	if( !args.IsEmpty() )
@@ -1183,7 +1184,7 @@ void OnReceiveMessage( const wchar_t *msg, size_t size, bool activeFile/* = true
 
 	if( ( !silent ) || ( use_script == true ) )
 	{
-		wxString strDelimiters = wxT( "|" );
+		wxString strDelimiters(wxUniChar( MAD_FILESEPERATOR ));
 		wxStringTokenizer tkz2( files, strDelimiters );
 
 		g_MainFrame->WxMenuBar1->Freeze();
@@ -3538,7 +3539,7 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 		if( count != 1 && !selname.IsEmpty() )
 		{
 			files += selname; // append selname to activate it
-			files += wxT( '|' );
+			files += wxUniChar( MAD_FILESEPERATOR );
 		}
 	}
 

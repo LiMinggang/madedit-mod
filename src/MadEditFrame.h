@@ -51,7 +51,8 @@
 #define MadEditFrame_STYLE wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxCLOSE_BOX
 ////Frame Style End
 
-#define MAX_MADSCRIPT_LOAD 200
+#define MAD_FILESEPERATOR   ((char)0x0B)
+#define MAX_MADSCRIPT_LOAD  200
 #define MAX_RECENTFILS      20
 #define MAX_RECENTSEARCHS   20
 #define MAX_RECENTFONTS     9
