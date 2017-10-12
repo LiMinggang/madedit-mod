@@ -2114,6 +2114,8 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 	int xpos1 = 0, xpos2 = 0;
 	bool reverseLineNum = false;
 	const int wspace = m_TextFontSpaceWidth/*GetUCharWidth( 0x20 )*/;
+	wxString lnums;
+	wxColor current_bgcolor;
 
 	if( m_DisplayLineNumber )
 	{
@@ -2136,7 +2138,7 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 		do                          // every row of line
 		{
 			left = leftpos;
-			wxColor current_bgcolor = bgcolor;
+			current_bgcolor = bgcolor;
 			// paint left margin
 			int leftmarginwidth = m_LeftMarginWidth - m_DrawingXPos;
 
@@ -2482,13 +2484,35 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 					m_Syntax->SetAttributes( aeLineNumber );
 
 					int lwidth = m_LineNumberAreaWidth + m_BookmarkWidth;
+					//int offset = 0;
+
 					if( m_DrawingXPos && m_Syntax->nw_BgColor != bgcolor )
 					{
 						dc->SetPen( *wxThePenList->FindOrCreatePen( m_Syntax->nw_BgColor, 1, wxPENSTYLE_SOLID ) );
 						dc->SetBrush( *wxTheBrushList->FindOrCreateBrush( m_Syntax->nw_BgColor ) );
 						dc->DrawRectangle( l, row_top, lwidth, m_RowHeight );
 					}
-
+#if 0
+					if(displaylinenumber)
+					{
+						lnums = wxT( '%' );
+						lnums += wxString::Format( wxT( "%u" ), ncount );
+						lnums += wxT( 'd' );
+						lnums = wxString::Format( lnums, lineid );
+						if (m_DisplayBookmark)
+						{
+							const wxChar *wcstr = lnums.c_str();
+							unsigned int i = 0;
+							for (; i < ncount; ++i)
+							{
+								if (wcstr[i] != 0x20) break;
+							}
+							offset = lwidth;
+							lwidth = (ncount - i) * m_TextFontMaxDigitWidth;
+							offset -= lwidth;
+						}
+					}
+#endif
 					if( m_DisplayBookmark )
 					{
 						int tl = rect.GetLeft();
@@ -2502,7 +2526,7 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 							dc->SetPen(*wxThePenList->FindOrCreatePen(attr->color, b, wxPENSTYLE_SOLID));
 							dc->SetBrush(*wxTheBrushList->FindOrCreateBrush(attr->bgcolor));
 							
-							wxRect rdrect(l +b / 2, row_top + b, lwidth - b, m_RowHeight - b * 3 / 2);
+							wxRect rdrect(l /*+ offset*/, row_top + b, lwidth - b, m_RowHeight - b * 3 / 2);
 							double r = m_RowHeight < 18 ? 3.0 : m_RowHeight / 6.0;
 							dc->DrawRoundedRectangle(rdrect, r);
 						}
@@ -2510,69 +2534,40 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 
 					if( displaylinenumber )
 					{
-						//else //----------
+						lnums = wxT('%');
+						lnums += wxString::Format(wxT("%u"), ncount);
+						lnums += wxT('d');
+						lnums = wxString::Format(lnums, lineid);
+						const wxChar *wcstr = lnums.c_str();
+						dc->SetTextForeground( m_Syntax->nw_Color );
+						dc->SetFont( *( m_Syntax->nw_Font ) );
+
+						if( !InPrinting() && reverseLineNum )
 						{
-							wxString s( wxT( '%' ) );
-							s += wxString::Format( wxT( "%u" ), ncount );
-							s += wxT( 'd' );
-							s = wxString::Format( s, lineid );
-							const wxChar *wcstr = s.c_str();
-							dc->SetTextForeground( m_Syntax->nw_Color );
-							dc->SetFont( *( m_Syntax->nw_Font ) );
-
-							if( !InPrinting() && reverseLineNum )
+							for( unsigned int i = 0; i < ncount; ++i, l += m_TextFontMaxDigitWidth )
 							{
-								for( unsigned int i = 0; i < ncount; ++i, l += m_TextFontMaxDigitWidth )
-								{
-									if( wcstr[i] != 0x20 ) break;
-								}
-
-								for(unsigned int i = ncount; i > 0; --i, l += m_TextFontMaxDigitWidth )
-								{
-									if( wcstr[i - 1] != 0x20 )
-									{
-										dc->DrawText( wcstr[i - 1], l, text_top );
-									}
-									else
-										break;
-								}
+								if( wcstr[i] != 0x20 ) break;
 							}
-							else
+
+							for(unsigned int i = ncount; i > 0; --i, l += m_TextFontMaxDigitWidth )
 							{
-								for(unsigned int i = 0; i < ncount; ++i, l += m_TextFontMaxDigitWidth )
+								if( wcstr[i - 1] != 0x20 )
 								{
-									if( wcstr[i] != 0x20 )
-									{
-										dc->DrawText( wcstr[i], l, text_top );
-									}
+									dc->DrawText( wcstr[i - 1], l, text_top );
 								}
+								else
+									break;
 							}
 						}
-					}
-				}
-				else
-				{
-					if( displaylinenumber && m_DisplayBookmark )
-					{
-						if( m_DrawingXPos )
+						else
 						{
-							dc->SetPen( *wxThePenList->FindOrCreatePen( bm_BgColor, 1, wxPENSTYLE_SOLID ) );
-							dc->SetBrush( *wxTheBrushList->FindOrCreateBrush( bm_BgColor ) );
-							dc->DrawRectangle( l, row_top, m_BookmarkWidth + 1, m_RowHeight );
-						}
-
-						// add: gogo, 27.09.2009
-						if( m_Lines->m_LineList.IsBookmarked( lineiter ) )
-						{
-							int b = m_RowHeight < 24 ? 1 : m_RowHeight / 24;
-
-							MadAttributes* attr = GetSyntax()->GetAttributes(aeBookmark);
-							dc->SetPen(*wxThePenList->FindOrCreatePen(attr->color, b, wxPENSTYLE_SOLID));
-							dc->SetBrush(*wxTheBrushList->FindOrCreateBrush(attr->bgcolor));
-
-							wxRect rdrect(l + b / 2, row_top + b, m_BookmarkWidth - b, m_RowHeight - b * 3 / 2);
-							double r = m_RowHeight < 18 ? 3.0 : m_RowHeight / 6.0;
-							dc->DrawRoundedRectangle(rdrect, r);
+							for(unsigned int i = 0; i < ncount; ++i, l += m_TextFontMaxDigitWidth )
+							{
+								if( wcstr[i] != 0x20 )
+								{
+									dc->DrawText( wcstr[i], l, text_top );
+								}
+							}
 						}
 					}
 				}

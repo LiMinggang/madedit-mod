@@ -102,7 +102,7 @@ Known issues(that may not be fixed in future releases):
 2. Search in selection in column mode is not exact the selection highlighted.
 3. HighlightWord would not work if the caret is at the end of the line
 4. Scroll function on Right click menu of scroll bars only works with Windows
-5. '*' are allowed in file names under Linux/Unix but are used as delimiter for file name and line number
+5. '*' is allowed in file name under Linux/Unix but is used as delimiter for file name and line number
 
 Feature/issues to be released
 -----------------------------
@@ -137,6 +137,8 @@ Fix: Wrong file filter of Open File dialog
 Fix: Bookmark Only in search dialog does not work correctly
 Fix: Enable 80 columns hint only if it's in fix width mode
 Fix: Use GTK2 for Ubuntu release to fix the issue of wxWidgets with GTK3
+Fix: Support '|' in filename('*' will not be supported)
+Fix: File change detect issue on close
 Update Astyle to latest code
 Update Hunspell to latest code
 Update translations
