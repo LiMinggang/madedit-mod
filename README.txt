@@ -102,7 +102,7 @@ Known issues(that may not be fixed in future releases):
 2. Search in selection in column mode is not exact the selection highlighted.
 3. HighlightWord would not work if the caret is at the end of the line
 4. Scroll function on Right click menu of scroll bars only works with Windows
-5. '|', '*', and '?' are allowed in file names under Linux/Unix but are used as delimiter for file name and line number
+5. '*' are allowed in file names under Linux/Unix but are used as delimiter for file name and line number
 
 Feature/issues to be released
 -----------------------------
@@ -126,6 +126,7 @@ New: Perl style regex match in Replace
 New: Copy/Cut unbookmarked lines
 New: Enable resize of search/replace input
 New: Merge bookmark to line number area(From wxMedit), use Alt+LeftClick to toggle
+New: Save bookmark to config file
 Fix: Crash in Cut/Delete/Replace bookmarked/unbookmarked lines
 Fix: Disable resize of Option dialog(hang UI)
 Fix: Restore select the whole line by left click #240
