@@ -12044,39 +12044,6 @@ int MadEdit::GetUCharType( ucs4_t uc )
 	return 8;
 }
 
-// add: gogo, 21.09.2009
-//
-void MadEdit::ToggleBookmark()
-{
-	m_Lines->m_LineList.SetBookmark( m_CaretPos.iter );
-	m_RepaintAll = true;
-	Refresh( false );
-}
-
-void MadEdit::GotoNextBookmark()
-{
-	int lineNum = m_Lines->m_LineList.GetNextBookmark( m_CaretPos.iter );
-
-	if( lineNum > 0 )
-		GoToLine( lineNum );
-}
-
-void MadEdit::GotoPreviousBookmark()
-{
-	int lineNum = m_Lines->m_LineList.GetPreviousBookmark( m_CaretPos.iter );
-
-	if( lineNum > 0 )
-		GoToLine( int( m_Lines->m_LineCount + 1 ) - lineNum );
-}
-
-void MadEdit::ClearAllBookmarks()
-{
-	m_Lines->m_LineList.ClearAllBookmarks();
-	m_RepaintAll = true;
-	Refresh( false );
-}
-
-//----------
 void MadEdit::OnCheckModificationTime( wxCommandEvent& evt )
 {
 	DBOUT( "OnCheckModificationTime\n" );

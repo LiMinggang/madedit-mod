@@ -1043,7 +1043,9 @@ public: // basic functions
 	void GotoNextBookmark();
 	void GotoPreviousBookmark();
 	void ClearAllBookmarks();
-	bool HasBookMark() {return m_Lines->m_LineList.HasBookMark();};
+	bool HasBookMark() {return m_Lines->m_LineList.HasBookMark();}	
+	void MadEdit::GetAllBookmarks( std::vector<int> & linenums );
+	void MadEdit::RestoreBookmarks( std::vector<int> & linenums );
 	//----------
 	void ToggleBookmarkInSearch( bool bookmark ) {m_BookmarkInSearch = bookmark;}
 	bool IsSelecting() {return m_SelectionStart;}

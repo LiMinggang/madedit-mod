@@ -4124,3 +4124,92 @@ void MadEdit::SetMaxDisplaySize( int maxsize )
 		}
 	}
 }
+
+// add: gogo, 21.09.2009
+//
+void MadEdit::ToggleBookmark()
+{
+	m_Lines->m_LineList.SetBookmark( m_CaretPos.iter );
+	m_RepaintAll = true;
+	Refresh( false );
+}
+
+void MadEdit::GotoNextBookmark()
+{
+	int lineNum = m_Lines->m_LineList.GetNextBookmark( m_CaretPos.iter );
+
+	if( lineNum > 0 )
+		GoToLine( lineNum );
+}
+
+void MadEdit::GotoPreviousBookmark()
+{
+	int lineNum = m_Lines->m_LineList.GetPreviousBookmark( m_CaretPos.iter );
+
+	if( lineNum > 0 )
+		GoToLine( int( m_Lines->m_LineCount + 1 ) - lineNum );
+}
+
+void MadEdit::ClearAllBookmarks()
+{
+	m_Lines->m_LineList.ClearAllBookmarks();
+	m_RepaintAll = true;
+	Refresh( false );
+}
+
+void MadEdit::GetAllBookmarks( std::vector<int> & linenums )
+{
+	list<MadLineIterator> & bmlist = m_Lines->m_LineList.GetBookmarkedLines();
+
+	if( bmlist.empty() )
+	{ return; }
+
+	linenums.clear();
+
+	int lineNum = 1;
+	list<MadLineIterator>::iterator bmkIter = bmlist.begin();
+	MadLineIterator bookmark = *bmkIter;
+	MadLineIterator iter;
+
+	for( iter = m_Lines->m_LineList.begin(); iter != m_Lines->m_LineList.end(); ++lineNum, ++iter )
+	{
+		if( iter == bookmark )
+		{
+			linenums.push_back(lineNum);
+			if( ++bmkIter == bmlist.end() )
+			{ break; } // no more bookmarks, we return the position of the first one
+
+			bookmark = *bmkIter;
+		}
+	}
+
+	wxASSERT( iter != m_Lines->m_LineList.end() );  // this can be triggered if bookmark list is not sorted
+}
+
+void MadEdit::RestoreBookmarks( std::vector<int> & linenums )
+{
+	if( linenums.empty() )
+	{ return; }
+	int lineNum = 1;
+	std::vector<int>::iterator linenumIter = linenums.begin();
+	MadLineIterator iter;
+
+	for( iter = m_Lines->m_LineList.begin(); iter != m_Lines->m_LineList.end(); ++lineNum, ++iter )
+	{
+		if( lineNum == *linenumIter )
+		{
+			m_Lines->m_LineList.SetBookmark( iter );
+			if( ++linenumIter == linenums.end() )
+			{ break; } // no more bookmarks, we return the position of the first one
+			if(*linenumIter > m_Lines->m_LineCount) return;
+		}
+	}
+
+	wxASSERT( iter != m_Lines->m_LineList.end() );	// this can be triggered if bookmark list is not sorted
+
+	m_RepaintAll = true;
+	Refresh( false );
+
+}
+
+//----------
