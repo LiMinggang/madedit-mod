@@ -10235,7 +10235,7 @@ void MadEdit::OnMouseLeftUp( wxMouseEvent &evt )
 				m_DragDrop = false;
 				m_DndData.Empty();
 			}
-            else if(( evt.m_x <= m_LineNumberAreaWidth ) && (( !m_Selection ) || (m_CaretPos.pos > m_SelectionEnd->pos)))
+            else if(( evt.m_x <= ( m_LineNumberAreaWidth + m_BookmarkWidth ) ) && (! evt.m_altDown ) && (( !m_Selection ) || (m_CaretPos.pos > m_SelectionEnd->pos)))
 				SelectLineFromCaretPos();
 
 			evt.Skip();

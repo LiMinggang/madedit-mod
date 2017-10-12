@@ -4194,22 +4194,23 @@ void MadEdit::RestoreBookmarks( std::vector<int> & linenums )
 	std::vector<int>::iterator linenumIter = linenums.begin();
 	MadLineIterator iter;
 
+	if(*linenumIter > m_Lines->m_LineCount)
+		return;
 	for( iter = m_Lines->m_LineList.begin(); iter != m_Lines->m_LineList.end(); ++lineNum, ++iter )
 	{
 		if( lineNum == *linenumIter )
 		{
-			m_Lines->m_LineList.SetBookmark( iter );
+			m_Lines->m_LineList.SetBookmark( iter, false );
 			if( ++linenumIter == linenums.end() )
 			{ break; } // no more bookmarks, we return the position of the first one
-			if(*linenumIter > m_Lines->m_LineCount) return;
+			if (*linenumIter > m_Lines->m_LineCount)
+				return;
 		}
 	}
 
 	wxASSERT( iter != m_Lines->m_LineList.end() );	// this can be triggered if bookmark list is not sorted
-
 	m_RepaintAll = true;
 	Refresh( false );
-
 }
 
 //----------

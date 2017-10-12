@@ -586,19 +586,23 @@ class FileCaretPosManager
 		int wrapmode; /*wwmNoWrap, wwmWrapByWindow, wwmWrapByColumn*/
 		int editmode; /*emTextMode, emColumnMode, emHexMode*/
 
-		FilePosData( const wxString &n, const wxLongLong_t &p, unsigned long h, const wxString &e, const wxString &fn, int fs, int lsp, int wm, int em )
+		FilePosData( const wxString &n, const wxLongLong_t &p, unsigned long h, const wxString &e, const wxString &fn, int fs, int lsp, int wm, int em, std::vector<int>& bmlns )
 			: name( n ), pos( p ), hash( h ), encoding( e ), fontname( fn ), fontsize( fs ), lspercent(lsp), wrapmode(wm), editmode(em)
-		{}
+		{
+			bmlinenums.swap( bmlns );
+		}
 		FilePosData()
 			: pos( 0 ), hash( 0 ), fontsize( 0 ), lspercent( 0 ), wrapmode( -1 ), editmode( -1 )
 		{}
+		FilePosData(const FilePosData & fpd)
+			: name(fpd.name), pos(fpd.pos), hash(fpd.hash), encoding(fpd.encoding), fontname(fpd.fontname), fontsize(fpd.fontsize), lspercent(fpd.lspercent), wrapmode(fpd.wrapmode), editmode(fpd.editmode)
+		{
+			bmlinenums = fpd.bmlinenums;
+		}
 	};
 	std::list<FilePosData> files;
-
-public:
-	FileCaretPosManager() : max_count( 40 ) {}
-
-	void Add( const wxString &name, const wxFileOffset &pos, const wxString &encoding, const wxString &fontname, int fontsize, int lspercent, int wrapmode, int editmode ) {
+	
+	void Add( const wxString &name, const wxFileOffset &pos, const wxString &encoding, const wxString &fontname, int fontsize, int lspercent, int wrapmode, int editmode, std::vector<int>& bmlinenums ) {
 #ifdef __WXMSW__
 		wxString name0( name.Upper() );
 #else
@@ -606,40 +610,40 @@ public:
 #endif
 		unsigned long hash = wxStringHash::stringHash(( wchar_t * )name0.wx_str());
 
-		if( files.empty() ) {
-			files.push_back( FilePosData( name0, pos, hash, encoding, fontname, fontsize, lspercent, wrapmode, editmode ) );
+		std::list<FilePosData>::iterator it = files.begin();
+		std::list<FilePosData>::iterator itend = files.end();
+		while( it != itend ) {
+			if( it->hash == hash && it->name == name0 ) {
+				break;
+			}
+			++it;
+		}
+
+		if( it == itend ) {
+			files.push_front( FilePosData( name0, pos, hash, encoding, fontname, fontsize, lspercent, wrapmode, editmode, bmlinenums ) );
 		}
 		else {
-			std::list<FilePosData>::iterator it = files.begin();
-			std::list<FilePosData>::iterator itend = files.end();
-
-			do {
-				if( it->hash == hash && it->name == name0 ) {
-					break;
-				}
-			}
-			while( ++it != itend );
-
-			if( it == itend ) {
-				files.push_front( FilePosData( name0, pos, hash, encoding, fontname, fontsize, lspercent, wrapmode, editmode ) );
-			}
-			else {
-				it->pos = pos;
-				it->encoding = encoding;
-				it->fontname = fontname;
-				it->fontsize = fontsize;
-				it->lspercent = lspercent;
-				it->wrapmode = wrapmode;
-				it->editmode = editmode; 
-				files.push_front( *it );
-				files.erase( it );
-			}
+			it->pos = pos;
+			it->encoding = encoding;
+			it->fontname = fontname;
+			it->fontsize = fontsize;
+			it->lspercent = lspercent;
+			it->wrapmode = wrapmode;
+			it->editmode = editmode; 
+			it->bmlinenums.swap( bmlinenums );
+			FilePosData newfp(*it);
+			files.erase(it);
+			files.push_front( newfp );
 		}
 
 		if( int( files.size() ) > max_count ) {
 			files.pop_back();
 		}
 	}
+
+public:
+	FileCaretPosManager() : max_count( 40 ) {}
+
 	void Add( MadEdit *madedit ) {
 		if( madedit == nullptr ) { return; }
 
@@ -658,9 +662,11 @@ public:
 			int wrapmode = madedit->GetWordWrapMode(); 
 			int editmode = madedit->GetEditMode(); /*emTextMode, emColumnMode, emHexMode*/
 			int fontsize;
-			madedit->GetTextFont( fontname, fontsize );
+			std::vector<int> bmlinenums;
+			madedit->GetTextFont( fontname, fontsize );			
+			madedit->GetAllBookmarks( bmlinenums );
 
-			Add( name, pos, madedit->GetEncodingName(), fontname, fontsize, lspercent, wrapmode, editmode );
+			Add( name, pos, madedit->GetEncodingName(), fontname, fontsize, lspercent, wrapmode, editmode, bmlinenums );
 		}
 	}
 	void Save( wxConfigBase *cfg ) {
@@ -685,6 +691,12 @@ public:
 			text += wxLongLong( it->wrapmode ).ToString();
 			text += g_MadConfigSeparator;
 			text += wxLongLong( it->editmode ).ToString();
+			if (!it->bmlinenums.empty()) {
+				text += g_MadBmSeparator;
+				for (size_t i = 0; i < it->bmlinenums.size(); ++i) {
+					text += wxLongLong(it->bmlinenums[i]).ToString() + g_MadBmSeparator;
+				}				
+			}
 			cfg->Write( entry + ( wxString() << ( idx + 1 ) ), text );
 			++idx;
 			++it;
@@ -713,6 +725,12 @@ public:
 				for(size_t i = 0; i < bmks.GetCount(); ++i) {
 					StrToInt64( bmks[i], i64 );
 					fpdata.bmlinenums.push_back(i64);
+				}
+
+				if(!fpdata.bmlinenums.empty()) {
+					std::sort(fpdata.bmlinenums.begin(), fpdata.bmlinenums.end());
+					std::vector<int>::iterator last = std::unique(fpdata.bmlinenums.begin(), fpdata.bmlinenums.end());
+					fpdata.bmlinenums.erase(last, fpdata.bmlinenums.end());
 				}
 			}
 			int p = text.Find( sep );
@@ -805,7 +823,7 @@ public:
 			++idx;
 		}
 	}
-	wxFileOffset GetRestoreData( const wxString &name, wxString &encoding, wxString &fontname, int &fontsize, int& lspercent, int& wrapmode, int& editmode ) {
+	wxFileOffset GetRestoreData( const wxString &name, wxString &encoding, wxString &fontname, int &fontsize, int& lspercent, int& wrapmode, int& editmode, std::vector<int>& bmlines ) {
 #ifdef __WXMSW__
 		wxString name0( name.Upper() );
 #else
@@ -825,12 +843,13 @@ public:
 			do {
 				if( it->hash == hash && it->name == name0 ) {
 					pos = it->pos;
-					encoding = it->encoding;
-					fontname = it->fontname;
-					fontsize = it->fontsize;
+					encoding  = it->encoding;
+					fontname  = it->fontname;
+					fontsize  = it->fontsize;
 					lspercent = it->lspercent;
 					wrapmode  = it->wrapmode;
 					editmode  = it->editmode;
+					bmlines   = it->bmlinenums;
 					break;
 				}
 			}
@@ -4479,7 +4498,8 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 		wxString enc, fn;
 		wxFileOffset pos;
 		int fs, lsp, wm, em;
-		pos = g_FileCaretPosManager.GetRestoreData( filename, enc, fn, fs, lsp, wm, em );
+		std::vector<int> bmlines;
+		pos = g_FileCaretPosManager.GetRestoreData( filename, enc, fn, fs, lsp, wm, em, bmlines );
 
 		if((em >= emTextMode && em <= emHexMode) && ((MadEditMode)em != madedit->GetEditMode()))
 			madedit->SetEditMode((MadEditMode)em);
@@ -4511,6 +4531,7 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 			{
 				madedit->SetCaretPosition( pos );
 			}
+			madedit->RestoreBookmarks( bmlines );
 		}
 	}
 
