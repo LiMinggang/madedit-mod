@@ -3755,6 +3755,7 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 
 	if( g_MadToolHtmlWin ) { delete g_MadToolHtmlWin; }
 
+	g_ActiveMadEdit = 0;
 	g_MainFrame = 0;
 #ifndef __WXMSW__
 	// it will crash randomly under linux.
