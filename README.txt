@@ -44,7 +44,7 @@ MadEdit_Win2K is a build by VC++ 2005 express for Windows 2000/XP.
 
 Example build under Linux
 wxWidgets(3.1.0) (CXXFLAGS=-fPIC CPPFLAGS=-fPIC CFLAGS=-fPIC, x64)
-./configure --enable-unicode --disable-shared --with-libpng=builtin --with-zlib=builtin --with-expat=builtin --with-gtk3=yes --with-libiconv=no
+./configure --enable-unicode --disable-shared --with-libpng=builtin --with-zlib=builtin --with-expat=builtin --with-gtk=2 --with-libiconv=no
 MadEdit-Mod
 ./configure --with-boost=${HOME}/boost_1_65_0 --with-wxdir=${HOME}/wxWidgets-3.1.0
 
