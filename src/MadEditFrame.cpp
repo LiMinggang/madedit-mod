@@ -4490,8 +4490,6 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 		{
 			m_Notebook->SetSelection( m_Notebook->GetPageCount() - 1 );
 		}
-		
-		madedit->ConfigNewDocument();
 	}
 
 	if( !filename.IsEmpty() )
@@ -4534,6 +4532,10 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 			}
 			madedit->RestoreBookmarks( bmlines );
 		}
+	}
+	else
+	{
+		madedit->ConfigNewDocument();
 	}
 
 	wxString str;
