@@ -601,28 +601,39 @@ class FileCaretPosManager
 		}
 	};
 	std::list<FilePosData> files;
-	
+	bool IsFound(const wxString & name) {
+		int hash = wxStringHash::stringHash( (wchar_t*)(name.wx_str()) );
+		std::list<FilePosData>::iterator it = files.begin();
+		std::list<FilePosData>::iterator itend = files.end();
+		while( it != itend ) {
+			if( it->hash == hash && it->name == name ) {
+				break;
+			}
+			++it;
+		}
+
+		return ( it != itend );
+	}
 	void Add( const wxString &name, const wxFileOffset &pos, const wxString &encoding, const wxString &fontname, int fontsize, int lspercent, int wrapmode, int editmode, std::vector<int>& bmlinenums ) {
 #ifdef __WXMSW__
 		wxString name0( name.Upper() );
 #else
 		const wxString &name0 = name;
 #endif
+		bool found = IsFound(name0);
 		unsigned long hash = wxStringHash::stringHash(( wchar_t * )name0.wx_str());
-
 		std::list<FilePosData>::iterator it = files.begin();
 		std::list<FilePosData>::iterator itend = files.end();
-		while( it != itend ) {
-			if( it->hash == hash && it->name == name0 ) {
+		while (it != itend) {
+			if (it->hash == hash && it->name == name) {
+				files.erase(it);
 				break;
 			}
 			++it;
 		}
 
 		FilePosData newfp( name0, pos, hash, encoding, fontname, fontsize, lspercent, wrapmode, editmode, bmlinenums );
-		if( it != itend ) {
-			files.erase(it);
-		}
+
 		files.push_front( newfp );
 
 		if( int( files.size() ) > max_count ) {
@@ -695,9 +706,12 @@ public:
 		cfg->Read( wxT( "MaxCount" ), &max_count );
 		FilePosData fpdata;
 		wxString entry( wxT( "file" ) ), text;
-		int idx = 1;
+		int idx = 1, valid_count = 0;
 		bool firsttry = true;
 		wxUniChar sep(g_MadConfigSeparator);
+		wxString bms;
+		wxArrayString bmks;
+		wxInt64 i64;
 
 		while( idx <= max_count && cfg->Read( entry + ( wxString() << idx ), &text ) ) {
 			if(text.IsEmpty()) {
@@ -707,9 +721,9 @@ public:
 
 			int bmp = text.Find(g_MadBmSeparator);
 			if(bmp != wxNOT_FOUND) {
-				wxString bms = text.Right( text.Len() - ( bmp + 1 ) );
+				bms = text.Right( text.Len() - ( bmp + 1 ) );
 				text = text.Left( bmp );
-				wxArrayString bmks = wxStringTokenize( bms, wxString(g_MadBmSeparator) );
+				bmks = wxStringTokenize( bms, wxString(g_MadBmSeparator) );
 				wxInt64 i64;
 				for(size_t i = 0; i < bmks.GetCount(); ++i) {
 					StrToInt64( bmks[i], i64 );
@@ -739,7 +753,6 @@ public:
 				fpdata.lspercent = 100;
 				fpdata.wrapmode = -1; 
 				fpdata.editmode = -1;
-				wxInt64 i64;
 
 				if( StrToInt64( text.Left( p ), i64 ) ) {
 					fpdata.pos = i64;
@@ -748,6 +761,10 @@ public:
 
 					if( p != wxNOT_FOUND ) {
 						fpdata.name = text.Left( p );
+						if(IsFound(fpdata.name)) {
+							++idx;
+							continue;
+						}
 						text = text.Right( text.Len() - ( p + 1 ) );
 						p = text.Find( sep );
 
@@ -802,14 +819,24 @@ public:
 					}
 					else { // old format
 						fpdata.name = text;
+						if(IsFound(fpdata.name)) {
+							++idx;
+							continue;
+						}
 					}
 
-					fpdata.hash = wxStringHash::stringHash( (wchar_t*)(fpdata.name.wx_str()) );
 					files.push_back( fpdata );
+					++valid_count;
 				}
 			}
 
 			++idx;
+		}
+
+		// Remove extra
+		for(; valid_count < max_count; ++valid_count) {
+			wxString entry( wxT( "file" ) ), text;
+				cfg->DeleteEntry( entry + ( wxString() << ( valid_count + 1 ) ), false );
 		}
 	}
 	wxFileOffset GetRestoreData( const wxString &name, wxString &encoding, wxString &fontname, int &fontsize, int& lspercent, int& wrapmode, int& editmode, std::vector<int>& bmlines ) {
