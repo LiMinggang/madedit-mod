@@ -589,7 +589,7 @@ class FileCaretPosManager
 		FilePosData( const wxString &n, const wxLongLong_t &p, unsigned long h, const wxString &e, const wxString &fn, int fs, int lsp, int wm, int em, std::vector<int>& bmlns )
 			: name( n ), pos( p ), hash( h ), encoding( e ), fontname( fn ), fontsize( fs ), lspercent(lsp), wrapmode(wm), editmode(em)
 		{
-			bmlinenums.swap( bmlns );
+			bmlinenums = bmlns;
 		}
 		FilePosData()
 			: pos( 0 ), hash( 0 ), fontsize( 0 ), lspercent( 0 ), wrapmode( -1 ), editmode( -1 )
@@ -607,12 +607,12 @@ class FileCaretPosManager
 		std::list<FilePosData>::iterator itend = files.end();
 		while( it != itend ) {
 			if( it->hash == hash && it->name == name ) {
-				break;
+				return true;
 			}
 			++it;
 		}
 
-		return ( it != itend );
+		return false;
 	}
 	void Add( const wxString &name, const wxFileOffset &pos, const wxString &encoding, const wxString &fontname, int fontsize, int lspercent, int wrapmode, int editmode, std::vector<int>& bmlinenums ) {
 #ifdef __WXMSW__
@@ -620,21 +620,18 @@ class FileCaretPosManager
 #else
 		const wxString &name0 = name;
 #endif
-		bool found = IsFound(name0);
 		unsigned long hash = wxStringHash::stringHash(( wchar_t * )name0.wx_str());
 		std::list<FilePosData>::iterator it = files.begin();
 		std::list<FilePosData>::iterator itend = files.end();
 		while (it != itend) {
-			if (it->hash == hash && it->name == name) {
+			if (it->hash == hash && it->name == name0) {
 				files.erase(it);
 				break;
 			}
 			++it;
 		}
 
-		FilePosData newfp( name0, pos, hash, encoding, fontname, fontsize, lspercent, wrapmode, editmode, bmlinenums );
-
-		files.push_front( newfp );
+		files.push_front( FilePosData( name0, pos, hash, encoding, fontname, fontsize, lspercent, wrapmode, editmode, bmlinenums ) );
 
 		if( int( files.size() ) > max_count ) {
 			files.pop_back();
@@ -650,7 +647,6 @@ public:
 		wxString name = madedit->GetFileName();
 
 		if( !name.IsEmpty() ) {
-			wxString fontname;
 			wxFileOffset pos = madedit->GetCaretPosition();
 			if(madedit->IsModified())
 			{
@@ -661,6 +657,7 @@ public:
 			int lspercent = (int)madedit->GetLineSpacing();
 			int wrapmode = madedit->GetWordWrapMode(); 
 			int editmode = madedit->GetEditMode(); /*emTextMode, emColumnMode, emHexMode*/
+			wxString fontname;
 			int fontsize;
 			std::vector<int> bmlinenums;
 			madedit->GetTextFont( fontname, fontsize );			
@@ -825,6 +822,7 @@ public:
 						}
 					}
 
+					fpdata.hash = wxStringHash::stringHash((wchar_t*)(fpdata.name.wx_str()));
 					files.push_back( fpdata );
 					++valid_count;
 				}
