@@ -619,22 +619,11 @@ class FileCaretPosManager
 			++it;
 		}
 
-		if( it == itend ) {
-			files.push_front( FilePosData( name0, pos, hash, encoding, fontname, fontsize, lspercent, wrapmode, editmode, bmlinenums ) );
-		}
-		else {
-			it->pos = pos;
-			it->encoding = encoding;
-			it->fontname = fontname;
-			it->fontsize = fontsize;
-			it->lspercent = lspercent;
-			it->wrapmode = wrapmode;
-			it->editmode = editmode; 
-			it->bmlinenums.swap( bmlinenums );
-			FilePosData newfp(*it);
+		FilePosData newfp( name0, pos, hash, encoding, fontname, fontsize, lspercent, wrapmode, editmode, bmlinenums );
+		if( it != itend ) {
 			files.erase(it);
-			files.push_front( newfp );
 		}
+		files.push_front( newfp );
 
 		if( int( files.size() ) > max_count ) {
 			files.pop_back();
@@ -3304,7 +3293,7 @@ void MadEditFrame::CreateGUIControls( void )
 		mystring.Empty();
 	}
 	
-	m_FontSizes = new wxComboBox( fontEoncodingBar, ID_FONTSIZES, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), fontsize, wxCB_READONLY );
+	m_FontSizes = new wxComboBox( fontEoncodingBar, ID_FONTSIZES, wxEmptyString, wxDefaultPosition, wxSize( 90, -1 ), fontsize, wxCB_READONLY );
 	fontEoncodingBar->AddControl( m_FontSizes );
 	fontEoncodingBar->AddTool( menuIncFontSize, wxT( "menuIncFontSize" ), m_ImageList->GetBitmap( fontsizeinc_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _( "Increase Font Size" ), _( "Make your text a bit bigger" ), nullptr );
 	fontEoncodingBar->AddTool( menuDecFontSize, wxT( "menuDecFontSize" ), m_ImageList->GetBitmap( fontsizedec_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _( "Decrease Font Size" ), _( "Make your text a bit smaller" ), nullptr );
@@ -3316,7 +3305,7 @@ void MadEditFrame::CreateGUIControls( void )
 		mystring.Empty();
 	}
 	
-	m_LineSpaces = new wxComboBox( fontEoncodingBar, ID_LINESPACES, wxEmptyString, wxDefaultPosition, wxSize( 50, -1 ), linespaces, wxCB_READONLY );
+	m_LineSpaces = new wxComboBox( fontEoncodingBar, ID_LINESPACES, wxEmptyString, wxDefaultPosition, wxSize( 90, -1 ), linespaces, wxCB_READONLY );
 	fontEoncodingBar->AddControl( m_LineSpaces );
 	m_Encodings->Bind( wxEVT_COMBOBOX, &MadEditFrame::OnFontEncoding, this );
 	m_Syntaxs->Bind( wxEVT_COMBOBOX, &MadEditFrame::OnFontEncoding, this );
