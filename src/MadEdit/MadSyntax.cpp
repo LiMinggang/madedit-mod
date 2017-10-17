@@ -25,6 +25,8 @@
 
 extern wxString g_MadEditHomeDir;
 
+const wxColour MadDefBmkColor(wxT("DeepSkyBlue")), MadDefBmkBgColor(wxT("MediumBlue"));
+
 const wxChar *SystemAttributesName[] =
 {
 	wxT( "Text" ), wxT( "Delimiter" ), wxT( "Space" ), wxT( "Number" ), wxT( "String" ), wxT( "Comment" ),

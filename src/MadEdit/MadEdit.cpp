@@ -2523,8 +2523,16 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 							int b = m_RowHeight < 24 ? 1 : m_RowHeight / 24;
 							
 							MadAttributes* attr = GetSyntax()->GetAttributes(aeBookmark);
-							dc->SetPen(*wxThePenList->FindOrCreatePen(attr->color, b, wxPENSTYLE_SOLID));
-							dc->SetBrush(*wxTheBrushList->FindOrCreateBrush(attr->bgcolor));
+							wxColour * clr = &MadDefBmkColor, *bgclr = &MadDefBmkBgColor;
+							if(attr)
+							{
+								if(attr->color != wxNullColor)
+									clr = &attr->color;
+								if(attr->bgcolor != wxNullColor)
+									bgclr = &attr->bgcolor;
+							}
+							dc->SetPen(*wxThePenList->FindOrCreatePen(*clr, b, wxPENSTYLE_SOLID));
+							dc->SetBrush(*wxTheBrushList->FindOrCreateBrush(*bgclr));
 							
 							wxRect rdrect(l /*+ offset*/, row_top + b, lwidth - b, m_RowHeight - b * 3 / 2);
 							double r = m_RowHeight < 18 ? 3.0 : m_RowHeight / 6.0;
