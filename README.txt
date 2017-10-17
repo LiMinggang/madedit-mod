@@ -16,18 +16,19 @@ A. Linux, FreeBSD, and Unix-like OS (__WXGTK__):
       1. wxWidgets-3.1.0 or higher with Unicode and IPC enabled
       2. Boost-1.56.0 or higher(build Boost-Python)(1.65 is recommended)
 
-      (install gtk2-devel/libgtk-3-dev(Ubuntu)/gtk3-devel(Fedora) gettext-devel automake rpm-build)
+      (install gtk2-devel/gtk3-devel gettext-devel automake rpm-build (Fedora/Mageia))
+      gtk+2.0-dev/libgtk-3-dev automake (Ubuntu/Debian/ElementaryOS)
       copy wxwin.m4 to usr/share/acloXXX/ or install wxGTK-devel
 
 B. MS Windows (__WXMSW__):
    a. MinGW32/GNU C++ 3.x (wxDevCpp):
       Required Libraries to compile:
       1. wxWidgets-3.1.0 or higher with Unicode and IPC enabled
-      2. Boost-1.56.0 or higher(build Boost-Python)(1.65 is recommended)
+      2. Boost-1.56.0 or higher(1.65 is recommended)
    b. Visual C++ 7.1 (VS.Net 2005) or higher:
       Required Libraries to compile:
       1. wxWidgets-3.1.0 or higher with Unicode and IPC enabled
-      2. Boost-1.56.0 or higher(build Boost-Python)(1.65 is recommended)
+      2. Boost-1.56.0 or higher(1.65 is recommended)
       3. Set WXWIN and BOOST to the root directory of your local ones
 
 P.S.: Please put the debug info(.pdb) under the App directory in case there was a
