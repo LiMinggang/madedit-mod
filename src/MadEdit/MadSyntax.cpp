@@ -25,7 +25,7 @@
 
 extern wxString g_MadEditHomeDir;
 
-const wxColour MadDefBmkColor(wxT("DeepSkyBlue")), MadDefBmkBgColor(wxT("MediumBlue"));
+wxColour g_MadDefBmkColor(wxT("DeepSkyBlue")), g_MadDefBmkBgColor(wxT("MediumBlue"));
 
 const wxChar *SystemAttributesName[] =
 {

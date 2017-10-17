@@ -2116,6 +2116,7 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 	const int wspace = m_TextFontSpaceWidth/*GetUCharWidth( 0x20 )*/;
 	wxString lnums;
 	wxColor current_bgcolor;
+	wxColour * clr = &g_MadDefBmkColor, *bgclr = &g_MadDefBmkBgColor;
 
 	if( m_DisplayLineNumber )
 	{
@@ -2523,12 +2524,11 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 							int b = m_RowHeight < 24 ? 1 : m_RowHeight / 24;
 							
 							MadAttributes* attr = GetSyntax()->GetAttributes(aeBookmark);
-							wxColour * clr = &MadDefBmkColor, *bgclr = &MadDefBmkBgColor;
 							if(attr)
 							{
-								if(attr->color != wxNullColor)
+								if(attr->color != wxNullColour)
 									clr = &attr->color;
-								if(attr->bgcolor != wxNullColor)
+								if(attr->bgcolor != wxNullColour)
 									bgclr = &attr->bgcolor;
 							}
 							dc->SetPen(*wxThePenList->FindOrCreatePen(*clr, b, wxPENSTYLE_SOLID));

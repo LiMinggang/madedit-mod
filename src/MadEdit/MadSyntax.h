@@ -305,5 +305,5 @@ private: // for Printing
 };
 
 extern const wxString MadPlainTextTitle;
-extern const wxColour MadDefBmkColor, MadDefBmkBgColor;
+extern wxColour g_MadDefBmkColor, g_MadDefBmkBgColor;
 #endif
