@@ -103,6 +103,7 @@ Known issues(that may not be fixed in future releases):
 3. HighlightWord would not work if the caret is at the end of the line
 4. Scroll function on Right click menu of scroll bars only works with Windows
 5. '*' is allowed in file name under Linux/Unix but is used as delimiter for file name and line number
+6. Alt+LeftDown to toggle bookmark does not work on Ubuntu because Alt was a special key(?) for the OS
 
 Feature/issues to be released
 -----------------------------
@@ -139,6 +140,7 @@ Fix: Enable 80 columns hint only if it's in fix width mode
 Fix: Use GTK2 for Ubuntu release to fix the issue of wxWidgets with GTK3
 Fix: Support '|' in filename('*' will not be supported)
 Fix: File change detect issue on close
+Fix: Improvement on file pos manager
 Update Astyle to latest code
 Update Hunspell to latest code
 Update translations
