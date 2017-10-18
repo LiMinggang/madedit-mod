@@ -633,7 +633,7 @@ bool HunspellImpl::spell(const std::string& word, int* info, std::string* root) 
   }
 
   // recursive breaking at break points
-  if (!wordbreak.empty()) {
+  if (!wordbreak.empty() && !(*info & SPELL_FORBIDDEN)) {
 
     int nbr = 0;
     wl = scw.size();
@@ -1069,7 +1069,11 @@ std::vector<std::string> HunspellImpl::suggest(const std::string& word) {
             wspace.append("-");
             wspace.append(scw.substr(dash_pos + 1));
           }
-          insert_sug(slst, wspace);
+          int info = 0;
+          if (pAMgr && pAMgr->get_forbiddenword())
+            checkword(wspace, &info, NULL);
+          if (!(info & SPELL_FORBIDDEN))
+            insert_sug(slst, wspace);
         }
         nodashsug = 0;
       }

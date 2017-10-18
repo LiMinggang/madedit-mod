@@ -42,7 +42,7 @@
 #include <iostream>
 #include <iomanip>
 
-//#include "config.h" // for macro VERSION
+#include "config.h" // for macro VERSION
 #include "hunspell.hxx"
 
 using namespace std;
