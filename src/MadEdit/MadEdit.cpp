@@ -1997,6 +1997,7 @@ bool IsTheSame( vector< T >& First, T * Second, size_t Len )
 	T *p = Second;
 	size_t i = 0;
 
+	wxASSERT(Len <= First.size());
 	while( i < Len )
 	{
 		if( First[i++] != *( p++ ) ) return false;
