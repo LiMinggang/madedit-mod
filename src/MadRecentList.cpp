@@ -171,7 +171,7 @@ void MadRecentList::AddFileToHistory(const wxString& file)
         const wxFileName fnOld(m_fileHistory[i]);
 
         wxString pathInMenu;
-        if ( fnOld.GetPath() == fnNew.GetPath() )
+        if ( fnOld.GetPath() == fnNew.GetPath() && m_isFileHistory )
         {
             pathInMenu = fnOld.GetFullName();
         }

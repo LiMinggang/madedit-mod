@@ -140,6 +140,7 @@ Fix: Bookmark Only in search dialog does not work correctly
 Fix: Enable 80 columns hint only if it's in fix width mode
 Fix: Use GTK2 for Ubuntu release to fix the issue of wxWidgets with GTK3
 Fix: Support '|' in filename('*' will not be supported)
+Fix: Display issue of '\' on Recent Find/Replace menu
 Fix: File change detect issue on close
 Fix: Improvement on file pos manager
 Update Astyle to latest code

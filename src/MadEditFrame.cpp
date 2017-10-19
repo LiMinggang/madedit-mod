@@ -3452,7 +3452,7 @@ void MadEditFrame::CreateGUIControls( void )
 	/*g_Menu_HScrollPop*/
 
 	m_QuickSearch = new wxComboBox( m_QuickSearchBar, ID_QUICKSEARCH, wxEmptyString, wxDefaultPosition, wxSize( 211, -1 ) );
-	g_RecentFindText = new MadRecentList( MAX_RECENTSEARCHS, ID_RECENTFINDTEXT1, true ); //Should be freed in SearchDialog
+	g_RecentFindText = new MadRecentList( MAX_RECENTSEARCHS, ID_RECENTFINDTEXT1, true, false ); //Should be freed in SearchDialog
 	wxString oldpath = m_Config->GetPath();
 	m_Config->SetPath( wxT( "/RecentFindText" ) );
 	g_RecentFindText->Load( *m_Config );

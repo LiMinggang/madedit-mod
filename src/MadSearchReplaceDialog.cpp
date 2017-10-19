@@ -325,7 +325,7 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	m_RecentFindText = g_RecentFindText; //new MadRecentList(20, ID_RECENTFINDTEXT1, true);
 	m_RecentFindText->UseMenu( &WxPopupMenuRecentFindText );
 	m_RecentFindText->AddFilesToMenu();
-	m_RecentReplaceText = new MadRecentList( 20, ID_RECENTREPLACETEXT1, true );
+	m_RecentReplaceText = new MadRecentList( 20, ID_RECENTREPLACETEXT1, true, false );
 	m_RecentReplaceText->UseMenu( &WxPopupMenuRecentReplaceText );
 	wxConfigBase *m_Config = wxConfigBase::Get( false );
 	wxString oldpath = m_Config->GetPath();
