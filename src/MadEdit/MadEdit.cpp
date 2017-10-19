@@ -2395,7 +2395,7 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 
 			if( left < maxright )     // paint range color at rest of row
 			{
-				wxColor c = m_Syntax->nw_CurrentBgColor;
+				const wxColor& c = m_Syntax->nw_CurrentBgColor;
 
 				if( c != current_bgcolor )
 				{
