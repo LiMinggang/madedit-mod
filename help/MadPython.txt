@@ -301,6 +301,13 @@ std::string InputBox(std::string message, std::string caption = "Input Text")
 void SetInsertPairForSelection( bool value )
 bool GetInsertPairForSelection()
 bool IsZeroSelected()
+void ToggleBookmarkInSearch( bool bookmark )
+void CutDelBookmarkedLines( bool copyLines = false )
+void DeleteUnmarkedLines()
+void CopyUnmarkedLines()
+void CutUnmarkedLines()
+void CopyCutDeleteUnmarkedLines( bool copyLines = false, bool deleteLines = false )
+void ReplaceBookmarkedLines()
 
 MadEditCommand
 ====

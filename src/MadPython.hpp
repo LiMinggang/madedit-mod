@@ -1845,6 +1845,7 @@ namespace mad_python {
 
 			return mad_py::make_tuple( words, chars, spaces, lines, halfwidths, fullwidths, std::string( str.mb_str() ) );
 		}
+
 		void SetColumnSelection( long startlineid, long startxpos, long hlines, long wlines ) {
 			if( g_ActiveMadEdit )
 			{ g_ActiveMadEdit->SetColumnSelection( startlineid, startxpos, hlines, wlines ); }
@@ -1888,6 +1889,41 @@ namespace mad_python {
 				g_MainFrame->OnToolsHtml2PlainText( event );
 			}
 		}
+
+		void ToggleBookmarkInSearch( bool bookmark ) {
+			if( ( g_ActiveMadEdit ) && ( !g_ActiveMadEdit->IsReadOnly() ) )
+			{ g_ActiveMadEdit->ToggleBookmarkInSearch(bookmark); }
+		}
+
+		void CutDelBookmarkedLines( bool copyLines = false )  {
+			if( ( g_ActiveMadEdit ) && ( !g_ActiveMadEdit->IsReadOnly() ) )
+			{ g_ActiveMadEdit->CutDelBookmarkedLines(copyLines); }
+		}
+
+		void DeleteUnmarkedLines() {
+			if( ( g_ActiveMadEdit ) && ( !g_ActiveMadEdit->IsReadOnly() ) )
+			{ g_ActiveMadEdit->DeleteUnmarkedLines(); }
+		}
+
+		void CopyUnmarkedLines()  {
+			if( ( g_ActiveMadEdit ) && ( !g_ActiveMadEdit->IsReadOnly() ) )
+			{ g_ActiveMadEdit->CopyUnmarkedLines(); }
+		}
+
+		void CutUnmarkedLines()  {
+			if( ( g_ActiveMadEdit ) && ( !g_ActiveMadEdit->IsReadOnly() ) )
+			{ g_ActiveMadEdit->CutUnmarkedLines(); }
+		}
+
+		void CopyCutDeleteUnmarkedLines( bool copyLines = false, bool deleteLines = false ) {
+			if( ( g_ActiveMadEdit ) && ( !g_ActiveMadEdit->IsReadOnly() ) )
+			{ g_ActiveMadEdit->CopyCutDeleteUnmarkedLines( copyLines, deleteLines ); }
+		}
+
+		void ReplaceBookmarkedLines() {
+			if( ( g_ActiveMadEdit ) && ( !g_ActiveMadEdit->IsReadOnly() ) )
+			{ g_ActiveMadEdit->ReplaceBookmarkedLines(); }
+		}
 	};
 
 	int MsgBox(const std::string& message, const std::string& caption = "Message", long style = wxOK | wxCENTRE)
@@ -1921,6 +1957,8 @@ BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( SetCaretPosition_member_overloads, SetCa
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( GetLine_member_overloads, GetLine, 1, 3 )
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( GetText_member_overloads, GetText, 0, 1 )
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( SetSelection_member_overloads, SetSelection, 2, 3 )
+BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( CutDelBookmarkedLines_member_overloads, CutDelBookmarkedLines, 0, 1 )
+BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( CopyCutDeleteUnmarkedLines_member_overloads, CopyCutDeleteUnmarkedLines, 0, 2 )
 
 BOOST_PYTHON_FUNCTION_OVERLOADS( InputBox_overloads, mad_python::InputBox, 1, 2 )
 BOOST_PYTHON_FUNCTION_OVERLOADS( MsgBox_overloads, mad_python::MsgBox, 1, 3 )
@@ -2097,7 +2135,13 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.def( "Markdown2Html", &PyMadEdit::Markdown2Html, "" )
 	.def( "Html2PlainText", &PyMadEdit::Html2PlainText, "" )
 	.def( "SelectWholeLine", &PyMadEdit::SelectWholeLine, "" )
+	.def( "ToggleBookmarkInSearch", &PyMadEdit::ToggleBookmarkInSearch, "Doc string" )
 	.def( "GetIndentCountByPos", &PyMadEdit::GetIndentCountByPos, "" )
+	.def( "CutDelBookmarkedLines", &PyMadEdit::CutDelBookmarkedLines, "" )
+	.def( "DeleteUnmarkedLines", &PyMadEdit::DeleteUnmarkedLines, "" )
+	.def( "CopyUnmarkedLines", &PyMadEdit::CopyUnmarkedLines, "" )
+	.def( "CutUnmarkedLines", &PyMadEdit::CutUnmarkedLines, "" )
+	.def( "ReplaceBookmarkedLines", &PyMadEdit::ReplaceBookmarkedLines, "" )
 	.def( "FindTextNext", &PyMadEdit::FindTextNext, FindTextNext_member_overloads( args( "text", "bRegex", "bCaseSensitive", "bWholeWord", "bDotMatchNewline", "rangeFrom", "rangeTo" ), "Doc string" )[return_value_policy<return_by_value>()] )
 	.def( "FindTextPrevious", &PyMadEdit::FindTextPrevious, FindTextPrevious_member_overloads( args( "text", "bRegex", "bCaseSensitive", "bWholeWord", "bDotMatchNewline", "rangeFrom", "rangeTo" ), "Doc string" )[return_value_policy<return_by_value>()] )
 	.def( "FindHexNext", &PyMadEdit::FindHexNext, FindHexNext_member_overloads( args( "hexstr", "rangeFrom", "rangeTo" ), "Doc string" )[return_value_policy<return_by_value>()] )
@@ -2118,6 +2162,7 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.def( "GetLine", &PyMadEdit::GetLine, GetLine_member_overloads( args( "line", "maxlen", "ignoreBOM" ), "Doc string" )[return_value_policy<return_by_value>()] )
 	.def( "SetSelection", &PyMadEdit::SetSelection, SetSelection_member_overloads( args( "beginpos", "endpos", "bCaretAtBeginPos" ), "Doc string" ) )
 	.def( "GetText", &PyMadEdit::GetText, GetText_member_overloads( args( "ignoreBOM" ), "Doc string" )[return_value_policy<return_by_value>()] )
+	.def( "CopyCutDeleteUnmarkedLines", &PyMadEdit::CopyCutDeleteUnmarkedLines, CopyCutDeleteUnmarkedLines_member_overloads( args( "copyLines", "deleteLines" ), "Doc string" ) )
 	;
 	enum_<MadEditCmd>( "MadEditCommand" )
 	.value( "None", ecNone )
