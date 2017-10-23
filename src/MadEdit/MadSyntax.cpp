@@ -137,9 +137,10 @@ void MadSyntax::LoadSyntaxFiles()
 					if( title == MadPlainTextTitle )
 					{
 						// "Plain Text" synfile must be first item of g_TitleSynfileTable
-						if( g_TitleSynfileTable.empty() || g_TitleSynfileTable[0].first != title )
+						title = wxGetTranslation(title);
+						if( g_TitleSynfileTable.empty() || g_TitleSynfileTable[0].first != title)
 						{
-							g_TitleSynfileTable.insert( g_TitleSynfileTable.begin(), pair<wxString, wxString>( wxGetTranslation(title), filename ) );
+							g_TitleSynfileTable.insert( g_TitleSynfileTable.begin(), pair<wxString, wxString>(title, filename ) );
 						}
 					}
 					else
@@ -150,7 +151,7 @@ void MadSyntax::LoadSyntaxFiles()
 
 						if( it != itend )
 						{
-							if( g_TitleSynfileTable[0].first == MadPlainTextTitle )
+							if( g_TitleSynfileTable[0].first == wxGetTranslation(MadPlainTextTitle) )
 							{
 								++it;
 							}
@@ -225,9 +226,9 @@ void MadSyntax::LoadSyntaxFiles()
 	}
 
 	// make sure "Plain Text" was added, otherwise add it
-	if( g_TitleSynfileTable.empty() || g_TitleSynfileTable[0].first != MadPlainTextTitle )
+	if( g_TitleSynfileTable.empty() || g_TitleSynfileTable[0].first != wxGetTranslation(MadPlainTextTitle) )
 	{
-		g_TitleSynfileTable.insert( g_TitleSynfileTable.begin(), pair<wxString, wxString>( MadPlainTextTitle, wxEmptyString ) );
+		g_TitleSynfileTable.insert( g_TitleSynfileTable.begin(), pair<wxString, wxString>(wxGetTranslation(MadPlainTextTitle), wxEmptyString ) );
 	}
 
 	// add "Default*" to the g_NameSchfileTable
