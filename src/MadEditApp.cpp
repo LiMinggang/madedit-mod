@@ -566,9 +566,11 @@ int MadEditApp::OnExit()
 	m_SigleAppChecker = nullptr;
 
 	if( m_AppServer )
+	{
 		delete m_AppServer;
+		m_AppServer = nullptr;
+	}
 
-	m_AppServer = nullptr;
 	if( g_Locale )
 		wxDELETE( g_Locale );
 	g_Locale = nullptr;
@@ -856,39 +858,43 @@ void ScanForLocales()
 
 void MadEditApp::InitLocale()
 {
-	wxString strlang;
-	wxConfigBase *cfg = wxConfigBase::Get( false );
-	cfg->Read( wxT( "/MadEdit/Language" ), &strlang );
-	int lang = g_LanguageValue[0];
-
-	if( !strlang.IsEmpty() )
+	static bool inited = false;
+	if( !inited )
 	{
-		strlang.MakeLower();
+		wxString strlang;
+		wxConfigBase *cfg = wxConfigBase::Get( false );
+		cfg->Read( wxT( "/MadEdit/Language" ), &strlang );
+		int lang = g_LanguageValue[0];
 
-		for( size_t idx = 1; idx < g_LanguageString.GetCount(); ++idx )
+		if( !strlang.IsEmpty() )
 		{
-			if( strlang == g_LanguageString[idx].Lower() )
+			strlang.MakeLower();
+
+			for( size_t idx = 1; idx < g_LanguageString.GetCount(); ++idx )
 			{
-				lang = g_LanguageId[idx];
-				break;
+				if( strlang == g_LanguageString[idx].Lower() )
+				{
+					lang = g_LanguageId[idx];
+					break;
+				}
 			}
 		}
+
+		if( g_Locale )
+		{
+			wxDELETE( g_Locale );
+			g_Locale = 0;
+		}
+
+		g_Locale = new wxLocale( lang );
+
+		// g_Locale.Init(lang);
+		for( size_t idx = 0; idx < g_LocaleDirPrefix.GetCount(); ++idx )
+		{
+			g_Locale->AddCatalogLookupPathPrefix( g_LocaleDirPrefix[idx] );
+		}
+
+		g_Locale->AddCatalog( g_MadLanguageFileName );
 	}
-
-	if( g_Locale )
-	{
-		wxDELETE( g_Locale );
-		g_Locale = 0;
-	}
-
-	g_Locale = new wxLocale( lang );
-
-	// g_Locale.Init(lang);
-	for( size_t idx = 0; idx < g_LocaleDirPrefix.GetCount(); ++idx )
-	{
-		g_Locale->AddCatalogLookupPathPrefix( g_LocaleDirPrefix[idx] );
-	}
-
-	g_Locale->AddCatalog( g_MadLanguageFileName );
 }
 
