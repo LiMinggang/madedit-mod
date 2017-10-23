@@ -372,7 +372,10 @@ bool MadEditApp::OnInit()
 
 			if( !m_AppServer->Create( g_MadServerStr ) )
 			{
+				ScanForLocales();
+				InitLocale();
 				wxLogDebug( wxGetTranslation(_( "Failed to create an IPC service." ) ));
+				return false;
 			}
 		}
 		else
@@ -423,6 +426,8 @@ bool MadEditApp::OnInit()
 			}
 			else
 			{
+				ScanForLocales();
+				InitLocale();
 				MadMessageBox( wxGetTranslation(_( "Sorry, the existing instance may be too busy too respond.\nPlease close any open dialogs and retry." )),
 							   wxT( "MadEdit-Mod" ), wxICON_INFORMATION | wxOK );
 			}
@@ -452,12 +457,6 @@ bool MadEditApp::OnInit()
 #endif
 
 	// init locale
-	for( long i = 0; i < g_LanguageCount; ++i )
-	{
-		g_EnhancedLangNameMap[g_LanguageValue[i]] = wxString( g_LanguageStr[i] );
-		//g_EnhancedLangNameBMap.insert(mad_lang(g_LanguageValue[i], wxString(g_LanguageStr[i])));
-	}
-
 	ScanForLocales();
 	InitLocale();
 	// set colors
@@ -789,6 +788,12 @@ void MadEditApp::ShowMainFrame( MadEditFrame *mainFrame, bool maximize )
 
 void ScanForLocales()
 {
+	for( long i = 0; i < g_LanguageCount; ++i )
+	{
+		g_EnhancedLangNameMap[g_LanguageValue[i]] = wxString( g_LanguageStr[i] );
+		//g_EnhancedLangNameBMap.insert(mad_lang(g_LanguageValue[i], wxString(g_LanguageStr[i])));
+	}
+
 	g_LanguageString.Empty();
 	g_LocaleDirPrefix.Empty();
 	// System Default
@@ -858,43 +863,39 @@ void ScanForLocales()
 
 void MadEditApp::InitLocale()
 {
-	static bool inited = false;
-	if( !inited )
+	wxString strlang;
+	wxConfigBase *cfg = wxConfigBase::Get( false );
+	cfg->Read( wxT( "/MadEdit/Language" ), &strlang );
+	int lang = g_LanguageValue[0];
+
+	if( !strlang.IsEmpty() )
 	{
-		wxString strlang;
-		wxConfigBase *cfg = wxConfigBase::Get( false );
-		cfg->Read( wxT( "/MadEdit/Language" ), &strlang );
-		int lang = g_LanguageValue[0];
+		strlang.MakeLower();
 
-		if( !strlang.IsEmpty() )
+		for( size_t idx = 1; idx < g_LanguageString.GetCount(); ++idx )
 		{
-			strlang.MakeLower();
-
-			for( size_t idx = 1; idx < g_LanguageString.GetCount(); ++idx )
+			if( strlang == g_LanguageString[idx].Lower())
 			{
-				if( strlang == g_LanguageString[idx].Lower() )
-				{
-					lang = g_LanguageId[idx];
-					break;
-				}
+				lang = g_LanguageId[idx];
+				break;
 			}
 		}
-
-		if( g_Locale )
-		{
-			wxDELETE( g_Locale );
-			g_Locale = 0;
-		}
-
-		g_Locale = new wxLocale( lang );
-
-		// g_Locale.Init(lang);
-		for( size_t idx = 0; idx < g_LocaleDirPrefix.GetCount(); ++idx )
-		{
-			g_Locale->AddCatalogLookupPathPrefix( g_LocaleDirPrefix[idx] );
-		}
-
-		g_Locale->AddCatalog( g_MadLanguageFileName );
 	}
+
+	if( g_Locale )
+	{
+		wxDELETE( g_Locale );
+		g_Locale = 0;
+	}
+
+	g_Locale = new wxLocale( lang );
+
+	// g_Locale.Init(lang);
+	for( size_t idx = 0; idx < g_LocaleDirPrefix.GetCount(); ++idx )
+	{
+		g_Locale->AddCatalogLookupPathPrefix( g_LocaleDirPrefix[idx] );
+	}
+
+	g_Locale->AddCatalog( g_MadLanguageFileName );
 }
 
