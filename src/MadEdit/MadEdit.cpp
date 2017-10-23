@@ -776,7 +776,7 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_Config->SetPath( wxT( "/MadEdit" ) );
 	wxString defaultenc;
 	m_Config->Read( wxT( "DefaultEncoding" ), &defaultenc );
-	m_Syntax = MadSyntax::GetSyntaxByTitle( MadPlainTextTitle );
+	m_Syntax = MadSyntax::GetSyntaxByTitle( wxGetTranslation(MadPlainTextTitle) );
 	wxASSERT( m_Syntax != 0 );
 	if(m_SpellCheckerPtr)
 		m_SpellCheckerPtr->SetSyntaxDictionary(m_Syntax->GetSyntaxDictionary());

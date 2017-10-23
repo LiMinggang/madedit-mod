@@ -3081,7 +3081,7 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 
 			if( m_Syntax == nullptr )
 			{
-				m_Syntax = MadSyntax::GetSyntaxByTitle( MadPlainTextTitle );
+				m_Syntax = MadSyntax::GetSyntaxByTitle( wxGetTranslation(MadPlainTextTitle) );
 			}
 		}
 		wxASSERT( m_Syntax != 0 );
@@ -3182,7 +3182,7 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 
 				if( m_Syntax == nullptr )
 				{
-					m_Syntax = MadSyntax::GetSyntaxByTitle( MadPlainTextTitle );
+					m_Syntax = MadSyntax::GetSyntaxByTitle( wxGetTranslation(MadPlainTextTitle) );
 				}
 			}
 		}
@@ -3658,7 +3658,7 @@ bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 
 		if( tmp_Syntax == nullptr )
 		{
-			tmp_Syntax = MadSyntax::GetSyntaxByTitle( MadPlainTextTitle );
+			tmp_Syntax = MadSyntax::GetSyntaxByTitle( wxGetTranslation(MadPlainTextTitle) );
 		}
 		wxASSERT( tmp_Syntax != 0 );
 	}
