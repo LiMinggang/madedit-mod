@@ -1,21 +1,27 @@
-Mod v0.4.9
-1.New: Change editor encoding of MadPython dialog according to current active edit
-2.New: Customizable search result display length #233
-3.New: New MadPython API GetRangeText
-4.New: More checks on numbers reading from config file, more robust code
-5.New: New predefined file associations(.tcl, .yaml, etc)
-6.Fix: IPC failure on Linux #234
-7.Fix: Bugs found by CPPCheck
-8.Fix: MadPython can't take chars not encoded by current encoding
-9.Fix: Restore default behavior of click on line number area
-10.Fix: Hang on closing Option Dialog if click Code preview edit on Source formatter tab #235
-11.Fix: Left double click would move caret forward
-12.Fix: Merge Hunspell latest fix
-13.Fix: Can't enable personal dictionary on Mageia/Linux #238
-14.Update C++ syntax to C++11
-15.Update uchardet to latest version
-16.Update Astyle to 3.0.1
-17.Update Credits on About Dialog
-18.Update Translations
-19.Minor code improvement
-20.Minor issue in MadPython scripts
+Mod v0.4.10
+1.New: Settings for new document in Options
+2.New: Default font for document
+3.New: Enforce default encoding
+4.New: Toolbar for Encoding/Font/Font Size/Line Spacing
+5.New: Perl style regex match in Replace
+6.New: Copy/Cut unbookmarked lines
+7.New: Enable resize of search/replace input
+8.New: Merge bookmark to line number area(From wxMedit), use Alt+LeftClick to toggle
+9.New: Save bookmark to config file
+10.Fix: Crash in Cut/Delete/Replace bookmarked/unbookmarked lines
+11.Fix: Disable resize of Option dialog(hang UI)
+12.Fix: Restore select the whole line by left click #240
+13.Fix: Refactor Option dialog with wxSmith and allow resize
+14.Fix: Font size issue of fix width mode in switching between different fonts
+15.Fix: Incorrect displaying DND mouse ICON while clicking line number area in selection
+16.Fix: Wrong file filter of Open File dialog
+17.Fix: Bookmark Only in search dialog does not work correctly
+18.Fix: Enable 80 columns hint only if it's in fix width mode
+19.Fix: Use GTK2 for Ubuntu release to fix the issue of wxWidgets with GTK3
+20.Fix: Support '|' in filename('*' will not be supported)
+21.Fix: Display issue of '\' on Recent Find/Replace menu
+22.Fix: File change detect issue on close
+23.Fix: Improvement on file pos manager
+24.Update Astyle to latest code
+25.Update Hunspell to latest code
+26.Update translations
