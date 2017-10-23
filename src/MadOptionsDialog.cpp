@@ -381,7 +381,7 @@ MadOptionsDialog::wxCmdEvtHandlerMap_t MadOptionsDialog::m_radiobutton_evt_map[]
         }\
     }
 #else
-#define ADD2CONTROLS(pWin)
+#define ADD2CONTROLS(ctrls, pWin)
 #define SET_CONTROLPARENT(pWin)
 #endif
 
