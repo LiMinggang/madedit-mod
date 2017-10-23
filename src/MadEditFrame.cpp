@@ -2786,6 +2786,14 @@ MadEditFrame::MadEditFrame( wxWindow *parent, wxWindowID id, const wxString &tit
 	Bind( wxEVT_TEXT, &MadEditFrame::OnSearchQuickFind, this, ID_QUICKSEARCH );
 	Bind( wxEVT_TEXT_ENTER, &MadEditFrame::OnSearchQuickFind, this, ID_QUICKSEARCH );
 	UpdateFontEncoding();
+
+	static bool initFileFilter = true;
+	if (initFileFilter)
+	{
+		MadEdit::m_FileFilter = wxString(wxGetTranslation(_T("All files (*;*.*)"))) + wxT("|") + wxFileSelectorDefaultWildcardStr + wxT("|") + wxGetTranslation(_T("Plain Text (*.txt)")) + 
+			wxT("|*.txt|") + MadEdit::m_FileFilter;
+		initFileFilter = false;
+	}
 }
 
 MadEditFrame::~MadEditFrame()
