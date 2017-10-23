@@ -1092,14 +1092,14 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	cnt=MadSyntax::GetSyntaxCount();
 	for(size_t i=0; i<cnt; ++i)
 	{
-		ComboBoxNewDocSyntax->Append(MadSyntax::GetSyntaxTitle(i));
+		ComboBoxNewDocSyntax->Append(wxGetTranslation(MadSyntax::GetSyntaxTitle(i)));
 	}
-	int index = ComboBoxNewDocSyntax->FindString(_T("Plain Text"));
+	int index = ComboBoxNewDocSyntax->FindString(wxGetTranslation(_T("Plain Text")));
 	if(index != wxNOT_FOUND)
 		ComboBoxNewDocSyntax->SetSelection(index);
 	m_NewDocEncoding = _("System Default");
 	m_NewDocLineEnding = nltDefault;
-	index = ComboBoxNewDocSyntax->FindString(_T("Plain Text"));
+	index = ComboBoxNewDocSyntax->FindString(wxGetTranslation(_T("Plain Text")));
 
 #ifdef __WXMSW__
 	wxString fontname( wxT( "Courier New" ) );
@@ -1391,7 +1391,7 @@ void MadOptionsDialog::LoadOptions(void)
 		wxASSERT(0);
 	}
 
-	ss = wxT("Plain Text");
+	ss = wxGetTranslation(wxT("Plain Text"));
 	cfg->Read( wxT( "NewDocumentSyntax" ), &ss );
 	index = ComboBoxNewDocSyntax->FindString(ss);
 	if(index == wxNOT_FOUND) index = 0;

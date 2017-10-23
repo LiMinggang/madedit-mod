@@ -12096,7 +12096,7 @@ void MadEdit::ConfigNewDocument()
 {
 	long ll;
 	bool bb;
-	wxString enc(wxT("System Default")), ss = wxT("Plain Text");
+	wxString enc(wxT("System Default")), ss = wxGetTranslation(wxT("Plain Text"));
 	m_Config->Read( wxT( "NewDocumentLineEnding" ), &ll, nltDefault );
 	m_NewLineType = (MadNewLineType)ll;
 	m_InsertNewLineType = (MadNewLineType)ll;
@@ -12114,7 +12114,7 @@ void MadEdit::ConfigNewDocument()
 	}
 
 	m_Config->Read( wxT( "NewDocumentSyntax" ), &ss );
-	if(MadSyntax::GetSyntaxByTitle( ss ) == nullptr) ss = wxT("Plain Text");
+	if(MadSyntax::GetSyntaxByTitle( ss ) == nullptr) ss = wxGetTranslation(wxT("Plain Text"));
 	SetSyntax(ss);
 	ss.Empty();
 	m_Config->Read( wxT( "NewDocumentTextFont" ), &ss );

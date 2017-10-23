@@ -139,7 +139,7 @@ void MadSyntax::LoadSyntaxFiles()
 						// "Plain Text" synfile must be first item of g_TitleSynfileTable
 						if( g_TitleSynfileTable.empty() || g_TitleSynfileTable[0].first != title )
 						{
-							g_TitleSynfileTable.insert( g_TitleSynfileTable.begin(), pair<wxString, wxString>( title, filename ) );
+							g_TitleSynfileTable.insert( g_TitleSynfileTable.begin(), pair<wxString, wxString>( wxGetTranslation(title), filename ) );
 						}
 					}
 					else
