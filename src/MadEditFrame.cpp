@@ -6058,8 +6058,18 @@ void MadEditFrame::OnOpenFileDir( wxCommandEvent& event )
 {
 	if( g_ActiveMadEdit )
 	{
+		// Todo: config for external tools
 		wxFileName fileName( g_ActiveMadEdit->GetFileName() );
-		wxLaunchDefaultApplication( fileName.GetPath() );
+		wxString envstr(wxT("EXTEXPLORER")), extexplorer;
+		bool hasext = wxGetEnv( envstr, &extexplorer );
+		if(hasext)
+		{
+			wxExecute( extexplorer + wxT( ' ' ) + fileName.GetPath() );
+		}
+		else
+		{
+			wxLaunchDefaultApplication( fileName.GetPath() );
+		}
 	}
 }
 
