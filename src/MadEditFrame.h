@@ -115,6 +115,7 @@ enum   // menu id
 	menuCopyFileName,
 	menuCopyFileNameNoExt,
 	menuCopyFileDir,
+	menuOpenFileDir,
 	menuCloseAllButThis,
 	menuCloseAllToTheLeft,
 	menuCloseAllToTheRight,
@@ -551,6 +552,7 @@ private:
 	void OnCopyFilePath( wxCommandEvent& event );
 	void OnCopyFileName( wxCommandEvent& event );
 	void OnCopyFileDir( wxCommandEvent& event );
+	void OnOpenFileDir( wxCommandEvent& event );
 	void OnFileToggleReadOnly( wxCommandEvent& event );
 
 	void OnEditUndo( wxCommandEvent& event );

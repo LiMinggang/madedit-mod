@@ -119,6 +119,10 @@ FreeBSD packaging (with FreeBSD 10.01)
 2. aclocal version in aclocal.m4
 3. stdc++ version
 
+Mod v0.4.11
+New: Open file path with default file explorer #243
+Fix: Message strings were not translated during initialization
+
 Mod v0.4.10
 1.New: Settings for new document in Options
 2.New: Default font for document

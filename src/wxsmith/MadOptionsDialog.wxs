@@ -331,7 +331,6 @@
 														<object class="sizeritem">
 															<object class="wxStaticText" name="ID_STATICTEXT3" variable="StaticText3" member="yes">
 																<label>Max line length before Line-Wrap (must restart MadEdit)</label>
-																<size>330,13</size>
 															</object>
 															<flag>wxALL|wxEXPAND</flag>
 															<border>2</border>
@@ -355,7 +354,6 @@
 														<object class="sizeritem">
 															<object class="wxStaticText" name="ID_STATICTEXT4" variable="StaticText4" member="yes">
 																<label>Columns of Wrap-By-Column</label>
-																<size>323,13</size>
 															</object>
 															<flag>wxALL|wxEXPAND</flag>
 															<border>2</border>
@@ -379,7 +377,6 @@
 														<object class="sizeritem">
 															<object class="wxStaticText" name="ID_STATICTEXT5" variable="StaticText5" member="yes">
 																<label>Columns of Tab</label>
-																<size>312,13</size>
 															</object>
 															<flag>wxALL|wxEXPAND</flag>
 															<border>2</border>
@@ -403,7 +400,6 @@
 														<object class="sizeritem">
 															<object class="wxStaticText" name="ID_STATICTEXT6" variable="StaticText6" member="yes">
 																<label>Columns of Indent</label>
-																<size>305,13</size>
 															</object>
 															<flag>wxALL|wxEXPAND</flag>
 															<border>2</border>

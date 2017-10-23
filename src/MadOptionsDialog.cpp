@@ -597,7 +597,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	EditMaxLineLength = new wxTextCtrl(Panel2, ID_EDITMAXLINELENGTH, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITMAXLINELENGTH"));
 	ADD2CONTROLS(controls, EditMaxLineLength);
 	BoxSizer9->Add(EditMaxLineLength, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticText3 = new wxStaticText(Panel2, ID_STATICTEXT3, _("Max line length before Line-Wrap (must restart MadEdit)"), wxDefaultPosition, wxSize(330,-1), 0, _T("ID_STATICTEXT3"));
+	StaticText3 = new wxStaticText(Panel2, ID_STATICTEXT3, _("Max line length before Line-Wrap (must restart MadEdit)"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT3"));
 	BoxSizer9->Add(StaticText3, 0, wxALL|wxEXPAND, 2);
 	BoxSizer8->Add(BoxSizer9, 0, wxALL|wxEXPAND, 2);
 	BoxSizer10 = new wxBoxSizer(wxHORIZONTAL);
@@ -605,7 +605,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	EditMaxColumns = new wxTextCtrl(Panel2, ID_EDITMAXCOLUMNS, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITMAXCOLUMNS"));
 	ADD2CONTROLS(controls, EditMaxColumns);
 	BoxSizer10->Add(EditMaxColumns, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticText4 = new wxStaticText(Panel2, ID_STATICTEXT4, _("Columns of Wrap-By-Column"), wxDefaultPosition, wxSize(323,-1), 0, _T("ID_STATICTEXT4"));
+	StaticText4 = new wxStaticText(Panel2, ID_STATICTEXT4, _("Columns of Wrap-By-Column"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT4"));
 	BoxSizer10->Add(StaticText4, 0, wxALL|wxEXPAND, 2);
 	BoxSizer8->Add(BoxSizer10, 0, wxALL|wxEXPAND, 2);
 	BoxSizer11 = new wxBoxSizer(wxHORIZONTAL);
@@ -613,7 +613,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	EditTabColumns = new wxTextCtrl(Panel2, ID_EDITTABCOLUMNS, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITTABCOLUMNS"));
 	ADD2CONTROLS(controls, EditTabColumns);
 	BoxSizer11->Add(EditTabColumns, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticText5 = new wxStaticText(Panel2, ID_STATICTEXT5, _("Columns of Tab"), wxDefaultPosition, wxSize(312,-1), 0, _T("ID_STATICTEXT5"));
+	StaticText5 = new wxStaticText(Panel2, ID_STATICTEXT5, _("Columns of Tab"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT5"));
 	BoxSizer11->Add(StaticText5, 0, wxALL|wxEXPAND, 2);
 	BoxSizer8->Add(BoxSizer11, 0, wxALL|wxEXPAND, 2);
 	BoxSizer13 = new wxBoxSizer(wxHORIZONTAL);
@@ -621,12 +621,12 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	EditIndentColumns = new wxTextCtrl(Panel2, ID_EDITINDENTCOLUMNS, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITINDENTCOLUMNS"));
 	ADD2CONTROLS(controls, EditIndentColumns);
 	BoxSizer13->Add(EditIndentColumns, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticText6 = new wxStaticText(Panel2, ID_STATICTEXT6, _("Columns of Indent"), wxDefaultPosition, wxSize(305,-1), 0, _T("ID_STATICTEXT6"));
+	StaticText6 = new wxStaticText(Panel2, ID_STATICTEXT6, _("Columns of Indent"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT6"));
 	BoxSizer13->Add(StaticText6, 0, wxALL|wxEXPAND, 2);
 	BoxSizer8->Add(BoxSizer13, 0, wxALL|wxEXPAND, 2);
 	BoxSizer5 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer5->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	EditDateTime = new wxTextCtrl(Panel2, ID_EDITDATETIME, wxEmptyString, wxDefaultPosition, wxSize(160,-1), 0, wxDefaultValidator, _T("ID_EDITDATETIME"));
+	EditDateTime = new wxTextCtrl(Panel2, ID_EDITDATETIME, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITDATETIME"));
 	ADD2CONTROLS(controls, EditDateTime);
 	BoxSizer5->Add(EditDateTime, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	StaticTextDateTime = new wxStaticText(Panel2, ID_STATICTEXTDATETIME, _("Format of Date/Time"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXTDATETIME"));
