@@ -10,6 +10,9 @@
 #endif
 
 #if defined(MS_WINDOWS) || defined(__CYGWIN__)
+#ifdef HAVE_IO_H
+#include <io.h>
+#endif
 #ifdef HAVE_FCNTL_H
 #include <fcntl.h>
 #endif
@@ -27,7 +30,7 @@
 
 #include "pygetopt.h"
 
-#define COPYRIGHT  "A Mini Python for embed to C++, Base on 2.7.13 [www.adintr.com]"
+#define COPYRIGHT  "A Mini Python for embed to C++, Base on 2.7.14 [www.adintr.com]"
 
 #ifdef __cplusplus
 extern "C" {
@@ -57,6 +60,8 @@ static char *usage_line =
 /* Long usage message, split into parts < 512 bytes */
 static char *usage_1 = "\
 Options and arguments (and corresponding environment variables):\n\
+-b     : issue warnings about comparing bytearray with unicode\n\
+         (-bb: issue errors)\n\
 -B     : don't write .py[co] files on import; also PYTHONDONTWRITEBYTECODE=x\n\
 -c cmd : program passed in as string (terminates option list)\n\
 -d     : debug output from parser; also PYTHONDEBUG=x\n\
@@ -260,7 +265,34 @@ Py_Main(int argc, char **argv)
     Py_RISCOSWimpFlag = 0;
 #endif
 
+    /* Hash randomization needed early for all string operations
+       (including -W and -X options). */
+    _PyOS_opterr = 0;  /* prevent printing the error in 1st pass */
+    while ((c = _PyOS_GetOpt(argc, argv, PROGRAM_OPTS)) != EOF) {
+        if (c == 'm' || c == 'c') {
+            /* -c / -m is the last option: following arguments are
+               not interpreter options. */
+            break;
+        }
+        switch (c) {
+        case 'E':
+            Py_IgnoreEnvironmentFlag++;
+            break;
+        case 'R':
+            Py_HashRandomizationFlag++;
+            break;
+        }
+    }
+    /* The variable is only tested for existence here; _PyRandom_Init will
+       check its value further. */
+    if (!Py_HashRandomizationFlag &&
+        (p = Py_GETENV("PYTHONHASHSEED")) && *p != '\0')
+        Py_HashRandomizationFlag = 1;
+
+    _PyRandom_Init();
+
     PySys_ResetWarnOptions();
+    _PyOS_ResetGetOpt();
 
     while ((c = _PyOS_GetOpt(argc, argv, PROGRAM_OPTS)) != EOF) {
         if (c == 'c') {
