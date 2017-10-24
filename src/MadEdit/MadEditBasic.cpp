@@ -591,6 +591,9 @@ void MadEdit::SetLineSpacing( int percent )
 			UpdateScrollBarPos();
 			Refresh( false );
 		}
+
+		if(m_OnLineSpaceChanged)
+			m_OnLineSpaceChanged(this);
 	}
 }
 

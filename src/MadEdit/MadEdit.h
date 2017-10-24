@@ -443,6 +443,7 @@ private:
 	OnStatusChangedPtr    m_OnFontChanged;
 	OnStatusChangedPtr    m_OnEncodingChanged;
 	OnStatusChangedPtr    m_OnSyntaxChanged;
+	OnStatusChangedPtr    m_OnLineSpaceChanged;
 	OnToggleWindowPtr     m_OnToggleWindow;
 	OnMouseRightUpPtr     m_OnMouseRightUp;
 	OnMouseRightUpPtr     m_OnVSMouseRightUp;
@@ -1118,6 +1119,9 @@ public:
 	}
 	void SetOnSyntaxChanged( OnStatusChangedPtr func ) {
 		m_OnSyntaxChanged = func;
+	}
+	void SetOnLineSpaceChanged( OnStatusChangedPtr func ) {
+		m_OnLineSpaceChanged = func;
 	}
 	void SetOnToggleWindow( OnToggleWindowPtr func ) {
 		m_OnToggleWindow = func;

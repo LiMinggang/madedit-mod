@@ -1615,6 +1615,14 @@ void OnSyntaxChanged( MadEdit *madedit )
 	}
 }
 
+void OnLineSpaceChanged( MadEdit *madedit )
+{
+	if(madedit && madedit == g_ActiveMadEdit)
+	{
+		g_MainFrame->UpdateFontEncoding();
+	}
+}
+
 void OnVScrollMouseRightUp( MadEdit *madedit )
 {
 	if(!g_Menu_VScrollPop)
@@ -4549,6 +4557,7 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 		madedit->SetOnFontChanged( &OnFontChanged );
 		madedit->SetOnEncodingChanged( &OnEncodingChanged );
 		madedit->SetOnSyntaxChanged( &OnSyntaxChanged );
+		madedit->SetOnLineSpaceChanged( &OnLineSpaceChanged );
 		madedit->Bind( wxEVT_KEY_DOWN, &MadEditFrame::MadEditFrameKeyDown, this );
 		g_PrevPageID = m_Notebook->GetSelection();
 

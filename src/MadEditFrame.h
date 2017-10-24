@@ -861,6 +861,7 @@ public:
 	friend void OnFontChanged( MadEdit *madedit );
 	friend void OnEncodingChanged( MadEdit *madedit );
     friend void OnSyntaxChanged( MadEdit *madedit );
+    friend void OnLineSpaceChanged( MadEdit *madedit );
 	friend void OnEditSelectionChanged( MadEdit *madedit );
 	friend void OnEditStatusChanged( MadEdit *madedit );
 	friend void OnEditActivate( MadEdit *madedit );
