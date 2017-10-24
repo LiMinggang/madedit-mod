@@ -1591,6 +1591,30 @@ void OnEditMouseRightUp( MadEdit *madedit )
 	}
 }
 
+void OnFontChanged( MadEdit *madedit )
+{
+	if(madedit && madedit == g_ActiveMadEdit)
+	{
+		g_MainFrame->UpdateFontEncoding();
+	}
+}
+
+void OnEncodingChanged( MadEdit *madedit )
+{
+	if(madedit && madedit == g_ActiveMadEdit)
+	{
+		g_MainFrame->UpdateFontEncoding();
+	}
+}
+
+void OnSyntaxChanged( MadEdit *madedit )
+{
+	if(madedit && madedit == g_ActiveMadEdit)
+	{
+		g_MainFrame->UpdateFontEncoding();
+	}
+}
+
 void OnVScrollMouseRightUp( MadEdit *madedit )
 {
 	if(!g_Menu_VScrollPop)
@@ -4522,6 +4546,9 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 		madedit->SetOnMouseRightUp( &OnEditMouseRightUp );
 		madedit->SetOnVSMouseRightUp( &OnVScrollMouseRightUp );
 		madedit->SetOnHSMouseRightUp( &OnHScrollMouseRightUp );
+		madedit->SetOnFontChanged( &OnFontChanged );
+		madedit->SetOnEncodingChanged( &OnEncodingChanged );
+		madedit->SetOnSyntaxChanged( &OnSyntaxChanged );
 		madedit->Bind( wxEVT_KEY_DOWN, &MadEditFrame::MadEditFrameKeyDown, this );
 		g_PrevPageID = m_Notebook->GetSelection();
 

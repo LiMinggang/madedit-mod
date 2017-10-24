@@ -163,6 +163,9 @@ void MadEdit::SetSyntax( const wxString &title )
 				Refresh( false );
 			}
 		}
+
+		if(m_OnSyntaxChanged)
+			m_OnSyntaxChanged(this);
 	}
 }
 
@@ -227,6 +230,9 @@ void MadEdit::SetEncoding( const wxString &encname )
 			m_RepaintAll = true;
 			Refresh( false );
 		}
+
+		if(m_OnEncodingChanged)
+			m_OnEncodingChanged(this);
 	}
 }
 

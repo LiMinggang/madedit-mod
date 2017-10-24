@@ -857,6 +857,17 @@ public:
 	}
 	bool HasRecordedScript() {return ( m_MadMacroScripts.GetCount() > 0 );}
 	wxArrayString& GetRecordedScripts() {return m_MadMacroScripts;}
+
+	friend void OnFontChanged( MadEdit *madedit );
+	friend void OnEncodingChanged( MadEdit *madedit );
+    friend void OnSyntaxChanged( MadEdit *madedit );
+	friend void OnEditSelectionChanged( MadEdit *madedit );
+	friend void OnEditStatusChanged( MadEdit *madedit );
+	friend void OnEditActivate( MadEdit *madedit );
+	friend void OnEditToggleWindow( MadEdit *madedit );
+	friend void OnEditMouseRightUp( MadEdit *madedit );
+	friend void OnVScrollMouseRightUp( MadEdit *madedit );
+	friend void OnHScrollMouseRightUp( MadEdit *madedit );
 };
 
 enum MadPreviewType

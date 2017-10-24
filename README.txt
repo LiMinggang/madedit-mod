@@ -123,6 +123,7 @@ Mod v0.4.11
 New: Open file path with default file explorer, set "EXTEXPLORER" as the env for open in another application #243
 Fix: Message strings were not translated during initialization
 Fix: TXT syntax would not be applied on first loading(0.4.10) #244
+Fix: Change font size/font/encoding/syntax will not update font toolbar #246
 
 Mod v0.4.10
 1.New: Settings for new document in Options

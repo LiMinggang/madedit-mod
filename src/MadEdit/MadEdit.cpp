@@ -924,6 +924,9 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_ModReloaded = true;
 	m_OnSelectionChanged = nullptr;
 	m_OnStatusChanged = nullptr;
+	m_OnFontChanged = nullptr;
+	m_OnEncodingChanged = nullptr;
+	m_OnSyntaxChanged = nullptr;
 	m_OnToggleWindow = nullptr;
 	m_OnMouseRightUp = nullptr;
 	m_OnVSMouseRightUp = nullptr;

@@ -440,6 +440,9 @@ private:
 
 	OnSelectionChangedPtr m_OnSelectionChanged;
 	OnStatusChangedPtr    m_OnStatusChanged;
+	OnStatusChangedPtr    m_OnFontChanged;
+	OnStatusChangedPtr    m_OnEncodingChanged;
+	OnStatusChangedPtr    m_OnSyntaxChanged;
 	OnToggleWindowPtr     m_OnToggleWindow;
 	OnMouseRightUpPtr     m_OnMouseRightUp;
 	OnMouseRightUpPtr     m_OnVSMouseRightUp;
@@ -712,6 +715,9 @@ public: // basic functions
 		else {
 			SetTextFont( name, size, false );
 		}
+
+		if(m_OnFontChanged)
+			m_OnFontChanged(this);
 	}
 
 	wxFont GetFont() {
@@ -1103,6 +1109,15 @@ public:
 	}
 	void SetOnStatusChanged( OnStatusChangedPtr func ) {
 		m_OnStatusChanged = func;
+	}
+	void SetOnFontChanged( OnStatusChangedPtr func ) {
+		m_OnFontChanged = func;
+	}
+	void SetOnEncodingChanged( OnStatusChangedPtr func ) {
+		m_OnEncodingChanged = func;
+	}
+	void SetOnSyntaxChanged( OnStatusChangedPtr func ) {
+		m_OnSyntaxChanged = func;
 	}
 	void SetOnToggleWindow( OnToggleWindowPtr func ) {
 		m_OnToggleWindow = func;
