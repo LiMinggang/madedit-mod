@@ -96,8 +96,29 @@
 #endif
 
 
-#if !defined(PREFIX) || !defined(EXEC_PREFIX) || !defined(VERSION) || !defined(VPATH)
-#error "PREFIX, EXEC_PREFIX, VERSION, and VPATH must be constant defined"
+#ifndef VERSION
+#define VERSION "2.7.14"
+#endif
+
+#ifndef VPATH
+#define VPATH "."
+#endif
+
+#ifndef PREFIX
+#  ifdef __VMS
+#    define PREFIX ""
+#  else
+#    define PREFIX "/usr/local"
+#  endif
+#endif
+
+#ifndef EXEC_PREFIX
+#define EXEC_PREFIX PREFIX
+#endif
+
+#ifndef PYTHONPATH
+#define PYTHONPATH PREFIX "/lib/python" VERSION ":" \
+              EXEC_PREFIX "/lib/python" VERSION "/lib-dynload"
 #endif
 
 #ifndef LANDMARK
