@@ -103,7 +103,7 @@ Known issues(that may not be fixed in future releases):
 2. Search in selection in column mode is not exact the selection highlighted.
 3. HighlightWord would not work if the caret is at the end of the line
 4. Scroll function on Right click menu of scroll bars only works with Windows
-5. '*' is allowed in file name under Linux/Unix but is used as delimiter for file name and line number
+5. '*' is allowed in file name under Linux/Unix but is used as delimiter for file name and line number, use -d and -w to use it as wildcard
 6. Alt+LeftDown to toggle bookmark does not work on Ubuntu because Alt was a special key(?) for the OS
 
 Feature/issues to be released
@@ -121,6 +121,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.4.11
 New: Open file path with default file explorer, set "EXTEXPLORER" as the env for open in another application #243
+New: Add '-d' to define a new delimiter to replace '*'
 Fix: Message strings were not translated during initialization
 Fix: TXT syntax would not be applied on first loading(0.4.10) #244
 Fix: Change font size/font/encoding/syntax/linespacing will not update font toolbar #246

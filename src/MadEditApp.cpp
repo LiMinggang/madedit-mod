@@ -101,6 +101,7 @@ static const wxCmdLineEntryDesc g_cmdLineDesc [] =
 	{ wxCMD_LINE_SWITCH, "x", "eXit", "Exit GUI if it was in silent mode" },
 	{ wxCMD_LINE_SWITCH, "w", "wildcard", "Enable wildcard support in file name\n(line number would be disabled becasue it used '*')" },
 	{ wxCMD_LINE_OPTION, "m", "madpython", "Specify MadPython file to be run on the file" },
+	{ wxCMD_LINE_OPTION, "d", "delimiter", "Specify delimiter between file name and line number, default is '*', ie, fname*linenum" },
 	{ wxCMD_LINE_PARAM, nullptr, nullptr, "File(s) to be opened", wxCMD_LINE_VAL_STRING,  wxCMD_LINE_PARAM_OPTIONAL | wxCMD_LINE_PARAM_MULTIPLE },
 
 	{ wxCMD_LINE_NONE }
@@ -590,6 +591,9 @@ bool MadEditApp::OnCmdLineParsed( wxCmdLineParser& cmdParser )
 	m_Exit = cmdParser.Found( wxT( "x" ) );
 	m_ForceEdit  = cmdParser.Found( wxT( "f" ) );
 	cmdParser.Found( wxT( "m" ), &m_MadPythonScript );
+	cmdParser.Found( wxT( "d" ), &m_Delimiter );
+	wxASSERT(m_Delimiter.Length() > 0);
+	g_Delimiter = m_Delimiter[0];
 
 	/*if( !m_MadPythonScript.IsEmpty() )
 	{
@@ -751,12 +755,17 @@ void MadEditApp::ShowMainFrame( MadEditFrame *mainFrame, bool maximize )
 		{
 			if( !m_MadPythonScript.IsEmpty() )
 			{
-				files += wxT( "*s" );
+				files += g_MadEscParameter;
+				files += wxT("s");
 
-				if( m_ForceEdit )
-					files += wxT( "*f" );
+				if (m_ForceEdit)
+				{
+					files += g_MadEscParameter;
+					files += wxT("f");
+				}
 
-				files += wxT( "*m" ) + m_MadPythonScript;
+				files += g_MadEscParameter;
+				files += wxT( "m" ) + m_MadPythonScript;
 			}
 
 			// use OnReceiveMessage() to open the files

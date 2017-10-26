@@ -77,11 +77,12 @@ class MadEditApp:public wxApp
 	bool m_SilentMode;
 	bool m_Exit;
 	bool m_ForceEdit;
+	wxString m_Delimiter;
 	wxArrayString m_FileNames;
 	wxString m_MadPythonScript;
 
 public:
-	MadEditApp() : m_SigleAppChecker(nullptr), m_AppServer(nullptr), m_SilentMode(false), m_Exit(false), m_ForceEdit(false) {}
+	MadEditApp() : m_SigleAppChecker(nullptr), m_AppServer(nullptr), m_SilentMode(false), m_Exit(false), m_ForceEdit(false), m_Delimiter(wxT("*")) {}
 	virtual bool OnInit();
 	virtual int OnExit();
 	virtual void OnInitCmdLine(wxCmdLineParser& cmdParser);

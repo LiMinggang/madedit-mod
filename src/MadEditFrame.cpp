@@ -365,7 +365,9 @@ const int IconWidth = 16;
 const int IconHeight = 16;
 
 wxUniChar g_MadConfigSeparator(0x1F);
+wxUniChar g_MadEscParameter(0x1B);
 wxUniChar g_MadBmSeparator(0x0B);
+wxUniChar g_Delimiter('*');
 
 bool g_CheckModTimeForReload = true;
 static int Menu_Window_Count = 4;
@@ -1155,7 +1157,7 @@ void OnReceiveMessage( const wchar_t *msg, size_t size, bool activeFile/* = true
 	if( !args.IsEmpty() )
 	{
 		mpScript.Empty();
-		wxString strDel = wxT( "*" );
+		wxString strDel = g_MadEscParameter;
 		wxStringTokenizer tkz1( args, strDel );
 
 		while( tkz1.HasMoreTokens() )
