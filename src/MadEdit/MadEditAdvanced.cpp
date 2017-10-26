@@ -4119,7 +4119,7 @@ void MadEdit::SetMaxDisplaySize( int maxsize )
 		if( m_StorePropertiesToGlobalConfig )
 		{
 			wxString oldpath = m_Config->GetPath();
-			m_Config->Write( wxT( "/MadEdit/MaxDisplaySize" ), maxsize );
+			m_Config->Write( wxT( "/UIView/MaxDisplaySize" ), maxsize );
 			m_Config->SetPath( oldpath );
 		}
 	}

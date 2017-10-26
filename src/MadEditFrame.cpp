@@ -2591,13 +2591,13 @@ CommandData CommandTable[] =
 
 ToolBarData ToolBarTable[] = 
 {
-	{tbSTANDARD,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBStandardPos"),      wxT("MadToolBar0"), _("Standard"),       1, 0},
-	{tbEDITOR,        MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBEditorPos"),        wxT("MadToolBar1"), _("Editor"),         1, 1},
-	{tbSEARCHREPLACE, MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBSearchReplacePos"), wxT("MadToolBar2"), _("Search/Replace"), 2, 0},
-	{tbTEXTVIEW,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBTextviewPos"),      wxT("MadToolBar3"), _("Text View"),      2, 1},
-	{tbEDITMODE,      MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBEditModePos"),      wxT("MadToolBar4"), _("Edit Mode"),      2, 2},
-	{tbMACRO,         MADTOOBAR_OVERFLOW, wxT("/MadEdit/TBMacroPos"),         wxT("MadToolBar5"), _("Macro"),          2, 3},
-	{tbFONTENCODING,  MADTOOBAR_DEFAULT,  wxT("/MadEdit/TBFontEncodingPos"),  wxT("MadToolBar6"), _("Font/Encoding"),  3, 0},
+	{tbSTANDARD,      MADTOOBAR_DEFAULT,  wxT("/UIView/TBStandardPos"),      wxT("MadToolBar0"), _("Standard"),       1, 0},
+	{tbEDITOR,        MADTOOBAR_DEFAULT,  wxT("/UIView/TBEditorPos"),        wxT("MadToolBar1"), _("Editor"),         1, 1},
+	{tbSEARCHREPLACE, MADTOOBAR_DEFAULT,  wxT("/UIView/TBSearchReplacePos"), wxT("MadToolBar2"), _("Search/Replace"), 2, 0},
+	{tbTEXTVIEW,      MADTOOBAR_DEFAULT,  wxT("/UIView/TBTextviewPos"),      wxT("MadToolBar3"), _("Text View"),      2, 1},
+	{tbEDITMODE,      MADTOOBAR_DEFAULT,  wxT("/UIView/TBEditModePos"),      wxT("MadToolBar4"), _("Edit Mode"),      2, 2},
+	{tbMACRO,         MADTOOBAR_OVERFLOW, wxT("/UIView/TBMacroPos"),         wxT("MadToolBar5"), _("Macro"),          2, 3},
+	{tbFONTENCODING,  MADTOOBAR_DEFAULT,  wxT("/UIView/TBFontEncodingPos"),  wxT("MadToolBar6"), _("Font/Encoding"),  3, 0},
 	{-1, 0, 0, 0, 0, -1, 0},
 };
 
@@ -2781,7 +2781,7 @@ MadEditFrame::MadEditFrame( wxWindow *parent, wxWindowID id, const wxString &tit
 	g_MainFrame = this;
 
 	m_AutoSaveTimout = 0;
-	m_Config->Read( wxT( "AutoSaveTimeout" ), &m_AutoSaveTimout, 0 );
+	m_Config->Read( wxT( "/Application/AutoSaveTimeout" ), &m_AutoSaveTimout, 0 );
 	if(m_AutoSaveTimout >= 10 && m_AutoSaveTimout <= 30)
 		m_AutoSaveTimer.StartOnce(m_AutoSaveTimout*MADMINUTES);
 	else
@@ -3542,10 +3542,10 @@ void MadEditFrame::CreateGUIControls( void )
 	m_QuickSearchBar->AddTool( menuQuickFindPrevious, wxT( "QuickFindPrevious" ), m_ImageList->GetBitmap( up_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _( "Find Previous" ), _( "Find matched text previous from caret" ), nullptr );
 	m_QuickSearchBar->AddTool( menuQuickFindWholeWord, _( "Whole Word Only" ), m_ImageList->GetBitmap( searchwholeword_xpm_idx ), wxNullBitmap, wxITEM_CHECK, _("Whole Word Only"), _("Match Whole Word Only"), nullptr );
 	bool bwholeword, bcase, bregex, bdotnewline = true;
-	m_Config->Read( wxT( "/MadEdit/QuickSearchWholeWord" ), &bwholeword, false );
-	m_Config->Read( wxT( "/MadEdit/QuickSearchCaseSensitive" ), &bcase, false );
-	m_Config->Read( wxT( "/MadEdit/QuickSearchRegEx" ), &bregex, false );
-	m_Config->Read( wxT( "/MadEdit/QuickSearchDotMatchNewLine" ), &bdotnewline, false );
+	m_Config->Read( wxT( "/QuickSearch/QuickSearchWholeWord" ), &bwholeword, false );
+	m_Config->Read( wxT( "/QuickSearch/QuickSearchCaseSensitive" ), &bcase, false );
+	m_Config->Read( wxT( "/QuickSearch/QuickSearchRegEx" ), &bregex, false );
+	m_Config->Read( wxT( "/QuickSearch/QuickSearchDotMatchNewLine" ), &bdotnewline, false );
 
 	m_QuickSearchBar->ToggleTool(menuQuickFindWholeWord, bwholeword);
 	m_QuickSearchBar->AddTool( menuQuickFindCase, _( "Case Sensitive" ), m_ImageList->GetBitmap( searchcase_xpm_idx ), wxNullBitmap, wxITEM_CHECK, _("Case Sensitive"), _("Case Sensitive"), nullptr );
@@ -3576,7 +3576,7 @@ void MadEditFrame::CreateGUIControls( void )
 
 	m_QuickSearchBar->Realize();
 	wxString      panelStatus;
-	m_Config->Read( wxT( "/MadEdit/QuickSearchBarStatus" ), &panelStatus );
+	m_Config->Read( wxT( "/UIView/QuickSearchBarStatus" ), &panelStatus );
 	
 	if(panelStatus.IsEmpty())
 		ResetQuickSearchBarPos();
@@ -3588,7 +3588,7 @@ void MadEditFrame::CreateGUIControls( void )
 	//m_Config->Read( wxT( "/MadEdit/InfoWindowWidth" ), &infoW );
 	//m_Config->Read( wxT( "/MadEdit/InfoWindowHeight" ), &infoH );
 	
-	m_Config->Read( wxT( "/MadEdit/InfoWindowStatus" ), &panelStatus );
+	m_Config->Read( wxT( "/UIView/InfoWindowStatus" ), &panelStatus );
 	wxSize nbsize( infoW, infoH );
 	m_InfoNotebook = new wxAuiNotebook( this, ID_OUTPUTNOTEBOOK, wxDefaultPosition, nbsize, wxAUI_NB_TOP | wxAUI_NB_SCROLL_BUTTONS );
 	m_FindInFilesResults = new MadTreeCtrl( m_InfoNotebook, ID_FINDINFILESRESULTS, wxDefaultPosition, wxSize( infoW, 4 ), wxTR_HAS_BUTTONS | wxTR_HIDE_ROOT | wxTR_TWIST_BUTTONS );
@@ -3673,7 +3673,7 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 		}
 	}
 
-	m_Config->Write( wxT( "/MadEdit/ReloadFilesList" ), files );
+	m_Config->Write( wxT( "/Application/ReloadFilesList" ), files );
 
 	if( m_PurgeHistory )
 	{
@@ -3727,19 +3727,19 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 	WINDOWPLACEMENT wp;
 	wp.length = sizeof( WINDOWPLACEMENT );
 	GetWindowPlacement( ( HWND ) GetHWND(), &wp );
-	m_Config->Write( wxT( "/MadEdit/WindowMaximize" ), wp.showCmd == SW_SHOWMAXIMIZED );
-	m_Config->Write( wxT( "/MadEdit/WindowLeft" ),  wp.rcNormalPosition.left );
-	m_Config->Write( wxT( "/MadEdit/WindowTop" ),   wp.rcNormalPosition.top );
-	m_Config->Write( wxT( "/MadEdit/WindowWidth" ), wp.rcNormalPosition.right - wp.rcNormalPosition.left );
-	m_Config->Write( wxT( "/MadEdit/WindowHeight" ), wp.rcNormalPosition.bottom - wp.rcNormalPosition.top );
+	m_Config->Write( wxT( "/UIView/WindowMaximize" ), wp.showCmd == SW_SHOWMAXIMIZED );
+	m_Config->Write( wxT( "/UIView/WindowLeft" ),  wp.rcNormalPosition.left );
+	m_Config->Write( wxT( "/UIView/WindowTop" ),   wp.rcNormalPosition.top );
+	m_Config->Write( wxT( "/UIView/WindowWidth" ), wp.rcNormalPosition.right - wp.rcNormalPosition.left );
+	m_Config->Write( wxT( "/UIView/WindowHeight" ), wp.rcNormalPosition.bottom - wp.rcNormalPosition.top );
 	//#endif
 #else
 	GetPosition( &x, &y );
-	m_Config->Write( wxT( "/MadEdit/WindowLeft" ), x );
-	m_Config->Write( wxT( "/MadEdit/WindowTop" ), y );
+	m_Config->Write( wxT( "/UIView/WindowLeft" ), x );
+	m_Config->Write( wxT( "/UIView/WindowTop" ), y );
 	GetSize( &x, &y );
-	m_Config->Write( wxT( "/MadEdit/WindowWidth" ), x );
-	m_Config->Write( wxT( "/MadEdit/WindowHeight" ), y );
+	m_Config->Write( wxT( "/UIView/WindowWidth" ), x );
+	m_Config->Write( wxT( "/UIView/WindowHeight" ), y );
 #endif
 	//------------------
 	m_Config->SetPath( wxT( "/RecentFiles" ) );
@@ -3760,15 +3760,15 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 		g_SearchReplaceDialog->m_RecentReplaceText->Save( *m_Config );
 		// add: gogo, 19.09.2009
 		g_SearchReplaceDialog->GetPosition( &x, &y );
-		m_Config->Write( wxT( "/MadEdit/SearchWinLeft" ), x );
-		m_Config->Write( wxT( "/MadEdit/SearchWinTop" ), y );
+		m_Config->Write( wxT( "/UIView/SearchWinLeft" ), x );
+		m_Config->Write( wxT( "/UIView/SearchWinTop" ), y );
 		m_Config->Write( wxT( "/MadEdit/SearchWrapAround" ), g_SearchReplaceDialog->WxCheckBoxWrapAround->GetValue() );
 
 		if( g_SearchReplaceDialog->m_EnableTransparency )
 		{
-			m_Config->Write( wxT( "/MadEdit/AlwaysTransparent" ), g_SearchReplaceDialog->WxRadioAlways->GetValue() );
+			m_Config->Write( wxT( "/UIView/AlwaysTransparent" ), g_SearchReplaceDialog->WxRadioAlways->GetValue() );
 			long trans = 25;
-			m_Config->Read( wxT( "/MadEdit/Transparency" ), &trans );
+			m_Config->Read( wxT( "/UIView/Transparency" ), &trans );
 		}
 
 		//----------
@@ -3793,10 +3793,10 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 	m_Config->Write( wxT( "/MadEdit/SearchTo" ), wxEmptyString );
 
 	// save quick search status
-	m_Config->Write( wxT( "/MadEdit/QuickSearchWholeWord" ), m_QuickSearchBar->GetToolToggled(menuQuickFindWholeWord) );
-	m_Config->Write( wxT( "/MadEdit/QuickSearchCaseSensitive" ), m_QuickSearchBar->GetToolToggled(menuQuickFindCase) );
-	m_Config->Write( wxT( "/MadEdit/QuickSearchRegEx" ), m_QuickSearchBar->GetToolToggled(menuQuickFindRegex) );
-	m_Config->Write( wxT( "/MadEdit/QuickSearchDotMatchNewLine" ), m_QuickSearchBar->GetToolToggled(menuQuickFindDotMatchNewLine) );
+	m_Config->Write( wxT( "/QuickSearch/QuickSearchWholeWord" ), m_QuickSearchBar->GetToolToggled(menuQuickFindWholeWord) );
+	m_Config->Write( wxT( "/QuickSearch/QuickSearchCaseSensitive" ), m_QuickSearchBar->GetToolToggled(menuQuickFindCase) );
+	m_Config->Write( wxT( "/QuickSearch/QuickSearchRegEx" ), m_QuickSearchBar->GetToolToggled(menuQuickFindRegex) );
+	m_Config->Write( wxT( "/QuickSearch/QuickSearchDotMatchNewLine" ), m_QuickSearchBar->GetToolToggled(menuQuickFindDotMatchNewLine) );
 
 	if(!m_ResetToolBars)
 	{
@@ -3809,9 +3809,9 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 			++td;
 		}
 		panelStatus = m_AuiManager.SavePaneInfo(m_AuiManager.GetPane( m_QuickSearchBar ));
-		m_Config->Write( wxT( "/MadEdit/QuickSearchBarStatus" ), panelStatus );
+		m_Config->Write( wxT( "/UIView/QuickSearchBarStatus" ), panelStatus );
 		panelStatus = m_AuiManager.SavePaneInfo(m_AuiManager.GetPane( m_InfoNotebook ));
-		m_Config->Write( wxT( "/MadEdit/InfoWindowStatus" ), panelStatus );
+		m_Config->Write( wxT( "/UIView/InfoWindowStatus" ), panelStatus );
 	}
 
 	delete m_RecentFiles;
@@ -8303,14 +8303,14 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		bool rcm, isiot, ai, acp, icp4sel, msc, mscck, mmp, afcp, fwm, twm, abck, ldch;
 		wxString mc, tc, ic, mds;
 		long ll;
-		m_Config->Write( wxT( "Language" ), g_OptionsDialog->ComboBoxLanguage->GetValue() );
-		m_Config->Write( wxT( "SingleInstance" ), g_OptionsDialog->CheckBoxSingleInstance->GetValue() );
+		m_Config->Write( wxT( "/Application/Language" ), g_OptionsDialog->ComboBoxLanguage->GetValue() );
+		m_Config->Write( wxT( "/Application/SingleInstance" ), g_OptionsDialog->CheckBoxSingleInstance->GetValue() );
 		rcm = g_OptionsDialog->CheckBoxRecordCaretMovements->GetValue();
 		m_Config->Write( wxT( "RecordCaretMovements" ), rcm );
 		m_Config->Write( wxT( "MaxSizeToLoad" ), g_OptionsDialog->EditMaxSizeToLoad->GetValue() );
 		m_Config->Write( wxT( "MaxTextFileSize" ), g_OptionsDialog->EditMaxTextFileSize->GetValue() );
 		mds = g_OptionsDialog->EditMaxDisplaySize->GetValue();
-		m_Config->Write( wxT( "MaxDisplaySize" ), mds );
+		m_Config->Write( wxT( "/UIView/MaxDisplaySize" ), mds );
 		m_Config->Write( wxT( "DefaultEncoding" ), g_OptionsDialog->ComboBoxEncoding->GetValue() );
 		m_Config->Write( wxT( "EnforceDefaultEncoding" ), g_OptionsDialog->CheckBoxSkipAutoEncoding->GetValue() );
 		
@@ -8327,7 +8327,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		m_Config->Write(wxT("DefaultTextFontSize"), ll);
 		ll = 0;
 		if (g_OptionsDialog->CheckBoxEnableAutoSave->GetValue()) g_OptionsDialog->EditAutoSaveTimeout->GetValue().ToLong(&ll);
-		m_Config->Write( wxT( "AutoSaveTimeout" ), ll );
+		m_Config->Write( wxT( "/Application/AutoSaveTimeout" ), ll );
 		if(m_AutoSaveTimout != ll)
 		{
 			if(m_AutoSaveTimout)
@@ -8337,7 +8337,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 				m_AutoSaveTimer.StartOnce(m_AutoSaveTimout*MADMINUTES);
 		}
 		abck = g_OptionsDialog->CheckBoxEnableAutoBackup->GetValue();
-		m_Config->Write( wxT( "AutoBackup" ),  abck);
+		m_Config->Write( wxT( "/Application/AutoBackup" ),  abck);
 			
 #ifdef __WXMSW__
 
@@ -8402,7 +8402,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		m_Config->Read( wxT( "PurgeHistory" ), g_ForcePurgeThisTime );
 		m_PurgeHistory = g_OptionsDialog->CheckBoxPurgeHistory->GetValue();
 		m_Config->Write( wxT( "PurgeHistory" ), g_OptionsDialog->CheckBoxPurgeHistory->GetValue() );
-		m_Config->Write( wxT( "ShowQSearchBarOnStart" ), g_OptionsDialog->CheckBoxShowQSearchBar->GetValue() );
+		m_Config->Write( wxT( "/UIView/ShowQSearchBarOnStart" ), g_OptionsDialog->CheckBoxShowQSearchBar->GetValue() );
 
 		if( !g_ForcePurgeThisTime ) { g_ForcePurgeThisTime = g_OptionsDialog->CheckBoxPurgeHistory->GetValue(); }
 		else { g_ForcePurgeThisTime = false; }

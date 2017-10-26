@@ -976,10 +976,10 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_LastPaintBitmap = -1;
 	m_UseDefaultSyntax = false;
 	m_SearchWholeWord = false;
-	m_MaxDisplaySize = m_Config->ReadLong( wxT( "MaxDisplaySize" ), 256 );
+	m_MaxDisplaySize = m_Config->ReadLong( wxT( "/UIView/MaxDisplaySize" ), 256 );
 	if(m_MaxDisplaySize < 128 )	m_MaxDisplaySize = 128;
 	if( m_MaxDisplaySize > 1024) m_MaxDisplaySize = 1024;
-	m_Config->Write( wxT( "MaxDisplaySize" ), m_MaxDisplaySize ); // Make sure	
+	m_Config->Write( wxT( "/UIView/MaxDisplaySize" ), m_MaxDisplaySize ); // Make sure	
 #if 0
 //#ifdef __WXGTK__
 	ConnectToFixedKeyPressHandler();

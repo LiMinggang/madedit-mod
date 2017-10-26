@@ -331,8 +331,8 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	wxString oldpath = m_Config->GetPath();
 	// add: gogo, 19.09.2009
 	long x = 480, y = 100;
-	m_Config->Read( wxT( "/MadEdit/SearchWinLeft" ), &x );
-	m_Config->Read( wxT( "/MadEdit/SearchWinTop" ), &y );
+	m_Config->Read( wxT( "/UIView/SearchWinLeft" ), &x );
+	m_Config->Read( wxT( "/UIView/SearchWinTop" ), &y );
 	m_Config->SetPath( wxT( "/RecentReplaceText" ) );
 	m_RecentReplaceText->Load( *m_Config );
 	m_Config->SetPath( oldpath );
@@ -351,8 +351,8 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 		wxASSERT( WxSliderTransDegree != 0 );
 		long trans = 30;
 
-		m_Config->Read( wxT( "/MadEdit/AlwaysTransparent" ), &bb, false );
-		m_Config->Read( wxT( "/MadEdit/Transparency" ), &trans );
+		m_Config->Read( wxT( "/UIView/AlwaysTransparent" ), &bb, false );
+		m_Config->Read( wxT( "/UIView/Transparency" ), &trans );
 
 		WxRadioAlways->SetValue( bb );
 		WxRadioLosingFocus->SetValue( !bb );

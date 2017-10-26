@@ -509,15 +509,13 @@ void MadFindInFilesDialog::MadFindInFilesDialogActivate( wxActivateEvent& event 
 		m_Config->Read( wxT( "/MadEdit/SearchHex" ), &bb, false );
 		WxCheckBoxFindHex->SetValue( bb );
 		UpdateCheckBoxByCBHex( bb );
-		m_Config->Read( wxT( "/MadEdit/SearchListFileOnly" ), &bb, false );
+		m_Config->Read( wxT( "/Application/FindListFileOnly" ), &bb, false );
 		WxCheckBoxListFirstOnly->SetValue( bb );
-		m_Config->Read( wxT( "/MadEdit/FindListFileOnly" ), &bb, false );
-		WxCheckBoxListFirstOnly->SetValue( bb );
-		m_Config->Read( wxT( "/MadEdit/FindOpenedFiles" ), &bb, true );
+		m_Config->Read( wxT( "/Application/FindOpenedFiles" ), &bb, true );
 		WxRadioButtonOpenedFiles->SetValue( bb );
-		m_Config->Read( wxT( "/MadEdit/FindDir" ), &bb, false );
+		m_Config->Read( wxT( "/Application/FindDir" ), &bb, false );
 		WxRadioButtonDir->SetValue( bb );
-		m_Config->Read( wxT( "/MadEdit/FindSubDir" ), &bb, true );
+		m_Config->Read( wxT( "/Application/FindSubDir" ), &bb, true );
 		WxCheckBoxSubDir->SetValue( bb );
 	}
 	else
@@ -526,10 +524,10 @@ void MadFindInFilesDialog::MadFindInFilesDialogActivate( wxActivateEvent& event 
 		m_Config->Write( wxT( "/MadEdit/SearchWholeWord" ), WxCheckBoxWholeWord->GetValue() );
 		m_Config->Write( wxT( "/MadEdit/SearchRegex" ), WxCheckBoxRegex->GetValue() );
 		m_Config->Write( wxT( "/MadEdit/SearchHex" ), WxCheckBoxFindHex->GetValue() );
-		m_Config->Write( wxT( "/MadEdit/FindListFileOnly" ), WxCheckBoxListFirstOnly->GetValue() );
-		m_Config->Write( wxT( "/MadEdit/FindOpenedFiles" ), WxRadioButtonOpenedFiles->GetValue() );
-		m_Config->Write( wxT( "/MadEdit/FindDir" ), WxRadioButtonDir->GetValue() );
-		m_Config->Write( wxT( "/MadEdit/FindSubDir" ), WxCheckBoxSubDir->GetValue() );
+		m_Config->Write( wxT( "/Application/FindListFileOnly" ), WxCheckBoxListFirstOnly->GetValue() );
+		m_Config->Write( wxT( "/Application/FindOpenedFiles" ), WxRadioButtonOpenedFiles->GetValue() );
+		m_Config->Write( wxT( "/Application/FindDir" ), WxRadioButtonDir->GetValue() );
+		m_Config->Write( wxT( "/Application/FindSubDir" ), WxCheckBoxSubDir->GetValue() );
 	}
 
 	m_Config->SetPath( oldpath );

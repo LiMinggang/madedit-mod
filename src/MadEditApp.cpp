@@ -356,7 +356,7 @@ bool MadEditApp::OnInit()
 	cfg->SetRecordDefaults( true );
 	wxFileConfig::Set( cfg );
 	bool bSingleInstance = true;
-	cfg->Read( wxT( "/MadEdit/SingleInstance" ), &bSingleInstance, true );
+	cfg->Read( wxT( "/Application/SingleInstance" ), &bSingleInstance, true );
 
 	if( bSingleInstance )
 	{
@@ -481,10 +481,10 @@ bool MadEditApp::OnInit()
 	//if(!maximize)    // removed: gogo, 30.08.2009
 	{
 		long x = 0, y = 0, w = 0, h = 0;
-		cfg->Read( wxT( "/MadEdit/WindowLeft" ), &x );
-		cfg->Read( wxT( "/MadEdit/WindowTop" ), &y );
-		cfg->Read( wxT( "/MadEdit/WindowWidth" ), &w );
-		cfg->Read( wxT( "/MadEdit/WindowHeight" ), &h );
+		cfg->Read( wxT( "/UIView/WindowLeft" ), &x );
+		cfg->Read( wxT( "/UIView/WindowTop" ), &y );
+		cfg->Read( wxT( "/UIView/WindowWidth" ), &w );
+		cfg->Read( wxT( "/UIView/WindowHeight" ), &h );
 
 		if( x + w > 0 && y + h > 0 )
 			//if(w>0 && h>0)
@@ -510,7 +510,7 @@ bool MadEditApp::OnInit()
 	{
 		bool maximize = false;
 #ifdef __WXMSW__
-		cfg->Read( wxT( "/MadEdit/WindowMaximize" ), &maximize, false );
+		cfg->Read( wxT( "/UIView/WindowMaximize" ), &maximize, false );
 #endif
 
 		ShowMainFrame( myFrame, maximize );
@@ -728,7 +728,7 @@ void MadEditApp::ShowMainFrame( MadEditFrame *mainFrame, bool maximize )
 		// reload files previously opened
 		wxString files;
 		wxConfigBase *cfg = wxConfigBase::Get( false );
-		cfg->Read( wxT( "/MadEdit/ReloadFilesList" ), &files );
+		cfg->Read( wxT( "/Application/ReloadFilesList" ), &files );
 
 		if( !files.IsEmpty() )
 		{

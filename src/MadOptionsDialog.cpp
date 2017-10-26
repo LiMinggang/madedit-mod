@@ -1260,9 +1260,9 @@ void MadOptionsDialog::LoadOptions(void)
 #endif
 	// General page
 	ss = g_LanguageString[0];
-	cfg->Read( wxT( "Language" ), &ss );
+	cfg->Read( wxT( "/Application/Language" ), &ss );
 	ComboBoxLanguage->SetValue( ss );
-	cfg->Read( wxT( "SingleInstance" ), &bb, false );
+	cfg->Read( wxT( "/Application/SingleInstance" ), &bb, false );
 	CheckBoxSingleInstance->SetValue( bb );
 	cfg->Read( wxT( "RecordCaretMovements" ), &bb, true );
 	CheckBoxRecordCaretMovements->SetValue( bb );
@@ -1270,7 +1270,7 @@ void MadOptionsDialog::LoadOptions(void)
 	EditMaxSizeToLoad->SetValue( wxString() << ll );
 	cfg->Read( wxT( "MaxTextFileSize" ), &ll );
 	EditMaxTextFileSize->SetValue( wxString() << ll );
-	cfg->Read( wxT( "MaxDisplaySize" ), &ll );
+	cfg->Read( wxT( "/UIView/MaxDisplaySize" ), &ll );
 	EditMaxDisplaySize->SetValue( wxString() << ll );
 	ss = _( "System Default" );
 	cfg->Read( wxT( "DefaultEncoding" ), &ss );
@@ -1286,13 +1286,13 @@ void MadOptionsDialog::LoadOptions(void)
 	if(ll > MAX_FONT_SIZE) ll = MAX_FONT_SIZE;
 	EditDefaultFontSize->SetValue( wxString() << ll );
 
-	cfg->Read( wxT( "AutoSaveTimeout" ), &ll, 0 );
+	cfg->Read( wxT( "/Application/AutoSaveTimeout" ), &ll, 0 );
 	bb = ((ll >= 10) && (ll <= 30));
 	CheckBoxEnableAutoSave->SetValue( bb );
 	if(!bb) ll = 10;
 	EditAutoSaveTimeout->Enable(bb);
 	EditAutoSaveTimeout->SetValue( wxString() << ll );
-	cfg->Read( wxT( "AutoBackup" ), &bb, false );
+	cfg->Read( wxT( "/Application/AutoBackup" ), &bb, false );
 	CheckBoxEnableAutoBackup->SetValue( bb );
 #ifdef __WXMSW__
 	wxRegKey *pRegKey = new wxRegKey( g_MadEditRegkeyPath + wxT( "*\\shell\\MadEdit-Mod\\command" ) );
@@ -1354,7 +1354,7 @@ void MadOptionsDialog::LoadOptions(void)
 	CheckBoxReloadFiles->SetValue( bb );
 	cfg->Read( wxT( "PurgeHistory" ), &bb, false );
 	CheckBoxPurgeHistory->SetValue( bb );
-	cfg->Read( wxT( "ShowQSearchBarOnStart" ), &bb, true );
+	cfg->Read( wxT( "/UIView/ShowQSearchBarOnStart" ), &bb, true );
 	CheckBoxShowQSearchBar->SetValue( bb );
 	cfg->Read( wxT( "RestoreCaretPos" ), &bb, true );
 	CheckBoxRestoreCaretPos->SetValue( bb );

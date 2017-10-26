@@ -2656,7 +2656,7 @@ int MadEdit::Save( bool ask, const wxString &title, bool saveas ) // return YES,
 			if(!m_HasBackup)
 			{
 				bool bb = true;
-				m_Config->Read( wxT( "AutoBackup" ), &bb, false );
+				m_Config->Read( wxT( "/Application/AutoBackup" ), &bb, false );
 				if(bb && (oldfilename == filename))
 				{
 					oldfilename += wxT(".bak");
