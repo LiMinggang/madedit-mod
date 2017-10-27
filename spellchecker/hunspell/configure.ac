@@ -1,30 +1,37 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-m4_pattern_allow
-
-AC_PREREQ(2.59)
-AC_INIT([hunspell],[1.6.1],[nemeth@numbertext.org])
-
+AC_PREREQ([2.69])
+AC_INIT([hunspell],[1.6.2],[https://github.com/hunspell/hunspell/issues],,[https://hunspell.github.io])
+AC_CONFIG_SRCDIR([config.h.in])
+AC_CONFIG_HEADERS([config.h])
 AC_CANONICAL_HOST
-AC_SUBST(XFAILED)
+AC_USE_SYSTEM_EXTENSIONS
+AC_CONFIG_MACRO_DIRS([m4])
+AM_INIT_AUTOMAKE
 
-AM_INIT_AUTOMAKE(hunspell, 1.6.1)
+# the folowing 4 lines are used for pkg-check's .pc.in file
 HUNSPELL_VERSION_MAJOR=`echo $VERSION | cut -d"." -f1`
 HUNSPELL_VERSION_MINOR=`echo $VERSION | cut -d"." -f2`
 AC_SUBST(HUNSPELL_VERSION_MAJOR)
 AC_SUBST(HUNSPELL_VERSION_MINOR)
 
-AC_CONFIG_SRCDIR([config.h.in])
-AC_CONFIG_HEADER([config.h])
+AX_CODE_COVERAGE
+AS_IF([test x$enable_code_coverage = xyes],
+      [: ${CXXFLAGS=""}; : ${CFLAGS=""}])
 
 # Checks for programs.
 AC_PROG_CXX
 AC_PROG_CC
-AC_PROG_LIBTOOL
-AC_LIBTOOL_WIN32_DLL
+LT_INIT
+AC_PROG_AWK
 
 # Checks for libraries.
+AM_ICONV
+PKG_CHECK_MODULES([CPPUNIT], [cppunit >= 1.11.6])
+BOOST_REQUIRE
+BOOST_LOCALE
+AC_REQUIRE_AUX_FILE([tap-driver.sh])
 
 # Checks for header files.
 
@@ -33,6 +40,7 @@ AC_CHECK_HEADERS([fcntl.h libintl.h locale.h unistd.h])
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
 AC_C_INLINE
+gl_VISIBILITY
 
 # Checks for library functions.
 AC_FUNC_ERROR_AT_LINE
@@ -40,7 +48,7 @@ AC_HEADER_STDC
 AC_CHECK_FUNCS([memchr setlocale strchr strstr])
 
 dnl internationalization macros
-AM_GNU_GETTEXT
+AM_GNU_GETTEXT([external])
 AM_GNU_GETTEXT_REQUIRE_VERSION(0.17)
 
 AC_ARG_WITH(warnings,[  --with-warnings         compile with warning messages], [
@@ -98,15 +106,17 @@ AC_SUBST(READLINELIB)
 
 AC_CONFIG_FILES([Makefile
 		 hunspell.pc
-                 man/Makefile
-                 man/hu/Makefile
-                 intl/Makefile
+                 docs/Makefile
+                 docs/hu/Makefile
                  po/Makefile.in
 		 src/Makefile
 		 src/hunspell/Makefile
 		 src/hunspell/hunvisapi.h
 		 src/parsers/Makefile
 		 src/tools/Makefile
+		 src/hunspell2/Makefile
                  tests/Makefile
-                 tests/suggestiontest/Makefile])
+                 tests/suggestiontest/Makefile
+                 tests/v1cmdline/Makefile
+                 tests/hun2/Makefile])
 AC_OUTPUT

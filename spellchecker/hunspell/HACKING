@@ -1,8 +1,0 @@
-To bump a release
-
-1. edit...
-  a) ./configure.ac
-and convert release string X.Y.Z/X,Y,Z to the next version
-
-2. autoconf && ./configure && make
-and the various strings will get updated by the build tooling
