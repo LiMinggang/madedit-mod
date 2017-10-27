@@ -1,7 +1,7 @@
 import sys, os, stat, string
 
 app = ["SingleInstance","ReloadFilesList","Language","AutoBackup","FindListFileOnly","FindOpenedFiles","FindDir","FindSubDir","AutoSaveTimeout",]
-view = ["TBStandardPos","TBEditorPos","TBSearchReplacePos","TBTextviewPos","TBEditModePos","TBMacroPos","TBFontEncodingPos","WindowMaximize","MaxDisplaySize","WindowLeft","WindowTop","WindowWidth","WindowHeight","QuickSearchBarStatus","InfoWindowStatus"]
+view = ["TBStandardPos","TBEditorPos","TBSearchReplacePos","TBTextviewPos","TBEditModePos","TBMacroPos","TBFontEncodingPos","WindowMaximize","MaxDisplaySize","WindowLeft","WindowTop","WindowWidth","WindowHeight","QuickSearchBarStatus","InfoWindowStatus", "ShowQSearchBarOnStart"]
 qsearch = [ "QuickSearchWholeWord", "QuickSearchCaseSensitive", "QuickSearchRegEx", "QuickSearchDotMatchNewLine"]
 delet = ["SearchListFileOnly", "ShowToolbarStandard", "ShowToolbarEditor", "ShowToolbarSearchReplace", "ShowToolbarTextview", "ShowToolbarEditMode", "ShowToolbarMacro"]
 

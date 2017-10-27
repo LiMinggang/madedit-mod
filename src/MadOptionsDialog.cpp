@@ -1191,6 +1191,10 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	}
 	while(cd->command > 0);
 
+	TreeCtrl1->Expand(menuRoot);
+	TreeCtrl1->Expand(editorRoot);
+	TreeCtrl1->Expand(root);
+
 	AuiNotebook1->SetWindowStyleFlag(wxAUI_NB_TOP|wxAUI_NB_TAB_MOVE|wxAUI_NB_SCROLL_BUTTONS);
 
 #if defined(__WXMSW__) && (wxMAJOR_VERSION >= 3)
