@@ -1,9 +1,12 @@
 import sys, os, stat, string
 
-app = ["SingleInstance","ReloadFilesList","Language","AutoBackup","FindListFileOnly","FindOpenedFiles","FindDir","FindSubDir","AutoSaveTimeout",]
-view = ["TBStandardPos","TBEditorPos","TBSearchReplacePos","TBTextviewPos","TBEditModePos","TBMacroPos","TBFontEncodingPos","WindowMaximize","MaxDisplaySize","WindowLeft","WindowTop","WindowWidth","WindowHeight","QuickSearchBarStatus","InfoWindowStatus", "ShowQSearchBarOnStart"]
+app = ["SingleInstance","ReloadFiles","ReloadFilesList","Language","AutoBackup","FindListFileOnly","FindOpenedFiles","FindDir","FindSubDir","AutoSaveTimeout",]
+view = ["TBStandardPos","TBEditorPos","TBSearchReplacePos","TBTextviewPos","TBEditModePos","TBMacroPos","TBFontEncodingPos","WindowMaximize","MaxDisplaySize",
+"WindowLeft","WindowTop","WindowWidth","WindowHeight", "SearchWinLeft", "SearchWinTop", "AlwaysTransparent", 
+"QuickSearchBarStatus","InfoWindowStatus"]
 qsearch = [ "QuickSearchWholeWord", "QuickSearchCaseSensitive", "QuickSearchRegEx", "QuickSearchDotMatchNewLine"]
-delet = ["SearchListFileOnly", "ShowToolbarStandard", "ShowToolbarEditor", "ShowToolbarSearchReplace", "ShowToolbarTextview", "ShowToolbarEditMode", "ShowToolbarMacro"]
+delet = ["SearchListFileOnly", "ShowToolbarStandard", "ShowToolbarEditor", "ShowToolbarSearchReplace", "ShowToolbarTextview",
+"ShowToolbarEditMode", "ShowToolbarMacro", "ShowQSearchBarOnStart", "SpellTooltips", "ThesTooltips"]
 
 newhdrs = ["[Application]", "[UIView]", "[QuickSearch]"]
 
@@ -26,20 +29,17 @@ if (__name__=="__main__"):
         for line in data:
             tags = line.split('=')
             if len(tags) > 1:
-                if tags[0] in app:
-                    if tags[0] not in apphds:
-                        appcfg += line + '\n'
-                        apphds.append(tags[0])
-                elif tags[0] in view:
-                    if tags[0] not in viewhds:
-                        viewcfg += line + '\n'
-                        viewhds.append(tags[0])
-                elif tags[0] in qsearch:
-                    if tags[0] not in qshdrs:
-                        qsearchcfg += line + '\n'
-                        qshdrs.append(tags[0])
-                elif tags[0] in delet:
+                if tags[0] in delet:
                     continue
+                elif ( tags[0] in app ) and (tags[0] not in apphds):
+                    appcfg += line + '\n'
+                    apphds.append(tags[0])
+                elif ( tags[0] in view ) and ( tags[0] not in viewhds ):
+                    viewcfg += line + '\n'
+                    viewhds.append(tags[0])
+                elif ( tags[0] in qsearch ) and ( tags[0] not in qshdrs ):
+                    qsearchcfg += line + '\n'
+                    qshdrs.append(tags[0])
                 else:
                     newcfg += line + '\n'
             else:
