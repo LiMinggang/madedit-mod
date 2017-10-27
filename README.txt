@@ -129,6 +129,7 @@ Fix: TXT syntax would not be applied on first loading(0.4.10) #244
 Fix: Change font size/font/encoding/syntax/linespacing will not update font toolbar #246
 Fix: Remove toggle show Quick Search bar on Option dialog
 Fix: Restruction of MadEdit config
+Other minor improvements
 
 Mod v0.4.10
 1.New: Settings for new document in Options
