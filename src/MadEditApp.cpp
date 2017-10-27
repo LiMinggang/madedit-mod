@@ -741,6 +741,14 @@ void MadEditApp::ShowMainFrame( MadEditFrame *mainFrame, bool maximize )
 
 			// use OnReceiveMessage() to open the files
 			OnReceiveMessage( files.c_str(), ( files.size() + 1 )*sizeof( wxChar ), false );
+			int selid = mainFrame->OpenedFileCount();
+			if(selid > 1)
+			{
+				selid -= 1;
+				int nselid = cfg->ReadLong( wxT( "/Application/LastWorkingFile" ), selid );
+				if( nselid >= 0 && selid > nselid )
+					mainFrame->ActivateFile( nselid );
+			}
 		}
 
 		files.Empty();

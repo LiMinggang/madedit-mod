@@ -3661,18 +3661,27 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 	bool bb = m_ReloadFiles;
 
 	//m_Config->Read(wxT("/Application/ReloadFiles"), &bb);
-	if( bb && count > 0 )
+	bool delsel = true;
+
+	if( bb && count > 1 )
 	{
 		count = m_Notebook->GetFilesList( files );
-		wxString selname = g_ActiveMadEdit->GetFileName();
-
-		if( count != 1 && !selname.IsEmpty() )
+		int selid = m_Notebook->GetSelection();
+		if( selid != ( count - 1 ))
 		{
-			files += selname; // append selname to activate it
-			files += g_MadConfigSeparator;
+			wxString selname = g_ActiveMadEdit->GetFileName();
+
+			if( !selname.IsEmpty())
+			{
+				m_Config->Write( wxT( "/Application/LastWorkingFile" ), selid );
+				delsel = false;
+				//files += selname; // append selname to activate it
+				//files += g_MadConfigSeparator;
+			}
 		}
 	}
 
+	if( delsel ) m_Config->DeleteEntry(wxT("/Application/LastWorkingFile"));
 	m_Config->Write( wxT( "/Application/ReloadFilesList" ), files );
 
 	if( m_PurgeHistory )
@@ -4394,6 +4403,28 @@ size_t MadEditFrame::OpenedFileCount()
 	return m_Notebook->GetPageCount();
 }
 
+void MadEditFrame::ActivateFile(int num)
+{
+	int selid = m_Notebook->GetSelection();
+	g_CheckModTimeForReload = false;
+	m_Notebook->SetSelection( num );
+	MadEdit *madedit = ( MadEdit* )m_Notebook->GetPage( m_Notebook->GetSelection() );
+
+	if( madedit != g_ActiveMadEdit )
+	{
+		wxAuiNotebookEvent event( wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGED, m_Notebook->GetId() );
+		event.SetSelection( m_Notebook->GetSelection() );
+		event.SetOldSelection( selid );
+		event.SetEventObject( this );
+		OnNotebookPageChanged( event );
+	}
+
+	g_CheckModTimeForReload = true;
+	g_ActiveMadEdit->ReloadByModificationTime();
+	g_ActiveMadEdit->SetFocus();
+	UpdateFontEncoding();
+}
+
 bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeSelection /*= true*/ )
 {
 	wxString title, filename( fname ), linenumstr;
@@ -4470,25 +4501,9 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 
 				if(changeSelection)
 				{
-					g_CheckModTimeForReload = false;
-					m_Notebook->SetSelection( id );
-					MadEdit *madedit = ( MadEdit* )m_Notebook->GetPage( m_Notebook->GetSelection() );
-
-					if( madedit != g_ActiveMadEdit )
-					{
-						wxAuiNotebookEvent event( wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGED, m_Notebook->GetId() );
-						event.SetSelection( m_Notebook->GetSelection() );
-						event.SetOldSelection( selid );
-						event.SetEventObject( this );
-						OnNotebookPageChanged( event );
-					}
-
-					g_CheckModTimeForReload = true;
-					g_ActiveMadEdit->ReloadByModificationTime();
+					ActivateFile(id);
 					m_RecentFiles->AddFileToHistory( filename ); // bring the filename to top of list
-					g_ActiveMadEdit->SetFocus();
 				}
-				UpdateFontEncoding();
 				return true;
 			}
 		}

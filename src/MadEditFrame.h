@@ -748,6 +748,7 @@ public:
 	void InitMenu_HScrollPop();
 	void InitMenu_VScrollPop();
 	size_t OpenedFileCount();
+    void ActivateFile(int num);
 	bool OpenFile( const wxString &filename, bool mustExist, bool changeSelection = true ); // if filename is empty, open a new file
 	void RunScriptWithFile( const wxString &filename, const wxString &script, bool mustExist, bool closeafterdone, bool ignorereadonly, bool activeFile );
 	void CloseFile( size_t pageId );
