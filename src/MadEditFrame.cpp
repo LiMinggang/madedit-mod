@@ -718,6 +718,7 @@ public:
 				continue;
 			}
 
+			fpdata.bmlinenums.clear();
 			int bmp = text.Find(g_MadBmSeparator);
 			if(bmp != wxNOT_FOUND) {
 				bms = text.Right( text.Len() - ( bmp + 1 ) );
