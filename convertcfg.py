@@ -8,7 +8,7 @@ delet = ["SearchListFileOnly", "ShowToolbarStandard", "ShowToolbarEditor", "Show
 newhdrs = ["[Application]", "[UIView]", "[QuickSearch]"]
 
 if (__name__=="__main__"):
-    name = "MadEdit.cfg"
+    name = "madedit.cfg"
     try:
         fd = open(name, "r") 
         #fd = os.open(name,os.O_RDONLY)

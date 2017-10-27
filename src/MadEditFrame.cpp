@@ -3658,26 +3658,28 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 
 	// save ReloadFilesList
 	wxString files;
-	size_t count = m_Notebook->GetPageCount();
 	bool bb = m_ReloadFiles;
 
 	//m_Config->Read(wxT("/Application/ReloadFiles"), &bb);
 	bool delsel = true;
 
-	if( bb && count > 1 )
+	if( bb )
 	{
-		count = m_Notebook->GetFilesList( files );
-		int selid = m_Notebook->GetSelection();
-		if( selid != ( count - 1 ))
+		size_t count = m_Notebook->GetFilesList( files );
+		if( count > 1 )
 		{
-			wxString selname = g_ActiveMadEdit->GetFileName();
-
-			if( !selname.IsEmpty())
+			int selid = m_Notebook->GetSelection();
+			if( selid != ( count - 1 ))
 			{
-				m_Config->Write( wxT( "/Application/LastWorkingFile" ), selid );
-				delsel = false;
-				//files += selname; // append selname to activate it
-				//files += g_MadConfigSeparator;
+				wxString selname = g_ActiveMadEdit->GetFileName();
+
+				if( !selname.IsEmpty())
+				{
+					m_Config->Write( wxT( "/Application/LastWorkingFile" ), selid );
+					delsel = false;
+					//files += selname; // append selname to activate it
+					//files += g_MadConfigSeparator;
+				}
 			}
 		}
 	}
