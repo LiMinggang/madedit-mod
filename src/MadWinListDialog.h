@@ -38,13 +38,13 @@ class MadWinListDialog: public wxDialog
 	protected:
 
 		//(*Identifiers(MadWinListDialog)
-		static const long ID_LISTCTRLMADWINLIST;
-		static const long ID_BUTTONACTIVATE;
-		static const long ID_BUTTONSAVE;
-		static const long ID_BUTTONSAVEAS;
-		static const long ID_BUTTONCLOSEWINDOWS;
-		static const long ID_BUTTONSORTTABBYNAME;
-		static const long ID_BUTTONSORTTABBYPATH;
+		//static const long ID_LISTCTRLMADWINLIST;
+		//static const long ID_BUTTONACTIVATE;
+		//static const long ID_BUTTONSAVE;
+		//static const long ID_BUTTONSAVEAS;
+		//static const long ID_BUTTONCLOSEWINDOWS;
+		//static const long ID_BUTTONSORTTABBYNAME;
+		//static const long ID_BUTTONSORTTABBYPATH;
 		//*)
 
 		static const long COL_TABNAME;

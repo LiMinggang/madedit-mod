@@ -28,10 +28,10 @@ class MadSortDialog: public wxDialog
 	protected:
 
 		//(*Identifiers(MadSortDialog)
-		static const long ID_WXRADIOBOXORDER;
-		static const long ID_WXCHECKBOXCASE;
-		static const long ID_WXCHECKBOXNUMERIC;
-		static const long ID_WXCHECKBOXREMOVEDUP;
+		//static const long ID_WXRADIOBOXORDER;
+		//static const long ID_WXCHECKBOXCASE;
+		//static const long ID_WXCHECKBOXNUMERIC;
+		//static const long ID_WXCHECKBOXREMOVEDUP;
 		//*)
 
 	private:

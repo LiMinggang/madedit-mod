@@ -12,13 +12,13 @@
 #include "MadWinListDialog.h"
 
 //(*IdInit(MadWinListDialog)
-const long MadWinListDialog::ID_LISTCTRLMADWINLIST = wxNewId();
-const long MadWinListDialog::ID_BUTTONACTIVATE = wxNewId();
-const long MadWinListDialog::ID_BUTTONSAVE = wxNewId();
-const long MadWinListDialog::ID_BUTTONSAVEAS = wxNewId();
-const long MadWinListDialog::ID_BUTTONCLOSEWINDOWS = wxNewId();
-const long MadWinListDialog::ID_BUTTONSORTTABBYNAME = wxNewId();
-const long MadWinListDialog::ID_BUTTONSORTTABBYPATH = wxNewId();
+//const long MadWinListDialog::ID_LISTCTRLMADWINLIST = wxNewId();
+//const long MadWinListDialog::ID_BUTTONACTIVATE = wxNewId();
+//const long MadWinListDialog::ID_BUTTONSAVE = wxNewId();
+//const long MadWinListDialog::ID_BUTTONSAVEAS = wxNewId();
+//const long MadWinListDialog::ID_BUTTONCLOSEWINDOWS = wxNewId();
+//const long MadWinListDialog::ID_BUTTONSORTTABBYNAME = wxNewId();
+//const long MadWinListDialog::ID_BUTTONSORTTABBYPATH = wxNewId();
 //*)
 
 const long MadWinListDialog::COL_TABNAME = 0;
@@ -37,21 +37,21 @@ MadWinListDialog::MadWinListDialog(wxWindow* parent,wxWindowID id)
 	Create(parent, id, _("Windows"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxSYSTEM_MENU|wxCLOSE_BOX, _T("id"));
 	BoxSizer1 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
-	MadWindowsList = new wxListCtrl(this, ID_LISTCTRLMADWINLIST, wxDefaultPosition, wxSize(400,300), wxLC_REPORT|wxSIMPLE_BORDER|wxVSCROLL, wxDefaultValidator, _T("ID_LISTCTRLMADWINLIST"));
+	MadWindowsList = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxSize(400,300), wxLC_REPORT|wxSIMPLE_BORDER|wxVSCROLL, wxDefaultValidator, _T("ID_LISTCTRLMADWINLIST"));
 	BoxSizer2->Add(MadWindowsList, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer1->Add(BoxSizer2, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer3 = new wxBoxSizer(wxVERTICAL);
-	ButtonActivate = new wxButton(this, ID_BUTTONACTIVATE, _("Acti&vate"), wxDefaultPosition, wxSize(110,-1), 0, wxDefaultValidator, _T("ID_BUTTONACTIVATE"));
+	ButtonActivate = new wxButton(this, wxID_ANY, _("Acti&vate"), wxDefaultPosition, wxSize(110,-1), 0, wxDefaultValidator, _T("ID_BUTTONACTIVATE"));
 	BoxSizer3->Add(ButtonActivate, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-	ButtonSave = new wxButton(this, ID_BUTTONSAVE, _("&Save"), wxDefaultPosition, wxSize(110,-1), 0, wxDefaultValidator, _T("ID_BUTTONSAVE"));
+	ButtonSave = new wxButton(this, wxID_ANY, _("&Save"), wxDefaultPosition, wxSize(110,-1), 0, wxDefaultValidator, _T("ID_BUTTONSAVE"));
 	BoxSizer3->Add(ButtonSave, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-	ButtonSaveAs = new wxButton(this, ID_BUTTONSAVEAS, _("Save &As..."), wxDefaultPosition, wxSize(110,-1), 0, wxDefaultValidator, _T("ID_BUTTONSAVEAS"));
+	ButtonSaveAs = new wxButton(this, wxID_ANY, _("Save &As..."), wxDefaultPosition, wxSize(110,-1), 0, wxDefaultValidator, _T("ID_BUTTONSAVEAS"));
 	BoxSizer3->Add(ButtonSaveAs, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-	ButtonCloseWindows = new wxButton(this, ID_BUTTONCLOSEWINDOWS, _("&Close Window(s)"), wxDefaultPosition, wxSize(110,-1), 0, wxDefaultValidator, _T("ID_BUTTONCLOSEWINDOWS"));
+	ButtonCloseWindows = new wxButton(this, wxID_ANY, _("&Close Window(s)"), wxDefaultPosition, wxSize(110,-1), 0, wxDefaultValidator, _T("ID_BUTTONCLOSEWINDOWS"));
 	BoxSizer3->Add(ButtonCloseWindows, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-	ButtonSortTabByName = new wxButton(this, ID_BUTTONSORTTABBYNAME, _("Sort Tab(&Name)"), wxDefaultPosition, wxSize(110,-1), 0, wxDefaultValidator, _T("ID_BUTTONSORTTABBYNAME"));
+	ButtonSortTabByName = new wxButton(this, wxID_ANY, _("Sort Tab(&Name)"), wxDefaultPosition, wxSize(110,-1), 0, wxDefaultValidator, _T("ID_BUTTONSORTTABBYNAME"));
 	BoxSizer3->Add(ButtonSortTabByName, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-	ButtonSortTabByPath = new wxButton(this, ID_BUTTONSORTTABBYPATH, _("Sort Tab(&Path)"), wxDefaultPosition, wxSize(110,-1), 0, wxDefaultValidator, _T("ID_BUTTONSORTTABBYPATH"));
+	ButtonSortTabByPath = new wxButton(this, wxID_ANY, _("Sort Tab(&Path)"), wxDefaultPosition, wxSize(110,-1), 0, wxDefaultValidator, _T("ID_BUTTONSORTTABBYPATH"));
 	ButtonSortTabByPath->SetMinSize(wxSize(110,-1));
 	BoxSizer3->Add(ButtonSortTabByPath, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	ButtonOk = new wxButton(this, wxID_OK, _("&Open"), wxDefaultPosition, wxSize(110,-1), 0, wxDefaultValidator, _T("wxID_OK"));
@@ -61,20 +61,20 @@ MadWinListDialog::MadWinListDialog(wxWindow* parent,wxWindowID id)
 	BoxSizer1->Fit(this);
 	BoxSizer1->SetSizeHints(this);
 
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonActivateClick, this, ID_BUTTONACTIVATE );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonSaveClick, this, ID_BUTTONSAVE );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonSaveAsClick, this, ID_BUTTONSAVEAS );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonCloseWindowsClick, this, ID_BUTTONCLOSEWINDOWS );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonSortTabByNameClick, this, ID_BUTTONSORTTABBYNAME );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonSortTabByPathClick, this, ID_BUTTONSORTTABBYPATH );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonActivateClick, this, ButtonActivate->GetId() );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonSaveClick, this, ButtonSave->GetId() );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonSaveAsClick, this, ButtonSaveAs->GetId() );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonCloseWindowsClick, this, ButtonCloseWindows->GetId() );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonSortTabByNameClick, this, ButtonSortTabByName->GetId() );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonSortTabByPathClick, this, ButtonSortTabByPath->GetId() );
 	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonOkClick, this, wxID_OK );
 	Bind( wxEVT_CLOSE_WINDOW, &MadWinListDialog::OnMadWinListDialogClose, this, wxID_ANY );
 	Bind( wxEVT_KEY_DOWN, &MadWinListDialog::OnKeyDown, this, wxID_ANY );
 	//*)
 
-	MadWindowsList->Bind(wxEVT_KEY_DOWN, &MadWinListDialog::OnKeyDown, this);
-	Bind(wxEVT_LIST_ITEM_SELECTED, &MadWinListDialog::OnWinListSelectionChanged, this, ID_LISTCTRLMADWINLIST);
-	Bind(wxEVT_LIST_ITEM_DESELECTED, &MadWinListDialog::OnWinListSelectionChanged, this, ID_LISTCTRLMADWINLIST);
+	MadWindowsList->Bind( wxEVT_KEY_DOWN, &MadWinListDialog::OnKeyDown, this );
+	Bind( wxEVT_LIST_ITEM_SELECTED, &MadWinListDialog::OnWinListSelectionChanged, this, MadWindowsList->GetId() );
+	Bind( wxEVT_LIST_ITEM_DESELECTED, &MadWinListDialog::OnWinListSelectionChanged, this, MadWindowsList->GetId() );
 
 	ResetButtonStatus();
 

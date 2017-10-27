@@ -16,25 +16,25 @@
 // MadNumberDlg
 //----------------------------------------------------------------------------
 //Add Custom Events	only in	the	appropriate	block.
-const long MadNumberDlg::ID_WXSTATICTEXTPREVIEW = wxNewId();
-const long MadNumberDlg::ID_WXSTATICTEXT6 = wxNewId();
-const long MadNumberDlg::ID_WXEDITPOSTFIX = wxNewId();
-const long MadNumberDlg::ID_WXCHECKPOSTFIX = wxNewId();
-const long MadNumberDlg::ID_WXEDITPREFIX = wxNewId();
-const long MadNumberDlg::ID_WXCHECKPREFIX = wxNewId();
-const long MadNumberDlg::ID_WXALIGN = wxNewId();
-const long MadNumberDlg::ID_WXSTATICTEXT4 = wxNewId();
-const long MadNumberDlg::ID_WXFORMAT = wxNewId();
-const long MadNumberDlg::ID_WXSTATICTEXT3 = wxNewId();
-const long MadNumberDlg::ID_WXCHOICENUMBERSTEPTYPE = wxNewId();
-const long MadNumberDlg::ID_WXSTATICTEXT2 = wxNewId();
-const long MadNumberDlg::ID_PADWITH = wxNewId();
-const long MadNumberDlg::ID_WXEDITNUMBEROFCHARS = wxNewId();
-const long MadNumberDlg::ID_WXSTATICTEXT5 = wxNewId();
-const long MadNumberDlg::ID_EDITNUMBERINGSTEP = wxNewId();
-const long MadNumberDlg::ID_WXSTATICTEXT8 = wxNewId();
-const long MadNumberDlg::ID_WXEDITINITIALNUMBER = wxNewId();
-const long MadNumberDlg::ID_WXSTATICTEXT1 = wxNewId();
+//const long MadNumberDlg::ID_WXSTATICTEXTPREVIEW = wxNewId();
+//const long MadNumberDlg::ID_WXSTATICTEXT6 = wxNewId();
+//const long MadNumberDlg::ID_WXEDITPOSTFIX = wxNewId();
+//const long MadNumberDlg::ID_WXCHECKPOSTFIX = wxNewId();
+//const long MadNumberDlg::ID_WXEDITPREFIX = wxNewId();
+//const long MadNumberDlg::ID_WXCHECKPREFIX = wxNewId();
+//const long MadNumberDlg::ID_WXALIGN = wxNewId();
+//const long MadNumberDlg::ID_WXSTATICTEXT4 = wxNewId();
+//const long MadNumberDlg::ID_WXFORMAT = wxNewId();
+//const long MadNumberDlg::ID_WXSTATICTEXT3 = wxNewId();
+//const long MadNumberDlg::ID_WXCHOICENUMBERSTEPTYPE = wxNewId();
+//const long MadNumberDlg::ID_WXSTATICTEXT2 = wxNewId();
+//const long MadNumberDlg::ID_PADWITH = wxNewId();
+//const long MadNumberDlg::ID_WXEDITNUMBEROFCHARS = wxNewId();
+//const long MadNumberDlg::ID_WXSTATICTEXT5 = wxNewId();
+//const long MadNumberDlg::ID_EDITNUMBERINGSTEP = wxNewId();
+//const long MadNumberDlg::ID_WXSTATICTEXT8 = wxNewId();
+//const long MadNumberDlg::ID_WXEDITINITIALNUMBER = wxNewId();
+//const long MadNumberDlg::ID_WXSTATICTEXT1 = wxNewId();
 
 MadNumberDlg * g_MadNumberDlg = nullptr;
 
@@ -47,13 +47,13 @@ MadNumberDlg::MadNumberDlg(wxWindow *parent, wxWindowID id, const wxString &titl
 	Bind( wxEVT_CLOSE_WINDOW, &MadNumberDlg::OnClose, this );
 	Bind( wxEVT_BUTTON, &MadNumberDlg::WxOKButtonClick, this, wxID_OK );
 
-	Bind( wxEVT_TEXT,&MadNumberDlg::WxEditItialnumberUpdated, this, ID_WXEDITINITIALNUMBER );
+	Bind( wxEVT_TEXT,&MadNumberDlg::WxEditItialnumberUpdated, this, WxEditInitialNumber->GetId() );
 	
-	Bind( wxEVT_TEXT, &MadNumberDlg::WxEditPostfixUpdated, this, ID_WXEDITPOSTFIX );
-	Bind( wxEVT_CHECKBOX, &MadNumberDlg::WxCheckPostfixClick, this, ID_WXCHECKPOSTFIX );
+	Bind( wxEVT_TEXT, &MadNumberDlg::WxEditPostfixUpdated, this, WxEditPostfix->GetId() );
+	Bind( wxEVT_CHECKBOX, &MadNumberDlg::WxCheckPostfixClick, this, WxCheckPostfix->GetId() );
 
-	Bind( wxEVT_TEXT, &MadNumberDlg::WxEditPrefixUpdated, this, ID_WXEDITPREFIX );
-	Bind( wxEVT_CHECKBOX, &MadNumberDlg::WxCheckPrefixClick, this, ID_WXCHECKPREFIX );
+	Bind( wxEVT_TEXT, &MadNumberDlg::WxEditPrefixUpdated, this, WxEditPrefix->GetId() );
+	Bind( wxEVT_CHECKBOX, &MadNumberDlg::WxCheckPrefixClick, this, WxCheckPrefix->GetId() );
 }
 
 MadNumberDlg::~MadNumberDlg()
@@ -78,42 +78,42 @@ void MadNumberDlg::CreateGUIControls()
 	WxBoxSizer11 = new wxBoxSizer(wxVERTICAL);
 	WxBoxSizer2->Add(WxBoxSizer11, 0, wxALIGN_LEFT | wxALL, 5);
 
-	WxStaticText1 = new wxStaticText(this, ID_WXSTATICTEXT1, _("Intial Number"), wxPoint(32, 5), wxDefaultSize, 0, wxT("WxStaticText1"));
+	WxStaticText1 = new wxStaticText(this, wxID_ANY, _("Intial Number"), wxPoint(32, 5), wxDefaultSize, 0, wxT("WxStaticText1"));
 	WxBoxSizer11->Add(WxStaticText1, 0, wxALIGN_LEFT | wxALL, 5);
 
-	WxEditInitialNumber = new wxTextCtrl(this, ID_WXEDITINITIALNUMBER, wxT("0"), wxPoint(10, 34), wxSize(122, -1), 0, wxTextValidator(wxFILTER_NUMERIC, nullptr), wxT("WxEditInitialNumber"));
+	WxEditInitialNumber = new wxTextCtrl(this, wxID_ANY, wxT("0"), wxPoint(10, 34), wxSize(122, -1), 0, wxTextValidator(wxFILTER_NUMERIC, nullptr), wxT("WxEditInitialNumber"));
 	WxBoxSizer11->Add(WxEditInitialNumber, 0, wxALIGN_LEFT | wxALL, 5);
 
-	WxStaticText8 = new wxStaticText(this, ID_WXSTATICTEXT8, _("Numbering Step"), wxPoint(25, 62), wxDefaultSize, 0, wxT("WxStaticText8"));
+	WxStaticText8 = new wxStaticText(this, wxID_ANY, _("Numbering Step"), wxPoint(25, 62), wxDefaultSize, 0, wxT("WxStaticText8"));
 	WxBoxSizer11->Add(WxStaticText8, 0, wxALIGN_LEFT | wxALL, 5);
 
-	WxEditNumberingStep = new wxTextCtrl(this, ID_EDITNUMBERINGSTEP, wxT("1"), wxPoint(10, 91), wxSize(121, -1), 0, wxTextValidator(wxFILTER_NUMERIC, nullptr), wxT("WxEditNumberingStep"));
+	WxEditNumberingStep = new wxTextCtrl(this, wxID_ANY, wxT("1"), wxPoint(10, 91), wxSize(121, -1), 0, wxTextValidator(wxFILTER_NUMERIC, nullptr), wxT("WxEditNumberingStep"));
 	WxBoxSizer11->Add(WxEditNumberingStep, 0, wxALIGN_LEFT | wxALL, 5);
 
-	WxStaticText5 = new wxStaticText(this, ID_WXSTATICTEXT5, _("Number of Chars"), wxPoint(23, 120), wxDefaultSize, 0, wxT("WxStaticText5"));
+	WxStaticText5 = new wxStaticText(this, wxID_ANY, _("Number of Chars"), wxPoint(23, 120), wxDefaultSize, 0, wxT("WxStaticText5"));
 	WxBoxSizer11->Add(WxStaticText5, 0, wxALIGN_LEFT | wxALL, 5);
 
-	WxEditNumberOfChars = new wxTextCtrl(this, ID_WXEDITNUMBEROFCHARS, wxT("0"), wxPoint(9, 149), wxSize(124, -1), 0, wxTextValidator(wxFILTER_NUMERIC, nullptr), wxT("WxEditNumberOfChars"));
+	WxEditNumberOfChars = new wxTextCtrl(this, wxID_ANY, wxT("0"), wxPoint(9, 149), wxSize(124, -1), 0, wxTextValidator(wxFILTER_NUMERIC, nullptr), wxT("WxEditNumberOfChars"));
 	WxBoxSizer11->Add(WxEditNumberOfChars, 0, wxALIGN_LEFT | wxALL, 5);
 
-	WxPadChar = new wxCheckBox(this, ID_PADWITH, _("Pad With Zero"), wxPoint(5, 176), wxSize(132, -1), 0, wxDefaultValidator, wxT("WxPadChar"));
+	WxPadChar = new wxCheckBox(this, wxID_ANY, _("Pad With Zero"), wxPoint(5, 176), wxSize(132, -1), 0, wxDefaultValidator, wxT("WxPadChar"));
 	WxPadChar->SetValue(true);
 	WxBoxSizer11->Add(WxPadChar, 0, wxALIGN_LEFT | wxALL, 5);
 
 	WxBoxSizer4 = new wxBoxSizer(wxVERTICAL);
 	WxBoxSizer2->Add(WxBoxSizer4, 0, wxALIGN_LEFT |	wxALL, 5);
 
-	WxStaticText2 = new wxStaticText(this, ID_WXSTATICTEXT2, _("Numbering Step Type"), wxPoint(9, 5), wxDefaultSize, 0, wxT("WxStaticText2"));
+	WxStaticText2 = new wxStaticText(this, wxID_ANY, _("Numbering Step Type"), wxPoint(9, 5), wxDefaultSize, 0, wxT("WxStaticText2"));
 	WxBoxSizer4->Add(WxStaticText2, 0, wxALIGN_LEFT | wxALL, 5);
 
 	wxArrayString arrayStringFor_WxChoiceNumberStepType;
 	arrayStringFor_WxChoiceNumberStepType.Add(_("Linear"));
 	arrayStringFor_WxChoiceNumberStepType.Add(_("Exponential"));
-	WxChoiceNumberStepType = new wxChoice(this, ID_WXCHOICENUMBERSTEPTYPE, wxPoint(5, 34), wxSize(128, -1), arrayStringFor_WxChoiceNumberStepType, 0, wxDefaultValidator, wxT("WxChoiceNumberStepType"));
+	WxChoiceNumberStepType = new wxChoice(this, wxID_ANY, wxPoint(5, 34), wxSize(128, -1), arrayStringFor_WxChoiceNumberStepType, 0, wxDefaultValidator, wxT("WxChoiceNumberStepType"));
 	WxChoiceNumberStepType->SetSelection(0);
 	WxBoxSizer4->Add(WxChoiceNumberStepType, 0, wxALIGN_LEFT | wxALL, 5);
 
-	WxStaticText3 = new wxStaticText(this, ID_WXSTATICTEXT3, _("Format"), wxPoint(48, 67), wxDefaultSize, 0, wxT("WxStaticText3"));
+	WxStaticText3 = new wxStaticText(this, wxID_ANY, _("Format"), wxPoint(48, 67), wxDefaultSize, 0, wxT("WxStaticText3"));
 	WxBoxSizer4->Add(WxStaticText3, 0, wxALIGN_LEFT | wxALL, 5);
 
 	wxArrayString arrayStringFor_WxChoiceFormat;
@@ -121,17 +121,17 @@ void MadNumberDlg::CreateGUIControls()
 	arrayStringFor_WxChoiceFormat.Add(_("HEX"));
 	arrayStringFor_WxChoiceFormat.Add(_("BIN"));
 	arrayStringFor_WxChoiceFormat.Add(_("OCT"));
-	WxChoiceFormat = new wxChoice(this, ID_WXFORMAT, wxPoint(5, 96), wxSize(128, -1), arrayStringFor_WxChoiceFormat, 0, wxDefaultValidator, wxT("WxChoiceFormat"));
+	WxChoiceFormat = new wxChoice(this, wxID_ANY, wxPoint(5, 96), wxSize(128, -1), arrayStringFor_WxChoiceFormat, 0, wxDefaultValidator, wxT("WxChoiceFormat"));
 	WxChoiceFormat->SetSelection(0);
 	WxBoxSizer4->Add(WxChoiceFormat, 0, wxALIGN_LEFT | wxALL, 5);
 
-	WxStaticText4 = new wxStaticText(this, ID_WXSTATICTEXT4, _("Align"), wxPoint(51, 129), wxDefaultSize, 0, wxT("WxStaticText4"));
+	WxStaticText4 = new wxStaticText(this, wxID_ANY, _("Align"), wxPoint(51, 129), wxDefaultSize, 0, wxT("WxStaticText4"));
 	WxBoxSizer4->Add(WxStaticText4, 0, wxALIGN_LEFT | wxALL, 5);
 
 	wxArrayString arrayStringFor_WxChoiceAlign;
 	arrayStringFor_WxChoiceAlign.Add(_("Align Left"));
 	arrayStringFor_WxChoiceAlign.Add(_("Align Right"));
-	WxChoiceAlign = new wxChoice(this, ID_WXALIGN, wxPoint(5, 158), wxSize(128, -1), arrayStringFor_WxChoiceAlign, 0, wxDefaultValidator, wxT("WxChoiceAlign"));
+	WxChoiceAlign = new wxChoice(this, wxID_ANY, wxPoint(5, 158), wxSize(128, -1), arrayStringFor_WxChoiceAlign, 0, wxDefaultValidator, wxT("WxChoiceAlign"));
 	WxChoiceAlign->SetSelection(1);
 	WxBoxSizer4->Add(WxChoiceAlign, 0, wxALIGN_LEFT | wxALL, 5);
 
@@ -141,20 +141,20 @@ void MadNumberDlg::CreateGUIControls()
 	WxBoxSizer6 = new wxBoxSizer(wxHORIZONTAL);
 	WxBoxSizer3->Add(WxBoxSizer6, 0, wxALIGN_CENTER | wxALL, 5);
 
-	WxCheckPrefix = new wxCheckBox(this, ID_WXCHECKPREFIX, _("Prefix"), wxPoint(5, 5), wxSize(132, -1), 0, wxDefaultValidator, wxT("WxCheckPrefix"));
+	WxCheckPrefix = new wxCheckBox(this, wxID_ANY, _("Prefix"), wxPoint(5, 5), wxSize(132, -1), 0, wxDefaultValidator, wxT("WxCheckPrefix"));
 	WxBoxSizer6->Add(WxCheckPrefix, 0, wxALIGN_LEFT | wxALL, 5);
 
-	WxEditPrefix = new wxTextCtrl(this, ID_WXEDITPREFIX, wxT(""), wxPoint(147, 5), wxSize(124, -1), 0, wxDefaultValidator, wxT("WxEditPrefix"));
+	WxEditPrefix = new wxTextCtrl(this, wxID_ANY, wxT(""), wxPoint(147, 5), wxSize(124, -1), 0, wxDefaultValidator, wxT("WxEditPrefix"));
 	WxBoxSizer6->Add(WxEditPrefix, 0, wxALIGN_LEFT | wxALL, 5);
 	WxEditPrefix->Enable(false);
 
 	WxBoxSizer7 = new wxBoxSizer(wxHORIZONTAL);
 	WxBoxSizer3->Add(WxBoxSizer7, 0, wxALIGN_CENTER | wxALL, 5);
 
-	WxCheckPostfix = new wxCheckBox(this, ID_WXCHECKPOSTFIX, _("Postfix"), wxPoint(5, 5), wxSize(132, -1), 0, wxDefaultValidator, wxT("WxCheckPostfix"));
+	WxCheckPostfix = new wxCheckBox(this, wxID_ANY, _("Postfix"), wxPoint(5, 5), wxSize(132, -1), 0, wxDefaultValidator, wxT("WxCheckPostfix"));
 	WxBoxSizer7->Add(WxCheckPostfix, 0, wxALIGN_LEFT | wxALL, 5);
 
-	WxEditPostfix = new wxTextCtrl(this, ID_WXEDITPOSTFIX, wxT("."), wxPoint(147, 5), wxSize(124, -1), 0, wxDefaultValidator, wxT("WxEditPostfix"));
+	WxEditPostfix = new wxTextCtrl(this, wxID_ANY, wxT("."), wxPoint(147, 5), wxSize(124, -1), 0, wxDefaultValidator, wxT("WxEditPostfix"));
 	WxBoxSizer7->Add(WxEditPostfix, 0, wxALIGN_LEFT | wxALL, 5);
 	WxEditPostfix->Enable(false);
 
@@ -170,10 +170,10 @@ void MadNumberDlg::CreateGUIControls()
 	WxCancelButton = new wxButton(this, wxID_CANCEL, _("Cancel"), wxPoint(90, 5), wxDefaultSize, 0, wxDefaultValidator, wxT("WxCancelButton"));
 	WxBoxSizer5->Add(WxCancelButton, 0, wxALIGN_CENTER | wxALL, 5);
 
-	WxStaticText6 = new wxStaticText(this, ID_WXSTATICTEXT6, _("Preview: "), wxPoint(5, 5), wxDefaultSize, 0, wxT("WxStaticText6"));
+	WxStaticText6 = new wxStaticText(this, wxID_ANY, _("Preview: "), wxPoint(5, 5), wxDefaultSize, 0, wxT("WxStaticText6"));
 	WxBoxSizer8->Add(WxStaticText6, 0, wxALIGN_LEFT | wxALL, 5);
 
-	WxStaticTextPreview = new wxStaticText(this, ID_WXSTATICTEXTPREVIEW, wxT("0"), wxPoint(63, 5), wxDefaultSize, 0, wxT("WxStaticTextPreview"));
+	WxStaticTextPreview = new wxStaticText(this, wxID_ANY, wxT("0"), wxPoint(63, 5), wxDefaultSize, 0, wxT("WxStaticTextPreview"));
 	WxBoxSizer8->Add(WxStaticTextPreview, 0, wxALIGN_LEFT | wxALL, 5);
 
 	SetTitle(_("Numbering Configuration"));

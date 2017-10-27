@@ -99,25 +99,25 @@ class MadNumberDlg : public	wxDialog
 		//change your old form code	that are based on the #define control IDs.
 		//#defines may replace a numeric value for the enum	names.
 		//Try copy and pasting the below block in your old form	header files.
-		static const long ID_WXSTATICTEXTPREVIEW;
-		static const long ID_WXSTATICTEXT6;
-		static const long ID_WXEDITPOSTFIX;
-		static const long ID_WXCHECKPOSTFIX;
-		static const long ID_WXEDITPREFIX;
-		static const long ID_WXCHECKPREFIX;
-		static const long ID_WXALIGN;
-		static const long ID_WXSTATICTEXT4;
-		static const long ID_WXFORMAT;
-		static const long ID_WXSTATICTEXT3;
-		static const long ID_WXCHOICENUMBERSTEPTYPE;
-		static const long ID_WXSTATICTEXT2;
-		static const long ID_PADWITH;
-		static const long ID_WXEDITNUMBEROFCHARS;
-		static const long ID_WXSTATICTEXT5;
-		static const long ID_EDITNUMBERINGSTEP;
-		static const long ID_WXSTATICTEXT8;
-		static const long ID_WXEDITINITIALNUMBER;
-		static const long ID_WXSTATICTEXT1;
+		//static const long ID_WXSTATICTEXTPREVIEW;
+		//static const long ID_WXSTATICTEXT6;
+		//static const long ID_WXEDITPOSTFIX;
+		//static const long ID_WXCHECKPOSTFIX;
+		//static const long ID_WXEDITPREFIX;
+		//static const long ID_WXCHECKPREFIX;
+		//static const long ID_WXALIGN;
+		//static const long ID_WXSTATICTEXT4;
+		//static const long ID_WXFORMAT;
+		//static const long ID_WXSTATICTEXT3;
+		//static const long ID_WXCHOICENUMBERSTEPTYPE;
+		//static const long ID_WXSTATICTEXT2;
+		//static const long ID_PADWITH;
+		//static const long ID_WXEDITNUMBEROFCHARS;
+		//static const long ID_WXSTATICTEXT5;
+		//static const long ID_EDITNUMBERINGSTEP;
+		//static const long ID_WXSTATICTEXT8;
+		//static const long ID_WXEDITINITIALNUMBER;
+		//static const long ID_WXSTATICTEXT1;
 
 	private:
 		void OnClose(wxCloseEvent& event);
