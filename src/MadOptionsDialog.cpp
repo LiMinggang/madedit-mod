@@ -162,7 +162,6 @@ const long MadOptionsDialog::ID_CHECKBOXSINGLEINSTANCE = wxNewId();
 const long MadOptionsDialog::ID_CHECKBOXRELOADFILES = wxNewId();
 const long MadOptionsDialog::ID_CHECKBOXRECORDCARETMOVEMENTS = wxNewId();
 const long MadOptionsDialog::ID_CHECKBOXRESTORECARETPOS = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXSHOWQSEARCHBAR = wxNewId();
 const long MadOptionsDialog::ID_CHECKBOXDONOTSAVESETTINGS = wxNewId();
 const long MadOptionsDialog::ID_CHECKBOXPURGEHISTORY = wxNewId();
 const long MadOptionsDialog::ID_CHECKBOXENABLEAUTOSAVE = wxNewId();
@@ -551,10 +550,6 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	CheckBoxRestoreCaretPos->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxRestoreCaretPos);
 	BoxSizer7->Add(CheckBoxRestoreCaretPos, 0, wxALL|wxEXPAND, 2);
-	CheckBoxShowQSearchBar = new wxCheckBox(Panel1, ID_CHECKBOXSHOWQSEARCHBAR, _("Show quick search bar on startup"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXSHOWQSEARCHBAR"));
-	CheckBoxShowQSearchBar->SetValue(false);
-	ADD2CONTROLS(controls, CheckBoxShowQSearchBar);
-	BoxSizer7->Add(CheckBoxShowQSearchBar, 0, wxALL|wxEXPAND, 2);
 	CheckBoxDoNotSaveSettings = new wxCheckBox(Panel1, ID_CHECKBOXDONOTSAVESETTINGS, _("Do not save settings to MadEdit.cfg when MadEdit closed (this session only)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXDONOTSAVESETTINGS"));
 	CheckBoxDoNotSaveSettings->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxDoNotSaveSettings);
@@ -1354,12 +1349,10 @@ void MadOptionsDialog::LoadOptions(void)
 	CheckBoxFixWidthMode->SetValue( bb );
 	extern bool g_DoNotSaveSettings;
 	CheckBoxDoNotSaveSettings->SetValue( g_DoNotSaveSettings );
-	cfg->Read( wxT( "ReloadFiles" ), &bb, true );
+	cfg->Read( wxT( "/Application/ReloadFiles" ), &bb, true );
 	CheckBoxReloadFiles->SetValue( bb );
 	cfg->Read( wxT( "PurgeHistory" ), &bb, false );
 	CheckBoxPurgeHistory->SetValue( bb );
-	cfg->Read( wxT( "/UIView/ShowQSearchBarOnStart" ), &bb, true );
-	CheckBoxShowQSearchBar->SetValue( bb );
 	cfg->Read( wxT( "RestoreCaretPos" ), &bb, true );
 	CheckBoxRestoreCaretPos->SetValue( bb );
 

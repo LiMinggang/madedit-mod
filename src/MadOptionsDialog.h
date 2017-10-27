@@ -115,7 +115,6 @@ class MadOptionsDialog: public wxDialog
 #ifdef __WXMSW__
 		wxCheckBox* CheckBoxRightClickMenu;
 #endif
-		wxCheckBox* CheckBoxShowQSearchBar;
 		wxCheckBox* CheckBoxSingleInstance;
 		wxCheckBox* CheckBoxSkipAutoEncoding;
 		wxCheckBox* CheckBoxTabOrSpaces;
@@ -204,7 +203,6 @@ class MadOptionsDialog: public wxDialog
 		static const long ID_CHECKBOXRELOADFILES;
 		static const long ID_CHECKBOXRECORDCARETMOVEMENTS;
 		static const long ID_CHECKBOXRESTORECARETPOS;
-		static const long ID_CHECKBOXSHOWQSEARCHBAR;
 		static const long ID_CHECKBOXDONOTSAVESETTINGS;
 		static const long ID_CHECKBOXPURGEHISTORY;
 		static const long ID_CHECKBOXENABLEAUTOSAVE;

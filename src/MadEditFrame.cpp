@@ -3660,7 +3660,7 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 	size_t count = m_Notebook->GetPageCount();
 	bool bb = m_ReloadFiles;
 
-	//m_Config->Read(wxT("ReloadFiles"), &bb);
+	//m_Config->Read(wxT("/Application/ReloadFiles"), &bb);
 	if( bb && count > 0 )
 	{
 		count = m_Notebook->GetFilesList( files );
@@ -8395,14 +8395,13 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 		m_Config->Write( wxT( "FixedWidthMode" ), fwm );
 		extern bool g_DoNotSaveSettings;
 		g_DoNotSaveSettings = g_OptionsDialog->CheckBoxDoNotSaveSettings->GetValue();
-		m_Config->Write( wxT( "ReloadFiles" ), g_OptionsDialog->CheckBoxReloadFiles->GetValue() );
+		m_Config->Write( wxT( "/Application/ReloadFiles" ), g_OptionsDialog->CheckBoxReloadFiles->GetValue() );
 		m_ReloadFiles  = g_OptionsDialog->CheckBoxReloadFiles->GetValue();
 		m_Config->Write( wxT( "RestoreCaretPos" ), g_OptionsDialog->CheckBoxRestoreCaretPos->GetValue() );
 		extern bool g_ForcePurgeThisTime;
 		m_Config->Read( wxT( "PurgeHistory" ), g_ForcePurgeThisTime );
 		m_PurgeHistory = g_OptionsDialog->CheckBoxPurgeHistory->GetValue();
 		m_Config->Write( wxT( "PurgeHistory" ), g_OptionsDialog->CheckBoxPurgeHistory->GetValue() );
-		m_Config->Write( wxT( "/UIView/ShowQSearchBarOnStart" ), g_OptionsDialog->CheckBoxShowQSearchBar->GetValue() );
 
 		if( !g_ForcePurgeThisTime ) { g_ForcePurgeThisTime = g_OptionsDialog->CheckBoxPurgeHistory->GetValue(); }
 		else { g_ForcePurgeThisTime = false; }

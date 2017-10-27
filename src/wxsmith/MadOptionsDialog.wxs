@@ -238,13 +238,6 @@
 															<border>2</border>
 														</object>
 														<object class="sizeritem">
-															<object class="wxCheckBox" name="ID_CHECKBOXSHOWQSEARCHBAR" variable="CheckBoxShowQSearchBar" member="yes">
-																<label>Show quick search bar on startup</label>
-															</object>
-															<flag>wxALL|wxEXPAND</flag>
-															<border>2</border>
-														</object>
-														<object class="sizeritem">
 															<object class="wxCheckBox" name="ID_CHECKBOXDONOTSAVESETTINGS" variable="CheckBoxDoNotSaveSettings" member="yes">
 																<label>Do not save settings to MadEdit.cfg when MadEdit closed (this session only)</label>
 															</object>

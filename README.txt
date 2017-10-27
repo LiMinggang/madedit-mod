@@ -120,11 +120,15 @@ FreeBSD packaging (with FreeBSD 10.01)
 3. stdc++ version
 
 Mod v0.4.11
+Note: please use the convertcfg.py to convert your old config if you want to restore your old config
+
 New: Open file path with default file explorer, set "EXTEXPLORER" as the env for open in another application #243
 New: Add '-d' to define a new delimiter to replace '*'
 Fix: Message strings were not translated during initialization
 Fix: TXT syntax would not be applied on first loading(0.4.10) #244
 Fix: Change font size/font/encoding/syntax/linespacing will not update font toolbar #246
+Fix: Remove toggle show Quick Search bar on Option dialog
+Fix: Restruction of MadEdit config
 
 Mod v0.4.10
 1.New: Settings for new document in Options
