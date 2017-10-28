@@ -10,7 +10,7 @@
 			<object class="sizeritem">
 				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
 					<object class="sizeritem">
-						<object class="wxCheckListBox" name="ID_CHECKLISTBOXMADFILELIST" variable="MadFileList" member="yes">
+						<object class="wxCheckListBox" name="wxID_ANY" variable="MadFileList" member="yes">
 							<size>400,300</size>
 							<style>wxLB_MULTIPLE|wxSIMPLE_BORDER|wxVSCROLL</style>
 						</object>
@@ -43,7 +43,7 @@
 						<border>2</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxButton" name="ID_BUTTONSELECTALL" variable="ButtonSelectAll" member="yes">
+						<object class="wxButton" name="wxID_ANY" variable="ButtonSelectAll" member="yes">
 							<label>Select &amp;All</label>
 							<handler function="OnButtonSelectAllClick" entry="EVT_BUTTON" />
 						</object>
@@ -51,7 +51,7 @@
 						<border>2</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxButton" name="ID_BUTTONDSELECTALL" variable="ButtonDselectAll" member="yes">
+						<object class="wxButton" name="wxID_ANY" variable="ButtonDselectAll" member="yes">
 							<label>&amp;Dselect All</label>
 							<handler function="OnButtonDselectAllClick" entry="EVT_BUTTON" />
 						</object>

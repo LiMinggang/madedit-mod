@@ -8,7 +8,6 @@
 #include <vector>
 #include "MadOptionsDialog.h"
 
-
 #ifdef _MSC_VER
 # pragma warning( push )
 # pragma warning( disable : 4996 )
@@ -111,7 +110,7 @@ public:
 			m_OptDlg->SetWindowStyleFlag(m_OptDlg->GetWindowStyleFlag() & ~wxTAB_TRAVERSAL);
 			m_OptDlg->AuiNotebook1->wxControl::SetWindowStyleFlag(m_OptDlg->AuiNotebook1->wxControl::GetWindowStyleFlag() & ~wxTAB_TRAVERSAL);
 			m_OptDlg->Panel4->SetWindowStyleFlag(m_OptDlg->Panel4->GetWindowStyleFlag() & ~wxTAB_TRAVERSAL);
-			m_OptDlg->ButtonCancel->SetId(MadOptionsDialog::ID_BUTTONCANCEL);
+			m_OptDlg->ButtonCancel->SetId(wxID_CANCEL);
 		}
 		evt.Skip();
 	}
@@ -148,225 +147,18 @@ wxString FilterChar(const wxChar *ws)
 }
 
 //(*IdInit(MadOptionsDialog)
-const long MadOptionsDialog::ID_COMBOBOXLANGUAGE = wxNewId();
-const long MadOptionsDialog::ID_STATICTEXT16 = wxNewId();
-const long MadOptionsDialog::ID_COMBOBOXENCODING = wxNewId();
-const long MadOptionsDialog::ID_STATICTEXT13 = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXSKIPAUTOENCODING = wxNewId();
-const long MadOptionsDialog::ID_COMBOBOXDEFAULTFONT = wxNewId();
-const long MadOptionsDialog::ID_TEXTCTRLDEFAULTFONTSIZE = wxNewId();
-const long MadOptionsDialog::ID_EDITMAXSIZETOLOAD = wxNewId();
-const long MadOptionsDialog::ID_EDITMAXTEXTFILESIZE = wxNewId();
-const long MadOptionsDialog::ID_MAXDISPLAYSIZE = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXSINGLEINSTANCE = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXRELOADFILES = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXRECORDCARETMOVEMENTS = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXRESTORECARETPOS = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXDONOTSAVESETTINGS = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXPURGEHISTORY = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXENABLEAUTOSAVE = wxNewId();
-const long MadOptionsDialog::ID_TEXTCTRLAUTOSAVETIMEOUT = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXAUTOBACKUP = wxNewId();
-const long MadOptionsDialog::ID_WSCHECKBOXMSRIGHTCCLICKMENU = wxNewId();
-const long MadOptionsDialog::ID_PANEL1 = wxNewId();
-const long MadOptionsDialog::ID_EDITMAXLINELENGTH = wxNewId();
-const long MadOptionsDialog::ID_STATICTEXT3 = wxNewId();
-const long MadOptionsDialog::ID_EDITMAXCOLUMNS = wxNewId();
-const long MadOptionsDialog::ID_STATICTEXT4 = wxNewId();
-const long MadOptionsDialog::ID_EDITTABCOLUMNS = wxNewId();
-const long MadOptionsDialog::ID_STATICTEXT5 = wxNewId();
-const long MadOptionsDialog::ID_EDITINDENTCOLUMNS = wxNewId();
-const long MadOptionsDialog::ID_STATICTEXT6 = wxNewId();
-const long MadOptionsDialog::ID_EDITDATETIME = wxNewId();
-const long MadOptionsDialog::ID_STATICTEXTDATETIME = wxNewId();
-const long MadOptionsDialog::ID_BUTTONDATETIME = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXDATETIMEINENGLISH = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXTABORSPACES = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXAUTOINDENT = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXAUTOCOMPLETEPAIR = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXINSERTPAIRFORSELECTION = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXMOUSESELECTTOCOPY = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXWHENPRESSCTRLKEY = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXMIDDLEMOUSETOPASTE = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXAUTOFILLCOLUMN = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXDCLICKHIGHLIGHT = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXLOCKCARETYPOS = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXFIXWIDTHMODE = wxNewId();
-const long MadOptionsDialog::ID_PANEL2 = wxNewId();
-const long MadOptionsDialog::ID_RADIOBUTTONNEWDOCLINEENDINGDEFAULT = wxNewId();
-const long MadOptionsDialog::ID_RADIOBUTTONNEWDOCLINEENDINGCRLF = wxNewId();
-const long MadOptionsDialog::ID_RADIOBUTTONNEWDOCLINEENDINGLF = wxNewId();
-const long MadOptionsDialog::ID_RADIOBUTTONNEWDOCLINEENDINGCR = wxNewId();
-const long MadOptionsDialog::ID_COMBOBOXNEWDOCSYNTAX = wxNewId();
-const long MadOptionsDialog::ID_RADIOBUTTONNEWDOCENCSYSTEMDEFAULT = wxNewId();
-const long MadOptionsDialog::ID_RADIOBUTTONNEWDOCENCUTF8 = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXNEWDOCENCUTF8WITHBOM = wxNewId();
-const long MadOptionsDialog::ID_RADIOBUTTONNEWDOCENCOTHER = wxNewId();
-const long MadOptionsDialog::ID_COMBOBOXNEWDOCENCOTHER = wxNewId();
-const long MadOptionsDialog::ID_COMBOBOXNEWDOCFONT = wxNewId();
-const long MadOptionsDialog::ID_TEXTCTRLNEWDOCFONTSIZE = wxNewId();
-const long MadOptionsDialog::ID_PANEL6 = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXPRINTSYNTAX = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXPRINTLINENUMBER = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXPRINTBOOKMARK = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXPRINTENDOFLINE = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXPRINTTABCHAR = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXPRINTSPACECHAR = wxNewId();
-const long MadOptionsDialog::ID_RADIOBOXPRINTOFFSET = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXPRINTPAGEHEADER = wxNewId();
-const long MadOptionsDialog::ID_STATICTEXT7 = wxNewId();
-const long MadOptionsDialog::ID_EDITHEADERLEFT = wxNewId();
-const long MadOptionsDialog::ID_BUTTON1 = wxNewId();
-const long MadOptionsDialog::ID_STATICTEXT8 = wxNewId();
-const long MadOptionsDialog::ID_EDITHEADERCENTER = wxNewId();
-const long MadOptionsDialog::ID_BUTTON2 = wxNewId();
-const long MadOptionsDialog::ID_STATICTEXT9 = wxNewId();
-const long MadOptionsDialog::ID_EDITHEADERRIGHT = wxNewId();
-const long MadOptionsDialog::ID_BUTTON3 = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXPRINTPAGEFOOTER = wxNewId();
-const long MadOptionsDialog::ID_STATICTEXT10 = wxNewId();
-const long MadOptionsDialog::ID_EDITFOOTERLEFT = wxNewId();
-const long MadOptionsDialog::ID_BUTTON4 = wxNewId();
-const long MadOptionsDialog::ID_STATICTEXT11 = wxNewId();
-const long MadOptionsDialog::ID_EDITFOOTERLEFTCENTER = wxNewId();
-const long MadOptionsDialog::ID_BUTTON5 = wxNewId();
-const long MadOptionsDialog::ID_STATICTEXT12 = wxNewId();
-const long MadOptionsDialog::ID_EDITFOOTERRIGHT = wxNewId();
-const long MadOptionsDialog::ID_BUTTON6 = wxNewId();
-const long MadOptionsDialog::ID_PANEL3 = wxNewId();
-const long MadOptionsDialog::ID_TREECTRL1 = wxNewId();
-const long MadOptionsDialog::ID_STATICTEXTCOMMANDHINT = wxNewId();
-const long MadOptionsDialog::ID_EDITHINT = wxNewId();
-const long MadOptionsDialog::ID_STATICTEXT14 = wxNewId();
-const long MadOptionsDialog::ID_LISTBOXKEYS = wxNewId();
-const long MadOptionsDialog::ID_STATICTEXT15 = wxNewId();
-const long MadOptionsDialog::ID_EDITKEY = wxNewId();
-const long MadOptionsDialog::ID_EDITKEYHINT = wxNewId();
-const long MadOptionsDialog::ID_BUTTONADDKEY = wxNewId();
-const long MadOptionsDialog::ID_BUTTONDELETEKEY = wxNewId();
-const long MadOptionsDialog::ID_BUTTONSHOWINMENU = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXRESETALLKEYS = wxNewId();
-const long MadOptionsDialog::ID_PANEL4 = wxNewId();
-const long MadOptionsDialog::ID_CHECKBOXPERSONALDICT = wxNewId();
-const long MadOptionsDialog::ID_CHOICEDICTIONARY = wxNewId();
-const long MadOptionsDialog::ID_STATICTEXT17 = wxNewId();
-const long MadOptionsDialog::ID_EDITDICTIONARYDIR = wxNewId();
-const long MadOptionsDialog::ID_DICTIONARY_DIR = wxNewId();
-const long MadOptionsDialog::ID_PANEL5 = wxNewId();
-const long MadOptionsDialog::ID_AUINOTEBOOK1 = wxNewId();
-const long MadOptionsDialog::ID_BUTTONOK = wxNewId();
-const long MadOptionsDialog::ID_BUTTONCANCEL = wxNewId();
 //*)
 
-const long MadOptionsDialog:: ID_MNU___Y__M__D_I__M__S_P_2007_02_2408_30_55AM_1191 = wxNewId();
-const long MadOptionsDialog:: ID_MNU___D__M__Y_24_02_2007_1192 = wxNewId();
-const long MadOptionsDialog:: ID_MNU___A__D_B_Y_H__M__S_Z_RFC822TIMESTAMP_1195 = wxNewId();
-const long MadOptionsDialog:: ID_MNU_MENUITEM1_1170 = wxNewId();
-const long MadOptionsDialog:: ID_MNU___A_FULLWEEKDAYNAME_1171 = wxNewId();
-const long MadOptionsDialog:: ID_MNU___B_ABBREVIATEDMONTHNAME_1172 = wxNewId();
-const long MadOptionsDialog:: ID_MNU___B_FULLMONTHNAME_1173 = wxNewId();
-const long MadOptionsDialog:: ID_MNU___C_DATEANDTIMEREPRESENTATIONAPPROPRIATEFORLOCALE_1174 = wxNewId();
-const long MadOptionsDialog:: ID_MNU___D_DAYOFMONTHASDECIMALNUMBER_01_31__1175 = wxNewId();
-const long MadOptionsDialog:: ID_MNU___H_HOURIN24_HOURFORMAT_00_23__1176 = wxNewId();
-const long MadOptionsDialog:: ID_MNU___I_HOURIN12_HOURFORMAT_01_12__1177 = wxNewId();
-const long MadOptionsDialog:: ID_MNU___J_DAYOFYEARASDECIMALNUMBER_001_366__1178 = wxNewId();
-const long MadOptionsDialog:: ID_MNU___M_MONTHASDECIMALNUMBER_01_12__1179 = wxNewId();
-const long MadOptionsDialog:: ID_MNU___M_MINUTEASDECIMALNUMBER_00_59__1180 = wxNewId();
-const long MadOptionsDialog:: ID_MNU___P_CURRENTLOCALESA_M__P_M_INDICATORFOR12_HOURCLOCK_1181 = wxNewId();
-const long MadOptionsDialog:: ID_MNU___S_SECONDASDECIMALNUMBER_00_59__1182 = wxNewId();
-const long MadOptionsDialog:: ID_MNU___U_WEEKOFYEARASDECIMALNUMBER_WITHSUNDAYASFIRSTDAYOFWEEK_00_53__1183 = wxNewId();
-const long MadOptionsDialog:: ID_MNU___W_WEEKDAYASDECIMALNUMBER_0_6_SUNDAYIS0__1184 = wxNewId();
-const long MadOptionsDialog:: ID_MNU___W_WEEKOFYEARASDECIMALNUMBER_WITHMONDAYASFIRSTDAYOFWEEK_00_53__1185 = wxNewId();
-const long MadOptionsDialog:: ID_MNU___X_DATEREPRESENTATIONFORCURRENTLOCALE_1186 = wxNewId();
-const long MadOptionsDialog:: ID_MNU___X_TIMEREPRESENTATIONFORCURRENTLOCALE_1187 = wxNewId();
-const long MadOptionsDialog:: ID_MNU___Y_YEARWITHOUTCENTURY_ASDECIMALNUMBER_00_99__1188 = wxNewId();
-const long MadOptionsDialog:: ID_MNU___Y_YEARWITHCENTURY_ASDECIMALNUMBER_1189 = wxNewId();
-const long MadOptionsDialog:: ID_MNU___Z_TIME_ZONENAME_1193 = wxNewId();
-const long MadOptionsDialog:: ID_MNU___Z_TIME_ZONEABBREVIATION_1194 = wxNewId();
+typedef struct {
+	wxWindow * pWin;
+	void (MadOptionsDialog::*method)( wxCommandEvent &);
+} MadEvtMap;
 
-const long MadOptionsDialog:: ID_MNU_MENUITEM1_1110 = wxNewId();
-const long MadOptionsDialog:: ID_MNU___P__PATHNAME_1111 = wxNewId();
-const long MadOptionsDialog:: ID_MNU_MENUITEM3_1112 = wxNewId();
-const long MadOptionsDialog:: ID_MNU___N_PAGE_NUMBER_1113 = wxNewId();
-const long MadOptionsDialog:: ID_MNU___S__TOTALPAGES_1114 = wxNewId();
-const long MadOptionsDialog:: ID_MNU_MENUITEM6_1115 = wxNewId();
-const long MadOptionsDialog:: ID_MNU___D__DATE_1116 = wxNewId();
-const long MadOptionsDialog:: ID_MNU___T__TIME_1117 = wxNewId();
-
-
-MadOptionsDialog::wxCmdEvtHandlerMap_t MadOptionsDialog::m_menu_evt_map[] = 
-{
-	{ ID_MNU___Y__M__D_I__M__S_P_2007_02_2408_30_55AM_1191, &MadOptionsDialog::DateTimeMarkClick },
-	{ ID_MNU___D__M__Y_24_02_2007_1192, &MadOptionsDialog::DateTimeMarkClick },
-	{ ID_MNU___A__D_B_Y_H__M__S_Z_RFC822TIMESTAMP_1195, &MadOptionsDialog::DateTimeMarkClick },
-	{ ID_MNU_MENUITEM1_1170, &MadOptionsDialog::DateTimeMarkClick },
-	{ ID_MNU___A_FULLWEEKDAYNAME_1171, &MadOptionsDialog::DateTimeMarkClick },
-	{ ID_MNU___B_ABBREVIATEDMONTHNAME_1172, &MadOptionsDialog::DateTimeMarkClick },
-	{ ID_MNU___B_FULLMONTHNAME_1173, &MadOptionsDialog::DateTimeMarkClick },
-	{ ID_MNU___C_DATEANDTIMEREPRESENTATIONAPPROPRIATEFORLOCALE_1174, &MadOptionsDialog::DateTimeMarkClick },
-	{ ID_MNU___D_DAYOFMONTHASDECIMALNUMBER_01_31__1175, &MadOptionsDialog::DateTimeMarkClick },
-	{ ID_MNU___H_HOURIN24_HOURFORMAT_00_23__1176, &MadOptionsDialog::DateTimeMarkClick },
-	{ ID_MNU___I_HOURIN12_HOURFORMAT_01_12__1177, &MadOptionsDialog::DateTimeMarkClick },
-	{ ID_MNU___J_DAYOFYEARASDECIMALNUMBER_001_366__1178, &MadOptionsDialog::DateTimeMarkClick },
-	{ ID_MNU___M_MONTHASDECIMALNUMBER_01_12__1179, &MadOptionsDialog::DateTimeMarkClick },
-	{ ID_MNU___M_MINUTEASDECIMALNUMBER_00_59__1180, &MadOptionsDialog::DateTimeMarkClick },
-	{ ID_MNU___P_CURRENTLOCALESA_M__P_M_INDICATORFOR12_HOURCLOCK_1181, &MadOptionsDialog::DateTimeMarkClick },
-	{ ID_MNU___S_SECONDASDECIMALNUMBER_00_59__1182, &MadOptionsDialog::DateTimeMarkClick },
-	{ ID_MNU___U_WEEKOFYEARASDECIMALNUMBER_WITHSUNDAYASFIRSTDAYOFWEEK_00_53__1183, &MadOptionsDialog::DateTimeMarkClick },
-	{ ID_MNU___W_WEEKDAYASDECIMALNUMBER_0_6_SUNDAYIS0__1184, &MadOptionsDialog::DateTimeMarkClick },
-	{ ID_MNU___W_WEEKOFYEARASDECIMALNUMBER_WITHMONDAYASFIRSTDAYOFWEEK_00_53__1185, &MadOptionsDialog::DateTimeMarkClick },
-	{ ID_MNU___X_DATEREPRESENTATIONFORCURRENTLOCALE_1186, &MadOptionsDialog::DateTimeMarkClick },
-	{ ID_MNU___X_TIMEREPRESENTATIONFORCURRENTLOCALE_1187, &MadOptionsDialog::DateTimeMarkClick },
-	{ ID_MNU___Y_YEARWITHOUTCENTURY_ASDECIMALNUMBER_00_99__1188, &MadOptionsDialog::DateTimeMarkClick },
-	{ ID_MNU___Y_YEARWITHCENTURY_ASDECIMALNUMBER_1189, &MadOptionsDialog::DateTimeMarkClick },
-	{ ID_MNU___Z_TIME_ZONENAME_1193, &MadOptionsDialog::DateTimeMarkClick },
-	{ ID_MNU___Z_TIME_ZONEABBREVIATION_1194, &MadOptionsDialog::DateTimeMarkClick },
-	{ ID_MNU_MENUITEM1_1110, &MadOptionsDialog::PrintMarkClick },
-	{ ID_MNU___P__PATHNAME_1111, &MadOptionsDialog::PrintMarkClick },
-	{ ID_MNU___N_PAGE_NUMBER_1113, &MadOptionsDialog::PrintMarkClick },
-	{ ID_MNU___S__TOTALPAGES_1114, &MadOptionsDialog::PrintMarkClick },
-	{ ID_MNU___D__DATE_1116, &MadOptionsDialog::PrintMarkClick },
-	{ ID_MNU___T__TIME_1117, &MadOptionsDialog::PrintMarkClick },
-};
-
-MadOptionsDialog::wxCmdEvtHandlerMap_t MadOptionsDialog::m_button_evt_map[] = 
-{
-	{ ID_BUTTON1, &MadOptionsDialog::PrintMarkButtonClick },
-	{ ID_BUTTON2, &MadOptionsDialog::PrintMarkButtonClick },
-	{ ID_BUTTON3, &MadOptionsDialog::PrintMarkButtonClick },
-	{ ID_BUTTON4, &MadOptionsDialog::PrintMarkButtonClick },
-	{ ID_BUTTON5, &MadOptionsDialog::PrintMarkButtonClick },
-	{ ID_BUTTON6, &MadOptionsDialog::PrintMarkButtonClick },
-	{ ID_BUTTONCANCEL, &MadOptionsDialog::ButtonCancelClick },
-	{ ID_BUTTONOK, &MadOptionsDialog::ButtonOKClick },
-	//  {ID_BITMAP_DIR,&MadOptionsDialog::ButtonBitmapDirClick},
-	//  {ID_THESAURI_DIR,&MadOptionsDialog::ButtonThesauriDirClick},
-	{ ID_DICTIONARY_DIR, &MadOptionsDialog::ButtonDictionaryDirClick },
-	{ ID_BUTTONSHOWINMENU, &MadOptionsDialog::ButtonShowInMenuClick },
-	{ ID_BUTTONDELETEKEY, &MadOptionsDialog::ButtonDeleteKeyClick },
-	{ ID_BUTTONADDKEY, &MadOptionsDialog::ButtonAddKeyClick },
-	{ ID_BUTTONDATETIME, &MadOptionsDialog::ButtonDateTimeClick },
-};
-
-MadOptionsDialog::wxCmdEvtHandlerMap_t MadOptionsDialog::m_checkbox_evt_map[] =
-{
-	{ ID_CHECKBOXMOUSESELECTTOCOPY, &MadOptionsDialog::CheckBoxMouseSelectToCopyClick },
-
-	{ ID_CHECKBOXAUTOCOMPLETEPAIR, &MadOptionsDialog::CheckBoxAutoCompletePairClick },
-	{ ID_CHECKBOXENABLEAUTOSAVE, &MadOptionsDialog::EnableAutoSaveClick },
-};
-
-MadOptionsDialog::wxCmdEvtHandlerMap_t MadOptionsDialog::m_radiobutton_evt_map[] = 
-{
-	{ ID_RADIOBUTTONNEWDOCENCSYSTEMDEFAULT, &MadOptionsDialog::RadioButtonNewDocEncSelect },
-	{ ID_RADIOBUTTONNEWDOCENCUTF8, &MadOptionsDialog::RadioButtonNewDocEncSelect },
-	{ ID_RADIOBUTTONNEWDOCENCOTHER, &MadOptionsDialog::RadioButtonNewDocEncSelect },
-	{ ID_RADIOBUTTONNEWDOCLINEENDINGCRLF, &MadOptionsDialog::RadioButtonNewDocLineEndingSelect },
-	{ ID_RADIOBUTTONNEWDOCLINEENDINGLF, &MadOptionsDialog::RadioButtonNewDocLineEndingSelect },
-	{ ID_RADIOBUTTONNEWDOCLINEENDINGCR, &MadOptionsDialog::RadioButtonNewDocLineEndingSelect },
-	{ ID_RADIOBUTTONNEWDOCLINEENDINGDEFAULT, &MadOptionsDialog::RadioButtonNewDocLineEndingSelect },
-};
-
+#define ADD2EVENTMAP(con, pwin, method) \
+{\
+    MadEvtMap evtm = { pwin, method}; \
+	con.push_back(evtm); \
+}
 
 #if defined(__WXMSW__) && (wxMAJOR_VERSION >= 3)
 #define ADD2CONTROLS(ctrls, pWin) (ctrls).push_back((wxWindow *)(pWin)); 
@@ -389,6 +181,9 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 #if defined(__WXMSW__) && (wxMAJOR_VERSION >= 3)
 	std::vector< wxWindow * > controls;
 #endif
+	std::vector< MadEvtMap > ButtonEvtMapVec;
+	std::vector< MadEvtMap > CheckboxEvtMapVec;
+	std::vector< MadEvtMap > RadioButtonEvtMapVec;
 	//(*Initialize(MadOptionsDialog)
 	wxBoxSizer* BoxSizer10;
 	wxBoxSizer* BoxSizer11;
@@ -461,37 +256,37 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	BoxSizer1 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer30 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer31 = new wxBoxSizer(wxVERTICAL);
-	AuiNotebook1 = new wxAuiNotebook(this, ID_AUINOTEBOOK1, wxDefaultPosition, wxDefaultSize, wxAUI_NB_DEFAULT_STYLE);
-	Panel1 = new wxPanel(AuiNotebook1, ID_PANEL1, wxDefaultPosition, wxSize(792,400), wxTAB_TRAVERSAL, _T("ID_PANEL1"));
+	AuiNotebook1 = new wxAuiNotebook(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxAUI_NB_DEFAULT_STYLE);
+	Panel1 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxSize(792,400), wxTAB_TRAVERSAL, _T("ID_PANEL1"));
 	BoxSizer3 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer27 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer27->Add(3,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	wxASSERT( g_LanguageString.GetCount() != 0 );
-	ComboBoxLanguage = new wxComboBox( Panel1, ID_COMBOBOXLANGUAGE, wxEmptyString, wxDefaultPosition, wxSize(160,-1), g_LanguageString,  wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, wxT( "ID_COMBOBOXLANGUAGE" ) );
+	ComboBoxLanguage = new wxComboBox( Panel1, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(160,-1), g_LanguageString,  wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, wxT( "ID_COMBOBOXLANGUAGE" ) );
 	ComboBoxLanguage->SetValue( g_LanguageString[0] );
 	ADD2CONTROLS(controls, ComboBoxLanguage);
 	BoxSizer27->Add(ComboBoxLanguage, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticText16 = new wxStaticText(Panel1, ID_STATICTEXT16, _("Language of User Interface (must restart MadEdit)"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT16"));
+	StaticText16 = new wxStaticText(Panel1, wxID_ANY, _("Language of User Interface (must restart MadEdit)"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT16"));
 	BoxSizer27->Add(StaticText16, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer3->Add(BoxSizer27, 0, wxALL|wxEXPAND, 2);
 	BoxSizer4 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer4->Add(3,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	ComboBoxEncoding = new wxComboBox(Panel1, ID_COMBOBOXENCODING, wxEmptyString, wxDefaultPosition, wxSize(160,-1), 0, 0, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXENCODING"));
+	ComboBoxEncoding = new wxComboBox(Panel1, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(160,-1), 0, 0, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXENCODING"));
 	ADD2CONTROLS(controls, ComboBoxEncoding);
 	BoxSizer4->Add(ComboBoxEncoding, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticText13 = new wxStaticText(Panel1, ID_STATICTEXT13, _("Use this encoding to create new file or when MadEdit cannot determine the encoding of old file"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT13"));
+	StaticText13 = new wxStaticText(Panel1, wxID_ANY, _("Use this encoding to create new file or when MadEdit cannot determine the encoding of old file"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT13"));
 	BoxSizer4->Add(StaticText13, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer3->Add(BoxSizer4, 0, wxALL|wxEXPAND, 2);
 	BoxSizer40 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer40->Add(10,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	CheckBoxSkipAutoEncoding = new wxCheckBox(Panel1, ID_CHECKBOXSKIPAUTOENCODING, _("Enforce default encoding"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXSKIPAUTOENCODING"));
+	CheckBoxSkipAutoEncoding = new wxCheckBox(Panel1, wxID_ANY, _("Enforce default encoding"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXSKIPAUTOENCODING"));
 	ADD2CONTROLS(controls, CheckBoxSkipAutoEncoding);
 	CheckBoxSkipAutoEncoding->SetValue(false);
 	BoxSizer40->Add(CheckBoxSkipAutoEncoding, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer3->Add(BoxSizer40, 0, wxALL|wxEXPAND, 2);
 	BoxSizer35 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer35->Add(3,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	ComboBoxDefaultFont = new wxComboBox(Panel1, ID_COMBOBOXDEFAULTFONT, wxEmptyString, wxDefaultPosition, wxSize(160,-1), g_FontNames, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXDEFAULTFONT"));
+	ComboBoxDefaultFont = new wxComboBox(Panel1, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(160,-1), g_FontNames, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXDEFAULTFONT"));
 	ADD2CONTROLS(controls, ComboBoxDefaultFont);
 	BoxSizer35->Add(ComboBoxDefaultFont, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	StaticText19 = new wxStaticText(Panel1, wxID_ANY, _("Default font"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
@@ -500,7 +295,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	BoxSizer7 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer39 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer39->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	EditDefaultFontSize = new wxTextCtrl(Panel1, ID_TEXTCTRLDEFAULTFONTSIZE, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRLDEFAULTFONTSIZE"));
+	EditDefaultFontSize = new wxTextCtrl(Panel1, wxID_ANY, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRLDEFAULTFONTSIZE"));
 	ADD2CONTROLS(controls, EditDefaultFontSize);
 	EditDefaultFontSize->SetMaxLength(2);
 	BoxSizer39->Add(EditDefaultFontSize, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
@@ -509,7 +304,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	BoxSizer7->Add(BoxSizer39, 0, wxALL|wxEXPAND, 2);
 	BoxSizer38 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer38->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	EditMaxSizeToLoad = new wxTextCtrl(Panel1, ID_EDITMAXSIZETOLOAD, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITMAXSIZETOLOAD"));
+	EditMaxSizeToLoad = new wxTextCtrl(Panel1, wxID_ANY, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITMAXSIZETOLOAD"));
 	EditMaxSizeToLoad->SetMaxLength(128);
 	ADD2CONTROLS(controls, EditMaxSizeToLoad);
 	BoxSizer38->Add(EditMaxSizeToLoad, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
@@ -518,7 +313,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	BoxSizer7->Add(BoxSizer38, 0, wxALL|wxEXPAND, 2);
 	BoxSizer17 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer17->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	EditMaxTextFileSize = new wxTextCtrl(Panel1, ID_EDITMAXTEXTFILESIZE, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITMAXTEXTFILESIZE"));
+	EditMaxTextFileSize = new wxTextCtrl(Panel1, wxID_ANY, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITMAXTEXTFILESIZE"));
 	EditMaxTextFileSize->SetMaxLength(128);
 	ADD2CONTROLS(controls, EditMaxTextFileSize);
 	BoxSizer17->Add(EditMaxTextFileSize, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
@@ -527,56 +322,57 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	BoxSizer7->Add(BoxSizer17, 0, wxALL|wxEXPAND, 2);
 	BoxSizer6 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer6->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	EditMaxDisplaySize = new wxTextCtrl(Panel1, ID_MAXDISPLAYSIZE, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_MAXDISPLAYSIZE"));
+	EditMaxDisplaySize = new wxTextCtrl(Panel1, wxID_ANY, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_MAXDISPLAYSIZE"));
 	EditMaxDisplaySize->SetMaxLength(5);
 	ADD2CONTROLS(controls, EditMaxDisplaySize);
 	BoxSizer6->Add(EditMaxDisplaySize, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	StaticText18 = new wxStaticText(Panel1, wxID_ANY, _("Max chars displayed in search results"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	BoxSizer6->Add(StaticText18, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer7->Add(BoxSizer6, 0, wxALL|wxEXPAND, 2);
-	CheckBoxSingleInstance = new wxCheckBox(Panel1, ID_CHECKBOXSINGLEINSTANCE, _("Single Instance (must restart MadEdit)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXSINGLEINSTANCE"));
+	CheckBoxSingleInstance = new wxCheckBox(Panel1, wxID_ANY, _("Single Instance (must restart MadEdit)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXSINGLEINSTANCE"));
 	CheckBoxSingleInstance->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxSingleInstance);
 	BoxSizer7->Add(CheckBoxSingleInstance, 0, wxALL|wxEXPAND, 2);
-	CheckBoxReloadFiles = new wxCheckBox(Panel1, ID_CHECKBOXRELOADFILES, _("Reload files previously open on startup"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXRELOADFILES"));
+	CheckBoxReloadFiles = new wxCheckBox(Panel1, wxID_ANY, _("Reload files previously open on startup"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXRELOADFILES"));
 	CheckBoxReloadFiles->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxReloadFiles);
 	BoxSizer7->Add(CheckBoxReloadFiles, 0, wxALL|wxEXPAND, 2);
-	CheckBoxRecordCaretMovements = new wxCheckBox(Panel1, ID_CHECKBOXRECORDCARETMOVEMENTS, _("Record caret movements"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXRECORDCARETMOVEMENTS"));
+	CheckBoxRecordCaretMovements = new wxCheckBox(Panel1, wxID_ANY, _("Record caret movements"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXRECORDCARETMOVEMENTS"));
 	CheckBoxRecordCaretMovements->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxRecordCaretMovements);
 	BoxSizer7->Add(CheckBoxRecordCaretMovements, 0, wxALL|wxEXPAND, 2);
-	CheckBoxRestoreCaretPos = new wxCheckBox(Panel1, ID_CHECKBOXRESTORECARETPOS, _("Restore previous caret position when files are opened"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXRESTORECARETPOS"));
+	CheckBoxRestoreCaretPos = new wxCheckBox(Panel1, wxID_ANY, _("Restore previous caret position when files are opened"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXRESTORECARETPOS"));
 	CheckBoxRestoreCaretPos->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxRestoreCaretPos);
 	BoxSizer7->Add(CheckBoxRestoreCaretPos, 0, wxALL|wxEXPAND, 2);
-	CheckBoxDoNotSaveSettings = new wxCheckBox(Panel1, ID_CHECKBOXDONOTSAVESETTINGS, _("Do not save settings to MadEdit.cfg when MadEdit closed (this session only)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXDONOTSAVESETTINGS"));
+	CheckBoxDoNotSaveSettings = new wxCheckBox(Panel1, wxID_ANY, _("Do not save settings to MadEdit.cfg when MadEdit closed (this session only)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXDONOTSAVESETTINGS"));
 	CheckBoxDoNotSaveSettings->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxDoNotSaveSettings);
 	BoxSizer7->Add(CheckBoxDoNotSaveSettings, 0, wxALL|wxEXPAND, 2);
-	CheckBoxPurgeHistory = new wxCheckBox(Panel1, ID_CHECKBOXPURGEHISTORY, _("Purge History while exiting"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXPURGEHISTORY"));
+	CheckBoxPurgeHistory = new wxCheckBox(Panel1, wxID_ANY, _("Purge History while exiting"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXPURGEHISTORY"));
 	CheckBoxPurgeHistory->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxPurgeHistory);
 	BoxSizer7->Add(CheckBoxPurgeHistory, 0, wxALL|wxEXPAND, 2);
-	CheckBoxEnableAutoSave = new wxCheckBox(Panel1, ID_CHECKBOXENABLEAUTOSAVE, _("Auto save"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXENABLEAUTOSAVE"));
+	CheckBoxEnableAutoSave = new wxCheckBox(Panel1, wxID_ANY, _("Auto save"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXENABLEAUTOSAVE"));
 	CheckBoxEnableAutoSave->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxEnableAutoSave);
+	ADD2EVENTMAP(CheckboxEvtMapVec, CheckBoxEnableAutoSave, &MadOptionsDialog::EnableAutoSaveClick);
 	BoxSizer7->Add(CheckBoxEnableAutoSave, 0, wxALL|wxEXPAND, 2);
 	BoxSizer37 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer37->Add(10,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	EditAutoSaveTimeout = new wxTextCtrl(Panel1, ID_TEXTCTRLAUTOSAVETIMEOUT, _T("10"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRLAUTOSAVETIMEOUT"));
+	EditAutoSaveTimeout = new wxTextCtrl(Panel1, wxID_ANY, _T("10"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRLAUTOSAVETIMEOUT"));
 	EditAutoSaveTimeout->SetMaxLength(2);
 	ADD2CONTROLS(controls, EditAutoSaveTimeout);
 	BoxSizer37->Add(EditAutoSaveTimeout, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	StaticTextAutoSaveTimeout = new wxStaticText(Panel1, wxID_ANY, _("Timeout(M)"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	BoxSizer37->Add(StaticTextAutoSaveTimeout, 0, wxALL|wxEXPAND, 2);
 	BoxSizer7->Add(BoxSizer37, 0, wxALL|wxEXPAND, 2);
-	CheckBoxEnableAutoBackup = new wxCheckBox(Panel1, ID_CHECKBOXAUTOBACKUP, _("Auto backup"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXAUTOBACKUP"));
+	CheckBoxEnableAutoBackup = new wxCheckBox(Panel1, wxID_ANY, _("Auto backup"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXAUTOBACKUP"));
 	CheckBoxEnableAutoBackup->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxEnableAutoBackup);
 	BoxSizer7->Add(CheckBoxEnableAutoBackup, 0, wxALL|wxEXPAND, 2);
 #ifdef __WXMSW__
-	CheckBoxRightClickMenu = new wxCheckBox(Panel1, ID_WSCHECKBOXMSRIGHTCCLICKMENU, _("Add MadEdit to the RightClickMenu of Explorer(Deselect to Remove the Entry from Windows Registry)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WSCHECKBOXMSRIGHTCCLICKMENU"));
+	CheckBoxRightClickMenu = new wxCheckBox(Panel1, wxID_ANY, _("Add MadEdit to the RightClickMenu of Explorer(Deselect to Remove the Entry from Windows Registry)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WSCHECKBOXMSRIGHTCCLICKMENU"));
 	CheckBoxRightClickMenu->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxRightClickMenu);
 	BoxSizer7->Add(CheckBoxRightClickMenu, 0, wxALL|wxEXPAND, 2);
@@ -585,103 +381,106 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	Panel1->SetSizer(BoxSizer3);
 	BoxSizer3->Fit(Panel1);
 	BoxSizer3->SetSizeHints(Panel1);
-	Panel2 = new wxPanel(AuiNotebook1, ID_PANEL2, wxDefaultPosition, wxSize(792,400), wxTAB_TRAVERSAL, _T("ID_PANEL2"));
+	Panel2 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxSize(792,400), wxTAB_TRAVERSAL, _T("ID_PANEL2"));
 	BoxSizer8 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer9 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer9->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	EditMaxLineLength = new wxTextCtrl(Panel2, ID_EDITMAXLINELENGTH, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITMAXLINELENGTH"));
+	EditMaxLineLength = new wxTextCtrl(Panel2, wxID_ANY, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITMAXLINELENGTH"));
 	ADD2CONTROLS(controls, EditMaxLineLength);
 	BoxSizer9->Add(EditMaxLineLength, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticText3 = new wxStaticText(Panel2, ID_STATICTEXT3, _("Max line length before Line-Wrap (must restart MadEdit)"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT3"));
+	StaticText3 = new wxStaticText(Panel2, wxID_ANY, _("Max line length before Line-Wrap (must restart MadEdit)"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT3"));
 	BoxSizer9->Add(StaticText3, 0, wxALL|wxEXPAND, 2);
 	BoxSizer8->Add(BoxSizer9, 0, wxALL|wxEXPAND, 2);
 	BoxSizer10 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer10->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	EditMaxColumns = new wxTextCtrl(Panel2, ID_EDITMAXCOLUMNS, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITMAXCOLUMNS"));
+	EditMaxColumns = new wxTextCtrl(Panel2, wxID_ANY, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITMAXCOLUMNS"));
 	ADD2CONTROLS(controls, EditMaxColumns);
 	BoxSizer10->Add(EditMaxColumns, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticText4 = new wxStaticText(Panel2, ID_STATICTEXT4, _("Columns of Wrap-By-Column"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT4"));
+	StaticText4 = new wxStaticText(Panel2, wxID_ANY, _("Columns of Wrap-By-Column"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT4"));
 	BoxSizer10->Add(StaticText4, 0, wxALL|wxEXPAND, 2);
 	BoxSizer8->Add(BoxSizer10, 0, wxALL|wxEXPAND, 2);
 	BoxSizer11 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer11->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	EditTabColumns = new wxTextCtrl(Panel2, ID_EDITTABCOLUMNS, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITTABCOLUMNS"));
+	EditTabColumns = new wxTextCtrl(Panel2, wxID_ANY, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITTABCOLUMNS"));
 	ADD2CONTROLS(controls, EditTabColumns);
 	BoxSizer11->Add(EditTabColumns, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticText5 = new wxStaticText(Panel2, ID_STATICTEXT5, _("Columns of Tab"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT5"));
+	StaticText5 = new wxStaticText(Panel2, wxID_ANY, _("Columns of Tab"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT5"));
 	BoxSizer11->Add(StaticText5, 0, wxALL|wxEXPAND, 2);
 	BoxSizer8->Add(BoxSizer11, 0, wxALL|wxEXPAND, 2);
 	BoxSizer13 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer13->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	EditIndentColumns = new wxTextCtrl(Panel2, ID_EDITINDENTCOLUMNS, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITINDENTCOLUMNS"));
+	EditIndentColumns = new wxTextCtrl(Panel2, wxID_ANY, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITINDENTCOLUMNS"));
 	ADD2CONTROLS(controls, EditIndentColumns);
 	BoxSizer13->Add(EditIndentColumns, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticText6 = new wxStaticText(Panel2, ID_STATICTEXT6, _("Columns of Indent"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT6"));
+	StaticText6 = new wxStaticText(Panel2, wxID_ANY, _("Columns of Indent"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT6"));
 	BoxSizer13->Add(StaticText6, 0, wxALL|wxEXPAND, 2);
 	BoxSizer8->Add(BoxSizer13, 0, wxALL|wxEXPAND, 2);
 	BoxSizer5 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer5->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	EditDateTime = new wxTextCtrl(Panel2, ID_EDITDATETIME, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITDATETIME"));
+	EditDateTime = new wxTextCtrl(Panel2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITDATETIME"));
 	ADD2CONTROLS(controls, EditDateTime);
 	BoxSizer5->Add(EditDateTime, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticTextDateTime = new wxStaticText(Panel2, ID_STATICTEXTDATETIME, _("Format of Date/Time"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXTDATETIME"));
+	StaticTextDateTime = new wxStaticText(Panel2, wxID_ANY, _("Format of Date/Time"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXTDATETIME"));
 	BoxSizer5->Add(StaticTextDateTime, 0, wxALL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer5->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	ButtonDateTime = new wxButton(Panel2, ID_BUTTONDATETIME, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTONDATETIME"));
+	ButtonDateTime = new wxButton(Panel2, wxID_ANY, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTONDATETIME"));
 	ADD2CONTROLS(controls, ButtonDateTime);
+	ADD2EVENTMAP(ButtonEvtMapVec, ButtonDateTime, &MadOptionsDialog::ButtonDateTimeClick);
 	BoxSizer5->Add(ButtonDateTime, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
-	CheckBoxDateTimeInEnglish = new wxCheckBox(Panel2, ID_CHECKBOXDATETIMEINENGLISH, _("Use English instead of current locale"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXDATETIMEINENGLISH"));
+	CheckBoxDateTimeInEnglish = new wxCheckBox(Panel2, wxID_ANY, _("Use English instead of current locale"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXDATETIMEINENGLISH"));
 	CheckBoxDateTimeInEnglish->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxDateTimeInEnglish);
 	BoxSizer5->Add(CheckBoxDateTimeInEnglish, 0, wxALL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer8->Add(BoxSizer5, 0, wxALL|wxALIGN_LEFT, 2);
 	BoxSizer12 = new wxBoxSizer(wxVERTICAL);
-	CheckBoxTabOrSpaces = new wxCheckBox(Panel2, ID_CHECKBOXTABORSPACES, _("Insert Space char instead of Tab char"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXTABORSPACES"));
+	CheckBoxTabOrSpaces = new wxCheckBox(Panel2, wxID_ANY, _("Insert Space char instead of Tab char"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXTABORSPACES"));
 	CheckBoxTabOrSpaces->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxTabOrSpaces);
 	BoxSizer12->Add(CheckBoxTabOrSpaces, 0, wxALL|wxEXPAND, 2);
-	CheckBoxAutoIndent = new wxCheckBox(Panel2, ID_CHECKBOXAUTOINDENT, _("Auto Indent"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXAUTOINDENT"));
+	CheckBoxAutoIndent = new wxCheckBox(Panel2, wxID_ANY, _("Auto Indent"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXAUTOINDENT"));
 	CheckBoxAutoIndent->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxAutoIndent);
 	BoxSizer12->Add(CheckBoxAutoIndent, 0, wxALL|wxEXPAND, 2);
-	CheckBoxAutoCompletePair = new wxCheckBox(Panel2, ID_CHECKBOXAUTOCOMPLETEPAIR, _("Auto complete character pair"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXAUTOCOMPLETEPAIR"));
+	CheckBoxAutoCompletePair = new wxCheckBox(Panel2, wxID_ANY, _("Auto complete character pair"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXAUTOCOMPLETEPAIR"));
 	CheckBoxAutoCompletePair->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxAutoCompletePair);
+	ADD2EVENTMAP(CheckboxEvtMapVec, CheckBoxAutoCompletePair, &MadOptionsDialog::CheckBoxAutoCompletePairClick);
 	BoxSizer12->Add(CheckBoxAutoCompletePair, 0, wxALL|wxEXPAND, 2);
 	BoxSizer23 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer23->Add(10,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	CheckBoxInsertPairForSelection = new wxCheckBox(Panel2, ID_CHECKBOXINSERTPAIRFORSELECTION, _("Insert pair instead of replacing selection"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXINSERTPAIRFORSELECTION"));
+	CheckBoxInsertPairForSelection = new wxCheckBox(Panel2, wxID_ANY, _("Insert pair instead of replacing selection"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXINSERTPAIRFORSELECTION"));
 	CheckBoxInsertPairForSelection->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxInsertPairForSelection);
 	BoxSizer23->Add(CheckBoxInsertPairForSelection, 1, wxALL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer12->Add(BoxSizer23, 1, wxALL|wxEXPAND, 0);
 	BoxSizer28 = new wxBoxSizer(wxHORIZONTAL);
-	CheckBoxMouseSelectToCopy = new wxCheckBox(Panel2, ID_CHECKBOXMOUSESELECTTOCOPY, _("Auto copy the mouse-selected text to clipboard"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXMOUSESELECTTOCOPY"));
+	CheckBoxMouseSelectToCopy = new wxCheckBox(Panel2, wxID_ANY, _("Auto copy the mouse-selected text to clipboard"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXMOUSESELECTTOCOPY"));
 	CheckBoxMouseSelectToCopy->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxMouseSelectToCopy);
+	ADD2EVENTMAP(CheckboxEvtMapVec, CheckBoxMouseSelectToCopy, &MadOptionsDialog::CheckBoxMouseSelectToCopyClick);
 	BoxSizer28->Add(CheckBoxMouseSelectToCopy, 0, wxALL|wxALIGN_CENTER_VERTICAL, 2);
-	CheckBoxCtrlWithMouseToSelect = new wxCheckBox(Panel2, ID_CHECKBOXWHENPRESSCTRLKEY, _("when pressing Ctrl key"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXWHENPRESSCTRLKEY"));
+	CheckBoxCtrlWithMouseToSelect = new wxCheckBox(Panel2, wxID_ANY, _("when pressing Ctrl key"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXWHENPRESSCTRLKEY"));
 	CheckBoxCtrlWithMouseToSelect->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxCtrlWithMouseToSelect);
 	BoxSizer28->Add(CheckBoxCtrlWithMouseToSelect, 0, wxALL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer12->Add(BoxSizer28, 0, wxALL|wxALIGN_LEFT, 0);
-	CheckBoxMiddleMouseToPaste = new wxCheckBox(Panel2, ID_CHECKBOXMIDDLEMOUSETOPASTE, _("Paste text from clipboard when pressing middle mouse button"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXMIDDLEMOUSETOPASTE"));
+	CheckBoxMiddleMouseToPaste = new wxCheckBox(Panel2, wxID_ANY, _("Paste text from clipboard when pressing middle mouse button"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXMIDDLEMOUSETOPASTE"));
 	CheckBoxMiddleMouseToPaste->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxMiddleMouseToPaste);
 	BoxSizer12->Add(CheckBoxMiddleMouseToPaste, 0, wxALL|wxEXPAND, 2);
-	CheckBoxAutoFillColumnPaste = new wxCheckBox(Panel2, ID_CHECKBOXAUTOFILLCOLUMN, _("Auto fill in column paste"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXAUTOFILLCOLUMN"));
+	CheckBoxAutoFillColumnPaste = new wxCheckBox(Panel2, wxID_ANY, _("Auto fill in column paste"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXAUTOFILLCOLUMN"));
 	CheckBoxAutoFillColumnPaste->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxAutoFillColumnPaste);
 	BoxSizer12->Add(CheckBoxAutoFillColumnPaste, 0, wxALL|wxEXPAND, 2);
-	CheckBoxLDClickHighlight = new wxCheckBox(Panel2, ID_CHECKBOXDCLICKHIGHLIGHT, _("Left double click to highlight"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXDCLICKHIGHLIGHT"));
+	CheckBoxLDClickHighlight = new wxCheckBox(Panel2, wxID_ANY, _("Left double click to highlight"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXDCLICKHIGHLIGHT"));
 	CheckBoxLDClickHighlight->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxLDClickHighlight);
 	BoxSizer12->Add(CheckBoxLDClickHighlight, 0, wxALL|wxEXPAND, 2);
-	CheckBoxTypewriterMode = new wxCheckBox(Panel2, ID_CHECKBOXLOCKCARETYPOS, _("Typewriter mode"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXLOCKCARETYPOS"));
+	CheckBoxTypewriterMode = new wxCheckBox(Panel2, wxID_ANY, _("Typewriter mode"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXLOCKCARETYPOS"));
 	CheckBoxTypewriterMode->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxTypewriterMode);
 	BoxSizer12->Add(CheckBoxTypewriterMode, 0, wxALL|wxEXPAND, 2);
-	CheckBoxFixWidthMode = new wxCheckBox(Panel2, ID_CHECKBOXFIXWIDTHMODE, _("Fix width mode"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXFIXWIDTHMODE"));
+	CheckBoxFixWidthMode = new wxCheckBox(Panel2, wxID_ANY, _("Fix width mode"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXFIXWIDTHMODE"));
 	CheckBoxFixWidthMode->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxFixWidthMode);
 	BoxSizer12->Add(CheckBoxFixWidthMode, 0, wxALL|wxEXPAND, 2);
@@ -689,51 +488,58 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	Panel2->SetSizer(BoxSizer8);
 	BoxSizer8->Fit(Panel2);
 	BoxSizer8->SetSizeHints(Panel2);
-	Panel6 = new wxPanel(AuiNotebook1, ID_PANEL6, wxDefaultPosition, wxSize(792,400), wxTAB_TRAVERSAL, _T("ID_PANEL6"));
+	Panel6 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxSize(792,400), wxTAB_TRAVERSAL, _T("ID_PANEL6"));
 	BoxSizer42 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer43 = new wxBoxSizer(wxVERTICAL);
 	StaticBoxSizer9 = new wxStaticBoxSizer(wxVERTICAL, Panel6, _("Line Ending"));
-	RadioButtonNewDocLineEndingDefault = new wxRadioButton(Panel6, ID_RADIOBUTTONNEWDOCLINEENDINGDEFAULT, _("System Default"), wxDefaultPosition, wxDefaultSize, wxRB_GROUP, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCLINEENDINGDEFAULT"));
+	RadioButtonNewDocLineEndingDefault = new wxRadioButton(Panel6, wxID_ANY, _("System Default"), wxDefaultPosition, wxDefaultSize, wxRB_GROUP, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCLINEENDINGDEFAULT"));
 	ADD2CONTROLS(controls, RadioButtonNewDocLineEndingDefault);
+	ADD2EVENTMAP(RadioButtonEvtMapVec, RadioButtonNewDocLineEndingDefault, &MadOptionsDialog::RadioButtonNewDocLineEndingSelect);
 	StaticBoxSizer9->Add(RadioButtonNewDocLineEndingDefault, 0, wxALL|wxEXPAND, 2);
-	RadioButtonNewDocLineEndingCRLF = new wxRadioButton(Panel6, ID_RADIOBUTTONNEWDOCLINEENDINGCRLF, _T("Windows(CR LF)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCLINEENDINGCRLF"));
+	RadioButtonNewDocLineEndingCRLF = new wxRadioButton(Panel6, wxID_ANY, _T("Windows(CR LF)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCLINEENDINGCRLF"));
 	ADD2CONTROLS(controls, RadioButtonNewDocLineEndingCRLF);
+	ADD2EVENTMAP(RadioButtonEvtMapVec, RadioButtonNewDocLineEndingCRLF, &MadOptionsDialog::RadioButtonNewDocLineEndingSelect);
 	StaticBoxSizer9->Add(RadioButtonNewDocLineEndingCRLF, 0, wxALL|wxEXPAND, 2);
-	RadioButtonNewDocLineEndingLF = new wxRadioButton(Panel6, ID_RADIOBUTTONNEWDOCLINEENDINGLF, _T("Unix(LF)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCLINEENDINGLF"));
+	RadioButtonNewDocLineEndingLF = new wxRadioButton(Panel6, wxID_ANY, _T("Unix(LF)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCLINEENDINGLF"));
 	ADD2CONTROLS(controls, RadioButtonNewDocLineEndingLF);
+	ADD2EVENTMAP(RadioButtonEvtMapVec, RadioButtonNewDocLineEndingLF, &MadOptionsDialog::RadioButtonNewDocLineEndingSelect);
 	//ADD2CONTROLS(controls, RadioBoxLineEnding);
 	StaticBoxSizer9->Add(RadioButtonNewDocLineEndingLF, 0, wxALL|wxEXPAND, 2);
-	RadioButtonNewDocLineEndingCR = new wxRadioButton(Panel6, ID_RADIOBUTTONNEWDOCLINEENDINGCR, _T("Macintosh"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCLINEENDINGCR"));
+	RadioButtonNewDocLineEndingCR = new wxRadioButton(Panel6, wxID_ANY, _T("Macintosh"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCLINEENDINGCR"));
 	ADD2CONTROLS(controls, RadioButtonNewDocLineEndingCR);
+	ADD2EVENTMAP(RadioButtonEvtMapVec, RadioButtonNewDocLineEndingCR, &MadOptionsDialog::RadioButtonNewDocLineEndingSelect);
 	StaticBoxSizer9->Add(RadioButtonNewDocLineEndingCR, 0, wxALL|wxEXPAND, 2);
 	BoxSizer43->Add(StaticBoxSizer9, 0, wxALL|wxALIGN_LEFT, 5);
 	BoxSizer49 = new wxBoxSizer(wxVERTICAL);
 	StaticText23 = new wxStaticText(Panel6, wxID_ANY, _("Syntax:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	BoxSizer49->Add(StaticText23, 0, wxALL|wxEXPAND, 2);
-	ComboBoxNewDocSyntax = new wxComboBox(Panel6, ID_COMBOBOXNEWDOCSYNTAX, wxEmptyString, wxDefaultPosition, wxSize(160,-1), 0, 0, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXNEWDOCSYNTAX"));
+	ComboBoxNewDocSyntax = new wxComboBox(Panel6, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(160,-1), 0, 0, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXNEWDOCSYNTAX"));
 	ADD2CONTROLS(controls, ComboBoxNewDocSyntax);
 	BoxSizer49->Add(ComboBoxNewDocSyntax, 0, wxALL|wxEXPAND, 2);
 	BoxSizer43->Add(BoxSizer49, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	BoxSizer42->Add(BoxSizer43, 0, wxALL|wxALIGN_TOP, 5);
 	BoxSizer47 = new wxBoxSizer(wxVERTICAL);
 	StaticBoxSizer10 = new wxStaticBoxSizer(wxVERTICAL, Panel6, _("Encoding"));
-	RadioButtonNewDocEncSystemDefault = new wxRadioButton(Panel6, ID_RADIOBUTTONNEWDOCENCSYSTEMDEFAULT, _("System Default"), wxDefaultPosition, wxDefaultSize, wxRB_GROUP, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCENCSYSTEMDEFAULT"));
+	RadioButtonNewDocEncSystemDefault = new wxRadioButton(Panel6, wxID_ANY, _("System Default"), wxDefaultPosition, wxDefaultSize, wxRB_GROUP, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCENCSYSTEMDEFAULT"));
 	ADD2CONTROLS(controls, RadioButtonNewDocEncSystemDefault);
+	ADD2EVENTMAP(RadioButtonEvtMapVec, RadioButtonNewDocEncSystemDefault, &MadOptionsDialog::RadioButtonNewDocEncSelect);
 	StaticBoxSizer10->Add(RadioButtonNewDocEncSystemDefault, 0, wxALL|wxEXPAND, 2);
 	GridSizer3 = new wxGridSizer(0, 2, 0, 0);
-	RadioButtonNewDocEncUTF8 = new wxRadioButton(Panel6, ID_RADIOBUTTONNEWDOCENCUTF8, _T("UTF8"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCENCUTF8"));
+	RadioButtonNewDocEncUTF8 = new wxRadioButton(Panel6, wxID_ANY, _T("UTF8"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCENCUTF8"));
 	ADD2CONTROLS(controls, RadioButtonNewDocEncUTF8);
 	GridSizer3->Add(RadioButtonNewDocEncUTF8, 0, wxALL|wxEXPAND, 2);
-	CheckBoxNewDocEncUTF8WithBOM = new wxCheckBox(Panel6, ID_CHECKBOXNEWDOCENCUTF8WITHBOM, _("with BOM"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXNEWDOCENCUTF8WITHBOM"));
+	ADD2EVENTMAP(RadioButtonEvtMapVec, RadioButtonNewDocEncUTF8, &MadOptionsDialog::RadioButtonNewDocEncSelect);
+	CheckBoxNewDocEncUTF8WithBOM = new wxCheckBox(Panel6, wxID_ANY, _("with BOM"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXNEWDOCENCUTF8WITHBOM"));
 	CheckBoxNewDocEncUTF8WithBOM->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxNewDocEncUTF8WithBOM);
 	GridSizer3->Add(CheckBoxNewDocEncUTF8WithBOM, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	StaticBoxSizer10->Add(GridSizer3, 1, wxALL|wxALIGN_LEFT, 0);
 	BoxSizer50 = new wxBoxSizer(wxHORIZONTAL);
-	RadioButtonNewDocEncOther = new wxRadioButton(Panel6, ID_RADIOBUTTONNEWDOCENCOTHER, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCENCOTHER"));
+	RadioButtonNewDocEncOther = new wxRadioButton(Panel6, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_RADIOBUTTONNEWDOCENCOTHER"));
 	ADD2CONTROLS(controls, RadioButtonNewDocEncOther);
+	ADD2EVENTMAP(RadioButtonEvtMapVec, RadioButtonNewDocEncOther, &MadOptionsDialog::RadioButtonNewDocEncSelect);
 	BoxSizer50->Add(RadioButtonNewDocEncOther, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	ComboBoxNewDocEncOther = new wxComboBox(Panel6, ID_COMBOBOXNEWDOCENCOTHER, wxEmptyString, wxDefaultPosition, wxSize(160,-1), 0, 0, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXNEWDOCENCOTHER"));
+	ComboBoxNewDocEncOther = new wxComboBox(Panel6, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(160,-1), 0, 0, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXNEWDOCENCOTHER"));
 	ADD2CONTROLS(controls, ComboBoxNewDocEncOther);
 	BoxSizer50->Add(ComboBoxNewDocEncOther, 0, wxALL|wxEXPAND, 2);
 	StaticBoxSizer10->Add(BoxSizer50, 0, wxALL|wxEXPAND, 0);
@@ -741,14 +547,14 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	BoxSizer51 = new wxBoxSizer(wxVERTICAL);
 	StaticText24 = new wxStaticText(Panel6, wxID_ANY, _("Font:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	BoxSizer51->Add(StaticText24, 0, wxALL|wxEXPAND, 2);
-	ComboBoxNewDocFont = new wxComboBox(Panel6, ID_COMBOBOXNEWDOCFONT, wxEmptyString, wxDefaultPosition, wxSize(160,-1), g_FontNames, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXNEWDOCFONT"));
+	ComboBoxNewDocFont = new wxComboBox(Panel6, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(160,-1), g_FontNames, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXNEWDOCFONT"));
 	ADD2CONTROLS(controls, ComboBoxNewDocFont);
 	BoxSizer51->Add(ComboBoxNewDocFont, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer47->Add(BoxSizer51, 0, wxALL|wxALIGN_LEFT, 5);
 	BoxSizer52 = new wxBoxSizer(wxVERTICAL);
 	StaticText25 = new wxStaticText(Panel6, wxID_ANY, _("Font Size:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	BoxSizer52->Add(StaticText25, 0, wxALL|wxEXPAND, 2);
-	EditNewDocFontSize = new wxTextCtrl(Panel6, ID_TEXTCTRLNEWDOCFONTSIZE, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRLNEWDOCFONTSIZE"));
+	EditNewDocFontSize = new wxTextCtrl(Panel6, wxID_ANY, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRLNEWDOCFONTSIZE"));
 	EditNewDocFontSize->SetMaxLength(2);
 	ADD2CONTROLS(controls, EditNewDocFontSize);
 	BoxSizer52->Add(EditNewDocFontSize, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
@@ -757,31 +563,31 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	Panel6->SetSizer(BoxSizer42);
 	BoxSizer42->Fit(Panel6);
 	BoxSizer42->SetSizeHints(Panel6);
-	Panel3 = new wxPanel(AuiNotebook1, ID_PANEL3, wxDefaultPosition, wxSize(792,400), wxTAB_TRAVERSAL, _T("ID_PANEL3"));
+	Panel3 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxSize(792,400), wxTAB_TRAVERSAL, _T("ID_PANEL3"));
 	BoxSizer14 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer15 = new wxBoxSizer(wxVERTICAL);
 	StaticBoxSizer1 = new wxStaticBoxSizer(wxVERTICAL, Panel3, _("Text Mode"));
-	CheckBoxPrintSyntax = new wxCheckBox(Panel3, ID_CHECKBOXPRINTSYNTAX, _("Print Syntax Highlighter"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXPRINTSYNTAX"));
+	CheckBoxPrintSyntax = new wxCheckBox(Panel3, wxID_ANY, _("Print Syntax Highlighter"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXPRINTSYNTAX"));
 	CheckBoxPrintSyntax->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxPrintSyntax);
 	StaticBoxSizer1->Add(CheckBoxPrintSyntax, 0, wxALL|wxALIGN_LEFT, 2);
-	CheckBoxPrintLineNumber = new wxCheckBox(Panel3, ID_CHECKBOXPRINTLINENUMBER, _("Print Line Number"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXPRINTLINENUMBER"));
+	CheckBoxPrintLineNumber = new wxCheckBox(Panel3, wxID_ANY, _("Print Line Number"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXPRINTLINENUMBER"));
 	CheckBoxPrintLineNumber->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxPrintLineNumber);
 	StaticBoxSizer1->Add(CheckBoxPrintLineNumber, 0, wxALL|wxALIGN_LEFT, 2);
-	CheckBoxPrintBookmark = new wxCheckBox(Panel3, ID_CHECKBOXPRINTBOOKMARK, _("Print Bookmark"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXPRINTBOOKMARK"));
+	CheckBoxPrintBookmark = new wxCheckBox(Panel3, wxID_ANY, _("Print Bookmark"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXPRINTBOOKMARK"));
 	CheckBoxPrintBookmark->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxPrintBookmark);
 	StaticBoxSizer1->Add(CheckBoxPrintBookmark, 0, wxALL|wxALIGN_LEFT, 2);
-	CheckBoxPrintEndOfLine = new wxCheckBox(Panel3, ID_CHECKBOXPRINTENDOFLINE, _("Print End of Line"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXPRINTENDOFLINE"));
+	CheckBoxPrintEndOfLine = new wxCheckBox(Panel3, wxID_ANY, _("Print End of Line"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXPRINTENDOFLINE"));
 	CheckBoxPrintEndOfLine->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxPrintEndOfLine);
 	StaticBoxSizer1->Add(CheckBoxPrintEndOfLine, 0, wxALL|wxALIGN_LEFT, 2);
-	CheckBoxPrintTabChar = new wxCheckBox(Panel3, ID_CHECKBOXPRINTTABCHAR, _("Print Tab Char"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXPRINTTABCHAR"));
+	CheckBoxPrintTabChar = new wxCheckBox(Panel3, wxID_ANY, _("Print Tab Char"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXPRINTTABCHAR"));
 	CheckBoxPrintTabChar->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxPrintTabChar);
 	StaticBoxSizer1->Add(CheckBoxPrintTabChar, 0, wxALL|wxALIGN_LEFT, 2);
-	CheckBoxPrintSpaceChar = new wxCheckBox(Panel3, ID_CHECKBOXPRINTSPACECHAR, _("Print Space Char"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXPRINTSPACECHAR"));
+	CheckBoxPrintSpaceChar = new wxCheckBox(Panel3, wxID_ANY, _("Print Space Char"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXPRINTSPACECHAR"));
 	CheckBoxPrintSpaceChar->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxPrintSpaceChar);
 	StaticBoxSizer1->Add(CheckBoxPrintSpaceChar, 0, wxALL|wxALIGN_LEFT, 2);
@@ -793,73 +599,79 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 		_("First Page Only"),
 		_("Every Page")
 	};
-	RadioBoxPrintOffset = new wxRadioBox(Panel3, ID_RADIOBOXPRINTOFFSET, _("Print Offset Header"), wxDefaultPosition, wxDefaultSize, 3, __wxRadioBoxChoices_1, 1, wxRA_SPECIFY_COLS, wxDefaultValidator, _T("ID_RADIOBOXPRINTOFFSET"));
+	RadioBoxPrintOffset = new wxRadioBox(Panel3, wxID_ANY, _("Print Offset Header"), wxDefaultPosition, wxDefaultSize, 3, __wxRadioBoxChoices_1, 1, wxRA_SPECIFY_COLS, wxDefaultValidator, _T("ID_RADIOBOXPRINTOFFSET"));
 	ADD2CONTROLS(controls, RadioBoxPrintOffset);
 	StaticBoxSizer2->Add(RadioBoxPrintOffset, 0, wxALL|wxALIGN_LEFT, 2);
 	BoxSizer15->Add(StaticBoxSizer2, 0, wxALL|wxEXPAND, 4);
 	BoxSizer14->Add(BoxSizer15, 0, wxALL|wxALIGN_TOP, 2);
 	BoxSizer16 = new wxBoxSizer(wxVERTICAL);
 	StaticBoxSizer3 = new wxStaticBoxSizer(wxVERTICAL, Panel3, _("Page Header"));
-	CheckBoxPrintPageHeader = new wxCheckBox(Panel3, ID_CHECKBOXPRINTPAGEHEADER, _("Print Page Header"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXPRINTPAGEHEADER"));
+	CheckBoxPrintPageHeader = new wxCheckBox(Panel3, wxID_ANY, _("Print Page Header"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXPRINTPAGEHEADER"));
 	CheckBoxPrintPageHeader->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxPrintPageHeader);
 	StaticBoxSizer3->Add(CheckBoxPrintPageHeader, 0, wxALL|wxALIGN_LEFT, 1);
 	FlexGridSizer1 = new wxFlexGridSizer(0, 3, 0, 0);
-	StaticText7 = new wxStaticText(Panel3, ID_STATICTEXT7, _("Left:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT7"));
+	StaticText7 = new wxStaticText(Panel3, wxID_ANY, _("Left:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT7"));
 	FlexGridSizer1->Add(StaticText7, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 2);
-	EditHeaderLeft = new wxTextCtrl(Panel3, ID_EDITHEADERLEFT, wxEmptyString, wxDefaultPosition, wxSize(240,-1), 0, wxDefaultValidator, _T("ID_EDITHEADERLEFT"));
+	EditHeaderLeft = new wxTextCtrl(Panel3, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(240,-1), 0, wxDefaultValidator, _T("ID_EDITHEADERLEFT"));
 	ADD2CONTROLS(controls, EditHeaderLeft);
 	FlexGridSizer1->Add(EditHeaderLeft, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	Button1 = new wxButton(Panel3, ID_BUTTON1, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON1"));
+	Button1 = new wxButton(Panel3, wxID_ANY, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON1"));
 	ADD2CONTROLS(controls, Button1);
+	ADD2EVENTMAP(ButtonEvtMapVec, Button1, &MadOptionsDialog::PrintMarkButtonClick);
 	FlexGridSizer1->Add(Button1, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
-	StaticText8 = new wxStaticText(Panel3, ID_STATICTEXT8, _("Center:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT8"));
+	StaticText8 = new wxStaticText(Panel3, wxID_ANY, _("Center:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT8"));
 	FlexGridSizer1->Add(StaticText8, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 2);
-	EditHeaderCenter = new wxTextCtrl(Panel3, ID_EDITHEADERCENTER, wxEmptyString, wxDefaultPosition, wxSize(240,-1), 0, wxDefaultValidator, _T("ID_EDITHEADERCENTER"));
+	EditHeaderCenter = new wxTextCtrl(Panel3, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(240,-1), 0, wxDefaultValidator, _T("ID_EDITHEADERCENTER"));
 	ADD2CONTROLS(controls, EditHeaderCenter);
 	FlexGridSizer1->Add(EditHeaderCenter, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	Button2 = new wxButton(Panel3, ID_BUTTON2, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON2"));
+	Button2 = new wxButton(Panel3, wxID_ANY, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON2"));
 	ADD2CONTROLS(controls, Button2);
+	ADD2EVENTMAP(ButtonEvtMapVec, Button2, &MadOptionsDialog::PrintMarkButtonClick);
 	FlexGridSizer1->Add(Button2, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
-	StaticText9 = new wxStaticText(Panel3, ID_STATICTEXT9, _("Right:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT9"));
+	StaticText9 = new wxStaticText(Panel3, wxID_ANY, _("Right:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT9"));
 	FlexGridSizer1->Add(StaticText9, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 2);
-	EditHeaderRight = new wxTextCtrl(Panel3, ID_EDITHEADERRIGHT, wxEmptyString, wxDefaultPosition, wxSize(240,-1), 0, wxDefaultValidator, _T("ID_EDITHEADERRIGHT"));
+	EditHeaderRight = new wxTextCtrl(Panel3, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(240,-1), 0, wxDefaultValidator, _T("ID_EDITHEADERRIGHT"));
 	ADD2CONTROLS(controls, EditHeaderRight);
 	FlexGridSizer1->Add(EditHeaderRight, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	Button3 = new wxButton(Panel3, ID_BUTTON3, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON3"));
+	Button3 = new wxButton(Panel3, wxID_ANY, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON3"));
 	ADD2CONTROLS(controls, Button3);
+	ADD2EVENTMAP(ButtonEvtMapVec, Button3, &MadOptionsDialog::PrintMarkButtonClick);
 	FlexGridSizer1->Add(Button3, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
 	StaticBoxSizer3->Add(FlexGridSizer1, 0, wxALL|wxEXPAND, 2);
 	BoxSizer16->Add(StaticBoxSizer3, 0, wxALL|wxEXPAND, 4);
 	StaticBoxSizer4 = new wxStaticBoxSizer(wxVERTICAL, Panel3, _("Page Footer"));
-	CheckBoxPrintPageFooter = new wxCheckBox(Panel3, ID_CHECKBOXPRINTPAGEFOOTER, _("Print Page Footer"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXPRINTPAGEFOOTER"));
+	CheckBoxPrintPageFooter = new wxCheckBox(Panel3, wxID_ANY, _("Print Page Footer"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXPRINTPAGEFOOTER"));
 	CheckBoxPrintPageFooter->SetValue(false);
 	ADD2CONTROLS(controls, CheckBoxPrintPageFooter);
 	StaticBoxSizer4->Add(CheckBoxPrintPageFooter, 0, wxALL|wxALIGN_LEFT, 2);
 	FlexGridSizer2 = new wxFlexGridSizer(0, 3, 0, 0);
-	StaticText10 = new wxStaticText(Panel3, ID_STATICTEXT10, _("Left:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT10"));
+	StaticText10 = new wxStaticText(Panel3, wxID_ANY, _("Left:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT10"));
 	FlexGridSizer2->Add(StaticText10, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 2);
-	EditFooterLeft = new wxTextCtrl(Panel3, ID_EDITFOOTERLEFT, wxEmptyString, wxDefaultPosition, wxSize(240,-1), 0, wxDefaultValidator, _T("ID_EDITFOOTERLEFT"));
+	EditFooterLeft = new wxTextCtrl(Panel3, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(240,-1), 0, wxDefaultValidator, _T("ID_EDITFOOTERLEFT"));
 	ADD2CONTROLS(controls, EditFooterLeft);
 	FlexGridSizer2->Add(EditFooterLeft, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	Button4 = new wxButton(Panel3, ID_BUTTON4, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON4"));
+	Button4 = new wxButton(Panel3, wxID_ANY, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON4"));
 	ADD2CONTROLS(controls, Button4);
+	ADD2EVENTMAP(ButtonEvtMapVec, Button4, &MadOptionsDialog::PrintMarkButtonClick);
 	FlexGridSizer2->Add(Button4, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
-	StaticText11 = new wxStaticText(Panel3, ID_STATICTEXT11, _("Center:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT11"));
+	StaticText11 = new wxStaticText(Panel3, wxID_ANY, _("Center:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT11"));
 	FlexGridSizer2->Add(StaticText11, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 2);
-	EditFooterCenter = new wxTextCtrl(Panel3, ID_EDITFOOTERLEFTCENTER, wxEmptyString, wxDefaultPosition, wxSize(240,-1), 0, wxDefaultValidator, _T("ID_EDITFOOTERLEFTCENTER"));
+	EditFooterCenter = new wxTextCtrl(Panel3, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(240,-1), 0, wxDefaultValidator, _T("ID_EDITFOOTERLEFTCENTER"));
 	ADD2CONTROLS(controls, EditFooterCenter);
 	FlexGridSizer2->Add(EditFooterCenter, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	Button5 = new wxButton(Panel3, ID_BUTTON5, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON5"));
+	Button5 = new wxButton(Panel3, wxID_ANY, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON5"));
 	ADD2CONTROLS(controls, Button5);
+	ADD2EVENTMAP(ButtonEvtMapVec, Button5, &MadOptionsDialog::PrintMarkButtonClick);
 	FlexGridSizer2->Add(Button5, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
-	StaticText12 = new wxStaticText(Panel3, ID_STATICTEXT12, _("Right:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT12"));
+	StaticText12 = new wxStaticText(Panel3, wxID_ANY, _("Right:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT12"));
 	FlexGridSizer2->Add(StaticText12, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 2);
-	EditFooterRight = new wxTextCtrl(Panel3, ID_EDITFOOTERRIGHT, wxEmptyString, wxDefaultPosition, wxSize(240,-1), 0, wxDefaultValidator, _T("ID_EDITFOOTERRIGHT"));
+	EditFooterRight = new wxTextCtrl(Panel3, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(240,-1), 0, wxDefaultValidator, _T("ID_EDITFOOTERRIGHT"));
 	ADD2CONTROLS(controls, EditFooterRight);
 	FlexGridSizer2->Add(EditFooterRight, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	Button6 = new wxButton(Panel3, ID_BUTTON6, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON6"));
+	Button6 = new wxButton(Panel3, wxID_ANY, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON6"));
 	ADD2CONTROLS(controls, Button6);
+	ADD2EVENTMAP(ButtonEvtMapVec, Button6, &MadOptionsDialog::PrintMarkButtonClick);
 	FlexGridSizer2->Add(Button6, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
 	StaticBoxSizer4->Add(FlexGridSizer2, 0, wxALL|wxEXPAND, 2);
 	BoxSizer16->Add(StaticBoxSizer4, 0, wxALL|wxEXPAND, 4);
@@ -867,55 +679,58 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	Panel3->SetSizer(BoxSizer14);
 	BoxSizer14->Fit(Panel3);
 	BoxSizer14->SetSizeHints(Panel3);
-	Panel4 = new wxPanel(AuiNotebook1, ID_PANEL4, wxDefaultPosition, wxSize(792,400), wxTAB_TRAVERSAL, _T("ID_PANEL4"));
+	Panel4 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxSize(792,400), wxTAB_TRAVERSAL, _T("ID_PANEL4"));
 	BoxSizer18 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer19 = new wxBoxSizer(wxHORIZONTAL);
-	TreeCtrl1 = new wxTreeCtrl(Panel4, ID_TREECTRL1, wxDefaultPosition, wxDefaultSize, wxTR_HAS_BUTTONS|wxTR_DEFAULT_STYLE, wxDefaultValidator, _T("ID_TREECTRL1"));
+	TreeCtrl1 = new wxTreeCtrl(Panel4, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTR_HAS_BUTTONS|wxTR_DEFAULT_STYLE, wxDefaultValidator, _T("ID_TREECTRL1"));
 	ADD2CONTROLS(controls, TreeCtrl1);
 	BoxSizer19->Add(TreeCtrl1, 1, wxALL|wxEXPAND, 3);
 	BoxSizer18->Add(BoxSizer19, 2, wxALL|wxEXPAND, 4);
 	BoxSizer20 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer24 = new wxBoxSizer(wxHORIZONTAL);
-	StaticTextCommandHint = new wxStaticText(Panel4, ID_STATICTEXTCOMMANDHINT, _("Hint:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXTCOMMANDHINT"));
+	StaticTextCommandHint = new wxStaticText(Panel4, wxID_ANY, _("Hint:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXTCOMMANDHINT"));
 	BoxSizer24->Add(StaticTextCommandHint, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5);
-	EditCommandHint = new wxTextCtrl(Panel4, ID_EDITHINT, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_EDITHINT"));
+	EditCommandHint = new wxTextCtrl(Panel4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_EDITHINT"));
 	ADD2CONTROLS(controls, EditCommandHint);
 	EditCommandHint->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BTNFACE));
 	BoxSizer24->Add(EditCommandHint, 1, wxALL|wxEXPAND, 5);
 	BoxSizer20->Add(BoxSizer24, 0, wxALL|wxEXPAND, 2);
 	BoxSizer21 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer22 = new wxBoxSizer(wxVERTICAL);
-	StaticText14 = new wxStaticText(Panel4, ID_STATICTEXT14, _("Assigned Keys:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT14"));
+	StaticText14 = new wxStaticText(Panel4, wxID_ANY, _("Assigned Keys:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT14"));
 	BoxSizer22->Add(StaticText14, 0, wxALL|wxALIGN_LEFT, 5);
-	ListBoxKeys = new wxListBox(Panel4, ID_LISTBOXKEYS, wxDefaultPosition, wxDefaultSize, 0, 0, wxLB_SINGLE, wxDefaultValidator, _T("ID_LISTBOXKEYS"));
+	ListBoxKeys = new wxListBox(Panel4, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, 0, wxLB_SINGLE, wxDefaultValidator, _T("ID_LISTBOXKEYS"));
 	ADD2CONTROLS(controls, ListBoxKeys);
 	BoxSizer22->Add(ListBoxKeys, 1, wxALL|wxEXPAND, 2);
 	BoxSizer21->Add(BoxSizer22, 0, wxALL|wxEXPAND, 2);
 	BoxSizer25 = new wxBoxSizer(wxVERTICAL);
-	StaticText15 = new wxStaticText(Panel4, ID_STATICTEXT15, _("New Key:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT15"));
+	StaticText15 = new wxStaticText(Panel4, wxID_ANY, _("New Key:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT15"));
 	BoxSizer25->Add(StaticText15, 0, wxALL|wxALIGN_LEFT, 5);
-	EditKey = new KeyTextCtrl(Panel4, ID_EDITKEY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_TAB|wxWANTS_CHARS, wxDefaultValidator, _T("ID_EDITKEY"));
+	EditKey = new KeyTextCtrl(Panel4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_TAB|wxWANTS_CHARS, wxDefaultValidator, _T("ID_EDITKEY"));
 	ADD2CONTROLS(controls, EditKey);
 	BoxSizer25->Add(EditKey, 0, wxALL|wxEXPAND, 5);
-	EditKeyHint = new wxTextCtrl(Panel4, ID_EDITKEYHINT, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_EDITKEYHINT"));
+	EditKeyHint = new wxTextCtrl(Panel4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_EDITKEYHINT"));
 	ADD2CONTROLS(controls, EditKeyHint);
 	EditKeyHint->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BTNFACE));
 	BoxSizer25->Add(EditKeyHint, 1, wxALL|wxEXPAND, 5);
 	BoxSizer29 = new wxBoxSizer(wxVERTICAL);
-	ButtonAddKey = new wxButton(Panel4, ID_BUTTONADDKEY, _("<== Add Key"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTONADDKEY"));
+	ButtonAddKey = new wxButton(Panel4, wxID_ANY, _("<== Add Key"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTONADDKEY"));
 	ADD2CONTROLS(controls, ButtonAddKey);
+	ADD2EVENTMAP(ButtonEvtMapVec, ButtonAddKey, &MadOptionsDialog::ButtonAddKeyClick);
 	BoxSizer29->Add(ButtonAddKey, 0, wxALL|wxEXPAND, 5);
-	ButtonDeleteKey = new wxButton(Panel4, ID_BUTTONDELETEKEY, _("==> Delete Key"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTONDELETEKEY"));
+	ButtonDeleteKey = new wxButton(Panel4, wxID_ANY, _("==> Delete Key"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTONDELETEKEY"));
 	ADD2CONTROLS(controls, ButtonDeleteKey);
+	ADD2EVENTMAP(ButtonEvtMapVec, ButtonDeleteKey, &MadOptionsDialog::ButtonDeleteKeyClick);
 	BoxSizer29->Add(ButtonDeleteKey, 0, wxALL|wxEXPAND, 5);
-	ButtonShowInMenu = new wxButton(Panel4, ID_BUTTONSHOWINMENU, _("Show the Key in Menu"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTONSHOWINMENU"));
+	ButtonShowInMenu = new wxButton(Panel4, wxID_ANY, _("Show the Key in Menu"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTONSHOWINMENU"));
 	ADD2CONTROLS(controls, ButtonShowInMenu);
+	ADD2EVENTMAP(ButtonEvtMapVec, ButtonShowInMenu, &MadOptionsDialog::ButtonShowInMenuClick);
 	BoxSizer29->Add(ButtonShowInMenu, 0, wxALL|wxEXPAND, 5);
 	BoxSizer25->Add(BoxSizer29, 0, wxALL|wxALIGN_LEFT, 0);
 	BoxSizer21->Add(BoxSizer25, 5, wxALL|wxEXPAND, 1);
 	BoxSizer20->Add(BoxSizer21, 1, wxALL|wxEXPAND, 2);
 	BoxSizer26 = new wxBoxSizer(wxHORIZONTAL);
-	CheckBoxResetAllKeys = new wxCheckBox(Panel4, ID_CHECKBOXRESETALLKEYS, _("Reset all keys to default (must restart MadEdit)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXRESETALLKEYS"));
+	CheckBoxResetAllKeys = new wxCheckBox(Panel4, wxID_ANY, _("Reset all keys to default (must restart MadEdit)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXRESETALLKEYS"));
 	ADD2CONTROLS(controls, CheckBoxResetAllKeys);
 	CheckBoxResetAllKeys->SetValue(false);
 	BoxSizer26->Add(CheckBoxResetAllKeys, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5);
@@ -924,28 +739,29 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	Panel4->SetSizer(BoxSizer18);
 	BoxSizer18->Fit(Panel4);
 	BoxSizer18->SetSizeHints(Panel4);
-	Panel5 = new wxPanel(AuiNotebook1, ID_PANEL5, wxDefaultPosition, wxSize(792,400), wxTAB_TRAVERSAL, _T("ID_PANEL5"));
+	Panel5 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxSize(792,400), wxTAB_TRAVERSAL, _T("ID_PANEL5"));
 	BoxSizer36 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer34 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer34->Add(3,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	CheckBoxPersonalDict = new wxCheckBox(Panel5, ID_CHECKBOXPERSONALDICT, _("Enable Personal Dictionary"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXPERSONALDICT"));
+	CheckBoxPersonalDict = new wxCheckBox(Panel5, wxID_ANY, _("Enable Personal Dictionary"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXPERSONALDICT"));
 	ADD2CONTROLS(controls, CheckBoxPersonalDict);
 	CheckBoxPersonalDict->SetValue(false);
 	BoxSizer34->Add(CheckBoxPersonalDict, 0, wxALL|wxEXPAND, 2);
 	BoxSizer36->Add(BoxSizer34, 0, wxALL|wxALIGN_LEFT, 2);
 	StaticBoxSizer5 = new wxStaticBoxSizer(wxHORIZONTAL, Panel5, _("Language"));
-	ChoiceDictionary = new wxChoice(Panel5, ID_CHOICEDICTIONARY, wxDefaultPosition, wxSize(200,-1), 0, 0, 0, wxDefaultValidator, _T("ID_CHOICEDICTIONARY"));
+	ChoiceDictionary = new wxChoice(Panel5, wxID_ANY, wxDefaultPosition, wxSize(200,-1), 0, 0, 0, wxDefaultValidator, _T("ID_CHOICEDICTIONARY"));
 	StaticBoxSizer5->Add(ChoiceDictionary, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	ADD2CONTROLS(controls, ChoiceDictionary);
-	StaticText17 = new wxStaticText(Panel5, ID_STATICTEXT17, _("Dictionary"), wxDefaultPosition, wxSize(200,-1), 0, _T("ID_STATICTEXT17"));
+	StaticText17 = new wxStaticText(Panel5, wxID_ANY, _("Dictionary"), wxDefaultPosition, wxSize(200,-1), 0, _T("ID_STATICTEXT17"));
 	StaticBoxSizer5->Add(StaticText17, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer36->Add(StaticBoxSizer5, 0, wxALL|wxEXPAND, 2);
 	StaticBoxSizer6 = new wxStaticBoxSizer(wxHORIZONTAL, Panel5, _("Path Setting"));
-	EditDictionaryDir = new wxTextCtrl(Panel5, ID_EDITDICTIONARYDIR, wxEmptyString, wxDefaultPosition, wxSize(200,-1), 0, wxDefaultValidator, _T("ID_EDITDICTIONARYDIR"));
+	EditDictionaryDir = new wxTextCtrl(Panel5, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(200,-1), 0, wxDefaultValidator, _T("ID_EDITDICTIONARYDIR"));
 	ADD2CONTROLS(controls, EditDictionaryDir);
 	StaticBoxSizer6->Add(EditDictionaryDir, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	ButtonDictionaryDir = new wxButton(Panel5, ID_DICTIONARY_DIR, _T("..."), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_DICTIONARY_DIR"));
+	ButtonDictionaryDir = new wxButton(Panel5, wxID_ANY, _T("..."), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_DICTIONARY_DIR"));
 	ADD2CONTROLS(controls, ButtonDictionaryDir);
+	ADD2EVENTMAP(ButtonEvtMapVec, ButtonDictionaryDir, &MadOptionsDialog::ButtonDictionaryDirClick);
 	StaticBoxSizer6->Add(ButtonDictionaryDir, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer36->Add(StaticBoxSizer6, 0, wxALL|wxEXPAND, 2);
 	Panel5->SetSizer(BoxSizer36);
@@ -967,9 +783,11 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	BoxSizer30->Add(BoxSizer33, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	BoxSizer1->Add(BoxSizer30, 1, wxALL|wxEXPAND, 0);
 	BoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
-	ButtonOK = new wxButton(this, ID_BUTTONOK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTONOK"));
+	ButtonOK = new wxButton(this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTONOK"));
+	ADD2EVENTMAP(ButtonEvtMapVec, ButtonOK, &MadOptionsDialog::ButtonOKClick);
 	BoxSizer2->Add(ButtonOK, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-	ButtonCancel = new wxButton(this, ID_BUTTONCANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTONCANCEL"));
+	ButtonCancel = new wxButton(this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTONCANCEL"));
+	ADD2EVENTMAP(ButtonEvtMapVec, ButtonCancel, &MadOptionsDialog::ButtonCancelClick);
 	BoxSizer2->Add(ButtonCancel, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	BoxSizer1->Add(BoxSizer2, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	SetSizer(BoxSizer1);
@@ -999,71 +817,96 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	Connect(ID_BUTTONCANCEL,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadOptionsDialog::ButtonCancelClick);
 #endif
 	//*)
-
-	for(size_t i = 0; i < sizeof(m_menu_evt_map)/sizeof(m_menu_evt_map[0]); ++i)
+	for(size_t i = 0; i < ButtonEvtMapVec.size(); ++i)
 	{
-		Bind( wxEVT_MENU, m_menu_evt_map[i].method, this, m_menu_evt_map[i].evtTag );
+		Bind( wxEVT_BUTTON, ButtonEvtMapVec[i].method, this, ButtonEvtMapVec[i].pWin->GetId() );
 	}
 
-	for(size_t i = 0; i < sizeof(m_button_evt_map)/sizeof(m_button_evt_map[0]); ++i)
+	for (size_t i = 0; i < CheckboxEvtMapVec.size(); ++i)
 	{
-		Bind( wxEVT_BUTTON, m_button_evt_map[i].method, this, m_button_evt_map[i].evtTag );
+		Bind(wxEVT_CHECKBOX, CheckboxEvtMapVec[i].method, this, CheckboxEvtMapVec[i].pWin->GetId());
 	}
 
-	for(size_t i = 0; i < sizeof(m_checkbox_evt_map)/sizeof(m_checkbox_evt_map[0]); ++i)
+	for (size_t i = 0; i < RadioButtonEvtMapVec.size(); ++i)
 	{
-		Bind( wxEVT_CHECKBOX, m_checkbox_evt_map[i].method, this, m_checkbox_evt_map[i].evtTag );
-	}
-
-	for(size_t i = 0; i < sizeof(m_radiobutton_evt_map)/sizeof(m_radiobutton_evt_map[0]); ++i)
-	{
-		Bind( wxEVT_COMMAND_RADIOBUTTON_SELECTED, m_radiobutton_evt_map[i].method, this, m_radiobutton_evt_map[i].evtTag );
+		Bind(wxEVT_COMMAND_RADIOBUTTON_SELECTED, RadioButtonEvtMapVec[i].method, this, RadioButtonEvtMapVec[i].pWin->GetId());
 	}
 
 	Bind( wxEVT_CLOSE_WINDOW, &MadOptionsDialog::MadOptionsDialogClose , this );
 	Bind( wxEVT_ACTIVATE, &MadOptionsDialog::MadOptionsDialogActivate , this );
 
-	Bind( wxEVT_TEXT_ENTER, &MadOptionsDialog::EditDictionaryDirTextEnter, this, ID_EDITDICTIONARYDIR );
-	Bind( wxEVT_CHOICE, &MadOptionsDialog::ChoiceDictionarySelect, this, ID_CHOICEDICTIONARY );
-	Bind( wxEVT_LISTBOX, &MadOptionsDialog::ListBoxKeysSelected , this, ID_LISTBOXKEYS );
+	Bind( wxEVT_TEXT_ENTER, &MadOptionsDialog::EditDictionaryDirTextEnter, this, wxID_ANY );
+	Bind( wxEVT_CHOICE, &MadOptionsDialog::ChoiceDictionarySelect, this, wxID_ANY );
+	Bind( wxEVT_LISTBOX, &MadOptionsDialog::ListBoxKeysSelected , this, wxID_ANY );
 
-	Bind( wxEVT_TREE_SEL_CHANGED, &MadOptionsDialog::TreeCtrl1SelChanged , this, ID_TREECTRL1 );
+	Bind( wxEVT_TREE_SEL_CHANGED, &MadOptionsDialog::TreeCtrl1SelChanged , this, wxID_ANY );
 
-	PopupMenuPrintMark.Append(ID_MNU_MENUITEM1_1110, _("[%f] &File Name"), _T(""), wxITEM_NORMAL);
-	PopupMenuPrintMark.Append(ID_MNU___P__PATHNAME_1111, _("[%p] &Path Name"), _T(""), wxITEM_NORMAL);
-	PopupMenuPrintMark.AppendSeparator();
-	PopupMenuPrintMark.Append(ID_MNU___N_PAGE_NUMBER_1113, _("[%n] Page &Number"), _T(""), wxITEM_NORMAL);
-	PopupMenuPrintMark.Append(ID_MNU___S__TOTALPAGES_1114, _("[%s] Total Page&s"), _T(""), wxITEM_NORMAL);
-	PopupMenuPrintMark.AppendSeparator();
-	PopupMenuPrintMark.Append(ID_MNU___D__DATE_1116, _("[%d] &Date"), _T(""), wxITEM_NORMAL);
-	PopupMenuPrintMark.Append(ID_MNU___T__TIME_1117, _("[%t] &Time"), _T(""), wxITEM_NORMAL);
+	const wxChar * printMenus[] = 
+	{
+		_("[%f] &File Name"), 
+		_("[%p] &Path Name"),
+		nullptr,
+		_("[%n] Page &Number"),
+		_("[%s] Total Page&s"),
+		nullptr,
+		_("[%d] &Date"),
+		_("[%t] &Time"),
+	};
 
-	PopupMenuDateTimeMark.Append(ID_MNU___Y__M__D_I__M__S_P_2007_02_2408_30_55AM_1191, _("[%Y/%m/%d %I:%M:%S %p] 2007/02/24 08:30:55 AM"), _T(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___D__M__Y_24_02_2007_1192, _("[%d/%m/%Y] 24/02/2007"), _T(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___A__D_B_Y_H__M__S_Z_RFC822TIMESTAMP_1195, _("[%a, %d %b %Y %H:%M:%S %z] RFC822 timestamp"), _T(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.AppendSeparator();
-	PopupMenuDateTimeMark.Append(ID_MNU_MENUITEM1_1170, _("[%a] Abbreviated weekday name"), _T(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___A_FULLWEEKDAYNAME_1171, _("[%A] Full weekday name"), _T(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___B_ABBREVIATEDMONTHNAME_1172, _("[%b] Abbreviated month name"), _T(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___B_FULLMONTHNAME_1173, _("[%B] Full month name"), _T(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___C_DATEANDTIMEREPRESENTATIONAPPROPRIATEFORLOCALE_1174, _("[%c] Date and time representation appropriate for locale"), _T(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___D_DAYOFMONTHASDECIMALNUMBER_01_31__1175, _("[%d] Day of month as decimal number (01 - 31)"), _T(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___H_HOURIN24_HOURFORMAT_00_23__1176, _("[%H] Hour in 24-hour format (00 - 23)"), _T(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___I_HOURIN12_HOURFORMAT_01_12__1177, _("[%I] Hour in 12-hour format (01 - 12)"), _T(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___J_DAYOFYEARASDECIMALNUMBER_001_366__1178, _("[%j] Day of year as decimal number (001 - 366)"), _T(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___M_MONTHASDECIMALNUMBER_01_12__1179, _("[%m] Month as decimal number (01 - 12)"), _T(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___M_MINUTEASDECIMALNUMBER_00_59__1180, _("[%M] Minute as decimal number (00 - 59)"), _T(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___P_CURRENTLOCALESA_M__P_M_INDICATORFOR12_HOURCLOCK_1181, _("[%p] Current locale's A.M./P.M. indicator for 12-hour clock"), _T(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___S_SECONDASDECIMALNUMBER_00_59__1182, _("[%S] Second as decimal number (00 - 59)"), _T(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___U_WEEKOFYEARASDECIMALNUMBER_WITHSUNDAYASFIRSTDAYOFWEEK_00_53__1183, _("[%U] Week of year as decimal number, with Sunday as first day of week (00 - 53)"), _T(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___W_WEEKDAYASDECIMALNUMBER_0_6_SUNDAYIS0__1184, _("[%w] Weekday as decimal number (0 - 6; Sunday is 0)"), _T(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___W_WEEKOFYEARASDECIMALNUMBER_WITHMONDAYASFIRSTDAYOFWEEK_00_53__1185, _("[%W] Week of year as decimal number, with Monday as first day of week (00 - 53)"), _T(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___X_DATEREPRESENTATIONFORCURRENTLOCALE_1186, _("[%x] Date representation for current locale"), _T(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___X_TIMEREPRESENTATIONFORCURRENTLOCALE_1187, _("[%X] Time representation for current locale"), _T(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___Y_YEARWITHOUTCENTURY_ASDECIMALNUMBER_00_99__1188, _("[%y] Year without century, as decimal number (00 - 99)"), _T(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___Y_YEARWITHCENTURY_ASDECIMALNUMBER_1189, _("[%Y] Year with century, as decimal number"), _T(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___Z_TIME_ZONENAME_1193, _("[%z] Time-zone name"), _T(""), wxITEM_NORMAL);
-	PopupMenuDateTimeMark.Append(ID_MNU___Z_TIME_ZONEABBREVIATION_1194, _("[%Z] Time-zone abbreviation"), _T(""), wxITEM_NORMAL);
+	for( size_t i = 0; i < (sizeof(printMenus)/sizeof(const wxChar *)); ++i)
+	{
+		if(printMenus[i] != nullptr)
+		{
+			wxMenuItem * menuItem = PopupMenuPrintMark.Append( wxID_ANY, printMenus[i], _T(""), wxITEM_NORMAL);
+			Bind( wxEVT_MENU, &MadOptionsDialog::PrintMarkClick, this, menuItem->GetId() );
+		}
+		else
+		{
+			PopupMenuPrintMark.AppendSeparator();
+		}
+	}
+
+	const wxChar * datetimeMenus[] =
+	{
+		_("[%Y/%m/%d %I:%M:%S %p] 2007/02/24 08:30:55 AM"),
+		_("[%d/%m/%Y] 24/02/2007"),
+		_("[%a, %d %b %Y %H:%M:%S %z] RFC822 timestamp"), 
+		nullptr,
+		_("[%a] Abbreviated weekday name"),
+		_("[%A] Full weekday name"),
+		_("[%b] Abbreviated month name"),
+		_("[%B] Full month name"),
+		_("[%c] Date and time representation appropriate for locale"),
+		_("[%d] Day of month as decimal number (01 - 31)"),
+		_("[%H] Hour in 24-hour format (00 - 23)"),
+		_("[%I] Hour in 12-hour format (01 - 12)"),
+		_("[%j] Day of year as decimal number (001 - 366)"),
+		_("[%m] Month as decimal number (01 - 12)"),
+		_("[%M] Minute as decimal number (00 - 59)"),
+		_("[%p] Current locale's A.M./P.M. indicator for 12-hour clock"),
+		_("[%S] Second as decimal number (00 - 59)"),
+		_("[%U] Week of year as decimal number,  with Sunday as first day of week (00 - 53)"),
+		_("[%w] Weekday as decimal number (0 - 6; Sunday is 0)"),
+		_("[%W] Week of year as decimal number, with Monday as first day of week (00 - 53)"),
+		_("[%x] Date representation for current locale"),
+		_("[%X] Time representation for current locale"),
+		_("[%y] Year without century, as decimal number (00 - 99)"),
+		_("[%Y] Year with century, as decimal number"),
+		_("[%z] Time-zone name"),
+		_("[%Z] Time-zone abbreviation"),
+	};
+	for( size_t i = 0; i < (sizeof(datetimeMenus)/sizeof(const wxChar *)); ++i)
+	{
+		if(datetimeMenus[i] != nullptr)
+		{
+			wxMenuItem * menuItem = PopupMenuDateTimeMark.Append( wxID_ANY, datetimeMenus[i], _T(""), wxITEM_NORMAL);
+			Bind( wxEVT_MENU, &MadOptionsDialog::DateTimeMarkClick, this, menuItem->GetId() );
+		}
+		else
+		{
+			PopupMenuDateTimeMark.AppendSeparator();
+		}
+	}
 
 	wxString systemenc(_("System Default"));
 	ComboBoxEncoding->Append(systemenc);
@@ -1588,12 +1431,12 @@ void MadOptionsDialog::PrintMarkClick(wxCommandEvent& event)
 {
 	wxString str = PopupMenuPrintMark.GetLabel( event.GetId() );
 	wxTextCtrl *edit = nullptr;
-	if (ButtonID == ID_BUTTON1) { edit = EditHeaderLeft; }
-	else if (ButtonID == ID_BUTTON2) { edit = EditHeaderCenter; }
-	else if (ButtonID == ID_BUTTON3) { edit = EditHeaderRight; }
-	else if (ButtonID == ID_BUTTON4) { edit = EditFooterLeft; }
-	else if (ButtonID == ID_BUTTON5) { edit = EditFooterCenter; }
-	else if (ButtonID == ID_BUTTON6) { edit = EditFooterRight; }
+	if (ButtonID == wxID_ANY) { edit = EditHeaderLeft; }
+	else if (ButtonID == wxID_ANY) { edit = EditHeaderCenter; }
+	else if (ButtonID == wxID_ANY) { edit = EditHeaderRight; }
+	else if (ButtonID == wxID_ANY) { edit = EditFooterLeft; }
+	else if (ButtonID == wxID_ANY) { edit = EditFooterCenter; }
+	else if (ButtonID == wxID_ANY) { edit = EditFooterRight; }
 	else { ; }
 
 	if(edit!=nullptr && str[0]==wxT('[') && str[3]==wxT(']'))
@@ -1947,7 +1790,7 @@ void MadOptionsDialog::OnMarginClick( wxStyledTextEvent &event )
 
 void MadOptionsDialog::RadioButtonNewDocEncSelect(wxCommandEvent& event)
 {
-	if(ID_RADIOBUTTONNEWDOCENCUTF8 == event.GetId())
+	if(RadioButtonNewDocEncUTF8->GetId() == event.GetId())
 	{
 		CheckBoxNewDocEncUTF8WithBOM->Enable(true);
 		ComboBoxNewDocEncOther->Enable(false);
@@ -1956,7 +1799,7 @@ void MadOptionsDialog::RadioButtonNewDocEncSelect(wxCommandEvent& event)
 	else
 	{
 		CheckBoxNewDocEncUTF8WithBOM->Enable(false);
-		if(ID_RADIOBUTTONNEWDOCENCOTHER == event.GetId())
+		if(RadioButtonNewDocEncOther->GetId() == event.GetId())
 		{
 			ComboBoxNewDocEncOther->Enable(true);
 			m_NewDocEncoding = ComboBoxNewDocEncOther->GetString(ComboBoxNewDocEncOther->GetSelection());
@@ -1971,15 +1814,15 @@ void MadOptionsDialog::RadioButtonNewDocEncSelect(wxCommandEvent& event)
 
 void MadOptionsDialog::RadioButtonNewDocLineEndingSelect(wxCommandEvent& event)
 {
-	if (event.GetId() == ID_RADIOBUTTONNEWDOCLINEENDINGCRLF)
+	if (event.GetId() == RadioButtonNewDocLineEndingCRLF->GetId())
 	{
 		m_NewDocLineEnding = nltDOS;
 	}
-	else if (event.GetId() == ID_RADIOBUTTONNEWDOCLINEENDINGLF)
+	else if (event.GetId() == RadioButtonNewDocLineEndingLF->GetId())
 	{
 		m_NewDocLineEnding = nltUNIX;
 	}
-	else if (event.GetId() == ID_RADIOBUTTONNEWDOCLINEENDINGCR)
+	else if (event.GetId() == RadioButtonNewDocLineEndingCR->GetId())
 	{
 		m_NewDocLineEnding = nltMAC;
 	}

@@ -26,28 +26,28 @@
 								<object class="wxBoxSizer" variable="BoxSizer6" member="no">
 									<orient>wxVERTICAL</orient>
 									<object class="sizeritem">
-										<object class="wxCheckBox" name="ID_WXCHECKBOXMOVEFOCUS" variable="WxCheckBoxMoveFocus" member="yes">
+										<object class="wxCheckBox" name="wxID_ANY" variable="WxCheckBoxMoveFocus" member="yes">
 											<label>&amp;Move Focus to Editor Window</label>
 										</object>
 										<flag>wxALL|wxEXPAND</flag>
 										<border>2</border>
 									</object>
 									<object class="sizeritem">
-										<object class="wxCheckBox" name="ID_WXCHECKBOXCASESENSITIVE" variable="WxCheckBoxCaseSensitive" member="yes">
+										<object class="wxCheckBox" name="wxID_ANY" variable="WxCheckBoxCaseSensitive" member="yes">
 											<label>&amp;Case Sensitive</label>
 										</object>
 										<flag>wxALL|wxEXPAND</flag>
 										<border>2</border>
 									</object>
 									<object class="sizeritem">
-										<object class="wxCheckBox" name="ID_WXCHECKBOXWHOLEWORD" variable="WxCheckBoxWholeWord" member="yes">
+										<object class="wxCheckBox" name="wxID_ANY" variable="WxCheckBoxWholeWord" member="yes">
 											<label>&amp;Whole Word Only</label>
 										</object>
 										<flag>wxALL|wxEXPAND</flag>
 										<border>2</border>
 									</object>
 									<object class="sizeritem">
-										<object class="wxCheckBox" name="ID_WXCHECKBOXREGEX" variable="WxCheckBoxRegex" member="yes">
+										<object class="wxCheckBox" name="wxID_ANY" variable="WxCheckBoxRegex" member="yes">
 											<label>Use Regular E&amp;xpressions</label>
 											<handler function="WxCheckBoxRegexClick" entry="EVT_CHECKBOX" />
 										</object>
@@ -61,7 +61,7 @@
 												<size>10,0</size>
 											</object>
 											<object class="sizeritem">
-												<object class="wxCheckBox" name="ID_WXCHECKBOXBOXDOTMATCHNEWLINE" variable="WxCheckBoxDotMatchNewLine" member="yes">
+												<object class="wxCheckBox" name="wxID_ANY" variable="WxCheckBoxDotMatchNewLine" member="yes">
 													<label>&amp;. Matches Newline</label>
 												</object>
 												<flag>wxALL|wxEXPAND</flag>
@@ -77,7 +77,7 @@
 												<size>10,0</size>
 											</object>
 											<object class="sizeritem">
-												<object class="wxCheckBox" name="ID_CHECKBOXREPLACENODOUBLECHECK" variable="wxCheckBoxReplaceNoDoubleCheck" member="yes">
+												<object class="wxCheckBox" name="wxID_ANY" variable="wxCheckBoxReplaceNoDoubleCheck" member="yes">
 													<label>Replace Directly(Fix Regex dilema)</label>
 												</object>
 												<flag>wxALL|wxEXPAND</flag>
@@ -87,7 +87,7 @@
 										<flag>wxALL|wxEXPAND</flag>
 									</object>
 									<object class="sizeritem">
-										<object class="wxCheckBox" name="ID_WXCHECKBOXFINDHEX" variable="WxCheckBoxFindHex" member="yes">
+										<object class="wxCheckBox" name="wxID_ANY" variable="WxCheckBoxFindHex" member="yes">
 											<label>Find &amp;Hex String (Example: BE 00 3A or BE003A)</label>
 											<handler function="WxCheckBoxFindHexClick" entry="EVT_CHECKBOX" />
 										</object>
@@ -95,7 +95,7 @@
 										<border>2</border>
 									</object>
 									<object class="sizeritem">
-										<object class="wxCheckBox" name="ID_WXCHECKBOXSEARCHINSELECTION" variable="WxCheckBoxSearchInSelection" member="yes">
+										<object class="wxCheckBox" name="wxID_ANY" variable="WxCheckBoxSearchInSelection" member="yes">
 											<label>Search In &amp;Selection</label>
 											<handler function="WxCheckBoxSearchInSelectionClick" entry="EVT_CHECKBOX" />
 										</object>
@@ -103,7 +103,7 @@
 										<border>2</border>
 									</object>
 									<object class="sizeritem">
-										<object class="wxCheckBox" name="ID_WXCHECKBOXWRAPAROUND" variable="WxCheckBoxWrapAround" member="yes">
+										<object class="wxCheckBox" name="wxID_ANY" variable="WxCheckBoxWrapAround" member="yes">
 											<label>Wrap aroun&amp;d</label>
 										</object>
 										<flag>wxALL|wxEXPAND</flag>
@@ -116,7 +116,7 @@
 													<label>Bookmark in Searching</label>
 													<orient>wxVERTICAL</orient>
 													<object class="sizeritem">
-														<object class="wxCheckBox" name="ID_WXCHECKBOXBOOKMARKLINE" variable="WxCheckBoxBookmarkLine" member="yes">
+														<object class="wxCheckBox" name="wxID_ANY" variable="WxCheckBoxBookmarkLine" member="yes">
 															<label>Bookmark line</label>
 															<handler function="WxCheckBoxBookmarkLineClick" entry="EVT_CHECKBOX" />
 														</object>
@@ -124,14 +124,14 @@
 														<border>2</border>
 													</object>
 													<object class="sizeritem">
-														<object class="wxCheckBox" name="ID_WXCHECKBOXBOOKMARKONLY" variable="WxCheckBoxBookmarkOnly" member="yes">
+														<object class="wxCheckBox" name="wxID_ANY" variable="WxCheckBoxBookmarkOnly" member="yes">
 															<label>Bookmark only(Find All in Current)</label>
 														</object>
 														<flag>wxALL|wxALIGN_LEFT</flag>
 														<border>2</border>
 													</object>
 													<object class="sizeritem">
-														<object class="wxCheckBox" name="ID_WXCHECKBOXPURGEBOOKMARK" variable="WxCheckBoxPurgeBookmark" member="yes">
+														<object class="wxCheckBox" name="wxID_ANY" variable="WxCheckBoxPurgeBookmark" member="yes">
 															<label>Purge mark for each search session</label>
 														</object>
 														<flag>wxALL|wxEXPAND</flag>
@@ -146,7 +146,7 @@
 													<label>Transparency</label>
 													<orient>wxVERTICAL</orient>
 													<object class="sizeritem">
-														<object class="wxRadioButton" name="ID_RADIOBUTTON1" variable="WxRadioLosingFocus" member="yes">
+														<object class="wxRadioButton" name="wxID_ANY" variable="WxRadioLosingFocus" member="yes">
 															<label>On Losing Focus</label>
 															<handler function="WxRadioLosingFocusSelect" entry="EVT_RADIOBUTTON" />
 														</object>
@@ -154,7 +154,7 @@
 														<border>2</border>
 													</object>
 													<object class="sizeritem">
-														<object class="wxRadioButton" name="ID_RADIOBUTTON2" variable="WxRadioAlways" member="yes">
+														<object class="wxRadioButton" name="wxID_ANY" variable="WxRadioAlways" member="yes">
 															<label>Always</label>
 															<handler function="WxRadioAlwaysSelect" entry="EVT_RADIOBUTTON" />
 														</object>
@@ -162,7 +162,7 @@
 														<border>2</border>
 													</object>
 													<object class="sizeritem">
-														<object class="wxSlider" name="ID_WXSLIDERTRANSDEGREE" variable="WxSliderTransDegree" member="yes">
+														<object class="wxSlider" name="wxID_ANY" variable="WxSliderTransDegree" member="yes">
 															<value>30</value>
 															<min>25</min>
 															<max>255</max>
@@ -179,7 +179,7 @@
 												<object class="wxStaticBoxSizer" variable="StaticBoxSizer3" member="no">
 													<label>Input Sizer</label>
 													<object class="sizeritem">
-														<object class="wxSlider" name="ID_WXSLIDERINPUTSIZER" variable="WxSliderInputSizer" member="yes">
+														<object class="wxSlider" name="wxID_ANY" variable="WxSliderInputSizer" member="yes">
 															<value>1</value>
 															<min>1</min>
 															<max>5</max>
@@ -212,7 +212,7 @@
 						<object class="wxBoxSizer" variable="BoxSizer3" member="no">
 							<orient>wxVERTICAL</orient>
 							<object class="sizeritem">
-								<object class="wxButton" name="ID_WXBUTTONFINDNEXT" variable="WxButtonFindNext" member="yes">
+								<object class="wxButton" name="wxID_ANY" variable="WxButtonFindNext" member="yes">
 									<label>Find &amp;Next</label>
 									<default>1</default>
 									<handler function="WxButtonFindNextClick" entry="EVT_BUTTON" />
@@ -221,7 +221,7 @@
 								<border>2</border>
 							</object>
 							<object class="sizeritem">
-								<object class="wxButton" name="ID_WXBUTTONFINDPREV" variable="WxButtonFindPrev" member="yes">
+								<object class="wxButton" name="wxID_ANY" variable="WxButtonFindPrev" member="yes">
 									<label>Find &amp;Previous</label>
 									<handler function="WxButtonFindPrevClick" entry="EVT_BUTTON" />
 								</object>
@@ -229,7 +229,7 @@
 								<border>2</border>
 							</object>
 							<object class="sizeritem">
-								<object class="wxButton" name="ID_WXBUTTONFINDALL" variable="WxButtonFindAll" member="yes">
+								<object class="wxButton" name="wxID_ANY" variable="WxButtonFindAll" member="yes">
 									<label>Find A&amp;ll</label>
 									<handler function="WxButtonFindAllClick" entry="EVT_BUTTON" />
 								</object>
@@ -237,7 +237,7 @@
 								<border>2</border>
 							</object>
 							<object class="sizeritem">
-								<object class="wxButton" name="ID_WXBUTTONFINDALLINALL" variable="WxButtonFindAllInAll" member="yes">
+								<object class="wxButton" name="wxID_ANY" variable="WxButtonFindAllInAll" member="yes">
 									<label>Find All in All&#x0A;Opened</label>
 									<handler function="WxButtonFindAllInAllClick" entry="EVT_BUTTON" />
 								</object>
@@ -245,7 +245,7 @@
 								<border>2</border>
 							</object>
 							<object class="sizeritem">
-								<object class="wxButton" name="ID_WXBUTTONREPLACE" variable="WxButtonReplace" member="yes">
+								<object class="wxButton" name="wxID_ANY" variable="WxButtonReplace" member="yes">
 									<label>&amp;Replace</label>
 									<handler function="WxButtonReplaceClick" entry="EVT_BUTTON" />
 								</object>
@@ -253,7 +253,7 @@
 								<border>2</border>
 							</object>
 							<object class="sizeritem">
-								<object class="wxButton" name="ID_WXBUTTONREPLACEALL" variable="WxButtonReplaceAll" member="yes">
+								<object class="wxButton" name="wxID_ANY" variable="WxButtonReplaceAll" member="yes">
 									<label>Replace &amp;All</label>
 									<handler function="WxButtonReplaceAllClick" entry="EVT_BUTTON" />
 								</object>
@@ -261,7 +261,7 @@
 								<border>2</border>
 							</object>
 							<object class="sizeritem">
-								<object class="wxButton" name="ID_WXBUTTONREPLACEALLINALL" variable="WxButtonReplaceAllInAll" member="yes">
+								<object class="wxButton" name="wxID_ANY" variable="WxButtonReplaceAllInAll" member="yes">
 									<label>Repl All in All&#x0A;Opened</label>
 									<handler function="WxButtonReplaceAllInAllClick" entry="EVT_BUTTON" />
 								</object>
@@ -269,7 +269,7 @@
 								<border>2</border>
 							</object>
 							<object class="sizeritem">
-								<object class="wxButton" name="ID_WXBUTTONCOUNT" variable="WxButtonCount" member="yes">
+								<object class="wxButton" name="wxID_ANY" variable="WxButtonCount" member="yes">
 									<label>C&amp;ount</label>
 									<handler function="WxButtonCountClick" entry="EVT_BUTTON" />
 								</object>
@@ -277,7 +277,7 @@
 								<border>2</border>
 							</object>
 							<object class="sizeritem">
-								<object class="wxButton" name="ID_WXBUTTONREPLACEEXPAND" variable="WxButtonReplaceExpand" member="yes">
+								<object class="wxButton" name="wxID_ANY" variable="WxButtonReplaceExpand" member="yes">
 									<label>R&amp;eplace &gt;&gt;</label>
 									<handler function="WxButtonReplaceExpandClick" entry="EVT_BUTTON" />
 								</object>
