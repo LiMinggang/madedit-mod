@@ -128,9 +128,9 @@ Fix: Message strings were not translated during initialization
 Fix: TXT syntax would not be applied on first loading(0.4.10) #244
 Fix: Change font size/font/encoding/syntax/linespacing will not update font toolbar #246
 Fix: Remove toggle show Quick Search bar on Option dialog
-Fix: Restruction of MadEdit config
+Fix: Restructure of MadEdit config
 Fix: Saved bookmarks would added to other files during reload
-Fix: Wrong MadPython expession recorded in Search/Replace
+Fix: Wrong MadPython expression recorded in Search/Replace
 Fix: Clean deprecated function wxNewId
 Fix: Complier warnings from VC
 Other minor improvements
