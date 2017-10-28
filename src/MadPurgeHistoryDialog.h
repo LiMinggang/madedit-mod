@@ -50,17 +50,6 @@ class MadPurgeHistoryDialog : public wxDialog
 	protected:
 
 		//(*Identifiers(MadPurgeHistoryDialog)
-		//static const long ID_WXCHECKBOXRECENTFILES;
-		//static const long ID_WXCHECKBOXRECENTFONTS;
-		//static const long ID_WXCHECKBOXRECENTENCODINGS;
-		//static const long ID_WXCHECKBOXRECENTSEARCHEDTEXTS;
-		//static const long ID_WXCHECKBOXRECENTREPLACEDTEXTS;
-		//static const long ID_WXCHECKBOXRECENTSEARCHEDDIRECTORIES;
-		//static const long ID_WXRECENTSEARCHEDFILEFILTERS;
-		//static const long ID_WXCHECKBOXRECENTSEARCHEDEXCLUDEFILTERS;
-		//static const long ID_WXCHECKBOXCARETPOS;
-		//static const long ID_CHECKBOXRESETTOOLBARSINFOWIN;
-		//static const long ID_WXCHECKBOXALLABOVE;
 		//*)
 
 	private:
