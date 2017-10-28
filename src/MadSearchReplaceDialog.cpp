@@ -1335,7 +1335,7 @@ void MadSearchReplaceDialog::WxButtonCountClick( wxCommandEvent& event )
 	if( text.Len() > 0 )
 	{
 		m_RecentFindText->AddFileToHistory( text );
-		wxInt64 from = 0, to = 0;
+		//wxInt64 from = 0, to = 0;
 		wxFileOffset rangeFrom = -1, rangeTo = -1;
 
 		if( WxCheckBoxSearchInSelection->IsChecked() )
@@ -1571,7 +1571,6 @@ void MadSearchReplaceDialog::SearchAll( MadEdit * madedit, bool needRec/*=true*/
 		if( WxCheckBoxPurgeBookmark->IsChecked() )
 			madedit->ClearAllBookmarks();
 
-		wxFileOffset selend = madedit->GetSelectionEndPos();
 		// moved here: gogo, 19.09.2009
 		wxFileOffset caretpos = madedit->GetCaretPosition();
 		//wxInt64 from = 0, to = 0;

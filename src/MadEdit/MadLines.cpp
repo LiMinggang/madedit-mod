@@ -1656,7 +1656,7 @@ int MadLines::FindStringNoCase( MadUCQueue &ucqueue, MadStringIterator begin,
 {
 	wxASSERT( !ucqueue.empty() );
 	int idx = 1;
-	ucs4_t uc, firstuc = ucqueue.front().first;
+	register ucs4_t uc, firstuc = ucqueue.front().first;
 
 	if( firstuc >= 'A' && firstuc <= 'Z' )
 	{
@@ -1668,7 +1668,7 @@ int MadLines::FindStringNoCase( MadUCQueue &ucqueue, MadStringIterator begin,
 
 	if( ucsize > 1 )
 	{
-		register ucs4_t uc = ucqueue.back().first;
+		uc = ucqueue.back().first;
 
 		if( uc == 0x0D || uc == 0x0A )
 		{
@@ -1690,7 +1690,7 @@ int MadLines::FindStringNoCase( MadUCQueue &ucqueue, MadStringIterator begin,
 			{
 				while( ( this->*NextUChar )( ucqueue ) )
 				{
-					register ucs4_t uc = ucqueue.back().first;
+					uc = ucqueue.back().first;
 
 					if( uc == 0x0D || uc == 0x0A )
 					{
@@ -2927,7 +2927,7 @@ void MadLines::RecountLineWidth( void )
 				{
 					wxASSERT( (wxFileOffset)bracepos <= bpi->LinePos );
 
-					if( bpi->LinePos == bracepos )
+					if( (size_t)(bpi->LinePos) == bracepos )
 					{
 						bpi->XPos = rowidx.m_Width;
 						bracexpos_thisrow.push_back( &bpi->XPos );
@@ -3686,7 +3686,7 @@ bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 		if( utf8test == 0 ) // not found
 		{
 			// test parent dir
-			wxFileName fn( filename );
+			//wxFileName fn( filename );
 			utf8test = MadDirExists( fn.GetPath( wxPATH_GET_VOLUME ) );
 		}
 
@@ -3727,7 +3727,7 @@ bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 		{
 #ifndef __WXMSW__
 			// test parent dir
-			wxFileName fn( filename );
+			//wxFileName fn( filename );
 			utf8test = MadDirExists( fn.GetPath( wxPATH_GET_VOLUME ) );
 #endif
 			createnew = true;
@@ -3799,7 +3799,7 @@ bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 
 	if( !tempdir.IsEmpty() )
 	{
-		wxFileName fn( filename );
+		//wxFileName fn( filename );
 		tempfilename = tempdir + fn.GetFullName() + wxT( ".MadEdit.tmp" );
 		int id = 0;
 

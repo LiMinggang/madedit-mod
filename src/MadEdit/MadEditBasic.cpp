@@ -2152,6 +2152,9 @@ void MadEdit::Undo()
 										&lineid );
 			}
 			break;
+		default:
+			lineid = 0;
+			wxASSERT(0);
 		}
 
 		if( lineid < fid )
@@ -2284,6 +2287,9 @@ void MadEdit::Redo()
 										&lineid );
 			}
 			break;
+		default:
+			lineid = 0;
+			wxASSERT(0);
 		}
 
 		if( lineid < fid )
@@ -2567,7 +2573,7 @@ bool MadEdit::SaveToFile( const wxString &filename )
 
 	if( memsize >= 0 && memsize < ( tempsize + 20 * 1024 * 1024 ) ) // use disk as tempdata
 	{
-		wxFileName fn( filename );
+		//wxFileName fn( filename );
 		tempdir = fn.GetPath( wxPATH_GET_VOLUME | wxPATH_GET_SEPARATOR );
 		// ToDo: test the disk size
 	}
@@ -3461,7 +3467,6 @@ MadReplaceResult MadEdit::ReplaceTextNoDoubleCheck( const wxString &expr, const 
 	if( bpos.pos >= epos.pos ) return res;
 
 	endpos=epos;
-	int multi = 0;
 	int state;
 	ucs4string out;
 

@@ -1070,8 +1070,8 @@ void MadKeyBindings::SaveToConfig_New(wxConfigBase *config)
 			key=ShortCutToString(kb->firstsc);
 			config->Write(key, wxString(wxT(" *"))+text);
 
-			int	idx=keys.Index(key.c_str(),	false);
-			if(idx>=0) { keys.RemoveAt(idx); }
+			int	ix=keys.Index(key.c_str(),	false);
+			if(ix>=0) { keys.RemoveAt(ix); }
 
 			MadShortCutSet::iterator sit=kb->shortcuts.begin();
 			MadShortCutSet::iterator sitend=kb->shortcuts.end();
@@ -1079,8 +1079,8 @@ void MadKeyBindings::SaveToConfig_New(wxConfigBase *config)
 			{
 				key=ShortCutToString(*sit);
 				config->Write(key, text);
-				int	idx=keys.Index(key.c_str(),	false);
-				if(idx>=0) { keys.RemoveAt(idx); }
+				ix=keys.Index(key.c_str(),	false);
+				if(ix>=0) { keys.RemoveAt(ix); }
 				++sit;
 			}
 		}

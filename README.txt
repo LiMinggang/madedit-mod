@@ -120,7 +120,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 3. stdc++ version
 
 Mod v0.4.11
-Note: please use the convertcfg.py to convert your old config if you want to restore your old config
+Note: please use the convertcfg.py to convert your old config if you want to restore your old config, use clearbms.py to clear the bookmarks before running MadEdit-Mod
 
 New: Open file path with default file explorer, set "EXTEXPLORER" as the env for open in another application #243
 New: Add '-d' to define a new delimiter to replace '*'
@@ -131,6 +131,8 @@ Fix: Remove toggle show Quick Search bar on Option dialog
 Fix: Restruction of MadEdit config
 Fix: Saved bookmarks would added to other files during reload
 Fix: Wrong MadPython expession recorded in Search/Replace
+Fix: Clean deprecated function wxNewId
+Fix: Complier warnings from VC
 Other minor improvements
 
 Mod v0.4.10

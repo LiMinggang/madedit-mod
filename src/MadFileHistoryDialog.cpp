@@ -147,7 +147,7 @@ void MadFileHistoryDialog::OnButtonDselectAllClick(wxCommandEvent& event)
 
 void MadFileHistoryDialog::GetCheckedItemsData(wxArrayString & selectedItems, bool checked)
 {
-	long item = -1, pid = -1;
+	long item = -1;
 	wxString fname;
 	wxString fdir;
 	for ( ;; ) {

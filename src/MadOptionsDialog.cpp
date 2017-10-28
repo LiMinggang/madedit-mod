@@ -928,7 +928,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	ComboBoxLanguage->SetValue(g_LanguageString[0]);*/
 
 	cnt=MadSyntax::GetSyntaxCount();
-	for(size_t i=0; i<cnt; ++i)
+	for(i=0; i<cnt; ++i)
 	{
 		ComboBoxNewDocSyntax->Append(wxGetTranslation(MadSyntax::GetSyntaxTitle(i)));
 	}

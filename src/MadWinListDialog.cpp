@@ -233,7 +233,7 @@ void MadWinListDialog::SortTabs(long column)
 		name = MadWindowsList->GetItemText(item, column);
 		if(column == COL_PATH)
 		{
-			wxString tname = MadWindowsList->GetItemText(item);
+			tname = MadWindowsList->GetItemText(item);
 			name += tname;
 		}
 		

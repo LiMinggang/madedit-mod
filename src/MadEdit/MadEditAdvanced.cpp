@@ -1042,8 +1042,8 @@ void MadEdit::Capitalize()
 
 			while( i < count )
 			{
-				int c = text[i];
-				int nc = 0;
+				c = text[i];
+				nc = 0;
 #if defined(__WXMSW__)
 
 				if( c <= 0xFF )
@@ -3050,15 +3050,13 @@ void MadEdit::ColumnAlignLeft()
 	if( IsReadOnly() || m_EditMode == emHexMode )
 		return;
 
-	bool oldModified = m_Modified;
 	MadLineIterator lit;
 
 	if( ( m_EditMode == emColumnMode ) && ( m_Selection && m_SelectionBegin->xpos && m_SelectionBegin->lineid != m_SelectionEnd->lineid ) )
 	{
 		MadUndo *undo = nullptr;
-		MadLineIterator lit, lastlit, firstlit;
+		MadLineIterator lastlit, firstlit;
 		size_t count;
-		bool SelEndAtBOL = false;
 		wxFileOffset linestartpos;
 		int columns = m_SelectionBegin->xpos / m_TextFontSpaceWidth/*GetUCharWidth( 0x20 )*/;
 		wxFileOffset delsize = 0, pos = m_SelectionEnd->pos - m_SelectionEnd->linepos;
@@ -3241,15 +3239,11 @@ void MadEdit::ColumnAlignRight()
 	if( IsReadOnly() || ( m_EditMode != emColumnMode ) )
 		return;
 
-	bool oldModified = m_Modified;
-	MadLineIterator lit;
-
 	if( m_Selection && m_SelectionBegin->xpos /*&& m_SelectionBegin->lineid!=m_SelectionEnd->lineid*/ )
 	{
 		MadUndo *undo = nullptr;
 		MadLineIterator lit, lastlit, firstlit;
 		size_t count;
-		bool SelEndAtBOL = false;
 		wxFileOffset linestartpos;
 		int columns = m_SelectionBegin->xpos / m_TextFontSpaceWidth/*GetUCharWidth( 0x20 )*/;
 		wxFileOffset delsize = 0, pos = m_SelectionEnd->pos, insize = 0;
@@ -3854,7 +3848,6 @@ void MadEdit::CopyCutDeleteUnmarkedLines( bool copyLines /*= false*/, bool delet
 	MadLineIterator lineit = m_Lines->m_LineList.begin();
 	bool oldModified = m_Modified;
 	MadUCQueue ucqueue;
-	wxFileOffset posBeg = 0, posEnd = m_Lines->m_Size;
 	wxFileOffset pos = 0, msize = 0;
 	vector<wxFileOffset> linebegpos, linesize;
 	wxFileOffset curpos = 0, lastpos = 0;
@@ -3884,7 +3877,7 @@ void MadEdit::CopyCutDeleteUnmarkedLines( bool copyLines /*= false*/, bool delet
 	if(!linebegpos.empty())
 	{
 		wxString ws, tmp;
-		wxFileOffset curpos = m_Lines->m_Size, msize = 0; //0 ~ fsize-1
+		curpos = m_Lines->m_Size, msize = 0; //0 ~ fsize-1
 		for (int i = (int)(linebegpos.size() - 1); i >= 0; --i )
 		{
 			msize = curpos - linebegpos[i] - linesize[i];

@@ -724,7 +724,6 @@ public:
 				bms = text.Right( text.Len() - ( bmp + 1 ) );
 				text = text.Left( bmp );
 				bmks = wxStringTokenize( bms, wxString(g_MadBmSeparator) );
-				wxInt64 i64;
 				for(size_t i = 0; i < bmks.GetCount(); ++i) {
 					StrToInt64( bmks[i], i64 );
 					fpdata.bmlinenums.push_back(i64);
@@ -835,8 +834,8 @@ public:
 		}
 
 		// Remove extra
+		entry = wxString( wxT( "file" ) );
 		for(; valid_count < max_count; ++valid_count) {
-			wxString entry( wxT( "file" ) ), text;
 				cfg->DeleteEntry( entry + ( wxString() << ( valid_count + 1 ) ), false );
 		}
 	}
@@ -4483,7 +4482,6 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 			if( !linenumstr.ToLong( &linenum ) ) { linenum = -1; }
 		}
 
-		int selid = m_Notebook->GetSelection();
 		// check this file is opened or not
 		size_t count = m_Notebook->GetPageCount();
 
@@ -5779,11 +5777,11 @@ void MadEditFrame::OnFileSaveAll( wxCommandEvent& event )
 
 					if( cme != g_ActiveMadEdit )
 					{
-						wxAuiNotebookEvent event( wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGED, m_Notebook->GetId() );
-						event.SetSelection( id );
-						event.SetOldSelection( sid );
-						event.SetEventObject( this );
-						OnNotebookPageChanged( event );
+						wxAuiNotebookEvent newevent( wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGED, m_Notebook->GetId() );
+						newevent.SetSelection( id );
+						newevent.SetOldSelection( sid );
+						newevent.SetEventObject( this );
+						OnNotebookPageChanged(newevent);
 					}
 				}
 
@@ -5843,11 +5841,11 @@ void MadEditFrame::OnRecentFilesPop( wxCommandEvent& event )
 		--i;
 	}
 
-	int n = ( int ) m_RecentFiles->GetCount();
+	size_t n = m_RecentFiles->GetCount();
 
-	for( int i = 0; i < n; ++i )
+	for( i = 0; i < n; ++i )
 	{ 
-		g_Menu_File_RecentFilesPop->Append( wxID_FILE1 + i, m_RecentFiles->GetHistoryFile( ( size_t )i ));
+		g_Menu_File_RecentFilesPop->Append( wxID_FILE1 + i, m_RecentFiles->GetHistoryFile( i ));
 	}
 
 	PopupMenu( g_Menu_File_RecentFilesPop );
@@ -7010,7 +7008,6 @@ void MadEditFrame::OnSearchFind( wxCommandEvent& event )
 
 			if( g_SearchReplaceDialog->WxCheckBoxFindHex->GetValue() )
 			{
-				wxString ws;
 				g_ActiveMadEdit->GetSelHexString( ws, true );
 				g_SearchReplaceDialog->m_FindText->SetText( ws );
 			}
@@ -7542,7 +7539,6 @@ void MadEditFrame::OnViewRecentEncoding( wxCommandEvent& event )
 					RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetEncoding(" ) ) + enc + wxT( ")" ) );
 
 				m_RecentEncodings->AddFileToHistory( str );
-				wxString str;
 				int size;
 				g_ActiveMadEdit->GetFont( str, size );
 				m_RecentFonts->AddFileToHistory( str );
@@ -8294,7 +8290,6 @@ void MadEditFrame::OnViewToolBarsToggleAll( wxCommandEvent& event )
 
 void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 {
-	size_t lang_count = g_LanguageString.GetCount();
 	ScanForLocales();
 
 	if (g_OptionsDialog == nullptr) { g_OptionsDialog = new MadOptionsDialog(this); }
@@ -8488,9 +8483,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 
 		// SpellChecker
 		SpellCheckerManager::Instance().Save();
-		size_t count = m_Notebook->GetPageCount();
-
-		for( int i = 0; i < count; ++i )
+		for( int i = 0; i < m_Notebook->GetPageCount(); ++i )
 		{
 			MadEdit *madedit = ( MadEdit* )m_Notebook->GetPage( i );
 			wxASSERT(madedit != 0);
@@ -8572,9 +8565,9 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 
 				if( cd->menu_id > 0 )
 				{
-					size_t idx = 0, count = tid->keys.GetCount();
+					size_t idx = 0;
 
-					for( ; idx < count; ++idx )
+					for( ; idx < tid->keys.GetCount(); ++idx )
 					{
 						MadEdit::ms_KeyBindings.Add( StringToShortCut( tid->keys[idx] ), idx == 0, cd->menu_id, true );
 					}
@@ -8582,9 +8575,9 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 				else
 					if( cd->command > 0 )
 					{
-						size_t idx = 0, count = tid->keys.GetCount();
+						size_t idx = 0;
 
-						for( ; idx < count; ++idx )
+						for( ; idx < tid->keys.GetCount(); ++idx )
 						{
 							MadEdit::ms_KeyBindings.Add( StringToShortCut( tid->keys[idx] ), cd->command, true );
 						}
@@ -9851,11 +9844,11 @@ void MadEditFrame::OnWindowToggleWindow( wxCommandEvent& event )
 
 	if( madedit != g_ActiveMadEdit )
 	{
-		wxAuiNotebookEvent event( wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGED, m_Notebook->GetId() );
-		event.SetSelection( m_Notebook->GetSelection() );
-		event.SetOldSelection( g_PrevPageID );
-		event.SetEventObject( this );
-		OnNotebookPageChanged( event );
+		wxAuiNotebookEvent nevent( wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGED, m_Notebook->GetId() );
+		nevent.SetSelection( m_Notebook->GetSelection() );
+		nevent.SetOldSelection( g_PrevPageID );
+		nevent.SetEventObject( this );
+		OnNotebookPageChanged(nevent);
 	}
 
 	g_CheckModTimeForReload = true;
@@ -9873,11 +9866,11 @@ void MadEditFrame::OnWindowPreviousWindow( wxCommandEvent& event )
 
 	if( madedit != g_ActiveMadEdit )
 	{
-		wxAuiNotebookEvent event( wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGED, m_Notebook->GetId() );
-		event.SetSelection( m_Notebook->GetSelection() );
-		event.SetOldSelection( g_PrevPageID );
-		event.SetEventObject( this );
-		OnNotebookPageChanged( event );
+		wxAuiNotebookEvent nevent( wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGED, m_Notebook->GetId() );
+		nevent.SetSelection( m_Notebook->GetSelection() );
+		nevent.SetOldSelection( g_PrevPageID );
+		nevent.SetEventObject( this );
+		OnNotebookPageChanged(nevent);
 	}
 
 	g_CheckModTimeForReload = true;
@@ -9895,11 +9888,11 @@ void MadEditFrame::OnWindowNextWindow( wxCommandEvent& event )
 
 	if( madedit != g_ActiveMadEdit )
 	{
-		wxAuiNotebookEvent event( wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGED, m_Notebook->GetId() );
-		event.SetSelection( m_Notebook->GetSelection() );
-		event.SetOldSelection( g_PrevPageID );
-		event.SetEventObject( this );
-		OnNotebookPageChanged( event );
+		wxAuiNotebookEvent nevent( wxEVT_COMMAND_AUINOTEBOOK_PAGE_CHANGED, m_Notebook->GetId() );
+		nevent.SetSelection( m_Notebook->GetSelection() );
+		nevent.SetOldSelection( g_PrevPageID );
+		nevent.SetEventObject( this );
+		OnNotebookPageChanged(nevent);
 	}
 
 	g_CheckModTimeForReload = true;
@@ -10000,7 +9993,7 @@ void MadEditFrame::OnCopyCurrResult( wxCommandEvent& event )
 			}
 			if( wxTheClipboard->Open() )
 			{
-				bool ok = wxTheClipboard->SetData( new wxTextDataObject( result ) );
+				wxTheClipboard->SetData( new wxTextDataObject( result ) );
 				wxTheClipboard->Flush();
 				wxTheClipboard->Close();
 			}
@@ -10052,7 +10045,7 @@ void MadEditFrame::OnCopyAllResults( wxCommandEvent& event )
 		{
 			if( wxTheClipboard->Open() )
 			{
-				bool ok = wxTheClipboard->SetData( new wxTextDataObject( results ) );
+				wxTheClipboard->SetData( new wxTextDataObject( results ) );
 				wxTheClipboard->Flush();
 				wxTheClipboard->Close();
 			}
@@ -10392,7 +10385,7 @@ void MadTreeCtrl::OnMouseWheel( wxMouseEvent &evt )
 	if( evt.ShiftDown() )
 	{
 #if 1	
-		int ThumbHorizon = GetScrollThumb(wxHORIZONTAL);
+		//int ThumbHorizon = GetScrollThumb(wxHORIZONTAL);
 		int PosHorizon   = GetScrollPos(wxHORIZONTAL);
 		int RangeHorizon = GetScrollRange(wxHORIZONTAL);
 		int NewPosHorizon = PosHorizon;

@@ -347,7 +347,7 @@ MadSyntax* MadSyntax::GetSyntaxByExt( const wxString &ext )
 MadSyntax* MadSyntax::GetSyntaxByFirstLine( wxByte *data, int size )
 {
 	wxString line;
-	wxChar ch;
+	wxChar ch(0);
 
 	// get first non-empty line
 	do
@@ -825,13 +825,13 @@ void MadSyntax::ParseSyntax( const wxString &filename )
 																						if( entry == wxT( "blockcommentinrange" ) )
 																						{
 																							wxStringTokenizer tkz( value, wxT( "," ), wxTOKEN_RET_EMPTY_ALL );
-																							size_t idx = 0;
+																							size_t inx = 0;
 
 																							while( tkz.HasMoreTokens() )
 																							{
 																								s = tkz.GetNextToken();
 																								m_BlockCommentInRange.push_back( vector<int>() );
-																								SetInRange( s, m_BlockCommentInRange[idx++] );
+																								SetInRange( s, m_BlockCommentInRange[inx++] );
 																							}
 																						}
 																						else
@@ -2070,7 +2070,7 @@ _NEXTUCHAR_:
 
 									for( int i = 0; i < idx; ++i )
 									{
-										ucs4_t uc = *puc++;
+										uc = *puc++;
 #ifdef __WXMSW__
 
 										if( uc < 0x10000 )
@@ -2124,7 +2124,7 @@ _NEXTUCHAR_:
 								{
 									size_t old_firstindex = nw_FirstIndex;
 									size_t old_rest_count = nw_RestCount;
-									int old_line_width = nw_LineWidth;
+									old_line_width = nw_LineWidth;
 
 									// get full word
 									do
@@ -2153,7 +2153,7 @@ _NEXTUCHAR_:
 
 										for( int i = 0; i < idx; ++i )
 										{
-											ucs4_t uc = *puc++;
+											uc = *puc++;
 #ifdef __WXMSW__
 
 											if( uc < 0x10000 )
@@ -2271,7 +2271,7 @@ _NEXTUCHAR_:
 
 											for( int i = 0; i < idx; ++i )
 											{
-												ucs4_t uc = *puc++;
+												uc = *puc++;
 #ifdef __WXMSW__
 
 												if( uc < 0x10000 )
