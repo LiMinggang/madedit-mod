@@ -48,9 +48,6 @@ class MadConvEncDialog : public wxDialog
 	protected:
 
 		//(*Identifiers(MadConvEncDialog)
-		static const long ID_STATICTEXT1;
-		static const long ID_WXCOMBOBOXENCODING;
-		static const long ID_WXRADIOBOXOPTION;
 		//*)
 
 	private:

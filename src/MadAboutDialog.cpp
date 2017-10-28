@@ -16,15 +16,6 @@
 #include "../images/Mad2.xpm"
 
 //(*IdInit(MadAboutDialog)
-const long MadAboutDialog::ID_STATICBITMAP1 = wxNewId();
-const long MadAboutDialog::ID_STATICBITMAP2 = wxNewId();
-const long MadAboutDialog::ID_WXMEMOABOUT = wxNewId();
-const long MadAboutDialog::ID_WXPANELABOUT = wxNewId();
-const long MadAboutDialog::ID_LISTCREDITS = wxNewId();
-const long MadAboutDialog::ID_WXPANELCREDITS = wxNewId();
-const long MadAboutDialog::ID_TEXTCTRL1 = wxNewId();
-const long MadAboutDialog::ID_WXMEMOLICENSE = wxNewId();
-const long MadAboutDialog::ID_WXAUINOTEBOOKABOUT = wxNewId();
 //*)
 
 wxString g_MadEdit_URL(wxT("http://sourceforge.net/projects/madedit/ or http://sourceforge.net/projects/madedit-mod/"));
@@ -66,19 +57,19 @@ MadAboutDialog::MadAboutDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos
 	BoxSizer1 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer3 = new wxBoxSizer(wxVERTICAL);
-	WxStaticBitmap1 = new wxStaticBitmap(this, ID_STATICBITMAP1, wxNullBitmap, wxDefaultPosition, wxSize(48,48), 0, _T("ID_STATICBITMAP1"));
+	WxStaticBitmap1 = new wxStaticBitmap(this, wxID_ANY, wxNullBitmap, wxDefaultPosition, wxSize(48,48), 0, _T("wxID_ANY"));
 	BoxSizer3->Add(WxStaticBitmap1, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-	WxStaticBitmap2 = new wxStaticBitmap(this, ID_STATICBITMAP2, wxNullBitmap, wxDefaultPosition, wxSize(48,48), 0, _T("ID_STATICBITMAP2"));
+	WxStaticBitmap2 = new wxStaticBitmap(this, wxID_ANY, wxNullBitmap, wxDefaultPosition, wxSize(48,48), 0, _T("wxID_ANY"));
 	BoxSizer3->Add(WxStaticBitmap2, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	BoxSizer2->Add(BoxSizer3, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5);
-	WxAuiNotebookAbout = new wxAuiNotebook(this, ID_WXAUINOTEBOOKABOUT, wxDefaultPosition, wxSize(440,220), wxAUI_NB_TOP|wxNO_BORDER|wxTAB_TRAVERSAL);
-	WxPanelAbout = new wxPanel(WxAuiNotebookAbout, ID_WXPANELABOUT, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_WXPANELABOUT"));
-	WxMemoAbout = new wxTextCtrl(WxPanelAbout, ID_WXMEMOABOUT, wxEmptyString, wxDefaultPosition, wxSize(435,200), wxTE_MULTILINE|wxTE_READONLY|wxTE_AUTO_URL|wxTE_WORDWRAP|wxDOUBLE_BORDER|wxVSCROLL, wxDefaultValidator, _T("ID_WXMEMOABOUT"));
-	WxPanelCredits = new wxPanel(WxAuiNotebookAbout, ID_WXPANELCREDITS, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_WXPANELCREDITS"));
-	WxListCredits = new wxListCtrl(WxPanelCredits, ID_LISTCREDITS, wxPoint(0,0), wxSize(400,300), wxLC_REPORT|wxNO_BORDER, wxDefaultValidator, _T("ID_LISTCREDITS"));
-	WxPanelLicense = new wxPanel(WxAuiNotebookAbout, ID_WXMEMOLICENSE, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_WXMEMOLICENSE"));
+	WxAuiNotebookAbout = new wxAuiNotebook(this, wxID_ANY, wxDefaultPosition, wxSize(440,220), wxAUI_NB_TOP|wxNO_BORDER|wxTAB_TRAVERSAL);
+	WxPanelAbout = new wxPanel(WxAuiNotebookAbout, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("wxID_ANY"));
+	WxMemoAbout = new wxTextCtrl(WxPanelAbout, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(435,200), wxTE_MULTILINE|wxTE_READONLY|wxTE_AUTO_URL|wxTE_WORDWRAP|wxDOUBLE_BORDER|wxVSCROLL, wxDefaultValidator, _T("wxID_ANY"));
+	WxPanelCredits = new wxPanel(WxAuiNotebookAbout, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("wxID_ANY"));
+	WxListCredits = new wxListCtrl(WxPanelCredits, wxID_ANY, wxPoint(0,0), wxSize(400,300), wxLC_REPORT|wxNO_BORDER, wxDefaultValidator, _T("wxID_ANY"));
+	WxPanelLicense = new wxPanel(WxAuiNotebookAbout, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("wxID_ANY"));
 	StaticBoxSizer1 = new wxStaticBoxSizer(wxHORIZONTAL, WxPanelLicense, _("GNU General Public License"));
-	WxMemoLicense = new wxTextCtrl(WxPanelLicense, ID_TEXTCTRL1, wxEmptyString, wxDefaultPosition, wxSize(435,200), wxTE_MULTILINE|wxTE_READONLY|wxTE_AUTO_URL|wxTE_WORDWRAP|wxVSCROLL, wxDefaultValidator, _T("ID_TEXTCTRL1"));
+	WxMemoLicense = new wxTextCtrl(WxPanelLicense, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(435,200), wxTE_MULTILINE|wxTE_READONLY|wxTE_AUTO_URL|wxTE_WORDWRAP|wxVSCROLL, wxDefaultValidator, _T("wxID_ANY"));
 	StaticBoxSizer1->Add(WxMemoLicense, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	WxPanelLicense->SetSizer(StaticBoxSizer1);
 	StaticBoxSizer1->Fit(WxPanelLicense);

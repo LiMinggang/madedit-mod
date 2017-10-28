@@ -16,25 +16,6 @@
 // MadNumberDlg
 //----------------------------------------------------------------------------
 //Add Custom Events	only in	the	appropriate	block.
-//const long MadNumberDlg::ID_WXSTATICTEXTPREVIEW = wxNewId();
-//const long MadNumberDlg::ID_WXSTATICTEXT6 = wxNewId();
-//const long MadNumberDlg::ID_WXEDITPOSTFIX = wxNewId();
-//const long MadNumberDlg::ID_WXCHECKPOSTFIX = wxNewId();
-//const long MadNumberDlg::ID_WXEDITPREFIX = wxNewId();
-//const long MadNumberDlg::ID_WXCHECKPREFIX = wxNewId();
-//const long MadNumberDlg::ID_WXALIGN = wxNewId();
-//const long MadNumberDlg::ID_WXSTATICTEXT4 = wxNewId();
-//const long MadNumberDlg::ID_WXFORMAT = wxNewId();
-//const long MadNumberDlg::ID_WXSTATICTEXT3 = wxNewId();
-//const long MadNumberDlg::ID_WXCHOICENUMBERSTEPTYPE = wxNewId();
-//const long MadNumberDlg::ID_WXSTATICTEXT2 = wxNewId();
-//const long MadNumberDlg::ID_PADWITH = wxNewId();
-//const long MadNumberDlg::ID_WXEDITNUMBEROFCHARS = wxNewId();
-//const long MadNumberDlg::ID_WXSTATICTEXT5 = wxNewId();
-//const long MadNumberDlg::ID_EDITNUMBERINGSTEP = wxNewId();
-//const long MadNumberDlg::ID_WXSTATICTEXT8 = wxNewId();
-//const long MadNumberDlg::ID_WXEDITINITIALNUMBER = wxNewId();
-//const long MadNumberDlg::ID_WXSTATICTEXT1 = wxNewId();
 
 MadNumberDlg * g_MadNumberDlg = nullptr;
 

@@ -33,21 +33,6 @@ extern bool IsMacroRecording();
 extern void RecordAsMadMacro(MadEdit *, const wxString&, bool=false);
 
 //(*IdInit(MadWordCountDialog)
-//const long MadWordCountDialog::ID_WXSTATICTEXT7 = wxNewId();
-//const long MadWordCountDialog::ID_WXSTATICTEXTLINECOUNT = wxNewId();
-//const long MadWordCountDialog::ID_WXSTATICTEXT1 = wxNewId();
-//const long MadWordCountDialog::ID_WXSTATICTEXTWORDCOUNT = wxNewId();
-//const long MadWordCountDialog::ID_WXSTATICTEXT2 = wxNewId();
-//const long MadWordCountDialog::ID_WXSTATICTEXTCHARCOUNT = wxNewId();
-//const long MadWordCountDialog::ID_WXSTATICTEXT3 = wxNewId();
-//const long MadWordCountDialog::ID_WXSTATICTEXTSPACECOUNT = wxNewId();
-//const long MadWordCountDialog::ID_WXSTATICTEXT4 = wxNewId();
-//const long MadWordCountDialog::ID_WXSTATICTEXTHALFWIDTHCOUNT = wxNewId();
-//const long MadWordCountDialog::ID_WXSTATICTEXT5 = wxNewId();
-//const long MadWordCountDialog::ID_WXSTATICTEXTFULLWIDTHCOUNT = wxNewId();
-//const long MadWordCountDialog::ID_STATICLINE1 = wxNewId();
-//const long MadWordCountDialog::ID_STATICTEXT7 = wxNewId();
-//const long MadWordCountDialog::ID_WXMEMO1 = wxNewId();
 //*)
 
 MadWordCountDialog::MadWordCountDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)

@@ -13,12 +13,6 @@
 #include "MadEditFrame.h"
 
 //(*IdInit(MadSaveQueryDialog)
-//const long MadSaveQueryDialog::ID_LISTCTRLMADFILELIST = wxNewId();
-//const long MadSaveQueryDialog::ID_BUTTONSAVENONE = wxNewId();
-//const long MadSaveQueryDialog::ID_CHECKBOXCONFIRM = wxNewId();
-//const long MadSaveQueryDialog::ID_BUTTONSELECTALL = wxNewId();
-//const long MadSaveQueryDialog::ID_BUTTONDSELECTALL = wxNewId();
-//const long MadSaveQueryDialog::ID_BUTTONGOTO = wxNewId();
 //*)
 
 #define SAVEQUERY_MIN_PATH_COL_WIDTH 80

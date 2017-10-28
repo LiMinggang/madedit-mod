@@ -14,10 +14,6 @@
 //*)
 
 //(*IdInit(MadSortDialog)
-//const long MadSortDialog::ID_WXRADIOBOXORDER = wxNewId();
-//const long MadSortDialog::ID_WXCHECKBOXCASE = wxNewId();
-//const long MadSortDialog::ID_WXCHECKBOXNUMERIC = wxNewId();
-//const long MadSortDialog::ID_WXCHECKBOXREMOVEDUP = wxNewId();
 //*)
 
 MadSortDialog::MadSortDialog(wxWindow* parent)

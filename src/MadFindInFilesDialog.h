@@ -81,38 +81,8 @@ class MadFindInFilesDialog: public wxDialog
 	protected:
 
 		//(*Identifiers(MadFindInFilesDialog)
-		static const long ID_WXCHECKBOXCASESENSITIVE;
-		static const long ID_WXCHECKBOXWHOLEWORD;
-		static const long ID_WXCHECKBOXREGEX;
-		static const long ID_CHECKBOXDOTMATCHNEWLINE;
-		static const long ID_WXCHECKBOXFINDHEX;
-		static const long ID_WXCHECKBOXLISTFIRSTONLY;
-		static const long ID_WXBUTTONFIND;
-		static const long ID_WXBUTTONREPLACE;
-		static const long ID_WXCHECKBOXENABLEREPLACE;
-		static const long ID_STATICLINE1;
-		static const long ID_WXRADIOBUTTONOPENEDFILES;
-		static const long ID_WXRADIOBUTTONDIR;
-		static const long ID_COMBOBOX1;
-		static const long ID_WXBUTTONDIR;
-		static const long ID_WXBUTTONACTIVEDIR;
-		static const long ID_STATICTEXT1;
-		static const long ID_WXCOMBOBOXFILTER;
-		static const long ID_STATICTEXT2;
-		static const long ID_STATICTEXT3;
-		static const long ID_STATICTEXT4;
-		static const long ID_WXCOMBOBOXEXCLUDE;
-		static const long ID_STATICTEXT5;
-		static const long ID_STATICTEXT6;
-		static const long ID_STATICTEXT7;
-		static const long ID_WXCOMBOBOXENCODING;
-		static const long ID_WXCHECKBOXSUBDIR;
 		//*)
 
-		static const long ID_MADEDIT1;
-		static const long ID_MADEDIT2;
-		static const long ID_WXBITMAPBUTTONRECENTFINDTEXT;
-		static const long ID_WXBITMAPBUTTONRECENTREPLACETEXT;
 		static const long ID_RECENTFINDTEXT1;    // must be the same with MadSearchDialog
 		static const long ID_RECENTFINDTEXT20;
 		static const long ID_RECENTREPLACETEXT1;

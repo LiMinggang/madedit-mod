@@ -44,15 +44,6 @@ class MadAboutDialog: public wxDialog
 	protected:
 
 		//(*Identifiers(MadAboutDialog)
-		static const long ID_STATICBITMAP1;
-		static const long ID_STATICBITMAP2;
-		static const long ID_WXMEMOABOUT;
-		static const long ID_WXPANELABOUT;
-		static const long ID_LISTCREDITS;
-		static const long ID_WXPANELCREDITS;
-		static const long ID_TEXTCTRL1;
-		static const long ID_WXMEMOLICENSE;
-		static const long ID_WXAUINOTEBOOKABOUT;
 		//*)
 
 	private:

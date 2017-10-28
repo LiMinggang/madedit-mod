@@ -46,9 +46,6 @@ class MadMacroDlg: public wxDialog
 	protected:
 
 		//(*Identifiers(MadMacroDlg)
-		//static const long ID_MADEDIT;
-		//static const long ID_WXBUTTONTOGGLERESULT;
-		//static const long ID_TEXTCTRLRESULT;
 		//*)
 		bool m_debug;
 

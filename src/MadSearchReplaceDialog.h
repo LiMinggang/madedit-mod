@@ -86,37 +86,7 @@ class MadSearchReplaceDialog: public wxDialog
 	protected:
 
 		//(*Identifiers(MadSearchReplaceDialog)
-		static const long ID_WXCHECKBOXMOVEFOCUS;
-		static const long ID_WXCHECKBOXCASESENSITIVE;
-		static const long ID_WXCHECKBOXWHOLEWORD;
-		static const long ID_WXCHECKBOXREGEX;
-		static const long ID_WXCHECKBOXBOXDOTMATCHNEWLINE;
-		static const long ID_CHECKBOXREPLACENODOUBLECHECK;
-		static const long ID_WXCHECKBOXFINDHEX;
-		static const long ID_WXCHECKBOXSEARCHINSELECTION;
-		static const long ID_WXCHECKBOXWRAPAROUND;
-		static const long ID_WXCHECKBOXBOOKMARKLINE;
-		static const long ID_WXCHECKBOXBOOKMARKONLY;
-		static const long ID_WXCHECKBOXPURGEBOOKMARK;
-		static const long ID_RADIOBUTTON1;
-		static const long ID_RADIOBUTTON2;
-		static const long ID_WXSLIDERTRANSDEGREE;
-		static const long ID_WXSLIDERINPUTSIZER;
-		static const long ID_WXBUTTONFINDNEXT;
-		static const long ID_WXBUTTONFINDPREV;
-		static const long ID_WXBUTTONFINDALL;
-		static const long ID_WXBUTTONFINDALLINALL;
-		static const long ID_WXBUTTONREPLACE;
-		static const long ID_WXBUTTONREPLACEALL;
-		static const long ID_WXBUTTONREPLACEALLINALL;
-		static const long ID_WXBUTTONCOUNT;
-		static const long ID_WXBUTTONREPLACEEXPAND;
 		//*)
-
-		static const long ID_MADEDIT1;
-		static const long ID_MADEDIT2;
-		static const long ID_WXBITMAPBUTTONRECENTFINDTEXT;
-		static const long ID_WXBITMAPBUTTONRECENTREPLACETEXT;
 
 		static const long ID_RECENTFINDTEXT1;	// must be the same with MadSearchDialog
 		static const long ID_RECENTFINDTEXT20;

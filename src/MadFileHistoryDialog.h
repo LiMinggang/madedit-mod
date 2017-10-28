@@ -38,9 +38,6 @@ class MadFileHistoryDialog: public wxDialog
 	protected:
 
 		//(*Identifiers(MadFileHistoryDialog)
-		static const long ID_CHECKLISTMADHISFILELIST;
-		static const long ID_BUTTONSELECTALL;
-		static const long ID_BUTTONDSELECTALL;
 		//*)
 
 		MadEditFrame * m_MainFrame;

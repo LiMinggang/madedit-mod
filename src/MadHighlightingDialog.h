@@ -83,30 +83,6 @@ class MadHighlightingDialog : public wxDialog
 	protected:
 
 		//(*Identifiers(MadHighlightingDialog)
-		static const long ID_WXLISTBOXSYNTAX;
-		static const long ID_STATICTEXT1;
-		static const long ID_WXCOMBOBOXSCHEME;
-		static const long ID_STATICTEXT2;
-		static const long ID_WXBUTTONLOAD;
-		static const long ID_WXBUTTONSAVE;
-		static const long ID_WXBUTTONDELETE;
-		static const long ID_STATICLINE1;
-		static const long ID_WXLISTCTRLKEYWORD;
-		static const long ID_WXCHECKBOXBOLD;
-		static const long ID_WXCHECKBOXITALIC;
-		static const long ID_WXCHECKBOXUNDERLINE;
-		static const long ID_STATICLINE3;
-		static const long ID_STATICTEXT3;
-		static const long ID_WXSTATICTEXTFCNAME;
-		static const long ID_WXPANELFC;
-		static const long ID_WXLISTCTRLFC;
-		static const long ID_WXBUTTONFC;
-		static const long ID_STATICLINE2;
-		static const long ID_STATICTEXT4;
-		static const long ID_WXSTATICTEXTBCNAME;
-		static const long ID_WXPANELBC;
-		static const long ID_WXLISTCTRLBC;
-		static const long ID_WXBUTTONBC;
 		//*)
 	private:
 		MadSyntax *m_Syntax;

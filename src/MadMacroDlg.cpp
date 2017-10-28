@@ -16,9 +16,6 @@
 //*)
 
 //(*IdInit(MadMacroDlg)
-//const long MadMacroDlg::ID_MADEDIT = wxNewId();
-//const long MadMacroDlg::ID_WXBUTTONTOGGLERESULT = wxNewId();
-//const long MadMacroDlg::ID_TEXTCTRLRESULT = wxNewId();
 //*)
 
 extern MadEdit *g_ActiveMadEdit;

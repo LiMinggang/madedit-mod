@@ -30,17 +30,6 @@
 #endif
 
 //(*IdInit(MadPurgeHistoryDialog)
-//const long MadPurgeHistoryDialog::ID_WXCHECKBOXRECENTFILES = wxNewId();
-//const long MadPurgeHistoryDialog::ID_WXCHECKBOXRECENTFONTS = wxNewId();
-//const long MadPurgeHistoryDialog::ID_WXCHECKBOXRECENTENCODINGS = wxNewId();
-//const long MadPurgeHistoryDialog::ID_WXCHECKBOXRECENTSEARCHEDTEXTS = wxNewId();
-//const long MadPurgeHistoryDialog::ID_WXCHECKBOXRECENTREPLACEDTEXTS = wxNewId();
-//const long MadPurgeHistoryDialog::ID_WXCHECKBOXRECENTSEARCHEDDIRECTORIES = wxNewId();
-//const long MadPurgeHistoryDialog::ID_WXRECENTSEARCHEDFILEFILTERS = wxNewId();
-//const long MadPurgeHistoryDialog::ID_WXCHECKBOXRECENTSEARCHEDEXCLUDEFILTERS = wxNewId();
-//const long MadPurgeHistoryDialog::ID_WXCHECKBOXCARETPOS = wxNewId();
-//const long MadPurgeHistoryDialog::ID_CHECKBOXRESETTOOLBARSINFOWIN = wxNewId();
-//const long MadPurgeHistoryDialog::ID_WXCHECKBOXALLABOVE = wxNewId();
 //*)
 
 MadPurgeHistoryDialog::MadPurgeHistoryDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)

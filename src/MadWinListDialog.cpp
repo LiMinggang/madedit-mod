@@ -12,13 +12,6 @@
 #include "MadWinListDialog.h"
 
 //(*IdInit(MadWinListDialog)
-//const long MadWinListDialog::ID_LISTCTRLMADWINLIST = wxNewId();
-//const long MadWinListDialog::ID_BUTTONACTIVATE = wxNewId();
-//const long MadWinListDialog::ID_BUTTONSAVE = wxNewId();
-//const long MadWinListDialog::ID_BUTTONSAVEAS = wxNewId();
-//const long MadWinListDialog::ID_BUTTONCLOSEWINDOWS = wxNewId();
-//const long MadWinListDialog::ID_BUTTONSORTTABBYNAME = wxNewId();
-//const long MadWinListDialog::ID_BUTTONSORTTABBYPATH = wxNewId();
 //*)
 
 const long MadWinListDialog::COL_TABNAME = 0;

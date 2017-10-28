@@ -53,14 +53,6 @@ class MadFileAssociationDialog: public wxDialog
 	protected:
 
 		//(*Identifiers(MadFileAssociationDialog)
-		static const long ID_STATICTEXT1;
-		static const long ID_WXLISTBOXASSOCIATED;
-		static const long ID_WXBUTTONADD;
-		static const long ID_WXBUTTONREMOVE;
-		static const long ID_STATICTEXT2;
-		static const long ID_WXLISTBOXPREDEFINED;
-		static const long ID_WXEDITCUSTOMTYPE;
-		static const long ID_WXBUTTONADDCUSTOM;
 		//*)
 
 	private:
