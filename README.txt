@@ -130,6 +130,7 @@ Fix: Change font size/font/encoding/syntax/linespacing will not update font tool
 Fix: Remove toggle show Quick Search bar on Option dialog
 Fix: Restruction of MadEdit config
 Fix: Saved bookmarks would added to other files during reload
+Fix: Wrong MadPython expession recorded in Search/Replace
 Other minor improvements
 
 Mod v0.4.10

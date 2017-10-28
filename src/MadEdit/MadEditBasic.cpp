@@ -2810,7 +2810,6 @@ MadSearchResult MadEdit::FindTextNext( const wxString &text,
 	vector<int> widthArray;
 	int tmp;
 
-
 	if( rangeFrom < 0 )
 	{
 		bpos = m_CaretPos;
