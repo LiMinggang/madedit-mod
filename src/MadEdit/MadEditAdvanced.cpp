@@ -3537,7 +3537,7 @@ void MadEdit::InsertIncrementalNumber( int initial, int step, int total, MadNumb
 						wxString tmp( wxString::Format( numFmt, num ) );
 						tstr << tmp;
 
-						if( align == naLeft && ( total > tmp.Len() ) )
+						if( align == naLeft && ( (size_t)total > tmp.Len() ) )
 						{
 							memset( padding, padchar, ( total - tmp.Len() ) );
 							tstr += wxString::FromAscii( padding );
@@ -4187,7 +4187,7 @@ void MadEdit::RestoreBookmarks( std::vector<int> & linenums )
 	std::vector<int>::iterator linenumIter = linenums.begin();
 	MadLineIterator iter;
 
-	if(*linenumIter > m_Lines->m_LineCount)
+	if((size_t)(*linenumIter) > m_Lines->m_LineCount)
 		return;
 	for( iter = m_Lines->m_LineList.begin(); iter != m_Lines->m_LineList.end(); ++lineNum, ++iter )
 	{
@@ -4196,7 +4196,7 @@ void MadEdit::RestoreBookmarks( std::vector<int> & linenums )
 			m_Lines->m_LineList.SetBookmark( iter, false );
 			if( ++linenumIter == linenums.end() )
 			{ break; } // no more bookmarks, we return the position of the first one
-			if (*linenumIter > m_Lines->m_LineCount)
+			if ((size_t)(*linenumIter) > m_Lines->m_LineCount)
 				return;
 		}
 	}

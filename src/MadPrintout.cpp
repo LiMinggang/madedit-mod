@@ -106,7 +106,7 @@ bool MadPrintout::HasPage(int page)
 {
     // get info from g_ActiveMadEdit
     size_t count=g_ActiveMadEdit->GetPageCount();
-    return (page>=1 && page<=count);
+    return ((size_t)page>=1 && (size_t)page<=count);
 }
 
 /* Header & Footer Print Marks
