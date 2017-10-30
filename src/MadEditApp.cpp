@@ -882,7 +882,7 @@ void MadEditApp::InitLocale()
 {
 	wxString strlang;
 	wxConfigBase *cfg = wxConfigBase::Get( false );
-	cfg->Read( wxT( "/MadEdit/Language" ), &strlang );
+	cfg->Read( wxT( "/Application/Language" ), &strlang );
 	int lang = g_LanguageValue[0];
 
 	if( !strlang.IsEmpty() )
@@ -914,5 +914,6 @@ void MadEditApp::InitLocale()
 	}
 
 	g_Locale->AddCatalog( g_MadLanguageFileName );
+	g_LanguageString[0] = wxGetTranslation( g_LanguageStr[0] );
 }
 

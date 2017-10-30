@@ -3962,7 +3962,7 @@ MadEdit *MadEditFrame::GetEditByFileName( const wxString &filename, size_t &id )
 		}
 	}
 
-	id = -1;
+	id = (size_t)-1;
 	return nullptr;
 }
 
@@ -8237,7 +8237,7 @@ void MadEditFrame::OnIncDecFontSize( wxCommandEvent& event )
 		{
 			sel = menuFontSize1;
 		}
-		else if ( m_FontSizes->GetCount() == (sel + 1))
+		else if ( m_FontSizes->GetCount() == (size_t)(sel + 1))
 		{
 			sel = menuFontSize1 + m_FontSizes->GetCount() - 1;
 		}
