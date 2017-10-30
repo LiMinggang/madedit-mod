@@ -100,7 +100,8 @@ void MadSaveQueryDialog::InitWindowListIterms()
 	wxListItem info;
 	for( size_t id = 0; id < count; ++id )
 	{
-		MadEdit * madedit = ( MadEdit* )notebookp->GetPage( id );
+		MadEdit * madedit = dynamic_cast < MadEdit* >(notebookp->GetPage( id ));
+		wxASSERT( madedit != 0 );
 		if(madedit->IsModified())
 		{
 			wxFileName fileName( madedit->GetFileName() );

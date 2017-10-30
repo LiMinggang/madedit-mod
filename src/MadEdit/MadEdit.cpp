@@ -2088,7 +2088,7 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 	int left, text_top = rect.GetTop() + ( SpacingHeight >> 1 );
 	int row_top = rect.GetTop();
 	const int rectright = rect.x + rect.width;
-	int SelLeft, SelRight;
+	int SelLeft = -1, SelRight = -1;
 	int xpos1 = 0, xpos2 = 0;
 	bool reverseLineNum = false;
 	const int wspace = m_TextFontSpaceWidth/*GetUCharWidth( 0x20 )*/;
@@ -2687,11 +2687,11 @@ void MadEdit::PaintHexLines( wxDC *dc, wxRect &rect, int toprow, int rowcount, b
 	wxFileOffset pos = m_HexRowIndex[toprow - m_TopRow];
 	MadLineIterator lit2;
 	wxFileOffset linepos2 = pos;
-	int rowno_notused;
+	int rowno_notused = -1;
 	GetLineByPos( lit2, linepos2, rowno_notused );
 	linepos2 = pos - linepos2;
 	MadLineIterator lit1;
-	wxFileOffset linepos1;
+	wxFileOffset linepos1 = -1;
 	wxFileOffset hexrowpos = toprow;
 	hexrowpos <<= 4;
 
@@ -2710,11 +2710,11 @@ void MadEdit::PaintHexLines( wxDC *dc, wxRect &rect, int toprow, int rowcount, b
 	MadLineIterator lineend = m_Lines->m_LineList.end();
 	m_ActiveRowUChars.clear();
 	bool bMarkChar = false;
-	int MarkCharLeft, MarkCharRight;
+	int MarkCharLeft = -1, MarkCharRight = -1;
 	wxFileOffset MarkPos1 = -1, MarkPos2 = -1;
 	MadLines::NextUCharFuncPtr NextUChar = m_Lines->NextUChar;
 	int SelLeft = 0, SelRight = 0;
-	wxFileOffset SelPos1, SelPos2;
+	wxFileOffset SelPos1 = -1, SelPos2 = -1;
 
 	if( m_Selection )
 	{
@@ -6974,9 +6974,9 @@ void MadEdit::OverwriteDataSingle( vector<wxFileOffset> &del_bpos, vector<wxFile
 
 	vector<wxFileOffset>::iterator ins_len_it = ins_len.begin();
 	MadLineIterator lit;
-	wxFileOffset pos, lpos, newCaretPos = m_CaretPos.pos;
-	wxFileOffset oldblksize, caretdiffsize, del_size;
-	int rowid;
+	wxFileOffset pos = -1, lpos = -1, newCaretPos = m_CaretPos.pos;
+	wxFileOffset oldblksize = 0, caretdiffsize = 0, del_size = 0;
+	int rowid = -1;
 	vector<wxByte> buffer;
 	buffer.resize( 10240 );
 	wxByte *buf = &buffer[0];
@@ -8674,7 +8674,7 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 							{
 								MadUCQueue ucqueue;
 								MadLines::NextUCharFuncPtr NextUChar = m_Lines->NextUChar;
-								ucs4_t uc;
+								ucs4_t uc(0);
 								wxFileOffset pos, pos1;
 
 								if( m_Selection )

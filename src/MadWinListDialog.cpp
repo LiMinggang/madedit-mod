@@ -103,7 +103,7 @@ void MadWinListDialog::InitWindowListIterms()
 	wxListItem info;
 	for( size_t id = 0; id < count; ++id )
 	{
-		MadEdit * madedit = ( MadEdit* )notebookp->GetPage( id );
+		MadEdit * madedit = dynamic_cast < MadEdit* >(notebookp->GetPage( id ));
 		wxFileName fileName( madedit->GetFileName() );
 		wxString fname = notebookp->GetPageText( id );
 		wxString fdir = fileName.GetPath();
@@ -238,7 +238,7 @@ void MadWinListDialog::SortTabs(long column)
 		}
 		
 		long pageId = static_cast<long>(MadWindowsList->GetItemData(item));
-		MadEdit * madedit = ( MadEdit* )notebookp->GetPage( pageId );
+		MadEdit * madedit = dynamic_cast < MadEdit* >(notebookp->GetPage( pageId ));
 		if(name.IsEmpty())
 			name.Printf(wxT("*%04d"), seq);
 		else if(madEditMap.find(name) != madEditMap.end())

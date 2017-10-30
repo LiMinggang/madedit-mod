@@ -160,7 +160,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -168,7 +168,7 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalIncludeDirectories>$(WXWIN)\include;$(WXWIN)\include\msvc;..\..\python\include\;..\..\minipython\Include;..\..\minipython\PC;..\..\spellchecker\;..\..\spellchecker\hunspell\src;..\..\markdown;..\..\astyle;..\..\charset-detector\include;..\..\charset-detector\src\tables;..\..\charset-detector\src;$(BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_UNICODE;UNICODE;HUNSPELL_STATIC;Py_NO_ENABLE_SHARED;_CRT_SECURE_NO_WARNINGS;BOOST_ALL_NO_LIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <DisableSpecificWarnings>4068</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4068;4018;4820;4514;4100</DisableSpecificWarnings>
       <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
     </ClCompile>
