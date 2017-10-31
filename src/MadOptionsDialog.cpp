@@ -869,7 +869,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	const wxChar * datetimeMenus[] =
 	{
 		_("[%Y/%m/%d %I:%M:%S %p] 2018/02/24 08:30:55 AM"),
-		_("[%d/%m/%Y] 24/02/2007"),
+		_("[%d/%m/%Y] 24/02/2018"),
 		_("[%a, %d %b %Y %H:%M:%S %z] RFC822 timestamp"), 
 		nullptr,
 		_("[%a] Abbreviated weekday name"),
@@ -932,12 +932,12 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 	{
 		ComboBoxNewDocSyntax->Append(wxGetTranslation(MadSyntax::GetSyntaxTitle(i)));
 	}
-	int index = ComboBoxNewDocSyntax->FindString(wxGetTranslation(_T("Plain Text")));
+	int index = ComboBoxNewDocSyntax->FindString(_("Plain Text"));
 	if(index != wxNOT_FOUND)
 		ComboBoxNewDocSyntax->SetSelection(index);
 	m_NewDocEncoding = _("System Default");
 	m_NewDocLineEnding = nltDefault;
-	index = ComboBoxNewDocSyntax->FindString(wxGetTranslation(_T("Plain Text")));
+	index = ComboBoxNewDocSyntax->FindString(_("Plain Text"));
 
 #ifdef __WXMSW__
 	wxString fontname( wxT( "Courier New" ) );
