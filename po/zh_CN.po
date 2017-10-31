@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-31 20:50+0800\n"
+"POT-Creation-Date: 2017-10-31 21:12+0800\n"
 "PO-Revision-Date: 2017-10-31 20:52+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit-Mod <minggang.li@gmail.com>\n"
@@ -3848,14 +3848,6 @@ msgstr "[%d] 日期(&D)"
 msgid "[%t] &Time"
 msgstr "[%t] 时间(&T)"
 
-#: ../src/MadOptionsDialog.cpp:871
-msgid "[%Y/%m/%d %I:%M:%S %p] 2018/02/24 08:30:55 AM"
-msgstr "[%Y/%m/%d %I:%M:%S %p] 20018/02/24 08:30:55 上午"
-
-#: ../src/MadOptionsDialog.cpp:872
-msgid "[%d/%m/%Y] 24/02/2018"
-msgstr "[%d/%m/%Y] 24/02/2018"
-
 #: ../src/MadOptionsDialog.cpp:873
 msgid "[%a, %d %b %Y %H:%M:%S %z] RFC822 timestamp"
 msgstr "[%a, %d %b %Y %H:%M:%S %z] RFC822 时间戳"
@@ -4287,6 +4279,12 @@ msgstr "MadEdit-Mod预览打印"
 msgid ""
 "Unsure how to update the possible values for %s based on the value of %s"
 msgstr "不确定如何更新%s的可能值（基于%s的值）"
+
+#~ msgid "[%Y/%m/%d %I:%M:%S %p] 2018/02/24 08:30:55 AM"
+#~ msgstr "[%Y/%m/%d %I:%M:%S %p] 20018/02/24 08:30:55 上午"
+
+#~ msgid "[%d/%m/%Y] 24/02/2018"
+#~ msgstr "[%d/%m/%Y] 24/02/2018"
 
 #~ msgid "Show quick search bar on startup"
 #~ msgstr "启动时显示快速搜索条"

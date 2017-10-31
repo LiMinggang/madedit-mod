@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-31 20:50+0800\n"
+"POT-Creation-Date: 2017-10-31 21:12+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3820,14 +3820,6 @@ msgstr ""
 
 #: ../src/MadOptionsDialog.cpp:853
 msgid "[%t] &Time"
-msgstr ""
-
-#: ../src/MadOptionsDialog.cpp:871
-msgid "[%Y/%m/%d %I:%M:%S %p] 2018/02/24 08:30:55 AM"
-msgstr ""
-
-#: ../src/MadOptionsDialog.cpp:872
-msgid "[%d/%m/%Y] 24/02/2018"
 msgstr ""
 
 #: ../src/MadOptionsDialog.cpp:873

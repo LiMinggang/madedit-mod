@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit 2.9.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-31 20:50+0800\n"
+"POT-Creation-Date: 2017-10-31 21:12+0800\n"
 "PO-Revision-Date: 2017-08-16 10:35+0800\n"
 "Last-Translator: \n"
 "Language-Team: <carlos1994sanchez@gmail.com>\n"
@@ -4043,16 +4043,6 @@ msgstr "[%d] &Fecha"
 msgid "[%t] &Time"
 msgstr "[%t] &Tiempo"
 
-#: ../src/MadOptionsDialog.cpp:871
-#, fuzzy
-msgid "[%Y/%m/%d %I:%M:%S %p] 2018/02/24 08:30:55 AM"
-msgstr "[%Y/%m/%d %I:%M:%S %p] 2007/02/24 08:30:55 AM"
-
-#: ../src/MadOptionsDialog.cpp:872
-#, fuzzy
-msgid "[%d/%m/%Y] 24/02/2018"
-msgstr "[%d/%m/%Y] 24/02/2007"
-
 #: ../src/MadOptionsDialog.cpp:873
 msgid "[%a, %d %b %Y %H:%M:%S %z] RFC822 timestamp"
 msgstr "[%a, %d %b %Y %H:%M:%S %z] RFC822 sello de tiempo"
@@ -4505,6 +4495,14 @@ msgstr "MadEdit Printout"
 msgid ""
 "Unsure how to update the possible values for %s based on the value of %s"
 msgstr ""
+
+#, fuzzy
+#~ msgid "[%Y/%m/%d %I:%M:%S %p] 2018/02/24 08:30:55 AM"
+#~ msgstr "[%Y/%m/%d %I:%M:%S %p] 2007/02/24 08:30:55 AM"
+
+#, fuzzy
+#~ msgid "[%d/%m/%Y] 24/02/2018"
+#~ msgstr "[%d/%m/%Y] 24/02/2007"
 
 #~ msgid "999999"
 #~ msgstr "999999"
