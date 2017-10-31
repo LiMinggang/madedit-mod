@@ -614,7 +614,7 @@ class FileCaretPosManager
 	};
 	std::list<FilePosData> files;
 	bool IsFound(const wxString & name) {
-		int hash = wxStringHash::stringHash( (wchar_t*)(name.wx_str()) );
+		unsigned long hash = wxStringHash::stringHash( (wchar_t*)(name.wx_str()) );
 		std::list<FilePosData>::iterator it = files.begin();
 		std::list<FilePosData>::iterator itend = files.end();
 		while( it != itend ) {
@@ -5602,8 +5602,8 @@ void MadEditFrame::OnUpdateUI_MenuWindow_Window( wxUpdateUIEvent& event )
 	if((size_t)pgid < m_Notebook->GetPageCount())
 	{
 		event.Check(pgid == m_Notebook->GetSelection());
-		int psid = m_Notebook->GetPageIndex( g_ActiveMadEdit );
-		DBOUT( "WWindow:pgid:"<<pgid<<", psid:"<<psid<<", sel:"<<m_Notebook->GetSelection()<<'\n' );
+		//int psid = m_Notebook->GetPageIndex( g_ActiveMadEdit );
+		//DBOUT( "WWindow:pgid:"<<pgid<<", psid:"<<psid<<", sel:"<<m_Notebook->GetSelection()<<'\n' );
 
 		MadEdit *me = ( MadEdit* )m_Notebook->GetPage( pgid );
 		wxString fname = m_Notebook->GetPageText( pgid );

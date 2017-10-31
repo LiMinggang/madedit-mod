@@ -639,9 +639,9 @@ bool MadEditApp::OnCmdLineParsed( wxCmdLineParser& cmdParser )
 			wxArrayString files;
 			size_t nums = wxDir::GetAllFiles( filename.GetPath(), &files, fname, flags );
 
-			for( size_t i = 0; i < nums; ++i )
+			for( size_t j = 0; j < nums; ++j )
 			{
-				m_FileNames.Add( files[i] );
+				m_FileNames.Add( files[j] );
 			}
 		}
 		else
