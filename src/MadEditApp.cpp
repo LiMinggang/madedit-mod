@@ -814,7 +814,7 @@ void ScanForLocales()
 	g_LanguageString.Empty();
 	g_LocaleDirPrefix.Empty();
 	// System Default
-	g_LanguageString.Add( g_LanguageStr[0] );
+	g_LanguageString.Add( wxGetTranslation(g_LanguageStr[0]) );
 	g_LanguageId.Add( g_LanguageValue[0] );
 	// English
 	g_LanguageString.Add( g_LanguageStr[3] );
@@ -914,6 +914,5 @@ void MadEditApp::InitLocale()
 	}
 
 	g_Locale->AddCatalog( g_MadLanguageFileName );
-	g_LanguageString[0] = wxGetTranslation( g_LanguageStr[0] );
 }
 

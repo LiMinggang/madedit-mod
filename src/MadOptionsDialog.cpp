@@ -868,7 +868,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
 
 	const wxChar * datetimeMenus[] =
 	{
-		_("[%Y/%m/%d %I:%M:%S %p] 2007/02/24 08:30:55 AM"),
+		_("[%Y/%m/%d %I:%M:%S %p] 2018/02/24 08:30:55 AM"),
 		_("[%d/%m/%Y] 24/02/2007"),
 		_("[%a, %d %b %Y %H:%M:%S %z] RFC822 timestamp"), 
 		nullptr,
