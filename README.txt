@@ -132,7 +132,8 @@ Fix: Restructure of MadEdit config
 Fix: Saved bookmarks would added to other files during reload
 Fix: Wrong MadPython expression recorded in Search/Replace
 Fix: Clean deprecated function wxNewId
-Fix: Complier warnings from VC
+Fix: Complier warnings from VC(L4)
+Fix: Restore InfoWindow instead of hide it if it was there last time
 Other minor improvements
 
 Mod v0.4.10

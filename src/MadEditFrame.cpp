@@ -3620,7 +3620,7 @@ void MadEditFrame::CreateGUIControls( void )
 		RestoreAuiPanel(m_InfoNotebook, panelStatus);
 
 	//m_AuiManager.AddPane( m_InfoNotebook, m_InfoNoteBookStatus, _( "Information Window" ) );
-	m_AuiManager.GetPane( m_InfoNotebook ).Show( false );
+	//m_AuiManager.GetPane( m_InfoNotebook ).Show( false );
 	m_AuiManager.Update();
 
 	if( g_tbMACRO_ptr->GetToolCount() <= 5 )
@@ -8927,7 +8927,7 @@ void MadEditFrame::OnToolsPurgeHistories( wxCommandEvent& event )
 			if(show)
 				m_AuiManager.GetPane( m_InfoNotebook ).Hide();
 			ResetInformationWinPos();
-			m_Config->DeleteEntry(wxT( "/MadEdit/InfoWindowStatus" ));
+			m_Config->DeleteEntry(wxT( "/UIView/InfoWindowStatus" ));
 			m_AuiManager.GetPane( m_InfoNotebook ).Show(show);
 			show = m_AuiManager.GetPane( m_QuickSearchBar ).IsShown();
 			if(show)
@@ -8935,7 +8935,7 @@ void MadEditFrame::OnToolsPurgeHistories( wxCommandEvent& event )
 			m_AuiManager.DetachPane(m_QuickSearchBar);
 			ResetQuickSearchBarPos();
 			
-			m_Config->DeleteEntry(wxT( "/MadEdit/QuickSearchBarStatus" ));
+			m_Config->DeleteEntry(wxT( "/UIView/QuickSearchBarStatus" ));
 			m_AuiManager.GetPane( m_QuickSearchBar ).Show(show);
 
 			ToolBarData * td = &ToolBarTable[0];
