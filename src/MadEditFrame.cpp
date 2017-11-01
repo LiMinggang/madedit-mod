@@ -3680,7 +3680,7 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 		if( count > 1 )
 		{
 			int selid = m_Notebook->GetSelection();
-			if( selid != ( count - 1 ))
+			if( (size_t)selid != ( count - 1 ))
 			{
 				wxString selname = g_ActiveMadEdit->GetFileName();
 
@@ -3914,7 +3914,7 @@ void MadEditFrame::SetPageFocus( size_t pageId )
 {
 	int selid = m_Notebook->GetSelection();
 
-	if(( pageId != selid ) && ( pageId < m_Notebook->GetPageCount())  && (pageId != selid))
+	if(( pageId != (size_t)selid ) && ( pageId < m_Notebook->GetPageCount())  && (pageId != (size_t)selid))
 	{
 		g_CheckModTimeForReload = false;
 		g_PrevPageID = selid;
@@ -4304,7 +4304,7 @@ void MadEditFrame::OnFindInFilesResultsDClick( wxMouseEvent& event )
 		{
 			size_t count = g_MainFrame->m_Notebook->GetPageCount();
 
-			if( cpdata->pageid >= 0 && cpdata->pageid < count )
+			if( cpdata->pageid >= 0 && (size_t)cpdata->pageid < count )
 			{
 				wxString title = g_MainFrame->m_Notebook->GetPageText( cpdata->pageid );
 
@@ -4897,7 +4897,7 @@ bool MadEditFrame::QueryCloseAllFiles()
 
 	do
 	{
-		if( id != selid )
+		if( id != (size_t)selid )
 		{
 			madedit = ( MadEdit* )m_Notebook->GetPage( id );
 
@@ -5776,7 +5776,7 @@ void MadEditFrame::OnFileSaveAll( wxCommandEvent& event )
 
 	do
 	{
-		if( id != selid )
+		if( id != (size_t)selid )
 		{
 			madedit = ( MadEdit* )m_Notebook->GetPage( id );
 
@@ -8495,9 +8495,9 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& event )
 
 		// SpellChecker
 		SpellCheckerManager::Instance().Save();
-		for( int i = 0; i < m_Notebook->GetPageCount(); ++i )
+		for( int i = 0; (size_t)i < m_Notebook->GetPageCount(); ++i )
 		{
-			MadEdit *madedit = ( MadEdit* )m_Notebook->GetPage( i );
+			MadEdit *madedit = dynamic_cast< MadEdit* >(m_Notebook->GetPage( i ));
 			wxASSERT(madedit != 0);
 			madedit->SetRecordCaretMovements( rcm );
 			madedit->SetInsertSpacesInsteadOfTab( isiot );
@@ -9840,7 +9840,7 @@ void MadEditFrame::OnWindowToggleWindow( wxCommandEvent& event )
 	g_CheckModTimeForReload = false;
 
 	if( g_PrevPageID >= 0 &&
-			g_PrevPageID < count &&
+			(size_t)g_PrevPageID < count &&
 			g_PrevPageID != selid )
 	{
 		m_Notebook->SetSelection( g_PrevPageID );
