@@ -4765,7 +4765,7 @@ void MadEditFrame::RunScriptWithFile( const wxString &filename, const wxString &
 					}
 					catch( std::bad_alloc & )
 					{
-						MadMessageBox( _( "Memory allocation failed" ), wxT( "Error" ),  wxOK | wxICON_ERROR );
+						MadMessageBox( _( "Memory allocation failed" ), _( "Error" ),  wxOK | wxICON_ERROR );
 					}
 				}
 
@@ -9173,7 +9173,7 @@ void MadEditFrame::OnToolsSaveRecMacro( wxCommandEvent& WXUNUSED(event) )
 		}
 	}
 
-	wxString fileFilter = wxString( wxT( "Mad Macro(*.mpy)|*.mpy|" ) ) + wxFileSelectorDefaultWildcardStr + wxT( "|All files(*;*.*)" );
+	wxString fileFilter = wxString( wxT( "Mad Macro(*.mpy)|*.mpy|" ) ) + wxFileSelectorDefaultWildcardStr + _( "|All files(*;*.*)" );
 	wxString filename = wxSaveFileSelector( _( "Mad Macro" ), fileFilter );
 
 	if( !filename.IsEmpty() )
@@ -9341,7 +9341,7 @@ void MadEditFrame::OnToolsMadScriptList( wxCommandEvent& event )
 				}
 				catch( std::bad_alloc & )
 				{
-					MadMessageBox( _( "Memory allocation failed" ), wxT( "Error" ),  wxOK | wxICON_ERROR );
+					MadMessageBox( _( "Memory allocation failed" ), _( "Error" ),  wxOK | wxICON_ERROR );
 				}
 			}
 
