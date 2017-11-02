@@ -177,7 +177,7 @@ void MadNumberDlg::OnClose(wxCloseEvent& /*event*/)
 /*
  * WxOKButtonClick
  */
-void MadNumberDlg::WxOKButtonClick(wxCommandEvent& event)
+void MadNumberDlg::WxOKButtonClick(wxCommandEvent& WXUNUSED(event))
 {
 	// insert your code here
 	
@@ -216,7 +216,7 @@ void MadNumberDlg::WxOKButtonClick(wxCommandEvent& event)
 /*
  * WxEditPrefixUpdated
  */
-void MadNumberDlg::WxEditPrefixUpdated(wxCommandEvent& event)
+void MadNumberDlg::WxEditPrefixUpdated(wxCommandEvent& WXUNUSED(event))
 {
 	// insert your code	here
 	if(WxStaticTextPreview)
@@ -228,7 +228,7 @@ void MadNumberDlg::WxEditPrefixUpdated(wxCommandEvent& event)
 	}
 }
 
-void MadNumberDlg::WxEditItialnumberUpdated(wxCommandEvent&	event)
+void MadNumberDlg::WxEditItialnumberUpdated(wxCommandEvent&	WXUNUSED(event))
 {
 	// insert your code	here
 	if(WxStaticTextPreview)
@@ -254,7 +254,7 @@ void MadNumberDlg::WxEditItialnumberUpdated(wxCommandEvent&	event)
 /*
  * WxEditPostfixUpdated
  */
-void MadNumberDlg::WxEditPostfixUpdated(wxCommandEvent&	event)
+void MadNumberDlg::WxEditPostfixUpdated(wxCommandEvent&	WXUNUSED(event))
 {
 	// insert your code	here
 	if(WxStaticTextPreview)
@@ -273,7 +273,7 @@ void MadNumberDlg::WxEditPostfixUpdated(wxCommandEvent&	event)
 /*
  * WxCheckPrefixClick
  */
-void MadNumberDlg::WxCheckPrefixClick(wxCommandEvent& event)
+void MadNumberDlg::WxCheckPrefixClick(wxCommandEvent& WXUNUSED(event))
 {
 	// insert your code	here
 	wxString preview;
@@ -297,7 +297,7 @@ void MadNumberDlg::WxCheckPrefixClick(wxCommandEvent& event)
 /*
  * WxCheckPostfixClick
  */
-void MadNumberDlg::WxCheckPostfixClick(wxCommandEvent& event)
+void MadNumberDlg::WxCheckPostfixClick(wxCommandEvent& WXUNUSED(event))
 {
 	// insert your code	here
 	wxString preview;

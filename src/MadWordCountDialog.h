@@ -61,7 +61,7 @@ class MadWordCountDialog: public wxDialog
 	private:
 
 		//(*Handlers(MadWordCountDialog)
-		void MadWordCountDialogClose(wxCloseEvent& event);
+		void MadWordCountDialogClose(wxCloseEvent& WXUNUSED(event));
 		//*)
 };
 

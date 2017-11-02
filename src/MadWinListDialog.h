@@ -47,17 +47,17 @@ class MadWinListDialog: public wxDialog
 	private:
 
 		//(*Handlers(MadWinListDialog)
-		void OnButtonActivateClick(wxCommandEvent& event);
-		void OnButtonSaveClick(wxCommandEvent& event);
-		void OnButtonCloseWindowsClick(wxCommandEvent& event);
-		void OnButtonSortTabByNameClick(wxCommandEvent& event);
-		void OnButtonOkClick(wxCommandEvent& event);
-		void OnMadWinListDialogClose(wxCloseEvent& event);
-		void OnButtonSortTabByPathClick(wxCommandEvent& event);
-		void OnButtonSaveAsClick(wxCommandEvent& event);
+		void OnButtonActivateClick(wxCommandEvent& WXUNUSED(event));
+		void OnButtonSaveClick(wxCommandEvent& WXUNUSED(event));
+		void OnButtonCloseWindowsClick(wxCommandEvent& WXUNUSED(event));
+		void OnButtonSortTabByNameClick(wxCommandEvent& WXUNUSED(event));
+		void OnButtonOkClick(wxCommandEvent& WXUNUSED(event));
+		void OnMadWinListDialogClose(wxCloseEvent& WXUNUSED(event));
+		void OnButtonSortTabByPathClick(wxCommandEvent& WXUNUSED(event));
+		void OnButtonSaveAsClick(wxCommandEvent& WXUNUSED(event));
 		void OnKeyDown(wxKeyEvent& event);
 		//*)
-		void MadWinListDialogActivate( wxActivateEvent& event );
+		void MadWinListDialogActivate( wxActivateEvent& WXUNUSED(event) );
 		void OnWinListSelectionChanged(wxListEvent& event);
 		void InitWindowListIterms();
 		void SortTabs(long column);

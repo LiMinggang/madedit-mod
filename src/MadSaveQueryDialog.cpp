@@ -17,7 +17,7 @@
 
 #define SAVEQUERY_MIN_PATH_COL_WIDTH 80
 
-MadSaveQueryDialog::MadSaveQueryDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)
+MadSaveQueryDialog::MadSaveQueryDialog(wxWindow* parent,wxWindowID id,const wxPoint& WXUNUSED(pos),const wxSize& WXUNUSED(size))
 {
 	//(*Initialize(MadSaveQueryDialog)
 	wxBoxSizer* BoxSizer2;
@@ -135,37 +135,37 @@ void MadSaveQueryDialog::InitWindowListIterms()
 	GetSizer()->Fit( this );
 }
 
-void MadSaveQueryDialog::OnButtonOKClick(wxCommandEvent& event)
+void MadSaveQueryDialog::OnButtonOKClick(wxCommandEvent& WXUNUSED(event))
 {
 	EndModal(wxID_OK);
 }
 
-void MadSaveQueryDialog::OnButtonSaveNoneClick(wxCommandEvent& event)
+void MadSaveQueryDialog::OnButtonSaveNoneClick(wxCommandEvent& WXUNUSED(event))
 {
 	MadFileList->CheckAll(false);
 	EndModal(wxID_OK);
 }
 
-void MadSaveQueryDialog::OnButtonCancelClick(wxCommandEvent& event)
+void MadSaveQueryDialog::OnButtonCancelClick(wxCommandEvent& WXUNUSED(event))
 {
 	EndModal(wxID_CANCEL);
 }
 
-void MadSaveQueryDialog::OnButtonSelectAllClick(wxCommandEvent& event)
+void MadSaveQueryDialog::OnButtonSelectAllClick(wxCommandEvent& WXUNUSED(event))
 {
 	MadFileList->Freeze();
 	MadFileList->CheckAll(true);
 	MadFileList->Thaw();
 }
 
-void MadSaveQueryDialog::OnButtonDselectAllClick(wxCommandEvent& event)
+void MadSaveQueryDialog::OnButtonDselectAllClick(wxCommandEvent& WXUNUSED(event))
 {
 	MadFileList->Freeze();
 	MadFileList->CheckAll(false);
 	MadFileList->Thaw();
 }
 
-void MadSaveQueryDialog::OnButtonGoToClick(wxCommandEvent& event)
+void MadSaveQueryDialog::OnButtonGoToClick(wxCommandEvent& WXUNUSED(event))
 {
 	wxASSERT(MadFileList->GetSelectedItemCount() == 1);
 	long selRowId = MadFileList->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
@@ -174,7 +174,7 @@ void MadSaveQueryDialog::OnButtonGoToClick(wxCommandEvent& event)
 	m_MainFrame->SetPageFocus( pageId );
 }
 
-void MadSaveQueryDialog::OnMadFileListItemSelectChange(wxListEvent& event)
+void MadSaveQueryDialog::OnMadFileListItemSelectChange(wxListEvent& WXUNUSED(event))
 {
 	bool onlyone = (MadFileList->GetSelectedItemCount() == 1);
 	ButtonGoTo->Enable(onlyone);

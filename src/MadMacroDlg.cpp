@@ -25,7 +25,7 @@ extern int MadMessageBox(const wxString& message,
 								 wxWindow *parent = nullptr,
 								 int x = wxDefaultCoord, int y = wxDefaultCoord);
 MadMacroDlg *g_MadMacroDlg = nullptr;
-MadMacroDlg::MadMacroDlg(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)
+MadMacroDlg::MadMacroDlg(wxWindow* parent,wxWindowID id,const wxPoint& WXUNUSED(pos),const wxSize& WXUNUSED(size))
 {
 	wxSize pymacro(640, 240);
 	//(*Initialize(MadMacroDlg)
@@ -98,7 +98,7 @@ void MadMacroDlg::SetEncoding(const wxString &encname)
 	m_Pymacro->SetEncoding(encname);
 }
 
-void MadMacroDlg::OnWxButtonRunClick(wxCommandEvent& event)
+void MadMacroDlg::OnWxButtonRunClick(wxCommandEvent& WXUNUSED(event))
 {
 	if(g_ActiveMadEdit)
 	{
@@ -138,13 +138,13 @@ void MadMacroDlg::OnWxButtonRunClick(wxCommandEvent& event)
 	}
 }
 
-void MadMacroDlg::OnWxButtonCloseClick(wxCommandEvent& event)
+void MadMacroDlg::OnWxButtonCloseClick(wxCommandEvent& WXUNUSED(event))
 {
 	if(WxMemoOutput) WxMemoOutput->Clear();
 	EndModal(wxID_CANCEL);
 }
 
-void MadMacroDlg::OnWxButtonResultClick(wxCommandEvent& event)
+void MadMacroDlg::OnWxButtonResultClick(wxCommandEvent& WXUNUSED(event))
 {
 	m_debug= !m_debug;
 	WxMemoOutput->Show(m_debug);
@@ -156,7 +156,7 @@ void MadMacroDlg::OnWxButtonResultClick(wxCommandEvent& event)
 		WxButtonResult->SetLabel(_("Results >>"));
 }
 
-void MadMacroDlg::MadMacroDlgClose(wxCloseEvent& event)
+void MadMacroDlg::MadMacroDlgClose(wxCloseEvent& WXUNUSED(event))
 {
 	Destroy();
 	g_MadMacroDlg =	nullptr;

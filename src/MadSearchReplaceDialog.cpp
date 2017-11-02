@@ -74,7 +74,7 @@ const long MadSearchReplaceDialog::ID_RECENTREPLACETEXT20 = MadUniqueIDReserver:
 // Code added in  other places will be removed by wx-dvcpp
 ////Event Table Start
 
-MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSize& size )
+MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id, const wxPoint& WXUNUSED(pos), const wxSize& WXUNUSED(size) )
 {
 	m_EnableTransparency = true;/*CanSetTransparent();*/
 	//(*Initialize(MadSearchReplaceDialog)
@@ -410,7 +410,7 @@ void MadSearchReplaceDialog::MadSearchReplaceDialogClose( wxCloseEvent& event )
 	Destroy();
 }
 
-void MadSearchReplaceDialog::WxButtonCloseClick( wxCommandEvent& event )
+void MadSearchReplaceDialog::WxButtonCloseClick( wxCommandEvent& WXUNUSED(event) )
 {
 	Show( false );
 	( ( wxFrame* )wxTheApp->GetTopWindow() )->Raise();
@@ -422,7 +422,7 @@ void MadSearchReplaceDialog::WxButtonCloseClick( wxCommandEvent& event )
 	}
 }
 
-void MadSearchReplaceDialog::WxButtonFindNextClick( wxCommandEvent& event )
+void MadSearchReplaceDialog::WxButtonFindNextClick( wxCommandEvent& WXUNUSED(event) )
 {
 	// add: gogo, 19.09.2009
 	g_StatusBar->SetStatusText( wxEmptyString, 0 );
@@ -576,7 +576,7 @@ void MadSearchReplaceDialog::WxButtonFindNextClick( wxCommandEvent& event )
 	}
 }
 
-void MadSearchReplaceDialog::WxButtonFindPrevClick( wxCommandEvent& event )
+void MadSearchReplaceDialog::WxButtonFindPrevClick( wxCommandEvent& WXUNUSED(event) )
 {
 	extern MadEdit *g_ActiveMadEdit;
 
@@ -793,12 +793,12 @@ void MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown( wxKeyEvent& event )
 /*
  * WxBitmapButtonRecentFindTextClick
  */
-void MadSearchReplaceDialog::WxBitmapButtonRecentFindTextClick( wxCommandEvent& event )
+void MadSearchReplaceDialog::WxBitmapButtonRecentFindTextClick( wxCommandEvent& WXUNUSED(event) )
 {
 	PopupMenu( &WxPopupMenuRecentFindText );
 }
 
-void MadSearchReplaceDialog::WxBitmapButtonRecentReplaceTextClick( wxCommandEvent& event )
+void MadSearchReplaceDialog::WxBitmapButtonRecentReplaceTextClick( wxCommandEvent& WXUNUSED(event) )
 {
 	PopupMenu( &WxPopupMenuRecentReplaceText );
 }
@@ -987,7 +987,7 @@ void MadSearchReplaceDialog::WxCheckBoxFindHexClick( wxCommandEvent& event )
 /*
  * WxButtonReplaceClick
  */
-void MadSearchReplaceDialog::WxButtonReplaceClick( wxCommandEvent& event )
+void MadSearchReplaceDialog::WxButtonReplaceClick( wxCommandEvent& WXUNUSED(event) )
 {
 	if( g_ActiveMadEdit == nullptr )
 		return;
@@ -1164,13 +1164,13 @@ void MadSearchReplaceDialog::WxButtonReplaceClick( wxCommandEvent& event )
 /*
  * WxButtonReplaceAllClick
  */
-void MadSearchReplaceDialog::WxButtonReplaceAllClick( wxCommandEvent& event )
+void MadSearchReplaceDialog::WxButtonReplaceAllClick( wxCommandEvent& WXUNUSED(event) )
 {
 	if( g_ActiveMadEdit != nullptr )
 		ReplaceAll( g_ActiveMadEdit );
 }
 
-void MadSearchReplaceDialog::WxButtonReplaceAllInAllClick( wxCommandEvent& event )
+void MadSearchReplaceDialog::WxButtonReplaceAllInAllClick( wxCommandEvent& WXUNUSED(event) )
 {
 	size_t count = ( ( wxAuiNotebook* )g_MainFrame->m_Notebook )->GetPageCount();
 
@@ -1227,7 +1227,7 @@ void MadSearchReplaceDialog::MadSearchReplaceDialogActivate( wxActivateEvent& ev
 /*
  * WxButtonReplaceClick
  */
-void MadSearchReplaceDialog::WxButtonReplaceExpandClick( wxCommandEvent& event )
+void MadSearchReplaceDialog::WxButtonReplaceExpandClick( wxCommandEvent& WXUNUSED(event) )
 {
 	if( !m_ReplaceDlgUi )
 	{
@@ -1321,7 +1321,7 @@ void MadSearchReplaceDialog::WxCheckBoxSearchInSelectionClick( wxCommandEvent& e
 	UpdateSearchInSelection( event.IsChecked() );
 }
 
-void MadSearchReplaceDialog::WxButtonCountClick( wxCommandEvent& event )
+void MadSearchReplaceDialog::WxButtonCountClick( wxCommandEvent& WXUNUSED(event) )
 {
 	extern MadEdit *g_ActiveMadEdit;
 
@@ -1524,7 +1524,7 @@ void DisplayFindAllResult( wxTreeItemId &myroot, vector<wxFileOffset> &begpos, v
 	}
 }
 
-void MadSearchReplaceDialog::WxButtonFindAllClick( wxCommandEvent& event )
+void MadSearchReplaceDialog::WxButtonFindAllClick( wxCommandEvent& WXUNUSED(event) )
 {
 	extern MadEdit *g_ActiveMadEdit;
 
@@ -1532,7 +1532,7 @@ void MadSearchReplaceDialog::WxButtonFindAllClick( wxCommandEvent& event )
 		SearchAll( g_ActiveMadEdit );
 }
 
-void MadSearchReplaceDialog::WxButtonFindAllInAllClick( wxCommandEvent& event )
+void MadSearchReplaceDialog::WxButtonFindAllInAllClick( wxCommandEvent& WXUNUSED(event) )
 {
 	extern MadEdit *g_ActiveMadEdit;
 	size_t count = ( ( wxAuiNotebook* )g_MainFrame->m_Notebook )->GetPageCount();
@@ -1814,7 +1814,7 @@ void MadSearchReplaceDialog::ReplaceAll( MadEdit * madedit, bool needRec/*=true*
 /*
  * WxRadioLosingFocusClick
  */
-void MadSearchReplaceDialog::WxRadioLosingFocusSelect( wxCommandEvent& event )
+void MadSearchReplaceDialog::WxRadioLosingFocusSelect( wxCommandEvent& WXUNUSED(event) )
 {
 	// insert your code here
 	if( m_EnableTransparency )
@@ -1826,7 +1826,7 @@ void MadSearchReplaceDialog::WxRadioLosingFocusSelect( wxCommandEvent& event )
 /*
  * WxRadioAlwaysClick
  */
-void MadSearchReplaceDialog::WxRadioAlwaysSelect( wxCommandEvent& event )
+void MadSearchReplaceDialog::WxRadioAlwaysSelect( wxCommandEvent& WXUNUSED(event) )
 {
 	// insert your code here
 	if( m_EnableTransparency )
@@ -1850,7 +1850,7 @@ void MadSearchReplaceDialog::SetTransparency()
 /*
  * WxSliderTransDegreeScroll
  */
-void MadSearchReplaceDialog::WxSliderTransDegreeScroll( wxCommandEvent& event )
+void MadSearchReplaceDialog::WxSliderTransDegreeScroll( wxCommandEvent& WXUNUSED(event) )
 {
 	// insert your code here
 	wxByte trans = wxIMAGE_ALPHA_OPAQUE;
@@ -1887,7 +1887,7 @@ void MadSearchReplaceDialog::WxCheckBoxRegexClick( wxCommandEvent& event )
 	}
 }
 
-void MadSearchReplaceDialog::OnWxSliderInputSizerCmdScroll(wxCommandEvent& event)
+void MadSearchReplaceDialog::OnWxSliderInputSizerCmdScroll(wxCommandEvent& WXUNUSED(event))
 {
 	int times = WxSliderInputSizer->GetValue();
 	int width, height = 0;

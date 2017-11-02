@@ -79,7 +79,7 @@ public:
     {
         return &m_Options;
     }
-    virtual void UpdatePossibleValues(SpellCheckEngineOption& OptionDependency, SpellCheckEngineOption& OptionToUpdate)
+    virtual void UpdatePossibleValues(SpellCheckEngineOption& WXUNUSED(OptionDependency), SpellCheckEngineOption& WXUNUSED(OptionToUpdate))
     {
         wxASSERT(false);
     }

@@ -147,7 +147,7 @@ void SetItemFont(wxListCtrl *listctrl, long item, wxFont &font)
 //(*IdInit(MadHighlightingDialog)
 //*)
 
-MadHighlightingDialog::MadHighlightingDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)
+MadHighlightingDialog::MadHighlightingDialog(wxWindow* parent,wxWindowID WXUNUSED(id),const wxPoint& WXUNUSED(pos),const wxSize& WXUNUSED(size))
 	: m_Syntax(nullptr)
 {
 	//(*Initialize(MadHighlightingDialog)
@@ -664,7 +664,7 @@ void MadHighlightingDialog::WxCheckBoxUnderlineClick(wxCommandEvent& event)
 /*
  * WxButtonFCClick
  */
-void MadHighlightingDialog::WxButtonFCClick(wxCommandEvent& event)
+void MadHighlightingDialog::WxButtonFCClick(wxCommandEvent& WXUNUSED(event))
 {
     wxColour color=GetColourFromUser(WxListCtrlKeyword->GetItemTextColour(g_Index), WxStaticText3->GetLabel());
     if(color.Ok())
@@ -680,7 +680,7 @@ void MadHighlightingDialog::WxButtonFCClick(wxCommandEvent& event)
 /*
  * WxButtonBCClick
  */
-void MadHighlightingDialog::WxButtonBCClick(wxCommandEvent& event)
+void MadHighlightingDialog::WxButtonBCClick(wxCommandEvent& WXUNUSED(event))
 {
     wxColour color=GetColourFromUser(WxPanelBC->GetBackgroundColour(), WxStaticText4->GetLabel());
     if(color.Ok())
@@ -879,7 +879,7 @@ void MadHighlightingDialog::FreeSyntax(bool restore)
 /*
  * WxButtonLoadClick
  */
-void MadHighlightingDialog::WxButtonLoadClick(wxCommandEvent& event)
+void MadHighlightingDialog::WxButtonLoadClick(wxCommandEvent& WXUNUSED(event))
 {
     if(MadSyntax::LoadScheme(WxComboBoxScheme->GetValue(), g_Syntax))
     {
@@ -900,7 +900,7 @@ void MadHighlightingDialog::WxButtonLoadClick(wxCommandEvent& event)
 /*
  * WxButtonSaveClick
  */
-void MadHighlightingDialog::WxButtonSaveClick(wxCommandEvent& event)
+void MadHighlightingDialog::WxButtonSaveClick(wxCommandEvent& WXUNUSED(event))
 {
     wxString schname = WxComboBoxScheme->GetValue();
     if(MadSyntax::SaveScheme(schname, g_Syntax))
@@ -923,7 +923,7 @@ void MadHighlightingDialog::WxButtonSaveClick(wxCommandEvent& event)
 /*
  * WxButtonDeleteClick
  */
-void MadHighlightingDialog::WxButtonDeleteClick(wxCommandEvent& event)
+void MadHighlightingDialog::WxButtonDeleteClick(wxCommandEvent& WXUNUSED(event))
 {
     if(MadSyntax::DeleteScheme(WxComboBoxScheme->GetValue()))
     {

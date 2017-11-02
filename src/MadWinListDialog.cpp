@@ -133,13 +133,13 @@ void MadWinListDialog::InitWindowListIterms()
 	GetSizer()->Fit( this );
 }
 
-void MadWinListDialog::MadWinListDialogActivate( wxActivateEvent& event )
+void MadWinListDialog::MadWinListDialogActivate( wxActivateEvent& WXUNUSED(event) )
 {
 	InitWindowListIterms();
 	ResetButtonStatus();
 }
 
-void MadWinListDialog::OnButtonActivateClick(wxCommandEvent& event)
+void MadWinListDialog::OnButtonActivateClick(wxCommandEvent& WXUNUSED(event))
 {
 	wxASSERT(MadWindowsList->GetSelectedItemCount() == 1);
 	long selRowId = MadWindowsList->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
@@ -168,19 +168,19 @@ void MadWinListDialog::SaveFile(bool saveas/* = false*/)
 		m_MainFrame->SaveFile(pageId, saveas);
 	}
 }
-void MadWinListDialog::OnButtonSaveClick(wxCommandEvent& event)
+void MadWinListDialog::OnButtonSaveClick(wxCommandEvent& WXUNUSED(event))
 {
 	wxASSERT(MadWindowsList->GetSelectedItemCount() > 0);
 	SaveFile(false);
 }
 
-void MadWinListDialog::OnButtonSaveAsClick(wxCommandEvent& event)
+void MadWinListDialog::OnButtonSaveAsClick(wxCommandEvent& WXUNUSED(event))
 {
 	wxASSERT(MadWindowsList->GetSelectedItemCount() > 0);
 	SaveFile(true);
 }
 
-void MadWinListDialog::OnButtonCloseWindowsClick(wxCommandEvent& event)
+void MadWinListDialog::OnButtonCloseWindowsClick(wxCommandEvent& WXUNUSED(event))
 {
 	wxASSERT(MadWindowsList->GetSelectedItemCount() > 0);
 	std::vector<long> items, pages; 
@@ -291,22 +291,22 @@ void MadWinListDialog::SortTabs(long column)
 	}
 }
 
-void MadWinListDialog::OnButtonSortTabByNameClick(wxCommandEvent& event)
+void MadWinListDialog::OnButtonSortTabByNameClick(wxCommandEvent& WXUNUSED(event))
 {
 	SortTabs(COL_TABNAME);
 }
 
-void MadWinListDialog::OnButtonSortTabByPathClick(wxCommandEvent& event)
+void MadWinListDialog::OnButtonSortTabByPathClick(wxCommandEvent& WXUNUSED(event))
 {
 	SortTabs(COL_PATH);
 }
 
-void MadWinListDialog::OnButtonOkClick(wxCommandEvent& event)
+void MadWinListDialog::OnButtonOkClick(wxCommandEvent& WXUNUSED(event))
 {
     Show( false );
 }
 
-void MadWinListDialog::OnMadWinListDialogClose(wxCloseEvent& event)
+void MadWinListDialog::OnMadWinListDialogClose(wxCloseEvent& WXUNUSED(event))
 {
 	g_WinListDialog = nullptr;
     Destroy();

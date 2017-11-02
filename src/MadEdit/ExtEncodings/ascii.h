@@ -23,7 +23,7 @@
  */
 
 static int
-ascii_mbtowc (ucs4_t *pwc, const unsigned char *s, int n)
+ascii_mbtowc (ucs4_t *pwc, const unsigned char *s, int WXUNUSED(n))
 {
   unsigned char c = *s;
   if (c < 0x80) {

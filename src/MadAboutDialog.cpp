@@ -42,7 +42,7 @@ const wxChar   * g_MadEditModCredits[g_num_contributers][2] = {
 	wxT("Others"), _("Translation/patch contributers"),
 };
 
-MadAboutDialog::MadAboutDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)
+MadAboutDialog::MadAboutDialog(wxWindow* parent,wxWindowID id,const wxPoint& WXUNUSED(pos),const wxSize& WXUNUSED(size))
 {
 	//(*Initialize(MadAboutDialog)
 	wxBoxSizer* BoxSizer1;
@@ -112,10 +112,10 @@ MadAboutDialog::MadAboutDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos
 	WxListCredits->Freeze();
 	wxListItem info;
 	long tmp;
-	for( size_t id = 0; id < g_num_contributers; ++id )
+	for( size_t idx = 0; idx < g_num_contributers; ++idx )
 	{
-		wxString name(g_MadEditModCredits[ id ][0]);
-		wxString role(wxGetTranslation(g_MadEditModCredits[ id ][1]));
+		wxString name(g_MadEditModCredits[ idx ][0]);
+		wxString role(wxGetTranslation(g_MadEditModCredits[ idx ][1]));
 		
 		info.Clear();
 		info.m_text = name;
@@ -139,7 +139,7 @@ MadAboutDialog::~MadAboutDialog()
 	//*)
 }
 
-void MadAboutDialog::MadAboutDialogClose(wxCloseEvent& event)
+void MadAboutDialog::MadAboutDialogClose(wxCloseEvent& WXUNUSED(event))
 {
     Destroy();
 }

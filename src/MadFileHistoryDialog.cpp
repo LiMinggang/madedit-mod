@@ -20,7 +20,7 @@
 
 MadFileHistoryDialog *g_RecentOpenedFileListDialog = nullptr;
 
-MadFileHistoryDialog::MadFileHistoryDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)
+MadFileHistoryDialog::MadFileHistoryDialog(wxWindow* parent,wxWindowID id, const wxPoint& WXUNUSED(pos), const wxSize& WXUNUSED(size))
 {
 	//(*Initialize(MadFileHistoryDialog)
 	wxBoxSizer* BoxSizer2;
@@ -121,24 +121,24 @@ void MadFileHistoryDialog::ResetWindowListIterms()
 	GetSizer()->Fit( this );
 }
 
-void MadFileHistoryDialog::OnButtonOKClick(wxCommandEvent& event)
+void MadFileHistoryDialog::OnButtonOKClick(wxCommandEvent& WXUNUSED(event))
 {
 	EndModal(wxID_OK);
 }
 
-void MadFileHistoryDialog::OnButtonCancelClick(wxCommandEvent& event)
+void MadFileHistoryDialog::OnButtonCancelClick(wxCommandEvent& WXUNUSED(event))
 {
 	EndModal(wxID_CANCEL);
 }
 
-void MadFileHistoryDialog::OnButtonSelectAllClick(wxCommandEvent& event)
+void MadFileHistoryDialog::OnButtonSelectAllClick(wxCommandEvent& WXUNUSED(event))
 {
 	MadFileList->Freeze();
 	MadFileList->CheckAll(true);
 	MadFileList->Thaw();
 }
 
-void MadFileHistoryDialog::OnButtonDselectAllClick(wxCommandEvent& event)
+void MadFileHistoryDialog::OnButtonDselectAllClick(wxCommandEvent& WXUNUSED(event))
 {
 	MadFileList->Freeze();
 	MadFileList->CheckAll(false);
@@ -163,7 +163,7 @@ void MadFileHistoryDialog::GetCheckedItemsData(wxArrayString & selectedItems, bo
 	}
 }
 
-void MadFileHistoryDialog::MadFileHistoryDialogClose(wxCloseEvent& event)
+void MadFileHistoryDialog::MadFileHistoryDialogClose(wxCloseEvent& WXUNUSED(event))
 {
 	g_RecentOpenedFileListDialog = nullptr;
 	Destroy();

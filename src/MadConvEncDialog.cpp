@@ -39,7 +39,7 @@ MadConvEncDialog *g_ConvEncDialog=nullptr;
 //(*IdInit(MadConvEncDialog)
 //*)
 
-MadConvEncDialog::MadConvEncDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)
+MadConvEncDialog::MadConvEncDialog(wxWindow* parent,wxWindowID id,const wxPoint& WXUNUSED(pos),const wxSize& WXUNUSED(size))
 {
 	//(*Initialize(MadConvEncDialog)
 	wxBoxSizer* BoxSizer4;

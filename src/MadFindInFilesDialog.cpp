@@ -59,7 +59,7 @@ const long MadFindInFilesDialog::ID_RECENTFINDTEXT20 = MadUniqueIDReserver::Inst
 const long MadFindInFilesDialog::ID_RECENTREPLACETEXT1 = MadUniqueIDReserver::Instance().RecentReplaceTextID1();
 const long MadFindInFilesDialog::ID_RECENTREPLACETEXT20 = MadUniqueIDReserver::Instance().RecentReplaceTextID20();
 
-MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)
+MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID WXUNUSED(id),const wxPoint& WXUNUSED(pos),const wxSize& WXUNUSED(size))
 {
 	//(*Initialize(MadFindInFilesDialog)
 	wxBoxSizer* BoxSizer4;
@@ -358,14 +358,14 @@ void MadFindInFilesDialog::UpdateCheckBoxByCBHex( bool check )
 	}
 }
 
-void MadFindInFilesDialog::WxBitmapButtonRecentFindTextClick( wxCommandEvent& event )
+void MadFindInFilesDialog::WxBitmapButtonRecentFindTextClick( wxCommandEvent& WXUNUSED(event) )
 {
 	wxASSERT(g_SearchReplaceDialog != nullptr);
 
 	PopupMenu( &g_SearchReplaceDialog->WxPopupMenuRecentFindText );
 }
 
-void MadFindInFilesDialog::WxBitmapButtonRecentReplaceTextClick( wxCommandEvent& event )
+void MadFindInFilesDialog::WxBitmapButtonRecentReplaceTextClick( wxCommandEvent& WXUNUSED(event) )
 {
 	wxASSERT(g_SearchReplaceDialog != nullptr);
 
@@ -409,7 +409,7 @@ void MadFindInFilesDialog::WxCheckBoxFindHexClick( wxCommandEvent& event )
 /*
  * WxButtonFindClick
  */
-void MadFindInFilesDialog::WxButtonFindClick( wxCommandEvent& event )
+void MadFindInFilesDialog::WxButtonFindClick( wxCommandEvent& WXUNUSED(event) )
 {
 	wxString text;
 	m_FindText->GetText( text );
@@ -425,7 +425,7 @@ void MadFindInFilesDialog::WxButtonFindClick( wxCommandEvent& event )
 /*
  * WxButtonReplaceClick
  */
-void MadFindInFilesDialog::WxButtonReplaceClick( wxCommandEvent& event )
+void MadFindInFilesDialog::WxButtonReplaceClick( wxCommandEvent& WXUNUSED(event) )
 {
 	wxString text, text2;
 	m_FindText->GetText( text );
@@ -448,7 +448,7 @@ void MadFindInFilesDialog::WxButtonReplaceClick( wxCommandEvent& event )
 /*
  * WxButtonDirClick
  */
-void MadFindInFilesDialog::WxButtonDirClick( wxCommandEvent& event )
+void MadFindInFilesDialog::WxButtonDirClick( wxCommandEvent& WXUNUSED(event) )
 {
 	wxString defdir = WxComboBoxDir->GetValue();
 
@@ -900,7 +900,7 @@ void MadFindInFilesDialog::WxCheckBoxEnableReplaceClick( wxCommandEvent& event )
 /*
  * WxButtonActiveDirClick
  */
-void MadFindInFilesDialog::WxButtonActiveDirClick( wxCommandEvent& event )
+void MadFindInFilesDialog::WxButtonActiveDirClick( wxCommandEvent& WXUNUSED(event) )
 {
 	extern MadEdit *g_ActiveMadEdit;
 

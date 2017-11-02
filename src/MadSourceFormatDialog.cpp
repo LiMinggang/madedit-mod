@@ -96,7 +96,7 @@ static wxString bracket_style[aspsCustom + 1] =
 	wxT( "#include <iostream>\n\nint Foo(bool isBar) {\n    if (isBar) {\n        bar()\n        return 1; }\n    else\n        return 0; }\n" ),
 };
 
-MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)
+MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID WXUNUSED(id),const wxPoint& WXUNUSED(pos),const wxSize& WXUNUSED(size))
 {
 	//(*Initialize(MadSourceFormatDialog)
 	wxAuiNotebook* AuiNotebook1;
@@ -510,7 +510,7 @@ MadSourceFormatDialog::~MadSourceFormatDialog()
 	//*)
 }
 
-void MadSourceFormatDialog::OnRadioBoxBracketStyleSelect( wxCommandEvent& event )
+void MadSourceFormatDialog::OnRadioBoxBracketStyleSelect( wxCommandEvent& WXUNUSED(event) )
 {
 	long style = RadioBoxBracketStyle->GetSelection();
 #ifdef MADEDIT_ENABLE_STC
@@ -555,14 +555,14 @@ void MadSourceFormatDialog::OnRadioBoxBracketStyleSelect( wxCommandEvent& event 
 #endif
 }
 
-void MadSourceFormatDialog::OnCheckBreakLinesClick( wxCommandEvent& event )
+void MadSourceFormatDialog::OnCheckBreakLinesClick( wxCommandEvent& WXUNUSED(event) )
 {
 	bool bb = CheckBreakLines->GetValue();
 	EditSFMaxLineLength->Enable( bb );
 	CheckBreakAfterLogical->Enable( bb );
 }
 
-void MadSourceFormatDialog::OnCheckBreakBlocksClick( wxCommandEvent& event )
+void MadSourceFormatDialog::OnCheckBreakBlocksClick( wxCommandEvent& WXUNUSED(event) )
 {
 	bool bb =  CheckBreakBlocks->GetValue();
 	CheckBreakBlocksAll->Enable( bb );

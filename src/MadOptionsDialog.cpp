@@ -176,7 +176,7 @@ typedef struct {
 #define SET_CONTROLPARENT(pWin)
 #endif
 
-MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID id)
+MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 {
 #if defined(__WXMSW__) && (wxMAJOR_VERSION >= 3)
 	std::vector< wxWindow * > controls;
@@ -1361,7 +1361,7 @@ void MadOptionsDialog::LoadOptions(void)
 	cfg->SetPath( oldpath );
 }
 
-void MadOptionsDialog::ButtonOKClick(wxCommandEvent& event)
+void MadOptionsDialog::ButtonOKClick(wxCommandEvent& WXUNUSED(event))
 {
 	long lo;
 	bool error = false;
@@ -1416,7 +1416,7 @@ void MadOptionsDialog::ButtonOKClick(wxCommandEvent& event)
 	if( !error ) { EndModal( wxID_OK ); }
 }
 
-void MadOptionsDialog::ButtonCancelClick(wxCommandEvent& event)
+void MadOptionsDialog::ButtonCancelClick(wxCommandEvent& WXUNUSED(event))
 {
 	EndModal(wxID_CANCEL);
 }
@@ -1583,7 +1583,7 @@ void MadOptionsDialog::UpdateKeyHint()
 	}
 }
 
-void MadOptionsDialog::ButtonAddKeyClick(wxCommandEvent& event)
+void MadOptionsDialog::ButtonAddKeyClick(wxCommandEvent& WXUNUSED(event))
 {
 	if(g_SelectedCommandItem!=nullptr && g_SelectedCommandItem!=g_CommandItemOfNewKey)
 	{
@@ -1623,7 +1623,7 @@ void MadOptionsDialog::ButtonAddKeyClick(wxCommandEvent& event)
 	}
 }
 
-void MadOptionsDialog::ButtonDeleteKeyClick(wxCommandEvent& event)
+void MadOptionsDialog::ButtonDeleteKeyClick(wxCommandEvent& WXUNUSED(event))
 {
 	if(g_SelectedCommandItem!=nullptr && g_SelectedKeyId >= 0)
 	{
@@ -1640,7 +1640,7 @@ void MadOptionsDialog::ButtonDeleteKeyClick(wxCommandEvent& event)
 	}
 }
 
-void MadOptionsDialog::ButtonShowInMenuClick(wxCommandEvent& event)
+void MadOptionsDialog::ButtonShowInMenuClick(wxCommandEvent& WXUNUSED(event))
 {
 	// move the selected key to first element of ListBoxKeys
 	if(g_SelectedCommandItem!=nullptr && g_SelectedCommandItem->cmddata->menu_id>0 && g_SelectedKeyId > 0)
@@ -1660,7 +1660,7 @@ void MadOptionsDialog::ButtonShowInMenuClick(wxCommandEvent& event)
 	}
 }
 
-void MadOptionsDialog::ButtonDateTimeClick(wxCommandEvent& event)
+void MadOptionsDialog::ButtonDateTimeClick(wxCommandEvent& WXUNUSED(event))
 {
 	PopupMenu(&PopupMenuDateTimeMark);
 }
@@ -1679,10 +1679,10 @@ void MadOptionsDialog::DateTimeMarkClick(wxCommandEvent& event)
 }
 
 #if ENABLE_BITMAP_THUARI
-void MadOptionsDialog::ButtonBitmapDirClick( wxCommandEvent& event )
+void MadOptionsDialog::ButtonBitmapDirClick( wxCommandEvent& WXUNUSED(event) )
 {
 }
-void MadOptionsDialog::ButtonThesauriDirClick( wxCommandEvent& event )
+void MadOptionsDialog::ButtonThesauriDirClick( wxCommandEvent& WXUNUSED(event) )
 {
 	wxString defdir = SpellCheckerManager::Instance().GetThesaurusPath();
 
@@ -1699,7 +1699,7 @@ void MadOptionsDialog::ButtonThesauriDirClick( wxCommandEvent& event )
 }
 #endif
 
-void MadOptionsDialog::ButtonDictionaryDirClick( wxCommandEvent& event )
+void MadOptionsDialog::ButtonDictionaryDirClick( wxCommandEvent& WXUNUSED(event) )
 {
 	wxString defdir = SpellCheckerManager::Instance().GetDictionaryPath();
 
@@ -1733,7 +1733,7 @@ void MadOptionsDialog::InitDictionaryChoice( const wxString &path/* = wxEmptyStr
 	{ ChoiceDictionary->Select( sel ); }
 }
 
-void MadOptionsDialog::EditDictionaryDirTextEnter( wxCommandEvent& event )
+void MadOptionsDialog::EditDictionaryDirTextEnter( wxCommandEvent& WXUNUSED(event) )
 {
 	wxString path = EditDictionaryDir->GetValue();
 
@@ -1747,7 +1747,7 @@ void MadOptionsDialog::EditDictionaryDirTextEnter( wxCommandEvent& event )
 	}
 }
 
-void MadOptionsDialog::ChoiceDictionarySelect( wxCommandEvent& event )
+void MadOptionsDialog::ChoiceDictionarySelect( wxCommandEvent& WXUNUSED(event) )
 {
 	wxString dictDesc = ChoiceDictionary->GetString( ChoiceDictionary->GetSelection() );
 	wxString dictName = SpellCheckerManager::Instance().GetDictionaryName( dictDesc );
@@ -1758,17 +1758,17 @@ void MadOptionsDialog::ChoiceDictionarySelect( wxCommandEvent& event )
 	}
 }
 
-void MadOptionsDialog::CheckBoxMouseSelectToCopyClick( wxCommandEvent& event )
+void MadOptionsDialog::CheckBoxMouseSelectToCopyClick( wxCommandEvent& WXUNUSED(event) )
 {
 	CheckBoxCtrlWithMouseToSelect->Enable( CheckBoxMouseSelectToCopy->GetValue() );
 }
 
-void MadOptionsDialog::CheckBoxAutoCompletePairClick( wxCommandEvent& event )
+void MadOptionsDialog::CheckBoxAutoCompletePairClick( wxCommandEvent& WXUNUSED(event) )
 {
 	CheckBoxInsertPairForSelection->Enable( CheckBoxAutoCompletePair->GetValue() );
 }
 
-void MadOptionsDialog::EnableAutoSaveClick( wxCommandEvent& event )
+void MadOptionsDialog::EnableAutoSaveClick( wxCommandEvent& WXUNUSED(event) )
 {
 	EditAutoSaveTimeout->Enable( CheckBoxEnableAutoSave->GetValue() );
 }

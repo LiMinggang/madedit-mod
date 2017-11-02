@@ -35,7 +35,7 @@ extern void RecordAsMadMacro(MadEdit *, const wxString&, bool=false);
 //(*IdInit(MadWordCountDialog)
 //*)
 
-MadWordCountDialog::MadWordCountDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)
+MadWordCountDialog::MadWordCountDialog(wxWindow* parent,wxWindowID WXUNUSED(id),const wxPoint& WXUNUSED(pos),const wxSize& WXUNUSED(size))
 {
 	//(*Initialize(MadWordCountDialog)
 	wxBoxSizer* BoxSizer1;
@@ -120,7 +120,7 @@ MadWordCountDialog::~MadWordCountDialog()
 }
 
 
-void MadWordCountDialog::MadWordCountDialogClose(wxCloseEvent& event)
+void MadWordCountDialog::MadWordCountDialogClose(wxCloseEvent& WXUNUSED(event))
 {
 	Destroy();
 }

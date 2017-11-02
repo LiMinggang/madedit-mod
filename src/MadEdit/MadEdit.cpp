@@ -4250,7 +4250,7 @@ void MadEdit::GetWordFromCaretPos( wxString &ws )
 	SelectWordFromCaretPos( &ws, pos, false );
 }
 
-void MadEdit::SelectLineFromCaretPos( wxString *ws, bool caretToBegOfSel )
+void MadEdit::SelectLineFromCaretPos( wxString * WXUNUSED(ws), bool caretToBegOfSel )
 {
 	m_ZeroSelection = false;
 	if( m_EditMode == emColumnMode && m_CaretPos.extraspaces )
@@ -10936,7 +10936,7 @@ void MadEdit::OnMouseLeaveWindow( wxMouseEvent &evt )
 	evt.Skip();
 }
 
-void MadEdit::OnMouseCaptureLost( wxMouseCaptureLostEvent &evt )
+void MadEdit::OnMouseCaptureLost( wxMouseCaptureLostEvent & WXUNUSED(evt) )
 {
 	DBOUT( "CaptureLost\n" );
 

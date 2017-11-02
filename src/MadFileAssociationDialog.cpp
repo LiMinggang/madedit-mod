@@ -318,7 +318,7 @@ void AddTypeToPredefined( wxListBox *WxListBoxAssociated,
 //(*IdInit(MadFileAssociationDialog)
 //*)
 
-MadFileAssociationDialog::MadFileAssociationDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)
+MadFileAssociationDialog::MadFileAssociationDialog(wxWindow* parent,wxWindowID WXUNUSED(id),const wxPoint& WXUNUSED(pos),const wxSize& WXUNUSED(size))
 {
 	//(*Initialize(MadFileAssociationDialog)
 	wxBoxSizer* BoxSizer4;
@@ -414,41 +414,41 @@ MadFileAssociationDialog::~MadFileAssociationDialog()
 	//*)
 }
 
-void MadFileAssociationDialog::MadFileAssociationDialogClose(wxCloseEvent& event)
+void MadFileAssociationDialog::MadFileAssociationDialogClose(wxCloseEvent& WXUNUSED(event))
 {
 	Destroy();
 }
 
 
-void MadFileAssociationDialog::WxListBoxAssociatedDoubleClicked(wxCommandEvent& event)
+void MadFileAssociationDialog::WxListBoxAssociatedDoubleClicked(wxCommandEvent& WXUNUSED(event))
 {
 	wxArrayString sel;
 	GetListBoxSelections(WxListBoxAssociated, sel);
 	AddTypeToPredefined(WxListBoxAssociated, WxListBoxPredefined, sel);
 }
 
-void MadFileAssociationDialog::WxListBoxPredefinedDoubleClicked(wxCommandEvent& event)
+void MadFileAssociationDialog::WxListBoxPredefinedDoubleClicked(wxCommandEvent& WXUNUSED(event))
 {
 	wxArrayString sel;
 	GetListBoxSelections(WxListBoxPredefined, sel);
 	AddTypeToAssociated(WxListBoxAssociated, WxListBoxPredefined, sel);
 }
 
-void MadFileAssociationDialog::WxButtonAddClick(wxCommandEvent& event)
+void MadFileAssociationDialog::WxButtonAddClick(wxCommandEvent& WXUNUSED(event))
 {
 	wxArrayString sel;
 	GetListBoxSelections(WxListBoxPredefined, sel);
 	AddTypeToAssociated(WxListBoxAssociated, WxListBoxPredefined, sel);
 }
 
-void MadFileAssociationDialog::WxButtonRemoveClick(wxCommandEvent& event)
+void MadFileAssociationDialog::WxButtonRemoveClick(wxCommandEvent& WXUNUSED(event))
 {
 	wxArrayString sel;
 	GetListBoxSelections(WxListBoxAssociated, sel);
 	AddTypeToPredefined(WxListBoxAssociated, WxListBoxPredefined, sel);
 }
 
-void MadFileAssociationDialog::WxButtonAddCustomClick(wxCommandEvent& event)
+void MadFileAssociationDialog::WxButtonAddCustomClick(wxCommandEvent& WXUNUSED(event))
 {
 	wxString type = WxEditCustomType->GetValue();
 	type.Trim(false);
@@ -465,7 +465,7 @@ void MadFileAssociationDialog::WxButtonAddCustomClick(wxCommandEvent& event)
 	}
 }
 
-void MadFileAssociationDialog::WxButtonOKClick(wxCommandEvent& event)
+void MadFileAssociationDialog::WxButtonOKClick(wxCommandEvent& WXUNUSED(event))
 {
 	wxConfigBase *cfg=wxConfigBase::Get(false);
 	wxString oldpath=cfg->GetPath();

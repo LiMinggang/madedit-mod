@@ -284,7 +284,7 @@ wxConnectionBase *MadAppSrv::OnAcceptConnection( const wxString& topic )
 }
 
 // Opens a file passed from another instance
-bool MadAppConn::OnExecute( const wxString& topic,
+bool MadAppConn::OnExecute( const wxString& WXUNUSED(topic),
 #if wxMAJOR_VERSION < 2 || (wxMAJOR_VERSION == 2 && wxMINOR_VERSION < 9)
 	wxChar* data,
 	int WXUNUSED(size),

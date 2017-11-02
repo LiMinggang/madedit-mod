@@ -64,7 +64,7 @@ MadSortDialog::~MadSortDialog()
 }
 
 
-void MadSortDialog::MadSortDialogClose(wxCloseEvent& event)
+void MadSortDialog::MadSortDialogClose(wxCloseEvent& WXUNUSED(event))
 {
     Destroy();
 }

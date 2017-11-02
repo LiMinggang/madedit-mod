@@ -32,7 +32,7 @@
 //(*IdInit(MadPurgeHistoryDialog)
 //*)
 
-MadPurgeHistoryDialog::MadPurgeHistoryDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)
+MadPurgeHistoryDialog::MadPurgeHistoryDialog(wxWindow* parent,wxWindowID WXUNUSED(id),const wxPoint& WXUNUSED(pos),const wxSize& WXUNUSED(size))
 {
 	//(*Initialize(MadPurgeHistoryDialog)
 	wxBoxSizer* BoxSizer2;
@@ -103,12 +103,12 @@ MadPurgeHistoryDialog::~MadPurgeHistoryDialog()
 }
 
 
-void MadPurgeHistoryDialog::MadPurgeHistoryDialogClose(wxCloseEvent& event)
+void MadPurgeHistoryDialog::MadPurgeHistoryDialogClose(wxCloseEvent& WXUNUSED(event))
 {
 	Destroy();
 }
 
-void MadPurgeHistoryDialog::WxButtonOKClick(wxCommandEvent& event)
+void MadPurgeHistoryDialog::WxButtonOKClick(wxCommandEvent& WXUNUSED(event))
 {
     EndModal(wxID_OK);
 }
@@ -116,7 +116,7 @@ void MadPurgeHistoryDialog::WxButtonOKClick(wxCommandEvent& event)
 /*
  * wxButtonCancelClick
  */
-void MadPurgeHistoryDialog::WxButtonCancelClick(wxCommandEvent& event)
+void MadPurgeHistoryDialog::WxButtonCancelClick(wxCommandEvent& WXUNUSED(event))
 {
     // insert your code here
     EndModal(wxID_CANCEL);
