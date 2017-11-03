@@ -1896,12 +1896,12 @@ void MadEdit::PaintText( wxDC *dc, int x, int y, const ucs4_t *text, const int *
 
 	if( !InPrinting() )
 	{
-		pu = text;
-		pw = width;
-		wcount = 0, wcstart = 0;
-		nowright = x;
-		nowleft = x;
-		nowleftend = false;
+		const ucs4_t *pu = text;
+		const int    *pw = width;
+		int wcount = 0, wcstart = 0;
+		int nowright = x;
+		int nowleft = x;
+		bool nowleftend = false;
 		wxString str;
 
 		for( int i = count; i > 0 && nowright < maxright; --i, ++pu, ++wcount )
@@ -1936,9 +1936,9 @@ void MadEdit::PaintText( wxDC *dc, int x, int y, const ucs4_t *text, const int *
 	//other platform or printing
 	{
 		wxString text1( wxT( '1' ) );
-		pu = text;
-		pw = width;
-		nowleft = x;
+		const ucs4_t  *pu = text;
+		const int     *pw = width;
+		int nowleft = x;
 
 		for( int i = count; i > 0 && nowleft < maxright; --i, nowleft += *pw, ++pu, ++pw )
 		{
