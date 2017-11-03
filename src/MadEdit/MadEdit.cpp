@@ -1959,7 +1959,7 @@ void MadEdit::PaintText( wxDC *dc, int x, int y, const ucs4_t *text, const int *
 		wxColour color( 255, 0, 0 ); /*RED*/
 		int delta = 3, yd[2] = {3, 0};
 		dc->SetPen( *wxThePenList->FindOrCreatePen( color, 1, wxPENSTYLE_SOLID/*wxDOT*/ ) );
-		nowleft = ( x > minleft ? x : minleft );
+		int nowleft = ( x > minleft ? x : minleft );
 
 		for( int i = 0; delta < totalwidth; ++i )
 		{
