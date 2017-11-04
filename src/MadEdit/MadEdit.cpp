@@ -2492,32 +2492,33 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 						}
 					}
 #endif
-					if( m_DisplayBookmark )
-					{
-						// add: gogo, 27.09.2009
-						if( m_Lines->m_LineList.IsBookmarked( lineiter ) )
-						{
-							int b = m_RowHeight < 24 ? 1 : m_RowHeight / 24;
-							
-							MadAttributes* attr = GetSyntax()->GetAttributes(aeBookmark);
-							if(attr)
-							{
-								if(attr->color != wxNullColour)
-									clr = &attr->color;
-								if(attr->bgcolor != wxNullColour)
-									bgclr = &attr->bgcolor;
-							}
-							dc->SetPen(*wxThePenList->FindOrCreatePen(*clr, b, wxPENSTYLE_SOLID));
-							dc->SetBrush(*wxTheBrushList->FindOrCreateBrush(*bgclr));
-							
-							wxRect rdrect(l /*+ offset*/, row_top + b, lwidth - b, m_RowHeight - b * 3 / 2);
-							double r = m_RowHeight < 18 ? 3.0 : m_RowHeight / 6.0;
-							dc->DrawRoundedRectangle(rdrect, r);
-						}
-					}
 
 					if( displaylinenumber )
 					{
+						if( m_DisplayBookmark )
+						{
+							// add: gogo, 27.09.2009
+							if( m_Lines->m_LineList.IsBookmarked( lineiter ) )
+							{
+								int b = m_RowHeight < 24 ? 1 : m_RowHeight / 24;
+								
+								MadAttributes* attr = GetSyntax()->GetAttributes(aeBookmark);
+								if(attr)
+								{
+									if(attr->color != wxNullColour)
+										clr = &attr->color;
+									if(attr->bgcolor != wxNullColour)
+										bgclr = &attr->bgcolor;
+								}
+								dc->SetPen(*wxThePenList->FindOrCreatePen(*clr, b, wxPENSTYLE_SOLID));
+								dc->SetBrush(*wxTheBrushList->FindOrCreateBrush(*bgclr));
+								
+								wxRect rdrect(l /*+ offset*/, row_top + b, lwidth - b, m_RowHeight - b * 3 / 2);
+								double r = m_RowHeight < 18 ? 3.0 : m_RowHeight / 6.0;
+								dc->DrawRoundedRectangle(rdrect, r);
+							}
+						}
+
 						lnums = wxT('%');
 						lnums += wxString::Format(wxT("%u"), ncount);
 						lnums += wxT('d');

@@ -134,6 +134,7 @@ Fix: Wrong MadPython expression recorded in Search/Replace
 Fix: Clean deprecated function wxNewId
 Fix: Complier warnings from VC(L4)
 Fix: Restore InfoWindow instead of hide it if it was there last time
+Fix: Display bookmark on the first sub-row of a wrapped line
 Other minor improvements
 
 Mod v0.4.10
