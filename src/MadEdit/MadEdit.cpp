@@ -10450,7 +10450,7 @@ void MadEdit::OnMouseMotion( wxMouseEvent &evt )
 	evt.Skip();
 }
 
-void MadEdit::OnMouseRightUp( wxMouseEvent &evt )
+void MadEdit::OnMouseRightUp( wxMouseEvent & WXUNUSED(evt) )
 {
 	ProcessCommand( ecMouseNotify );
 	DoMouseRightUp();
@@ -11035,12 +11035,12 @@ void MadEdit::UpdateCursor( int mouse_x, int mouse_y )
 	}
 }
 
-void MadEdit::OnEraseBackground( wxEraseEvent &evt )
+void MadEdit::OnEraseBackground( wxEraseEvent & WXUNUSED(evt))
 {
 	// do nothing
 }
 
-void MadEdit::OnPaint( wxPaintEvent &evt )
+void MadEdit::OnPaint( wxPaintEvent & WXUNUSED(evt) )
 {
 	//Patch from http://linuxtoy.org/archives/madedit.html
 	//"segmentation fault " in Ubuntu 9.10 while open 2 files might be occurred when using iBus. I changed the default  IM to gcin by im-switch command,
@@ -12021,14 +12021,14 @@ int MadEdit::GetUCharType( ucs4_t uc )
 	return 8;
 }
 
-void MadEdit::OnCheckModificationTime( wxCommandEvent& evt )
+void MadEdit::OnCheckModificationTime( wxCommandEvent& WXUNUSED(evt) )
 {
 	DBOUT( "OnCheckModificationTime\n" );
 	if(m_ModReloaded == false )
 		ReloadByModificationTime();
 }
 
-void MadEdit::OnUpdateHScrollPos( wxCommandEvent& evt )
+void MadEdit::OnUpdateHScrollPos( wxCommandEvent& WXUNUSED(evt) )
 {
 	DBOUT( "OnUpdateHScrollPos\n" );
 	AppearCaret();
