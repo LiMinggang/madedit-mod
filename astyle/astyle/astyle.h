@@ -438,6 +438,7 @@ private:  // functions
 	int  adjustIndentCountForBreakElseIfComments() const;
 	int  computeObjCColonAlignment(const string& line, int colonAlignPosition) const;
 	int  convertTabToSpaces(int i, int tabIncrementIn) const;
+	int  findObjCColonAlignment(const string& line) const;
 	int  getContinuationIndentAssign(const string& line, size_t currPos) const;
 	int  getContinuationIndentComma(const string& line, size_t currPos) const;
 	int  getObjCFollowingKeyword(const string& line, int bracePos) const;
@@ -445,6 +446,7 @@ private:  // functions
 	bool isLineEndComment(const string& line, int startPos) const;
 	bool isPreprocessorConditionalCplusplus(const string& line) const;
 	bool isInPreprocessorUnterminatedComment(const string& line);
+	bool isTopLevel() const;
 	bool statementEndsWithComma(const string& line, int index) const;
 	const string& getIndentedLineReturn(const string& newLine, const string& originalLine) const;
 	string getIndentedSpaceEquivalent(const string& line_) const;
@@ -470,7 +472,7 @@ private:  // variables
 	vector<int>* activeBeautifierStackLengthStack;
 	vector<const string*>* headerStack;
 	vector<vector<const string*>* >* tempStacks;
-	vector<int>* squareBracketDepthStack;
+	vector<int>* parenDepthStack;
 	vector<bool>* blockStatementStack;
 	vector<bool>* parenStatementStack;
 	vector<bool>* braceBlockStateStack;
@@ -518,6 +520,7 @@ private:  // variables
 	bool isInEnum;
 	bool isInEnumTypeID;
 	bool isInLet;
+	bool isInTrailingReturnType;
 	bool modifierIndent;
 	bool switchIndent;
 	bool caseIndent;
@@ -696,6 +699,10 @@ public:	// functions
 	void setCloseTemplatesMode(bool state);
 	void setCommaPaddingMode(bool state);
 	void setDeleteEmptyLinesMode(bool state);
+	void setBreakReturnType(bool state);
+	void setBreakReturnTypeDecl(bool state);
+	void setAttachReturnType(bool state);
+	void setAttachReturnTypeDecl(bool state);
 	void setIndentCol1CommentsMode(bool state);
 	void setLineEndFormat(LineEndFormat fmt);
 	void setMaxCodeLength(int max);
@@ -760,6 +767,7 @@ private:  // functions
 	bool isPointerOrReference() const;
 	bool isPointerOrReferenceCentered() const;
 	bool isPointerOrReferenceVariable(const string& word) const;
+	bool isPointerToPointer(const string& line, int currPos) const;
 	bool isSharpStyleWithParen(const string* header) const;
 	bool isStructAccessModified(const string& firstLine, size_t index) const;
 	bool isIndentablePreprocessorBlock(const string& firstLine, size_t index);
@@ -793,6 +801,7 @@ private:  // functions
 	void clearFormattedLineSplitPoints();
 	void convertTabToSpaces();
 	void deleteContainer(vector<BraceType>*& container);
+	void findReturnTypeSplitPoint();
 	void formatArrayRunIn();
 	void formatRunIn();
 	void formatArrayBraces(BraceType braceType, bool isOpeningArrayBrace);
@@ -1013,6 +1022,10 @@ private:  // variables
 	bool shouldPadParamType;
 	bool shouldUnPadParamType;
 	bool shouldDeleteEmptyLines;
+	bool shouldBreakReturnType;
+	bool shouldBreakReturnTypeDecl;
+	bool shouldAttachReturnType;
+	bool shouldAttachReturnTypeDecl;
 	bool needHeaderOpeningBrace;
 	bool shouldBreakLineAtNextChar;
 	bool shouldKeepLineUnbroken;

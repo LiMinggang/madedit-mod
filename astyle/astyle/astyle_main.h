@@ -236,7 +236,8 @@ class ASConsole
 {
 private:    // variables
 	ASFormatter& formatter;             // reference to the ASFormatter object
-	ASLocalizer localizer;              // ASLocalizer object
+	ASEncoding encode;                  // file encoding conversion
+	ASLocalizer localizer;              // language translation
 	ostream* errorStream;               // direct error messages to cerr or cout
 	// command line options
 	bool isRecursive;                   // recursive option
@@ -258,8 +259,6 @@ private:    // variables
 	int  filesUnchanged;                // number of files unchanged
 	bool lineEndsMixed;                 // output has mixed line ends
 	int  linesOut;                      // number of output lines
-
-	ASEncoding encode;                  // file encoding conversion
 
 	string outputEOL;                   // current line end
 	string prevEOL;                     // previous line end
@@ -308,8 +307,10 @@ public:     // functions
 	string getNumberFormat(int num, const char* groupingArg, const char* separator) const;
 	string getOptionFileName() const;
 	string getOrigSuffix() const;
+	string getProjectOptionFileName() const;
 	string getStdPathIn() const;
 	string getStdPathOut() const;
+	void getTargetFilenames(string& targetFilename_, vector<string>& targetFilenameVector) const;
 	void processFiles();
 	void processOptions(const vector<string>& argvOptions);
 	void setBypassBrowserOpen(bool state);
@@ -325,7 +326,7 @@ public:     // functions
 	void setOptionFileName(const string& name);
 	void setOrigSuffix(const string& suffix);
 	void setPreserveDate(bool state);
-	void setProjectOptionFileName(const string& name);
+	void setProjectOptionFileName(const string& optfilepath);
 	void setStdPathIn(const string& path);
 	void setStdPathOut(const string& path);
 	void standardizePath(string& path, bool removeBeginningSeparator = false) const;
@@ -347,7 +348,7 @@ private:	// functions
 	string getParentDirectory(const string& absPath) const;
 	string findProjectOptionFilePath(const string& fileName_) const;
 	string getCurrentDirectory(const string& fileName_) const;
-	void getFileNames(const string& directory, const string& wildcard);
+	void getFileNames(const string& directory, const vector<string>& wildcards);
 	void getFilePaths(const string& filePath);
 	string getFullPathName(const string& relativePath) const;
 	string getParam(const string& arg, const char* op);

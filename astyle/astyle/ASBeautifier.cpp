@@ -38,7 +38,7 @@ ASBeautifier::ASBeautifier()
 
 	headerStack = nullptr;
 	tempStacks = nullptr;
-	squareBracketDepthStack = nullptr;
+	parenDepthStack = nullptr;
 	blockStatementStack = nullptr;
 	parenStatementStack = nullptr;
 	braceBlockStateStack = nullptr;
@@ -106,8 +106,8 @@ ASBeautifier::ASBeautifier(const ASBeautifier& other) : ASBase(other)
 
 	tempStacks = copyTempStacks(other);
 
-	squareBracketDepthStack = new vector<int>;
-	*squareBracketDepthStack = *other.squareBracketDepthStack;
+	parenDepthStack = new vector<int>;
+	*parenDepthStack = *other.parenDepthStack;
 
 	blockStatementStack = new vector<bool>;
 	*blockStatementStack = *other.blockStatementStack;
@@ -200,6 +200,7 @@ ASBeautifier::ASBeautifier(const ASBeautifier& other) : ASBase(other)
 	isInEnum = other.isInEnum;
 	isInEnumTypeID = other.isInEnumTypeID;
 	isInLet = other.isInLet;
+	isInTrailingReturnType = other.isInTrailingReturnType;
 	modifierIndent = other.modifierIndent;
 	switchIndent = other.switchIndent;
 	caseIndent = other.caseIndent;
@@ -273,7 +274,7 @@ ASBeautifier::~ASBeautifier()
 	deleteContainer(activeBeautifierStackLengthStack);
 	deleteContainer(headerStack);
 	deleteTempStacksContainer(tempStacks);
-	deleteContainer(squareBracketDepthStack);
+	deleteContainer(parenDepthStack);
 	deleteContainer(blockStatementStack);
 	deleteContainer(parenStatementStack);
 	deleteContainer(braceBlockStateStack);
@@ -312,7 +313,7 @@ void ASBeautifier::init(ASSourceIterator* iter)
 	initTempStacksContainer(tempStacks, new vector<vector<const string*>*>);
 	tempStacks->emplace_back(new vector<const string*>);
 
-	initContainer(squareBracketDepthStack, new vector<int>);
+	initContainer(parenDepthStack, new vector<int>);
 	initContainer(blockStatementStack, new vector<bool>);
 	initContainer(parenStatementStack, new vector<bool>);
 	initContainer(braceBlockStateStack, new vector<bool>);
@@ -356,6 +357,7 @@ void ASBeautifier::init(ASSourceIterator* iter)
 	isInHeader = false;
 	isInTemplate = false;
 	isInConditional = false;
+	isInTrailingReturnType = false;
 
 	indentCount = 0;
 	spaceIndentCount = 0;
@@ -1746,7 +1748,7 @@ int ASBeautifier::getContinuationIndentAssign(const string& line, size_t currPos
 	int start;          // start of the previous word
 	for (start = end; start > -1; start--)
 	{
-		if (!isLegalNameChar(line[start]) || line[start] == '.')
+		if (!isLegalNameChar(line[start]))
 			break;
 	}
 	start++;
@@ -2287,7 +2289,7 @@ void ASBeautifier::adjustObjCMethodDefinitionIndentation(const string& line_)
 		if (shouldAlignMethodColon && objCColonAlignSubsequent != -1)
 		{
 			string convertedLine = getIndentedSpaceEquivalent(line_);
-			colonIndentObjCMethodAlignment = convertedLine.find(':');
+			colonIndentObjCMethodAlignment = findObjCColonAlignment(convertedLine);
 			int objCColonAlignSubsequentIndent = objCColonAlignSubsequent + indentLength;
 			if (objCColonAlignSubsequentIndent > colonIndentObjCMethodAlignment)
 				colonIndentObjCMethodAlignment = objCColonAlignSubsequentIndent;
@@ -2321,7 +2323,7 @@ void ASBeautifier::adjustObjCMethodCallIndentation(const string& line_)
 			bracePosObjCMethodAlignment = convertedLine.find('[');
 			keywordIndentObjCMethodAlignment =
 			    getObjCFollowingKeyword(convertedLine, bracePosObjCMethodAlignment);
-			colonIndentObjCMethodAlignment = convertedLine.find(':');
+			colonIndentObjCMethodAlignment = findObjCColonAlignment(convertedLine);
 			if (colonIndentObjCMethodAlignment >= 0)
 			{
 				int objCColonAlignSubsequentIndent = objCColonAlignSubsequent + indentLength;
@@ -2333,7 +2335,7 @@ void ASBeautifier::adjustObjCMethodCallIndentation(const string& line_)
 		}
 		else
 		{
-			if (line_.find(':') != string::npos)
+			if (findObjCColonAlignment(line_) != -1)
 			{
 				if (colonIndentObjCMethodAlignment < 0)
 					spaceIndentCount += computeObjCColonAlignment(line_, objCColonAlignSubsequent);
@@ -2383,6 +2385,34 @@ void ASBeautifier::clearObjCMethodDefinitionAlignment()
 }
 
 /**
+ * Find the first alignment colon on a line.
+ * Ternary operators (?) are bypassed.
+ */
+int ASBeautifier::findObjCColonAlignment(const string& line) const
+{
+	bool haveTernary = false;
+	for (size_t i = 0; i < line.length(); i++)
+	{
+		i = line.find_first_of(":?", i);
+		if (i == string::npos)
+			break;
+
+		if (line[i] == '?')
+		{
+			haveTernary = true;
+			continue;
+		}
+		if (haveTernary)
+		{
+			haveTernary = false;
+			continue;
+		}
+		return i;
+	}
+	return -1;
+}
+
+/**
  * Compute the spaceIndentCount necessary to align the current line colon
  * with the colon position in the argument.
  * If it cannot be aligned indentLength is returned and a new colon
@@ -2390,7 +2420,7 @@ void ASBeautifier::clearObjCMethodDefinitionAlignment()
  */
 int ASBeautifier::computeObjCColonAlignment(const string& line, int colonAlignPosition) const
 {
-	int colonPosition = line.find(':');
+	int colonPosition = findObjCColonAlignment(line);
 	if (colonPosition < 0 || colonPosition > colonAlignPosition)
 		return indentLength;
 	return (colonAlignPosition - colonPosition);
@@ -2398,6 +2428,9 @@ int ASBeautifier::computeObjCColonAlignment(const string& line, int colonAlignPo
 
 /*
  * Compute postition of the keyword following the method call object.
+ * This is oversimplified to find unusual method calls.
+ * Use for now and see what happens.
+ * Most programmers will probably use align-method-colon anyway.
  */
 int ASBeautifier::getObjCFollowingKeyword(const string& line, int bracePos) const
 {
@@ -2453,6 +2486,34 @@ string ASBeautifier::getIndentedSpaceEquivalent(const string& line_) const
 		}
 	}
 	return convertedLine;
+}
+
+/**
+ * Determine if an item is at a top level.
+ */
+bool ASBeautifier::isTopLevel() const
+{
+	if (headerStack->empty())
+		return true;
+	else if (headerStack->back() == &AS_OPEN_BRACE
+	         && headerStack->size() >= 2)
+	{
+		if ((*headerStack)[headerStack->size() - 2] == &AS_NAMESPACE
+		        || (*headerStack)[headerStack->size() - 2] == &AS_MODULE
+		        || (*headerStack)[headerStack->size() - 2] == &AS_CLASS
+		        || (*headerStack)[headerStack->size() - 2] == &AS_INTERFACE
+		        || (*headerStack)[headerStack->size() - 2] == &AS_STRUCT
+		        || (*headerStack)[headerStack->size() - 2] == &AS_UNION)
+			return true;
+	}
+	else if (headerStack->back() == &AS_NAMESPACE
+	         || headerStack->back() == &AS_MODULE
+	         || headerStack->back() == &AS_CLASS
+	         || headerStack->back() == &AS_INTERFACE
+	         || headerStack->back() == &AS_STRUCT
+	         || headerStack->back() == &AS_UNION)
+		return true;
+	return false;
 }
 
 /**
@@ -2814,6 +2875,7 @@ void ASBeautifier::parseCurrentLine(const string& line)
 			                      || prevNonSpaceCh == ')'
 			                      || prevNonSpaceCh == ';'
 			                      || peekNextChar(line, i) == '{'
+			                      || isInTrailingReturnType
 			                      || foundPreCommandHeader
 			                      || foundPreCommandMacro
 			                      || isInClassHeader
@@ -2840,25 +2902,7 @@ void ASBeautifier::parseCurrentLine(const string& line)
 
 			if (!isBlockOpener && !isContinuation && !isInClassInitializer && !isInEnum)
 			{
-				if (headerStack->empty())
-					isBlockOpener = true;
-				else if (headerStack->back() == &AS_OPEN_BRACE
-				         && headerStack->size() >= 2)
-				{
-					if ((*headerStack)[headerStack->size() - 2] == &AS_NAMESPACE
-					        || (*headerStack)[headerStack->size() - 2] == &AS_MODULE
-					        || (*headerStack)[headerStack->size() - 2] == &AS_CLASS
-					        || (*headerStack)[headerStack->size() - 2] == &AS_INTERFACE
-					        || (*headerStack)[headerStack->size() - 2] == &AS_STRUCT
-					        || (*headerStack)[headerStack->size() - 2] == &AS_UNION)
-						isBlockOpener = true;
-				}
-				else if (headerStack->back() == &AS_NAMESPACE
-				         || headerStack->back() == &AS_MODULE
-				         || headerStack->back() == &AS_CLASS
-				         || headerStack->back() == &AS_INTERFACE
-				         || headerStack->back() == &AS_STRUCT
-				         || headerStack->back() == &AS_UNION)
+				if (isTopLevel())
 					isBlockOpener = true;
 			}
 
@@ -2928,12 +2972,13 @@ void ASBeautifier::parseCurrentLine(const string& line)
 			        && isInIndentableStruct)
 				(*headerStack).back() = &AS_CLASS;
 
-			squareBracketDepthStack->emplace_back(parenDepth);
+			// is a brace inside a paren?
+			parenDepthStack->emplace_back(parenDepth);
 			blockStatementStack->push_back(isContinuation);
 
 			if (!continuationIndentStack->empty())
 			{
-				// completely purge the inStatementIndentStack
+				// completely purge the continuationIndentStack
 				while (!continuationIndentStack->empty())
 					popLastContinuationIndent();
 				if (isInClassInitializer || isInClassHeaderTab)
@@ -2949,6 +2994,7 @@ void ASBeautifier::parseCurrentLine(const string& line)
 			if (g_preprocessorCppExternCBrace == 3)
 				++g_preprocessorCppExternCBrace;
 			parenDepth = 0;
+			isInTrailingReturnType = false;
 			isInClassHeader = false;
 			isInClassHeaderTab = false;
 			isInClassInitializer = false;
@@ -3184,7 +3230,7 @@ void ASBeautifier::parseCurrentLine(const string& line)
 				if (i == 0)
 					indentCount += classInitializerIndents;
 			}
-			else if (isCStyle()
+			else if ((isCStyle() || isSharpStyle())
 			         && !isInCase
 			         && (prevNonSpaceCh == ')' || foundPreCommandHeader))
 			{
@@ -3331,10 +3377,10 @@ void ASBeautifier::parseCurrentLine(const string& line)
 				if (!continuationIndentStackSizeStack->empty())
 					popLastContinuationIndent();
 
-				if (!squareBracketDepthStack->empty())
+				if (!parenDepthStack->empty())
 				{
-					parenDepth = squareBracketDepthStack->back();
-					squareBracketDepthStack->pop_back();
+					parenDepth = parenDepthStack->back();
+					parenDepthStack->pop_back();
 					isContinuation = blockStatementStack->back();
 					blockStatementStack->pop_back();
 
@@ -3399,7 +3445,10 @@ void ASBeautifier::parseCurrentLine(const string& line)
 			}
 
 			if (parenDepth == 0 && ch == ';')
+			{
 				isContinuation = false;
+				isInClassInitializer = false;
+			}
 
 			if (isInObjCMethodDefinition)
 			{
@@ -3502,6 +3551,11 @@ void ASBeautifier::parseCurrentLine(const string& line)
 			{
 				if (isContinuation && !continuationIndentStack->empty() && prevNonSpaceCh == '=')
 					continuationIndentStack->back() = 0;
+			}
+
+			if (isCStyle() && findKeyword(line, i, AS_AUTO) && isTopLevel())
+			{
+				isInTrailingReturnType = true;
 			}
 
 			if (isCStyle())
