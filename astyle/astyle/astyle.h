@@ -16,11 +16,10 @@
 #ifndef nullptr
 #define nullptr (0)
 #endif
-#else 
-#include <memory>
 #endif
 #else
 #if _MSC_VER < 1800
+#define CPLUSEPLUSE98 1
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
 #ifndef emplace_back
@@ -29,8 +28,6 @@
 #ifndef nullptr
 #define nullptr (0)
 #endif
-#else 
-#include <memory>
 #endif
 #endif
 //-----------------------------------------------------------------------------
