@@ -6,6 +6,8 @@
 // Licence:		GPL
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "../MadUtils.h"
+
 #include "TradSimp.h"
 
 #ifdef __WXGTK__
@@ -17,12 +19,6 @@
 #ifdef _DEBUG
 #include <crtdbg.h>
 #define new new(_NORMAL_BLOCK ,__FILE__, __LINE__)
-#endif
-
-#if !defined(__cplusplus) || __cplusplus <= 199711L
-#ifndef nullptr
-	#define nullptr (0)
-#endif
 #endif
 
 ucs2_t Simp2Trad_Table[]=

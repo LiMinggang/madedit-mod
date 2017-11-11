@@ -7,8 +7,9 @@
 
 #ifndef __MADCSCONV__
 #define __MADCSCONV__
+#include "../MadUtils.h"
 
-#if __cplusplus <= 199711L
+#if CPLUSEPLUSE98
 	#include <boost/shared_ptr.hpp>
 	using boost::shared_ptr;
 #else

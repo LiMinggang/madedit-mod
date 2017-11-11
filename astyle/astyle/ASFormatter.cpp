@@ -1658,7 +1658,7 @@ string ASFormatter::nextLine()
 				{
 					// must determine if newHeader is an assignment operator
 					// do NOT use findOperator - the length must be exact!!!
-#if __cplusplus <= 199711L
+#if CPLUSEPLUSE98
 					if (find(assignmentOperators->begin(), assignmentOperators->end(), newHeader)
 					        != assignmentOperators->end())
 #else
@@ -3742,7 +3742,7 @@ bool ASFormatter::isMultiStatementLine() const
  */
 string ASFormatter::peekNextText(const string& firstLine,
                                  bool endOnEmptyLine /*false*/,
-#if __cplusplus <= 199711L
+#if CPLUSEPLUSE98
                                  boost::shared_ptr<ASPeekStream> streamArg /*nullptr*/) const
 #else
 								 std::shared_ptr<ASPeekStream> streamArg /*nullptr*/) const
@@ -3751,13 +3751,13 @@ string ASFormatter::peekNextText(const string& firstLine,
 	bool isFirstLine = true;
 	string nextLine_ = firstLine;
 	size_t firstChar = string::npos;
-#if __cplusplus <= 199711L
+#if CPLUSEPLUSE98
 	boost::shared_ptr<ASPeekStream> stream = streamArg;
 #else
 	std::shared_ptr<ASPeekStream> stream = streamArg;
 #endif
 	if (stream == nullptr)							// Borland may need == 0
-#if __cplusplus <= 199711L
+#if CPLUSEPLUSE98
 		stream = boost::make_shared<ASPeekStream>(sourceIterator);
 #else
 		stream = std::make_shared<ASPeekStream>(sourceIterator);
@@ -5538,7 +5538,7 @@ bool ASFormatter::commentAndHeaderFollows()
 	assert(shouldDeleteEmptyLines && shouldBreakBlocks);
 
 	// is the next line a comment
-#if __cplusplus <= 199711L
+#if CPLUSEPLUSE98
 	boost::shared_ptr<ASPeekStream> stream = boost::make_shared<ASPeekStream>(sourceIterator);
 #else
 	auto stream = std::make_shared<ASPeekStream>(sourceIterator);
@@ -6583,7 +6583,7 @@ bool ASFormatter::isIndentablePreprocessorBlock(const string& firstLine, size_t 
 	int  numBlockIndents = 0;
 	int  lineParenCount = 0;
 	string nextLine_ = firstLine.substr(index);
-#if __cplusplus <= 199711L
+#if CPLUSEPLUSE98
 	boost::shared_ptr<ASPeekStream> stream = boost::make_shared<ASPeekStream>(sourceIterator);
 #else
 	auto stream = std::make_shared<ASPeekStream>(sourceIterator);

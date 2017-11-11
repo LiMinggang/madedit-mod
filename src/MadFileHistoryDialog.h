@@ -1,16 +1,12 @@
 #ifndef MADFILEHISTORYDIALOG_H
 #define MADFILEHISTORYDIALOG_H
+#include "MadUtils.h"
 
 //(*Headers(MadFileHistoryDialog)
 #include <wx/sizer.h>
 #include <wx/button.h>
 #include <wx/dialog.h>
 //*)
-#if __cplusplus <= 199711L
-#ifndef nullptr
-	#define nullptr (0)
-#endif
-#endif
 
 #include "checkedlistctrl.h"
 

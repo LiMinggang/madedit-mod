@@ -8,6 +8,13 @@
 
 #ifndef _MADLINES_H_
 #define _MADLINES_H_
+#include "../MadUtils.h"
+
+#if CPLUSEPLUSE98
+	#include <boost/shared_ptr.hpp>
+#else
+	#include <memory>
+#endif
 
 #include <wx/wxprec.h>
 
@@ -32,12 +39,6 @@ using std::vector;
 using std::list;
 using std::deque;
 using std::pair;
-
-#if __cplusplus <= 199711L
-#ifndef nullptr
-	#define nullptr (0)
-#endif
-#endif
 
 #include "ucs4_t.h"
 #include "MadDeque.hpp"

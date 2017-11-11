@@ -8,6 +8,15 @@
 
 #ifndef	_MADENCODING_H_
 #define	_MADENCODING_H_
+#include "../MadUtils.h"
+
+#if CPLUSEPLUSE98
+	#include <boost/shared_ptr.hpp>
+	using boost::shared_ptr;
+#else
+	#include <memory>
+	using std::shared_ptr;
+#endif
 
 #include <wx/wxprec.h>
 
@@ -19,11 +28,7 @@
 // Include your	minimal	set	of headers here, or	wx.h
 #include <wx/wx.h>
 #endif
-#if __cplusplus <= 199711L
-#ifndef nullptr
-#define nullptr (0)
-#endif
-#endif
+
 #include <wx/fontmap.h>
 #include <wx/string.h>
 #include "ucs4_t.h"

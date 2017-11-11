@@ -11,6 +11,7 @@
 #include "MadSyntax.h"
 #include "MadEdit.h"
 #include <wx/filename.h>
+#include <wx/fileconf.h>
 
 // add: gogo, 27.09.2009
 #include <algorithm>

@@ -8,14 +8,10 @@
 
 #ifndef	_MADUTILS_H_
 #define	_MADUTILS_H_
+#include "MadUtils.h"
 
 #include <wx/defs.h>
 #include <boost/noncopyable.hpp>
-#if __cplusplus <= 199711L
-#ifndef nullptr
-	#define nullptr (0)
-#endif
-#endif
 
 struct HtmlColor
 {

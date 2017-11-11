@@ -8,6 +8,7 @@
 
 #ifndef __MADPYTHON__
 #define __MADPYTHON__
+#include "MadUtils.h"
 #include <stdexcept>
 //#include <Python.h>
 
@@ -18,12 +19,6 @@
 #include <iostream>
 #include <string>
 #include <memory>
-
-#if __cplusplus <= 199711L
-#ifndef nullptr
-	#define nullptr (0)
-#endif
-#endif
 
 #include "MadEdit/MadEncoding.h"
 #include "MadEdit/MadEdit.h"

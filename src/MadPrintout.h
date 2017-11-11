@@ -8,11 +8,7 @@
 
 #ifndef _MADPRINTOUT_H_
 #define _MADPRINTOUT_H_
-#if __cplusplus <= 199711L
-#ifndef nullptr
-	#define nullptr (0)
-#endif
-#endif
+#include "MadUtils.h"
 
 class MadPrintout: public wxPrintout
 {

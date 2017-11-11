@@ -6,12 +6,15 @@
 // Licence:		GPL
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "../MadUtils.h"
+
+#if CPLUSEPLUSE98
+	#include <boost/shared_ptr.hpp>
+#else
+	#include <memory>
+#endif
+
 #include <cstddef>
-#if __cplusplus <= 199711L
-#ifndef nullptr
-	#define nullptr (0)
-#endif
-#endif
 
 template <typename T>
 class MadDeque

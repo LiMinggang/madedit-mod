@@ -8,6 +8,7 @@
 
 #ifndef	_MADSEARCHREPLACEDIALOG_H_
 #define	_MADSEARCHREPLACEDIALOG_H_
+#include "MadUtils.h"
 
 #ifdef _MSC_VER
 # pragma warning( push )
@@ -32,12 +33,6 @@
 #include <wx/bmpbuttn.h>
 
 #include <map>
-
-#if __cplusplus <= 199711L
-#ifndef nullptr
-	#define nullptr (0)
-#endif
-#endif
 
 class MadEdit;
 class MadRecentList;

@@ -7,6 +7,7 @@
 
 #ifndef	__MADMACRODLG_H__
 #define	__MADMACRODLG_H__
+#include "MadUtils.h"
 
 //(*Headers(MadMacroDlg)
 #include <wx/sizer.h>
@@ -14,12 +15,6 @@
 #include <wx/button.h>
 #include <wx/dialog.h>
 //*)
-
-#if __cplusplus <= 199711L
-#ifndef nullptr
-	#define nullptr (0)
-#endif
-#endif
 
 class EmbeddedPython;
 class wxStreamToTextRedirector;

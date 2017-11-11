@@ -8,6 +8,7 @@
 
 #include <boost/scoped_ptr.hpp>
 #include <wx/filefn.h>
+#include <wx/fileconf.h>
 #include "MadEdit.h"
 #include "MadEditPv.h"
 

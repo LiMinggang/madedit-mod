@@ -5,6 +5,7 @@
 // Maintainer:  minggang.li@gmail.com
 // Licence:     GPL
 ///////////////////////////////////////////////////////////////////////////////
+#include "MadUtils.h"
 
 #ifdef _MSC_VER
 # pragma warning( push )
@@ -19,12 +20,6 @@
 // disable 4996 }
 #include "MadConvEncDialog.h"
 #include "MadEdit/MadEncoding.h"
-
-#if __cplusplus <= 199711L
-#ifndef nullptr
-	#define nullptr (0)
-#endif
-#endif
 
 #ifdef _MSC_VER
 # pragma warning( pop )

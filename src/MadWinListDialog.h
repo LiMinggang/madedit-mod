@@ -1,5 +1,6 @@
 #ifndef MADWINLISTDIALOG_H
 #define MADWINLISTDIALOG_H
+#include "MadUtils.h"
 
 #include <set>
 #include <map>
@@ -9,11 +10,6 @@
 #include <wx/button.h>
 #include <wx/dialog.h>
 //*)
-#if __cplusplus <= 199711L
-#ifndef nullptr
-	#define nullptr (0)
-#endif
-#endif
 
 class MadEditFrame;
 

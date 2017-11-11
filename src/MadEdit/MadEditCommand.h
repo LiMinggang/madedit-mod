@@ -8,6 +8,13 @@
 
 #ifndef	_MADEDITCOMMAND_H_
 #define	_MADEDITCOMMAND_H_
+#include "../MadUtils.h"
+
+#if CPLUSEPLUSE98
+	#include <boost/shared_ptr.hpp>
+#else
+	#include <memory>
+#endif
 
 #include <wx/wxprec.h>
 
@@ -25,12 +32,6 @@
 #include <wx/hashset.h>
 #include <vector>
 #include <list>
-
-#if __cplusplus <= 199711L
-#ifndef nullptr
-	#define nullptr (0)
-#endif
-#endif
 
 using std::vector;
 using std::list;

@@ -8,6 +8,13 @@
 
 #ifndef _MADEDIT_H_
 #define _MADEDIT_H_
+#include "../MadUtils.h"
+
+#if CPLUSEPLUSE98
+	#include <boost/shared_ptr.hpp>
+#else
+	#include <memory>
+#endif
 
 #include <wx/wxprec.h>
 
@@ -18,17 +25,6 @@
 #ifndef WX_PRECOMP
 	// Include your minimal set of headers here, or wx.h
 	#include <wx/wx.h>
-#endif
-
-#include <wx/confbase.h>
-#include <string>
-#if __cplusplus <= 199711L
-	#include <boost/shared_ptr.hpp>
-#ifndef nullptr
-	#define nullptr (0)
-#endif
-#else
-	#include <memory>
 #endif
 
 #include "MadLines.h"
@@ -451,7 +447,7 @@ private:
 	OnActivatePtr         m_OnActivate;
 
 	wxMilliClock_t m_lastDoubleClick;
-#if __cplusplus <= 199711L
+#if CPLUSEPLUSE98
 	boost::shared_ptr<wxSpellCheckEngineInterface> m_SpellCheckerPtr;
 #else
 	std::shared_ptr<wxSpellCheckEngineInterface> m_SpellCheckerPtr;
@@ -681,7 +677,7 @@ public: // basic functions
 	MadSyntax* GetSyntax() { return m_Syntax; }
 	wxString GetSyntaxTitle() { return m_Syntax->m_Title; }
 	void UpdateSyntaxDictionary();
-#if __cplusplus <= 199711L
+#if CPLUSEPLUSE98
     boost::shared_ptr<PersonalDictionary>& GetSyntaxDictionary() { return m_Syntax->GetSyntaxDictionary(); }
 #else
     std::shared_ptr<PersonalDictionary>& GetSyntaxDictionary() { return m_Syntax->GetSyntaxDictionary(); }
@@ -797,7 +793,7 @@ public: // basic functions
 	bool GetLDClickHighlight() { return m_LDClickHighlight; }
     bool HasBackup() {return m_HasBackup;}
     void SetHasBackup(bool bk) {m_HasBackup = bk;}
-#if __cplusplus <= 199711L
+#if CPLUSEPLUSE98
     boost::shared_ptr<wxSpellCheckEngineInterface> &GetSpellChecker() { return m_SpellCheckerPtr; }
 #else
     std::shared_ptr<wxSpellCheckEngineInterface> &GetSpellChecker() { return m_SpellCheckerPtr; }

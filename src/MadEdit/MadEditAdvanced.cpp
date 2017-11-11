@@ -15,6 +15,7 @@
 #include <cctype>
 #include <locale>
 #include <wx/tokenzr.h>
+#include <wx/fileconf.h>
 
 #ifdef __WXGTK__
 	#   include "clipbrd_gtk.h"

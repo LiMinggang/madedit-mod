@@ -7,6 +7,7 @@
 
 #ifndef	__MADNUMBERDLG_H__
 #define	__MADNUMBERDLG_H__
+#include "MadUtils.h"
 
 #ifdef __BORLANDC__
 	#pragma	hdrstop
@@ -29,12 +30,6 @@
 #include <wx/stattext.h>
 #include <wx/sizer.h>
 ////Header Include End
-
-#if __cplusplus <= 199711L
-#ifndef nullptr
-	#define nullptr (0)
-#endif
-#endif
 
 ////Dialog Style Start
 #undef MadNumberDlg_STYLE

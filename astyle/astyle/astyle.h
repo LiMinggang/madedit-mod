@@ -5,7 +5,34 @@
 
 #ifndef ASTYLE_H
 #define ASTYLE_H
-
+#ifndef _MSC_VER 
+#if __cplusplus <= 199711L
+#define CPLUSEPLUSE98 1
+#include <boost/shared_ptr.hpp>
+#include <boost/make_shared.hpp>
+#ifndef emplace_back
+#define emplace_back push_back
+#endif
+#ifndef nullptr
+#define nullptr (0)
+#endif
+#else 
+#include <memory>
+#endif
+#else
+#if _MSC_VER < 1800
+#include <boost/shared_ptr.hpp>
+#include <boost/make_shared.hpp>
+#ifndef emplace_back
+#define emplace_back push_back
+#endif
+#ifndef nullptr
+#define nullptr (0)
+#endif
+#else 
+#include <memory>
+#endif
+#endif
 //-----------------------------------------------------------------------------
 // headers
 //-----------------------------------------------------------------------------
@@ -15,17 +42,6 @@
 	#include <assert>
 #else
 	#include <cassert>
-#endif
-
-#if __cplusplus <= 199711L
-#include <boost/shared_ptr.hpp>
-#include <boost/make_shared.hpp>
-#ifndef emplace_back
-#define emplace_back push_back
-#endif
-#ifndef nullptr
-#define nullptr (0)
-#endif
 #endif
 
 #include <cctype>
@@ -844,7 +860,7 @@ private:  // functions
 	string getPreviousWord(const string& line, int currPos) const;
 	string peekNextText(const string& firstLine,
 	                    bool endOnEmptyLine = false,
-#if __cplusplus <= 199711L
+#if CPLUSEPLUSE98
                         boost::shared_ptr<ASPeekStream> streamArg = boost::shared_ptr<ASPeekStream>()) const;
 #else
                         std::shared_ptr<ASPeekStream> streamArg = nullptr) const;

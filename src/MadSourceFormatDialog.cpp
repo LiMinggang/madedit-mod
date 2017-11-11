@@ -2,6 +2,7 @@
 #include "MadEdit/MadEdit.h"
 #include "astyle/astyle.h"
 #include "astylepredefinedstyles.h"
+#include <wx/fileconf.h>
 
 //(*InternalHeaders(MadSourceFormatDialog)
 #include <wx/button.h>
@@ -10,70 +11,6 @@
 //*)
 
 //(*IdInit(MadSourceFormatDialog)
-//const long MadSourceFormatDialog::ID_RADIOBOXBRACKETSTYLE = wxNewId();
-//const long MadSourceFormatDialog::ID_TEXTSAMPLE = wxNewId();
-//const long MadSourceFormatDialog::ID_PANEL1 = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKATTACHCLASSES = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKATTACHEXTERNC = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKATTACHNAMESPACES = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKATTACHINLINES = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKATTACHCLOSINGWHILE = wxNewId();
-//const long MadSourceFormatDialog::ID_PANEL2 = wxNewId();
-//const long MadSourceFormatDialog::ID_SPINCTRLINDENTSIZE = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKUSETABOVERSPACES = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKFORCETABS = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKINDENTCASE = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKINDENETCLASSES = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKINDENTLABELS = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKINDENTMODIFIERS = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKINDENTNS = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKINDENTSWITCHS = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKINDENTPREP = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKINDENTMULTIPREP = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKINDENTPREPCOND = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKINDENETCPPCOMMENTS = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKINDENTAFTERPARENS = wxNewId();
-//const long MadSourceFormatDialog::ID_SPINCTRLMININDENT = wxNewId();
-//const long MadSourceFormatDialog::ID_EDITMAXCONTINUATIONINDENT = wxNewId();
-//const long MadSourceFormatDialog::ID_EDITINDENTCONTINUATION = wxNewId();
-//const long MadSourceFormatDialog::ID_PANEL3 = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKBREAKCLOSING = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKBREAKELSEIFS = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKADDBRACKETS = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKADDONELINEBRACKETS = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKBOXREMOVEBRACKETS = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKKEEPBLOCKS = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKKEEPCOMPLEX = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKCONVERTTABS = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKCLOSETEMPLATES = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKREMOVECOMMENTPREFIX = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKBREAKONELINEHEADERS = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKBREAKLINES = wxNewId();
-//const long MadSourceFormatDialog::ID_EDITSFMAXLINELENGTH = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKBREAKAFTERLOGICAL = wxNewId();
-//const long MadSourceFormatDialog::ID_PANEL4 = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKBREAKBLOCKS = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKBREAKBLOCKSALL = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKPADOPERATORS = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKPADPARENSOUT = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKPADPARENSIN = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKPADHEADER = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKUNPADPARENS = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKDELEMPTYLINE = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKFILLEMPTYLINES = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKPADCOMMA = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKPADRETURNTYPE = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKUNPADRETURNTYPE = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKPADPARAMTYPE = wxNewId();
-//const long MadSourceFormatDialog::ID_CHECKUNPADPARAMTYPE = wxNewId();
-//const long MadSourceFormatDialog::ID_CHOICEPOINTERALIGN = wxNewId();
-//const long MadSourceFormatDialog::ID_CHOICEREFERENCEALIGN = wxNewId();
-//const long MadSourceFormatDialog::ID_PANEL5 = wxNewId();
-//const long MadSourceFormatDialog::ID_EDITXMLVERSION = wxNewId();
-//const long MadSourceFormatDialog::ID_EDITXMLINDENTSIZE = wxNewId();
-//const long MadSourceFormatDialog::ID_PANEL6 = wxNewId();
-//const long MadSourceFormatDialog::ID_AUINOTEBOOK1 = wxNewId();
-
 //*)
 
 static wxString bracket_style[aspsCustom + 1] =

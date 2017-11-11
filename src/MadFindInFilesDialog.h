@@ -8,6 +8,7 @@
 
 #ifndef _MADFINDINFILESDIALOG_H_
 #define _MADFINDINFILESDIALOG_H_
+#include "MadUtils.h"
 
 #ifdef _MSC_VER
 # pragma warning( push )
@@ -31,12 +32,6 @@
 
 #include <wx/fileconf.h>
 #include <wx/bmpbuttn.h>
-
-#if __cplusplus <= 199711L
-#ifndef nullptr
-	#define nullptr (0)
-#endif
-#endif
 
 class MadEdit;
 class MadRecentList;

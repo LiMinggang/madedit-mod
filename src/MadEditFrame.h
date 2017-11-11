@@ -8,6 +8,15 @@
 
 #ifndef _MADEDITFRAME_H_
 #define _MADEDITFRAME_H_
+#include "MadUtils.h"
+
+#if CPLUSEPLUSE98
+	#include <boost/shared_ptr.hpp>
+	using boost::shared_ptr;
+#else
+	#include <memory>
+	using std::shared_ptr;
+#endif
 
 #include <wx/wxprec.h>
 #ifdef __BORLANDC__
@@ -34,17 +43,6 @@
 #include <wx/treectrl.h>
 
 #include <wx/aui/aui.h> // wxAUI
-#if __cplusplus <= 199711L
-	#include <boost/shared_ptr.hpp>
-	using boost::shared_ptr;
-	
-#ifndef nullptr
-	#define nullptr (0)
-#endif
-#else
-	#include <memory>
-	using std::shared_ptr;
-#endif
 
 ////Frame Style Start
 #undef MadEditFrame_STYLE

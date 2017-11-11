@@ -8,6 +8,7 @@
 
 #ifndef _MADOPTIONSDIALOG_H_
 #define _MADOPTIONSDIALOG_H_
+#include "MadUtils.h"
 
 #ifdef _MSC_VER
 # pragma warning( push )
@@ -39,12 +40,6 @@
 #include <list>
 #include <map>
 using std::list;
-
-#if __cplusplus <= 199711L
-#ifndef nullptr
-#define nullptr (0)
-#endif
-#endif
 
 #include "MadCommand.h"
 

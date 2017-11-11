@@ -8,6 +8,13 @@
 
 #ifndef _MADEDITAPP_H_
 #define _MADEDITAPP_H_
+#include "MadUtils.h"
+
+#if CPLUSEPLUSE98
+	#include <boost/shared_ptr.hpp>
+#else
+	#include <memory>
+#endif
 
 #include <wx/wxprec.h>
 
@@ -19,11 +26,6 @@
 #endif
 #include <wx/ipc.h>
 #include <wx/stackwalk.h>
-#if __cplusplus <= 199711L
-#ifndef nullptr
-	#define nullptr (0)
-#endif
-#endif
 
 class wxFile;
 class wxSingleInstanceChecker;

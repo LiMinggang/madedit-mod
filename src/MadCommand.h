@@ -8,10 +8,11 @@
 #ifndef _MADCOMMAND_H_
 #define _MADCOMMAND_H_
 
-#if __cplusplus <= 199711L
-#ifndef nullptr
-	#define nullptr (0)
-#endif
+#include "MadUtils.h"
+#if CPLUSEPLUSE98 
+#include <boost/shared_ptr.hpp>
+#else 
+#include <memory>
 #endif
 
 #include "MadEdit/MadEditCommand.h"

@@ -12,15 +12,24 @@
 
 #ifndef _WX_CHECKEDLISTCTRL_H_
 #define _WX_CHECKEDLISTCTRL_H_
-
+#ifndef _MSC_VER 
+#if __cplusplus <= 199711L
+#define CPLUSEPLUSE98 1
+#include <boost/shared_ptr.hpp>
+#else 
+#include <memory>
+#endif
+#else
+#if _MSC_VER < 1800
+#define CPLUSEPLUSE98 1
+#include <boost/shared_ptr.hpp>
+#else 
+#include <memory>
+#endif
+#endif
 // wxWidgets headers
 #include <wx/listctrl.h>
 #include <wx/imaglist.h>
-#if __cplusplus <= 199711L
-#ifndef nullptr
-	#define nullptr (0)
-#endif
-#endif
 
 #ifndef wxUSE_CHECKEDLISTCTRL
     #define wxUSE_CHECKEDLISTCTRL                   1

@@ -36,12 +36,6 @@ using std::vector;
 
 #include <wx/colordlg.h>
 
-#if __cplusplus <= 199711L
-#ifndef nullptr
-	#define nullptr (0)
-#endif
-#endif
-
 class MadSyntax;
 
 class MadHighlightingDialog : public wxDialog
