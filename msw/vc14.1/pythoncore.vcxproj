@@ -1,0 +1,468 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{CF7AC3D1-E2DF-41D2-BEA6-1E2556CDEA26}</ProjectGuid>
+    <RootNamespace>pythoncore</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="pyproject.props" />
+    <Import Project="debug.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="pyproject.props" />
+    <Import Project="release.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="pyproject.props" />
+    <Import Project="x64.props" />
+    <Import Project="debug.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="pyproject.props" />
+    <Import Project="x64.props" />
+    <Import Project="release.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">python27_d</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">python27</TargetName>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <PreBuildEventUseInBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</PreBuildEventUseInBuild>
+    <PostBuildEventUseInBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</PostBuildEventUseInBuild>
+    <PreLinkEventUseInBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</PreLinkEventUseInBuild>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">python27_d</TargetName>
+    <PreLinkEventUseInBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</PreLinkEventUseInBuild>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">python27</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/Zm200  %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>..\..\minipython\Python;..\..\minipython\Modules\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>Py_BUILD_CORE;Py_NO_ENABLE_SHARED;_CRT_SECURE_NO_WARNINGS;WIN32;BOOST_ALL_NO_LIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>..\..\minipython\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <PreLinkEvent>
+      <Message>Generate build information...</Message>
+      <Command>
+      </Command>
+    </PreLinkEvent>
+    <Link>
+      <OutputFile>..\..\minipython\lib\$(PyDllName).dll</OutputFile>
+      <IgnoreSpecificDefaultLibraries>libc;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ProgramDatabaseFile>$(OutDir)$(PyDllName).pdb</ProgramDatabaseFile>
+      <BaseAddress>0x1e000000</BaseAddress>
+      <ImportLibrary>$(OutDir)$(PyDllName).lib</ImportLibrary>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/Zm200  %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\minipython\Python;..\..\minipython\Modules\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>Py_BUILD_CORE;Py_NO_ENABLE_SHARED;_CRT_SECURE_NO_WARNINGS;WIN32;NOPCH;BOOST_ALL_NO_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <CompileAs>Default</CompileAs>
+      <CallingConvention>Cdecl</CallingConvention>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>..\..\minipython\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <PreLinkEvent>
+      <Message>Generate build information...</Message>
+      <Command>
+      </Command>
+    </PreLinkEvent>
+    <Link>
+      <OutputFile>..\..\minipython\lib\$(PyDllName)_d.dll</OutputFile>
+      <IgnoreSpecificDefaultLibraries>libc;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ProgramDatabaseFile>$(OutDir)$(PyDllName)_d.pdb</ProgramDatabaseFile>
+      <BaseAddress>0x1e000000</BaseAddress>
+      <ImportLibrary>$(OutDir)$(PyDllName)_d.lib</ImportLibrary>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
+    <Lib />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <AdditionalOptions>/Zm200  %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>..\..\minipython\Python;..\..\minipython\Modules\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>Py_BUILD_CORE;Py_NO_ENABLE_SHARED;_CRT_SECURE_NO_WARNINGS;BOOST_ALL_NO_LIB;NDEBUG</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>..\..\minipython\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <PreLinkEvent>
+      <Message>Generate build information...</Message>
+      <Command>
+      </Command>
+    </PreLinkEvent>
+    <Link>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(PyDllName).dll</OutputFile>
+      <IgnoreSpecificDefaultLibraries>libc;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ProgramDatabaseFile>$(OutDir)$(PyDllName).pdb</ProgramDatabaseFile>
+      <BaseAddress>0x1e000000</BaseAddress>
+      <ImportLibrary>$(OutDir)$(PyDllName).lib</ImportLibrary>
+    </Link>
+    <Lib>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <AdditionalOptions>/Zm200  %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\minipython\Python;..\..\minipython\Modules\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>Py_BUILD_CORE;Py_NO_ENABLE_SHARED;_CRT_SECURE_NO_WARNINGS;BOOST_ALL_NO_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>..\..\minipython\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <PreLinkEvent>
+      <Message>
+      </Message>
+      <Command>
+      </Command>
+    </PreLinkEvent>
+    <Link>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(PyDllName)_d.dll</OutputFile>
+      <IgnoreSpecificDefaultLibraries>libc;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ProgramDatabaseFile>$(OutDir)$(PyDllName)_d.pdb</ProgramDatabaseFile>
+      <BaseAddress>0x1e000000</BaseAddress>
+      <ImportLibrary>$(OutDir)$(PyDllName)_d.lib</ImportLibrary>
+    </Link>
+    <Lib>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\minipython\Include\abstract.h" />
+    <ClInclude Include="..\..\minipython\Include\asdl.h" />
+    <ClInclude Include="..\..\minipython\Include\ast.h" />
+    <ClInclude Include="..\..\minipython\Include\bitset.h" />
+    <ClInclude Include="..\..\minipython\Include\boolobject.h" />
+    <ClInclude Include="..\..\minipython\Include\bufferobject.h" />
+    <ClInclude Include="..\..\minipython\Include\bytearrayobject.h" />
+    <ClInclude Include="..\..\minipython\Include\bytes_methods.h" />
+    <ClInclude Include="..\..\minipython\Include\bytesobject.h" />
+    <ClInclude Include="..\..\minipython\Include\cellobject.h" />
+    <ClInclude Include="..\..\minipython\Include\ceval.h" />
+    <ClInclude Include="..\..\minipython\Include\classobject.h" />
+    <ClInclude Include="..\..\minipython\Include\cobject.h" />
+    <ClInclude Include="..\..\minipython\Include\code.h" />
+    <ClInclude Include="..\..\minipython\Include\codecs.h" />
+    <ClInclude Include="..\..\minipython\Include\compile.h" />
+    <ClInclude Include="..\..\minipython\Include\complexobject.h" />
+    <ClInclude Include="..\..\minipython\Include\descrobject.h" />
+    <ClInclude Include="..\..\minipython\Include\dictobject.h" />
+    <ClInclude Include="..\..\minipython\Include\dtoa.h" />
+    <ClInclude Include="..\..\minipython\Include\enumobject.h" />
+    <ClInclude Include="..\..\minipython\Include\errcode.h" />
+    <ClInclude Include="..\..\minipython\Include\eval.h" />
+    <ClInclude Include="..\..\minipython\Include\fileobject.h" />
+    <ClInclude Include="..\..\minipython\Include\floatobject.h" />
+    <ClInclude Include="..\..\minipython\Include\frameobject.h" />
+    <ClInclude Include="..\..\minipython\Include\funcobject.h" />
+    <ClInclude Include="..\..\minipython\Include\genobject.h" />
+    <ClInclude Include="..\..\minipython\Include\graminit.h" />
+    <ClInclude Include="..\..\minipython\Include\grammar.h" />
+    <ClInclude Include="..\..\minipython\Include\import.h" />
+    <ClInclude Include="..\..\minipython\Include\intobject.h" />
+    <ClInclude Include="..\..\minipython\Include\intrcheck.h" />
+    <ClInclude Include="..\..\minipython\Include\iterobject.h" />
+    <ClInclude Include="..\..\minipython\Include\listobject.h" />
+    <ClInclude Include="..\..\minipython\Include\longintrepr.h" />
+    <ClInclude Include="..\..\minipython\Include\longobject.h" />
+    <ClInclude Include="..\..\minipython\Include\marshal.h" />
+    <ClInclude Include="..\..\minipython\Include\metagrammar.h" />
+    <ClInclude Include="..\..\minipython\Include\methodobject.h" />
+    <ClInclude Include="..\..\minipython\Include\modsupport.h" />
+    <ClInclude Include="..\..\minipython\Include\moduleobject.h" />
+    <ClInclude Include="..\..\minipython\Include\node.h" />
+    <ClInclude Include="..\..\minipython\Include\object.h" />
+    <ClInclude Include="..\..\minipython\Include\objimpl.h" />
+    <ClInclude Include="..\..\minipython\Include\opcode.h" />
+    <ClInclude Include="..\..\minipython\Include\osdefs.h" />
+    <ClInclude Include="..\..\minipython\Include\parsetok.h" />
+    <ClInclude Include="..\..\minipython\Include\patchlevel.h" />
+    <ClInclude Include="..\..\minipython\Include\pgen.h" />
+    <ClInclude Include="..\..\minipython\Include\pgenheaders.h" />
+    <ClInclude Include="..\..\minipython\Include\py_curses.h" />
+    <ClInclude Include="..\..\minipython\Include\pyarena.h" />
+    <ClInclude Include="..\..\minipython\Include\pycapsule.h" />
+    <ClInclude Include="..\..\minipython\Include\pyctype.h" />
+    <ClInclude Include="..\..\minipython\Include\pydebug.h" />
+    <ClInclude Include="..\..\minipython\Include\pyerrors.h" />
+    <ClInclude Include="..\..\minipython\Include\pyexpat.h" />
+    <ClInclude Include="..\..\minipython\Include\pyfpe.h" />
+    <ClInclude Include="..\..\minipython\Include\pygetopt.h" />
+    <ClInclude Include="..\..\minipython\Include\pymactoolbox.h" />
+    <ClInclude Include="..\..\minipython\Include\pymath.h" />
+    <ClInclude Include="..\..\minipython\Include\pymem.h" />
+    <ClInclude Include="..\..\minipython\Include\pyport.h" />
+    <ClInclude Include="..\..\minipython\Include\pystate.h" />
+    <ClInclude Include="..\..\minipython\Include\pystrcmp.h" />
+    <ClInclude Include="..\..\minipython\Include\pystrtod.h" />
+    <ClInclude Include="..\..\minipython\Include\Python-ast.h" />
+    <ClInclude Include="..\..\minipython\Include\Python.h" />
+    <ClInclude Include="..\..\minipython\Include\pythonrun.h" />
+    <ClInclude Include="..\..\minipython\Include\pythread.h" />
+    <ClInclude Include="..\..\minipython\Include\rangeobject.h" />
+    <ClInclude Include="..\..\minipython\Include\setobject.h" />
+    <ClInclude Include="..\..\minipython\Include\sliceobject.h" />
+    <ClInclude Include="..\..\minipython\Include\stringobject.h" />
+    <ClInclude Include="..\..\minipython\Include\structmember.h" />
+    <ClInclude Include="..\..\minipython\Include\structseq.h" />
+    <ClInclude Include="..\..\minipython\Include\symtable.h" />
+    <ClInclude Include="..\..\minipython\Include\sysmodule.h" />
+    <ClInclude Include="..\..\minipython\Include\timefuncs.h" />
+    <ClInclude Include="..\..\minipython\Include\token.h" />
+    <ClInclude Include="..\..\minipython\Include\traceback.h" />
+    <ClInclude Include="..\..\minipython\Include\tupleobject.h" />
+    <ClInclude Include="..\..\minipython\Include\ucnhash.h" />
+    <ClInclude Include="..\..\minipython\Include\unicodeobject.h" />
+    <ClInclude Include="..\..\minipython\Include\weakrefobject.h" />
+    <ClInclude Include="..\..\minipython\Modules\_math.h" />
+    <ClInclude Include="..\..\minipython\Modules\zlib\crc32.h" />
+    <ClInclude Include="..\..\minipython\Modules\zlib\deflate.h" />
+    <ClInclude Include="..\..\minipython\Modules\zlib\inffast.h" />
+    <ClInclude Include="..\..\minipython\Modules\zlib\inffixed.h" />
+    <ClInclude Include="..\..\minipython\Modules\zlib\inflate.h" />
+    <ClInclude Include="..\..\minipython\Modules\zlib\inftrees.h" />
+    <ClInclude Include="..\..\minipython\Modules\zlib\trees.h" />
+    <ClInclude Include="..\..\minipython\Modules\zlib\zconf.h" />
+    <ClInclude Include="..\..\minipython\Modules\zlib\zconf.in.h" />
+    <ClInclude Include="..\..\minipython\Modules\zlib\zlib.h" />
+    <ClInclude Include="..\..\minipython\Modules\zlib\zutil.h" />
+    <ClInclude Include="..\..\minipython\Objects\stringlib\count.h" />
+    <ClInclude Include="..\..\minipython\Objects\stringlib\fastsearch.h" />
+    <ClInclude Include="..\..\minipython\Objects\stringlib\find.h" />
+    <ClInclude Include="..\..\minipython\Objects\stringlib\partition.h" />
+    <ClInclude Include="..\..\minipython\Objects\stringlib\split.h" />
+    <ClInclude Include="..\..\minipython\Objects\unicodetype_db.h" />
+    <ClInclude Include="..\..\minipython\Parser\parser.h" />
+    <ClInclude Include="..\..\minipython\Parser\tokenizer.h" />
+    <ClInclude Include="..\..\minipython\PC\errmap.h" />
+    <ClInclude Include="..\..\minipython\PC\pyconfig.h" />
+    <ClInclude Include="..\..\minipython\Python\importdl.h" />
+    <ClInclude Include="..\..\minipython\Python\thread_nt.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\minipython\Modules\zlib\gzclose.c" />
+    <ClCompile Include="..\..\minipython\Modules\zlib\gzlib.c" />
+    <ClCompile Include="..\..\minipython\Modules\zlib\gzread.c" />
+    <ClCompile Include="..\..\minipython\Modules\zlib\gzwrite.c" />
+    <ClCompile Include="..\..\minipython\Modules\_codecsmodule.c" />
+    <ClCompile Include="..\..\minipython\Modules\_math.c" />
+    <ClCompile Include="..\..\minipython\Modules\errnomodule.c" />
+    <ClCompile Include="..\..\minipython\Modules\future_builtins.c" />
+    <ClCompile Include="..\..\minipython\Modules\gcmodule.c" />
+    <ClCompile Include="..\..\minipython\Modules\mathmodule.c" />
+    <ClCompile Include="..\..\minipython\Modules\parsermodule.c" />
+    <ClCompile Include="..\..\minipython\Modules\stropmodule.c" />
+    <ClCompile Include="..\..\minipython\Modules\symtablemodule.c" />
+    <ClCompile Include="..\..\minipython\Modules\zipimport.c" />
+    <ClCompile Include="..\..\minipython\Modules\zlibmodule.c" />
+    <ClCompile Include="..\..\minipython\Modules\zlib\adler32.c" />
+    <ClCompile Include="..\..\minipython\Modules\zlib\compress.c" />
+    <ClCompile Include="..\..\minipython\Modules\zlib\crc32.c" />
+    <ClCompile Include="..\..\minipython\Modules\zlib\deflate.c" />
+    <ClCompile Include="..\..\minipython\Modules\zlib\infback.c" />
+    <ClCompile Include="..\..\minipython\Modules\zlib\inffast.c" />
+    <ClCompile Include="..\..\minipython\Modules\zlib\inflate.c" />
+    <ClCompile Include="..\..\minipython\Modules\zlib\inftrees.c" />
+    <ClCompile Include="..\..\minipython\Modules\zlib\trees.c" />
+    <ClCompile Include="..\..\minipython\Modules\zlib\uncompr.c" />
+    <ClCompile Include="..\..\minipython\Modules\zlib\zutil.c" />
+    <ClCompile Include="..\..\minipython\Objects\abstract.c" />
+    <ClCompile Include="..\..\minipython\Objects\boolobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\bufferobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\capsule.c" />
+    <ClCompile Include="..\..\minipython\Objects\cellobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\classobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\cobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\codeobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\complexobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\descrobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\dictobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\enumobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\exceptions.c" />
+    <ClCompile Include="..\..\minipython\Objects\fileobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\floatobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\frameobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\funcobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\genobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\intobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\iterobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\listobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\longobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\methodobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\moduleobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\object.c" />
+    <ClCompile Include="..\..\minipython\Objects\obmalloc.c" />
+    <ClCompile Include="..\..\minipython\Objects\rangeobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\setobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\sliceobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\stringobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\structseq.c" />
+    <ClCompile Include="..\..\minipython\Objects\tupleobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\typeobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\unicodectype.c" />
+    <ClCompile Include="..\..\minipython\Objects\unicodeobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\weakrefobject.c" />
+    <ClCompile Include="..\..\minipython\Parser\acceler.c" />
+    <ClCompile Include="..\..\minipython\Parser\bitset.c" />
+    <ClCompile Include="..\..\minipython\Parser\firstsets.c" />
+    <ClCompile Include="..\..\minipython\Parser\grammar.c" />
+    <ClCompile Include="..\..\minipython\Parser\grammar1.c" />
+    <ClCompile Include="..\..\minipython\Parser\listnode.c" />
+    <ClCompile Include="..\..\minipython\Parser\metagrammar.c" />
+    <ClCompile Include="..\..\minipython\Parser\myreadline.c" />
+    <ClCompile Include="..\..\minipython\Parser\node.c" />
+    <ClCompile Include="..\..\minipython\Parser\parser.c" />
+    <ClCompile Include="..\..\minipython\Parser\parsetok.c" />
+    <ClCompile Include="..\..\minipython\Parser\tokenizer.c" />
+    <ClCompile Include="..\..\minipython\PC\config.c" />
+    <ClCompile Include="..\..\minipython\PC\dl_nt.c" />
+    <ClCompile Include="..\..\minipython\Modules\getbuildinfo.c" />
+    <ClCompile Include="..\..\minipython\PC\getpathp.c" />
+    <ClCompile Include="..\..\minipython\PC\import_nt.c" />
+    <ClCompile Include="..\..\minipython\Python\_warnings.c" />
+    <ClCompile Include="..\..\minipython\Python\asdl.c" />
+    <ClCompile Include="..\..\minipython\Python\ast.c" />
+    <ClCompile Include="..\..\minipython\Python\bltinmodule.c" />
+    <ClCompile Include="..\..\minipython\Python\ceval.c" />
+    <ClCompile Include="..\..\minipython\Python\codecs.c" />
+    <ClCompile Include="..\..\minipython\Python\compile.c" />
+    <ClCompile Include="..\..\minipython\Python\dtoa.c" />
+    <ClCompile Include="..\..\minipython\Python\dynload_win.c" />
+    <ClCompile Include="..\..\minipython\Python\errors.c" />
+    <ClCompile Include="..\..\minipython\Python\formatter_string.c" />
+    <ClCompile Include="..\..\minipython\Python\formatter_unicode.c" />
+    <ClCompile Include="..\..\minipython\Python\frozen.c" />
+    <ClCompile Include="..\..\minipython\Python\future.c" />
+    <ClCompile Include="..\..\minipython\Python\getargs.c" />
+    <ClCompile Include="..\..\minipython\Python\getcompiler.c" />
+    <ClCompile Include="..\..\minipython\Python\getcopyright.c" />
+    <ClCompile Include="..\..\minipython\Python\getopt.c" />
+    <ClCompile Include="..\..\minipython\Python\getplatform.c" />
+    <ClCompile Include="..\..\minipython\Python\getversion.c" />
+    <ClCompile Include="..\..\minipython\Python\graminit.c" />
+    <ClCompile Include="..\..\minipython\Python\import.c" />
+    <ClCompile Include="..\..\minipython\Python\importdl.c" />
+    <ClCompile Include="..\..\minipython\Python\marshal.c" />
+    <ClCompile Include="..\..\minipython\Python\modsupport.c" />
+    <ClCompile Include="..\..\minipython\Python\mysnprintf.c" />
+    <ClCompile Include="..\..\minipython\Python\mystrtoul.c" />
+    <ClCompile Include="..\..\minipython\Python\peephole.c" />
+    <ClCompile Include="..\..\minipython\Python\pyarena.c" />
+    <ClCompile Include="..\..\minipython\Python\pyctype.c" />
+    <ClCompile Include="..\..\minipython\Python\pyfpe.c" />
+    <ClCompile Include="..\..\minipython\Python\pymath.c" />
+    <ClCompile Include="..\..\minipython\Python\pystate.c" />
+    <ClCompile Include="..\..\minipython\Python\pystrcmp.c" />
+    <ClCompile Include="..\..\minipython\Python\pystrtod.c" />
+    <ClCompile Include="..\..\minipython\Python\Python-ast.c" />
+    <ClCompile Include="..\..\minipython\Python\pythonrun.c" />
+    <ClCompile Include="..\..\minipython\Python\structmember.c" />
+    <ClCompile Include="..\..\minipython\Python\symtable.c" />
+    <ClCompile Include="..\..\minipython\Python\sysmodule.c" />
+    <ClCompile Include="..\..\minipython\Python\thread.c" />
+    <ClCompile Include="..\..\minipython\Python\traceback.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\minipython\PC\python_nt.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

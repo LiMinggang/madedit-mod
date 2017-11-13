@@ -1893,14 +1893,13 @@ void MadEdit::PaintText( wxDC *dc, int x, int y, const ucs4_t *text, const int *
 	}
 
 #elif defined(__WXGTK20__) && (wxMAJOR_VERSION < 3)
-
+	int nowleft = x;
 	if( !InPrinting() )
 	{
 		const ucs4_t *pu = text;
 		const int    *pw = width;
 		int wcount = 0, wcstart = 0;
 		int nowright = x;
-		int nowleft = x;
 		bool nowleftend = false;
 		wxString str;
 
@@ -1934,11 +1933,11 @@ void MadEdit::PaintText( wxDC *dc, int x, int y, const ucs4_t *text, const int *
 #endif
 #ifndef __WXMSW__
 	//other platform or printing
+	int nowleft = x;
 	{
 		wxString text1( wxT( '1' ) );
 		const ucs4_t  *pu = text;
 		const int     *pw = width;
-		int nowleft = x;
 
 		for( int i = count; i > 0 && nowleft < maxright; --i, nowleft += *pw, ++pu, ++pw )
 		{
@@ -1959,7 +1958,7 @@ void MadEdit::PaintText( wxDC *dc, int x, int y, const ucs4_t *text, const int *
 		wxColour color( 255, 0, 0 ); /*RED*/
 		int delta = 3, yd[2] = {3, 0};
 		dc->SetPen( *wxThePenList->FindOrCreatePen( color, 1, wxPENSTYLE_SOLID/*wxDOT*/ ) );
-		int nowleft = ( x > minleft ? x : minleft );
+		nowleft = ( x > minleft ? x : minleft );
 
 		for( int i = 0; delta < totalwidth; ++i )
 		{
@@ -2790,7 +2789,7 @@ void MadEdit::PaintHexLines( wxDC *dc, wxRect &rect, int toprow, int rowcount, b
 			while( --i > 0 );
 		}
 
-		wxFileOffset oldpos;
+		wxFileOffset oldpos = -1;
 		wxFileOffset oldhexrowpos = hexrowpos;
 		hexrowpos += 16;
 
@@ -5828,7 +5827,7 @@ void MadEdit::InsertColumnString( const ucs4_t *ucs, size_t count, int linecount
 	else // insert column string
 	{
 		MadLineIterator lit = firstlit;
-		wxFileOffset inssize = 0, selcaretpos;
+		wxFileOffset inssize = 0, selcaretpos = -1;
 		const ucs4_t *ucs1 = ucs;
 		// newline
 		ucs4_t nl[2];

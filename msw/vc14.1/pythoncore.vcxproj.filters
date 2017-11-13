@@ -1,0 +1,731 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Include">
+      <UniqueIdentifier>{543dc009-75e4-4988-9fcb-91ad1fdb25ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules">
+      <UniqueIdentifier>{6b908bfe-acf5-4c57-ab02-333a934feff6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\zlib">
+      <UniqueIdentifier>{ad79f695-b771-4bdb-9d3c-609cf803d469}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{644c0560-9cb2-4473-83b9-fd5852af421d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Parser">
+      <UniqueIdentifier>{ccae43e3-b01b-4986-b02c-5e5430e2800a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PC">
+      <UniqueIdentifier>{c13053e2-99e7-4026-9584-a1d7fe0c1a3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Python">
+      <UniqueIdentifier>{7041ae4c-31cf-45b2-9c23-ef1d2a5c4c7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{30809e9e-70b6-45ef-aa27-b8f2b998ba74}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\minipython\Include\abstract.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\asdl.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\ast.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\bitset.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\boolobject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\bufferobject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\bytearrayobject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\bytes_methods.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\bytesobject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\cellobject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\ceval.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\classobject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\cobject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\code.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\codecs.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\compile.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\complexobject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\descrobject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\dictobject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\dtoa.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\enumobject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\errcode.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\eval.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\fileobject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\floatobject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\frameobject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\funcobject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\genobject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\graminit.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\grammar.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\import.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\intobject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\intrcheck.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\iterobject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\listobject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\longintrepr.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\longobject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\marshal.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\metagrammar.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\methodobject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\modsupport.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\moduleobject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\node.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\object.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\objimpl.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\opcode.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\osdefs.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\parsetok.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\patchlevel.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\pgen.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\pgenheaders.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\py_curses.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\pyarena.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\pycapsule.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\pyctype.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\pydebug.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\pyerrors.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\pyexpat.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\pyfpe.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\pygetopt.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\pymactoolbox.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\pymath.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\pymem.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\pyport.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\pystate.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\pystrcmp.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\pystrtod.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\Python-ast.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\Python.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\pythonrun.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\pythread.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\rangeobject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\setobject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\sliceobject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\stringobject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\structmember.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\structseq.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\symtable.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\sysmodule.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\timefuncs.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\token.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\traceback.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\tupleobject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\ucnhash.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\unicodeobject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\weakrefobject.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Modules\_math.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Modules\zlib\crc32.h">
+      <Filter>Modules\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Modules\zlib\deflate.h">
+      <Filter>Modules\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Modules\zlib\inffast.h">
+      <Filter>Modules\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Modules\zlib\inffixed.h">
+      <Filter>Modules\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Modules\zlib\inflate.h">
+      <Filter>Modules\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Modules\zlib\inftrees.h">
+      <Filter>Modules\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Modules\zlib\trees.h">
+      <Filter>Modules\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Modules\zlib\zconf.h">
+      <Filter>Modules\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Modules\zlib\zconf.in.h">
+      <Filter>Modules\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Modules\zlib\zlib.h">
+      <Filter>Modules\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Modules\zlib\zutil.h">
+      <Filter>Modules\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Objects\stringlib\count.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Objects\stringlib\fastsearch.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Objects\stringlib\find.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Objects\stringlib\partition.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Objects\stringlib\split.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Objects\unicodetype_db.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Parser\parser.h">
+      <Filter>Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Parser\tokenizer.h">
+      <Filter>Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\PC\errmap.h">
+      <Filter>PC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\PC\pyconfig.h">
+      <Filter>PC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Python\importdl.h">
+      <Filter>Python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Python\thread_nt.h">
+      <Filter>Python</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\minipython\Modules\_codecsmodule.c">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\_math.c">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\errnomodule.c">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\future_builtins.c">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\gcmodule.c">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\mathmodule.c">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\parsermodule.c">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\stropmodule.c">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\symtablemodule.c">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\zipimport.c">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\zlibmodule.c">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\zlib\adler32.c">
+      <Filter>Modules\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\zlib\compress.c">
+      <Filter>Modules\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\zlib\crc32.c">
+      <Filter>Modules\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\zlib\deflate.c">
+      <Filter>Modules\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\zlib\infback.c">
+      <Filter>Modules\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\zlib\inffast.c">
+      <Filter>Modules\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\zlib\inflate.c">
+      <Filter>Modules\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\zlib\inftrees.c">
+      <Filter>Modules\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\zlib\trees.c">
+      <Filter>Modules\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\zlib\uncompr.c">
+      <Filter>Modules\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\zlib\zutil.c">
+      <Filter>Modules\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\abstract.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\boolobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\bufferobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\capsule.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\cellobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\classobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\cobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\codeobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\complexobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\descrobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\dictobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\enumobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\exceptions.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\fileobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\floatobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\frameobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\funcobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\genobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\intobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\iterobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\listobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\longobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\methodobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\moduleobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\object.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\obmalloc.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\rangeobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\setobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\sliceobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\stringobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\structseq.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\tupleobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\typeobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\unicodectype.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\unicodeobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\weakrefobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Parser\acceler.c">
+      <Filter>Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Parser\bitset.c">
+      <Filter>Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Parser\firstsets.c">
+      <Filter>Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Parser\grammar.c">
+      <Filter>Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Parser\grammar1.c">
+      <Filter>Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Parser\listnode.c">
+      <Filter>Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Parser\metagrammar.c">
+      <Filter>Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Parser\myreadline.c">
+      <Filter>Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Parser\node.c">
+      <Filter>Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Parser\parser.c">
+      <Filter>Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Parser\parsetok.c">
+      <Filter>Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Parser\tokenizer.c">
+      <Filter>Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\PC\config.c">
+      <Filter>PC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\PC\dl_nt.c">
+      <Filter>PC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\getbuildinfo.c">
+      <Filter>PC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\PC\getpathp.c">
+      <Filter>PC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\PC\import_nt.c">
+      <Filter>PC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\_warnings.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\asdl.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\ast.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\bltinmodule.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\ceval.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\codecs.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\compile.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\dtoa.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\dynload_win.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\errors.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\formatter_string.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\formatter_unicode.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\frozen.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\future.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\getargs.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\getcompiler.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\getcopyright.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\getopt.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\getplatform.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\getversion.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\graminit.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\import.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\importdl.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\marshal.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\modsupport.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\mysnprintf.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\mystrtoul.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\peephole.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\pyarena.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\pyctype.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\pyfpe.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\pymath.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\pystate.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\pystrcmp.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\pystrtod.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\Python-ast.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\pythonrun.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\structmember.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\symtable.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\sysmodule.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\thread.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Python\traceback.c">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\zlib\gzlib.c">
+      <Filter>Modules\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\zlib\gzread.c">
+      <Filter>Modules\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\zlib\gzwrite.c">
+      <Filter>Modules\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\zlib\gzclose.c">
+      <Filter>Modules\zlib</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\minipython\PC\python_nt.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
