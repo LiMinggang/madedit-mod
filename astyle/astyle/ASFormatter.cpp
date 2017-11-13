@@ -7766,7 +7766,11 @@ void ASFormatter::padObjCMethodColon()
 		if (formattedLine.length() > 0)
 		{
 			appendSpacePad();
+#if CPLUSEPLUSE98 == 1
+			formattedLine[formattedLine.length()-1] = ' ';
+#else
 			formattedLine.back() = ' ';  // convert any tab to space
+#endif
 		}
 	}
 	if (objCColonPadMode == COLON_PAD_NONE

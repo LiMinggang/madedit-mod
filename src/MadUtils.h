@@ -8,7 +8,27 @@
 
 #ifndef	_MADUTILS_H_
 #define	_MADUTILS_H_
-#include "MadUtils.h"
+#ifndef _MSC_VER 
+#if __cplusplus <= 199711L
+#define CPLUSEPLUSE98 1
+#ifndef emplace_back
+#define emplace_back push_back
+#endif
+#ifndef nullptr
+#define nullptr (0)
+#endif
+#endif
+#else
+#if _MSC_VER < 1800
+#define CPLUSEPLUSE98 1
+#ifndef emplace_back
+#define emplace_back push_back
+#endif
+#ifndef nullptr
+#define nullptr (0)
+#endif
+#endif
+#endif
 
 #include <wx/defs.h>
 #include <boost/noncopyable.hpp>
