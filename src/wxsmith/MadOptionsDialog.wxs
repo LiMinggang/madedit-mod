@@ -14,9 +14,9 @@
 						<object class="wxBoxSizer" variable="BoxSizer31" member="no">
 							<orient>wxVERTICAL</orient>
 							<object class="sizeritem">
-								<object class="wxAuiNotebook" name="wxID_ANY" variable="AuiNotebook1" member="yes">
+								<object class="wxAuiNotebook" name="ID_AUINOTEBOOK1" variable="AuiNotebook1" member="yes">
 									<object class="AuiNotebookPage">
-										<object class="wxPanel" name="wxID_ANY" variable="Panel1" member="yes">
+										<object class="wxPanel" name="ID_PANEL1" variable="Panel1" member="yes">
 											<object class="wxBoxSizer" variable="BoxSizer3" member="no">
 												<orient>wxVERTICAL</orient>
 												<object class="sizeritem">
@@ -26,14 +26,14 @@
 															<size>3,-1</size>
 														</object>
 														<object class="sizeritem">
-															<object class="wxComboBox" name="wxID_ANY" variable="ComboBoxLanguage" member="yes">
+															<object class="wxComboBox" name="ID_COMBOBOXLANGUAGE" variable="ComboBoxLanguage" member="yes">
 																<size>160,-1</size>
 																<style>wxCB_READONLY|wxCB_DROPDOWN</style>
 															</object>
 															<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 														</object>
 														<object class="sizeritem">
-															<object class="wxStaticText" name="wxID_ANY" variable="StaticText16" member="yes">
+															<object class="wxStaticText" name="ID_STATICTEXT16" variable="StaticText16" member="yes">
 																<label>Language of User Interface (must restart MadEdit)</label>
 															</object>
 															<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
@@ -50,14 +50,14 @@
 															<size>3,-1</size>
 														</object>
 														<object class="sizeritem">
-															<object class="wxComboBox" name="wxID_ANY" variable="ComboBoxEncoding" member="yes">
+															<object class="wxComboBox" name="ID_COMBOBOXENCODING" variable="ComboBoxEncoding" member="yes">
 																<size>160,-1</size>
 																<style>wxCB_READONLY|wxCB_DROPDOWN</style>
 															</object>
 															<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 														</object>
 														<object class="sizeritem">
-															<object class="wxStaticText" name="wxID_ANY" variable="StaticText13" member="yes">
+															<object class="wxStaticText" name="ID_STATICTEXT13" variable="StaticText13" member="yes">
 																<label>Use this encoding to create new file or when MadEdit cannot determine the encoding of old file</label>
 															</object>
 															<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
@@ -75,7 +75,7 @@
 															<size>10,-1</size>
 														</object>
 														<object class="sizeritem">
-															<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxSkipAutoEncoding" member="yes">
+															<object class="wxCheckBox" name="ID_CHECKBOXSKIPAUTOENCODING" variable="CheckBoxSkipAutoEncoding" member="yes">
 																<label>Enforce default encoding</label>
 															</object>
 															<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
@@ -93,7 +93,7 @@
 															<size>3,-1</size>
 														</object>
 														<object class="sizeritem">
-															<object class="wxComboBox" name="wxID_ANY" variable="ComboBoxDefaultFont" member="yes">
+															<object class="wxComboBox" name="ID_COMBOBOXDEFAULTFONT" variable="ComboBoxDefaultFont" member="yes">
 																<size>160,-1</size>
 																<style>wxCB_READONLY|wxCB_DROPDOWN</style>
 															</object>
@@ -103,7 +103,7 @@
 															<object class="wxStaticText" name="wxID_ANY" variable="StaticText19" member="no">
 																<label>Default font</label>
 															</object>
-															<flag>wxALL|wxEXPAND</flag>
+															<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 															<border>2</border>
 														</object>
 													</object>
@@ -120,7 +120,7 @@
 																	<size>3,0</size>
 																</object>
 																<object class="sizeritem">
-																	<object class="wxTextCtrl" name="wxID_ANY" variable="EditDefaultFontSize" member="yes">
+																	<object class="wxTextCtrl" name="ID_TEXTCTRLDEFAULTFONTSIZE" variable="EditDefaultFontSize" member="yes">
 																		<value>0</value>
 																		<maxlength>2</maxlength>
 																	</object>
@@ -130,7 +130,7 @@
 																	<object class="wxStaticText" name="wxID_ANY" variable="StaticText20" member="no">
 																		<label>Default font size</label>
 																	</object>
-																	<flag>wxALL|wxEXPAND</flag>
+																	<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 																	<border>2</border>
 																</object>
 															</object>
@@ -144,7 +144,7 @@
 																	<size>3,0</size>
 																</object>
 																<object class="sizeritem">
-																	<object class="wxTextCtrl" name="wxID_ANY" variable="EditMaxSizeToLoad" member="yes">
+																	<object class="wxTextCtrl" name="ID_EDITMAXSIZETOLOAD" variable="EditMaxSizeToLoad" member="yes">
 																		<value>0</value>
 																		<maxlength>128</maxlength>
 																	</object>
@@ -154,7 +154,7 @@
 																	<object class="wxStaticText" name="wxID_ANY" variable="StaticText1" member="yes">
 																		<label>Max file size to load whole file into memory</label>
 																	</object>
-																	<flag>wxALL|wxEXPAND</flag>
+																	<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 																	<border>2</border>
 																</object>
 															</object>
@@ -168,7 +168,7 @@
 																	<size>3,0</size>
 																</object>
 																<object class="sizeritem">
-																	<object class="wxTextCtrl" name="wxID_ANY" variable="EditMaxTextFileSize" member="yes">
+																	<object class="wxTextCtrl" name="ID_EDITMAXTEXTFILESIZE" variable="EditMaxTextFileSize" member="yes">
 																		<value>0</value>
 																		<maxlength>128</maxlength>
 																	</object>
@@ -192,7 +192,7 @@
 																	<size>3,0</size>
 																</object>
 																<object class="sizeritem">
-																	<object class="wxTextCtrl" name="wxID_ANY" variable="EditMaxDisplaySize" member="yes">
+																	<object class="wxTextCtrl" name="ID_MAXDISPLAYSIZE" variable="EditMaxDisplaySize" member="yes">
 																		<value>0</value>
 																		<maxlength>5</maxlength>
 																	</object>
@@ -210,49 +210,49 @@
 															<border>2</border>
 														</object>
 														<object class="sizeritem">
-															<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxSingleInstance" member="yes">
+															<object class="wxCheckBox" name="ID_CHECKBOXSINGLEINSTANCE" variable="CheckBoxSingleInstance" member="yes">
 																<label>Single Instance (must restart MadEdit)</label>
 															</object>
 															<flag>wxALL|wxEXPAND</flag>
 															<border>2</border>
 														</object>
 														<object class="sizeritem">
-															<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxReloadFiles" member="yes">
+															<object class="wxCheckBox" name="ID_CHECKBOXRELOADFILES" variable="CheckBoxReloadFiles" member="yes">
 																<label>Reload files previously open on startup</label>
 															</object>
 															<flag>wxALL|wxEXPAND</flag>
 															<border>2</border>
 														</object>
 														<object class="sizeritem">
-															<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxRecordCaretMovements" member="yes">
+															<object class="wxCheckBox" name="ID_CHECKBOXRECORDCARETMOVEMENTS" variable="CheckBoxRecordCaretMovements" member="yes">
 																<label>Record caret movements</label>
 															</object>
 															<flag>wxALL|wxEXPAND</flag>
 															<border>2</border>
 														</object>
 														<object class="sizeritem">
-															<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxRestoreCaretPos" member="yes">
+															<object class="wxCheckBox" name="ID_CHECKBOXRESTORECARETPOS" variable="CheckBoxRestoreCaretPos" member="yes">
 																<label>Restore previous caret position when files are opened</label>
 															</object>
 															<flag>wxALL|wxEXPAND</flag>
 															<border>2</border>
 														</object>
 														<object class="sizeritem">
-															<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxDoNotSaveSettings" member="yes">
+															<object class="wxCheckBox" name="ID_CHECKBOXDONOTSAVESETTINGS" variable="CheckBoxDoNotSaveSettings" member="yes">
 																<label>Do not save settings to MadEdit.cfg when MadEdit closed (this session only)</label>
 															</object>
 															<flag>wxALL|wxEXPAND</flag>
 															<border>2</border>
 														</object>
 														<object class="sizeritem">
-															<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxPurgeHistory" member="yes">
+															<object class="wxCheckBox" name="ID_CHECKBOXPURGEHISTORY" variable="CheckBoxPurgeHistory" member="yes">
 																<label>Purge History while exiting</label>
 															</object>
 															<flag>wxALL|wxEXPAND</flag>
 															<border>2</border>
 														</object>
 														<object class="sizeritem">
-															<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxEnableAutoSave" member="yes">
+															<object class="wxCheckBox" name="ID_CHECKBOXENABLEAUTOSAVE" variable="CheckBoxEnableAutoSave" member="yes">
 																<label>Auto save</label>
 																<handler function="EnableAutoSaveClick" entry="EVT_CHECKBOX" />
 															</object>
@@ -266,7 +266,7 @@
 																	<size>10,-1</size>
 																</object>
 																<object class="sizeritem">
-																	<object class="wxTextCtrl" name="wxID_ANY" variable="EditAutoSaveTimeout" member="yes">
+																	<object class="wxTextCtrl" name="ID_TEXTCTRLAUTOSAVETIMEOUT" variable="EditAutoSaveTimeout" member="yes">
 																		<value>10</value>
 																		<maxlength>2</maxlength>
 																	</object>
@@ -276,7 +276,7 @@
 																	<object class="wxStaticText" name="wxID_ANY" variable="StaticTextAutoSaveTimeout" member="yes">
 																		<label>Timeout(M)</label>
 																	</object>
-																	<flag>wxALL|wxEXPAND</flag>
+																	<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 																	<border>2</border>
 																</object>
 															</object>
@@ -284,14 +284,14 @@
 															<border>2</border>
 														</object>
 														<object class="sizeritem">
-															<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxEnableAutoBackup" member="yes">
+															<object class="wxCheckBox" name="ID_CHECKBOXAUTOBACKUP" variable="CheckBoxEnableAutoBackup" member="yes">
 																<label>Auto backup</label>
 															</object>
 															<flag>wxALL|wxEXPAND</flag>
 															<border>2</border>
 														</object>
 														<object class="sizeritem">
-															<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxRightClickMenu" member="yes">
+															<object class="wxCheckBox" name="ID_WSCHECKBOXMSRIGHTCCLICKMENU" variable="CheckBoxRightClickMenu" member="yes">
 																<label>Add MadEdit to the RightClickMenu of Explorer(Deselect to Remove the Entry from Windows Registry)</label>
 															</object>
 															<flag>wxALL|wxEXPAND</flag>
@@ -306,7 +306,7 @@
 										<label>General</label>
 									</object>
 									<object class="AuiNotebookPage">
-										<object class="wxPanel" name="wxID_ANY" variable="Panel2" member="yes">
+										<object class="wxPanel" name="ID_PANEL2" variable="Panel2" member="yes">
 											<object class="wxBoxSizer" variable="BoxSizer8" member="no">
 												<orient>wxVERTICAL</orient>
 												<object class="sizeritem">
@@ -316,16 +316,16 @@
 															<size>3,0</size>
 														</object>
 														<object class="sizeritem">
-															<object class="wxTextCtrl" name="wxID_ANY" variable="EditMaxLineLength" member="yes">
+															<object class="wxTextCtrl" name="ID_EDITMAXLINELENGTH" variable="EditMaxLineLength" member="yes">
 																<value>0</value>
 															</object>
 															<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
 														</object>
 														<object class="sizeritem">
-															<object class="wxStaticText" name="wxID_ANY" variable="StaticText3" member="yes">
+															<object class="wxStaticText" name="ID_STATICTEXT3" variable="StaticText3" member="yes">
 																<label>Max line length before Line-Wrap (must restart MadEdit)</label>
 															</object>
-															<flag>wxALL|wxEXPAND</flag>
+															<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 															<border>2</border>
 														</object>
 													</object>
@@ -339,16 +339,16 @@
 															<size>3,0</size>
 														</object>
 														<object class="sizeritem">
-															<object class="wxTextCtrl" name="wxID_ANY" variable="EditMaxColumns" member="yes">
+															<object class="wxTextCtrl" name="ID_EDITMAXCOLUMNS" variable="EditMaxColumns" member="yes">
 																<value>0</value>
 															</object>
 															<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
 														</object>
 														<object class="sizeritem">
-															<object class="wxStaticText" name="wxID_ANY" variable="StaticText4" member="yes">
+															<object class="wxStaticText" name="ID_STATICTEXT4" variable="StaticText4" member="yes">
 																<label>Columns of Wrap-By-Column</label>
 															</object>
-															<flag>wxALL|wxEXPAND</flag>
+															<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 															<border>2</border>
 														</object>
 													</object>
@@ -362,16 +362,16 @@
 															<size>3,0</size>
 														</object>
 														<object class="sizeritem">
-															<object class="wxTextCtrl" name="wxID_ANY" variable="EditTabColumns" member="yes">
+															<object class="wxTextCtrl" name="ID_EDITTABCOLUMNS" variable="EditTabColumns" member="yes">
 																<value>0</value>
 															</object>
 															<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
 														</object>
 														<object class="sizeritem">
-															<object class="wxStaticText" name="wxID_ANY" variable="StaticText5" member="yes">
+															<object class="wxStaticText" name="ID_STATICTEXT5" variable="StaticText5" member="yes">
 																<label>Columns of Tab</label>
 															</object>
-															<flag>wxALL|wxEXPAND</flag>
+															<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 															<border>2</border>
 														</object>
 													</object>
@@ -385,13 +385,13 @@
 															<size>3,0</size>
 														</object>
 														<object class="sizeritem">
-															<object class="wxTextCtrl" name="wxID_ANY" variable="EditIndentColumns" member="yes">
+															<object class="wxTextCtrl" name="ID_EDITINDENTCOLUMNS" variable="EditIndentColumns" member="yes">
 																<value>0</value>
 															</object>
 															<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
 														</object>
 														<object class="sizeritem">
-															<object class="wxStaticText" name="wxID_ANY" variable="StaticText6" member="yes">
+															<object class="wxStaticText" name="ID_STATICTEXT6" variable="StaticText6" member="yes">
 																<label>Columns of Indent</label>
 															</object>
 															<flag>wxALL|wxEXPAND</flag>
@@ -408,16 +408,16 @@
 															<size>3,0</size>
 														</object>
 														<object class="sizeritem">
-															<object class="wxTextCtrl" name="wxID_ANY" variable="EditDateTime" member="yes">
+															<object class="wxTextCtrl" name="ID_EDITDATETIME" variable="EditDateTime" member="yes">
 																<size>160,-1</size>
 															</object>
 															<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 														</object>
 														<object class="sizeritem">
-															<object class="wxStaticText" name="wxID_ANY" variable="StaticTextDateTime" member="yes">
+															<object class="wxStaticText" name="ID_STATICTEXTDATETIME" variable="StaticTextDateTime" member="yes">
 																<label>Format of Date/Time</label>
 															</object>
-															<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+															<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 															<border>2</border>
 														</object>
 														<object class="spacer">
@@ -425,7 +425,7 @@
 															<size>3,0</size>
 														</object>
 														<object class="sizeritem">
-															<object class="wxButton" name="wxID_ANY" variable="ButtonDateTime" member="yes">
+															<object class="wxButton" name="ID_BUTTONDATETIME" variable="ButtonDateTime" member="yes">
 																<label>&gt;&gt;</label>
 																<size>40,-1</size>
 																<handler function="ButtonDateTimeClick" entry="EVT_BUTTON" />
@@ -433,7 +433,7 @@
 															<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
 														</object>
 														<object class="sizeritem">
-															<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxDateTimeInEnglish" member="yes">
+															<object class="wxCheckBox" name="ID_CHECKBOXDATETIMEINENGLISH" variable="CheckBoxDateTimeInEnglish" member="yes">
 																<label>Use English instead of current locale</label>
 															</object>
 															<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
@@ -447,21 +447,21 @@
 													<object class="wxBoxSizer" variable="BoxSizer12" member="no">
 														<orient>wxVERTICAL</orient>
 														<object class="sizeritem">
-															<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxTabOrSpaces" member="yes">
+															<object class="wxCheckBox" name="ID_CHECKBOXTABORSPACES" variable="CheckBoxTabOrSpaces" member="yes">
 																<label>Insert Space char instead of Tab char</label>
 															</object>
 															<flag>wxALL|wxEXPAND</flag>
 															<border>2</border>
 														</object>
 														<object class="sizeritem">
-															<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxAutoIndent" member="yes">
+															<object class="wxCheckBox" name="ID_CHECKBOXAUTOINDENT" variable="CheckBoxAutoIndent" member="yes">
 																<label>Auto Indent</label>
 															</object>
 															<flag>wxALL|wxEXPAND</flag>
 															<border>2</border>
 														</object>
 														<object class="sizeritem">
-															<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxAutoCompletePair" member="yes">
+															<object class="wxCheckBox" name="ID_CHECKBOXAUTOCOMPLETEPAIR" variable="CheckBoxAutoCompletePair" member="yes">
 																<label>Auto complete character pair</label>
 																<handler function="CheckBoxAutoCompletePairClick" entry="EVT_CHECKBOX" />
 															</object>
@@ -475,7 +475,7 @@
 																	<size>10,-1</size>
 																</object>
 																<object class="sizeritem">
-																	<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxInsertPairForSelection" member="yes">
+																	<object class="wxCheckBox" name="ID_CHECKBOXINSERTPAIRFORSELECTION" variable="CheckBoxInsertPairForSelection" member="yes">
 																		<label>Insert pair instead of replacing selection</label>
 																	</object>
 																	<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
@@ -489,7 +489,7 @@
 														<object class="sizeritem">
 															<object class="wxBoxSizer" variable="BoxSizer28" member="no">
 																<object class="sizeritem">
-																	<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxMouseSelectToCopy" member="yes">
+																	<object class="wxCheckBox" name="ID_CHECKBOXMOUSESELECTTOCOPY" variable="CheckBoxMouseSelectToCopy" member="yes">
 																		<label>Auto copy the mouse-selected text to clipboard</label>
 																		<handler function="CheckBoxMouseSelectToCopyClick" entry="EVT_CHECKBOX" />
 																	</object>
@@ -497,7 +497,7 @@
 																	<border>2</border>
 																</object>
 																<object class="sizeritem">
-																	<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxCtrlWithMouseToSelect" member="yes">
+																	<object class="wxCheckBox" name="ID_CHECKBOXWHENPRESSCTRLKEY" variable="CheckBoxCtrlWithMouseToSelect" member="yes">
 																		<label>when pressing Ctrl key</label>
 																	</object>
 																	<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
@@ -507,35 +507,35 @@
 															<flag>wxALL|wxALIGN_LEFT</flag>
 														</object>
 														<object class="sizeritem">
-															<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxMiddleMouseToPaste" member="yes">
+															<object class="wxCheckBox" name="ID_CHECKBOXMIDDLEMOUSETOPASTE" variable="CheckBoxMiddleMouseToPaste" member="yes">
 																<label>Paste text from clipboard when pressing middle mouse button</label>
 															</object>
 															<flag>wxALL|wxEXPAND</flag>
 															<border>2</border>
 														</object>
 														<object class="sizeritem">
-															<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxAutoFillColumnPaste" member="yes">
+															<object class="wxCheckBox" name="ID_CHECKBOXAUTOFILLCOLUMN" variable="CheckBoxAutoFillColumnPaste" member="yes">
 																<label>Auto fill in column paste</label>
 															</object>
 															<flag>wxALL|wxEXPAND</flag>
 															<border>2</border>
 														</object>
 														<object class="sizeritem">
-															<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxLDClickHighlight" member="yes">
+															<object class="wxCheckBox" name="ID_CHECKBOXDCLICKHIGHLIGHT" variable="CheckBoxLDClickHighlight" member="yes">
 																<label>Left double click to highlight</label>
 															</object>
 															<flag>wxALL|wxEXPAND</flag>
 															<border>2</border>
 														</object>
 														<object class="sizeritem">
-															<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxTypewriterMode" member="yes">
+															<object class="wxCheckBox" name="ID_CHECKBOXLOCKCARETYPOS" variable="CheckBoxTypewriterMode" member="yes">
 																<label>Typewriter mode</label>
 															</object>
 															<flag>wxALL|wxEXPAND</flag>
 															<border>2</border>
 														</object>
 														<object class="sizeritem">
-															<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxFixWidthMode" member="yes">
+															<object class="wxCheckBox" name="ID_CHECKBOXFIXWIDTHMODE" variable="CheckBoxFixWidthMode" member="yes">
 																<label>Fix width mode</label>
 															</object>
 															<flag>wxALL|wxEXPAND</flag>
@@ -550,7 +550,7 @@
 										<label>Edit</label>
 									</object>
 									<object class="AuiNotebookPage">
-										<object class="wxPanel" name="wxID_ANY" variable="Panel6" member="yes">
+										<object class="wxPanel" name="ID_PANEL6" variable="Panel6" member="yes">
 											<object class="wxBoxSizer" variable="BoxSizer42" member="no">
 												<object class="sizeritem">
 													<object class="wxBoxSizer" variable="BoxSizer43" member="no">
@@ -560,7 +560,7 @@
 																<label>Line Ending</label>
 																<orient>wxVERTICAL</orient>
 																<object class="sizeritem">
-																	<object class="wxRadioButton" name="wxID_ANY" variable="RadioButtonNewDocLineEndingDefault" member="yes">
+																	<object class="wxRadioButton" name="ID_RADIOBUTTONNEWDOCLINEENDINGDEFAULT" variable="RadioButtonNewDocLineEndingDefault" member="yes">
 																		<label>System Default</label>
 																		<style>wxRB_GROUP</style>
 																		<handler function="RadioButtonNewDocLineEndingSelect" entry="EVT_RADIOBUTTON" />
@@ -569,7 +569,7 @@
 																	<border>2</border>
 																</object>
 																<object class="sizeritem">
-																	<object class="wxRadioButton" name="wxID_ANY" variable="RadioButtonNewDocLineEndingCRLF" member="yes">
+																	<object class="wxRadioButton" name="ID_RADIOBUTTONNEWDOCLINEENDINGCRLF" variable="RadioButtonNewDocLineEndingCRLF" member="yes">
 																		<label>Windows(CR LF)</label>
 																		<handler function="RadioButtonNewDocLineEndingSelect" entry="EVT_RADIOBUTTON" />
 																	</object>
@@ -577,7 +577,7 @@
 																	<border>2</border>
 																</object>
 																<object class="sizeritem">
-																	<object class="wxRadioButton" name="wxID_ANY" variable="RadioButtonNewDocLineEndingLF" member="yes">
+																	<object class="wxRadioButton" name="ID_RADIOBUTTONNEWDOCLINEENDINGLF" variable="RadioButtonNewDocLineEndingLF" member="yes">
 																		<label>Unix(LF)</label>
 																		<handler function="RadioButtonNewDocLineEndingSelect" entry="EVT_RADIOBUTTON" />
 																	</object>
@@ -585,7 +585,7 @@
 																	<border>2</border>
 																</object>
 																<object class="sizeritem">
-																	<object class="wxRadioButton" name="wxID_ANY" variable="RadioButtonNewDocLineEndingCR" member="yes">
+																	<object class="wxRadioButton" name="ID_RADIOBUTTONNEWDOCLINEENDINGCR" variable="RadioButtonNewDocLineEndingCR" member="yes">
 																		<label>Macintosh</label>
 																		<handler function="RadioButtonNewDocLineEndingSelect" entry="EVT_RADIOBUTTON" />
 																	</object>
@@ -603,11 +603,11 @@
 																	<object class="wxStaticText" name="wxID_ANY" variable="StaticText23" member="no">
 																		<label>Syntax:</label>
 																	</object>
-																	<flag>wxALL|wxEXPAND</flag>
+																	<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 																	<border>2</border>
 																</object>
 																<object class="sizeritem">
-																	<object class="wxComboBox" name="wxID_ANY" variable="ComboBoxNewDocSyntax" member="yes">
+																	<object class="wxComboBox" name="ID_COMBOBOXNEWDOCSYNTAX" variable="ComboBoxNewDocSyntax" member="yes">
 																		<size>160,-1</size>
 																		<style>wxCB_READONLY|wxCB_DROPDOWN</style>
 																	</object>
@@ -630,7 +630,7 @@
 																<label>Encoding</label>
 																<orient>wxVERTICAL</orient>
 																<object class="sizeritem">
-																	<object class="wxRadioButton" name="wxID_ANY" variable="RadioButtonNewDocEncSystemDefault" member="yes">
+																	<object class="wxRadioButton" name="ID_RADIOBUTTONNEWDOCENCSYSTEMDEFAULT" variable="RadioButtonNewDocEncSystemDefault" member="yes">
 																		<label>System Default</label>
 																		<style>wxRB_GROUP</style>
 																		<handler function="RadioButtonNewDocEncSelect" entry="EVT_RADIOBUTTON" />
@@ -642,7 +642,7 @@
 																	<object class="wxGridSizer" variable="GridSizer3" member="no">
 																		<cols>2</cols>
 																		<object class="sizeritem">
-																			<object class="wxRadioButton" name="wxID_ANY" variable="RadioButtonNewDocEncUTF8" member="yes">
+																			<object class="wxRadioButton" name="ID_RADIOBUTTONNEWDOCENCUTF8" variable="RadioButtonNewDocEncUTF8" member="yes">
 																				<label>UTF8</label>
 																				<handler function="RadioButtonNewDocEncSelect" entry="EVT_RADIOBUTTON" />
 																			</object>
@@ -650,7 +650,7 @@
 																			<border>2</border>
 																		</object>
 																		<object class="sizeritem">
-																			<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxNewDocEncUTF8WithBOM" member="yes">
+																			<object class="wxCheckBox" name="ID_CHECKBOXNEWDOCENCUTF8WITHBOM" variable="CheckBoxNewDocEncUTF8WithBOM" member="yes">
 																				<label>with BOM</label>
 																			</object>
 																			<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
@@ -663,7 +663,7 @@
 																<object class="sizeritem">
 																	<object class="wxBoxSizer" variable="BoxSizer50" member="no">
 																		<object class="sizeritem">
-																			<object class="wxRadioButton" name="wxID_ANY" variable="RadioButtonNewDocEncOther" member="yes">
+																			<object class="wxRadioButton" name="ID_RADIOBUTTONNEWDOCENCOTHER" variable="RadioButtonNewDocEncOther" member="yes">
 																				<label></label>
 																				<handler function="RadioButtonNewDocEncSelect" entry="EVT_RADIOBUTTON" />
 																			</object>
@@ -671,7 +671,7 @@
 																			<border>2</border>
 																		</object>
 																		<object class="sizeritem">
-																			<object class="wxComboBox" name="wxID_ANY" variable="ComboBoxNewDocEncOther" member="yes">
+																			<object class="wxComboBox" name="ID_COMBOBOXNEWDOCENCOTHER" variable="ComboBoxNewDocEncOther" member="yes">
 																				<size>160,-1</size>
 																				<style>wxCB_READONLY|wxCB_DROPDOWN</style>
 																			</object>
@@ -692,11 +692,11 @@
 																	<object class="wxStaticText" name="wxID_ANY" variable="StaticText24" member="no">
 																		<label>Font:</label>
 																	</object>
-																	<flag>wxALL|wxEXPAND</flag>
+																	<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 																	<border>2</border>
 																</object>
 																<object class="sizeritem">
-																	<object class="wxComboBox" name="wxID_ANY" variable="ComboBoxNewDocFont" member="yes">
+																	<object class="wxComboBox" name="ID_COMBOBOXNEWDOCFONT" variable="ComboBoxNewDocFont" member="yes">
 																		<size>160,-1</size>
 																		<style>wxCB_READONLY|wxCB_DROPDOWN</style>
 																	</object>
@@ -714,11 +714,11 @@
 																	<object class="wxStaticText" name="wxID_ANY" variable="StaticText25" member="no">
 																		<label>Font Size:</label>
 																	</object>
-																	<flag>wxALL|wxEXPAND</flag>
+																	<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 																	<border>2</border>
 																</object>
 																<object class="sizeritem">
-																	<object class="wxTextCtrl" name="wxID_ANY" variable="EditNewDocFontSize" member="yes">
+																	<object class="wxTextCtrl" name="ID_TEXTCTRLNEWDOCFONTSIZE" variable="EditNewDocFontSize" member="yes">
 																		<value>0</value>
 																		<maxlength>2</maxlength>
 																	</object>
@@ -738,7 +738,7 @@
 										<label>New Document</label>
 									</object>
 									<object class="AuiNotebookPage">
-										<object class="wxPanel" name="wxID_ANY" variable="Panel3" member="yes">
+										<object class="wxPanel" name="ID_PANEL3" variable="Panel3" member="yes">
 											<object class="wxBoxSizer" variable="BoxSizer14" member="no">
 												<object class="sizeritem">
 													<object class="wxBoxSizer" variable="BoxSizer15" member="no">
@@ -748,42 +748,42 @@
 																<label>Text Mode</label>
 																<orient>wxVERTICAL</orient>
 																<object class="sizeritem">
-																	<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxPrintSyntax" member="yes">
+																	<object class="wxCheckBox" name="ID_CHECKBOXPRINTSYNTAX" variable="CheckBoxPrintSyntax" member="yes">
 																		<label>Print Syntax Highlighter</label>
 																	</object>
 																	<flag>wxALL|wxALIGN_LEFT</flag>
 																	<border>2</border>
 																</object>
 																<object class="sizeritem">
-																	<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxPrintLineNumber" member="yes">
+																	<object class="wxCheckBox" name="ID_CHECKBOXPRINTLINENUMBER" variable="CheckBoxPrintLineNumber" member="yes">
 																		<label>Print Line Number</label>
 																	</object>
 																	<flag>wxALL|wxALIGN_LEFT</flag>
 																	<border>2</border>
 																</object>
 																<object class="sizeritem">
-																	<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxPrintBookmark" member="yes">
+																	<object class="wxCheckBox" name="ID_CHECKBOXPRINTBOOKMARK" variable="CheckBoxPrintBookmark" member="yes">
 																		<label>Print Bookmark</label>
 																	</object>
 																	<flag>wxALL|wxALIGN_LEFT</flag>
 																	<border>2</border>
 																</object>
 																<object class="sizeritem">
-																	<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxPrintEndOfLine" member="yes">
+																	<object class="wxCheckBox" name="ID_CHECKBOXPRINTENDOFLINE" variable="CheckBoxPrintEndOfLine" member="yes">
 																		<label>Print End of Line</label>
 																	</object>
 																	<flag>wxALL|wxALIGN_LEFT</flag>
 																	<border>2</border>
 																</object>
 																<object class="sizeritem">
-																	<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxPrintTabChar" member="yes">
+																	<object class="wxCheckBox" name="ID_CHECKBOXPRINTTABCHAR" variable="CheckBoxPrintTabChar" member="yes">
 																		<label>Print Tab Char</label>
 																	</object>
 																	<flag>wxALL|wxALIGN_LEFT</flag>
 																	<border>2</border>
 																</object>
 																<object class="sizeritem">
-																	<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxPrintSpaceChar" member="yes">
+																	<object class="wxCheckBox" name="ID_CHECKBOXPRINTSPACECHAR" variable="CheckBoxPrintSpaceChar" member="yes">
 																		<label>Print Space Char</label>
 																	</object>
 																	<flag>wxALL|wxALIGN_LEFT</flag>
@@ -798,7 +798,7 @@
 																<label>Hex Mode</label>
 																<orient>wxVERTICAL</orient>
 																<object class="sizeritem">
-																	<object class="wxRadioBox" name="wxID_ANY" variable="RadioBoxPrintOffset" member="yes">
+																	<object class="wxRadioBox" name="ID_RADIOBOXPRINTOFFSET" variable="RadioBoxPrintOffset" member="yes">
 																		<label>Print Offset Header</label>
 																		<content>
 																			<item>None</item>
@@ -827,7 +827,7 @@
 																<label>Page Header</label>
 																<orient>wxVERTICAL</orient>
 																<object class="sizeritem">
-																	<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxPrintPageHeader" member="yes">
+																	<object class="wxCheckBox" name="ID_CHECKBOXPRINTPAGEHEADER" variable="CheckBoxPrintPageHeader" member="yes">
 																		<label>Print Page Header</label>
 																	</object>
 																	<flag>wxALL|wxALIGN_LEFT</flag>
@@ -837,21 +837,21 @@
 																	<object class="wxFlexGridSizer" variable="FlexGridSizer1" member="no">
 																		<cols>3</cols>
 																		<object class="sizeritem">
-																			<object class="wxStaticText" name="wxID_ANY" variable="StaticText7" member="yes">
+																			<object class="wxStaticText" name="ID_STATICTEXT7" variable="StaticText7" member="yes">
 																				<label>Left:</label>
 																			</object>
 																			<flag>wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL</flag>
 																			<border>2</border>
 																		</object>
 																		<object class="sizeritem">
-																			<object class="wxTextCtrl" name="wxID_ANY" variable="EditHeaderLeft" member="yes">
+																			<object class="wxTextCtrl" name="ID_EDITHEADERLEFT" variable="EditHeaderLeft" member="yes">
 																				<size>240,-1</size>
 																			</object>
 																			<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 																			<border>2</border>
 																		</object>
 																		<object class="sizeritem">
-																			<object class="wxButton" name="wxID_ANY" variable="Button1" member="yes">
+																			<object class="wxButton" name="ID_BUTTON1" variable="Button1" member="yes">
 																				<label>&gt;&gt;</label>
 																				<size>40,-1</size>
 																			</object>
@@ -859,21 +859,21 @@
 																			<border>1</border>
 																		</object>
 																		<object class="sizeritem">
-																			<object class="wxStaticText" name="wxID_ANY" variable="StaticText8" member="yes">
+																			<object class="wxStaticText" name="ID_STATICTEXT8" variable="StaticText8" member="yes">
 																				<label>Center:</label>
 																			</object>
 																			<flag>wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL</flag>
 																			<border>2</border>
 																		</object>
 																		<object class="sizeritem">
-																			<object class="wxTextCtrl" name="wxID_ANY" variable="EditHeaderCenter" member="yes">
+																			<object class="wxTextCtrl" name="ID_EDITHEADERCENTER" variable="EditHeaderCenter" member="yes">
 																				<size>240,-1</size>
 																			</object>
 																			<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 																			<border>2</border>
 																		</object>
 																		<object class="sizeritem">
-																			<object class="wxButton" name="wxID_ANY" variable="Button2" member="yes">
+																			<object class="wxButton" name="ID_BUTTON2" variable="Button2" member="yes">
 																				<label>&gt;&gt;</label>
 																				<size>40,-1</size>
 																			</object>
@@ -881,21 +881,21 @@
 																			<border>1</border>
 																		</object>
 																		<object class="sizeritem">
-																			<object class="wxStaticText" name="wxID_ANY" variable="StaticText9" member="yes">
+																			<object class="wxStaticText" name="ID_STATICTEXT9" variable="StaticText9" member="yes">
 																				<label>Right:</label>
 																			</object>
 																			<flag>wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL</flag>
 																			<border>2</border>
 																		</object>
 																		<object class="sizeritem">
-																			<object class="wxTextCtrl" name="wxID_ANY" variable="EditHeaderRight" member="yes">
+																			<object class="wxTextCtrl" name="ID_EDITHEADERRIGHT" variable="EditHeaderRight" member="yes">
 																				<size>240,-1</size>
 																			</object>
 																			<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 																			<border>2</border>
 																		</object>
 																		<object class="sizeritem">
-																			<object class="wxButton" name="wxID_ANY" variable="Button3" member="yes">
+																			<object class="wxButton" name="ID_BUTTON3" variable="Button3" member="yes">
 																				<label>&gt;&gt;</label>
 																				<size>40,-1</size>
 																			</object>
@@ -915,7 +915,7 @@
 																<label>Page Footer</label>
 																<orient>wxVERTICAL</orient>
 																<object class="sizeritem">
-																	<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxPrintPageFooter" member="yes">
+																	<object class="wxCheckBox" name="ID_CHECKBOXPRINTPAGEFOOTER" variable="CheckBoxPrintPageFooter" member="yes">
 																		<label>Print Page Footer</label>
 																	</object>
 																	<flag>wxALL|wxALIGN_LEFT</flag>
@@ -925,21 +925,21 @@
 																	<object class="wxFlexGridSizer" variable="FlexGridSizer2" member="no">
 																		<cols>3</cols>
 																		<object class="sizeritem">
-																			<object class="wxStaticText" name="wxID_ANY" variable="StaticText10" member="yes">
+																			<object class="wxStaticText" name="ID_STATICTEXT10" variable="StaticText10" member="yes">
 																				<label>Left:</label>
 																			</object>
 																			<flag>wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL</flag>
 																			<border>2</border>
 																		</object>
 																		<object class="sizeritem">
-																			<object class="wxTextCtrl" name="wxID_ANY" variable="EditFooterLeft" member="yes">
+																			<object class="wxTextCtrl" name="ID_EDITFOOTERLEFT" variable="EditFooterLeft" member="yes">
 																				<size>240,-1</size>
 																			</object>
 																			<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 																			<border>2</border>
 																		</object>
 																		<object class="sizeritem">
-																			<object class="wxButton" name="wxID_ANY" variable="Button4" member="yes">
+																			<object class="wxButton" name="ID_BUTTON4" variable="Button4" member="yes">
 																				<label>&gt;&gt;</label>
 																				<size>40,-1</size>
 																			</object>
@@ -947,21 +947,21 @@
 																			<border>1</border>
 																		</object>
 																		<object class="sizeritem">
-																			<object class="wxStaticText" name="wxID_ANY" variable="StaticText11" member="yes">
+																			<object class="wxStaticText" name="ID_STATICTEXT11" variable="StaticText11" member="yes">
 																				<label>Center:</label>
 																			</object>
 																			<flag>wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL</flag>
 																			<border>2</border>
 																		</object>
 																		<object class="sizeritem">
-																			<object class="wxTextCtrl" name="wxID_ANY" variable="EditFooterCenter" member="yes">
+																			<object class="wxTextCtrl" name="ID_EDITFOOTERLEFTCENTER" variable="EditFooterCenter" member="yes">
 																				<size>240,-1</size>
 																			</object>
 																			<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 																			<border>2</border>
 																		</object>
 																		<object class="sizeritem">
-																			<object class="wxButton" name="wxID_ANY" variable="Button5" member="yes">
+																			<object class="wxButton" name="ID_BUTTON5" variable="Button5" member="yes">
 																				<label>&gt;&gt;</label>
 																				<size>40,-1</size>
 																			</object>
@@ -969,21 +969,21 @@
 																			<border>1</border>
 																		</object>
 																		<object class="sizeritem">
-																			<object class="wxStaticText" name="wxID_ANY" variable="StaticText12" member="yes">
+																			<object class="wxStaticText" name="ID_STATICTEXT12" variable="StaticText12" member="yes">
 																				<label>Right:</label>
 																			</object>
 																			<flag>wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL</flag>
 																			<border>2</border>
 																		</object>
 																		<object class="sizeritem">
-																			<object class="wxTextCtrl" name="wxID_ANY" variable="EditFooterRight" member="yes">
+																			<object class="wxTextCtrl" name="ID_EDITFOOTERRIGHT" variable="EditFooterRight" member="yes">
 																				<size>240,-1</size>
 																			</object>
 																			<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 																			<border>2</border>
 																		</object>
 																		<object class="sizeritem">
-																			<object class="wxButton" name="wxID_ANY" variable="Button6" member="yes">
+																			<object class="wxButton" name="ID_BUTTON6" variable="Button6" member="yes">
 																				<label>&gt;&gt;</label>
 																				<size>40,-1</size>
 																			</object>
@@ -1007,12 +1007,12 @@
 										<label>Print</label>
 									</object>
 									<object class="AuiNotebookPage">
-										<object class="wxPanel" name="wxID_ANY" variable="Panel4" member="yes">
+										<object class="wxPanel" name="ID_PANEL4" variable="Panel4" member="yes">
 											<object class="wxBoxSizer" variable="BoxSizer18" member="no">
 												<object class="sizeritem">
 													<object class="wxBoxSizer" variable="BoxSizer19" member="no">
 														<object class="sizeritem">
-															<object class="wxTreeCtrl" name="wxID_ANY" variable="TreeCtrl1" member="yes">
+															<object class="wxTreeCtrl" name="ID_TREECTRL1" variable="TreeCtrl1" member="yes">
 																<image_list>&lt;none&gt;</image_list>
 																<tree_items>
 																	<item>TreeCtrl1</item>
@@ -1040,14 +1040,14 @@
 														<object class="sizeritem">
 															<object class="wxBoxSizer" variable="BoxSizer24" member="no">
 																<object class="sizeritem">
-																	<object class="wxStaticText" name="wxID_ANY" variable="StaticTextCommandHint" member="yes">
+																	<object class="wxStaticText" name="ID_STATICTEXTCOMMANDHINT" variable="StaticTextCommandHint" member="yes">
 																		<label>Hint:</label>
 																	</object>
 																	<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
 																	<border>5</border>
 																</object>
 																<object class="sizeritem">
-																	<object class="wxTextCtrl" name="wxID_ANY" variable="EditCommandHint" member="yes">
+																	<object class="wxTextCtrl" name="ID_EDITHINT" variable="EditCommandHint" member="yes">
 																		<bg>wxSYS_COLOUR_BTNFACE</bg>
 																		<style>wxTE_READONLY</style>
 																	</object>
@@ -1065,14 +1065,14 @@
 																	<object class="wxBoxSizer" variable="BoxSizer22" member="no">
 																		<orient>wxVERTICAL</orient>
 																		<object class="sizeritem">
-																			<object class="wxStaticText" name="wxID_ANY" variable="StaticText14" member="yes">
+																			<object class="wxStaticText" name="ID_STATICTEXT14" variable="StaticText14" member="yes">
 																				<label>Assigned Keys:</label>
 																			</object>
 																			<flag>wxALL|wxALIGN_LEFT</flag>
 																			<border>5</border>
 																		</object>
 																		<object class="sizeritem">
-																			<object class="wxListBox" name="wxID_ANY" variable="ListBoxKeys" member="yes">
+																			<object class="wxListBox" name="ID_LISTBOXKEYS" variable="ListBoxKeys" member="yes">
 																				<default>-1</default>
 																				<style>wxLB_SINGLE</style>
 																				<handler function="ListBoxKeysSelected" entry="EVT_LISTBOX" />
@@ -1089,21 +1089,21 @@
 																	<object class="wxBoxSizer" variable="BoxSizer25" member="no">
 																		<orient>wxVERTICAL</orient>
 																		<object class="sizeritem">
-																			<object class="wxStaticText" name="wxID_ANY" variable="StaticText15" member="yes">
+																			<object class="wxStaticText" name="ID_STATICTEXT15" variable="StaticText15" member="yes">
 																				<label>New Key:</label>
 																			</object>
 																			<flag>wxALL|wxALIGN_LEFT</flag>
 																			<border>5</border>
 																		</object>
 																		<object class="sizeritem">
-																			<object class="wxTextCtrl" name="wxID_ANY" subclass="KeyTextCtrl" variable="EditKey" member="yes">
+																			<object class="wxTextCtrl" name="ID_EDITKEY" subclass="KeyTextCtrl" variable="EditKey" member="yes">
 																				<style>wxTE_PROCESS_TAB|wxWANTS_CHARS</style>
 																			</object>
 																			<flag>wxALL|wxEXPAND</flag>
 																			<border>5</border>
 																		</object>
 																		<object class="sizeritem">
-																			<object class="wxTextCtrl" name="wxID_ANY" variable="EditKeyHint" member="yes">
+																			<object class="wxTextCtrl" name="ID_EDITKEYHINT" variable="EditKeyHint" member="yes">
 																				<bg>wxSYS_COLOUR_BTNFACE</bg>
 																				<style>wxTE_READONLY</style>
 																			</object>
@@ -1115,7 +1115,7 @@
 																			<object class="wxBoxSizer" variable="BoxSizer29" member="no">
 																				<orient>wxVERTICAL</orient>
 																				<object class="sizeritem">
-																					<object class="wxButton" name="wxID_ANY" variable="ButtonAddKey" member="yes">
+																					<object class="wxButton" name="ID_BUTTONADDKEY" variable="ButtonAddKey" member="yes">
 																						<label>&lt;== Add Key</label>
 																						<handler function="ButtonAddKeyClick" entry="EVT_BUTTON" />
 																					</object>
@@ -1123,7 +1123,7 @@
 																					<border>5</border>
 																				</object>
 																				<object class="sizeritem">
-																					<object class="wxButton" name="wxID_ANY" variable="ButtonDeleteKey" member="yes">
+																					<object class="wxButton" name="ID_BUTTONDELETEKEY" variable="ButtonDeleteKey" member="yes">
 																						<label>==&gt; Delete Key</label>
 																						<handler function="ButtonDeleteKeyClick" entry="EVT_BUTTON" />
 																					</object>
@@ -1131,7 +1131,7 @@
 																					<border>5</border>
 																				</object>
 																				<object class="sizeritem">
-																					<object class="wxButton" name="wxID_ANY" variable="ButtonShowInMenu" member="yes">
+																					<object class="wxButton" name="ID_BUTTONSHOWINMENU" variable="ButtonShowInMenu" member="yes">
 																						<label>Show the Key in Menu</label>
 																						<handler function="ButtonShowInMenuClick" entry="EVT_BUTTON" />
 																					</object>
@@ -1154,7 +1154,7 @@
 														<object class="sizeritem">
 															<object class="wxBoxSizer" variable="BoxSizer26" member="no">
 																<object class="sizeritem">
-																	<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxResetAllKeys" member="yes">
+																	<object class="wxCheckBox" name="ID_CHECKBOXRESETALLKEYS" variable="CheckBoxResetAllKeys" member="yes">
 																		<label>Reset all keys to default (must restart MadEdit)</label>
 																	</object>
 																	<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
@@ -1174,7 +1174,7 @@
 										<label>Keys</label>
 									</object>
 									<object class="AuiNotebookPage">
-										<object class="wxPanel" name="wxID_ANY" variable="Panel5" member="yes">
+										<object class="wxPanel" name="ID_PANEL5" variable="Panel5" member="yes">
 											<object class="wxBoxSizer" variable="BoxSizer36" member="no">
 												<orient>wxVERTICAL</orient>
 												<object class="sizeritem">
@@ -1184,7 +1184,7 @@
 															<size>3,-1</size>
 														</object>
 														<object class="sizeritem">
-															<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxPersonalDict" member="yes">
+															<object class="wxCheckBox" name="ID_CHECKBOXPERSONALDICT" variable="CheckBoxPersonalDict" member="yes">
 																<label>Enable Personal Dictionary</label>
 															</object>
 															<flag>wxALL|wxEXPAND</flag>
@@ -1198,7 +1198,7 @@
 													<object class="wxStaticBoxSizer" variable="StaticBoxSizer5" member="no">
 														<label>Language</label>
 														<object class="sizeritem">
-															<object class="wxChoice" name="wxID_ANY" variable="ChoiceDictionary" member="yes">
+															<object class="wxChoice" name="ID_CHOICEDICTIONARY" variable="ChoiceDictionary" member="yes">
 																<size>200,-1</size>
 																<handler function="ChoiceDictionarySelect" entry="EVT_CHOICE" />
 															</object>
@@ -1206,7 +1206,7 @@
 															<border>2</border>
 														</object>
 														<object class="sizeritem">
-															<object class="wxStaticText" name="wxID_ANY" variable="StaticText17" member="yes">
+															<object class="wxStaticText" name="ID_STATICTEXT17" variable="StaticText17" member="yes">
 																<label>Dictionary</label>
 																<size>200,-1</size>
 															</object>
@@ -1221,7 +1221,7 @@
 													<object class="wxStaticBoxSizer" variable="StaticBoxSizer6" member="no">
 														<label>Path Setting</label>
 														<object class="sizeritem">
-															<object class="wxTextCtrl" name="wxID_ANY" variable="EditDictionaryDir" member="yes">
+															<object class="wxTextCtrl" name="ID_EDITDICTIONARYDIR" variable="EditDictionaryDir" member="yes">
 																<size>200,-1</size>
 																<handler function="EditDictionaryDirTextEnter" entry="EVT_TEXT_ENTER" />
 															</object>
@@ -1278,7 +1278,7 @@
 			<object class="sizeritem">
 				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
 					<object class="sizeritem">
-						<object class="wxButton" name="wxID_ANY" variable="ButtonOK" member="yes">
+						<object class="wxButton" name="ID_BUTTONOK" variable="ButtonOK" member="yes">
 							<label>&amp;OK</label>
 							<handler function="ButtonOKClick" entry="EVT_BUTTON" />
 						</object>
@@ -1286,7 +1286,7 @@
 						<border>5</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxButton" name="wxID_ANY" variable="ButtonCancel" member="yes">
+						<object class="wxButton" name="wxID_CANCEL" variable="ButtonCancel" member="yes">
 							<label>&amp;Cancel</label>
 							<handler function="ButtonCancelClick" entry="EVT_BUTTON" />
 						</object>

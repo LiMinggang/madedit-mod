@@ -290,7 +290,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	ADD2CONTROLS(controls, ComboBoxDefaultFont);
 	BoxSizer35->Add(ComboBoxDefaultFont, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	StaticText19 = new wxStaticText(Panel1, wxID_ANY, _("Default font"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
-	BoxSizer35->Add(StaticText19, 0, wxALL|wxEXPAND, 2);
+	BoxSizer35->Add(StaticText19, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer3->Add(BoxSizer35, 0, wxALL|wxEXPAND, 2);
 	BoxSizer7 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer39 = new wxBoxSizer(wxHORIZONTAL);
@@ -300,7 +300,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	EditDefaultFontSize->SetMaxLength(2);
 	BoxSizer39->Add(EditDefaultFontSize, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
 	StaticText20 = new wxStaticText(Panel1, wxID_ANY, _("Default font size"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
-	BoxSizer39->Add(StaticText20, 0, wxALL|wxEXPAND, 2);
+	BoxSizer39->Add(StaticText20, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer7->Add(BoxSizer39, 0, wxALL|wxEXPAND, 2);
 	BoxSizer38 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer38->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
@@ -309,7 +309,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	ADD2CONTROLS(controls, EditMaxSizeToLoad);
 	BoxSizer38->Add(EditMaxSizeToLoad, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
 	StaticText1 = new wxStaticText(Panel1, wxID_ANY, _("Max file size to load whole file into memory"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
-	BoxSizer38->Add(StaticText1, 0, wxALL|wxEXPAND, 2);
+	BoxSizer38->Add(StaticText1, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer7->Add(BoxSizer38, 0, wxALL|wxEXPAND, 2);
 	BoxSizer17 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer17->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
@@ -365,7 +365,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	ADD2CONTROLS(controls, EditAutoSaveTimeout);
 	BoxSizer37->Add(EditAutoSaveTimeout, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	StaticTextAutoSaveTimeout = new wxStaticText(Panel1, wxID_ANY, _("Timeout(M)"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
-	BoxSizer37->Add(StaticTextAutoSaveTimeout, 0, wxALL|wxEXPAND, 2);
+	BoxSizer37->Add(StaticTextAutoSaveTimeout, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer7->Add(BoxSizer37, 0, wxALL|wxEXPAND, 2);
 	CheckBoxEnableAutoBackup = new wxCheckBox(Panel1, wxID_ANY, _("Auto backup"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXAUTOBACKUP"));
 	CheckBoxEnableAutoBackup->SetValue(false);
@@ -389,7 +389,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	ADD2CONTROLS(controls, EditMaxLineLength);
 	BoxSizer9->Add(EditMaxLineLength, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
 	StaticText3 = new wxStaticText(Panel2, wxID_ANY, _("Max line length before Line-Wrap (must restart MadEdit)"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT3"));
-	BoxSizer9->Add(StaticText3, 0, wxALL|wxEXPAND, 2);
+	BoxSizer9->Add(StaticText3, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer8->Add(BoxSizer9, 0, wxALL|wxEXPAND, 2);
 	BoxSizer10 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer10->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
@@ -397,7 +397,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	ADD2CONTROLS(controls, EditMaxColumns);
 	BoxSizer10->Add(EditMaxColumns, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
 	StaticText4 = new wxStaticText(Panel2, wxID_ANY, _("Columns of Wrap-By-Column"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT4"));
-	BoxSizer10->Add(StaticText4, 0, wxALL|wxEXPAND, 2);
+	BoxSizer10->Add(StaticText4, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer8->Add(BoxSizer10, 0, wxALL|wxEXPAND, 2);
 	BoxSizer11 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer11->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
@@ -405,7 +405,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	ADD2CONTROLS(controls, EditTabColumns);
 	BoxSizer11->Add(EditTabColumns, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
 	StaticText5 = new wxStaticText(Panel2, wxID_ANY, _("Columns of Tab"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT5"));
-	BoxSizer11->Add(StaticText5, 0, wxALL|wxEXPAND, 2);
+	BoxSizer11->Add(StaticText5, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer8->Add(BoxSizer11, 0, wxALL|wxEXPAND, 2);
 	BoxSizer13 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer13->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
@@ -413,7 +413,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	ADD2CONTROLS(controls, EditIndentColumns);
 	BoxSizer13->Add(EditIndentColumns, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
 	StaticText6 = new wxStaticText(Panel2, wxID_ANY, _("Columns of Indent"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT6"));
-	BoxSizer13->Add(StaticText6, 0, wxALL|wxEXPAND, 2);
+	BoxSizer13->Add(StaticText6, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer8->Add(BoxSizer13, 0, wxALL|wxEXPAND, 2);
 	BoxSizer5 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer5->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
@@ -421,7 +421,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	ADD2CONTROLS(controls, EditDateTime);
 	BoxSizer5->Add(EditDateTime, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	StaticTextDateTime = new wxStaticText(Panel2, wxID_ANY, _("Format of Date/Time"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXTDATETIME"));
-	BoxSizer5->Add(StaticTextDateTime, 0, wxALL|wxALIGN_CENTER_VERTICAL, 2);
+	BoxSizer5->Add(StaticTextDateTime, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer5->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	ButtonDateTime = new wxButton(Panel2, wxID_ANY, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTONDATETIME"));
 	ADD2CONTROLS(controls, ButtonDateTime);
@@ -512,7 +512,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	BoxSizer43->Add(StaticBoxSizer9, 0, wxALL|wxALIGN_LEFT, 5);
 	BoxSizer49 = new wxBoxSizer(wxVERTICAL);
 	StaticText23 = new wxStaticText(Panel6, wxID_ANY, _("Syntax:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
-	BoxSizer49->Add(StaticText23, 0, wxALL|wxEXPAND, 2);
+	BoxSizer49->Add(StaticText23, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	ComboBoxNewDocSyntax = new wxComboBox(Panel6, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(160,-1), 0, 0, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXNEWDOCSYNTAX"));
 	ADD2CONTROLS(controls, ComboBoxNewDocSyntax);
 	BoxSizer49->Add(ComboBoxNewDocSyntax, 0, wxALL|wxEXPAND, 2);
@@ -546,14 +546,14 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	BoxSizer47->Add(StaticBoxSizer10, 0, wxALL|wxALIGN_LEFT, 5);
 	BoxSizer51 = new wxBoxSizer(wxVERTICAL);
 	StaticText24 = new wxStaticText(Panel6, wxID_ANY, _("Font:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
-	BoxSizer51->Add(StaticText24, 0, wxALL|wxEXPAND, 2);
+	BoxSizer51->Add(StaticText24, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	ComboBoxNewDocFont = new wxComboBox(Panel6, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(160,-1), g_FontNames, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXNEWDOCFONT"));
 	ADD2CONTROLS(controls, ComboBoxNewDocFont);
 	BoxSizer51->Add(ComboBoxNewDocFont, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer47->Add(BoxSizer51, 0, wxALL|wxALIGN_LEFT, 5);
 	BoxSizer52 = new wxBoxSizer(wxVERTICAL);
 	StaticText25 = new wxStaticText(Panel6, wxID_ANY, _("Font Size:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
-	BoxSizer52->Add(StaticText25, 0, wxALL|wxEXPAND, 2);
+	BoxSizer52->Add(StaticText25, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	EditNewDocFontSize = new wxTextCtrl(Panel6, wxID_ANY, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRLNEWDOCFONTSIZE"));
 	EditNewDocFontSize->SetMaxLength(2);
 	ADD2CONTROLS(controls, EditNewDocFontSize);
