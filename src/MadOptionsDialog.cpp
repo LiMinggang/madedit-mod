@@ -512,7 +512,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	BoxSizer43->Add(StaticBoxSizer9, 0, wxALL|wxALIGN_LEFT, 5);
 	BoxSizer49 = new wxBoxSizer(wxVERTICAL);
 	StaticText23 = new wxStaticText(Panel6, wxID_ANY, _("Syntax:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
-	BoxSizer49->Add(StaticText23, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	BoxSizer49->Add(StaticText23, 0, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 2);
 	ComboBoxNewDocSyntax = new wxComboBox(Panel6, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(160,-1), 0, 0, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXNEWDOCSYNTAX"));
 	ADD2CONTROLS(controls, ComboBoxNewDocSyntax);
 	BoxSizer49->Add(ComboBoxNewDocSyntax, 0, wxALL|wxEXPAND, 2);
@@ -546,14 +546,14 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	BoxSizer47->Add(StaticBoxSizer10, 0, wxALL|wxALIGN_LEFT, 5);
 	BoxSizer51 = new wxBoxSizer(wxVERTICAL);
 	StaticText24 = new wxStaticText(Panel6, wxID_ANY, _("Font:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
-	BoxSizer51->Add(StaticText24, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	BoxSizer51->Add(StaticText24, 0, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 2);
 	ComboBoxNewDocFont = new wxComboBox(Panel6, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(160,-1), g_FontNames, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXNEWDOCFONT"));
 	ADD2CONTROLS(controls, ComboBoxNewDocFont);
 	BoxSizer51->Add(ComboBoxNewDocFont, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer47->Add(BoxSizer51, 0, wxALL|wxALIGN_LEFT, 5);
 	BoxSizer52 = new wxBoxSizer(wxVERTICAL);
 	StaticText25 = new wxStaticText(Panel6, wxID_ANY, _("Font Size:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
-	BoxSizer52->Add(StaticText25, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	BoxSizer52->Add(StaticText25, 0, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 2);
 	EditNewDocFontSize = new wxTextCtrl(Panel6, wxID_ANY, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRLNEWDOCFONTSIZE"));
 	EditNewDocFontSize->SetMaxLength(2);
 	ADD2CONTROLS(controls, EditNewDocFontSize);
