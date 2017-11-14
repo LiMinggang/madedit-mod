@@ -546,7 +546,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	BoxSizer47->Add(StaticBoxSizer10, 0, wxALL|wxALIGN_LEFT, 5);
 	BoxSizer51 = new wxBoxSizer(wxVERTICAL);
 	StaticText24 = new wxStaticText(Panel6, wxID_ANY, _("Font:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
-	BoxSizer51->Add(StaticText24, 0, wxALL|wxALIGN_LEFTL, 2);
+	BoxSizer51->Add(StaticText24, 0, wxALL|wxALIGN_LEFT, 2);
 	ComboBoxNewDocFont = new wxComboBox(Panel6, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(160,-1), g_FontNames, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXNEWDOCFONT"));
 	ADD2CONTROLS(controls, ComboBoxNewDocFont);
 	BoxSizer51->Add(ComboBoxNewDocFont, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
