@@ -557,7 +557,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	EditNewDocFontSize = new wxTextCtrl(Panel6, wxID_ANY, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRLNEWDOCFONTSIZE"));
 	EditNewDocFontSize->SetMaxLength(2);
 	ADD2CONTROLS(controls, EditNewDocFontSize);
-	BoxSizer52->Add(EditNewDocFontSize, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	BoxSizer52->Add(EditNewDocFontSize, 0, wxALL|wxALIGN_LEFT, 2);
 	BoxSizer47->Add(BoxSizer52, 0, wxALL|wxALIGN_LEFT, 5);
 	BoxSizer42->Add(BoxSizer47, 0, wxALL|wxALIGN_TOP, 5);
 	Panel6->SetSizer(BoxSizer42);
@@ -758,7 +758,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	StaticBoxSizer6 = new wxStaticBoxSizer(wxHORIZONTAL, Panel5, _("Path Setting"));
 	EditDictionaryDir = new wxTextCtrl(Panel5, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(200,-1), 0, wxDefaultValidator, _T("ID_EDITDICTIONARYDIR"));
 	ADD2CONTROLS(controls, EditDictionaryDir);
-	StaticBoxSizer6->Add(EditDictionaryDir, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	StaticBoxSizer6->Add(EditDictionaryDir, 0, wxALL|wxALIGN_LEFT, 2);
 	ButtonDictionaryDir = new wxButton(Panel5, wxID_ANY, _T("..."), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_DICTIONARY_DIR"));
 	ADD2CONTROLS(controls, ButtonDictionaryDir);
 	ADD2EVENTMAP(ButtonEvtMapVec, ButtonDictionaryDir, &MadOptionsDialog::ButtonDictionaryDirClick);
