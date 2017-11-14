@@ -750,7 +750,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	BoxSizer36->Add(BoxSizer34, 0, wxALL|wxALIGN_LEFT, 2);
 	StaticBoxSizer5 = new wxStaticBoxSizer(wxHORIZONTAL, Panel5, _("Language"));
 	ChoiceDictionary = new wxChoice(Panel5, wxID_ANY, wxDefaultPosition, wxSize(200,-1), 0, 0, 0, wxDefaultValidator, _T("ID_CHOICEDICTIONARY"));
-	StaticBoxSizer5->Add(ChoiceDictionary, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	StaticBoxSizer5->Add(ChoiceDictionary, 0, wxALL|wxALIGN_LEFT, 2);
 	ADD2CONTROLS(controls, ChoiceDictionary);
 	StaticText17 = new wxStaticText(Panel5, wxID_ANY, _("Dictionary"), wxDefaultPosition, wxSize(200,-1), 0, _T("ID_STATICTEXT17"));
 	StaticBoxSizer5->Add(StaticText17, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
