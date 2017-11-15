@@ -1462,7 +1462,7 @@ void DisplayFindAllResult( wxTreeItemId &myroot, vector<wxFileOffset> &begpos, v
 				loc += wxT(": "); //As delimiter
 
 				fmt = loc + linetext;
-				if(fmt.Len() > maxdisplay)
+				if(fmt.Len() > (size_t)maxdisplay)
 				{
 					fmt.Remove(maxdisplay-4);
 					fmt += wxT("...");
