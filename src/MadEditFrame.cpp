@@ -3587,7 +3587,7 @@ void MadEditFrame::CreateGUIControls( void )
 	m_QuickSearchBar->AddTool( menuRecentFilesToolbar, _( "Recent Files" ), m_ImageList->GetBitmap( recentfiles_xpm_idx ), wxNullBitmap, wxITEM_NORMAL, _("Recent file list"), _("List all recent opened files"), nullptr );
 
 	m_QuickSearchBar->Realize();
-	wxString      panelStatus;
+	wxString panelStatus;
 	m_Config->Read( wxT( "/UIView/QuickSearchBarStatus" ), &panelStatus );
 	
 	if(panelStatus.IsEmpty())
