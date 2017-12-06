@@ -136,6 +136,7 @@ Fix: Complier warnings from VC(L4)
 Fix: Restore InfoWindow instead of hide it if it was there last time
 Fix: Display bookmark on the first sub-row of a wrapped line
 Update Astyle to latest version
+Update Hunspell to latest version
 Other minor improvements
 
 Mod v0.4.10

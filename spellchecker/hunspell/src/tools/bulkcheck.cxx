@@ -42,8 +42,7 @@
 #include <iostream>
 #include <iomanip>
 
-#include "config.h" // for macro VERSION
-#include "hunspell.hxx"
+#include "../hunspell/hunspell.hxx"
 
 using namespace std;
 
@@ -52,7 +51,7 @@ int main(int argc, char** argv) {
   /* first parse the command line options */
 
   if (argc < 4) {
-    //TODO refactor to use a library for this
+    // Note: refactor to use a library for this
     fprintf(stderr, "bulkcheck (now it works with more dictionary files):\n");
     fprintf(stderr,
             "bulkcheck affix_file dictionary_file(s) file_of_words_to_check result_file\n");
@@ -69,7 +68,7 @@ int main(int argc, char** argv) {
   Hunspell* hunspell = new Hunspell(argv[1], argv[2]);
 
   // load extra dictionaries, such as medical dictionaries or personal dictionaries that do not have affix file
-  //TODO This should go into the documentation
+  // Note: this should go into the documentation
   if (argc > 3)
     for (int k = 3; k < argc - 1; ++k)
       hunspell->add_dic(argv[k]);
@@ -154,7 +153,7 @@ int main(int argc, char** argv) {
   float per_incorrect_space = 100.0 - per_correct_space;
   float per_incorrect_nospace = 100.0 - per_correct_nospace;
 
-  cerr << "Hunspell version\t" << VERSION << endl;
+  //cerr << "Hunspell version\t" << VERSION << endl;
   cerr << "Hunspell affix\t" << argv[1] << endl;
   cerr << "Hunspell dict\t" << argv[2] << endl;
 

@@ -79,7 +79,7 @@
 #define MAXCOMPOUNDSUGS 3
 
 // timelimit: max ~1/4 sec (process time on Linux) for a time consuming function
-#define TIMELIMIT (CLOCKS_PER_SEC >> 2)
+#define TIMELIMIT (CLOCKS_PER_SEC / 4)
 #define MINTIMER 100
 #define MAXPLUSTIMER 100
 
@@ -109,6 +109,7 @@ class SuggestMgr {
   char* ctry;
   size_t ctryl;
   std::vector<w_char> ctry_utf;
+  bool lang_with_dash_usage;
 
   AffixMgr* pAMgr;
   unsigned int maxSug;
@@ -124,8 +125,8 @@ class SuggestMgr {
   SuggestMgr(const char* tryme, unsigned int maxn, AffixMgr* aptr);
   ~SuggestMgr();
 
-  void suggest(std::vector<std::string>& slst, const char* word, int* onlycmpdsug);
-  void ngsuggest(std::vector<std::string>& slst, const char* word, const std::vector<HashMgr*>& rHMgr);
+  bool suggest(std::vector<std::string>& slst, const char* word, int* onlycmpdsug);
+  void ngsuggest(std::vector<std::string>& slst, const char* word, const std::vector<HashMgr*>& rHMgr, int captype);
 
   std::string suggest_morph(const std::string& word);
   std::string suggest_gen(const std::vector<std::string>& pl, const std::string& pattern);
@@ -149,7 +150,7 @@ class SuggestMgr {
   int extrachar(std::vector<std::string>&, const char*, int);
   int badcharkey(std::vector<std::string>&, const char*, int);
   int badchar(std::vector<std::string>&, const char*, int);
-  int twowords(std::vector<std::string>&, const char*, int);
+  bool twowords(std::vector<std::string>&, const char*, int, bool);
 
   void capchars_utf(std::vector<std::string>&, const w_char*, int wl, int);
   int doubletwochars_utf(std::vector<std::string>&, const w_char*, int wl, int);

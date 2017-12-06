@@ -46,11 +46,11 @@
 #include <sstream>
 #include <string>
 #include <string.h>
-#include "config.h"
-#include "atypes.hxx"
-#include "hunspell.hxx"
-#include "csutil.hxx"
-#include "hunzip.hxx"
+#include "../../config.h"
+#include "../hunspell/atypes.hxx"
+#include "../hunspell/hunspell.hxx"
+#include "../hunspell/csutil.hxx"
+#include "../hunspell/hunzip.hxx"
 
 #define HUNSPELL_VERSION VERSION
 #define INPUTLEN 50
@@ -92,13 +92,13 @@
 #include <unistd.h>
 #endif
 
-#include "textparser.hxx"
-#include "htmlparser.hxx"
-#include "latexparser.hxx"
-#include "manparser.hxx"
-#include "firstparser.hxx"
-#include "xmlparser.hxx"
-#include "odfparser.hxx"
+#include "../parsers/textparser.hxx"
+#include "../parsers/htmlparser.hxx"
+#include "../parsers/latexparser.hxx"
+#include "../parsers/manparser.hxx"
+#include "../parsers/firstparser.hxx"
+#include "../parsers/xmlparser.hxx"
+#include "../parsers/odfparser.hxx"
 
 #else
 
@@ -107,13 +107,13 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include <unistd.h>
-#include "textparser.hxx"
-#include "htmlparser.hxx"
-#include "latexparser.hxx"
-#include "manparser.hxx"
-#include "firstparser.hxx"
-#include "xmlparser.hxx"
-#include "odfparser.hxx"
+#include "../parsers/textparser.hxx"
+#include "../parsers/htmlparser.hxx"
+#include "../parsers/latexparser.hxx"
+#include "../parsers/manparser.hxx"
+#include "../parsers/firstparser.hxx"
+#include "../parsers/xmlparser.hxx"
+#include "../parsers/odfparser.hxx"
 
 #define LIBDIR                \
   "/usr/share/hunspell:"      \
@@ -155,24 +155,19 @@ char text_conv[MAXLNLEN];
 #if ENABLE_NLS
 #ifdef HAVE_LOCALE_H
 #include <locale.h>
-#ifdef HAVE_LANGINFO_CODESET
+#ifdef HAVE_LANGINFO_H
 #include <langinfo.h>
 #endif
 #endif
-#ifdef HAVE_LIBINTL_H
 #include <libintl.h>
-#else
-#include <../../intl/libintl.h>
-#endif
 #else
 #define gettext
 #undef HAVE_LOCALE_H
-#undef HAVE_LIBINTL_H
 #endif
 
 #ifdef HAVE_CURSES_H
-#ifdef HAVE_NCURSESW_H
-#include <ncurses.h>
+#ifdef HAVE_NCURSESW_CURSES_H
+#include <ncursesw/curses.h>
 #else
 #include <curses.h>
 #endif
@@ -203,6 +198,8 @@ char* privdicname = NULL;
 const char* currentfilename = NULL;
 
 int modified;  // modified file sign
+bool multiple_files; // for listing file names in pipe interface
+
 enum {
   NORMAL,
   BADWORD,     // print only bad words
@@ -255,7 +252,7 @@ std::string chenc(const std::string& st, const char* enc1, const char* enc2) {
   if (!enc1 || !enc2 || strcmp(enc1, enc2) == 0)
     return st;
 
-  std::string out(st.size(), std::string::value_type());
+  std::string out(st.size() < 15 ? 15 : st.size(), '\0');
   size_t c1(st.size());
   size_t c2(out.size());
   ICONV_CONST char* source = (ICONV_CONST char*) &st[0];
@@ -269,8 +266,8 @@ std::string chenc(const std::string& st, const char* enc1, const char* enc2) {
       if (errno == E2BIG) {
         //c2 is zero or close to zero
         size_t next_start = out.size() - c2;
-        c2 += c1;
-        out.resize(out.size() + c2);
+        c2 += c1*2;
+        out.resize(out.size() + c1*2);
         dest = &out[next_start];
       } else
         break;
@@ -659,6 +656,8 @@ void pipe_interface(Hunspell** pMS, int format, FILE* fileid, char* filename) {
   int d = 0;
   char* odftmpdir = NULL;
 
+  std::string filename_prefix = (multiple_files) ? filename + std::string(": ") : "";
+
   const char* extension = (filename) ? basename(filename, '.') : NULL;
   TextParser* parser = get_parser(format, extension, pMS[0]);
   char tmpdirtemplate[] = "/tmp/hunspellXXXXXX";
@@ -675,7 +674,7 @@ void pipe_interface(Hunspell** pMS, int format, FILE* fileid, char* filename) {
     // to avoid tokenization problems (fgets could stop within an XML tag)
     std::ostringstream sbuf;
     sbuf << "unzip -p \"" << filename << "\" content.xml | sed "
-            "\"s/\\(<\\/text:p>\\|<\\/style:style>\\)\\(.\\)/\\1\\n\\2/g\" "
+            "\"s/\\(<\\/text:p>\\|<\\/style:style>\\)\\(.\\)/\\1\\n\\2/g;s/<\\/\\?text:span[^>]*>//g\" "
             ">" << odftmpdir << "/content.xml";
     if (!secure_filename(filename) || system(sbuf.str().c_str()) != 0) {
       if (secure_filename(filename))
@@ -796,22 +795,23 @@ nextline:
       parser->put_line(buf + pos);
       std::string token;
       while (parser->next_token(token)) {
+        token = parser->get_word(token);
         mystrrep(token, ENTITY_APOS, "'");
         switch (filter_mode) {
           case BADWORD: {
             if (!check(pMS, &d, token, NULL, NULL)) {
               bad = 1;
               if (!printgood)
-                fprintf(stdout, "%s\n", token.c_str());
+                fprintf(stdout, "%s%s\n", filename_prefix.c_str(), token.c_str());
             } else {
               if (printgood)
-                fprintf(stdout, "%s\n", token.c_str());
+                fprintf(stdout, "%s%s\n", filename_prefix.c_str(), token.c_str());
             }
             continue;
           }
 
           case WORDFILTER: {
-            if (!check(pMS, &d, token, NULL, NULL)) {
+            if (!check(pMS, &d, parser->get_word(token), NULL, NULL)) {
               if (!printgood)
                 fprintf(stdout, "%s\n", buf);
             } else {
@@ -822,7 +822,7 @@ nextline:
           }
 
           case BADLINE: {
-            if (!check(pMS, &d, token, NULL, NULL)) {
+            if (!check(pMS, &d, parser->get_word(token), NULL, NULL)) {
               bad = 1;
             }
             continue;
@@ -833,10 +833,10 @@ nextline:
           case AUTO2:
           case AUTO3: {
             FILE* f = (filter_mode == AUTO) ? stderr : stdout;
-            if (!check(pMS, &d, token, NULL, NULL)) {
+            if (!check(pMS, &d, parser->get_word(token), NULL, NULL)) {
               bad = 1;
               std::vector<std::string> wlst =
-                  pMS[d]->suggest(chenc(token, io_enc, dic_enc[d]));
+                  pMS[d]->suggest(chenc(parser->get_word(token), io_enc, dic_enc[d]));
               if (!wlst.empty()) {
                 parser->change_token(chenc(wlst[0], dic_enc[d], io_enc).c_str());
                 if (filter_mode == AUTO3) {
@@ -909,7 +909,7 @@ nextline:
           case PIPE: {
             int info;
             std::string root;
-            if (check(pMS, &d, token, &info, &root)) {
+            if (check(pMS, &d, parser->get_word(token), &info, &root)) {
               if (!terse_mode) {
                 if (verbose_mode)
                   fprintf(stdout, "* %s\n", token.c_str());
@@ -1526,11 +1526,11 @@ int interactive_line(TextParser* parser,
   int d = 0;
   std::string token;
   while (parser->next_token(token)) {
-    if (!check(pMS, &d, token, &info, NULL)) {
+    if (!check(pMS, &d, parser->get_word(token), &info, NULL)) {
       std::vector<std::string> wlst;
       dialogscreen(parser, token, filename, info, wlst);  // preview
       refresh();
-      std::string dicbuf = chenc(token, io_enc, dic_enc[d]);
+      std::string dicbuf = chenc(parser->get_word(token), io_enc, dic_enc[d]);
       wlst = pMS[d]->suggest(mystrrep(dicbuf, ENTITY_APOS, "'").c_str());
       if (wlst.empty()) {
         dialogexit = dialog(parser, pMS[d], token, filename, wlst, info);
@@ -1766,7 +1766,7 @@ int main(int argc, char** argv) {
 #ifdef HAVE_LOCALE_H
   setlocale(LC_ALL, "");
   textdomain("hunspell");
-#ifdef HAVE_LANGINFO_CODESET
+#ifdef HAVE_LANGINFO_H
   ui_enc = nl_langinfo(CODESET);
 #endif
 #endif
@@ -1999,6 +1999,8 @@ int main(int argc, char** argv) {
       }
     }
   }
+
+  multiple_files = (arg_files > 0) && (argc - arg_files > 1);
 
   if (printgood && (filter_mode == NORMAL))
     filter_mode = BADWORD;
