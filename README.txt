@@ -105,6 +105,7 @@ Known issues(that may not be fixed in future releases):
 4. Scroll function on Right click menu of scroll bars only works with Windows
 5. '*' is allowed in file name under Linux/Unix but is used as delimiter for file name and line number, use -d and -w to use it as wildcard
 6. Alt+LeftDown to toggle bookmark does not work on Ubuntu because Alt was a special key(?) for the OS
+7. Preview html/convert html to plain text will hang on some html files(wxWidgets html view bug)
 
 Feature/issues to be released
 -----------------------------
