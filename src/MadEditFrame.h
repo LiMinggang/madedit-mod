@@ -272,6 +272,7 @@ enum   // menu id
 	menuToolBarsToggleAll,
 	menuToolBar1,
 	menuToolBar99 = menuToolBar1 + 98,
+	menuMenuBarToggle,
 
 	// tools
 	menuOptions,
@@ -510,6 +511,7 @@ private:
 	void OnUpdateUI_MenuSpellAdd2Dict( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuSpellRemoveFromDict( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuViewToolbarsToggleAll( wxUpdateUIEvent& event );
+	void OnUpdateUI_MenuViewMenuBarToggle( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuViewToolbarList( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuViewTypewriterMode( wxUpdateUIEvent& event );
 
@@ -672,7 +674,8 @@ private:
 	void OnSpellCheckIgnore( wxCommandEvent& WXUNUSED(event) );
 	void OnSpellAdd2Dict( wxCommandEvent& WXUNUSED(event) );
 	void OnSpellCheckRemoveFromDict( wxCommandEvent& WXUNUSED(event) );
-	void OnViewToolBarsToggleAll( wxCommandEvent& WXUNUSED(event) );
+	void OnViewToolBarsToggleAll( wxCommandEvent& event );
+	void OnViewMenuBarToggle( wxCommandEvent& event );
 	void OnViewToolbars( wxCommandEvent& WXUNUSED(event) );
 	void OnViewTypewriterMode( wxCommandEvent& WXUNUSED(event) );
 
