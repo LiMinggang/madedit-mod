@@ -1870,6 +1870,7 @@ MadEditFrame::wxCmdEvtHandlerMap_t MadEditFrame::m_menu_evt_map[] =
 	{ menuSpellAdd2Dict, &MadEditFrame::OnSpellAdd2Dict },
 	{ menuSpellRemoveFromDict, &MadEditFrame::OnSpellCheckRemoveFromDict },
 	{ menuToolBarsToggleAll, &MadEditFrame::OnViewToolBarsToggleAll },
+	{ menuMenuBarToggle, &MadEditFrame::OnViewMenuBarToggle },
 	{ menuIncFontSize, &MadEditFrame::OnIncDecFontSize },
 	{ menuDecFontSize, &MadEditFrame::OnIncDecFontSize },
 
@@ -2072,6 +2073,7 @@ MadEditFrame::wxUIUpdateEvtHandlerMap_t MadEditFrame::m_menu_ui_updater_map[] =
 	{ menuSpellAdd2Dict, &MadEditFrame::OnUpdateUI_MenuSpellAdd2Dict },
 	{ menuSpellRemoveFromDict, &MadEditFrame::OnUpdateUI_MenuSpellRemoveFromDict },
 	{ menuToolBarsToggleAll, &MadEditFrame::OnUpdateUI_MenuViewToolbarsToggleAll },
+	{ menuMenuBarToggle, &MadEditFrame::OnUpdateUI_MenuViewMenuBarToggle },
 	{ menuTypewriterMode, &MadEditFrame::OnUpdateUI_MenuViewTypewriterMode },
 	// tools
 	{ menuByteOrderMark, &MadEditFrame::OnUpdateUI_MenuToolsByteOrderMark },
@@ -2461,6 +2463,7 @@ CommandData CommandTable[] =
 	{ 0,			  1, 0,			         0,						    0,						 0,			       wxITEM_SEPARATOR, -1,			     0,						 0, 0, 0, 0, false},
 	{ 0,			  1, menuToolBars,          wxT( "menuToolBar" ),           _( "Toolbars" ),			 0,			       wxITEM_NORMAL,    -1,			     &g_Menu_Toolbars,          0, 0, 0, 0, false},
 	{ 0,			  2, menuToolBarsToggleAll, wxT( "menuToolBarsToggleAll" ), _( "Toggle Main Toolbar" ),  0,			       wxITEM_CHECK,     -1,			     0,						 _( "Show/Hide Main Toolbar" ), 0, 0, 0, false},
+	{ 0,			  2, menuMenuBarToggle,     wxT( "menuMenuBarToggle" ),     _( "Toggle Menubar" ),  0,			           wxITEM_CHECK,     -1,			     0,						 _( "Show/Hide Main Menubar" ), 0, 0, 0, false},
 	{ 0,			  2, 0,			         0,						    0,						 0,			       wxITEM_SEPARATOR, -1,			     0,						 0, 0, 0, 0, false},
 	{ 0,			  1, 0,			         0,						    0,						 0,			       wxITEM_SEPARATOR, -1,			     0,						 0, 0, 0, 0, false},
 	{ ecTextMode,     1, menuTextMode,          wxT( "menuTextMode" ),          _( "&Text Mode" ),           wxT( "Alt-1" ),        wxITEM_CHECK,     textmode_xpm_idx,   0,						 _( "Change the editing mode to Text-Mode" ), 0, &g_tbEDITMODE_ptr, _( "Text Mode" ), false},
@@ -5460,6 +5463,14 @@ void MadEditFrame::OnUpdateUI_MenuViewToolbarsToggleAll( wxUpdateUIEvent& event 
 
 	event.Check( check );
 }
+
+void MadEditFrame::OnUpdateUI_MenuViewMenuBarToggle( wxUpdateUIEvent& event )
+{
+	event.Enable( true );
+	event.Check( GetMenuBar() != nullptr );
+}
+
+
 void MadEditFrame::OnUpdateUI_MenuViewTypewriterMode( wxUpdateUIEvent& event )
 {
 	event.Enable( g_ActiveMadEdit != nullptr );
@@ -8088,6 +8099,7 @@ void MadEditFrame::OnViewTextMode( wxCommandEvent& WXUNUSED(event) )
 			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetEditMode(MadEditMode.TextMode)" ) ) );
 	}
 }
+
 void MadEditFrame::OnViewColumnMode( wxCommandEvent& WXUNUSED(event) )
 {
 	if( g_ActiveMadEdit != nullptr )
@@ -8098,6 +8110,7 @@ void MadEditFrame::OnViewColumnMode( wxCommandEvent& WXUNUSED(event) )
 			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetEditMode(MadEditMode.ColumnMode)" ) ) );
 	}
 }
+
 void MadEditFrame::OnViewHexMode( wxCommandEvent& WXUNUSED(event) )
 {
 	if( g_ActiveMadEdit != nullptr )
@@ -8265,7 +8278,6 @@ void MadEditFrame::OnIncDecFontSize( wxCommandEvent& event )
 
 void MadEditFrame::HideAllToolBars()
 {
-
 	for( int toolbarId = tbSTANDARD; toolbarId < tbMAX; ++toolbarId )
 	{
 		if( m_AuiManager.GetPane( WxToolBar[toolbarId] ).IsShown( ) )
@@ -8297,6 +8309,18 @@ void MadEditFrame::OnViewToolBarsToggleAll( wxCommandEvent& event )
 	else
 	{
 		HideAllToolBars();
+	}
+}
+
+void MadEditFrame::OnViewMenuBarToggle( wxCommandEvent& event )
+{
+	if( event.IsChecked() || event.GetInt() == -1 )
+	{
+		SetMenuBar(WxMenuBar1);
+	}
+	else
+	{
+		SetMenuBar(nullptr);
 	}
 }
 
@@ -10135,6 +10159,7 @@ void MadEditFrame::OnContextMenu( wxContextMenuEvent& WXUNUSED(event) )
 		g_Menu_FrameContext = new wxMenu( ( long )0 );
 		g_Menu_FrameContext->AppendCheckItem( menuToolBarsToggleAll, _( "Toggle Main Toolbar" ) );
 		g_Menu_FrameContext->AppendSeparator();
+		g_Menu_FrameContext->AppendCheckItem( menuMenuBarToggle, _( "Toggle Main Menubar" ) );
 
 		for( int i = tbSTANDARD; i < tbMAX; ++i )
 		{

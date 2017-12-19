@@ -125,6 +125,7 @@ Note: please use the convertcfg.py to convert your old config if you want to res
 
 New: Open file path with default file explorer, set "EXTEXPLORER" as the env for open in another application #243
 New: Add '-d' to define a new delimiter to replace '*'
+New: Show/Hide menu bar
 Fix: Message strings were not translated during initialization
 Fix: TXT syntax would not be applied on first loading(0.4.10) #244
 Fix: Change font size/font/encoding/syntax/linespacing will not update font toolbar #246
@@ -138,6 +139,7 @@ Fix: Restore InfoWindow instead of hide it if it was there last time
 Fix: Display bookmark on the first sub-row of a wrapped line
 Update Astyle to latest version
 Update Hunspell to latest version
+Update Python to 2.7.14
 Other minor improvements
 
 Mod v0.4.10
