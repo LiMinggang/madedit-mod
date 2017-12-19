@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-19 10:14+0800\n"
-"PO-Revision-Date: 2017-10-18 23:14+0800\n"
+"POT-Creation-Date: 2017-10-31 21:12+0800\n"
+"PO-Revision-Date: 2017-12-18 16:28+0800\n"
 "Last-Translator: zhtw <zhtw2013@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
 "Language: zh_TW\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 1.8.8\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Language: zh_TW\n"
 "X-Source-Language: C\n"
@@ -427,7 +427,7 @@ msgstr "列印"
 
 #: wxstd.po.cpp:103
 msgid "Document:"
-msgstr "文檔："
+msgstr "文件："
 
 #: wxstd.po.cpp:104
 msgid "Progress:"
@@ -633,7 +633,7 @@ msgstr "找到 %d 個符合篩選條件的文字..."
 #: ../src/MadEdit/MadEditSearch.cpp:721 ../src/MadEdit/MadEditSearch.cpp:864
 #: ../src/MadEdit/MadEditSearch.cpp:962 ../src/MadEdit/MadEditSearch.cpp:1025
 msgid "Regex error:"
-msgstr "正則運算式錯誤："
+msgstr "正規運算式錯誤："
 
 #: ../src/MadEdit/MadEncoding.cpp:144
 msgid "Macintosh"
@@ -772,7 +772,7 @@ msgstr "另存為(&A)..."
 
 #: ../src/MadEditFrame.cpp:2140
 msgid "Save the file with a new name"
-msgstr "以新檔案名儲存"
+msgstr "以新檔名儲存"
 
 #: ../src/MadEditFrame.cpp:2141
 msgid "Save A Copy"
@@ -1839,7 +1839,7 @@ msgstr "儲存目前錄製的巨集"
 
 #: ../src/MadEditFrame.cpp:2483
 msgid "Local Script List"
-msgstr "本地指令碼清單"
+msgstr "本機指令碼清單"
 
 #: ../src/MadEditFrame.cpp:2484
 msgid "Edit Saved MacroScript..."
@@ -2329,7 +2329,7 @@ msgstr "巨集"
 
 #: ../src/MadEditFrame.cpp:2615
 msgid "Font/Encoding"
-msgstr "字體/編碼"
+msgstr "字型/編碼"
 
 #: ../src/MadEditFrame.cpp:2627
 msgid "Scrolls text according to vertical bar posistion"
@@ -2449,7 +2449,7 @@ msgstr "Markdown"
 
 #: ../src/MadEditFrame.cpp:3167
 msgid "Copy full path name"
-msgstr "複製全寫目錄名稱"
+msgstr "複製整個路徑名稱"
 
 #: ../src/MadEditFrame.cpp:3168
 msgid "Copy full file name"
@@ -2473,19 +2473,19 @@ msgstr "執行巨集指令碼檔案"
 
 #: ../src/MadEditFrame.cpp:3406
 msgid "Increase Font Size"
-msgstr "增加字體大小"
+msgstr "放大字型"
 
 #: ../src/MadEditFrame.cpp:3406
 msgid "Make your text a bit bigger"
-msgstr "使文本變大一些"
+msgstr "將文字放大一點"
 
 #: ../src/MadEditFrame.cpp:3407
 msgid "Decrease Font Size"
-msgstr "減小字體大小"
+msgstr "縮小字型"
 
 #: ../src/MadEditFrame.cpp:3407
 msgid "Make your text a bit smaller"
-msgstr "使文本變小一些"
+msgstr "將文字縮小一點"
 
 #: ../src/MadEditFrame.cpp:3556
 msgid "Find matched text next to caret"
@@ -2774,7 +2774,7 @@ msgstr "已經過了檔案或所選擇區域開頭"
 #: ../src/MadEditFrame.cpp:10318 ../src/MadSearchReplaceDialog.cpp:514
 #: ../src/MadSearchReplaceDialog.cpp:662
 msgid "Passed the end of the file"
-msgstr "經過了文件結尾"
+msgstr "經過了檔案結尾"
 
 #: ../src/MadEditFrame.cpp:10363
 msgid "Information Window"
@@ -2906,7 +2906,7 @@ msgstr "包含子目錄"
 
 #: ../src/MadFindInFilesDialog.cpp:231
 msgid "Automatic Detection"
-msgstr "自動檢測"
+msgstr "自動偵測"
 
 #: ../src/MadFindInFilesDialog.cpp:457 ../src/MadOptionsDialog.cpp:1691
 #: ../src/MadOptionsDialog.cpp:1708
@@ -3173,7 +3173,7 @@ msgstr "要從選擇的開頭查找嗎？"
 
 #: ../src/MadSearchReplaceDialog.cpp:544 ../src/MadSearchReplaceDialog.cpp:1130
 msgid "Do you want to find from begin of file?"
-msgstr "要從文件開頭尋找嗎？"
+msgstr "要從檔案開頭尋找嗎？"
 
 #: ../src/MadSearchReplaceDialog.cpp:569 ../src/MadSearchReplaceDialog.cpp:703
 #: ../src/MadSearchReplaceDialog.cpp:1725
@@ -3186,7 +3186,7 @@ msgstr "要從選擇的末尾開始尋找嗎？"
 
 #: ../src/MadSearchReplaceDialog.cpp:687
 msgid "Do you want to find from end of file?"
-msgstr "要從文件結尾處開始尋找？"
+msgstr "要從檔案結尾處開始尋找？"
 
 #: ../src/MadSearchReplaceDialog.cpp:1126
 msgid ""
@@ -3263,7 +3263,7 @@ msgstr "來源檔案格式化工具"
 
 #: ../src/MadSourceFormatDialog.cpp:98
 msgid "Bracket Style"
-msgstr "花括號樣式"
+msgstr "大括號樣式"
 
 #: ../src/MadSourceFormatDialog.cpp:100
 msgid "Sample"
@@ -3271,27 +3271,27 @@ msgstr "範例"
 
 #: ../src/MadSourceFormatDialog.cpp:101
 msgid "Sample of the bracket style option chosen to use:"
-msgstr "所選擇使用的花括號格式樣例"
+msgstr "所選擇使用的大括號格式樣例"
 
 #: ../src/MadSourceFormatDialog.cpp:199
 msgid "Attach Classes"
-msgstr "類名後跟著花括號"
+msgstr "類名後跟著大括號"
 
 #: ../src/MadSourceFormatDialog.cpp:202
 msgid "Attach Extern C"
-msgstr "Extern C後跟著花括號"
+msgstr "Extern C後跟著大括號"
 
 #: ../src/MadSourceFormatDialog.cpp:205
 msgid "Attach Namespaces"
-msgstr "命名空間後跟著花括號"
+msgstr "命名空間後跟著大括號"
 
 #: ../src/MadSourceFormatDialog.cpp:208
 msgid "Attach Inlines"
-msgstr "Inline後跟著花括號"
+msgstr "Inline後跟著大括號"
 
 #: ../src/MadSourceFormatDialog.cpp:211
 msgid "Attach Closing While"
-msgstr "\"do-while\"花括號後跟著while"
+msgstr "\"do-while\"大括號後跟著while"
 
 #: ../src/MadSourceFormatDialog.cpp:220 ../src/MadSourceFormatDialog.cpp:413
 msgid "Indentation size(in spaces):"
@@ -3332,7 +3332,7 @@ msgstr "縮排switch語句"
 #: ../src/MadSourceFormatDialog.cpp:250
 msgid ""
 "Indent preprocessor blocks at bracket level zero, and within a namespace"
-msgstr "縮排零級花括號以及命名空間內的預編譯運算子語句"
+msgstr "縮排零級大括號以及命名空間內的預編譯運算子語句"
 
 #: ../src/MadSourceFormatDialog.cpp:253
 msgid "Indent multi-line preprocessor definitions ending with a backslash"
@@ -3364,7 +3364,7 @@ msgstr "一個續行時縮排幾個空格"
 
 #: ../src/MadSourceFormatDialog.cpp:286
 msgid "Break closing headers from their immediately preceding closing braces"
-msgstr "把閉合的語句頭從前面的閉合花括號處中斷"
+msgstr "將閉合的語句頭從前面的閉合大括號處中斷"
 
 #: ../src/MadSourceFormatDialog.cpp:289
 msgid "Break 'else if()' header combinations into seperate lines"
@@ -3372,20 +3372,20 @@ msgstr "把'else if()'語句頭組合中斷成單獨的多行"
 
 #: ../src/MadSourceFormatDialog.cpp:292
 msgid "Add braces to unbraced one line conditional statements"
-msgstr "給沒有花括號的單行語句加上花括號"
+msgstr "將沒有大括號的單行語句加上大括號"
 
 #: ../src/MadSourceFormatDialog.cpp:295
 msgid "Add one line braces to unbraced one line conditional statements"
-msgstr "給沒有花括號的單行條件語句加上單行花括號"
+msgstr "將沒有大括號的單行條件語句加上單行大括號"
 
 #: ../src/MadSourceFormatDialog.cpp:298
 msgid ""
 "Remove braces from conditional statements (single statement on a single line)"
-msgstr "去掉條件語句的花括號（單行語句）"
+msgstr "去掉條件語句的大括號（單行語句）"
 
 #: ../src/MadSourceFormatDialog.cpp:301
 msgid "Don't break one-line blocks"
-msgstr "不要中斷單行程式塊"
+msgstr "不要中斷單行程式區塊"
 
 #: ../src/MadSourceFormatDialog.cpp:304
 msgid ""
@@ -3423,12 +3423,12 @@ msgstr "中斷前一行最後面的邏輯條件"
 
 #: ../src/MadSourceFormatDialog.cpp:340
 msgid "Pad empty lines around header blocks (e.g. 'if', 'while'...)"
-msgstr "在語句頭塊（例如'if'，'while'等等）周圍填充空行"
+msgstr "在頁首組塊（例如'if'，'while'等等）周圍填充空行"
 
 #: ../src/MadSourceFormatDialog.cpp:345
 msgid ""
 "Treat closing header blocks (e.g. 'else', 'catch') as stand-alone blocks"
-msgstr "把閉合語句頭語句塊（例如'else'，'catch'）作為獨立的語句塊"
+msgstr "將閉合頁首組塊（例如'else'，'catch'）當做獨立的語句區塊"
 
 #: ../src/MadSourceFormatDialog.cpp:349
 msgid "Insert space padding around operators"
@@ -3504,7 +3504,7 @@ msgstr "樣式"
 
 #: ../src/MadSourceFormatDialog.cpp:422
 msgid "Brackets"
-msgstr "花括號"
+msgstr "大括號"
 
 #: ../src/MadSourceFormatDialog.cpp:423
 msgid "Indentation"
@@ -3544,7 +3544,7 @@ msgstr "刪除重複的(&R)"
 
 #: ../src/MadOptionsDialog.cpp:269
 msgid "Language of User Interface (must restart MadEdit)"
-msgstr "使用者介面語言（必須重啟才能生效）"
+msgstr "使用者介面語言（必須重新啟動才能生效）"
 
 #: ../src/MadOptionsDialog.cpp:277
 msgid ""
@@ -3578,7 +3578,7 @@ msgstr "在搜尋結果中最多顯示的字元數"
 
 #: ../src/MadOptionsDialog.cpp:332
 msgid "Single Instance (must restart MadEdit)"
-msgstr "只執行一個執行個體 (需要重啟 MadEdit)"
+msgstr "只執行一個程式個體，不要重複開啟 MadEdit（必須重新啟動 MadEdit）"
 
 #: ../src/MadOptionsDialog.cpp:336
 msgid "Reload files previously open on startup"
@@ -3618,7 +3618,7 @@ msgid ""
 "Add MadEdit to the RightClickMenu of Explorer(Deselect to Remove the Entry "
 "from Windows Registry)"
 msgstr ""
-"將 MadEdit 增加到檔案總管的右鍵選單 (取消選取會把寫入註冊表中的資訊移除)"
+"將 MadEdit 增加到檔案總管的右鍵選單 (取消選取會將寫入登錄檔中的資訊移除)"
 
 #: ../src/MadOptionsDialog.cpp:391
 msgid "Max line length before Line-Wrap (must restart MadEdit)"
@@ -3789,7 +3789,7 @@ msgstr "提示："
 
 #: ../src/MadOptionsDialog.cpp:700
 msgid "Assigned Keys:"
-msgstr "指定的按鍵："
+msgstr "已指派的按鍵："
 
 #: ../src/MadOptionsDialog.cpp:707
 msgid "New Key:"
@@ -3809,7 +3809,7 @@ msgstr "在選單中顯示此按鍵"
 
 #: ../src/MadOptionsDialog.cpp:733
 msgid "Reset all keys to default (must restart MadEdit)"
-msgstr "還原所有按鍵為原始設定 (需要重啟 MadEdit-Mod)"
+msgstr "還原所有按鍵為預設設定 (必須重新啟動 MadEdit-Mod)"
 
 #: ../src/MadOptionsDialog.cpp:746
 msgid "Enable Personal Dictionary"
@@ -3837,7 +3837,7 @@ msgstr "編輯"
 
 #: ../src/MadOptionsDialog.cpp:772
 msgid "New Document"
-msgstr "新文檔"
+msgstr "新增文件"
 
 #: ../src/MadOptionsDialog.cpp:774
 msgid "Keys"
@@ -3850,12 +3850,12 @@ msgstr "拼字檢查"
 #: ../src/MadOptionsDialog.cpp:846
 #, c-format
 msgid "[%f] &File Name"
-msgstr "[%f] 檔案名(&F)"
+msgstr "[%f] 檔案名稱(&F)"
 
 #: ../src/MadOptionsDialog.cpp:847
 #, c-format
 msgid "[%p] &Path Name"
-msgstr "[%p] 完整路徑名(&P)"
+msgstr "[%p] 完整路徑名稱(&P)"
 
 #: ../src/MadOptionsDialog.cpp:849
 #, c-format
@@ -4017,12 +4017,12 @@ msgstr "無法指定按鍵到此項目"
 
 #: ../src/MadOptionsDialog.cpp:1556
 msgid "This key is not assigned"
-msgstr "這個按鍵尚未指定"
+msgstr "這個按鍵尚未指派"
 
 #: ../src/MadOptionsDialog.cpp:1580
 #, c-format
 msgid "This key is assigned to [%s]"
-msgstr "這個按鍵已指定給 [%s]"
+msgstr "這個按鍵已指派給 [%s]"
 
 #: ../src/MadConvEncDialog.cpp:45
 msgid "Convert Encoding"
