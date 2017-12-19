@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-31 21:12+0800\n"
-"PO-Revision-Date: 2017-12-18 16:28+0800\n"
+"PO-Revision-Date: 2017-12-19 17:53+0800\n"
 "Last-Translator: zhtw <zhtw2013@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
 "Language: zh_TW\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8.8\n"
+"X-Generator: Poedit 2.0.3\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Language: zh_TW\n"
 "X-Source-Language: C\n"
@@ -1744,9 +1744,8 @@ msgid "Show/Hide Main Toolbar"
 msgstr "顯示/隱藏主工具列"
 
 #: ../src/MadEditFrame.cpp:2466
-#, fuzzy
 msgid "Toggle Menubar"
-msgstr "切換顯示主工具列"
+msgstr "切換顯示功能表列"
 
 #: ../src/MadEditFrame.cpp:2466
 #, fuzzy
@@ -2465,7 +2464,7 @@ msgstr "複製目錄名稱"
 
 #: ../src/MadEditFrame.cpp:3171
 msgid "Open directory of the file"
-msgstr ""
+msgstr "開啟檔案所在的目錄"
 
 #: ../src/MadEditFrame.cpp:3199
 msgid "Run Scripts"
@@ -2729,9 +2728,8 @@ msgid "Open Mad Macro File"
 msgstr "開啟MadPython巨集檔案"
 
 #: ../src/MadEditFrame.cpp:9200
-#, fuzzy
 msgid "|All files(*;*.*)"
-msgstr "所有檔案 (*;*.*)"
+msgstr "|所有檔案 (*;*.*)"
 
 #: ../src/MadEditFrame.cpp:9201
 msgid "Mad Macro"
@@ -2763,9 +2761,8 @@ msgid "Press OK to visit our HomePage."
 msgstr "按「確定」存取 MadEdit-Mod 首頁。"
 
 #: ../src/MadEditFrame.cpp:10162
-#, fuzzy
 msgid "Toggle Main Menubar"
-msgstr "切換顯示主工具列"
+msgstr "切換顯示主功能表列"
 
 #: ../src/MadEditFrame.cpp:10256
 msgid "Passed the begin of the file/selection"
@@ -3940,7 +3937,6 @@ msgid "[%S] Second as decimal number (00 - 59)"
 msgstr "[%S] 十進位的秒數 (從 00 到 59)"
 
 #: ../src/MadOptionsDialog.cpp:888
-#, fuzzy
 msgid ""
 "[%U] Week of year as decimal number,  with Sunday as first day of week (00 - "
 "53)"
