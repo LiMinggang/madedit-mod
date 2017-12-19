@@ -1,27 +1,22 @@
-Mod v0.4.10
-1.New: Settings for new document in Options
-2.New: Default font for document
-3.New: Enforce default encoding
-4.New: Toolbar for Encoding/Font/Font Size/Line Spacing
-5.New: Perl style regex match in Replace
-6.New: Copy/Cut unbookmarked lines
-7.New: Enable resize of search/replace input
-8.New: Merge bookmark to line number area(From wxMedit), use Alt+LeftClick to toggle
-9.New: Save bookmark to config file
-10.Fix: Crash in Cut/Delete/Replace bookmarked/unbookmarked lines
-11.Fix: Disable resize of Option dialog(hang UI)
-12.Fix: Restore select the whole line by left click #240
-13.Fix: Refactor Option dialog with wxSmith and allow resize
-14.Fix: Font size issue of fix width mode in switching between different fonts
-15.Fix: Incorrect displaying DND mouse ICON while clicking line number area in selection
-16.Fix: Wrong file filter of Open File dialog
-17.Fix: Bookmark Only in search dialog does not work correctly
-18.Fix: Enable 80 columns hint only if it's in fix width mode
-19.Fix: Use GTK2 for Ubuntu release to fix the issue of wxWidgets with GTK3
-20.Fix: Support '|' in filename('*' will not be supported)
-21.Fix: Display issue of '\' on Recent Find/Replace menu
-22.Fix: File change detect issue on close
-23.Fix: Improvement on file pos manager
-24.Update Astyle to latest code
-25.Update Hunspell to latest code
-26.Update translations
+Mod v0.4.11
+Note: please use the convertcfg.py to convert your old config if you want to restore your old config, use clearbms.py to clear the bookmarks before running MadEdit-Mod
+
+1.New: Open file path with default file explorer, set "EXTEXPLORER" as the env for open in another application #243
+2.New: Add '-d' to define a new delimiter to replace '*'
+3.New: Show/Hide menu bar
+4.Fix: Message strings were not translated during initialization
+5.Fix: TXT syntax would not be applied on first loading(0.4.10) #244
+6.Fix: Change font size/font/encoding/syntax/linespacing will not update font toolbar #246
+7.Fix: Remove toggle show Quick Search bar on Option dialog
+8.Fix: Restructure of MadEdit config
+9.Fix: Saved bookmarks would added to other files during reload
+10.Fix: Wrong MadPython expression recorded in Search/Replace
+11.Fix: Clean deprecated function wxNewId
+12.Fix: Complier warnings from VC(L4)
+13.Fix: Restore InfoWindow instead of hide it if it was there last time
+14.Fix: Display bookmark on the first sub-row of a wrapped line
+15.Update Astyle to latest version
+16.Update Hunspell to latest version
+17.Update Python to 2.7.14
+18.Update translation
+19.Other minor improvements

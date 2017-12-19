@@ -123,6 +123,29 @@ FreeBSD packaging (with FreeBSD 10.01)
 2. aclocal version in aclocal.m4
 3. stdc++ version
 
+Mod v0.4.11
+Note: please use the convertcfg.py to convert your old config if you want to restore your old config, use clearbms.py to clear the bookmarks before running MadEdit-Mod
+
+1.New: Open file path with default file explorer, set "EXTEXPLORER" as the env for open in another application #243
+2.New: Add '-d' to define a new delimiter to replace '*'
+3.New: Show/Hide menu bar
+4.Fix: Message strings were not translated during initialization
+5.Fix: TXT syntax would not be applied on first loading(0.4.10) #244
+6.Fix: Change font size/font/encoding/syntax/linespacing will not update font toolbar #246
+7.Fix: Remove toggle show Quick Search bar on Option dialog
+8.Fix: Restructure of MadEdit config
+9.Fix: Saved bookmarks would added to other files during reload
+10.Fix: Wrong MadPython expression recorded in Search/Replace
+11.Fix: Clean deprecated function wxNewId
+12.Fix: Complier warnings from VC(L4)
+13.Fix: Restore InfoWindow instead of hide it if it was there last time
+14.Fix: Display bookmark on the first sub-row of a wrapped line
+15.Update Astyle to latest version
+16.Update Hunspell to latest version
+17.Update Python to 2.7.14
+18.Update translation
+19.Other minor improvements
+
 Mod v0.4.10
 1.New: Settings for new document in Options
 2.New: Default font for document
