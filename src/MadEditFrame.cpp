@@ -2783,8 +2783,8 @@ MadEditFrame::MadEditFrame( wxWindow *parent, wxWindowID id, const wxString &tit
 	//g_PrintData = new wxPrintData;
 	g_PageSetupData = new wxPageSetupDialogData;
 	LoadDefaultSettings( m_Config );
-	m_ReloadFiles  = m_Config->ReadBool( wxT( "/MadEdit/ReloadFiles" ), true );
-	m_PurgeHistory = m_Config->ReadBool( wxT( "/MadEdit/PurgeHistory" ), false );
+	m_ReloadFiles  = m_Config->ReadBool( wxT( "/Application/ReloadFiles" ), true );
+	m_PurgeHistory = m_Config->ReadBool( wxT( "/Application/PurgeHistory" ), false );
 	SetDropTarget( new DnDFile() );
 	m_PageClosing = false;
 	m_MadMacroStatus = emMacroStopped;
@@ -8448,9 +8448,9 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& WXUNUSED(event) )
 		m_ReloadFiles  = g_OptionsDialog->CheckBoxReloadFiles->GetValue();
 		m_Config->Write( wxT( "RestoreCaretPos" ), g_OptionsDialog->CheckBoxRestoreCaretPos->GetValue() );
 		extern bool g_ForcePurgeThisTime;
-		m_Config->Read( wxT( "PurgeHistory" ), g_ForcePurgeThisTime );
+		m_Config->Read( wxT( "/Application/PurgeHistory" ), g_ForcePurgeThisTime );
 		m_PurgeHistory = g_OptionsDialog->CheckBoxPurgeHistory->GetValue();
-		m_Config->Write( wxT( "PurgeHistory" ), g_OptionsDialog->CheckBoxPurgeHistory->GetValue() );
+		m_Config->Write( wxT( "/Application/PurgeHistory" ), g_OptionsDialog->CheckBoxPurgeHistory->GetValue() );
 
 		if( !g_ForcePurgeThisTime ) { g_ForcePurgeThisTime = g_OptionsDialog->CheckBoxPurgeHistory->GetValue(); }
 		else { g_ForcePurgeThisTime = false; }

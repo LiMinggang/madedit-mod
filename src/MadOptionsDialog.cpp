@@ -1194,7 +1194,7 @@ void MadOptionsDialog::LoadOptions(void)
 	CheckBoxDoNotSaveSettings->SetValue( g_DoNotSaveSettings );
 	cfg->Read( wxT( "/Application/ReloadFiles" ), &bb, true );
 	CheckBoxReloadFiles->SetValue( bb );
-	cfg->Read( wxT( "PurgeHistory" ), &bb, false );
+	cfg->Read( wxT( "/Application/PurgeHistory" ), &bb, false );
 	CheckBoxPurgeHistory->SetValue( bb );
 	cfg->Read( wxT( "RestoreCaretPos" ), &bb, true );
 	CheckBoxRestoreCaretPos->SetValue( bb );
