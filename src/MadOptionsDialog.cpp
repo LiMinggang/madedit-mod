@@ -209,8 +209,8 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	wxBoxSizer* BoxSizer2;
 	wxBoxSizer* BoxSizer30;
 	wxBoxSizer* BoxSizer31;
-	wxBoxSizer* BoxSizer32;
-	wxBoxSizer* BoxSizer33;
+	//wxBoxSizer* BoxSizer32;
+	//wxBoxSizer* BoxSizer33;
 	wxBoxSizer* BoxSizer34;
 	wxBoxSizer* BoxSizer35;
 	wxBoxSizer* BoxSizer36;
@@ -774,13 +774,13 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	AuiNotebook1->AddPage(Panel4, _("Keys"));
 	AuiNotebook1->AddPage(Panel5, _("SpellChecker"));
 	BoxSizer31->Add(AuiNotebook1, 1, wxALL|wxEXPAND, 0);
-	BoxSizer32 = new wxBoxSizer(wxVERTICAL);
-	BoxSizer32->Add(450,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	BoxSizer31->Add(BoxSizer32, 0, wxALL|wxEXPAND, 0);
+	//BoxSizer32 = new wxBoxSizer(wxVERTICAL);
+	//BoxSizer32->Add(450,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
+	//BoxSizer31->Add(BoxSizer32, 0, wxALL|wxEXPAND, 0);
 	BoxSizer30->Add(BoxSizer31, 1, wxALL|wxEXPAND, 0);
-	BoxSizer33 = new wxBoxSizer(wxHORIZONTAL);
-	BoxSizer33->Add(0,260,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	BoxSizer30->Add(BoxSizer33, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
+	//BoxSizer33 = new wxBoxSizer(wxHORIZONTAL);
+	//BoxSizer33->Add(0,260,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
+	//BoxSizer30->Add(BoxSizer33, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	BoxSizer1->Add(BoxSizer30, 1, wxALL|wxEXPAND, 0);
 	BoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
 	ButtonOK = new wxButton(this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTONOK"));
@@ -959,8 +959,10 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	int ww = std::max(std::max(sz1.x, sz2.x), std::max(sz3.x, sz4.x));
 	int hh = std::max(std::max(sz1.y, sz2.y), std::max(sz3.y, sz4.y));
 
-	BoxSizer33->Add(0, hh + AuiNotebook1->GetTabCtrlHeight() + 2, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	BoxSizer32->Add(ww + 2, 0, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
+	//BoxSizer33->Add(0, hh + AuiNotebook1->GetTabCtrlHeight() + 2, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
+	//BoxSizer30->Add(0, hh + AuiNotebook1->GetTabCtrlHeight() + 2, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
+	//BoxSizer32->Add(ww + 2, 0, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
+    BoxSizer30->SetMinSize(ww + 10,  hh + AuiNotebook1->GetTabCtrlHeight() + 10);
 	BoxSizer1->Fit(this);
 	BoxSizer1->SetSizeHints(this);
 	Layout();
