@@ -155,6 +155,7 @@ public:	// inline functions
 	bool compareToInputBuffer(const string& nextLine_) const
 	{ return (nextLine_ == prevBuffer); }
 	const string& getOutputEOL() const { return outputEOL; }
+	streamoff getPeekStart() const { return peekStart; }
 	bool hasMoreLines() const { return !inStream->eof(); }
 };
 

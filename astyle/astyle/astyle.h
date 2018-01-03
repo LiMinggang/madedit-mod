@@ -122,7 +122,7 @@ enum BraceMode
 	RUN_IN_MODE		// broken braces
 };
 
-// maximun value for int is 16,384 (total value of 32,767)
+// maximum value for int is 16,384 (total value of 32,767)
 enum BraceType
 {
 	NULL_TYPE        = 0,
@@ -179,10 +179,10 @@ enum ReferenceAlign
 
 enum FileEncoding
 {
-	ENCODING_8BIT,
+	ENCODING_8BIT,  // includes UTF-8 without BOM
 	UTF_8BOM,       // UTF-8 with BOM
 	UTF_16BE,
-	UTF_16LE,     // Windows default
+	UTF_16LE,       // Windows default
 	UTF_32BE,
 	UTF_32LE
 };
@@ -211,6 +211,7 @@ class ASSourceIterator
 public:
 	ASSourceIterator() {}
 	virtual ~ASSourceIterator() {}
+	virtual streamoff getPeekStart() const = 0;
 	virtual int getStreamLength() const = 0;
 	virtual bool hasMoreLines() const = 0;
 	virtual string nextLine(bool emptyLineWasDeleted = false) = 0;
@@ -735,7 +736,7 @@ public:	// functions
 	size_t getChecksumOut() const;
 	int  getChecksumDiff() const;
 	int  getFormatterFileType() const;
-	// retained for compatability with release 2.06
+	// retained for compatibility with release 2.06
 	// "Brackets" have been changed to "Braces" in 3.0
 	// they are referenced only by the old "bracket" options
 	void setAddBracketsMode(bool state);
@@ -814,7 +815,7 @@ private:  // functions
 	void clearFormattedLineSplitPoints();
 	void convertTabToSpaces();
 	void deleteContainer(vector<BraceType>*& container);
-	void findReturnTypeSplitPoint();
+	void findReturnTypeSplitPoint(const string& firstLine);
 	void formatArrayRunIn();
 	void formatRunIn();
 	void formatArrayBraces(BraceType braceType, bool isOpeningArrayBrace);
@@ -909,6 +910,10 @@ private:  // variables
 	size_t formattedLineCommentNum;     // comment location on formattedLine
 	size_t leadingSpaces;
 	size_t maxCodeLength;
+	size_t methodAttachCharNum;
+	size_t methodAttachLineNum;
+	size_t methodBreakCharNum;
+	size_t methodBreakLineNum;
 
 	// possible split points
 	size_t maxSemi;			// probably a 'for' statement
@@ -1015,6 +1020,7 @@ private:  // variables
 	bool breakCurrentOneLineBlock;
 	bool shouldRemoveNextClosingBrace;
 	bool isInBraceRunIn;
+	bool returnTypeChecked;
 	bool currentLineBeginsWithBrace;
 	bool attachClosingBraceMode;
 	bool shouldBreakOneLineBlocks;

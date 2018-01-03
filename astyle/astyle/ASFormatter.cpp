@@ -188,6 +188,10 @@ void ASFormatter::init(ASSourceIterator* si)
 	previousReadyFormattedLineLength = string::npos;
 	preprocBraceTypeStackSize = 0;
 	spacePadNum = 0;
+	methodAttachCharNum = string::npos;
+	methodAttachLineNum = 0;
+	methodBreakCharNum = string::npos;
+	methodBreakLineNum = 0;
 	nextLineSpacePadNum = 0;
 	objCColonAlign = 0;
 	templateDepth = 0;
@@ -282,6 +286,7 @@ void ASFormatter::init(ASSourceIterator* si)
 	breakCurrentOneLineBlock = false;
 	shouldRemoveNextClosingBrace = false;
 	isInBraceRunIn = false;
+	returnTypeChecked = false;
 	currentLineBeginsWithBrace = false;
 	isPrependPostBlockEmptyLineRequested = false;
 	isAppendPostBlockEmptyLineRequested = false;
@@ -440,6 +445,11 @@ void ASFormatter::fixOptionVariableConflicts()
 	// don't allow add-braces and remove-braces
 	if (shouldAddBraces || shouldAddOneLineBraces)
 		setRemoveBracesMode(false);
+	// don't allow break-return-type and attach-return-type
+	if (shouldBreakReturnType)
+		shouldAttachReturnType = false;
+	if (shouldBreakReturnTypeDecl)
+		shouldAttachReturnTypeDecl = false;
 	// don't allow indent-classes and indent-modifiers
 	if (getClassIndent())
 		setModifierIndent(false);
@@ -639,7 +649,9 @@ string ASFormatter::nextLine()
 		// check if in preprocessor
 		// ** isInPreprocessor will be automatically reset at the beginning
 		//    of a new line in getnextChar()
-		if (currentChar == '#' && !isBraceType(braceTypeStack->back(), SINGLE_LINE_TYPE))
+		if (currentChar == '#'
+		        && currentLine.find_first_not_of(" \t") == (size_t) charNum
+		        && !isBraceType(braceTypeStack->back(), SINGLE_LINE_TYPE))
 		{
 			isInPreprocessor = true;
 			// check for run-in
@@ -888,6 +900,58 @@ string ASFormatter::nextLine()
 			checkIfTemplateOpener();
 		}
 
+		// Check for break return type
+		if (charNum >= (int) methodBreakCharNum && methodBreakLineNum == 0)
+		{
+			if (charNum == (int) methodBreakCharNum)
+				isInLineBreak = true;
+			methodBreakCharNum = string::npos;
+			methodBreakLineNum = 0;
+		}
+		// Check for attach return type
+		if (charNum >= (int) methodAttachCharNum && methodAttachLineNum == 0)
+		{
+			if (charNum == (int) methodAttachCharNum)
+			{
+				int pa = pointerAlignment;
+				int ra = referenceAlignment;
+				int itemAlignment = (previousNonWSChar == '*' || previousNonWSChar == '^')
+				                    ? pa : ((ra == REF_SAME_AS_PTR) ? pa : ra);
+				isInLineBreak = false;
+				if (previousNonWSChar == '*' || previousNonWSChar == '&' || previousNonWSChar == '^')
+				{
+					if (itemAlignment == REF_ALIGN_TYPE)
+					{
+						if (formattedLine.length() > 0
+						        && !isWhiteSpace(formattedLine[formattedLine.length() - 1]))
+							formattedLine.append(1, ' ');
+					}
+					else if (itemAlignment == REF_ALIGN_MIDDLE)
+					{
+						if (formattedLine.length() > 0
+						        && !isWhiteSpace(formattedLine[formattedLine.length() - 1]))
+							formattedLine.append(1, ' ');
+					}
+					else if (itemAlignment == REF_ALIGN_NAME)
+					{
+						if (formattedLine.length() > 0
+						        && isWhiteSpace(formattedLine[formattedLine.length() - 1]))
+							formattedLine.erase(formattedLine.length() - 1);
+					}
+					else
+					{
+						if (formattedLine.length() > 1
+						        && !isWhiteSpace(formattedLine[formattedLine.length() - 2]))
+							formattedLine.append(1, ' ');
+					}
+				}
+				else
+					formattedLine.append(1, ' ');
+			}
+			methodAttachCharNum = string::npos;
+			methodAttachLineNum = 0;
+		}
+
 		// handle parens
 		if (currentChar == '(' || currentChar == '[' || (isInTemplate && currentChar == '<'))
 		{
@@ -972,7 +1036,14 @@ string ASFormatter::nextLine()
 				isCharImmediatelyPostNonInStmt = false;
 				needHeaderOpeningBrace = false;
 				shouldKeepLineUnbroken = false;
+				returnTypeChecked = false;
 				objCColonAlign = 0;
+				//assert(methodBreakCharNum == string::npos);	// comment out
+				//assert(methodBreakLineNum == 0);				// comment out
+				methodBreakCharNum = string::npos;
+				methodBreakLineNum = 0;
+				methodAttachCharNum = string::npos;
+				methodAttachLineNum = 0;
 
 				isPreviousBraceBlockRelated = !isBraceType(newBraceType, ARRAY_TYPE);
 				braceTypeStack->emplace_back(newBraceType);
@@ -1369,6 +1440,12 @@ string ASFormatter::nextLine()
 			if (currentChar == ';')
 			{
 				squareBracketCount = 0;
+				//assert(methodBreakCharNum == string::npos);	// comment out
+				//assert(methodBreakLineNum == 0);				// comment out
+				methodBreakCharNum = string::npos;
+				methodBreakLineNum = 0;
+				methodAttachCharNum = string::npos;
+				methodAttachLineNum = 0;
 
 				if (((shouldBreakOneLineStatements
 				        || isBraceType(braceTypeStack->back(), SINGLE_LINE_TYPE))
@@ -1399,6 +1476,7 @@ string ASFormatter::nextLine()
 			if (currentChar != ';'
 			        || (needHeaderOpeningBrace && parenStack->back() == 0))
 				currentHeader = nullptr;
+
 			resetEndOfStatement();
 		}
 
@@ -1469,8 +1547,8 @@ string ASFormatter::nextLine()
 
 			if (findKeyword(currentLine, charNum, AS_RETURN))
 			{
-				isInPotentialCalculation = true;	// return is the same as an = sign
-				isImmediatelyPostReturn = true;
+				isInPotentialCalculation = true;
+				isImmediatelyPostReturn = true;		// return is the same as an = sign
 			}
 
 			if (findKeyword(currentLine, charNum, AS_OPERATOR))
@@ -1499,19 +1577,27 @@ string ASFormatter::nextLine()
 			            || isBraceType(braceTypeStack->back(), DEFINITION_TYPE)))
 				foundTrailingReturnType = true;
 
-			// is this a function definition or declaration?
-			if ((isBraceType(braceTypeStack->back(), NULL_TYPE)
-			        || isBraceType(braceTypeStack->back(), DEFINITION_TYPE))
-			        && (previousCommandChar == '}'
-			            || previousCommandChar == ';'
-			            || previousCommandChar == '{'
-			            || previousCommandChar == ']')
-			        && !foundTrailingReturnType
-			        && (shouldBreakReturnType
-			            || shouldBreakReturnTypeDecl
-			            || shouldAttachReturnType
-			            || shouldAttachReturnTypeDecl))
-				findReturnTypeSplitPoint();
+			// check for break/attach return type
+			if (shouldBreakReturnType || shouldBreakReturnTypeDecl
+			        || shouldAttachReturnType || shouldAttachReturnTypeDecl)
+			{
+				if ((isBraceType(braceTypeStack->back(), NULL_TYPE)
+				        || isBraceType(braceTypeStack->back(), DEFINITION_TYPE))
+				        && !returnTypeChecked
+				        && !foundNamespaceHeader
+				        && !foundClassHeader
+				        && !isInObjCMethodDefinition
+				        // bypass objective-C and java @ character
+				        && charNum == (int) currentLine.find_first_not_of(" \t")
+				        && !(isCStyle() && isCharPotentialHeader(currentLine, charNum)
+				             && (findKeyword(currentLine, charNum, AS_PUBLIC)
+				                 || findKeyword(currentLine, charNum, AS_PRIVATE)
+				                 || findKeyword(currentLine, charNum, AS_PROTECTED))))
+				{
+					findReturnTypeSplitPoint(currentLine);
+					returnTypeChecked = true;
+				}
+			}
 
 			// Objective-C NSException macros are preCommandHeaders
 			if (isCStyle() && findKeyword(currentLine, charNum, AS_NS_DURING))
@@ -1906,7 +1992,7 @@ void ASFormatter::setRemoveBracesMode(bool state)
 	shouldRemoveBraces = state;
 }
 
-// retained for compatability with release 2.06
+// retained for compatibility with release 2.06
 // "Brackets" have been changed to "Braces" in 3.0
 // it is referenced only by the old "bracket" options
 void ASFormatter::setAddBracketsMode(bool state)
@@ -1914,7 +2000,7 @@ void ASFormatter::setAddBracketsMode(bool state)
 	setAddBracesMode(state);
 }
 
-// retained for compatability with release 2.06
+// retained for compatibility with release 2.06
 // "Brackets" have been changed to "Braces" in 3.0
 // it is referenced only by the old "bracket" options
 void ASFormatter::setAddOneLineBracketsMode(bool state)
@@ -1922,7 +2008,7 @@ void ASFormatter::setAddOneLineBracketsMode(bool state)
 	setAddOneLineBracesMode(state);
 }
 
-// retained for compatability with release 2.06
+// retained for compatibility with release 2.06
 // "Brackets" have been changed to "Braces" in 3.0
 // it is referenced only by the old "bracket" options
 void ASFormatter::setRemoveBracketsMode(bool state)
@@ -1930,7 +2016,7 @@ void ASFormatter::setRemoveBracketsMode(bool state)
 	setRemoveBracesMode(state);
 }
 
-// retained for compatability with release 2.06
+// retained for compatibility with release 2.06
 // "Brackets" have been changed to "Braces" in 3.0
 // it is referenced only by the old "bracket" options
 void ASFormatter::setBreakClosingHeaderBracketsMode(bool state)
@@ -2553,6 +2639,11 @@ bool ASFormatter::getNextLine(bool emptyLineWasDeleted /*false*/)
 
 	if (currentLine.length() == 0)
 		currentLine = string(" ");        // a null is inserted if this is not done
+
+	if (methodBreakLineNum > 0)
+		--methodBreakLineNum;
+	if (methodAttachLineNum > 0)
+		--methodAttachLineNum;
 
 	// unless reading in the first line of the file, break a new line.
 	if (!isVirgin)
@@ -3748,6 +3839,7 @@ string ASFormatter::peekNextText(const string& firstLine,
 								 std::shared_ptr<ASPeekStream> streamArg /*nullptr*/) const
 #endif
 {
+	assert(sourceIterator->getPeekStart() == 0 || streamArg != nullptr);
 	bool isFirstLine = true;
 	string nextLine_ = firstLine;
 	size_t firstChar = string::npos;
@@ -4003,7 +4095,8 @@ void ASFormatter::formatPointerOrReference()
 
 	int pa = pointerAlignment;
 	int ra = referenceAlignment;
-	int itemAlignment = (currentChar == '*' || currentChar == '^') ? pa : ((ra == REF_SAME_AS_PTR) ? pa : ra);
+	int itemAlignment = (currentChar == '*' || currentChar == '^')
+	                    ? pa : ((ra == REF_SAME_AS_PTR) ? pa : ra);
 
 	// check for ** and &&
 	int ptrLength = 1;
@@ -4403,7 +4496,7 @@ void ASFormatter::formatPointerOrReferenceCast()
 		}
 		else if (prevNum + 1 < formattedLine.length()
 		         && isWhiteSpace(formattedLine[prevNum + 1])
-		        && prevCh != '(')
+		         && prevCh != '(')
 		{
 			spacePadNum -= (formattedLine.length() - 1 - prevNum);
 			formattedLine.erase(prevNum + 1);
@@ -6459,16 +6552,267 @@ size_t ASFormatter::findNextChar(const string& line, char searchChar, int search
 }
 
 /**
- * Find the split point for a method definition or declaration.
+ * Find split point for break/attach return type.
  */
-void ASFormatter::findReturnTypeSplitPoint()
+void ASFormatter::findReturnTypeSplitPoint(const string& firstLine)
 {
 	assert((isBraceType(braceTypeStack->back(), NULL_TYPE)
 	        || isBraceType(braceTypeStack->back(), DEFINITION_TYPE)));
-	assert(shouldBreakReturnType
-	       || shouldBreakReturnTypeDecl
-	       || shouldAttachReturnType
-	       || shouldAttachReturnTypeDecl);
+	assert(shouldBreakReturnType || shouldBreakReturnTypeDecl
+	       || shouldAttachReturnType || shouldAttachReturnTypeDecl);
+
+	bool isFirstLine     = true;
+	bool isInComment_    = false;
+	bool isInQuote_      = false;
+	bool foundSplitPoint = false;
+	bool isAlreadyBroken = false;
+	char quoteChar_      = ' ';
+	char currNonWSChar   = ' ';
+	char prevNonWSChar   = ' ';
+	size_t parenCount    = 0;
+	size_t squareCount   = 0;
+	size_t angleCount    = 0;
+	size_t breakLineNum  = 0;
+	size_t breakCharNum  = string::npos;
+	string line          = firstLine;
+
+	// Process the lines until a ';' or '{'.
+	ASPeekStream stream(sourceIterator);
+	while (stream.hasMoreLines() || isFirstLine)
+	{
+		if (isFirstLine)
+			isFirstLine = false;
+		else
+		{
+			if (isInQuote_)
+				return;
+			line = stream.peekNextLine();
+			if (!foundSplitPoint)
+				++breakLineNum;
+		}
+		size_t firstCharNum = line.find_first_not_of(" \t");
+		if (firstCharNum == string::npos)
+			continue;
+		if (line[firstCharNum] == '#')
+		{
+			// don't attach to a preprocessor
+			if (shouldAttachReturnType || shouldAttachReturnTypeDecl)
+				return;
+			else
+				continue;
+		}
+		// parse the line
+		for (size_t i = 0; i < line.length(); i++)
+		{
+			if (!isWhiteSpace(line[i]))
+			{
+				prevNonWSChar = currNonWSChar;
+				currNonWSChar = line[i];
+			}
+			if (line.compare(i, 2, "/*") == 0)
+				isInComment_ = true;
+			if (isInComment_)
+			{
+				if (line.compare(i, 2, "*/") == 0)
+				{
+					isInComment_ = false;
+					++i;
+				}
+				continue;
+			}
+			if (line[i] == '\\')
+			{
+				++i;
+				continue;
+			}
+
+			if (isInQuote_)
+			{
+				if (line[i] == quoteChar_)
+					isInQuote_ = false;
+				continue;
+			}
+
+			if (line[i] == '"'
+			        || (line[i] == '\'' && !isDigitSeparator(line, i)))
+			{
+				isInQuote_ = true;
+				quoteChar_ = line[i];
+				continue;
+			}
+			if (line.compare(i, 2, "//") == 0)
+			{
+				i = line.length();
+				continue;
+			}
+			// not in quote or comment
+			if (!foundSplitPoint)
+			{
+				if (line[i] == '<')
+				{
+					++angleCount;
+					continue;
+				}
+				if (line[i] == '>')
+				{
+					if (angleCount)
+						--angleCount;
+					if (!angleCount)
+					{
+						size_t nextCharNum = line.find_first_not_of(" \t*&", i + 1);
+						if (nextCharNum == string::npos)
+						{
+							breakCharNum  = string::npos;
+							continue;
+						}
+						if (line[nextCharNum] != ':')		// scope operator
+							breakCharNum  = nextCharNum;
+					}
+					continue;
+				}
+				if (angleCount)
+					continue;
+				if (line[i] == '[')
+				{
+					++squareCount;
+					continue;
+				}
+				if (line[i] == ']')
+				{
+					if (squareCount)
+						--squareCount;
+					continue;
+				}
+				// an assignment before the parens is not a function
+				if (line[i] == '=')
+					return;
+				if (isWhiteSpace(line[i]) || line[i] == '*' || line[i] == '&')
+				{
+					size_t nextNum = line.find_first_not_of(" \t", i + 1);
+					if (nextNum == string::npos)
+						breakCharNum = string::npos;
+					else
+					{
+						if (line.length() > nextNum + 1
+						        && line[nextNum] == ':' && line[nextNum + 1] == ':')
+							i = --nextNum;
+						else if (line[nextNum] != '(')
+							breakCharNum = string::npos;
+					}
+					continue;
+				}
+				if ((isLegalNameChar(line[i]) || line[i] == '~')
+				        && breakCharNum == string::npos)
+				{
+					breakCharNum = i;
+					if (isLegalNameChar(line[i])
+					        && findKeyword(line, i, AS_OPERATOR))
+					{
+						if (breakCharNum == firstCharNum)
+							isAlreadyBroken = true;
+						foundSplitPoint = true;
+						// find the operator, may be parens
+						size_t parenNum =
+						    line.find_first_not_of(" \t", i + AS_OPERATOR.length());
+						if (parenNum == string::npos)
+							return;
+						// find paren after the operator
+						parenNum = line.find('(', parenNum + 1);
+						if (parenNum == string::npos)
+							return;
+						i = --parenNum;
+					}
+					continue;
+				}
+				if (line[i] == ':'
+				        && line.length() > i + 1
+				        && line[i + 1] == ':')
+				{
+					size_t nextCharNum = line.find_first_not_of(" \t:", i + 1);
+					if (nextCharNum == string::npos)
+						return;
+
+					if (isLegalNameChar(line[nextCharNum])
+					        && findKeyword(line, nextCharNum, AS_OPERATOR))
+					{
+						i = nextCharNum;
+						if (breakCharNum == firstCharNum)
+							isAlreadyBroken = true;
+						foundSplitPoint = true;
+						// find the operator, may be parens
+						size_t parenNum =
+						    line.find_first_not_of(" \t", i + AS_OPERATOR.length());
+						if (parenNum == string::npos)
+							return;
+						// find paren after the operator
+						parenNum = line.find('(', parenNum + 1);
+						if (parenNum == string::npos)
+							return;
+						i = --parenNum;
+					}
+					else
+						i = --nextCharNum;
+					continue;
+				}
+				if (line[i] == '(' && !squareCount)
+				{
+					// is line is already broken?
+					if (breakCharNum == firstCharNum && breakLineNum > 0)
+						isAlreadyBroken = true;
+					++parenCount;
+					foundSplitPoint = true;
+					continue;
+				}
+			}
+			// end !foundSplitPoint
+			if (line[i] == '(')
+			{
+				// consecutive ')(' parens is probably a function pointer
+				if (prevNonWSChar == ')' && !parenCount)
+					return;
+				++parenCount;
+				continue;
+			}
+			if (line[i] == ')')
+			{
+				if (parenCount)
+					--parenCount;
+				continue;
+			}
+			if (line[i] == '{')
+			{
+				if (shouldBreakReturnType && foundSplitPoint && !isAlreadyBroken)
+				{
+					methodBreakCharNum = breakCharNum;
+					methodBreakLineNum = breakLineNum;
+				}
+				if (shouldAttachReturnType && foundSplitPoint && isAlreadyBroken)
+				{
+					methodAttachCharNum = breakCharNum;
+					methodAttachLineNum = breakLineNum;
+				}
+				return;
+			}
+			if (line[i] == ';')
+			{
+				if (shouldBreakReturnTypeDecl && foundSplitPoint && !isAlreadyBroken)
+				{
+					methodBreakCharNum = breakCharNum;
+					methodBreakLineNum = breakLineNum;
+				}
+				if ((shouldAttachReturnTypeDecl && foundSplitPoint && isAlreadyBroken))
+				{
+					methodAttachCharNum = breakCharNum;
+					methodAttachLineNum = breakLineNum;
+				}
+				return;
+			}
+			if (line[i] == '}')
+				return;
+		}   // end of for loop
+		if (!foundSplitPoint)
+			breakCharNum = string::npos;
+	}   // end of while loop
 }
 
 /**
@@ -7607,6 +7951,7 @@ void ASFormatter::resetEndOfStatement()
 	isInEnum = false;
 	isInExternC = false;
 	elseHeaderFollowsComments = false;
+	returnTypeChecked = false;
 	nonInStatementBrace = 0;
 	while (!questionMarkStack->empty())
 		questionMarkStack->pop_back();
@@ -7778,8 +8123,8 @@ void ASFormatter::padObjCMethodColon()
 	        || nextChar == ')')
 	{
 		// remove spaces after
-		int nextText = currentLine.find_first_not_of(" \t", charNum + 1);
-		if (nextText == (int)string::npos)
+		size_t nextText = currentLine.find_first_not_of(" \t", charNum + 1);
+		if (nextText == string::npos)
 			nextText = currentLine.length();
 		int spaces = nextText - charNum - 1;
 		if (spaces > 0)
@@ -7792,8 +8137,8 @@ void ASFormatter::padObjCMethodColon()
 	else
 	{
 		// pad space after
-		int nextText = currentLine.find_first_not_of(" \t", charNum + 1);
-		if (nextText == (int) string::npos)
+		size_t nextText = currentLine.find_first_not_of(" \t", charNum + 1);
+		if (nextText == string::npos)
 			nextText = currentLine.length();
 		int spaces = nextText - charNum - 1;
 		if (spaces == 0)

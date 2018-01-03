@@ -1132,7 +1132,7 @@ void ASConsole::getFileNames(const string& directory, const vector<string>& wild
 // Return the full path name or an empty string if failed.
 string ASConsole::getFullPathName(const string& relativePath) const
 {
-	char fullPath[MAX_PATH] = "\0";
+	char fullPath[MAX_PATH];
 	GetFullPathName(relativePath.c_str(), MAX_PATH, fullPath, NULL);
 	return fullPath;
 }
@@ -1379,9 +1379,13 @@ void ASConsole::getFileNames(const string& directory, const vector<string>& wild
 // Return the full path name or an empty string if failed.
 string ASConsole::getFullPathName(const string& relativePath) const
 {
-	char fullPath[PATH_MAX] = "\0";
+	// ignore realPath attribute warning
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-result"
+	char fullPath[PATH_MAX];
 	realpath(relativePath.c_str(), fullPath);
 	return fullPath;
+#pragma GCC diagnostic pop
 }
 
 /**
@@ -2097,6 +2101,16 @@ void ASConsole::printHelp() const
 	cout << endl;
 	cout << "    --remove-braces  OR  -xj\n";
 	cout << "    Remove braces from a braced one line conditional statements.\n";
+	cout << endl;
+	cout << "    --break-return-type       OR  -xB\n";
+	cout << "    --break-return-type-decl  OR  -xD\n";
+	cout << "    Break the return type from the function name. Options are\n";
+	cout << "    for the function definitions and the function declarations.\n";
+	cout << endl;
+	cout << "    --attach-return-type       OR  -xf\n";
+	cout << "    --attach-return-type-decl  OR  -xh\n";
+	cout << "    Attach the return type to the function name. Options are\n";
+	cout << "    for the function definitions and the function declarations.\n";
 	cout << endl;
 	cout << "    --keep-one-line-blocks  OR  -O\n";
 	cout << "    Don't break blocks residing completely on one line.\n";

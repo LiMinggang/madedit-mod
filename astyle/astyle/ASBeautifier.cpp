@@ -540,7 +540,7 @@ void ASBeautifier::setMaxContinuationIndentLength(int max)
 	maxContinuationIndent = max;
 }
 
-// retained for compatability with release 2.06
+// retained for compatibility with release 2.06
 // "MaxInStatementIndent" has been changed to "MaxContinuationIndent" in 3.0
 // it is referenced only by the old "MaxInStatementIndent" options
 void ASBeautifier::setMaxInStatementIndentLength(int max)
@@ -2427,7 +2427,7 @@ int ASBeautifier::computeObjCColonAlignment(const string& line, int colonAlignPo
 }
 
 /*
- * Compute postition of the keyword following the method call object.
+ * Compute position of the keyword following the method call object.
  * This is oversimplified to find unusual method calls.
  * Use for now and see what happens.
  * Most programmers will probably use align-method-colon anyway.
