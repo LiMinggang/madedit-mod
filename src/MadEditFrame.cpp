@@ -8887,67 +8887,49 @@ void MadEditFrame::OnToolsPurgeHistories( wxCommandEvent& WXUNUSED(event) )
 		if( dlg.wxCheckBoxRecentEncodings->IsChecked() )
 		{ PurgeRecentEncodings(); }
 
-		if( dlg.wxCheckBoxRecentSearchedTexts->IsChecked() )
+		if( dlg.wxCheckBoxRecentSearchedTexts->IsChecked() || dlg.wxCheckBoxRecentReplacedTexts->IsChecked()
+			|| dlg.wxCheckBoxRecentSearchedDirectories->IsChecked() || dlg.wxRecentSearchedFileFilters->IsChecked()
+			|| dlg.wxCheckBoxRecentSearchedExcludeFilters->IsChecked())
 		{
 			if( g_SearchReplaceDialog == nullptr )
 			{
 				g_SearchReplaceDialog = new MadSearchReplaceDialog( this, -1 );
 			}
 
-			g_SearchReplaceDialog->PurgeRecentFindTexts();
-			m_QuickSearch->Clear();
-		}
-
-		if( dlg.wxCheckBoxRecentReplacedTexts->IsChecked() )
-		{
-			if( g_SearchReplaceDialog == nullptr )
+			if( dlg.wxCheckBoxRecentSearchedTexts->IsChecked() )
 			{
-				g_SearchReplaceDialog = new MadSearchReplaceDialog( this, -1 );
+				g_SearchReplaceDialog->PurgeRecentFindTexts();
+				m_QuickSearch->Clear();
 			}
 
-			g_SearchReplaceDialog->PurgeRecentReplaceTexts();
-		}
-
-		if( dlg.wxCheckBoxRecentSearchedDirectories->IsChecked() )
-		{
-			if( g_FindInFilesDialog == nullptr )
+			if( dlg.wxCheckBoxRecentReplacedTexts->IsChecked() )
 			{
-				if( g_SearchReplaceDialog == nullptr )
+				g_SearchReplaceDialog->PurgeRecentReplaceTexts();
+			}
+
+			if( dlg.wxCheckBoxRecentSearchedDirectories->IsChecked() || dlg.wxRecentSearchedFileFilters->IsChecked()
+				|| dlg.wxCheckBoxRecentSearchedExcludeFilters->IsChecked())
+			{
+				if( g_FindInFilesDialog == nullptr )
 				{
-					g_SearchReplaceDialog = new MadSearchReplaceDialog( this, -1 );
+					g_FindInFilesDialog = new MadFindInFilesDialog( this, -1 );
 				}
-				g_FindInFilesDialog = new MadFindInFilesDialog( this, -1 );
-			}
 
-			g_FindInFilesDialog->PurgeRecentFindDirs();
-		}
-
-		if( dlg.wxRecentSearchedFileFilters->IsChecked() )
-		{
-			if( g_FindInFilesDialog == nullptr )
-			{
-				if( g_SearchReplaceDialog == nullptr )
+				if( dlg.wxCheckBoxRecentSearchedDirectories->IsChecked() )
 				{
-					g_SearchReplaceDialog = new MadSearchReplaceDialog( this, -1 );
+					g_FindInFilesDialog->PurgeRecentFindDirs();
 				}
-				g_FindInFilesDialog = new MadFindInFilesDialog( this, -1 );
-			}
 
-			g_FindInFilesDialog->PurgeRecentFindFilters();
-		}
-
-		if( dlg.wxCheckBoxRecentSearchedExcludeFilters->IsChecked() )
-		{
-			if( g_FindInFilesDialog == nullptr )
-			{
-				if( g_SearchReplaceDialog == nullptr )
+				if( dlg.wxRecentSearchedFileFilters->IsChecked() )
 				{
-					g_SearchReplaceDialog = new MadSearchReplaceDialog( this, -1 );
+					g_FindInFilesDialog->PurgeRecentFindFilters();
 				}
-				g_FindInFilesDialog = new MadFindInFilesDialog( this, -1 );
-			}
 
-			g_FindInFilesDialog->PurgeRecentFindExcludes();
+				if( dlg.wxCheckBoxRecentSearchedExcludeFilters->IsChecked() )
+				{
+					g_FindInFilesDialog->PurgeRecentFindExcludes();
+				}
+			}
 		}
 
 		if( dlg.wxCheckBoxCaretPos->IsChecked() )
