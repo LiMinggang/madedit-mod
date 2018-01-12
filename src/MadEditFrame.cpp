@@ -8912,6 +8912,10 @@ void MadEditFrame::OnToolsPurgeHistories( wxCommandEvent& WXUNUSED(event) )
 		{
 			if( g_FindInFilesDialog == nullptr )
 			{
+				if( g_SearchReplaceDialog == nullptr )
+				{
+					g_SearchReplaceDialog = new MadSearchReplaceDialog( this, -1 );
+				}
 				g_FindInFilesDialog = new MadFindInFilesDialog( this, -1 );
 			}
 
@@ -8922,6 +8926,10 @@ void MadEditFrame::OnToolsPurgeHistories( wxCommandEvent& WXUNUSED(event) )
 		{
 			if( g_FindInFilesDialog == nullptr )
 			{
+				if( g_SearchReplaceDialog == nullptr )
+				{
+					g_SearchReplaceDialog = new MadSearchReplaceDialog( this, -1 );
+				}
 				g_FindInFilesDialog = new MadFindInFilesDialog( this, -1 );
 			}
 
@@ -8932,6 +8940,10 @@ void MadEditFrame::OnToolsPurgeHistories( wxCommandEvent& WXUNUSED(event) )
 		{
 			if( g_FindInFilesDialog == nullptr )
 			{
+				if( g_SearchReplaceDialog == nullptr )
+				{
+					g_SearchReplaceDialog = new MadSearchReplaceDialog( this, -1 );
+				}
 				g_FindInFilesDialog = new MadFindInFilesDialog( this, -1 );
 			}
 
