@@ -12097,3 +12097,147 @@ void MadEdit::ConfigNewDocument()
 	}
 }
 
+bool MadEdit::InsertString( const wxString & text )
+{
+	bool res = false;
+	if( IsReadOnly() )
+		return res;
+
+	if( m_EditMode == emColumnMode )
+	{
+		vector < ucs4_t > ucs;
+		int linecount = TranslateText( text.c_str(), text.Len(), &ucs, false );
+		
+		if( linecount != 0 )
+		{
+			switch( m_InsertNewLineType )
+			{
+			case nltDOS:
+#ifdef __WXMSW__
+			case nltDefault:
+#endif
+				ucs.push_back( 0x0D );
+				ucs.push_back( 0x0A );
+				break;
+
+			case nltMAC:
+				ucs.push_back( 0x0D );
+				break;
+
+			case nltUNIX:
+#ifndef __WXMSW__
+			case nltDefault:
+#endif
+				ucs.push_back( 0x0A );
+				break;
+			}
+		}
+		
+		if( m_AutoFillColumnPaste && m_Selection )
+		{
+			int rowcount = m_SelectionEnd->rowid - m_SelectionBegin->rowid + 1;
+	
+			if( rowcount > linecount )
+			{
+				rowcount -= linecount;
+				linecount += rowcount;
+				size_t i = 0;
+	
+				while( rowcount > 0 )
+				{
+					for( i = 0; i < ucs.size(); ++i )
+					{
+						ucs4_t uch = ucs.at( i );
+	
+						if( uch == 0x0D || uch == 0x0A )
+						{
+							--rowcount;
+	
+							switch( m_InsertNewLineType )
+							{
+							case nltDOS:
+#ifdef __WXMSW__
+							case nltDefault:
+#endif
+								ucs.push_back( 0x0D );
+								ucs.push_back( 0x0A );
+								break;
+	
+							case nltMAC:
+								ucs.push_back( 0x0D );
+								break;
+	
+							case nltUNIX:
+#ifndef __WXMSW__
+							case nltDefault:
+#endif
+								ucs.push_back( 0x0A );
+								break;
+							}
+	
+							if( i < ( ucs.size() - 1 ) )
+							{
+								if( uch == 0x0D && ucs.at( i + 1 ) == 0x0A )
+									++i;
+							}
+						}
+						else
+							ucs.push_back( uch );
+	
+						if( rowcount == 0 )break;
+					}
+				}
+			}
+		}
+
+		if( !ucs.empty() )
+		{
+			InsertColumnString( &ucs[0], ucs.size(), linecount, false, false );
+			res = true;
+		}
+	}
+	else
+		if( m_EditMode == emHexMode && m_CaretAtHexArea )
+		{
+			vector < char >cs;
+			vector<ucs4_t> ucs;
+			TranslateText( text.c_str(), text.Len(), &ucs, false );
+			
+			if( ucs.size() > 0 )
+			{
+				MadMemData tempmem;
+				MadBlock blk( &tempmem, -1, 0 );
+				UCStoBlock( &ucs[0], ucs.size(), blk );
+				size_t size = blk.m_Size;
+				cs.resize( size );
+				char *p = &cs[0];
+			
+				for( size_t i = 0; i < size; ++i, ++p )
+				{
+					*p = char( tempmem.Get( i ) );
+				}
+			}
+
+			if( !cs.empty() )
+			{
+				InsertHexData( ( wxByte* )&cs[0], cs.size() );
+				res = true;
+			}
+		}
+		else //if(m_EditMode == emTextMode || !m_CaretAtHexArea)
+		{
+			vector < ucs4_t > ucs;
+			TranslateText( text.c_str(), text.Len(), &ucs, false );
+			size_t size = ucs.size();
+
+			if( size )
+			{
+				//bool oldim = m_InsertMode;
+				//m_InsertMode = true;
+				InsertString( &ucs[0], size, false, true, false );
+				res = true;
+				//m_InsertMode = oldim;
+			}
+		}
+	return res;
+}

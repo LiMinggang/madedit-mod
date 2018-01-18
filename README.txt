@@ -121,6 +121,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 3. stdc++ version
 
 Mod v0.4.12
+New: Support Drag and Drop for text(from other application, not DnD edit)
 Fix: Crash on purging items of FindInFiles Dialog
 
 Mod v0.4.11

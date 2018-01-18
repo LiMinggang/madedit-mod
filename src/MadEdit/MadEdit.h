@@ -260,6 +260,7 @@ private:
 	friend class MadEncoding;
 	friend class MadLines;
 	friend class MadMouseMotionTimer;
+	friend class MadDropTarget;
 
 	static int      ms_Count; // the count of MadEdit
 
@@ -673,6 +674,8 @@ public:
 	void ProcessCommand( MadEditCommand command );
 
 public: // basic functions
+	bool InsertString( const wxString & text );
+
 	void SetSyntax( const wxString &title );
 	MadSyntax* GetSyntax() { return m_Syntax; }
 	wxString GetSyntaxTitle() { return m_Syntax->m_Title; }

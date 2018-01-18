@@ -953,22 +953,71 @@ wxString FixFileNameEncoding( const wxString &filename )
 }
 #endif
 
-class DnDFile : public wxFileDropTarget
+class MadDropTarget : public wxDropTarget
 {
 public:
-	virtual bool OnDropFiles( wxCoord WXUNUSED(x), wxCoord WXUNUSED(y), const wxArrayString& filenames ) {
-		size_t count = filenames.GetCount();
-
-		for( size_t i = 0; i < count; ++i ) {
+	MadDropTarget::MadDropTarget()
+	{
+		wxDataObjectComposite* dataobj = new wxDataObjectComposite();
+		dataobj->Add(new wxFileDataObject(), true); 
+		dataobj->Add(new wxTextDataObject());
+		SetDataObject(dataobj);
+	}
+private:
+	virtual wxDragResult OnData(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y), wxDragResult defResult)
+	{
+		if(GetData())
+		{
+			wxDataObjectComposite * dataobjComp = static_cast<wxDataObjectComposite *>(GetDataObject()); 
+			wxDataFormat format = dataobjComp->GetReceivedFormat();
+			wxDataObject *dataobj = dataobjComp->GetObject(format); 
+			switch ( format.GetType() )
+			{
+				case wxDF_TEXT:
+				case wxDF_UNICODETEXT:
+					{
+						wxTextDataObject * dataobjText = static_cast<wxTextDataObject *>(dataobj);
+						wxASSERT(dataobjText != nullptr);
+						if(dataobjText)
+						{
+							wxString data = dataobjText->GetText();
+							if (!data.IsEmpty())
+							{
+								defResult = wxDragNone;
+								if( g_ActiveMadEdit )
+								{
+									if(g_ActiveMadEdit->InsertString( data ))
+										defResult = wxDragCopy;
+								}
+							}
+						}
+					}
+					break;
+				case wxDF_FILENAME:
+					{
+						wxFileDataObject * dataobjFile = static_cast<wxFileDataObject *>(dataobj);
+						wxASSERT(dataobjFile != nullptr);
+						if(dataobjFile)
+						{
+							wxArrayString filenames = dataobjFile->GetFilenames();
+							size_t count = filenames.GetCount();
+							for( size_t i = 0; i < count; ++i ) {
 #ifdef __WXMSW__
-			g_MainFrame->OpenFile( filenames[i], true );
+								g_MainFrame->OpenFile( filenames[i], true );
 #else
-			wxString fn = FixFileNameEncoding( filenames[i] );
-			g_MainFrame->OpenFile( fn, true );
+								wxString fn = FixFileNameEncoding( filenames[i] );
+								g_MainFrame->OpenFile( fn, true );
 #endif
+							}
+						}
+					}
+					break;
+				default:
+					wxFAIL_MSG( "unexpected data object format" );
+			}
 		}
 
-		return true;
+		return defResult;
 	}
 };
 
@@ -2785,7 +2834,7 @@ MadEditFrame::MadEditFrame( wxWindow *parent, wxWindowID id, const wxString &tit
 	LoadDefaultSettings( m_Config );
 	m_ReloadFiles  = m_Config->ReadBool( wxT( "/Application/ReloadFiles" ), true );
 	m_PurgeHistory = m_Config->ReadBool( wxT( "/Application/PurgeHistory" ), false );
-	SetDropTarget( new DnDFile() );
+	SetDropTarget( new MadDropTarget() );
 	m_PageClosing = false;
 	m_MadMacroStatus = emMacroStopped;
 	m_LastSelBeg = -1;
@@ -2917,7 +2966,7 @@ void MadEditFrame::CreateGUIControls( void )
 
 	m_Notebook = new wxMadAuiNotebook( this, ID_NOTEBOOK, wxPoint( 0, 29 ), wxSize( 392, 320 ), wxWANTS_CHARS | wxAUI_NB_TOP | wxAUI_NB_TAB_SPLIT | wxAUI_NB_TAB_MOVE | wxAUI_NB_SCROLL_BUTTONS | wxAUI_NB_WINDOWLIST_BUTTON | wxAUI_NB_CLOSE_BUTTON | wxAUI_NB_CLOSE_ON_ALL_TABS );
 	m_Notebook->wxControl::SetWindowStyleFlag( m_Notebook->wxControl::GetWindowStyleFlag() & ~wxTAB_TRAVERSAL );
-	m_Notebook->SetDropTarget( new DnDFile() );
+	m_Notebook->SetDropTarget( new MadDropTarget() );
 	m_Notebook->SetArtProvider( new wxAuiSimpleTabArt );
 	m_NoteBookTabHeight = m_Notebook->GetTabCtrlHeight();
 	m_FullScreenStyle = 0;
