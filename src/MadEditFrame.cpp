@@ -9273,7 +9273,7 @@ void MadEditFrame::OnToolsSaveRecMacro( wxCommandEvent& WXUNUSED(event) )
 				scriptfile.AddLine( wxT( "#Create MadEdit Object for active edit" ) );
 				scriptfile.AddLine( wxT( "medit = MadEdit()" ) );
 				scriptfile.AddLine( wxT( "" ) );
-				scriptfile.AddLine( m_MadMacroScripts[0] );
+				scriptfile.AddLine( medit + m_MadMacroScripts[0] );
 				scriptfile.AddLine( wxT( "" ) );
 
 				for( size_t i = 1; i < total; ++i )
@@ -9424,7 +9424,7 @@ void MadEditFrame::OnToolsMadScriptList( wxCommandEvent& event )
 				if( str.IsNull() == false )
 				{
 					g_MainFrame->SetMacroRunning();
-					g_EmbeddedPython->exec( std::string( str.mb_str() ) );
+					g_EmbeddedPython->exec( std::string((const char *)(str.ToUTF8().data())) );
 					g_MainFrame->SetMacroStopped();
 				}
 			}

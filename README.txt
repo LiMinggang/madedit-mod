@@ -123,6 +123,8 @@ FreeBSD packaging (with FreeBSD 10.01)
 Mod v0.4.12
 New: Support Drag and Drop for text(from other application, not DnD edit)
 Fix: Crash on purging items of FindInFiles Dialog
+Fix: The first macro command recorded without prefix "medit."
+Fix: Convert macros from saved macro file to UTF8 before running
 
 Mod v0.4.11
 Note: please use the convertcfg.py to convert your old config if you want to restore your old config, use clearbms.py to clear the bookmarks before running MadEdit-Mod
