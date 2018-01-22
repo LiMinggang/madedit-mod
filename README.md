@@ -104,6 +104,7 @@ Todo
 1. configure CC=gcc CXX=g++
 2. aclocal version in aclocal.m4
 3. stdc++ version
+* MAC porting(I've no MAC for this task)
 
 Known issues
 =============
