@@ -10,10 +10,10 @@
 #include "MadUtils.h"
 
 //(*Headers(MadMacroDlg)
-#include <wx/sizer.h>
-#include <wx/textctrl.h>
 #include <wx/button.h>
 #include <wx/dialog.h>
+#include <wx/sizer.h>
+#include <wx/textctrl.h>
 //*)
 
 class EmbeddedPython;
@@ -31,13 +31,12 @@ class MadMacroDlg: public wxDialog
 		void SetEncoding(const wxString &encname);
 
 		//(*Declarations(MadMacroDlg)
-		wxTextCtrl* WxMemoOutput;
-		wxButton* WxButtonRun;
-		MadEdit*  m_Pymacro;
-		wxButton* WxButtonClose;
 		wxButton* WxButtonResult;
+		wxTextCtrl* WxMemoOutput;
+		MadEdit*  m_Pymacro;
 		//*)
 
+		static wxString m_PyacroContext;
 	protected:
 
 		//(*Identifiers(MadMacroDlg)
@@ -51,6 +50,7 @@ class MadMacroDlg: public wxDialog
 		void OnWxButtonCloseClick(wxCommandEvent& event);
 		void OnWxButtonResultClick(wxCommandEvent& event);
 		void MadMacroDlgClose(wxCloseEvent& event);
+		void OnButtonResetClick(wxCommandEvent& event);
 		//*)
 };
 extern MadMacroDlg *g_MadMacroDlg;

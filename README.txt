@@ -122,6 +122,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.4.12
 New: Support Drag and Drop for text(from other application, not DnD edit)
+New: Remember last editing and reset of MadMacro dialog
 Fix: Crash on purging items of FindInFiles Dialog
 Fix: The first macro command recorded without prefix "medit."
 Fix: Convert macros from saved macro file to UTF8 before running

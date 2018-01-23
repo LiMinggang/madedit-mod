@@ -25,14 +25,19 @@ extern int MadMessageBox(const wxString& message,
 								 wxWindow *parent = nullptr,
 								 int x = wxDefaultCoord, int y = wxDefaultCoord);
 MadMacroDlg *g_MadMacroDlg = nullptr;
+wxString MadMacroDlg::m_PyacroContext;
+
 MadMacroDlg::MadMacroDlg(wxWindow* parent,wxWindowID id,const wxPoint& WXUNUSED(pos),const wxSize& WXUNUSED(size))
 {
 	wxSize pymacro(640, 240);
 	//(*Initialize(MadMacroDlg)
-	wxBoxSizer* BoxSizer4;
-	wxBoxSizer* BoxSizer2;
 	wxBoxSizer* BoxSizer1;
+	wxBoxSizer* BoxSizer2;
 	wxBoxSizer* BoxSizer3;
+	wxBoxSizer* BoxSizer4;
+	wxButton* WxButtonClose;
+	wxButton* WxButtonRun;
+	wxButton* wxButtonReset;
 
 	Create(parent, id, _("MadEdit Macro"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxSYSTEM_MENU|wxRESIZE_BORDER|wxCLOSE_BOX, _T("id"));
 	SetClientSize(wxDefaultSize);
@@ -47,10 +52,14 @@ MadMacroDlg::MadMacroDlg(wxWindow* parent,wxWindowID id,const wxPoint& WXUNUSED(
 	m_Pymacro->SetWantTab(true);
 	m_Pymacro->SetSyntax(wxT("MadPython"));
 	m_Pymacro->SetDisplayBookmark(false);
-	wxString endline(wxT("\r"));
-	if (m_Pymacro->GetInsertNewLineType() == nltDOS) endline += wxT("\n");
-	else if (m_Pymacro->GetInsertNewLineType() == nltUNIX) endline = wxT("\n");
-	m_Pymacro->SetText((wxString(wxT("#Create MadEdit Object for the active edit")) + endline + wxT("medit = MadEdit()") + endline + endline));
+	if(m_PyacroContext == wxEmptyString)
+	{
+		wxString endline(wxT("\r"));
+		if (m_Pymacro->GetInsertNewLineType() == nltDOS) endline += wxT("\n");
+		else if (m_Pymacro->GetInsertNewLineType() == nltUNIX) endline = wxT("\n");
+		m_PyacroContext = (wxString(wxT("#Create MadEdit Object for the active edit")) + endline + wxT("medit = MadEdit()") + endline + endline);
+	}
+	m_Pymacro->SetText( m_PyacroContext );
 	m_Pymacro->SetCaretPosition(m_Pymacro->GetFileSize());
 	//m_Pymacro = new wxTextCtrl(this, ID_MADEDIT, _("Text"), wxDefaultPosition, wxSize(640,240), 0, wxDefaultValidator, _T("ID_MADEDIT"));
 	BoxSizer2->Add(m_Pymacro, 1, wxALL|wxEXPAND, 5);
@@ -61,11 +70,13 @@ MadMacroDlg::MadMacroDlg(wxWindow* parent,wxWindowID id,const wxPoint& WXUNUSED(
 	BoxSizer3->Add(WxButtonRun, 0, wxALL|wxEXPAND, 5);
 	WxButtonClose = new wxButton(this, wxID_CANCEL, _("&Close"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_CANCEL"));
 	BoxSizer3->Add(WxButtonClose, 0, wxALL|wxEXPAND, 5);
-	WxButtonResult = new wxButton(this, wxID_ANY, _("Results >>"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXBUTTONTOGGLERESULT"));
+	wxButtonReset = new wxButton(this, wxID_ANY, _("Reset"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
+	BoxSizer3->Add(wxButtonReset, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	WxButtonResult = new wxButton(this, wxID_ANY, _("Results >>"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
 	BoxSizer3->Add(WxButtonResult, 0, wxALL|wxEXPAND, 5);
 	BoxSizer1->Add(BoxSizer3, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5);
 	BoxSizer4 = new wxBoxSizer(wxHORIZONTAL);
-	WxMemoOutput = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(640,240), wxTE_MULTILINE|wxTE_READONLY|wxTE_WORDWRAP|wxDOUBLE_BORDER|wxVSCROLL, wxDefaultValidator, _T("ID_TEXTCTRLRESULT"));
+	WxMemoOutput = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(640,240), wxTE_MULTILINE|wxTE_READONLY|wxTE_WORDWRAP|wxDOUBLE_BORDER|wxVSCROLL, wxDefaultValidator, _T("wxID_ANY"));
 	BoxSizer4->Add(WxMemoOutput, 1, wxALL|wxEXPAND, 5);
 	BoxSizer1->Add(BoxSizer4, 1, wxALL|wxEXPAND, 5);
 	WxMemoOutput->Show(m_debug);
@@ -75,6 +86,7 @@ MadMacroDlg::MadMacroDlg(wxWindow* parent,wxWindowID id,const wxPoint& WXUNUSED(
 
 	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadMacroDlg::OnWxButtonRunClick, this, wxID_OK );
 	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadMacroDlg::OnWxButtonCloseClick, this, wxID_CANCEL );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadMacroDlg::OnButtonResetClick, this, wxButtonReset->GetId() );
 	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadMacroDlg::OnWxButtonResultClick, this, WxButtonResult->GetId() );
 	Bind( wxEVT_CLOSE_WINDOW, &MadMacroDlg::MadMacroDlgClose, this, wxID_ANY );
 	//*)
@@ -158,6 +170,16 @@ void MadMacroDlg::OnWxButtonResultClick(wxCommandEvent& WXUNUSED(event))
 
 void MadMacroDlg::MadMacroDlgClose(wxCloseEvent& WXUNUSED(event))
 {
+	m_PyacroContext.Empty();
+	m_Pymacro->GetText(m_PyacroContext);
 	Destroy();
-	g_MadMacroDlg =	nullptr;
+	g_MadMacroDlg = nullptr;
+}
+
+void MadMacroDlg::OnButtonResetClick(wxCommandEvent& event)
+{
+	wxString endline(wxT("\r"));
+	if (m_Pymacro->GetInsertNewLineType() == nltDOS) endline += wxT("\n");
+	else if (m_Pymacro->GetInsertNewLineType() == nltUNIX) endline = wxT("\n");
+	m_PyacroContext = (wxString(wxT("#Create MadEdit Object for the active edit")) + endline + wxT("medit = MadEdit()") + endline + endline);
 }
