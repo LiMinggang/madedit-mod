@@ -489,8 +489,8 @@ bool MadEditApp::OnInit()
 		if( x + w > 0 && y + h > 0 )
 			//if(w>0 && h>0)
 		{
-			size.x = w;
-			size.y = h;
+			size.x = std::min( w, size.x );
+			size.y = std::min( h, size.y );
 			pos.x = x;
 			pos.y = y;
 		}
