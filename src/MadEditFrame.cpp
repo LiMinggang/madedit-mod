@@ -5770,6 +5770,8 @@ void MadEditFrame::SaveFile(size_t pageId, bool saveas/* = false*/, bool hideDlg
 			wxString fname = madedit->GetFileName();
 			if(!fname.IsEmpty())
 				m_RecentFiles->AddFileToHistory( madedit->GetFileName() );
+
+			m_Notebook->SetPageToolTip (pageId, fname);
 		}
 	}
 }
