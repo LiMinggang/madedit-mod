@@ -129,7 +129,6 @@
     <ClCompile Include="..\..\python\src\list.cpp" />
     <ClCompile Include="..\..\python\src\long.cpp" />
     <ClCompile Include="..\..\python\src\module.cpp" />
-    <ClCompile Include="..\..\python\src\numeric.cpp" />
     <ClCompile Include="..\..\python\src\object_operators.cpp" />
     <ClCompile Include="..\..\python\src\object_protocol.cpp" />
     <ClCompile Include="..\..\python\src\slice.cpp" />

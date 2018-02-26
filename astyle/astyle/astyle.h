@@ -18,7 +18,7 @@
 #endif
 #endif
 #else
-#if _MSC_VER < 1800
+#if _MSC_VER < 1600
 #define CPLUSEPLUSE98 1
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>

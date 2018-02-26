@@ -19,7 +19,7 @@
 #endif
 #endif
 #else
-#if _MSC_VER < 1800
+#if _MSC_VER < 1600
 #define CPLUSEPLUSE98 1
 #ifndef emplace_back
 #define emplace_back push_back

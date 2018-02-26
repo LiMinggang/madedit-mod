@@ -345,6 +345,9 @@
     <ClCompile Include="..\..\charset-detector\src\uchardet.cpp">
       <Filter>Source Files\charset-detector</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\MadSourceFormatDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\spellchecker\SpellCheckEngineOption.h">
@@ -607,6 +610,9 @@
     </ClInclude>
     <ClInclude Include="..\..\markdown\markdown-tokens.h">
       <Filter>Header Files\MarkDown</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadSourceFormatDialog.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

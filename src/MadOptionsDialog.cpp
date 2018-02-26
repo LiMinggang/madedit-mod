@@ -165,10 +165,10 @@ typedef struct {
 
 #define SET_CONTROLPARENT(pWin) \
     {\
-        LONG exStyle = wxGetWindowExStyle((wxWindow *)(pWin));\
+        LONG exStyle = ::GetWindowLong(GetHwndOf(((wxWindow *)(pWin))), GWL_EXSTYLE);\
         if ( !(exStyle & WS_EX_CONTROLPARENT) )\
         {\
-            wxSetWindowExStyle((wxWindow *)(pWin), exStyle | WS_EX_CONTROLPARENT);\
+            ::SetWindowLong(GetHwndOf((wxWindow *)(pWin)), GWL_EXSTYLE, exStyle | WS_EX_CONTROLPARENT);\
         }\
     }
 #else
@@ -1043,12 +1043,12 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	{
 		wxWindow *pWin = *it;
 		wxASSERT(pWin != nullptr);
-        LONG exStyle = wxGetWindowExStyle(pWin);
-        if ( !(exStyle & WS_EX_CONTROLPARENT) )
-        {
-            wxSetWindowExStyle((pWin), exStyle | WS_EX_CONTROLPARENT);
-        }
-        ++it;
+		LONG exStyle = ::GetWindowLong(GetHwndOf(((wxWindow *)(pWin))), GWL_EXSTYLE);
+		if (!(exStyle & WS_EX_CONTROLPARENT))
+		{
+			::SetWindowLong(GetHwndOf((wxWindow *)(pWin)), GWL_EXSTYLE, exStyle | WS_EX_CONTROLPARENT);
+		}
+		++it;
     }
 #endif
 	ButtonCancel->SetId(wxID_CANCEL);
