@@ -76,6 +76,7 @@ wxChar TestEncoding( const wxChar *name, wxFontEncoding enc, wxByte *mb )
 #if defined(__WXGTK__)
 	wxCSConv conv( name );
 #else //#elif defined(__WXMSW__) || defined(__WXMAC__)
+	name;
 	wxCSConv conv( enc );
 #endif
 	wxChar wcs[4] = {0};
