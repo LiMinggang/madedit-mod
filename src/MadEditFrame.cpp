@@ -956,13 +956,14 @@ wxString FixFileNameEncoding( const wxString &filename )
 class MadDropTarget : public wxDropTarget
 {
 public:
-	MadDropTarget::MadDropTarget()
+	MadDropTarget()
 	{
 		wxDataObjectComposite* dataobj = new wxDataObjectComposite();
 		dataobj->Add(new wxFileDataObject(), true); 
 		dataobj->Add(new wxTextDataObject());
 		SetDataObject(dataobj);
 	}
+	~MadDropTarget() {}
 private:
 	virtual wxDragResult OnData(wxCoord WXUNUSED(x), wxCoord WXUNUSED(y), wxDragResult defResult)
 	{
