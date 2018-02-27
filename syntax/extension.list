@@ -118,13 +118,11 @@ vho	syntax_vhdl.syn
 vhdl	syntax_vhdl.syn
 
 tcl syntax_tcl.syn
-S	syntax_gnuasm.syn
 s	syntax_gnuasm.syn
 
-YAML	syntax_yaml.syn
 yaml	syntax_yaml.syn
-YML	syntax_yaml.syn
 yml	syntax_yaml.syn
 
 yang	syntax_yang.syn
-YANG	syntax_yang.syn
+
+go  syntax_go.syn

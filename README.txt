@@ -123,11 +123,13 @@ FreeBSD packaging (with FreeBSD 10.01)
 Mod v0.4.12
 New: Support Drag and Drop for text(from other application, not DnD edit)
 New: Remember last editing and reset of MadMacro dialog
+New: Go language syntax support
 Fix: Crash on purging items of FindInFiles Dialog
 Fix: The first macro command recorded without prefix "medit."
 Fix: Convert macros from saved macro file to UTF8 before running
 Fix: Tooltip of the file name tab was not updated if renamed
 Fix: Use min size of the config and actual resolution
+Fix: Option dialog hang issue
 Update VS2010 build
 Update wxWidgets to 3.1.1
 
