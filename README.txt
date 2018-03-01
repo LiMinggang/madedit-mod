@@ -13,7 +13,7 @@ Supported Developing Platforms:
 A. Linux, FreeBSD, and Unix-like OS (__WXGTK__):
    a. GNU C++ 3.x/4.x:
       Required Libraries to compile:
-      1. wxWidgets-3.1.0 or higher with Unicode and IPC enabled
+      1. wxWidgets-3.1.1 or higher with Unicode and IPC enabled
       2. Boost-1.56.0 or higher(build Boost-Python)(1.65 is recommended)
 
       (install gtk2-devel/gtk3-devel gettext-devel automake rpm-build (Fedora/Mageia))
@@ -44,7 +44,7 @@ P.S.: Please open a ticket for bug of MadEdit-Mod at
 MadEdit_Win2K is a build by VC++ 2005 express for Windows 2000/XP.
 
 Example build under Linux
-wxWidgets(3.1.0) (CXXFLAGS=-fPIC CPPFLAGS=-fPIC CFLAGS=-fPIC, x64)
+wxWidgets(3.1.1) (CXXFLAGS=-fPIC CPPFLAGS=-fPIC CFLAGS=-fPIC, x64)
 ./configure --enable-unicode --disable-shared --with-libpng=builtin --with-zlib=builtin --with-expat=builtin --with-gtk=2 --with-libiconv=no
 MadEdit-Mod
 ./configure --with-boost=${HOME}/boost_1_66_0 --with-wxdir=${HOME}/wxWidgets-3.1.1
@@ -129,7 +129,7 @@ Fix: The first macro command recorded without prefix "medit."
 Fix: Convert macros from saved macro file to UTF8 before running
 Fix: Tooltip of the file name tab was not updated if renamed
 Fix: Use min size of the config and actual resolution
-Fix: Option dialog hang issue
+Fix: Option dialog hang issue(https://trac.wxwidgets.org/ticket/18091)
 Update VS2010 build
 Update wxWidgets to 3.1.1
 
