@@ -3990,7 +3990,6 @@ void MadEditFrame::SetPageFocus( size_t pageId )
 
 int MadEditFrame::GetPageFocus( )
 {
-
 	return m_Notebook->GetSelection();
 }
 

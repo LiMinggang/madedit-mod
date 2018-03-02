@@ -50,8 +50,8 @@ extern wxString g_MadEditAppDir;
 extern wxArrayString g_FontNames;
 
 TreeItemData *g_SelectedCommandItem = nullptr;
-int g_SelectedKeyId = -1;
 TreeItemData *g_CommandItemOfNewKey = nullptr;
+int g_SelectedKeyId = -1;
 #define ENABLE_BITMAP_THUARI 0
 
 class KeyTextCtrl : public wxTextCtrl
@@ -794,6 +794,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 		_("[%z] Time-zone name"),
 		_("[%Z] Time-zone abbreviation"),
 	};
+
 	for( size_t i = 0; i < (sizeof(datetimeMenus)/sizeof(const wxChar *)); ++i)
 	{
 		if(datetimeMenus[i] != nullptr)
@@ -827,10 +828,11 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	ComboBoxLanguage->SetValue(g_LanguageString[0]);*/
 
 	cnt=MadSyntax::GetSyntaxCount();
-	for(i=0; i<cnt; ++i)
+	for(i = 0; i < cnt; ++i)
 	{
 		ComboBoxNewDocSyntax->Append(wxGetTranslation(MadSyntax::GetSyntaxTitle(i)));
 	}
+
 	int index = ComboBoxNewDocSyntax->FindString(_("Plain Text"));
 	if(index != wxNOT_FOUND)
 		ComboBoxNewDocSyntax->SetSelection(index);
@@ -1383,7 +1385,7 @@ TreeItemData* MadOptionsDialog::FindKeyInList(const wxString &key)
 	list<TreeItemData*>::iterator tidit=TreeItemDataList.begin();
 	list<TreeItemData*>::iterator tiditend=TreeItemDataList.end();
 
-	wxString lkey=key.Lower();
+	wxString lkey = key.Lower();
 
 	while(tidit!=tiditend)
 	{
@@ -1412,7 +1414,7 @@ bool MadOptionsDialog::FindItemInList(TreeItemData* tid, const list<TreeItemData
 	list<TreeItemData*>::const_iterator tidit=tlist.begin();
 	list<TreeItemData*>::const_iterator tiditend=tlist.end();
 
-	while(tidit!=tiditend)
+	while(tidit != tiditend)
 	{
 		if((*tidit) == tid)
 		{
