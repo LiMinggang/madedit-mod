@@ -5771,6 +5771,7 @@ void MadEditFrame::SaveFile(size_t pageId, bool saveas/* = false*/, bool hideDlg
 			if(!fname.IsEmpty())
 				m_RecentFiles->AddFileToHistory( madedit->GetFileName() );
 
+			UpdateFontEncoding();
 			m_Notebook->SetPageToolTip (pageId, fname);
 		}
 	}
@@ -8198,7 +8199,7 @@ void MadEditFrame::OnViewToolbars( wxCommandEvent& event )
 	}
 }
 
-void MadEditFrame::UpdateFontEncoding(  )
+void MadEditFrame::UpdateFontEncoding( )
 {
 	if( g_ActiveMadEdit )
 	{
