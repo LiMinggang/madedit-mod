@@ -353,6 +353,8 @@ class MadSyntax;
 class MadLines
 {
 private:
+	typedef int ( MadLines::*FindStringPtr )( MadUCQueue &ucqueue,
+			MadStringIterator begin, const MadStringIterator &end, size_t &len );
 	friend class MadEdit;
 	friend class MadSyntax;
 
@@ -373,12 +375,22 @@ private:
 	MadFileData *m_TmpFileData;
 
 	MadMemData *m_MemData;
+	FindStringPtr FindString;
 
 	wxByte          *m_WriteBuffer;
+	wxByte          *m_NextUChar_Buffer;
+	size_t          m_NextUChar_BufferStart;
+	size_t          m_NextUChar_BufferSize;
+	wxFileOffset    m_NextUChar_BufferNextPos;
+	wxFileOffset    m_NextUChar_LineSize;
+	wxFileOffset    m_NextUChar_Pos;
 	vector<wxByte>  m_WriteBufferVector;
+	MadLineIterator m_NextUChar_LineIter;
 	wxString    m_Name;
 	bool        m_ReadOnly;
+	bool        m_NextUChar_BufferLoadNew;
 	int         m_MaxLineWidth;             //max pixel width of line/row
+
 
 private:
 
@@ -411,17 +423,7 @@ public:
 	wxFileOffset GetSize() { return m_Size; }
 
 private:  // NextUChar()
-	wxByte          *m_NextUChar_Buffer;
-	size_t          m_NextUChar_BufferStart;
-	size_t          m_NextUChar_BufferSize;
-	wxFileOffset    m_NextUChar_BufferNextPos;
-	bool            m_NextUChar_BufferLoadNew;
 	void LoadNewBuffer();
-
-
-	MadLineIterator m_NextUChar_LineIter;
-	wxFileOffset    m_NextUChar_LineSize;
-	wxFileOffset    m_NextUChar_Pos;
 
 	bool NextUChar_SBCS( MadUCQueue &ucqueue );
 	bool NextUChar_DBCS( MadUCQueue &ucqueue );
@@ -441,10 +443,6 @@ private:  // NextUChar()
 	int FindStringNoCase( MadUCQueue &ucqueue, MadStringIterator begin,
 						  const MadStringIterator &end, size_t &len );
 
-	typedef int ( MadLines::*FindStringPtr )( MadUCQueue &ucqueue,
-			MadStringIterator begin, const MadStringIterator &end, size_t &len );
-
-	FindStringPtr FindString;
 
 public:
 	void SetEncoding( MadEncoding *encoding );
@@ -463,6 +461,5 @@ public:
 	static const MadLine madNewEmptyLine;
 	static const MadRowIndex madNewRowIdx;
 };
-
 
 #endif

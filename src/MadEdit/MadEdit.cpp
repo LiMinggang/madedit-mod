@@ -90,6 +90,15 @@ extern bool IsMacroRecording();
 extern void RecordAsMadMacro( MadEdit *, const wxString&, bool=false);
 
 MadKeyBindings MadEdit::ms_KeyBindings;
+wxPoint MadEdit::m_Space_Points[4];
+wxPoint MadEdit::m_EOF_Points[5];
+wxPoint MadEdit::m_CR_Points[40];
+wxPoint MadEdit::m_LF_Points[40];
+wxPoint MadEdit::m_CRLF_Points[80];
+int MadEdit::m_CR_Points_Count;
+int MadEdit::m_LF_Points_Count;
+int MadEdit::m_CRLF_Points_Count;
+
 
 const int HexModeMaxColumns = 78;
 extern const ucs4_t HexHeader[78] =
@@ -10964,7 +10973,6 @@ void MadEdit::OnMouseCaptureLost( wxMouseCaptureLostEvent & WXUNUSED(evt) )
 
 	//evt.Skip();
 }
-
 
 void MadEdit::UpdateCursor( int mouse_x, int mouse_y )
 {

@@ -214,7 +214,6 @@ struct MadCaretPos
 	    extraspaces = cp.extraspaces;
 	}
 	*/
-
 };
 
 struct UCIterator;
@@ -292,10 +291,9 @@ private:
 	wxBitmap        *m_ClientBitmap, *m_MarkBitmap;
 	int             m_LastPaintBitmap;// 0:client, 1:mark
 
-	wxPoint         m_Space_Points[4], m_EOF_Points[5];
-	wxPoint         m_CR_Points[40], m_LF_Points[40], m_CRLF_Points[80];
-	int             m_CR_Points_Count, m_LF_Points_Count, m_CRLF_Points_Count;
-
+	static wxPoint  m_Space_Points[4], m_EOF_Points[5];
+	static wxPoint  m_CR_Points[40], m_LF_Points[40], m_CRLF_Points[80];
+	static int      m_CR_Points_Count, m_LF_Points_Count, m_CRLF_Points_Count;
 
 	MadCaretPos     m_CaretPos;
 	MadUCQueue      m_ActiveRowUChars;  // ucs4 char cache of active row
