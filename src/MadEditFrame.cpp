@@ -483,12 +483,12 @@ inline void RecordAsMadMacro( MadEdit * edit, const wxString& script, bool input
 					}
 
 					g_MainFrame->AddMacroScript( wxString::Format( wxT( "Goto( %s )" ), ( wxLongLong( g_MPythonCaretPos ).ToString() ).c_str() ) );
-					g_MainFrame->AddMacroScript( wxT( "InsertStr(\"" ) + g_MPythonInputBuf + wxT( "\")" ), g_MPythonCaretPos, g_MPythonSelBegPos, g_MPythonSelEndPos );
+					g_MainFrame->AddMacroScript( wxT( "InsertStr(\"" ) + g_MPythonInputBuf + wxT( "\")" ), /*g_MPythonCaretPos,*/ g_MPythonSelBegPos, g_MPythonSelEndPos );
 					g_MPythonInputBuf.Empty();
 					g_MPythonCaretPos = -1;
 				}
 
-				g_MainFrame->AddMacroScript( script, g_ActiveMadEdit->GetCaretPosition(),
+				g_MainFrame->AddMacroScript( script, /*g_ActiveMadEdit->GetCaretPosition(),*/
 											 g_ActiveMadEdit->GetSelectionBeginPos(), g_ActiveMadEdit->GetSelectionEndPos() );
 			}
 			else
@@ -499,7 +499,7 @@ inline void RecordAsMadMacro( MadEdit * edit, const wxString& script, bool input
 					if(breaked)
 					{
 						g_MainFrame->AddMacroScript( wxString::Format( wxT( "Goto( %s )" ), ( wxLongLong( g_MPythonCaretPos ).ToString() ).c_str() ) );
-						g_MainFrame->AddMacroScript( wxT( "InsertStr(\"" ) + g_MPythonInputBuf + wxT( "\")" ), g_MPythonCaretPos, g_MPythonSelBegPos, g_MPythonSelEndPos );
+						g_MainFrame->AddMacroScript( wxT( "InsertStr(\"" ) + g_MPythonInputBuf + wxT( "\")" ), /*g_MPythonCaretPos, */g_MPythonSelBegPos, g_MPythonSelEndPos );
 						g_MPythonInputBuf.Empty();
 					}
 					g_MPythonCaretPos = g_ActiveMadEdit->GetCaretPosition();
@@ -9168,7 +9168,7 @@ void MadEditFrame::OnToolsStopRecMacro( wxCommandEvent& WXUNUSED(event) )
 		}
 
 		g_MainFrame->AddMacroScript( wxString::Format( wxT( "Goto( %s )" ), ( wxLongLong( g_MPythonCaretPos ).ToString() ).c_str() ) );
-		g_MainFrame->AddMacroScript( wxT( "InsertStr(\"" ) + g_MPythonInputBuf + wxT( "\")" ), g_MPythonCaretPos, g_MPythonSelBegPos, g_MPythonSelEndPos );
+		g_MainFrame->AddMacroScript( wxT( "InsertStr(\"" ) + g_MPythonInputBuf + wxT( "\")" ), /*g_MPythonCaretPos,*/ g_MPythonSelBegPos, g_MPythonSelEndPos );
 		g_MPythonInputBuf.Empty();
 	}
 

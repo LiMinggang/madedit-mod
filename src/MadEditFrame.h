@@ -851,7 +851,7 @@ public:
 	void SetMacroRunning() {m_MadMacroStatus = emMacroRunning;}
 	void SetMacroRecording() {m_MadMacroStatus = emMacroRecoding;}
 	void SetMacroStopped() {m_MadMacroStatus = emMacroStopped;}
-	void AddMacroScript( const wxString & script, wxFileOffset caretPos = 0, wxFileOffset selBeg = -1, wxFileOffset selEnd = -1 ) {
+	void AddMacroScript( const wxString & script, /*wxFileOffset caretPos = 0,*/ wxFileOffset selBeg = -1, wxFileOffset selEnd = -1 ) {
 		if( ( ( selBeg != -1 ) && ( selEnd != -1 ) ) && ( selBeg != m_LastSelBeg || selEnd != m_LastSelEnd ) ) {
 			m_LastSelBeg = selBeg;
 			m_LastSelEnd = selEnd;
