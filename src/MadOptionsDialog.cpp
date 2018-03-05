@@ -216,6 +216,11 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	wxFlexGridSizer* FlexGridSizer1;
 	wxFlexGridSizer* FlexGridSizer2;
 	wxGridSizer* GridSizer3;
+	wxPanel* Panel1;
+	wxPanel* Panel2;
+	wxPanel* Panel3;
+	wxPanel* Panel5;
+	wxPanel* Panel6;
 	wxStaticBoxSizer* StaticBoxSizer10;
 	wxStaticBoxSizer* StaticBoxSizer1;
 	wxStaticBoxSizer* StaticBoxSizer2;
@@ -224,12 +229,26 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	wxStaticBoxSizer* StaticBoxSizer5;
 	wxStaticBoxSizer* StaticBoxSizer6;
 	wxStaticBoxSizer* StaticBoxSizer9;
+	wxStaticText* StaticText12;
+	wxStaticText* StaticText13;
+	wxStaticText* StaticText14;
+	wxStaticText* StaticText15;
+	wxStaticText* StaticText16;
+	wxStaticText* StaticText17;
 	wxStaticText* StaticText18;
 	wxStaticText* StaticText19;
+	wxStaticText* StaticText1;
 	wxStaticText* StaticText20;
+	wxStaticText* StaticText21;
+	wxStaticText* StaticText22;
 	wxStaticText* StaticText23;
 	wxStaticText* StaticText24;
 	wxStaticText* StaticText25;
+	wxStaticText* StaticText26;
+	wxStaticText* StaticText2;
+	wxStaticText* StaticText3;
+	wxStaticText* StaticText6;
+
 	Create(parent, wxID_ANY, _("Options"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxSYSTEM_MENU|wxRESIZE_BORDER|wxCLOSE_BOX, _T("wxID_ANY"));
 	SetClientSize(wxSize(900,400));
 
@@ -246,15 +265,15 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	ComboBoxLanguage = new wxComboBox( Panel1, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(160,-1), g_LanguageString,  wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, wxT( "ID_COMBOBOXLANGUAGE" ) );
 	ComboBoxLanguage->SetValue( g_LanguageString[0] );
 	BoxSizer27->Add(ComboBoxLanguage, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticText16 = new wxStaticText(Panel1, wxID_ANY, _("Language of User Interface (must restart MadEdit)"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT16"));
-	BoxSizer27->Add(StaticText16, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	StaticText17 = new wxStaticText(Panel1, wxID_ANY, _("Language of User Interface (must restart MadEdit)"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	BoxSizer27->Add(StaticText17, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer3->Add(BoxSizer27, 0, wxALL|wxEXPAND, 2);
 	BoxSizer4 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer4->Add(3,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	ComboBoxEncoding = new wxComboBox(Panel1, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(160,-1), 0, 0, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXENCODING"));
 	BoxSizer4->Add(ComboBoxEncoding, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticText13 = new wxStaticText(Panel1, wxID_ANY, _("Use this encoding to create new file or when MadEdit cannot determine the encoding of old file"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT13"));
-	BoxSizer4->Add(StaticText13, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	StaticText1 = new wxStaticText(Panel1, wxID_ANY, _("Use this encoding to create new file or when MadEdit cannot determine the encoding of old file"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	BoxSizer4->Add(StaticText1, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer3->Add(BoxSizer4, 0, wxALL|wxEXPAND, 2);
 	BoxSizer40 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer40->Add(10,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
@@ -266,8 +285,8 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	BoxSizer35->Add(3,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	ComboBoxDefaultFont = new wxComboBox(Panel1, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(160,-1), g_FontNames, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXDEFAULTFONT"));
 	BoxSizer35->Add(ComboBoxDefaultFont, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticText19 = new wxStaticText(Panel1, wxID_ANY, _("Default font"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
-	BoxSizer35->Add(StaticText19, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	StaticText2 = new wxStaticText(Panel1, wxID_ANY, _("Default font"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	BoxSizer35->Add(StaticText2, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer3->Add(BoxSizer35, 0, wxALL|wxEXPAND, 2);
 	BoxSizer7 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer39 = new wxBoxSizer(wxHORIZONTAL);
@@ -275,32 +294,32 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	EditDefaultFontSize = new wxTextCtrl(Panel1, wxID_ANY, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRLDEFAULTFONTSIZE"));
 	EditDefaultFontSize->SetMaxLength(2);
 	BoxSizer39->Add(EditDefaultFontSize, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticText20 = new wxStaticText(Panel1, wxID_ANY, _("Default font size"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
-	BoxSizer39->Add(StaticText20, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	StaticText3 = new wxStaticText(Panel1, wxID_ANY, _("Default font size"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	BoxSizer39->Add(StaticText3, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer7->Add(BoxSizer39, 0, wxALL|wxEXPAND, 2);
 	BoxSizer38 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer38->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	EditMaxSizeToLoad = new wxTextCtrl(Panel1, wxID_ANY, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITMAXSIZETOLOAD"));
 	EditMaxSizeToLoad->SetMaxLength(128);
 	BoxSizer38->Add(EditMaxSizeToLoad, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticText1 = new wxStaticText(Panel1, wxID_ANY, _("Max file size to load whole file into memory"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
-	BoxSizer38->Add(StaticText1, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	StaticText4 = new wxStaticText(Panel1, wxID_ANY, _("Max file size to load whole file into memory"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	BoxSizer38->Add(StaticText4, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer7->Add(BoxSizer38, 0, wxALL|wxEXPAND, 2);
 	BoxSizer17 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer17->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	EditMaxTextFileSize = new wxTextCtrl(Panel1, wxID_ANY, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITMAXTEXTFILESIZE"));
 	EditMaxTextFileSize->SetMaxLength(128);
 	BoxSizer17->Add(EditMaxTextFileSize, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticText2 = new wxStaticText(Panel1, wxID_ANY, _("Max file size to load as a text file"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
-	BoxSizer17->Add(StaticText2, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	StaticText5 = new wxStaticText(Panel1, wxID_ANY, _("Max file size to load as a text file"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	BoxSizer17->Add(StaticText5, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer7->Add(BoxSizer17, 0, wxALL|wxEXPAND, 2);
 	BoxSizer6 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer6->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	EditMaxDisplaySize = new wxTextCtrl(Panel1, wxID_ANY, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_MAXDISPLAYSIZE"));
 	EditMaxDisplaySize->SetMaxLength(5);
 	BoxSizer6->Add(EditMaxDisplaySize, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticText18 = new wxStaticText(Panel1, wxID_ANY, _("Max chars displayed in search results"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
-	BoxSizer6->Add(StaticText18, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	StaticText6 = new wxStaticText(Panel1, wxID_ANY, _("Max chars displayed in search results"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	BoxSizer6->Add(StaticText6, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer7->Add(BoxSizer6, 0, wxALL|wxEXPAND, 2);
 	CheckBoxSingleInstance = new wxCheckBox(Panel1, wxID_ANY, _("Single Instance (must restart MadEdit)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXSINGLEINSTANCE"));
 	CheckBoxSingleInstance->SetValue(false);
@@ -329,8 +348,8 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	EditAutoSaveTimeout = new wxTextCtrl(Panel1, wxID_ANY, _T("10"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRLAUTOSAVETIMEOUT"));
 	EditAutoSaveTimeout->SetMaxLength(2);
 	BoxSizer37->Add(EditAutoSaveTimeout, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticTextAutoSaveTimeout = new wxStaticText(Panel1, wxID_ANY, _("Timeout(M)"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
-	BoxSizer37->Add(StaticTextAutoSaveTimeout, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	StaticText7 = new wxStaticText(Panel1, wxID_ANY, _("Timeout(M)"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	BoxSizer37->Add(StaticText7, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer7->Add(BoxSizer37, 0, wxALL|wxEXPAND, 2);
 	CheckBoxEnableAutoBackup = new wxCheckBox(Panel1, wxID_ANY, _("Auto backup"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXAUTOBACKUP"));
 	CheckBoxEnableAutoBackup->SetValue(false);
@@ -350,36 +369,36 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	BoxSizer9->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	EditMaxLineLength = new wxTextCtrl(Panel2, wxID_ANY, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITMAXLINELENGTH"));
 	BoxSizer9->Add(EditMaxLineLength, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticText3 = new wxStaticText(Panel2, wxID_ANY, _("Max line length before Line-Wrap (must restart MadEdit)"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT3"));
-	BoxSizer9->Add(StaticText3, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	StaticText8 = new wxStaticText(Panel2, wxID_ANY, _("Max line length before Line-Wrap (must restart MadEdit)"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	BoxSizer9->Add(StaticText8, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer8->Add(BoxSizer9, 0, wxALL|wxEXPAND, 2);
 	BoxSizer10 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer10->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	EditMaxColumns = new wxTextCtrl(Panel2, wxID_ANY, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITMAXCOLUMNS"));
 	BoxSizer10->Add(EditMaxColumns, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticText4 = new wxStaticText(Panel2, wxID_ANY, _("Columns of Wrap-By-Column"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT4"));
-	BoxSizer10->Add(StaticText4, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	StaticText9 = new wxStaticText(Panel2, wxID_ANY, _("Columns of Wrap-By-Column"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	BoxSizer10->Add(StaticText9, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer8->Add(BoxSizer10, 0, wxALL|wxEXPAND, 2);
 	BoxSizer11 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer11->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	EditTabColumns = new wxTextCtrl(Panel2, wxID_ANY, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITTABCOLUMNS"));
 	BoxSizer11->Add(EditTabColumns, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticText5 = new wxStaticText(Panel2, wxID_ANY, _("Columns of Tab"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT5"));
-	BoxSizer11->Add(StaticText5, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	StaticText10 = new wxStaticText(Panel2, wxID_ANY, _("Columns of Tab"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	BoxSizer11->Add(StaticText10, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer8->Add(BoxSizer11, 0, wxALL|wxEXPAND, 2);
 	BoxSizer13 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer13->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	EditIndentColumns = new wxTextCtrl(Panel2, wxID_ANY, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITINDENTCOLUMNS"));
 	BoxSizer13->Add(EditIndentColumns, 0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticText6 = new wxStaticText(Panel2, wxID_ANY, _("Columns of Indent"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT6"));
-	BoxSizer13->Add(StaticText6, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	StaticText11 = new wxStaticText(Panel2, wxID_ANY, _("Columns of Indent"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	BoxSizer13->Add(StaticText11, 0, wxALL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer8->Add(BoxSizer13, 0, wxALL|wxEXPAND, 2);
 	BoxSizer5 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer5->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	EditDateTime = new wxTextCtrl(Panel2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_EDITDATETIME"));
 	BoxSizer5->Add(EditDateTime, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	StaticTextDateTime = new wxStaticText(Panel2, wxID_ANY, _("Format of Date/Time"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXTDATETIME"));
-	BoxSizer5->Add(StaticTextDateTime, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	StaticText12 = new wxStaticText(Panel2, wxID_ANY, _("Format of Date/Time"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	BoxSizer5->Add(StaticText12, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer5->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	ButtonDateTime = new wxButton(Panel2, wxID_ANY, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTONDATETIME"));
 	ADD2EVENTMAP(ButtonEvtMapVec, ButtonDateTime, &MadOptionsDialog::ButtonDateTimeClick);
@@ -452,8 +471,8 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	StaticBoxSizer9->Add(RadioButtonNewDocLineEndingCR, 0, wxALL|wxEXPAND, 2);
 	BoxSizer43->Add(StaticBoxSizer9, 0, wxALL|wxALIGN_LEFT, 5);
 	BoxSizer49 = new wxBoxSizer(wxVERTICAL);
-	StaticText23 = new wxStaticText(Panel6, wxID_ANY, _("Syntax:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
-	BoxSizer49->Add(StaticText23, 0, wxALL|wxALIGN_LEFT, 2);
+	StaticText13 = new wxStaticText(Panel6, wxID_ANY, _("Syntax:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	BoxSizer49->Add(StaticText13, 0, wxALL|wxALIGN_LEFT, 2);
 	ComboBoxNewDocSyntax = new wxComboBox(Panel6, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(160,-1), 0, 0, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXNEWDOCSYNTAX"));
 	BoxSizer49->Add(ComboBoxNewDocSyntax, 0, wxALL|wxEXPAND, 2);
 	BoxSizer43->Add(BoxSizer49, 0, wxALL|wxALIGN_LEFT, 5);
@@ -480,14 +499,14 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	StaticBoxSizer10->Add(BoxSizer50, 0, wxALL|wxEXPAND, 0);
 	BoxSizer47->Add(StaticBoxSizer10, 0, wxALL|wxALIGN_LEFT, 5);
 	BoxSizer51 = new wxBoxSizer(wxVERTICAL);
-	StaticText24 = new wxStaticText(Panel6, wxID_ANY, _("Font:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
-	BoxSizer51->Add(StaticText24, 0, wxALL|wxALIGN_LEFT, 2);
+	StaticText14 = new wxStaticText(Panel6, wxID_ANY, _("Font:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	BoxSizer51->Add(StaticText14, 0, wxALL|wxALIGN_LEFT, 2);
 	ComboBoxNewDocFont = new wxComboBox(Panel6, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(160,-1), g_FontNames, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("ID_COMBOBOXNEWDOCFONT"));
 	BoxSizer51->Add(ComboBoxNewDocFont, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer47->Add(BoxSizer51, 0, wxALL|wxALIGN_LEFT, 5);
 	BoxSizer52 = new wxBoxSizer(wxVERTICAL);
-	StaticText25 = new wxStaticText(Panel6, wxID_ANY, _("Font Size:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
-	BoxSizer52->Add(StaticText25, 0, wxALL|wxALIGN_LEFT, 2);
+	StaticText15 = new wxStaticText(Panel6, wxID_ANY, _("Font Size:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	BoxSizer52->Add(StaticText15, 0, wxALL|wxALIGN_LEFT, 2);
 	EditNewDocFontSize = new wxTextCtrl(Panel6, wxID_ANY, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRLNEWDOCFONTSIZE"));
 	EditNewDocFontSize->SetMaxLength(2);
 	BoxSizer52->Add(EditNewDocFontSize, 0, wxALL|wxALIGN_LEFT, 2);
@@ -536,22 +555,22 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	CheckBoxPrintPageHeader->SetValue(false);
 	StaticBoxSizer3->Add(CheckBoxPrintPageHeader, 0, wxALL|wxALIGN_LEFT, 1);
 	FlexGridSizer1 = new wxFlexGridSizer(0, 3, 0, 0);
-	StaticText7 = new wxStaticText(Panel3, wxID_ANY, _("Left:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT7"));
-	FlexGridSizer1->Add(StaticText7, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 2);
+	StaticText16 = new wxStaticText(Panel3, wxID_ANY, _("Left:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	FlexGridSizer1->Add(StaticText16, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 2);
 	EditHeaderLeft = new wxTextCtrl(Panel3, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(240,-1), 0, wxDefaultValidator, _T("ID_EDITHEADERLEFT"));
 	FlexGridSizer1->Add(EditHeaderLeft, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	Button1 = new wxButton(Panel3, wxID_ANY, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON1"));
 	ADD2EVENTMAP(ButtonEvtMapVec, Button1, &MadOptionsDialog::PrintMarkButtonClick);
 	FlexGridSizer1->Add(Button1, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
-	StaticText8 = new wxStaticText(Panel3, wxID_ANY, _("Center:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT8"));
-	FlexGridSizer1->Add(StaticText8, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 2);
+	StaticText18 = new wxStaticText(Panel3, wxID_ANY, _("Center:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	FlexGridSizer1->Add(StaticText18, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 2);
 	EditHeaderCenter = new wxTextCtrl(Panel3, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(240,-1), 0, wxDefaultValidator, _T("ID_EDITHEADERCENTER"));
 	FlexGridSizer1->Add(EditHeaderCenter, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	Button2 = new wxButton(Panel3, wxID_ANY, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON2"));
 	ADD2EVENTMAP(ButtonEvtMapVec, Button2, &MadOptionsDialog::PrintMarkButtonClick);
 	FlexGridSizer1->Add(Button2, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
-	StaticText9 = new wxStaticText(Panel3, wxID_ANY, _("Right:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT9"));
-	FlexGridSizer1->Add(StaticText9, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 2);
+	StaticText19 = new wxStaticText(Panel3, wxID_ANY, _("Right:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	FlexGridSizer1->Add(StaticText19, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 2);
 	EditHeaderRight = new wxTextCtrl(Panel3, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(240,-1), 0, wxDefaultValidator, _T("ID_EDITHEADERRIGHT"));
 	FlexGridSizer1->Add(EditHeaderRight, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	Button3 = new wxButton(Panel3, wxID_ANY, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON3"));
@@ -564,22 +583,22 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	CheckBoxPrintPageFooter->SetValue(false);
 	StaticBoxSizer4->Add(CheckBoxPrintPageFooter, 0, wxALL|wxALIGN_LEFT, 2);
 	FlexGridSizer2 = new wxFlexGridSizer(0, 3, 0, 0);
-	StaticText10 = new wxStaticText(Panel3, wxID_ANY, _("Left:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT10"));
-	FlexGridSizer2->Add(StaticText10, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 2);
+	StaticText20 = new wxStaticText(Panel3, wxID_ANY, _("Left:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	FlexGridSizer2->Add(StaticText20, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 2);
 	EditFooterLeft = new wxTextCtrl(Panel3, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(240,-1), 0, wxDefaultValidator, _T("ID_EDITFOOTERLEFT"));
 	FlexGridSizer2->Add(EditFooterLeft, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	Button4 = new wxButton(Panel3, wxID_ANY, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON4"));
 	ADD2EVENTMAP(ButtonEvtMapVec, Button4, &MadOptionsDialog::PrintMarkButtonClick);
 	FlexGridSizer2->Add(Button4, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
-	StaticText11 = new wxStaticText(Panel3, wxID_ANY, _("Center:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT11"));
-	FlexGridSizer2->Add(StaticText11, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 2);
+	StaticText21 = new wxStaticText(Panel3, wxID_ANY, _("Center:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	FlexGridSizer2->Add(StaticText21, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 2);
 	EditFooterCenter = new wxTextCtrl(Panel3, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(240,-1), 0, wxDefaultValidator, _T("ID_EDITFOOTERLEFTCENTER"));
 	FlexGridSizer2->Add(EditFooterCenter, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	Button5 = new wxButton(Panel3, wxID_ANY, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON5"));
 	ADD2EVENTMAP(ButtonEvtMapVec, Button5, &MadOptionsDialog::PrintMarkButtonClick);
 	FlexGridSizer2->Add(Button5, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
-	StaticText12 = new wxStaticText(Panel3, wxID_ANY, _("Right:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT12"));
-	FlexGridSizer2->Add(StaticText12, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 2);
+	StaticText22 = new wxStaticText(Panel3, wxID_ANY, _("Right:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	FlexGridSizer2->Add(StaticText22, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 2);
 	EditFooterRight = new wxTextCtrl(Panel3, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(240,-1), 0, wxDefaultValidator, _T("ID_EDITFOOTERRIGHT"));
 	FlexGridSizer2->Add(EditFooterRight, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	Button6 = new wxButton(Panel3, wxID_ANY, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON6"));
@@ -599,22 +618,22 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	BoxSizer18->Add(BoxSizer19, 2, wxALL|wxEXPAND, 4);
 	BoxSizer20 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer24 = new wxBoxSizer(wxHORIZONTAL);
-	StaticTextCommandHint = new wxStaticText(Panel4, wxID_ANY, _("Hint:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXTCOMMANDHINT"));
-	BoxSizer24->Add(StaticTextCommandHint, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5);
+	StaticText23 = new wxStaticText(Panel4, wxID_ANY, _("Hint:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	BoxSizer24->Add(StaticText23, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5);
 	EditCommandHint = new wxTextCtrl(Panel4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_EDITHINT"));
 	EditCommandHint->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BTNFACE));
 	BoxSizer24->Add(EditCommandHint, 1, wxALL|wxEXPAND, 5);
 	BoxSizer20->Add(BoxSizer24, 0, wxALL|wxEXPAND, 2);
 	BoxSizer21 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer22 = new wxBoxSizer(wxVERTICAL);
-	StaticText14 = new wxStaticText(Panel4, wxID_ANY, _("Assigned Keys:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT14"));
-	BoxSizer22->Add(StaticText14, 0, wxALL|wxALIGN_LEFT, 5);
+	StaticText24 = new wxStaticText(Panel4, wxID_ANY, _("Assigned Keys:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	BoxSizer22->Add(StaticText24, 0, wxALL|wxALIGN_LEFT, 5);
 	ListBoxKeys = new wxListBox(Panel4, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, 0, wxLB_SINGLE, wxDefaultValidator, _T("ID_LISTBOXKEYS"));
 	BoxSizer22->Add(ListBoxKeys, 1, wxALL|wxEXPAND, 2);
 	BoxSizer21->Add(BoxSizer22, 0, wxALL|wxEXPAND, 2);
 	BoxSizer25 = new wxBoxSizer(wxVERTICAL);
-	StaticText15 = new wxStaticText(Panel4, wxID_ANY, _("New Key:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT15"));
-	BoxSizer25->Add(StaticText15, 0, wxALL|wxALIGN_LEFT, 5);
+	StaticText25 = new wxStaticText(Panel4, wxID_ANY, _("New Key:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	BoxSizer25->Add(StaticText25, 0, wxALL|wxALIGN_LEFT, 5);
 	EditKey = new KeyTextCtrl(Panel4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_TAB|wxWANTS_CHARS, wxDefaultValidator, _T("ID_EDITKEY"));
 	BoxSizer25->Add(EditKey, 0, wxALL|wxEXPAND, 5);
 	EditKeyHint = new wxTextCtrl(Panel4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_EDITKEYHINT"));
@@ -653,8 +672,8 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	StaticBoxSizer5 = new wxStaticBoxSizer(wxHORIZONTAL, Panel5, _("Language"));
 	ChoiceDictionary = new wxChoice(Panel5, wxID_ANY, wxDefaultPosition, wxSize(200,-1), 0, 0, 0, wxDefaultValidator, _T("ID_CHOICEDICTIONARY"));
 	StaticBoxSizer5->Add(ChoiceDictionary, 0, wxALL|wxALIGN_LEFT, 2);
-	StaticText17 = new wxStaticText(Panel5, wxID_ANY, _("Dictionary"), wxDefaultPosition, wxSize(200,-1), 0, _T("ID_STATICTEXT17"));
-	StaticBoxSizer5->Add(StaticText17, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	StaticText26 = new wxStaticText(Panel5, wxID_ANY, _("Dictionary"), wxDefaultPosition, wxSize(200,-1), 0, _T("wxID_ANY"));
+	StaticBoxSizer5->Add(StaticText26, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer36->Add(StaticBoxSizer5, 0, wxALL|wxEXPAND, 2);
 	StaticBoxSizer6 = new wxStaticBoxSizer(wxHORIZONTAL, Panel5, _("Path Setting"));
 	EditDictionaryDir = new wxTextCtrl(Panel5, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(200,-1), 0, wxDefaultValidator, _T("ID_EDITDICTIONARYDIR"));
@@ -712,8 +731,8 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	Connect(ID_CHOICEDICTIONARY,wxEVT_COMMAND_CHOICE_SELECTED,(wxObjectEventFunction)&MadOptionsDialog::ChoiceDictionarySelect);
 	Connect(ID_EDITDICTIONARYDIR,wxEVT_COMMAND_TEXT_ENTER,(wxObjectEventFunction)&MadOptionsDialog::EditDictionaryDirTextEnter);
 	Connect(ID_DICTIONARY_DIR,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadOptionsDialog::ButtonDictionaryDirClick);
-	Connect(ID_BUTTONOK,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadOptionsDialog::ButtonOKClick);
-	Connect(ID_BUTTONCANCEL,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadOptionsDialog::ButtonCancelClick);
+	Connect(wxID_OK,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadOptionsDialog::ButtonOKClick);
+	Connect(wxID_CANCEL,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadOptionsDialog::ButtonCancelClick);
 #endif
 	//*)
 	for(size_t i = 0; i < ButtonEvtMapVec.size(); ++i)
@@ -1256,13 +1275,13 @@ void MadOptionsDialog::ButtonOKClick(wxCommandEvent& WXUNUSED(event))
 
 	if( !EditMaxSizeToLoad->GetValue().ToLong( &lo ) || lo < 0 )
 	{
-		wxLogError( errtext + _(": Should be greater than zero"), StaticText1->GetLabel().c_str(), EditMaxSizeToLoad->GetValue().c_str() );
+		wxLogError( errtext + _(": Should be greater than zero"), StaticText4->GetLabel().c_str(), EditMaxSizeToLoad->GetValue().c_str() );
 		error = true;
 	}
 
 	if( !EditMaxTextFileSize->GetValue().ToLong( &lo ) || lo < 0 )
 	{
-		wxLogError( errtext + _(": Should be greater than zero"), StaticText2->GetLabel().c_str(), EditMaxTextFileSize->GetValue().c_str() );
+		wxLogError( errtext + _(": Should be greater than zero"), StaticText5->GetLabel().c_str(), EditMaxTextFileSize->GetValue().c_str() );
 		error = true;
 	}
 
@@ -1272,31 +1291,31 @@ void MadOptionsDialog::ButtonOKClick(wxCommandEvent& WXUNUSED(event))
 	if( !EditMaxLineLength->GetValue().ToLong( &lo ) || lo < 80 )
 #endif
 	{
-		wxLogError( errtext + _(": Should be 1~4096"), StaticText3->GetLabel().c_str(), EditMaxLineLength->GetValue().c_str() );
+		wxLogError( errtext + _(": Should be 1~4096"), StaticText8->GetLabel().c_str(), EditMaxLineLength->GetValue().c_str() );
 		error = true;
 	}
 
 	if( !EditMaxColumns->GetValue().ToLong( &lo ) || lo <= 0 || lo > 4096 )
 	{
-		wxLogError( errtext + _(": Should be 1~4096"), StaticText4->GetLabel().c_str(), EditMaxColumns->GetValue().c_str() );
+		wxLogError( errtext + _(": Should be 1~4096"), StaticText9->GetLabel().c_str(), EditMaxColumns->GetValue().c_str() );
 		error = true;
 	}
 
 	if( !EditTabColumns->GetValue().ToLong( &lo ) || lo <= 0 || lo > 256 )
 	{
-		wxLogError( errtext + _(": Should be 1~256"), StaticText5->GetLabel().c_str(), EditTabColumns->GetValue().c_str() );
+		wxLogError( errtext + _(": Should be 1~256"), StaticText10->GetLabel().c_str(), EditTabColumns->GetValue().c_str() );
 		error = true;
 	}
 
 	if( !EditIndentColumns->GetValue().ToLong( &lo ) || lo <= 0 || lo > 256 )
 	{
-		wxLogError( errtext + _(": Should be 1~256"), StaticText6->GetLabel().c_str(), EditIndentColumns->GetValue().c_str() );
+		wxLogError( errtext + _(": Should be 1~256"), StaticText11->GetLabel().c_str(), EditIndentColumns->GetValue().c_str() );
 		error = true;
 	}
 
 	if( !EditAutoSaveTimeout->GetValue().ToLong( &lo ) || ( lo < 10 || lo > 30 ))
 	{
-		wxLogError( errtext + _(": Should be 10~30"), StaticTextAutoSaveTimeout->GetLabel().c_str(), EditAutoSaveTimeout->GetValue().c_str() );
+		wxLogError( errtext + _(": Should be 10~30"), StaticText7->GetLabel().c_str(), EditAutoSaveTimeout->GetValue().c_str() );
 		error = true;
 	}
 
