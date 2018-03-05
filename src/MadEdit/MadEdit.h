@@ -179,10 +179,10 @@ struct MadCaretPos
 	MadCaretPos(): pos( -1 ), rowid( 0 ), linepos( -1 ), lineid( 0 ), subrowid( 0 ), xpos( 0 ), extraspaces( 0 )
 	{}
 	wxFileOffset pos;     // position of whole file
-	int rowid;            // row-id. of whole file
-
 	wxFileOffset linepos; // position of this line
+
 	MadLineIterator iter; // line iterator
+	int rowid;            // row-id. of whole file
 	int lineid;           // id. of iterator in m_Lines->m_LineList
 	int subrowid;         // sub row-id. in this line
 
@@ -276,8 +276,8 @@ private:
 
 	MadUndoBuffer   *m_UndoBuffer;
 	MadUndo         *m_SavePoint;
-	bool            m_RecordCaretMovements;
 	MadUndoBuffer   *m_CaretTracker;
+	bool            m_RecordCaretMovements;
 
 	bool            m_NeedSync;
 
@@ -307,13 +307,13 @@ private:
 	MadLineIterator m_ValidPos_iter;    // line iterator
 	int             m_ValidPos_lineid;  // line-id. of iterator
 	int             m_ValidPos_rowid;   // row-id. of iter
-	wxFileOffset    m_ValidPos_pos;     // position of line in whole file
 	int             m_UpdateValidPos;   // ==0: no update; <0 update always; >0 update if newpos<oldpos
+	wxFileOffset    m_ValidPos_pos;     // position of line in whole file
 
-	bool            m_Selection;
-	bool            m_ZeroSelection;
 	MadCaretPos     m_SelectionPos1, m_SelectionPos2;
 	MadCaretPos     *m_SelectionBegin, *m_SelectionEnd;
+	bool            m_Selection;
+	bool            m_ZeroSelection;
 	bool            m_SelectionStart;
 	wxFileOffset    m_SelectionStartPos;
 

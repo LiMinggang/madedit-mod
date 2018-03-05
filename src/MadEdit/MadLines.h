@@ -302,7 +302,6 @@ struct MadLine
 		}
 	}
 
-
 	size_t RowCount() {
 		return m_RowIndices.size() - 1;
 	}
@@ -375,12 +374,11 @@ private:
 
 	MadMemData *m_MemData;
 
+	wxByte          *m_WriteBuffer;
+	vector<wxByte>  m_WriteBufferVector;
 	wxString    m_Name;
 	bool        m_ReadOnly;
 	int         m_MaxLineWidth;             //max pixel width of line/row
-
-	wxByte          *m_WriteBuffer;
-	vector<wxByte>  m_WriteBufferVector;
 
 private:
 

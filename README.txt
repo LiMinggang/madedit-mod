@@ -130,6 +130,7 @@ Fix: Convert macros from saved macro file to UTF8 before running
 Fix: Tooltip of the file name tab was not updated if renamed
 Fix: Use min size of the config and actual resolution
 Fix: Option dialog hang issue(https://trac.wxwidgets.org/ticket/18091)
+Minor memory improvement
 Update VS2010 build
 Update wxWidgets to 3.1.1
 
