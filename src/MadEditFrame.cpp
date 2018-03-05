@@ -493,7 +493,7 @@ inline void RecordAsMadMacro( MadEdit * edit, const wxString& script, bool input
 			}
 			else
 			{
-				bool breaked = ((g_MPythonCaretPos != -1) && ((g_MPythonCaretPos + g_MPythonInputBuf.Len()) != g_ActiveMadEdit->GetCaretPosition()));
+				bool breaked = ((g_MPythonCaretPos != -1) && ((g_MPythonCaretPos + (wxFileOffset)(g_MPythonInputBuf.Len())) != g_ActiveMadEdit->GetCaretPosition()));
 				if( g_MPythonCaretPos == -1 || breaked)
 				{
 					if(breaked)
