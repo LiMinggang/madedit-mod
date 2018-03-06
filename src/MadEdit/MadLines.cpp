@@ -3688,7 +3688,7 @@ bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 
 		if( tmp_Syntax == nullptr )
 		{
-			if(s != 0)
+			if(buf != nullptr && s != 0)
 				tmp_Syntax = MadSyntax::GetSyntaxByFirstLine( buf, s );
 
 			if( tmp_Syntax == nullptr )
