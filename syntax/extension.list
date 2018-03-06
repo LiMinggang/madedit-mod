@@ -4,6 +4,7 @@ cfg	syntax_conf.syn
 conf	syntax_conf.syn
 mak	syntax_conf.syn
 nmake	syntax_conf.syn
+mk	syntax_conf.syn
 list	syntax_conf.syn
 po	syntax_conf.syn
 pot	syntax_conf.syn
