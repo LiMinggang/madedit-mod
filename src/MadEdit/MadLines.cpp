@@ -3651,17 +3651,57 @@ wxFileOffset MadLines::GetMaxTempSize( const wxString &filename )
 bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 {
 	wxFileName fn( filename );
-	MadSyntax * tmp_Syntax = MadSyntax::GetSyntaxByExt( fn.GetExt() );
 
-	if( tmp_Syntax == nullptr )
+	const int max_detecting_size = 4096;
+	int s;
+	wxByte *buf;
+
+	if( m_Size > max_detecting_size )
+		s = max_detecting_size;
+	else
+		s = m_Size;
+
+	long MaxSizeToLoad;
+	m_MadEdit->m_Config->Read( wxT( "/MadEdit/MaxSizeToLoad" ), &MaxSizeToLoad, 20 * 1000 * 1000 );
+	if(m_Size <= MaxSizeToLoad)
+		buf = m_MemData->m_Buffers.front();
+	else
+		buf = m_FileData->m_Buffer1;
+
+	MadSyntax * tmp_Syntax = nullptr;
+	if( m_MadEdit->m_UseDefaultSyntax )
 	{
-		tmp_Syntax = MadSyntax::GetSyntaxByFileName( fn.GetName() );
+		tmp_Syntax = new MadSyntax( false );
+
+		if( m_MadEdit->m_SearchWholeWord == false )
+		{
+			//m_Syntax->m_Delimiter.Empty();
+			//m_Syntax->m_Delimiter.clear();
+			memset(tmp_Syntax->m_Delimiter, 0, sizeof(tmp_Syntax->m_Delimiter));
+		}
+
+		tmp_Syntax->m_CaseSensitive = true;
+	}
+	else
+	{
+		tmp_Syntax = MadSyntax::GetSyntaxByExt( fn.GetExt() );
 
 		if( tmp_Syntax == nullptr )
 		{
-			tmp_Syntax = MadSyntax::GetSyntaxByTitle( wxGetTranslation(MadPlainTextTitle) );
+			if(s != 0)
+				tmp_Syntax = MadSyntax::GetSyntaxByFirstLine( buf, s );
+
+			if( tmp_Syntax == nullptr )
+			{
+				tmp_Syntax = MadSyntax::GetSyntaxByFileName( fn.GetName() );
+
+				if( tmp_Syntax == nullptr )
+				{
+					tmp_Syntax = MadSyntax::GetSyntaxByTitle( wxGetTranslation(MadPlainTextTitle) );
+				}
+				wxASSERT( tmp_Syntax != 0 );
+			}
 		}
-		wxASSERT( tmp_Syntax != 0 );
 	}
 
 	if( tmp_Syntax->m_Title != m_Syntax->m_Title )
