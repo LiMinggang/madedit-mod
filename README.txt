@@ -124,6 +124,7 @@ Mod v0.4.12
 New: Support Drag and Drop for text(from other application, not DnD edit)
 New: Remember last editing and reset of MadMacro dialog
 New: Go language syntax support
+New: First line syntax detect for TCL
 Fix: Crash on purging items of FindInFiles Dialog
 Fix: The first macro command recorded without prefix "medit."
 Fix: Convert macros from saved macro file to UTF8 before running
