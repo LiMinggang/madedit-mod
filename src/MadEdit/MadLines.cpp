@@ -3682,7 +3682,7 @@ bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 		if (m_Size <= MaxSizeToLoad)
 			buf = m_MemData->m_Buffers.front();
 		else
-			buf = m_FileData->m_Buffer1;
+			buf = (m_FileData == nullptr) ? nullptr : m_FileData->m_Buffer1;
 
 		tmp_Syntax = MadSyntax::GetSyntaxByExt( fn.GetExt() );
 
