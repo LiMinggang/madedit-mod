@@ -3652,22 +3652,6 @@ bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 {
 	wxFileName fn( filename );
 
-	const int max_detecting_size = 4096;
-	int s;
-	wxByte *buf;
-
-	if( m_Size > max_detecting_size )
-		s = max_detecting_size;
-	else
-		s = m_Size;
-
-	long MaxSizeToLoad;
-	m_MadEdit->m_Config->Read( wxT( "/MadEdit/MaxSizeToLoad" ), &MaxSizeToLoad, 20 * 1000 * 1000 );
-	if(m_Size <= MaxSizeToLoad)
-		buf = m_MemData->m_Buffers.front();
-	else
-		buf = m_FileData->m_Buffer1;
-
 	MadSyntax * tmp_Syntax = nullptr;
 	if( m_MadEdit->m_UseDefaultSyntax )
 	{
@@ -3684,6 +3668,22 @@ bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 	}
 	else
 	{
+		const int max_detecting_size = 4096;
+		int s;
+		wxByte *buf;
+
+		if (m_Size > max_detecting_size)
+			s = max_detecting_size;
+		else
+			s = m_Size;
+
+		long MaxSizeToLoad;
+		m_MadEdit->m_Config->Read(wxT("/MadEdit/MaxSizeToLoad"), &MaxSizeToLoad, 20 * 1000 * 1000);
+		if (m_Size <= MaxSizeToLoad)
+			buf = m_MemData->m_Buffers.front();
+		else
+			buf = m_FileData->m_Buffer1;
+
 		tmp_Syntax = MadSyntax::GetSyntaxByExt( fn.GetExt() );
 
 		if( tmp_Syntax == nullptr )
@@ -3699,23 +3699,22 @@ bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 				{
 					tmp_Syntax = MadSyntax::GetSyntaxByTitle( wxGetTranslation(MadPlainTextTitle) );
 				}
-				wxASSERT( tmp_Syntax != 0 );
 			}
 		}
 	}
 
-	if( tmp_Syntax->m_Title != m_Syntax->m_Title )
+	if (tmp_Syntax != nullptr)
 	{
-		delete m_Syntax;
-		m_Syntax = tmp_Syntax;
-		wxFont *font = m_MadEdit->m_TextFont;
-		tmp_Syntax->InitNextWord1( m_MadEdit->m_Lines, m_MadEdit->m_WordBuffer, m_MadEdit->m_WidthBuffer, font->GetFaceName(), font->GetPointSize(), font->GetFamily() );
-		m_MadEdit->m_Syntax = tmp_Syntax;
-		m_MadEdit->UpdateSyntaxDictionary();
-		m_MadEdit->ReformatAll();
-	}
-	else
-	{
+		if (tmp_Syntax->m_Title != m_Syntax->m_Title)
+		{
+			wxFont *font = m_MadEdit->m_TextFont;
+			tmp_Syntax->InitNextWord1(m_MadEdit->m_Lines, m_MadEdit->m_WordBuffer, m_MadEdit->m_WidthBuffer, font->GetFaceName(), font->GetPointSize(), font->GetFamily());
+			m_MadEdit->m_Syntax = tmp_Syntax;
+			tmp_Syntax = m_Syntax;
+			m_Syntax = m_MadEdit->m_Syntax;
+			m_MadEdit->UpdateSyntaxDictionary();
+			m_MadEdit->ReformatAll();
+		}
 		delete tmp_Syntax;
 	}
 
