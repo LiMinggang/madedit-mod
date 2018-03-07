@@ -136,6 +136,7 @@ Fix: Improve syntax auto detect on Save As(#254)
 Minor memory improvement
 Update VS2010 build
 Update wxWidgets to 3.1.1
+Update boost.python to latest code
 
 Mod v0.4.11
 Note: please use the convertcfg.py to convert your old config if you want to restore your old config, use clearbms.py to clear the bookmarks before running MadEdit-Mod
