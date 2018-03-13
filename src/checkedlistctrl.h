@@ -107,7 +107,7 @@ public:
                         const wxValidator& validator = wxDefaultValidator,
                         const wxString& name = wxListCtrlNameStr);
 
-    virtual ~wxCheckedListCtrl() {}
+    virtual ~wxCheckedListCtrl() { DeletePendingEvents  (  );}
 
 
 public:			// utilities

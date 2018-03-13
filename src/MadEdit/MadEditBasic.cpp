@@ -928,9 +928,8 @@ void MadEdit::SetWordWrapMode( MadWordWrapMode mode )
 			m_RepaintAll = true;
 			Refresh( false );
 			
-			wxCommandEvent event( UPDATE_HSCROLL_POS );
-			event.SetEventObject( this );
-			AddPendingEvent( event );
+			wxCommandEvent *pevt = new wxCommandEvent( UPDATE_HSCROLL_POS );
+			wxQueueEvent(this, pevt);
 		}
 		else
 		{
@@ -2716,9 +2715,8 @@ bool MadEdit::ReloadByModificationTime( bool LostCapture/* = false*/ )
 
 	if( LostCapture )
 	{
-		wxCommandEvent event( CHECK_MODIFICATION_TIME );
-		event.SetEventObject( this );
-		AddPendingEvent( event );
+		wxCommandEvent *pevt = new wxCommandEvent( CHECK_MODIFICATION_TIME );
+		wxQueueEvent(this, pevt);
 		m_ModReloaded = false;
 		return false;
 	}

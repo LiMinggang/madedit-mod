@@ -391,7 +391,7 @@ void wxCheckedListCtrl::OnMouseEvent(wxMouseEvent& event)
 	if (processcheck) {
 
 		wxListEvent ev(wxEVT_NULL, GetId());
-		ev.m_itemIndex = item;		
+		ev.m_itemIndex = item;
 
 		wxArrayLong selectedItems;
 		bool sel = (GetItemState(item, wxLIST_STATE_SELECTED) == wxLIST_STATE_SELECTED);
