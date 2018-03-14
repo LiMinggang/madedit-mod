@@ -426,7 +426,7 @@ void wxCheckedListCtrl::OnMouseEvent(wxMouseEvent& event)
 			item = selectedItems[i];
 			ev.m_itemIndex = item;	
 			Check(item, checked);
-			AddPendingEvent(ev);
+			wxQueueEvent(this, ev.Clone());
 		}
 	}
 
