@@ -389,16 +389,11 @@ void wxCheckedListCtrl::OnMouseEvent(wxMouseEvent& event)
 		(flags & wxLIST_HITTEST_ONITEM));
 
 	if (processcheck) {
-
-		wxListEvent ev(wxEVT_NULL, GetId());
-		ev.m_itemIndex = item;
-
 		wxArrayLong selectedItems;
 		bool sel = (GetItemState(item, wxLIST_STATE_SELECTED) == wxLIST_STATE_SELECTED);
 		bool checked = FALSE;
 		selectedItems.Add(item); //Make sure it's the first
 		if(sel) {
-
 			long selitem = -1;
 			for ( ;; ) {
 				selitem = GetNextItem(selitem, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
@@ -410,23 +405,22 @@ void wxCheckedListCtrl::OnMouseEvent(wxMouseEvent& event)
 			}
 		}
 
+		wxEventType evtType;
 		// send the check event
 		if (IsChecked(item)) {
-
-			ev.SetEventType(wxEVT_COMMAND_LIST_ITEM_UNCHECKED);
+			evtType = wxEVT_COMMAND_LIST_ITEM_UNCHECKED;
 			checked = false;
 		} else {
-
-			ev.SetEventType(wxEVT_COMMAND_LIST_ITEM_CHECKED);
+			evtType = wxEVT_COMMAND_LIST_ITEM_CHECKED;
 			checked = true;
 		}
 
 		for(size_t i = 0; i < selectedItems.GetCount(); ++i) {
-
 			item = selectedItems[i];
-			ev.m_itemIndex = item;	
+			wxListEvent *pEvt = new wxListEvent(evtType, GetId());
+			pEvt->m_itemIndex = item;
 			Check(item, checked);
-			wxQueueEvent(this, ev.Clone());
+			wxQueueEvent(this, pEvt);
 		}
 	}
 
