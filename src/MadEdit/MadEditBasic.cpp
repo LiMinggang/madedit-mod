@@ -2745,13 +2745,17 @@ bool MadEdit::ReloadByModificationTime( bool LostCapture/* = false*/ )
 		if( modtime == m_ModificationTime ) return false; // the file doesn't change.
 
 	m_ModificationTime = modtime;
-	long style = wxYES_NO | wxICON_QUESTION;
+	long style = wxYES_NO;
 	wxString message(_( "This file has been changed by another application." ));
 
 	if( m_Modified )
 	{
 		style |= wxICON_WARNING;
 		message += wxString(_("And it has been MODIFIED!!!"));
+	}
+	else
+	{
+		style |= wxICON_QUESTION;
 	}
 
 	message += wxT("\n");
