@@ -121,7 +121,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 3. stdc++ version
 
 Mod v0.4.12
-New: Support Drag and Drop for text(from other application, not DnD edit)
+New: Support Drag and Drop for text(from other applications, not DnD edit, can't drag out from MadEdit)
 New: Remember last editing and reset of MadMacro dialog
 New: Go language syntax support
 New: First line syntax detect for TCL
