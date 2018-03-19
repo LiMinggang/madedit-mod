@@ -2745,10 +2745,24 @@ bool MadEdit::ReloadByModificationTime( bool LostCapture/* = false*/ )
 		if( modtime == m_ModificationTime ) return false; // the file doesn't change.
 
 	m_ModificationTime = modtime;
-	wxMessageDialog dlg( this,
-						 wxString( _( "This file has been changed by another application." ) ) + wxT( "\n" ) +
-						 wxString( _( "Do you want to reload it?" ) ) + wxT( "\n\n" ) + m_Lines->m_Name,
-						 wxT( "MadEdit-Mod" ), wxYES_NO | wxICON_QUESTION );
+	long style = wxYES_NO | wxICON_QUESTION;
+	wxString message(_( "This file has been changed by another application." ));
+
+	if( m_Modified )
+	{
+		style |= wxICON_WARNING;
+		message += wxString(_("And it has been MODIFIED!!!"));
+	}
+
+	message += wxT("\n");
+	message += wxString( _( "Do you want to reload it?" ) );
+	if( m_Modified )
+	{
+		message += wxString(_("I.e. DISCARD changes?"));
+	}
+	message += wxT( "\n\n" ) + m_Lines->m_Name;
+
+	wxMessageDialog dlg( this, message, wxT( "MadEdit-Mod" ), style );
 	dlg.SetYesNoLabels( wxMessageDialog::ButtonLabel( _( "&Yes" ) ), wxMessageDialog::ButtonLabel( _( "&No" ) ) );
 
 	//wxMouseCaptureLostEvent mevt(GetId());
@@ -2767,6 +2781,7 @@ bool MadEdit::ReloadByModificationTime( bool LostCapture/* = false*/ )
 	//AddPendingEvent( mevt );
 	// YES, reload it.
 	m_ModReloaded = true;
+	m_Modified = false;
 	return Reload();
 }
 
