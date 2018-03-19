@@ -832,6 +832,7 @@ void MadSearchReplaceDialog::ReadWriteSettings( bool bRead )
 	extern MadEdit *g_ActiveMadEdit;
 	wxConfigBase *m_Config = wxConfigBase::Get( false );
 	wxString oldpath = m_Config->GetPath();
+	if(m_Config == nullptr) return;
 	if( m_EnableTransparency && WxRadioLosingFocus->GetValue() )
 	{
 		SetTransparent( ( wxByte )WxSliderTransDegree->GetValue() );
