@@ -635,6 +635,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	StaticText25 = new wxStaticText(Panel4, wxID_ANY, _("New Key:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	BoxSizer25->Add(StaticText25, 0, wxALL|wxALIGN_LEFT, 5);
 	EditKey = new KeyTextCtrl(Panel4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_TAB|wxWANTS_CHARS, wxDefaultValidator, _T("ID_EDITKEY"));
+	EditKey->BindDialog(this);
 	BoxSizer25->Add(EditKey, 0, wxALL|wxEXPAND, 5);
 	EditKeyHint = new wxTextCtrl(Panel4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY, wxDefaultValidator, _T("ID_EDITKEYHINT"));
 	EditKeyHint->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BTNFACE));

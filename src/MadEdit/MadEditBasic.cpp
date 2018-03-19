@@ -2755,7 +2755,7 @@ bool MadEdit::ReloadByModificationTime( bool LostCapture/* = false*/ )
 	}
 	else
 	{
-		style |= wxICON_QUESTION;
+		style |= wxICON_INFORMATION;
 	}
 
 	message += wxT("\n");
