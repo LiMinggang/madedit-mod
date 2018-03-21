@@ -74,6 +74,30 @@ const long MadSearchReplaceDialog::ID_RECENTREPLACETEXT20 = MadUniqueIDReserver:
 // Code added in  other places will be removed by wx-dvcpp
 ////Event Table Start
 
+inline void MadSearchEscapeString(wxString & expr, bool bRegex)
+{
+	const wxUniChar esp('\\');
+	if(!bRegex)
+	{
+		expr.Replace( wxT( "\\" ), wxT( "\\\\" ) );
+	}
+
+	for( size_t i  = 0; i < expr.Length(); ++i )
+	{
+		if((uint32_t)(expr[i].GetValue()) == (uint32_t)('"'))
+		{
+			expr.insert( i, 1, esp );
+			if (bRegex && (i > 0) && ((uint32_t)(expr[i - 1].GetValue()) == (uint32_t)('\\')))
+			{
+				expr.insert(i, 1, esp);
+				++i;
+			}
+
+			++i;
+		}
+	}
+}
+
 MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id, const wxPoint& WXUNUSED(pos), const wxSize& WXUNUSED(size) )
 {
 	m_EnableTransparency = true;/*CanSetTransparent();*/
@@ -486,8 +510,7 @@ void MadSearchReplaceDialog::WxButtonFindNextClick( wxCommandEvent& WXUNUSED(eve
 					if( IsMacroRecording() )
 					{
 						expr = text;
-						expr.Replace( wxT( "\\" ), wxT( "\\\\" ) );
-						expr.Replace( wxT( "\"" ), wxT( "\\\"" ) );
+						MadSearchEscapeString(expr, bRegex);
 
 						wxString fnstr( wxString::Format( wxT( "FindTextNext(\"%s\", %s, %s, %s, %s, %s, %s)" ), expr.c_str(),
 														  bRegex ? wxT( "True" ) : wxT( "False" ),
@@ -636,8 +659,7 @@ void MadSearchReplaceDialog::WxButtonFindPrevClick( wxCommandEvent& WXUNUSED(eve
 				if( IsMacroRecording() )
 				{
 					expr = text;
-					expr.Replace( wxT( "\\" ), wxT( "\\\\" ) );
-					expr.Replace( wxT( "\"" ), wxT( "\\\"" ) );
+					MadSearchEscapeString(expr, bRegex);
 
 					wxString fnstr( wxString::Format( wxT( "FindTextPrevious(\"%s\", %s, %s, %s, %s, %s, %s)" ), expr.c_str(),
 													  bRegex ? wxT( "True" ) : wxT( "False" ),
@@ -1065,8 +1087,7 @@ void MadSearchReplaceDialog::WxButtonReplaceClick( wxCommandEvent& WXUNUSED(even
 				if( ( ret == RR_REP_NEXT || ret == RR_NREP_NEXT ) && ( IsMacroRecording() ) )
 				{
 					expr = text;
-					expr.Replace( wxT( "\\" ), wxT( "\\\\" ) );
-					expr.Replace( wxT( "\"" ), wxT( "\\\"" ) );
+					MadSearchEscapeString(expr, bRegex);
 
 					wxString fnstr( wxString::Format( wxT( "ReplaceText(\"%s\", \"%s\", %s, %s, %s, %s, %s, %s)" ), expr.c_str(), reptext.c_str(),
 													  bRegex ? wxT( "True" ) : wxT( "False" ),
@@ -1104,6 +1125,7 @@ void MadSearchReplaceDialog::WxButtonReplaceClick( wxCommandEvent& WXUNUSED(even
 
 							if( bRegex ) bWholeWord = false;
 							else bDotMatchNewline = false;
+							MadSearchEscapeString(expr, bRegex);
 
 							wxString fnstr( wxString::Format( wxT( "ReplaceText(\"%s\", \"%s\", %s, %s, %s, %s, %s, %s)" ), expr.c_str(), reptext.c_str(),
 															  bRegex ? wxT( "True" ) : wxT( "False" ),
@@ -1631,8 +1653,7 @@ void MadSearchReplaceDialog::SearchAll( MadEdit * madedit, bool needRec/*=true*/
 
 			if( needRec && ( IsMacroRecording() ) )
 			{
-				expr.Replace( wxT( "\\" ), wxT( "\\\\" ) );
-				expr.Replace( wxT( "\"" ), wxT( "\\\"" ) );
+				MadSearchEscapeString(expr, bRegex);
 				wxString fnstr( wxString::Format( wxT( "FindTextAll(\"%s\", %s, %s, %s, %s, False)" ),  expr.c_str(),
 												  bRegex ? wxT( "True" ) : wxT( "False" ),
 												  WxCheckBoxCaseSensitive->GetValue() ? wxT( "True" ) : wxT( "False" ),
@@ -1784,8 +1805,7 @@ void MadSearchReplaceDialog::ReplaceAll( MadEdit * madedit, bool needRec/*=true*
 
 			if( needRec && count && ( IsMacroRecording() ) )
 			{
-				text.Replace( wxT( "\\" ), wxT( "\\\\" ) );
-				text.Replace( wxT( "\"" ), wxT( "\\\"" ) );
+				MadSearchEscapeString(text, bRegex);
 				wxString fnstr( wxString::Format( wxT( "ReplaceTextAll(\"%s\", \"%s\", %s, %s, %s, %s, %s)" ), text.c_str(), reptext.c_str(),
 												  bRegex ? wxT( "True" ) : wxT( "False" ),
 												  WxCheckBoxCaseSensitive->GetValue() ? wxT( "True" ) : wxT( "False" ),

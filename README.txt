@@ -135,6 +135,7 @@ Fix: Syntax is not updated on Save As
 Fix: Option dialog hang issue(https://trac.wxwidgets.org/ticket/18091)
 Fix: Improve syntax auto detect on Save As(#254)
 Fix: Can't assign more than one shortcut to commands by Option Dialog
+Fix: String escaping issue in Macro Recording of Search/Replace
 Minor memory improvement
 Update VS2010 build
 Update wxWidgets to 3.1.1
