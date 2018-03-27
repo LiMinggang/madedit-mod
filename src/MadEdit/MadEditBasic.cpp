@@ -2727,13 +2727,12 @@ bool MadEdit::ReloadByModificationTime( bool LostCapture/* = false*/ )
 	if( modtime == 0 ) // the file has been deleted
 	{
 		m_ModificationTime = 0;
+		m_Modified = true;
 		return false;
 	}
 
 	// Check if the file attribute was changed
-	bool writable = wxFileName::IsFileWritable( m_Lines->m_Name );
 	bool readable = wxFileName::IsFileReadable( m_Lines->m_Name );
-
 	if( !readable )
 	{
 		m_Modified = true;
@@ -2741,6 +2740,7 @@ bool MadEdit::ReloadByModificationTime( bool LostCapture/* = false*/ )
 		return false;
 	}
 
+	bool writable = wxFileName::IsFileWritable( m_Lines->m_Name );
 	if( !( ( IsReadOnly() && writable ) || ( !IsReadOnly() && !writable ) ) )
 		if( modtime == m_ModificationTime ) return false; // the file doesn't change.
 
