@@ -2035,7 +2035,7 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 			{
 				do
 				{
-					m_Syntax->NextWord( wordwidth );
+					if(m_Syntax->NextWord( wordwidth ) == 0) break;
 				}
 				while( m_Syntax->nw_LineWidth != 0 );
 			}
@@ -2572,6 +2572,7 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 		}
 
 		++lineiter;
+		if(lineiter == m_Lines->m_LineList.end()) --lineiter;
 		m_Syntax->InitNextWord2( lineiter, 0 );
 		subrowid = 0;
 		displaylinenumber = true;
