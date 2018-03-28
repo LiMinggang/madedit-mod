@@ -5133,7 +5133,7 @@ void MadEditFrame::OnUpdateUI_MenuEditStartEndSelction( wxUpdateUIEvent& event )
 		}
 		else
 		{
-			m_SetSelecting->SetItemLabel(_("Begin Selecting "));
+			m_SetSelecting->SetItemLabel(_("Begin Selecting"));
 			m_SetSelecting->SetHelp(_( "Begin selecting text" ));
 		}
 	}
