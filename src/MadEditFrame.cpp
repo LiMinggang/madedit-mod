@@ -6047,7 +6047,7 @@ void MadEditFrame::OnFilePrintPreview( wxCommandEvent& WXUNUSED(event) )
 	if( !preview->Ok() )
 	{
 		delete preview;
-		MadMessageBox( _( "There was a problem previewing.\nPerhaps your current printer is not set correctly?" ), _( "Previewing" ), wxOK );
+		MadMessageBox( _( "There was a problem previewing this document.\nPerhaps your current printer is not set correctly?" ), _( "Previewing" ), wxOK );
 	}
 	else
 	{
@@ -6075,7 +6075,7 @@ void PrintOut( wxWindow *parentWin )
 	if( !printer.Print( parentWin, &printout, true /*prompt*/ ) )
 	{
 		if( wxPrinter::GetLastError() == wxPRINTER_ERROR )
-		{ MadMessageBox( _( "There was a problem printing.\nPerhaps your current printer is not set correctly?" ), _( "Printing" ), wxOK ); }
+		{ MadMessageBox( _( "There was a problem printing this document.\nPerhaps your current printer is not set correctly?" ), _( "Printing" ), wxOK ); }
 	}
 	else
 	{

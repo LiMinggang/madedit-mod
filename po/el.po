@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: madedit-mod 0.4.11\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-28 16:48+0800\n"
+"POT-Creation-Date: 2018-03-28 17:25+0800\n"
 "PO-Revision-Date: 2017-11-12 11:03+0800\n"
 "Last-Translator: nikos <nikos769@yahoo.gr>\n"
 "Language-Team: Greek <nikos769@yahoo.gr>\n"
@@ -2673,8 +2673,9 @@ msgid " might not exist."
 msgstr " ίσως να μην υπάρχει."
 
 #: ../src/MadEditFrame.cpp:6050
+#, fuzzy
 msgid ""
-"There was a problem previewing.\n"
+"There was a problem previewing this document.\n"
 "Perhaps your current printer is not set correctly?"
 msgstr ""
 "Υπήρξε πρόβλημα κατά την προεπισκόπηση.\n"
@@ -2689,8 +2690,9 @@ msgid "MadEdit Print Preview"
 msgstr "Προεπισκόπηση thw Εκτύπωσης του ΜαντΈντιτ"
 
 #: ../src/MadEditFrame.cpp:6078
+#, fuzzy
 msgid ""
-"There was a problem printing.\n"
+"There was a problem printing this document.\n"
 "Perhaps your current printer is not set correctly?"
 msgstr ""
 "Υπήρξε πρόβλημα κατά την εκτύπωση.\n"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-28 16:48+0800\n"
-"PO-Revision-Date: 2018-03-28 16:51+0800\n"
+"POT-Creation-Date: 2018-03-28 17:25+0800\n"
+"PO-Revision-Date: 2018-03-28 17:26+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit-Mod <minggang.li@gmail.com>\n"
 "Language: zh_CN\n"
@@ -2630,10 +2630,10 @@ msgstr " 可能不存在。"
 
 #: ../src/MadEditFrame.cpp:6050
 msgid ""
-"There was a problem previewing.\n"
+"There was a problem previewing this document.\n"
 "Perhaps your current printer is not set correctly?"
 msgstr ""
-"在预览打印时发生问题。\n"
+"在预览当前文件时发生问题。\n"
 "或许是打印机没有设置正确？"
 
 #: ../src/MadEditFrame.cpp:6050
@@ -2646,10 +2646,10 @@ msgstr "MadEdit预览打印"
 
 #: ../src/MadEditFrame.cpp:6078
 msgid ""
-"There was a problem printing.\n"
+"There was a problem printing this document.\n"
 "Perhaps your current printer is not set correctly?"
 msgstr ""
-"在打印时发生问题。\n"
+"在打印当前文件时发生问题。\n"
 "或许是打印机没有设置正确？"
 
 #: ../src/MadEditFrame.cpp:6555

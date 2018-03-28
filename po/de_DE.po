@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-28 16:48+0800\n"
+"POT-Creation-Date: 2018-03-28 17:25+0800\n"
 "PO-Revision-Date: 2015-04-18 00:14+0100\n"
 "Last-Translator: Ronny Steiner <post@sirsteiner.de>\n"
 "Language-Team: \n"
@@ -2802,8 +2802,9 @@ msgid " might not exist."
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:6050
+#, fuzzy
 msgid ""
-"There was a problem previewing.\n"
+"There was a problem previewing this document.\n"
 "Perhaps your current printer is not set correctly?"
 msgstr ""
 "Die Druckvorschau konnte nicht erstellt werden.\n"
@@ -2819,8 +2820,9 @@ msgid "MadEdit Print Preview"
 msgstr "MadEdit Druckvorschau"
 
 #: ../src/MadEditFrame.cpp:6078
+#, fuzzy
 msgid ""
-"There was a problem printing.\n"
+"There was a problem printing this document.\n"
 "Perhaps your current printer is not set correctly?"
 msgstr ""
 "Es gab Probleme beim Drucken.\n"
