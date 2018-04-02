@@ -2137,7 +2137,7 @@ MadEditFrame::wxUIUpdateEvtHandlerMap_t MadEditFrame::m_menu_ui_updater_map[] =
 	{ menuSaveRecMacro, &MadEditFrame::OnUpdateUI_MenuToolsSaveRecMacro },
 	{ menuMadScriptList, &MadEditFrame::OnUpdateUI_MenuFile_CheckCount },
 	{ menuInsertNewLineChar, &MadEditFrame::OnUpdateUI_MenuToolsInsertNewLineChar },
-	{ menuNewLineChar, &MadEditFrame::OnUpdateUI_MenuCheckWritable },
+	{ menuNewLineChar, &MadEditFrame::OnUpdateUI_MenuToolsNewLineChar },
 	{ menuConvertToDOS, &MadEditFrame::OnUpdateUI_MenuCheckWritable },
 	{ menuConvertToMAC, &MadEditFrame::OnUpdateUI_MenuCheckWritable },
 	{ menuConvertToUNIX, &MadEditFrame::OnUpdateUI_MenuCheckWritable },
