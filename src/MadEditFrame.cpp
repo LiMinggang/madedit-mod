@@ -941,7 +941,10 @@ wxString FixFileNameEncoding( const wxString &filename )
 	size_t wcslen = MadConvFileNameObj.MB2WC( nullptr, ( const char* )bbuf, 0 );
 
 	if( wcslen == size_t( -1 ) )
-	{ return filename; }
+	{
+		delete []bbuf;
+		return filename;
+	}
 
 	wxChar *str = new wxChar[wcslen + 1];
 	MadConvFileNameObj.MB2WC( str, ( const char* )bbuf, wcslen + 1 );
@@ -1128,7 +1131,7 @@ public:
 		list<PageData> pages_list = GetPagesList();
 		wxWindow* win = GetPage( GetSelection() );
 		FunctorA fa;
-		fa.madedit = ( MadEdit* )win;
+		fa.madedit = dynamic_cast< MadEdit* >( win );
 		list<PageData>::iterator it = std::find_if( pages_list.begin(), pages_list.end(), fa );
 		wxASSERT( it != pages_list.end() );
 

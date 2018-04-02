@@ -5086,7 +5086,7 @@ MadLineIterator MadEdit::DeleteInsertData( wxFileOffset pos,
 // block should be set before call UCStoBlock
 void MadEdit::UCStoBlock( const ucs4_t *ucs, size_t count, MadBlock & block )
 {
-	MadMemData *md = ( MadMemData * ) block.m_Data;
+	MadMemData *md = dynamic_cast< MadMemData * > (block.m_Data);
 	ucs4_t uc;
 	size_t size, idx;
 	wxByte mb[4], unitext[14]; // utf16: U+XXXX or utf32: U+XXXXXXXX
@@ -11289,7 +11289,7 @@ void MadEdit::OnPaint( wxPaintEvent & WXUNUSED(evt) )
 				if( focuswin == this )
 				{
 					DisplayCaret( false );       // paint a caret in the MarkDC
-					wxCaretNew *caret = ( wxCaretNew* )GetCaret();
+					wxCaretNew *caret = dynamic_cast< wxCaretNew* >(GetCaret());
 
 					if( caret->IsVisible() )
 					{
@@ -11368,7 +11368,7 @@ void MadEdit::OnPaint( wxPaintEvent & WXUNUSED(evt) )
 			if( focuswin == this )
 			{
 				DisplayCaret( false );       // paint a caret in the m_ClientBitmap
-				wxCaretNew *caret = ( wxCaretNew* )GetCaret();
+				wxCaretNew *caret = dynamic_cast< wxCaretNew* > (GetCaret());
 
 				if( caret->IsVisible() )
 				{

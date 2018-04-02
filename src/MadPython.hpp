@@ -1242,9 +1242,8 @@ namespace mad_python {
 		mad_py::tuple GetLine( long line, size_t maxlen = 0, bool ignoreBOM = true ) {
 			if( g_ActiveMadEdit )
 			{
-				bool ret = false;
 				wxString wxWs;
-				ret = g_ActiveMadEdit->GetLine( wxWs, line, maxlen, ignoreBOM );
+				bool ret = g_ActiveMadEdit->GetLine( wxWs, line, maxlen, ignoreBOM );
 				if(wxWs.size())
 					return mad_py::make_tuple( std::string( wxWs.mb_str() ), ret );
 			}

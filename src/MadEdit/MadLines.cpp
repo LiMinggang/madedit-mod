@@ -1752,25 +1752,27 @@ void MadLines::Reformat( /*IN*/MadLineIterator &iter,/*IN*/int maxwrapwidth, /*I
 	MadRowIndex rowidx;
 	int rowidx_idx = 0;
 	MadUCQueue ucqueue;
-	int ucwidth;
-	size_t rowlen;                                     // byte-length
-	size_t wordlength;
-	int wordwidth;
+	int ucwidth = -1;
+	size_t rowlen = size_t(-1);                                     // byte-length
+	size_t wordlength = size_t(-1);
+	int wordwidth = -1;
 	int wordisdelimiter = 0; //1:is delimiter, -1:not delimiter, 0:other
 	const size_t maxlinelength = m_MadEdit->m_MaxLineLength;
 	//int maxwidth = m_MadEdit->GetMaxWordWrapWidth();
 	size_t bomlen = 0;
 
-	ucs4_t firstuc, lastuc, prevuc;
-	int index, notSpaceCount;
-	size_t firstuclen, length, eatUCharCount, bracepos;
-	int *bracexpos;
-	int bracexpos_count;
+	ucs4_t firstuc = 0, lastuc = 0, prevuc = 0;
+	int index = 0, notSpaceCount = 0;
+	size_t firstuclen = size_t(-1), length = size_t(-1), eatUCharCount = size_t(-1), bracepos = size_t(-1);
+	int *bracexpos = nullptr;
+	int bracexpos_count = -1;
 	MadStringIterator sit, sitend;
-	vector < wxString > strvec;
+	static vector < wxString > strvec;
 	MadSyntaxRange *srange = nullptr;
 	int CheckState = m_Syntax->m_CheckState;
-	long tabwidth;
+	long tabwidth = -1;
+
+	strvec.clear();
 
 	( this->*NextUChar )( ucqueue );
 
