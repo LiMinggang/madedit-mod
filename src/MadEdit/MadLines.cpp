@@ -1751,7 +1751,7 @@ void MadLines::Reformat( /*IN*/MadLineIterator &iter,/*IN*/int maxwrapwidth, /*I
 	iter->m_RowIndices.resize( 2 );
 	MadRowIndex rowidx;
 	int rowidx_idx = 0;
-	MadUCQueue ucqueue;
+	static MadUCQueue ucqueue;
 	int ucwidth = -1;
 	size_t rowlen = size_t(-1);                                     // byte-length
 	size_t wordlength = size_t(-1);
@@ -1773,6 +1773,7 @@ void MadLines::Reformat( /*IN*/MadLineIterator &iter,/*IN*/int maxwrapwidth, /*I
 	long tabwidth = -1;
 
 	strvec.clear();
+	ucqueue.clear();
 
 	( this->*NextUChar )( ucqueue );
 

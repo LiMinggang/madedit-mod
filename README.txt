@@ -136,7 +136,7 @@ Fix: Option dialog hang issue(https://trac.wxwidgets.org/ticket/18091)
 Fix: Improve syntax auto detect on Save As(#254)
 Fix: Can't assign more than one shortcut to commands by Option Dialog
 Fix: String escaping issue in Macro Recording of Search/Replace
-Fix: Patch for possible dead/infinite loop in syntax highlighting
+Fix: Patch for dead/infinite loop in syntax highlighting
 Fix: Display file format(new line char) on menu
 Fix: Memory leak in FixFileNameEncoding
 Minor memory improvement
