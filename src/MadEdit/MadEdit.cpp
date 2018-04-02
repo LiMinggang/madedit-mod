@@ -2227,7 +2227,7 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 						else
 						{
 							//static ucs4_t data[] = {117, 115, 101 ,114};//"user"
-							if( !m_HighlightWords.empty() && ( wordlength == m_HighlightWords.size() ) && IsTheSame<ucs4_t>( m_HighlightWords, m_WordBuffer, m_HighlightWords.size() ) )
+							if( !m_HighlightWords.empty() && ( wordlength == (int)m_HighlightWords.size() ) && IsTheSame<ucs4_t>( m_HighlightWords, m_WordBuffer, m_HighlightWords.size() ) )
 							{
 								static wxColour bgColor( 0x0, 0xff, 0xff );
 								current_bgcolor = bgColor;//wxTheColourDatabase->Find(wxString(wxT("PALE GREEN")));
