@@ -423,7 +423,7 @@ MadSearchReplaceDialog::~MadSearchReplaceDialog()
 
 void MadSearchReplaceDialog::MadSearchReplaceDialogClose( wxCloseEvent& event )
 {
-	if( event.CanVeto() )
+	if( event.CanVeto() && (nullptr != dynamic_cast< wxFrame * >(wxTheApp->GetTopWindow())))
 	{
 		event.Veto();
 		wxCommandEvent evt;
@@ -437,12 +437,16 @@ void MadSearchReplaceDialog::MadSearchReplaceDialogClose( wxCloseEvent& event )
 void MadSearchReplaceDialog::WxButtonCloseClick( wxCommandEvent& WXUNUSED(event) )
 {
 	Show( false );
-	( ( wxFrame* )wxTheApp->GetTopWindow() )->Raise();
-
-	if( g_ActiveMadEdit != nullptr )
+	wxFrame * mframe = dynamic_cast< wxFrame * >(wxTheApp->GetTopWindow());
+	if( mframe != nullptr )
 	{
-		g_ActiveMadEdit->Refresh( false );
-		g_ActiveMadEdit->SetFocus();
+		mframe->Raise();
+
+		if( g_ActiveMadEdit != nullptr )
+		{
+			g_ActiveMadEdit->Refresh( false );
+			g_ActiveMadEdit->SetFocus();
+		}
 	}
 }
 
@@ -594,8 +598,12 @@ void MadSearchReplaceDialog::WxButtonFindNextClick( wxCommandEvent& WXUNUSED(eve
 
 	if( WxCheckBoxMoveFocus->GetValue() )
 	{
-		( ( wxFrame* )wxTheApp->GetTopWindow() )->Raise();
-		g_ActiveMadEdit->SetFocus();
+		wxFrame * mframe = dynamic_cast< wxFrame * >(wxTheApp->GetTopWindow());
+		if( mframe != nullptr )
+		{
+			mframe->Raise();
+			g_ActiveMadEdit->SetFocus();
+		}
 	}
 }
 
@@ -727,8 +735,12 @@ void MadSearchReplaceDialog::WxButtonFindPrevClick( wxCommandEvent& WXUNUSED(eve
 
 	if( WxCheckBoxMoveFocus->GetValue() )
 	{
-		( ( wxFrame* )wxTheApp->GetTopWindow() )->Raise();
-		g_ActiveMadEdit->SetFocus();
+		wxFrame * mframe = dynamic_cast< wxFrame * >(wxTheApp->GetTopWindow());
+		if( mframe != nullptr )
+		{
+			mframe->Raise();
+			g_ActiveMadEdit->SetFocus();
+		}
 	}
 }
 
@@ -1110,7 +1122,14 @@ void MadSearchReplaceDialog::WxButtonReplaceClick( wxCommandEvent& WXUNUSED(even
 			case RR_NREP_NEXT:
 				if( WxCheckBoxMoveFocus->GetValue() )
 				{
-					( ( wxFrame* )wxTheApp->GetTopWindow() )->Raise();
+					wxFrame * mframe = dynamic_cast< wxFrame * >(wxTheApp->GetTopWindow());
+					if( mframe == nullptr )
+					{
+						return;
+					}
+
+					mframe->Raise();
+					wxASSERT(g_ActiveMadEdit != nullptr);
 					g_ActiveMadEdit->SetFocus();
 
 					if( IsMacroRecording() )

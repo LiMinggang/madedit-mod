@@ -108,7 +108,7 @@ MadConvEncDialog::~MadConvEncDialog()
 
 void MadConvEncDialog::MadConvEncDialogClose(wxCloseEvent& event)
 {
-	if(event.CanVeto())
+	if(event.CanVeto() && (nullptr != dynamic_cast< wxFrame * >(wxTheApp->GetTopWindow())))
 	{
 		event.Veto();
 		Show(false);

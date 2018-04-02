@@ -316,16 +316,20 @@ void MadFindInFilesDialog::MadFindInFilesDialogClose(wxCloseEvent& event)
 {
 	if(event.CanVeto())
 	{
-		event.Veto();
-		Show(false);
-		( ( wxFrame* )wxTheApp->GetTopWindow() )->Raise();
-
-		if( g_ActiveMadEdit != nullptr )
+		wxFrame * mframe = dynamic_cast< wxFrame * >(wxTheApp->GetTopWindow());
+		if( mframe != nullptr )
 		{
-			g_ActiveMadEdit->Refresh( false );
-			g_ActiveMadEdit->SetFocus();
+			event.Veto();
+			Show(false);
+			mframe->Raise();
+
+			if( g_ActiveMadEdit != nullptr )
+			{
+				g_ActiveMadEdit->Refresh( false );
+				g_ActiveMadEdit->SetFocus();
+			}
+			return;
 		}
-		return;
 	}
 
 	g_FindInFilesDialog = nullptr;
