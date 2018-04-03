@@ -139,6 +139,7 @@ Fix: String escaping issue in Macro Recording of Search/Replace
 Fix: Patch for dead/infinite loop in syntax highlighting
 Fix: Display file format(new line char) on menu
 Fix: Memory leak in FixFileNameEncoding
+Fix: Bugs introduced in refactor Option Dialog(printing functions)
 Minor memory improvement
 Minor code improvement
 Update VS2010 build

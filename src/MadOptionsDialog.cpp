@@ -561,6 +561,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	FlexGridSizer1->Add(EditHeaderLeft, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	Button1 = new wxButton(Panel3, wxID_ANY, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON1"));
 	ADD2EVENTMAP(ButtonEvtMapVec, Button1, &MadOptionsDialog::PrintMarkButtonClick);
+	EditHeaderLeftId   = Button1->GetId();
 	FlexGridSizer1->Add(Button1, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
 	StaticText18 = new wxStaticText(Panel3, wxID_ANY, _("Center:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	FlexGridSizer1->Add(StaticText18, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 2);
@@ -568,6 +569,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	FlexGridSizer1->Add(EditHeaderCenter, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	Button2 = new wxButton(Panel3, wxID_ANY, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON2"));
 	ADD2EVENTMAP(ButtonEvtMapVec, Button2, &MadOptionsDialog::PrintMarkButtonClick);
+	EditHeaderCenterId = Button2->GetId();
 	FlexGridSizer1->Add(Button2, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
 	StaticText19 = new wxStaticText(Panel3, wxID_ANY, _("Right:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	FlexGridSizer1->Add(StaticText19, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 2);
@@ -575,6 +577,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	FlexGridSizer1->Add(EditHeaderRight, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	Button3 = new wxButton(Panel3, wxID_ANY, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON3"));
 	ADD2EVENTMAP(ButtonEvtMapVec, Button3, &MadOptionsDialog::PrintMarkButtonClick);
+	EditHeaderRightId  = Button3->GetId();
 	FlexGridSizer1->Add(Button3, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
 	StaticBoxSizer3->Add(FlexGridSizer1, 0, wxALL|wxEXPAND, 2);
 	BoxSizer16->Add(StaticBoxSizer3, 0, wxALL|wxEXPAND, 4);
@@ -589,6 +592,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	FlexGridSizer2->Add(EditFooterLeft, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	Button4 = new wxButton(Panel3, wxID_ANY, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON4"));
 	ADD2EVENTMAP(ButtonEvtMapVec, Button4, &MadOptionsDialog::PrintMarkButtonClick);
+	EditFooterLeftId   = Button4->GetId();
 	FlexGridSizer2->Add(Button4, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
 	StaticText21 = new wxStaticText(Panel3, wxID_ANY, _("Center:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	FlexGridSizer2->Add(StaticText21, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 2);
@@ -596,6 +600,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	FlexGridSizer2->Add(EditFooterCenter, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	Button5 = new wxButton(Panel3, wxID_ANY, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON5"));
 	ADD2EVENTMAP(ButtonEvtMapVec, Button5, &MadOptionsDialog::PrintMarkButtonClick);
+	EditFooterCenterId = Button5->GetId();
 	FlexGridSizer2->Add(Button5, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
 	StaticText22 = new wxStaticText(Panel3, wxID_ANY, _("Right:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	FlexGridSizer2->Add(StaticText22, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 2);
@@ -603,6 +608,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	FlexGridSizer2->Add(EditFooterRight, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	Button6 = new wxButton(Panel3, wxID_ANY, _T(">>"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_BUTTON6"));
 	ADD2EVENTMAP(ButtonEvtMapVec, Button6, &MadOptionsDialog::PrintMarkButtonClick);
+	EditFooterRightId  = Button6->GetId();
 	FlexGridSizer2->Add(Button6, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 1);
 	StaticBoxSizer4->Add(FlexGridSizer2, 0, wxALL|wxEXPAND, 2);
 	BoxSizer16->Add(StaticBoxSizer4, 0, wxALL|wxEXPAND, 4);
@@ -858,7 +864,6 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 		ComboBoxNewDocSyntax->SetSelection(index);
 	m_NewDocEncoding = _("System Default");
 	m_NewDocLineEnding = nltDefault;
-	index = ComboBoxNewDocSyntax->FindString(_("Plain Text"));
 
 #ifdef __WXMSW__
 	wxString fontname( wxT( "Courier New" ) );
@@ -967,7 +972,7 @@ MadOptionsDialog::~MadOptionsDialog()
 
 void MadOptionsDialog::MadOptionsDialogClose(wxCloseEvent& event)
 {
-	if(event.CanVeto())
+	if(event.CanVeto() && (dynamic_cast< wxFrame * >(wxTheApp->GetTopWindow()) != nullptr))
 	{
 		event.Veto();
 		Show(false);
@@ -1338,12 +1343,12 @@ void MadOptionsDialog::PrintMarkClick(wxCommandEvent& event)
 {
 	wxString str = PopupMenuPrintMark.GetLabel( event.GetId() );
 	wxTextCtrl *edit = nullptr;
-	if (ButtonID == wxID_ANY) { edit = EditHeaderLeft; }
-	else if (ButtonID == wxID_ANY) { edit = EditHeaderCenter; }
-	else if (ButtonID == wxID_ANY) { edit = EditHeaderRight; }
-	else if (ButtonID == wxID_ANY) { edit = EditFooterLeft; }
-	else if (ButtonID == wxID_ANY) { edit = EditFooterCenter; }
-	else if (ButtonID == wxID_ANY) { edit = EditFooterRight; }
+	if      (ButtonID == EditHeaderLeftId)   { edit = EditHeaderLeft; }
+	else if (ButtonID == EditHeaderCenterId) { edit = EditHeaderCenter; }
+	else if (ButtonID == EditHeaderRightId)  { edit = EditHeaderRight; }
+	else if (ButtonID == EditFooterLeftId)   { edit = EditFooterLeft; }
+	else if (ButtonID == EditFooterCenterId) { edit = EditFooterCenter; }
+	else if (ButtonID == EditFooterRightId)  { edit = EditFooterRight; }
 	else { ; }
 
 	if(edit!=nullptr && str[0]==wxT('[') && str[3]==wxT(']'))
@@ -1356,13 +1361,13 @@ void MadOptionsDialog::PrintMarkClick(wxCommandEvent& event)
 
 void MadOptionsDialog::TreeCtrl1SelChanged(wxTreeEvent& event)
 {
-	wxTreeItemId id=event.GetItem();
+	wxTreeItemId id = event.GetItem();
 	if(!id.IsOk()) return;
 
-	g_SelectedCommandItem=(TreeItemData*)TreeCtrl1->GetItemData(id);
+	g_SelectedCommandItem = dynamic_cast< TreeItemData* >(TreeCtrl1->GetItemData(id));
 	g_SelectedKeyId=-1;
 
-	if(g_SelectedCommandItem==nullptr)
+	if(g_SelectedCommandItem == nullptr)
 	{
 		ListBoxKeys->Clear();
 		EditCommandHint->SetValue(_("Cannot assign key to this item"));

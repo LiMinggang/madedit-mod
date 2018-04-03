@@ -205,7 +205,6 @@ private:
 public:
 	void LoadOptions(void);
 
-	int ButtonID;
 	list<TreeItemData*> TreeItemDataList; // list of all TreeItemData
 	list<TreeItemData*> ChangedTreeItemDataList;
 	
@@ -217,6 +216,13 @@ public:
 	wxString m_NewDocEncoding;
 
 private:
+	int ButtonID;
+	int EditHeaderLeftId;
+	int EditHeaderCenterId;
+	int EditHeaderRightId;
+	int EditFooterLeftId;
+	int EditFooterCenterId;
+	int EditFooterRightId;
 };
 
 

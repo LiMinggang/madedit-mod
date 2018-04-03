@@ -77,6 +77,7 @@ private:
 	int m_Table[256];
 	std::basic_string<wxByte> m_Pattern;
 public:
+	JumpTable_Hex() {}
 	void Build( const wxByte* pat, size_t len ) {
 		if( m_Pattern.length() == len && IsTheSame( m_Pattern.c_str(), pat, ( int )len ) ) { return; }
 
