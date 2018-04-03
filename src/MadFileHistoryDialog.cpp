@@ -81,19 +81,18 @@ MadFileHistoryDialog::~MadFileHistoryDialog()
 void MadFileHistoryDialog::ResetWindowListIterms()
 {
 	size_t count = m_RecentFiles->GetCount();
-	long tmp;
-	wxString fname;
-	wxString fdir;
 
 	MadFileList->Hide();
 	MadFileList->DeleteAllItems();
 	if( count )
 	{
-		MadFileList->Freeze();
+		wxString fname, fdir;
 		wxListItem info;
+		wxFileName fileName;
+		MadFileList->Freeze();
 		for( size_t id = 0; id < count; ++id )
 		{
-			wxFileName fileName( m_RecentFiles->GetHistoryFile( id ) );
+			fileName.Assign( m_RecentFiles->GetHistoryFile( id ) );
 			if(fileName.Exists())
 			{
 				fname = fileName.GetFullName();
@@ -102,7 +101,7 @@ void MadFileHistoryDialog::ResetWindowListIterms()
 				info.m_text = fname;
 				info.m_mask = wxLIST_MASK_TEXT;
 				info.m_itemId = MadFileList->GetItemCount();
-				tmp = MadFileList->InsertItem(info);
+				long tmp = MadFileList->InsertItem(info);
 				//MadFileList->SetItemData(tmp, id);
 				MadFileList->SetItem(tmp, 1, fdir);
 			}
