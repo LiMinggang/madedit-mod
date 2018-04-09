@@ -378,11 +378,6 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 		}
 	}
 
-	SetSizer( BoxSizer1 );
-	BoxSizer1->Fit( this );
-	BoxSizer1->SetSizeHints( this );
-	Center();
-
 	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED,     &MadSearchReplaceDialog::WxCheckBoxRegexClick, this,             WxCheckBoxRegex->GetId() );
 	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED,     &MadSearchReplaceDialog::WxCheckBoxFindHexClick, this,           WxCheckBoxFindHex->GetId() );
 	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED,     &MadSearchReplaceDialog::WxCheckBoxSearchInSelectionClick, this, WxCheckBoxSearchInSelection->GetId() );

@@ -293,11 +293,6 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID WXUNUSED(
 		for( size_t i = 1; i < count; ++i ) { WxComboBoxExclude->Append( m_RecentFindExclude->GetHistoryFile( i ) ); }
 	}
 
-	BoxSizer1->Fit(this);
-	BoxSizer1->SetSizeHints(this);
-	Center();
-
-	//
 	wxASSERT(g_SearchReplaceDialog != nullptr);
 	if( g_SearchReplaceDialog->m_RecentFindText->GetCount() > 0 )
 	{
