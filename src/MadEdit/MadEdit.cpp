@@ -2022,6 +2022,7 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 	bool displaylinenumber = true; // check first row for displayning line-number or not
 	int wordwidth = 0, wordlength = 0, lastwordwidth = -1;
 
+	wxASSERT(subrowid >= 0);
 	if( m_Syntax->m_CheckState )
 	{
 		m_Syntax->InitNextWord2( lineiter, 0 );
