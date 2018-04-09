@@ -2016,11 +2016,11 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 {
 	MadLineIterator lineiter;
 	int subrowid = toprow;
-	wxFileOffset notused;
+	wxFileOffset notused = -1;
 	int lineid = GetLineByRow( lineiter, notused, subrowid ) + 1;
 	subrowid = toprow - subrowid;
 	bool displaylinenumber = true; // check first row for displayning line-number or not
-	int wordwidth = 0, wordlength = 0, lastwordwidth = -1;
+	int wordwidth = -1, wordlength = -1, lastwordwidth = -1;
 
 	wxASSERT(subrowid >= 0);
 	if( m_Syntax->m_CheckState )
