@@ -126,6 +126,7 @@ New: Remember last editing and reset of MadMacro dialog
 New: Go language syntax support
 New: First line syntax detect for TCL
 New: Don't pop up 2 dialogs on reloading a file changed
+New: Sort Encoding with name
 Fix: Crash on purging items of FindInFiles Dialog
 Fix: The first macro command recorded without prefix "medit."
 Fix: Convert macros from saved macro file to UTF8 before running
@@ -140,6 +141,8 @@ Fix: Patch for dead/infinite loop in syntax highlighting
 Fix: Display file format(new line char) on menu
 Fix: Memory leak in FixFileNameEncoding
 Fix: Bugs introduced in refactor Option Dialog(printing functions)
+Fix: Bug on detect Chinese encoding
+Fix: Some dialog close event code issue
 Minor memory improvement
 Minor code improvement
 Update VS2010 build

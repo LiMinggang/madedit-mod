@@ -226,6 +226,7 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID WXUNUSED(
 	Bind( wxEVT_BUTTON, &MadFindInFilesDialog::WxBitmapButtonRecentReplaceTextClick, this, WxBitmapButtonRecentReplaceText->GetId() );
 	Bind( wxEVT_MENU, &MadFindInFilesDialog::OnRecentFindText, this, ID_RECENTFINDTEXT1, ID_RECENTFINDTEXT20 );
 	Bind( wxEVT_MENU, &MadFindInFilesDialog::OnRecentReplaceText, this, ID_RECENTREPLACETEXT1, ID_RECENTREPLACETEXT20 );
+	Bind( wxEVT_CLOSE_WINDOW, &MadFindInFilesDialog::MadFindInFilesDialogClose, this);
 
 	// build encoding list
 	wxString systemenc( _( "Automatic Detection" ) );

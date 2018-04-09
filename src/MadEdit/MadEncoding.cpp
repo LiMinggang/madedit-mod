@@ -71,6 +71,18 @@ using std::map;
 static vector<MadEncodingInfo> EncodingsTable;
 map<int, wxString>MadEncoding::MadEncodingGrpName;
 
+class EncSort  
+{  
+public:  
+  
+	// Return whether first element is less than the second  
+    bool operator () (MadEncodingInfo& a, MadEncodingInfo& b) const  
+	{  
+		 return (a.m_Name.Cmp(b.m_Name) < 0);  
+	};  
+};  
+  
+
 wxChar TestEncoding( const wxChar *name, wxFontEncoding enc, wxByte *mb )
 {
 #if defined(__WXGTK__)
@@ -670,10 +682,6 @@ void MadEncoding::InitEncodings()
 
 		if( !ignore )
 		{
-			if( enc == sysenc )
-			{
-				ms_SystemEncodingIndex = EncodingsTable.size();
-			}
 			EncodingsTable.push_back( MadEncodingInfo( enc, name.Upper(), desc, type, fontname, encGrp ) );
 		}
 	}
@@ -691,6 +699,16 @@ void MadEncoding::InitEncodings()
 	}
 #endif //__MAD_ENCODING_EXTENDED__
 
+	std::sort(EncodingsTable.begin(), EncodingsTable.end(), EncSort());
+
+	for( size_t idx = 0; idx < EncodingsTable.size(); ++idx )
+	{
+		if( EncodingsTable[idx].m_Encoding == sysenc )
+		{
+			ms_SystemEncodingIndex = idx;
+			break;
+		}
+	}
 }
 
 void MadEncoding::FreeEncodings()
@@ -1708,7 +1726,7 @@ void DetectEncoding( const wxByte *text, int count, int &enc )
 				{
 					int def = wxFONTENCODING_DEFAULT;
 
-					if( enc == wxFONTENCODING_CP950 || wxFONTENCODING_CP936 )
+					if( enc == wxFONTENCODING_CP950 || enc == wxFONTENCODING_CP936 )
 					{
 						DetectChineseEncoding( text, count, def );
 

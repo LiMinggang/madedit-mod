@@ -80,14 +80,13 @@ MadConvEncDialog::MadConvEncDialog(wxWindow* parent,wxWindowID id,const wxPoint&
 	Center();
 	//*)
 
+	Bind( wxEVT_CLOSE_WINDOW, &MadConvEncDialog::MadConvEncDialogClose, this);
+
 	size_t cnt=MadEncoding::GetEncodingsCount();
 	for(size_t i=0;i<cnt;++i)
 	{
 		WxComboBoxEncoding->Append(MadEncoding::GetEncodingName(i));//enc+des);
 	}
-	BoxSizer1->Fit(this);
-	BoxSizer1->SetSizeHints(this);
-	Center();
 
 	wxString convenc=MadEncoding::GetEncodingName(0);
 	wxConfigBase *cfg=wxConfigBase::Get(false);
