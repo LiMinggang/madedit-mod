@@ -62,16 +62,16 @@ const long MadFindInFilesDialog::ID_RECENTREPLACETEXT20 = MadUniqueIDReserver::I
 MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID WXUNUSED(id),const wxPoint& WXUNUSED(pos),const wxSize& WXUNUSED(size))
 {
 	//(*Initialize(MadFindInFilesDialog)
+	wxBoxSizer* BoxSizer1;
+	wxBoxSizer* BoxSizer2;
+	wxBoxSizer* BoxSizer3;
 	wxBoxSizer* BoxSizer4;
-	wxBoxSizer* BoxSizer6;
 	wxBoxSizer* BoxSizer5;
+	wxBoxSizer* BoxSizer6;
 	wxBoxSizer* BoxSizer7;
 	wxBoxSizer* BoxSizer8;
-	wxBoxSizer* BoxSizer2;
-	wxBoxSizer* BoxSizer1;
 	wxBoxSizer* BoxSizer9;
 	wxFlexGridSizer* FlexGridSizer1;
-	wxBoxSizer* BoxSizer3;
 
 	Create(parent, wxID_ANY, _("Find/Replace In Files"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxSYSTEM_MENU|wxCLOSE_BOX, _T("wxID_ANY"));
 	BoxSizer1 = new wxBoxSizer(wxVERTICAL);
@@ -82,78 +82,78 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID WXUNUSED(
 	BoxSizer7 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer4->Add(BoxSizer7, 1, wxALL|wxEXPAND, 0);
 	BoxSizer8 = new wxBoxSizer(wxVERTICAL);
-	WxCheckBoxCaseSensitive = new wxCheckBox(this, wxID_ANY, _("&Case Sensitive"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXCASESENSITIVE"));
+	WxCheckBoxCaseSensitive = new wxCheckBox(this, wxID_ANY, _("&Case Sensitive"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
 	WxCheckBoxCaseSensitive->SetValue(false);
 	BoxSizer8->Add(WxCheckBoxCaseSensitive, 0, wxALL|wxEXPAND, 2);
-	WxCheckBoxWholeWord = new wxCheckBox(this, wxID_ANY, _("&Whole Word Only"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXWHOLEWORD"));
+	WxCheckBoxWholeWord = new wxCheckBox(this, wxID_ANY, _("&Whole Word Only"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
 	WxCheckBoxWholeWord->SetValue(false);
 	BoxSizer8->Add(WxCheckBoxWholeWord, 0, wxALL|wxEXPAND, 2);
-	WxCheckBoxRegex = new wxCheckBox(this, wxID_ANY, _("Use Regular E&xpressions"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXREGEX"));
+	WxCheckBoxRegex = new wxCheckBox(this, wxID_ANY, _("Use Regular E&xpressions"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
 	WxCheckBoxRegex->SetValue(false);
 	BoxSizer8->Add(WxCheckBoxRegex, 0, wxALL|wxEXPAND, 2);
 	BoxSizer9 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer9->Add(10,0,0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
-	WxCheckBoxDotMatchNewLine = new wxCheckBox(this, wxID_ANY, _("&. Matches Newline"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXDOTMATCHNEWLINE"));
+	WxCheckBoxDotMatchNewLine = new wxCheckBox(this, wxID_ANY, _("&. Matches Newline"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
 	WxCheckBoxDotMatchNewLine->SetValue(false);
 	BoxSizer9->Add(WxCheckBoxDotMatchNewLine, 0, wxALL|wxEXPAND, 2);
 	BoxSizer8->Add(BoxSizer9, 0, wxALL|wxEXPAND, 0);
-	WxCheckBoxFindHex = new wxCheckBox(this, wxID_ANY, _("Find &Hex String (Example: BE 00 3A or BE003A)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXFINDHEX"));
+	WxCheckBoxFindHex = new wxCheckBox(this, wxID_ANY, _("Find &Hex String (Example: BE 00 3A or BE003A)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
 	WxCheckBoxFindHex->SetValue(false);
 	BoxSizer8->Add(WxCheckBoxFindHex, 0, wxALL|wxEXPAND, 2);
-	WxCheckBoxListFirstOnly = new wxCheckBox(this, wxID_ANY, _("&List the First Found Item Only"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXLISTFIRSTONLY"));
+	WxCheckBoxListFirstOnly = new wxCheckBox(this, wxID_ANY, _("&List the First Found Item Only"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
 	WxCheckBoxListFirstOnly->SetValue(false);
 	BoxSizer8->Add(WxCheckBoxListFirstOnly, 0, wxALL|wxEXPAND, 2);
 	BoxSizer4->Add(BoxSizer8, 0, wxALL|wxEXPAND, 0);
 	BoxSizer2->Add(BoxSizer4, 1, wxALL|wxALIGN_TOP, 0);
 	BoxSizer5 = new wxBoxSizer(wxVERTICAL);
-	WxButtonFind = new wxButton(this, wxID_ANY, _("&Find"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXBUTTONFIND"));
+	WxButtonFind = new wxButton(this, wxID_ANY, _("&Find"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
 	WxButtonFind->SetDefault();
 	BoxSizer5->Add(WxButtonFind, 0, wxALL|wxEXPAND, 2);
-	WxButtonReplace = new wxButton(this, wxID_ANY, _("&Replace"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXBUTTONREPLACE"));
+	WxButtonReplace = new wxButton(this, wxID_ANY, _("&Replace"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
 	BoxSizer5->Add(WxButtonReplace, 0, wxALL|wxEXPAND, 2);
 	WxButtonClose = new wxButton(this, wxID_CANCEL, _("Close"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_CANCEL"));
 	BoxSizer5->Add(WxButtonClose, 0, wxALL|wxEXPAND, 2);
-	WxCheckBoxEnableReplace = new wxCheckBox(this, wxID_ANY, _("&Enable Replace"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXENABLEREPLACE"));
+	WxCheckBoxEnableReplace = new wxCheckBox(this, wxID_ANY, _("&Enable Replace"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
 	WxCheckBoxEnableReplace->SetValue(false);
 	BoxSizer5->Add(WxCheckBoxEnableReplace, 0, wxALL|wxEXPAND, 2);
 	BoxSizer2->Add(BoxSizer5, 0, wxALL|wxALIGN_TOP, 0);
 	BoxSizer1->Add(BoxSizer2, 0, wxALL|wxEXPAND, 0);
-	StaticLine1 = new wxStaticLine(this, wxID_ANY, wxDefaultPosition, wxSize(10,-1), wxLI_HORIZONTAL, _T("ID_STATICLINE1"));
+	StaticLine1 = new wxStaticLine(this, wxID_ANY, wxDefaultPosition, wxSize(10,-1), wxLI_HORIZONTAL, _T("wxID_ANY"));
 	BoxSizer1->Add(StaticLine1, 0, wxALL|wxEXPAND, 2);
 	BoxSizer3 = new wxBoxSizer(wxVERTICAL);
-	WxRadioButtonOpenedFiles = new wxRadioButton(this, wxID_ANY, _("Opened Files in Editor"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXRADIOBUTTONOPENEDFILES"));
+	WxRadioButtonOpenedFiles = new wxRadioButton(this, wxID_ANY, _("Opened Files in Editor"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
 	BoxSizer3->Add(WxRadioButtonOpenedFiles, 0, wxALL|wxALIGN_LEFT, 2);
 	FlexGridSizer1 = new wxFlexGridSizer(0, 4, 0, 0);
-	WxRadioButtonDir = new wxRadioButton(this, wxID_ANY, _("Selected Directory:"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXRADIOBUTTONDIR"));
+	WxRadioButtonDir = new wxRadioButton(this, wxID_ANY, _("Selected Directory:"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
 	FlexGridSizer1->Add(WxRadioButtonDir, 0, wxALL|wxEXPAND, 2);
-	WxComboBoxDir = new wxComboBox(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(330,-1), 0, 0, 0, wxDefaultValidator, _T("ID_COMBOBOX1"));
+	WxComboBoxDir = new wxComboBox(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(330,-1), 0, 0, 0, wxDefaultValidator, _T("wxID_ANY"));
 	FlexGridSizer1->Add(WxComboBoxDir, 1, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 2);
-	WxButtonDir = new wxButton(this, wxID_ANY, _T("..."), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_WXBUTTONDIR"));
+	WxButtonDir = new wxButton(this, wxID_ANY, _("..."), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("wxID_ANY"));
 	FlexGridSizer1->Add(WxButtonDir, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	WxButtonActiveDir = new wxButton(this, wxID_ANY, _T("<<"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("ID_WXBUTTONACTIVEDIR"));
+	WxButtonActiveDir = new wxButton(this, wxID_ANY, _("<<"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("wxID_ANY"));
 	FlexGridSizer1->Add(WxButtonActiveDir, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	StaticText1 = new wxStaticText(this, wxID_ANY, _("File Filters:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT1"));
+	StaticText1 = new wxStaticText(this, wxID_ANY, _("File Filters:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	FlexGridSizer1->Add(StaticText1, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 2);
-	WxComboBoxFilter = new wxComboBox(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(330,-1), 0, 0, 0, wxDefaultValidator, _T("ID_WXCOMBOBOXFILTER"));
+	WxComboBoxFilter = new wxComboBox(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(330,-1), 0, 0, 0, wxDefaultValidator, _T("wxID_ANY"));
 	FlexGridSizer1->Add(WxComboBoxFilter, 1, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 2);
-	StaticText2 = new wxStaticText(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT2"));
+	StaticText2 = new wxStaticText(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	FlexGridSizer1->Add(StaticText2, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 8);
-	StaticText3 = new wxStaticText(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT3"));
+	StaticText3 = new wxStaticText(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	FlexGridSizer1->Add(StaticText3, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	StaticText4 = new wxStaticText(this, wxID_ANY, _("Exclude Filters:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT4"));
+	StaticText4 = new wxStaticText(this, wxID_ANY, _("Exclude Filters:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	FlexGridSizer1->Add(StaticText4, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 2);
-	WxComboBoxExclude = new wxComboBox(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(330,-1), 0, 0, 0, wxDefaultValidator, _T("ID_WXCOMBOBOXEXCLUDE"));
+	WxComboBoxExclude = new wxComboBox(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(330,-1), 0, 0, 0, wxDefaultValidator, _T("wxID_ANY"));
 	FlexGridSizer1->Add(WxComboBoxExclude, 1, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 2);
-	StaticText5 = new wxStaticText(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT5"));
+	StaticText5 = new wxStaticText(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	FlexGridSizer1->Add(StaticText5, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 8);
-	StaticText6 = new wxStaticText(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT6"));
+	StaticText6 = new wxStaticText(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	FlexGridSizer1->Add(StaticText6, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	StaticText7 = new wxStaticText(this, wxID_ANY, _("File Encoding:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT7"));
+	StaticText7 = new wxStaticText(this, wxID_ANY, _("File Encoding:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	FlexGridSizer1->Add(StaticText7, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 2);
-	WxComboBoxEncoding = new wxComboBox(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, 0, 0, wxDefaultValidator, _T("ID_WXCOMBOBOXENCODING"));
+	WxComboBoxEncoding = new wxComboBox(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, 0, 0, wxDefaultValidator, _T("wxID_ANY"));
 	FlexGridSizer1->Add(WxComboBoxEncoding, 1, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer3->Add(FlexGridSizer1, 0, wxALL|wxEXPAND, 0);
-	WxCheckBoxSubDir = new wxCheckBox(this, wxID_ANY, _("Include Subdirectories"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXSUBDIR"));
+	WxCheckBoxSubDir = new wxCheckBox(this, wxID_ANY, _("Include Subdirectories"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
 	WxCheckBoxSubDir->SetValue(false);
 	BoxSizer3->Add(WxCheckBoxSubDir, 0, wxALL|wxEXPAND, 2);
 	BoxSizer1->Add(BoxSizer3, 1, wxALL|wxEXPAND, 0);
@@ -162,6 +162,14 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID WXUNUSED(
 	BoxSizer1->SetSizeHints(this);
 	Center();
 
+	//Connect(wxID_ANY,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&MadFindInFilesDialog::WxCheckBoxRegexClick);
+	//Connect(wxID_ANY,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&MadFindInFilesDialog::WxCheckBoxFindHexClick);
+	//Connect(wxID_ANY,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadFindInFilesDialog::WxButtonFindClick);
+	//Connect(wxID_ANY,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadFindInFilesDialog::WxButtonReplaceClick);
+	//Connect(wxID_ANY,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&MadFindInFilesDialog::WxCheckBoxEnableReplaceClick);
+	//Connect(wxID_ANY,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadFindInFilesDialog::WxButtonDirClick);
+	//Connect(wxID_ANY,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadFindInFilesDialog::WxButtonActiveDirClick);
+	//Connect(wxID_ANY,wxEVT_CLOSE_WINDOW,(wxObjectEventFunction)&MadFindInFilesDialog::MadFindInFilesDialogClose);
 	//*)
 
 	int bw, bh;
@@ -198,7 +206,7 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID WXUNUSED(
 	m_ReplaceText->LoadDefaultSyntaxScheme();
 	m_ReplaceText->SetShowEndOfLine(false);
 	m_ReplaceText->SetShowTabChar( true );
-	
+
 	// connect to KeyDown event handler
 	m_FindText->Bind( wxEVT_KEY_DOWN, &MadFindInFilesDialog::MadFindInFilesDialogKeyDown, this );
 	m_ReplaceText->Bind( wxEVT_KEY_DOWN, &MadFindInFilesDialog::MadFindInFilesDialogKeyDown, this );
@@ -211,7 +219,7 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID WXUNUSED(
 	WxBitmapButtonRecentReplaceText->Show(false);
 	WxButtonReplace->Show(false);
 
-	
+
 	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED, &MadFindInFilesDialog::WxCheckBoxRegexClick, this, WxCheckBoxRegex->GetId() );
 	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED, &MadFindInFilesDialog::WxCheckBoxFindHexClick, this, WxCheckBoxFindHex->GetId() );
 	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadFindInFilesDialog::WxButtonFindClick, this, WxButtonFind->GetId() );
@@ -219,7 +227,7 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID WXUNUSED(
 	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED, &MadFindInFilesDialog::WxCheckBoxEnableReplaceClick, this, WxCheckBoxEnableReplace->GetId() );
 	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadFindInFilesDialog::WxButtonDirClick, this, WxButtonDir->GetId() );
 	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadFindInFilesDialog::WxButtonActiveDirClick, this, WxButtonActiveDir->GetId() );
-	
+
 	Bind( wxEVT_ACTIVATE, &MadFindInFilesDialog::MadFindInFilesDialogActivate, this );
 
 	Bind( wxEVT_BUTTON, &MadFindInFilesDialog::WxBitmapButtonRecentFindTextClick, this, WxBitmapButtonRecentFindText->GetId() );

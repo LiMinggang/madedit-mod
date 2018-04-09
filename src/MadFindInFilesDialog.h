@@ -16,14 +16,14 @@
 #endif
 // disable 4996 {
 //(*Headers(MadFindInFilesDialog)
-#include <wx/sizer.h>
-#include <wx/stattext.h>
-#include <wx/checkbox.h>
-#include <wx/statline.h>
-#include <wx/radiobut.h>
 #include <wx/button.h>
-#include <wx/dialog.h>
+#include <wx/checkbox.h>
 #include <wx/combobox.h>
+#include <wx/dialog.h>
+#include <wx/radiobut.h>
+#include <wx/sizer.h>
+#include <wx/statline.h>
+#include <wx/stattext.h>
 //*)
 // disable 4996 }
 #ifdef _MSC_VER
@@ -44,33 +44,33 @@ class MadFindInFilesDialog: public wxDialog
 		virtual ~MadFindInFilesDialog();
 
 		//(*Declarations(MadFindInFilesDialog)
-		wxButton* WxButtonReplace;
-		wxRadioButton* WxRadioButtonOpenedFiles;
-		wxComboBox* WxComboBoxExclude;
-		wxComboBox* WxComboBoxFilter;
-		wxStaticText* StaticText2;
-		wxButton* WxButtonFind;
-		wxStaticText* StaticText6;
-		wxCheckBox* WxCheckBoxCaseSensitive;
-		wxCheckBox* WxCheckBoxEnableReplace;
-		wxStaticText* StaticText1;
-		wxStaticText* StaticText3;
-		wxButton* WxButtonClose;
-		wxRadioButton* WxRadioButtonDir;
 		wxButton* WxButtonActiveDir;
+		wxButton* WxButtonClose;
 		wxButton* WxButtonDir;
+		wxButton* WxButtonFind;
+		wxButton* WxButtonReplace;
+		wxCheckBox* WxCheckBoxCaseSensitive;
+		wxCheckBox* WxCheckBoxDotMatchNewLine;
+		wxCheckBox* WxCheckBoxEnableReplace;
+		wxCheckBox* WxCheckBoxFindHex;
+		wxCheckBox* WxCheckBoxListFirstOnly;
+		wxCheckBox* WxCheckBoxRegex;
+		wxCheckBox* WxCheckBoxSubDir;
+		wxCheckBox* WxCheckBoxWholeWord;
 		wxComboBox* WxComboBoxDir;
 		wxComboBox* WxComboBoxEncoding;
-		wxStaticText* StaticText5;
-		wxStaticText* StaticText7;
-		wxCheckBox* WxCheckBoxListFirstOnly;
-		wxCheckBox* WxCheckBoxFindHex;
+		wxComboBox* WxComboBoxExclude;
+		wxComboBox* WxComboBoxFilter;
+		wxRadioButton* WxRadioButtonDir;
+		wxRadioButton* WxRadioButtonOpenedFiles;
 		wxStaticLine* StaticLine1;
-		wxCheckBox* WxCheckBoxWholeWord;
-		wxCheckBox* WxCheckBoxSubDir;
-		wxCheckBox* WxCheckBoxRegex;
+		wxStaticText* StaticText1;
+		wxStaticText* StaticText2;
+		wxStaticText* StaticText3;
 		wxStaticText* StaticText4;
-		wxCheckBox* WxCheckBoxDotMatchNewLine;
+		wxStaticText* StaticText5;
+		wxStaticText* StaticText6;
+		wxStaticText* StaticText7;
 		//*)
 
 	protected:
