@@ -143,6 +143,7 @@ Fix: Memory leak in FixFileNameEncoding
 Fix: Bugs introduced in refactor Option Dialog(printing functions)
 Fix: Bug on detect Chinese encoding
 Fix: Some dialog close event code issue
+Fix: Clear mouse status on losing focus while popping up dialog to reload file
 Minor memory improvement
 Minor code improvement
 Update VS2010 build

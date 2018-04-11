@@ -2693,6 +2693,8 @@ bool MadEdit::Reload()
 	{
 		wxMessageDialog dlg( this, _( "Do you want to discard changes?" ), wxT( "MadEdit-Mod" ), wxYES_NO | wxICON_QUESTION );
 		dlg.SetYesNoLabels( wxMessageDialog::ButtonLabel( _( "&Yes" ) ), wxMessageDialog::ButtonLabel( _( "&No" ) ) );
+		wxMouseCaptureLostEvent evt;
+		OnMouseCaptureLost( evt );
 
 		if( dlg.ShowModal() != wxID_YES )
 		{
@@ -2774,11 +2776,14 @@ bool MadEdit::ReloadByModificationTime( bool LostCapture/* = false*/ )
 	//DBOUT((m_MouseLeftDown?"LDown:TRUE\n":"LDown:FALSE\n"));
 	//if(LostCapture)
 	//    mevt.SetEventObject(this);
+	wxMouseCaptureLostEvent evt;
+	OnMouseCaptureLost( evt );
 	if( dlg.ShowModal() != wxID_YES )
 	{
 		//if(LostCapture)
 		//AddPendingEvent( mevt );
 		m_ModReloaded = false;
+		m_Modified = true;
 		return false;
 	}
 
