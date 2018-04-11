@@ -2726,7 +2726,7 @@ bool MadEdit::ReloadByModificationTime( bool LostCapture/* = false*/ )
 
 	if( modtime == (time_t)-1 ) // the file has been deleted
 	{
-		m_ModificationTime = 0;
+		m_ModificationTime = (time_t)-1;
 		m_Modified = true;
 		return false;
 	}
