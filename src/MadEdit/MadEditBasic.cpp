@@ -2729,7 +2729,11 @@ bool MadEdit::ReloadByModificationTime( bool LostCapture/* = false*/ )
 	if( modtime == (time_t)-1 ) // the file has been deleted
 	{
 		m_ModificationTime = (time_t)-1;
-		m_Modified = true;
+		if(!m_Modified)
+		{
+			m_Modified = true;
+			DoStatusChanged();
+		}
 		return false;
 	}
 
@@ -2737,8 +2741,11 @@ bool MadEdit::ReloadByModificationTime( bool LostCapture/* = false*/ )
 	bool readable = wxFileName::IsFileReadable( m_Lines->m_Name );
 	if( !readable )
 	{
-		m_Modified = true;
-		DoStatusChanged();
+		if(!m_Modified)
+		{
+			m_Modified = true;
+			DoStatusChanged();
+		}
 		return false;
 	}
 
@@ -2783,7 +2790,11 @@ bool MadEdit::ReloadByModificationTime( bool LostCapture/* = false*/ )
 		//if(LostCapture)
 		//AddPendingEvent( mevt );
 		m_ModReloaded = false;
-		m_Modified = true;
+		if(!m_Modified)
+		{
+			m_Modified = true;
+			DoStatusChanged();
+		}
 		return false;
 	}
 
