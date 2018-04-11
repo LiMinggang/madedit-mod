@@ -2724,7 +2724,7 @@ bool MadEdit::ReloadByModificationTime( bool LostCapture/* = false*/ )
 	wxLogNull nolog;
 	time_t modtime = wxFileModificationTime( m_Lines->m_Name );
 
-	if( modtime == 0 ) // the file has been deleted
+	if( modtime == (time_t)-1 ) // the file has been deleted
 	{
 		m_ModificationTime = 0;
 		m_Modified = true;
@@ -2778,6 +2778,7 @@ bool MadEdit::ReloadByModificationTime( bool LostCapture/* = false*/ )
 	{
 		//if(LostCapture)
 		//AddPendingEvent( mevt );
+		m_ModReloaded = false;
 		return false;
 	}
 
