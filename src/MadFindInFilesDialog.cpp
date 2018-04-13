@@ -128,9 +128,9 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID WXUNUSED(
 	FlexGridSizer1->Add(WxRadioButtonDir, 0, wxALL|wxEXPAND, 2);
 	WxComboBoxDir = new wxComboBox(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(330,-1), 0, 0, 0, wxDefaultValidator, _T("wxID_ANY"));
 	FlexGridSizer1->Add(WxComboBoxDir, 1, wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL, 2);
-	WxButtonDir = new wxButton(this, wxID_ANY, _("..."), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("wxID_ANY"));
+	WxButtonDir = new wxButton(this, wxID_ANY, wxT("..."), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("wxID_ANY"));
 	FlexGridSizer1->Add(WxButtonDir, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	WxButtonActiveDir = new wxButton(this, wxID_ANY, _("<<"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("wxID_ANY"));
+	WxButtonActiveDir = new wxButton(this, wxID_ANY, wxT("<<"), wxDefaultPosition, wxSize(40,-1), 0, wxDefaultValidator, _T("wxID_ANY"));
 	FlexGridSizer1->Add(WxButtonActiveDir, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	StaticText1 = new wxStaticText(this, wxID_ANY, _("File Filters:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	FlexGridSizer1->Add(StaticText1, 0, wxALL|wxALIGN_RIGHT|wxALIGN_CENTER_VERTICAL, 2);
