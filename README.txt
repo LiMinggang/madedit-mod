@@ -126,6 +126,7 @@ New: Remember last editing and reset of MadMacro dialog
 New: Go language syntax support
 New: First line syntax detect for TCL
 New: Don't pop up 2 dialogs on reloading a file changed
+New: Ask user to choose if s/he wants to remove the recent file list if the file does not exist
 New: Sort Encoding with name
 Fix: Crash on purging items of FindInFiles Dialog
 Fix: The first macro command recorded without prefix "medit."

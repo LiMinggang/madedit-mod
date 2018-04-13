@@ -6147,7 +6147,16 @@ void MadEditFrame::OnFileRecentFile( wxCommandEvent& event )
 	{
 		if(!OpenFile( file, true ))
 		{
-			m_RecentFiles->RemoveFileFromHistory(idx);
+			wxString message(file);
+			long style = wxYES_NO;
+			message += _( " does not exist. It might be removed. Do you want to removed it from recent file list?" );
+			wxMessageDialog dlg( this, message, wxT( "MadEdit-Mod" ), style );
+			dlg.SetYesNoLabels( wxMessageDialog::ButtonLabel( _( "&Yes" ) ), wxMessageDialog::ButtonLabel( _( "&No" ) ) );
+
+			if( dlg.ShowModal() == wxID_YES )
+			{
+				m_RecentFiles->RemoveFileFromHistory(idx);
+			}
 		}
 	}
 }
