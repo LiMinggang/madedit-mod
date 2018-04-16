@@ -1405,7 +1405,6 @@ noinst_HEADERS =	description-pak \
 	python/config/boost.py \
 	python/build/Jamfile \
 	python/config/__init__.py \
-	python/appveyor.yml \
 	python/SConstruct \
 	python/LICENSE_1_0.txt \
 	python/README.md \
