@@ -121,36 +121,36 @@ FreeBSD packaging (with FreeBSD 10.01)
 3. stdc++ version
 
 Mod v0.4.12
-New: Support Drag and Drop for text(from other applications, not DnD edit, can't drag text out of MadEdit yet)
-New: Remember last editing and reset of MadMacro dialog
-New: Go language syntax support
-New: First line syntax detect for TCL
-New: Don't pop up 2 dialogs on reloading a file changed
-New: Ask user to choose if s/he wants to remove the recent file list if the file does not exist
-New: Sort Encoding with name
-Fix: Crash on purging items of FindInFiles Dialog
-Fix: The first macro command recorded without prefix "medit."
-Fix: Convert macros from saved macro file to UTF8 before running
-Fix: Tooltip of the file name tab was not updated if renamed
-Fix: Use min size of the config and actual resolution
-Fix: Syntax is not updated on Save As
-Fix: Option dialog hang issue(https://trac.wxwidgets.org/ticket/18091)
-Fix: Improve syntax auto detect on Save As(#254)
-Fix: Can't assign more than one shortcut to commands by Option Dialog
-Fix: String escaping issue in Macro Recording of Search/Replace
-Fix: Patch for dead/infinite loop in syntax highlighting
-Fix: Display file format(new line char) on menu
-Fix: Memory leak in FixFileNameEncoding
-Fix: Bugs introduced in refactor Option Dialog(printing functions)
-Fix: Bug on detect Chinese encoding
-Fix: Some dialog close event code issue
-Fix: Clear mouse status on losing focus while popping up dialog to reload file
-Minor memory improvement
-Minor code improvement
-Update VS2010 build
-Update wxWidgets to 3.1.1
-Update boost.python to latest code
-Update translation
+1.New: Support Drag and Drop for text(from other applications, not DnD edit, can't drag text out of MadEdit yet)
+2.New: Remember last editing and reset of MadMacro dialog
+3.New: Go language syntax support
+4.New: First line syntax detect for TCL
+5.New: Don't pop up 2 dialogs on reloading a file changed
+6.New: Ask user to choose if s/he wants to remove the recent file list if the file does not exist
+7.New: Sort Encoding with name
+8.Fix: Crash on purging items of FindInFiles Dialog
+9.Fix: The first macro command recorded without prefix "medit."
+10.Fix: Convert macros from saved macro file to UTF8 before running
+11.Fix: Tooltip of the file name tab was not updated if renamed
+12.Fix: Use min size of the config and actual resolution
+13.Fix: Syntax is not updated on Save As
+14.Fix: Option dialog hang issue(https://trac.wxwidgets.org/ticket/18091)
+15.Fix: Improve syntax auto detect on Save As(#254)
+16.Fix: Can't assign more than one shortcut to commands by Option Dialog
+17.Fix: String escaping issue in Macro Recording of Search/Replace
+18.Fix: Patch for dead/infinite loop in syntax highlighting
+19.Fix: Display file format(new line char) on menu
+20.Fix: Memory leak in FixFileNameEncoding
+21.Fix: Bugs introduced in refactor Option Dialog(printing functions)
+22.Fix: Bug on detect Chinese encoding
+23.Fix: Some dialog close event code issue
+24.Fix: Clear mouse status on losing focus while popping up dialog to reload file
+25.Minor memory improvement
+26.Minor code improvement
+27.Update VS2010 build
+28.Update wxWidgets to 3.1.1
+29.Update boost.python to latest code
+30.Update translations
 
 Mod v0.4.11
 Note: please use the convertcfg.py to convert your old config if you want to restore your old config, use clearbms.py to clear the bookmarks before running MadEdit-Mod

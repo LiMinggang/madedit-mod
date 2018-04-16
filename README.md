@@ -74,28 +74,37 @@ Translations
 
 News
 =======
-Mod v0.4.11
-* Note: please use the convertcfg.py to convert your old config if you want to restore your old config, use clearbms.py to clear the bookmarks before running MadEdit-Mod
-
-* New: Open file path with default file explorer, set "EXTEXPLORER" as the env for open in another application #243
-* New: Add '-d' to define a new delimiter to replace '*'
-* New: Show/Hide menu bar
-* Fix: Message strings were not translated during initialization
-* Fix: TXT syntax would not be applied on first loading(0.4.10) #244
-* Fix: Change font size/font/encoding/syntax/linespacing will not update font toolbar #246
-* Fix: Remove toggle show Quick Search bar on Option dialog
-* Fix: Restructure of MadEdit config
-* Fix: Saved bookmarks would added to other files during reload
-* Fix: Wrong MadPython expression recorded in Search/Replace
-* Fix: Clean deprecated function wxNewId
-* Fix: Complier warnings from VC(L4)
-* Fix: Restore InfoWindow instead of hide it if it was there last time
-* Fix: Display bookmark on the first sub-row of a wrapped line
-* Update Astyle to latest version
-* Update Hunspell to latest version
-* Update Python to 2.7.14
-* Update translation
-* Other minor improvements
+Mod v0.4.12
+* New: Support Drag and Drop for text(from other applications, not DnD edit, can't drag text out of MadEdit yet)
+* New: Remember last editing and reset of MadMacro dialog
+* New: Go language syntax support
+* New: First line syntax detect for TCL
+* New: Don't pop up 2 dialogs on reloading a file changed
+* New: Ask user to choose if s/he wants to remove the recent file list if the file does not exist
+* New: Sort Encoding with name
+* Fix: Crash on purging items of FindInFiles Dialog
+* Fix: The first macro command recorded without prefix "medit."
+* Fix: Convert macros from saved macro file to UTF8 before running
+* Fix: Tooltip of the file name tab was not updated if renamed
+* Fix: Use min size of the config and actual resolution
+* Fix: Syntax is not updated on Save As
+* Fix: Option dialog hang issue(https://trac.wxwidgets.org/ticket/18091)
+* Fix: Improve syntax auto detect on Save As(#254)
+* Fix: Can't assign more than one shortcut to commands by Option Dialog
+* Fix: String escaping issue in Macro Recording of Search/Replace
+* Fix: Patch for dead/infinite loop in syntax highlighting
+* Fix: Display file format(new line char) on menu
+* Fix: Memory leak in FixFileNameEncoding
+* Fix: Bugs introduced in refactor Option Dialog(printing functions)
+* Fix: Bug on detect Chinese encoding
+* Fix: Some dialog close event code issue
+* Fix: Clear mouse status on losing focus while popping up dialog to reload file
+* Minor memory improvement
+* Minor code improvement
+* Update VS2010 build
+* Update wxWidgets to 3.1.1
+* Update boost.python to latest code
+* Update translations
 
 Todo
 =====
