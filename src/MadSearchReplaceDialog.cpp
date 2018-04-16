@@ -84,10 +84,10 @@ inline void MadSearchEscapeString(wxString & expr, bool bRegex)
 
 	for( size_t i  = 0; i < expr.Length(); ++i )
 	{
-		if((uint32_t)(expr[i].GetValue()) == (uint32_t)('"'))
+		if((wxUint32)(expr[i].GetValue()) == (wxUint32)('"'))
 		{
 			expr.insert( i, 1, esp );
-			if (bRegex && (i > 0) && ((uint32_t)(expr[i - 1].GetValue()) == (uint32_t)('\\')))
+			if (bRegex && (i > 0) && ((wxUint32)(expr[i - 1].GetValue()) == (wxUint32)('\\')))
 			{
 				expr.insert(i, 1, esp);
 				++i;
