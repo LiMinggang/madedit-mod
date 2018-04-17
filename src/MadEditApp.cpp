@@ -376,6 +376,7 @@ bool MadEditApp::OnInit()
 				ScanForLocales();
 				InitLocale();
 				wxLogDebug( wxGetTranslation(_( "Failed to create an IPC service." ) ));
+				OnExit();
 				return false;
 			}
 		}
@@ -436,6 +437,7 @@ bool MadEditApp::OnInit()
 			g_DoNotSaveSettings = true;
 			DeleteConfig();
 			delete client;
+			OnExit();
 			return false;
 		}
 	}
