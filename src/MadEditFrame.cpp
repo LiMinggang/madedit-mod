@@ -3919,13 +3919,8 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 
 	g_ActiveMadEdit = 0;
 	g_MainFrame = 0;
-#ifndef __WXMSW__
-	// it will crash randomly under linux.
-	// so we must call exit() to quit the app.
-	exit( 0 );
-#else
-	Destroy(); // quit app normally.
-#endif
+	event.Skip();
+
 }
 
 /*

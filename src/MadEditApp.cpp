@@ -564,8 +564,10 @@ int MadEditApp::OnExit()
 {
 	// save settings in FrameClose();
 	if( m_SigleAppChecker )
+	{
 		delete m_SigleAppChecker;
-	m_SigleAppChecker = nullptr;
+		m_SigleAppChecker = nullptr;
+	}
 
 	if( m_AppServer )
 	{
@@ -574,8 +576,10 @@ int MadEditApp::OnExit()
 	}
 
 	if( g_Locale )
-		wxDELETE( g_Locale );
-	g_Locale = nullptr;
+	{
+		delete g_Locale;
+		g_Locale = nullptr;
+	}
 
 	return 0;
 }
@@ -904,7 +908,7 @@ void MadEditApp::InitLocale()
 	if( g_Locale )
 	{
 		wxDELETE( g_Locale );
-		g_Locale = 0;
+		g_Locale = nullptr;
 	}
 
 	g_Locale = new wxLocale( lang );

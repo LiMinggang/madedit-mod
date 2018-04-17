@@ -120,6 +120,9 @@ FreeBSD packaging (with FreeBSD 10.01)
 2. aclocal version in aclocal.m4
 3. stdc++ version
 
+Mod v0.4.13
+Fix: Deleted stale lock file '/home/username/prog_name-username' bug(Linux) #262
+
 Mod v0.4.12
 1.New: Support Drag and Drop for text(from other applications, not DnD edit, can't drag text out of MadEdit yet)
 2.New: Remember last editing and reset of MadMacro dialog
