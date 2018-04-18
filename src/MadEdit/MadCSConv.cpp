@@ -19,7 +19,7 @@ MadCSConv::MadCSConv(const wxString &charset):m_Charset(charset.Upper())
 {
 
 	m_Encoding = wxFontMapperBase::GetEncodingFromName(charset);
-	if(m_Encoding != wxFONTENCODING_SYSTEM)
+	if(m_Encoding != wxFONTENCODING_SYSTEM && m_Encoding < wxFONTENCODING_MAX)
 	{
 		m_CSConv.reset(new wxCSConv( (wxFontEncoding)m_Encoding ));
 	}

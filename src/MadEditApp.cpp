@@ -376,7 +376,6 @@ bool MadEditApp::OnInit()
 				ScanForLocales();
 				InitLocale();
 				wxLogDebug( wxGetTranslation(_( "Failed to create an IPC service." ) ));
-				delete cfg;
 				OnExit();
 				return false;
 			}
@@ -435,7 +434,6 @@ bool MadEditApp::OnInit()
 							   wxT( "MadEdit-Mod" ), wxICON_INFORMATION | wxOK );
 			}
 
-			delete cfg;
 			delete client;
 			OnExit();
 			return false;
@@ -549,7 +547,6 @@ bool MadEditApp::OnInit()
 		SetTopWindow(myFrame);
 		if( !bSingleInstance || m_Exit)
 		{
-			delete cfg;
 			OnExit(); // Clean up
 			return false;
 		}
@@ -557,8 +554,8 @@ bool MadEditApp::OnInit()
 		// Waiting for -x to close
 	}
 
-	delete cfg;
 	if(m_Exit) OnExit(); // Clean up
+
 	return !m_Exit;
 }
 
@@ -582,6 +579,8 @@ int MadEditApp::OnExit()
 		delete g_Locale;
 		g_Locale = nullptr;
 	}
+
+	delete wxFileConfig::Set((wxConfigBase *)nullptr);
 
 	return 0;
 }

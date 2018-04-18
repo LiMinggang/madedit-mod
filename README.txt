@@ -123,6 +123,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 Mod v0.4.13
 Fix: Deleted stale lock file '/home/username/prog_name-username' bug(Linux) #262
 Fix: Code issue of EnableTransparency
+Fix: GB18030 not work under Linux
 
 Mod v0.4.12
 1.New: Support Drag and Drop for text(from other applications, not DnD edit, can't drag text out of MadEdit yet)
