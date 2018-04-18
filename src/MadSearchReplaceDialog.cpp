@@ -382,8 +382,11 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED,     &MadSearchReplaceDialog::WxCheckBoxFindHexClick, this,           WxCheckBoxFindHex->GetId() );
 	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED,     &MadSearchReplaceDialog::WxCheckBoxSearchInSelectionClick, this, WxCheckBoxSearchInSelection->GetId() );
 	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED,     &MadSearchReplaceDialog::WxCheckBoxBookmarkLineClick, this,      WxCheckBoxBookmarkLine->GetId() );
-	Bind( wxEVT_COMMAND_RADIOBUTTON_SELECTED, &MadSearchReplaceDialog::WxRadioLosingFocusSelect, this,         WxRadioLosingFocus->GetId() );
-	Bind( wxEVT_COMMAND_RADIOBUTTON_SELECTED, &MadSearchReplaceDialog::WxRadioAlwaysSelect, this,              WxRadioAlways->GetId() );
+	if( m_EnableTransparency )
+	{
+		Bind( wxEVT_COMMAND_RADIOBUTTON_SELECTED, &MadSearchReplaceDialog::WxRadioLosingFocusSelect, this,         WxRadioLosingFocus->GetId() );
+		Bind( wxEVT_COMMAND_RADIOBUTTON_SELECTED, &MadSearchReplaceDialog::WxRadioAlwaysSelect, this,              WxRadioAlways->GetId() );
+	}
 	Bind( wxEVT_SLIDER,       &MadSearchReplaceDialog::WxSliderTransDegreeScroll, this,        WxSliderTransDegree->GetId() );
 	Bind( wxEVT_SLIDER,       &MadSearchReplaceDialog::OnWxSliderInputSizerCmdScroll, this,    WxSliderInputSizer->GetId() );
 	Bind( wxEVT_COMMAND_BUTTON_CLICKED,       &MadSearchReplaceDialog::WxButtonFindNextClick, this,            WxButtonFindNext->GetId() );
