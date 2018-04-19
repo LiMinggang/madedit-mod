@@ -1,5 +1,5 @@
 // ASLocalizer.h
-// Copyright (c) 2017 by Jim Pattee <jimp03@email.com>.
+// Copyright (c) 2018 by Jim Pattee <jimp03@email.com>.
 // This code is licensed under the MIT License.
 // License.md describes the conditions under which this software may be distributed.
 
@@ -47,7 +47,7 @@ private:	// functions
 	void setTranslationClass();
 
 private:	// variables
-	Translation* m_translation;		// pointer to a polymorphic Translation class
+	Translation* m_translationClass;// pointer to a polymorphic Translation class
 	string m_langID;				// language identifier from the locale
 	string m_subLangID;				// sub language identifier, if needed
 	string m_localeName;			// name of the current locale (Linux only)
@@ -67,8 +67,8 @@ class Translation
 //       typeid() is used by AStyleTestI18n_Localizer.cpp.
 {
 public:
-	Translation() {}
-	virtual ~Translation() {}
+	Translation();
+	virtual ~Translation() = default;
 	string convertToMultiByte(const wstring& wideStr) const;
 	string getTranslationString(size_t i) const;
 	size_t getTranslationVectorSize() const;
@@ -78,9 +78,12 @@ public:
 protected:
 	void addPair(const string& english, const wstring& translated);
 	// variables
-	vector<pair<string, wstring> > m_translation;		// translation vector
+	vector<pair<string, wstring> > m_translationVector;
 
 private:
+	// the number of translation pairs added a constructor
+	static const size_t translationElements = 30;	// need static for vs2013
+	// the translated string
 	mutable string m_mbTranslation;
 };
 

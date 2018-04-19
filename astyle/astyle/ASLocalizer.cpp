@@ -40,7 +40,7 @@
 #include "ASLocalizer.h"
 
 #ifdef _WIN32
-	#include <windows.h>
+	#include <Windows.h>
 #endif
 
 #ifdef __VMS
@@ -50,10 +50,10 @@
 	#include <cassert>
 #endif
 
-#include <cstdio>
-#include <iostream>
 #include <clocale>		// needed by some compilers
+#include <cstdio>
 #include <cstdlib>
+#include <iostream>
 #include <typeinfo>
 
 #ifdef _MSC_VER
@@ -90,7 +90,7 @@ ASLocalizer::ASLocalizer()
 	m_langID = "en";
 	m_lcid = 0;
 	m_subLangID.clear();
-	m_translation = nullptr;
+	m_translationClass = nullptr;
 
 	// Not all compilers support the C++ function locale::global(locale(""));
 	char* localeName = setlocale(LC_ALL, "");
@@ -112,7 +112,7 @@ ASLocalizer::ASLocalizer()
 ASLocalizer::~ASLocalizer()
 // Delete dynamically allocated memory.
 {
-	delete m_translation;
+	delete m_translationClass;
 }
 
 #ifdef _WIN32
@@ -194,8 +194,8 @@ string ASLocalizer::getLanguageID() const
 const Translation* ASLocalizer::getTranslationClass() const
 // Returns the name of the translation class in m_translation.  Used for testing.
 {
-	assert(m_translation);
-	return m_translation;
+	assert(m_translationClass);
+	return m_translationClass;
 }
 
 void ASLocalizer::setLanguageFromName(const char* langID)
@@ -238,9 +238,9 @@ void ASLocalizer::setLanguageFromName(const char* langID)
 const char* ASLocalizer::settext(const char* textIn) const
 // Call the settext class and return the value.
 {
-	assert(m_translation);
+	assert(m_translationClass);
 	const string stringIn = textIn;
-	return m_translation->translate(stringIn).c_str();
+	return m_translationClass->translate(stringIn).c_str();
 }
 
 void ASLocalizer::setTranslationClass()
@@ -250,70 +250,75 @@ void ASLocalizer::setTranslationClass()
 {
 	assert(m_langID.length());
 	// delete previously set (--ascii option)
-	if (m_translation != nullptr)
+	if (m_translationClass != nullptr)
 	{
-		delete m_translation;
-		m_translation = nullptr;
+		delete m_translationClass;
+		m_translationClass = nullptr;
 	}
 	if (m_langID == "bg")
-		m_translation = new Bulgarian;
+		m_translationClass = new Bulgarian;
 	else if (m_langID == "zh" && m_subLangID == "CHS")
-		m_translation = new ChineseSimplified;
+		m_translationClass = new ChineseSimplified;
 	else if (m_langID == "zh" && m_subLangID == "CHT")
-		m_translation = new ChineseTraditional;
+		m_translationClass = new ChineseTraditional;
 	else if (m_langID == "nl")
-		m_translation = new Dutch;
+		m_translationClass = new Dutch;
 	else if (m_langID == "en")
-		m_translation = new English;
+		m_translationClass = new English;
 	else if (m_langID == "et")
-		m_translation = new Estonian;
+		m_translationClass = new Estonian;
 	else if (m_langID == "fi")
-		m_translation = new Finnish;
+		m_translationClass = new Finnish;
 	else if (m_langID == "fr")
-		m_translation = new French;
+		m_translationClass = new French;
 	else if (m_langID == "de")
-		m_translation = new German;
+		m_translationClass = new German;
 	else if (m_langID == "el")
-		m_translation = new Greek;
+		m_translationClass = new Greek;
 	else if (m_langID == "hi")
-		m_translation = new Hindi;
+		m_translationClass = new Hindi;
 	else if (m_langID == "hu")
-		m_translation = new Hungarian;
+		m_translationClass = new Hungarian;
 	else if (m_langID == "it")
-		m_translation = new Italian;
+		m_translationClass = new Italian;
 	else if (m_langID == "ja")
-		m_translation = new Japanese;
+		m_translationClass = new Japanese;
 	else if (m_langID == "ko")
-		m_translation = new Korean;
+		m_translationClass = new Korean;
 	else if (m_langID == "nn")
-		m_translation = new Norwegian;
+		m_translationClass = new Norwegian;
 	else if (m_langID == "pl")
-		m_translation = new Polish;
+		m_translationClass = new Polish;
 	else if (m_langID == "pt")
-		m_translation = new Portuguese;
+		m_translationClass = new Portuguese;
 	else if (m_langID == "ro")
-		m_translation = new Romanian;
+		m_translationClass = new Romanian;
 	else if (m_langID == "ru")
-		m_translation = new Russian;
+		m_translationClass = new Russian;
 	else if (m_langID == "es")
-		m_translation = new Spanish;
+		m_translationClass = new Spanish;
 	else if (m_langID == "sv")
-		m_translation = new Swedish;
+		m_translationClass = new Swedish;
 	else if (m_langID == "uk")
-		m_translation = new Ukrainian;
+		m_translationClass = new Ukrainian;
 	else	// default
-		m_translation = new English;
+		m_translationClass = new English;
 }
 
 //----------------------------------------------------------------------------
 // Translation base class methods.
 //----------------------------------------------------------------------------
 
+Translation::Translation()
+{
+	m_translationVector.reserve(translationElements);
+}
 void Translation::addPair(const string& english, const wstring& translated)
 // Add a string pair to the translation vector.
 {
 	pair<string, wstring> entry(english, translated);
-	m_translation.emplace_back(entry);
+	m_translationVector.emplace_back(entry);
+	assert(m_translationVector.size() <= translationElements);
 }
 
 string Translation::convertToMultiByte(const wstring& wideStr) const
@@ -353,25 +358,25 @@ string Translation::convertToMultiByte(const wstring& wideStr) const
 string Translation::getTranslationString(size_t i) const
 // Return the translation ascii value. Used for testing.
 {
-	if (i >= m_translation.size())
+	if (i >= m_translationVector.size())
 		return string();
-	return m_translation[i].first;
+	return m_translationVector[i].first;
 }
 
 size_t Translation::getTranslationVectorSize() const
 // Return the translation vector size.  Used for testing.
 {
-	return m_translation.size();
+	return m_translationVector.size();
 }
 
 bool Translation::getWideTranslation(const string& stringIn, wstring& wideOut) const
 // Get the wide translation string. Used for testing.
 {
-	for (size_t i = 0; i < m_translation.size(); i++)
+	for (size_t i = 0; i < m_translationVector.size(); i++)
 	{
-		if (m_translation[i].first == stringIn)
+		if (m_translationVector.at(i).first == stringIn)
 		{
-			wideOut = m_translation[i].second;
+			wideOut = m_translationVector.at(i).second;
 			return true;
 		}
 	}
@@ -386,11 +391,11 @@ string& Translation::translate(const string& stringIn) const
 // This allows "settext" to be called from a "const" method.
 {
 	m_mbTranslation.clear();
-	for (size_t i = 0; i < m_translation.size(); i++)
+	for (size_t i = 0; i < m_translationVector.size(); i++)
 	{
-		if (m_translation[i].first == stringIn)
+		if (m_translationVector.at(i).first == stringIn)
 		{
-			m_mbTranslation = convertToMultiByte(m_translation[i].second);
+			m_mbTranslation = convertToMultiByte(m_translationVector.at(i).second);
 			break;
 		}
 	}

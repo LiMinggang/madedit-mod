@@ -1,5 +1,5 @@
 // astyle_main.h
-// Copyright (c) 2017 by Jim Pattee <jimp03@email.com>.
+// Copyright (c) 2018 by Jim Pattee <jimp03@email.com>.
 // This code is licensed under the MIT License.
 // License.md describes the conditions under which this software may be distributed.
 
@@ -12,8 +12,8 @@
 
 #include "astyle.h"
 
-#include <sstream>
 #include <ctime>
+#include <sstream>
 
 #if defined(__BORLANDC__) && __BORLANDC__ < 0x0650
 	// Embarcadero needs this for the following utime.h
@@ -23,11 +23,11 @@
 #endif
 
 #if defined(_MSC_VER)
+	#include <sys/stat.h>
 	#include <sys/utime.h>
-	#include <sys/stat.h>
 #else
-	#include <utime.h>
 	#include <sys/stat.h>
+	#include <utime.h>
 #endif                         // end compiler checks
 
 #ifdef ASTYLE_JNI
@@ -57,9 +57,9 @@
 	#pragma warning(disable: 4996)  // secure version deprecation warnings
 #endif
 
-// for Visual Studio supported C++11 standard
-#if defined(_MSC_VER) && _MSC_VER < 1600
-	#error Use Microsoft Visual Studio 2010 or higher
+// for Visual Studio 2013 supported C++11 standard
+#if defined(_MSC_VER) && _MSC_VER < 1800
+	#error Use Microsoft Visual Studio 2013 or higher
 #endif
 
 #ifdef __clang__
@@ -126,20 +126,18 @@ class ASStreamIterator : public ASSourceIterator
 public:
 	bool checkForEmptyLine;
 
-	// function declarations
+public:	// function declarations
 	explicit ASStreamIterator(T* in);
-	virtual ~ASStreamIterator();
+	~ASStreamIterator() override;
 	bool getLineEndChange(int lineEndFormat) const;
-	int  getStreamLength() const;
-	string nextLine(bool emptyLineWasDeleted);
-	string peekNextLine();
-	void peekReset();
+	int  getStreamLength() const override;
+	string nextLine(bool emptyLineWasDeleted) override;
+	string peekNextLine() override;
+	void peekReset() override;
 	void saveLastInputLine();
-	streamoff tellg();
+	streamoff tellg() override;
 
 private:
-	ASStreamIterator(const ASStreamIterator& copy);       // copy constructor not to be implemented
-	ASStreamIterator& operator=(ASStreamIterator&);       // assignment operator not to be implemented
 	T* inStream;            // pointer to the input stream
 	string buffer;          // current input line
 	string prevBuffer;      // previous input line
@@ -155,8 +153,8 @@ public:	// inline functions
 	bool compareToInputBuffer(const string& nextLine_) const
 	{ return (nextLine_ == prevBuffer); }
 	const string& getOutputEOL() const { return outputEOL; }
-	streamoff getPeekStart() const { return peekStart; }
-	bool hasMoreLines() const { return !inStream->eof(); }
+	streamoff getPeekStart() const override { return peekStart; }
+	bool hasMoreLines() const override { return !inStream->eof(); }
 };
 
 //----------------------------------------------------------------------------
@@ -167,9 +165,9 @@ public:	// inline functions
 class ASEncoding
 {
 private:
-	typedef char16_t utf16;       // 16 bits unsigned
-	typedef unsigned char utf8;   // 8 bits
-	typedef unsigned char ubyte;  // 8 bits
+	using utf16 = char16_t;       // 16 bits unsigned
+	using utf8  = unsigned char;  // 8 bits
+	using ubyte = unsigned char;  // 8 bits
 	enum { SURROGATE_LEAD_FIRST = 0xD800 };
 	enum { SURROGATE_LEAD_LAST = 0xDBFF };
 	enum { SURROGATE_TRAIL_FIRST = 0xDC00 };
@@ -215,8 +213,6 @@ private:
 #endif
 
 	// functions
-	ASOptions(const ASOptions&);           // copy constructor not to be implemented
-	ASOptions& operator=(ASOptions&);      // assignment operator not to be implemented
 	string getParam(const string& arg, const char* op);
 	string getParam(const string& arg, const char* op1, const char* op2);
 	bool isOption(const string& arg, const char* op);
@@ -225,6 +221,7 @@ private:
 	bool isParamOption(const string& arg, const char* option);
 	bool isParamOption(const string& arg, const char* option1, const char* option2);
 	void parseOption(const string& arg, const string& errorInfo);
+	bool parseOptionContinued(const string& arg, const string& errorInfo);
 };
 
 #ifndef	ASTYLE_LIB
@@ -281,11 +278,18 @@ private:    // variables
 
 public:     // functions
 	explicit ASConsole(ASFormatter& formatterArg);
-	~ASConsole();
+	ASConsole(const ASConsole&)            = delete;
+	ASConsole& operator=(ASConsole const&) = delete;
 	void convertLineEnds(ostringstream& out, int lineEnd);
 	FileEncoding detectEncoding(const char* data, size_t dataSize) const;
+	// check Visual Studio 2015 supported C++11 standard
+#if defined(_MSC_VER) && _MSC_VER < 1900
 	void error() const;
 	void error(const char* why, const char* what) const;
+#else
+	[[noreturn]] void error() const;
+	[[noreturn]] void error(const char* why, const char* what) const;
+#endif // defined
 	void formatCinToCout();
 	vector<string> getArgvOptions(int argc, char** argv) const;
 	bool fileExists(const char* file) const;
@@ -342,8 +346,6 @@ public:     // functions
 	vector<string> getFileName() const;
 
 private:	// functions
-	ASConsole(const ASConsole&);           // copy constructor not to be implemented
-	ASConsole& operator=(ASConsole&);      // assignment operator not to be implemented
 	void correctMixedLineEnds(ostringstream& out);
 	void formatFile(const string& fileName_);
 	string getParentDirectory(const string& absPath) const;
@@ -386,8 +388,8 @@ private:	// functions
 class ASLibrary
 {
 public:
-	ASLibrary() {}
-	virtual ~ASLibrary() {}
+	ASLibrary()          = default;
+	virtual ~ASLibrary() = default;
 	// virtual functions are mocked in testing
 	char16_t* formatUtf16(const char16_t*, const char16_t*, fpError, fpAlloc) const;
 	virtual char16_t* convertUtf8ToUtf16(const char* utf8In, fpAlloc fpMemoryAlloc) const;
