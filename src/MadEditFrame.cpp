@@ -3920,7 +3920,6 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 	g_ActiveMadEdit = 0;
 	g_MainFrame = 0;
 	event.Skip();
-
 }
 
 /*
