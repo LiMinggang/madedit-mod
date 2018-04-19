@@ -833,7 +833,7 @@ MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 							DBOUT((wchar_t)(*out)[i]);
 						DBOUT('\n');
 #endif
-						*out = ConvertEscape( *out );
+						//*out = ConvertEscape( *out );
 					}
 				}
 				else

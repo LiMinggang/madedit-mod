@@ -1828,6 +1828,7 @@ void MadSearchReplaceDialog::ReplaceAll( MadEdit * madedit, bool needRec/*=true*
 			if( needRec && count && ( IsMacroRecording() ) )
 			{
 				MadSearchEscapeString(text, bRegex);
+				MadSearchEscapeString(reptext, bRegex);
 				wxString fnstr( wxString::Format( wxT( "ReplaceTextAll(\"%s\", \"%s\", %s, %s, %s, %s, %s)" ), text.c_str(), reptext.c_str(),
 												  bRegex ? wxT( "True" ) : wxT( "False" ),
 												  WxCheckBoxCaseSensitive->GetValue() ? wxT( "True" ) : wxT( "False" ),
