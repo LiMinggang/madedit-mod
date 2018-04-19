@@ -59,7 +59,7 @@ void FormatterSettings::ApplyTo(astyle::ASFormatter& formatter)
       formatter.setFormattingStyle(astyle::STYLE_VTK);
       break;
 
-    case aspsBanner: // Banner
+    case aspsRaliff: // Raliff
       formatter.setFormattingStyle(astyle::STYLE_RATLIFF);
       break;
 
@@ -83,11 +83,15 @@ void FormatterSettings::ApplyTo(astyle::ASFormatter& formatter)
       formatter.setFormattingStyle(astyle::STYLE_GOOGLE);
       break;
 
-    case aspsMozilla: // Google
+    case aspsMozilla: // Mozilla
       formatter.setFormattingStyle(astyle::STYLE_MOZILLA);
       break;
 
-    case aspsPico: // Pico
+	case aspsWebkit: // Webkit
+		formatter.setFormattingStyle(astyle::STYLE_WEBKIT);
+		break;
+	
+	case aspsPico: // Pico
       formatter.setFormattingStyle(astyle::STYLE_PICO);
       break;
 

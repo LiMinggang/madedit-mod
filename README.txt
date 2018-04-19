@@ -121,6 +121,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 3. stdc++ version
 
 Mod v0.4.13
+New: Atyle formatter: Add new option "style=webkit" for the WebKit brace style
 Fix: Deleted stale lock file '/home/username/prog_name-username' bug(Linux) #262
 Fix: Code issue of EnableTransparency
 Fix: GB18030 not work under Linux
