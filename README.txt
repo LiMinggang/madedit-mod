@@ -125,6 +125,7 @@ New: Atyle formatter: Add new option "style=webkit" for the WebKit brace style
 Fix: Deleted stale lock file '/home/username/prog_name-username' bug(Linux) #262
 Fix: Code issue of EnableTransparency
 Fix: GB18030 not work under Linux
+Fix: Regex replace bug, eg, replace "\r\n" with "\\n"
 Update Astyle to latest code
 
 Mod v0.4.12

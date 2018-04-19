@@ -1019,7 +1019,7 @@ MadSearchResult MadEdit::Replace( ucs4string &out, const MadCaretPos &beginpos, 
 			DBOUT((wchar_t)out[i] );
 		DBOUT('\n');
 #endif
-		out = ConvertEscape( out );
+		//out = ConvertEscape( out );
 	}
 	catch( regex_error & e )
 	{

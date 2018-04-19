@@ -1025,12 +1025,12 @@ void MadSearchReplaceDialog::WxButtonReplaceClick( wxCommandEvent& WXUNUSED(even
 	if( g_ActiveMadEdit == nullptr )
 		return;
 
-	wxString text, expr;
+	wxString text;
 	m_FindText->GetText( text, true );
 
 	if( text.Len() > 0 )
 	{
-		wxString reptext;
+		wxString reptext, expr, target;
 		m_ReplaceText->GetText( reptext, true );
 		m_RecentFindText->AddFileToHistory( text );
 
@@ -1097,9 +1097,11 @@ void MadSearchReplaceDialog::WxButtonReplaceClick( wxCommandEvent& WXUNUSED(even
 				if( ( ret == RR_REP_NEXT || ret == RR_NREP_NEXT ) && ( IsMacroRecording() ) )
 				{
 					expr = text;
+					target = reptext;
 					MadSearchEscapeString(expr, bRegex);
+					MadSearchEscapeString(target, bRegex);
 
-					wxString fnstr( wxString::Format( wxT( "ReplaceText(\"%s\", \"%s\", %s, %s, %s, %s, %s, %s)" ), expr.c_str(), reptext.c_str(),
+					wxString fnstr( wxString::Format( wxT( "ReplaceText(\"%s\", \"%s\", %s, %s, %s, %s, %s, %s)" ), expr.c_str(), target.c_str(),
 													  bRegex ? wxT( "True" ) : wxT( "False" ),
 													  WxCheckBoxCaseSensitive->GetValue() ? wxT( "True" ) : wxT( "False" ),
 													  bWholeWord ? wxT( "True" ) : wxT( "False" ),
@@ -1134,7 +1136,7 @@ void MadSearchReplaceDialog::WxButtonReplaceClick( wxCommandEvent& WXUNUSED(even
 					{
 						if( WxCheckBoxFindHex->GetValue() )
 						{
-							RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "ReplaceHex(\"%s\", \"%s\", %s, %s)" ), expr.c_str(), reptext.c_str(), ( wxLongLong( rangeFrom ).ToString() ).c_str(), ( wxLongLong( rangeTo ).ToString() ).c_str() ) );
+							RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "ReplaceHex(\"%s\", \"%s\", %s, %s)" ), text.c_str(), reptext.c_str(), ( wxLongLong( rangeFrom ).ToString() ).c_str(), ( wxLongLong( rangeTo ).ToString() ).c_str() ) );
 						}
 						else
 						{
@@ -1142,9 +1144,12 @@ void MadSearchReplaceDialog::WxButtonReplaceClick( wxCommandEvent& WXUNUSED(even
 
 							if( bRegex ) bWholeWord = false;
 							else bDotMatchNewline = false;
+							expr = text;
+							target = reptext;
 							MadSearchEscapeString(expr, bRegex);
+							MadSearchEscapeString(target, bRegex);
 
-							wxString fnstr( wxString::Format( wxT( "ReplaceText(\"%s\", \"%s\", %s, %s, %s, %s, %s, %s)" ), expr.c_str(), reptext.c_str(),
+							wxString fnstr( wxString::Format( wxT( "ReplaceText(\"%s\", \"%s\", %s, %s, %s, %s, %s, %s)" ), expr.c_str(), target.c_str(),
 															  bRegex ? wxT( "True" ) : wxT( "False" ),
 															  WxCheckBoxCaseSensitive->GetValue() ? wxT( "True" ) : wxT( "False" ),
 															  bWholeWord ? wxT( "True" ) : wxT( "False" ),
