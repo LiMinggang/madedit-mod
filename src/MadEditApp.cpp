@@ -25,7 +25,7 @@
 #include <wx/cmdline.h>
 #include <wx/settings.h>
 
-IMPLEMENT_APP( MadEditApp )
+wxIMPLEMENT_APP(MadEditApp);
 
 extern int MadMessageBox( const wxString& message,
 						  const wxString& caption = wxMessageBoxCaptionStr,
@@ -108,7 +108,7 @@ static const wxCmdLineEntryDesc g_cmdLineDesc [] =
 };
 
 extern const size_t g_LanguageCount = sizeof( g_LanguageValue ) / sizeof( int );
-//wxIMPLEMENT_APP(MadEditApp);
+
 #ifdef __WXMSW__
 const wxString g_MadServerStr = wxT( "MadMainApp" );
 #else  //Linux

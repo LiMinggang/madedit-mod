@@ -30,7 +30,7 @@
 #include "../images/checked_dis.xpm"
 #include "../images/unchecked_dis.xpm"
 
-IMPLEMENT_CLASS(wxCheckedListCtrl, wxListCtrl)
+wxIMPLEMENT_CLASS(wxCheckedListCtrl, wxListCtrl);
 
 DEFINE_EVENT_TYPE(wxEVT_COMMAND_LIST_ITEM_CHECKED);
 DEFINE_EVENT_TYPE(wxEVT_COMMAND_LIST_ITEM_UNCHECKED);
