@@ -332,7 +332,7 @@ char ** g_MadIcons[] =
 };
 
 extern void ScanForLocales();
-extern wxArrayString g_LanguageString;
+extern std::vector<wxString> g_LanguageString;
 
 #if wxCHECK_VERSION(2,7,0)
 	#define GetAccelFromString(x) wxAcceleratorEntry::Create(x)
@@ -8394,8 +8394,8 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& WXUNUSED(event) )
 		wxString lang = g_OptionsDialog->ComboBoxLanguage->GetValue();
 		g_OptionsDialog->ComboBoxLanguage->Clear();
 		g_OptionsDialog->ComboBoxLanguage->Append( g_LanguageString );
-
-		if( wxNOT_FOUND == g_LanguageString.Index( lang ) ) g_OptionsDialog->ComboBoxLanguage->SetValue( g_LanguageString[0] );
+		std::vector<wxString>::iterator it = find(g_LanguageString.begin(), g_LanguageString.end(), lang);
+		if(it == g_LanguageString.end()) g_OptionsDialog->ComboBoxLanguage->SetValue( g_LanguageString[0] );
 		else g_OptionsDialog->ComboBoxLanguage->SetValue( lang );
 	}
 
