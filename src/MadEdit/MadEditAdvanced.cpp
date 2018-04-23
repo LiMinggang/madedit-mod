@@ -1020,7 +1020,7 @@ void MadEdit::Capitalize()
 			size_t pos = tkz.GetPosition();
 			size_t TokenStart = pos - token.Length();
 
-			if( pos != lastPos )  TokenStart -= 1;
+			if( pos != lastPos ) TokenStart -= 1;
 
 			size_t i = TokenStart, count = token.Length() + TokenStart;
 			int c = text[i];

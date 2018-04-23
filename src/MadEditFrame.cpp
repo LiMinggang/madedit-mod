@@ -3710,7 +3710,6 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 	}
 
 	m_Closing = true;
-	g_CheckModTimeForReload = false;
 
 	if( event.CanVeto() )
 	{
@@ -3721,6 +3720,8 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 			return;
 		}
 	}
+
+	g_CheckModTimeForReload = false;
 
 	wxTheApp->DeletePendingEvents();
 
@@ -4221,7 +4222,7 @@ void MadEditFrame::OnActivate( wxActivateEvent &evt )
 {
 	DBOUT( "MadEditFrame::OnActivate\n" );
 
-	if( evt.GetActive() && g_ActiveMadEdit )
+	if( g_CheckModTimeForReload && evt.GetActive() && g_ActiveMadEdit )
 	{
 		//g_ActiveMadEdit->SetFocus();
 		g_ActiveMadEdit->ReloadByModificationTime( true );
@@ -4922,7 +4923,8 @@ bool MadEditFrame::QueryCloseAllFiles()
 	MadEdit *madedit = nullptr;
 	wxString fname;
 	std::set< long >::iterator it;
-	madedit = ( MadEdit* )m_Notebook->GetPage( selid );
+	madedit = = dynamic_cast< MadEdit* >(m_Notebook->GetPage( id ));
+	wxASSERT(madedit != 0);
 
 	if( madedit->IsModified() )
 	{
