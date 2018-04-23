@@ -4920,10 +4920,9 @@ bool MadEditFrame::QueryCloseAllFiles()
 	}
 
 	// From now on, won't ask user if ItemCount > 1 && ask = false
-	MadEdit *madedit = nullptr;
 	wxString fname;
 	std::set< long >::iterator it;
-	madedit = = dynamic_cast< MadEdit* >(m_Notebook->GetPage( id ));
+	MadEdit *madedit = dynamic_cast< MadEdit* >(m_Notebook->GetPage( selid ));
 	wxASSERT(madedit != 0);
 
 	if( madedit->IsModified() )
