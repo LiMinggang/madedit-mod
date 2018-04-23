@@ -76,7 +76,7 @@ class EncSort
 public:  
   
 	// Return whether first element is less than the second  
-    bool operator () (MadEncodingInfo& a, MadEncodingInfo& b) const  
+    bool operator () (const MadEncodingInfo& a, const MadEncodingInfo& b) const  
 	{  
 		 return (a.m_Name.Cmp(b.m_Name) < 0);  
 	};  
