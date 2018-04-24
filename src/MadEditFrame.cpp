@@ -3723,8 +3723,6 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 
 	g_CheckModTimeForReload = false;
 
-	wxTheApp->DeletePendingEvents();
-
 	// save ReloadFilesList
 	wxString files;
 	bool bb = m_ReloadFiles;
@@ -3918,8 +3916,11 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 
 	if( g_MadToolHtmlWin ) { delete g_MadToolHtmlWin; }
 
+	m_AutoSaveTimer.Stop();
+	m_AutoSaveTimer.DeletePendingEvents();
 	g_ActiveMadEdit = 0;
 	g_MainFrame = 0;
+	DeletePendingEvents();
 	event.Skip();
 }
 

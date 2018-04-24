@@ -1056,6 +1056,8 @@ MadEdit::~MadEdit()
 
 	delete m_ClientBitmap;
 	delete m_MarkBitmap;
+	m_MouseMotionTimer->Stop();
+	m_MouseMotionTimer->DeletePendingEvents();
 	delete m_MouseMotionTimer;
 }
 

@@ -580,6 +580,8 @@ int MadEditApp::OnExit()
 		g_Locale = nullptr;
 	}
 
+	DeletePendingEvents();
+
 	delete wxFileConfig::Set((wxConfigBase *)nullptr);
 
 	return 0;
