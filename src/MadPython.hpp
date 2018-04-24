@@ -439,6 +439,12 @@ namespace mad_python {
 			}
 		}
 
+		void InsertNewline( ) {
+			if(( g_ActiveMadEdit ) && ( !g_ActiveMadEdit->IsReadOnly() )) {
+				g_ActiveMadEdit->ProcessCommand( ecReturn );
+			}
+		}
+
 		void InsertIncrementalNumber( long initial, long step, long total, long stepType,
 									  long fmt, long align, bool zeroPad, const std::string & pref, const std::string & post ) {
 			if( ( g_ActiveMadEdit ) && ( !g_ActiveMadEdit->IsReadOnly() ) ) {
@@ -2059,6 +2065,7 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.def( "GetLineByPos", &PyMadEdit::GetLineByPos, "" )
 	.def( "GetSelHexString", &PyMadEdit::GetSelHexString, "" )
 	.def( "GetWordFromCaretPos", &PyMadEdit::GetWordFromCaretPos, return_value_policy<return_by_value>(), "" )
+	.def( "InsertNewline", &PyMadEdit::InsertNewline, "" )
 	.def( "Delete", &PyMadEdit::Delete, "" )
 	.def( "CutLine", &PyMadEdit::CutLine, "" )
 	.def( "DeleteLine", &PyMadEdit::DeleteLine, "" )
