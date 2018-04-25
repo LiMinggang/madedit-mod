@@ -3920,7 +3920,8 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 	m_AutoSaveTimer.DeletePendingEvents();
 	g_ActiveMadEdit = 0;
 	g_MainFrame = 0;
-	DeletePendingEvents();
+	Unbind( wxEVT_ACTIVATE, &MadEditFrame::OnActivate, this );
+	Unbind( wxEVT_TIMER, &MadEditFrame::OnTimer, this, ID_WXTIMER );
 	event.Skip();
 }
 
