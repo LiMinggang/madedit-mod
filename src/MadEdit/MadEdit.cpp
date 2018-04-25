@@ -1034,7 +1034,6 @@ MadEdit::~MadEdit()
 {
 	--ms_Count;
 
-	DeletePendingEvents();
 	if( ms_Count == 0 )
 	{
 		wxSetCursor( wxNullCursor ); // reset to default
@@ -1059,6 +1058,7 @@ MadEdit::~MadEdit()
 	m_MouseMotionTimer->Stop();
 	m_MouseMotionTimer->DeletePendingEvents();
 	delete m_MouseMotionTimer;
+	DeletePendingEvents();
 }
 
 //==================================================
