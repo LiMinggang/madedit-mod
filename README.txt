@@ -129,6 +129,7 @@ Fix: GB18030 not work under Linux
 Fix: Regex replace bug, eg, replace "\r\n" with "\\n"
 Fix: MadPython Recording issue
 Fix: Chars escape for regex recording
+Fix: Unbind critial message handlers during OnClose
 Update Astyle to latest code
 
 Mod v0.4.12
