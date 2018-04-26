@@ -31,28 +31,28 @@
 #endif
 
 extern int MadMessageBox(const wxString& message,
-                             const wxString& caption = wxMessageBoxCaptionStr,
-                             long style = wxOK | wxCENTRE,
-                             wxWindow *parent = nullptr,
-                             int x = wxDefaultCoord, int y = wxDefaultCoord);
+							 const wxString& caption = wxMessageBoxCaptionStr,
+							 long style = wxOK | wxCENTRE,
+							 wxWindow *parent = nullptr,
+							 int x = wxDefaultCoord, int y = wxDefaultCoord);
 extern void ApplySyntaxAttributes(MadSyntax *syn);
 
 MadHighlightingDialog *g_HighlightingDialog=nullptr;
 
 enum
 {
-    kindSysAttr1, kindSysAttr2/*aeActiveLine, aeBookmark*/, kindRange, kindKeyword
+	kindSysAttr1, kindSysAttr2/*aeActiveLine, aeBookmark*/, kindRange, kindKeyword
 };
 
 struct KeywordInfo
 {
-    int kind;
-    MadAttributes *attr; // for kindSysAttr1, kindSysArrt2, kindKeyword
-    wxColour *range_bgcolor; // for kindRange
-    KeywordInfo(): kind(0), attr(0), range_bgcolor(0)
-    {}
-    KeywordInfo(int k, MadAttributes *a, wxColour *bg): kind(k), attr(a), range_bgcolor(bg)
-    {}
+	int kind;
+	MadAttributes *attr; // for kindSysAttr1, kindSysArrt2, kindKeyword
+	wxColour *range_bgcolor; // for kindRange
+	KeywordInfo(): kind(0), attr(0), range_bgcolor(0)
+	{}
+	KeywordInfo(int k, MadAttributes *a, wxColour *bg): kind(k), attr(a), range_bgcolor(bg)
+	{}
 };
 vector<KeywordInfo> g_KeywordInfoTable;
 long g_Index=-1;
@@ -62,86 +62,86 @@ int g_DefaultFontSize;
 
 wxColour GetColourFromUser(const wxColour& colInit, const wxString& caption)
 {
-    if(g_ColourDialog==nullptr)
-    {
-        wxColourData *data=new wxColourData;
-        data->SetChooseFull(true);
-        if ( colInit.Ok() )
-        {
-            data->SetColour((wxColour &)colInit); // const_cast
-        }
-        g_ColourDialog = new wxColourDialog(g_HighlightingDialog, data);
-    }
-    else
-    {
-        if ( colInit.Ok() )
-        {
-            g_ColourDialog->GetColourData().SetColour(colInit);
-        }
-    }
+	if(g_ColourDialog==nullptr)
+	{
+		wxColourData *data=new wxColourData;
+		data->SetChooseFull(true);
+		if ( colInit.Ok() )
+		{
+			data->SetColour((wxColour &)colInit); // const_cast
+		}
+		g_ColourDialog = new wxColourDialog(g_HighlightingDialog, data);
+	}
+	else
+	{
+		if ( colInit.Ok() )
+		{
+			g_ColourDialog->GetColourData().SetColour(colInit);
+		}
+	}
 
-    if (!caption.IsEmpty())
-        g_ColourDialog->SetTitle(caption);
+	if (!caption.IsEmpty())
+		g_ColourDialog->SetTitle(caption);
 
-    wxColour colRet;
-    if ( g_ColourDialog->ShowModal() == wxID_OK )
-    {
-        colRet = g_ColourDialog->GetColourData().GetColour();
-    }
+	wxColour colRet;
+	if ( g_ColourDialog->ShowModal() == wxID_OK )
+	{
+		colRet = g_ColourDialog->GetColourData().GetColour();
+	}
 
-    return colRet;
+	return colRet;
 }
 
 void SetItemColour(wxListCtrl* listctrl, long item, const wxColour& fc, const wxColour& bc)
 {
-    wxListItem it;
-    it.SetId(item);
-    listctrl->GetItem(it);
-    it.SetTextColour(fc);
-    it.SetBackgroundColour(bc);
-    listctrl->SetItem(it);
+	wxListItem it;
+	it.SetId(item);
+	listctrl->GetItem(it);
+	it.SetTextColour(fc);
+	it.SetBackgroundColour(bc);
+	listctrl->SetItem(it);
 }
 
 void SetItemTextColour(wxListCtrl* listctrl, long item, const wxColour& fc)
 {
-    wxListItem it;
-    it.SetId(item);
-    listctrl->GetItem(it);
-    it.SetTextColour(fc);
-    listctrl->SetItem(it);
+	wxListItem it;
+	it.SetId(item);
+	listctrl->GetItem(it);
+	it.SetTextColour(fc);
+	listctrl->SetItem(it);
 }
 void SetItemBackgroundColour(wxListCtrl* listctrl, long item, const wxColour& bc)
 {
-    wxListItem it;
-    it.SetId(item);
-    listctrl->GetItem(it);
-    it.SetBackgroundColour(bc);
-    listctrl->SetItem(it);
+	wxListItem it;
+	it.SetId(item);
+	listctrl->GetItem(it);
+	it.SetBackgroundColour(bc);
+	listctrl->SetItem(it);
 }
 
 void SetFontStyle(wxFont &font, MadFontStyles fs)
 {
-    if((fs&fsBold)!=0)  font.SetWeight(wxFONTWEIGHT_BOLD);
-    else                font.SetWeight(wxFONTWEIGHT_NORMAL);
-    if((fs&fsItalic)!=0) font.SetStyle(wxFONTSTYLE_ITALIC);
-    else                 font.SetStyle(wxFONTSTYLE_NORMAL);
-    font.SetUnderlined((fs&fsUnderline)!=0);
+	if((fs&fsBold)!=0)  font.SetWeight(wxFONTWEIGHT_BOLD);
+	else				font.SetWeight(wxFONTWEIGHT_NORMAL);
+	if((fs&fsItalic)!=0) font.SetStyle(wxFONTSTYLE_ITALIC);
+	else				 font.SetStyle(wxFONTSTYLE_NORMAL);
+	font.SetUnderlined((fs&fsUnderline)!=0);
 }
 wxFont GetItemFont(wxListCtrl *listctrl, long item)
 {
-    wxListItem it;
-    it.SetId(item);
-    listctrl->GetItem(it);
-    return it.GetFont();
+	wxListItem it;
+	it.SetId(item);
+	listctrl->GetItem(it);
+	return it.GetFont();
 }
 void SetItemFont(wxListCtrl *listctrl, long item, wxFont &font)
 {
-    wxListItem it;
-    it.SetId(item);
-    listctrl->GetItem(it);
-    font.SetPointSize(g_DefaultFontSize);
-    it.SetFont(font);
-    listctrl->SetItem(it);
+	wxListItem it;
+	it.SetId(item);
+	listctrl->GetItem(it);
+	font.SetPointSize(g_DefaultFontSize);
+	it.SetFont(font);
+	listctrl->SetItem(it);
 }
 
 //(*IdInit(MadHighlightingDialog)
@@ -269,64 +269,64 @@ MadHighlightingDialog::MadHighlightingDialog(wxWindow* parent,wxWindowID WXUNUSE
 	WxListCtrlKeyword->SetWindowStyle(WxListCtrlKeyword->GetWindowStyle() & ~wxALWAYS_SHOW_SB);
 #endif
 
-    {   // build scheme list
-        size_t cnt=MadSyntax::GetSchemeCount();
-        for(size_t i=0;i<cnt;++i)
-        {
-            wxString name=MadSyntax::GetSchemeName(i);
-            WxComboBoxScheme->Append(name);
-            if(i==0) WxComboBoxScheme->SetValue(name);
-        }
-    }
+	{   // build scheme list
+		size_t cnt=MadSyntax::GetSchemeCount();
+		for(size_t i=0;i<cnt;++i)
+		{
+			wxString name=MadSyntax::GetSchemeName(i);
+			WxComboBoxScheme->Append(name);
+			if(i==0) WxComboBoxScheme->SetValue(name);
+		}
+	}
 
-    {   // build syntax type list
-        size_t cnt=MadSyntax::GetSyntaxCount();
-        for(size_t i=0;i<cnt;++i)
-        {
-            WxListBoxSyntax->Append(MadSyntax::GetSyntaxTitle(i));
-        }
-    }
+	{   // build syntax type list
+		size_t cnt=MadSyntax::GetSyntaxCount();
+		for(size_t i=0;i<cnt;++i)
+		{
+			WxListBoxSyntax->Append(MadSyntax::GetSyntaxTitle(i));
+		}
+	}
 
-    g_DefaultFontSize=WxListCtrlKeyword->GetFont().GetPointSize();
-    WxListCtrlKeyword->InsertColumn(0, wxT("first column"));
+	g_DefaultFontSize=WxListCtrlKeyword->GetFont().GetPointSize();
+	WxListCtrlKeyword->InsertColumn(0, wxT("first column"));
 
-    // build color list
-    WxListCtrlFC->Hide();
-    WxListCtrlBC->Hide();
-    WxListCtrlFC->InsertColumn(0, wxT("first column"));
-    WxListCtrlBC->InsertColumn(0, wxT("first column"));
+	// build color list
+	WxListCtrlFC->Hide();
+	WxListCtrlBC->Hide();
+	WxListCtrlFC->InsertColumn(0, wxT("first column"));
+	WxListCtrlBC->InsertColumn(0, wxT("first column"));
 
-    wxListItem it;
-    it.SetColumn(0);
-    it.SetId(0);
-    it.SetText(_("(Automatic)"));
-    it.SetTextColour(wxT("Red"));
-    WxListCtrlFC->InsertItem(it);
-    WxListCtrlBC->InsertItem(it);
+	wxListItem it;
+	it.SetColumn(0);
+	it.SetId(0);
+	it.SetText(_("(Automatic)"));
+	it.SetTextColour(wxT("Red"));
+	WxListCtrlFC->InsertItem(it);
+	WxListCtrlBC->InsertItem(it);
 
-    HtmlColor *hc=HtmlColorTable;
-    for(int i=0; i<HtmlColorTableCount; ++i, ++hc)
-    {
-        it.SetText(wxGetTranslation(hc->name));
-        it.SetId(i+1);
+	HtmlColor *hc=HtmlColorTable;
+	for(int i=0; i<HtmlColorTableCount; ++i, ++hc)
+	{
+		it.SetText(wxGetTranslation(hc->name));
+		it.SetId(i+1);
 
-        wxColor c(wxColor(hc->red, hc->green, hc->blue));
-        it.SetTextColour(c);
-        it.SetBackgroundColour(wxNullColour);
-        WxListCtrlFC->InsertItem(it);
+		wxColor c(wxColor(hc->red, hc->green, hc->blue));
+		it.SetTextColour(c);
+		it.SetBackgroundColour(wxNullColour);
+		WxListCtrlFC->InsertItem(it);
 
-        if((hc->red+hc->green+hc->blue)/3 >= 128)
-            it.SetTextColour(*wxBLACK);
-        else
-            it.SetTextColour(*wxWHITE);
-        it.SetBackgroundColour(c);
-        WxListCtrlBC->InsertItem(it);
-    }
+		if((hc->red+hc->green+hc->blue)/3 >= 128)
+			it.SetTextColour(*wxBLACK);
+		else
+			it.SetTextColour(*wxWHITE);
+		it.SetBackgroundColour(c);
+		WxListCtrlBC->InsertItem(it);
+	}
 
-    WxListCtrlFC->SetColumnWidth( 0, wxLIST_AUTOSIZE );
-    WxListCtrlBC->SetColumnWidth( 0, wxLIST_AUTOSIZE );
-    WxListCtrlFC->Show();
-    WxListCtrlBC->Show();
+	WxListCtrlFC->SetColumnWidth( 0, wxLIST_AUTOSIZE );
+	WxListCtrlBC->SetColumnWidth( 0, wxLIST_AUTOSIZE );
+	WxListCtrlFC->Show();
+	WxListCtrlBC->Show();
 }
 
 MadHighlightingDialog::~MadHighlightingDialog()
@@ -338,125 +338,126 @@ MadHighlightingDialog::~MadHighlightingDialog()
 
 void MadHighlightingDialog::MadHighlightingDialogClose(wxCloseEvent& event)
 {
-    if(event.CanVeto() && (nullptr != dynamic_cast< wxFrame * >(wxTheApp->GetTopWindow())))
-    {
-        event.Veto();
-        Show(false);
-        return;
-    }
+	if(event.CanVeto() && (nullptr != dynamic_cast< wxFrame * >(wxTheApp->GetTopWindow())))
+	{
+		event.Veto();
+		Show(false);
+		return;
+	}
 
-    FreeSyntax(false);
-    g_HighlightingDialog=nullptr;
-    if(g_ColourDialog) delete g_ColourDialog;
-    Destroy();
+	FreeSyntax(false);
+	g_HighlightingDialog=nullptr;
+	if(g_ColourDialog) delete g_ColourDialog;
+	Destroy();
 }
 
 void MadHighlightingDialog::WxListBoxSyntaxSelected(wxCommandEvent& event)
 {
-    wxString title=WxListBoxSyntax->GetString(event.GetSelection());
-    g_Syntax=GetSyntax(title);
+	wxString title=WxListBoxSyntax->GetString(event.GetSelection());
+	g_Syntax=GetSyntax(title);
+	wxASSERT(g_Syntax != nullptr);
 
-    // build keyword list
-    WxListCtrlKeyword->Freeze();
-    WxListCtrlKeyword->DeleteAllItems();
-    g_KeywordInfoTable.clear();
-    int index=0;
+	// build keyword list
+	WxListCtrlKeyword->Freeze();
+	WxListCtrlKeyword->DeleteAllItems();
+	g_KeywordInfoTable.clear();
+	int index=0;
 
-    // system attributes
-    for(int ae=aeText; ae<aeNone; ++ae)
-    {
-        long item = WxListCtrlKeyword->InsertItem(index++, MadSyntax::GetAttributeName((MadAttributeElement)ae));
-        MadAttributes *attr = g_Syntax->GetAttributes((MadAttributeElement)ae);
-        int kind=kindSysAttr1;
-        if(ae==aeActiveLine || ae==aeBookmark) kind=kindSysAttr2;
-        g_KeywordInfoTable.push_back(KeywordInfo(kind, attr, nullptr));
+	// system attributes
+	for(int ae=aeText; ae<aeNone; ++ae)
+	{
+		long item = WxListCtrlKeyword->InsertItem(index++, MadSyntax::GetAttributeName((MadAttributeElement)ae));
+		MadAttributes *attr = g_Syntax->GetAttributes((MadAttributeElement)ae);
+		int kind=kindSysAttr1;
+		if(ae==aeActiveLine || ae==aeBookmark) kind=kindSysAttr2;
+		g_KeywordInfoTable.push_back(KeywordInfo(kind, attr, nullptr));
 
-        if(ae==aeText)
-        {
-            WxListCtrlKeyword->SetBackgroundColour(attr->bgcolor);
-        }
+		if(ae==aeText)
+		{
+			WxListCtrlKeyword->SetBackgroundColour(attr->bgcolor);
+		}
 
-        SetItemColour(WxListCtrlKeyword, item, attr->color, attr->bgcolor);
-        wxFont font=GetItemFont(WxListCtrlKeyword, item);
-        SetFontStyle(font, attr->style);
-        SetItemFont(WxListCtrlKeyword, item, font);
-    }
-    
-    // custom ranges
-    size_t i;
-    for(i=0; i<g_Syntax->m_CustomRange.size(); ++i)
-    {
-        wxString text;
-        text.Printf(wxT("Range %s %s"), g_Syntax->m_CustomRange[i].begin.c_str(), g_Syntax->m_CustomRange[i].end.c_str());
-        long item = WxListCtrlKeyword->InsertItem(index++, text);
-        wxColour *bg = &(g_Syntax->m_CustomRange[i].bgcolor);
-        g_KeywordInfoTable.push_back( KeywordInfo(kindRange, nullptr, bg) );
-        SetItemColour(WxListCtrlKeyword, item, g_KeywordInfoTable[0].attr->color, *bg);
-    }
-    
-    // custom keywords
-    for(i=0; i<g_Syntax->m_CustomKeyword.size(); ++i)
-    {
-        long item = WxListCtrlKeyword->InsertItem(index++, g_Syntax->m_CustomKeyword[i].m_Name);
-        MadAttributes *attr = &(g_Syntax->m_CustomKeyword[i].m_Attr);
-        g_KeywordInfoTable.push_back(KeywordInfo(kindKeyword, attr, nullptr));
+		SetItemColour(WxListCtrlKeyword, item, attr->color, attr->bgcolor);
+		wxFont font=GetItemFont(WxListCtrlKeyword, item);
+		SetFontStyle(font, attr->style);
+		SetItemFont(WxListCtrlKeyword, item, font);
+	}
+	
+	// custom ranges
+	size_t i;
+	for(i=0; i<g_Syntax->m_CustomRange.size(); ++i)
+	{
+		wxString text;
+		text.Printf(wxT("Range %s %s"), g_Syntax->m_CustomRange[i].begin.c_str(), g_Syntax->m_CustomRange[i].end.c_str());
+		long item = WxListCtrlKeyword->InsertItem(index++, text);
+		wxColour *bg = &(g_Syntax->m_CustomRange[i].bgcolor);
+		g_KeywordInfoTable.push_back( KeywordInfo(kindRange, nullptr, bg) );
+		SetItemColour(WxListCtrlKeyword, item, g_KeywordInfoTable[0].attr->color, *bg);
+	}
+	
+	// custom keywords
+	for(i=0; i<g_Syntax->m_CustomKeyword.size(); ++i)
+	{
+		long item = WxListCtrlKeyword->InsertItem(index++, g_Syntax->m_CustomKeyword[i].m_Name);
+		MadAttributes *attr = &(g_Syntax->m_CustomKeyword[i].m_Attr);
+		g_KeywordInfoTable.push_back(KeywordInfo(kindKeyword, attr, nullptr));
 
-        SetItemColour(WxListCtrlKeyword, item, attr->color, attr->bgcolor);
-        wxFont font=GetItemFont(WxListCtrlKeyword, item);
-        SetFontStyle(font, attr->style);
-        SetItemFont(WxListCtrlKeyword, item, font);
-    }
+		SetItemColour(WxListCtrlKeyword, item, attr->color, attr->bgcolor);
+		wxFont font=GetItemFont(WxListCtrlKeyword, item);
+		SetFontStyle(font, attr->style);
+		SetItemFont(WxListCtrlKeyword, item, font);
+	}
 
-    WxListCtrlKeyword->SetColumnWidth( 0, WxListCtrlKeyword->GetClientSize().x - 4);
-    WxListCtrlKeyword->Thaw();
+	WxListCtrlKeyword->SetColumnWidth( 0, WxListCtrlKeyword->GetClientSize().x - 4);
+	WxListCtrlKeyword->Thaw();
 
-    g_Index=-1;
-    wxListEvent e;
-    e.m_itemIndex=0;
-    WxListCtrlKeywordSelected(e);
+	g_Index=-1;
+	wxListEvent e;
+	e.m_itemIndex=0;
+	WxListCtrlKeywordSelected(e);
 }
 
 
 void MadHighlightingDialog::SetPanelFC(const wxColor &color)
 {
-    if(color==wxNullColour)
-    {
-        WxStaticTextFCName->SetLabel(wxT("(Automatic)"));
-        WxPanelFC->SetBackgroundColour(WxListCtrlFC->GetItemTextColour(0));
-        WxPanelFC->ClearBackground();
-    }
-    else
-    {
-        wxString cname=wxTheColourDatabase->FindName(color);
-        if(cname.IsEmpty())
-        {
-            cname.Printf(wxT("#%02X%02X%02X"), color.Red(), color.Green(), color.Blue());
-        }
-        WxStaticTextFCName->SetLabel(cname);
-        WxPanelFC->SetBackgroundColour(color);
-        WxPanelFC->ClearBackground();
-    }
+	if(color==wxNullColour)
+	{
+		WxStaticTextFCName->SetLabel(wxT("(Automatic)"));
+		WxPanelFC->SetBackgroundColour(WxListCtrlFC->GetItemTextColour(0));
+		WxPanelFC->ClearBackground();
+	}
+	else
+	{
+		wxString cname=wxTheColourDatabase->FindName(color);
+		if(cname.IsEmpty())
+		{
+			cname.Printf(wxT("#%02X%02X%02X"), color.Red(), color.Green(), color.Blue());
+		}
+		WxStaticTextFCName->SetLabel(cname);
+		WxPanelFC->SetBackgroundColour(color);
+		WxPanelFC->ClearBackground();
+	}
 }
 
 void MadHighlightingDialog::SetPanelBC(const wxColor &color)
 {
-    if(color==wxNullColour)
-    {
-        WxStaticTextBCName->SetLabel(wxT("(Automatic)"));
-        WxPanelBC->SetBackgroundColour(WxListCtrlBC->GetItemBackgroundColour(0));
-        WxPanelBC->ClearBackground();
-    }
-    else
-    {
-        wxString cname=wxTheColourDatabase->FindName(color);
-        if(cname.IsEmpty())
-        {
-            cname.Printf(wxT("#%02X%02X%02X"), color.Red(), color.Green(), color.Blue());
-        }
-        WxStaticTextBCName->SetLabel(cname);
-        WxPanelBC->SetBackgroundColour(color);
-        WxPanelBC->ClearBackground();
-    }
+	if(color==wxNullColour)
+	{
+		WxStaticTextBCName->SetLabel(wxT("(Automatic)"));
+		WxPanelBC->SetBackgroundColour(WxListCtrlBC->GetItemBackgroundColour(0));
+		WxPanelBC->ClearBackground();
+	}
+	else
+	{
+		wxString cname=wxTheColourDatabase->FindName(color);
+		if(cname.IsEmpty())
+		{
+			cname.Printf(wxT("#%02X%02X%02X"), color.Red(), color.Green(), color.Blue());
+		}
+		WxStaticTextBCName->SetLabel(cname);
+		WxPanelBC->SetBackgroundColour(color);
+		WxPanelBC->ClearBackground();
+	}
 }
 
 /*
@@ -464,103 +465,103 @@ void MadHighlightingDialog::SetPanelBC(const wxColor &color)
  */
 void MadHighlightingDialog::WxListCtrlKeywordSelected(wxListEvent& event)
 {
-    long oldIndex=g_Index;
-    g_Index = event.m_itemIndex;
+	long oldIndex=g_Index;
+	g_Index = event.m_itemIndex;
 
-    WxListCtrlKeyword->Freeze();
-    WxListCtrlFC->Freeze();
+	WxListCtrlKeyword->Freeze();
+	WxListCtrlFC->Freeze();
 
-    if(oldIndex!=g_Index)
-    {
-        wxString str;
-        if(oldIndex>=0)
-        {
-            str = WxListCtrlKeyword->GetItemText(oldIndex);
-            if(str[0]==wxT('*')) 
-            {
-                WxListCtrlKeyword->SetItemText(oldIndex, str.Right(str.Len()-1));
-            }
-        }
+	if(oldIndex!=g_Index)
+	{
+		wxString str;
+		if(oldIndex>=0)
+		{
+			str = WxListCtrlKeyword->GetItemText(oldIndex);
+			if(str[0]==wxT('*')) 
+			{
+				WxListCtrlKeyword->SetItemText(oldIndex, str.Right(str.Len()-1));
+			}
+		}
 
-        str = WxListCtrlKeyword->GetItemText(g_Index);
-        WxListCtrlKeyword->SetItemText(g_Index, wxString(wxT('*'))+str);
+		str = WxListCtrlKeyword->GetItemText(g_Index);
+		WxListCtrlKeyword->SetItemText(g_Index, wxString(wxT('*'))+str);
 
-        WxListCtrlKeyword->SetColumnWidth(0, WxListCtrlKeyword->GetClientSize().x - 4);
-    }
+		WxListCtrlKeyword->SetColumnWidth(0, WxListCtrlKeyword->GetClientSize().x - 4);
+	}
 
-    KeywordInfo &kinfo=g_KeywordInfoTable[g_Index];
-    if(g_Index==0) // set (Automatic) colors
-    {
-        SetItemTextColour(WxListCtrlFC, 0, kinfo.attr->color);
-        int c = (kinfo.attr->bgcolor.Red()+kinfo.attr->bgcolor.Green()+kinfo.attr->bgcolor.Blue())/3;
-        if(c >= 128)
-        {
-            SetItemColour(WxListCtrlBC, 0, *wxBLACK, kinfo.attr->bgcolor);
-        }
-        else
-        {
-            SetItemColour(WxListCtrlBC, 0, *wxWHITE, kinfo.attr->bgcolor);
-        }
-    }
+	KeywordInfo &kinfo=g_KeywordInfoTable[g_Index];
+	if(g_Index==0) // set (Automatic) colors
+	{
+		SetItemTextColour(WxListCtrlFC, 0, kinfo.attr->color);
+		int c = (kinfo.attr->bgcolor.Red()+kinfo.attr->bgcolor.Green()+kinfo.attr->bgcolor.Blue())/3;
+		if(c >= 128)
+		{
+			SetItemColour(WxListCtrlBC, 0, *wxBLACK, kinfo.attr->bgcolor);
+		}
+		else
+		{
+			SetItemColour(WxListCtrlBC, 0, *wxWHITE, kinfo.attr->bgcolor);
+		}
+	}
 
-    wxColour bgc;
-    switch(kinfo.kind)
-    {
-    case kindSysAttr1:
-    case kindKeyword:
-        WxCheckBoxBold->Enable();
-        WxCheckBoxItalic->Enable();
-        WxCheckBoxUnderline->Enable();
-        WxCheckBoxBold->SetValue((kinfo.attr->style&fsBold)!=0);
-        WxCheckBoxItalic->SetValue((kinfo.attr->style&fsItalic)!=0);
-        WxCheckBoxUnderline->SetValue((kinfo.attr->style&fsUnderline)!=0);
-        SetPanelFC(kinfo.attr->color);
-        SetPanelBC(kinfo.attr->bgcolor);
-        WxListCtrlFC->Enable();
-        WxButtonFC->Enable();
-        WxListCtrlBC->Enable();
-        WxButtonBC->Enable();
-        bgc=kinfo.attr->bgcolor;
-        break;
-    case kindSysAttr2:
-        WxCheckBoxBold->SetValue(false);
-        WxCheckBoxItalic->SetValue(false);
-        WxCheckBoxUnderline->SetValue(false);
-        WxCheckBoxBold->Disable();
-        WxCheckBoxItalic->Disable();
-        WxCheckBoxUnderline->Disable();
-        SetPanelFC(kinfo.attr->color);
-        SetPanelBC(wxNullColour);
-        WxListCtrlFC->Enable();
-        WxButtonFC->Enable();
-        WxListCtrlBC->Disable();
-        WxButtonBC->Disable();
-        bgc=wxNullColour;
-        break;
-    case kindRange:
-        WxCheckBoxBold->SetValue(false);
-        WxCheckBoxItalic->SetValue(false);
-        WxCheckBoxUnderline->SetValue(false);
-        WxCheckBoxBold->Disable();
-        WxCheckBoxItalic->Disable();
-        WxCheckBoxUnderline->Disable();
-        SetPanelFC(wxNullColour);
-        SetPanelBC(*kinfo.range_bgcolor);
-        WxListCtrlFC->Disable();
-        WxButtonFC->Disable();
-        WxListCtrlBC->Enable();
-        WxButtonBC->Enable();
-        bgc=*kinfo.range_bgcolor;
-        break;
-    }
-    if(bgc==wxNullColour) bgc=g_KeywordInfoTable[0].attr->bgcolor;
-    WxListCtrlFC->SetBackgroundColour(bgc);
-    SetItemBackgroundColour(WxListCtrlFC, 0, bgc);
-    this->Layout();
+	wxColour bgc;
+	switch(kinfo.kind)
+	{
+	case kindSysAttr1:
+	case kindKeyword:
+		WxCheckBoxBold->Enable();
+		WxCheckBoxItalic->Enable();
+		WxCheckBoxUnderline->Enable();
+		WxCheckBoxBold->SetValue((kinfo.attr->style&fsBold)!=0);
+		WxCheckBoxItalic->SetValue((kinfo.attr->style&fsItalic)!=0);
+		WxCheckBoxUnderline->SetValue((kinfo.attr->style&fsUnderline)!=0);
+		SetPanelFC(kinfo.attr->color);
+		SetPanelBC(kinfo.attr->bgcolor);
+		WxListCtrlFC->Enable();
+		WxButtonFC->Enable();
+		WxListCtrlBC->Enable();
+		WxButtonBC->Enable();
+		bgc=kinfo.attr->bgcolor;
+		break;
+	case kindSysAttr2:
+		WxCheckBoxBold->SetValue(false);
+		WxCheckBoxItalic->SetValue(false);
+		WxCheckBoxUnderline->SetValue(false);
+		WxCheckBoxBold->Disable();
+		WxCheckBoxItalic->Disable();
+		WxCheckBoxUnderline->Disable();
+		SetPanelFC(kinfo.attr->color);
+		SetPanelBC(wxNullColour);
+		WxListCtrlFC->Enable();
+		WxButtonFC->Enable();
+		WxListCtrlBC->Disable();
+		WxButtonBC->Disable();
+		bgc=wxNullColour;
+		break;
+	case kindRange:
+		WxCheckBoxBold->SetValue(false);
+		WxCheckBoxItalic->SetValue(false);
+		WxCheckBoxUnderline->SetValue(false);
+		WxCheckBoxBold->Disable();
+		WxCheckBoxItalic->Disable();
+		WxCheckBoxUnderline->Disable();
+		SetPanelFC(wxNullColour);
+		SetPanelBC(*kinfo.range_bgcolor);
+		WxListCtrlFC->Disable();
+		WxButtonFC->Disable();
+		WxListCtrlBC->Enable();
+		WxButtonBC->Enable();
+		bgc=*kinfo.range_bgcolor;
+		break;
+	}
+	if(bgc==wxNullColour) bgc=g_KeywordInfoTable[0].attr->bgcolor;
+	WxListCtrlFC->SetBackgroundColour(bgc);
+	SetItemBackgroundColour(WxListCtrlFC, 0, bgc);
+	this->Layout();
 
-    WxListCtrlKeyword->SetItemState(event.m_itemIndex, 0, wxLIST_STATE_SELECTED);
-    WxListCtrlKeyword->Thaw();
-    WxListCtrlFC->Thaw();
+	WxListCtrlKeyword->SetItemState(event.m_itemIndex, 0, wxLIST_STATE_SELECTED);
+	WxListCtrlKeyword->Thaw();
+	WxListCtrlFC->Thaw();
 }
 
 /*
@@ -568,18 +569,18 @@ void MadHighlightingDialog::WxListCtrlKeywordSelected(wxListEvent& event)
  */
 void MadHighlightingDialog::WxListCtrlFCSelected(wxListEvent& event)
 {
-    wxString colorname=WxListCtrlFC->GetItemText(event.m_itemIndex);
-    wxColor color=WxListCtrlFC->GetItemTextColour(event.m_itemIndex);
-    WxStaticTextFCName->SetLabel(colorname);
-    this->Layout();
+	wxString colorname=WxListCtrlFC->GetItemText(event.m_itemIndex);
+	wxColor color=WxListCtrlFC->GetItemTextColour(event.m_itemIndex);
+	WxStaticTextFCName->SetLabel(colorname);
+	this->Layout();
 
-    WxPanelFC->SetBackgroundColour(color);
-    WxPanelFC->ClearBackground();
+	WxPanelFC->SetBackgroundColour(color);
+	WxPanelFC->ClearBackground();
 
-    SetAttrFC(color, colorname);
-    SetToModifiedSyntax(g_Syntax);
+	SetAttrFC(color, colorname);
+	SetToModifiedSyntax(g_Syntax);
 
-    WxListCtrlFC->SetItemState(event.m_itemIndex, 0, wxLIST_STATE_SELECTED);
+	WxListCtrlFC->SetItemState(event.m_itemIndex, 0, wxLIST_STATE_SELECTED);
 }
 
 /*
@@ -587,18 +588,18 @@ void MadHighlightingDialog::WxListCtrlFCSelected(wxListEvent& event)
  */
 void MadHighlightingDialog::WxListCtrlBCSelected(wxListEvent& event)
 {
-    wxString colorname=WxListCtrlBC->GetItemText(event.m_itemIndex);
-    wxColor color=WxListCtrlBC->GetItemBackgroundColour(event.m_itemIndex);
-    WxStaticTextBCName->SetLabel(colorname);
-    this->Layout();
+	wxString colorname=WxListCtrlBC->GetItemText(event.m_itemIndex);
+	wxColor color=WxListCtrlBC->GetItemBackgroundColour(event.m_itemIndex);
+	WxStaticTextBCName->SetLabel(colorname);
+	this->Layout();
 
-    WxPanelBC->SetBackgroundColour(color);
-    WxPanelBC->ClearBackground();
+	WxPanelBC->SetBackgroundColour(color);
+	WxPanelBC->ClearBackground();
 
-    SetAttrBC(color, colorname);
-    SetToModifiedSyntax(g_Syntax);
+	SetAttrBC(color, colorname);
+	SetToModifiedSyntax(g_Syntax);
 
-    WxListCtrlBC->SetItemState(event.m_itemIndex, 0, wxLIST_STATE_SELECTED);
+	WxListCtrlBC->SetItemState(event.m_itemIndex, 0, wxLIST_STATE_SELECTED);
 }
 
 /*
@@ -606,19 +607,19 @@ void MadHighlightingDialog::WxListCtrlBCSelected(wxListEvent& event)
  */
 void MadHighlightingDialog::WxCheckBoxBoldClick(wxCommandEvent& event)
 {
-    wxFont font=GetItemFont(WxListCtrlKeyword, g_Index);
-    if(event.IsChecked()) 
-    {
-        g_KeywordInfoTable[g_Index].attr->style |= fsBold;
-    }
-    else
-    {
-        g_KeywordInfoTable[g_Index].attr->style &= (~fsBold);
-    }
-    SetFontStyle(font, g_KeywordInfoTable[g_Index].attr->style);
-    SetItemFont(WxListCtrlKeyword, g_Index, font);
-    WxListCtrlKeyword->SetColumnWidth(0, WxListCtrlKeyword->GetClientSize().x - 4);
-    SetToModifiedSyntax(g_Syntax);
+	wxFont font=GetItemFont(WxListCtrlKeyword, g_Index);
+	if(event.IsChecked()) 
+	{
+		g_KeywordInfoTable[g_Index].attr->style |= fsBold;
+	}
+	else
+	{
+		g_KeywordInfoTable[g_Index].attr->style &= (~fsBold);
+	}
+	SetFontStyle(font, g_KeywordInfoTable[g_Index].attr->style);
+	SetItemFont(WxListCtrlKeyword, g_Index, font);
+	WxListCtrlKeyword->SetColumnWidth(0, WxListCtrlKeyword->GetClientSize().x - 4);
+	SetToModifiedSyntax(g_Syntax);
 }
 
 /*
@@ -626,19 +627,19 @@ void MadHighlightingDialog::WxCheckBoxBoldClick(wxCommandEvent& event)
  */
 void MadHighlightingDialog::WxCheckBoxItalicClick(wxCommandEvent& event)
 {
-    wxFont font=GetItemFont(WxListCtrlKeyword, g_Index);
-    if(event.IsChecked()) 
-    {
-        g_KeywordInfoTable[g_Index].attr->style |= fsItalic;
-    }
-    else
-    {
-        g_KeywordInfoTable[g_Index].attr->style &= (~fsItalic);
-    }
-    SetFontStyle(font, g_KeywordInfoTable[g_Index].attr->style);
-    SetItemFont(WxListCtrlKeyword, g_Index, font);
-    WxListCtrlKeyword->SetColumnWidth(0, WxListCtrlKeyword->GetClientSize().x - 4);
-    SetToModifiedSyntax(g_Syntax);
+	wxFont font=GetItemFont(WxListCtrlKeyword, g_Index);
+	if(event.IsChecked()) 
+	{
+		g_KeywordInfoTable[g_Index].attr->style |= fsItalic;
+	}
+	else
+	{
+		g_KeywordInfoTable[g_Index].attr->style &= (~fsItalic);
+	}
+	SetFontStyle(font, g_KeywordInfoTable[g_Index].attr->style);
+	SetItemFont(WxListCtrlKeyword, g_Index, font);
+	WxListCtrlKeyword->SetColumnWidth(0, WxListCtrlKeyword->GetClientSize().x - 4);
+	SetToModifiedSyntax(g_Syntax);
 }
 
 /*
@@ -646,19 +647,19 @@ void MadHighlightingDialog::WxCheckBoxItalicClick(wxCommandEvent& event)
  */
 void MadHighlightingDialog::WxCheckBoxUnderlineClick(wxCommandEvent& event)
 {
-    wxFont font=GetItemFont(WxListCtrlKeyword, g_Index);
-    if(event.IsChecked()) 
-    {
-        g_KeywordInfoTable[g_Index].attr->style |= fsUnderline;
-    }
-    else
-    {
-        g_KeywordInfoTable[g_Index].attr->style &= (~fsUnderline);
-    }
-    SetFontStyle(font, g_KeywordInfoTable[g_Index].attr->style);
-    SetItemFont(WxListCtrlKeyword, g_Index, font);
-    WxListCtrlKeyword->SetColumnWidth(0, WxListCtrlKeyword->GetClientSize().x - 4);
-    SetToModifiedSyntax(g_Syntax);
+	wxFont font=GetItemFont(WxListCtrlKeyword, g_Index);
+	if(event.IsChecked()) 
+	{
+		g_KeywordInfoTable[g_Index].attr->style |= fsUnderline;
+	}
+	else
+	{
+		g_KeywordInfoTable[g_Index].attr->style &= (~fsUnderline);
+	}
+	SetFontStyle(font, g_KeywordInfoTable[g_Index].attr->style);
+	SetItemFont(WxListCtrlKeyword, g_Index, font);
+	WxListCtrlKeyword->SetColumnWidth(0, WxListCtrlKeyword->GetClientSize().x - 4);
+	SetToModifiedSyntax(g_Syntax);
 }
 
 /*
@@ -666,15 +667,15 @@ void MadHighlightingDialog::WxCheckBoxUnderlineClick(wxCommandEvent& event)
  */
 void MadHighlightingDialog::WxButtonFCClick(wxCommandEvent& WXUNUSED(event))
 {
-    wxColour color=GetColourFromUser(WxListCtrlKeyword->GetItemTextColour(g_Index), WxStaticText3->GetLabel());
-    if(color.Ok())
-    {
-        SetPanelFC(color);
-        this->Layout();
-        wxString colorname=WxStaticTextFCName->GetLabel();
-        SetAttrFC(color, colorname);
-        SetToModifiedSyntax(g_Syntax);
-    }
+	wxColour color=GetColourFromUser(WxListCtrlKeyword->GetItemTextColour(g_Index), WxStaticText3->GetLabel());
+	if(color.Ok())
+	{
+		SetPanelFC(color);
+		this->Layout();
+		wxString colorname=WxStaticTextFCName->GetLabel();
+		SetAttrFC(color, colorname);
+		SetToModifiedSyntax(g_Syntax);
+	}
 }
 
 /*
@@ -682,15 +683,15 @@ void MadHighlightingDialog::WxButtonFCClick(wxCommandEvent& WXUNUSED(event))
  */
 void MadHighlightingDialog::WxButtonBCClick(wxCommandEvent& WXUNUSED(event))
 {
-    wxColour color=GetColourFromUser(WxPanelBC->GetBackgroundColour(), WxStaticText4->GetLabel());
-    if(color.Ok())
-    {
-        SetPanelBC(color);
-        this->Layout();
-        wxString colorname=WxStaticTextBCName->GetLabel();
-        SetAttrBC(color, colorname);
-        SetToModifiedSyntax(g_Syntax);
-    }
+	wxColour color=GetColourFromUser(WxPanelBC->GetBackgroundColour(), WxStaticText4->GetLabel());
+	if(color.Ok())
+	{
+		SetPanelBC(color);
+		this->Layout();
+		wxString colorname=WxStaticTextBCName->GetLabel();
+		SetAttrBC(color, colorname);
+		SetToModifiedSyntax(g_Syntax);
+	}
 }
 
 /*
@@ -698,181 +699,181 @@ void MadHighlightingDialog::WxButtonBCClick(wxCommandEvent& WXUNUSED(event))
  */
 void MadHighlightingDialog::MadHighlightingDialogActivate(wxActivateEvent& event)
 {
-    if(!m_InitSetting.IsEmpty() && event.GetActive())
-    {
-        g_Index=-1;
+	if(!m_InitSetting.IsEmpty() && event.GetActive())
+	{
+		g_Index=-1;
 
-        int i=WxListBoxSyntax->FindString(m_InitSetting);
-        if(i==wxNOT_FOUND)
-        {
-            i=WxListBoxSyntax->GetSelection();
-            if(i==wxNOT_FOUND) i=0;
-        }
-        WxListBoxSyntax->SetSelection(i);
+		int i=WxListBoxSyntax->FindString(m_InitSetting);
+		if(i==wxNOT_FOUND)
+		{
+			i=WxListBoxSyntax->GetSelection();
+			if(i==wxNOT_FOUND) i=0;
+		}
+		WxListBoxSyntax->SetSelection(i);
 
-        wxCommandEvent e;
-        e.SetInt(i);
-        WxListBoxSyntaxSelected(e);
+		wxCommandEvent e;
+		e.SetInt(i);
+		WxListBoxSyntaxSelected(e);
 
-        m_InitSetting.Empty();
+		m_InitSetting.Empty();
 
-        if(FindFocus()==nullptr)
-        {
-            WxButtonCancel->SetFocus();
-        }
-    }
+		if(FindFocus()==nullptr)
+		{
+			WxButtonCancel->SetFocus();
+		}
+	}
 }
 
 MadSyntax *MadHighlightingDialog::GetSyntax(const wxString &title)
 {
-    if(m_Syntax && m_Syntax->m_Title.CmpNoCase(title)==0)
-        return m_Syntax;
+	if(m_Syntax && m_Syntax->m_Title.CmpNoCase(title)==0)
+		return m_Syntax;
 
-    for(size_t i=0; i<m_ModifiedSyntax.size(); ++i)
-    {
-        if(m_ModifiedSyntax[i]->m_Title.CmpNoCase(title)==0)
-            return m_ModifiedSyntax[i];
-    }
+	for(size_t i=0; i<m_ModifiedSyntax.size(); ++i)
+	{
+		if(m_ModifiedSyntax[i]->m_Title.CmpNoCase(title)==0)
+			return m_ModifiedSyntax[i];
+	}
 
-    if(m_Syntax) delete m_Syntax;
-    m_Syntax=MadSyntax::GetSyntaxByTitle(title);
-	wxASSERT( m_Syntax != 0 );
-    return m_Syntax;
+	if(m_Syntax) delete m_Syntax;
+	m_Syntax=MadSyntax::GetSyntaxByTitle(title);
+	wxASSERT( m_Syntax != nullptr );
+	return m_Syntax;
 }
 
 void MadHighlightingDialog::SetToModifiedSyntax(MadSyntax *syn)
 {
-    if(syn==m_Syntax)
-    {
-        m_ModifiedSyntax.push_back(syn);
-        m_Syntax=nullptr;
-    }
-    ApplySyntaxAttributes(syn);// apply syntax attributes to editor
+	if(syn==m_Syntax)
+	{
+		m_ModifiedSyntax.push_back(syn);
+		m_Syntax=nullptr;
+	}
+	ApplySyntaxAttributes(syn);// apply syntax attributes to editor
 }
 
 void MadHighlightingDialog::SetAttrFC(const wxColor &color, const wxString &colorname)
 {
-    KeywordInfo &kinfo=g_KeywordInfoTable[g_Index];
-    if(g_Index==0)
-    {
-        SetItemTextColour(WxListCtrlFC, 0, color);
-        kinfo.attr->color=color;
-    }
-    else
-    {
-        wxASSERT(kinfo.kind!=kindRange);
-        if(colorname==wxT("(Automatic)"))
-        {
-            kinfo.attr->color=wxNullColour;
-        }
-        else
-        {
-            kinfo.attr->color=color;
-        }
-    }
-    RepaintKeyword();
+	KeywordInfo &kinfo=g_KeywordInfoTable[g_Index];
+	if(g_Index==0)
+	{
+		SetItemTextColour(WxListCtrlFC, 0, color);
+		kinfo.attr->color=color;
+	}
+	else
+	{
+		wxASSERT(kinfo.kind!=kindRange);
+		if(colorname==wxT("(Automatic)"))
+		{
+			kinfo.attr->color=wxNullColour;
+		}
+		else
+		{
+			kinfo.attr->color=color;
+		}
+	}
+	RepaintKeyword();
 }
 
 void MadHighlightingDialog::SetAttrBC(const wxColor &color, const wxString &colorname)
 {
-    KeywordInfo &kinfo=g_KeywordInfoTable[g_Index];
-    if(g_Index==0)
-    {
-        SetItemBackgroundColour(WxListCtrlBC, 0, color);
-        WxListCtrlKeyword->SetBackgroundColour(color);
-        kinfo.attr->bgcolor=color;
-    }
-    else
-    {
-        wxASSERT(kinfo.kind!=kindSysAttr2);
-        switch(kinfo.kind)
-        {
-        case kindSysAttr1:
-        case kindKeyword:
-            if(colorname==wxT("(Automatic)")) kinfo.attr->bgcolor=wxNullColour;
-            else                              kinfo.attr->bgcolor=color;
-            break;
-        case kindRange:
-            if(colorname==wxT("(Automatic)")) *kinfo.range_bgcolor=wxNullColour;
-            else                              *kinfo.range_bgcolor=color;
-            break;
-        }
-    }
-    RepaintKeyword();
+	KeywordInfo &kinfo=g_KeywordInfoTable[g_Index];
+	if(g_Index==0)
+	{
+		SetItemBackgroundColour(WxListCtrlBC, 0, color);
+		WxListCtrlKeyword->SetBackgroundColour(color);
+		kinfo.attr->bgcolor=color;
+	}
+	else
+	{
+		wxASSERT(kinfo.kind!=kindSysAttr2);
+		switch(kinfo.kind)
+		{
+		case kindSysAttr1:
+		case kindKeyword:
+			if(colorname==wxT("(Automatic)")) kinfo.attr->bgcolor=wxNullColour;
+			else							  kinfo.attr->bgcolor=color;
+			break;
+		case kindRange:
+			if(colorname==wxT("(Automatic)")) *kinfo.range_bgcolor=wxNullColour;
+			else							  *kinfo.range_bgcolor=color;
+			break;
+		}
+	}
+	RepaintKeyword();
 
-    SetItemBackgroundColour(WxListCtrlFC, 0, color);
-    WxListCtrlFC->SetBackgroundColour(color);
-    WxListCtrlFC->Refresh();
+	SetItemBackgroundColour(WxListCtrlFC, 0, color);
+	WxListCtrlFC->SetBackgroundColour(color);
+	WxListCtrlFC->Refresh();
 }
 
 void MadHighlightingDialog::RepaintKeyword()
 {
-    vector<KeywordInfo>::iterator it=g_KeywordInfoTable.begin();
-    vector<KeywordInfo>::iterator itend=g_KeywordInfoTable.end();
-    long idx=0;
-    wxFont font;
-    wxColour &fc0=it->attr->color;
-    wxColour &bc0=it->attr->bgcolor;
-    wxColour fc, bc;
-    WxListCtrlKeyword->Freeze();
-    do
-    {
-        switch(it->kind)
-        {
-        case kindSysAttr1:
-        case kindSysAttr2:
-        case kindKeyword:
-            fc=it->attr->color;
-            bc=it->attr->bgcolor;
-            font=GetItemFont(WxListCtrlKeyword, idx);
-            SetFontStyle(font, it->attr->style);
-            SetItemFont(WxListCtrlKeyword, idx, font);
-            break;
-        case kindRange:
-            fc=wxNullColour;
-            bc=*it->range_bgcolor;
-            break;
-        }
-        if(fc==wxNullColour) fc=fc0;
-        if(bc==wxNullColour) bc=bc0;
-        SetItemColour(WxListCtrlKeyword, idx, fc, bc);
-        ++idx;
-    }
-    while(++it != itend);
-    WxListCtrlKeyword->SetColumnWidth(0, WxListCtrlKeyword->GetClientSize().x - 4);
-    WxListCtrlKeyword->Thaw();
+	vector<KeywordInfo>::iterator it=g_KeywordInfoTable.begin();
+	vector<KeywordInfo>::iterator itend=g_KeywordInfoTable.end();
+	long idx=0;
+	wxFont font;
+	wxColour &fc0=it->attr->color;
+	wxColour &bc0=it->attr->bgcolor;
+	wxColour fc, bc;
+	WxListCtrlKeyword->Freeze();
+	do
+	{
+		switch(it->kind)
+		{
+		case kindSysAttr1:
+		case kindSysAttr2:
+		case kindKeyword:
+			fc=it->attr->color;
+			bc=it->attr->bgcolor;
+			font=GetItemFont(WxListCtrlKeyword, idx);
+			SetFontStyle(font, it->attr->style);
+			SetItemFont(WxListCtrlKeyword, idx, font);
+			break;
+		case kindRange:
+			fc=wxNullColour;
+			bc=*it->range_bgcolor;
+			break;
+		}
+		if(fc==wxNullColour) fc=fc0;
+		if(bc==wxNullColour) bc=bc0;
+		SetItemColour(WxListCtrlKeyword, idx, fc, bc);
+		++idx;
+	}
+	while(++it != itend);
+	WxListCtrlKeyword->SetColumnWidth(0, WxListCtrlKeyword->GetClientSize().x - 4);
+	WxListCtrlKeyword->Thaw();
 }
 
 void MadHighlightingDialog::FreeSyntax(bool restore)
 {
-    if(restore) // restore the original syntax
-    {
-        for(size_t i=0; i<m_ModifiedSyntax.size(); ++i)
-        {
-            MadSyntax *syn=MadSyntax::GetSyntaxByTitle(m_ModifiedSyntax[i]->m_Title);
-            ApplySyntaxAttributes(syn);
-            delete syn;
-        }
-    }
-    else // write the modified syntax back
-    {
-        for(size_t i=0; i<m_ModifiedSyntax.size(); ++i)
-        {
-            m_ModifiedSyntax[i]->SaveAttributes();
-        }
-    }
+	if(restore) // restore the original syntax
+	{
+		for(size_t i=0; i<m_ModifiedSyntax.size(); ++i)
+		{
+			MadSyntax *syn=MadSyntax::GetSyntaxByTitle(m_ModifiedSyntax[i]->m_Title);
+			ApplySyntaxAttributes(syn);
+			delete syn;
+		}
+	}
+	else // write the modified syntax back
+	{
+		for(size_t i=0; i<m_ModifiedSyntax.size(); ++i)
+		{
+			m_ModifiedSyntax[i]->SaveAttributes();
+		}
+	}
 
-    if(m_Syntax) 
-    {
-        delete m_Syntax;
-        m_Syntax=nullptr;
-    }
+	if(m_Syntax) 
+	{
+		delete m_Syntax;
+		m_Syntax=nullptr;
+	}
 
-    for(size_t i=0; i<m_ModifiedSyntax.size(); ++i)
-    {
-        delete m_ModifiedSyntax[i];
-    }
-    m_ModifiedSyntax.clear();
+	for(size_t i=0; i<m_ModifiedSyntax.size(); ++i)
+	{
+		delete m_ModifiedSyntax[i];
+	}
+	m_ModifiedSyntax.clear();
 }
 
 
@@ -881,20 +882,20 @@ void MadHighlightingDialog::FreeSyntax(bool restore)
  */
 void MadHighlightingDialog::WxButtonLoadClick(wxCommandEvent& WXUNUSED(event))
 {
-    if(MadSyntax::LoadScheme(WxComboBoxScheme->GetValue(), g_Syntax))
-    {
-        WxListCtrlKeyword->SetBackgroundColour(g_KeywordInfoTable[0].attr->bgcolor);
-        RepaintKeyword();
-        wxListEvent e;
-        e.m_itemIndex=g_Index;
-        WxListCtrlKeywordSelected(e);
-        
-        SetToModifiedSyntax(g_Syntax);
-    }
-    else
-    {
-        MadMessageBox(_("Cannot load this scheme."), wxT("MadEdit-Mod"), wxICON_WARNING|wxOK);
-    }
+	if(MadSyntax::LoadScheme(WxComboBoxScheme->GetValue(), g_Syntax))
+	{
+		WxListCtrlKeyword->SetBackgroundColour(g_KeywordInfoTable[0].attr->bgcolor);
+		RepaintKeyword();
+		wxListEvent e;
+		e.m_itemIndex=g_Index;
+		WxListCtrlKeywordSelected(e);
+		
+		SetToModifiedSyntax(g_Syntax);
+	}
+	else
+	{
+		MadMessageBox(_("Cannot load this scheme."), wxT("MadEdit-Mod"), wxICON_WARNING|wxOK);
+	}
 }
 
 /*
@@ -902,22 +903,22 @@ void MadHighlightingDialog::WxButtonLoadClick(wxCommandEvent& WXUNUSED(event))
  */
 void MadHighlightingDialog::WxButtonSaveClick(wxCommandEvent& WXUNUSED(event))
 {
-    wxString schname = WxComboBoxScheme->GetValue();
-    if(MadSyntax::SaveScheme(schname, g_Syntax))
-    {
-        WxComboBoxScheme->Clear();
-        size_t cnt=MadSyntax::GetSchemeCount();
-        for(size_t i=0;i<cnt;++i)
-        {
-            wxString name=MadSyntax::GetSchemeName(i);
-            WxComboBoxScheme->Append(name);
-        }
-        WxComboBoxScheme->SetValue(schname);
-    }
-    else
-    {
-        MadMessageBox(_("Cannot save to the scheme."), wxT("MadEdit-Mod"), wxICON_WARNING|wxOK);
-    }
+	wxString schname = WxComboBoxScheme->GetValue();
+	if(MadSyntax::SaveScheme(schname, g_Syntax))
+	{
+		WxComboBoxScheme->Clear();
+		size_t cnt=MadSyntax::GetSchemeCount();
+		for(size_t i=0;i<cnt;++i)
+		{
+			wxString name=MadSyntax::GetSchemeName(i);
+			WxComboBoxScheme->Append(name);
+		}
+		WxComboBoxScheme->SetValue(schname);
+	}
+	else
+	{
+		MadMessageBox(_("Cannot save to the scheme."), wxT("MadEdit-Mod"), wxICON_WARNING|wxOK);
+	}
 }
 
 /*
@@ -925,19 +926,19 @@ void MadHighlightingDialog::WxButtonSaveClick(wxCommandEvent& WXUNUSED(event))
  */
 void MadHighlightingDialog::WxButtonDeleteClick(wxCommandEvent& WXUNUSED(event))
 {
-    if(MadSyntax::DeleteScheme(WxComboBoxScheme->GetValue()))
-    {
-        WxComboBoxScheme->Clear();
-        size_t cnt=MadSyntax::GetSchemeCount();
-        for(size_t i=0;i<cnt;++i)
-        {
-            wxString name=MadSyntax::GetSchemeName(i);
-            WxComboBoxScheme->Append(name);
-            if(i==0) WxComboBoxScheme->SetValue(name);
-        }
-    }
-    else
-    {
-        MadMessageBox(_("Cannot delete this scheme."), wxT("MadEdit-Mod"), wxICON_WARNING|wxOK);
-    }
+	if(MadSyntax::DeleteScheme(WxComboBoxScheme->GetValue()))
+	{
+		WxComboBoxScheme->Clear();
+		size_t cnt=MadSyntax::GetSchemeCount();
+		for(size_t i=0;i<cnt;++i)
+		{
+			wxString name=MadSyntax::GetSchemeName(i);
+			WxComboBoxScheme->Append(name);
+			if(i==0) WxComboBoxScheme->SetValue(name);
+		}
+	}
+	else
+	{
+		MadMessageBox(_("Cannot delete this scheme."), wxT("MadEdit-Mod"), wxICON_WARNING|wxOK);
+	}
 }
