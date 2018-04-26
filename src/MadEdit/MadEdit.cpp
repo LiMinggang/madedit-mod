@@ -9894,7 +9894,8 @@ void MadEdit::OnKeyDown( wxKeyEvent& evt )
 		{
 			m_DragCopyFlag = true;
 			//wxSetCursor( DragCopyCursor );
-			SetCursor(DragCopyCursor);
+			if( ( m_EditMode != emHexMode ) && (evt.m_x > ( m_LineNumberAreaWidth + m_BookmarkWidth )))
+				SetCursor(DragCopyCursor);
 		}
 
 		return;
@@ -9976,7 +9977,8 @@ void MadEdit::OnKeyUp( wxKeyEvent& evt )
 		{
 			m_DragCopyFlag = false;
 			//wxSetCursor( DragMoveCursor );
-			SetCursor(DragMoveCursor);
+			if(( m_EditMode != emHexMode ) && (evt.m_x > ( m_LineNumberAreaWidth + m_BookmarkWidth )))
+				SetCursor(DragMoveCursor);
 		}
 	}
 
