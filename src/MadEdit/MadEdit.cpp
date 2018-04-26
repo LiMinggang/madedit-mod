@@ -10914,13 +10914,14 @@ void MadEdit::OnMouseWheel( wxMouseEvent &evt )
 
 void MadEdit::OnMouseEnterWindow( wxMouseEvent &evt )
 {
-	UpdateCursor( evt.m_x, evt.m_y );
 	m_MouseInWindow = true;
+	UpdateCursor( evt.m_x, evt.m_y );
 	evt.Skip();
 }
 
 void MadEdit::OnMouseLeaveWindow( wxMouseEvent &evt )
 {
+	m_MouseInWindow = false;
 	if( m_DragDrop )
 	{
 		wxSetCursor( DragNoneCursor );
@@ -10939,7 +10940,6 @@ void MadEdit::OnMouseLeaveWindow( wxMouseEvent &evt )
 		}
 	}
 
-	m_MouseInWindow = false;
 	evt.Skip();
 }
 
