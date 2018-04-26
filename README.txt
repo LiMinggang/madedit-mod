@@ -130,6 +130,7 @@ Fix: Regex replace bug, eg, replace "\r\n" with "\\n"
 Fix: MadPython Recording issue
 Fix: Chars escape for regex recording
 Fix: Unbind critial message handlers during OnClose
+Fix: High CPU load when move mouse over textlines #258 #265
 Update Astyle to latest code
 
 Mod v0.4.12

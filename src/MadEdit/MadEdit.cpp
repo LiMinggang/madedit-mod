@@ -9893,8 +9893,8 @@ void MadEdit::OnKeyDown( wxKeyEvent& evt )
 		if( evt.ControlDown() )
 		{
 			m_DragCopyFlag = true;
-			wxSetCursor( DragCopyCursor );
-			//SetCursor(DragCopyCursor);
+			//wxSetCursor( DragCopyCursor );
+			SetCursor(DragCopyCursor);
 		}
 
 		return;
@@ -9975,8 +9975,8 @@ void MadEdit::OnKeyUp( wxKeyEvent& evt )
 		if( key == WXK_CONTROL )
 		{
 			m_DragCopyFlag = false;
-			wxSetCursor( DragMoveCursor );
-			//SetCursor(DragMoveCursor);
+			//wxSetCursor( DragMoveCursor );
+			SetCursor(DragMoveCursor);
 		}
 	}
 
@@ -10135,14 +10135,14 @@ void MadEdit::OnMouseLeftDown( wxMouseEvent &evt )
 				if( evt.m_controlDown )
 				{
 					m_DragCopyFlag = true;
-					wxSetCursor( DragCopyCursor );
-					//SetCursor(DragCopyCursor);
+					//wxSetCursor( DragCopyCursor );
+					SetCursor(DragCopyCursor);
 				}
 				else
 				{
 					m_DragCopyFlag = false;
-					wxSetCursor( DragMoveCursor );
-					//SetCursor(DragMoveCursor);
+					//wxSetCursor( DragMoveCursor );
+					SetCursor(DragMoveCursor);
 				}
 			}
 			else
@@ -10933,7 +10933,7 @@ void MadEdit::OnMouseLeaveWindow( wxMouseEvent &evt )
 		}
 		else
 		{
-			wxSetCursor( ArrowCursor ); // scrollbar
+			SetCursor( ArrowCursor ); // scrollbar
 		}
 	}
 
@@ -10980,29 +10980,29 @@ void MadEdit::UpdateCursor( int mouse_x, int mouse_y )
 			{
 				if( m_DragCopyFlag )
 				{
-					wxSetCursor( DragCopyCursor );
-					//SetCursor(DragCopyCursor);
+					//wxSetCursor( DragCopyCursor );
+					SetCursor(DragCopyCursor);
 				}
 				else
 				{
-					wxSetCursor( DragMoveCursor );
-					//SetCursor(DragMoveCursor);
+					//wxSetCursor( DragMoveCursor );
+					SetCursor(DragMoveCursor);
 				}
 			}
 			else
 			{
-				wxSetCursor( IBeamCursor );
-				//SetCursor(IBeamCursor);
+				//wxSetCursor( IBeamCursor );
+				SetCursor(IBeamCursor);
 			}
 		}
 		else
 		{
 			if( mouse_x >= 0 && mouse_x <= ( m_LineNumberAreaWidth + m_BookmarkWidth ) )
 			{
-				wxSetCursor( RightArrowCursor );
+				SetCursor( RightArrowCursor );
 			}
 			else
-				wxSetCursor( ArrowCursor );
+				SetCursor( ArrowCursor );
 
 			//SetCursor(ArrowCursor);
 		}
@@ -11015,25 +11015,25 @@ void MadEdit::UpdateCursor( int mouse_x, int mouse_y )
 			{
 				if( m_DragCopyFlag )
 				{
-					wxSetCursor( DragCopyCursor );
-					//SetCursor(DragCopyCursor);
+					//wxSetCursor( DragCopyCursor );
+					SetCursor(DragCopyCursor);
 				}
 				else
 				{
-					wxSetCursor( DragMoveCursor );
-					//SetCursor(DragMoveCursor);
+					//wxSetCursor( DragMoveCursor );
+					SetCursor(DragMoveCursor);
 				}
 			}
 			else
 			{
-				wxSetCursor( IBeamCursor );
-				//SetCursor(IBeamCursor);
+				//wxSetCursor( IBeamCursor );
+				SetCursor(IBeamCursor);
 			}
 		}
 		else
 		{
-			wxSetCursor( ArrowCursor );
-			//SetCursor(ArrowCursor);
+			//wxSetCursor( ArrowCursor );
+			SetCursor(ArrowCursor);
 		}
 	}
 }
