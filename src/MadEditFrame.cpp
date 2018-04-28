@@ -1598,18 +1598,22 @@ void OnEditToggleWindow( MadEdit *WXUNUSED(madedit) )
 	g_MainFrame->OnWindowToggleWindow( e );
 }
 
-void OnEditMouseRightUp( MadEdit *WXUNUSED(madedit) )
+void OnEditMouseRightUp( MadEdit * madedit )
 {
 	//wxPoint pt=wxGetMousePosition();
 	//pt=g_MainFrame->m_Notebook->ScreenToClient(pt);
 	//g_MainFrame->PopupMenu(g_Menu_Edit);//, pt);
 	vector<wxMenuItem *> spellItems;
+	wxMenu * editPopup = madedit->GetRightClickMenu();
+	wxWindow * pwin  = madedit->GetParent();
 
-	if( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() != emHexMode && g_ActiveMadEdit->GetSpellCheckStatus() )
+	if( editPopup == nullptr || pwin == nullptr ) return;
+
+	if( madedit && madedit->GetEditMode() != emHexMode && madedit->GetSpellCheckStatus() )
 	{
 		wxString misspelledStr;
-		shared_ptr<wxSpellCheckEngineInterface> & spellChecker = g_ActiveMadEdit->GetSpellChecker();
-		g_ActiveMadEdit->GetWordFromCaretPos( misspelledStr );
+		shared_ptr<wxSpellCheckEngineInterface> & spellChecker = madedit->GetSpellChecker();
+		madedit->GetWordFromCaretPos( misspelledStr );
 		size_t count = 0;
 
 		if( !spellChecker->IsSpellingOk( misspelledStr ) )
@@ -1622,38 +1626,38 @@ void OnEditMouseRightUp( MadEdit *WXUNUSED(madedit) )
 			{
 				for( size_t i = 0; i < count; ++i )
 				{
-					spellItems.push_back( g_Menu_EditPop->Insert( i, menuSpellOption1 + i, g_SpellSuggestions[i] ) );
+					spellItems.push_back( editPopup->Insert( i, menuSpellOption1 + i, g_SpellSuggestions[i] ) );
 				}
 
-				spellItems.push_back( g_Menu_EditPop->InsertSeparator( count++ ) );
+				spellItems.push_back( editPopup->InsertSeparator( count++ ) );
 			}
 
 			wxString label = _( "Ignore '" ) + misspelledStr + _( "' for this session" );
-			spellItems.push_back( g_Menu_EditPop->Insert( count++, menuSpellIgnore, label ) );
+			spellItems.push_back( editPopup->Insert( count++, menuSpellIgnore, label ) );
 
 			if( SpellCheckerManager::Instance().GetEnablePersonalDictionary() )
 			{
 				label = _( "Add '" ) + misspelledStr + _( "' to dictionary" );
-				spellItems.push_back( g_Menu_EditPop->Insert( count++, menuSpellAdd2Dict, label ) );
+				spellItems.push_back( editPopup->Insert( count++, menuSpellAdd2Dict, label ) );
 			}
 
-			spellItems.push_back( g_Menu_EditPop->InsertSeparator( count++ ) );
+			spellItems.push_back( editPopup->InsertSeparator( count++ ) );
 		}
 		else
 			if( spellChecker->IsWordInPersonalDictionary( misspelledStr ) )
 			{
 				wxString label = _( "Remove '" ) + misspelledStr + _( "' from dictionary" );
-				spellItems.push_back( g_Menu_EditPop->Insert( count++, menuSpellRemoveFromDict, label ) );
-				spellItems.push_back( g_Menu_EditPop->InsertSeparator( count++ ) );
+				spellItems.push_back( editPopup->Insert( count++, menuSpellRemoveFromDict, label ) );
+				spellItems.push_back( editPopup->InsertSeparator( count++ ) );
 			}
 	}
 
-	g_MainFrame->PopupMenu( g_Menu_EditPop ); //Fixe for the assertion in debug
+	pwin->PopupMenu( editPopup ); //Fixe for the assertion in debug
 	vector<wxMenuItem *>::iterator it = spellItems.begin();
 
 	while( it != spellItems.end() )
 	{
-		g_Menu_EditPop->Delete( *it );
+		editPopup->Delete( *it );
 		++it;
 	}
 }
@@ -4635,6 +4639,7 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 		madedit->SetOnActivate( &OnEditActivate );
 		madedit->SetOnToggleWindow( &OnEditToggleWindow );
 		madedit->SetOnMouseRightUp( &OnEditMouseRightUp );
+		madedit->SetRightClickMenu(g_Menu_EditPop);
 		madedit->SetOnVSMouseRightUp( &OnVScrollMouseRightUp );
 		madedit->SetOnHSMouseRightUp( &OnHScrollMouseRightUp );
 		madedit->SetOnFontChanged( &OnFontChanged );

@@ -929,6 +929,7 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_OnLineSpaceChanged = nullptr;
 	m_OnToggleWindow = nullptr;
 	m_OnMouseRightUp = nullptr;
+	m_RightClickMenu = nullptr;
 	m_OnVSMouseRightUp = nullptr;
 	m_OnHSMouseRightUp = nullptr;
 	m_OnActivate = nullptr;

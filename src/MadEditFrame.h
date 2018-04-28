@@ -871,7 +871,7 @@ public:
 	friend void OnEditStatusChanged( MadEdit *madedit );
 	friend void OnEditActivate( MadEdit *WXUNUSED(madedit) );
 	friend void OnEditToggleWindow( MadEdit * WXUNUSED(madedit) );
-	friend void OnEditMouseRightUp( MadEdit * WXUNUSED(madedit) );
+	friend void OnEditMouseRightUp( MadEdit * madedit );
 	friend void OnVScrollMouseRightUp( MadEdit *madedit );
 	friend void OnHScrollMouseRightUp( MadEdit *madedit );
 };

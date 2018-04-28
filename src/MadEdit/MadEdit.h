@@ -440,6 +440,7 @@ private:
 	OnStatusChangedPtr    m_OnSyntaxChanged;
 	OnStatusChangedPtr    m_OnLineSpaceChanged;
 	OnToggleWindowPtr     m_OnToggleWindow;
+	wxMenu *              m_RightClickMenu;
 	OnMouseRightUpPtr     m_OnMouseRightUp;
 	OnMouseRightUpPtr     m_OnVSMouseRightUp;
 	OnMouseRightUpPtr     m_OnHSMouseRightUp;
@@ -1126,6 +1127,8 @@ public:
 	void SetOnMouseRightUp( OnMouseRightUpPtr func ) {
 		m_OnMouseRightUp = func;
 	}
+	wxMenu * GetRightClickMenu() const { return m_RightClickMenu; }
+	void SetRightClickMenu( wxMenu * rmenu )        { m_RightClickMenu = rmenu; }
 	void SetOnVSMouseRightUp( OnMouseRightUpPtr func ) {
 		m_OnVSMouseRightUp = func;
 	}
@@ -1141,14 +1144,13 @@ public:
 	}
 	void ScrollTo( int scrollcmd );
     
-    long GetVSMousePos(){return m_VSMousePos;}
-    long GetHSMousePos(){return m_HSMousePos;}
-    void ShowZeroLenSelIndicator();
+	long GetVSMousePos(){return m_VSMousePos;}
+	long GetHSMousePos(){return m_HSMousePos;}
+	void ShowZeroLenSelIndicator();
 
 	int GetMaxDisplaySize() { return m_MaxDisplaySize; }
 	void SetMaxDisplaySize( int maxchars );
 	void ConfigNewDocument();
-
 private: // Printing functions
 	int m_Printing;     // 0: no, <0: Text, >0: Hex
 	bool TextPrinting() { return m_Printing < 0; }
