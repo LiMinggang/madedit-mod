@@ -357,6 +357,8 @@ wxHtmlWindow * g_MadToolHtmlWin = nullptr;
 
 MadEditFrame *g_MainFrame = nullptr;
 MadEdit *g_ActiveMadEdit = nullptr;
+MadEdit *g_CurrentMadEdit = nullptr;
+
 int g_PrevPageID = -1;
 wxStatusBar *g_StatusBar = nullptr;
 wxArrayString g_SpellSuggestions;
@@ -1606,6 +1608,7 @@ void OnEditMouseRightUp( MadEdit * madedit )
 	vector<wxMenuItem *> spellItems;
 	wxMenu * editPopup = madedit->GetRightClickMenu();
 	wxWindow * pwin  = madedit->GetParent();
+	g_CurrentMadEdit = madedit;
 
 	if( editPopup == nullptr || pwin == nullptr ) return;
 	static int id = editPopup->FindItem(_( "Run Scripts" ));

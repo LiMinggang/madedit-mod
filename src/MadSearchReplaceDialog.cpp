@@ -10,12 +10,21 @@
 #include <sstream>
 #include <wx/longlong.h>
 #include <wx/progdlg.h>
+#include <wx/fileconf.h>
+
 #include "MadEditFrame.h"
 #include "MadSearchReplaceDialog.h"
 #include "MadRecentList.h"
 #include "MadUtils.h"
 
 #include "MadEdit/MadEdit.h"
+#include "MadNumberDlg.h"
+#include "MadSortDialog.h"
+
+extern MadEdit *g_ActiveMadEdit;
+extern void OnEditMouseRightUp( MadEdit * madedit );
+extern wxMenu *g_Menu_EditPop;
+extern MadNumberDlg * g_MadNumberDlg;
 
 #ifdef _MSC_VER
 	# pragma warning( push )
@@ -36,6 +45,56 @@
 	#define new new(_NORMAL_BLOCK ,__FILE__, __LINE__)
 #endif
 
+MadSearchReplaceDialog::wxCmdEvtHandlerMap_t MadSearchReplaceDialog::m_menu_evt_map[] =
+{
+	// edit
+	{ menuUndo, &MadSearchReplaceDialog::OnEditUndo },
+	{ menuRedo, &MadSearchReplaceDialog::OnEditRedo },
+	{ menuCut, &MadSearchReplaceDialog::OnEditCut },
+	{ menuCopy, &MadSearchReplaceDialog::OnEditCopy },
+	{ menuPaste, &MadSearchReplaceDialog::OnEditPaste },
+	{ menuDelete, &MadSearchReplaceDialog::OnEditDelete },
+	{ menuCutLine, &MadSearchReplaceDialog::OnEditCutLine },
+	{ menuDeleteLine, &MadSearchReplaceDialog::OnEditDeleteLine },
+	{ menuSelectAll, &MadSearchReplaceDialog::OnEditSelectAll },
+	{ menuStartEndSelction, &MadSearchReplaceDialog::OnEditStartEndSelction },
+	{ menuInsertTabChar, &MadSearchReplaceDialog::OnEditInsertTabChar },
+	{ menuInsertDateTime, &MadSearchReplaceDialog::OnEditInsertDateTime },
+	{ menuSortAscending, &MadSearchReplaceDialog::OnEditSortAscending },
+	{ menuSortDescending, &MadSearchReplaceDialog::OnEditSortDescending },
+	{ menuSortAscendingCase, &MadSearchReplaceDialog::OnEditSortAscendingCase },
+	{ menuSortDescendingCase, &MadSearchReplaceDialog::OnEditSortDescendingCase },
+	{ menuSortByOptions, &MadSearchReplaceDialog::OnEditSortByOptions },
+	{ menuSortOptions, &MadSearchReplaceDialog::OnEditSortOptions },
+	{ menuCopyAsHexString, &MadSearchReplaceDialog::OnEditCopyAsHexString },
+	{ menuCopyAsHexStringWithSpace, &MadSearchReplaceDialog::OnEditCopyAsHexStringWithSpace },
+	{ menuCopyRevertHex, &MadSearchReplaceDialog::OnEditCopyRevertHex },
+	{ menuIncreaseIndent, &MadSearchReplaceDialog::OnEditIncIndent },
+	{ menuDecreaseIndent, &MadSearchReplaceDialog::OnEditDecIndent },
+	{ menuComment, &MadSearchReplaceDialog::OnEditComment },
+	{ menuUncomment, &MadSearchReplaceDialog::OnEditUncomment },
+	{ menuWordWrapToNewLine, &MadSearchReplaceDialog::OnEditWordWrapToNewLine },
+	{ menuNewLineToWordWrap, &MadSearchReplaceDialog::OnEditNewLineToWordWrap },
+	{ menuToUpperCase, &MadSearchReplaceDialog::OnEditToUpperCase },
+	{ menuToLowerCase, &MadSearchReplaceDialog::OnEditToLowerCase },
+	{ menuInvertCase, &MadSearchReplaceDialog::OnEditInvertCase },
+	{ menuCapitalize, &MadSearchReplaceDialog::OnEditCapitalize },
+	{ menuToHalfWidth, &MadSearchReplaceDialog::OnEditToHalfWidth },
+	{ menuToHalfWidthByOptions, &MadSearchReplaceDialog::OnEditToHalfWidthByOptions },
+	{ menuToFullWidth, &MadSearchReplaceDialog::OnEditToFullWidth },
+	{ menuToFullWidthByOptions, &MadSearchReplaceDialog::OnEditToFullWidthByOptions },
+	{ menuTabToSpace, &MadSearchReplaceDialog::OnEditTabToSpace },
+	{ menuSpaceToTab, &MadSearchReplaceDialog::OnEditSpaceToTab },
+	{ menuTrimTrailingSpaces, &MadSearchReplaceDialog::OnEditTrimTrailingSpaces },
+	{ menuTrimLeadingSpaces, &MadSearchReplaceDialog::OnEditTrimLeadingSpaces },
+	{ menuDeleteEmptyLines, &MadSearchReplaceDialog::OnEditDeleteEmptyLines },
+	{ menuDeleteEmptyLinesWithSpaces, &MadSearchReplaceDialog::OnEditDeleteEmptyLinesWithSpaces },
+	{ menuJoinLines, &MadSearchReplaceDialog::OnEditJoinLines },
+	{ menuInsertNumbers, &MadSearchReplaceDialog::OnEditInsertNumbers },
+	{ menuColumnAlignLeft, &MadSearchReplaceDialog::OnEditColumnAlignLeft },
+	{ menuColumnAlignRight, &MadSearchReplaceDialog::OnEditColumnAlignRight },
+};
+
 extern int MadMessageBox( const wxString& message,
 						  const wxString& caption = wxMessageBoxCaptionStr,
 						  long style = wxOK | wxCENTRE,
@@ -50,6 +109,7 @@ MadSearchReplaceDialog *g_SearchReplaceDialog = nullptr;
 extern bool IsMacroRecording();
 extern void RecordAsMadMacro( MadEdit *, const wxString&, bool = false );
 extern MadEdit *g_ActiveMadEdit;
+extern MadEdit *g_CurrentMadEdit;
 wxProgressDialog *g_SearchProgressDialog = nullptr;
 
 bool OnSearchProgressUpdate( int value, const wxString &newmsg = wxEmptyString, bool *skip = nullptr )
@@ -410,6 +470,16 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	Bind( wxEVT_BUTTON, &MadSearchReplaceDialog::WxBitmapButtonRecentReplaceTextClick, this, WxBitmapButtonRecentReplaceText->GetId() );
 	Bind( wxEVT_MENU, &MadSearchReplaceDialog::OnRecentFindText, this, ID_RECENTFINDTEXT1, ID_RECENTFINDTEXT20 );
 	Bind( wxEVT_MENU, &MadSearchReplaceDialog::OnRecentReplaceText, this, ID_RECENTREPLACETEXT1, ID_RECENTREPLACETEXT20 );
+
+	for(size_t i = 0; i < sizeof(m_menu_evt_map)/sizeof(m_menu_evt_map[0]); ++i)
+	{
+		Bind( wxEVT_MENU, m_menu_evt_map[i].method, this, m_menu_evt_map[i].evtTag );
+	}
+
+	m_FindText->SetOnMouseRightUp( &OnEditMouseRightUp );
+	m_FindText->SetRightClickMenu( g_Menu_EditPop );
+	m_ReplaceText->SetOnMouseRightUp( &OnEditMouseRightUp );
+	m_ReplaceText->SetRightClickMenu( g_Menu_EditPop );
 }
 
 MadSearchReplaceDialog::~MadSearchReplaceDialog()
@@ -434,7 +504,7 @@ void MadSearchReplaceDialog::MadSearchReplaceDialogClose( wxCloseEvent& event )
 	Destroy();
 }
 
-void MadSearchReplaceDialog::WxButtonCloseClick( wxCommandEvent& WXUNUSED(event) )
+void MadSearchReplaceDialog::WxButtonCloseClick( wxCommandEvent& event )
 {
 	Show( false );
 	wxFrame * mframe = dynamic_cast< wxFrame * >(wxTheApp->GetTopWindow());
@@ -450,7 +520,7 @@ void MadSearchReplaceDialog::WxButtonCloseClick( wxCommandEvent& WXUNUSED(event)
 	}
 }
 
-void MadSearchReplaceDialog::WxButtonFindNextClick( wxCommandEvent& WXUNUSED(event) )
+void MadSearchReplaceDialog::WxButtonFindNextClick( wxCommandEvent& event )
 {
 	// add: gogo, 19.09.2009
 	g_StatusBar->SetStatusText( wxEmptyString, 0 );
@@ -607,7 +677,7 @@ void MadSearchReplaceDialog::WxButtonFindNextClick( wxCommandEvent& WXUNUSED(eve
 	}
 }
 
-void MadSearchReplaceDialog::WxButtonFindPrevClick( wxCommandEvent& WXUNUSED(event) )
+void MadSearchReplaceDialog::WxButtonFindPrevClick( wxCommandEvent& event )
 {
 	extern MadEdit *g_ActiveMadEdit;
 
@@ -827,12 +897,12 @@ void MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown( wxKeyEvent& event )
 /*
  * WxBitmapButtonRecentFindTextClick
  */
-void MadSearchReplaceDialog::WxBitmapButtonRecentFindTextClick( wxCommandEvent& WXUNUSED(event) )
+void MadSearchReplaceDialog::WxBitmapButtonRecentFindTextClick( wxCommandEvent& event )
 {
 	PopupMenu( &WxPopupMenuRecentFindText );
 }
 
-void MadSearchReplaceDialog::WxBitmapButtonRecentReplaceTextClick( wxCommandEvent& WXUNUSED(event) )
+void MadSearchReplaceDialog::WxBitmapButtonRecentReplaceTextClick( wxCommandEvent& event )
 {
 	PopupMenu( &WxPopupMenuRecentReplaceText );
 }
@@ -1022,7 +1092,7 @@ void MadSearchReplaceDialog::WxCheckBoxFindHexClick( wxCommandEvent& event )
 /*
  * WxButtonReplaceClick
  */
-void MadSearchReplaceDialog::WxButtonReplaceClick( wxCommandEvent& WXUNUSED(event) )
+void MadSearchReplaceDialog::WxButtonReplaceClick( wxCommandEvent& event )
 {
 	if( g_ActiveMadEdit == nullptr )
 		return;
@@ -1213,13 +1283,13 @@ void MadSearchReplaceDialog::WxButtonReplaceClick( wxCommandEvent& WXUNUSED(even
 /*
  * WxButtonReplaceAllClick
  */
-void MadSearchReplaceDialog::WxButtonReplaceAllClick( wxCommandEvent& WXUNUSED(event) )
+void MadSearchReplaceDialog::WxButtonReplaceAllClick( wxCommandEvent& event )
 {
 	if( g_ActiveMadEdit != nullptr )
 		ReplaceAll( g_ActiveMadEdit );
 }
 
-void MadSearchReplaceDialog::WxButtonReplaceAllInAllClick( wxCommandEvent& WXUNUSED(event) )
+void MadSearchReplaceDialog::WxButtonReplaceAllInAllClick( wxCommandEvent& event )
 {
 	size_t count = ( ( wxAuiNotebook* )g_MainFrame->m_Notebook )->GetPageCount();
 
@@ -1276,7 +1346,7 @@ void MadSearchReplaceDialog::MadSearchReplaceDialogActivate( wxActivateEvent& ev
 /*
  * WxButtonReplaceClick
  */
-void MadSearchReplaceDialog::WxButtonReplaceExpandClick( wxCommandEvent& WXUNUSED(event) )
+void MadSearchReplaceDialog::WxButtonReplaceExpandClick( wxCommandEvent& event )
 {
 	if( !m_ReplaceDlgUi )
 	{
@@ -1370,7 +1440,7 @@ void MadSearchReplaceDialog::WxCheckBoxSearchInSelectionClick( wxCommandEvent& e
 	UpdateSearchInSelection( event.IsChecked() );
 }
 
-void MadSearchReplaceDialog::WxButtonCountClick( wxCommandEvent& WXUNUSED(event) )
+void MadSearchReplaceDialog::WxButtonCountClick( wxCommandEvent& event )
 {
 	extern MadEdit *g_ActiveMadEdit;
 
@@ -1573,7 +1643,7 @@ void DisplayFindAllResult( wxTreeItemId &myroot, vector<wxFileOffset> &begpos, v
 	}
 }
 
-void MadSearchReplaceDialog::WxButtonFindAllClick( wxCommandEvent& WXUNUSED(event) )
+void MadSearchReplaceDialog::WxButtonFindAllClick( wxCommandEvent& event )
 {
 	extern MadEdit *g_ActiveMadEdit;
 
@@ -1581,7 +1651,7 @@ void MadSearchReplaceDialog::WxButtonFindAllClick( wxCommandEvent& WXUNUSED(even
 		SearchAll( g_ActiveMadEdit );
 }
 
-void MadSearchReplaceDialog::WxButtonFindAllInAllClick( wxCommandEvent& WXUNUSED(event) )
+void MadSearchReplaceDialog::WxButtonFindAllInAllClick( wxCommandEvent& event )
 {
 	extern MadEdit *g_ActiveMadEdit;
 	size_t count = ( ( wxAuiNotebook* )g_MainFrame->m_Notebook )->GetPageCount();
@@ -1862,7 +1932,7 @@ void MadSearchReplaceDialog::ReplaceAll( MadEdit * madedit, bool needRec/*=true*
 /*
  * WxRadioLosingFocusClick
  */
-void MadSearchReplaceDialog::WxRadioLosingFocusSelect( wxCommandEvent& WXUNUSED(event) )
+void MadSearchReplaceDialog::WxRadioLosingFocusSelect( wxCommandEvent& event )
 {
 	// insert your code here
 	if( m_EnableTransparency )
@@ -1874,7 +1944,7 @@ void MadSearchReplaceDialog::WxRadioLosingFocusSelect( wxCommandEvent& WXUNUSED(
 /*
  * WxRadioAlwaysClick
  */
-void MadSearchReplaceDialog::WxRadioAlwaysSelect( wxCommandEvent& WXUNUSED(event) )
+void MadSearchReplaceDialog::WxRadioAlwaysSelect( wxCommandEvent& event )
 {
 	// insert your code here
 	if( m_EnableTransparency )
@@ -1898,7 +1968,7 @@ void MadSearchReplaceDialog::SetTransparency()
 /*
  * WxSliderTransDegreeScroll
  */
-void MadSearchReplaceDialog::WxSliderTransDegreeScroll( wxCommandEvent& WXUNUSED(event) )
+void MadSearchReplaceDialog::WxSliderTransDegreeScroll( wxCommandEvent& event )
 {
 	// insert your code here
 	wxByte trans = wxIMAGE_ALPHA_OPAQUE;
@@ -1935,7 +2005,7 @@ void MadSearchReplaceDialog::WxCheckBoxRegexClick( wxCommandEvent& event )
 	}
 }
 
-void MadSearchReplaceDialog::OnWxSliderInputSizerCmdScroll(wxCommandEvent& WXUNUSED(event))
+void MadSearchReplaceDialog::OnWxSliderInputSizerCmdScroll(wxCommandEvent& event)
 {
 	int times = WxSliderInputSizer->GetValue();
 	int width, height = 0;
@@ -1970,3 +2040,632 @@ void MadSearchReplaceDialog::WxCheckBoxBookmarkLineClick(wxCommandEvent& event)
 		WxCheckBoxBookmarkOnly->Disable();
 	}
 }
+
+void MadSearchReplaceDialog::OnEditUndo( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit && ( !g_CurrentMadEdit->IsReadOnly() ) )
+	{
+		g_CurrentMadEdit->Undo();
+	}
+}
+
+void MadSearchReplaceDialog::OnEditRedo( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit && ( !g_CurrentMadEdit->IsReadOnly() ) )
+	{
+		g_CurrentMadEdit->Redo();
+	}
+}
+
+void MadSearchReplaceDialog::OnEditCut( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit )
+	{
+		g_CurrentMadEdit->CutToClipboard();
+	}
+}
+
+void MadSearchReplaceDialog::OnEditCopy( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit )
+	{
+		g_CurrentMadEdit->CopyToClipboard();
+	}
+}
+
+void MadSearchReplaceDialog::OnEditPaste( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit )
+	{
+		g_CurrentMadEdit->PasteFromClipboard();
+	}
+}
+
+void MadSearchReplaceDialog::OnEditDelete( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit )
+	{
+		g_CurrentMadEdit->Delete();
+	}
+}
+
+void MadSearchReplaceDialog::OnEditCutLine( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit )
+	{
+		g_CurrentMadEdit->CutLine();
+	}
+}
+
+void MadSearchReplaceDialog::OnEditDeleteLine( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit )
+	{
+		g_CurrentMadEdit->DeleteLine();
+	}
+}
+
+void MadSearchReplaceDialog::OnEditSelectAll( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit )
+	{
+		g_CurrentMadEdit->SelectAll();
+	}
+}
+
+void MadSearchReplaceDialog::OnEditStartEndSelction( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit )
+	{
+		g_CurrentMadEdit->StartEndSelction();
+	}
+}
+
+void MadSearchReplaceDialog::OnEditInsertTabChar( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit )
+	{
+		g_CurrentMadEdit->InsertTabChar();
+	}
+}
+
+void MadSearchReplaceDialog::OnEditInsertDateTime( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit )
+	{
+		g_CurrentMadEdit->InsertDateTime();
+	}
+}
+
+void MadSearchReplaceDialog::OnEditSortAscending( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit && g_CurrentMadEdit->GetEditMode() != emHexMode )
+	{
+		int begin, end;
+		g_CurrentMadEdit->GetSelectionLineId( begin, end );
+		g_CurrentMadEdit->SortLines( sfAscending, begin, end );
+	}
+}
+
+void MadSearchReplaceDialog::OnEditSortDescending( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit && g_CurrentMadEdit->GetEditMode() != emHexMode )
+	{
+		int begin, end;
+		g_CurrentMadEdit->GetSelectionLineId( begin, end );
+		g_CurrentMadEdit->SortLines( sfDescending, begin, end );
+	}
+}
+
+void MadSearchReplaceDialog::OnEditSortAscendingCase( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit && g_CurrentMadEdit->GetEditMode() != emHexMode )
+	{
+		int begin, end;
+		g_CurrentMadEdit->GetSelectionLineId( begin, end );
+		g_CurrentMadEdit->SortLines( sfAscending | sfCaseSensitive, begin, end );
+	}
+}
+
+void MadSearchReplaceDialog::OnEditSortDescendingCase( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit && g_CurrentMadEdit->GetEditMode() != emHexMode )
+	{
+		int begin, end;
+		g_CurrentMadEdit->GetSelectionLineId( begin, end );
+		g_CurrentMadEdit->SortLines( sfDescending | sfCaseSensitive, begin, end );
+	}
+}
+
+void MadSearchReplaceDialog::OnEditSortByOptions( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit && g_CurrentMadEdit->GetEditMode() != emHexMode )
+	{
+		wxConfigBase *m_Config = wxConfigBase::Get(false);
+		wxString oldpath = m_Config->GetPath();
+		m_Config->SetPath( wxT( "/MadEdit" ) );
+		int order;
+		bool cs, num, rem;
+		m_Config->Read( wxT( "SortOrder" ), &order, sfAscending );
+		m_Config->Read( wxT( "SortCaseSensitive" ), &cs, false );
+		m_Config->Read( wxT( "SortNumeric" ), &num, false );
+		m_Config->Read( wxT( "SortRemoveDup" ), &rem, false );
+		m_Config->SetPath( oldpath );
+		MadSortFlags flags = order |
+							 ( cs ? sfCaseSensitive : 0 ) |
+							 ( num ? sfNumericSort : 0 ) |
+							 ( rem ? sfRemoveDuplicate : 0 ) ;
+		int begin, end;
+		g_CurrentMadEdit->GetSelectionLineId( begin, end );
+		g_CurrentMadEdit->SortLines( flags, begin, end );
+	}
+}
+
+void MadSearchReplaceDialog::OnEditSortOptions( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit == nullptr || g_CurrentMadEdit->GetEditMode() == emHexMode )
+	{ return; }
+	wxConfigBase *m_Config = wxConfigBase::Get(false);
+	MadSortDialog dialog( this );
+	wxString oldpath = m_Config->GetPath();
+	m_Config->SetPath( wxT( "/MadEdit" ) );
+	int order;
+	bool cs, num, rem;
+	m_Config->Read( wxT( "SortOrder" ), &order, sfAscending );
+	dialog.WxRadioBoxOrder->SetSelection( order );
+	m_Config->Read( wxT( "SortCaseSensitive" ), &cs, false );
+	dialog.WxCheckBoxCase->SetValue( cs );
+	m_Config->Read( wxT( "SortNumeric" ), &num, false );
+	dialog.WxCheckBoxNumeric->SetValue( num );
+	m_Config->Read( wxT( "SortRemoveDup" ), &rem, false );
+	dialog.WxCheckBoxRemoveDup->SetValue( rem );
+	// Hide Modaless Dialog
+	//HideModalessDialogs();
+
+	if( dialog.ShowModal() == wxID_OK )
+	{
+		order = dialog.WxRadioBoxOrder->GetSelection();
+		cs = dialog.WxCheckBoxCase->GetValue();
+		num = dialog.WxCheckBoxNumeric->GetValue();
+		rem = dialog.WxCheckBoxRemoveDup->GetValue();
+		m_Config->Write( wxT( "SortOrder" ), order );
+		m_Config->Write( wxT( "SortCaseSensitive" ), cs );
+		m_Config->Write( wxT( "SortNumeric" ), num );
+		m_Config->Write( wxT( "SortRemoveDup" ), rem );
+		int flags = order |
+					( cs ? sfCaseSensitive : 0 ) |
+					( num ? sfNumericSort : 0 ) |
+					( rem ? sfRemoveDuplicate : 0 ) ;
+		int begin, end;
+		g_CurrentMadEdit->GetSelectionLineId( begin, end );
+		g_CurrentMadEdit->SortLines( flags, begin, end );
+	}
+
+	m_Config->SetPath( oldpath );
+}
+
+void MadSearchReplaceDialog::OnEditCopyAsHexString( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit )
+	{
+		g_CurrentMadEdit->CopyAsHexString( false );
+	}
+}
+
+void MadSearchReplaceDialog::OnEditCopyAsHexStringWithSpace( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit )
+	{
+		g_CurrentMadEdit->CopyAsHexString( true );
+	}
+}
+
+void MadSearchReplaceDialog::OnEditCopyRevertHex( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit )
+	{
+		static wxString strDelimiters = wxT( " .,?!@#\t$%^&*()-=_+[]{}\\|;:\"'`<>/~" );
+		wxString str = wxGetTextFromUser( _( "Delimiters:" ), _( "Revert Hex String" ), strDelimiters );
+
+		if( !str.IsEmpty() )
+		{
+			strDelimiters = str;
+		}
+
+		g_CurrentMadEdit->CopyRevertHex( str );
+	}
+}
+
+void MadSearchReplaceDialog::OnEditIncIndent( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit )
+	{
+		g_CurrentMadEdit->IncreaseDecreaseIndent( true );
+	}
+}
+void MadSearchReplaceDialog::OnEditDecIndent( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit )
+	{
+		g_CurrentMadEdit->IncreaseDecreaseIndent( false );
+	}
+}
+
+void MadSearchReplaceDialog::OnEditComment( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit )
+	{
+		g_CurrentMadEdit->CommentUncomment( true );
+	}
+}
+
+void MadSearchReplaceDialog::OnEditUncomment( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit )
+	{
+		g_CurrentMadEdit->CommentUncomment( false );
+	}
+}
+
+void MadSearchReplaceDialog::OnEditWordWrapToNewLine( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit )
+	{
+		g_CurrentMadEdit->ConvertWordWrapToNewLine();
+	}
+}
+void MadSearchReplaceDialog::OnEditNewLineToWordWrap( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit )
+	{
+		g_CurrentMadEdit->ConvertNewLineToWordWrap();
+	}
+}
+
+void MadSearchReplaceDialog::OnEditToUpperCase( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit )
+	{
+		g_CurrentMadEdit->ToUpperCase();
+	}
+}
+
+void MadSearchReplaceDialog::OnEditToLowerCase( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit )
+	{
+		g_CurrentMadEdit->ToLowerCase();
+	}
+}
+
+void MadSearchReplaceDialog::OnEditInvertCase( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit )
+	{
+		g_CurrentMadEdit->InvertCase();
+	}
+}
+
+void MadSearchReplaceDialog::OnEditCapitalize( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit )
+	{
+		g_CurrentMadEdit->Capitalize();
+	}
+}
+
+void MadSearchReplaceDialog::OnEditToHalfWidth( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit )
+	{
+		g_CurrentMadEdit->ToHalfWidth();
+	}
+}
+
+void MadSearchReplaceDialog::OnEditToHalfWidthByOptions( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit == nullptr ) { return; }
+
+	static wxArrayInt selections;
+	static bool inited = false;
+
+	if( !inited )
+	{
+		selections.Add( 0 );
+		selections.Add( 1 );
+		selections.Add( 2 );
+		selections.Add( 3 );
+		inited = true;
+	}
+
+	wxString choices[4] = { _( "ASCII characters" ), _( "Japanese characters" ),
+							_( "Korean characters" ), _( "other characters" )
+						  };
+#if (wxMAJOR_VERSION == 2)
+	size_t sels = wxGetSelectedChoices( selections,
+										_( "Choose the characters you want to convert:" ), _( "To Halfwidth by Options..." ),
+										4, choices, this );
+#else
+	int sels = wxGetSelectedChoices( selections,
+									 _( "Choose the characters you want to convert:" ), _( "To Halfwidth by Options..." ),
+									 4, choices, this );
+#endif
+
+	if( sels > 0 )
+	{
+		bool ascii = false, japanese = false, korean = false, other = false;
+
+		for( size_t i = 0; i < (size_t)sels; ++i )
+		{
+			switch( selections[i] )
+			{
+			case 0: ascii = true; break;
+
+			case 1: japanese = true; break;
+
+			case 2: korean = true; break;
+
+			case 3: other = true; break;
+			}
+		}
+
+		g_CurrentMadEdit->ToHalfWidth( ascii, japanese, korean, other );
+	}
+}
+
+void MadSearchReplaceDialog::OnEditToFullWidth( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit )
+	{
+		g_CurrentMadEdit->ToFullWidth();
+	}
+}
+
+void MadSearchReplaceDialog::OnEditToFullWidthByOptions( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit == nullptr ) { return; }
+
+	static wxArrayInt selections;
+	static bool inited = false;
+
+	if( !inited )
+	{
+		selections.Add( 0 );
+		selections.Add( 1 );
+		selections.Add( 2 );
+		selections.Add( 3 );
+		inited = true;
+	}
+
+	wxString choices[4] = { _( "ASCII characters" ), _( "Japanese characters" ),
+							_( "Korean characters" ), _( "other characters" )
+						  };
+#if (wxMAJOR_VERSION == 2)
+	size_t sels = wxGetSelectedChoices( selections,
+										_( "Choose the characters you want to convert:" ), _( "To Fullwidth by Options..." ),
+										4, choices, this );
+#else
+	int sels = wxGetSelectedChoices( selections,
+									 _( "Choose the characters you want to convert:" ), _( "To Fullwidth by Options..." ),
+									 4, choices, this );
+#endif
+
+	if( sels > 0 )
+	{
+		bool ascii = false, japanese = false, korean = false, other = false;
+
+		for( size_t i = 0; i < (size_t)sels; ++i )
+		{
+			switch( selections[i] )
+			{
+			case 0: ascii = true; break;
+
+			case 1: japanese = true; break;
+
+			case 2: korean = true; break;
+
+			case 3: other = true; break;
+			}
+		}
+
+		g_CurrentMadEdit->ToFullWidth( ascii, japanese, korean, other );
+	}
+}
+
+void MadSearchReplaceDialog::OnEditTabToSpace( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit )
+	{
+		g_CurrentMadEdit->ConvertTabToSpace();
+	}
+}
+void MadSearchReplaceDialog::OnEditSpaceToTab( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit )
+	{
+		g_CurrentMadEdit->ConvertSpaceToTab();
+	}
+}
+
+void MadSearchReplaceDialog::OnEditTrimTrailingSpaces( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit && g_CurrentMadEdit->GetEditMode() != emHexMode )
+	{
+		g_CurrentMadEdit->TrimTrailingSpaces();
+	}
+}
+
+void MadSearchReplaceDialog::OnEditTrimLeadingSpaces( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit && g_CurrentMadEdit->GetEditMode() != emHexMode )
+	{
+		g_CurrentMadEdit->TrimLeadingSpaces();
+	}
+}
+
+void MadSearchReplaceDialog::OnEditDeleteEmptyLines( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit && g_CurrentMadEdit->GetEditMode() != emHexMode )
+	{
+		g_CurrentMadEdit->DeleteEmptyLines();
+	}
+}
+
+void MadSearchReplaceDialog::OnEditDeleteEmptyLinesWithSpaces( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit && g_CurrentMadEdit->GetEditMode() != emHexMode )
+	{
+		g_CurrentMadEdit->DeleteEmptyLinesWithSpaces();
+	}
+}
+
+void MadSearchReplaceDialog::OnEditJoinLines( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit && g_CurrentMadEdit->GetEditMode() != emHexMode )
+	{
+		g_CurrentMadEdit->JoinLines();
+	}
+}
+
+void MadSearchReplaceDialog::OnEditInsertNumbers( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit && g_CurrentMadEdit->GetEditMode() == emColumnMode )
+	{
+		// Hide Modaless Dialog
+		//HideModalessDialogs();
+
+		if( g_MadNumberDlg == nullptr ) { g_MadNumberDlg = new MadNumberDlg( this ); }
+
+		if( g_MadNumberDlg->ShowModal() == wxID_OK )
+		{
+			MadNumberingStepType numStepType = mnstLinear;
+			MadNumberFormat numFormat = nfDEC;
+			MadNumberAlign numAlign = naLeft;
+			int sel = g_MadNumberDlg->WxChoiceNumberStepType->GetSelection();
+
+			switch( sel )
+			{
+			case 1: numStepType = mnstExponential; break;
+
+			default: break;
+			}
+
+			sel = g_MadNumberDlg->WxChoiceFormat->GetSelection();
+
+			switch( sel )
+			{
+			case 1:
+				{
+					numFormat = nfHEX;
+				}
+				break;
+
+			case 2:
+				{
+					numFormat = nfBIN;
+				}
+				break;
+
+			case 3:
+				{
+					numFormat = nfOCT;
+				}
+				break;
+
+			default:
+				break;
+			}
+
+			sel = g_MadNumberDlg->WxChoiceAlign->GetSelection();
+
+			switch( sel )
+			{
+			case 1:
+				{
+					numAlign = naRight;
+				}
+				break;
+
+			default:
+				break;
+			}
+
+			long initialNum = 0, numStep = 0, totalChar = 0;
+			g_MadNumberDlg->WxEditNumberOfChars->GetValue().ToLong( &totalChar );
+			g_MadNumberDlg->WxEditNumberingStep->GetValue().ToLong( &numStep );
+			g_MadNumberDlg->WxEditInitialNumber->GetValue().ToLong( &initialNum );
+			wxString prefix, postfix;
+
+			if( g_MadNumberDlg->WxCheckPrefix->GetValue() )
+			{ prefix = g_MadNumberDlg->WxEditPrefix->GetValue(); }
+
+			if( g_MadNumberDlg->WxCheckPostfix->GetValue() )
+			{ postfix = g_MadNumberDlg->WxEditPostfix->GetValue(); }
+
+			g_CurrentMadEdit->InsertIncrementalNumber( initialNum, numStep, totalChar, numStepType, numFormat, numAlign, g_MadNumberDlg->WxPadChar->GetValue(), prefix, postfix );
+			g_CurrentMadEdit->Refresh( false );
+		}
+	}
+}
+
+void MadSearchReplaceDialog::OnEditColumnAlignLeft( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit && g_CurrentMadEdit->GetEditMode() != emHexMode )
+	{
+		g_CurrentMadEdit->ColumnAlignLeft();
+	}
+}
+
+void MadSearchReplaceDialog::OnEditColumnAlignRight( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit && g_CurrentMadEdit->GetEditMode() != emHexMode )
+	{
+		g_CurrentMadEdit->ColumnAlignRight();
+	}
+}
+

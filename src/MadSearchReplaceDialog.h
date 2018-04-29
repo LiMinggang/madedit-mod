@@ -103,6 +103,60 @@ class MadSearchReplaceDialog: public wxDialog
 		void UpdateCheckBoxByCBHex(bool check);
 		void UpdateSearchInSelection(bool check);
 
+		void OnEditUndo( wxCommandEvent& event );
+		void OnEditRedo( wxCommandEvent& event );
+		void OnEditCut( wxCommandEvent& event );
+		void OnEditCopy( wxCommandEvent& event );
+		void OnEditPaste( wxCommandEvent& event );
+		void OnEditDelete( wxCommandEvent& event );
+		void OnEditCutLine( wxCommandEvent& event );
+		void OnEditDeleteLine( wxCommandEvent& event );
+		void OnEditSelectAll( wxCommandEvent& event );
+		void OnEditStartEndSelction( wxCommandEvent& event );
+		void OnEditInsertTabChar( wxCommandEvent& event );
+		void OnEditInsertDateTime( wxCommandEvent& event );
+		
+		void OnEditSortAscending( wxCommandEvent& event );
+		void OnEditSortDescending( wxCommandEvent& event );
+		void OnEditSortAscendingCase( wxCommandEvent& event );
+		void OnEditSortDescendingCase( wxCommandEvent& event );
+		void OnEditSortByOptions( wxCommandEvent& event );
+		void OnEditSortOptions( wxCommandEvent& event );
+		
+		void OnEditCopyAsHexString( wxCommandEvent& event );
+		void OnEditCopyAsHexStringWithSpace( wxCommandEvent& event );
+		void OnEditCopyRevertHex( wxCommandEvent& event );
+		void OnEditIncIndent( wxCommandEvent& event );
+		void OnEditDecIndent( wxCommandEvent& event );
+		void OnEditComment( wxCommandEvent& event );
+		void OnEditUncomment( wxCommandEvent& event );
+		void OnEditWordWrapToNewLine( wxCommandEvent& event );
+		void OnEditNewLineToWordWrap( wxCommandEvent& event );
+		void OnEditToUpperCase( wxCommandEvent& event );
+		void OnEditToLowerCase( wxCommandEvent& event );
+		void OnEditInvertCase( wxCommandEvent& event );
+		void OnEditCapitalize( wxCommandEvent& event );
+		void OnEditToHalfWidth( wxCommandEvent& event );
+		void OnEditToHalfWidthByOptions( wxCommandEvent& event );
+		void OnEditToFullWidth( wxCommandEvent& event );
+		void OnEditToFullWidthByOptions( wxCommandEvent& event );
+		void OnEditTabToSpace( wxCommandEvent& event );
+		void OnEditSpaceToTab( wxCommandEvent& event );
+		void OnEditTrimTrailingSpaces( wxCommandEvent& event );
+		void OnEditTrimLeadingSpaces( wxCommandEvent& event );
+		void OnEditDeleteEmptyLines( wxCommandEvent& event );
+		void OnEditDeleteEmptyLinesWithSpaces( wxCommandEvent& event );
+		void OnEditJoinLines( wxCommandEvent& event );
+		void OnEditInsertNumbers( wxCommandEvent& event );
+		void OnEditColumnAlignLeft( wxCommandEvent& event );
+		void OnEditColumnAlignRight( wxCommandEvent& event );
+		
+		typedef struct 
+		{
+			const long evtTag;
+			void (MadSearchReplaceDialog::*method)( wxCommandEvent &);
+		} wxCmdEvtHandlerMap_t;
+		static wxCmdEvtHandlerMap_t m_menu_evt_map[];
 
 	//private:
 	public:
