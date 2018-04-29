@@ -1608,6 +1608,7 @@ void OnEditMouseRightUp( MadEdit * madedit )
 	wxWindow * pwin  = madedit->GetParent();
 
 	if( editPopup == nullptr || pwin == nullptr ) return;
+	static int id = editPopup->FindItem(_( "Run Scripts" ));
 
 	if( madedit && madedit->GetEditMode() != emHexMode && madedit->GetSpellCheckStatus() )
 	{
@@ -1652,6 +1653,14 @@ void OnEditMouseRightUp( MadEdit * madedit )
 			}
 	}
 
+	if( editPopup->IsEnabled( id ) )
+	{
+		if(madedit != g_ActiveMadEdit) editPopup->Enable( id, false );
+	}
+	else
+	{
+		if(madedit == g_ActiveMadEdit) editPopup->Enable( id, true );
+	}
 	pwin->PopupMenu( editPopup ); //Fixe for the assertion in debug
 	vector<wxMenuItem *>::iterator it = spellItems.begin();
 
