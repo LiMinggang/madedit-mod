@@ -5,11 +5,13 @@
 // Licence:		GPL
 ///////////////////////////////////////////////////////////////////////////////
 
+#include <wx/fileconf.h>
 #include "MadEdit/MadEdit.h"
 #include "MadEditFrame.h"
 #include "EmbeddedPython.hpp"
 #include "MadMacroDlg.h"
-
+#include "MadNumberDlg.h"
+#include "MadSortDialog.h"
 //(*InternalHeaders(MadMacroDlg)
 #include <wx/intl.h>
 #include <wx/string.h>
@@ -17,8 +19,60 @@
 
 //(*IdInit(MadMacroDlg)
 //*)
+MadMacroDlg::wxCmdEvtHandlerMap_t MadMacroDlg::m_menu_evt_map[] =
+{
+	// edit
+	{ menuUndo, &MadMacroDlg::OnEditUndo },
+	{ menuRedo, &MadMacroDlg::OnEditRedo },
+	{ menuCut, &MadMacroDlg::OnEditCut },
+	{ menuCopy, &MadMacroDlg::OnEditCopy },
+	{ menuPaste, &MadMacroDlg::OnEditPaste },
+	{ menuDelete, &MadMacroDlg::OnEditDelete },
+	{ menuCutLine, &MadMacroDlg::OnEditCutLine },
+	{ menuDeleteLine, &MadMacroDlg::OnEditDeleteLine },
+	{ menuSelectAll, &MadMacroDlg::OnEditSelectAll },
+	{ menuStartEndSelction, &MadMacroDlg::OnEditStartEndSelction },
+	{ menuInsertTabChar, &MadMacroDlg::OnEditInsertTabChar },
+	{ menuInsertDateTime, &MadMacroDlg::OnEditInsertDateTime },
+	{ menuSortAscending, &MadMacroDlg::OnEditSortAscending },
+	{ menuSortDescending, &MadMacroDlg::OnEditSortDescending },
+	{ menuSortAscendingCase, &MadMacroDlg::OnEditSortAscendingCase },
+	{ menuSortDescendingCase, &MadMacroDlg::OnEditSortDescendingCase },
+	{ menuSortByOptions, &MadMacroDlg::OnEditSortByOptions },
+	{ menuSortOptions, &MadMacroDlg::OnEditSortOptions },
+	{ menuCopyAsHexString, &MadMacroDlg::OnEditCopyAsHexString },
+	{ menuCopyAsHexStringWithSpace, &MadMacroDlg::OnEditCopyAsHexStringWithSpace },
+	{ menuCopyRevertHex, &MadMacroDlg::OnEditCopyRevertHex },
+	{ menuIncreaseIndent, &MadMacroDlg::OnEditIncIndent },
+	{ menuDecreaseIndent, &MadMacroDlg::OnEditDecIndent },
+	{ menuComment, &MadMacroDlg::OnEditComment },
+	{ menuUncomment, &MadMacroDlg::OnEditUncomment },
+	{ menuWordWrapToNewLine, &MadMacroDlg::OnEditWordWrapToNewLine },
+	{ menuNewLineToWordWrap, &MadMacroDlg::OnEditNewLineToWordWrap },
+	{ menuToUpperCase, &MadMacroDlg::OnEditToUpperCase },
+	{ menuToLowerCase, &MadMacroDlg::OnEditToLowerCase },
+	{ menuInvertCase, &MadMacroDlg::OnEditInvertCase },
+	{ menuCapitalize, &MadMacroDlg::OnEditCapitalize },
+	{ menuToHalfWidth, &MadMacroDlg::OnEditToHalfWidth },
+	{ menuToHalfWidthByOptions, &MadMacroDlg::OnEditToHalfWidthByOptions },
+	{ menuToFullWidth, &MadMacroDlg::OnEditToFullWidth },
+	{ menuToFullWidthByOptions, &MadMacroDlg::OnEditToFullWidthByOptions },
+	{ menuTabToSpace, &MadMacroDlg::OnEditTabToSpace },
+	{ menuSpaceToTab, &MadMacroDlg::OnEditSpaceToTab },
+	{ menuTrimTrailingSpaces, &MadMacroDlg::OnEditTrimTrailingSpaces },
+	{ menuTrimLeadingSpaces, &MadMacroDlg::OnEditTrimLeadingSpaces },
+	{ menuDeleteEmptyLines, &MadMacroDlg::OnEditDeleteEmptyLines },
+	{ menuDeleteEmptyLinesWithSpaces, &MadMacroDlg::OnEditDeleteEmptyLinesWithSpaces },
+	{ menuJoinLines, &MadMacroDlg::OnEditJoinLines },
+	{ menuInsertNumbers, &MadMacroDlg::OnEditInsertNumbers },
+	{ menuColumnAlignLeft, &MadMacroDlg::OnEditColumnAlignLeft },
+	{ menuColumnAlignRight, &MadMacroDlg::OnEditColumnAlignRight },
+};
 
 extern MadEdit *g_ActiveMadEdit;
+extern void OnEditMouseRightUp( MadEdit * madedit );
+extern wxMenu *g_Menu_EditPop;
+extern MadNumberDlg * g_MadNumberDlg;
 extern int MadMessageBox(const wxString& message,
 								 const wxString& caption = wxMessageBoxCaptionStr,
 								 long style	= wxOK | wxCENTRE,
@@ -26,7 +80,6 @@ extern int MadMessageBox(const wxString& message,
 								 int x = wxDefaultCoord, int y = wxDefaultCoord);
 MadMacroDlg *g_MadMacroDlg = nullptr;
 wxString MadMacroDlg::m_PyacroContext;
-
 MadMacroDlg::MadMacroDlg(wxWindow* parent,wxWindowID id,const wxPoint& WXUNUSED(pos),const wxSize& WXUNUSED(size))
 {
 	wxSize pymacro(640, 240);
@@ -45,7 +98,7 @@ MadMacroDlg::MadMacroDlg(wxWindow* parent,wxWindowID id,const wxPoint& WXUNUSED(
 	BoxSizer1 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
     m_debug = false;
-	m_Pymacro=new MadEdit(this, wxID_ANY, wxPoint(0, 0), pymacro);
+	m_Pymacro = new MadEdit(this, wxID_ANY, wxPoint(0, 0), pymacro);
 	m_Pymacro->SetFixedWidthMode(false);
 	m_Pymacro->SetRecordCaretMovements(false);
 	m_Pymacro->SetInsertSpacesInsteadOfTab(true);
@@ -90,6 +143,14 @@ MadMacroDlg::MadMacroDlg(wxWindow* parent,wxWindowID id,const wxPoint& WXUNUSED(
 	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadMacroDlg::OnWxButtonResultClick, this, WxButtonResult->GetId() );
 	Bind( wxEVT_CLOSE_WINDOW, &MadMacroDlg::MadMacroDlgClose, this, wxID_ANY );
 	//*)
+
+	for(size_t i = 0; i < sizeof(m_menu_evt_map)/sizeof(m_menu_evt_map[0]); ++i)
+	{
+		Bind( wxEVT_MENU, m_menu_evt_map[i].method, this, m_menu_evt_map[i].evtTag );
+	}
+
+	m_Pymacro->SetOnMouseRightUp( &OnEditMouseRightUp );
+	m_Pymacro->SetRightClickMenu( g_Menu_EditPop );
 	m_Pymacro->SetFocus();
 }
 
@@ -183,3 +244,587 @@ void MadMacroDlg::OnButtonResetClick(wxCommandEvent& event)
 	else if (m_Pymacro->GetInsertNewLineType() == nltUNIX) endline = wxT("\n");
 	m_PyacroContext = (wxString(wxT("#Create MadEdit Object for the active edit")) + endline + wxT("medit = MadEdit()") + endline + endline);
 }
+
+void MadMacroDlg::OnEditUndo( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro && ( !m_Pymacro->IsReadOnly() ) )
+	{
+		m_Pymacro->Undo();
+	}
+}
+
+void MadMacroDlg::OnEditRedo( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro && ( !m_Pymacro->IsReadOnly() ) )
+	{
+		m_Pymacro->Redo();
+	}
+}
+
+void MadMacroDlg::OnEditCut( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro )
+	{
+		m_Pymacro->CutToClipboard();
+	}
+}
+
+void MadMacroDlg::OnEditCopy( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro )
+	{
+		m_Pymacro->CopyToClipboard();
+	}
+}
+
+void MadMacroDlg::OnEditPaste( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro )
+	{
+		m_Pymacro->PasteFromClipboard();
+	}
+}
+
+void MadMacroDlg::OnEditDelete( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro )
+	{
+		m_Pymacro->Delete();
+	}
+}
+
+void MadMacroDlg::OnEditCutLine( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro )
+	{
+		m_Pymacro->CutLine();
+	}
+}
+
+void MadMacroDlg::OnEditDeleteLine( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro )
+	{
+		m_Pymacro->DeleteLine();
+	}
+}
+
+void MadMacroDlg::OnEditSelectAll( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro )
+	{
+		m_Pymacro->SelectAll();
+	}
+}
+
+void MadMacroDlg::OnEditStartEndSelction( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro )
+	{
+		m_Pymacro->StartEndSelction();
+	}
+}
+
+void MadMacroDlg::OnEditInsertTabChar( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro )
+	{
+		m_Pymacro->InsertTabChar();
+	}
+}
+
+void MadMacroDlg::OnEditInsertDateTime( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro )
+	{
+		m_Pymacro->InsertDateTime();
+	}
+}
+
+void MadMacroDlg::OnEditSortAscending( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro && m_Pymacro->GetEditMode() != emHexMode )
+	{
+		int begin, end;
+		m_Pymacro->GetSelectionLineId( begin, end );
+		m_Pymacro->SortLines( sfAscending, begin, end );
+	}
+}
+
+void MadMacroDlg::OnEditSortDescending( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro && m_Pymacro->GetEditMode() != emHexMode )
+	{
+		int begin, end;
+		m_Pymacro->GetSelectionLineId( begin, end );
+		m_Pymacro->SortLines( sfDescending, begin, end );
+	}
+}
+
+void MadMacroDlg::OnEditSortAscendingCase( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro && m_Pymacro->GetEditMode() != emHexMode )
+	{
+		int begin, end;
+		m_Pymacro->GetSelectionLineId( begin, end );
+		m_Pymacro->SortLines( sfAscending | sfCaseSensitive, begin, end );
+	}
+}
+
+void MadMacroDlg::OnEditSortDescendingCase( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro && m_Pymacro->GetEditMode() != emHexMode )
+	{
+		int begin, end;
+		m_Pymacro->GetSelectionLineId( begin, end );
+		m_Pymacro->SortLines( sfDescending | sfCaseSensitive, begin, end );
+	}
+}
+
+void MadMacroDlg::OnEditSortByOptions( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro && m_Pymacro->GetEditMode() != emHexMode )
+	{
+		wxConfigBase *m_Config = wxConfigBase::Get(false);
+		wxString oldpath = m_Config->GetPath();
+		m_Config->SetPath( wxT( "/MadEdit" ) );
+		int order;
+		bool cs, num, rem;
+		m_Config->Read( wxT( "SortOrder" ), &order, sfAscending );
+		m_Config->Read( wxT( "SortCaseSensitive" ), &cs, false );
+		m_Config->Read( wxT( "SortNumeric" ), &num, false );
+		m_Config->Read( wxT( "SortRemoveDup" ), &rem, false );
+		m_Config->SetPath( oldpath );
+		MadSortFlags flags = order |
+							 ( cs ? sfCaseSensitive : 0 ) |
+							 ( num ? sfNumericSort : 0 ) |
+							 ( rem ? sfRemoveDuplicate : 0 ) ;
+		int begin, end;
+		m_Pymacro->GetSelectionLineId( begin, end );
+		m_Pymacro->SortLines( flags, begin, end );
+	}
+}
+
+void MadMacroDlg::OnEditSortOptions( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro == nullptr || m_Pymacro->GetEditMode() == emHexMode )
+	{ return; }
+	wxConfigBase *m_Config = wxConfigBase::Get(false);
+	MadSortDialog dialog( this );
+	wxString oldpath = m_Config->GetPath();
+	m_Config->SetPath( wxT( "/MadEdit" ) );
+	int order;
+	bool cs, num, rem;
+	m_Config->Read( wxT( "SortOrder" ), &order, sfAscending );
+	dialog.WxRadioBoxOrder->SetSelection( order );
+	m_Config->Read( wxT( "SortCaseSensitive" ), &cs, false );
+	dialog.WxCheckBoxCase->SetValue( cs );
+	m_Config->Read( wxT( "SortNumeric" ), &num, false );
+	dialog.WxCheckBoxNumeric->SetValue( num );
+	m_Config->Read( wxT( "SortRemoveDup" ), &rem, false );
+	dialog.WxCheckBoxRemoveDup->SetValue( rem );
+	// Hide Modaless Dialog
+	//HideModalessDialogs();
+
+	if( dialog.ShowModal() == wxID_OK )
+	{
+		order = dialog.WxRadioBoxOrder->GetSelection();
+		cs = dialog.WxCheckBoxCase->GetValue();
+		num = dialog.WxCheckBoxNumeric->GetValue();
+		rem = dialog.WxCheckBoxRemoveDup->GetValue();
+		m_Config->Write( wxT( "SortOrder" ), order );
+		m_Config->Write( wxT( "SortCaseSensitive" ), cs );
+		m_Config->Write( wxT( "SortNumeric" ), num );
+		m_Config->Write( wxT( "SortRemoveDup" ), rem );
+		int flags = order |
+					( cs ? sfCaseSensitive : 0 ) |
+					( num ? sfNumericSort : 0 ) |
+					( rem ? sfRemoveDuplicate : 0 ) ;
+		int begin, end;
+		m_Pymacro->GetSelectionLineId( begin, end );
+		m_Pymacro->SortLines( flags, begin, end );
+	}
+
+	m_Config->SetPath( oldpath );
+}
+
+void MadMacroDlg::OnEditCopyAsHexString( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro )
+	{
+		m_Pymacro->CopyAsHexString( false );
+	}
+}
+
+void MadMacroDlg::OnEditCopyAsHexStringWithSpace( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro )
+	{
+		m_Pymacro->CopyAsHexString( true );
+	}
+}
+
+void MadMacroDlg::OnEditCopyRevertHex( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro )
+	{
+		static wxString strDelimiters = wxT( " .,?!@#\t$%^&*()-=_+[]{}\\|;:\"'`<>/~" );
+		wxString str = wxGetTextFromUser( _( "Delimiters:" ), _( "Revert Hex String" ), strDelimiters );
+
+		if( !str.IsEmpty() )
+		{
+			strDelimiters = str;
+		}
+
+		m_Pymacro->CopyRevertHex( str );
+	}
+}
+
+void MadMacroDlg::OnEditIncIndent( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro )
+	{
+		m_Pymacro->IncreaseDecreaseIndent( true );
+	}
+}
+void MadMacroDlg::OnEditDecIndent( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro )
+	{
+		m_Pymacro->IncreaseDecreaseIndent( false );
+	}
+}
+
+void MadMacroDlg::OnEditComment( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro )
+	{
+		m_Pymacro->CommentUncomment( true );
+	}
+}
+
+void MadMacroDlg::OnEditUncomment( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro )
+	{
+		m_Pymacro->CommentUncomment( false );
+	}
+}
+
+void MadMacroDlg::OnEditWordWrapToNewLine( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro )
+	{
+		m_Pymacro->ConvertWordWrapToNewLine();
+	}
+}
+void MadMacroDlg::OnEditNewLineToWordWrap( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro )
+	{
+		m_Pymacro->ConvertNewLineToWordWrap();
+	}
+}
+
+void MadMacroDlg::OnEditToUpperCase( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro )
+	{
+		m_Pymacro->ToUpperCase();
+	}
+}
+
+void MadMacroDlg::OnEditToLowerCase( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro )
+	{
+		m_Pymacro->ToLowerCase();
+	}
+}
+
+void MadMacroDlg::OnEditInvertCase( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro )
+	{
+		m_Pymacro->InvertCase();
+	}
+}
+
+void MadMacroDlg::OnEditCapitalize( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro )
+	{
+		m_Pymacro->Capitalize();
+	}
+}
+
+void MadMacroDlg::OnEditToHalfWidth( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro )
+	{
+		m_Pymacro->ToHalfWidth();
+	}
+}
+
+void MadMacroDlg::OnEditToHalfWidthByOptions( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro == nullptr ) { return; }
+
+	static wxArrayInt selections;
+	static bool inited = false;
+
+	if( !inited )
+	{
+		selections.Add( 0 );
+		selections.Add( 1 );
+		selections.Add( 2 );
+		selections.Add( 3 );
+		inited = true;
+	}
+
+	wxString choices[4] = { _( "ASCII characters" ), _( "Japanese characters" ),
+							_( "Korean characters" ), _( "other characters" )
+						  };
+#if (wxMAJOR_VERSION == 2)
+	size_t sels = wxGetSelectedChoices( selections,
+										_( "Choose the characters you want to convert:" ), _( "To Halfwidth by Options..." ),
+										4, choices, this );
+#else
+	int sels = wxGetSelectedChoices( selections,
+									 _( "Choose the characters you want to convert:" ), _( "To Halfwidth by Options..." ),
+									 4, choices, this );
+#endif
+
+	if( sels > 0 )
+	{
+		bool ascii = false, japanese = false, korean = false, other = false;
+
+		for( size_t i = 0; i < (size_t)sels; ++i )
+		{
+			switch( selections[i] )
+			{
+			case 0: ascii = true; break;
+
+			case 1: japanese = true; break;
+
+			case 2: korean = true; break;
+
+			case 3: other = true; break;
+			}
+		}
+
+		m_Pymacro->ToHalfWidth( ascii, japanese, korean, other );
+	}
+}
+
+void MadMacroDlg::OnEditToFullWidth( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro )
+	{
+		m_Pymacro->ToFullWidth();
+	}
+}
+
+void MadMacroDlg::OnEditToFullWidthByOptions( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro == nullptr ) { return; }
+
+	static wxArrayInt selections;
+	static bool inited = false;
+
+	if( !inited )
+	{
+		selections.Add( 0 );
+		selections.Add( 1 );
+		selections.Add( 2 );
+		selections.Add( 3 );
+		inited = true;
+	}
+
+	wxString choices[4] = { _( "ASCII characters" ), _( "Japanese characters" ),
+							_( "Korean characters" ), _( "other characters" )
+						  };
+#if (wxMAJOR_VERSION == 2)
+	size_t sels = wxGetSelectedChoices( selections,
+										_( "Choose the characters you want to convert:" ), _( "To Fullwidth by Options..." ),
+										4, choices, this );
+#else
+	int sels = wxGetSelectedChoices( selections,
+									 _( "Choose the characters you want to convert:" ), _( "To Fullwidth by Options..." ),
+									 4, choices, this );
+#endif
+
+	if( sels > 0 )
+	{
+		bool ascii = false, japanese = false, korean = false, other = false;
+
+		for( size_t i = 0; i < (size_t)sels; ++i )
+		{
+			switch( selections[i] )
+			{
+			case 0: ascii = true; break;
+
+			case 1: japanese = true; break;
+
+			case 2: korean = true; break;
+
+			case 3: other = true; break;
+			}
+		}
+
+		m_Pymacro->ToFullWidth( ascii, japanese, korean, other );
+	}
+}
+
+void MadMacroDlg::OnEditTabToSpace( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro )
+	{
+		m_Pymacro->ConvertTabToSpace();
+	}
+}
+void MadMacroDlg::OnEditSpaceToTab( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro )
+	{
+		m_Pymacro->ConvertSpaceToTab();
+	}
+}
+
+void MadMacroDlg::OnEditTrimTrailingSpaces( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro && m_Pymacro->GetEditMode() != emHexMode )
+	{
+		m_Pymacro->TrimTrailingSpaces();
+	}
+}
+
+void MadMacroDlg::OnEditTrimLeadingSpaces( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro && m_Pymacro->GetEditMode() != emHexMode )
+	{
+		m_Pymacro->TrimLeadingSpaces();
+	}
+}
+
+void MadMacroDlg::OnEditDeleteEmptyLines( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro && m_Pymacro->GetEditMode() != emHexMode )
+	{
+		m_Pymacro->DeleteEmptyLines();
+	}
+}
+
+void MadMacroDlg::OnEditDeleteEmptyLinesWithSpaces( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro && m_Pymacro->GetEditMode() != emHexMode )
+	{
+		m_Pymacro->DeleteEmptyLinesWithSpaces();
+	}
+}
+
+void MadMacroDlg::OnEditJoinLines( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro && m_Pymacro->GetEditMode() != emHexMode )
+	{
+		m_Pymacro->JoinLines();
+	}
+}
+
+void MadMacroDlg::OnEditInsertNumbers( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro && m_Pymacro->GetEditMode() == emColumnMode )
+	{
+		// Hide Modaless Dialog
+		//HideModalessDialogs();
+
+		if( g_MadNumberDlg == nullptr ) { g_MadNumberDlg = new MadNumberDlg( this ); }
+
+		if( g_MadNumberDlg->ShowModal() == wxID_OK )
+		{
+			MadNumberingStepType numStepType = mnstLinear;
+			MadNumberFormat numFormat = nfDEC;
+			MadNumberAlign numAlign = naLeft;
+			int sel = g_MadNumberDlg->WxChoiceNumberStepType->GetSelection();
+
+			switch( sel )
+			{
+			case 1: numStepType = mnstExponential; break;
+
+			default: break;
+			}
+
+			sel = g_MadNumberDlg->WxChoiceFormat->GetSelection();
+
+			switch( sel )
+			{
+			case 1:
+				{
+					numFormat = nfHEX;
+				}
+				break;
+
+			case 2:
+				{
+					numFormat = nfBIN;
+				}
+				break;
+
+			case 3:
+				{
+					numFormat = nfOCT;
+				}
+				break;
+
+			default:
+				break;
+			}
+
+			sel = g_MadNumberDlg->WxChoiceAlign->GetSelection();
+
+			switch( sel )
+			{
+			case 1:
+				{
+					numAlign = naRight;
+				}
+				break;
+
+			default:
+				break;
+			}
+
+			long initialNum = 0, numStep = 0, totalChar = 0;
+			g_MadNumberDlg->WxEditNumberOfChars->GetValue().ToLong( &totalChar );
+			g_MadNumberDlg->WxEditNumberingStep->GetValue().ToLong( &numStep );
+			g_MadNumberDlg->WxEditInitialNumber->GetValue().ToLong( &initialNum );
+			wxString prefix, postfix;
+
+			if( g_MadNumberDlg->WxCheckPrefix->GetValue() )
+			{ prefix = g_MadNumberDlg->WxEditPrefix->GetValue(); }
+
+			if( g_MadNumberDlg->WxCheckPostfix->GetValue() )
+			{ postfix = g_MadNumberDlg->WxEditPostfix->GetValue(); }
+
+			m_Pymacro->InsertIncrementalNumber( initialNum, numStep, totalChar, numStepType, numFormat, numAlign, g_MadNumberDlg->WxPadChar->GetValue(), prefix, postfix );
+			m_Pymacro->Refresh( false );
+		}
+	}
+}
+
+void MadMacroDlg::OnEditColumnAlignLeft( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro && m_Pymacro->GetEditMode() != emHexMode )
+	{
+		m_Pymacro->ColumnAlignLeft();
+	}
+}
+
+void MadMacroDlg::OnEditColumnAlignRight( wxCommandEvent& WXUNUSED(event) )
+{
+	if( m_Pymacro && m_Pymacro->GetEditMode() != emHexMode )
+	{
+		m_Pymacro->ColumnAlignRight();
+	}
+}
+

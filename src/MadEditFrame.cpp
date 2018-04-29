@@ -4639,7 +4639,7 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 		madedit->SetOnActivate( &OnEditActivate );
 		madedit->SetOnToggleWindow( &OnEditToggleWindow );
 		madedit->SetOnMouseRightUp( &OnEditMouseRightUp );
-		madedit->SetRightClickMenu(g_Menu_EditPop);
+		madedit->SetRightClickMenu( g_Menu_EditPop );
 		madedit->SetOnVSMouseRightUp( &OnVScrollMouseRightUp );
 		madedit->SetOnHSMouseRightUp( &OnHScrollMouseRightUp );
 		madedit->SetOnFontChanged( &OnFontChanged );
