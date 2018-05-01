@@ -69,6 +69,18 @@ MadMacroDlg::wxCmdEvtHandlerMap_t MadMacroDlg::m_menu_evt_map[] =
 	{ menuColumnAlignRight, &MadMacroDlg::OnEditColumnAlignRight },
 };
 
+MadMacroDlg::wxCmdEvtHandlerRangeMap_t MadMacroDlg::m_menu_evt_range_map[] =
+{
+	{ menuSpellOption1, menuSpellOption99, &MadMacroDlg::OnEditSpellCheck },
+	{ menuMadScrip1, menuMadScrip200, &MadMacroDlg::OnToolsMadScriptList },
+};
+
+extern EmbeddedPython *g_EmbeddedPython;
+extern MadEditFrame *g_MainFrame;
+extern wxArrayString g_SpellSuggestions;
+extern wxString g_MadEditAppDir;
+extern wxString g_MadEditHomeDir;
+extern wxMenu *g_Menu_MadMacro_Scripts;
 extern MadEdit *g_ActiveMadEdit;
 extern void OnEditMouseRightUp( MadEdit * madedit );
 extern wxMenu *g_Menu_EditPop;
@@ -147,6 +159,11 @@ MadMacroDlg::MadMacroDlg(wxWindow* parent,wxWindowID id,const wxPoint& WXUNUSED(
 	for(size_t i = 0; i < sizeof(m_menu_evt_map)/sizeof(m_menu_evt_map[0]); ++i)
 	{
 		Bind( wxEVT_MENU, m_menu_evt_map[i].method, this, m_menu_evt_map[i].evtTag );
+	}
+
+	for(size_t i = 0; i < sizeof(m_menu_evt_range_map)/sizeof(m_menu_evt_range_map[0]); ++i)
+	{
+		Bind( wxEVT_MENU, m_menu_evt_range_map[i].method, this, m_menu_evt_range_map[i].evtStartTag, m_menu_evt_range_map[i].evtEndTag );
 	}
 
 	m_Pymacro->SetOnMouseRightUp( &OnEditMouseRightUp );
@@ -237,7 +254,7 @@ void MadMacroDlg::MadMacroDlgClose(wxCloseEvent& WXUNUSED(event))
 	g_MadMacroDlg = nullptr;
 }
 
-void MadMacroDlg::OnButtonResetClick(wxCommandEvent& event)
+void MadMacroDlg::OnButtonResetClick(wxCommandEvent& WXUNUSED(event))
 {
 	wxString endline(wxT("\r"));
 	if (m_Pymacro->GetInsertNewLineType() == nltDOS) endline += wxT("\n");
@@ -825,6 +842,73 @@ void MadMacroDlg::OnEditColumnAlignRight( wxCommandEvent& WXUNUSED(event) )
 	if( m_Pymacro && m_Pymacro->GetEditMode() != emHexMode )
 	{
 		m_Pymacro->ColumnAlignRight();
+	}
+}
+
+void MadMacroDlg::OnEditSpellCheck( wxCommandEvent& event )
+{
+	if( m_Pymacro && m_Pymacro->GetEditMode() != emHexMode )
+	{
+		m_Pymacro->ReplaceWordFromCaretPos( g_SpellSuggestions[event.GetId() - menuSpellOption1] );
+	}
+}
+
+void MadMacroDlg::OnToolsMadScriptList( wxCommandEvent& event )
+{
+	if( m_Pymacro != nullptr )
+	{ 
+		wxString scriptdir = g_MadEditAppDir + wxT( "scripts" ) + wxFILE_SEP_PATH;
+		int menuId = event.GetId();
+		wxString filename = g_Menu_MadMacro_Scripts->GetLabelText( menuId ) + wxT( ".mpy" );
+		wxString scripfile = scriptdir + filename;
+		if(!wxFileExists(scripfile)) scripfile = g_MadEditHomeDir + wxT( "scripts" ) + wxFILE_SEP_PATH + filename;
+		if(!wxFileExists(scripfile)) 
+		{
+			scripfile = 
+#if defined (DATA_DIR)
+				wxT( DATA_DIR"/madedit-mod/scripts/" ) +
+#else
+				wxT( "/usr/share/madedit-mod/scripts/" ) +
+#endif
+			filename;
+		}
+
+		wxTextFile scriptfile( scripfile );
+		scriptfile.Open( wxConvFile );
+
+		if( scriptfile.IsOpened() )
+		{
+			if( !g_EmbeddedPython )
+			{
+				try
+				{
+					g_EmbeddedPython = new EmbeddedPython();
+				}
+				catch( std::bad_alloc & )
+				{
+					MadMessageBox( _( "Memory allocation failed" ), _( "Error" ),  wxOK | wxICON_ERROR );
+				}
+			}
+
+			if( g_EmbeddedPython )
+			{
+				wxString str = scriptfile.GetFirstLine() + wxT( "\n" );
+
+				for( ; !scriptfile.Eof(); )
+				{
+					str << scriptfile.GetNextLine() << wxT( "\n" );
+				}
+
+				if( str.IsNull() == false )
+				{
+					g_MainFrame->SetMacroRunning();
+					g_EmbeddedPython->exec( std::string((const char *)(str.ToUTF8().data())) );
+					g_MainFrame->SetMacroStopped();
+				}
+			}
+
+			scriptfile.Close();
+		}
 	}
 }
 

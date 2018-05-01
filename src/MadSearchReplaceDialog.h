@@ -150,6 +150,8 @@ class MadSearchReplaceDialog: public wxDialog
 		void OnEditInsertNumbers( wxCommandEvent& event );
 		void OnEditColumnAlignLeft( wxCommandEvent& event );
 		void OnEditColumnAlignRight( wxCommandEvent& event );
+		void OnEditSpellCheck( wxCommandEvent& WXUNUSED(event) );
+		void OnToolsMadScriptList( wxCommandEvent& WXUNUSED(event) );
 		
 		typedef struct 
 		{
@@ -157,6 +159,13 @@ class MadSearchReplaceDialog: public wxDialog
 			void (MadSearchReplaceDialog::*method)( wxCommandEvent &);
 		} wxCmdEvtHandlerMap_t;
 		static wxCmdEvtHandlerMap_t m_menu_evt_map[];
+		typedef struct 
+		{
+			const long evtStartTag;
+			const long evtEndTag;
+			void (MadSearchReplaceDialog::*method)( wxCommandEvent &);
+		} wxCmdEvtHandlerRangeMap_t;
+		static wxCmdEvtHandlerRangeMap_t m_menu_evt_range_map[];
 
 	//private:
 	public:

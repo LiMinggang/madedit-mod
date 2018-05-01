@@ -100,6 +100,8 @@ class MadMacroDlg: public wxDialog
 		void OnEditInsertNumbers( wxCommandEvent& WXUNUSED(event) );
 		void OnEditColumnAlignLeft( wxCommandEvent& WXUNUSED(event) );
 		void OnEditColumnAlignRight( wxCommandEvent& WXUNUSED(event) );
+		void OnEditSpellCheck( wxCommandEvent& WXUNUSED(event) );
+		void OnToolsMadScriptList( wxCommandEvent& WXUNUSED(event) );
 
 		typedef struct 
 		{
@@ -107,6 +109,14 @@ class MadMacroDlg: public wxDialog
 			void (MadMacroDlg::*method)( wxCommandEvent &);
 		} wxCmdEvtHandlerMap_t;
 		static wxCmdEvtHandlerMap_t m_menu_evt_map[];
+		
+		typedef struct 
+		{
+			const long evtStartTag;
+			const long evtEndTag;
+			void (MadMacroDlg::*method)( wxCommandEvent &);
+		} wxCmdEvtHandlerRangeMap_t;
+		static wxCmdEvtHandlerRangeMap_t m_menu_evt_range_map[];
 };
 extern MadMacroDlg *g_MadMacroDlg;
 #endif //__MADMACRODLG_H__

@@ -125,6 +125,7 @@ New: Atyle formatter: Add new option "style=webkit" for the WebKit brace style
 New: New API for MadPython:InsertNewline
 New: Right click menu enabled for MadMacroDlg
 New: Right click menu enabled for SearchReplaceDialog
+New: Scripts and spell check for Macro and SearchReplace dialog
 Fix: Deleted stale lock file '/home/username/prog_name-username' bug(Linux) #262
 Fix: Code issue of EnableTransparency
 Fix: GB18030 not work under Linux

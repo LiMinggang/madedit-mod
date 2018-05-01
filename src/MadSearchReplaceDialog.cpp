@@ -12,6 +12,7 @@
 #include <wx/progdlg.h>
 #include <wx/fileconf.h>
 
+#include "EmbeddedPython.hpp"
 #include "MadEditFrame.h"
 #include "MadSearchReplaceDialog.h"
 #include "MadRecentList.h"
@@ -94,6 +95,19 @@ MadSearchReplaceDialog::wxCmdEvtHandlerMap_t MadSearchReplaceDialog::m_menu_evt_
 	{ menuColumnAlignLeft, &MadSearchReplaceDialog::OnEditColumnAlignLeft },
 	{ menuColumnAlignRight, &MadSearchReplaceDialog::OnEditColumnAlignRight },
 };
+
+MadSearchReplaceDialog::wxCmdEvtHandlerRangeMap_t MadSearchReplaceDialog::m_menu_evt_range_map[] =
+{
+	{ menuSpellOption1, menuSpellOption99, &MadSearchReplaceDialog::OnEditSpellCheck },
+	{ menuMadScrip1, menuMadScrip200, &MadSearchReplaceDialog::OnToolsMadScriptList },
+};
+
+extern EmbeddedPython *g_EmbeddedPython;
+extern MadEditFrame *g_MainFrame;
+extern wxArrayString g_SpellSuggestions;
+extern wxString g_MadEditAppDir;
+extern wxString g_MadEditHomeDir;
+extern wxMenu *g_Menu_MadMacro_Scripts;
 
 extern int MadMessageBox( const wxString& message,
 						  const wxString& caption = wxMessageBoxCaptionStr,
@@ -2757,5 +2771,74 @@ void MadSearchReplaceDialog::OnEditColumnAlignRight( wxCommandEvent& event )
 	}
 
 	g_CurrentMadEdit = nullptr;
+}
+
+void MadSearchReplaceDialog::OnEditSpellCheck( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit && g_CurrentMadEdit->GetEditMode() != emHexMode )
+	{
+		g_CurrentMadEdit->ReplaceWordFromCaretPos( g_SpellSuggestions[event.GetId() - menuSpellOption1] );
+	}
+}
+
+void MadSearchReplaceDialog::OnToolsMadScriptList( wxCommandEvent& event )
+{
+	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit != nullptr )
+	{ 
+		wxString scriptdir = g_MadEditAppDir + wxT( "scripts" ) + wxFILE_SEP_PATH;
+		int menuId = event.GetId();
+		wxString filename = g_Menu_MadMacro_Scripts->GetLabelText( menuId ) + wxT( ".mpy" );
+		wxString scripfile = scriptdir + filename;
+		if(!wxFileExists(scripfile)) scripfile = g_MadEditHomeDir + wxT( "scripts" ) + wxFILE_SEP_PATH + filename;
+		if(!wxFileExists(scripfile)) 
+		{
+			scripfile = 
+#if defined (DATA_DIR)
+				wxT( DATA_DIR"/madedit-mod/scripts/" ) +
+#else
+				wxT( "/usr/share/madedit-mod/scripts/" ) +
+#endif
+			filename;
+		}
+
+		wxTextFile scriptfile( scripfile );
+		scriptfile.Open( wxConvFile );
+
+		if( scriptfile.IsOpened() )
+		{
+			if( !g_EmbeddedPython )
+			{
+				try
+				{
+					g_EmbeddedPython = new EmbeddedPython();
+				}
+				catch( std::bad_alloc & )
+				{
+					MadMessageBox( _( "Memory allocation failed" ), _( "Error" ),  wxOK | wxICON_ERROR );
+				}
+			}
+
+			if( g_EmbeddedPython )
+			{
+				wxString str = scriptfile.GetFirstLine() + wxT( "\n" );
+
+				for( ; !scriptfile.Eof(); )
+				{
+					str << scriptfile.GetNextLine() << wxT( "\n" );
+				}
+
+				if( str.IsNull() == false )
+				{
+					g_MainFrame->SetMacroRunning();
+					g_EmbeddedPython->exec( std::string((const char *)(str.ToUTF8().data())) );
+					g_MainFrame->SetMacroStopped();
+				}
+			}
+
+			scriptfile.Close();
+		}
+	}
 }
 
