@@ -1356,7 +1356,6 @@ void MadSearchReplaceDialog::MadSearchReplaceDialogActivate( wxActivateEvent& ev
 	}
 }
 
-
 /*
  * WxButtonReplaceClick
  */
@@ -1447,7 +1446,6 @@ void MadSearchReplaceDialog::UpdateSearchInSelection( bool check )
 	else
 		WxCheckBoxWrapAround->Enable();
 }
-
 
 void MadSearchReplaceDialog::WxCheckBoxSearchInSelectionClick( wxCommandEvent& event )
 {
@@ -2841,4 +2839,3 @@ void MadSearchReplaceDialog::OnToolsMadScriptList( wxCommandEvent& event )
 		}
 	}
 }
-

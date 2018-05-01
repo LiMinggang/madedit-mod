@@ -172,8 +172,8 @@ class MadSearchReplaceDialog: public wxDialog
 		//(*Handlers(MadSearchReplaceDialog)
 		void MadSearchReplaceDialogClose(wxCloseEvent& event);
 		void MadSearchReplaceDialogKeyDown(wxKeyEvent& event);
-		void WxCheckBoxFindHexClick(wxCommandEvent& WXUNUSED(event));
-		void WxCheckBoxSearchInSelectionClick(wxCommandEvent& WXUNUSED(event));
+		void WxCheckBoxFindHexClick(wxCommandEvent& event);
+		void WxCheckBoxSearchInSelectionClick(wxCommandEvent& event);
 		void WxButtonFindNextClick(wxCommandEvent& WXUNUSED(event));
 		void WxButtonReplaceClick(wxCommandEvent& WXUNUSED(event));
 		void WxButtonReplaceAllClick(wxCommandEvent& WXUNUSED(event));
@@ -181,7 +181,7 @@ class MadSearchReplaceDialog: public wxDialog
 		void WxButtonCountClick(wxCommandEvent& WXUNUSED(event));
 		void WxButtonCloseClick(wxCommandEvent& WXUNUSED(event));
 		void WxButtonReplaceExpandClick(wxCommandEvent& WXUNUSED(event));
-		void WxCheckBoxRegexClick(wxCommandEvent& WXUNUSED(event));
+		void WxCheckBoxRegexClick(wxCommandEvent& event);
 		void WxRadioLosingFocusSelect(wxCommandEvent& WXUNUSED(event));
 		void WxRadioAlwaysSelect(wxCommandEvent& WXUNUSED(event));
 		void WxSliderTransDegreeScroll(wxCommandEvent& WXUNUSED(event));
@@ -189,7 +189,7 @@ class MadSearchReplaceDialog: public wxDialog
 		void WxButtonFindAllClick(wxCommandEvent& WXUNUSED(event));
 		void WxButtonFindAllInAllClick(wxCommandEvent& WXUNUSED(event));
 		void OnWxSliderInputSizerCmdScroll(wxCommandEvent& WXUNUSED(event));
-		void WxCheckBoxBookmarkLineClick(wxCommandEvent& WXUNUSED(event));
+		void WxCheckBoxBookmarkLineClick(wxCommandEvent& event);
 		//*)
 
 		void MadSearchReplaceDialogActivate(wxActivateEvent& event);
