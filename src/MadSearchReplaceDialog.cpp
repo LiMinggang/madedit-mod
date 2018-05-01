@@ -509,7 +509,6 @@ MadSearchReplaceDialog::~MadSearchReplaceDialog()
 	delete m_RecentFindText;
 }
 
-
 void MadSearchReplaceDialog::MadSearchReplaceDialogClose( wxCloseEvent& event )
 {
 	if( event.CanVeto() && (nullptr != dynamic_cast< wxFrame * >(wxTheApp->GetTopWindow())))
