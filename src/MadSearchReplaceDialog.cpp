@@ -490,6 +490,11 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 		Bind( wxEVT_MENU, m_menu_evt_map[i].method, this, m_menu_evt_map[i].evtTag );
 	}
 
+	for(size_t i = 0; i < sizeof(m_menu_evt_range_map)/sizeof(m_menu_evt_range_map[0]); ++i)
+	{
+		Bind( wxEVT_MENU, m_menu_evt_range_map[i].method, this, m_menu_evt_range_map[i].evtStartTag, m_menu_evt_range_map[i].evtEndTag );
+	}
+
 	m_FindText->SetOnMouseRightUp( &OnEditMouseRightUp );
 	m_FindText->SetRightClickMenu( g_Menu_EditPop );
 	m_ReplaceText->SetOnMouseRightUp( &OnEditMouseRightUp );
