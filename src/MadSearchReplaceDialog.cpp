@@ -253,7 +253,7 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 		StaticBoxSizer2->Add( WxRadioLosingFocus, 0, wxALL | wxEXPAND, 2 );
 		WxRadioAlways = new wxRadioButton( this, wxID_ANY, _( "Always" ), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T( "ID_RADIOBUTTON2" ) );
 		StaticBoxSizer2->Add( WxRadioAlways, 0, wxALL | wxEXPAND, 2 );
-		WxSliderTransDegree = new wxSlider( this, wxID_ANY, 30, 25, 255, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T( "ID_WXSLIDERTRANSDEGREE" ) );
+		WxSliderTransDegree = new wxSlider( this, wxID_ANY, 255, 25, 255, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T( "ID_WXSLIDERTRANSDEGREE" ) );
 		StaticBoxSizer2->Add( WxSliderTransDegree, 0, wxALL | wxEXPAND, 2 );
 		BoxSizer9->Add(StaticBoxSizer2, 0, wxALL|wxALIGN_TOP, 2);
 	}
@@ -996,7 +996,7 @@ void MadSearchReplaceDialog::ReadWriteSettings( bool bRead )
 		if(m_EnableTransparency)
 		{
 			long transparency = 30;
-			m_Config->Read( wxT( "/MadEdit/SearchTransparency" ), &transparency, 30 );
+			m_Config->Read( wxT( "/MadEdit/SearchTransparency" ), &transparency, 255 );
 			if(transparency < 30) transparency = 30;
 			else if(transparency > 255) transparency = 255;
 			WxSliderTransDegree->SetValue(transparency);

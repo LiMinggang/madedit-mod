@@ -32,19 +32,20 @@ class MadPurgeHistoryDialog : public wxDialog
 		virtual ~MadPurgeHistoryDialog();
 
 		//(*Declarations(MadPurgeHistoryDialog)
-		wxCheckBox* wxCheckBoxRecentEncodings;
-		wxCheckBox* wxCheckBoxResetToolBarsInfoWin;
-		wxCheckBox* wxCheckBoxCaretPos;
-		wxCheckBox* wxCheckBoxRecentSearchedExcludeFilters;
-		wxCheckBox* wxCheckBoxAllAbove;
-		wxCheckBox* wxCheckBoxRecentFonts;
-		wxCheckBox* wxCheckBoxRecentSearchedDirectories;
 		wxButton* WxButtonCancel;
-		wxCheckBox* wxCheckBoxRecentSearchedTexts;
 		wxButton* WxButtonOK;
-		wxCheckBox* wxRecentSearchedFileFilters;
+		wxCheckBox* wxCheckBoxAllAbove;
+		wxCheckBox* wxCheckBoxCaretPos;
+		wxCheckBox* wxCheckBoxRecentEncodings;
 		wxCheckBox* wxCheckBoxRecentFiles;
+		wxCheckBox* wxCheckBoxRecentFonts;
 		wxCheckBox* wxCheckBoxRecentReplacedTexts;
+		wxCheckBox* wxCheckBoxRecentSearchedDirectories;
+		wxCheckBox* wxCheckBoxRecentSearchedExcludeFilters;
+		wxCheckBox* wxCheckBoxRecentSearchedTexts;
+		wxCheckBox* wxCheckBoxResetToolBarsInfoWin;
+		wxCheckBox* wxCheckBoxResetTransparency;
+		wxCheckBox* wxRecentSearchedFileFilters;
 		//*)
 
 	protected:

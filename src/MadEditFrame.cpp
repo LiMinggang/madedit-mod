@@ -8962,7 +8962,7 @@ void MadEditFrame::OnToolsPurgeHistories( wxCommandEvent& WXUNUSED(event) )
 
 		if( dlg.wxCheckBoxRecentSearchedTexts->IsChecked() || dlg.wxCheckBoxRecentReplacedTexts->IsChecked()
 			|| dlg.wxCheckBoxRecentSearchedDirectories->IsChecked() || dlg.wxRecentSearchedFileFilters->IsChecked()
-			|| dlg.wxCheckBoxRecentSearchedExcludeFilters->IsChecked())
+			|| dlg.wxCheckBoxRecentSearchedExcludeFilters->IsChecked() || dlg.wxCheckBoxResetTransparency->IsChecked())
 		{
 			if( g_SearchReplaceDialog == nullptr )
 			{
@@ -8978,6 +8978,11 @@ void MadEditFrame::OnToolsPurgeHistories( wxCommandEvent& WXUNUSED(event) )
 			if( dlg.wxCheckBoxRecentReplacedTexts->IsChecked() )
 			{
 				g_SearchReplaceDialog->PurgeRecentReplaceTexts();
+			}
+
+			if(dlg.wxCheckBoxResetTransparency->IsChecked()  && g_SearchReplaceDialog->m_EnableTransparency )
+			{
+				m_Config->Write( wxT( "/MadEdit/SearchTransparency" ), 255 );
 			}
 
 			if( dlg.wxCheckBoxRecentSearchedDirectories->IsChecked() || dlg.wxRecentSearchedFileFilters->IsChecked()
