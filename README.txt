@@ -134,6 +134,7 @@ Fix: MadPython Recording issue
 Fix: Chars escape for regex recording
 Fix: Unbind critial message handlers during OnClose
 Fix: High CPU load when move mouse over textlines #258 #265
+Fix: Can't replace bookmarked lines with multiple line text
 Update Astyle to latest code
 
 Mod v0.4.12

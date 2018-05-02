@@ -3971,10 +3971,6 @@ void MadEdit::ReplaceBookmarkedLines()
 	wxString strText;
 	wxString newline( wxT( "\r" ) );
 
-	if( GetInsertNewLineType() == nltDOS ) newline += wxT( "\n" );
-	else
-		if( GetInsertNewLineType() == nltUNIX ) newline = wxT( "\n" );
-
 	if( wxTheClipboard->Open() )
 	{
 		if( wxTheClipboard->IsSupported( wxDF_UNICODETEXT ) )
@@ -3989,32 +3985,32 @@ void MadEdit::ReplaceBookmarkedLines()
 
 	if( strText.IsEmpty() ) return;
 
+	if( GetInsertNewLineType() == nltDOS ) newline += wxT( "\n" );
+	else
+		if( GetInsertNewLineType() == nltUNIX ) newline = wxT( "\n" );
+
 	wxString strDelimiters = _T( "\r\n" );
-	wxStringTokenizer tkz( strText, strDelimiters );
 	list<wxString> strLines;
 	list<MadLineIterator> &lineList = m_Lines->m_LineList.GetBookmarkedLines();
-	list<MadLineIterator>::iterator it = lineList.begin();
 	size_t totalBmk = lineList.size(), i = 0;
 	wxFileOffset msize = 0;
 	vector<wxFileOffset> linebegpos, linesize;
 	wxFileOffset curpos = 0, lastpos = 0;
 
-	while( tkz.HasMoreTokens() && ( i++ < totalBmk ) )
+	while(i < totalBmk)
 	{
-		strLines.push_front( tkz.GetNextToken() + newline );
+		wxStringTokenizer tkz( strText, strDelimiters );
+		while( tkz.HasMoreTokens() && ( i++ < totalBmk ) )
+		{
+			strLines.push_front( tkz.GetNextToken() + newline );
+		}
 	}
 
-	list<wxString>::iterator strit = strLines.begin();
-	list<MadLineIterator>::reverse_iterator rit = lineList.rbegin();
-
-	while( strLines.size() < totalBmk )
-	{
-		--totalBmk;
-		++rit;
-	}
+	wxASSERT(strLines.size() >= totalBmk);
 
 	if(totalBmk)
 	{
+		list<MadLineIterator>::iterator it = lineList.begin();
 		MadLineIterator lineit = m_Lines->m_LineList.begin();
 		linebegpos.reserve(totalBmk);
 		linesize.reserve(totalBmk);
@@ -4046,8 +4042,17 @@ void MadEdit::ReplaceBookmarkedLines()
 		}
 
 		wxASSERT(linebegpos.size() > 0);
+		if( undo == nullptr )
+		{
+			undo = m_UndoBuffer->Add();
+			SetNeedSync();
+			undo->m_CaretPosBefore = m_CaretPos.pos;
+		}
+
+		list<wxString>::iterator strit = strLines.begin();
 		for (int j = (int)(linebegpos.size() - 1); j >= 0; --j )
 		{
+			wxASSERT(strit != strLines.end());
 			MadOverwriteUndoData *oudata = new MadOverwriteUndoData();
 			MadBlock blk( md, -1, 0 );
 			oudata->m_Pos = linebegpos[j];
@@ -4061,16 +4066,10 @@ void MadEdit::ReplaceBookmarkedLines()
 							  oudata->m_DelSize, &oudata->m_DelData,
 							  oudata->m_InsSize, &oudata->m_InsData );
 
-			if( undo == nullptr )
-			{
-				undo = m_UndoBuffer->Add();
-				SetNeedSync();
-				undo->m_CaretPosBefore = m_CaretPos.pos;
-			}
-
 			undo->m_CaretPosAfter = oudata->m_Pos + oudata->m_InsSize;
 			undo->m_Undos.push_back( oudata );
 			m_CaretPos.pos = oudata->m_Pos;
+			++strit;
 		}
 
 		if( undo )
