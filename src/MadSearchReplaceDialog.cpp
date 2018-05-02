@@ -518,6 +518,7 @@ void MadSearchReplaceDialog::MadSearchReplaceDialogClose( wxCloseEvent& event )
 		return WxButtonCloseClick( evt );
 	}
 
+	if( g_CurrentMadEdit == m_ReplaceText || g_CurrentMadEdit == m_FindText ) g_CurrentMadEdit = nullptr;
 	g_SearchReplaceDialog = nullptr;
 	Destroy();
 }
@@ -2085,9 +2086,8 @@ void MadSearchReplaceDialog::OnEditCut( wxCommandEvent& WXUNUSED(event) )
 	if( g_CurrentMadEdit )
 	{
 		g_CurrentMadEdit->CutToClipboard();
+		g_CurrentMadEdit = nullptr;
 	}
-
-	g_CurrentMadEdit = nullptr;
 }
 
 void MadSearchReplaceDialog::OnEditCopy( wxCommandEvent& WXUNUSED(event) )
@@ -2096,9 +2096,8 @@ void MadSearchReplaceDialog::OnEditCopy( wxCommandEvent& WXUNUSED(event) )
 	if( g_CurrentMadEdit )
 	{
 		g_CurrentMadEdit->CopyToClipboard();
+		g_CurrentMadEdit = nullptr;
 	}
-
-	g_CurrentMadEdit = nullptr;
 }
 
 void MadSearchReplaceDialog::OnEditPaste( wxCommandEvent& WXUNUSED(event) )
@@ -2107,9 +2106,8 @@ void MadSearchReplaceDialog::OnEditPaste( wxCommandEvent& WXUNUSED(event) )
 	if( g_CurrentMadEdit )
 	{
 		g_CurrentMadEdit->PasteFromClipboard();
+		g_CurrentMadEdit = nullptr;
 	}
-
-	g_CurrentMadEdit = nullptr;
 }
 
 void MadSearchReplaceDialog::OnEditDelete( wxCommandEvent& WXUNUSED(event) )
@@ -2118,9 +2116,8 @@ void MadSearchReplaceDialog::OnEditDelete( wxCommandEvent& WXUNUSED(event) )
 	if( g_CurrentMadEdit )
 	{
 		g_CurrentMadEdit->Delete();
+		g_CurrentMadEdit = nullptr;
 	}
-
-	g_CurrentMadEdit = nullptr;
 }
 
 void MadSearchReplaceDialog::OnEditCutLine( wxCommandEvent& WXUNUSED(event) )
@@ -2129,9 +2126,8 @@ void MadSearchReplaceDialog::OnEditCutLine( wxCommandEvent& WXUNUSED(event) )
 	if( g_CurrentMadEdit )
 	{
 		g_CurrentMadEdit->CutLine();
+		g_CurrentMadEdit = nullptr;
 	}
-
-	g_CurrentMadEdit = nullptr;
 }
 
 void MadSearchReplaceDialog::OnEditDeleteLine( wxCommandEvent& WXUNUSED(event) )
@@ -2140,9 +2136,8 @@ void MadSearchReplaceDialog::OnEditDeleteLine( wxCommandEvent& WXUNUSED(event) )
 	if( g_CurrentMadEdit )
 	{
 		g_CurrentMadEdit->DeleteLine();
+		g_CurrentMadEdit = nullptr;
 	}
-
-	g_CurrentMadEdit = nullptr;
 }
 
 void MadSearchReplaceDialog::OnEditSelectAll( wxCommandEvent& WXUNUSED(event) )
@@ -2151,9 +2146,8 @@ void MadSearchReplaceDialog::OnEditSelectAll( wxCommandEvent& WXUNUSED(event) )
 	if( g_CurrentMadEdit )
 	{
 		g_CurrentMadEdit->SelectAll();
+		g_CurrentMadEdit = nullptr;
 	}
-
-	g_CurrentMadEdit = nullptr;
 }
 
 void MadSearchReplaceDialog::OnEditStartEndSelction( wxCommandEvent& WXUNUSED(event) )
@@ -2162,9 +2156,8 @@ void MadSearchReplaceDialog::OnEditStartEndSelction( wxCommandEvent& WXUNUSED(ev
 	if( g_CurrentMadEdit )
 	{
 		g_CurrentMadEdit->StartEndSelction();
+		g_CurrentMadEdit = nullptr;
 	}
-
-	g_CurrentMadEdit = nullptr;
 }
 
 void MadSearchReplaceDialog::OnEditInsertTabChar( wxCommandEvent& WXUNUSED(event) )
@@ -2173,9 +2166,8 @@ void MadSearchReplaceDialog::OnEditInsertTabChar( wxCommandEvent& WXUNUSED(event
 	if( g_CurrentMadEdit )
 	{
 		g_CurrentMadEdit->InsertTabChar();
+		g_CurrentMadEdit = nullptr;
 	}
-
-	g_CurrentMadEdit = nullptr;
 }
 
 void MadSearchReplaceDialog::OnEditInsertDateTime( wxCommandEvent& WXUNUSED(event) )
@@ -2184,9 +2176,8 @@ void MadSearchReplaceDialog::OnEditInsertDateTime( wxCommandEvent& WXUNUSED(even
 	if( g_CurrentMadEdit )
 	{
 		g_CurrentMadEdit->InsertDateTime();
+		g_CurrentMadEdit = nullptr;
 	}
-
-	g_CurrentMadEdit = nullptr;
 }
 
 void MadSearchReplaceDialog::OnEditSortAscending( wxCommandEvent& WXUNUSED(event) )
@@ -2270,9 +2261,12 @@ void MadSearchReplaceDialog::OnEditSortByOptions( wxCommandEvent& WXUNUSED(event
 
 void MadSearchReplaceDialog::OnEditSortOptions( wxCommandEvent& WXUNUSED(event) )
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit == nullptr || g_CurrentMadEdit->GetEditMode() == emHexMode )
-	{ return; }
+	if( g_CurrentMadEdit == nullptr || g_CurrentMadEdit == g_ActiveMadEdit ) return;
+	if( g_CurrentMadEdit->GetEditMode() == emHexMode )
+	{
+		g_CurrentMadEdit = nullptr;
+		return;
+	}
 	wxConfigBase *m_Config = wxConfigBase::Get(false);
 	MadSortDialog dialog( this );
 	wxString oldpath = m_Config->GetPath();
@@ -2310,7 +2304,6 @@ void MadSearchReplaceDialog::OnEditSortOptions( wxCommandEvent& WXUNUSED(event) 
 	}
 
 	m_Config->SetPath( oldpath );
-
 	g_CurrentMadEdit = nullptr;
 }
 
@@ -2320,9 +2313,8 @@ void MadSearchReplaceDialog::OnEditCopyAsHexString( wxCommandEvent& WXUNUSED(eve
 	if( g_CurrentMadEdit )
 	{
 		g_CurrentMadEdit->CopyAsHexString( false );
+		g_CurrentMadEdit = nullptr;
 	}
-
-	g_CurrentMadEdit = nullptr;
 }
 
 void MadSearchReplaceDialog::OnEditCopyAsHexStringWithSpace( wxCommandEvent& WXUNUSED(event) )
@@ -2331,9 +2323,8 @@ void MadSearchReplaceDialog::OnEditCopyAsHexStringWithSpace( wxCommandEvent& WXU
 	if( g_CurrentMadEdit )
 	{
 		g_CurrentMadEdit->CopyAsHexString( true );
+		g_CurrentMadEdit = nullptr;
 	}
-
-	g_CurrentMadEdit = nullptr;
 }
 
 void MadSearchReplaceDialog::OnEditCopyRevertHex( wxCommandEvent& WXUNUSED(event) )
@@ -2350,9 +2341,8 @@ void MadSearchReplaceDialog::OnEditCopyRevertHex( wxCommandEvent& WXUNUSED(event
 		}
 
 		g_CurrentMadEdit->CopyRevertHex( str );
+		g_CurrentMadEdit = nullptr;
 	}
-
-	g_CurrentMadEdit = nullptr;
 }
 
 void MadSearchReplaceDialog::OnEditIncIndent( wxCommandEvent& WXUNUSED(event) )
@@ -2361,9 +2351,8 @@ void MadSearchReplaceDialog::OnEditIncIndent( wxCommandEvent& WXUNUSED(event) )
 	if( g_CurrentMadEdit )
 	{
 		g_CurrentMadEdit->IncreaseDecreaseIndent( true );
+		g_CurrentMadEdit = nullptr;
 	}
-
-	g_CurrentMadEdit = nullptr;
 }
 void MadSearchReplaceDialog::OnEditDecIndent( wxCommandEvent& WXUNUSED(event) )
 {
@@ -2371,9 +2360,8 @@ void MadSearchReplaceDialog::OnEditDecIndent( wxCommandEvent& WXUNUSED(event) )
 	if( g_CurrentMadEdit )
 	{
 		g_CurrentMadEdit->IncreaseDecreaseIndent( false );
+		g_CurrentMadEdit = nullptr;
 	}
-
-	g_CurrentMadEdit = nullptr;
 }
 
 void MadSearchReplaceDialog::OnEditComment( wxCommandEvent& WXUNUSED(event) )
@@ -2382,9 +2370,9 @@ void MadSearchReplaceDialog::OnEditComment( wxCommandEvent& WXUNUSED(event) )
 	if( g_CurrentMadEdit )
 	{
 		g_CurrentMadEdit->CommentUncomment( true );
-	}
 
-	g_CurrentMadEdit = nullptr;
+		g_CurrentMadEdit = nullptr;
+	}
 }
 
 void MadSearchReplaceDialog::OnEditUncomment( wxCommandEvent& WXUNUSED(event) )
@@ -2393,9 +2381,8 @@ void MadSearchReplaceDialog::OnEditUncomment( wxCommandEvent& WXUNUSED(event) )
 	if( g_CurrentMadEdit )
 	{
 		g_CurrentMadEdit->CommentUncomment( false );
+		g_CurrentMadEdit = nullptr;
 	}
-
-	g_CurrentMadEdit = nullptr;
 }
 
 void MadSearchReplaceDialog::OnEditWordWrapToNewLine( wxCommandEvent& WXUNUSED(event) )
@@ -2404,9 +2391,8 @@ void MadSearchReplaceDialog::OnEditWordWrapToNewLine( wxCommandEvent& WXUNUSED(e
 	if( g_CurrentMadEdit )
 	{
 		g_CurrentMadEdit->ConvertWordWrapToNewLine();
+		g_CurrentMadEdit = nullptr;
 	}
-
-	g_CurrentMadEdit = nullptr;
 }
 void MadSearchReplaceDialog::OnEditNewLineToWordWrap( wxCommandEvent& WXUNUSED(event) )
 {
@@ -2414,9 +2400,8 @@ void MadSearchReplaceDialog::OnEditNewLineToWordWrap( wxCommandEvent& WXUNUSED(e
 	if( g_CurrentMadEdit )
 	{
 		g_CurrentMadEdit->ConvertNewLineToWordWrap();
+		g_CurrentMadEdit = nullptr;
 	}
-
-	g_CurrentMadEdit = nullptr;
 }
 
 void MadSearchReplaceDialog::OnEditToUpperCase( wxCommandEvent& WXUNUSED(event) )
@@ -2425,9 +2410,8 @@ void MadSearchReplaceDialog::OnEditToUpperCase( wxCommandEvent& WXUNUSED(event) 
 	if( g_CurrentMadEdit )
 	{
 		g_CurrentMadEdit->ToUpperCase();
+		g_CurrentMadEdit = nullptr;
 	}
-
-	g_CurrentMadEdit = nullptr;
 }
 
 void MadSearchReplaceDialog::OnEditToLowerCase( wxCommandEvent& WXUNUSED(event) )
@@ -2436,9 +2420,8 @@ void MadSearchReplaceDialog::OnEditToLowerCase( wxCommandEvent& WXUNUSED(event) 
 	if( g_CurrentMadEdit )
 	{
 		g_CurrentMadEdit->ToLowerCase();
+		g_CurrentMadEdit = nullptr;
 	}
-
-	g_CurrentMadEdit = nullptr;
 }
 
 void MadSearchReplaceDialog::OnEditInvertCase( wxCommandEvent& WXUNUSED(event) )
@@ -2447,9 +2430,8 @@ void MadSearchReplaceDialog::OnEditInvertCase( wxCommandEvent& WXUNUSED(event) )
 	if( g_CurrentMadEdit )
 	{
 		g_CurrentMadEdit->InvertCase();
+		g_CurrentMadEdit = nullptr;
 	}
-
-	g_CurrentMadEdit = nullptr;
 }
 
 void MadSearchReplaceDialog::OnEditCapitalize( wxCommandEvent& WXUNUSED(event) )
@@ -2458,9 +2440,8 @@ void MadSearchReplaceDialog::OnEditCapitalize( wxCommandEvent& WXUNUSED(event) )
 	if( g_CurrentMadEdit )
 	{
 		g_CurrentMadEdit->Capitalize();
+		g_CurrentMadEdit = nullptr;
 	}
-
-	g_CurrentMadEdit = nullptr;
 }
 
 void MadSearchReplaceDialog::OnEditToHalfWidth( wxCommandEvent& WXUNUSED(event) )
@@ -2469,9 +2450,8 @@ void MadSearchReplaceDialog::OnEditToHalfWidth( wxCommandEvent& WXUNUSED(event) 
 	if( g_CurrentMadEdit )
 	{
 		g_CurrentMadEdit->ToHalfWidth();
+		g_CurrentMadEdit = nullptr;
 	}
-
-	g_CurrentMadEdit = nullptr;
 }
 
 void MadSearchReplaceDialog::OnEditToHalfWidthByOptions( wxCommandEvent& WXUNUSED(event) )
@@ -2534,15 +2514,13 @@ void MadSearchReplaceDialog::OnEditToFullWidth( wxCommandEvent& WXUNUSED(event) 
 	if( g_CurrentMadEdit )
 	{
 		g_CurrentMadEdit->ToFullWidth();
+		g_CurrentMadEdit = nullptr;
 	}
-
-	g_CurrentMadEdit = nullptr;
 }
 
 void MadSearchReplaceDialog::OnEditToFullWidthByOptions( wxCommandEvent& WXUNUSED(event) )
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit == nullptr ) { return; }
+	if(( g_CurrentMadEdit == g_ActiveMadEdit ) ||( g_CurrentMadEdit == nullptr ) ) return;
 
 	static wxArrayInt selections;
 	static bool inited = false;
@@ -2599,9 +2577,9 @@ void MadSearchReplaceDialog::OnEditTabToSpace( wxCommandEvent& WXUNUSED(event) )
 	if( g_CurrentMadEdit )
 	{
 		g_CurrentMadEdit->ConvertTabToSpace();
+		g_CurrentMadEdit = nullptr;
 	}
 
-	g_CurrentMadEdit = nullptr;
 }
 void MadSearchReplaceDialog::OnEditSpaceToTab( wxCommandEvent& WXUNUSED(event) )
 {
@@ -2609,9 +2587,8 @@ void MadSearchReplaceDialog::OnEditSpaceToTab( wxCommandEvent& WXUNUSED(event) )
 	if( g_CurrentMadEdit )
 	{
 		g_CurrentMadEdit->ConvertSpaceToTab();
+		g_CurrentMadEdit = nullptr;
 	}
-
-	g_CurrentMadEdit = nullptr;
 }
 
 void MadSearchReplaceDialog::OnEditTrimTrailingSpaces( wxCommandEvent& WXUNUSED(event) )
@@ -2782,6 +2759,7 @@ void MadSearchReplaceDialog::OnEditSpellCheck( wxCommandEvent& event )
 	{
 		g_CurrentMadEdit->ReplaceWordFromCaretPos( g_SpellSuggestions[event.GetId() - menuSpellOption1] );
 	}
+	g_CurrentMadEdit = nullptr;
 }
 
 void MadSearchReplaceDialog::OnToolsMadScriptList( wxCommandEvent& event )
@@ -2841,5 +2819,6 @@ void MadSearchReplaceDialog::OnToolsMadScriptList( wxCommandEvent& event )
 
 			scriptfile.Close();
 		}
+		g_CurrentMadEdit = nullptr;
 	}
 }
