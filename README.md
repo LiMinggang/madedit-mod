@@ -125,7 +125,7 @@ Known issues
 License
 =============
 * Mixed
-1. GPL for the code from MadEdit and developed by me
+1. GPL for the code from MadEdit and developed by myself
 2. MIT License for the code from Astyle
 3. Boost Software License for boost.python
 4. Python License for miniPython
