@@ -9406,6 +9406,7 @@ void MadEditFrame::OnToolsEditMacroFile( wxCommandEvent& WXUNUSED(event) )
 
 void MadEditFrame::OnToolsMadScriptList( wxCommandEvent& event )
 {
+	g_CurrentMadEdit = nullptr;
 	if( g_ActiveMadEdit != nullptr )
 	{ 
 		wxString scriptdir = g_MadEditAppDir + wxT( "scripts" ) + wxFILE_SEP_PATH;
