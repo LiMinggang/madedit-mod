@@ -136,6 +136,7 @@ Fix: Chars escape for regex recording
 Fix: Unbind critial message handlers during OnClose
 Fix: High CPU load when move mouse over textlines #258 #265
 Fix: Can't replace bookmarked lines with multiple line text
+Fix: Patch for possible buffer overflow in GetFontWidths
 Update Astyle to latest code
 
 Mod v0.4.12

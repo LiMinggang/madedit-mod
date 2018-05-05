@@ -609,6 +609,7 @@ static inline int wxChCmp( const wchar_t * wchStr, const wxString & wsStr )
 wxUint16 *FontWidthManager::GetFontWidths( int index, const wxString &fontname, int fontsize, wxWindow *win )
 {
 	wxASSERT( index >= 0 && index <= 16 );
+	if(index >= FontWidthBuffersVector.size()) index = 0;
 	FontWidthBuffers &fwbuffers = FontWidthBuffersVector[index];
 
 	if( fwbuffers.empty() )
