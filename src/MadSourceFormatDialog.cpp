@@ -220,7 +220,7 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID WXUNUSE
 	Panel3 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxSize(792,490), 0, _T("wxID_ANY"));
 	BoxSizer4 = new wxBoxSizer(wxVERTICAL);
 	GridSizer4 = new wxGridSizer(0, 2, 0, 0);
-	StaticText2 = new wxStaticText(Panel3, wxID_ANY, _("Indentation size (in spaces):"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	StaticText2 = new wxStaticText(Panel3, wxID_ANY, _("Indentation size(in spaces):"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	GridSizer4->Add(StaticText2, 0, wxALL|wxEXPAND, 2);
 	SpinIndentation = new wxSpinCtrl(Panel3, wxID_ANY, _T("4"), wxDefaultPosition, wxDefaultSize, 0, 2, 8, 4, _T("wxID_ANY"));
 	SpinIndentation->SetValue(_T("4"));
