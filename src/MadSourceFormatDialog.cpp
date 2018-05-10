@@ -82,7 +82,7 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID WXUNUSE
 	{
 		_T("Allman(ANSI)"),
 		_T("Java"),
-		_T("Kr"),
+		_T("K&&R"),
 		_T("Stroustrup"),
 		_T("Whitesmith"),
 		_T("VTK"),
