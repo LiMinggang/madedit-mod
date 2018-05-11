@@ -336,7 +336,7 @@ MadFileAssociationDialog::MadFileAssociationDialog(wxWindow* parent,wxWindowID W
 	BoxSizer4 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer6 = new wxBoxSizer(wxVERTICAL);
 	StaticText1 = new wxStaticText(this, wxID_ANY, _("Associated File Types:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
-	BoxSizer6->Add(StaticText1, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	BoxSizer6->Add(StaticText1, 0, wxALL|wxALIGN_LEFT, 5);
 	WxListBoxAssociated = new wxListBox(this, wxID_ANY, wxDefaultPosition, wxSize(121,200), 0, 0, wxLB_EXTENDED, wxDefaultValidator, _T("wxID_ANY"));
 	BoxSizer6->Add(WxListBoxAssociated, 1, wxALL|wxEXPAND, 5);
 	BoxSizer4->Add(BoxSizer6, 1, wxALL|wxEXPAND, 5);
@@ -348,7 +348,7 @@ MadFileAssociationDialog::MadFileAssociationDialog(wxWindow* parent,wxWindowID W
 	BoxSizer4->Add(BoxSizer7, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	BoxSizer8 = new wxBoxSizer(wxVERTICAL);
 	StaticText2 = new wxStaticText(this, wxID_ANY, _("Predefined File Types:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
-	BoxSizer8->Add(StaticText2, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+	BoxSizer8->Add(StaticText2, 0, wxALL|wxALIGN_LEFT, 5);
 	WxListBoxPredefined = new wxListBox(this, wxID_ANY, wxDefaultPosition, wxSize(121,200), 0, 0, wxLB_EXTENDED, wxDefaultValidator, _T("wxID_ANY"));
 	BoxSizer8->Add(WxListBoxPredefined, 1, wxALL|wxEXPAND, 5);
 	BoxSizer4->Add(BoxSizer8, 1, wxALL|wxEXPAND, 5);

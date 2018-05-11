@@ -20,7 +20,7 @@
 										<object class="wxStaticText" name="wxID_ANY" variable="StaticText1" member="yes">
 											<label>Associated File Types:</label>
 										</object>
-										<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+										<flag>wxALL|wxALIGN_LEFT</flag>
 										<border>5</border>
 									</object>
 									<object class="sizeritem">
@@ -69,7 +69,7 @@
 										<object class="wxStaticText" name="wxID_ANY" variable="StaticText2" member="yes">
 											<label>Predefined File Types:</label>
 										</object>
-										<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+										<flag>wxALL|wxALIGN_LEFT</flag>
 										<border>5</border>
 									</object>
 									<object class="sizeritem">
