@@ -410,6 +410,7 @@ MadFileAssociationDialog::MadFileAssociationDialog(wxWindow* parent,wxWindowID W
 		++idx;
 	}
 
+	as_predefined.Sort();
 	WxListBoxPredefined->Set(as_predefined);
 
 	cfg->SetPath(oldpath);
