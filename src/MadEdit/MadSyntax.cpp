@@ -2398,7 +2398,7 @@ _NEXTUCHAR_:
 		nw_State = nw_NextState;
 	}
 
-	if( nw_LineWidth == nw_RowIndexIter->m_Width )
+	if( nw_LineWidth >= nw_RowIndexIter->m_Width )
 	{
 		nw_LineWidth = 0;
 
