@@ -123,8 +123,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 Mod v0.4.13
 New: Atyle formatter: Add new option "style=webkit" for the WebKit brace style
 New: New API for MadPython:InsertNewline
-New: Right click menu enabled for MadMacroDlg
-New: Right click menu enabled for SearchReplaceDialog
+New: Right click menu enabled for MadMacroDlg and SearchReplaceDialog(more edit functions for input of the dialog)
 New: Scripts and spell check for Macro and SearchReplace dialog
 New: Reset transparency of SearchReplace dialog
 Fix: Deleted stale lock file '/home/username/prog_name-username' bug(Linux) #262
