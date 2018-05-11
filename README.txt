@@ -138,6 +138,7 @@ Fix: High CPU load when move mouse over textlines #258 #265
 Fix: Can't replace bookmarked lines with multiple line text
 Fix: Patch for possible buffer overflow in GetFontWidths
 Fix: Wrong string for K&R style on SourceFormat config Dialog
+Fix: Code improvement
 Update Astyle to latest code
 
 Mod v0.4.12

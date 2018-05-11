@@ -11094,6 +11094,12 @@ void MadEdit::OnPaint( wxPaintEvent & WXUNUSED(evt) )
 
 			memdc.SetFont( *m_TextFont );
 			// calculate rows to paint
+			if( m_Lines->m_RowCount < m_TopRow )
+			{
+				wxASSERT(0);
+				m_TopRow = m_Lines->m_RowCount - 1;
+			}
+
 			int rowcount = ( int )( m_Lines->m_RowCount - m_TopRow );
 
 			if( rowcount > ( int )m_VisibleRowCount )
