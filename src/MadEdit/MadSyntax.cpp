@@ -1375,7 +1375,13 @@ void MadSyntax::InitNextWord2( MadLineIterator &lit, size_t row )
 	nw_LineWidth = 0;
 	nw_FirstIndex = 0;
 	nw_RestCount = 0;
-	nw_MaxLength = lit->m_RowIndices[row + 1].m_Start - nw_RowIndexIter->m_Start;
+	if(lit->m_RowIndices[row + 1].m_Start >= nw_RowIndexIter->m_Start)
+		nw_MaxLength = lit->m_RowIndices[row + 1].m_Start - nw_RowIndexIter->m_Start;
+	else
+	{
+		wxASSERT(0);
+		nw_MaxLength = 0;
+	}
 
 	if( m_CheckState )
 	{
@@ -2404,7 +2410,13 @@ _NEXTUCHAR_:
 		{
 			MadRowIndexIterator nextit = nw_RowIndexIter;
 			++nextit;
-			nw_MaxLength = nextit->m_Start - nw_RowIndexIter->m_Start;
+			if(nextit->m_Start >= nw_RowIndexIter->m_Start)
+				nw_MaxLength = nextit->m_Start - nw_RowIndexIter->m_Start;
+			else
+			{
+				wxASSERT(0);
+				nw_MaxLength = 0;
+			}
 		}
 	}
 
