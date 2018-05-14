@@ -1609,16 +1609,16 @@ int MadSyntax::FindStringNoCase( MadUCQueue & ucqueue, size_t first,
 int MadSyntax::NextWord( int &wordwidth )
 {
 	wordwidth = 0;
-	MadLines::NextUCharFuncPtr NextUChar = nw_MadLines->NextUChar;
 
 	if( nw_RestCount == 0 )
 	{
 		if( nw_EndOfLine && nw_ucqueue.empty() )
 			return 0;
 
+		MadLines::NextUCharFuncPtr NextUChar = nw_MadLines->NextUChar;
 		MadStringIterator sit, sitend;
-		size_t strlen;
-		int idx;
+		size_t strlen = 0;
+		int idx = 0;
 		nw_RestCount += nw_FirstIndex;
 
 		do
