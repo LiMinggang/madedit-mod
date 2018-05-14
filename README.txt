@@ -132,8 +132,8 @@ Fix: GB18030 not work under Linux
 Fix: Regex replace bug, eg, replace "\r\n" with "\\n"
 Fix: MadPython Recording issue
 Fix: Chars escape for regex recording
-Fix: Unbind critial message handlers during OnClose
-Fix: High CPU load when move mouse over textlines #258 #265
+Fix: Unbind critical message handlers during OnClose
+Fix: High CPU load when move mouse over text lines #258 #265
 Fix: Can't replace bookmarked lines with multiple line text
 Fix: Patch for possible buffer overflow in GetFontWidths
 Fix: Wrong string for K&R style on SourceFormat config Dialog
