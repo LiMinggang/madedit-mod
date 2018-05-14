@@ -257,6 +257,13 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 		StaticBoxSizer2->Add( WxSliderTransDegree, 0, wxALL | wxEXPAND, 2 );
 		BoxSizer9->Add(StaticBoxSizer2, 0, wxALL|wxALIGN_TOP, 2);
 	}
+	else
+	{
+		StaticBoxSizer2 = nullptr;
+		WxRadioLosingFocus = nullptr;
+		WxRadioAlways = nullptr;
+		WxSliderTransDegree = nullptr;
+	}
 
 	StaticBoxSizer3 = new wxStaticBoxSizer(wxHORIZONTAL, this, _("Input Sizer"));
 	WxSliderInputSizer = new wxSlider(this, wxID_ANY, 1, 1, 5, wxDefaultPosition, wxSize(69,-1), 0, wxDefaultValidator, _T("ID_WXSLIDERINPUTSIZER"));
