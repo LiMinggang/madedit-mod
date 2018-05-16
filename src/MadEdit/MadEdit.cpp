@@ -3180,7 +3180,7 @@ void MadEdit::UpdateTextAreaXPos()
 
 	wxFileOffset pos2 = pos;
 	MadLineIterator lit;
-	int rowid_notused;
+	int rowid_notused = -1;
 	GetLineByPos( lit, pos2, rowid_notused );
 	pos2 = pos - pos2;
 	m_Lines->InitNextUChar( lit, pos2 );
@@ -3403,7 +3403,7 @@ void MadEdit::UpdateHexPosByXPos( int row, int xpos )
 			int firstxpos = ( ( int ( firstpos ) & 0x0F ) + 60 ) * m_HexFontMaxDigitWidth;
 			m_ActiveRowUChars.clear();
 			MadLineIterator lit;
-			int rn;
+			int rn = -1;
 			pos = firstpos;
 			GetLineByPos( lit, pos, rn );
 			pos = firstpos - pos;
@@ -3455,7 +3455,7 @@ void MadEdit::UpdateHexPosByXPos( int row, int xpos )
 	// now pos is CaretPos, use pos to update m_CaretPos
 	wxFileOffset linepos = pos;
 	MadLineIterator lit;
-	int rowid;
+	int rowid = -1;
 	m_CaretPos.lineid = GetLineByPos( lit, linepos, rowid );
 	m_CaretPos.linepos = pos - linepos;
 	m_CaretPos.pos = pos;
@@ -3509,7 +3509,7 @@ void MadEdit::RecountLineWidth( bool bForceRecount )
 		m_ValidPos_pos = 0;
 		m_UpdateValidPos = -1;
 		MadLineIterator lit;
-		wxFileOffset pos;
+		wxFileOffset pos = -1;
 		int toprow = m_TopRow;
 		GetLineByRow( lit, pos, toprow );
 		m_UpdateValidPos = 0;
@@ -4057,7 +4057,7 @@ void MadEdit::SelectWordFromCaretPos( wxString *ws, MadCaretPos * cpos/* = nullp
 	if( m_EditMode == emColumnMode && caretPos->extraspaces )
 		return;
 
-	wxFileOffset startpos, endpos;
+	wxFileOffset startpos = -1, endpos = -1;
 
 	if( !IsTextFile() ) // not a text file (HexMode)
 	{
@@ -4195,7 +4195,7 @@ void MadEdit::SelectWordFromCaretPos( wxString *ws, MadCaretPos * cpos/* = nullp
 		if( m_MouseLeftDoubleClick && m_LeftBrace_rowid >= 0 )
 		{
 			MadLineIterator lit1;
-			wxFileOffset pos1, pos2;
+			wxFileOffset pos1 = -1, pos2 = -1;
 			GetLineByRow( lit1, pos1, m_LeftBrace_rowid );
 			GetLineByRow( lit1, pos2, m_RightBrace_rowid );
 			pos1 += m_LeftBrace.LinePos;
@@ -4249,7 +4249,7 @@ void MadEdit::SelectWordFromCaretPos( wxString *ws, MadCaretPos * cpos/* = nullp
 
 void MadEdit::GetWordFromCaretPos( wxString &ws )
 {
-	MadCaretPos * pos( 0 );
+	MadCaretPos * pos( nullptr );
 
 	if( IsSelected() )
 		pos = m_SelectionBegin;
@@ -4384,7 +4384,7 @@ bool MadEdit::PutHexDataToClipboard( const char *cs, size_t length )
 // return linecount
 int MadEdit::TranslateText( const wxChar *pwcs, size_t count, vector<ucs4_t> *ucs, bool passNewLine )
 {
-	ucs4_t uc;
+	ucs4_t uc = 0;
 	size_t i = 0;
 	size_t linecount = 0;
 
@@ -4769,7 +4769,7 @@ MadLineIterator MadEdit::DeleteInsertData( wxFileOffset pos,
 {
 	MadLineIterator lit;
 	wxFileOffset bpos = pos;
-	int tmp_rowid;
+	int tmp_rowid = -1;
 	m_UpdateValidPos = 1;   // update if pos < oldpos
 	int lid = GetLineByPos( lit, bpos, tmp_rowid );
 
