@@ -8167,7 +8167,7 @@ void MadEditFrame::OnViewTextMode( wxCommandEvent& WXUNUSED(event) )
 	if( g_ActiveMadEdit != nullptr )
 	{
 		g_ActiveMadEdit->SetEditMode( emTextMode );
-		UpdateFontEncoding();
+		if(!m_Syntaxs->IsThisEnabled()) m_Syntaxs->Enable(true);
 
 		if( IsMacroRecording() )
 			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetEditMode(MadEditMode.TextMode)" ) ) );
@@ -8179,7 +8179,7 @@ void MadEditFrame::OnViewColumnMode( wxCommandEvent& WXUNUSED(event) )
 	if( g_ActiveMadEdit != nullptr )
 	{
 		g_ActiveMadEdit->SetEditMode( emColumnMode );
-		UpdateFontEncoding();
+		if(!m_Syntaxs->IsThisEnabled()) m_Syntaxs->Enable(true);
 
 		if( IsMacroRecording() )
 			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetEditMode(MadEditMode.ColumnMode)" ) ) );
@@ -8191,7 +8191,7 @@ void MadEditFrame::OnViewHexMode( wxCommandEvent& WXUNUSED(event) )
 	if( g_ActiveMadEdit != nullptr )
 	{
 		g_ActiveMadEdit->SetEditMode( emHexMode );
-		UpdateFontEncoding();
+		if(m_Syntaxs->IsThisEnabled()) m_Syntaxs->Enable(false);
 
 		if( IsMacroRecording() )
 			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetEditMode(MadEditMode.HexMode)" ) ) );
@@ -8229,14 +8229,7 @@ void MadEditFrame::UpdateFontEncoding( )
 	{
 		m_Encodings->SetSelection(m_Encodings->FindString(g_ActiveMadEdit->GetEncodingName()));
 		m_Syntaxs->SetSelection(m_Syntaxs->FindString(wxGetTranslation(g_ActiveMadEdit->GetSyntaxTitle())));
-		if(g_ActiveMadEdit->GetEditMode() == emHexMode)
-		{
-			m_Syntaxs->Enable(false);
-		}
-		else
-		{
-			m_Syntaxs->Enable(true);
-		}
+
 		wxString name;
 		int size;
 		g_ActiveMadEdit->GetFont( name, size );
