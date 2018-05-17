@@ -138,6 +138,7 @@ Fix: Can't replace bookmarked lines with multiple line text
 Fix: Patch for possible buffer overflow in GetFontWidths
 Fix: Wrong string for K&R style on SourceFormat config Dialog
 Fix: Use alphabet order for file name extension in FileAssociation Dialog
+Fix: Diable syntax toolbar in Hex mode
 Fix: Code improvement
 Update Astyle to latest code
 
