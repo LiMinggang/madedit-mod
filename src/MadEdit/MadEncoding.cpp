@@ -1586,7 +1586,10 @@ void DetectChineseEncoding( const wxByte *text, int count, int &enc )
 					{
 						if( b0 >= 0x81 && b0 <= 0xFE )
 						{
-							enc = wxFONTENCODING_CP936; // [0x81~0xFE][0x80~0xA0] are invalid in big5
+							if (wxFontMapper::Get()->IsEncodingAvailable(wxFONTENCODING_CP936))
+								enc = wxFONTENCODING_CP936; // [0x81~0xFE][0x80~0xA0] are invalid in big5
+							else
+								enc = MAD_FONTENCODING_GB18030; // [0x81~0xFE][0x30~0x39] are invalid in big5 and GBK
 							return;
 						}
 					}

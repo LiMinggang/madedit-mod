@@ -139,6 +139,7 @@ Fix: Patch for possible buffer overflow in GetFontWidths
 Fix: Wrong string for K&R style on SourceFormat config Dialog
 Fix: Use alphabet order for file name extension in FileAssociation Dialog
 Fix: Disable syntax toolbar in Hex mode
+Fix: Use GB18030 if wxFONTENCODING_CP936 is not available
 Fix: Code improvement
 Update Astyle to latest code
 Update translations

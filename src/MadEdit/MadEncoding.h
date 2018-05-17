@@ -38,7 +38,7 @@
 class MadCSConv;
 
 enum MadEncodingType
-{ etSingleByte,	etDoubleByte, etUTF8, etUTF16LE, etUTF16BE,	etUTF32LE, etUTF32BE, etGB18030 };
+{ etSingleByte, etDoubleByte, etUTF8, etUTF16LE, etUTF16BE,	etUTF32LE, etUTF32BE, etGB18030 };
 
 enum MadEncodingGrp
 {
