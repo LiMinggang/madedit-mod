@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.10\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-08 11:23+0800\n"
-"PO-Revision-Date: 2018-05-08 11:23+0800\n"
+"PO-Revision-Date: 2018-05-17 12:15+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit-Mod <minggang.li@gmail.com>\n"
 "Language: zh_CN\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.3\n"
+"X-Generator: Poedit 2.0.7\n"
 
 #: wxstd.po.cpp:2
 msgid "Unicode 16 bit (UTF-16)"
@@ -2532,7 +2532,7 @@ msgstr ". 匹配换行符"
 
 #: ../src/MadEditFrame.cpp:3634
 msgid "Dot Match Newline in Regular Expressions"
-msgstr ". 在正则表达式中匹配换行符"
+msgstr ".（点）在正则表达式中匹配换行符"
 
 #: ../src/MadEditFrame.cpp:3654
 msgid "Recent file list"
@@ -3040,7 +3040,7 @@ msgstr "其他颜色"
 
 #: ../src/MadHighlightingDialog.cpp:225
 msgid "Background Color"
-msgstr "背景颜色"
+msgstr "背景色"
 
 #: ../src/MadHighlightingDialog.cpp:302
 msgid "(Automatic)"
@@ -4030,7 +4030,7 @@ msgstr "\"%s（%s）\" 不是正确的值"
 
 #: ../src/MadOptionsDialog.cpp:1285 ../src/MadOptionsDialog.cpp:1291
 msgid ": Should be greater than zero"
-msgstr "：应该大于0"
+msgstr "：应该大于零（0）"
 
 #: ../src/MadOptionsDialog.cpp:1301 ../src/MadOptionsDialog.cpp:1307
 msgid ": Should be 1~4096"
@@ -4174,7 +4174,7 @@ msgid ""
 "    You should have received a copy of the GNU General Public License along "
 "with this program.  If not, see <http://www.gnu.org/licenses/>.\n"
 msgstr ""
-"著作权所有(C) 2012-2017 Minggang Li <minggang.li@gmail.com>\n"
+"著作权所有(C) 2012-2018 Minggang Li <minggang.li@gmail.com>\n"
 "\n"
 "本程序为自由软件；您可依据自由软件基金会所发表的GNU通用公共授权条款规定，就本"
 "程序再为发布与／或修改；无论您依据的是本授权的第二版或（您自行选择的）任一日"

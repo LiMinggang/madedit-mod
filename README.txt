@@ -141,6 +141,7 @@ Fix: Use alphabet order for file name extension in FileAssociation Dialog
 Fix: Disable syntax toolbar in Hex mode
 Fix: Code improvement
 Update Astyle to latest code
+Update translations
 
 Mod v0.4.12
 1.New: Support Drag and Drop for text(from other applications, not DnD edit, can't drag text out of MadEdit yet)
