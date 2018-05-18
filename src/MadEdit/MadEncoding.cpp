@@ -6,6 +6,7 @@
 // Licence:     GPL
 ///////////////////////////////////////////////////////////////////////////////
 
+#include <set>
 #include <wx/config.h>
 #include "MadEncoding.h"
 #include "uchardet.h"
@@ -13,6 +14,7 @@
 
 using std::vector;
 using std::map;
+using std::set;
 
 #ifdef _DEBUG
 	#include <crtdbg.h>
@@ -70,6 +72,7 @@ using std::map;
 
 static vector<MadEncodingInfo> EncodingsTable;
 map<int, wxString>MadEncoding::MadEncodingGrpName;
+set<int> EncodingsSet;
 
 class EncSort  
 {  
@@ -683,6 +686,7 @@ void MadEncoding::InitEncodings()
 		if( !ignore )
 		{
 			EncodingsTable.push_back( MadEncodingInfo( enc, name.Upper(), desc, type, fontname, encGrp ) );
+			EncodingsSet.insert(enc);
 		}
 	}
 
@@ -696,6 +700,7 @@ void MadEncoding::InitEncodings()
 		MSW_GET_FONT_NAME( wxT( "54936" ), fontname );
 		encGrp.push_back( ENCG_EASTASIA );
 		EncodingsTable.push_back( MadEncodingInfo( MAD_FONTENCODING_GB18030, name.Upper(), desc, type, fontname, encGrp ) );
+		EncodingsSet.insert(MAD_FONTENCODING_GB18030);
 	}
 #endif //__MAD_ENCODING_EXTENDED__
 
@@ -1586,7 +1591,7 @@ void DetectChineseEncoding( const wxByte *text, int count, int &enc )
 					{
 						if( b0 >= 0x81 && b0 <= 0xFE )
 						{
-							if (wxFontMapper::Get()->IsEncodingAvailable(wxFONTENCODING_CP936))
+							if(EncodingsSet.find(wxFONTENCODING_CP936) != EncodingsSet.end())
 								enc = wxFONTENCODING_CP936; // [0x81~0xFE][0x80~0xA0] are invalid in big5
 							else
 								enc = MAD_FONTENCODING_GB18030; // [0x81~0xFE][0x30~0x39] are invalid in big5 and GBK
@@ -1773,38 +1778,40 @@ void DetectEncoding( const wxByte *text, int count, int &enc )
 				}
 				else
 					if( name.IsSameAs( wxT( "GB2312" ) )
-							|| name.IsSameAs( wxT( "GB18030" ) )
 							|| name.IsSameAs( wxT( "HZ-GB-2312" ) ) )
 					{
-						if (wxFontMapper::Get()->IsEncodingAvailable(wxFONTENCODING_CP936))
-							enc = wxFONTENCODING_CP936;
-						else
+						enc = wxFONTENCODING_CP936;
+						if(EncodingsSet.find(enc) == EncodingsSet.end())
+						{
 							enc = MAD_FONTENCODING_GB18030;
-						return;
+						}
 					}
 					else
-						if( name.IsSameAs( wxT( "SHIFT_JIS" ) ) )
-						{
-							enc = wxFONTENCODING_CP932;
-						}
+						if(name.IsSameAs( wxT( "GB18030" )))
+							enc = MAD_FONTENCODING_GB18030;
 						else
-							if( name.IsSameAs( wxT( "EUC-JP" ) ) )
+							if( name.IsSameAs( wxT( "SHIFT_JIS" ) ) )
 							{
-								enc = wxFONTENCODING_EUC_JP;
+								enc = wxFONTENCODING_CP932;
 							}
 							else
-								if( name.IsSameAs( wxT( "EUC-KR" ) ) )
+								if( name.IsSameAs( wxT( "EUC-JP" ) ) )
 								{
-									enc = wxFONTENCODING_CP949;
+									enc = wxFONTENCODING_EUC_JP;
 								}
 								else
-									if( name.IsSameAs( wxT( "KOI8-R" ) ) )
+									if( name.IsSameAs( wxT( "EUC-KR" ) ) )
 									{
-										enc = wxFONTENCODING_KOI8;
+										enc = wxFONTENCODING_CP949;
 									}
 									else
-										if( name.IsSameAs( wxT( "IBM866" ) ) )
+										if( name.IsSameAs( wxT( "KOI8-R" ) ) )
 										{
-											enc = wxFONTENCODING_CP866;
+											enc = wxFONTENCODING_KOI8;
 										}
+										else
+											if( name.IsSameAs( wxT( "IBM866" ) ) )
+											{
+												enc = wxFONTENCODING_CP866;
+											}
 }
