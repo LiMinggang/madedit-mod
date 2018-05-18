@@ -1776,7 +1776,11 @@ void DetectEncoding( const wxByte *text, int count, int &enc )
 							|| name.IsSameAs( wxT( "GB18030" ) )
 							|| name.IsSameAs( wxT( "HZ-GB-2312" ) ) )
 					{
-						enc = wxFONTENCODING_CP936;
+						if (wxFontMapper::Get()->IsEncodingAvailable(wxFONTENCODING_CP936))
+							enc = wxFONTENCODING_CP936;
+						else
+							enc = MAD_FONTENCODING_GB18030;
+						return;
 					}
 					else
 						if( name.IsSameAs( wxT( "SHIFT_JIS" ) ) )
