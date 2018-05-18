@@ -237,7 +237,6 @@ void MadEdit::SetEncoding( const wxString &encname )
 	}
 }
 
-
 void MadEdit::SetRecordCaretMovements( bool value )
 {
 	if( value != m_RecordCaretMovements )
