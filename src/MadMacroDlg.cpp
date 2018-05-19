@@ -205,7 +205,7 @@ void MadMacroDlg::OnWxButtonRunClick(wxCommandEvent& WXUNUSED(event))
 				}
 				catch(std::bad_alloc &)
 				{
-					MadMessageBox(_("Memory	allocation failed"), _("Error"),  wxOK|wxICON_ERROR);
+					MadMessageBox(_("Memory allocation failed"), _("Error"),  wxOK|wxICON_ERROR);
 					g_EmbeddedPython = 0;
 				}
 			}
