@@ -22,7 +22,6 @@ bool GetActiveMadEditPathNameOrTitle(wxString &name);
 // Global page setup data
 wxPageSetupData *g_PageSetupData = (wxPageSetupData*) nullptr;
 
-
 int MadPrintout::s_PrintoutCount=0;
 
 MadPrintout::MadPrintout(const wxString& title)
@@ -38,7 +37,6 @@ MadPrintout::~MadPrintout()
         g_ActiveMadEdit->EndPrint();
     }
 }
-
 
 void MadPrintout::OnPreparePrinting()
 {
@@ -86,7 +84,6 @@ void MadPrintout::OnPreparePrinting()
 
     g_ActiveMadEdit->BeginPrint(printRect);
 }
-
 
 void MadPrintout::GetPageInfo(int *minPage, int *maxPage, int *pageFrom, int *pageTo)
 {
@@ -175,7 +172,6 @@ wxString TranslatePrintMark(const wxString &text, int pageNum)
 
     return newtext;
 }
-
 
 bool MadPrintout::OnPrintPage(int page)
 {
