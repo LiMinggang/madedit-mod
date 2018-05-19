@@ -88,7 +88,7 @@ void MadPrintout::OnPreparePrinting()
 }
 
 
-void MadPrintout::GetPageInfo(size_t *minPage, size_t *maxPage, size_t *pageFrom, size_t *pageTo)
+void MadPrintout::GetPageInfo(int *minPage, int *maxPage, int *pageFrom, int *pageTo)
 {
     // get info from g_ActiveMadEdit
     *maxPage = *pageTo = g_ActiveMadEdit->GetPageCount();
