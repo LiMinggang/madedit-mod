@@ -17,7 +17,7 @@ public:
     explicit MadPrintout(const wxString& title = _("MadEdit-Mod Printout"));
     virtual ~MadPrintout();
 
-    virtual void GetPageInfo(int *minPage, int *maxPage, int *pageFrom, int *pageTo);
+    virtual void GetPageInfo(int *minPage, int *maxPage, int *pageFrom, int *pageTo) wxOVERRIDE;
     virtual bool HasPage(int page);
     virtual bool OnPrintPage(int page);
     
