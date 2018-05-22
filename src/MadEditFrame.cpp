@@ -9478,6 +9478,7 @@ void MadEditFrame::OnToolsToggleBOM( wxCommandEvent& WXUNUSED(event) )
 			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "ToggleBOM()" ) ) );
 	}
 }
+
 void MadEditFrame::OnToolsConvertToDOS( wxCommandEvent& WXUNUSED(event) )
 {
 	if( g_ActiveMadEdit != nullptr )
@@ -9488,6 +9489,7 @@ void MadEditFrame::OnToolsConvertToDOS( wxCommandEvent& WXUNUSED(event) )
 			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "ConvertNewLineType(MadNewLineType.Dos)" ) ) );
 	}
 }
+
 void MadEditFrame::OnToolsConvertToMAC( wxCommandEvent& WXUNUSED(event) )
 {
 	if( g_ActiveMadEdit != nullptr )
@@ -9498,6 +9500,7 @@ void MadEditFrame::OnToolsConvertToMAC( wxCommandEvent& WXUNUSED(event) )
 			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "ConvertNewLineType(MadNewLineType.MAC)" ) ) );
 	}
 }
+
 void MadEditFrame::OnToolsConvertToUNIX( wxCommandEvent& WXUNUSED(event) )
 {
 	if( g_ActiveMadEdit != nullptr )
@@ -10075,7 +10078,6 @@ void MadEditFrame::OnHelpAbout( wxCommandEvent& WXUNUSED(event) )
 		{
 			wxLaunchDefaultBrowser( g_MadEditMod_URL );
 		}
-
 #else
 		wxLaunchDefaultBrowser( g_MadEditMod_URL );
 #endif
@@ -10442,7 +10444,6 @@ inline bool MadEditFrame::ResetInformationWinPos()
 
 bool MadEditFrame::RestoreAuiPanel(wxWindow * toolbar, wxString& toolbar_status, bool gripper/* = false*/)
 {
-	
 	wxAuiPaneInfo pane_info;
 	m_AuiManager.LoadPaneInfo( toolbar_status, pane_info );
 	pane_info.Gripper( gripper ); // Make sure you can drag the panel
