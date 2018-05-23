@@ -1,31 +1,24 @@
-Mod v0.4.12
-1.New: Support Drag and Drop for text(from other applications, not DnD edit, can't drag text out of MadEdit yet)
-2.New: Remember last editing and reset of MadMacro dialog
-3.New: Go language syntax support
-4.New: First line syntax detect for TCL
-5.New: Don't pop up 2 dialogs on reloading a file changed
-6.New: Ask user to choose if s/he wants to remove the recent file list if the file does not exist
-7.New: Sort Encoding with name
-8.Fix: Crash on purging items of FindInFiles Dialog
-9.Fix: The first macro command recorded without prefix "medit."
-10.Fix: Convert macros from saved macro file to UTF8 before running
-11.Fix: Tooltip of the file name tab was not updated if renamed
-12.Fix: Use min size of the config and actual resolution
-13.Fix: Syntax is not updated on Save As
-14.Fix: Option dialog hang issue(https://trac.wxwidgets.org/ticket/18091)
-15.Fix: Improve syntax auto detect on Save As(#254)
-16.Fix: Can't assign more than one shortcut to commands by Option Dialog
-17.Fix: String escaping issue in Macro Recording of Search/Replace
-18.Fix: Patch for dead/infinite loop in syntax highlighting
-19.Fix: Display file format(new line char) on menu
-20.Fix: Memory leak in FixFileNameEncoding
-21.Fix: Bugs introduced in refactor Option Dialog(printing functions)
-22.Fix: Bug on detect Chinese encoding
-23.Fix: Some dialog close event code issue
-24.Fix: Clear mouse status on losing focus while popping up dialog to reload file
-25.Minor memory improvement
-26.Minor code improvement
-27.Update VS2010 build
-28.Update wxWidgets to 3.1.1
-29.Update boost.python to latest code
-30.Update translations
+Mod v0.4.13
+1.New: Atyle formatter: Add new option "style=webkit" for the WebKit brace style
+2.New: New API for MadPython:InsertNewline
+3.New: Right click menu enabled for MadMacroDlg and SearchReplaceDialog(more edit functions for input of the dialog)
+4.New: Scripts and spell check for Macro and SearchReplace dialog
+5.New: Reset transparency of SearchReplace dialog
+6.Fix: Deleted stale lock file '/home/username/prog_name-username' bug(Linux) #262
+7.Fix: Code issue of EnableTransparency
+8.Fix: GB18030 not work under Linux
+9.Fix: Regex replace bug, eg, replace "\r\n" with "\\n"
+10.Fix: MadPython Recording issue
+11.Fix: Chars escape for regex recording
+12.Fix: Unbind critical message handlers during OnClose
+13.Fix: High CPU load when move mouse over text lines #258 #265
+14.Fix: Can't replace bookmarked lines with multiple line text
+15.Fix: Patch for possible buffer overflow in GetFontWidths
+16.Fix: Wrong string for K&R style on SourceFormat config Dialog
+17.Fix: Use alphabet order for file name extension in FileAssociation Dialog
+18.Fix: Disable syntax toolbar in Hex mode
+19.Fix: Use GB18030 if wxFONTENCODING_CP936 is not available
+20.Fix: Total pages in print preview is incorrect
+21.Fix: Code improvement
+22.Update Astyle to latest code
+23.Update translations

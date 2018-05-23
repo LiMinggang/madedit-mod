@@ -74,36 +74,29 @@ Translations
 
 News
 =======
-Mod v0.4.12
-* New: Support Drag and Drop for text(from other applications, not DnD edit, can't drag text out of MadEdit yet)
-* New: Remember last editing and reset of MadMacro dialog
-* New: Go language syntax support
-* New: First line syntax detect for TCL
-* New: Don't pop up 2 dialogs on reloading a file changed
-* New: Ask user to choose if s/he wants to remove the recent file list if the file does not exist
-* New: Sort Encoding with name
-* Fix: Crash on purging items of FindInFiles Dialog
-* Fix: The first macro command recorded without prefix "medit."
-* Fix: Convert macros from saved macro file to UTF8 before running
-* Fix: Tooltip of the file name tab was not updated if renamed
-* Fix: Use min size of the config and actual resolution
-* Fix: Syntax is not updated on Save As
-* Fix: Option dialog hang issue(https://trac.wxwidgets.org/ticket/18091)
-* Fix: Improve syntax auto detect on Save As(#254)
-* Fix: Can't assign more than one shortcut to commands by Option Dialog
-* Fix: String escaping issue in Macro Recording of Search/Replace
-* Fix: Patch for dead/infinite loop in syntax highlighting
-* Fix: Display file format(new line char) on menu
-* Fix: Memory leak in FixFileNameEncoding
-* Fix: Bugs introduced in refactor Option Dialog(printing functions)
-* Fix: Bug on detect Chinese encoding
-* Fix: Some dialog close event code issue
-* Fix: Clear mouse status on losing focus while popping up dialog to reload file
-* Minor memory improvement
-* Minor code improvement
-* Update VS2010 build
-* Update wxWidgets to 3.1.1
-* Update boost.python to latest code
+Mod v0.4.13
+* New: Atyle formatter: Add new option "style=webkit" for the WebKit brace style
+* New: New API for MadPython:InsertNewline
+* New: Right click menu enabled for MadMacroDlg and SearchReplaceDialog(more edit functions for input of the dialog)
+* New: Scripts and spell check for Macro and SearchReplace dialog
+* New: Reset transparency of SearchReplace dialog
+* Fix: Deleted stale lock file '/home/username/prog_name-username' bug(Linux) #262
+* Fix: Code issue of EnableTransparency
+* Fix: GB18030 not work under Linux
+* Fix: Regex replace bug, eg, replace "\r\n" with "\\n"
+* Fix: MadPython Recording issue
+* Fix: Chars escape for regex recording
+* Fix: Unbind critical message handlers during OnClose
+* Fix: High CPU load when move mouse over text lines #258 #265
+* Fix: Can't replace bookmarked lines with multiple line text
+* Fix: Patch for possible buffer overflow in GetFontWidths
+* Fix: Wrong string for K&R style on SourceFormat config Dialog
+* Fix: Use alphabet order for file name extension in FileAssociation Dialog
+* Fix: Disable syntax toolbar in Hex mode
+* Fix: Use GB18030 if wxFONTENCODING_CP936 is not available
+* Fix: Total pages in print preview is incorrect
+* Fix: Code improvement
+* Update Astyle to latest code
 * Update translations
 
 Todo

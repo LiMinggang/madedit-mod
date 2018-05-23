@@ -123,6 +123,31 @@ FreeBSD packaging (with FreeBSD 10.01)
 2. aclocal version in aclocal.m4
 3. stdc++ version
 
+Mod v0.4.13
+1.New: Atyle formatter: Add new option "style=webkit" for the WebKit brace style
+2.New: New API for MadPython:InsertNewline
+3.New: Right click menu enabled for MadMacroDlg and SearchReplaceDialog(more edit functions for input of the dialog)
+4.New: Scripts and spell check for Macro and SearchReplace dialog
+5.New: Reset transparency of SearchReplace dialog
+6.Fix: Deleted stale lock file '/home/username/prog_name-username' bug(Linux) #262
+7.Fix: Code issue of EnableTransparency
+8.Fix: GB18030 not work under Linux
+9.Fix: Regex replace bug, eg, replace "\r\n" with "\\n"
+10.Fix: MadPython Recording issue
+11.Fix: Chars escape for regex recording
+12.Fix: Unbind critical message handlers during OnClose
+13.Fix: High CPU load when move mouse over text lines #258 #265
+14.Fix: Can't replace bookmarked lines with multiple line text
+15.Fix: Patch for possible buffer overflow in GetFontWidths
+16.Fix: Wrong string for K&R style on SourceFormat config Dialog
+17.Fix: Use alphabet order for file name extension in FileAssociation Dialog
+18.Fix: Disable syntax toolbar in Hex mode
+19.Fix: Use GB18030 if wxFONTENCODING_CP936 is not available
+20.Fix: Total pages in print preview is incorrect
+21.Fix: Code improvement
+22.Update Astyle to latest code
+23.Update translations
+
 Mod v0.4.12
 1.New: Support Drag and Drop for text(from other applications, not DnD edit, can't drag text out of MadEdit yet)
 2.New: Remember last editing and reset of MadMacro dialog
