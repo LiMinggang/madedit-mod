@@ -83,7 +83,7 @@ Mod v0.4.13
 * Fix: Deleted stale lock file '/home/username/prog_name-username' bug(Linux) #262
 * Fix: Code issue of EnableTransparency
 * Fix: GB18030 not work under Linux
-* Fix: Regex replace bug, eg, replace "\r\n" with "\\n"
+* Fix: Regex replace bug, eg, replace "\r\n" with "\\\n"
 * Fix: MadPython Recording issue
 * Fix: Chars escape for regex recording
 * Fix: Unbind critical message handlers during OnClose
