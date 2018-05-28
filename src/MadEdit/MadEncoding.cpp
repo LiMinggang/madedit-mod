@@ -966,10 +966,11 @@ void MadEncoding::Create( size_t idx )
 		UCS4toMultiByte = &MadEncoding::UCS4toUTF32BE;
 		break;
 
+#ifdef __MAD_ENCODING_EXTENDED__
 	case etGB18030:
 		UCS4toMultiByte = &MadEncoding::UCS4toGB18030;
 		break;
-
+#endif
 	default:
 		//case etSingleByte:
 		//case etDoubleByte:
@@ -1591,16 +1592,24 @@ void DetectChineseEncoding( const wxByte *text, int count, int &enc )
 					{
 						if( b0 >= 0x81 && b0 <= 0xFE )
 						{
+#ifdef __MAD_ENCODING_EXTENDED__
 							if(EncodingsSet.find(wxFONTENCODING_CP936) != EncodingsSet.end())
+#endif
 								enc = wxFONTENCODING_CP936; // [0x81~0xFE][0x80~0xA0] are invalid in big5
+#ifdef __MAD_ENCODING_EXTENDED__
 							else
 								enc = MAD_FONTENCODING_GB18030; // [0x81~0xFE][0x30~0x39] are invalid in big5 and GBK
+#endif
 							return;
 						}
 					}
 					else if((b1 <= 0x39) && (b1 >= 0x30) && (b0 >= 0x81) && (b0 <= 0xFE))
 						{
+#ifdef __MAD_ENCODING_EXTENDED__
 							enc = MAD_FONTENCODING_GB18030; // [0x81~0xFE][0x30~0x39] are invalid in big5 and GBK
+#else
+							enc = wxFONTENCODING_CP936; // [0x81~0xFE][0x80~0xA0] are invalid in big5
+#endif
 							return;
 						}
 					else
@@ -1781,15 +1790,19 @@ void DetectEncoding( const wxByte *text, int count, int &enc )
 							|| name.IsSameAs( wxT( "HZ-GB-2312" ) ) )
 					{
 						enc = wxFONTENCODING_CP936;
+#ifdef __MAD_ENCODING_EXTENDED__
 						if(EncodingsSet.find(enc) == EncodingsSet.end())
 						{
 							enc = MAD_FONTENCODING_GB18030;
 						}
+#endif
 					}
 					else
+#ifdef __MAD_ENCODING_EXTENDED__
 						if(name.IsSameAs( wxT( "GB18030" )))
 							enc = MAD_FONTENCODING_GB18030;
 						else
+#endif
 							if( name.IsSameAs( wxT( "SHIFT_JIS" ) ) )
 							{
 								enc = wxFONTENCODING_CP932;
