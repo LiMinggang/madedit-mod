@@ -79,6 +79,8 @@
 
 const w_char W_VLINE = {'\0', '|'};
 
+#define MAX_CHAR_DISTANCE 4
+
 SuggestMgr::SuggestMgr(const char* tryme, unsigned int maxn, AffixMgr* aptr) {
   // register affix manager and check in string of chars to
   // try when building candidate suggestions
@@ -469,8 +471,11 @@ int SuggestMgr::replchars(std::vector<std::string>& wlst,
   return wlst.size();
 }
 
-// perhaps we doubled two characters (pattern aba -> ababa, for example vacation
-// -> vacacation)
+// perhaps we doubled two characters
+// (for example vacation -> vacacation)
+// The recognized pattern with regex back-references:
+// "(.)(.)\1\2\1" or "..(.)(.)\1\2"
+
 int SuggestMgr::doubletwochars(std::vector<std::string>& wlst,
                                const char* word,
                                int cpdsuggest) {
@@ -481,7 +486,7 @@ int SuggestMgr::doubletwochars(std::vector<std::string>& wlst,
   for (int i = 2; i < wl; i++) {
     if (word[i] == word[i - 2]) {
       state++;
-      if (state == 3) {
+      if (state == 3 || (state == 2 && i >= 4)) {
         std::string candidate(word, word + i - 1);
         candidate.insert(candidate.end(), word + i + 1, word + wl);
         testsug(wlst, candidate, cpdsuggest, NULL, NULL);
@@ -494,8 +499,11 @@ int SuggestMgr::doubletwochars(std::vector<std::string>& wlst,
   return wlst.size();
 }
 
-// perhaps we doubled two characters (pattern aba -> ababa, for example vacation
-// -> vacacation)
+// perhaps we doubled two characters
+// (for example vacation -> vacacation)
+// The recognized pattern with regex back-references:
+// "(.)(.)\1\2\1" or "..(.)(.)\1\2"
+
 int SuggestMgr::doubletwochars_utf(std::vector<std::string>& wlst,
                                    const w_char* word,
                                    int wl,
@@ -506,7 +514,7 @@ int SuggestMgr::doubletwochars_utf(std::vector<std::string>& wlst,
   for (int i = 2; i < wl; i++) {
     if (word[i] == word[i - 2]) {
       state++;
-      if (state == 3) {
+      if (state == 3 || (state == 2 && i >= 4)) {
         std::vector<w_char> candidate_utf(word, word + i - 1);
         candidate_utf.insert(candidate_utf.end(), word + i + 1, word + wl);
         std::string candidate;
@@ -939,7 +947,8 @@ int SuggestMgr::longswapchar(std::vector<std::string>& wlst,
   // try swapping not adjacent chars one by one
   for (std::string::iterator p = candidate.begin(); p < candidate.end(); ++p) {
     for (std::string::iterator q = candidate.begin(); q < candidate.end(); ++q) {
-      if (std::abs(std::distance(q, p)) > 1) {
+      size_t distance = std::abs(std::distance(q, p));
+      if (distance > 1 && distance <= MAX_CHAR_DISTANCE) {
         std::swap(*p, *q);
         testsug(wlst, candidate, cpdsuggest, NULL, NULL);
         std::swap(*p, *q);
@@ -958,7 +967,8 @@ int SuggestMgr::longswapchar_utf(std::vector<std::string>& wlst,
   // try swapping not adjacent chars
   for (std::vector<w_char>::iterator p = candidate_utf.begin(); p < candidate_utf.end(); ++p) {
     for (std::vector<w_char>::iterator q = candidate_utf.begin(); q < candidate_utf.end(); ++q) {
-      if (std::abs(std::distance(q, p)) > 1) {
+      size_t distance = std::abs(std::distance(q, p));
+      if (distance > 1 && distance <= MAX_CHAR_DISTANCE) {
         std::swap(*p, *q);
         std::string candidate;
         u16_u8(candidate, candidate_utf);
@@ -980,7 +990,7 @@ int SuggestMgr::movechar(std::vector<std::string>& wlst,
 
   // try moving a char
   for (std::string::iterator p = candidate.begin(); p < candidate.end(); ++p) {
-    for (std::string::iterator q = p + 1; q < candidate.end() && std::distance(p, q) < 10; ++q) {
+    for (std::string::iterator q = p + 1; q < candidate.end() && std::distance(p, q) <= MAX_CHAR_DISTANCE; ++q) {
       std::swap(*q, *(q - 1));
       if (std::distance(p, q) < 2)
         continue;  // omit swap char
@@ -990,7 +1000,7 @@ int SuggestMgr::movechar(std::vector<std::string>& wlst,
   }
 
   for (std::string::reverse_iterator p = candidate.rbegin(), pEnd = candidate.rend() - 1; p != pEnd; ++p) {
-    for (std::string::reverse_iterator q = p + 1, qEnd = candidate.rend(); q != qEnd && std::distance(p, q) < 10; ++q) {
+    for (std::string::reverse_iterator q = p + 1, qEnd = candidate.rend(); q != qEnd && std::distance(p, q) <= MAX_CHAR_DISTANCE; ++q) {
       std::swap(*q, *(q - 1));
       if (std::distance(p, q) < 2)
         continue;  // omit swap char
@@ -1013,7 +1023,7 @@ int SuggestMgr::movechar_utf(std::vector<std::string>& wlst,
 
   // try moving a char
   for (std::vector<w_char>::iterator p = candidate_utf.begin(); p < candidate_utf.end(); ++p) {
-    for (std::vector<w_char>::iterator q = p + 1; q < candidate_utf.end() && std::distance(p, q) < 10; ++q) {
+    for (std::vector<w_char>::iterator q = p + 1; q < candidate_utf.end() && std::distance(p, q) <= MAX_CHAR_DISTANCE; ++q) {
       std::swap(*q, *(q - 1));
       if (std::distance(p, q) < 2)
         continue;  // omit swap char
@@ -1025,7 +1035,7 @@ int SuggestMgr::movechar_utf(std::vector<std::string>& wlst,
   }
 
   for (std::vector<w_char>::reverse_iterator p = candidate_utf.rbegin(); p < candidate_utf.rend(); ++p) {
-    for (std::vector<w_char>::reverse_iterator q = p + 1; q < candidate_utf.rend() && std::distance(p, q) < 10; ++q) {
+    for (std::vector<w_char>::reverse_iterator q = p + 1; q < candidate_utf.rend() && std::distance(p, q) <= MAX_CHAR_DISTANCE; ++q) {
       std::swap(*q, *(q - 1));
       if (std::distance(p, q) < 2)
         continue;  // omit swap char
@@ -1715,15 +1725,15 @@ std::string SuggestMgr::suggest_morph(const std::string& in_w) {
           TESTAFF(rv->astr, pAMgr->get_needaffix(), rv->alen) ||
           TESTAFF(rv->astr, pAMgr->get_onlyincompound(), rv->alen))) {
       if (!HENTRY_FIND(rv, MORPH_STEM)) {
-        result.append(" ");
+        result.push_back(MSEP_FLD);
         result.append(MORPH_STEM);
         result.append(w);
       }
       if (HENTRY_DATA(rv)) {
-        result.append(" ");
+        result.push_back(MSEP_FLD);
         result.append(HENTRY_DATA2(rv));
       }
-      result.append("\n");
+      result.push_back(MSEP_REC);
     }
     rv = rv->next_homonym;
   }
@@ -1779,7 +1789,7 @@ std::string SuggestMgr::suggest_hentry_gen(hentry* rv, const char* pattern) {
                                       HENTRY_DATA(rv), pattern, 0);
     if (!aff.empty()) {
       result.append(aff);
-      result.append("\n");
+      result.push_back(MSEP_REC);
     }
   }
 
@@ -1803,7 +1813,7 @@ std::string SuggestMgr::suggest_hentry_gen(hentry* rv, const char* pattern) {
                                             rv2->alen, HENTRY_DATA(rv2), pattern, 0);
           if (!aff.empty()) {
             result.append(aff);
-            result.append("\n");
+            result.push_back(MSEP_REC);
           }
         }
       }

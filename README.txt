@@ -120,6 +120,9 @@ FreeBSD packaging (with FreeBSD 10.01)
 2. aclocal version in aclocal.m4
 3. stdc++ version
 
+Mod v0.4.14
+Update hunspell to latest b0ded558c6019f8490dcd56b711497b07e9fbfee
+
 Mod v0.4.13
 1.New: Atyle formatter: Add new option "style=webkit" for the WebKit brace style
 2.New: New API for MadPython:InsertNewline
