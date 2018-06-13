@@ -121,6 +121,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 3. stdc++ version
 
 Mod v0.4.14
+Fix: Input Method Candidate Window doesn't follow the caret under Windows 7
 Update hunspell to latest b0ded558c6019f8490dcd56b711497b07e9fbfee
 
 Mod v0.4.13

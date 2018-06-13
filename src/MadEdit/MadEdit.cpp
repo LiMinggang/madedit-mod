@@ -11444,6 +11444,44 @@ void MadEdit::DoActivate()
 }
 
 #ifdef __WXMSW__
+struct IMEAdjuster
+{
+	IMEAdjuster( HWND hWnd, const wxPoint & pos ): m_hWnd( hWnd ), m_hImc( ImmGetContext( hWnd ) ), m_pos( pos ) {}
+
+	void InitStatus(const wxFont& font) const
+	{
+		if (m_hImc == (HIMC)0 || ImmGetOpenStatus(m_hImc) != TRUE)
+			return;
+
+		LOGFONT lf;
+		wxFillLogFont(&lf, &font);
+		ImmSetCompositionFont(m_hImc, &lf);
+
+		UpdatePosition();
+	}
+
+	void UpdatePosition() const
+	{
+		if (m_hImc == (HIMC)0)
+			return;
+
+		COMPOSITIONFORM	cfs;
+		cfs.dwStyle = CFS_POINT;
+		cfs.ptCurrentPos.x = m_pos.x;
+		cfs.ptCurrentPos.y = m_pos.y;
+		ImmSetCompositionWindow(m_hImc, &cfs);
+	}
+
+	~IMEAdjuster()
+	{
+		ImmReleaseContext(m_hWnd, m_hImc);
+	}
+private:
+	const wxPoint& m_pos;
+	HWND m_hWnd;
+	HIMC m_hImc;
+};
+
 WXLRESULT MadEdit::MSWWindowProc( WXUINT message, WXWPARAM wParam, WXLPARAM lParam )
 {
 	switch( message )
@@ -11459,6 +11497,19 @@ WXLRESULT MadEdit::MSWWindowProc( WXUINT message, WXWPARAM wParam, WXLPARAM lPar
 	case WM_PASTE:
 		PasteFromClipboard();
 		return TRUE;
+
+	case WM_IME_NOTIFY:
+		if (wParam == IMN_SETOPENSTATUS)
+		{
+			IMEAdjuster((HWND)GetHWND(), m_caret->GetPosition()).InitStatus(m_font);
+		}
+		break;
+
+	case WM_IME_COMPOSITION:
+		{
+			IMEAdjuster((HWND)GetHWND(), m_caret->GetPosition()).UpdatePosition();
+		}
+		break;
 
 	case WM_PAINT: // for Mouse-Over-Get-Word of Dr.Eye & StarDict
 		{
