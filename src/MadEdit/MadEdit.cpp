@@ -11450,7 +11450,7 @@ struct IMEAdjuster
 
 	void InitStatus(const wxFont& font) const
 	{
-		if (m_hImc == (HIMC)0 || ImmGetOpenStatus(m_hImc) != TRUE)
+		if (m_hImc == (HIMC)nullptr || ImmGetOpenStatus(m_hImc) == 0)
 			return;
 
 		LOGFONT lf;
@@ -11462,10 +11462,10 @@ struct IMEAdjuster
 
 	void UpdatePosition() const
 	{
-		if (m_hImc == (HIMC)0)
+		if (m_hImc == (HIMC)nullptr)
 			return;
 
-		COMPOSITIONFORM	cfs;
+		COMPOSITIONFORM cfs;
 		cfs.dwStyle = CFS_POINT;
 		cfs.ptCurrentPos.x = m_pos.x;
 		cfs.ptCurrentPos.y = m_pos.y;
