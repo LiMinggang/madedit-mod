@@ -122,7 +122,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.4.14
 Fix: Input Method Candidate Window doesn't follow the caret under Windows 7
-Update hunspell to latest b0ded558c6019f8490dcd56b711497b07e9fbfee
+Update hunspell to latest 8e6ceaa55d3f22c2b8ceff0190ce05f56aad38c4
 
 Mod v0.4.13
 1.New: Atyle formatter: Add new option "style=webkit" for the WebKit brace style
