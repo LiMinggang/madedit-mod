@@ -126,7 +126,7 @@
       <AdditionalLibraryDirectories>$(WXWIN)\lib\vc_x64_lib\;$(SolutionDir)$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
-      <AdditionalDependencies>python27.lib;boostpython.lib;libhunspell.lib;comctl32.lib;rpcrt4.lib;imm32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>python27_d.lib;boostpython.lib;libhunspell.lib;comctl32.lib;rpcrt4.lib;imm32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/ignore:4217 /ignore:4049 %(AdditionalOptions)</AdditionalOptions>
       <Profile>true</Profile>
     </Link>
