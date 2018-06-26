@@ -104,6 +104,21 @@ PyModule_GetWarningsModule(void)
     return PyImport_ImportModule("warnings");
 }
 
+static void
+_PyDebug_PrintTotalRefs(void)
+{
+#ifdef Py_REF_DEBUG
+    Py_ssize_t total;
+
+    if (!Py_GETENV("PYTHONSHOWREFCOUNT")) {
+        return;
+    }
+
+    total = _Py_GetRefTotal();
+    fprintf(stderr, "[%" PY_FORMAT_SIZE_T "d refs]\n", total);
+#endif
+}
+
 static int initialized = 0;
 
 /* API to access the initialized flag -- useful for esoteric use */
@@ -481,10 +496,12 @@ Py_Finalize(void)
 
     /* Debugging stuff */
 #ifdef COUNT_ALLOCS
-    dump_counts(stdout);
+    if (Py_GETENV("PYTHONSHOWALLOCCOUNT")) {
+        dump_counts(stderr);
+    }
 #endif
 
-    PRINT_TOTAL_REFS();
+    _PyDebug_PrintTotalRefs();
 
 #ifdef Py_TRACE_REFS
     /* Display all objects still alive -- this can invoke arbitrary
@@ -775,7 +792,7 @@ PyRun_InteractiveLoopFlags(FILE *fp, const char *filename, PyCompilerFlags *flag
     }
     for (;;) {
         ret = PyRun_InteractiveOneFlags(fp, filename, flags);
-        PRINT_TOTAL_REFS();
+        _PyDebug_PrintTotalRefs();
         if (ret == E_EOF)
             return 0;
         /*

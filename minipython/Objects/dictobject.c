@@ -2576,6 +2576,7 @@ dictiter_new(PyDictObject *dict, PyTypeObject *itertype)
 static void
 dictiter_dealloc(dictiterobject *di)
 {
+    _PyObject_GC_UNTRACK(di);
     Py_XDECREF(di->di_dict);
     Py_XDECREF(di->di_result);
     PyObject_GC_Del(di);
@@ -2855,6 +2856,7 @@ typedef struct {
 static void
 dictview_dealloc(dictviewobject *dv)
 {
+    _PyObject_GC_UNTRACK(dv);
     Py_XDECREF(dv->dv_dict);
     PyObject_GC_Del(dv);
 }
@@ -3000,21 +3002,29 @@ dictview_repr(dictviewobject *dv)
 {
     PyObject *seq;
     PyObject *seq_str;
-    PyObject *result;
+    PyObject *result = NULL;
+    Py_ssize_t rc;
 
+    rc = Py_ReprEnter((PyObject *)dv);
+    if (rc != 0) {
+        return rc > 0 ? PyString_FromString("...") : NULL;
+    }
     seq = PySequence_List((PyObject *)dv);
-    if (seq == NULL)
-        return NULL;
-
+    if (seq == NULL) {
+        goto Done;
+    }
     seq_str = PyObject_Repr(seq);
-    if (seq_str == NULL) {
         Py_DECREF(seq);
-        return NULL;
+
+    if (seq_str == NULL) {
+        goto Done;
     }
     result = PyString_FromFormat("%s(%s)", Py_TYPE(dv)->tp_name,
                                  PyString_AS_STRING(seq_str));
     Py_DECREF(seq_str);
-    Py_DECREF(seq);
+
+Done:
+    Py_ReprLeave((PyObject *)dv);
     return result;
 }
 
