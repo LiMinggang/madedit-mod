@@ -157,10 +157,6 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID WXUNUSED(
 	WxCheckBoxSubDir->SetValue(false);
 	BoxSizer3->Add(WxCheckBoxSubDir, 0, wxALL|wxEXPAND, 2);
 	BoxSizer1->Add(BoxSizer3, 1, wxALL|wxEXPAND, 0);
-	SetSizer(BoxSizer1);
-	BoxSizer1->Fit(this);
-	BoxSizer1->SetSizeHints(this);
-	Center();
 
 	//Connect(wxID_ANY,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&MadFindInFilesDialog::WxCheckBoxRegexClick);
 	//Connect(wxID_ANY,wxEVT_COMMAND_CHECKBOX_CLICKED,(wxObjectEventFunction)&MadFindInFilesDialog::WxCheckBoxFindHexClick);
@@ -219,6 +215,10 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID WXUNUSED(
 	WxBitmapButtonRecentReplaceText->Show(false);
 	WxButtonReplace->Show(false);
 
+	SetSizer(BoxSizer1);
+	BoxSizer1->Fit(this);
+	BoxSizer1->SetSizeHints(this);
+	Center();
 
 	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED, &MadFindInFilesDialog::WxCheckBoxRegexClick, this, WxCheckBoxRegex->GetId() );
 	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED, &MadFindInFilesDialog::WxCheckBoxFindHexClick, this, WxCheckBoxFindHex->GetId() );
@@ -782,6 +782,7 @@ void MadFindInFilesDialog::FindReplaceInFiles( bool bReplace )
 				}
 
 				cont = dialog.Update( idx, str );
+				dialog.Fit();
 
 				if( !cont ) { break; }
 			}
