@@ -123,6 +123,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 Mod v0.4.14
 Fix: Input Method Candidate Window doesn't follow the caret under Windows 7
 Fix: Blurry GUI text issue under Windows 10 high DPI screen
+Update Python to 2.7.15
 Update hunspell to latest 8e6ceaa55d3f22c2b8ceff0190ce05f56aad38c4
 
 Mod v0.4.13
