@@ -126,6 +126,7 @@ Fix: Blurry GUI text issue under Windows 10 high DPI screen
 Fix: FindInFiles dialog/search progress display issue under high DPI
 Update Python to 2.7.15
 Update hunspell to latest 8e6ceaa55d3f22c2b8ceff0190ce05f56aad38c4
+Update Chinese translation
 
 Mod v0.4.13
 1.New: Atyle formatter: Add new option "style=webkit" for the WebKit brace style

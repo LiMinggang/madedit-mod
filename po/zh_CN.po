@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.10\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-19 18:22+0800\n"
-"PO-Revision-Date: 2018-05-19 18:19+0800\n"
+"PO-Revision-Date: 2018-06-28 20:17+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit-Mod <minggang.li@gmail.com>\n"
 "Language: zh_CN\n"
@@ -2721,7 +2721,7 @@ msgstr "多文件查找/替换的结果"
 #: ../src/MadEditFrame.cpp:7393
 #, c-format
 msgid "Line Number(1~%s): (you can input HexNumber(0x1~0x%X): 0xNNN)"
-msgstr "行数（1~%s）:（可以输入16进位数字（0x1~0x%X）: 0xNNN）"
+msgstr "行号（1~%s）:（可以输入16进位数字（0x1~0x%X）: 0xNNN）"
 
 #: ../src/MadEditFrame.cpp:7393
 msgid "Go To Line"
