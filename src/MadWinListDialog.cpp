@@ -247,6 +247,10 @@ void MadWinListDialog::SortTabs(long column)
 			postfix.Printf(wxT("*%04d"), seq);
 			name += postfix;
 		}
+
+#ifdef __WXMSW__
+		name.MakeUpper();
+#endif
 		colname.Add(name);
 		madEditMap[name] = madedit;
 		oldmedits.push_back(madedit);

@@ -121,6 +121,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 3. stdc++ version
 
 Mod v0.4.14
+New: Using case insensitive on file name and directory name sorting in Windows list dialog
 Fix: Input Method Candidate Window doesn't follow the caret under Windows 7
 Fix: Blurry GUI text issue under Windows 10 high DPI screen
 Fix: FindInFiles dialog/search progress display issue under high DPI
