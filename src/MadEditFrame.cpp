@@ -8596,6 +8596,8 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& WXUNUSED(event) )
 
 		// SpellChecker
 		SpellCheckerManager::Instance().Save();
+		bb = g_OptionsDialog->CheckBoxAddKeywords->GetValue();
+		m_Config->Write( wxT( "/SpellChecker/AddKeywords" ), bb );
 		for( int i = 0; (size_t)i < m_Notebook->GetPageCount(); ++i )
 		{
 			MadEdit *madedit = dynamic_cast< MadEdit* >(m_Notebook->GetPage( i ));

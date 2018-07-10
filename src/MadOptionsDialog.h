@@ -79,6 +79,7 @@ class MadOptionsDialog: public wxDialog
 		wxButton* ButtonDictionaryDir;
 		wxButton* ButtonOK;
 		wxButton* ButtonShowInMenu;
+		wxCheckBox* CheckBoxAddKeywords;
 		wxCheckBox* CheckBoxAutoCompletePair;
 		wxCheckBox* CheckBoxAutoFillColumnPaste;
 		wxCheckBox* CheckBoxAutoIndent;

@@ -890,6 +890,10 @@ void MadSyntax::ParseSyntax( const wxString &filename )
 	long gidx = 0;
 	bool gcont = syn.GetNextGroup( group, gidx );
 
+	wxConfigBase  * cfg = wxConfigBase::Get(false);
+	cfg->SetPath(_T("/SpellChecker"));
+	bool bb = false;
+	cfg->Read(_T("AddKeywords"), &bb, true);
 	m_SyntaxKeywordDict->DisableSort();
 	while( gcont )
 	{
@@ -947,7 +951,8 @@ void MadSyntax::ParseSyntax( const wxString &filename )
 										kw.MakeLower();
 
 									ck->m_Keywords.insert( kw );
-									m_SyntaxKeywordDict->AddWord(kw);
+									if(bb)
+										m_SyntaxKeywordDict->AddWord(kw);
 									kw = tkz.GetNextToken();
 								}
 							}
@@ -959,7 +964,8 @@ void MadSyntax::ParseSyntax( const wxString &filename )
 		gcont = syn.GetNextGroup( group, gidx );
 	}
 
-	m_SyntaxKeywordDict->SortDict();
+	if(bb)
+		m_SyntaxKeywordDict->SortDict();
 	// syn loaded, begin post-processing
 #ifdef __WXMSW__
 
