@@ -890,6 +890,7 @@ void MadSyntax::ParseSyntax( const wxString &filename )
 	long gidx = 0;
 	bool gcont = syn.GetNextGroup( group, gidx );
 
+	m_SyntaxKeywordDict->DisableSort();
 	while( gcont )
 	{
 		//wxLogMessage(entry);
@@ -958,6 +959,7 @@ void MadSyntax::ParseSyntax( const wxString &filename )
 		gcont = syn.GetNextGroup( group, gidx );
 	}
 
+	m_SyntaxKeywordDict->SortDict();
 	// syn loaded, begin post-processing
 #ifdef __WXMSW__
 
