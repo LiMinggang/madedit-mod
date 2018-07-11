@@ -952,7 +952,10 @@ void MadSyntax::ParseSyntax( const wxString &filename )
 
 									ck->m_Keywords.insert( kw );
 									if(bb)
+									{
+										wxASSERT(m_SyntaxKeywordDict->IsWordInDictionary(kw) == false);
 										m_SyntaxKeywordDict->AddWord(kw);
+									}
 									kw = tkz.GetNextToken();
 								}
 							}
