@@ -894,7 +894,7 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_LDClickHighlight = m_Config->ReadBool( wxT( "LDoubleClickHighlight" ), true );
 	m_HasBackup = true;
 #ifndef PYMADEDIT_DLL
-	m_Config->Read( wxT( "SpellCheck" ),   &m_SpellCheck, true );
+	m_Config->Read( wxT( "SpellCheck" ),   &m_SpellCheck, false );
 
 	if( SpellCheckerManager::Instance().GetSelectedDictionaryNumber() == -1 ) m_SpellCheck = false;
 
