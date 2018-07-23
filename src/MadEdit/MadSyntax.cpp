@@ -891,6 +891,7 @@ void MadSyntax::ParseSyntax( const wxString &filename )
 	bool gcont = syn.GetNextGroup( group, gidx );
 
 	wxConfigBase  * cfg = wxConfigBase::Get(false);
+	wxString oldpath = cfg->GetPath();
 	cfg->SetPath(_T("/SpellChecker"));
 	bool bb = false;
 	cfg->Read(_T("AddKeywords"), &bb, true);
@@ -953,8 +954,8 @@ void MadSyntax::ParseSyntax( const wxString &filename )
 									ck->m_Keywords.insert( kw );
 									if(bb)
 									{
-										wxASSERT(m_SyntaxKeywordDict->IsWordInDictionary(kw) == false);
-										m_SyntaxKeywordDict->AddWord(kw);
+										if(m_SyntaxKeywordDict->IsWordInDictionary(kw) == false);
+											m_SyntaxKeywordDict->AddWord(kw);
 									}
 									kw = tkz.GetNextToken();
 								}
@@ -1080,6 +1081,8 @@ void MadSyntax::ParseSyntax( const wxString &filename )
 	{
 		m_CheckState = true;
 	}
+
+	cfg->SetPath(oldpath);
 }
 
 //static ucs4_t DefDelimiter[] = {wxT('~'), wxT('`'), wxT('!'), wxT('@'), wxT('#'), wxT('$'), wxT('%'), wxT('^'), wxT('&'), wxT('*'), wxT('('), wxT(')'), wxT('-'), wxT('+'), wxT('='), wxT('|'), wxT('\\'), wxT('{'), wxT('}'), wxT('['), wxT(']'), wxT(':'), wxT(';'), wxT('"'), wxT('\''), wxT(','), wxT('.'), wxT('<'), wxT('>'), wxT('/'), wxT('?')};

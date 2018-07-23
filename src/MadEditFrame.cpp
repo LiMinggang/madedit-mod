@@ -8536,8 +8536,9 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& WXUNUSED(event) )
 		m_Config->Write( wxT( "NewDocumentLineEnding" ), g_OptionsDialog->m_NewDocLineEnding );
 		m_Config->Write( wxT( "NewDocumentEncoding" ), g_OptionsDialog->m_NewDocEncoding );
 		m_Config->Write( wxT( "NewDocumentEncodingUTF8WithBOM" ), g_OptionsDialog->CheckBoxNewDocEncUTF8WithBOM->GetValue() );
-		m_Config->Write( wxT( "NewDocumentSyntax" ), g_OptionsDialog->ComboBoxNewDocSyntax->GetValue() );
-		m_Config->Write( wxT( "NewDocumentTextFont" ), g_OptionsDialog->ComboBoxNewDocFont->GetValue() );
+		m_Config->Write( wxT( "NewDocumentSyntax" ), g_OptionsDialog->ComboBoxNewDocSyntax->GetString( g_OptionsDialog->ComboBoxNewDocSyntax->GetSelection() ) );
+		m_Config->Write( wxT( "NewDocumentTextFont" ), g_OptionsDialog->ComboBoxNewDocFont->GetString( g_OptionsDialog->ComboBoxNewDocFont->GetSelection() ) );
+		m_Config->Write( wxT( "NewDocumentTextFontSize" ), g_OptionsDialog->EditNewDocFontSize->GetValue() );
 
 		//Print
 		bool bb;

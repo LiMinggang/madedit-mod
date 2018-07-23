@@ -55,6 +55,8 @@ struct MadAttributes    // font attributes
 	MadFontStyles style;   // style
 	MadAttributes(): color( wxNullColour ), bgcolor( wxNullColour ), style( fsNone )
 	{}
+	MadAttributes(const MadAttributes & attr): color( attr.color ), bgcolor( attr.bgcolor ), style( attr.style )
+	{}
 };
 
 struct MadSyntaxRange
@@ -65,6 +67,9 @@ struct MadSyntaxRange
 	wxColour bgcolor;
 	MadSyntaxRange(): id( 0 ), bgcolor( wxNullColour )
 	{}
+	MadSyntaxRange(const MadSyntaxRange& synRange)
+		:id(synRange.id), begin(synRange.begin), end(synRange.end), bgcolor(synRange.bgcolor)
+	{}
 };
 
 struct MadSyntaxKeyword
@@ -74,8 +79,10 @@ struct MadSyntaxKeyword
 	vector < int > m_InRange;
 	MadKeywordSet m_Keywords;
 	bool m_CaseSensitive;
-
 	MadSyntaxKeyword() : m_CaseSensitive( false )
+	{}
+	MadSyntaxKeyword(const MadSyntaxKeyword & keyword) : m_CaseSensitive( keyword.m_CaseSensitive ),
+		m_Attr(keyword.m_Attr), m_InRange(keyword.m_InRange), m_Keywords(keyword.m_Keywords)
 	{}
 };
 
@@ -95,6 +102,10 @@ struct MadState
 	void Reset() {
 		rangeid = blkcmtid = stringid = linecmt = directive = 0;
 	}
+	MadState() :rangeid(0), blkcmtid(0), stringid(0), linecmt(0), directive(0)
+	{}
+	MadState(const MadState & state) :rangeid(state.rangeid), blkcmtid(state.blkcmtid), stringid(state.stringid), linecmt(state.linecmt), directive(state.directive)
+	{}
 };
 
 class MadEdit;

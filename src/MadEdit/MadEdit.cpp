@@ -894,7 +894,7 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_LDClickHighlight = m_Config->ReadBool( wxT( "LDoubleClickHighlight" ), true );
 	m_HasBackup = true;
 #ifndef PYMADEDIT_DLL
-	m_Config->Read( wxT( "SpellCheck" ),   &m_SpellCheck, false );
+	m_Config->Read( wxT( "SpellCheck" ), &m_SpellCheck, false );
 
 	if( SpellCheckerManager::Instance().GetSelectedDictionaryNumber() == -1 ) m_SpellCheck = false;
 
@@ -12135,6 +12135,8 @@ void MadEdit::ConfigNewDocument()
 	long ll;
 	bool bb;
 	wxString enc(wxT("System Default")), ss = wxGetTranslation(wxT("Plain Text"));
+	wxString oldpath = m_Config->GetPath();
+	m_Config->SetPath( wxT( "/MadEdit" ) );
 	m_Config->Read( wxT( "NewDocumentLineEnding" ), &ll, nltDefault );
 	m_NewLineType = (MadNewLineType)ll;
 	m_InsertNewLineType = (MadNewLineType)ll;
@@ -12158,9 +12160,11 @@ void MadEdit::ConfigNewDocument()
 	m_Config->Read( wxT( "NewDocumentTextFont" ), &ss );
 	if (!ss.IsEmpty())
 	{
-		m_Config->Read(wxT("NewDocumentTextSize"), &ll, DEFAULT_FONT_SIZE);
+		m_Config->Read(wxT("NewDocumentTextFontSize"), &ll, DEFAULT_FONT_SIZE);
 		SetTextFont(ss, ll, true);
 	}
+
+	m_Config->SetPath( oldpath );
 }
 
 bool MadEdit::InsertString( const wxString & text )
