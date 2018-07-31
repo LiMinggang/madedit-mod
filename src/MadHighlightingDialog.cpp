@@ -385,21 +385,21 @@ void MadHighlightingDialog::WxListBoxSyntaxSelected(wxCommandEvent& event)
 	
 	// custom ranges
 	size_t i;
-	for(i=0; i<g_Syntax->m_CustomRange.size(); ++i)
+	for(i=0; i<g_Syntax->m_SynAttr->m_CustomRange.size(); ++i)
 	{
 		wxString text;
-		text.Printf(wxT("Range %s %s"), g_Syntax->m_CustomRange[i].begin.c_str(), g_Syntax->m_CustomRange[i].end.c_str());
+		text.Printf(wxT("Range %s %s"), g_Syntax->m_SynAttr->m_CustomRange[i].begin.c_str(), g_Syntax->m_SynAttr->m_CustomRange[i].end.c_str());
 		long item = WxListCtrlKeyword->InsertItem(index++, text);
-		wxColour *bg = &(g_Syntax->m_CustomRange[i].bgcolor);
+		wxColour *bg = &(g_Syntax->m_SynAttr->m_CustomRange[i].bgcolor);
 		g_KeywordInfoTable.push_back( KeywordInfo(kindRange, nullptr, bg) );
 		SetItemColour(WxListCtrlKeyword, item, g_KeywordInfoTable[0].attr->color, *bg);
 	}
 	
 	// custom keywords
-	for(i=0; i<g_Syntax->m_CustomKeyword.size(); ++i)
+	for(i=0; i<g_Syntax->m_SynAttr->m_CustomKeyword.size(); ++i)
 	{
-		long item = WxListCtrlKeyword->InsertItem(index++, g_Syntax->m_CustomKeyword[i].m_Name);
-		MadAttributes *attr = &(g_Syntax->m_CustomKeyword[i].m_Attr);
+		long item = WxListCtrlKeyword->InsertItem(index++, g_Syntax->m_SynAttr->m_CustomKeyword[i].m_Name);
+		MadAttributes *attr = &(g_Syntax->m_SynAttr->m_CustomKeyword[i].m_Attr);
 		g_KeywordInfoTable.push_back(KeywordInfo(kindKeyword, attr, nullptr));
 
 		SetItemColour(WxListCtrlKeyword, item, attr->color, attr->bgcolor);
@@ -726,12 +726,12 @@ void MadHighlightingDialog::MadHighlightingDialogActivate(wxActivateEvent& event
 
 MadSyntax *MadHighlightingDialog::GetSyntax(const wxString &title)
 {
-	if(m_Syntax && m_Syntax->m_Title.CmpNoCase(title)==0)
+	if(m_Syntax && m_Syntax->m_SynAttr->m_Title.CmpNoCase(title)==0)
 		return m_Syntax;
 
 	for(size_t i=0; i<m_ModifiedSyntax.size(); ++i)
 	{
-		if(m_ModifiedSyntax[i]->m_Title.CmpNoCase(title)==0)
+		if(m_ModifiedSyntax[i]->m_SynAttr->m_Title.CmpNoCase(title)==0)
 			return m_ModifiedSyntax[i];
 	}
 
@@ -850,7 +850,7 @@ void MadHighlightingDialog::FreeSyntax(bool restore)
 	{
 		for(size_t i=0; i<m_ModifiedSyntax.size(); ++i)
 		{
-			MadSyntax *syn=MadSyntax::GetSyntaxByTitle(m_ModifiedSyntax[i]->m_Title);
+			MadSyntax *syn=MadSyntax::GetSyntaxByTitle(m_ModifiedSyntax[i]->m_SynAttr->m_Title);
 			ApplySyntaxAttributes(syn);
 			delete syn;
 		}

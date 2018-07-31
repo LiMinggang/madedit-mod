@@ -129,6 +129,7 @@ Fix: FindInFiles dialog/search progress display issue under high DPI
 Fix: Performance issue of spell check for syntax hightlighting #267 #270
 Fix: NewDocumentTextFontSize does not take effect
 Fix: Set spell check default to disable
+Fix: Memory saving and performance improvement on syntax highlighting
 Update Python to 2.7.15
 Update hunspell to latest 8e6ceaa55d3f22c2b8ceff0190ce05f56aad38c4
 Update Chinese translation

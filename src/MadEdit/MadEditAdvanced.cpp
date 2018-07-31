@@ -655,7 +655,7 @@ void MadEdit::IncreaseDecreaseIndent( bool incIndent )
 
 void MadEdit::CommentUncomment( bool comment )
 {
-	if( IsReadOnly() || m_EditMode == emHexMode || m_Syntax->m_LineComment.empty() )
+	if( IsReadOnly() || m_EditMode == emHexMode || m_Syntax->m_SynAttr->m_LineComment.empty() )
 		return;
 
 	bool oldModified = m_Modified;
@@ -693,7 +693,7 @@ void MadEdit::CommentUncomment( bool comment )
 		m_SelectionPos1.pos = m_CaretPos.pos - m_CaretPos.linepos + linestartpos;
 	}
 
-	wxString &str = m_Syntax->m_LineComment.front();
+	wxString &str = m_Syntax->m_SynAttr->m_LineComment.front();
 	vector <ucs4_t> commentstr;
 	const size_t commentlen = str.size();
 

@@ -677,7 +677,7 @@ public: // basic functions
 
 	void SetSyntax( const wxString &title );
 	MadSyntax* GetSyntax() { return m_Syntax; }
-	wxString GetSyntaxTitle() { return m_Syntax->m_Title; }
+	wxString GetSyntaxTitle() { return m_Syntax->m_SynAttr->m_Title; }
 	void UpdateSyntaxDictionary();
 #if CPLUSEPLUSE98
     boost::shared_ptr<PersonalDictionary>& GetSyntaxDictionary() { return m_Syntax->GetSyntaxDictionary(); }
@@ -975,7 +975,7 @@ public: // basic functions
 	void GoToLine( int line );
 	void SetCaretPosition( wxFileOffset pos, wxFileOffset selbeg = -1, wxFileOffset selend = -1 );
 
-	bool HasBracePair() { return !m_Syntax->m_LeftBrace.empty(); }
+	bool HasBracePair() { return !m_Syntax->m_SynAttr->m_LeftBrace.empty(); }
 	void GoToLeftBrace() { ProcessCommand( ecLeftBrace ); }
 	void GoToRightBrace() { ProcessCommand( ecRightBrace ); }
 
@@ -1065,7 +1065,7 @@ public: // advanced functions
 	void ToggleBOM();
 
 	void IncreaseDecreaseIndent( bool incIndent );
-	bool HasLineComment() { return !m_Syntax->m_LineComment.empty(); }
+	bool HasLineComment() { return !m_Syntax->m_SynAttr->m_LineComment.empty(); }
 	void CommentUncomment( bool comment );
 
 	void ToUpperCase();

@@ -2027,7 +2027,7 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 	int wordwidth = -1, wordlength = -1, lastwordwidth = -1;
 
 	wxASSERT(subrowid >= 0);
-	if( m_Syntax->m_CheckState )
+	if( m_Syntax->m_SynAttr->m_CheckState )
 	{
 		m_Syntax->InitNextWord2( lineiter, 0 );
 
@@ -2315,7 +2315,7 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 					}
 
 					/***/
-					if( m_Syntax->m_CheckState == false )
+					if( m_Syntax->m_SynAttr->m_CheckState == false )
 					{
 						m_Syntax->InitNextWord2( lineiter, subrowid + 1 );
 						break;
@@ -6289,7 +6289,7 @@ void MadEdit::GetIndentSpaces( int lineid, MadLineIterator lit, vector <ucs4_t> 
 			}
 	}
 
-	if( autoIndent && !m_Syntax->m_IndentChar.IsEmpty() ) // check the last char is IndentChar or not
+	if( autoIndent && !m_Syntax->m_SynAttr->m_IndentChar.IsEmpty() ) // check the last char is IndentChar or not
 	{
 		MadCaretPos *maxpos;
 
@@ -6318,7 +6318,7 @@ void MadEdit::GetIndentSpaces( int lineid, MadLineIterator lit, vector <ucs4_t> 
 			ucqueue.pop_back();
 		}
 
-		if( ucqueue.size() > 0 && m_Syntax->m_IndentChar.Find( wxChar( ucqueue.back().first ) ) >= 0 )
+		if( ucqueue.size() > 0 && m_Syntax->m_SynAttr->m_IndentChar.Find( wxChar( ucqueue.back().first ) ) >= 0 )
 		{
 			if( unindentChar == false )
 			{
@@ -7281,7 +7281,7 @@ void MadEdit::OverwriteDataMultiple( vector<wxFileOffset> &del_bpos, vector<wxFi
 
 void MadEdit::FindLeftBrace( int &rowid, MadLineIterator lit, wxFileOffset linepos, BracePairIndex &bpi )  // find by bpi.BraceIndex
 {
-	wxASSERT( m_Syntax->m_LeftBrace.size() != 0 );
+	wxASSERT( m_Syntax->m_SynAttr->m_LeftBrace.size() != 0 );
 	vector <BracePairIndex>::iterator bit = lit->m_BracePairIndices.end();
 	size_t bcount = lit->m_BracePairIndices.size();
 
@@ -7309,7 +7309,7 @@ void MadEdit::FindLeftBrace( int &rowid, MadLineIterator lit, wxFileOffset linep
 
 	if( bpi.BraceIndex < 0 )
 	{
-		StackVector.resize( m_Syntax->m_LeftBrace.size() );
+		StackVector.resize( m_Syntax->m_SynAttr->m_LeftBrace.size() );
 	}
 	else
 	{
@@ -7399,7 +7399,7 @@ void MadEdit::FindLeftBrace( int &rowid, MadLineIterator lit, wxFileOffset linep
 
 void MadEdit::FindRightBrace( int &rowid, MadLineIterator lit, wxFileOffset linepos, BracePairIndex &bpi )
 {
-	wxASSERT( m_Syntax->m_LeftBrace.size() != 0 );
+	wxASSERT( m_Syntax->m_SynAttr->m_LeftBrace.size() != 0 );
 	vector <BracePairIndex>::iterator bit = lit->m_BracePairIndices.begin();
 	size_t bcount = lit->m_BracePairIndices.size();
 
@@ -7427,7 +7427,7 @@ void MadEdit::FindRightBrace( int &rowid, MadLineIterator lit, wxFileOffset line
 
 	if( bpi.BraceIndex < 0 )
 	{
-		StackVector.resize( m_Syntax->m_LeftBrace.size() );
+		StackVector.resize( m_Syntax->m_SynAttr->m_LeftBrace.size() );
 	}
 	else
 	{
@@ -7518,7 +7518,7 @@ void MadEdit::FindRightBrace( int &rowid, MadLineIterator lit, wxFileOffset line
 
 void MadEdit::FindBracePairUnderCaretPos()
 {
-	if( m_Syntax->m_LeftBrace.empty() )
+	if( m_Syntax->m_SynAttr->m_LeftBrace.empty() )
 	{
 		m_LeftBrace_rowid = -1;
 		m_RightBrace_rowid = -1;
@@ -7925,7 +7925,7 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 				// check for AutoCompletePair
 				int idx;
 
-				if( m_AutoCompletePair && m_EditMode==emTextMode && ( idx = m_Syntax->m_AutoCompleteLeftChar.Find( wxChar( uc ) ) ) >= 0 )
+				if( m_AutoCompletePair && m_EditMode==emTextMode && ( idx = m_Syntax->m_SynAttr->m_AutoCompleteLeftChar.Find( wxChar( uc ) ) ) >= 0 )
 				{
 					// insert the AutoCompleteLeftChar
 					if((!m_SingleLineMode) && IsMacroRecording())
@@ -7962,7 +7962,7 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 						{
 							SetCaretPosition(m_CaretPos.pos + sellen);
 						}
-						NewAutoCompleteRightChar = m_Syntax->m_AutoCompleteRightChar[idx];
+						NewAutoCompleteRightChar = m_Syntax->m_SynAttr->m_AutoCompleteRightChar[idx];
 						if((!m_SingleLineMode) && IsMacroRecording())
 							RecordAsMadMacro( this, wxString::Format( wxT( "%c" ), ( int )NewAutoCompleteRightChar ), true);
 						InsertString( &NewAutoCompleteRightChar, 1, true, false, false );
@@ -7975,7 +7975,7 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 					bool inserted = false;
 
 					// check for m_UnindentChar
-					if( m_EditMode == emTextMode && ( idx = m_Syntax->m_UnindentChar.Find( wxChar( uc ) ) ) >= 0 )
+					if( m_EditMode == emTextMode && ( idx = m_Syntax->m_SynAttr->m_UnindentChar.Find( wxChar( uc ) ) ) >= 0 )
 					{
 						// check if the chars before uc are all spaces
 						MadCaretPos *sbeg;
@@ -8716,7 +8716,7 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 
 								bool unindentChar = false;
 
-								if( ucqueue.size() > 0 && m_Syntax->m_UnindentChar.Find( wxChar( uc ) ) >= 0 )
+								if( ucqueue.size() > 0 && m_Syntax->m_SynAttr->m_UnindentChar.Find( wxChar( uc ) ) >= 0 )
 								{
 									unindentChar = true;
 								}

@@ -1769,7 +1769,7 @@ void MadLines::Reformat( /*IN*/MadLineIterator &iter,/*IN*/int maxwrapwidth, /*I
 	MadStringIterator sit, sitend;
 	static vector < wxString > strvec;
 	MadSyntaxRange *srange = nullptr;
-	int CheckState = m_Syntax->m_CheckState;
+	int CheckState = m_Syntax->m_SynAttr->m_CheckState;
 	long tabwidth = -1;
 
 	strvec.clear();
@@ -1837,7 +1837,7 @@ void MadLines::Reformat( /*IN*/MadLineIterator &iter,/*IN*/int maxwrapwidth, /*I
 				{
 					wxASSERT( ucqueue.size() == 1 );
 
-					if( prevuc != m_Syntax->nw_EscapeChar )
+					if( prevuc != m_Syntax->m_SynAttr->nw_EscapeChar )
 					{
 						state.LineComment = 0;
 						state.Directive = 0;
@@ -1872,7 +1872,7 @@ void MadLines::Reformat( /*IN*/MadLineIterator &iter,/*IN*/int maxwrapwidth, /*I
 				{
 					wxASSERT( ucqueue.size() == 1 );
 
-					if( prevuc != m_Syntax->nw_EscapeChar )
+					if( prevuc != m_Syntax->m_SynAttr->nw_EscapeChar )
 					{
 						state.LineComment = 0;
 						state.Directive = 0;
@@ -1903,11 +1903,11 @@ _RUNAGAIN_:
 							//Minggang: Not sure why this was commneted out at the first promote of MadEdit
 							//https://sourceforge.net/p/madedit/code/9/tree/trunk/madedit/src/MadEdit/MadLines.cpp#l1761
 							if( state.CommentId == 0 && state.StringId == 0 &&
-									!m_Syntax->m_LeftBrace.empty() )
+									!m_Syntax->m_SynAttr->m_LeftBrace.empty() )
 							{
 								bool ok = false;
-								index = ( this->*FindString )( ucqueue, m_Syntax->m_LeftBrace.begin(),
-															   m_Syntax->m_LeftBrace.end(), length );
+								index = ( this->*FindString )( ucqueue, m_Syntax->m_SynAttr->m_LeftBrace.begin(),
+															   m_Syntax->m_SynAttr->m_LeftBrace.end(), length );
 
 								if( index != 0 )
 								{
@@ -1963,8 +1963,8 @@ _RUNAGAIN_:
 								}
 								else // check right brace
 								{
-									if( ( index = ( this->*FindString )( ucqueue, m_Syntax->m_RightBrace.begin(),
-																		 m_Syntax->m_RightBrace.end(), length ) ) != 0 )
+									if( ( index = ( this->*FindString )( ucqueue, m_Syntax->m_SynAttr->m_RightBrace.begin(),
+																		 m_Syntax->m_SynAttr->m_RightBrace.end(), length ) ) != 0 )
 									{
 										ok = true;
 										ucs4_t uc = ucqueue[length - 1].first;
@@ -2022,7 +2022,7 @@ _RUNAGAIN_:
 							if( state.LineComment == 0 )
 							{
 								// check EscapeChar
-								if( firstuc == m_Syntax->nw_EscapeChar )
+								if( firstuc == m_Syntax->m_SynAttr->nw_EscapeChar )
 								{
 									if( ucqueue.size() == 1 )
 										( this->*NextUChar )( ucqueue );
@@ -2043,7 +2043,7 @@ _RUNAGAIN_:
 								// check block comment off
 								if( state.CommentId != 0 )
 								{
-									sit = m_Syntax->m_BlockCommentOff.begin();
+									sit = m_Syntax->m_SynAttr->m_BlockCommentOff.begin();
 									std::advance( sit, state.CommentId - 1 );
 									sitend = sit;
 									++sitend;
@@ -2066,7 +2066,7 @@ _RUNAGAIN_:
 								// check string off
 								if( state.StringId != 0 )
 								{
-									//if(firstuc == m_Syntax->nw_EscapeChar)
+									//if(firstuc == m_Syntax->m_SynAttr->nw_EscapeChar)
 									//{
 									//if(ucqueue.size() == 1)
 									//(this->*NextUChar)(ucqueue);
@@ -2075,7 +2075,7 @@ _RUNAGAIN_:
 									//{
 									//lastuc = ucqueue[1].first;
 
-									//if(lastuc == m_Syntax->nw_EscapeChar
+									//if(lastuc == m_Syntax->m_SynAttr->nw_EscapeChar
 									//|| m_Syntax->m_StringChar.Find(lastuc)+1 == state.StringId)
 									//{
 									//++eatUCharCount;//=2
@@ -2083,7 +2083,7 @@ _RUNAGAIN_:
 									//}
 									//goto _NOCHECK_;
 									//}
-									if( m_Syntax->m_StringChar.Find( wxChar( firstuc ) ) + 1 == state.StringId )
+									if( m_Syntax->m_SynAttr->m_StringChar.Find( wxChar( firstuc ) ) + 1 == state.StringId )
 									{
 										state.StringId = 0;
 										//eatUCharCount=1;
@@ -2093,9 +2093,9 @@ _RUNAGAIN_:
 								}
 
 								// check string on
-								if( !m_Syntax->m_StringChar.IsEmpty() && m_Syntax->IsInRange( state.RangeId, m_Syntax->m_StringInRange ) )
+								if( !m_Syntax->m_SynAttr->m_StringChar.IsEmpty() && m_Syntax->IsInRange( state.RangeId, m_Syntax->m_SynAttr->m_StringInRange ) )
 								{
-									if( ( index = m_Syntax->m_StringChar.Find( wxChar( firstuc ) ) + 1 ) != 0 )
+									if( ( index = m_Syntax->m_SynAttr->m_StringChar.Find( wxChar( firstuc ) ) + 1 ) != 0 )
 									{
 										state.StringId = index;
 										//eatUCharCount=1;
@@ -2104,11 +2104,11 @@ _RUNAGAIN_:
 								}
 
 								// check directive on
-								if( !m_Syntax->m_DirectiveLeadingAtBOL || BeginOfLine )
+								if( !m_Syntax->m_SynAttr->m_DirectiveLeadingAtBOL || BeginOfLine )
 								{
-									if( notSpaceCount == 1 && !m_Syntax->m_DirectiveLeading.IsEmpty() )
+									if( notSpaceCount == 1 && !m_Syntax->m_SynAttr->m_DirectiveLeading.IsEmpty() )
 									{
-										if( ( index = m_Syntax->m_DirectiveLeading.Find( wxChar( firstuc ) ) + 1 ) != 0 )
+										if( ( index = m_Syntax->m_SynAttr->m_DirectiveLeading.Find( wxChar( firstuc ) ) + 1 ) != 0 )
 										{
 											state.Directive = index;
 											//eatUCharCount=1;
@@ -2118,15 +2118,15 @@ _RUNAGAIN_:
 								}
 
 								// check block comment on
-								if( !m_Syntax->m_BlockCommentOn.empty() )
+								if( !m_Syntax->m_SynAttr->m_BlockCommentOn.empty() )
 								{
-									index = ( this->*FindString )( ucqueue, m_Syntax->m_BlockCommentOn.begin(),
-																   m_Syntax->m_BlockCommentOn.end(), length );
+									index = ( this->*FindString )( ucqueue, m_Syntax->m_SynAttr->m_BlockCommentOn.begin(),
+																   m_Syntax->m_SynAttr->m_BlockCommentOn.end(), length );
 
 									if( index != 0 )  // got
 									{
 										// check InRange
-										if( m_Syntax->IsInRange( state.RangeId, m_Syntax->m_BlockCommentInRange[index - 1] ) )
+										if( m_Syntax->IsInRange( state.RangeId, m_Syntax->m_SynAttr->m_BlockCommentInRange[index - 1] ) )
 										{
 											state.CommentId = index;
 											//state.CommentOff = false;
@@ -2137,17 +2137,17 @@ _RUNAGAIN_:
 								}
 
 								// check line comment
-								if( !m_Syntax->m_LineCommentAtBOL || BeginOfLine )
+								if( !m_Syntax->m_SynAttr->m_LineCommentAtBOL || BeginOfLine )
 								{
-									if( !m_Syntax->m_LineComment.empty() )
+									if( !m_Syntax->m_SynAttr->m_LineComment.empty() )
 									{
-										index = ( this->*FindString )( ucqueue, m_Syntax->m_LineComment.begin(),
-																	   m_Syntax->m_LineComment.end(), length );
+										index = ( this->*FindString )( ucqueue, m_Syntax->m_SynAttr->m_LineComment.begin(),
+																	   m_Syntax->m_SynAttr->m_LineComment.end(), length );
 
 										if( index != 0 )  // got
 										{
 											// check InRange
-											if( m_Syntax->IsInRange( state.RangeId, m_Syntax->m_LineCommentInRange ) )
+											if( m_Syntax->IsInRange( state.RangeId, m_Syntax->m_SynAttr->m_LineCommentInRange ) )
 											{
 												if( state.RangeId == 0 )
 												{
@@ -2188,15 +2188,15 @@ _RUNAGAIN_:
 							}
 
 							// check range on
-							if( state.LineComment == 0 && state.RangeId == 0 && !m_Syntax->m_RangeBeginString.empty() )
+							if( state.LineComment == 0 && state.RangeId == 0 && !m_Syntax->m_SynAttr->m_RangeBeginString.empty() )
 							{
-								index = ( this->*FindString )( ucqueue, m_Syntax->m_RangeBeginString.begin(),
-															   m_Syntax->m_RangeBeginString.end(), length );
+								index = ( this->*FindString )( ucqueue, m_Syntax->m_SynAttr->m_RangeBeginString.begin(),
+															   m_Syntax->m_SynAttr->m_RangeBeginString.end(), length );
 
 								if( index != 0 )
 								{
 									eatUCharCount = length;
-									state.RangeId = m_Syntax->m_CustomRange[index - 1].id;
+									state.RangeId = m_Syntax->m_SynAttr->m_CustomRange[index - 1].id;
 									srange = m_Syntax->GetSyntaxRange( state.RangeId );
 									//goto _NOCHECK_;
 								}
@@ -2531,7 +2531,7 @@ size_t MadLines::Reformat( MadLineIterator first, MadLineIterator last )
 	long lTabWidth = m_MadEdit->m_TabColumns * m_MadEdit->GetUCharWidth(0x20);
 	int iMaxWrapWidth = m_MadEdit->GetMaxWordWrapWidth();
 
-	if( m_Syntax->m_CaseSensitive )
+	if( m_Syntax->m_SynAttr->m_CaseSensitive )
 		FindString = &MadLines::FindStringCase;
 	else
 		FindString = &MadLines::FindStringNoCase;
@@ -3096,10 +3096,10 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 		m_MadEdit->UpdateSyntaxDictionary();
 		m_MadEdit->m_LoadingFile = false;
 
-		if( m_Syntax->m_Encoding.IsEmpty() )
+		if( m_Syntax->m_SynAttr->m_Encoding.IsEmpty() )
 			m_MadEdit->SetEncoding( defaultenc );
 		else
-			m_MadEdit->SetEncoding( m_Syntax->m_Encoding );
+			m_MadEdit->SetEncoding( m_Syntax->m_SynAttr->m_Encoding );
 
 		return true;
 	}
@@ -3166,10 +3166,10 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 		{
 			//m_Syntax->m_Delimiter.Empty();
 			//m_Syntax->m_Delimiter.clear();
-			memset(m_Syntax->m_Delimiter, 0, sizeof(m_Syntax->m_Delimiter));
+			memset(m_Syntax->m_SynAttr->m_Delimiter, 0, sizeof(m_Syntax->m_SynAttr->m_Delimiter));
 		}
 
-		m_Syntax->m_CaseSensitive = true;
+		m_Syntax->m_SynAttr->m_CaseSensitive = true;
 	}
 	else
 	{
@@ -3260,9 +3260,9 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 			m_MadEdit->SetEncoding( useencoding );
 		}
 		else
-			if( !m_Syntax->m_Encoding.IsEmpty() )
+			if( !m_Syntax->m_SynAttr->m_Encoding.IsEmpty() )
 			{
-				m_MadEdit->SetEncoding( m_Syntax->m_Encoding );
+				m_MadEdit->SetEncoding( m_Syntax->m_SynAttr->m_Encoding );
 			}
 			else
 			{
@@ -3664,10 +3664,10 @@ bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 		{
 			//m_Syntax->m_Delimiter.Empty();
 			//m_Syntax->m_Delimiter.clear();
-			memset(tmp_Syntax->m_Delimiter, 0, sizeof(tmp_Syntax->m_Delimiter));
+			memset(tmp_Syntax->m_SynAttr->m_Delimiter, 0, sizeof(tmp_Syntax->m_SynAttr->m_Delimiter));
 		}
 
-		tmp_Syntax->m_CaseSensitive = true;
+		tmp_Syntax->m_SynAttr->m_CaseSensitive = true;
 	}
 	else
 	{
@@ -3708,7 +3708,7 @@ bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 
 	if (tmp_Syntax != nullptr)
 	{
-		if (tmp_Syntax->m_Title != m_Syntax->m_Title)
+		if (tmp_Syntax->m_SynAttr->m_Title != m_Syntax->m_SynAttr->m_Title)
 		{
 			wxFont *font = m_MadEdit->m_TextFont;
 			tmp_Syntax->InitNextWord1(m_MadEdit->m_Lines, m_MadEdit->m_WordBuffer, m_MadEdit->m_WidthBuffer, font->GetFaceName(), font->GetPointSize(), font->GetFamily());

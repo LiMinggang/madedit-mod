@@ -112,6 +112,55 @@ class MadEdit;
 class MadEncoding;
 class wxFileConfig;
 class PersonalDictionary;
+class MadSyntax;
+
+class MadSyntaxAttributes
+{
+public:
+	MadSyntaxAttributes();
+	~MadSyntaxAttributes(){}
+		
+	wxString            m_Title;
+	bool                m_CaseSensitive;
+	//wxString          m_Delimiter;
+	//set< ucs4_t >         m_Delimiter;
+	wxByte              m_Delimiter[256];
+	vector < wxString > m_LineComment;
+	vector < wxString > m_BlockCommentOn;
+	vector < wxString > m_BlockCommentOff;
+	wxString            m_EscapeChar;
+	wxString            m_StringChar;
+	wxString            m_DirectiveLeading;
+	wxString            m_KeywordPrefix;
+	wxString            m_SpecialWordPrefix;
+	wxString            m_IndentChar;
+	wxString            m_UnindentChar;
+	vector < wxString > m_LeftBrace;
+	vector < wxString > m_RightBrace;
+	wxString            m_AutoCompleteLeftChar;
+	wxString            m_AutoCompleteRightChar;
+	wxString            m_Encoding;
+
+	vector < int >      m_StringInRange;
+	vector < int >      m_LineCommentInRange;
+	vector < vector < int > >m_BlockCommentInRange;
+
+	size_t		        nw_MaxKeywordLen;
+	ucs4_t              nw_EscapeChar;
+	bool                m_LineCommentAtBOL; // for diff/patch syntax
+	bool                m_DirectiveLeadingAtBOL;
+	bool                m_CheckState;
+	bool                m_IsPlainText;
+
+	vector < MadSyntaxRange > m_CustomRange; // user defined ranges
+	vector < wxString >       m_RangeBeginString;
+
+	vector < MadSyntaxKeyword > m_CustomKeyword; // user defined keywords
+	shared_ptr<PersonalDictionary> m_SyntaxKeywordDict;
+private:
+	MadAttributes m_SystemAttributes[aeNone];
+	friend class MadSyntax;
+};
 
 class MadSyntax
 {
@@ -145,16 +194,11 @@ public:
 	static bool LoadScheme( const wxString &schname, MadSyntax *syn ); // apply scheme to syn
 	static bool SaveScheme( const wxString &schname, MadSyntax *syn ); // save scheme from syn
 	static bool DeleteScheme( const wxString &schname );
-#if CPLUSEPLUSE98
-    boost::shared_ptr<PersonalDictionary>& GetSyntaxDictionary() { return m_SyntaxKeywordDict; }
-#else
-    std::shared_ptr<PersonalDictionary>& GetSyntaxDictionary() { return m_SyntaxKeywordDict; }
-#endif
+	shared_ptr<PersonalDictionary>& GetSyntaxDictionary() { return m_SynAttr->m_SyntaxKeywordDict; }
 
 private:
 	friend class MadEdit;
 	friend class MadLines;
-	MadAttributes m_SystemAttributes[aeNone];
 
 	void  ParseSyntax( const wxString &filename );
 	MadAttributes *GetAttributes( const wxString &name );
@@ -165,41 +209,7 @@ private:
 	void  SetInRange( const wxString &value, vector < int > &ir );
 
 public:
-	wxString            m_Title;
-	bool                m_CaseSensitive;
-	//wxString          m_Delimiter;
-	//set< ucs4_t >         m_Delimiter;
-	wxByte              m_Delimiter[256];
-	vector < wxString > m_LineComment;
-	vector < wxString > m_BlockCommentOn;
-	vector < wxString > m_BlockCommentOff;
-	wxString            m_EscapeChar;
-	wxString            m_StringChar;
-	wxString            m_DirectiveLeading;
-	wxString            m_KeywordPrefix;
-	wxString            m_SpecialWordPrefix;
-	wxString            m_IndentChar;
-	wxString            m_UnindentChar;
-	vector < wxString > m_LeftBrace;
-	vector < wxString > m_RightBrace;
-	wxString            m_AutoCompleteLeftChar;
-	wxString            m_AutoCompleteRightChar;
-	wxString            m_Encoding;
-
-	vector < int >      m_StringInRange;
-	vector < int >      m_LineCommentInRange;
-	vector < vector < int > >m_BlockCommentInRange;
-
-	bool                m_LineCommentAtBOL; // for diff/patch syntax
-	bool                m_DirectiveLeadingAtBOL;
-
-	vector < MadSyntaxRange > m_CustomRange; // user defined ranges
-	vector < wxString >       m_RangeBeginString;
-
-	vector < MadSyntaxKeyword > m_CustomKeyword; // user defined keywords
-
-	bool m_CheckState;
-	bool m_IsPlainText;
+	shared_ptr< MadSyntaxAttributes > m_SynAttr;
 
 public:
 	MadSyntax( const wxString &filename, bool loadAttr = true );
@@ -216,7 +226,7 @@ public:
 	MadSyntaxRange *GetSyntaxRange( int rangeid );
 
 	MadAttributes *GetAttributes( MadAttributeElement ae ) {
-		return m_SystemAttributes + ae;
+		return m_SynAttr->m_SystemAttributes + ae;
 	}
 	static wxString GetAttributeName( MadAttributeElement ae );
 
@@ -227,7 +237,7 @@ public:
 	bool IsDelimiter( ucs4_t uc ) {
 		//return ((uc < 0x100) && m_Delimiter.Find(wxChar(uc))>=0);
 		//return ( ( uc < 0x100 ) && ( m_Delimiter.find( uc ) != m_Delimiter.end() ) );
-		return ( ( uc < 0x100 ) && ( m_Delimiter[ uc ] != 0 ) );
+		return ( ( uc < 0x100 ) && (m_SynAttr->m_Delimiter[ uc ] != 0 ) );
 	}
 	bool IsNotDelimiter( ucs4_t uc ) {
 		// changed: gogo, 21.09.2009 (purpose - correct word wrap for words with non-ascii chars)
@@ -235,11 +245,11 @@ public:
 		//return ((uc < 0x100) && (!IsSpace(uc)) && (m_Delimiter.Find(wxChar(uc))<0));
 		//return ( ( uc < 0x100 ) && ( !IsSpace( uc ) ) && ( m_Delimiter.find( uc ) == m_Delimiter.end() ) );
 		//return ((m_Delimiter.Find(wxChar(uc)) < 0)  && (! IsSpace(uc)));
-		return ( ( uc < 0x100 ) && ( !IsSpace( uc ) ) && ( m_Delimiter[ uc ] == 0 ) );
+		return ( ( uc < 0x100 ) && ( !IsSpace( uc ) ) && (m_SynAttr->m_Delimiter[ uc ] == 0 ) );
 	}
 
 	void SetAttributes( MadAttributeElement ae ) {
-		SetAttributes( m_SystemAttributes + ae );
+		SetAttributes( m_SynAttr->m_SystemAttributes + ae );
 	}
 	void SetAttributes( MadAttributes *attr );
 
@@ -253,8 +263,6 @@ private: // for NextWord()
 	int         nw_FontSize;
 	int         nw_FontFamily;
 
-	size_t      nw_MaxKeywordLen;
-
 	MadState nw_State, nw_NextState;
 
 	size_t nw_NotSpaceCount;
@@ -264,7 +272,7 @@ private: // for NextWord()
 
 	MadSyntaxRange *nw_SynRange;
 
-	ucs4_t nw_StringChar, nw_EscapeChar;
+	ucs4_t nw_StringChar;
 
 	MadLineIterator nw_LineIter;
 	MadRowIndexIterator nw_RowIndexIter;
@@ -278,11 +286,6 @@ private: // for NextWord()
 	bool nw_EndOfLine;
 	wxColor nw_Color, nw_BgColor, nw_CurrentBgColor;
 	wxFont *nw_Font;
-#if CPLUSEPLUSE98
-    boost::shared_ptr<PersonalDictionary> m_SyntaxKeywordDict;
-#else
-    std::shared_ptr<PersonalDictionary> m_SyntaxKeywordDict;
-#endif
  
 	int FindStringCase( MadUCQueue & ucqueue, size_t first,
 						MadStringIterator begin, const MadStringIterator & end,
