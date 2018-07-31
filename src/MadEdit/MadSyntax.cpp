@@ -1114,11 +1114,9 @@ MadSyntaxAttributes::MadSyntaxAttributes()
 	m_LineCommentAtBOL = false;
 	m_DirectiveLeadingAtBOL = false;
 	m_SyntaxKeywordDict.reset(new PersonalDictionary());
-}
-
-void MadSyntax::Reset()
-{
-	size_t i;
+	nw_MaxKeywordLen = 0;
+	
+	MadAttributes *pat = m_SystemAttributes;
 #ifdef __WXMSW__
 	wxColour c = wxSystemSettings::GetColour( wxSYS_COLOUR_WINDOWTEXT );
 	wxColour c1 = wxSystemSettings::GetColour( wxSYS_COLOUR_WINDOW );
@@ -1128,7 +1126,7 @@ void MadSyntax::Reset()
 	SystemAttributesBgColor[0] = s1;
 #endif
 
-	/*for( i = 0; i < aeNone; ++i )
+	for( size_t i = 0; i < aeNone; ++i )
 	{
 		if( SystemAttributesColor[i][0] == 0 )
 			pat->color = wxNullColour;
@@ -1148,7 +1146,11 @@ void MadSyntax::Reset()
 
 		pat->style = fsNone;
 		++pat;
-	}*/
+	}
+}
+
+void MadSyntax::Reset()
+{
 }
 
 MadAttributes *MadSyntax::GetAttributes( const wxString &name )
