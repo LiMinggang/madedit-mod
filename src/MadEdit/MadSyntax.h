@@ -120,11 +120,10 @@ public:
 	MadSyntaxAttributes();
 	~MadSyntaxAttributes(){}
 		
+	wxByte				m_Delimiter[256];
 	wxString            m_Title;
-	bool                m_CaseSensitive;
 	//wxString          m_Delimiter;
 	//set< ucs4_t >         m_Delimiter;
-	wxByte              m_Delimiter[256];
 	vector < wxString > m_LineComment;
 	vector < wxString > m_BlockCommentOn;
 	vector < wxString > m_BlockCommentOff;
@@ -147,6 +146,7 @@ public:
 
 	size_t		        nw_MaxKeywordLen;
 	ucs4_t              nw_EscapeChar;
+	bool                m_CaseSensitive;
 	bool                m_LineCommentAtBOL; // for diff/patch syntax
 	bool                m_DirectiveLeadingAtBOL;
 	bool                m_CheckState;

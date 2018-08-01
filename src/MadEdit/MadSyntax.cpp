@@ -585,7 +585,6 @@ bool MadSyntax::DeleteScheme( const wxString &schname )
 
 MadSyntax::MadSyntax( const wxString &filename, bool loadAttr )
 {
-	m_SynAttr.reset(new MadSyntaxAttributes());
 	LoadFromFile( filename );
 	wxFileName fn( filename );
 
@@ -597,8 +596,7 @@ MadSyntax::MadSyntax( const wxString &filename, bool loadAttr )
 
 MadSyntax::MadSyntax( bool loadAttr )
 {
-	m_SynAttr.reset(new MadSyntaxAttributes());
-	Reset();    // use default attributes
+	//Reset();    // use default attributes
 
 	if( loadAttr ) LoadAttributes();
 }
@@ -610,7 +608,7 @@ MadSyntax::~MadSyntax()
 
 void MadSyntax::LoadFromFile( const wxString &filename )
 {
-	Reset();    // reset attributes
+	//Reset();    // reset attributes
 	ParseSyntax( filename );
 	if(m_SynAttr->m_Title == MadPlainTextTitle) m_SynAttr->m_IsPlainText = true;
 	else m_SynAttr->m_IsPlainText = false;
@@ -625,6 +623,8 @@ void MadSyntax::ParseSyntax( const wxString &filename )
 	}
 	wxFileConfig syn( wxEmptyString, wxEmptyString, filename, wxEmptyString, wxCONFIG_USE_RELATIVE_PATH | wxCONFIG_USE_NO_ESCAPE_CHARACTERS );
 	wxString entry, value;
+	
+	m_SynAttr.reset(new MadSyntaxAttributes());
 	m_SynAttr->m_Title = wxT( "No Title" );
 	m_SynAttr->m_IsPlainText = false;
 	long idx = 0;
