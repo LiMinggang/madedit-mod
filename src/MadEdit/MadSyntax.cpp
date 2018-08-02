@@ -592,13 +592,14 @@ MadSyntax::MadSyntax( const wxString &filename, bool loadAttr )
 	{
 		LoadAttributes();
 	}
+
+	if(!m_SynAttr) m_SynAttr.reset(new MadSyntaxAttributes());
 }
 
 MadSyntax::MadSyntax( bool loadAttr )
 {
-	//Reset();    // use default attributes
-
-	if( loadAttr ) LoadAttributes();
+	if( loadAttr ) LoadAttributes();	
+	if(!m_SynAttr) m_SynAttr.reset(new MadSyntaxAttributes());
 }
 
 MadSyntax::~MadSyntax()
@@ -2556,7 +2557,7 @@ void MadSyntax::SaveAttributes( const wxString &file )
 	{
 		wxString s, cname;
 		cname = GetColorName(m_SynAttr->m_CustomRange[i].bgcolor );
-		s.Printf( wxT( " %d b%d e%d %s" ), i + 1, i + 1, i + 1, cname.c_str() );
+		s.Printf( wxT( " %d b%d e%d %s" ), (unsigned int)(i + 1), (unsigned int)(i + 1), (unsigned int)(i + 1), cname.c_str() );
 		str += s;
 	}
 
@@ -2586,13 +2587,13 @@ void MadSyntax::SaveAttributes( const wxString &file )
 	// write custom keywords
 	for( i = 0; i < m_SynAttr->m_CustomKeyword.size(); ++i )
 	{
-		str.Printf( wxT( "/%x.Keyword/Color" ), i + 1 );
+		str.Printf( wxT( "/%x.Keyword/Color" ), (unsigned int)(i + 1) );
 		value.Printf( wxT( "%s" ), GetColorName( m_SynAttr->m_CustomKeyword[i].m_Attr.color ).c_str() );
 		syn.Write( str, value );
-		str.Printf( wxT( "/%x.Keyword/BgColor" ), i + 1 );
+		str.Printf( wxT( "/%x.Keyword/BgColor" ), (unsigned int)(i + 1) );
 		value.Printf( wxT( "%s" ), GetColorName( m_SynAttr->m_CustomKeyword[i].m_Attr.bgcolor ).c_str() );
 		syn.Write( str, value );
-		str.Printf( wxT( "/%x.Keyword/Style" ), i + 1 );
+		str.Printf( wxT( "/%x.Keyword/Style" ), (unsigned int)(i + 1) );
 		value.Printf( wxT( "%s" ), GetStyleString(m_SynAttr->m_CustomKeyword[i].m_Attr.style ).c_str() );
 		syn.Write( str, value );
 	}
