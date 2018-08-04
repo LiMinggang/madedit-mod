@@ -485,18 +485,18 @@ bool MadSyntax::LoadScheme( const wxString &schname, MadSyntax *syn )
 	{
 		if( schname == wxT( "Default*" ) || schname == wxT( "Default" ) )
 		{
-			MadSyntax *sch = new MadSyntax( false );
-			syn->AssignAttributes( sch );
-			delete sch;
+			MadSyntax *newsyn = new MadSyntax( false );
+			syn->AssignAttributes( newsyn );
+			delete newsyn;
 			return true;
 		}
 	}
 
 	if( schfile.IsEmpty() || !wxFileExists( schfile ) ) return false;
 
-	MadSyntax *sch = new MadSyntax( schfile, false );
-	syn->AssignAttributes( sch );
-	delete sch;
+	MadSyntax *newsyn = new MadSyntax( schfile, false, true );
+	syn->AssignAttributes( newsyn );
+	delete newsyn;
 	return true;
 }
 
@@ -514,14 +514,14 @@ bool MadSyntax::SaveScheme( const wxString &schname, MadSyntax *syn )
 
 	if( schfile.IsEmpty() || !wxFileExists( schfile ) )
 	{
-		MadSyntax *sch = new MadSyntax( false );
+		MadSyntax *newsyn = new MadSyntax( false );
 		size_t i;
 		MadSyntaxRange ra;
 		ra.bgcolor = *wxWHITE;
 
-		for( i = sch->m_SynAttr->m_CustomRange.size(); i < 5; ++i )
+		for( i = newsyn->m_SynAttr->m_CustomRange.size(); i < 5; ++i )
 		{
-			sch->m_SynAttr->m_CustomRange.push_back( ra );
+			newsyn->m_SynAttr->m_CustomRange.push_back( ra );
 		}
 
 		MadSyntaxKeyword ke;
@@ -529,12 +529,12 @@ bool MadSyntax::SaveScheme( const wxString &schname, MadSyntax *syn )
 		ke.m_Attr.bgcolor = wxNullColour;
 		ke.m_Attr.style = fsNone;
 
-		for( i = sch->m_SynAttr->m_CustomKeyword.size(); i < 10; ++i )
+		for( i = newsyn->m_SynAttr->m_CustomKeyword.size(); i < 10; ++i )
 		{
-			sch->m_SynAttr->m_CustomKeyword.push_back( ke );
+			newsyn->m_SynAttr->m_CustomKeyword.push_back( ke );
 		}
 
-		sch->AssignAttributes( syn, true );
+		newsyn->AssignAttributes( syn, true );
 
 		if( schfile.IsEmpty() )
 		{
@@ -542,15 +542,15 @@ bool MadSyntax::SaveScheme( const wxString &schname, MadSyntax *syn )
 			g_NameSchfileTable.push_back( pair<wxString, wxString>( name, schfile ) );
 		}
 
-		sch->SaveAttributes( schfile );
-		delete sch;
+		newsyn->SaveAttributes( schfile );
+		delete newsyn;
 	}
 	else
 	{
-		MadSyntax *sch = new MadSyntax( schfile, false );
-		sch->AssignAttributes( syn, true );
-		sch->SaveAttributes( schfile );
-		delete sch;
+		MadSyntax *newsyn = new MadSyntax( schfile, false );
+		newsyn->AssignAttributes( syn, true );
+		newsyn->SaveAttributes( schfile );
+		delete newsyn;
 	}
 
 	if( !wxFileExists( schfile ) ) return false;
@@ -583,9 +583,9 @@ bool MadSyntax::DeleteScheme( const wxString &schname )
 
 //========================================================
 
-MadSyntax::MadSyntax( const wxString &filename, bool loadAttr )
+MadSyntax::MadSyntax( const wxString &filename, bool loadAttr/* = true*/, bool reParse/* = false*/ )
 {
-	LoadFromFile( filename );
+	LoadFromFile( filename, reParse );
 	wxFileName fn( filename );
 
 	if( loadAttr && fn.GetExt().CmpNoCase( wxT( "syn" ) ) == 0 )
@@ -596,9 +596,9 @@ MadSyntax::MadSyntax( const wxString &filename, bool loadAttr )
 	if(!m_SynAttr) m_SynAttr.reset(new MadSyntaxAttributes());
 }
 
-MadSyntax::MadSyntax( bool loadAttr )
+MadSyntax::MadSyntax( bool loadAttr/* = true*/ )
 {
-	if( loadAttr ) LoadAttributes();	
+	if( loadAttr ) LoadAttributes();
 	if(!m_SynAttr) m_SynAttr.reset(new MadSyntaxAttributes());
 }
 
@@ -607,17 +607,17 @@ MadSyntax::~MadSyntax()
 	//Reset();    // free memories
 }
 
-void MadSyntax::LoadFromFile( const wxString &filename )
+void MadSyntax::LoadFromFile( const wxString &filename, bool reParse/* = false*/ )
 {
 	//Reset();    // reset attributes
-	ParseSyntax( filename );
+	ParseSyntax( filename, reParse );
 	if(m_SynAttr->m_Title == MadPlainTextTitle) m_SynAttr->m_IsPlainText = true;
 	else m_SynAttr->m_IsPlainText = false;
 }
 
-void MadSyntax::ParseSyntax( const wxString &filename )
+void MadSyntax::ParseSyntax( const wxString &filename, bool reParse/* = false*/ )
 {
-	if(g_TitleSynAttrMap.find(filename) != g_TitleSynAttrMap.end())
+	if(!reParse && g_TitleSynAttrMap.find(filename) != g_TitleSynAttrMap.end())
 	{
 		m_SynAttr = g_TitleSynAttrMap[filename];
 		return;
@@ -1093,7 +1093,8 @@ void MadSyntax::ParseSyntax( const wxString &filename )
 		m_SynAttr->m_CheckState = true;
 	}
 
-	g_TitleSynAttrMap[filename] = m_SynAttr;
+	if(!reParse)
+		g_TitleSynAttrMap[filename] = m_SynAttr;
 	cfg->SetPath(oldpath);
 }
 
@@ -1147,6 +1148,45 @@ MadSyntaxAttributes::MadSyntaxAttributes()
 
 		pat->style = fsNone;
 		++pat;
+	}
+}
+
+MadSyntaxAttributes::MadSyntaxAttributes(MadSyntaxAttributes & synAttrs)
+{
+	memcpy(m_Delimiter, synAttrs.m_Delimiter, 256*(sizeof(wxByte)));
+	m_Title = synAttrs.m_Title;
+	m_LineComment           = synAttrs.m_LineComment;
+	m_BlockCommentOn        = synAttrs.m_BlockCommentOn;
+	m_BlockCommentOff       = synAttrs.m_BlockCommentOff;
+	m_EscapeChar            = synAttrs.m_EscapeChar;
+	m_StringChar            = synAttrs.m_StringChar;
+	m_DirectiveLeading      = synAttrs.m_DirectiveLeading;
+	m_KeywordPrefix         = synAttrs.m_KeywordPrefix;
+	m_SpecialWordPrefix     = synAttrs.m_SpecialWordPrefix;
+	m_IndentChar            = synAttrs.m_IndentChar;
+	m_UnindentChar          = synAttrs.m_UnindentChar;
+	m_LeftBrace             = synAttrs.m_LeftBrace;
+	m_RightBrace            = synAttrs.m_RightBrace;
+	m_AutoCompleteLeftChar  = synAttrs.m_AutoCompleteLeftChar;
+	m_AutoCompleteRightChar = synAttrs.m_AutoCompleteRightChar;
+	m_Encoding              = synAttrs.m_Encoding;
+	m_StringInRange         = synAttrs.m_StringInRange;
+	m_LineCommentInRange    = synAttrs.m_LineCommentInRange;
+	m_BlockCommentInRange   = synAttrs.m_BlockCommentInRange;
+	nw_MaxKeywordLen        = synAttrs.nw_MaxKeywordLen;
+	nw_EscapeChar           = synAttrs.nw_EscapeChar;
+	m_CaseSensitive         = synAttrs.m_CaseSensitive;
+	m_LineCommentAtBOL      = synAttrs.m_LineCommentAtBOL; // for diff/patch syntax
+	m_DirectiveLeadingAtBOL = synAttrs.m_DirectiveLeadingAtBOL;
+	m_CheckState            = synAttrs.m_CheckState;
+	m_IsPlainText           = synAttrs.m_IsPlainText;
+	m_CustomRange           = synAttrs.m_CustomRange; // user defined ranges
+	m_RangeBeginString      = synAttrs.m_RangeBeginString;   
+	m_CustomKeyword         = synAttrs.m_CustomKeyword; // user defined keywords
+	m_SyntaxKeywordDict     = synAttrs.m_SyntaxKeywordDict;
+	for( size_t i = 0; i < aeNone; ++i )
+	{
+		m_SystemAttributes[i] = synAttrs.m_SystemAttributes[i];
 	}
 }
 
@@ -2646,3 +2686,11 @@ void MadSyntax::AssignAttributes( MadSyntax *syn, bool add )
 		}
 	}
 }
+
+void MadSyntax::DuplicateAttributes()
+{
+	MadSyntaxAttributes * pCurSynAttr = m_SynAttr.get();
+	m_SynAttr.reset(new MadSyntaxAttributes(*pCurSynAttr));
+}
+
+

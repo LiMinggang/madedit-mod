@@ -118,6 +118,7 @@ class MadSyntaxAttributes
 {
 public:
 	MadSyntaxAttributes();
+	MadSyntaxAttributes(MadSyntaxAttributes &);
 	~MadSyntaxAttributes(){}
 		
 	wxByte				m_Delimiter[256];
@@ -152,9 +153,9 @@ public:
 	bool                m_CheckState;
 	bool                m_IsPlainText;
 
-	vector < MadSyntaxRange > m_CustomRange; // user defined ranges
 	vector < wxString >       m_RangeBeginString;
 
+	vector < MadSyntaxRange > m_CustomRange; // user defined ranges
 	vector < MadSyntaxKeyword > m_CustomKeyword; // user defined keywords
 	shared_ptr<PersonalDictionary> m_SyntaxKeywordDict;
 private:
@@ -200,7 +201,7 @@ private:
 	friend class MadEdit;
 	friend class MadLines;
 
-	void  ParseSyntax( const wxString &filename );
+	void  ParseSyntax( const wxString &filename, bool reParse = false );
 	MadAttributes *GetAttributes( const wxString &name );
 	MadSyntaxKeyword *GetCustomKeyword( const wxString &name );
 
@@ -212,15 +213,16 @@ public:
 	shared_ptr< MadSyntaxAttributes > m_SynAttr;
 
 public:
-	MadSyntax( const wxString &filename, bool loadAttr = true );
+	MadSyntax( const wxString &filename, bool loadAttr = true, bool reParse = false );
 	explicit MadSyntax( bool loadAttr = true );
 	~MadSyntax();
 
-	void LoadFromFile( const wxString &filename );
+	void LoadFromFile( const wxString &filename, bool reParse = false );
 	void Reset();
 	void LoadAttributes( const wxString &file = wxEmptyString ); // if file IsEmpty, load from default .att file
 	void SaveAttributes( const wxString &file = wxEmptyString ); // if file IsEmpty, save to default .att file
 	void AssignAttributes( MadSyntax *syn, bool add = false ); // assign attributes from syn
+	void DuplicateAttributes();
 
 	bool IsInRange( int range, vector < int >&InRangeVector );
 	MadSyntaxRange *GetSyntaxRange( int rangeid );

@@ -343,6 +343,8 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	m_FindText->SetRecordCaretMovements( false );
 	m_FindText->SetInsertSpacesInsteadOfTab( false );
 	m_FindText->SetWantTab( false );
+	MadSyntax* syn = m_FindText->GetSyntax();
+	syn->DuplicateAttributes();
 	m_FindText->LoadDefaultSyntaxScheme();
 	m_FindText->SetMaxLineLength( DEFAULT_MAX_LINELEN );
 	m_FindText->SetShowEndOfLine(false);
@@ -366,6 +368,8 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	m_ReplaceText->SetRecordCaretMovements( false );
 	m_ReplaceText->SetInsertSpacesInsteadOfTab( false );
 	m_ReplaceText->SetWantTab( false );
+	syn = m_ReplaceText->GetSyntax();
+	syn->DuplicateAttributes();
 	m_ReplaceText->LoadDefaultSyntaxScheme();
 	m_ReplaceText->SetMaxLineLength( DEFAULT_MAX_LINELEN );
 	m_ReplaceText->SetShowEndOfLine(false);
