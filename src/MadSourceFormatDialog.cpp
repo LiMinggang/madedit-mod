@@ -119,6 +119,9 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID WXUNUSE
 	TextSample->SetShowEndOfLine(false);
 	TextSample->SetSpellCheck(false);
 	TextSample->SetSyntax(wxT("C/C++"));
+	MadSyntax* syn = TextSample->GetSyntax();
+	syn->DuplicateAttributes();
+	TextSample->LoadDefaultSyntaxScheme();
 	TextSample->SetText(bracket_style[aspsAllman]);
 #elif MADEDIT_USE_STC
 	TextSample = new wxStyledTextCtrl( Panel1, wxID_ANY, wxPoint( 19, 47 ), wxSize( 219, 300 ) );
