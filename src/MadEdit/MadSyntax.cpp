@@ -597,7 +597,7 @@ MadSyntax::MadSyntax( const wxString &filename, bool loadAttr/* = true*/, bool r
 
 MadSyntax::MadSyntax( bool loadAttr/* = true*/ )
 {
-	if(!m_SynAttr) m_SynAttr.reset(new MadSyntaxAttributes());
+	m_SynAttr.reset(new MadSyntaxAttributes());
 	if( loadAttr ) LoadAttributes();
 }
 
@@ -2691,6 +2691,5 @@ void MadSyntax::DuplicateAttributes()
 	MadSyntaxAttributes * pCurSynAttr = m_SynAttr.get();
 	m_SynAttr.reset(new MadSyntaxAttributes(*pCurSynAttr));
 }
-
 
 
