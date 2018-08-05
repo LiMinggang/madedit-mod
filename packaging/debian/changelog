@@ -1,18 +1,19 @@
 madedit-mod (0.4.14-1) stable; urgency=low
   1.New: Using case insensitive on file name and directory name sorting in Windows list dialog
   2.New: Enable/disable adding keywords to internal dictionary
-  3.Fix: Input Method Candidate Window doesn't follow the caret under Windows 7
-  4.Fix: Blurry GUI text issue under Windows 10 high DPI display
-  5.Fix: FindInFiles dialog/search progress display issue under high DPI
-  6.Fix: Performance issue of spell check for syntax hightlighting #267 #270
-  7.Fix: NewDocumentTextFontSize does not take effect
-  8.Fix: Set spell check default to disable
-  9.Fix: Memory saving and performance improvement on syntax highlighting
-  10.Update Python to 2.7.15
-  11.Update hunspell to latest 8e6ceaa55d3f22c2b8ceff0190ce05f56aad38c4
-  12.Update Chinese translation
+  3.New: Source code formatter icon
+  4.Fix: Input Method Candidate Window doesn't follow the caret under Windows 7
+  5.Fix: Blurry GUI text issue under Windows 10 high DPI display
+  6.Fix: FindInFiles dialog/search progress display issue under high DPI
+  7.Fix: Performance issue of spell check for syntax hightlighting #267 #270
+  8.Fix: NewDocumentTextFontSize does not take effect
+  9.Fix: Set spell check default to disable
+  10.Fix: Memory saving and performance improvement on syntax highlighting
+  11.Update Python to 2.7.15
+  12.Update hunspell to latest 8e6ceaa55d3f22c2b8ceff0190ce05f56aad38c4
+  13.Update Chinese translation
 
- -- Minggang Li <liminggang@gmail.com>  Wed, 1 Aug 2018 17:07:40 +0800
+ -- Minggang Li <liminggang@gmail.com>  Wed, 5 Aug 2018 17:07:40 +0800
 
 madedit-mod (0.4.13-1) stable; urgency=low
   1.New: Atyle formatter: Add new option "style=webkit" for the WebKit brace style

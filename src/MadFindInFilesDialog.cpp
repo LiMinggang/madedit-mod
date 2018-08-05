@@ -182,7 +182,6 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID WXUNUSED(
 	MadSyntax* syn = m_FindText->GetSyntax();
 	syn->DuplicateAttributes();
 	m_FindText->LoadDefaultSyntaxScheme();
-	m_FindText->LoadDefaultSyntaxScheme();
 	m_FindText->SetShowEndOfLine(false);
 	m_FindText->SetShowTabChar( true );
 	BoxSizer6->Add(m_FindText,1,wxEXPAND|wxALIGN_LEFT | wxALL,2);
@@ -202,13 +201,11 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID WXUNUSED(
 	m_ReplaceText->SetRecordCaretMovements( false );
 	m_ReplaceText->SetInsertSpacesInsteadOfTab( false );
 	m_ReplaceText->SetWantTab( false );
-	m_ReplaceText->SetWantTab( false );
 	syn = m_ReplaceText->GetSyntax();
 	syn->DuplicateAttributes();
 	m_ReplaceText->LoadDefaultSyntaxScheme();
 	m_ReplaceText->SetShowEndOfLine(false);
 	m_ReplaceText->SetShowTabChar( true );
-
 	// connect to KeyDown event handler
 	m_FindText->Bind( wxEVT_KEY_DOWN, &MadFindInFilesDialog::MadFindInFilesDialogKeyDown, this );
 	m_ReplaceText->Bind( wxEVT_KEY_DOWN, &MadFindInFilesDialog::MadFindInFilesDialogKeyDown, this );

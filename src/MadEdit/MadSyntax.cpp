@@ -588,18 +588,17 @@ MadSyntax::MadSyntax( const wxString &filename, bool loadAttr/* = true*/, bool r
 	LoadFromFile( filename, reParse );
 	wxFileName fn( filename );
 
+	if(!m_SynAttr) m_SynAttr.reset(new MadSyntaxAttributes());
 	if( loadAttr && fn.GetExt().CmpNoCase( wxT( "syn" ) ) == 0 )
 	{
 		LoadAttributes();
 	}
-
-	if(!m_SynAttr) m_SynAttr.reset(new MadSyntaxAttributes());
 }
 
 MadSyntax::MadSyntax( bool loadAttr/* = true*/ )
 {
-	if( loadAttr ) LoadAttributes();
 	if(!m_SynAttr) m_SynAttr.reset(new MadSyntaxAttributes());
+	if( loadAttr ) LoadAttributes();
 }
 
 MadSyntax::~MadSyntax()
@@ -2692,5 +2691,6 @@ void MadSyntax::DuplicateAttributes()
 	MadSyntaxAttributes * pCurSynAttr = m_SynAttr.get();
 	m_SynAttr.reset(new MadSyntaxAttributes(*pCurSynAttr));
 }
+
 
 

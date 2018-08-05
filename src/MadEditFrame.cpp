@@ -304,6 +304,8 @@
 #define fontsizeinc_xpm_idx (goforward_xpm_idx+1)
 #include "../images/fontsizedec.xpm"
 #define fontsizedec_xpm_idx (fontsizeinc_xpm_idx+1)
+#include "../images/astyle.xpm"
+#define astyle_xpm_idx (fontsizedec_xpm_idx+1)
 
 /*#include "../images/.xpm"
 #define _xpm_idx (navifwd_xpm_idx+1)*/
@@ -328,7 +330,7 @@ char ** g_MadIcons[] =
 	&report_xpm[0], &scriptcode_xpm[0], &encoding_xpm[0], &help_xpm[0], &linuxlogo_xpm[0], &maclogo_xpm[0], &windowslogo_xpm[0],
 	&filehandle_xpm[0], &qfind_xpm[0], &goposition_xpm[0], &cplusplus_xpm[0], &markdown_xpm[0], &html_xpm[0], &xml_xpm[0],
 	&plaintext_xpm[0], &togglewin_xpm[0], &prevwin_xpm[0], &nextwin_xpm[0], &goback_xpm[0], &goforward_xpm[0],
-	&fontsizeinc_xpm[0], &fontsizedec_xpm[0],
+	&fontsizeinc_xpm[0], &fontsizedec_xpm[0], &astyle_xpm[0],
 };
 
 extern void ScanForLocales();
@@ -2553,7 +2555,7 @@ CommandData CommandTable[] =
 #ifdef __WXMSW__
 	{ 0,			   1, menuFileAssociation,    wxT( "menuFileAssociation" ),    _( "&File Type Associations..." ),			        wxT( "" ),       wxITEM_NORMAL,    filehandle_xpm_idx, 0,			    _( "Change file type associations" ), 0, 0, 0, false},
 #endif
-	{ 0,			   1, menuSourceFormatter,    wxT( "menuSourceFormatter" ),    _( "&Source Formatter Settings..." ),			     wxT( "" ),       wxITEM_NORMAL,    -1, 0,						        _( "Change source formatter settings" ), 0, 0, 0, false},
+	{ 0,			   1, menuSourceFormatter,    wxT( "menuSourceFormatter" ),    _( "&Source Formatter Settings..." ),			     wxT( "" ),       wxITEM_NORMAL,    astyle_xpm_idx, 0,						        _( "Change source formatter settings" ), 0, 0, 0, false},
 	{ 0,			   1, menuPurgeHistories,     wxT( "menuPurgeHistories" ),     _( "&Purge Histories..." ),						   wxT( "" ),       wxITEM_NORMAL,    footprint_xpm_idx, 0,			     _( "Clearing out your history" ), 0, 0, 0, false},
 	{ 0,			   1, 0,			          0,						     0,												  0,			 wxITEM_SEPARATOR, -1, 0,						        0, 0, 0, 0, false},
 	{ 0,			   1, menuByteOrderMark,      wxT( "menuByteOrderMark" ),      _( "Has Unicode BOM (Byte-Order Mark)" ),			 0,			 wxITEM_NORMAL,    -1, &g_Menu_Tools_BOM,			    0, 0, 0, 0, false},
