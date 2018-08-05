@@ -179,6 +179,9 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID WXUNUSED(
 	m_FindText->SetRecordCaretMovements( false );
 	m_FindText->SetInsertSpacesInsteadOfTab( false );
 	m_FindText->SetWantTab( false );
+	MadSyntax* syn = m_FindText->GetSyntax();
+	syn->DuplicateAttributes();
+	m_FindText->LoadDefaultSyntaxScheme();
 	m_FindText->LoadDefaultSyntaxScheme();
 	m_FindText->SetShowEndOfLine(false);
 	m_FindText->SetShowTabChar( true );
@@ -199,6 +202,9 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID WXUNUSED(
 	m_ReplaceText->SetRecordCaretMovements( false );
 	m_ReplaceText->SetInsertSpacesInsteadOfTab( false );
 	m_ReplaceText->SetWantTab( false );
+	m_ReplaceText->SetWantTab( false );
+	syn = m_ReplaceText->GetSyntax();
+	syn->DuplicateAttributes();
 	m_ReplaceText->LoadDefaultSyntaxScheme();
 	m_ReplaceText->SetShowEndOfLine(false);
 	m_ReplaceText->SetShowTabChar( true );
