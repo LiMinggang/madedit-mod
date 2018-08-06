@@ -907,6 +907,7 @@ void MadFindInFilesDialog::WxCheckBoxEnableReplaceClick( wxCommandEvent& event )
 
 	GetSizer()->Fit(this);
 	GetSizer()->SetSizeHints(this);
+	Layout();  
 }
 
 /*
