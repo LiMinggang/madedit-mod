@@ -1411,8 +1411,8 @@ void MadSearchReplaceDialog::ShowReplaceUI()
 	BoxSizer4->Show(true);
 	GetSizer()->Fit( this );
 	GetSizer()->SetSizeHints( this );
+	Layout();  
 	SetTitle( _( "Replace" ) );
-	Refresh( false );
 	Show( true );
 	SetFocus();
 	Raise();
@@ -1434,8 +1434,8 @@ void MadSearchReplaceDialog::ShowFindUI()
 	WxButtonFindNext->SetDefault();
 	GetSizer()->Fit( this );
 	GetSizer()->SetSizeHints( this );
+	Layout();  
 	SetTitle( _( "Search" ) );
-	Refresh( false );
 	Show( true );
 	SetFocus();
 	Raise();
