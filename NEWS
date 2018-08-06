@@ -9,6 +9,7 @@ Mod v0.4.14
 8.Fix: NewDocumentTextFontSize does not take effect
 9.Fix: Set spell check default to disable
 10.Fix: Memory saving and performance improvement on syntax highlighting
-11.Update Python to 2.7.15
-12.Update hunspell to latest 8e6ceaa55d3f22c2b8ceff0190ce05f56aad38c4
-13.Update Chinese translation
+11.Fix: UI not automatically updated(SearchReplace Dialog)
+12.Update Python to 2.7.15
+13.Update hunspell to latest 8e6ceaa55d3f22c2b8ceff0190ce05f56aad38c4
+14.Update Chinese translation

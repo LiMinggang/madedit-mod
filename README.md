@@ -85,6 +85,7 @@ News
 * Fix: NewDocumentTextFontSize does not take effect
 * Fix: Set spell check default to disable
 * Fix: Memory saving and performance improvement on syntax highlighting
+* Fix: UI not automatically updated(SearchReplace Dialog)
 * Update Python to 2.7.15
 * Update hunspell to latest 8e6ceaa55d3f22c2b8ceff0190ce05f56aad38c4
 * Update Chinese translation

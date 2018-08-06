@@ -1397,13 +1397,11 @@ void MadSearchReplaceDialog::WxButtonReplaceExpandClick( wxCommandEvent& WXUNUSE
 
 void MadSearchReplaceDialog::ShowReplaceUI()
 {
-	//WxButtonReplaceExpand->Show(false);
 	m_ReplaceDlgUi = true;
 	WxButtonFindAllInAll->Show( false );
 	WxButtonFindAll->Show( false );
 	WxButtonReplaceExpand->SetLabel( _( "Search <<" ) );
-	m_ReplaceText->Show( true );
-	WxBitmapButtonRecentReplaceText->Show( true );
+	BoxSizerReplace->Show( true );
 	WxButtonReplace->Show( true );
 	WxButtonReplaceAll->Show( true );
 	WxButtonReplaceAllInAll->Show( true );
@@ -1411,34 +1409,26 @@ void MadSearchReplaceDialog::ShowReplaceUI()
 	BoxSizer4->Show(true);
 	GetSizer()->Fit( this );
 	GetSizer()->SetSizeHints( this );
-	Layout();  
 	SetTitle( _( "Replace" ) );
 	Show( true );
-	SetFocus();
-	Raise();
 }
 
 void MadSearchReplaceDialog::ShowFindUI()
 {
 	m_ReplaceDlgUi = false;
-	m_ReplaceText->Show( false );
-	WxBitmapButtonRecentReplaceText->Show( false );
+	BoxSizerReplace->Show( false );
 	WxButtonReplace->Show( false );
 	WxButtonReplaceAll->Show( false );
 	WxButtonReplaceAllInAll->Show( false );
 	BoxSizer4->Show(false);
 	WxButtonFindAllInAll->Show( true );
 	WxButtonFindAll->Show( true );
-	//WxButtonReplaceExpand->Show(true);
 	WxButtonReplaceExpand->SetLabel( _( "R&eplace >>" ) );
 	WxButtonFindNext->SetDefault();
 	GetSizer()->Fit( this );
 	GetSizer()->SetSizeHints( this );
-	Layout();  
 	SetTitle( _( "Search" ) );
 	Show( true );
-	SetFocus();
-	Raise();
 }
 
 void MadSearchReplaceDialog::UpdateSearchInSelection( bool check )

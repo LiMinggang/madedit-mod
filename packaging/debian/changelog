@@ -9,11 +9,12 @@ madedit-mod (0.4.14-1) stable; urgency=low
   8.Fix: NewDocumentTextFontSize does not take effect
   9.Fix: Set spell check default to disable
   10.Fix: Memory saving and performance improvement on syntax highlighting
-  11.Update Python to 2.7.15
-  12.Update hunspell to latest 8e6ceaa55d3f22c2b8ceff0190ce05f56aad38c4
-  13.Update Chinese translation
+  11.Fix: UI not automatically updated(SearchReplace Dialog)
+  12.Update Python to 2.7.15
+  13.Update hunspell to latest 8e6ceaa55d3f22c2b8ceff0190ce05f56aad38c4
+  14.Update Chinese translation
 
- -- Minggang Li <liminggang@gmail.com>  Wed, 5 Aug 2018 17:07:40 +0800
+ -- Minggang Li <liminggang@gmail.com>  Mon, 6 Aug 2018 17:07:40 +0800
 
 madedit-mod (0.4.13-1) stable; urgency=low
   1.New: Atyle formatter: Add new option "style=webkit" for the WebKit brace style
