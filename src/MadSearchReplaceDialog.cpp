@@ -1412,6 +1412,7 @@ void MadSearchReplaceDialog::ShowReplaceUI()
 	GetSizer()->Fit( this );
 	GetSizer()->SetSizeHints( this );
 	SetTitle( _( "Replace" ) );
+	Refresh( false );
 	Show( true );
 	SetFocus();
 	Raise();
@@ -1434,6 +1435,7 @@ void MadSearchReplaceDialog::ShowFindUI()
 	GetSizer()->Fit( this );
 	GetSizer()->SetSizeHints( this );
 	SetTitle( _( "Search" ) );
+	Refresh( false );
 	Show( true );
 	SetFocus();
 	Raise();
