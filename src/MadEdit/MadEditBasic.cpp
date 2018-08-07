@@ -2654,21 +2654,18 @@ int MadEdit::Save( bool ask, const wxString &title, bool saveas ) // return YES,
 				g_MB2WC_check_dir_filename = false;
 				ret = wxID_YES;
 				refresh = true;
-				if(filterIndex == 0)
+				wxFileName fname( filename );
+				if( fname.HasExt() )
 				{
-					wxFileName fname( filename );
-					if( fname.HasExt() )
-					{
-						wxString fext( wxT("*.") + fname.GetExt() );
-						int index = m_FileFilter.Find(fext);
+					wxString fext( wxT("*.") + fname.GetExt() );
+					int index = m_FileFilter.Find(fext);
 
-						if (wxNOT_FOUND != index)
-						{
-							wxString sss = m_FileFilter.SubString(0, index);
-							wxArrayString ary = wxStringTokenize(sss, _T("|"));
-							int counter = ary.size();
-							if(counter > 2) filterIndex = (counter - 1)/2;
-						}
+					if (wxNOT_FOUND != index)
+					{
+						wxString sss = m_FileFilter.SubString(0, index);
+						wxArrayString ary = wxStringTokenize(sss, _T("|"));
+						int counter = ary.size();
+						if(counter > 2) filterIndex = (counter - 1)/2;
 					}
 				}
 			}
