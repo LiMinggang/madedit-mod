@@ -120,6 +120,9 @@ FreeBSD packaging (with FreeBSD 10.01)
 2. aclocal version in aclocal.m4
 3. stdc++ version
 
+Mod v0.4.15
+New: Use input file ext as SaveAs file type
+
 Mod v0.4.14
 1.New: Using case insensitive on file name and directory name sorting in Windows list dialog
 2.New: Enable/disable adding keywords to internal dictionary
