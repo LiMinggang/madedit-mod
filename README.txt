@@ -122,6 +122,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.4.15
 New: Use input file ext as SaveAs file type
+Fix: Size issue of MacroDialog
 
 Mod v0.4.14
 1.New: Using case insensitive on file name and directory name sorting in Windows list dialog
