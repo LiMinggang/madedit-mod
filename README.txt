@@ -1265,7 +1265,6 @@ Links:
 MadEdit: http://sourceforge.net/projects/madedit/
 MadEdit-Mod: http://sourceforge.net/projects/madedit-mod/
 wxWidgets: http://www.wxwidgets.org
-wxDevCpp: http://wxdsgn.sourceforge.net
 Boost: http://www.boost.org
 Python: http://www.python.org
 Open Clip Art Library: http://www.openclipart.org
