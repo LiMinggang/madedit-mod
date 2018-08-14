@@ -90,31 +90,6 @@ News
 * Update hunspell to latest 8e6ceaa55d3f22c2b8ceff0190ce05f56aad38c4
 * Update Chinese translation
 
-Mod v0.4.13
-* New: Atyle formatter: Add new option "style=webkit" for the WebKit brace style
-* New: New API for MadPython:InsertNewline
-* New: Right click menu enabled for MadMacroDlg and SearchReplaceDialog(more edit functions for input of the dialog)
-* New: Scripts and spell check for Macro and SearchReplace dialog
-* New: Reset transparency of SearchReplace dialog
-* Fix: Deleted stale lock file '/home/username/prog_name-username' bug(Linux) #262
-* Fix: Code issue of EnableTransparency
-* Fix: GB18030 not work under Linux
-* Fix: Regex replace bug, eg, replace "\r\n" with "\\\n"
-* Fix: MadPython Recording issue
-* Fix: Chars escape for regex recording
-* Fix: Unbind critical message handlers during OnClose
-* Fix: High CPU load when move mouse over text lines #258 #265
-* Fix: Can't replace bookmarked lines with multiple line text
-* Fix: Patch for possible buffer overflow in GetFontWidths
-* Fix: Wrong string for K&R style on SourceFormat config Dialog
-* Fix: Use alphabet order for file name extension in FileAssociation Dialog
-* Fix: Disable syntax toolbar in Hex mode
-* Fix: Use GB18030 if wxFONTENCODING_CP936 is not available
-* Fix: Total pages in print preview is incorrect
-* Fix: Code improvement
-* Update Astyle to latest code
-* Update translations
-
 Todo
 =====
 * Partial load for large text files which was mentioned by the original author but never getting done.
