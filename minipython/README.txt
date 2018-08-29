@@ -1,4 +1,4 @@
-Minipython is based on http://www.adintr.com/article/blog/281(Python 2.7.2). I updated it to 2.7.10.
+Minipython is based on http://www.adintr.com/article/blog/281(Python 2.7.2). I updated it to 2.7.15.
 
 Based on the description from the author:
 1. 去掉 python 解释器对 Python 源代码的标准库的依赖. 
