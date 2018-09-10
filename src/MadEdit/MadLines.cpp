@@ -3673,7 +3673,7 @@ bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 	{
 		const int max_detecting_size = 4096;
 		int s;
-		wxByte *buf;
+		wxByte *buf = nullptr;
 
 		if (m_Size > max_detecting_size)
 			s = max_detecting_size;
@@ -3682,12 +3682,16 @@ bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 
 		long MaxSizeToLoad;
 		m_MadEdit->m_Config->Read(wxT("/MadEdit/MaxSizeToLoad"), &MaxSizeToLoad, 20 * 1000 * 1000);
-		if (m_Size <= MaxSizeToLoad)
-			buf = m_MemData->m_Buffers.front();
-		else
-			buf = (m_FileData == nullptr) ? nullptr : m_FileData->m_Buffer1;
 
-		tmp_Syntax = MadSyntax::GetSyntaxByExt( fn.GetExt() );
+		if (m_Size > 0)
+		{
+			if (m_Size <= MaxSizeToLoad)
+				buf = m_MemData->m_Buffers.front();
+			else
+				buf = (m_FileData == nullptr) ? nullptr : m_FileData->m_Buffer1;
+		}
+
+		tmp_Syntax = MadSyntax::GetSyntaxByExt(fn.GetExt());
 
 		if( tmp_Syntax == nullptr )
 		{
