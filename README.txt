@@ -81,9 +81,8 @@ Syntax files, Locale files, Dictionaries and Settings:
     Russian(ru_RU)             (Not done)
     Spanish(es)                (Not done)
 
-  * Download dictionary at http://extensions.openoffice.org
-    oxt is actually a zip file. So, download it and open it with 7-zip. Then extract
-    the .dic and .aff to ./Dictionaries. Re-start MadEdit-Mod to load the dictionary.
+  * Download dictionary at https://github.com/LibreOffice/dictionaries
+    Copy the .dic and .aff to ./Dictionaries. Re-start MadEdit-Mod to load the dictionary.
   * Use MadEdit-Mod with other applications like CPPCheck, Visual Studio, try
     'madedit filename*lineNum'
   * Silent mode which can be used in scripting, no GUI will be shown
