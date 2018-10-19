@@ -67,6 +67,7 @@ patch	syntax_diff.syn
 
 js	syntax_javascript.syn
 json	syntax_javascript.syn
+ts	syntax_typescript.syn
 
 xml	syntax_xml.syn
 idl	syntax_xml.syn

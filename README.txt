@@ -121,6 +121,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.4.15
 New: Use input file ext as SaveAs file type filter
+New: Use javascript syntax for typescript at first
 Fix: Size issue of MacroDialog
 Fix: Save new created empty file as would cause crash #271
 
