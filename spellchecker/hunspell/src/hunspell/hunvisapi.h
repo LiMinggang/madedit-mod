@@ -15,18 +15,4 @@
 #  define LIBHUNSPELL_DLL_EXPORTED
 #endif
 
-/* use thread_local, if it's possible, otherwise static */
-
-#if defined(_WIN32)
-#if _MSC_VER >= 1700
-#  define HUNSPELL_THREAD_LOCAL thread_local
-#else
-#  define HUNSPELL_THREAD_LOCAL static
-#endif
-#elif 0
-#  define HUNSPELL_THREAD_LOCAL thread_local
-#else
-#  define HUNSPELL_THREAD_LOCAL static
-#endif
-
 #endif

@@ -124,6 +124,7 @@ New: Use input file ext as SaveAs file type filter
 New: Use javascript syntax for typescript at first
 Fix: Size issue of MacroDialog
 Fix: Save new created empty file as would cause crash #271
+Update Hunspell to latest revision
 
 Mod v0.4.14
 1.New: Using case insensitive on file name and directory name sorting in Windows list dialog
