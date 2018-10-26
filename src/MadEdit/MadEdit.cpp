@@ -10326,6 +10326,7 @@ void MadEdit::OnMouseMotion( wxMouseEvent &evt )
 	//wxTheApp->GetTopWindow()->SetTitle(wxString::Format(wxT("%d %d"), evt.m_x, evt.m_y));
 
 	//ProcessCommand(ecMouseNotify); // no notify on mousemotion
+	//DBOUT( "OnMM:TW:"<<m_TopRow<<", InW?"<<(m_MouseInWindow?"T":"F")<<", (" <<evt.m_x <<", " << evt.m_y <<")\n" );
 
 	// fix vmware doubleclick bug
 	if( m_MouseLeftDoubleClick && m_DoubleClickX == evt.m_x && m_DoubleClickY == evt.m_y )
@@ -10340,118 +10341,115 @@ void MadEdit::OnMouseMotion( wxMouseEvent &evt )
 		m_LeftClickY = evt.m_y;
 	}
 
-	if( m_MouseInWindow )
+	UpdateCursor( evt.m_x, evt.m_y );
+
+	if( m_MouseLeftDown )
 	{
-		UpdateCursor( evt.m_x, evt.m_y );
+		wxFileOffset oldCaretPos = m_CaretPos.pos;
 
-		if( m_MouseLeftDown )
+		if( !m_Selection )
 		{
-			wxFileOffset oldCaretPos = m_CaretPos.pos;
+			BeginUpdateSelection();
+			m_DragDrop = false;
+		}
 
-			if( !m_Selection )
+		if( !m_MouseMotionTimer->IsRunning() )
+		{
+			m_MouseMotionTimer->Start( 125 );
+		}
+
+		if( m_EditMode != emHexMode )
+		{
+			int row;
+
+			if( evt.m_y < 0 )
 			{
-				BeginUpdateSelection();
-				m_DragDrop = false;
-			}
+				row = ( -evt.m_y / m_RowHeight ) + 1;
 
-			if( !m_MouseMotionTimer->IsRunning() )
-			{
-				m_MouseMotionTimer->Start( 125 );
-			}
-
-			if( m_EditMode != emHexMode )
-			{
-				int row;
-
-				if( evt.m_y < 0 )
+				if( row > m_TopRow )
 				{
-					row = ( -evt.m_y / m_RowHeight ) + 1;
-
-					if( row > m_TopRow )
-					{
-						row = 0;
-					}
-					else
-					{
-						row = m_TopRow - row;
-					}
+					row = 0;
 				}
 				else
 				{
-					row = evt.m_y / m_RowHeight;
-					row += m_TopRow;
-
-					if( row >= int( m_Lines->m_RowCount ) )
-						row = int( m_Lines->m_RowCount - 1 );
+					row = m_TopRow - row;
 				}
-
-				m_CaretPos.rowid = row;
-				m_CaretPos.lineid = GetLineByRow( m_CaretPos.iter, m_CaretPos.pos, row );
-				m_CaretPos.subrowid = m_CaretPos.rowid - row;
-				MadRowIndexIterator riter = m_CaretPos.iter->m_RowIndices.begin();
-				std::advance( riter, m_CaretPos.subrowid );
-				m_CaretPos.linepos = riter->m_Start;
-				m_CaretPos.pos += m_CaretPos.linepos;
-				UpdateCaretByXPos( evt.m_x + m_DrawingXPos - m_LineNumberAreaWidth - m_BookmarkWidth - m_LeftMarginWidth,
-								   m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
-				m_LastCaretXPos = m_CaretPos.xpos;
 			}
-			else                        //HexMode
+			else
 			{
-				int row;
+				row = evt.m_y / m_RowHeight;
+				row += m_TopRow;
 
-				if( evt.m_y < m_RowHeight )
+				if( row >= int( m_Lines->m_RowCount ) )
+					row = int( m_Lines->m_RowCount - 1 );
+			}
+
+			m_CaretPos.rowid = row;
+			m_CaretPos.lineid = GetLineByRow( m_CaretPos.iter, m_CaretPos.pos, row );
+			m_CaretPos.subrowid = m_CaretPos.rowid - row;
+			MadRowIndexIterator riter = m_CaretPos.iter->m_RowIndices.begin();
+			std::advance( riter, m_CaretPos.subrowid );
+			m_CaretPos.linepos = riter->m_Start;
+			m_CaretPos.pos += m_CaretPos.linepos;
+			UpdateCaretByXPos( evt.m_x + m_DrawingXPos - m_LineNumberAreaWidth - m_BookmarkWidth - m_LeftMarginWidth,
+							   m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
+			m_LastCaretXPos = m_CaretPos.xpos;
+		}
+		else                        //HexMode
+		{
+			int row;
+
+			if( evt.m_y < m_RowHeight )
+			{
+				int y = -( evt.m_y - m_RowHeight );
+				row = ( y / m_RowHeight ) + 1;
+
+				if( row > m_TopRow )
 				{
-					int y = -( evt.m_y - m_RowHeight );
-					row = ( y / m_RowHeight ) + 1;
-
-					if( row > m_TopRow )
-					{
-						row = 0;
-					}
-					else
-					{
-						row = m_TopRow - row;
-					}
+					row = 0;
 				}
 				else
 				{
-					row = ( evt.m_y / m_RowHeight ) - 1;
-					row += m_TopRow;
-					int rows = ( m_Lines->m_Size >> 4 ) + 1;
-
-					if( row >= rows )
-					{
-						if( rows > 0 )
-							row = rows - 1;
-						else
-							row = 0;
-					}
+					row = m_TopRow - row;
 				}
-
-				AppearHexRow( wxFileOffset( row ) << 4 );
-				UpdateHexPosByXPos( row, evt.m_x + m_DrawingXPos );
-				m_RepaintAll = true;
 			}
-
-			AppearCaret();
-			UpdateScrollBarPos();
-			m_LastTextAreaXPos = m_TextAreaXPos;
-
-			if( !m_DragDrop )
+			else
 			{
-				if( m_Selection )
+				row = ( evt.m_y / m_RowHeight ) - 1;
+				row += m_TopRow;
+				int rows = ( m_Lines->m_Size >> 4 ) + 1;
+
+				if( row >= rows )
 				{
-					EndUpdateSelection( true );
+					if( rows > 0 )
+						row = rows - 1;
+					else
+						row = 0;
 				}
 			}
 
-			DoSelectionChanged();
+			AppearHexRow( wxFileOffset( row ) << 4 );
+			UpdateHexPosByXPos( row, evt.m_x + m_DrawingXPos );
+			m_RepaintAll = true;
+		}
 
-			if( m_RecordCaretMovements && oldCaretPos != m_CaretPos.pos )
+		AppearCaret();
+		UpdateScrollBarPos();
+		m_LastTextAreaXPos = m_TextAreaXPos;
+
+		if( !m_DragDrop )
+		{
+			if( m_Selection )
 			{
-				m_CaretTracker->Add( oldCaretPos, m_CaretPos.pos );
+				EndUpdateSelection( true );
 			}
+		}
+
+		DoSelectionChanged();
+
+		if( m_RecordCaretMovements && oldCaretPos != m_CaretPos.pos )
+		{
+			m_CaretTracker->Add( oldCaretPos, m_CaretPos.pos );
 		}
 	}
 
