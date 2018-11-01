@@ -1,0 +1,33 @@
+# Maintainer: Minggang Li <minggang.li@gmail.com>
+# To build:
+#   1) Download boost and wxWidgets from boost.org(1.67 or later) and wxWidgets(3.1.1 or later)
+#      and change the './configure ...' accordingly
+#   2) Extract('tar -xvf ...') the source code packages at your {HOME} or other(change the {HOME} in './configure ...')
+#   3) Compile wxWigets with './configure --enable-unicode --disable-shared --with-libpng=builtin --with-zlib=builtin --with-expat=builtin --with-gtk=2 --with-libiconv=no'
+#   4) Run 'makepkg' under the directory of this file
+
+pkgname=madedit-mod
+pkgver=0.4.14
+pkgrel=1
+pkgdesc="Cross-platform Text/Hex Editor, a fork of MadEdit with bug fixes and enhancements"
+arch=("i686" "x86_64")
+url="https://github.com/LiMinggang/madedit-mod"
+license=('GPL')
+#depends=('wxgtk' 'desktop-file-utils')
+#makedepends=('boost')
+source=("https://github.com/LiMinggang/madedit-mod/archive/$pkgver.tar.gz")
+sha256sums=('SKIP')
+
+build() {
+  cd "$srcdir/madedit-mod-$pkgver"
+
+  sh ./autogen.sh
+
+  sh ./configure --with-boost=${HOME}/boost_1_67_0 --with-wxdir=${HOME}/wxWidgets-3.1.1
+  make
+}
+
+package() {
+  cd "$srcdir/madedit-mod-$pkgver"
+  make DESTDIR="${pkgdir}" install
+}
