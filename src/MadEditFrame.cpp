@@ -7538,18 +7538,31 @@ void MadEditFrame::ToggleFullScreen(long style, bool maxmize)
 	wxTopLevelWindow * topWin = (wxTopLevelWindow*)this;
 	int x =0,  y = 0, w = 0, h = 0;
 	bool fullScrn = true, resize = false;
+	static bool tbStatus[tbMAX] = {true};
 	if(topWin->IsFullScreen())
 	{
 		fullScrn = false;
-		//Hide toolbar first
-		ShowAllToolBars();
+		for( int toolbarId = tbSTANDARD; toolbarId < tbMAX; ++toolbarId )
+		{
+			if( tbStatus[toolbarId] )
+			{
+				m_AuiManager.GetPane( WxToolBar[toolbarId] ).Show();
+			}
+		}
 		if (style == wxFULLSCREEN_ALL || (m_Notebook->GetTabCtrlHeight() == 0))
 			m_Notebook->SetTabCtrlHeight(m_NoteBookTabHeight);
 		m_FullScreenStyle = 0;
 	}
 	else
 	{
-		HideAllToolBars();
+		//Hide toolbar first
+		for( int toolbarId = tbSTANDARD; toolbarId < tbMAX; ++toolbarId )
+		{
+			tbStatus[toolbarId] = m_AuiManager.GetPane( WxToolBar[toolbarId] ).IsShown( );
+			if( tbStatus[toolbarId] )
+			{ m_AuiManager.GetPane( WxToolBar[toolbarId] ).Hide(); }
+		}
+
 		if (style == wxFULLSCREEN_ALL)
 			m_Notebook->SetTabCtrlHeight(0);
 		else if (m_Notebook->GetTabCtrlHeight() == 0)
@@ -7563,6 +7576,8 @@ void MadEditFrame::ToggleFullScreen(long style, bool maxmize)
 			resize = true;
 		}
 	}
+
+	m_AuiManager.Update();
 
 	topWin->ShowFullScreen( fullScrn, style );
 	if(resize)
