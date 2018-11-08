@@ -10053,7 +10053,7 @@ void MadEditFrame::OnHelpAbout( wxCommandEvent& WXUNUSED(event) )
 	MadAboutDialog dlg( this );
 	dlg.WxMemoAbout->AppendText( g_MadEdit_Version + wxT( "\n" ) +
 								 g_MadEditMod_URL + wxT( "\n\n" ) +
-								 _( "Download dictionary at\nhttp://extensions.openoffice.org/" ) + wxT( "\n\n" ) +
+								 _( "Download dictionary at\nhttps://github.com/LibreOffice/dictionaries" ) + wxT( "\n\n" ) +
 								 _( "Press OK to visit our HomePage." ) );
 	dlg.WxMemoAbout->SetInsertionPoint( 0 );
 	dlg.WxMemoLicense->AppendText( wxGetTranslation(g_MadEditModLicense) );
