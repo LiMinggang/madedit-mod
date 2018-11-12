@@ -609,7 +609,7 @@ static inline int wxChCmp( const wchar_t * wchStr, const wxString & wsStr )
 wxUint16 *FontWidthManager::GetFontWidths( int index, const wxString &fontname, int fontsize, wxWindow *win )
 {
 	wxASSERT( index >= 0 && index <= 16 );
-	if(index >= FontWidthBuffersVector.size()) index = 0;
+	if((size_t)index >= FontWidthBuffersVector.size()) index = 0;
 	FontWidthBuffers &fwbuffers = FontWidthBuffersVector[index];
 
 	if( fwbuffers.empty() )
@@ -10665,7 +10665,7 @@ void MadEdit::OnKillFocus( wxFocusEvent &evt )
 
 void MadEdit::OnSize( wxSizeEvent &evt )
 {
-	int w, h;
+	int w = 0, h = 0;
 	GetClientSize( &w, &h );
 	//wxTheApp->GetTopWindow()->SetTitle(wxString::Format(wxT("%d %d"), w,h));
 
@@ -11093,7 +11093,7 @@ void MadEdit::OnPaint( wxPaintEvent & WXUNUSED(evt) )
 			memdc.SetFont( *m_TextFont );
 			// calculate rows to paint
 			if( m_TopRow < 0 ) m_TopRow = 0;
-			if( m_Lines->m_RowCount < m_TopRow )
+			if( m_Lines->m_RowCount < (size_t)m_TopRow )
 			{
 				wxASSERT(0);
 				m_TopRow = m_Lines->m_RowCount - 1;
@@ -11111,7 +11111,7 @@ void MadEdit::OnPaint( wxPaintEvent & WXUNUSED(evt) )
 				// update ValidPos
 				m_UpdateValidPos = -1;
 				MadLineIterator lit;
-				wxFileOffset tmppos;
+				wxFileOffset tmppos = -1;
 				int rowid = m_TopRow;
 				int lineid = GetLineByRow( lit, tmppos, rowid );
 				m_UpdateValidPos = 0;

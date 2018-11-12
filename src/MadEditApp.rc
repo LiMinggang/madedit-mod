@@ -144,7 +144,7 @@ BEGIN
             VALUE "FileDescription", "MadEdit-Mod Text Editor"
             VALUE "FileVersion", "0.0.4.15"
             VALUE "InternalName", "MadEditApp.rc"
-            VALUE "LegalCopyright", "Copyright (C) 2018"
+            VALUE "LegalCopyright", "Copyright (C) 2018 Minggang Li"
             VALUE "OriginalFilename", "MadEditApp.rc"
             VALUE "ProductName", "MadEdit-Mod"
             VALUE "ProductVersion", "0.0.4.15"
