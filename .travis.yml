@@ -9,7 +9,7 @@ os:
   - linux
 
 script:
-  - cd ./thirdparty/wxWidgets && sh ./configure --enable-unicode --disable-shared --with-libpng=builtin --with-zlib=builtin --with-expat=builtin --with-gtk=2 --with-libiconv=no
+  - cd ./thirdparty/wxWidgets && sh ./configure --enable-unicode --disable-shared --with-libpng=builtin --with-zlib=builtin --with-expat=builtin --with-gtk=2 --with-libiconv=no && make
   - sh ./autogen.sh && sh ./configure --with-wxdir=./thirdparty/wxWidgets && make
 #  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then autoreconf -i -I /usr/local/share/aclocal && ./configure && make && make check; fi
 # might be needed for future
