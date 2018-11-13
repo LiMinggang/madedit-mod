@@ -1,8 +1,6 @@
                         =================================
                                   MadEdit Mod
                         =================================
-.. image:: https://travis-ci.org/LiMinggang/madedit-mod.svg?branch=master
-    :target: https://travis-ci.org/LiMinggang/madedit-mod
 About:
 -----
 MadEdit is a cross-platform Text/Hex Editor written in C++ & wxWidgets.
