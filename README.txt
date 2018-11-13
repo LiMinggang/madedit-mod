@@ -129,6 +129,7 @@ Fix: Upward text selection stops at the top margin of text area #272
 Fix: After entering and exiting full screen mode, the Macro tool buttons auto appear on the toolbar #273
 Update Hunspell to 1.7.0
 Update dictionary download URL
+Update translations
 
 Mod v0.4.14
 1.New: Using case insensitive on file name and directory name sorting in Windows list dialog
