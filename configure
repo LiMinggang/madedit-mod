@@ -11490,7 +11490,7 @@ $as_echo "yes (version $WX_VERSION)" >&6; }
 
                               { $as_echo "$as_me:${as_lineno-$LINENO}: checking for wxWidgets static library" >&5
 $as_echo_n "checking for wxWidgets static library... " >&6; }
-      WX_LIBS_STATIC=`$WX_CONFIG_WITH_ARGS --libs std,net,aui,html 2>/dev/null`
+      WX_LIBS_STATIC=`$WX_CONFIG_WITH_ARGS --static --libs std,net,aui,html 2>/dev/null`
       if test "x$WX_LIBS_STATIC" = "x"; then
         { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }

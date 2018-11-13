@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([hunspell],[1.6.2],[https://github.com/hunspell/hunspell/issues],,[https://hunspell.github.io])
+AC_INIT([hunspell],[1.7.0],[https://github.com/hunspell/hunspell/issues],,[https://hunspell.github.io])
 AC_CONFIG_SRCDIR([config.h.in])
 AC_CONFIG_HEADERS([config.h])
 AC_CANONICAL_HOST
@@ -21,8 +21,6 @@ AC_PROG_CXX
 AC_PROG_CC
 LT_INIT
 AC_PROG_AWK
-AC_CHECK_PROG([ronn], [ronn], [yes])
-AM_CONDITIONAL([HAVE_RONN], [test x$ronn = xyes])
 
 # Checks for libraries.
 AM_ICONV
@@ -103,8 +101,8 @@ AC_SUBST(READLINELIB)
 AC_CONFIG_FILES([
 	Makefile
 	hunspell.pc
-	docs/Makefile
-	docs/hu/Makefile
+	man/Makefile
+	man/hu/Makefile
 	po/Makefile.in
 	src/Makefile
 	src/hunspell/Makefile
@@ -113,6 +111,5 @@ AC_CONFIG_FILES([
 	src/tools/Makefile
 	tests/Makefile
 	tests/suggestiontest/Makefile
-	tests/v1cmdline/Makefile
 ])
 AC_OUTPUT

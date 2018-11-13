@@ -127,7 +127,7 @@ Fix: Size issue of MacroDialog
 Fix: Save new created empty file as would cause crash #271
 Fix: Upward text selection stops at the top margin of text area #272
 Fix: After entering and exiting full screen mode, the Macro tool buttons auto appear on the toolbar #273
-Update Hunspell to latest revision
+Update Hunspell to 1.7.0
 Update dictionary download URL
 
 Mod v0.4.14
