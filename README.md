@@ -1,7 +1,5 @@
-madedit-mod 
+madedit-mod [![Build Status](https://travis-ci.org/LiMinggang/madedit-mod.svg?branch=master)](https://travis-ci.org/LiMinggang/madedit-mod)
 ===========
-.. image:: https://travis-ci.org/LiMinggang/madedit-mod.svg?branch=master
-    :target: https://travis-ci.org/LiMinggang/madedit-mod
 
 MadEdit Mod(based on the madedit project @ sourceforge)
 
