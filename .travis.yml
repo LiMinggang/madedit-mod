@@ -1,0 +1,25 @@
+language: cpp
+
+compiler:
+  - gcc
+
+sudo: false
+
+os:
+  - linux
+
+script:
+  - sh ./autogen.sh -i && sh ./configure && make
+#  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then autoreconf -i -I /usr/local/share/aclocal && ./configure && make && make check; fi
+# might be needed for future
+
+
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - autoconf
+    - automake
+    - gcc
+    - g++
