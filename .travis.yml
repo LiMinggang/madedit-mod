@@ -25,4 +25,4 @@ addons:
     - g++
     - libboost1.55-all-dev
     - gtk+2.0-dev
-    - libwxgtk3.0-0
+    - libwxgtk3.0
