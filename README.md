@@ -1,4 +1,4 @@
-madedit-mod [![Build Status](https://travis-ci.org/LiMinggang/madedit-mod.svg?branch=master)](https://travis-ci.org/LiMinggang/madedit-mod)
+madedit-mod [![Build Status](https://img.shields.io/travis/LiMinggang/madedit-mod/master.svg?label=Linux)](https://travis-ci.org/LiMinggang/madedit-mod)
 ===========
 
 MadEdit Mod(based on the madedit project @ sourceforge)
