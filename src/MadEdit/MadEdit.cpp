@@ -11278,7 +11278,7 @@ void MadEdit::OnPaint( wxPaintEvent & WXUNUSED(evt) )
 				}
 
 				wxColor &c = m_Syntax->GetAttributes( aeActiveLine )->color;
-				markdc.SetPen( *( wxThePenList->FindOrCreatePen( c, 1, wxPENSTYLE_SOLID ) ) );
+				markdc.SetPen( *( wxThePenList->FindOrCreatePen( c, 2, wxPENSTYLE_SOLID ) ) );
 				markdc.SetBrush( *wxTRANSPARENT_BRUSH );
 				markdc.DrawRectangle( x, y, w, h );
 			}

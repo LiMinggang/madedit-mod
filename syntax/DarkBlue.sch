@@ -26,7 +26,7 @@ SpecialWordStyle=
 LineNumberColor=MediumBlue
 LineNumberBgColor=LightSteelBlue
 LineNumberStyle=
-ActiveLineColor=FUCHSIA
+ActiveLineColor=EAEAF2
 BookmarkColor=0000FF
 [1.Keyword]
 Color=CYAN
