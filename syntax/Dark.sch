@@ -1,6 +1,6 @@
 CustomRange= 1 b1 e1 404040 2 b2 e2 606060 3 b3 e3 808080 4 b4 e4 A0A0A0 5 b5 e5 WHITE
-TextColor=CCCCCC
-TextBgColor=2D2D2D
+TextColor=DCDCDC
+TextBgColor=1E1E1E
 TextStyle=
 DelimiterColor=WHEAT
 DelimiterBgColor=
@@ -11,7 +11,7 @@ SpaceStyle=
 NumberColor=DEEPSKYBLUE
 NumberBgColor=
 NumberStyle=
-StringColor=CORAL
+StringColor=D69685
 StringBgColor=
 StringStyle=
 CommentColor=PowderBlue
