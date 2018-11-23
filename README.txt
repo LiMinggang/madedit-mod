@@ -123,6 +123,7 @@ Mod v0.4.15
 New: Use input file ext as SaveAs file type filter
 New: Use javascript syntax for typescript at first
 New: ArchLinux/Manjaro package support
+New: Better Dark theme based on popular ones
 Fix: Size issue of MacroDialog
 Fix: Save new created empty file as would cause crash #271
 Fix: Upward text selection stops at the top margin of text area #272
