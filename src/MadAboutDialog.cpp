@@ -21,7 +21,7 @@
 wxString g_MadEdit_URL(wxT("https://sourceforge.net/projects/madedit/ or https://sourceforge.net/projects/madedit-mod/"));
 wxString g_MadEditMod_URL(wxT("https://sourceforge.net/p/madedit-mod/wiki/MadEdi-Mod/"));
 wxString g_MadEditModLicense (
-_("Copyright (C) 2012-2019  Minggang Li <minggang.li@gmail.com>\n\n\
+_("Copyright (C) 2012-2019 Minggang Li <minggang.li@gmail.com>\n\n\
     This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by\
  the Free Software Foundation, either version 3 of the License, or\
  (at your option) any later version.\n\n\
