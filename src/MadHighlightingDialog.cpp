@@ -369,7 +369,8 @@ void MadHighlightingDialog::WxListBoxSyntaxSelected(wxCommandEvent& event)
 		long item = WxListCtrlKeyword->InsertItem(index++, MadSyntax::GetAttributeName((MadAttributeElement)ae));
 		MadAttributes *attr = g_Syntax->GetAttributes((MadAttributeElement)ae);
 		int kind=kindSysAttr1;
-		if(ae==aeActiveLine || ae==aeBookmark || ae==aeHighlightWord) kind=kindSysAttr2;
+		if(ae==aeActiveLine) kind=kindSysAttr2;
+		if(ae==aeBookmark || ae==aeHighlightWord) kind=kindSysAttr1;
 		g_KeywordInfoTable.push_back(KeywordInfo(kind, attr, nullptr));
 
 		if(ae==aeText)
@@ -422,7 +423,7 @@ void MadHighlightingDialog::SetPanelFC(const wxColor &color)
 {
 	if(color==wxNullColour)
 	{
-		WxStaticTextFCName->SetLabel(wxT("(Automatic)"));
+		WxStaticTextFCName->SetLabel(_("(Automatic)"));
 		WxPanelFC->SetBackgroundColour(WxListCtrlFC->GetItemTextColour(0));
 		WxPanelFC->ClearBackground();
 	}
@@ -443,7 +444,7 @@ void MadHighlightingDialog::SetPanelBC(const wxColor &color)
 {
 	if(color==wxNullColour)
 	{
-		WxStaticTextBCName->SetLabel(wxT("(Automatic)"));
+		WxStaticTextBCName->SetLabel(_("(Automatic)"));
 		WxPanelBC->SetBackgroundColour(WxListCtrlBC->GetItemBackgroundColour(0));
 		WxPanelBC->ClearBackground();
 	}
@@ -560,8 +561,8 @@ void MadHighlightingDialog::WxListCtrlKeywordSelected(wxListEvent& event)
 	this->Layout();
 
 	WxListCtrlKeyword->SetItemState(event.m_itemIndex, 0, wxLIST_STATE_SELECTED);
-	WxListCtrlKeyword->Thaw();
 	WxListCtrlFC->Thaw();
+	WxListCtrlKeyword->Thaw();
 }
 
 /*
@@ -762,7 +763,7 @@ void MadHighlightingDialog::SetAttrFC(const wxColor &color, const wxString &colo
 	else
 	{
 		wxASSERT(kinfo.kind!=kindRange);
-		if(colorname==wxT("(Automatic)"))
+		if(colorname==_("(Automatic)"))
 		{
 			kinfo.attr->color=wxNullColour;
 		}
@@ -790,11 +791,11 @@ void MadHighlightingDialog::SetAttrBC(const wxColor &color, const wxString &colo
 		{
 		case kindSysAttr1:
 		case kindKeyword:
-			if(colorname==wxT("(Automatic)")) kinfo.attr->bgcolor=wxNullColour;
+			if(colorname==_("(Automatic)")) kinfo.attr->bgcolor=wxNullColour;
 			else							  kinfo.attr->bgcolor=color;
 			break;
 		case kindRange:
-			if(colorname==wxT("(Automatic)")) *kinfo.range_bgcolor=wxNullColour;
+			if(colorname==_("(Automatic)")) *kinfo.range_bgcolor=wxNullColour;
 			else							  *kinfo.range_bgcolor=color;
 			break;
 		}
