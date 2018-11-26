@@ -25,9 +25,6 @@
 
 extern wxString g_MadEditHomeDir;
 
-wxColour g_MadDefBmkColor(wxT("DeepSkyBlue")), g_MadDefBmkBgColor(wxT("MediumBlue"));
-wxColour g_MadDefHWColor(0x9B, 0xFF, 0x9B), g_MadDefHWBgColor(0xE2, 0xE6, 0xD6);
-
 const wxChar *SystemAttributesName[] =
 {
 	wxT( "Text" ), wxT( "Delimiter" ), wxT( "Space" ), wxT( "Number" ), wxT( "String" ), wxT( "Comment" ),
@@ -37,11 +34,11 @@ const wxChar *SystemAttributesName[] =
 
 const wxChar *SystemAttributesColor[] =
 {
-	wxT( "Black" ), wxT( "SaddleBrown" ), wxT( "Aqua" ), wxT( "Blue" ), wxT( "Red" ), wxT( "Teal" ), wxT( "Green" ), wxT( "Maroon" ), wxT( "White" ),         wxT( "Fuchsia" ), wxT( "#\xC0\xFF\xFF" ), wxT("PaleGreen")
+	wxT( "Black" ), wxT( "SaddleBrown" ), wxT( "Aqua" ), wxT( "Blue" ), wxT( "Red" ), wxT( "Teal" ), wxT( "Green" ), wxT( "Maroon" ), wxT( "White" ),       wxT( "#\x46\x46\x46" ), wxT("DeepSkyBlue"), wxT("PaleGreen")
 };
 const wxChar *SystemAttributesBgColor[] =
 {
-	wxT( "White" ), wxT( "" ),            wxT( "" ),     wxT( "" ),     wxT( "" ),    wxT( "" ),     wxT( "" ),      wxT( "" ),       wxT( "#\xA0\xA0\xA0" ), wxT( "" ),        wxT( "" ),              wxT("AntiqueWhite")
+	wxT( "White" ), wxT( "" ),           wxT( "" ),     wxT( "" ),     wxT( "" ),    wxT( "" ),     wxT( "" ),      wxT( "" ),      wxT( "#\xA0\xA0\xA0" ), wxT( "" ),        wxT("MediumBlue"), wxT("AntiqueWhite")
 };
 
 const wxString MadPlainTextTitle( wxT( "Plain Text" ) );
@@ -2625,8 +2622,14 @@ void MadSyntax::SaveAttributes( const wxString &file )
 	str.Printf( wxT( "/%sColor" ), SystemAttributesName[aeBookmark] );
 	value.Printf( wxT( "%s" ), GetColorName( m_SynAttr->m_SystemAttributes[aeBookmark].color ).c_str() );
 	syn.Write( str, value );
+	str.Printf( wxT( "/%sBgColor" ), SystemAttributesName[aeBookmark] );
+	value.Printf( wxT( "%s" ), GetColorName( m_SynAttr->m_SystemAttributes[aeBookmark].bgcolor ).c_str() );
+	syn.Write( str, value );
 	str.Printf( wxT( "/%sColor" ), SystemAttributesName[aeHighlightWord] );
 	value.Printf( wxT( "%s" ), GetColorName( m_SynAttr->m_SystemAttributes[aeHighlightWord].color ).c_str() );
+	syn.Write( str, value );
+	str.Printf( wxT( "/%sBgColor" ), SystemAttributesName[aeHighlightWord] );
+	value.Printf( wxT( "%s" ), GetColorName( m_SynAttr->m_SystemAttributes[aeHighlightWord].bgcolor ).c_str() );
 	syn.Write( str, value );
 
 	// write custom keywords

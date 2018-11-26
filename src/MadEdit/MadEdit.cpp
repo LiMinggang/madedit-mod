@@ -2099,8 +2099,8 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 	const int wspace = m_TextFontSpaceWidth/*GetUCharWidth( 0x20 )*/;
 	wxString lnums;
 	wxColor current_bgcolor;
-	wxColour * clr = &g_MadDefBmkColor, *bgclr = &g_MadDefBmkBgColor;
-	wxColour * hwclr = &g_MadDefHWColor, *hwbgclr = &g_MadDefHWBgColor;
+	//wxColour * clr = &g_MadDefBmkColor, *bgclr = &g_MadDefBmkBgColor;
+	//wxColour * hwclr = &g_MadDefHWColor, *hwbgclr = &g_MadDefHWBgColor;
 
 	if( m_DisplayLineNumber )
 	{
@@ -2240,17 +2240,11 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 							{
 								//static wxColour hlBgColor( 0x11, 0x3D, 0x6F );
 								MadAttributes* attr = GetSyntax()->GetAttributes(aeHighlightWord);
-								if(attr)
+								wxASSERT(attr != 0);
+								fclr = &attr->color;
+								if(current_bgcolor != attr->bgcolor)
 								{
-									if(attr->color != wxNullColour)
-										hwclr = &attr->color;
-									if(attr->bgcolor != wxNullColour)
-										hwbgclr = &attr->bgcolor;
-								}
-								fclr = hwclr;
-								if(current_bgcolor != *hwbgclr)
-								{
-									current_bgcolor = *hwbgclr;
+									current_bgcolor = attr->bgcolor;
 									newBg = true;
 								}
 							}
@@ -2535,15 +2529,10 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 								int b = m_RowHeight < 24 ? 1 : m_RowHeight / 24;
 								
 								MadAttributes* attr = GetSyntax()->GetAttributes(aeBookmark);
-								if(attr)
-								{
-									if(attr->color != wxNullColour)
-										clr = &attr->color;
-									if(attr->bgcolor != wxNullColour)
-										bgclr = &attr->bgcolor;
-								}
-								dc->SetPen(*(wxThePenList->FindOrCreatePen(*clr, b, wxPENSTYLE_SOLID)));
-								dc->SetBrush(*(wxTheBrushList->FindOrCreateBrush(*bgclr)));
+								wxASSERT(attr != 0);
+
+								dc->SetPen(*(wxThePenList->FindOrCreatePen(attr->color, b, wxPENSTYLE_SOLID)));
+								dc->SetBrush(*(wxTheBrushList->FindOrCreateBrush(attr->bgcolor)));
 								
 								wxRect rdrect(l /*+ offset*/, row_top + b, lwidth - b, m_RowHeight - b * 3 / 2);
 								double r = m_RowHeight < 18 ? 3.0 : m_RowHeight / 6.0;

@@ -1,5 +1,5 @@
 CustomRange= 1 b1 e1 404040 2 b2 e2 606060 3 b3 e3 808080 4 b4 e4 A0A0A0 5 b5 e5 WHITE
-TextColor=DCDCDC
+TextColor=GAINSBORO
 TextBgColor=1E1E1E
 TextStyle=
 DelimiterColor=WHEAT
@@ -27,7 +27,7 @@ LineNumberColor=Linen
 LineNumberBgColor=LightSlateGray
 LineNumberStyle=
 ActiveLineColor=464646
-BookmarkColor=0000FF
+BookmarkColor=BLUE
 HighlightWordColor=8A96A1
 HighlightWordBgColor=113D6F
 [1.Keyword]
