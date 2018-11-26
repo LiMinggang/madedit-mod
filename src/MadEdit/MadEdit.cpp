@@ -1830,7 +1830,7 @@ void MadEdit::PaintText( wxDC *dc, int x, int y, const ucs4_t *text, const int *
 }
 #endif
 
-void MadEdit::PaintText( wxDC *dc, int x, int y, const ucs4_t *text, const int *width, int count, int minleft, int maxright, bool spellmark /*=false*/ )
+void MadEdit::PaintText( wxDC *dc, int x, int y, const ucs4_t *text, const int *width, int count, int minleft, int maxright, bool spellmark/*=false*/ )
 {
 	int totalwidth = 0;
 #ifdef __WXMSW__
@@ -2100,6 +2100,7 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 	wxString lnums;
 	wxColor current_bgcolor;
 	wxColour * clr = &g_MadDefBmkColor, *bgclr = &g_MadDefBmkBgColor;
+	wxColour * hwclr = &g_MadDefHWColor, *hwbgclr = &g_MadDefHWBgColor;
 
 	if( m_DisplayLineNumber )
 	{
@@ -2231,24 +2232,50 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 						}
 						else
 						{
+							wxColour * fclr = 0;
+							bool newBg = false;
+							int pensize = 1;
 							//static ucs4_t data[] = {117, 115, 101 ,114};//"user"
 							if( !m_HighlightWords.empty() && ( wordlength == (int)m_HighlightWords.size() ) && IsTheSame<ucs4_t>( m_HighlightWords, m_WordBuffer, m_HighlightWords.size() ) )
 							{
-								static wxColour bgColor( 0x0, 0xff, 0xff );
-								current_bgcolor = bgColor;//wxTheColourDatabase->Find(wxString(wxT("PALE GREEN")));
-								dc->SetPen( *( wxThePenList->FindOrCreatePen( current_bgcolor, 1, wxPENSTYLE_SOLID ) ) );
-								dc->SetBrush( *( wxTheBrushList->FindOrCreateBrush( current_bgcolor ) ) );
-								dc->DrawRectangle( left, row_top, rectright - left, m_RowHeight );
+								//static wxColour hlBgColor( 0x11, 0x3D, 0x6F );
+								MadAttributes* attr = GetSyntax()->GetAttributes(aeHighlightWord);
+								if(attr)
+								{
+									if(attr->color != wxNullColour)
+										hwclr = &attr->color;
+									if(attr->bgcolor != wxNullColour)
+										hwbgclr = &attr->bgcolor;
+								}
+								fclr = hwclr;
+								if(current_bgcolor != *hwbgclr)
+								{
+									current_bgcolor = *hwbgclr;
+									newBg = true;
+								}
 							}
 							else
 							{
 								if( m_Syntax->nw_BgColor != current_bgcolor )
 								{
 									current_bgcolor = m_Syntax->nw_BgColor;
-									dc->SetPen( *( wxThePenList->FindOrCreatePen( m_Syntax->nw_BgColor, 1, wxPENSTYLE_SOLID ) ) );
-									dc->SetBrush( *( wxTheBrushList->FindOrCreateBrush( m_Syntax->nw_BgColor ) ) );
-									dc->DrawRectangle( left, row_top, rectright - left, m_RowHeight );
+									newBg = true;
+									fclr = &current_bgcolor;
 								}
+							}
+
+							if(newBg)
+							{
+								int nowright = left;
+								const int *pw = m_WidthBuffer;
+								for( int i = 0; i < wordlength && nowright < maxright; ++i )
+								{
+									int ucw = *pw++;
+									nowright += ucw;
+								}
+								dc->SetPen( *( wxThePenList->FindOrCreatePen( *fclr, pensize, wxPENSTYLE_SOLID ) ) );
+								dc->SetBrush( *( wxTheBrushList->FindOrCreateBrush( current_bgcolor ) ) );
+								dc->DrawRectangle( left, row_top, nowright - left, m_RowHeight );
 							}
 
 							dc->SetTextForeground( m_Syntax->nw_Color );

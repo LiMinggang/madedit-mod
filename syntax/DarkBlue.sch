@@ -28,6 +28,8 @@ LineNumberBgColor=LightSteelBlue
 LineNumberStyle=
 ActiveLineColor=EAEAF2
 BookmarkColor=0000FF
+HighlightWordColor=8A96A1
+HighlightWordBgColor=113D6F
 [1.Keyword]
 Color=CYAN
 BgColor=

@@ -34,7 +34,7 @@ ascii_mbtowc (ucs4_t *pwc, const unsigned char *s, int WXUNUSED(n))
 }
 
 static int
-ascii_wctomb (unsigned char *r, ucs4_t wc, int n)
+ascii_wctomb (unsigned char *r, ucs4_t wc, int WXUNUSED(n))
 {
   if (wc < 0x0080) {
     *r = wc;

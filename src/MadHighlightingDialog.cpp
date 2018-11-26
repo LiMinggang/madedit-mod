@@ -369,7 +369,7 @@ void MadHighlightingDialog::WxListBoxSyntaxSelected(wxCommandEvent& event)
 		long item = WxListCtrlKeyword->InsertItem(index++, MadSyntax::GetAttributeName((MadAttributeElement)ae));
 		MadAttributes *attr = g_Syntax->GetAttributes((MadAttributeElement)ae);
 		int kind=kindSysAttr1;
-		if(ae==aeActiveLine || ae==aeBookmark) kind=kindSysAttr2;
+		if(ae==aeActiveLine || ae==aeBookmark || ae==aeHighlightWord) kind=kindSysAttr2;
 		g_KeywordInfoTable.push_back(KeywordInfo(kind, attr, nullptr));
 
 		if(ae==aeText)

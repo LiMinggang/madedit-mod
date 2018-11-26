@@ -89,7 +89,7 @@ struct MadSyntaxKeyword
 enum MadAttributeElement
 {
 	aeText, aeDelimiter, aeSpace, aeNumber, aeString, aeComment, aeDirective,
-	aeSpecialWord, aeLineNumber, aeActiveLine, aeBookmark, aeNone
+	aeSpecialWord, aeLineNumber, aeActiveLine, aeBookmark, aeHighlightWord, aeNone
 };
 
 struct MadState
@@ -320,5 +320,5 @@ private: // for Printing
 };
 
 extern const wxString MadPlainTextTitle;
-extern wxColour g_MadDefBmkColor, g_MadDefBmkBgColor;
+extern wxColour g_MadDefBmkColor, g_MadDefBmkBgColor, g_MadDefHWColor, g_MadDefHWBgColor;
 #endif
