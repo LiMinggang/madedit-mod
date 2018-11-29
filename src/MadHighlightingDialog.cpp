@@ -423,7 +423,7 @@ void MadHighlightingDialog::SetPanelFC(const wxColor &color)
 {
 	if(color==wxNullColour)
 	{
-		WxStaticTextFCName->SetLabel(_("(Automatic)"));
+		WxStaticTextFCName->SetLabel(wxT("(Automatic)"));
 		WxPanelFC->SetBackgroundColour(WxListCtrlFC->GetItemTextColour(0));
 		WxPanelFC->ClearBackground();
 	}
@@ -444,7 +444,7 @@ void MadHighlightingDialog::SetPanelBC(const wxColor &color)
 {
 	if(color==wxNullColour)
 	{
-		WxStaticTextBCName->SetLabel(_("(Automatic)"));
+		WxStaticTextBCName->SetLabel(wxT("(Automatic)"));
 		WxPanelBC->SetBackgroundColour(WxListCtrlBC->GetItemBackgroundColour(0));
 		WxPanelBC->ClearBackground();
 	}
@@ -763,7 +763,7 @@ void MadHighlightingDialog::SetAttrFC(const wxColor &color, const wxString &colo
 	else
 	{
 		wxASSERT(kinfo.kind!=kindRange);
-		if(colorname==_("(Automatic)"))
+		if(colorname==wxT("(Automatic)"))
 		{
 			kinfo.attr->color=wxNullColour;
 		}
@@ -791,11 +791,11 @@ void MadHighlightingDialog::SetAttrBC(const wxColor &color, const wxString &colo
 		{
 		case kindSysAttr1:
 		case kindKeyword:
-			if(colorname==_("(Automatic)")) kinfo.attr->bgcolor=wxNullColour;
+			if(colorname==wxT("(Automatic)")) kinfo.attr->bgcolor=wxNullColour;
 			else							  kinfo.attr->bgcolor=color;
 			break;
 		case kindRange:
-			if(colorname==_("(Automatic)")) *kinfo.range_bgcolor=wxNullColour;
+			if(colorname==wxT("(Automatic)")) *kinfo.range_bgcolor=wxNullColour;
 			else							  *kinfo.range_bgcolor=color;
 			break;
 		}
