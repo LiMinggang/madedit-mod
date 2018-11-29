@@ -2236,6 +2236,7 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 							bool newBg = false;
 							int pensize = 1;
 							//static ucs4_t data[] = {117, 115, 101 ,114};//"user"
+							int nowright = left;
 							if( !m_HighlightWords.empty() && ( wordlength == (int)m_HighlightWords.size() ) && IsTheSame<ucs4_t>( m_HighlightWords, m_WordBuffer, m_HighlightWords.size() ) )
 							{
 								//static wxColour hlBgColor( 0x11, 0x3D, 0x6F );
@@ -2246,6 +2247,12 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 								{
 									current_bgcolor = attr->bgcolor;
 									newBg = true;
+									const int *pw = m_WidthBuffer;
+									for( int i = 0; i < wordlength && nowright < maxright; ++i )
+									{
+										int ucw = *pw++;
+										nowright += ucw;
+									}
 								}
 							}
 							else
@@ -2255,18 +2262,12 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 									current_bgcolor = m_Syntax->nw_BgColor;
 									newBg = true;
 									fclr = &current_bgcolor;
+									nowright = maxright;
 								}
 							}
 
 							if(newBg)
 							{
-								int nowright = left;
-								const int *pw = m_WidthBuffer;
-								for( int i = 0; i < wordlength && nowright < maxright; ++i )
-								{
-									int ucw = *pw++;
-									nowright += ucw;
-								}
 								dc->SetPen( *( wxThePenList->FindOrCreatePen( *fclr, pensize, wxPENSTYLE_SOLID ) ) );
 								dc->SetBrush( *( wxTheBrushList->FindOrCreateBrush( current_bgcolor ) ) );
 								dc->DrawRectangle( left, row_top, nowright - left, m_RowHeight );
