@@ -73,21 +73,22 @@ Translations
 
 News
 =======
-* Mod v0.4.14
-* New: Using case insensitive on file name and directory name sorting in Windows list dialog
-* New: Enable/disable adding keywords to internal dictionary
-* New: Source code formatter icon
-* Fix: Input Method Candidate Window doesn't follow the caret under Windows 7
-* Fix: Blurry GUI text issue under Windows 10 high DPI display
-* Fix: FindInFiles dialog/search progress display issue under high DPI
-* Fix: Performance issue of spell check for syntax hightlighting #267 #270
-* Fix: NewDocumentTextFontSize does not take effect
-* Fix: Set spell check default to disable
-* Fix: Memory saving and performance improvement on syntax highlighting
-* Fix: UI not automatically updated(SearchReplace Dialog)
-* Update Python to 2.7.15
-* Update hunspell to latest 8e6ceaa55d3f22c2b8ceff0190ce05f56aad38c4
-* Update Chinese translation
+Mod v0.4.15
+New: Use input file ext as SaveAs file type filter
+New: Use javascript syntax for typescript at first
+New: ArchLinux/Manjaro package support
+New: Better Dark theme based on popular ones
+New: Change default color of active line marker
+New: Highlight word color can be configed
+New: Use backgroud color of text for rest of the line
+Fix: Size issue of MacroDialog
+Fix: Save new created empty file as would cause crash #271
+Fix: Upward text selection stops at the top margin of text area #272
+Fix: After entering and exiting full screen mode, the Macro tool buttons auto appear on the toolbar #273
+Fix: Bookmark background color could not be saved
+Update Hunspell to 1.7.0
+Update dictionary download URL
+Update translations
 
 Todo
 =====

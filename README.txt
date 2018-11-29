@@ -120,21 +120,21 @@ FreeBSD packaging (with FreeBSD 10.01)
 3. stdc++ version
 
 Mod v0.4.15
-New: Use input file ext as SaveAs file type filter
-New: Use javascript syntax for typescript at first
-New: ArchLinux/Manjaro package support
-New: Better Dark theme based on popular ones
-New: Change default color of active line marker
-New: Highlight word color can be configed
-New: Use backgroud color of text for rest of the line
-Fix: Size issue of MacroDialog
-Fix: Save new created empty file as would cause crash #271
-Fix: Upward text selection stops at the top margin of text area #272
-Fix: After entering and exiting full screen mode, the Macro tool buttons auto appear on the toolbar #273
-Fix: Bookmark background color could not be saved
-Update Hunspell to 1.7.0
-Update dictionary download URL
-Update translations
+1.New: Use input file ext as SaveAs file type filter
+2.New: Use javascript syntax for typescript at first
+3.New: ArchLinux/Manjaro package support
+4.New: Better Dark theme based on popular ones
+5.New: Change default color of active line marker
+6.New: Highlight word color can be configed
+7.New: Use backgroud color of text for rest of the line
+8.Fix: Size issue of MacroDialog
+9.Fix: Save new created empty file as would cause crash #271
+10.Fix: Upward text selection stops at the top margin of text area #272
+11.Fix: After entering and exiting full screen mode, the Macro tool buttons auto appear on the toolbar #273
+12.Fix: Bookmark background color could not be saved
+13.Update Hunspell to 1.7.0
+14.Update dictionary download URL
+15.Update translations
 
 Mod v0.4.14
 1.New: Using case insensitive on file name and directory name sorting in Windows list dialog
