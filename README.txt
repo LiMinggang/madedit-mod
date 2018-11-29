@@ -124,7 +124,7 @@ New: Use input file ext as SaveAs file type filter
 New: Use javascript syntax for typescript at first
 New: ArchLinux/Manjaro package support
 New: Better Dark theme based on popular ones
-New: Change color of active line marker
+New: Change default color of active line marker
 New: Highlight word color can be configed
 New: Use backgroud color of text for rest of the line
 Fix: Size issue of MacroDialog
