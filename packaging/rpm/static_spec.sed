@@ -1,3 +1,3 @@
-/%configure/s##& --with-wx-config=${HOME}/wxWidgets-3.1.1/release/bin/wx-config LIBS="${HOME}/wxWidgets-3.1.1/release/lib/libwx_gtk2u_aui-3.1.a ${HOME}/wxWidgets-3.1.1/release/lib/libwx_gtk2u_core-3.1.a ${HOME}/wxWidgets-3.1.1/release/lib/libwx_baseu-3.1.a -lgtk-x11-2.0 -lgthread-2.0 -lX11" glib_gtk2_LIBS="-lm" WX_LIBS="-lm" --with-boost=${HOME}/boost_1_67_0#
+/%configure/s##& --with-wx-config=${HOME}/wxWidgets-3.1.1/release/bin/wx-config LIBS="${HOME}/wxWidgets-3.1.1/release/lib/libwx_gtk2u_aui-3.1.a ${HOME}/wxWidgets-3.1.1/release/lib/libwx_gtk2u_core-3.1.a ${HOME}/wxWidgets-3.1.1/release/lib/libwx_baseu-3.1.a -lgtk-x11-2.0 -lgthread-2.0 -lX11" glib_gtk2_LIBS="-lm" WX_LIBS="-lm" --with-boost=${HOME}/boost_1_68_0#
 /^BuildRequires:/s#^.*$#BuildRequires: gtk2-devel >= 2.6.0#
 /^Requires:/s#^.*$#Requires: gtk2 >= 2.6.0#
