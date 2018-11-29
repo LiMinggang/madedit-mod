@@ -126,6 +126,7 @@ New: ArchLinux/Manjaro package support
 New: Better Dark theme based on popular ones
 New: Change color of active line marker
 New: Highlight word color can be configed
+New: Use backgroud color of text for rest of the line
 Fix: Size issue of MacroDialog
 Fix: Save new created empty file as would cause crash #271
 Fix: Upward text selection stops at the top margin of text area #272

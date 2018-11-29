@@ -2365,7 +2365,7 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 					current_bgcolor = m_Syntax->nw_BgColor;
 					dc->SetPen( *(wxThePenList->FindOrCreatePen( m_Syntax->nw_BgColor, 1, wxPENSTYLE_SOLID ) ) );
 					dc->SetBrush( *( wxTheBrushList->FindOrCreateBrush( m_Syntax->nw_BgColor ) ) );
-					dc->DrawRectangle( left, row_top, rectright - left, m_RowHeight );
+					dc->DrawRectangle( left, row_top, maxright - left, m_RowHeight );
 				}
 
 				dc->SetPen( *( wxThePenList->FindOrCreatePen( m_Syntax->nw_Color, 1, wxPENSTYLE_SOLID ) ) );
@@ -2400,7 +2400,7 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 
 			if( left < maxright )     // paint range color at rest of row
 			{
-				const wxColor& c = m_Syntax->nw_CurrentBgColor;
+				wxColor &c = m_Syntax->GetAttributes(aeText)->bgcolor;
 
 				if( c != current_bgcolor )
 				{
