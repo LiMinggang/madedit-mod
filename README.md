@@ -74,21 +74,21 @@ Translations
 News
 =======
 Mod v0.4.15
-New: Use input file ext as SaveAs file type filter
-New: Use javascript syntax for typescript at first
-New: ArchLinux/Manjaro package support
-New: Better Dark theme based on popular ones
-New: Change default color of active line marker
-New: Highlight word color can be configed
-New: Use backgroud color of text for rest of the line
-Fix: Size issue of MacroDialog
-Fix: Save new created empty file as would cause crash #271
-Fix: Upward text selection stops at the top margin of text area #272
-Fix: After entering and exiting full screen mode, the Macro tool buttons auto appear on the toolbar #273
-Fix: Bookmark background color could not be saved
-Update Hunspell to 1.7.0
-Update dictionary download URL
-Update translations
+* New: Use input file ext as SaveAs file type filter
+* New: Use javascript syntax for typescript at first
+* New: ArchLinux/Manjaro package support
+* New: Better Dark theme based on popular ones
+* New: Change default color of active line marker
+* New: Highlight word color can be configed
+* New: Use backgroud color of text for rest of the line
+* Fix: Size issue of MacroDialog
+* Fix: Save new created empty file as would cause crash #271
+* Fix: Upward text selection stops at the top margin of text area #272
+* Fix: After entering and exiting full screen mode, the Macro tool buttons auto appear on the toolbar #273
+* Fix: Bookmark background color could not be saved
+* Update Hunspell to 1.7.0
+* Update dictionary download URL
+* Update translations
 
 Todo
 =====
