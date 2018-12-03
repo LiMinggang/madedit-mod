@@ -805,6 +805,7 @@ public:
 	void PurgeRecentFonts();
 	void PurgeRecentEncodings();
 	void OnTimer(wxTimerEvent& event);
+	void ShowSelectionTab();
 private:
 	enum MadMacroMode
 	{ emMacroStopped = 0, emMacroRecoding, emMacroRunning };

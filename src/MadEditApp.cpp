@@ -809,6 +809,7 @@ void MadEditApp::ShowMainFrame( MadEditFrame *mainFrame, bool maximize )
 		}
 #endif
 		mainFrame->Show( true );
+		mainFrame->ShowSelectionTab();
 	}
 }
 

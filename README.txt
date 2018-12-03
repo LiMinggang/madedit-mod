@@ -119,6 +119,9 @@ FreeBSD packaging (with FreeBSD 10.01)
 2. aclocal version in aclocal.m4
 3. stdc++ version
 
+Mod v0.4.16
+Fix: wxAuiNotebook don't show selected tab if it's beyond the view boundary
+
 Mod v0.4.15
 1.New: Use input file ext as SaveAs file type filter
 2.New: Use javascript syntax for typescript at first
