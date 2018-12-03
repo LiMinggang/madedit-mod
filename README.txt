@@ -120,7 +120,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 3. stdc++ version
 
 Mod v0.4.16
-Fix: wxAuiNotebook don't show selected tab if it's beyond the view boundary
+Fix: wxAuiNotebook don't show selected tab automatically if it's beyond the view boundary
 
 Mod v0.4.15
 1.New: Use input file ext as SaveAs file type filter
