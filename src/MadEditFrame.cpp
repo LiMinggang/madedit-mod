@@ -4261,6 +4261,8 @@ void MadEditFrame::OnActivate( wxActivateEvent &evt )
 		g_ActiveMadEdit->ReloadByModificationTime( true );
 	}
 
+	ShowSelectionTab();
+
 	evt.Skip();
 }
 
