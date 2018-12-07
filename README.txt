@@ -120,6 +120,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 3. stdc++ version
 
 Mod v0.4.16
+New: Change foreground and backgroud colour for all the text controls in main frame
 Fix: wxAuiNotebook don't show selected tab automatically if it's beyond the view boundary
 
 Mod v0.4.15

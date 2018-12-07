@@ -4206,4 +4206,20 @@ void MadEdit::RestoreBookmarks( std::vector<int> & linenums )
 	Refresh( false );
 }
 
+wxColour & const MadEdit::GetTextBgColor()
+{
+	if( m_Syntax )
+		return m_Syntax->GetAttributes( aeText )->bgcolor;
+	else
+		return wxNullColour;
+}
+
+wxColour & const MadEdit::GetTextFtColor()
+{
+	if (m_Syntax)
+		return m_Syntax->GetAttributes(aeText)->color;
+	else
+		return wxNullColour;
+}
+
 //----------

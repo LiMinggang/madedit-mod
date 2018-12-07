@@ -8264,13 +8264,34 @@ void MadEditFrame::OnViewToolbars( wxCommandEvent& event )
 	}
 }
 
+void MadEditFrame::UpdateControlsColour(const wxColour& colFt, const wxColour& colBg)
+{
+	m_FindInFilesResults->SetBackgroundColour(colBg);
+	m_FindInFilesResults->SetForegroundColour(colFt);
+	m_Encodings->SetBackgroundColour(colBg);
+	m_Encodings->SetForegroundColour(colFt);
+	m_Fonts->SetBackgroundColour(colBg);
+	m_Fonts->SetForegroundColour(colFt);
+	m_FontSizes->SetBackgroundColour(colBg);
+	m_FontSizes->SetForegroundColour(colFt);
+	m_LineSpaces->SetBackgroundColour(colBg);
+	m_LineSpaces->SetForegroundColour(colFt);
+	m_QuickSearch->SetBackgroundColour(colBg);
+	m_QuickSearch->SetForegroundColour(colFt);
+	m_Syntaxs->SetBackgroundColour(colBg);
+	m_Syntaxs->SetForegroundColour(colFt);
+}
+
 void MadEditFrame::UpdateFontEncoding( )
 {
 	if( g_ActiveMadEdit )
 	{
 		m_Encodings->SetSelection(m_Encodings->FindString(g_ActiveMadEdit->GetEncodingName()));
 		m_Syntaxs->SetSelection(m_Syntaxs->FindString(wxGetTranslation(g_ActiveMadEdit->GetSyntaxTitle())));
-
+		
+		const wxColour& colBg = g_ActiveMadEdit->GetTextBgColor();
+		const wxColour& colFt = g_ActiveMadEdit->GetTextFtColor();
+		UpdateControlsColour(colFt, colBg);
 		wxString name;
 		int size;
 		g_ActiveMadEdit->GetFont( name, size );
@@ -8808,6 +8829,9 @@ void MadEditFrame::OnToolsHighlighting( wxCommandEvent& WXUNUSED(event) )
 
 	if( g_ActiveMadEdit )
 	{
+		const wxColour& colBg = g_ActiveMadEdit->GetTextBgColor();
+		const wxColour& colFt = g_ActiveMadEdit->GetTextFtColor();
+		UpdateControlsColour(colFt, colBg);
 		g_ActiveMadEdit->SetFocus();
 	}
 }

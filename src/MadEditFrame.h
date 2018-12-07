@@ -844,6 +844,7 @@ private:
 		void (MadEditFrame::*method)( wxUpdateUIEvent &);
 	} wxCmdUpdaterRangeMap_t;
     static wxCmdUpdaterRangeMap_t m_menu_ui_updater_range_map[];
+	void UpdateControlsColour(const wxColour& colFt, const wxColour& colBg);
 public:
 	MadMacroMode GetMadMacroStatus() {return m_MadMacroStatus;}
 	bool IsMacroRunning() {return ( m_MadMacroStatus == emMacroRunning );}

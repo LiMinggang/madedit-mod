@@ -1151,6 +1151,8 @@ public:
 	int GetMaxDisplaySize() { return m_MaxDisplaySize; }
 	void SetMaxDisplaySize( int maxchars );
 	void ConfigNewDocument();
+	wxColour & const GetTextBgColor();
+	wxColour & const GetTextFtColor();
 private: // Printing functions
 	int m_Printing;     // 0: no, <0: Text, >0: Hex
 	bool TextPrinting() { return m_Printing < 0; }
