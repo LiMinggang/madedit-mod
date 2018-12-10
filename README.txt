@@ -122,6 +122,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 Mod v0.4.16
 New: Change foreground and backgroud colour for all the text controls in main frame
 Fix: wxAuiNotebook don't show selected tab automatically if it's beyond the view boundary
+Update wxWidgets to 3.1.2
 
 Mod v0.4.15
 1.New: Use input file ext as SaveAs file type filter
