@@ -8291,7 +8291,8 @@ void MadEditFrame::UpdateFontEncoding( )
 		
 		const wxColour& colBg = g_ActiveMadEdit->GetTextBgColor();
 		const wxColour& colFt = g_ActiveMadEdit->GetTextFtColor();
-		UpdateControlsColour(colFt, colBg);
+		if(( colBg != wxNullColour ) && ( colFt != wxNullColour ))
+			UpdateControlsColour(colFt, colBg);
 		wxString name;
 		int size;
 		g_ActiveMadEdit->GetFont( name, size );
