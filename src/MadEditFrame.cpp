@@ -1151,7 +1151,7 @@ public:
 		SetSelection( GetPageIndex( it->madedit ) );
 	}
 
-	void ShowTab( ) {
+	void ShowActiveTab( ) {
 		if(GetPageCount() > 1) {
 			int activePage = m_tabs.GetActivePage();
 			if(activePage != -1) {
@@ -1159,6 +1159,8 @@ public:
 				int ctrl_idx = -1;
 				wxAuiNotebookPage& page_info = m_tabs.GetPage(activePage);
 				if(FindTab(page_info.window, &ctrl, &ctrl_idx)) {
+					DoSizing();
+            		ctrl->DoShowHide();
 					ctrl->MakeTabVisible(ctrl_idx, ctrl);
 				}
 			}
@@ -3992,7 +3994,7 @@ void MadEditFrame::MadEditFrameKeyDown( wxKeyEvent& event )
 
 void MadEditFrame::ShowSelectionTab()
 {
-	m_Notebook->ShowTab();
+	m_Notebook->ShowActiveTab();
 }
 
 void MadEditFrame::SetPageFocus( size_t pageId )
@@ -4261,7 +4263,8 @@ void MadEditFrame::OnActivate( wxActivateEvent &evt )
 		g_ActiveMadEdit->ReloadByModificationTime( true );
 	}
 
-	ShowSelectionTab();
+	if(g_ActiveMadEdit)
+		ShowSelectionTab();
 
 	evt.Skip();
 }
@@ -4524,7 +4527,7 @@ void MadEditFrame::ActivateFile(int num)
 	g_ActiveMadEdit->SetFocus();
 	UpdateFontEncoding();
 	
-	m_Notebook->ShowTab();
+	m_Notebook->ShowActiveTab();
 }
 
 bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeSelection /*= true*/ )
@@ -4692,7 +4695,7 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 		if(changeSelection)
 		{
 			m_Notebook->SetSelection( m_Notebook->GetPageCount() - 1 );
-			m_Notebook->ShowTab();
+			m_Notebook->ShowActiveTab();
 		}
 	}
 
