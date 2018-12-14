@@ -8598,6 +8598,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& WXUNUSED(event) )
 		if( !g_ForcePurgeThisTime ) { g_ForcePurgeThisTime = g_OptionsDialog->CheckBoxPurgeHistory->GetValue(); }
 		else { g_ForcePurgeThisTime = false; }
 
+		//New Document
 		m_Config->Write( wxT( "NewDocumentLineEnding" ), g_OptionsDialog->m_NewDocLineEnding );
 		m_Config->Write( wxT( "NewDocumentEncoding" ), g_OptionsDialog->m_NewDocEncoding );
 		m_Config->Write( wxT( "NewDocumentEncodingUTF8WithBOM" ), g_OptionsDialog->CheckBoxNewDocEncUTF8WithBOM->GetValue() );
@@ -8809,7 +8810,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& WXUNUSED(event) )
 		}
 
 		m_Config->SetPath( oldpath );
-	}	
+	}
 }
 
 void MadEditFrame::OnToolsHighlighting( wxCommandEvent& WXUNUSED(event) )
