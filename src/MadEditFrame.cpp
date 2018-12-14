@@ -8599,6 +8599,10 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& WXUNUSED(event) )
 		else { g_ForcePurgeThisTime = false; }
 
 		//New Document
+		if(g_OptionsDialog->RadioButtonNewDocEncOther->GetValue() == true)
+		{
+			g_OptionsDialog->m_NewDocEncoding = g_OptionsDialog->ComboBoxNewDocEncOther->GetString(g_OptionsDialog->ComboBoxNewDocEncOther->GetSelection());
+		}
 		m_Config->Write( wxT( "NewDocumentLineEnding" ), g_OptionsDialog->m_NewDocLineEnding );
 		m_Config->Write( wxT( "NewDocumentEncoding" ), g_OptionsDialog->m_NewDocEncoding );
 		m_Config->Write( wxT( "NewDocumentEncodingUTF8WithBOM" ), g_OptionsDialog->CheckBoxNewDocEncUTF8WithBOM->GetValue() );
@@ -8810,6 +8814,13 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& WXUNUSED(event) )
 		}
 
 		m_Config->SetPath( oldpath );
+	}
+	else
+	{
+		if(g_OptionsDialog->RadioButtonNewDocEncOther->GetValue() == true)
+		{
+			g_OptionsDialog->m_NewDocEncoding = g_OptionsDialog->ComboBoxNewDocEncOther->GetString(g_OptionsDialog->ComboBoxNewDocEncOther->GetSelection());
+		}
 	}
 }
 
