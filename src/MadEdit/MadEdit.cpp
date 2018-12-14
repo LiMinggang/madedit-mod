@@ -12162,7 +12162,7 @@ void MadEdit::ConfigNewDocument()
 	if(wxFONTENCODING_UTF8 == wxFontMapper::GetEncodingFromName( enc ))
 	{
 		m_Config->Read( wxT( "NewDocumentEncodingUTF8WithBOM" ), &bb, false );
-		if(0 == m_Lines->m_LineList.begin()->m_RowIndices[0].m_Start)
+		if(bb && (0 == m_Lines->m_LineList.begin()->m_RowIndices[0].m_Start))
 		{
 			ToggleBOM();
 		}
