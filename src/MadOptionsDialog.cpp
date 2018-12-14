@@ -1720,6 +1720,10 @@ void MadOptionsDialog::RadioButtonNewDocEncSelect(wxCommandEvent& event)
 		if(RadioButtonNewDocEncOther->GetId() == event.GetId())
 		{
 			ComboBoxNewDocEncOther->Enable(true);
+			if(ComboBoxNewDocEncOther->GetSelection() == wxNOT_FOUND && ComboBoxNewDocEncOther->GetCount() > 0)
+			{
+				ComboBoxNewDocEncOther->SetSelection(0);
+			}
 			m_NewDocEncoding = ComboBoxNewDocEncOther->GetString(ComboBoxNewDocEncOther->GetSelection());
 		}
 		else

@@ -123,6 +123,7 @@ Mod v0.4.16
 New: Change foreground and backgroud colour for all the text controls in main frame
 Fix: wxAuiNotebook don't show selected tab automatically if it's beyond the view boundary
 Fix: With BOM for UTF8 in New Document settings was ignored #275
+Fix: Saving the default encoding setting when choosing one from the drop down list #275
 Update wxWidgets to 3.1.2
 
 Mod v0.4.15
