@@ -512,6 +512,7 @@ private:
 	void OnUpdateUI_MenuSpellAdd2Dict( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuSpellRemoveFromDict( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuViewToolbarsToggleAll( wxUpdateUIEvent& event );
+	void OnUpdateUI_MenuViewToolbarsLockPosition( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuViewMenuBarToggle( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuViewToolbarList( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuViewTypewriterMode( wxUpdateUIEvent& event );

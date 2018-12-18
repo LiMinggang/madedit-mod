@@ -2155,6 +2155,7 @@ MadEditFrame::wxUIUpdateEvtHandlerMap_t MadEditFrame::m_menu_ui_updater_map[] =
 	{ menuSpellAdd2Dict, &MadEditFrame::OnUpdateUI_MenuSpellAdd2Dict },
 	{ menuSpellRemoveFromDict, &MadEditFrame::OnUpdateUI_MenuSpellRemoveFromDict },
 	{ menuToolBarsToggleAll, &MadEditFrame::OnUpdateUI_MenuViewToolbarsToggleAll },
+	{ menuToolBarsLockPos, &MadEditFrame::OnUpdateUI_MenuViewToolbarsLockPosition },
 	{ menuMenuBarToggle, &MadEditFrame::OnUpdateUI_MenuViewMenuBarToggle },
 	{ menuTypewriterMode, &MadEditFrame::OnUpdateUI_MenuViewTypewriterMode },
 	// tools
@@ -5525,21 +5526,25 @@ void MadEditFrame::OnUpdateUI_MenuSpellAdd2Dict( wxUpdateUIEvent& event )
 	event.Enable( g_ActiveMadEdit != nullptr && g_ActiveMadEdit->GetEditMode() != emHexMode
 				  && SpellCheckerManager::Instance().GetEnablePersonalDictionary() );
 }
+
 void MadEditFrame::OnUpdateUI_MenuViewTextMode( wxUpdateUIEvent& event )
 {
 	event.Enable( g_ActiveMadEdit != nullptr );
 	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() == emTextMode );
 }
+
 void MadEditFrame::OnUpdateUI_MenuViewColumnMode( wxUpdateUIEvent& event )
 {
 	event.Enable( g_ActiveMadEdit != nullptr );
 	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() == emColumnMode );
 }
+
 void MadEditFrame::OnUpdateUI_MenuViewHexMode( wxUpdateUIEvent& event )
 {
 	event.Enable( g_ActiveMadEdit != nullptr && !IsMacroRecording() );
 	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() == emHexMode );
 }
+
 void MadEditFrame::OnUpdateUI_MenuViewToolbarsToggleAll( wxUpdateUIEvent& event )
 {
 	event.Enable( true );
@@ -5556,13 +5561,18 @@ void MadEditFrame::OnUpdateUI_MenuViewToolbarsToggleAll( wxUpdateUIEvent& event 
 	event.Check( check );
 }
 
+void MadEditFrame::OnUpdateUI_MenuViewToolbarsLockPosition( wxUpdateUIEvent& event )
+{
+	event.Enable( true );
+	bool check = !(m_AuiManager.GetPane( WxToolBar[tbSTANDARD] ).IsDockable());
+	event.Check( check );
+}
+
 void MadEditFrame::OnUpdateUI_MenuViewMenuBarToggle( wxUpdateUIEvent& event )
 {
 	event.Enable( true );
 	event.Check( GetMenuBar() != nullptr );
 }
-
-
 void MadEditFrame::OnUpdateUI_MenuViewTypewriterMode( wxUpdateUIEvent& event )
 {
 	event.Enable( g_ActiveMadEdit != nullptr );
