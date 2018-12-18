@@ -2546,7 +2546,7 @@ CommandData CommandTable[] =
 	{ 0,			  1, 0,			         0,						    0,						 0,			       wxITEM_SEPARATOR, -1,			     0,						 0, 0, 0, 0, false},
 	{ 0,			  1, menuToolBars,          wxT( "menuToolBar" ),           _( "Toolbars" ),			 0,			       wxITEM_NORMAL,    -1,			     &g_Menu_Toolbars,          0, 0, 0, 0, false},
 	{ 0,			  2, menuToolBarsToggleAll, wxT( "menuToolBarsToggleAll" ), _( "Toggle Main Toolbar" ),  0,			       wxITEM_CHECK,     -1,			     0,						 _( "Show/Hide Main Toolbar" ), 0, 0, 0, false},
-	{ 0,			  2, menuToolBarsLockPos,   wxT( "menuToolBarsLockPos" ),   _( "Lock Toolbar postion" ), 0,			       wxITEM_CHECK,     -1,			     0,						 _( "Lock/Unlock Toolbar's Position" ), 0, 0, 0, false},
+	{ 0,			  2, menuToolBarsLockPos,   wxT( "menuToolBarsLockPos" ),   _( "Lock Toolbar" ), 0,			       wxITEM_CHECK,     -1,			     0,						 _( "Lock/Unlock Toolbar" ), 0, 0, 0, false},
 	{ 0,			  2, menuMenuBarToggle,     wxT( "menuMenuBarToggle" ),     _( "Toggle Menubar" ),  0,			           wxITEM_CHECK,     -1,			     0,						 _( "Show/Hide Main Menubar" ), 0, 0, 0, false},
 	{ 0,			  2, 0,			         0,						    0,						 0,			       wxITEM_SEPARATOR, -1,			     0,						 0, 0, 0, 0, false},
 	{ 0,			  1, 0,			         0,						    0,						 0,			       wxITEM_SEPARATOR, -1,			     0,						 0, 0, 0, 0, false},
@@ -10349,7 +10349,7 @@ void MadEditFrame::OnContextMenu( wxContextMenuEvent& WXUNUSED(event) )
 	{
 		g_Menu_FrameContext = new wxMenu( ( long )0 );
 		g_Menu_FrameContext->AppendCheckItem( menuToolBarsToggleAll, _( "Toggle Main Toolbar" ) );
-		g_Menu_FrameContext->AppendCheckItem( menuToolBarsLockPos, _( "Lock Toolbar Position" ) );
+		g_Menu_FrameContext->AppendCheckItem( menuToolBarsLockPos, _( "Lock Toolbar" ) );
 		g_Menu_FrameContext->AppendSeparator();
 		g_Menu_FrameContext->AppendCheckItem( menuMenuBarToggle, _( "Toggle Main Menubar" ) );
 
