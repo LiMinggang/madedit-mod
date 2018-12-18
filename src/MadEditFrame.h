@@ -270,6 +270,7 @@ enum   // menu id
 	// ToolBar
 	menuToolBars,
 	menuToolBarsToggleAll,
+	menuToolBarsLockPos,
 	menuToolBar1,
 	menuToolBar99 = menuToolBar1 + 98,
 	menuMenuBarToggle,
@@ -675,6 +676,7 @@ private:
 	void OnSpellAdd2Dict( wxCommandEvent& WXUNUSED(event) );
 	void OnSpellCheckRemoveFromDict( wxCommandEvent& WXUNUSED(event) );
 	void OnViewToolBarsToggleAll( wxCommandEvent& event );
+	void OnViewToolBarsLockPosistion( wxCommandEvent& event );
 	void OnViewMenuBarToggle( wxCommandEvent& event );
 	void OnViewToolbars( wxCommandEvent& WXUNUSED(event) );
 	void OnViewTypewriterMode( wxCommandEvent& WXUNUSED(event) );

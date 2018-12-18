@@ -1951,6 +1951,7 @@ MadEditFrame::wxCmdEvtHandlerMap_t MadEditFrame::m_menu_evt_map[] =
 	{ menuSpellAdd2Dict, &MadEditFrame::OnSpellAdd2Dict },
 	{ menuSpellRemoveFromDict, &MadEditFrame::OnSpellCheckRemoveFromDict },
 	{ menuToolBarsToggleAll, &MadEditFrame::OnViewToolBarsToggleAll },
+	{ menuToolBarsLockPos, &MadEditFrame::OnViewToolBarsLockPosistion },
 	{ menuMenuBarToggle, &MadEditFrame::OnViewMenuBarToggle },
 	{ menuIncFontSize, &MadEditFrame::OnIncDecFontSize },
 	{ menuDecFontSize, &MadEditFrame::OnIncDecFontSize },
@@ -2544,6 +2545,7 @@ CommandData CommandTable[] =
 	{ 0,			  1, 0,			         0,						    0,						 0,			       wxITEM_SEPARATOR, -1,			     0,						 0, 0, 0, 0, false},
 	{ 0,			  1, menuToolBars,          wxT( "menuToolBar" ),           _( "Toolbars" ),			 0,			       wxITEM_NORMAL,    -1,			     &g_Menu_Toolbars,          0, 0, 0, 0, false},
 	{ 0,			  2, menuToolBarsToggleAll, wxT( "menuToolBarsToggleAll" ), _( "Toggle Main Toolbar" ),  0,			       wxITEM_CHECK,     -1,			     0,						 _( "Show/Hide Main Toolbar" ), 0, 0, 0, false},
+	{ 0,			  2, menuToolBarsLockPos,   wxT( "menuToolBarsLockPos" ),   _( "Lock Toolbar postion" ), 0,			       wxITEM_CHECK,     -1,			     0,						 _( "Lock/Unlock Toolbar's Position" ), 0, 0, 0, false},
 	{ 0,			  2, menuMenuBarToggle,     wxT( "menuMenuBarToggle" ),     _( "Toggle Menubar" ),  0,			           wxITEM_CHECK,     -1,			     0,						 _( "Show/Hide Main Menubar" ), 0, 0, 0, false},
 	{ 0,			  2, 0,			         0,						    0,						 0,			       wxITEM_SEPARATOR, -1,			     0,						 0, 0, 0, 0, false},
 	{ 0,			  1, 0,			         0,						    0,						 0,			       wxITEM_SEPARATOR, -1,			     0,						 0, 0, 0, 0, false},
@@ -8455,6 +8457,23 @@ void MadEditFrame::OnViewToolBarsToggleAll( wxCommandEvent& event )
 	}
 }
 
+void MadEditFrame::OnViewToolBarsLockPosistion( wxCommandEvent& event )
+{
+	bool lock = !event.IsChecked();
+	ToolBarData * td = &ToolBarTable[0];
+
+	wxString toolbarpos;
+	wxSize tbsize;
+	while( td->toolbar_id >= 0 )
+	{
+		m_AuiManager.GetPane( WxToolBar[td->toolbar_id] ).Dockable(lock);
+
+		++td;
+	}
+	m_AuiManager.GetPane( m_QuickSearchBar ).Dockable(lock);	
+	m_AuiManager.Update();
+}
+
 void MadEditFrame::OnViewMenuBarToggle( wxCommandEvent& event )
 {
 	if( event.IsChecked() || event.GetInt() == -1 )
@@ -10320,6 +10339,7 @@ void MadEditFrame::OnContextMenu( wxContextMenuEvent& WXUNUSED(event) )
 	{
 		g_Menu_FrameContext = new wxMenu( ( long )0 );
 		g_Menu_FrameContext->AppendCheckItem( menuToolBarsToggleAll, _( "Toggle Main Toolbar" ) );
+		g_Menu_FrameContext->AppendCheckItem( menuToolBarsLockPos, _( "Lock Toolbar Position" ) );
 		g_Menu_FrameContext->AppendSeparator();
 		g_Menu_FrameContext->AppendCheckItem( menuMenuBarToggle, _( "Toggle Main Menubar" ) );
 
