@@ -5547,7 +5547,8 @@ void MadEditFrame::OnUpdateUI_MenuViewHexMode( wxUpdateUIEvent& event )
 
 void MadEditFrame::OnUpdateUI_MenuViewToolbarsToggleAll( wxUpdateUIEvent& event )
 {
-	event.Enable( true );
+	bool enable = (m_AuiManager.GetPane( WxToolBar[tbSTANDARD] ).IsDockable());
+	event.Enable( enable );
 
 	bool check = (m_AuiManager.GetPane( WxToolBar[tbSTANDARD] ).IsShown()
 		|| m_AuiManager.GetPane( WxToolBar[tbEDITOR] ).IsShown()
@@ -5585,6 +5586,8 @@ void MadEditFrame::OnUpdateUI_MenuViewToolbarList( wxUpdateUIEvent& event )
 
 	if( toolbarId < tbMAX )
 	{
+		bool enable = (m_AuiManager.GetPane( WxToolBar[toolbarId] ).IsDockable());
+		event.Enable( enable );
 		g_Menu_Toolbars->Check( menuItemId, m_AuiManager.GetPane( WxToolBar[toolbarId] ).IsShown() );
 	}
 }
