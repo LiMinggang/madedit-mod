@@ -6,12 +6,13 @@
 		<pos_arg>1</pos_arg>
 		<size_arg>1</size_arg>
 		<style>wxCAPTION|wxSYSTEM_MENU|wxCLOSE_BOX|wxDIALOG_NO_PARENT</style>
+		<handler function="MadConvEncDialogClose" entry="EVT_CLOSE" />
 		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
 			<orient>wxVERTICAL</orient>
 			<object class="sizeritem">
 				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
 					<object class="sizeritem">
-						<object class="wxStaticText" name="ID_STATICTEXT1" variable="StaticText1" member="yes">
+						<object class="wxStaticText" name="wxID_ANY" variable="StaticText1" member="yes">
 							<label>New Encoding:</label>
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
@@ -19,7 +20,7 @@
 						<option>1</option>
 					</object>
 					<object class="sizeritem">
-						<object class="wxComboBox" name="ID_WXCOMBOBOXENCODING" variable="WxComboBoxEncoding" member="yes">
+						<object class="wxComboBox" name="wxID_ANY" variable="WxComboBoxEncoding" member="yes">
 							<style>wxCB_READONLY|wxCB_DROPDOWN</style>
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
@@ -33,7 +34,7 @@
 			<object class="sizeritem">
 				<object class="wxBoxSizer" variable="BoxSizer3" member="no">
 					<object class="sizeritem">
-						<object class="wxRadioBox" name="ID_WXRADIOBOXOPTION" variable="WxRadioBoxOption" member="yes">
+						<object class="wxRadioBox" name="wxID_ANY" variable="WxRadioBoxOption" member="yes">
 							<label>Addtional Option</label>
 							<content>
 								<item>None</item>

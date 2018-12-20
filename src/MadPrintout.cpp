@@ -17,11 +17,10 @@ extern MadEdit *g_ActiveMadEdit;
 bool GetActiveMadEditPathNameOrTitle(wxString &name);
 
 // Global print data, to remember settings during the session
-//wxPrintData *g_PrintData = (wxPrintData*) NULL ;
+//wxPrintData *g_PrintData = (wxPrintData*) nullptr ;
 
 // Global page setup data
-wxPageSetupData *g_PageSetupData = (wxPageSetupData*) NULL;
-
+wxPageSetupData *g_PageSetupData = (wxPageSetupData*) nullptr;
 
 int MadPrintout::s_PrintoutCount=0;
 
@@ -38,7 +37,6 @@ MadPrintout::~MadPrintout()
         g_ActiveMadEdit->EndPrint();
     }
 }
-
 
 void MadPrintout::OnPreparePrinting()
 {
@@ -87,7 +85,6 @@ void MadPrintout::OnPreparePrinting()
     g_ActiveMadEdit->BeginPrint(printRect);
 }
 
-
 void MadPrintout::GetPageInfo(int *minPage, int *maxPage, int *pageFrom, int *pageTo)
 {
     // get info from g_ActiveMadEdit
@@ -105,8 +102,8 @@ void MadPrintout::GetPageInfo(int *minPage, int *maxPage, int *pageFrom, int *pa
 bool MadPrintout::HasPage(int page)
 {
     // get info from g_ActiveMadEdit
-    int count=g_ActiveMadEdit->GetPageCount();
-    return (page>=1 && page<=count);
+    size_t count=g_ActiveMadEdit->GetPageCount();
+    return ((size_t)page>=1 && (size_t)page<=count);
 }
 
 /* Header & Footer Print Marks
@@ -175,7 +172,6 @@ wxString TranslatePrintMark(const wxString &text, int pageNum)
 
     return newtext;
 }
-
 
 bool MadPrintout::OnPrintPage(int page)
 {
@@ -259,7 +255,7 @@ bool MadPrintout::OnPrintPage(int page)
     return true;
 }
 
-void MadPrintout::CalcPrintInfo(wxPageSetupData *pPageSetupData, double &xScale, double &yScale, wxRect &paintRect)
+void MadPrintout::CalcPrintInfo(wxPageSetupData *pPageSetupData, double &xScale, double &yScale, wxRect &printRect)
 {
     wxDC *dc = GetDC();
     int dcw, dch;
@@ -277,17 +273,17 @@ void MadPrintout::CalcPrintInfo(wxPageSetupData *pPageSetupData, double &xScale,
     double px = double(pagesize_x)/25.4 * double(sx);
     double py = double(pagesize_y)/25.4 * double(sy);
 
-    // calc paintRect scale
+    // calc printRect scale
     double top    = double(pttl.y)/double(pagesize_y);
     double left   = double(pttl.x)/double(pagesize_x);
     double bottom = double(ptbr.y)/double(pagesize_y);
     double right  = double(ptbr.x)/double(pagesize_x);
     
-    // calc the pixel-size of paintRect
-    paintRect.x = int(left * px);
-    paintRect.y = int(top  * py);
-    paintRect.width  = int(px) - int(right * px) - paintRect.x;
-    paintRect.height = int(py) - int(bottom * py) - paintRect.y;
+    // calc the pixel-size of printRect
+    printRect.x = int(left * px);
+    printRect.y = int(top  * py);
+    printRect.width  = int(px) - int(right * px) - printRect.x;
+    printRect.height = int(py) - int(bottom * py) - printRect.y;
 
     // calc scaling factor
     xScale = double(dcw) / px;

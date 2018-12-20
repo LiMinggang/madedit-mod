@@ -35,12 +35,12 @@ class MadSaveQueryDialog: public wxDialog
 	protected:
 
 		//(*Identifiers(MadSaveQueryDialog)
-		static const long ID_LISTCTRLMADFILELIST;
-		static const long ID_BUTTONSAVENONE;
-		static const long ID_CHECKBOXCONFIRM;
-		static const long ID_BUTTONSELECTALL;
-		static const long ID_BUTTONDSELECTALL;
-		static const long ID_BUTTONGOTO;
+		//static const long ID_LISTCTRLMADFILELIST;
+		//static const long ID_BUTTONSAVENONE;
+		//static const long ID_CHECKBOXCONFIRM;
+		//static const long ID_BUTTONSELECTALL;
+		//static const long ID_BUTTONDSELECTALL;
+		//static const long ID_BUTTONGOTO;
 		//*)
 
 		MadEditFrame * m_MainFrame;
@@ -58,9 +58,6 @@ class MadSaveQueryDialog: public wxDialog
 		//*)
 
         void InitWindowListIterms();
-		DECLARE_EVENT_TABLE()
 };
-
-extern MadSaveQueryDialog *g_ModifiedFileListDialog;
 
 #endif

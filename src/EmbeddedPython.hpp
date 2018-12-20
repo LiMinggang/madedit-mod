@@ -11,7 +11,7 @@
 #include <Python.h>
 
 #define BOOST_PYTHON_STATIC_LIB
-#include <boost/python.hpp>
+#include "../python/include/boost/python.hpp"
 #include <boost/function.hpp>
 
 #include <iostream>
@@ -36,7 +36,7 @@ namespace embedded_python {
 		py_redirector()
 		{ }
 
-		py_redirector( boost::function<void ( const std::string& )> f )
+		explicit py_redirector( boost::function<void ( const std::string& )> f )
 			: m_write_fn( f )
 		{ }
 

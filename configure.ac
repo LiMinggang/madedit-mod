@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
-AC_INIT([madedit-mod], [0.3.9], [minggang.li@gmail.com])
+AC_INIT([madedit-mod], [0.4.7], [minggang.li@gmail.com])
 AC_CONFIG_SRCDIR([src/MadEditApp.cpp])
 AC_CONFIG_HEADER([config.h])
 AC_PREFIX_DEFAULT([/usr])
@@ -19,7 +19,7 @@ AC_PROG_CXX
 AC_PROG_INSTALL
 AC_LANG(C++)
 
-CXXFLAGS="-O2 -Wno-write-strings -fno-strict-aliasing"
+CXXFLAGS="-O2 -Wno-write-strings -fno-strict-aliasing -fPIC "
 
 # Checks for MacOS
 IS_MACOS=
@@ -111,9 +111,8 @@ AC_ARG_WITH(xpressive,
 AC_ARG_WITH(boost, 
     [  --with-boost=PATH       use additional Boost library path,
                           otherwise use system include path],
-    [CXXFLAGS="$CXXFLAGS -I$withval"]
-    [LIBS="$LIBS $withval/stage/lib/libboost_python.a"])
-
+    [CXXFLAGS="$CXXFLAGS -I$withval"])
+#    [LIBS="$LIBS $withval/stage/lib/libboost_python.a"])
 
 # Checks for wxWidgets library
 WX_LIBS_set="0"

@@ -252,6 +252,29 @@ unicode_internal_decode(PyObject *self,
 //    return codec_tuple(decoded, consumed);
 //}
 
+//static PyObject *
+//utf_7_decode(PyObject *self,
+//             PyObject *args)
+//{
+//    Py_buffer pbuf;
+//    const char *errors = NULL;
+//    int final = 0;
+//    Py_ssize_t consumed;
+//    PyObject *decoded = NULL;
+//
+//    if (!PyArg_ParseTuple(args, "s*|zi:utf_7_decode",
+//                          &pbuf, &errors, &final))
+//        return NULL;
+//    consumed = pbuf.len;
+
+//    decoded = PyUnicode_DecodeUTF7Stateful(pbuf.buf, pbuf.len, errors,
+//                                           final ? NULL : &consumed);
+//    PyBuffer_Release(&pbuf);
+//    if (decoded == NULL)
+//        return NULL;
+//    return codec_tuple(decoded, consumed);
+//}
+
 static PyObject *
 utf_8_decode(PyObject *self,
             PyObject *args)

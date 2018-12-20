@@ -1,0 +1,381 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{1296E799-D8A5-411A-81B6-6AAF79986070}</ProjectGuid>
+    <RootNamespace>boostpython</RootNamespace>
+    <Keyword>ManagedCProj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\..\python\include;$(SolutionDir)..\..\minipython\Include;$(BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE;BOOST_PYTHON_STATIC_LIB;Py_NO_ENABLE_SHARED;BOOST_ALL_NO_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <Optimization>Disabled</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)/../../python/include;$(SolutionDir)/../../minipython/Include;$(BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BOOST_PYTHON_STATIC_LIB;BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE;Py_NO_ENABLE_SHARED;BOOST_DEBUG_PYTHON;BOOST_ALL_NO_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>$(SolutionDir)/../../python/include;$(SolutionDir)/../../minipython/Include;$(BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE;BOOST_PYTHON_STATIC_LIB;Py_NO_ENABLE_SHARED;BOOST_ALL_NO_LIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>$(SolutionDir)/../../python/include;$(SolutionDir)/../../minipython/Include;$(BOOST);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BOOST_PYTHON_STATIC_LIB;BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE;Py_NO_ENABLE_SHARED;BOOST_ALL_NO_LIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <Lib>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </Reference>
+    <Reference Include="System.Data">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </Reference>
+    <Reference Include="System.Xml">
+      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\python\src\dict.cpp" />
+    <ClCompile Include="..\..\python\src\errors.cpp" />
+    <ClCompile Include="..\..\python\src\exec.cpp" />
+    <ClCompile Include="..\..\python\src\import.cpp" />
+    <ClCompile Include="..\..\python\src\list.cpp" />
+    <ClCompile Include="..\..\python\src\long.cpp" />
+    <ClCompile Include="..\..\python\src\module.cpp" />
+    <ClCompile Include="..\..\python\src\object_operators.cpp" />
+    <ClCompile Include="..\..\python\src\object_protocol.cpp" />
+    <ClCompile Include="..\..\python\src\slice.cpp" />
+    <ClCompile Include="..\..\python\src\str.cpp" />
+    <ClCompile Include="..\..\python\src\tuple.cpp" />
+    <ClCompile Include="..\..\python\src\wrapper.cpp" />
+    <ClCompile Include="..\..\python\src\object\class.cpp" />
+    <ClCompile Include="..\..\python\src\object\enum.cpp" />
+    <ClCompile Include="..\..\python\src\object\function.cpp" />
+    <ClCompile Include="..\..\python\src\object\function_doc_signature.cpp" />
+    <ClCompile Include="..\..\python\src\object\inheritance.cpp" />
+    <ClCompile Include="..\..\python\src\object\iterator.cpp" />
+    <ClCompile Include="..\..\python\src\object\life_support.cpp" />
+    <ClCompile Include="..\..\python\src\object\pickle_support.cpp" />
+    <ClCompile Include="..\..\python\src\object\stl_iterator.cpp" />
+    <ClCompile Include="..\..\python\src\converter\arg_to_python_base.cpp" />
+    <ClCompile Include="..\..\python\src\converter\builtin_converters.cpp" />
+    <ClCompile Include="..\..\python\src\converter\from_python.cpp" />
+    <ClCompile Include="..\..\python\src\converter\registry.cpp" />
+    <ClCompile Include="..\..\python\src\converter\type_id.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\python\include\boost\python.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\arg_from_python.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\args.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\args_fwd.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\back_reference.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\base_type_traits.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\bases.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\borrowed.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\call.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\call_method.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\cast.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\class.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\class_fwd.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\copy_const_reference.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\copy_non_const_reference.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\data_members.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\def.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\def_visitor.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\default_call_policies.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\dict.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\docstring_options.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\enum.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\errors.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\exception_translator.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\exec.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\extract.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\handle.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\handle_fwd.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\has_back_reference.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\implicit.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\import.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\init.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\instance_holder.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\iterator.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\list.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\long.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\lvalue_from_pytype.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\make_constructor.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\make_function.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\manage_new_object.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\module.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\module_init.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\numpy.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object_attributes.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object_call.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object_core.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object_fwd.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object_items.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object_operators.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object_protocol.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object_protocol_core.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object_slices.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\opaque_pointer_converter.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\operators.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\other.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\overloads.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\override.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\pointee.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\proxy.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\ptr.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\pure_virtual.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\raw_function.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\refcount.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\reference_existing_object.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\register_ptr_to_python.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\return_arg.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\return_by_value.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\return_internal_reference.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\return_opaque_pointer.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\return_value_policy.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\scope.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\self.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\signature.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\slice.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\slice_nil.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\ssize_t.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\stl_iterator.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\str.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\tag.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\to_python_converter.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\to_python_indirect.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\to_python_value.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\tuple.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\type_id.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\with_custodian_and_ward.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\wrapper.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\converter\arg_from_python.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\converter\arg_to_python.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\converter\arg_to_python_base.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\converter\as_to_python_function.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\converter\builtin_converters.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\converter\constructor_function.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\converter\context_result_converter.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\converter\convertible_function.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\converter\from_python.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\converter\implicit.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\converter\obj_mgr_arg_from_python.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\converter\object_manager.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\converter\pointer_type_id.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\converter\pyobject_traits.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\converter\pyobject_type.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\converter\pytype_function.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\converter\pytype_object_mgr_traits.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\converter\registered.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\converter\registered_pointee.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\converter\registrations.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\converter\registry.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\converter\return_from_python.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\converter\rvalue_from_python_data.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\converter\shared_ptr_deleter.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\converter\shared_ptr_from_python.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\converter\shared_ptr_to_python.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\converter\to_python_function_type.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object\add_to_namespace.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object\class.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object\class_detail.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object\class_metadata.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object\class_wrapper.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object\enum_base.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object\find_instance.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object\forward.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object\function.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object\function_doc_signature.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object\function_handle.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object\function_object.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object\inheritance.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object\inheritance_query.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object\instance.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object\iterator.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object\iterator_core.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object\life_support.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object\make_holder.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object\make_instance.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object\make_ptr_instance.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object\pickle_support.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object\pointer_holder.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object\py_function.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object\stl_iterator_core.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object\value_holder.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\object\value_holder_fwd.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\aix_init_module.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\api_placeholder.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\borrowed_ptr.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\caller.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\config.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\construct.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\convertible.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\copy_ctor_mutates_rhs.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\cv_category.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\dealloc.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\decorated_type_id.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\decref_guard.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\def_helper.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\def_helper_fwd.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\defaults_def.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\defaults_gen.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\dependent.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\destroy.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\enable_if.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\exception_handler.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\force_instantiate.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\if_else.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\indirect_traits.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\invoke.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\is_auto_ptr.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\is_shared_ptr.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\is_wrapper.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\is_xxx.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\make_keyword_range_fn.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\make_tuple.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\map_entry.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\mpl_lambda.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\msvc_typeinfo.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\none.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\not_specified.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\nullary_function_adaptor.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\operator_id.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\overloads_fwd.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\pointee.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\prefix.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\preprocessor.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\python22_fixed.h" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\python_type.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\raw_pyobject.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\referent_storage.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\result.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\scope.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\sfinae.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\signature.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\string_literal.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\target.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\translate_exception.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\type_list.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\type_list_impl.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\unwind_type.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\unwrap_type_id.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\unwrap_wrapper.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\value_arg.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\value_is_shared_ptr.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\value_is_xxx.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\void_ptr.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\void_return.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\wrap_python.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\detail\wrapper_base.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\suite\indexing\container_utils.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\suite\indexing\indexing_suite.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\suite\indexing\detail\indexing_suite_detail.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\suite\indexing\map_indexing_suite.hpp" />
+    <ClInclude Include="..\..\python\include\boost\python\suite\indexing\vector_indexing_suite.hpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

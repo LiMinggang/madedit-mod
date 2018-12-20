@@ -2,7 +2,7 @@ MadPython for MadEdit Mod
 ====
 Backgroud:
 ====
-MadEdit is a cross-platform Text/Hex Editor written in C++ & wxWidgets.
+MadEdit is a cross-platform Text/Hex Editor written in C++  wxWidgets.
 MadEdit supports many useful functions, e.g. SyntaxHighlightings, WordWraps, 
 Encodings, Column/Hex Modes, and a Plugin system(not work yet).
 In HexMode, MadEdit can open large files which size is up to 32GB (INT_MAX*16).
@@ -12,7 +12,7 @@ About:
 MadPython is a minimized Python which is used as an embedded macro script for 
 automation of MadEdit-Mod. The Python is based on the work of Adie
 (http://www.adintr.com/article/blog/embedpython_source.html) and was updated 
-to Python 2.7.11. Lots of Python modules were removed to reduce the size of it. 
+to Python 2.7.14. Lots of Python modules were removed to reduce the size of it. 
 So, you may get errors while importing some of the standard modules. However, 
 I don't think it's a problem for the purpose to use it as a macro script language.
 
@@ -32,10 +32,14 @@ Note:
 
     Not supported Python internal ojbects: bytearray, memoryobject
 
+Note:
+    You can still extend MadPython by writing a module for it just like the 
+    extention module for Python. Eg. https://docs.python.org/2/tutorial/modules.html
+
 C++ Key word|In Python's world
 ------------|------------------
 void        |No return value
-int         |integer
+int/long    |integer
 string      |string
 tuple       |tuple
 bool        |bool
@@ -72,9 +76,10 @@ Supported method list:
 ====
 void ProcessCommand(int command)
 void InsertWChar(int key)
-void InsertStr(const std::string &str)
+void InsertStr(std::string str)
 void InsertIncrementalNumber(int initial, int step, int total, int stepType,
                         int fmt, int align, bool zeroPad)
+void InsertNewline()
 void ScrollLineUp()
 void ScrollLineDown()
 void ScrollPageUp()
@@ -84,27 +89,27 @@ void ScrollRight()
 void GoToLine(int line)
 void Goto(long pos)
 void GoToLineColumn(int line, int column)
-void SetSyntax(const std::string &title)
+void SetSyntax(std::string title)
 std::string GetSyntaxTitle()
 void LoadDefaultSyntaxScheme()
-void SetEncoding(const wxString &encname)
+void SetEncoding(std::string encname)
 std::string GetEncodingName()
 std::string GetEncodingDescription()
-int GetEncodingType()
+long GetEncodingType()
 bool GetRecordCaretMovements()
 void SetRecordCaretMovements(bool value)
-void SetTextFont(const std::string &name, int size, bool forceReset)
-void SetHexFont(const std::string &name, int size, bool forceReset)
+void SetTextFont(std::string name, int size, bool forceReset)
+void SetHexFont(std::string name, int size, bool forceReset)
 mad_py::tuple GetTextFont()
 mad_py::tuple GetHexFont()
 mad_py::tuple GetFontNameSize()
-void SetFontA(const std::string &name, int size)
+void SetFontA(std::string name, int size)
 void SetFixedWidthMode(bool mode)
 bool GetFixedWidthMode()
 void SetLineSpacing(int percent)
 long GetLineSpacing()
 void SetEditMode(MadEditMode mode)
-int GetEditMode()
+long GetEditMode()
 void SetSingleLineMode(bool mode)
 void SetTabColumns(long value)
 long GetTabColumns()
@@ -115,7 +120,7 @@ bool GetInsertSpacesInsteadOfTab()
 void SetWantTab(bool value)
 bool GetWantTab()
 void SetWordWrapMode(int mode)
-int GetWordWrapMode()
+long GetWordWrapMode()
 void SetShowEndOfLine(bool value)
 void SetShowTabChar(bool value)
 void SetShowSpaceChar(bool value)
@@ -145,40 +150,43 @@ bool GetMouseSelectToCopyWithCtrlKey()
 void SetMouseSelectToCopyWithCtrlKey(bool value)
 bool GetMiddleMouseToPaste()
 void SetMiddleMouseToPaste(bool value)
-int GetMaxWordWrapWidth()
-int GetUCharWidth(int uc)
-int GetHexUCharWidth(int uc)
-int GetUCharType(int uc)
+long GetMaxWordWrapWidth()
+long GetUCharWidth(int uc)
+long GetHexUCharWidth(int uc)
+long GetUCharType(int uc)
 // all are zero-based
 mad_py::tuple GetCaretPositionA()
-int GetCaretPositionB()
+long GetCaretPositionB()
 std::string GetFileName()
-int GetFileSize()
+long GetFileSize()
 bool IsSelected()
-int GetSelectionSize()
-int GetSelectionBeginPos()
-int GetSelectionEndPos()
+bool IsZeroSelected()
+long GetLineBeginPos( int line )
+long GetSelectionSize()
+long GetSelectionBeginPos()
+long GetSelectionEndPos()
 // return -1 for no selection
 mad_py::tuple GetSelectionLineId()
-int GetLineCount()
+long GetLineCount()
 void ConvertNewLineType(MadNewLineType type)
 void SetInsertNewLineType(MadNewLineType type)
-int GetNewLineType()
-int GetInsertNewLineType()
+long GetNewLineType()
+long GetInsertNewLineType()
 bool IsModified()
 long GetModificationTime()
 void SetReadOnly(bool value)
 bool IsReadOnly()
 bool IsTextFile()
 std::string GetSelText()
+std::string GetRangeText( long begpos, long endpos )
 std::string GetText(bool ignoreBOM = true)
-void SetText(const std::string &ws)
+void SetText(std::string ws)
 // line: zero based
 // return true for full line, false for partial line
 mad_py::tuple GetLine(int line, size_t maxlen = 0, bool ignoreBOM = true)
-int GetLineByPos(int pos)
-const std::string GetSelHexString(bool withSpace)
-const std::string GetWordFromCaretPos()
+long GetLineByPos(int pos)
+std::string GetSelHexString(bool withSpace)
+std::string GetWordFromCaretPos()
 void Delete()
 void CutLine()
 void DeleteLine()
@@ -192,45 +200,53 @@ void PasteFromClipboard()
 void DndBegDrag()
 void DndDrop()
 bool CanPaste()
-void CopyToClipboardB(std::string &txt)
+void CopyToClipboardB(std::string txt)
 bool CanUndo()
 bool CanRedo()
 void Undo()
 void Redo()
+bool CanGoBack()
+bool CanGoForward()
+void GoBack()
+void GoForward()
+
 void SetCaretPosition(int pos, int selbeg=-1, int selend=-1)
 bool HasBracePair()
 void GoToLeftBrace()
 void GoToRightBrace()
 // search in [rangeFrom, rangeTo], default in [CaretPos, EndOfDoc]
-int FindTextNext(const std::string &text,
+long FindTextNext(std::string text,
                         bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false,
                         int rangeFrom = -1, int rangeTo = -1)
 // search in [rangeFrom, rangeTo], rangeFrom > rangeTo, default in [CaretPos, BeginOfDoc]
-int FindTextPrevious(const std::string &text,
+long FindTextPrevious(std::string text,
                             bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false,
                             int rangeFrom = -1, int rangeTo = -1)
 // search in [rangeFrom, rangeTo], default in [CaretPos, EndOfDoc]
-int FindHexNext(const std::string &hexstr, int rangeFrom = -1, int rangeTo = -1)
+long FindHexNext(std::string hexstr, int rangeFrom = -1, int rangeTo = -1)
 // search in [rangeFrom, rangeTo], rangeFrom > rangeTo, default in [CaretPos, BeginOfDoc]
-int FindHexPrevious(const std::string &hexstr, int rangeFrom = -1, int rangeTo = -1)
+long FindHexPrevious(std::string hexstr, int rangeFrom = -1, int rangeTo = -1)
 // replace the selected text that must match expr
-int ReplaceText(const std::string &expr, const std::string &fmt,
+long ReplaceText(std::string expr, std::string fmt,
                              bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false,
                              int rangeFrom = -1, int rangeTo = -1)
-int ReplaceHex(const std::string &expr, const std::string &fmt,
+long ReplaceTextNoDoubleCheck(std::string expr, std::string fmt,
+                             bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false,
+                             int rangeFrom = -1, int rangeTo = -1)
+long ReplaceHex(std::string expr, std::string fmt,
                              int rangeFrom = -1, int rangeTo = -1)
 // return the replaced count or SR_EXPR_ERROR
-int ReplaceTextAll(const std::string &expr, const std::string &fmt,
+long ReplaceTextAll(std::string expr, std::string fmt,
                     bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false,
                     int rangeFrom = -1, int rangeTo = -1)
-int ReplaceHexAll(const std::string &expr, const std::string &fmt,
+long ReplaceHexAll(std::string expr, std::string fmt,
                     int rangeFrom = -1, int rangeTo = -1)
-// list the matched data to pbegpos & pendpos
+// list the matched data to pbegpos  pendpos
 // return the found count or SR_EXPR_ERROR
-int FindTextAll(const std::string &expr, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false)
-int FindHexAll(const std::string &expr)
-bool LoadFromFile(const std::string &filename, const std::string &encoding=std::string(""))
-bool SaveToFile(const std::string &filename)
+long FindTextAll(std::string expr, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false)
+long FindHexAll(std::string expr)
+bool LoadFromFile(std::string filename, std::string encoding=std::string(""))
+bool SaveToFile(std::string filename)
 bool Reload()
 // if the file is modified by another app, reload it.
 bool ReloadByModificationTime()
@@ -239,11 +255,11 @@ void RestorePosition(int pos, int toprow)
 // write back to the original FileName
 // if FileName is empty, ask the user to get filename
 // return wxID_YES(Saved), wxID_NO(Not Saved), or wxID_CANCEL
-int Save(bool ask, const std::string &title, bool saveas)
-void SetBookmark()
+long Save(bool ask, std::string title, bool saveas)
+void ToggleBookmark()
 void GotoNextBookmark()
 void GotoPreviousBookmark()
-void ConvertEncoding(const std::string &newenc, int flag)
+void ConvertEncoding(std::string newenc, int flag)
 void ConvertChineseA(int flag)
 bool HasBOM()
 void ToggleBOM()
@@ -269,23 +285,30 @@ void ConvertNewLineToWordWrap()
 void ConvertSpaceToTab()
 void ConvertTabToSpace()
 void CopyAsHexString(bool withSpace)
-void CopyRevertHex(const std::string &delimiters)
+void CopyRevertHex(std::string delimiters)
 mad_py::tuple WordCount(bool selection)
 void ColumnAlignLeft()
 void ColumnAlignRight()
-void InsertIncrementalNumber(int initial, int step, int total, int stepType, int fmt, int align, bool zeroPad, std::string &prefix, std::string & postfix)
+void InsertIncrementalNumber(int initial, int step, int total, int stepType, int fmt, int align, bool zeroPad, std::string prefix, std::string  postfix)
 void Astyle()
 void XMLFormat()
 void Markdown2Html()
 void Html2PlainText()
 void SetColumnSelection(int startlineid, int startxpos, int hlines, int wlines)
 void SelectWholeLine()
-int GetIndentCountByPos( long endpos )
-int MsgBox(const std::string& message, const std::string& caption = "Message", long style = wxOK | wxCENTRE)
-const std::string InputBox(const std::string& message, const std::string& caption = "Input Text")
+long GetIndentCountByPos( long endpos )
+int MsgBox(std::string message, std::string caption = "Message", long style = wxOK | wxCENTRE)
+std::string InputBox(std::string message, std::string caption = "Input Text")
 void SetInsertPairForSelection( bool value )
-bool GetInsertPairForSelection() { return m_InsertPairForSelection; }
-
+bool GetInsertPairForSelection()
+bool IsZeroSelected()
+void ToggleBookmarkInSearch( bool bookmark )
+void CutDelBookmarkedLines( bool copyLines = false )
+void DeleteUnmarkedLines()
+void CopyUnmarkedLines()
+void CutUnmarkedLines()
+void CopyCutDeleteUnmarkedLines( bool copyLines = false, bool deleteLines = false )
+void ReplaceBookmarkedLines()
 
 MadEditCommand
 ====
@@ -401,7 +424,7 @@ SC2TC// Simplified Chinese  ==> Traditional Chinese
 TC2SC// Traditional Chinese ==> Simplified Chinese
 JK2TC// Japanese Kanji      ==> Traditional Chinese
 JK2SC// Japanese Kanji      ==> Simplified Chinese
-C2JK  // Trad&Simp Chinese   ==> Japanese Kanji
+C2JK  // TradSimp Chinese   ==> Japanese Kanji
 
 MadNumberingStepType
 ====

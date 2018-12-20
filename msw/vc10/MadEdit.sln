@@ -10,6 +10,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pythoncore", "pythoncore.vc
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libhunspell", "libhunspell.vcxproj", "{53609BB3-D874-465C-AF7B-DF626DB0D89B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "boostpython", "boostpython.vcxproj", "{1296E799-D8A5-411A-81B6-6AAF79986070}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CF7AC3D1-E2DF-41D2-BEA6-1E2556CDEA26} = {CF7AC3D1-E2DF-41D2-BEA6-1E2556CDEA26}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Unicode Debug|Win32 = Unicode Debug|Win32
@@ -42,6 +47,14 @@ Global
 		{53609BB3-D874-465C-AF7B-DF626DB0D89B}.Unicode Release|Win32.Build.0 = Unicode Release|Win32
 		{53609BB3-D874-465C-AF7B-DF626DB0D89B}.Unicode Release|x64.ActiveCfg = Unicode Release|x64
 		{53609BB3-D874-465C-AF7B-DF626DB0D89B}.Unicode Release|x64.Build.0 = Unicode Release|x64
+		{1296E799-D8A5-411A-81B6-6AAF79986070}.Unicode Debug|Win32.ActiveCfg = Unicode Debug|Win32
+		{1296E799-D8A5-411A-81B6-6AAF79986070}.Unicode Debug|Win32.Build.0 = Unicode Debug|Win32
+		{1296E799-D8A5-411A-81B6-6AAF79986070}.Unicode Debug|x64.ActiveCfg = Unicode Debug|x64
+		{1296E799-D8A5-411A-81B6-6AAF79986070}.Unicode Debug|x64.Build.0 = Unicode Debug|x64
+		{1296E799-D8A5-411A-81B6-6AAF79986070}.Unicode Release|Win32.ActiveCfg = Unicode Release|Win32
+		{1296E799-D8A5-411A-81B6-6AAF79986070}.Unicode Release|Win32.Build.0 = Unicode Release|Win32
+		{1296E799-D8A5-411A-81B6-6AAF79986070}.Unicode Release|x64.ActiveCfg = Unicode Release|x64
+		{1296E799-D8A5-411A-81B6-6AAF79986070}.Unicode Release|x64.Build.0 = Unicode Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

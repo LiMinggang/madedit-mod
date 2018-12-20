@@ -27,7 +27,7 @@ endif
 config.status: configure
 	dh_testdir
 	# Add here commands to configure the package.
-	CXXFLAGS="$(CXXFLAGS) -Wl,-z,defs" ./configure --host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE) --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info --with-boost=${HOME}/boost_1_61_0 --with-wxdir=${HOME}/wxWidgets-3.1.0
+	CXXFLAGS="$(CXXFLAGS) -Wl,-z,defs" ./configure --host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE) --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info --with-boost=${HOME}/boost_1_68_0 --with-wxdir=${HOME}/wxWidgets-3.1.2
 
 
 build: build-stamp

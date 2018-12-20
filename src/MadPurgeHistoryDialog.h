@@ -32,35 +32,25 @@ class MadPurgeHistoryDialog : public wxDialog
 		virtual ~MadPurgeHistoryDialog();
 
 		//(*Declarations(MadPurgeHistoryDialog)
-		wxCheckBox* wxCheckBoxRecentEncodings;
-		wxCheckBox* wxCheckBoxResetToolBarsInfoWin;
-		wxCheckBox* wxCheckBoxCaretPos;
-		wxCheckBox* wxCheckBoxRecentSearchedExcludeFilters;
-		wxCheckBox* wxCheckBoxAllAbove;
-		wxCheckBox* wxCheckBoxRecentFonts;
-		wxCheckBox* wxCheckBoxRecentSearchedDirectories;
 		wxButton* WxButtonCancel;
-		wxCheckBox* wxCheckBoxRecentSearchedTexts;
 		wxButton* WxButtonOK;
-		wxCheckBox* wxRecentSearchedFileFilters;
+		wxCheckBox* wxCheckBoxAllAbove;
+		wxCheckBox* wxCheckBoxCaretPos;
+		wxCheckBox* wxCheckBoxRecentEncodings;
 		wxCheckBox* wxCheckBoxRecentFiles;
+		wxCheckBox* wxCheckBoxRecentFonts;
 		wxCheckBox* wxCheckBoxRecentReplacedTexts;
+		wxCheckBox* wxCheckBoxRecentSearchedDirectories;
+		wxCheckBox* wxCheckBoxRecentSearchedExcludeFilters;
+		wxCheckBox* wxCheckBoxRecentSearchedTexts;
+		wxCheckBox* wxCheckBoxResetToolBarsInfoWin;
+		wxCheckBox* wxCheckBoxResetTransparency;
+		wxCheckBox* wxRecentSearchedFileFilters;
 		//*)
 
 	protected:
 
 		//(*Identifiers(MadPurgeHistoryDialog)
-		static const long ID_WXCHECKBOXRECENTFILES;
-		static const long ID_WXCHECKBOXRECENTFONTS;
-		static const long ID_WXCHECKBOXRECENTENCODINGS;
-		static const long ID_WXCHECKBOXRECENTSEARCHEDTEXTS;
-		static const long ID_WXCHECKBOXRECENTREPLACEDTEXTS;
-		static const long ID_WXCHECKBOXRECENTSEARCHEDDIRECTORIES;
-		static const long ID_WXRECENTSEARCHEDFILEFILTERS;
-		static const long ID_WXCHECKBOXRECENTSEARCHEDEXCLUDEFILTERS;
-		static const long ID_WXCHECKBOXCARETPOS;
-		static const long ID_CHECKBOXRESETTOOLBARSINFOWIN;
-		static const long ID_WXCHECKBOXALLABOVE;
 		//*)
 
 	private:
@@ -73,8 +63,6 @@ class MadPurgeHistoryDialog : public wxDialog
 		void wxCheckBoxAllAboveClick(wxCommandEvent& event);
 		void MadPurgeHistoryDialogKeyDown(wxKeyEvent& event);
 		//*)
-
-		DECLARE_EVENT_TABLE()
 };
 
 #endif

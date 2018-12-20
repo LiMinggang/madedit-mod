@@ -8,6 +8,13 @@
 
 #ifndef _MADEDIT_H_
 #define _MADEDIT_H_
+#include "../MadUtils.h"
+
+#if CPLUSEPLUSE98
+	#include <boost/shared_ptr.hpp>
+#else
+	#include <memory>
+#endif
 
 #include <wx/wxprec.h>
 
@@ -18,14 +25,6 @@
 #ifndef WX_PRECOMP
 	// Include your minimal set of headers here, or wx.h
 	#include <wx/wx.h>
-#endif
-
-#include <wx/confbase.h>
-#include <string>
-#if __cplusplus <= 199711L
-	#include <boost/shared_ptr.hpp>
-#else
-	#include <memory>
 #endif
 
 #include "MadLines.h"
@@ -51,6 +50,8 @@
 #endif
 
 #define DEFAULT_MAX_LINELEN 4096
+#define MAX_FONT_SIZE 72
+#define DEFAULT_FONT_SIZE 12
 
 enum { ID_VSCROLLBAR = 19876, ID_HSCROLLBAR };
 
@@ -65,6 +66,7 @@ class MadReplaceDialog;
 class wxSpellCheckEngineInterface;
 
 wxDECLARE_EVENT( CHECK_MODIFICATION_TIME, wxCommandEvent );
+wxDECLARE_EVENT( UPDATE_HSCROLL_POS, wxCommandEvent );
 
 typedef void ( *OnSelectionChangedPtr )( MadEdit *madedit );
 typedef void ( *OnStatusChangedPtr )( MadEdit *madedit );
@@ -85,7 +87,7 @@ public:
 		int fontsize;
 		wxUint16 *widths;
 
-		FontWidthBuffer() {}
+		FontWidthBuffer() : fontsize(0), widths(nullptr) {fontname[0] = '\0';}
 		FontWidthBuffer( const wxString &fn, int fs, wxUint16 *ws )
 			: fontsize( fs ), widths( ws ) {
 			size_t count = fn.Length();
@@ -177,10 +179,10 @@ struct MadCaretPos
 	MadCaretPos(): pos( -1 ), rowid( 0 ), linepos( -1 ), lineid( 0 ), subrowid( 0 ), xpos( 0 ), extraspaces( 0 )
 	{}
 	wxFileOffset pos;     // position of whole file
-	int rowid;            // row-id. of whole file
-
 	wxFileOffset linepos; // position of this line
+
 	MadLineIterator iter; // line iterator
+	int rowid;            // row-id. of whole file
 	int lineid;           // id. of iterator in m_Lines->m_LineList
 	int subrowid;         // sub row-id. in this line
 
@@ -212,7 +214,6 @@ struct MadCaretPos
 	    extraspaces = cp.extraspaces;
 	}
 	*/
-
 };
 
 struct UCIterator;
@@ -235,7 +236,6 @@ enum MadReplaceResult
 
 class MadEdit: public MadEditSuperClass
 {
-	DECLARE_EVENT_TABLE()
 public:
 	static MadKeyBindings ms_KeyBindings;
 	enum {
@@ -259,6 +259,7 @@ private:
 	friend class MadEncoding;
 	friend class MadLines;
 	friend class MadMouseMotionTimer;
+	friend class MadDropTarget;
 
 	static int      ms_Count; // the count of MadEdit
 
@@ -274,6 +275,7 @@ private:
 
 	MadUndoBuffer   *m_UndoBuffer;
 	MadUndo         *m_SavePoint;
+	MadUndoBuffer   *m_CaretTracker;
 	bool            m_RecordCaretMovements;
 
 	bool            m_NeedSync;
@@ -289,10 +291,9 @@ private:
 	wxBitmap        *m_ClientBitmap, *m_MarkBitmap;
 	int             m_LastPaintBitmap;// 0:client, 1:mark
 
-	wxPoint         m_Space_Points[4], m_EOF_Points[5];
-	wxPoint         m_CR_Points[40], m_LF_Points[40], m_CRLF_Points[80];
-	int             m_CR_Points_Count, m_LF_Points_Count, m_CRLF_Points_Count;
-
+	wxPoint  m_Space_Points[4], m_EOF_Points[5];
+	wxPoint  m_CR_Points[40], m_LF_Points[40], m_CRLF_Points[80];
+	int      m_CR_Points_Count, m_LF_Points_Count, m_CRLF_Points_Count;
 
 	MadCaretPos     m_CaretPos;
 	MadUCQueue      m_ActiveRowUChars;  // ucs4 char cache of active row
@@ -304,12 +305,13 @@ private:
 	MadLineIterator m_ValidPos_iter;    // line iterator
 	int             m_ValidPos_lineid;  // line-id. of iterator
 	int             m_ValidPos_rowid;   // row-id. of iter
-	wxFileOffset    m_ValidPos_pos;     // position of line in whole file
 	int             m_UpdateValidPos;   // ==0: no update; <0 update always; >0 update if newpos<oldpos
+	wxFileOffset    m_ValidPos_pos;     // position of line in whole file
 
-	bool            m_Selection;
 	MadCaretPos     m_SelectionPos1, m_SelectionPos2;
 	MadCaretPos     *m_SelectionBegin, *m_SelectionEnd;
+	bool            m_Selection;
+	bool            m_ZeroSelection;
 	bool            m_SelectionStart;
 	wxFileOffset    m_SelectionStartPos;
 
@@ -433,31 +435,31 @@ private:
 
 	OnSelectionChangedPtr m_OnSelectionChanged;
 	OnStatusChangedPtr    m_OnStatusChanged;
+	OnStatusChangedPtr    m_OnFontChanged;
+	OnStatusChangedPtr    m_OnEncodingChanged;
+	OnStatusChangedPtr    m_OnSyntaxChanged;
+	OnStatusChangedPtr    m_OnLineSpaceChanged;
 	OnToggleWindowPtr     m_OnToggleWindow;
+	wxMenu *              m_RightClickMenu;
 	OnMouseRightUpPtr     m_OnMouseRightUp;
 	OnMouseRightUpPtr     m_OnVSMouseRightUp;
 	OnMouseRightUpPtr     m_OnHSMouseRightUp;
 	OnActivatePtr         m_OnActivate;
 
 	wxMilliClock_t m_lastDoubleClick;
-#if __cplusplus <= 199711L
+#if CPLUSEPLUSE98
 	boost::shared_ptr<wxSpellCheckEngineInterface> m_SpellCheckerPtr;
 #else
 	std::shared_ptr<wxSpellCheckEngineInterface> m_SpellCheckerPtr;
 #endif
     long           m_VSMousePos;
     long           m_HSMousePos;
+    int            m_MaxDisplaySize;
 	bool           m_SpellCheck;
 	bool           m_BookmarkInSearch;
     bool           m_TypewriterMode;
     bool           m_LDClickHighlight;
     bool           m_HasBackup;
-#ifdef __WXMSW__
-	bool m_IsWin98;
-	int  m_Win98LeadByte; // fixed that input DBCS char under win98
-	bool m_ProcessWin98LeadByte;
-#endif
-
 protected:
 
 	// GetLineByXXX() will get the wanted line from the nearest position(begin of lines, end of lines, or m_ValidPos)
@@ -527,11 +529,12 @@ protected:
 	void SetSelection( wxFileOffset beginpos, wxFileOffset endpos, bool bCaretAtBeginPos = false );
 
 	wxFileOffset GetColumnSelection( wxString *ws );
+	wxFileOffset GetColumnRange( wxString *ws, MadCaretPos *begpos, MadCaretPos *endpos );
 
-	// if(ws==NULL) SelectWord only;
+	// if(ws==nullptr) SelectWord only;
 	// else GetWord to ws;
-	void SelectWordFromCaretPos( wxString *ws, MadCaretPos * pos = NULL, bool bSelection = false );
-	void SelectLineFromCaretPos( wxString *ws = NULL, bool caretToBegOfSel = true );
+	void SelectWordFromCaretPos( wxString *ws, MadCaretPos * pos = nullptr, bool bSelection = false );
+	void SelectLineFromCaretPos( wxString *ws = nullptr, bool caretToBegOfSel = true );
 
 	bool PutTextToClipboard( const wxString &ws );
 	bool PutColumnDataToClipboard( const wxString &ws, int linecount );
@@ -553,11 +556,11 @@ protected:
 
 	void CopyFileDataToMem( MadBlockIterator begin, MadBlockIterator end );
 
-	// return the line-iterator and and lineid (if it is not NULL) by the pos
+	// return the line-iterator and and lineid (if it is not nullptr) by the pos
 	MadLineIterator DeleteInsertData( wxFileOffset pos,
 									  wxFileOffset delsize, /*OUT*/ MadBlockVector *deldata,
 									  wxFileOffset inssize, /*IN*/  MadBlockVector *insdata,
-									  /*OUT*/ int *lineid = NULL );
+									  /*OUT*/ int *lineid = nullptr );
 
 	void UCStoBlock( const ucs4_t *ucs, size_t count, MadBlock & block );
 	void InsertString( const ucs4_t *ucs, size_t count, bool bColumnEditing, bool moveCaret, bool bSelText, bool insert = false );
@@ -579,7 +582,7 @@ protected:
 	void InsertHexData( wxByte *hex, size_t count );
 
 	MadSearchResult Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadCaretPos &endpos,
-									  const wxString &text, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false, /*IN_OUT*/ucs4string *fmt = NULL, ucs4string *out = NULL );
+									  const wxString &text, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false, /*IN_OUT*/ucs4string *fmt = nullptr, ucs4string *out = nullptr );
 
 	MadSearchResult SearchHex( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadCaretPos &endpos,
 										 const wxByte *hex, size_t count );
@@ -634,6 +637,7 @@ protected:
 	void OnMouseLeaveWindow( wxMouseEvent &evt );
 	void OnMouseCaptureLost( wxMouseCaptureLostEvent &evt );
 	void OnCheckModificationTime( wxCommandEvent& evt );
+	void OnUpdateHScrollPos( wxCommandEvent& evt );
 
 	void OnEraseBackground( wxEraseEvent &evt );
 	void OnPaint( wxPaintEvent &evt );
@@ -648,7 +652,8 @@ protected:
 	WXLRESULT MSWWindowProc( WXUINT message, WXWPARAM wParam, WXLPARAM lParam );
 #endif
 
-#ifdef __WXGTK__
+//#ifdef __WXGTK__
+#if 0
 	void ConnectToFixedKeyPressHandler();
 #endif
 
@@ -668,11 +673,13 @@ public:
 	void ProcessCommand( MadEditCommand command );
 
 public: // basic functions
+	bool InsertString( const wxString & text );
+
 	void SetSyntax( const wxString &title );
 	MadSyntax* GetSyntax() { return m_Syntax; }
-	wxString GetSyntaxTitle() { return m_Syntax->m_Title; }
+	wxString GetSyntaxTitle() { return m_Syntax->m_SynAttr->m_Title; }
 	void UpdateSyntaxDictionary();
-#if __cplusplus <= 199711L
+#if CPLUSEPLUSE98
     boost::shared_ptr<PersonalDictionary>& GetSyntaxDictionary() { return m_Syntax->GetSyntaxDictionary(); }
 #else
     std::shared_ptr<PersonalDictionary>& GetSyntaxDictionary() { return m_Syntax->GetSyntaxDictionary(); }
@@ -707,6 +714,9 @@ public: // basic functions
 		else {
 			SetTextFont( name, size, false );
 		}
+
+		if(m_OnFontChanged)
+			m_OnFontChanged(this);
 	}
 
 	wxFont GetFont() {
@@ -785,7 +795,7 @@ public: // basic functions
 	bool GetLDClickHighlight() { return m_LDClickHighlight; }
     bool HasBackup() {return m_HasBackup;}
     void SetHasBackup(bool bk) {m_HasBackup = bk;}
-#if __cplusplus <= 199711L
+#if CPLUSEPLUSE98
     boost::shared_ptr<wxSpellCheckEngineInterface> &GetSpellChecker() { return m_SpellCheckerPtr; }
 #else
     std::shared_ptr<wxSpellCheckEngineInterface> &GetSpellChecker() { return m_SpellCheckerPtr; }
@@ -841,6 +851,7 @@ public: // basic functions
 	wxFileOffset GetFileSize() { return m_Lines->m_Size; }
 
 	bool IsSelected() { return m_Selection; }
+	bool IsZeroSelected() { return m_ZeroSelection; }
 	wxFileOffset GetSelectionSize();
 	wxFileOffset GetSelectionBeginPos() { return m_Selection ? m_SelectionBegin->pos : -1; }
 	wxFileOffset GetSelectionEndPos() { return m_Selection ? m_SelectionEnd->pos : -1; }
@@ -891,6 +902,8 @@ public: // basic functions
 	bool IsTextFile() { return m_Lines->m_MaxLineWidth >= 0; }
 
 	void GetSelText( wxString &ws );
+	void GetRangeText( wxString &ws, MadCaretPos *begpos, MadCaretPos *endpos );
+	void GetRangeText( wxString &ws, wxFileOffset &begpos, wxFileOffset &endpos );
 	void GetText( wxString &ws, bool ignoreBOM = true );
 	void SetText( const wxString &ws );
 
@@ -899,6 +912,7 @@ public: // basic functions
 	bool GetLine( wxString &ws, int line, size_t maxlen = 0, bool ignoreBOM = true );
 	bool GetLine( wxString &ws, MadLineIterator lit, size_t maxlen = 0, bool ignoreBOM = true );
 	int GetLineByPos( const wxFileOffset &pos );
+	wxFileOffset GetLineBeginPos( int line );
 
 	int GetIndentCountByPos( wxFileOffset pos );
 	void SelectWholeLine();
@@ -914,7 +928,7 @@ public: // basic functions
 	void DeleteLine() { ProcessCommand( ecDeleteLine ); }
 	void InsertTabChar() { ProcessCommand( ecInsertTabChar ); }
 	void InsertDateTime() { ProcessCommand( ecInsertDateTime ); }
-	void InsertIncrementalNumber( int intial, int step, int total, MadNumberingStepType stepType,
+	void InsertIncrementalNumber( int initial, int step, int total, MadNumberingStepType stepType,
 								  MadNumberFormat fmt, MadNumberAlign align, bool zeroPad, const wxString& prefix, const wxString& postfix );
 
 	void ColumnAlignLeft();
@@ -922,7 +936,10 @@ public: // basic functions
 	void HighlightWords();
 	void CopyBookmarkedLines();
 	void CutDelBookmarkedLines( bool copyLines = false );
-	void DeleteUnmarkedLines();
+	void DeleteUnmarkedLines() { CopyCutDeleteUnmarkedLines( false, true );}
+	void CopyUnmarkedLines() { CopyCutDeleteUnmarkedLines( true, false );}
+	void CutUnmarkedLines() { CopyCutDeleteUnmarkedLines( true, true );}
+	void CopyCutDeleteUnmarkedLines( bool copyLines = false, bool deleteLines = false );
 	void ReplaceBookmarkedLines();
 	void SelectAll();
 	void CutToClipboard();
@@ -934,13 +951,22 @@ public: // basic functions
 	void CopyToClipboard( const wxString & text ) {PutTextToClipboard( text );}
 
 	bool CanUndo() {
-		return m_UndoBuffer->CanUndo( !m_RecordCaretMovements );
+		return m_UndoBuffer->CanUndo( true/*!m_RecordCaretMovements*/ );
 	}
 	bool CanRedo() {
-		return m_UndoBuffer->CanRedo( !m_RecordCaretMovements );
+		return m_UndoBuffer->CanRedo( true/*!m_RecordCaretMovements*/ );
+	}
+
+	bool CanGoBack() {
+		return m_CaretTracker->CanUndo( false );
+	}
+	bool CanGoForward() {
+		return m_CaretTracker->CanRedo( false );
 	}
 	void Undo();
 	void Redo();
+    void GoBack();
+    void GoForward();
 
 	bool NeedSync() {return m_NeedSync;}
 	void SetNeedSync() {m_NeedSync = true;}
@@ -949,7 +975,7 @@ public: // basic functions
 	void GoToLine( int line );
 	void SetCaretPosition( wxFileOffset pos, wxFileOffset selbeg = -1, wxFileOffset selend = -1 );
 
-	bool HasBracePair() { return !m_Syntax->m_LeftBrace.empty(); }
+	bool HasBracePair() { return !m_Syntax->m_SynAttr->m_LeftBrace.empty(); }
 	void GoToLeftBrace() { ProcessCommand( ecLeftBrace ); }
 	void GoToRightBrace() { ProcessCommand( ecRightBrace ); }
 
@@ -978,16 +1004,21 @@ public: // basic functions
 	MadReplaceResult ReplaceHex( const wxString &expr, const wxString &fmt,
 								 wxFileOffset rangeFrom = -1, wxFileOffset rangeTo = -1 );
 
+    MadReplaceResult ReplaceTextNoDoubleCheck( const wxString &expr, const wxString &fmt,
+                                 bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
+                                 wxFileOffset rangeFrom, wxFileOffset rangeTo );
+
 	// return the replaced count or SR_EXPR_ERROR
 	int ReplaceTextAll( const wxString &expr, const wxString &fmt,
 						bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
-						vector<wxFileOffset> *pbegpos = NULL, vector<wxFileOffset> *pendpos = NULL,
+						vector<wxFileOffset> *pbegpos = nullptr, vector<wxFileOffset> *pendpos = nullptr,
 						wxFileOffset rangeFrom = -1, wxFileOffset rangeTo = -1 );
 	int ReplaceHexAll( const wxString &expr, const wxString &fmt,
-					   vector<wxFileOffset> *pbegpos = NULL, vector<wxFileOffset> *pendpos = NULL,
+					   vector<wxFileOffset> *pbegpos = nullptr, vector<wxFileOffset> *pendpos = nullptr,
 					   wxFileOffset rangeFrom = -1, wxFileOffset rangeTo = -1 );
 
 	bool NextRegexSearchingPos( MadCaretPos& cp, const wxString &expr );
+    bool MoveToNextRegexSearchingPos( const wxString &expr );
 
 	// list the matched data to pbegpos & pendpos
 	// return the found count or SR_EXPR_ERROR
@@ -1013,13 +1044,15 @@ public: // basic functions
 	int Save( bool ask, const wxString &title, bool saveas );
 
 	// add: gogo, 21.09.2009
-	void SetBookmark();
+	void ToggleBookmark();
 	void GotoNextBookmark();
 	void GotoPreviousBookmark();
 	void ClearAllBookmarks();
-	bool HasBookMark() {return m_Lines->m_LineList.HasBookMark();};
+	bool HasBookMark() {return m_Lines->m_LineList.HasBookMark();}	
+	void GetAllBookmarks( std::vector<int> & linenums );
+	void RestoreBookmarks( std::vector<int> & linenums );
 	//----------
-	void SetBookmarkInSearch( bool bookmark ) {m_BookmarkInSearch = bookmark;}
+	void ToggleBookmarkInSearch( bool bookmark ) {m_BookmarkInSearch = bookmark;}
 	bool IsSelecting() {return m_SelectionStart;}
 	void StartEndSelction();
 public: // advanced functions
@@ -1032,7 +1065,7 @@ public: // advanced functions
 	void ToggleBOM();
 
 	void IncreaseDecreaseIndent( bool incIndent );
-	bool HasLineComment() { return !m_Syntax->m_LineComment.empty(); }
+	bool HasLineComment() { return !m_Syntax->m_SynAttr->m_LineComment.empty(); }
 	void CommentUncomment( bool comment );
 
 	void ToUpperCase();
@@ -1076,12 +1109,26 @@ public:
 	void SetOnStatusChanged( OnStatusChangedPtr func ) {
 		m_OnStatusChanged = func;
 	}
+	void SetOnFontChanged( OnStatusChangedPtr func ) {
+		m_OnFontChanged = func;
+	}
+	void SetOnEncodingChanged( OnStatusChangedPtr func ) {
+		m_OnEncodingChanged = func;
+	}
+	void SetOnSyntaxChanged( OnStatusChangedPtr func ) {
+		m_OnSyntaxChanged = func;
+	}
+	void SetOnLineSpaceChanged( OnStatusChangedPtr func ) {
+		m_OnLineSpaceChanged = func;
+	}
 	void SetOnToggleWindow( OnToggleWindowPtr func ) {
 		m_OnToggleWindow = func;
 	}
 	void SetOnMouseRightUp( OnMouseRightUpPtr func ) {
 		m_OnMouseRightUp = func;
 	}
+	wxMenu * GetRightClickMenu() const { return m_RightClickMenu; }
+	void SetRightClickMenu( wxMenu * rmenu )        { m_RightClickMenu = rmenu; }
 	void SetOnVSMouseRightUp( OnMouseRightUpPtr func ) {
 		m_OnVSMouseRightUp = func;
 	}
@@ -1097,9 +1144,15 @@ public:
 	}
 	void ScrollTo( int scrollcmd );
     
-    long GetVSMousePos(){return m_VSMousePos;}
-    long GetHSMousePos(){return m_HSMousePos;}
+	long GetVSMousePos(){return m_VSMousePos;}
+	long GetHSMousePos(){return m_HSMousePos;}
+	void ShowZeroLenSelIndicator();
 
+	int GetMaxDisplaySize() { return m_MaxDisplaySize; }
+	void SetMaxDisplaySize( int maxchars );
+	void ConfigNewDocument();
+	const wxColour & GetTextBgColor() const;
+	const wxColour & GetTextFtColor() const;
 private: // Printing functions
 	int m_Printing;     // 0: no, <0: Text, >0: Hex
 	bool TextPrinting() { return m_Printing < 0; }
@@ -1130,6 +1183,7 @@ private: // Printing functions
 	int m_HexLineCountPerPage;
 	int m_PrintTotalHexLineCount;
 	MadEdit *m_PrintHexEdit;    // use a temporary MadEdit to print Hex-Data
+	static wxMenu * m_ZeroLenSelIndicator;
 
 public: // printing functions
 	void BeginPrint( const wxRect &printRect );
@@ -1164,6 +1218,7 @@ public: // utility functions
 
 	bool StringToHex( wxString ws, vector<wxByte> &hex );
 
+	static wxString m_FileFilter;
 	friend class MadSearchReplaceDialog;
 	friend class mad_python::PyMadEdit;
 };

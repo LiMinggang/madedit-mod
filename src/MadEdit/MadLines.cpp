@@ -11,6 +11,7 @@
 #include "MadSyntax.h"
 #include "MadEdit.h"
 #include <wx/filename.h>
+#include <wx/fileconf.h>
 
 // add: gogo, 27.09.2009
 #include <algorithm>
@@ -153,7 +154,7 @@ size_t MadConvFileName::MB2WC( wchar_t *outputBuf, const char *psz, size_t outpu
 		bool is_utf8 = IsTextUTF8( ( wxByte * )psz + dirlen, int( fnlen ) );
 		wchar_t *obuf = outputBuf;
 
-		if( outputBuf != NULL )
+		if( outputBuf != nullptr )
 			obuf += dirret;
 
 		if( is_utf8 )
@@ -212,7 +213,7 @@ wxByte MadMemData::Get( const wxFileOffset &pos )
 
 void MadMemData::Get( const wxFileOffset &pos, wxByte *buffer, size_t size )
 {
-	wxASSERT( ( pos >= 0 ) && ( size > 0 ) && ( ( pos + size ) <= m_Size ) );
+	wxASSERT( ( pos >= 0 ) && ( size > 0 ) && ( ( pos + (wxFileOffset)size ) <= m_Size ) );
 	int buf = pos >> BUFFER_BITS;    //pos / BUFFER_SIZE;
 	int idx = pos & BUFFER_MASK;    //pos % BUFFER_SIZE;
 	size_t buf_size = BUFFER_SIZE - idx;
@@ -370,14 +371,9 @@ wxFileOffset MadMemData::Put( wxByte * buffer, size_t size )
 // MadFileData
 //===========================================================================
 
-MadFileData::MadFileData( const wxString &name )
+MadFileData::MadFileData( const wxString &name ) : m_OpenSuccess(true), m_Name(name), m_ReadOnly(false), m_Buffer1(nullptr), m_Buffer2(nullptr), m_Buf1Pos(-1), m_Buf2Pos(-1)
 {
-	m_Name = name;
 	m_Size = 0;
-	m_OpenSuccess = true;
-	m_ReadOnly = false;
-	m_Buffer1 = NULL;
-	m_Buffer2 = NULL;
 	int utf8test = MadFileNameIsUTF8( name );
 
 	if( utf8test == 0 ) // this file/dir is not exist
@@ -467,7 +463,7 @@ wxByte MadFileData::Get( const wxFileOffset &pos )
 
 void MadFileData::Get( const wxFileOffset &pos, wxByte * buffer, size_t size )
 {
-	wxASSERT( ( pos >= 0 ) && ( size > 0 ) && ( ( pos + size ) <= m_Size ) );
+	wxASSERT( ( pos >= 0 ) && ( size > 0 ) && ( ((wxFileOffset)( pos + size )) <= m_Size ) );
 	wxFileOffset idx;
 
 	if( m_Buf1Pos >= 0 )
@@ -494,7 +490,7 @@ void MadFileData::Get( const wxFileOffset &pos, wxByte * buffer, size_t size )
 
 	idx = pos & BUFFER_BASE_MASK; //(pos >> BUFFER_BITS) << BUFFER_BITS;        //(pos / BUFFER_SIZE) * BUFFER_SIZE;
 
-	if( pos + size <= idx + BUFFER_SIZE )              // wanted bytes in one block
+	if( ((wxFileOffset)(pos + size)) <= idx + BUFFER_SIZE )              // wanted bytes in one block
 	{
 		if( m_Buf1Pos >= 0 )
 		{
@@ -834,10 +830,10 @@ MadLines::MadLines( MadEdit *madedit )
 	//m_Name="";
 	m_ReadOnly = false;
 	m_MaxLineWidth = 0;
-	m_FileData = NULL;
-	m_TmpFileData = NULL;
+	m_FileData = nullptr;
+	m_TmpFileData = nullptr;
 	m_MemData = new MadMemData();
-	m_WriteBuffer = NULL;
+	m_WriteBuffer = nullptr;
 	m_NextUChar_Buffer = new wxByte[NEXTUCHAR_BUFFER_SIZE + 10];
 	m_NextUChar_BufferLoadNew = true;
 	m_NextUChar_BufferStart = 0;
@@ -910,7 +906,7 @@ void MadLines::Clear( bool freeAll )
 	if( m_FileData )
 	{
 		delete m_FileData;
-		m_FileData = NULL;
+		m_FileData = nullptr;
 	}
 
 	if( m_TmpFileData )
@@ -918,7 +914,7 @@ void MadLines::Clear( bool freeAll )
 		wxString tmpfile = m_TmpFileData->m_Name;
 		delete m_TmpFileData;
 		wxRemoveFile( tmpfile );
-		m_TmpFileData = NULL;
+		m_TmpFileData = nullptr;
 	}
 
 	m_MemData->Reset();
@@ -956,6 +952,10 @@ void MadLines::SetEncoding( MadEncoding *encoding )
 
 	case etUTF32BE:
 		NextUChar = &MadLines::NextUChar_UTF32BE;
+		break;
+
+	case etGB18030:
+		NextUChar = &MadLines::NextUChar_GB18030;
 		break;
 	}
 }
@@ -1433,6 +1433,47 @@ bool MadLines::NextUChar_UTF32BE( MadUCQueue &ucqueue )
 	return true;
 }
 
+bool MadLines::NextUChar_GB18030( MadUCQueue &ucqueue )
+{
+	wxFileOffset rest = m_NextUChar_LineSize - m_NextUChar_Pos;
+
+	if( rest <= 0 ) return false;
+
+	//check buffersize
+	if( m_NextUChar_BufferNextPos != m_NextUChar_LineSize && m_NextUChar_BufferSize < 4 )
+	{
+		LoadNewBuffer();
+	}
+
+	int cnt = 4;
+	if( rest < 4 ) cnt = rest;
+
+	wxByte *buf = m_NextUChar_Buffer + m_NextUChar_BufferStart;
+	wxByte db[4] = {0,0,0,0};
+	for(int i = 0; i < cnt; ++i)
+	{
+		db[i] = buf[i];
+	}
+
+	size_t len = 0;
+	ucs4_t ucs4 = m_Encoding->GB18030toUCS4 (db, len);
+	if (len)
+	{
+		ucqueue.push_back( MadUCPair( ucs4, len ) );
+		m_NextUChar_Pos += len;
+		m_NextUChar_BufferStart += len;
+		m_NextUChar_BufferSize -= len;
+		return true;
+	}
+
+	ucqueue.push_back( MadUCPair( '?', MadUCPair::second_type( cnt ) ) );
+	m_NextUChar_Pos += cnt;
+	m_NextUChar_BufferStart += size_t( cnt );
+	m_NextUChar_BufferSize -= size_t( cnt );
+	return true;
+}
+
+
 bool MadLines::NextUCharIs0x0A( void )
 {
 	wxFileOffset rest = m_NextUChar_LineSize - m_NextUChar_Pos;
@@ -1616,7 +1657,7 @@ int MadLines::FindStringNoCase( MadUCQueue &ucqueue, MadStringIterator begin,
 {
 	wxASSERT( !ucqueue.empty() );
 	int idx = 1;
-	ucs4_t uc, firstuc = ucqueue.front().first;
+	register ucs4_t uc, firstuc = ucqueue.front().first;
 
 	if( firstuc >= 'A' && firstuc <= 'Z' )
 	{
@@ -1628,7 +1669,7 @@ int MadLines::FindStringNoCase( MadUCQueue &ucqueue, MadStringIterator begin,
 
 	if( ucsize > 1 )
 	{
-		register ucs4_t uc = ucqueue.back().first;
+		uc = ucqueue.back().first;
 
 		if( uc == 0x0D || uc == 0x0A )
 		{
@@ -1650,7 +1691,7 @@ int MadLines::FindStringNoCase( MadUCQueue &ucqueue, MadStringIterator begin,
 			{
 				while( ( this->*NextUChar )( ucqueue ) )
 				{
-					register ucs4_t uc = ucqueue.back().first;
+					uc = ucqueue.back().first;
 
 					if( uc == 0x0D || uc == 0x0A )
 					{
@@ -1710,26 +1751,29 @@ void MadLines::Reformat( /*IN*/MadLineIterator &iter,/*IN*/int maxwrapwidth, /*I
 	iter->m_RowIndices.resize( 2 );
 	MadRowIndex rowidx;
 	int rowidx_idx = 0;
-	MadUCQueue ucqueue;
-	int ucwidth;
-	size_t rowlen;                                     // byte-length
-	size_t wordlength;
-	int wordwidth;
+	static MadUCQueue ucqueue;
+	int ucwidth = -1;
+	size_t rowlen = size_t(-1);                                     // byte-length
+	size_t wordlength = size_t(-1);
+	int wordwidth = -1;
 	int wordisdelimiter = 0; //1:is delimiter, -1:not delimiter, 0:other
 	const size_t maxlinelength = m_MadEdit->m_MaxLineLength;
 	//int maxwidth = m_MadEdit->GetMaxWordWrapWidth();
 	size_t bomlen = 0;
-	
-	ucs4_t firstuc, lastuc, prevuc;
-	int index, notSpaceCount;
-	size_t firstuclen, length, eatUCharCount, bracepos;
-	int *bracexpos;
-	int bracexpos_count;
+
+	ucs4_t firstuc = 0, lastuc = 0, prevuc = 0;
+	int index = 0, notSpaceCount = 0;
+	size_t firstuclen = size_t(-1), length = size_t(-1), eatUCharCount = size_t(-1), bracepos = size_t(-1);
+	int *bracexpos = nullptr;
+	int bracexpos_count = -1;
 	MadStringIterator sit, sitend;
-	vector < wxString > strvec;
-	MadSyntaxRange *srange = NULL;
-	int CheckState = m_Syntax->m_CheckState;
-	long tabwidth;
+	static vector < wxString > strvec;
+	MadSyntaxRange *srange = nullptr;
+	int CheckState = m_Syntax->m_SynAttr->m_CheckState;
+	long tabwidth = -1;
+
+	strvec.clear();
+	ucqueue.clear();
 
 	( this->*NextUChar )( ucqueue );
 
@@ -1777,7 +1821,7 @@ void MadLines::Reformat( /*IN*/MadLineIterator &iter,/*IN*/int maxwrapwidth, /*I
 			eatUCharCount = 0;
 			notSpaceCount = 0;
 			bracepos = bomlen;  // first line only
-			bracexpos = NULL;
+			bracexpos = nullptr;
 			bracexpos_count = 0;
 			bomlen = 0;
 			bool BeginOfLine = true;
@@ -1793,7 +1837,7 @@ void MadLines::Reformat( /*IN*/MadLineIterator &iter,/*IN*/int maxwrapwidth, /*I
 				{
 					wxASSERT( ucqueue.size() == 1 );
 
-					if( prevuc != m_Syntax->nw_EscapeChar )
+					if( prevuc != m_Syntax->m_SynAttr->nw_EscapeChar )
 					{
 						state.LineComment = 0;
 						state.Directive = 0;
@@ -1828,7 +1872,7 @@ void MadLines::Reformat( /*IN*/MadLineIterator &iter,/*IN*/int maxwrapwidth, /*I
 				{
 					wxASSERT( ucqueue.size() == 1 );
 
-					if( prevuc != m_Syntax->nw_EscapeChar )
+					if( prevuc != m_Syntax->m_SynAttr->nw_EscapeChar )
 					{
 						state.LineComment = 0;
 						state.Directive = 0;
@@ -1859,11 +1903,11 @@ _RUNAGAIN_:
 							//Minggang: Not sure why this was commneted out at the first promote of MadEdit
 							//https://sourceforge.net/p/madedit/code/9/tree/trunk/madedit/src/MadEdit/MadLines.cpp#l1761
 							if( state.CommentId == 0 && state.StringId == 0 &&
-									!m_Syntax->m_LeftBrace.empty() )
+									!m_Syntax->m_SynAttr->m_LeftBrace.empty() )
 							{
 								bool ok = false;
-								index = ( this->*FindString )( ucqueue, m_Syntax->m_LeftBrace.begin(),
-															   m_Syntax->m_LeftBrace.end(), length );
+								index = ( this->*FindString )( ucqueue, m_Syntax->m_SynAttr->m_LeftBrace.begin(),
+															   m_Syntax->m_SynAttr->m_LeftBrace.end(), length );
 
 								if( index != 0 )
 								{
@@ -1919,8 +1963,8 @@ _RUNAGAIN_:
 								}
 								else // check right brace
 								{
-									if( ( index = ( this->*FindString )( ucqueue, m_Syntax->m_RightBrace.begin(),
-																		 m_Syntax->m_RightBrace.end(), length ) ) != 0 )
+									if( ( index = ( this->*FindString )( ucqueue, m_Syntax->m_SynAttr->m_RightBrace.begin(),
+																		 m_Syntax->m_SynAttr->m_RightBrace.end(), length ) ) != 0 )
 									{
 										ok = true;
 										ucs4_t uc = ucqueue[length - 1].first;
@@ -1978,7 +2022,7 @@ _RUNAGAIN_:
 							if( state.LineComment == 0 )
 							{
 								// check EscapeChar
-								if( firstuc == m_Syntax->nw_EscapeChar )
+								if( firstuc == m_Syntax->m_SynAttr->nw_EscapeChar )
 								{
 									if( ucqueue.size() == 1 )
 										( this->*NextUChar )( ucqueue );
@@ -1999,7 +2043,7 @@ _RUNAGAIN_:
 								// check block comment off
 								if( state.CommentId != 0 )
 								{
-									sit = m_Syntax->m_BlockCommentOff.begin();
+									sit = m_Syntax->m_SynAttr->m_BlockCommentOff.begin();
 									std::advance( sit, state.CommentId - 1 );
 									sitend = sit;
 									++sitend;
@@ -2022,7 +2066,7 @@ _RUNAGAIN_:
 								// check string off
 								if( state.StringId != 0 )
 								{
-									//if(firstuc == m_Syntax->nw_EscapeChar)
+									//if(firstuc == m_Syntax->m_SynAttr->nw_EscapeChar)
 									//{
 									//if(ucqueue.size() == 1)
 									//(this->*NextUChar)(ucqueue);
@@ -2031,7 +2075,7 @@ _RUNAGAIN_:
 									//{
 									//lastuc = ucqueue[1].first;
 
-									//if(lastuc == m_Syntax->nw_EscapeChar
+									//if(lastuc == m_Syntax->m_SynAttr->nw_EscapeChar
 									//|| m_Syntax->m_StringChar.Find(lastuc)+1 == state.StringId)
 									//{
 									//++eatUCharCount;//=2
@@ -2039,7 +2083,7 @@ _RUNAGAIN_:
 									//}
 									//goto _NOCHECK_;
 									//}
-									if( m_Syntax->m_StringChar.Find( wxChar( firstuc ) ) + 1 == state.StringId )
+									if( m_Syntax->m_SynAttr->m_StringChar.Find( wxChar( firstuc ) ) + 1 == state.StringId )
 									{
 										state.StringId = 0;
 										//eatUCharCount=1;
@@ -2049,9 +2093,9 @@ _RUNAGAIN_:
 								}
 
 								// check string on
-								if( !m_Syntax->m_StringChar.IsEmpty() && m_Syntax->IsInRange( state.RangeId, m_Syntax->m_StringInRange ) )
+								if( !m_Syntax->m_SynAttr->m_StringChar.IsEmpty() && m_Syntax->IsInRange( state.RangeId, m_Syntax->m_SynAttr->m_StringInRange ) )
 								{
-									if( ( index = m_Syntax->m_StringChar.Find( wxChar( firstuc ) ) + 1 ) != 0 )
+									if( ( index = m_Syntax->m_SynAttr->m_StringChar.Find( wxChar( firstuc ) ) + 1 ) != 0 )
 									{
 										state.StringId = index;
 										//eatUCharCount=1;
@@ -2060,11 +2104,11 @@ _RUNAGAIN_:
 								}
 
 								// check directive on
-								if( !m_Syntax->m_DirectiveLeadingAtBOL || BeginOfLine )
+								if( !m_Syntax->m_SynAttr->m_DirectiveLeadingAtBOL || BeginOfLine )
 								{
-									if( notSpaceCount == 1 && !m_Syntax->m_DirectiveLeading.IsEmpty() )
+									if( notSpaceCount == 1 && !m_Syntax->m_SynAttr->m_DirectiveLeading.IsEmpty() )
 									{
-										if( ( index = m_Syntax->m_DirectiveLeading.Find( wxChar( firstuc ) ) + 1 ) != 0 )
+										if( ( index = m_Syntax->m_SynAttr->m_DirectiveLeading.Find( wxChar( firstuc ) ) + 1 ) != 0 )
 										{
 											state.Directive = index;
 											//eatUCharCount=1;
@@ -2074,15 +2118,15 @@ _RUNAGAIN_:
 								}
 
 								// check block comment on
-								if( !m_Syntax->m_BlockCommentOn.empty() )
+								if( !m_Syntax->m_SynAttr->m_BlockCommentOn.empty() )
 								{
-									index = ( this->*FindString )( ucqueue, m_Syntax->m_BlockCommentOn.begin(),
-																   m_Syntax->m_BlockCommentOn.end(), length );
+									index = ( this->*FindString )( ucqueue, m_Syntax->m_SynAttr->m_BlockCommentOn.begin(),
+																   m_Syntax->m_SynAttr->m_BlockCommentOn.end(), length );
 
 									if( index != 0 )  // got
 									{
 										// check InRange
-										if( m_Syntax->IsInRange( state.RangeId, m_Syntax->m_BlockCommentInRange[index - 1] ) )
+										if( m_Syntax->IsInRange( state.RangeId, m_Syntax->m_SynAttr->m_BlockCommentInRange[index - 1] ) )
 										{
 											state.CommentId = index;
 											//state.CommentOff = false;
@@ -2093,17 +2137,17 @@ _RUNAGAIN_:
 								}
 
 								// check line comment
-								if( !m_Syntax->m_LineCommentAtBOL || BeginOfLine )
+								if( !m_Syntax->m_SynAttr->m_LineCommentAtBOL || BeginOfLine )
 								{
-									if( !m_Syntax->m_LineComment.empty() )
+									if( !m_Syntax->m_SynAttr->m_LineComment.empty() )
 									{
-										index = ( this->*FindString )( ucqueue, m_Syntax->m_LineComment.begin(),
-																	   m_Syntax->m_LineComment.end(), length );
+										index = ( this->*FindString )( ucqueue, m_Syntax->m_SynAttr->m_LineComment.begin(),
+																	   m_Syntax->m_SynAttr->m_LineComment.end(), length );
 
 										if( index != 0 )  // got
 										{
 											// check InRange
-											if( m_Syntax->IsInRange( state.RangeId, m_Syntax->m_LineCommentInRange ) )
+											if( m_Syntax->IsInRange( state.RangeId, m_Syntax->m_SynAttr->m_LineCommentInRange ) )
 											{
 												if( state.RangeId == 0 )
 												{
@@ -2144,15 +2188,15 @@ _RUNAGAIN_:
 							}
 
 							// check range on
-							if( state.LineComment == 0 && state.RangeId == 0 && !m_Syntax->m_RangeBeginString.empty() )
+							if( state.LineComment == 0 && state.RangeId == 0 && !m_Syntax->m_SynAttr->m_RangeBeginString.empty() )
 							{
-								index = ( this->*FindString )( ucqueue, m_Syntax->m_RangeBeginString.begin(),
-															   m_Syntax->m_RangeBeginString.end(), length );
+								index = ( this->*FindString )( ucqueue, m_Syntax->m_SynAttr->m_RangeBeginString.begin(),
+															   m_Syntax->m_SynAttr->m_RangeBeginString.end(), length );
 
 								if( index != 0 )
 								{
 									eatUCharCount = length;
-									state.RangeId = m_Syntax->m_CustomRange[index - 1].id;
+									state.RangeId = m_Syntax->m_SynAttr->m_CustomRange[index - 1].id;
 									srange = m_Syntax->GetSyntaxRange( state.RangeId );
 									//goto _NOCHECK_;
 								}
@@ -2237,7 +2281,7 @@ _NOCHECK_:
 				{
 					m_MadEdit->m_HasTab = true;
 
-					tabwidth = orgtabwidth; 
+					tabwidth = orgtabwidth;
 
 					ucwidth = maxwrapwidth - rowidx.m_Width;
 
@@ -2327,7 +2371,7 @@ _NOCHECK_:
 						wordwidth = ucwidth;
 					}
 					else
-						if( ( ( firstuc < 0x100 ) && ( !m_Syntax->IsSpace( firstuc ) ) ) /* m_Syntax->IsNotDelimiter( firstuc )*/ )
+						if( ( ( firstuc < 0x100 ) && ( !MadSyntax::IsSpace( firstuc ) ) ) /* m_Syntax->IsNotDelimiter( firstuc )*/ )
 						{
 							wordisdelimiter = -1;
 							wordlength = firstuclen;
@@ -2345,7 +2389,7 @@ _NOCHECK_:
 							wordwidth = ucwidth;
 						}
 						else
-							if( ( ( firstuc < 0x100 ) && ( !m_Syntax->IsSpace( firstuc ) ) ) /* m_Syntax->IsNotDelimiter( firstuc )*/ )
+							if( ( ( firstuc < 0x100 ) && ( !MadSyntax::IsSpace( firstuc ) ) ) /* m_Syntax->IsNotDelimiter( firstuc )*/ )
 							{
 								wordlength += firstuclen;
 								wordwidth += ucwidth;
@@ -2366,7 +2410,7 @@ _NOCHECK_:
 								wordwidth += ucwidth;
 							}
 							else
-								if( ( ( firstuc < 0x100 ) && ( !m_Syntax->IsSpace( firstuc ) ) ) /* m_Syntax->IsNotDelimiter( firstuc )*/ )
+								if( ( ( firstuc < 0x100 ) && ( !MadSyntax::IsSpace( firstuc ) ) ) /* m_Syntax->IsNotDelimiter( firstuc )*/ )
 								{
 									wordisdelimiter = -1;
 									wordlength = firstuclen;
@@ -2387,10 +2431,10 @@ _NOCHECK_:
 						}
 				}
 
-				if( bracexpos != NULL )
+				if( bracexpos != nullptr )
 				{
 					*bracexpos = rowidx.m_Width;
-					bracexpos = NULL;
+					bracexpos = nullptr;
 				}
 
 				rowidx.m_Width += ucwidth;
@@ -2487,7 +2531,7 @@ size_t MadLines::Reformat( MadLineIterator first, MadLineIterator last )
 	long lTabWidth = m_MadEdit->m_TabColumns * m_MadEdit->GetUCharWidth(0x20);
 	int iMaxWrapWidth = m_MadEdit->GetMaxWordWrapWidth();
 
-	if( m_Syntax->m_CaseSensitive )
+	if( m_Syntax->m_SynAttr->m_CaseSensitive )
 		FindString = &MadLines::FindStringCase;
 	else
 		FindString = &MadLines::FindStringNoCase;
@@ -2533,10 +2577,10 @@ size_t MadLines::Reformat( MadLineIterator first, MadLineIterator last )
 		ReformatCount = 1;
 		first->m_BracePairIndices.clear();
 		/*====End of being moved from Reformat() above for performance====*/
-		
+
 		if( first->m_Size != 0 ) // not an empty line
 			Reformat( first, iMaxWrapWidth, lTabWidth, state);
-		else			
+		else
 			state = first->m_State;
 
 		count += ReformatCount;
@@ -2573,7 +2617,7 @@ size_t MadLines::Reformat( MadLineIterator first, MadLineIterator last )
 			break;
 		}
 	}
-	while( bContinue | bStateIsNotOkay );
+	while( bContinue || bStateIsNotOkay );
 
 	return count;
 }
@@ -2599,7 +2643,7 @@ void MadLines::RecountLineWidth( void )
 	BracePairIndex *bpi;
 	vector <BracePairIndex>::iterator bpit, bpitend;
 	size_t bracepos, bracelen = 0, bracemaxlen = 0, braceposdelta = 0;
-	wxUint16 *bracewidth = NULL;
+	wxUint16 *bracewidth = nullptr;
 	vector<int*> bracexpos_thisrow;
 	vector<int*>::iterator it;
 	int orgtabwidth = m_MadEdit->m_TabColumns * m_MadEdit->GetUCharWidth( 0x20 );
@@ -2631,7 +2675,7 @@ void MadLines::RecountLineWidth( void )
 		}
 		else
 		{
-			bpi = NULL;
+			bpi = nullptr;
 		}
 
 		bracexpos_thisrow.clear();
@@ -2823,7 +2867,7 @@ void MadLines::RecountLineWidth( void )
 						wordwidth = ucwidth;
 					}
 					else
-						if( ( firstuc < 0x100 ) && ( !m_Syntax->IsSpace( firstuc ) ) /*m_Syntax->IsNotDelimiter( firstuc )*/ )
+						if( ( firstuc < 0x100 ) && ( !MadSyntax::IsSpace( firstuc ) ) /*m_Syntax->IsNotDelimiter( firstuc )*/ )
 						{
 							wordisdelimiter = -1;
 							wordlength = firstuclen;
@@ -2841,7 +2885,7 @@ void MadLines::RecountLineWidth( void )
 							wordwidth = ucwidth;
 						}
 						else
-							if( ( firstuc < 0x100 ) && ( !m_Syntax->IsSpace( firstuc ) ) /*m_Syntax->IsNotDelimiter( firstuc )*/ )
+							if( ( firstuc < 0x100 ) && ( !MadSyntax::IsSpace( firstuc ) ) /*m_Syntax->IsNotDelimiter( firstuc )*/ )
 							{
 								wordlength += firstuclen;
 								wordwidth += ucwidth;
@@ -2862,7 +2906,7 @@ void MadLines::RecountLineWidth( void )
 								wordwidth += ucwidth;
 							}
 							else
-								if( ( firstuc < 0x100 ) && ( !m_Syntax->IsSpace( firstuc ) ) /*m_Syntax->IsNotDelimiter( firstuc )*/ )
+								if( ( firstuc < 0x100 ) && ( !MadSyntax::IsSpace( firstuc ) ) /*m_Syntax->IsNotDelimiter( firstuc )*/ )
 								{
 									wordisdelimiter = -1;
 									wordlength = firstuclen;
@@ -2883,11 +2927,11 @@ void MadLines::RecountLineWidth( void )
 						}
 				}
 
-				if( bpi != NULL )
+				if( bpi != nullptr )
 				{
-					wxASSERT( bracepos <= bpi->LinePos );
+					wxASSERT( (wxFileOffset)bracepos <= bpi->LinePos );
 
-					if( bpi->LinePos == bracepos )
+					if( (size_t)(bpi->LinePos) == bracepos )
 					{
 						bpi->XPos = rowidx.m_Width;
 						bracexpos_thisrow.push_back( &bpi->XPos );
@@ -2898,7 +2942,7 @@ void MadLines::RecountLineWidth( void )
 
 						if( ( ++bpit ) == bpitend )
 						{
-							bpi = NULL;
+							bpi = nullptr;
 						}
 						else
 						{
@@ -2909,13 +2953,13 @@ void MadLines::RecountLineWidth( void )
 
 				bracepos += firstuclen;
 
-				if( bracewidth != NULL )
+				if( bracewidth != nullptr )
 				{
 					*bracewidth += ucwidth;
 
 					if( ( bracelen += firstuclen ) >= bracemaxlen )
 					{
-						bracewidth = NULL;
+						bracewidth = nullptr;
 					}
 				}
 
@@ -2938,7 +2982,7 @@ void MadLines::RecountLineWidth( void )
 			iter->m_RowIndices.back() = rowidx;
 		}
 
-		wxASSERT( bpi == NULL );
+		wxASSERT( bpi == nullptr );
 		braceposdelta = 0;
 	}
 	while( ++iter != iterend );
@@ -2969,6 +3013,7 @@ void MadLines::Append( const MadLineIterator &lit1, const MadLineIterator &lit2 
 bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding )
 {
 	MadFileData *fd = new MadFileData( filename );
+	wxString useencoding = encoding;
 
 	if( !fd->OpenSuccess() )
 	{
@@ -2986,7 +3031,7 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 		wxString tmpfile = m_TmpFileData->m_Name;
 		delete m_TmpFileData;
 		wxRemoveFile( tmpfile );
-		m_TmpFileData = NULL;
+		m_TmpFileData = nullptr;
 	}
 
 	m_MemData->Reset();
@@ -3012,31 +3057,35 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 
 	wxString defaultenc;
 
-	if( encoding.IsEmpty() )
+	bool bb = false;
+	m_MadEdit->m_Config->Read( wxT( "/MadEdit/EnforceDefaultEncoding" ), &bb, false );
+	if(bb) m_MadEdit->m_Config->Read( wxT( "/MadEdit/DefaultEncoding" ), &useencoding ); 
+
+	if( useencoding.IsEmpty()  )
 	{
 		m_MadEdit->m_Config->Read( wxT( "/MadEdit/DefaultEncoding" ), &defaultenc );
 	}
 	else
 	{
-		defaultenc = encoding;
+		defaultenc = useencoding;
 	}
 
 	if( s == 0 )
 	{
 		delete m_FileData;
-		m_FileData = NULL;
+		m_FileData = nullptr;
 		// reload syntax
 		delete m_Syntax;
 		wxFileName fn( filename );
 		m_Syntax = MadSyntax::GetSyntaxByExt( fn.GetExt() );
 
-		if( m_Syntax == NULL )
+		if( m_Syntax == nullptr )
 		{
 			m_Syntax = MadSyntax::GetSyntaxByFileName( fn.GetName() );
 
-			if( m_Syntax == NULL )
+			if( m_Syntax == nullptr )
 			{
-				m_Syntax = MadSyntax::GetSyntaxByTitle( MadPlainTextTitle );
+				m_Syntax = MadSyntax::GetSyntaxByTitle( wxGetTranslation(MadPlainTextTitle) );
 			}
 		}
 		wxASSERT( m_Syntax != 0 );
@@ -3047,10 +3096,10 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 		m_MadEdit->UpdateSyntaxDictionary();
 		m_MadEdit->m_LoadingFile = false;
 
-		if( m_Syntax->m_Encoding.IsEmpty() )
+		if( m_Syntax->m_SynAttr->m_Encoding.IsEmpty() )
 			m_MadEdit->SetEncoding( defaultenc );
 		else
-			m_MadEdit->SetEncoding( m_Syntax->m_Encoding );
+			m_MadEdit->SetEncoding( m_Syntax->m_SynAttr->m_Encoding );
 
 		return true;
 	}
@@ -3096,7 +3145,7 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 		}
 
 		delete m_FileData;
-		m_FileData = NULL;
+		m_FileData = nullptr;
 		iter->m_Blocks[0].m_Data = m_MemData;
 		buf = m_MemData->m_Buffers.front();
 	}
@@ -3117,27 +3166,27 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 		{
 			//m_Syntax->m_Delimiter.Empty();
 			//m_Syntax->m_Delimiter.clear();
-			memset(m_Syntax->m_Delimiter, 0, sizeof(m_Syntax->m_Delimiter));
+			memset(m_Syntax->m_SynAttr->m_Delimiter, 0, sizeof(m_Syntax->m_SynAttr->m_Delimiter));
 		}
 
-		m_Syntax->m_CaseSensitive = true;
+		m_Syntax->m_SynAttr->m_CaseSensitive = true;
 	}
 	else
 	{
 		wxFileName fn( filename );
 		m_Syntax = MadSyntax::GetSyntaxByExt( fn.GetExt() );
 
-		if( m_Syntax == NULL )
+		if( m_Syntax == nullptr )
 		{
 			m_Syntax = MadSyntax::GetSyntaxByFirstLine( buf, s );
 
-			if( m_Syntax == NULL )
+			if( m_Syntax == nullptr )
 			{
 				m_Syntax = MadSyntax::GetSyntaxByFileName( fn.GetName() );
 
-				if( m_Syntax == NULL )
+				if( m_Syntax == nullptr )
 				{
-					m_Syntax = MadSyntax::GetSyntaxByTitle( MadPlainTextTitle );
+					m_Syntax = MadSyntax::GetSyntaxByTitle( wxGetTranslation(MadPlainTextTitle) );
 				}
 			}
 		}
@@ -3161,9 +3210,9 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 	}
 	else
 	{
-		if( !encoding.IsEmpty() )
+		if( !useencoding.IsEmpty() )
 		{
-			m_MadEdit->SetEncoding( encoding );
+			m_MadEdit->SetEncoding( useencoding );
 			Reformat( iter, iter );
 			ok = true;
 		}
@@ -3206,18 +3255,18 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 
 	if( !ok )
 	{
-		if( !encoding.IsEmpty() )
+		if( !useencoding.IsEmpty() )
 		{
-			m_MadEdit->SetEncoding( encoding );
+			m_MadEdit->SetEncoding( useencoding );
 		}
 		else
-			if( !m_Syntax->m_Encoding.IsEmpty() )
+			if( !m_Syntax->m_SynAttr->m_Encoding.IsEmpty() )
 			{
-				m_MadEdit->SetEncoding( m_Syntax->m_Encoding );
+				m_MadEdit->SetEncoding( m_Syntax->m_SynAttr->m_Encoding );
 			}
 			else
 			{
-				wxFontEncoding enc = m_MadEdit->m_Encoding->GetEncoding();
+				int enc = m_MadEdit->m_Encoding->GetEncoding();
 
 				if( enc == wxFONTENCODING_UTF8 ||
 						enc == wxFONTENCODING_UTF16LE ||
@@ -3287,10 +3336,10 @@ bool TruncateFile( const wxString &filename, wxFileOffset size )
 	HANDLE handle = CreateFile( filename.c_str(),       // file to open
 								GENERIC_WRITE,   // open for writing
 								0,       // do not share
-								NULL,    // default security
+								nullptr,    // default security
 								OPEN_ALWAYS,   // open the file, if not exist then create it
 								FILE_ATTRIBUTE_NORMAL,   // normal file
-								NULL );
+								nullptr );
 
 	if( handle == INVALID_HANDLE_VALUE )
 	{
@@ -3323,7 +3372,7 @@ bool TruncateFile( const wxString &filename, wxFileOffset size )
 		}
 		**/
 		wxFileOffset s = size - oldsize.QuadPart;
-		DWORD ret = SetFilePointer( handle, 0, NULL, FILE_END );
+		DWORD ret = SetFilePointer( handle, 0, nullptr, FILE_END );
 
 		if( ret == INVALID_SET_FILE_POINTER && GetLastError() != NO_ERROR )
 		{
@@ -3331,10 +3380,10 @@ bool TruncateFile( const wxString &filename, wxFileOffset size )
 			return false;
 		}
 
-		static char *buf = NULL;
+		static char *buf = nullptr;
 		static vector<char> buffervector;
 
-		if( buf == NULL )
+		if( buf == nullptr )
 		{
 			buffervector.resize( 256 * 1024 );
 			buf = &buffervector[0];
@@ -3347,7 +3396,7 @@ bool TruncateFile( const wxString &filename, wxFileOffset size )
 		{
 			if( len > s ) len = s;
 
-			WriteFile( handle, buf, len, &wlen, NULL );
+			WriteFile( handle, buf, len, &wlen, nullptr );
 		}
 		while( ( s -= len ) > 0 );
 	}
@@ -3382,7 +3431,7 @@ bool TruncateFile( const wxString &filename, wxFileOffset size )
 
 void MadLines::WriteBlockToData( MadOutData *data, const MadBlockIterator &bit )
 {
-	wxASSERT( data != NULL );
+	wxASSERT( data != nullptr );
 	wxDword bs = BUFFER_SIZE;
 	wxFileOffset size = bit->m_Size;
 	wxFileOffset pos = bit->m_Pos;
@@ -3403,7 +3452,7 @@ void MadLines::WriteToFile( wxFile &file, MadFileData *oldfd, MadFileData *newfd
 {
 	if( m_Size > 0 )
 	{
-		if( m_WriteBuffer == NULL )
+		if( m_WriteBuffer == nullptr )
 		{
 			m_WriteBufferVector.resize( BUFFER_SIZE );
 			m_WriteBuffer = &m_WriteBufferVector[0];
@@ -3454,7 +3503,7 @@ void MadLines::WriteToFile( wxFile &file, MadFileData *oldfd, MadFileData *newfd
 
 wxFileOffset MadLines::GetMaxTempSize( const wxString &filename )
 {
-	if( m_FileData == NULL || filename != m_Name || m_Size == 0 )
+	if( m_FileData == nullptr || filename != m_Name || m_Size == 0 )
 		return 0;
 
 	wxFileOffset maxsize = 0, temppos = 0, tempsize = 0, filepos = 0;
@@ -3523,7 +3572,7 @@ wxFileOffset MadLines::GetMaxTempSize( const wxString &filename )
 					}
 
 					// move the block to tempdata
-					file_bit->m_Data = NULL; // temp data
+					file_bit->m_Data = nullptr; // temp data
 					tempsize += file_bit->m_Size;
 					writable_size += file_bit->m_Size;
 
@@ -3563,7 +3612,7 @@ wxFileOffset MadLines::GetMaxTempSize( const wxString &filename )
 			}
 		}
 		else
-			if( write_bit->m_Data == NULL ) // this block is in the tempdata
+			if( write_bit->m_Data == nullptr ) // this block is in the tempdata
 			{
 				write_bit->m_Data = m_FileData;
 				temppos += write_bit->m_Size;
@@ -3605,35 +3654,78 @@ wxFileOffset MadLines::GetMaxTempSize( const wxString &filename )
 bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 {
 	wxFileName fn( filename );
-	MadSyntax * tmp_Syntax = MadSyntax::GetSyntaxByExt( fn.GetExt() );
 
-	if( tmp_Syntax == NULL )
+	MadSyntax * tmp_Syntax = nullptr;
+	if( m_MadEdit->m_UseDefaultSyntax )
 	{
-		tmp_Syntax = MadSyntax::GetSyntaxByFileName( fn.GetName() );
+		tmp_Syntax = new MadSyntax( false );
 
-		if( tmp_Syntax == NULL )
+		if( m_MadEdit->m_SearchWholeWord == false )
 		{
-			tmp_Syntax = MadSyntax::GetSyntaxByTitle( MadPlainTextTitle );
+			//m_Syntax->m_Delimiter.Empty();
+			//m_Syntax->m_Delimiter.clear();
+			memset(tmp_Syntax->m_SynAttr->m_Delimiter, 0, sizeof(tmp_Syntax->m_SynAttr->m_Delimiter));
 		}
-		wxASSERT( tmp_Syntax != 0 );
-	}
 
-	if( tmp_Syntax->m_Title != m_Syntax->m_Title )
-	{
-		delete m_Syntax;
-		m_Syntax = tmp_Syntax;
-		wxFont *font = m_MadEdit->m_TextFont;
-		tmp_Syntax->InitNextWord1( m_MadEdit->m_Lines, m_MadEdit->m_WordBuffer, m_MadEdit->m_WidthBuffer, font->GetFaceName(), font->GetPointSize(), font->GetFamily() );
-		m_MadEdit->m_Syntax = tmp_Syntax;
-		m_MadEdit->UpdateSyntaxDictionary();
-		m_MadEdit->ReformatAll();
+		tmp_Syntax->m_SynAttr->m_CaseSensitive = true;
 	}
 	else
 	{
+		const int max_detecting_size = 4096;
+		int s;
+		wxByte *buf = nullptr;
+
+		if (m_Size > max_detecting_size)
+			s = max_detecting_size;
+		else
+			s = m_Size;
+
+		long MaxSizeToLoad;
+		m_MadEdit->m_Config->Read(wxT("/MadEdit/MaxSizeToLoad"), &MaxSizeToLoad, 20 * 1000 * 1000);
+
+		if (m_Size > 0)
+		{
+			if (m_Size <= MaxSizeToLoad)
+				buf = m_MemData->m_Buffers.front();
+			else
+				buf = (m_FileData == nullptr) ? nullptr : m_FileData->m_Buffer1;
+		}
+
+		tmp_Syntax = MadSyntax::GetSyntaxByExt(fn.GetExt());
+
+		if( tmp_Syntax == nullptr )
+		{
+			if(buf != nullptr && s != 0)
+				tmp_Syntax = MadSyntax::GetSyntaxByFirstLine( buf, s );
+
+			if( tmp_Syntax == nullptr )
+			{
+				tmp_Syntax = MadSyntax::GetSyntaxByFileName( fn.GetName() );
+
+				if( tmp_Syntax == nullptr )
+				{
+					tmp_Syntax = MadSyntax::GetSyntaxByTitle( wxGetTranslation(MadPlainTextTitle) );
+				}
+			}
+		}
+	}
+
+	if (tmp_Syntax != nullptr)
+	{
+		if (tmp_Syntax->m_SynAttr->m_Title != m_Syntax->m_SynAttr->m_Title)
+		{
+			wxFont *font = m_MadEdit->m_TextFont;
+			tmp_Syntax->InitNextWord1(m_MadEdit->m_Lines, m_MadEdit->m_WordBuffer, m_MadEdit->m_WidthBuffer, font->GetFaceName(), font->GetPointSize(), font->GetFamily());
+			m_MadEdit->m_Syntax = tmp_Syntax;
+			tmp_Syntax = m_Syntax;
+			m_Syntax = m_MadEdit->m_Syntax;
+			m_MadEdit->UpdateSyntaxDictionary();
+			m_MadEdit->ReformatAll();
+		}
 		delete tmp_Syntax;
 	}
 
-	if( m_FileData == NULL )
+	if( m_FileData == nullptr )
 	{
 		int utf8test = MadFileNameIsUTF8( filename );
 #ifndef __WXMSW__
@@ -3641,7 +3733,7 @@ bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 		if( utf8test == 0 ) // not found
 		{
 			// test parent dir
-			wxFileName fn( filename );
+			//wxFileName fn( filename );
 			utf8test = MadDirExists( fn.GetPath( wxPATH_GET_VOLUME ) );
 		}
 
@@ -3656,7 +3748,7 @@ bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 
 		wxFileOffset filesize = file.SeekEnd( 0 );
 		file.Seek( 0 );
-		WriteToFile( file, NULL, NULL );
+		WriteToFile( file, nullptr, nullptr );
 		file.Close();
 
 		if( filesize > m_Size )
@@ -3682,7 +3774,7 @@ bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 		{
 #ifndef __WXMSW__
 			// test parent dir
-			wxFileName fn( filename );
+			//wxFileName fn( filename );
 			utf8test = MadDirExists( fn.GetPath( wxPATH_GET_VOLUME ) );
 #endif
 			createnew = true;
@@ -3743,7 +3835,7 @@ bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 		return true;
 	}
 
-	if( m_WriteBuffer == NULL )
+	if( m_WriteBuffer == nullptr )
 	{
 		m_WriteBufferVector.resize( BUFFER_SIZE );
 		m_WriteBuffer = &m_WriteBufferVector[0];
@@ -3754,7 +3846,7 @@ bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 
 	if( !tempdir.IsEmpty() )
 	{
-		wxFileName fn( filename );
+		//wxFileName fn( filename );
 		tempfilename = tempdir + fn.GetFullName() + wxT( ".MadEdit.tmp" );
 		int id = 0;
 
@@ -3763,10 +3855,10 @@ bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 		tempfilename << id; // append "id"
 	}
 
-	MadFileData *tempfiledata = NULL;
-	MadMemData *tempmemdata = NULL;
-	MadInData *tempindata = NULL;
-	MadOutData *tempoutdata = NULL;
+	MadFileData *tempfiledata = nullptr;
+	MadMemData *tempmemdata = nullptr;
+	MadInData *tempindata = nullptr;
+	MadOutData *tempoutdata = nullptr;
 #ifdef _DEBUG
 	wxFileOffset maxsize = 0;
 #endif
@@ -3836,7 +3928,7 @@ bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 					}
 
 					// move the block to tempdata
-					if( tempoutdata == NULL )
+					if( tempoutdata == nullptr )
 					{
 						if( tempfilename.IsEmpty() )
 						{
@@ -3856,13 +3948,13 @@ bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 
 					wxFileOffset pos0 = temppos + tempsize;
 
-					if( tempfiledata != NULL )
+					if( tempfiledata != nullptr )
 					{
 						tempfiledata->m_SavePos = pos0;
 					}
 					else
 					{
-						wxASSERT( pos0 <= tempmemdata->m_Buffers.size()*BUFFER_SIZE );
+						wxASSERT( pos0 <= ((wxFileOffset)(tempmemdata->m_Buffers.size()*BUFFER_SIZE)) );
 						tempmemdata->m_Size = pos0;
 					}
 
@@ -3927,7 +4019,7 @@ bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 				{
 					temppos = 0;
 
-					if( tempmemdata != NULL )
+					if( tempmemdata != nullptr )
 					{
 						tempmemdata->Reset();
 					}
@@ -3973,12 +4065,12 @@ bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 	m_FileData->m_Buf1Pos = -1;
 	m_FileData->m_Buf2Pos = -1;
 
-	if( tempmemdata != NULL )
+	if( tempmemdata != nullptr )
 	{
 		delete tempmemdata;
 	}
 	else
-		if( tempfiledata != NULL )
+		if( tempfiledata != nullptr )
 		{
 			delete tempfiledata;
 			wxRemoveFile( tempfilename );
@@ -3997,7 +4089,7 @@ MadLineList::MadLineList()
 // Toggle or remove bookmark from given position.
 // If there is a bookmark on the given position, remove it. If there is not, add it.
 //
-void MadLineList::SetBookmark( MadLineIterator position )
+void MadLineList::SetBookmark( MadLineIterator position, bool toggle/* = true*/ )
 {
 	if( m_BookmarkList.empty() )
 	{
@@ -4009,7 +4101,8 @@ void MadLineList::SetBookmark( MadLineIterator position )
 
 	if( bmkIter != m_BookmarkList.end() )
 	{
-		m_BookmarkList.erase( bmkIter );   // we remove this bookmark
+		if(toggle)
+			m_BookmarkList.erase( bmkIter );   // we remove this bookmark
 		return;
 	}
 
@@ -4034,6 +4127,24 @@ void MadLineList::SetBookmark( MadLineIterator position )
 
 	wxASSERT( iter != end() );
 	m_BookmarkList.insert( bmkIter, position );
+}
+
+// Remove bookmark from given position.
+// If there is a bookmark on the given position, remove it.
+//
+void MadLineList::RemoveBookmark( MadLineIterator position )
+{
+	if( m_BookmarkList.empty() )
+	{
+		return;
+	}
+
+	MadBookmarkIterator bmkIter = find( m_BookmarkList.begin(), m_BookmarkList.end(), position );
+
+	if( bmkIter != m_BookmarkList.end() )
+	{
+		m_BookmarkList.erase( bmkIter );   // we remove this bookmark
+	}
 }
 
 // Return line number, or -1 if there are no bookmars.

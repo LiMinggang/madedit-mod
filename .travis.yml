@@ -1,0 +1,29 @@
+language: cpp
+
+compiler:
+  - gcc
+
+sudo: false
+
+os:
+  - linux
+
+script:
+  - cd ./thirdparty/wxWidgets && sh ./configure --enable-unicode --disable-shared --with-libpng=builtin --with-zlib=builtin --with-expat=builtin --with-gtk=2 --with-libiconv=no && make
+  - cd ../.. && sh ./autogen.sh && sh ./configure --with-wxdir=./thirdparty/wxWidgets && make
+#  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then autoreconf -i -I /usr/local/share/aclocal && ./configure && make && make check; fi
+# might be needed for future
+
+
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - autoconf
+    - automake
+    - gcc
+    - g++
+    - libboost1.55-all-dev
+    - gtk+2.0-dev
+    - libwxgtk3.0

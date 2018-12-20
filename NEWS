@@ -1,28 +1,16 @@
-Mod v0.4.3
-1.New: Use dialog to let user choose one for all instead of annoying one by one dialogs
-2.New: Let the user to do the backup selfly #198
-3.New: Use Icon to replace the checkbox on QuickSearch Bar #181
-4.New: Remember pos of all tool Bars
-5.New: Reset tool bars position
-6.New: Insert to the top instead of append to the bottom of search results, expand the last automatically and collapse the last
-7.New: Add InputBox, MsgBox to MadPython so that user can get input or output some message
-8.New: Confirm Undo at the first time if the changes had been saved to disk
-9.New: Add Scripts list to right click menu
-10.New: Remove file from recentlist if could not be opened
-11.New: An Enhanced "Auto-complete" for selection(Option->Edit) #176
-12.New: Scroll function on Righ click menu of scroll bars #157
-13.New: Support selection replace in Typewriter mode
-14.New: Hope typewrite mode could work when use "Backspace" or "Delete" #203
-15.New: Double click to highlight word
-16.New: Enlarge input area of single mode
-17.New: Enhancement for Post-It mode #182
-18.Fix: 0.4.2.1 can not remember the word wrap setting #201
-19.Fix: The fix width in the Option menu can't Open #199
-20.Fix: Improve windows list code, fix a bug of inner-tab drag/reposition(wxAuiNoteBook)
-21.Fix: Assertion failure of FindInFilesDialog
-22.Fix: Assertion failure of MadMacroDlg
-23.Fix: Improve 80 column indicator
-24.Other code improvement
-25.Upgrade boost to 1.61
-26.Update hunspell to 1.41
-27.Update Chinese translation
+Mod v0.4.15
+1.New: Use input file ext as SaveAs file type filter
+2.New: Use javascript syntax for typescript at first
+3.New: ArchLinux/Manjaro package support
+4.New: Better Dark theme based on popular ones
+5.New: Change default color of active line marker
+6.New: Highlight word color can be configed
+7.New: Use backgroud color of text for rest of the line
+8.Fix: Size issue of MacroDialog
+9.Fix: Save new created empty file as would cause crash #271
+10.Fix: Upward text selection stops at the top margin of text area #272
+11.Fix: After entering and exiting full screen mode, the Macro tool buttons auto appear on the toolbar #273
+12.Fix: Bookmark background color could not be saved
+13.Update Hunspell to 1.7.0
+14.Update dictionary download URL
+15.Update translations

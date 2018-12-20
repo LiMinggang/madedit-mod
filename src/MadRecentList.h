@@ -23,8 +23,8 @@ public:
 #endif
     }
 
-    MadRecentList(size_t maxFiles = 9, wxWindowID idBase = wxID_FILE1, bool caseSensitive=OSCaseSensitive() )
-        : wxFileHistory(maxFiles, idBase), m_caseSensitive(caseSensitive), m_idBase(idBase)
+    MadRecentList(size_t maxFiles = 9, wxWindowID idBase = wxID_FILE1, bool caseSensitive=OSCaseSensitive(), bool isFileHistory = true )
+        : wxFileHistory(maxFiles, idBase), m_caseSensitive(caseSensitive), m_isFileHistory(isFileHistory), m_idBase(idBase)
     {}
 
     virtual void AddFileToHistory(const wxString& file);
@@ -44,6 +44,7 @@ private:
     bool ItemEQ(const wxString& item1, const wxString& item2);
 
     bool m_caseSensitive;
+	bool m_isFileHistory;
 	wxWindowID m_idBase;
 };
 

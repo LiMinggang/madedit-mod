@@ -52,8 +52,9 @@ LineNumberColor=White
 LineNumberBgColor=A0A0A0
 LineNumberStyle=
 
-ActiveLineColor=Fuchsia
-BookmarkColor=0000FF
+ActiveLineColor=EAEAF2
+BookmarkColor=DeepSkyBlue
+BookmarkBgColor=MediumBlue
 
 # User Defined Keywords
 [1.Keywords]
@@ -61,4 +62,5 @@ Color=Blue
 BgColor=
 Style=Bold
 InRange=0
-Keyword=__asm __based __cdecl __declspec __except __far __fastcall __finally __fortran __huge __inline __int16 __int32 __int64 __int8 __interrupt __leave __loadds __multiple_inheritance __near __pascal __saveregs __segment __segname __self __single_inheritance __stdcall __try __uuidof __virtual_inheritance auto bool break case catch char class const const_cast continue default delete dllexport dllimport do double dynamic_cast else enum explicit export extern false float for friend goto if inline int long mutable naked namespace new operator private protected public register reinterpret_cast return short signed sizeof static static_cast struct switch template this thread throw true try typedef typeid typename union unsigned using uuid virtual void volatile wchar_t while
+Keyword=_Pragma __asm __based __cdecl __declspec __except __far __fastcall __finally __fortran __huge __inline __int16 __int32 __int64 __int8 __interrupt __leave __loadds __multiple_inheritance __near __pascal __saveregs __segment __segname __self __single_inheritance __stdcall __try __uuidof __virtual_inheritance alignas alignof and and_eq atomic_cancel atomic_commit atomic_noexcept auto bool break case catch char char16_t char32_t class compl concept concept const const_cast constexpr continue decltype default delete dllexport dllimport do double dynamic_cast else enum explicit export extern false final float for friend goto if import inline int long module mutable naked namespace new not not_eq nullptr operator or or_eq override private protected public register reinterpret_cast requires return short signed sizeof static static_assert static_cast struct switch synchronized template this thread thread_local throw transaction_safe transaction_safe_dynamic true try typedef typeid typename union unsigned using uuid virtual void volatile wchar_t while xor xor_eq
+

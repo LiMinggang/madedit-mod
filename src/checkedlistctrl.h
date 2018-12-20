@@ -12,7 +12,21 @@
 
 #ifndef _WX_CHECKEDLISTCTRL_H_
 #define _WX_CHECKEDLISTCTRL_H_
-
+#ifndef _MSC_VER 
+#if __cplusplus <= 199711L
+#define CPLUSEPLUSE98 1
+#include <boost/shared_ptr.hpp>
+#else 
+#include <memory>
+#endif
+#else
+#if _MSC_VER < 1600
+#define CPLUSEPLUSE98 1
+#include <boost/shared_ptr.hpp>
+#else 
+#include <memory>
+#endif
+#endif
 // wxWidgets headers
 #include <wx/listctrl.h>
 #include <wx/imaglist.h>
@@ -49,7 +63,7 @@ DECLARE_EXPORTED_EVENT_TYPE(WXEXPORT, wxEVT_COMMAND_LIST_ITEM_UNCHECKED, -1);
     DECLARE_EVENT_TABLE_ENTRY( \
         wxEVT_COMMAND_LIST_ITEM_CHECKED, id, -1, \
         (wxObjectEventFunction)(wxEventFunction)(wxListEventFunction)&fn, \
-        (wxObject *) NULL \
+        (wxObject *) nullptr \
     ),
 #endif
 #ifndef EVT_LIST_ITEM_UNCHECKED
@@ -58,7 +72,7 @@ DECLARE_EXPORTED_EVENT_TYPE(WXEXPORT, wxEVT_COMMAND_LIST_ITEM_UNCHECKED, -1);
     DECLARE_EVENT_TABLE_ENTRY( \
         wxEVT_COMMAND_LIST_ITEM_UNCHECKED, id, -1, \
         (wxObjectEventFunction)(wxEventFunction)(wxListEventFunction)&fn, \
-        (wxObject *) NULL \
+        (wxObject *) nullptr \
     ),
 
 #endif
@@ -77,26 +91,23 @@ protected:
     wxImageList m_imageList;
 
 public:
-    wxCheckedListCtrl()
-        : wxListCtrl(), m_imageList(16, 16, TRUE) {}
+    wxCheckedListCtrl();
 
-    wxCheckedListCtrl(wxWindow *parent, wxWindowID id = -1,
-                        const wxPoint& pt = wxDefaultPosition,
-                        const wxSize& sz = wxDefaultSize,
-                        long style = wxCLC_CHECK_WHEN_SELECTING,
-                        const wxValidator& validator = wxDefaultValidator,
-                        const wxString& name = wxListCtrlNameStr)
-                        : wxListCtrl(), m_imageList(16, 16, TRUE)
-        { Create(parent, id, pt, sz, style, validator, name); }
-
-    bool Create(wxWindow *parent, wxWindowID id = -1,
+    wxCheckedListCtrl(wxWindow *parent, wxWindowID id = wxID_ANY,
                         const wxPoint& pt = wxDefaultPosition,
                         const wxSize& sz = wxDefaultSize,
                         long style = wxCLC_CHECK_WHEN_SELECTING,
                         const wxValidator& validator = wxDefaultValidator,
                         const wxString& name = wxListCtrlNameStr);
 
-    virtual ~wxCheckedListCtrl() {}
+    bool Create(wxWindow *parent, wxWindowID id = wxID_ANY,
+                        const wxPoint& pt = wxDefaultPosition,
+                        const wxSize& sz = wxDefaultSize,
+                        long style = wxCLC_CHECK_WHEN_SELECTING,
+                        const wxValidator& validator = wxDefaultValidator,
+                        const wxString& name = wxListCtrlNameStr);
+
+    virtual ~wxCheckedListCtrl() { DeletePendingEvents  (  ); }
 
 
 public:			// utilities
@@ -161,7 +172,6 @@ protected:		// internal utilities
 
 private:
     DECLARE_CLASS(wxCheckedListCtrl)
-    DECLARE_EVENT_TABLE()
 };
 
 

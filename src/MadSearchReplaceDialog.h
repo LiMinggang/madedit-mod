@@ -8,6 +8,7 @@
 
 #ifndef	_MADSEARCHREPLACEDIALOG_H_
 #define	_MADSEARCHREPLACEDIALOG_H_
+#include "MadUtils.h"
 
 #ifdef _MSC_VER
 # pragma warning( push )
@@ -15,13 +16,13 @@
 #endif
 // disable 4996 {
 //(*Headers(MadSearchReplaceDialog)
-#include <wx/sizer.h>
-#include <wx/menu.h>
-#include <wx/checkbox.h>
-#include <wx/radiobut.h>
-#include <wx/slider.h>
 #include <wx/button.h>
+#include <wx/checkbox.h>
 #include <wx/dialog.h>
+#include <wx/menu.h>
+#include <wx/radiobut.h>
+#include <wx/sizer.h>
+#include <wx/slider.h>
 //*)
 // disable 4996 }
 #ifdef _MSC_VER
@@ -44,70 +45,43 @@ class MadSearchReplaceDialog: public wxDialog
 		virtual ~MadSearchReplaceDialog();
 
 		//(*Declarations(MadSearchReplaceDialog)
-		wxSlider* WxSliderTransDegree;
-		wxButton* WxButtonReplace;
-		wxButton* WxButtonFindPrev;
-		wxButton* WxButtonFindNext;
-		wxButton* WxButtonFindAll;
-		wxRadioButton* WxRadioAlways;
-		wxButton* WxButtonReplaceAll;
-		wxCheckBox* WxCheckBoxMoveFocus;
-		wxCheckBox* WxCheckBoxCaseSensitive;
-		wxSlider* WxSliderInputSizer;
-		wxCheckBox* WxCheckBoxPurgeBookmark;
-		wxCheckBox* WxCheckBoxSearchInSelection;
-		wxMenu WxPopupMenuRecentFindText;
-		wxCheckBox* WxCheckBoxBookmarkLine;
-		wxButton* WxButtonFindAllInAll;
-		wxButton* WxButtonClose;
-		wxRadioButton* WxRadioLosingFocus;
-		wxMenu WxPopupMenuRecentReplaceText;
-		wxCheckBox* WxCheckBoxFindHex;
-		wxCheckBox* WxCheckBoxWholeWord;
-		wxBoxSizer* BoxSizerSearch;
-		wxButton* WxButtonReplaceAllInAll;
-		wxButton* WxButtonCount;
-		wxCheckBox* WxCheckBoxBookmarkOnly;
-		wxCheckBox* WxCheckBoxRegex;
-		wxCheckBox* WxCheckBoxWrapAround;
+		wxBoxSizer* BoxSizer4;
 		wxBoxSizer* BoxSizerReplace;
-		wxCheckBox* WxCheckBoxDotMatchNewLine;
+		wxBoxSizer* BoxSizerSearch;
+		wxButton* WxButtonClose;
+		wxButton* WxButtonCount;
+		wxButton* WxButtonFindAll;
+		wxButton* WxButtonFindAllInAll;
+		wxButton* WxButtonFindNext;
+		wxButton* WxButtonFindPrev;
+		wxButton* WxButtonReplace;
+		wxButton* WxButtonReplaceAll;
+		wxButton* WxButtonReplaceAllInAll;
 		wxButton* WxButtonReplaceExpand;
+		wxCheckBox* WxCheckBoxBookmarkLine;
+		wxCheckBox* WxCheckBoxBookmarkOnly;
+		wxCheckBox* WxCheckBoxCaseSensitive;
+		wxCheckBox* WxCheckBoxDotMatchNewLine;
+		wxCheckBox* WxCheckBoxFindHex;
+		wxCheckBox* WxCheckBoxMoveFocus;
+		wxCheckBox* WxCheckBoxPurgeBookmark;
+		wxCheckBox* WxCheckBoxRegex;
+		wxCheckBox* WxCheckBoxSearchInSelection;
+		wxCheckBox* WxCheckBoxWholeWord;
+		wxCheckBox* WxCheckBoxWrapAround;
+		wxCheckBox* wxCheckBoxReplaceNoDoubleCheck;
+		wxMenu WxPopupMenuRecentFindText;
+		wxMenu WxPopupMenuRecentReplaceText;
+		wxRadioButton* WxRadioAlways;
+		wxRadioButton* WxRadioLosingFocus;
+		wxSlider* WxSliderInputSizer;
+		wxSlider* WxSliderTransDegree;
 		//*)
 
 	protected:
 
 		//(*Identifiers(MadSearchReplaceDialog)
-		static const long ID_WXCHECKBOXMOVEFOCUS;
-		static const long ID_WXCHECKBOXCASESENSITIVE;
-		static const long ID_WXCHECKBOXWHOLEWORD;
-		static const long ID_WXCHECKBOXREGEX;
-		static const long ID_WXCHECKBOXBOXDOTMATCHNEWLINE;
-		static const long ID_WXCHECKBOXFINDHEX;
-		static const long ID_WXCHECKBOXSEARCHINSELECTION;
-		static const long ID_WXCHECKBOXWRAPAROUND;
-		static const long ID_WXCHECKBOXBOOKMARKLINE;
-		static const long ID_WXCHECKBOXBOOKMARKONLY;
-		static const long ID_WXCHECKBOXPURGEBOOKMARK;
-		static const long ID_RADIOBUTTON1;
-		static const long ID_RADIOBUTTON2;
-		static const long ID_WXSLIDERTRANSDEGREE;
-		static const long ID_WXSLIDERINPUTSIZER;
-		static const long ID_WXBUTTONFINDNEXT;
-		static const long ID_WXBUTTONFINDPREV;
-		static const long ID_WXBUTTONFINDALL;
-		static const long ID_WXBUTTONFINDALLINALL;
-		static const long ID_WXBUTTONREPLACE;
-		static const long ID_WXBUTTONREPLACEALL;
-		static const long ID_WXBUTTONREPLACEALLINALL;
-		static const long ID_WXBUTTONCOUNT;
-		static const long ID_WXBUTTONREPLACEEXPAND;
 		//*)
-
-		static const long ID_MADEDIT1;
-		static const long ID_MADEDIT2;
-		static const long ID_WXBITMAPBUTTONRECENTFINDTEXT;
-		static const long ID_WXBITMAPBUTTONRECENTREPLACETEXT;
 
 		static const long ID_RECENTFINDTEXT1;	// must be the same with MadSearchDialog
 		static const long ID_RECENTFINDTEXT20;
@@ -129,6 +103,69 @@ class MadSearchReplaceDialog: public wxDialog
 		void UpdateCheckBoxByCBHex(bool check);
 		void UpdateSearchInSelection(bool check);
 
+		void OnEditUndo( wxCommandEvent& WXUNUSED(event) );
+		void OnEditRedo( wxCommandEvent& WXUNUSED(event) );
+		void OnEditCut( wxCommandEvent& WXUNUSED(event) );
+		void OnEditCopy( wxCommandEvent& WXUNUSED(event) );
+		void OnEditPaste( wxCommandEvent& WXUNUSED(event) );
+		void OnEditDelete( wxCommandEvent& WXUNUSED(event) );
+		void OnEditCutLine( wxCommandEvent& WXUNUSED(event) );
+		void OnEditDeleteLine( wxCommandEvent& WXUNUSED(event) );
+		void OnEditSelectAll( wxCommandEvent& WXUNUSED(event) );
+		void OnEditStartEndSelction( wxCommandEvent& WXUNUSED(event) );
+		void OnEditInsertTabChar( wxCommandEvent& WXUNUSED(event) );
+		void OnEditInsertDateTime( wxCommandEvent& WXUNUSED(event) );
+		
+		void OnEditSortAscending( wxCommandEvent& WXUNUSED(event) );
+		void OnEditSortDescending( wxCommandEvent& WXUNUSED(event) );
+		void OnEditSortAscendingCase( wxCommandEvent& WXUNUSED(event) );
+		void OnEditSortDescendingCase( wxCommandEvent& WXUNUSED(event) );
+		void OnEditSortByOptions( wxCommandEvent& WXUNUSED(event) );
+		void OnEditSortOptions( wxCommandEvent& WXUNUSED(event) );
+		
+		void OnEditCopyAsHexString( wxCommandEvent& WXUNUSED(event) );
+		void OnEditCopyAsHexStringWithSpace( wxCommandEvent& WXUNUSED(event) );
+		void OnEditCopyRevertHex( wxCommandEvent& WXUNUSED(event) );
+		void OnEditIncIndent( wxCommandEvent& WXUNUSED(event) );
+		void OnEditDecIndent( wxCommandEvent& WXUNUSED(event) );
+		void OnEditComment( wxCommandEvent& WXUNUSED(event) );
+		void OnEditUncomment( wxCommandEvent& WXUNUSED(event) );
+		void OnEditWordWrapToNewLine( wxCommandEvent& WXUNUSED(event) );
+		void OnEditNewLineToWordWrap( wxCommandEvent& WXUNUSED(event) );
+		void OnEditToUpperCase( wxCommandEvent& WXUNUSED(event) );
+		void OnEditToLowerCase( wxCommandEvent& WXUNUSED(event) );
+		void OnEditInvertCase( wxCommandEvent& WXUNUSED(event) );
+		void OnEditCapitalize( wxCommandEvent& WXUNUSED(event) );
+		void OnEditToHalfWidth( wxCommandEvent& WXUNUSED(event) );
+		void OnEditToHalfWidthByOptions( wxCommandEvent& WXUNUSED(event) );
+		void OnEditToFullWidth( wxCommandEvent& WXUNUSED(event) );
+		void OnEditToFullWidthByOptions( wxCommandEvent& WXUNUSED(event) );
+		void OnEditTabToSpace( wxCommandEvent& WXUNUSED(event) );
+		void OnEditSpaceToTab( wxCommandEvent& WXUNUSED(event) );
+		void OnEditTrimTrailingSpaces( wxCommandEvent& WXUNUSED(event) );
+		void OnEditTrimLeadingSpaces( wxCommandEvent& WXUNUSED(event) );
+		void OnEditDeleteEmptyLines( wxCommandEvent& WXUNUSED(event) );
+		void OnEditDeleteEmptyLinesWithSpaces( wxCommandEvent& WXUNUSED(event) );
+		void OnEditJoinLines( wxCommandEvent& WXUNUSED(event) );
+		void OnEditInsertNumbers( wxCommandEvent& WXUNUSED(event) );
+		void OnEditColumnAlignLeft( wxCommandEvent& WXUNUSED(event) );
+		void OnEditColumnAlignRight( wxCommandEvent& WXUNUSED(event) );
+		void OnEditSpellCheck( wxCommandEvent& WXUNUSED(WXUNUSED(event)) );
+		void OnToolsMadScriptList( wxCommandEvent& WXUNUSED(WXUNUSED(event)) );
+		
+		typedef struct 
+		{
+			const long evtTag;
+			void (MadSearchReplaceDialog::*method)( wxCommandEvent &);
+		} wxCmdEvtHandlerMap_t;
+		static wxCmdEvtHandlerMap_t m_menu_evt_map[];
+		typedef struct 
+		{
+			const long evtStartTag;
+			const long evtEndTag;
+			void (MadSearchReplaceDialog::*method)( wxCommandEvent &);
+		} wxCmdEvtHandlerRangeMap_t;
+		static wxCmdEvtHandlerRangeMap_t m_menu_evt_range_map[];
 
 	//private:
 	public:
@@ -137,27 +174,28 @@ class MadSearchReplaceDialog: public wxDialog
 		void MadSearchReplaceDialogKeyDown(wxKeyEvent& event);
 		void WxCheckBoxFindHexClick(wxCommandEvent& event);
 		void WxCheckBoxSearchInSelectionClick(wxCommandEvent& event);
-		void WxButtonFindNextClick(wxCommandEvent& event);
-		void WxButtonReplaceClick(wxCommandEvent& event);
-		void WxButtonReplaceAllClick(wxCommandEvent& event);
-		void WxButtonFindPrevClick(wxCommandEvent& event);
-		void WxButtonCountClick(wxCommandEvent& event);
-		void WxButtonCloseClick(wxCommandEvent& event);
-		void WxButtonReplaceExpandClick(wxCommandEvent& event);
+		void WxButtonFindNextClick(wxCommandEvent& WXUNUSED(event));
+		void WxButtonReplaceClick(wxCommandEvent& WXUNUSED(event));
+		void WxButtonReplaceAllClick(wxCommandEvent& WXUNUSED(event));
+		void WxButtonFindPrevClick(wxCommandEvent& WXUNUSED(event));
+		void WxButtonCountClick(wxCommandEvent& WXUNUSED(event));
+		void WxButtonCloseClick(wxCommandEvent& WXUNUSED(event));
+		void WxButtonReplaceExpandClick(wxCommandEvent& WXUNUSED(event));
 		void WxCheckBoxRegexClick(wxCommandEvent& event);
-		void WxRadioLosingFocusSelect(wxCommandEvent& event);
-		void WxRadioAlwaysSelect(wxCommandEvent& event);
-		void WxSliderTransDegreeScroll(wxCommandEvent& event);
-		void WxButtonReplaceAllInAllClick(wxCommandEvent& event);
-		void WxButtonFindAllClick(wxCommandEvent& event);
-		void WxButtonFindAllInAllClick(wxCommandEvent& event);
-		void OnWxSliderInputSizerCmdScroll(wxCommandEvent& event);
+		void WxRadioLosingFocusSelect(wxCommandEvent& WXUNUSED(event));
+		void WxRadioAlwaysSelect(wxCommandEvent& WXUNUSED(event));
+		void WxSliderTransDegreeScroll(wxCommandEvent& WXUNUSED(event));
+		void WxButtonReplaceAllInAllClick(wxCommandEvent& WXUNUSED(event));
+		void WxButtonFindAllClick(wxCommandEvent& WXUNUSED(event));
+		void WxButtonFindAllInAllClick(wxCommandEvent& WXUNUSED(event));
+		void OnWxSliderInputSizerCmdScroll(wxCommandEvent& WXUNUSED(event));
+		void WxCheckBoxBookmarkLineClick(wxCommandEvent& event);
 		//*)
 
 		void MadSearchReplaceDialogActivate(wxActivateEvent& event);
 
-		void WxBitmapButtonRecentFindTextClick(wxCommandEvent& event);
-		void WxBitmapButtonRecentReplaceTextClick(wxCommandEvent& event);
+		void WxBitmapButtonRecentFindTextClick(wxCommandEvent& WXUNUSED(event));
+		void WxBitmapButtonRecentReplaceTextClick(wxCommandEvent& WXUNUSED(event));
 		void OnRecentFindText(wxCommandEvent& event);
 		void OnRecentReplaceText(wxCommandEvent& event);
 
@@ -168,7 +206,6 @@ class MadSearchReplaceDialog: public wxDialog
 		void ShowReplaceUI();
 		void SetTransparency();
 		void ShowFindUI();
-		DECLARE_EVENT_TABLE()
 };
 
 extern MadSearchReplaceDialog *g_SearchReplaceDialog;

@@ -1,0 +1,664 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<wxsmith>
+	<object class="wxDialog" name="MadSourceFormatDialog">
+		<title>Source Formatter</title>
+		<maxsize>-1,-1</maxsize>
+		<id_arg>0</id_arg>
+		<size_arg>1</size_arg>
+		<style>wxCAPTION|wxRESIZE_BORDER|wxCLOSE_BOX</style>
+		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
+			<orient>wxVERTICAL</orient>
+			<object class="sizeritem">
+				<object class="wxAuiNotebook" name="wxID_ANY" variable="AuiNotebook1" member="no">
+					<size>800,500</size>
+					<style>wxAUI_NB_TOP</style>
+					<object class="AuiNotebookPage">
+						<object class="wxPanel" name="wxID_ANY" variable="Panel1" member="no">
+							<size>792,464</size>
+							<style>0</style>
+							<object class="wxGridSizer" variable="GridSizer1" member="no">
+								<cols>2</cols>
+								<object class="sizeritem">
+									<object class="wxRadioBox" name="wxID_ANY" variable="RadioBoxBracketStyle" member="yes">
+										<label>Bracket Style</label>
+										<content>
+											<item>Allman(ANSI)</item>
+											<item>Java</item>
+											<item>K&amp;&amp;R</item>
+											<item>Stroustrup</item>
+											<item>Whitesmith</item>
+											<item>VTK</item>
+											<item>Ratliff</item>
+											<item>Gnu</item>
+											<item>Linux</item>
+											<item>Horstmann</item>
+											<item>1TBS</item>
+											<item>Google</item>
+											<item>Mozilla</item>
+											<item>Webkit</item>
+											<item>Pico</item>
+											<item>Lisp</item>
+											<item>Custom</item>
+										</content>
+										<default>-1</default>
+										<style>wxRA_SPECIFY_COLS</style>
+										<handler function="OnRadioBoxBracketStyleSelect" entry="EVT_RADIOBOX" />
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxStaticBoxSizer" variable="StaticBoxSizer1" member="no">
+										<label>Sample</label>
+										<orient>wxVERTICAL</orient>
+										<object class="sizeritem">
+											<object class="wxStaticText" name="wxID_ANY" variable="StaticText1" member="no">
+												<label>Sample of the bracket style option chosen to use:</label>
+											</object>
+											<flag>wxALL|wxEXPAND</flag>
+											<border>5</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxTextCtrl" name="wxID_ANY" variable="TextSample" member="yes">
+												<style>wxTE_MULTILINE|wxTE_READONLY|wxVSCROLL|wxHSCROLL</style>
+											</object>
+											<flag>wxALL|wxEXPAND</flag>
+											<border>5</border>
+										</object>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>5</border>
+									<option>1</option>
+								</object>
+							</object>
+						</object>
+						<label>Style</label>
+					</object>
+					<object class="AuiNotebookPage">
+						<object class="wxPanel" name="wxID_ANY" variable="Panel2" member="no">
+							<size>792,464</size>
+							<style>0</style>
+							<object class="wxBoxSizer" variable="BoxSizer3" member="no">
+								<orient>wxVERTICAL</orient>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckAttachClasses" member="yes">
+										<label>Attach Classes</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckAttachExternC" member="yes">
+										<label>Attach Extern C</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckAttachNamespaces" member="yes">
+										<label>Attach Namespaces</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckAttachInlines" member="yes">
+										<label>Attach Inlines</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckAttachClosingWhile" member="yes">
+										<label>Attach Closing While</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+							</object>
+						</object>
+						<label>Brackets</label>
+					</object>
+					<object class="AuiNotebookPage">
+						<object class="wxPanel" name="wxID_ANY" variable="Panel3" member="no">
+							<size>792,464</size>
+							<style>0</style>
+							<object class="wxBoxSizer" variable="BoxSizer4" member="no">
+								<orient>wxVERTICAL</orient>
+								<object class="sizeritem">
+									<object class="wxGridSizer" variable="GridSizer4" member="no">
+										<cols>2</cols>
+										<object class="sizeritem">
+											<object class="wxStaticText" name="wxID_ANY" variable="StaticText2" member="no">
+												<label>Indentation size (in spaces):</label>
+											</object>
+											<flag>wxALL|wxEXPAND</flag>
+											<border>2</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxSpinCtrl" name="wxID_ANY" variable="SpinIndentation" member="yes">
+												<value>4</value>
+												<min>2</min>
+												<max>8</max>
+											</object>
+											<flag>wxALL</flag>
+											<border>2</border>
+										</object>
+									</object>
+									<flag>wxALL</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckUseTab" member="yes">
+										<label>Use TABs instead of spaces</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckForceUseTabs" member="yes">
+										<label>Force using TABs</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckIndentCase" member="yes">
+										<label>Indent case: statement in switches (commands under case:)</label>
+									</object>
+									<flag>wxALL|wxALIGN_LEFT</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckIndentClasses" member="yes">
+										<label>Indent classes (keywords public:, protected: and private:)</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckIndentLabels" member="yes">
+										<label>Indent labels</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckIndentModifiers" member="yes">
+										<label>Indent modifiers</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckIndentNamespaces" member="yes">
+										<label>Indent namespaces</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckIndentSwitches" member="yes">
+										<label>Indent switches</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckIndentPreprocBlock" member="yes">
+										<label>Indent preprocessor blocks at bracket level zero, and within a namespace</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckIndentPreprocDefine" member="yes">
+										<label>Indent multi-line preprocessor definitions ending with a backslash</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckIndentPreprocCond" member="yes">
+										<label>Indent preprocessor conditionals</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckIndentCol1Comments" member="yes">
+										<label>Indent C++ comments beginning in column one</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckIndentAfterParens" member="yes">
+										<label>Indent after parens</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxFlexGridSizer" variable="FlexGridSizer3" member="no">
+										<cols>2</cols>
+										<growablecols>0</growablecols>
+										<object class="sizeritem">
+											<object class="wxStaticText" name="wxID_ANY" variable="StaticText3" member="no">
+												<label>Minimal indent added when a header is built of multiple lines:</label>
+											</object>
+											<flag>wxALL|wxEXPAND</flag>
+											<border>2</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxSpinCtrl" name="wxID_ANY" variable="SpinMinConditionalEvent" member="yes">
+												<value>2</value>
+												<max>3</max>
+											</object>
+											<flag>wxALL|wxEXPAND</flag>
+											<border>2</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxStaticText" name="wxID_ANY" variable="StaticText4" member="no">
+												<label>Maximum of # spaces to indent a continuation line (max. 120):</label>
+											</object>
+											<flag>wxALL|wxEXPAND</flag>
+											<border>2</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxTextCtrl" name="wxID_ANY" variable="EditMaxContinuationIndent" member="yes">
+												<value>40</value>
+											</object>
+											<flag>wxALL|wxEXPAND</flag>
+											<border>2</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxStaticText" name="wxID_ANY" variable="StaticText10" member="no">
+												<label>Indent a continuation line (default 1)</label>
+											</object>
+											<flag>wxALL|wxEXPAND</flag>
+											<border>2</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxTextCtrl" name="wxID_ANY" variable="EditIndentContinuation" member="yes">
+												<value>1</value>
+											</object>
+											<flag>wxALL|wxEXPAND</flag>
+											<border>2</border>
+										</object>
+									</object>
+									<flag>wxALL</flag>
+								</object>
+							</object>
+						</object>
+						<label>Indentation</label>
+					</object>
+					<object class="AuiNotebookPage">
+						<object class="wxPanel" name="wxID_ANY" variable="Panel4" member="no">
+							<size>792,490</size>
+							<style>0</style>
+							<object class="wxBoxSizer" variable="BoxSizer5" member="no">
+								<orient>wxVERTICAL</orient>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckBreakClosing" member="yes">
+										<label>Break closing headers from their immediately preceding closing braces</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckBreakElseIfs" member="yes">
+										<label>Break &apos;else if()&apos; header combinations into seperate lines</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckAddBraces" member="yes">
+										<label>Add braces to unbraced one line conditional statements</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckAddOneLineBraces" member="yes">
+										<label>Add one line braces to unbraced one line conditional statements</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckRemoveBraces" member="yes">
+										<label>Remove braces from conditional statements (single statement on a single line)</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckKeepBlocks" member="yes">
+										<label>Don&apos;t break one-line blocks</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckKeepComplex" member="yes">
+										<label>Don&apos;t break complex statements and multiple statements residing in a single line</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckConvertTabs" member="yes">
+										<label>Convert TABs to spaces</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckCloseTemplates" member="yes">
+										<label>Closes whitespace in the angle brackets of template definitions</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckRemoveCommentPrefix" member="yes">
+										<label>Remove the preceding &apos;*&apos; in a multi-line comment that begins a line</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckBreakOneLineHeaders" member="yes">
+										<label>Break one line headers</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckBreakLines" member="yes">
+										<label>Enable line breaking</label>
+										<handler function="OnCheckBreakLinesClick" entry="EVT_CHECKBOX" />
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxBoxSizer" variable="BoxSizer6" member="no">
+										<object class="spacer">
+											<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+											<size>10,0</size>
+										</object>
+										<object class="sizeritem">
+											<object class="wxStaticText" name="wxID_ANY" variable="StaticText5" member="no">
+												<label>Break lines after amount of chars (range: 50-200)</label>
+											</object>
+											<flag>wxALL|wxEXPAND</flag>
+											<border>2</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxTextCtrl" name="wxID_ANY" variable="EditSFMaxLineLength" member="yes">
+												<value>200</value>
+											</object>
+											<flag>wxALL</flag>
+											<border>2</border>
+										</object>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+								</object>
+								<object class="sizeritem">
+									<object class="wxBoxSizer" variable="BoxSizer7" member="no">
+										<object class="spacer">
+											<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+											<size>10,0</size>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="wxID_ANY" variable="CheckBreakAfterLogical" member="yes">
+												<label>Break logical conditionals to be placed last on the previous line</label>
+											</object>
+											<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+											<border>2</border>
+										</object>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+								</object>
+							</object>
+						</object>
+						<label>Formatting</label>
+					</object>
+					<object class="AuiNotebookPage">
+						<object class="wxPanel" name="wxID_ANY" variable="Panel5" member="no">
+							<size>792,490</size>
+							<style>0</style>
+							<object class="wxBoxSizer" variable="BoxSizer9" member="no">
+								<orient>wxVERTICAL</orient>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckBreakBlocks" member="yes">
+										<label>Pad empty lines around header blocks (e.g. &apos;if&apos;, &apos;while&apos;...)</label>
+										<handler function="OnCheckBreakBlocksClick" entry="EVT_CHECKBOX" />
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxBoxSizer" variable="BoxSizer2" member="no">
+										<object class="spacer">
+											<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+											<size>10,0</size>
+										</object>
+										<object class="sizeritem">
+											<object class="wxCheckBox" name="wxID_ANY" variable="CheckBreakBlocksAll" member="yes">
+												<label>Treat closing header blocks (e.g. &apos;else&apos;, &apos;catch&apos;) as stand-alone blocks</label>
+											</object>
+											<flag>wxALL|wxEXPAND</flag>
+											<border>2</border>
+										</object>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckPadOperators" member="yes">
+										<label>Insert space padding around operators</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckPadParensOut" member="yes">
+										<label>Insert space padding around parenthesies on the outside</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckPadParensIn" member="yes">
+										<label>Insert space padding around parenthesies on the inside</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckPadHeader" member="yes">
+										<label>Insert space padding between a header and the following parenthesis</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckUnpadParens" member="yes">
+										<label>Remove extra space padding around parenthesis</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckDelEmptyLine" member="yes">
+										<label>Delete empty lines within a function or method</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckFillEmptyLines" member="yes">
+										<label>Fill empty lines with the whitespace of their previous lines</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckPadComma" member="yes">
+										<label>Pad comma</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckPadReturnType" member="yes">
+										<label>Pad return type(Object-C)</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckUnpadReturnType" member="yes">
+										<label>Unpad return type(Object-C)</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckPadParamType" member="yes">
+										<label>Pad param type(Object-C)</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxCheckBox" name="wxID_ANY" variable="CheckUnpadParamType" member="yes">
+										<label>Unpad param type(Object-C)</label>
+									</object>
+									<flag>wxALL|wxEXPAND</flag>
+									<border>2</border>
+								</object>
+								<object class="sizeritem">
+									<object class="wxGridSizer" variable="GridSizer3" member="no">
+										<cols>4</cols>
+										<object class="sizeritem">
+											<object class="wxStaticText" name="wxID_ANY" variable="StaticText6" member="no">
+												<label>Pointer alignment</label>
+											</object>
+											<flag>wxALL|wxEXPAND</flag>
+											<option>2</option>
+										</object>
+										<object class="sizeritem">
+											<object class="wxChoice" name="wxID_ANY" variable="ChoicePointerAlign" member="yes">
+												<content>
+													<item>None</item>
+													<item>Type</item>
+													<item>Middle</item>
+													<item>Name</item>
+												</content>
+												<selection>0</selection>
+											</object>
+											<flag>wxALL|wxEXPAND</flag>
+											<border>2</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxStaticText" name="wxID_ANY" variable="StaticText7" member="no">
+												<label>Reference alignment</label>
+											</object>
+											<flag>wxALL|wxEXPAND</flag>
+											<border>2</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxChoice" name="wxID_ANY" variable="ChoiceReferenceAlign" member="yes">
+												<content>
+													<item>None</item>
+													<item>Type</item>
+													<item>Middle</item>
+													<item>Name</item>
+												</content>
+												<selection>0</selection>
+											</object>
+											<flag>wxALL|wxEXPAND</flag>
+											<border>2</border>
+										</object>
+									</object>
+									<flag>wxALL</flag>
+									<border>2</border>
+								</object>
+							</object>
+						</object>
+						<label>Padding</label>
+					</object>
+					<object class="AuiNotebookPage">
+						<object class="wxPanel" name="wxID_ANY" variable="Panel6" member="no">
+							<size>792,490</size>
+							<style>0</style>
+							<object class="wxBoxSizer" variable="BoxSizer8" member="no">
+								<orient>wxVERTICAL</orient>
+								<object class="sizeritem">
+									<object class="wxGridSizer" variable="GridSizer2" member="no">
+										<cols>2</cols>
+										<object class="sizeritem">
+											<object class="wxStaticText" name="wxID_ANY" variable="StaticText8" member="no">
+												<label>XML version:</label>
+											</object>
+											<flag>wxALL|wxEXPAND</flag>
+											<border>2</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxTextCtrl" name="wxID_ANY" variable="EditXMLversion" member="yes">
+												<value>1.0</value>
+											</object>
+											<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+											<border>2</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxStaticText" name="wxID_ANY" variable="StaticText9" member="no">
+												<label>Indentation size(in spaces):</label>
+											</object>
+											<flag>wxALL|wxEXPAND</flag>
+											<border>2</border>
+										</object>
+										<object class="sizeritem">
+											<object class="wxTextCtrl" name="wxID_ANY" variable="EditXmlIndentSize" member="yes">
+												<value>4</value>
+											</object>
+											<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+											<border>2</border>
+										</object>
+									</object>
+									<flag>wxALL|wxALIGN_LEFT</flag>
+									<border>2</border>
+								</object>
+							</object>
+						</object>
+						<label>XML</label>
+					</object>
+				</object>
+				<flag>wxALL|wxEXPAND</flag>
+				<border>5</border>
+				<option>1</option>
+			</object>
+			<object class="sizeritem">
+				<object class="wxStdDialogButtonSizer" variable="StdDialogButtonSizer1" member="no">
+					<object class="button">
+						<object class="wxButton" name="wxID_OK">
+							<label></label>
+						</object>
+					</object>
+					<object class="button">
+						<object class="wxButton" name="wxID_CANCEL">
+							<label></label>
+						</object>
+					</object>
+				</object>
+				<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+				<border>5</border>
+			</object>
+		</object>
+	</object>
+</wxsmith>

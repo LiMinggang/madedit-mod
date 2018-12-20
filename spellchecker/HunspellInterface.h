@@ -18,7 +18,21 @@
 */
 #ifndef __HUNSPELL_CHECK_INTERFACE__
 #define __HUNSPELL_CHECK_INTERFACE__
-
+#ifndef _MSC_VER 
+#if __cplusplus <= 199711L
+#define CPLUSEPLUSE98 1
+#ifndef nullptr
+#define nullptr (0)
+#endif
+#endif
+#else
+#if _MSC_VER < 1600
+#define CPLUSEPLUSE98 1
+#ifndef nullptr
+#define nullptr (0)
+#endif
+#endif
+#endif
 // For compilers that support precompilation, includes "wx/wx.h".
 #include "wx/wxprec.h"
 
@@ -46,7 +60,7 @@ class Hunspell;
 class HunspellInterface : public wxSpellCheckEngineInterface
 {
 public:
-    HunspellInterface(wxSpellCheckUserInterface* pDlg = NULL);
+    HunspellInterface(wxSpellCheckUserInterface* pDlg = nullptr);
     ~HunspellInterface();
 
     // Spell Checker functions
@@ -69,7 +83,7 @@ public:
     virtual wxArrayString GetWordListAsArray();
     void OpenPersonalDictionary(const wxString& strPersonalDictionaryFile=wxEmptyString);    
     virtual void SetEnablePersonalDictionary(bool enable);
-#if __cplusplus <= 199711L
+#if CPLUSEPLUSE98
     virtual void SetSyntaxDictionary(boost::shared_ptr<PersonalDictionary>& syntaxKeywordDict)
 #else
     virtual void SetSyntaxDictionary(std::shared_ptr<PersonalDictionary>& syntaxKeywordDict)
@@ -105,7 +119,7 @@ private:
     wxString m_strDictionaryPath;
 
     PersonalDictionary m_PersonalDictionary;
-#if __cplusplus <= 199711L
+#if CPLUSEPLUSE98
     boost::shared_ptr<PersonalDictionary> m_SyntaxKeywordDict;
 #else
     std::shared_ptr<PersonalDictionary> m_SyntaxKeywordDict;

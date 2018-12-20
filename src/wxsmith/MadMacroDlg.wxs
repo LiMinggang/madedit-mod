@@ -11,7 +11,7 @@
 			<object class="sizeritem">
 				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
 					<object class="sizeritem">
-						<object class="wxTextCtrl" name="ID_MADEDIT" variable="m_Pymacro" member="yes">
+						<object class="wxTextCtrl" name="wxID_ANY" variable="m_Pymacro" member="yes">
 							<value>Text</value>
 							<size>640,240</size>
 						</object>
@@ -27,7 +27,7 @@
 			<object class="sizeritem">
 				<object class="wxBoxSizer" variable="BoxSizer3" member="no">
 					<object class="sizeritem">
-						<object class="wxButton" name="wxID_OK" variable="WxButtonRun" member="yes">
+						<object class="wxButton" name="wxID_OK" variable="WxButtonRun" member="no">
 							<label>&amp;Run</label>
 							<default>1</default>
 							<handler function="OnWxButtonRunClick" entry="EVT_BUTTON" />
@@ -36,7 +36,7 @@
 						<border>5</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxButton" name="wxID_CANCEL" variable="WxButtonClose" member="yes">
+						<object class="wxButton" name="wxID_CANCEL" variable="WxButtonClose" member="no">
 							<label>&amp;Close</label>
 							<handler function="OnWxButtonCloseClick" entry="EVT_BUTTON" />
 						</object>
@@ -44,7 +44,16 @@
 						<border>5</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxButton" name="ID_WXBUTTONTOGGLERESULT" variable="WxButtonResult" member="yes">
+						<object class="wxButton" name="wxID_ANY" variable="wxButtonReset" member="no">
+							<label>Reset</label>
+							<handler function="OnButtonResetClick" entry="EVT_BUTTON" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+						<option>1</option>
+					</object>
+					<object class="sizeritem">
+						<object class="wxButton" name="wxID_ANY" variable="WxButtonResult" member="yes">
 							<label>Results &gt;&gt;</label>
 							<handler function="OnWxButtonResultClick" entry="EVT_BUTTON" />
 						</object>
@@ -58,7 +67,7 @@
 			<object class="sizeritem">
 				<object class="wxBoxSizer" variable="BoxSizer4" member="no">
 					<object class="sizeritem">
-						<object class="wxTextCtrl" name="ID_TEXTCTRLRESULT" variable="WxMemoOutput" member="yes">
+						<object class="wxTextCtrl" name="wxID_ANY" variable="WxMemoOutput" member="yes">
 							<size>640,240</size>
 							<style>wxTE_MULTILINE|wxTE_READONLY|wxTE_WORDWRAP|wxDOUBLE_BORDER|wxVSCROLL</style>
 						</object>

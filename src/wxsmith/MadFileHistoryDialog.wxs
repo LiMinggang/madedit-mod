@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<wxsmith>
+	<object class="wxDialog" name="MadFileHistoryDialog">
+		<title>Recent Opened Files</title>
+		<centered>1</centered>
+		<pos_arg>1</pos_arg>
+		<size_arg>1</size_arg>
+		<style>wxSTAY_ON_TOP|wxCAPTION|wxCLOSE_BOX|wxSIMPLE_BORDER</style>
+		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
+					<object class="sizeritem">
+						<object class="wxCheckListBox" name="wxID_ANY" variable="MadFileList" member="yes">
+							<size>400,300</size>
+							<style>wxLB_MULTIPLE|wxSIMPLE_BORDER|wxVSCROLL</style>
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>5</border>
+					</object>
+				</object>
+				<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+				<border>5</border>
+				<option>1</option>
+			</object>
+			<object class="sizeritem">
+				<object class="wxBoxSizer" variable="BoxSizer3" member="no">
+					<orient>wxVERTICAL</orient>
+					<object class="sizeritem">
+						<object class="wxButton" name="wxID_OK" variable="ButtonOK" member="yes">
+							<label>&amp;OK</label>
+							<default>1</default>
+							<handler function="OnButtonOKClick" entry="EVT_BUTTON" />
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>2</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxButton" name="wxID_CANCEL" variable="ButtonCancel" member="yes">
+							<label>&amp;Cancel</label>
+							<handler function="OnButtonCancelClick" entry="EVT_BUTTON" />
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>2</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxButton" name="wxID_ANY" variable="ButtonSelectAll" member="yes">
+							<label>Select &amp;All</label>
+							<handler function="OnButtonSelectAllClick" entry="EVT_BUTTON" />
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>2</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxButton" name="wxID_ANY" variable="ButtonDselectAll" member="yes">
+							<label>&amp;Dselect All</label>
+							<handler function="OnButtonDselectAllClick" entry="EVT_BUTTON" />
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>2</border>
+					</object>
+				</object>
+				<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+				<border>5</border>
+			</object>
+		</object>
+	</object>
+</wxsmith>

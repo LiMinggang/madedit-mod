@@ -6,33 +6,41 @@
 // Licence:		GPL
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "../MadUtils.h"
+
+#if CPLUSEPLUSE98
+	#include <boost/shared_ptr.hpp>
+#else
+	#include <memory>
+#endif
+
 #include <cstddef>
 
 template <typename T>
 class MadDeque
 {
 public:
-	typedef	T value_type;
-	typedef	T& reference;
-	typedef	const T& const_reference;
-	typedef	T* pointer;
-	typedef	size_t size_type;
+	typedef T value_type;
+	typedef T& reference;
+	typedef const T& const_reference;
+	typedef T* pointer;
+	typedef size_t size_type;
 
 private:
 	struct buffer
 	{
 		static const size_type N = 8192;
-		MadDeque<T>	*mdeque;
+		MadDeque<T> *mdeque;
 		T* begin;
 		T* end;
-		buffer*	prev;
-		buffer*	next;
-		buffer(MadDeque<T> *d) :
+		buffer* prev;
+		buffer* next;
+		explicit buffer(MadDeque<T> *d) :
 			mdeque(d),
-			begin( (T*)	operator new(N * sizeof(T))	),
-			end(begin +	N),
-			prev(NULL),
-			next(NULL)
+			begin( (T*) operator new(N * sizeof(T))),
+			end(begin + N),
+			prev(nullptr),
+			next(nullptr)
 		{
 		}
 		~buffer()
@@ -44,26 +52,26 @@ private:
 public:
 	struct iterator
 	{
-		typedef	typename MadDeque::value_type value_type;
-		typedef	typename MadDeque::reference reference;
-		typedef	typename MadDeque::const_reference const_reference;
-		typedef	typename MadDeque::pointer pointer;
-		typedef	typename MadDeque::size_type size_type;
-		typedef	size_type difference_type;
-		typedef	std::random_access_iterator_tag	iterator_category;
+		typedef typename MadDeque::value_type value_type;
+		typedef typename MadDeque::reference reference;
+		typedef typename MadDeque::const_reference const_reference;
+		typedef typename MadDeque::pointer pointer;
+		typedef typename MadDeque::size_type size_type;
+		typedef size_type difference_type;
+		typedef std::random_access_iterator_tag iterator_category;
 
 		buffer *buf;
 		T* ptr;
 
-		iterator() : buf(NULL),	ptr(NULL) {}
-		iterator(buffer	*b,	T* p) :	buf(b),	ptr(p) {}
-		iterator(const iterator& it) : buf(it.buf),	ptr(it.ptr)	{}
+		iterator() : buf(nullptr), ptr(nullptr) {}
+		iterator(buffer *b, T* p) : buf(b), ptr(p) {}
+		iterator(const iterator& it) : buf(it.buf), ptr(it.ptr) {}
 
 		reference operator*()
 		{
 			return *ptr;
 		}
-		const_reference	operator*()	const
+		const_reference operator*() const
 		{
 			return *ptr;
 		}
@@ -71,15 +79,14 @@ public:
 		{
 			return ptr;
 		}
-		bool operator==(const iterator&	it)	const
+		bool operator==(const iterator& it) const
 		{
-			return (ptr	== it.ptr) && (buf == it.buf);
+			return (ptr == it.ptr) && (buf == it.buf);
 		}
-		bool operator!=(const iterator&	it)	const
+		bool operator!=(const iterator&	it) const
 		{
-			return (ptr	!= it.ptr) || (buf != it.buf);
+			return (ptr != it.ptr) || (buf != it.buf);
 		}
-
 		iterator& operator+=(difference_type off)
 		{
 			if(off != 0)
@@ -88,7 +95,7 @@ public:
 				{
 					++(*this);
 				}
-				while(--off	> 0);
+				while(--off > 0);
 			}
 			return *this;
 		}
@@ -100,7 +107,7 @@ public:
 				{
 					--(*this);
 				}
-				while(--off	> 0);
+				while(--off > 0);
 			}
 			return *this;
 		}
@@ -108,22 +115,22 @@ public:
 		// pre-increment operator
 		iterator& operator++()
 		{
-			if(++ptr ==	buf->end)
+			if(++ptr == buf->end)
 			{
-				if(buf->next ==	NULL)
+				if(buf->next == nullptr)
 				{
 					//assert(buf==buf->mdeque->m_last_buffrt);
 					buf->mdeque->add_buffer_back();
 				}
-				buf	= buf->next;
-				ptr	= buf->begin;
+				buf = buf->next;
+				ptr = buf->begin;
 			}
 			return *this;
 		}
 		// post-increment operator
 		iterator operator++(int)
 		{
-			iterator it	= *this;
+			iterator it = *this;
 			++(*this);
 			return it;
 		}
@@ -132,8 +139,8 @@ public:
 		{
 			if(ptr == buf->begin)
 			{
-				buf	= buf->prev;
-				ptr	= buf->end;
+				buf = buf->prev;
+				ptr = buf->end;
 			}
 			--ptr;
 			return *this;
@@ -141,23 +148,22 @@ public:
 		// post-decrement operator
 		iterator operator--(int)
 		{
-			iterator it	= *this;
+			iterator it = *this;
 			--(*this);
 			return it;
 		}
-
 		iterator operator+(difference_type off)
 		{
-			iterator it	= *this;
+			iterator it = *this;
 			if(off>=0) it += off;
-			else	   it -= (-off);
+			else it -= (-off);
 			return it;
 		}
 	};
 
 private:
 	size_type m_size;
-	buffer *m_first_buffer,	*m_last_buffer;
+	buffer *m_first_buffer, *m_last_buffer;
 	iterator m_begin_iterator, m_end_iterator;
 
 public:
@@ -166,19 +172,19 @@ public:
 	// buffer methods
 	void add_buffer_back()
 	{
-		buffer *tmp	= new buffer(this);
-		tmp->prev =	m_last_buffer;
-		m_last_buffer->next	= tmp;
-		m_last_buffer =	tmp;
+		buffer *tmp = new buffer(this);
+		tmp->prev = m_last_buffer;
+		m_last_buffer->next = tmp;
+		m_last_buffer = tmp;
 	}
 	void delete_first_buffer()
 	{
 		if(m_first_buffer != m_last_buffer)
 		{
-			buffer *tmp	= m_first_buffer->next;
+			buffer *tmp = m_first_buffer->next;
 			delete m_first_buffer;
 			m_first_buffer = tmp;
-			m_first_buffer->prev = NULL;
+			m_first_buffer->prev = nullptr;
 		}
 	}
 	void free_buffer()
@@ -186,60 +192,60 @@ public:
 		buffer *tmp;
 		do
 		{
-			tmp	= m_first_buffer->next;
+			tmp = m_first_buffer->next;
 			delete m_first_buffer;
 			m_first_buffer = tmp;
-		}while(m_first_buffer != NULL);
-		m_last_buffer =	NULL;
+		}while(m_first_buffer != nullptr);
+		m_last_buffer = nullptr;
 	}
 	pointer	get_pointer(size_type index) const
 	{
 		//assert(index<m_size)
-		if(index <=	m_size/2) // from begin
+		if(index <= m_size/2) // from begin
 		{
-			buffer *buf	= m_begin_iterator.buf;
+			buffer *buf = m_begin_iterator.buf;
 			T* ptr = m_begin_iterator.ptr;
-			size_type count	= buf->end - ptr;
-			while(index	>= count)
+			size_type count = buf->end - ptr;
+			while(index >= count)
 			{
-				buf	= buf->next;
-				ptr	= buf->begin;
+				buf = buf->next;
+				ptr = buf->begin;
 				index -= count;
-				count =	buffer::N;
+				count = buffer::N;
 			}
 			return ptr + index;
 		}
 
 		// from	end
-		index =	m_size - index;
-		buffer *buf	= m_end_iterator.buf;
+		index = m_size - index;
+		buffer *buf = m_end_iterator.buf;
 		T* ptr = buf->begin;
 		if(buf == m_begin_iterator.buf)
 		{
-			ptr	= m_begin_iterator.ptr;
+			ptr = m_begin_iterator.ptr;
 		}
-		size_type count	= m_end_iterator.ptr - ptr;
-		while(index	> count)
+		size_type count = m_end_iterator.ptr - ptr;
+		while(index > count)
 		{
-			buf	= buf->prev;
-			ptr	= buf->begin;
+			buf = buf->prev;
+			ptr = buf->begin;
 			if(buf == m_begin_iterator.buf)
 			{
-				ptr	= m_begin_iterator.ptr;
+				ptr = m_begin_iterator.ptr;
 			}
 			index -= count;
-			count =	buf->end - ptr;
+			count = buf->end - ptr;
 		}
-		return ptr + (count	- index);
+		return ptr + (count - index);
 	}
 
 private:
-	void init(const	MadDeque& d)
+	void init(const MadDeque& d)
 	{
-		clear(); //	destroy	old	T
+		clear(); // destroy old T
 		if(!d.empty())
 		{
-			iterator it	= d.begin(), itend = d.end();
+			iterator it = d.begin(), itend = d.end();
 			do
 			{
 				this->push_back(*it);
@@ -257,7 +263,7 @@ public:
 		m_end_iterator(m_begin_iterator)
 	{
 	}
-	MadDeque(const MadDeque& d)	:
+	MadDeque(const MadDeque& d) :
 		m_size(0),
 		m_first_buffer(new buffer(this)),
 		m_last_buffer(m_first_buffer),
@@ -275,32 +281,29 @@ public:
 		}
 		free_buffer();
 	}
-
-	MadDeque& operator=(const MadDeque&	d)
+	MadDeque& operator=(const MadDeque& d)
 	{
 		init(d);
 		return *this;
 	}
-
-	bool operator==(const MadDeque&	d) const
+	bool operator==(const MadDeque& d) const
 	{
 		if(m_size != d.m_size) return false;
 		if(m_size == 0)	return true;
 
-		iterator it0 = begin(),	it0end = end();
+		iterator it0 = begin(), it0end = end();
 		iterator it1 = d.begin();
 		while(*it0 == *it1)
 		{
 			++it1;
-			if(++it0 ==	it0end)	return true;
+			if(++it0 == it0end) return true;
 		}
 		return false;
 	}
-	bool operator!=(const MadDeque&	d) const
+	bool operator!=(const MadDeque& d) const
 	{
 		return !this->operator==(d);
 	}
-
 	iterator begin() const
 	{
 		return m_begin_iterator;
@@ -321,7 +324,7 @@ public:
 	{
 		return *get_pointer(n);
 	}
-	const_reference	operator[](size_type n)	const
+	const_reference operator[](size_type n) const
 	{
 		return *get_pointer(n);
 	}
@@ -331,12 +334,12 @@ public:
 	}
 	reference back()
 	{
-		iterator it	= m_end_iterator;
+		iterator it = m_end_iterator;
 		return *--it;
 	}
-	void push_back(const T&	x)
+	void push_back(const T& x)
 	{
-		new(m_end_iterator.ptr)	T(x);
+		new(m_end_iterator.ptr) T(x);
 		++m_end_iterator;
 		++m_size;
 	}
@@ -345,7 +348,7 @@ public:
 		(m_begin_iterator.ptr)->~T();
 		++m_begin_iterator;
 		--m_size;
-		if(m_begin_iterator.buf	!= m_first_buffer)
+		if(m_begin_iterator.buf != m_first_buffer)
 		{
 			delete_first_buffer();
 		}

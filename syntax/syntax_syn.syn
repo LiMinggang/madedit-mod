@@ -51,8 +51,9 @@ LineNumberColor=White
 LineNumberBgColor=A0A0A0
 LineNumberStyle=
 
-ActiveLineColor=Fuchsia
-BookmarkColor=C0FFFF
+ActiveLineColor=EAEAF2
+BookmarkColor=DeepSkyBlue
+BookmarkBgColor=MediumBlue
 
 # User Defined Keywords
 [1.Commands]
@@ -65,7 +66,7 @@ Keyword=Title CaseSensitive Delimiter LineComment BlockComment EscapeChar String
 Color=Black
 Style=Bold
 InRange=0
-Keyword=TextColor TextBgColor TextStyle TextInRange DelimiterColor DelimiterBgColor DelimiterStyle DelimiterInRange SpaceColor SpaceBgColor SpaceStyle SpaceInRange NumberColor NumberBgColor NumberStyle NumberInRange StringColor StringBgColor StringStyle StringInRange CommentColor CommentBgColor CommentStyle CommentInRange DirectiveColor DirectiveBgColor DirectiveStyle DirectiveInRange SpecialWordColor SpecialWordBgColor SpecialWordStyle SpecialWordInRange LineNumberColor LineNumberBgColor LineNumberStyle LineNumberInRange ActiveLineColor BookmarkColor LineCommentInRange BlockCommentInRange
+Keyword=TextColor TextBgColor TextStyle TextInRange DelimiterColor DelimiterBgColor DelimiterStyle DelimiterInRange SpaceColor SpaceBgColor SpaceStyle SpaceInRange NumberColor NumberBgColor NumberStyle NumberInRange StringColor StringBgColor StringStyle StringInRange CommentColor CommentBgColor CommentStyle CommentInRange DirectiveColor DirectiveBgColor DirectiveStyle DirectiveInRange SpecialWordColor SpecialWordBgColor SpecialWordStyle SpecialWordInRange LineNumberColor LineNumberBgColor LineNumberStyle LineNumberInRange ActiveLineColor BookmarkColor BookmarkBgColor LineCommentInRange BlockCommentInRange HighlightWordColor HighlightWordBgColor
 
 [3.Constans]
 Color=Red

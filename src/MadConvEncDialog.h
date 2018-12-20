@@ -37,20 +37,17 @@ class MadConvEncDialog : public wxDialog
 		virtual ~MadConvEncDialog();
 
 		//(*Declarations(MadConvEncDialog)
-		wxRadioBox* WxRadioBoxOption;
-		wxStaticText* StaticText1;
-		wxComboBox* WxComboBoxEncoding;
 		wxButton* WxButtonCancel;
 		wxButton* WxButtonOK;
+		wxComboBox* WxComboBoxEncoding;
+		wxRadioBox* WxRadioBoxOption;
+		wxStaticText* StaticText1;
 		//*)
 
 		wxString GetEncoding() const;
 	protected:
 
 		//(*Identifiers(MadConvEncDialog)
-		static const long ID_STATICTEXT1;
-		static const long ID_WXCOMBOBOXENCODING;
-		static const long ID_WXRADIOBOXOPTION;
 		//*)
 
 	private:
@@ -58,8 +55,6 @@ class MadConvEncDialog : public wxDialog
 		//(*Handlers(MadConvEncDialog)
 		void MadConvEncDialogClose(wxCloseEvent& event);
 		//*)
-
-		DECLARE_EVENT_TABLE()
 };
 
 extern MadConvEncDialog *g_ConvEncDialog;

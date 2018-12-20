@@ -8,6 +8,13 @@
 #ifndef _MADCOMMAND_H_
 #define _MADCOMMAND_H_
 
+#include "MadUtils.h"
+#if CPLUSEPLUSE98 
+#include <boost/shared_ptr.hpp>
+#else 
+#include <memory>
+#endif
+
 #include "MadEdit/MadEditCommand.h"
 class wxAuiToolBar;
 

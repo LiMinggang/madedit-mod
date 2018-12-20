@@ -13,24 +13,11 @@
 #include "MadEditFrame.h"
 
 //(*IdInit(MadSaveQueryDialog)
-const long MadSaveQueryDialog::ID_LISTCTRLMADFILELIST = wxNewId();
-const long MadSaveQueryDialog::ID_BUTTONSAVENONE = wxNewId();
-const long MadSaveQueryDialog::ID_CHECKBOXCONFIRM = wxNewId();
-const long MadSaveQueryDialog::ID_BUTTONSELECTALL = wxNewId();
-const long MadSaveQueryDialog::ID_BUTTONDSELECTALL = wxNewId();
-const long MadSaveQueryDialog::ID_BUTTONGOTO = wxNewId();
 //*)
 
 #define SAVEQUERY_MIN_PATH_COL_WIDTH 80
 
-BEGIN_EVENT_TABLE(MadSaveQueryDialog,wxDialog)
-	//(*EventTable(MadSaveQueryDialog)
-	//*)
-END_EVENT_TABLE()
-
-MadSaveQueryDialog *g_ModifiedFileListDialog = NULL;
-
-MadSaveQueryDialog::MadSaveQueryDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,const wxSize& size)
+MadSaveQueryDialog::MadSaveQueryDialog(wxWindow* parent,wxWindowID id,const wxPoint& WXUNUSED(pos),const wxSize& WXUNUSED(size))
 {
 	//(*Initialize(MadSaveQueryDialog)
 	wxBoxSizer* BoxSizer2;
@@ -42,27 +29,27 @@ MadSaveQueryDialog::MadSaveQueryDialog(wxWindow* parent,wxWindowID id,const wxPo
 	Move(wxDefaultPosition);
 	BoxSizer1 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
-	MadFileList = new wxCheckedListCtrl(this, ID_LISTCTRLMADFILELIST, wxDefaultPosition, wxSize(400,300), wxLC_REPORT | wxSIMPLE_BORDER | wxVSCROLL, wxDefaultValidator, _T("ID_LISTCTRLMADFILELIST"));
+	MadFileList = new wxCheckedListCtrl(this, wxID_ANY, wxDefaultPosition, wxSize(400,300), wxLC_REPORT | wxSIMPLE_BORDER | wxVSCROLL, wxDefaultValidator, _T("ID_LISTCTRLMADFILELIST"));
 	BoxSizer2->Add(MadFileList, 0, wxALL|wxEXPAND, 5);
 	BoxSizer1->Add(BoxSizer2, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
 	BoxSizer3 = new wxBoxSizer(wxVERTICAL);
 	ButtonOK = new wxButton(this, wxID_OK, _("&OK"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_OK"));
 	ButtonOK->SetDefault();
 	BoxSizer3->Add(ButtonOK, 0, wxALL|wxEXPAND, 2);
-	ButtonSaveNone = new wxButton(this, ID_BUTTONSAVENONE, _("Save &None"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTONSAVENONE"));
+	ButtonSaveNone = new wxButton(this, wxID_ANY, _("Save &None"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTONSAVENONE"));
 	BoxSizer3->Add(ButtonSaveNone, 0, wxALL|wxEXPAND, 2);
 	ButtonCancel = new wxButton(this, wxID_CANCEL, _("&Cancel"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_CANCEL"));
 	BoxSizer3->Add(ButtonCancel, 0, wxALL|wxEXPAND, 2);
-	CheckBoxConfirm = new wxCheckBox(this, ID_CHECKBOXCONFIRM, _("Confirm"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXCONFIRM"));
+	CheckBoxConfirm = new wxCheckBox(this, wxID_ANY, _("Confirm"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_CHECKBOXCONFIRM"));
 	CheckBoxConfirm->SetValue(false);
 	BoxSizer3->Add(CheckBoxConfirm, 0, wxALL|wxEXPAND, 2);
 	BoxSizer3->Add(-1,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	ButtonSelectAll = new wxButton(this, ID_BUTTONSELECTALL, _("Select &All"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTONSELECTALL"));
+	ButtonSelectAll = new wxButton(this, wxID_ANY, _("Select &All"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTONSELECTALL"));
 	BoxSizer3->Add(ButtonSelectAll, 0, wxALL|wxEXPAND, 2);
-	ButtonDselectAll = new wxButton(this, ID_BUTTONDSELECTALL, _("Dselect &All"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTONDSELECTALL"));
+	ButtonDselectAll = new wxButton(this, wxID_ANY, _("&Deselect All"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTONDSELECTALL"));
 	BoxSizer3->Add(ButtonDselectAll, 0, wxALL|wxEXPAND, 2);
 	BoxSizer3->Add(-1,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	ButtonGoTo = new wxButton(this, ID_BUTTONGOTO, _("&Go To"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTONGOTO"));
+	ButtonGoTo = new wxButton(this, wxID_ANY, _("&Go To"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTONGOTO"));
 	BoxSizer3->Add(ButtonGoTo, 0, wxALL|wxEXPAND, 2);
 	BoxSizer1->Add(BoxSizer3, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5);
 	SetSizer(BoxSizer1);
@@ -70,14 +57,14 @@ MadSaveQueryDialog::MadSaveQueryDialog(wxWindow* parent,wxWindowID id,const wxPo
 	BoxSizer1->SetSizeHints(this);
 	Center();
 
-	Bind( wxEVT_COMMAND_LIST_ITEM_SELECTED, &MadSaveQueryDialog::OnMadFileListItemSelectChange, this, ID_LISTCTRLMADFILELIST );
-	Bind( wxEVT_COMMAND_LIST_ITEM_DESELECTED, &MadSaveQueryDialog::OnMadFileListItemSelectChange, this, ID_LISTCTRLMADFILELIST );
+	Bind( wxEVT_COMMAND_LIST_ITEM_SELECTED, &MadSaveQueryDialog::OnMadFileListItemSelectChange, this, MadFileList->GetId() );
+	Bind( wxEVT_COMMAND_LIST_ITEM_DESELECTED, &MadSaveQueryDialog::OnMadFileListItemSelectChange, this, MadFileList->GetId() );
 	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadSaveQueryDialog::OnButtonOKClick, this, wxID_OK );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadSaveQueryDialog::OnButtonSaveNoneClick, this, ID_BUTTONSAVENONE );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadSaveQueryDialog::OnButtonSaveNoneClick, this, ButtonSaveNone->GetId() );
 	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadSaveQueryDialog::OnButtonCancelClick, this, wxID_CANCEL );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadSaveQueryDialog::OnButtonSelectAllClick, this, ID_BUTTONSELECTALL );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadSaveQueryDialog::OnButtonDselectAllClick, this, ID_BUTTONDSELECTALL );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadSaveQueryDialog::OnButtonGoToClick, this, ID_BUTTONGOTO );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadSaveQueryDialog::OnButtonSelectAllClick, this, ButtonSelectAll->GetId() );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadSaveQueryDialog::OnButtonDselectAllClick, this, ButtonDselectAll->GetId() );
+	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadSaveQueryDialog::OnButtonGoToClick, this, ButtonGoTo->GetId() );
 	//*)
 
 	SetDefaultItem(ButtonOK);
@@ -101,30 +88,39 @@ MadSaveQueryDialog::~MadSaveQueryDialog()
 void MadSaveQueryDialog::InitWindowListIterms()
 {
 	wxAuiNotebook * notebookp = reinterpret_cast<wxAuiNotebook *>(m_MainFrame->m_Notebook);
-	long count = (long) notebookp->GetPageCount();
+	size_t count = notebookp->GetPageCount();
 	long tmp;
+	bool hasdata = false;
 
 	MadFileList->Hide();
 	MadFileList->DeleteAllItems();
 
 	MadFileList->Freeze();
-	long index = 0;
-	for( long id = 0; id < count; ++id )
+	
+	wxListItem info;
+	for( size_t id = 0; id < count; ++id )
 	{
-		MadEdit * madedit = ( MadEdit* )notebookp->GetPage( id );
+		MadEdit * madedit = dynamic_cast < MadEdit* >(notebookp->GetPage( id ));
+		wxASSERT( madedit != 0 );
 		if(madedit->IsModified())
 		{
 			wxFileName fileName( madedit->GetFileName() );
 			wxString fname = notebookp->GetPageText( id );
 			wxString fdir = fileName.GetPath();
-			tmp = MadFileList->InsertItem(index++, fname);
+
+			info.Clear();
+			info.m_text = fname;
+			info.m_mask = wxLIST_MASK_TEXT;
+			info.m_itemId = MadFileList->GetItemCount();
+			tmp = MadFileList->InsertItem(info);
 			MadFileList->SetItemData(tmp, id);
 			MadFileList->SetItem(tmp, 1, fdir);
+			hasdata = true;
 		}
 	}
 	MadFileList->Thaw();
 
-	if(count)
+	if(hasdata)
 	{
 	    MadFileList->SetColumnWidth( 0, wxLIST_AUTOSIZE );
 		MadFileList->SetColumnWidth( 1, wxLIST_AUTOSIZE );
@@ -139,37 +135,37 @@ void MadSaveQueryDialog::InitWindowListIterms()
 	GetSizer()->Fit( this );
 }
 
-void MadSaveQueryDialog::OnButtonOKClick(wxCommandEvent& event)
+void MadSaveQueryDialog::OnButtonOKClick(wxCommandEvent& WXUNUSED(event))
 {
 	EndModal(wxID_OK);
 }
 
-void MadSaveQueryDialog::OnButtonSaveNoneClick(wxCommandEvent& event)
+void MadSaveQueryDialog::OnButtonSaveNoneClick(wxCommandEvent& WXUNUSED(event))
 {
 	MadFileList->CheckAll(false);
 	EndModal(wxID_OK);
 }
 
-void MadSaveQueryDialog::OnButtonCancelClick(wxCommandEvent& event)
+void MadSaveQueryDialog::OnButtonCancelClick(wxCommandEvent& WXUNUSED(event))
 {
 	EndModal(wxID_CANCEL);
 }
 
-void MadSaveQueryDialog::OnButtonSelectAllClick(wxCommandEvent& event)
+void MadSaveQueryDialog::OnButtonSelectAllClick(wxCommandEvent& WXUNUSED(event))
 {
 	MadFileList->Freeze();
 	MadFileList->CheckAll(true);
 	MadFileList->Thaw();
 }
 
-void MadSaveQueryDialog::OnButtonDselectAllClick(wxCommandEvent& event)
+void MadSaveQueryDialog::OnButtonDselectAllClick(wxCommandEvent& WXUNUSED(event))
 {
 	MadFileList->Freeze();
 	MadFileList->CheckAll(false);
 	MadFileList->Thaw();
 }
 
-void MadSaveQueryDialog::OnButtonGoToClick(wxCommandEvent& event)
+void MadSaveQueryDialog::OnButtonGoToClick(wxCommandEvent& WXUNUSED(event))
 {
 	wxASSERT(MadFileList->GetSelectedItemCount() == 1);
 	long selRowId = MadFileList->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
@@ -178,7 +174,7 @@ void MadSaveQueryDialog::OnButtonGoToClick(wxCommandEvent& event)
 	m_MainFrame->SetPageFocus( pageId );
 }
 
-void MadSaveQueryDialog::OnMadFileListItemSelectChange(wxListEvent& event)
+void MadSaveQueryDialog::OnMadFileListItemSelectChange(wxListEvent& WXUNUSED(event))
 {
 	bool onlyone = (MadFileList->GetSelectedItemCount() == 1);
 	ButtonGoTo->Enable(onlyone);
@@ -191,7 +187,7 @@ void MadSaveQueryDialog::GetCheckedItemsData(std::set< long > & selectedItems, b
 		item = MadFileList->GetNextItem(item, wxLIST_NEXT_ALL, wxLIST_STATE_DONTCARE);
 		if ( item == -1 )
 			break;
-		if((!checked) || (checked && (MadFileList->IsChecked(item))))
+		if((!checked) || (MadFileList->IsChecked(item)))
 		{
 			pid = static_cast<long>(MadFileList->GetItemData(item));
 			selectedItems.insert(pid);

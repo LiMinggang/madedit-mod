@@ -9,7 +9,7 @@
 		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
 			<orient>wxVERTICAL</orient>
 			<object class="sizeritem">
-				<object class="wxRadioBox" name="ID_WXRADIOBOXORDER" variable="WxRadioBoxOrder" member="yes">
+				<object class="wxRadioBox" name="wxID_ANY" variable="WxRadioBoxOrder" member="yes">
 					<label>Sort Order</label>
 					<content>
 						<item>&amp;Ascending</item>
@@ -22,21 +22,21 @@
 				<border>5</border>
 			</object>
 			<object class="sizeritem">
-				<object class="wxCheckBox" name="ID_WXCHECKBOXCASE" variable="WxCheckBoxCase" member="yes">
+				<object class="wxCheckBox" name="wxID_ANY" variable="WxCheckBoxCase" member="yes">
 					<label>&amp;Case Sensitive</label>
 				</object>
 				<flag>wxALL|wxEXPAND</flag>
 				<border>5</border>
 			</object>
 			<object class="sizeritem">
-				<object class="wxCheckBox" name="ID_WXCHECKBOXNUMERIC" variable="WxCheckBoxNumeric" member="yes">
+				<object class="wxCheckBox" name="wxID_ANY" variable="WxCheckBoxNumeric" member="yes">
 					<label>&amp;Numeric Sort</label>
 				</object>
 				<flag>wxALL|wxEXPAND</flag>
 				<border>5</border>
 			</object>
 			<object class="sizeritem">
-				<object class="wxCheckBox" name="ID_WXCHECKBOXREMOVEDUP" variable="WxCheckBoxRemoveDup" member="yes">
+				<object class="wxCheckBox" name="wxID_ANY" variable="WxCheckBoxRemoveDup" member="yes">
 					<label>&amp;Remove Duplicates</label>
 				</object>
 				<flag>wxALL|wxEXPAND</flag>

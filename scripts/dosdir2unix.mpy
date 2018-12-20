@@ -1,0 +1,6 @@
+####Change Dos/Windows directory seperator to Unix ones
+####!Alt-U
+
+me=MadEdit()
+res = me.ReplaceTextAll("\\", "/", False, False, False)
+

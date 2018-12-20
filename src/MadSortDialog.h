@@ -13,7 +13,7 @@ class MadSortDialog: public wxDialog
 {
 	public:
 
-		MadSortDialog(wxWindow* parent);
+		explicit MadSortDialog(wxWindow* parent);
 		virtual ~MadSortDialog();
 
 		//(*Declarations(MadSortDialog)
@@ -28,10 +28,10 @@ class MadSortDialog: public wxDialog
 	protected:
 
 		//(*Identifiers(MadSortDialog)
-		static const long ID_WXRADIOBOXORDER;
-		static const long ID_WXCHECKBOXCASE;
-		static const long ID_WXCHECKBOXNUMERIC;
-		static const long ID_WXCHECKBOXREMOVEDUP;
+		//static const long ID_WXRADIOBOXORDER;
+		//static const long ID_WXCHECKBOXCASE;
+		//static const long ID_WXCHECKBOXNUMERIC;
+		//static const long ID_WXCHECKBOXREMOVEDUP;
 		//*)
 
 	private:
@@ -39,8 +39,6 @@ class MadSortDialog: public wxDialog
 		//(*Handlers(MadSortDialog)
 		void MadSortDialogClose(wxCloseEvent& event);
 		//*)
-
-		DECLARE_EVENT_TABLE()
 };
 
 #endif

@@ -30,6 +30,7 @@ class ASStreamIterator : public astyle::ASSourceIterator
         void ClearFoundBookmark()    { m_FoundBookmark = false;   }
         bool FoundBreakpoint() const { return m_FoundBreakpoint;  }
         void ClearFoundBreakpoint()  { m_FoundBreakpoint = false; }
+		std::streamoff getPeekStart() const { return static_cast<std::streamoff>(m_CurChar); }
 
     protected:
         inline bool IsEOL(wxChar ch) { return (ch == _T('\r') || ch == _T('\n')); }

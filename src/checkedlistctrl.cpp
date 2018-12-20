@@ -30,10 +30,7 @@
 #include "../images/checked_dis.xpm"
 #include "../images/unchecked_dis.xpm"
 
-IMPLEMENT_CLASS(wxCheckedListCtrl, wxListCtrl)
-BEGIN_EVENT_TABLE(wxCheckedListCtrl, wxListCtrl)
-    EVT_LEFT_DOWN(wxCheckedListCtrl::OnMouseEvent)
-END_EVENT_TABLE()
+wxIMPLEMENT_CLASS(wxCheckedListCtrl, wxListCtrl);
 
 DEFINE_EVENT_TYPE(wxEVT_COMMAND_LIST_ITEM_CHECKED);
 DEFINE_EVENT_TYPE(wxEVT_COMMAND_LIST_ITEM_UNCHECKED);
@@ -44,19 +41,37 @@ DEFINE_EVENT_TYPE(wxEVT_COMMAND_LIST_ITEM_UNCHECKED);
 // wxCHECKEDLISTCTRL
 // ------------------
 
+wxCheckedListCtrl::wxCheckedListCtrl()
+	: wxListCtrl(), m_imageList(16, 16, TRUE)
+{
+	Bind( wxEVT_LEFT_DOWN, &wxCheckedListCtrl::OnMouseEvent, this );
+}
+
+wxCheckedListCtrl::wxCheckedListCtrl(wxWindow *parent, wxWindowID id/* = -1*/,
+					const wxPoint& pt/* = wxDefaultPosition*/,
+					const wxSize& sz/* = wxDefaultSize*/,
+					long style/* = wxCLC_CHECK_WHEN_SELECTING*/,
+					const wxValidator& validator/* = wxDefaultValidator*/,
+					const wxString& name/* = wxListCtrlNameStr*/)
+					: wxListCtrl(), m_imageList(16, 16, TRUE)
+{
+	Create(parent, id, pt, sz, style, validator, name);
+	Bind( wxEVT_LEFT_DOWN, &wxCheckedListCtrl::OnMouseEvent, this );
+}
+
 bool wxCheckedListCtrl::Create(wxWindow* parent, wxWindowID id, const wxPoint& pt,
         const wxSize& sz, long style, const wxValidator& validator, const wxString& name)
 {
 	if (!wxListCtrl::Create(parent, id, pt, sz, style, validator, name))
 		return FALSE;
 
-    SetImageList(&m_imageList, wxIMAGE_LIST_SMALL);
+	SetImageList(&m_imageList, wxIMAGE_LIST_SMALL);
 
 	// the add order must respect the wxCLC_XXX_IMGIDX defines in the headers !
-    m_imageList.Add(wxIcon(unchecked_xpm));
-    m_imageList.Add(wxIcon(checked_xpm));
-    m_imageList.Add(wxIcon(unchecked_dis_xpm));
-    m_imageList.Add(wxIcon(checked_dis_xpm));
+	m_imageList.Add(wxIcon(unchecked_xpm));
+	m_imageList.Add(wxIcon(checked_xpm));
+	m_imageList.Add(wxIcon(unchecked_dis_xpm));
+	m_imageList.Add(wxIcon(checked_dis_xpm));
 
 	return TRUE;
 }
@@ -374,16 +389,11 @@ void wxCheckedListCtrl::OnMouseEvent(wxMouseEvent& event)
 		(flags & wxLIST_HITTEST_ONITEM));
 
 	if (processcheck) {
-
-		wxListEvent ev(wxEVT_NULL, GetId());
-		ev.m_itemIndex = item;		
-
 		wxArrayLong selectedItems;
 		bool sel = (GetItemState(item, wxLIST_STATE_SELECTED) == wxLIST_STATE_SELECTED);
 		bool checked = FALSE;
 		selectedItems.Add(item); //Make sure it's the first
 		if(sel) {
-
 			long selitem = -1;
 			for ( ;; ) {
 				selitem = GetNextItem(selitem, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
@@ -395,23 +405,22 @@ void wxCheckedListCtrl::OnMouseEvent(wxMouseEvent& event)
 			}
 		}
 
+		wxEventType evtType;
 		// send the check event
 		if (IsChecked(item)) {
-
-			ev.SetEventType(wxEVT_COMMAND_LIST_ITEM_UNCHECKED);
+			evtType = wxEVT_COMMAND_LIST_ITEM_UNCHECKED;
 			checked = false;
 		} else {
-
-			ev.SetEventType(wxEVT_COMMAND_LIST_ITEM_CHECKED);
+			evtType = wxEVT_COMMAND_LIST_ITEM_CHECKED;
 			checked = true;
 		}
 
 		for(size_t i = 0; i < selectedItems.GetCount(); ++i) {
-
 			item = selectedItems[i];
-			ev.m_itemIndex = item;	
+			wxListEvent *pEvt = new wxListEvent(evtType, GetId());
+			pEvt->m_itemIndex = item;
 			Check(item, checked);
-			AddPendingEvent(ev);
+			wxQueueEvent(this, pEvt);
 		}
 	}
 

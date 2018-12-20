@@ -7,6 +7,7 @@
 
 #ifndef	__MADNUMBERDLG_H__
 #define	__MADNUMBERDLG_H__
+#include "MadUtils.h"
 
 #ifdef __BORLANDC__
 	#pragma	hdrstop
@@ -40,10 +41,9 @@
 class MadNumberDlg : public	wxDialog
 {
 	private:
-		DECLARE_EVENT_TABLE();
 		
 	public:
-		MadNumberDlg(wxWindow *parent, wxWindowID id = 1, const	wxString &title	= _("Numbering Configuration"),	const wxPoint& pos = wxDefaultPosition,	const wxSize& size = wxDefaultSize,	long style = MadNumberDlg_STYLE);
+		MadNumberDlg(wxWindow *parent, wxWindowID id = wxID_ANY, const	wxString &title	= _("Numbering Configuration"), const wxPoint& position = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = MadNumberDlg_STYLE);
 		virtual	~MadNumberDlg();
 		void WxOKButtonClick(wxCommandEvent& event);		
 	
@@ -94,32 +94,7 @@ class MadNumberDlg : public	wxDialog
 		//change your old form code	that are based on the #define control IDs.
 		//#defines may replace a numeric value for the enum	names.
 		//Try copy and pasting the below block in your old form	header files.
-		enum
-		{
-			////GUI	Enum Control ID	Start
-			ID_WXSTATICTEXTPREVIEW = 1142,
-			ID_WXSTATICTEXT6 = 1141,
-			ID_WXEDITPOSTFIX = 1137,
-			ID_WXCHECKPOSTFIX =	1136,
-			ID_WXEDITPREFIX	= 1134,
-			ID_WXCHECKPREFIX = 1133,
-			ID_WXALIGN = 1119,
-			ID_WXSTATICTEXT4 = 1118,
-			ID_WXFORMAT	= 1117,
-			ID_WXSTATICTEXT3 = 1116,
-			ID_WXCHOICENUMBERSTEPTYPE =	1115,
-			ID_WXSTATICTEXT2 = 1113,
-			ID_PADWITH = 1126,
-			ID_WXEDITNUMBEROFCHARS = 1125,
-			ID_WXSTATICTEXT5 = 1124,
-			ID_EDITNUMBERINGSTEP = 1123,
-			ID_WXSTATICTEXT8 = 1122,
-			ID_WXEDITINITIALNUMBER = 1121,
-			ID_WXSTATICTEXT1 = 1120,
-			////GUI	Enum Control ID	End
-			ID_DUMMY_VALUE_	//don't	remove this	value unless you have other	enum values
-		};
-	
+
 	private:
 		void OnClose(wxCloseEvent& event);
 		void CreateGUIControls();

@@ -1,5 +1,6 @@
 #ifndef MADWINLISTDIALOG_H
 #define MADWINLISTDIALOG_H
+#include "MadUtils.h"
 
 #include <set>
 #include <map>
@@ -33,13 +34,6 @@ class MadWinListDialog: public wxDialog
 	protected:
 
 		//(*Identifiers(MadWinListDialog)
-		static const long ID_LISTCTRLMADWINLIST;
-		static const long ID_BUTTONACTIVATE;
-		static const long ID_BUTTONSAVE;
-		static const long ID_BUTTONSAVEAS;
-		static const long ID_BUTTONCLOSEWINDOWS;
-		static const long ID_BUTTONSORTTABBYNAME;
-		static const long ID_BUTTONSORTTABBYPATH;
 		//*)
 
 		static const long COL_TABNAME;
@@ -49,23 +43,22 @@ class MadWinListDialog: public wxDialog
 	private:
 
 		//(*Handlers(MadWinListDialog)
-		void OnButtonActivateClick(wxCommandEvent& event);
-		void OnButtonSaveClick(wxCommandEvent& event);
-		void OnButtonCloseWindowsClick(wxCommandEvent& event);
-		void OnButtonSortTabByNameClick(wxCommandEvent& event);
-		void OnButtonOkClick(wxCommandEvent& event);
-		void OnMadWinListDialogClose(wxCloseEvent& event);
-		void OnButtonSortTabByPathClick(wxCommandEvent& event);
-		void OnButtonSaveAsClick(wxCommandEvent& event);
+		void OnButtonActivateClick(wxCommandEvent& WXUNUSED(event));
+		void OnButtonSaveClick(wxCommandEvent& WXUNUSED(event));
+		void OnButtonCloseWindowsClick(wxCommandEvent& WXUNUSED(event));
+		void OnButtonSortTabByNameClick(wxCommandEvent& WXUNUSED(event));
+		void OnButtonOkClick(wxCommandEvent& WXUNUSED(event));
+		void OnMadWinListDialogClose(wxCloseEvent& WXUNUSED(event));
+		void OnButtonSortTabByPathClick(wxCommandEvent& WXUNUSED(event));
+		void OnButtonSaveAsClick(wxCommandEvent& WXUNUSED(event));
 		void OnKeyDown(wxKeyEvent& event);
 		//*)
-		void MadWinListDialogActivate( wxActivateEvent& event );
+		void MadWinListDialogActivate( wxActivateEvent& WXUNUSED(event) );
 		void OnWinListSelectionChanged(wxListEvent& event);
 		void InitWindowListIterms();
 		void SortTabs(long column);
 		void SaveFile(bool saveas = false);
         void ResetButtonStatus();
-		DECLARE_EVENT_TABLE()
 };
 
 extern MadWinListDialog *g_WinListDialog;

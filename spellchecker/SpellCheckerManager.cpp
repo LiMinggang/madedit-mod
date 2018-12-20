@@ -24,7 +24,7 @@
 #include <wx/confbase.h>
 
 #include "HunspellInterface.h"
-#if __cplusplus <= 199711L
+#if CPLUSEPLUSE98
 using boost::shared_ptr;
 #else
 using std::shared_ptr;

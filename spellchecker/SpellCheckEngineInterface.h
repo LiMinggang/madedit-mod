@@ -1,6 +1,20 @@
 #ifndef __SPELL_CHECK_ENGINE_INTERFACE__
 #define __SPELL_CHECK_ENGINE_INTERFACE__
-
+#ifndef _MSC_VER 
+#if __cplusplus <= 199711L
+#define CPLUSEPLUSE98 1
+#ifndef nullptr
+#define nullptr (0)
+#endif
+#endif
+#else
+#if _MSC_VER < 1600
+#define CPLUSEPLUSE98 1
+#ifndef nullptr
+#define nullptr (0)
+#endif
+#endif
+#endif
 // For compilers that support precompilation, includes "wx/wx.h".
 #include "wx/wxprec.h"
 
@@ -20,8 +34,11 @@
 #pragma warning(disable:4786)
 #endif
 
-#if __cplusplus <= 199711L
+#if CPLUSEPLUSE98
 #include <boost/shared_ptr.hpp>
+#ifndef nullptr
+	#define nullptr (0)
+#endif
 #else
 #include <memory>
 #endif
@@ -65,7 +82,7 @@ public:
     virtual int InitializeSpellCheckEngine() = 0;
     virtual int UninitializeSpellCheckEngine() = 0;
     virtual int SetOption(SpellCheckEngineOption& Option) = 0;
-#if __cplusplus <= 199711L
+#if CPLUSEPLUSE98
     virtual void SetSyntaxDictionary(boost::shared_ptr<PersonalDictionary>& syntaxKeywordDict) = 0;
 #else
     virtual void SetSyntaxDictionary(std::shared_ptr<PersonalDictionary>& syntaxKeywordDict) = 0;
@@ -76,7 +93,7 @@ public:
     {
         return &m_Options;
     }
-    virtual void UpdatePossibleValues(SpellCheckEngineOption& OptionDependency, SpellCheckEngineOption& OptionToUpdate)
+    virtual void UpdatePossibleValues(SpellCheckEngineOption& WXUNUSED(OptionDependency), SpellCheckEngineOption& WXUNUSED(OptionToUpdate))
     {
         wxASSERT(false);
     }

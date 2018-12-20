@@ -4,6 +4,7 @@ cfg	syntax_conf.syn
 conf	syntax_conf.syn
 mak	syntax_conf.syn
 nmake	syntax_conf.syn
+mk	syntax_conf.syn
 list	syntax_conf.syn
 po	syntax_conf.syn
 pot	syntax_conf.syn
@@ -66,6 +67,7 @@ patch	syntax_diff.syn
 
 js	syntax_javascript.syn
 json	syntax_javascript.syn
+ts	syntax_typescript.syn
 
 xml	syntax_xml.syn
 idl	syntax_xml.syn
@@ -118,5 +120,11 @@ vho	syntax_vhdl.syn
 vhdl	syntax_vhdl.syn
 
 tcl syntax_tcl.syn
-S	syntax_gnuasm.syn
 s	syntax_gnuasm.syn
+
+yaml	syntax_yaml.syn
+yml	syntax_yaml.syn
+
+yang	syntax_yang.syn
+
+go  syntax_go.syn

@@ -167,7 +167,7 @@ void SpellCheckEngineOption::AddPossibleValue(bool bValue)
     }
 }
 
-void SpellCheckEngineOption::SetOptionType(int nType)
+void SpellCheckEngineOption::SetOptionType(int WXUNUSED(nType))
 {
     // If the type isn't consistent with the current option value or any of the possible values
     // then we need to remove the existing inconsistent data

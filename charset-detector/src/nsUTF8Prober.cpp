@@ -35,8 +35,6 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-#pragma GCC visibility push(hidden)
-
 #include "nsUTF8Prober.h"
 
 void  nsUTF8Prober::Reset(void)
@@ -48,16 +46,11 @@ void  nsUTF8Prober::Reset(void)
 
 nsProbingState nsUTF8Prober::HandleData(const char* aBuf, PRUint32 aLen)
 {
-  nsSMState codingState;
+  PRUint32 codingState;
 
   for (PRUint32 i = 0; i < aLen; i++)
   {
     codingState = mCodingSM->NextState(aBuf[i]);
-    if (codingState == eError)
-    {
-      mState = eNotMe;
-      break;
-    }
     if (codingState == eItsMe)
     {
       mState = eFoundIt;
@@ -91,6 +84,4 @@ float nsUTF8Prober::GetConfidence(void)
   else
     return (float)0.99;
 }
-
-#pragma GCC visibility pop
 

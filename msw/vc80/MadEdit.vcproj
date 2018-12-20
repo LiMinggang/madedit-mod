@@ -41,8 +41,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(WXWIN)\lib\vc_lib\mswud&quot;;&quot;$(WXWIN)\include&quot;;&quot;$(BOOST)&quot;;&quot;..\..\charset-detector\include&quot;;&quot;..\..\charset-detector\src&quot;;&quot;..\..\charset-detector\src\tables&quot;;&quot;$(SolutionDir)/../minipython/Include&quot;;&quot;$(SolutionDir)/../minipython/PC&quot;;&quot;$(SolutionDir)\..\..\spellchecker&quot;;&quot;$(SolutionDir)\..\..\spellchecker\hunspell\src&quot;;&quot;$(SolutionDir)\..\..\markdown&quot;"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_SCL_SECURE_NO_WARNINGS;HUNSPELL_STATIC;Py_NO_ENABLE_SHARED"
+				AdditionalIncludeDirectories="&quot;$(WXWIN)\lib\vc_lib\mswud&quot;;&quot;$(WXWIN)\include&quot;;&quot;$(SolutionDir)..\..\python\include&quot;;&quot;$(BOOST)&quot;;&quot;..\..\charset-detector\include&quot;;&quot;..\..\charset-detector\src&quot;;&quot;..\..\charset-detector\src\tables&quot;;&quot;$(SolutionDir)/../minipython/Include&quot;;&quot;$(SolutionDir)/../minipython/PC&quot;;&quot;$(SolutionDir)\..\..\spellchecker&quot;;&quot;$(SolutionDir)\..\..\spellchecker\hunspell\src&quot;;&quot;$(SolutionDir)\..\..\markdown&quot;"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_SCL_SECURE_NO_WARNINGS;HUNSPELL_STATIC;Py_NO_ENABLE_SHARED;BOOST_ALL_NO_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -68,7 +68,7 @@
 				AdditionalDependencies="wxmsw30ud_core.lib wxbase30ud.lib wxmsw30ud_aui.lib wxbase30ud_xml.lib wxmsw30ud_html.lib wxexpatd.lib wxpngd.lib wxzlibd.lib python27_d.lib libhunspell.lib comctl32.lib uuid.lib rpcrt4.lib User32.Lib Gdi32.Lib Shell32.Lib AdvAPI32.Lib Ole32.Lib OleAut32.Lib ComDlg32.Lib"
 				OutputFile="$(OutDir)/MadEdit.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(WXWIN)\lib\vc_lib&quot;;&quot;$(TargetDir)&quot;;&quot;$(BOOST)stage/lib&quot;"
+				AdditionalLibraryDirectories="&quot;$(WXWIN)\lib\vc_lib&quot;;&quot;$(TargetDir)&quot;;&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
@@ -125,8 +125,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				FavorSizeOrSpeed="1"
-				AdditionalIncludeDirectories="&quot;$(WXWIN3)\lib\vc_lib\mswu&quot;;&quot;$(WXWIN3)\include&quot;;&quot;$(BOOST)&quot;;&quot;$(SolutionDir)..\..\charset-detector\include&quot;;&quot;$(SolutionDir)..\..\charset-detector\src&quot;;&quot;$(SolutionDir)..\..\charset-detector\src\tables&quot;;&quot;$(SolutionDir)..\..\minipython\Include&quot;;&quot;$(SolutionDir)..\..\minipython\PC&quot;;&quot;$(SolutionDir)..\..\spellchecker&quot;;&quot;$(SolutionDir)..\..\spellchecker\hunspell\src&quot;;&quot;$(SolutionDir)..\..\markdown&quot;;&quot;$(SolutionDir)..\..\astyle&quot;;&quot;$(SolutionDir)..\..\astyle\astyle&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;HUNSPELL_STATIC;Py_NO_ENABLE_SHARED"
+				AdditionalIncludeDirectories="&quot;$(WXWIN)\lib\vc_lib\mswu&quot;;&quot;$(WXWIN)\include&quot;;&quot;$(SolutionDir)..\..\python\include&quot;;&quot;$(BOOST)&quot;;&quot;$(SolutionDir)..\..\charset-detector\src&quot;;&quot;$(SolutionDir)..\..\minipython\Include&quot;;&quot;$(SolutionDir)..\..\minipython\PC&quot;;&quot;$(SolutionDir)..\..\spellchecker&quot;;&quot;$(SolutionDir)..\..\spellchecker\hunspell\src&quot;;&quot;$(SolutionDir)..\..\markdown&quot;;&quot;$(SolutionDir)..\..\astyle&quot;;&quot;$(SolutionDir)..\..\astyle\astyle&quot;"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;HUNSPELL_STATIC;Py_NO_ENABLE_SHARED;BOOST_ALL_NO_LIB"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -147,10 +147,10 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/ignore:4217 /ignore:4049"
-				AdditionalDependencies="wxmsw31u_core.lib wxbase31u.lib wxmsw31u_aui.lib wxbase31u_xml.lib wxmsw31u_html.lib wxexpat.lib wxpng.lib wxzlib.lib python27.lib libboost_python-vc80-mt-s-1_61.lib libhunspell.lib comctl32.lib rpcrt4.lib User32.Lib Gdi32.Lib Shell32.Lib AdvAPI32.Lib Ole32.Lib OleAut32.Lib ComDlg32.Lib Winspool.lib"
+				AdditionalDependencies="wxmsw31u_core.lib wxbase31u.lib wxmsw31u_aui.lib wxbase31u_xml.lib wxmsw31u_html.lib wxexpat.lib wxpng.lib wxzlib.lib python27.lib boostpython.lib libhunspell.lib comctl32.lib rpcrt4.lib imm32.lib User32.Lib Gdi32.Lib Shell32.Lib AdvAPI32.Lib Ole32.Lib OleAut32.Lib ComDlg32.Lib Winspool.lib"
 				OutputFile="$(OutDir)/MadEdit.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(WXWIN3)\lib\vc_lib\&quot;;&quot;$(TargetDir)&quot;;&quot;$(BOOST)\stage\lib&quot;;$(NOINHERIT)"
+				AdditionalLibraryDirectories="&quot;$(WXWIN)\lib\vc_lib\&quot;;&quot;$(TargetDir)&quot;;&quot;$(NOINHERIT)"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -220,6 +220,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\MadFileHistoryDialog.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\MadFindInFilesDialog.cpp"
 				>
 			</File>
@@ -268,6 +272,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\MadSourceFormatDialog.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\MadUtils.cpp"
 				>
 			</File>
@@ -286,6 +294,10 @@
 			<Filter
 				Name="MadEdit"
 				>
+				<File
+					RelativePath="..\..\src\MadEdit\MadCSConv.cpp"
+					>
+				</File>
 				<File
 					RelativePath="..\..\src\MadEdit\MadEdit.cpp"
 					>
@@ -335,35 +347,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\charset-detector\src\entry\impl.cpp"
-					>
-				</File>
-				<File
 					RelativePath="..\..\charset-detector\src\JpCntx.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\charset-detector\src\LangBulgarianModel.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\charset-detector\src\LangCyrillicModel.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\charset-detector\src\LangGreekModel.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\charset-detector\src\LangHebrewModel.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\charset-detector\src\LangHungarianModel.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\charset-detector\src\LangThaiModel.cpp"
 					>
 				</File>
 				<File
@@ -434,6 +418,130 @@
 					RelativePath="..\..\charset-detector\src\nsUTF8Prober.cpp"
 					>
 				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\uchardet.cpp"
+					>
+				</File>
+				<Filter
+					Name="LangModels"
+					>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangArabicModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangBulgarianModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangCroatianModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangCzechModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangDanishModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangEsperantoModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangEstonianModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangFinnishModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangFrenchModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangGermanModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangGreekModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangHebrewModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangHungarianModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangIrishModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangItalianModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangLatvianModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangLithuanianModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangMalteseModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangPolishModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangPortugueseModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangRomanianModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangRussianModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangSlovakModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangSloveneModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangSpanishModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangSwedishModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangThaiModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangTurkishModel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\charset-detector\src\LangModels\LangVietnameseModel.cpp"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="SpellChecker"
@@ -443,15 +551,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\spellchecker\HunspellInterface.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\spellchecker\PersonalDictionary.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\spellchecker\PersonalDictionary.h"
 					>
 				</File>
 				<File
@@ -467,23 +567,11 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\spellchecker\SpellCheckEngineOption.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\spellchecker\SpellCheckerManager.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\spellchecker\SpellCheckerManager.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\spellchecker\SpellCheckUserInterface.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\spellchecker\SpellCheckUserInterface.h"
 					>
 				</File>
 			</Filter>
@@ -531,23 +619,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\astyle\asstreamiterator.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\astyle\astyle\astyle.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\astyle\astylepredefinedstyles.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\astyle\formattersettings.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\astyle\formattersettings.h"
 					>
 				</File>
 			</Filter>
@@ -579,6 +651,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\MadFileAssociationDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\MadFileHistoryDialog.h"
 				>
 			</File>
 			<File
@@ -622,6 +698,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\MadSourceFormatDialog.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\MadUtils.h"
 				>
 			</File>
@@ -636,6 +716,10 @@
 			<Filter
 				Name="MadEdit"
 				>
+				<File
+					RelativePath="..\..\src\MadEdit\MadCSConv.h"
+					>
+				</File>
 				<File
 					RelativePath="..\..\src\MadEdit\MadEdit.h"
 					>
@@ -672,12 +756,192 @@
 					RelativePath="..\..\src\MadEdit\ucs4_t.h"
 					>
 				</File>
+				<Filter
+					Name="ExtEncodings"
+					>
+					<File
+						RelativePath="..\..\src\MadEdit\ExtEncodings\ascii.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\src\MadEdit\ExtEncodings\converters.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\src\MadEdit\ExtEncodings\cp936ext.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\src\MadEdit\ExtEncodings\gb18030.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\src\MadEdit\ExtEncodings\gb18030ext.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\src\MadEdit\ExtEncodings\gb18030uni.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\src\MadEdit\ExtEncodings\gb2312.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\src\MadEdit\ExtEncodings\gbk.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\src\MadEdit\ExtEncodings\gbkext1.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\src\MadEdit\ExtEncodings\gbkext2.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\src\MadEdit\ExtEncodings\gbkext_inv.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="charset-detector"
 				>
 				<File
-					RelativePath="..\..\charset-detector\include\chardetect.h"
+					RelativePath="..\..\charset-detector\src\CharDistribution.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\JpCntx.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsBig5Prober.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsCharSetProber.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsCodingStateMachine.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nscore.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsEscCharsetProber.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsEUCJPProber.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsEUCKRProber.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsEUCTWProber.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsGB2312Prober.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsHebrewProber.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsLatin1Prober.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsMBCSGroupProber.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsPkgInt.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsSBCharSetProber.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsSBCSGroupProber.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsSJISProber.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsUniversalDetector.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\nsUTF8Prober.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\prmem.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\charset-detector\src\uchardet.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Astyle"
+				>
+				<File
+					RelativePath="..\..\astyle\astyle\ASLocalizer.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\astyle\asstreamiterator.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\astyle\astyle\astyle.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\astyle\astylepredefinedstyles.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\astyle\formattersettings.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="SpellChecker"
+				>
+				<File
+					RelativePath="..\..\spellchecker\HunspellInterface.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\spellchecker\PersonalDictionary.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\spellchecker\SpellCheckEngineOption.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\spellchecker\SpellCheckerManager.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\spellchecker\SpellCheckUserInterface.h"
 					>
 				</File>
 			</Filter>

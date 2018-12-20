@@ -33,6 +33,7 @@ share/madedit/syntax/syntax_jsp.syn
 share/madedit/syntax/syntax_js_html.syn
 share/madedit/syntax/syntax_latex.syn
 share/madedit/syntax/syntax_lua.syn
+share/madedit/syntax/syntax_mpython.syn
 share/madedit/syntax/syntax_nfo.syn
 share/madedit/syntax/syntax_pas.syn
 share/madedit/syntax/syntax_perl.syn

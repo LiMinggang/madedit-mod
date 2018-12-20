@@ -8,6 +8,13 @@
 
 #ifndef _MADLINES_H_
 #define _MADLINES_H_
+#include "../MadUtils.h"
+
+#if CPLUSEPLUSE98
+	#include <boost/shared_ptr.hpp>
+#else
+	#include <memory>
+#endif
 
 #include <wx/wxprec.h>
 
@@ -54,7 +61,7 @@ extern bool g_MB2WC_check_dir_filename;//check dir, filename separately
 class MadConvFileName_WC2MB_UseLibc
 {
 public:
-	MadConvFileName_WC2MB_UseLibc( bool uselibc ) {
+	explicit MadConvFileName_WC2MB_UseLibc( bool uselibc ) {
 		g_WC2MB_2_utf8 = !uselibc;
 	}
 	~MadConvFileName_WC2MB_UseLibc() {
@@ -129,7 +136,7 @@ private:
 	bool Rename( const wxString &name );
 
 public:
-	MadFileData( const wxString &name );
+	explicit MadFileData( const wxString &name );
 	virtual ~MadFileData();
 	virtual wxByte Get( const wxFileOffset &pos );
 	virtual void Get( const wxFileOffset &pos, wxByte *buffer, size_t size );
@@ -152,13 +159,13 @@ struct MadBlock//:public Loki::SmallObject <>
 	wxFileOffset m_Pos;
 	wxFileOffset m_Size;
 
-	MadBlock(): m_Data( NULL ), m_Pos( 0 ), m_Size( 0 ) {
+	MadBlock(): m_Data( nullptr ), m_Pos( 0 ), m_Size( 0 ) {
 	}
 	MadBlock( MadInData *data, const wxFileOffset &pos, const wxFileOffset &size )
 		: m_Data( data ), m_Pos( pos ), m_Size( size ) {
 	}
 	void Reset() {
-		m_Data = NULL;
+		m_Data = nullptr;
 		m_Pos = 0;
 		m_Size = 0;
 	}
@@ -214,11 +221,11 @@ struct BracePairIndex
 	wxByte       LeftPair;   // non-zero: leftpair, zero: rightpair
 	char         BraceIndex; //
 
-	BracePairIndex()
+	BracePairIndex(): LinePos( 0 ), XPos( 0 ), Width( 0 ), Length( 0 ), LeftPair( 0 ), BraceIndex( 0 )
 	{}
 
 	BracePairIndex( int xpos, wxUint16 wid, wxFileOffset lpos, wxUint16 len, wxByte lp, char bi )
-		: XPos( xpos ), Width( wid ), LinePos( lpos ), Length( len ), LeftPair( lp ), BraceIndex( bi )
+		: LinePos( lpos ), XPos( xpos ), Width( wid ), Length( len ), LeftPair( lp ), BraceIndex( bi )
 	{}
 };
 
@@ -264,7 +271,7 @@ struct MadLine
 	}
 
 	void Get( wxFileOffset pos, wxByte *buf, size_t size ) { // get n bytes
-		wxASSERT( pos >= 0 && pos + size <= m_Size );
+		wxASSERT( pos >= 0 && ((wxFileOffset)(pos + size) <= m_Size) );
 
 		if( size == 0 ) { return; }
 
@@ -282,7 +289,7 @@ struct MadLine
 			cnt = size;
 
 			//wxLogDebug(wxT("Before:m_size[%d], m_data[%p]"), biter->m_Size, biter->m_Data);
-			if( pos + cnt > biter->m_Size ) { cnt = biter->m_Size - pos; }
+			if( ((wxFileOffset)(pos + cnt)) > biter->m_Size ) { cnt = (size_t)(biter->m_Size - pos); }
 
 			biter->Get( pos, buf, cnt );
 
@@ -294,7 +301,6 @@ struct MadLine
 			++biter;
 		}
 	}
-
 
 	size_t RowCount() {
 		return m_RowIndices.size() - 1;
@@ -321,7 +327,8 @@ class MadLineList : public list <MadLine>
 public:
 	MadLineList();
 
-	void SetBookmark( MadLineIterator position );     // toggle or remove bookmark from given position
+	void SetBookmark( MadLineIterator position, bool toggle = true );     // toggle or remove bookmark from given position
+	void RemoveBookmark( MadLineIterator position );     // remove bookmark from given position
 	int  GetNextBookmark( MadLineIterator position ); // return line number, or -1 if no bookmars
 	int  GetPreviousBookmark( MadLineIterator position ); // return line number from the end to the beginning, or -1
 	bool IsBookmarked( MadLineIterator position );
@@ -346,6 +353,8 @@ class MadSyntax;
 class MadLines
 {
 private:
+	typedef int ( MadLines::*FindStringPtr )( MadUCQueue &ucqueue,
+			MadStringIterator begin, const MadStringIterator &end, size_t &len );
 	friend class MadEdit;
 	friend class MadSyntax;
 
@@ -366,13 +375,22 @@ private:
 	MadFileData *m_TmpFileData;
 
 	MadMemData *m_MemData;
-
-	wxString    m_Name;
-	bool        m_ReadOnly;
-	int         m_MaxLineWidth;             //max pixel width of line/row
+	FindStringPtr FindString;
 
 	wxByte          *m_WriteBuffer;
+	wxByte          *m_NextUChar_Buffer;
+	size_t          m_NextUChar_BufferStart;
+	size_t          m_NextUChar_BufferSize;
+	wxFileOffset    m_NextUChar_BufferNextPos;
+	wxFileOffset    m_NextUChar_LineSize;
+	wxFileOffset    m_NextUChar_Pos;
 	vector<wxByte>  m_WriteBufferVector;
+	MadLineIterator m_NextUChar_LineIter;
+	wxString    m_Name;
+	bool        m_ReadOnly;
+	bool        m_NextUChar_BufferLoadNew;
+	int         m_MaxLineWidth;             //max pixel width of line/row
+
 
 private:
 
@@ -390,14 +408,14 @@ private:
 	// append lit2 after lit1
 	void Append( const MadLineIterator &lit1, const MadLineIterator &lit2 );
 
-	// write to fd or file if which one isn't NULL
+	// write to fd or file if which one isn't nullptr
 	void WriteBlockToData( MadOutData *fd, const MadBlockIterator &bit );
 	void WriteToFile( wxFile &file, MadFileData *oldfd, MadFileData *newfd );
 
 	wxFileOffset GetMaxTempSize( const wxString &filename );
 
 public:
-	MadLines( MadEdit *madedit );
+	explicit MadLines( MadEdit *madedit );
 	~MadLines();
 
 	bool LoadFromFile( const wxString &filename, const wxString &encoding = wxEmptyString );
@@ -405,17 +423,7 @@ public:
 	wxFileOffset GetSize() { return m_Size; }
 
 private:  // NextUChar()
-	wxByte          *m_NextUChar_Buffer;
-	size_t          m_NextUChar_BufferStart;
-	size_t          m_NextUChar_BufferSize;
-	wxFileOffset    m_NextUChar_BufferNextPos;
-	bool            m_NextUChar_BufferLoadNew;
 	void LoadNewBuffer();
-
-
-	MadLineIterator m_NextUChar_LineIter;
-	wxFileOffset    m_NextUChar_LineSize;
-	wxFileOffset    m_NextUChar_Pos;
 
 	bool NextUChar_SBCS( MadUCQueue &ucqueue );
 	bool NextUChar_DBCS( MadUCQueue &ucqueue );
@@ -424,6 +432,7 @@ private:  // NextUChar()
 	bool NextUChar_UTF16BE( MadUCQueue &ucqueue );
 	bool NextUChar_UTF32LE( MadUCQueue &ucqueue );
 	bool NextUChar_UTF32BE( MadUCQueue &ucqueue );
+    bool NextUChar_GB18030( MadUCQueue &ucqueue );
 
 	bool NextUCharIs0x0A( void );
 
@@ -434,10 +443,6 @@ private:  // NextUChar()
 	int FindStringNoCase( MadUCQueue &ucqueue, MadStringIterator begin,
 						  const MadStringIterator &end, size_t &len );
 
-	typedef int ( MadLines::*FindStringPtr )( MadUCQueue &ucqueue,
-			MadStringIterator begin, const MadStringIterator &end, size_t &len );
-
-	FindStringPtr FindString;
 
 public:
 	void SetEncoding( MadEncoding *encoding );
@@ -456,6 +461,5 @@ public:
 	static const MadLine madNewEmptyLine;
 	static const MadRowIndex madNewRowIdx;
 };
-
 
 #endif

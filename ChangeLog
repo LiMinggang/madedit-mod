@@ -1,3 +1,276 @@
+2019-11-29  Minggang Li <minggang.li@gmail.com>
+1.New: Use input file ext as SaveAs file type filter
+2.New: Use javascript syntax for typescript at first
+3.New: ArchLinux/Manjaro package support
+4.New: Better Dark theme based on popular ones
+5.New: Change default color of active line marker
+6.New: Highlight word color can be configed
+7.New: Use backgroud color of text for rest of the line
+8.Fix: Size issue of MacroDialog
+9.Fix: Save new created empty file as would cause crash #271
+10.Fix: Upward text selection stops at the top margin of text area #272
+11.Fix: After entering and exiting full screen mode, the Macro tool buttons auto appear on the toolbar #273
+12.Fix: Bookmark background color could not be saved
+13.Update Hunspell to 1.7.0
+14.Update dictionary download URL
+15.Update translations
+
+2018-08-05  Minggang Li <minggang.li@gmail.com>
+	1.New: Using case insensitive on file name and directory name sorting in Windows list dialog
+	2.New: Enable/disable adding keywords to internal dictionary
+	3.Fix: Input Method Candidate Window doesn't follow the caret under Windows 7
+	4.New: Source code formatter icon
+	5.Fix: Blurry GUI text issue under Windows 10 high DPI display
+	6.Fix: FindInFiles dialog/search progress display issue under high DPI
+	7.Fix: Performance issue of spell check for syntax hightlighting #267 #270
+	8.Fix: NewDocumentTextFontSize does not take effect
+	9.Fix: Set spell check default to disable
+	10.Fix: Memory saving and performance improvement on syntax highlighting
+	11.Fix: UI not automatically updated(SearchReplace Dialog)
+	12.Update Python to 2.7.15
+	13.Update hunspell to latest 8e6ceaa55d3f22c2b8ceff0190ce05f56aad38c4
+	14.Update Chinese translation
+
+2018-05-23  Minggang Li <minggang.li@gmail.com>
+	1.New: Atyle formatter: Add new option "style=webkit" for the WebKit brace style
+	2.New: New API for MadPython:InsertNewline
+	3.New: Right click menu enabled for MadMacroDlg and SearchReplaceDialog(more edit functions for input of the dialog)
+	4.New: Scripts and spell check for Macro and SearchReplace dialog
+	5.New: Reset transparency of SearchReplace dialog
+	6.Fix: Deleted stale lock file '/home/username/prog_name-username' bug(Linux) #262
+	7.Fix: Code issue of EnableTransparency
+	8.Fix: GB18030 not work under Linux
+	9.Fix: Regex replace bug, eg, replace "\r\n" with "\\n"
+	10.Fix: MadPython Recording issue
+	11.Fix: Chars escape for regex recording
+	12.Fix: Unbind critical message handlers during OnClose
+	13.Fix: High CPU load when move mouse over text lines #258 #265
+	14.Fix: Can't replace bookmarked lines with multiple line text
+	15.Fix: Patch for possible buffer overflow in GetFontWidths
+	16.Fix: Wrong string for K&R style on SourceFormat config Dialog
+	17.Fix: Use alphabet order for file name extension in FileAssociation Dialog
+	18.Fix: Disable syntax toolbar in Hex mode
+	19.Fix: Use GB18030 if wxFONTENCODING_CP936 is not available
+	20.Fix: Total pages in print preview is incorrect
+	21.Fix: Code improvement
+	22.Update Astyle to latest code
+	23.Update translations
+
+2018-04-16  Minggang Li <minggang.li@gmail.com>
+	1.New: Support Drag and Drop for text(from other applications, not DnD edit, can't drag text out of MadEdit yet)
+	2.New: Remember last editing and reset of MadMacro dialog
+	3.New: Go language syntax support
+	4.New: First line syntax detect for TCL
+	5.New: Don't pop up 2 dialogs on reloading a file changed
+	6.New: Ask user to choose if s/he wants to remove the recent file list if the file does not exist
+	7.New: Sort Encoding with name
+	8.Fix: Crash on purging items of FindInFiles Dialog
+	9.Fix: The first macro command recorded without prefix "medit."
+	10.Fix: Convert macros from saved macro file to UTF8 before running
+	11.Fix: Tooltip of the file name tab was not updated if renamed
+	12.Fix: Use min size of the config and actual resolution
+	13.Fix: Syntax is not updated on Save As
+	14.Fix: Option dialog hang issue(https://trac.wxwidgets.org/ticket/18091)
+	15.Fix: Improve syntax auto detect on Save As(#254)
+	16.Fix: Can't assign more than one shortcut to commands by Option Dialog
+	17.Fix: String escaping issue in Macro Recording of Search/Replace
+	18.Fix: Patch for dead/infinite loop in syntax highlighting
+	19.Fix: Display file format(new line char) on menu
+	20.Fix: Memory leak in FixFileNameEncoding
+	21.Fix: Bugs introduced in refactor Option Dialog(printing functions)
+	22.Fix: Bug on detect Chinese encoding
+	23.Fix: Some dialog close event code issue
+	24.Fix: Clear mouse status on losing focus while popping up dialog to reload file
+	25.Minor memory improvement
+	26.Minor code improvement
+	27.Update VS2010 build
+	28.Update wxWidgets to 3.1.1
+	29.Update boost.python to latest code
+	30.Update translations
+
+2017-12-19  Minggang Li <minggang.li@gmail.com>
+	1.New: Open file path with default file explorer, set "EXTEXPLORER" as the env for open in another application #243
+	2.New: Add '-d' to define a new delimiter to replace '*'
+	3.New: Show/Hide menu bar
+	4.Fix: Message strings were not translated during initialization
+	5.Fix: TXT syntax would not be applied on first loading(0.4.10) #244
+	6.Fix: Change font size/font/encoding/syntax/linespacing will not update font toolbar #246
+	7.Fix: Remove toggle show Quick Search bar on Option dialog
+	8.Fix: Restructure of MadEdit config
+	9.Fix: Saved bookmarks would added to other files during reload
+	10.Fix: Wrong MadPython expression recorded in Search/Replace
+	11.Fix: Clean deprecated function wxNewId
+	12.Fix: Complier warnings from VC(L4)
+	13.Fix: Restore InfoWindow instead of hide it if it was there last time
+	14.Fix: Display bookmark on the first sub-row of a wrapped line
+	15.Update Astyle to latest version
+	16.Update Hunspell to latest version
+	17.Update Python to 2.7.14
+	18.Update translation
+	19.Other minor improvements
+
+2017-10-23  Minggang Li <minggang.li@gmail.com>
+	1.New: Settings for new document in Options
+	2.New: Default font for document
+	3.New: Enforce default encoding
+	4.New: Toolbar for Encoding/Font/Font Size/Line Spacing
+	5.New: Perl style regex match in Replace
+	6.New: Copy/Cut unbookmarked lines
+	7.New: Enable resize of search/replace input
+	8.New: Merge bookmark to line number area(From wxMedit), use Alt+LeftClick to toggle
+	9.New: Save bookmark to config file
+	10.Fix: Crash in Cut/Delete/Replace bookmarked/unbookmarked lines
+	11.Fix: Disable resize of Option dialog(hang UI)
+	12.Fix: Restore select the whole line by left click #240
+	13.Fix: Refactor Option dialog with wxSmith and allow resize
+	14.Fix: Font size issue of fix width mode in switching between different fonts
+	15.Fix: Incorrect displaying DND mouse ICON while clicking line number area in selection
+	16.Fix: Wrong file filter of Open File dialog
+	17.Fix: Bookmark Only in search dialog does not work correctly
+	18.Fix: Enable 80 columns hint only if it's in fix width mode
+	19.Fix: Use GTK2 for Ubuntu release to fix the issue of wxWidgets with GTK3
+	20.Fix: Support '|' in filename('*' will not be supported)
+	21.Fix: Display issue of '\' on Recent Find/Replace menu
+	22.Fix: File change detect issue on close
+	23.Fix: Improvement on file pos manager
+	24.Update Astyle to latest code
+	25.Update Hunspell to latest code
+	26.Update translations
+
+2017-08-31  Minggang Li <minggang.li@gmail.com>
+	1.New: Change editor encoding of MadPython dialog according to current active edit
+	2.New: Customizable search result display length #233
+	3.New: New MadPython API GetRangeText
+	4.New: More checks on numbers reading from config file, more robust code
+	5.New: New predefined file associations(.tcl, .yaml, etc)
+	6.Fix: IPC failure on Linux #234
+	7.Fix: Bugs found by CPPCheck
+	8.Fix: MadPython can't take chars not encoded by current encoding
+	9.Fix: Restore default behavior of click on line number area
+	10.Fix: Hang on closing Option Dialog if click Code preview edit on Source formatter tab #235
+	11.Fix: Left double click would move caret forward
+	12.Fix: Merge Hunspell latest fix
+	13.Fix: Can't enable personal dictionary on Mageia/Linux #238
+	14.Update C++ syntax to C++11
+	15.Update uchardet to latest version
+	16.Update Astyle to 3.0.1
+	17.Update Credits on About Dialog
+	18.Update Translations
+	19.Minor code improvement
+	20.Minor issue in MadPython scripts
+
+2017-05-31  Minggang Li <minggang.li@gmail.com>
+	1.New: Copy file name without extension
+	2.New: Syntax highlight support for YAML, YANG
+	3.New: New Astyle options support(indent-after-parens, attach-closing-while)
+	4.New: Caret will keep in window after resize(Fix issue of alwasys showing file at the beginning on loading maximized)
+	5.New: Update toggle-able menu items according to context(ReadOnly flag and Set selection)
+	6.New: Hex offset of char position
+	7.Fix: Minor bug on OpenFile again
+	8.Fix: Can not copy the first item in Copy All results
+	9.Fix: Change Astyle config according to official change(bracket to brace)
+	10.Fix: Could not close MadEdit-Mod if you canceled in the first time
+	11.Fix: Bugs found by CppCheck
+	12.Fix: Can't open file having double backslash in path(Windows)
+	13.Fix: Caret is not correctly displayed(0.4.7, WinX64) #231
+	14.Fix: Bug 101030 & 101031 of uchardet
+	15.Fix: Possible char type cast issue(Windows)
+	16.Fix: Bug of query to save files(some file will not be queried)
+	17.Fix: Associated file does not show MadEdit ICON
+	18.Fix: Weird scrollbar thumb(Windows)
+	19.Fix: Assertion on Option dialog(Linux)
+	20.Code improvement for 64 bits system
+	21.Update Hunspell to 1.6.1
+	22.Update Astyle to 3.0
+	23.Update boost_python to boost 1.64
+	24.C++ 11 transform
+	25.Update Simplified Chinese translation
+	26.Update Traditional Chinese translation(Thanks zhtw2013@gmail.com)
+	27.Update Greek translation(Thanks Nikoss)
+
+2017-03-24  Minggang Li <minggang.li@gmail.com>
+	1.New: Astyle 2.06 new option support
+	2.Fix: UI issues of source formatter config tab
+	3.Fix: Bookmark tag show up issue in Find and Bookmark
+	4.Fix: Crash while opening file history dialog by hitting F9
+	5.Fix: Crash while Windows shutdown(wxWidgets issue)
+	6.Fix: Crash because of Astyle assertion failure at line 3229, ASFormatter.cpp(https://sourceforge.net/p/astyle/bugs/422/)
+	7.Fix: Cannot open documents on the network server #228
+	8.Use standalone boost python to replace boost one(No need to compile boost anymore)
+	9.Use Bind to replace event table in MadEditframe to fix potentail issues
+	10.Update Simplified Chinese translation
+
+2016-12-30  Minggang Li <minggang.li@gmail.com>
+	This release is mainly for more encodings support, especially GB18030 and Regex bug fix
+	1.New: Spell check for SearchReplaceDialog would change according to active window
+	2.New: Ctrl+Shift+Wheel as shortcut for Page Up/Down
+	3.New: Indicator for zero length match in Regex search
+	4.New: Support Replace of '^' and '$' in Regex
+	5.New: Add GB18030 support
+	6.New: Add KOI8-R, KOI8-U and CP866 support
+	7.New: Add Macintosh encodings(Roman, Japanese, Chinese-trad, Korean, Arabic, Hebrew, Greek, Cyrillic, Thai, Chinese-simp, Central-Eur, Croatian, Icelandic, Romanian) support
+	8.New: Add CP874 Windows Thai support
+	9.New: Mark unsupported unicode char with {}
+	10.Fix: Toolbar issue
+	11.Fix: Regex search bug #224
+	12.Fix: Regular expression (?<=.)\s(?=.) replacement issue(Enable "Replace Directly" in Options) #119
+	13.Fix: Caret position is not updated if close search dialog by click 'X' instead of close button
+	14.Fix: Disable Find Previous in Regex search
+	15.Fix: Add ResetToolBarsInfoWin to All above in PurgeHisoryDialog
+	16.Fix: Not stay in current line when switch between modes #226
+	17.Fix: Adjust encoding group according to MSDN
+	18.Fix: Adjust toolbar position #225
+	19.Fix: UI issue of Source formatter tab in Option dialog
+	20.Update Simplified Chinese translation
+	21.Update boost to 1.62
+	22.Update chardetector to latest uchardet v0.0.6
+	23.Update Hunspell to 1.6
+	24.Update Python to 2.7.13
+	25.Other minor improvements
+
+2016-10-21  Minggang Li <minggang.li@gmail.com>
+	1.New: File history dialog
+	2.New: Add default key, down key support(the same as Search Dialog) for FindInFiles Dialog
+	3.Fix: Size issue of some UI items #215
+	4.Fix: Two typos #82
+	5.Fix: Don't show EOF but Space/Tab in Search/Replace Dialog
+	6.Fix: CPPCheck warnings
+	7.Fix: Change shortcuts of Go Back/Forward
+	8.Fix: Some greek symbols that require the Alt+ compination don't get created #214
+	    with Greek extended keyboard layout
+	    Madeit-Mod -------------------> result <------------ IceApe
+	    RightAlt+Shift+r --------------> U+00AE <----------------- RightAlt+r
+	    RightAlt+Shift+[2 times ; ] --> Â¨ <------------------ [couldn't find it]
+	9.Fix: Remove support for Win98
+	10.Fix: Some illegal chars in file name(eg, 0xFFF0~0xFFFF) would cause wxWidgets crash
+	11.Fix: a bug when move up #217
+	12.Fix: Crash if close the last file by double clicking page tab #218
+	13.Other improvements
+	14.Update translation
+
+2016-7-13  Minggang Li <minggang.li@gmail.com>
+
+	1.New: Set toolbar to 3 columns to let user who has a small display have a chance to re-org the toolbars
+	2.New: Use icon to mark readonly flag
+	3.New: Replace toolbar icons with Silk icon set from Mark James(www.famfamfam.com) and Fugue(http://p.yusukekamiyamane.com/)
+	4.New: Change default color of space/tab/carrige/return to Gray
+	5.New: Use hotkey to launch the macro saved #208
+	6.New: Add app dir to script searching directories
+	7.New: Seperate "goto the last edit position" and ¡°goto the next edit position¡±function from Undo #169 
+	8.Fix: Move recent files tool bar item from Quick search to Standard
+	9.Fix: Apply AuiNoteBook fix from wxWidgets dev(http://trac.wxwidgets.org/ticket/17551)
+	10.Fix: Display replace all result on Status bar instead of an annoying dialog
+	11.Fix: Add default pos to tool bars in order that tool bar would be in the pos expected
+	12.Fix: Group Bookmark tools to SearchReplace Toolbar
+	13.Fix: Some config would be overidded
+	14.Fix: When I paste some lines, the typewrite mode is not working #209 
+	15.Add more Icons
+	16.Update license information
+	17.Update Greek Translation
+	18.Update MiniPython to Python 2.7.12
+	19. Upadate Astyle to latest
+	Note: The Quick search bar would be larger than expected because of removing the recent file list button. Please reset the toolbar (and re-arrange it---it would be saved) by Tools->Purge History->Reset Toolbar position
+
 2016-6-18  Minggang Li <minggang.li@gmail.com>
 
 	1.New: Use dialog to let user choose one for all instead of annoying one by one dialogs

@@ -14,16 +14,7 @@
 //*)
 
 //(*IdInit(MadSortDialog)
-const long MadSortDialog::ID_WXRADIOBOXORDER = wxNewId();
-const long MadSortDialog::ID_WXCHECKBOXCASE = wxNewId();
-const long MadSortDialog::ID_WXCHECKBOXNUMERIC = wxNewId();
-const long MadSortDialog::ID_WXCHECKBOXREMOVEDUP = wxNewId();
 //*)
-
-BEGIN_EVENT_TABLE(MadSortDialog,wxDialog)
-	//(*EventTable(MadSortDialog)
-	//*)
-END_EVENT_TABLE()
 
 MadSortDialog::MadSortDialog(wxWindow* parent)
 {
@@ -38,15 +29,16 @@ MadSortDialog::MadSortDialog(wxWindow* parent)
 		_("&Ascending"),
 		_("&Descending")
 	};
-	WxRadioBoxOrder = new wxRadioBox(this, ID_WXRADIOBOXORDER, _("Sort Order"), wxDefaultPosition, wxDefaultSize, 2, __wxRadioBoxChoices_1, 1, wxRA_SPECIFY_COLS, wxDefaultValidator, _T("ID_WXRADIOBOXORDER"));
+	WxRadioBoxOrder = new wxRadioBox(this, wxID_ANY, _("Sort Order"), wxDefaultPosition, wxDefaultSize, 2, __wxRadioBoxChoices_1, 1, wxRA_SPECIFY_COLS, wxDefaultValidator, _T("ID_WXRADIOBOXORDER"));
+	WxRadioBoxOrder->InvalidateBestSize();
 	BoxSizer1->Add(WxRadioBoxOrder, 0, wxALL|wxEXPAND, 5);
-	WxCheckBoxCase = new wxCheckBox(this, ID_WXCHECKBOXCASE, _("&Case Sensitive"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXCASE"));
+	WxCheckBoxCase = new wxCheckBox(this, wxID_ANY, _("&Case Sensitive"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXCASE"));
 	WxCheckBoxCase->SetValue(false);
 	BoxSizer1->Add(WxCheckBoxCase, 0, wxALL|wxEXPAND, 5);
-	WxCheckBoxNumeric = new wxCheckBox(this, ID_WXCHECKBOXNUMERIC, _("&Numeric Sort"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXNUMERIC"));
+	WxCheckBoxNumeric = new wxCheckBox(this, wxID_ANY, _("&Numeric Sort"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXNUMERIC"));
 	WxCheckBoxNumeric->SetValue(false);
 	BoxSizer1->Add(WxCheckBoxNumeric, 0, wxALL|wxEXPAND, 5);
-	WxCheckBoxRemoveDup = new wxCheckBox(this, ID_WXCHECKBOXREMOVEDUP, _("&Remove Duplicates"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXREMOVEDUP"));
+	WxCheckBoxRemoveDup = new wxCheckBox(this, wxID_ANY, _("&Remove Duplicates"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_WXCHECKBOXREMOVEDUP"));
 	WxCheckBoxRemoveDup->SetValue(false);
 	BoxSizer1->Add(WxCheckBoxRemoveDup, 0, wxALL|wxEXPAND, 5);
 	BoxSizer3 = new wxBoxSizer(wxHORIZONTAL);
@@ -72,7 +64,7 @@ MadSortDialog::~MadSortDialog()
 }
 
 
-void MadSortDialog::MadSortDialogClose(wxCloseEvent& event)
+void MadSortDialog::MadSortDialogClose(wxCloseEvent& WXUNUSED(event))
 {
     Destroy();
 }

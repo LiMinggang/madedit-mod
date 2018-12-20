@@ -1552,7 +1552,7 @@ _PyObject_DebugReallocApi(char api, void *p, size_t nbytes)
         /* overflow:  can't represent total as a size_t */
         return NULL;
 
-    if (nbytes < original_nbytes) {
+    if (nbytes <= original_nbytes) {
         /* shrinking:  mark old extra memory dead */
         memset(q + nbytes, DEADBYTE, original_nbytes - nbytes + 2*SST);
     }
@@ -1562,8 +1562,12 @@ _PyObject_DebugReallocApi(char api, void *p, size_t nbytes)
      * but we live with that.
      */
     q = (uchar *)PyObject_Realloc(q - 2*SST, total);
-    if (q == NULL)
+    if (q == NULL) {
+        if (nbytes <= original_nbytes) {
+            Py_FatalError("Shrinking reallocation failed");
+        }
         return NULL;
+    }
 
     write_size_t(q, nbytes);
     assert(q[SST] == (uchar)api);

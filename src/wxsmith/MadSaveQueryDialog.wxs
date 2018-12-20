@@ -10,7 +10,7 @@
 			<object class="sizeritem">
 				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
 					<object class="sizeritem">
-						<object class="wxCheckListBox" name="ID_CHECKLISTBOXMADFILELIST" variable="MadFileList" member="yes">
+						<object class="wxCheckListBox" name="wxID_ANY" variable="MadFileList" member="yes">
 							<size>400,300</size>
 							<style>wxLB_MULTIPLE|wxSIMPLE_BORDER|wxVSCROLL</style>
 						</object>
@@ -35,7 +35,7 @@
 						<border>2</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxButton" name="ID_BUTTONSAVENONE" variable="ButtonSaveNone" member="yes">
+						<object class="wxButton" name="wxID_ANY" variable="ButtonSaveNone" member="yes">
 							<label>Save &amp;None</label>
 							<handler function="OnButtonSaveNoneClick" entry="EVT_BUTTON" />
 						</object>
@@ -51,7 +51,7 @@
 						<border>2</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxCheckBox" name="ID_CHECKBOXCONFIRM" variable="CheckBoxConfirm" member="yes">
+						<object class="wxCheckBox" name="wxID_ANY" variable="CheckBoxConfirm" member="yes">
 							<label>Confirm</label>
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
@@ -62,7 +62,7 @@
 						<border>2</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxButton" name="ID_BUTTONSELECTALL" variable="ButtonSelectAll" member="yes">
+						<object class="wxButton" name="wxID_ANY" variable="ButtonSelectAll" member="yes">
 							<label>Select &amp;All</label>
 							<handler function="OnButtonSelectAllClick" entry="EVT_BUTTON" />
 						</object>
@@ -70,8 +70,8 @@
 						<border>2</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxButton" name="ID_BUTTONDSELECTALL" variable="ButtonDselectAll" member="yes">
-							<label>Dselect &amp;All</label>
+						<object class="wxButton" name="wxID_ANY" variable="ButtonDselectAll" member="yes">
+							<label>&amp;Dselect All</label>
 							<handler function="OnButtonDselectAllClick" entry="EVT_BUTTON" />
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
@@ -82,7 +82,7 @@
 						<border>2</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxButton" name="ID_BUTTONGOTO" variable="ButtonGoTo" member="yes">
+						<object class="wxButton" name="wxID_ANY" variable="ButtonGoTo" member="yes">
 							<label>&amp;Go To</label>
 							<handler function="OnButtonGoToClick" entry="EVT_BUTTON" />
 						</object>

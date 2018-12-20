@@ -9,7 +9,7 @@
 			<object class="sizeritem">
 				<object class="wxBoxSizer" variable="BoxSizer2" member="no">
 					<object class="sizeritem">
-						<object class="wxListCtrl" name="ID_LISTCTRLMADWINLIST" variable="MadWindowsList" member="yes">
+						<object class="wxListCtrl" name="wxID_ANY" variable="MadWindowsList" member="yes">
 							<size>400,300</size>
 							<style>wxLC_REPORT|wxSIMPLE_BORDER|wxVSCROLL</style>
 						</object>
@@ -25,7 +25,7 @@
 				<object class="wxBoxSizer" variable="BoxSizer3" member="no">
 					<orient>wxVERTICAL</orient>
 					<object class="sizeritem">
-						<object class="wxButton" name="ID_BUTTONACTIVATE" variable="ButtonActivate" member="yes">
+						<object class="wxButton" name="wxID_ANY" variable="ButtonActivate" member="yes">
 							<label>Acti&amp;vate</label>
 							<size>110,27</size>
 							<handler function="OnButtonActivateClick" entry="EVT_BUTTON" />
@@ -34,7 +34,7 @@
 						<border>5</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxButton" name="ID_BUTTONSAVE" variable="ButtonSave" member="yes">
+						<object class="wxButton" name="wxID_ANY" variable="ButtonSave" member="yes">
 							<label>&amp;Save</label>
 							<size>110,27</size>
 							<handler function="OnButtonSaveClick" entry="EVT_BUTTON" />
@@ -43,7 +43,7 @@
 						<border>5</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxButton" name="ID_BUTTONSAVEAS" variable="ButtonSaveAs" member="yes">
+						<object class="wxButton" name="wxID_ANY" variable="ButtonSaveAs" member="yes">
 							<label>Save &amp;As...</label>
 							<size>110,27</size>
 							<handler function="OnButtonSaveAsClick" entry="EVT_BUTTON" />
@@ -52,7 +52,7 @@
 						<border>5</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxButton" name="ID_BUTTONCLOSEWINDOWS" variable="ButtonCloseWindows" member="yes">
+						<object class="wxButton" name="wxID_ANY" variable="ButtonCloseWindows" member="yes">
 							<label>&amp;Close Window(s)</label>
 							<size>110,27</size>
 							<handler function="OnButtonCloseWindowsClick" entry="EVT_BUTTON" />
@@ -61,7 +61,7 @@
 						<border>5</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxButton" name="ID_BUTTONSORTTABBYNAME" variable="ButtonSortTabByName" member="yes">
+						<object class="wxButton" name="wxID_ANY" variable="ButtonSortTabByName" member="yes">
 							<label>Sort Tab(&amp;Name)</label>
 							<size>110,27</size>
 							<handler function="OnButtonSortTabByNameClick" entry="EVT_BUTTON" />
@@ -70,7 +70,7 @@
 						<border>5</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxButton" name="ID_BUTTONSORTTABBYPATH" variable="ButtonSortTabByPath" member="yes">
+						<object class="wxButton" name="wxID_ANY" variable="ButtonSortTabByPath" member="yes">
 							<label>Sort Tab(&amp;Path)</label>
 							<minsize>110,27</minsize>
 							<handler function="OnButtonSortTabByPathClick" entry="EVT_BUTTON" />

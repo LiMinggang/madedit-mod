@@ -8,6 +8,7 @@
 
 #include <boost/scoped_ptr.hpp>
 #include <wx/filefn.h>
+#include <wx/fileconf.h>
 #include "MadEdit.h"
 #include "MadEditPv.h"
 
@@ -18,6 +19,7 @@
 #endif
 
 #include <wx/filename.h>
+#include <wx/tokenzr.h> 
 #ifndef PYMADEDIT_DLL
 	#include "SpellCheckerManager.h"
 	#include "HunspellInterface.h"
@@ -32,7 +34,7 @@ extern const ucs4_t HexHeader[];
 extern int MadMessageBox( const wxString& message,
 						  const wxString& caption = wxMessageBoxCaptionStr,
 						  long style = wxOK | wxCENTRE,
-						  wxWindow *parent = NULL,
+						  wxWindow *parent = nullptr,
 						  int x = wxDefaultCoord, int y = wxDefaultCoord );
 
 //==============================================================================
@@ -141,7 +143,7 @@ const int CRLF_Points2[CRLF_Points2_Count+1][2]=
 
 void MadEdit::SetSyntax( const wxString &title )
 {
-	if( m_Syntax->m_Title != title )
+	if( m_Syntax->m_SynAttr->m_Title != title )
 	{
 		delete m_Syntax;
 		m_Syntax = MadSyntax::GetSyntaxByTitle( title );
@@ -163,6 +165,9 @@ void MadEdit::SetSyntax( const wxString &title )
 				Refresh( false );
 			}
 		}
+
+		if(m_OnSyntaxChanged)
+			m_OnSyntaxChanged(this);
 	}
 }
 
@@ -174,14 +179,14 @@ void MadEdit::UpdateSyntaxDictionary()
 
 void MadEdit::ApplySyntaxAttributes( MadSyntax *syn, bool matchTitle )
 {
-	if( !matchTitle || syn->m_Title == m_Syntax->m_Title )
+	if( !matchTitle || syn->m_SynAttr->m_Title == m_Syntax->m_SynAttr->m_Title )
 	{
 		m_Syntax->AssignAttributes( syn );
 
 		if( m_EditMode == emHexMode && m_HexDigitBitmap )
 		{
 			delete m_HexDigitBitmap;
-			m_HexDigitBitmap = NULL;
+			m_HexDigitBitmap = nullptr;
 		}
 
 		m_RepaintAll = true;
@@ -227,9 +232,11 @@ void MadEdit::SetEncoding( const wxString &encname )
 			m_RepaintAll = true;
 			Refresh( false );
 		}
+
+		if(m_OnEncodingChanged)
+			m_OnEncodingChanged(this);
 	}
 }
-
 
 void MadEdit::SetRecordCaretMovements( bool value )
 {
@@ -245,7 +252,6 @@ void MadEdit::SetRecordCaretMovements( bool value )
 		}
 	}
 }
-
 
 void MadEdit::SetTextFont( const wxString &name, int size, bool forceReset )
 {
@@ -281,6 +287,7 @@ void MadEdit::SetTextFont( const wxString &name, int size, bool forceReset )
 
 			bool ofwm = m_FixedWidthMode;
 			m_FixedWidthMode = false; // avoid effecting on GetUCharWidth();
+			m_TextFontSpaceWidth = GetUCharWidth( 0x20 );
 			m_TextFontAveCharWidth = m_TextFontSpaceWidth/*GetUCharWidth( 0x20 )*/; //GetCharWidth();
 			int w;
 			m_TextFontMaxDigitWidth = GetUCharWidth( '0' );
@@ -467,8 +474,6 @@ void MadEdit::SetTextFont( const wxString &name, int size, bool forceReset )
 			}
 		}
 	}
-
-	m_TextFontSpaceWidth = GetUCharWidth( 0x20 );
 }
 
 void MadEdit::SetHexFont( const wxString &name, int size, bool forceReset )
@@ -493,7 +498,7 @@ void MadEdit::SetHexFont( const wxString &name, int size, bool forceReset )
 		if( m_HexDigitBitmap )
 		{
 			delete m_HexDigitBitmap;
-			m_HexDigitBitmap = NULL;
+			m_HexDigitBitmap = nullptr;
 		}
 
 		if( m_EditMode == emHexMode )
@@ -587,6 +592,9 @@ void MadEdit::SetLineSpacing( int percent )
 			UpdateScrollBarPos();
 			Refresh( false );
 		}
+
+		if(m_OnLineSpaceChanged)
+			m_OnLineSpaceChanged(this);
 	}
 }
 
@@ -715,6 +723,7 @@ void MadEdit::SetEditMode( MadEditMode mode )
 					DoSelectionChanged();
 
 				DoStatusChanged();
+				
 				//SetInsertMode(m_InsertMode);
 			}
 			else //HexMode
@@ -761,6 +770,7 @@ void MadEdit::SetEditMode( MadEditMode mode )
 					DoSelectionChanged();
 
 				DoStatusChanged();
+				
 				//SetInsertMode(m_InsertMode);
 			}
 			else                      //HexMode
@@ -914,9 +924,12 @@ void MadEdit::SetWordWrapMode( MadWordWrapMode mode )
 
 			UpdateAppearance();
 			RecountLineWidth( true );
-			UpdateScrollBarPos();
+			//UpdateScrollBarPos(); //Waiting for the event to UpdateScrollBarPos
 			m_RepaintAll = true;
 			Refresh( false );
+			
+			wxCommandEvent *pevt = new wxCommandEvent( UPDATE_HSCROLL_POS );
+			wxQueueEvent(this, pevt);
 		}
 		else
 		{
@@ -948,6 +961,14 @@ void MadEdit::SetDisplayLineNumber( bool value )
 			UpdateScrollBarPos();
 		}
 
+		if( m_DisplayLineNumber )
+		{
+			m_BookmarkWidth = 0;
+		}
+		else
+		{
+			m_BookmarkWidth = m_RowHeight/2;
+		}
 		m_RepaintAll = true;
 		Refresh( false );
 	}
@@ -959,7 +980,7 @@ void MadEdit::SetDisplayBookmark( bool value )
 	{
 		m_DisplayBookmark = value;
 
-		if( m_DisplayBookmark ) m_BookmarkWidth = m_RowHeight;
+		if( m_DisplayBookmark && ( !m_DisplayLineNumber ) ) m_BookmarkWidth = m_RowHeight/2;
 		else m_BookmarkWidth = 0;
 
 		if( m_StorePropertiesToGlobalConfig )
@@ -1163,7 +1184,7 @@ void MadEdit::GetCaretPosition( int &line, int &subrow, wxFileOffset &column )
 
 wxFileOffset MadEdit::GetLastSavePointCaretPosition()
 {
-	if(m_SavePoint == NULL) return wxFileOffset(-1);
+	if(m_SavePoint == nullptr) return wxFileOffset(-1);
 
 	return m_SavePoint->m_CaretPosAfter;
 }
@@ -1173,7 +1194,7 @@ wxFileOffset MadEdit::GetSelectionSize()
 
 	if( m_EditMode == emColumnMode )
 	{
-		return GetColumnSelection( NULL );
+		return GetColumnSelection( nullptr );
 	}
 
 	return m_SelectionEnd->pos - m_SelectionBegin->pos;
@@ -1192,6 +1213,64 @@ void MadEdit::GetSelectionLineId( int &beginline, int &endline )
 	}
 }
 
+void MadEdit::GetRangeText( wxString &ws, MadCaretPos *begpos, MadCaretPos *endpos )
+{
+	wxFileOffset pos = begpos->pos;
+	MadUCQueue ucqueue;
+	MadLineIterator lit = begpos->iter;
+	m_Lines->InitNextUChar( lit, begpos->linepos );
+	MadLines::NextUCharFuncPtr NextUChar = m_Lines->NextUChar;
+
+	do
+	{
+		if( !( m_Lines->*NextUChar )( ucqueue ) )
+		{
+			++lit;
+			m_Lines->InitNextUChar( lit, 0 );
+			( m_Lines->*NextUChar )( ucqueue );
+		}
+
+#ifdef __WXMSW__
+		ucs4_t uc = ucqueue.back().first;
+
+		if( uc >= 0x10000 )
+		{
+			wchar_t wbuf[2];
+			m_Encoding->UCS4toUTF16LE_U10000( uc, ( wxByte* )wbuf );
+			ws << wbuf[0];
+			ws << wbuf[1];
+		}
+		else
+		{
+			ws << wxChar( uc );
+		}
+
+#else
+		ws << wxChar( ucqueue.back().first );
+#endif
+		pos += ucqueue.back().second;
+	}
+	while( pos < endpos->pos );
+}
+
+void MadEdit::GetRangeText( wxString &ws, wxFileOffset &begpos, wxFileOffset &endpos )
+{
+	MadCaretPos bpos, epos;
+	if( begpos < 0 ) begpos = 0;
+	else
+		if( begpos > m_Lines->m_Size ) begpos = m_Lines->m_Size;
+	if( endpos < 0 ) endpos = 0;
+	else
+		if( endpos > m_Lines->m_Size ) endpos = m_Lines->m_Size;
+
+	bpos.pos = begpos;
+	UpdateCaretByPos( bpos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
+	epos.pos = endpos;
+	UpdateCaretByPos( epos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
+
+	GetRangeText(ws, &bpos, &epos);
+}
+
 void MadEdit::GetSelText( wxString &ws )
 {
 	if( !m_Selection )
@@ -1203,42 +1282,7 @@ void MadEdit::GetSelText( wxString &ws )
 	}
 	else
 	{
-		wxFileOffset pos = m_SelectionBegin->pos;
-		MadUCQueue ucqueue;
-		MadLineIterator lit = m_SelectionBegin->iter;
-		m_Lines->InitNextUChar( lit, m_SelectionBegin->linepos );
-		MadLines::NextUCharFuncPtr NextUChar = m_Lines->NextUChar;
-
-		do
-		{
-			if( !( m_Lines->*NextUChar )( ucqueue ) )
-			{
-				++lit;
-				m_Lines->InitNextUChar( lit, 0 );
-				( m_Lines->*NextUChar )( ucqueue );
-			}
-
-#ifdef __WXMSW__
-			ucs4_t uc = ucqueue.back().first;
-
-			if( uc >= 0x10000 )
-			{
-				wchar_t wbuf[2];
-				m_Encoding->UCS4toUTF16LE_U10000( uc, ( wxByte* )wbuf );
-				ws << wbuf[0];
-				ws << wbuf[1];
-			}
-			else
-			{
-				ws << wxChar( uc );
-			}
-
-#else
-			ws << wxChar( ucqueue.back().first );
-#endif
-			pos += ucqueue.back().second;
-		}
-		while( pos < m_SelectionEnd->pos );
+		GetRangeText( ws, m_SelectionBegin, m_SelectionEnd );
 	}
 }
 
@@ -1315,7 +1359,7 @@ void MadEdit::SetText( const wxString &ws )
 		size = sss;
 	}
 
-	MadUndo *undo = NULL;
+	MadUndo *undo = nullptr;
 
 	if( m_Lines->m_Size )
 	{
@@ -1324,7 +1368,7 @@ void MadEdit::SetText( const wxString &ws )
 			MadDeleteUndoData *dudata = new MadDeleteUndoData;
 			dudata->m_Pos = 0;
 			dudata->m_Size = m_Lines->m_Size;
-			lit = DeleteInsertData( 0, dudata->m_Size, &dudata->m_Data, 0, NULL );
+			lit = DeleteInsertData( 0, dudata->m_Size, &dudata->m_Data, 0, nullptr );
 			undo = m_UndoBuffer->Add();
 			SetNeedSync();
 			undo->m_Undos.push_back( dudata );
@@ -1360,7 +1404,7 @@ void MadEdit::SetText( const wxString &ws )
 		insud->m_Pos = 0;
 		insud->m_Size = blk.m_Size;
 		insud->m_Data.push_back( blk );
-		lit = DeleteInsertData( 0, 0, NULL, insud->m_Size, &insud->m_Data );
+		lit = DeleteInsertData( 0, 0, nullptr, insud->m_Size, &insud->m_Data );
 		undo = m_UndoBuffer->Add();
 		SetNeedSync();
 		undo->m_Undos.push_back( insud );
@@ -1369,6 +1413,7 @@ void MadEdit::SetText( const wxString &ws )
 	undo->m_CaretPosBefore = m_CaretPos.pos;
 	m_Modified = true;
 	m_Selection = false;
+	m_ZeroSelection = false;
 	m_RepaintAll = true;
 	Refresh( false );
 
@@ -1688,6 +1733,7 @@ void MadEdit::SelectAll()
 
 		DoSelectionChanged();
 	}
+	m_ZeroSelection = false;
 }
 
 void MadEdit::StartEndSelction()
@@ -1730,7 +1776,7 @@ void MadEdit::CutToClipboard()
 	if( m_Selection )
 	{
 		CopyToClipboard();
-		DeleteSelection( true, NULL, true );
+		DeleteSelection( true, nullptr, true );
 	}
 }
 
@@ -2036,7 +2082,7 @@ void MadEdit::DndDrop()
 						UpdateSelectionPos();
 					}
 
-					DeleteSelection(false, NULL, false);
+					DeleteSelection(false, nullptr, false);
 					SetCaretPosition(OldCaretPos-SelectionLen);
 				}*/
 			}
@@ -2051,7 +2097,7 @@ void MadEdit::Undo()
 {
 	MadUndo *undo = m_UndoBuffer->Undo( !m_RecordCaretMovements );
 
-	if( undo == NULL )
+	if( undo == nullptr )
 		return;
 
 	if( undo->m_Undos.empty() ) // caret movement undo
@@ -2087,25 +2133,28 @@ void MadEdit::Undo()
 		case udtInsert:
 			{
 				MadInsertUndoData *iudata = ( MadInsertUndoData * )( *it );
-				lit = DeleteInsertData( pos, iudata->m_Size, NULL, 0, NULL, &lineid );
+				lit = DeleteInsertData( pos, iudata->m_Size, nullptr, 0, nullptr, &lineid );
 			}
 			break;
 
 		case udtDelete:
 			{
 				MadDeleteUndoData *dudata = ( MadDeleteUndoData * )( *it );
-				lit = DeleteInsertData( pos, 0, NULL, dudata->m_Size, &dudata->m_Data, &lineid );
+				lit = DeleteInsertData( pos, 0, nullptr, dudata->m_Size, &dudata->m_Data, &lineid );
 			}
 			break;
 
 		case udtOverwrite:
 			{
 				MadOverwriteUndoData *oudata = ( MadOverwriteUndoData * )( *it );
-				lit = DeleteInsertData( pos, oudata->m_InsSize, NULL,
+				lit = DeleteInsertData( pos, oudata->m_InsSize, nullptr,
 										oudata->m_DelSize, &oudata->m_DelData,
 										&lineid );
 			}
 			break;
+		default:
+			lineid = 0;
+			wxASSERT(0);
 		}
 
 		if( lineid < fid )
@@ -2170,6 +2219,7 @@ void MadEdit::Undo()
 	}
 
 	m_Selection = false;
+	m_ZeroSelection = false;
 	bool oldmod = m_Modified;
 
 	if( m_UndoBuffer->GetPrevUndo() == m_SavePoint )
@@ -2189,7 +2239,7 @@ void MadEdit::Redo()
 {
 	MadUndo *redo = m_UndoBuffer->Redo( !m_RecordCaretMovements );
 
-	if( redo == NULL )
+	if( redo == nullptr )
 		return;
 
 	if( redo->m_Undos.empty() ) // caret movement redo
@@ -2218,25 +2268,28 @@ void MadEdit::Redo()
 		case udtInsert:
 			{
 				MadInsertUndoData *iudata = ( MadInsertUndoData * )( *it );
-				lit = DeleteInsertData( pos, 0, NULL, iudata->m_Size, &iudata->m_Data, &lineid );
+				lit = DeleteInsertData( pos, 0, nullptr, iudata->m_Size, &iudata->m_Data, &lineid );
 			}
 			break;
 
 		case udtDelete:
 			{
 				MadDeleteUndoData *dudata = ( MadDeleteUndoData * )( *it );
-				lit = DeleteInsertData( pos, dudata->m_Size, NULL, 0, NULL, &lineid );
+				lit = DeleteInsertData( pos, dudata->m_Size, nullptr, 0, nullptr, &lineid );
 			}
 			break;
 
 		case udtOverwrite:
 			{
 				MadOverwriteUndoData *oudata = ( MadOverwriteUndoData * )( *it );
-				lit = DeleteInsertData( pos, oudata->m_DelSize, NULL,
+				lit = DeleteInsertData( pos, oudata->m_DelSize, nullptr,
 										oudata->m_InsSize, &oudata->m_InsData,
 										&lineid );
 			}
 			break;
+		default:
+			lineid = 0;
+			wxASSERT(0);
 		}
 
 		if( lineid < fid )
@@ -2301,6 +2354,7 @@ void MadEdit::Redo()
 	}
 
 	m_Selection = false;
+	m_ZeroSelection = false;
 	bool oldmod = m_Modified;
 
 	if( m_UndoBuffer->GetPrevUndo() == m_SavePoint )
@@ -2399,6 +2453,7 @@ void MadEdit::SetCaretPosition( wxFileOffset pos, wxFileOffset selbeg, wxFileOff
 		UpdateSelectionPos();
 	}
 
+	m_ZeroSelection = false;
 	m_RepaintAll = true;
 	Refresh( false );
 
@@ -2410,6 +2465,39 @@ void MadEdit::SetCaretPosition( wxFileOffset pos, wxFileOffset selbeg, wxFileOff
 	DoSelectionChanged();
 }
 
+void MadEdit::GoBack()
+{
+	MadUndo *undo = m_CaretTracker->Undo( false );
+
+	if( undo == nullptr )
+		return;
+
+	if( undo->m_Undos.empty() ) // caret movement undo
+	{
+		bool oldrcm = m_RecordCaretMovements;
+		m_RecordCaretMovements = false;
+		SetCaretPosition( undo->m_CaretPosBefore );
+		m_RecordCaretMovements = oldrcm;
+		return;
+	}
+}
+
+void MadEdit::GoForward()
+{
+	MadUndo *redo = m_CaretTracker->Redo( false );
+
+	if( redo == nullptr )
+		return;
+
+	if( redo->m_Undos.empty() ) // caret movement redo
+	{
+		bool oldrcm = m_RecordCaretMovements;
+		m_RecordCaretMovements = false;
+		SetCaretPosition( redo->m_CaretPosAfter );
+		m_RecordCaretMovements = oldrcm;
+		return;
+	}
+}
 
 bool MadEdit::LoadFromFile( const wxString &filename, const wxString &encoding )
 {
@@ -2426,12 +2514,13 @@ bool MadEdit::LoadFromFile( const wxString &filename, const wxString &encoding )
 
 	m_UndoBuffer->Clear();
 	SetNeedSync();
-	m_SavePoint = NULL;
+	m_SavePoint = nullptr;
 	m_Modified = false;
 	m_ModificationTime = wxFileModificationTime( filename );
 	m_ReadOnly = false; // use IsReadOnly() to check ReadOnly or not
 	m_InsertNewLineType = m_NewLineType;
 	m_Selection = false;
+	m_ZeroSelection = false;
 	m_SelFirstRow = INT_MAX;
 	m_SelLastRow = -1;
 	m_TopRow = 0;
@@ -2455,9 +2544,6 @@ bool MadEdit::LoadFromFile( const wxString &filename, const wxString &encoding )
 		UpdateCaret( m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
 	}
 
-	m_Selection = false;
-	m_SelFirstRow = INT_MAX;
-	m_SelLastRow = -1;
 	m_SelectionPos1 = m_CaretPos;
 	m_SelectionPos2 = m_CaretPos;
 	m_SelectionBegin = &m_SelectionPos1;
@@ -2487,7 +2573,7 @@ bool MadEdit::SaveToFile( const wxString &filename )
 
 	if( memsize >= 0 && memsize < ( tempsize + 20 * 1024 * 1024 ) ) // use disk as tempdata
 	{
-		wxFileName fn( filename );
+		//wxFileName fn( filename );
 		tempdir = fn.GetPath( wxPATH_GET_VOLUME | wxPATH_GET_SEPARATOR );
 		// ToDo: test the disk size
 	}
@@ -2550,8 +2636,7 @@ int MadEdit::Save( bool ask, const wxString &title, bool saveas ) // return YES,
 		{
 			DBOUT( "choose a file to save" );
 			static int filterIndex = 0;
-			wxString fileFilter = wxString( wxT( "Plain Text (*.txt)|*.txt|All files (*;*.*)|*;*.*" ) ) + wxFileSelectorDefaultWildcardStr + wxT( "|68k Assembly (*.68k)|*.68k|ActionScript (*.as;*.asc;*.mx)|*.as;*.asc;*.mx|Ada (*.a;*.ada;*.adb;*.ads)|*.a;*.ada;*.adb;*.ads|Apache Conf (*.conf;*.htaccess)|*.conf;*.htaccess|Bash Shell Script (*.bsh;*.configure;*.sh)|*.bsh;*.configure;*.sh|Boo (*.boo)|*.boo|C (*.c;*.h)|*.c;*.h|C# (*.cs)|*.cs|C-Shell Script (*.csh)|*.csh|Caml (*.ml;*.mli)|*.ml;*.mli|Cascading Style Sheet (*.css)|*.css|Cilk (*.cilk;*.cilkh)|*.cilk;*.cilkh|Cobra (*.cobra)|*.cobra|ColdFusion (*.cfc;*.cfm;*.cfml;*.dbm)|*.cfc;*.cfm;*.cfml;*.dbm|CPP (*.c++;*.cc;*.cpp;*.cxx;*.h++;*.hh;*.hpp;*.hxx)|*.c++;*.cc;*.cpp;*.cxx;*.h++;*.hh;*.hpp;*.hxx|D (*.d)|*.d|Diff File (*.diff;*.patch)|*.diff;*.patch|Django (*.django)|*.django|DOS Batch Script (*.bat;*.cmd)|*.bat;*.cmd|DOT (*.dot)|*.dot|DSP56K Assembly (*.56k)|*.56k|Editra Style Sheet (*.ess)|*.ess|Edje (*.edc)|*.edc|Eiffel (*.e)|*.e|Erlang (*.erl)|*.erl|Ferite (*.fe)|*.fe|FlagShip (*.prg)|*.prg|Forth (*.4th;*.fs;*.fth;*.seq)|*.4th;*.fs;*.fth;*.seq|Fortran 77 (*.f;*.for)|*.f;*.for|Fortran 95 (*.f2k;*.f90;*.f95;*.fpp)|*.f2k;*.f90;*.f95;*.fpp|GLSL (*.frag;*.glsl;*.vert)|*.frag;*.glsl;*.vert|GNU Assembly (*.gasm)|*.gasm|Groovy (*.groovy)|*.groovy|Gui4Cli (*.gc;*.gui)|*.gc;*.gui|Haskell (*.hs)|*.hs|HaXe (*.hx;*.hxml)|*.hx;*.hxml|HTML (*.htm;*.html;*.shtm;*.shtml;*.xhtml)|*.htm;*.html;*.shtm;*.shtml;*.xhtml|Inno Setup Script (*.iss)|*.iss|IssueList (*.isl)|*.isl|Java (*.java)|*.java|JavaScript (*.js)|*.js|Kix (*.kix)|*.kix|Korn Shell Script (*.ksh)|*.ksh|LaTeX (*.aux;*.sty;*.tex)|*.aux;*.sty;*.tex|Lisp (*.cl;*.lisp)|*.cl;*.lisp|Lout (*.lt)|*.lt|Lua (*.lua)|*.lua|Mako (*.mako;*.mao)|*.mako;*.mao|MASM (*.asm;*.masm)|*.asm;*.masm|Matlab (*.matlab)|*.matlab|Microsoft SQL (*.mssql)|*.mssql|Netwide Assembler (*.nasm)|*.nasm|newLISP (*.lsp)|*.lsp|NONMEM Control Stream (*.ctl)|*.ctl|Nullsoft Installer Script (*.nsh;*.nsi)|*.nsh;*.nsi|Objective C (*.m;*.mm)|*.m;*.mm|Octave (*.oct;*.octave)|*.oct;*.octave|OOC (*.ooc)|*.ooc|Pascal (*.dfm;*.dpk;*.dpr;*.inc;*.p;*.pas;*.pp)|*.dfm;*.dpk;*.dpr;*.inc;*.p;*.pas;*.pp|Perl (*.cgi;*.pl;*.pm;*.pod)|*.cgi;*.pl;*.pm;*.pod|PHP (*.php;*.php3;*.phtm;*.phtml)|*.php;*.php3;*.phtm;*.phtml|Pike (*.pike)|*.pike|PL/SQL (*.plsql)|*.plsql;|Postscript (*.ai;*.ps)|*.ai;*.ps|Progress 4GL (*.4gl)|*.4gl|Properties (*.cfg;*.cnf;*.inf;*.ini;*.reg;*.url)|*.cfg;*.cnf;*.inf;*.ini;*.reg;*.url|Python (*.py;*.python;*.pyw)|*.py;*.python;*.pyw|R (*.r)|*.r|Ruby (*.gemspec;*.rake;*.rb;*.rbw;*.rbx)|*.gemspec;*.rake;*.rb;*.rbw;*.rbx|S (*.s)|*.s|Scheme (*.scm;*.smd;*.ss)|*.scm;*.smd;*.ss|Smalltalk (*.st)|*.st|SQL (*.sql)|*.sql|Squirrel (*.nut)|*.nut|Stata (*.ado;*.do)|*.ado;*.do|System Verilog (*.sv;*.svh)|*.sv;*.svh|Tcl/Tk (*.itcl;*.tcl;*.tk)|*.itcl;*.tcl;*.tk|Vala (*.vala)|*.vala|VBScript (*.dsm;*.vbs)|*.dsm;*.vbs|Verilog (*.v)|*.v|VHDL (*.vh;*.vhd;*.vhdl)|*.vh;*.vhd;*.vhdl|Visual Basic (*.bas;*.cls;*.frm;*.vb)|*.bas;*.cls;*.frm;*.vb|XML (*.axl;*.dtd;*.plist;*.rdf;*.svg;*.xml;*.xrc;*.xsd;*.xsl;*.xslt;*.xul)|*.axl;*.dtd;*.plist;*.rdf;*.svg;*.xml;*.xrc;*.xsd;*.xsl;*.xslt;*.xul|Xtext (*.xtext)|*.xtext|YAML (*.yaml;*.yml)|*.yaml;*.yml" );
-			wxFileDialog dlg( this, dlgtitle, wxEmptyString, filename, fileFilter,
+			wxFileDialog dlg( this, dlgtitle, wxEmptyString, filename, m_FileFilter,
 #if wxCHECK_VERSION(2,8,0)
 							  wxFD_SAVE | wxFD_OVERWRITE_PROMPT );
 #else
@@ -2569,6 +2654,20 @@ int MadEdit::Save( bool ask, const wxString &title, bool saveas ) // return YES,
 				g_MB2WC_check_dir_filename = false;
 				ret = wxID_YES;
 				refresh = true;
+				wxFileName fname( filename );
+				if( fname.HasExt() )
+				{
+					wxString fext( wxT("*.") + fname.GetExt() );
+					int index = m_FileFilter.Find(fext);
+
+					if (wxNOT_FOUND != index)
+					{
+						wxString sss = m_FileFilter.SubString(0, index);
+						wxArrayString ary = wxStringTokenize(sss, _T("|"));
+						int counter = ary.size();
+						if(counter > 2) filterIndex = (counter - 1)/2;
+					}
+				}
 			}
 		}
 
@@ -2577,7 +2676,7 @@ int MadEdit::Save( bool ask, const wxString &title, bool saveas ) // return YES,
 			if(!m_HasBackup)
 			{
 				bool bb = true;
-				m_Config->Read( wxT( "AutoBackup" ), &bb, false );
+				m_Config->Read( wxT( "/Application/AutoBackup" ), &bb, false );
 				if(bb && (oldfilename == filename))
 				{
 					oldfilename += wxT(".bak");
@@ -2608,6 +2707,8 @@ bool MadEdit::Reload()
 	{
 		wxMessageDialog dlg( this, _( "Do you want to discard changes?" ), wxT( "MadEdit-Mod" ), wxYES_NO | wxICON_QUESTION );
 		dlg.SetYesNoLabels( wxMessageDialog::ButtonLabel( _( "&Yes" ) ), wxMessageDialog::ButtonLabel( _( "&No" ) ) );
+		wxMouseCaptureLostEvent evt;
+		OnMouseCaptureLost( evt );
 
 		if( dlg.ShowModal() != wxID_YES )
 		{
@@ -2630,9 +2731,8 @@ bool MadEdit::ReloadByModificationTime( bool LostCapture/* = false*/ )
 
 	if( LostCapture )
 	{
-		wxCommandEvent event( CHECK_MODIFICATION_TIME );
-		event.SetEventObject( this );
-		AddPendingEvent( event );
+		wxCommandEvent *pevt = new wxCommandEvent( CHECK_MODIFICATION_TIME );
+		wxQueueEvent(this, pevt);
 		m_ModReloaded = false;
 		return false;
 	}
@@ -2640,31 +2740,56 @@ bool MadEdit::ReloadByModificationTime( bool LostCapture/* = false*/ )
 	wxLogNull nolog;
 	time_t modtime = wxFileModificationTime( m_Lines->m_Name );
 
-	if( modtime == 0 ) // the file has been deleted
+	if( modtime == (time_t)-1 ) // the file has been deleted
 	{
-		m_ModificationTime = 0;
+		m_ModificationTime = (time_t)-1;
+		if(!m_Modified)
+		{
+			m_Modified = true;
+			DoStatusChanged();
+		}
 		return false;
 	}
 
 	// Check if the file attribute was changed
-	bool writable = wxFileName::IsFileWritable( m_Lines->m_Name );
 	bool readable = wxFileName::IsFileReadable( m_Lines->m_Name );
-
 	if( !readable )
 	{
-		m_Modified = true;
-		DoStatusChanged();
+		if(!m_Modified)
+		{
+			m_Modified = true;
+			DoStatusChanged();
+		}
 		return false;
 	}
 
+	bool writable = wxFileName::IsFileWritable( m_Lines->m_Name );
 	if( !( ( IsReadOnly() && writable ) || ( !IsReadOnly() && !writable ) ) )
 		if( modtime == m_ModificationTime ) return false; // the file doesn't change.
 
 	m_ModificationTime = modtime;
-	wxMessageDialog dlg( this,
-						 wxString( _( "This file has been changed by another application." ) ) + wxT( "\n" ) +
-						 wxString( _( "Do you want to reload it?" ) ) + wxT( "\n\n" ) + m_Lines->m_Name,
-						 wxT( "MadEdit-Mod" ), wxYES_NO | wxICON_QUESTION );
+	long style = wxYES_NO;
+	wxString message(_( "This file has been changed by another application." ));
+
+	if( m_Modified )
+	{
+		style |= wxICON_WARNING;
+		message += wxString(_("And it has been MODIFIED!!!"));
+	}
+	else
+	{
+		style |= wxICON_INFORMATION;
+	}
+
+	message += wxT("\n");
+	message += wxString( _( "Do you want to reload it?" ) );
+	if( m_Modified )
+	{
+		message += wxString(_("I.e. DISCARD changes?"));
+	}
+	message += wxT( "\n\n" ) + m_Lines->m_Name;
+
+	wxMessageDialog dlg( this, message, wxT( "MadEdit-Mod" ), style );
 	dlg.SetYesNoLabels( wxMessageDialog::ButtonLabel( _( "&Yes" ) ), wxMessageDialog::ButtonLabel( _( "&No" ) ) );
 
 	//wxMouseCaptureLostEvent mevt(GetId());
@@ -2672,10 +2797,18 @@ bool MadEdit::ReloadByModificationTime( bool LostCapture/* = false*/ )
 	//DBOUT((m_MouseLeftDown?"LDown:TRUE\n":"LDown:FALSE\n"));
 	//if(LostCapture)
 	//    mevt.SetEventObject(this);
+	wxMouseCaptureLostEvent evt;
+	OnMouseCaptureLost( evt );
 	if( dlg.ShowModal() != wxID_YES )
 	{
 		//if(LostCapture)
 		//AddPendingEvent( mevt );
+		m_ModReloaded = false;
+		if(!m_Modified)
+		{
+			m_Modified = true;
+			DoStatusChanged();
+		}
 		return false;
 	}
 
@@ -2683,6 +2816,7 @@ bool MadEdit::ReloadByModificationTime( bool LostCapture/* = false*/ )
 	//AddPendingEvent( mevt );
 	// YES, reload it.
 	m_ModReloaded = true;
+	m_Modified = false;
 	return Reload();
 }
 
@@ -2756,6 +2890,18 @@ MadSearchResult MadEdit::FindTextNext( const wxString &text,
 
 		epos.pos = rangeTo;
 		UpdateCaretByPos( epos, ucharQueue, widthArray, tmp );
+	}
+
+	if( bRegex && (bpos.linepos != 0) && (text[0] == '^' ))
+	{
+		int maxLines = GetLineCount();
+		if ((bpos.lineid + 1) >= maxLines) { return SR_NO;}
+		else
+		{
+			rangeFrom = GetLineBeginPos(bpos.lineid + 1 + 1); //line is 1 based
+			bpos.pos = rangeFrom;
+			UpdateCaretByPos(bpos, ucharQueue, widthArray, tmp);
+		}
 	}
 
 	MadSearchResult state = Search( bpos, epos, text, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
@@ -2890,11 +3036,11 @@ MadSearchResult MadEdit::FindTextPrevious( const wxString &text,
 		epos = bpos;
 		size_t s = text.Len() * 4;
 
-		if( epos.pos + s > epos1.pos )
+		if( ((wxFileOffset)(epos.pos + s)) > epos1.pos )
 		{
 			s = text.Len();
 
-			if( epos.pos + s > epos1.pos )
+			if(((wxFileOffset)( epos.pos + s)) > epos1.pos )
 			{
 				s = 0;
 			}
@@ -2908,7 +3054,7 @@ MadSearchResult MadEdit::FindTextPrevious( const wxString &text,
 			{
 				len = epos.iter->m_Size - epos.linepos;
 
-				if( len > s ) len = s;
+				if( len > (wxFileOffset)s ) len = (wxFileOffset)s;
 
 				if( ( epos.linepos += len ) == epos.iter->m_Size )
 				{
@@ -2939,7 +3085,7 @@ bool MadEdit::StringToHex( wxString ws, vector<wxByte> &hex )
 	{
 		if( len < 2 )
 		{
-			wxMessageDialog dlg( NULL, errmsg + wxT( "\n\n" ) + ws,
+			wxMessageDialog dlg( nullptr, errmsg + wxT( "\n\n" ) + ws,
 								 wxT( "MadEdit-Mod" ), wxOK | wxICON_ERROR );
 			dlg.SetOKLabel( wxMessageDialog::ButtonLabel( _( "&Ok" ) ) );
 			dlg.ShowModal();
@@ -2952,7 +3098,7 @@ bool MadEdit::StringToHex( wxString ws, vector<wxByte> &hex )
 
 		if( b0 < 0 || b1 < 0 )
 		{
-			wxMessageDialog dlg( NULL, errmsg + wxT( "\n\n" ) + ws,
+			wxMessageDialog dlg( nullptr, errmsg + wxT( "\n\n" ) + ws,
 								 wxT( "MadEdit-Mod" ), wxOK | wxICON_ERROR );
 			dlg.SetOKLabel( wxMessageDialog::ButtonLabel( _( "&Ok" ) ) );
 			dlg.ShowModal();
@@ -3129,11 +3275,11 @@ MadSearchResult MadEdit::FindHexPrevious( const wxString &hexstr,
 		epos = bpos;
 		size_t s = hexstr.Len() * 4;
 
-		if( epos.pos + s > epos1.pos )
+		if( ((wxFileOffset)(epos.pos + s)) > epos1.pos )
 		{
 			s = hexstr.Len();
 
-			if( epos.pos + s > epos1.pos )
+			if(((wxFileOffset)(epos.pos + s)) > epos1.pos )
 			{
 				s = 0;
 			}
@@ -3147,7 +3293,7 @@ MadSearchResult MadEdit::FindHexPrevious( const wxString &hexstr,
 			{
 				len = epos.iter->m_Size - epos.linepos;
 
-				if( len > s ) len = s;
+				if( len > (wxFileOffset)s ) len = (wxFileOffset)s;
 
 				if( ( epos.linepos += len ) == epos.iter->m_Size )
 				{
@@ -3174,7 +3320,7 @@ MadReplaceResult MadEdit::ReplaceText( const wxString &expr, const wxString &fmt
 	MadCaretPos epos = *m_SelectionEnd;
 	int state = SR_EXPR_ERROR;
 
-	if( m_Selection ) // test the selection is wanted text
+	if( m_Selection || m_ZeroSelection ) // test the selection is wanted text
 	{
 		state = Search( bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
 
@@ -3213,16 +3359,33 @@ MadReplaceResult MadEdit::ReplaceText( const wxString &expr, const wxString &fmt
 		return RR_EXPR_ERROR;
 	}
 
+	bool bZeroLenSel = m_ZeroSelection;
 	if( out.length() == 0 )
 	{
-		DeleteSelection( true, NULL, false );
+		DeleteSelection( true, nullptr, false );
 	}
 	else
 	{
 		InsertString( out.c_str(), out.length(), false, true, false );
 	}
 
-	if( SR_NO == FindTextNext( expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, -1, rangeTo ) )
+	rangeFrom = -1;
+	if( bRegex && bZeroLenSel)
+	{
+		if(expr.find_last_of( wxT( '$' ) ) != wxString::npos)
+		{
+			MadUCQueue ucharQueue;
+			vector<int> widthArray;
+			int maxLines = GetLineCount();
+			if ((bpos.lineid + 1) >= maxLines) { return RR_REP_NNEXT;}
+			else
+			{
+				rangeFrom = GetLineBeginPos(bpos.lineid + 1 + 1); //line is 1 based
+			}
+		}
+	}
+
+	if( SR_NO == FindTextNext( expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, rangeFrom, rangeTo ) )
 		return RR_REP_NNEXT;
 
 	return RR_REP_NEXT;
@@ -3278,7 +3441,7 @@ MadReplaceResult MadEdit::ReplaceHex( const wxString &expr, const wxString &fmt,
 
 	if( fmthex.empty() )
 	{
-		DeleteSelection( true, NULL, false );
+		DeleteSelection( true, nullptr, false );
 	}
 	else
 	{
@@ -3291,6 +3454,144 @@ MadReplaceResult MadEdit::ReplaceHex( const wxString &expr, const wxString &fmt,
 	return RR_REP_NEXT;
 }
 
+MadReplaceResult MadEdit::ReplaceTextNoDoubleCheck( const wxString &expr, const wxString &fmt,
+							 bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
+							 wxFileOffset rangeFrom, wxFileOffset rangeTo )
+{
+	if( expr.IsEmpty() )
+		return RR_EXPR_ERROR;
+
+	vector<wxFileOffset> del_bpos;
+	vector<wxFileOffset> del_epos;
+	vector<const ucs4_t*> ins_ucs;
+	vector<wxFileOffset> ins_len;
+	list<ucs4string> outs;
+	MadCaretPos bpos, epos, endpos, obpos, oepos;
+	boost::scoped_ptr< ucs4string > fmtstr;
+	MadReplaceResult res = RR_NREP_NNEXT;
+
+	if( rangeFrom <= 0 )
+	{
+		bpos.iter = m_Lines->m_LineList.begin();
+		bpos.pos = bpos.iter->m_RowIndices[0].m_Start;
+
+		if( m_CaretPos.pos < bpos.pos || m_EditMode == emHexMode )
+		{
+			bpos.pos = 0;
+		}
+
+		bpos.linepos = bpos.pos;
+	}
+	else
+	{
+		MadUCQueue ucharQueue;
+		vector<int> widthArray;
+		int tmp;
+
+		if( rangeFrom > GetFileSize() ) rangeFrom = GetFileSize();
+
+		bpos.pos = rangeFrom;
+		UpdateCaretByPos( bpos, ucharQueue, widthArray, tmp );
+	}
+
+	if( rangeTo < 0 )
+	{
+		epos.pos = m_Lines->m_Size;
+		epos.iter = m_Lines->m_LineList.end();
+		--epos.iter;
+		epos.linepos = epos.iter->m_Size;
+	}
+	else
+	{
+		MadUCQueue ucharQueue;
+		vector<int> widthArray;
+		int tmp;
+
+		if( rangeTo > GetFileSize() ) rangeTo = GetFileSize();
+
+		epos.pos = rangeTo;
+		UpdateCaretByPos( epos, ucharQueue, widthArray, tmp );
+	}
+
+	if( bpos.pos >= epos.pos ) return res;
+
+	endpos=epos;
+	int state;
+	ucs4string out;
+
+	vector<ucs4_t> ucs;
+
+	if(!bRegex)
+	{
+		// fmt is the wanted string
+		TranslateText( fmt.c_str(), fmt.Len(), &ucs, true );
+
+		for( size_t i = 0, size = ucs.size(); i < size; ++i )
+		{
+			out += ucs[i] ;
+		}
+	}
+	else
+	{
+#ifdef __WXMSW__
+		ucs4_t *puc = 0;
+		if( !fmt.IsEmpty() )
+		{
+			TranslateText( fmt.c_str(), fmt.Len(), &ucs, true );
+			puc = &ucs[0];
+		}
+		fmtstr.reset(new ucs4string( puc, puc + ucs.size() ));
+#else
+		const ucs4_t *puc = 0;
+		if( !fmt.IsEmpty() )
+		{
+			puc = fmt.c_str();
+		}
+
+		fmtstr.reset(new ucs4string( puc, puc + fmt.Len() ));
+#endif
+	}
+
+	if( ( state = Search( bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, fmtstr.get(), &out) ) == SR_YES )
+	{
+		del_bpos.push_back( bpos.pos );
+		del_epos.push_back( epos.pos );
+		outs.push_back( out );
+		ucs4string &str = outs.back();
+		ins_ucs.push_back( str.c_str() );
+		ins_len.push_back( str.length() );
+
+		res = RR_REP_NNEXT;
+		if(!( bpos.pos == epos.pos && !NextRegexSearchingPos( epos, expr ) ))
+		{
+			bpos=epos;
+			epos=endpos;
+			
+			if(bRegex)
+				out.clear();
+			if( ( state = Search( bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, fmtstr.get(), &out) ) == SR_YES )
+				res = RR_REP_NEXT;
+		}
+	}
+
+	if( state == SR_EXPR_ERROR ) return RR_EXPR_ERROR;
+
+	if( del_bpos.size() > 0 )
+	{
+		wxFileOffset size = del_epos.back() - del_bpos.front();
+
+		if( size <= 2 * 1024 * 1024 )
+		{
+			OverwriteDataSingle( del_bpos, del_epos, &ins_ucs, nullptr, ins_len );
+		}
+		else
+		{
+			OverwriteDataMultiple( del_bpos, del_epos, &ins_ucs, nullptr, ins_len );
+		}
+	}
+
+	return res;
+}
 
 int MadEdit::ReplaceTextAll( const wxString &expr, const wxString &fmt,
 							 bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
@@ -3436,11 +3737,11 @@ int MadEdit::ReplaceTextAll( const wxString &expr, const wxString &fmt,
 
 		if( ( size <= 2 * 1024 * 1024 ) || ( multi >= 40 && size <= 10 * 1024 * 1024 ) )
 		{
-			OverwriteDataSingle( del_bpos, del_epos, &ins_ucs, NULL, ins_len );
+			OverwriteDataSingle( del_bpos, del_epos, &ins_ucs, nullptr, ins_len );
 		}
 		else
 		{
-			OverwriteDataMultiple( del_bpos, del_epos, &ins_ucs, NULL, ins_len );
+			OverwriteDataMultiple( del_bpos, del_epos, &ins_ucs, nullptr, ins_len );
 		}
 
 		if( pbegpos != 0 && pendpos != 0 )
@@ -3559,11 +3860,11 @@ int MadEdit::ReplaceHexAll( const wxString &expr, const wxString &fmt,
 
 		if( IsTextFile() && ( ( size <= 2 * 1024 * 1024 ) || ( multi >= 40 && size <= 10 * 1024 * 1024 ) ) )
 		{
-			OverwriteDataSingle( del_bpos, del_epos, NULL, &ins_data, ins_len );
+			OverwriteDataSingle( del_bpos, del_epos, nullptr, &ins_data, ins_len );
 		}
 		else
 		{
-			OverwriteDataMultiple( del_bpos, del_epos, NULL, &ins_data, ins_len );
+			OverwriteDataMultiple( del_bpos, del_epos, nullptr, &ins_data, ins_len );
 		}
 
 		if( pbegpos != 0 && pendpos != 0 )
@@ -3657,7 +3958,11 @@ int MadEdit::FindTextAll( const wxString &expr,
 
 		++count;
 
-		if( IsTextFile() && m_BookmarkInSearch && !( m_Lines->m_LineList.IsBookmarked( bpos.iter ) ) ) m_Lines->m_LineList.SetBookmark( bpos.iter );
+		if( IsTextFile() && m_BookmarkInSearch && !( m_Lines->m_LineList.IsBookmarked( bpos.iter ) ) )
+		{
+			m_Lines->m_LineList.SetBookmark( bpos.iter );
+			m_RepaintAll = true;
+		}
 
 		if( bFirstOnly ) break;
 
@@ -3935,7 +4240,7 @@ void MadEdit::EndPrint()
 	{
 		m_CaretAtHexArea = m_old_CaretAtHexArea;
 		delete m_PrintHexEdit;
-		m_PrintHexEdit = NULL;
+		m_PrintHexEdit = nullptr;
 	}
 
 	m_Printing = 0;
@@ -3975,9 +4280,9 @@ bool MadEdit::PrintPage( wxDC *dc, int pageNum )
 			m_LineNumberAreaWidth = 0;
 		}
 
-		if( m_DisplayBookmark )
+		if( m_DisplayBookmark && m_LineNumberAreaWidth == 0 )
 		{
-			m_BookmarkWidth = m_RowHeight;
+			m_BookmarkWidth = m_RowHeight/2;
 		}
 		else
 		{
@@ -3995,7 +4300,7 @@ bool MadEdit::PrintPage( wxDC *dc, int pageNum )
 	}
 	else //HexPrinting()
 	{
-		int toprow, rowcount;
+		int toprow = 0, rowcount = 0;
 
 		switch( m_PrintOffsetHeader )
 		{

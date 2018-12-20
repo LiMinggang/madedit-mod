@@ -8,6 +8,13 @@
 
 #ifndef	_MADEDITCOMMAND_H_
 #define	_MADEDITCOMMAND_H_
+#include "../MadUtils.h"
+
+#if CPLUSEPLUSE98
+	#include <boost/shared_ptr.hpp>
+#else
+	#include <memory>
+#endif
 
 #include <wx/wxprec.h>
 
@@ -25,6 +32,7 @@
 #include <wx/hashset.h>
 #include <vector>
 #include <list>
+
 using std::vector;
 using std::list;
 
@@ -200,7 +208,7 @@ WX_DECLARE_HASH_MAP( int,				// menuid or editcmd or	shortcut
 
 //---------------------------------------------------------------------------
 
-inline MadEditShortCut ShortCut(int	flags, int keyCode)
+inline MadEditShortCut ShortCut(int flags, int keyCode)
 {
 	return (flags<<16) | keyCode;
 }
@@ -227,6 +235,8 @@ private:
 	MadKeyBindingMap *m_MenuIdMap;
 	MadKeyBindingMap *m_EditCommandMap;
 	MadKeyBindingMap *m_ShortCutMap;
+	MadKeyBindings(const MadKeyBindings&){}
+	MadKeyBindings& operator=(MadKeyBindings const&){}
 
 public:
 	static void	InitCommandTextMap();
@@ -293,7 +303,7 @@ public:
 		}
 		if(overwrite)
 		{
-			MadKeyBinding *kb=NULL;
+			MadKeyBinding *kb=nullptr;
 			MadKeyBindingMap::iterator ecit	= m_EditCommandMap->find(cmd);
 			if(ecit	!= m_EditCommandMap->end())
 			{

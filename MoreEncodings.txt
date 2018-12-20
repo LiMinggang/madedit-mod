@@ -1,9 +1,4 @@
+CP855 and Windows-1258 not tested. EUC-JP
 	AddEncoding("ISO-8859-16", ENC_ISO_8859_16, _("South-Eastern European (ISO-8859-16)"), etSingleByte, "ISO-8859-15", false);
-	AddEncoding("Windows-1258", ENC_Windows_1258, _("Windows Vietnamese (CP 1258)"), etSingleByte, "CP1258");
-	AddEncoding("KOI8-R", ENC_KOI8_R, _("Cyrillic (KOI8-R)"));
-	AddEncoding("KOI8-U", ENC_KOI8_U, _("Cyrillic (KOI8-U)"));
 	AddEncoding("CP437-Art", ENC_CP437_ART, _("CP437 Variant for ASCII Art"), etCP437ART, "CP437");
-	AddEncoding("GB18030", ENC_GB18030, _("Unicode/Chinese Simplified (GB18030)"), etGB18030);
 	AddEncoding("CP20932", ENC_CP20932, _("EUC-JP Double-Byte Edition of Windows (CP 20932)"), etCP20932, "EUC-JP", false);
-	AddEncoding("CP855", ENC_CP855, _("Windows/DOS OEM - Cyrillic (CP 855)"));
-	AddEncoding("CP866", ENC_CP866, _("Windows/DOS OEM - Cyrillic (CP 866)"));

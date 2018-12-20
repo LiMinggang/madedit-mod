@@ -43,7 +43,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="..\..\spellchecker\hunspell\src;..\..\spellchecker\hunspell\src\hunspell;..\..\spellchecker\hunspell\src\win_api;."
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;HUNSPELL_STATIC;_CRT_SECURE_NO_WARNINGS"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;HUNSPELL_STATIC;_CRT_SECURE_NO_WARNINGS;BOOST_ALL_NO_LIB"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -84,7 +84,7 @@
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
-			IntermediateDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory="$(SolutionDir)$(ConfigurationName)\$(ProjectName)"
 			ConfigurationType="4"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
@@ -111,7 +111,7 @@
 				Optimization="3"
 				InlineFunctionExpansion="2"
 				AdditionalIncludeDirectories="..\..\spellchecker\hunspell\src\hunspell;..\..\spellchecker\hunspell\src\win_api;."
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;HUNSPELL_STATIC;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;HUNSPELL_STATIC;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;BOOST_ALL_NO_LIB"
 				StringPooling="true"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
@@ -182,7 +182,7 @@
 				Optimization="3"
 				InlineFunctionExpansion="2"
 				AdditionalIncludeDirectories="..\..\spellchecker\hunspell\src\hunspell;..\..\spellchecker\hunspell\src\win_api;."
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;HUNSPELL_EXPORTS;_CRT_SECURE_NO_DEPRECATE"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;HUNSPELL_EXPORTS;_CRT_SECURE_NO_DEPRECATE;BOOST_ALL_NO_LIB"
 				StringPooling="true"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
@@ -265,7 +265,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="..\..\spellchecker\hunspell\src\hunspell;..\..\spellchecker\hunspell\src\win_api;."
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;HUNSPELL_EXPORTS;HUNSPELL_STATIC"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;HUNSPELL_EXPORTS;HUNSPELL_STATIC;BOOST_ALL_NO_LIB"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="0"
@@ -320,58 +320,6 @@
 	<References>
 	</References>
 	<Files>
-		<Filter
-			Name="_Main"
-			>
-			<File
-				RelativePath="..\..\spellchecker\hunspell\src\win_api\config.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\spellchecker\hunspell\src\win_api\Hunspell.rc"
-				>
-			</File>
-			<File
-				RelativePath="..\..\spellchecker\hunspell\src\win_api\hunspelldll.c"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release_dll|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Debug_dll|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						CompileAs="2"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath="..\..\spellchecker\hunspell\src\win_api\hunspelldll.h"
-				>
-			</File>
-		</Filter>
 		<Filter
 			Name="hunspell"
 			>

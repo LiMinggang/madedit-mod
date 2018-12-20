@@ -6,12 +6,15 @@
 // Licence:     GPL
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "MadEncoding.h"
-#include "chardetect.h"
+#include <set>
 #include <wx/config.h>
+#include "MadEncoding.h"
+#include "uchardet.h"
+#include "MadCSConv.h"
 
 using std::vector;
 using std::map;
+using std::set;
 
 #ifdef _DEBUG
 	#include <crtdbg.h>
@@ -69,12 +72,26 @@ using std::map;
 
 static vector<MadEncodingInfo> EncodingsTable;
 map<int, wxString>MadEncoding::MadEncodingGrpName;
+set<int> EncodingsSet;
+
+class EncSort  
+{  
+public:  
+  
+	// Return whether first element is less than the second  
+    bool operator () (const MadEncodingInfo& a, const MadEncodingInfo& b) const  
+	{  
+		 return (a.m_Name.Cmp(b.m_Name) < 0);  
+	};  
+};  
+  
 
 wxChar TestEncoding( const wxChar *name, wxFontEncoding enc, wxByte *mb )
 {
 #if defined(__WXGTK__)
 	wxCSConv conv( name );
 #else //#elif defined(__WXMSW__) || defined(__WXMAC__)
+	name;
 	wxCSConv conv( enc );
 #endif
 	wxChar wcs[4] = {0};
@@ -120,7 +137,7 @@ void MSW_GetFontName( wxChar *codepage, wxString &fontname )
 #endif
 
 size_t MadEncoding::ms_SystemEncodingIndex = 0;
-MadEncoding *MadEncoding::ms_SystemEncoding = NULL;
+MadEncoding *MadEncoding::ms_SystemEncoding = nullptr;
 
 void MadEncoding::InitEncodings()
 {
@@ -140,12 +157,23 @@ void MadEncoding::InitEncodings()
 	MadEncodingGrpName[ENCG_UNICODE      ] = _( "Unicode" );
 	MadEncodingGrpName[ENCG_ISO8859      ] = _( "ISO-8859" );
 	MadEncodingGrpName[ENCG_WINDOWS      ] = _( "Windows" );
+	MadEncodingGrpName[ENCG_MACINTOSH    ] = _( "Macintosh" );
 	MadEncodingGrpName[ENCG_OEM          ] = _( "OEM" );
 	MadEncodingGrpName[ENCG_DEFAULT      ] = _( "Other" );
 	MadEncodingGrpName[ENCG_MAX          ] = _( "Invalid" );
 	wxFontEncoding sysenc = wxLocale::GetSystemEncoding();
 	size_t count = wxFontMapper::GetSupportedEncodingsCount();
 	std::vector<int> encGrp;
+#ifdef __WXMSW__
+	wxString fontname( wxT( "Courier New" ) );
+#elif defined(__APPLE__) && defined(__MACH__)
+	wxString fontname( wxT( "Monaco" ) );
+#else
+	wxString fontname( wxT( "Monospace" ) );
+#endif
+
+	wxConfigBase *cfg = wxConfigBase::Get( false );
+	cfg->Read( wxT( "/MadEdit/DefaultTextFont" ), &fontname );
 
 	for( size_t idx = 0; idx < count; ++idx )
 	{
@@ -153,13 +181,6 @@ void MadEncoding::InitEncodings()
 		wxString name = wxFontMapper::GetEncodingName( enc );
 		wxString desc = wxFontMapper::GetEncodingDescription( enc );
 		MadEncodingType type = etSingleByte;
-#ifdef __WXMSW__
-		wxString fontname( wxT( "Courier New" ) );
-#elif defined(__APPLE__) && defined(__MACH__)
-		wxString fontname( wxT( "Monaco" ) );
-#else
-		wxString fontname( wxT( "Monospace" ) );
-#endif
 		bool ignore = false;
 		bool dotest = true;    // test the encoding if is supported in this machine
 		wxChar testwc = 0;
@@ -181,7 +202,7 @@ void MadEncoding::InitEncodings()
 					testmb[1] = 0x40;
 					MSW_GET_FONT_NAME( wxT( "932" ), fontname );
 					added = true;
-					encGrp.push_back( ENCG_WINDOWS );
+					encGrp.push_back( ENCG_OEM );
 					encGrp.push_back( ENCG_EASTASIA );
 				}
 				else
@@ -201,11 +222,11 @@ void MadEncoding::InitEncodings()
 					name = wxT( "GBK" );
 					type = etDoubleByte;
 					testwc = 0x3000;
-					testmb[0] = 0xa1;
-					testmb[1] = 0xa1;
+					testmb[0] = 0xA1;
+					testmb[1] = 0xA1;
 					MSW_GET_FONT_NAME( wxT( "936" ), fontname );
 					added = true;
-					encGrp.push_back( ENCG_WINDOWS );
+					encGrp.push_back( ENCG_OEM );
 					encGrp.push_back( ENCG_EASTASIA );
 				}
 				else
@@ -225,11 +246,11 @@ void MadEncoding::InitEncodings()
 					name = wxT( "EUC-KR" );
 					type = etDoubleByte;
 					testwc = 0x3000;
-					testmb[0] = 0xa1;
-					testmb[1] = 0xa1;
+					testmb[0] = 0xA1;
+					testmb[1] = 0xA1;
 					MSW_GET_FONT_NAME( wxT( "949" ), fontname );
 					added = true;
-					encGrp.push_back( ENCG_WINDOWS );
+					encGrp.push_back( ENCG_OEM );
 					encGrp.push_back( ENCG_EASTASIA );
 				}
 				else
@@ -249,11 +270,11 @@ void MadEncoding::InitEncodings()
 					name = wxT( "BIG5" );
 					type = etDoubleByte;
 					testwc = 0x3000;
-					testmb[0] = 0xa1;
+					testmb[0] = 0xA1;
 					testmb[1] = 0x40;
 					MSW_GET_FONT_NAME( wxT( "950" ), fontname );
 					added = true;
-					encGrp.push_back( ENCG_WINDOWS );
+					encGrp.push_back( ENCG_OEM );
 					encGrp.push_back( ENCG_EASTASIA );
 				}
 				else
@@ -273,8 +294,8 @@ void MadEncoding::InitEncodings()
 					name = wxT( "EUC-JP" );
 					type = etDoubleByte;
 					testwc = 0x3000;
-					testmb[0] = 0xa1;
-					testmb[1] = 0xa1;
+					testmb[0] = 0xA1;
+					testmb[1] = 0xA1;
 					MSW_GET_FONT_NAME( wxT( "51932" ), fontname );
 					added = true;
 					encGrp.push_back( ENCG_WINDOWS );
@@ -290,8 +311,8 @@ void MadEncoding::InitEncodings()
 
 		case wxFONTENCODING_CP437:
 			name = wxT( "CP437" );
-			testwc = 0xa0;
-			testmb[0] = 0xff;
+			testwc = 0xA0;
+			testmb[0] = 0xFF;
 			encGrp.push_back( ENCG_OEM );
 			break;
 
@@ -375,17 +396,59 @@ void MadEncoding::InitEncodings()
 			}
 			break;
 
+		case wxFONTENCODING_KOI8:
+			name = wxT( "KOI8-R" );
+			testwc = 0x2553;
+			testmb[0] = 0xA4;
+			encGrp.push_back( ENCG_CYRILLIC );
+			break;
+
+		case wxFONTENCODING_KOI8_U:
+			name = wxT( "KOI8-U" );
+			testwc = 0x0454;
+			testmb[0] = 0xA4;
+			encGrp.push_back( ENCG_CYRILLIC );
+			break;
+
+		case wxFONTENCODING_CP866:
+			name = wxT( "CP866" );
+			testwc = 0x0434;
+			testmb[0] = 0xA4;
+			encGrp.push_back( ENCG_OEM );
+			encGrp.push_back( ENCG_CYRILLIC );
+			break;
+
+		case wxFONTENCODING_CP855:
+			name = wxT( "CP855" );
+			testwc = 0x0446;
+			testmb[0] = 0xA4;
+			encGrp.push_back( ENCG_OEM );
+			encGrp.push_back( ENCG_CYRILLIC );
+			break;
+
+		case wxFONTENCODING_CP874:
+			name = wxT( "CP874" );
+			testwc = 0x0E5B;
+			testmb[0] = 0xFB;
+			encGrp.push_back( ENCG_OEM );
+			encGrp.push_back( ENCG_SOUTHEASTASIA );
+			break;
+
 		default:
-			if( enc >= wxFONTENCODING_ISO8859_2 && enc <= wxFONTENCODING_ISO8859_15 )
+			if( enc >= wxFONTENCODING_ISO8859_1 && enc <= wxFONTENCODING_ISO8859_15 )
 			{
-				static wxChar wctable[] = {0x0102, 0x0108, 0x0100, 0x00a7, 0x060c, 0x03ce, 0x00d7, 0x011e, 0x0100, 0x0e01,    0, 0x00c6, 0x010a, 0x0152};
-				static wxByte mbtable[] = {0xc3,   0xc6,   0xc0,   0xfd,   0xac,   0xfe,   0xaa,   0xd0,   0xc0,   0xa1,  0, 0xaf,   0xa4,   0xbc};
-				testwc    = wctable[enc - wxFONTENCODING_ISO8859_2];
-				testmb[0] = mbtable[enc - wxFONTENCODING_ISO8859_2];
+				static wxChar wctable[] = {0x00A1, 0x0102, 0x0108, 0x0100, 0x00a7, 0x060c, 0x03ce, 0x00d7, 0x011e, 0x0100, 0x0e01,    0, 0x00c6, 0x010a, 0x0152};
+				static wxByte mbtable[] = {0xA1,   0xc3,   0xc6,   0xc0,   0xfd,   0xac,   0xfe,   0xaa,   0xd0,   0xc0,   0xa1,      0, 0xaf,   0xa4,   0xbc};
+				testwc    = wctable[enc - wxFONTENCODING_ISO8859_1];
+				testmb[0] = mbtable[enc - wxFONTENCODING_ISO8859_1];
 				encGrp.push_back( ENCG_ISO8859 );
 
 				switch( enc )
 				{
+				case wxFONTENCODING_ISO8859_1:
+					encGrp.push_back( ENCG_WESTERNEUROPE );
+					break;
+
 				case wxFONTENCODING_ISO8859_2:
 					encGrp.push_back( ENCG_CENTRALEUROPE );
 					break;
@@ -443,10 +506,10 @@ void MadEncoding::InitEncodings()
 				}
 			}
 			else
-				if( enc >= wxFONTENCODING_CP1250 && enc <= wxFONTENCODING_CP1257 )
+				if( enc >= wxFONTENCODING_CP1250 && enc <= wxFONTENCODING_CP1258 )
 				{
-					static wxChar wctable[] = {0x0102, 0x0401, 0x0152, 0x0192, 0x011e, 0x00d7, 0x0152, 0x00a8};
-					static wxByte mbtable[] = {0xc3,   0xa8,   0x8c,   0x83,   0xd0,   0xaa,   0x8c,   0x8d};
+					static wxChar wctable[] = {0x0102, 0x0401, 0x0152, 0x0192, 0x011e, 0x00d7, 0x0152, 0x00a8, 0x20AB};
+					static wxByte mbtable[] = {0xc3,   0xa8,   0x8c,   0x83,   0xd0,   0xaa,   0x8c,   0x8d,   0xFE};
 					testwc    = wctable[enc - wxFONTENCODING_CP1250];
 					testmb[0] = mbtable[enc - wxFONTENCODING_CP1250];
 					encGrp.push_back( ENCG_WINDOWS );
@@ -485,6 +548,10 @@ void MadEncoding::InitEncodings()
 						encGrp.push_back( ENCG_BALTIC );
 						break;
 
+					case wxFONTENCODING_CP1258:
+						encGrp.push_back( ENCG_SOUTHEASTASIA );
+						break;
+
 					default:
 						break;
 					}
@@ -495,15 +562,109 @@ void MadEncoding::InitEncodings()
 						testwc = 0x0e50;
 						testmb[0] = 0xf0;
 						MSW_GET_FONT_NAME( wxT( "874" ), fontname );
+						encGrp.push_back( ENCG_OEM );
 						encGrp.push_back( ENCG_WINDOWS );
 						encGrp.push_back( ENCG_SOUTHEASTASIA );
 					}
-					else
-						if( name == wxT( "default" ) || name == wxGetTranslation( wxT( "default" ) ) ) // unnecessary
+					else if( enc >= wxFONTENCODING_MACMIN && enc <= wxFONTENCODING_MACMAX )
+					{
+						encGrp.push_back( ENCG_MACINTOSH );
+
+						switch( enc )
 						{
-							ignore = true;
-							dotest = false;
+							case wxFONTENCODING_MACROMAN:
+								testwc    = 0x00B0;
+								testmb[0] = 0xA1;
+								break;
+							case wxFONTENCODING_MACJAPANESE:
+								type = etDoubleByte;
+								testwc    = 0x4E9C;
+								testmb[0] = 0x88;
+								testmb[1] = 0x9F;
+								encGrp.push_back( ENCG_EASTASIA );
+								break;
+							case wxFONTENCODING_MACCHINESETRAD:
+								type = etDoubleByte;
+								testwc    = 0x3000;
+								testmb[0] = 0xA1;
+								testmb[1] = 0x40;
+								encGrp.push_back( ENCG_EASTASIA );
+								break;
+							case wxFONTENCODING_MACKOREAN:
+								type = etDoubleByte;
+								testwc    = 0x3000;
+								testmb[0] = 0xA1;
+								testmb[1] = 0xA1;
+								encGrp.push_back( ENCG_EASTASIA );
+								break;
+							case wxFONTENCODING_MACCHINESESIMP:
+								type = etDoubleByte;
+								testwc    = 0x3000;
+								testmb[0] = 0xA1;
+								testmb[1] = 0xA1;
+								encGrp.push_back( ENCG_EASTASIA );
+								break;
+							case wxFONTENCODING_MACARABIC:
+								encGrp.push_back( ENCG_ARABIC );
+								testwc    = 0x0621;
+								testmb[0] = 0xC1;
+								break;
+							case wxFONTENCODING_MACHEBREW:
+								encGrp.push_back( ENCG_HEBREW );
+								testwc    = 0x00C4;
+								testmb[0] = 0x80;
+								break;
+							case wxFONTENCODING_MACGREEK:
+								encGrp.push_back( ENCG_GREEK );
+								testwc    = 0x0393;
+								testmb[0] = 0xA1;
+								break;
+							case wxFONTENCODING_MACCYRILLIC:
+								encGrp.push_back( ENCG_CYRILLIC );
+								testwc    = 0x042F;
+								testmb[0] = 0x9F;
+								break;
+							case wxFONTENCODING_MACTHAI:
+								encGrp.push_back( ENCG_SOUTHEASTASIA );
+								testwc    = 0x0E01;
+								testmb[0] = 0xA1;
+								break;
+							case wxFONTENCODING_MACCENTRALEUR:
+								encGrp.push_back( ENCG_CENTRALEUROPE );
+								testwc    = 0x012B;
+								testmb[0] = 0xB4;
+								break;
+							case wxFONTENCODING_MACCROATIAN:
+								encGrp.push_back( ENCG_SOUTHEUROPE );
+								testwc    = 0x25CA;
+								testmb[0] = 0xD7;
+								break;
+							case wxFONTENCODING_MACICELANDIC:
+								encGrp.push_back( ENCG_NORTHEUROPE );
+								testwc    = 0x2014;
+								testmb[0] = 0xD1;
+								break;
+							case wxFONTENCODING_MACROMANIAN:
+								encGrp.push_back( ENCG_SOUTHEUROPE );
+								testwc    = 0x2014;
+								testmb[0] = 0xD1;
+								break;
+
+							default:
+								break;
 						}
+					}
+					else
+						if((enc >= wxFONTENCODING_CP437) && ((enc < wxFONTENCODING_CP12_MAX)))
+						{
+							encGrp.push_back( ENCG_OEM );
+						}
+						else
+							if( name == wxT( "default" ) || name == wxGetTranslation( wxT( "default" ) ) ) // unnecessary
+							{
+								ignore = true;
+								dotest = false;
+							}
 		}
 
 		// test the encoding is supported in the system
@@ -519,25 +680,45 @@ void MadEncoding::InitEncodings()
 			{
 				ignore = ! wxFontMapper::Get()->IsEncodingAvailable( enc );
 			}
-
 #endif
 		}
 
 		if( !ignore )
 		{
-			if( enc == sysenc )
-			{
-				ms_SystemEncodingIndex = EncodingsTable.size();
-			}
-
 			EncodingsTable.push_back( MadEncodingInfo( enc, name.Upper(), desc, type, fontname, encGrp ) );
+			EncodingsSet.insert(enc);
+		}
+	}
+
+#ifdef __MAD_ENCODING_EXTENDED__
+	{
+		encGrp.clear();
+		wxString name = wxT( "GB18030" );
+//		wxString fontname( wxT( "Courier New" ) );
+		wxString desc(_("Chinese Simplified(UTF-PRC)"));
+		MadEncodingType type = etGB18030;
+		MSW_GET_FONT_NAME( wxT( "54936" ), fontname );
+		encGrp.push_back( ENCG_EASTASIA );
+		EncodingsTable.push_back( MadEncodingInfo( MAD_FONTENCODING_GB18030, name.Upper(), desc, type, fontname, encGrp ) );
+		EncodingsSet.insert(MAD_FONTENCODING_GB18030);
+	}
+#endif //__MAD_ENCODING_EXTENDED__
+
+	std::sort(EncodingsTable.begin(), EncodingsTable.end(), EncSort());
+
+	for( size_t idx = 0; idx < EncodingsTable.size(); ++idx )
+	{
+		if( EncodingsTable[idx].m_Encoding == sysenc )
+		{
+			ms_SystemEncodingIndex = idx;
+			break;
 		}
 	}
 }
 
 void MadEncoding::FreeEncodings()
 {
-	if( ms_SystemEncoding != NULL )
+	if( ms_SystemEncoding != nullptr )
 	{
 		delete ms_SystemEncoding;
 	}
@@ -559,6 +740,17 @@ void MadEncoding::FreeEncodings()
 	}
 }
 
+void MadEncoding::UpdateEncodingDefaultFont(const wxString & font)
+{
+	vector<MadEncodingInfo>::iterator it = EncodingsTable.begin();
+	vector<MadEncodingInfo>::iterator itend = EncodingsTable.end();
+
+	while( it != itend )
+	{
+		it->m_FontName = font;
+		++it;
+	}
+}
 
 size_t MadEncoding::GetEncodingsCount()
 {
@@ -591,7 +783,7 @@ const std::vector<int>& MadEncoding::GetEncodingGrps( size_t idx )
 	return EncodingsTable[idx].m_GrpIdVec;
 }
 
-wxString MadEncoding::EncodingToName( wxFontEncoding enc )
+wxString MadEncoding::EncodingToName( int enc )
 {
 	size_t idx;
 
@@ -606,7 +798,7 @@ wxString MadEncoding::EncodingToName( wxFontEncoding enc )
 	return EncodingsTable[ms_SystemEncodingIndex].m_Name;
 }
 
-wxFontEncoding MadEncoding::NameToEncoding( const wxString &name )
+int MadEncoding::NameToEncoding( const wxString &name )
 {
 	size_t idx;
 	wxString uname( name.Upper() );
@@ -624,7 +816,7 @@ wxFontEncoding MadEncoding::NameToEncoding( const wxString &name )
 
 MadEncoding *MadEncoding::GetSystemEncoding()
 {
-	if( ms_SystemEncoding == NULL )
+	if( ms_SystemEncoding == nullptr )
 	{
 		ms_SystemEncoding = new MadEncoding( ms_SystemEncodingIndex );
 	}
@@ -632,12 +824,12 @@ MadEncoding *MadEncoding::GetSystemEncoding()
 	return ms_SystemEncoding;
 }
 
-MadEncoding::MadEncoding( size_t idx )
+MadEncoding::MadEncoding( size_t idx ) : m_Info(nullptr), m_CSConv(nullptr), m_MBtoWC_Table(nullptr), m_WCtoMB_Table(nullptr), m_LeadByte_Table(nullptr)
 {
 	Create( idx );
 }
 
-MadEncoding::MadEncoding( wxFontEncoding enc )
+MadEncoding::MadEncoding( int enc ) : m_Info(nullptr), m_CSConv(nullptr), m_MBtoWC_Table(nullptr), m_WCtoMB_Table(nullptr), m_LeadByte_Table(nullptr)
 {
 	size_t idx;
 
@@ -656,7 +848,7 @@ MadEncoding::MadEncoding( wxFontEncoding enc )
 	}
 }
 
-MadEncoding::MadEncoding( const wxString &name )
+MadEncoding::MadEncoding( const wxString &name ) : m_Info(nullptr), m_CSConv(nullptr), m_MBtoWC_Table(nullptr), m_WCtoMB_Table(nullptr), m_LeadByte_Table(nullptr)
 {
 	size_t idx;
 	wxString uname( name.Upper() );
@@ -682,7 +874,7 @@ void MadEncoding::Create( size_t idx )
 	m_Info = &EncodingsTable[idx];
 	m_CSConv = m_Info->m_CSConv;
 
-	if( m_CSConv != NULL )
+	if( m_CSConv != nullptr )
 	{
 		m_MBtoWC_Table = m_Info->m_MBtoWC_Table;
 		m_WCtoMB_Table = m_Info->m_WCtoMB_Table;
@@ -691,9 +883,9 @@ void MadEncoding::Create( size_t idx )
 	else
 	{
 #if defined(__WXGTK__)
-		m_CSConv = new wxCSConv( m_Info->m_Name.c_str() );
+		m_CSConv = new MadCSConv( m_Info->m_Name.c_str() );
 #else //#elif defined(__WXMSW__) || defined(__WXMAC__)
-		m_CSConv = new wxCSConv( m_Info->m_Encoding );
+		m_CSConv = new MadCSConv( m_Info->m_Encoding );
 #endif
 		m_Info->m_CSConv = m_CSConv;
 
@@ -774,6 +966,11 @@ void MadEncoding::Create( size_t idx )
 		UCS4toMultiByte = &MadEncoding::UCS4toUTF32BE;
 		break;
 
+#ifdef __MAD_ENCODING_EXTENDED__
+	case etGB18030:
+		UCS4toMultiByte = &MadEncoding::UCS4toGB18030;
+		break;
+#endif
 	default:
 		//case etSingleByte:
 		//case etDoubleByte:
@@ -849,11 +1046,11 @@ size_t MadEncoding::UCS4toUTF8( ucs4_t ucs4, wxByte *buf )
 
 	UTF8-octets = *( UTF8-char )
 	UTF8-char   = UTF8-1 / UTF8-2 / UTF8-3 / UTF8-4
-	UTF8-1      = %x00-7F
-	UTF8-2      = %xC2-DF UTF8-tail
-	UTF8-3      = %xE0 %xA0-BF UTF8-tail / %xE1-EC 2( UTF8-tail ) /
+	UTF8-1    = %x00-7F
+	UTF8-2    = %xC2-DF UTF8-tail
+	UTF8-3    = %xE0 %xA0-BF UTF8-tail / %xE1-EC 2( UTF8-tail ) /
 	              %xED %x80-9F UTF8-tail / %xEE-EF 2( UTF8-tail )
-	UTF8-4      = %xF0 %x90-BF 2( UTF8-tail ) / %xF1-F3 3( UTF8-tail ) /
+	UTF8-4    = %xF0 %x90-BF 2( UTF8-tail ) / %xF1-F3 3( UTF8-tail ) /
 	              %xF4 %x80-8F 2( UTF8-tail )
 	UTF8-tail   = %x80-BF
 	***/
@@ -971,7 +1168,12 @@ size_t MadEncoding::UCS4toUTF32BE( ucs4_t ucs4, wxByte *buf )
 	return 4;
 }
 
-ucs4_t MadEncoding::SBtoUCS4( wxByte b1 )  // Single-Byte to UCS4
+size_t MadEncoding::UCS4toGB18030(ucs4_t ucs4, wxByte *buf)
+{
+	return m_CSConv->WC2MB( ( char* )buf, (wchar_t *)(&ucs4), 4 );
+}
+
+ucs4_t MadEncoding::SBtoUCS4( wxByte b1 )    // Single-Byte to UCS4
 {
 	return m_MBtoWC_Table[ b1 ];
 }
@@ -984,6 +1186,13 @@ ucs4_t MadEncoding::DBtoUCS4( wxByte *buf )  // Double-Byte to UCS4
 
 	register unsigned int w = ( ( ( unsigned int )buf[0] ) << 8 ) | buf[1];
 	return m_MBtoWC_Table[w];
+}
+
+ucs4_t MadEncoding::GB18030toUCS4(wxByte *buf, size_t &len)
+{
+	ucs4_t ucs4 = 0;
+	len = m_CSConv->MB2WC ((wchar_t *)(&ucs4), (const char *)buf, 4);
+	return ucs4;
 }
 
 bool MadEncoding::IsLeadByte( wxByte byte )
@@ -1031,7 +1240,6 @@ bool MadEncoding::IsLeadByte( wxByte byte )
 
 	return m_LeadByte_Table[byte] == 1;
 }
-
 
 //==================================================
 
@@ -1290,7 +1498,7 @@ bool IsBinaryData( wxByte *data, int size )
 	return false;
 }
 
-void DetectChineseEncoding( const wxByte *text, int count, wxFontEncoding &enc )
+void DetectChineseEncoding( const wxByte *text, int count, int &enc )
 {
 	// detect by punctuation marks
 	int i = 0;
@@ -1384,10 +1592,26 @@ void DetectChineseEncoding( const wxByte *text, int count, wxFontEncoding &enc )
 					{
 						if( b0 >= 0x81 && b0 <= 0xFE )
 						{
-							enc = wxFONTENCODING_CP936; // [0x81~0xFE][0x80~0xA0] are invalid in big5
+#ifdef __MAD_ENCODING_EXTENDED__
+							if(EncodingsSet.find(wxFONTENCODING_CP936) != EncodingsSet.end())
+#endif
+								enc = wxFONTENCODING_CP936; // [0x81~0xFE][0x80~0xA0] are invalid in big5
+#ifdef __MAD_ENCODING_EXTENDED__
+							else
+								enc = MAD_FONTENCODING_GB18030; // [0x81~0xFE][0x30~0x39] are invalid in big5 and GBK
+#endif
 							return;
 						}
 					}
+					else if((b1 <= 0x39) && (b1 >= 0x30) && (b0 >= 0x81) && (b0 <= 0xFE))
+						{
+#ifdef __MAD_ENCODING_EXTENDED__
+							enc = MAD_FONTENCODING_GB18030; // [0x81~0xFE][0x30~0x39] are invalid in big5 and GBK
+#else
+							enc = wxFONTENCODING_CP936; // [0x81~0xFE][0x80~0xA0] are invalid in big5
+#endif
+							return;
+						}
 					else
 					{
 						int w = ( b0 << 8 ) + b1;
@@ -1420,7 +1644,7 @@ void DetectChineseEncoding( const wxByte *text, int count, wxFontEncoding &enc )
 		if( cp936 > cp950 ) enc = wxFONTENCODING_CP936;
 }
 
-void DetectJapaneseEncoding( const wxByte *text, int count, wxFontEncoding &enc )
+void DetectJapaneseEncoding( const wxByte *text, int count, int &enc )
 {
 	wxByte c;
 	int i = 0;
@@ -1492,16 +1716,14 @@ void DetectJapaneseEncoding( const wxByte *text, int count, wxFontEncoding &enc 
 		enc = xenc;
 }
 
-void DetectEncoding( const wxByte *text, int count, wxFontEncoding &enc )
+void DetectEncoding( const wxByte *text, int count, int &enc )
 {
-	chardet_t det = NULL;
-	char encoding_name[CHARDET_MAX_ENCODING_NAME];
-	chardet_create( &det );
-	chardet_handle_data( det, ( const char* )text, count );
-	chardet_data_end( det );
-	chardet_get_charset( det, encoding_name, CHARDET_MAX_ENCODING_NAME );
-	chardet_destroy( det );
-	wxString name( encoding_name, wxConvLocal ), rest;
+	uchardet_t det = nullptr;
+	det = uchardet_new();
+	uchardet_handle_data( det, ( const char* )text, count );
+	uchardet_data_end( det );
+	wxString name( uchardet_get_charset( det ), wxConvLocal ), rest;
+	uchardet_delete( det );
 	name.MakeUpper();
 	long value;
 
@@ -1519,9 +1741,9 @@ void DetectEncoding( const wxByte *text, int count, wxFontEncoding &enc )
 			{
 				if( value == 2 ) //1252 or ?
 				{
-					wxFontEncoding def = wxFONTENCODING_DEFAULT;
+					int def = wxFONTENCODING_DEFAULT;
 
-					if( enc == wxFONTENCODING_CP950 || wxFONTENCODING_CP936 )
+					if( enc == wxFONTENCODING_CP950 || enc == wxFONTENCODING_CP936 )
 					{
 						DetectChineseEncoding( text, count, def );
 
@@ -1565,34 +1787,44 @@ void DetectEncoding( const wxByte *text, int count, wxFontEncoding &enc )
 				}
 				else
 					if( name.IsSameAs( wxT( "GB2312" ) )
-							|| name.IsSameAs( wxT( "GB18030" ) )
 							|| name.IsSameAs( wxT( "HZ-GB-2312" ) ) )
 					{
 						enc = wxFONTENCODING_CP936;
+#ifdef __MAD_ENCODING_EXTENDED__
+						if(EncodingsSet.find(enc) == EncodingsSet.end())
+						{
+							enc = MAD_FONTENCODING_GB18030;
+						}
+#endif
 					}
 					else
-						if( name.IsSameAs( wxT( "SHIFT_JIS" ) ) )
-						{
-							enc = wxFONTENCODING_CP932;
-						}
+#ifdef __MAD_ENCODING_EXTENDED__
+						if(name.IsSameAs( wxT( "GB18030" )))
+							enc = MAD_FONTENCODING_GB18030;
 						else
-							if( name.IsSameAs( wxT( "EUC-JP" ) ) )
+#endif
+							if( name.IsSameAs( wxT( "SHIFT_JIS" ) ) )
 							{
-								enc = wxFONTENCODING_EUC_JP;
+								enc = wxFONTENCODING_CP932;
 							}
 							else
-								if( name.IsSameAs( wxT( "EUC-KR" ) ) )
+								if( name.IsSameAs( wxT( "EUC-JP" ) ) )
 								{
-									enc = wxFONTENCODING_CP949;
+									enc = wxFONTENCODING_EUC_JP;
 								}
 								else
-									if( name.IsSameAs( wxT( "KOI8-R" ) ) )
+									if( name.IsSameAs( wxT( "EUC-KR" ) ) )
 									{
-										enc = wxFONTENCODING_KOI8;
+										enc = wxFONTENCODING_CP949;
 									}
 									else
-										if( name.IsSameAs( wxT( "IBM866" ) ) )
+										if( name.IsSameAs( wxT( "KOI8-R" ) ) )
 										{
-											enc = wxFONTENCODING_CP866;
+											enc = wxFONTENCODING_KOI8;
 										}
+										else
+											if( name.IsSameAs( wxT( "IBM866" ) ) )
+											{
+												enc = wxFONTENCODING_CP866;
+											}
 }

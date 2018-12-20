@@ -46,12 +46,12 @@
 #define MAX_REL_THRESHOLD     1000
 
 //hiragana frequency category table
-extern char jp2CharContext[83][83];
+extern const PRUint8 jp2CharContext[83][83];
 
 class JapaneseContextAnalysis
 {
 public:
-  JapaneseContextAnalysis() {Reset();};
+  JapaneseContextAnalysis() {Reset(PR_FALSE);}
 
   void HandleData(const char* aBuf, PRUint32 aLen);
 
@@ -72,22 +72,25 @@ public:
       mRelSample[jp2CharContext[mLastCharOrder][order]]++;
     }
     mLastCharOrder = order;
-  };
+  }
 
-  float GetConfidence();
-  void      Reset(void);
-  void      SetOpion(){};
-  PRBool GotEnoughData() {return mTotalRel > ENOUGH_REL_THRESHOLD;};
+  float GetConfidence(void);
+  void      Reset(PRBool aIsPreferredLanguage);
+  void      SetOpion(){}
+  PRBool GotEnoughData() {return mTotalRel > ENOUGH_REL_THRESHOLD;}
 
 protected:
   virtual PRInt32 GetOrder(const char* str, PRUint32 *charLen) = 0;
   virtual PRInt32 GetOrder(const char* str) = 0;
 
-  //category counters, each interger counts sequence in its category
+  //category counters, each integer counts sequences in its category
   PRUint32 mRelSample[NUM_OF_CATEGORY];
 
   //total sequence received
   PRUint32 mTotalRel;
+
+  //Number of sequences needed to trigger detection
+  PRUint32 mDataThreshold;
   
   //The order of previous char
   PRInt32  mLastCharOrder;
@@ -115,7 +118,7 @@ protected:
           (unsigned char)*(str+1) <= (unsigned char)0xf1)
       return (unsigned char)*(str+1) - (unsigned char)0x9f;
     return -1;
-  };
+  }
 };
 
 class EUCJPContextAnalysis : public JapaneseContextAnalysis
@@ -130,7 +133,7 @@ protected:
           (unsigned char)*(str+1) <= (unsigned char)0xf3)
       return (unsigned char)*(str+1) - (unsigned char)0xa1;
     return -1;
-  };
+  }
 };
 
 #endif /* __JPCNTX_H__ */

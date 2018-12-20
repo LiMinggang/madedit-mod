@@ -20,7 +20,7 @@
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)\"
-			IntermediateDirectory="$(SolutionDir)$(ConfigurationName)\"
+			IntermediateDirectory="$(SolutionDir)$(ConfigurationName)\$(ProjectName)\"
 			ConfigurationType="4"
 			InheritedPropertySheets=".\pyproject.vsprops;.\release.vsprops"
 			UseOfMFC="0"
@@ -44,8 +44,9 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/Zm200 "
+				Optimization="3"
 				AdditionalIncludeDirectories="..\..\minipython\Python;..\..\minipython\Modules\zlib;"
-				PreprocessorDefinitions="Py_BUILD_CORE;Py_NO_ENABLE_SHARED;WIN32"
+				PreprocessorDefinitions="Py_BUILD_CORE;Py_NO_ENABLE_SHARED;WIN32;BOOST_ALL_NO_LIB"
 				RuntimeLibrary="0"
 			/>
 			<Tool

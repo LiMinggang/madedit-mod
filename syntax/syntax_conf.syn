@@ -52,5 +52,6 @@ LineNumberColor=White
 LineNumberBgColor=A0A0A0
 LineNumberStyle=
 
-ActiveLineColor=Fuchsia
-BookmarkColor=C0FFFF
+ActiveLineColor=EAEAF2
+BookmarkColor=DeepSkyBlue
+BookmarkBgColor=MediumBlue

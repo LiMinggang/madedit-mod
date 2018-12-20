@@ -18,12 +18,12 @@
 #endif
 // disable 4996 {
 //(*Headers(MadFileAssociationDialog)
+#include <wx/button.h>
+#include <wx/dialog.h>
+#include <wx/listbox.h>
 #include <wx/sizer.h>
 #include <wx/stattext.h>
 #include <wx/textctrl.h>
-#include <wx/listbox.h>
-#include <wx/button.h>
-#include <wx/dialog.h>
 //*)
 // disable 4996 }
 #ifdef _MSC_VER
@@ -38,29 +38,21 @@ class MadFileAssociationDialog: public wxDialog
 		virtual ~MadFileAssociationDialog();
 
 		//(*Declarations(MadFileAssociationDialog)
-		wxButton* WxButtonAddCustom;
 		wxButton* WxButtonAdd;
-		wxTextCtrl* WxEditCustomType;
-		wxListBox* WxListBoxPredefined;
-		wxStaticText* StaticText2;
-		wxButton* WxButtonRemove;
-		wxListBox* WxListBoxAssociated;
-		wxStaticText* StaticText1;
+		wxButton* WxButtonAddCustom;
 		wxButton* WxButtonCancel;
 		wxButton* WxButtonOK;
+		wxButton* WxButtonRemove;
+		wxListBox* WxListBoxAssociated;
+		wxListBox* WxListBoxPredefined;
+		wxStaticText* StaticText1;
+		wxStaticText* StaticText2;
+		wxTextCtrl* WxEditCustomType;
 		//*)
 
 	protected:
 
 		//(*Identifiers(MadFileAssociationDialog)
-		static const long ID_STATICTEXT1;
-		static const long ID_WXLISTBOXASSOCIATED;
-		static const long ID_WXBUTTONADD;
-		static const long ID_WXBUTTONREMOVE;
-		static const long ID_STATICTEXT2;
-		static const long ID_WXLISTBOXPREDEFINED;
-		static const long ID_WXEDITCUSTOMTYPE;
-		static const long ID_WXBUTTONADDCUSTOM;
 		//*)
 
 	private:
@@ -74,8 +66,6 @@ class MadFileAssociationDialog: public wxDialog
 		void WxListBoxAssociatedDoubleClicked(wxCommandEvent& event);
 		void WxListBoxPredefinedDoubleClicked(wxCommandEvent& event);
 		//*)
-
-		DECLARE_EVENT_TABLE()
 };
 
 #endif //__WXMSW__

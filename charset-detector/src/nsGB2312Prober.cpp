@@ -40,30 +40,23 @@
 // 2, kana character often exist in group
 // 3, certain combination of kana is never used in japanese language
 
-#pragma GCC visibility push(hidden)
-
 #include "nsGB2312Prober.h"
 
 void  nsGB18030Prober::Reset(void)
 {
   mCodingSM->Reset(); 
   mState = eDetecting;
-  mDistributionAnalyser.Reset();
+  mDistributionAnalyser.Reset(mIsPreferredLanguage);
   //mContextAnalyser.Reset();
 }
 
 nsProbingState nsGB18030Prober::HandleData(const char* aBuf, PRUint32 aLen)
 {
-  nsSMState codingState;
+  PRUint32 codingState;
 
   for (PRUint32 i = 0; i < aLen; i++)
   {
     codingState = mCodingSM->NextState(aBuf[i]);
-    if (codingState == eError)
-    {
-      mState = eNotMe;
-      break;
-    }
     if (codingState == eItsMe)
     {
       mState = eFoundIt;
@@ -100,6 +93,4 @@ float nsGB18030Prober::GetConfidence(void)
 
   return (float)distribCf;
 }
-
-#pragma GCC visibility pop
 

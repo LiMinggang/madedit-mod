@@ -13,77 +13,84 @@
 				<object class="wxStaticBoxSizer" variable="StaticBoxSizer1" member="no">
 					<orient>wxVERTICAL</orient>
 					<object class="sizeritem">
-						<object class="wxCheckBox" name="ID_WXCHECKBOXRECENTFILES" variable="wxCheckBoxRecentFiles" member="yes">
+						<object class="wxCheckBox" name="wxID_ANY" variable="wxCheckBoxRecentFiles" member="yes">
 							<label>Recent &amp;Files</label>
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxCheckBox" name="ID_WXCHECKBOXRECENTFONTS" variable="wxCheckBoxRecentFonts" member="yes">
+						<object class="wxCheckBox" name="wxID_ANY" variable="wxCheckBoxRecentFonts" member="yes">
 							<label>Recent Fon&amp;ts</label>
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxCheckBox" name="ID_WXCHECKBOXRECENTENCODINGS" variable="wxCheckBoxRecentEncodings" member="yes">
+						<object class="wxCheckBox" name="wxID_ANY" variable="wxCheckBoxRecentEncodings" member="yes">
 							<label>Recent &amp;Encodings</label>
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxCheckBox" name="ID_WXCHECKBOXRECENTSEARCHEDTEXTS" variable="wxCheckBoxRecentSearchedTexts" member="yes">
+						<object class="wxCheckBox" name="wxID_ANY" variable="wxCheckBoxRecentSearchedTexts" member="yes">
 							<label>Recent &amp;Searched Texts</label>
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxCheckBox" name="ID_WXCHECKBOXRECENTREPLACEDTEXTS" variable="wxCheckBoxRecentReplacedTexts" member="yes">
+						<object class="wxCheckBox" name="wxID_ANY" variable="wxCheckBoxRecentReplacedTexts" member="yes">
 							<label>Recent &amp;Replaced Texts</label>
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxCheckBox" name="ID_WXCHECKBOXRECENTSEARCHEDDIRECTORIES" variable="wxCheckBoxRecentSearchedDirectories" member="yes">
+						<object class="wxCheckBox" name="wxID_ANY" variable="wxCheckBoxRecentSearchedDirectories" member="yes">
 							<label>Recent Searched &amp;Directories</label>
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxCheckBox" name="ID_WXRECENTSEARCHEDFILEFILTERS" variable="wxRecentSearchedFileFilters" member="yes">
+						<object class="wxCheckBox" name="wxID_ANY" variable="wxRecentSearchedFileFilters" member="yes">
 							<label>Recent Searched File Fi&amp;lters</label>
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxCheckBox" name="ID_WXCHECKBOXRECENTSEARCHEDEXCLUDEFILTERS" variable="wxCheckBoxRecentSearchedExcludeFilters" member="yes">
+						<object class="wxCheckBox" name="wxID_ANY" variable="wxCheckBoxRecentSearchedExcludeFilters" member="yes">
 							<label>Recent Searched E&amp;xclude Filters</label>
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxCheckBox" name="ID_WXCHECKBOXCARETPOS" variable="wxCheckBoxCaretPos" member="yes">
+						<object class="wxCheckBox" name="wxID_ANY" variable="wxCheckBoxCaretPos" member="yes">
 							<label>Recent Caret Position</label>
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxCheckBox" name="ID_CHECKBOXRESETTOOLBARSINFOWIN" variable="wxCheckBoxResetToolBarsInfoWin" member="yes">
+						<object class="wxCheckBox" name="wxID_ANY" variable="wxCheckBoxResetTransparency" member="yes">
+							<label>Reset Transparency of Search/Replace Dialog</label>
+						</object>
+						<flag>wxALL|wxEXPAND</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxCheckBox" name="wxID_ANY" variable="wxCheckBoxResetToolBarsInfoWin" member="yes">
 							<label>Reset Tool Bars and Information Window Pos</label>
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxCheckBox" name="ID_WXCHECKBOXALLABOVE" variable="wxCheckBoxAllAbove" member="yes">
+						<object class="wxCheckBox" name="wxID_ANY" variable="wxCheckBoxAllAbove" member="yes">
 							<label>All Above</label>
 							<handler function="wxCheckBoxAllAboveClick" entry="EVT_CHECKBOX" />
 						</object>

@@ -8,6 +8,7 @@
 
 #ifndef	_MADPLUGIN_H_
 #define	_MADPLUGIN_H_
+#include "MadUtils.h"
 
 /***************************************************************
 
@@ -48,7 +49,7 @@ v0.000009: not work	yet.
 #if	defined(WIN32)
 #	include	<windows.h>
 #	define WIN32_DLL_ENTRY()									\
-static HINSTANCE gs_hInstance=NULL;								\
+static HINSTANCE gs_hInstance=nullptr;								\
 BOOL WINAPI														\
 DllMain(HINSTANCE hModule, DWORD fdwReason,	LPVOID lpReserved)	\
 {																\

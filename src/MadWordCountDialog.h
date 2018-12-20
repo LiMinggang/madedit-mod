@@ -56,30 +56,13 @@ class MadWordCountDialog: public wxDialog
 	protected:
 
 		//(*Identifiers(MadWordCountDialog)
-		static const long ID_WXSTATICTEXT7;
-		static const long ID_WXSTATICTEXTLINECOUNT;
-		static const long ID_WXSTATICTEXT1;
-		static const long ID_WXSTATICTEXTWORDCOUNT;
-		static const long ID_WXSTATICTEXT2;
-		static const long ID_WXSTATICTEXTCHARCOUNT;
-		static const long ID_WXSTATICTEXT3;
-		static const long ID_WXSTATICTEXTSPACECOUNT;
-		static const long ID_WXSTATICTEXT4;
-		static const long ID_WXSTATICTEXTHALFWIDTHCOUNT;
-		static const long ID_WXSTATICTEXT5;
-		static const long ID_WXSTATICTEXTFULLWIDTHCOUNT;
-		static const long ID_STATICLINE1;
-		static const long ID_STATICTEXT7;
-		static const long ID_WXMEMO1;
 		//*)
 
 	private:
 
 		//(*Handlers(MadWordCountDialog)
-		void MadWordCountDialogClose(wxCloseEvent& event);
+		void MadWordCountDialogClose(wxCloseEvent& WXUNUSED(event));
 		//*)
-
-		DECLARE_EVENT_TABLE()
 };
 
 #endif

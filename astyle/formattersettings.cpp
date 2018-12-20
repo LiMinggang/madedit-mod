@@ -59,8 +59,8 @@ void FormatterSettings::ApplyTo(astyle::ASFormatter& formatter)
       formatter.setFormattingStyle(astyle::STYLE_VTK);
       break;
 
-    case aspsBanner: // Banner
-      formatter.setFormattingStyle(astyle::STYLE_BANNER);
+    case aspsRaliff: // Raliff
+      formatter.setFormattingStyle(astyle::STYLE_RATLIFF);
       break;
 
     case aspsGnu: // GNU
@@ -83,7 +83,15 @@ void FormatterSettings::ApplyTo(astyle::ASFormatter& formatter)
       formatter.setFormattingStyle(astyle::STYLE_GOOGLE);
       break;
 
-    case aspsPico: // Pico
+    case aspsMozilla: // Mozilla
+      formatter.setFormattingStyle(astyle::STYLE_MOZILLA);
+      break;
+
+	case aspsWebkit: // Webkit
+		formatter.setFormattingStyle(astyle::STYLE_WEBKIT);
+		break;
+	
+	case aspsPico: // Pico
       formatter.setFormattingStyle(astyle::STYLE_PICO);
       break;
 
@@ -99,9 +107,12 @@ void FormatterSettings::ApplyTo(astyle::ASFormatter& formatter)
   formatter.setAttachExternC(cfg->ReadBool(wxT("attach_extern_c"), true));
   formatter.setAttachNamespace(cfg->ReadBool(wxT("attach_namespaces"), true));
   formatter.setAttachInline(cfg->ReadBool(wxT("attach_inlines"), true));
+  formatter.setAttachClosingWhile(cfg->ReadBool(wxT("attach_closing_while"), false));
 
   bool value = cfg->ReadBool(wxT("force_tabs"), false);
   long spaceNum = cfg->ReadLong(wxT("indentation"), 4);
+  if(spaceNum < 0) spaceNum = 4;
+  if(spaceNum > 1024) spaceNum = 1024;
   if (cfg->ReadBool(wxT("use_tabs"), false))
     formatter.setTabIndentation(spaceNum, value);
   else
@@ -117,19 +128,30 @@ void FormatterSettings::ApplyTo(astyle::ASFormatter& formatter)
   formatter.setPreprocDefineIndent(cfg->ReadBool(wxT("indent_preproc_define"), false));
   formatter.setPreprocConditionalIndent(cfg->ReadBool(wxT("indent_preproc_cond"), false));
   formatter.setIndentCol1CommentsMode(cfg->ReadBool(wxT("indent_col1_comments"), true));
-  formatter.setMinConditionalIndentOption(cfg->ReadLong(wxT("min_conditional_indent"), 2));
-  formatter.setMaxInStatementIndentLength(cfg->ReadLong(wxT("max_instatement_indent"), 40));
+  formatter.setAfterParenIndent(cfg->ReadBool(wxT("indent_after_parens"), false));
+  long indent = cfg->ReadLong(wxT("min_conditional_indent"), 2);
+  if(indent < 0) indent = 2;
+  if(indent > 1024) indent = 1024;
+  formatter.setMinConditionalIndentOption(indent);
+  indent = cfg->ReadLong(wxT("max_continuation_indent"), 40);
+  if(indent < 0) indent = 40;
+  if(indent > 1024) indent = 1024;
+  formatter.setMaxInStatementIndentLength(indent);
+  indent = cfg->ReadLong(wxT("indent_continuation"), 1);
+  if(indent < 0) indent = 1;
+  if(indent > 1024) indent = 1024;
+  formatter.setContinuationIndentation(indent);
 
   formatter.setBreakClosingHeaderBracketsMode(cfg->ReadBool(wxT("break_closing"), true));
   formatter.setBreakElseIfsMode(cfg->ReadBool(wxT("break_elseifs"), true));
   formatter.setAddBracketsMode(cfg->ReadBool(wxT("add_brackets"), false));
   formatter.setAddOneLineBracketsMode(cfg->ReadBool(wxT("add_one_line_brackets"), true));
-  formatter.setSingleStatementsMode(!cfg->ReadBool(wxT("keep_complex"), true));
   formatter.setRemoveBracketsMode(cfg->ReadBool(wxT("remove_brackets"), false));
   formatter.setBreakOneLineBlocksMode(!cfg->ReadBool(wxT("keep_blocks"), true));
   formatter.setTabSpaceConversionMode(cfg->ReadBool(wxT("convert_tabs"), true));
   formatter.setCloseTemplatesMode(cfg->ReadBool(wxT("close_templates"), false));
   formatter.setStripCommentPrefix(cfg->ReadBool(wxT("remove_comment_prefix"), false));
+  formatter.setBreakOneLineHeadersMode(cfg->ReadBool(wxT("break_one_line_headers"), false));
 
   if (cfg->ReadBool(wxT("break_lines"), false))
   {
@@ -137,8 +159,9 @@ void FormatterSettings::ApplyTo(astyle::ASFormatter& formatter)
     formatter.setBreakAfterMode(cfg->ReadBool(wxT("break_after_mode"), false));
   }
   else
-    //formatter.setMaxCodeLength(INT_MAX);
-    formatter.setMaxCodeLength(4096); //DEFAULT_MAX_LINELEN
+  {
+    formatter.setMaxCodeLength(INT_MAX);
+  }
 
   formatter.setBreakBlocksMode(cfg->ReadBool(wxT("break_blocks"), true));
   formatter.setBreakClosingHeaderBlocksMode(cfg->ReadBool(wxT("break_blocks_all"), false));
@@ -149,6 +172,11 @@ void FormatterSettings::ApplyTo(astyle::ASFormatter& formatter)
   formatter.setParensUnPaddingMode(cfg->ReadBool(wxT("unpad_parentheses"), true));
   formatter.setDeleteEmptyLinesMode(cfg->ReadBool(wxT("delete_empty_lines"), true));
   formatter.setEmptyLineFill(cfg->ReadBool(wxT("fill_empty_lines"), false));
+  formatter.setCommaPaddingMode(cfg->ReadBool(wxT("pad_comma"), false));
+  formatter.setReturnTypePaddingMode(cfg->ReadBool(wxT("pad_return_type"), false));
+  formatter.setReturnTypeUnPaddingMode(cfg->ReadBool(wxT("unpad_return_type"), false));
+  formatter.setParamTypePaddingMode(cfg->ReadBool(wxT("pad_param_type"), false));
+  formatter.setParamTypeUnPaddingMode(cfg->ReadBool(wxT("unpad_param_type"), false));
 
   wxString pointerAlign = cfg->Read(wxT("pointer_align"), wxEmptyString);
   if      (pointerAlign == wxT("Type"))

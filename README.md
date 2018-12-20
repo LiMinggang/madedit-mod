@@ -1,17 +1,20 @@
-madedit-mod
+madedit-mod [![Build Status](https://img.shields.io/travis/LiMinggang/madedit-mod/master.svg?label=Linux)](https://travis-ci.org/LiMinggang/madedit-mod)[![GitHub Latest release](https://img.shields.io/github/release/LiMinggang/madedit-mod/all.svg)](https://github.com/LiMinggang/madedit-mod/releases)
 ===========
 
 MadEdit Mod(based on the madedit project @ sourceforge)
 
 Based on [madedit@sf](https://sourceforge.net/projects/madedit/). Patched a lot from the contributors because the author is not active any more. The patches includes bug fixing from contributors of Madedit and some bloody edge enhancement. Madedit is one of the best free editor I ever know. See detailed introduction at it homepage. I create this page just for those user who need these features but are not able to build from source code by themselves. Use GPL because the author does.
 
-Anyway, just for fun!
+You're encouraged to translate MadEdit-Mod into your native language if there's not already a translation.
 
-NOTE: The release marked as Selfuse is a bloody edge and buggy one with a lot of enhancement without carefully tested(Eg. Drag and Drop(cross-platform), bookmark, etc). Try it at your own risk. From 2.9.1, the implementation of single instance has to be changed and not compatible with 2.8.x, which means madedit.exe could not behave correctly if another madedit.exe(complied with wxwidgets 2.8.x) were running.
+NOTE:
+
+The release marked as Selfuse is a bloody edge and buggy one with a lot of enhancement without carefully tested(Eg. Drag and Drop(cross-platform), bookmark, etc). Try it at your own risk. From 2.9.1, the implementation of single instance has to be changed and not compatible with 2.8.x, which means madedit.exe could not behave correctly if another madedit.exe(complied with wxwidgets 2.8.x) were running.
 
 Current Feature list(comparing to the original Madedit@sourceforge)
 ===================================================================
 * Original features from MadEdit(Hex Edit, Column Edit, many encodings support, etc) with lots of bug fixes
+* More encodings supported, eg, GB18030, CP874, CP866, KOI8-R and KOI8-U Macintosh encodings(Roman, Japanese, Chinese-trad, Korean, Arabic, Hebrew, Greek, Cyrillic, Thai, Chinese-simp, Central-Eur, Croatian, Icelandic, Romanian) if your system supports
 * Drag&Drop Edit(Cross platform)
 * Bookmark(From Gogo)
 * Bookmark enhancement:Edit functions(Copy/Cut/Delete/Replace bookmarked lines), Bookmark in search
@@ -55,48 +58,70 @@ Current Feature list(comparing to the original Madedit@sourceforge)
 * Interactive scripting(Message box and Input dialog suppored)
 * 64 Bit build (Win64 and x86_x64), GTK+3 support
 
+Translations
+=============================
+* English
+* Chinese Simplified (zh_CN)
+* Chinese Traditional(zh_TW)
+* German(de_DE)              (Not done)
+* Greek(el)
+* Italian(it_IT)             (Not done)
+* Japanese(ja_JP)            (Not done)
+* Polish(pl_PL)              (Not done)
+* Russian(ru_RU)             (Not done)
+* Spanish(es)                (Not done)
+
 News
 =======
-Mod v0.4.3
-1.New: Use dialog to let user choose one for all instead of annoying one by one dialogs
-2.New: Let the user to do the backup selfly #198
-3.New: Use Icon to replace the checkbox on QuickSearch Bar #181
-4.New: Remember pos of all tool Bars
-5.New: Reset tool bars position
-6.New: Insert to the top instead of append to the bottom of search results, expand the last automatically and collapse the last
-7.New: Add InputBox, MsgBox to MadPython so that user can get input or output some message
-8.New: Confirm Undo at the first time if the changes had been saved to disk
-9.New: Add Scripts list to right click menu
-10.New: Remove file from recentlist if could not be opened
-11.New: An Enhanced "Auto-complete" for selection(Option->Edit) #176
-12.New: Scroll function on Righ click menu of scroll bars #157
-13.New: Support selection replace in Typewriter mode
-14.New: Hope typewrite mode could work when use "Backspace" or "Delete" #203
-15.New: Double click to highlight word
-16.New: Enlarge input area of single mode
-17.New: Enhancement for Post-It mode #182
-18.Fix: 0.4.2.1 can not remember the word wrap setting #201
-19.Fix: The fix width in the Option menu can't Open #199
-20.Fix: Improve windows list code, fix a bug of inner-tab drag/reposition(wxAuiNoteBook, http://trac.wxwidgets.org/ticket/17551)
-21.Fix: Assertion failure of FindInFilesDialog
-22.Fix: Assertion failure of MadMacroDlg
-23.Fix: Improve 80 column indicator
-24.Other code improvement
-25.Upgrade boost to 1.61
-26.Update hunspell to 1.41
-27.Update Chinese translation
+Mod v0.4.15
+* New: Use input file ext as SaveAs file type filter
+* New: Use javascript syntax for typescript at first
+* New: ArchLinux/Manjaro package support
+* New: Better Dark theme based on popular ones
+* New: Change default color of active line marker
+* New: Highlight word color can be configed
+* New: Use backgroud color of text for rest of the line
+* Fix: Size issue of MacroDialog
+* Fix: Save new created empty file as would cause crash #271
+* Fix: Upward text selection stops at the top margin of text area #272
+* Fix: After entering and exiting full screen mode, the Macro tool buttons auto appear on the toolbar #273
+* Fix: Bookmark background color could not be saved
+* Update Hunspell to 1.7.0
+* Update dictionary download URL
+* Update translations
 
-Todo:
+Todo
 =====
 * Partial load for large text files which was mentioned by the original author but never getting done.
 * FreeBSD packaging (with FreeBSD 10.01)
+1. configure CC=gcc CXX=g++
+2. aclocal version in aclocal.m4
+3. stdc++ version
 
-Known issues:
+Known issues
 =============
 1. The Macro recording function will save all your commands to one document which
     means it will not record the "switching" between documents.
 2. Search in selection in column mode is not exact the selection highlighted.
-3. Regular expression which relies on characters before/after the matched string, 
-    Eg. (?<=.)\s(?=.), will has issue to be replaced one by one. It's tricky and
-    NP++ has the same issue too.
-4. HighlightWord would not work if the caret is at the end of the line
+3. HighlightWord would not work if the caret is at the end of the line
+4. Scroll function on Right click menu of scroll bars only works with Windows
+
+License
+=============
+* Mixed
+1. GPL for the code from MadEdit and developed by myself
+2. MIT License for the code from Astyle
+3. Boost Software License for boost.python
+4. Python License for miniPython
+5. LGPL for hunspell
+6. Others by the original authors
+
+Thanks
+=============
+* Nikoss   Greek Translation
+* ZhTw2013 Traditional Chinese Translation
+
+Download
+=============
+[Madedit-Mod@sf](https://sourceforge.net/projects/madedit-mod/files/?source=navbar)
+

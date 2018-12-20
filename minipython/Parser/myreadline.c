@@ -53,13 +53,17 @@ my_fgets(char *buf, int len, FILE *fp)
         if (p != NULL)
             return 0; /* No error */
 #ifdef MS_WINDOWS
-        /* In the case of a Ctrl+C or some other external event
-           interrupting the operation:
-           Win2k/NT: ERROR_OPERATION_ABORTED is the most recent Win32
-           error code (and feof() returns TRUE).
-           Win9x: Ctrl+C seems to have no effect on fgets() returning
-           early - the signal handler is called, but the fgets()
-           only returns "normally" (ie, when Enter hit or feof())
+        /* Ctrl-C anywhere on the line or Ctrl-Z if the only character
+           on a line will set ERROR_OPERATION_ABORTED. Under normal
+           circumstances Ctrl-C will also have caused the SIGINT handler
+           to fire. This signal fires in another thread and is not
+           guaranteed to have occurred before this point in the code.
+
+           Therefore: check in a small loop to see if the trigger has
+           fired, in which case assume this is a Ctrl-C event. If it
+           hasn't fired within 10ms assume that this is a Ctrl-Z on its
+           own or that the signal isn't going to fire for some other
+           reason and drop through to check for EOF.
         */
         if (GetLastError()==ERROR_OPERATION_ABORTED) {
             /* Signals come asynchronously, so we sleep a brief

@@ -40,7 +40,7 @@
 #define nsSBCSGroupProber_h__
 
 
-#define NUM_OF_SBCS_PROBERS    13
+#define NUM_OF_SBCS_PROBERS 100
 
 class nsCharSetProber;
 class nsSBCSGroupProber: public nsCharSetProber {
@@ -49,10 +49,10 @@ public:
   virtual ~nsSBCSGroupProber();
   nsProbingState HandleData(const char* aBuf, PRUint32 aLen);
   const char* GetCharSetName();
-  nsProbingState GetState(void) {return mState;};
+  nsProbingState GetState(void) {return mState;}
   void      Reset(void);
   float     GetConfidence(void);
-  void      SetOpion() {};
+  void      SetOpion() {}
 
 #ifdef DEBUG_chardet
   void  DumpStatus();

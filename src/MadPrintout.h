@@ -8,15 +8,16 @@
 
 #ifndef _MADPRINTOUT_H_
 #define _MADPRINTOUT_H_
+#include "MadUtils.h"
 
 class MadPrintout: public wxPrintout
 {
     static int s_PrintoutCount;
 public:
-    MadPrintout(const wxString& title = _("MadEdit-Mod Printout"));
+    explicit MadPrintout(const wxString& title = _("MadEdit-Mod Printout"));
     virtual ~MadPrintout();
 
-    virtual void GetPageInfo(int *minPage, int *maxPage, int *pageFrom, int *pageTo);
+    virtual void GetPageInfo(int *minPage, int *maxPage, int *pageFrom, int *pageTo) wxOVERRIDE;
     virtual bool HasPage(int page);
     virtual bool OnPrintPage(int page);
     

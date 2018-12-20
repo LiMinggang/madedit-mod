@@ -122,13 +122,21 @@ frame_setlineno(PyFrameObject *f, PyObject* p_new_lineno)
         return -1;
     }
 
+    if (f->f_lasti == -1) {
+        PyErr_Format(PyExc_ValueError,
+                     "can't jump from the 'call' trace event of a new frame");
+        return -1;
+    }
     /* You can only do this from within a trace function, not via
      * _getframe or similar hackery. */
-    if (!f->f_trace)
-    {
+    if (!f->f_trace) {
         PyErr_Format(PyExc_ValueError,
-                     "f_lineno can only be set by a"
-                     " line trace function");
+                     "f_lineno can only be set by a trace function");
+        return -1;
+    }
+    if (f->f_stacktop == NULL) {
+        PyErr_SetString(PyExc_ValueError,
+                "can only jump from a 'line' trace event");
         return -1;
     }
 
@@ -177,6 +185,12 @@ frame_setlineno(PyFrameObject *f, PyObject* p_new_lineno)
     PyString_AsStringAndSize(f->f_code->co_code, (char **)&code, &code_len);
     min_addr = MIN(new_lasti, f->f_lasti);
     max_addr = MAX(new_lasti, f->f_lasti);
+    assert(f->f_lasti != -1);
+    if (code[f->f_lasti] == YIELD_VALUE) {
+        PyErr_SetString(PyExc_ValueError,
+                "can't jump from a yield statement");
+        return -1;
+    }
 
     /* You can't jump onto a line with an 'except' statement on it -
      * they expect to have an exception on the top of the stack, which
@@ -340,6 +354,10 @@ frame_setlineno(PyFrameObject *f, PyObject* p_new_lineno)
             PyObject *v = (*--f->f_stacktop);
             Py_DECREF(v);
         }
+        if (b->b_type == SETUP_WITH) {
+            PyObject *v = (*--f->f_stacktop);
+            Py_DECREF(v);
+        }
     }
 
     /* Finally set the new f_lineno and f_lasti and return OK. */
@@ -364,15 +382,13 @@ frame_gettrace(PyFrameObject *f, void *closure)
 static int
 frame_settrace(PyFrameObject *f, PyObject* v, void *closure)
 {
-    PyObject* old_value;
-
     /* We rely on f_lineno being accurate when f_trace is set. */
     f->f_lineno = PyFrame_GetLineNumber(f);
 
-    old_value = f->f_trace;
+    if (v == Py_None)
+        v = NULL;
     Py_XINCREF(v);
-    f->f_trace = v;
-    Py_XDECREF(old_value);
+    Py_XSETREF(f->f_trace, v);
 
     return 0;
 }
@@ -859,8 +875,7 @@ dict_to_map(PyObject *map, Py_ssize_t nmap, PyObject *dict, PyObject **values,
             }
         } else if (values[j] != value) {
             Py_XINCREF(value);
-            Py_XDECREF(values[j]);
-            values[j] = value;
+            Py_XSETREF(values[j], value);
         }
         Py_XDECREF(value);
     }

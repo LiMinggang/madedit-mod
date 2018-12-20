@@ -28,6 +28,7 @@ MadEdit-Mod supports many useful functions, e.g. Bookmark, SyntaxHighlightings, 
 
 MadEdit-Mod is a continually maintained text/hex editor with bug fixes and improvements.
 
+%global debug_package %{nil}
 
 %prep
 %setup
@@ -37,8 +38,9 @@ sed -i 's/^dist_doc_DATA/#dist_doc_DATA/' \
 
 %build
 sh ./autogen.sh
-%configure --with-boost=${HOME}/boost_1_61_0 --with-wxdir=${HOME}/wxWidgets-3.1.0
-make
+%configure --disable-dependency-tracking CFLAGS=-fPIC CPPFLAGS=-fPIC CXXFLAGS=-fPIC --with-boost=${HOME}/boost_1_68_0 --with-wxdir=${HOME}/wxWidgets-3.1.1
+make -j8
+make loc
 strip -s ./madedit
 
 %install
