@@ -126,6 +126,7 @@ Fix: wxAuiNotebook don't show selected tab automatically if it's beyond the view
 Fix: With BOM for UTF8 in New Document settings was ignored #275
 Fix: Saving the default encoding setting when choosing one from the drop down list #275
 Update wxWidgets to 3.1.2
+Update Greek translation(https://github.com/nikoss)
 
 Mod v0.4.15
 1.New: Use input file ext as SaveAs file type filter

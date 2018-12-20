@@ -1,21 +1,20 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
-# Nikos Papadopoulos <nikos <nikos769@yahoo.gr>>, 2016, 2017.
+# Nikos Papadopoulos <nikos <nikos769@yahoo.gr>>, 2016, 2017, 2018.
 msgid ""
 msgstr ""
-"Project-Id-Version: madedit-mod 0.4.11\n"
+"Project-Id-Version: madedit-mod 0.4.15+\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-18 20:24+0800\n"
-"PO-Revision-Date: 2017-11-12 11:03+0800\n"
-"Last-Translator: nikos <nikos769@yahoo.gr>\n"
-"Language-Team: Greek <nikos769@yahoo.gr>\n"
+"PO-Revision-Date: 2018-12-20 10:32+0800\n"
+"Last-Translator: nikos papadopoulos <nikos769@yahoo.gr>\n"
+"Language-Team: https://github.com/nikoss/my-translation-contributions\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 2.2\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: wxstd.po.cpp:2
@@ -618,7 +617,7 @@ msgstr "Αυτό το αρχείο έχει αλλαχτεί από μια άλ�
 
 #: ../src/MadEdit/MadEditBasic.cpp:2777
 msgid "And it has been MODIFIED!!!"
-msgstr ""
+msgstr "Και έχει ΤΡΟΠΟΠΟΙΗΘΕΙ!!!"
 
 #: ../src/MadEdit/MadEditBasic.cpp:2785
 msgid "Do you want to reload it?"
@@ -910,7 +909,7 @@ msgstr "&Έξοδος"
 
 #: ../src/MadEditFrame.cpp:2244
 msgid "Quit MadEdit"
-msgstr " Τερματισμός του ΜαντΈντιτ"
+msgstr "Τερματισμός του ΜαντΈντιτ"
 
 #: ../src/MadEditFrame.cpp:2247
 msgid "&Edit"
@@ -1263,7 +1262,7 @@ msgstr "Μετατροπή της επιλογής σε πλήρους-πλάτ�
 #: ../src/MadSearchReplaceDialog.cpp:2549 ../src/MadMacroDlg.cpp:748
 #: ../src/MadMacroDlg.cpp:752
 msgid "To Fullwidth by Options..."
-msgstr "Σε Πλήρους-πλάτους κατά τις Επιλογές"
+msgstr "Σε Πλήρους-πλάτους κατά τις Επιλογές..."
 
 #: ../src/MadEditFrame.cpp:2333
 msgid "Convert the selection to fullwidth by options"
@@ -1430,7 +1429,7 @@ msgstr "Άμεση αναζήτηση για κάποιο στίχο"
 
 #: ../src/MadEditFrame.cpp:2359
 msgid "&Replace..."
-msgstr "Α&ντικατάσταση"
+msgstr "Α&ντικατάσταση..."
 
 #: ../src/MadEditFrame.cpp:2359
 msgid "Replace a string"
@@ -1623,7 +1622,7 @@ msgstr "Ορισμός στήλης από τον χαρακτήρα Πινακ�
 #: ../src/MadEditFrame.cpp:2496 ../src/MadEditFrame.cpp:5431
 #: ../src/MadEditFrame.cpp:5436
 msgid "Line Spacing: "
-msgstr "Διάστιχο:"
+msgstr "Διάστιχο: "
 
 #: ../src/MadEditFrame.cpp:2497
 msgid "Set line spacing"
@@ -1772,24 +1771,20 @@ msgid "Show/Hide Main Toolbar"
 msgstr "Εμφάνιση  ή Απόκρυψη της Κύριας Γραμμής Εργαλείων"
 
 #: ../src/MadEditFrame.cpp:2549 ../src/MadEditFrame.cpp:10352
-#, fuzzy
 msgid "Lock Toolbar"
-msgstr "Μετάβαση σε Θέση"
+msgstr "Κλείδωμα της Γραμμής Εργαλείων"
 
 #: ../src/MadEditFrame.cpp:2549
-#, fuzzy
 msgid "Lock/Unlock Toolbar"
-msgstr "Μετάβαση σε Θέση"
+msgstr "Κλείδωμα ή Ξεκλείδωμα της Γραμμή Εργαλείων"
 
 #: ../src/MadEditFrame.cpp:2550
-#, fuzzy
 msgid "Toggle Menubar"
 msgstr "Εναλλαγή της Κύριας Γραμμής Εργαλείων"
 
 #: ../src/MadEditFrame.cpp:2550
-#, fuzzy
 msgid "Show/Hide Main Menubar"
-msgstr "Εμφάνιση  ή Απόκρυψη της Κύριας Γραμμής Εργαλείων"
+msgstr "Εμφάνιση  ή Απόκρυψη της Κύριας Γραμμής Εργαλείων με το Μενού"
 
 #: ../src/MadEditFrame.cpp:2553
 msgid "&Text Mode"
@@ -1917,7 +1912,7 @@ msgstr "Αλλαγή των συσχετίσεων των μορφών των α
 
 #: ../src/MadEditFrame.cpp:2577
 msgid "&Source Formatter Settings..."
-msgstr "Ρυθμί&σεις του Μορφοποιητή του Πηγαίου Κώδικα"
+msgstr "Ρυθμί&σεις του Μορφοποιητή του Πηγαίου Κώδικα..."
 
 #: ../src/MadEditFrame.cpp:2577
 msgid "Change source formatter settings"
@@ -1982,7 +1977,7 @@ msgstr "Εισα&γωγή CRLF/0D0A (DOS)"
 #: ../src/MadEditFrame.cpp:2588
 msgid "Insert CR&LF chars when pressing Enter key"
 msgstr ""
-"Εισαγωγή των χαρακτήρων CR&LF όταν πατιέται το κλειδί της εισαγωγής (Enter)"
+"Εισαγωγή των χαρακτήρων CR&LF όταν πατιέται το κλειδί της Εισαγωγής (Enter)"
 
 #: ../src/MadEditFrame.cpp:2589
 msgid "Insert CR/0D (Old &MAC)"
@@ -1991,7 +1986,7 @@ msgstr "Εισαγ&ωγή CR/0D (Παλιό MAC)"
 #: ../src/MadEditFrame.cpp:2589
 msgid "Insert CR char when pressing Enter key"
 msgstr ""
-"Εισαγωγή του χαρακτήρα CR όταν πατιέται το κλειδί της εισαγωγής (Enter)"
+"Εισαγωγή του χαρακτήρα CR όταν πατιέται το κλειδί της Εισαγωγής (Enter)"
 
 #: ../src/MadEditFrame.cpp:2590
 msgid "Insert LF/0A (&UNIX/OSX)"
@@ -2631,7 +2626,7 @@ msgstr "Η δέσμευση μνήμης απέτυχε"
 #: ../src/MadSearchReplaceDialog.cpp:2802 ../src/MadMacroDlg.cpp:208
 #: ../src/MadMacroDlg.cpp:995
 msgid "Error"
-msgstr "Σφάλμα "
+msgstr "Σφάλμα"
 
 #: ../src/MadEditFrame.cpp:5174
 msgid "End Selecting"
@@ -2642,9 +2637,8 @@ msgid "End selecting text"
 msgstr "Τερματισμός της επιλογής κειμένου"
 
 #: ../src/MadEditFrame.cpp:5179
-#, fuzzy
 msgid "Begin Selecting"
-msgstr "Αρχίνισμα της Επιλογής "
+msgstr "Αρχίνισμα της Επιλογής"
 
 #: ../src/MadEditFrame.cpp:5180
 msgid "Begin selecting text"
@@ -2689,29 +2683,27 @@ msgid " might not exist."
 msgstr " ίσως να μην υπάρχει."
 
 #: ../src/MadEditFrame.cpp:6102
-#, fuzzy
 msgid ""
 "There was a problem previewing this document.\n"
 "Perhaps your current printer is not set correctly?"
 msgstr ""
-"Υπήρξε πρόβλημα κατά την προεπισκόπηση.\n"
+"Παρουσιάστηκε κάποιο πρόβλημα κατά την προεπισκόπηση του εγγράφου.\n"
 "Μήπως ο τρέχων εκτυπωτής δεν έχει ρυθμιστεί σωστά;"
 
 #: ../src/MadEditFrame.cpp:6102
 msgid "Previewing"
-msgstr "Προεπισκόπηση"
+msgstr "Γίνεται Προεπισκόπηση"
 
 #: ../src/MadEditFrame.cpp:6106
 msgid "MadEdit Print Preview"
-msgstr "Προεπισκόπηση thw Εκτύπωσης του ΜαντΈντιτ"
+msgstr "Προεπισκόπηση της Εκτύπωσης κατά το ΜαντΈντιτ"
 
 #: ../src/MadEditFrame.cpp:6130
-#, fuzzy
 msgid ""
 "There was a problem printing this document.\n"
 "Perhaps your current printer is not set correctly?"
 msgstr ""
-"Υπήρξε πρόβλημα κατά την εκτύπωση.\n"
+"Υπήρξε πρόβλημα κατά την εκτύπωση του εγγράφου.\n"
 "Μήπως ο τρέχων εκτυπωτής δεν έχει ρυθμιστεί σωστά;"
 
 #: ../src/MadEditFrame.cpp:6201
@@ -2719,6 +2711,9 @@ msgid ""
 " does not exist. It might have been removed. Do you want to removed it from "
 "recent file list?"
 msgstr ""
+" δεν υπάρχει. Ίσως να έχει απομακρυνθεί. \n"
+"\n"
+"Θα ήθελες να απομακρυνθεί από το κατάστιχο των πρόσφατων αρχείων;"
 
 #: ../src/MadEditFrame.cpp:6616 ../src/MadSearchReplaceDialog.cpp:2339
 #: ../src/MadMacroDlg.cpp:535
@@ -2818,9 +2813,8 @@ msgid "Open Mad Macro File"
 msgstr "Άνοιγμα Αρχείου Μακροεντολών του Μαντ"
 
 #: ../src/MadEditFrame.cpp:9388
-#, fuzzy
 msgid "|All files(*;*.*)"
-msgstr "Όλα τα αρχεία (*;*.*)"
+msgstr "|Όλα τα αρχεία (*;*.*)"
 
 #: ../src/MadEditFrame.cpp:9389
 msgid "Mad Macro"
@@ -2829,7 +2823,7 @@ msgstr "Μακροεντολή Μαντ"
 #: ../src/MadEditFrame.cpp:9397
 #, c-format
 msgid "Do you want to overwrite %s ?"
-msgstr "Θέλεις να απανωγραφεί το %s"
+msgstr "Θέλεις να απανωγραφεί το %s ;"
 
 #: ../src/MadEditFrame.cpp:9397
 msgid "Warning"
@@ -2840,22 +2834,20 @@ msgid "Edit Mad Macro File"
 msgstr "Επεξεργασία Ενός Αρχείου Μακροεντολών Μαντ"
 
 #: ../src/MadEditFrame.cpp:10148
-#, fuzzy
 msgid ""
 "Download dictionary at\n"
 "https://github.com/LibreOffice/dictionaries"
 msgstr ""
-"Λήψη του λεξικού από το\n"
-"http://extensions.openoffice.org/"
+"Λήψη του λεξικού από το...\n"
+"https://github.com/LibreOffice/dictionaries"
 
 #: ../src/MadEditFrame.cpp:10149
 msgid "Press OK to visit our HomePage."
 msgstr "Κλίκαρε στο  «Εντάξει» για να επισκεφτείς την Αρχική Ιστοσελίδα."
 
 #: ../src/MadEditFrame.cpp:10354
-#, fuzzy
 msgid "Toggle Main Menubar"
-msgstr "Εναλλαγή της Κύριας Γραμμής Εργαλείων"
+msgstr "Εναλλαγή της Κύριας Γραμμής Εργαλείων με το Μενού"
 
 #: ../src/MadEditFrame.cpp:10448
 msgid "Passed the begin of the file/selection"
@@ -3069,7 +3061,7 @@ msgstr "Χρωματικό Θέμα:"
 
 #: ../src/MadHighlightingDialog.cpp:178
 msgid "You cannot modify the scheme with * sign."
-msgstr "Δεν μπορείς να μετατρέψεις το χρωματικό θέμα με το σύμβολο *"
+msgstr "Δεν μπορείς να μετατρέψεις το χρωματικό θέμα με το σύμβολο * ."
 
 #: ../src/MadHighlightingDialog.cpp:182
 msgid "&Load"
@@ -3161,7 +3153,7 @@ msgstr "Πρόσφατη Θέση Δρομέα"
 
 #: ../src/MadPurgeHistoryDialog.cpp:72
 msgid "Reset Transparency of Search/Replace Dialog"
-msgstr ""
+msgstr "Επαναφορά της Διαφάνειας του Διαλόγου Αναζήτησης και Αντικατάστασης"
 
 #: ../src/MadPurgeHistoryDialog.cpp:75
 msgid "Reset Tool Bars and Information Window Pos"
@@ -3965,7 +3957,7 @@ msgstr "Ενεργοποίηση του Προσωπικού Λεξικού"
 
 #: ../src/MadOptionsDialog.cpp:678
 msgid "Add Keywords from Syntax File"
-msgstr ""
+msgstr "Προσθήκη Λέξεων-Κλειδιών από Αρχείο Σύνταξης"
 
 #: ../src/MadOptionsDialog.cpp:682
 msgid "Language"
@@ -4188,7 +4180,7 @@ msgstr "Μετατροπή της Κωδικοποίησης"
 
 #: ../src/MadConvEncDialog.cpp:50
 msgid "New Encoding:"
-msgstr "Νέα Κωδικοποίηση: "
+msgstr "Νέα Κωδικοποίηση:"
 
 #: ../src/MadConvEncDialog.cpp:59
 msgid "Simplified Chinese => Traditional Chinese"
@@ -4283,7 +4275,6 @@ msgid "Sort Tab(&Path)"
 msgstr "Καρτέλα Ταξινόμησης (&Διαδρομή)"
 
 #: ../src/MadAboutDialog.cpp:24
-#, fuzzy
 msgid ""
 "Copyright (C) 2012-2019 Minggang Li <minggang.li@gmail.com>\n"
 "\n"
@@ -4300,7 +4291,7 @@ msgid ""
 "    You should have received a copy of the GNU General Public License along "
 "with this program.  If not, see <http://www.gnu.org/licenses/>.\n"
 msgstr ""
-"Πνευματικά Δικαιώματα (C) 2012-2017  Minggang Li <minggang.li@gmail.com>\n"
+"Πνευματικά Δικαιώματα (C) 2012-2019 Minggang Li <minggang.li@gmail.com>\n"
 "\n"
 "    Αυτό το πρόγραμμα είναι ένα ελεύθερο λογισμικό: μπορείς να το "
 "αναδιανείμεις και/ή να το μετατρέψεις υπό τους όρους της GNU Γενικής "
@@ -4308,13 +4299,13 @@ msgstr ""
 "Λογισμικού, είτε της έκδοσης 3 της Άδειας, ή (κατά επιλογή σου) της "
 "οποιασδήποτε επόμενης εκδοχής.\n"
 "\n"
-"    Αυτό το πρόγραμμα διανέμεται με την ελπίδα πως θα  είναι χρήσιμο, αλλά "
+"    Αυτό το πρόγραμμα διανέμεται με την ελπίδα πως θα είναι χρήσιμο, αλλά "
 "ΧΩΡΙΣ ΚΑΜΙΑ ΕΓΓΥΗΣΗ· χωρίς ακόμη και την εννοούμενη εγγύηση της "
 "ΕΜΠΟΡΕΥΣΙΜΟΤΗΤΑΣ ή της ΚΑΤΑΛΛΗΛΟΤΗΤΑΣ ΓΙΑ ΕΝΑ ΣΥΓΚΕΚΡΙΜΕΝΟ ΣΚΟΠΟ. Δες την "
 "GNU Γενική Δημόσια Άδεια για περισσότερες λεπτομέρειες.\n"
 "\n"
 "    Θα πρέπει να έχεις λάβεις ένα αντίγραφο της GNU Γενικής Δημόσιας Άδειας "
-"μαζί με αυτό το πρόγραμμα. Αν όχι, τότε δες το <http://www.gnu.org/licenses/"
+"μαζί με αυτό το πρόγραμμα.  Αν όχι, τότε δες το <http://www.gnu.org/licenses/"
 ">.\n"
 
 #: ../src/MadAboutDialog.cpp:38
@@ -4448,7 +4439,7 @@ msgstr "Εκ&τέλεση"
 
 #: ../src/MadMacroDlg.cpp:139
 msgid "Reset"
-msgstr ""
+msgstr "Επαναφορά"
 
 #: ../src/MadMacroDlg.cpp:141 ../src/MadMacroDlg.cpp:248
 msgid "Results >>"
