@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: madedit-mod 0.4.15+\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-18 20:24+0800\n"
-"PO-Revision-Date: 2018-12-20 10:32+0800\n"
+"PO-Revision-Date: 2018-12-19 20:41+0200\n"
 "Last-Translator: nikos papadopoulos <nikos769@yahoo.gr>\n"
 "Language-Team: https://github.com/nikoss/my-translation-contributions\n"
 "Language: el\n"
@@ -14,7 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.0.2\n"
+
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: wxstd.po.cpp:2
