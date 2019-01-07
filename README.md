@@ -1,7 +1,9 @@
 madedit-mod
 ===========
+[![License](https://img.shields.io/badge/license-GPLv3.0%2B-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![Build Status](https://img.shields.io/travis/LiMinggang/madedit-mod/master.svg?label=Linux)](https://travis-ci.org/LiMinggang/madedit-mod)
 [![GitHub Latest release](https://img.shields.io/github/release/LiMinggang/madedit-mod/all.svg)](https://github.com/LiMinggang/madedit-mod/releases)
+[![GitHub issues](https://img.shields.io/github/issues/LiMinggang/madedit-mod.svg)](https://github.com/LiMinggang/madedit-mod/issues)
 [![Maintained](https://img.shields.io/maintenance/yes/2019.svg)](https://github.com/LiMinggang/madedit-mod/commits/master)
  
 MadEdit Mod(based on the madedit project @ sourceforge)
