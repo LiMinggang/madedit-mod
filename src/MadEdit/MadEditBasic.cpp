@@ -2603,7 +2603,7 @@ int MadEdit::Save( bool ask, const wxString &title, bool saveas ) // return YES,
 	wxString filename = m_Lines->m_Name;
 	wxString oldfilename(filename);
 
-	DBOUT( "MadEdit::Save("<<ask<<", " <<title.wc_str()<<", "<< saveas <<")" );
+	DBOUT( "MadEdit::Save("<<ask<<", " <<title.wc_str()<<", "<< saveas <<")\n" );
 
 	if( filename.IsEmpty() )
 	{
