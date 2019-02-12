@@ -38,7 +38,7 @@ sed -i 's/^dist_doc_DATA/#dist_doc_DATA/' \
 
 %build
 sh ./autogen.sh
-%configure --disable-dependency-tracking CFLAGS=-fPIC CPPFLAGS=-fPIC CXXFLAGS=-fPIC --with-boost=${HOME}/boost_1_68_0 --with-wxdir=${HOME}/wxWidgets-3.1.1
+%configure --disable-dependency-tracking CFLAGS=-fPIC CPPFLAGS=-fPIC CXXFLAGS=-fPIC --with-boost=${HOME}/boost_1_68_0 --with-wxdir=${HOME}/wxWidgets-3.1.2
 make -j8
 make loc
 strip -s ./madedit
