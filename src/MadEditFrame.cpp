@@ -4707,11 +4707,25 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 		wxString enc, fn;
 		wxFileOffset pos;
 		int fs, lsp, wm, em;
+		long ll;
 		std::vector<int> bmlines;
 		pos = g_FileCaretPosManager.GetRestoreData( filename, enc, fn, fs, lsp, wm, em, bmlines );
 
 		if((em >= emTextMode && em <= emHexMode) && ((MadEditMode)em != madedit->GetEditMode()))
 			madedit->SetEditMode((MadEditMode)em);
+		else if((em < emTextMode || em > emHexMode)) // New opened
+		{
+			m_Config->Read( wxT( "ViewModeInOpen" ), &ll, 0 );
+			if(ll < 0 || ll > 3) /*{ emTextMode, emColumnMode, emHexMode }*/
+				ll = 0;
+			ll -= 1;
+			if(ll >= 0)
+			{
+				em = (int)ll;
+				if((em >= emTextMode && em <= emHexMode) && ((MadEditMode)em != madedit->GetEditMode()))
+					madedit->SetEditMode((MadEditMode)em);
+			}
+		}
 		if( !fn.IsEmpty() && fs > 0 )
 		{
 			if(madedit->GetEditMode() == emHexMode)
@@ -8524,7 +8538,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& WXUNUSED(event) )
 		// save options
 		wxString oldpath = m_Config->GetPath();
 		m_Config->SetPath( wxT( "/MadEdit" ) );
-		bool rcm, isiot, ai, acp, icp4sel, msc, mscck, mmp, afcp, fwm, twm, abck, ldch;
+		bool rcm, isiot, ai, acp, icp4sel, msc, mscck, mmp, afcp, fwm, twm, abck, ldch, sw;
 		wxString mc, tc, ic, mds;
 		long ll;
 		m_Config->Write( wxT( "/Application/Language" ), g_OptionsDialog->ComboBoxLanguage->GetValue() );
@@ -8533,11 +8547,12 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& WXUNUSED(event) )
 		m_Config->Write( wxT( "RecordCaretMovements" ), rcm );
 		m_Config->Write( wxT( "MaxSizeToLoad" ), g_OptionsDialog->EditMaxSizeToLoad->GetValue() );
 		m_Config->Write( wxT( "MaxTextFileSize" ), g_OptionsDialog->EditMaxTextFileSize->GetValue() );
+		m_Config->Write( wxT( "ViewModeInOpen" ), g_OptionsDialog->ComboBoxViewModeInOpen->GetSelection() );
 		mds = g_OptionsDialog->EditMaxDisplaySize->GetValue();
 		m_Config->Write( wxT( "/UIView/MaxDisplaySize" ), mds );
 		m_Config->Write( wxT( "DefaultEncoding" ), g_OptionsDialog->ComboBoxEncoding->GetValue() );
 		m_Config->Write( wxT( "EnforceDefaultEncoding" ), g_OptionsDialog->CheckBoxSkipAutoEncoding->GetValue() );
-		
+
 		wxString ss;
 		m_Config->Read( wxT( "DefaultTextFont" ), &ss );
 		if(g_OptionsDialog->ComboBoxDefaultFont->GetValue() != ss)
@@ -8617,6 +8632,8 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& WXUNUSED(event) )
 		m_Config->Write( wxT( "TypewriterMode" ), twm );
 		fwm = g_OptionsDialog->CheckBoxFixWidthMode->GetValue();
 		m_Config->Write( wxT( "FixedWidthMode" ), fwm );
+		sw = g_OptionsDialog->CheckBoxIgnoreUndoWrnMsg->GetValue();
+		m_Config->Write( wxT( "IgnoreUndoWarn" ), sw );
 		extern bool g_DoNotSaveSettings;
 		g_DoNotSaveSettings = g_OptionsDialog->CheckBoxDoNotSaveSettings->GetValue();
 		m_Config->Write( wxT( "/Application/ReloadFiles" ), g_OptionsDialog->CheckBoxReloadFiles->GetValue() );

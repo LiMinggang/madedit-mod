@@ -89,6 +89,7 @@ class MadOptionsDialog: public wxDialog
 		wxCheckBox* CheckBoxEnableAutoBackup;
 		wxCheckBox* CheckBoxEnableAutoSave;
 		wxCheckBox* CheckBoxFixWidthMode;
+		wxCheckBox* CheckBoxIgnoreUndoWrnMsg;
 		wxCheckBox* CheckBoxInsertPairForSelection;
 		wxCheckBox* CheckBoxLDClickHighlight;
 		wxCheckBox* CheckBoxMiddleMouseToPaste;
@@ -122,6 +123,7 @@ class MadOptionsDialog: public wxDialog
 		wxComboBox* ComboBoxNewDocEncOther;
 		wxComboBox* ComboBoxNewDocFont;
 		wxComboBox* ComboBoxNewDocSyntax;
+		wxComboBox* ComboBoxViewModeInOpen;
 		wxListBox* ListBoxKeys;
 		wxMenu PopupMenuDateTimeMark;
 		wxMenu PopupMenuPrintMark;

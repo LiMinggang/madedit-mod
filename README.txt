@@ -122,6 +122,8 @@ FreeBSD packaging (with FreeBSD 10.01)
 Mod v0.4.16
 New: Change foreground and backgroud colour for all the text controls in main frame
 New: Lock toolbar position #275
+New: Ignore warning for undo saved changes #280
+New: Override View Mode while opening files(it's only for the newly opened and enforces the opened ones) #278
 Fix: wxAuiNotebook don't show selected tab automatically if it's beyond the view boundary
 Fix: With BOM for UTF8 in New Document settings was ignored #275
 Fix: Saving the default encoding setting when choosing one from the drop down list #275

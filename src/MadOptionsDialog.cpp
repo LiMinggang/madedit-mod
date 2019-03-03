@@ -200,6 +200,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	wxBoxSizer* BoxSizer39;
 	wxBoxSizer* BoxSizer3;
 	wxBoxSizer* BoxSizer40;
+	wxBoxSizer* BoxSizer41;
 	wxBoxSizer* BoxSizer42;
 	wxBoxSizer* BoxSizer43;
 	wxBoxSizer* BoxSizer47;
@@ -245,6 +246,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	wxStaticText* StaticText24;
 	wxStaticText* StaticText25;
 	wxStaticText* StaticText26;
+	wxStaticText* StaticText27;
 	wxStaticText* StaticText2;
 	wxStaticText* StaticText3;
 	wxStaticText* StaticText6;
@@ -314,6 +316,16 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	StaticText5 = new wxStaticText(Panel1, wxID_ANY, _("Max file size to load as a text file"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	BoxSizer17->Add(StaticText5, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer7->Add(BoxSizer17, 0, wxALL|wxEXPAND, 2);
+	BoxSizer41 = new wxBoxSizer(wxHORIZONTAL);
+	ComboBoxViewModeInOpen = new wxComboBox(Panel1, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(160,-1), 0, 0, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("wxID_ANY"));
+	ComboBoxViewModeInOpen->SetSelection( ComboBoxViewModeInOpen->Append(_("Auto")) ); /*{ emTextMode, emColumnMode, emHexMode }*/
+	ComboBoxViewModeInOpen->Append(_("Text"));
+	ComboBoxViewModeInOpen->Append(_("Column"));
+	ComboBoxViewModeInOpen->Append(_("Hex"));
+	BoxSizer41->Add(ComboBoxViewModeInOpen, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
+	StaticText27 = new wxStaticText(Panel1, wxID_ANY, _("View mode while opening file(for text file size)"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	BoxSizer41->Add(StaticText27, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	BoxSizer7->Add(BoxSizer41, 0, wxALL|wxEXPAND, 2);
 	BoxSizer6 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer6->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	EditMaxDisplaySize = new wxTextCtrl(Panel1, wxID_ANY, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
@@ -449,6 +461,9 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	CheckBoxFixWidthMode = new wxCheckBox(Panel2, wxID_ANY, _("Fix width mode"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
 	CheckBoxFixWidthMode->SetValue(false);
 	BoxSizer12->Add(CheckBoxFixWidthMode, 0, wxALL|wxEXPAND, 2);
+	CheckBoxIgnoreUndoWrnMsg = new wxCheckBox(Panel2, wxID_ANY, _("Ignore undo warning message"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
+	CheckBoxIgnoreUndoWrnMsg->SetValue(false);
+	BoxSizer12->Add(CheckBoxIgnoreUndoWrnMsg, 0, wxALL|wxEXPAND, 2);
 	BoxSizer8->Add(BoxSizer12, 0, wxALL|wxEXPAND, 2);
 	Panel2->SetSizer(BoxSizer8);
 	BoxSizer8->Fit(Panel2);
@@ -1028,6 +1043,10 @@ void MadOptionsDialog::LoadOptions(void)
 	EditMaxSizeToLoad->SetValue( wxString() << ll );
 	cfg->Read( wxT( "MaxTextFileSize" ), &ll );
 	EditMaxTextFileSize->SetValue( wxString() << ll );
+	cfg->Read( wxT( "ViewModeInOpen" ), &ll, 0 );
+	if(ll < 0 || ll > 3) /*{ emTextMode, emColumnMode, emHexMode }*/
+		ll = 0; //Auto
+	ComboBoxViewModeInOpen->SetSelection( ll );
 	cfg->Read( wxT( "/UIView/MaxDisplaySize" ), &ll );
 	EditMaxDisplaySize->SetValue( wxString() << ll );
 	ss = _( "System Default" );
@@ -1106,6 +1125,8 @@ void MadOptionsDialog::LoadOptions(void)
 	CheckBoxTypewriterMode->SetValue( bb );
 	cfg->Read( wxT( "FixedWidthMode" ), &bb, false );
 	CheckBoxFixWidthMode->SetValue( bb );
+	cfg->Read( wxT( "IgnoreUndoWarn" ), &bb, false );
+	CheckBoxIgnoreUndoWrnMsg->SetValue( bb );
 	extern bool g_DoNotSaveSettings;
 	CheckBoxDoNotSaveSettings->SetValue( g_DoNotSaveSettings );
 	cfg->Read( wxT( "/Application/ReloadFiles" ), &bb, true );
