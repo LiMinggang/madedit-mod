@@ -128,6 +128,7 @@ Fix: wxAuiNotebook don't show selected tab automatically if it's beyond the view
 Fix: With BOM for UTF8 in New Document settings was ignored #275
 Fix: Saving the default encoding setting when choosing one from the drop down list #275
 Fix: Mouse event issue in handling file changed externally
+Fix: Rollback the change of active line marker width #276
 Update wxWidgets to 3.1.2
 Update Greek translation(https://github.com/nikoss)
 
