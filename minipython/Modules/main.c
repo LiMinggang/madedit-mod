@@ -30,7 +30,7 @@
 
 #include "pygetopt.h"
 
-#define COPYRIGHT  "A Mini Python for embed to C++, Base on 2.7.14 [www.adintr.com]"
+#define COPYRIGHT  "A Mini Python for embed to C++, Base on 2.7.16 [www.adintr.com]"
 
 #ifdef __cplusplus
 extern "C" {

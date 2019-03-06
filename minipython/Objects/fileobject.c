@@ -124,9 +124,11 @@ dircheck(PyFileObject* f)
     int res;
     if (f->f_fp == NULL)
         return f;
+
     Py_BEGIN_ALLOW_THREADS
     res = fstat(fileno(f->f_fp), &buf);
     Py_END_ALLOW_THREADS
+
     if (res == 0 && S_ISDIR(buf.st_mode)) {
         char *msg = strerror(EISDIR);
         PyObject *exc = PyObject_CallFunction(PyExc_IOError, "(isO)",
@@ -1014,8 +1016,10 @@ new_buffersize(PyFileObject *f, size_t currentsize)
     struct stat st;
     int res;
     size_t bufsize = 0;
+
     FILE_BEGIN_ALLOW_THREADS(f)
     res = fstat(fileno(f->f_fp), &st);
+
     if (res == 0) {
         end = st.st_size;
         /* The following is not a bug: we really need to call lseek()
@@ -1027,7 +1031,9 @@ new_buffersize(PyFileObject *f, size_t currentsize)
            works.  We can't use the lseek() value either, because we
            need to take the amount of buffered data into account.
            (Yet another reason why stdio stinks. :-) */
+
         pos = lseek(fileno(f->f_fp), 0L, SEEK_CUR);
+
         if (pos >= 0) {
             pos = ftell(f->f_fp);
         }
@@ -2239,6 +2245,7 @@ static PyGetSetDef file_getsetlist[] = {
 typedef struct {
     char *buf, *bufptr, *bufend;
 } readaheadbuffer;
+
 static void
 drop_readaheadbuffer(readaheadbuffer *rab)
 {
@@ -2344,14 +2351,29 @@ file_iternext(PyFileObject *f)
         return err_mode("reading");
 
     {
+        /*
+          Multiple threads can enter this method while the GIL is released
+          during file read and wreak havoc on the file object's readahead
+          buffer. To avoid dealing with cross-thread coordination issues, we
+          cache the file buffer state locally and only set it back on the file
+          object when we're done.
+        */
         readaheadbuffer rab = {f->f_buf, f->f_bufptr, f->f_bufend};
         f->f_buf = NULL;
         l = readahead_get_line_skip(f, &rab, 0, READAHEAD_BUFSIZE);
+        /*
+          Make sure the file's internal read buffer is cleared out. This will
+          only do anything if some other thread interleaved with us during
+          readahead. We want to drop any changeling buffer, so we don't leak
+          memory. We may lose data, but that's what you get for reading the same
+          file object in multiple threads.
+        */
         drop_file_readahead(f);
         f->f_buf = rab.buf;
         f->f_bufptr = rab.bufptr;
         f->f_bufend = rab.bufend;
     }
+
     if (l == NULL || PyString_GET_SIZE(l) == 0) {
         Py_XDECREF(l);
         return NULL;

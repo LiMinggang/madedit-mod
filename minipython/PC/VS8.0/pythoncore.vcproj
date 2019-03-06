@@ -5,6 +5,7 @@
 	Name="pythoncore"
 	ProjectGUID="{CF7AC3D1-E2DF-41D2-BEA6-1E2556CDEA26}"
 	RootNamespace="pythoncore"
+	TargetFrameworkVersion="131072"
 	>
 	<Platforms>
 		<Platform
@@ -19,9 +20,7 @@
 	<Configurations>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)\"
-			IntermediateDirectory="$(SolutionDir)$(ConfigurationName)\"
-			ConfigurationType="4"
+			ConfigurationType="2"
 			InheritedPropertySheets=".\pyproject.vsprops;.\release.vsprops"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
@@ -44,9 +43,9 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/Zm200 "
-				AdditionalIncludeDirectories="..\..\Python;..\..\Modules\zlib;"
-				PreprocessorDefinitions="Py_BUILD_CORE;Py_NO_ENABLE_SHARED;WIN32"
-				RuntimeLibrary="0"
+				AdditionalIncludeDirectories="..\..\Python;..\..\Modules\zlib"
+				PreprocessorDefinitions="_USRDLL;Py_BUILD_CORE;Py_ENABLE_SHARED;WIN32"
+				RuntimeLibrary="2"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -60,14 +59,22 @@
 			<Tool
 				Name="VCPreLinkEventTool"
 				Description="Generate build information..."
-				CommandLine=""
+				CommandLine="&quot;$(SolutionDir)make_buildinfo.exe&quot; Release"
 			/>
 			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\python27.lib"
+				Name="VCLinkerTool"
+				AdditionalDependencies="getbuildinfo.o"
+				OutputFile="$(OutDir)\$(PyDllName).dll"
+				IgnoreDefaultLibraryNames="libc"
+				ProgramDatabaseFile="$(OutDir)$(PyDllName).pdb"
+				BaseAddress="0x1e000000"
+				ImportLibrary="$(OutDir)$(PyDllName).lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -79,73 +86,7 @@
 				Name="VCFxCopTool"
 			/>
 			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-		</Configuration>
-		<Configuration
-			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)\"
-			IntermediateDirectory="$(SolutionDir)$(ConfigurationName)\"
-			ConfigurationType="4"
-			InheritedPropertySheets=".\pyproject.vsprops;.\debug.vsprops"
-			UseOfMFC="0"
-			ATLMinimizesCRunTimeLibraryUsage="false"
-			CharacterSet="0"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				AdditionalOptions="/Zm200 "
-				Optimization="0"
-				InlineFunctionExpansion="0"
-				EnableIntrinsicFunctions="false"
-				AdditionalIncludeDirectories="..\..\Python;..\..\Modules\zlib"
-				PreprocessorDefinitions="Py_BUILD_CORE;Py_NO_ENABLE_SHARED;WIN32"
-				RuntimeLibrary="1"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-				PreprocessorDefinitions="_DEBUG"
-				Culture="1033"
-				AdditionalIncludeDirectories="..\..\Include"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-				Description="Generate build information..."
-				CommandLine=""
-			/>
-			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)python27_d.lib"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-			/>
-			<Tool
-				Name="VCFxCopTool"
+				Name="VCAppVerifierTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -223,7 +164,82 @@
 				Name="VCAppVerifierTool"
 			/>
 			<Tool
-				Name="VCWebDeploymentTool"
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Debug|Win32"
+			ConfigurationType="2"
+			InheritedPropertySheets=".\pyproject.vsprops;.\debug.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="0"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions="/Zm200 "
+				Optimization="0"
+				InlineFunctionExpansion="0"
+				EnableIntrinsicFunctions="false"
+				AdditionalIncludeDirectories="..\..\Python;..\..\Modules\zlib"
+				PreprocessorDefinitions="_USRDLL;Py_BUILD_CORE;Py_ENABLE_SHARED;WIN32"
+				RuntimeLibrary="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="_DEBUG"
+				Culture="1033"
+				AdditionalIncludeDirectories="..\..\Include"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+				Description="Generate build information..."
+				CommandLine="&quot;$(SolutionDir)make_buildinfo.exe&quot; Debug"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="getbuildinfo.o"
+				OutputFile="$(OutDir)\$(PyDllName)_d.dll"
+				IgnoreDefaultLibraryNames="libc"
+				ProgramDatabaseFile="$(OutDir)$(PyDllName)_d.pdb"
+				BaseAddress="0x1e000000"
+				ImportLibrary="$(OutDir)$(PyDllName)_d.lib"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -304,7 +320,304 @@
 				Name="VCAppVerifierTool"
 			/>
 			<Tool
-				Name="VCWebDeploymentTool"
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="PGInstrument|Win32"
+			ConfigurationType="2"
+			InheritedPropertySheets=".\pyproject.vsprops;.\release.vsprops;.\pginstrument.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions="/Zm200 "
+				AdditionalIncludeDirectories="..\..\Python;..\..\Modules\zlib"
+				PreprocessorDefinitions="_USRDLL;Py_BUILD_CORE;Py_ENABLE_SHARED;WIN32"
+				RuntimeLibrary="2"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG"
+				Culture="1033"
+				AdditionalIncludeDirectories="..\..\Include"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+				Description="Generate build information..."
+				CommandLine="&quot;$(SolutionDir)make_buildinfo.exe&quot; Release"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="getbuildinfo.o"
+				OutputFile="$(OutDir)\$(PyDllName).dll"
+				IgnoreDefaultLibraryNames="libc"
+				ProgramDatabaseFile="$(OutDir)$(PyDllName).pdb"
+				BaseAddress="0x1e000000"
+				ImportLibrary="$(OutDirPGI)$(PyDllName).lib"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="PGInstrument|x64"
+			ConfigurationType="2"
+			InheritedPropertySheets=".\pyproject.vsprops;.\x64.vsprops;.\release.vsprops;.\pginstrument.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions="/Zm200 "
+				AdditionalIncludeDirectories="..\..\Python;..\..\Modules\zlib"
+				PreprocessorDefinitions="_USRDLL;Py_BUILD_CORE;Py_ENABLE_SHARED;WIN32"
+				RuntimeLibrary="2"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG"
+				Culture="1033"
+				AdditionalIncludeDirectories="..\..\Include"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+				Description="Generate build information..."
+				CommandLine="&quot;$(SolutionDir)make_buildinfo.exe&quot; Release"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="getbuildinfo.o"
+				OutputFile="$(OutDir)\$(PyDllName).dll"
+				IgnoreDefaultLibraryNames="libc"
+				ProgramDatabaseFile="$(OutDir)$(PyDllName).pdb"
+				BaseAddress="0x1e000000"
+				ImportLibrary="$(OutDirPGI)$(PyDllName).lib"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="PGUpdate|Win32"
+			ConfigurationType="2"
+			InheritedPropertySheets=".\pyproject.vsprops;.\release.vsprops;.\pgupdate.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions="/Zm200 "
+				AdditionalIncludeDirectories="..\..\Python;..\..\Modules\zlib"
+				PreprocessorDefinitions="_USRDLL;Py_BUILD_CORE;Py_ENABLE_SHARED;WIN32"
+				RuntimeLibrary="2"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG"
+				Culture="1033"
+				AdditionalIncludeDirectories="..\..\Include"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+				Description="Generate build information..."
+				CommandLine="&quot;$(SolutionDir)make_buildinfo.exe&quot; Release"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="getbuildinfo.o"
+				OutputFile="$(OutDir)\$(PyDllName).dll"
+				IgnoreDefaultLibraryNames="libc"
+				ProgramDatabaseFile="$(OutDir)$(PyDllName).pdb"
+				BaseAddress="0x1e000000"
+				ImportLibrary="$(OutDirPGI)$(PyDllName).lib"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="PGUpdate|x64"
+			ConfigurationType="2"
+			InheritedPropertySheets=".\pyproject.vsprops;.\x64.vsprops;.\release.vsprops;.\pgupdate.vsprops"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions="/Zm200 "
+				AdditionalIncludeDirectories="..\..\Python;..\..\Modules\zlib"
+				PreprocessorDefinitions="_USRDLL;Py_BUILD_CORE;Py_ENABLE_SHARED;WIN32"
+				RuntimeLibrary="2"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG"
+				Culture="1033"
+				AdditionalIncludeDirectories="..\..\Include"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+				Description="Generate build information..."
+				CommandLine="&quot;$(SolutionDir)make_buildinfo.exe&quot; Release"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="getbuildinfo.o"
+				OutputFile="$(OutDir)\$(PyDllName).dll"
+				IgnoreDefaultLibraryNames="libc"
+				ProgramDatabaseFile="$(OutDir)$(PyDllName).pdb"
+				BaseAddress="0x1e000000"
+				ImportLibrary="$(OutDirPGI)$(PyDllName).lib"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -342,11 +655,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\Include\bytearrayobject.h"
+				RelativePath="..\..\Include\bytes_methods.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\Include\bytes_methods.h"
+				RelativePath="..\..\Include\bytearrayobject.h"
 				>
 			</File>
 			<File
@@ -383,6 +696,14 @@
 			</File>
 			<File
 				RelativePath="..\..\Include\complexobject.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Include\cStringIO.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Include\datetime.h"
 				>
 			</File>
 			<File
@@ -467,6 +788,10 @@
 			</File>
 			<File
 				RelativePath="..\..\Include\marshal.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Include\memoryobject.h"
 				>
 			</File>
 			<File
@@ -666,7 +991,43 @@
 			Name="Modules"
 			>
 			<File
+				RelativePath="..\..\Modules\_bisectmodule.c"
+				>
+			</File>
+			<File
 				RelativePath="..\..\Modules\_codecsmodule.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\_collectionsmodule.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\_csv.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\_functoolsmodule.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\_heapqmodule.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\_hotshot.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\_json.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\_localemodule.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\_lsprof.c"
 				>
 			</File>
 			<File
@@ -675,6 +1036,50 @@
 			</File>
 			<File
 				RelativePath="..\..\Modules\_math.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\_randommodule.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\_sre.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\_struct.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\_weakref.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\arraymodule.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\audioop.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\binascii.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\cmathmodule.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\cPickle.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\cStringIO.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\datetimemodule.c"
 				>
 			</File>
 			<File
@@ -690,6 +1095,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\Modules\imageop.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\itertoolsmodule.c"
+				>
+			</File>
+			<File
 				RelativePath="..\..\Modules\main.c"
 				>
 			</File>
@@ -698,7 +1111,55 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\Modules\md5.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\md5.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\md5module.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\mmapmodule.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\operator.c"
+				>
+			</File>
+			<File
 				RelativePath="..\..\Modules\parsermodule.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\posixmodule.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\rotatingtree.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\rotatingtree.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\sha256module.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\sha512module.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\shamodule.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\signalmodule.c"
 				>
 			</File>
 			<File
@@ -707,6 +1168,18 @@
 			</File>
 			<File
 				RelativePath="..\..\Modules\symtablemodule.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\threadmodule.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\timemodule.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Modules\xxsubtype.c"
 				>
 			</File>
 			<File
@@ -745,7 +1218,19 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\Modules\zlib\gzio.c"
+					RelativePath="..\..\Modules\zlib\gzclose.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Modules\zlib\gzlib.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Modules\zlib\gzread.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Modules\zlib\gzwrite.c"
 					>
 				</File>
 				<File
@@ -813,6 +1298,114 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="cjkcodecs"
+				>
+				<File
+					RelativePath="..\..\Modules\cjkcodecs\_codecs_cn.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Modules\cjkcodecs\_codecs_hk.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Modules\cjkcodecs\_codecs_iso2022.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Modules\cjkcodecs\_codecs_jp.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Modules\cjkcodecs\_codecs_kr.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Modules\cjkcodecs\_codecs_tw.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Modules\cjkcodecs\alg_jisx0201.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Modules\cjkcodecs\cjkcodecs.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Modules\cjkcodecs\emu_jisx0213_2000.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Modules\cjkcodecs\mappings_cn.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Modules\cjkcodecs\mappings_hk.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Modules\cjkcodecs\mappings_jisx0213_pair.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Modules\cjkcodecs\mappings_jp.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Modules\cjkcodecs\mappings_kr.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Modules\cjkcodecs\mappings_tw.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Modules\cjkcodecs\multibytecodec.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Modules\cjkcodecs\multibytecodec.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="_io"
+				>
+				<File
+					RelativePath="..\..\Modules\_io\_iomodule.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Modules\_io\_iomodule.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Modules\_io\bufferedio.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Modules\_io\bytesio.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Modules\_io\fileio.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Modules\_io\iobase.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Modules\_io\stringio.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\Modules\_io\textio.c"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Objects"
@@ -827,6 +1420,14 @@
 			</File>
 			<File
 				RelativePath="..\..\Objects\bufferobject.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Objects\bytes_methods.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Objects\bytearrayobject.c"
 				>
 			</File>
 			<File
@@ -915,6 +1516,10 @@
 			</File>
 			<File
 				RelativePath="..\..\Objects\longobject.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Objects\memoryobject.c"
 				>
 			</File>
 			<File
@@ -1050,6 +1655,14 @@
 			Name="PC"
 			>
 			<File
+				RelativePath="..\..\PC\_subprocess.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\PC\_winreg.c"
+				>
+			</File>
+			<File
 				RelativePath="..\..\PC\config.c"
 				>
 			</File>
@@ -1062,15 +1675,15 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\Modules\getbuildinfo.c"
-				>
-			</File>
-			<File
 				RelativePath="..\..\PC\getpathp.c"
 				>
 			</File>
 			<File
 				RelativePath="..\..\PC\import_nt.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\PC\msvcrtmodule.c"
 				>
 			</File>
 			<File
@@ -1231,6 +1844,10 @@
 			</File>
 			<File
 				RelativePath="..\..\Python\pythonrun.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\Python\random.c"
 				>
 			</File>
 			<File

@@ -1075,6 +1075,7 @@ compiler_addop_j(struct compiler *c, int opcode, basicblock *b, int absolute)
         return 0; \
 }
 
+/* Same as ADDOP_O, but steals a reference. */
 #define ADDOP_N(C, OP, O, TYPE) { \
     if (!compiler_addop_o((C), (OP), (C)->u->u_ ## TYPE, (O))) { \
         Py_DECREF((O)); \
@@ -1984,6 +1985,7 @@ compiler_from_import(struct compiler *c, stmt_ty s)
         return 0;
     }
     ADDOP_N(c, LOAD_CONST, level, consts);
+
     names = PyTuple_New(n);
     if (!names)
         return 0;

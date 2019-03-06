@@ -56,6 +56,13 @@ extern void init_functools(void);
 extern void init_json(void);
 extern void initzlib(void);
 
+extern void init_multibytecodec(void);
+extern void init_codecs_cn(void);
+extern void init_codecs_hk(void);
+extern void init_codecs_iso2022(void);
+extern void init_codecs_jp(void);
+extern void init_codecs_kr(void);
+extern void init_codecs_tw(void);
 extern void init_subprocess(void);
 extern void init_lsprof(void);
 extern void init_ast(void);

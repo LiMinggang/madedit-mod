@@ -1,4 +1,3 @@
-
 /* Float object implementation */
 
 /* XXX There should be overflow checks here, but it's hard to check
@@ -429,7 +428,7 @@ float_richcompare(PyObject *v, PyObject *w, int op)
         j = PyFloat_AS_DOUBLE(w);
 
     else if (!Py_IS_FINITE(i)) {
-        if (PyInt_Check(w) || PyLong_Check(w))
+        if (_PyAnyInt_Check(w))
             /* If i is an infinity, its magnitude exceeds any
              * finite integer, so it doesn't matter which int we
              * compare i with.  If i is a NaN, similarly.

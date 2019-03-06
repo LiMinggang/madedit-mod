@@ -589,6 +589,7 @@ PyGILState_Ensure(void)
     int current;
     PyThreadState *tcur;
     int need_init_threads = 0;
+
     /* Note that we do not auto-init Python here - apart from
        potential races with 2 threads auto-initializing, pep-311
        spells out other issues.  Embedders are expected to have
@@ -598,6 +599,7 @@ PyGILState_Ensure(void)
     tcur = (PyThreadState *)PyThread_get_key_value(autoTLSkey);
     if (tcur == NULL) {
         need_init_threads = 1;
+
         /* Create a new thread state for this thread */
         tcur = PyThreadState_New(autoInterpreterState);
         if (tcur == NULL)
@@ -610,9 +612,11 @@ PyGILState_Ensure(void)
     else {
         current = PyThreadState_IsCurrent(tcur);
     }
+
     if (current == 0) {
         PyEval_RestoreThread(tcur);
     }
+
     /* Update our counter in the thread-state - no need for locks:
        - tcur will remain valid as we hold the GIL.
        - the counter is safe as we are the only thread "allowed"
@@ -626,6 +630,7 @@ PyGILState_Ensure(void)
            GIL. */
         PyEval_InitThreads();
     }
+
     return current ? PyGILState_LOCKED : PyGILState_UNLOCKED;
 }
 

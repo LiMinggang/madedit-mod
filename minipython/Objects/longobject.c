@@ -1723,7 +1723,7 @@ PyLong_FromString(char *str, char **pend, int base)
 
     if ((base != 0 && base < 2) || base > 36) {
         PyErr_SetString(PyExc_ValueError,
-                        "long() arg 2 must be >= 2 and <= 36");
+                        "long() base must be >= 2 and <= 36, or 0");
         return NULL;
     }
     while (*str != '\0' && isspace(Py_CHARMASK(*str)))
@@ -2743,7 +2743,7 @@ k_mul(PyLongObject *a, PyLongObject *b)
     /* If a is small compared to b, splitting on b gives a degenerate
      * case with ah==0, and Karatsuba may be (even much) less efficient
      * than "grade school" then.  However, we can still win, by viewing
-     * b as a string of "big digits", each of width a->ob_size.  That
+     * b as a string of "big digits", each of width Py_SIZE(a).  That
      * leads to a sequence of balanced calls to k_mul.
      */
     if (2 * asize <= bsize)
@@ -2911,7 +2911,7 @@ ah*bh and al*bl too.
 
 /* b has at least twice the digits of a, and a is big enough that Karatsuba
  * would pay off *if* the inputs had balanced sizes.  View b as a sequence
- * of slices, each with a->ob_size digits, and multiply the slices by a,
+ * of slices, each with Py_SIZE(a) digits, and multiply the slices by a,
  * one at a time.  This gives k_mul balanced inputs to work with, and is
  * also cache-friendly (we compute one double-width slice of the result
  * at a time, then move on, never backtracking except for the helpful

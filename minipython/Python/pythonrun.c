@@ -37,14 +37,6 @@
 #include "windows.h"
 #endif
 
-#ifndef Py_REF_DEBUG
-#define PRINT_TOTAL_REFS()
-#else /* Py_REF_DEBUG */
-#define PRINT_TOTAL_REFS() fprintf(stderr,                              \
-                   "[%" PY_FORMAT_SIZE_T "d refs]\n",                   \
-                   _Py_GetRefTotal())
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -1144,7 +1136,7 @@ handle_system_exit(void)
         /* If we failed to dig out the 'code' attribute,
            just let the else clause below print the error. */
     }
-    if (PyInt_Check(value) || PyLong_Check(value))
+    if (_PyAnyInt_Check(value))
         exitcode = (int)PyInt_AsLong(value);
     else {
         PyObject *sys_stderr = PySys_GetObject("stderr");
@@ -1598,7 +1590,7 @@ err_input(perrdetail *err)
     errtype = PyExc_SyntaxError;
     switch (err->error) {
     case E_ERROR:
-        return;
+        goto cleanup;
     case E_SYNTAX:
         errtype = PyExc_IndentationError;
         if (err->expected == INDENT)
@@ -1662,6 +1654,9 @@ err_input(perrdetail *err)
         Py_XDECREF(tb);
         break;
     }
+    case E_IO:
+        msg = "I/O error while reading";
+        break;
     case E_LINECONT:
         msg = "unexpected character after line continuation character";
         break;

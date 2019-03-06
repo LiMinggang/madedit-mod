@@ -130,6 +130,7 @@ Fix: Saving the default encoding setting when choosing one from the drop down li
 Fix: Mouse event issue in handling file changed externally
 Fix: Rollback the change of active line marker width #276
 Update wxWidgets to 3.1.2
+Update python to 2.7.16
 Update Greek translation(https://github.com/nikoss)
 
 Mod v0.4.15
