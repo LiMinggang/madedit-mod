@@ -78,22 +78,21 @@ Translations
 
 News
 =======
-Mod v0.4.15
-* New: Use input file ext as SaveAs file type filter
-* New: Use javascript syntax for typescript at first
-* New: ArchLinux/Manjaro package support
-* New: Better Dark theme based on popular ones
-* New: Change default color of active line marker
-* New: Highlight word color can be configed
-* New: Use backgroud color of text for rest of the line
-* Fix: Size issue of MacroDialog
-* Fix: Save new created empty file as would cause crash #271
-* Fix: Upward text selection stops at the top margin of text area #272
-* Fix: After entering and exiting full screen mode, the Macro tool buttons auto appear on the toolbar #273
-* Fix: Bookmark background color could not be saved
-* Update Hunspell to 1.7.0
-* Update dictionary download URL
-* Update translations
+Mod v0.4.16
+* New: Change foreground and backgroud colour for all the text controls in main frame
+* New: Lock toolbar position #275
+* New: Ignore warning for undo saved changes #280
+* New: Override View Mode while opening files(it's only for the newly opened and enforces the opened ones) #278
+* New: Config entry for active line marker width #276
+* Fix: wxAuiNotebook don't show selected tab automatically if it's beyond the view boundary
+* Fix: With BOM for UTF8 in New Document settings was ignored #275
+* Fix: Saving the default encoding setting when choosing one from the drop down list #275
+* Fix: Mouse event issue in handling file changed externally
+* Fix: Rollback the change of active line marker width #276
+* Update wxWidgets to 3.1.2
+* Update python to 2.7.16
+* Update Greek translation(https://github.com/nikoss)
+* Update Chinese translations
 
 Todo
 =====

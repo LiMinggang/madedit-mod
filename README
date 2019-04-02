@@ -122,6 +122,22 @@ FreeBSD packaging (with FreeBSD 10.01)
 2. aclocal version in aclocal.m4
 3. stdc++ version
 
+Mod v0.4.16
+1.New: Change foreground and backgroud colour for all the text controls in main frame
+2.New: Lock toolbar position #275
+3.New: Ignore warning for undo saved changes #280
+4.New: Override View Mode while opening files(it's only for the newly opened and enforces the opened ones) #278
+5.New: Config entry for active line marker width #276
+6.Fix: wxAuiNotebook don't show selected tab automatically if it's beyond the view boundary
+7.Fix: With BOM for UTF8 in New Document settings was ignored #275
+8.Fix: Saving the default encoding setting when choosing one from the drop down list #275
+9.Fix: Mouse event issue in handling file changed externally
+10.Fix: Rollback the change of active line marker width #276
+11.Update wxWidgets to 3.1.2
+12.Update python to 2.7.16
+13.Update Greek translation(https://github.com/nikoss)
+14.Update Chinese translations
+
 Mod v0.4.15
 1.New: Use input file ext as SaveAs file type filter
 2.New: Use javascript syntax for typescript at first
