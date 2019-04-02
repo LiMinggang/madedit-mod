@@ -774,6 +774,7 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_ClientWidth = m_ClientHeight = 0;
 	m_Config = wxConfigBase::Get( false );
 	m_Config->SetPath( wxT( "/MadEdit" ) );
+	m_ActiveLMSize = m_Config->ReadLong( wxT( "ActiveLineMarkerSize" ), 1 );
 	wxString defaultenc;
 	m_Config->Read( wxT( "DefaultEncoding" ), &defaultenc );
 	m_Syntax = MadSyntax::GetSyntaxByTitle( wxGetTranslation(MadPlainTextTitle) );
@@ -11295,7 +11296,7 @@ void MadEdit::OnPaint( wxPaintEvent & WXUNUSED(evt) )
 				}
 
 				wxColor &c = m_Syntax->GetAttributes( aeActiveLine )->color;
-				markdc.SetPen( *( wxThePenList->FindOrCreatePen( c, 1, wxPENSTYLE_SOLID ) ) );
+				markdc.SetPen( *( wxThePenList->FindOrCreatePen( c, m_ActiveLMSize, wxPENSTYLE_SOLID ) ) );
 				markdc.SetBrush( *wxTRANSPARENT_BRUSH );
 				markdc.DrawRectangle( x, y, w, h );
 			}

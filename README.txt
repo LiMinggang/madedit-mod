@@ -124,6 +124,7 @@ New: Change foreground and backgroud colour for all the text controls in main fr
 New: Lock toolbar position #275
 New: Ignore warning for undo saved changes #280
 New: Override View Mode while opening files(it's only for the newly opened and enforces the opened ones) #278
+New: Config entry for active line marker width #276
 Fix: wxAuiNotebook don't show selected tab automatically if it's beyond the view boundary
 Fix: With BOM for UTF8 in New Document settings was ignored #275
 Fix: Saving the default encoding setting when choosing one from the drop down list #275

@@ -455,6 +455,7 @@ private:
     long           m_VSMousePos;
     long           m_HSMousePos;
     int            m_MaxDisplaySize;
+    int            m_ActiveLMSize;
 	bool           m_SpellCheck;
 	bool           m_BookmarkInSearch;
     bool           m_TypewriterMode;
