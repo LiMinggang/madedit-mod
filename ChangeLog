@@ -4,15 +4,16 @@
 	3.New: Ignore warning for undo saved changes #280
 	4.New: Override View Mode while opening files(it's only for the newly opened and enforces the opened ones) #278
 	5.New: Config entry for active line marker width #276
-	6.Fix: wxAuiNotebook don't show selected tab automatically if it's beyond the view boundary
-	7.Fix: With BOM for UTF8 in New Document settings was ignored #275
-	8.Fix: Saving the default encoding setting when choosing one from the drop down list #275
-	9.Fix: Mouse event issue in handling file changed externally
-	10.Fix: Rollback the change of active line marker width #276
-	11.Update wxWidgets to 3.1.2
-	12.Update python to 2.7.16
-	13.Update Greek translation(https://github.com/nikoss)
-	14.Update Chinese translations
+	6.New: Multiple words can be highlighted at the same time #281
+	7.Fix: wxAuiNotebook don't show selected tab automatically if it's beyond the view boundary
+	8.Fix: With BOM for UTF8 in New Document settings was ignored #275
+	9.Fix: Saving the default encoding setting when choosing one from the drop down list #275
+	10.Fix: Mouse event issue in handling file changed externally
+	11.Fix: Rollback the change of active line marker width #276
+	12.Update wxWidgets to 3.1.2
+	13.Update python to 2.7.16
+	14.Update Greek translation(https://github.com/nikoss)
+	15.Update Chinese translations
 
 2018-11-29  Minggang Li <minggang.li@gmail.com>
 	1.New: Use input file ext as SaveAs file type filter

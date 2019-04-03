@@ -15,6 +15,7 @@
 #else
 	#include <memory>
 #endif
+#include <set>
 
 #include <wx/wxprec.h>
 
@@ -286,7 +287,7 @@ private:
 	int             *m_WCWidthBuffer;
 
 	//highlight words
-	vector<ucs4_t>  m_HighlightWords;
+	std::set< vector<ucs4_t> > m_HighlightWords;
 
 	wxBitmap        *m_ClientBitmap, *m_MarkBitmap;
 	int             m_LastPaintBitmap;// 0:client, 1:mark

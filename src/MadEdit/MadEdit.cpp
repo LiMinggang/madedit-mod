@@ -2238,25 +2238,39 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 							int pensize = 1;
 							//static ucs4_t data[] = {117, 115, 101 ,114};//"user"
 							int nowright = left;
-							if( !m_HighlightWords.empty() && ( wordlength == (int)m_HighlightWords.size() ) && IsTheSame<ucs4_t>( m_HighlightWords, m_WordBuffer, m_HighlightWords.size() ) )
+							bool nothighlighted = true;
+							if( !m_HighlightWords.empty() )
 							{
-								//static wxColour hlBgColor( 0x11, 0x3D, 0x6F );
-								MadAttributes* attr = GetSyntax()->GetAttributes(aeHighlightWord);
-								wxASSERT(attr != 0);
-								fclr = &attr->color;
-								if(current_bgcolor != attr->bgcolor)
+								vector<ucs4_t> newword;
+								newword.reserve(wordlength);
+								for( size_t i = 0; i < wordlength; ++i )
 								{
-									current_bgcolor = attr->bgcolor;
-									newBg = true;
-									const int *pw = m_WidthBuffer;
-									for( int i = 0; i < wordlength && nowright < maxright; ++i )
+									newword.push_back( m_WordBuffer[i] );
+								}
+
+								std::set< vector<ucs4_t> >::iterator it = m_HighlightWords.find(newword);
+								if (it != m_HighlightWords.end())
+								{
+									//static wxColour hlBgColor( 0x11, 0x3D, 0x6F );
+									MadAttributes* attr = GetSyntax()->GetAttributes(aeHighlightWord);
+									wxASSERT(attr != 0);
+									fclr = &attr->color;
+									if(current_bgcolor != attr->bgcolor)
 									{
-										int ucw = *pw++;
-										nowright += ucw;
+										current_bgcolor = attr->bgcolor;
+										newBg = true;
+										const int *pw = m_WidthBuffer;
+										for( int i = 0; i < wordlength && nowright < maxright; ++i )
+										{
+											int ucw = *pw++;
+											nowright += ucw;
+										}
 									}
+									nothighlighted = false;
 								}
 							}
-							else
+
+							if(nothighlighted)
 							{
 								if( m_Syntax->nw_BgColor != current_bgcolor )
 								{
@@ -2269,6 +2283,7 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 
 							if(newBg)
 							{
+								wxASSERT(fclr != 0);
 								dc->SetPen( *( wxThePenList->FindOrCreatePen( *fclr, pensize, wxPENSTYLE_SOLID ) ) );
 								dc->SetBrush( *( wxTheBrushList->FindOrCreateBrush( current_bgcolor ) ) );
 								dc->DrawRectangle( left, row_top, nowright - left, m_RowHeight );

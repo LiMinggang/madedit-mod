@@ -1645,41 +1645,26 @@ void MadEdit::HighlightWords()
 	if( !ucqueue.empty() && type != 0 )
 	{
 		//wxASSERT(type != 0);
+		vector<ucs4_t> highlightword;
 		size_t s = ucqueue.size();
-
-		if( s != m_HighlightWords.size() )
+		highlightword.reserve(s);
+		for( size_t i = 0; i < s; ++i )
 		{
-			m_HighlightWords.clear();
+			highlightword.push_back( ucqueue[i].first );
+		}
 
-			for( size_t i = 0; i < s; ++i )
-			{
-				m_HighlightWords.push_back( ucqueue[i].first );
-			}
+		std::set< vector<ucs4_t> >::iterator it = m_HighlightWords.find(highlightword);
+		if (it != m_HighlightWords.end())
+		{
+			m_HighlightWords.erase(it);
 		}
 		else
 		{
-			bool toggleHighlight = true;
-
-			for( size_t i = 0; i < s; ++i )
-			{
-				if( m_HighlightWords[i] != ucqueue[i].first )
-				{
-					toggleHighlight = false;
-					m_HighlightWords[i] = ucqueue[i].first;
-				}
-			}
-
-			if( toggleHighlight )
-			{
-				m_HighlightWords.clear();
-			}
+			m_HighlightWords.insert(highlightword);
 		}
+		m_RepaintAll = true;
+		Refresh( false );
 	}
-	else
-		m_HighlightWords.clear();
-
-	m_RepaintAll = true;
-	Refresh( false );
 }
 
 void MadEdit::SelectAll()
