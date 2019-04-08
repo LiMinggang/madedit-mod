@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.16\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-02 16:15+0800\n"
-"PO-Revision-Date: 2019-04-04 18:35+0800\n"
+"PO-Revision-Date: 2019-04-08 12:03+0800\n"
 "Last-Translator: zhtw2013 <zhtw2013@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
 "Language: zh_TW\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.2.1\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Language: zh_TW\n"
 "X-Source-Language: C\n"
@@ -481,7 +481,7 @@ msgstr "對不起，沒有足夠記憶體來建立文件預覽。"
 
 #: wxstd.po.cpp:116
 msgid "Print Preview Failure"
-msgstr "預覽列印失敗。"
+msgstr "預覽列印失敗"
 
 #: wxstd.po.cpp:117
 #, c-format
@@ -661,7 +661,7 @@ msgstr "正在搜尋 %s"
 
 #: ../src/MadEditApp.cpp:378
 msgid "Failed to create an IPC service."
-msgstr "建立IPC（處理程序間通訊）失敗"
+msgstr "建立IPC（處理程序間通訊）失敗。"
 
 #: ../src/MadEditApp.cpp:433
 msgid ""
@@ -2866,7 +2866,7 @@ msgstr "刪除 ->"
 
 #: ../src/MadFileAssociationDialog.cpp:350
 msgid "Predefined File Types:"
-msgstr "預先定義的類型"
+msgstr "預先定義的類型："
 
 #: ../src/MadFileAssociationDialog.cpp:359
 msgid "<- Add Custom File Type"
@@ -3019,7 +3019,7 @@ msgstr "配色："
 
 #: ../src/MadHighlightingDialog.cpp:178
 msgid "You cannot modify the scheme with * sign."
-msgstr "不能修改標示著 * 號的配色"
+msgstr "不能修改標示著 * 號的配色。"
 
 #: ../src/MadHighlightingDialog.cpp:182
 msgid "&Load"
@@ -3205,7 +3205,7 @@ msgstr "取代(&E) >>"
 #: ../src/MadSearchReplaceDialog.cpp:1657
 #: ../src/MadSearchReplaceDialog.cpp:1826
 msgid "Cannot find the matched string"
-msgstr "找不到符合的字串。"
+msgstr "找不到符合的字串"
 
 #: ../src/MadSearchReplaceDialog.cpp:667 ../src/MadSearchReplaceDialog.cpp:813
 msgid "Cannot find the matched string."
@@ -3315,7 +3315,7 @@ msgstr "範例"
 
 #: ../src/MadSourceFormatDialog.cpp:104
 msgid "Sample of the bracket style option chosen to use:"
-msgstr "所選擇使用的大括號格式樣例"
+msgstr "所選擇使用的大括號格式樣例："
 
 #: ../src/MadSourceFormatDialog.cpp:205
 msgid "Attach Classes"
