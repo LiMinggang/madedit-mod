@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.16\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-02 16:15+0800\n"
-"PO-Revision-Date: 2018-11-13 15:36+0800\n"
-"Last-Translator: zhtw <zhtw2013@gmail.com>\n"
+"PO-Revision-Date: 2019-04-04 18:35+0800\n"
+"Last-Translator: zhtw2013 <zhtw2013@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -554,9 +554,9 @@ msgid ""
 "\n"
 "Do you want to continue?"
 msgstr ""
-"你將會恢復已經存檔的變更。\n"
+"將會還原已經儲存的變更。\n"
 "\n"
-"繼續？"
+"要繼續嗎？"
 
 #: ../src/MadEdit/MadEditBasic.cpp:2508 ../src/MadEdit/MadEditBasic.cpp:2566
 #: ../src/MadEditFrame.cpp:4639
@@ -610,15 +610,15 @@ msgstr "儲存檔案"
 
 #: ../src/MadEdit/MadEditBasic.cpp:2708
 msgid "Do you want to discard changes?"
-msgstr "要放棄所做的修改嗎？"
+msgstr "要放棄所做的變更嗎？"
 
 #: ../src/MadEdit/MadEditBasic.cpp:2772
 msgid "This file has been changed by another application."
-msgstr "這個檔案被其它程式修改過了。"
+msgstr "這個檔案被其它程式變更過了。"
 
 #: ../src/MadEdit/MadEditBasic.cpp:2777
 msgid "And it has been MODIFIED!!!"
-msgstr ""
+msgstr "並且有未存檔的修改！！"
 
 #: ../src/MadEdit/MadEditBasic.cpp:2785
 msgid "Do you want to reload it?"
@@ -626,7 +626,7 @@ msgstr "要重新載入這個檔案嗎？"
 
 #: ../src/MadEdit/MadEditBasic.cpp:2788
 msgid "I.e. DISCARD changes?"
-msgstr ""
+msgstr "即：放棄變更？"
 
 #: ../src/MadEdit/MadEditBasic.cpp:3081
 msgid "The input string is not a valid Hex-String:"
@@ -1093,7 +1093,7 @@ msgstr "複製未標記的行"
 
 #: ../src/MadEditFrame.cpp:2307
 msgid "Cut Unmarked Lines"
-msgstr "剪切未標記的行"
+msgstr "剪下未標記的行"
 
 #: ../src/MadEditFrame.cpp:2308
 msgid "Delete Unmarked Lines"
@@ -1755,23 +1755,20 @@ msgid "Show/Hide Main Toolbar"
 msgstr "顯示/隱藏主工具列"
 
 #: ../src/MadEditFrame.cpp:2549 ../src/MadEditFrame.cpp:10372
-#, fuzzy
 msgid "Lock Toolbar"
 msgstr "跳到檔案位置"
 
 #: ../src/MadEditFrame.cpp:2549
-#, fuzzy
 msgid "Lock/Unlock Toolbar"
-msgstr "跳到檔案位置"
+msgstr "鎖定/解鎖工具列"
 
 #: ../src/MadEditFrame.cpp:2550
 msgid "Toggle Menubar"
 msgstr "切換顯示功能表列"
 
 #: ../src/MadEditFrame.cpp:2550
-#, fuzzy
 msgid "Show/Hide Main Menubar"
-msgstr "顯示/隱藏主工具列"
+msgstr "顯示/隱藏主功能表列"
 
 #: ../src/MadEditFrame.cpp:2553
 msgid "&Text Mode"
@@ -1879,15 +1876,15 @@ msgstr "選項(&O)..."
 
 #: ../src/MadEditFrame.cpp:2572
 msgid "Change the configuration"
-msgstr "修改設定"
+msgstr "變更設定"
 
 #: ../src/MadEditFrame.cpp:2573
 msgid "&Syntax Highlighting Settings..."
-msgstr "語法高亮度設定(&S)..."
+msgstr "語法醒目提示設定(&S)..."
 
 #: ../src/MadEditFrame.cpp:2573
 msgid "Change syntax highlighting settings"
-msgstr "修改語法高亮度設定"
+msgstr "變更語法醒目提示設定"
 
 #: ../src/MadEditFrame.cpp:2575
 msgid "&File Type Associations..."
@@ -1895,7 +1892,7 @@ msgstr "檔案關聯(&F)..."
 
 #: ../src/MadEditFrame.cpp:2575
 msgid "Change file type associations"
-msgstr "修改檔案關聯設定"
+msgstr "變更檔案關聯設定"
 
 #: ../src/MadEditFrame.cpp:2577
 msgid "&Source Formatter Settings..."
@@ -2676,7 +2673,7 @@ msgstr ""
 msgid ""
 " does not exist. It might have been removed. Do you want to removed it from "
 "recent file list?"
-msgstr ""
+msgstr "不存在。檔案可能已經被刪除了。您希望將它從最近造訪檔案清單中刪除嗎？"
 
 #: ../src/MadEditFrame.cpp:6633 ../src/MadSearchReplaceDialog.cpp:2339
 #: ../src/MadMacroDlg.cpp:535
@@ -3014,7 +3011,7 @@ msgstr "路徑"
 
 #: ../src/MadHighlightingDialog.cpp:167
 msgid "Syntax Highlighting Settings"
-msgstr "語法高亮度設定"
+msgstr "語法醒目提示設定"
 
 #: ../src/MadHighlightingDialog.cpp:174
 msgid "Scheme:"
@@ -3114,7 +3111,7 @@ msgstr "近期游標在檔案中的位置"
 
 #: ../src/MadPurgeHistoryDialog.cpp:72
 msgid "Reset Transparency of Search/Replace Dialog"
-msgstr ""
+msgstr "重設尋找取代對話方塊的透明度"
 
 #: ../src/MadPurgeHistoryDialog.cpp:75
 msgid "Reset Tool Bars and Information Window Pos"
@@ -3620,26 +3617,24 @@ msgid "Max file size to load as a text file"
 msgstr "以文字檔案方式開啟的最大檔案長度，超過時以十六進位模式開啟"
 
 #: ../src/MadOptionsDialog.cpp:321
-#, fuzzy
 msgid "Auto"
-msgstr "自動儲存"
+msgstr "自動"
 
 #: ../src/MadOptionsDialog.cpp:322
 msgid "Text"
 msgstr "文字"
 
 #: ../src/MadOptionsDialog.cpp:323
-#, fuzzy
 msgid "Column"
 msgstr "區塊模式"
 
 #: ../src/MadOptionsDialog.cpp:324
 msgid "Hex"
-msgstr ""
+msgstr "十六進位顯示"
 
 #: ../src/MadOptionsDialog.cpp:326
 msgid "View mode while opening file(for text file size)"
-msgstr ""
+msgstr "開啟檔案（文字文件尺寸）時的顯示模式"
 
 #: ../src/MadOptionsDialog.cpp:334
 msgid "Max chars displayed in search results"
@@ -3747,7 +3742,7 @@ msgstr "列模式複製時自動填入行"
 
 #: ../src/MadOptionsDialog.cpp:455
 msgid "Left double click to highlight"
-msgstr "雙按左鍵進行文字標明"
+msgstr "按兩下左鍵進行文字標明"
 
 #: ../src/MadOptionsDialog.cpp:458
 msgid "Typewriter mode"
@@ -3759,7 +3754,7 @@ msgstr "固定寬度模式"
 
 #: ../src/MadOptionsDialog.cpp:464
 msgid "Ignore undo warning message"
-msgstr ""
+msgstr "忽略還原警告訊息"
 
 #: ../src/MadOptionsDialog.cpp:474
 msgid "Line Ending"
@@ -3794,7 +3789,7 @@ msgstr "字型大小:"
 
 #: ../src/MadOptionsDialog.cpp:538
 msgid "Print Syntax Highlighter"
-msgstr "列印語法高亮度"
+msgstr "列印語法色彩"
 
 #: ../src/MadOptionsDialog.cpp:541
 msgid "Print Line Number"
@@ -3890,7 +3885,7 @@ msgstr "使用個人字典"
 
 #: ../src/MadOptionsDialog.cpp:693
 msgid "Add Keywords from Syntax File"
-msgstr ""
+msgstr "將語法檔案中的關鍵字加入字典"
 
 #: ../src/MadOptionsDialog.cpp:697
 msgid "Language"
@@ -4201,7 +4196,6 @@ msgid "Sort Tab(&Path)"
 msgstr "按路徑排序(&P)"
 
 #: ../src/MadAboutDialog.cpp:24
-#, fuzzy
 msgid ""
 "Copyright (C) 2012-2019 Minggang Li <minggang.li@gmail.com>\n"
 "\n"
@@ -4218,17 +4212,17 @@ msgid ""
 "    You should have received a copy of the GNU General Public License along "
 "with this program.  If not, see <http://www.gnu.org/licenses/>.\n"
 msgstr ""
-"著作權所有(C) 2012-2017 Minggang Li <minggang.li@gmail.com>\n"
+"著作權所有(C) 2012-2019 Minggang Li <minggang.li@gmail.com>\n"
 "\n"
-"本程式為自由軟體；您可依據自由軟體基金會所發表的GNU通用公共授權條款規定，就本"
-"程式再為發佈與／或變更；無論您依據的是本授權的第二版或（您自行選擇的）任一日"
-"期後發行的版本。\n"
+"本程式為自由軟體；您可依據自由軟體基金會所發表的 GNU 通用公共授權條款規定，就"
+"本程式再為發佈與／或變更；無論您依據的是本授權的第二版或（您自行選擇的）任一"
+"日期後發行的版本。\n"
 "\n"
 "本程式是依據使用目的而加以發佈，然而不負任何擔保責任；亦無對適售性或特定目的"
-"適用性所為的默示性擔保。詳情請參照GNU通用公共授權。\n"
+"適用性所為的默示性擔保。詳情請參照 GNU 通用公共授權。\n"
 "\n"
-"您應已收到附隨於本程式的GNU通用公共授權的副本；如果沒有，參見<http://www.gnu."
-"org/licenses/>。\n"
+"您應已收到附隨於本程式的 GNU 通用公共授權的副本；如果沒有，參見<http://www."
+"gnu.org/licenses/>。\n"
 
 #: ../src/MadAboutDialog.cpp:38
 msgid "Current maintainer"
@@ -4361,7 +4355,7 @@ msgstr "執行(&R)"
 
 #: ../src/MadMacroDlg.cpp:139
 msgid "Reset"
-msgstr "重置"
+msgstr "重設"
 
 #: ../src/MadMacroDlg.cpp:141 ../src/MadMacroDlg.cpp:248
 msgid "Results >>"
@@ -4373,7 +4367,7 @@ msgstr "隱藏結果 <<"
 
 #: ../src/MadPrintout.h:17
 msgid "MadEdit-Mod Printout"
-msgstr "MadEdit-Mod預覽列印"
+msgstr "MadEdit-Mod 預覽列印"
 
 #: ../spellchecker/HunspellInterface.cpp:389
 #, c-format
@@ -5220,7 +5214,7 @@ msgstr "不確定如何更新%s的可能值（依據%s的值）"
 #~ msgstr "檢查新版本的 MadEdit"
 
 #~ msgid "Show about dialog"
-#~ msgstr "顯示關於對話框"
+#~ msgstr "顯示關於對話方塊"
 
 #~ msgid "MadEdit, a cross-platform Text/Hex Editor"
 #~ msgstr "MadEdit：跨平台的文字/十六進位編輯器"
@@ -5301,8 +5295,8 @@ msgstr "不確定如何更新%s的可能值（依據%s的值）"
 #~ "MadEdit %s is available. \n"
 #~ "Click OK to open the download page."
 #~ msgstr ""
-#~ "可升級 MadEdit 到 %s。\n"
-#~ "單按「確定」開啟下載頁。"
+#~ "可升級 MadEdit 至 %s。\n"
+#~ "點選「確定」開啟下載頁面。"
 
 #~ msgid "MadEdit is already the newest version."
 #~ msgstr "MadEdit 已經是最新版本了。"
