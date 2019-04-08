@@ -13,7 +13,7 @@
 	12.Update wxWidgets to 3.1.2
 	13.Update python to 2.7.16
 	14.Update Greek translation(https://github.com/nikoss)
-	15.Update Chinese translations
+	15.Update Chinese translations(ZhTw2013)
 
 2018-11-29  Minggang Li <minggang.li@gmail.com>
 	1.New: Use input file ext as SaveAs file type filter

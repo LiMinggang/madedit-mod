@@ -135,7 +135,7 @@ Mod v0.4.16
 13.Update wxWidgets to 3.1.2
 14.Update python to 2.7.16
 15.Update Greek translation(https://github.com/nikoss)
-16.Update Chinese translations
+16.Update Chinese translations(ZhTw2013)
 
 Mod v0.4.15
 1.New: Use input file ext as SaveAs file type filter

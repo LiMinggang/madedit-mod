@@ -94,7 +94,7 @@ Mod v0.4.16
 * Update wxWidgets to 3.1.2
 * Update python to 2.7.16
 * Update Greek translation(https://github.com/nikoss)
-* Update Chinese translations
+* Update Chinese translations(ZhTw2013)
 
 Todo
 =====
