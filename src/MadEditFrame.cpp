@@ -6340,6 +6340,8 @@ void MadEditFrame::OnEditDelete( wxCommandEvent& WXUNUSED(event) )
 	if( g_ActiveMadEdit )
 	{
 		g_ActiveMadEdit->Delete();
+		if( IsMacroRecording() )
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "Delete()" ) ) );
 	}
 }
 
@@ -6348,6 +6350,8 @@ void MadEditFrame::OnEditCutLine( wxCommandEvent& WXUNUSED(event) )
 	if( g_ActiveMadEdit )
 	{
 		g_ActiveMadEdit->CutLine();
+		if( IsMacroRecording() )
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "CutLine()" ) ) );
 	}
 }
 
@@ -6356,6 +6360,8 @@ void MadEditFrame::OnEditDeleteLine( wxCommandEvent& WXUNUSED(event) )
 	if( g_ActiveMadEdit )
 	{
 		g_ActiveMadEdit->DeleteLine();
+		if( IsMacroRecording() )
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "DeleteLine()" ) ) );
 	}
 }
 
@@ -6383,6 +6389,8 @@ void MadEditFrame::OnEditInsertTabChar( wxCommandEvent& WXUNUSED(event) )
 	if( g_ActiveMadEdit )
 	{
 		g_ActiveMadEdit->InsertTabChar();
+		if( IsMacroRecording() )
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "InsertTabChar()" ) ) );
 	}
 }
 

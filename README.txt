@@ -119,6 +119,9 @@ FreeBSD packaging (with FreeBSD 10.01)
 2. aclocal version in aclocal.m4
 3. stdc++ version
 
+Mod v0.4.17
+New: MadPython recording enhencement to support keyboard commands
+
 Mod v0.4.16
 1.New: Change foreground and backgroud colour for all the text controls in main frame
 2.New: Lock toolbar position #275

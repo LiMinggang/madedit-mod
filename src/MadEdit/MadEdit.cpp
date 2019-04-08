@@ -88,6 +88,7 @@ using std::list;
 static inline int wxChCmp( const wchar_t * wchStr, const wxString & wsStr );
 extern bool IsMacroRecording();
 extern void RecordAsMadMacro( MadEdit *, const wxString&, bool=false);
+extern bool FromCmdToString( wxString &cmdStr, long madCmd );
 
 MadKeyBindings MadEdit::ms_KeyBindings;
 
@@ -8675,9 +8676,6 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 				case ecReturnNoIndent:
 					if( !IsReadOnly() && !m_SingleLineMode )
 					{
-						if(IsMacroRecording())
-							RecordAsMadMacro( this, wxString(wxT("ProcessCommand( MadEditCommand.Return )")));
-						
 						if( m_Selection && m_EditMode == emColumnMode )
 						{
 							DeleteSelection( true, nullptr, false );
@@ -9140,11 +9138,6 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 				case ecBackSpace:
 					if( !IsReadOnly() )
 					{
-						if((!m_SingleLineMode) && IsMacroRecording())
-						{
-							RecordAsMadMacro( this, wxString(wxT("ProcessCommand( MadEditCommand.BackSpace )")));
-						}
-
 						int oldsubrowid = m_CaretPos.subrowid, oldlineid = m_CaretPos.lineid;
 
 						if( m_Selection )
@@ -9961,7 +9954,7 @@ void MadEdit::OnKeyDown( wxKeyEvent& evt )
 
 	if( cmd != ecNone )
 	{
-		wxLogDebug( wxT( "edit cmd: %X" ), cmd );
+		//wxLogDebug( wxT( "edit cmd: %X" ), cmd );
 
 		if( cmd == ecToggleWindow )
 		{
@@ -9990,6 +9983,12 @@ void MadEdit::OnKeyDown( wxKeyEvent& evt )
 		else //--------------------------
 			ProcessCommand( cmd );
 
+		if(IsMacroRecording())
+		{
+			wxString cmdStr;
+			if(FromCmdToString( cmdStr, cmd ))
+				RecordAsMadMacro( this, cmdStr ); 
+		}
 #ifdef __WXMSW__
 
 		if( key == int( evt.GetUnicodeKey() ) )

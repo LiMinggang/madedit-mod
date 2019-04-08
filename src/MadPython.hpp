@@ -45,310 +45,306 @@ extern int MadMessageBox( const wxString& message,
 // Ugly bigger switch than bigger map
 bool FromCmdToString( wxString &cmdStr, long madCmd ) {
 	switch( madCmd ) {
-	case ecCharFirst:
-		cmdStr << ( wxT( "MadEditCommand.CharFirst" ) );
-		break;
-
-	case ecCharLast:
-		cmdStr << ( wxT( "MadEditCommand.CharLast" ) );
-		break;
-
-	case ecCaretCommandFirst:
-		cmdStr << ( wxT( "MadEditCommand.CaretCommandFirst" ) );
-		break;
-
-	case ecLeft:
-		cmdStr << ( wxT( "MadEditCommand.Left" ) );
-		break;
-
-	case ecRight:
-		cmdStr << ( wxT( "MadEditCommand.Right" ) );
-		break;
-
-	case ecUp:
-		cmdStr << ( wxT( "MadEditCommand.Up" ) );
-		break;
-
-	case ecDown:
-		cmdStr << ( wxT( "MadEditCommand.Down" ) );
-		break;
-
-	case ecBeginLine:
-		cmdStr << ( wxT( "MadEditCommand.BeginLine" ) );
-		break;
-
-	case ecEndLine:
-		cmdStr << ( wxT( "MadEditCommand.EndLine" ) );
-		break;
-
-	case ecBeginDoc:
-		cmdStr << ( wxT( "MadEditCommand.BeginDoc" ) );
-		break;
-
-	case ecEndDoc:
-		cmdStr << ( wxT( "MadEditCommand.EndDoc" ) );
-		break;
-
-	case ecPrevPage:
-		cmdStr << ( wxT( "MadEditCommand.PrevPage" ) );
-		break;
-
-	case ecNextPage:
-		cmdStr << ( wxT( "MadEditCommand.NextPage" ) );
-		break;
-
-	case ecPrevWord:
-		cmdStr << ( wxT( "MadEditCommand.PrevWord" ) );
-		break;
-
-	case ecNextWord:
-		cmdStr << ( wxT( "MadEditCommand.NextWord" ) );
-		break;
-
-	case ecLeftBrace:
-		cmdStr << ( wxT( "MadEditCommand.LeftBrace" ) );
-		break;
-
-	case ecRightBrace:
-		cmdStr << ( wxT( "MadEditCommand.RightBrace" ) );
-		break;
-
-	case ecCaretCommandLast:
-		cmdStr << ( wxT( "MadEditCommand.CaretCommandLast" ) );
-		break;
-
-	case ecSelCommandFirst:
-		cmdStr << ( wxT( "MadEditCommand.SelCommandFirst" ) );
-		break;
-
-	case ecSelLeft:
-		cmdStr << ( wxT( "MadEditCommand.SelLeft" ) );
-		break;
-
-	case ecSelRight:
-		cmdStr << ( wxT( "MadEditCommand.SelRight" ) );
-		break;
-
-	case ecSelUp:
-		cmdStr << ( wxT( "MadEditCommand.SelUp" ) );
-		break;
-
-	case ecSelDown:
-		cmdStr << ( wxT( "MadEditCommand.SelDown" ) );
-		break;
-
-	case ecSelBeginLine:
-		cmdStr << ( wxT( "MadEditCommand.SelBeginLine" ) );
-		break;
-
-	case ecSelEndLine:
-		cmdStr << ( wxT( "MadEditCommand.SelEndLine" ) );
-		break;
-
-	case ecSelBeginDoc:
-		cmdStr << ( wxT( "MadEditCommand.SelBeginDoc" ) );
-		break;
-
-	case ecSelEndDoc:
-		cmdStr << ( wxT( "MadEditCommand.SelEndDoc" ) );
-		break;
-
-	case ecSelPrevPage:
-		cmdStr << ( wxT( "MadEditCommand.SelPrevPage" ) );
-		break;
-
-	case ecSelNextPage:
-		cmdStr << ( wxT( "MadEditCommand.SelNextPage" ) );
-		break;
-
-	case ecSelPrevWord:
-		cmdStr << ( wxT( "MadEditCommand.SelPrevWord" ) );
-		break;
-
-	case ecSelNextWord:
-		cmdStr << ( wxT( "MadEditCommand.SelNextWord" ) );
-		break;
-
-	case ecSelLeftBrace:
-		cmdStr << ( wxT( "MadEditCommand.SelLeftBrace" ) );
-		break;
-
-	case ecSelRightBrace:
-		cmdStr << ( wxT( "MadEditCommand.SelRightBrace" ) );
-		break;
-
-	case ecSelCommandLast:
-		cmdStr << ( wxT( "MadEditCommand.SelCommandLast" ) );
-		break;
-
-	case ecHighlightWords:
-		cmdStr << ( wxT( "MadEditCommand.HighlightWords" ) );
-		break;
-
-	case ecSelectAll:
-		cmdStr << ( wxT( "MadEditCommand.SelectAll" ) );
-		break;
-
-	case ecScrollLineUp:
-		cmdStr << ( wxT( "MadEditCommand.ScrollLineUp" ) );
-		break;
-
-	case ecScrollLineDown:
-		cmdStr << ( wxT( "MadEditCommand.ScrollLineDown" ) );
-		break;
-
-	case ecScrollPageUp:
-		cmdStr << ( wxT( "MadEditCommand.ScrollPageUp" ) );
-		break;
-
-	case ecScrollPageDown:
-		cmdStr << ( wxT( "MadEditCommand.ScrollPageDown" ) );
-		break;
-
-	case ecScrollLeft:
-		cmdStr << ( wxT( "MadEditCommand.ScrollLeft" ) );
-		break;
-
-	case ecScrollRight:
-		cmdStr << ( wxT( "MadEditCommand.ScrollRight" ) );
-		break;
-
-	case ecReturn:
-		cmdStr << ( wxT( "MadEditCommand.Return" ) );
-		break;
-
-	case ecReturnNoIndent:
-		cmdStr << ( wxT( "MadEditCommand.ReturnNoIndent" ) );
-		break;
-
-	case ecTab:
-		cmdStr << ( wxT( "MadEditCommand.Tab" ) );
-		break;
-
-	case ecInsertTabChar:
-		cmdStr << ( wxT( "MadEditCommand.InsertTabChar" ) );
-		break;
-
-	case ecDelete:
-		cmdStr << ( wxT( "MadEditCommand.Delete" ) );
-		break;
-
-	case ecBackSpace:
-		cmdStr << ( wxT( "MadEditCommand.BackSpace" ) );
-		break;
-
-	case ecDelPrevWord:
-		cmdStr << ( wxT( "MadEditCommand.DelPrevWord" ) );
-		break;
-
-	case ecDelNextWord:
-		cmdStr << ( wxT( "MadEditCommand.DelNextWord" ) );
-		break;
-#if 0
-		//case ecCutLine:
-		//    cmdStr<<(wxT("MadEditCommand.CutLine"));
-		//    break;
-		//case ecDeleteLine:
-		//    cmdStr<<(wxT("MadEditCommand.DeleteLine"));
-		//    break;
-		//case ecUndo:
-		//    cmdStr<<(wxT("MadEditCommand.Undo"));
-		//    break;
-		//case ecRedo:
-		//    cmdStr<<(wxT("MadEditCommand.Redo"));
-		//    break;
-		//case ecCut:
-		//    cmdStr<<(wxT("MadEditCommand.Cut"));
-		//    break;
-		//case ecCopy:
-		cmdStr << ( wxT( "MadEditCommand.Copy" ) );
-		break;
-
-	case ecPaste:
-		cmdStr << ( wxT( "MadEditCommand.Paste" ) );
-		break;
-
-	case ecToggleInsertMode:
-		cmdStr << ( wxT( "MadEditCommand.ToggleInsertMode" ) );
-		break;
-
-	case ecTextMode:
-		cmdStr << ( wxT( "MadEditCommand.TextMode" ) );
-		break;
-
-	case ecColumnMode:
-		cmdStr << ( wxT( "MadEditCommand.ColumnMode" ) );
-		break;
-
-	case ecHexMode:
-		cmdStr << ( wxT( "MadEditCommand.HexMode" ) );
-		break;
-
-	case ecNoWrap:
-		cmdStr << ( wxT( "MadEditCommand.NoWrap" ) );
-		break;
-
-	case ecWrapByWindow:
-		cmdStr << ( wxT( "MadEditCommand.WrapByWindow" ) );
-		break;
-
-	case ecWrapByColumn:
-		cmdStr << ( wxT( "MadEditCommand.WrapByColumn" ) );
-		break;
-
-	case ecToggleWindow:
-		cmdStr << ( wxT( "MadEditCommand.ToggleWindow" ) );
-		break;
-
-	case ecIncreaseIndent:
-		cmdStr << ( wxT( "MadEditCommand.IncreaseIndent" ) );
-		break;
-
-	case ecDecreaseIndent:
-		cmdStr << ( wxT( "MadEditCommand.DecreaseIndent" ) );
-		break;
-
-	case ecComment:
-		cmdStr << ( wxT( "MadEditCommand.Comment" ) );
-		break;
-
-	case ecUncomment:
-		cmdStr << ( wxT( "MadEditCommand.Uncomment" ) );
-		break;
-
-	case ecToUpperCase:
-		cmdStr << ( wxT( "MadEditCommand.ToUpperCase" ) );
-		break;
-
-	case ecToLowerCase:
-		cmdStr << ( wxT( "MadEditCommand.ToLowerCase" ) );
-		break;
-
-	case ecInvertCase:
-		cmdStr << ( wxT( "MadEditCommand.InvertCase" ) );
-		break;
-
-	case ecToHalfWidth:
-		cmdStr << ( wxT( "MadEditCommand.ToHalfWidth" ) );
-		break;
-
-	case ecToFullWidth:
-		cmdStr << ( wxT( "MadEditCommand.ToFullWidth" ) );
-		break;
-
-	case ecInsertDateTime:
-		cmdStr << ( wxT( "MadEditCommand.InsertDateTime" ) );
-		break;
-
-	case ecMouseNotify:
-		cmdStr << ( wxT( "MadEditCommand.MouseNotify" ) );
-		break;
-#endif
-
-	default:
-		cmdStr << ( wxT( "MadEditCommand.None)" ) );
-		return false;
-		break;
+		case ecCharFirst:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.CharFirst)" ) );
+			break;
+		
+		case ecCharLast:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.CharLast)" ) );
+			break;
+		
+		case ecCaretCommandFirst:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.CaretCommandFirst)" ) );
+			break;
+		
+		case ecLeft:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.Left)" ) );
+			break;
+		
+		case ecRight:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.Right)" ) );
+			break;
+		
+		case ecUp:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.Up)" ) );
+			break;
+		
+		case ecDown:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.Down)" ) );
+			break;
+		
+		case ecBeginLine:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.BeginLine)" ) );
+			break;
+		
+		case ecEndLine:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.EndLine)" ) );
+			break;
+		
+		case ecBeginDoc:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.BeginDoc)" ) );
+			break;
+		
+		case ecEndDoc:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.EndDoc)" ) );
+			break;
+		
+		case ecPrevPage:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.PrevPage)" ) );
+			break;
+		
+		case ecNextPage:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.NextPage)" ) );
+			break;
+		
+		case ecPrevWord:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.PrevWord)" ) );
+			break;
+		
+		case ecNextWord:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.NextWord)" ) );
+			break;
+		
+		case ecLeftBrace:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.LeftBrace)" ) );
+			break;
+		
+		case ecRightBrace:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.RightBrace)" ) );
+			break;
+		
+		case ecCaretCommandLast:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.CaretCommandLast)" ) );
+			break;
+		
+		case ecSelCommandFirst:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.SelCommandFirst)" ) );
+			break;
+		
+		case ecSelLeft:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.SelLeft)" ) );
+			break;
+		
+		case ecSelRight:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.SelRight)" ) );
+			break;
+		
+		case ecSelUp:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.SelUp)" ) );
+			break;
+		
+		case ecSelDown:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.SelDown)" ) );
+			break;
+		
+		case ecSelBeginLine:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.SelBeginLine)" ) );
+			break;
+		
+		case ecSelEndLine:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.SelEndLine)" ) );
+			break;
+		
+		case ecSelBeginDoc:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.SelBeginDoc)" ) );
+			break;
+		
+		case ecSelEndDoc:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.SelEndDoc)" ) );
+			break;
+		
+		case ecSelPrevPage:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.SelPrevPage)" ) );
+			break;
+		
+		case ecSelNextPage:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.SelNextPage)" ) );
+			break;
+		
+		case ecSelPrevWord:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.SelPrevWord)" ) );
+			break;
+		
+		case ecSelNextWord:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.SelNextWord)" ) );
+			break;
+		
+		case ecSelLeftBrace:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.SelLeftBrace)" ) );
+			break;
+		
+		case ecSelRightBrace:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.SelRightBrace)" ) );
+			break;
+		
+		case ecSelCommandLast:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.SelCommandLast)" ) );
+			break;
+		
+		case ecHighlightWords:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.HighlightWords)" ) );
+			break;
+		
+		case ecSelectAll:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.SelectAll)" ) );
+			break;
+		
+		case ecScrollLineUp:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.ScrollLineUp)" ) );
+			break;
+		
+		case ecScrollLineDown:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.ScrollLineDown)" ) );
+			break;
+		
+		case ecScrollPageUp:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.ScrollPageUp)" ) );
+			break;
+		
+		case ecScrollPageDown:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.ScrollPageDown)" ) );
+			break;
+		
+		case ecScrollLeft:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.ScrollLeft)" ) );
+			break;
+		
+		case ecScrollRight:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.ScrollRight)" ) );
+			break;
+		
+		case ecReturn:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.Return)" ) );
+			break;
+		
+		case ecReturnNoIndent:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.ReturnNoIndent)" ) );
+			break;
+		
+		case ecTab:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.Tab)" ) );
+			break;
+		
+		case ecInsertTabChar:
+			cmdStr << ( wxT( "InsertTabChar()" ) );
+			break;
+		
+		case ecDelete:
+			cmdStr << ( wxT( "Delete()" ) );
+			break;
+		
+		case ecBackSpace:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.BackSpace)" ) );
+			break;
+		
+		case ecDelPrevWord:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.DelPrevWord)" ) );
+			break;
+		
+		case ecDelNextWord:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.DelNextWord)" ) );
+			break;
+		case ecCutLine:
+			cmdStr<< ( wxT( "CutLine()" ) );
+			break;
+		case ecDeleteLine:
+			cmdStr<< ( wxT( "DeleteLine()" ) );
+			break;
+		case ecUndo:
+			cmdStr<< ( wxT( "Undo()" ) );
+			break;
+		case ecRedo:
+			cmdStr<< ( wxT( "Redo()" ) );
+			break;
+		case ecCut:
+			cmdStr<< ( wxT( "Cut()" ) );
+			break;
+		case ecCopy:
+			cmdStr << ( wxT( "Copy()" ) );
+			break;
+		case ecPaste:
+			cmdStr << ( wxT( "PasteFromClipboard()" ) );
+			break;
+		
+		case ecToggleInsertMode:
+			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.ToggleInsertMode)" ) );
+			break;
+		
+		case ecTextMode:
+			cmdStr << ( wxT( "SetEditMode(MadEditMode.TextMode)" ) );
+			break;
+		
+		case ecColumnMode:
+			cmdStr << ( wxT( "SetEditMode(MadEditMode.ColumnMode)" ) );
+			break;
+		
+		case ecHexMode:
+			cmdStr << ( wxT( "SetEditMode(MadEditMode.HexMode)" ) );
+			break;
+		
+		case ecNoWrap:
+			cmdStr << ( wxT( "SetWordWrapMode(MadWordWrapMode.NoWrap)" ) );
+			break;
+		
+		case ecWrapByWindow:
+			cmdStr << ( wxT( "SetWordWrapMode(MadWordWrapMode.WrapByWindow)" ) );
+			break;
+		
+		case ecWrapByColumn:
+			cmdStr << ( wxT( "SetWordWrapMode(MadWordWrapMode.WrapByColumn)" ) );
+			break;
+
+		//case ecToggleWindow:
+		//	cmdStr << ( wxT( "ProcessCommand(MadEditCommand.ToggleWindow)" ) );
+		//	break;
+		
+		case ecIncreaseIndent:
+			cmdStr << ( wxT( "IncreaseDecreaseIndent(True)" ) );
+			break;
+		
+		case ecDecreaseIndent:
+			cmdStr << ( wxT( "IncreaseDecreaseIndent(False)" ) );
+			break;
+		
+		case ecComment:
+			cmdStr << ( wxT( "CommentUncomment(True)" ) );
+			break;
+		
+		case ecUncomment:
+			cmdStr << ( wxT( "CommentUncomment(False)" ) );
+			break;
+		
+		case ecToUpperCase:
+			cmdStr << ( wxT( "ToUpperCase()" ) );
+			break;
+		
+		case ecToLowerCase:
+			cmdStr << ( wxT( "ToLowerCase()" ) );
+			break;
+		
+		case ecInvertCase:
+			cmdStr << ( wxT( "InvertCase()" ) );
+			break;
+		
+		case ecToHalfWidth:
+			cmdStr << ( wxT( "ToHalfWidth()" ) );
+			break;
+		
+		case ecToFullWidth:
+			cmdStr << ( wxT( "ToFullWidth()" ) );
+			break;
+		
+		case ecInsertDateTime:
+			cmdStr << ( wxT( "InsertDateTime()" ) );
+			break;
+		
+		//case ecMouseNotify:
+		//	cmdStr << ( wxT( "ProcessCommand(MadEditCommand.MouseNotify)" ) );
+		//	break;
+		
+		default:
+			return false;
+			break;
 	}
 
 	return true;
