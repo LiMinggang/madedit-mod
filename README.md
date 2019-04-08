@@ -91,6 +91,7 @@ Mod v0.4.16
 * Fix: Mouse event issue in handling file changed externally
 * Fix: Rollback the change of active line marker width #276
 * Fix: MadPython script recording bug(SelectAll, Cut)
+* Fix: Don't add "SetSelection" before SelectXXX
 * Update wxWidgets to 3.1.2
 * Update python to 2.7.16
 * Update Greek translation(https://github.com/nikoss)

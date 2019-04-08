@@ -856,15 +856,7 @@ public:
 	void SetMacroRunning() {m_MadMacroStatus = emMacroRunning;}
 	void SetMacroRecording() {m_MadMacroStatus = emMacroRecoding;}
 	void SetMacroStopped() {m_MadMacroStatus = emMacroStopped;}
-	void AddMacroScript( const wxString & script, /*wxFileOffset caretPos = 0,*/ wxFileOffset selBeg = -1, wxFileOffset selEnd = -1 ) {
-		if( ( ( selBeg != -1 ) && ( selEnd != -1 ) ) && ( selBeg != m_LastSelBeg || selEnd != m_LastSelEnd ) ) {
-			m_LastSelBeg = selBeg;
-			m_LastSelEnd = selEnd;
-			m_MadMacroScripts.Add( wxString::Format( wxT( "SetSelection(%s, %s, True)" ), ( wxLongLong( m_LastSelBeg ).ToString() ).c_str(), ( wxLongLong( m_LastSelEnd ).ToString() ).c_str() ) );
-		}
-
-		m_MadMacroScripts.Add( script );
-	}
+	void AddMacroScript(const wxString & script, /*wxFileOffset caretPos = 0,*/ wxFileOffset selBeg = -1, wxFileOffset selEnd = -1);
 	bool HasRecordedScript() {return ( m_MadMacroScripts.GetCount() > 0 );}
 	wxArrayString& GetRecordedScripts() {return m_MadMacroScripts;}
 

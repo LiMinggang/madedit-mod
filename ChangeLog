@@ -11,9 +11,11 @@
 	10.Fix: Mouse event issue in handling file changed externally
 	11.Fix: Rollback the change of active line marker width #276
 	12.Update wxWidgets to 3.1.2
-	13.Update python to 2.7.16
-	14.Update Greek translation(https://github.com/nikoss)
-	15.Update Chinese translations(ZhTw2013)
+	13.Fix: Don't add "SetSelection" before SelectXXX
+	14.Update wxWidgets to 3.1.2
+	15.Update python to 2.7.16
+	16.Update Greek translation(https://github.com/nikoss)
+	17.Update Chinese translations(ZhTw2013))
 
 2018-11-29  Minggang Li <minggang.li@gmail.com>
 	1.New: Use input file ext as SaveAs file type filter

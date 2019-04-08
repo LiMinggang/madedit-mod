@@ -11,10 +11,11 @@ madedit-mod (0.4.16-1) stable; urgency=low
   10.Fix: Mouse event issue in handling file changed externally
   11.Fix: Rollback the change of active line marker width #276
   12.Fix: MadPython script recording bug(SelectAll, Cut)
-  13.Update wxWidgets to 3.1.2
-  14.Update python to 2.7.16
-  15.Update Greek translation(https://github.com/nikoss)
-  16.Update Chinese translations(ZhTw2013)
+  13.Fix: Don't add "SetSelection" before SelectXXX
+  14.Update wxWidgets to 3.1.2
+  15.Update python to 2.7.16
+  16.Update Greek translation(https://github.com/nikoss)
+  17.Update Chinese translations(ZhTw2013)
 
  -- Minggang Li <liminggang@gmail.com>  Mon, 8 Apr 2019 17:07:40 +0800
 

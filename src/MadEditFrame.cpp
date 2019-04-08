@@ -10582,6 +10582,18 @@ bool MadEditFrame::RestoreAuiPanel(wxWindow * toolbar, wxString& toolbar_status,
 	return m_AuiManager.AddPane( toolbar, pane_info );
 }
 
+void MadEditFrame::AddMacroScript( const wxString & script, /*wxFileOffset caretPos = 0,*/ wxFileOffset selBeg/* = -1*/, wxFileOffset selEnd/* = -1*/ ) {
+	if( ( ( selBeg != -1 ) && ( selEnd != -1 ) ) && ( selBeg != m_LastSelBeg || selEnd != m_LastSelEnd ) ) {
+		m_LastSelBeg = selBeg;
+		m_LastSelEnd = selEnd;
+		wxString strPrefix = script.Left(6);
+		if( strPrefix != wxT( "Select" ) ) 
+			m_MadMacroScripts.Add( wxString::Format( wxT( "SetSelection(%s, %s, True)" ), ( wxLongLong( m_LastSelBeg ).ToString() ).c_str(), ( wxLongLong( m_LastSelEnd ).ToString() ).c_str() ) );
+	}
+
+	m_MadMacroScripts.Add( script );
+}
+
 MadTreeCtrl::MadTreeCtrl( wxWindow *parent, const wxWindowID id,
 						  const wxPoint& pos, const wxSize& size,
 						  long style )
