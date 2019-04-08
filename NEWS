@@ -10,7 +10,8 @@ Mod v0.4.16
 9.Fix: Saving the default encoding setting when choosing one from the drop down list #275
 10.Fix: Mouse event issue in handling file changed externally
 11.Fix: Rollback the change of active line marker width #276
-12.Update wxWidgets to 3.1.2
-13.Update python to 2.7.16
-14.Update Greek translation(https://github.com/nikoss)
-15.Update Chinese translations
+12.Fix: MadPython script recording bug(SelectAll, Cut)
+13.Update wxWidgets to 3.1.2
+14.Update python to 2.7.16
+15.Update Greek translation(https://github.com/nikoss)
+16.Update Chinese translations

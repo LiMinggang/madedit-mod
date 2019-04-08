@@ -1404,7 +1404,12 @@ namespace mad_python {
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
 			if( madedit )
-			{ madedit->SetSelection( ( wxFileOffset )beginpos, ( wxFileOffset )endpos, bCaretAtBeginPos ); }
+			{
+				long fsize = ( long )g_ActiveMadEdit->GetFileSize();
+				if( endpos == fsize )
+					endpos = -1;
+				madedit->SetSelection( ( wxFileOffset )beginpos, ( wxFileOffset )endpos, bCaretAtBeginPos );
+			}
 		}
 
 		void SelectWholeLine() {

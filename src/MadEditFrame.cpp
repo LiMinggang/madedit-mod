@@ -6308,6 +6308,8 @@ void MadEditFrame::OnEditCut( wxCommandEvent& WXUNUSED(event) )
 	if( g_ActiveMadEdit )
 	{
 		g_ActiveMadEdit->CutToClipboard();
+		if( IsMacroRecording() )
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "CutToClipboard()" ) ) );
 	}
 }
 
@@ -6346,9 +6348,6 @@ void MadEditFrame::OnEditCutLine( wxCommandEvent& WXUNUSED(event) )
 	if( g_ActiveMadEdit )
 	{
 		g_ActiveMadEdit->CutLine();
-
-		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "CutLine()" ) ) );
 	}
 }
 
@@ -6367,7 +6366,7 @@ void MadEditFrame::OnEditSelectAll( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->SelectAll();
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "DeleteLine()" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SelectAll()" ) ) );
 	}
 }
 
