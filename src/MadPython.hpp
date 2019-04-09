@@ -186,163 +186,169 @@ bool FromCmdToString( wxString &cmdStr, long madCmd ) {
 
 			break;
 			
-			case ecSelectAll:
-				cmdStr << ( wxT( "ProcessCommand(MadEditCommand.SelectAll)" ) );
-				break;
-			
-			case ecScrollLineUp:
-				cmdStr << ( wxT( "ScrollLineUp()" ) );
-				break;
-			
-			case ecScrollLineDown:
-				cmdStr << ( wxT( "ScrollLineDown()" ) );
-				break;
-			
-			case ecScrollPageUp:
-				cmdStr << ( wxT( "ScrollPageUp()" ) );
-				break;
-			
-			case ecScrollPageDown:
-				cmdStr << ( wxT( "ScrollPageDown()" ) );
-				break;
-			
-			case ecScrollLeft:
-				cmdStr << ( wxT( "ScrollLeft()" ) );
-				break;
-			
-			case ecScrollRight:
-				cmdStr << ( wxT( "ScrollRight()" ) );
-				break;
-			
-			case ecReturn:
-				cmdStr << ( wxT( "ProcessCommand(MadEditCommand.Return)" ) );
-				break;
-			
-			case ecReturnNoIndent:
-				cmdStr << ( wxT( "ProcessCommand(MadEditCommand.ReturnNoIndent)" ) );
-				break;
-			
-			case ecTab:
-				cmdStr << ( wxT( "ProcessCommand(MadEditCommand.Tab)" ) );
-				break;
-			
-			case ecInsertTabChar:
-				cmdStr << ( wxT( "InsertTabChar()" ) );
-				break;
-			
-			case ecDelete:
-				cmdStr << ( wxT( "Delete()" ) );
-				break;
-			
-			case ecBackSpace:
-				cmdStr << ( wxT( "ProcessCommand(MadEditCommand.BackSpace)" ) );
-				break;
-			
-			case ecDelPrevWord:
-				cmdStr << ( wxT( "ProcessCommand(MadEditCommand.DelPrevWord)" ) );
-				break;
-			
-			case ecDelNextWord:
-				cmdStr << ( wxT( "ProcessCommand(MadEditCommand.DelNextWord)" ) );
-				break;
-			case ecCutLine:
-				cmdStr<< ( wxT( "CutLine()" ) );
-				break;
-			case ecDeleteLine:
-				cmdStr<< ( wxT( "DeleteLine()" ) );
-				break;
-			case ecUndo:
-				cmdStr<< ( wxT( "Undo()" ) );
-				break;
-			case ecRedo:
-				cmdStr<< ( wxT( "Redo()" ) );
-				break;
-			case ecCut:
-				cmdStr<< ( wxT( "Cut()" ) );
-				break;
-			case ecCopy:
-				cmdStr << ( wxT( "Copy()" ) );
-				break;
-			case ecPaste:
-				cmdStr << ( wxT( "Paste()" ) );
-				break;
-			
-			case ecToggleInsertMode:
-				cmdStr << ( wxT( "ProcessCommand(MadEditCommand.ToggleInsertMode)" ) );
-				break;
-			
-			case ecTextMode:
-				cmdStr << ( wxT( "SetEditMode(MadEditMode.TextMode)" ) );
-				break;
-			
-			case ecColumnMode:
-				cmdStr << ( wxT( "SetEditMode(MadEditMode.ColumnMode)" ) );
-				break;
-			
-			case ecHexMode:
-				cmdStr << ( wxT( "SetEditMode(MadEditMode.HexMode)" ) );
-				break;
-			
-			case ecNoWrap:
-				cmdStr << ( wxT( "SetWordWrapMode(MadWordWrapMode.NoWrap)" ) );
-				break;
-			
-			case ecWrapByWindow:
-				cmdStr << ( wxT( "SetWordWrapMode(MadWordWrapMode.WrapByWindow)" ) );
-				break;
-			
-			case ecWrapByColumn:
-				cmdStr << ( wxT( "SetWordWrapMode(MadWordWrapMode.WrapByColumn)" ) );
-				break;
-			
-			//case ecToggleWindow:
-			//	cmdStr << ( wxT( "ProcessCommand(MadEditCommand.ToggleWindow)" ) );
-			//	break;
-			
-			case ecIncreaseIndent:
-				cmdStr << ( wxT( "IncreaseDecreaseIndent(True)" ) );
-				break;
-			
-			case ecDecreaseIndent:
-				cmdStr << ( wxT( "IncreaseDecreaseIndent(False)" ) );
-				break;
-			
-			case ecComment:
-				cmdStr << ( wxT( "CommentUncomment(True)" ) );
-				break;
-			
-			case ecUncomment:
-				cmdStr << ( wxT( "CommentUncomment(False)" ) );
-				break;
-			
-			case ecToUpperCase:
-				cmdStr << ( wxT( "ToUpperCase()" ) );
-				break;
-			
-			case ecToLowerCase:
-				cmdStr << ( wxT( "ToLowerCase()" ) );
-				break;
-			
-			case ecInvertCase:
-				cmdStr << ( wxT( "InvertCase()" ) );
-				break;
-			
-			case ecToHalfWidth:
-				cmdStr << ( wxT( "ToHalfWidth()" ) );
-				break;
-			
-			case ecToFullWidth:
-				cmdStr << ( wxT( "ToFullWidth()" ) );
-				break;
-			
-			case ecInsertDateTime:
-				cmdStr << ( wxT( "InsertDateTime()" ) );
-				break;
-			
-			//case ecMouseNotify:
-			//	cmdStr << ( wxT( "ProcessCommand(MadEditCommand.MouseNotify)" ) );
-			//	break;
-			
+		case ecSelectAll:
+			cmdStr << ( wxT( "SelectAll()" ) );
+			break;
+		
+		case ecScrollLineUp:
+			cmdStr << ( wxT( "ScrollLineUp()" ) );
+			break;
+		
+		case ecScrollLineDown:
+			cmdStr << ( wxT( "ScrollLineDown()" ) );
+			break;
+		
+		case ecScrollPageUp:
+			cmdStr << ( wxT( "ScrollPageUp()" ) );
+			break;
+		
+		case ecScrollPageDown:
+			cmdStr << ( wxT( "ScrollPageDown()" ) );
+			break;
+		
+		case ecScrollLeft:
+			cmdStr << ( wxT( "ScrollLeft()" ) );
+			break;
+		
+		case ecScrollRight:
+			cmdStr << ( wxT( "ScrollRight()" ) );
+			break;
+		
+		case ecReturn:
+			cmdStr << ( wxT( "Return()" ) );
+			break;
+		
+		case ecReturnNoIndent:
+			cmdStr << ( wxT( "ReturnNoIndent()" ) );
+			break;
+		
+		case ecTab:
+			cmdStr << ( wxT( "Tab()" ) );
+			break;
+		
+		case ecInsertTabChar:
+			cmdStr << ( wxT( "InsertTabChar()" ) );
+			break;
+		
+		case ecDelete:
+			cmdStr << ( wxT( "Delete()" ) );
+			break;
+		
+		case ecBackSpace:
+			cmdStr << ( wxT( "BackSpace()" ) );
+			break;
+		
+		case ecDelPrevWord:
+			cmdStr << ( wxT( "DelPrevWord()" ) );
+			break;
+		
+		case ecDelNextWord:
+			cmdStr << ( wxT( "DelNextWord()" ) );
+			break;
+
+		case ecCutLine:
+			cmdStr<< ( wxT( "CutLine()" ) );
+			break;
+
+		case ecDeleteLine:
+			cmdStr<< ( wxT( "DeleteLine()" ) );
+			break;
+
+		case ecUndo:
+			cmdStr<< ( wxT( "Undo()" ) );
+			break;
+
+		case ecRedo:
+			cmdStr<< ( wxT( "Redo()" ) );
+			break;
+
+		case ecCut:
+			cmdStr<< ( wxT( "Cut()" ) );
+			break;
+
+		case ecCopy:
+			cmdStr << ( wxT( "Copy()" ) );
+			break;
+
+		case ecPaste:
+			cmdStr << ( wxT( "Paste()" ) );
+			break;
+		
+		case ecToggleInsertMode:
+			cmdStr << ( wxT( "ToggleInsertMode()" ) );
+			break;
+		
+		case ecTextMode:
+			cmdStr << ( wxT( "SetEditMode(MadEditMode.TextMode)" ) );
+			break;
+		
+		case ecColumnMode:
+			cmdStr << ( wxT( "SetEditMode(MadEditMode.ColumnMode)" ) );
+			break;
+		
+		case ecHexMode:
+			cmdStr << ( wxT( "SetEditMode(MadEditMode.HexMode)" ) );
+			break;
+		
+		case ecNoWrap:
+			cmdStr << ( wxT( "SetWordWrapMode(MadWordWrapMode.NoWrap)" ) );
+			break;
+		
+		case ecWrapByWindow:
+			cmdStr << ( wxT( "SetWordWrapMode(MadWordWrapMode.WrapByWindow)" ) );
+			break;
+		
+		case ecWrapByColumn:
+			cmdStr << ( wxT( "SetWordWrapMode(MadWordWrapMode.WrapByColumn)" ) );
+			break;
+		
+		//case ecToggleWindow:
+		//	cmdStr << ( wxT( "ProcessCommand(MadEditCommand.ToggleWindow)" ) );
+		//	break;
+		
+		case ecIncreaseIndent:
+			cmdStr << ( wxT( "IncreaseDecreaseIndent(True)" ) );
+			break;
+		
+		case ecDecreaseIndent:
+			cmdStr << ( wxT( "IncreaseDecreaseIndent(False)" ) );
+			break;
+		
+		case ecComment:
+			cmdStr << ( wxT( "CommentUncomment(True)" ) );
+			break;
+		
+		case ecUncomment:
+			cmdStr << ( wxT( "CommentUncomment(False)" ) );
+			break;
+		
+		case ecToUpperCase:
+			cmdStr << ( wxT( "ToUpperCase()" ) );
+			break;
+		
+		case ecToLowerCase:
+			cmdStr << ( wxT( "ToLowerCase()" ) );
+			break;
+		
+		case ecInvertCase:
+			cmdStr << ( wxT( "InvertCase()" ) );
+			break;
+		
+		case ecToHalfWidth:
+			cmdStr << ( wxT( "ToHalfWidth()" ) );
+			break;
+		
+		case ecToFullWidth:
+			cmdStr << ( wxT( "ToFullWidth()" ) );
+			break;
+		
+		case ecInsertDateTime:
+			cmdStr << ( wxT( "InsertDateTime()" ) );
+			break;
+
+		//case ecMouseNotify:
+		//	cmdStr << ( wxT( "ProcessCommand(MadEditCommand.MouseNotify)" ) );
+		//	break;
 
 		default:
 			return false;
@@ -695,6 +701,78 @@ namespace mad_python {
 				madedit = g_ActiveMadEdit;
 			if( madedit )
 			{ madedit->ProcessCommand( ecSelCommandLast ); }
+		}
+
+		void Return() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+			{ madedit->ProcessCommand( ecReturn ); }
+		}
+
+		void ReturnNoIndent() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+			{ madedit->ProcessCommand( ecReturnNoIndent ); }
+		}
+
+		void Tab() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+			{ madedit->ProcessCommand( ecTab ); }
+		}
+
+		void InsertTabChar() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+			{ madedit->ProcessCommand( ecInsertTabChar ); }
+		}
+
+		void Delete() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+			{ madedit->ProcessCommand( ecDelete ); }
+		}
+
+		void BackSpace() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+			{ madedit->ProcessCommand( ecBackSpace ); }
+		}
+
+		void DelPrevWord() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+			{ madedit->ProcessCommand( ecDelPrevWord ); }
+		}
+
+		void DelNextWord() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+			{ madedit->ProcessCommand( ecDelNextWord ); }
+		}
+
+		void ToggleInsertMode() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+			{ madedit->ProcessCommand( ecToggleInsertMode ); }
 		}
 
 		void InsertWChar( long key ) {
@@ -2865,6 +2943,15 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.def( "SelLeftBrace", &PyMadEdit::SelLeftBrace, "" )
 	.def( "SelRightBrace", &PyMadEdit::SelRightBrace, "" )
 	.def( "SelCommandLast", &PyMadEdit::SelCommandLast, "" )
+	.def( "Return", &PyMadEdit::Return, "" )
+	.def( "ReturnNoIndent", &PyMadEdit::ReturnNoIndent, "" )
+	.def( "Tab", &PyMadEdit::Tab, "" )
+	.def( "InsertTabChar", &PyMadEdit::InsertTabChar, "" )
+	.def( "Delete", &PyMadEdit::Delete, "" )
+	.def( "BackSpace", &PyMadEdit::BackSpace, "" )
+	.def( "DelPrevWord", &PyMadEdit::DelPrevWord, "" )
+	.def( "DelNextWord", &PyMadEdit::DelNextWord, "" )
+	.def( "ToggleInsertMode", &PyMadEdit::ToggleInsertMode, "" )
 	.def( "InsertWChar", &PyMadEdit::InsertWChar, "" )
 	.def( "InsertStr", &PyMadEdit::InsertStr, "" )
 	.def( "InsertIncrementalNumber", &PyMadEdit::InsertIncrementalNumber, "" )
