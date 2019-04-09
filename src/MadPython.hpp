@@ -1972,14 +1972,6 @@ namespace mad_python {
 			{ return std::string( "" ); }
 		}
 
-		void Delete() {
-			MadEdit *madedit = g_CurrentMadEdit;
-			if(madedit == nullptr)
-				madedit = g_ActiveMadEdit;
-			if( ( madedit ) && ( !madedit->IsReadOnly() ) )
-			{ madedit->Delete(); }
-		}
-
 		void CutLine() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
@@ -1994,14 +1986,6 @@ namespace mad_python {
 				madedit = g_ActiveMadEdit;
 			if( ( madedit ) && ( !madedit->IsReadOnly() ) )
 			{ madedit->DeleteLine(); }
-		}
-
-		void InsertTabChar() {
-			MadEdit *madedit = g_CurrentMadEdit;
-			if(madedit == nullptr)
-				madedit = g_ActiveMadEdit;
-			if( ( madedit ) && ( !madedit->IsReadOnly() ) )
-			{ madedit->InsertTabChar(); }
 		}
 
 		void InsertDateTime() {
@@ -3050,10 +3034,8 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.def( "GetSelHexString", &PyMadEdit::GetSelHexString, "" )
 	.def( "GetWordFromCaretPos", &PyMadEdit::GetWordFromCaretPos, return_value_policy<return_by_value>(), "" )
 	.def( "InsertNewline", &PyMadEdit::InsertNewline, "" )
-	.def( "Delete", &PyMadEdit::Delete, "" )
 	.def( "CutLine", &PyMadEdit::CutLine, "" )
 	.def( "DeleteLine", &PyMadEdit::DeleteLine, "" )
-	.def( "InsertTabChar", &PyMadEdit::InsertTabChar, "" )
 	.def( "InsertDateTime", &PyMadEdit::InsertDateTime, "" )
 	.def( "HighlightWords", &PyMadEdit::HighlightWords, "" )
 	.def( "SelectAll", &PyMadEdit::SelectAll, "" )
