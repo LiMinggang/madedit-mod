@@ -121,6 +121,7 @@ FreeBSD packaging (with FreeBSD 10.01)
 
 Mod v0.4.17
 New: MadPython recording enhencement to support keyboard commands
+New: Improve MadPython API to support readable APIs
 
 Mod v0.4.16
 1.New: Change foreground and backgroud colour for all the text controls in main frame
