@@ -190,27 +190,27 @@ bool FromCmdToString( wxString &cmdStr, long madCmd ) {
 			break;
 		
 		case ecScrollLineUp:
-			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.ScrollLineUp)" ) );
+			cmdStr << ( wxT( "ScrollLineUp()" ) );
 			break;
 		
 		case ecScrollLineDown:
-			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.ScrollLineDown)" ) );
+			cmdStr << ( wxT( "ScrollLineDown()" ) );
 			break;
 		
 		case ecScrollPageUp:
-			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.ScrollPageUp)" ) );
+			cmdStr << ( wxT( "ScrollPageUp()" ) );
 			break;
 		
 		case ecScrollPageDown:
-			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.ScrollPageDown)" ) );
+			cmdStr << ( wxT( "ScrollPageDown()" ) );
 			break;
 		
 		case ecScrollLeft:
-			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.ScrollLeft)" ) );
+			cmdStr << ( wxT( "ScrollLeft()" ) );
 			break;
 		
 		case ecScrollRight:
-			cmdStr << ( wxT( "ProcessCommand(MadEditCommand.ScrollRight)" ) );
+			cmdStr << ( wxT( "ScrollRight()" ) );
 			break;
 		
 		case ecReturn:
@@ -263,7 +263,7 @@ bool FromCmdToString( wxString &cmdStr, long madCmd ) {
 			cmdStr << ( wxT( "Copy()" ) );
 			break;
 		case ecPaste:
-			cmdStr << ( wxT( "PasteFromClipboard()" ) );
+			cmdStr << ( wxT( "Paste()" ) );
 			break;
 		
 		case ecToggleInsertMode:
@@ -1676,7 +1676,7 @@ namespace mad_python {
 			{ madedit->SelectAll(); }
 		}
 
-		void CutToClipboard() {
+		void Cut() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
@@ -1689,7 +1689,7 @@ namespace mad_python {
 			}
 		}
 
-		void CopyToClipboardA() {
+		void Copy() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
@@ -1697,7 +1697,7 @@ namespace mad_python {
 			{ madedit->CopyToClipboard(); }
 		}
 
-		void PasteFromClipboard() {
+		void Paste() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
@@ -1731,7 +1731,7 @@ namespace mad_python {
 			{ return false; }
 		}
 
-		void CopyToClipboardB( const std::string &txt ) {
+		void CopyText( const std::string &txt ) {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
@@ -2662,8 +2662,10 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.def( "InsertDateTime", &PyMadEdit::InsertDateTime, "" )
 	.def( "HighlightWords", &PyMadEdit::HighlightWords, "" )
 	.def( "SelectAll", &PyMadEdit::SelectAll, "" )
-	.def( "CutToClipboard", &PyMadEdit::CutToClipboard, "" )
-	.def( "PasteFromClipboard", &PyMadEdit::PasteFromClipboard, "" )
+	.def( "Copy", &PyMadEdit::Copy, "" )
+	.def( "CopyText", &PyMadEdit::CopyText, "" )
+	.def( "Cut", &PyMadEdit::Cut, "" )
+	.def( "Paste", &PyMadEdit::Paste, "" )
 	.def( "DndBegDrag", &PyMadEdit::DndBegDrag, "" )
 	.def( "DndDrop", &PyMadEdit::DndDrop, "" )
 	.def( "CanPaste", &PyMadEdit::CanPaste, "" )
@@ -2710,8 +2712,6 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.def( "WordCount", &PyMadEdit::WordCount, return_value_policy<return_by_value>(), "" )
 	.def( "SetColumnSelection", &PyMadEdit::SetColumnSelection, "" )
 	.def( "SetFontA", &PyMadEdit::SetFontA, "Doc" )
-	.def( "CopyToClipboardA", &PyMadEdit::CopyToClipboardA, "" )
-	.def( "CopyToClipboardB", &PyMadEdit::CopyToClipboardB, "" )
 	.def( "ScrollLineUp", &PyMadEdit::ScrollLineUp, "" )
 	.def( "ScrollLineDown", &PyMadEdit::ScrollLineDown, "" )
 	.def( "ScrollPageUp", &PyMadEdit::ScrollPageUp, "" )

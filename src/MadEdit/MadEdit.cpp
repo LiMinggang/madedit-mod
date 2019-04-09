@@ -7751,7 +7751,7 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 		{
 			CutToClipboard();
 			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro( this, wxString( wxT( "CutToClipboard()" ) ) );
+				RecordAsMadMacro( this, wxString( wxT( "Cut()" ) ) );
 		}
 		break;
 
@@ -7759,7 +7759,7 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 		{
 			CopyToClipboard();
 			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro(this, wxString(wxT("CopyToClipboard()")));
+				RecordAsMadMacro(this, wxString(wxT("Copy()")));
 		}
 		break;
 
@@ -7767,7 +7767,7 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 		{
 			PasteFromClipboard();
 			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro(this, wxString(wxT("PasteFromClipboard()")));
+				RecordAsMadMacro(this, wxString(wxT("Paste()")));
 		}
 		break;
 

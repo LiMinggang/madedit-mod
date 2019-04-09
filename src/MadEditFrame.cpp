@@ -6309,7 +6309,7 @@ void MadEditFrame::OnEditCut( wxCommandEvent& WXUNUSED(event) )
 	{
 		g_ActiveMadEdit->CutToClipboard();
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "CutToClipboard()" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "Cut()" ) ) );
 	}
 }
 
@@ -6320,7 +6320,7 @@ void MadEditFrame::OnEditCopy( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->CopyToClipboard();
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "CopyToClipboard()" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "Copy()" ) ) );
 	}
 }
 
@@ -6331,7 +6331,7 @@ void MadEditFrame::OnEditPaste( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->PasteFromClipboard();
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "PasteFromClipboard()" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "Paste()" ) ) );
 	}
 }
 
