@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	madedit
-PORTVERSION=	0.4.15
+PORTVERSION=	0.4.17
 CATEGORIES=	editors
 MASTER_SITES=	SF/${PORTNAME}/${PORTVERSION}
 DISTNAME=	madedit-mod${PORTVERSION}
@@ -16,8 +16,8 @@ USES=		gettext pkgconfig desktop-file-utils
 WANT_UNICODE=	yes
 
 GNU_CONFIGURE=	yes
-CONFIGURE_ARGS+=--with-boost=${HOME}/boost_1_68_0
-CONFIGURE_ARGS+=--with-wxdir=${HOME}/wxWidgets-3.1.1
+CONFIGURE_ARGS+=--with-boost=${HOME}/boost_1_69_0
+CONFIGURE_ARGS+=--with-wxdir=${HOME}/wxWidgets-3.1.2
 CONFIGURE_ENV+=	PKG_CONFIG="${PKG_CONFIG}" glib_gtk2_CFLAGS="${glib_gtk2_CFLAGS}" glib_gtk2_LIBS="${glib_gtk2_LIBS}"
 CXXFLAGS+=	${glib_gtk2_CFLAGS}
 CPPFLAGS+=	-I/usr/local/include

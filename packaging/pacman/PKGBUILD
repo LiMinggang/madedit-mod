@@ -1,12 +1,12 @@
 # Maintainer: Minggang Li <minggang.li@gmail.com>
 # Build instructions:
-#   1) Download boost and wxWidgets from boost.org(1.68 or later) and wxWidgets(3.1.2 or later)
+#   1) Download boost and wxWidgets from boost.org(1.69 or later) and wxWidgets(3.1.2 or later)
 #      and change the './configure ...' accordingly
 #   2) Extract('tar -xvf ...') the source code packages at your {HOME} or other(change the {HOME} in './configure ...')
 #   3) Compile wxWigets with './configure --enable-unicode --disable-shared --with-libpng=builtin --with-zlib=builtin --with-expat=builtin --with-gtk=2 --with-libiconv=no'
 #   4) Run 'makepkg' under the directory of this file
 
-boost=${HOME}/boost_1_68_0
+boost=${HOME}/boost_1_69s_0
 wxWidgets=${HOME}/wxWidgets-3.1.2
 pkgname=madedit-mod
 pkgver=$MADEDIT_VERSION
