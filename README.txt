@@ -44,7 +44,7 @@ P.S.: Please open a ticket for bug of MadEdit-Mod at
 MadEdit_Win2K is a build by VC++ 2005 express for Windows 2000/XP.
 
 Example build under Linux
-wxWidgets(3.1.1) (CXXFLAGS=-fPIC CPPFLAGS=-fPIC CFLAGS=-fPIC, x64)
+wxWidgets(3.1.2) (CXXFLAGS=-fPIC CPPFLAGS=-fPIC CFLAGS=-fPIC, x64)
 ./configure --enable-unicode --disable-shared --with-libpng=builtin --with-zlib=builtin --with-expat=builtin --with-gtk=2 --with-libiconv=no
 MadEdit-Mod
 ./configure --with-boost=${HOME}/boost_1_69_0 --with-wxdir=${HOME}/wxWidgets-3.1.2
@@ -124,6 +124,7 @@ Mod v0.4.17
 New: MadPython recording enhencement to support keyboard commands
 New: Improve MadPython API to support readable APIs
 New: Japanese Translation(Thanks Tilt <tiltstr@gmail.com>)
+Update boostpython to 1.70
 
 Mod v0.4.16
 1.New: Change foreground and backgroud colour for all the text controls in main frame
