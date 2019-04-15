@@ -94,8 +94,8 @@ Mod v0.4.16
 * Fix: Don't add "SetSelection" before SelectXXX
 * Update wxWidgets to 3.1.2
 * Update python to 2.7.16
-* Update Greek translation(https://github.com/nikoss)
-* Update Chinese translations(ZhTw2013)
+* Update Greek translation by [Nikoss](https://github.com/nikoss)
+* Update Chinese translations by [ZhTw2013](https://github.com/zhtw2013)
 
 Todo
 =====
@@ -127,7 +127,7 @@ Thanks
 =============
 * [Nikoss](https://github.com/nikoss)   Greek Translation
 * [ZhTw2013](https://github.com/zhtw2013) Traditional Chinese Translation
-* [Tilt](tiltstr@gmail.com) Japanese Translation
+* [Tilt](mailto:tiltstr@gmail.com) Japanese Translation
 
 Download
 =============
