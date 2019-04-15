@@ -236,7 +236,7 @@ private:
 	MadKeyBindingMap *m_EditCommandMap;
 	MadKeyBindingMap *m_ShortCutMap;
 	MadKeyBindings(const MadKeyBindings&){}
-	MadKeyBindings& operator=(MadKeyBindings const&){}
+	MadKeyBindings& operator=(MadKeyBindings const&){ return *this; }
 
 public:
 	static void	InitCommandTextMap();
