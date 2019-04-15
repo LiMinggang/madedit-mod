@@ -11,30 +11,17 @@ Requirements
 
 Compile wxWidgets and boost_python
 ============
-* Get wxWidgets 3.1.0 and boost 1.62
+* Get wxWidgets 3.1.2 and boost 1.69
 * Get latest code from sourceforge
-  git clone git://git.code.sf.net/p/madedit-mod/code madedit-mod
+  git clone https://github.com/LiMinggang/madedit-mod.git
 
-* Static build of wxWidgets 3.1.0 with builtin png and zlib
+* Static build of wxWidgets 3.1.2 with builtin png and zlib
 ./configure --enable-unicode --disable-shared --with-libpng=builtin --with-zlib=builtin --with-expat=builtin --with-gtk3=yes --with-libiconv=no
-
-* Static build of boost_python with minipython(add 'address-model=64' if build for 64 bit and add ' cflags=-fPIC cxxflags=-fPIC ' if you got ". /usr/bin/ld: /usr/local/lib/libboost_python.a(list.o): relocation R_X86_64_32 against `.rodata.str1.1' can not be used when making a shared object; recompile with -fPIC)
-  ./bootstrap.sh
-  ./bjam --user-config=user-config.jam --with-python python-debugging=off threading=multi variant=release link=static runtime-link=static stage
-  Sample jam
-
-    using python : 2.7 :
-
-    : /home/gli/madedit-mod/minipython/Include
-
-    : /home/gli/madedit-mod/minipython/lib
-
-    : <python-debugging>off ;
 
 Compile MadEdi-Mod from source code
 ============
 * Compile madedit-mod by configure or packaging script
-  configure --with-boost=${HOME}/boost_1_60_0 --with-wxdir=${HOME}/wxWidgets-3.1.0
+  configure --with-boost=${HOME}/boost_1_69_0 --with-wxdir=${HOME}/wxWidgets-3.1.2
 
   Or
 
