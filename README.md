@@ -128,6 +128,7 @@ Thanks
 * [Nikoss](https://github.com/nikoss)   Greek Translation
 * [ZhTw2013](https://github.com/zhtw2013) Traditional Chinese Translation
 * [Tilt](tiltstr@gmail.com) Japanese Translation
+
 Download
 =============
 [Madedit-Mod@sf](https://sourceforge.net/projects/madedit-mod/files/?source=navbar)
