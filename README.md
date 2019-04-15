@@ -71,7 +71,7 @@ Translations
 * German(de_DE)              (Not done)
 * Greek(el)
 * Italian(it_IT)             (Not done)
-* Japanese(ja_JP)            (Not done)
+* Japanese(ja_JP)
 * Polish(pl_PL)              (Not done)
 * Russian(ru_RU)             (Not done)
 * Spanish(es)                (Not done)
@@ -125,9 +125,9 @@ License
 
 Thanks
 =============
-* Nikoss   Greek Translation
-* ZhTw2013 Traditional Chinese Translation
-
+* [Nikoss](https://github.com/nikoss)   Greek Translation
+* [ZhTw2013](https://github.com/zhtw2013) Traditional Chinese Translation
+* [Tilt](tiltstr@gmail.com) Japanese Translation
 Download
 =============
 [Madedit-Mod@sf](https://sourceforge.net/projects/madedit-mod/files/?source=navbar)
