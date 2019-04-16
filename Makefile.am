@@ -479,7 +479,6 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	python/src/converter/registry.cpp \
 	python/src/converter/builtin_converters.cpp \
 	python/src/converter/arg_to_python_base.cpp \
-	python/src/SConscript \
 	python/include/boost/python/wrapper.hpp \
 	python/include/boost/python/type_id.hpp \
 	python/include/boost/python/with_custodian_and_ward.hpp \
@@ -1094,7 +1093,6 @@ noinst_HEADERS =	description-pak \
 	python/test/andreas_beyer.py \
 	python/test/a_map_indexing_suite.cpp \
 	python/test/andreas_beyer.cpp \
-	python/test/SConscript \
 	python/test/Jamfile \
 	python/meta/libraries.json \
 	python/index.html \
@@ -1387,7 +1385,6 @@ noinst_HEADERS =	description-pak \
 	python/doc/boostbook.css \
 	python/doc/article.rst \
 	python/doc/Jamfile \
-	python/doc/SConscript \
 	python/config/ui.py \
 	python/config/tools/sphinx4scons.py \
 	python/config/tools/tests.py \
