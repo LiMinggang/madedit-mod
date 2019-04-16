@@ -6,7 +6,7 @@
 #   3) Compile wxWigets with './configure --enable-unicode --disable-shared --with-libpng=builtin --with-zlib=builtin --with-expat=builtin --with-gtk=2 --with-libiconv=no'
 #   4) Run 'makepkg' under the directory of this file
 
-boost=${HOME}/boost_1_69s_0
+boost=${HOME}/boost_1_69_0
 wxWidgets=${HOME}/wxWidgets-3.1.2
 pkgname=madedit-mod
 pkgver=$MADEDIT_VERSION
