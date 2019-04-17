@@ -4,7 +4,7 @@
 PORTNAME=	madedit-mod
 PORTVERSION=	0.4.16
 CATEGORIES=	editors
-MASTER_SITES=	SF/${PORTNAME}/${PORTVERSION}
+MASTER_SITES=	https://sourceforge.net/projects/${PORTNAME}/files/${PORTVERSION}
 DISTNAME=	Madedit-Mod${PORTVERSION}
 
 MAINTAINER=	Minggang Li <minggang.li@gmail.com>
