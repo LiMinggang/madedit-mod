@@ -705,7 +705,7 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	python/src/slice.cpp \
 	python/src/str.cpp \
 	python/src/tuple.cpp \
-	python/src/wrapper.cpp \
+	python/src/wrapper.cpp
 
 dist_doc_DATA = gpl-3.0.txt README.txt help/MadPython.txt help/Help.txt help/KeyMapping.html help/RegexReference.html
 pixmapsdir = $(datadir)/pixmaps
