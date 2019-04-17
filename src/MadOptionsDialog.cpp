@@ -1403,7 +1403,7 @@ void MadOptionsDialog::TreeCtrl1SelChanged(wxTreeEvent& event)
 	{
 		ListBoxKeys->Set(g_SelectedCommandItem->keys);
 		wxString hint=wxT('[');
-		if(g_SelectedCommandItem->cmddata->menuid_name > 0)
+		if(g_SelectedCommandItem->cmddata->menuid_name != 0)
 		{
 			hint+= wxString(g_SelectedCommandItem->cmddata->menuid_name);
 		}
@@ -1499,7 +1499,7 @@ void MadOptionsDialog::UpdateKeyHint()
 			g_CommandItemOfNewKey=tid;
 			wxString cmd;
 
-			if(tid->cmddata->menuid_name > 0)
+			if(tid->cmddata->menuid_name != 0)
 			{
 				cmd+= wxString(tid->cmddata->menuid_name);
 			}
