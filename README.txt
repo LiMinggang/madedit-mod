@@ -19,6 +19,9 @@ A. Linux, FreeBSD, and Unix-like OS (__WXGTK__):
       (install gtk2-devel/gtk3-devel gettext-devel automake rpm-build (Fedora/Mageia))
       gtk+2.0-dev/libgtk-3-dev automake (Ubuntu/Debian/ElementaryOS)
       copy wxwin.m4 to usr/share/acloXXX/ or install wxGTK-devel
+      
+      install pkgconf for FreeBSD/GhostBSD, GhostBSD is recommanded
+      sudo portsnap fetch extract(/usr/share/mk/bsd.port.mk not found)
 
 B. MS Windows (__WXMSW__):
    a. MinGW32/GNU C++ 3.x (wxDevCpp):
