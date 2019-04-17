@@ -1,4 +1,4 @@
 MadEdit-Mod is a cross-platform Text/Hex Editor written in C++ & wxWidgets.
 MadEdit-Mod supports many useful functions, e.g. SyntaxHighlightings, 
 WordWrap, Encodings, Column/Hex Modes.
-HomePage: http://sourceforge.net/project/madedit-mod
+HomePage: https://github.com/LiMinggang/madedit-mod

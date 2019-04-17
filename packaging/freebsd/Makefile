@@ -1,14 +1,14 @@
 # Created by: Minggang Li <minggang.li@gmail.com>
 # $FreeBSD$
 
-PORTNAME=	madedit
+PORTNAME=	madedit-mod
 PORTVERSION=	0.4.17
 CATEGORIES=	editors
 MASTER_SITES=	SF/${PORTNAME}/${PORTVERSION}
 DISTNAME=	madedit-mod${PORTVERSION}
 
 MAINTAINER=	Minggang Li <minggang.li@gmail.com>
-COMMENT=	madedit: Cross-platform Text/Hex Editor, Improved Version of MadEdit
+COMMENT=	madedit-mod: Cross-platform Text/Hex Editor, Improved Version of MadEdit
 
 LICENSE=	GPLv3
 
@@ -16,7 +16,7 @@ USES=		gettext pkgconfig desktop-file-utils
 WANT_UNICODE=	yes
 
 GNU_CONFIGURE=	yes
-CONFIGURE_ARGS+=--with-boost=${HOME}/boost_1_69_0
+CONFIGURE_ARGS+=--with-boost=${HOME}/boost_1_70_0
 CONFIGURE_ARGS+=--with-wxdir=${HOME}/wxWidgets-3.1.2
 CONFIGURE_ENV+=	PKG_CONFIG="${PKG_CONFIG}" glib_gtk2_CFLAGS="${glib_gtk2_CFLAGS}" glib_gtk2_LIBS="${glib_gtk2_LIBS}"
 CXXFLAGS+=	${glib_gtk2_CFLAGS}
