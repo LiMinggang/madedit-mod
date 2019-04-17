@@ -24,6 +24,6 @@ addons:
     - automake
     - gcc
     - g++
-    - libboost1.55-all-dev
-    - gtk+2.0-dev
+    - libboost-latest-dev
+    - gtk+3.0-dev
     - libwxgtk3.0
