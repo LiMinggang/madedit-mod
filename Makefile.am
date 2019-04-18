@@ -6,7 +6,8 @@ AM_CPPFLAGS = -I$(top_srcdir)/charset-detector/src \
 -I$(top_srcdir)/spellchecker/hunspell/src/hunspell -I$(top_srcdir)/spellchecker/hunspell/src/win_api \
 -I$(top_srcdir)/minipython/Include -I$(top_srcdir)/minipython/Python \
 -I$(top_srcdir)/minipython/Modules/zlib -I$(top_srcdir)/markdown -I$(top_srcdir)/astyle \
--I$(top_srcdir)/astyle/astyle -I$(top_srcdir)/src/MadEdit -I$(top_srcdir)/python/include
+-I$(top_srcdir)/astyle/astyle -I$(top_srcdir)/src/MadEdit -I$(top_srcdir)/python/include \
+-I$(top_srcdir)/python/include/boost/python
 
 madedit_CXXFLAGS = -DDATA_DIR=\"${datadir}\"
 madedit_SOURCES =	src/MadAboutDialog.cpp \
@@ -586,16 +587,6 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	python/include/boost/python/manage_new_object.hpp \
 	python/include/boost/python/module.hpp \
 	python/include/boost/python/module_init.hpp \
-	python/include/boost/python/numpy.hpp \
-	python/include/boost/python/numpy/config.hpp \
-	python/include/boost/python/numpy/dtype.hpp \
-	python/include/boost/python/numpy/internal.hpp \
-	python/include/boost/python/numpy/invoke_matching.hpp \
-	python/include/boost/python/numpy/matrix.hpp \
-	python/include/boost/python/numpy/ndarray.hpp \
-	python/include/boost/python/numpy/numpy_object_mgr_traits.hpp \
-	python/include/boost/python/numpy/scalars.hpp \
-	python/include/boost/python/numpy/ufunc.hpp \
 	python/include/boost/python/object.hpp \
 	python/include/boost/python/object/add_to_namespace.hpp \
 	python/include/boost/python/object/class.hpp \
@@ -685,12 +676,6 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	python/src/list.cpp \
 	python/src/long.cpp \
 	python/src/module.cpp \
-	python/src/numpy/dtype.cpp \
-	python/src/numpy/matrix.cpp \
-	python/src/numpy/ndarray.cpp \
-	python/src/numpy/numpy.cpp \
-	python/src/numpy/scalars.cpp \
-	python/src/numpy/ufunc.cpp \
 	python/src/object/class.cpp \
 	python/src/object/enum.cpp \
 	python/src/object/function.cpp \
@@ -1222,11 +1207,27 @@ noinst_HEADERS =	description-pak \
 	python/example/tutorial/hello.py \
 	python/example/tutorial/Jamfile \
 	python/fabscript \
+	python/include/boost/python/numpy.hpp \
+	python/include/boost/python/numpy/config.hpp \
+	python/include/boost/python/numpy/dtype.hpp \
+	python/include/boost/python/numpy/internal.hpp \
+	python/include/boost/python/numpy/invoke_matching.hpp \
+	python/include/boost/python/numpy/matrix.hpp \
+	python/include/boost/python/numpy/ndarray.hpp \
+	python/include/boost/python/numpy/numpy_object_mgr_traits.hpp \
+	python/include/boost/python/numpy/scalars.hpp \
+	python/include/boost/python/numpy/ufunc.hpp \
 	python/index.html \
 	python/Jamfile \
 	python/LICENSE_1_0.txt \
 	python/meta/libraries.json \
 	python/README.md \
+	python/src/numpy/dtype.cpp \
+	python/src/numpy/matrix.cpp \
+	python/src/numpy/ndarray.cpp \
+	python/src/numpy/numpy.cpp \
+	python/src/numpy/scalars.cpp \
+	python/src/numpy/ufunc.cpp \
 	python/test/a_map_indexing_suite.cpp \
 	python/test/andreas_beyer.cpp \
 	python/test/andreas_beyer.py \
