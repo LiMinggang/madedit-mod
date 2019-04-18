@@ -5,10 +5,12 @@ compiler:
 
 sudo: false
 
+install:
+  - wget http://sourceforge.net/projects/boost/files/boost/1.70.0/boost_1_70_0.zip && unzip -q boost_1_70_0.zip
+
 os:
   - linux
-boost:
-  - wget http://sourceforge.net/projects/boost/files/boost/1.70.0/boost_1_70_0.zip && unzip -q boost_1_70_0.zip
+
 script:
   - cd ./thirdparty/wxWidgets && sh ./configure --enable-unicode --disable-shared --with-libpng=builtin --with-zlib=builtin --with-expat=builtin --with-gtk=2 --with-libiconv=no && make
   - cd ../.. && sh ./autogen.sh && sh ./configure --with-wxdir=./thirdparty/wxWidgets --with-boost=./boost_1_70_0 && make
