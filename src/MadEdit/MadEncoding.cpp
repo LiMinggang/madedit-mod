@@ -1184,7 +1184,7 @@ ucs4_t MadEncoding::DBtoUCS4( wxByte *buf )  // Double-Byte to UCS4
 	if( m_LeadByte_Table[ buf[0] ] == 0 )
 		IsLeadByte( buf[0] );
 
-	register unsigned int w = ( ( ( unsigned int )buf[0] ) << 8 ) | buf[1];
+	__REGISTER unsigned int w = ( ( ( unsigned int )buf[0] ) << 8 ) | buf[1];
 	return m_MBtoWC_Table[w];
 }
 

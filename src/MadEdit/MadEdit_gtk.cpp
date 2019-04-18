@@ -432,7 +432,7 @@ wxTranslateGTKKeyEventToWx(wxKeyEvent& event,
             // got one
             key_code = keysymNormalized ? keysymNormalized : keysym;
 
-            // as explained above, we want to have lower register key codes
+            // as explained above, we want to have lower __REGISTER key codes
             // normally but for the letter keys we want to have the upper ones
             //
             // NB: don't use XConvertCase() here, we want to do it for letters
@@ -1156,7 +1156,7 @@ wxTranslateGTKKeyEventToWx(wxKeyEvent& event,
             key_code = keysym;
 #endif
 
-            // as explained above, we want to have lower register key codes
+            // as explained above, we want to have lower __REGISTER key codes
             // normally but for the letter keys we want to have the upper ones
             //
             // NB: don't use XConvertCase() here, we want to do it for letters

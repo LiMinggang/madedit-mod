@@ -147,10 +147,10 @@ bool Search( CharIter &begin, CharIter &end,
 
 	if( begin == end ) { return false; }
 
-	register size_t idx = 0;
-	register const char_type *p = pattern;
+	__REGISTER size_t idx = 0;
+	__REGISTER const char_type *p = pattern;
 	CharIter beginpos;
-	register char_type c1;
+	__REGISTER char_type c1;
 
 	for( ;; )
 	{
@@ -203,7 +203,7 @@ bool Search( CharIter &begin, CharIter &end,
 				c1 = xtolower( c1 );
 			}
 
-			register int jv = jump_table.GetValue( c1 );
+			__REGISTER int jv = jump_table.GetValue( c1 );
 
 			if( jv >= ( int )pat_len )
 			{

@@ -1492,7 +1492,7 @@ int MadSyntax::FindStringCase( MadUCQueue & ucqueue, size_t first,
 
 	if( ucsize > 1 )
 	{
-		register ucs4_t uc = ucqueue.back().first;
+		__REGISTER ucs4_t uc = ucqueue.back().first;
 
 		if( uc == 0x0D || uc == 0x0A )
 		{
@@ -1516,7 +1516,7 @@ int MadSyntax::FindStringCase( MadUCQueue & ucqueue, size_t first,
 			{
 				while( ( nw_MadLines->*NextUChar )( ucqueue ) )
 				{
-					register ucs4_t uc = ucqueue.back().first;
+					__REGISTER ucs4_t uc = ucqueue.back().first;
 
 					if( uc == 0x0D || uc == 0x0A )
 					{
@@ -1569,7 +1569,7 @@ int MadSyntax::FindStringNoCase( MadUCQueue & ucqueue, size_t first,
 
 	if( ucsize > 1 )
 	{
-		register ucs4_t uc = ucqueue.back().first;
+		__REGISTER ucs4_t uc = ucqueue.back().first;
 
 		if( uc == 0x0D || uc == 0x0A )
 		{
@@ -1594,7 +1594,7 @@ int MadSyntax::FindStringNoCase( MadUCQueue & ucqueue, size_t first,
 			{
 				while( ( nw_MadLines->*NextUChar )( ucqueue ) )
 				{
-					register ucs4_t uc = ucqueue.back().first;
+					__REGISTER ucs4_t uc = ucqueue.back().first;
 
 					if( uc == 0x0D || uc == 0x0A )
 					{
@@ -1613,7 +1613,7 @@ int MadSyntax::FindStringNoCase( MadUCQueue & ucqueue, size_t first,
 
 				while( *( ++cstr ) != 0 )
 				{
-					register ucs4_t uc = it->first;
+					__REGISTER ucs4_t uc = it->first;
 
 					if( uc >= 'A' && uc <= 'Z' )
 					{

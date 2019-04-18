@@ -1594,7 +1594,7 @@ int MadLines::FindStringCase( MadUCQueue &ucqueue, MadStringIterator begin,
 
 	if( ucsize > 1 )
 	{
-		register ucs4_t uc = ucqueue.back().first;
+		__REGISTER ucs4_t uc = ucqueue.back().first;
 
 		if( uc == 0x0D || uc == 0x0A )
 		{
@@ -1616,7 +1616,7 @@ int MadLines::FindStringCase( MadUCQueue &ucqueue, MadStringIterator begin,
 			{
 				while( ( this->*NextUChar )( ucqueue ) )
 				{
-					register ucs4_t uc = ucqueue.back().first;
+					__REGISTER ucs4_t uc = ucqueue.back().first;
 
 					if( uc == 0x0D || uc == 0x0A )
 					{
@@ -1657,7 +1657,7 @@ int MadLines::FindStringNoCase( MadUCQueue &ucqueue, MadStringIterator begin,
 {
 	wxASSERT( !ucqueue.empty() );
 	int idx = 1;
-	register ucs4_t uc, firstuc = ucqueue.front().first;
+	__REGISTER ucs4_t uc, firstuc = ucqueue.front().first;
 
 	if( firstuc >= 'A' && firstuc <= 'Z' )
 	{

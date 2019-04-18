@@ -11982,7 +11982,7 @@ int MadEdit::GetUCharWidth( ucs4_t uc )
 {
 	if( uc > 0x10FFFF || uc < 0 ) uc = '?';
 
-	register int idx = uc >> 16;
+	__REGISTER int idx = uc >> 16;
 	wxUint16 *widths = m_TextFontWidths[idx];
 
 	if( widths == nullptr )
@@ -12044,7 +12044,7 @@ int MadEdit::GetHexUCharWidth( ucs4_t uc )
 {
 	if( uc > 0x10FFFF || uc < 0 ) uc = '?';
 
-	register int idx = uc >> 16;
+	__REGISTER int idx = uc >> 16;
 	wxUint16 *widths = m_HexFontWidths[idx];
 
 	if( widths == nullptr )

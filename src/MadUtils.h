@@ -17,6 +17,12 @@
 #ifndef nullptr
 #define nullptr (0)
 #endif
+#else
+#if (__cplusplus - 0) >= 201703L
+  #define __REGISTER
+#else
+  #define __REGISTER                              register
+#endif
 #endif
 #else
 #if _MSC_VER < 1600
@@ -26,6 +32,12 @@
 #endif
 #ifndef nullptr
 #define nullptr (0)
+#endif
+#else
+#if ((_MSC_VER >= 1910) && (_MSC_VER <= 2000))
+  #define __REGISTER
+#else
+  #define __REGISTER                              register
 #endif
 #endif
 #endif
