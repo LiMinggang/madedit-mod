@@ -1,5 +1,8 @@
 #ifndef Py_PYTHON_H
 #define Py_PYTHON_H
+#ifdef __cplusplus
+extern "C" {
+#endif
 /* Since this is a "meta-include" file, no #ifdef __cplusplus / extern "C" { */
 
 /* Include nearly all Python header files */
@@ -178,4 +181,7 @@ PyAPI_FUNC(PyObject*) _Py_Mangle(PyObject *p, PyObject *name);
 #define PyDoc_STR(str) ""
 #endif
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* !Py_PYTHON_H */
