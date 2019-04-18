@@ -11316,10 +11316,10 @@ fi
 # option for additional Boost lib
 
 # Check whether --with-boost was given.
-if test "${with_boost+set}" = set; then :
-  withval=$with_boost; CXXFLAGS="$CXXFLAGS -I$withval"
-    LIBS="$LIBS $withval/stage/lib/libboost_python.a"
-fi
+#if test "${with_boost+set}" = set; then :
+#  withval=$with_boost; CXXFLAGS="$CXXFLAGS -I$withval"
+#    LIBS="$LIBS $withval/stage/lib/libboost_python.a"
+#fi
 
 
 
