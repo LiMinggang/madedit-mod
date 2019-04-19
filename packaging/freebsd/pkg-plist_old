@@ -45,7 +45,6 @@ share/madedit-mod/syntax/syntax_sh.syn
 share/madedit-mod/syntax/syntax_sql.syn
 share/madedit-mod/syntax/syntax_squirrel.syn
 share/madedit-mod/syntax/syntax_syn.syn
-share/madedit-mod/syntax/syntax_syn.syn
 share/madedit-mod/syntax/syntax_tcl.syn
 share/madedit-mod/syntax/syntax_vbscript_asp.syn
 share/madedit-mod/syntax/syntax_visualbasic.syn
@@ -53,6 +52,5 @@ share/madedit-mod/syntax/syntax_verilog.syn
 share/madedit-mod/syntax/syntax_vhdl.syn
 share/madedit-mod/syntax/syntax_x86asm.syn
 share/madedit-mod/syntax/syntax_xml.syn
-share/pixmaps/madedit-mod.xpm
-@dirrm share/madedit-mod/syntax
-@dirrm share/madedit-mod
+@dir share/madedit-mod/syntax
+@dir share/madedit-mod
