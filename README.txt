@@ -20,7 +20,7 @@ A. Linux, FreeBSD, and Unix-like OS (__WXGTK__):
       gtk+2.0-dev/libgtk-3-dev automake (Ubuntu/Debian/ElementaryOS)
       copy wxwin.m4 to usr/share/acloXXX/ or install wxGTK-devel
       
-      install pkgconf for FreeBSD/GhostBSD, GhostBSD is recommanded
+      install gcc pkgconf for FreeBSD is recommanded
       sudo portsnap fetch extract(/usr/share/mk/bsd.port.mk not found)
 
 B. MS Windows (__WXMSW__):
@@ -118,10 +118,6 @@ ChangeLog:
 Note: Not support wxWidgets 2.X anymore since 0.3.X
 
 Todo:
-FreeBSD packaging (with FreeBSD 10.01)
-1. configure CC=gcc CXX=g++
-2. aclocal version in aclocal.m4
-3. stdc++ version
 
 Mod v0.4.17
 New: MadPython recording enhencement to support keyboard commands
