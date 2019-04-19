@@ -100,10 +100,6 @@ Mod v0.4.16
 Todo
 =====
 * Partial load for large text files which was mentioned by the original author but never getting done.
-* FreeBSD packaging (with FreeBSD 10.01)
-1. configure CC=gcc CXX=g++
-2. aclocal version in aclocal.m4
-3. stdc++ version
 
 Known issues
 =============
