@@ -20,7 +20,8 @@ A. Linux, FreeBSD, and Unix-like OS (__WXGTK__):
       gtk+2.0-dev/libgtk-3-dev automake (Ubuntu/Debian/ElementaryOS)
       copy wxwin.m4 to usr/share/acloXXX/ or install wxGTK-devel
       
-      install gcc pkgconf for FreeBSD is recommanded
+      install wxgtk(and rename the script under /usr/local/bin/wxgtk3uxxx-config tp wx-config)
+      pkgconf for FreeBSD is recommanded
       sudo portsnap fetch extract(/usr/share/mk/bsd.port.mk not found)
 
 B. MS Windows (__WXMSW__):
@@ -123,6 +124,7 @@ Mod v0.4.17
 New: MadPython recording enhencement to support keyboard commands
 New: Improve MadPython API to support readable APIs
 New: Japanese Translation(Thanks Tilt <tiltstr@gmail.com>)
+Change *nix build to use shared libs released by the OS. You have to install libwxgtk by your self
 Update boostpython to 1.70
 
 Mod v0.4.16

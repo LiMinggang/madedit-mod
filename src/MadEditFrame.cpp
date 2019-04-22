@@ -8530,7 +8530,19 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& WXUNUSED(event) )
 		// update languages
 		wxString lang = g_OptionsDialog->ComboBoxLanguage->GetValue();
 		g_OptionsDialog->ComboBoxLanguage->Clear();
+#if wxMAJOR_VERSION < 3 || (wxMAJOR_VERSION == 3 && wxMINOR_VERSION < 1)
+		wxArrayString items;
+		items.Alloc(g_LanguageString.size());
+		std::vector<wxString>::iterator it = g_LanguageString.begin(); std::vector<wxString>::iterator itend = g_LanguageString.end();
+		for(; it != itend; ++it)
+		{
+			items.Add(*it);
+		}
+		g_OptionsDialog->ComboBoxLanguage->Append( items );
+#else
 		g_OptionsDialog->ComboBoxLanguage->Append( g_LanguageString );
+#endif
+
 		std::vector<wxString>::iterator it = find(g_LanguageString.begin(), g_LanguageString.end(), lang);
 		if(it == g_LanguageString.end()) g_OptionsDialog->ComboBoxLanguage->SetValue( g_LanguageString[0] );
 		else g_OptionsDialog->ComboBoxLanguage->SetValue( lang );
