@@ -10,6 +10,10 @@
 #define _MADPRINTOUT_H_
 #include "MadUtils.h"
 
+#if wxMAJOR_VERSION < 3 || (wxMAJOR_VERSION == 3 && wxMINOR_VERSION < 1)
+#define wxOVERRIDE
+#endif
+
 class MadPrintout: public wxPrintout
 {
     static int s_PrintoutCount;

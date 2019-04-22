@@ -8533,10 +8533,10 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& WXUNUSED(event) )
 #if wxMAJOR_VERSION < 3 || (wxMAJOR_VERSION == 3 && wxMINOR_VERSION < 1)
 		wxArrayString items;
 		items.Alloc(g_LanguageString.size());
-		std::vector<wxString>::iterator it = g_LanguageString.begin(); std::vector<wxString>::iterator itend = g_LanguageString.end();
-		for(; it != itend; ++it)
+		std::vector<wxString>::iterator itt = g_LanguageString.begin(); std::vector<wxString>::iterator itend = g_LanguageString.end();
+		for(; itt != itend; ++itt)
 		{
-			items.Add(*it);
+			items.Add(*itt);
 		}
 		g_OptionsDialog->ComboBoxLanguage->Append( items );
 #else

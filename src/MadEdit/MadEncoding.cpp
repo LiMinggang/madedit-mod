@@ -7,6 +7,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <set>
+#include <algorithm>
 #include <wx/config.h>
 #include "MadEncoding.h"
 #include "uchardet.h"

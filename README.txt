@@ -13,10 +13,10 @@ Supported Developing Platforms:
 A. Linux, FreeBSD, and Unix-like OS (__WXGTK__):
    a. GNU C++ 3.x/4.x:
       Required Libraries to compile:
-      1. wxWidgets-3.1.2 or higher with Unicode and IPC enabled
-      2. Boost-1.56.0 or higher(build Boost-Python)(1.69 is recommended)
+      1. wxWidgets-3.1.2 or higher with Unicode and IPC enabled(obsoleted)
+      2. Boost-1.56.0 or higher(build Boost-Python)(1.70 is recommended)
 
-      (install gtk2-devel/gtk3-devel gettext-devel automake rpm-build (Fedora/Mageia))
+      (install wxgtk gtk2-devel/gtk3-devel gettext-devel automake rpm-build (Fedora/Mageia))
       gtk+2.0-dev/libgtk-3-dev automake (Ubuntu/Debian/ElementaryOS)
       copy wxwin.m4 to usr/share/acloXXX/ or install wxGTK-devel
       
@@ -28,11 +28,11 @@ B. MS Windows (__WXMSW__):
    a. MinGW32/GNU C++ 3.x (wxDevCpp):
       Required Libraries to compile:
       1. wxWidgets-3.1.2 or higher with Unicode and IPC enabled
-      2. Boost-1.56.0 or higher(1.69 is recommended)
+      2. Boost-1.56.0 or higher(1.70 is recommended)
    b. Visual C++ 7.1 (VS.Net 2005) or higher:
       Required Libraries to compile:
       1. wxWidgets-3.1.2 or higher with Unicode and IPC enabled
-      2. Boost-1.56.0 or higher(1.69 is recommended)
+      2. Boost-1.56.0 or higher(1.70 is recommended)
       3. Set WXWIN and BOOST to the root directory of your local ones
 
 P.S.: Please put the debug info(.pdb) under the App directory in case there was a
@@ -48,10 +48,8 @@ P.S.: Please open a ticket for bug of MadEdit-Mod at
 MadEdit_Win2K is a build by VC++ 2005 express for Windows 2000/XP.
 
 Example build under Linux
-wxWidgets(3.1.2) (CXXFLAGS=-fPIC CPPFLAGS=-fPIC CFLAGS=-fPIC, x64)
-./configure --enable-unicode --disable-shared --with-libpng=builtin --with-zlib=builtin --with-expat=builtin --with-gtk=2 --with-libiconv=no
 MadEdit-Mod
-./configure --with-boost=${HOME}/boost_1_69_0 --with-wxdir=${HOME}/wxWidgets-3.1.2
+./configure --with-boost=${HOME}/boost_1_70_0
 
 Syntax files, Locale files, Dictionaries and Settings:
 ---------------------------------------
@@ -80,7 +78,7 @@ Syntax files, Locale files, Dictionaries and Settings:
     German(de_DE)              (Not done)
     Greek(el)
     Italian(it_IT)             (Not done)
-    Japanese(ja_JP)            (Not done)
+    Japanese(ja_JP)
     Polish(pl_PL)              (Not done)
     Russian(ru_RU)             (Not done)
     Spanish(es)                (Not done)
@@ -124,8 +122,12 @@ Mod v0.4.17
 New: MadPython recording enhencement to support keyboard commands
 New: Improve MadPython API to support readable APIs
 New: Japanese Translation(Thanks Tilt <tiltstr@gmail.com>)
-Change *nix build to use shared libs released by the OS. You have to install libwxgtk by your self
+New: Package for FreeBSD 12.0
+Fix: wxWidgets 3.0.x backward compatibility
+Change *nix build to use shared libs released by the OS. You have to install libwxgtk by yourself
+Add wxWidgets version number in About dialog
 Update boostpython to 1.70
+Update boost to 1.70
 
 Mod v0.4.16
 1.New: Change foreground and backgroud colour for all the text controls in main frame

@@ -265,7 +265,18 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	BoxSizer27->Add(3,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	wxASSERT( g_LanguageString.empty() != true );
 	ComboBoxLanguage = new wxComboBox( Panel1, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(160,-1), 0, nullptr,  wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, wxT( "wxID_ANY" ) );
+#if wxMAJOR_VERSION < 3 || (wxMAJOR_VERSION == 3 && wxMINOR_VERSION < 1)
+	wxArrayString items;
+	items.Alloc(g_LanguageString.size());
+	std::vector<wxString>::iterator itt = g_LanguageString.begin(); std::vector<wxString>::iterator itend = g_LanguageString.end();
+	for(; itt != itend; ++itt)
+	{
+		items.Add(*itt);
+	}
+	ComboBoxLanguage->Append( items );
+#else
 	ComboBoxLanguage->Append(g_LanguageString);
+#endif
 	ComboBoxLanguage->SetValue( g_LanguageString[0] );
 	BoxSizer27->Add(ComboBoxLanguage, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	StaticText17 = new wxStaticText(Panel1, wxID_ANY, _("Language of User Interface (must restart MadEdit)"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
