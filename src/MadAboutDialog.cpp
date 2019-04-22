@@ -32,13 +32,14 @@ _("Copyright (C) 2012-2019 Minggang Li <minggang.li@gmail.com>\n\n\
  along with this program.  If not, see <http://www.gnu.org/licenses/>.\n")
 );
 
-const int g_num_contributers = 5;
+const int g_num_contributers = 6;
 
 const wxChar   * g_MadEditModCredits[g_num_contributers][2] = {
 	wxT("Minggang Li"), _("Current maintainer"),
 	wxT("Alston Chen"), _("Author of MadEdit"),
-	wxT("nikoss"), _("Greek Translation"),
-	wxT("zhtw2013"), _("Traditional Chinese Translation"),
+	wxT("Nikoss"), _("Greek Translation"),
+	wxT("ZhTw2013"), _("Traditional Chinese Translation"),
+	wxT("Tilt"), _("Japanese Translation"),
 	wxT("Others"), _("Translation/patch contributers"),
 };
 
