@@ -5,18 +5,13 @@ compiler:
 
 sudo: false
 
-install:
-  - wget http://sourceforge.net/projects/boost/files/boost/1.70.0/boost_1_70_0.zip && unzip -q boost_1_70_0.zip
-
 os:
   - linux
 
-script:
-  - cd ./thirdparty/wxWidgets && sh ./configure --enable-unicode --disable-shared --with-libpng=builtin --with-zlib=builtin --with-expat=builtin --with-gtk=2 --with-libiconv=no && make
-  - cd ../.. && sh ./autogen.sh && sh ./configure --with-wxdir=./thirdparty/wxWidgets --with-boost=./boost_1_70_0 && make
+make
+  - cd ../.. && sh ./autogen.sh && sh ./configure && make
 #  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then autoreconf -i -I /usr/local/share/aclocal && ./configure && make && make check; fi
 # might be needed for future
-
 
 addons:
   apt:
@@ -27,5 +22,6 @@ addons:
     - automake
     - gcc
     - g++
+    - libboost1.55-all-dev
     - gtk+2.0-dev
     - libwxgtk3.0
