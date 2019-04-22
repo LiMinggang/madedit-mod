@@ -73,8 +73,6 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	src/MadEdit/ExtEncodings/converters.h \
 	src/MadEdit/caret_new.cpp \
 	src/MadEdit/caret_new.h \
-	src/MadEdit/clipbrd_gtk.cpp \
-	src/MadEdit/clipbrd_gtk.h \
 	src/MadEdit/MadCSConv.cpp \
 	src/MadEdit/MadCSConv.h \
 	src/MadEdit/MadDeque.hpp \

@@ -12,11 +12,11 @@
 #include "MadEdit.h"
 #include "MadEditPv.h"
 
-#ifdef __WXGTK__
-	#   include "clipbrd_gtk.h"
-#else
+//#ifdef __WXGTK__
+//	#   include "clipbrd_gtk.h"
+//#else
 	#   include <wx/clipbrd.h>
-#endif
+//#endif
 
 #include <wx/filename.h>
 #include <wx/tokenzr.h> 

@@ -70,11 +70,11 @@
 	#include <sys/stat.h>
 #endif
 
-#ifdef __WXGTK__
-	#   include "MadEdit/clipbrd_gtk.h"
-#else
+//#ifdef __WXGTK__
+//	#   include "MadEdit/clipbrd_gtk.h"
+//#else
 	#   include <wx/clipbrd.h>
-#endif
+//#endif
 
 //Do not add custom headers.
 //wx-dvcpp designer will remove them

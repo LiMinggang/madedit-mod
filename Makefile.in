@@ -134,7 +134,6 @@ am_madedit_OBJECTS = src/madedit-MadAboutDialog.$(OBJEXT) \
 	src/madedit-MadRecentList.$(OBJEXT) \
 	src/madedit-EmbeddedPython.$(OBJEXT) \
 	src/MadEdit/madedit-caret_new.$(OBJEXT) \
-	src/MadEdit/madedit-clipbrd_gtk.$(OBJEXT) \
 	src/MadEdit/madedit-MadCSConv.$(OBJEXT) \
 	src/MadEdit/madedit-MadEdit.$(OBJEXT) \
 	src/MadEdit/madedit-MadEditAdvanced.$(OBJEXT) \
@@ -638,8 +637,7 @@ am__depfiles_remade = astyle/$(DEPDIR)/madedit-asstreamiterator.Po \
 	src/MadEdit/$(DEPDIR)/madedit-MadSyntax.Po \
 	src/MadEdit/$(DEPDIR)/madedit-MadUndo.Po \
 	src/MadEdit/$(DEPDIR)/madedit-TradSimp.Po \
-	src/MadEdit/$(DEPDIR)/madedit-caret_new.Po \
-	src/MadEdit/$(DEPDIR)/madedit-clipbrd_gtk.Po
+	src/MadEdit/$(DEPDIR)/madedit-caret_new.Po
 am__mv = mv -f
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
@@ -1035,8 +1033,6 @@ madedit_SOURCES = src/MadAboutDialog.cpp \
 	src/MadEdit/ExtEncodings/converters.h \
 	src/MadEdit/caret_new.cpp \
 	src/MadEdit/caret_new.h \
-	src/MadEdit/clipbrd_gtk.cpp \
-	src/MadEdit/clipbrd_gtk.h \
 	src/MadEdit/MadCSConv.cpp \
 	src/MadEdit/MadCSConv.h \
 	src/MadEdit/MadDeque.hpp \
@@ -2166,16 +2162,16 @@ noinst_HEADERS = description-pak \
 	python/example/tutorial/hello.py \
 	python/example/tutorial/Jamfile \
 	python/fabscript \
-        python/include/boost/python/numpy.hpp \
-        python/include/boost/python/numpy/config.hpp \
-        python/include/boost/python/numpy/dtype.hpp \
-        python/include/boost/python/numpy/internal.hpp \
-        python/include/boost/python/numpy/invoke_matching.hpp \
-        python/include/boost/python/numpy/matrix.hpp \
-        python/include/boost/python/numpy/ndarray.hpp \
-        python/include/boost/python/numpy/numpy_object_mgr_traits.hpp \
-        python/include/boost/python/numpy/scalars.hpp \
-        python/include/boost/python/numpy/ufunc.hpp \
+	python/include/boost/python/numpy.hpp \
+	python/include/boost/python/numpy/config.hpp \
+	python/include/boost/python/numpy/dtype.hpp \
+	python/include/boost/python/numpy/internal.hpp \
+	python/include/boost/python/numpy/invoke_matching.hpp \
+	python/include/boost/python/numpy/matrix.hpp \
+	python/include/boost/python/numpy/ndarray.hpp \
+	python/include/boost/python/numpy/numpy_object_mgr_traits.hpp \
+	python/include/boost/python/numpy/scalars.hpp \
+	python/include/boost/python/numpy/ufunc.hpp \
 	python/index.html \
 	python/Jamfile \
 	python/LICENSE_1_0.txt \
@@ -2532,9 +2528,6 @@ src/MadEdit/$(DEPDIR)/$(am__dirstamp):
 	@$(MKDIR_P) src/MadEdit/$(DEPDIR)
 	@: > src/MadEdit/$(DEPDIR)/$(am__dirstamp)
 src/MadEdit/madedit-caret_new.$(OBJEXT): src/MadEdit/$(am__dirstamp) \
-	src/MadEdit/$(DEPDIR)/$(am__dirstamp)
-src/MadEdit/madedit-clipbrd_gtk.$(OBJEXT):  \
-	src/MadEdit/$(am__dirstamp) \
 	src/MadEdit/$(DEPDIR)/$(am__dirstamp)
 src/MadEdit/madedit-MadCSConv.$(OBJEXT): src/MadEdit/$(am__dirstamp) \
 	src/MadEdit/$(DEPDIR)/$(am__dirstamp)
@@ -3561,7 +3554,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/MadEdit/$(DEPDIR)/madedit-MadUndo.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/MadEdit/$(DEPDIR)/madedit-TradSimp.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@src/MadEdit/$(DEPDIR)/madedit-caret_new.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@src/MadEdit/$(DEPDIR)/madedit-clipbrd_gtk.Po@am__quote@ # am--include-marker
 
 $(am__depfiles_remade):
 	@$(MKDIR_P) $(@D)
@@ -3950,20 +3942,6 @@ src/MadEdit/madedit-caret_new.obj: src/MadEdit/caret_new.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/MadEdit/caret_new.cpp' object='src/MadEdit/madedit-caret_new.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o src/MadEdit/madedit-caret_new.obj `if test -f 'src/MadEdit/caret_new.cpp'; then $(CYGPATH_W) 'src/MadEdit/caret_new.cpp'; else $(CYGPATH_W) '$(srcdir)/src/MadEdit/caret_new.cpp'; fi`
-
-src/MadEdit/madedit-clipbrd_gtk.o: src/MadEdit/clipbrd_gtk.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT src/MadEdit/madedit-clipbrd_gtk.o -MD -MP -MF src/MadEdit/$(DEPDIR)/madedit-clipbrd_gtk.Tpo -c -o src/MadEdit/madedit-clipbrd_gtk.o `test -f 'src/MadEdit/clipbrd_gtk.cpp' || echo '$(srcdir)/'`src/MadEdit/clipbrd_gtk.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/MadEdit/$(DEPDIR)/madedit-clipbrd_gtk.Tpo src/MadEdit/$(DEPDIR)/madedit-clipbrd_gtk.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/MadEdit/clipbrd_gtk.cpp' object='src/MadEdit/madedit-clipbrd_gtk.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o src/MadEdit/madedit-clipbrd_gtk.o `test -f 'src/MadEdit/clipbrd_gtk.cpp' || echo '$(srcdir)/'`src/MadEdit/clipbrd_gtk.cpp
-
-src/MadEdit/madedit-clipbrd_gtk.obj: src/MadEdit/clipbrd_gtk.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT src/MadEdit/madedit-clipbrd_gtk.obj -MD -MP -MF src/MadEdit/$(DEPDIR)/madedit-clipbrd_gtk.Tpo -c -o src/MadEdit/madedit-clipbrd_gtk.obj `if test -f 'src/MadEdit/clipbrd_gtk.cpp'; then $(CYGPATH_W) 'src/MadEdit/clipbrd_gtk.cpp'; else $(CYGPATH_W) '$(srcdir)/src/MadEdit/clipbrd_gtk.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/MadEdit/$(DEPDIR)/madedit-clipbrd_gtk.Tpo src/MadEdit/$(DEPDIR)/madedit-clipbrd_gtk.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/MadEdit/clipbrd_gtk.cpp' object='src/MadEdit/madedit-clipbrd_gtk.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -c -o src/MadEdit/madedit-clipbrd_gtk.obj `if test -f 'src/MadEdit/clipbrd_gtk.cpp'; then $(CYGPATH_W) 'src/MadEdit/clipbrd_gtk.cpp'; else $(CYGPATH_W) '$(srcdir)/src/MadEdit/clipbrd_gtk.cpp'; fi`
 
 src/MadEdit/madedit-MadCSConv.o: src/MadEdit/MadCSConv.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(madedit_CXXFLAGS) $(CXXFLAGS) -MT src/MadEdit/madedit-MadCSConv.o -MD -MP -MF src/MadEdit/$(DEPDIR)/madedit-MadCSConv.Tpo -c -o src/MadEdit/madedit-MadCSConv.o `test -f 'src/MadEdit/MadCSConv.cpp' || echo '$(srcdir)/'`src/MadEdit/MadCSConv.cpp
@@ -6243,7 +6221,6 @@ distclean: distclean-recursive
 	-rm -f src/MadEdit/$(DEPDIR)/madedit-MadUndo.Po
 	-rm -f src/MadEdit/$(DEPDIR)/madedit-TradSimp.Po
 	-rm -f src/MadEdit/$(DEPDIR)/madedit-caret_new.Po
-	-rm -f src/MadEdit/$(DEPDIR)/madedit-clipbrd_gtk.Po
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-hdr distclean-tags
@@ -6547,7 +6524,6 @@ maintainer-clean: maintainer-clean-recursive
 	-rm -f src/MadEdit/$(DEPDIR)/madedit-MadUndo.Po
 	-rm -f src/MadEdit/$(DEPDIR)/madedit-TradSimp.Po
 	-rm -f src/MadEdit/$(DEPDIR)/madedit-caret_new.Po
-	-rm -f src/MadEdit/$(DEPDIR)/madedit-clipbrd_gtk.Po
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

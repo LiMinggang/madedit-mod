@@ -20,11 +20,12 @@
 #include <wx/tokenzr.h>
 #include <wx/menu.h>
 
-#ifdef __WXGTK__
-	#   include "clipbrd_gtk.h"
-#else
+//#ifdef __WXGTK__
+	//#   include <wx/gtk/clipbrd.h>
+
+//#else
 	#   include <wx/clipbrd.h>
-#endif
+//#endif
 
 #include <wx/caret.h>
 #if !defined(__WXMSW__)

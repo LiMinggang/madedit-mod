@@ -10,11 +10,11 @@
 
 #include "TradSimp.h"
 
-#ifdef __WXGTK__
-#include "clipbrd_gtk.h"
-#else
+//#ifdef __WXGTK__
+//#include "clipbrd_gtk.h"
+//#else
 #include <wx/clipbrd.h>
-#endif
+//#endif
 
 #ifdef _DEBUG
 #include <crtdbg.h>

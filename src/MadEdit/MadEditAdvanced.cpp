@@ -17,11 +17,11 @@
 #include <wx/tokenzr.h>
 #include <wx/fileconf.h>
 
-#ifdef __WXGTK__
-	#   include "clipbrd_gtk.h"
-#else
+//#ifdef __WXGTK__
+//	#   include "clipbrd_gtk.h"
+//#else
 	#   include <wx/clipbrd.h>
-#endif
+//#endif
 
 #ifndef PYMADEDIT_DLL
 	#include "SpellCheckerManager.h"
