@@ -576,8 +576,7 @@ int MadEditApp::OnExit()
 
 	if( g_Locale )
 	{
-		delete g_Locale;
-		g_Locale = nullptr;
+		wxDELETE( g_Locale );
 	}
 
 	DeletePendingEvents();
@@ -912,15 +911,13 @@ void MadEditApp::InitLocale()
 	if( g_Locale )
 	{
 		wxDELETE( g_Locale );
-		g_Locale = nullptr;
 	}
 
 	g_Locale = new wxLocale( lang );
-
 	// g_Locale.Init(lang);
 	for( size_t idx = 0; idx < g_LocaleDirPrefix.size(); ++idx )
 	{
-		g_Locale->AddCatalogLookupPathPrefix( g_LocaleDirPrefix[idx] );
+		wxLocale::AddCatalogLookupPathPrefix( g_LocaleDirPrefix[idx] );
 	}
 
 	g_Locale->AddCatalog( g_MadLanguageFileName );

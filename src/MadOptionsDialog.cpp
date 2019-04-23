@@ -6,6 +6,7 @@
 // Licence:     GPL
 ///////////////////////////////////////////////////////////////////////////////
 #include <vector>
+#include <algorithm>
 #include "MadOptionsDialog.h"
 
 #ifdef _MSC_VER
