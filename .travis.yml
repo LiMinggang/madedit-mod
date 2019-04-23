@@ -8,7 +8,7 @@ sudo: false
 os:
   - linux
 
-make
+script:
   - cd ../.. && sh ./autogen.sh && sh ./configure && make
 #  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then autoreconf -i -I /usr/local/share/aclocal && ./configure && make && make check; fi
 # might be needed for future
