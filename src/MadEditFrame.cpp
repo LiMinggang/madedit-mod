@@ -2275,9 +2275,9 @@ CommandData CommandTable[] =
 		wxITEM_NORMAL,    -1,			    0,			         _( "Delete the selected lines" ), &g_Menu_EditPop, 0, 0, false
 	},
 
+	{ 0,			    1, menuJoinLines,			     wxT( "menuJoinLines" ),			    _( "Join Lines" ),						      wxT( "Ctrl-J" ),       wxITEM_NORMAL,    -1,			    0,			         _( "Join selected lines into one" ), &g_Menu_EditPop, 0, 0, false},
 	{ 0,			    1, menuDeleteEmptyLines,         wxT( "menuDeleteEmptyLines" ),         _( "Delete Empty Lines" ),			          wxT( "Ctrl-Alt-L" ),   wxITEM_NORMAL,    -1,			    0,			         _( "Delete empty lines" ), &g_Menu_EditPop, 0, 0, false},
 	{ 0,			    1, menuDeleteEmptyLinesWithSpaces, wxT( "menuDeleteEmptyLinesWithSpaces" ), _( "Delete Empty Lines With Spaces" ),      wxT( "" ),			 wxITEM_NORMAL,    -1,			    0,			         _( "Delete empty lines with spaces" ), &g_Menu_EditPop, 0, 0, false},
-	{ 0,			    1, menuJoinLines,			    wxT( "menuJoinLines" ),			    _( "Join Lines" ),						      wxT( "Ctrl-J" ),       wxITEM_NORMAL,    -1,			    0,			         _( "Join selected lines into one" ), &g_Menu_EditPop, 0, 0, false},
 	{ 0,			    1, menuTrimTrailingSpaces,       wxT( "menuTrimTrailingSpaces" ),       _( "Tri&m Trailing Spaces" ),			       wxT( "" ),			 wxITEM_NORMAL,    -1,			    0,			         _( "Trim trailing spaces at the end of lines" ), &g_Menu_EditPop, 0, 0, false},
 	{ 0,			    1, menuTrimLeadingSpaces,        wxT( "menuTrimLeadingSpaces" ),        _( "Tri&m Leading Spaces" ),			        wxT( "" ),			 wxITEM_NORMAL,    -1,			    0,			         _( "Trim leading spaces at the beginning of lines" ), &g_Menu_EditPop, 0, 0, false},
 	{ 0,			    1, 0,						    0,						           0,									        0,			       wxITEM_SEPARATOR, -1,			    0,			         0, &g_Menu_EditPop, 0, 0, false},
