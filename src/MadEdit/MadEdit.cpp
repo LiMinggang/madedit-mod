@@ -10237,6 +10237,10 @@ void MadEdit::OnMouseLeftUp( wxMouseEvent &evt )
 				if( !m_DragDrop )
 				{
 					EndUpdateSelection( true );
+					if( m_RecordCaretMovements && m_Selection )
+					{
+						m_CaretTracker->Add( m_SelectionPos1.pos, m_SelectionPos2.pos );
+					}
 				}
 			}
 
@@ -10479,11 +10483,6 @@ void MadEdit::OnMouseMotion( wxMouseEvent &evt )
 		}
 
 		DoSelectionChanged();
-
-		if( m_RecordCaretMovements && oldCaretPos != m_CaretPos.pos )
-		{
-			m_CaretTracker->Add( oldCaretPos, m_CaretPos.pos );
-		}
 	}
 
 	evt.Skip();

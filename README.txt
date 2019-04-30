@@ -124,6 +124,7 @@ New: Improve MadPython API to support readable APIs
 New: Japanese Translation(Thanks Tilt <tiltstr@gmail.com>)
 New: Package for FreeBSD 12.0
 Fix: wxWidgets 3.0.x backward compatibility
+Fix: Treat mouse moving in selecting by mouse as one move #284
 Change *nix build to use shared libs released by the OS. You have to install libwxgtk by yourself
 Add wxWidgets version number in About dialog
 Update boostpython to 1.70
