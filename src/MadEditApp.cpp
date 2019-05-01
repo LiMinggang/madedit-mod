@@ -722,6 +722,8 @@ void MadEditApp::OnFatalException()
 
 	if( dmpFile.IsOpened() )
 	{
+		extern wxString g_MadEdit_Version;
+		dmpFile.Write(g_MadEdit_Version + wxT("\n\n"));
 		m_StackWalker.SetDumpFile( &dmpFile );
 		m_StackWalker.WalkFromException();
 		dmpFile.Close();

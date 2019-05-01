@@ -127,6 +127,7 @@ Fix: wxWidgets 3.0.x backward compatibility
 Fix: Treat mouse moving in selecting by mouse as one move #284
 Change *nix build to use shared libs released by the OS. You have to install libwxgtk by yourself
 Add wxWidgets version number in About dialog
+Add version information to crash dump file
 Update boostpython to 1.70
 Update boost to 1.70
 
