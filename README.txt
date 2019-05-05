@@ -119,13 +119,16 @@ Note: Not support wxWidgets 2.X anymore since 0.3.X
 Todo:
 
 Mod v0.4.17
+Note: Changed *nix build from static link with wxWidgets to dynamic link with wxGTK, which
+means you have to install wxGTK3+(wxGTK2.8 is not supported) to install the release
+
 New: MadPython recording enhencement to support keyboard commands
 New: Improve MadPython API to support readable APIs
 New: Japanese Translation(Thanks Tilt <tiltstr@gmail.com>)
 New: Package for FreeBSD 12.0
 Fix: wxWidgets 3.0.x backward compatibility
 Fix: Treat mouse moving in selecting by mouse as one move #284
-Change *nix build to use shared libs released by the OS. You have to install libwxgtk by yourself
+Change *nix build to use shared libs released by the OS. You have to install libwxgtk3 by yourself
 Add wxWidgets version number in About dialog
 Add version information to crash dump file
 Update boostpython to 1.70
