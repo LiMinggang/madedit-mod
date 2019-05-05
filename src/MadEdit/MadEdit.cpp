@@ -2245,7 +2245,7 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 							{
 								vector<ucs4_t> newword;
 								newword.reserve(wordlength);
-								for( size_t i = 0; i < wordlength; ++i )
+								for( size_t i = 0; i < (size_t)wordlength; ++i )
 								{
 									newword.push_back( m_WordBuffer[i] );
 								}
@@ -10382,8 +10382,6 @@ void MadEdit::OnMouseMotion( wxMouseEvent &evt )
 
 	if( m_MouseLeftDown )
 	{
-		wxFileOffset oldCaretPos = m_CaretPos.pos;
-
 		if( !m_Selection )
 		{
 			BeginUpdateSelection();
