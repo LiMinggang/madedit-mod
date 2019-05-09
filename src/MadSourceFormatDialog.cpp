@@ -468,7 +468,7 @@ void MadSourceFormatDialog::OnRadioBoxBracketStyleSelect( wxCommandEvent& WXUNUS
 	case aspsStroustrup: // Stroustrup
 	case aspsWhitesmith: // Whitesmith
 	case aspsVTK: // VTK
-	case aspsRaliff: // Ratliff
+	case aspsRatliff: // Ratliff
 	case aspsGnu: // GNU
 	case aspsLinux: // Linux
 	case aspsHorstmann: // Horstmann

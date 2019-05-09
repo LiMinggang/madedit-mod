@@ -215,7 +215,7 @@ public:
 	virtual streamoff getPeekStart() const = 0;
 	virtual int getStreamLength() const = 0;
 	virtual bool hasMoreLines() const = 0;
-	virtual string nextLine(bool emptyLineWasDeleted) = 0;
+	virtual string nextLine(bool emptyLineWasDeleted = false) = 0;
 	virtual string peekNextLine() = 0;
 	virtual void peekReset() = 0;
 	virtual streamoff tellg() = 0;
@@ -358,12 +358,7 @@ class ASBeautifier : protected ASBase
 public:
 	ASBeautifier();
 	virtual ~ASBeautifier();
-	ASBeautifier(const ASBeautifier& other);
-	ASBeautifier& operator=(ASBeautifier const&);
-	ASBeautifier(ASBeautifier&){};
-	ASBeautifier& operator=(ASBeautifier&);
 	virtual void init(ASSourceIterator* iter);
-
 	virtual string beautify(const string& originalLine);
 	void setCaseIndent(bool state);
 	void setClassIndent(bool state);
@@ -436,6 +431,8 @@ protected:
 	bool isInIndentablePreproc;
 
 private:  // functions
+	ASBeautifier(const ASBeautifier& other);     // inline functions
+	ASBeautifier& operator=(ASBeautifier&);      // not to be implemented
 
 	void adjustObjCMethodDefinitionIndentation(const string& line_);
 	void adjustObjCMethodCallIndentation(const string& line_);
@@ -608,7 +605,8 @@ private:  // variables
 class ASEnhancer : protected ASBase
 {
 public:  // functions
-	ASEnhancer(){};
+	ASEnhancer();
+	virtual ~ASEnhancer();
 	void init(int, int, int, bool, bool, bool, bool, bool, bool, bool,
 	          vector<const pair<const string, const string>* >*);
 	void enhance(string& line, bool isInNamespace, bool isInPreprocessor, bool isInSQL);
@@ -684,13 +682,9 @@ class ASFormatter : public ASBeautifier
 public:	// functions
 	ASFormatter();
 	virtual ~ASFormatter();
-	ASFormatter(const ASFormatter&);
-	ASFormatter& operator=(ASFormatter const&);
-	ASFormatter(ASFormatter&);
-	ASFormatter& operator=(ASFormatter&);
 	virtual void init(ASSourceIterator* si);
-	bool hasMoreLines() const;
-	string nextLine();
+	virtual bool hasMoreLines() const;
+	virtual string nextLine();
 	LineEndFormat getLineEndFormat() const;
 	bool getIsLineReady() const;
 	void setFormattingStyle(FormatStyle style);
@@ -753,6 +747,8 @@ public:	// functions
 
 
 private:  // functions
+	ASFormatter(const ASFormatter& copy);       // not to be implemented
+	ASFormatter& operator=(ASFormatter&);       // not to be implemented
 	template<typename T> void deleteContainer(T& container);
 	template<typename T> void initContainer(T& container, T value);
 	char peekNextChar() const;
@@ -864,9 +860,9 @@ private:  // functions
 	string peekNextText(const string& firstLine,
 	                    bool endOnEmptyLine = false,
 #if CPLUSEPLUSE98
-                        const boost::shared_ptr<ASPeekStream>& streamArg = boost::shared_ptr<ASPeekStream>()) const;
+                        const boost::shared_ptr<ASPeekStream> streamArg = boost::shared_ptr<ASPeekStream>()) const;
 #else
-                        const std::shared_ptr<ASPeekStream>& streamArg = nullptr) const;
+                        const std::shared_ptr<ASPeekStream> streamArg = nullptr) const;
 #endif
 
 private:  // variables

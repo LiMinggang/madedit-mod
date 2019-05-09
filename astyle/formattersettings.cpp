@@ -59,7 +59,7 @@ void FormatterSettings::ApplyTo(astyle::ASFormatter& formatter)
       formatter.setFormattingStyle(astyle::STYLE_VTK);
       break;
 
-    case aspsRaliff: // Raliff
+    case aspsRatliff: // Ratliff
       formatter.setFormattingStyle(astyle::STYLE_RATLIFF);
       break;
 
@@ -117,6 +117,10 @@ void FormatterSettings::ApplyTo(astyle::ASFormatter& formatter)
     formatter.setTabIndentation(spaceNum, value);
   else
     formatter.setSpaceIndentation(spaceNum);
+
+  long contNum = cfg->ReadLong(_T("/continuation"), 0);
+  if (contNum>0 && contNum<=4)
+    formatter.setContinuationIndentation(contNum);
 
   formatter.setCaseIndent(cfg->ReadBool(wxT("indent_case"), true));
   formatter.setClassIndent(cfg->ReadBool(wxT("indent_classes"), false));

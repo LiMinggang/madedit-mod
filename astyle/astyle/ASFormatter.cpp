@@ -1,5 +1,5 @@
 // ASFormatter.cpp
-// Copyright (c) 2017 by Jim Pattee <jimp03@email.com>.
+// Copyright (c) 2018 by Jim Pattee <jimp03@email.com>.
 // This code is licensed under the MIT License.
 // License.md describes the conditions under which this software may be distributed.
 
@@ -580,13 +580,13 @@ string ASFormatter::nextLine()
 			testForTimeToSplitFormattedLine();
 			continue;
 		}
-		if (isSequenceReached("/*"))
+		else if (isSequenceReached("/*"))
 		{
 			formatCommentOpener();
 			testForTimeToSplitFormattedLine();
 			continue;
 		}
-		if (currentChar == '"'
+		else if (currentChar == '"'
 		         || (currentChar == '\'' && !isDigitSeparator(currentLine, charNum)))
 		{
 			formatQuoteOpener();
@@ -594,7 +594,7 @@ string ASFormatter::nextLine()
 			continue;
 		}
 		// treat these preprocessor statements as a line comment
-		if (currentChar == '#'
+		else if (currentChar == '#'
 		         && currentLine.find_first_not_of(" \t") == (size_t) charNum)
 		{
 			string preproc = trim(currentLine.c_str() + charNum + 1);
@@ -1397,7 +1397,7 @@ string ASFormatter::nextLine()
 
 				continue;
 			}
-			if ((newHeader = findHeader(preDefinitionHeaders)) != nullptr
+			else if ((newHeader = findHeader(preDefinitionHeaders)) != nullptr
 			         && parenStack->back() == 0
 			         && !isInEnum)		// not C++11 enum class
 			{
@@ -1415,7 +1415,7 @@ string ASFormatter::nextLine()
 
 				continue;
 			}
-			if ((newHeader = findHeader(preCommandHeaders)) != nullptr)
+			else if ((newHeader = findHeader(preCommandHeaders)) != nullptr)
 			{
 				// must be after function arguments
 				if (previousNonWSChar == ')')
@@ -1697,8 +1697,8 @@ string ASFormatter::nextLine()
 			goForward(name.length() - 1);
 			continue;
 		}
-		if (currentChar == '@'
-		        && isCStyle()
+		else if (currentChar == '@'
+		         && isCStyle()
 		         && (int) currentLine.length() > charNum + 1
 		         && !isWhiteSpace(currentLine[charNum + 1])
 		         && isCharPotentialHeader(currentLine, charNum + 1)
@@ -1710,8 +1710,8 @@ string ASFormatter::nextLine()
 			goForward(name.length() - 1);
 			continue;
 		}
-		if ((currentChar == '-' || currentChar == '+')
-		        && isCStyle()
+		else if ((currentChar == '-' || currentChar == '+')
+		         && isCStyle()
 		         && (int) currentLine.find_first_not_of(" \t") == charNum
 		         && !isInPotentialCalculation
 		         && !isInObjCMethodDefinition
@@ -3849,12 +3849,12 @@ bool ASFormatter::isMultiStatementLine() const
 string ASFormatter::peekNextText(const string& firstLine,
                                  bool endOnEmptyLine /*false*/,
 #if CPLUSEPLUSE98
-                                 const boost::shared_ptr<ASPeekStream>& streamArg /*nullptr*/) const
+                                 const boost::shared_ptr<ASPeekStream> streamArg /*nullptr*/) const
 #else
-								 const std::shared_ptr<ASPeekStream>& streamArg /*nullptr*/) const
+                                 shared_ptr<ASPeekStream> streamArg /*nullptr*/) const
 #endif
 {
-	assert(sourceIterator->getPeekStart() == 0 || streamArg != nullptr);
+	assert(sourceIterator->getPeekStart() == 0 || streamArg != nullptr);	// Borland may need != 0
 	bool isFirstLine = true;
 	string nextLine_ = firstLine;
 	size_t firstChar = string::npos;
@@ -6616,6 +6616,7 @@ void ASFormatter::findReturnTypeSplitPoint(const string& firstLine)
 			// don't attach to a preprocessor
 			if (shouldAttachReturnType || shouldAttachReturnTypeDecl)
 				return;
+			else
 				continue;
 		}
 		// parse the line
@@ -7325,7 +7326,7 @@ void ASFormatter::checkIfTemplateOpener()
 				++maxTemplateDepth;
 				continue;
 			}
-			if (currentChar_ == '>')
+			else if (currentChar_ == '>')
 			{
 				--templateDepth;
 				if (templateDepth == 0)
@@ -7340,7 +7341,7 @@ void ASFormatter::checkIfTemplateOpener()
 				}
 				continue;
 			}
-			if (currentChar_ == '(' || currentChar_ == ')')
+			else if (currentChar_ == '(' || currentChar_ == ')')
 			{
 				if (currentChar_ == '(')
 					++parenDepth_;
@@ -7353,7 +7354,7 @@ void ASFormatter::checkIfTemplateOpener()
 				templateDepth = 0;
 				return;
 			}
-			if (nextLine_.compare(i, 2, AS_AND) == 0
+			else if (nextLine_.compare(i, 2, AS_AND) == 0
 			         || nextLine_.compare(i, 2, AS_OR) == 0)
 			{
 				// this is not a template -> leave...
@@ -7361,7 +7362,7 @@ void ASFormatter::checkIfTemplateOpener()
 				templateDepth = 0;
 				return;
 			}
-			if (currentChar_ == ','  // comma,     e.g. A<int, char>
+			else if (currentChar_ == ','  // comma,     e.g. A<int, char>
 			         || currentChar_ == '&'    // reference, e.g. A<int&>
 			         || currentChar_ == '*'    // pointer,   e.g. A<int*>
 			         || currentChar_ == '^'    // C++/CLI managed pointer, e.g. A<int^>
@@ -7376,7 +7377,7 @@ void ASFormatter::checkIfTemplateOpener()
 			{
 				continue;
 			}
-			if (!isLegalNameChar(currentChar_))
+			else if (!isLegalNameChar(currentChar_))
 			{
 				// this is not a template -> leave...
 				isInTemplate = false;
