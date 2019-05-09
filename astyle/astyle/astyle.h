@@ -68,8 +68,8 @@
 #endif
 
 #ifdef __INTEL_COMPILER
-	#pragma warning(disable:  383)  // value copied to temporary, reference to temporary used
-	#pragma warning(disable:  981)  // operands are evaluated in unspecified order
+	// #pragma warning disable 383  // value copied to temporary, reference to temporary used
+	// #pragma warning disable 981  // operands are evaluated in unspecified order
 #endif
 
 #ifdef __clang__
@@ -123,8 +123,8 @@ enum BraceMode
 	RUN_IN_MODE		// broken braces
 };
 
-// maximum value for int is 16,384 (total value of 32,767)
-enum BraceType
+// maximum single value for size_t is 32,768 (total value of 65,535)
+enum BraceType : size_t
 {
 	NULL_TYPE        = 0,
 	NAMESPACE_TYPE   = 1,		// also a DEFINITION_TYPE
@@ -483,8 +483,8 @@ private:  // variables
 
 	vector<ASBeautifier*>* waitingBeautifierStack;
 	vector<ASBeautifier*>* activeBeautifierStack;
-	vector<int>* waitingBeautifierStackLengthStack;
-	vector<int>* activeBeautifierStackLengthStack;
+	vector<size_t>* waitingBeautifierStackLengthStack;
+	vector<size_t>* activeBeautifierStackLengthStack;
 	vector<const string*>* headerStack;
 	vector<vector<const string*>* >* tempStacks;
 	vector<int>* parenDepthStack;
@@ -492,7 +492,7 @@ private:  // variables
 	vector<bool>* parenStatementStack;
 	vector<bool>* braceBlockStateStack;
 	vector<int>* continuationIndentStack;
-	vector<int>* continuationIndentStackSizeStack;
+	vector<size_t>* continuationIndentStackSizeStack;
 	vector<int>* parenIndentStack;
 	vector<pair<int, int> >* preprocIndentStack;
 
@@ -960,6 +960,7 @@ private:  // variables
 	bool isInCommentStartLine;
 	bool noTrimCommentContinuation;
 	bool isInPreprocessor;
+	bool isInPreprocessorDefineDef;
 	bool isInPreprocessorBeautify;
 	bool isInTemplate;
 	bool doesLineStartComment;

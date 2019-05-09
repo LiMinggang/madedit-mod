@@ -134,6 +134,7 @@ Add wxWidgets version number in About dialog
 Add version information to crash dump file
 Update boostpython to 1.70
 Update boost to 1.70
+Update Astyle to r672
 
 Mod v0.4.16
 1.New: Change foreground and backgroud colour for all the text controls in main frame

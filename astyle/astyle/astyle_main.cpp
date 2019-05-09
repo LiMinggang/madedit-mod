@@ -387,7 +387,7 @@ void ASConsole::convertLineEnds(ostringstream& out, int lineEnd)
 				pos++;
 				continue;
 			}
-			else
+			else                                // NOLINT
 			{
 				// CR
 				if (lineEnd == LINEEND_CRLF)
@@ -815,8 +815,10 @@ void ASConsole::setErrorStream(ostream* errStreamPtr)
 
 // build a vector of argv options
 // the program path argv[0] is excluded
-vector<string> ASConsole::getArgvOptions(int argc, char** argv) const
+vector<string> ASConsole::getArgvOptions(int argc, char** argv)
 {
+	if (argc > 0)
+		astyleExePath = getFullPathName(argv[0]);
 	vector<string> argvOptions;
 	for (int i = 1; i < argc; i++)
 	{
@@ -1108,8 +1110,8 @@ void ASConsole::getFileNames(const string& directory, const vector<string>& wild
 
 	// recurse into sub directories
 	// if not doing recursive subDirectory is empty
-	for (unsigned i = 0; i < subDirectory.size(); i++)
-		getFileNames(subDirectory[i], wildcards);
+	for (const string& subDirectoryName : subDirectory)
+		getFileNames(subDirectoryName, wildcards);
 }
 
 // WINDOWS function to get the full path name from the relative path name
@@ -1179,7 +1181,7 @@ string ASConsole::getNumberFormat(int num, size_t lcid) const
  */
 bool ASConsole::isHomeOrInvalidAbsPath(const string& absPath) const
 {
-	char* env = getenv("USERPROFILE");
+	const char* const env = getenv("USERPROFILE");
 	if (env == nullptr)
 		return true;
 
@@ -1203,7 +1205,7 @@ void ASConsole::launchDefaultBrowser(const char* filePathIn /*nullptr*/) const
 	string htmlDefaultPath;
 	for (size_t i = 0; i < pathsLen; i++)
 	{
-		const char* envPath = getenv(envPaths[i]);
+		const char* const envPath = getenv(envPaths[i]);
 		if (envPath == nullptr)
 			continue;
 		htmlDefaultPath = envPath;
@@ -1262,7 +1264,7 @@ void ASConsole::launchDefaultBrowser(const char* filePathIn /*nullptr*/) const
  */
 string ASConsole::getCurrentDirectory(const string& fileName_) const
 {
-	char* currdir = getenv("PWD");
+	const char* const currdir = getenv("PWD");
 	if (currdir == nullptr)
 		error("Cannot find file", fileName_.c_str());
 	return string(currdir);
@@ -1347,7 +1349,7 @@ void ASConsole::getFileNames(const string& directory, const vector<string>& wild
 
 	// sort the current entries for fileName
 	if (firstEntry < fileName.size())
-		sort(&fileName[firstEntry], &fileName[fileName.size()]);
+		sort(fileName.begin() + firstEntry, fileName.end());
 
 	// recurse into sub directories
 	// if not doing recursive, subDirectory is empty
@@ -1363,13 +1365,27 @@ void ASConsole::getFileNames(const string& directory, const vector<string>& wild
 // Return the full path name or an empty string if failed.
 string ASConsole::getFullPathName(const string& relativePath) const
 {
-	// ignore realPath attribute warning
+	// ignore realPath attribute warning, only with cmake
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-result"
 	char fullPath[PATH_MAX];
+	fullPath[0] = '\0';
 	realpath(relativePath.c_str(), fullPath);
 	return fullPath;
 #pragma GCC diagnostic pop
+}
+
+// LINUX function to get the documentation file path prefix
+//     from the executable file path.
+// Return the documentation path prefix or an empty string if failed.
+string ASConsole::getHtmlInstallPrefix() const
+{
+	string astyleHtmlPrefix = astyleExePath;
+	size_t end = astyleHtmlPrefix.find("/bin/");
+	if (end == string::npos)
+		return "";
+	astyleHtmlPrefix = astyleHtmlPrefix.substr(0, end);
+	return astyleHtmlPrefix;
 }
 
 /**
@@ -1454,7 +1470,7 @@ string ASConsole::getNumberFormat(int num, const char* groupingArg, const char* 
  */
 bool ASConsole::isHomeOrInvalidAbsPath(const string& absPath) const
 {
-	char* env = getenv("HOME");
+	const char* const env = getenv("HOME");
 	if (env == nullptr)
 		return true;
 
@@ -1475,14 +1491,25 @@ bool ASConsole::isHomeOrInvalidAbsPath(const string& absPath) const
  */
 void ASConsole::launchDefaultBrowser(const char* filePathIn /*nullptr*/) const
 {
-	struct stat statbuf;
-	string htmlDefaultPath = "/usr/share/doc/astyle/html/";
+#ifdef __APPLE__
+	string htmlDefaultPrefix = "/usr/local";
+#else
+	string htmlDefaultPrefix = "/usr";
+#endif
+	string htmlDefaultPath = htmlDefaultPrefix + "/share/doc/astyle/html/";
 	string htmlDefaultFile = "astyle.html";
-
-	// build file path
 	string htmlFilePath;
+	struct stat statbuf;
+
+	// build html path
 	if (filePathIn == nullptr)
-		htmlFilePath = htmlDefaultPath + htmlDefaultFile;
+	{
+		string htmlPrefix = getHtmlInstallPrefix();
+		if (htmlPrefix.empty())
+			htmlFilePath = htmlDefaultPrefix + htmlDefaultPath + htmlDefaultFile;
+		else
+			htmlFilePath = htmlPrefix + htmlDefaultPath + htmlDefaultFile;
+	}
 	else
 	{
 		if (strpbrk(filePathIn, "\\/") == nullptr)
@@ -1498,9 +1525,9 @@ void ASConsole::launchDefaultBrowser(const char* filePathIn /*nullptr*/) const
 	}
 
 	// get search paths
-	const char* envPaths = getenv("PATH");
+	const char* const envPaths = getenv("PATH");
 	if (envPaths == nullptr)
-		envPaths = "?";
+		error("Cannot read PATH environment variable", "");
 	size_t envlen = strlen(envPaths);
 	char* paths = new char[envlen + 1];
 	strcpy(paths, envPaths);
@@ -1701,7 +1728,7 @@ bool ASConsole::fileNameVectorIsEmpty() const
 
 bool ASConsole::isOption(const string& arg, const char* op)
 {
-	return arg.compare(op) == 0;
+	return arg == op;
 }
 
 bool ASConsole::isOption(const string& arg, const char* a, const char* b)
@@ -2273,13 +2300,13 @@ void ASConsole::processFiles()
 	clock_t startTime = clock();     // start time of file formatting
 
 	// loop thru input fileNameVector and process the files
-	for (size_t i = 0; i < fileNameVector.size(); i++)
+	for (const string& fileNameVectorName : fileNameVector)
 	{
-		getFilePaths(fileNameVector[i]);
+		getFilePaths(fileNameVectorName);
 
 		// loop thru fileName vector formatting the files
-		for (size_t j = 0; j < fileName.size(); j++)
-			formatFile(fileName[j]);
+		for (const string& file : fileName)
+			formatFile(file);
 	}
 
 	// files are processed, display stats
@@ -2292,7 +2319,6 @@ void ASConsole::processFiles()
 // projectOptionsVector and fileOptionsVector
 void ASConsole::processOptions(const vector<string>& argvOptions)
 {
-	string arg;
 	bool ok = true;
 	bool optionFileRequired = false;
 	bool shouldParseOptionFile = true;
@@ -2301,10 +2327,8 @@ void ASConsole::processOptions(const vector<string>& argvOptions)
 	string projectOptionArg;		// save for display
 
 	// get command line options
-	for (size_t i = 0; i < argvOptions.size(); i++)
+	for (string arg : argvOptions)
 	{
-		arg = argvOptions[i];
-
 		if (isOption(arg, "-I")
 		        || isOption(arg, "--ascii"))
 		{
@@ -2399,7 +2423,7 @@ void ASConsole::processOptions(const vector<string>& argvOptions)
 	{
 		if (optionFileName.empty())
 		{
-			char* env = getenv("ARTISTIC_STYLE_OPTIONS");
+			const char* const env = getenv("ARTISTIC_STYLE_OPTIONS");
 			if (env != nullptr)
 			{
 				setOptionFileName(env);
@@ -2410,7 +2434,7 @@ void ASConsole::processOptions(const vector<string>& argvOptions)
 		// for Linux
 		if (optionFileName.empty())
 		{
-			char* env = getenv("HOME");
+			const char* const env = getenv("HOME");
 			if (env != nullptr)
 			{
 				string name = string(env) + "/.astylerc";
@@ -2421,7 +2445,7 @@ void ASConsole::processOptions(const vector<string>& argvOptions)
 		// for Windows
 		if (optionFileName.empty())
 		{
-			char* env = getenv("APPDATA");
+			const char* const env = getenv("APPDATA");
 			if (env != nullptr)
 			{
 				string name = string(env) + "\\astylerc";
@@ -2434,7 +2458,7 @@ void ASConsole::processOptions(const vector<string>& argvOptions)
 		// there is NO test data for this option
 		if (optionFileName.empty())
 		{
-			char* env = getenv("USERPROFILE");
+			const char* const env = getenv("USERPROFILE");
 			if (env != nullptr)
 			{
 				string name = string(env) + "\\astylerc";
@@ -2455,7 +2479,7 @@ void ASConsole::processOptions(const vector<string>& argvOptions)
 	}
 	if (shouldParseProjectOptionFile)
 	{
-		char* env = getenv("ARTISTIC_STYLE_PROJECT_OPTIONS");
+		const char* const env = getenv("ARTISTIC_STYLE_PROJECT_OPTIONS");
 		if (env != nullptr)
 		{
 			string optfilepath = findProjectOptionFilePath(env);
@@ -2668,7 +2692,7 @@ void ASConsole::printVerboseHeader() const
 	// NOTE: depreciated with release 3.1, remove when appropriate
 	if (!optionFileName.empty())
 	{
-		char* env = getenv("USERPROFILE");
+		const char* const env = getenv("USERPROFILE");
 		if (env != nullptr && optionFileName == string(env) + "\\astylerc")
 			printf("The above option file has been DEPRECIATED\n");
 	}
@@ -2706,6 +2730,7 @@ void ASConsole::printVerboseStats(clock_t startTime) const
 		// show minutes and seconds if time is greater than one minute
 		int min = (int) secs / 60;
 		secs -= min * 60;
+		// NOTE: lround is not supported by MinGW and Embarcadero
 		int minsec = int(secs + .5);
 		printf(_("%d min %d sec   "), min, minsec);
 	}
@@ -2745,6 +2770,7 @@ void ASConsole::updateExcludeVector(const string& suffixParam)
 {
 	excludeVector.emplace_back(suffixParam);
 	standardizePath(excludeVector.back(), true);
+	// do not use emplace_back on vector<bool> until supported by macOS
 	excludeHitsVector.push_back(false);
 }
 
@@ -2768,7 +2794,8 @@ int ASConsole::waitForRemove(const char* newFileName) const
 // Modified to compare case insensitive for Windows
 int ASConsole::wildcmp(const char* wild, const char* data) const
 {
-	const char* cp = nullptr, *mp = nullptr;
+	const char* cp = nullptr;
+	const char* mp = nullptr;
 	bool cmpval;
 
 	while ((*data) && (*wild != '*'))
@@ -3024,7 +3051,8 @@ ASOptions::ASOptions(ASFormatter& formatterArg, ASConsole& consoleArg)
 bool ASOptions::parseOptions(vector<string>& optionsVector, const string& errorInfo)
 {
 	vector<string>::iterator option;
-	string arg, subArg;
+	string arg;
+	string subArg;
 	optionErrors.clear();
 
 	for (option = optionsVector.begin(); option != optionsVector.end(); ++option)
@@ -3777,7 +3805,7 @@ string ASOptions::getParam(const string& arg, const char* op1, const char* op2)
 
 bool ASOptions::isOption(const string& arg, const char* op)
 {
-	return arg.compare(op) == 0;
+	return arg == op;
 }
 
 bool ASOptions::isOption(const string& arg, const char* op1, const char* op2)
@@ -3815,7 +3843,7 @@ bool ASOptions::isParamOption(const string& arg, const char* option1, const char
 bool ASEncoding::getBigEndian() const
 {
 	char16_t word = 0x0001;
-	char* byte = (char*) &word;
+	char* byte = reinterpret_cast<char*>(&word);
 	return (byte[0] ? false : true);
 }
 

@@ -47,19 +47,9 @@
 // declarations
 //-----------------------------------------------------------------------------
 
-// for G++ implementation of string.compare:
-#if defined(__GNUC__) && __GNUC__ < 3
-	#error - Use GNU C compiler release 3 or higher
-#endif
-
 // for getenv and localtime
 #if defined(_MSC_VER)
 	#pragma warning(disable: 4996)  // secure version deprecation warnings
-#endif
-
-// for Visual Studio 2013 supported C++11 standard
-#if defined(_MSC_VER) && _MSC_VER < 1800
-	#error Use Microsoft Visual Studio 2013 or higher
 #endif
 
 #ifdef __clang__
@@ -67,16 +57,7 @@
 	#pragma clang diagnostic ignored "-Wmissing-braces"
 #endif
 
-// for mingw BOM, UTF-16, and Unicode functions
-#if defined(__MINGW32__) && !defined(__MINGW64_VERSION_MAJOR)
-	#if (__MINGW32_MAJOR_VERSION > 3) || \
-		((__MINGW32_MAJOR_VERSION == 3) && (__MINGW32_MINOR_VERSION < 16))
-		#error - Use MinGW compiler version 4 or higher
-	#endif
-#endif
-
 #ifdef ASTYLE_LIB
-
 	// define STDCALL and EXPORT for Windows
 	// MINGW defines STDCALL in Windows.h (actually windef.h)
 	// EXPORT has no value if ASTYLE_NO_EXPORT is defined
@@ -100,11 +81,9 @@
 			#define EXPORT
 		#endif
 	#endif	// #ifdef _WIN32
-
 	// define pointers to callback error handler and memory allocation
 	typedef void (STDCALL* fpError)(int errorNumber, const char* errorMessage);
 	typedef char* (STDCALL* fpAlloc)(unsigned long memoryNeeded);
-
 #endif  // #ifdef ASTYLE_LIB
 
 //----------------------------------------------------------------------------
@@ -116,7 +95,7 @@ namespace astyle {
 //----------------------------------------------------------------------------
 // ASStreamIterator class
 // typename will be stringstream for AStyle
-// it could be istream or wxChar for plug-ins
+// it could be istream for plug-ins
 // ASSourceIterator is an inherited abstract class defined in astyle.h
 //----------------------------------------------------------------------------
 
@@ -209,7 +188,7 @@ private:
 	ASFormatter& formatter;
 	stringstream optionErrors;		// option error messages
 #ifndef ASTYLE_LIB
-	ASConsole&   console;			// DO NOT USE for ASTYLE_LIB
+	ASConsole& console;				// DO NOT USE for ASTYLE_LIB
 #endif
 
 	// functions
@@ -260,6 +239,7 @@ private:    // variables
 
 	string outputEOL;                   // current line end
 	string prevEOL;                     // previous line end
+	string astyleExePath;               // absolute executable path and name from argv[0]
 	string optionFileName;              // file path and name of the options file
 	string origSuffix;                  // suffix= option
 	string projectOptionFileName;       // file path and name of the project options file
@@ -282,16 +262,10 @@ public:     // functions
 	ASConsole& operator=(ASConsole const&) = delete;
 	void convertLineEnds(ostringstream& out, int lineEnd);
 	FileEncoding detectEncoding(const char* data, size_t dataSize) const;
-	// check Visual Studio 2015 supported C++11 standard
-#if defined(_MSC_VER) && _MSC_VER < 1900
 	void error() const;
 	void error(const char* why, const char* what) const;
-#else
-	[[noreturn]] void error() const;
-	[[noreturn]] void error(const char* why, const char* what) const;
-#endif // defined
 	void formatCinToCout();
-	vector<string> getArgvOptions(int argc, char** argv) const;
+	vector<string> getArgvOptions(int argc, char** argv);
 	bool fileExists(const char* file) const;
 	bool fileNameVectorIsEmpty() const;
 	ostream* getErrorStream() const;
@@ -354,6 +328,7 @@ private:	// functions
 	void getFileNames(const string& directory, const vector<string>& wildcards);
 	void getFilePaths(const string& filePath);
 	string getFullPathName(const string& relativePath) const;
+	string getHtmlInstallPrefix() const;
 	string getParam(const string& arg, const char* op);
 	bool isHomeOrInvalidAbsPath(const string& absPath) const;
 	void initializeOutputEOL(LineEndFormat lineEndFormat);

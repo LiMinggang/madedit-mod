@@ -216,16 +216,13 @@ size_t ASEnhancer::findCaseColon(const string& line, size_t caseIndex) const
 				i++;
 				continue;
 			}
-			else if (line[i] == quoteChar_)          // check ending quote
+			if (line[i] == quoteChar_)          // check ending quote
 			{
 				isInQuote_ = false;
 				quoteChar_ = ' ';
 				continue;
 			}
-			else
-			{
-				continue;                           // must close quote before continuing
-			}
+			continue;                           // must close quote before continuing
 		}
 		if (line[i] == '"' 		// check opening quote
 		        || (line[i] == '\'' && !isDigitSeparator(line, i)))
@@ -526,7 +523,7 @@ void ASEnhancer::parseCurrentLine(string& line, bool isInPreprocessor, bool isIn
 				shouldUnindentComment = true;
 			break;                 // finished with the line
 		}
-		else if (!(isInComment) && line.compare(i, 2, "/*") == 0)
+		if (!(isInComment) && line.compare(i, 2, "/*") == 0)
 		{
 			// unindent if not in case braces
 			if (sw.switchBraceCount == 1 && sw.unindentCase)
@@ -539,7 +536,7 @@ void ASEnhancer::parseCurrentLine(string& line, bool isInPreprocessor, bool isIn
 				i = commentEnd - 1;
 			continue;
 		}
-		else if ((isInComment) && line.compare(i, 2, "*/") == 0)
+		if ((isInComment) && line.compare(i, 2, "*/") == 0)
 		{
 			// unindent if not in case braces
 			if (sw.switchBraceCount == 1 && sw.unindentCase)
@@ -548,7 +545,6 @@ void ASEnhancer::parseCurrentLine(string& line, bool isInPreprocessor, bool isIn
 			i++;
 			continue;
 		}
-
 		if (isInComment)
 		{
 			// unindent if not in case braces
