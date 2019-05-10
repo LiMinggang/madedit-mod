@@ -128,7 +128,7 @@ New: Japanese Translation(Thanks Tilt <tiltstr@gmail.com>)
 New: Package for FreeBSD 12.0
 Fix: wxWidgets 3.0.x backward compatibility
 Fix: Treat mouse moving in selecting by mouse as one move #284
-Fix: Atyle crash by updating Astyle to 3.1
+Fix: Astyle crash
 Change *nix build to use shared libs released by the OS. You have to install libwxgtk3 by yourself
 Add wxWidgets version number in About dialog
 Add version information to crash dump file
