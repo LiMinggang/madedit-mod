@@ -3769,6 +3769,10 @@ void MadEdit::BeginUpdateSelection()
 		m_Selection = true;
 		m_SelectionPos1 = m_CaretPos;
 	}
+    else if((m_SelectionPos1.pos != m_CaretPos.pos) && (m_SelectionPos2.pos != m_CaretPos.pos)) // Caret has moved by goto
+    {
+        m_SelectionPos1 = m_CaretPos;
+    }
 
 	m_ZeroSelection = false;
 	if( int( m_CaretPos.rowid ) < m_SelFirstRow )
