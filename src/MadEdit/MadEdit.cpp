@@ -7780,7 +7780,7 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 		{
 			SetEditMode( emTextMode );
 			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro(this, wxString::Format(wxT("SetEditMode(%d)"), emTextMode));
+				RecordAsMadMacro(this, wxString(wxT("SetEditMode(MadEditMode.TextMode)")));
 		}
 		break;
 
@@ -7788,7 +7788,7 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 		{
 			SetEditMode( emColumnMode );
 			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro(this, wxString::Format(wxT("SetEditMode(%d)"), emColumnMode));
+				RecordAsMadMacro(this, wxString(wxT("SetEditMode(MadEditMode.ColumnMode)")));
 		}
 		break;
 
@@ -7796,7 +7796,7 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 		{
 			SetEditMode( emHexMode );
 			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro(this, wxString::Format(wxT("SetEditMode(%d)"), emHexMode));
+				RecordAsMadMacro(this, wxString(wxT("SetEditMode(MadEditMode.HexMode")));
 		}
 		break;
 
@@ -7804,7 +7804,7 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 		{
 			SetWordWrapMode( wwmNoWrap );
 			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro(this, wxString::Format(wxT("SetWordWrapMode(%d)"), wwmNoWrap));
+				RecordAsMadMacro(this, wxString::Format(wxT("SetWordWrapMode(MadWordWrapMode.NoWrap)")));
 		}
 		break;
 
@@ -7812,7 +7812,7 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 		{
 			SetWordWrapMode( wwmWrapByWindow );
 			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro(this, wxString::Format(wxT("SetWordWrapMode(%d)"), wwmWrapByWindow));
+				RecordAsMadMacro(this, wxString(wxT("SetWordWrapMode(MadWordWrapMode.WrapByWindow)")));
 		}
 		break;
 
@@ -7820,7 +7820,7 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 		{
 			SetWordWrapMode( wwmWrapByColumn );
 			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro(this, wxString::Format(wxT("SetWordWrapMode(%d)"), wwmWrapByColumn));
+				RecordAsMadMacro(this, wxString(wxT("SetWordWrapMode(MadWordWrapMode.WrapByColumn)")));
 		}
 		break;
 

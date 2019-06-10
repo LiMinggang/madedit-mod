@@ -486,6 +486,14 @@ MadNumberAlign
 Left
 Right
 
+MadSortLinesFlags
+====
+Ascending
+Descending
+CaseSensitive
+RemoveDuplicate
+NumericSort
+
 MadDlgStyle
 ====
 YES

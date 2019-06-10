@@ -3253,6 +3253,13 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.value( "Left", naLeft )
 	.value( "Right", naRight )
 	;
+	enum_<MadSortLinesFlags>( "MadSortLinesFlags" )
+	.value( "Ascending", sfAscending )
+	.value( "Descending", sfDescending )
+	.value( "CaseSensitive", sfCaseSensitive )
+	.value( "RemoveDuplicate", sfRemoveDuplicate )
+	.value( "NumericSort", sfNumericSort )
+	;
 	enum_<MadMsgBoxStyle>( "MadDlgStyle" )
 	.value( "YES",                      MAD_YES )
 	.value( "OK",                       MAD_OK )

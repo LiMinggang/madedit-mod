@@ -146,7 +146,7 @@ enum MadConvertEncodingFlag
 
 // flags for SortLines
 typedef int MadSortFlags;
-enum
+enum MadSortLinesFlags
 { sfAscending = 0, sfDescending = 1, sfCaseSensitive = 2, sfRemoveDuplicate = 4, sfNumericSort = 8 };
 
 enum MadNumberingStepType

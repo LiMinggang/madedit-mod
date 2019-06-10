@@ -1160,7 +1160,7 @@ public:
 				wxAuiNotebookPage& page_info = m_tabs.GetPage(activePage);
 				if(FindTab(page_info.window, &ctrl, &ctrl_idx)) {
 					DoSizing();
-            		ctrl->DoShowHide();
+					ctrl->DoShowHide();
 					ctrl->MakeTabVisible(ctrl_idx, ctrl);
 				}
 			}
@@ -6495,7 +6495,7 @@ void MadEditFrame::OnEditSortAscending( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->SortLines( sfAscending, begin, end );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SortLines(%d, %d, %d)" ), ( int )sfAscending, begin, end ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SortLines(MadSortLinesFlags.Ascending, %d, %d)" ), begin, end ) );
 	}
 }
 
@@ -6508,7 +6508,7 @@ void MadEditFrame::OnEditSortDescending( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->SortLines( sfDescending, begin, end );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SortLines(%d, %d, %d)" ), ( int )sfDescending, begin, end ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SortLines(MadSortLinesFlags.Descending, %d, %d)" ), begin, end ) );
 	}
 }
 
@@ -6521,7 +6521,7 @@ void MadEditFrame::OnEditSortAscendingCase( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->SortLines( sfAscending | sfCaseSensitive, begin, end );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SortLines(%d, %d, %d)" ), ( int )sfAscending | sfCaseSensitive, begin, end ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SortLines(MadSortLinesFlags.Ascending|MadSortLinesFlags.CaseSensitive, %d, %d)" ), begin, end ) );
 	}
 }
 
@@ -6534,7 +6534,7 @@ void MadEditFrame::OnEditSortDescendingCase( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->SortLines( sfDescending | sfCaseSensitive, begin, end );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SortLines(%d, %d, %d)" ), ( int )sfDescending | sfCaseSensitive, begin, end ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SortLines(MadSortLinesFlags.Descending|MadSortLinesFlags.CaseSensitive, %d, %d)" ), begin, end ) );
 	}
 }
 
@@ -6560,7 +6560,13 @@ void MadEditFrame::OnEditSortByOptions( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->SortLines( flags, begin, end );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SortLines(%d, %d, %d)" ), flags, begin, end ) );
+		{
+			wxString sflags((( order & sfDescending) == 0 ) ? wxT("MadSortLinesFlags.Ascending") : wxT("MadSortLinesFlags.Descending"));
+			if(cs != 0) sflags += wxString(wxT("|MadSortLinesFlags.CaseSensitive"));
+			if(num != 0) sflags += wxString(wxT("|MadSortLinesFlags.NumericSort"));
+			if(rem != 0) sflags += wxString(wxT("|MadSortLinesFlags.RemoveDuplicate"));;
+			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SortLines(%s, %d, %d)" ), sflags.c_str(), begin, end ) );
+		}
 	}
 }
 
@@ -6604,7 +6610,13 @@ void MadEditFrame::OnEditSortOptions( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->SortLines( flags, begin, end );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SortLines(%d, %d, %d)" ), flags, begin, end ) );
+		{
+			wxString sflags((( order & sfDescending ) == 0 ) ? wxT("MadSortLinesFlags.Ascending") : wxT("MadSortLinesFlags.Descending"));
+			if(cs != 0) sflags += wxString(wxT("|MadSortLinesFlags.CaseSensitive"));
+			if(num != 0) sflags += wxString(wxT("|MadSortLinesFlags.NumericSort"));
+			if(rem != 0) sflags += wxString(wxT("|MadSortLinesFlags.RemoveDuplicate"));;
+			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SortLines(%s, %d, %d)" ), sflags.c_str(), begin, end ) );
+		}
 	}
 
 	m_Config->SetPath( oldpath );
@@ -7747,6 +7759,8 @@ void MadEditFrame::OnViewFontName( wxCommandEvent& event )
 		wxString &fontname = g_FontNames[idx];
 		g_ActiveMadEdit->SetFont( fontname, fs );
 		m_RecentFonts->AddFileToHistory( fontname );
+        if( IsMacroRecording() )
+            RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetFontA(" ) ) + fontname + wxT(", ") + wxString::Format("%d", fs) + wxT( ")" ) );
 	}
 }
 
@@ -7764,6 +7778,8 @@ void MadEditFrame::OnViewRecentFont( wxCommandEvent& event )
 			g_ActiveMadEdit->GetFont( fn, fs );
 			g_ActiveMadEdit->SetFont( fontname, fs );
 			m_RecentFonts->AddFileToHistory( fontname );
+            if( IsMacroRecording() )
+                RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetFontA(" ) ) + fontname + wxT(", ") + wxString::Format("%d", fs) + wxT( ")" ) );
 		}
 	}
 }
@@ -9710,8 +9726,32 @@ void MadEditFrame::OnToolsConvertEncoding( wxCommandEvent& WXUNUSED(event) )
 											  MadConvertEncodingFlag( g_ConvEncDialog->WxRadioBoxOption->GetSelection() ) );
 
 			if( IsMacroRecording() )
-				RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "ConvertEncoding(%s, %d)" ), g_ConvEncDialog->WxComboBoxEncoding->GetValue().c_str(),
-								  MadConvertEncodingFlag( g_ConvEncDialog->WxRadioBoxOption->GetSelection() ) ) );
+			{
+				wxString flag(wxT("MadConvertEncodingFlag."));
+				switch(MadConvertEncodingFlag( g_ConvEncDialog->WxRadioBoxOption->GetSelection() ))
+				{
+					case cefSC2TC: // Simplified Chinese  ==> Traditional Chinese
+						flag += wxString(wxT("SC2TC"));
+						break;
+					case cefTC2SC: // Traditional Chinese ==> Simplified Chinese
+						flag += wxString(wxT("TC2SC"));
+						break;
+					case cefJK2TC: // Japanese Kanji      ==> Traditional Chinese
+						flag += wxString(wxT("JK2TC"));
+						break;
+					case cefJK2SC: // Japanese Kanji      ==> Simplified Chinese
+						flag += wxString(wxT("JK2SC"));
+						break;
+					case cefC2JK:  // Trad&Simp Chinese   ==> Japanese Kanji
+						flag += wxString(wxT("C2JK"));
+						break;
+					case cefNone:
+					default:
+						flag += wxString(wxT("None"));
+				}
+				RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "ConvertEncoding(\"%s\"," ), g_ConvEncDialog->WxComboBoxEncoding->GetValue().c_str()
+								  ) + flag + wxString(wxT( ")")));
+			}
 
 			wxString oldpath = m_Config->GetPath();
 			m_Config->SetPath( wxT( "/MadEdit" ) );
