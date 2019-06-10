@@ -7684,7 +7684,7 @@ void MadEditFrame::OnViewEncoding( wxCommandEvent& event )
 		g_ActiveMadEdit->SetEncoding( enc );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetEncoding(" ) ) + enc + wxT( ")" ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetEncoding(\"" ) ) + enc + wxT( "\")" ) );
 
 		wxString str = wxString( wxT( '[' ) ) + enc + wxT( "] " ) + wxGetTranslation( MadEncoding::GetEncodingDescription( idx ).c_str() );
 		m_RecentEncodings->AddFileToHistory( str );
@@ -7712,7 +7712,7 @@ void MadEditFrame::OnViewRecentEncoding( wxCommandEvent& event )
 				g_ActiveMadEdit->SetEncoding( enc );
 
 				if( IsMacroRecording() )
-					RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetEncoding(" ) ) + enc + wxT( ")" ) );
+					RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetEncoding(\"" ) ) + enc + wxT( "\")" ) );
 
 				m_RecentEncodings->AddFileToHistory( str );
 				int size;
@@ -7732,7 +7732,7 @@ void MadEditFrame::OnViewSyntax( wxCommandEvent& event )
 		g_ActiveMadEdit->SetSyntax( title );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetSyntax(" ) ) + title + wxT( ")" ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetSyntax(\"" ) ) + title + wxT( "\")" ) );
 	}
 }
 
