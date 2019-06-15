@@ -9053,14 +9053,6 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 				case ecCutLine:
 					if( !IsReadOnly() )
 					{
-						if((!m_SingleLineMode) && IsMacroRecording())
-						{
-							if(command == ecDeleteLine)
-								RecordAsMadMacro( this, wxString( wxT( "DeleteLine()" ) ) );
-							else //ecCutLine
-								RecordAsMadMacro( this, wxString( wxT( "CutLine()" ) ) );
-						}
-
 						if( !m_Selection )
 						{
 							m_SelectionPos1 = m_CaretPos;
@@ -9988,7 +9980,7 @@ void MadEdit::OnKeyDown( wxKeyEvent& evt )
 		else //--------------------------
 			ProcessCommand( cmd );
 
-		if(IsMacroRecording())
+		if((!m_SingleLineMode) && IsMacroRecording())
 		{
 			wxString cmdStr;
 			if(FromCmdToString( cmdStr, cmd ))

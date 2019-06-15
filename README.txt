@@ -131,6 +131,7 @@ Fix: Treat mouse moving in selecting by mouse as one move #284
 Fix: Atyle crash by updating Astyle to 3.1
 Fix: Selection by Shift+Left button does not select from caret position if there is a selection and the caret has been moved
 Fix: Missed quotes in Macro Recording of changing encodings #286
+Fix: Duplicted commands recorded
 Change *nix build to use shared libs released by the OS. You have to install libwxgtk3 by yourself
 Add wxWidgets version number in About dialog
 Add version information to crash dump file
