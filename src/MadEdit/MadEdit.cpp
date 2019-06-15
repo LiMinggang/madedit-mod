@@ -7739,104 +7739,78 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 	case ecHighlightWords:
 		{
 			HighlightWords();
-			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro(this, wxString(wxT("HighlightWords()")));
 		}
 		break;
 
 	case ecSelectAll:
 		{
 			SelectAll();
-			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro(this, wxString(wxT("SelectAll()")));
 		}
 		break;
 
 	case ecCut:
 		{
 			CutToClipboard();
-			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro( this, wxString( wxT( "Cut()" ) ) );
 		}
 		break;
 
 	case ecCopy:
 		{
 			CopyToClipboard();
-			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro(this, wxString(wxT("Copy()")));
 		}
 		break;
 
 	case ecPaste:
 		{
 			PasteFromClipboard();
-			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro(this, wxString(wxT("Paste()")));
 		}
 		break;
 
 	case ecTextMode:
 		{
 			SetEditMode( emTextMode );
-			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro(this, wxString(wxT("SetEditMode(MadEditMode.TextMode)")));
 		}
 		break;
 
 	case ecColumnMode:
 		{
 			SetEditMode( emColumnMode );
-			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro(this, wxString(wxT("SetEditMode(MadEditMode.ColumnMode)")));
 		}
 		break;
 
 	case ecHexMode:
 		{
 			SetEditMode( emHexMode );
-			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro(this, wxString(wxT("SetEditMode(MadEditMode.HexMode")));
 		}
 		break;
 
 	case ecNoWrap:
 		{
 			SetWordWrapMode( wwmNoWrap );
-			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro(this, wxString::Format(wxT("SetWordWrapMode(MadWordWrapMode.NoWrap)")));
 		}
 		break;
 
 	case ecWrapByWindow:
 		{
 			SetWordWrapMode( wwmWrapByWindow );
-			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro(this, wxString(wxT("SetWordWrapMode(MadWordWrapMode.WrapByWindow)")));
 		}
 		break;
 
 	case ecWrapByColumn:
 		{
 			SetWordWrapMode( wwmWrapByColumn );
-			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro(this, wxString(wxT("SetWordWrapMode(MadWordWrapMode.WrapByColumn)")));
 		}
 		break;
 
 	case ecUndo:
 		{
 			Undo();
-			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro(this, wxString(wxT("Undo()")));
 		}
 		break;
 
 	case ecRedo:
 		{
 			Redo();
-			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro(this, wxString(wxT("Redo()")));
 		}
 		break;
 
@@ -7847,8 +7821,6 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 			m_RepaintAll = true;
 			Refresh( false );
 			NewAutoCompleteRightChar = m_AutoCompleteRightChar;
-			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro( this, wxString( wxT( "ScrollLineUp()" ) ) );
 		}
 		break;
 
@@ -7859,8 +7831,6 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 			m_RepaintAll = true;
 			Refresh( false );
 			NewAutoCompleteRightChar = m_AutoCompleteRightChar;
-			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro( this, wxString( wxT( "ScrollLineDown()" ) ) );
 		}
 		break;
 
@@ -7871,8 +7841,6 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 			m_RepaintAll = true;
 			Refresh( false );
 			NewAutoCompleteRightChar = m_AutoCompleteRightChar;
-			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro( this, wxString( wxT( "ScrollPageUp()" ) ) );
 		}
 		break;
 
@@ -7883,8 +7851,6 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 			m_RepaintAll = true;
 			Refresh( false );
 			NewAutoCompleteRightChar = m_AutoCompleteRightChar;
-			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro( this, wxString( wxT( "ScrollPageDown()" ) ) );
 		}
 		break;
 
@@ -7895,8 +7861,6 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 			m_RepaintAll = true;
 			Refresh( false );
 			NewAutoCompleteRightChar = m_AutoCompleteRightChar;
-			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro( this, wxString( wxT( "ScrollLeft()" ) ) );
 		}
 		break;
 
@@ -7907,48 +7871,36 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 			m_RepaintAll = true;
 			Refresh( false );
 			NewAutoCompleteRightChar = m_AutoCompleteRightChar;
-			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro( this, wxString( wxT( "ScrollRight()" ) ) );
 		}
 		break;
 
 	case ecToUpperCase:
 		{
 			ToUpperCase();
-			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro(this, wxString(wxT("ToUpperCase()")));
 		}
 		break;
 
 	case ecToLowerCase:
 		{
 			ToLowerCase();
-			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro(this, wxString(wxT("ToLowerCase()")));
 		}
 		break;
 
 	case ecInvertCase:
 		{
 			InvertCase();
-			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro(this, wxString(wxT("InvertCase()")));
 		}
 		break;
 
 	case ecToHalfWidth:
 		{
 			ToHalfWidth();
-			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro(this, wxString(wxT("ToHalfWidth()")));
 		}
 		break;
 
 	case ecToFullWidth:
 		{
 			ToFullWidth();
-			if((!m_SingleLineMode) && IsMacroRecording())
-				RecordAsMadMacro(this, wxString(wxT("ToFullWidth()")));
 		}
 		break;
 
@@ -8847,32 +8799,24 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 
 				case ecIncreaseIndent:
 					{
-						if((!m_SingleLineMode) && IsMacroRecording())
-							RecordAsMadMacro(this, wxString(wxT("IncreaseDecreaseIndent(True)")));
 						IncreaseDecreaseIndent( true );
 					}
 					break;
 
 				case ecDecreaseIndent:
 					{
-						if((!m_SingleLineMode) && IsMacroRecording())
-							RecordAsMadMacro(this, wxString(wxT("IncreaseDecreaseIndent(False)")));
 						IncreaseDecreaseIndent( false );
 					}
 					break;
 
 				case ecComment:
 					{
-						if((!m_SingleLineMode) && IsMacroRecording())
-							RecordAsMadMacro(this, wxString(wxT("CommentUncomment(True)")));
 						CommentUncomment( true );
 					}
 					break;
 
 				case ecUncomment:
 					{
-						if((!m_SingleLineMode) && IsMacroRecording())
-							RecordAsMadMacro(this, wxString(wxT("CommentUncomment(False)")));
 						CommentUncomment( false );
 					}
 					break;
@@ -8881,8 +8825,6 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 					if( !IsReadOnly() )
 					{
 						ucs4_t tab = 0x09;
-						if((!m_SingleLineMode) && IsMacroRecording())
-							RecordAsMadMacro( this, wxString( wxT( "InsertTabChar()" ) ) );
 						InsertString( &tab, 1, true, true, false );
 						
 					}
@@ -9307,11 +9249,6 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 
 				case ecToggleInsertMode:
 					SetInsertMode( !m_InsertMode );
-					
-					if((!m_SingleLineMode) && IsMacroRecording())
-					{
-						RecordAsMadMacro( this, wxString(( m_InsertMode ? wxT( "SetInsertMode(False)" ) : wxT( "SetInsertMode(True)" ))));
-					}
 					break;
 
 				case ecInsertDateTime:
@@ -9326,11 +9263,6 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 							bool inEnglish = false;
 							m_Config->Read( wxT( "/MadEdit/DateTimeInEnglish" ), &inEnglish );
 
-							if((!m_SingleLineMode) && IsMacroRecording())
-							{
-								RecordAsMadMacro( this, wxString::Format( wxT( "Goto( %s )" ), ( wxLongLong( GetCaretPosition()).ToString() ).c_str() ));
-								RecordAsMadMacro( this, wxString( wxT( "InsertDateTime()" ) ) );
-							}
 							if( inEnglish )
 							{
 								strcpy( oldlocale, setlocale( LC_TIME, nullptr ) );
