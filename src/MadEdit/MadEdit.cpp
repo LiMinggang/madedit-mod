@@ -8754,7 +8754,7 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 						if( m_Selection && ( m_SelectionPos1.lineid != m_SelectionPos2.lineid )  && m_EditMode==emTextMode)
 						{
 							if((!m_SingleLineMode) && IsMacroRecording())
-								RecordAsMadMacro( this, wxString( wxT( "IncreaseDecreaseIndent(True)" ) ) );
+								RecordAsMadMacro( this, wxString( wxT( "IncreaseIndent()" ) ) );
 							IncreaseDecreaseIndent( true );
 						}
 						else

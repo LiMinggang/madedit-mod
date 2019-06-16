@@ -6670,7 +6670,7 @@ void MadEditFrame::OnEditIncIndent( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->IncreaseDecreaseIndent( true );
 		
 		if(IsMacroRecording())
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "IncreaseDecreaseIndent(True)" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "IncreaseIndent()" ) ) );
 	}
 }
 void MadEditFrame::OnEditDecIndent( wxCommandEvent& WXUNUSED(event) )
@@ -6679,7 +6679,7 @@ void MadEditFrame::OnEditDecIndent( wxCommandEvent& WXUNUSED(event) )
 	{
 		g_ActiveMadEdit->IncreaseDecreaseIndent( false );
 		if(IsMacroRecording())
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "IncreaseDecreaseIndent(False)" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "DecreaseIndent()" ) ) );
 	}
 }
 
@@ -6690,7 +6690,7 @@ void MadEditFrame::OnEditComment( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->CommentUncomment( true );
 		
 		if(IsMacroRecording())
-			RecordAsMadMacro(g_ActiveMadEdit, wxString(wxT("CommentUncomment(True)")));
+			RecordAsMadMacro(g_ActiveMadEdit, wxString(wxT("Comment()")));
 	}
 }
 
@@ -6701,7 +6701,7 @@ void MadEditFrame::OnEditUncomment( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->CommentUncomment( false );
 		
 		if(IsMacroRecording())
-			RecordAsMadMacro(g_ActiveMadEdit, wxString(wxT("CommentUncomment(False)")));
+			RecordAsMadMacro(g_ActiveMadEdit, wxString(wxT("Uncomment()")));
 	}
 }
 
@@ -7995,7 +7995,7 @@ void MadEditFrame::OnViewNoWrap( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->SetWordWrapMode( wwmNoWrap );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetWordWrapMode(MadWordWrapMode.NoWrap)" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "NoWrap()" ) ) );
 	}
 }
 
@@ -8006,7 +8006,7 @@ void MadEditFrame::OnViewWrapByWindow( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->SetWordWrapMode( wwmWrapByWindow );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetWordWrapMode(MadWordWrapMode.WrapByWindow)" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "WrapByWindow()" ) ) );
 	}
 }
 void MadEditFrame::OnViewWrapByColumn( wxCommandEvent& WXUNUSED(event) )
@@ -8016,7 +8016,7 @@ void MadEditFrame::OnViewWrapByColumn( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->SetWordWrapMode( wwmWrapByColumn );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetWordWrapMode(MadWordWrapMode.WrapByColumn)" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "WrapByColumn()" ) ) );
 	}
 }
 
@@ -8030,11 +8030,11 @@ void MadEditFrame::OnViewDisplayLineNumber( wxCommandEvent& event )
 		{
 			if( event.IsChecked() )
 			{
-				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetDisplayLineNumber(True)" ) ) );
+				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "DisplayLineNumber()" ) ) );
 			}
 			else
 			{
-				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetDisplayLineNumber(False)" ) ) );
+				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "HideLineNumber()" ) ) );
 			}
 		}
 	}
@@ -8050,11 +8050,11 @@ void MadEditFrame::OnViewDisplayBookmark( wxCommandEvent& event )
 		{
 			if( event.IsChecked() )
 			{
-					RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetDisplayBookmark(True)" ) ) );
+					RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "DisplayBookmark()" ) ) );
 			}
 			else
 			{
-					RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetDisplayBookmark(False)" ) ) );
+					RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "HideBookmark()" ) ) );
 			}
 		}
 	}
@@ -8070,11 +8070,11 @@ void MadEditFrame::OnViewDisplay80ColHint( wxCommandEvent& event )
 		{
 			if( event.IsChecked() )
 			{
-				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetDisplay80ColHint(True)" ) ) );
+				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "Display80ColHint()" ) ) );
 			}
 			else
 			{
-				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetDisplay80ColHint(False)" ) ) );
+				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "Hide80ColHint()" ) ) );
 			}
 		}
 	}
@@ -8090,11 +8090,11 @@ void MadEditFrame::OnViewShowEndOfLine( wxCommandEvent& event )
 		{
 			if( event.IsChecked() )
 			{
-				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetShowEndOfLine(True)" ) ) );
+				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "ShowEndOfLine()" ) ) );
 			}
 			else
 			{
-				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetShowEndOfLine(False)" ) ) );
+				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "HideEndOfLine()" ) ) );
 			}
 		}
 	}
@@ -8110,11 +8110,11 @@ void MadEditFrame::OnViewShowTabChar( wxCommandEvent& event )
 		{
 			if( event.IsChecked() )
 			{
-				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetShowTabChar(True)" ) ) );
+				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "ShowTabChar()" ) ) );
 			}
 			else
 			{
-				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetShowTabChar(False)" ) ) );
+				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "TabChar()" ) ) );
 			}
 		}
 	}
@@ -8130,11 +8130,11 @@ void MadEditFrame::OnViewShowSpaceChar( wxCommandEvent& event )
 		{
 			if( event.IsChecked() )
 			{
-				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetShowSpaceChar(True)" ) ) );
+				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "ShowSpaceChar()" ) ) );
 			}
 			else
 			{
-				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetShowSpaceChar(False)" ) ) );
+				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "HideSpaceChar()" ) ) );
 			}
 		}
 	}
@@ -8152,15 +8152,15 @@ void MadEditFrame::OnViewShowAllChars( wxCommandEvent& event )
 		{
 			if( event.IsChecked() )
 			{
-				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetShowTabChar(True)" ) ) );
-				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetShowSpaceChar(True)" ) ) );
-				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetShowEndOfLine(True)" ) ) );
+				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "ShowTabChar()" ) ) );
+				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "ShowSpaceChar()" ) ) );
+				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "ShowEndOfLine()" ) ) );
 			}
 			else
 			{
-				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetShowTabChar(False)" ) ) );
-				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetShowSpaceChar(False)" ) ) );
-				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetShowEndOfLine(False)" ) ) );
+				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "HideTabChar()" ) ) );
+				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "HideSpaceChar()" ) ) );
+				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "HideEndOfLine()" ) ) );
 			}
 		}
 	}
@@ -8188,11 +8188,11 @@ void MadEditFrame::OnViewMarkActiveLine( wxCommandEvent& event )
 		{
 			if( event.IsChecked() )
 			{
-				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetMarkActiveLine(True)" ) ) );
+				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "MarkActiveLine()" ) ) );
 			}
 			else
 			{
-				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetMarkActiveLine(False)" ) ) );
+				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "HideMarkActiveLine()" ) ) );
 			}
 		}
 	}
@@ -8266,7 +8266,7 @@ void MadEditFrame::OnViewTextMode( wxCommandEvent& WXUNUSED(event) )
 		if(!m_Syntaxs->IsThisEnabled()) m_Syntaxs->Enable(true);
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetEditMode(MadEditMode.TextMode)" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "TextMode()" ) ) );
 	}
 }
 
@@ -8278,7 +8278,7 @@ void MadEditFrame::OnViewColumnMode( wxCommandEvent& WXUNUSED(event) )
 		if(!m_Syntaxs->IsThisEnabled()) m_Syntaxs->Enable(true);
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetEditMode(MadEditMode.ColumnMode)" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "ColumnMode()" ) ) );
 	}
 }
 
@@ -8290,7 +8290,7 @@ void MadEditFrame::OnViewHexMode( wxCommandEvent& WXUNUSED(event) )
 		if(m_Syntaxs->IsThisEnabled()) m_Syntaxs->Enable(false);
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetEditMode(MadEditMode.HexMode)" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "HexMode()" ) ) );
 	}
 }
 

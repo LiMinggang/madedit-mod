@@ -135,7 +135,8 @@ Fix: Duplicted commands recorded
 Change *nix build to use shared libs released by the OS. You have to install libwxgtk3 by yourself
 Add wxWidgets version number in About dialog
 Add version information to crash dump file
-Impove Macro Recording
+Improve Macro Recording
+Improve MadPython APIs
 Update boostpython to 1.70
 Update boost to 1.70
 Update Astyle to r672

@@ -279,27 +279,27 @@ bool FromCmdToString( wxString &cmdStr, long madCmd ) {
 			break;
 		
 		case ecTextMode:
-			cmdStr << ( wxT( "SetEditMode(MadEditMode.TextMode)" ) );
+			cmdStr << ( wxT( "TextMode()" ) );
 			break;
 		
 		case ecColumnMode:
-			cmdStr << ( wxT( "SetEditMode(MadEditMode.ColumnMode)" ) );
+			cmdStr << ( wxT( "ColumnMode()" ) );
 			break;
 		
 		case ecHexMode:
-			cmdStr << ( wxT( "SetEditMode(MadEditMode.HexMode)" ) );
+			cmdStr << ( wxT( "HexMode()" ) );
 			break;
 		
 		case ecNoWrap:
-			cmdStr << ( wxT( "SetWordWrapMode(MadWordWrapMode.NoWrap)" ) );
+			cmdStr << ( wxT( "NoWrap()" ) );
 			break;
 		
 		case ecWrapByWindow:
-			cmdStr << ( wxT( "SetWordWrapMode(MadWordWrapMode.WrapByWindow)" ) );
+			cmdStr << ( wxT( "WrapByWindow()" ) );
 			break;
 		
 		case ecWrapByColumn:
-			cmdStr << ( wxT( "SetWordWrapMode(MadWordWrapMode.WrapByColumn)" ) );
+			cmdStr << ( wxT( "WrapByColumn()" ) );
 			break;
 		
 		//case ecToggleWindow:
@@ -307,19 +307,19 @@ bool FromCmdToString( wxString &cmdStr, long madCmd ) {
 		//	break;
 		
 		case ecIncreaseIndent:
-			cmdStr << ( wxT( "IncreaseDecreaseIndent(True)" ) );
+			cmdStr << ( wxT( "IncreaseIndent()" ) );
 			break;
 		
 		case ecDecreaseIndent:
-			cmdStr << ( wxT( "IncreaseDecreaseIndent(False)" ) );
+			cmdStr << ( wxT( "DecreaseIndent()" ) );
 			break;
 		
 		case ecComment:
-			cmdStr << ( wxT( "CommentUncomment(True)" ) );
+			cmdStr << ( wxT( "Comment()" ) );
 			break;
 		
 		case ecUncomment:
-			cmdStr << ( wxT( "CommentUncomment(False)" ) );
+			cmdStr << ( wxT( "Uncomment()" ) );
 			break;
 		
 		case ecToUpperCase:
@@ -801,7 +801,7 @@ namespace mad_python {
 			}
 		}
 
-		void InsertNewline( ) {
+		void InsertNewline() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
@@ -977,13 +977,22 @@ namespace mad_python {
 			return madedit->GetRecordCaretMovements();
 		}
 
-		void SetRecordCaretMovements( bool value ) {
+		void RecordCaretMovements() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
 			if( !( madedit ) ) { return; }
 
-			madedit->SetRecordCaretMovements( value );
+			madedit->SetRecordCaretMovements( true );
+		}
+
+		void NotRecordCaretMovements() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( !( madedit ) ) { return; }
+
+			madedit->SetRecordCaretMovements( false );
 		}
 
 		void SetTextFont( const std::string &name, long size, bool forceReset ) {
@@ -1077,12 +1086,20 @@ namespace mad_python {
 		    return (madedit)->SetFont(font);
 		}*/
 
-		void SetFixedWidthMode( bool mode ) {
+		void FixedWidthMode() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
 			if( madedit )
-			{ madedit->SetFixedWidthMode( mode ); }
+			{ madedit->SetFixedWidthMode( true ); }
+		}
+
+		void NoFixedWidthMode() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+			{ madedit->SetFixedWidthMode( false ); }
 		}
 
 		bool GetFixedWidthMode() {
@@ -1117,12 +1134,23 @@ namespace mad_python {
 			return spacing;
 		}
 
-		void SetEditMode( long mode ) {
+		void TextMode() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
-			if( madedit && ( mode >= emTextMode ) && ( mode <= emHexMode ) )
-			{ madedit->SetEditMode( ( MadEditMode )mode ); }
+			madedit->SetEditMode( emTextMode );
+		}
+		void ColumnMode() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			madedit->SetEditMode( emColumnMode );
+		}
+		void HexMode() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			madedit->SetEditMode( emHexMode );
 		}
 
 		long GetEditMode() {
@@ -1137,12 +1165,20 @@ namespace mad_python {
 			return mode;
 		}
 
-		void SetSingleLineMode( bool mode ) {
+		void SingleLineMode() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
 			if( madedit )
-			{ madedit->SetSingleLineMode( mode ); }
+			{ madedit->SetSingleLineMode( true ); }
+		}
+
+		void MultiLineMode() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+			{ madedit->SetSingleLineMode( false ); }
 		}
 
 		void SetTabColumns( long value ) {
@@ -1185,12 +1221,20 @@ namespace mad_python {
 			return cols;
 		}
 
-		void SetInsertSpacesInsteadOfTab( bool value ) {
+		void InsertSpacesInsteadOfTab() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
 			if( madedit )
-			{ madedit->SetInsertSpacesInsteadOfTab( value ); }
+			{ madedit->SetInsertSpacesInsteadOfTab( true ); }
+		}
+
+		void InsertTab() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+			{ madedit->SetInsertSpacesInsteadOfTab( false ); }
 		}
 
 		bool GetInsertSpacesInsteadOfTab() {
@@ -1205,13 +1249,22 @@ namespace mad_python {
 			return res;
 		}
 
-		void SetWantTab( bool value ) {
+		void WantTab() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
 			if( madedit )
-			{ madedit->SetWantTab( value ); }
+			{ madedit->SetWantTab( true ); }
 		}
+
+		void NotWantTab() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+			{ madedit->SetWantTab( false ); }
+		}
+
 		bool GetWantTab() {
 			bool res = false;
 
@@ -1224,12 +1277,25 @@ namespace mad_python {
 			return res;
 		}
 
-		void SetWordWrapMode( long mode ) {
+		void NoWrap() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
-			if( madedit && ( mode >= wwmNoWrap ) && ( mode <= wwmWrapByColumn ) )
-			{ madedit->SetWordWrapMode( ( MadWordWrapMode )mode ); }
+			madedit->SetWordWrapMode( wwmNoWrap );
+		}
+
+		void WrapByWindow() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			madedit->SetWordWrapMode( wwmWrapByWindow );
+		}
+
+		void WrapByColumn() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			madedit->SetWordWrapMode( wwmWrapByColumn );
 		}
 
 		long GetWordWrapMode() {
@@ -1244,44 +1310,116 @@ namespace mad_python {
 			return mode;
 		}
 
-		void SetShowEndOfLine( bool value ) {
+		void ShowEndOfLine() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
 			if( madedit )
-			{ madedit->SetShowEndOfLine( value ); }
+			{ madedit->SetShowEndOfLine( true ); }
 		}
 
-		void SetShowTabChar( bool value ) {
+		void ShowTabChar() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
 			if( madedit )
-			{ madedit->SetShowTabChar( value ); }
+			{ madedit->SetShowTabChar( true ); }
 		}
 
-		void SetShowSpaceChar( bool value ) {
+		void ShowSpaceChar() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
 			if( madedit )
-			{ madedit->SetShowSpaceChar( value ); }
+			{ madedit->SetShowSpaceChar( true ); }
 		}
 
-		void SetMarkActiveLine( bool value ) {
+		void MarkActiveLine() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
 			if( madedit )
-			{ madedit->SetMarkActiveLine( value ); }
+			{ madedit->SetMarkActiveLine( true ); }
 		}
 
-		void SetDisplayLineNumber( bool value ) {
+		void DisplayLineNumber() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
 			if( madedit )
-			{ madedit->SetDisplayLineNumber( value ); }
+			{ madedit->SetDisplayLineNumber( true ); }
+		}
+
+		void Display80ColHint() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+			{ madedit->SetDisplay80ColHint( true ); }
+		}
+
+		void DisplayBookmark() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+			{ madedit->SetDisplayBookmark( true ); }
+		}
+
+		void HideEndOfLine() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+			{ madedit->SetShowEndOfLine( false ); }
+		}
+
+		void HideTabChar() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+			{ madedit->SetShowTabChar( false ); }
+		}
+
+		void HideSpaceChar() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+			{ madedit->SetShowSpaceChar( false ); }
+		}
+
+		void HideMarkActiveLine() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+			{ madedit->SetMarkActiveLine( false ); }
+		}
+
+		void HideLineNumber() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+			{ madedit->SetDisplayLineNumber( false ); }
+		}
+
+		void HideBookmark() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+			{ madedit->SetDisplayBookmark( false ); }
+		}
+
+		void Hide80ColHint() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+			{ madedit->SetDisplay80ColHint( false ); }
 		}
 
 		bool GetDisplayLineNumber() {
@@ -1294,13 +1432,6 @@ namespace mad_python {
 			{ res = madedit->GetDisplayLineNumber(); }
 
 			return res;
-		}
-		void SetDisplayBookmark( bool value ) {
-			MadEdit *madedit = g_CurrentMadEdit;
-			if(madedit == nullptr)
-				madedit = g_ActiveMadEdit;
-			if( madedit )
-			{ madedit->SetDisplayBookmark( value ); }
 		}
 
 		bool GetDisplayBookmark() {
@@ -1362,12 +1493,20 @@ namespace mad_python {
 			return res;
 		}
 
-		void SetMarkBracePair( bool value ) {
+		void MarkBracePair() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
 			if( madedit )
-			{ madedit->SetMarkBracePair( value ); }
+			{ madedit->SetMarkBracePair( true ); }
+		}
+
+		void NoMarkBracePair() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+			{ madedit->SetMarkBracePair( false ); }
 		}
 
 		bool GetMarkBracePair() {
@@ -1400,7 +1539,7 @@ namespace mad_python {
 			{ madedit->SetMaxColumns( cols ); }
 		}
 
-		bool GetAutoIndent() {
+		bool IsAutoIndent() {
 			bool res = false;
 
 			MadEdit *madedit = g_CurrentMadEdit;
@@ -1412,20 +1551,36 @@ namespace mad_python {
 			return res;
 		}
 
-		void SetAutoIndent( bool value ) {
+		void AutoIndent() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
 			if( madedit )
-				madedit->SetAutoIndent( value );
+				madedit->SetAutoIndent( true );
 		}
 
-		void SetAutoCompletePair( bool value ) {
+		void NoAutoIndent() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
 			if( madedit )
-				madedit->SetAutoCompletePair( value );
+				madedit->SetAutoIndent( false );
+		}
+
+		void AutoCompletePair() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+				madedit->SetAutoCompletePair( true );
+		}
+
+		void NoAutoCompletePair() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+				madedit->SetAutoCompletePair( false );
 		}
 
 		bool GetAutoCompletePair() {
@@ -1440,12 +1595,20 @@ namespace mad_python {
 			return res;
 		}
 
-		void SetInsertPairForSelection( bool value ) {
+		void InsertPairForSelection() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
 			if( madedit )
-				madedit->SetInsertPairForSelection( value );
+				madedit->SetInsertPairForSelection( true );
+		}
+
+		void NoInsertPairForSelection() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+				madedit->SetInsertPairForSelection( false );
 		}
 
 		bool GetInsertPairForSelection() {
@@ -1460,12 +1623,20 @@ namespace mad_python {
 			return res;
 		}
 
-		void SetInsertMode( bool mode ) { // true: insert, false: overwrite
+		void InsertMode() { // true: insert, false: overwrite
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
 			if( madedit )
-			{ madedit->SetInsertMode( mode ); }
+			{ madedit->SetInsertMode( true ); }
+		}
+
+		void OverwriteMode() { // true: insert, false: overwrite
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+			{ madedit->SetInsertMode( false ); }
 		}
 
 		bool GetInsertMode() {
@@ -1500,12 +1671,20 @@ namespace mad_python {
 			return res;
 		}
 
-		void SetMouseSelectToCopy( bool value ) {
+		void MouseSelectToCopy() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
 			if( madedit )
-			{ madedit->SetMouseSelectToCopy( value ); }
+			{ madedit->SetMouseSelectToCopy( true ); }
+		}
+
+		void NoMouseSelectToCopy() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+			{ madedit->SetMouseSelectToCopy( false ); }
 		}
 
 		bool GetMouseSelectToCopyWithCtrlKey() {
@@ -1520,12 +1699,20 @@ namespace mad_python {
 			return res;
 		}
 
-		void SetMouseSelectToCopyWithCtrlKey( bool value ) {
+		void MouseSelectToCopyWithCtrlKey() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
 			if( madedit )
-			{ madedit->SetMouseSelectToCopyWithCtrlKey( value ); }
+			{ madedit->SetMouseSelectToCopyWithCtrlKey( true ); }
+		}
+
+		void NoMouseSelectToCopyWithCtrlKey() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+			{ madedit->SetMouseSelectToCopyWithCtrlKey( false ); }
 		}
 
 		bool GetMiddleMouseToPaste() {
@@ -1540,12 +1727,20 @@ namespace mad_python {
 			return res;
 		}
 
-		void SetMiddleMouseToPaste( bool value ) {
+		void MiddleMouseToPaste() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
 			if( madedit )
-			{ madedit->SetMiddleMouseToPaste( value ); }
+			{ madedit->SetMiddleMouseToPaste( true ); }
+		}
+
+		void NoMiddleMouseToPaste() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+			{ madedit->SetMiddleMouseToPaste( true ); }
 		}
 
 		long GetMaxWordWrapWidth() {
@@ -1838,12 +2033,20 @@ namespace mad_python {
 			return res;
 		}
 
-		void SetReadOnly( bool value ) {
+		void SetReadOnly() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
 			if( madedit )
-			{ madedit->SetReadOnly( value ); }
+			{ madedit->SetReadOnly( true ); }
+		}
+
+		void ClearReadOnly() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( madedit )
+			{ madedit->SetReadOnly( false ); }
 		}
 
 		bool IsReadOnly() {
@@ -2536,12 +2739,20 @@ namespace mad_python {
 			{ madedit->ToggleBOM(); }
 		}
 
-		void IncreaseDecreaseIndent( bool incIndent ) {
+		void IncreaseIndent() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if (madedit == nullptr)
 				madedit = g_ActiveMadEdit;
 			if( ( madedit ) && ( !madedit->IsReadOnly() ) )
-			{ madedit->IncreaseDecreaseIndent( incIndent ); }
+			{ madedit->IncreaseDecreaseIndent( true ); }
+		}
+
+		void DecreaseIndent() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if (madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( ( madedit ) && ( !madedit->IsReadOnly() ) )
+			{ madedit->IncreaseDecreaseIndent( false ); }
 		}
 
 		bool HasLineComment() {
@@ -2554,12 +2765,20 @@ namespace mad_python {
 				return false;
 		}
 
-		void CommentUncomment( bool comment ) {
+		void Comment() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
 			if( ( madedit ) && ( !madedit->IsReadOnly() ) )
-			{ madedit->CommentUncomment( comment ); }
+			{ madedit->CommentUncomment( true ); }
+		}
+
+		void Uncomment() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( ( madedit ) && ( !madedit->IsReadOnly() ) )
+			{ madedit->CommentUncomment( false ); }
 		}
 
 		void ToUpperCase() {
@@ -2891,7 +3110,7 @@ BOOST_PYTHON_FUNCTION_OVERLOADS( MsgBox_overloads, mad_python::MsgBox, 1, 3 )
 BOOST_PYTHON_MODULE( madpython ) {
 	using namespace mad_python;
 	using namespace mad_py;
-	class_<PyMadEdit>( "MadEdit", "This class is a collection of wrapper functions of MadEdit.", init<>() )
+	class_<PyMadEdit>( "MadEdit", init<>() )
 	.def( "ProcessCommand", &PyMadEdit::ProcessCommand, "" )
 	.def( "CharFirst", &PyMadEdit::CharFirst, "" )
 	.def( "CharLast", &PyMadEdit::CharLast, "" )
@@ -2949,58 +3168,84 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.def( "GetEncodingDescription", &PyMadEdit::GetEncodingDescription, return_value_policy<return_by_value>(), "" )
 	.def( "GetEncodingType", &PyMadEdit::GetEncodingType, return_value_policy<return_by_value>(), "" )
 	.def( "GetRecordCaretMovements", &PyMadEdit::GetRecordCaretMovements, return_value_policy<return_by_value>(), "" )
-	.def( "SetRecordCaretMovements", &PyMadEdit::SetRecordCaretMovements, return_value_policy<return_by_value>(), "" )
+	.def( "RecordCaretMovements", &PyMadEdit::RecordCaretMovements, return_value_policy<return_by_value>(), "" )
+	.def( "NotRecordCaretMovements", &PyMadEdit::NotRecordCaretMovements, return_value_policy<return_by_value>(), "" )
 	.def( "SetTextFont", &PyMadEdit::SetTextFont, "" )
 	.def( "SetHexFont", &PyMadEdit::SetHexFont, "" )
 	.def( "GetTextFont", &PyMadEdit::GetTextFont, "" )
 	.def( "GetHexFont", &PyMadEdit::GetHexFont, "" )
 	.def( "GetFontNameSize", &PyMadEdit::GetFontNameSize, return_value_policy<return_by_value>(), "Doc" )
-	.def( "SetFixedWidthMode", &PyMadEdit::SetFixedWidthMode, "" )
+	.def( "FixedWidthMode", &PyMadEdit::FixedWidthMode, "" )
+	.def( "NoFixedWidthMode", &PyMadEdit::NoFixedWidthMode, "" )
 	.def( "GetFixedWidthMode", &PyMadEdit::GetFixedWidthMode, "" )
 	.def( "SetLineSpacing", &PyMadEdit::SetLineSpacing, "" )
 	.def( "GetLineSpacing", &PyMadEdit::GetLineSpacing, "" )
-	.def( "SetEditMode", &PyMadEdit::SetEditMode, "" )
+	.def( "TextMode", &PyMadEdit::TextMode, "" )
+	.def( "ColumnMode", &PyMadEdit::ColumnMode, "" )
+	.def( "HexMode", &PyMadEdit::HexMode, "" )
 	.def( "GetEditMode", &PyMadEdit::GetEditMode, return_value_policy<return_by_value>(), "" )
-	.def( "SetSingleLineMode", &PyMadEdit::SetSingleLineMode, "" )
+	.def( "SingleLineMode", &PyMadEdit::SingleLineMode, "" )
+	.def( "MultiLineMode", &PyMadEdit::MultiLineMode, "" )
 	.def( "SetTabColumns", &PyMadEdit::SetTabColumns, "" )
 	.def( "GetTabColumns", &PyMadEdit::GetTabColumns, "" )
 	.def( "SetIndentColumns", &PyMadEdit::SetIndentColumns, "" )
 	.def( "GetIndentColumns", &PyMadEdit::GetIndentColumns, "" )
-	.def( "SetInsertSpacesInsteadOfTab", &PyMadEdit::SetInsertSpacesInsteadOfTab, "" )
+	.def( "InsertSpacesInsteadOfTab", &PyMadEdit::InsertSpacesInsteadOfTab, "" )
+	.def( "InsertTab", &PyMadEdit::InsertTab, "" )
 	.def( "GetInsertSpacesInsteadOfTab", &PyMadEdit::GetInsertSpacesInsteadOfTab, "" )
-	.def( "SetWantTab", &PyMadEdit::SetWantTab, "" )
+	.def( "WantTab", &PyMadEdit::WantTab, "" )
+	.def( "NotWantTab", &PyMadEdit::NotWantTab, "" )
 	.def( "GetWantTab", &PyMadEdit::GetWantTab, "" )
-	.def( "SetWordWrapMode", &PyMadEdit::SetWordWrapMode, "" )
+	.def( "NoWrap", &PyMadEdit::NoWrap, "" )
+	.def( "WrapByWindow", &PyMadEdit::WrapByWindow, "" )
+	.def( "WrapByColumn", &PyMadEdit::WrapByColumn, "" )
 	.def( "GetWordWrapMode", &PyMadEdit::GetWordWrapMode, "" )
-	.def( "SetDisplayLineNumber", &PyMadEdit::SetDisplayLineNumber, "" )
-	.def( "SetShowEndOfLine", &PyMadEdit::SetShowEndOfLine, "" )
-	.def( "SetShowTabChar", &PyMadEdit::SetShowTabChar, "" )
-	.def( "SetShowSpaceChar", &PyMadEdit::SetShowSpaceChar, "" )
-	.def( "SetMarkActiveLine", &PyMadEdit::SetMarkActiveLine, "" )
+	.def( "DisplayLineNumber", &PyMadEdit::DisplayLineNumber, "" )
+	.def( "ShowEndOfLine", &PyMadEdit::ShowEndOfLine, "" )
+	.def( "ShowTabChar", &PyMadEdit::ShowTabChar, "" )
+	.def( "ShowSpaceChar", &PyMadEdit::ShowSpaceChar, "" )
+	.def( "MarkActiveLine", &PyMadEdit::MarkActiveLine, "" )
+	.def( "DisplayLineNumber", &PyMadEdit::DisplayLineNumber, "" )
+	.def( "DisplayBookmark", &PyMadEdit::DisplayBookmark, "" )
+	.def( "Display80ColHint", &PyMadEdit::Display80ColHint, "" )
+	.def( "HideEndOfLine", &PyMadEdit::HideEndOfLine, "" )
+	.def( "HideTabChar", &PyMadEdit::HideTabChar, "" )
+	.def( "HideSpaceChar", &PyMadEdit::HideSpaceChar, "" )
+	.def( "HideMarkActiveLine", &PyMadEdit::HideMarkActiveLine, "" )
+	.def( "HideBookmark", &PyMadEdit::HideBookmark, "" )
+	.def( "Hide80ColHint", &PyMadEdit::Hide80ColHint, "" )
 	.def( "GetDisplayLineNumber", &PyMadEdit::GetDisplayLineNumber, "" )
 	.def( "GetShowEndOfLine", &PyMadEdit::GetShowEndOfLine, "" )
 	.def( "GetShowTabChar", &PyMadEdit::GetShowTabChar, "" )
 	.def( "GetShowSpaceChar", &PyMadEdit::GetShowSpaceChar, "" )
 	.def( "GetMarkActiveLine", &PyMadEdit::GetMarkActiveLine, "" )
-	.def( "SetMarkBracePair", &PyMadEdit::SetMarkBracePair, "" )
+	.def( "MarkBracePair", &PyMadEdit::MarkBracePair, "" )
+	.def( "NoMarkBracePair", &PyMadEdit::NoMarkBracePair, "" )
 	.def( "GetMarkBracePair", &PyMadEdit::GetMarkBracePair, "" )
 	.def( "GetMaxColumns", &PyMadEdit::GetMaxColumns, "" )
 	.def( "SetMaxColumns", &PyMadEdit::SetMaxColumns, "" )
-	.def( "GetAutoIndent", &PyMadEdit::GetAutoIndent, "" )
-	.def( "SetAutoIndent", &PyMadEdit::SetAutoIndent, "" )
-	.def( "SetAutoCompletePair", &PyMadEdit::SetAutoCompletePair, "" )
+	.def( "IsAutoIndent", &PyMadEdit::IsAutoIndent, "" )
+	.def( "AutoIndent", &PyMadEdit::AutoIndent, "" )
+	.def( "NoAutoIndent", &PyMadEdit::NoAutoIndent, "" )
+	.def( "AutoCompletePair", &PyMadEdit::AutoCompletePair, "" )
+	.def( "NoAutoCompletePair", &PyMadEdit::NoAutoCompletePair, "" )
 	.def( "GetAutoCompletePair", &PyMadEdit::GetAutoCompletePair, "" )
-	.def( "SetInsertPairForSelection", &PyMadEdit::SetInsertPairForSelection, "" )
+	.def( "InsertPairForSelection", &PyMadEdit::InsertPairForSelection, "" )
+	.def( "NoInsertPairForSelection", &PyMadEdit::NoInsertPairForSelection, "" )
 	.def( "GetInsertPairForSelection", &PyMadEdit::GetInsertPairForSelection, "" )
-	.def( "SetInsertMode", &PyMadEdit::SetInsertMode, "" )
+	.def( "InsertMode", &PyMadEdit::InsertMode, "" )
+	.def( "OverwriteMode", &PyMadEdit::OverwriteMode, "" )
 	.def( "GetInsertMode", &PyMadEdit::GetInsertMode, "" )
 	.def( "SetCaretType", &PyMadEdit::SetCaretType, "" )
 	.def( "GetMouseSelectToCopy", &PyMadEdit::GetMouseSelectToCopy, "" )
-	.def( "SetMouseSelectToCopy", &PyMadEdit::SetMouseSelectToCopy, "" )
+	.def( "MouseSelectToCopy", &PyMadEdit::MouseSelectToCopy, "" )
+	.def( "NoMouseSelectToCopy", &PyMadEdit::NoMouseSelectToCopy, "" )
 	.def( "GetMouseSelectToCopyWithCtrlKey", &PyMadEdit::GetMouseSelectToCopyWithCtrlKey, "" )
-	.def( "SetMouseSelectToCopyWithCtrlKey", &PyMadEdit::SetMouseSelectToCopyWithCtrlKey, "" )
+	.def( "MouseSelectToCopyWithCtrlKey", &PyMadEdit::MouseSelectToCopyWithCtrlKey, "" )
+	.def( "NoMouseSelectToCopyWithCtrlKey", &PyMadEdit::NoMouseSelectToCopyWithCtrlKey, "" )
 	.def( "GetMiddleMouseToPaste", &PyMadEdit::GetMiddleMouseToPaste, "" )
-	.def( "SetMiddleMouseToPaste", &PyMadEdit::SetMiddleMouseToPaste, "" )
+	.def( "MiddleMouseToPaste", &PyMadEdit::MiddleMouseToPaste, "" )
+	.def( "NoMiddleMouseToPaste", &PyMadEdit::NoMiddleMouseToPaste, "" )
 	.def( "GetMaxWordWrapWidth", &PyMadEdit::GetMaxWordWrapWidth, "" )
 	.def( "GetUCharWidth", &PyMadEdit::GetUCharWidth, "" )
 	.def( "GetHexUCharWidth", &PyMadEdit::GetHexUCharWidth, "" )
@@ -3024,6 +3269,7 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.def( "IsModified", &PyMadEdit::IsModified, "" )
 	.def( "GetModificationTime", &PyMadEdit::GetModificationTime, "" )
 	.def( "SetReadOnly", &PyMadEdit::SetReadOnly, "" )
+	.def( "ClearReadOnly", &PyMadEdit::ClearReadOnly, "" )
 	.def( "IsReadOnly", &PyMadEdit::IsReadOnly, "" )
 	.def( "IsTextFile", &PyMadEdit::IsTextFile, "" )
 	.def( "GetSelText", &PyMadEdit::GetSelText, return_value_policy<return_by_value>(), "" )
@@ -3067,9 +3313,11 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.def( "ConvertChineseA", &PyMadEdit::ConvertChineseA, "" )
 	.def( "HasBOM", &PyMadEdit::HasBOM, "" )
 	.def( "ToggleBOM", &PyMadEdit::ToggleBOM, "" )
-	.def( "IncreaseDecreaseIndent", &PyMadEdit::IncreaseDecreaseIndent, "" )
+	.def( "IncreaseIndent", &PyMadEdit::IncreaseIndent, "" )
+	.def( "DecreaseIndent", &PyMadEdit::DecreaseIndent, "" )
 	.def( "HasLineComment", &PyMadEdit::HasLineComment, "" )
-	.def( "CommentUncomment", &PyMadEdit::CommentUncomment, "" )
+	.def( "Comment", &PyMadEdit::Comment, "" )
+	.def( "Uncomment", &PyMadEdit::Uncomment, "" )
 	.def( "ToUpperCase", &PyMadEdit::ToUpperCase, "" )
 	.def( "ToLowerCase", &PyMadEdit::ToLowerCase, "" )
 	.def( "InvertCase", &PyMadEdit::InvertCase, "" )
@@ -3209,16 +3457,6 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.value( "ToFullWidth", ecToFullWidth )
 	.value( "InsertDateTime", ecInsertDateTime )
 	.value( "MouseNotify", ecMouseNotify )
-	;
-	enum_<MadWordWrapMode>( "MadWordWrapMode" )
-	.value( "NoWrap", wwmNoWrap )
-	.value( "WrapByWindow", wwmWrapByWindow )
-	.value( "WrapByColumn", wwmWrapByColumn )
-	;
-	enum_<MadEditMode>( "MadEditMode" )
-	.value( "TextMode", emTextMode )
-	.value( "ColumnMode", emColumnMode )
-	.value( "HexMode", emHexMode )
 	;
 	enum_<MadCaretType>( "MadCaretType" )
 	.value( "VerticalLine", ctVerticalLine )
