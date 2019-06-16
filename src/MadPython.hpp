@@ -3110,7 +3110,7 @@ BOOST_PYTHON_FUNCTION_OVERLOADS( MsgBox_overloads, mad_python::MsgBox, 1, 3 )
 BOOST_PYTHON_MODULE( madpython ) {
 	using namespace mad_python;
 	using namespace mad_py;
-	class_<PyMadEdit>( "MadEdit", init<>() )
+	class_<PyMadEdit>( "MadEdit", "MadEdit Python API wrapper class", init<>() )
 	.def( "ProcessCommand", &PyMadEdit::ProcessCommand, "" )
 	.def( "CharFirst", &PyMadEdit::CharFirst, "" )
 	.def( "CharLast", &PyMadEdit::CharLast, "" )
