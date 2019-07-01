@@ -663,7 +663,10 @@ MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 					text_lower << towlower(text[i]);
 #endif
 				}
-				lastChar = text[i];
+                if(lastChar == wchar_t('\\') && text[i] == wchar_t('\\'))
+                    lastChar = 0;
+                else
+				    lastChar = text[i];
 			}
 		}
 		else
