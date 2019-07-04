@@ -647,7 +647,7 @@ MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 		{
 			text_lower.Empty();
 			wchar_t lastChar = 0;
-			for(size_t i =0; i < text.Len(); ++i)
+			for(size_t i = 0; i < text.Len(); ++i)
 			{
 				if(lastChar == wchar_t('\\'))
 				{
