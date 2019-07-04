@@ -122,17 +122,19 @@ Mod v0.4.17
 Note: Changed *nix build from static link with wxWidgets to dynamic link with wxGTK, which
 means you have to install wxGTK3+(wxGTK2.8 is not supported) to install the release
 
-New: MadPython recording enhencement to support keyboard commands
+New: MadPython recording enhancement to support keyboard commands
 New: Improve MadPython API to support readable APIs
 New: Japanese Translation(Thanks Tilt <tiltstr@gmail.com>)
 New: Package for FreeBSD 12.0
 Fix: wxWidgets 3.0.x backward compatibility
-Fix: Treat mouse moving in selecting by mouse as one move #284
-Fix: Atyle crash by updating Astyle to 3.1
+Fix: Treat mouse moving in selecting by mouse as one move in macro recording #284
+Fix: Astyle crash by updating Astyle to 3.1
 Fix: Selection by Shift+Left button does not select from caret position if there is a selection and the caret has been moved
 Fix: Missed quotes in Macro Recording of changing encodings #286
-Fix: Duplicted commands recorded
+Fix: Duplicated commands recorded
+Fix: Regex search/replace(case insensitive) does not work under Linux #288
 Change *nix build to use shared libs released by the OS. You have to install libwxgtk3 by yourself
+Change C/C++ compiler under FreeBSD from GNU to c++
 Add wxWidgets version number in About dialog
 Add version information to crash dump file
 Improve Macro Recording
