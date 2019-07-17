@@ -2842,7 +2842,7 @@ void MadEdit::RestorePosition( wxFileOffset pos, int toprow )
 /************** Find/Replace functions ****************/
 
 MadSearchResult MadEdit::FindTextNext( const wxString &text,
-									   bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
+									   bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline, bool bPanChinese,
 									   wxFileOffset rangeFrom, wxFileOffset rangeTo )
 {
 	MadCaretPos bpos, epos;
@@ -2889,7 +2889,7 @@ MadSearchResult MadEdit::FindTextNext( const wxString &text,
 		}
 	}
 
-	MadSearchResult state = Search( bpos, epos, text, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
+	MadSearchResult state = Search( bpos, epos, text, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, bPanChinese );
 
 	if( state == SR_YES )
 	{
@@ -2909,7 +2909,7 @@ MadSearchResult MadEdit::FindTextNext( const wxString &text,
 }
 
 MadSearchResult MadEdit::FindTextPrevious( const wxString &text,
-		bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
+		bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline, bool bPanChinese,
 		wxFileOffset rangeFrom, wxFileOffset rangeTo )
 {
 	MadCaretPos bpos, epos;
@@ -2974,7 +2974,7 @@ MadSearchResult MadEdit::FindTextPrevious( const wxString &text,
 		}
 
 		MadCaretPos bpos1 = bpos, epos1 = epos;
-		int state = Search( bpos1, epos1, text, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
+		int state = Search( bpos1, epos1, text, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, bPanChinese );
 
 		if( state == SR_EXPR_ERROR )
 		{
@@ -3006,7 +3006,7 @@ MadSearchResult MadEdit::FindTextPrevious( const wxString &text,
 				bpos1.linepos += ucq.back().second;
 				epos1 = epos;
 			}
-			while( Search( bpos1, epos1, text, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline ) );
+			while( Search( bpos1, epos1, text, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, bPanChinese ) );
 
 			SetSelection( bp.pos, ep.pos, true );
 
@@ -3294,7 +3294,7 @@ MadSearchResult MadEdit::FindHexPrevious( const wxString &hexstr,
 }
 
 MadReplaceResult MadEdit::ReplaceText( const wxString &expr, const wxString &fmt,
-									   bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
+									   bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline, bool bPanChinese,
 									   wxFileOffset rangeFrom, wxFileOffset rangeTo )
 {
 	if( expr.Len() == 0 )
@@ -3307,7 +3307,7 @@ MadReplaceResult MadEdit::ReplaceText( const wxString &expr, const wxString &fmt
 
 	if( m_Selection || m_ZeroSelection ) // test the selection is wanted text
 	{
-		state = Search( bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
+		state = Search( bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, bPanChinese );
 
 		if( state == SR_EXPR_ERROR )
 		{
@@ -3440,7 +3440,7 @@ MadReplaceResult MadEdit::ReplaceHex( const wxString &expr, const wxString &fmt,
 }
 
 MadReplaceResult MadEdit::ReplaceTextNoDoubleCheck( const wxString &expr, const wxString &fmt,
-							 bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
+							 bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline, bool bPanChinese,
 							 wxFileOffset rangeFrom, wxFileOffset rangeTo )
 {
 	if( expr.IsEmpty() )
@@ -3537,7 +3537,7 @@ MadReplaceResult MadEdit::ReplaceTextNoDoubleCheck( const wxString &expr, const 
 #endif
 	}
 
-	if( ( state = Search( bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, fmtstr.get(), &out) ) == SR_YES )
+	if( ( state = Search( bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, bPanChinese, fmtstr.get(), &out) ) == SR_YES )
 	{
 		del_bpos.push_back( bpos.pos );
 		del_epos.push_back( epos.pos );
@@ -3554,7 +3554,7 @@ MadReplaceResult MadEdit::ReplaceTextNoDoubleCheck( const wxString &expr, const 
 			
 			if(bRegex)
 				out.clear();
-			if( ( state = Search( bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, fmtstr.get(), &out) ) == SR_YES )
+			if( ( state = Search( bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, bPanChinese, fmtstr.get(), &out) ) == SR_YES )
 				res = RR_REP_NEXT;
 		}
 	}
@@ -3579,7 +3579,7 @@ MadReplaceResult MadEdit::ReplaceTextNoDoubleCheck( const wxString &expr, const 
 }
 
 int MadEdit::ReplaceTextAll( const wxString &expr, const wxString &fmt,
-							 bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
+							 bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline, bool bPanChinese,
 							 vector<wxFileOffset> *pbegpos, vector<wxFileOffset> *pendpos,
 							 wxFileOffset rangeFrom, wxFileOffset rangeTo )
 {
@@ -3681,7 +3681,7 @@ int MadEdit::ReplaceTextAll( const wxString &expr, const wxString &fmt,
 #endif
 	}
 
-	while( ( state = Search( bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, fmtstr.get(), &out) ) == SR_YES )
+	while( ( state = Search( bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, bPanChinese, fmtstr.get(), &out) ) == SR_YES )
 	{
 		/*if(bRegex)
 		{
@@ -3875,7 +3875,7 @@ int MadEdit::ReplaceHexAll( const wxString &expr, const wxString &fmt,
 }
 
 int MadEdit::FindTextAll( const wxString &expr,
-						  bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline, bool bFirstOnly,
+						  bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline, bool bPanChinese, bool bFirstOnly,
 						  vector<wxFileOffset> *pbegpos, vector<wxFileOffset> *pendpos,
 						  wxFileOffset rangeFrom, wxFileOffset rangeTo )
 {
@@ -3935,7 +3935,7 @@ int MadEdit::FindTextAll( const wxString &expr,
 	wxString fmt = _( "Found %d matched texts..." );
 	fmt += wxT( "								\n" );
 
-	while( ( state = Search( bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline ) ) == SR_YES )
+	while( ( state = Search( bpos, epos, expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, bPanChinese ) ) == SR_YES )
 	{
 		if( pbegpos ) pbegpos->push_back( bpos.pos );
 

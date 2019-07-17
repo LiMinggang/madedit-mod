@@ -284,11 +284,11 @@ void GoToLeftBrace()
 void GoToRightBrace()
 // search in [rangeFrom, rangeTo], default in [CaretPos, EndOfDoc]
 long FindTextNext(std::string text,
-                        bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false,
+                        bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false, bool bPanChinese = false,
                         int rangeFrom = -1, int rangeTo = -1)
 // search in [rangeFrom, rangeTo], rangeFrom > rangeTo, default in [CaretPos, BeginOfDoc]
 long FindTextPrevious(std::string text,
-                            bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false,
+                            bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false, bool bPanChinese = false,
                             int rangeFrom = -1, int rangeTo = -1)
 // search in [rangeFrom, rangeTo], default in [CaretPos, EndOfDoc]
 long FindHexNext(std::string hexstr, int rangeFrom = -1, int rangeTo = -1)
@@ -296,22 +296,22 @@ long FindHexNext(std::string hexstr, int rangeFrom = -1, int rangeTo = -1)
 long FindHexPrevious(std::string hexstr, int rangeFrom = -1, int rangeTo = -1)
 // replace the selected text that must match expr
 long ReplaceText(std::string expr, std::string fmt,
-                             bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false,
+                             bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false, bool bPanChinese = false,
                              int rangeFrom = -1, int rangeTo = -1)
 long ReplaceTextNoDoubleCheck(std::string expr, std::string fmt,
-                             bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false,
+                             bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false, bool bPanChinese = false,
                              int rangeFrom = -1, int rangeTo = -1)
 long ReplaceHex(std::string expr, std::string fmt,
                              int rangeFrom = -1, int rangeTo = -1)
 // return the replaced count or SR_EXPR_ERROR
 long ReplaceTextAll(std::string expr, std::string fmt,
-                    bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false,
+                    bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false, bool bPanChinese = false,
                     int rangeFrom = -1, int rangeTo = -1)
 long ReplaceHexAll(std::string expr, std::string fmt,
                     int rangeFrom = -1, int rangeTo = -1)
 // list the matched data to pbegpos  pendpos
 // return the found count or SR_EXPR_ERROR
-long FindTextAll(std::string expr, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false)
+long FindTextAll(std::string expr, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false, bool bPanChinese = false,)
 long FindHexAll(std::string expr)
 bool LoadFromFile(std::string filename, std::string encoding=std::string(""))
 bool SaveToFile(std::string filename)

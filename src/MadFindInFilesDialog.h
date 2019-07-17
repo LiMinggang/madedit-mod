@@ -54,6 +54,7 @@ class MadFindInFilesDialog: public wxDialog
 		wxCheckBox* WxCheckBoxEnableReplace;
 		wxCheckBox* WxCheckBoxFindHex;
 		wxCheckBox* WxCheckBoxListFirstOnly;
+		wxCheckBox* WxCheckBoxPanChinese;
 		wxCheckBox* WxCheckBoxRegex;
 		wxCheckBox* WxCheckBoxSubDir;
 		wxCheckBox* WxCheckBoxWholeWord;

@@ -7,12 +7,21 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "MadEdit.h"
+#include "TradSimp.h"
 #include "MadEncoding.h"
 #include <iostream>
 #include <string>
 #include <cwctype>
 #include <cctype>
 #include <locale>
+
+#if CPLUSEPLUSE98
+	#include <boost/shared_ptr.hpp>
+	using boost::shared_ptr;
+#else
+	#include <memory>
+	using std::shared_ptr;
+#endif
 
 //#include <boost/xpressive/xpressive.hpp>
 #include <boost/xpressive/xpressive_dynamic.hpp>
@@ -24,6 +33,7 @@ using namespace std;
 using namespace boost::xpressive;
 extern wxStatusBar *g_StatusBar;
 ucs4string ConvertEscape( const ucs4string &str );
+extern wxString *ConvertTextToNewString( const wxString& text, MadConvertChineseFlag flag );
 
 #ifdef _DEBUG
 	#include <crtdbg.h>
@@ -631,7 +641,7 @@ list<UCQueueSet> UCIterator::s_ucqueues;
 
 extern wxString MadStrLower( const wxString & );
 MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadCaretPos &endpos,
-		const wxString &text, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline/* = false*/, /*IN_OUT*/ucs4string *fmt/*= nullptr*/, ucs4string *out/* = nullptr*/ )
+		const wxString &text, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline/* = false*/, bool bPanChinese/* = false*/,/*IN_OUT*/ucs4string *fmt/*= nullptr*/, ucs4string *out/* = nullptr*/ )
 {
 	if((( beginpos.pos >= endpos.pos) && (!m_ZeroSelection) )|| text.IsEmpty() )
 	{ return SR_NO; }
@@ -675,9 +685,58 @@ MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 		text_ptr = &text_lower;
 	}
 
-	if( bDotMatchNewline == false )
+	if(bRegex)
 	{
-		opt = opt | regex_constants::not_dot_newline;
+		if( bDotMatchNewline == false )
+		{
+			opt = opt | regex_constants::not_dot_newline;
+		}
+
+		if(bPanChinese)
+		{
+			shared_ptr< wxString > ptext;
+			std::vector<shared_ptr< wxString > > pan_ch;
+			MadConvertEncodingFlag cefs[] =
+			{ cefSC2TC, cefTC2SC, cefJK2TC, cefJK2SC, cefC2JK };
+			MadConvertChineseFlag ccfs[] =
+			{ ccfSimp2Trad, ccfTrad2Simp, ccfKanji2Trad, ccfKanji2Simp, ccfChinese2Kanji };
+			
+			for( int i = 0; i < sizeof( cefs ) / sizeof( cefs[0] ); ++i )
+			{
+				ptext.reset( ConvertTextToNewString( text, ccfs[i] ));
+				pan_ch.push_back(ptext);
+			}
+
+			if(!pan_ch.empty())
+			{
+				std::set<wxChar> panch;
+				static wxString pan_text;
+				pan_text.Empty();
+				for(size_t i = 0; i < text_ptr->Len(); ++i)
+				{
+					for(size_t j = 0; j < pan_ch.size(); ++j )
+					{
+						panch.insert((*(pan_ch[j]))[i]);
+					}
+
+					if(panch.size() > 1)
+					{
+						pan_text << '[';
+						for(std::set<wxChar>::iterator it = panch.begin(); it != panch.end(); ++it)
+						{
+							pan_text << *it;
+						}
+						pan_text << ']';
+					}
+					else
+					{
+						pan_text << (*text_ptr)[i];
+					}
+				}
+
+				text_ptr = &pan_text;
+			}
+		}
 	}
 
 #ifdef __WXMSW__
@@ -914,7 +973,7 @@ ucs4string ConvertEscape( const ucs4string &str )
 
 MadSearchResult MadEdit::Replace( ucs4string &out, const MadCaretPos &beginpos, const MadCaretPos &endpos,
 								  const wxString &expr, const wxString &fmt,
-								  bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline/* = false*/ )
+								  bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline/* = false*/, bool bPanChinese/* = false*/ )
 {
 	if( expr.IsEmpty() ) { return SR_NO; }
 

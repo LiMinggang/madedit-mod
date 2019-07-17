@@ -584,14 +584,14 @@ protected:
 	void InsertHexData( wxByte *hex, size_t count );
 
 	MadSearchResult Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadCaretPos &endpos,
-									  const wxString &text, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false, /*IN_OUT*/ucs4string *fmt = nullptr, ucs4string *out = nullptr );
+									  const wxString &text, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false, bool bPanChinese = false, /*IN_OUT*/ucs4string *fmt = nullptr, ucs4string *out = nullptr );
 
 	MadSearchResult SearchHex( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadCaretPos &endpos,
 										 const wxByte *hex, size_t count );
 
 	MadSearchResult Replace( /*OUT*/ucs4string &out, const MadCaretPos &beginpos, const MadCaretPos &endpos,
 									const wxString &expr, const wxString &fmt,
-									bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false );
+									bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false, bool bPanChinese = false );
 
 	void OverwriteDataSingle( vector<wxFileOffset> &del_bpos, vector<wxFileOffset> &del_epos,
 							  vector<const ucs4_t*> *ins_ucs, vector<wxByte*> *ins_data,
@@ -983,11 +983,11 @@ public: // basic functions
 
 	// search in [rangeFrom, rangeTo], default in [CaretPos, EndOfDoc]
 	MadSearchResult FindTextNext( const wxString &text,
-								  bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
+								  bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline, bool bPanChinese = false,
 								  wxFileOffset rangeFrom = -1, wxFileOffset rangeTo = -1 );
 	// search in [rangeFrom, rangeTo], rangeFrom > rangeTo, default in [CaretPos, BeginOfDoc]
 	MadSearchResult FindTextPrevious( const wxString &text,
-									  bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
+									  bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline, bool bPanChinese = false,
 									  wxFileOffset rangeFrom = -1, wxFileOffset rangeTo = -1 );
 
 	// search in [rangeFrom, rangeTo], default in [CaretPos, EndOfDoc]
@@ -1001,18 +1001,18 @@ public: // basic functions
 
 	// replace the selected text that must match expr
 	MadReplaceResult ReplaceText( const wxString &expr, const wxString &fmt,
-								  bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
+								  bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline, bool bPanChinese = false,
 								  wxFileOffset rangeFrom = -1, wxFileOffset rangeTo = -1 );
 	MadReplaceResult ReplaceHex( const wxString &expr, const wxString &fmt,
 								 wxFileOffset rangeFrom = -1, wxFileOffset rangeTo = -1 );
 
     MadReplaceResult ReplaceTextNoDoubleCheck( const wxString &expr, const wxString &fmt,
-                                 bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
-                                 wxFileOffset rangeFrom, wxFileOffset rangeTo );
+                                 bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline, bool bPanChinese = false,
+                                 wxFileOffset rangeFrom = -1, wxFileOffset rangeTo = -1);
 
 	// return the replaced count or SR_EXPR_ERROR
 	int ReplaceTextAll( const wxString &expr, const wxString &fmt,
-						bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline,
+						bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline, bool bPanChinese = false,
 						vector<wxFileOffset> *pbegpos = nullptr, vector<wxFileOffset> *pendpos = nullptr,
 						wxFileOffset rangeFrom = -1, wxFileOffset rangeTo = -1 );
 	int ReplaceHexAll( const wxString &expr, const wxString &fmt,
@@ -1025,7 +1025,7 @@ public: // basic functions
 	// list the matched data to pbegpos & pendpos
 	// return the found count or SR_EXPR_ERROR
 	int FindTextAll( const wxString &expr,
-					 bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline, bool bFirstOnly,
+					 bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline, bool bPanChinese, bool bFirstOnly,
 					 vector<wxFileOffset> *pbegpos, vector<wxFileOffset> *pendpos,
 					 wxFileOffset rangeFrom = -1, wxFileOffset rangeTo = -1 );
 	int FindHexAll( const wxString &expr, bool bFirstOnly,

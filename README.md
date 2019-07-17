@@ -78,24 +78,31 @@ Translations
 
 News
 =======
-Mod v0.4.16
-* New: Change foreground and backgroud colour for all the text controls in main frame
-* New: Lock toolbar position #275
-* New: Ignore warning for undo saved changes #280
-* New: Override View Mode while opening files(it's only for the newly opened and enforces the opened ones) #278
-* New: Config entry for active line marker width #276
-* New: Multiple words can be highlighted at the same time #281
-* Fix: wxAuiNotebook don't show selected tab automatically if it's beyond the view boundary
-* Fix: With BOM for UTF8 in New Document settings was ignored #275
-* Fix: Saving the default encoding setting when choosing one from the drop down list #275
-* Fix: Mouse event issue in handling file changed externally
-* Fix: Rollback the change of active line marker width #276
-* Fix: MadPython script recording bug(SelectAll, Cut)
-* Fix: Don't add "SetSelection" before SelectXXX
-* Update wxWidgets to 3.1.2
-* Update python to 2.7.16
-* Update Greek translation by [Nikoss](https://github.com/nikoss)
-* Update Chinese translations by [ZhTw2013](https://github.com/zhtw2013)
+Mod v0.4.17
+Note: Changed *nix build from static link with wxWidgets to dynamic link with wxGTK, which
+means you have to install wxGTK3+(wxGTK2.8 is not supported) to install the release
+
+* New: MadPython recording enhancement to support keyboard commands
+* New: Improve MadPython API to support readable APIs
+* New: Japanese Translation(Thanks Tilt <tiltstr@gmail.com>)
+* New: Package for FreeBSD 12.0
+* New: Pan Chinese(CJK) support in Regex #291
+* Fix: wxWidgets 3.0.x backward compatibility
+* Fix: Treat mouse moving in selecting by mouse as one move in macro recording #284
+* Fix: Astyle crash by updating Astyle to 3.1
+* Fix: Selection by Shift+Left button does not select from caret position if there is a selection and the caret has been moved
+* Fix: Missed quotes in Macro Recording of changing encodings #286
+* Fix: Duplicated commands recorded
+* Fix: Regex search/replace(case insensitive) does not work under Linux #288
+* Change *nix build to use shared libs released by the OS. You have to install libwxgtk3 by yourself
+* Change C/C++ compiler under FreeBSD from GNU to c++
+* Add wxWidgets version number in About dialog
+* Add version information to crash dump file
+* Improve Macro Recording
+* Improve MadPython APIs
+* Update boostpython to 1.70
+* Update boost to 1.70
+* Update Astyle to r672
 
 Todo
 =====

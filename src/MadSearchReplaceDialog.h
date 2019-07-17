@@ -64,6 +64,7 @@ class MadSearchReplaceDialog: public wxDialog
 		wxCheckBox* WxCheckBoxDotMatchNewLine;
 		wxCheckBox* WxCheckBoxFindHex;
 		wxCheckBox* WxCheckBoxMoveFocus;
+		wxCheckBox* WxCheckBoxPanChinese;
 		wxCheckBox* WxCheckBoxPurgeBookmark;
 		wxCheckBox* WxCheckBoxRegex;
 		wxCheckBox* WxCheckBoxSearchInSelection;

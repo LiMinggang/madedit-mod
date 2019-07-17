@@ -2,6 +2,7 @@
 <wxsmith>
 	<object class="wxDialog" name="MadSearchReplaceDialog">
 		<centered>1</centered>
+		<id_arg>0</id_arg>
 		<style>wxCAPTION|wxSYSTEM_MENU|wxRESIZE_BORDER|wxCLOSE_BOX</style>
 		<handler function="MadSearchReplaceDialogClose" entry="EVT_CLOSE" />
 		<handler function="MadSearchReplaceDialogKeyDown" entry="EVT_KEY_DOWN" />
@@ -65,6 +66,22 @@
 													<label>&amp;. Matches Newline</label>
 												</object>
 												<flag>wxALL|wxEXPAND</flag>
+												<border>2</border>
+											</object>
+										</object>
+										<flag>wxALL|wxEXPAND</flag>
+									</object>
+									<object class="sizeritem">
+										<object class="wxBoxSizer" variable="BoxSizer5" member="no">
+											<object class="spacer">
+												<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+												<size>10,0</size>
+											</object>
+											<object class="sizeritem">
+												<object class="wxCheckBox" name="wxID_ANY" variable="WxCheckBoxPanChinese" member="yes">
+													<label>Pan Chinese</label>
+												</object>
+												<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 												<border>2</border>
 											</object>
 										</object>

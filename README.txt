@@ -126,22 +126,23 @@ means you have to install wxGTK3+(wxGTK2.8 is not supported) to install the rele
 2.New: Improve MadPython API to support readable APIs
 3.New: Japanese Translation(Thanks Tilt <tiltstr@gmail.com>)
 4.New: Package for FreeBSD 12.0
-5.Fix: wxWidgets 3.0.x backward compatibility
-6.Fix: Treat mouse moving in selecting by mouse as one move in macro recording #284
-7.Fix: Astyle crash by updating Astyle to 3.1
-8.Fix: Selection by Shift+Left button does not select from caret position if there is a selection and the caret has been moved
-9.Fix: Missed quotes in Macro Recording of changing encodings #286
-10.Fix: Duplicated commands recorded
-11.Fix: Regex search/replace(case insensitive) does not work under Linux #288
-12.Change *nix build to use shared libs released by the OS. You have to install libwxgtk3 by yourself
-13.Change C/C++ compiler under FreeBSD from GNU to c++
-14.Add wxWidgets version number in About dialog
-15.Add version information to crash dump file
-16.Improve Macro Recording
-17.Improve MadPython APIs
-18.Update boostpython to 1.70
-19.Update boost to 1.70
-20.Update Astyle to r672
+5.New: Pan Chinese(CJK) support in Regex #291
+6.Fix: wxWidgets 3.0.x backward compatibility
+7.Fix: Treat mouse moving in selecting by mouse as one move in macro recording #284
+8.Fix: Astyle crash by updating Astyle to 3.1
+9.Fix: Selection by Shift+Left button does not select from caret position if there is a selection and the caret has been moved
+10.Fix: Missed quotes in Macro Recording of changing encodings #286
+11.Fix: Duplicated commands recorded
+12.Fix: Regex search/replace(case insensitive) does not work under Linux #288
+13.Change *nix build to use shared libs released by the OS. You have to install libwxgtk3 by yourself
+14.Change C/C++ compiler under FreeBSD from GNU to c++
+15.Add wxWidgets version number in About dialog
+16.Add version information to crash dump file
+17.Improve Macro Recording
+18.Improve MadPython APIs
+19.Update boostpython to 1.70
+20.Update boost to 1.70
+21.Update Astyle to r672
 
 Mod v0.4.16
 1.New: Change foreground and backgroud colour for all the text controls in main frame
