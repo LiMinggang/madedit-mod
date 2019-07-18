@@ -704,7 +704,8 @@ MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 			for( int i = 0; i < sizeof( cefs ) / sizeof( cefs[0] ); ++i )
 			{
 				ptext.reset( ConvertTextToNewString( text, ccfs[i] ));
-				pan_ch.push_back(ptext);
+				if(ptext)
+					pan_ch.push_back(ptext);
 			}
 
 			if(!pan_ch.empty())
@@ -714,6 +715,7 @@ MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 				pan_text.Empty();
 				for(size_t i = 0; i < text_ptr->Len(); ++i)
 				{
+					panch.clear();
 					for(size_t j = 0; j < pan_ch.size(); ++j )
 					{
 						panch.insert((*(pan_ch[j]))[i]);
