@@ -31,7 +31,7 @@ B. MS Windows (__WXMSW__):
       2. Boost-1.56.0 or higher(1.70 is recommended)
    b. Visual C++ 7.1 (VS.Net 2005) or higher:
       Required Libraries to compile:
-      1. wxWidgets-3.1.2 or higher with Unicode and IPC enabled
+      1. wxWidgets-3.1.2 or higher with Unicode and IPC enabled(change Runtime Library in Code Generation to /MT)
       2. Boost-1.56.0 or higher(1.70 is recommended)
       3. Set WXWIN and BOOST to the root directory of your local ones
 
