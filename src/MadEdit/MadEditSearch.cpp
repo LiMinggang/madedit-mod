@@ -10,6 +10,7 @@
 #include "TradSimp.h"
 #include "MadEncoding.h"
 #include <iostream>
+#include <algorithm>
 #include <string>
 #include <cwctype>
 #include <cctype>
@@ -634,12 +635,100 @@ struct UCIterator   // ucs4_t widechar iterator
 
 };
 
+void MadEdit::PanChinese(wxString &text)
+{
+	shared_ptr< wxString > ptext;
+	std::vector<shared_ptr< wxString > > pan_ch;
+	MadConvertEncodingFlag cefs[] =
+	{ cefSC2TC, cefTC2SC, cefJK2TC, cefJK2SC, cefC2JK };
+	MadConvertChineseFlag ccfs[] =
+	{ ccfSimp2Trad, ccfTrad2Simp, ccfKanji2Trad, ccfKanji2Simp, ccfChinese2Kanji };
+	
+	for( int i = 0; i < sizeof( cefs ) / sizeof( cefs[0] ); ++i )
+	{
+		ptext.reset( ConvertTextToNewString( text, ccfs[i] ));
+		if(ptext)
+			pan_ch.push_back(ptext);
+	}
+
+	if(!pan_ch.empty())
+	{
+		std::set<wxChar> panch, lastpanch;
+		wxString ttext;
+		bool inSquare = false;
+		wxChar lastpchar = 0;
+		for(size_t i = 0; i < text.Len(); ++i)
+		{
+			panch.clear();
+			for(size_t j = 0; j < pan_ch.size(); ++j )
+			{
+				panch.insert((*(pan_ch[j]))[i]);
+			}
+
+			std::set<wxChar> intersect;
+
+			if(panch.size() > 1)
+			{
+				bool insert = !inSquare;
+				if(inSquare)
+				{
+					std::set_intersection(lastpanch.begin(),lastpanch.end(), panch.begin(), panch.end(),
+								  std::inserter(intersect, intersect.begin()));
+					if(intersect != panch)
+					{
+						intersect.clear();
+						std::set_union(lastpanch.begin(),lastpanch.end(), panch.begin(), panch.end(),
+									  std::inserter(intersect, intersect.begin()));
+						lastpanch = intersect;
+						insert = true;
+					}
+				}
+
+				if(insert)
+				{
+					if(!inSquare)
+						ttext << '[';
+					for(std::set<wxChar>::iterator it = panch.begin(); it != panch.end(); ++it)
+					{
+						ttext << *it;
+					}
+
+					if(!inSquare)
+						ttext << ']';
+				}
+			}
+			else
+			{
+				lastpanch.clear();
+				ttext << text[i];
+			}
+
+			if(lastpchar == '\\')
+			{
+				lastpchar = 0;
+			}
+			else
+			{
+				lastpchar = text[i];
+				if(inSquare == false)
+					inSquare = (lastpchar == '[');
+				else
+					inSquare = (lastpchar != ']');
+			}
+ 		}
+
+		text = ttext;
+	}
+}
+
+
+extern wxString MadStrLower( const wxString & );
+
 MadLines *UCIterator::s_lines = nullptr;
 MadLines::NextUCharFuncPtr UCIterator::s_NextUChar = nullptr;
 wxFileOffset UCIterator::s_endpos = 0;
 list<UCQueueSet> UCIterator::s_ucqueues;
 
-extern wxString MadStrLower( const wxString & );
 MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadCaretPos &endpos,
 		const wxString &text, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline/* = false*/, bool bPanChinese/* = false*/,/*IN_OUT*/ucs4string *fmt/*= nullptr*/, ucs4string *out/* = nullptr*/ )
 {
@@ -685,59 +774,33 @@ MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 		text_ptr = &text_lower;
 	}
 
+	if(bPanChinese)
+	{
+		static wxString pan_chs = *text_ptr;
+		if(!bRegex)
+		{
+			bDotMatchNewline = false;
+			// todo trans
+			wxString spC[] = { wxT("\\"), wxT("{"), wxT("}"), wxT("["), wxT("]"), wxT("("), wxT(")"), wxT("*"),
+				wxT("&"), wxT("^"), wxT("$"), wxT("!"), wxT(":"), wxT("."), wxT("?"), wxT("|"), wxT("_"),
+				wxT("-"), wxT("+"), wxT("="), wxT("<"), wxT(">") };
+			wxString esc(wxT("\\"));
+			for (size_t i = 0; i < (sizeof(spC) / sizeof(spC[0])); ++i)
+			{
+				pan_chs.Replace(spC[i], esc + spC[i]);
+			}
+			bRegex = true;
+		}
+
+		PanChinese(pan_chs);
+		text_ptr = &pan_chs;
+	}
+
 	if(bRegex)
 	{
 		if( bDotMatchNewline == false )
 		{
 			opt = opt | regex_constants::not_dot_newline;
-		}
-
-		if(bPanChinese)
-		{
-			shared_ptr< wxString > ptext;
-			std::vector<shared_ptr< wxString > > pan_ch;
-			MadConvertEncodingFlag cefs[] =
-			{ cefSC2TC, cefTC2SC, cefJK2TC, cefJK2SC, cefC2JK };
-			MadConvertChineseFlag ccfs[] =
-			{ ccfSimp2Trad, ccfTrad2Simp, ccfKanji2Trad, ccfKanji2Simp, ccfChinese2Kanji };
-			
-			for( int i = 0; i < sizeof( cefs ) / sizeof( cefs[0] ); ++i )
-			{
-				ptext.reset( ConvertTextToNewString( text, ccfs[i] ));
-				if(ptext)
-					pan_ch.push_back(ptext);
-			}
-
-			if(!pan_ch.empty())
-			{
-				std::set<wxChar> panch;
-				static wxString pan_text;
-				pan_text.Empty();
-				for(size_t i = 0; i < text_ptr->Len(); ++i)
-				{
-					panch.clear();
-					for(size_t j = 0; j < pan_ch.size(); ++j )
-					{
-						panch.insert((*(pan_ch[j]))[i]);
-					}
-
-					if(panch.size() > 1)
-					{
-						pan_text << '[';
-						for(std::set<wxChar>::iterator it = panch.begin(); it != panch.end(); ++it)
-						{
-							pan_text << *it;
-						}
-						pan_text << ']';
-					}
-					else
-					{
-						pan_text << (*text_ptr)[i];
-					}
-				}
-
-				text_ptr = &pan_text;
-			}
 		}
 	}
 

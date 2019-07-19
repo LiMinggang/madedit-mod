@@ -181,7 +181,6 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	wxBoxSizer* BoxSizer1;
 	wxBoxSizer* BoxSizer2;
 	wxBoxSizer* BoxSizer3;
-	wxBoxSizer* BoxSizer5;
 	wxBoxSizer* BoxSizer6;
 	wxBoxSizer* BoxSizer7;
 	wxBoxSizer* BoxSizer8;
@@ -210,6 +209,9 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	WxCheckBoxWholeWord = new wxCheckBox(this, wxID_ANY, _("&Whole Word Only"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
 	WxCheckBoxWholeWord->SetValue(false);
 	BoxSizer6->Add(WxCheckBoxWholeWord, 0, wxALL|wxEXPAND, 2);
+	WxCheckBoxPanChinese = new wxCheckBox(this, wxID_ANY, _("Pan Chinese"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
+	WxCheckBoxPanChinese->SetValue(false);
+	BoxSizer6->Add(WxCheckBoxPanChinese, 0, wxALL|wxEXPAND, 2);
 	WxCheckBoxRegex = new wxCheckBox(this, wxID_ANY, _("Use Regular E&xpressions"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
 	WxCheckBoxRegex->SetValue(false);
 	BoxSizer6->Add(WxCheckBoxRegex, 0, wxALL|wxEXPAND, 2);
@@ -219,12 +221,6 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	WxCheckBoxDotMatchNewLine->SetValue(false);
 	BoxSizer7->Add(WxCheckBoxDotMatchNewLine, 0, wxALL|wxEXPAND, 2);
 	BoxSizer6->Add(BoxSizer7, 0, wxALL|wxEXPAND, 0);
-	BoxSizer5 = new wxBoxSizer(wxHORIZONTAL);
-	BoxSizer5->Add(10,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	WxCheckBoxPanChinese = new wxCheckBox(this, wxID_ANY, _("Pan Chinese"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
-	WxCheckBoxPanChinese->SetValue(false);
-	BoxSizer5->Add(WxCheckBoxPanChinese, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	BoxSizer6->Add(BoxSizer5, 0, wxALL|wxEXPAND, 0);
 	BoxSizer4 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer4->Add(10,0,0, wxALL|wxALIGN_CENTER_VERTICAL, 0);
 	wxCheckBoxReplaceNoDoubleCheck = new wxCheckBox(this, wxID_ANY, _("Replace Directly(Fix Regex dilema)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));

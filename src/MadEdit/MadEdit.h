@@ -650,6 +650,7 @@ protected:
 	void DoMouseRightUp();
 	void DoActivate();
 
+	void PanChinese(wxString &text);
 #ifdef __WXMSW__
 	WXLRESULT MSWWindowProc( WXUINT message, WXWPARAM wParam, WXLPARAM lParam );
 #endif
