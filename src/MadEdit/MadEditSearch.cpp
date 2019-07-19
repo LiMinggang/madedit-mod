@@ -721,7 +721,6 @@ void MadEdit::PanChinese(wxString &text)
 	}
 }
 
-
 extern wxString MadStrLower( const wxString & );
 
 MadLines *UCIterator::s_lines = nullptr;

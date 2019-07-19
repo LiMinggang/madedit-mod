@@ -86,7 +86,7 @@ means you have to install wxGTK3+(wxGTK2.8 is not supported) to install the rele
 * New: Improve MadPython API to support readable APIs
 * New: Japanese Translation(Thanks Tilt <tiltstr@gmail.com>)
 * New: Package for FreeBSD 12.0
-* New: Pan Chinese(CJK) support in Regex #291
+* New: Pan Chinese(CJK) support #291
 * Fix: wxWidgets 3.0.x backward compatibility
 * Fix: Treat mouse moving in selecting by mouse as one move in macro recording #284
 * Fix: Astyle crash by updating Astyle to 3.1
@@ -94,6 +94,7 @@ means you have to install wxGTK3+(wxGTK2.8 is not supported) to install the rele
 * Fix: Missed quotes in Macro Recording of changing encodings #286
 * Fix: Duplicated commands recorded
 * Fix: Regex search/replace(case insensitive) does not work under Linux #288
+* Fix: Re-enable Find Prev in Regex search
 * Change *nix build to use shared libs released by the OS. You have to install libwxgtk3 by yourself
 * Change C/C++ compiler under FreeBSD from GNU to c++
 * Add wxWidgets version number in About dialog

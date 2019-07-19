@@ -1389,14 +1389,6 @@ void MadSearchReplaceDialog::MadSearchReplaceDialogActivate( wxActivateEvent& ev
 			SetTransparent( wxIMAGE_ALPHA_OPAQUE );
 		}
 
-		if(WxCheckBoxRegex->GetValue())
-		{
-			WxButtonFindPrev->Disable();
-		}
-		else
-		{
-			WxButtonFindPrev->Enable();
-		}
 		GetSizer()->Fit( this );
 		GetSizer()->Layout();
 	}
@@ -2064,7 +2056,6 @@ void MadSearchReplaceDialog::WxCheckBoxRegexClick( wxCommandEvent& event )
 		WxCheckBoxDotMatchNewLine->Enable();
 		WxCheckBoxPanChinese->Enable();
 		wxCheckBoxReplaceNoDoubleCheck->Enable();
-		WxButtonFindPrev->Disable();
 	}
 	else
 	{
@@ -2073,7 +2064,6 @@ void MadSearchReplaceDialog::WxCheckBoxRegexClick( wxCommandEvent& event )
 		WxCheckBoxDotMatchNewLine->Disable();
 		WxCheckBoxPanChinese->Disable();
 		wxCheckBoxReplaceNoDoubleCheck->Disable();
-		WxButtonFindPrev->Enable();
 	}
 }
 
