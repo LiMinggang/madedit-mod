@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.16\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-20 10:58+0800\n"
+"POT-Creation-Date: 2019-07-20 17:24+0800\n"
 "PO-Revision-Date: 2015-11-24 19:35+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
@@ -490,11 +490,11 @@ msgstr ""
 msgid "Page %d"
 msgstr ""
 
-#: wxstd.po.cpp:120 wxstd.po.cpp:121 ../src/MadOptionsDialog.cpp:255
+#: wxstd.po.cpp:120 ../src/MadOptionsDialog.cpp:255
 msgid "Options"
 msgstr "Opzioni"
 
-#: wxstd.po.cpp:122
+#: wxstd.po.cpp:121
 msgid ""
 "\n"
 "\n"
@@ -502,17 +502,67 @@ msgid ""
 "Invalid Markdown format!!"
 msgstr ""
 
-#: wxstd.po.cpp:123 ../src/MadOptionsDialog.cpp:893
+#: wxstd.po.cpp:122 ../src/MadOptionsDialog.cpp:893
 msgid "Plain Text"
 msgstr ""
 
-#: wxstd.po.cpp:124
+#: wxstd.po.cpp:123
 msgid "All files (*;*.*)"
 msgstr ""
 
-#: wxstd.po.cpp:125
+#: wxstd.po.cpp:124
 msgid "Plain Text (*.txt)"
 msgstr ""
+
+#: wxstd.po.cpp:125
+msgid "incomplete escape sequence"
+msgstr ""
+
+#: wxstd.po.cpp:126
+msgid "mismatched parenthesis"
+msgstr ""
+
+#: wxstd.po.cpp:127
+msgid "rule assignments must be at the front of the regex"
+msgstr ""
+
+#: wxstd.po.cpp:128
+msgid "invalid named back-reference"
+msgstr ""
+
+#: wxstd.po.cpp:129
+msgid "quantifier not expected"
+msgstr ""
+
+#: wxstd.po.cpp:130
+msgid "found quote-meta end without corresponding quote-meta begin"
+msgstr ""
+
+#: wxstd.po.cpp:131
+msgid "An argument to an action was unspecified"
+msgstr ""
+
+#: wxstd.po.cpp:132
+msgid "expression cannot be quantified"
+msgstr ""
+
+#: wxstd.po.cpp:133 wxstd.po.cpp:137
+msgid "character escape too large to fit in target character type"
+msgstr ""
+
+#: wxstd.po.cpp:134
+msgid "unrecognized extension"
+msgstr ""
+
+#: wxstd.po.cpp:135
+#, fuzzy
+msgid "incomplete extension"
+msgstr "Estensioni Fonetiche"
+
+#: wxstd.po.cpp:136
+#, fuzzy
+msgid "unknown pattern modifier"
+msgstr "Orientamento"
 
 #: ../src/MadEdit/MadEdit.cpp:12065
 msgid "Zero Length Match"
@@ -559,8 +609,8 @@ msgid "Cannot save this file:"
 msgstr "Non posso salvare il File:"
 
 #: ../src/MadEdit/MadEditBasic.cpp:2570 ../src/MadEdit/MadEditBasic.cpp:3075
-#: ../src/MadEdit/MadEditBasic.cpp:3088 ../src/MadEdit/MadEditSearch.cpp:996
-#: ../src/MadEdit/MadEditSearch.cpp:1094 ../src/MadEdit/MadEditSearch.cpp:1157
+#: ../src/MadEdit/MadEditBasic.cpp:3088 ../src/MadEdit/MadEditSearch.cpp:998
+#: ../src/MadEdit/MadEditSearch.cpp:1096 ../src/MadEdit/MadEditSearch.cpp:1159
 #: ../src/MadEditFrame.cpp:544 ../src/MadEditFrame.cpp:549
 #: ../src/MadEditFrame.cpp:5884
 msgid "&Ok"
@@ -628,8 +678,8 @@ msgstr "La Stringa fornita non è una Stringa Esadecimale valida:"
 msgid "Found %d matched texts..."
 msgstr ""
 
-#: ../src/MadEdit/MadEditSearch.cpp:849 ../src/MadEdit/MadEditSearch.cpp:992
-#: ../src/MadEdit/MadEditSearch.cpp:1090 ../src/MadEdit/MadEditSearch.cpp:1153
+#: ../src/MadEdit/MadEditSearch.cpp:851 ../src/MadEdit/MadEditSearch.cpp:994
+#: ../src/MadEdit/MadEditSearch.cpp:1092 ../src/MadEdit/MadEditSearch.cpp:1155
 msgid "Regex error:"
 msgstr ""
 
@@ -4846,9 +4896,6 @@ msgstr ""
 
 #~ msgid "Buginese"
 #~ msgstr "Buginese"
-
-#~ msgid "Phonetic Extensions"
-#~ msgstr "Estensioni Fonetiche"
 
 #~ msgid "Phonetic Extensions Supplement"
 #~ msgstr "Supplemento Estensioni Fonetiche"

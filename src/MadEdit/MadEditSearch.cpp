@@ -643,7 +643,9 @@ void MadEdit::PanChinese(wxString &text)
 	{ cefSC2TC, cefTC2SC, cefJK2TC, cefJK2SC, cefC2JK };
 	MadConvertChineseFlag ccfs[] =
 	{ ccfSimp2Trad, ccfTrad2Simp, ccfKanji2Trad, ccfKanji2Simp, ccfChinese2Kanji };
-	
+
+	ptext.reset(new wxString(text));
+	pan_ch.push_back(ptext);
 	for( int i = 0; i < sizeof( cefs ) / sizeof( cefs[0] ); ++i )
 	{
 		ptext.reset( ConvertTextToNewString( text, ccfs[i] ));
@@ -847,7 +849,7 @@ MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 			//dlg.SetOKLabel( wxMessageDialog::ButtonLabel( _( "&Ok" ) ) );
 			//dlg.ShowModal();
 			wxString regErr(_("Regex error:"));
-			regErr << e.what();
+			regErr << wxGetTranslation(e.what());
 			g_StatusBar->SetStatusText( regErr, 0 );
 			return SR_EXPR_ERROR;
 		}
