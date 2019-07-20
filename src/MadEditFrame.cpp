@@ -10575,7 +10575,7 @@ void MadEditFrame::OnSearchQuickFindNext( wxCommandEvent& event )
 			reset_caretpos = false;
 		}
 
-		bool bRegex = (m_QuickSearchBar->GetToolEnabled(menuQuickFindRegex) &&  m_QuickSearchBar->GetToolToggled(menuQuickFindRegex)),
+		bool bRegex = (m_QuickSearchBar->GetToolEnabled(menuQuickFindRegex) && m_QuickSearchBar->GetToolToggled(menuQuickFindRegex)),
 			bWholeWord = (m_QuickSearchBar->GetToolEnabled(menuQuickFindWholeWord) &&  m_QuickSearchBar->GetToolToggled(menuQuickFindWholeWord)),
 			bDotMatchNewline = (m_QuickSearchBar->GetToolEnabled(menuQuickFindDotMatchNewLine) &&  m_QuickSearchBar->GetToolToggled(menuQuickFindDotMatchNewLine)),
 			bCase = (m_QuickSearchBar->GetToolEnabled(menuQuickFindCase) &&  m_QuickSearchBar->GetToolToggled(menuQuickFindCase)),
