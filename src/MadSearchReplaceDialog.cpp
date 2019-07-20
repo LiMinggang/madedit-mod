@@ -604,17 +604,14 @@ void MadSearchReplaceDialog::WxButtonFindNextClick( wxCommandEvent& WXUNUSED(eve
 				bool bPanChinese = WxCheckBoxPanChinese->GetValue(), bCaseSensitive = WxCheckBoxCaseSensitive->GetValue();
 
 				if( bRegex ) bWholeWord = false;
-				else
-				{
-					bDotMatchNewline = false;
-					bPanChinese = false;
-				}
+				else bDotMatchNewline = false;
 
 				sr = g_ActiveMadEdit->FindTextNext( text,
 													bRegex,
 													bCaseSensitive,
 													bWholeWord,
 													bDotMatchNewline,
+													bPanChinese,
 													rangeFrom, rangeTo );
 
 				if( sr != SR_EXPR_ERROR )
@@ -765,17 +762,14 @@ void MadSearchReplaceDialog::WxButtonFindPrevClick( wxCommandEvent& WXUNUSED(eve
 				bool bPanChinese = WxCheckBoxPanChinese->GetValue(), bCaseSensitive = WxCheckBoxCaseSensitive->GetValue();
 
 				if( bRegex ) bWholeWord = false;
-				else
-				{
-					bDotMatchNewline = false;
-					bPanChinese = false;
-				}
+				else bDotMatchNewline = false;
 
 				sr = g_ActiveMadEdit->FindTextPrevious( text,
 														bRegex,
 														bCaseSensitive,
 														bWholeWord,
 														bDotMatchNewline,
+														bPanChinese,
 														rangeTo, rangeFrom );
 
 				if( IsMacroRecording() )
@@ -1068,7 +1062,6 @@ void MadSearchReplaceDialog::UpdateCheckBoxByCBHex( bool check )
 		WxCheckBoxRegex->Disable();
 		WxCheckBoxDotMatchNewLine->Disable();
 		wxCheckBoxReplaceNoDoubleCheck->Disable();
-		WxCheckBoxPanChinese->Disable();
 	}
 	else
 	{
@@ -1079,14 +1072,12 @@ void MadSearchReplaceDialog::UpdateCheckBoxByCBHex( bool check )
 		{
 			WxCheckBoxDotMatchNewLine->Enable();
 			wxCheckBoxReplaceNoDoubleCheck->Enable();
-			WxCheckBoxPanChinese->Enable();
 			WxCheckBoxWholeWord->Disable();
 		}
 		else
 		{
 			WxCheckBoxWholeWord->Enable();
 			WxCheckBoxDotMatchNewLine->Disable();
-			WxCheckBoxPanChinese->Disable();
 			wxCheckBoxReplaceNoDoubleCheck->Disable();
 		}
 	}
@@ -1194,11 +1185,7 @@ void MadSearchReplaceDialog::WxButtonReplaceClick( wxCommandEvent& WXUNUSED(even
 				bool bPanChinese = WxCheckBoxPanChinese->GetValue(), bCaseSensitive = WxCheckBoxCaseSensitive->GetValue();
 
 				if( bRegex ) bWholeWord = false;
-				else
-				{
-					bDotMatchNewline = false;
-					bPanChinese = false;
-				}
+				else bDotMatchNewline = false;
 
 				if(bRegex && wxCheckBoxReplaceNoDoubleCheck->GetValue())
 				{
@@ -1207,6 +1194,7 @@ void MadSearchReplaceDialog::WxButtonReplaceClick( wxCommandEvent& WXUNUSED(even
 																 bCaseSensitive,
 																 bWholeWord,
 																 bDotMatchNewline,
+																 bPanChinese,
 																 rangeFrom, rangeTo );
 					func = wxT("ReplaceTextNoDoubleCheck");
 				}
@@ -1217,6 +1205,7 @@ void MadSearchReplaceDialog::WxButtonReplaceClick( wxCommandEvent& WXUNUSED(even
 														bCaseSensitive,
 														bWholeWord,
 														bDotMatchNewline,
+														bPanChinese,
 														rangeFrom, rangeTo );					
 					func = wxT("ReplaceText");
 				}
@@ -1272,11 +1261,7 @@ void MadSearchReplaceDialog::WxButtonReplaceClick( wxCommandEvent& WXUNUSED(even
 							bool bPanChinese = WxCheckBoxPanChinese->GetValue(), bCaseSensitive = WxCheckBoxCaseSensitive->GetValue();
 
 							if( bRegex ) bWholeWord = false;
-							else
-							{
-								bDotMatchNewline = false;
-								bPanChinese = false;
-							}
+							else bDotMatchNewline = false;
 							expr = text;
 							target = reptext;
 							MadSearchEscapeString(expr, bRegex);
@@ -1515,18 +1500,14 @@ void MadSearchReplaceDialog::WxButtonCountClick( wxCommandEvent& WXUNUSED(event)
 			bool bPanChinese = WxCheckBoxPanChinese->GetValue(), bCaseSensitive = WxCheckBoxCaseSensitive->GetValue();
 
 			if( bRegex ) bWholeWord = false;
-			else
-			{
-				bDotMatchNewline = false;
-				bPanChinese = false;
-			}
+			else bDotMatchNewline = false;
 
 			count = g_ActiveMadEdit->FindTextAll( text,
 												  bRegex,
 												  bCaseSensitive,
 												  bWholeWord,
 												  bDotMatchNewline,
-												  false,
+												  bPanChinese,
 												  false,
 												  nullptr, nullptr,
 												  rangeFrom, rangeTo );
@@ -1786,18 +1767,14 @@ void MadSearchReplaceDialog::SearchAll( MadEdit * madedit, bool needRec/*=true*/
 			bool bPanChinese = WxCheckBoxPanChinese->GetValue(), bCaseSensitive = WxCheckBoxCaseSensitive->GetValue();
 
 			if( bRegex ) bWholeWord = false;
-			else
-			{
-				bDotMatchNewline = false;
-				bPanChinese = false;
-			}
+			else bDotMatchNewline = false;
 
 			ok = madedit->FindTextAll( expr,
 									   bRegex,
 									   WxCheckBoxCaseSensitive->GetValue(),
 									   bWholeWord,
 									   bDotMatchNewline,
-									   false,
+									   bPanChinese,
 									   false,
 									   &begpos, &endpos, rangeFrom, rangeTo );
 
@@ -1946,11 +1923,7 @@ void MadSearchReplaceDialog::ReplaceAll( MadEdit * madedit, bool needRec/*=true*
 			bool bPanChinese = WxCheckBoxPanChinese->GetValue(), bCaseSensitive = WxCheckBoxCaseSensitive->GetValue();
 
 			if( bRegex ) bWholeWord = false;
-			else
-			{
-				bDotMatchNewline = false;
-				bPanChinese = false;
-			}
+			else bDotMatchNewline = false;
 
 			count = madedit->ReplaceTextAll( text, reptext,
 											 bRegex,
@@ -2054,7 +2027,6 @@ void MadSearchReplaceDialog::WxCheckBoxRegexClick( wxCommandEvent& event )
 		WxCheckBoxWholeWord->Disable();
 		WxCheckBoxFindHex->Disable();
 		WxCheckBoxDotMatchNewLine->Enable();
-		WxCheckBoxPanChinese->Enable();
 		wxCheckBoxReplaceNoDoubleCheck->Enable();
 	}
 	else
@@ -2062,7 +2034,6 @@ void MadSearchReplaceDialog::WxCheckBoxRegexClick( wxCommandEvent& event )
 		WxCheckBoxWholeWord->Enable();
 		WxCheckBoxFindHex->Enable();
 		WxCheckBoxDotMatchNewLine->Disable();
-		WxCheckBoxPanChinese->Disable();
 		wxCheckBoxReplaceNoDoubleCheck->Disable();
 	}
 }

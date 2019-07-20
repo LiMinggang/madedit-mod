@@ -3325,7 +3325,7 @@ MadReplaceResult MadEdit::ReplaceText( const wxString &expr, const wxString &fmt
 
 	if( !selok ) // just find next
 	{
-		switch( FindTextNext( expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, rangeFrom, rangeTo ) )
+		switch( FindTextNext( expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, bPanChinese, rangeFrom, rangeTo ) )
 		{
 		case SR_EXPR_ERROR: return RR_EXPR_ERROR;
 
@@ -3337,7 +3337,7 @@ MadReplaceResult MadEdit::ReplaceText( const wxString &expr, const wxString &fmt
 
 	ucs4string out;
 	// replace the selected text
-	state = Replace( out, bpos, epos, expr, fmt, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline );
+	state = Replace( out, bpos, epos, expr, fmt, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, bPanChinese );
 
 	if( state == SR_EXPR_ERROR )
 	{
@@ -3370,7 +3370,7 @@ MadReplaceResult MadEdit::ReplaceText( const wxString &expr, const wxString &fmt
 		}
 	}
 
-	if( SR_NO == FindTextNext( expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, rangeFrom, rangeTo ) )
+	if( SR_NO == FindTextNext( expr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, bPanChinese, rangeFrom, rangeTo ) )
 		return RR_REP_NNEXT;
 
 	return RR_REP_NEXT;

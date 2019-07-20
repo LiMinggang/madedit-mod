@@ -3654,7 +3654,10 @@ void MadEditFrame::CreateGUIControls( void )
 	m_QuickSearchBar->ToggleTool(menuQuickFindRegex, bregex);
 	m_QuickSearchBar->AddTool( menuQuickFindDotMatchNewLine, _( "Dot Match Newline" ), m_ImageList->GetBitmap( dotmatchnewline_xpm_idx ), wxNullBitmap, wxITEM_CHECK, _("Dot Match Newline in Regular Expressions"), _("Dot Match Newline in Regular Expressions"), nullptr );
 	m_QuickSearchBar->ToggleTool(menuQuickFindDotMatchNewLine, bdotnewline);
-	if( bwholeword || bcase )
+	m_QuickSearchBar->ToggleTool( menuQuickFindWholeWord, bwholeword );
+	m_QuickSearchBar->ToggleTool( menuQuickFindCase, bcase );
+	m_QuickSearchBar->ToggleTool( menuQuickFindRegex, bregex );
+	if( bwholeword )
 	{
 		m_QuickSearchBar->EnableTool(menuQuickFindRegex, false);
 		m_QuickSearchBar->EnableTool(menuQuickFindDotMatchNewLine, false);
@@ -3664,7 +3667,6 @@ void MadEditFrame::CreateGUIControls( void )
 		if(bregex)
 		{
 			m_QuickSearchBar->EnableTool(menuQuickFindWholeWord, false);
-			m_QuickSearchBar->EnableTool(menuQuickFindCase, false);
 		}
 		else
 		{
@@ -5062,12 +5064,14 @@ void MadEditFrame::OnUpdateUI_MenuSearch_QuickBar( wxUpdateUIEvent& event )
 
 	switch(event.GetId())
 	{
-		case menuQuickFindWholeWord:
 		case menuQuickFindCase:
+			enable = true;
+			break;
+		case menuQuickFindWholeWord:
 			{
 				if(enable)
 				{
-					enable = (m_QuickSearchBar->GetToolToggled(menuQuickFindWholeWord) || m_QuickSearchBar->GetToolToggled(menuQuickFindCase));
+					enable = (m_QuickSearchBar->GetToolToggled(menuQuickFindWholeWord));
 					if(!enable) enable = (!m_QuickSearchBar->GetToolToggled(menuQuickFindRegex));
 				}
 				break;
@@ -5076,7 +5080,7 @@ void MadEditFrame::OnUpdateUI_MenuSearch_QuickBar( wxUpdateUIEvent& event )
 			{
 				if(enable)
 				{
-					enable = !(m_QuickSearchBar->GetToolToggled(menuQuickFindWholeWord) || m_QuickSearchBar->GetToolToggled(menuQuickFindCase) || (!m_SearchDirectionNext));
+					enable = !(m_QuickSearchBar->GetToolToggled(menuQuickFindWholeWord));
 				}
 				break;
 			}
@@ -5084,8 +5088,7 @@ void MadEditFrame::OnUpdateUI_MenuSearch_QuickBar( wxUpdateUIEvent& event )
 			{
 				if(enable)
 				{
-					enable = (!(m_QuickSearchBar->GetToolToggled(menuQuickFindWholeWord) || m_QuickSearchBar->GetToolToggled(menuQuickFindCase))
-						&& (m_QuickSearchBar->GetToolToggled(menuQuickFindRegex)));
+					enable = (!(m_QuickSearchBar->GetToolToggled(menuQuickFindWholeWord)) && (m_QuickSearchBar->GetToolToggled(menuQuickFindRegex)));
 				}
 				break;
 			}
@@ -10477,7 +10480,6 @@ void MadEditFrame::OnSearchQuickFind( wxCommandEvent& event )
 void MadEditFrame::OnSearchQuickFindPrevious( wxCommandEvent& event )
 {
 	m_SearchDirectionNext = false;
-	m_QuickSearchBar->EnableTool(menuQuickFindRegex, false);
 
 	if( m_QuickSearch && g_ActiveMadEdit )
 	{
@@ -10513,13 +10515,14 @@ void MadEditFrame::OnSearchQuickFindPrevious( wxCommandEvent& event )
 			reset_caretpos = false;
 		}
 
-		bool bRegex = (m_QuickSearchBar->GetToolEnabled(menuQuickFindRegex) &&  m_QuickSearchBar->GetToolToggled(menuQuickFindRegex)),
+		bool bRegex = (m_QuickSearchBar->GetToolEnabled(menuQuickFindRegex) && m_QuickSearchBar->GetToolToggled(menuQuickFindRegex)),
 			bWholeWord = (m_QuickSearchBar->GetToolEnabled(menuQuickFindWholeWord) &&  m_QuickSearchBar->GetToolToggled(menuQuickFindWholeWord)),
 			bDotMatchNewline = (m_QuickSearchBar->GetToolEnabled(menuQuickFindDotMatchNewLine) &&  m_QuickSearchBar->GetToolToggled(menuQuickFindDotMatchNewLine)),
-			bCase = (m_QuickSearchBar->GetToolEnabled(menuQuickFindCase) &&  m_QuickSearchBar->GetToolToggled(menuQuickFindCase));
+			bCase = (m_QuickSearchBar->GetToolEnabled(menuQuickFindCase) &&  m_QuickSearchBar->GetToolToggled(menuQuickFindCase)),
+			bPanChinese = false;
 
 		sr = g_ActiveMadEdit->FindTextPrevious( text, bRegex,
-												bCase, bWholeWord, bDotMatchNewline, rangeFrom, rangeTo );
+												bCase, bWholeWord, bDotMatchNewline, bPanChinese, rangeFrom, rangeTo );
 
 		if( sr == SR_NO )
 		{
@@ -10537,7 +10540,6 @@ void MadEditFrame::OnSearchQuickFindPrevious( wxCommandEvent& event )
 void MadEditFrame::OnSearchQuickFindNext( wxCommandEvent& event )
 {
 	m_SearchDirectionNext = true;
-	m_QuickSearchBar->EnableTool(menuQuickFindRegex, true);
 
 	if( m_QuickSearch && g_ActiveMadEdit )
 	{
@@ -10576,12 +10578,13 @@ void MadEditFrame::OnSearchQuickFindNext( wxCommandEvent& event )
 		bool bRegex = (m_QuickSearchBar->GetToolEnabled(menuQuickFindRegex) &&  m_QuickSearchBar->GetToolToggled(menuQuickFindRegex)),
 			bWholeWord = (m_QuickSearchBar->GetToolEnabled(menuQuickFindWholeWord) &&  m_QuickSearchBar->GetToolToggled(menuQuickFindWholeWord)),
 			bDotMatchNewline = (m_QuickSearchBar->GetToolEnabled(menuQuickFindDotMatchNewLine) &&  m_QuickSearchBar->GetToolToggled(menuQuickFindDotMatchNewLine)),
-			bCase = (m_QuickSearchBar->GetToolEnabled(menuQuickFindCase) &&  m_QuickSearchBar->GetToolToggled(menuQuickFindCase));
+			bCase = (m_QuickSearchBar->GetToolEnabled(menuQuickFindCase) &&  m_QuickSearchBar->GetToolToggled(menuQuickFindCase)),
+			bPanChinese = false;
 
 		if( bRegex ) bWholeWord = false;
 
 		sr = g_ActiveMadEdit->FindTextNext( text, bRegex,
-											bCase, bWholeWord, bDotMatchNewline, rangeFrom, rangeTo );
+											bCase, bWholeWord, bDotMatchNewline, bPanChinese, rangeFrom, rangeTo );
 
 		if( sr == SR_NO )
 		{

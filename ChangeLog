@@ -1,26 +1,28 @@
-2019-07-19  Minggang Li <minggang.li@gmail.com>
-	1.New: MadPython recording enhancement to support keyboard commands
-	2.New: Improve MadPython API to support readable APIs
-	3.New: Japanese Translation(Thanks Tilt <tiltstr@gmail.com>)
-	4.New: Package for FreeBSD 12.0
-	5.New: Pan Chinese(CJK) support #291
-	6.Fix: wxWidgets 3.0.x backward compatibility
-	7.Fix: Treat mouse moving in selecting by mouse as one move in macro recording #284
-	8.Fix: Astyle crash by updating Astyle to 3.1
-	9.Fix: Selection by Shift+Left button does not select from caret position if there is a selection and the caret has been moved
-	10.Fix: Missed quotes in Macro Recording of changing encodings #286
-	11.Fix: Duplicated commands recorded
-	12.Fix: Regex search/replace(case insensitive) does not work under Linux #288
-	13.Fix: Re-enable Find Prev in Regex search
-	14.Change *nix build to use shared libs released by the OS. You have to install libwxgtk3 by yourself
-	15.Change C/C++ compiler under FreeBSD from GNU to c++
-	16.Add wxWidgets version number in About dialog
-	17.Add version information to crash dump file
-	18.Improve Macro Recording
-	19.Improve MadPython APIs
-	20.Update boostpython to 1.70
-	21.Update boost to 1.70
-	22.Update Astyle to r672
+2019-07-20  Minggang Li <minggang.li@gmail.com>
+	1.New: Atyle formatter: Add new option "style=webkit" for the WebKit brace style
+	2.New: New API for MadPython:InsertNewline
+	3.New: Right click menu enabled for MadMacroDlg and SearchReplaceDialog(more edit functions for input of the dialog)
+	4.New: Scripts and spell check for Macro and SearchReplace dialog
+	5.New: Reset transparency of SearchReplace dialog
+	6.Fix: Deleted stale lock file '/home/username/prog_name-username' bug(Linux) #262
+	7.Fix: Code issue of EnableTransparency
+	8.Fix: GB18030 not work under Linux
+	9.Fix: Regex replace bug, eg, replace "\r\n" with "\\n"
+	10.Fix: MadPython Recording issue
+	11.Fix: Chars escape for regex recording
+	12.Fix: Unbind critical message handlers during OnClose
+	13.Fix: High CPU load when move mouse over text lines #258 #265
+	14.Fix: Can't replace bookmarked lines with multiple line text
+	15.Fix: Patch for possible buffer overflow in GetFontWidths
+	16.Fix: Wrong string for K&R style on SourceFormat config Dialog
+	17.Fix: Use alphabet order for file name extension in FileAssociation Dialog
+	18.Fix: Disable syntax toolbar in Hex mode
+	19.Fix: Use GB18030 if wxFONTENCODING_CP936 is not available
+	20.Fix: Total pages in print preview is incorrect
+	21.Fix: Code improvement
+	22.Fix: Buggy code of quick search UI
+	23.Update Astyle to latest code
+	24.Update translations
 
 2019-04-02  Minggang Li <minggang.li@gmail.com>
 	1.New: Change foreground and backgroud colour for all the text controls in main frame

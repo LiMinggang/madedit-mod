@@ -82,28 +82,30 @@ Mod v0.4.17
 Note: Changed *nix build from static link with wxWidgets to dynamic link with wxGTK, which
 means you have to install wxGTK3+(wxGTK2.8 is not supported) to install the release
 
-* New: MadPython recording enhancement to support keyboard commands
-* New: Improve MadPython API to support readable APIs
-* New: Japanese Translation(Thanks Tilt <tiltstr@gmail.com>)
-* New: Package for FreeBSD 12.0
-* New: Pan Chinese(CJK) support #291
-* Fix: wxWidgets 3.0.x backward compatibility
-* Fix: Treat mouse moving in selecting by mouse as one move in macro recording #284
-* Fix: Astyle crash by updating Astyle to 3.1
-* Fix: Selection by Shift+Left button does not select from caret position if there is a selection and the caret has been moved
-* Fix: Missed quotes in Macro Recording of changing encodings #286
-* Fix: Duplicated commands recorded
-* Fix: Regex search/replace(case insensitive) does not work under Linux #288
-* Fix: Re-enable Find Prev in Regex search
-* Change *nix build to use shared libs released by the OS. You have to install libwxgtk3 by yourself
-* Change C/C++ compiler under FreeBSD from GNU to c++
-* Add wxWidgets version number in About dialog
-* Add version information to crash dump file
-* Improve Macro Recording
-* Improve MadPython APIs
-* Update boostpython to 1.70
-* Update boost to 1.70
-* Update Astyle to r672
+* New: Atyle formatter: Add new option "style=webkit" for the WebKit brace style
+* New: New API for MadPython:InsertNewline
+* New: Right click menu enabled for MadMacroDlg and SearchReplaceDialog(more edit functions for input of the dialog)
+* New: Scripts and spell check for Macro and SearchReplace dialog
+* New: Reset transparency of SearchReplace dialog
+* Fix: Deleted stale lock file '/home/username/prog_name-username' bug(Linux) #262
+* Fix: Code issue of EnableTransparency
+* Fix: GB18030 not work under Linux
+* Fix: Regex replace bug, eg, replace "\r\n" with "\\n"
+* Fix: MadPython Recording issue
+* Fix: Chars escape for regex recording
+* Fix: Unbind critical message handlers during OnClose
+* Fix: High CPU load when move mouse over text lines #258 #265
+* Fix: Can't replace bookmarked lines with multiple line text
+* Fix: Patch for possible buffer overflow in GetFontWidths
+* Fix: Wrong string for K&R style on SourceFormat config Dialog
+* Fix: Use alphabet order for file name extension in FileAssociation Dialog
+* Fix: Disable syntax toolbar in Hex mode
+* Fix: Use GB18030 if wxFONTENCODING_CP936 is not available
+* Fix: Total pages in print preview is incorrect
+* Fix: Code improvement
+* Fix: Buggy code of quick search UI
+* Update Astyle to latest code
+* Update translations
 
 Todo
 =====

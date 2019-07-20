@@ -775,7 +775,8 @@ MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 
 	if(bPanChinese)
 	{
-		static wxString pan_chs = *text_ptr;
+		static wxString pan_chs;
+		pan_chs = *text_ptr;
 		if(!bRegex)
 		{
 			bDotMatchNewline = false;

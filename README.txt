@@ -219,8 +219,9 @@ Mod v0.4.13
 19.Fix: Use GB18030 if wxFONTENCODING_CP936 is not available
 20.Fix: Total pages in print preview is incorrect
 21.Fix: Code improvement
-22.Update Astyle to latest code
-23.Update translations
+22.Fix: Buggy code of quick search UI
+23.Update Astyle to latest code
+24.Update translations
 
 Mod v0.4.12
 1.New: Support Drag and Drop for text(from other applications, not DnD edit, can't drag text out of MadEdit yet)
