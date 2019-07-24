@@ -5,7 +5,7 @@ PORTNAME=	madedit-mod
 PORTVERSION=	0.4.17
 CATEGORIES=	editors
 MASTER_SITES=	https://sourceforge.net/projects/${PORTNAME}/files/${PORTVERSION}/
-DISTNAME=	madedit-mod-${PORTVERSION}
+DISTNAME=	Madedit-Mod ${PORTVERSION}
 
 MAINTAINER=	Minggang Li <minggang.li@gmail.com>
 COMMENT=	madedit-mod: Cross-platform Text/Hex Editor, Improved Version of MadEdit
