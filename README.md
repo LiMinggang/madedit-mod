@@ -20,6 +20,7 @@ Current Feature list(comparing to the original Madedit@sourceforge)
 ===================================================================
 * Original features from MadEdit(Hex Edit, Column Edit, many encodings support, etc) with lots of bug fixes
 * More encodings supported, eg, GB18030, CP874, CP866, KOI8-R and KOI8-U Macintosh encodings(Roman, Japanese, Chinese-trad, Korean, Arabic, Hebrew, Greek, Cyrillic, Thai, Chinese-simp, Central-Eur, Croatian, Icelandic, Romanian) if your system supports
+* Pan Chinese character support in search(CJK non-sensitive)
 * Drag&Drop Edit(Cross platform)
 * Bookmark(From Gogo)
 * Bookmark enhancement:Edit functions(Copy/Cut/Delete/Replace bookmarked lines), Bookmark in search
