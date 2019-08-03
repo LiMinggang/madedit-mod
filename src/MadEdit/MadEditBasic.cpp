@@ -2621,6 +2621,29 @@ int MadEdit::Save( bool ask, const wxString &title, bool saveas ) // return YES,
 		{
 			DBOUT( "choose a file to save" );
 			static int filterIndex = 0;
+			if(m_Lines->m_Name.IsEmpty() && m_Syntax)
+			{
+				if(m_Syntax->m_SynAttr)
+				{
+					wxString synTitle = m_Syntax->m_SynAttr->m_Title;
+					if (synTitle == wxT("Flash ActionScript")) synTitle = wxT("ActionScript");
+					else if (synTitle == wxT("X86 Assembly")) synTitle = wxT("MASM");
+					else if (synTitle == wxT("C/C++")) synTitle = wxT("CPP");
+					else if (synTitle == wxT("Diff/Patch")) synTitle = wxT("Diff");
+					else if (synTitle == wxT("Pascal/Delphi")) synTitle = wxT("Pascal");
+					else if (synTitle == wxT("UNIX Configuration")) synTitle = wxT("Bash Shell Script");
+					else if (synTitle == wxT("UNIX Shell Script")) synTitle = wxT("Bash Shell Script");
+					int index = m_FileFilter.Find(synTitle);
+
+					if (wxNOT_FOUND != index)
+					{
+						wxString sss = m_FileFilter.SubString(0, index);
+						wxArrayString ary = wxStringTokenize(sss, _T("|"));
+						int counter = ary.size();
+						if (counter > 2) filterIndex = (counter - 1) / 2;
+					}
+				}
+			}
 			wxFileDialog dlg( this, dlgtitle, wxEmptyString, filename, m_FileFilter,
 #if wxCHECK_VERSION(2,8,0)
 							  wxFD_SAVE | wxFD_OVERWRITE_PROMPT );

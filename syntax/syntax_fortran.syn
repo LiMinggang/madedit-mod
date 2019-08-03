@@ -1,5 +1,5 @@
-# Fortran 90
-Title=Fortran 90
+# Fortran 95
+Title=Fortran 95
 CaseSensitive=No
 Delimiter=,(){}[]-+*%/="'~!&|\<>?:;#
 LineComment=! $

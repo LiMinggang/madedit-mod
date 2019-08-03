@@ -1,5 +1,5 @@
 # awk
-Title=awk
+Title=Awk
 CaseSensitive=Yes
 Delimiter=~`!@#$%^&*()-+=|\{}[]:;"',.<>/?
 LineComment=#

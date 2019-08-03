@@ -118,6 +118,9 @@ Note: Not support wxWidgets 2.X anymore since 0.3.X
 
 Todo:
 
+Mod v0.4.18
+Fix: Automatically select extension for new file according to syntax used
+
 Mod v0.4.17
 Note: Changed *nix build from static link with wxWidgets to dynamic link with wxGTK, which
 means you have to install wxGTK3+(wxGTK2.8 is not supported) to install the release
