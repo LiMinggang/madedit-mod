@@ -213,9 +213,9 @@ void MadWinListDialog::SortTabs(long column)
 {
 	wxArrayString colname;
 	std::map<wxString, MadEdit *> madEditMap;
+	std::map<MadEdit *, wxString> capMap;
 	std::map<wxString, MadEdit *>::iterator it;
-	std::map<wxString, wxString> nameMap;
-	wxString name;
+	wxString name, tname;
 
 	wxAuiNotebook * notebookp = reinterpret_cast<wxAuiNotebook *>(m_MainFrame->m_Notebook);
 	std::vector<MadEdit *> oldmedits, medits;
@@ -223,7 +223,6 @@ void MadWinListDialog::SortTabs(long column)
 	long item = -1, seq = 0;
 	int selid = notebookp->GetSelection();
 	MadEdit * selmedit = 0;
-	wxString tname;
 	for (; ;)
 	{
 		++seq;
@@ -240,6 +239,7 @@ void MadWinListDialog::SortTabs(long column)
 		
 		long pageId = static_cast<long>(MadWindowsList->GetItemData(item));
 		MadEdit * madedit = dynamic_cast < MadEdit* >(notebookp->GetPage( pageId ));
+        capMap[madedit] = notebookp->GetPageText( pageId );
 		if(name.IsEmpty())
 			name.Printf(wxT("*%04d"), seq);
 		else if(madEditMap.find(name) != madEditMap.end())
@@ -252,28 +252,27 @@ void MadWinListDialog::SortTabs(long column)
 #ifdef __WXMSW__
 		name.MakeUpper();
 #endif
-		colname.Add(name);
+
 		madEditMap[name] = madedit;
 		oldmedits.push_back(madedit);
 		if(selid == pageId)
 			selmedit = madedit;
-		tname = MadWindowsList->GetItemText(item);
-		nameMap[name] = tname;
 	}
 
-	size_t count = colname.GetCount();
-	wxASSERT(notebookp->GetPageCount() == count);
-	medits.reserve(count);
-	colname.Sort();
-	for(size_t i = 0; i < count; ++i)
-	{
-		it = madEditMap.find(colname[i]);
-		wxASSERT(it != madEditMap.end());
-		medits.push_back(it->second);
-		if(selmedit == it->second) selid = i;
-	}
+    bool changed = false;
+    size_t index = 0;
+    it = madEditMap.begin();
+	for( ; it != madEditMap.end(); ++it )
+    {
+        if(oldmedits[index] != it->second)
+        {
+            changed = true;
+            break;
+        }
+        index++;
+    }
 
-	if(oldmedits != medits)
+	if(changed)
 	{
 		m_MainFrame->WxMenuBar1->Freeze();
 		while(notebookp->GetPageCount())
@@ -281,15 +280,21 @@ void MadWinListDialog::SortTabs(long column)
 			notebookp->RemovePage( 0 );
 		}
 
-		for( size_t id = 0; id < count; ++id )
-		{
-			tname = nameMap[colname[id]];
-			notebookp->AddPage( medits[id], tname, false);
-			
-			wxString tmpname = (medits[id])->GetFileName();
-			if(tmpname.IsEmpty()) tmpname = tname;
-			notebookp->SetPageToolTip (id, tmpname);
-		}
+		selid = 0;
+		seq = 0;
+        it = madEditMap.begin();
+        for( ; it != madEditMap.end(); ++it)
+        {
+			wxFileName fileName((it->second)->GetFileName());
+			wxString fname = fileName.GetFullName();
+            if(fname.IsEmpty())
+			    fname = capMap[it->second];
+			notebookp->AddPage(it->second, fname);
+			if (selmedit == it->second)
+				selid = seq;
+			notebookp->SetPageToolTip (notebookp->GetPageCount(), fname);
+			seq++;
+        }
 		m_MainFrame->WxMenuBar1->Thaw();
 		m_MainFrame->SetPageFocus( selid );
 		InitWindowListIterms();
