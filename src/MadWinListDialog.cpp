@@ -78,10 +78,10 @@ MadWinListDialog::MadWinListDialog(wxWindow* parent,wxWindowID id)
 	wxListItem itemCol;
 	itemCol.SetText(_("Name"));
 	itemCol.SetAlign(wxLIST_FORMAT_LEFT);
-	MadWindowsList->InsertColumn(0, itemCol);
+	MadWindowsList->InsertColumn(COL_TABNAME, itemCol);
 	itemCol.SetText(_("Path"));
 	itemCol.SetAlign(wxLIST_FORMAT_LEFT);
-	MadWindowsList->InsertColumn(1, itemCol);
+	MadWindowsList->InsertColumn(COL_PATH, itemCol);
 	Bind( wxEVT_ACTIVATE, &MadWinListDialog::MadWinListDialogActivate, this );
 }
 
@@ -114,20 +114,20 @@ void MadWinListDialog::InitWindowListIterms()
 		info.m_mask = wxLIST_MASK_TEXT;
 		info.m_itemId = MadWindowsList->GetItemCount();
 		tmp = MadWindowsList->InsertItem(info);
-		MadWindowsList->SetItemData(tmp, info.m_itemId);
-		MadWindowsList->SetItem(tmp, 1, fdir);
+		MadWindowsList->SetItemData(tmp, id);
+		MadWindowsList->SetItem(tmp, COL_PATH, fdir);
 	}
 	MadWindowsList->Thaw();
 
 	if(count)
 	{
-	    MadWindowsList->SetColumnWidth( 0, wxLIST_AUTOSIZE );
-		MadWindowsList->SetColumnWidth( 1, wxLIST_AUTOSIZE );
+	    MadWindowsList->SetColumnWidth( COL_TABNAME, wxLIST_AUTOSIZE );
+		MadWindowsList->SetColumnWidth( COL_PATH, wxLIST_AUTOSIZE );
 	}
 
-	if(WINLIST_MIN_PATH_COL_WIDTH > MadWindowsList->GetColumnWidth(1))
+	if(WINLIST_MIN_PATH_COL_WIDTH > MadWindowsList->GetColumnWidth(COL_PATH))
 	{
-		MadWindowsList->SetColumnWidth( 1, WINLIST_MIN_PATH_COL_WIDTH );
+		MadWindowsList->SetColumnWidth( COL_PATH, WINLIST_MIN_PATH_COL_WIDTH );
 	}
 
 	MadWindowsList->Show();
@@ -306,10 +306,80 @@ void MadWinListDialog::OnButtonSortTabByPathClick(wxCommandEvent& WXUNUSED(event
 	SortTabs(COL_PATH);
 }
 
+struct winlistdat
+{
+    wxString name;
+    wxString path;
+    long id;
+};
 void MadWinListDialog::OnWinListColumnTabClicked(wxListEvent& event)
 {
     int col = event.GetColumn();
-	SortTabs(col);
+    long item = -1;
+    std::map<wxString, winlistdat> winListMap;
+    wxString sortby;
+    winlistdat dat;
+    long tmp;
+    for (; ;)
+    {
+        item = MadWindowsList->GetNextItem(item);
+        if ( item == -1 )
+            break;
+
+        dat.path = MadWindowsList->GetItemText(item, COL_PATH);
+        dat.name = MadWindowsList->GetItemText(item, COL_TABNAME);
+        dat.id = static_cast<long>(MadWindowsList->GetItemData(item));
+        if(col == COL_PATH)
+        {
+            sortby = dat.path + dat.name;
+        }
+        else
+        {
+            sortby = dat.name;
+        }
+            
+#ifdef __WXMSW__
+        sortby.MakeUpper();
+#endif
+        winListMap[sortby] = dat;
+    }
+    
+	MadWindowsList->Hide();
+	MadWindowsList->DeleteAllItems();
+
+	MadWindowsList->Freeze();
+	wxListItem info;
+
+    std::map<wxString, winlistdat>::iterator it = winListMap.begin();
+	for( ; it != winListMap.end(); ++it )
+    {
+        wxString fname = it->second.name;
+        wxString fdir = it->second.path;
+        long id = it->second.id;
+        
+        info.Clear();
+        info.m_text = fname;
+        info.m_mask = wxLIST_MASK_TEXT;
+        info.m_itemId = MadWindowsList->GetItemCount();
+        tmp = MadWindowsList->InsertItem(info);
+        MadWindowsList->SetItemData(tmp, id);
+        MadWindowsList->SetItem(tmp, COL_PATH, fdir);
+    }
+    MadWindowsList->Thaw();
+
+    if(MadWindowsList->GetItemCount())
+    {
+        MadWindowsList->SetColumnWidth( COL_TABNAME, wxLIST_AUTOSIZE );
+        MadWindowsList->SetColumnWidth( COL_PATH, wxLIST_AUTOSIZE );
+    }
+
+    if(WINLIST_MIN_PATH_COL_WIDTH > MadWindowsList->GetColumnWidth(COL_PATH))
+    {
+        MadWindowsList->SetColumnWidth( COL_PATH, WINLIST_MIN_PATH_COL_WIDTH );
+    }
+
+    MadWindowsList->Show();
+    GetSizer()->Fit( this );
 }
 
 void MadWinListDialog::OnButtonOkClick(wxCommandEvent& WXUNUSED(event))
