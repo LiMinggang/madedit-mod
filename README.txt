@@ -117,6 +117,7 @@ ChangeLog:
 Note: Not support wxWidgets 2.X anymore since 0.3.X
 
 Todo:
+Packing for FreeBSD
 
 Mod v0.4.18
 New: Automatically select extension for new file according to syntax used
