@@ -68,6 +68,7 @@ MadWinListDialog::MadWinListDialog(wxWindow* parent,wxWindowID id)
 	MadWindowsList->Bind( wxEVT_KEY_DOWN, &MadWinListDialog::OnKeyDown, this );
 	Bind( wxEVT_LIST_ITEM_SELECTED, &MadWinListDialog::OnWinListSelectionChanged, this, MadWindowsList->GetId() );
 	Bind( wxEVT_LIST_ITEM_DESELECTED, &MadWinListDialog::OnWinListSelectionChanged, this, MadWindowsList->GetId() );
+	Bind( wxEVT_LIST_COL_CLICK, &MadWinListDialog::OnWinListColumnTabClicked, this, MadWindowsList->GetId() );
 
 	ResetButtonStatus();
 
@@ -303,6 +304,12 @@ void MadWinListDialog::OnButtonSortTabByNameClick(wxCommandEvent& WXUNUSED(event
 void MadWinListDialog::OnButtonSortTabByPathClick(wxCommandEvent& WXUNUSED(event))
 {
 	SortTabs(COL_PATH);
+}
+
+void MadWinListDialog::OnWinListColumnTabClicked(wxListEvent& event)
+{
+    int col = event.GetColumn();
+	SortTabs(col);
 }
 
 void MadWinListDialog::OnButtonOkClick(wxCommandEvent& WXUNUSED(event))

@@ -119,7 +119,9 @@ Note: Not support wxWidgets 2.X anymore since 0.3.X
 Todo:
 
 Mod v0.4.18
-Fix: Automatically select extension for new file according to syntax used
+New: Automatically select extension for new file according to syntax used
+New: Sort windows by clicking column tab(Windows list dialog)
+New: Sort windows by clicking column tab(Save query dialog)
 
 Mod v0.4.17
 Note: Changed *nix build from static link with wxWidgets to dynamic link with wxGTK, which

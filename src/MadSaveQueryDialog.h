@@ -33,6 +33,8 @@ class MadSaveQueryDialog: public wxDialog
         void GetCheckedItemsData(std::set< long > & selectedItems, bool checked);
 
 	protected:
+		static const long COL_TABNAME;
+		static const long COL_PATH;
 
 		//(*Identifiers(MadSaveQueryDialog)
 		//static const long ID_LISTCTRLMADFILELIST;
@@ -58,6 +60,8 @@ class MadSaveQueryDialog: public wxDialog
 		//*)
 
         void InitWindowListIterms();
+		void OnWinListColumnTabClicked(wxListEvent& event);
+        void SortTabs(long column);
 };
 
 #endif

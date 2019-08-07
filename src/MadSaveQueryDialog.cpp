@@ -15,6 +15,9 @@
 //(*IdInit(MadSaveQueryDialog)
 //*)
 
+const long MadSaveQueryDialog::COL_TABNAME = 0;
+const long MadSaveQueryDialog::COL_PATH = 1;
+
 #define SAVEQUERY_MIN_PATH_COL_WIDTH 80
 
 MadSaveQueryDialog::MadSaveQueryDialog(wxWindow* parent,wxWindowID id,const wxPoint& WXUNUSED(pos),const wxSize& WXUNUSED(size))
@@ -67,15 +70,17 @@ MadSaveQueryDialog::MadSaveQueryDialog(wxWindow* parent,wxWindowID id,const wxPo
 	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadSaveQueryDialog::OnButtonGoToClick, this, ButtonGoTo->GetId() );
 	//*)
 
+	Bind( wxEVT_LIST_COL_CLICK, &MadSaveQueryDialog::OnWinListColumnTabClicked, this, MadFileList->GetId() );
+
 	SetDefaultItem(ButtonOK);
 	m_MainFrame = static_cast<MadEditFrame *>(parent);
 	wxListItem itemCol;
 	itemCol.SetText(_("Name"));
 	itemCol.SetAlign(wxLIST_FORMAT_LEFT);
-	MadFileList->InsertColumn(0, itemCol);
+	MadFileList->InsertColumn(COL_TABNAME, itemCol);
 	itemCol.SetText(_("Path"));
 	itemCol.SetAlign(wxLIST_FORMAT_LEFT);
-	MadFileList->InsertColumn(1, itemCol);
+	MadFileList->InsertColumn(COL_PATH, itemCol);
 	InitWindowListIterms();
 }
 
@@ -114,7 +119,7 @@ void MadSaveQueryDialog::InitWindowListIterms()
 			info.m_itemId = MadFileList->GetItemCount();
 			tmp = MadFileList->InsertItem(info);
 			MadFileList->SetItemData(tmp, id);
-			MadFileList->SetItem(tmp, 1, fdir);
+			MadFileList->SetItem(tmp, COL_PATH, fdir);
 			hasdata = true;
 		}
 	}
@@ -122,17 +127,110 @@ void MadSaveQueryDialog::InitWindowListIterms()
 
 	if(hasdata)
 	{
-	    MadFileList->SetColumnWidth( 0, wxLIST_AUTOSIZE );
-		MadFileList->SetColumnWidth( 1, wxLIST_AUTOSIZE );
+	    MadFileList->SetColumnWidth( COL_TABNAME, wxLIST_AUTOSIZE );
+		MadFileList->SetColumnWidth( COL_PATH, wxLIST_AUTOSIZE );
 	}
 
-	if(SAVEQUERY_MIN_PATH_COL_WIDTH > MadFileList->GetColumnWidth(1))
+	if(SAVEQUERY_MIN_PATH_COL_WIDTH > MadFileList->GetColumnWidth(COL_PATH))
 	{
-		MadFileList->SetColumnWidth( 1, SAVEQUERY_MIN_PATH_COL_WIDTH );
+		MadFileList->SetColumnWidth( COL_PATH, SAVEQUERY_MIN_PATH_COL_WIDTH );
 	}
 
 	MadFileList->Show();
 	GetSizer()->Fit( this );
+}
+
+void MadSaveQueryDialog::SortTabs(long column)
+{
+	wxArrayString colname;
+	std::map<wxString, MadEdit *> madEditMap;
+	std::map<wxString, MadEdit *>::iterator it;
+	std::map<wxString, wxString> nameMap;
+	wxString name;
+
+	wxAuiNotebook * notebookp = reinterpret_cast<wxAuiNotebook *>(m_MainFrame->m_Notebook);
+	std::vector<MadEdit *> oldmedits, medits;
+
+	long item = -1, seq = 0;
+	int selid = notebookp->GetSelection();
+	MadEdit * selmedit = 0;
+	wxString tname;
+	for (; ;)
+	{
+		++seq;
+		item = MadFileList->GetNextItem(item);
+		if ( item == -1 )
+			break;
+
+		name = MadFileList->GetItemText(item, column);
+		if(column == COL_PATH)
+		{
+			tname = MadFileList->GetItemText(item);
+			name += tname;
+		}
+		
+		long pageId = static_cast<long>(MadFileList->GetItemData(item));
+		MadEdit * madedit = dynamic_cast < MadEdit* >(notebookp->GetPage( pageId ));
+		if(name.IsEmpty())
+			name.Printf(wxT("*%04d"), seq);
+		else if(madEditMap.find(name) != madEditMap.end())
+		{
+			wxString postfix;
+			postfix.Printf(wxT("*%04d"), seq);
+			name += postfix;
+		}
+
+#ifdef __WXMSW__
+		name.MakeUpper();
+#endif
+		colname.Add(name);
+		madEditMap[name] = madedit;
+		oldmedits.push_back(madedit);
+		if(selid == pageId)
+			selmedit = madedit;
+		tname = MadFileList->GetItemText(item);
+		nameMap[name] = tname;
+	}
+
+	size_t count = colname.GetCount();
+	wxASSERT(notebookp->GetPageCount() == count);
+	medits.reserve(count);
+	colname.Sort();
+	for(size_t i = 0; i < count; ++i)
+	{
+		it = madEditMap.find(colname[i]);
+		wxASSERT(it != madEditMap.end());
+		medits.push_back(it->second);
+		if(selmedit == it->second) selid = i;
+	}
+
+	if(oldmedits != medits)
+	{
+		m_MainFrame->WxMenuBar1->Freeze();
+		while(notebookp->GetPageCount())
+		{
+			notebookp->RemovePage( 0 );
+		}
+
+		for( size_t id = 0; id < count; ++id )
+		{
+			tname = nameMap[colname[id]];
+			notebookp->AddPage( medits[id], tname, false);
+			
+			wxString tmpname = (medits[id])->GetFileName();
+			if(tmpname.IsEmpty()) tmpname = tname;
+			notebookp->SetPageToolTip (id, tmpname);
+		}
+		m_MainFrame->WxMenuBar1->Thaw();
+		m_MainFrame->SetPageFocus( selid );
+		InitWindowListIterms();
+	}
+}
+
+void MadSaveQueryDialog::OnWinListColumnTabClicked(wxListEvent& event)
+{
+    int col = event.GetColumn();
+	SortTabs(col);
 }
 
 void MadSaveQueryDialog::OnButtonOKClick(wxCommandEvent& WXUNUSED(event))
