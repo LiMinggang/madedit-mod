@@ -785,7 +785,7 @@ MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 			// todo trans
 			wxString spC[] = { wxT("\\"), wxT("{"), wxT("}"), wxT("["), wxT("]"), wxT("("), wxT(")"), wxT("*"),
 				wxT("&"), wxT("^"), wxT("$"), wxT("!"), wxT(":"), wxT("."), wxT("?"), wxT("|"), wxT("_"),
-				wxT("-"), wxT("+"), wxT("="), wxT("<"), wxT(">") };
+				wxT("-"), wxT("+"), wxT("="), wxT("<"), wxT("~") };
 			wxString esc(wxT("\\"));
 			for (size_t i = 0; i < (sizeof(spC) / sizeof(spC[0])); ++i)
 			{
