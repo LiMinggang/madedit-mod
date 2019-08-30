@@ -1062,11 +1062,13 @@ void MadSearchReplaceDialog::UpdateCheckBoxByCBHex( bool check )
 		WxCheckBoxRegex->Disable();
 		WxCheckBoxDotMatchNewLine->Disable();
 		wxCheckBoxReplaceNoDoubleCheck->Disable();
+		WxCheckBoxPanChinese->Disable();
 	}
 	else
 	{
 		WxCheckBoxCaseSensitive->Enable();
 		WxCheckBoxRegex->Enable();
+		WxCheckBoxPanChinese->Enable();
 
 		if( WxCheckBoxRegex->GetValue() )
 		{

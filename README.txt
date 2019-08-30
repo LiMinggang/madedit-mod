@@ -125,6 +125,7 @@ New: Sort windows by clicking column tab(Windows list dialog)
 New: Sort windows by clicking column tab(Save query dialog)
 Fix: Fix bug of windows sorting in Windows list dialog
 Fix: Minor fix for Pan Chinese support
+Fix: Enable/diable Pan Chinese on clicking Hex searching
 
 Mod v0.4.17
 Note: Changed *nix build from static link with wxWidgets to dynamic link with wxGTK, which
