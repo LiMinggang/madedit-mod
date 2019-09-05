@@ -126,6 +126,7 @@ New: Sort windows by clicking column tab(Save query dialog)
 Fix: Fix bug of windows sorting in Windows list dialog
 Fix: Minor fix for Pan Chinese support
 Fix: Enable/diable Pan Chinese on clicking Hex searching
+Fix: Binary file detect bug in FindInFiles
 
 Mod v0.4.17
 Note: Changed *nix build from static link with wxWidgets to dynamic link with wxGTK, which

@@ -765,6 +765,7 @@ void MadFindInFilesDialog::FindReplaceInFiles( bool bReplace )
 				if( madedit == nullptr )
 				{
 					madedit = tempedit;
+                    madedit->SetEditMode(emTextMode); // Reset it to Text mode
 					wxString enc = WxComboBoxEncoding->GetValue();
 
 					if( enc == WxComboBoxEncoding->GetString( 0 ) )
