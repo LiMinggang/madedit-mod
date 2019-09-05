@@ -120,7 +120,7 @@ Todo:
 Packing for FreeBSD
 
 Mod v0.4.18
-New: Automatically select extension for new file according to syntax used
+New: Automatically choose extension for new file according to syntax used
 New: Sort windows by clicking column tab(Windows list dialog)
 New: Sort windows by clicking column tab(Save query dialog)
 Fix: Fix bug of windows sorting in Windows list dialog
