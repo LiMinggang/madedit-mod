@@ -2484,7 +2484,7 @@ void MadEdit::GoForward()
 	}
 }
 
-bool MadEdit::LoadFromFile( const wxString &filename, const wxString &encoding )
+bool MadEdit::LoadFromFile( const wxString &filename, const wxString &encoding, bool bForceText )
 {
 	wxFileName fn( filename );
 
@@ -2494,6 +2494,8 @@ bool MadEdit::LoadFromFile( const wxString &filename, const wxString &encoding )
 		return false;
 	}
 
+	if( bForceText )
+		m_EditMode = emTextMode;
 	if( m_Lines->LoadFromFile( filename, encoding ) == false )
 		return false;
 

@@ -1033,7 +1033,7 @@ public: // basic functions
 					vector<wxFileOffset> *pbegpos, vector<wxFileOffset> *pendpos,
 					wxFileOffset rangeFrom = -1, wxFileOffset rangeTo = -1 );
 
-	bool LoadFromFile( const wxString &filename, const wxString &encoding = wxEmptyString );
+	bool LoadFromFile( const wxString &filename, const wxString &encoding = wxEmptyString, bool bForceText = false );
 	bool SaveToFile( const wxString &filename );
 	bool Reload();
 	// if the file is modified by another app, reload it.

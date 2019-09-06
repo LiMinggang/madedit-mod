@@ -725,6 +725,7 @@ void MadFindInFilesDialog::FindReplaceInFiles( bool bReplace )
 	{
 		MadEdit *tempedit = nullptr;
 
+		bool bForceText = false;
 		if( WxRadioButtonDir->GetValue() )
 		{
 			tempedit = new MadEdit( this, -1, wxPoint( -1024, -1024 ) );
@@ -733,6 +734,7 @@ void MadFindInFilesDialog::FindReplaceInFiles( bool bReplace )
 			tempedit->SetFixedWidthMode( false );
 			tempedit->SetWordWrapMode( wwmNoWrap );
 			tempedit->SetSearchOptions( true, WxCheckBoxWholeWord->GetValue() );
+			bForceText = true; // reset to default
 		}
 
 		wxString fmt( _( "Processing %s of %s files..." ) );
@@ -765,7 +767,6 @@ void MadFindInFilesDialog::FindReplaceInFiles( bool bReplace )
 				if( madedit == nullptr )
 				{
 					madedit = tempedit;
-                    madedit->SetEditMode(emTextMode); // Reset it to Text mode
 					wxString enc = WxComboBoxEncoding->GetValue();
 
 					if( enc == WxComboBoxEncoding->GetString( 0 ) )
@@ -773,7 +774,7 @@ void MadFindInFilesDialog::FindReplaceInFiles( bool bReplace )
 						enc.Clear();
 					}
 
-					madedit->LoadFromFile( *fnit, enc );
+					madedit->LoadFromFile( *fnit, enc, bForceText );
 				}
 
 				++fnit;

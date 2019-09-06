@@ -2623,7 +2623,7 @@ namespace mad_python {
 			return ok;
 		}
 #endif
-		bool LoadFromFile( const std::string &filename, const std::string &encoding = std::string( "" ) ) {
+		bool LoadFromFile( const std::string &filename, const std::string &encoding = std::string( "" ), bool bForceText = false ) {
 			bool res = false;
 
 			MadEdit *madedit = g_CurrentMadEdit;
@@ -2632,7 +2632,7 @@ namespace mad_python {
 			if( ( madedit ) && ( ! filename.empty() ) ) {
 				wxString wxEncoding( encoding.c_str(), wxConvUTF8 );
 				wxString wxFilename( filename.c_str(), wxConvUTF8 );
-				res = madedit->LoadFromFile( wxFilename, wxEncoding );
+				res = madedit->LoadFromFile( wxFilename, wxEncoding, bForceText );
 			}
 
 			return res;
@@ -3118,7 +3118,7 @@ BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( ReplaceText_member_overloads, ReplaceTex
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( ReplaceHex_member_overloads, ReplaceHex, 2, 4 )
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( ReplaceTextAll_member_overloads, ReplaceTextAll, 5, 9 )
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( ReplaceHexAll_member_overloads, ReplaceHexAll, 2, 4 )
-BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( LoadFromFile_member_overloads, LoadFromFile, 1, 2 )
+BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( LoadFromFile_member_overloads, LoadFromFile, 1, 3 )
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( ToHalfWidth_member_overloads, ToHalfWidth, 0, 4 )
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( ToFullWidth_member_overloads, ToFullWidth, 0, 4 )
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( SetCaretPosition_member_overloads, SetCaretPosition, 1, 3 )
@@ -3394,7 +3394,7 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.def( "FindTextAll", &PyMadEdit::FindTextAll, FindTextAll_member_overloads( args( "expr", "bRegex", "bCaseSensitive", "bWholeWord", "bDotMatchNewline", "bPanChinese", "showresults" ), "Doc string" )[return_value_policy<return_by_value>()] )
 	.def( "FindHexAll", &PyMadEdit::FindHexAll, FindHexAll_member_overloads( args( "expr", "showresults" ), "Doc string" )[return_value_policy<return_by_value>()] )
 #endif
-	.def( "LoadFromFile", &PyMadEdit::LoadFromFile, LoadFromFile_member_overloads( args( "filename", "encoding" ), "Doc string" )[return_value_policy<return_by_value>()] )
+	.def( "LoadFromFile", &PyMadEdit::LoadFromFile, LoadFromFile_member_overloads( args( "filename", "encoding", "bForceText" ), "Doc string" )[return_value_policy<return_by_value>()] )
 	.def( "ToHalfWidth", &PyMadEdit::ToHalfWidth, ToHalfWidth_member_overloads( args( "ascii", "japanese", "korean", "other" ), "Doc string" ) )
 	.def( "ToFullWidth", &PyMadEdit::ToFullWidth, ToFullWidth_member_overloads( args( "ascii", "japanese", "korean", "other" ), "Doc string" ) )
 	.def( "SetCaretPosition", &PyMadEdit::SetCaretPosition, SetCaretPosition_member_overloads( args( "pos", "selbeg", "selend" ), "Doc string" ) )
