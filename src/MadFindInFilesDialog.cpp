@@ -89,6 +89,9 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID WXUNUSED(
 	WxCheckBoxWholeWord = new wxCheckBox(this, wxID_ANY, _("&Whole Word Only"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
 	WxCheckBoxWholeWord->SetValue(false);
 	BoxSizer8->Add(WxCheckBoxWholeWord, 0, wxALL|wxEXPAND, 2);
+	WxCheckBoxPanChinese = new wxCheckBox(this, wxID_ANY, _("Pan Chinese"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
+	WxCheckBoxPanChinese->SetValue(false);
+	BoxSizer8->Add(WxCheckBoxPanChinese, 0, wxALL|wxEXPAND, 2);
 	WxCheckBoxRegex = new wxCheckBox(this, wxID_ANY, _("Use Regular E&xpressions"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
 	WxCheckBoxRegex->SetValue(false);
 	BoxSizer8->Add(WxCheckBoxRegex, 0, wxALL|wxEXPAND, 2);
@@ -100,9 +103,6 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID WXUNUSED(
 	BoxSizer8->Add(BoxSizer9, 0, wxALL|wxEXPAND, 0);
 	BoxSizer10 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer10->Add(10,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	WxCheckBoxPanChinese = new wxCheckBox(this, wxID_ANY, _("Pan Chinese"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
-	WxCheckBoxPanChinese->SetValue(false);
-	BoxSizer10->Add(WxCheckBoxPanChinese, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer8->Add(BoxSizer10, 0, wxALL|wxEXPAND, 0);
 	WxCheckBoxFindHex = new wxCheckBox(this, wxID_ANY, _("Find &Hex String (Example: BE 00 3A or BE003A)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
 	WxCheckBoxFindHex->SetValue(false);
@@ -364,17 +364,16 @@ void MadFindInFilesDialog::UpdateCheckBoxByCBHex( bool check )
 	{
 		WxCheckBoxCaseSensitive->Enable();
 		WxCheckBoxRegex->Enable();
+		WxCheckBoxPanChinese->Enable();
 		if(WxCheckBoxRegex->GetValue())
 		{
 			WxCheckBoxDotMatchNewLine->Enable();
-			WxCheckBoxPanChinese->Enable();
 			WxCheckBoxWholeWord->Disable();
 		}
 		else
 		{
 			WxCheckBoxWholeWord->Enable();
 			WxCheckBoxDotMatchNewLine->Disable();
-			WxCheckBoxPanChinese->Disable();
 		}
 	}
 }
@@ -991,7 +990,6 @@ void MadFindInFilesDialog::WxCheckBoxRegexClick(wxCommandEvent& event)
 	if(event.IsChecked())
 	{
 		WxCheckBoxDotMatchNewLine->Enable();
-		WxCheckBoxPanChinese->Enable();
 		WxCheckBoxFindHex->Disable();
 		WxCheckBoxWholeWord->Disable();
 	}
@@ -1000,7 +998,6 @@ void MadFindInFilesDialog::WxCheckBoxRegexClick(wxCommandEvent& event)
 		WxCheckBoxWholeWord->Enable();
 		WxCheckBoxFindHex->Enable();
 		WxCheckBoxDotMatchNewLine->Disable();
-		WxCheckBoxPanChinese->Disable();
 	}
 }
 
