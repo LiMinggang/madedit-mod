@@ -472,8 +472,8 @@ bool MadEditApp::OnInit()
 		if( dis.IsPrimary() )
 		{
 			wxRect rect = dis.GetClientArea();
-			size.x = std::min( rect.width, size.x );
-			size.y = std::min( rect.height, size.y );
+			size.x = rect.width;
+			size.y = rect.height;
 			break;
 		}
 	}
