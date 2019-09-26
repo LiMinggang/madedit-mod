@@ -128,6 +128,7 @@ Fix: Minor fix for Pan Chinese support
 Fix: Enable/diable Pan Chinese on clicking Hex searching
 Fix: Pan Chinese on Search in files
 Fix: Binary file detect bug in FindInFiles
+Fix: Can't remember Main Window size larger than 1024*768 #296
 
 Mod v0.4.17
 Note: Changed *nix build from static link with wxWidgets to dynamic link with wxGTK, which
