@@ -123,6 +123,7 @@ Mod v0.4.18
 New: Automatically choose extension for new file according to syntax used
 New: Sort windows by clicking column tab(Windows list dialog)
 New: Sort windows by clicking column tab(Save query dialog)
+New: Update icon for Convert File Encoding menu item #297
 Fix: Fix bug of windows sorting in Windows list dialog
 Fix: Minor fix for Pan Chinese support
 Fix: Enable/diable Pan Chinese on clicking Hex searching
