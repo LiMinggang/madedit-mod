@@ -34,8 +34,10 @@ wxString g_MadEdit_Version(wxString(wxT("MadEdit-Mod 0.4.18"))
 	+ wxT(" Visual Studio 2013")
 #elif _MSC_VER == 1900
 	+ wxT(" Visual Studio 2015")
-#elif ((_MSC_VER >= 1910) && (_MSC_VER <= 2000))
+#elif ((_MSC_VER >= 1910) && (_MSC_VER < 1920))
 	+ wxT(" Visual Studio 2017")
+#elif ((_MSC_VER >= 1920) && (_MSC_VER < 2000))
+	+ wxT(" Visual Studio 2019")
 #else
 	+ wxT(" Visual Studio unknown")
 #pragma message("Please update verion info to recognize this VC++ version")
