@@ -11409,9 +11409,15 @@ struct IMEAdjuster
 		if (m_hImc == (HIMC)nullptr || ImmGetOpenStatus(m_hImc) == 0)
 			return;
 
+#if 0 //WXWIN_COMPATIBILITY_3_0
 		LOGFONT lf;
 		wxFillLogFont(&lf, &font);
 		ImmSetCompositionFont(m_hImc, &lf);
+#else
+		wxNativeFontInfo fontInfo;
+		fontInfo.InitFromFont(font);
+		ImmSetCompositionFont(m_hImc, &fontInfo.lf);
+#endif
 
 		UpdatePosition();
 	}

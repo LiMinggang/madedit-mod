@@ -120,6 +120,7 @@ Todo:
 Packing for FreeBSD
 
 Mod v0.4.18
+Note: Rollback *nix build to static link with wxWidgets because UI issues reported
 New: Automatically choose extension for new file according to syntax used
 New: Sort windows by clicking column tab(Windows list dialog)
 New: Sort windows by clicking column tab(Save query dialog)
@@ -130,6 +131,8 @@ Fix: Enable/diable Pan Chinese on clicking Hex searching
 Fix: Pan Chinese on Search in files
 Fix: Binary file detect bug in FindInFiles
 Fix: Can't remember Main Window size larger than 1024*768 #296
+Update wxWidgets to 3.1.3
+Update boost to 1.71
 Update Python to 2.7.17
 
 Mod v0.4.17
