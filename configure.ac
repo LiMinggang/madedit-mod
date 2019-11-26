@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
-AC_INIT([madedit-mod], [0.4.17], [minggang.li@gmail.com])
+AC_INIT([madedit-mod], [0.4.19], [minggang.li@gmail.com])
 AC_CONFIG_SRCDIR([src/MadEditApp.cpp])
 AC_CONFIG_HEADER([config.h])
 AC_PREFIX_DEFAULT([/usr])
@@ -121,7 +121,7 @@ if test "x$WX_LIBS" != "x"; then
 fi
 
 AM_OPTIONS_WXCONFIG
-AM_PATH_WXCONFIG(2.8.0, wxWin=1, , [std,net,aui,html])
+AM_PATH_WXCONFIG(2.8.0, wxWin=1, , [std,net,aui,html], [--static])
 if test "$wxWin" != 1; then
    AC_MSG_ERROR([
            wxWidgets must be installed on your system

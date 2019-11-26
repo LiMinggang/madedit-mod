@@ -48,8 +48,10 @@ P.S.: Please open a ticket for bug of MadEdit-Mod at
 MadEdit_Win2K is a build by VC++ 2005 express for Windows 2000/XP.
 
 Example build under Linux
+wxWidgets(3.1.3) (CXXFLAGS=-fPIC CPPFLAGS=-fPIC CFLAGS=-fPIC, x64)
+./configure --enable-unicode --disable-shared --with-libpng=builtin --with-zlib=builtin --with-expat=builtin --with-gtk=2 --with-libiconv=no
 MadEdit-Mod
-./configure --with-boost=${HOME}/boost_1_70_0
+./configure --with-boost=${HOME}/boost_1_71_0 --with-wxdir=${HOME}/wxWidgets-3.1.3
 
 Syntax files, Locale files, Dictionaries and Settings:
 ---------------------------------------
