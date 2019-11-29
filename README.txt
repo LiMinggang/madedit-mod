@@ -14,7 +14,7 @@ A. Linux, FreeBSD, and Unix-like OS (__WXGTK__):
    a. GNU C++ 3.x/4.x:
       Required Libraries to compile:
       1. wxWidgets-3.1.2 or higher with Unicode and IPC enabled(obsoleted)
-      2. Boost-1.56.0 or higher(build Boost-Python)(1.70 is recommended)
+      2. Boost-1.56.0 or higher(1.70 is recommended)
 
       (install wxgtk gtk2-devel/gtk3-devel gettext-devel automake rpm-build (Fedora/Mageia))
       gtk+2.0-dev/libgtk-3-dev automake (Ubuntu/Debian/ElementaryOS)
