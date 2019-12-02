@@ -3,7 +3,7 @@
 	<object class="wxDialog" name="MadOptionsDialog">
 		<title>Options</title>
 		<centered>1</centered>
-		<size>576,446</size>
+		<size>732,586</size>
 		<id_arg>0</id_arg>
 		<style>wxCAPTION|wxSYSTEM_MENU|wxRESIZE_BORDER|wxCLOSE_BOX</style>
 		<object class="wxBoxSizer" variable="BoxSizer1" member="no">
@@ -71,7 +71,6 @@
 													<object class="wxBoxSizer" variable="BoxSizer40" member="no">
 														<object class="spacer">
 															<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
-															<border>2</border>
 															<size>10,-1</size>
 														</object>
 														<object class="sizeritem">
@@ -79,8 +78,6 @@
 																<label>Enforce default encoding</label>
 															</object>
 															<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
-															<border>2</border>
-															<option>1</option>
 														</object>
 													</object>
 													<flag>wxALL|wxEXPAND</flag>
@@ -187,6 +184,10 @@
 														</object>
 														<object class="sizeritem">
 															<object class="wxBoxSizer" variable="BoxSizer41" member="no">
+																<object class="spacer">
+																	<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+																	<size>3,-1</size>
+																</object>
 																<object class="sizeritem">
 																	<object class="wxComboBox" name="wxID_ANY" variable="ComboBoxViewModeInOpen" member="yes">
 																		<content>
@@ -1240,7 +1241,7 @@
 																<size>200,-1</size>
 																<handler function="ChoiceDictionarySelect" entry="EVT_CHOICE" />
 															</object>
-															<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+															<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
 															<border>2</border>
 														</object>
 														<object class="sizeritem">

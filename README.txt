@@ -136,6 +136,7 @@ Fix: Can't remember Main Window size larger than 1024*768 #296
 Update wxWidgets to 3.1.3
 Update boost to 1.71
 Update Python to 2.7.17
+Update hunspell to latest
 
 Mod v0.4.17
 Note: Changed *nix build from static link with wxWidgets to dynamic link with wxGTK, which

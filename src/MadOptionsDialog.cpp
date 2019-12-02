@@ -291,10 +291,10 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	BoxSizer4->Add(StaticText1, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer3->Add(BoxSizer4, 0, wxALL|wxEXPAND, 2);
 	BoxSizer40 = new wxBoxSizer(wxHORIZONTAL);
-	BoxSizer40->Add(10,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	BoxSizer40->Add(10,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	CheckBoxSkipAutoEncoding = new wxCheckBox(Panel1, wxID_ANY, _("Enforce default encoding"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
 	CheckBoxSkipAutoEncoding->SetValue(false);
-	BoxSizer40->Add(CheckBoxSkipAutoEncoding, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	BoxSizer40->Add(CheckBoxSkipAutoEncoding, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	BoxSizer3->Add(BoxSizer40, 0, wxALL|wxEXPAND, 2);
 	BoxSizer35 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer35->Add(3,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
@@ -329,6 +329,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	BoxSizer17->Add(StaticText5, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer7->Add(BoxSizer17, 0, wxALL|wxEXPAND, 2);
 	BoxSizer41 = new wxBoxSizer(wxHORIZONTAL);
+	BoxSizer41->Add(3,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	ComboBoxViewModeInOpen = new wxComboBox(Panel1, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(160,-1), 0, 0, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("wxID_ANY"));
 	ComboBoxViewModeInOpen->SetSelection( ComboBoxViewModeInOpen->Append(_("Auto")) ); /*{ emTextMode, emColumnMode, emHexMode }*/
 	ComboBoxViewModeInOpen->Append(_("Text"));
@@ -388,7 +389,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	Panel1->SetSizer(BoxSizer3);
 	BoxSizer3->Fit(Panel1);
 	BoxSizer3->SetSizeHints(Panel1);
-	Panel2 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxSize(792,400), wxTAB_TRAVERSAL, _T("wxID_ANY"));
+	Panel2 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxSize(900,400), wxTAB_TRAVERSAL, _T("wxID_ANY"));
 	BoxSizer8 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer9 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer9->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
@@ -480,7 +481,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	Panel2->SetSizer(BoxSizer8);
 	BoxSizer8->Fit(Panel2);
 	BoxSizer8->SetSizeHints(Panel2);
-	Panel6 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxSize(792,400), wxTAB_TRAVERSAL, _T("wxID_ANY"));
+	Panel6 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxSize(900,400), wxTAB_TRAVERSAL, _T("wxID_ANY"));
 	BoxSizer42 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer43 = new wxBoxSizer(wxVERTICAL);
 	StaticBoxSizer9 = new wxStaticBoxSizer(wxVERTICAL, Panel6, _("Line Ending"));
@@ -543,7 +544,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	Panel6->SetSizer(BoxSizer42);
 	BoxSizer42->Fit(Panel6);
 	BoxSizer42->SetSizeHints(Panel6);
-	Panel3 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxSize(792,400), wxTAB_TRAVERSAL, _T("wxID_ANY"));
+	Panel3 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxSize(900,400), wxTAB_TRAVERSAL, _T("wxID_ANY"));
 	BoxSizer14 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer15 = new wxBoxSizer(wxVERTICAL);
 	StaticBoxSizer1 = new wxStaticBoxSizer(wxVERTICAL, Panel3, _("Text Mode"));
@@ -644,7 +645,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	Panel3->SetSizer(BoxSizer14);
 	BoxSizer14->Fit(Panel3);
 	BoxSizer14->SetSizeHints(Panel3);
-	Panel4 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxSize(792,400), wxTAB_TRAVERSAL, _T("wxID_ANY"));
+	Panel4 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxSize(900,400), wxTAB_TRAVERSAL, _T("wxID_ANY"));
 	BoxSizer18 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer19 = new wxBoxSizer(wxHORIZONTAL);
 	TreeCtrl1 = new wxTreeCtrl(Panel4, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTR_HAS_BUTTONS|wxTR_DEFAULT_STYLE, wxDefaultValidator, _T("wxID_ANY"));
@@ -696,7 +697,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	Panel4->SetSizer(BoxSizer18);
 	BoxSizer18->Fit(Panel4);
 	BoxSizer18->SetSizeHints(Panel4);
-	Panel5 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxSize(792,400), wxTAB_TRAVERSAL, _T("wxID_ANY"));
+	Panel5 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxSize(900,400), wxTAB_TRAVERSAL, _T("wxID_ANY"));
 	BoxSizer36 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer34 = new wxBoxSizer(wxVERTICAL);
 	CheckBoxPersonalDict = new wxCheckBox(Panel5, wxID_ANY, _("Enable Personal Dictionary"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
@@ -715,7 +716,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	StaticBoxSizer6 = new wxStaticBoxSizer(wxHORIZONTAL, Panel5, _("Path Setting"));
 	EditDictionaryDir = new wxTextCtrl(Panel5, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(200,-1), 0, wxDefaultValidator, _T("wxID_ANY"));
 	StaticBoxSizer6->Add(EditDictionaryDir, 0, wxALL|wxALIGN_LEFT, 2);
-	ButtonDictionaryDir = new wxButton(Panel5, wxID_ANY, _T("..."), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_DICTIONARY_DIR"));
+	ButtonDictionaryDir = new wxButton(Panel5, wxID_ANY, _T("..."), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
 	ADD2EVENTMAP(ButtonEvtMapVec, ButtonDictionaryDir, &MadOptionsDialog::ButtonDictionaryDirClick);
 	StaticBoxSizer6->Add(ButtonDictionaryDir, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer36->Add(StaticBoxSizer6, 0, wxALL|wxEXPAND, 2);
