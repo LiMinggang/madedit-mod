@@ -161,6 +161,7 @@ void SpellCheckerManager::DetectDictionaryPath()
 #else
     {
         dictPaths.Add(wxT("/usr/share/hunspell"));
+        dictPaths.Add(wxT("/usr/share/myspell"));
         dictPaths.Add(wxT("/usr/share/myspell/dicts"));
     }
 #endif
