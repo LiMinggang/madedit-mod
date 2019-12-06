@@ -1237,11 +1237,12 @@
 													<object class="wxStaticBoxSizer" variable="StaticBoxSizer5" member="no">
 														<label>Language</label>
 														<object class="sizeritem">
-															<object class="wxChoice" name="wxID_ANY" variable="ChoiceDictionary" member="yes">
+															<object class="wxComboBox" name="wxID_ANY" variable="ComboDictionary" member="yes">
 																<size>200,-1</size>
-																<handler function="ChoiceDictionarySelect" entry="EVT_CHOICE" />
+																<style>wxCB_READONLY</style>
+																<handler function="ComboDictionarySelected" entry="EVT_COMBOBOX" />
 															</object>
-															<flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+															<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 															<border>2</border>
 														</object>
 														<object class="sizeritem">

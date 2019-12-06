@@ -260,7 +260,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	BoxSizer30 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer31 = new wxBoxSizer(wxVERTICAL);
 	AuiNotebook1 = new wxAuiNotebook(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxAUI_NB_TOP | wxAUI_NB_TAB_MOVE | wxAUI_NB_SCROLL_BUTTONS);
-	Panel1 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxSize(792,400), wxTAB_TRAVERSAL, _T("wxID_ANY"));
+	Panel1 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxSize(900,400), wxTAB_TRAVERSAL, _T("wxID_ANY"));
 	BoxSizer3 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer27 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer27->Add(3,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
@@ -708,8 +708,8 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	BoxSizer34->Add(CheckBoxAddKeywords, 0, wxALL|wxALIGN_LEFT, 2);
 	BoxSizer36->Add(BoxSizer34, 0, wxALL|wxALIGN_LEFT, 2);
 	StaticBoxSizer5 = new wxStaticBoxSizer(wxHORIZONTAL, Panel5, _("Language"));
-	ChoiceDictionary = new wxChoice(Panel5, wxID_ANY, wxDefaultPosition, wxSize(200,-1), 0, 0, 0, wxDefaultValidator, _T("wxID_ANY"));
-	StaticBoxSizer5->Add(ChoiceDictionary, 0, wxALL|wxALIGN_LEFT, 2);
+	ComboDictionary = new wxComboBox(Panel5, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(200,-1), 0, 0, wxCB_READONLY, wxDefaultValidator, _T("wxID_ANY"));
+	StaticBoxSizer5->Add(ComboDictionary, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	StaticText26 = new wxStaticText(Panel5, wxID_ANY, _("Dictionary"), wxDefaultPosition, wxSize(200,-1), 0, _T("wxID_ANY"));
 	StaticBoxSizer5->Add(StaticText26, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer36->Add(StaticBoxSizer5, 0, wxALL|wxEXPAND, 2);
@@ -792,11 +792,10 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	Bind( wxEVT_CLOSE_WINDOW, &MadOptionsDialog::MadOptionsDialogClose , this );
 	Bind( wxEVT_ACTIVATE, &MadOptionsDialog::MadOptionsDialogActivate , this );
 
-	Bind( wxEVT_TEXT_ENTER, &MadOptionsDialog::EditDictionaryDirTextEnter, this, wxID_ANY );
-	Bind( wxEVT_CHOICE, &MadOptionsDialog::ChoiceDictionarySelect, this, wxID_ANY );
-	Bind( wxEVT_LISTBOX, &MadOptionsDialog::ListBoxKeysSelected , this, wxID_ANY );
-
-	Bind( wxEVT_TREE_SEL_CHANGED, &MadOptionsDialog::TreeCtrl1SelChanged , this, wxID_ANY );
+	Bind( wxEVT_TEXT_ENTER, &MadOptionsDialog::EditDictionaryDirTextEnter, this, EditDictionaryDir->GetId() );
+	Bind( wxEVT_COMBOBOX, &MadOptionsDialog::ComboDictionarySelected, this, ComboDictionary->GetId() );
+	Bind( wxEVT_LISTBOX, &MadOptionsDialog::ListBoxKeysSelected , this, ListBoxKeys->GetId() );
+	Bind( wxEVT_TREE_SEL_CHANGED, &MadOptionsDialog::TreeCtrl1SelChanged , this, TreeCtrl1->GetId() );
 
 	const wxChar * printMenus[] = 
 	{
@@ -1023,6 +1022,15 @@ void MadOptionsDialog::MadOptionsDialogActivate(wxActivateEvent& event)
 		{
 			SetReturnCode(wxID_CANCEL);
 			ButtonCancel->SetFocus();
+		}
+
+		if(ComboDictionary->GetCount())
+		{
+			ComboDictionary->Enable(true);
+		}
+		else
+		{
+			ComboDictionary->Enable(false);
 		}
 	}
 
@@ -1676,13 +1684,13 @@ void MadOptionsDialog::InitDictionaryChoice( const wxString &path/* = wxEmptyStr
 
 	std::vector<wxString> dics = SpellCheckerManager::Instance().GetPossibleDictionaries();
 	int sel = SpellCheckerManager::Instance().GetSelectedDictionaryNumber();
-	ChoiceDictionary->Clear();
+	ComboDictionary->Clear();
 
 	for( unsigned int i = 0 ; i < dics.size(); i++ )
-	{ ChoiceDictionary->AppendString( SpellCheckerManager::Instance().GetLanguageName( dics[i] ) ); }
+	{ ComboDictionary->Append( SpellCheckerManager::Instance().GetLanguageName( dics[i] ) ); }
 
 	if( sel != -1 )
-	{ ChoiceDictionary->Select( sel ); }
+	{ ComboDictionary->SetSelection( sel ); }
 }
 
 void MadOptionsDialog::EditDictionaryDirTextEnter( wxCommandEvent& WXUNUSED(event) )
@@ -1695,13 +1703,13 @@ void MadOptionsDialog::EditDictionaryDirTextEnter( wxCommandEvent& WXUNUSED(even
 	}
 	else
 	{
-		ChoiceDictionary->Clear();
+		ComboDictionary->Clear();
 	}
 }
 
-void MadOptionsDialog::ChoiceDictionarySelect( wxCommandEvent& WXUNUSED(event) )
+void MadOptionsDialog::ComboDictionarySelected( wxCommandEvent& WXUNUSED(event) )
 {
-	wxString dictDesc = ChoiceDictionary->GetString( ChoiceDictionary->GetSelection() );
+	wxString dictDesc = ComboDictionary->GetString( ComboDictionary->GetSelection() );
 	wxString dictName = SpellCheckerManager::Instance().GetDictionaryName( dictDesc );
 
 	if( !dictName.IsEmpty() )

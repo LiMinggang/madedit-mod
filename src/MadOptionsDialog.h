@@ -19,7 +19,6 @@
 #include <wx/aui/aui.h>
 #include <wx/button.h>
 #include <wx/checkbox.h>
-#include <wx/choice.h>
 #include <wx/combobox.h>
 #include <wx/dialog.h>
 #include <wx/listbox.h>
@@ -116,7 +115,6 @@ class MadOptionsDialog: public wxDialog
 		wxCheckBox* CheckBoxSkipAutoEncoding;
 		wxCheckBox* CheckBoxTabOrSpaces;
 		wxCheckBox* CheckBoxTypewriterMode;
-		wxChoice* ChoiceDictionary;
 		wxComboBox* ComboBoxDefaultFont;
 		wxComboBox* ComboBoxEncoding;
 		wxComboBox* ComboBoxLanguage;
@@ -124,6 +122,7 @@ class MadOptionsDialog: public wxDialog
 		wxComboBox* ComboBoxNewDocFont;
 		wxComboBox* ComboBoxNewDocSyntax;
 		wxComboBox* ComboBoxViewModeInOpen;
+		wxComboBox* ComboDictionary;
 		wxListBox* ListBoxKeys;
 		wxMenu PopupMenuDateTimeMark;
 		wxMenu PopupMenuPrintMark;
@@ -186,10 +185,10 @@ class MadOptionsDialog: public wxDialog
 		void ButtonDictionaryDirClick(wxCommandEvent& event);
 		void CheckBoxAutoCompletePairClick(wxCommandEvent& event);
 		void EnableAutoSaveClick(wxCommandEvent& event);
-		void ChoiceDictionarySelect(wxCommandEvent& event);
 		void EditDictionaryDirTextEnter(wxCommandEvent& event);
 		void RadioButtonNewDocEncSelect(wxCommandEvent& event);
 		void RadioButtonNewDocLineEndingSelect(wxCommandEvent& event);
+		void ComboDictionarySelected(wxCommandEvent& event);
 		//*)
 
 		void MadOptionsDialogActivate(wxActivateEvent& event);

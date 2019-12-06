@@ -8738,7 +8738,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& WXUNUSED(event) )
 			SpellCheckerManager::Instance().ScanForDictionaries();
 		}
 
-		wxString dictDesc = g_OptionsDialog->ChoiceDictionary->GetString( g_OptionsDialog->ChoiceDictionary->GetSelection() );
+		wxString dictDesc = g_OptionsDialog->ComboDictionary->GetString( g_OptionsDialog->ComboDictionary->GetSelection() );
 		wxString dictName = SpellCheckerManager::Instance().GetDictionaryName( dictDesc );
 
 		if( !dictName.IsEmpty() )
