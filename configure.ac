@@ -121,6 +121,18 @@ if test "x$WX_LIBS" != "x"; then
 fi
 
 AM_OPTIONS_WXCONFIG
+with_wxdir_set=0
+AC_ARG_WITH(wxdir, 
+    [ --with-wxdir=PATH    Use uninstalled version of wxWidgets in PATH,
+                          otherwise use installed version of wxWidgets],
+    [with_wxdir_set=1])
+
+if test "$with_wxdir_set" != 1; then
+    AM_PATH_WXCONFIG(2.8.0, wxWin=1, , [std,net,aui,html], )
+else
+    AM_PATH_WXCONFIG(2.8.0, wxWin=1, , [std,net,aui,html], [--static])
+fi
+
 AM_PATH_WXCONFIG(2.8.0, wxWin=1, , [std,net,aui,html], [--static])
 if test "$wxWin" != 1; then
    AC_MSG_ERROR([
