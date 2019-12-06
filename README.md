@@ -5,7 +5,8 @@ madedit-mod
 [![GitHub Latest release](https://img.shields.io/github/release/LiMinggang/madedit-mod/all.svg)](https://github.com/LiMinggang/madedit-mod/releases)
 [![GitHub issues](https://img.shields.io/github/issues/LiMinggang/madedit-mod.svg)](https://github.com/LiMinggang/madedit-mod/issues)
 [![Maintained](https://img.shields.io/maintenance/yes/2019.svg)](https://github.com/LiMinggang/madedit-mod/commits/master)
- 
+[![Ohloh Project Status](https://www.openhub.net/p/madedit-mod/widgets/project_thin_badge.gif)](https://www.openhub.net/p/madedit-mod)
+
 MadEdit Mod(based on the madedit project @ sourceforge)
 
 Based on [madedit@sf](https://sourceforge.net/projects/madedit/). Patched a lot from the contributors because the author is not active any more. The patches includes bug fixing from contributors of Madedit and some bloody edge enhancement. Madedit is one of the best free editor I ever know. See detailed introduction at it homepage. I create this page just for those user who need these features but are not able to build from source code by themselves. Use GPL because the author does.
