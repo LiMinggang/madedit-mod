@@ -8346,7 +8346,8 @@ void MadEditFrame::UpdateFontEncoding( )
 	{
 		m_Encodings->SetSelection(m_Encodings->FindString(g_ActiveMadEdit->GetEncodingName()));
 		m_Syntaxs->SetSelection(m_Syntaxs->FindString(wxGetTranslation(g_ActiveMadEdit->GetSyntaxTitle())));
-		
+		m_Syntaxs->Enable(g_ActiveMadEdit->GetEditMode() != emHexMode);
+
 		const wxColour& colBg = g_ActiveMadEdit->GetTextBgColor();
 		const wxColour& colFt = g_ActiveMadEdit->GetTextFtColor();
 		if(( colBg != wxNullColour ) && ( colFt != wxNullColour ))
