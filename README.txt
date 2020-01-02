@@ -135,6 +135,7 @@ Fix: Binary file detect bug in FindInFiles
 Fix: Can't remember Main Window size larger than 1024*768 #296
 Fix: Replace buggy wxChoice with wxComboBox for Dictionary selection
 Fix: Syntax combo box status is not updated while switching among opened files
+Fix: Missing '+' if character is greater than 0x10000
 Update wxWidgets to 3.1.3
 Update boost to 1.71
 Update Python to 2.7.17
