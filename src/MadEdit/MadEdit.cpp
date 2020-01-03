@@ -5158,10 +5158,10 @@ void MadEdit::UCStoBlock( const ucs4_t *ucs, size_t count, MadBlock & block )
 			}
 			else //if(uc>=0x10000)
 			{
-				( m_Encoding->*UCS4toMultiByte )( wxT( '0' ), unitext + 2 );
 				( m_Encoding->*UCS4toMultiByte )( wxT( '0' ), unitext + 3 );
-				( m_Encoding->*UCS4toMultiByte )( ToHex( ( uc >> 20 ) & 0xF ), unitext + 4 );
-				( m_Encoding->*UCS4toMultiByte )( ToHex( ( uc >> 16 ) & 0xF ), unitext + 5 );
+				( m_Encoding->*UCS4toMultiByte )( wxT( '0' ), unitext + 4 );
+				( m_Encoding->*UCS4toMultiByte )( ToHex( ( uc >> 20 ) & 0xF ), unitext + 5 );
+				( m_Encoding->*UCS4toMultiByte )( ToHex( ( uc >> 16 ) & 0xF ), unitext + 6 );
 				size = 12;
 				idx = 7;
 			}
