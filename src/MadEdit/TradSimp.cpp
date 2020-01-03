@@ -10,11 +10,14 @@
 
 #include "TradSimp.h"
 
+#include <wx/config.h>
 //#ifdef __WXGTK__
 //#include "clipbrd_gtk.h"
 //#else
 #include <wx/clipbrd.h>
 //#endif
+#include <wx/string.h>
+#include <wx/ustring.h>
 
 #ifdef _DEBUG
 #include <crtdbg.h>
@@ -11573,7 +11576,20 @@ int ConvertChinese(const wxChar *in, wxChar *out, size_t count, MadConvertChines
 
 	for(size_t i=0; i<count; ++i, ++in, ++out)
 	{
-		const wxChar wc = *in;
+		ucs4_t wc = *in;
+#ifdef __WXMSW__
+		if( wc >= 0xD800 && wc <= 0xDBFF && i < (count - 1) )
+		{
+			ucs4_t wc1 = *(in + 1);
+
+			if( wc1 >= 0xDC00 && wc1 <= 0xDFFF )
+			{
+				++in;
+				++i;
+				wc = ( ( wc - 0xD800 ) << 10 ) + ( wc1 - 0xDC00 ) + 0x10000;
+			}
+		}
+#endif
 		if(wc >= 0 && wc < 65536 && table[wc] != 0)
 		{
 			*out = table[ wc ];
@@ -11581,13 +11597,27 @@ int ConvertChinese(const wxChar *in, wxChar *out, size_t count, MadConvertChines
 		}
 		else
 		{
+#ifdef __WXMSW__
+            if(wc < 65536)
+				*out = wxChar(wc);
+			else
+			{
+				wxString wstr(wxUniChar((int)wc));
+				for(size_t j = 0; j < wstr.Length(); ++j)
+				{
+					*out = wstr.GetChar(j);
+					++out;
+				}
+				--out;
+			}				
+#else
 			*out = wc;
+#endif
 		}
 	}
 
 	return converted;
 }
-
 
 void ConvertChineseInClipboard(MadConvertChineseFlag flag)
 {
