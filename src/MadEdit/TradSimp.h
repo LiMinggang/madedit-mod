@@ -21,7 +21,7 @@ enum MadConvertChineseFlag
 	ccfChinese2Kanji,
 };
 
-int	ConvertChinese(const wxChar *in, wxChar *out, size_t count,	MadConvertChineseFlag flag);
+int	ConvertChinese(const wxChar *in, wxChar *out, size_t count, MadConvertChineseFlag flag, size_t& rcount);
 void ConvertChineseInClipboard(MadConvertChineseFlag flag);
 void FreeConvertChineseTable();
 

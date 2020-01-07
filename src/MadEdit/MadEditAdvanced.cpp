@@ -177,12 +177,17 @@ wxString *ConvertTextToNewString( const wxString& text, MadConvertChineseFlag fl
 
 	if( text.Len() != 0 )
 	{
-		wxChar *str = new wxChar[text.Len()];
-		int count =::ConvertChinese( text.c_str(), str, text.Len(), flag );
+		size_t rcount = text.Len();
+#ifdef __WXMSW__
+		wxChar *str = new wxChar[rcount*2];
+#else
+		wxChar *str = new wxChar[rcount];
+#endif
+		int count =::ConvertChinese( text.c_str(), str, text.Len(), flag, rcount );
 
 		if( count > 0 )
 		{
-			ptext = new wxString( str, text.Len() );
+			ptext = new wxString( str, rcount );
 		}
 
 		delete []str;

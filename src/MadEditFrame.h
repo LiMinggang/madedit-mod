@@ -307,6 +307,7 @@ enum   // menu id
 	menuInsertUNIX,
 	menuConvertEncoding,
 	menuConvertChineseChar,
+	menuConvertChineseSafeMode,
 	menuSimp2TradChinese,
 	menuTrad2SimpChinese,
 	menuKanji2TradChinese,
@@ -524,6 +525,7 @@ private:
 	void OnUpdateUI_MenuCheckIsThisModified( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuCheckIsAnyoneModified( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuToolsConvertEncoding( wxUpdateUIEvent& event );
+	void OnUpdateUI_MenuToolsConvertChineseSafeMode( wxUpdateUIEvent& event );
 
 	void OnUpdateUI_MenuWindow_CheckCount( wxUpdateUIEvent& event );
 	void OnUpdateUI_MenuWindow_Window( wxUpdateUIEvent& event );
@@ -710,6 +712,7 @@ private:
 	void OnToolsInsertMAC( wxCommandEvent& WXUNUSED(event) );
 	void OnToolsInsertUNIX( wxCommandEvent& WXUNUSED(event) );
 	void OnToolsConvertEncoding( wxCommandEvent& WXUNUSED(event) );
+	void OnToolsConvertChineseSafeMode( wxCommandEvent& WXUNUSED(event) );
 	void OnToolsSimp2TradChinese( wxCommandEvent& WXUNUSED(event) );
 	void OnToolsTrad2SimpChinese( wxCommandEvent& WXUNUSED(event) );
 	void OnToolsKanji2TradChinese( wxCommandEvent& WXUNUSED(event) );

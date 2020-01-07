@@ -360,6 +360,7 @@ wxHtmlWindow * g_MadToolHtmlWin = nullptr;
 MadEditFrame *g_MainFrame = nullptr;
 MadEdit *g_ActiveMadEdit = nullptr;
 MadEdit *g_CurrentMadEdit = nullptr;
+bool g_ConvertChineseSafeMode = false;
 
 int g_PrevPageID = -1;
 wxStatusBar *g_StatusBar = nullptr;
@@ -1979,6 +1980,7 @@ MadEditFrame::wxCmdEvtHandlerMap_t MadEditFrame::m_menu_evt_map[] =
 	{ menuInsertMAC, &MadEditFrame::OnToolsInsertMAC },
 	{ menuInsertUNIX, &MadEditFrame::OnToolsInsertUNIX },
 	{ menuConvertEncoding, &MadEditFrame::OnToolsConvertEncoding },
+	{ menuConvertChineseSafeMode, &MadEditFrame::OnToolsConvertChineseSafeMode },
 	{ menuSimp2TradChinese, &MadEditFrame::OnToolsSimp2TradChinese },
 	{ menuTrad2SimpChinese, &MadEditFrame::OnToolsTrad2SimpChinese },
 	{ menuKanji2TradChinese, &MadEditFrame::OnToolsKanji2TradChinese },
@@ -2179,6 +2181,7 @@ MadEditFrame::wxUIUpdateEvtHandlerMap_t MadEditFrame::m_menu_ui_updater_map[] =
 	{ menuTrad2SimpChinese, &MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding },
 	{ menuKanji2TradChinese, &MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding },
 	{ menuKanji2SimpChinese, &MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding },
+	{ menuConvertChineseSafeMode, &MadEditFrame::OnUpdateUI_MenuToolsConvertChineseSafeMode },
 	{ menuChinese2Kanji, &MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding },
 	{ menuMarkdown2Html, &MadEditFrame::OnUpdateUI_MenuCheckWritable },
 	{ menuHtml2PlainText, &MadEditFrame::OnUpdateUI_MenuCheckWritable },
@@ -2592,6 +2595,8 @@ CommandData CommandTable[] =
 	{ 0,			   1, menuConvertEncoding,    wxT( "menuConvertEncoding" ),    _( "Convert File &Encoding..." ),			         0,			   wxITEM_NORMAL,    encoding_xpm_idx, 0,			      _( "Convert to the specified encoding" ), 0, 0, 0, false},
 	{ 0,			   1, 0,			          0,						     0,												  0,			 wxITEM_SEPARATOR, -1, 0,						        0, 0, 0, 0, false},
 	{ 0,			   1, menuConvertChineseChar,     wxT( "menuConvertChineseChar" ),     _( "Convert &Chinese Char" ),						         0,			 wxITEM_NORMAL,    -1, &g_Menu_Tools_ConvertChineseChar, 0, 0, 0, 0, false},
+	{ 0,			   2, menuConvertChineseSafeMode,   wxT( "menuConvertChineseSafe" ),   _( "Safe Mode" ), 0,			       wxITEM_CHECK,     -1,			     0,						 _( "Convert Only 1:1 Maped Chars" ), 0, 0, 0, false},
+	{ 0,			   2, 0,						  0,						         0,												          0,			 wxITEM_SEPARATOR, -1, 0,						        0, 0, 0, 0, false},
 	{ 0,			   2, menuSimp2TradChinese,       wxT( "menuSimp2TradChinese" ),       _( "File: Simplified Chinese to &Traditional Chinese" ),      0,			 wxITEM_NORMAL,    tchinese_xpm_idx, 0,    _( "Convert simplified Chinese chars to traditional Chinese chars in the file" ), 0, 0, 0, false},
 	{ 0,			   2, menuTrad2SimpChinese,       wxT( "menuTrad2SimpChinese" ),       _( "File: Traditional Chinese to &Simplified Chinese" ),      0,			 wxITEM_NORMAL,    schinese_xpm_idx, 0,    _( "Convert traditional Chinese chars to simplified Chinese chars in the file" ), 0, 0, 0, false},
 	{ 0,			   2, menuKanji2TradChinese,      wxT( "menuKanji2TradChinese" ),      _( "File: Japanese Kanji to Tr&aditional Chinese" ),          0,			 wxITEM_NORMAL,    tchinese_xpm_idx, 0,    _( "Convert Japanese Kanji to traditional Chinese chars in the file" ), 0, 0, 0, false},
@@ -2885,6 +2890,8 @@ MadEditFrame::MadEditFrame( wxWindow *parent, wxWindowID id, const wxString &tit
 		m_AutoSaveTimer.StartOnce(m_AutoSaveTimout*MADMINUTES);
 	else
 		m_AutoSaveTimout = 0;
+
+	g_ConvertChineseSafeMode = m_Config->ReadBool( wxT( "/Application/ConvertChineseCharSafeMode" ), false );
 
 	for(size_t i = 0; i < sizeof(m_menu_evt_map)/sizeof(m_menu_evt_map[0]); ++i)
 	{
@@ -3909,6 +3916,8 @@ void MadEditFrame::MadEditFrameClose( wxCloseEvent& event )
 	m_Config->Write( wxT( "/QuickSearch/QuickSearchCaseSensitive" ), m_QuickSearchBar->GetToolToggled(menuQuickFindCase) );
 	m_Config->Write( wxT( "/QuickSearch/QuickSearchRegEx" ), m_QuickSearchBar->GetToolToggled(menuQuickFindRegex) );
 	m_Config->Write( wxT( "/QuickSearch/QuickSearchDotMatchNewLine" ), m_QuickSearchBar->GetToolToggled(menuQuickFindDotMatchNewLine) );
+
+	m_Config->Write( wxT( "/Application/ConvertChineseCharSafeMode" ), g_ConvertChineseSafeMode );
 
 	if(!m_ResetToolBars)
 	{
@@ -5720,6 +5729,11 @@ void MadEditFrame::OnUpdateUI_MenuToolsConvertEncoding( wxUpdateUIEvent& event )
 {
 	event.Enable( g_ActiveMadEdit != nullptr &&
 				  !g_ActiveMadEdit->IsReadOnly() && g_ActiveMadEdit->IsTextFile() );
+}
+
+void MadEditFrame::OnUpdateUI_MenuToolsConvertChineseSafeMode( wxUpdateUIEvent& event )
+{
+	event.Check(g_ConvertChineseSafeMode);
 }
 
 void MadEditFrame::OnUpdateUI_MenuWindow_CheckCount( wxUpdateUIEvent& event )
@@ -9769,6 +9783,11 @@ void MadEditFrame::OnToolsConvertEncoding( wxCommandEvent& WXUNUSED(event) )
 			m_RecentFonts->AddFileToHistory( str );
 		}
 	}
+}
+
+void MadEditFrame::OnToolsConvertChineseSafeMode( wxCommandEvent& WXUNUSED(event) )
+{
+	g_ConvertChineseSafeMode = !g_ConvertChineseSafeMode;
 }
 
 void MadEditFrame::OnToolsSimp2TradChinese( wxCommandEvent& WXUNUSED(event) )
