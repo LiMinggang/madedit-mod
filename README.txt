@@ -142,6 +142,7 @@ Update boost to 1.71
 Update Python to 2.7.17
 Update hunspell to latest
 Update gb18030 to iconv 1.16
+Update Simplified Chinese translation
 
 Mod v0.4.17
 Note: Changed *nix build from static link with wxWidgets to dynamic link with wxGTK, which
