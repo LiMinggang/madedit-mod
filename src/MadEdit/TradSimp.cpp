@@ -11842,25 +11842,24 @@ int ConvertChinese(const wxChar *in, wxChar *out, size_t count, MadConvertChines
         	}
 			else
 			{
-				ucs4_t outc = wc;
 				if(convmap)
 				{
 					std::map<ucs4_t, ucs4_t>::iterator it = convmap->find(wc);
 					if(it != convmap->end())
 					{
-						outc = it->second;
+						wc = it->second;
 						++converted;
 					}
 				}
-
-				if(outc < TWO_BYTES_MAX)
+				if(wc < TWO_BYTES_MAX)
 				{
-					*out = wxChar(outc);
+					*out = wxChar(wc);
+					//if (convmap) //Don't need this because (wc < TWO_BYTES_MAX) if only wc = it->second was excuted
 					--rcount;
 				}
 				else
 				{
-					wxString wstr(wxUniChar((int)outc));
+					wxString wstr(wxUniChar((int)wc));
 					for(size_t j = 0; j < wstr.Length(); ++j)
 					{
 						*out = wstr.GetChar(j);
@@ -11875,14 +11874,11 @@ int ConvertChinese(const wxChar *in, wxChar *out, size_t count, MadConvertChines
 				std::map<ucs4_t, ucs4_t>::iterator it = convmap->find(wc);
 				if (it != convmap->end())
 				{
-					*out = it->second;
+					wc = it->second;
 					++converted;
 				}
 			}
-			else
-			{
-				*out = wc;
-			}
+			*out = wc;
 #endif
 		}
 	}
