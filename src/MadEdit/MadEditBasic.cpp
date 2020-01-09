@@ -2964,8 +2964,6 @@ MadSearchResult MadEdit::FindTextPrevious( const wxString &text,
 	if( searchsize < text.Len() * 8 ) searchsize = text.Len() * 8;
 
 	wxFileOffset startpos = epos.pos;
-	MadLineIterator last = m_Lines->m_LineList.end();
-	--last;
 
 	for( ;; )
 	{
