@@ -127,6 +127,7 @@ New: Automatically choose extension for new file according to syntax used
 New: Sort windows by clicking column tab(Windows list dialog)
 New: Sort windows by clicking column tab(Save query dialog)
 New: Update icon for Convert File Encoding menu item #297
+New: Zero length match indicator in FindTextPrevious
 Fix: Fix bug of windows sorting in Windows list dialog
 Fix: Minor fix for Pan Chinese support
 Fix: Enable/diable Pan Chinese on clicking Hex searching
@@ -138,6 +139,7 @@ Fix: Syntax combo box status is not updated while switching among opened files
 Fix: Unicode converting bug if character is greater than 0x10000 in ConvertChinese chars(Windows only)
 Fix: Safe mode in Chinese convertion #293
 Fix: Regex search bug in FindTextNext
+Fix: Regex search bug in FindTextPrevious
 Update wxWidgets to 3.1.3
 Update boost to 1.71
 Update Python to 2.7.17

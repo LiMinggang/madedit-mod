@@ -722,7 +722,7 @@ void MadSearchReplaceDialog::WxButtonFindPrevClick( wxCommandEvent& WXUNUSED(eve
 
 	// add: gogo, 19.09.2009
 	g_StatusBar->SetStatusText( wxEmptyString, 0 );
-	bool ThrEndOfFile = false;
+	bool ThrBegOfFile = false;
 	wxString text, expr;
 	m_FindText->GetText( text, true );
 
@@ -749,7 +749,9 @@ void MadSearchReplaceDialog::WxButtonFindPrevClick( wxCommandEvent& WXUNUSED(eve
 
 		for( ;; )
 		{
-			if( WxCheckBoxFindHex->GetValue() )
+			bool bHex = WxCheckBoxFindHex->GetValue();
+			bool bRegex = ((!bHex) && WxCheckBoxRegex->GetValue());
+			if( bHex )
 			{
 				sr = g_ActiveMadEdit->FindHexPrevious( text, rangeTo, rangeFrom );
 
@@ -758,7 +760,7 @@ void MadSearchReplaceDialog::WxButtonFindPrevClick( wxCommandEvent& WXUNUSED(eve
 			}
 			else
 			{
-				bool bRegex = WxCheckBoxRegex->GetValue(), bWholeWord = WxCheckBoxWholeWord->GetValue(), bDotMatchNewline = WxCheckBoxDotMatchNewLine->GetValue();
+				bool bWholeWord = WxCheckBoxWholeWord->GetValue(), bDotMatchNewline = WxCheckBoxDotMatchNewLine->GetValue();
 				bool bPanChinese = WxCheckBoxPanChinese->GetValue(), bCaseSensitive = WxCheckBoxCaseSensitive->GetValue();
 
 				if( bRegex ) bWholeWord = false;
@@ -797,8 +799,12 @@ void MadSearchReplaceDialog::WxButtonFindPrevClick( wxCommandEvent& WXUNUSED(eve
 				}
 
 				// add: gogo, 19.09.2009
-				if( ThrEndOfFile )
-					g_StatusBar->SetStatusText( _( "Passed the end of the file" ), 0 );
+				if( ThrBegOfFile )
+					g_StatusBar->SetStatusText( _( "Passed the begin of the file" ), 0 );
+				else if(bRegex && g_ActiveMadEdit->IsZeroSelected())
+				{
+					g_ActiveMadEdit->ShowZeroLenSelIndicator();
+				}
 
 				break;
 			}
@@ -814,7 +820,7 @@ void MadSearchReplaceDialog::WxButtonFindPrevClick( wxCommandEvent& WXUNUSED(eve
 
 				rangeTo = g_ActiveMadEdit->GetFileSize();
 				rangeFrom = caretpos;
-				ThrEndOfFile = true;
+				ThrBegOfFile = true;
 				continue;
 			}
 

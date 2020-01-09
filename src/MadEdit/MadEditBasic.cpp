@@ -3021,7 +3021,6 @@ MadSearchResult MadEdit::FindTextPrevious( const wxString &text,
 
 				if( !( m_Lines->*NextUChar )( ucq ) )
 				{
-					if(bpos1.iter == last) return SR_NO;
 					++bpos1.iter;
 					bpos1.linepos = 0;
 					m_Lines->InitNextUChar( bpos1.iter, 0 );
@@ -3029,6 +3028,7 @@ MadSearchResult MadEdit::FindTextPrevious( const wxString &text,
 				}
 
 				bpos1.pos += ucq.back().second;
+				if (bpos1.pos >= epos.pos) break;
 				bpos1.linepos += ucq.back().second;
 				epos1 = epos;
 			}

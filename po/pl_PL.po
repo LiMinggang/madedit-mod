@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.18\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-08 08:06+0800\n"
+"POT-Creation-Date: 2020-01-09 14:33+0800\n"
 "PO-Revision-Date: 2015-03-31 14:56+0100\n"
 "Last-Translator: Adam Massalski <massaada@wp.pl>\n"
 "Language-Team: Adam Massalski <massaada@wp.pl>\n"
@@ -660,8 +660,8 @@ msgstr "Katalog nadrzędny tego pliku nie istnieje:"
 msgid "Cannot save this file:"
 msgstr "Nie można zapisać tego pliku:"
 
-#: ../src/MadEdit/MadEditBasic.cpp:2572 ../src/MadEdit/MadEditBasic.cpp:3100
-#: ../src/MadEdit/MadEditBasic.cpp:3113 ../src/MadEdit/MadEditSearch.cpp:998
+#: ../src/MadEdit/MadEditBasic.cpp:2572 ../src/MadEdit/MadEditBasic.cpp:3101
+#: ../src/MadEdit/MadEditBasic.cpp:3114 ../src/MadEdit/MadEditSearch.cpp:998
 #: ../src/MadEdit/MadEditSearch.cpp:1096 ../src/MadEdit/MadEditSearch.cpp:1159
 #: ../src/MadEditFrame.cpp:545 ../src/MadEditFrame.cpp:550
 #: ../src/MadEditFrame.cpp:5898
@@ -723,11 +723,11 @@ msgstr "Czy chcesz wczytać ponownie?"
 msgid "I.e. DISCARD changes?"
 msgstr ""
 
-#: ../src/MadEdit/MadEditBasic.cpp:3091
+#: ../src/MadEdit/MadEditBasic.cpp:3092
 msgid "The input string is not a valid Hex-String:"
 msgstr "Ciąg wejściowy nie jest poprawny wyrażeniem heksadecymalnym"
 
-#: ../src/MadEdit/MadEditBasic.cpp:3960
+#: ../src/MadEdit/MadEditBasic.cpp:3961
 #, fuzzy, c-format
 msgid "Found %d matched texts..."
 msgstr "Znaleziono %d plik(i) dopasowane do filtra..."
@@ -1359,8 +1359,8 @@ msgid "Convert the selection to halfwidth"
 msgstr "Konwersja zaznaczenia do połowy szerokości"
 
 #: ../src/MadEditFrame.cpp:2334 ../src/MadEditFrame.cpp:6822
-#: ../src/MadEditFrame.cpp:6826 ../src/MadSearchReplaceDialog.cpp:2497
-#: ../src/MadSearchReplaceDialog.cpp:2501 ../src/MadMacroDlg.cpp:681
+#: ../src/MadEditFrame.cpp:6826 ../src/MadSearchReplaceDialog.cpp:2503
+#: ../src/MadSearchReplaceDialog.cpp:2507 ../src/MadMacroDlg.cpp:681
 #: ../src/MadMacroDlg.cpp:685
 msgid "To Halfwidth by Options..."
 msgstr "Do Halfwidth wg ustawień..."
@@ -1378,8 +1378,8 @@ msgid "Convert the selection to fullwidth"
 msgstr "Konwertuje zaznaczony tekst do fullwidith"
 
 #: ../src/MadEditFrame.cpp:2336 ../src/MadEditFrame.cpp:6888
-#: ../src/MadEditFrame.cpp:6892 ../src/MadSearchReplaceDialog.cpp:2560
-#: ../src/MadSearchReplaceDialog.cpp:2564 ../src/MadMacroDlg.cpp:748
+#: ../src/MadEditFrame.cpp:6892 ../src/MadSearchReplaceDialog.cpp:2566
+#: ../src/MadSearchReplaceDialog.cpp:2570 ../src/MadMacroDlg.cpp:748
 #: ../src/MadMacroDlg.cpp:752
 msgid "To Fullwidth by Options..."
 msgstr "Do fullwidith wg ustawień"
@@ -1521,7 +1521,7 @@ msgid "Find next occurrence"
 msgstr "Znajdź następne wystąpienie"
 
 #: ../src/MadEditFrame.cpp:2358 ../src/MadEditFrame.cpp:3648
-#: ../src/MadSearchReplaceDialog.cpp:679 ../src/MadSearchReplaceDialog.cpp:1298
+#: ../src/MadSearchReplaceDialog.cpp:679 ../src/MadSearchReplaceDialog.cpp:1304
 msgid "Find Next"
 msgstr "Znajdź następny"
 
@@ -1534,7 +1534,7 @@ msgid "Find previous occurrence"
 msgstr "Znajdź następne wystąpienie"
 
 #: ../src/MadEditFrame.cpp:2359 ../src/MadEditFrame.cpp:3649
-#: ../src/MadSearchReplaceDialog.cpp:828
+#: ../src/MadSearchReplaceDialog.cpp:834
 msgid "Find Previous"
 msgstr "Znajdź poprzedni"
 
@@ -1556,7 +1556,7 @@ msgstr "&Zamień"
 msgid "Replace a string"
 msgstr "Zamien tekst"
 
-#: ../src/MadEditFrame.cpp:2362 ../src/MadSearchReplaceDialog.cpp:1421
+#: ../src/MadEditFrame.cpp:2362 ../src/MadSearchReplaceDialog.cpp:1427
 msgid "Replace"
 msgstr "Zamień"
 
@@ -2758,7 +2758,7 @@ msgstr "Ostatnio otwierane"
 msgid "List all recent opened files"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:3706 ../src/MadSearchReplaceDialog.cpp:1831
+#: ../src/MadEditFrame.cpp:3706 ../src/MadSearchReplaceDialog.cpp:1837
 #: ../src/MadPython.hpp:2586 ../src/MadPython.hpp:2612
 #, fuzzy
 msgid "Search Results"
@@ -2786,13 +2786,13 @@ msgid "Cannot load this file:"
 msgstr "Nie można wczytać pliku:"
 
 #: ../src/MadEditFrame.cpp:4889 ../src/MadEditFrame.cpp:9630
-#: ../src/MadSearchReplaceDialog.cpp:2817 ../src/MadMacroDlg.cpp:208
+#: ../src/MadSearchReplaceDialog.cpp:2823 ../src/MadMacroDlg.cpp:208
 #: ../src/MadMacroDlg.cpp:995
 msgid "Memory allocation failed"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:4889 ../src/MadEditFrame.cpp:9630
-#: ../src/MadSearchReplaceDialog.cpp:2817 ../src/MadMacroDlg.cpp:208
+#: ../src/MadSearchReplaceDialog.cpp:2823 ../src/MadMacroDlg.cpp:208
 #: ../src/MadMacroDlg.cpp:995
 msgid "Error"
 msgstr ""
@@ -2891,52 +2891,52 @@ msgid ""
 "recent file list?"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:6669 ../src/MadSearchReplaceDialog.cpp:2354
+#: ../src/MadEditFrame.cpp:6669 ../src/MadSearchReplaceDialog.cpp:2360
 #: ../src/MadMacroDlg.cpp:535
 #, fuzzy
 msgid "Delimiters:"
 msgstr "Separator"
 
-#: ../src/MadEditFrame.cpp:6669 ../src/MadSearchReplaceDialog.cpp:2354
+#: ../src/MadEditFrame.cpp:6669 ../src/MadSearchReplaceDialog.cpp:2360
 #: ../src/MadMacroDlg.cpp:535
 #, fuzzy
 msgid "Revert Hex String"
 msgstr "Kopiuj jako wyrażenie heksadecymalne"
 
 #: ../src/MadEditFrame.cpp:6817 ../src/MadEditFrame.cpp:6883
-#: ../src/MadSearchReplaceDialog.cpp:2492
-#: ../src/MadSearchReplaceDialog.cpp:2555 ../src/MadMacroDlg.cpp:676
+#: ../src/MadSearchReplaceDialog.cpp:2498
+#: ../src/MadSearchReplaceDialog.cpp:2561 ../src/MadMacroDlg.cpp:676
 #: ../src/MadMacroDlg.cpp:743
 msgid "ASCII characters"
 msgstr "Znaki ASCII"
 
 #: ../src/MadEditFrame.cpp:6817 ../src/MadEditFrame.cpp:6883
-#: ../src/MadSearchReplaceDialog.cpp:2492
-#: ../src/MadSearchReplaceDialog.cpp:2555 ../src/MadMacroDlg.cpp:676
+#: ../src/MadSearchReplaceDialog.cpp:2498
+#: ../src/MadSearchReplaceDialog.cpp:2561 ../src/MadMacroDlg.cpp:676
 #: ../src/MadMacroDlg.cpp:743
 msgid "Japanese characters"
 msgstr "Znaki japońskie"
 
 #: ../src/MadEditFrame.cpp:6818 ../src/MadEditFrame.cpp:6884
-#: ../src/MadSearchReplaceDialog.cpp:2493
-#: ../src/MadSearchReplaceDialog.cpp:2556 ../src/MadMacroDlg.cpp:677
+#: ../src/MadSearchReplaceDialog.cpp:2499
+#: ../src/MadSearchReplaceDialog.cpp:2562 ../src/MadMacroDlg.cpp:677
 #: ../src/MadMacroDlg.cpp:744
 msgid "Korean characters"
 msgstr "Znaki koreańskie"
 
 #: ../src/MadEditFrame.cpp:6818 ../src/MadEditFrame.cpp:6884
-#: ../src/MadSearchReplaceDialog.cpp:2493
-#: ../src/MadSearchReplaceDialog.cpp:2556 ../src/MadMacroDlg.cpp:677
+#: ../src/MadSearchReplaceDialog.cpp:2499
+#: ../src/MadSearchReplaceDialog.cpp:2562 ../src/MadMacroDlg.cpp:677
 #: ../src/MadMacroDlg.cpp:744
 msgid "other characters"
 msgstr "inne znaki"
 
 #: ../src/MadEditFrame.cpp:6822 ../src/MadEditFrame.cpp:6826
 #: ../src/MadEditFrame.cpp:6888 ../src/MadEditFrame.cpp:6892
-#: ../src/MadSearchReplaceDialog.cpp:2497
-#: ../src/MadSearchReplaceDialog.cpp:2501
-#: ../src/MadSearchReplaceDialog.cpp:2560
-#: ../src/MadSearchReplaceDialog.cpp:2564 ../src/MadMacroDlg.cpp:681
+#: ../src/MadSearchReplaceDialog.cpp:2503
+#: ../src/MadSearchReplaceDialog.cpp:2507
+#: ../src/MadSearchReplaceDialog.cpp:2566
+#: ../src/MadSearchReplaceDialog.cpp:2570 ../src/MadMacroDlg.cpp:681
 #: ../src/MadMacroDlg.cpp:685 ../src/MadMacroDlg.cpp:748
 #: ../src/MadMacroDlg.cpp:752
 msgid "Choose the characters you want to convert:"
@@ -3032,7 +3032,6 @@ msgid "Passed the begin of the file/selection"
 msgstr "Zwiększ wcięcie wybranych linii"
 
 #: ../src/MadEditFrame.cpp:10612 ../src/MadSearchReplaceDialog.cpp:647
-#: ../src/MadSearchReplaceDialog.cpp:801
 #, fuzzy
 msgid "Passed the end of the file"
 msgstr "Zwiększ wcięcie wybranych linii"
@@ -3197,7 +3196,7 @@ msgstr "Wybrany katalog nie istnieje"
 msgid "Processing %s of %s files..."
 msgstr "Przetwarzanie %d z %d plików..."
 
-#: ../src/MadFindInFilesDialog.cpp:749 ../src/MadSearchReplaceDialog.cpp:1715
+#: ../src/MadFindInFilesDialog.cpp:749 ../src/MadSearchReplaceDialog.cpp:1721
 #: ../src/MadPython.hpp:2590 ../src/MadPython.hpp:2617
 #, fuzzy
 msgid "Search \""
@@ -3208,12 +3207,12 @@ msgstr "Szukaj"
 msgid "(in %s files)"
 msgstr ""
 
-#: ../src/MadFindInFilesDialog.cpp:884 ../src/MadSearchReplaceDialog.cpp:1812
+#: ../src/MadFindInFilesDialog.cpp:884 ../src/MadSearchReplaceDialog.cpp:1818
 #, fuzzy, c-format
 msgid "Found %s matched texts..."
 msgstr "Znaleziono %d plik(i) dopasowane do filtra..."
 
-#: ../src/MadFindInFilesDialog.cpp:886 ../src/MadSearchReplaceDialog.cpp:1814
+#: ../src/MadFindInFilesDialog.cpp:886 ../src/MadSearchReplaceDialog.cpp:1820
 msgid "Preparing Results"
 msgstr ""
 
@@ -3440,113 +3439,118 @@ msgstr ""
 msgid "C&ount"
 msgstr "Zlicz"
 
-#: ../src/MadSearchReplaceDialog.cpp:299 ../src/MadSearchReplaceDialog.cpp:1435
+#: ../src/MadSearchReplaceDialog.cpp:299 ../src/MadSearchReplaceDialog.cpp:1441
 #, fuzzy
 msgid "R&eplace >>"
 msgstr "&Zamień >>"
 
-#: ../src/MadSearchReplaceDialog.cpp:662 ../src/MadSearchReplaceDialog.cpp:811
-#: ../src/MadSearchReplaceDialog.cpp:1668
-#: ../src/MadSearchReplaceDialog.cpp:1840
+#: ../src/MadSearchReplaceDialog.cpp:662 ../src/MadSearchReplaceDialog.cpp:817
+#: ../src/MadSearchReplaceDialog.cpp:1674
+#: ../src/MadSearchReplaceDialog.cpp:1846
 #, fuzzy
 msgid "Cannot find the matched string"
 msgstr "Nie można znaleźć poszukiwanego ciągu."
 
-#: ../src/MadSearchReplaceDialog.cpp:673 ../src/MadSearchReplaceDialog.cpp:822
+#: ../src/MadSearchReplaceDialog.cpp:673 ../src/MadSearchReplaceDialog.cpp:828
 msgid "Cannot find the matched string."
 msgstr "Nie można znaleźć poszukiwanego ciągu."
 
-#: ../src/MadSearchReplaceDialog.cpp:676 ../src/MadSearchReplaceDialog.cpp:1295
+#: ../src/MadSearchReplaceDialog.cpp:676 ../src/MadSearchReplaceDialog.cpp:1301
 #, fuzzy
 msgid "Do you want to find from begin of selection?"
 msgstr "Czy chcesz wczytać ponownie?"
 
-#: ../src/MadSearchReplaceDialog.cpp:677 ../src/MadSearchReplaceDialog.cpp:1296
+#: ../src/MadSearchReplaceDialog.cpp:677 ../src/MadSearchReplaceDialog.cpp:1302
 #, fuzzy
 msgid "Do you want to find from begin of file?"
 msgstr "Czy chcesz zapisać ten plik?"
 
-#: ../src/MadSearchReplaceDialog.cpp:702 ../src/MadSearchReplaceDialog.cpp:842
-#: ../src/MadSearchReplaceDialog.cpp:1877
+#: ../src/MadSearchReplaceDialog.cpp:702 ../src/MadSearchReplaceDialog.cpp:848
+#: ../src/MadSearchReplaceDialog.cpp:1883
 msgid "Empty expression"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:825
+#: ../src/MadSearchReplaceDialog.cpp:803
+#, fuzzy
+msgid "Passed the begin of the file"
+msgstr "Zwiększ wcięcie wybranych linii"
+
+#: ../src/MadSearchReplaceDialog.cpp:831
 #, fuzzy
 msgid "Do you want to find from end of selection?"
 msgstr "Czy chcesz wczytać ponownie?"
 
-#: ../src/MadSearchReplaceDialog.cpp:826
+#: ../src/MadSearchReplaceDialog.cpp:832
 #, fuzzy
 msgid "Do you want to find from end of file?"
 msgstr "Czy chcesz zapisać ten plik?"
 
-#: ../src/MadSearchReplaceDialog.cpp:1292
+#: ../src/MadSearchReplaceDialog.cpp:1298
 #, fuzzy
 msgid ""
 "Cannot find the matched string.\n"
 "Replace is finished."
 msgstr "Nie można znaleźć poszukiwanego ciągu. Zamiana zakończona"
 
-#: ../src/MadSearchReplaceDialog.cpp:1412
+#: ../src/MadSearchReplaceDialog.cpp:1418
 #, fuzzy
 msgid "Search <<"
 msgstr "Szukaj"
 
-#: ../src/MadSearchReplaceDialog.cpp:1439
+#: ../src/MadSearchReplaceDialog.cpp:1445
 msgid "Search"
 msgstr "Szukaj"
 
-#: ../src/MadSearchReplaceDialog.cpp:1522
+#: ../src/MadSearchReplaceDialog.cpp:1528
 #, c-format
 msgid "'%s' was found %d times."
 msgstr "'%s' znaleziono %d razy."
 
-#: ../src/MadSearchReplaceDialog.cpp:1559
+#: ../src/MadSearchReplaceDialog.cpp:1565
 #, fuzzy, c-format
 msgid "Preparing %s of %s results..."
 msgstr "Przetwarzanie %d z %d plików..."
 
-#: ../src/MadSearchReplaceDialog.cpp:1598
+#: ../src/MadSearchReplaceDialog.cpp:1604
 #, fuzzy, c-format
 msgid "Line(%d-%d)"
 msgstr "Linia(%d): "
 
-#: ../src/MadSearchReplaceDialog.cpp:1603
+#: ../src/MadSearchReplaceDialog.cpp:1609
 #, fuzzy, c-format
 msgid "Line(%d)"
 msgstr "Linia(%d): "
 
-#: ../src/MadSearchReplaceDialog.cpp:1608
+#: ../src/MadSearchReplaceDialog.cpp:1614
 #, fuzzy, c-format
 msgid "Offset(%s)"
 msgstr "Przesunięcie(%s):"
 
-#: ../src/MadSearchReplaceDialog.cpp:1609
+#: ../src/MadSearchReplaceDialog.cpp:1615
 msgid "Binary file matches"
 msgstr "Porównanie binarne plików"
 
-#: ../src/MadSearchReplaceDialog.cpp:1672
+#: ../src/MadSearchReplaceDialog.cpp:1678
 #, fuzzy
 msgid " results"
 msgstr "%d wyników"
 
-#: ../src/MadSearchReplaceDialog.cpp:1804 ../src/MadPython.hpp:2590
+#: ../src/MadSearchReplaceDialog.cpp:1810 ../src/MadPython.hpp:2590
 #: ../src/MadPython.hpp:2617
 #, c-format
 msgid "(%s hits in 1 file)"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:1845
+#: ../src/MadSearchReplaceDialog.cpp:1851
 #, fuzzy, c-format
 msgid "%s results"
 msgstr "%d wyników"
 
-#: ../src/MadSearchReplaceDialog.cpp:1958
+#: ../src/MadSearchReplaceDialog.cpp:1964
 msgid "Cannot find any matched string."
 msgstr "Nie można znaleźć żadnego pasującego łańcucha."
 
-#: ../src/MadSearchReplaceDialog.cpp:1960
+#: ../src/MadSearchReplaceDialog.cpp:1966
 #, fuzzy, c-format
 msgid "%s string(s) were replaced."
 msgstr "%d ciąg(i) zostały zastąpione."
