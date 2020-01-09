@@ -137,6 +137,7 @@ Fix: Replace buggy wxChoice with wxComboBox for Dictionary selection
 Fix: Syntax combo box status is not updated while switching among opened files
 Fix: Unicode converting bug if character is greater than 0x10000 in ConvertChinese chars(Windows only)
 Fix: Safe mode in Chinese convertion #293
+Fix: Regex search bug in FindTextNext
 Update wxWidgets to 3.1.3
 Update boost to 1.71
 Update Python to 2.7.17

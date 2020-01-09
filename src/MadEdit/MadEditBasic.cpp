@@ -2924,8 +2924,6 @@ MadSearchResult MadEdit::FindTextNext( const wxString &text,
 		if ((epos.linepos > (epos.iter->m_Size - epos.iter->m_NewLineSize)) && (epos.linepos < epos.iter->m_Size))
 			endpos += (epos.linepos + epos.iter->m_NewLineSize - epos.iter->m_Size);
 		SetSelection(beginpos, endpos);
-		if (endpos != epos.pos)
-			m_CaretPos = epos;
 
 		if (IsTextFile() && m_BookmarkInSearch && !(m_Lines->m_LineList.IsBookmarked(bpos.iter))) m_Lines->m_LineList.SetBookmark(bpos.iter);
 	}
@@ -3001,7 +2999,7 @@ MadSearchResult MadEdit::FindTextPrevious( const wxString &text,
 		}
 
 		MadCaretPos bpos1 = bpos, epos1 = epos;
-		int state = Search( bpos1, epos1, text, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, bPanChinese );
+		MadSearchResult state = Search( bpos1, epos1, text, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, bPanChinese );
 
 		if( state == SR_EXPR_ERROR )
 		{
