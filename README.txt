@@ -123,29 +123,30 @@ Packing for FreeBSD
 
 Mod v0.4.18
 Note: Rollback *nix build to static link with wxWidgets because UI issues reported
-New: Automatically choose extension for new file according to syntax used
-New: Sort windows by clicking column tab(Windows list dialog)
-New: Sort windows by clicking column tab(Save query dialog)
-New: Update icon for Convert File Encoding menu item #297
-New: Zero length match indicator in FindTextPrevious
-Fix: Fix bug of windows sorting in Windows list dialog
-Fix: Minor fix for Pan Chinese support
-Fix: Enable/diable Pan Chinese on clicking Hex searching
-Fix: Pan Chinese on Search in files
-Fix: Binary file detect bug in FindInFiles
-Fix: Can't remember Main Window size larger than 1024*768 #296
-Fix: Replace buggy wxChoice with wxComboBox for Dictionary selection
-Fix: Syntax combo box status is not updated while switching among opened files
-Fix: Unicode converting bug if character is greater than 0x10000 in ConvertChinese chars(Windows only)
-Fix: Safe mode in Chinese convertion #293
-Fix: Regex search bug in FindTextNext
-Fix: Regex search bug in FindTextPrevious
-Update wxWidgets to 3.1.3
-Update boost to 1.71
-Update Python to 2.7.17
-Update hunspell to latest
-Update gb18030 to iconv 1.16
-Update Simplified Chinese translation
+1.New: Automatically choose extension for new file according to syntax used
+2.New: Sort windows by clicking column tab(Windows list dialog)
+3.New: Sort windows by clicking column tab(Save query dialog)
+4.New: Update icon for Convert File Encoding menu item #297
+5.New: Zero length match indicator in FindTextPrevious
+6.Fix: Fix bug of windows sorting in Windows list dialog
+7.Fix: Minor fix for Pan Chinese support
+8.Fix: Enable/diable Pan Chinese on clicking Hex searching
+9.Fix: Pan Chinese on Search in files
+10.Fix: Binary file detect bug in FindInFiles
+11.Fix: Can't remember Main Window size larger than 1024*768 #296
+12.Fix: Replace buggy wxChoice with wxComboBox for Dictionary selection
+13.Fix: Syntax combo box status is not updated while switching among opened files
+14.Fix: Unicode converting bug if character is greater than 0x10000 in ConvertChinese chars(Windows only)
+15.Fix: Safe mode in Chinese convertion #293
+16.Fix: Regex search bug in FindTextNext
+17.Fix: Regex search bug in FindTextPrevious
+18.Update wxWidgets to 3.1.3
+19.Update boost to 1.71
+20.Update Python to 2.7.17
+21.Update hunspell to latest
+22.Update gb18030 to iconv 1.16
+23.Update Simplified Chinese translation
+24.Patch for wxWidgets 3.1.3 issue under Windows 10
 
 Mod v0.4.17
 Note: Changed *nix build from static link with wxWidgets to dynamic link with wxGTK, which

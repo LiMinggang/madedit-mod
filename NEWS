@@ -1,25 +1,26 @@
-Mod v0.4.17
-1.New: Atyle formatter: Add new option "style=webkit" for the WebKit brace style
-2.New: New API for MadPython:InsertNewline
-3.New: Right click menu enabled for MadMacroDlg and SearchReplaceDialog(more edit functions for input of the dialog)
-4.New: Scripts and spell check for Macro and SearchReplace dialog
-5.New: Reset transparency of SearchReplace dialog
-6.Fix: Deleted stale lock file '/home/username/prog_name-username' bug(Linux) #262
-7.Fix: Code issue of EnableTransparency
-8.Fix: GB18030 not work under Linux
-9.Fix: Regex replace bug, eg, replace "\r\n" with "\\n"
-10.Fix: MadPython Recording issue
-11.Fix: Chars escape for regex recording
-12.Fix: Unbind critical message handlers during OnClose
-13.Fix: High CPU load when move mouse over text lines #258 #265
-14.Fix: Can't replace bookmarked lines with multiple line text
-15.Fix: Patch for possible buffer overflow in GetFontWidths
-16.Fix: Wrong string for K&R style on SourceFormat config Dialog
-17.Fix: Use alphabet order for file name extension in FileAssociation Dialog
-18.Fix: Disable syntax toolbar in Hex mode
-19.Fix: Use GB18030 if wxFONTENCODING_CP936 is not available
-20.Fix: Total pages in print preview is incorrect
-21.Fix: Code improvement
-22.Fix: Buggy code of quick search UI
-23.Update Astyle to latest code
-24.Update translations
+Mod v0.4.18
+Note: Rollback *nix build to static link with wxWidgets because UI issues reported
+1.New: Automatically choose extension for new file according to syntax used
+2.New: Sort windows by clicking column tab(Windows list dialog)
+3.New: Sort windows by clicking column tab(Save query dialog)
+4.New: Update icon for Convert File Encoding menu item #297
+5.New: Zero length match indicator in FindTextPrevious
+6.Fix: Fix bug of windows sorting in Windows list dialog
+7.Fix: Minor fix for Pan Chinese support
+8.Fix: Enable/diable Pan Chinese on clicking Hex searching
+9.Fix: Pan Chinese on Search in files
+10.Fix: Binary file detect bug in FindInFiles
+11.Fix: Can't remember Main Window size larger than 1024*768 #296
+12.Fix: Replace buggy wxChoice with wxComboBox for Dictionary selection
+13.Fix: Syntax combo box status is not updated while switching among opened files
+14.Fix: Unicode converting bug if character is greater than 0x10000 in ConvertChinese chars(Windows only)
+15.Fix: Safe mode in Chinese convertion #293
+16.Fix: Regex search bug in FindTextNext
+17.Fix: Regex search bug in FindTextPrevious
+18.Update wxWidgets to 3.1.3
+19.Update boost to 1.71
+20.Update Python to 2.7.17
+21.Update hunspell to latest
+22.Update gb18030 to iconv 1.16
+23.Update Simplified Chinese translation
+24.Patch for wxWidgets 3.1.3 issue under Windows 10
