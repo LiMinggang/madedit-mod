@@ -121,6 +121,9 @@ Note: Not support wxWidgets 2.X anymore since 0.3.X
 Todo:
 Packing for FreeBSD
 
+Mod v0.4.19
+Fix: Disable safe mode in PanChinese search
+
 Mod v0.4.18
 Note: Rollback *nix build to static link with wxWidgets because UI issues reported
 1.New: Automatically choose extension for new file according to syntax used

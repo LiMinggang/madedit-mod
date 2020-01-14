@@ -22,7 +22,7 @@ build() {
 
   sh ./autogen.sh
 
-  sh ./configure --prefix=/usr --with-boost=$boost  --with-wxdir=${HOME}/$wxWidgets
+  sh ./configure --prefix=/usr --with-boost=$boost  --with-wxdir=$wxWidgets --with-gtk=3
   make
 }
 

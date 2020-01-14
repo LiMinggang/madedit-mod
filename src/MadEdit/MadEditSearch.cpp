@@ -635,6 +635,7 @@ struct UCIterator   // ucs4_t widechar iterator
 
 };
 
+extern bool g_ConvertChineseSafeMode;
 void MadEdit::PanChinese(wxString &text)
 {
 	shared_ptr< wxString > ptext;
@@ -646,12 +647,15 @@ void MadEdit::PanChinese(wxString &text)
 
 	ptext.reset(new wxString(text));
 	pan_ch.push_back(ptext);
+	bool safe = g_ConvertChineseSafeMode;
+	g_ConvertChineseSafeMode = false;
 	for( int i = 0; i < sizeof( cefs ) / sizeof( cefs[0] ); ++i )
 	{
 		ptext.reset( ConvertTextToNewString( text, ccfs[i] ));
 		if(ptext)
 			pan_ch.push_back(ptext);
 	}
+	g_ConvertChineseSafeMode = safe;
 
 	if(!pan_ch.empty())
 	{
