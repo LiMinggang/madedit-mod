@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit 0.4.18\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-09 14:33+0800\n"
+"POT-Creation-Date: 2020-01-15 21:28+0800\n"
 "PO-Revision-Date: 2017-08-16 10:35+0800\n"
 "Last-Translator: \n"
 "Language-Team: <carlos1994sanchez@gmail.com>\n"
@@ -570,52 +570,142 @@ msgid "Plain Text (*.txt)"
 msgstr "Texto Plano"
 
 #: wxstd.po.cpp:125
-msgid "incomplete escape sequence"
-msgstr ""
-
-#: wxstd.po.cpp:126
-msgid "mismatched parenthesis"
-msgstr ""
-
-#: wxstd.po.cpp:127
-msgid "rule assignments must be at the front of the regex"
-msgstr ""
-
-#: wxstd.po.cpp:128
-msgid "invalid named back-reference"
-msgstr ""
-
-#: wxstd.po.cpp:129
-msgid "quantifier not expected"
-msgstr ""
-
-#: wxstd.po.cpp:130
-msgid "found quote-meta end without corresponding quote-meta begin"
-msgstr ""
-
-#: wxstd.po.cpp:131
 msgid "An argument to an action was unspecified"
 msgstr ""
 
-#: wxstd.po.cpp:132
-msgid "expression cannot be quantified"
+#: wxstd.po.cpp:126
+msgid "bad regex reference"
 msgstr ""
 
-#: wxstd.po.cpp:133 wxstd.po.cpp:137
+#: wxstd.po.cpp:127
 msgid "character escape too large to fit in target character type"
 msgstr ""
 
-#: wxstd.po.cpp:134
-msgid "unrecognized extension"
+#: wxstd.po.cpp:128
+msgid "collation sequences are not yet supported"
 msgstr ""
 
-#: wxstd.po.cpp:135
+#: wxstd.po.cpp:129
+msgid "equivalence classes are not yet supported"
+msgstr ""
+
+#: wxstd.po.cpp:130
+msgid "expression cannot be quantified"
+msgstr ""
+
+#: wxstd.po.cpp:131
+msgid "found quote-meta end without corresponding quote-meta begin"
+msgstr ""
+
+#: wxstd.po.cpp:132
+msgid "incomplete escape sequence"
+msgstr ""
+
+#: wxstd.po.cpp:133
 #, fuzzy
 msgid "incomplete extension"
 msgstr "Extensiones fonéticas"
 
+#: wxstd.po.cpp:134
+msgid "invalid back-reference"
+msgstr ""
+
+#: wxstd.po.cpp:135
+msgid "invalid charset range"
+msgstr ""
+
 #: wxstd.po.cpp:136
+msgid "invalid escape control letter; must be one of a-z or A-Z"
+msgstr ""
+
+#: wxstd.po.cpp:137
+msgid "invalid hex escape : "
+msgstr ""
+
+#: wxstd.po.cpp:138
+msgid "invalid hex escape : must be \\x HexDigit HexDigit"
+msgstr ""
+
+#: wxstd.po.cpp:139
+msgid ""
+"invalid hex escape : must be \\x { HexDigit HexDigit HexDigit HexDigit }"
+msgstr ""
+
+#: wxstd.po.cpp:140
+msgid "invalid named back-reference"
+msgstr ""
+
+#: wxstd.po.cpp:141
+msgid "invalid quantification range"
+msgstr ""
+
+#: wxstd.po.cpp:142
+msgid "invalid quantifier"
+msgstr ""
+
+#: wxstd.po.cpp:143
+#, fuzzy
+msgid "invalid Unicode escape : "
+msgstr "Caracteres Unicode no válidos"
+
+#: wxstd.po.cpp:144
+msgid "malformed conditional in format string"
+msgstr ""
+
+#: wxstd.po.cpp:145
+msgid "mismatched parenthesis"
+msgstr ""
+
+#: wxstd.po.cpp:146
+msgid "must be \\u HexDigit HexDigit HexDigit HexDigit"
+msgstr ""
+
+#: wxstd.po.cpp:147
+msgid "must be \\x HexDigit HexDigit"
+msgstr ""
+
+#: wxstd.po.cpp:148
+msgid "named mark already exists"
+msgstr ""
+
+#: wxstd.po.cpp:149
+msgid "quantifier not expected"
+msgstr ""
+
+#: wxstd.po.cpp:150
+msgid "Regex stack space exhausted"
+msgstr ""
+
+#: wxstd.po.cpp:151
+msgid "rule assignments must be at the front of the regex"
+msgstr ""
+
+#: wxstd.po.cpp:152
+msgid "unbalanced parentheses in format string"
+msgstr ""
+
+#: wxstd.po.cpp:153
+msgid "unexpected end of format found"
+msgstr ""
+
+#: wxstd.po.cpp:154
+msgid "unexpected end of pattern found"
+msgstr ""
+
+#: wxstd.po.cpp:155
+msgid "unknown class name"
+msgstr ""
+
+#: wxstd.po.cpp:156
 msgid "unknown pattern modifier"
+msgstr ""
+
+#: wxstd.po.cpp:157
+msgid "unrecognized extension"
+msgstr ""
+
+#: wxstd.po.cpp:158
+msgid "Use of uninitialized regex attribute"
 msgstr ""
 
 #: ../src/MadEdit/MadEdit.cpp:12071
@@ -661,9 +751,9 @@ msgstr "El directorio principal de este archivo no existe:"
 msgid "Cannot save this file:"
 msgstr "No es posible guardar el archivo:"
 
-#: ../src/MadEdit/MadEditBasic.cpp:2572 ../src/MadEdit/MadEditBasic.cpp:3101
-#: ../src/MadEdit/MadEditBasic.cpp:3114 ../src/MadEdit/MadEditSearch.cpp:998
-#: ../src/MadEdit/MadEditSearch.cpp:1096 ../src/MadEdit/MadEditSearch.cpp:1159
+#: ../src/MadEdit/MadEditBasic.cpp:2572 ../src/MadEdit/MadEditBasic.cpp:3099
+#: ../src/MadEdit/MadEditBasic.cpp:3112 ../src/MadEdit/MadEditSearch.cpp:1002
+#: ../src/MadEdit/MadEditSearch.cpp:1100 ../src/MadEdit/MadEditSearch.cpp:1163
 #: ../src/MadEditFrame.cpp:545 ../src/MadEditFrame.cpp:550
 #: ../src/MadEditFrame.cpp:5898
 #, fuzzy
@@ -724,17 +814,17 @@ msgstr "¿Desea volver a cargarlo?"
 msgid "I.e. DISCARD changes?"
 msgstr ""
 
-#: ../src/MadEdit/MadEditBasic.cpp:3092
+#: ../src/MadEdit/MadEditBasic.cpp:3090
 msgid "The input string is not a valid Hex-String:"
 msgstr "La cadena introducida no es una cadena hexadecimal válida:"
 
-#: ../src/MadEdit/MadEditBasic.cpp:3961
+#: ../src/MadEdit/MadEditBasic.cpp:3959
 #, fuzzy, c-format
 msgid "Found %d matched texts..."
 msgstr "Se ha encontrado %d archivo(s) que coincide(n) con los filtros..."
 
-#: ../src/MadEdit/MadEditSearch.cpp:851 ../src/MadEdit/MadEditSearch.cpp:994
-#: ../src/MadEdit/MadEditSearch.cpp:1092 ../src/MadEdit/MadEditSearch.cpp:1155
+#: ../src/MadEdit/MadEditSearch.cpp:855 ../src/MadEdit/MadEditSearch.cpp:998
+#: ../src/MadEdit/MadEditSearch.cpp:1096 ../src/MadEdit/MadEditSearch.cpp:1159
 msgid "Regex error:"
 msgstr ""
 

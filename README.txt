@@ -123,6 +123,7 @@ Packing for FreeBSD
 
 Mod v0.4.19
 Fix: Disable safe mode in PanChinese search
+Add more Regex error strings for translation
 
 Mod v0.4.18
 Note: Rollback *nix build to static link with wxWidgets because UI issues reported
