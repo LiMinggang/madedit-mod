@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.18\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-15 21:28+0800\n"
-"PO-Revision-Date: 2020-01-15 22:03+0800\n"
+"PO-Revision-Date: 2020-01-15 22:09+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit-Mod <minggang.li@gmail.com>\n"
 "Language: zh_CN\n"
@@ -592,9 +592,8 @@ msgid "invalid quantifier"
 msgstr "无效的限定符"
 
 #: wxstd.po.cpp:143
-#, fuzzy
 msgid "invalid Unicode escape : "
-msgstr "无效的 Unicode 字符"
+msgstr "无效的Unicode转义"
 
 #: wxstd.po.cpp:144
 msgid "malformed conditional in format string"
@@ -638,7 +637,7 @@ msgstr "发现不应该有的格式结束"
 
 #: wxstd.po.cpp:154
 msgid "unexpected end of pattern found"
-msgstr "发现不应该有的的模式结束"
+msgstr "发现不应该有的模式结束"
 
 #: wxstd.po.cpp:155
 msgid "unknown class name"
