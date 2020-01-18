@@ -1,0 +1,6 @@
+version: 1.0.{build}
+configuration: Release
+platform: x64
+build:
+  project: msw\vc14.2\MadEdit.sln
+  verbosity: minimal
