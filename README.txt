@@ -110,6 +110,7 @@ Known issues(that may not be fixed in future releases):
 6. Alt+LeftDown to toggle bookmark does not work on Ubuntu because Alt was a special key(?) for the OS
 7. Preview html will hang on some html files(wxWidgets html view bug)
 8. wxWidgets GTK3 may have issue under some themes of some Ubuntu dists, eg, Elementry OS
+9. MadPython does not support locale convertion and 'print' can NOT print non-ASCII char correctly
 
 Feature/issues to be released
 -----------------------------

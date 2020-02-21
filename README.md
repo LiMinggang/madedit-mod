@@ -119,6 +119,11 @@ Known issues
 2. Search in selection in column mode is not exact the selection highlighted.
 3. HighlightWord would not work if the caret is at the end of the line
 4. Scroll function on Right click menu of scroll bars only works with Windows
+5. '*' is allowed in file name under Linux/Unix but is used as delimiter for file name and line number, use -d and -w to use it as wildcard
+6. Alt+LeftDown to toggle bookmark does not work on Ubuntu because Alt was a special key(?) for the OS
+7. Preview html will hang on some html files(wxWidgets html view bug)
+8. wxWidgets GTK3 may have issue under some themes of some Ubuntu dists, eg, Elementry OS
+9. MadPython does not support locale convertion and 'print' can NOT print non-ASCII char correctly
 
 License
 =============

@@ -120,10 +120,10 @@ MadMacroDlg::MadMacroDlg(wxWindow* parent,wxWindowID id,const wxPoint& WXUNUSED(
 	m_Pymacro->SetDisplayBookmark(false);
 	if(m_PyacroContext == wxEmptyString)
 	{
-		wxString endline(wxT("\r"));
-		if (m_Pymacro->GetInsertNewLineType() == nltDOS) endline += wxT("\n");
-		else if (m_Pymacro->GetInsertNewLineType() == nltUNIX) endline = wxT("\n");
-		m_PyacroContext = (wxString(wxT("#Create MadEdit Object for the active edit")) + endline + wxT("medit = MadEdit()") + endline + endline);
+		wxString endline(wxT("\n"));
+		if (m_Pymacro->GetInsertNewLineType() == nltDOS) endline = wxT("\r\n");
+		else if (m_Pymacro->GetInsertNewLineType() == nltMAC) endline = wxT("\r");
+		m_PyacroContext = ( wxString(wxT("#Current Encoding is UTF-8")) + endline + wxString(wxT("#Create MadEdit Object for the active edit")) + endline + wxT("medit = MadEdit()") + endline + endline);
 	}
 	m_Pymacro->SetText( m_PyacroContext );
 	m_Pymacro->SetCaretPosition(m_Pymacro->GetFileSize());
