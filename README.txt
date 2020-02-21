@@ -123,6 +123,7 @@ Packing for FreeBSD
 
 Mod v0.4.19
 Fix: Disable safe mode in PanChinese search
+Fix: String encoding bug in MadPython #304
 Add more Regex error strings for translation
 Update Simplifed Chinese translation
 

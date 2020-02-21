@@ -908,7 +908,7 @@ namespace mad_python {
 				madedit = g_ActiveMadEdit;
 			if( madedit ) {
 				wxString title = madedit->GetSyntaxTitle();
-				return std::string( title.mb_str() );
+				return std::string( title.mb_str(wxConvUTF8) );
 			}
 			else { return std::string( "" );}
 		}
@@ -939,7 +939,7 @@ namespace mad_python {
 				madedit = g_ActiveMadEdit;
 			if( ( madedit ) ) {
 				wxString desc = madedit->GetEncodingName();
-				return std::string( desc.mb_str() );
+				return std::string( desc.mb_str(wxConvUTF8) );
 			}
 			else {
 				return std::string( "" );
@@ -952,7 +952,7 @@ namespace mad_python {
 				madedit = g_ActiveMadEdit;
 			if( madedit ) {
 				wxString desc = madedit->GetEncodingDescription();
-				return std::string( desc.mb_str() );
+				return std::string( desc.mb_str(wxConvUTF8) );
 			}
 			else {
 				return std::string( "" );
@@ -1026,7 +1026,7 @@ namespace mad_python {
 				madedit->GetTextFont( name, size );
 
 				if(name.size())
-					return mad_py::make_tuple( std::string( name.mb_str() ), size );
+					return mad_py::make_tuple( std::string( name.mb_str(wxConvUTF8) ), size );
 			}
 
 			return mad_py::make_tuple( std::string( "" ), 0 );
@@ -1043,7 +1043,7 @@ namespace mad_python {
 				madedit->GetHexFont( name, size );
 
 				if(name.size())
-					return mad_py::make_tuple( std::string( name.mb_str() ), size );
+					return mad_py::make_tuple( std::string( name.mb_str(wxConvUTF8) ), size );
 			}
 
 			return mad_py::make_tuple( std::string( "" ), 0 );
@@ -1065,7 +1065,7 @@ namespace mad_python {
 				madedit->GetFont( name, size );
 
 				if(name.size())
-					return mad_py::make_tuple( std::string( name.mb_str() ), size );
+					return mad_py::make_tuple( std::string( name.mb_str(wxConvUTF8) ), size );
 			}
 
 			return mad_py::make_tuple( std::string( "" ), 0 );
@@ -1826,7 +1826,7 @@ namespace mad_python {
 				wxString name;
 				name = madedit->GetFileName();
 				if(name.size())
-					return std::string( name.mb_str() );
+					return std::string( name.mb_str(wxConvUTF8) );
 			}
 
 			return std::string( "" );
@@ -2078,7 +2078,7 @@ namespace mad_python {
 				wxString ws;
 				madedit->GetSelText( ws );
 				if(ws.size())
-					return std::string( ws.mb_str() );
+					return std::string( ws.mb_str(wxConvUTF8) );
 			}
 			return std::string("");
 		}
@@ -2093,7 +2093,7 @@ namespace mad_python {
 				wxFileOffset bpos = begpos, epos = endpos;
 				madedit->GetRangeText( ws, bpos, epos );
 				if(ws.size())
-					return std::string( ws.mb_str() );
+					return std::string( ws.mb_str(wxConvUTF8) );
 			}
 			return std::string("");
 		}
@@ -2107,7 +2107,7 @@ namespace mad_python {
 				wxString ws;
 				madedit->GetText( ws, ignoreBOM );
 				if(ws.size())
-					return std::string( ws.mb_str() );
+					return std::string( ws.mb_str(wxConvUTF8) );
 			}
 			return std::string("");
 		}
@@ -2133,7 +2133,7 @@ namespace mad_python {
 				wxString wxWs;
 				bool ret = madedit->GetLine( wxWs, line, maxlen, ignoreBOM );
 				if(wxWs.size())
-					return mad_py::make_tuple( std::string( wxWs.mb_str() ), ret );
+					return mad_py::make_tuple( std::string( wxWs.mb_str(wxConvUTF8) ), ret );
 			}
 
 			return mad_py::make_tuple( std::string( "" ), false );
@@ -2156,7 +2156,7 @@ namespace mad_python {
 			if( madedit ) {
 				wxString wxWs;
 				madedit->GetSelHexString( wxWs, withSpace );
-				return std::string( wxWs.mb_str() );
+				return std::string( wxWs.mb_str(wxConvUTF8) );
 			}
 			else
 			{ return std::string( "" ); }
@@ -2169,7 +2169,7 @@ namespace mad_python {
 			if( madedit ) {
 				wxString wxWs;
 				madedit->GetWordFromCaretPos( wxWs );
-				return std::string( wxWs.mb_str() );
+				return std::string( wxWs.mb_str(wxConvUTF8) );
 			}
 			else
 			{ return std::string( "" ); }
@@ -2969,7 +2969,7 @@ namespace mad_python {
 				}
 			}
 
-			return mad_py::make_tuple( words, chars, spaces, lines, halfwidths, fullwidths, std::string( str.mb_str() ) );
+			return mad_py::make_tuple( words, chars, spaces, lines, halfwidths, fullwidths, std::string( str.mb_str(wxConvUTF8) ) );
 		}
 
 		void SetColumnSelection( long startlineid, long startxpos, long hlines, long wlines ) {
@@ -3104,7 +3104,7 @@ namespace mad_python {
 	{
 		wxString wxMessage( message.c_str(), wxConvUTF8 ), wxCaption( caption.c_str(), wxConvUTF8 );
 		wxString input = wxGetTextFromUser( wxMessage, wxCaption );
-		return std::string( input.mb_str() );
+		return std::string( input.mb_str(wxConvUTF8) );
 	}
 };
 
@@ -3545,7 +3545,7 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.value( "YES", MADRET_YES )
 	.value( "NO", MADRET_NO )
 	;
-	def( "MsgBox", &MsgBox, MsgBox_overloads( args( "message", "caption", "style" ), "Doc string" ) );
-	def( "InputBox", &InputBox, InputBox_overloads( args( "message", "caption" ), "Doc string" ) );
+	def( "MsgBox", &MsgBox, MsgBox_overloads( args( "message", "caption", "style" ), "Message Dialog Box" ) );
+	def( "InputBox", &InputBox, InputBox_overloads( args( "message", "caption" ), "Input Dialog Box" ) );
 }
 #endif //__MADPYTHON__
