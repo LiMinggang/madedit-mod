@@ -137,6 +137,7 @@ class MadOptionsDialog: public wxDialog
 		wxRadioButton* RadioButtonNewDocLineEndingLF;
 		wxStaticText* StaticText10;
 		wxStaticText* StaticText11;
+		wxStaticText* StaticText28;
 		wxStaticText* StaticText4;
 		wxStaticText* StaticText5;
 		wxStaticText* StaticText7;
@@ -153,6 +154,7 @@ class MadOptionsDialog: public wxDialog
 		wxTextCtrl* EditHeaderCenter;
 		wxTextCtrl* EditHeaderLeft;
 		wxTextCtrl* EditHeaderRight;
+		wxTextCtrl* EditHintColumns;
 		wxTextCtrl* EditIndentColumns;
 		wxTextCtrl* EditKeyHint;
 		wxTextCtrl* EditMaxColumns;

@@ -356,6 +356,7 @@ EmbeddedPython *g_EmbeddedPython = 0;
 MadRecentList  *g_RecentFindText = nullptr;
 extern wxString g_MadEditAppDir, g_MadEditHomeDir;
 wxHtmlWindow * g_MadToolHtmlWin = nullptr;
+long g_HintColumns = 80;
 
 MadEditFrame *g_MainFrame = nullptr;
 MadEdit *g_ActiveMadEdit = nullptr;
@@ -2883,6 +2884,7 @@ MadEditFrame::MadEditFrame( wxWindow *parent, wxWindowID id, const wxString &tit
 	m_HtmlPreview = 0;
 	m_PreviewType = ptPREVIEW_NONE;
 	g_MainFrame = this;
+	g_HintColumns = m_Config->ReadLong( wxT( "/MadEdit/HintColumns" ), 80 );
 
 	m_AutoSaveTimout = 0;
 	m_Config->Read( wxT( "/Application/AutoSaveTimeout" ), &m_AutoSaveTimout, 0 );
@@ -8592,7 +8594,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& WXUNUSED(event) )
 		wxString oldpath = m_Config->GetPath();
 		m_Config->SetPath( wxT( "/MadEdit" ) );
 		bool rcm, isiot, ai, acp, icp4sel, msc, mscck, mmp, afcp, fwm, twm, abck, ldch, sw;
-		wxString mc, tc, ic, mds;
+		wxString mc, tc, ic, hc, mds;
 		long ll;
 		m_Config->Write( wxT( "/Application/Language" ), g_OptionsDialog->ComboBoxLanguage->GetValue() );
 		m_Config->Write( wxT( "/Application/SingleInstance" ), g_OptionsDialog->CheckBoxSingleInstance->GetValue() );
@@ -8660,6 +8662,9 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& WXUNUSED(event) )
 		m_Config->Write( wxT( "TabColumns" ), tc );
 		ic = g_OptionsDialog->EditIndentColumns->GetValue();
 		m_Config->Write( wxT( "IndentColumns" ), ic );
+		hc = g_OptionsDialog->EditHintColumns->GetValue();
+		m_Config->Write( wxT( "HintColumns" ), hc );
+		hc.ToLong( &g_HintColumns );
 		m_Config->Write( wxT( "DateTimeFormat" ), g_OptionsDialog->EditDateTime->GetValue() );
 		m_Config->Write( wxT( "DateTimeInEnglish" ), g_OptionsDialog->CheckBoxDateTimeInEnglish->GetValue() );
 		isiot = g_OptionsDialog->CheckBoxTabOrSpaces->GetValue();
@@ -8916,6 +8921,7 @@ void MadEditFrame::OnToolsOptions( wxCommandEvent& WXUNUSED(event) )
 		}
 
 		m_Config->SetPath( oldpath );
+		g_ActiveMadEdit->SetDisplay80ColHint( g_ActiveMadEdit->GetDisplay80ColHint() );
 	}
 	else
 	{

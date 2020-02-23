@@ -126,8 +126,9 @@ Mod v0.4.19
 Fix: Disable safe mode in PanChinese search
 Fix: String encoding bug in MadPython #304
 New: PrintStr, Utf8ToLocal and LocalToUtf8 for MadPython
+New: Configurable column number of the column hint indicator #303
 Add more Regex error strings for translation
-Update Simplifed Chinese translation
+Update Simplified Chinese translation
 
 Mod v0.4.18
 Note: Rollback *nix build to static link with wxWidgets because UI issues reported

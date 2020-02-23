@@ -41,7 +41,7 @@
 										<border>2</border>
 									</object>
 									<object class="sizeritem">
-										<object class="wxCheckBox" name="ID_CHECKBOX1" variable="WxCheckBoxPanChinese" member="yes">
+										<object class="wxCheckBox" name="wxID_ANY" variable="WxCheckBoxPanChinese" member="yes">
 											<label>Pan Chinese</label>
 										</object>
 										<flag>wxALL|wxEXPAND</flag>

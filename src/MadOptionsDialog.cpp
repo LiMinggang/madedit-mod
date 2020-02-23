@@ -204,6 +204,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	wxBoxSizer* BoxSizer41;
 	wxBoxSizer* BoxSizer42;
 	wxBoxSizer* BoxSizer43;
+	wxBoxSizer* BoxSizer44;
 	wxBoxSizer* BoxSizer47;
 	wxBoxSizer* BoxSizer49;
 	wxBoxSizer* BoxSizer4;
@@ -419,6 +420,13 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	StaticText11 = new wxStaticText(Panel2, wxID_ANY, _("Columns of Indent"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	BoxSizer13->Add(StaticText11, 0, wxALL|wxALIGN_CENTER_VERTICAL, 2);
 	BoxSizer8->Add(BoxSizer13, 0, wxALL|wxEXPAND, 2);
+	BoxSizer44 = new wxBoxSizer(wxHORIZONTAL);
+	BoxSizer44->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
+	EditHintColumns = new wxTextCtrl(Panel2, wxID_ANY, _T("0"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
+	BoxSizer44->Add(EditHintColumns, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
+	StaticText28 = new wxStaticText(Panel2, wxID_ANY, _("Columns Pos to Show Indicator"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
+	BoxSizer44->Add(StaticText28, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
+	BoxSizer8->Add(BoxSizer44, 0, wxALL|wxEXPAND, 2);
 	BoxSizer5 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer5->Add(3,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	EditDateTime = new wxTextCtrl(Panel2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
@@ -1118,6 +1126,8 @@ void MadOptionsDialog::LoadOptions(void)
 	EditTabColumns->SetValue( wxString() << ll );
 	cfg->Read( wxT( "IndentColumns" ), &ll );
 	EditIndentColumns->SetValue( wxString() << ll );
+	cfg->Read( wxT( "HintColumns" ), &ll, 80 );
+	EditHintColumns->SetValue( wxString() << ll );
 	cfg->Read( wxT( "DateTimeFormat" ), &ss, wxT( "%c" ) );
 	EditDateTime->SetValue( ss );
 	cfg->Read( wxT( "DateTimeInEnglish" ), &bb, false );
@@ -1323,7 +1333,7 @@ void MadOptionsDialog::LoadOptions(void)
 
 void MadOptionsDialog::ButtonOKClick(wxCommandEvent& WXUNUSED(event))
 {
-	long lo;
+	long lo, ml;
 	bool error = false;
 	wxString errtext( _( "Invalid value of \"%s(%s)\"" ) );
 
@@ -1349,7 +1359,7 @@ void MadOptionsDialog::ButtonOKClick(wxCommandEvent& WXUNUSED(event))
 		error = true;
 	}
 
-	if( !EditMaxColumns->GetValue().ToLong( &lo ) || lo <= 0 || lo > 4096 )
+	if( !EditMaxColumns->GetValue().ToLong( &ml ) || ml <= 0 || ml > 4096 )
 	{
 		wxLogError( errtext + _(": Should be 1~4096"), StaticText9->GetLabel().c_str(), EditMaxColumns->GetValue().c_str() );
 		error = true;
@@ -1364,6 +1374,12 @@ void MadOptionsDialog::ButtonOKClick(wxCommandEvent& WXUNUSED(event))
 	if( !EditIndentColumns->GetValue().ToLong( &lo ) || lo <= 0 || lo > 256 )
 	{
 		wxLogError( errtext + _(": Should be 1~256"), StaticText11->GetLabel().c_str(), EditIndentColumns->GetValue().c_str() );
+		error = true;
+	}
+
+	if( !EditHintColumns->GetValue().ToLong( &lo ) || lo <= 0 || lo > ml )
+	{
+		wxLogError( errtext + _(": Should be 1~") + EditMaxColumns->GetValue(), StaticText11->GetLabel().c_str(), EditHintColumns->GetValue().c_str() );
 		error = true;
 	}
 
