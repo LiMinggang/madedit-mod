@@ -3106,6 +3106,18 @@ namespace mad_python {
 		wxString input = wxGetTextFromUser( wxMessage, wxCaption );
 		return std::string( input.mb_str(wxConvUTF8) );
 	}
+
+	const std::string Utf8ToLocal(const std::string& str)
+	{
+		wxString wxStr( str.c_str(), wxConvUTF8 );
+		return std::string( wxStr.mb_str(wxConvLibc) );
+	}
+
+	const std::string LocalToUtf8(const std::string& str)
+	{
+		wxString wxStr( str.c_str(), wxConvLibc );
+		return std::string( wxStr.mb_str(wxConvUTF8) );
+	}
 };
 
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( FindTextNext_member_overloads, FindTextNext, 4, 8 )
@@ -3547,5 +3559,7 @@ BOOST_PYTHON_MODULE( madpython ) {
 	;
 	def( "MsgBox", &MsgBox, MsgBox_overloads( args( "message", "caption", "style" ), "Message Dialog Box" ) );
 	def( "InputBox", &InputBox, InputBox_overloads( args( "message", "caption" ), "Input Dialog Box" ) );
+	def( "Utf8ToLocal", &Utf8ToLocal, "" );
+	def( "LocalToUtf8", &LocalToUtf8, "" );
 }
 #endif //__MADPYTHON__

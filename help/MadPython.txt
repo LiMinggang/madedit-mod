@@ -12,7 +12,7 @@ About:
 MadPython is a minimized Python which is used as an embedded macro script for 
 automation of MadEdit-Mod. The Python is based on the work of Adie
 (http://www.adintr.com/article/blog/embedpython_source.html) and was updated 
-to Python 2.7.16. Lots of Python modules were removed to reduce the size of it. 
+to Python 2.7.17. Lots of Python modules were removed to reduce the size of it. 
 So, you may get errors while importing some of the standard modules. However, 
 I don't think it's a problem for the purpose to use it as a macro script language.
 
@@ -26,9 +26,9 @@ Note: The APIs are listed as C++ functions.
 
 Note:
     Not supported Python modules:
-    cPickle, _io, datetime, _random, cStringIO, _lsprof, _collections, _struct,
-    _sre, time, _locale, _headq, _functools, _weakref, itertools, _ctypes and
-    all the modules that was implemented by Python, Eg, re, shutil, etc.
+    locale, cPickle, _io, datetime, _random, cStringIO, _lsprof, _collections,
+    _struct, _sre, time, _locale, _headq, _functools, _weakref, itertools, _ctypes
+    and all the modules that was implemented in Python, Eg, re, shutil, etc.
 
     Not supported Python internal ojbects: bytearray, memoryobject
 
@@ -365,8 +365,6 @@ void Html2PlainText()
 void SetColumnSelection(int startlineid, int startxpos, int hlines, int wlines)
 void SelectWholeLine()
 long GetIndentCountByPos( long endpos )
-int MsgBox(std::string message, std::string caption = "Message", long style = wxOK | wxCENTRE)
-std::string InputBox(std::string message, std::string caption = "Input Text")
 void SetInsertPairForSelection( bool value )
 bool GetInsertPairForSelection()
 bool IsZeroSelected()
@@ -377,6 +375,12 @@ void CopyUnmarkedLines()
 void CutUnmarkedLines()
 void CopyCutDeleteUnmarkedLines( bool copyLines = false, bool deleteLines = false )
 void ReplaceBookmarkedLines()
+
+// Not relating to text edit
+int MsgBox(std::string message, std::string caption = "Message", long style = wxOK | wxCENTRE)
+std::string InputBox(std::string message, std::string caption = "Input Text")
+std::string Utf8ToLocal(std::string str)
+std::string LocalToUtf8(std::string str)
 
 MadEditCommand
 ====
