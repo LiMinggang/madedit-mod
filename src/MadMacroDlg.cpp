@@ -92,6 +92,8 @@ extern int MadMessageBox(const wxString& message,
 								 wxWindow *parent = nullptr,
 								 int x = wxDefaultCoord, int y = wxDefaultCoord);
 MadMacroDlg *g_MadMacroDlg = nullptr;
+wxTextCtrl *g_Output;
+
 wxString MadMacroDlg::m_PyacroContext;
 MadMacroDlg::MadMacroDlg(wxWindow* parent,wxWindowID id,const wxPoint& WXUNUSED(pos),const wxSize& WXUNUSED(size))
 {
@@ -143,6 +145,7 @@ MadMacroDlg::MadMacroDlg(wxWindow* parent,wxWindowID id,const wxPoint& WXUNUSED(
 	BoxSizer1->Add(BoxSizer3, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5);
 	BoxSizer4 = new wxBoxSizer(wxHORIZONTAL);
 	WxMemoOutput = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(640,240), wxTE_MULTILINE|wxTE_READONLY|wxTE_WORDWRAP|wxDOUBLE_BORDER|wxVSCROLL, wxDefaultValidator, _T("wxID_ANY"));
+	g_Output = WxMemoOutput;
 	BoxSizer4->Add(WxMemoOutput, 1, wxALL|wxEXPAND, 5);
 	BoxSizer1->Add(BoxSizer4, 1, wxALL|wxEXPAND, 5);
 	WxMemoOutput->Show(m_debug);
@@ -177,6 +180,7 @@ MadMacroDlg::~MadMacroDlg()
 	//(*Destroy(MadMacroDlg)
 	//*)
 	g_MadMacroDlg = nullptr;
+	g_Output = nullptr;
 }
 
 void MadMacroDlg::SetPyScript(wxString & pyscript)

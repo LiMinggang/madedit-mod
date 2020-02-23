@@ -125,7 +125,7 @@ Packing for FreeBSD
 Mod v0.4.19
 Fix: Disable safe mode in PanChinese search
 Fix: String encoding bug in MadPython #304
-New: Utf8ToLocal and LocalToUtf8 for MadPython
+New: PrintStr, Utf8ToLocal and LocalToUtf8 for MadPython
 Add more Regex error strings for translation
 Update Simplifed Chinese translation
 

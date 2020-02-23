@@ -29,6 +29,7 @@
 	extern wxStatusBar *g_StatusBar;
 	extern MadEdit *g_ActiveMadEdit;
 	extern MadEdit *g_CurrentMadEdit;
+	extern wxTextCtrl *g_Output;
 #else
 	MadEdit *g_ActiveMadEdit = nullptr;
 	MadEdit *g_CurrentMadEdit = nullptr;
@@ -3118,6 +3119,15 @@ namespace mad_python {
 		wxString wxStr( str.c_str(), wxConvLibc );
 		return std::string( wxStr.mb_str(wxConvUTF8) );
 	}
+
+	void PrintStr(const std::string& str)
+	{
+		if(g_Output)
+		{
+			wxString wxStr( str.c_str(), wxConvUTF8 );
+			g_Output->AppendText(wxStr+ "\n");
+		}
+	}
 };
 
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( FindTextNext_member_overloads, FindTextNext, 4, 8 )
@@ -3559,6 +3569,7 @@ BOOST_PYTHON_MODULE( madpython ) {
 	;
 	def( "MsgBox", &MsgBox, MsgBox_overloads( args( "message", "caption", "style" ), "Message Dialog Box" ) );
 	def( "InputBox", &InputBox, InputBox_overloads( args( "message", "caption" ), "Input Dialog Box" ) );
+	def( "PrintStr", &PrintStr, "" );
 	def( "Utf8ToLocal", &Utf8ToLocal, "" );
 	def( "LocalToUtf8", &LocalToUtf8, "" );
 }

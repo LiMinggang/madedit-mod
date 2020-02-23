@@ -379,6 +379,7 @@ void ReplaceBookmarkedLines()
 // Not relating to text edit
 int MsgBox(std::string message, std::string caption = "Message", long style = wxOK | wxCENTRE)
 std::string InputBox(std::string message, std::string caption = "Input Text")
+void PrintStr(std::string message) //For debug output
 std::string Utf8ToLocal(std::string str)
 std::string LocalToUtf8(std::string str)
 
