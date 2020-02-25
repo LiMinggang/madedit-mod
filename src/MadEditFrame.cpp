@@ -9265,7 +9265,7 @@ void MadEditFrame::OnToolsRunTempMacro( wxCommandEvent& WXUNUSED(event) )
 		g_MadMacroDlg = new MadMacroDlg( this );
 	}
 
-	g_MadMacroDlg->SetEncoding(g_ActiveMadEdit->GetEncodingName());
+	//g_MadMacroDlg->SetEncoding(g_ActiveMadEdit->GetEncodingName());
 
 	if( g_SearchReplaceDialog != nullptr )
 	{ g_SearchReplaceDialog->Show( false ); }
@@ -9417,7 +9417,7 @@ void MadEditFrame::OnToolsPlayRecMacro( wxCommandEvent& WXUNUSED(event) )
 			{
 				g_MadMacroDlg = new MadMacroDlg( this );
 			}
-			g_MadMacroDlg->SetEncoding(g_ActiveMadEdit->GetEncodingName());
+			//g_MadMacroDlg->SetEncoding(g_ActiveMadEdit->GetEncodingName());
 
 			wxString endline( wxT( "\r" ) );
 

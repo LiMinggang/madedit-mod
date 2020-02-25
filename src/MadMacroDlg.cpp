@@ -168,6 +168,7 @@ MadMacroDlg::MadMacroDlg(wxWindow* parent,wxWindowID id,const wxPoint& WXUNUSED(
 	m_Pymacro->SetInsertSpacesInsteadOfTab(true);
 	m_Pymacro->SetWantTab(true);
 	m_Pymacro->SetSyntax(wxT("MadPython"));
+	m_Pymacro->SetEncoding("UTF8");
 	m_Pymacro->SetDisplayBookmark(false);
 	if(m_PyacroContext == wxEmptyString)
 	{
@@ -308,6 +309,8 @@ void MadMacroDlg::OnButtonResetClick(wxCommandEvent& WXUNUSED(event))
 	if (m_Pymacro->GetInsertNewLineType() == nltDOS) endline += wxT("\n");
 	else if (m_Pymacro->GetInsertNewLineType() == nltUNIX) endline = wxT("\n");
 	m_PyacroContext = (wxString(wxT("#Create MadEdit Object for the active edit")) + endline + wxT("medit = MadEdit()") + endline + endline);
+	m_Pymacro->SetText( m_PyacroContext );
+	WxMemoOutput->Clear();
 }
 
 void MadMacroDlg::OnEditUndo( wxCommandEvent& WXUNUSED(event) )
