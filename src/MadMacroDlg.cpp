@@ -19,6 +19,55 @@
 
 //(*IdInit(MadMacroDlg)
 //*)
+#if 0
+#include <iostream>
+#include <fstream>
+class wxStreamToTextRedirectorUnicode : public std::wstreambuf
+{
+private:
+  void Init(wxTextCtrl *text)
+  {
+    m_text = text;
+    m_sbufOld = m_ostr.rdbuf();
+    m_ostr.rdbuf(this);
+  }
+
+public:
+  wxStreamToTextRedirectorUnicode(wxTextCtrl *text)
+    : m_ostr(std::wcout)
+  {
+    Init(text);
+  }
+
+  wxStreamToTextRedirectorUnicode(wxTextCtrl *text, std::wostream *ostr)
+    : m_ostr(*ostr)
+  {
+    Init(text);
+  }
+
+  ~wxStreamToTextRedirectorUnicode()
+  {
+    m_ostr.rdbuf(m_sbufOld);
+  }
+
+  // override streambuf method
+  int_type overflow(int_type i) wxOVERRIDE
+  {
+   m_text->AppendText( (wxChar)i );
+   return 0;
+  }
+
+private:
+  wxTextCtrl *m_text;
+
+  // the stream we're redirecting
+  std::wostream &m_ostr;
+
+  // the old streambuf (before we changed it)
+  std::wstreambuf *m_sbufOld;
+};
+#endif
+
 MadMacroDlg::wxCmdEvtHandlerMap_t MadMacroDlg::m_menu_evt_map[] =
 {
 	// edit
@@ -215,12 +264,10 @@ void MadMacroDlg::OnWxButtonRunClick(wxCommandEvent& WXUNUSED(event))
 			}
 			if(g_EmbeddedPython)
 			{
-				wxMBConv * current = wxConvCurrent;
-				wxConvCurrent = dynamic_cast<wxMBConv *>(&wxConvUTF8);
-				wxASSERT(wxConvCurrent);
 				if (m_debug)
 				{
-					wxStreamToTextRedirector redirector((wxTextCtrl *)WxMemoOutput);
+					//wxStreamToTextRedirector redirector((wxTextCtrl *)WxMemoOutput);
+					//wxStreamToTextRedirectorUnicode redirector((wxTextCtrl *)WxMemoOutput);
 					g_MainFrame->SetMacroRunning();
 					g_EmbeddedPython->exec(std::string(pystr.mb_str(wxConvUTF8)));
 					g_MainFrame->SetMacroStopped();
@@ -231,7 +278,6 @@ void MadMacroDlg::OnWxButtonRunClick(wxCommandEvent& WXUNUSED(event))
 					g_EmbeddedPython->exec(std::string(pystr.mb_str(wxConvUTF8)));
 					g_MainFrame->SetMacroStopped();
 				}
-				wxConvCurrent = current;
 			}
 		}
 	}
@@ -250,7 +296,7 @@ void MadMacroDlg::OnWxButtonResultClick(wxCommandEvent& WXUNUSED(event))
 	GetSizer()->Fit(this);
 	GetSizer()->SetSizeHints(this);
 	Layout();
-	Refresh(true);
+	Refresh();
 	if(m_debug)
 		WxButtonResult->SetLabel(_("Results <<"));
 	else

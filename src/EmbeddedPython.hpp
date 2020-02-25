@@ -20,6 +20,7 @@
 
 namespace py = ::boost::python;
 
+extern void PrintString(const std::string& str);
 namespace embedded_python {
 
 	enum direction_type
@@ -44,7 +45,7 @@ namespace embedded_python {
 			if( m_write_fn )
 			{ m_write_fn( text ); }
 			else
-			{ std::cout << text; }
+			{ std::wcout << text; }
 		}
 
 	public:
@@ -57,13 +58,13 @@ namespace embedded_python {
 
 	static std::auto_ptr<stdout_redirector> make_stdout_redirector()
 	{
-		std::auto_ptr<stdout_redirector> ptr( new stdout_redirector );
+		std::auto_ptr<stdout_redirector> ptr( new stdout_redirector(PrintString) );
 		return ptr;
 	}
 
 	static std::auto_ptr<stderr_redirector> make_stderr_redirector()
 	{
-		std::auto_ptr<stderr_redirector> ptr( new stderr_redirector );
+		std::auto_ptr<stderr_redirector> ptr( new stderr_redirector(PrintString) );
 		return ptr;
 	}
 }

@@ -10,6 +10,9 @@
 #define __MADPYTHON__
 #include "MadUtils.h"
 #include <stdexcept>
+#include <iostream>
+#include <string>
+
 //#include <Python.h>
 
 #define BOOST_PYTHON_STATIC_LIB
@@ -42,6 +45,16 @@ extern int MadMessageBox( const wxString& message,
 						  wxWindow *parent = nullptr,
 						  int x = wxDefaultCoord, int y = wxDefaultCoord );
 
+void PrintString(const std::string& str)
+{
+	if(g_Output)
+	{
+		wxString wxStr( str.c_str(), wxConvUTF8 );
+		g_Output->AppendText(wxStr);
+	}
+	else
+	{ std::wcout << str; }
+}
 
 // Ugly bigger switch than bigger map
 bool FromCmdToString( wxString &cmdStr, long madCmd ) {
@@ -3107,27 +3120,6 @@ namespace mad_python {
 		wxString input = wxGetTextFromUser( wxMessage, wxCaption );
 		return std::string( input.mb_str(wxConvUTF8) );
 	}
-
-	const std::string Utf8ToLocal(const std::string& str)
-	{
-		wxString wxStr( str.c_str(), wxConvUTF8 );
-		return std::string( wxStr.mb_str(wxConvLibc) );
-	}
-
-	const std::string LocalToUtf8(const std::string& str)
-	{
-		wxString wxStr( str.c_str(), wxConvLibc );
-		return std::string( wxStr.mb_str(wxConvUTF8) );
-	}
-
-	void PrintStr(const std::string& str)
-	{
-		if(g_Output)
-		{
-			wxString wxStr( str.c_str(), wxConvUTF8 );
-			g_Output->AppendText(wxStr+ "\n");
-		}
-	}
 };
 
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( FindTextNext_member_overloads, FindTextNext, 4, 8 )
@@ -3569,8 +3561,5 @@ BOOST_PYTHON_MODULE( madpython ) {
 	;
 	def( "MsgBox", &MsgBox, MsgBox_overloads( args( "message", "caption", "style" ), "Message Dialog Box" ) );
 	def( "InputBox", &InputBox, InputBox_overloads( args( "message", "caption" ), "Input Dialog Box" ) );
-	def( "PrintStr", &PrintStr, "" );
-	def( "Utf8ToLocal", &Utf8ToLocal, "" );
-	def( "LocalToUtf8", &LocalToUtf8, "" );
 }
 #endif //__MADPYTHON__
