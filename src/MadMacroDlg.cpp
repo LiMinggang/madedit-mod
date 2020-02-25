@@ -262,22 +262,12 @@ void MadMacroDlg::OnWxButtonRunClick(wxCommandEvent& WXUNUSED(event))
 					g_EmbeddedPython = 0;
 				}
 			}
+
 			if(g_EmbeddedPython)
 			{
-				if (m_debug)
-				{
-					//wxStreamToTextRedirector redirector((wxTextCtrl *)WxMemoOutput);
-					//wxStreamToTextRedirectorUnicode redirector((wxTextCtrl *)WxMemoOutput);
-					g_MainFrame->SetMacroRunning();
-					g_EmbeddedPython->exec(std::string(pystr.mb_str(wxConvUTF8)));
-					g_MainFrame->SetMacroStopped();
-				}
-				else
-				{
-					g_MainFrame->SetMacroRunning();
-					g_EmbeddedPython->exec(std::string(pystr.mb_str(wxConvUTF8)));
-					g_MainFrame->SetMacroStopped();
-				}
+				g_MainFrame->SetMacroRunning();
+				g_EmbeddedPython->exec(std::string(pystr.mb_str(wxConvUTF8)));
+				g_MainFrame->SetMacroStopped();
 			}
 		}
 	}
@@ -297,7 +287,7 @@ void MadMacroDlg::OnWxButtonResultClick(wxCommandEvent& WXUNUSED(event))
 	GetSizer()->SetSizeHints(this);
 	Layout();
 	Refresh();
-	if(m_debug)
+	if(IsDebugOn())
 		WxButtonResult->SetLabel(_("Results <<"));
 	else
 		WxButtonResult->SetLabel(_("Results >>"));
