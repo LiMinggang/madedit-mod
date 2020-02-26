@@ -128,6 +128,7 @@ Fix: String encoding bug in MadPython #304
 Fix: print in MadPython can output unicode string now
 Fix: Reset MadMacro Dialog
 New: Configurable column number of the column hint indicator #303
+New: Reset MadPython console output
 Add more Regex error strings for translation
 Update Simplified Chinese translation
 

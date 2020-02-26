@@ -53,7 +53,7 @@ void PrintString(const std::string& str)
 		g_Output->AppendText(wxStr);
 	}
 	else
-	{ std::wcout << str; }
+	{ std::cout << str; }
 }
 
 // Ugly bigger switch than bigger map

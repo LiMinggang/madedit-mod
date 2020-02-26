@@ -45,7 +45,7 @@ namespace embedded_python {
 			if( m_write_fn )
 			{ m_write_fn( text ); }
 			else
-			{ std::wcout << text; }
+			{ std::cout << text; }
 		}
 
 	public:

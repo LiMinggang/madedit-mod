@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.18\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-23 21:59+0800\n"
-"PO-Revision-Date: 2020-02-23 22:25+0800\n"
+"POT-Creation-Date: 2020-02-26 19:00+0800\n"
+"PO-Revision-Date: 2020-02-26 19:02+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit-Mod <minggang.li@gmail.com>\n"
 "Language: zh_CN\n"
@@ -191,7 +191,7 @@ msgstr "取消"
 msgid "File '%s' already exists, do you really want to overwrite it?"
 msgstr "文件 '%s' 已存在，是否真要覆盖？"
 
-#: wxstd.po.cpp:45 ../src/MadWordCountDialog.cpp:78 ../src/MadMacroDlg.cpp:139
+#: wxstd.po.cpp:45 ../src/MadWordCountDialog.cpp:78 ../src/MadMacroDlg.cpp:190
 msgid "&Close"
 msgstr "关闭(&C)"
 
@@ -1371,8 +1371,8 @@ msgstr "将选取的文字转为半角字"
 
 #: ../src/MadEditFrame.cpp:2335 ../src/MadEditFrame.cpp:6824
 #: ../src/MadEditFrame.cpp:6828 ../src/MadSearchReplaceDialog.cpp:2503
-#: ../src/MadSearchReplaceDialog.cpp:2507 ../src/MadMacroDlg.cpp:690
-#: ../src/MadMacroDlg.cpp:694
+#: ../src/MadSearchReplaceDialog.cpp:2507 ../src/MadMacroDlg.cpp:732
+#: ../src/MadMacroDlg.cpp:736
 msgid "To Halfwidth by Options..."
 msgstr "转成半角字（使用选项）…"
 
@@ -1390,8 +1390,8 @@ msgstr "将选取的文字转为全角字"
 
 #: ../src/MadEditFrame.cpp:2337 ../src/MadEditFrame.cpp:6890
 #: ../src/MadEditFrame.cpp:6894 ../src/MadSearchReplaceDialog.cpp:2566
-#: ../src/MadSearchReplaceDialog.cpp:2570 ../src/MadMacroDlg.cpp:757
-#: ../src/MadMacroDlg.cpp:761
+#: ../src/MadSearchReplaceDialog.cpp:2570 ../src/MadMacroDlg.cpp:799
+#: ../src/MadMacroDlg.cpp:803
 msgid "To Fullwidth by Options..."
 msgstr "转成全角字（使用选项）…"
 
@@ -2696,7 +2696,7 @@ msgid "List all recent opened files"
 msgstr "列出最近打开过的所有文件"
 
 #: ../src/MadEditFrame.cpp:3708 ../src/MadSearchReplaceDialog.cpp:1837
-#: ../src/MadPython.hpp:2587 ../src/MadPython.hpp:2613
+#: ../src/MadPython.hpp:2600 ../src/MadPython.hpp:2626
 msgid "Search Results"
 msgstr "查找结果"
 
@@ -2722,14 +2722,14 @@ msgid "Cannot load this file:"
 msgstr "无法载入这个文件："
 
 #: ../src/MadEditFrame.cpp:4891 ../src/MadEditFrame.cpp:9636
-#: ../src/MadSearchReplaceDialog.cpp:2823 ../src/MadMacroDlg.cpp:212
-#: ../src/MadMacroDlg.cpp:1004
+#: ../src/MadSearchReplaceDialog.cpp:2823 ../src/MadMacroDlg.cpp:266
+#: ../src/MadMacroDlg.cpp:1046
 msgid "Memory allocation failed"
 msgstr "分配内存失败"
 
 #: ../src/MadEditFrame.cpp:4891 ../src/MadEditFrame.cpp:9636
-#: ../src/MadSearchReplaceDialog.cpp:2823 ../src/MadMacroDlg.cpp:212
-#: ../src/MadMacroDlg.cpp:1004
+#: ../src/MadSearchReplaceDialog.cpp:2823 ../src/MadMacroDlg.cpp:266
+#: ../src/MadMacroDlg.cpp:1046
 msgid "Error"
 msgstr "错误"
 
@@ -2819,40 +2819,39 @@ msgstr ""
 " 不存在。该文件可能已经被删除了。你希望把它从最近访问文件列表中删除吗？"
 
 #: ../src/MadEditFrame.cpp:6671 ../src/MadSearchReplaceDialog.cpp:2360
-#: ../src/MadMacroDlg.cpp:544
+#: ../src/MadMacroDlg.cpp:586
 msgid "Delimiters:"
 msgstr "分隔符："
 
 #: ../src/MadEditFrame.cpp:6671 ../src/MadSearchReplaceDialog.cpp:2360
-#: ../src/MadMacroDlg.cpp:544
+#: ../src/MadMacroDlg.cpp:586
 msgid "Revert Hex String"
 msgstr "还原十六进制字符串"
 
 #: ../src/MadEditFrame.cpp:6819 ../src/MadEditFrame.cpp:6885
 #: ../src/MadSearchReplaceDialog.cpp:2498
-#: ../src/MadSearchReplaceDialog.cpp:2561 ../src/MadMacroDlg.cpp:685
-#: ../src/MadMacroDlg.cpp:752
+#: ../src/MadSearchReplaceDialog.cpp:2561 ../src/MadMacroDlg.cpp:727
+#: ../src/MadMacroDlg.cpp:794
 msgid "ASCII characters"
 msgstr "ASCII 字符"
 
 #: ../src/MadEditFrame.cpp:6819 ../src/MadEditFrame.cpp:6885
 #: ../src/MadSearchReplaceDialog.cpp:2498
-#: ../src/MadSearchReplaceDialog.cpp:2561 ../src/MadMacroDlg.cpp:685
-#: ../src/MadMacroDlg.cpp:752
+#: ../src/MadSearchReplaceDialog.cpp:2561 ../src/MadMacroDlg.cpp:727
+#: ../src/MadMacroDlg.cpp:794
 msgid "Japanese characters"
 msgstr "日文"
 
 #: ../src/MadEditFrame.cpp:6820 ../src/MadEditFrame.cpp:6886
 #: ../src/MadSearchReplaceDialog.cpp:2499
-#: ../src/MadSearchReplaceDialog.cpp:2562 ../src/MadMacroDlg.cpp:686
-#: ../src/MadMacroDlg.cpp:753
+#: ../src/MadSearchReplaceDialog.cpp:2562 ../src/MadMacroDlg.cpp:728
+#: ../src/MadMacroDlg.cpp:795
 msgid "Korean characters"
 msgstr "韩文"
 
 #: ../src/MadEditFrame.cpp:6820 ../src/MadEditFrame.cpp:6886
 #: ../src/MadSearchReplaceDialog.cpp:2499
-#: ../src/MadSearchReplaceDialog.cpp:2562 ../src/MadMacroDlg.cpp:686
-#: ../src/MadMacroDlg.cpp:753
+#: ../src/MadSearchReplaceDialog.cpp:2562 ../src/MadMacroDlg.cpp:795
 msgid "other characters"
 msgstr "其他文字"
 
@@ -2861,9 +2860,9 @@ msgstr "其他文字"
 #: ../src/MadSearchReplaceDialog.cpp:2503
 #: ../src/MadSearchReplaceDialog.cpp:2507
 #: ../src/MadSearchReplaceDialog.cpp:2566
-#: ../src/MadSearchReplaceDialog.cpp:2570 ../src/MadMacroDlg.cpp:690
-#: ../src/MadMacroDlg.cpp:694 ../src/MadMacroDlg.cpp:757
-#: ../src/MadMacroDlg.cpp:761
+#: ../src/MadSearchReplaceDialog.cpp:2570 ../src/MadMacroDlg.cpp:732
+#: ../src/MadMacroDlg.cpp:736 ../src/MadMacroDlg.cpp:799
+#: ../src/MadMacroDlg.cpp:803
 msgid "Choose the characters you want to convert:"
 msgstr "选择想转换的文字："
 
@@ -3114,7 +3113,7 @@ msgid "Processing %s of %s files..."
 msgstr "第 %s 个文件处理中（共有 %s 个）..."
 
 #: ../src/MadFindInFilesDialog.cpp:749 ../src/MadSearchReplaceDialog.cpp:1721
-#: ../src/MadPython.hpp:2591 ../src/MadPython.hpp:2618
+#: ../src/MadPython.hpp:2604 ../src/MadPython.hpp:2631
 msgid "Search \""
 msgstr "查找 “"
 
@@ -3431,8 +3430,8 @@ msgstr "二进制数据匹配（相同）"
 msgid " results"
 msgstr " 结果"
 
-#: ../src/MadSearchReplaceDialog.cpp:1810 ../src/MadPython.hpp:2591
-#: ../src/MadPython.hpp:2618
+#: ../src/MadSearchReplaceDialog.cpp:1810 ../src/MadPython.hpp:2604
+#: ../src/MadPython.hpp:2631
 #, c-format
 msgid "(%s hits in 1 file)"
 msgstr "(在一个文件中匹配 %s 次)"
@@ -4508,25 +4507,33 @@ msgstr "\"%s:%s\" 不是正确的值"
 msgid ": Valid range is 0~512, 0 means NO PADDING"
 msgstr "：有效范围是0～512，0意味着不填充"
 
-#: ../src/MadMacroDlg.cpp:110
+#: ../src/MadMacroDlg.cpp:160
 msgid "MadEdit Macro"
 msgstr "MadEdit 宏"
 
-#: ../src/MadMacroDlg.cpp:136
+#: ../src/MadMacroDlg.cpp:187
 msgid "&Run"
 msgstr "运行(&R)"
 
-#: ../src/MadMacroDlg.cpp:141
+#: ../src/MadMacroDlg.cpp:192
 msgid "Reset"
 msgstr "重置"
 
-#: ../src/MadMacroDlg.cpp:143 ../src/MadMacroDlg.cpp:257
+#: ../src/MadMacroDlg.cpp:194
+msgid "Clear Output"
+msgstr "清理输出信息"
+
+#: ../src/MadMacroDlg.cpp:196 ../src/MadMacroDlg.cpp:298
 msgid "Results >>"
 msgstr "显示结果 >>"
 
-#: ../src/MadMacroDlg.cpp:255
+#: ../src/MadMacroDlg.cpp:296
 msgid "Results <<"
 msgstr "隐藏结果 <<"
+
+#: ../src/MadMacroDlg.cpp:728
+msgid "Other characters"
+msgstr "其他文字"
 
 #: ../src/MadPrintout.h:21
 msgid "MadEdit-Mod Printout"

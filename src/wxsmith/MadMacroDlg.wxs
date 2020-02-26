@@ -27,18 +27,18 @@
 			<object class="sizeritem">
 				<object class="wxBoxSizer" variable="BoxSizer3" member="no">
 					<object class="sizeritem">
-						<object class="wxButton" name="wxID_OK" variable="WxButtonRun" member="no">
+						<object class="wxButton" name="wxID_OK" variable="wxButtonRun" member="no">
 							<label>&amp;Run</label>
 							<default>1</default>
-							<handler function="OnWxButtonRunClick" entry="EVT_BUTTON" />
+							<handler function="OnButtonRunClick" entry="EVT_BUTTON" />
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
 					</object>
 					<object class="sizeritem">
-						<object class="wxButton" name="wxID_CANCEL" variable="WxButtonClose" member="no">
+						<object class="wxButton" name="wxID_CANCEL" variable="wxButtonClose" member="no">
 							<label>&amp;Close</label>
-							<handler function="OnWxButtonCloseClick" entry="EVT_BUTTON" />
+							<handler function="OnButtonCloseClick" entry="EVT_BUTTON" />
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
@@ -50,12 +50,19 @@
 						</object>
 						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
 						<border>5</border>
-						<option>1</option>
 					</object>
 					<object class="sizeritem">
-						<object class="wxButton" name="wxID_ANY" variable="WxButtonResult" member="yes">
+						<object class="wxButton" name="wxID_ANY" variable="wxButtonClearResults" member="no">
+							<label>Clear Output</label>
+							<handler function="OnButtonClearResultsClick" entry="EVT_BUTTON" />
+						</object>
+						<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+						<border>5</border>
+					</object>
+					<object class="sizeritem">
+						<object class="wxButton" name="wxID_ANY" variable="wxButtonResult" member="yes">
 							<label>Results &gt;&gt;</label>
-							<handler function="OnWxButtonResultClick" entry="EVT_BUTTON" />
+							<handler function="OnButtonResultClick" entry="EVT_BUTTON" />
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>
@@ -69,7 +76,7 @@
 					<object class="sizeritem">
 						<object class="wxTextCtrl" name="wxID_ANY" variable="WxMemoOutput" member="yes">
 							<size>640,240</size>
-							<style>wxTE_MULTILINE|wxTE_READONLY|wxTE_WORDWRAP|wxDOUBLE_BORDER|wxVSCROLL</style>
+							<style>wxTE_MULTILINE|wxTE_READONLY|wxTE_WORDWRAP|wxBORDER_DOUBLE|wxVSCROLL</style>
 						</object>
 						<flag>wxALL|wxEXPAND</flag>
 						<border>5</border>

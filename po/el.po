@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: madedit-mod 0.4.18\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-23 21:59+0800\n"
+"POT-Creation-Date: 2020-02-26 19:00+0800\n"
 "PO-Revision-Date: 2019-04-22 21:51+0800\n"
 "Last-Translator: nikos papadopoulos <nikos769@yahoo.gr>\n"
 "Language-Team: https://github.com/nikoss/my-translation-contributions\n"
@@ -193,7 +193,7 @@ msgstr ""
 "\n"
 "Θέλεις, σίγουρα, να απανωγραφεί;"
 
-#: wxstd.po.cpp:45 ../src/MadWordCountDialog.cpp:78 ../src/MadMacroDlg.cpp:139
+#: wxstd.po.cpp:45 ../src/MadWordCountDialog.cpp:78 ../src/MadMacroDlg.cpp:190
 msgid "&Close"
 msgstr "&Κλείσιμο"
 
@@ -1381,8 +1381,8 @@ msgstr "Μετατροπή της επιλογής σε μισού-πλάτου�
 
 #: ../src/MadEditFrame.cpp:2335 ../src/MadEditFrame.cpp:6824
 #: ../src/MadEditFrame.cpp:6828 ../src/MadSearchReplaceDialog.cpp:2503
-#: ../src/MadSearchReplaceDialog.cpp:2507 ../src/MadMacroDlg.cpp:690
-#: ../src/MadMacroDlg.cpp:694
+#: ../src/MadSearchReplaceDialog.cpp:2507 ../src/MadMacroDlg.cpp:732
+#: ../src/MadMacroDlg.cpp:736
 msgid "To Halfwidth by Options..."
 msgstr "Σε Μισού-Πλάτους κατά τις Επιλογές..."
 
@@ -1400,8 +1400,8 @@ msgstr "Μετατροπή της επιλογής σε πλήρους-πλάτ�
 
 #: ../src/MadEditFrame.cpp:2337 ../src/MadEditFrame.cpp:6890
 #: ../src/MadEditFrame.cpp:6894 ../src/MadSearchReplaceDialog.cpp:2566
-#: ../src/MadSearchReplaceDialog.cpp:2570 ../src/MadMacroDlg.cpp:757
-#: ../src/MadMacroDlg.cpp:761
+#: ../src/MadSearchReplaceDialog.cpp:2570 ../src/MadMacroDlg.cpp:799
+#: ../src/MadMacroDlg.cpp:803
 msgid "To Fullwidth by Options..."
 msgstr "Σε Πλήρους-πλάτους κατά τις Επιλογές..."
 
@@ -2742,7 +2742,7 @@ msgid "List all recent opened files"
 msgstr "Καταλογίζει όλα τα πρόσφατα ανοιγμένα αρχεία"
 
 #: ../src/MadEditFrame.cpp:3708 ../src/MadSearchReplaceDialog.cpp:1837
-#: ../src/MadPython.hpp:2587 ../src/MadPython.hpp:2613
+#: ../src/MadPython.hpp:2600 ../src/MadPython.hpp:2626
 msgid "Search Results"
 msgstr "Αποτελέσματα Αναζήτησης"
 
@@ -2768,14 +2768,14 @@ msgid "Cannot load this file:"
 msgstr "Αδυναμία φόρτωσης αυτού του αρχείου:"
 
 #: ../src/MadEditFrame.cpp:4891 ../src/MadEditFrame.cpp:9636
-#: ../src/MadSearchReplaceDialog.cpp:2823 ../src/MadMacroDlg.cpp:212
-#: ../src/MadMacroDlg.cpp:1004
+#: ../src/MadSearchReplaceDialog.cpp:2823 ../src/MadMacroDlg.cpp:266
+#: ../src/MadMacroDlg.cpp:1046
 msgid "Memory allocation failed"
 msgstr "Η δέσμευση μνήμης απέτυχε"
 
 #: ../src/MadEditFrame.cpp:4891 ../src/MadEditFrame.cpp:9636
-#: ../src/MadSearchReplaceDialog.cpp:2823 ../src/MadMacroDlg.cpp:212
-#: ../src/MadMacroDlg.cpp:1004
+#: ../src/MadSearchReplaceDialog.cpp:2823 ../src/MadMacroDlg.cpp:266
+#: ../src/MadMacroDlg.cpp:1046
 msgid "Error"
 msgstr "Σφάλμα"
 
@@ -2867,40 +2867,39 @@ msgstr ""
 "Θα ήθελες να απομακρυνθεί από το κατάστιχο των πρόσφατων αρχείων;"
 
 #: ../src/MadEditFrame.cpp:6671 ../src/MadSearchReplaceDialog.cpp:2360
-#: ../src/MadMacroDlg.cpp:544
+#: ../src/MadMacroDlg.cpp:586
 msgid "Delimiters:"
 msgstr "Διαχωριστικά:"
 
 #: ../src/MadEditFrame.cpp:6671 ../src/MadSearchReplaceDialog.cpp:2360
-#: ../src/MadMacroDlg.cpp:544
+#: ../src/MadMacroDlg.cpp:586
 msgid "Revert Hex String"
 msgstr "Επαναφορά Δεκαεξαδικού Στίχου"
 
 #: ../src/MadEditFrame.cpp:6819 ../src/MadEditFrame.cpp:6885
 #: ../src/MadSearchReplaceDialog.cpp:2498
-#: ../src/MadSearchReplaceDialog.cpp:2561 ../src/MadMacroDlg.cpp:685
-#: ../src/MadMacroDlg.cpp:752
+#: ../src/MadSearchReplaceDialog.cpp:2561 ../src/MadMacroDlg.cpp:727
+#: ../src/MadMacroDlg.cpp:794
 msgid "ASCII characters"
 msgstr "ASCII χαρακτήρες"
 
 #: ../src/MadEditFrame.cpp:6819 ../src/MadEditFrame.cpp:6885
 #: ../src/MadSearchReplaceDialog.cpp:2498
-#: ../src/MadSearchReplaceDialog.cpp:2561 ../src/MadMacroDlg.cpp:685
-#: ../src/MadMacroDlg.cpp:752
+#: ../src/MadSearchReplaceDialog.cpp:2561 ../src/MadMacroDlg.cpp:727
+#: ../src/MadMacroDlg.cpp:794
 msgid "Japanese characters"
 msgstr "Γιαπωνέζικοι χαρακτήρες"
 
 #: ../src/MadEditFrame.cpp:6820 ../src/MadEditFrame.cpp:6886
 #: ../src/MadSearchReplaceDialog.cpp:2499
-#: ../src/MadSearchReplaceDialog.cpp:2562 ../src/MadMacroDlg.cpp:686
-#: ../src/MadMacroDlg.cpp:753
+#: ../src/MadSearchReplaceDialog.cpp:2562 ../src/MadMacroDlg.cpp:728
+#: ../src/MadMacroDlg.cpp:795
 msgid "Korean characters"
 msgstr "Κορεάτικοι χαρακτήρες"
 
 #: ../src/MadEditFrame.cpp:6820 ../src/MadEditFrame.cpp:6886
 #: ../src/MadSearchReplaceDialog.cpp:2499
-#: ../src/MadSearchReplaceDialog.cpp:2562 ../src/MadMacroDlg.cpp:686
-#: ../src/MadMacroDlg.cpp:753
+#: ../src/MadSearchReplaceDialog.cpp:2562 ../src/MadMacroDlg.cpp:795
 msgid "other characters"
 msgstr "άλλοι χαρακτήρες"
 
@@ -2909,9 +2908,9 @@ msgstr "άλλοι χαρακτήρες"
 #: ../src/MadSearchReplaceDialog.cpp:2503
 #: ../src/MadSearchReplaceDialog.cpp:2507
 #: ../src/MadSearchReplaceDialog.cpp:2566
-#: ../src/MadSearchReplaceDialog.cpp:2570 ../src/MadMacroDlg.cpp:690
-#: ../src/MadMacroDlg.cpp:694 ../src/MadMacroDlg.cpp:757
-#: ../src/MadMacroDlg.cpp:761
+#: ../src/MadSearchReplaceDialog.cpp:2570 ../src/MadMacroDlg.cpp:732
+#: ../src/MadMacroDlg.cpp:736 ../src/MadMacroDlg.cpp:799
+#: ../src/MadMacroDlg.cpp:803
 msgid "Choose the characters you want to convert:"
 msgstr "Επέλεξε τους χαρακτήρες που θα ήθελες να μετατραπούν:"
 
@@ -3164,7 +3163,7 @@ msgid "Processing %s of %s files..."
 msgstr "Επεξεργασία %s από %s αρχεία..."
 
 #: ../src/MadFindInFilesDialog.cpp:749 ../src/MadSearchReplaceDialog.cpp:1721
-#: ../src/MadPython.hpp:2591 ../src/MadPython.hpp:2618
+#: ../src/MadPython.hpp:2604 ../src/MadPython.hpp:2631
 msgid "Search \""
 msgstr "Αναζήτηση \""
 
@@ -3483,8 +3482,8 @@ msgstr "Ταιριάσματα δυαδικού αρχείου"
 msgid " results"
 msgstr " αποτελέσματα"
 
-#: ../src/MadSearchReplaceDialog.cpp:1810 ../src/MadPython.hpp:2591
-#: ../src/MadPython.hpp:2618
+#: ../src/MadSearchReplaceDialog.cpp:1810 ../src/MadPython.hpp:2604
+#: ../src/MadPython.hpp:2631
 #, c-format
 msgid "(%s hits in 1 file)"
 msgstr "(%s επιτυχίες σε 1 αρχείο)"
@@ -4629,25 +4628,34 @@ msgstr "Μη έγκυρη τιμή του \"%s:%s\""
 msgid ": Valid range is 0~512, 0 means NO PADDING"
 msgstr ": Το έγκυρο εύρος είναι 0~512, το 0 σημαίνει ΧΩΡΙΣ ΓΕΜΙΣΜΑ"
 
-#: ../src/MadMacroDlg.cpp:110
+#: ../src/MadMacroDlg.cpp:160
 msgid "MadEdit Macro"
 msgstr "ΜαντΈντιτ Μακροεντολή"
 
-#: ../src/MadMacroDlg.cpp:136
+#: ../src/MadMacroDlg.cpp:187
 msgid "&Run"
 msgstr "Εκ&τέλεση"
 
-#: ../src/MadMacroDlg.cpp:141
+#: ../src/MadMacroDlg.cpp:192
 msgid "Reset"
 msgstr "Επαναφορά"
 
-#: ../src/MadMacroDlg.cpp:143 ../src/MadMacroDlg.cpp:257
+#: ../src/MadMacroDlg.cpp:194
+msgid "Clear Output"
+msgstr ""
+
+#: ../src/MadMacroDlg.cpp:196 ../src/MadMacroDlg.cpp:298
 msgid "Results >>"
 msgstr "Αποτελέσματα >>"
 
-#: ../src/MadMacroDlg.cpp:255
+#: ../src/MadMacroDlg.cpp:296
 msgid "Results <<"
 msgstr "Αποτελέσματα <<"
+
+#: ../src/MadMacroDlg.cpp:728
+#, fuzzy
+msgid "Other characters"
+msgstr "άλλοι χαρακτήρες"
 
 #: ../src/MadPrintout.h:21
 msgid "MadEdit-Mod Printout"

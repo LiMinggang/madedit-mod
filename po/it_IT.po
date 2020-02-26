@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.18\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-23 21:59+0800\n"
+"POT-Creation-Date: 2020-02-26 19:00+0800\n"
 "PO-Revision-Date: 2015-11-24 19:35+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
@@ -191,7 +191,7 @@ msgstr "Annulla"
 msgid "File '%s' already exists, do you really want to overwrite it?"
 msgstr "Il File '%s' esiste già, vuoi sovrascriverlo?"
 
-#: wxstd.po.cpp:45 ../src/MadWordCountDialog.cpp:78 ../src/MadMacroDlg.cpp:139
+#: wxstd.po.cpp:45 ../src/MadWordCountDialog.cpp:78 ../src/MadMacroDlg.cpp:190
 msgid "&Close"
 msgstr "&Chiudi"
 
@@ -1382,8 +1382,8 @@ msgstr "Converte la Selezione in Half-Width"
 
 #: ../src/MadEditFrame.cpp:2335 ../src/MadEditFrame.cpp:6824
 #: ../src/MadEditFrame.cpp:6828 ../src/MadSearchReplaceDialog.cpp:2503
-#: ../src/MadSearchReplaceDialog.cpp:2507 ../src/MadMacroDlg.cpp:690
-#: ../src/MadMacroDlg.cpp:694
+#: ../src/MadSearchReplaceDialog.cpp:2507 ../src/MadMacroDlg.cpp:732
+#: ../src/MadMacroDlg.cpp:736
 msgid "To Halfwidth by Options..."
 msgstr ""
 
@@ -1401,8 +1401,8 @@ msgstr "Converte la Selezione in Full-Width"
 
 #: ../src/MadEditFrame.cpp:2337 ../src/MadEditFrame.cpp:6890
 #: ../src/MadEditFrame.cpp:6894 ../src/MadSearchReplaceDialog.cpp:2566
-#: ../src/MadSearchReplaceDialog.cpp:2570 ../src/MadMacroDlg.cpp:757
-#: ../src/MadMacroDlg.cpp:761
+#: ../src/MadSearchReplaceDialog.cpp:2570 ../src/MadMacroDlg.cpp:799
+#: ../src/MadMacroDlg.cpp:803
 msgid "To Fullwidth by Options..."
 msgstr ""
 
@@ -2763,7 +2763,7 @@ msgid "List all recent opened files"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:3708 ../src/MadSearchReplaceDialog.cpp:1837
-#: ../src/MadPython.hpp:2587 ../src/MadPython.hpp:2613
+#: ../src/MadPython.hpp:2600 ../src/MadPython.hpp:2626
 msgid "Search Results"
 msgstr ""
 
@@ -2789,14 +2789,14 @@ msgid "Cannot load this file:"
 msgstr "Non posso caricare il File:"
 
 #: ../src/MadEditFrame.cpp:4891 ../src/MadEditFrame.cpp:9636
-#: ../src/MadSearchReplaceDialog.cpp:2823 ../src/MadMacroDlg.cpp:212
-#: ../src/MadMacroDlg.cpp:1004
+#: ../src/MadSearchReplaceDialog.cpp:2823 ../src/MadMacroDlg.cpp:266
+#: ../src/MadMacroDlg.cpp:1046
 msgid "Memory allocation failed"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:4891 ../src/MadEditFrame.cpp:9636
-#: ../src/MadSearchReplaceDialog.cpp:2823 ../src/MadMacroDlg.cpp:212
-#: ../src/MadMacroDlg.cpp:1004
+#: ../src/MadSearchReplaceDialog.cpp:2823 ../src/MadMacroDlg.cpp:266
+#: ../src/MadMacroDlg.cpp:1046
 msgid "Error"
 msgstr ""
 
@@ -2894,40 +2894,39 @@ msgid ""
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:6671 ../src/MadSearchReplaceDialog.cpp:2360
-#: ../src/MadMacroDlg.cpp:544
+#: ../src/MadMacroDlg.cpp:586
 msgid "Delimiters:"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:6671 ../src/MadSearchReplaceDialog.cpp:2360
-#: ../src/MadMacroDlg.cpp:544
+#: ../src/MadMacroDlg.cpp:586
 msgid "Revert Hex String"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:6819 ../src/MadEditFrame.cpp:6885
 #: ../src/MadSearchReplaceDialog.cpp:2498
-#: ../src/MadSearchReplaceDialog.cpp:2561 ../src/MadMacroDlg.cpp:685
-#: ../src/MadMacroDlg.cpp:752
+#: ../src/MadSearchReplaceDialog.cpp:2561 ../src/MadMacroDlg.cpp:727
+#: ../src/MadMacroDlg.cpp:794
 msgid "ASCII characters"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:6819 ../src/MadEditFrame.cpp:6885
 #: ../src/MadSearchReplaceDialog.cpp:2498
-#: ../src/MadSearchReplaceDialog.cpp:2561 ../src/MadMacroDlg.cpp:685
-#: ../src/MadMacroDlg.cpp:752
+#: ../src/MadSearchReplaceDialog.cpp:2561 ../src/MadMacroDlg.cpp:727
+#: ../src/MadMacroDlg.cpp:794
 msgid "Japanese characters"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:6820 ../src/MadEditFrame.cpp:6886
 #: ../src/MadSearchReplaceDialog.cpp:2499
-#: ../src/MadSearchReplaceDialog.cpp:2562 ../src/MadMacroDlg.cpp:686
-#: ../src/MadMacroDlg.cpp:753
+#: ../src/MadSearchReplaceDialog.cpp:2562 ../src/MadMacroDlg.cpp:728
+#: ../src/MadMacroDlg.cpp:795
 msgid "Korean characters"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:6820 ../src/MadEditFrame.cpp:6886
 #: ../src/MadSearchReplaceDialog.cpp:2499
-#: ../src/MadSearchReplaceDialog.cpp:2562 ../src/MadMacroDlg.cpp:686
-#: ../src/MadMacroDlg.cpp:753
+#: ../src/MadSearchReplaceDialog.cpp:2562 ../src/MadMacroDlg.cpp:795
 msgid "other characters"
 msgstr ""
 
@@ -2936,9 +2935,9 @@ msgstr ""
 #: ../src/MadSearchReplaceDialog.cpp:2503
 #: ../src/MadSearchReplaceDialog.cpp:2507
 #: ../src/MadSearchReplaceDialog.cpp:2566
-#: ../src/MadSearchReplaceDialog.cpp:2570 ../src/MadMacroDlg.cpp:690
-#: ../src/MadMacroDlg.cpp:694 ../src/MadMacroDlg.cpp:757
-#: ../src/MadMacroDlg.cpp:761
+#: ../src/MadSearchReplaceDialog.cpp:2570 ../src/MadMacroDlg.cpp:732
+#: ../src/MadMacroDlg.cpp:736 ../src/MadMacroDlg.cpp:799
+#: ../src/MadMacroDlg.cpp:803
 msgid "Choose the characters you want to convert:"
 msgstr ""
 
@@ -3195,7 +3194,7 @@ msgid "Processing %s of %s files..."
 msgstr "Elaborazione %d di %d Files..."
 
 #: ../src/MadFindInFilesDialog.cpp:749 ../src/MadSearchReplaceDialog.cpp:1721
-#: ../src/MadPython.hpp:2591 ../src/MadPython.hpp:2618
+#: ../src/MadPython.hpp:2604 ../src/MadPython.hpp:2631
 #, fuzzy
 msgid "Search \""
 msgstr "Cerca"
@@ -3533,8 +3532,8 @@ msgstr "Files Binari trovati"
 msgid " results"
 msgstr "%d risultati"
 
-#: ../src/MadSearchReplaceDialog.cpp:1810 ../src/MadPython.hpp:2591
-#: ../src/MadPython.hpp:2618
+#: ../src/MadSearchReplaceDialog.cpp:1810 ../src/MadPython.hpp:2604
+#: ../src/MadPython.hpp:2631
 #, c-format
 msgid "(%s hits in 1 file)"
 msgstr ""
@@ -4659,28 +4658,37 @@ msgstr "Valore di \"%s\" non valido"
 msgid ": Valid range is 0~512, 0 means NO PADDING"
 msgstr ""
 
-#: ../src/MadMacroDlg.cpp:110
+#: ../src/MadMacroDlg.cpp:160
 #, fuzzy
 msgid "MadEdit Macro"
 msgstr "Apri..."
 
-#: ../src/MadMacroDlg.cpp:136
+#: ../src/MadMacroDlg.cpp:187
 msgid "&Run"
 msgstr ""
 
-#: ../src/MadMacroDlg.cpp:141
+#: ../src/MadMacroDlg.cpp:192
 msgid "Reset"
 msgstr ""
 
-#: ../src/MadMacroDlg.cpp:143 ../src/MadMacroDlg.cpp:257
+#: ../src/MadMacroDlg.cpp:194
+msgid "Clear Output"
+msgstr ""
+
+#: ../src/MadMacroDlg.cpp:196 ../src/MadMacroDlg.cpp:298
 #, fuzzy
 msgid "Results >>"
 msgstr "%d risultati"
 
-#: ../src/MadMacroDlg.cpp:255
+#: ../src/MadMacroDlg.cpp:296
 #, fuzzy
 msgid "Results <<"
 msgstr "%d risultati"
+
+#: ../src/MadMacroDlg.cpp:728
+#, fuzzy
+msgid "Other characters"
+msgstr "Caratteri di Controllo"
 
 #: ../src/MadPrintout.h:21
 msgid "MadEdit-Mod Printout"
@@ -4871,9 +4879,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Find Results"
 #~ msgstr "%d risultati"
-
-#~ msgid "Control Characters"
-#~ msgstr "Caratteri di Controllo"
 
 #~ msgid "Basic Latin"
 #~ msgstr "Latino Base"

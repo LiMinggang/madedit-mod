@@ -31,7 +31,7 @@ class MadMacroDlg: public wxDialog
 		void SetEncoding(const wxString &encname);
 
 		//(*Declarations(MadMacroDlg)
-		wxButton* WxButtonResult;
+		wxButton* wxButtonResult;
 		wxTextCtrl* WxMemoOutput;
 		MadEdit*  m_Pymacro;
 		//*)
@@ -46,11 +46,12 @@ class MadMacroDlg: public wxDialog
 	private:
 
 		//(*Handlers(MadMacroDlg)
-		void OnWxButtonRunClick(wxCommandEvent& event);
-		void OnWxButtonCloseClick(wxCommandEvent& event);
-		void OnWxButtonResultClick(wxCommandEvent& event);
+		void OnButtonRunClick(wxCommandEvent& event);
+		void OnButtonCloseClick(wxCommandEvent& event);
+		void OnButtonResultClick(wxCommandEvent& event);
 		void MadMacroDlgClose(wxCloseEvent& event);
 		void OnButtonResetClick(wxCommandEvent& event);
+		void OnButtonClearResultsClick(wxCommandEvent& event);
 		//*)
 
 		void OnEditUndo( wxCommandEvent& WXUNUSED(event) );
