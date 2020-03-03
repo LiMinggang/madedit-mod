@@ -150,7 +150,7 @@ Note: Rollback *nix build to static link with wxWidgets because UI issues report
 12.Fix: Replace buggy wxChoice with wxComboBox for Dictionary selection
 13.Fix: Syntax combo box status is not updated while switching among opened files
 14.Fix: Unicode converting bug if character is greater than 0x10000 in ConvertChinese chars(Windows only)
-15.Fix: Safe mode in Chinese convertion #293
+15.Fix: Safe mode in Chinese conversion #293
 16.Fix: Regex search bug in FindTextNext
 17.Fix: Regex search bug in FindTextPrevious
 18.Update wxWidgets to 3.1.3
