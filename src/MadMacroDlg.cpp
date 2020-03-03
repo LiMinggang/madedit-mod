@@ -162,7 +162,7 @@ MadMacroDlg::MadMacroDlg(wxWindow* parent,wxWindowID id,const wxPoint& WXUNUSED(
 	Move(wxDefaultPosition);
 	BoxSizer1 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer2 = new wxBoxSizer(wxHORIZONTAL);
-    m_debug = false;
+	m_debug = false;
 	m_Pymacro = new MadEdit(this, wxID_ANY, wxPoint(0, 0), pymacro);
 	m_Pymacro->SetFixedWidthMode(false);
 	m_Pymacro->SetRecordCaretMovements(false);

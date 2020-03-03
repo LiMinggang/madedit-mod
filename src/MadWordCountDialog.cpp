@@ -91,7 +91,7 @@ MadWordCountDialog::MadWordCountDialog(wxWindow* parent,wxWindowID WXUNUSED(id),
 	wxArrayString detail;
 	g_ActiveMadEdit->WordCount(g_ActiveMadEdit->IsSelected(), words, chars, spaces, halfwidths, fullwidths, lines, &detail);
 	if( IsMacroRecording() )
-		RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("WordCount(%s)"), g_ActiveMadEdit->IsSelected()?wxT("True"):wxT("False")));
+		RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("WordCount(selection=%s)"), g_ActiveMadEdit->IsSelected()?wxT("True"):wxT("False")));
 
 	if(g_ActiveMadEdit->IsSelected())
 	{

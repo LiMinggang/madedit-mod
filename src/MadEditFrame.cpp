@@ -6514,7 +6514,7 @@ void MadEditFrame::OnEditSortAscending( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->SortLines( sfAscending, begin, end );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SortLines(MadSortLinesFlags.Ascending, %d, %d)" ), begin, end ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SortLines(MadSortLinesFlags.Ascending, beginline=%d, endline=%d)" ), begin, end ) );
 	}
 }
 
@@ -6527,7 +6527,7 @@ void MadEditFrame::OnEditSortDescending( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->SortLines( sfDescending, begin, end );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SortLines(MadSortLinesFlags.Descending, %d, %d)" ), begin, end ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SortLines(MadSortLinesFlags.Descending, beginline=%d, endline=%d)" ), begin, end ) );
 	}
 }
 
@@ -6540,7 +6540,7 @@ void MadEditFrame::OnEditSortAscendingCase( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->SortLines( sfAscending | sfCaseSensitive, begin, end );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SortLines(MadSortLinesFlags.Ascending|MadSortLinesFlags.CaseSensitive, %d, %d)" ), begin, end ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SortLines(MadSortLinesFlags.Ascending|MadSortLinesFlags.CaseSensitive, beginline=%d, endline=%d)" ), begin, end ) );
 	}
 }
 
@@ -6553,7 +6553,7 @@ void MadEditFrame::OnEditSortDescendingCase( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->SortLines( sfDescending | sfCaseSensitive, begin, end );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SortLines(MadSortLinesFlags.Descending|MadSortLinesFlags.CaseSensitive, %d, %d)" ), begin, end ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SortLines(MadSortLinesFlags.Descending|MadSortLinesFlags.CaseSensitive, beginline=%d, endline=%d)" ), begin, end ) );
 	}
 }
 
@@ -6584,7 +6584,7 @@ void MadEditFrame::OnEditSortByOptions( wxCommandEvent& WXUNUSED(event) )
 			if(cs != 0) sflags += wxString(wxT("|MadSortLinesFlags.CaseSensitive"));
 			if(num != 0) sflags += wxString(wxT("|MadSortLinesFlags.NumericSort"));
 			if(rem != 0) sflags += wxString(wxT("|MadSortLinesFlags.RemoveDuplicate"));;
-			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SortLines(%s, %d, %d)" ), sflags.c_str(), begin, end ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SortLines(%s, beginline=%d, endline=%d)" ), sflags.c_str(), begin, end ) );
 		}
 	}
 }
@@ -6634,7 +6634,7 @@ void MadEditFrame::OnEditSortOptions( wxCommandEvent& WXUNUSED(event) )
 			if(cs != 0) sflags += wxString(wxT("|MadSortLinesFlags.CaseSensitive"));
 			if(num != 0) sflags += wxString(wxT("|MadSortLinesFlags.NumericSort"));
 			if(rem != 0) sflags += wxString(wxT("|MadSortLinesFlags.RemoveDuplicate"));;
-			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SortLines(%s, %d, %d)" ), sflags.c_str(), begin, end ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SortLines(%s, beginline=%d, endline=%d)" ), sflags.c_str(), begin, end ) );
 		}
 	}
 
@@ -6648,7 +6648,7 @@ void MadEditFrame::OnEditCopyAsHexString( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->CopyAsHexString( false );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "CopyAsHexString(False)" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "CopyAsHexString(withSpace=False)" ) ) );
 	}
 }
 
@@ -6659,7 +6659,7 @@ void MadEditFrame::OnEditCopyAsHexStringWithSpace( wxCommandEvent& WXUNUSED(even
 		g_ActiveMadEdit->CopyAsHexString( true );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "CopyAsHexString(True)" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "CopyAsHexString(withSpace=True)" ) ) );
 	}
 }
 
@@ -6678,7 +6678,7 @@ void MadEditFrame::OnEditCopyRevertHex( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->CopyRevertHex( str );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxString::Format( wxT( "CopyRevertHex(%s)" ), str.c_str() ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxString::Format( wxT( "CopyRevertHex(withSpace=%s)" ), str.c_str() ) ) );
 	}
 }
 
@@ -6850,7 +6850,7 @@ void MadEditFrame::OnEditToHalfWidthByOptions( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->ToHalfWidth( ascii, japanese, korean, other );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "ToHalfWidth(%s, %s, %s)" ), ascii ? wxT( "True" ) : wxT( "False" ),
+			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "ToHalfWidth(ascii=%s, japanese=%s? korean=%s, other=%s)" ), ascii ? wxT( "True" ) : wxT( "False" ),
 							  japanese ? wxT( "True" ) : wxT( "False" ), korean ? wxT( "True" ) : wxT( "False" ), other ? wxT( "True" ) : wxT( "False" ) ) );
 	}
 }
@@ -6916,7 +6916,7 @@ void MadEditFrame::OnEditToFullWidthByOptions( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->ToFullWidth( ascii, japanese, korean, other );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "ToFullWidth(%s, %s, %s)" ), ascii ? wxT( "True" ) : wxT( "False" ),
+			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "ToFullWidth(ascii=%s, japanese=%s? korean=%s, other=%s)" ), ascii ? wxT( "True" ) : wxT( "False" ),
 							  japanese ? wxT( "True" ) : wxT( "False" ), korean ? wxT( "True" ) : wxT( "False" ), other ? wxT( "True" ) : wxT( "False" ) ) );
 	}
 }
@@ -7083,7 +7083,7 @@ void MadEditFrame::OnEditInsertNumbers( wxCommandEvent& WXUNUSED(event) )
 			g_ActiveMadEdit->Refresh( false );
 
 			if( IsMacroRecording() )
-				RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "InsertIncrementalNumber(%s, %s, %s, %s, %s, %s, %s, \"%s\", \"%s\")" ),
+				RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "InsertIncrementalNumber(initial=%s, step=%s, total=%s, stepType=%s, fmt=%s, align=%s, zeroPad=%s, pref=\"%s\", post=\"%s\")" ),
 								  wxLongLong( initialNum ).ToString().c_str(), wxLongLong( numStep ).ToString().c_str(), wxLongLong( totalChar ).ToString().c_str(), strStepType.c_str(), strFormat.c_str(), strAlign.c_str(),
 								  g_MadNumberDlg->WxPadChar->GetValue() ? wxT( "True" ) : wxT( "False" ), prefix.c_str(), postfix.c_str() ) );
 		}
@@ -7528,11 +7528,11 @@ void MadEditFrame::OnSearchGoToLine( wxCommandEvent& WXUNUSED(event) )
 		{
 			if( base == 16 )
 			{
-				RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "GoToLine( 0x%X )" ), line ) );
+				RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "GoToLine(line=0x%X)" ), line ) );
 			}
 			else
 			{
-				RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "GoToLine( %s )" ), ( wxLongLong( line ).ToString() ).c_str() ) );
+				RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "GoToLine(line=%s)" ), ( wxLongLong( line ).ToString() ).c_str() ) );
 			}
 		}
 	}
@@ -7579,7 +7579,7 @@ void MadEditFrame::OnSearchGoToPosition( wxCommandEvent& WXUNUSED(event) )
 			wxLongLong wxPos1( pos );
 
 			if( IsMacroRecording() )
-				RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SetCaretPosition(%s)" ), ( wxPos1.ToString() ).c_str() ) );
+				RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SetCaretPosition(pos=%s)" ), ( wxPos1.ToString() ).c_str() ) );
 		}
 	}
 }
@@ -7743,7 +7743,7 @@ void MadEditFrame::OnViewRecentEncoding( wxCommandEvent& event )
 				g_ActiveMadEdit->SetEncoding( enc );
 
 				if( IsMacroRecording() )
-					RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetEncoding(\"" ) ) + enc + wxT( "\")" ) );
+					RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetEncoding(encname=\"" ) ) + enc + wxT( "\")" ) );
 
 				m_RecentEncodings->AddFileToHistory( str );
 				int size;
@@ -7763,7 +7763,7 @@ void MadEditFrame::OnViewSyntax( wxCommandEvent& event )
 		g_ActiveMadEdit->SetSyntax( title );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetSyntax(\"" ) ) + title + wxT( "\")" ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetSyntax(title=\"" ) ) + title + wxT( "\")" ) );
 	}
 }
 
@@ -7779,7 +7779,7 @@ void MadEditFrame::OnViewFontName( wxCommandEvent& event )
 		g_ActiveMadEdit->SetFont( fontname, fs );
 		m_RecentFonts->AddFileToHistory( fontname );
         if( IsMacroRecording() )
-            RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetFontA(" ) ) + fontname + wxT(", ") + wxString::Format("%d", fs) + wxT( ")" ) );
+            RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetFontA(name=" ) ) + fontname + wxT(", size=") + wxString::Format("%d", fs) + wxT( ")" ) );
 	}
 }
 
@@ -7798,7 +7798,7 @@ void MadEditFrame::OnViewRecentFont( wxCommandEvent& event )
 			g_ActiveMadEdit->SetFont( fontname, fs );
 			m_RecentFonts->AddFileToHistory( fontname );
             if( IsMacroRecording() )
-                RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetFontA(" ) ) + fontname + wxT(", ") + wxString::Format("%d", fs) + wxT( ")" ) );
+                RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetFontA(name=" ) ) + fontname + wxT(", size=") + wxString::Format("%d", fs) + wxT( ")" ) );
 		}
 	}
 }
@@ -7876,14 +7876,8 @@ void MadEditFrame::OnViewFixedWidthMode( wxCommandEvent& event )
 
 		if( IsMacroRecording() )
 		{
-			if( event.IsChecked() )
-			{
-				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetFixedWidthMode(True)" ) ) );
-			}
-			else
-			{
-				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetFixedWidthMode(False)" ) ) );
-			}
+			wxString recstr( event.IsChecked() ? wxT( "SetFixedWidthMode(mode=True)" ) : wxT( "SetFixedWidthMode(mode=False)" ));
+			RecordAsMadMacro( g_ActiveMadEdit, recstr );
 		}
 	}
 }
@@ -7896,7 +7890,7 @@ void MadEditFrame::OnViewTabColumn( wxCommandEvent& event )
 		g_ActiveMadEdit->SetTabColumns( col );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SetTabColumns(%d)" ), col ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SetTabColumns(value=%d)" ), col ) );
 	}
 }
 
@@ -8003,7 +7997,7 @@ void MadEditFrame::OnViewLineSpacing( wxCommandEvent& event )
 		g_ActiveMadEdit->SetLineSpacing( ls );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SetLineSpacing(%d)" ), ls ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "SetLineSpacing(percent=%d)" ), ls ) );
 	}
 }
 
@@ -9677,7 +9671,7 @@ void MadEditFrame::OnToolsConvertToDOS( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->ConvertNewLineType( nltDOS );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "ConvertNewLineType(MadNewLineType.Dos)" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "ConvertNewLineType(type=MadNewLineType.Dos)" ) ) );
 	}
 }
 
@@ -9688,7 +9682,7 @@ void MadEditFrame::OnToolsConvertToMAC( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->ConvertNewLineType( nltMAC );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "ConvertNewLineType(MadNewLineType.MAC)" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "ConvertNewLineType(type=MadNewLineType.MAC)" ) ) );
 	}
 }
 
@@ -9699,7 +9693,7 @@ void MadEditFrame::OnToolsConvertToUNIX( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->ConvertNewLineType( nltUNIX );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "ConvertNewLineType(MadNewLineType.UNIX)" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "ConvertNewLineType(type=MadNewLineType.UNIX)" ) ) );
 	}
 }
 
@@ -9710,7 +9704,7 @@ void MadEditFrame::OnToolsInsertDOS( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->SetInsertNewLineType( nltDOS );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetInsertNewLineType(MadNewLineType.DOS)" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetInsertNewLineType(type=MadNewLineType.DOS)" ) ) );
 	}
 }
 void MadEditFrame::OnToolsInsertMAC( wxCommandEvent& WXUNUSED(event) )
@@ -9720,7 +9714,7 @@ void MadEditFrame::OnToolsInsertMAC( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->SetInsertNewLineType( nltMAC );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetInsertNewLineType(MadNewLineType.MAC)" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetInsertNewLineType(type=MadNewLineType.MAC)" ) ) );
 	}
 }
 void MadEditFrame::OnToolsInsertUNIX( wxCommandEvent& WXUNUSED(event) )
@@ -9730,7 +9724,7 @@ void MadEditFrame::OnToolsInsertUNIX( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->SetInsertNewLineType( nltUNIX );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetInsertNewLineType(MadNewLineType.UNIX)" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetInsertNewLineType(type=MadNewLineType.UNIX)" ) ) );
 	}
 }
 
@@ -9773,7 +9767,7 @@ void MadEditFrame::OnToolsConvertEncoding( wxCommandEvent& WXUNUSED(event) )
 					default:
 						flag += wxString(wxT("None"));
 				}
-				RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "ConvertEncoding(\"%s\"," ), g_ConvEncDialog->WxComboBoxEncoding->GetValue().c_str()
+				RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "ConvertEncoding(newenc=\"%s\", flag=" ), g_ConvEncDialog->WxComboBoxEncoding->GetValue().c_str()
 								  ) + flag + wxString(wxT( ")")));
 			}
 
@@ -9803,7 +9797,7 @@ void MadEditFrame::OnToolsSimp2TradChinese( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->ConvertChinese( cefSC2TC );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "ConvertChineseA(MadConvertEncodingFlag.SC2TC)" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "ConvertChineseA(flag=MadConvertEncodingFlag.SC2TC)" ) ) );
 	}
 }
 
@@ -9814,7 +9808,7 @@ void MadEditFrame::OnToolsTrad2SimpChinese( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->ConvertChinese( cefTC2SC );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "ConvertChineseA(MadConvertEncodingFlag.TC2SC)" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "ConvertChineseA(flag=MadConvertEncodingFlag.TC2SC)" ) ) );
 	}
 }
 
@@ -9825,7 +9819,7 @@ void MadEditFrame::OnToolsKanji2TradChinese( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->ConvertChinese( cefJK2TC );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "ConvertChineseA(MadConvertEncodingFlag.JK2TC)" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "ConvertChineseA(flag=MadConvertEncodingFlag.JK2TC)" ) ) );
 	}
 }
 
@@ -9856,7 +9850,7 @@ void MadEditFrame::OnToolsSimp2TradClipboard( wxCommandEvent& WXUNUSED(event) )
 	ConvertChineseInClipboard( ccfSimp2Trad );
 	if( IsMacroRecording() )
 		//RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "ConvertChineseInClipboard(%d)" ), ccfSimp2Trad ) );
-		m_MadMacroScripts.Add( wxString::Format( wxT( "ConvertChineseInClipboard(%d)" ), ccfSimp2Trad ) );
+		m_MadMacroScripts.Add( wxString( wxT( "ConvertChineseInClipboard(flag=MadConvertChineseFlag.SC2TC)" )) );
 }
 
 void MadEditFrame::OnToolsTrad2SimpClipboard( wxCommandEvent& WXUNUSED(event) )
@@ -9864,7 +9858,7 @@ void MadEditFrame::OnToolsTrad2SimpClipboard( wxCommandEvent& WXUNUSED(event) )
 	ConvertChineseInClipboard( ccfTrad2Simp );
 	if( IsMacroRecording() )
 		//RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "ConvertChineseInClipboard(%d)" ), ccfTrad2Simp ) );
-		m_MadMacroScripts.Add( wxString::Format( wxT( "ConvertChineseInClipboard(%d)" ), ccfTrad2Simp ) );
+		m_MadMacroScripts.Add( wxString( wxT( "ConvertChineseInClipboard(flag=MadConvertChineseFlag.Trad2Simp)" )) );
 }
 
 void MadEditFrame::OnToolsKanji2TradClipboard( wxCommandEvent& WXUNUSED(event) )
@@ -9872,7 +9866,7 @@ void MadEditFrame::OnToolsKanji2TradClipboard( wxCommandEvent& WXUNUSED(event) )
 	ConvertChineseInClipboard( ccfKanji2Trad );
 	if( IsMacroRecording() )
 		//RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "ConvertChineseInClipboard(%d)" ), ccfKanji2Trad ) );
-		m_MadMacroScripts.Add( wxString::Format( wxT( "ConvertChineseInClipboard(%d)" ), ccfKanji2Trad ) );
+	m_MadMacroScripts.Add( wxString( wxT( "ConvertChineseInClipboard(flag=MadConvertChineseFlag.Kanji2Trad)" )) );
 }
 
 void MadEditFrame::OnToolsKanji2SimpClipboard( wxCommandEvent& WXUNUSED(event) )
@@ -9880,7 +9874,7 @@ void MadEditFrame::OnToolsKanji2SimpClipboard( wxCommandEvent& WXUNUSED(event) )
 	ConvertChineseInClipboard( ccfKanji2Simp );
 	if( IsMacroRecording() )
 		//RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "ConvertChineseInClipboard(%d)" ), ccfKanji2Simp ) );
-		m_MadMacroScripts.Add( wxString::Format( wxT( "ConvertChineseInClipboard(%d)" ), ccfKanji2Simp ) );
+		m_MadMacroScripts.Add( wxString( wxT( "ConvertChineseInClipboard(flag=MadConvertChineseFlag.Kanji2Simp)" )) );
 }
 
 void MadEditFrame::OnToolsChinese2KanjiClipboard( wxCommandEvent& WXUNUSED(event) )
@@ -9888,7 +9882,7 @@ void MadEditFrame::OnToolsChinese2KanjiClipboard( wxCommandEvent& WXUNUSED(event
 	ConvertChineseInClipboard( ccfChinese2Kanji );
 	if( IsMacroRecording() )
 		//RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "ConvertChineseInClipboard(%d)" ), ccfChinese2Kanji ) );
-		m_MadMacroScripts.Add( wxString::Format( wxT( "ConvertChineseInClipboard(%d)" ), ccfChinese2Kanji ) );
+		m_MadMacroScripts.Add( wxString( wxT( "ConvertChineseInClipboard(flag=MadConvertChineseFlag.Chinese2Kanji)" )) );
 }
 
 void MadEditFrame::OnToolsWordCount( wxCommandEvent& WXUNUSED(event) )

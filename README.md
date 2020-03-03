@@ -5,7 +5,6 @@ madedit-mod
 [![GitHub Latest release](https://img.shields.io/github/release/LiMinggang/madedit-mod/all.svg)](https://github.com/LiMinggang/madedit-mod/releases)
 [![GitHub issues](https://img.shields.io/github/issues/LiMinggang/madedit-mod.svg)](https://github.com/LiMinggang/madedit-mod/issues)
 [![Maintained](https://img.shields.io/maintenance/yes/2020.svg)](https://github.com/LiMinggang/madedit-mod/commits/master)
-[![Coverity Scan Build Status](https://scan.coverity.com/projects/19986/badge.svg)](https://scan.coverity.com/projects/19986)
 [![Ohloh Project Status](https://www.openhub.net/p/madedit-mod/widgets/project_thin_badge.gif)](https://www.openhub.net/p/madedit-mod)
 
 MadEdit Mod(based on the madedit project @ sourceforge)
@@ -90,14 +89,14 @@ Mod v0.4.18
 * New: Zero length match indicator in FindTextPrevious
 * Fix: Fix bug of windows sorting in Windows list dialog
 * Fix: Minor fix for Pan Chinese support
-* Fix: Enable/diable Pan Chinese on clicking Hex searching
+* Fix: Enable/disable Pan Chinese on clicking Hex searching
 * Fix: Pan Chinese on Search in files
 * Fix: Binary file detect bug in FindInFiles
 * Fix: Can't remember Main Window size larger than 1024*768 #296
 * Fix: Replace buggy wxChoice with wxComboBox for Dictionary selection
 * Fix: Syntax combo box status is not updated while switching among opened files
 * Fix: Unicode converting bug if character is greater than 0x10000 in ConvertChinese chars(Windows only)
-* Fix: Safe mode in Chinese convertion #293
+* Fix: Safe mode in Chinese conversion #293
 * Fix: Regex search bug in FindTextNext
 * Fix: Regex search bug in FindTextPrevious
 * Update wxWidgets to 3.1.3
@@ -121,9 +120,9 @@ Known issues
 4. Scroll function on Right click menu of scroll bars only works with Windows
 5. '*' is allowed in file name under Linux/Unix but is used as delimiter for file name and line number, use -d and -w to use it as wildcard
 6. Alt+LeftDown to toggle bookmark does not work on Ubuntu because Alt was a special key(?) for the OS
-7. Preview html will hang on some html files(wxWidgets html view bug)
+7. Preview html will hang on some HTML files(wxWidgets HTML view bug)
 8. wxWidgets GTK3 may have issue under some themes of some Ubuntu dists, eg, Elementry OS
-9. MadPython does not support locale convertion and 'print' can NOT print non-ASCII char correctly
+9. MadPython does not support locale conversion and 'print' can NOT print non-ASCII char correctly
 
 License
 =============

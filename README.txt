@@ -108,9 +108,9 @@ Known issues(that may not be fixed in future releases):
 4. Scroll function on Right click menu of scroll bars only works with Windows
 5. '*' is allowed in file name under Linux/Unix but is used as delimiter for file name and line number, use -d and -w to use it as wildcard
 6. Alt+LeftDown to toggle bookmark does not work on Ubuntu because Alt was a special key(?) for the OS
-7. Preview html will hang on some html files(wxWidgets html view bug)
+7. Preview HTML will hang on some HTML files(wxWidgets HTML view bug)
 8. wxWidgets GTK3 may have issue under some themes of some Ubuntu dists, eg, Elementry OS
-9. MadPython does not support locale convertion and 'print' can NOT print non-ASCII char correctly
+9. MadPython does not support locale conversion and 'print' can NOT print non-ASCII char correctly
 
 Feature/issues to be released
 -----------------------------
@@ -125,10 +125,12 @@ Packing for FreeBSD
 Mod v0.4.19
 Fix: Disable safe mode in PanChinese search
 Fix: String encoding bug in MadPython #304
-Fix: print in MadPython can output unicode string now
+Fix: print in MadPython can output Unicode string now
 Fix: Reset MadMacro Dialog
+Fix: Bugs in Macro Recording
 New: Configurable column number of the column hint indicator #303
 New: Reset MadPython console output
+Improve readability of recorded MadPython
 Add more Regex error strings for translation
 Update Simplified Chinese translation
 
@@ -141,7 +143,7 @@ Note: Rollback *nix build to static link with wxWidgets because UI issues report
 5.New: Zero length match indicator in FindTextPrevious
 6.Fix: Fix bug of windows sorting in Windows list dialog
 7.Fix: Minor fix for Pan Chinese support
-8.Fix: Enable/diable Pan Chinese on clicking Hex searching
+8.Fix: Enable/disable Pan Chinese on clicking Hex searching
 9.Fix: Pan Chinese on Search in files
 10.Fix: Binary file detect bug in FindInFiles
 11.Fix: Can't remember Main Window size larger than 1024*768 #296

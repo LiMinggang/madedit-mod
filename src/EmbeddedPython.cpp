@@ -62,7 +62,7 @@ EmbeddedPython::EmbeddedPython()
             "sys.stderr = redirector.stderr()\n"
             "from madpython import MadEdit, MadEditCommand, "
             "MadCaretType, MadNewLineType, MadConvertEncodingFlag, MadNumberingStepType, "
-            "MadNumberFormat, MadNumberAlign, MadSortLinesFlags, MsgBox, InputBox, MadDlgStyle, MadMsgBoxRet";
+            "MadNumberFormat, MadNumberAlign, MadSortLinesFlags, MsgBox, InputBox, MadDlgStyle, MadMsgBoxRet, ConvertChineseInClipboard";
 
 #if 0
         /* FixMe: exception thrown, mmh - seems a bug in boost.python, see

@@ -24,6 +24,7 @@
 #include <memory>
 
 #include "MadEdit/MadEncoding.h"
+#include "MadEdit/TradSimp.h"
 #include "MadEdit/MadEdit.h"
 #include "MadEdit/MadEditCommand.h"
 
@@ -3120,6 +3121,10 @@ namespace mad_python {
 		wxString input = wxGetTextFromUser( wxMessage, wxCaption );
 		return std::string( input.mb_str(wxConvUTF8) );
 	}
+
+	void ConvertChineseInClipboard( long flag ){
+		::ConvertChineseInClipboard( ( MadConvertChineseFlag )flag );
+	}
 };
 
 BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS( FindTextNext_member_overloads, FindTextNext, 4, 8 )
@@ -3515,6 +3520,13 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.value( "JK2SC", cefJK2SC ) // Japanese Kanji      ==> Simplified Chinese
 	.value( "C2JK", cefC2JK ) // Trad&Simp Chinese   ==> Japanese Kanji
 	;
+	enum_<MadConvertChineseFlag>( "MadConvertChineseFlag" )
+	.value( "Simp2Trad", ccfSimp2Trad ) // Simplified Chinese  ==> Traditional Chinese
+	.value( "Trad2Simp", ccfTrad2Simp ) // Traditional Chinese ==> Simplified Chinese
+	.value( "Kanji2Trad", ccfKanji2Trad ) // Japanese Kanji      ==> Traditional Chinese
+	.value( "Kanji2Simp", ccfKanji2Simp ) // Japanese Kanji      ==> Simplified Chinese
+	.value( "Chinese2Kanji", ccfChinese2Kanji ) // Trad&Simp Chinese   ==> Japanese Kanji
+	;
 	enum_<MadNumberingStepType>( "MadNumberingStepType" )
 	.value( "Linear", mnstLinear )
 	.value( "Exponential", mnstExponential )
@@ -3561,5 +3573,6 @@ BOOST_PYTHON_MODULE( madpython ) {
 	;
 	def( "MsgBox", &MsgBox, MsgBox_overloads( args( "message", "caption", "style" ), "Message Dialog Box" ) );
 	def( "InputBox", &InputBox, InputBox_overloads( args( "message", "caption" ), "Input Dialog Box" ) );
+	def( "ConvertChineseInClipboard", &mad_python::ConvertChineseInClipboard, "" );
 }
 #endif //__MADPYTHON__
