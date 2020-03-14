@@ -642,7 +642,8 @@ protected:
 	void OnUpdateHScrollPos( wxCommandEvent& evt );
 
 	void OnEraseBackground( wxEraseEvent &evt );
-	void OnPaint( wxPaintEvent &evt );
+	void OnPaint( wxPaintEvent &evt ) {return MadEditOnPaint(&evt);}
+	void MadEditOnPaint( wxPaintEvent *pevt = NULL );
 
 	void DoSelectionChanged();
 	void DoStatusChanged();

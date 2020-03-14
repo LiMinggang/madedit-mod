@@ -11004,7 +11004,7 @@ void MadEdit::OnEraseBackground( wxEraseEvent & WXUNUSED(evt))
 	// do nothing
 }
 
-void MadEdit::OnPaint( wxPaintEvent & WXUNUSED(evt) )
+void MadEdit::MadEditOnPaint( wxPaintEvent *evt /*=NULL*/  )
 {
 	//Patch from http://linuxtoy.org/archives/madedit.html
 	//"segmentation fault " in Ubuntu 9.10 while open 2 files might be occurred when using iBus. I changed the default  IM to gcin by im-switch command,
@@ -11521,8 +11521,8 @@ WXLRESULT MadEdit::MSWWindowProc( WXUINT message, WXWPARAM wParam, WXLPARAM lPar
 
 						m_RepaintAll = false;
 						Refresh( false );*/
-						wxPaintEvent evt;
-						OnPaint( evt );
+						//wxPaintEvent evt;
+						MadEditOnPaint( NULL );
 						return 0;
 					}
 				}
