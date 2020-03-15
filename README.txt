@@ -128,6 +128,7 @@ Fix: String encoding bug in MadPython #304
 Fix: print in MadPython can output Unicode string now
 Fix: Reset MadMacro Dialog
 Fix: Bugs in Macro Recording
+Fix: Char display issue with certain font in search/replace input box #305
 New: Configurable column number of the column hint indicator #303
 New: Reset MadPython console output
 Improve readability of recorded MadPython

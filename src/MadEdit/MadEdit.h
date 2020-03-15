@@ -1157,6 +1157,8 @@ public:
 	void ConfigNewDocument();
 	const wxColour & GetTextBgColor() const;
 	const wxColour & GetTextFtColor() const;
+
+	inline int GetCharHeight();
 private: // Printing functions
 	int m_Printing;     // 0: no, <0: Text, >0: Hex
 	bool TextPrinting() { return m_Printing < 0; }

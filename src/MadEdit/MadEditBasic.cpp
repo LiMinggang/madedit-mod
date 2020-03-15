@@ -141,6 +141,11 @@ const int CRLF_Points2[CRLF_Points2_Count+1][2]=
 };
 */
 
+int MadEdit::GetCharHeight()
+{
+	return wxWindow::GetCharHeight();
+}
+
 void MadEdit::SetSyntax( const wxString &title )
 {
 	if( m_Syntax->m_SynAttr->m_Title != title )

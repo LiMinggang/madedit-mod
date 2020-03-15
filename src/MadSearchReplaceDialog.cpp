@@ -23,6 +23,7 @@
 #include "MadSortDialog.h"
 
 extern MadEdit *g_ActiveMadEdit;
+extern MadEdit *g_CurrentMadEdit;
 extern void OnEditMouseRightUp( MadEdit * madedit );
 extern wxMenu *g_Menu_EditPop;
 extern MadNumberDlg * g_MadNumberDlg;
@@ -122,8 +123,6 @@ extern MadRecentList * g_RecentFindText;
 MadSearchReplaceDialog *g_SearchReplaceDialog = nullptr;
 extern bool IsMacroRecording();
 extern void RecordAsMadMacro( MadEdit *, const wxString&, bool = false );
-extern MadEdit *g_ActiveMadEdit;
-extern MadEdit *g_CurrentMadEdit;
 wxProgressDialog *g_SearchProgressDialog = nullptr;
 
 bool OnSearchProgressUpdate( int value, const wxString &newmsg = wxEmptyString, bool *skip = nullptr )
@@ -251,14 +250,14 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 
 	if( m_EnableTransparency )
 	{
-	StaticBoxSizer2 = new wxStaticBoxSizer(wxVERTICAL, this, _("Transparency"));
-	WxRadioLosingFocus = new wxRadioButton(this, wxID_ANY, _("On Losing Focus"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
-	StaticBoxSizer2->Add(WxRadioLosingFocus, 0, wxALL|wxEXPAND, 2);
-	WxRadioAlways = new wxRadioButton(this, wxID_ANY, _("Always"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
-	StaticBoxSizer2->Add(WxRadioAlways, 0, wxALL|wxEXPAND, 2);
-		WxSliderTransDegree = new wxSlider( this, wxID_ANY, 255, 25, 255, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T( "ID_WXSLIDERTRANSDEGREE" ) );
-	StaticBoxSizer2->Add(WxSliderTransDegree, 0, wxALL|wxEXPAND, 2);
-	BoxSizer9->Add(StaticBoxSizer2, 0, wxALL|wxALIGN_TOP, 2);
+		StaticBoxSizer2 = new wxStaticBoxSizer(wxVERTICAL, this, _("Transparency"));
+		WxRadioLosingFocus = new wxRadioButton(this, wxID_ANY, _("On Losing Focus"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
+		StaticBoxSizer2->Add(WxRadioLosingFocus, 0, wxALL|wxEXPAND, 2);
+		WxRadioAlways = new wxRadioButton(this, wxID_ANY, _("Always"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
+		StaticBoxSizer2->Add(WxRadioAlways, 0, wxALL|wxEXPAND, 2);
+			WxSliderTransDegree = new wxSlider( this, wxID_ANY, 255, 25, 255, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T( "ID_WXSLIDERTRANSDEGREE" ) );
+		StaticBoxSizer2->Add(WxSliderTransDegree, 0, wxALL|wxEXPAND, 2);
+		BoxSizer9->Add(StaticBoxSizer2, 0, wxALL|wxALIGN_TOP, 2);
 	}
 	else
 	{
@@ -330,9 +329,11 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	Connect(wxEVT_KEY_DOWN,(wxObjectEventFunction)&MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown);
 #endif
 	//*)
-	int bw, bh;
+	int bw, bh, bhm;
 	// find
 	WxButtonFindNext->GetSize( &bw, &bh );
+	bhm = g_ActiveMadEdit->GetCharHeight();
+	bh = bh > bhm ? bh : bhm;
 	m_OriginInputSize = wxSize( 400, bh );
 	m_FindText = new MadEdit( this, wxID_ANY, wxPoint( 0, 0 ), m_OriginInputSize );
 	m_FindText->SetSingleLineMode( true );
@@ -358,8 +359,8 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	WxBitmapButtonRecentFindText = new wxBitmapButton( this, wxID_ANY, WxBitmapButtonRecentFindText_BITMAP, wxPoint( 0, 0 ), wxSize( bh, bh ), wxBU_AUTODRAW, wxDefaultValidator, _T( "WxBitmapButtonRecentFindText" ) );
 	BoxSizerSearch->Add( WxBitmapButtonRecentFindText, 0, wxALL, 2 );
 	// replace
-	WxButtonReplace->GetSize( &bw, &bh );
-	m_ReplaceText = new MadEdit( this, wxID_ANY, wxPoint( 0, 0 ), wxSize( 400, bh ) );
+	//WxButtonReplace->GetSize( &bw, &bh );
+	m_ReplaceText = new MadEdit( this, wxID_ANY, wxPoint( 0, 0 ), m_OriginInputSize );
 	m_ReplaceText->SetSingleLineMode( true );
 
 	if( g_ActiveMadEdit )
@@ -1366,6 +1367,8 @@ void MadSearchReplaceDialog::MadSearchReplaceDialogActivate( wxActivateEvent& ev
 		{
 			wxString fname;
 			int fsize;
+			int times = WxSliderInputSizer->GetValue();
+			int width = 0, height = 0, bw, bhm;
 			g_ActiveMadEdit->GetFont( fname, fsize );
 			m_FindText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
 			m_FindText->SetFont( fname, 14 );
@@ -1373,6 +1376,13 @@ void MadSearchReplaceDialog::MadSearchReplaceDialogActivate( wxActivateEvent& ev
 			m_ReplaceText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
 			m_ReplaceText->SetFont( fname, 14 );
 			m_ReplaceText->SetSpellCheck( g_ActiveMadEdit->GetSpellCheckStatus() );
+
+			m_FindText->GetSize (&width, &height);
+			WxButtonFindNext->GetSize( &bw, &height );
+			bhm = g_ActiveMadEdit->GetCharHeight() + 10;
+			height = height > bhm ? height : bhm;
+			BoxSizerSearch->SetItemMinSize( m_FindText, width, height*times );
+			BoxSizerReplace->SetItemMinSize( m_ReplaceText, width, height*times );
 		}
 
 		UpdateCheckBoxByCBHex( WxCheckBoxFindHex->GetValue() );
@@ -2049,9 +2059,13 @@ void MadSearchReplaceDialog::WxCheckBoxRegexClick( wxCommandEvent& event )
 void MadSearchReplaceDialog::OnWxSliderInputSizerCmdScroll(wxCommandEvent& WXUNUSED(event))
 {
 	int times = WxSliderInputSizer->GetValue();
-	int width, height = 0;
+	int width = 0, height = 0, bw, bhm;
 	m_FindText->GetSize (&width, &height);
-	BoxSizerSearch->SetItemMinSize( m_FindText, width, m_OriginInputSize.GetHeight()*times );
+	WxButtonFindNext->GetSize( &bw, &height );
+	bhm = g_ActiveMadEdit->GetCharHeight();
+	height = height > bhm ? height : bhm;
+	BoxSizerSearch->SetItemMinSize( m_FindText, width, height*times );
+	BoxSizerReplace->SetItemMinSize( m_ReplaceText, width, height );
 
 	if(times == 1)
 	{
