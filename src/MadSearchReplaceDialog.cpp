@@ -329,20 +329,12 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	Connect(wxEVT_KEY_DOWN,(wxObjectEventFunction)&MadSearchReplaceDialog::MadSearchReplaceDialogKeyDown);
 #endif
 	//*)
-	int bw, bh, bhm;
+	int bw = -1, bh = -1;
 	// find
 	WxButtonFindNext->GetSize( &bw, &bh );
-	bhm = g_ActiveMadEdit->GetCharHeight();
-	bh = bh > bhm ? bh : bhm;
 	m_OriginInputSize = wxSize( 400, bh );
 	m_FindText = new MadEdit( this, wxID_ANY, wxPoint( 0, 0 ), m_OriginInputSize );
 	m_FindText->SetSingleLineMode( true );
-
-	if( g_ActiveMadEdit )
-		m_FindText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
-	else
-		m_FindText->SetEncoding( wxT( "UTF-32LE" ) );
-
 	m_FindText->SetFixedWidthMode( false );
 	m_FindText->SetRecordCaretMovements( false );
 	m_FindText->SetInsertSpacesInsteadOfTab( false );
@@ -359,15 +351,8 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	WxBitmapButtonRecentFindText = new wxBitmapButton( this, wxID_ANY, WxBitmapButtonRecentFindText_BITMAP, wxPoint( 0, 0 ), wxSize( bh, bh ), wxBU_AUTODRAW, wxDefaultValidator, _T( "WxBitmapButtonRecentFindText" ) );
 	BoxSizerSearch->Add( WxBitmapButtonRecentFindText, 0, wxALL, 2 );
 	// replace
-	//WxButtonReplace->GetSize( &bw, &bh );
 	m_ReplaceText = new MadEdit( this, wxID_ANY, wxPoint( 0, 0 ), m_OriginInputSize );
 	m_ReplaceText->SetSingleLineMode( true );
-
-	if( g_ActiveMadEdit )
-		m_ReplaceText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
-	else
-		m_ReplaceText->SetEncoding( wxT( "UTF-32LE" ) );
-
 	m_ReplaceText->SetFixedWidthMode( false );
 	m_ReplaceText->SetRecordCaretMovements( false );
 	m_ReplaceText->SetInsertSpacesInsteadOfTab( false );
@@ -380,6 +365,23 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	m_ReplaceText->SetShowTabChar( true );
 	BoxSizerReplace->Add( m_ReplaceText, 1, wxEXPAND | wxALIGN_LEFT | wxALL, 2 );
 	BoxSizerReplace->SetItemMinSize( m_ReplaceText, 400, bh );
+
+	if (g_ActiveMadEdit)
+	{
+		wxString fname, enc = g_ActiveMadEdit->GetEncodingName();
+		int fsize, fsize1;
+		m_FindText->SetEncoding(enc);
+		m_FindText->GetFont(fname, fsize);
+		g_ActiveMadEdit->GetFont(fname, fsize1);
+		m_FindText->SetFont(fname, fsize);
+		m_ReplaceText->SetFont(fname, fsize);
+	}
+	else
+	{
+		m_FindText->SetEncoding(wxT("UTF-32LE"));
+		m_ReplaceText->SetEncoding(wxT("UTF-32LE"));
+	}
+
 	WxBitmapButtonRecentReplaceText = new wxBitmapButton( this, wxID_ANY, WxBitmapButtonRecentFindText_BITMAP, wxPoint( 0, 0 ), wxSize( bh, bh ), wxBU_AUTODRAW, wxDefaultValidator, _T( "WxBitmapButtonRecentReplaceText" ) );
 	BoxSizerReplace->Add( WxBitmapButtonRecentReplaceText, 0, wxALL, 2 );
 
@@ -1365,22 +1367,20 @@ void MadSearchReplaceDialog::MadSearchReplaceDialogActivate( wxActivateEvent& ev
 	{
 		if( g_ActiveMadEdit )
 		{
-			wxString fname;
-			int fsize;
+			wxString fname, enc = g_ActiveMadEdit->GetEncodingName();
+			int fsize, fsize1;
 			int times = WxSliderInputSizer->GetValue();
-			int width = 0, height = 0, bw, bhm;
-			g_ActiveMadEdit->GetFont( fname, fsize );
-			m_FindText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
-			m_FindText->SetFont( fname, 14 );
+			int width = 0, height = 0;
+			m_FindText->GetFont(fname, fsize);
+			g_ActiveMadEdit->GetFont(fname, fsize1);
+			m_FindText->SetEncoding(enc);
+			m_FindText->SetFont( fname, fsize);
 			m_FindText->SetSpellCheck( g_ActiveMadEdit->GetSpellCheckStatus() );
-			m_ReplaceText->SetEncoding( g_ActiveMadEdit->GetEncodingName() );
-			m_ReplaceText->SetFont( fname, 14 );
+			m_ReplaceText->SetEncoding(enc);
+			m_ReplaceText->SetFont( fname, fsize);
 			m_ReplaceText->SetSpellCheck( g_ActiveMadEdit->GetSpellCheckStatus() );
 
 			m_FindText->GetSize (&width, &height);
-			WxButtonFindNext->GetSize( &bw, &height );
-			bhm = g_ActiveMadEdit->GetCharHeight() + 10;
-			height = height > bhm ? height : bhm;
 			BoxSizerSearch->SetItemMinSize( m_FindText, width, height*times );
 			BoxSizerReplace->SetItemMinSize( m_ReplaceText, width, height*times );
 		}
