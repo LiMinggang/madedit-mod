@@ -195,9 +195,9 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	BoxSizer8 = new wxBoxSizer( wxHORIZONTAL );
 	BoxSizer2 = new wxBoxSizer( wxVERTICAL );
 	BoxSizerSearch = new wxBoxSizer(wxHORIZONTAL);
-	BoxSizer2->Add(BoxSizerSearch, 1, wxALL|wxEXPAND, 0);
+	BoxSizer2->Add(BoxSizerSearch, 1, wxALL|wxEXPAND, 2);
 	BoxSizerReplace = new wxBoxSizer(wxHORIZONTAL);
-	BoxSizer2->Add(BoxSizerReplace, 1, wxALL|wxEXPAND, 0);
+	BoxSizer2->Add(BoxSizerReplace, 1, wxALL|wxEXPAND, 2);
 	BoxSizer6 = new wxBoxSizer(wxVERTICAL);
 	WxCheckBoxMoveFocus = new wxCheckBox(this, wxID_ANY, _("&Move Focus to Editor Window"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
 	WxCheckBoxMoveFocus->SetValue(false);
@@ -345,7 +345,7 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	m_FindText->SetMaxLineLength( DEFAULT_MAX_LINELEN );
 	m_FindText->SetShowEndOfLine(false);
 	m_FindText->SetShowTabChar( true );
-	BoxSizerSearch->Add( m_FindText, 1, wxEXPAND | wxALIGN_LEFT | wxALL, 2 );
+	BoxSizerSearch->Add( m_FindText, 1, wxEXPAND | wxALIGN_LEFT | wxALL, 0 );
 	BoxSizerSearch->SetItemMinSize( m_FindText, 400, bh );
 	wxBitmap WxBitmapButtonRecentFindText_BITMAP( down_xpm );
 	WxBitmapButtonRecentFindText = new wxBitmapButton( this, wxID_ANY, WxBitmapButtonRecentFindText_BITMAP, wxPoint( 0, 0 ), wxSize( bh, bh ), wxBU_AUTODRAW, wxDefaultValidator, _T( "WxBitmapButtonRecentFindText" ) );
@@ -363,7 +363,7 @@ MadSearchReplaceDialog::MadSearchReplaceDialog( wxWindow* parent, wxWindowID id,
 	m_ReplaceText->SetMaxLineLength( DEFAULT_MAX_LINELEN );
 	m_ReplaceText->SetShowEndOfLine(false);
 	m_ReplaceText->SetShowTabChar( true );
-	BoxSizerReplace->Add( m_ReplaceText, 1, wxEXPAND | wxALIGN_LEFT | wxALL, 2 );
+	BoxSizerReplace->Add( m_ReplaceText, 1, wxEXPAND | wxALIGN_LEFT | wxALL, 0 );
 	BoxSizerReplace->SetItemMinSize( m_ReplaceText, 400, bh );
 
 	if (g_ActiveMadEdit)

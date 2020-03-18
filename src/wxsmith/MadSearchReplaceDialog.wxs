@@ -16,11 +16,13 @@
 							<object class="sizeritem">
 								<object class="wxBoxSizer" variable="BoxSizerSearch" member="yes" />
 								<flag>wxALL|wxEXPAND</flag>
+								<border>2</border>
 								<option>1</option>
 							</object>
 							<object class="sizeritem">
 								<object class="wxBoxSizer" variable="BoxSizerReplace" member="yes" />
 								<flag>wxALL|wxEXPAND</flag>
+								<border>2</border>
 								<option>1</option>
 							</object>
 							<object class="sizeritem">
@@ -223,7 +225,6 @@
 								<object class="wxButton" name="wxID_ANY" variable="WxButtonFindNext" member="yes">
 									<label>Find &amp;Next</label>
 									<default>1</default>
-									<handler function="WxButtonFindNextClick" entry="EVT_BUTTON" />
 								</object>
 								<flag>wxALL|wxEXPAND</flag>
 								<border>2</border>
@@ -231,7 +232,6 @@
 							<object class="sizeritem">
 								<object class="wxButton" name="wxID_ANY" variable="WxButtonFindPrev" member="yes">
 									<label>Find &amp;Previous</label>
-									<handler function="WxButtonFindPrevClick" entry="EVT_BUTTON" />
 								</object>
 								<flag>wxALL|wxEXPAND</flag>
 								<border>2</border>
@@ -239,7 +239,6 @@
 							<object class="sizeritem">
 								<object class="wxButton" name="wxID_ANY" variable="WxButtonFindAll" member="yes">
 									<label>Find A&amp;ll</label>
-									<handler function="WxButtonFindAllClick" entry="EVT_BUTTON" />
 								</object>
 								<flag>wxALL|wxEXPAND</flag>
 								<border>2</border>
@@ -247,7 +246,6 @@
 							<object class="sizeritem">
 								<object class="wxButton" name="wxID_ANY" variable="WxButtonFindAllInAll" member="yes">
 									<label>Find All in All&#x0A;Opened</label>
-									<handler function="WxButtonFindAllInAllClick" entry="EVT_BUTTON" />
 								</object>
 								<flag>wxALL|wxEXPAND</flag>
 								<border>2</border>
