@@ -1407,8 +1407,8 @@ void MadSearchReplaceDialog::WxButtonReplaceExpandClick( wxCommandEvent& WXUNUSE
 		wxString fname;
 		int fsize;
 		m_FindText->GetFont( fname, fsize );
-		m_FindText->SetFont( fname, 14 );
-		m_ReplaceText->SetFont( fname, 14 );
+		m_FindText->SetFont( fname, fsize );
+		m_ReplaceText->SetFont( fname, fsize );
 		ShowReplaceUI();
 	}
 	else
