@@ -102,7 +102,7 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID WXUNUSE
 	GridSizer1->Add(RadioBoxBracketStyle, 0, wxALL|wxEXPAND, 2);
 	StaticBoxSizer1 = new wxStaticBoxSizer(wxVERTICAL, Panel1, _("Sample"));
 	StaticText1 = new wxStaticText(Panel1, wxID_ANY, _("Sample of the bracket style option chosen to use:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
-	StaticBoxSizer1->Add(StaticText1, 0, wxALL|wxEXPAND, 5);
+	StaticBoxSizer1->Add(StaticText1, 0, wxALL|wxEXPAND, 2);
 #ifdef MADEDIT_USE_MADEDIT
 	TextSample = new MadEdit(Panel1, wxID_ANY, wxPoint(19, 47), wxSize(300, 300));
 	TextSample->SetStorePropertiesToGlobalConfig(false);
@@ -195,8 +195,8 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID WXUNUSE
 #ifndef MADEDIT_USE_MADEDIT
 	TextSample->SetInsertionPointEnd();
 #endif
-	StaticBoxSizer1->Add(TextSample, 0, wxALL|wxEXPAND, 5);
-	GridSizer1->Add(StaticBoxSizer1, 1, wxALL|wxEXPAND, 5);
+	StaticBoxSizer1->Add(TextSample, 0, wxALL|wxEXPAND, 2);
+	GridSizer1->Add(StaticBoxSizer1, 0, wxALL|wxEXPAND, 2);
 	Panel1->SetSizer(GridSizer1);
 	GridSizer1->Fit(Panel1);
 	GridSizer1->SetSizeHints(Panel1);

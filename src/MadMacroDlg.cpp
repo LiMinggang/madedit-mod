@@ -291,11 +291,11 @@ void MadMacroDlg::OnButtonResultClick(wxCommandEvent& WXUNUSED(event))
 	GetSizer()->Fit(this);
 	GetSizer()->SetSizeHints(this);
 	Layout();
-	Refresh();
 	if(IsDebugOn())
 		wxButtonResult->SetLabel(_("Results <<"));
 	else
 		wxButtonResult->SetLabel(_("Results >>"));
+	Refresh();
 }
 
 void MadMacroDlg::MadMacroDlgClose(wxCloseEvent& WXUNUSED(event))
