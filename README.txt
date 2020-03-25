@@ -135,6 +135,7 @@ New: Reset MadPython console output
 Improve readability of recorded MadPython
 Add more Regex error strings for translation
 Update Simplified Chinese translation
+Update Japanese translation(Thanks Tilt)
 
 Mod v0.4.18
 Note: Rollback *nix build to static link with wxWidgets because UI issues reported
