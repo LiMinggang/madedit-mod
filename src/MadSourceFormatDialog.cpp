@@ -71,12 +71,12 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID WXUNUSE
 	wxStaticText* StaticText9;
 	wxStdDialogButtonSizer* StdDialogButtonSizer1;
 
-	Create(parent, wxID_ANY, _("Source Formatter"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxRESIZE_BORDER|wxCLOSE_BOX, _T("wxID_ANY"));
-	SetClientSize(wxSize(800,500));
+	Create(parent, wxID_ANY, _("Source Formatter"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxCLOSE_BOX|wxBORDER_SIMPLE, _T("wxID_ANY"));
+	SetClientSize(wxDefaultSize);
 	SetMaxSize(wxSize(-1,-1));
 	BoxSizer1 = new wxBoxSizer(wxVERTICAL);
-	AuiNotebook1 = new wxAuiNotebook(this, wxID_ANY, wxDefaultPosition, wxSize(800,500), wxAUI_NB_TOP);
-	Panel1 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxSize(792,490), 0, _T("wxID_ANY"));
+	AuiNotebook1 = new wxAuiNotebook(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxAUI_NB_TOP);
+	Panel1 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	GridSizer1 = new wxGridSizer(0, 2, 0, 0);
 	wxString __wxRadioBoxChoices_1[17] =
 	{
@@ -102,9 +102,9 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID WXUNUSE
 	GridSizer1->Add(RadioBoxBracketStyle, 0, wxALL|wxEXPAND, 2);
 	StaticBoxSizer1 = new wxStaticBoxSizer(wxVERTICAL, Panel1, _("Sample"));
 	StaticText1 = new wxStaticText(Panel1, wxID_ANY, _("Sample of the bracket style option chosen to use:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
-	StaticBoxSizer1->Add(StaticText1, 0, wxALL|wxEXPAND, 2);
+	StaticBoxSizer1->Add(StaticText1, 0, wxALL|wxEXPAND, 5);
 #ifdef MADEDIT_USE_MADEDIT
-	TextSample = new MadEdit(Panel1, wxID_ANY, wxPoint(19, 47), wxSize(300, 300));
+	TextSample = new MadEdit(Panel1, wxID_ANY, wxDefaultPosition, wxSize(500, 300));
 	TextSample->SetStorePropertiesToGlobalConfig(false);
 	TextSample->SetEncoding(wxT("UTF-32LE"));
 	TextSample->SetFixedWidthMode(true);
@@ -124,7 +124,7 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID WXUNUSE
 	TextSample->LoadDefaultSyntaxScheme();
 	TextSample->SetText(bracket_style[aspsAllman]);
 #elif MADEDIT_USE_STC
-	TextSample = new wxStyledTextCtrl( Panel1, wxID_ANY, wxPoint( 19, 47 ), wxSize( 219, 300 ) );
+	TextSample = new wxStyledTextCtrl( Panel1, wxID_ANY, wxDefaultPosition, wxSize( 219, 300 ) );
 	TextSample->StyleClearAll();
 	TextSample->SetLexer( wxSTC_LEX_CPP );
 	TextSample->SetMarginWidth( MARGIN_LINE_NUMBERS, 50 );
@@ -200,7 +200,7 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID WXUNUSE
 	Panel1->SetSizer(GridSizer1);
 	GridSizer1->Fit(Panel1);
 	GridSizer1->SetSizeHints(Panel1);
-	Panel2 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxSize(792,490), 0, _T("wxID_ANY"));
+	Panel2 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	BoxSizer3 = new wxBoxSizer(wxVERTICAL);
 	CheckAttachClasses = new wxCheckBox(Panel2, wxID_ANY, _("Attach Classes"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
 	CheckAttachClasses->SetValue(false);
@@ -220,7 +220,7 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID WXUNUSE
 	Panel2->SetSizer(BoxSizer3);
 	BoxSizer3->Fit(Panel2);
 	BoxSizer3->SetSizeHints(Panel2);
-	Panel3 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxSize(792,490), 0, _T("wxID_ANY"));
+	Panel3 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	BoxSizer4 = new wxBoxSizer(wxVERTICAL);
 	GridSizer4 = new wxGridSizer(0, 2, 0, 0);
 	StaticText2 = new wxStaticText(Panel3, wxID_ANY, _("Indentation size(in spaces):"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
@@ -287,7 +287,7 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID WXUNUSE
 	Panel3->SetSizer(BoxSizer4);
 	BoxSizer4->Fit(Panel3);
 	BoxSizer4->SetSizeHints(Panel3);
-	Panel4 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxSize(792,490), 0, _T("ID_PANEL4"));
+	Panel4 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	BoxSizer5 = new wxBoxSizer(wxVERTICAL);
 	CheckBreakClosing = new wxCheckBox(Panel4, wxID_ANY, _("Break closing headers from their immediately preceding closing braces"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
 	CheckBreakClosing->SetValue(false);
@@ -341,7 +341,7 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID WXUNUSE
 	Panel4->SetSizer(BoxSizer5);
 	BoxSizer5->Fit(Panel4);
 	BoxSizer5->SetSizeHints(Panel4);
-	Panel5 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxSize(792,490), 0, _T("wxID_ANY"));
+	Panel5 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	BoxSizer9 = new wxBoxSizer(wxVERTICAL);
 	CheckBreakBlocks = new wxCheckBox(Panel5, wxID_ANY, _("Pad empty lines around header blocks (e.g. \'if\', \'while\'...)"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
 	CheckBreakBlocks->SetValue(false);
@@ -409,7 +409,7 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID WXUNUSE
 	Panel5->SetSizer(BoxSizer9);
 	BoxSizer9->Fit(Panel5);
 	BoxSizer9->SetSizeHints(Panel5);
-	Panel6 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxSize(792,490), 0, _T("wxID_ANY"));
+	Panel6 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	BoxSizer8 = new wxBoxSizer(wxVERTICAL);
 	GridSizer2 = new wxGridSizer(0, 2, 0, 0);
 	StaticText8 = new wxStaticText(Panel6, wxID_ANY, _("XML version:"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
@@ -439,7 +439,6 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID WXUNUSE
 	SetSizer(BoxSizer1);
 	BoxSizer1->Fit(this);
 	BoxSizer1->SetSizeHints(this);
-	Layout();
 
 	Bind(wxEVT_COMMAND_RADIOBOX_SELECTED,&MadSourceFormatDialog::OnRadioBoxBracketStyleSelect, this, RadioBoxBracketStyle->GetId());
 	Bind(wxEVT_COMMAND_CHECKBOX_CLICKED,&MadSourceFormatDialog::OnCheckBreakLinesClick, this, CheckBreakLines->GetId());
