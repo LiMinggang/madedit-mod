@@ -261,7 +261,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	BoxSizer30 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer31 = new wxBoxSizer(wxVERTICAL);
 	AuiNotebook1 = new wxAuiNotebook(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxAUI_NB_TOP | wxAUI_NB_TAB_MOVE | wxAUI_NB_SCROLL_BUTTONS);
-	Panel1 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxSize(900,400), wxTAB_TRAVERSAL, _T("wxID_ANY"));
+	Panel1 = new wxPanel(AuiNotebook1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("wxID_ANY"));
 	BoxSizer3 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer27 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer27->Add(3,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
