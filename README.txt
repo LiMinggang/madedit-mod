@@ -133,6 +133,7 @@ Fix: Layout issue of Source Formatter Dialog
 New: Configurable column number of the column hint indicator #303
 New: Reset MadPython console output
 Improve readability of recorded MadPython
+Set Recent files, Search/replace Text to true on PurgeHistory dialog
 Add more Regex error strings for translation
 Update Simplified Chinese translation
 Update Japanese translation(Thanks Tilt)

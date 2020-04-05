@@ -4634,15 +4634,6 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 			return false;
 		}
 
-		int utf8test = MadFileNameIsUTF8( filename );
-		bool exists = ( wxFileExists( filename ) || ( utf8test != 0 ) );
-
-		if( mustExist && !exists )
-		{
-			wxLogError( wxString( _( "This file does not exist:" ) ) + wxT( "\n\n" ) + filename );
-			return false;
-		}
-
 		wxFileName fn( filename );
 		title = fn.GetFullName();
 
@@ -4652,6 +4643,18 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 			wxLogError( wxString( _( "The Parent Directory of this file does not exist:" ) ) + wxT( "\n\n" ) + filename );
 			return false;
 		}
+
+		bool shown = this->IsShown(); // Only do the create choice when the main window is shown
+
+		int utf8test = MadFileNameIsUTF8( filename );
+		bool exists = wxFileExists( filename );
+
+		if( mustExist && !(exists || ( utf8test != 0 )) )
+		{
+			wxLogError( wxString( _( "This file does not exist:" ) ) + wxT( "\n\n" ) + filename );
+			return false;
+		}
+		// Todo: mustExist == false and exists == false
 
 		// test access mode
 		MadConvFileName_WC2MB_UseLibc uselibc( utf8test < 0 );
