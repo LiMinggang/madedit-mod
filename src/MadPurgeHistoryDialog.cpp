@@ -64,7 +64,7 @@ MadPurgeHistoryDialog::MadPurgeHistoryDialog(wxWindow* parent,wxWindowID WXUNUSE
 	wxRecentSearchedFileFilters->SetValue(true);
 	StaticBoxSizer1->Add(wxRecentSearchedFileFilters, 0, wxALL|wxEXPAND, 5);
 	wxCheckBoxRecentSearchedExcludeFilters = new wxCheckBox(this, wxID_ANY, _("Recent Searched E&xclude Filters"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
-	wxCheckBoxRecentSearchedExcludeFilters->SetValue(false);
+	wxCheckBoxRecentSearchedExcludeFilters->SetValue(true);
 	StaticBoxSizer1->Add(wxCheckBoxRecentSearchedExcludeFilters, 0, wxALL|wxEXPAND, 5);
 	wxCheckBoxCaretPos = new wxCheckBox(this, wxID_ANY, _("Recent Caret Position"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_ANY"));
 	wxCheckBoxCaretPos->SetValue(false);
