@@ -9674,7 +9674,7 @@ void MadEditFrame::OnToolsConvertToDOS( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->ConvertNewLineType( nltDOS );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "ConvertNewLineType(type=MadNewLineType.Dos)" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "ConvertNewLineType(MadNewLineType.Dos)" ) ) );
 	}
 }
 
@@ -9685,7 +9685,7 @@ void MadEditFrame::OnToolsConvertToMAC( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->ConvertNewLineType( nltMAC );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "ConvertNewLineType(type=MadNewLineType.MAC)" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "ConvertNewLineType(MadNewLineType.MAC)" ) ) );
 	}
 }
 
@@ -9696,7 +9696,7 @@ void MadEditFrame::OnToolsConvertToUNIX( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->ConvertNewLineType( nltUNIX );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "ConvertNewLineType(type=MadNewLineType.UNIX)" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "ConvertNewLineType(MadNewLineType.UNIX)" ) ) );
 	}
 }
 
@@ -9707,7 +9707,7 @@ void MadEditFrame::OnToolsInsertDOS( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->SetInsertNewLineType( nltDOS );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetInsertNewLineType(type=MadNewLineType.DOS)" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetInsertNewLineType(MadNewLineType.DOS)" ) ) );
 	}
 }
 void MadEditFrame::OnToolsInsertMAC( wxCommandEvent& WXUNUSED(event) )
@@ -9717,7 +9717,7 @@ void MadEditFrame::OnToolsInsertMAC( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->SetInsertNewLineType( nltMAC );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetInsertNewLineType(type=MadNewLineType.MAC)" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetInsertNewLineType(MadNewLineType.MAC)" ) ) );
 	}
 }
 void MadEditFrame::OnToolsInsertUNIX( wxCommandEvent& WXUNUSED(event) )
@@ -9727,7 +9727,7 @@ void MadEditFrame::OnToolsInsertUNIX( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->SetInsertNewLineType( nltUNIX );
 
 		if( IsMacroRecording() )
-			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetInsertNewLineType(type=MadNewLineType.UNIX)" ) ) );
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "SetInsertNewLineType(MadNewLineType.UNIX)" ) ) );
 	}
 }
 

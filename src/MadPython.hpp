@@ -1666,12 +1666,16 @@ namespace mad_python {
 			return res;
 		}
 
-		void SetCaretType( long type ) {
+		void SetCaretType( long caType ) {
 			MadEdit *madedit = g_CurrentMadEdit;
+			MadCaretType catype = (MadCaretType)caType;
+			if (ctVerticalLine > catype && catype > ctBlock)
+				throw std::out_of_range("Valid range 0~2");
+
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
-			if( madedit  && ( type >= ctVerticalLine ) && ( type <= ctBlock ))
-			{ madedit->SetCaretType( ( MadCaretType )type ); }
+			if( madedit )
+			{ madedit->SetCaretType(catype); }
 		}
 
 		bool GetMouseSelectToCopy() {
@@ -1985,19 +1989,25 @@ namespace mad_python {
 			return res;
 		}
 
-		void ConvertNewLineType( long type ) {
+		void ConvertNewLineType( long nlType ) {
 			MadEdit *madedit = g_CurrentMadEdit;
+			MadNewLineType nltype = (MadNewLineType)nlType;
+			if (nltDefault > nltype && nltype > nltMAC)
+				throw std::out_of_range("Valid range 0~3()");
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
 			if( madedit )
-			{ madedit->ConvertNewLineType( ( MadNewLineType )type ); }
+			{ madedit->ConvertNewLineType(nltype); }
 		}
-		void SetInsertNewLineType( long type ) {
+		void SetInsertNewLineType( long nlType ) {
 			MadEdit *madedit = g_CurrentMadEdit;
+			MadNewLineType nltype = (MadNewLineType)nlType;
+			if (nltDefault > nltype && nltype > nltMAC)
+				throw std::out_of_range("Valid range 0~3");
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
 			if( madedit )
-			{ madedit->SetInsertNewLineType( ( MadNewLineType )type ); }
+			{ madedit->SetInsertNewLineType(nltype); }
 		}
 
 		long GetNewLineType() {

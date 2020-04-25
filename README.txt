@@ -130,6 +130,7 @@ Fix: Reset MadMacro Dialog
 Fix: Bugs in Macro Recording
 Fix: Char display issue with certain font in search/replace input box #305
 Fix: Layout issue of Source Formatter Dialog
+Fix: MadPython range checking bug and recording bug
 New: Configurable column number of the column hint indicator #303
 New: Reset MadPython console output
 Improve readability of recorded MadPython
