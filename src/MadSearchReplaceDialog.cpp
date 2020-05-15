@@ -1777,7 +1777,7 @@ void MadSearchReplaceDialog::SearchAll( MadEdit * madedit, bool needRec/*=true*/
 			ok = madedit->FindHexAll( expr, false, &begpos, &endpos, rangeFrom, rangeTo );
 
 			if( needRec && IsMacroRecording() )
-				RecordAsMadMacro( madedit, wxString::Format( wxT( "FindHexAll(expr=\"%s\")" ), expr.c_str() ) );
+				RecordAsMadMacro( madedit, wxString::Format( wxT( "FindHexAll(\"%s\")" ), expr.c_str() ) );
 		}
 		else
 		{
@@ -1933,7 +1933,7 @@ void MadSearchReplaceDialog::ReplaceAll( MadEdit * madedit, bool needRec/*=true*
 			count = madedit->ReplaceHexAll( text, reptext, nullptr, nullptr, rangeFrom, rangeTo );
 
 			if( needRec && count && ( IsMacroRecording() ) )
-				RecordAsMadMacro( madedit, wxString::Format( wxT( "ReplaceHexAll(expr=\"%s\", fmt=\"%s\", rangeFrom=%s, rangeTo=%s)" ), text.c_str(),  reptext.c_str(), ( wxLongLong( rangeFrom ).ToString() ).c_str(), ( wxLongLong( rangeTo ).ToString() ).c_str() ) );
+				RecordAsMadMacro( madedit, wxString::Format( wxT( "ReplaceHexAll(\"%s\", fmt=\"%s\", rangeFrom=%s, rangeTo=%s)" ), text.c_str(),  reptext.c_str(), ( wxLongLong( rangeFrom ).ToString() ).c_str(), ( wxLongLong( rangeTo ).ToString() ).c_str() ) );
 		}
 		else
 		{
@@ -1955,7 +1955,7 @@ void MadSearchReplaceDialog::ReplaceAll( MadEdit * madedit, bool needRec/*=true*
 			{
 				MadSearchEscapeString(text, bRegex);
 				MadSearchEscapeString(reptext, bRegex);
-				wxString fnstr( wxString::Format( wxT( "ReplaceTextAll(expr=\"%s\", fmt=\"%s\", bRegex=%s, bCaseSensitive=%s, bWholeWord=%s, bDotMatchNewline=%s, bPanChinese=%s, rangeFrom=%s, rangeTo=%s)" ), text.c_str(), reptext.c_str(),
+				wxString fnstr( wxString::Format( wxT( "ReplaceTextAll(\"%s\", fmt=\"%s\", bRegex=%s, bCaseSensitive=%s, bWholeWord=%s, bDotMatchNewline=%s, bPanChinese=%s, rangeFrom=%s, rangeTo=%s)" ), text.c_str(), reptext.c_str(),
 												  bRegex ? wxT( "True" ) : wxT( "False" ),
 												  bCaseSensitive ? wxT( "True" ) : wxT( "False" ),
 												  bWholeWord ? wxT( "True" ) : wxT( "False" ),

@@ -1985,19 +1985,19 @@ namespace mad_python {
 			return res;
 		}
 
-		void ConvertNewLineType( long type ) {
+		void ConvertNewLineType( long ltype ) {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
 			if( madedit )
-			{ madedit->ConvertNewLineType( ( MadNewLineType )type ); }
+			{ madedit->ConvertNewLineType( ( MadNewLineType )ltype ); }
 		}
-		void SetInsertNewLineType( long type ) {
+		void SetInsertNewLineType( long ltype ) {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
 			if( madedit )
-			{ madedit->SetInsertNewLineType( ( MadNewLineType )type ); }
+			{ madedit->SetInsertNewLineType( ( MadNewLineType )ltype ); }
 		}
 
 		long GetNewLineType() {
