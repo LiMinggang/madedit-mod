@@ -338,7 +338,7 @@ void MadEdit::ConvertNewLineType( MadNewLineType type )
 		UCStoBlock( newline + 1, 1, newline_blk );
 		break;
 
-	default: break;
+	default: return;
 	}
 
 	wxByte newlinedata[16];
