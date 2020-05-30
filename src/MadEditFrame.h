@@ -323,6 +323,7 @@ enum   // menu id
 	menuTextConvFormatter,
 	menuAstyleFormat,
 	menuXMLFormat,
+	menuJSONFormat,
 	menuWordCount,
 
 	// window
@@ -748,6 +749,7 @@ public:
 	void OnToolsHtml2PlainText( wxCommandEvent& WXUNUSED(event) );
 	void OnToolsAstyleFormat( wxCommandEvent& WXUNUSED(event) );
 	void OnToolsXMLFormat( wxCommandEvent& WXUNUSED(event) );
+	void OnToolsJSONFormat( wxCommandEvent& WXUNUSED(event) );
 private:
 	bool m_PageClosing; // prevent from reentry of CloseFile(), OnNotebookPageClosing()
 public:

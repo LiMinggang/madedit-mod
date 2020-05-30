@@ -1670,7 +1670,7 @@ namespace mad_python {
 			MadEdit *madedit = g_CurrentMadEdit;
 			MadCaretType catype = (MadCaretType)caType;
 			if (ctVerticalLine > catype && catype > ctBlock)
-				throw std::out_of_range("Valid range 0~2");
+				throw std::out_of_range("Valid range VerticalLine, HorizontalLine, Block");
 
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
@@ -1993,7 +1993,7 @@ namespace mad_python {
 			MadEdit *madedit = g_CurrentMadEdit;
 			MadNewLineType nltype = (MadNewLineType)nlType;
 			if (nltDefault > nltype && nltype > nltMAC)
-				throw std::out_of_range("Valid range 0~3)");
+				throw std::out_of_range("Valid range Default, DOS, UNIX, MAC)");
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
 			if( madedit )
@@ -2004,7 +2004,7 @@ namespace mad_python {
 			MadEdit *madedit = g_CurrentMadEdit;
 			MadNewLineType nltype = (MadNewLineType)nlType;
 			if (nltDefault > nltype && nltype > nltMAC)
-				throw std::out_of_range("Valid range 0~3");
+				throw std::out_of_range("Valid range Default, DOS, UNIX, MAC");
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
 			if( madedit )
@@ -3043,6 +3043,16 @@ namespace mad_python {
 			}
 		}
 
+		void JSONFormat() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if(madedit == nullptr)
+				madedit = g_ActiveMadEdit;
+			if( g_MainFrame && ( madedit ) && ( !madedit->IsReadOnly() ) ) {
+				wxCommandEvent event;
+				g_MainFrame->OnToolsJSONFormat( event );
+			}
+		}
+
 		void Markdown2Html() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
@@ -3401,6 +3411,7 @@ BOOST_PYTHON_MODULE( madpython ) {
 	.def( "ColumnAlignRight", &PyMadEdit::ColumnAlignRight, "" )
 	.def( "Astyle", &PyMadEdit::Astyle, "" )
 	.def( "XMLFormat", &PyMadEdit::XMLFormat, "" )
+	.def( "JSONFormat", &PyMadEdit::JSONFormat, "" )
 	.def( "Markdown2Html", &PyMadEdit::Markdown2Html, "" )
 	.def( "Html2PlainText", &PyMadEdit::Html2PlainText, "" )
 	.def( "SelectWholeLine", &PyMadEdit::SelectWholeLine, "" )

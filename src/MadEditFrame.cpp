@@ -20,7 +20,7 @@
 #include <wx/msgdlg.h>
 #include <wx/dnd.h>
 #include <wx/printdlg.h>
-#include "wx/wxhtml.h"
+#include <wx/wxhtml.h>
 #include <wx/xml/xml.h>
 #include <wx/sstream.h>
 #include <wx/datetime.h>
@@ -63,7 +63,7 @@
 #include "markdown.h"
 #include "formattersettings.h"
 #include "asstreamiterator.h"
-
+#include "JSON.h"
 #ifdef __WXMSW__
 	#include <io.h>
 #else
@@ -1996,6 +1996,7 @@ MadEditFrame::wxCmdEvtHandlerMap_t MadEditFrame::m_menu_evt_map[] =
 	{ menuHtml2PlainText, &MadEditFrame::OnToolsHtml2PlainText },
 	{ menuAstyleFormat, &MadEditFrame::OnToolsAstyleFormat },
 	{ menuXMLFormat, &MadEditFrame::OnToolsXMLFormat },
+	{ menuJSONFormat, &MadEditFrame::OnToolsJSONFormat },
 	{ menuWordCount, &MadEditFrame::OnToolsWordCount },
 
 	// window
@@ -2188,6 +2189,7 @@ MadEditFrame::wxUIUpdateEvtHandlerMap_t MadEditFrame::m_menu_ui_updater_map[] =
 	{ menuHtml2PlainText, &MadEditFrame::OnUpdateUI_MenuCheckWritable },
 	{ menuAstyleFormat, &MadEditFrame::OnUpdateUI_MenuCheckWritable },
 	{ menuXMLFormat, &MadEditFrame::OnUpdateUI_MenuCheckWritable },
+	{ menuJSONFormat, &MadEditFrame::OnUpdateUI_MenuCheckWritable },
 	{ menuWordCount, &MadEditFrame::OnUpdateUI_MenuFile_CheckCount },
 	// window, hardcode of Menu_Window_Count
 	{ menuToggleWindow, &MadEditFrame::OnUpdateUI_MenuWindow_CheckCount },
@@ -2616,6 +2618,7 @@ CommandData CommandTable[] =
 	{ 0,			   2, 0,						  0,						         0,												          0,			 wxITEM_SEPARATOR, -1, 0,						        0, 0, 0, 0, false},
 	{ 0,			   2, menuAstyleFormat,           wxT( "menuAstyleFormat" ),           _( "&Astyle(C++/C#/Java/ObjC)" ),         wxT( "Ctrl-Shift-K" ),			 wxITEM_NORMAL,    cplusplus_xpm_idx, 0,   _( "Format selection or whole file(C++/C#/Java)" ), 0, 0, 0, false},
 	{ 0,			   2, menuXMLFormat,			  wxT( "menuXMLFormat" ),			  _( "&XML Formatter" ),									    0,			 wxITEM_NORMAL,    xml_xpm_idx, 0,         _( "Format XML(whole file)" ), 0, 0, 0, false},
+	{ 0,			   2, menuJSONFormat,			  wxT( "menuJSONFormat" ),			  _( "&JSON Formatter" ),									    0,			 wxITEM_NORMAL,    xml_xpm_idx, 0,         _( "Format JSON" ), 0, 0, 0, false},
 	{ 0,			   1, 0,						  0,						         0,												          0,			 wxITEM_SEPARATOR, -1, 0,						        0, 0, 0, 0, false},
 	{ 0,			   1, menuWordCount,			  wxT( "menuWordCount" ),			  _( "&Word Count..." ),									    0,			 wxITEM_NORMAL,    report_xpm_idx, 0,      _( "Count the words and chars of the file or selection" ), 0, 0, 0, false},
 
@@ -10148,6 +10151,67 @@ void MadEditFrame::OnToolsXMLFormat( wxCommandEvent& WXUNUSED(event) )
 			if( IsMacroRecording() )
 				RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "XMLFormat()" )) );
 		}
+	}
+}
+
+void MadEditFrame::OnToolsJSONFormat( wxCommandEvent& WXUNUSED(event) )
+{
+	if( g_ActiveMadEdit == nullptr ) { return; }
+
+	wxString text;
+	bool onlySelected = false;
+	int leftBracesNumber = 0;
+
+	if( g_ActiveMadEdit->IsSelected() )
+	{
+		wxString seltext;
+		onlySelected = true;
+		// Ajust to select the whole line
+		leftBracesNumber = g_ActiveMadEdit->GetIndentCountByPos( g_ActiveMadEdit->GetSelectionBeginPos() );
+		g_ActiveMadEdit->SelectWholeLine();
+		g_ActiveMadEdit->GetSelText(text);
+	}
+	else
+	{
+		g_ActiveMadEdit->GetText( text, false );
+	}
+
+	std::string src = text.ToStdString(wxConvUTF8);
+	JSON::Parser parser(
+		JSON::ALLOW_COMMENTS  |
+		JSON::ALLOW_UNQUOTED_FIELD_NAMES |
+		JSON::ALLOW_SINGLE_QUOTES |
+		JSON::ALLOW_TRAILING_COMMAS
+	);
+
+
+	std::string res;
+	try {
+		JSON::ValuePtr v = parser.parse(src);
+		std::string res = v->encodePretty();
+	}
+	catch (...)
+	{
+		MadMessageBox(_("Invalid JSON string, formatting failed"), _("Error"), wxOK | wxICON_ERROR);
+		return;
+	}
+
+	wxString formattedText( res.c_str(), wxConvUTF8 );
+	bool changed = BuffersDiffer( formattedText, text );
+
+	if( changed )
+	{
+		if( onlySelected )
+		{
+			g_ActiveMadEdit->ReplaceSelection( formattedText );
+		}
+		else
+		{
+			g_ActiveMadEdit->SetText( formattedText );
+		}
+		
+		if( IsMacroRecording() )
+			RecordAsMadMacro( g_ActiveMadEdit, wxString( wxT( "JSONFormat()" )) );
 	}
 }
 
