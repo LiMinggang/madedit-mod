@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.18\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-31 10:25+0800\n"
+"POT-Creation-Date: 2020-05-31 11:34+0800\n"
 "PO-Revision-Date: 2019-07-20 11:07+0800\n"
 "Last-Translator: zhtw2013 <zhtw2013@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
@@ -215,7 +215,7 @@ msgstr "請輸入 %d 到 %d 之間的頁數："
 msgid "Please wait while printing\n"
 msgstr "列印中，請等待\n"
 
-#: wxstd.po.cpp:50 ../src/MadEditFrame.cpp:6172
+#: wxstd.po.cpp:50 ../src/MadEditFrame.cpp:6196
 msgid "Printing"
 msgstr "列印"
 
@@ -837,7 +837,7 @@ msgstr ""
 "要繼續嗎？"
 
 #: ../src/MadEdit/MadEditBasic.cpp:2498 ../src/MadEdit/MadEditBasic.cpp:2558
-#: ../src/MadEditFrame.cpp:4646
+#: ../src/MadEditFrame.cpp:4647
 msgid "The Parent Directory of this file does not exist:"
 msgstr "這個檔案所在目錄不存在："
 
@@ -849,7 +849,7 @@ msgstr "無法儲存這個檔案："
 #: ../src/MadEdit/MadEditBasic.cpp:3117 ../src/MadEdit/MadEditSearch.cpp:1002
 #: ../src/MadEdit/MadEditSearch.cpp:1100 ../src/MadEdit/MadEditSearch.cpp:1163
 #: ../src/MadEditFrame.cpp:546 ../src/MadEditFrame.cpp:551
-#: ../src/MadEditFrame.cpp:5906
+#: ../src/MadEditFrame.cpp:5930
 msgid "&Ok"
 msgstr "確定(&O)"
 
@@ -859,13 +859,15 @@ msgstr "要儲存這個檔案嗎？"
 
 #: ../src/MadEdit/MadEditBasic.cpp:2609 ../src/MadEdit/MadEditBasic.cpp:2724
 #: ../src/MadEdit/MadEditBasic.cpp:2808 ../src/MadEditFrame.cpp:535
-#: ../src/MadEditFrame.cpp:541 ../src/MadEditFrame.cpp:6245
+#: ../src/MadEditFrame.cpp:541 ../src/MadEditFrame.cpp:4685
+#: ../src/MadEditFrame.cpp:6269
 msgid "&Yes"
 msgstr "是(&Y)"
 
 #: ../src/MadEdit/MadEditBasic.cpp:2610 ../src/MadEdit/MadEditBasic.cpp:2724
 #: ../src/MadEdit/MadEditBasic.cpp:2808 ../src/MadEditFrame.cpp:536
-#: ../src/MadEditFrame.cpp:541 ../src/MadEditFrame.cpp:6245
+#: ../src/MadEditFrame.cpp:541 ../src/MadEditFrame.cpp:4685
+#: ../src/MadEditFrame.cpp:6269
 msgid "&No"
 msgstr "否(&N)"
 
@@ -1039,7 +1041,7 @@ msgstr "開啟檔案(&O)..."
 msgid "Open an existing file"
 msgstr "開啟已存在的檔案"
 
-#: ../src/MadEditFrame.cpp:2226 ../src/MadEditFrame.cpp:5818
+#: ../src/MadEditFrame.cpp:2226 ../src/MadEditFrame.cpp:5842
 msgid "Open File"
 msgstr "開啟檔案"
 
@@ -1135,11 +1137,11 @@ msgstr "關閉目前檔案右邊的所有檔案"
 msgid "Close all files to the right"
 msgstr "關閉目前檔案右邊的所有檔案"
 
-#: ../src/MadEditFrame.cpp:2241 ../src/MadEditFrame.cpp:5251
+#: ../src/MadEditFrame.cpp:2241 ../src/MadEditFrame.cpp:5275
 msgid "Set/Clear ReadOnly Flag"
 msgstr "設定/清除唯讀標幟"
 
-#: ../src/MadEditFrame.cpp:2241 ../src/MadEditFrame.cpp:5252
+#: ../src/MadEditFrame.cpp:2241 ../src/MadEditFrame.cpp:5276
 msgid "Set/Clear ReadOnly flag of the file"
 msgstr "設定/清除檔案的唯讀標幟"
 
@@ -1325,11 +1327,11 @@ msgstr "選取全部(&A)"
 msgid "Select all data"
 msgstr "選取全部的資料"
 
-#: ../src/MadEditFrame.cpp:2291 ../src/MadEditFrame.cpp:5219
+#: ../src/MadEditFrame.cpp:2291 ../src/MadEditFrame.cpp:5243
 msgid "Begin/End Selecting"
 msgstr "開始/結束選擇"
 
-#: ../src/MadEditFrame.cpp:2291 ../src/MadEditFrame.cpp:5220
+#: ../src/MadEditFrame.cpp:2291 ../src/MadEditFrame.cpp:5244
 msgid "Begin/End selecting text"
 msgstr "開始/結束選擇文字"
 
@@ -1513,8 +1515,8 @@ msgstr "轉為半形"
 msgid "Convert the selection to halfwidth"
 msgstr "將選取的文字轉為半形"
 
-#: ../src/MadEditFrame.cpp:2337 ../src/MadEditFrame.cpp:6830
-#: ../src/MadEditFrame.cpp:6834 ../src/MadSearchReplaceDialog.cpp:2516
+#: ../src/MadEditFrame.cpp:2337 ../src/MadEditFrame.cpp:6854
+#: ../src/MadEditFrame.cpp:6858 ../src/MadSearchReplaceDialog.cpp:2516
 #: ../src/MadSearchReplaceDialog.cpp:2520 ../src/MadMacroDlg.cpp:732
 #: ../src/MadMacroDlg.cpp:736
 msgid "To Halfwidth by Options..."
@@ -1532,8 +1534,8 @@ msgstr "轉為全形"
 msgid "Convert the selection to fullwidth"
 msgstr "將選取的文字轉為全形"
 
-#: ../src/MadEditFrame.cpp:2339 ../src/MadEditFrame.cpp:6896
-#: ../src/MadEditFrame.cpp:6900 ../src/MadSearchReplaceDialog.cpp:2579
+#: ../src/MadEditFrame.cpp:2339 ../src/MadEditFrame.cpp:6920
+#: ../src/MadEditFrame.cpp:6924 ../src/MadSearchReplaceDialog.cpp:2579
 #: ../src/MadSearchReplaceDialog.cpp:2583 ../src/MadMacroDlg.cpp:799
 #: ../src/MadMacroDlg.cpp:803
 msgid "To Fullwidth by Options..."
@@ -1826,8 +1828,8 @@ msgstr "切換全螢幕模式"
 msgid "Post-It"
 msgstr "Post-It"
 
-#: ../src/MadEditFrame.cpp:2391 ../src/MadEditFrame.cpp:5329
-#: ../src/MadEditFrame.cpp:5335
+#: ../src/MadEditFrame.cpp:2391 ../src/MadEditFrame.cpp:5353
+#: ../src/MadEditFrame.cpp:5359
 msgid "Encoding: "
 msgstr "編碼: "
 
@@ -1835,13 +1837,13 @@ msgstr "編碼: "
 msgid "All Encodings"
 msgstr "所有的編碼"
 
-#: ../src/MadEditFrame.cpp:2394 ../src/MadEditFrame.cpp:5344
-#: ../src/MadEditFrame.cpp:5349
+#: ../src/MadEditFrame.cpp:2394 ../src/MadEditFrame.cpp:5368
+#: ../src/MadEditFrame.cpp:5373
 msgid "Syntax Type: "
 msgstr "語法類型: "
 
-#: ../src/MadEditFrame.cpp:2396 ../src/MadEditFrame.cpp:5361
-#: ../src/MadEditFrame.cpp:5366
+#: ../src/MadEditFrame.cpp:2396 ../src/MadEditFrame.cpp:5385
+#: ../src/MadEditFrame.cpp:5390
 msgid "Font Name: "
 msgstr "字型名稱: "
 
@@ -1849,8 +1851,8 @@ msgstr "字型名稱: "
 msgid "[other]"
 msgstr "[其它]"
 
-#: ../src/MadEditFrame.cpp:2405 ../src/MadEditFrame.cpp:5377
-#: ../src/MadEditFrame.cpp:5382
+#: ../src/MadEditFrame.cpp:2405 ../src/MadEditFrame.cpp:5401
+#: ../src/MadEditFrame.cpp:5406
 msgid "Font Size: "
 msgstr "字型大小: "
 
@@ -1874,8 +1876,8 @@ msgstr "固定寬度模式(&F)"
 msgid "Set/Unset the font with Fixed Width"
 msgstr "設定或取消字型為固定的寬度"
 
-#: ../src/MadEditFrame.cpp:2483 ../src/MadEditFrame.cpp:5397
-#: ../src/MadEditFrame.cpp:5402
+#: ../src/MadEditFrame.cpp:2483 ../src/MadEditFrame.cpp:5421
+#: ../src/MadEditFrame.cpp:5426
 msgid "Tab Column: "
 msgstr "定位符號(Tab)的寬度: "
 
@@ -1883,8 +1885,8 @@ msgstr "定位符號(Tab)的寬度: "
 msgid "Set column of Tab char"
 msgstr "設定定位符號(Tab)的寬度"
 
-#: ../src/MadEditFrame.cpp:2502 ../src/MadEditFrame.cpp:5465
-#: ../src/MadEditFrame.cpp:5470
+#: ../src/MadEditFrame.cpp:2502 ../src/MadEditFrame.cpp:5489
+#: ../src/MadEditFrame.cpp:5494
 msgid "Line Spacing: "
 msgstr "行間距: "
 
@@ -2024,7 +2026,7 @@ msgstr "傳統打字機模式"
 msgid "Toolbars"
 msgstr "工具列"
 
-#: ../src/MadEditFrame.cpp:2554 ../src/MadEditFrame.cpp:10526
+#: ../src/MadEditFrame.cpp:2554 ../src/MadEditFrame.cpp:10550
 msgid "Toggle Main Toolbar"
 msgstr "切換顯示主工具列"
 
@@ -2032,7 +2034,7 @@ msgstr "切換顯示主工具列"
 msgid "Show/Hide Main Toolbar"
 msgstr "顯示/隱藏主工具列"
 
-#: ../src/MadEditFrame.cpp:2555 ../src/MadEditFrame.cpp:10527
+#: ../src/MadEditFrame.cpp:2555 ../src/MadEditFrame.cpp:10551
 msgid "Lock Toolbar"
 msgstr "跳到檔案位置"
 
@@ -2084,7 +2086,7 @@ msgstr "變更編輯模式為十六進位模式"
 msgid "Hex Mode"
 msgstr "十六進位模式"
 
-#: ../src/MadEditFrame.cpp:2563 ../src/MadEditFrame.cpp:5433
+#: ../src/MadEditFrame.cpp:2563 ../src/MadEditFrame.cpp:5457
 msgid "Preview as: "
 msgstr "預覽為："
 
@@ -2188,7 +2190,7 @@ msgstr "清除歷史記錄(&P)"
 msgid "Clearing out your history"
 msgstr "清除歷史紀錄"
 
-#: ../src/MadEditFrame.cpp:2586 ../src/MadEditFrame.cpp:5641
+#: ../src/MadEditFrame.cpp:2586 ../src/MadEditFrame.cpp:5665
 msgid "Has Unicode BOM (Byte-Order Mark)"
 msgstr "有 Unicode BOM (位元組順序標籤)"
 
@@ -2200,7 +2202,7 @@ msgstr "插入/刪除 BOM"
 msgid "Add/Remove Unicode BOM"
 msgstr "插入/刪除 Unicode BOM"
 
-#: ../src/MadEditFrame.cpp:2589 ../src/MadEditFrame.cpp:5656
+#: ../src/MadEditFrame.cpp:2589 ../src/MadEditFrame.cpp:5680
 msgid "NewLine Char (File Format): "
 msgstr "換行字元(檔案格式): "
 
@@ -2228,7 +2230,7 @@ msgstr "轉換為 LF/0A (&UNIX/OSX)"
 msgid "Convert the file format to UNIX format"
 msgstr "轉換檔案格式為 UNIX 的格式"
 
-#: ../src/MadEditFrame.cpp:2593 ../src/MadEditFrame.cpp:5683
+#: ../src/MadEditFrame.cpp:2593 ../src/MadEditFrame.cpp:5707
 msgid "Press Enter to Insert NewLine Char: "
 msgstr "按Enter插入的換行字元: "
 
@@ -2750,15 +2752,15 @@ msgstr "向右捲動"
 msgid "Scrolls right by aprox. 1 tab stop"
 msgstr "向右捲動約一個Tab的寬度"
 
-#: ../src/MadEditFrame.cpp:3012 ../src/MadEditFrame.cpp:10725
+#: ../src/MadEditFrame.cpp:3012 ../src/MadEditFrame.cpp:10749
 msgid "Quick Search"
 msgstr "快速尋找"
 
-#: ../src/MadEditFrame.cpp:3021 ../src/MadEditFrame.cpp:5415
+#: ../src/MadEditFrame.cpp:3021 ../src/MadEditFrame.cpp:5439
 msgid "HTML"
 msgstr "HTML"
 
-#: ../src/MadEditFrame.cpp:3022 ../src/MadEditFrame.cpp:5419
+#: ../src/MadEditFrame.cpp:3022 ../src/MadEditFrame.cpp:5443
 msgid "Markdown"
 msgstr "Markdown"
 
@@ -2856,95 +2858,105 @@ msgstr "列出最近開啟過的所有檔案"
 msgid "Search Results"
 msgstr "搜尋結果"
 
-#: ../src/MadEditFrame.cpp:4579 ../src/MadEditFrame.cpp:4588
+#: ../src/MadEditFrame.cpp:4580 ../src/MadEditFrame.cpp:4589
 #, c-format
 msgid "NoName%d"
 msgstr "未命名%d"
 
-#: ../src/MadEditFrame.cpp:4636
+#: ../src/MadEditFrame.cpp:4637
 msgid "This is a Directory:"
 msgstr "這是個目錄："
 
-#: ../src/MadEditFrame.cpp:4657
+#: ../src/MadEditFrame.cpp:4658
 msgid "This file does not exist:"
 msgstr "這個檔案不存在："
 
-#: ../src/MadEditFrame.cpp:4675
+#: ../src/MadEditFrame.cpp:4676
 msgid "Cannot access this file:"
 msgstr "無法存取這個檔案："
 
-#: ../src/MadEditFrame.cpp:4763
+#: ../src/MadEditFrame.cpp:4684
+#, fuzzy
+msgid "The file "
+msgstr "儲存檔案"
+
+#: ../src/MadEditFrame.cpp:4688
+#, fuzzy
+msgid "File does not exist:"
+msgstr "這個檔案不存在："
+
+#: ../src/MadEditFrame.cpp:4782
 msgid "Cannot load this file:"
 msgstr "無法載入這個檔案："
 
-#: ../src/MadEditFrame.cpp:4897 ../src/MadEditFrame.cpp:9636
+#: ../src/MadEditFrame.cpp:4921 ../src/MadEditFrame.cpp:9660
 #: ../src/MadSearchReplaceDialog.cpp:2836 ../src/MadMacroDlg.cpp:266
 #: ../src/MadMacroDlg.cpp:1046
 msgid "Memory allocation failed"
 msgstr "指派記憶體失敗"
 
-#: ../src/MadEditFrame.cpp:4897 ../src/MadEditFrame.cpp:9636
-#: ../src/MadEditFrame.cpp:10196 ../src/MadEditFrame.cpp:10201
+#: ../src/MadEditFrame.cpp:4921 ../src/MadEditFrame.cpp:9660
+#: ../src/MadEditFrame.cpp:10220 ../src/MadEditFrame.cpp:10225
 #: ../src/MadSearchReplaceDialog.cpp:2836 ../src/MadMacroDlg.cpp:266
 #: ../src/MadMacroDlg.cpp:1046
 msgid "Error"
 msgstr "錯誤"
 
-#: ../src/MadEditFrame.cpp:5208
+#: ../src/MadEditFrame.cpp:5232
 msgid "End Selecting"
 msgstr "結束選擇"
 
-#: ../src/MadEditFrame.cpp:5209
+#: ../src/MadEditFrame.cpp:5233
 msgid "End selecting text"
 msgstr "結束選擇文字"
 
-#: ../src/MadEditFrame.cpp:5213
+#: ../src/MadEditFrame.cpp:5237
 msgid "Begin Selecting"
 msgstr "開始選擇"
 
-#: ../src/MadEditFrame.cpp:5214
+#: ../src/MadEditFrame.cpp:5238
 msgid "Begin selecting text"
 msgstr "開始選擇文字"
 
-#: ../src/MadEditFrame.cpp:5238
+#: ../src/MadEditFrame.cpp:5262
 msgid "Clear ReadOnly Flag"
 msgstr "清除唯讀標幟"
 
-#: ../src/MadEditFrame.cpp:5239
+#: ../src/MadEditFrame.cpp:5263
 msgid "Clear ReadOnly flag of the file"
 msgstr "清除檔案的唯讀標幟"
 
-#: ../src/MadEditFrame.cpp:5246
+#: ../src/MadEditFrame.cpp:5270
 msgid "Set ReadOnly Flag"
 msgstr "設定唯讀標幟"
 
-#: ../src/MadEditFrame.cpp:5247
+#: ../src/MadEditFrame.cpp:5271
 msgid "Set ReadOnly flag of the file"
 msgstr "設定檔案的唯讀標幟"
 
-#: ../src/MadEditFrame.cpp:5335 ../src/MadEditFrame.cpp:5349
-#: ../src/MadEditFrame.cpp:5366 ../src/MadEditFrame.cpp:5382
-#: ../src/MadEditFrame.cpp:5402 ../src/MadEditFrame.cpp:5408
-#: ../src/MadEditFrame.cpp:5470 ../src/MadEditFrame.cpp:5678
-#: ../src/MadEditFrame.cpp:5705 ../src/MadSourceFormatDialog.cpp:395
+#: ../src/MadEditFrame.cpp:5359 ../src/MadEditFrame.cpp:5373
+#: ../src/MadEditFrame.cpp:5390 ../src/MadEditFrame.cpp:5406
+#: ../src/MadEditFrame.cpp:5426 ../src/MadEditFrame.cpp:5432
+#: ../src/MadEditFrame.cpp:5494 ../src/MadEditFrame.cpp:5702
+#: ../src/MadEditFrame.cpp:5729 ../src/MadSourceFormatDialog.cpp:395
 #: ../src/MadSourceFormatDialog.cpp:403 ../src/MadOptionsDialog.cpp:581
 #: ../src/MadConvEncDialog.cpp:58
 msgid "None"
 msgstr "無"
 
-#: ../src/MadEditFrame.cpp:5645 ../src/MadEditFrame.cpp:5651
+#: ../src/MadEditFrame.cpp:5669 ../src/MadEditFrame.cpp:5675
 msgid "Has No Unicode BOM (Byte-Order Mark)"
 msgstr "沒有 Unicode BOM (位元組順序標籤)"
 
-#: ../src/MadEditFrame.cpp:5904
+#: ../src/MadEditFrame.cpp:5928
 msgid "Failed to backup the file. "
 msgstr "檔案備份失敗 "
 
-#: ../src/MadEditFrame.cpp:5904
+#: ../src/MadEditFrame.cpp:5928
 msgid " might not exist."
 msgstr " 可能不存在。"
 
-#: ../src/MadEditFrame.cpp:6144
+#: ../src/MadEditFrame.cpp:6168
 msgid ""
 "There was a problem previewing this document.\n"
 "Perhaps your current printer is not set correctly?"
@@ -2952,15 +2964,15 @@ msgstr ""
 "在列印預覽時發生問題。\n"
 "或許是印表機沒有設定正確？"
 
-#: ../src/MadEditFrame.cpp:6144
+#: ../src/MadEditFrame.cpp:6168
 msgid "Previewing"
 msgstr "列印預覽"
 
-#: ../src/MadEditFrame.cpp:6148
+#: ../src/MadEditFrame.cpp:6172
 msgid "MadEdit Print Preview"
 msgstr "MadEdit 列印預覽"
 
-#: ../src/MadEditFrame.cpp:6172
+#: ../src/MadEditFrame.cpp:6196
 msgid ""
 "There was a problem printing this document.\n"
 "Perhaps your current printer is not set correctly?"
@@ -2968,51 +2980,51 @@ msgstr ""
 "在列印時發生問題。\n"
 "或許是印表機沒有設定正確？"
 
-#: ../src/MadEditFrame.cpp:6243
+#: ../src/MadEditFrame.cpp:6267
 msgid ""
 " does not exist. It might have been removed. Do you want to removed it from "
 "recent file list?"
 msgstr "不存在。檔案可能已經被刪除了。您希望將它從最近造訪檔案清單中刪除嗎？"
 
-#: ../src/MadEditFrame.cpp:6677 ../src/MadSearchReplaceDialog.cpp:2373
+#: ../src/MadEditFrame.cpp:6701 ../src/MadSearchReplaceDialog.cpp:2373
 #: ../src/MadMacroDlg.cpp:586
 msgid "Delimiters:"
 msgstr "分隔字元："
 
-#: ../src/MadEditFrame.cpp:6677 ../src/MadSearchReplaceDialog.cpp:2373
+#: ../src/MadEditFrame.cpp:6701 ../src/MadSearchReplaceDialog.cpp:2373
 #: ../src/MadMacroDlg.cpp:586
 msgid "Revert Hex String"
 msgstr "還原十六進位字串"
 
-#: ../src/MadEditFrame.cpp:6825 ../src/MadEditFrame.cpp:6891
+#: ../src/MadEditFrame.cpp:6849 ../src/MadEditFrame.cpp:6915
 #: ../src/MadSearchReplaceDialog.cpp:2511
 #: ../src/MadSearchReplaceDialog.cpp:2574 ../src/MadMacroDlg.cpp:727
 #: ../src/MadMacroDlg.cpp:794
 msgid "ASCII characters"
 msgstr "ASCII 字元"
 
-#: ../src/MadEditFrame.cpp:6825 ../src/MadEditFrame.cpp:6891
+#: ../src/MadEditFrame.cpp:6849 ../src/MadEditFrame.cpp:6915
 #: ../src/MadSearchReplaceDialog.cpp:2511
 #: ../src/MadSearchReplaceDialog.cpp:2574 ../src/MadMacroDlg.cpp:727
 #: ../src/MadMacroDlg.cpp:794
 msgid "Japanese characters"
 msgstr "日文"
 
-#: ../src/MadEditFrame.cpp:6826 ../src/MadEditFrame.cpp:6892
+#: ../src/MadEditFrame.cpp:6850 ../src/MadEditFrame.cpp:6916
 #: ../src/MadSearchReplaceDialog.cpp:2512
 #: ../src/MadSearchReplaceDialog.cpp:2575 ../src/MadMacroDlg.cpp:728
 #: ../src/MadMacroDlg.cpp:795
 msgid "Korean characters"
 msgstr "韓文"
 
-#: ../src/MadEditFrame.cpp:6826 ../src/MadEditFrame.cpp:6892
+#: ../src/MadEditFrame.cpp:6850 ../src/MadEditFrame.cpp:6916
 #: ../src/MadSearchReplaceDialog.cpp:2512
 #: ../src/MadSearchReplaceDialog.cpp:2575 ../src/MadMacroDlg.cpp:795
 msgid "other characters"
 msgstr "其它字元"
 
-#: ../src/MadEditFrame.cpp:6830 ../src/MadEditFrame.cpp:6834
-#: ../src/MadEditFrame.cpp:6896 ../src/MadEditFrame.cpp:6900
+#: ../src/MadEditFrame.cpp:6854 ../src/MadEditFrame.cpp:6858
+#: ../src/MadEditFrame.cpp:6920 ../src/MadEditFrame.cpp:6924
 #: ../src/MadSearchReplaceDialog.cpp:2516
 #: ../src/MadSearchReplaceDialog.cpp:2520
 #: ../src/MadSearchReplaceDialog.cpp:2579
@@ -3022,82 +3034,82 @@ msgstr "其它字元"
 msgid "Choose the characters you want to convert:"
 msgstr "選擇要轉換的字元："
 
-#: ../src/MadEditFrame.cpp:7424
+#: ../src/MadEditFrame.cpp:7448
 msgid "Find/Replace in Files Results"
 msgstr "多檔案尋找/取代的結果"
 
-#: ../src/MadEditFrame.cpp:7495
+#: ../src/MadEditFrame.cpp:7519
 #, c-format
 msgid "Line Number(1~%s): (you can input HexNumber(0x1~0x%X): 0xNNN)"
 msgstr "行號（1~%s）:（可以輸入16進位數字（0x1~0x%X）: 0xNNN）"
 
-#: ../src/MadEditFrame.cpp:7495
+#: ../src/MadEditFrame.cpp:7519
 msgid "Go To Line"
 msgstr "跳到此行"
 
-#: ../src/MadEditFrame.cpp:7556
+#: ../src/MadEditFrame.cpp:7580
 #, c-format
 msgid "Position(0~%s): (you can input HexNumber: 0xNNN)"
 msgstr "檔案位置（0~%s）：（可以輸入16進位數字: 0xNNN）"
 
-#: ../src/MadEditFrame.cpp:7556
+#: ../src/MadEditFrame.cpp:7580
 msgid "Go To Position"
 msgstr "跳到檔案位置"
 
-#: ../src/MadEditFrame.cpp:7922
+#: ../src/MadEditFrame.cpp:7946
 msgid "Markdown/HTML Preview"
 msgstr "Markdown/HTML預覽"
 
-#: ../src/MadEditFrame.cpp:7925
+#: ../src/MadEditFrame.cpp:7949
 msgid "Refresh"
 msgstr "重新整理"
 
-#: ../src/MadEditFrame.cpp:7925
+#: ../src/MadEditFrame.cpp:7949
 msgid "Refresh prviewed text"
 msgstr "重新整理預覽的文字"
 
-#: ../src/MadEditFrame.cpp:7926
+#: ../src/MadEditFrame.cpp:7950
 msgid "Close Preveiw"
 msgstr "關閉預覽"
 
-#: ../src/MadEditFrame.cpp:7926
+#: ../src/MadEditFrame.cpp:7950
 msgid "Close preveiw windows"
 msgstr "關閉預覽視窗"
 
-#: ../src/MadEditFrame.cpp:9316
+#: ../src/MadEditFrame.cpp:9340
 msgid "Open Mad Macro File"
 msgstr "開啟MadPython巨集檔案"
 
-#: ../src/MadEditFrame.cpp:9467
+#: ../src/MadEditFrame.cpp:9491
 msgid "|All files(*;*.*)"
 msgstr "|所有檔案 (*;*.*)"
 
-#: ../src/MadEditFrame.cpp:9468
+#: ../src/MadEditFrame.cpp:9492
 msgid "Mad Macro"
 msgstr "Mad巨集語言"
 
-#: ../src/MadEditFrame.cpp:9476
+#: ../src/MadEditFrame.cpp:9500
 #, c-format
 msgid "Do you want to overwrite %s ?"
 msgstr "要覆寫%s嗎？"
 
-#: ../src/MadEditFrame.cpp:9476
+#: ../src/MadEditFrame.cpp:9500
 msgid "Warning"
 msgstr "警告"
 
-#: ../src/MadEditFrame.cpp:9579
+#: ../src/MadEditFrame.cpp:9603
 msgid "Edit Mad Macro File"
 msgstr "編輯MadPython巨集檔案"
 
-#: ../src/MadEditFrame.cpp:10196
+#: ../src/MadEditFrame.cpp:10220
 msgid "Invalid JSON string, formatting failed\n"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:10201
+#: ../src/MadEditFrame.cpp:10225
 msgid "Invalid JSON string, formatting failed"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:10323
+#: ../src/MadEditFrame.cpp:10347
 msgid ""
 "Download dictionary at\n"
 "https://github.com/LibreOffice/dictionaries"
@@ -3105,51 +3117,51 @@ msgstr ""
 "字典取得位址\n"
 "https://github.com/LibreOffice/dictionaries"
 
-#: ../src/MadEditFrame.cpp:10324
+#: ../src/MadEditFrame.cpp:10348
 msgid "Press OK to visit our HomePage."
 msgstr "按「確定」存取 MadEdit-Mod 首頁。"
 
-#: ../src/MadEditFrame.cpp:10529
+#: ../src/MadEditFrame.cpp:10553
 msgid "Toggle Main Menubar"
 msgstr "切換顯示主功能表列"
 
-#: ../src/MadEditFrame.cpp:10623
+#: ../src/MadEditFrame.cpp:10647
 msgid "Passed the begin of the file/selection"
 msgstr "已經過了檔案或所選擇區域開頭"
 
-#: ../src/MadEditFrame.cpp:10685 ../src/MadSearchReplaceDialog.cpp:650
+#: ../src/MadEditFrame.cpp:10709 ../src/MadSearchReplaceDialog.cpp:650
 msgid "Passed the end of the file"
 msgstr "經過了檔案結尾"
 
-#: ../src/MadEditFrame.cpp:10730
+#: ../src/MadEditFrame.cpp:10754
 msgid "Information Window"
 msgstr "資訊視窗"
 
-#: ../src/MadEditFrame.cpp:10770
+#: ../src/MadEditFrame.cpp:10794
 msgid "Invalid item"
 msgstr "無效項目"
 
-#: ../src/MadEditFrame.cpp:10783
+#: ../src/MadEditFrame.cpp:10807
 msgid "&Collapse All"
 msgstr "折疊全部"
 
-#: ../src/MadEditFrame.cpp:10784
+#: ../src/MadEditFrame.cpp:10808
 msgid "Copy &All"
 msgstr "複製全部"
 
-#: ../src/MadEditFrame.cpp:10785
+#: ../src/MadEditFrame.cpp:10809
 msgid "&Reset Results"
 msgstr "清空結果"
 
-#: ../src/MadEditFrame.cpp:10787
+#: ../src/MadEditFrame.cpp:10811
 msgid "&Collapse Selected"
 msgstr "折疊選取項"
 
-#: ../src/MadEditFrame.cpp:10788
+#: ../src/MadEditFrame.cpp:10812
 msgid "&Copy Selected"
 msgstr "複製選取文字"
 
-#: ../src/MadEditFrame.cpp:10789
+#: ../src/MadEditFrame.cpp:10813
 msgid "&Delete Selected"
 msgstr "刪除選擇的項目"
 

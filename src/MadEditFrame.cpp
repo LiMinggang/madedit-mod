@@ -4553,6 +4553,7 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 {
 	wxString title, filename( fname ), linenumstr;
 	long linenum = -1;
+	bool createNew = false;
 
 	if( filename.IsEmpty() )
 	{
@@ -4675,6 +4676,24 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 			wxLogError( wxString( _( "Cannot access this file:" ) ) + wxT( "\n\n" ) + normalfilename );
 			return false;
 		}
+		else
+		{
+			if( !exists )
+			{
+			
+				wxMessageDialog dlg( this, wxString( _( "The file " ) ) + filename + wxT( " doesn't exist.\n Are you going to create it?" ), wxT( "MadEdit-Mod" ), wxYES_NO | wxICON_QUESTION );
+				dlg.SetYesNoLabels( wxMessageDialog::ButtonLabel( _( "&Yes" ) ), wxMessageDialog::ButtonLabel( _( "&No" ) ) );
+				if( dlg.ShowModal() != wxID_YES )
+				{
+					wxLogError(wxString(_("File does not exist:")) + wxT("\n\n") + filename);
+					return false;
+				}
+				else
+				{
+					createNew = true;
+				}
+			}
+		}
 	}
 
 	MadEdit *madedit = g_ActiveMadEdit;
@@ -4721,7 +4740,7 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 		}
 	}
 
-	if( !filename.IsEmpty() )
+	if( !filename.IsEmpty() && !createNew)
 	{
 		wxString enc, fn;
 		wxFileOffset pos;
@@ -4779,6 +4798,11 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 	else
 	{
 		madedit->ConfigNewDocument();
+		if(createNew)
+		{
+			madedit->MarkModified();
+			OnEditStatusChanged( madedit );
+		}
 	}
 
 	wxString str;

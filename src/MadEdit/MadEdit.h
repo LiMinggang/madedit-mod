@@ -899,6 +899,7 @@ public: // basic functions
 	}
 
 	bool IsModified() { return m_Modified; }
+	void MarkModified() { m_Modified = true; }
 	time_t GetModificationTime() { return m_ModificationTime; }
 
 	void SetReadOnly( bool value ) { m_ReadOnly = value; m_Lines->m_ReadOnly = value;}

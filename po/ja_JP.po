@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.18\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-31 10:25+0800\n"
+"POT-Creation-Date: 2020-05-31 11:34+0800\n"
 "PO-Revision-Date: 2019-04-12 22:31+0900\n"
 "Last-Translator: Tilt <tiltstr@gmail.com>\n"
 "Language-Team: Tilt <tiltstr@gmail.com> \n"
@@ -208,7 +208,7 @@ msgstr "ページ番号を %d から %d の間で入力:"
 msgid "Please wait while printing\n"
 msgstr "印刷しています..少々お待ちください\n"
 
-#: wxstd.po.cpp:50 ../src/MadEditFrame.cpp:6172
+#: wxstd.po.cpp:50 ../src/MadEditFrame.cpp:6196
 msgid "Printing"
 msgstr "印刷"
 
@@ -830,7 +830,7 @@ msgstr ""
 "続行してよろしいですか?"
 
 #: ../src/MadEdit/MadEditBasic.cpp:2498 ../src/MadEdit/MadEditBasic.cpp:2558
-#: ../src/MadEditFrame.cpp:4646
+#: ../src/MadEditFrame.cpp:4647
 msgid "The Parent Directory of this file does not exist:"
 msgstr "このファイルの親ディレクトリが存在しません:"
 
@@ -842,7 +842,7 @@ msgstr "ファイルを保存できません:"
 #: ../src/MadEdit/MadEditBasic.cpp:3117 ../src/MadEdit/MadEditSearch.cpp:1002
 #: ../src/MadEdit/MadEditSearch.cpp:1100 ../src/MadEdit/MadEditSearch.cpp:1163
 #: ../src/MadEditFrame.cpp:546 ../src/MadEditFrame.cpp:551
-#: ../src/MadEditFrame.cpp:5906
+#: ../src/MadEditFrame.cpp:5930
 msgid "&Ok"
 msgstr "&OK"
 
@@ -852,13 +852,15 @@ msgstr "ファイルを保存しますか?"
 
 #: ../src/MadEdit/MadEditBasic.cpp:2609 ../src/MadEdit/MadEditBasic.cpp:2724
 #: ../src/MadEdit/MadEditBasic.cpp:2808 ../src/MadEditFrame.cpp:535
-#: ../src/MadEditFrame.cpp:541 ../src/MadEditFrame.cpp:6245
+#: ../src/MadEditFrame.cpp:541 ../src/MadEditFrame.cpp:4685
+#: ../src/MadEditFrame.cpp:6269
 msgid "&Yes"
 msgstr "はい(&Y)"
 
 #: ../src/MadEdit/MadEditBasic.cpp:2610 ../src/MadEdit/MadEditBasic.cpp:2724
 #: ../src/MadEdit/MadEditBasic.cpp:2808 ../src/MadEditFrame.cpp:536
-#: ../src/MadEditFrame.cpp:541 ../src/MadEditFrame.cpp:6245
+#: ../src/MadEditFrame.cpp:541 ../src/MadEditFrame.cpp:4685
+#: ../src/MadEditFrame.cpp:6269
 msgid "&No"
 msgstr "いいえ(&N)"
 
@@ -1032,7 +1034,7 @@ msgstr "ファイルを開く(&O)"
 msgid "Open an existing file"
 msgstr "既存ファイルを開く"
 
-#: ../src/MadEditFrame.cpp:2226 ../src/MadEditFrame.cpp:5818
+#: ../src/MadEditFrame.cpp:2226 ../src/MadEditFrame.cpp:5842
 msgid "Open File"
 msgstr "ファイルを開く..."
 
@@ -1128,11 +1130,11 @@ msgstr "現在のファイルから右をすべて閉じる"
 msgid "Close all files to the right"
 msgstr "現在のファイルから右をすべて閉じる"
 
-#: ../src/MadEditFrame.cpp:2241 ../src/MadEditFrame.cpp:5251
+#: ../src/MadEditFrame.cpp:2241 ../src/MadEditFrame.cpp:5275
 msgid "Set/Clear ReadOnly Flag"
 msgstr "読み取り専用フラグのセット/解除"
 
-#: ../src/MadEditFrame.cpp:2241 ../src/MadEditFrame.cpp:5252
+#: ../src/MadEditFrame.cpp:2241 ../src/MadEditFrame.cpp:5276
 msgid "Set/Clear ReadOnly flag of the file"
 msgstr "ファイルの読み取り専用フラグ切り替え"
 
@@ -1318,11 +1320,11 @@ msgstr "すべて選択&"
 msgid "Select all data"
 msgstr "すべてのデータを選択"
 
-#: ../src/MadEditFrame.cpp:2291 ../src/MadEditFrame.cpp:5219
+#: ../src/MadEditFrame.cpp:2291 ../src/MadEditFrame.cpp:5243
 msgid "Begin/End Selecting"
 msgstr "選択の開始/終了"
 
-#: ../src/MadEditFrame.cpp:2291 ../src/MadEditFrame.cpp:5220
+#: ../src/MadEditFrame.cpp:2291 ../src/MadEditFrame.cpp:5244
 msgid "Begin/End selecting text"
 msgstr "テキスト選択の開始/終了"
 
@@ -1506,8 +1508,8 @@ msgstr "半角に変換(&A)"
 msgid "Convert the selection to halfwidth"
 msgstr "選択範囲を半角に変換"
 
-#: ../src/MadEditFrame.cpp:2337 ../src/MadEditFrame.cpp:6830
-#: ../src/MadEditFrame.cpp:6834 ../src/MadSearchReplaceDialog.cpp:2516
+#: ../src/MadEditFrame.cpp:2337 ../src/MadEditFrame.cpp:6854
+#: ../src/MadEditFrame.cpp:6858 ../src/MadSearchReplaceDialog.cpp:2516
 #: ../src/MadSearchReplaceDialog.cpp:2520 ../src/MadMacroDlg.cpp:732
 #: ../src/MadMacroDlg.cpp:736
 msgid "To Halfwidth by Options..."
@@ -1525,8 +1527,8 @@ msgstr "全角に変換(&F)"
 msgid "Convert the selection to fullwidth"
 msgstr "選択範囲を全角に変換"
 
-#: ../src/MadEditFrame.cpp:2339 ../src/MadEditFrame.cpp:6896
-#: ../src/MadEditFrame.cpp:6900 ../src/MadSearchReplaceDialog.cpp:2579
+#: ../src/MadEditFrame.cpp:2339 ../src/MadEditFrame.cpp:6920
+#: ../src/MadEditFrame.cpp:6924 ../src/MadSearchReplaceDialog.cpp:2579
 #: ../src/MadSearchReplaceDialog.cpp:2583 ../src/MadMacroDlg.cpp:799
 #: ../src/MadMacroDlg.cpp:803
 msgid "To Fullwidth by Options..."
@@ -1819,8 +1821,8 @@ msgstr "全画面モードの切り替え"
 msgid "Post-It"
 msgstr "付箋"
 
-#: ../src/MadEditFrame.cpp:2391 ../src/MadEditFrame.cpp:5329
-#: ../src/MadEditFrame.cpp:5335
+#: ../src/MadEditFrame.cpp:2391 ../src/MadEditFrame.cpp:5353
+#: ../src/MadEditFrame.cpp:5359
 msgid "Encoding: "
 msgstr "エンコーディング: "
 
@@ -1828,13 +1830,13 @@ msgstr "エンコーディング: "
 msgid "All Encodings"
 msgstr "全エンコーディング"
 
-#: ../src/MadEditFrame.cpp:2394 ../src/MadEditFrame.cpp:5344
-#: ../src/MadEditFrame.cpp:5349
+#: ../src/MadEditFrame.cpp:2394 ../src/MadEditFrame.cpp:5368
+#: ../src/MadEditFrame.cpp:5373
 msgid "Syntax Type: "
 msgstr "現在の構文:  "
 
-#: ../src/MadEditFrame.cpp:2396 ../src/MadEditFrame.cpp:5361
-#: ../src/MadEditFrame.cpp:5366
+#: ../src/MadEditFrame.cpp:2396 ../src/MadEditFrame.cpp:5385
+#: ../src/MadEditFrame.cpp:5390
 msgid "Font Name: "
 msgstr "フォント名: "
 
@@ -1842,8 +1844,8 @@ msgstr "フォント名: "
 msgid "[other]"
 msgstr "[その他]"
 
-#: ../src/MadEditFrame.cpp:2405 ../src/MadEditFrame.cpp:5377
-#: ../src/MadEditFrame.cpp:5382
+#: ../src/MadEditFrame.cpp:2405 ../src/MadEditFrame.cpp:5401
+#: ../src/MadEditFrame.cpp:5406
 msgid "Font Size: "
 msgstr "文字サイズ:"
 
@@ -1867,8 +1869,8 @@ msgstr "幅固定モード(&F)"
 msgid "Set/Unset the font with Fixed Width"
 msgstr "フォントの固定幅の設定/解除"
 
-#: ../src/MadEditFrame.cpp:2483 ../src/MadEditFrame.cpp:5397
-#: ../src/MadEditFrame.cpp:5402
+#: ../src/MadEditFrame.cpp:2483 ../src/MadEditFrame.cpp:5421
+#: ../src/MadEditFrame.cpp:5426
 msgid "Tab Column: "
 msgstr "列のタブ: "
 
@@ -1876,8 +1878,8 @@ msgstr "列のタブ: "
 msgid "Set column of Tab char"
 msgstr "列と TAB 文字を設定"
 
-#: ../src/MadEditFrame.cpp:2502 ../src/MadEditFrame.cpp:5465
-#: ../src/MadEditFrame.cpp:5470
+#: ../src/MadEditFrame.cpp:2502 ../src/MadEditFrame.cpp:5489
+#: ../src/MadEditFrame.cpp:5494
 msgid "Line Spacing: "
 msgstr "行間隔: "
 
@@ -2017,7 +2019,7 @@ msgstr "タイプライターモード"
 msgid "Toolbars"
 msgstr "ツールバー"
 
-#: ../src/MadEditFrame.cpp:2554 ../src/MadEditFrame.cpp:10526
+#: ../src/MadEditFrame.cpp:2554 ../src/MadEditFrame.cpp:10550
 msgid "Toggle Main Toolbar"
 msgstr "メインツールバーの切り替え"
 
@@ -2025,7 +2027,7 @@ msgstr "メインツールバーの切り替え"
 msgid "Show/Hide Main Toolbar"
 msgstr "メインツールバーの表示切り替え"
 
-#: ../src/MadEditFrame.cpp:2555 ../src/MadEditFrame.cpp:10527
+#: ../src/MadEditFrame.cpp:2555 ../src/MadEditFrame.cpp:10551
 msgid "Lock Toolbar"
 msgstr "ツールバーを固定"
 
@@ -2077,7 +2079,7 @@ msgstr "編集モードを 16 進モードに変更"
 msgid "Hex Mode"
 msgstr "16 進モード"
 
-#: ../src/MadEditFrame.cpp:2563 ../src/MadEditFrame.cpp:5433
+#: ../src/MadEditFrame.cpp:2563 ../src/MadEditFrame.cpp:5457
 msgid "Preview as: "
 msgstr "プレビュー："
 
@@ -2181,7 +2183,7 @@ msgstr "履歴をクリア(&P)"
 msgid "Clearing out your history"
 msgstr "履歴をクリア"
 
-#: ../src/MadEditFrame.cpp:2586 ../src/MadEditFrame.cpp:5641
+#: ../src/MadEditFrame.cpp:2586 ../src/MadEditFrame.cpp:5665
 msgid "Has Unicode BOM (Byte-Order Mark)"
 msgstr "Unicode (BOM あり)"
 
@@ -2193,7 +2195,7 @@ msgstr "BOM を追加/除去"
 msgid "Add/Remove Unicode BOM"
 msgstr "Unicode BOM を追加/除去"
 
-#: ../src/MadEditFrame.cpp:2589 ../src/MadEditFrame.cpp:5656
+#: ../src/MadEditFrame.cpp:2589 ../src/MadEditFrame.cpp:5680
 msgid "NewLine Char (File Format): "
 msgstr "改行文字 (ファイル形式): "
 
@@ -2221,7 +2223,7 @@ msgstr "LF/0A (UNIX/OSX) に変換(&U)"
 msgid "Convert the file format to UNIX format"
 msgstr "ファイルを UNIX形式に変換"
 
-#: ../src/MadEditFrame.cpp:2593 ../src/MadEditFrame.cpp:5683
+#: ../src/MadEditFrame.cpp:2593 ../src/MadEditFrame.cpp:5707
 msgid "Press Enter to Insert NewLine Char: "
 msgstr "Enter で挿入する改行記号: "
 
@@ -2743,15 +2745,15 @@ msgstr "右にスクロール"
 msgid "Scrolls right by aprox. 1 tab stop"
 msgstr "TAB 1 個分右にスクロール"
 
-#: ../src/MadEditFrame.cpp:3012 ../src/MadEditFrame.cpp:10725
+#: ../src/MadEditFrame.cpp:3012 ../src/MadEditFrame.cpp:10749
 msgid "Quick Search"
 msgstr "クイック検索"
 
-#: ../src/MadEditFrame.cpp:3021 ../src/MadEditFrame.cpp:5415
+#: ../src/MadEditFrame.cpp:3021 ../src/MadEditFrame.cpp:5439
 msgid "HTML"
 msgstr "HTML"
 
-#: ../src/MadEditFrame.cpp:3022 ../src/MadEditFrame.cpp:5419
+#: ../src/MadEditFrame.cpp:3022 ../src/MadEditFrame.cpp:5443
 msgid "Markdown"
 msgstr "マークダウン"
 
@@ -2849,95 +2851,105 @@ msgstr "最近開いたファイルすべてを一覧表示"
 msgid "Search Results"
 msgstr "検索結果"
 
-#: ../src/MadEditFrame.cpp:4579 ../src/MadEditFrame.cpp:4588
+#: ../src/MadEditFrame.cpp:4580 ../src/MadEditFrame.cpp:4589
 #, c-format
 msgid "NoName%d"
 msgstr "無題 %d"
 
-#: ../src/MadEditFrame.cpp:4636
+#: ../src/MadEditFrame.cpp:4637
 msgid "This is a Directory:"
 msgstr "これはディレクトリです:"
 
-#: ../src/MadEditFrame.cpp:4657
+#: ../src/MadEditFrame.cpp:4658
 msgid "This file does not exist:"
 msgstr "このファイルは存在しません:"
 
-#: ../src/MadEditFrame.cpp:4675
+#: ../src/MadEditFrame.cpp:4676
 msgid "Cannot access this file:"
 msgstr "ファイルにアクセス出来ません:"
 
-#: ../src/MadEditFrame.cpp:4763
+#: ../src/MadEditFrame.cpp:4684
+#, fuzzy
+msgid "The file "
+msgstr "このファイルを保存"
+
+#: ../src/MadEditFrame.cpp:4688
+#, fuzzy
+msgid "File does not exist:"
+msgstr "このファイルは存在しません:"
+
+#: ../src/MadEditFrame.cpp:4782
 msgid "Cannot load this file:"
 msgstr "ファイルを読み込めません:"
 
-#: ../src/MadEditFrame.cpp:4897 ../src/MadEditFrame.cpp:9636
+#: ../src/MadEditFrame.cpp:4921 ../src/MadEditFrame.cpp:9660
 #: ../src/MadSearchReplaceDialog.cpp:2836 ../src/MadMacroDlg.cpp:266
 #: ../src/MadMacroDlg.cpp:1046
 msgid "Memory allocation failed"
 msgstr "メモリの割り当てに失敗"
 
-#: ../src/MadEditFrame.cpp:4897 ../src/MadEditFrame.cpp:9636
-#: ../src/MadEditFrame.cpp:10196 ../src/MadEditFrame.cpp:10201
+#: ../src/MadEditFrame.cpp:4921 ../src/MadEditFrame.cpp:9660
+#: ../src/MadEditFrame.cpp:10220 ../src/MadEditFrame.cpp:10225
 #: ../src/MadSearchReplaceDialog.cpp:2836 ../src/MadMacroDlg.cpp:266
 #: ../src/MadMacroDlg.cpp:1046
 msgid "Error"
 msgstr "エラー"
 
-#: ../src/MadEditFrame.cpp:5208
+#: ../src/MadEditFrame.cpp:5232
 msgid "End Selecting"
 msgstr "選択範囲の終了"
 
-#: ../src/MadEditFrame.cpp:5209
+#: ../src/MadEditFrame.cpp:5233
 msgid "End selecting text"
 msgstr "结束选择文本"
 
-#: ../src/MadEditFrame.cpp:5213
+#: ../src/MadEditFrame.cpp:5237
 msgid "Begin Selecting"
 msgstr "選択の開始"
 
-#: ../src/MadEditFrame.cpp:5214
+#: ../src/MadEditFrame.cpp:5238
 msgid "Begin selecting text"
 msgstr "テキストの選択開始"
 
-#: ../src/MadEditFrame.cpp:5238
+#: ../src/MadEditFrame.cpp:5262
 msgid "Clear ReadOnly Flag"
 msgstr "読み取り専用フラグをクリア"
 
-#: ../src/MadEditFrame.cpp:5239
+#: ../src/MadEditFrame.cpp:5263
 msgid "Clear ReadOnly flag of the file"
 msgstr "このファイルの読み取り専用フラグをクリア"
 
-#: ../src/MadEditFrame.cpp:5246
+#: ../src/MadEditFrame.cpp:5270
 msgid "Set ReadOnly Flag"
 msgstr "読み取り専用フラグをセット"
 
-#: ../src/MadEditFrame.cpp:5247
+#: ../src/MadEditFrame.cpp:5271
 msgid "Set ReadOnly flag of the file"
 msgstr "ファイルの読み取り専用フラグをセット"
 
-#: ../src/MadEditFrame.cpp:5335 ../src/MadEditFrame.cpp:5349
-#: ../src/MadEditFrame.cpp:5366 ../src/MadEditFrame.cpp:5382
-#: ../src/MadEditFrame.cpp:5402 ../src/MadEditFrame.cpp:5408
-#: ../src/MadEditFrame.cpp:5470 ../src/MadEditFrame.cpp:5678
-#: ../src/MadEditFrame.cpp:5705 ../src/MadSourceFormatDialog.cpp:395
+#: ../src/MadEditFrame.cpp:5359 ../src/MadEditFrame.cpp:5373
+#: ../src/MadEditFrame.cpp:5390 ../src/MadEditFrame.cpp:5406
+#: ../src/MadEditFrame.cpp:5426 ../src/MadEditFrame.cpp:5432
+#: ../src/MadEditFrame.cpp:5494 ../src/MadEditFrame.cpp:5702
+#: ../src/MadEditFrame.cpp:5729 ../src/MadSourceFormatDialog.cpp:395
 #: ../src/MadSourceFormatDialog.cpp:403 ../src/MadOptionsDialog.cpp:581
 #: ../src/MadConvEncDialog.cpp:58
 msgid "None"
 msgstr "なし"
 
-#: ../src/MadEditFrame.cpp:5645 ../src/MadEditFrame.cpp:5651
+#: ../src/MadEditFrame.cpp:5669 ../src/MadEditFrame.cpp:5675
 msgid "Has No Unicode BOM (Byte-Order Mark)"
 msgstr "Unicode (BOMなし)"
 
-#: ../src/MadEditFrame.cpp:5904
+#: ../src/MadEditFrame.cpp:5928
 msgid "Failed to backup the file. "
 msgstr "ファイルのバックアップに失敗 "
 
-#: ../src/MadEditFrame.cpp:5904
+#: ../src/MadEditFrame.cpp:5928
 msgid " might not exist."
 msgstr "存在しません."
 
-#: ../src/MadEditFrame.cpp:6144
+#: ../src/MadEditFrame.cpp:6168
 #, fuzzy
 msgid ""
 "There was a problem previewing this document.\n"
@@ -2946,15 +2958,15 @@ msgstr ""
 "プレビューに不具合がありました.\n"
 "現在のプリンタ設定をもう一度確認してください"
 
-#: ../src/MadEditFrame.cpp:6144
+#: ../src/MadEditFrame.cpp:6168
 msgid "Previewing"
 msgstr "プレビュー中"
 
-#: ../src/MadEditFrame.cpp:6148
+#: ../src/MadEditFrame.cpp:6172
 msgid "MadEdit Print Preview"
 msgstr "MadEdit 印刷プレビュー"
 
-#: ../src/MadEditFrame.cpp:6172
+#: ../src/MadEditFrame.cpp:6196
 #, fuzzy
 msgid ""
 "There was a problem printing this document.\n"
@@ -2963,7 +2975,7 @@ msgstr ""
 "印刷に不具合がありました.\n"
 "現在のプリンタ設定をもう一度確認してください"
 
-#: ../src/MadEditFrame.cpp:6243
+#: ../src/MadEditFrame.cpp:6267
 msgid ""
 " does not exist. It might have been removed. Do you want to removed it from "
 "recent file list?"
@@ -2971,45 +2983,45 @@ msgstr ""
 " ファイルが存在しません、削除された可能性があります。履歴一覧から除去します"
 "か? "
 
-#: ../src/MadEditFrame.cpp:6677 ../src/MadSearchReplaceDialog.cpp:2373
+#: ../src/MadEditFrame.cpp:6701 ../src/MadSearchReplaceDialog.cpp:2373
 #: ../src/MadMacroDlg.cpp:586
 msgid "Delimiters:"
 msgstr "区切り 記号："
 
-#: ../src/MadEditFrame.cpp:6677 ../src/MadSearchReplaceDialog.cpp:2373
+#: ../src/MadEditFrame.cpp:6701 ../src/MadSearchReplaceDialog.cpp:2373
 #: ../src/MadMacroDlg.cpp:586
 msgid "Revert Hex String"
 msgstr "16進数文字列を復元"
 
-#: ../src/MadEditFrame.cpp:6825 ../src/MadEditFrame.cpp:6891
+#: ../src/MadEditFrame.cpp:6849 ../src/MadEditFrame.cpp:6915
 #: ../src/MadSearchReplaceDialog.cpp:2511
 #: ../src/MadSearchReplaceDialog.cpp:2574 ../src/MadMacroDlg.cpp:727
 #: ../src/MadMacroDlg.cpp:794
 msgid "ASCII characters"
 msgstr "ASCII 文字"
 
-#: ../src/MadEditFrame.cpp:6825 ../src/MadEditFrame.cpp:6891
+#: ../src/MadEditFrame.cpp:6849 ../src/MadEditFrame.cpp:6915
 #: ../src/MadSearchReplaceDialog.cpp:2511
 #: ../src/MadSearchReplaceDialog.cpp:2574 ../src/MadMacroDlg.cpp:727
 #: ../src/MadMacroDlg.cpp:794
 msgid "Japanese characters"
 msgstr "日本語文字"
 
-#: ../src/MadEditFrame.cpp:6826 ../src/MadEditFrame.cpp:6892
+#: ../src/MadEditFrame.cpp:6850 ../src/MadEditFrame.cpp:6916
 #: ../src/MadSearchReplaceDialog.cpp:2512
 #: ../src/MadSearchReplaceDialog.cpp:2575 ../src/MadMacroDlg.cpp:728
 #: ../src/MadMacroDlg.cpp:795
 msgid "Korean characters"
 msgstr "韓国語文字"
 
-#: ../src/MadEditFrame.cpp:6826 ../src/MadEditFrame.cpp:6892
+#: ../src/MadEditFrame.cpp:6850 ../src/MadEditFrame.cpp:6916
 #: ../src/MadSearchReplaceDialog.cpp:2512
 #: ../src/MadSearchReplaceDialog.cpp:2575 ../src/MadMacroDlg.cpp:795
 msgid "other characters"
 msgstr "その他の文字"
 
-#: ../src/MadEditFrame.cpp:6830 ../src/MadEditFrame.cpp:6834
-#: ../src/MadEditFrame.cpp:6896 ../src/MadEditFrame.cpp:6900
+#: ../src/MadEditFrame.cpp:6854 ../src/MadEditFrame.cpp:6858
+#: ../src/MadEditFrame.cpp:6920 ../src/MadEditFrame.cpp:6924
 #: ../src/MadSearchReplaceDialog.cpp:2516
 #: ../src/MadSearchReplaceDialog.cpp:2520
 #: ../src/MadSearchReplaceDialog.cpp:2579
@@ -3019,82 +3031,82 @@ msgstr "その他の文字"
 msgid "Choose the characters you want to convert:"
 msgstr "変換する文字を選択してください:"
 
-#: ../src/MadEditFrame.cpp:7424
+#: ../src/MadEditFrame.cpp:7448
 msgid "Find/Replace in Files Results"
 msgstr "ファイルの検索/置換結果"
 
-#: ../src/MadEditFrame.cpp:7495
+#: ../src/MadEditFrame.cpp:7519
 #, c-format
 msgid "Line Number(1~%s): (you can input HexNumber(0x1~0x%X): 0xNNN)"
 msgstr "行番号（1~%s）:（16進数の入力可能（0x1~0x%X）: 0xNNN）"
 
-#: ../src/MadEditFrame.cpp:7495
+#: ../src/MadEditFrame.cpp:7519
 msgid "Go To Line"
 msgstr "行の移動"
 
-#: ../src/MadEditFrame.cpp:7556
+#: ../src/MadEditFrame.cpp:7580
 #, c-format
 msgid "Position(0~%s): (you can input HexNumber: 0xNNN)"
 msgstr "ファイルの位置（0~%s）：（16 進数値を入力可能: 0xNNN"
 
-#: ../src/MadEditFrame.cpp:7556
+#: ../src/MadEditFrame.cpp:7580
 msgid "Go To Position"
 msgstr "位置の移動"
 
-#: ../src/MadEditFrame.cpp:7922
+#: ../src/MadEditFrame.cpp:7946
 msgid "Markdown/HTML Preview"
 msgstr "マークダウン/HTML プレビュー"
 
-#: ../src/MadEditFrame.cpp:7925
+#: ../src/MadEditFrame.cpp:7949
 msgid "Refresh"
 msgstr "更新"
 
-#: ../src/MadEditFrame.cpp:7925
+#: ../src/MadEditFrame.cpp:7949
 msgid "Refresh prviewed text"
 msgstr "プレビューテキストを更新"
 
-#: ../src/MadEditFrame.cpp:7926
+#: ../src/MadEditFrame.cpp:7950
 msgid "Close Preveiw"
 msgstr "プレビューを閉じる"
 
-#: ../src/MadEditFrame.cpp:7926
+#: ../src/MadEditFrame.cpp:7950
 msgid "Close preveiw windows"
 msgstr "プレビューウィンドウを閉じる"
 
-#: ../src/MadEditFrame.cpp:9316
+#: ../src/MadEditFrame.cpp:9340
 msgid "Open Mad Macro File"
 msgstr "Mad マクロ　(Python) を開く"
 
-#: ../src/MadEditFrame.cpp:9467
+#: ../src/MadEditFrame.cpp:9491
 msgid "|All files(*;*.*)"
 msgstr "|すべてのファイル (*;*.*)"
 
-#: ../src/MadEditFrame.cpp:9468
+#: ../src/MadEditFrame.cpp:9492
 msgid "Mad Macro"
 msgstr "Mad マクロ"
 
-#: ../src/MadEditFrame.cpp:9476
+#: ../src/MadEditFrame.cpp:9500
 #, c-format
 msgid "Do you want to overwrite %s ?"
 msgstr "本当に %s を上書きしますか?"
 
-#: ../src/MadEditFrame.cpp:9476
+#: ../src/MadEditFrame.cpp:9500
 msgid "Warning"
 msgstr "警告"
 
-#: ../src/MadEditFrame.cpp:9579
+#: ../src/MadEditFrame.cpp:9603
 msgid "Edit Mad Macro File"
 msgstr "Mad (Python) マクロファイルを編集"
 
-#: ../src/MadEditFrame.cpp:10196
+#: ../src/MadEditFrame.cpp:10220
 msgid "Invalid JSON string, formatting failed\n"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:10201
+#: ../src/MadEditFrame.cpp:10225
 msgid "Invalid JSON string, formatting failed"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:10323
+#: ../src/MadEditFrame.cpp:10347
 msgid ""
 "Download dictionary at\n"
 "https://github.com/LibreOffice/dictionaries"
@@ -3102,51 +3114,51 @@ msgstr ""
 "辞書をダウンロード\n"
 "https://github.com/LibreOffice/dictionaries"
 
-#: ../src/MadEditFrame.cpp:10324
+#: ../src/MadEditFrame.cpp:10348
 msgid "Press OK to visit our HomePage."
 msgstr "OK でホームページに移動します"
 
-#: ../src/MadEditFrame.cpp:10529
+#: ../src/MadEditFrame.cpp:10553
 msgid "Toggle Main Menubar"
 msgstr "メインメニューバーの切り替え"
 
-#: ../src/MadEditFrame.cpp:10623
+#: ../src/MadEditFrame.cpp:10647
 msgid "Passed the begin of the file/selection"
 msgstr "ファイル/選択範囲の先頭を渡す"
 
-#: ../src/MadEditFrame.cpp:10685 ../src/MadSearchReplaceDialog.cpp:650
+#: ../src/MadEditFrame.cpp:10709 ../src/MadSearchReplaceDialog.cpp:650
 msgid "Passed the end of the file"
 msgstr "ファイルの末尾を渡す"
 
-#: ../src/MadEditFrame.cpp:10730
+#: ../src/MadEditFrame.cpp:10754
 msgid "Information Window"
 msgstr "情報ウィンドウ"
 
-#: ../src/MadEditFrame.cpp:10770
+#: ../src/MadEditFrame.cpp:10794
 msgid "Invalid item"
 msgstr "無効な項目"
 
-#: ../src/MadEditFrame.cpp:10783
+#: ../src/MadEditFrame.cpp:10807
 msgid "&Collapse All"
 msgstr "すべて閉じる(&C)"
 
-#: ../src/MadEditFrame.cpp:10784
+#: ../src/MadEditFrame.cpp:10808
 msgid "Copy &All"
 msgstr "すべてコピー(&A)"
 
-#: ../src/MadEditFrame.cpp:10785
+#: ../src/MadEditFrame.cpp:10809
 msgid "&Reset Results"
 msgstr "結果をリセット(&R)"
 
-#: ../src/MadEditFrame.cpp:10787
+#: ../src/MadEditFrame.cpp:10811
 msgid "&Collapse Selected"
 msgstr "選択項目を折りたたむ(&C)"
 
-#: ../src/MadEditFrame.cpp:10788
+#: ../src/MadEditFrame.cpp:10812
 msgid "&Copy Selected"
 msgstr "選択した文字をコピー(&C)"
 
-#: ../src/MadEditFrame.cpp:10789
+#: ../src/MadEditFrame.cpp:10813
 msgid "&Delete Selected"
 msgstr "選択した項目を削除(&D)"
 
