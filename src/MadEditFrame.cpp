@@ -10188,7 +10188,13 @@ void MadEditFrame::OnToolsJSONFormat( wxCommandEvent& WXUNUSED(event) )
 	std::string res;
 	try {
 		JSON::ValuePtr v = parser.parse(src);
-		std::string res = v->encodePretty();
+		res = v->encodePretty(leftBracesNumber);
+	}
+	catch(JSON::Exception& e)
+	{
+		wxString errMsg( wxGetTranslation(e.what()) );
+		MadMessageBox(wxGetTranslation(_("Invalid JSON string, formatting failed\n")) + errMsg, _("Error"), wxOK | wxICON_ERROR);
+		return;
 	}
 	catch (...)
 	{

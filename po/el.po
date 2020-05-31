@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: madedit-mod 0.4.18\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-31 09:45+0800\n"
+"POT-Creation-Date: 2020-05-31 10:25+0800\n"
 "PO-Revision-Date: 2019-04-22 21:51+0800\n"
 "Last-Translator: nikos papadopoulos <nikos769@yahoo.gr>\n"
 "Language-Team: https://github.com/nikoss/my-translation-contributions\n"
@@ -787,6 +787,16 @@ msgstr "Αναζήτηση για στίχο"
 #, fuzzy
 msgid "error"
 msgstr "Σφάλμα"
+
+#: wxstd.po.cpp:190
+#, fuzzy
+msgid " at line "
+msgstr "Η Κουκκίδα Ταιριάζει Νέα Γραμμή"
+
+#: wxstd.po.cpp:191
+#, fuzzy
+msgid " and column "
+msgstr "Στήλη Πινακωτής: "
 
 #: ../src/MadEdit/MadEdit.cpp:12072
 msgid "Zero Length Match"
@@ -2030,7 +2040,7 @@ msgstr "Παραδοσιακή Λειτουργία Γραφομηχανής"
 msgid "Toolbars"
 msgstr "Γραμμές Εργαλείων"
 
-#: ../src/MadEditFrame.cpp:2554 ../src/MadEditFrame.cpp:10520
+#: ../src/MadEditFrame.cpp:2554 ../src/MadEditFrame.cpp:10526
 msgid "Toggle Main Toolbar"
 msgstr "Εναλλαγή της Κύριας Γραμμής Εργαλείων"
 
@@ -2038,7 +2048,7 @@ msgstr "Εναλλαγή της Κύριας Γραμμής Εργαλείων"
 msgid "Show/Hide Main Toolbar"
 msgstr "Εμφάνιση  ή Απόκρυψη της Κύριας Γραμμής Εργαλείων"
 
-#: ../src/MadEditFrame.cpp:2555 ../src/MadEditFrame.cpp:10521
+#: ../src/MadEditFrame.cpp:2555 ../src/MadEditFrame.cpp:10527
 msgid "Lock Toolbar"
 msgstr "Κλείδωμα της Γραμμής Εργαλείων"
 
@@ -2777,7 +2787,7 @@ msgstr "Κύλιση Δεξιά"
 msgid "Scrolls right by aprox. 1 tab stop"
 msgstr "Κυλά δεξιά κατά περίπου 1 πινακωτή"
 
-#: ../src/MadEditFrame.cpp:3012 ../src/MadEditFrame.cpp:10719
+#: ../src/MadEditFrame.cpp:3012 ../src/MadEditFrame.cpp:10725
 msgid "Quick Search"
 msgstr "Γρήγορη Αναζήτηση"
 
@@ -2911,8 +2921,9 @@ msgid "Memory allocation failed"
 msgstr "Η δέσμευση μνήμης απέτυχε"
 
 #: ../src/MadEditFrame.cpp:4897 ../src/MadEditFrame.cpp:9636
-#: ../src/MadEditFrame.cpp:10195 ../src/MadSearchReplaceDialog.cpp:2836
-#: ../src/MadMacroDlg.cpp:266 ../src/MadMacroDlg.cpp:1046
+#: ../src/MadEditFrame.cpp:10196 ../src/MadEditFrame.cpp:10201
+#: ../src/MadSearchReplaceDialog.cpp:2836 ../src/MadMacroDlg.cpp:266
+#: ../src/MadMacroDlg.cpp:1046
 msgid "Error"
 msgstr "Σφάλμα"
 
@@ -3120,11 +3131,15 @@ msgstr "Προειδοποίηση"
 msgid "Edit Mad Macro File"
 msgstr "Επεξεργασία Ενός Αρχείου Μακροεντολών Μαντ"
 
-#: ../src/MadEditFrame.cpp:10195
+#: ../src/MadEditFrame.cpp:10196
+msgid "Invalid JSON string, formatting failed\n"
+msgstr ""
+
+#: ../src/MadEditFrame.cpp:10201
 msgid "Invalid JSON string, formatting failed"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:10317
+#: ../src/MadEditFrame.cpp:10323
 msgid ""
 "Download dictionary at\n"
 "https://github.com/LibreOffice/dictionaries"
@@ -3132,51 +3147,51 @@ msgstr ""
 "Λήψη του λεξικού από το...\n"
 "https://github.com/LibreOffice/dictionaries"
 
-#: ../src/MadEditFrame.cpp:10318
+#: ../src/MadEditFrame.cpp:10324
 msgid "Press OK to visit our HomePage."
 msgstr "Κλίκαρε στο  «Εντάξει» για να επισκεφτείς την Αρχική Ιστοσελίδα."
 
-#: ../src/MadEditFrame.cpp:10523
+#: ../src/MadEditFrame.cpp:10529
 msgid "Toggle Main Menubar"
 msgstr "Εναλλαγή της Κύριας Γραμμής Εργαλείων με το Μενού"
 
-#: ../src/MadEditFrame.cpp:10617
+#: ../src/MadEditFrame.cpp:10623
 msgid "Passed the begin of the file/selection"
 msgstr "Πέρασε την αρχή του αρχείου ή της επιλογής"
 
-#: ../src/MadEditFrame.cpp:10679 ../src/MadSearchReplaceDialog.cpp:650
+#: ../src/MadEditFrame.cpp:10685 ../src/MadSearchReplaceDialog.cpp:650
 msgid "Passed the end of the file"
 msgstr "Πέρασε το τέλος του αρχείου ή της επιλογής"
 
-#: ../src/MadEditFrame.cpp:10724
+#: ../src/MadEditFrame.cpp:10730
 msgid "Information Window"
 msgstr "Παράθυρο Πληροφοριών"
 
-#: ../src/MadEditFrame.cpp:10764
+#: ../src/MadEditFrame.cpp:10770
 msgid "Invalid item"
 msgstr "Μη έγκυρο αντικείμενο"
 
-#: ../src/MadEditFrame.cpp:10777
+#: ../src/MadEditFrame.cpp:10783
 msgid "&Collapse All"
 msgstr "Σύμπτυ&ξη Όλων"
 
-#: ../src/MadEditFrame.cpp:10778
+#: ../src/MadEditFrame.cpp:10784
 msgid "Copy &All"
 msgstr "&Αντιγραφή Όλων"
 
-#: ../src/MadEditFrame.cpp:10779
+#: ../src/MadEditFrame.cpp:10785
 msgid "&Reset Results"
 msgstr "Επαναφο&ρά των Αποτελέσματων"
 
-#: ../src/MadEditFrame.cpp:10781
+#: ../src/MadEditFrame.cpp:10787
 msgid "&Collapse Selected"
 msgstr "Σύμπτυ&ξη των Επιλεγμένων"
 
-#: ../src/MadEditFrame.cpp:10782
+#: ../src/MadEditFrame.cpp:10788
 msgid "&Copy Selected"
 msgstr "Αντι&γραφή Επιλεγμένων"
 
-#: ../src/MadEditFrame.cpp:10783
+#: ../src/MadEditFrame.cpp:10789
 msgid "&Delete Selected"
 msgstr "&Διαγραφή Των Επιλεγμένων"
 

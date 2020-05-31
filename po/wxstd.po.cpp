@@ -187,3 +187,5 @@ _("forward slash '/'"); // TOK_COMMENT
 _("identifier"); // TOK_IDENTIFIER
 _("end of string"); // TOK_EOS
 _("error"); // TOK_ERROR
+_(" at line ")
+_(" and column ")

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.18\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-31 09:45+0800\n"
+"POT-Creation-Date: 2020-05-31 10:25+0800\n"
 "PO-Revision-Date: 2015-03-31 14:56+0100\n"
 "Last-Translator: Adam Massalski <massaada@wp.pl>\n"
 "Language-Team: Adam Massalski <massaada@wp.pl>\n"
@@ -829,6 +829,15 @@ msgstr "Znajdź wyraz"
 #: wxstd.po.cpp:189
 msgid "error"
 msgstr ""
+
+#: wxstd.po.cpp:190
+msgid " at line "
+msgstr ""
+
+#: wxstd.po.cpp:191
+#, fuzzy
+msgid " and column "
+msgstr "Tabulator:"
 
 #: ../src/MadEdit/MadEdit.cpp:12072
 msgid "Zero Length Match"
@@ -2102,7 +2111,7 @@ msgstr ""
 msgid "Toolbars"
 msgstr "&Narzędzia"
 
-#: ../src/MadEditFrame.cpp:2554 ../src/MadEditFrame.cpp:10520
+#: ../src/MadEditFrame.cpp:2554 ../src/MadEditFrame.cpp:10526
 #, fuzzy
 msgid "Toggle Main Toolbar"
 msgstr "Dodaj zakładkę"
@@ -2111,7 +2120,7 @@ msgstr "Dodaj zakładkę"
 msgid "Show/Hide Main Toolbar"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2555 ../src/MadEditFrame.cpp:10521
+#: ../src/MadEditFrame.cpp:2555 ../src/MadEditFrame.cpp:10527
 #, fuzzy
 msgid "Lock Toolbar"
 msgstr "Idź do pozycji"
@@ -2865,7 +2874,7 @@ msgstr "Przewiń w prawo tekstu"
 msgid "Scrolls right by aprox. 1 tab stop"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:3012 ../src/MadEditFrame.cpp:10719
+#: ../src/MadEditFrame.cpp:3012 ../src/MadEditFrame.cpp:10725
 #, fuzzy
 msgid "Quick Search"
 msgstr "Szukaj"
@@ -3015,8 +3024,9 @@ msgid "Memory allocation failed"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:4897 ../src/MadEditFrame.cpp:9636
-#: ../src/MadEditFrame.cpp:10195 ../src/MadSearchReplaceDialog.cpp:2836
-#: ../src/MadMacroDlg.cpp:266 ../src/MadMacroDlg.cpp:1046
+#: ../src/MadEditFrame.cpp:10196 ../src/MadEditFrame.cpp:10201
+#: ../src/MadSearchReplaceDialog.cpp:2836 ../src/MadMacroDlg.cpp:266
+#: ../src/MadMacroDlg.cpp:1046
 msgid "Error"
 msgstr ""
 
@@ -3233,67 +3243,71 @@ msgstr ""
 msgid "Edit Mad Macro File"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:10195
+#: ../src/MadEditFrame.cpp:10196
+msgid "Invalid JSON string, formatting failed\n"
+msgstr ""
+
+#: ../src/MadEditFrame.cpp:10201
 msgid "Invalid JSON string, formatting failed"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:10317
+#: ../src/MadEditFrame.cpp:10323
 msgid ""
 "Download dictionary at\n"
 "https://github.com/LibreOffice/dictionaries"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:10318
+#: ../src/MadEditFrame.cpp:10324
 msgid "Press OK to visit our HomePage."
 msgstr "Naciśnij OK, aby odwiedzić naszą stronę."
 
-#: ../src/MadEditFrame.cpp:10523
+#: ../src/MadEditFrame.cpp:10529
 #, fuzzy
 msgid "Toggle Main Menubar"
 msgstr "Dodaj zakładkę"
 
-#: ../src/MadEditFrame.cpp:10617
+#: ../src/MadEditFrame.cpp:10623
 #, fuzzy
 msgid "Passed the begin of the file/selection"
 msgstr "Zwiększ wcięcie wybranych linii"
 
-#: ../src/MadEditFrame.cpp:10679 ../src/MadSearchReplaceDialog.cpp:650
+#: ../src/MadEditFrame.cpp:10685 ../src/MadSearchReplaceDialog.cpp:650
 #, fuzzy
 msgid "Passed the end of the file"
 msgstr "Zwiększ wcięcie wybranych linii"
 
-#: ../src/MadEditFrame.cpp:10724
+#: ../src/MadEditFrame.cpp:10730
 msgid "Information Window"
 msgstr "Okno informacyjne"
 
-#: ../src/MadEditFrame.cpp:10764
+#: ../src/MadEditFrame.cpp:10770
 msgid "Invalid item"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:10777
+#: ../src/MadEditFrame.cpp:10783
 #, fuzzy
 msgid "&Collapse All"
 msgstr "Zamkni&j wszystkie"
 
-#: ../src/MadEditFrame.cpp:10778
+#: ../src/MadEditFrame.cpp:10784
 #, fuzzy
 msgid "Copy &All"
 msgstr "Kopiuj pełną ścieżkę"
 
-#: ../src/MadEditFrame.cpp:10779
+#: ../src/MadEditFrame.cpp:10785
 msgid "&Reset Results"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:10781
+#: ../src/MadEditFrame.cpp:10787
 #, fuzzy
 msgid "&Collapse Selected"
 msgstr "Zamkni&j wszystkie"
 
-#: ../src/MadEditFrame.cpp:10782
+#: ../src/MadEditFrame.cpp:10788
 msgid "&Copy Selected"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:10783
+#: ../src/MadEditFrame.cpp:10789
 #, fuzzy
 msgid "&Delete Selected"
 msgstr "Usuń zaznaczone linie"
