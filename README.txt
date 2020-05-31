@@ -139,6 +139,7 @@ Set Recent files, Search/replace Text to true on PurgeHistory dialog
 Add more Regex error strings for translation
 Update Simplified Chinese translation
 Update Japanese translation(Thanks Tilt)
+Thanks ddowling for JSON formatter
 
 Mod v0.4.18
 Note: Rollback *nix build to static link with wxWidgets because UI issues reported

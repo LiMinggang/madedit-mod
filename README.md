@@ -132,7 +132,8 @@ License
 3. Boost Software License for boost.python
 4. Python License for miniPython
 5. LGPL for hunspell
-6. Others by the original authors
+6. MIT License for JSON formatter
+7. Others by the original authors
 
 Thanks
 =============
