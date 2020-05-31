@@ -123,24 +123,24 @@ Todo:
 Packing for FreeBSD
 
 Mod v0.4.19
-Fix: Disable safe mode in PanChinese search
-Fix: String encoding bug in MadPython #304
-Fix: print in MadPython can output Unicode string now
-Fix: Reset MadMacro Dialog
-Fix: Bugs in Macro Recording
-Fix: Char display issue with certain font in search/replace input box #305
-Fix: Layout issue of Source Formatter Dialog
-Fix: MadPython range checking bug and recording bug
-New: Configurable column number of the column hint indicator #303
-New: Reset MadPython console output
-New: JSON formatter #306
-New: Automatically create new file if not exist #300
-Improve readability of recorded MadPython
-Set Recent files, Search/replace Text to true on PurgeHistory dialog
-Add more Regex error strings for translation
-Update Simplified Chinese translation
-Update Japanese translation(Thanks Tilt)
-Thanks ddowling for JSON formatter
+1.Fix: Disable safe mode in PanChinese search
+2.Fix: String encoding bug in MadPython #304
+3.Fix: print in MadPython can output Unicode string now
+4.Fix: Reset MadMacro Dialog
+5.Fix: Bugs in Macro Recording
+6.Fix: Char display issue with certain font in search/replace input box #305
+7.Fix: Layout issue of Source Formatter Dialog
+8.Fix: MadPython range checking bug and recording bug
+9.New: Configurable column number of the column hint indicator #303
+10.New: Reset MadPython console output
+11.New: JSON formatter #306
+12.New: Automatically create new file if not exist #300
+13.Improve readability of recorded MadPython
+14.Set Recent files, Search/replace Text to true on PurgeHistory dialog
+15.Add more Regex error strings for translation
+16.Update Simplified Chinese translation
+17.Update Japanese translation(Thanks Tilt)
+18.Thanks ddowling for JSON formatter
 
 Mod v0.4.18
 Note: Rollback *nix build to static link with wxWidgets because UI issues reported
