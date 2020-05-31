@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-31 11:34+0800\n"
+"POT-Creation-Date: 2020-05-31 13:10+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2844,6 +2844,12 @@ msgstr ""
 
 #: ../src/MadEditFrame.cpp:4684
 msgid "The file "
+msgstr ""
+
+#: ../src/MadEditFrame.cpp:4684
+msgid ""
+" doesn't exist.\n"
+" Are you going to create it?"
 msgstr ""
 
 #: ../src/MadEditFrame.cpp:4688

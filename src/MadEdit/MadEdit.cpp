@@ -1998,7 +1998,13 @@ int MadEdit::GetIndentCountByPos( wxFileOffset pos )
 	vector <ucs4_t> spaces;
 	int lineid = GetLineByPos( lit, pos, row );
 	GetIndentSpaces( lineid, lit, spaces, true, false );
-	count = spaces.size() / GetIndentColumns();
+	long totalSpaces = 0;
+	for (int i = 0; i < spaces.size(); ++i)
+	{
+		if (spaces[i] == (ucs4_t)'\t') totalSpaces += GetIndentColumns();
+		else totalSpaces += 1;
+	}
+	count = totalSpaces / GetIndentColumns();
 	return count;
 }
 
@@ -11521,8 +11527,8 @@ WXLRESULT MadEdit::MSWWindowProc( WXUINT message, WXWPARAM wParam, WXLPARAM lPar
 
 						m_RepaintAll = false;
 						Refresh( false );*/
-						//wxPaintEvent evt;
-						MadEditOnPaint( NULL );
+						wxPaintEvent evt;
+						MadEditOnPaint( &evt);
 						return 0;
 					}
 				}

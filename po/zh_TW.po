@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.18\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-31 11:34+0800\n"
+"POT-Creation-Date: 2020-05-31 13:09+0800\n"
 "PO-Revision-Date: 2019-07-20 11:07+0800\n"
 "Last-Translator: zhtw2013 <zhtw2013@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
@@ -2879,6 +2879,12 @@ msgstr "無法存取這個檔案："
 #, fuzzy
 msgid "The file "
 msgstr "儲存檔案"
+
+#: ../src/MadEditFrame.cpp:4684
+msgid ""
+" doesn't exist.\n"
+" Are you going to create it?"
+msgstr ""
 
 #: ../src/MadEditFrame.cpp:4688
 #, fuzzy

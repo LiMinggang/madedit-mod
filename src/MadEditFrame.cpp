@@ -4680,10 +4680,13 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 		{
 			if( !exists )
 			{
-			
-				wxMessageDialog dlg( this, wxString( _( "The file " ) ) + filename + wxT( " doesn't exist.\n Are you going to create it?" ), wxT( "MadEdit-Mod" ), wxYES_NO | wxICON_QUESTION );
-				dlg.SetYesNoLabels( wxMessageDialog::ButtonLabel( _( "&Yes" ) ), wxMessageDialog::ButtonLabel( _( "&No" ) ) );
-				if( dlg.ShowModal() != wxID_YES )
+				if(shown)
+				{
+					wxMessageDialog dlg(this, wxString(_("The file ")) + filename + _(" doesn't exist.\n Are you going to create it?"), wxT("MadEdit-Mod"), wxYES_NO | wxICON_QUESTION);
+					dlg.SetYesNoLabels(wxMessageDialog::ButtonLabel(_("&Yes")), wxMessageDialog::ButtonLabel(_("&No")));
+					shown = (dlg.ShowModal() != wxID_YES);
+				}
+				if(shown)
 				{
 					wxLogError(wxString(_("File does not exist:")) + wxT("\n\n") + filename);
 					return false;
@@ -10184,14 +10187,14 @@ void MadEditFrame::OnToolsJSONFormat( wxCommandEvent& WXUNUSED(event) )
 
 	wxString text;
 	bool onlySelected = false;
-	int leftBracesNumber = 0;
+	int leftIndentNumber = 0;
 
 	if( g_ActiveMadEdit->IsSelected() )
 	{
 		wxString seltext;
 		onlySelected = true;
 		// Ajust to select the whole line
-		leftBracesNumber = g_ActiveMadEdit->GetIndentCountByPos( g_ActiveMadEdit->GetSelectionBeginPos() );
+		leftIndentNumber = g_ActiveMadEdit->GetIndentCountByPos( g_ActiveMadEdit->GetSelectionBeginPos() );
 		g_ActiveMadEdit->SelectWholeLine();
 		g_ActiveMadEdit->GetSelText(text);
 	}
@@ -10201,18 +10204,24 @@ void MadEditFrame::OnToolsJSONFormat( wxCommandEvent& WXUNUSED(event) )
 	}
 
 	std::string src = text.ToStdString(wxConvUTF8);
-	JSON::Parser parser(
-		JSON::ALLOW_COMMENTS  |
-		JSON::ALLOW_UNQUOTED_FIELD_NAMES |
-		JSON::ALLOW_SINGLE_QUOTES |
-		JSON::ALLOW_TRAILING_COMMAS
-	);
-
+	JSON::Parser parser;
 
 	std::string res;
 	try {
+		if(g_ActiveMadEdit->GetInsertSpacesInsteadOfTab())
+		{
+			JSON::indentChar = ' ';
+			JSON::indentUnit = g_ActiveMadEdit->GetTabColumns();
+		}
+		else
+		{
+			JSON::indentChar = '\t';
+			JSON::indentUnit = 1;
+		}
 		JSON::ValuePtr v = parser.parse(src);
-		res = v->encodePretty(leftBracesNumber);
+		leftIndentNumber *= JSON::indentUnit;
+		std::string indentString(leftIndentNumber, JSON::indentChar);
+		res = indentString + v->encodePretty(leftIndentNumber);
 	}
 	catch(JSON::Exception& e)
 	{

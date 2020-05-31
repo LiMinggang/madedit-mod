@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: madedit-mod 0.4.18\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-31 11:34+0800\n"
+"POT-Creation-Date: 2020-05-31 13:09+0800\n"
 "PO-Revision-Date: 2019-04-22 21:51+0800\n"
 "Last-Translator: nikos papadopoulos <nikos769@yahoo.gr>\n"
 "Language-Team: https://github.com/nikoss/my-translation-contributions\n"
@@ -2916,6 +2916,12 @@ msgstr "Αδυναμία πρόσβασης σε αυτό το αρχείο:"
 #, fuzzy
 msgid "The file "
 msgstr "Αποθήκευση του αρχείου"
+
+#: ../src/MadEditFrame.cpp:4684
+msgid ""
+" doesn't exist.\n"
+" Are you going to create it?"
+msgstr ""
 
 #: ../src/MadEditFrame.cpp:4688
 #, fuzzy

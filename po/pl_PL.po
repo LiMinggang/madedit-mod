@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.18\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-31 11:34+0800\n"
+"POT-Creation-Date: 2020-05-31 13:09+0800\n"
 "PO-Revision-Date: 2015-03-31 14:56+0100\n"
 "Last-Translator: Adam Massalski <massaada@wp.pl>\n"
 "Language-Team: Adam Massalski <massaada@wp.pl>\n"
@@ -3019,6 +3019,12 @@ msgstr "Brak dostępu do tego pliku:"
 #, fuzzy
 msgid "The file "
 msgstr "Zapisz plik"
+
+#: ../src/MadEditFrame.cpp:4684
+msgid ""
+" doesn't exist.\n"
+" Are you going to create it?"
+msgstr ""
 
 #: ../src/MadEditFrame.cpp:4688
 #, fuzzy

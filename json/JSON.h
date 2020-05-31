@@ -24,7 +24,7 @@
 
 namespace JSON
 {
-    // Need to forward declare these class as they all refer to each other
+	// Need to forward declare these class as they all refer to each other
     class Object;
     typedef boost::shared_ptr<Object> ObjectPtr;
 
@@ -35,32 +35,32 @@ namespace JSON
     typedef boost::shared_ptr<Value> ValuePtr;
 
     class Value
-    {
+	{
     public:
 	virtual ~Value() {}
 
 	bool isString() const { return type == TypeString; }
 	virtual std::string getString() const;
-        // Return a JSON value as a string
-        std::string getAsString() const;
+		// Return a JSON value as a string
+	    std::string getAsString() const;
 
 	bool isNumber() const { return type == TypeNumber; }
 	virtual double getNumber() const;
-        // Return a JSON value as a number if possible otherwise returns 0
-        double getAsNumber() const;
+		// Return a JSON value as a number if possible otherwise returns 0
+	    double getAsNumber() const;
 
 	bool isBoolean() const { return type == TypeBoolean; }
 	virtual bool getBoolean() const;
-        // Return a JSON value as a boolean if possible otherwise returns false
-        bool getAsBoolean() const;
+		// Return a JSON value as a boolean if possible otherwise returns false
+	    bool getAsBoolean() const;
 
 	bool isObject() const { return type == TypeObject; }
-        // To convert value to object use
-        // boost::dynamic_pointer_cast<JSON::Object>(v)
+		// To convert value to object use
+		// boost::dynamic_pointer_cast<JSON::Object>(v)
 
 	bool isArray() const { return type == TypeArray; }
-        // To convert value to array use
-        // boost::dynamic_pointer_cast<JSON::Array>(v)
+		// To convert value to array use
+		// boost::dynamic_pointer_cast<JSON::Array>(v)
 
 	bool isNull() const { return type == TypeNull; }
 
@@ -79,15 +79,15 @@ namespace JSON
 	// Cannot copy this base class
 	Value(const Value &) {}
 	Value &operator=(const Value &) { return *this; }
-    };
+	};
 
     class String
 	: public Value
-    {
+	{
     public:
-    	// Itentionally not explicit as want automatic type conversion
-        String(const std::string &str) : Value(TypeString), val(str) {}
-        String(const char *str) : Value(TypeString), val(str) {}
+		// Itentionally not explicit as want automatic type conversion
+	    String(const std::string &str) : Value(TypeString), val(str) {}
+	    String(const char *str) : Value(TypeString), val(str) {}
 	virtual ~String() {}
 
 	virtual std::string getString() const;
@@ -96,17 +96,17 @@ namespace JSON
 	virtual std::string encode() const;
     protected:
 	std::string val;
-    };
+	};
 
     class Number
 	: public Value
-    {
+	{
     public:
-    	// Itentionally not explicit as want automatic type conversion
-        Number(double d) : Value(TypeNumber), val(d) {}
-        Number(long d) : Value(TypeNumber), val(d) {}
-        Number(unsigned long d) : Value(TypeNumber), val(d) {}
-        Number(int d) : Value(TypeNumber), val(d) {}
+		// Itentionally not explicit as want automatic type conversion
+	    Number(double d) : Value(TypeNumber), val(d) {}
+	    Number(long d) : Value(TypeNumber), val(d) {}
+	    Number(unsigned long d) : Value(TypeNumber), val(d) {}
+	    Number(int d) : Value(TypeNumber), val(d) {}
 
 	virtual ~Number() {}
 
@@ -116,14 +116,14 @@ namespace JSON
 	virtual std::string encode() const;
     protected:
 	double val;
-    };
+	};
 
     class Boolean
 	: public Value
-    {
+	{
     public:
-    	// Itentionally not explicit as want automatic type conversion
-        Boolean(bool b) : Value(TypeBoolean), val(b) {}
+		// Itentionally not explicit as want automatic type conversion
+	    Boolean(bool b) : Value(TypeBoolean), val(b) {}
 	virtual ~Boolean() {}
 
 	virtual bool getBoolean() const;
@@ -131,13 +131,13 @@ namespace JSON
 	virtual std::string encode() const;
     protected:
 	bool val;
-    };
+	};
 
     class Object
 	: public Value
-    {
+	{
     public:
-        Object() : Value(TypeObject) {}
+	    Object() : Value(TypeObject) {}
 	virtual ~Object() {}
 
 	void setProperty(const std::string &name, ValuePtr value);
@@ -156,7 +156,7 @@ namespace JSON
 
 	bool hasProperty(const std::string &name);
 
-        ValuePtr getProperty(const std::string &name) const;
+	    ValuePtr getProperty(const std::string &name) const;
 
 	bool getProperty(const std::string &name, std::string &value) const;
 	bool getProperty(const std::string &name, double &value) const;
@@ -170,13 +170,13 @@ namespace JSON
 
 	virtual std::string encode() const;
 	virtual std::string encodePretty(int indent = 0) const;
-    };
+	};
 
     class Array
 	: public Value
-    {
+	{
     public:
-        Array() : Value(TypeArray) {}
+	    Array() : Value(TypeArray) {}
 	virtual ~Array() {}
 
 	void add(ValuePtr value);
@@ -191,27 +191,27 @@ namespace JSON
 	void add(ObjectPtr value);
 	void add(ArrayPtr value);
 
-        size_t size() const;
+	size_t size() const;
 
 	typedef std::vector<ValuePtr> Elements;
 	Elements elements;
 
 	virtual std::string encode() const;
 	virtual std::string encodePretty(int indent = 0) const;
-    };
+	};
 
     class Null
 	: public Value
-    {
+	{
     public:
-        Null() : Value(TypeNull)  {}
+		Null() : Value(TypeNull)  {}
 	virtual ~Null() {}
 
 	virtual std::string encode() const;
-    };
+	};
 
     class Exception : public std::exception
-    {
+	{
     public:
 	Exception(const std::string &str);
 	virtual ~Exception() throw();
@@ -219,30 +219,30 @@ namespace JSON
 	virtual const char *what() const throw();
     protected:
 	std::string reason;
-    };
+	};
 
     class ParserException : public Exception
-    {
+	{
     public:
 	ParserException(const std::string &str, size_t line, size_t column);
-    };
+	};
 
-    // Support relaxing the strict JSON parsing syntax to allow some
-    // common Javascript features. This idea is copied from the Jackson
-    // JSON parser
+	// Support relaxing the strict JSON parsing syntax to allow some
+	// common Javascript features. This idea is copied from the Jackson
+	// JSON parser
     enum ParserFeature {
 	ALLOW_COMMENTS = 1<<0,
 	ALLOW_UNQUOTED_FIELD_NAMES = 1<<1,
 	ALLOW_SINGLE_QUOTES = 1<<2,
 	ALLOW_TRAILING_COMMAS = 1<<3,
-    };
+	};
 
     class Parser
-    {
+	{
     public:
 	Parser(int features =
-	       ALLOW_COMMENTS | ALLOW_UNQUOTED_FIELD_NAMES |
-	       ALLOW_SINGLE_QUOTES | ALLOW_TRAILING_COMMAS);
+		   ALLOW_COMMENTS | ALLOW_UNQUOTED_FIELD_NAMES |
+		   ALLOW_SINGLE_QUOTES | ALLOW_TRAILING_COMMAS);
 
 	ValuePtr parse(const std::string &str);
     protected:
@@ -291,7 +291,10 @@ namespace JSON
 	ValuePtr parseObject();
 	ValuePtr parseArray();
 	void parseComment();
-    };
+	};
+
+	extern char indentChar/* = '\t'*/;
+	extern int indentUnit/* = 1*/;
 }
 
 #endif
