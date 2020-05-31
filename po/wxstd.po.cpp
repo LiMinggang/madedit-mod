@@ -156,3 +156,34 @@ _("unknown class name")
 _("unknown pattern modifier")
 _("unrecognized extension")
 _("Use of uninitialized regex attribute")
+_("Not String Type")
+_("Not Number Type")
+_("Not Boolean Type")
+_("No Encoding")
+_("Illegal identifier")
+_("Unexpected '")
+_("Illegal hex digit")
+_("Unexpected end of buffer")
+_("Unexpected start of buffer")
+_("Expected ")
+_("Expected string or identifier")
+_("Duplicate property '")
+_("' on object")
+_("Expected ")
+_(" or ")
+_("Expected value")
+_("Expected start of comment")
+_("open brace '{'"); // TOK_OPEN_BRACE
+_("close brace '}'"); // TOK_CLOSE_BRACE
+_("comma ','"); // TOK_COMMA
+_("colon ':'"); // TOK_COLON
+_("open bracket '('"); // TOK_OPEN_BRACKET
+_("close bracket ')'"); // TOK_CLOSE_BRACKET
+_("double quote '\"'"); // TOK_DOUBLE_QUOTE
+_("single quote '''"); // TOK_SINGLE_QUOTE
+_("number"); // TOK_NUMBER
+_("white space"); // TOK_WHITE_SPACE
+_("forward slash '/'"); // TOK_COMMENT
+_("identifier"); // TOK_IDENTIFIER
+_("end of string"); // TOK_EOS
+_("error"); // TOK_ERROR

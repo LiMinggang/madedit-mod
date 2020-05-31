@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.18\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-30 22:47+0800\n"
+"POT-Creation-Date: 2020-05-31 09:45+0800\n"
 "PO-Revision-Date: 2019-07-20 11:07+0800\n"
 "Last-Translator: zhtw2013 <zhtw2013@gmail.com>\n"
 "Language-Team: MadEdit <madedit@gmail.com>\n"
@@ -661,6 +661,133 @@ msgstr ""
 #: wxstd.po.cpp:158
 msgid "Use of uninitialized regex attribute"
 msgstr ""
+
+#: wxstd.po.cpp:159
+msgid "Not String Type"
+msgstr ""
+
+#: wxstd.po.cpp:160
+#, fuzzy
+msgid "Not Number Type"
+msgstr "數列步進的類型"
+
+#: wxstd.po.cpp:161
+msgid "Not Boolean Type"
+msgstr ""
+
+#: wxstd.po.cpp:162
+#, fuzzy
+msgid "No Encoding"
+msgstr "編碼"
+
+#: wxstd.po.cpp:163
+#, fuzzy
+msgid "Illegal identifier"
+msgstr "無效項目"
+
+#: wxstd.po.cpp:164
+msgid "Unexpected '"
+msgstr ""
+
+#: wxstd.po.cpp:165
+msgid "Illegal hex digit"
+msgstr ""
+
+#: wxstd.po.cpp:166
+msgid "Unexpected end of buffer"
+msgstr ""
+
+#: wxstd.po.cpp:167
+msgid "Unexpected start of buffer"
+msgstr ""
+
+#: wxstd.po.cpp:168 wxstd.po.cpp:172
+msgid "Expected "
+msgstr ""
+
+#: wxstd.po.cpp:169
+msgid "Expected string or identifier"
+msgstr ""
+
+#: wxstd.po.cpp:170
+msgid "Duplicate property '"
+msgstr ""
+
+#: wxstd.po.cpp:171
+msgid "' on object"
+msgstr ""
+
+#: wxstd.po.cpp:173
+msgid " or "
+msgstr ""
+
+#: wxstd.po.cpp:174
+msgid "Expected value"
+msgstr ""
+
+#: wxstd.po.cpp:175
+msgid "Expected start of comment"
+msgstr ""
+
+#: wxstd.po.cpp:176
+msgid "open brace '{'"
+msgstr ""
+
+#: wxstd.po.cpp:177
+msgid "close brace '}'"
+msgstr ""
+
+#: wxstd.po.cpp:178
+msgid "comma ','"
+msgstr ""
+
+#: wxstd.po.cpp:179
+msgid "colon ':'"
+msgstr ""
+
+#: wxstd.po.cpp:180
+msgid "open bracket '('"
+msgstr ""
+
+#: wxstd.po.cpp:181
+msgid "close bracket ')'"
+msgstr ""
+
+#: wxstd.po.cpp:182
+msgid "double quote '\"'"
+msgstr ""
+
+#: wxstd.po.cpp:183
+msgid "single quote '''"
+msgstr ""
+
+#: wxstd.po.cpp:184
+#, fuzzy
+msgid "number"
+msgstr "行號"
+
+#: wxstd.po.cpp:185
+msgid "white space"
+msgstr ""
+
+#: wxstd.po.cpp:186
+msgid "forward slash '/'"
+msgstr ""
+
+#: wxstd.po.cpp:187
+#, fuzzy
+msgid "identifier"
+msgstr "縮排修飾字元"
+
+#: wxstd.po.cpp:188
+#, fuzzy
+msgid "end of string"
+msgstr "尋找字串"
+
+#: wxstd.po.cpp:189
+#, fuzzy
+msgid "error"
+msgstr "錯誤"
 
 #: ../src/MadEdit/MadEdit.cpp:12072
 msgid "Zero Length Match"
@@ -4805,9 +4932,6 @@ msgstr "不確定如何更新%s的可能值（依據%s的值）"
 
 #~ msgid "SpecialWord"
 #~ msgstr "特殊詞彙"
-
-#~ msgid "LineNumber"
-#~ msgstr "行號"
 
 #~ msgid "AliceBlue"
 #~ msgstr "艾麗斯藍"

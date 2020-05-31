@@ -1,0 +1,756 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\object">
+      <UniqueIdentifier>{1d2a2795-8fe8-4045-9989-84ab89780089}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\converter">
+      <UniqueIdentifier>{6fd767e0-0d47-4a66-8510-a556e4ec34ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\boost">
+      <UniqueIdentifier>{40a52b6a-c91e-41ba-8dc6-8a921cd04746}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\boost\python">
+      <UniqueIdentifier>{216f948c-6ae5-45fc-b0be-19c3d25ef148}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\boost\python\converter">
+      <UniqueIdentifier>{cca10422-54e2-432a-9a2c-6438221f4f7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\boost\python\object">
+      <UniqueIdentifier>{c6e085d1-6ce0-40c2-b99f-edfad1613d60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\boost\python\detail">
+      <UniqueIdentifier>{050959b5-1147-46d3-8e56-bd4b75fd6727}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\boost\python\suite">
+      <UniqueIdentifier>{3c355e9b-ce10-4d4a-825d-aa5fc27f6f58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\python\src\dict.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\python\src\errors.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\python\src\exec.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\python\src\import.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\python\src\list.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\python\src\long.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\python\src\module.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\python\src\object_operators.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\python\src\object_protocol.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\python\src\slice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\python\src\str.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\python\src\tuple.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\python\src\wrapper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\python\src\object\class.cpp">
+      <Filter>Source Files\object</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\python\src\object\enum.cpp">
+      <Filter>Source Files\object</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\python\src\object\function.cpp">
+      <Filter>Source Files\object</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\python\src\object\function_doc_signature.cpp">
+      <Filter>Source Files\object</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\python\src\object\inheritance.cpp">
+      <Filter>Source Files\object</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\python\src\object\iterator.cpp">
+      <Filter>Source Files\object</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\python\src\object\life_support.cpp">
+      <Filter>Source Files\object</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\python\src\object\pickle_support.cpp">
+      <Filter>Source Files\object</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\python\src\object\stl_iterator.cpp">
+      <Filter>Source Files\object</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\python\src\converter\arg_to_python_base.cpp">
+      <Filter>Source Files\converter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\python\src\converter\builtin_converters.cpp">
+      <Filter>Source Files\converter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\python\src\converter\from_python.cpp">
+      <Filter>Source Files\converter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\python\src\converter\registry.cpp">
+      <Filter>Source Files\converter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\python\src\converter\type_id.cpp">
+      <Filter>Source Files\converter</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\python\include\boost\python.hpp">
+      <Filter>Header Files\boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\arg_from_python.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\args.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\args_fwd.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\back_reference.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\base_type_traits.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\bases.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\borrowed.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\call.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\call_method.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\cast.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\class.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\class_fwd.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\copy_const_reference.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\copy_non_const_reference.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\data_members.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\def.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\def_visitor.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\default_call_policies.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\dict.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\docstring_options.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\enum.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\errors.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\exception_translator.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\exec.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\extract.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\handle.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\handle_fwd.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\has_back_reference.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\implicit.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\import.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\init.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\instance_holder.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\iterator.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\list.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\long.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\lvalue_from_pytype.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\make_constructor.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\make_function.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\manage_new_object.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\module.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\module_init.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\numpy.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object_attributes.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object_call.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object_core.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object_fwd.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object_items.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object_operators.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object_protocol.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object_protocol_core.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object_slices.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\opaque_pointer_converter.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\operators.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\other.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\overloads.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\override.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\pointee.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\proxy.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\ptr.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\pure_virtual.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\raw_function.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\refcount.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\reference_existing_object.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\register_ptr_to_python.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\return_arg.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\return_by_value.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\return_internal_reference.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\return_opaque_pointer.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\return_value_policy.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\scope.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\self.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\signature.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\slice.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\slice_nil.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\ssize_t.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\stl_iterator.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\str.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\tag.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\to_python_converter.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\to_python_indirect.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\to_python_value.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\tuple.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\type_id.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\with_custodian_and_ward.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\wrapper.hpp">
+      <Filter>Header Files\boost\python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\converter\arg_from_python.hpp">
+      <Filter>Header Files\boost\python\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\converter\arg_to_python.hpp">
+      <Filter>Header Files\boost\python\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\converter\arg_to_python_base.hpp">
+      <Filter>Header Files\boost\python\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\converter\as_to_python_function.hpp">
+      <Filter>Header Files\boost\python\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\converter\builtin_converters.hpp">
+      <Filter>Header Files\boost\python\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\converter\constructor_function.hpp">
+      <Filter>Header Files\boost\python\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\converter\context_result_converter.hpp">
+      <Filter>Header Files\boost\python\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\converter\convertible_function.hpp">
+      <Filter>Header Files\boost\python\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\converter\from_python.hpp">
+      <Filter>Header Files\boost\python\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\converter\implicit.hpp">
+      <Filter>Header Files\boost\python\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\converter\obj_mgr_arg_from_python.hpp">
+      <Filter>Header Files\boost\python\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\converter\object_manager.hpp">
+      <Filter>Header Files\boost\python\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\converter\pointer_type_id.hpp">
+      <Filter>Header Files\boost\python\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\converter\pyobject_traits.hpp">
+      <Filter>Header Files\boost\python\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\converter\pyobject_type.hpp">
+      <Filter>Header Files\boost\python\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\converter\pytype_function.hpp">
+      <Filter>Header Files\boost\python\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\converter\pytype_object_mgr_traits.hpp">
+      <Filter>Header Files\boost\python\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\converter\registered.hpp">
+      <Filter>Header Files\boost\python\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\converter\registered_pointee.hpp">
+      <Filter>Header Files\boost\python\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\converter\registrations.hpp">
+      <Filter>Header Files\boost\python\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\converter\registry.hpp">
+      <Filter>Header Files\boost\python\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\converter\return_from_python.hpp">
+      <Filter>Header Files\boost\python\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\converter\rvalue_from_python_data.hpp">
+      <Filter>Header Files\boost\python\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\converter\shared_ptr_deleter.hpp">
+      <Filter>Header Files\boost\python\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\converter\shared_ptr_from_python.hpp">
+      <Filter>Header Files\boost\python\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\converter\shared_ptr_to_python.hpp">
+      <Filter>Header Files\boost\python\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\converter\to_python_function_type.hpp">
+      <Filter>Header Files\boost\python\converter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object\add_to_namespace.hpp">
+      <Filter>Header Files\boost\python\object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object\class.hpp">
+      <Filter>Header Files\boost\python\object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object\class_detail.hpp">
+      <Filter>Header Files\boost\python\object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object\class_metadata.hpp">
+      <Filter>Header Files\boost\python\object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object\class_wrapper.hpp">
+      <Filter>Header Files\boost\python\object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object\enum_base.hpp">
+      <Filter>Header Files\boost\python\object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object\find_instance.hpp">
+      <Filter>Header Files\boost\python\object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object\forward.hpp">
+      <Filter>Header Files\boost\python\object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object\function.hpp">
+      <Filter>Header Files\boost\python\object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object\function_doc_signature.hpp">
+      <Filter>Header Files\boost\python\object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object\function_handle.hpp">
+      <Filter>Header Files\boost\python\object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object\function_object.hpp">
+      <Filter>Header Files\boost\python\object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object\inheritance.hpp">
+      <Filter>Header Files\boost\python\object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object\inheritance_query.hpp">
+      <Filter>Header Files\boost\python\object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object\instance.hpp">
+      <Filter>Header Files\boost\python\object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object\iterator.hpp">
+      <Filter>Header Files\boost\python\object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object\iterator_core.hpp">
+      <Filter>Header Files\boost\python\object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object\life_support.hpp">
+      <Filter>Header Files\boost\python\object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object\make_holder.hpp">
+      <Filter>Header Files\boost\python\object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object\make_instance.hpp">
+      <Filter>Header Files\boost\python\object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object\make_ptr_instance.hpp">
+      <Filter>Header Files\boost\python\object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object\pickle_support.hpp">
+      <Filter>Header Files\boost\python\object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object\pointer_holder.hpp">
+      <Filter>Header Files\boost\python\object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object\py_function.hpp">
+      <Filter>Header Files\boost\python\object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object\stl_iterator_core.hpp">
+      <Filter>Header Files\boost\python\object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object\value_holder.hpp">
+      <Filter>Header Files\boost\python\object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\object\value_holder_fwd.hpp">
+      <Filter>Header Files\boost\python\object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\aix_init_module.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\api_placeholder.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\borrowed_ptr.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\caller.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\config.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\construct.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\convertible.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\copy_ctor_mutates_rhs.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\cv_category.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\dealloc.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\decorated_type_id.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\decref_guard.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\def_helper.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\def_helper_fwd.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\defaults_def.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\defaults_gen.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\dependent.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\destroy.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\enable_if.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\exception_handler.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\force_instantiate.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\if_else.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\indirect_traits.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\invoke.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\is_auto_ptr.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\is_shared_ptr.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\is_wrapper.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\is_xxx.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\make_keyword_range_fn.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\make_tuple.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\map_entry.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\mpl_lambda.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\msvc_typeinfo.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\none.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\not_specified.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\nullary_function_adaptor.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\operator_id.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\overloads_fwd.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\pointee.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\prefix.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\preprocessor.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\python22_fixed.h">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\python_type.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\raw_pyobject.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\referent_storage.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\result.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\scope.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\sfinae.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\signature.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\string_literal.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\target.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\translate_exception.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\type_list.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\type_list_impl.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\unwind_type.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\unwrap_type_id.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\unwrap_wrapper.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\value_arg.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\value_is_shared_ptr.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\value_is_xxx.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\void_ptr.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\void_return.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\wrap_python.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\detail\wrapper_base.hpp">
+      <Filter>Header Files\boost\python\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\suite\indexing\container_utils.hpp">
+      <Filter>Header Files\boost\python\suite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\suite\indexing\indexing_suite.hpp">
+      <Filter>Header Files\boost\python\suite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\suite\indexing\detail\indexing_suite_detail.hpp">
+      <Filter>Header Files\boost\python\suite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\suite\indexing\map_indexing_suite.hpp">
+      <Filter>Header Files\boost\python\suite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\python\include\boost\python\suite\indexing\vector_indexing_suite.hpp">
+      <Filter>Header Files\boost\python\suite</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

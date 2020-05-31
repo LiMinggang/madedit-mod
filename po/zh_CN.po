@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.18\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-30 22:47+0800\n"
-"PO-Revision-Date: 2020-05-30 22:49+0800\n"
+"POT-Creation-Date: 2020-05-31 09:45+0800\n"
+"PO-Revision-Date: 2020-05-31 09:56+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit-Mod <minggang.li@gmail.com>\n"
 "Language: zh_CN\n"
@@ -654,6 +654,126 @@ msgstr "不能识别的扩展"
 #: wxstd.po.cpp:158
 msgid "Use of uninitialized regex attribute"
 msgstr "使用了未初始化的正则表达式属性"
+
+#: wxstd.po.cpp:159
+msgid "Not String Type"
+msgstr "非字符串类型"
+
+#: wxstd.po.cpp:160
+msgid "Not Number Type"
+msgstr "非编号类型"
+
+#: wxstd.po.cpp:161
+msgid "Not Boolean Type"
+msgstr "非布尔类型"
+
+#: wxstd.po.cpp:162
+msgid "No Encoding"
+msgstr "没有编码"
+
+#: wxstd.po.cpp:163
+msgid "Illegal identifier"
+msgstr "无效的标识符"
+
+#: wxstd.po.cpp:164
+msgid "Unexpected '"
+msgstr "不应出现的 '"
+
+#: wxstd.po.cpp:165
+msgid "Illegal hex digit"
+msgstr "非法的十六进制数字"
+
+#: wxstd.po.cpp:166
+msgid "Unexpected end of buffer"
+msgstr "出现不应该有的缓冲区结尾"
+
+#: wxstd.po.cpp:167
+msgid "Unexpected start of buffer"
+msgstr "不应该出现的缓冲区开始"
+
+#: wxstd.po.cpp:168 wxstd.po.cpp:172
+msgid "Expected "
+msgstr "应该出现"
+
+#: wxstd.po.cpp:169
+msgid "Expected string or identifier"
+msgstr "应该出现字符串或者标识符"
+
+#: wxstd.po.cpp:170
+msgid "Duplicate property '"
+msgstr "重复的属性 '"
+
+#: wxstd.po.cpp:171
+msgid "' on object"
+msgstr "' 位于对象上"
+
+#: wxstd.po.cpp:173
+msgid " or "
+msgstr "或者"
+
+#: wxstd.po.cpp:174
+msgid "Expected value"
+msgstr "应该出现值"
+
+#: wxstd.po.cpp:175
+msgid "Expected start of comment"
+msgstr "应该出现注释开始"
+
+#: wxstd.po.cpp:176
+msgid "open brace '{'"
+msgstr "开放的'{'"
+
+#: wxstd.po.cpp:177
+msgid "close brace '}'"
+msgstr "闭合的'}'"
+
+#: wxstd.po.cpp:178
+msgid "comma ','"
+msgstr "逗号','"
+
+#: wxstd.po.cpp:179
+msgid "colon ':'"
+msgstr "冒号':'"
+
+#: wxstd.po.cpp:180
+msgid "open bracket '('"
+msgstr "开放的'('"
+
+#: wxstd.po.cpp:181
+msgid "close bracket ')'"
+msgstr "关闭的')'"
+
+#: wxstd.po.cpp:182
+msgid "double quote '\"'"
+msgstr "双引号'\"'"
+
+#: wxstd.po.cpp:183
+msgid "single quote '''"
+msgstr "单引号'''"
+
+#: wxstd.po.cpp:184
+msgid "number"
+msgstr "编号"
+
+#: wxstd.po.cpp:185
+msgid "white space"
+msgstr "空白字符"
+
+#: wxstd.po.cpp:186
+msgid "forward slash '/'"
+msgstr "前向斜线'/'"
+
+#: wxstd.po.cpp:187
+msgid "identifier"
+msgstr "标识符"
+
+#: wxstd.po.cpp:188
+msgid "end of string"
+msgstr "字符串结尾"
+
+#: wxstd.po.cpp:189
+msgid "error"
+msgstr "错误"
 
 #: ../src/MadEdit/MadEdit.cpp:12072
 msgid "Zero Length Match"
@@ -4877,9 +4997,6 @@ msgstr "不确定如何更新%s的可能值（基于%s的值）"
 
 #~ msgid "Uncomment selection"
 #~ msgstr "将选取行的注释取消"
-
-#~ msgid "Numbering"
-#~ msgstr "编号序列"
 
 #~ msgid "Insert incremental numbers with step and padding"
 #~ msgstr "插入按步进递增数列并填充"
