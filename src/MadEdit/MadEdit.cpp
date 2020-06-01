@@ -1997,7 +1997,7 @@ int MadEdit::GetIndentCountByPos( wxFileOffset pos )
 	int row = -1, count = 0;
 	vector <ucs4_t> spaces;
 	int lineid = GetLineByPos( lit, pos, row );
-	GetIndentSpaces( lineid, lit, spaces, true, false );
+	GetIndentSpaces( lineid, lit, spaces, true, true );
 	long totalSpaces = 0;
 	for (int i = 0; i < spaces.size(); ++i)
 	{
