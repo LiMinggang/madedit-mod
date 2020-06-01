@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: madedit-mod 0.4.18\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-31 13:09+0800\n"
+"POT-Creation-Date: 2020-06-01 09:38+0800\n"
 "PO-Revision-Date: 2019-04-22 21:51+0800\n"
 "Last-Translator: nikos papadopoulos <nikos769@yahoo.gr>\n"
 "Language-Team: https://github.com/nikoss/my-translation-contributions\n"
@@ -214,7 +214,7 @@ msgstr "Δώστε έναν αριθμό σελίδας μεταξύ %d και %
 msgid "Please wait while printing\n"
 msgstr "Παρακαλώ περιμένετε όσο διαρκεί η εκτύπωση\n"
 
-#: wxstd.po.cpp:50 ../src/MadEditFrame.cpp:6196
+#: wxstd.po.cpp:50 ../src/MadEditFrame.cpp:6199
 msgid "Printing"
 msgstr "Εκτύπωση"
 
@@ -798,11 +798,11 @@ msgstr "Η Κουκκίδα Ταιριάζει Νέα Γραμμή"
 msgid " and column "
 msgstr "Στήλη Πινακωτής: "
 
-#: ../src/MadEdit/MadEdit.cpp:12072
+#: ../src/MadEdit/MadEdit.cpp:12078
 msgid "Zero Length Match"
 msgstr "Ταίριασμα Μηδενικού Μήκους"
 
-#: ../src/MadEdit/MadEdit.cpp:12075
+#: ../src/MadEdit/MadEdit.cpp:12081
 msgid "^ Zero Length Match"
 msgstr "^ Ταίριασμα Μηδενικού Μήκους"
 
@@ -848,7 +848,7 @@ msgstr "Αδυναμία αποθήκευσης αυτού του αρχείου
 #: ../src/MadEdit/MadEditBasic.cpp:3117 ../src/MadEdit/MadEditSearch.cpp:1002
 #: ../src/MadEdit/MadEditSearch.cpp:1100 ../src/MadEdit/MadEditSearch.cpp:1163
 #: ../src/MadEditFrame.cpp:546 ../src/MadEditFrame.cpp:551
-#: ../src/MadEditFrame.cpp:5930
+#: ../src/MadEditFrame.cpp:5933
 msgid "&Ok"
 msgstr "&Εντάξει"
 
@@ -858,15 +858,15 @@ msgstr "Θέλεις να αποθηκεύσεις αυτό το αρχείο;"
 
 #: ../src/MadEdit/MadEditBasic.cpp:2609 ../src/MadEdit/MadEditBasic.cpp:2724
 #: ../src/MadEdit/MadEditBasic.cpp:2808 ../src/MadEditFrame.cpp:535
-#: ../src/MadEditFrame.cpp:541 ../src/MadEditFrame.cpp:4685
-#: ../src/MadEditFrame.cpp:6269
+#: ../src/MadEditFrame.cpp:541 ../src/MadEditFrame.cpp:4686
+#: ../src/MadEditFrame.cpp:6272
 msgid "&Yes"
 msgstr "&Ναι"
 
 #: ../src/MadEdit/MadEditBasic.cpp:2610 ../src/MadEdit/MadEditBasic.cpp:2724
 #: ../src/MadEdit/MadEditBasic.cpp:2808 ../src/MadEditFrame.cpp:536
-#: ../src/MadEditFrame.cpp:541 ../src/MadEditFrame.cpp:4685
-#: ../src/MadEditFrame.cpp:6269
+#: ../src/MadEditFrame.cpp:541 ../src/MadEditFrame.cpp:4686
+#: ../src/MadEditFrame.cpp:6272
 msgid "&No"
 msgstr "Ό&χι"
 
@@ -1042,7 +1042,7 @@ msgstr "Ά&νοιγμα Αρχείου..."
 msgid "Open an existing file"
 msgstr "Άνοιγμα ενός υπάρχοντος αρχείου"
 
-#: ../src/MadEditFrame.cpp:2226 ../src/MadEditFrame.cpp:5842
+#: ../src/MadEditFrame.cpp:2226 ../src/MadEditFrame.cpp:5845
 msgid "Open File"
 msgstr "Άνοιγμα Αρχείου"
 
@@ -1138,11 +1138,11 @@ msgstr "Κλείσιμο Όλων στα Δεξιά"
 msgid "Close all files to the right"
 msgstr "Κλείσιμο όλων των αρχείων στα δεξιά"
 
-#: ../src/MadEditFrame.cpp:2241 ../src/MadEditFrame.cpp:5275
+#: ../src/MadEditFrame.cpp:2241 ../src/MadEditFrame.cpp:5278
 msgid "Set/Clear ReadOnly Flag"
 msgstr "Ορισμός/Καθάρισμα της Σημαίας ΜόνοΑνάγνωσης (ReadOnly)"
 
-#: ../src/MadEditFrame.cpp:2241 ../src/MadEditFrame.cpp:5276
+#: ../src/MadEditFrame.cpp:2241 ../src/MadEditFrame.cpp:5279
 msgid "Set/Clear ReadOnly flag of the file"
 msgstr "Ορισμός/Καθάρισμα της σημαίας ΜόνοΑνάγνωσης του αρχείου"
 
@@ -1328,11 +1328,11 @@ msgstr "Επιλογή &Όλων"
 msgid "Select all data"
 msgstr "Επιλογή όλων των δεδομένων"
 
-#: ../src/MadEditFrame.cpp:2291 ../src/MadEditFrame.cpp:5243
+#: ../src/MadEditFrame.cpp:2291 ../src/MadEditFrame.cpp:5246
 msgid "Begin/End Selecting"
 msgstr "Αρχίνισμα/Τερματισμός της Επιλογής"
 
-#: ../src/MadEditFrame.cpp:2291 ../src/MadEditFrame.cpp:5244
+#: ../src/MadEditFrame.cpp:2291 ../src/MadEditFrame.cpp:5247
 msgid "Begin/End selecting text"
 msgstr "Αρχίνισμα/Τερματισμός της επιλογής κειμένου"
 
@@ -1518,8 +1518,8 @@ msgstr "&Σε Μισού-πλάτους"
 msgid "Convert the selection to halfwidth"
 msgstr "Μετατροπή της επιλογής σε μισού-πλάτους"
 
-#: ../src/MadEditFrame.cpp:2337 ../src/MadEditFrame.cpp:6854
-#: ../src/MadEditFrame.cpp:6858 ../src/MadSearchReplaceDialog.cpp:2516
+#: ../src/MadEditFrame.cpp:2337 ../src/MadEditFrame.cpp:6857
+#: ../src/MadEditFrame.cpp:6861 ../src/MadSearchReplaceDialog.cpp:2516
 #: ../src/MadSearchReplaceDialog.cpp:2520 ../src/MadMacroDlg.cpp:732
 #: ../src/MadMacroDlg.cpp:736
 msgid "To Halfwidth by Options..."
@@ -1537,8 +1537,8 @@ msgstr "Σε Πλήρους-πλάτους"
 msgid "Convert the selection to fullwidth"
 msgstr "Μετατροπή της επιλογής σε πλήρους-πλάτους"
 
-#: ../src/MadEditFrame.cpp:2339 ../src/MadEditFrame.cpp:6920
-#: ../src/MadEditFrame.cpp:6924 ../src/MadSearchReplaceDialog.cpp:2579
+#: ../src/MadEditFrame.cpp:2339 ../src/MadEditFrame.cpp:6923
+#: ../src/MadEditFrame.cpp:6927 ../src/MadSearchReplaceDialog.cpp:2579
 #: ../src/MadSearchReplaceDialog.cpp:2583 ../src/MadMacroDlg.cpp:799
 #: ../src/MadMacroDlg.cpp:803
 msgid "To Fullwidth by Options..."
@@ -1842,8 +1842,8 @@ msgstr "Εναλλαγή της Λειτουργίας Πλήρους Οθόνη
 msgid "Post-It"
 msgstr "Σαν Γράμμα"
 
-#: ../src/MadEditFrame.cpp:2391 ../src/MadEditFrame.cpp:5353
-#: ../src/MadEditFrame.cpp:5359
+#: ../src/MadEditFrame.cpp:2391 ../src/MadEditFrame.cpp:5356
+#: ../src/MadEditFrame.cpp:5362
 msgid "Encoding: "
 msgstr "Κωδικοποίηση: "
 
@@ -1851,13 +1851,13 @@ msgstr "Κωδικοποίηση: "
 msgid "All Encodings"
 msgstr "Όλες οι Κωδικοποιήσεις"
 
-#: ../src/MadEditFrame.cpp:2394 ../src/MadEditFrame.cpp:5368
-#: ../src/MadEditFrame.cpp:5373
+#: ../src/MadEditFrame.cpp:2394 ../src/MadEditFrame.cpp:5371
+#: ../src/MadEditFrame.cpp:5376
 msgid "Syntax Type: "
 msgstr "Μορφή της Σύνταξης: "
 
-#: ../src/MadEditFrame.cpp:2396 ../src/MadEditFrame.cpp:5385
-#: ../src/MadEditFrame.cpp:5390
+#: ../src/MadEditFrame.cpp:2396 ../src/MadEditFrame.cpp:5388
+#: ../src/MadEditFrame.cpp:5393
 msgid "Font Name: "
 msgstr "Όνομα Γραμματοσειράς: "
 
@@ -1865,8 +1865,8 @@ msgstr "Όνομα Γραμματοσειράς: "
 msgid "[other]"
 msgstr "[άλλο]"
 
-#: ../src/MadEditFrame.cpp:2405 ../src/MadEditFrame.cpp:5401
-#: ../src/MadEditFrame.cpp:5406
+#: ../src/MadEditFrame.cpp:2405 ../src/MadEditFrame.cpp:5404
+#: ../src/MadEditFrame.cpp:5409
 msgid "Font Size: "
 msgstr "Μέγεθος της Γραμματοσειράς: "
 
@@ -1890,8 +1890,8 @@ msgstr "Λειτουργία Στα&θερού Πλάτους"
 msgid "Set/Unset the font with Fixed Width"
 msgstr "Όρισε ή Άλλαξε τη Γραμματοσειρά με το Σταθερό Πλάτος"
 
-#: ../src/MadEditFrame.cpp:2483 ../src/MadEditFrame.cpp:5421
-#: ../src/MadEditFrame.cpp:5426
+#: ../src/MadEditFrame.cpp:2483 ../src/MadEditFrame.cpp:5424
+#: ../src/MadEditFrame.cpp:5429
 msgid "Tab Column: "
 msgstr "Στήλη Πινακωτής: "
 
@@ -1899,8 +1899,8 @@ msgstr "Στήλη Πινακωτής: "
 msgid "Set column of Tab char"
 msgstr "Ορισμός στήλης από τον χαρακτήρα Πινακωτής"
 
-#: ../src/MadEditFrame.cpp:2502 ../src/MadEditFrame.cpp:5489
-#: ../src/MadEditFrame.cpp:5494
+#: ../src/MadEditFrame.cpp:2502 ../src/MadEditFrame.cpp:5492
+#: ../src/MadEditFrame.cpp:5497
 msgid "Line Spacing: "
 msgstr "Διάστιχο: "
 
@@ -2042,7 +2042,7 @@ msgstr "Παραδοσιακή Λειτουργία Γραφομηχανής"
 msgid "Toolbars"
 msgstr "Γραμμές Εργαλείων"
 
-#: ../src/MadEditFrame.cpp:2554 ../src/MadEditFrame.cpp:10550
+#: ../src/MadEditFrame.cpp:2554 ../src/MadEditFrame.cpp:10559
 msgid "Toggle Main Toolbar"
 msgstr "Εναλλαγή της Κύριας Γραμμής Εργαλείων"
 
@@ -2050,7 +2050,7 @@ msgstr "Εναλλαγή της Κύριας Γραμμής Εργαλείων"
 msgid "Show/Hide Main Toolbar"
 msgstr "Εμφάνιση  ή Απόκρυψη της Κύριας Γραμμής Εργαλείων"
 
-#: ../src/MadEditFrame.cpp:2555 ../src/MadEditFrame.cpp:10551
+#: ../src/MadEditFrame.cpp:2555 ../src/MadEditFrame.cpp:10560
 msgid "Lock Toolbar"
 msgstr "Κλείδωμα της Γραμμής Εργαλείων"
 
@@ -2102,7 +2102,7 @@ msgstr "Αλλαγή της λειτουργίας επεξεργασίας σε
 msgid "Hex Mode"
 msgstr "Δεκαεξαδική Λειτουργία"
 
-#: ../src/MadEditFrame.cpp:2563 ../src/MadEditFrame.cpp:5457
+#: ../src/MadEditFrame.cpp:2563 ../src/MadEditFrame.cpp:5460
 msgid "Preview as: "
 msgstr "Προεπισκόπηση ως: "
 
@@ -2206,7 +2206,7 @@ msgstr "Εκ&καθάριση των Ιστορικών..."
 msgid "Clearing out your history"
 msgstr "Εκκαθάρριση του ιστορικού"
 
-#: ../src/MadEditFrame.cpp:2586 ../src/MadEditFrame.cpp:5665
+#: ../src/MadEditFrame.cpp:2586 ../src/MadEditFrame.cpp:5668
 msgid "Has Unicode BOM (Byte-Order Mark)"
 msgstr "Έχει Unicode BOM (Σημάδι Ταξινόμησης-Μπάιτιου)"
 
@@ -2218,7 +2218,7 @@ msgstr "Προσθήκη/Αφαίρεση BOM"
 msgid "Add/Remove Unicode BOM"
 msgstr "Προσθήκη/Αφαίρεση Unicode BOM"
 
-#: ../src/MadEditFrame.cpp:2589 ../src/MadEditFrame.cpp:5680
+#: ../src/MadEditFrame.cpp:2589 ../src/MadEditFrame.cpp:5683
 msgid "NewLine Char (File Format): "
 msgstr "Χαρακτήρες ΝέαςΓραμμής (Μορφή Αρχείου): "
 
@@ -2246,7 +2246,7 @@ msgstr "Μετατρ&οπή σε LF/0A (UNIX/OSX)"
 msgid "Convert the file format to UNIX format"
 msgstr "Μετατροπή της μορφής του αρχείου σε μορφή UNIX"
 
-#: ../src/MadEditFrame.cpp:2593 ../src/MadEditFrame.cpp:5707
+#: ../src/MadEditFrame.cpp:2593 ../src/MadEditFrame.cpp:5710
 msgid "Press Enter to Insert NewLine Char: "
 msgstr "Πάτησε την Εισαγωγή (Enter) για να Εισαχθεί Χαρακτήρας ΝέαςΓραμμής: "
 
@@ -2789,15 +2789,15 @@ msgstr "Κύλιση Δεξιά"
 msgid "Scrolls right by aprox. 1 tab stop"
 msgstr "Κυλά δεξιά κατά περίπου 1 πινακωτή"
 
-#: ../src/MadEditFrame.cpp:3012 ../src/MadEditFrame.cpp:10749
+#: ../src/MadEditFrame.cpp:3012 ../src/MadEditFrame.cpp:10758
 msgid "Quick Search"
 msgstr "Γρήγορη Αναζήτηση"
 
-#: ../src/MadEditFrame.cpp:3021 ../src/MadEditFrame.cpp:5439
+#: ../src/MadEditFrame.cpp:3021 ../src/MadEditFrame.cpp:5442
 msgid "HTML"
 msgstr "HTML"
 
-#: ../src/MadEditFrame.cpp:3022 ../src/MadEditFrame.cpp:5443
+#: ../src/MadEditFrame.cpp:3022 ../src/MadEditFrame.cpp:5446
 msgid "Markdown"
 msgstr "Markdown"
 
@@ -2912,94 +2912,94 @@ msgstr "Αυτό το αρχείο δεν υπάρχει:"
 msgid "Cannot access this file:"
 msgstr "Αδυναμία πρόσβασης σε αυτό το αρχείο:"
 
-#: ../src/MadEditFrame.cpp:4684
+#: ../src/MadEditFrame.cpp:4685
 #, fuzzy
 msgid "The file "
 msgstr "Αποθήκευση του αρχείου"
 
-#: ../src/MadEditFrame.cpp:4684
+#: ../src/MadEditFrame.cpp:4685
 msgid ""
 " doesn't exist.\n"
 " Are you going to create it?"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:4688
+#: ../src/MadEditFrame.cpp:4691
 #, fuzzy
 msgid "File does not exist:"
 msgstr "Αυτό το αρχείο δεν υπάρχει:"
 
-#: ../src/MadEditFrame.cpp:4782
+#: ../src/MadEditFrame.cpp:4785
 msgid "Cannot load this file:"
 msgstr "Αδυναμία φόρτωσης αυτού του αρχείου:"
 
-#: ../src/MadEditFrame.cpp:4921 ../src/MadEditFrame.cpp:9660
+#: ../src/MadEditFrame.cpp:4924 ../src/MadEditFrame.cpp:9663
 #: ../src/MadSearchReplaceDialog.cpp:2836 ../src/MadMacroDlg.cpp:266
 #: ../src/MadMacroDlg.cpp:1046
 msgid "Memory allocation failed"
 msgstr "Η δέσμευση μνήμης απέτυχε"
 
-#: ../src/MadEditFrame.cpp:4921 ../src/MadEditFrame.cpp:9660
-#: ../src/MadEditFrame.cpp:10220 ../src/MadEditFrame.cpp:10225
+#: ../src/MadEditFrame.cpp:4924 ../src/MadEditFrame.cpp:9663
+#: ../src/MadEditFrame.cpp:10229 ../src/MadEditFrame.cpp:10234
 #: ../src/MadSearchReplaceDialog.cpp:2836 ../src/MadMacroDlg.cpp:266
 #: ../src/MadMacroDlg.cpp:1046
 msgid "Error"
 msgstr "Σφάλμα"
 
-#: ../src/MadEditFrame.cpp:5232
+#: ../src/MadEditFrame.cpp:5235
 msgid "End Selecting"
 msgstr "Τερματισμός της Επιλογής"
 
-#: ../src/MadEditFrame.cpp:5233
+#: ../src/MadEditFrame.cpp:5236
 msgid "End selecting text"
 msgstr "Τερματισμός της επιλογής κειμένου"
 
-#: ../src/MadEditFrame.cpp:5237
+#: ../src/MadEditFrame.cpp:5240
 msgid "Begin Selecting"
 msgstr "Αρχίνισμα της Επιλογής"
 
-#: ../src/MadEditFrame.cpp:5238
+#: ../src/MadEditFrame.cpp:5241
 msgid "Begin selecting text"
 msgstr "Αρχίνισμα της επιλογής κειμένου"
 
-#: ../src/MadEditFrame.cpp:5262
+#: ../src/MadEditFrame.cpp:5265
 msgid "Clear ReadOnly Flag"
 msgstr "Καθάρισμα της Σημαίας ΜόνοΑνάγνωσης"
 
-#: ../src/MadEditFrame.cpp:5263
+#: ../src/MadEditFrame.cpp:5266
 msgid "Clear ReadOnly flag of the file"
 msgstr "Καθάρισμα της σημαίας ΜόνοΑνάγνωσης του αρχείου"
 
-#: ../src/MadEditFrame.cpp:5270
+#: ../src/MadEditFrame.cpp:5273
 msgid "Set ReadOnly Flag"
 msgstr "Ορισμός της Σημαίας ΜόνοΑνάγνωσης"
 
-#: ../src/MadEditFrame.cpp:5271
+#: ../src/MadEditFrame.cpp:5274
 msgid "Set ReadOnly flag of the file"
 msgstr "Ορισμός της σημαίας ΜόνοΑνάγνωσης του αρχείου"
 
-#: ../src/MadEditFrame.cpp:5359 ../src/MadEditFrame.cpp:5373
-#: ../src/MadEditFrame.cpp:5390 ../src/MadEditFrame.cpp:5406
-#: ../src/MadEditFrame.cpp:5426 ../src/MadEditFrame.cpp:5432
-#: ../src/MadEditFrame.cpp:5494 ../src/MadEditFrame.cpp:5702
-#: ../src/MadEditFrame.cpp:5729 ../src/MadSourceFormatDialog.cpp:395
+#: ../src/MadEditFrame.cpp:5362 ../src/MadEditFrame.cpp:5376
+#: ../src/MadEditFrame.cpp:5393 ../src/MadEditFrame.cpp:5409
+#: ../src/MadEditFrame.cpp:5429 ../src/MadEditFrame.cpp:5435
+#: ../src/MadEditFrame.cpp:5497 ../src/MadEditFrame.cpp:5705
+#: ../src/MadEditFrame.cpp:5732 ../src/MadSourceFormatDialog.cpp:395
 #: ../src/MadSourceFormatDialog.cpp:403 ../src/MadOptionsDialog.cpp:581
 #: ../src/MadConvEncDialog.cpp:58
 msgid "None"
 msgstr "Κανένα"
 
-#: ../src/MadEditFrame.cpp:5669 ../src/MadEditFrame.cpp:5675
+#: ../src/MadEditFrame.cpp:5672 ../src/MadEditFrame.cpp:5678
 msgid "Has No Unicode BOM (Byte-Order Mark)"
 msgstr "Δεν Έχει Unicode BOM (Σημάδι Ταξινόμησης-Μπάιτιου)"
 
-#: ../src/MadEditFrame.cpp:5928
+#: ../src/MadEditFrame.cpp:5931
 msgid "Failed to backup the file. "
 msgstr "Αποτυχία δημιουργίας αντιγράφου ασφαλείας του αρχείου. "
 
-#: ../src/MadEditFrame.cpp:5928
+#: ../src/MadEditFrame.cpp:5931
 msgid " might not exist."
 msgstr " ίσως να μην υπάρχει."
 
-#: ../src/MadEditFrame.cpp:6168
+#: ../src/MadEditFrame.cpp:6171
 msgid ""
 "There was a problem previewing this document.\n"
 "Perhaps your current printer is not set correctly?"
@@ -3007,15 +3007,15 @@ msgstr ""
 "Παρουσιάστηκε κάποιο πρόβλημα κατά την προεπισκόπηση του εγγράφου.\n"
 "Μήπως ο τρέχων εκτυπωτής δεν έχει ρυθμιστεί σωστά;"
 
-#: ../src/MadEditFrame.cpp:6168
+#: ../src/MadEditFrame.cpp:6171
 msgid "Previewing"
 msgstr "Γίνεται Προεπισκόπηση"
 
-#: ../src/MadEditFrame.cpp:6172
+#: ../src/MadEditFrame.cpp:6175
 msgid "MadEdit Print Preview"
 msgstr "Προεπισκόπηση της Εκτύπωσης κατά το ΜαντΈντιτ"
 
-#: ../src/MadEditFrame.cpp:6196
+#: ../src/MadEditFrame.cpp:6199
 msgid ""
 "There was a problem printing this document.\n"
 "Perhaps your current printer is not set correctly?"
@@ -3023,7 +3023,7 @@ msgstr ""
 "Υπήρξε πρόβλημα κατά την εκτύπωση του εγγράφου.\n"
 "Μήπως ο τρέχων εκτυπωτής δεν έχει ρυθμιστεί σωστά;"
 
-#: ../src/MadEditFrame.cpp:6267
+#: ../src/MadEditFrame.cpp:6270
 msgid ""
 " does not exist. It might have been removed. Do you want to removed it from "
 "recent file list?"
@@ -3032,45 +3032,45 @@ msgstr ""
 "\n"
 "Θα ήθελες να απομακρυνθεί από το κατάστιχο των πρόσφατων αρχείων;"
 
-#: ../src/MadEditFrame.cpp:6701 ../src/MadSearchReplaceDialog.cpp:2373
+#: ../src/MadEditFrame.cpp:6704 ../src/MadSearchReplaceDialog.cpp:2373
 #: ../src/MadMacroDlg.cpp:586
 msgid "Delimiters:"
 msgstr "Διαχωριστικά:"
 
-#: ../src/MadEditFrame.cpp:6701 ../src/MadSearchReplaceDialog.cpp:2373
+#: ../src/MadEditFrame.cpp:6704 ../src/MadSearchReplaceDialog.cpp:2373
 #: ../src/MadMacroDlg.cpp:586
 msgid "Revert Hex String"
 msgstr "Επαναφορά Δεκαεξαδικού Στίχου"
 
-#: ../src/MadEditFrame.cpp:6849 ../src/MadEditFrame.cpp:6915
+#: ../src/MadEditFrame.cpp:6852 ../src/MadEditFrame.cpp:6918
 #: ../src/MadSearchReplaceDialog.cpp:2511
 #: ../src/MadSearchReplaceDialog.cpp:2574 ../src/MadMacroDlg.cpp:727
 #: ../src/MadMacroDlg.cpp:794
 msgid "ASCII characters"
 msgstr "ASCII χαρακτήρες"
 
-#: ../src/MadEditFrame.cpp:6849 ../src/MadEditFrame.cpp:6915
+#: ../src/MadEditFrame.cpp:6852 ../src/MadEditFrame.cpp:6918
 #: ../src/MadSearchReplaceDialog.cpp:2511
 #: ../src/MadSearchReplaceDialog.cpp:2574 ../src/MadMacroDlg.cpp:727
 #: ../src/MadMacroDlg.cpp:794
 msgid "Japanese characters"
 msgstr "Γιαπωνέζικοι χαρακτήρες"
 
-#: ../src/MadEditFrame.cpp:6850 ../src/MadEditFrame.cpp:6916
+#: ../src/MadEditFrame.cpp:6853 ../src/MadEditFrame.cpp:6919
 #: ../src/MadSearchReplaceDialog.cpp:2512
 #: ../src/MadSearchReplaceDialog.cpp:2575 ../src/MadMacroDlg.cpp:728
 #: ../src/MadMacroDlg.cpp:795
 msgid "Korean characters"
 msgstr "Κορεάτικοι χαρακτήρες"
 
-#: ../src/MadEditFrame.cpp:6850 ../src/MadEditFrame.cpp:6916
+#: ../src/MadEditFrame.cpp:6853 ../src/MadEditFrame.cpp:6919
 #: ../src/MadSearchReplaceDialog.cpp:2512
 #: ../src/MadSearchReplaceDialog.cpp:2575 ../src/MadMacroDlg.cpp:795
 msgid "other characters"
 msgstr "άλλοι χαρακτήρες"
 
-#: ../src/MadEditFrame.cpp:6854 ../src/MadEditFrame.cpp:6858
-#: ../src/MadEditFrame.cpp:6920 ../src/MadEditFrame.cpp:6924
+#: ../src/MadEditFrame.cpp:6857 ../src/MadEditFrame.cpp:6861
+#: ../src/MadEditFrame.cpp:6923 ../src/MadEditFrame.cpp:6927
 #: ../src/MadSearchReplaceDialog.cpp:2516
 #: ../src/MadSearchReplaceDialog.cpp:2520
 #: ../src/MadSearchReplaceDialog.cpp:2579
@@ -3080,84 +3080,80 @@ msgstr "άλλοι χαρακτήρες"
 msgid "Choose the characters you want to convert:"
 msgstr "Επέλεξε τους χαρακτήρες που θα ήθελες να μετατραπούν:"
 
-#: ../src/MadEditFrame.cpp:7448
+#: ../src/MadEditFrame.cpp:7451
 msgid "Find/Replace in Files Results"
 msgstr "Αναζήτηση ή Αντικατάσταση στα Αποτελέσματα των Φακέλων"
 
-#: ../src/MadEditFrame.cpp:7519
+#: ../src/MadEditFrame.cpp:7522
 #, c-format
 msgid "Line Number(1~%s): (you can input HexNumber(0x1~0x%X): 0xNNN)"
 msgstr ""
 "Αριθμός Γραμμής(1~%s): (μπορείς να εισάγεις ΔεκαεξαδικόΑριθμό(0x1~0x%X): "
 "0xNNN)"
 
-#: ../src/MadEditFrame.cpp:7519
+#: ../src/MadEditFrame.cpp:7522
 msgid "Go To Line"
 msgstr "Μετάβαση σε Γραμμή"
 
-#: ../src/MadEditFrame.cpp:7580
+#: ../src/MadEditFrame.cpp:7583
 #, c-format
 msgid "Position(0~%s): (you can input HexNumber: 0xNNN)"
 msgstr "Θέση(0~%s): (μπορείς να εισάγεις ΔεκαεξαδικόΑριθμό: 0xNNN)"
 
-#: ../src/MadEditFrame.cpp:7580
+#: ../src/MadEditFrame.cpp:7583
 msgid "Go To Position"
 msgstr "Μετάβαση σε Θέση"
 
-#: ../src/MadEditFrame.cpp:7946
+#: ../src/MadEditFrame.cpp:7949
 msgid "Markdown/HTML Preview"
 msgstr "Markdown/HTML Προεπισκόπηση"
 
-#: ../src/MadEditFrame.cpp:7949
+#: ../src/MadEditFrame.cpp:7952
 msgid "Refresh"
 msgstr "Ανανέωση"
 
-#: ../src/MadEditFrame.cpp:7949
+#: ../src/MadEditFrame.cpp:7952
 msgid "Refresh prviewed text"
 msgstr "Ανανέωση της προεπισκόπησης του κειμένου"
 
-#: ../src/MadEditFrame.cpp:7950
+#: ../src/MadEditFrame.cpp:7953
 msgid "Close Preveiw"
 msgstr "Κλείσιμο της Προεπισκόπησης"
 
-#: ../src/MadEditFrame.cpp:7950
+#: ../src/MadEditFrame.cpp:7953
 msgid "Close preveiw windows"
 msgstr "Κλείσιμο των παραθύρων της προεπισκόπησης"
 
-#: ../src/MadEditFrame.cpp:9340
+#: ../src/MadEditFrame.cpp:9343
 msgid "Open Mad Macro File"
 msgstr "Άνοιγμα Αρχείου Μακροεντολών του Μαντ"
 
-#: ../src/MadEditFrame.cpp:9491
+#: ../src/MadEditFrame.cpp:9494
 msgid "|All files(*;*.*)"
 msgstr "|Όλα τα αρχεία (*;*.*)"
 
-#: ../src/MadEditFrame.cpp:9492
+#: ../src/MadEditFrame.cpp:9495
 msgid "Mad Macro"
 msgstr "Μακροεντολή Μαντ"
 
-#: ../src/MadEditFrame.cpp:9500
+#: ../src/MadEditFrame.cpp:9503
 #, c-format
 msgid "Do you want to overwrite %s ?"
 msgstr "Θέλεις να απανωγραφεί το %s ;"
 
-#: ../src/MadEditFrame.cpp:9500
+#: ../src/MadEditFrame.cpp:9503
 msgid "Warning"
 msgstr "Προειδοποίηση"
 
-#: ../src/MadEditFrame.cpp:9603
+#: ../src/MadEditFrame.cpp:9606
 msgid "Edit Mad Macro File"
 msgstr "Επεξεργασία Ενός Αρχείου Μακροεντολών Μαντ"
 
-#: ../src/MadEditFrame.cpp:10220
+#: ../src/MadEditFrame.cpp:10229 ../src/MadEditFrame.cpp:10234
 msgid "Invalid JSON string, formatting failed\n"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:10225
-msgid "Invalid JSON string, formatting failed"
-msgstr ""
-
-#: ../src/MadEditFrame.cpp:10347
+#: ../src/MadEditFrame.cpp:10356
 msgid ""
 "Download dictionary at\n"
 "https://github.com/LibreOffice/dictionaries"
@@ -3165,51 +3161,51 @@ msgstr ""
 "Λήψη του λεξικού από το...\n"
 "https://github.com/LibreOffice/dictionaries"
 
-#: ../src/MadEditFrame.cpp:10348
+#: ../src/MadEditFrame.cpp:10357
 msgid "Press OK to visit our HomePage."
 msgstr "Κλίκαρε στο  «Εντάξει» για να επισκεφτείς την Αρχική Ιστοσελίδα."
 
-#: ../src/MadEditFrame.cpp:10553
+#: ../src/MadEditFrame.cpp:10562
 msgid "Toggle Main Menubar"
 msgstr "Εναλλαγή της Κύριας Γραμμής Εργαλείων με το Μενού"
 
-#: ../src/MadEditFrame.cpp:10647
+#: ../src/MadEditFrame.cpp:10656
 msgid "Passed the begin of the file/selection"
 msgstr "Πέρασε την αρχή του αρχείου ή της επιλογής"
 
-#: ../src/MadEditFrame.cpp:10709 ../src/MadSearchReplaceDialog.cpp:650
+#: ../src/MadEditFrame.cpp:10718 ../src/MadSearchReplaceDialog.cpp:650
 msgid "Passed the end of the file"
 msgstr "Πέρασε το τέλος του αρχείου ή της επιλογής"
 
-#: ../src/MadEditFrame.cpp:10754
+#: ../src/MadEditFrame.cpp:10763
 msgid "Information Window"
 msgstr "Παράθυρο Πληροφοριών"
 
-#: ../src/MadEditFrame.cpp:10794
+#: ../src/MadEditFrame.cpp:10803
 msgid "Invalid item"
 msgstr "Μη έγκυρο αντικείμενο"
 
-#: ../src/MadEditFrame.cpp:10807
+#: ../src/MadEditFrame.cpp:10816
 msgid "&Collapse All"
 msgstr "Σύμπτυ&ξη Όλων"
 
-#: ../src/MadEditFrame.cpp:10808
+#: ../src/MadEditFrame.cpp:10817
 msgid "Copy &All"
 msgstr "&Αντιγραφή Όλων"
 
-#: ../src/MadEditFrame.cpp:10809
+#: ../src/MadEditFrame.cpp:10818
 msgid "&Reset Results"
 msgstr "Επαναφο&ρά των Αποτελέσματων"
 
-#: ../src/MadEditFrame.cpp:10811
+#: ../src/MadEditFrame.cpp:10820
 msgid "&Collapse Selected"
 msgstr "Σύμπτυ&ξη των Επιλεγμένων"
 
-#: ../src/MadEditFrame.cpp:10812
+#: ../src/MadEditFrame.cpp:10821
 msgid "&Copy Selected"
 msgstr "Αντι&γραφή Επιλεγμένων"
 
-#: ../src/MadEditFrame.cpp:10813
+#: ../src/MadEditFrame.cpp:10822
 msgid "&Delete Selected"
 msgstr "&Διαγραφή Των Επιλεγμένων"
 

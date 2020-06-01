@@ -10231,7 +10231,7 @@ void MadEditFrame::OnToolsJSONFormat( wxCommandEvent& WXUNUSED(event) )
 	}
 	catch (...)
 	{
-		MadMessageBox(_("Invalid JSON string, formatting failed"), _("Error"), wxOK | wxICON_ERROR);
+		MadMessageBox(_("Invalid JSON string, formatting failed\n"), _("Error"), wxOK | wxICON_ERROR);
 		return;
 	}
 
