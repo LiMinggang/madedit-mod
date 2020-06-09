@@ -9933,6 +9933,11 @@ void MadEditFrame::OnToolsMarkdown2Html( wxCommandEvent& WXUNUSED(event) )
 {
 	if( g_ActiveMadEdit != nullptr )
 	{ 
+		if( g_ActiveMadEdit->GetEditMode() == emHexMode ) // In case of OOM
+		{
+			wxLogError( wxString( _( "This is not a text file:" ) ) + g_ActiveMadEdit->GetFileName() );
+			return;
+		}
 		wxString text;
 		g_ActiveMadEdit->GetText( text, false );
 		std::wstring src = text.ToStdWstring();
@@ -9952,6 +9957,11 @@ void MadEditFrame::OnToolsHtml2PlainText( wxCommandEvent& WXUNUSED(event) )
 {
 	if( g_ActiveMadEdit != nullptr )
 	{ 
+		if( g_ActiveMadEdit->GetEditMode() == emHexMode ) // In case of OOM
+		{
+			wxLogError( wxString( _( "This is not a text file:" ) ) + g_ActiveMadEdit->GetFileName() );
+			return;
+		}
 		if( g_MadToolHtmlWin == nullptr )
 		{
 			try
@@ -10039,6 +10049,11 @@ static bool BuffersDiffer( const wxString &a, const wxString &b )
 void MadEditFrame::OnToolsAstyleFormat( wxCommandEvent& WXUNUSED(event) )
 {
 	if( g_ActiveMadEdit == nullptr ) { return; }
+	if( g_ActiveMadEdit->GetEditMode() == emHexMode ) // In case of OOM
+	{
+		wxLogError( wxString( _( "This is not a text file:" ) ) + g_ActiveMadEdit->GetFileName() );
+		return;
+	}
 
 	wxString text;
 	bool onlySelected = false;
@@ -10144,6 +10159,11 @@ void MadEditFrame::OnToolsXMLFormat( wxCommandEvent& WXUNUSED(event) )
 
 	if( g_ActiveMadEdit != nullptr )
 	{ 
+		if( g_ActiveMadEdit->GetEditMode() == emHexMode ) // In case of OOM
+		{
+			wxLogError( wxString( _( "This is not a text file:" ) ) + g_ActiveMadEdit->GetFileName() );
+			return;
+		}
 		wxString text;
 		g_ActiveMadEdit->GetText( text, false );
 
@@ -10184,6 +10204,11 @@ void MadEditFrame::OnToolsXMLFormat( wxCommandEvent& WXUNUSED(event) )
 void MadEditFrame::OnToolsJSONFormat( wxCommandEvent& WXUNUSED(event) )
 {
 	if( g_ActiveMadEdit == nullptr ) { return; }
+	if( g_ActiveMadEdit->GetEditMode() == emHexMode ) // In case of OOM
+	{
+		wxLogError( wxString( _( "This is not a text file:" ) ) + g_ActiveMadEdit->GetFileName() );
+		return;
+	}
 
 	wxString text;
 	bool onlySelected = false;
