@@ -3057,7 +3057,7 @@ namespace mad_python {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
-			if( g_MainFrame && ( madedit ) && ( !madedit->IsReadOnly() )  && (madedit->GetEditMode() != emHexMode) ) {
+			if( g_MainFrame && ( madedit ) && ( !madedit->IsReadOnly() ) && (madedit->GetEditMode() != emHexMode) ) {
 				wxCommandEvent event;
 				g_MainFrame->OnToolsMarkdown2Html( event );
 			}
@@ -3081,7 +3081,7 @@ namespace mad_python {
 			{ madedit->ToggleBookmarkInSearch(bookmark); }
 		}
 
-		void CutDelBookmarkedLines( bool copyLines = false )  {
+		void CutDelBookmarkedLines( bool copyLines = false ) {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
@@ -3097,7 +3097,7 @@ namespace mad_python {
 			{ madedit->DeleteUnmarkedLines(); }
 		}
 
-		void CopyUnmarkedLines()  {
+		void CopyUnmarkedLines() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
@@ -3105,7 +3105,7 @@ namespace mad_python {
 			{ madedit->CopyUnmarkedLines(); }
 		}
 
-		void CutUnmarkedLines()  {
+		void CutUnmarkedLines() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
@@ -3130,20 +3130,18 @@ namespace mad_python {
 		}
 	};
 
-	int MsgBox(const std::string& message, const std::string& caption = "Message", long style = wxOK | wxCENTRE)
-	{
+	int MsgBox(const std::string& message, const std::string& caption = "Message", long style = wxOK | wxCENTRE) {
 		wxString wxMessage( message.c_str(), wxConvUTF8 ), wxCaption( caption.c_str(), wxConvUTF8 );
 		return MadMessageBox( wxMessage, wxCaption, style );
 	}
 
-	const std::string InputBox(const std::string& message, const std::string& caption = "Input Text")
-	{
+	const std::string InputBox(const std::string& message, const std::string& caption = "Input Text") {
 		wxString wxMessage( message.c_str(), wxConvUTF8 ), wxCaption( caption.c_str(), wxConvUTF8 );
 		wxString input = wxGetTextFromUser( wxMessage, wxCaption );
 		return std::string( input.mb_str(wxConvUTF8) );
 	}
 
-	void ConvertChineseInClipboard( long flag ){
+	void ConvertChineseInClipboard( long flag ) {
 		::ConvertChineseInClipboard( ( MadConvertChineseFlag )flag );
 	}
 };
