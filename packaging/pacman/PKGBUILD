@@ -1,6 +1,6 @@
 # Maintainer: Minggang Li <minggang.li@gmail.com>
 # Build instructions:
-#   1) Download boost and wxWidgets from boost.org(1.71 or later) and install wxgtk-dev(3.0.x or later)
+#   1) Download boost from boost.org(1.71 or later) and wxWidgets from wxWidgets.org or install wxgtk-dev(3.0.x or later)
 #      and change the './configure ...' accordingly
 #   2) Extract('tar -xvf ...') the source code packages at your {HOME} or other(change the {HOME} in './configure ...')
 #   3) Run 'makepkg' under the directory of this file
