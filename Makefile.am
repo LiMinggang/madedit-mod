@@ -7,7 +7,7 @@ AM_CPPFLAGS = -I$(top_srcdir)/charset-detector/src \
 -I$(top_srcdir)/minipython/Include -I$(top_srcdir)/minipython/Python \
 -I$(top_srcdir)/minipython/Modules/zlib -I$(top_srcdir)/markdown -I$(top_srcdir)/astyle \
 -I$(top_srcdir)/astyle/astyle -I$(top_srcdir)/src/MadEdit -I$(top_srcdir)/python/include \
--I$(top_srcdir)/python/include/boost/python
+-I$(top_srcdir)/python/include/boost/python -I$(top_srcdir)/json
 
 madedit_CXXFLAGS = -DDATA_DIR=\"${datadir}\"
 madedit_SOURCES =	src/MadAboutDialog.cpp \
@@ -688,7 +688,9 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	python/src/slice.cpp \
 	python/src/str.cpp \
 	python/src/tuple.cpp \
-	python/src/wrapper.cpp
+	python/src/wrapper.cpp \
+	json/JSON.cpp \
+	json/JSON.h
 
 dist_doc_DATA = gpl-3.0.txt README.txt help/MadPython.txt help/Help.txt help/KeyMapping.html help/RegexReference.html
 pixmapsdir = $(datadir)/pixmaps
