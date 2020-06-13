@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.18\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-01 09:38+0800\n"
-"PO-Revision-Date: 2020-05-31 13:12+0800\n"
+"POT-Creation-Date: 2020-06-13 10:56+0800\n"
+"PO-Revision-Date: 2020-06-13 10:57+0800\n"
 "Last-Translator: Li Minggang <minggang.li@gmail.com>\n"
 "Language-Team: MadEdit-Mod <minggang.li@gmail.com>\n"
 "Language: zh_CN\n"
@@ -2010,7 +2010,7 @@ msgstr "打字机模式"
 msgid "Toolbars"
 msgstr "工具栏"
 
-#: ../src/MadEditFrame.cpp:2554 ../src/MadEditFrame.cpp:10559
+#: ../src/MadEditFrame.cpp:2554 ../src/MadEditFrame.cpp:10584
 msgid "Toggle Main Toolbar"
 msgstr "切换显示主工具栏"
 
@@ -2018,7 +2018,7 @@ msgstr "切换显示主工具栏"
 msgid "Show/Hide Main Toolbar"
 msgstr "显示/隐藏主工具栏"
 
-#: ../src/MadEditFrame.cpp:2555 ../src/MadEditFrame.cpp:10560
+#: ../src/MadEditFrame.cpp:2555 ../src/MadEditFrame.cpp:10585
 msgid "Lock Toolbar"
 msgstr "锁定工具栏"
 
@@ -2732,7 +2732,7 @@ msgstr "向右滚动"
 msgid "Scrolls right by aprox. 1 tab stop"
 msgstr "向右滚动约一个Tab的宽度"
 
-#: ../src/MadEditFrame.cpp:3012 ../src/MadEditFrame.cpp:10758
+#: ../src/MadEditFrame.cpp:3012 ../src/MadEditFrame.cpp:10783
 msgid "Quick Search"
 msgstr "快速查找"
 
@@ -2882,7 +2882,7 @@ msgid "Memory allocation failed"
 msgstr "分配内存失败"
 
 #: ../src/MadEditFrame.cpp:4924 ../src/MadEditFrame.cpp:9663
-#: ../src/MadEditFrame.cpp:10229 ../src/MadEditFrame.cpp:10234
+#: ../src/MadEditFrame.cpp:10254 ../src/MadEditFrame.cpp:10259
 #: ../src/MadSearchReplaceDialog.cpp:2836 ../src/MadMacroDlg.cpp:266
 #: ../src/MadMacroDlg.cpp:1046
 msgid "Error"
@@ -3088,11 +3088,17 @@ msgstr "警告"
 msgid "Edit Mad Macro File"
 msgstr "编辑MadPython宏文件"
 
-#: ../src/MadEditFrame.cpp:10229 ../src/MadEditFrame.cpp:10234
+#: ../src/MadEditFrame.cpp:9938 ../src/MadEditFrame.cpp:9962
+#: ../src/MadEditFrame.cpp:10054 ../src/MadEditFrame.cpp:10164
+#: ../src/MadEditFrame.cpp:10209
+msgid "This is not a text file:"
+msgstr "这不是文本文件："
+
+#: ../src/MadEditFrame.cpp:10254 ../src/MadEditFrame.cpp:10259
 msgid "Invalid JSON string, formatting failed\n"
 msgstr "无效的JSON字符串，格式化失败\n"
 
-#: ../src/MadEditFrame.cpp:10356
+#: ../src/MadEditFrame.cpp:10381
 msgid ""
 "Download dictionary at\n"
 "https://github.com/LibreOffice/dictionaries"
@@ -3100,51 +3106,51 @@ msgstr ""
 "字典获取地址\n"
 "https://github.com/LibreOffice/dictionaries"
 
-#: ../src/MadEditFrame.cpp:10357
+#: ../src/MadEditFrame.cpp:10382
 msgid "Press OK to visit our HomePage."
 msgstr "按「确定」可以浏览我们的主页。"
 
-#: ../src/MadEditFrame.cpp:10562
+#: ../src/MadEditFrame.cpp:10587
 msgid "Toggle Main Menubar"
 msgstr "切换显示主菜单栏"
 
-#: ../src/MadEditFrame.cpp:10656
+#: ../src/MadEditFrame.cpp:10681
 msgid "Passed the begin of the file/selection"
 msgstr "已经过了文件或所选择区域开头"
 
-#: ../src/MadEditFrame.cpp:10718 ../src/MadSearchReplaceDialog.cpp:650
+#: ../src/MadEditFrame.cpp:10743 ../src/MadSearchReplaceDialog.cpp:650
 msgid "Passed the end of the file"
 msgstr "已经过了文件末尾"
 
-#: ../src/MadEditFrame.cpp:10763
+#: ../src/MadEditFrame.cpp:10788
 msgid "Information Window"
 msgstr "信息窗口"
 
-#: ../src/MadEditFrame.cpp:10803
+#: ../src/MadEditFrame.cpp:10828
 msgid "Invalid item"
 msgstr "无效项"
 
-#: ../src/MadEditFrame.cpp:10816
+#: ../src/MadEditFrame.cpp:10841
 msgid "&Collapse All"
 msgstr "折叠全部"
 
-#: ../src/MadEditFrame.cpp:10817
+#: ../src/MadEditFrame.cpp:10842
 msgid "Copy &All"
 msgstr "复制全部"
 
-#: ../src/MadEditFrame.cpp:10818
+#: ../src/MadEditFrame.cpp:10843
 msgid "&Reset Results"
 msgstr "清空结果"
 
-#: ../src/MadEditFrame.cpp:10820
+#: ../src/MadEditFrame.cpp:10845
 msgid "&Collapse Selected"
 msgstr "折叠选中项"
 
-#: ../src/MadEditFrame.cpp:10821
+#: ../src/MadEditFrame.cpp:10846
 msgid "&Copy Selected"
 msgstr "拷贝选中文字"
 
-#: ../src/MadEditFrame.cpp:10822
+#: ../src/MadEditFrame.cpp:10847
 msgid "&Delete Selected"
 msgstr "删除选中的项目"
 

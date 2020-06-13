@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.18\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-01 09:38+0800\n"
+"POT-Creation-Date: 2020-06-13 10:56+0800\n"
 "PO-Revision-Date: 2019-04-12 22:31+0900\n"
 "Last-Translator: Tilt <tiltstr@gmail.com>\n"
 "Language-Team: Tilt <tiltstr@gmail.com> \n"
@@ -2019,7 +2019,7 @@ msgstr "タイプライターモード"
 msgid "Toolbars"
 msgstr "ツールバー"
 
-#: ../src/MadEditFrame.cpp:2554 ../src/MadEditFrame.cpp:10559
+#: ../src/MadEditFrame.cpp:2554 ../src/MadEditFrame.cpp:10584
 msgid "Toggle Main Toolbar"
 msgstr "メインツールバーの切り替え"
 
@@ -2027,7 +2027,7 @@ msgstr "メインツールバーの切り替え"
 msgid "Show/Hide Main Toolbar"
 msgstr "メインツールバーの表示切り替え"
 
-#: ../src/MadEditFrame.cpp:2555 ../src/MadEditFrame.cpp:10560
+#: ../src/MadEditFrame.cpp:2555 ../src/MadEditFrame.cpp:10585
 msgid "Lock Toolbar"
 msgstr "ツールバーを固定"
 
@@ -2745,7 +2745,7 @@ msgstr "右にスクロール"
 msgid "Scrolls right by aprox. 1 tab stop"
 msgstr "TAB 1 個分右にスクロール"
 
-#: ../src/MadEditFrame.cpp:3012 ../src/MadEditFrame.cpp:10758
+#: ../src/MadEditFrame.cpp:3012 ../src/MadEditFrame.cpp:10783
 msgid "Quick Search"
 msgstr "クイック検索"
 
@@ -2895,7 +2895,7 @@ msgid "Memory allocation failed"
 msgstr "メモリの割り当てに失敗"
 
 #: ../src/MadEditFrame.cpp:4924 ../src/MadEditFrame.cpp:9663
-#: ../src/MadEditFrame.cpp:10229 ../src/MadEditFrame.cpp:10234
+#: ../src/MadEditFrame.cpp:10254 ../src/MadEditFrame.cpp:10259
 #: ../src/MadSearchReplaceDialog.cpp:2836 ../src/MadMacroDlg.cpp:266
 #: ../src/MadMacroDlg.cpp:1046
 msgid "Error"
@@ -3104,11 +3104,18 @@ msgstr "警告"
 msgid "Edit Mad Macro File"
 msgstr "Mad (Python) マクロファイルを編集"
 
-#: ../src/MadEditFrame.cpp:10229 ../src/MadEditFrame.cpp:10234
+#: ../src/MadEditFrame.cpp:9938 ../src/MadEditFrame.cpp:9962
+#: ../src/MadEditFrame.cpp:10054 ../src/MadEditFrame.cpp:10164
+#: ../src/MadEditFrame.cpp:10209
+#, fuzzy
+msgid "This is not a text file:"
+msgstr "このファイルは存在しません:"
+
+#: ../src/MadEditFrame.cpp:10254 ../src/MadEditFrame.cpp:10259
 msgid "Invalid JSON string, formatting failed\n"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:10356
+#: ../src/MadEditFrame.cpp:10381
 msgid ""
 "Download dictionary at\n"
 "https://github.com/LibreOffice/dictionaries"
@@ -3116,51 +3123,51 @@ msgstr ""
 "辞書をダウンロード\n"
 "https://github.com/LibreOffice/dictionaries"
 
-#: ../src/MadEditFrame.cpp:10357
+#: ../src/MadEditFrame.cpp:10382
 msgid "Press OK to visit our HomePage."
 msgstr "OK でホームページに移動します"
 
-#: ../src/MadEditFrame.cpp:10562
+#: ../src/MadEditFrame.cpp:10587
 msgid "Toggle Main Menubar"
 msgstr "メインメニューバーの切り替え"
 
-#: ../src/MadEditFrame.cpp:10656
+#: ../src/MadEditFrame.cpp:10681
 msgid "Passed the begin of the file/selection"
 msgstr "ファイル/選択範囲の先頭を渡す"
 
-#: ../src/MadEditFrame.cpp:10718 ../src/MadSearchReplaceDialog.cpp:650
+#: ../src/MadEditFrame.cpp:10743 ../src/MadSearchReplaceDialog.cpp:650
 msgid "Passed the end of the file"
 msgstr "ファイルの末尾を渡す"
 
-#: ../src/MadEditFrame.cpp:10763
+#: ../src/MadEditFrame.cpp:10788
 msgid "Information Window"
 msgstr "情報ウィンドウ"
 
-#: ../src/MadEditFrame.cpp:10803
+#: ../src/MadEditFrame.cpp:10828
 msgid "Invalid item"
 msgstr "無効な項目"
 
-#: ../src/MadEditFrame.cpp:10816
+#: ../src/MadEditFrame.cpp:10841
 msgid "&Collapse All"
 msgstr "すべて閉じる(&C)"
 
-#: ../src/MadEditFrame.cpp:10817
+#: ../src/MadEditFrame.cpp:10842
 msgid "Copy &All"
 msgstr "すべてコピー(&A)"
 
-#: ../src/MadEditFrame.cpp:10818
+#: ../src/MadEditFrame.cpp:10843
 msgid "&Reset Results"
 msgstr "結果をリセット(&R)"
 
-#: ../src/MadEditFrame.cpp:10820
+#: ../src/MadEditFrame.cpp:10845
 msgid "&Collapse Selected"
 msgstr "選択項目を折りたたむ(&C)"
 
-#: ../src/MadEditFrame.cpp:10821
+#: ../src/MadEditFrame.cpp:10846
 msgid "&Copy Selected"
 msgstr "選択した文字をコピー(&C)"
 
-#: ../src/MadEditFrame.cpp:10822
+#: ../src/MadEditFrame.cpp:10847
 msgid "&Delete Selected"
 msgstr "選択した項目を削除(&D)"
 
