@@ -10228,7 +10228,7 @@ void MadEditFrame::OnToolsJSONFormat( wxCommandEvent& WXUNUSED(event) )
 		g_ActiveMadEdit->GetText( text, false );
 	}
 
-	std::string src = text.ToStdString(wxConvUTF8);
+	std::string src(text.mb_str(wxConvUTF8));
 	JSON::Parser parser;
 
 	std::string res;
