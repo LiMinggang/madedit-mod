@@ -16,10 +16,10 @@ A. Linux, FreeBSD, and Unix-like OS (__WXGTK__):
       1. wxWidgets-3.1.2 or higher with Unicode and IPC enabled(obsoleted)
       2. Boost-1.56.0 or higher(1.70 is recommended)
 
-      (install wxgtk gtk2-devel/gtk3-devel gettext-devel automake rpm-build (Fedora/Mageia))
+      (install wxgtk gtk2-devel/gtk3-devel gettext-devel automake autoconf pkgconf rpm-build (Fedora/Mageia))
       gtk+2.0-dev/libgtk-3-dev automake (Ubuntu/Debian/ElementaryOS)
       copy wxwin.m4 to usr/share/acloXXX/ or install wxGTK-devel
-      
+
       install wxgtk(and rename the script under /usr/local/bin/wxgtk3uxxx-config tp wx-config)
       pkgconf for FreeBSD is recommanded
       sudo portsnap fetch extract(/usr/share/mk/bsd.port.mk not found)
