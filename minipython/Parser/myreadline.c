@@ -66,23 +66,11 @@ my_fgets(char *buf, int len, FILE *fp)
            reason and drop through to check for EOF.
         */
         if (GetLastError()==ERROR_OPERATION_ABORTED) {
-            /* Signals come asynchronously, so we sleep a brief
-               moment before checking if the handler has been
-               triggered (we cant just return 1 before the
-               signal handler has been called, as the later
-               signal may be treated as a separate interrupt).
-            */
-            Sleep(1);
-            ///if (PyOS_InterruptOccurred()) {
-            //    return 1; /* Interrupt */
+            //for (i = 0; i < 10; i++) {
+            //    if (PyOS_InterruptOccurred())
+            //        return 1;
+                Sleep(1);
             //}
-            /* Either the sleep wasn't long enough (need a
-               short loop retrying?) or not interrupted at all
-               (in which case we should revisit the whole thing!)
-               Logging some warning would be nice.  assert is not
-               viable as under the debugger, the various dialogs
-               mean the condition is not true.
-            */
         }
 #endif /* MS_WINDOWS */
         if (feof(fp)) {
