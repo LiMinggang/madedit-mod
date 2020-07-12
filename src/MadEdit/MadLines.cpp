@@ -371,7 +371,7 @@ wxFileOffset MadMemData::Put( wxByte * buffer, size_t size )
 // MadFileData
 //===========================================================================
 
-MadFileData::MadFileData( const wxString &name ) : m_OpenSuccess(true), m_Name(name), m_ReadOnly(false), m_Buffer1(nullptr), m_Buffer2(nullptr), m_Buf1Pos(-1), m_Buf2Pos(-1)
+MadFileData::MadFileData( const wxString &name, const wxFileOffset &rpos/*read offset*/ ) : m_OpenSuccess(true), m_Name(name), m_ReadOnly(false), m_Buffer1(nullptr), m_Buffer2(nullptr), m_Buf1Pos(-1), m_Buf2Pos(-1)
 {
 	m_Size = 0;
 	int utf8test = MadFileNameIsUTF8( name );
@@ -392,7 +392,7 @@ MadFileData::MadFileData( const wxString &name ) : m_OpenSuccess(true), m_Name(n
 	if( OpenFile() )
 	{
 		m_Size = m_File.SeekEnd();    // get size
-		m_File.Seek( 0 );              // move to begin
+		m_File.Seek( rpos );          // move to the offset to read
 		m_Buffer1 = new wxByte[BUFFER_SIZE];
 		m_Buf1Pos = 0;
 		m_Buffer2 = new wxByte[BUFFER_SIZE];
@@ -3109,7 +3109,14 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 	}
 
 	// set size
-	m_Size = m_FileData->m_Size;
+	if(m_MadEdit->m_EditMode == emPartialMode)
+	{
+		m_MadEdit->m_LinePos.clear();
+		/*m_FileData->Read
+		m_Size = m_MadEdit->m_PartialBufferSize??;*/
+	}
+	else
+		m_Size = m_FileData->m_Size;
 	MadLineIterator iter = m_LineList.begin();
 	iter->m_Size = m_Size;
 	// set line's blocks

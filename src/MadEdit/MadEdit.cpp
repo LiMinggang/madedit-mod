@@ -991,6 +991,9 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_lastDoubleClick = 0;
 
 	m_FileBuff = 0;
+	m_PosOffset = 0;
+	m_LineidOffset = 0;
+	m_LinePos.reserve(0xFFFF);
 
 	Bind(CHECK_MODIFICATION_TIME, &MadEdit::OnCheckModificationTime, this );
 	Bind(UPDATE_HSCROLL_POS, &MadEdit::OnUpdateHScrollPos, this );

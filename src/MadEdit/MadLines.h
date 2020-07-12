@@ -136,7 +136,7 @@ private:
 	bool Rename( const wxString &name );
 
 public:
-	explicit MadFileData( const wxString &name );
+	explicit MadFileData( const wxString &name, const wxFileOffset &rpos/*read offset*/ = 0 );
 	virtual ~MadFileData();
 	virtual wxByte Get( const wxFileOffset &pos );
 	virtual void Get( const wxFileOffset &pos, wxByte *buffer, size_t size );
