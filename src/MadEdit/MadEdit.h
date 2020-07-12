@@ -126,7 +126,7 @@ enum MadWordWrapMode
 { wwmNoWrap, wwmWrapByWindow, wwmWrapByColumn };
 
 enum MadEditMode
-{ emTextMode, emColumnMode, emHexMode };
+{ emTextMode, emPartialMode, emColumnMode, emHexMode };
 
 enum MadCaretType
 { ctVerticalLine, ctHorizontalLine, ctBlock };
@@ -754,6 +754,7 @@ public: // basic functions
 
 	void SetEditMode( MadEditMode mode );
 	MadEditMode GetEditMode() {return m_EditMode; }
+	bool IsTextMode() { return (m_EditMode == emTextMode || m_EditMode == emPartialMode);}
 
 	void SetSingleLineMode( bool mode );
 
@@ -1191,6 +1192,8 @@ private: // Printing functions
 	int m_PrintTotalHexLineCount;
 	MadEdit *m_PrintHexEdit;    // use a temporary MadEdit to print Hex-Data
 	static wxMenu * m_ZeroLenSelIndicator;
+	std::vector<wxFileOffset> m_LinePos;
+	unsigned char * m_FileBuff;
 
 public: // printing functions
 	void BeginPrint( const wxRect &printRect );
@@ -1226,6 +1229,7 @@ public: // utility functions
 	bool StringToHex( wxString ws, vector<wxByte> &hex );
 
 	static wxString m_FileFilter;
+	const static int m_PartialBufferSize = 8 * 1204/* * 1024*/;
 	friend class MadSearchReplaceDialog;
 	friend class mad_python::PyMadEdit;
 };

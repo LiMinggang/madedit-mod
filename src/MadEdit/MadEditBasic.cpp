@@ -740,7 +740,7 @@ void MadEdit::SetEditMode( MadEditMode mode )
 			break;
 
 		case emColumnMode:
-			if( m_EditMode == emTextMode )
+			if( IsTextMode() )
 			{
 				UpdateScrollBarPos();//update m_MaxColumnModeWidth;
 
@@ -1785,7 +1785,7 @@ void MadEdit::CopyToClipboard()
 		}
 	}
 	else
-		if( m_EditMode == emTextMode || !m_CaretAtHexArea )
+		if( IsTextMode() || !m_CaretAtHexArea )
 		{
 			wxString ws;
 			MadUCQueue ucqueue;
@@ -1929,7 +1929,7 @@ void MadEdit::DndBegDrag()
 		}
 	}
 	else
-		if( m_EditMode == emTextMode || !m_CaretAtHexArea )
+		if( IsTextMode() || !m_CaretAtHexArea )
 		{
 			MadUCQueue ucqueue;
 			MadLines::NextUCharFuncPtr NextUChar = m_Lines->NextUChar;
@@ -2167,7 +2167,7 @@ void MadEdit::Undo()
 		m_CaretPos.pos = undo->m_CaretPosBefore;
 		UpdateCaretByPos( m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
 
-		if( m_EditMode != emTextMode || m_Selection || oldrows != m_Lines->m_RowCount
+		if( !IsTextMode() || m_Selection || oldrows != m_Lines->m_RowCount
 				|| oldlines    != m_Lines->m_LineCount || count > 1 || lid < m_CaretPos.lineid )
 		{
 			m_RepaintAll = true;
@@ -2302,7 +2302,7 @@ void MadEdit::Redo()
 		m_CaretPos.pos = redo->m_CaretPosAfter;
 		UpdateCaretByPos( m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
 
-		if( m_EditMode != emTextMode || m_Selection || oldrows != m_Lines->m_RowCount
+		if( !IsTextMode() || m_Selection || oldrows != m_Lines->m_RowCount
 				|| oldlines    != m_Lines->m_LineCount || count > 1 || lid < m_CaretPos.lineid )
 		{
 			m_RepaintAll = true;

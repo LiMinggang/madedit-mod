@@ -4756,11 +4756,10 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 			madedit->SetEditMode((MadEditMode)em);
 		else if((em < emTextMode || em > emHexMode)) // New opened
 		{
-			m_Config->Read( wxT( "ViewModeInOpen" ), &ll, 0 );
-			if(ll < 0 || ll > 3) /*{ emTextMode, emColumnMode, emHexMode }*/
-				ll = 0;
-			ll -= 1;
-			if(ll >= 0)
+			m_Config->Read( wxT( "ViewModeInOpen" ), &ll, (long)emTextMode );
+			if(ll < (long)emTextMode || ll > (long)emHexMode) /*{ emTextMode, emColumnMode, emHexMode }*/
+				ll = (long)emTextMode;
+			if(ll >= (long)emTextMode)
 			{
 				em = (int)ll;
 				if((em >= emTextMode && em <= emHexMode) && ((MadEditMode)em != madedit->GetEditMode()))

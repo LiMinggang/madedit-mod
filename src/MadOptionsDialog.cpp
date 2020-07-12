@@ -1072,9 +1072,9 @@ void MadOptionsDialog::LoadOptions(void)
 	EditMaxSizeToLoad->SetValue( wxString() << ll );
 	cfg->Read( wxT( "MaxTextFileSize" ), &ll );
 	EditMaxTextFileSize->SetValue( wxString() << ll );
-	cfg->Read( wxT( "ViewModeInOpen" ), &ll, 0 );
-	if(ll < 0 || ll > 3) /*{ emTextMode, emColumnMode, emHexMode }*/
-		ll = 0; //Auto
+	cfg->Read( wxT( "ViewModeInOpen" ), &ll, (long)emTextMode );
+	if(ll < (long)emTextMode || ll > (long)emHexMode) /*{ emTextMode, emColumnMode, emHexMode }*/
+		ll = (long)emTextMode; //Auto
 	ComboBoxViewModeInOpen->SetSelection( ll );
 	cfg->Read( wxT( "/UIView/MaxDisplaySize" ), &ll );
 	EditMaxDisplaySize->SetValue( wxString() << ll );
