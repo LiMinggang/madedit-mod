@@ -3109,14 +3109,7 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 	}
 
 	// set size
-	if(m_MadEdit->m_EditMode == emPartialMode)
-	{
-		m_MadEdit->m_LinePos.clear();
-		/*m_FileData->Read
-		m_Size = m_MadEdit->m_PartialBufferSize??;*/
-	}
-	else
-		m_Size = m_FileData->m_Size;
+	m_Size = m_FileData->m_Size;
 	MadLineIterator iter = m_LineList.begin();
 	iter->m_Size = m_Size;
 	// set line's blocks
@@ -3127,6 +3120,44 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 	m_MadEdit->m_Config->Read( wxT( "/MadEdit/MaxSizeToLoad" ), &MaxSizeToLoad, 20 * 1000 * 1000 );
 	wxMemorySize memsize = wxGetFreeMemory();
 	wxByte *buf;
+	wxFileOffset partialSize = MadEdit::m_PartialBufferSize;
+
+	if(m_MadEdit->m_EditMode == emPartialMode && m_Size > MaxSizeToLoad)
+	{
+		if(!m_MadEdit->m_FileBuff)
+			m_MadEdit->m_FileBuff = new wxByte[MadEdit::m_PartialBufferSize];
+		buf = m_MadEdit->m_FileBuff;
+		m_MadEdit->m_LinePos.clear();
+		wxFileOffset ind = 0;
+		int ds = MadEdit::m_PartialBufferSize;
+		bool lastIsCR = false;
+		for(; ind < m_FileData->m_Size; ind += ds)
+		{
+			m_FileData->Read( ind, buf, ds );
+			for(int i = 0; i < ds; i++)
+			{
+				if(buf[i] == '\n')
+				{
+					m_MadEdit->m_LinePos.push_back(ind + i);
+					if(ind + i < MadEdit::m_PartialBufferSize)
+						partialSize = ind + i;
+					lastIsCR = false;
+				}
+
+				if(lastIsCR)
+				{
+					m_MadEdit->m_LinePos.push_back(ind + i - 1);
+
+					if(ind + i < MadEdit::m_PartialBufferSize)
+						partialSize = ind + i;
+				}
+
+				if(buf[i] == '\r') lastIsCR = true;
+			}
+
+			if((m_FileData->m_Size - ind) < ds) ds = (m_FileData->m_Size - ind);
+		}
+	}
 
 	if( m_Size <= MaxSizeToLoad && memsize > 0 && ( m_Size * 2 + 15 * 1024 * 1024 ) < memsize ) // load filedata to  MemData
 	{
