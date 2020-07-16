@@ -3143,16 +3143,19 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 						partialSize = ind + i;
 					lastIsCR = false;
 				}
-
-				if(lastIsCR)
+				else
 				{
-					m_MadEdit->m_LinePos.push_back(ind + i - 1);
+					if(lastIsCR)
+					{
+						m_MadEdit->m_LinePos.push_back(ind + i - 1);
 
-					if(ind + i < MadEdit::m_PartialBufferSize)
-						partialSize = ind + i;
+						if(ind + i < MadEdit::m_PartialBufferSize)
+							partialSize = ind + i;
+					}
+
+					if(buf[i] == '\r') lastIsCR = true;
+					else lastIsCR = false;
 				}
-
-				if(buf[i] == '\r') lastIsCR = true;
 			}
 
 			if((m_FileData->m_Size - ind) < ds) ds = (m_FileData->m_Size - ind);
