@@ -3160,6 +3160,8 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 
 			if((m_FileData->m_Size - ind) < ds) ds = (m_FileData->m_Size - ind);
 		}
+
+		if(lastIsCR) = m_MadEdit->m_LinePos.push_back(m_FileData->m_Size - 1);
 	}
 
 	if( m_Size <= MaxSizeToLoad && memsize > 0 && ( m_Size * 2 + 15 * 1024 * 1024 ) < memsize ) // load filedata to  MemData
