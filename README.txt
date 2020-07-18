@@ -122,6 +122,9 @@ Note: Not support wxWidgets 2.X anymore since 0.3.X
 Todo:
 Packing for FreeBSD
 
+Mod v0.4.20
+Fix: JSON formatter convert Unicode chars to UTF8 chars #309
+
 Mod v0.4.19
 1.Fix: Disable safe mode in PanChinese search
 2.Fix: String encoding bug in MadPython #304

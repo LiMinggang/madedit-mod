@@ -113,32 +113,43 @@ namespace JSON
 
 		// Common case first
 		if (c >= 0x20 && c != '"' && c != '\\' && c < 0x7f)
-		result += c;
-		else
-		{
-		result += '\\';
-
-		if (c == '"' || c == '\\')
 			result += c;
-		else if (c == 0x08) // BS
-			result += 'b';
-		else if (c == 0x0c) // FF
-			result += 'f';
-		else if (c == 0x0a) // NL
-			result += 'n';
-		else if (c == 0x0d) // CR
-			result += 'r';
-		else if (c == 0x09) // HT
-			result += 't';
 		else
 		{
-			std::ostringstream ss;
-			ss << "u"
-			   << std::setfill('0') << std::hex << std::setw(4)
-			   << c
-			   << std::setfill(' ') << std::dec;
-			result += ss.str();
-		}
+			if (c == '"' || c == '\\')
+			{
+				result += '\\';
+				result += c;
+			}
+			else if (c == 0x08) // BS
+			{
+				result += '\\';
+				result += 'b';
+			}
+			else if (c == 0x0c) // FF
+			{
+				result += '\\';
+				result += 'f';
+			}
+			else if (c == 0x0a) // NL
+			{
+				result += '\\';
+				result += 'n';
+			}
+			else if (c == 0x0d) // CR
+			{
+				result += '\\';
+				result += 'r';
+			}
+			else if (c == 0x09) // HT
+			{
+				result += '\\';
+				result += 't';
+			}
+			else
+			{
+				result += c;
+			}
 		}
 	}
 
