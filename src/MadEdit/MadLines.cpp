@@ -3045,7 +3045,7 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 	m_MadEdit->m_LoadingFile = true;
 	bool isbinary = false;
 
-	if( m_MadEdit->m_EditMode == emHexMode || m_MadEdit->m_EditMode == emPartialMode)
+	if( m_MadEdit->IsTextMode() )
 	{
 		isbinary = true;
 		m_MadEdit->SetEditMode( emTextMode );
@@ -3122,7 +3122,7 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 	wxByte *buf;
 	wxFileOffset partialSize = MadEdit::m_PartialBufferSize;
 
-	if(m_MadEdit->m_EditMode == emPartialMode && m_Size > MaxSizeToLoad)
+	if(m_MadEdit->m_PartialMode && m_Size > MaxSizeToLoad)
 	{
 		if(!m_MadEdit->m_FileBuff)
 			m_MadEdit->m_FileBuff = new wxByte[MadEdit::m_PartialBufferSize];
@@ -3161,7 +3161,9 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 			if((m_FileData->m_Size - ind) < ds) ds = (m_FileData->m_Size - ind);
 		}
 
-		if(lastIsCR) = m_MadEdit->m_LinePos.push_back(m_FileData->m_Size - 1);
+		if(lastIsCR) m_MadEdit->m_LinePos.push_back(m_FileData->m_Size - 1);
+
+		// Todo: Load first part of file according to pos
 	}
 
 	if( m_Size <= MaxSizeToLoad && memsize > 0 && ( m_Size * 2 + 15 * 1024 * 1024 ) < memsize ) // load filedata to  MemData
@@ -3250,7 +3252,7 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 	m_MadEdit->m_Config->SetPath( oldpath );
 	bool ok = false;
 
-	if(( m_Size >= maxtextfilesize || isbinary ) && m_MadEdit->m_EditMode != emPartialMode)
+	if(( m_Size >= maxtextfilesize || isbinary ) && !m_MadEdit->m_PartialMode)
 	{
 		isbinary = true;
 	}

@@ -126,7 +126,7 @@ enum MadWordWrapMode
 { wwmNoWrap, wwmWrapByWindow, wwmWrapByColumn };
 
 enum MadEditMode
-{ emTextMode, emPartialMode, emColumnMode, emHexMode };
+{ emTextMode, emColumnMode, emHexMode };
 
 enum MadCaretType
 { ctVerticalLine, ctHorizontalLine, ctBlock };
@@ -754,7 +754,7 @@ public: // basic functions
 
 	void SetEditMode( MadEditMode mode );
 	MadEditMode GetEditMode() {return m_EditMode; }
-	bool IsTextMode() { return (m_EditMode == emTextMode || m_EditMode == emPartialMode);}
+	bool IsTextMode() { return (m_EditMode == emTextMode);}
 
 	void SetSingleLineMode( bool mode );
 
@@ -1196,6 +1196,7 @@ private: // Printing functions
 	wxFileOffset m_PosOffset;
 	std::vector<wxFileOffset> m_LinePos;
 	int m_LineidOffset;
+	bool m_PartialMode; 
 
 public: // printing functions
 	void BeginPrint( const wxRect &printRect );
