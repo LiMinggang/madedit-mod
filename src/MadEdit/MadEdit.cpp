@@ -991,8 +991,8 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_lastDoubleClick = 0;
 
 	m_PartialMode = true;
-	m_FileBuff = 0;
-	m_PosOffset = 0;
+	m_PosOffsetBeg = 0;
+	m_PosOffsetEnd = 0;
 	m_LineidOffset = 0;
 	m_LinePos.reserve(0xFFFF);
 

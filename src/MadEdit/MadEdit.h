@@ -1192,8 +1192,8 @@ private: // Printing functions
 	int m_PrintTotalHexLineCount;
 	MadEdit *m_PrintHexEdit;    // use a temporary MadEdit to print Hex-Data
 	static wxMenu * m_ZeroLenSelIndicator;
-	wxByte * m_FileBuff;
-	wxFileOffset m_PosOffset;
+	wxFileOffset m_PosOffsetBeg;
+	wxFileOffset m_PosOffsetEnd;
 	std::vector<wxFileOffset> m_LinePos;
 	int m_LineidOffset;
 	bool m_PartialMode; 

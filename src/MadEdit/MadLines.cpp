@@ -3110,12 +3110,6 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 
 	// set size
 	m_Size = m_FileData->m_Size;
-	MadLineIterator iter = m_LineList.begin();
-	iter->m_Size = m_Size;
-	// set line's blocks
-	iter->m_Blocks[0].m_Size = m_Size;
-	// set line's row indices
-	iter->m_RowIndices[1].m_Start = m_Size;
 	long MaxSizeToLoad;
 	m_MadEdit->m_Config->Read( wxT( "/MadEdit/MaxSizeToLoad" ), &MaxSizeToLoad, 20 * 1000 * 1000 );
 	wxMemorySize memsize = wxGetFreeMemory();
@@ -3124,9 +3118,8 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 
 	if(m_MadEdit->m_PartialMode && m_Size > MaxSizeToLoad)
 	{
-		if(!m_MadEdit->m_FileBuff)
-			m_MadEdit->m_FileBuff = new wxByte[MadEdit::m_PartialBufferSize];
-		buf = m_MadEdit->m_FileBuff;
+		buf = new wxByte[MadEdit::m_PartialBufferSize];
+		m_MadEdit->m_PosOffsetBeg = 0;
 		m_MadEdit->m_LinePos.clear();
 		wxFileOffset ind = 0;
 		int ds = MadEdit::m_PartialBufferSize;
@@ -3161,10 +3154,19 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 			if((m_FileData->m_Size - ind) < ds) ds = (m_FileData->m_Size - ind);
 		}
 
-		if(lastIsCR) m_MadEdit->m_LinePos.push_back(m_FileData->m_Size - 1);
-
+		if(m_MadEdit->m_LinePos[m_MadEdit->m_LinePos.size()-1] != (m_FileData->m_Size - 1)) m_MadEdit->m_LinePos.push_back(m_FileData->m_Size - 1);
+		m_MadEdit->m_PosOffsetEnd = partialSize;
+		m_Size = partialSize;
+		delete[]buf;
 		// Todo: Load first part of file according to pos
 	}
+
+	MadLineIterator iter = m_LineList.begin();
+	iter->m_Size = m_Size;
+	// set line's blocks
+	iter->m_Blocks[0].m_Size = m_Size;
+	// set line's row indices
+	iter->m_RowIndices[1].m_Start = m_Size;
 
 	if( m_Size <= MaxSizeToLoad && memsize > 0 && ( m_Size * 2 + 15 * 1024 * 1024 ) < memsize ) // load filedata to  MemData
 	{
