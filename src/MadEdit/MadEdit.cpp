@@ -990,7 +990,7 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 #endif
 	m_lastDoubleClick = 0;
 
-	m_PartialMode = true;
+	m_PartialLoadMode = true;
 	m_PosOffsetBeg = 0;
 	m_PosOffsetEnd = 0;
 	m_LineidOffset = 0;
@@ -1069,7 +1069,6 @@ MadEdit::~MadEdit()
 	m_MouseMotionTimer->Stop();
 	m_MouseMotionTimer->DeletePendingEvents();
 	delete m_MouseMotionTimer;
-	if(m_FileBuff) delete [] m_FileBuff;
 	DeletePendingEvents();
 }
 

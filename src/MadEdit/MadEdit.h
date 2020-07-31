@@ -1194,15 +1194,17 @@ private: // Printing functions
 	static wxMenu * m_ZeroLenSelIndicator;
 	wxFileOffset m_PosOffsetBeg;
 	wxFileOffset m_PosOffsetEnd;
+	wxFileOffset m_RealSize;
 	std::vector<wxFileOffset> m_LinePos;
 	int m_LineidOffset;
-	bool m_PartialMode; 
+	bool m_PartialLoadMode; 
 
 public: // printing functions
 	void BeginPrint( const wxRect &printRect );
 	int  GetPageCount() { return m_PrintPageCount; }
 	bool PrintPage( wxDC *dc, int pageNum );
 	void EndPrint();
+	bool IsPartialLoadMode() { return m_PartialLoadMode; }
 
 public: // fix wxDC.Blit(wxINVERT) not work on some old versions of VMWare
 	typedef void ( MadEdit::*InvertRectPtr )( wxDC *dc, int x, int y, int w, int h );

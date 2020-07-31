@@ -419,6 +419,7 @@ public:
 	~MadLines();
 
 	bool LoadFromFile( const wxString &filename, const wxString &encoding = wxEmptyString );
+	bool MadLines::LoadPartial( wxFileOffset startpos, wxFileOffset len );
 	bool SaveToFile( const wxString &filename, const wxString &tempdir );
 	wxFileOffset GetSize() { return m_Size; }
 

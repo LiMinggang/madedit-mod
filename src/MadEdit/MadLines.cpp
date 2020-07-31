@@ -3116,7 +3116,7 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 	wxByte *buf;
 	wxFileOffset partialSize = MadEdit::m_PartialBufferSize;
 
-	if(m_MadEdit->m_PartialMode && m_Size > MaxSizeToLoad)
+	if(m_MadEdit->IsPartialLoadMode() && m_Size > MaxSizeToLoad)
 	{
 		buf = new wxByte[MadEdit::m_PartialBufferSize];
 		m_MadEdit->m_PosOffsetBeg = 0;
@@ -3254,7 +3254,7 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 	m_MadEdit->m_Config->SetPath( oldpath );
 	bool ok = false;
 
-	if(( m_Size >= maxtextfilesize || isbinary ) && !m_MadEdit->m_PartialMode)
+	if(( m_Size >= maxtextfilesize || isbinary ) && !m_MadEdit->IsPartialLoadMode())
 	{
 		isbinary = true;
 	}
@@ -3363,7 +3363,7 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 				m_MadEdit->SetEncoding( MadEncoding::EncodingToName( enc ) );
 			}
 
-		if( isbinary || IsBinaryData( buf, s ) )
+		if( isbinary && (!m_MadEdit->IsPartialLoadMode()) || IsBinaryData( buf, s ) )
 		{
 			m_MaxLineWidth = -1;       // indicate the data is not text data
 			m_MadEdit->SetEditMode( emHexMode );
@@ -3375,6 +3375,51 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 	}
 
 	m_MadEdit->m_LoadingFile = false;
+	return true;
+}
+
+bool MadLines::LoadPartial( wxFileOffset startpos, wxFileOffset len )
+{
+	if( m_FileData || m_FileData->OpenSuccess())
+		return false;
+
+	wxByte * buf = 0;
+	/*if( m_TmpFileData )
+	{
+		wxString tmpfile = m_TmpFileData->m_Name;
+		delete m_TmpFileData;
+		wxRemoveFile( tmpfile );
+		m_TmpFileData = nullptr;
+	}*/
+	m_MemData->Reset();
+	// reserve one empty line
+	Empty( false );
+	m_MadEdit->m_LoadingFile = true;
+
+	if(startpos + len >= m_FileData->m_Size) len = m_FileData->m_Size - startpos; // ???? -1?
+	m_Size = len;
+	buf = new wxByte[len];
+	MadLineIterator iter = m_LineList.begin();
+	iter->m_Size = m_Size;
+	// set line's blocks
+	iter->m_Blocks[0].m_Size = m_Size;
+	// set line's row indices
+	iter->m_RowIndices[1].m_Start = m_Size;
+
+	wxFileOffset ss = startpos;
+	m_FileData->Get( startpos, buf, m_Size );
+	m_MemData->Put( buf, m_Size );
+
+	iter->m_Blocks[0].m_Data = m_MemData;
+	buf = m_MemData->m_Buffers.front();
+
+	wxFont *font = m_MadEdit->m_TextFont;
+	m_Syntax->InitNextWord1( m_MadEdit->m_Lines, m_MadEdit->m_WordBuffer, m_MadEdit->m_WidthBuffer, font->GetFaceName(), font->GetPointSize(), font->GetFamily() );
+	//m_MadEdit->m_Syntax = m_Syntax;
+	//m_MadEdit->UpdateSyntaxDictionary();
+	Reformat( iter, iter );
+	m_MadEdit->m_LoadingFile = false;
+	delete []buf;
 	return true;
 }
 
