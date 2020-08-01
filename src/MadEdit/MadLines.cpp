@@ -3397,7 +3397,6 @@ bool MadLines::LoadPartial( wxFileOffset startpos, wxFileOffset len )
 	// set size
 	m_Size = len;
 	wxByte* buf;
-	wxFileOffset partialSize = MadEdit::m_PartialBufferSize;
 
 	MadLineIterator iter = m_LineList.begin();
 	iter->m_Size = m_Size;

@@ -993,7 +993,8 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_PartialLoadMode = true;
 	m_PosOffsetBeg = 0;
 	m_PosOffsetEnd = 0;
-	m_LineidOffset = 0;
+	m_LineidBeg = 0;
+	m_LineidEnd = 0;
 	m_LineEndPos.reserve(0xFFFF);
 
 	Bind(CHECK_MODIFICATION_TIME, &MadEdit::OnCheckModificationTime, this );

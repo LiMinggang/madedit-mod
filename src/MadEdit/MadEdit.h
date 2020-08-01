@@ -1194,21 +1194,23 @@ private: // Printing functions
 	static wxMenu * m_ZeroLenSelIndicator;
 	wxFileOffset m_PosOffsetBeg;
 	wxFileOffset m_PosOffsetEnd;
-	wxFileOffset m_RealSize;
 	std::vector<wxFileOffset> m_LineEndPos;
-	int m_LineidOffset;
+	int m_LineidBeg;
+	int m_LineidEnd;
 	bool m_PartialLoadMode; 
 
 public: // Partial load functions
+	bool IsPartialLoadMode() { return m_PartialLoadMode; }
 	bool MadEdit::NormalFilePosBackward(wxFileOffset pos, wxFileOffset& newpos, int& line);
 	bool MadEdit::NormalFilePosForward(wxFileOffset pos, wxFileOffset& newpos, int& line);
+	bool LoadPartial(wxFileOffset pos);
+	bool LoadPartial(int line);
 
 public: // printing functions
 	void BeginPrint( const wxRect &printRect );
 	int  GetPageCount() { return m_PrintPageCount; }
 	bool PrintPage( wxDC *dc, int pageNum );
 	void EndPrint();
-	bool IsPartialLoadMode() { return m_PartialLoadMode; }
 
 public: // fix wxDC.Blit(wxINVERT) not work on some old versions of VMWare
 	typedef void ( MadEdit::*InvertRectPtr )( wxDC *dc, int x, int y, int w, int h );
