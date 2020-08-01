@@ -1195,9 +1195,13 @@ private: // Printing functions
 	wxFileOffset m_PosOffsetBeg;
 	wxFileOffset m_PosOffsetEnd;
 	wxFileOffset m_RealSize;
-	std::vector<wxFileOffset> m_LinePos;
+	std::vector<wxFileOffset> m_LineEndPos;
 	int m_LineidOffset;
 	bool m_PartialLoadMode; 
+
+public: // Partial load functions
+	bool MadEdit::NormalFilePosBackward(wxFileOffset pos, wxFileOffset& newpos, int& line);
+	bool MadEdit::NormalFilePosForward(wxFileOffset pos, wxFileOffset& newpos, int& line);
 
 public: // printing functions
 	void BeginPrint( const wxRect &printRect );

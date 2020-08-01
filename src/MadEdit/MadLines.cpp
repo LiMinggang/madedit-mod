@@ -3120,7 +3120,7 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 	{
 		buf = new wxByte[MadEdit::m_PartialBufferSize];
 		m_MadEdit->m_PosOffsetBeg = 0;
-		m_MadEdit->m_LinePos.clear();
+		m_MadEdit->m_LineEndPos.clear();
 		wxFileOffset ind = 0;
 		int ds = MadEdit::m_PartialBufferSize;
 		bool lastIsCR = false;
@@ -3131,7 +3131,7 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 			{
 				if(buf[i] == '\n')
 				{
-					m_MadEdit->m_LinePos.push_back(ind + i);
+					m_MadEdit->m_LineEndPos.push_back(ind + i);
 					if(ind + i < MadEdit::m_PartialBufferSize)
 						partialSize = ind + i;
 					lastIsCR = false;
@@ -3140,7 +3140,7 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 				{
 					if(lastIsCR)
 					{
-						m_MadEdit->m_LinePos.push_back(ind + i - 1);
+						m_MadEdit->m_LineEndPos.push_back(ind + i - 1);
 
 						if(ind + i < MadEdit::m_PartialBufferSize)
 							partialSize = ind + i;
@@ -3154,7 +3154,7 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 			if((m_FileData->m_Size - ind) < ds) ds = (m_FileData->m_Size - ind);
 		}
 
-		if(m_MadEdit->m_LinePos[m_MadEdit->m_LinePos.size()-1] != (m_FileData->m_Size - 1)) m_MadEdit->m_LinePos.push_back(m_FileData->m_Size - 1);
+		if(m_MadEdit->m_LineEndPos[m_MadEdit->m_LineEndPos.size()-1] != (m_FileData->m_Size - 1)) m_MadEdit->m_LineEndPos.push_back(m_FileData->m_Size - 1);
 		m_MadEdit->m_PosOffsetEnd = partialSize;
 		m_Size = partialSize;
 		delete[]buf;
@@ -3380,7 +3380,6 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 
 	m_MadEdit->m_LoadingFile = false;
 
-	LoadPartial(100, 4096);
 	return true;
 }
 

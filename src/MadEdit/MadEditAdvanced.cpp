@@ -4227,4 +4227,42 @@ const wxColour & MadEdit::GetTextFtColor() const
 		return wxNullColour;
 }
 
+bool MadEdit::NormalFilePosBackward(wxFileOffset pos, wxFileOffset& newpos, int& line)
+{
+	if (!IsPartialLoadMode() || m_LineEndPos.empty()) return false;
+	std::vector<wxFileOffset>::iterator it;
+	if (pos < 0) pos = 0;
+	it = std::lower_bound(m_LineEndPos.begin(), m_LineEndPos.end(), pos);
+
+	line = it - m_LineEndPos.begin();
+	if (line > 0) newpos = m_LineEndPos[line - 1] + 1;
+	else newpos = 0;
+
+	if (pos - newpos > m_PartialBufferSize)
+	{
+		newpos = m_LineEndPos[line] + 1;
+		line++;
+	}
+}
+
+bool MadEdit::NormalFilePosForward(wxFileOffset pos, wxFileOffset& newpos, int& line)
+{
+	if (!IsPartialLoadMode() || m_LineEndPos.empty()) return false;
+	std::vector<wxFileOffset>::iterator it;
+	if (pos < 0) pos = 0;
+	it = std::lower_bound(m_LineEndPos.begin(), m_LineEndPos.end(), pos);
+
+	line = it - m_LineEndPos.begin();
+	newpos = *it;
+
+	if (newpos - pos > m_PartialBufferSize)
+	{
+		if (line > 0)
+		{
+			line--;
+			newpos = m_LineEndPos[line];
+		}
+	}
+}
+
 //----------
