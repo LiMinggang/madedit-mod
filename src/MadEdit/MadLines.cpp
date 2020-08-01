@@ -3038,7 +3038,7 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 	// reserve one empty line
 	Empty( false );
 	m_Name = filename;
-	m_ReadOnly = fd->IsReadOnly();
+	m_ReadOnly = m_FileData->IsReadOnly();
 	m_MaxLineWidth = 0;
 	m_MadEdit->m_HasTab = false;
 	m_MadEdit->m_NewLineType = nltDefault;
@@ -3195,8 +3195,12 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 			ss += bs;
 		}
 
-		delete m_FileData;
-		m_FileData = nullptr;
+		if (!m_MadEdit->IsPartialLoadMode())
+		{
+			delete m_FileData;
+			m_FileData = nullptr;
+		}
+		
 		iter->m_Blocks[0].m_Data = m_MemData;
 		buf = m_MemData->m_Buffers.front();
 	}
@@ -3375,30 +3379,27 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 	}
 
 	m_MadEdit->m_LoadingFile = false;
+
+	LoadPartial(100, 4096);
 	return true;
 }
 
 bool MadLines::LoadPartial( wxFileOffset startpos, wxFileOffset len )
 {
-	if( m_FileData || m_FileData->OpenSuccess())
+	if (!m_FileData || !m_FileData->OpenSuccess())
 		return false;
 
-	wxByte * buf = 0;
-	/*if( m_TmpFileData )
-	{
-		wxString tmpfile = m_TmpFileData->m_Name;
-		delete m_TmpFileData;
-		wxRemoveFile( tmpfile );
-		m_TmpFileData = nullptr;
-	}*/
 	m_MemData->Reset();
 	// reserve one empty line
-	Empty( false );
+	Empty(false);
+	m_MaxLineWidth = 0;
 	m_MadEdit->m_LoadingFile = true;
 
-	if(startpos + len >= m_FileData->m_Size) len = m_FileData->m_Size - startpos; // ???? -1?
+	// set size
 	m_Size = len;
-	buf = new wxByte[len];
+	wxByte* buf;
+	wxFileOffset partialSize = MadEdit::m_PartialBufferSize;
+
 	MadLineIterator iter = m_LineList.begin();
 	iter->m_Size = m_Size;
 	// set line's blocks
@@ -3406,20 +3407,39 @@ bool MadLines::LoadPartial( wxFileOffset startpos, wxFileOffset len )
 	// set line's row indices
 	iter->m_RowIndices[1].m_Start = m_Size;
 
-	wxFileOffset ss = startpos;
-	m_FileData->Get( startpos, buf, m_Size );
-	m_MemData->Put( buf, m_Size );
+	int ss = 0;
+	int bs = BUFFER_SIZE;
+	buf = new wxByte[len];
+
+	if (BUFFER_SIZE > m_Size)
+	{
+		bs = m_Size;
+	}
+
+	while (ss < m_Size)
+	{
+		// now bs == BUFFER_SIZE;
+		if (BUFFER_SIZE > (m_Size - ss))
+		{
+			bs = (m_Size - ss);
+		}
+
+		m_FileData->Get(startpos + ss, buf, bs);
+		m_MemData->Put(buf, bs);
+		ss += bs;
+	}
 
 	iter->m_Blocks[0].m_Data = m_MemData;
-	buf = m_MemData->m_Buffers.front();
+	delete[]buf;
 
-	wxFont *font = m_MadEdit->m_TextFont;
-	m_Syntax->InitNextWord1( m_MadEdit->m_Lines, m_MadEdit->m_WordBuffer, m_MadEdit->m_WidthBuffer, font->GetFaceName(), font->GetPointSize(), font->GetFamily() );
-	//m_MadEdit->m_Syntax = m_Syntax;
-	//m_MadEdit->UpdateSyntaxDictionary();
-	Reformat( iter, iter );
+	wxASSERT(m_Syntax != 0);
+	wxFont* font = m_MadEdit->m_TextFont;
+	m_Syntax->InitNextWord1(m_MadEdit->m_Lines, m_MadEdit->m_WordBuffer, m_MadEdit->m_WidthBuffer, font->GetFaceName(), font->GetPointSize(), font->GetFamily());
+
+	Reformat(iter, iter);
+
 	m_MadEdit->m_LoadingFile = false;
-	delete []buf;
+
 	return true;
 }
 
