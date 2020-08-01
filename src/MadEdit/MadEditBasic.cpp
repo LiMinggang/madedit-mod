@@ -2365,6 +2365,16 @@ void MadEdit::GoToLine( int line )
 	wxFileOffset oldCaretPos = m_CaretPos.pos;
 	--line;
 
+	if (IsPartialLoadMode())
+	{
+		if (line < m_LineidBeg || line > m_LineidEnd - 10)
+		{
+			if(!MadEdit::LoadPartial(line)) return;
+		}
+
+		line -= m_LineidBeg;
+	}
+
 	if( line < 0 ) line = 0;
 	else
 		if( line >= int( m_Lines->m_LineCount ) ) line = int( m_Lines->m_LineCount - 1 );

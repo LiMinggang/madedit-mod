@@ -4319,10 +4319,6 @@ bool MadEdit::LoadPartial(wxFileOffset pos)
 			bw_line = m_LineEndPos[m_LineEndPos.size() - 1] - pos;
 			fw_len = m_PartialBufferSize - bw_line;
 		}
-		else
-		{
-			wxLogError(wxString(_("Error pos:")) + wxT("\n\n") + wxLongLong(pos).ToString());
-		}
 	}
 
 	if (!NormalFilePosBackward(pos - fw_len, m_PosOffsetBeg, m_LineidBeg) ||

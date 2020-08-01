@@ -2074,6 +2074,11 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 	}
 
 	m_Syntax->SetAttributes( aeSpace );
+	if (m_DisplayLineNumber && IsPartialLoadMode())
+	{
+		m_LineNumberAreaWidth = GetLineNumberAreaWidth(m_LineidEnd+1);
+	}
+
 	const wxColor bm_BgColor = m_Syntax->nw_BgColor;
 	const int minleft = rect.GetLeft() + m_LineNumberAreaWidth + m_BookmarkWidth;
 	const int maxright = rect.GetRight();
@@ -2535,7 +2540,7 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 						lnums = wxT( '%' );
 						lnums += wxString::Format( wxT( "%u" ), ncount );
 						lnums += wxT( 'd' );
-						lnums = wxString::Format( lnums, lineid );
+						lnums = wxString::Format( lnums, lineid);
 						if (m_DisplayBookmark)
 						{
 							const wxChar *wcstr = lnums.c_str();
@@ -2575,7 +2580,7 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 						lnums = wxT('%');
 						lnums += wxString::Format(wxT("%u"), ncount);
 						lnums += wxT('d');
-						lnums = wxString::Format(lnums, lineid);
+						lnums = wxString::Format(lnums, lineid + m_LineidBeg);
 						const wxChar *wcstr = lnums.c_str();
 						dc->SetTextForeground( m_Syntax->nw_Color );
 						dc->SetFont( *( m_Syntax->nw_Font ) );
