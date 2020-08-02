@@ -4250,6 +4250,7 @@ bool MadEdit::NormalFilePosBackward(wxFileOffset pos, wxFileOffset& newpos, int&
 			line++;
 		}
 	}
+
 	return true;
 }
 
@@ -4279,6 +4280,7 @@ bool MadEdit::NormalFilePosForward(wxFileOffset pos, wxFileOffset& newpos, int& 
 			}
 		}
 	}
+
 	return true;
 }
 
@@ -4293,7 +4295,7 @@ bool MadEdit::LoadPartial(wxFileOffset pos)
 		return false;
 	}
 
-	int fw_len = m_PartialBufferSize/2, bw_line = m_PartialBufferSize / 2;
+	int fw_len = m_PartialBufferSize/2, bw_line = m_PartialBufferSize/2;
 
 	if (pos < 0)
 	{
@@ -4324,6 +4326,8 @@ bool MadEdit::LoadPartial(wxFileOffset pos)
 	if (!NormalFilePosBackward(pos - fw_len, m_PosOffsetBeg, m_LineidBeg) ||
 		!NormalFilePosForward(pos + bw_line, m_PosOffsetEnd, m_LineidEnd) ||
 		!m_Lines->LoadPartial(m_PosOffsetBeg, m_PosOffsetEnd - m_PosOffsetBeg + 1)) return false;
+
+	return true;
 }
 
 bool MadEdit::LoadPartial(int line)
