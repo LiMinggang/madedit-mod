@@ -3116,8 +3116,9 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 	wxByte *buf;
 	wxFileOffset partialSize = MadEdit::m_PartialBufferSize;
 
-	if(m_MadEdit->IsPartialLoadMode() && m_Size > MaxSizeToLoad)
+	if(m_Size > MaxSizeToLoad)
 	{
+		m_MadEdit->SetPartialLoadMode(true);
 		buf = new wxByte[MadEdit::m_PartialBufferSize];
 		m_MadEdit->m_PosOffsetBeg = 0;
 		m_MadEdit->m_LineEndPos.clear();

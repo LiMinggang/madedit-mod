@@ -990,7 +990,7 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 #endif
 	m_lastDoubleClick = 0;
 
-	m_PartialLoadMode = true;
+	m_PartialLoadMode = false;
 	m_PosOffsetBeg = 0;
 	m_PosOffsetEnd = 0;
 	m_LineidBeg = 0;
@@ -11083,10 +11083,6 @@ void MadEdit::MadEditOnPaint( wxPaintEvent *evt /*=NULL*/  )
 			{
 				// update ValidPos
 				m_UpdateValidPos = -1;
-				MadLineIterator lit;
-				wxFileOffset tmppos = -1;
-				int rowid = m_TopRow;
-				int lineid = GetLineByRow( lit, tmppos, rowid );
 				m_UpdateValidPos = 0;
 
 				// update m_LineNumberAreaWidth
@@ -11098,6 +11094,10 @@ void MadEdit::MadEditOnPaint( wxPaintEvent *evt /*=NULL*/  )
 					}
 					else
 					{
+						MadLineIterator lit;
+						wxFileOffset tmppos = -1;
+						int rowid = m_TopRow;
+						int lineid = GetLineByRow( lit, tmppos, rowid );
 						m_LineNumberAreaWidth = CalcLineNumberAreaWidth( lit, lineid, rowid, m_TopRow, rowcount );
 					}					
 				}

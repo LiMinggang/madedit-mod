@@ -1201,6 +1201,7 @@ private: // Printing functions
 
 public: // Partial load functions
 	bool IsPartialLoadMode() { return m_PartialLoadMode; }
+	void SetPartialLoadMode(bool partial) { m_PartialLoadMode = partial; }
 	bool MadEdit::NormalFilePosBackward(wxFileOffset pos, wxFileOffset& newpos, int& line);
 	bool MadEdit::NormalFilePosForward(wxFileOffset pos, wxFileOffset& newpos, int& line);
 	bool LoadPartial(wxFileOffset pos);
