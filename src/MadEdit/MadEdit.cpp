@@ -2074,10 +2074,6 @@ void MadEdit::PaintTextLines( wxDC *dc, const wxRect &rect, int toprow, int rowc
 	}
 
 	m_Syntax->SetAttributes( aeSpace );
-	if (m_DisplayLineNumber && IsPartialLoadMode())
-	{
-		m_LineNumberAreaWidth = GetLineNumberAreaWidth(m_LineidEnd+1);
-	}
 
 	const wxColor bm_BgColor = m_Syntax->nw_BgColor;
 	const int minleft = rect.GetLeft() + m_LineNumberAreaWidth + m_BookmarkWidth;
@@ -11096,7 +11092,14 @@ void MadEdit::MadEditOnPaint( wxPaintEvent *evt /*=NULL*/  )
 				// update m_LineNumberAreaWidth
 				if( m_DisplayLineNumber )
 				{
-					m_LineNumberAreaWidth = CalcLineNumberAreaWidth( lit, lineid, rowid, m_TopRow, rowcount );
+					if (IsPartialLoadMode())
+					{
+						m_LineNumberAreaWidth = GetLineNumberAreaWidth(m_LineidEnd+1);
+					}
+					else
+					{
+						m_LineNumberAreaWidth = CalcLineNumberAreaWidth( lit, lineid, rowid, m_TopRow, rowcount );
+					}					
 				}
 				else
 				{
