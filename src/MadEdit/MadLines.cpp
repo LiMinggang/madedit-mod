@@ -3045,7 +3045,7 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 	m_MadEdit->m_LoadingFile = true;
 	bool isbinary = false;
 
-	if( m_MadEdit->IsTextMode() )
+	if( !m_MadEdit->IsTextMode() )
 	{
 		isbinary = true;
 		m_MadEdit->SetEditMode( emTextMode );
@@ -3114,10 +3114,10 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 	m_MadEdit->m_Config->Read( wxT( "/MadEdit/MaxSizeToLoad" ), &MaxSizeToLoad, 20 * 1000 * 1000 );
 	wxMemorySize memsize = wxGetFreeMemory();
 	wxByte *buf;
-	wxFileOffset partialSize = MadEdit::m_PartialBufferSize;
 
 	if(m_Size > MaxSizeToLoad)
 	{
+		wxFileOffset partialSize = MadEdit::m_PartialBufferSize;
 		m_MadEdit->SetPartialLoadMode(true);
 		buf = new wxByte[MadEdit::m_PartialBufferSize];
 		m_MadEdit->m_PosOffsetBeg = 0;
