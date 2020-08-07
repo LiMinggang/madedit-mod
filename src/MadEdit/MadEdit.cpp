@@ -11088,16 +11088,24 @@ void MadEdit::MadEditOnPaint( wxPaintEvent *evt /*=NULL*/  )
 				// update m_LineNumberAreaWidth
 				if( m_DisplayLineNumber )
 				{
+					MadLineIterator lit;
+					wxFileOffset tmppos = -1;
+					int rowid = m_TopRow;
+					int lineid = GetLineByRow( lit, tmppos, rowid );
+					wxFileOffset pos = GetCaretPosition();
+					int trowid = 0, tline;
+					MadLineIterator tlit;
+					/*1. m_TopRow = GetLineByPos + delta(m_TopRow-rowid)
+					2. update selection
+					*/
+					tline = GetLineByPos( tlit, pos, trowid );
+					DBOUT( "m_TopRow:"<<m_TopRow<<", lineid:"<<lineid<<", rowid:"<<rowid<<", rowcount:"<<rowcount<<'\n');
 					if (IsPartialLoadMode())
 					{
 						m_LineNumberAreaWidth = GetLineNumberAreaWidth(m_LineidEnd+1);
 					}
 					else
 					{
-						MadLineIterator lit;
-						wxFileOffset tmppos = -1;
-						int rowid = m_TopRow;
-						int lineid = GetLineByRow( lit, tmppos, rowid );
 						m_LineNumberAreaWidth = CalcLineNumberAreaWidth( lit, lineid, rowid, m_TopRow, rowcount );
 					}					
 				}
