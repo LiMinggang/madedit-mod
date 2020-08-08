@@ -993,6 +993,7 @@ MadEdit::MadEdit( wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxS
 	m_PartialLoadMode = false;
 	m_PosOffsetBeg = 0;
 	m_PosOffsetEnd = 0;
+	m_PosCaretPos = -1;
 	m_LineidBeg = 0;
 	m_LineidEnd = 0;
 	m_LineEndPos.reserve(0xFFFF);
@@ -11108,18 +11109,21 @@ void MadEdit::MadEditOnPaint( wxPaintEvent *evt /*=NULL*/  )
 						{
 							m_PosCaretPos = GetCaretPosition() + m_PosOffsetBeg;
 							tmppos += m_PosOffsetBeg;
-							LoadPartial(m_PosCaretPos); // Todo for scroll by scrollbar
+							LoadPartial(tmppos);
 							tmppos -= m_PosOffsetBeg;
-							wxASSERT((m_PosCaretPos-m_PosOffsetBeg) >= 0 && tmppos >= 0);
-							int trowid = 0, tline;
-							MadLineIterator tlit;
-							tline = GetLineByPos( tlit, tmppos, trowid );
-							m_TopRow += trowid - rowid;
-							SetCaretPosition((m_PosCaretPos-m_PosOffsetBeg)); // Todo for scroll by scrollbar
+							SetCaretPosition(tmppos);
+							if ((m_PosCaretPos < m_PosOffsetBeg) || (m_PosCaretPos > m_PosOffsetEnd))
+								ShowCaret(false);
 							m_ValidPos_iter = m_CaretPos.iter;
 							m_ValidPos_lineid = m_CaretPos.lineid;
 							m_ValidPos_rowid = m_CaretPos.rowid - m_CaretPos.subrowid;
 							m_ValidPos_pos = m_CaretPos.pos - m_CaretPos.linepos;
+
+							wxASSERT(/*(m_PosCaretPos-m_PosOffsetBeg) >= 0 && */tmppos >= 0);
+							int trowid = 0, tline;
+							MadLineIterator tlit;
+							tline = GetLineByPos( tlit, tmppos, trowid );
+							m_TopRow += trowid - rowid;
 							if(m_Selection)
 							{
 								wxASSERT(0); // Todo
