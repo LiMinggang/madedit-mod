@@ -11104,19 +11104,23 @@ void MadEdit::MadEditOnPaint( wxPaintEvent *evt /*=NULL*/  )
 						2. set caret pos after reload
 						3. update selection
 						*/
-						if(rowshort || (m_TopRow <= m_VisibleRowCount))
+						if(((m_TopRow <= m_VisibleRowCount) && m_PosOffsetBeg) || (rowshort && (m_PosOffsetEnd < m_LineEndPos[m_LineEndPos.size() -1])))
 						{
 							wxFileOffset cpos = GetCaretPosition() + m_PosOffsetBeg;
 							tmppos += m_PosOffsetBeg;
 							LoadPartial(cpos);
 							cpos -= m_PosOffsetBeg;
 							tmppos -= m_PosOffsetBeg;
-							wxASSERT(cpos > 0 && tmppos > 0);
+							wxASSERT(cpos >= 0 && tmppos >= 0);
 							int trowid = 0, tline;
 							MadLineIterator tlit;
 							tline = GetLineByPos( tlit, tmppos, trowid );
 							m_TopRow += trowid - rowid;
 							SetCaretPosition(cpos);
+							m_ValidPos_iter = m_CaretPos.iter;
+							m_ValidPos_lineid = m_CaretPos.lineid;
+							m_ValidPos_rowid = m_CaretPos.rowid - m_CaretPos.subrowid;
+							m_ValidPos_pos = m_CaretPos.pos - m_CaretPos.linepos;
 							if(m_Selection)
 							{
 								wxASSERT(0); // Todo
@@ -11141,14 +11145,14 @@ void MadEdit::MadEditOnPaint( wxPaintEvent *evt /*=NULL*/  )
 						wxFileOffset tmppos = -1;
 						int rowid = m_TopRow;
 						(void)GetLineByRow( lit, tmppos, rowid );
-						if(rowshort || (m_TopRow <= m_VisibleRowCount))
+						if(((m_TopRow <= m_VisibleRowCount) && m_PosOffsetBeg) || (rowshort && (m_PosOffsetEnd < m_LineEndPos[m_LineEndPos.size() -1])))
 						{
 							wxFileOffset cpos = GetCaretPosition() + m_PosOffsetBeg;
 							tmppos += m_PosOffsetBeg;
 							LoadPartial(cpos);
 							cpos -= m_PosOffsetBeg;
 							tmppos -= m_PosOffsetBeg;
-							wxASSERT(cpos > 0 && tmppos > 0);
+							wxASSERT(cpos >= 0 && tmppos >= 0);
 							int trowid = 0;
 							MadLineIterator tlit;
 							(void)GetLineByPos( tlit, tmppos, trowid );
