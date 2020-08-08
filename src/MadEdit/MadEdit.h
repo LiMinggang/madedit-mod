@@ -1194,6 +1194,7 @@ private: // Printing functions
 	static wxMenu * m_ZeroLenSelIndicator;
 	wxFileOffset m_PosOffsetBeg;
 	wxFileOffset m_PosOffsetEnd;
+	wxFileOffset m_PosCaretPos;
 	std::vector<wxFileOffset> m_LineEndPos;
 	int m_LineidBeg;
 	int m_LineidEnd;
