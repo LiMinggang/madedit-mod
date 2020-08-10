@@ -11108,16 +11108,16 @@ void MadEdit::MadEditOnPaint( wxPaintEvent *evt /*=NULL*/  )
 						if(((m_TopRow <= m_VisibleRowCount) && m_PosOffsetBeg) || (rowshort && (m_PosOffsetEnd < m_LineEndPos[m_LineEndPos.size() -1])))
 						{
 							m_PosCaretPos = GetCaretPosition() + m_PosOffsetBeg;
+							//SetCaretPosition(tmppos);
+							//if ((m_PosCaretPos < m_PosOffsetBeg) || (m_PosCaretPos > m_PosOffsetEnd))
+							//	ShowCaret(false);
 							tmppos += m_PosOffsetBeg;
 							LoadPartial(tmppos);
 							tmppos -= m_PosOffsetBeg;
-							SetCaretPosition(tmppos);
-							if ((m_PosCaretPos < m_PosOffsetBeg) || (m_PosCaretPos > m_PosOffsetEnd))
-								ShowCaret(false);
-							m_ValidPos_iter = m_CaretPos.iter;
-							m_ValidPos_lineid = m_CaretPos.lineid;
-							m_ValidPos_rowid = m_CaretPos.rowid - m_CaretPos.subrowid;
-							m_ValidPos_pos = m_CaretPos.pos - m_CaretPos.linepos;
+							//m_ValidPos_iter = m_CaretPos.iter;
+							//m_ValidPos_lineid = m_CaretPos.lineid;
+							//m_ValidPos_rowid = m_CaretPos.rowid - m_CaretPos.subrowid;
+							//m_ValidPos_pos = m_CaretPos.pos - m_CaretPos.linepos;
 
 							wxASSERT(/*(m_PosCaretPos-m_PosOffsetBeg) >= 0 && */tmppos >= 0);
 							int trowid = 0, tline;

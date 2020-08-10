@@ -4802,7 +4802,9 @@ bool MadEditFrame::OpenFile( const wxString &fname, bool mustExist, bool changeS
 		madedit->ConfigNewDocument();
 		if(createNew)
 		{
+			m_Notebook->SetPageText( m_Notebook->GetSelection(), filename );
 			madedit->MarkModified();
+			//m_RecentFiles->AddFileToHistory( filename );
 			OnEditStatusChanged( madedit );
 		}
 	}
