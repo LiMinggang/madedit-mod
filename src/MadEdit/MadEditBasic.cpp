@@ -796,6 +796,7 @@ void MadEdit::SetEditMode( MadEditMode mode )
 			SetHexFont( m_HexFont->GetFaceName(), m_HexFont->GetPointSize(), true );
 			UpdateAppearance();
 			m_RepaintAll = true;
+			SetPartialLoadMode(false);
 
 			//SetCaretType(ctBlock);
 
@@ -861,6 +862,7 @@ void MadEdit::SetSingleLineMode( bool mode )
 			m_HScrollBar->Show( false );
 			SetDisplayBookmark( false );
 			SetDisplay80ColHint( false );
+			SetPartialLoadMode(false);
 			m_RightMarginWidth = 0;
 		}
 
