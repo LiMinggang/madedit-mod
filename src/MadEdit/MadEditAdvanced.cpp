@@ -4323,10 +4323,12 @@ bool MadEdit::LoadPartial(wxFileOffset pos)
 		}
 	}
 
+	wxFileOffset oldCaretPos = m_PosOffsetBeg + GetCaretPosition();
 	if (!NormalFilePosBackward(pos - fw_len, m_PosOffsetBeg, m_LineidBeg) ||
 		!NormalFilePosForward(pos + bw_line, m_PosOffsetEnd, m_LineidEnd) ||
 		!m_Lines->LoadPartial(m_PosOffsetBeg, m_PosOffsetEnd - m_PosOffsetBeg + 1)) return false;
 
+	m_PosCaretPos = oldCaretPos;
 	return true;
 }
 
