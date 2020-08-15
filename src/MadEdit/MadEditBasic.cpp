@@ -857,12 +857,13 @@ void MadEdit::SetSingleLineMode( bool mode )
 			SetDisplayLineNumber( false );
 			SetWordWrapMode( wwmNoWrap );
 			SetEditMode( emTextMode );
+			SetPartialLoadMode( false );
 			SetMarkActiveLine( false );
 			m_VScrollBar->Show( false );
 			m_HScrollBar->Show( false );
 			SetDisplayBookmark( false );
 			SetDisplay80ColHint( false );
-			SetPartialLoadMode(false);
+			SetPartialLoadMode( false );
 			m_RightMarginWidth = 0;
 		}
 
