@@ -11118,6 +11118,10 @@ void MadEdit::MadEditOnPaint( wxPaintEvent *evt /*=NULL*/  )
 							//m_ValidPos_pos = m_CaretPos.pos - m_CaretPos.linepos;
 
 							//wxASSERT(/*(m_PosCaretPos-m_PosOffsetBeg) >= 0 && */tmppos >= 0);
+							m_ValidPos_iter = m_Lines->m_LineList.begin();
+							m_ValidPos_lineid = 0;
+							m_ValidPos_rowid = 0;
+							m_ValidPos_pos = 0;
 							int trowid = 0, tline;
 							MadLineIterator tlit;
 							tline = GetLineByPos( tlit, tmppos, trowid );
