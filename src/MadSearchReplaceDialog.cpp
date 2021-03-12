@@ -2060,11 +2060,10 @@ void MadSearchReplaceDialog::OnWxSliderInputSizerCmdScroll(wxCommandEvent& WXUNU
 {
 	int times = WxSliderInputSizer->GetValue();
 	int width = 0, height = 0, bw, bhm;
-	m_FindText->GetSize (&width, &height);
 	WxButtonFindNext->GetSize( &bw, &bhm);
-	height = height > bhm ? height : bhm;
-	BoxSizerSearch->SetItemMinSize( m_FindText, width, height * times );
-	BoxSizerReplace->SetItemMinSize( m_ReplaceText, width, height * times);
+	height = bhm * times;
+	BoxSizerSearch->SetItemMinSize(m_FindText, width, height);
+	BoxSizerReplace->SetItemMinSize(m_ReplaceText, width, height);
 
 	if(times == 1)
 	{
