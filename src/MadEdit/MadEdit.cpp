@@ -11527,8 +11527,7 @@ WXLRESULT MadEdit::MSWWindowProc( WXUINT message, WXWPARAM wParam, WXLPARAM lPar
 
 						m_RepaintAll = false;
 						Refresh( false );*/
-						wxPaintEvent evt;
-						MadEditOnPaint( &evt);
+						MadEditOnPaint( NULL );
 						return 0;
 					}
 				}
