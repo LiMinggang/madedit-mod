@@ -3124,9 +3124,14 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 		m_MadEdit->m_LineEndPos.clear();
 		wxFileOffset ind = 0;
 		int ds = MadEdit::m_PartialBufferSize;
-		bool lastIsCR = false;
+		bool lastIsCR = false, bin_file = false;
 		for(; ind < m_FileData->m_Size; ind += ds)
 		{
+			if (bin_file)
+			{
+				m_MadEdit->SetPartialLoadMode(false);
+				break;
+			}
 			m_FileData->Read( ind, buf, ds );
 			for(int i = 0; i < ds; i++)
 			{
@@ -3149,6 +3154,12 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 
 					if(buf[i] == '\r') lastIsCR = true;
 					else lastIsCR = false;
+
+					if (buf[i] == '\0' && ind < max_detecting_size * 4)
+					{
+						bin_file = true;
+						break;
+					}
 				}
 			}
 
