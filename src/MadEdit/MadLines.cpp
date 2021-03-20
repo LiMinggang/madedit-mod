@@ -3155,7 +3155,7 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 					if(buf[i] == '\r') lastIsCR = true;
 					else lastIsCR = false;
 
-					if (buf[i] == '\0' && ind < max_detecting_size * 4)
+					if (buf[i] == '\0')
 					{
 						bin_file = true;
 						break;
