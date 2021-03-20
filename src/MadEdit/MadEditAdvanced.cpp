@@ -4227,4 +4227,117 @@ const wxColour & MadEdit::GetTextFtColor() const
 		return wxNullColour;
 }
 
+bool MadEdit::NormalFilePosBackward(wxFileOffset pos, wxFileOffset& newpos, int& line)
+{
+	if (!IsPartialLoadMode() || m_LineEndPos.empty()) return false;
+	if (pos <= 0)
+	{
+		newpos = 0;
+		line = 0;
+	}
+	else
+	{
+		std::vector<wxFileOffset>::iterator it;
+		it = std::lower_bound(m_LineEndPos.begin(), m_LineEndPos.end(), pos);
+
+		line = it - m_LineEndPos.begin();
+		if (line > 0) newpos = m_LineEndPos[line - 1] + 1;
+		else newpos = 0;
+
+		if (pos - newpos > m_PartialBufferSize)
+		{
+			newpos = m_LineEndPos[line] + 1;
+			line++;
+		}
+	}
+
+	return true;
+}
+
+bool MadEdit::NormalFilePosForward(wxFileOffset pos, wxFileOffset& newpos, int& line)
+{
+	if (!IsPartialLoadMode() || m_LineEndPos.empty()) return false;
+	if (pos >= m_LineEndPos[m_LineEndPos.size() - 1])
+	{
+		line = m_LineEndPos.size() - 1;
+		newpos = m_LineEndPos[line];
+	}
+	else
+	{
+		std::vector<wxFileOffset>::iterator it;
+		if (pos < 0) pos = 0;
+		it = std::lower_bound(m_LineEndPos.begin(), m_LineEndPos.end(), pos);
+
+		line = it - m_LineEndPos.begin();
+		newpos = *it;
+
+		if (newpos - pos > m_PartialBufferSize)
+		{
+			if (line > 0)
+			{
+				line--;
+				newpos = m_LineEndPos[line];
+			}
+		}
+	}
+
+	return true;
+}
+
+bool MadEdit::LoadPartial(wxFileOffset pos)
+{
+	wxASSERT(m_Lines);
+	if (m_LineEndPos.empty()) return false;
+	wxFileName fn(GetFileName());
+	if (MadDirExists(fn.GetPath(wxPATH_GET_VOLUME)) == 0)
+	{
+		wxLogError(wxString(_("The file does not exist:")) + wxT("\n\n") + GetFileName());
+		return false;
+	}
+
+	int fw_len = m_PartialBufferSize/2, bw_line = m_PartialBufferSize/2;
+
+	if (pos < 0)
+	{
+		pos = 0;
+		fw_len = 0;
+		bw_line = m_PartialBufferSize;
+	}
+	else if (pos >= m_LineEndPos[m_LineEndPos.size() - 1])
+	{
+		 pos = m_LineEndPos[m_LineEndPos.size() - 1];
+		 fw_len = m_PartialBufferSize;
+		 bw_line = 0;
+	}
+	else
+	{
+		if (pos - fw_len < 0)
+		{
+			fw_len = pos;
+			bw_line = m_PartialBufferSize - fw_len;
+		}
+		else if ((pos + bw_line) > m_LineEndPos[m_LineEndPos.size() - 1])
+		{
+			bw_line = m_LineEndPos[m_LineEndPos.size() - 1] - pos;
+			fw_len = m_PartialBufferSize - bw_line;
+		}
+	}
+
+	wxFileOffset oldCaretPos = m_PosOffsetBeg + GetCaretPosition();
+	if (!NormalFilePosBackward(pos - fw_len, m_PosOffsetBeg, m_LineidBeg) ||
+		!NormalFilePosForward(pos + bw_line, m_PosOffsetEnd, m_LineidEnd) ||
+		!m_Lines->LoadPartial(m_PosOffsetBeg, m_PosOffsetEnd - m_PosOffsetBeg + 1)) return false;
+
+	m_PosCaretPos = oldCaretPos;
+	return true;
+}
+
+bool MadEdit::LoadPartial(int line)
+{
+	if (m_LineEndPos.empty()) return false;
+	if (line < 0) line = 0;
+	else if (line >= m_LineEndPos.size()) line = m_LineEndPos.size() - 1;
+	return LoadPartial(m_LineEndPos[line]);
+}
+
 //----------

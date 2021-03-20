@@ -740,7 +740,7 @@ void MadEdit::SetEditMode( MadEditMode mode )
 			break;
 
 		case emColumnMode:
-			if( m_EditMode == emTextMode )
+			if( IsTextMode() )
 			{
 				UpdateScrollBarPos();//update m_MaxColumnModeWidth;
 
@@ -796,6 +796,7 @@ void MadEdit::SetEditMode( MadEditMode mode )
 			SetHexFont( m_HexFont->GetFaceName(), m_HexFont->GetPointSize(), true );
 			UpdateAppearance();
 			m_RepaintAll = true;
+			SetPartialLoadMode(false);
 
 			//SetCaretType(ctBlock);
 
@@ -856,11 +857,13 @@ void MadEdit::SetSingleLineMode( bool mode )
 			SetDisplayLineNumber( false );
 			SetWordWrapMode( wwmNoWrap );
 			SetEditMode( emTextMode );
+			SetPartialLoadMode( false );
 			SetMarkActiveLine( false );
 			m_VScrollBar->Show( false );
 			m_HScrollBar->Show( false );
 			SetDisplayBookmark( false );
 			SetDisplay80ColHint( false );
+			SetPartialLoadMode( false );
 			m_RightMarginWidth = 0;
 		}
 
@@ -1785,7 +1788,7 @@ void MadEdit::CopyToClipboard()
 		}
 	}
 	else
-		if( m_EditMode == emTextMode || !m_CaretAtHexArea )
+		if( IsTextMode() || !m_CaretAtHexArea )
 		{
 			wxString ws;
 			MadUCQueue ucqueue;
@@ -1929,7 +1932,7 @@ void MadEdit::DndBegDrag()
 		}
 	}
 	else
-		if( m_EditMode == emTextMode || !m_CaretAtHexArea )
+		if( IsTextMode() || !m_CaretAtHexArea )
 		{
 			MadUCQueue ucqueue;
 			MadLines::NextUCharFuncPtr NextUChar = m_Lines->NextUChar;
@@ -2167,7 +2170,7 @@ void MadEdit::Undo()
 		m_CaretPos.pos = undo->m_CaretPosBefore;
 		UpdateCaretByPos( m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
 
-		if( m_EditMode != emTextMode || m_Selection || oldrows != m_Lines->m_RowCount
+		if( !IsTextMode() || m_Selection || oldrows != m_Lines->m_RowCount
 				|| oldlines    != m_Lines->m_LineCount || count > 1 || lid < m_CaretPos.lineid )
 		{
 			m_RepaintAll = true;
@@ -2302,7 +2305,7 @@ void MadEdit::Redo()
 		m_CaretPos.pos = redo->m_CaretPosAfter;
 		UpdateCaretByPos( m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
 
-		if( m_EditMode != emTextMode || m_Selection || oldrows != m_Lines->m_RowCount
+		if( !IsTextMode() || m_Selection || oldrows != m_Lines->m_RowCount
 				|| oldlines    != m_Lines->m_LineCount || count > 1 || lid < m_CaretPos.lineid )
 		{
 			m_RepaintAll = true;
@@ -2364,6 +2367,16 @@ void MadEdit::GoToLine( int line )
 {
 	wxFileOffset oldCaretPos = m_CaretPos.pos;
 	--line;
+
+	if (IsPartialLoadMode())
+	{
+		if (line < m_LineidBeg || line > m_LineidEnd - 10)
+		{
+			if(!MadEdit::LoadPartial(line)) return;
+		}
+
+		line -= m_LineidBeg;
+	}
 
 	if( line < 0 ) line = 0;
 	else

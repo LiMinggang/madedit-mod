@@ -754,6 +754,7 @@ public: // basic functions
 
 	void SetEditMode( MadEditMode mode );
 	MadEditMode GetEditMode() {return m_EditMode; }
+	bool IsTextMode() { return (m_EditMode == emTextMode);}
 
 	void SetSingleLineMode( bool mode );
 
@@ -1191,6 +1192,21 @@ private: // Printing functions
 	int m_PrintTotalHexLineCount;
 	MadEdit *m_PrintHexEdit;    // use a temporary MadEdit to print Hex-Data
 	static wxMenu * m_ZeroLenSelIndicator;
+	wxFileOffset m_PosOffsetBeg;
+	wxFileOffset m_PosOffsetEnd;
+	wxFileOffset m_PosCaretPos;
+	std::vector<wxFileOffset> m_LineEndPos;
+	int m_LineidBeg;
+	int m_LineidEnd;
+	bool m_PartialLoadMode; 
+
+public: // Partial load functions
+	bool IsPartialLoadMode() { return m_PartialLoadMode; }
+	void SetPartialLoadMode(bool partial) { m_PartialLoadMode = partial; }
+	bool MadEdit::NormalFilePosBackward(wxFileOffset pos, wxFileOffset& newpos, int& line);
+	bool MadEdit::NormalFilePosForward(wxFileOffset pos, wxFileOffset& newpos, int& line);
+	bool LoadPartial(wxFileOffset pos);
+	bool LoadPartial(int line);
 
 public: // printing functions
 	void BeginPrint( const wxRect &printRect );
@@ -1226,6 +1242,7 @@ public: // utility functions
 	bool StringToHex( wxString ws, vector<wxByte> &hex );
 
 	static wxString m_FileFilter;
+	const static int m_PartialBufferSize = 8 * 1204/* * 1024*/;
 	friend class MadSearchReplaceDialog;
 	friend class mad_python::PyMadEdit;
 };
