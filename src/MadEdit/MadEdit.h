@@ -1192,6 +1192,8 @@ private: // Printing functions
 	int m_PrintTotalHexLineCount;
 	MadEdit *m_PrintHexEdit;    // use a temporary MadEdit to print Hex-Data
 	static wxMenu * m_ZeroLenSelIndicator;
+
+	// Partial Load
 	wxFileOffset m_PosOffsetBeg;
 	wxFileOffset m_PosOffsetEnd;
 	wxFileOffset m_PosCaretPos;
