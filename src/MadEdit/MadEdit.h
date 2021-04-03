@@ -1197,6 +1197,7 @@ private: // Printing functions
 	wxFileOffset m_PosOffsetBeg;
 	wxFileOffset m_PosOffsetEnd;
 	wxFileOffset m_PosCaretPos;
+	wxFileOffset m_RealSize;
 	std::vector<wxFileOffset> m_LineEndPos;
 	int m_LineidBeg;
 	int m_LineidEnd;

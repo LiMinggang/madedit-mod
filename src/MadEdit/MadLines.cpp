@@ -3168,6 +3168,7 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 
 		if(m_MadEdit->m_LineEndPos[m_MadEdit->m_LineEndPos.size()-1] != (m_FileData->m_Size - 1)) m_MadEdit->m_LineEndPos.push_back(m_FileData->m_Size - 1);
 		m_MadEdit->m_PosOffsetEnd = partialSize;
+		m_MadEdit->m_RealSize = m_Size;
 		m_Size = partialSize;
 		delete[]buf;
 		// Todo: Load first part of file according to pos

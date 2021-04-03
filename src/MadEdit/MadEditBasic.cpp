@@ -2422,9 +2422,41 @@ void MadEdit::SetCaretPosition( wxFileOffset pos, wxFileOffset selbeg, wxFileOff
 {
 	wxFileOffset oldCaretPos = m_CaretPos.pos;
 
-	if( pos < 0 ) pos = 0;
-	else
-		if( pos > m_Lines->m_Size ) pos = m_Lines->m_Size;
+	if (IsPartialLoadMode())
+	{
+		bool needReload = false;
+		if( pos < 0 )
+		{
+			pos += m_PosOffsetBeg;
+			if ( pos < 0 ) pos = 0;
+			needReload = true;
+		}
+		else
+			if( pos > m_Lines->m_Size )
+			{
+				if( pos > m_RealSize ) pos = m_RealSize;
+				needReload = true;
+			}
+		if (selbeg >= 0)
+		{
+			selbeg += m_PosOffsetBeg;
+			selend += m_PosOffsetBeg;
+		}
+		m_LastCaretXPos = m_CaretPos.xpos;
+		LoadPartial(pos);
+		if (selbeg >= 0)
+		{
+			selbeg -= m_PosOffsetBeg;
+			selend -= m_PosOffsetBeg;
+		}
+		pos -= m_PosOffsetBeg;
+	}
+	else 
+	{
+		if( pos < 0 ) pos = 0;
+		else
+			if( pos > m_Lines->m_Size ) pos = m_Lines->m_Size;
+	}
 
 	m_CaretPos.pos = pos;
 	m_UpdateValidPos = -1;
