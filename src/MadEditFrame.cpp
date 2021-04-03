@@ -7529,7 +7529,7 @@ void MadEditFrame::OnSearchGoToLine( wxCommandEvent& WXUNUSED(event) )
 
 	str.Trim( false );
 	str.Trim( true );
-	long line;
+	unsigned long line;
 	int base = 10;
 
 	if( str.Left( 2 ).Lower() == wxT( "0x" ) ) { base = 16; }
@@ -7545,7 +7545,7 @@ void MadEditFrame::OnSearchGoToLine( wxCommandEvent& WXUNUSED(event) )
 		str = str.substr(1);
 	}
 
-	if( !str.IsEmpty() && str.ToLong( &line, base ) )
+	if( !str.IsEmpty() && str.ToULong( &line, base ) )
 	{
 		if(relative)
 		{
@@ -7568,6 +7568,14 @@ void MadEditFrame::OnSearchGoToLine( wxCommandEvent& WXUNUSED(event) )
 			{
 				RecordAsMadMacro( g_ActiveMadEdit, wxString::Format( wxT( "GoToLine(%s) # line" ), ( wxLongLong( line ).ToString() ).c_str() ) );
 			}
+		}
+	}
+	else
+	{
+		if( !str.IsEmpty())
+		{
+			wxString smsg( str + _( " exceeds upper limit" ) );
+			g_StatusBar->SetStatusText( smsg, 0 );
 		}
 	}
 }
