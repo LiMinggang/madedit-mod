@@ -4329,6 +4329,12 @@ bool MadEdit::LoadPartial(wxFileOffset pos)
 		!m_Lines->LoadPartial(m_PosOffsetBeg, m_PosOffsetEnd - m_PosOffsetBeg + 1)) return false;
 
 	m_PosCaretPos = oldCaretPos;
+	m_ValidPos_iter = m_Lines->m_LineList.begin();
+	m_ValidPos_lineid = 0;
+	m_ValidPos_rowid = 0;
+	m_ValidPos_pos = 0;
+	m_CaretPos.Reset( m_ValidPos_iter );
+	m_LastCaretXPos = 0;
 	return true;
 }
 

@@ -3706,7 +3706,7 @@ void MadEdit::UpdateScrollBarPos()
 		{
 			m_VScrollBar->Enable();
 			int ymax = int( m_Lines->m_RowCount ) + m_PageRowCount - 1;
-			if (IsPartialLoadMode())
+			if ( IsPartialLoadMode() )
 			{
 				MadLineIterator lineiter;
 				int subrowid = m_TopRow;
@@ -3778,7 +3778,7 @@ void MadEdit::UpdateScrollBarPos()
 		{
 			m_VScrollBar->Enable( true );
 			
-			if (IsPartialLoadMode())
+			if ( IsPartialLoadMode() )
 			{
 				MadLineIterator lineiter;
 				int subrowid = m_TopRow;
@@ -10794,10 +10794,23 @@ void MadEdit::OnSize( wxSizeEvent &evt )
 void MadEdit::OnVScroll( wxScrollEvent &evt )
 {
 	m_TopRow = evt.GetPosition();
-	DBOUT( "OnVScroll:"<<m_TopRow<<"\n" );
+	DBOUT( "OnVScroll:[type:"<<evt.GetEventType()<<"] rowid:"<<m_TopRow<<"\n" );
 
 	if( m_EditMode != emHexMode )
 	{
+		if ( IsPartialLoadMode() )
+		{
+			int lineid = evt.GetPosition();
+			MadLineIterator lit;
+			wxFileOffset pos;
+			if (lineid < 0) lineid = 0;
+			if (lineid < m_LineidBeg || lineid > m_LineidEnd)
+			{
+				LoadPartial(lineid);
+			}
+			m_TopRow = GetLineByLine(lit, pos, lineid - m_LineidBeg);
+		}
+
 		if( m_TopRow < 0 ) m_TopRow = 0;
 		else
 			if( m_TopRow >= int( m_Lines->m_RowCount ) ) m_TopRow = int( m_Lines->m_RowCount - 1 );
