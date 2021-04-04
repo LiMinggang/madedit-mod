@@ -1196,6 +1196,12 @@ wxFileOffset MadEdit::GetLastSavePointCaretPosition()
 
 	return m_SavePoint->m_CaretPosAfter;
 }
+
+wxFileOffset MadEdit::GetLastSavePointCaretPositionHF()
+{
+	return GetLastSavePointCaretPosition();
+}
+
 wxFileOffset MadEdit::GetSelectionSize()
 {
 	if( !m_Selection ) return 0;
