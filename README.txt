@@ -122,8 +122,21 @@ Note: Not support wxWidgets 2.X anymore since 0.3.X
 Todo:
 Packing for FreeBSD
 
-Mod v0.4.20
+Mod v0.5.0a
+This is a preview of the feature to load large text files(no size limit), such as log files in text mode
+Limitation:
+Limited edit function: the same as Hex mode
+Bookmark can't be restored
+
+Text mode for large text files(preview)
 Fix: JSON formatter convert Unicode chars to UTF8 chars #309
+Fix global-buffer-overflow due EUCTW_TABLE_SIZE
+Crashing sequence with nsSJISProber
+Input size could not decrease the size of Input control
+Fix compiling issue under wx 3.1.4
+Fix bug that caused file type detect wrongly
+Fix Linux build issue with wxWidgets < 3.1.1
+Update Python to 2.7.18
 
 Mod v0.4.19
 1.Fix: Disable safe mode in PanChinese search

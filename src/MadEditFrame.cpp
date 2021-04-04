@@ -665,11 +665,12 @@ public:
 		wxString name = madedit->GetFileName();
 
 		if( !name.IsEmpty() ) {
-			wxFileOffset pos = madedit->GetCaretPosition();
+			bool pMode = madedit->IsPartialLoadMode();
+			wxFileOffset pos = pMode ? madedit->GetCaretPositionHF() : madedit->GetCaretPosition();
 			if(madedit->IsModified())
 			{
 				wxFileOffset bkpos = pos;
-				pos = madedit->GetLastSavePointCaretPosition();
+				pos = pMode ? madedit->GetLastSavePointCaretPositionHF() : madedit->GetLastSavePointCaretPosition();
 				if(-1 == pos) pos = bkpos;
 			}
 			int lspercent = (int)madedit->GetLineSpacing();
