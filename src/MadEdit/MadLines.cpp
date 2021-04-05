@@ -3051,7 +3051,7 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 		m_MadEdit->SetEditMode( emTextMode );
 	}
 
-	const int max_detecting_size = 4096;
+	const int max_detecting_size = 4096 * 32;
 	int s;
 
 	if( m_FileData->m_Size > max_detecting_size )
@@ -3797,7 +3797,7 @@ bool MadLines::SaveToFile( const wxString &filename, const wxString &tempdir )
 	}
 	else
 	{
-		const int max_detecting_size = 4096;
+		const int max_detecting_size = 4096 * 32;
 		int s;
 		wxByte *buf = nullptr;
 
