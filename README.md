@@ -6,6 +6,7 @@ madedit-mod
 [![GitHub issues](https://img.shields.io/github/issues/LiMinggang/madedit-mod.svg)](https://github.com/LiMinggang/madedit-mod/issues)
 [![Maintained](https://img.shields.io/maintenance/yes/2021.svg)](https://github.com/LiMinggang/madedit-mod/commits/master)
 [![Ohloh Project Status](https://www.openhub.net/p/madedit-mod/widgets/project_thin_badge.gif)](https://www.openhub.net/p/madedit-mod)
+[![Download MadEdit-Mod](https://img.shields.io/sourceforge/dt/madedit-mod.svg)](https://sourceforge.net/projects/madedit-mod/files/)
 
 MadEdit Mod(based on the madedit project @ sourceforge)
 

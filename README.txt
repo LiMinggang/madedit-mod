@@ -123,7 +123,14 @@ Todo:
 Packing for FreeBSD
 
 Mod v0.4.20
-Fix: JSON formatter convert Unicode chars to UTF8 chars #309
+1.Fix: JSON formatter convert Unicode chars to UTF8 chars #309
+2.Fix global-buffer-overflow due EUCTW_TABLE_SIZE
+3.Crashing sequence with nsSJISProber
+4.Input size could not decrease the size of Input control
+5.Fix compiling issue under wx 3.1.4
+6.Fix bug that caused file type detect wrongly
+7.Fix Linux build issue with wxWidgets < 3.1.1
+8.Update Python to 2.7.18
 
 Mod v0.4.19
 1.Fix: Disable safe mode in PanChinese search
