@@ -128,15 +128,15 @@ Limitation:
 Limited edit function: the same as Hex mode
 Bookmark can't be restored
 
-Text mode for large text files(preview)
-Fix: JSON formatter convert Unicode chars to UTF8 chars #309
-Fix global-buffer-overflow due EUCTW_TABLE_SIZE
-Crashing sequence with nsSJISProber
-Input size could not decrease the size of Input control
-Fix compiling issue under wx 3.1.4
-Fix bug that caused file type detect wrongly
-Fix Linux build issue with wxWidgets < 3.1.1
-Update Python to 2.7.18
+1.Text mode for large text files(preview)
+2.Fix: JSON formatter convert Unicode chars to UTF8 chars #309
+3.Fix global-buffer-overflow due EUCTW_TABLE_SIZE
+4.Crashing sequence with nsSJISProber
+5.Input size could not decrease the size of Input control
+6.Fix compiling issue under wx 3.1.4
+7.Fix bug that caused file type detect wrongly
+8.Fix Linux build issue with wxWidgets < 3.1.1
+9.Update Python to 2.7.18
 
 Mod v0.4.19
 1.Fix: Disable safe mode in PanChinese search
