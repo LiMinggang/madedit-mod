@@ -8374,26 +8374,40 @@ void MadEdit::ProcessCommand( MadEditCommand command )
 
 				case ecBeginDoc:
 				case ecSelBeginDoc:
-					m_CaretPos.Reset( m_Lines->m_LineList.begin() );
-					UpdateCaret( m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
-					m_LastCaretXPos = m_CaretPos.xpos;
-					AppearCaret();
-					UpdateScrollBarPos();
+					if (!IsPartialLoadMode())
+					{
+						m_CaretPos.Reset( m_Lines->m_LineList.begin() );
+						UpdateCaret( m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
+						m_LastCaretXPos = m_CaretPos.xpos;
+						AppearCaret();
+						UpdateScrollBarPos();
+					}
+					else
+					{
+						SetCaretPosition(0);
+					}
 					break;
 
 				case ecEndDoc:
 				case ecSelEndDoc:
-					m_CaretPos.iter = m_Lines->m_LineList.end();
-					--m_CaretPos.iter;
-					m_CaretPos.pos = m_Lines->m_Size;
-					m_CaretPos.linepos = m_CaretPos.iter->m_Size;    //-m_CaretPos.iter->m_NewLineSize;
-					m_CaretPos.rowid = int( m_Lines->m_RowCount - 1 );
-					m_CaretPos.lineid = int( m_Lines->m_LineCount - 1 );
-					m_CaretPos.subrowid = int( m_CaretPos.iter->RowCount() - 1 );
-					UpdateCaret( m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
-					m_LastCaretXPos = m_CaretPos.xpos;
-					AppearCaret();
-					UpdateScrollBarPos();
+					if (!IsPartialLoadMode())
+					{
+						m_CaretPos.iter = m_Lines->m_LineList.end();
+						--m_CaretPos.iter;
+						m_CaretPos.pos = m_Lines->m_Size;
+						m_CaretPos.linepos = m_CaretPos.iter->m_Size;    //-m_CaretPos.iter->m_NewLineSize;
+						m_CaretPos.rowid = int( m_Lines->m_RowCount - 1 );
+						m_CaretPos.lineid = int( m_Lines->m_LineCount - 1 );
+						m_CaretPos.subrowid = int( m_CaretPos.iter->RowCount() - 1 );
+						UpdateCaret( m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
+						m_LastCaretXPos = m_CaretPos.xpos;
+						AppearCaret();
+						UpdateScrollBarPos();
+					}
+					else
+					{
+						SetCaretPosition(m_RealSize);
+					}
 					break;
 
 				case ecPrevPage:
