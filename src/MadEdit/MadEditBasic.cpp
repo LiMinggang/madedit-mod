@@ -683,6 +683,43 @@ void MadEdit::HexModeToTextMode( MadEditMode mode )
 	SetInsertMode( m_InsertMode );
 }
 
+void MadEdit::ReloadForModeChange( MadEditMode mode )
+{
+	if( m_EditMode != mode && !m_SingleLineMode )
+	{
+		switch( mode )
+		{
+		case emTextMode:
+			if( m_EditMode == emHexMode )
+			{
+				long MaxSizeToLoad;
+				m_Config->Read( wxT( "/MadEdit/MaxSizeToLoad" ), &MaxSizeToLoad, 20 * 1000 * 1000 );
+				if(m_RealSize > MaxSizeToLoad)
+				{
+					m_EditMode = emTextMode;
+					Reload();
+					m_EditMode = emHexMode;
+				}
+			}
+			break;
+
+		case emHexMode:
+			MadEditMode oldmod = m_EditMode;
+			m_EditMode = emHexMode;
+			if (m_RealSize > m_Lines->m_Size)
+			{
+				SetPartialLoadMode( false );
+				//m_Lines->Clear(false);
+				//m_Lines->m_LineList.clear();
+				Reload();
+			}
+			m_EditMode = oldmod;
+
+			break;
+		}
+	}
+}
+
 void MadEdit::SetEditMode( MadEditMode mode )
 {
 	if( m_EditMode != mode && !m_SingleLineMode )
@@ -733,8 +770,18 @@ void MadEdit::SetEditMode( MadEditMode mode )
 			}
 			else //HexMode
 			{
-				SetInsertMode( true );
-				HexModeToTextMode( mode );
+				/*long MaxSizeToLoad;
+				m_Config->Read( wxT( "/MadEdit/MaxSizeToLoad" ), &MaxSizeToLoad, 20 * 1000 * 1000 );
+				if(m_RealSize <= MaxSizeToLoad)
+				{*/
+					SetInsertMode( true );
+					HexModeToTextMode( mode );
+				/*}
+				else
+				{
+					m_EditMode = emTextMode;
+					Reload();
+				}*/
 			}
 
 			break;
@@ -796,12 +843,18 @@ void MadEdit::SetEditMode( MadEditMode mode )
 			SetHexFont( m_HexFont->GetFaceName(), m_HexFont->GetPointSize(), true );
 			UpdateAppearance();
 			m_RepaintAll = true;
-			SetPartialLoadMode(false);
 
 			//SetCaretType(ctBlock);
 
 			if( m_LoadingFile == false )
 			{
+				/*if (m_RealSize > m_Lines->m_Size)
+				{
+					SetPartialLoadMode( false );
+					//m_Lines->Clear(false);
+					m_Lines->m_LineList.clear();
+					Reload();
+				}*/
 				m_TopRow = ( m_CaretPos.pos >> 4 );
 
 				if( m_TopRow >= ( m_VisibleRowCount >> 1 ) )

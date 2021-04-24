@@ -5598,7 +5598,7 @@ void MadEditFrame::OnUpdateUI_MenuViewTextMode( wxUpdateUIEvent& event )
 
 void MadEditFrame::OnUpdateUI_MenuViewColumnMode( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != nullptr );
+	event.Enable( g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsPartialLoadMode());
 	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() == emColumnMode );
 }
 
@@ -8318,6 +8318,7 @@ void MadEditFrame::OnViewTextMode( wxCommandEvent& WXUNUSED(event) )
 {
 	if( g_ActiveMadEdit != nullptr )
 	{
+		g_ActiveMadEdit->ReloadForModeChange( emTextMode );
 		g_ActiveMadEdit->SetEditMode( emTextMode );
 		if(!m_Syntaxs->IsThisEnabled()) m_Syntaxs->Enable(true);
 
@@ -8342,6 +8343,7 @@ void MadEditFrame::OnViewHexMode( wxCommandEvent& WXUNUSED(event) )
 {
 	if( g_ActiveMadEdit != nullptr )
 	{
+		g_ActiveMadEdit->ReloadForModeChange( emHexMode );
 		g_ActiveMadEdit->SetEditMode( emHexMode );
 		if(m_Syntaxs->IsThisEnabled()) m_Syntaxs->Enable(false);
 

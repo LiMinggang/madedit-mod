@@ -3044,6 +3044,7 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 	m_MadEdit->m_NewLineType = nltDefault;
 	m_MadEdit->m_LoadingFile = true;
 	bool isbinary = false;
+	bool en_PartialLoad = m_MadEdit->m_Config->ReadBool( wxT( "EnablePartialLoad" ), true );
 
 	if( !m_MadEdit->IsTextMode() )
 	{
@@ -3110,12 +3111,13 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 
 	// set size
 	m_Size = m_FileData->m_Size;
+	m_MadEdit->m_RealSize = m_Size;
 	long MaxSizeToLoad;
 	m_MadEdit->m_Config->Read( wxT( "/MadEdit/MaxSizeToLoad" ), &MaxSizeToLoad, 20 * 1000 * 1000 );
 	wxMemorySize memsize = wxGetFreeMemory();
 	wxByte *buf;
 
-	if(m_Size > MaxSizeToLoad)
+	if(en_PartialLoad && !isbinary && m_Size > MaxSizeToLoad)
 	{
 		wxFileOffset partialSize = MadEdit::m_PartialBufferSize;
 		m_MadEdit->SetPartialLoadMode(true);
@@ -3127,11 +3129,6 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 		bool lastIsCR = false, bin_file = false;
 		for(; ind < m_FileData->m_Size; ind += ds)
 		{
-			if (bin_file)
-			{
-				m_MadEdit->SetPartialLoadMode(false);
-				break;
-			}
 			m_FileData->Read( ind, buf, ds );
 			for(int i = 0; i < ds; i++)
 			{
@@ -3158,17 +3155,20 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 					if (buf[i] == '\0')
 					{
 						bin_file = true;
+						m_MadEdit->SetPartialLoadMode(false);
 						break;
 					}
 				}
 			}
+
+			if (bin_file)
+				break;
 
 			if((m_FileData->m_Size - ind) < ds) ds = (m_FileData->m_Size - ind);
 		}
 
 		if(m_MadEdit->m_LineEndPos[m_MadEdit->m_LineEndPos.size()-1] != (m_FileData->m_Size - 1)) m_MadEdit->m_LineEndPos.push_back(m_FileData->m_Size - 1);
 		m_MadEdit->m_PosOffsetEnd = partialSize;
-		m_MadEdit->m_RealSize = m_Size;
 		m_Size = partialSize;
 		delete[]buf;
 		// Todo: Load first part of file according to pos
@@ -3271,7 +3271,7 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 	m_MadEdit->m_Config->SetPath( oldpath );
 	bool ok = false;
 
-	if(( m_Size >= maxtextfilesize || isbinary ) && !m_MadEdit->IsPartialLoadMode())
+	if(( m_Size >= maxtextfilesize || isbinary ))
 	{
 		isbinary = true;
 	}
@@ -3380,7 +3380,7 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 				m_MadEdit->SetEncoding( MadEncoding::EncodingToName( enc ) );
 			}
 
-		if( isbinary && (!m_MadEdit->IsPartialLoadMode()) || IsBinaryData( buf, s ) )
+		if( isbinary || IsBinaryData( buf, s ) )
 		{
 			m_MaxLineWidth = -1;       // indicate the data is not text data
 			m_MadEdit->SetEditMode( emHexMode );

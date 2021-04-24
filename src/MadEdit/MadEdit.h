@@ -1212,6 +1212,7 @@ public: // Partial load functions
 	bool NormalFilePosForward(wxFileOffset pos, wxFileOffset& newpos, int& line);
 	bool LoadPartial(wxFileOffset pos);
 	bool LoadPartial(int line);
+	void ReloadForModeChange( MadEditMode mode );
 
 public: // printing functions
 	void BeginPrint( const wxRect &printRect );

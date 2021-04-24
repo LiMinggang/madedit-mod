@@ -3777,19 +3777,7 @@ void MadEdit::UpdateScrollBarPos()
 		if( rowcount > 1 )
 		{
 			m_VScrollBar->Enable( true );
-			
-			if ( IsPartialLoadMode() )
-			{
-				MadLineIterator lineiter;
-				int subrowid = m_TopRow;
-				wxFileOffset notused = -1;
-				int lineid = GetLineByRow( lineiter, notused, subrowid ) + 1;
-				m_VScrollBar->SetScrollbar( lineid + m_LineidBeg, m_PageRowCount, m_LineEndPos.size(), m_PageRowCount, true );
-			}
-			else
-			{
-				m_VScrollBar->SetScrollbar( m_TopRow, m_PageRowCount, ymax, m_PageRowCount, true );
-			}
+			m_VScrollBar->SetScrollbar( m_TopRow, m_PageRowCount, ymax, m_PageRowCount, true );
 		}
 		else
 		{
