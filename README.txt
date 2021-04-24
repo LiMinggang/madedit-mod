@@ -123,8 +123,9 @@ Todo:
 Packing for FreeBSD
 
 Mod v0.5.0a2
-1. Support switch between edit modes(Text<==>Hex)
-2. Goto beg/end of doc in partial load mode
+1.Support switch between edit modes(Text<==>Hex)
+2.Goto beg/end of doc in partial load mode
+Update wxWidgets to 3.1.5
 
 Mod v0.5.0a
 This is a preview of the feature to load large text files(no size limit), such as log files in text mode
