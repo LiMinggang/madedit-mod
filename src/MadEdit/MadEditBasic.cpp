@@ -697,6 +697,7 @@ void MadEdit::ReloadForModeChange( MadEditMode mode )
 				if(m_RealSize > MaxSizeToLoad)
 				{
 					m_EditMode = emTextMode;
+					m_CaretPos.pos -= m_PosOffsetBeg;
 					Reload();
 					m_EditMode = emHexMode;
 				}
@@ -711,6 +712,7 @@ void MadEdit::ReloadForModeChange( MadEditMode mode )
 				SetPartialLoadMode( false );
 				//m_Lines->Clear(false);
 				//m_Lines->m_LineList.clear();
+				m_CaretPos.pos += m_PosOffsetBeg;
 				Reload();
 			}
 			m_EditMode = oldmod;
