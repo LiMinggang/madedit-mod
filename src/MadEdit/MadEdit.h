@@ -1203,9 +1203,10 @@ private: // Printing functions
 	std::vector<wxFileOffset> m_LineEndPos;
 	int m_LineidBeg;
 	int m_LineidEnd;
-	bool m_PartialLoadMode; 
+	bool m_PartialLoadMode;
 
 public: // Partial load functions
+	const static int m_PartialBufferSize = 8 * 1204/* * 1024*/;
 	bool IsPartialLoadMode() { return m_PartialLoadMode; }
 	void SetPartialLoadMode(bool partial) { m_PartialLoadMode = partial; }
 	bool NormalFilePosBackward(wxFileOffset pos, wxFileOffset& newpos, int& line);
@@ -1248,7 +1249,6 @@ public: // utility functions
 	bool StringToHex( wxString ws, vector<wxByte> &hex );
 
 	static wxString m_FileFilter;
-	const static int m_PartialBufferSize = 8 * 1204/* * 1024*/;
 	friend class MadSearchReplaceDialog;
 	friend class mad_python::PyMadEdit;
 };
