@@ -116,7 +116,7 @@ bool DetectType(const wxString& type)
 	wxString value;
 	wxRegKey *pRegKey = new wxRegKey( g_MadEditRegkeyPath + type );
 
-	if( pRegKey->Exists() ) { pRegKey->QueryValue( wxEmptyString, value ); }
+	if( pRegKey->Exists() && pRegKey->HasValues() ) { pRegKey->QueryValue( wxEmptyString, value ); }
 
 	delete pRegKey;
 
@@ -127,7 +127,7 @@ bool DetectType(const wxString& type)
 								+ wxString( wxT( "\\shell\\open\\command" ) ) );
 		value.Empty();
 
-		if( pRegKey->Exists() ) { pRegKey->QueryValue( wxEmptyString, value ); }
+		if( pRegKey->Exists() && pRegKey->HasValues() ) { pRegKey->QueryValue( wxEmptyString, value ); }
 
 		delete pRegKey;
 		wxString exepath = GetExecutablePath();
@@ -148,7 +148,7 @@ void AddType( const wxString& type )
 	wxRegKey *pRegKey = new wxRegKey( g_MadEditRegkeyPath + type );
 
 	if( !pRegKey->Exists() ) { pRegKey->Create(); }
-	else { pRegKey->QueryValue( wxEmptyString, value ); }
+	else { if (pRegKey->HasValues()) pRegKey->QueryValue( wxEmptyString, value ); }
 
 	if( value != madedit_type )
 	{
@@ -176,7 +176,7 @@ void AddType( const wxString& type )
 		wxString txt_name;
 		pRegKey = new wxRegKey( wxString( g_MadEditRegkeyPath + wxT( "txtfile" ) ) );
 
-		if( pRegKey->Exists() ) { pRegKey->QueryValue( wxEmptyString, txt_name ); }
+		if( pRegKey->Exists()  && pRegKey->HasValues()) { pRegKey->QueryValue( wxEmptyString, txt_name ); }
 
 		delete pRegKey;
 
@@ -211,7 +211,7 @@ void RemoveType( const wxString& type )
 	wxString madedit_type = wxString( wxT( "MadEdit-Mod" ) ) + type;
 	wxRegKey *pRegKey = new wxRegKey( g_MadEditRegkeyPath + type );
 
-	if( pRegKey->Exists() )
+	if( pRegKey->Exists() && pRegKey->HasValues())
 	{
 		pRegKey->QueryValue( wxT( "Old_Default" ), old_default );
 		pRegKey->QueryValue( wxEmptyString, value );
