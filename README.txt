@@ -125,6 +125,8 @@ Packing for FreeBSD
 Mod v0.5.0a2
 1.Support switch between edit modes(Text<==>Hex)
 2.Goto beg/end of doc in partial load mode
+3.Correct caret pos after switching view mode
+4.Fix RegKey issue
 Update wxWidgets to 3.1.5
 
 Mod v0.5.0a
