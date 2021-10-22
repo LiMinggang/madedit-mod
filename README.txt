@@ -122,6 +122,9 @@ Note: Not support wxWidgets 2.X anymore since 0.3.X
 Todo:
 Packing for FreeBSD
 
+Mod v0.5.0a3
+1.Support some IBM EBCDIC encodings(IBM-10{25,47,97}, IBM-11{12,22,23,30,32,37,40,41,42,43,44,45,46,47,48,49,53,54,55,56,57,58,60,64,66}, IBM-{12712,16804})
+
 Mod v0.5.0a2
 1.Support switch between edit modes(Text<==>Hex)
 2.Goto beg/end of doc in partial load mode

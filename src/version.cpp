@@ -15,7 +15,7 @@
 #include <wx/version.h>
 
 /*\u03B1 \u03B2*/
-wxString g_MadEdit_Version(wxString(wxT("MadEdit-Mod 0.5.0\u03B12"))
+wxString g_MadEdit_Version(wxString(wxT("MadEdit-Mod 0.5.0\u03B13"))
 #if defined(__WXMSW__)
 #ifdef _WIN64
 	+ wxT(" win64")

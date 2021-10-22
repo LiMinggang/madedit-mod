@@ -142,12 +142,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "Minggang Li"
             VALUE "FileDescription", "MadEdit-Mod Text Editor"
-            VALUE "FileVersion", "0.0.4.19"
+            VALUE "FileVersion", "0.0.5.0"
             VALUE "InternalName", "MadEditApp.rc"
             VALUE "LegalCopyright", "Copyright (C) 2019 Minggang Li"
             VALUE "OriginalFilename", "MadEditApp.rc"
             VALUE "ProductName", "MadEdit-Mod"
-            VALUE "ProductVersion", "0.0.4.19"
+            VALUE "ProductVersion", "0.0.5.0"
         END
     END
     BLOCK "VarFileInfo"
