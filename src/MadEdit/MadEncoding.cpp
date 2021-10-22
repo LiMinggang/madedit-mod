@@ -143,6 +143,9 @@ MadEncoding *MadEncoding::ms_SystemEncoding = nullptr;
 void MadEncoding::InitEncodings()
 {
 	wxLogNull nolog;
+
+	MadCSConv::InitCharSetNames();
+
 	MadEncodingGrpName[ENCG_WESTERNEUROPE] = _( "Western European" );
 	MadEncodingGrpName[ENCG_CENTRALEUROPE] = _( "Central European" );
 	MadEncodingGrpName[ENCG_SOUTHEUROPE  ] = _( "South European" );
@@ -160,6 +163,7 @@ void MadEncoding::InitEncodings()
 	MadEncodingGrpName[ENCG_WINDOWS      ] = _( "Windows" );
 	MadEncodingGrpName[ENCG_MACINTOSH    ] = _( "Macintosh" );
 	MadEncodingGrpName[ENCG_OEM          ] = _( "OEM" );
+	MadEncodingGrpName[ENCG_EBCDIC       ] = _( "EBCDIC" );
 	MadEncodingGrpName[ENCG_DEFAULT      ] = _( "Other" );
 	MadEncodingGrpName[ENCG_MAX          ] = _( "Invalid" );
 	wxFontEncoding sysenc = wxLocale::GetSystemEncoding();
@@ -695,13 +699,30 @@ void MadEncoding::InitEncodings()
 	{
 		encGrp.clear();
 		wxString name = wxT( "GB18030" );
-//		wxString fontname( wxT( "Courier New" ) );
+		wxString ftname( wxT( "Courier New" ) );
 		wxString desc(_("Chinese Simplified(UTF-PRC)"));
 		MadEncodingType type = etGB18030;
-		MSW_GET_FONT_NAME( wxT( "54936" ), fontname );
+		MSW_GET_FONT_NAME( wxT( "54936" ), ftname );
 		encGrp.push_back( ENCG_EASTASIA );
-		EncodingsTable.push_back( MadEncodingInfo( MAD_FONTENCODING_GB18030, name.Upper(), desc, type, fontname, encGrp ) );
+		EncodingsTable.push_back( MadEncodingInfo( MAD_FONTENCODING_GB18030, name.Upper(), desc, type, ftname, encGrp ) );
 		EncodingsSet.insert(MAD_FONTENCODING_GB18030);
+	}
+	{
+		wxString name;
+		std::map<wxString, int>::iterator it = MadCSConv::MadExtCharSetNames.begin();
+		for(; it != MadCSConv::MadExtCharSetNames.end(); ++it)
+		{
+			if(!it->first.IsSameAs(wxT( "GB18030" )))
+			{
+				encGrp.clear();
+				name = it->first;
+				wxString desc(wxT("EBCDIC ") + name);
+				MadEncodingType type = etSingleByte;
+				encGrp.push_back( ENCG_EBCDIC );
+				EncodingsTable.push_back( MadEncodingInfo( it->second, name.Upper(), desc, type, fontname, encGrp ) );
+				EncodingsSet.insert(it->second);
+			}
+		}
 	}
 #endif //__MAD_ENCODING_EXTENDED__
 
