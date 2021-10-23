@@ -55,6 +55,7 @@ MadCSConv::MadCSConv(int encoding):m_Charset(_T("UNKNOWN_CHARSET")), m_Encoding(
 
 void MadCSConv::InitCharSetNames()
 {
+#ifdef __MAD_ENCODING_EXTENDED__
 	MadExtCharSetNames[_T("GB18030")]	= MAD_FONTENCODING_GB18030;
 	MadExtCharSetNames[_T("IBM1025")]	= MAD_FONTENCODING_IBM1025;
 	MadExtCharSetNames[_T("IBM1047")]	= MAD_FONTENCODING_IBM1047;
@@ -86,6 +87,7 @@ void MadCSConv::InitCharSetNames()
 	MadExtCharSetNames[_T("IBM1166")]	= MAD_FONTENCODING_IBM1166;
 	MadExtCharSetNames[_T("IBM12712")] = MAD_FONTENCODING_IBM12712;
 	MadExtCharSetNames[_T("IBM16804")] = MAD_FONTENCODING_IBM16804;
+#endif
 }
 
 size_t MadCSConv::MB2WC (wchar_t *out, const char *in, size_t outLen) const
