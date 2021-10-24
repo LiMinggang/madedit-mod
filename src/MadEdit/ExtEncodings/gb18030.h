@@ -185,7 +185,7 @@
 #include "gb18030uni.h"
 
 static int
-gb18030_mbtowc (ucs4_t *pwc, const unsigned char *s, size_t n)
+gb18030_mbtowc (ucs4_t *pwc, const unsigned char *s, int n)
 {
   int ret;
 

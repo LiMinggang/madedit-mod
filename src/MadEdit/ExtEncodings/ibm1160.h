@@ -93,7 +93,7 @@ static const unsigned short ibm1160_2uni[256] =
 
 
 static int
-ibm1160_mbtowc (ucs4_t *pwc, const unsigned char *s, int n)
+ibm1160_mbtowc (ucs4_t *pwc, const unsigned char *s, int WXUNUSED(n))
 {
    unsigned char c = *s;
    *pwc = (ucs4_t) ibm1160_2uni[c];
@@ -146,7 +146,7 @@ static const struct gap ibm1160_idx[] =
 };
 
 static int
-ibm1160_wctomb (unsigned char *r, ucs4_t wc, int n)
+ibm1160_wctomb (unsigned char *r, ucs4_t wc, int WXUNUSED(n))
 {
    const struct gap* p2gap = ibm1160_idx;
    for (; p2gap->start < 0xffff ; p2gap++) {

@@ -91,7 +91,7 @@ static const unsigned short ibm1148_2uni[256] =
 
 
 static int
-ibm1148_mbtowc (ucs4_t *pwc, const unsigned char *s, int n)
+ibm1148_mbtowc (ucs4_t *pwc, const unsigned char *s, int WXUNUSED(n))
 {
   unsigned char c = *s;
   *pwc = (ucs4_t) ibm1148_2uni[c];
@@ -135,7 +135,7 @@ static const unsigned char ibm1148_page00[] = {
 };
 
 static int
-ibm1148_wctomb (unsigned char *r, ucs4_t wc, int n)
+ibm1148_wctomb (unsigned char *r, ucs4_t wc, int WXUNUSED(n))
 {
    unsigned char c = 0;
    if (wc >= 0x0 && wc < 0x0100)

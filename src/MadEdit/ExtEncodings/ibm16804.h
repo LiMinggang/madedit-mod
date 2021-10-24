@@ -91,7 +91,7 @@ static const unsigned short ibm16804_2uni[256] =
 };
 
 static int
-ibm16804_mbtowc (ucs4_t *pwc, const unsigned char *s, int n)
+ibm16804_mbtowc (ucs4_t *pwc, const unsigned char *s, int WXUNUSED(n))
 {
    unsigned char c = *s;
    *pwc = (ucs4_t) ibm16804_2uni[c];
@@ -164,7 +164,7 @@ static const struct gap ibm16804_idx[] =
 };
 
 static int
-ibm16804_wctomb (unsigned char *r, ucs4_t wc, int n)
+ibm16804_wctomb (unsigned char *r, ucs4_t wc, int WXUNUSED(n))
 {
    const struct gap* p2gap = ibm16804_idx;
    for (; p2gap->start < 0xffff ; p2gap++) {
