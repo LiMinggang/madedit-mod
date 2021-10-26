@@ -1,6 +1,8 @@
 ./wxstd.po.cpp
 ../src/MadEdit/caret_new.cpp
 ../src/MadEdit/caret_new.h
+../src/MadEdit/MadCSConv.cpp
+../src/MadEdit/MadCSConv.h
 ../src/MadEdit/MadEdit.cpp
 ../src/MadEdit/MadEdit.h
 ../src/MadEdit/MadEditAdvanced.cpp
