@@ -5,6 +5,7 @@
 // Licence:     GPL
 ///////////////////////////////////////////////////////////////////////////////
 
+#include <wx/intl.h> 
 #include <wx/strconv.h>
 #include <wx/fontmap.h>
 
@@ -13,6 +14,7 @@
 #include "ExtEncodings/converters.h"
 
 std::map<wxString, int>MadCSConv::MadExtCharSetNames;
+std::map<wxString, wxString>MadCSConv::MadExtCharSetFullNames;
 #endif //__MAD_ENCODING_EXTENDED__
 
 MadCSConv::MadCSConv(const wxString &charset):m_Charset(charset.Upper())
@@ -56,37 +58,69 @@ MadCSConv::MadCSConv(int encoding):m_Charset(_T("UNKNOWN_CHARSET")), m_Encoding(
 void MadCSConv::InitCharSetNames()
 {
 #ifdef __MAD_ENCODING_EXTENDED__
-	MadExtCharSetNames[_T("GB18030")]	= MAD_FONTENCODING_GB18030;
-	MadExtCharSetNames[_T("IBM1025")]	= MAD_FONTENCODING_IBM1025;
-	MadExtCharSetNames[_T("IBM1047")]	= MAD_FONTENCODING_IBM1047;
-	MadExtCharSetNames[_T("IBM1097")]	= MAD_FONTENCODING_IBM1097;
-	MadExtCharSetNames[_T("IBM1112")]	= MAD_FONTENCODING_IBM1112;
-	MadExtCharSetNames[_T("IBM1122")]	= MAD_FONTENCODING_IBM1122;
-	MadExtCharSetNames[_T("IBM1123")]	= MAD_FONTENCODING_IBM1123;
-	MadExtCharSetNames[_T("IBM1130")]	= MAD_FONTENCODING_IBM1130;
-	MadExtCharSetNames[_T("IBM1132")]	= MAD_FONTENCODING_IBM1132;
-	MadExtCharSetNames[_T("IBM1137")]	= MAD_FONTENCODING_IBM1137;
-	MadExtCharSetNames[_T("IBM1140")]	= MAD_FONTENCODING_IBM1140;
-	MadExtCharSetNames[_T("IBM1141")]	= MAD_FONTENCODING_IBM1141;
-	MadExtCharSetNames[_T("IBM1142")]	= MAD_FONTENCODING_IBM1142;
-	MadExtCharSetNames[_T("IBM1143")]	= MAD_FONTENCODING_IBM1143;
-	MadExtCharSetNames[_T("IBM1144")]	= MAD_FONTENCODING_IBM1144;
-	MadExtCharSetNames[_T("IBM1145")]	= MAD_FONTENCODING_IBM1145;
-	MadExtCharSetNames[_T("IBM1146")]	= MAD_FONTENCODING_IBM1146;
-	MadExtCharSetNames[_T("IBM1147")]	= MAD_FONTENCODING_IBM1147;
-	MadExtCharSetNames[_T("IBM1148")]	= MAD_FONTENCODING_IBM1148;
-	MadExtCharSetNames[_T("IBM1149")]	= MAD_FONTENCODING_IBM1149;
-	MadExtCharSetNames[_T("IBM1153")]	= MAD_FONTENCODING_IBM1153;
-	MadExtCharSetNames[_T("IBM1154")]	= MAD_FONTENCODING_IBM1154;
-	MadExtCharSetNames[_T("IBM1155")]	= MAD_FONTENCODING_IBM1155;
-	MadExtCharSetNames[_T("IBM1156")]	= MAD_FONTENCODING_IBM1156;
-	MadExtCharSetNames[_T("IBM1157")]	= MAD_FONTENCODING_IBM1157;
-	MadExtCharSetNames[_T("IBM1158")]	= MAD_FONTENCODING_IBM1158;
-	MadExtCharSetNames[_T("IBM1160")]	= MAD_FONTENCODING_IBM1160;
-	MadExtCharSetNames[_T("IBM1164")]	= MAD_FONTENCODING_IBM1164;
-	MadExtCharSetNames[_T("IBM1166")]	= MAD_FONTENCODING_IBM1166;
+	MadExtCharSetNames[_T("GB18030")]  = MAD_FONTENCODING_GB18030;
+	MadExtCharSetNames[_T("IBM1025")]  = MAD_FONTENCODING_IBM1025;
+	MadExtCharSetNames[_T("IBM1047")]  = MAD_FONTENCODING_IBM1047;
+	MadExtCharSetNames[_T("IBM1097")]  = MAD_FONTENCODING_IBM1097;
+	MadExtCharSetNames[_T("IBM1112")]  = MAD_FONTENCODING_IBM1112;
+	MadExtCharSetNames[_T("IBM1122")]  = MAD_FONTENCODING_IBM1122;
+	MadExtCharSetNames[_T("IBM1123")]  = MAD_FONTENCODING_IBM1123;
+	MadExtCharSetNames[_T("IBM1130")]  = MAD_FONTENCODING_IBM1130;
+	MadExtCharSetNames[_T("IBM1132")]  = MAD_FONTENCODING_IBM1132;
+	MadExtCharSetNames[_T("IBM1137")]  = MAD_FONTENCODING_IBM1137;
+	MadExtCharSetNames[_T("IBM1140")]  = MAD_FONTENCODING_IBM1140;
+	MadExtCharSetNames[_T("IBM1141")]  = MAD_FONTENCODING_IBM1141;
+	MadExtCharSetNames[_T("IBM1142")]  = MAD_FONTENCODING_IBM1142;
+	MadExtCharSetNames[_T("IBM1143")]  = MAD_FONTENCODING_IBM1143;
+	MadExtCharSetNames[_T("IBM1144")]  = MAD_FONTENCODING_IBM1144;
+	MadExtCharSetNames[_T("IBM1145")]  = MAD_FONTENCODING_IBM1145;
+	MadExtCharSetNames[_T("IBM1146")]  = MAD_FONTENCODING_IBM1146;
+	MadExtCharSetNames[_T("IBM1147")]  = MAD_FONTENCODING_IBM1147;
+	MadExtCharSetNames[_T("IBM1148")]  = MAD_FONTENCODING_IBM1148;
+	MadExtCharSetNames[_T("IBM1149")]  = MAD_FONTENCODING_IBM1149;
+	MadExtCharSetNames[_T("IBM1153")]  = MAD_FONTENCODING_IBM1153;
+	MadExtCharSetNames[_T("IBM1154")]  = MAD_FONTENCODING_IBM1154;
+	MadExtCharSetNames[_T("IBM1155")]  = MAD_FONTENCODING_IBM1155;
+	MadExtCharSetNames[_T("IBM1156")]  = MAD_FONTENCODING_IBM1156;
+	MadExtCharSetNames[_T("IBM1157")]  = MAD_FONTENCODING_IBM1157;
+	MadExtCharSetNames[_T("IBM1158")]  = MAD_FONTENCODING_IBM1158;
+	MadExtCharSetNames[_T("IBM1160")]  = MAD_FONTENCODING_IBM1160;
+	MadExtCharSetNames[_T("IBM1164")]  = MAD_FONTENCODING_IBM1164;
+	MadExtCharSetNames[_T("IBM1166")]  = MAD_FONTENCODING_IBM1166;
 	MadExtCharSetNames[_T("IBM12712")] = MAD_FONTENCODING_IBM12712;
 	MadExtCharSetNames[_T("IBM16804")] = MAD_FONTENCODING_IBM16804;
+
+	MadExtCharSetFullNames[_T("GB18030")]  = _("Chinese Simplified(UTF-PRC)");
+	MadExtCharSetFullNames[_T("IBM1025")]  = _("IBM Cyrillic");
+	MadExtCharSetFullNames[_T("IBM1047")]  = _("IBM Latin-1");
+	MadExtCharSetFullNames[_T("IBM1097")]  = _("IBM Farsi Bilingual");
+	MadExtCharSetFullNames[_T("IBM1112")]  = _("IBM Baltic");
+	MadExtCharSetFullNames[_T("IBM1122")]  = _("IBM Estonia");
+	MadExtCharSetFullNames[_T("IBM1123")]  = _("IBM Cyrillic Ukraine");
+	MadExtCharSetFullNames[_T("IBM1130")]  = _("IBM Vietnamese");
+	MadExtCharSetFullNames[_T("IBM1132")]  = _("IBM Lao");
+	MadExtCharSetFullNames[_T("IBM1137")]  = _("IBM Devanagari");
+	MadExtCharSetFullNames[_T("IBM1140")]  = _("IBM USA");
+	MadExtCharSetFullNames[_T("IBM1141")]  = _("IBM Austria");
+	MadExtCharSetFullNames[_T("IBM1142")]  = _("IBM Denmark");
+	MadExtCharSetFullNames[_T("IBM1143")]  = _("IBM Finland");
+	MadExtCharSetFullNames[_T("IBM1144")]  = _("IBM Italy");
+	MadExtCharSetFullNames[_T("IBM1145")]  = _("IBM Spain");
+	MadExtCharSetFullNames[_T("IBM1146")]  = _("IBM UK");
+	MadExtCharSetFullNames[_T("IBM1147")]  = _("IBM France");
+	MadExtCharSetFullNames[_T("IBM1148")]  = _("IBM International");
+	MadExtCharSetFullNames[_T("IBM1149")]  = _("IBM Icelandic");
+	MadExtCharSetFullNames[_T("IBM1153")]  = _("IBM Latin-2");
+	MadExtCharSetFullNames[_T("IBM1154")]  = _("IBM Cyrillic Multilingual");
+	MadExtCharSetFullNames[_T("IBM1155")]  = _("IBM Turkey");
+	MadExtCharSetFullNames[_T("IBM1156")]  = _("IBM Baltic");
+	MadExtCharSetFullNames[_T("IBM1157")]  = _("IBM Estonia with euro");
+	MadExtCharSetFullNames[_T("IBM1158")]  = _("IBM Cyrillic Ukraine");
+	MadExtCharSetFullNames[_T("IBM1160")]  = _("IBM Thai");
+	MadExtCharSetFullNames[_T("IBM1164")]  = _("IBM Vietnamese with euro");
+	MadExtCharSetFullNames[_T("IBM1166")]  = _("IBM Cyrillic Kazakh");
+	MadExtCharSetFullNames[_T("IBM12712")] = _("IBM Hebrew");
+	MadExtCharSetFullNames[_T("IBM16804")] = _("IBM Arabic");
 #endif
 }
 

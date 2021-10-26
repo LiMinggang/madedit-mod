@@ -70,12 +70,12 @@ public:
 	static void InitCharSetNames();
 #ifdef __MAD_ENCODING_EXTENDED__	
 	static std::map<wxString, int>MadExtCharSetNames;
+	static std::map<wxString, wxString>MadExtCharSetFullNames;
 #endif //__MAD_ENCODING_EXTENDED__
 private:
 	wxString m_Charset;
 	int m_Encoding;
 	shared_ptr< wxCSConv > m_CSConv;
 };
-
 
 #endif //__MADCSCONV__

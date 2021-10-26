@@ -147,6 +147,7 @@ void MadEncoding::InitEncodings()
 	MadCSConv::InitCharSetNames();
 
 	MadEncodingGrpName[ENCG_WESTERNEUROPE] = _( "Western European" );
+	MadEncodingGrpName[ENCG_EASTERNEUROPE] = _( "Eastern European" );
 	MadEncodingGrpName[ENCG_CENTRALEUROPE] = _( "Central European" );
 	MadEncodingGrpName[ENCG_SOUTHEUROPE  ] = _( "South European" );
 	MadEncodingGrpName[ENCG_NORTHEUROPE  ] = _( "North European" );
@@ -158,6 +159,7 @@ void MadEncoding::InitEncodings()
 	MadEncodingGrpName[ENCG_BALTIC       ] = _( "Baltic" );
 	MadEncodingGrpName[ENCG_EASTASIA     ] = _( "East Asian" );
 	MadEncodingGrpName[ENCG_SOUTHEASTASIA] = _( "Southeast Asian" );
+	MadEncodingGrpName[ENCG_SOUTHASIA    ] = _( "South Asian" );
 	MadEncodingGrpName[ENCG_UNICODE      ] = _( "Unicode" );
 	MadEncodingGrpName[ENCG_ISO8859      ] = _( "ISO-8859" );
 	MadEncodingGrpName[ENCG_WINDOWS      ] = _( "Windows" );
@@ -700,7 +702,7 @@ void MadEncoding::InitEncodings()
 		encGrp.clear();
 		wxString name = wxT( "GB18030" );
 		wxString ftname( wxT( "Courier New" ) );
-		wxString desc(_("Chinese Simplified(UTF-PRC)"));
+		wxString desc(MadCSConv::MadExtCharSetFullNames[name]);
 		MadEncodingType type = etGB18030;
 		MSW_GET_FONT_NAME( wxT( "54936" ), ftname );
 		encGrp.push_back( ENCG_EASTASIA );
@@ -715,10 +717,105 @@ void MadEncoding::InitEncodings()
 			if(!it->first.IsSameAs(wxT( "GB18030" )))
 			{
 				encGrp.clear();
-				name = it->first;
-				wxString desc(wxT("EBCDIC ") + name);
-				MadEncodingType type = etSingleByte;
 				encGrp.push_back( ENCG_EBCDIC );
+				name = it->first;
+				wxString desc(MadCSConv::MadExtCharSetFullNames[name]);
+				MadEncodingType type = etSingleByte;
+				switch( it->second )
+				{
+					case MAD_FONTENCODING_IBM1025:
+						encGrp.push_back(ENCG_CYRILLIC);
+						break;
+					case MAD_FONTENCODING_IBM1047:
+						encGrp.push_back(ENCG_WESTERNEUROPE);
+						break;
+					//case MAD_FONTENCODING_IBM1097: //Farsi Bilingual/Persian
+					//	encGrp.push_back();
+					//	break;
+					case MAD_FONTENCODING_IBM1112:
+						encGrp.push_back(ENCG_BALTIC);
+						break;
+					case MAD_FONTENCODING_IBM1122:
+						encGrp.push_back(ENCG_EASTERNEUROPE);
+						break;
+					case MAD_FONTENCODING_IBM1123:
+						encGrp.push_back(ENCG_CYRILLIC);
+						break;
+					case MAD_FONTENCODING_IBM1130:
+						encGrp.push_back(ENCG_SOUTHEASTASIA);
+						break;
+					case MAD_FONTENCODING_IBM1132:
+						encGrp.push_back(ENCG_SOUTHEASTASIA);
+						break;
+					case MAD_FONTENCODING_IBM1137:
+						encGrp.push_back(ENCG_SOUTHASIA);
+						break;
+					//case MAD_FONTENCODING_IBM1140: //USA
+					//	encGrp.push_back();
+					//	break;
+					case MAD_FONTENCODING_IBM1141:
+						encGrp.push_back(ENCG_CENTRALEUROPE);
+						break;
+					case MAD_FONTENCODING_IBM1142:
+						encGrp.push_back(ENCG_NORTHEUROPE);
+						break;
+					case MAD_FONTENCODING_IBM1143:
+						encGrp.push_back(ENCG_NORTHEUROPE);
+						break;
+					case MAD_FONTENCODING_IBM1144:
+						encGrp.push_back(ENCG_SOUTHEUROPE);
+						break;
+					case MAD_FONTENCODING_IBM1145:
+						encGrp.push_back(ENCG_SOUTHEUROPE);
+						break;
+					case MAD_FONTENCODING_IBM1146:
+						encGrp.push_back(ENCG_WESTERNEUROPE);
+						break;
+					case MAD_FONTENCODING_IBM1147:
+						encGrp.push_back(ENCG_WESTERNEUROPE);
+						break;
+					//case MAD_FONTENCODING_IBM1148://International
+					//	encGrp.push_back();
+					//	break;
+					case MAD_FONTENCODING_IBM1149:
+						encGrp.push_back(ENCG_NORTHEUROPE);
+						break;
+					case MAD_FONTENCODING_IBM1153:
+						encGrp.push_back(ENCG_CENTRALEUROPE);
+						break;
+					case MAD_FONTENCODING_IBM1154:
+						encGrp.push_back(ENCG_CYRILLIC);
+						break;
+					case MAD_FONTENCODING_IBM1155:
+						encGrp.push_back(ENCG_TURKISH);
+						break;
+					case MAD_FONTENCODING_IBM1156:
+						encGrp.push_back(ENCG_BALTIC);
+						break;
+					case MAD_FONTENCODING_IBM1157:
+						encGrp.push_back(ENCG_EASTERNEUROPE);
+						break;
+					case MAD_FONTENCODING_IBM1158:
+						encGrp.push_back(ENCG_CYRILLIC);
+						break;
+					case MAD_FONTENCODING_IBM1160:
+						encGrp.push_back(ENCG_SOUTHEASTASIA);
+						break;
+					case MAD_FONTENCODING_IBM1164:
+						encGrp.push_back(ENCG_SOUTHEASTASIA);
+						break;
+					case MAD_FONTENCODING_IBM1166:
+						encGrp.push_back(ENCG_CYRILLIC);
+						break;
+					case MAD_FONTENCODING_IBM12712:
+						encGrp.push_back(ENCG_HEBREW);
+						break;
+					case MAD_FONTENCODING_IBM16804:
+						encGrp.push_back(ENCG_ARABIC);
+						break;
+					default:
+						break;
+				}				
 				EncodingsTable.push_back( MadEncodingInfo( it->second, name.Upper(), desc, type, fontname, encGrp ) );
 				EncodingsSet.insert(it->second);
 			}
