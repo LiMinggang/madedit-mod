@@ -44,6 +44,8 @@
 MadFindInFilesDialog *g_FindInFilesDialog = nullptr;
 extern wxStatusBar *g_StatusBar;
 extern MadEdit *g_ActiveMadEdit;
+extern wxMenu *g_Menu_EditPop;
+
 extern void DisplayFindAllResult( wxTreeItemId &myroot, vector<wxFileOffset> &begpos, vector<wxFileOffset> &endpos, MadEdit *madedit, bool expandresults = true, OnProgressUpdatePtr updater = nullptr );
 extern int MadMessageBox( const wxString& message,
                           const wxString& caption = wxMessageBoxCaptionStr,
@@ -58,6 +60,62 @@ const long MadFindInFilesDialog::ID_RECENTFINDTEXT1 = MadUniqueIDReserver::Insta
 const long MadFindInFilesDialog::ID_RECENTFINDTEXT20 = MadUniqueIDReserver::Instance().RecentFindTextID20();
 const long MadFindInFilesDialog::ID_RECENTREPLACETEXT1 = MadUniqueIDReserver::Instance().RecentReplaceTextID1();
 const long MadFindInFilesDialog::ID_RECENTREPLACETEXT20 = MadUniqueIDReserver::Instance().RecentReplaceTextID20();
+
+MadFindInFilesDialog::wxCmdEvtHandlerMap_t MadFindInFilesDialog::m_menu_evt_map[] =
+{
+	// edit
+	{ menuUndo, &MadFindInFilesDialog::OnEditUndo },
+	{ menuRedo, &MadFindInFilesDialog::OnEditRedo },
+	{ menuCut, &MadFindInFilesDialog::OnEditCut },
+	{ menuCopy, &MadFindInFilesDialog::OnEditCopy },
+	{ menuPaste, &MadFindInFilesDialog::OnEditPaste },
+	{ menuDelete, &MadFindInFilesDialog::OnEditDelete },
+	{ menuCutLine, &MadFindInFilesDialog::OnEditCutLine },
+	{ menuDeleteLine, &MadFindInFilesDialog::OnEditDeleteLine },
+	{ menuSelectAll, &MadFindInFilesDialog::OnEditSelectAll },
+	{ menuStartEndSelction, &MadFindInFilesDialog::OnEditStartEndSelction },
+	{ menuInsertTabChar, &MadFindInFilesDialog::OnEditInsertTabChar },
+	{ menuInsertDateTime, &MadFindInFilesDialog::OnEditInsertDateTime },
+	{ menuSortAscending, &MadFindInFilesDialog::OnEditSortAscending },
+	{ menuSortDescending, &MadFindInFilesDialog::OnEditSortDescending },
+	{ menuSortAscendingCase, &MadFindInFilesDialog::OnEditSortAscendingCase },
+	{ menuSortDescendingCase, &MadFindInFilesDialog::OnEditSortDescendingCase },
+	{ menuSortByOptions, &MadFindInFilesDialog::OnEditSortByOptions },
+	{ menuSortOptions, &MadFindInFilesDialog::OnEditSortOptions },
+	{ menuCopyAsHexString, &MadFindInFilesDialog::OnEditCopyAsHexString },
+	{ menuCopyAsHexStringWithSpace, &MadFindInFilesDialog::OnEditCopyAsHexStringWithSpace },
+	{ menuCopyRevertHex, &MadFindInFilesDialog::OnEditCopyRevertHex },
+	{ menuIncreaseIndent, &MadFindInFilesDialog::OnEditIncIndent },
+	{ menuDecreaseIndent, &MadFindInFilesDialog::OnEditDecIndent },
+	{ menuComment, &MadFindInFilesDialog::OnEditComment },
+	{ menuUncomment, &MadFindInFilesDialog::OnEditUncomment },
+	{ menuWordWrapToNewLine, &MadFindInFilesDialog::OnEditWordWrapToNewLine },
+	{ menuNewLineToWordWrap, &MadFindInFilesDialog::OnEditNewLineToWordWrap },
+	{ menuToUpperCase, &MadFindInFilesDialog::OnEditToUpperCase },
+	{ menuToLowerCase, &MadFindInFilesDialog::OnEditToLowerCase },
+	{ menuInvertCase, &MadFindInFilesDialog::OnEditInvertCase },
+	{ menuCapitalize, &MadFindInFilesDialog::OnEditCapitalize },
+	{ menuToHalfWidth, &MadFindInFilesDialog::OnEditToHalfWidth },
+	{ menuToHalfWidthByOptions, &MadFindInFilesDialog::OnEditToHalfWidthByOptions },
+	{ menuToFullWidth, &MadFindInFilesDialog::OnEditToFullWidth },
+	{ menuToFullWidthByOptions, &MadFindInFilesDialog::OnEditToFullWidthByOptions },
+	{ menuTabToSpace, &MadFindInFilesDialog::OnEditTabToSpace },
+	{ menuSpaceToTab, &MadFindInFilesDialog::OnEditSpaceToTab },
+	{ menuTrimTrailingSpaces, &MadFindInFilesDialog::OnEditTrimTrailingSpaces },
+	{ menuTrimLeadingSpaces, &MadFindInFilesDialog::OnEditTrimLeadingSpaces },
+	{ menuDeleteEmptyLines, &MadFindInFilesDialog::OnEditDeleteEmptyLines },
+	{ menuDeleteEmptyLinesWithSpaces, &MadFindInFilesDialog::OnEditDeleteEmptyLinesWithSpaces },
+	{ menuJoinLines, &MadFindInFilesDialog::OnEditJoinLines },
+	{ menuInsertNumbers, &MadFindInFilesDialog::OnEditInsertNumbers },
+	{ menuColumnAlignLeft, &MadFindInFilesDialog::OnEditColumnAlignLeft },
+	{ menuColumnAlignRight, &MadFindInFilesDialog::OnEditColumnAlignRight },
+};
+
+MadFindInFilesDialog::wxCmdEvtHandlerRangeMap_t MadFindInFilesDialog::m_menu_evt_range_map[] =
+{
+	{ menuSpellOption1, menuSpellOption99, &MadFindInFilesDialog::OnEditSpellCheck },
+	{ menuMadScrip1, menuMadScrip200, &MadFindInFilesDialog::OnToolsMadScriptList },
+};
 
 MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID WXUNUSED(id),const wxPoint& WXUNUSED(pos),const wxSize& WXUNUSED(size))
 {
@@ -246,6 +304,16 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID WXUNUSED(
 	Bind( wxEVT_MENU, &MadFindInFilesDialog::OnRecentReplaceText, this, ID_RECENTREPLACETEXT1, ID_RECENTREPLACETEXT20 );
 	Bind( wxEVT_CLOSE_WINDOW, &MadFindInFilesDialog::MadFindInFilesDialogClose, this);
 
+	for(size_t i = 0; i < sizeof(m_menu_evt_map)/sizeof(m_menu_evt_map[0]); ++i)
+	{
+		Bind( wxEVT_MENU, m_menu_evt_map[i].method, this, m_menu_evt_map[i].evtTag );
+	}
+
+	for(size_t i = 0; i < sizeof(m_menu_evt_range_map)/sizeof(m_menu_evt_range_map[0]); ++i)
+	{
+		Bind( wxEVT_MENU, m_menu_evt_range_map[i].method, this, m_menu_evt_range_map[i].evtStartTag, m_menu_evt_range_map[i].evtEndTag );
+	}
+
 	// build encoding list
 	wxString systemenc( _( "Automatic Detection" ) );
 	WxComboBoxEncoding->Append( systemenc );
@@ -313,6 +381,11 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID WXUNUSED(
 	{
 		m_ReplaceText->SetText( g_SearchReplaceDialog->m_RecentReplaceText->GetHistoryFile( 0 ) );
 	}
+
+	m_FindText->SetOnMouseRightUp( &OnEditMouseRightUp );
+	m_FindText->SetRightClickMenu( g_Menu_EditPop );
+	m_ReplaceText->SetOnMouseRightUp( &OnEditMouseRightUp );
+	m_ReplaceText->SetRightClickMenu( g_Menu_EditPop );
 
 	WxButtonClose->SetFocus();
 }
@@ -1054,5 +1127,240 @@ void MadFindInFilesDialog::MadFindInFilesDialogKeyDown(wxKeyEvent& event)
 	}
 
 	event.Skip();
+}
+
+void MadFindInFilesDialog::OnEditUndo( wxCommandEvent& WXUNUSED(event) )
+{
+	EditUndo();
+}
+
+void MadFindInFilesDialog::OnEditRedo( wxCommandEvent& WXUNUSED(event) )
+{
+	EditRedo();
+}
+
+void MadFindInFilesDialog::OnEditCut( wxCommandEvent& WXUNUSED(event) )
+{
+	EditCut();
+}
+
+void MadFindInFilesDialog::OnEditCopy( wxCommandEvent& WXUNUSED(event) )
+{
+	EditCopy();
+}
+
+void MadFindInFilesDialog::OnEditPaste( wxCommandEvent& WXUNUSED(event) )
+{
+	EditPaste();
+}
+
+void MadFindInFilesDialog::OnEditDelete( wxCommandEvent& WXUNUSED(event) )
+{
+	EditDelete();
+}
+
+void MadFindInFilesDialog::OnEditCutLine( wxCommandEvent& WXUNUSED(event) )
+{
+	EditCutLine();
+}
+
+void MadFindInFilesDialog::OnEditDeleteLine( wxCommandEvent& WXUNUSED(event) )
+{
+	EditDeleteLine();
+}
+
+void MadFindInFilesDialog::OnEditSelectAll( wxCommandEvent& WXUNUSED(event) )
+{
+	EditSelectAll();
+}
+
+void MadFindInFilesDialog::OnEditStartEndSelction( wxCommandEvent& WXUNUSED(event) )
+{
+	EditStartEndSelction();
+}
+
+void MadFindInFilesDialog::OnEditInsertTabChar( wxCommandEvent& WXUNUSED(event) )
+{
+	EditInsertTabChar();
+}
+
+void MadFindInFilesDialog::OnEditInsertDateTime( wxCommandEvent& WXUNUSED(event) )
+{
+	EditInsertDateTime();
+}
+
+void MadFindInFilesDialog::OnEditSortAscending( wxCommandEvent& WXUNUSED(event) )
+{
+	EditSortAscending();
+}
+
+void MadFindInFilesDialog::OnEditSortDescending( wxCommandEvent& WXUNUSED(event) )
+{
+	EditSortDescending();
+}
+
+void MadFindInFilesDialog::OnEditSortAscendingCase( wxCommandEvent& WXUNUSED(event) )
+{
+	EditSortAscendingCase();
+}
+
+void MadFindInFilesDialog::OnEditSortDescendingCase( wxCommandEvent& WXUNUSED(event) )
+{
+	EditSortDescendingCase();
+}
+
+void MadFindInFilesDialog::OnEditSortByOptions( wxCommandEvent& WXUNUSED(event) )
+{
+	EditSortByOptions();
+}
+
+void MadFindInFilesDialog::OnEditSortOptions( wxCommandEvent& WXUNUSED(event) )
+{
+	EditSortOptions(this);
+}
+
+void MadFindInFilesDialog::OnEditCopyAsHexString( wxCommandEvent& WXUNUSED(event) )
+{
+	EditCopyAsHexString();
+}
+
+void MadFindInFilesDialog::OnEditCopyAsHexStringWithSpace( wxCommandEvent& WXUNUSED(event) )
+{
+	EditCopyAsHexStringWithSpace();
+}
+
+void MadFindInFilesDialog::OnEditCopyRevertHex( wxCommandEvent& WXUNUSED(event) )
+{
+	EditCopyRevertHex();
+}
+
+void MadFindInFilesDialog::OnEditIncIndent( wxCommandEvent& WXUNUSED(event) )
+{
+	EditIncIndent();
+}
+
+void MadFindInFilesDialog::OnEditDecIndent( wxCommandEvent& WXUNUSED(event) )
+{
+	EditDecIndent();
+}
+
+void MadFindInFilesDialog::OnEditComment( wxCommandEvent& WXUNUSED(event) )
+{
+	EditComment();
+}
+
+void MadFindInFilesDialog::OnEditUncomment( wxCommandEvent& WXUNUSED(event) )
+{
+	EditUncomment();
+}
+
+void MadFindInFilesDialog::OnEditWordWrapToNewLine( wxCommandEvent& WXUNUSED(event) )
+{
+	EditWordWrapToNewLine();
+}
+
+void MadFindInFilesDialog::OnEditNewLineToWordWrap( wxCommandEvent& WXUNUSED(event) )
+{
+	EditNewLineToWordWrap();
+}
+
+void MadFindInFilesDialog::OnEditToUpperCase( wxCommandEvent& WXUNUSED(event) )
+{
+	EditToUpperCase();
+}
+
+void MadFindInFilesDialog::OnEditToLowerCase( wxCommandEvent& WXUNUSED(event) )
+{
+	EditToLowerCase();
+}
+
+void MadFindInFilesDialog::OnEditInvertCase( wxCommandEvent& WXUNUSED(event) )
+{
+	EditInvertCase();
+}
+
+void MadFindInFilesDialog::OnEditCapitalize( wxCommandEvent& WXUNUSED(event) )
+{
+	EditCapitalize();
+}
+
+void MadFindInFilesDialog::OnEditToHalfWidth( wxCommandEvent& WXUNUSED(event) )
+{
+	EditToHalfWidth();
+}
+
+void MadFindInFilesDialog::OnEditToHalfWidthByOptions( wxCommandEvent& WXUNUSED(event) )
+{
+	EditToHalfWidthByOptions(this);
+}
+
+void MadFindInFilesDialog::OnEditToFullWidth( wxCommandEvent& WXUNUSED(event) )
+{
+	EditToFullWidth();
+}
+
+void MadFindInFilesDialog::OnEditToFullWidthByOptions( wxCommandEvent& WXUNUSED(event) )
+{
+	EditToFullWidthByOptions(this);
+}
+
+void MadFindInFilesDialog::OnEditTabToSpace( wxCommandEvent& WXUNUSED(event) )
+{
+	EditTabToSpace();
+}
+
+void MadFindInFilesDialog::OnEditSpaceToTab( wxCommandEvent& WXUNUSED(event) )
+{
+	EditSpaceToTab();
+}
+
+void MadFindInFilesDialog::OnEditTrimTrailingSpaces( wxCommandEvent& WXUNUSED(event) )
+{
+	EditTrimTrailingSpaces();
+}
+
+void MadFindInFilesDialog::OnEditTrimLeadingSpaces( wxCommandEvent& WXUNUSED(event) )
+{
+	EditTrimLeadingSpaces();
+}
+
+void MadFindInFilesDialog::OnEditDeleteEmptyLines( wxCommandEvent& WXUNUSED(event) )
+{
+	EditDeleteEmptyLines();
+}
+
+void MadFindInFilesDialog::OnEditDeleteEmptyLinesWithSpaces( wxCommandEvent& WXUNUSED(event) )
+{
+	EditDeleteEmptyLinesWithSpaces();
+}
+
+void MadFindInFilesDialog::OnEditJoinLines( wxCommandEvent& WXUNUSED(event) )
+{
+	EditJoinLines();
+}
+
+void MadFindInFilesDialog::OnEditInsertNumbers( wxCommandEvent& WXUNUSED(event) )
+{
+	EditInsertNumbers(this);
+}
+
+void MadFindInFilesDialog::OnEditColumnAlignLeft( wxCommandEvent& WXUNUSED(event) )
+{
+	EditColumnAlignLeft();
+}
+
+void MadFindInFilesDialog::OnEditColumnAlignRight( wxCommandEvent& WXUNUSED(event) )
+{
+	EditColumnAlignRight();
+}
+
+void MadFindInFilesDialog::OnEditSpellCheck( wxCommandEvent& event )
+{
+	EditSpellCheck(event);
+}
+
+void MadFindInFilesDialog::OnToolsMadScriptList( wxCommandEvent& event )
+{
+	ToolsMadScriptList(event);
 }
 
