@@ -151,8 +151,8 @@ class MadSearchReplaceDialog: public wxDialog
 		void OnEditInsertNumbers( wxCommandEvent& WXUNUSED(event) );
 		void OnEditColumnAlignLeft( wxCommandEvent& WXUNUSED(event) );
 		void OnEditColumnAlignRight( wxCommandEvent& WXUNUSED(event) );
-		void OnEditSpellCheck( wxCommandEvent& WXUNUSED(WXUNUSED(event)) );
-		void OnToolsMadScriptList( wxCommandEvent& WXUNUSED(WXUNUSED(event)) );
+		void OnEditSpellCheck( wxCommandEvent& event );
+		void OnToolsMadScriptList( wxCommandEvent& event );
 		
 		typedef struct 
 		{
