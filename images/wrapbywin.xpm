@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * wrapbywin_xpm[] = {
+static const char * const wrapbywin_xpm[] = {
 "16 16 127 2",
 "  	c None",
 "! 	c black",

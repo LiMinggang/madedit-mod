@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * bookmark_clear_xpm[] = {
+static const char * const bookmark_clear_xpm[] = {
 "16 16 83 1",
 " 	c None",
 "!	c black",

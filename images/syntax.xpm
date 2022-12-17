@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * syntax_xpm[] = {
+static const char * const syntax_xpm[] = {
 "16 16 163 2",
 "  	c None",
 "! 	c black",

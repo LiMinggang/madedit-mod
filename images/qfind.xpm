@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * qfind_xpm[] = {
+static const char * const qfind_xpm[] = {
 "16 16 96 2",
 "  	c None",
 "! 	c black",

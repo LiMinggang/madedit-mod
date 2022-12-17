@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * tchinese_xpm[] = {
+static const char * const tchinese_xpm[] = {
 "16 16 89 1",
 " 	c None",
 "!	c black",

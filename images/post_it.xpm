@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * post_it_xpm[] = {
+static const char * const post_it_xpm[] = {
 "16 16 124 2",
 "  	c None",
 "! 	c black",

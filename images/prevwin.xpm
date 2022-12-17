@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * prevwin_xpm[] = {
+static const char * const prevwin_xpm[] = {
 "16 16 105 2",
 "  	c None",
 "! 	c #5070A8",

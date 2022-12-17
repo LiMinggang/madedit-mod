@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * goposition_xpm[] = {
+static const char * const goposition_xpm[] = {
 "16 16 203 2",
 "  	c None",
 "! 	c #495348",

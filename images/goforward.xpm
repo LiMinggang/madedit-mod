@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * goforward_xpm[] = {
+static const char * const goforward_xpm[] = {
 "16 16 186 2",
 "  	c None",
 "! 	c black",

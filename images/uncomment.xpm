@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * uncomment_xpm[] = {
+static const char * const uncomment_xpm[] = {
 "16 16 140 2",
 "  	c None",
 "! 	c black",

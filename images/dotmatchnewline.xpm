@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * dotmatchnewline_xpm[] = {
+static const char * const dotmatchnewline_xpm[] = {
 "16 16 21 1",
 " 	c None",
 "!	c black",

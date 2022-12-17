@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * showsymbol_xpm[] = {
+static const char * const showsymbol_xpm[] = {
 "16 16 44 1",
 " 	c None",
 "!	c black",

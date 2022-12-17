@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * japanese_xpm[] = {
+static const char * const japanese_xpm[] = {
 "16 16 102 2",
 "  	c None",
 "! 	c black",

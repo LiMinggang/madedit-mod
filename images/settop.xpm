@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * settop_xpm[] = {
+static const char * const settop_xpm[] = {
 "16 16 52 1",
 " 	c None",
 "!	c black",

@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * scriptedit_xpm[] = {
+static const char * const scriptedit_xpm[] = {
 "16 16 184 2",
 "  	c None",
 "! 	c black",

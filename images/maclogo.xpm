@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * maclogo_xpm[] = {
+static const char * const maclogo_xpm[] = {
 "16 16 118 2",
 "  	c None",
 "! 	c black",

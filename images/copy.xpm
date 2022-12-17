@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * copy_xpm[] = {
+static const char * const copy_xpm[] = {
 "16 16 113 2",
 "  	c None",
 "! 	c #4678C7",

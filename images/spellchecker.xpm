@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * spellchecker_xpm[] = {
+static const char * const spellchecker_xpm[] = {
 "16 16 45 1",
 " 	c None",
 "!	c black",

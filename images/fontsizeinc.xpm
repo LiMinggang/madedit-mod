@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * fontsizeinc_xpm[] = {
+static const char * const fontsizeinc_xpm[] = {
 "16 16 86 1",
 " 	c None",
 "!	c black",

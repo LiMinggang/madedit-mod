@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * wrapbycol_xpm[] = {
+static const char * const wrapbycol_xpm[] = {
 "16 16 115 2",
 "  	c None",
 "! 	c black",

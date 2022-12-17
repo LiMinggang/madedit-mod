@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * saveall_xpm[] = {
+static const char * const saveall_xpm[] = {
 "16 16 120 2",
 "  	c None",
 "! 	c black",

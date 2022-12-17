@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * checked_xpm[] = {
+static const char * const checked_xpm[] = {
 "16 16 4 1",
 " 	c None",
 "!	c black",

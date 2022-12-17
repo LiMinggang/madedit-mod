@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * recentfiles_xpm[] = {
+static const char * const recentfiles_xpm[] = {
 "16 16 107 2",
 "  	c None",
 "! 	c black",

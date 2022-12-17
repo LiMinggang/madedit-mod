@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * schinese_xpm[] = {
+static const char * const schinese_xpm[] = {
 "16 16 73 1",
 " 	c None",
 "!	c black",

@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * pagesetup_xpm[] = {
+static const char * const pagesetup_xpm[] = {
 "16 16 191 2",
 "  	c None",
 "! 	c black",

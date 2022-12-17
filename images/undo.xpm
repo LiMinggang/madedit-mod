@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * undo_xpm[] = {
+static const char * const undo_xpm[] = {
 "16 16 117 2",
 "  	c None",
 "! 	c black",

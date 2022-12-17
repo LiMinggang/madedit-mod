@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * dateadd_xpm[] = {
+static const char * const dateadd_xpm[] = {
 "16 16 113 2",
 "  	c None",
 "! 	c black",

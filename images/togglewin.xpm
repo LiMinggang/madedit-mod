@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * togglewin_xpm[] = {
+static const char * const togglewin_xpm[] = {
 "16 16 124 2",
 "  	c None",
 "! 	c black",

@@ -312,7 +312,7 @@
 
 #define MADMINUTES (60*1000)
 
-char ** g_MadIcons[] =
+const char *const * g_MadIcons[] =
 {
 	&null_xpm[0], &new_xpm[0], &fileopen_xpm[0], &filesave_xpm[0], &saveall_xpm[0], &fileclose_xpm[0],
 	&closeall_xpm[0], &preview_xpm[0], &print_xpm[0], &quit_xpm[0], &undo_xpm[0], &redo_xpm[0], &cut_xpm[0],

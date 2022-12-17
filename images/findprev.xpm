@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * findprev_xpm[] = {
+static const char * const findprev_xpm[] = {
 "16 16 35 1",
 " 	c None",
 "!	c black",

@@ -1,5 +1,5 @@
 /* XPM */ 
-static char * footprint_xpm[] = {
+static const char * const footprint_xpm[] = {
 "16 16 52 1",
 " 	c None",
 "!	c black",
