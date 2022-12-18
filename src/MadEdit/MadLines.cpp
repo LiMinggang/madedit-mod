@@ -3045,7 +3045,7 @@ bool MadLines::LoadFromFile( const wxString &filename, const wxString &encoding 
 	m_MadEdit->m_LoadingFile = true;
 	bool isbinary = false;
 
-	if( m_MadEdit->m_EditMode == emHexMode )
+	if( m_MadEdit->IsHexMode() )
 	{
 		isbinary = true;
 		m_MadEdit->SetEditMode( emTextMode );

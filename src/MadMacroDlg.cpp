@@ -438,7 +438,7 @@ void MadMacroDlg::OnEditInsertDateTime( wxCommandEvent& WXUNUSED(event) )
 
 void MadMacroDlg::OnEditSortAscending( wxCommandEvent& WXUNUSED(event) )
 {
-	if( m_Pymacro && m_Pymacro->GetEditMode() != emHexMode )
+	if( m_Pymacro && !m_Pymacro->IsHexMode() )
 	{
 		int begin, end;
 		m_Pymacro->GetSelectionLineId( begin, end );
@@ -450,7 +450,7 @@ void MadMacroDlg::OnEditSortAscending( wxCommandEvent& WXUNUSED(event) )
 
 void MadMacroDlg::OnEditSortDescending( wxCommandEvent& WXUNUSED(event) )
 {
-	if( m_Pymacro && m_Pymacro->GetEditMode() != emHexMode )
+	if( m_Pymacro && !m_Pymacro->IsHexMode() )
 	{
 		int begin, end;
 		m_Pymacro->GetSelectionLineId( begin, end );
@@ -462,7 +462,7 @@ void MadMacroDlg::OnEditSortDescending( wxCommandEvent& WXUNUSED(event) )
 
 void MadMacroDlg::OnEditSortAscendingCase( wxCommandEvent& WXUNUSED(event) )
 {
-	if( m_Pymacro && m_Pymacro->GetEditMode() != emHexMode )
+	if( m_Pymacro && !m_Pymacro->IsHexMode() )
 	{
 		int begin, end;
 		m_Pymacro->GetSelectionLineId( begin, end );
@@ -474,7 +474,7 @@ void MadMacroDlg::OnEditSortAscendingCase( wxCommandEvent& WXUNUSED(event) )
 
 void MadMacroDlg::OnEditSortDescendingCase( wxCommandEvent& WXUNUSED(event) )
 {
-	if( m_Pymacro && m_Pymacro->GetEditMode() != emHexMode )
+	if( m_Pymacro && !m_Pymacro->IsHexMode() )
 	{
 		int begin, end;
 		m_Pymacro->GetSelectionLineId( begin, end );
@@ -486,7 +486,7 @@ void MadMacroDlg::OnEditSortDescendingCase( wxCommandEvent& WXUNUSED(event) )
 
 void MadMacroDlg::OnEditSortByOptions( wxCommandEvent& WXUNUSED(event) )
 {
-	if( m_Pymacro && m_Pymacro->GetEditMode() != emHexMode )
+	if( m_Pymacro && !m_Pymacro->IsHexMode() )
 	{
 		wxConfigBase *m_Config = wxConfigBase::Get(false);
 		wxString oldpath = m_Config->GetPath();
@@ -512,7 +512,7 @@ void MadMacroDlg::OnEditSortByOptions( wxCommandEvent& WXUNUSED(event) )
 
 void MadMacroDlg::OnEditSortOptions( wxCommandEvent& WXUNUSED(event) )
 {
-	if( m_Pymacro == nullptr || m_Pymacro->GetEditMode() == emHexMode )
+	if( m_Pymacro == nullptr || m_Pymacro->IsHexMode() )
 	{
 		g_CurrentMadEdit = nullptr;
 		return;
@@ -849,7 +849,7 @@ void MadMacroDlg::OnEditSpaceToTab( wxCommandEvent& WXUNUSED(event) )
 
 void MadMacroDlg::OnEditTrimTrailingSpaces( wxCommandEvent& WXUNUSED(event) )
 {
-	if( m_Pymacro && m_Pymacro->GetEditMode() != emHexMode )
+	if( m_Pymacro && !m_Pymacro->IsHexMode() )
 	{
 		m_Pymacro->TrimTrailingSpaces();
 	}
@@ -859,7 +859,7 @@ void MadMacroDlg::OnEditTrimTrailingSpaces( wxCommandEvent& WXUNUSED(event) )
 
 void MadMacroDlg::OnEditTrimLeadingSpaces( wxCommandEvent& WXUNUSED(event) )
 {
-	if( m_Pymacro && m_Pymacro->GetEditMode() != emHexMode )
+	if( m_Pymacro && !m_Pymacro->IsHexMode() )
 	{
 		m_Pymacro->TrimLeadingSpaces();
 	}
@@ -869,7 +869,7 @@ void MadMacroDlg::OnEditTrimLeadingSpaces( wxCommandEvent& WXUNUSED(event) )
 
 void MadMacroDlg::OnEditDeleteEmptyLines( wxCommandEvent& WXUNUSED(event) )
 {
-	if( m_Pymacro && m_Pymacro->GetEditMode() != emHexMode )
+	if( m_Pymacro && !m_Pymacro->IsHexMode() )
 	{
 		m_Pymacro->DeleteEmptyLines();
 	}
@@ -879,7 +879,7 @@ void MadMacroDlg::OnEditDeleteEmptyLines( wxCommandEvent& WXUNUSED(event) )
 
 void MadMacroDlg::OnEditDeleteEmptyLinesWithSpaces( wxCommandEvent& WXUNUSED(event) )
 {
-	if( m_Pymacro && m_Pymacro->GetEditMode() != emHexMode )
+	if( m_Pymacro && !m_Pymacro->IsHexMode() )
 	{
 		m_Pymacro->DeleteEmptyLinesWithSpaces();
 	}
@@ -889,7 +889,7 @@ void MadMacroDlg::OnEditDeleteEmptyLinesWithSpaces( wxCommandEvent& WXUNUSED(eve
 
 void MadMacroDlg::OnEditJoinLines( wxCommandEvent& WXUNUSED(event) )
 {
-	if( m_Pymacro && m_Pymacro->GetEditMode() != emHexMode )
+	if( m_Pymacro && !m_Pymacro->IsHexMode() )
 	{
 		m_Pymacro->JoinLines();
 	}
@@ -899,7 +899,7 @@ void MadMacroDlg::OnEditJoinLines( wxCommandEvent& WXUNUSED(event) )
 
 void MadMacroDlg::OnEditInsertNumbers( wxCommandEvent& WXUNUSED(event) )
 {
-	if( m_Pymacro && m_Pymacro->GetEditMode() == emColumnMode )
+	if( m_Pymacro && m_Pymacro->IsColumnMode() )
 	{
 		// Hide Modaless Dialog
 		//HideModalessDialogs();
@@ -982,7 +982,7 @@ void MadMacroDlg::OnEditInsertNumbers( wxCommandEvent& WXUNUSED(event) )
 
 void MadMacroDlg::OnEditColumnAlignLeft( wxCommandEvent& WXUNUSED(event) )
 {
-	if( m_Pymacro && m_Pymacro->GetEditMode() != emHexMode )
+	if( m_Pymacro && !m_Pymacro->IsHexMode() )
 	{
 		m_Pymacro->ColumnAlignLeft();
 	}
@@ -992,7 +992,7 @@ void MadMacroDlg::OnEditColumnAlignLeft( wxCommandEvent& WXUNUSED(event) )
 
 void MadMacroDlg::OnEditColumnAlignRight( wxCommandEvent& WXUNUSED(event) )
 {
-	if( m_Pymacro && m_Pymacro->GetEditMode() != emHexMode )
+	if( m_Pymacro && !m_Pymacro->IsHexMode() )
 	{
 		m_Pymacro->ColumnAlignRight();
 	}
@@ -1002,7 +1002,7 @@ void MadMacroDlg::OnEditColumnAlignRight( wxCommandEvent& WXUNUSED(event) )
 
 void MadMacroDlg::OnEditSpellCheck( wxCommandEvent& event )
 {
-	if( m_Pymacro && m_Pymacro->GetEditMode() != emHexMode )
+	if( m_Pymacro && !m_Pymacro->IsHexMode() )
 	{
 		m_Pymacro->ReplaceWordFromCaretPos( g_SpellSuggestions[event.GetId() - menuSpellOption1] );
 	}

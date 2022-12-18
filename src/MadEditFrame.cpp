@@ -1414,7 +1414,7 @@ void OnEditSelectionChanged( MadEdit *madedit )
 		wxFileOffset col;
 		madedit->GetCaretPosition( line, subrow, col );
 
-		if( madedit->GetEditMode() != emHexMode )
+		if( !madedit->IsHexMode() )
 		{
 			++line;
 			++col;
@@ -1632,7 +1632,7 @@ void OnEditMouseRightUp( MadEdit * madedit )
 
 	if( editPopup == nullptr || pwin == nullptr ) return;
 
-	if( madedit && madedit->GetEditMode() != emHexMode && madedit->GetSpellCheckStatus() )
+	if( madedit && !madedit->IsHexMode() && madedit->GetSpellCheckStatus() )
 	{
 		wxString misspelledStr;
 		shared_ptr<wxSpellCheckEngineInterface> & spellChecker = madedit->GetSpellChecker();
@@ -5172,7 +5172,7 @@ void MadEditFrame::OnUpdateUI_MenuEditCopy( wxUpdateUIEvent& event )
 {
 	bool enabled = ( g_ActiveMadEdit && g_ActiveMadEdit->IsSelected() );
 
-	if( ( enabled ) && g_ActiveMadEdit->GetEditMode() == emColumnMode )
+	if( ( enabled ) && g_ActiveMadEdit->IsColumnMode() )
 	{ enabled = ( g_ActiveMadEdit->GetSelectionSize() > 0 ); }
 
 	event.Enable( enabled );
@@ -5187,7 +5187,7 @@ void MadEditFrame::OnUpdateUI_MenuEditCut( wxUpdateUIEvent& event )
 {
 	bool enabled = ( g_ActiveMadEdit && g_ActiveMadEdit->IsSelected() && !g_ActiveMadEdit->IsReadOnly() );
 
-	if( ( enabled ) && g_ActiveMadEdit->GetEditMode() == emColumnMode )
+	if( ( enabled ) && g_ActiveMadEdit->IsColumnMode() )
 	{ enabled = ( g_ActiveMadEdit->GetSelectionSize() > 0 ); }
 
 	event.Enable( enabled );
@@ -5214,7 +5214,7 @@ void MadEditFrame::OnUpdateUI_Menu_CheckSize( wxUpdateUIEvent& event )
 
 void MadEditFrame::OnUpdateUI_Menu_CheckTextFileSize( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit && !g_ActiveMadEdit->IsReadOnly() && g_ActiveMadEdit->GetEditMode() != emHexMode && g_ActiveMadEdit->GetFileSize() );
+	event.Enable( g_ActiveMadEdit && !g_ActiveMadEdit->IsReadOnly() && !g_ActiveMadEdit->IsHexMode() && g_ActiveMadEdit->GetFileSize() );
 }
 
 void MadEditFrame::OnUpdateUI_MenuEditStartEndSelction( wxUpdateUIEvent& event )
@@ -5286,32 +5286,32 @@ void MadEditFrame::OnUpdateUI_MenuFile_Readonly( wxUpdateUIEvent& event )
 //----------
 void MadEditFrame::OnUpdateUI_MenuEditCheckBookmark( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != nullptr && g_ActiveMadEdit->GetEditMode() != emHexMode && g_ActiveMadEdit->HasBookMark() );
+	event.Enable( g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsHexMode() && g_ActiveMadEdit->HasBookMark() );
 }
 void MadEditFrame::OnUpdateUI_MenuEditCheckBookmarkWritable( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsReadOnly() && g_ActiveMadEdit->GetEditMode() != emHexMode && g_ActiveMadEdit->HasBookMark() );
+	event.Enable( g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsReadOnly() && !g_ActiveMadEdit->IsHexMode() && g_ActiveMadEdit->HasBookMark() );
 }
 //----------
 
 void MadEditFrame::OnUpdateUI_Menu_CheckTextFile( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != nullptr && g_ActiveMadEdit->GetEditMode() != emHexMode );
+	event.Enable( g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsHexMode() );
 }
 
 void MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsReadOnly() && g_ActiveMadEdit->GetEditMode() != emHexMode );
+	event.Enable( g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsReadOnly() && !g_ActiveMadEdit->IsHexMode() );
 }
 
 void MadEditFrame::OnUpdateUI_Menu_CheckColumnMode( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != nullptr && g_ActiveMadEdit->GetEditMode() == emColumnMode && g_ActiveMadEdit->IsSelected() );
+	event.Enable( g_ActiveMadEdit != nullptr && g_ActiveMadEdit->IsColumnMode() && g_ActiveMadEdit->IsSelected() );
 }
 
 void MadEditFrame::OnUpdateUI_Menu_JoinLines( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsReadOnly() && g_ActiveMadEdit->GetEditMode() != emHexMode && g_ActiveMadEdit->IsSelected() );
+	event.Enable( g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsReadOnly() && !g_ActiveMadEdit->IsHexMode() && g_ActiveMadEdit->IsSelected() );
 }
 
 void MadEditFrame::OnUpdateUI_MenuEditCopyAsHexString( wxUpdateUIEvent& event )
@@ -5323,18 +5323,18 @@ void MadEditFrame::OnUpdateUI_MenuEditCopyAsHexString( wxUpdateUIEvent& event )
 void MadEditFrame::OnUpdateUI_MenuIndent( wxUpdateUIEvent& event )
 {
 	event.Enable( g_ActiveMadEdit && !g_ActiveMadEdit->IsReadOnly() &&
-				  g_ActiveMadEdit->GetEditMode() != emHexMode );
+				  !g_ActiveMadEdit->IsHexMode() );
 }
 
 void MadEditFrame::OnUpdateUI_MenuComment( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit && !g_ActiveMadEdit->IsReadOnly() && g_ActiveMadEdit->GetEditMode() != emHexMode
+	event.Enable( g_ActiveMadEdit && !g_ActiveMadEdit->IsReadOnly() && !g_ActiveMadEdit->IsHexMode()
 				  && g_ActiveMadEdit->HasLineComment() );
 }
 
 void MadEditFrame::OnUpdateUI_MenuSearchGoToBrace( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != nullptr && g_ActiveMadEdit->GetEditMode() != emHexMode && g_ActiveMadEdit->HasBracePair() );
+	event.Enable( g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsHexMode() && g_ActiveMadEdit->HasBracePair() );
 }
 
 void MadEditFrame::OnUpdateUI_MenuSearchGoBack( wxUpdateUIEvent& event )
@@ -5367,7 +5367,7 @@ void MadEditFrame::OnUpdateUI_MenuViewSyntax( wxUpdateUIEvent& event )
 {
 	if( g_ActiveMadEdit )
 	{
-		event.Enable( g_ActiveMadEdit->GetEditMode() != emHexMode );
+		event.Enable( !g_ActiveMadEdit->IsHexMode() );
 		event.SetText( wxString( _( "Syntax Type: " ) ) + wxGetTranslation(g_ActiveMadEdit->GetSyntaxTitle()) );
 	}
 	else
@@ -5420,7 +5420,7 @@ void MadEditFrame::OnUpdateUI_MenuViewTabColumn( wxUpdateUIEvent& event )
 {
 	if( g_ActiveMadEdit != nullptr )
 	{
-		event.Enable( g_ActiveMadEdit->GetEditMode() != emHexMode );
+		event.Enable( !g_ActiveMadEdit->IsHexMode() );
 		event.SetText( wxString( _( "Tab Column: " ) ) << g_ActiveMadEdit->GetTabColumns() );
 	}
 	else
@@ -5488,7 +5488,7 @@ void MadEditFrame::OnUpdateUI_MenuViewLineSpacing( wxUpdateUIEvent& event )
 {
 	if( g_ActiveMadEdit != nullptr )
 	{
-		event.Enable( g_ActiveMadEdit->GetEditMode() != emHexMode );
+		event.Enable( !g_ActiveMadEdit->IsHexMode() );
 		event.SetText( wxString( _( "Line Spacing: " ) ) << g_ActiveMadEdit->GetLineSpacing() << wxT( '%' ) );
 	}
 	else
@@ -5500,110 +5500,110 @@ void MadEditFrame::OnUpdateUI_MenuViewLineSpacing( wxUpdateUIEvent& event )
 
 void MadEditFrame::OnUpdateUI_MenuViewNoWrap( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != nullptr && g_ActiveMadEdit->GetEditMode() != emHexMode );
+	event.Enable( g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsHexMode() );
 	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetWordWrapMode() == wwmNoWrap );
 }
 void MadEditFrame::OnUpdateUI_MenuViewWrapByWindow( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != nullptr && g_ActiveMadEdit->GetEditMode() != emHexMode );
+	event.Enable( g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsHexMode() );
 	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetWordWrapMode() == wwmWrapByWindow );
 }
 void MadEditFrame::OnUpdateUI_MenuViewWrapByColumn( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != nullptr && g_ActiveMadEdit->GetEditMode() != emHexMode );
+	event.Enable( g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsHexMode() );
 	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetWordWrapMode() == wwmWrapByColumn );
 }
 void MadEditFrame::OnUpdateUI_MenuViewDisplayLineNumber( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != nullptr && g_ActiveMadEdit->GetEditMode() != emHexMode );
+	event.Enable( g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsHexMode() );
 	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetDisplayLineNumber() );
 }
 void MadEditFrame::OnUpdateUI_MenuViewDisplayBookmark( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != nullptr && g_ActiveMadEdit->GetEditMode() != emHexMode );
+	event.Enable( g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsHexMode() );
 	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetDisplayBookmark() );
 }
 void MadEditFrame::OnUpdateUI_MenuViewDisplay80ColHint( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != nullptr && g_ActiveMadEdit->GetEditMode() != emHexMode && g_ActiveMadEdit->GetFixedWidthMode());
+	event.Enable( g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsHexMode() && g_ActiveMadEdit->GetFixedWidthMode());
 	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetDisplay80ColHint() );
 }
 void MadEditFrame::OnUpdateUI_MenuViewShowEndOfLine( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != nullptr && g_ActiveMadEdit->GetEditMode() != emHexMode );
+	event.Enable( g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsHexMode() );
 	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetShowEndOfLine() );
 }
 void MadEditFrame::OnUpdateUI_MenuViewShowTabChar( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != nullptr && g_ActiveMadEdit->GetEditMode() != emHexMode );
+	event.Enable( g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsHexMode() );
 	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetShowTabChar() );
 }
 void MadEditFrame::OnUpdateUI_MenuViewShowSpaceChar( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != nullptr && g_ActiveMadEdit->GetEditMode() != emHexMode );
+	event.Enable( g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsHexMode() );
 	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetShowSpaceChar() );
 }
 void MadEditFrame::OnUpdateUI_MenuViewShowAllChars( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != nullptr && g_ActiveMadEdit->GetEditMode() != emHexMode );
+	event.Enable( g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsHexMode() );
 	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetShowSpaceChar() && g_ActiveMadEdit->GetShowTabChar()
 				 && g_ActiveMadEdit->GetShowEndOfLine() );
 }
 void MadEditFrame::OnUpdateUI_MenuViewRightToLeft( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != nullptr && g_ActiveMadEdit->GetEditMode() != emHexMode );
+	event.Enable( g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsHexMode() );
 	event.Check( g_ActiveMadEdit && ( g_ActiveMadEdit->GetLayoutDirection() == wxLayout_RightToLeft ) );
 }
 void MadEditFrame::OnUpdateUI_MenuViewMarkActiveLine( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != nullptr && g_ActiveMadEdit->GetEditMode() != emHexMode );
+	event.Enable( g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsHexMode() );
 	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetMarkActiveLine() );
 }
 void MadEditFrame::OnUpdateUI_MenuViewMarkBracePair( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != nullptr && g_ActiveMadEdit->GetEditMode() != emHexMode );
+	event.Enable( g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsHexMode() );
 	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetMarkBracePair() );
 }
 void MadEditFrame::OnUpdateUI_MenuViewSpellChecker( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != nullptr && g_ActiveMadEdit->GetEditMode() != emHexMode
+	event.Enable( g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsHexMode()
 				  && SpellCheckerManager::Instance().GetSelectedDictionaryNumber() != -1 );
 	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetSpellCheckStatus() );
 }
 void MadEditFrame::OnUpdateUI_MenuSpellIgnore( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != nullptr && g_ActiveMadEdit->GetEditMode() != emHexMode
+	event.Enable( g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsHexMode()
 				  && SpellCheckerManager::Instance().GetSelectedDictionaryNumber() != -1 );
 }
 
 void MadEditFrame::OnUpdateUI_MenuSpellRemoveFromDict( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != nullptr && g_ActiveMadEdit->GetEditMode() != emHexMode
+	event.Enable( g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsHexMode()
 				  && SpellCheckerManager::Instance().GetEnablePersonalDictionary() );
 }
 
 void MadEditFrame::OnUpdateUI_MenuSpellAdd2Dict( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != nullptr && g_ActiveMadEdit->GetEditMode() != emHexMode
+	event.Enable( g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsHexMode()
 				  && SpellCheckerManager::Instance().GetEnablePersonalDictionary() );
 }
 
 void MadEditFrame::OnUpdateUI_MenuViewTextMode( wxUpdateUIEvent& event )
 {
 	event.Enable( g_ActiveMadEdit != nullptr );
-	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() == emTextMode );
+	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->IsTextMode() );
 }
 
 void MadEditFrame::OnUpdateUI_MenuViewColumnMode( wxUpdateUIEvent& event )
 {
 	event.Enable( g_ActiveMadEdit != nullptr );
-	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() == emColumnMode );
+	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->IsColumnMode() );
 }
 
 void MadEditFrame::OnUpdateUI_MenuViewHexMode( wxUpdateUIEvent& event )
 {
 	event.Enable( g_ActiveMadEdit != nullptr && !IsMacroRecording() );
-	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() == emHexMode );
+	event.Check( g_ActiveMadEdit && g_ActiveMadEdit->IsHexMode() );
 }
 
 void MadEditFrame::OnUpdateUI_MenuViewToolbarsToggleAll( wxUpdateUIEvent& event )
@@ -5806,17 +5806,17 @@ void MadEditFrame::OnUpdateUI_MenuWindow_Window( wxUpdateUIEvent& event )
 
 void MadEditFrame::OnUpdateUI_MenuToolsStartRecMacro( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != nullptr && ( g_ActiveMadEdit->GetEditMode() != emHexMode ) && IsMacroStopped() );
+	event.Enable( g_ActiveMadEdit != nullptr && ( !g_ActiveMadEdit->IsHexMode() ) && IsMacroStopped() );
 }
 
 void MadEditFrame::OnUpdateUI_MenuToolsStopRecMacro( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != nullptr && ( g_ActiveMadEdit->GetEditMode() != emHexMode ) && IsMacroRecording() );
+	event.Enable( g_ActiveMadEdit != nullptr && ( !g_ActiveMadEdit->IsHexMode() ) && IsMacroRecording() );
 }
 
 void MadEditFrame::OnUpdateUI_MenuToolsPlayRecMacro( wxUpdateUIEvent& event )
 {
-	event.Enable( g_ActiveMadEdit != nullptr && ( g_ActiveMadEdit->GetEditMode() != emHexMode ) && IsMacroStopped() && HasRecordedScript() );
+	event.Enable( g_ActiveMadEdit != nullptr && ( !g_ActiveMadEdit->IsHexMode() ) && IsMacroStopped() && HasRecordedScript() );
 }
 
 void MadEditFrame::OnUpdateUI_MenuToolsSaveRecMacro( wxUpdateUIEvent& event )
@@ -6540,7 +6540,7 @@ void MadEditFrame::OnSearchClearAllBookmarks( wxCommandEvent& WXUNUSED(event) )
 
 void MadEditFrame::OnEditSortAscending( wxCommandEvent& WXUNUSED(event) )
 {
-	if( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() != emHexMode )
+	if( g_ActiveMadEdit && !g_ActiveMadEdit->IsHexMode() )
 	{
 		int begin, end;
 		g_ActiveMadEdit->GetSelectionLineId( begin, end );
@@ -6553,7 +6553,7 @@ void MadEditFrame::OnEditSortAscending( wxCommandEvent& WXUNUSED(event) )
 
 void MadEditFrame::OnEditSortDescending( wxCommandEvent& WXUNUSED(event) )
 {
-	if( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() != emHexMode )
+	if( g_ActiveMadEdit && !g_ActiveMadEdit->IsHexMode() )
 	{
 		int begin, end;
 		g_ActiveMadEdit->GetSelectionLineId( begin, end );
@@ -6566,7 +6566,7 @@ void MadEditFrame::OnEditSortDescending( wxCommandEvent& WXUNUSED(event) )
 
 void MadEditFrame::OnEditSortAscendingCase( wxCommandEvent& WXUNUSED(event) )
 {
-	if( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() != emHexMode )
+	if( g_ActiveMadEdit && !g_ActiveMadEdit->IsHexMode() )
 	{
 		int begin, end;
 		g_ActiveMadEdit->GetSelectionLineId( begin, end );
@@ -6579,7 +6579,7 @@ void MadEditFrame::OnEditSortAscendingCase( wxCommandEvent& WXUNUSED(event) )
 
 void MadEditFrame::OnEditSortDescendingCase( wxCommandEvent& WXUNUSED(event) )
 {
-	if( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() != emHexMode )
+	if( g_ActiveMadEdit && !g_ActiveMadEdit->IsHexMode() )
 	{
 		int begin, end;
 		g_ActiveMadEdit->GetSelectionLineId( begin, end );
@@ -6592,7 +6592,7 @@ void MadEditFrame::OnEditSortDescendingCase( wxCommandEvent& WXUNUSED(event) )
 
 void MadEditFrame::OnEditSortByOptions( wxCommandEvent& WXUNUSED(event) )
 {
-	if( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() != emHexMode )
+	if( g_ActiveMadEdit && !g_ActiveMadEdit->IsHexMode() )
 	{
 		wxString oldpath = m_Config->GetPath();
 		m_Config->SetPath( wxT( "/MadEdit" ) );
@@ -6624,7 +6624,7 @@ void MadEditFrame::OnEditSortByOptions( wxCommandEvent& WXUNUSED(event) )
 
 void MadEditFrame::OnEditSortOptions( wxCommandEvent& WXUNUSED(event) )
 {
-	if( g_ActiveMadEdit == nullptr || g_ActiveMadEdit->GetEditMode() == emHexMode )
+	if( g_ActiveMadEdit == nullptr || g_ActiveMadEdit->IsHexMode() )
 	{ return; }
 
 	MadSortDialog dialog( this );
@@ -6977,7 +6977,7 @@ void MadEditFrame::OnEditSpaceToTab( wxCommandEvent& WXUNUSED(event) )
 
 void MadEditFrame::OnEditTrimTrailingSpaces( wxCommandEvent& WXUNUSED(event) )
 {
-	if( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() != emHexMode )
+	if( g_ActiveMadEdit && !g_ActiveMadEdit->IsHexMode() )
 	{
 		g_ActiveMadEdit->TrimTrailingSpaces();
 
@@ -6988,7 +6988,7 @@ void MadEditFrame::OnEditTrimTrailingSpaces( wxCommandEvent& WXUNUSED(event) )
 
 void MadEditFrame::OnEditTrimLeadingSpaces( wxCommandEvent& WXUNUSED(event) )
 {
-	if( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() != emHexMode )
+	if( g_ActiveMadEdit && !g_ActiveMadEdit->IsHexMode() )
 	{
 		g_ActiveMadEdit->TrimLeadingSpaces();
 
@@ -6999,7 +6999,7 @@ void MadEditFrame::OnEditTrimLeadingSpaces( wxCommandEvent& WXUNUSED(event) )
 
 void MadEditFrame::OnEditDeleteEmptyLines( wxCommandEvent& WXUNUSED(event) )
 {
-	if( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() != emHexMode )
+	if( g_ActiveMadEdit && !g_ActiveMadEdit->IsHexMode() )
 	{
 		g_ActiveMadEdit->DeleteEmptyLines();
 
@@ -7010,7 +7010,7 @@ void MadEditFrame::OnEditDeleteEmptyLines( wxCommandEvent& WXUNUSED(event) )
 
 void MadEditFrame::OnEditDeleteEmptyLinesWithSpaces( wxCommandEvent& WXUNUSED(event) )
 {
-	if( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() != emHexMode )
+	if( g_ActiveMadEdit && !g_ActiveMadEdit->IsHexMode() )
 	{
 		g_ActiveMadEdit->DeleteEmptyLinesWithSpaces();
 
@@ -7021,7 +7021,7 @@ void MadEditFrame::OnEditDeleteEmptyLinesWithSpaces( wxCommandEvent& WXUNUSED(ev
 
 void MadEditFrame::OnEditJoinLines( wxCommandEvent& WXUNUSED(event) )
 {
-	if( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() != emHexMode )
+	if( g_ActiveMadEdit && !g_ActiveMadEdit->IsHexMode() )
 	{
 		g_ActiveMadEdit->JoinLines();
 
@@ -7032,7 +7032,7 @@ void MadEditFrame::OnEditJoinLines( wxCommandEvent& WXUNUSED(event) )
 
 void MadEditFrame::OnEditInsertNumbers( wxCommandEvent& WXUNUSED(event) )
 {
-	if( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() == emColumnMode )
+	if( g_ActiveMadEdit && g_ActiveMadEdit->IsColumnMode() )
 	{
 		// Hide Modaless Dialog
 		HideModalessDialogs();
@@ -7125,7 +7125,7 @@ void MadEditFrame::OnEditInsertNumbers( wxCommandEvent& WXUNUSED(event) )
 
 void MadEditFrame::OnEditColumnAlignLeft( wxCommandEvent& WXUNUSED(event) )
 {
-	if( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() != emHexMode )
+	if( g_ActiveMadEdit && !g_ActiveMadEdit->IsHexMode() )
 	{
 		g_ActiveMadEdit->ColumnAlignLeft();
 
@@ -7136,7 +7136,7 @@ void MadEditFrame::OnEditColumnAlignLeft( wxCommandEvent& WXUNUSED(event) )
 
 void MadEditFrame::OnEditColumnAlignRight( wxCommandEvent& WXUNUSED(event) )
 {
-	if( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() != emHexMode )
+	if( g_ActiveMadEdit && !g_ActiveMadEdit->IsHexMode() )
 	{
 		g_ActiveMadEdit->ColumnAlignRight();
 
@@ -7147,7 +7147,7 @@ void MadEditFrame::OnEditColumnAlignRight( wxCommandEvent& WXUNUSED(event) )
 
 void MadEditFrame::OnEditSpellCheck( wxCommandEvent& event )
 {
-	if( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() != emHexMode )
+	if( g_ActiveMadEdit && !g_ActiveMadEdit->IsHexMode() )
 	{
 		g_ActiveMadEdit->ReplaceWordFromCaretPos( g_SpellSuggestions[event.GetId() - menuSpellOption1] );
 	}
@@ -7155,7 +7155,7 @@ void MadEditFrame::OnEditSpellCheck( wxCommandEvent& event )
 
 void MadEditFrame::OnEditBookmarkCopy( wxCommandEvent& WXUNUSED(event) )
 {
-	if( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() != emHexMode )
+	if( g_ActiveMadEdit && !g_ActiveMadEdit->IsHexMode() )
 	{
 		g_ActiveMadEdit->CopyBookmarkedLines();
 	}
@@ -7163,7 +7163,7 @@ void MadEditFrame::OnEditBookmarkCopy( wxCommandEvent& WXUNUSED(event) )
 
 void MadEditFrame::OnEditBookmarkCut( wxCommandEvent& WXUNUSED(event) )
 {
-	if( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() != emHexMode )
+	if( g_ActiveMadEdit && !g_ActiveMadEdit->IsHexMode() )
 	{
 		g_ActiveMadEdit->CutDelBookmarkedLines( true );
 	}
@@ -7171,7 +7171,7 @@ void MadEditFrame::OnEditBookmarkCut( wxCommandEvent& WXUNUSED(event) )
 
 void MadEditFrame::OnEditBookmarkDel( wxCommandEvent& WXUNUSED(event) )
 {
-	if( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() != emHexMode )
+	if( g_ActiveMadEdit && !g_ActiveMadEdit->IsHexMode() )
 	{
 		g_ActiveMadEdit->CutDelBookmarkedLines();
 	}
@@ -7179,7 +7179,7 @@ void MadEditFrame::OnEditBookmarkDel( wxCommandEvent& WXUNUSED(event) )
 
 void MadEditFrame::OnEditBookmarkCopyUnmarked( wxCommandEvent& WXUNUSED(event) )
 {
-	if( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() != emHexMode )
+	if( g_ActiveMadEdit && !g_ActiveMadEdit->IsHexMode() )
 	{
 		g_ActiveMadEdit->CopyUnmarkedLines();
 	}
@@ -7187,7 +7187,7 @@ void MadEditFrame::OnEditBookmarkCopyUnmarked( wxCommandEvent& WXUNUSED(event) )
 
 void MadEditFrame::OnEditBookmarkCutUnmarked( wxCommandEvent& WXUNUSED(event) )
 {
-	if( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() != emHexMode )
+	if( g_ActiveMadEdit && !g_ActiveMadEdit->IsHexMode() )
 	{
 		g_ActiveMadEdit->CutUnmarkedLines();
 	}
@@ -7195,7 +7195,7 @@ void MadEditFrame::OnEditBookmarkCutUnmarked( wxCommandEvent& WXUNUSED(event) )
 
 void MadEditFrame::OnEditBookmarkDelUnmarked( wxCommandEvent& WXUNUSED(event) )
 {
-	if( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() != emHexMode )
+	if( g_ActiveMadEdit && !g_ActiveMadEdit->IsHexMode() )
 	{
 		g_ActiveMadEdit->DeleteUnmarkedLines();
 	}
@@ -7203,7 +7203,7 @@ void MadEditFrame::OnEditBookmarkDelUnmarked( wxCommandEvent& WXUNUSED(event) )
 
 void MadEditFrame::OnEditBookmarkReplace( wxCommandEvent& WXUNUSED(event) )
 {
-	if( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() != emHexMode )
+	if( g_ActiveMadEdit && !g_ActiveMadEdit->IsHexMode() )
 	{
 		g_ActiveMadEdit->ReplaceBookmarkedLines();
 	}
@@ -8272,7 +8272,7 @@ void MadEditFrame::OnViewSpellChecker( wxCommandEvent& event )
 
 void MadEditFrame::OnSpellCheckIgnore( wxCommandEvent& WXUNUSED(event) )
 {
-	if( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() != emHexMode )
+	if( g_ActiveMadEdit && !g_ActiveMadEdit->IsHexMode() )
 	{
 		wxString str;
 		shared_ptr<wxSpellCheckEngineInterface> & spellChecker = g_ActiveMadEdit->GetSpellChecker();
@@ -8284,7 +8284,7 @@ void MadEditFrame::OnSpellCheckIgnore( wxCommandEvent& WXUNUSED(event) )
 
 void MadEditFrame::OnSpellCheckRemoveFromDict( wxCommandEvent& WXUNUSED(event) )
 {
-	if( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() != emHexMode )
+	if( g_ActiveMadEdit && !g_ActiveMadEdit->IsHexMode() )
 	{
 		wxString str;
 		shared_ptr<wxSpellCheckEngineInterface> & spellChecker = g_ActiveMadEdit->GetSpellChecker();
@@ -8296,7 +8296,7 @@ void MadEditFrame::OnSpellCheckRemoveFromDict( wxCommandEvent& WXUNUSED(event) )
 
 void MadEditFrame::OnSpellAdd2Dict( wxCommandEvent& WXUNUSED(event) )
 {
-	if( g_ActiveMadEdit && g_ActiveMadEdit->GetEditMode() != emHexMode )
+	if( g_ActiveMadEdit && !g_ActiveMadEdit->IsHexMode() )
 	{
 		wxString str;
 		g_ActiveMadEdit->GetWordFromCaretPos( str );
@@ -8389,7 +8389,7 @@ void MadEditFrame::UpdateFontEncoding( )
 	{
 		m_Encodings->SetSelection(m_Encodings->FindString(g_ActiveMadEdit->GetEncodingName()));
 		m_Syntaxs->SetSelection(m_Syntaxs->FindString(wxGetTranslation(g_ActiveMadEdit->GetSyntaxTitle())));
-		m_Syntaxs->Enable(g_ActiveMadEdit->GetEditMode() != emHexMode);
+		m_Syntaxs->Enable(!g_ActiveMadEdit->IsHexMode());
 
 		const wxColour& colBg = g_ActiveMadEdit->GetTextBgColor();
 		const wxColour& colFt = g_ActiveMadEdit->GetTextFtColor();
@@ -9933,7 +9933,7 @@ void MadEditFrame::OnToolsMarkdown2Html( wxCommandEvent& WXUNUSED(event) )
 {
 	if( g_ActiveMadEdit != nullptr )
 	{ 
-		if( g_ActiveMadEdit->GetEditMode() == emHexMode ) // In case of OOM
+		if( g_ActiveMadEdit->IsHexMode() ) // In case of OOM
 		{
 			wxLogError( wxString( _( "This is not a text file:" ) ) + g_ActiveMadEdit->GetFileName() );
 			return;
@@ -9957,7 +9957,7 @@ void MadEditFrame::OnToolsHtml2PlainText( wxCommandEvent& WXUNUSED(event) )
 {
 	if( g_ActiveMadEdit != nullptr )
 	{ 
-		if( g_ActiveMadEdit->GetEditMode() == emHexMode ) // In case of OOM
+		if( g_ActiveMadEdit->IsHexMode() ) // In case of OOM
 		{
 			wxLogError( wxString( _( "This is not a text file:" ) ) + g_ActiveMadEdit->GetFileName() );
 			return;
@@ -10049,7 +10049,7 @@ static bool BuffersDiffer( const wxString &a, const wxString &b )
 void MadEditFrame::OnToolsAstyleFormat( wxCommandEvent& WXUNUSED(event) )
 {
 	if( g_ActiveMadEdit == nullptr ) { return; }
-	if( g_ActiveMadEdit->GetEditMode() == emHexMode ) // In case of OOM
+	if( g_ActiveMadEdit->IsHexMode() ) // In case of OOM
 	{
 		wxLogError( wxString( _( "This is not a text file:" ) ) + g_ActiveMadEdit->GetFileName() );
 		return;
@@ -10159,7 +10159,7 @@ void MadEditFrame::OnToolsXMLFormat( wxCommandEvent& WXUNUSED(event) )
 
 	if( g_ActiveMadEdit != nullptr )
 	{ 
-		if( g_ActiveMadEdit->GetEditMode() == emHexMode ) // In case of OOM
+		if( g_ActiveMadEdit->IsHexMode() ) // In case of OOM
 		{
 			wxLogError( wxString( _( "This is not a text file:" ) ) + g_ActiveMadEdit->GetFileName() );
 			return;
@@ -10204,7 +10204,7 @@ void MadEditFrame::OnToolsXMLFormat( wxCommandEvent& WXUNUSED(event) )
 void MadEditFrame::OnToolsJSONFormat( wxCommandEvent& WXUNUSED(event) )
 {
 	if( g_ActiveMadEdit == nullptr ) { return; }
-	if( g_ActiveMadEdit->GetEditMode() == emHexMode ) // In case of OOM
+	if( g_ActiveMadEdit->IsHexMode() ) // In case of OOM
 	{
 		wxLogError( wxString( _( "This is not a text file:" ) ) + g_ActiveMadEdit->GetFileName() );
 		return;

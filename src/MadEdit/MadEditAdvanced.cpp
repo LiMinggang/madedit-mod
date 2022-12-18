@@ -159,7 +159,7 @@ void MadEdit::ToggleBOM()
 		}
 	}
 
-	if( m_EditMode == emHexMode )
+	if( IsHexMode() )
 	{
 		m_RepaintAll = true;
 		Refresh( false );
@@ -509,7 +509,7 @@ void MadEdit::CopyRevertHex( wxString &delimiters )
 
 void MadEdit::IncreaseDecreaseIndent( bool incIndent )
 {
-	if( IsReadOnly() || m_EditMode == emHexMode )
+	if( IsReadOnly() || IsHexMode() )
 		return;
 
 	bool oldModified = m_Modified;
@@ -660,7 +660,7 @@ void MadEdit::IncreaseDecreaseIndent( bool incIndent )
 
 void MadEdit::CommentUncomment( bool comment )
 {
-	if( IsReadOnly() || m_EditMode == emHexMode || m_Syntax->m_SynAttr->m_LineComment.empty() )
+	if( IsReadOnly() || IsHexMode() || m_Syntax->m_SynAttr->m_LineComment.empty() )
 		return;
 
 	bool oldModified = m_Modified;
@@ -876,7 +876,7 @@ void MadEdit::ToUpperCase()
 		vector<ucs4_t> ucs;
 		TranslateText( text.c_str(), text.Len(), &ucs, true );
 
-		if( m_EditMode == emColumnMode )
+		if( IsColumnMode() )
 		{
 			int colcount = m_SelectionEnd->rowid - m_SelectionBegin->rowid + 1;
 			InsertColumnString( &ucs[0], ucs.size(), colcount, false, true );
@@ -924,7 +924,7 @@ void MadEdit::ToLowerCase()
 		vector<ucs4_t> ucs;
 		TranslateText( text.c_str(), text.Len(), &ucs, true );
 
-		if( m_EditMode == emColumnMode )
+		if( IsColumnMode() )
 		{
 			int colcount = m_SelectionEnd->rowid - m_SelectionBegin->rowid + 1;
 			InsertColumnString( &ucs[0], ucs.size(), colcount, false, true );
@@ -992,7 +992,7 @@ void MadEdit::InvertCase()
 		vector<ucs4_t> ucs;
 		TranslateText( text.c_str(), text.Len(), &ucs, true );
 
-		if( m_EditMode == emColumnMode )
+		if( IsColumnMode() )
 		{
 			int colcount = m_SelectionEnd->rowid - m_SelectionBegin->rowid + 1;
 			InsertColumnString( &ucs[0], ucs.size(), colcount, false, true );
@@ -1074,7 +1074,7 @@ void MadEdit::Capitalize()
 		vector<ucs4_t> ucs;
 		TranslateText( text.c_str(), text.Len(), &ucs, true );
 
-		if( m_EditMode == emColumnMode )
+		if( IsColumnMode() )
 		{
 			int colcount = m_SelectionEnd->rowid - m_SelectionBegin->rowid + 1;
 			InsertColumnString( &ucs[0], ucs.size(), colcount, false, true );
@@ -1456,7 +1456,7 @@ void MadEdit::ToHalfWidth( bool ascii, bool japanese, bool korean, bool other )
 		vector<ucs4_t> ucs;
 		TranslateText( text.c_str(), text.Len(), &ucs, true );
 
-		if( m_EditMode == emColumnMode )
+		if( IsColumnMode() )
 		{
 			int colcount = m_SelectionEnd->rowid - m_SelectionBegin->rowid + 1;
 			InsertColumnString( &ucs[0], ucs.size(), colcount, false, true );
@@ -1498,7 +1498,7 @@ void MadEdit::ToFullWidth( bool ascii, bool japanese, bool korean, bool other )
 		vector<ucs4_t> ucs;
 		TranslateText( text.c_str(), text.Len(), &ucs, true );
 
-		if( m_EditMode == emColumnMode )
+		if( IsColumnMode() )
 		{
 			int colcount = m_SelectionEnd->rowid - m_SelectionBegin->rowid + 1;
 			InsertColumnString( &ucs[0], ucs.size(), colcount, false, true );
@@ -1867,7 +1867,7 @@ void MadEdit::WordCount( bool selection, int &wordCount, int &charCount, int &sp
 
 void MadEdit::TrimTrailingSpaces()
 {
-	if( IsReadOnly() || m_EditMode == emHexMode )
+	if( IsReadOnly() || IsHexMode() )
 		return;
 
 	// use Regular Expressions to trim all trailing spaces
@@ -1876,7 +1876,7 @@ void MadEdit::TrimTrailingSpaces()
 
 void MadEdit::TrimLeadingSpaces()
 {
-	if( IsReadOnly() || m_EditMode == emHexMode )
+	if( IsReadOnly() || IsHexMode() )
 		return;
 
 	wxFileOffset rangeFrom = -1, rangeTo = -1;
@@ -1893,7 +1893,7 @@ void MadEdit::TrimLeadingSpaces()
 
 void MadEdit::DeleteEmptyLines()
 {
-	if( IsReadOnly() || m_EditMode == emHexMode )
+	if( IsReadOnly() || IsHexMode() )
 		return;
 
 	wxFileOffset rangeFrom = -1, rangeTo = -1;
@@ -1910,7 +1910,7 @@ void MadEdit::DeleteEmptyLines()
 
 void MadEdit::DeleteEmptyLinesWithSpaces()
 {
-	if( IsReadOnly() || m_EditMode == emHexMode )
+	if( IsReadOnly() || IsHexMode() )
 		return;
 
 	wxFileOffset rangeFrom = -1, rangeTo = -1;
@@ -1927,7 +1927,7 @@ void MadEdit::DeleteEmptyLinesWithSpaces()
 
 void MadEdit::JoinLines()
 {
-	if( IsReadOnly() || m_EditMode == emHexMode || !m_Selection )
+	if( IsReadOnly() || IsHexMode() || !m_Selection )
 		return;
 
 	wxFileOffset rangeFrom = -1, rangeTo = -1;
@@ -2267,7 +2267,7 @@ bool SortLineComp::s_numeric = false;
 
 void MadEdit::SortLines( MadSortFlags flags, int beginline, int endline )
 {
-	if( IsReadOnly() || m_EditMode == emHexMode )
+	if( IsReadOnly() || IsHexMode() )
 		return;
 
 	int maxline = int( m_Lines->m_LineCount ) - 1;
@@ -2474,7 +2474,7 @@ void MadEdit::SortLines( MadSortFlags flags, int beginline, int endline )
 		AppearCaret();
 		UpdateScrollBarPos();
 
-		if( m_EditMode == emHexMode )
+		if( IsHexMode() )
 		{
 			if( !m_CaretAtHexArea )
 			{
@@ -2505,7 +2505,7 @@ void MadEdit::SortLines( MadSortFlags flags, int beginline, int endline )
 
 void MadEdit::ConvertWordWrapToNewLine()
 {
-	if( IsReadOnly() || GetEditMode() == emHexMode || m_Lines->m_LineCount == m_Lines->m_RowCount )
+	if( IsReadOnly() || IsHexMode() || m_Lines->m_LineCount == m_Lines->m_RowCount )
 		return;
 
 	wxFileOffset begpos = 0, endpos = GetFileSize();
@@ -2600,7 +2600,7 @@ void MadEdit::ConvertWordWrapToNewLine()
 
 void MadEdit::ConvertNewLineToWordWrap()
 {
-	if( IsReadOnly() || GetEditMode() == emHexMode || !IsSelected() )
+	if( IsReadOnly() || IsHexMode() || !IsSelected() )
 		return;
 
 	wxFileOffset begpos = m_SelectionBegin->pos, endpos = m_SelectionEnd->pos;
@@ -2656,7 +2656,7 @@ void MadEdit::ConvertNewLineToWordWrap()
 
 void MadEdit::ConvertSpaceToTab()
 {
-	if( IsReadOnly() || GetEditMode() == emHexMode || !IsSelected() )
+	if( IsReadOnly() || IsHexMode() || !IsSelected() )
 		return;
 
 	vector < ucs4_t >  newtext;
@@ -2676,7 +2676,7 @@ void MadEdit::ConvertSpaceToTab()
 		int nowxpos = 0;
 		int xpos1, xpos2;
 
-		if( GetEditMode() == emColumnMode )
+		if( IsColumnMode() )
 		{
 			xpos1 = m_SelLeftXPos;
 			xpos2 = m_SelRightXPos;
@@ -2813,7 +2813,7 @@ void MadEdit::ConvertSpaceToTab()
 		}
 
 		// add newline
-		if( GetEditMode() == emColumnMode )
+		if( IsColumnMode() )
 		{
 #ifdef __WXMSW__
 			newtext.push_back( 0x0D );
@@ -2859,7 +2859,7 @@ void MadEdit::ConvertSpaceToTab()
 
 	if( modified )
 	{
-		if( GetEditMode() == emColumnMode )
+		if( IsColumnMode() )
 			InsertColumnString( &newtext[0], newtext.size(), RowCount, false, true );
 		else
 			InsertString( &newtext[0], newtext.size(), false, false, true );
@@ -2868,7 +2868,7 @@ void MadEdit::ConvertSpaceToTab()
 
 void MadEdit::ConvertTabToSpace()
 {
-	if( IsReadOnly() || GetEditMode() == emHexMode || !IsSelected() )
+	if( IsReadOnly() || IsHexMode() || !IsSelected() )
 		return;
 
 	vector < ucs4_t >  newtext;
@@ -2888,7 +2888,7 @@ void MadEdit::ConvertTabToSpace()
 		int nowxpos = 0;
 		int xpos1, xpos2;
 
-		if( GetEditMode() == emColumnMode )
+		if( IsColumnMode() )
 		{
 			xpos1 = m_SelLeftXPos;
 			xpos2 = m_SelRightXPos;
@@ -2998,7 +2998,7 @@ void MadEdit::ConvertTabToSpace()
 		}
 
 		// add newline
-		if( GetEditMode() == emColumnMode )
+		if( IsColumnMode() )
 		{
 #ifdef __WXMSW__
 			newtext.push_back( 0x0D );
@@ -3044,7 +3044,7 @@ void MadEdit::ConvertTabToSpace()
 
 	if( modified )
 	{
-		if( GetEditMode() == emColumnMode )
+		if( IsColumnMode() )
 			InsertColumnString( &newtext[0], newtext.size(), RowCount, false, true );
 		else
 			InsertString( &newtext[0], newtext.size(), false, false, true );
@@ -3053,12 +3053,12 @@ void MadEdit::ConvertTabToSpace()
 
 void MadEdit::ColumnAlignLeft()
 {
-	if( IsReadOnly() || m_EditMode == emHexMode )
+	if( IsReadOnly() || IsHexMode() )
 		return;
 
 	MadLineIterator lit;
 
-	if( ( m_EditMode == emColumnMode ) && ( m_Selection && m_SelectionBegin->xpos && m_SelectionBegin->lineid != m_SelectionEnd->lineid ) )
+	if( ( IsColumnMode() ) && ( m_Selection && m_SelectionBegin->xpos && m_SelectionBegin->lineid != m_SelectionEnd->lineid ) )
 	{
 		MadUndo *undo = nullptr;
 		MadLineIterator lastlit, firstlit;
@@ -3242,7 +3242,7 @@ void MadEdit::ColumnAlignLeft()
 
 void MadEdit::ColumnAlignRight()
 {
-	if( IsReadOnly() || ( m_EditMode != emColumnMode ) )
+	if( IsReadOnly() || ( !IsColumnMode() ) )
 		return;
 
 	if( m_Selection && m_SelectionBegin->xpos /*&& m_SelectionBegin->lineid!=m_SelectionEnd->lineid*/ )
@@ -3491,7 +3491,7 @@ void MadEdit::InsertIncrementalNumber( int initial, int step, int total, MadNumb
 
 	if( m_Selection )
 	{
-		if( m_EditMode == emColumnMode )
+		if( IsColumnMode() )
 		{
 			colcount = m_SelectionEnd->rowid - m_SelectionBegin->rowid + 1;
 

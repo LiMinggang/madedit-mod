@@ -397,7 +397,7 @@ void EditInsertDateTime()
 void EditSortAscending()
 {
 	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && g_CurrentMadEdit->GetEditMode() != emHexMode )
+	if( g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode() )
 	{
 		int begin, end;
 		g_CurrentMadEdit->GetSelectionLineId( begin, end );
@@ -410,7 +410,7 @@ void EditSortAscending()
 void EditSortDescending()
 {
 	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && g_CurrentMadEdit->GetEditMode() != emHexMode )
+	if( g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode() )
 	{
 		int begin, end;
 		g_CurrentMadEdit->GetSelectionLineId( begin, end );
@@ -423,7 +423,7 @@ void EditSortDescending()
 void EditSortAscendingCase()
 {
 	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && g_CurrentMadEdit->GetEditMode() != emHexMode )
+	if( g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode() )
 	{
 		int begin, end;
 		g_CurrentMadEdit->GetSelectionLineId( begin, end );
@@ -436,7 +436,7 @@ void EditSortAscendingCase()
 void EditSortDescendingCase()
 {
 	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && g_CurrentMadEdit->GetEditMode() != emHexMode )
+	if( g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode() )
 	{
 		int begin, end;
 		g_CurrentMadEdit->GetSelectionLineId( begin, end );
@@ -449,7 +449,7 @@ void EditSortDescendingCase()
 void EditSortByOptions()
 {
 	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && g_CurrentMadEdit->GetEditMode() != emHexMode )
+	if( g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode() )
 	{
 		wxConfigBase *m_Config = wxConfigBase::Get(false);
 		wxString oldpath = m_Config->GetPath();
@@ -476,7 +476,7 @@ void EditSortByOptions()
 void EditSortOptions(wxWindow* parent)
 {
 	if( g_CurrentMadEdit == nullptr || g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit->GetEditMode() == emHexMode )
+	if( g_CurrentMadEdit->IsHexMode() )
 	{
 		g_CurrentMadEdit = nullptr;
 		return;
@@ -808,7 +808,7 @@ void EditSpaceToTab()
 void EditTrimTrailingSpaces()
 {
 	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && g_CurrentMadEdit->GetEditMode() != emHexMode )
+	if( g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode() )
 	{
 		g_CurrentMadEdit->TrimTrailingSpaces();
 	}
@@ -819,7 +819,7 @@ void EditTrimTrailingSpaces()
 void EditTrimLeadingSpaces()
 {
 	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && g_CurrentMadEdit->GetEditMode() != emHexMode )
+	if( g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode() )
 	{
 		g_CurrentMadEdit->TrimLeadingSpaces();
 	}
@@ -830,7 +830,7 @@ void EditTrimLeadingSpaces()
 void EditDeleteEmptyLines()
 {
 	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && g_CurrentMadEdit->GetEditMode() != emHexMode )
+	if( g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode() )
 	{
 		g_CurrentMadEdit->DeleteEmptyLines();
 	}
@@ -841,7 +841,7 @@ void EditDeleteEmptyLines()
 void EditDeleteEmptyLinesWithSpaces()
 {
 	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && g_CurrentMadEdit->GetEditMode() != emHexMode )
+	if( g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode() )
 	{
 		g_CurrentMadEdit->DeleteEmptyLinesWithSpaces();
 	}
@@ -852,7 +852,7 @@ void EditDeleteEmptyLinesWithSpaces()
 void EditJoinLines()
 {
 	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && g_CurrentMadEdit->GetEditMode() != emHexMode )
+	if( g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode() )
 	{
 		g_CurrentMadEdit->JoinLines();
 	}
@@ -863,7 +863,7 @@ void EditJoinLines()
 void EditInsertNumbers(wxWindow* parent)
 {
 	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && g_CurrentMadEdit->GetEditMode() == emColumnMode )
+	if( g_CurrentMadEdit && g_CurrentMadEdit->IsColumnMode() )
 	{
 		// Hide Modaless Dialog
 		//HideModalessDialogs();
@@ -947,7 +947,7 @@ void EditInsertNumbers(wxWindow* parent)
 void EditColumnAlignLeft()
 {
 	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && g_CurrentMadEdit->GetEditMode() != emHexMode )
+	if( g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode() )
 	{
 		g_CurrentMadEdit->ColumnAlignLeft();
 	}
@@ -958,7 +958,7 @@ void EditColumnAlignLeft()
 void EditColumnAlignRight()
 {
 	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && g_CurrentMadEdit->GetEditMode() != emHexMode )
+	if( g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode() )
 	{
 		g_CurrentMadEdit->ColumnAlignRight();
 	}
@@ -969,7 +969,7 @@ void EditColumnAlignRight()
 void EditSpellCheck( wxCommandEvent& event )
 {
 	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && g_CurrentMadEdit->GetEditMode() != emHexMode )
+	if( g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode() )
 	{
 		g_CurrentMadEdit->ReplaceWordFromCaretPos( g_SpellSuggestions[event.GetId() - menuSpellOption1] );
 	}

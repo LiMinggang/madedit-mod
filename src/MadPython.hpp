@@ -3027,7 +3027,7 @@ namespace mad_python {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
-			if( g_MainFrame && ( madedit ) && ( !madedit->IsReadOnly() ) && (madedit->GetEditMode() != emHexMode) ) {
+			if( g_MainFrame && ( madedit ) && ( !madedit->IsReadOnly() ) && (!madedit->IsHexMode()) ) {
 				wxCommandEvent event;
 				g_MainFrame->OnToolsAstyleFormat( event );
 			}
@@ -3037,7 +3037,7 @@ namespace mad_python {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
-			if( g_MainFrame && ( madedit ) && ( !madedit->IsReadOnly() ) && (madedit->GetEditMode() != emHexMode) ) {
+			if( g_MainFrame && ( madedit ) && ( !madedit->IsReadOnly() ) && (!madedit->IsHexMode()) ) {
 				wxCommandEvent event;
 				g_MainFrame->OnToolsXMLFormat( event );
 			}
@@ -3047,7 +3047,7 @@ namespace mad_python {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
-			if( g_MainFrame && ( madedit ) && ( !madedit->IsReadOnly() ) && (madedit->GetEditMode() != emHexMode) ) {
+			if( g_MainFrame && ( madedit ) && ( !madedit->IsReadOnly() ) && (!madedit->IsHexMode()) ) {
 				wxCommandEvent event;
 				g_MainFrame->OnToolsJSONFormat( event );
 			}
@@ -3057,7 +3057,7 @@ namespace mad_python {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
-			if( g_MainFrame && ( madedit ) && ( !madedit->IsReadOnly() ) && (madedit->GetEditMode() != emHexMode) ) {
+			if( g_MainFrame && ( madedit ) && ( !madedit->IsReadOnly() ) && (!madedit->IsHexMode()) ) {
 				wxCommandEvent event;
 				g_MainFrame->OnToolsMarkdown2Html( event );
 			}
@@ -3067,7 +3067,7 @@ namespace mad_python {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if(madedit == nullptr)
 				madedit = g_ActiveMadEdit;
-			if( g_MainFrame && ( madedit ) && ( !madedit->IsReadOnly() ) && (madedit->GetEditMode() != emHexMode) ) {
+			if( g_MainFrame && ( madedit ) && ( !madedit->IsReadOnly() ) && (!madedit->IsHexMode()) ) {
 				wxCommandEvent event;
 				g_MainFrame->OnToolsHtml2PlainText( event );
 			}

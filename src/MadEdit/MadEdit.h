@@ -712,7 +712,7 @@ public: // basic functions
 	}
 
 	void SetFont( const wxString &name, int size ) {
-		if( m_EditMode == emHexMode ) {
+		if( IsHexMode() ) {
 			SetHexFont( name, size, false );
 		}
 		else {
@@ -724,7 +724,7 @@ public: // basic functions
 	}
 
 	wxFont GetFont() {
-		if( m_EditMode == emHexMode ) {
+		if( IsHexMode() ) {
 			return *m_HexFont;
 		}
 		else {
@@ -733,7 +733,7 @@ public: // basic functions
 	}
 
 	void GetFont( wxString &name, int &size ) {
-		if( m_EditMode == emHexMode ) {
+		if( IsHexMode() ) {
 			GetHexFont( name, size );
 		}
 		else {
@@ -898,6 +898,9 @@ public: // basic functions
 		return m_InsertNewLineType;
 	}
 
+	bool IsHexMode() { return m_EditMode == emHexMode; }
+	bool IsTextMode() { return m_EditMode == emTextMode; }
+	bool IsColumnMode() { return m_EditMode == emColumnMode; }
 	bool IsModified() { return m_Modified; }
 	void MarkModified() { m_Modified = true; }
 	time_t GetModificationTime() { return m_ModificationTime; }

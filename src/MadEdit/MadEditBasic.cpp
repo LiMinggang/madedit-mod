@@ -188,7 +188,7 @@ void MadEdit::ApplySyntaxAttributes( MadSyntax *syn, bool matchTitle )
 	{
 		m_Syntax->AssignAttributes( syn );
 
-		if( m_EditMode == emHexMode && m_HexDigitBitmap )
+		if( IsHexMode() && m_HexDigitBitmap )
 		{
 			delete m_HexDigitBitmap;
 			m_HexDigitBitmap = nullptr;
@@ -277,7 +277,7 @@ void MadEdit::SetTextFont( const wxString &name, int size, bool forceReset )
 			m_Config->SetPath( oldpath );
 		}
 
-		if( m_EditMode == emHexMode )
+		if( IsHexMode() )
 		{
 			m_DoRecountLineWidth = true;
 		}
@@ -506,7 +506,7 @@ void MadEdit::SetHexFont( const wxString &name, int size, bool forceReset )
 			m_HexDigitBitmap = nullptr;
 		}
 
-		if( m_EditMode == emHexMode )
+		if( IsHexMode() )
 		{
 			MadEditSuperClass::SetFont( *m_HexFont );
 			m_HexFontHeight = GetCharHeight();
@@ -590,7 +590,7 @@ void MadEdit::SetLineSpacing( int percent )
 			m_Config->SetPath( oldpath );
 		}
 
-		if( m_EditMode != emHexMode )
+		if( !IsHexMode() )
 		{
 			m_RepaintAll = true;
 			UpdateAppearance();
@@ -692,7 +692,7 @@ void MadEdit::SetEditMode( MadEditMode mode )
 		switch( mode )
 		{
 		case emTextMode:
-			if( m_EditMode == emColumnMode )
+			if( IsColumnMode() )
 			{
 				if( m_CaretPos.extraspaces )
 				{
@@ -740,7 +740,7 @@ void MadEdit::SetEditMode( MadEditMode mode )
 			break;
 
 		case emColumnMode:
-			if( m_EditMode == emTextMode )
+			if( IsTextMode() )
 			{
 				UpdateScrollBarPos();//update m_MaxColumnModeWidth;
 
@@ -922,7 +922,7 @@ void MadEdit::SetWordWrapMode( MadWordWrapMode mode )
 			m_Config->SetPath( oldpath );
 		}
 
-		if( m_EditMode != emHexMode )
+		if( !IsHexMode() )
 		{
 			if( mode == wwmWrapByWindow )
 				m_DrawingXPos = 0;
@@ -956,7 +956,7 @@ void MadEdit::SetDisplayLineNumber( bool value )
 			m_Config->SetPath( oldpath );
 		}
 
-		if( m_EditMode != emHexMode && m_WordWrapMode != wwmNoWrap )
+		if( !IsHexMode() && m_WordWrapMode != wwmNoWrap )
 		{
 			if( m_WordWrapMode == wwmWrapByWindow )
 				m_DrawingXPos = 0;
@@ -995,7 +995,7 @@ void MadEdit::SetDisplayBookmark( bool value )
 			m_Config->SetPath( oldpath );
 		}
 
-		if( m_EditMode != emHexMode && m_WordWrapMode != wwmNoWrap )
+		if( !IsHexMode() && m_WordWrapMode != wwmNoWrap )
 		{
 			if( m_WordWrapMode == wwmWrapByWindow )
 				m_DrawingXPos = 0;
@@ -1133,7 +1133,7 @@ void MadEdit::SetMaxColumns( long cols )
 
 		if( m_WordWrapMode == wwmWrapByColumn )
 		{
-			if( m_EditMode != emHexMode )
+			if( !IsHexMode() )
 			{
 				//UpdateAppearance();
 				RecountLineWidth( true );
@@ -1172,7 +1172,7 @@ void MadEdit::GetCaretPosition( int &line, int &subrow, wxFileOffset &column )
 	line = m_CaretPos.lineid;
 	subrow = m_CaretPos.subrowid;
 
-	if( m_EditMode == emHexMode )
+	if( IsHexMode() )
 	{
 		column = m_CaretPos.linepos;
 	}
@@ -1197,7 +1197,7 @@ wxFileOffset MadEdit::GetSelectionSize()
 {
 	if( !m_Selection ) return 0;
 
-	if( m_EditMode == emColumnMode )
+	if( IsColumnMode() )
 	{
 		return GetColumnSelection( nullptr );
 	}
@@ -1281,7 +1281,7 @@ void MadEdit::GetSelText( wxString &ws )
 	if( !m_Selection )
 		return;
 
-	if( m_EditMode == emColumnMode )
+	if( IsColumnMode() )
 	{
 		GetColumnSelection( &ws );
 	}
@@ -1431,7 +1431,7 @@ void MadEdit::SetText( const wxString &ws )
 		AppearCaret();
 		UpdateScrollBarPos();
 
-		if( m_EditMode == emHexMode )
+		if( IsHexMode() )
 		{
 			if( !m_CaretAtHexArea )
 			{
@@ -1555,7 +1555,7 @@ int MadEdit::GetLineByPos( const wxFileOffset &pos )
 
 void MadEdit::HighlightWords()
 {
-	if( m_EditMode == emColumnMode && m_CaretPos.extraspaces )
+	if( IsColumnMode() && m_CaretPos.extraspaces )
 		return;
 
 	wxFileOffset startpos, endpos;
@@ -1702,7 +1702,7 @@ void MadEdit::SelectAll()
 			m_SelFirstRow = 0;
 			m_SelLastRow = int( m_Lines->m_RowCount - 1 );
 
-			if( m_EditMode == emColumnMode )
+			if( IsColumnMode() )
 			{
 				if( m_SelectionPos1.xpos < m_SelectionPos2.xpos )
 				{
@@ -1774,7 +1774,7 @@ void MadEdit::CopyToClipboard()
 {
 	if( !m_Selection ) return;
 
-	if( m_EditMode == emColumnMode )
+	if( IsColumnMode() )
 	{
 		wxString ws;
 		GetColumnSelection( &ws );
@@ -1785,7 +1785,7 @@ void MadEdit::CopyToClipboard()
 		}
 	}
 	else
-		if( m_EditMode == emTextMode || !m_CaretAtHexArea )
+		if( IsTextMode() || !m_CaretAtHexArea )
 		{
 			wxString ws;
 			MadUCQueue ucqueue;
@@ -1879,7 +1879,7 @@ void MadEdit::PasteFromClipboard()
 	if( IsReadOnly() )
 		return;
 
-	if( m_EditMode == emColumnMode )
+	if( IsColumnMode() )
 	{
 		vector < ucs4_t > ucs;
 		int lines = GetColumnDataFromClipboard( &ucs );
@@ -1888,7 +1888,7 @@ void MadEdit::PasteFromClipboard()
 			InsertColumnString( &ucs[0], ucs.size(), lines, false, false );
 	}
 	else
-		if( m_EditMode == emHexMode && m_CaretAtHexArea )
+		if( IsHexMode() && m_CaretAtHexArea )
 		{
 			vector < char >cs;
 			GetHexDataFromClipboard( &cs );
@@ -1898,7 +1898,7 @@ void MadEdit::PasteFromClipboard()
 				InsertHexData( ( wxByte* )&cs[0], cs.size() );
 			}
 		}
-		else //if(m_EditMode == emTextMode || !m_CaretAtHexArea)
+		else //if(IsTextMode() || !m_CaretAtHexArea)
 		{
 			vector < ucs4_t > ucs;
 			GetTextFromClipboard( &ucs );
@@ -1919,7 +1919,7 @@ void MadEdit::DndBegDrag()
 	if( !m_Selection ) return;
 
 	//m_DndData.Empty();
-	if( m_EditMode == emColumnMode )
+	if( IsColumnMode() )
 	{
 		GetColumnSelection( &m_DndData );
 
@@ -1929,7 +1929,7 @@ void MadEdit::DndBegDrag()
 		}
 	}
 	else
-		if( m_EditMode == emTextMode || !m_CaretAtHexArea )
+		if( IsTextMode() || !m_CaretAtHexArea )
 		{
 			MadUCQueue ucqueue;
 			MadLines::NextUCharFuncPtr NextUChar = m_Lines->NextUChar;
@@ -2018,7 +2018,7 @@ void MadEdit::DndDrop()
 	if( IsReadOnly() )
 		return;
 
-	if( m_EditMode == emColumnMode )
+	if( IsColumnMode() )
 	{
 		vector < ucs4_t > ucs;
 		TranslateText( m_DndData.c_str(), m_DndData.Len(), &ucs, false );
@@ -2027,7 +2027,7 @@ void MadEdit::DndDrop()
 			InsertColumnString( &( *ucs.begin() ), ucs.size(), m_DndLines, false, false );
 	}
 	else
-		if( m_EditMode == emHexMode && m_CaretAtHexArea )
+		if( IsHexMode() && m_CaretAtHexArea )
 		{
 #if 0
 			vector < char >cs;
@@ -2040,7 +2040,7 @@ void MadEdit::DndDrop()
 
 #endif
 		}
-		else //if(m_EditMode == emTextMode || !m_CaretAtHexArea)
+		else //if(IsTextMode() || !m_CaretAtHexArea)
 		{
 			vector < ucs4_t > ucs;
 			TranslateText( m_DndData.c_str(), m_DndData.Len(), &ucs, false );
@@ -2182,7 +2182,7 @@ void MadEdit::Undo()
 		AppearCaret();
 		UpdateScrollBarPos();
 
-		if( m_EditMode == emHexMode )
+		if( IsHexMode() )
 		{
 			if( !m_CaretAtHexArea )
 			{
@@ -2317,7 +2317,7 @@ void MadEdit::Redo()
 		AppearCaret();
 		UpdateScrollBarPos();
 
-		if( m_EditMode == emHexMode )
+		if( IsHexMode() )
 		{
 			if( !m_CaretAtHexArea )
 			{
@@ -2380,7 +2380,7 @@ void MadEdit::GoToLine( int line )
 	m_UpdateValidPos = 0;
 	UpdateCaret( m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos );
 
-	if( m_EditMode == emHexMode )
+	if( IsHexMode() )
 	{
 		AppearHexRow( m_CaretPos.pos );
 		m_CaretAtHalfByte = false;
@@ -2421,7 +2421,7 @@ void MadEdit::SetCaretPosition( wxFileOffset pos, wxFileOffset selbeg, wxFileOff
 	UpdateScrollBarPos();
 	m_LastCaretXPos = m_CaretPos.xpos;
 
-	if( m_EditMode == emHexMode )
+	if( IsHexMode() )
 	{
 		if( !m_CaretAtHexArea )
 		{
@@ -2528,7 +2528,7 @@ bool MadEdit::LoadFromFile( const wxString &filename, const wxString &encoding, 
 	m_DoRecountLineWidth = false;
 	m_HasBackup = false;
 
-	if( m_EditMode == emHexMode )
+	if( IsHexMode() )
 	{
 	}
 	else
@@ -2848,7 +2848,7 @@ void MadEdit::RestorePosition( wxFileOffset pos, int toprow )
 	UpdateScrollBarPos();
 	m_LastCaretXPos = m_CaretPos.xpos;
 
-	if( m_EditMode == emHexMode )
+	if( IsHexMode() )
 	{
 		if( !m_CaretAtHexArea )
 		{
@@ -3489,7 +3489,7 @@ MadReplaceResult MadEdit::ReplaceTextNoDoubleCheck( const wxString &expr, const 
 		bpos.iter = m_Lines->m_LineList.begin();
 		bpos.pos = bpos.iter->m_RowIndices[0].m_Start;
 
-		if( m_CaretPos.pos < bpos.pos || m_EditMode == emHexMode )
+		if( m_CaretPos.pos < bpos.pos || IsHexMode() )
 		{
 			bpos.pos = 0;
 		}
@@ -3628,7 +3628,7 @@ int MadEdit::ReplaceTextAll( const wxString &expr, const wxString &fmt,
 		bpos.iter = m_Lines->m_LineList.begin();
 		bpos.pos = bpos.iter->m_RowIndices[0].m_Start;
 
-		if( m_CaretPos.pos < bpos.pos || m_EditMode == emHexMode )
+		if( m_CaretPos.pos < bpos.pos || IsHexMode() )
 		{
 			bpos.pos = 0;
 		}
@@ -3918,7 +3918,7 @@ int MadEdit::FindTextAll( const wxString &expr,
 		bpos.iter = m_Lines->m_LineList.begin();
 		bpos.pos = bpos.iter->m_RowIndices[0].m_Start;
 
-		if( m_CaretPos.pos < bpos.pos || m_EditMode == emHexMode )
+		if( m_CaretPos.pos < bpos.pos || IsHexMode() )
 		{
 			bpos.pos = 0;
 		}
@@ -4085,7 +4085,7 @@ void MadEdit::BeginPrint( const wxRect &printRect )
 	m_PrintRect = printRect;
 
 	// calc page count
-	if( m_EditMode != emHexMode ) // Print Text
+	if( !IsHexMode() ) // Print Text
 	{
 		m_Printing = -1;
 		m_ClientWidth = m_PrintRect.width + m_RightMarginWidth;
