@@ -1,0 +1,786 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header files\MadEdit">
+      <UniqueIdentifier>{36abdca5-57fc-4798-8376-9c95dcf1a8fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\MadEdit">
+      <UniqueIdentifier>{dd55226b-2ad6-45ae-be84-a5c81b4e7e8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\charset-detector">
+      <UniqueIdentifier>{fdcc1d08-3810-4380-85ec-cdbfa59c61ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\charset-detector">
+      <UniqueIdentifier>{a9504282-edb0-4294-bc4b-28e4e850b62c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\SpellChecker">
+      <UniqueIdentifier>{5f0e3579-ebac-49d7-9215-f04bcba14878}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\Markdown">
+      <UniqueIdentifier>{854d836e-f59d-4a9a-9850-fe95492eafb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\Astyle">
+      <UniqueIdentifier>{2f2d5553-279c-4b1a-907b-b0414e85ef76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\MadEdit\ExtEncodings">
+      <UniqueIdentifier>{2f54f988-e633-4484-85cc-3660f7bd1ce1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\charset-detector\LangModels">
+      <UniqueIdentifier>{6e32b77f-3ecb-47d9-8a2c-051192054210}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Astyle">
+      <UniqueIdentifier>{17c00da0-040e-4bfc-9d5e-06e6043a2925}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\MarkDown">
+      <UniqueIdentifier>{e2f38beb-21a6-4b1e-b70c-140f1d87681c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\SpellChecker">
+      <UniqueIdentifier>{28fad63d-7a8a-4941-b866-42d854384d4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\jsonformtter">
+      <UniqueIdentifier>{5adf3d39-64cb-439e-b7d8-7eb1562ae074}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\jsonformatter">
+      <UniqueIdentifier>{7520c39c-fc3d-4603-9db5-84e89b8a0b29}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\MadAboutDialog.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadCommand.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadConvEncDialog.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEditApp.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEditFrame.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadFileAssociationDialog.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadFindInFilesDialog.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadHighlightingDialog.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadOptionsDialog.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadPrintout.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadSortDialog.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadUtils.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadWordCountDialog.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\caret_new.h">
+      <Filter>Header files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\clipbrd_gtk.h">
+      <Filter>Header files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\MadDeque.hpp">
+      <Filter>Header files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\MadEdit.h">
+      <Filter>Header files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\MadEditCommand.h">
+      <Filter>Header files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\MadEditPv.h">
+      <Filter>Header files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\MadEncoding.h">
+      <Filter>Header files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\MadLines.h">
+      <Filter>Header files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\MadSyntax.h">
+      <Filter>Header files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\MadUndo.h">
+      <Filter>Header files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\TradSimp.h">
+      <Filter>Header files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ucs4_t.h">
+      <Filter>Header files\MadEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\CharDistribution.h">
+      <Filter>Header files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\JpCntx.h">
+      <Filter>Header files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsBig5Prober.h">
+      <Filter>Header files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsCharSetProber.h">
+      <Filter>Header files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsCodingStateMachine.h">
+      <Filter>Header files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nscore.h">
+      <Filter>Header files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsEscCharsetProber.h">
+      <Filter>Header files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsEUCJPProber.h">
+      <Filter>Header files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsEUCKRProber.h">
+      <Filter>Header files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsEUCTWProber.h">
+      <Filter>Header files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsGB2312Prober.h">
+      <Filter>Header files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsHebrewProber.h">
+      <Filter>Header files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsLatin1Prober.h">
+      <Filter>Header files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsMBCSGroupProber.h">
+      <Filter>Header files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsPkgInt.h">
+      <Filter>Header files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsSBCharSetProber.h">
+      <Filter>Header files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsSBCSGroupProber.h">
+      <Filter>Header files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsSJISProber.h">
+      <Filter>Header files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsUniversalDetector.h">
+      <Filter>Header files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\nsUTF8Prober.h">
+      <Filter>Header files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\prmem.h">
+      <Filter>Header files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadPurgeHistoryDialog.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadMacroDlg.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadNumberDlg.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadRecentList.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadSearchReplaceDialog.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadPython.hpp">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadWinListDialog.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\checkedlistctrl.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadSaveQueryDialog.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadFileHistoryDialog.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ascii.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\converters.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\cp936ext.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gb2312.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gb18030.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gb18030ext.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gb18030uni.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gbk.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gbkext_inv.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gbkext1.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gbkext2.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\charset-detector\src\uchardet.h">
+      <Filter>Header files\charset-detector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\astyle\asstreamiterator.h">
+      <Filter>Header files\Astyle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\astyle\astylepredefinedstyles.h">
+      <Filter>Header files\Astyle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\astyle\formattersettings.h">
+      <Filter>Header files\Astyle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\astyle\astyle\ASLocalizer.h">
+      <Filter>Header files\Astyle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\astyle\astyle\astyle.h">
+      <Filter>Header files\Astyle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\markdown\markdown.h">
+      <Filter>Header files\MarkDown</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\markdown\markdown-tokens.h">
+      <Filter>Header files\MarkDown</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\spellchecker\HunspellInterface.h">
+      <Filter>Header files\SpellChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\spellchecker\PersonalDictionary.h">
+      <Filter>Header files\SpellChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\spellchecker\SpellCheckEngineInterface.h">
+      <Filter>Header files\SpellChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\spellchecker\SpellCheckEngineOption.h">
+      <Filter>Header files\SpellChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\spellchecker\SpellCheckerManager.h">
+      <Filter>Header files\SpellChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\spellchecker\SpellCheckUserInterface.h">
+      <Filter>Header files\SpellChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\resource.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadSourceFormatDialog.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\json\JSON.h">
+      <Filter>Header files\jsonformtter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\gap.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm1025.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm1047.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm1097.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm1112.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm1122.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm1123.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm1130.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm1132.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm1137.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm1140.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm1141.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm1142.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm1143.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm1144.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm1145.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm1146.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm1147.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm1148.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm1149.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm1153.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm1154.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm1155.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm1156.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm1157.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm1158.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm1160.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm1164.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm1166.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm12712.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MadEdit\ExtEncodings\ibm16804.h">
+      <Filter>Header files\MadEdit\ExtEncodings</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\MadAboutDialog.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadConvEncDialog.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadEditApp.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadEditFrame.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadFileAssociationDialog.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadFindInFilesDialog.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadHighlightingDialog.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadOptionsDialog.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadPrintout.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadSortDialog.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadUtils.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\version.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadWordCountDialog.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadEdit\caret_new.cpp">
+      <Filter>Source files\MadEdit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadEdit\MadEdit.cpp">
+      <Filter>Source files\MadEdit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadEdit\MadEditAdvanced.cpp">
+      <Filter>Source files\MadEdit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadEdit\MadEditBasic.cpp">
+      <Filter>Source files\MadEdit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadEdit\MadEditCommand.cpp">
+      <Filter>Source files\MadEdit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadEdit\MadEditSearch.cpp">
+      <Filter>Source files\MadEdit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadEdit\MadEncoding.cpp">
+      <Filter>Source files\MadEdit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadEdit\MadLines.cpp">
+      <Filter>Source files\MadEdit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadEdit\MadSyntax.cpp">
+      <Filter>Source files\MadEdit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadEdit\MadUndo.cpp">
+      <Filter>Source files\MadEdit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadEdit\TradSimp.cpp">
+      <Filter>Source files\MadEdit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\CharDistribution.cpp">
+      <Filter>Source files\charset-detector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\JpCntx.cpp">
+      <Filter>Source files\charset-detector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\nsBig5Prober.cpp">
+      <Filter>Source files\charset-detector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\nsCharSetProber.cpp">
+      <Filter>Source files\charset-detector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\nsEscCharsetProber.cpp">
+      <Filter>Source files\charset-detector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\nsEscSM.cpp">
+      <Filter>Source files\charset-detector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\nsEUCJPProber.cpp">
+      <Filter>Source files\charset-detector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\nsEUCKRProber.cpp">
+      <Filter>Source files\charset-detector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\nsEUCTWProber.cpp">
+      <Filter>Source files\charset-detector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\nsGB2312Prober.cpp">
+      <Filter>Source files\charset-detector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\nsHebrewProber.cpp">
+      <Filter>Source files\charset-detector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\nsLatin1Prober.cpp">
+      <Filter>Source files\charset-detector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\nsMBCSGroupProber.cpp">
+      <Filter>Source files\charset-detector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\nsMBCSSM.cpp">
+      <Filter>Source files\charset-detector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\nsSBCharSetProber.cpp">
+      <Filter>Source files\charset-detector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\nsSBCSGroupProber.cpp">
+      <Filter>Source files\charset-detector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\nsSJISProber.cpp">
+      <Filter>Source files\charset-detector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\nsUniversalDetector.cpp">
+      <Filter>Source files\charset-detector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\nsUTF8Prober.cpp">
+      <Filter>Source files\charset-detector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadPurgeHistoryDialog.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadMacroDlg.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\EmbeddedPython.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadNumberDlg.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadRecentList.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\spellchecker\HunspellInterface.cpp">
+      <Filter>Source files\SpellChecker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\spellchecker\PersonalDictionary.cpp">
+      <Filter>Source files\SpellChecker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\spellchecker\SpellCheckEngineInterface.cpp">
+      <Filter>Source files\SpellChecker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\spellchecker\SpellCheckEngineOption.cpp">
+      <Filter>Source files\SpellChecker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\spellchecker\SpellCheckUserInterface.cpp">
+      <Filter>Source files\SpellChecker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\spellchecker\SpellCheckerManager.cpp">
+      <Filter>Source files\SpellChecker</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\markdown\markdown.cpp">
+      <Filter>Source files\Markdown</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\markdown\markdown-tokens.cpp">
+      <Filter>Source files\Markdown</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\astyle\asstreamiterator.cpp">
+      <Filter>Source files\Astyle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\astyle\astyle\ASBeautifier.cpp">
+      <Filter>Source files\Astyle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\astyle\astyle\ASEnhancer.cpp">
+      <Filter>Source files\Astyle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\astyle\astyle\ASResource.cpp">
+      <Filter>Source files\Astyle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\astyle\formattersettings.cpp">
+      <Filter>Source files\Astyle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\astyle\astyle\ASFormatter.cpp">
+      <Filter>Source files\Astyle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadSearchReplaceDialog.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadWinListDialog.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\checkedlistctrl.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadSaveQueryDialog.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadFileHistoryDialog.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadEdit\MadCSConv.cpp">
+      <Filter>Source files\MadEdit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\uchardet.cpp">
+      <Filter>Source files\charset-detector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangArabicModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangBulgarianModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangCroatianModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangCzechModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangDanishModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangEsperantoModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangEstonianModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangFinnishModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangFrenchModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangGermanModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangGreekModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangHebrewModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangHungarianModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangIrishModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangItalianModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangLatvianModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangLithuanianModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangMalteseModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangPolishModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangPortugueseModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangRomanianModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangRussianModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangSlovakModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangSloveneModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangSpanishModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangSwedishModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangThaiModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangTurkishModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangVietnameseModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MadSourceFormatDialog.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\json\JSON.cpp">
+      <Filter>Source files\jsonformatter</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\src\MadEditApp.rc">
+      <Filter>Resource files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\images\Mad2.ico">
+      <Filter>Resource files</Filter>
+    </Image>
+    <Image Include="..\..\images\Mad.ico">
+      <Filter>Resource files</Filter>
+    </Image>
+    <Image Include="..\..\src\wx\msw\std.ico">
+      <Filter>Resource files</Filter>
+    </Image>
+    <Image Include="..\..\src\wx\msw\folder1.ico">
+      <Filter>Resource files</Filter>
+    </Image>
+    <Image Include="..\..\src\wx\msw\folder2.ico">
+      <Filter>Resource files</Filter>
+    </Image>
+    <Image Include="..\..\src\wx\msw\file1.ico">
+      <Filter>Resource files</Filter>
+    </Image>
+    <Image Include="..\..\src\wx\msw\computer.ico">
+      <Filter>Resource files</Filter>
+    </Image>
+    <Image Include="..\..\src\wx\msw\drive.ico">
+      <Filter>Resource files</Filter>
+    </Image>
+    <Image Include="..\..\src\wx\msw\cdrom.ico">
+      <Filter>Resource files</Filter>
+    </Image>
+    <Image Include="..\..\src\wx\msw\floppy.ico">
+      <Filter>Resource files</Filter>
+    </Image>
+    <Image Include="..\..\src\wx\msw\removble.ico">
+      <Filter>Resource files</Filter>
+    </Image>
+    <Image Include="..\..\src\wx\msw\csquery.bmp">
+      <Filter>Resource files</Filter>
+    </Image>
+    <Image Include="..\..\src\wx\msw\colours.bmp">
+      <Filter>Resource files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\src\wx\msw\hand.cur">
+      <Filter>Resource files</Filter>
+    </None>
+    <None Include="..\..\src\wx\msw\bullseye.cur">
+      <Filter>Resource files</Filter>
+    </None>
+    <None Include="..\..\src\wx\msw\pencil.cur">
+      <Filter>Resource files</Filter>
+    </None>
+    <None Include="..\..\src\wx\msw\magnif1.cur">
+      <Filter>Resource files</Filter>
+    </None>
+    <None Include="..\..\src\wx\msw\roller.cur">
+      <Filter>Resource files</Filter>
+    </None>
+    <None Include="..\..\src\wx\msw\pbrush.cur">
+      <Filter>Resource files</Filter>
+    </None>
+    <None Include="..\..\src\wx\msw\pntleft.cur">
+      <Filter>Resource files</Filter>
+    </None>
+    <None Include="..\..\src\wx\msw\pntright.cur">
+      <Filter>Resource files</Filter>
+    </None>
+    <None Include="..\..\src\wx\msw\blank.cur">
+      <Filter>Resource files</Filter>
+    </None>
+    <None Include="..\..\src\wx\msw\cross.cur">
+      <Filter>Resource files</Filter>
+    </None>
+  </ItemGroup>
+</Project>
