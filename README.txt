@@ -131,6 +131,7 @@ Mod v0.4.20
 6.Fix bug that caused file type detect wrongly
 7.Fix Linux build issue with wxWidgets < 3.1.1
 8.Update Python to 2.7.18
+9.Fix langurage ID of wxWidgets
 
 Mod v0.4.19
 1.Fix: Disable safe mode in PanChinese search
