@@ -901,6 +901,9 @@ public: // basic functions
 	bool IsHexMode() { return m_EditMode == emHexMode; }
 	bool IsTextMode() { return m_EditMode == emTextMode; }
 	bool IsColumnMode() { return m_EditMode == emColumnMode; }
+	bool IsNoWrap() { return m_WordWrapMode == wwmNoWrap; } 
+	bool IsWrapByWindow() { return IsWrapByWindow(); } 
+	bool IsWrapByColumn() { return m_WordWrapMode == wwmWrapByColumn; } 
 	bool IsModified() { return m_Modified; }
 	void MarkModified() { m_Modified = true; }
 	time_t GetModificationTime() { return m_ModificationTime; }

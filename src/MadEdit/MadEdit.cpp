@@ -3528,7 +3528,7 @@ void MadEdit::RecountLineWidth(bool bForceRecount)
 
 	if (bForceRecount == false)
 	{
-		if (m_WordWrapMode == wwmWrapByWindow  && (m_Lines->m_RowCount != m_Lines->m_LineCount
+		if (IsWrapByWindow() && (m_Lines->m_RowCount != m_Lines->m_LineCount
 				|| m_Lines->m_MaxLineWidth > GetMaxWordWrapWidth()))
 		{
 			bForceRecount = true;
@@ -3665,7 +3665,7 @@ void MadEdit::UpdateScrollBarPos()
 		int xmax = GetLineNumberAreaWidth(int(m_Lines->m_LineCount)) + m_LeftMarginWidth
 				   + m_MaxColumnRowWidth + m_BookmarkWidth;
 
-		if (m_WordWrapMode == wwmWrapByWindow)
+		if (IsWrapByWindow())
 		{
 			xmax -= m_RightMarginWidth;
 		}
@@ -10793,7 +10793,7 @@ void MadEdit::OnHScroll(wxScrollEvent &evt)
 		int xmax = GetLineNumberAreaWidth(int(m_Lines->m_LineCount)) + m_LeftMarginWidth
 				   + m_Lines->m_MaxLineWidth + m_RightMarginWidth + m_BookmarkWidth;
 
-		if (m_WordWrapMode == wwmWrapByWindow)
+		if (IsWrapByWindow())
 		{
 			xmax -= m_RightMarginWidth;
 		}

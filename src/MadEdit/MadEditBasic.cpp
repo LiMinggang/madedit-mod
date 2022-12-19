@@ -763,7 +763,7 @@ void MadEdit::SetEditMode(MadEditMode mode)
 
 				m_EditMode = emColumnMode;
 
-				if (m_WordWrapMode != wwmNoWrap)
+				if (!IsNoWrap)
 				{
 					bool oldconfigmode = m_StorePropertiesToGlobalConfig;
 					m_StorePropertiesToGlobalConfig = false;
@@ -956,9 +956,9 @@ void MadEdit::SetDisplayLineNumber(bool value)
 			m_Config->SetPath(oldpath);
 		}
 
-		if (!IsHexMode() && m_WordWrapMode != wwmNoWrap)
+		if (!IsHexMode() && !IsNoWrap)
 		{
-			if (m_WordWrapMode == wwmWrapByWindow)
+			if (IsWrapByWindow())
 				m_DrawingXPos = 0;
 
 			UpdateAppearance();
@@ -995,9 +995,9 @@ void MadEdit::SetDisplayBookmark(bool value)
 			m_Config->SetPath(oldpath);
 		}
 
-		if (!IsHexMode() && m_WordWrapMode != wwmNoWrap)
+		if (!IsHexMode() && !IsNoWrap)
 		{
-			if (m_WordWrapMode == wwmWrapByWindow)
+			if (IsWrapByWindow())
 				m_DrawingXPos = 0;
 
 			UpdateAppearance();
@@ -1131,7 +1131,7 @@ void MadEdit::SetMaxColumns(long cols)
 			m_Config->SetPath(oldpath);
 		}
 
-		if (m_WordWrapMode == wwmWrapByColumn)
+		if (IsWrapByColumn())
 		{
 			if (!IsHexMode())
 			{

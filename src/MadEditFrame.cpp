@@ -5501,17 +5501,17 @@ void MadEditFrame::OnUpdateUI_MenuViewLineSpacing(wxUpdateUIEvent& event)
 void MadEditFrame::OnUpdateUI_MenuViewNoWrap(wxUpdateUIEvent& event)
 {
 	event.Enable(g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsHexMode());
-	event.Check(g_ActiveMadEdit && g_ActiveMadEdit->GetWordWrapMode() == wwmNoWrap);
+	event.Check(g_ActiveMadEdit && g_ActiveMadEdit->IsNoWrap());
 }
 void MadEditFrame::OnUpdateUI_MenuViewWrapByWindow(wxUpdateUIEvent& event)
 {
 	event.Enable(g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsHexMode());
-	event.Check(g_ActiveMadEdit && g_ActiveMadEdit->GetWordWrapMode() == wwmWrapByWindow);
+	event.Check(g_ActiveMadEdit && g_ActiveMadEdit->IsWrapByWindow());
 }
 void MadEditFrame::OnUpdateUI_MenuViewWrapByColumn(wxUpdateUIEvent& event)
 {
 	event.Enable(g_ActiveMadEdit != nullptr && !g_ActiveMadEdit->IsHexMode());
-	event.Check(g_ActiveMadEdit && g_ActiveMadEdit->GetWordWrapMode() == wwmWrapByColumn);
+	event.Check(g_ActiveMadEdit && g_ActiveMadEdit->IsWrapByColumn());
 }
 void MadEditFrame::OnUpdateUI_MenuViewDisplayLineNumber(wxUpdateUIEvent& event)
 {
