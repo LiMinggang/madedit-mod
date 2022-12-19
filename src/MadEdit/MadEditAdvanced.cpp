@@ -3151,7 +3151,7 @@ void MadEdit::ColumnAlignLeft()
 					dudata->m_Size = delsize;
 					lit = DeleteInsertData(dudata->m_Pos, dudata->m_Size, &dudata->m_Data, 0, nullptr);
 
-					if (undo == nullptr)
+					if (!undo)
 					{
 						undo = m_UndoBuffer->Add();
 						SetNeedSync();
@@ -3183,7 +3183,7 @@ void MadEdit::ColumnAlignLeft()
 				indata->m_Data.push_back(blk);
 				lit = DeleteInsertData(indata->m_Pos, 0, nullptr, indata->m_Size, &indata->m_Data);
 
-				if (undo == nullptr)
+				if (!undo)
 				{
 					undo = m_UndoBuffer->Add();
 					SetNeedSync();
@@ -3359,7 +3359,7 @@ void MadEdit::ColumnAlignRight()
 				dudata->m_Size = delsize;
 				lit = DeleteInsertData(dudata->m_Pos, dudata->m_Size, &dudata->m_Data, 0, nullptr);
 
-				if (undo == nullptr)
+				if (!undo)
 				{
 					undo = m_UndoBuffer->Add();
 					SetNeedSync();
@@ -3414,7 +3414,7 @@ void MadEdit::ColumnAlignRight()
 								  oudata->m_DelSize, &oudata->m_DelData,
 								  oudata->m_InsSize, &oudata->m_InsData);
 
-				if (undo == nullptr)
+				if (!undo)
 				{
 					undo = m_UndoBuffer->Add();
 					SetNeedSync();
@@ -3815,7 +3815,7 @@ void MadEdit::CutDelBookmarkedLines(bool copyLines/*= false*/)
 		wxASSERT(linesize[i]>0);
 		DeleteInsertData(dudata->m_Pos, dudata->m_Size, &dudata->m_Data, 0, nullptr);
 
-		if (undo == nullptr)
+		if (!undo)
 		{
 			undo = m_UndoBuffer->Add();
 			SetNeedSync();
@@ -3905,7 +3905,7 @@ void MadEdit::CopyCutDeleteUnmarkedLines(bool copyLines /*= false*/, bool delete
 					dudata->m_Size = msize;
 					wxASSERT(linesize[i] > 0);
 					DeleteInsertData(dudata->m_Pos, dudata->m_Size, &dudata->m_Data, 0, nullptr);
-					if (undo == nullptr)
+					if (!undo)
 					{
 						undo = m_UndoBuffer->Add();
 						SetNeedSync();
@@ -3934,7 +3934,7 @@ void MadEdit::CopyCutDeleteUnmarkedLines(bool copyLines /*= false*/, bool delete
 				dudata->m_Pos = pos;
 				dudata->m_Size = curpos;
 				DeleteInsertData(dudata->m_Pos, dudata->m_Size, &dudata->m_Data, 0, nullptr);
-				if (undo == nullptr)
+				if (!undo)
 				{
 					undo = m_UndoBuffer->Add();
 					SetNeedSync();
@@ -4047,7 +4047,7 @@ void MadEdit::ReplaceBookmarkedLines()
 		}
 
 		wxASSERT(linebegpos.size() > 0);
-		if (undo == nullptr)
+		if (!undo)
 		{
 			undo = m_UndoBuffer->Add();
 			SetNeedSync();

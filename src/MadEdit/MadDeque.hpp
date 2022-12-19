@@ -117,7 +117,7 @@ public:
 		{
 			if (++ptr == buf->end)
 			{
-				if (buf->next == nullptr)
+				if (!buf->next)
 				{
 					//assert(buf==buf->mdeque->m_last_buffrt);
 					buf->mdeque->add_buffer_back();
@@ -195,7 +195,7 @@ public:
 			tmp = m_first_buffer->next;
 			delete m_first_buffer;
 			m_first_buffer = tmp;
-		}while (m_first_buffer != nullptr);
+		}while (m_first_buffer);
 		m_last_buffer = nullptr;
 	}
 	pointer	get_pointer(size_type index) const

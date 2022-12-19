@@ -538,7 +538,7 @@ void MadSearchReplaceDialog::WxButtonCloseClick(wxCommandEvent& WXUNUSED(event))
 	{
 		mframe->Raise();
 
-		if (g_ActiveMadEdit != nullptr)
+		if (g_ActiveMadEdit)
 		{
 			g_ActiveMadEdit->Refresh(false);
 			g_ActiveMadEdit->SetFocus();
@@ -1099,7 +1099,7 @@ void MadSearchReplaceDialog::WxCheckBoxFindHexClick(wxCommandEvent& event)
 
 		if (text.IsEmpty())
 		{
-			if (g_ActiveMadEdit != nullptr)
+			if (g_ActiveMadEdit)
 			{
 				g_ActiveMadEdit->GetSelHexString(ws, true);
 				m_FindText->SetText(ws);
@@ -1118,7 +1118,7 @@ void MadSearchReplaceDialog::WxCheckBoxFindHexClick(wxCommandEvent& event)
 
 		if (text.IsEmpty())
 		{
-			if (g_ActiveMadEdit != nullptr)
+			if (g_ActiveMadEdit)
 			{
 				g_ActiveMadEdit->GetSelText(ws);
 				m_FindText->SetText(ws);
@@ -1247,7 +1247,7 @@ void MadSearchReplaceDialog::WxButtonReplaceClick(wxCommandEvent& WXUNUSED(event
 					}
 
 					mframe->Raise();
-					wxASSERT(g_ActiveMadEdit != nullptr);
+					wxASSERT(g_ActiveMadEdit);
 					g_ActiveMadEdit->SetFocus();
 
 					if (IsMacroRecording())
@@ -1331,7 +1331,7 @@ void MadSearchReplaceDialog::WxButtonReplaceClick(wxCommandEvent& WXUNUSED(event
  */
 void MadSearchReplaceDialog::WxButtonReplaceAllClick(wxCommandEvent& WXUNUSED(event))
 {
-	if (g_ActiveMadEdit != nullptr)
+	if (g_ActiveMadEdit)
 		ReplaceAll(g_ActiveMadEdit);
 }
 
@@ -1452,7 +1452,7 @@ void MadSearchReplaceDialog::UpdateSearchInSelection(bool check)
 	//WxEditTo->Enable(check);
 	extern MadEdit *g_ActiveMadEdit;
 
-	if (check && g_ActiveMadEdit != nullptr)
+	if (check && g_ActiveMadEdit)
 	{
 		m_SearchFrom = g_ActiveMadEdit->GetSelectionBeginPos();
 		m_SearchTo = g_ActiveMadEdit->GetSelectionEndPos();
@@ -1870,7 +1870,7 @@ void MadSearchReplaceDialog::SearchAll(MadEdit * madedit, bool needRec/*=true*/)
 			}
 			if (WxCheckBoxBookmarkLine->IsChecked())
 			{
-				if (g_ActiveMadEdit != nullptr)
+				if (g_ActiveMadEdit)
 				{
 					g_ActiveMadEdit->Refresh(false);					
 					g_ActiveMadEdit->SetFocus();

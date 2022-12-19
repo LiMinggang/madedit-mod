@@ -278,7 +278,7 @@ void GTK2_DrawText(wxMemoryDC *dc, MadEncoding *encoding, const int *widths,
 	PangoLayoutLine* ll = pango_layout_get_line(dc->m_layout, 0);
 	run = ll->runs;
 
-	for (; run != nullptr; run = g_slist_next(run))
+	for (; run; run = g_slist_next(run))
 	{
 		gi = (PangoGlyphItem *)run->data;
 		gs = gi->glyphs;
@@ -1705,10 +1705,10 @@ void MadEdit::InvertRectManual(wxDC *dc, int x, int y, int w, int h)
 	wxImage img = bmp->ConvertToImage();
 	// invert data
 	unsigned char* olddata = img.GetData();
-	wxASSERT(olddata != nullptr);
+	wxASSERT(olddata);
 	int size = w * h * 3;
 	unsigned char* newdata = (unsigned char*)malloc(size);
-	wxASSERT(newdata != nullptr);
+	wxASSERT(newdata);
 	int* pold = (int*)olddata;
 	int* pnew = (int*)newdata;
 
@@ -4157,7 +4157,7 @@ void MadEdit::SelectWordFromCaretPos(wxString *ws, MadCaretPos * cpos/* = nullpt
 					type = GetUCharType(uc);
 					posidx = idx;
 
-					if ((ws != nullptr || bSelection)
+					if ((ws || bSelection)
 							&& ((type <= 3 && prevtype > 3) || (type <= 2 && prevtype > 2)))
 					{
 						--posidx;
@@ -4167,7 +4167,7 @@ void MadEdit::SelectWordFromCaretPos(wxString *ws, MadCaretPos * cpos/* = nullpt
 					}
 				}
 				else
-					if (ws != nullptr || bSelection)
+					if (ws || bSelection)
 					{
 						prevtype = GetUCharType(uc);
 					}
@@ -4207,7 +4207,7 @@ void MadEdit::SelectWordFromCaretPos(wxString *ws, MadCaretPos * cpos/* = nullpt
 	if (!ucqueue.empty() && type != 0)
 	{
 		//wxASSERT(type != 0);
-		if (ws != nullptr)            // get word
+		if (ws)            // get word
 		{
 			size_t s = ucqueue.size();
 
@@ -4764,14 +4764,14 @@ void MadEdit::CopyFileDataToMem(MadBlockIterator begin, MadBlockIterator end)
 
 	// ToDo: if the size is too large, move data to a temporary file
 
-	if (m_Lines->m_FileData == nullptr)
+	if (!m_Lines->m_FileData)
 		return;
 
 	const size_t BUFFER_SIZE = 128 * 1024;
 	static vector<wxByte> TempBufferVector;
 	static wxByte *TempBuffer = nullptr;
 
-	if (TempBuffer == nullptr)
+	if (!TempBuffer)
 	{
 		TempBufferVector.resize(BUFFER_SIZE);
 		TempBuffer = &TempBufferVector[0];
@@ -4819,7 +4819,7 @@ MadLineIterator MadEdit::DeleteInsertData(wxFileOffset pos,
 	m_UpdateValidPos = 1;   // update if pos < oldpos
 	int lid = GetLineByPos(lit, bpos, tmp_rowid);
 
-	if (lineid != nullptr) *lineid = lid;
+	if (lineid) *lineid = lid;
 
 	m_UpdateValidPos = 0;
 	MadBlockVector &blocks = lit->m_Blocks;
@@ -11022,7 +11022,7 @@ void MadEdit::MadEditOnPaint(wxPaintEvent *evt /*=NULL*/ )
 	wxMemoryDC memdc(&dc), markdc(&dc);
 	wxWindow *focuswin = FindFocus();
 
-	if (nullptr == m_ClientBitmap)
+	if (!m_ClientBitmap)
 	{
 		wxSizeEvent evttmp;
 		OnSize(evttmp);
@@ -11050,7 +11050,7 @@ void MadEdit::MadEditOnPaint(wxPaintEvent *evt /*=NULL*/ )
 	{
 		if (!IsHexMode())
 		{
-			if (m_ClientBitmap != nullptr)
+			if (m_ClientBitmap)
 			{
 				memdc.SelectObject(*m_ClientBitmap);
 			}
@@ -11173,7 +11173,7 @@ void MadEdit::MadEditOnPaint(wxPaintEvent *evt /*=NULL*/ )
 					{
 						if (bPaintMark == false)
 						{
-							if (m_MarkBitmap != nullptr)
+							if (m_MarkBitmap)
 							{
 								markdc.SelectObject(*m_MarkBitmap);
 							}
@@ -11305,7 +11305,7 @@ void MadEdit::MadEditOnPaint(wxPaintEvent *evt /*=NULL*/ )
 				memdc.SetPen(*(wxThePenList->FindOrCreatePen(bgcolor, 1, wxPENSTYLE_SOLID)));
 				memdc.DrawRectangle(0, 0, m_ClientWidth, m_ClientHeight);
 
-				if (m_HexDigitBitmap == nullptr)
+				if (!m_HexDigitBitmap)
 				{
 					m_HexDigitBitmap = new wxBitmap(m_HexFontMaxDigitWidth * 76, m_RowHeight * 3);
 					memdc.SelectObject(*m_HexDigitBitmap);
@@ -11413,7 +11413,7 @@ struct IMEAdjuster
 
 	void InitStatus(const wxFont& font) const
 	{
-		if (m_hImc == (HIMC)nullptr || ImmGetOpenStatus(m_hImc) == 0)
+		if (!m_hImc|| ImmGetOpenStatus(m_hImc) == 0)
 			return;
 
 #if 0 //WXWIN_COMPATIBILITY_3_0
@@ -11431,7 +11431,7 @@ struct IMEAdjuster
 
 	void UpdatePosition() const
 	{
-		if (m_hImc == (HIMC)nullptr)
+		if (!m_hImc)
 			return;
 
 		COMPOSITIONFORM cfs;

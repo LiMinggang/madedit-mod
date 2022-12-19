@@ -11742,7 +11742,7 @@ int ConvertChinese(const wxChar *in, wxChar *out, size_t count, MadConvertChines
 	case ccfTrad2Simp:
 		BuildConvertTable(Trad2SimpTable, Trad2Simp_Table);
 		table=Trad2SimpTable;
-		wxASSERT(table != nullptr);
+		wxASSERT(table);
 		convmap = &Trad2SimpExtMap;
 		if (convmap->empty())
 		{
@@ -11762,7 +11762,7 @@ int ConvertChinese(const wxChar *in, wxChar *out, size_t count, MadConvertChines
 	case ccfSimp2Trad:
 		BuildConvertTable(Simp2TradTable, Simp2Trad_Table);
 		table=Simp2TradTable;
-		wxASSERT(table != nullptr);
+		wxASSERT(table);
 		convmap = &Simp2TradExtMap;
 		if (convmap->empty())
 		{
@@ -11827,7 +11827,7 @@ int ConvertChinese(const wxChar *in, wxChar *out, size_t count, MadConvertChines
     			}
 				else
 				{
-					wxASSERT(convmap != nullptr);
+					wxASSERT(convmap);
 					ucs4_t outc = (*convmap)[wc];
 					wxString wstr(wxUniChar((int)outc));
 					for (size_t j = 0; j < wstr.Length(); ++j)
@@ -11869,7 +11869,7 @@ int ConvertChinese(const wxChar *in, wxChar *out, size_t count, MadConvertChines
 				}
 			}
 #else
-			if ((table[wc] == NEED_TRANS/*Extension*/ || wc >= TWO_BYTES_MAX) && convmap != nullptr) // Try again
+			if ((table[wc] == NEED_TRANS/*Extension*/ || wc >= TWO_BYTES_MAX) && convmap) // Try again
 			{
 				std::map<ucs4_t, ucs4_t>::iterator it = convmap->find(wc);
 				if (it != convmap->end())

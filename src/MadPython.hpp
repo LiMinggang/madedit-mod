@@ -405,7 +405,7 @@ namespace mad_python {
 		PyMadEdit(){
 #ifndef PYMADEDIT_DLL
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (!madedit) {
 				// Simulate MadEditFrame::OnFileNew
@@ -431,7 +431,7 @@ namespace mad_python {
 
 		void ProcessCommand(long command) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit) {
 				if (madedit->IsReadOnly()) {
@@ -448,7 +448,7 @@ namespace mad_python {
 
 		void CharFirst() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecCharFirst); }
@@ -456,7 +456,7 @@ namespace mad_python {
 
 		void CharLast() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecCharLast); }
@@ -464,7 +464,7 @@ namespace mad_python {
 
 		void CaretCommandFirst() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecCaretCommandFirst); }
@@ -472,7 +472,7 @@ namespace mad_python {
 
 		void Left() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecLeft); }
@@ -480,7 +480,7 @@ namespace mad_python {
 
 		void Right() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecRight); }
@@ -488,7 +488,7 @@ namespace mad_python {
 
 		void Up() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecUp); }
@@ -496,7 +496,7 @@ namespace mad_python {
 
 		void Down() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecDown); }
@@ -504,7 +504,7 @@ namespace mad_python {
 
 		void BeginLine() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecBeginLine); }
@@ -512,7 +512,7 @@ namespace mad_python {
 
 		void EndLine() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecEndLine); }
@@ -520,7 +520,7 @@ namespace mad_python {
 
 		void BeginDoc() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecBeginDoc); }
@@ -528,7 +528,7 @@ namespace mad_python {
 
 		void EndDoc() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecEndDoc); }
@@ -536,7 +536,7 @@ namespace mad_python {
 
 		void PrevPage() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecPrevPage); }
@@ -544,7 +544,7 @@ namespace mad_python {
 
 		void NextPage() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecNextPage); }
@@ -552,7 +552,7 @@ namespace mad_python {
 
 		void PrevWord() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecPrevWord); }
@@ -560,7 +560,7 @@ namespace mad_python {
 
 		void NextWord() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecNextWord); }
@@ -568,7 +568,7 @@ namespace mad_python {
 
 		void LeftBrace() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecLeftBrace); }
@@ -576,7 +576,7 @@ namespace mad_python {
 
 		void RightBrace() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecRightBrace); }
@@ -584,7 +584,7 @@ namespace mad_python {
 
 		void CaretCommandLast() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecCaretCommandLast); }
@@ -592,7 +592,7 @@ namespace mad_python {
 
 		void SelCommandFirst() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecSelCommandFirst); }
@@ -600,7 +600,7 @@ namespace mad_python {
 
 		void SelLeft() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecSelLeft); }
@@ -608,7 +608,7 @@ namespace mad_python {
 
 		void SelRight() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecSelRight); }
@@ -616,7 +616,7 @@ namespace mad_python {
 
 		void SelUp() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecSelUp); }
@@ -624,7 +624,7 @@ namespace mad_python {
 
 		void SelDown() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecSelDown); }
@@ -632,7 +632,7 @@ namespace mad_python {
 
 		void SelBeginLine() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecSelBeginLine); }
@@ -640,7 +640,7 @@ namespace mad_python {
 
 		void SelEndLine() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecSelEndLine); }
@@ -648,7 +648,7 @@ namespace mad_python {
 
 		void SelBeginDoc() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecSelBeginDoc); }
@@ -656,7 +656,7 @@ namespace mad_python {
 
 		void SelEndDoc() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecSelEndDoc); }
@@ -664,7 +664,7 @@ namespace mad_python {
 
 		void SelPrevPage() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecSelPrevPage); }
@@ -672,7 +672,7 @@ namespace mad_python {
 
 		void SelNextPage() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecSelNextPage); }
@@ -680,7 +680,7 @@ namespace mad_python {
 
 		void SelPrevWord() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecSelPrevWord); }
@@ -688,7 +688,7 @@ namespace mad_python {
 
 		void SelNextWord() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecSelNextWord); }
@@ -696,7 +696,7 @@ namespace mad_python {
 
 		void SelLeftBrace() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecSelLeftBrace); }
@@ -704,7 +704,7 @@ namespace mad_python {
 
 		void SelRightBrace() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecSelRightBrace); }
@@ -712,7 +712,7 @@ namespace mad_python {
 
 		void SelCommandLast() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecSelCommandLast); }
@@ -720,7 +720,7 @@ namespace mad_python {
 
 		void Return() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecReturn); }
@@ -728,7 +728,7 @@ namespace mad_python {
 
 		void ReturnNoIndent() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecReturnNoIndent); }
@@ -736,7 +736,7 @@ namespace mad_python {
 
 		void Tab() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecTab); }
@@ -744,7 +744,7 @@ namespace mad_python {
 
 		void InsertTabChar() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecInsertTabChar); }
@@ -752,7 +752,7 @@ namespace mad_python {
 
 		void Delete() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecDelete); }
@@ -760,7 +760,7 @@ namespace mad_python {
 
 		void BackSpace() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecBackSpace); }
@@ -768,7 +768,7 @@ namespace mad_python {
 
 		void DelPrevWord() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecDelPrevWord); }
@@ -776,7 +776,7 @@ namespace mad_python {
 
 		void DelNextWord() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecDelNextWord); }
@@ -784,7 +784,7 @@ namespace mad_python {
 
 		void ToggleInsertMode() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecToggleInsertMode); }
@@ -792,7 +792,7 @@ namespace mad_python {
 
 		void InsertWChar(long key) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->ProcessCommand(key); }
@@ -800,7 +800,7 @@ namespace mad_python {
 
 		void InsertStr(const std::string &str) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly())) {
 				wxString wxStr(str.c_str(), wxConvUTF8);
@@ -818,7 +818,7 @@ namespace mad_python {
 
 		void InsertNewline() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly())) {
 				madedit->ProcessCommand(ecReturn);
@@ -828,7 +828,7 @@ namespace mad_python {
 		void InsertIncrementalNumber(long initial, long step, long total, long stepType,
 									  long fmt, long align, bool zeroPad, const std::string & pref, const std::string & post) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly())) {
 				wxString wxPrefix(pref.c_str(), wxConvUTF8), wxPostfix(post.c_str(), wxConvUTF8);
@@ -839,7 +839,7 @@ namespace mad_python {
 
 		void ScrollLineUp() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecScrollLineUp); }
@@ -847,7 +847,7 @@ namespace mad_python {
 
 		void ScrollLineDown() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecScrollLineDown); }
@@ -855,7 +855,7 @@ namespace mad_python {
 
 		void ScrollPageUp() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecScrollPageUp); }
@@ -863,7 +863,7 @@ namespace mad_python {
 
 		void ScrollPageDown() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecScrollPageDown); }
@@ -871,7 +871,7 @@ namespace mad_python {
 
 		void ScrollLeft() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecScrollLeft); }
@@ -879,7 +879,7 @@ namespace mad_python {
 
 		void ScrollRight() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ProcessCommand(ecScrollRight); }
@@ -887,7 +887,7 @@ namespace mad_python {
 
 		void GoToLine(long line) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->GoToLine(line); }
@@ -895,7 +895,7 @@ namespace mad_python {
 
 		void GoToLineColumn(long line, long column) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit) {
 				if (column < 0) column = 0;
@@ -909,7 +909,7 @@ namespace mad_python {
 
 		void SetSyntax(const std::string &title) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (! title.empty())) {
 				wxString wxTitle(title.c_str(), wxConvUTF8);
@@ -919,7 +919,7 @@ namespace mad_python {
 
 		const std::string GetSyntaxTitle() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit) {
 				wxString title = madedit->GetSyntaxTitle();
@@ -930,7 +930,7 @@ namespace mad_python {
 
 		void LoadDefaultSyntaxScheme() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->LoadDefaultSyntaxScheme(); }
@@ -938,7 +938,7 @@ namespace mad_python {
 
 		void SetEncoding(const std::string &encname) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly())) {
 				if (encname.empty())
@@ -950,7 +950,7 @@ namespace mad_python {
 		}
 		const std::string GetEncodingName() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit)) {
 				wxString desc = madedit->GetEncodingName();
@@ -963,7 +963,7 @@ namespace mad_python {
 
 		const std::string GetEncodingDescription() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit) {
 				wxString desc = madedit->GetEncodingDescription();
@@ -976,7 +976,7 @@ namespace mad_python {
 
 		long GetEncodingType() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ return (long)madedit->GetEncodingType(); }
@@ -985,7 +985,7 @@ namespace mad_python {
 
 		bool GetRecordCaretMovements() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (!(madedit)) { return false; }
 
@@ -994,7 +994,7 @@ namespace mad_python {
 
 		void RecordCaretMovements() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (!(madedit)) { return; }
 
@@ -1003,7 +1003,7 @@ namespace mad_python {
 
 		void NotRecordCaretMovements() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (!(madedit)) { return; }
 
@@ -1012,7 +1012,7 @@ namespace mad_python {
 
 		void SetTextFont(const std::string &name, long size, bool forceReset) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((! name.empty()) && (size > 0) && (madedit)) {
 				wxString wxName(name.c_str(), wxConvUTF8);
@@ -1022,7 +1022,7 @@ namespace mad_python {
 
 		void SetHexFont(const std::string &name, long size, bool forceReset) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((! name.empty()) && (size > 0) && (madedit)) {
 				wxString wxName(name.c_str(), wxConvUTF8);
@@ -1032,7 +1032,7 @@ namespace mad_python {
 
 		mad_py::tuple GetTextFont() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{
@@ -1049,7 +1049,7 @@ namespace mad_python {
 
 		mad_py::tuple GetHexFont() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{
@@ -1071,7 +1071,7 @@ namespace mad_python {
 
 		mad_py::tuple GetFontNameSize() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{
@@ -1088,7 +1088,7 @@ namespace mad_python {
 
 		void SetFontA(const std::string &name, long size) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!name.empty())) {
 				wxString wxName(name.c_str(), wxConvUTF8);
@@ -1103,7 +1103,7 @@ namespace mad_python {
 
 		void FixedWidthMode() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetFixedWidthMode(true); }
@@ -1111,7 +1111,7 @@ namespace mad_python {
 
 		void NoFixedWidthMode() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetFixedWidthMode(false); }
@@ -1120,7 +1120,7 @@ namespace mad_python {
 		bool GetFixedWidthMode() {
 			bool mode = false;
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 
 			if (madedit)
@@ -1131,7 +1131,7 @@ namespace mad_python {
 
 		void SetLineSpacing(long percent) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetLineSpacing(percent); }
@@ -1141,7 +1141,7 @@ namespace mad_python {
 			long spacing = -1;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ spacing = madedit->GetLineSpacing(); }
@@ -1151,19 +1151,19 @@ namespace mad_python {
 
 		void TextMode() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			madedit->SetEditMode(emTextMode);
 		}
 		void ColumnMode() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			madedit->SetEditMode(emColumnMode);
 		}
 		void HexMode() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			madedit->SetEditMode(emHexMode);
 		}
@@ -1172,7 +1172,7 @@ namespace mad_python {
 			long mode = -1;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ mode = (long)madedit->GetEditMode(); }
@@ -1182,7 +1182,7 @@ namespace mad_python {
 
 		void SingleLineMode() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetSingleLineMode(true); }
@@ -1190,7 +1190,7 @@ namespace mad_python {
 
 		void MultiLineMode() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetSingleLineMode(false); }
@@ -1198,7 +1198,7 @@ namespace mad_python {
 
 		void SetTabColumns(long value) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetTabColumns(value); }
@@ -1208,7 +1208,7 @@ namespace mad_python {
 			long cols = -1;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ cols = madedit->GetTabColumns(); }
@@ -1218,7 +1218,7 @@ namespace mad_python {
 
 		void SetIndentColumns(long value) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetIndentColumns(value); }
@@ -1228,7 +1228,7 @@ namespace mad_python {
 			long cols = -1;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ cols = madedit->GetIndentColumns(); }
@@ -1238,7 +1238,7 @@ namespace mad_python {
 
 		void InsertSpacesInsteadOfTab() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetInsertSpacesInsteadOfTab(true); }
@@ -1246,7 +1246,7 @@ namespace mad_python {
 
 		void InsertTab() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetInsertSpacesInsteadOfTab(false); }
@@ -1256,7 +1256,7 @@ namespace mad_python {
 			bool res = false;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = madedit->GetInsertSpacesInsteadOfTab(); }
@@ -1266,7 +1266,7 @@ namespace mad_python {
 
 		void WantTab() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetWantTab(true); }
@@ -1274,7 +1274,7 @@ namespace mad_python {
 
 		void NotWantTab() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetWantTab(false); }
@@ -1284,7 +1284,7 @@ namespace mad_python {
 			bool res = false;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = madedit->GetWantTab(); }
@@ -1294,21 +1294,21 @@ namespace mad_python {
 
 		void NoWrap() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			madedit->SetWordWrapMode(wwmNoWrap);
 		}
 
 		void WrapByWindow() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			madedit->SetWordWrapMode(wwmWrapByWindow);
 		}
 
 		void WrapByColumn() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			madedit->SetWordWrapMode(wwmWrapByColumn);
 		}
@@ -1317,7 +1317,7 @@ namespace mad_python {
 			long mode  = -1;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ mode = (long)madedit->GetWordWrapMode(); }
@@ -1327,7 +1327,7 @@ namespace mad_python {
 
 		void ShowEndOfLine() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetShowEndOfLine(true); }
@@ -1335,7 +1335,7 @@ namespace mad_python {
 
 		void ShowTabChar() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetShowTabChar(true); }
@@ -1343,7 +1343,7 @@ namespace mad_python {
 
 		void ShowSpaceChar() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetShowSpaceChar(true); }
@@ -1351,7 +1351,7 @@ namespace mad_python {
 
 		void MarkActiveLine() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetMarkActiveLine(true); }
@@ -1359,7 +1359,7 @@ namespace mad_python {
 
 		void DisplayLineNumber() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetDisplayLineNumber(true); }
@@ -1367,7 +1367,7 @@ namespace mad_python {
 
 		void Display80ColHint() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetDisplay80ColHint(true); }
@@ -1375,7 +1375,7 @@ namespace mad_python {
 
 		void DisplayBookmark() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetDisplayBookmark(true); }
@@ -1383,7 +1383,7 @@ namespace mad_python {
 
 		void HideEndOfLine() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetShowEndOfLine(false); }
@@ -1391,7 +1391,7 @@ namespace mad_python {
 
 		void HideTabChar() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetShowTabChar(false); }
@@ -1399,7 +1399,7 @@ namespace mad_python {
 
 		void HideSpaceChar() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetShowSpaceChar(false); }
@@ -1407,7 +1407,7 @@ namespace mad_python {
 
 		void HideMarkActiveLine() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetMarkActiveLine(false); }
@@ -1415,7 +1415,7 @@ namespace mad_python {
 
 		void HideLineNumber() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetDisplayLineNumber(false); }
@@ -1423,7 +1423,7 @@ namespace mad_python {
 
 		void HideBookmark() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetDisplayBookmark(false); }
@@ -1431,7 +1431,7 @@ namespace mad_python {
 
 		void Hide80ColHint() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetDisplay80ColHint(false); }
@@ -1441,7 +1441,7 @@ namespace mad_python {
 			bool res = false;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = madedit->GetDisplayLineNumber(); }
@@ -1453,7 +1453,7 @@ namespace mad_python {
 			bool res = false;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = madedit->GetDisplayBookmark(); }
@@ -1465,7 +1465,7 @@ namespace mad_python {
 			bool res = false;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = madedit->GetShowEndOfLine(); }
@@ -1476,7 +1476,7 @@ namespace mad_python {
 			bool res = false;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ return madedit->GetShowTabChar(); }
@@ -1488,7 +1488,7 @@ namespace mad_python {
 			bool res = false;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = madedit->GetShowSpaceChar(); }
@@ -1500,7 +1500,7 @@ namespace mad_python {
 			bool res = false;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = madedit->GetMarkActiveLine(); }
@@ -1510,7 +1510,7 @@ namespace mad_python {
 
 		void MarkBracePair() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetMarkBracePair(true); }
@@ -1518,7 +1518,7 @@ namespace mad_python {
 
 		void NoMarkBracePair() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetMarkBracePair(false); }
@@ -1528,7 +1528,7 @@ namespace mad_python {
 			bool res = false;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = madedit->GetMarkBracePair(); }
@@ -1539,7 +1539,7 @@ namespace mad_python {
 		long GetMaxColumns() {
 			long cols = 0;
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 				cols = madedit->GetMaxColumns();
@@ -1548,7 +1548,7 @@ namespace mad_python {
 
 		void SetMaxColumns(long cols) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetMaxColumns(cols); }
@@ -1558,7 +1558,7 @@ namespace mad_python {
 			bool res = false;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = madedit->GetAutoIndent(); }
@@ -1568,7 +1568,7 @@ namespace mad_python {
 
 		void AutoIndent() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 				madedit->SetAutoIndent(true);
@@ -1576,7 +1576,7 @@ namespace mad_python {
 
 		void NoAutoIndent() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 				madedit->SetAutoIndent(false);
@@ -1584,7 +1584,7 @@ namespace mad_python {
 
 		void AutoCompletePair() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 				madedit->SetAutoCompletePair(true);
@@ -1592,7 +1592,7 @@ namespace mad_python {
 
 		void NoAutoCompletePair() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 				madedit->SetAutoCompletePair(false);
@@ -1602,7 +1602,7 @@ namespace mad_python {
 			bool res = false;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = madedit->GetAutoCompletePair(); }
@@ -1612,7 +1612,7 @@ namespace mad_python {
 
 		void InsertPairForSelection() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 				madedit->SetInsertPairForSelection(true);
@@ -1620,7 +1620,7 @@ namespace mad_python {
 
 		void NoInsertPairForSelection() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 				madedit->SetInsertPairForSelection(false);
@@ -1630,7 +1630,7 @@ namespace mad_python {
 			bool res = false;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = madedit->GetInsertPairForSelection(); }
@@ -1640,7 +1640,7 @@ namespace mad_python {
 
 		void InsertMode() { // true: insert, false: overwrite
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetInsertMode(true); }
@@ -1648,7 +1648,7 @@ namespace mad_python {
 
 		void OverwriteMode() { // true: insert, false: overwrite
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetInsertMode(false); }
@@ -1658,7 +1658,7 @@ namespace mad_python {
 			bool res = false;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = madedit->GetInsertMode(); }
@@ -1672,7 +1672,7 @@ namespace mad_python {
 			if (ctVerticalLine > catype && catype > ctBlock)
 				throw std::out_of_range("Valid range VerticalLine, HorizontalLine, Block");
 
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetCaretType(catype); }
@@ -1682,7 +1682,7 @@ namespace mad_python {
 			bool res = false;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = madedit->GetMouseSelectToCopy(); }
@@ -1692,7 +1692,7 @@ namespace mad_python {
 
 		void MouseSelectToCopy() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetMouseSelectToCopy(true); }
@@ -1700,7 +1700,7 @@ namespace mad_python {
 
 		void NoMouseSelectToCopy() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetMouseSelectToCopy(false); }
@@ -1710,7 +1710,7 @@ namespace mad_python {
 			bool res = false;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = madedit->GetMouseSelectToCopyWithCtrlKey(); }
@@ -1720,7 +1720,7 @@ namespace mad_python {
 
 		void MouseSelectToCopyWithCtrlKey() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetMouseSelectToCopyWithCtrlKey(true); }
@@ -1728,7 +1728,7 @@ namespace mad_python {
 
 		void NoMouseSelectToCopyWithCtrlKey() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetMouseSelectToCopyWithCtrlKey(false); }
@@ -1738,7 +1738,7 @@ namespace mad_python {
 			bool res = false;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = madedit->GetMiddleMouseToPaste(); }
@@ -1748,7 +1748,7 @@ namespace mad_python {
 
 		void MiddleMouseToPaste() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetMiddleMouseToPaste(true); }
@@ -1756,7 +1756,7 @@ namespace mad_python {
 
 		void NoMiddleMouseToPaste() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetMiddleMouseToPaste(true); }
@@ -1766,7 +1766,7 @@ namespace mad_python {
 			long res = 0;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = madedit->GetMaxWordWrapWidth(); }
@@ -1778,7 +1778,7 @@ namespace mad_python {
 			long res = 0;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = madedit->GetUCharWidth((ucs4_t)uc); }
@@ -1790,7 +1790,7 @@ namespace mad_python {
 			long res = 0;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = madedit->GetHexUCharWidth((ucs4_t)uc); }
@@ -1802,7 +1802,7 @@ namespace mad_python {
 			long res = 0;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = madedit->GetUCharType((ucs4_t)uc); }
@@ -1816,7 +1816,7 @@ namespace mad_python {
 			wxFileOffset column = -1;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->GetCaretPosition(line, subrow, column); }
@@ -1828,7 +1828,7 @@ namespace mad_python {
 			long res = 0;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = (long)madedit->GetCaretPosition(); }
@@ -1838,7 +1838,7 @@ namespace mad_python {
 
 		const std::string GetFileName() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{
@@ -1855,7 +1855,7 @@ namespace mad_python {
 			long res = 0;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = (long)madedit->GetFileSize(); }
@@ -1867,7 +1867,7 @@ namespace mad_python {
 			bool res = false;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = madedit->IsSelected(); }
@@ -1879,7 +1879,7 @@ namespace mad_python {
 			bool res = false;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = madedit->IsSelected(); }
@@ -1891,7 +1891,7 @@ namespace mad_python {
 			long res = 0;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = (long)madedit->GetLineBeginPos(line); }
@@ -1903,7 +1903,7 @@ namespace mad_python {
 			long res = 0;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = (long)madedit->GetSelectionSize(); }
@@ -1915,7 +1915,7 @@ namespace mad_python {
 			long res = 0;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = madedit->GetIndentCountByPos((wxFileOffset) endpos); }
@@ -1928,7 +1928,7 @@ namespace mad_python {
 			long res = 0;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = (long)madedit->GetSelectionBeginPos(); }
@@ -1940,7 +1940,7 @@ namespace mad_python {
 			long res = 0;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = (long)madedit->GetSelectionEndPos(); }
@@ -1953,7 +1953,7 @@ namespace mad_python {
 			int beginline = -1, endline = -1;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->GetSelectionLineId(beginline, endline); }
@@ -1963,7 +1963,7 @@ namespace mad_python {
 
 		void SetSelection(long beginpos, long endpos, bool bCaretAtBeginPos = false) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetSelection((wxFileOffset)beginpos, (wxFileOffset)endpos, bCaretAtBeginPos); }
@@ -1971,7 +1971,7 @@ namespace mad_python {
 
 		void SelectWholeLine() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SelectWholeLine(); }
@@ -1981,7 +1981,7 @@ namespace mad_python {
 			long res = 0;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = madedit->GetLineCount(); }
@@ -1994,7 +1994,7 @@ namespace mad_python {
 			MadNewLineType nltype = (MadNewLineType)nlType;
 			if (nltDefault > nltype && nltype > nltMAC)
 				throw std::out_of_range("Valid range Default, DOS, UNIX, MAC)");
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ConvertNewLineType(nltype); }
@@ -2005,7 +2005,7 @@ namespace mad_python {
 			MadNewLineType nltype = (MadNewLineType)nlType;
 			if (nltDefault > nltype && nltype > nltMAC)
 				throw std::out_of_range("Valid range Default, DOS, UNIX, MAC");
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetInsertNewLineType(nltype); }
@@ -2015,7 +2015,7 @@ namespace mad_python {
 			long res = 0;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = (long)madedit->GetNewLineType(); }
@@ -2027,7 +2027,7 @@ namespace mad_python {
 			long res = 0;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = (long)madedit->GetInsertNewLineType(); }
@@ -2039,7 +2039,7 @@ namespace mad_python {
 			bool res = false;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = madedit->IsModified(); }
@@ -2051,7 +2051,7 @@ namespace mad_python {
 			long res = 0;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ res = (long)madedit->GetModificationTime(); }
@@ -2061,7 +2061,7 @@ namespace mad_python {
 
 		void SetReadOnly() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetReadOnly(true); }
@@ -2069,7 +2069,7 @@ namespace mad_python {
 
 		void ClearReadOnly() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetReadOnly(false); }
@@ -2077,7 +2077,7 @@ namespace mad_python {
 
 		bool IsReadOnly() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ return madedit->IsReadOnly(); }
@@ -2087,7 +2087,7 @@ namespace mad_python {
 
 		bool IsTextFile() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ return madedit->IsTextFile(); }
@@ -2097,7 +2097,7 @@ namespace mad_python {
 
 		const std::string GetSelText() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{
@@ -2111,7 +2111,7 @@ namespace mad_python {
 
 		const std::string GetRangeText(long begpos, long endpos){
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{
@@ -2126,7 +2126,7 @@ namespace mad_python {
 
 		const std::string GetText(bool ignoreBOM = true) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{
@@ -2140,7 +2140,7 @@ namespace mad_python {
 
 		void SetText(const std::string &ws) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((! ws.empty()) && (madedit)) {
 				wxString wxWs(ws.c_str(), wxConvUTF8);
@@ -2152,7 +2152,7 @@ namespace mad_python {
 		// return true for full line, false for partial line
 		mad_py::tuple GetLine(long line, size_t maxlen = 0, bool ignoreBOM = true) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{
@@ -2167,7 +2167,7 @@ namespace mad_python {
 
 		long GetLineByPos(long pos) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ return madedit->GetLineByPos(pos); }
@@ -2177,7 +2177,7 @@ namespace mad_python {
 
 		const std::string GetSelHexString(bool withSpace) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit) {
 				wxString wxWs;
@@ -2190,7 +2190,7 @@ namespace mad_python {
 
 		const std::string GetWordFromCaretPos() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit) {
 				wxString wxWs;
@@ -2203,7 +2203,7 @@ namespace mad_python {
 
 		void CutLine() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->CutLine(); }
@@ -2211,7 +2211,7 @@ namespace mad_python {
 
 		void DeleteLine() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->DeleteLine(); }
@@ -2219,7 +2219,7 @@ namespace mad_python {
 
 		void InsertDateTime() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->InsertDateTime(); }
@@ -2227,7 +2227,7 @@ namespace mad_python {
 
 		void HighlightWords() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->HighlightWords(); }
@@ -2235,7 +2235,7 @@ namespace mad_python {
 
 		void SelectAll() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SelectAll(); }
@@ -2243,7 +2243,7 @@ namespace mad_python {
 
 		void Cut() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{
@@ -2256,7 +2256,7 @@ namespace mad_python {
 
 		void Copy() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->CopyToClipboard(); }
@@ -2264,7 +2264,7 @@ namespace mad_python {
 
 		void Paste() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->PasteFromClipboard(); }
@@ -2272,7 +2272,7 @@ namespace mad_python {
 
 		void DndBegDrag() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->DndBegDrag(); }
@@ -2280,7 +2280,7 @@ namespace mad_python {
 
 		void DndDrop() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->DndDrop(); }
@@ -2288,7 +2288,7 @@ namespace mad_python {
 
 		bool CanPaste() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ return madedit->CanPaste(); }
@@ -2298,7 +2298,7 @@ namespace mad_python {
 
 		void CopyText(const std::string &txt) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit) {
 				wxString text(txt.c_str(), wxConvUTF8);
@@ -2308,7 +2308,7 @@ namespace mad_python {
 
 		bool CanUndo() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ return madedit->CanUndo(); }
@@ -2317,7 +2317,7 @@ namespace mad_python {
 
 		bool CanRedo() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ return madedit->CanRedo(); }
@@ -2326,7 +2326,7 @@ namespace mad_python {
 
 		void Undo() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->Undo(); }
@@ -2334,7 +2334,7 @@ namespace mad_python {
 
 		void Redo() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->Redo(); }
@@ -2342,7 +2342,7 @@ namespace mad_python {
 
 		void Goto(long pos) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetCaretPosition((wxFileOffset)pos); }
@@ -2350,7 +2350,7 @@ namespace mad_python {
 
 		void SetCaretPosition(long pos, long selbeg = -1, long selend = -1) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetCaretPosition((wxFileOffset)pos, (wxFileOffset)selbeg, (wxFileOffset)selend); }
@@ -2358,7 +2358,7 @@ namespace mad_python {
 
 		void GoBack() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->GoBack(); }
@@ -2366,7 +2366,7 @@ namespace mad_python {
 
 		void GoForward() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->GoForward(); }
@@ -2374,7 +2374,7 @@ namespace mad_python {
 		
 		bool HasBracePair() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ return madedit->HasBracePair(); }
@@ -2384,7 +2384,7 @@ namespace mad_python {
 
 		void GoToLeftBrace() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->GoToLeftBrace(); }
@@ -2392,7 +2392,7 @@ namespace mad_python {
 
 		void GoToRightBrace() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->GoToRightBrace(); }
@@ -2405,7 +2405,7 @@ namespace mad_python {
 			long ok = SR_EXPR_ERROR;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!text.empty())) {
 				wxString wxText(text.c_str(), wxConvUTF8);
@@ -2430,7 +2430,7 @@ namespace mad_python {
 			long ok = SR_EXPR_ERROR;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!text.empty())) {
 				wxString wxText(text.c_str(), wxConvUTF8);
@@ -2453,7 +2453,7 @@ namespace mad_python {
 			long ok = SR_EXPR_ERROR;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!hexstr.empty())) {
 				wxString wxHexExpr(hexstr.c_str(), wxConvUTF8);
@@ -2469,7 +2469,7 @@ namespace mad_python {
 			long ok = SR_EXPR_ERROR;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!hexstr.empty())) {
 				wxString wxHexExpr(hexstr.c_str(), wxConvUTF8);
@@ -2488,7 +2488,7 @@ namespace mad_python {
 			{ return RR_EXPR_ERROR; }
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (!(madedit) || madedit->IsReadOnly())
 			{ return RR_NREP_NNEXT; }
@@ -2513,7 +2513,7 @@ namespace mad_python {
 			{ return RR_EXPR_ERROR; }
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (!(madedit) || madedit->IsReadOnly())
 			{ return RR_NREP_NNEXT; }
@@ -2536,7 +2536,7 @@ namespace mad_python {
 			{ return RR_EXPR_ERROR; }
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (!(madedit) || madedit->IsReadOnly())
 			{ return RR_NREP_NNEXT; }
@@ -2553,7 +2553,7 @@ namespace mad_python {
 			long ok = 0;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!expr.empty()) && (!madedit->IsReadOnly())) {
 				wxString wxExpr(expr.c_str(), wxConvUTF8), wxFmt(fmt.c_str(), wxConvUTF8);
@@ -2576,7 +2576,7 @@ namespace mad_python {
 			long ok = 0;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!expr.empty()) && (!madedit->IsReadOnly())) {
 				wxString wxExpr(expr.c_str(), wxConvUTF8), wxFmt(fmt.c_str(), wxConvUTF8);
@@ -2593,7 +2593,7 @@ namespace mad_python {
 			long ok = SR_EXPR_ERROR;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((!expr.empty()) && (madedit)) {
 				wxString wxExpr(expr.c_str(), wxConvUTF8);
@@ -2626,7 +2626,7 @@ namespace mad_python {
 			long ok = SR_EXPR_ERROR;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((!expr.empty()) && (madedit)) {
 				wxString wxExpr(expr.c_str(), wxConvUTF8), fmt;
@@ -2653,7 +2653,7 @@ namespace mad_python {
 			bool res = false;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (! filename.empty())) {
 				wxString wxEncoding(encoding.c_str(), wxConvUTF8);
@@ -2666,7 +2666,7 @@ namespace mad_python {
 
 		bool SaveToFile(const std::string &filename) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((!filename.empty()) && (madedit) && (!madedit->IsReadOnly())) {
 				wxString wxFilename(filename.c_str(), wxConvUTF8);
@@ -2678,7 +2678,7 @@ namespace mad_python {
 
 		bool Reload() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit) 
 				return madedit->Reload();
@@ -2689,7 +2689,7 @@ namespace mad_python {
 		// if the file is modified by another app, reload it.
 		bool ReloadByModificationTime() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit) 
 				return madedit->ReloadByModificationTime(false);
@@ -2700,7 +2700,7 @@ namespace mad_python {
 		// restore pos in Reload(), ConvertEncoding()
 		void RestorePosition(long pos, long toprow) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit) {
 				wxFileOffset wxPos = pos;
@@ -2713,7 +2713,7 @@ namespace mad_python {
 		// return wxID_YES(Saved), wxID_NO(Not Saved), or wxID_CANCEL
 		long Save(bool ask, const std::string &title, bool saveas) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!title.empty()) && (!madedit->IsReadOnly())) {
 				wxString wxTitle(title.c_str(), wxConvUTF8);
@@ -2726,7 +2726,7 @@ namespace mad_python {
 		// add: gogo, 21.09.2009
 		void ToggleBookmark() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->ToggleBookmark(); }
@@ -2734,7 +2734,7 @@ namespace mad_python {
 
 		void GotoNextBookmark() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->GotoNextBookmark(); }
@@ -2742,7 +2742,7 @@ namespace mad_python {
 
 		void GotoPreviousBookmark() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->GotoPreviousBookmark(); }
@@ -2751,7 +2751,7 @@ namespace mad_python {
 		//----------
 		void ConvertEncoding(const std::string &newenc, long flag) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly())) {
 				if (newenc.empty())
@@ -2765,7 +2765,7 @@ namespace mad_python {
 
 		void ConvertChineseA(long flag) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->ConvertChinese((MadConvertEncodingFlag)flag); }
@@ -2773,7 +2773,7 @@ namespace mad_python {
 
 		bool HasBOM() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit) 
 				return madedit->HasBOM();
@@ -2783,7 +2783,7 @@ namespace mad_python {
 
 		void ToggleBOM() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->ToggleBOM(); }
@@ -2791,7 +2791,7 @@ namespace mad_python {
 
 		void IncreaseIndent() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->IncreaseDecreaseIndent(true); }
@@ -2799,7 +2799,7 @@ namespace mad_python {
 
 		void DecreaseIndent() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->IncreaseDecreaseIndent(false); }
@@ -2807,7 +2807,7 @@ namespace mad_python {
 
 		bool HasLineComment() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit) 
 				return madedit->HasLineComment();
@@ -2817,7 +2817,7 @@ namespace mad_python {
 
 		void Comment() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->CommentUncomment(true); }
@@ -2825,7 +2825,7 @@ namespace mad_python {
 
 		void Uncomment() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->CommentUncomment(false); }
@@ -2833,7 +2833,7 @@ namespace mad_python {
 
 		void ToUpperCase() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->ToUpperCase(); }
@@ -2841,7 +2841,7 @@ namespace mad_python {
 
 		void ToLowerCase() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->ToLowerCase(); }
@@ -2849,7 +2849,7 @@ namespace mad_python {
 
 		void InvertCase() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->InvertCase(); }
@@ -2857,7 +2857,7 @@ namespace mad_python {
 
 		void Capitalize() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->Capitalize(); }
@@ -2865,7 +2865,7 @@ namespace mad_python {
 
 		void ToHalfWidth(bool ascii = true, bool japanese = true, bool korean = true, bool other = true) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->ToHalfWidth(ascii, japanese, korean, other); }
@@ -2873,7 +2873,7 @@ namespace mad_python {
 
 		void ToFullWidth(bool ascii = true, bool japanese = true, bool korean = true, bool other = true) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->ToFullWidth(ascii, japanese, korean, other); }
@@ -2881,7 +2881,7 @@ namespace mad_python {
 
 		void TrimTrailingSpaces() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->TrimTrailingSpaces(); }
@@ -2889,7 +2889,7 @@ namespace mad_python {
 
 		void TrimLeadingSpaces() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->TrimLeadingSpaces(); }
@@ -2897,7 +2897,7 @@ namespace mad_python {
 
 		void DeleteEmptyLines() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->DeleteEmptyLines(); }
@@ -2906,7 +2906,7 @@ namespace mad_python {
 
 		void DeleteEmptyLinesWithSpaces() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->DeleteEmptyLinesWithSpaces(); }
@@ -2914,7 +2914,7 @@ namespace mad_python {
 
 		void JoinLines() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->JoinLines(); }
@@ -2923,7 +2923,7 @@ namespace mad_python {
 		// startline<0 : sort all lines otherwise sort [beginline, endline]
 		void SortLines(MadSortFlags flags, long beginline, long endline) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->SortLines(flags, beginline, endline); }
@@ -2932,7 +2932,7 @@ namespace mad_python {
 		// convert WordWraps to NewLine-chars in the SelText or whole file
 		void ConvertWordWrapToNewLine() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->ConvertWordWrapToNewLine(); }
@@ -2940,7 +2940,7 @@ namespace mad_python {
 		// convert NewLine-chars to WordWraps in the SelText
 		void ConvertNewLineToWordWrap() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->ConvertNewLineToWordWrap(); }
@@ -2948,14 +2948,14 @@ namespace mad_python {
 
 		void ConvertSpaceToTab() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->ConvertSpaceToTab(); }
 		}
 		void ConvertTabToSpace() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->ConvertTabToSpace(); }
@@ -2963,7 +2963,7 @@ namespace mad_python {
 
 		void CopyAsHexString(bool withSpace) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->CopyAsHexString(withSpace); }
@@ -2971,7 +2971,7 @@ namespace mad_python {
 
 		void CopyRevertHex(const std::string &delimiters) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit) {
 				wxString wxDelimiters(delimiters.c_str(), wxConvUTF8);
@@ -2984,7 +2984,7 @@ namespace mad_python {
 			wxString str;
 
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit) {
 				wxArrayString detail;
@@ -3000,7 +3000,7 @@ namespace mad_python {
 
 		void SetColumnSelection(long startlineid, long startxpos, long hlines, long wlines) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
 			{ madedit->SetColumnSelection(startlineid, startxpos, hlines, wlines); }
@@ -3008,7 +3008,7 @@ namespace mad_python {
 
 		void ColumnAlignLeft() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->ColumnAlignLeft(); }
@@ -3016,7 +3016,7 @@ namespace mad_python {
 
 		void ColumnAlignRight() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->ColumnAlignRight(); }
@@ -3025,7 +3025,7 @@ namespace mad_python {
 
 		void Astyle() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (g_MainFrame && (madedit) && (!madedit->IsReadOnly()) && (!madedit->IsHexMode())) {
 				wxCommandEvent event;
@@ -3035,7 +3035,7 @@ namespace mad_python {
 
 		void XMLFormat() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (g_MainFrame && (madedit) && (!madedit->IsReadOnly()) && (!madedit->IsHexMode())) {
 				wxCommandEvent event;
@@ -3045,7 +3045,7 @@ namespace mad_python {
 
 		void JSONFormat() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (g_MainFrame && (madedit) && (!madedit->IsReadOnly()) && (!madedit->IsHexMode())) {
 				wxCommandEvent event;
@@ -3055,7 +3055,7 @@ namespace mad_python {
 
 		void Markdown2Html() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (g_MainFrame && (madedit) && (!madedit->IsReadOnly()) && (!madedit->IsHexMode())) {
 				wxCommandEvent event;
@@ -3065,7 +3065,7 @@ namespace mad_python {
 
 		void Html2PlainText() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (g_MainFrame && (madedit) && (!madedit->IsReadOnly()) && (!madedit->IsHexMode())) {
 				wxCommandEvent event;
@@ -3075,7 +3075,7 @@ namespace mad_python {
 
 		void ToggleBookmarkInSearch(bool bookmark) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->ToggleBookmarkInSearch(bookmark); }
@@ -3083,7 +3083,7 @@ namespace mad_python {
 
 		void CutDelBookmarkedLines(bool copyLines = false) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->CutDelBookmarkedLines(copyLines); }
@@ -3091,7 +3091,7 @@ namespace mad_python {
 
 		void DeleteUnmarkedLines() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->DeleteUnmarkedLines(); }
@@ -3099,7 +3099,7 @@ namespace mad_python {
 
 		void CopyUnmarkedLines() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->CopyUnmarkedLines(); }
@@ -3107,7 +3107,7 @@ namespace mad_python {
 
 		void CutUnmarkedLines() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->CutUnmarkedLines(); }
@@ -3115,7 +3115,7 @@ namespace mad_python {
 
 		void CopyCutDeleteUnmarkedLines(bool copyLines = false, bool deleteLines = false) {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->CopyCutDeleteUnmarkedLines(copyLines, deleteLines); }
@@ -3123,7 +3123,7 @@ namespace mad_python {
 
 		void ReplaceBookmarkedLines() {
 			MadEdit *madedit = g_CurrentMadEdit;
-			if (madedit == nullptr)
+			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if ((madedit) && (!madedit->IsReadOnly()))
 			{ madedit->ReplaceBookmarkedLines(); }

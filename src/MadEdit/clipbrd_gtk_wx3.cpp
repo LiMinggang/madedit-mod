@@ -776,7 +776,7 @@ wxDataObject* wxClipboardGtk::GTKGetDataObject(GdkAtom atom)
 wxClipboardGtk *g_ClipboardGtk=nullptr;
 wxClipboardGtk *GetClipboardGtk()
 {
-    if (g_ClipboardGtk==nullptr)
+    if (!g_ClipboardGtk)
     {
         g_ClipboardGtk=new wxClipboardGtk;
     }

@@ -475,7 +475,7 @@ void EditSortByOptions()
 
 void EditSortOptions(wxWindow* parent)
 {
-	if (g_CurrentMadEdit == nullptr || g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (!g_CurrentMadEdit || g_CurrentMadEdit == g_ActiveMadEdit) return;
 	if (g_CurrentMadEdit->IsHexMode())
 	{
 		g_CurrentMadEdit = nullptr;
@@ -670,8 +670,7 @@ void EditToHalfWidth()
 
 void EditToHalfWidthByOptions(wxWindow* parent)
 {
-	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
-	if (g_CurrentMadEdit == nullptr) { return; }
+	if (g_CurrentMadEdit == g_ActiveMadEdit || !g_CurrentMadEdit) return;
 
 	static wxArrayInt selections;
 	static bool inited = false;
@@ -734,7 +733,7 @@ void EditToFullWidth()
 
 void EditToFullWidthByOptions(wxWindow* parent)
 {
-	if ((g_CurrentMadEdit == g_ActiveMadEdit) ||(g_CurrentMadEdit == nullptr)) return;
+	if ((g_CurrentMadEdit == g_ActiveMadEdit) ||(!g_CurrentMadEdit)) return;
 
 	static wxArrayInt selections;
 	static bool inited = false;

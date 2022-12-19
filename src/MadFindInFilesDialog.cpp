@@ -410,7 +410,7 @@ void MadFindInFilesDialog::MadFindInFilesDialogClose(wxCloseEvent& event)
 			Show(false);
 			mframe->Raise();
 
-			if (g_ActiveMadEdit != nullptr)
+			if (g_ActiveMadEdit)
 			{
 				g_ActiveMadEdit->Refresh(false);
 				g_ActiveMadEdit->SetFocus();
@@ -1015,7 +1015,7 @@ void MadFindInFilesDialog::WxButtonActiveDirClick(wxCommandEvent& WXUNUSED(event
 {
 	extern MadEdit *g_ActiveMadEdit;
 
-	if (g_ActiveMadEdit != nullptr)
+	if (g_ActiveMadEdit)
 	{
 		wxString str = g_ActiveMadEdit->GetFileName();
 
