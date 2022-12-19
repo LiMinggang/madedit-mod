@@ -300,7 +300,7 @@ void MadEdit::ConvertChinese(MadConvertEncodingFlag flag)
 		}
 	}
 
-	if (ptext != nullptr)
+	if (ptext)
 	{
 		SetText(*ptext);
 		delete ptext;
@@ -1363,7 +1363,7 @@ ucs2_t *GetHalfwidthTable(bool ascii, bool japanese, bool korean, bool other)
 {
 	static ucs2_t *Halfwidth_Table = nullptr; // halfwidth-char to fullwidth-char table
 
-	if (Halfwidth_Table == nullptr)
+	if (!Halfwidth_Table)
 	{
 		Halfwidth_Table = new ucs2_t[65536];
 	}
@@ -1385,7 +1385,7 @@ ucs2_t *GetFullwidthTable(bool ascii, bool japanese, bool korean, bool other)
 {
 	static ucs2_t *Fullwidth_Table = nullptr; // fullwidth-char to halfwidth-char table
 
-	if (Fullwidth_Table == nullptr)
+	if (!Fullwidth_Table)
 	{
 		Fullwidth_Table = new ucs2_t[65536];
 	}
@@ -1847,7 +1847,7 @@ void MadEdit::WordCount(bool selection, int &wordCount, int &charCount, int &spa
 		previdx = idx;
 	}
 
-	if (detail != nullptr)
+	if (detail)
 	{
 		for (idx = 0; idx < UnicodeBlocksCount; ++idx)
 		{
@@ -2364,7 +2364,7 @@ void MadEdit::SortLines(MadSortFlags flags, int beginline, int endline)
 
 		if (bRemoveDup)
 		{
-			if (dupdata != nullptr && dupdata->Equal(data))
+			if (dupdata && dupdata->Equal(data))
 			{
 				dupdata = data;
 				data = nullptr;
@@ -2380,7 +2380,7 @@ void MadEdit::SortLines(MadSortFlags flags, int beginline, int endline)
 			}
 		}
 
-		if (data != nullptr)
+		if (data)
 		{
 			lit = data->lit;
 			wxFileOffset spos = lit->m_RowIndices[0].m_Start;

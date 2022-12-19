@@ -501,7 +501,7 @@ bool MadSyntax::LoadScheme(const wxString &schname, MadSyntax *syn)
 
 bool MadSyntax::SaveScheme(const wxString &schname, MadSyntax *syn)
 {
-	wxASSERT(syn != nullptr);
+	wxASSERT(syn);
 	wxString name = schname;
 
 	if (name.Right(1) == wxT('*')) name = schname.Left(schname.Len() - 1);

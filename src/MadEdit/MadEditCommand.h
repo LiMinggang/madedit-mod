@@ -303,7 +303,7 @@ public:
 		}
 		if (overwrite)
 		{
-			MadKeyBinding *kb=nullptr;
+			MadKeyBinding *kb = nullptr;
 			MadKeyBindingMap::iterator ecit	= m_EditCommandMap->find(cmd);
 			if (ecit	!= m_EditCommandMap->end())
 			{
@@ -316,7 +316,7 @@ public:
 			}
 
 			if (first) kb->AddFirst(0, cmd, shortcut);
-			else	  kb->Add(0, cmd, shortcut);
+			else kb->Add(0, cmd, shortcut);
 			m_EditCommandMap->insert(MadKeyBindingMap::value_type(cmd, kb));
 			m_ShortCutMap->insert(MadKeyBindingMap::value_type(shortcut, kb));
 		}

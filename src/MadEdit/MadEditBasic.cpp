@@ -1189,7 +1189,7 @@ void MadEdit::GetCaretPosition(int &line, int &subrow, wxFileOffset &column)
 
 wxFileOffset MadEdit::GetLastSavePointCaretPosition()
 {
-	if (m_SavePoint == nullptr) return wxFileOffset(-1);
+	if (!m_SavePoint) return wxFileOffset(-1);
 
 	return m_SavePoint->m_CaretPosAfter;
 }
@@ -2087,7 +2087,7 @@ void MadEdit::Undo()
 {
 	MadUndo *undo = m_UndoBuffer->Undo(!m_RecordCaretMovements);
 
-	if (undo == nullptr)
+	if (!undo)
 		return;
 
 	if (undo->m_Undos.empty()) // caret movement undo
@@ -2229,7 +2229,7 @@ void MadEdit::Redo()
 {
 	MadUndo *redo = m_UndoBuffer->Redo(!m_RecordCaretMovements);
 
-	if (redo == nullptr)
+	if (!redo)
 		return;
 
 	if (redo->m_Undos.empty()) // caret movement redo
@@ -2459,7 +2459,7 @@ void MadEdit::GoBack()
 {
 	MadUndo *undo = m_CaretTracker->Undo(false);
 
-	if (undo == nullptr)
+	if (!undo)
 		return;
 
 	if (undo->m_Undos.empty()) // caret movement undo
@@ -2476,7 +2476,7 @@ void MadEdit::GoForward()
 {
 	MadUndo *redo = m_CaretTracker->Redo(false);
 
-	if (redo == nullptr)
+	if (!redo)
 		return;
 
 	if (redo->m_Undos.empty()) // caret movement redo

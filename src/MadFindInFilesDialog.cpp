@@ -371,7 +371,7 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID WXUNUSED(
 		for (size_t i = 1; i < count; ++i) { WxComboBoxExclude->Append(m_RecentFindExclude->GetHistoryFile(i)); }
 	}
 
-	wxASSERT(g_SearchReplaceDialog != nullptr);
+	wxASSERT(g_SearchReplaceDialog);
 	if (g_SearchReplaceDialog->m_RecentFindText->GetCount() > 0)
 	{
 		m_FindText->SetText(g_SearchReplaceDialog->m_RecentFindText->GetHistoryFile(0));
@@ -404,7 +404,7 @@ void MadFindInFilesDialog::MadFindInFilesDialogClose(wxCloseEvent& event)
 	if (event.CanVeto())
 	{
 		wxFrame * mframe = dynamic_cast< wxFrame * >(wxTheApp->GetTopWindow());
-		if (mframe != nullptr)
+		if (mframe)
 		{
 			event.Veto();
 			Show(false);
@@ -453,14 +453,14 @@ void MadFindInFilesDialog::UpdateCheckBoxByCBHex(bool check)
 
 void MadFindInFilesDialog::WxBitmapButtonRecentFindTextClick(wxCommandEvent& WXUNUSED(event))
 {
-	wxASSERT(g_SearchReplaceDialog != nullptr);
+	wxASSERT(g_SearchReplaceDialog);
 
 	PopupMenu(&g_SearchReplaceDialog->WxPopupMenuRecentFindText);
 }
 
 void MadFindInFilesDialog::WxBitmapButtonRecentReplaceTextClick(wxCommandEvent& WXUNUSED(event))
 {
-	wxASSERT(g_SearchReplaceDialog != nullptr);
+	wxASSERT(g_SearchReplaceDialog);
 
 	PopupMenu(&g_SearchReplaceDialog->WxPopupMenuRecentReplaceText);
 }
@@ -468,7 +468,7 @@ void MadFindInFilesDialog::WxBitmapButtonRecentReplaceTextClick(wxCommandEvent& 
 void MadFindInFilesDialog::OnRecentFindText(wxCommandEvent& event)
 {
 	int idx = event.GetId() - ID_RECENTFINDTEXT1;
-	wxASSERT(g_SearchReplaceDialog != nullptr);
+	wxASSERT(g_SearchReplaceDialog);
 	wxString text = g_SearchReplaceDialog->m_RecentFindText->GetHistoryFile(idx);
 
 	if (!text.IsEmpty())
@@ -481,7 +481,7 @@ void MadFindInFilesDialog::OnRecentFindText(wxCommandEvent& event)
 void MadFindInFilesDialog::OnRecentReplaceText(wxCommandEvent& event)
 {
 	int idx = event.GetId() - ID_RECENTREPLACETEXT1;
-	wxASSERT(g_SearchReplaceDialog != nullptr);
+	wxASSERT(g_SearchReplaceDialog);
 	wxString text = g_SearchReplaceDialog->m_RecentReplaceText->GetHistoryFile(idx);
 
 	if (!text.IsEmpty())
@@ -509,7 +509,7 @@ void MadFindInFilesDialog::WxButtonFindClick(wxCommandEvent& WXUNUSED(event))
 
 	if (!text.IsEmpty())
 	{
-		wxASSERT(g_SearchReplaceDialog != nullptr);
+		wxASSERT(g_SearchReplaceDialog);
 		g_SearchReplaceDialog->m_RecentFindText->AddFileToHistory(text);
 		FindReplaceInFiles(false);
 	}
@@ -526,7 +526,7 @@ void MadFindInFilesDialog::WxButtonReplaceClick(wxCommandEvent& WXUNUSED(event))
 
 	if (!text.IsEmpty())
 	{
-		wxASSERT(g_SearchReplaceDialog != nullptr);
+		wxASSERT(g_SearchReplaceDialog);
 		g_SearchReplaceDialog->m_RecentFindText->AddFileToHistory(text);
 
 		if (!text2.IsEmpty())
@@ -621,7 +621,7 @@ public:
 
 		if (delta.ToLong() >= 350) {
 			g_Time = t;
-			wxASSERT(g_ProgressDialog != nullptr);
+			wxASSERT(g_ProgressDialog);
 			g_Continue = g_ProgressDialog->Update(0, wxString::Format(fmtmsg1, (wxLongLong(g_FileNameList.size()).ToString()).c_str()));
 
 			if (!g_Continue) { return wxDIR_STOP; }
@@ -836,7 +836,7 @@ void MadFindInFilesDialog::FindReplaceInFiles(bool bReplace)
 				size_t id;
 				madedit = g_MainFrame->GetEditByFileName(*fnit, id);
 
-				if (madedit == nullptr)
+				if (!madedit)
 				{
 					madedit = tempedit;
 					wxString enc = WxComboBoxEncoding->GetValue();
@@ -1108,7 +1108,7 @@ void MadFindInFilesDialog::MadFindInFilesDialogKeyDown(wxKeyEvent& event)
 			int x, y, w, h;
 			m_FindText->GetPosition(&x, &y);
 			m_FindText->GetSize(&w, &h);
-			wxASSERT(g_SearchReplaceDialog != nullptr);
+			wxASSERT(g_SearchReplaceDialog);
 			PopupMenu(&g_SearchReplaceDialog->WxPopupMenuRecentFindText, x, y + h);
 			return;
 		}
@@ -1118,7 +1118,7 @@ void MadFindInFilesDialog::MadFindInFilesDialogKeyDown(wxKeyEvent& event)
 				int x, y, w, h;
 				m_ReplaceText->GetPosition(&x, &y);
 				m_ReplaceText->GetSize(&w, &h);
-				wxASSERT(g_SearchReplaceDialog != nullptr);
+				wxASSERT(g_SearchReplaceDialog);
 				PopupMenu(&g_SearchReplaceDialog->WxPopupMenuRecentReplaceText, x, y + h);
 				return;
 			}

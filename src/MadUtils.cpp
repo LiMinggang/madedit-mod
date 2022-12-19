@@ -867,7 +867,7 @@ void EditInsertNumbers(wxWindow* parent)
 		// Hide Modaless Dialog
 		//HideModalessDialogs();
 
-		if (g_MadNumberDlg == nullptr) { g_MadNumberDlg = new MadNumberDlg(parent); }
+		if (!g_MadNumberDlg) { g_MadNumberDlg = new MadNumberDlg(parent); }
 
 		if (g_MadNumberDlg->ShowModal() == wxID_OK)
 		{
@@ -978,7 +978,7 @@ void EditSpellCheck(wxCommandEvent& event)
 void ToolsMadScriptList(wxCommandEvent& event)
 {
 	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
-	if (g_CurrentMadEdit != nullptr)
+	if (g_CurrentMadEdit)
 	{ 
 		wxString scriptdir = g_MadEditAppDir + wxT("scripts") + wxFILE_SEP_PATH;
 		int menuId = event.GetId();

@@ -534,7 +534,7 @@ void MadSearchReplaceDialog::WxButtonCloseClick(wxCommandEvent& WXUNUSED(event))
 {
 	Show(false);
 	wxFrame * mframe = dynamic_cast< wxFrame * >(wxTheApp->GetTopWindow());
-	if (mframe != nullptr)
+	if (mframe)
 	{
 		mframe->Raise();
 
@@ -698,7 +698,7 @@ void MadSearchReplaceDialog::WxButtonFindNextClick(wxCommandEvent& WXUNUSED(even
 	if (WxCheckBoxMoveFocus->GetValue())
 	{
 		wxFrame * mframe = dynamic_cast< wxFrame * >(wxTheApp->GetTopWindow());
-		if (mframe != nullptr)
+		if (mframe)
 		{
 			mframe->Raise();
 			g_ActiveMadEdit->SetFocus();
@@ -710,7 +710,7 @@ void MadSearchReplaceDialog::WxButtonFindPrevClick(wxCommandEvent& WXUNUSED(even
 {
 	extern MadEdit *g_ActiveMadEdit;
 
-	if (g_ActiveMadEdit == nullptr)
+	if (!g_ActiveMadEdit)
 		return;
 
 	// add: gogo, 19.09.2009
@@ -844,7 +844,7 @@ void MadSearchReplaceDialog::WxButtonFindPrevClick(wxCommandEvent& WXUNUSED(even
 	if (WxCheckBoxMoveFocus->GetValue())
 	{
 		wxFrame * mframe = dynamic_cast< wxFrame * >(wxTheApp->GetTopWindow());
-		if (mframe != nullptr)
+		if (mframe)
 		{
 			mframe->Raise();
 			g_ActiveMadEdit->SetFocus();
@@ -973,7 +973,8 @@ void MadSearchReplaceDialog::ReadWriteSettings(bool bRead)
 {
 	extern MadEdit *g_ActiveMadEdit;
 	wxConfigBase *m_Config = wxConfigBase::Get(false);
-	if (m_Config == nullptr) return;
+	if (!m_Config)
+		return;
 	wxString oldpath = m_Config->GetPath();
 	if (m_EnableTransparency && WxRadioLosingFocus->GetValue())
 	{
@@ -1134,7 +1135,7 @@ void MadSearchReplaceDialog::WxCheckBoxFindHexClick(wxCommandEvent& event)
  */
 void MadSearchReplaceDialog::WxButtonReplaceClick(wxCommandEvent& WXUNUSED(event))
 {
-	if (g_ActiveMadEdit == nullptr)
+	if (!g_ActiveMadEdit)
 		return;
 
 	wxString text;
@@ -1241,7 +1242,7 @@ void MadSearchReplaceDialog::WxButtonReplaceClick(wxCommandEvent& WXUNUSED(event
 				if (WxCheckBoxMoveFocus->GetValue())
 				{
 					wxFrame * mframe = dynamic_cast< wxFrame * >(wxTheApp->GetTopWindow());
-					if (mframe == nullptr)
+					if (!mframe)
 					{
 						return;
 					}
@@ -1479,7 +1480,7 @@ void MadSearchReplaceDialog::WxButtonCountClick(wxCommandEvent& WXUNUSED(event))
 {
 	extern MadEdit *g_ActiveMadEdit;
 
-	if (g_ActiveMadEdit == nullptr)
+	if (!g_ActiveMadEdit)
 		return;
 
 	int count = 0;
@@ -1643,7 +1644,7 @@ void DisplayFindAllResult(wxTreeItemId &myroot, vector<wxFileOffset> &begpos, ve
 				g_MainFrame->AddItemToFindInFilesResults(myroot, fmt, linetext, idx, filename, pid, begpos[idx], endpos[idx]);
 				++ResultCount;
 
-				if (updater != nullptr && (count >= 2000))
+				if (updater && (count >= 2000))
 				{
 					if (updater(idx, wxString::Format(status, (wxLongLong(idx).ToString().c_str()), (wxLongLong(count).ToString().c_str())), nullptr) == false) break;
 				}

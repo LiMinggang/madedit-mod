@@ -353,7 +353,7 @@ const long MadEditFrame::ID_RECENTFINDTEXT20 = MadUniqueIDReserver::Instance().R
 wxDEFINE_EVENT(EVT_AUINOTEBOOK_PAGE_ADVANCE, wxMouseEvent);
 
 EmbeddedPython *g_EmbeddedPython = 0;
-MadRecentList  *g_RecentFindText = nullptr;
+MadRecentList *g_RecentFindText = nullptr;
 extern wxString g_MadEditAppDir, g_MadEditHomeDir;
 wxHtmlWindow * g_MadToolHtmlWin = nullptr;
 long g_HintColumns = 80;
@@ -466,14 +466,14 @@ wxFileOffset g_MPythonSelEndPos = -1;
 
 extern bool IsMacroRecording()
 {
-	return ((g_MainFrame != nullptr) && (g_MainFrame->IsMacroRecording()) && (g_ActiveMadEdit));
+	return ((g_MainFrame) && (g_MainFrame->IsMacroRecording()) && (g_ActiveMadEdit));
 }
 
 inline void RecordAsMadMacro(MadEdit * edit, const wxString& script, bool inputCh = false);
 
 inline void RecordAsMadMacro(MadEdit * edit, const wxString& script, bool inputCh /*= false*/)
 {
-	if ((g_MainFrame != nullptr) && (edit == g_ActiveMadEdit))
+	if ((g_MainFrame) && (edit == g_ActiveMadEdit))
 	{
 		if (g_MainFrame->IsMacroRecording())
 		{
@@ -660,7 +660,7 @@ public:
 	FileCaretPosManager() : max_count(40) {}
 
 	void Add(MadEdit *madedit) {
-		if (madedit == nullptr) { return; }
+		if (!madedit) return;
 
 		wxString name = madedit->GetFileName();
 
@@ -987,7 +987,7 @@ private:
 				case wxDF_UNICODETEXT:
 					{
 						wxTextDataObject * dataobjText = static_cast<wxTextDataObject *>(dataobj);
-						wxASSERT(dataobjText != nullptr);
+						wxASSERT(dataobjText);
 						if (dataobjText)
 						{
 							wxString data = dataobjText->GetText();
@@ -1006,7 +1006,7 @@ private:
 				case wxDF_FILENAME:
 					{
 						wxFileDataObject * dataobjFile = static_cast<wxFileDataObject *>(dataobj);
-						wxASSERT(dataobjFile != nullptr);
+						wxASSERT(dataobjFile);
 						if (dataobjFile)
 						{
 							wxArrayString filenames = dataobjFile->GetFilenames();
@@ -1132,7 +1132,7 @@ public:
 	};
 
 	void AdvanceSelection(bool bForward) {
-		if (GetPageCount() <= 1) { return; }
+		if (GetPageCount() <= 1) return;
 
 		list<PageData> pages_list = GetPagesList();
 		wxWindow* win = GetPage(GetSelection());
@@ -1399,7 +1399,7 @@ void OnEditSelectionChanged(MadEdit *madedit)
 	wxMadAuiNotebook * notebook = g_MainFrame->m_Notebook;
 	notebook->ConnectMouseClick();
 
-	if (madedit == nullptr)
+	if (!madedit)
 	{
 		g_StatusBar->SetStatusText(wxEmptyString, 1);
 		g_StatusBar->SetStatusText(wxEmptyString, 2);
@@ -1476,7 +1476,7 @@ void OnEditStatusChanged(MadEdit *madedit)
 
 	notebook->ConnectMouseClick();
 
-	if (madedit == nullptr)
+	if (!madedit)
 	{
 		g_StatusBar->SetStatusText(wxEmptyString, 4);
 		g_StatusBar->SetStatusText(wxEmptyString, 5);
@@ -1586,12 +1586,12 @@ void OnEditStatusChanged(MadEdit *madedit)
 			}
 
 			g_StatusBar->Update(); // repaint immediately
-			/*if (g_SearchReplaceDialog != nullptr)
+			/*if (g_SearchReplaceDialog)
 			{
 				g_SearchReplaceDialog->UpdateCheckBoxByCBHex(g_SearchReplaceDialog->WxCheckBoxFindHex->GetValue());
 			}
 
-			if (g_SearchReplaceDialog != nullptr)
+			if (g_SearchReplaceDialog)
 			{
 				g_SearchReplaceDialog->UpdateCheckBoxByCBHex(g_SearchReplaceDialog->WxCheckBoxFindHex->GetValue());
 			}*/
@@ -1630,7 +1630,7 @@ void OnEditMouseRightUp(MadEdit * madedit)
 	wxWindow * pwin  = madedit->GetParent();
 	g_CurrentMadEdit = madedit;
 
-	if (editPopup == nullptr || pwin == nullptr) return;
+	if (!editPopup || !pwin) return;
 
 	if (madedit && !madedit->IsHexMode() && madedit->GetSpellCheckStatus())
 	{
@@ -3312,7 +3312,7 @@ void MadEditFrame::CreateGUIControls(void)
 	g_AccelFindPrev.Set(0, 0, 0, 0);
 	wxAcceleratorEntry *ent = GetAccelFromString(g_Menu_Search->GetLabel(menuFindNext));
 
-	if (ent != nullptr)
+	if (ent)
 	{
 		g_AccelFindNext = *ent;
 		delete ent;
@@ -3320,7 +3320,7 @@ void MadEditFrame::CreateGUIControls(void)
 
 	ent = GetAccelFromString(g_Menu_Search->GetLabel(menuFindPrevious));
 
-	if (ent != nullptr)
+	if (ent)
 	{
 		g_AccelFindPrev = *ent;
 		delete ent;
@@ -3808,18 +3808,18 @@ void MadEditFrame::MadEditFrameClose(wxCloseEvent& event)
 
 		if (g_ForcePurgeThisTime)
 		{
-			if (g_SearchReplaceDialog == nullptr)
+			if (!g_SearchReplaceDialog)
 			{
 				g_SearchReplaceDialog = new MadSearchReplaceDialog(this, -1);
 			}
 
-			if (g_FindInFilesDialog == nullptr)
+			if (!g_FindInFilesDialog)
 			{
 				g_FindInFilesDialog = new MadFindInFilesDialog(this, -1);
 			}
 		}
 
-		if (g_SearchReplaceDialog != nullptr)
+		if (g_SearchReplaceDialog)
 		{
 			if (g_SearchReplaceDialog->IsShown())
 			{ g_SearchReplaceDialog->Show(false); }
@@ -3828,7 +3828,7 @@ void MadEditFrame::MadEditFrameClose(wxCloseEvent& event)
 			g_SearchReplaceDialog->PurgeRecentReplaceTexts();
 		}
 
-		if (g_FindInFilesDialog != nullptr)
+		if (g_FindInFilesDialog)
 		{
 			if (g_FindInFilesDialog->IsShown())
 			{ g_FindInFilesDialog->Show(false); }
@@ -3898,7 +3898,7 @@ void MadEditFrame::MadEditFrameClose(wxCloseEvent& event)
 		//----------
 	}
 
-	if (g_FindInFilesDialog != nullptr)
+	if (g_FindInFilesDialog)
 	{
 		if (g_FindInFilesDialog->IsShown())
 		{ g_FindInFilesDialog->Show(false); }
@@ -4359,7 +4359,7 @@ void MadEditFrame::OnInfoNotebookSize(wxSizeEvent &evt)
 		}
 		else
 		{
-			if (pinfo.frame != nullptr)
+			if (pinfo.frame)
 			{
 				size = pinfo.frame->GetSize();
 			}
@@ -4428,7 +4428,7 @@ void MadEditFrame::OnFindInFilesResultsDClick(wxMouseEvent& event)
 				}
 			}
 
-			if (madedit == nullptr && wxFileExists(cpdata->filename))
+			if (!madedit && wxFileExists(cpdata->filename))
 			{
 				g_MainFrame->OpenFile(cpdata->filename, true);
 #ifdef __WXMSW__
@@ -4451,7 +4451,7 @@ void MadEditFrame::OnFindInFilesResultsDClick(wxMouseEvent& event)
 		}
 	}
 
-	if (madedit == nullptr) { event.Skip(); }
+	if (!madedit) { event.Skip(); }
 }
 
 void MadEditFrame::ResetFindInFilesResults()
@@ -4701,7 +4701,7 @@ bool MadEditFrame::OpenFile(const wxString &fname, bool mustExist, bool changeSe
 
 	MadEdit *madedit = g_ActiveMadEdit;
 
-	if (!filename.IsEmpty() && madedit != nullptr
+	if (!filename.IsEmpty() && madedit
 			&& !madedit->IsModified() && madedit->GetFileName().IsEmpty())
 	{
 		// load file in g_ActiveMadEdit
@@ -4884,7 +4884,7 @@ void MadEditFrame::RunScriptWithFile(const wxString &filename, const wxString &s
 				madedit = g_MainFrame->GetEditByFileName(filename, id);
 			}
 
-			if (madedit == nullptr)
+			if (!madedit)
 			{
 				madedit = tempedit;
 				wxString enc = WxComboBoxEncoding->GetValue();
@@ -4974,7 +4974,7 @@ bool MadEditFrame::QueryCloseFile(size_t idx)
 {
 	MadEdit *madedit = (MadEdit*)m_Notebook->GetPage(idx);
 
-	if (madedit == nullptr)
+	if (!madedit)
 	{
 		wxASSERT(0);
 		return false;
@@ -5633,7 +5633,7 @@ void MadEditFrame::OnUpdateUI_MenuViewToolbarsLockPosition(wxUpdateUIEvent& even
 void MadEditFrame::OnUpdateUI_MenuViewMenuBarToggle(wxUpdateUIEvent& event)
 {
 	event.Enable(true);
-	event.Check(GetMenuBar() != nullptr);
+	event.Check(GetMenuBar());
 }
 void MadEditFrame::OnUpdateUI_MenuViewTypewriterMode(wxUpdateUIEvent& event)
 {
@@ -5940,7 +5940,7 @@ void MadEditFrame::OnFileSaveAll(wxCommandEvent& WXUNUSED(event))
 {
 	int selid = m_Notebook->GetSelection();
 
-	if (selid == -1) { return; } // no file was opened
+	if (selid == -1) return; // no file was opened
 
 	MadEdit *madedit = (MadEdit*)m_Notebook->GetPage(selid);
 	wxString name;
@@ -6007,7 +6007,7 @@ void MadEditFrame::OnFileReload(wxCommandEvent& WXUNUSED(event))
 
 void MadEditFrame::OnRecentFilesList(wxCommandEvent& WXUNUSED(event))
 {
-	if (g_RecentOpenedFileListDialog == nullptr)
+	if (!g_RecentOpenedFileListDialog)
 	{
 		g_RecentOpenedFileListDialog = new MadFileHistoryDialog(this);
 	}
@@ -6154,7 +6154,7 @@ void MadEditFrame::OnFilePageSetup(wxCommandEvent& WXUNUSED(event))
 
 void MadEditFrame::OnFilePrintPreview(wxCommandEvent& WXUNUSED(event))
 {
-	if (g_ActiveMadEdit == nullptr) { return; }
+	if (!g_ActiveMadEdit) return;
 
 	// Pass two printout objects: for preview, and possible printing.
 	wxPrintDialogData printDialogData(g_PageSetupData->GetPrintData()); //*g_PrintData);
@@ -6624,7 +6624,7 @@ void MadEditFrame::OnEditSortByOptions(wxCommandEvent& WXUNUSED(event))
 
 void MadEditFrame::OnEditSortOptions(wxCommandEvent& WXUNUSED(event))
 {
-	if (g_ActiveMadEdit == nullptr || g_ActiveMadEdit->IsHexMode())
+	if (!g_ActiveMadEdit || g_ActiveMadEdit->IsHexMode())
 	{ return; }
 
 	MadSortDialog dialog(this);
@@ -6835,7 +6835,7 @@ void MadEditFrame::OnEditToHalfWidth(wxCommandEvent& WXUNUSED(event))
 
 void MadEditFrame::OnEditToHalfWidthByOptions(wxCommandEvent& WXUNUSED(event))
 {
-	if (g_ActiveMadEdit == nullptr) { return; }
+	if (!g_ActiveMadEdit) return;
 
 	static wxArrayInt selections;
 	static bool inited = false;
@@ -6901,7 +6901,7 @@ void MadEditFrame::OnEditToFullWidth(wxCommandEvent& WXUNUSED(event))
 
 void MadEditFrame::OnEditToFullWidthByOptions(wxCommandEvent& WXUNUSED(event))
 {
-	if (g_ActiveMadEdit == nullptr) { return; }
+	if (!g_ActiveMadEdit) return;
 
 	static wxArrayInt selections;
 	static bool inited = false;
@@ -7037,7 +7037,7 @@ void MadEditFrame::OnEditInsertNumbers(wxCommandEvent& WXUNUSED(event))
 		// Hide Modaless Dialog
 		HideModalessDialogs();
 
-		if (g_MadNumberDlg == nullptr) { g_MadNumberDlg = new MadNumberDlg(this); }
+		if (!g_MadNumberDlg) { g_MadNumberDlg = new MadNumberDlg(this); }
 
 		if (g_MadNumberDlg->ShowModal() == wxID_OK)
 		{
@@ -7211,9 +7211,9 @@ void MadEditFrame::OnEditBookmarkReplace(wxCommandEvent& WXUNUSED(event))
 
 void MadEditFrame::OnSearchFind(wxCommandEvent& WXUNUSED(event))
 {
-	if (g_ActiveMadEdit == nullptr) { return; }
+	if (!g_ActiveMadEdit) return;
 
-	if (g_SearchReplaceDialog == nullptr)
+	if (!g_SearchReplaceDialog)
 	{
 		g_SearchReplaceDialog = new MadSearchReplaceDialog(this, -1);
 	}
@@ -7273,14 +7273,14 @@ void MadEditFrame::OnSearchFind(wxCommandEvent& WXUNUSED(event))
 
 void MadEditFrame::OnSearchFindNext(wxCommandEvent& WXUNUSED(event))
 {
-	if (g_ActiveMadEdit == nullptr) { return; }
+	if (!g_ActiveMadEdit) return;
 
-	if (g_SearchReplaceDialog == nullptr)
+	if (!g_SearchReplaceDialog)
 	{
 		g_SearchReplaceDialog = new MadSearchReplaceDialog(this, -1);
 	}
 
-	if (g_FindInFilesDialog != nullptr && g_FindInFilesDialog->IsShown())
+	if (g_FindInFilesDialog && g_FindInFilesDialog->IsShown())
 	{ g_FindInFilesDialog->Show(false); }
 
 	//g_SearchReplaceDialog->m_FindText->SetEncoding(g_ActiveMadEdit->GetEncodingName());
@@ -7321,14 +7321,14 @@ void MadEditFrame::OnSearchFindNext(wxCommandEvent& WXUNUSED(event))
 
 void MadEditFrame::OnSearchFindPrevious(wxCommandEvent& WXUNUSED(event))
 {
-	if (g_ActiveMadEdit == nullptr) { return; }
+	if (!g_ActiveMadEdit) return;
 
-	if (g_SearchReplaceDialog == nullptr)
+	if (!g_SearchReplaceDialog)
 	{
 		g_SearchReplaceDialog = new MadSearchReplaceDialog(this, -1);
 	}
 
-	if (g_FindInFilesDialog != nullptr && g_FindInFilesDialog->IsShown())
+	if (g_FindInFilesDialog && g_FindInFilesDialog->IsShown())
 	{ g_FindInFilesDialog->Show(false); }
 
 	//g_SearchReplaceDialog->m_FindText->SetEncoding(g_ActiveMadEdit->GetEncodingName());
@@ -7368,14 +7368,14 @@ void MadEditFrame::OnSearchFindPrevious(wxCommandEvent& WXUNUSED(event))
 
 void MadEditFrame::OnSearchReplace(wxCommandEvent& WXUNUSED(event))
 {
-	if (g_ActiveMadEdit == nullptr) { return; }
+	if (!g_ActiveMadEdit) return;
 
-	if (g_SearchReplaceDialog == nullptr)
+	if (!g_SearchReplaceDialog)
 	{
 		g_SearchReplaceDialog = new MadSearchReplaceDialog(this, -1);
 	}
 
-	if (g_FindInFilesDialog != nullptr)
+	if (g_FindInFilesDialog)
 	{ g_FindInFilesDialog->Show(false); }
 
 	//g_SearchReplaceDialog->m_FindText->SetEncoding(g_ActiveMadEdit->GetEncodingName());
@@ -7436,12 +7436,12 @@ void MadEditFrame::OnSearchReplace(wxCommandEvent& WXUNUSED(event))
 
 void MadEditFrame::OnSearchFindInFiles(wxCommandEvent& WXUNUSED(event))
 {
-	if (g_SearchReplaceDialog == nullptr)
+	if (!g_SearchReplaceDialog)
 	{
 		g_SearchReplaceDialog = new MadSearchReplaceDialog(this, -1);
 	}
 
-	if (g_FindInFilesDialog == nullptr)
+	if (!g_FindInFilesDialog)
 	{
 		g_FindInFilesDialog = new MadFindInFilesDialog(this, -1);
 	}
@@ -7512,7 +7512,7 @@ void MadEditFrame::OnSearchShowFindInFilesResults(wxCommandEvent& WXUNUSED(event
 
 void MadEditFrame::OnSearchGoToLine(wxCommandEvent& WXUNUSED(event))
 {
-	if (g_ActiveMadEdit == nullptr) { return; }
+	if (!g_ActiveMadEdit) return;
 
 	// Hide Modaless Dialog
 	HideModalessDialogs();
@@ -7573,7 +7573,7 @@ void MadEditFrame::OnSearchGoToLine(wxCommandEvent& WXUNUSED(event))
 
 void MadEditFrame::OnSearchGoToPosition(wxCommandEvent& WXUNUSED(event))
 {
-	if (g_ActiveMadEdit == nullptr) { return; }
+	if (!g_ActiveMadEdit) return;
 
 	// Hide Modaless Dialog
 	HideModalessDialogs();
@@ -7850,7 +7850,7 @@ void MadEditFrame::OnViewFontSize(wxCommandEvent& event)
 
 void MadEditFrame::OnViewSetFont(wxCommandEvent& WXUNUSED(event))
 {
-	if (g_ActiveMadEdit == nullptr) { return; }
+	if (!g_ActiveMadEdit) return;
 
 	wxFontData data;
 	wxFont font = g_ActiveMadEdit->GetFont();
@@ -7929,7 +7929,7 @@ void MadEditFrame::OnViewTabColumn(wxCommandEvent& event)
 
 void MadEditFrame::OnViewPreview(wxCommandEvent& event)
 {
-	if (g_ActiveMadEdit == nullptr) { return; }
+	if (!g_ActiveMadEdit) return;
 
 	int menuItemId = event.GetId();
 
@@ -8587,7 +8587,7 @@ void MadEditFrame::OnToolsOptions(wxCommandEvent& WXUNUSED(event))
 {
 	ScanForLocales();
 
-	if (g_OptionsDialog == nullptr) { g_OptionsDialog = new MadOptionsDialog(this); }
+	if (!g_OptionsDialog) { g_OptionsDialog = new MadOptionsDialog(this); }
 	else
 	{
 		// update languages
@@ -8961,7 +8961,7 @@ void MadEditFrame::OnToolsOptions(wxCommandEvent& WXUNUSED(event))
 
 void MadEditFrame::OnToolsHighlighting(wxCommandEvent& WXUNUSED(event))
 {
-	if (g_HighlightingDialog == nullptr) { g_HighlightingDialog = new MadHighlightingDialog(this, -1); }
+	if (!g_HighlightingDialog) { g_HighlightingDialog = new MadHighlightingDialog(this, -1); }
 
 	if (g_ActiveMadEdit)
 	{
@@ -9186,7 +9186,7 @@ void MadEditFrame::OnToolsPurgeHistories(wxCommandEvent& WXUNUSED(event))
 			|| dlg.wxCheckBoxRecentSearchedDirectories->IsChecked() || dlg.wxRecentSearchedFileFilters->IsChecked()
 			|| dlg.wxCheckBoxRecentSearchedExcludeFilters->IsChecked() || dlg.wxCheckBoxResetTransparency->IsChecked())
 		{
-			if (g_SearchReplaceDialog == nullptr)
+			if (!g_SearchReplaceDialog)
 			{
 				g_SearchReplaceDialog = new MadSearchReplaceDialog(this, -1);
 			}
@@ -9210,7 +9210,7 @@ void MadEditFrame::OnToolsPurgeHistories(wxCommandEvent& WXUNUSED(event))
 			if (dlg.wxCheckBoxRecentSearchedDirectories->IsChecked() || dlg.wxRecentSearchedFileFilters->IsChecked()
 				|| dlg.wxCheckBoxRecentSearchedExcludeFilters->IsChecked())
 			{
-				if (g_FindInFilesDialog == nullptr)
+				if (!g_FindInFilesDialog)
 				{
 					g_FindInFilesDialog = new MadFindInFilesDialog(this, -1);
 				}
@@ -9287,7 +9287,7 @@ void MadEditFrame::OnToolsPurgeHistories(wxCommandEvent& WXUNUSED(event))
 
 void MadEditFrame::OnToolsRunTempMacro(wxCommandEvent& WXUNUSED(event))
 {
-	if (g_MadMacroDlg == nullptr)
+	if (!g_MadMacroDlg)
 	{
 		g_MadMacroDlg = new MadMacroDlg(this);
 	}
@@ -9297,7 +9297,7 @@ void MadEditFrame::OnToolsRunTempMacro(wxCommandEvent& WXUNUSED(event))
 	if (g_SearchReplaceDialog)
 	{ g_SearchReplaceDialog->Show(false); }
 
-	if (g_FindInFilesDialog != nullptr)
+	if (g_FindInFilesDialog)
 	{ g_FindInFilesDialog->Show(false); }
 
 	g_MadMacroDlg->ShowModal();
@@ -9365,7 +9365,7 @@ void MadEditFrame::OnToolsRunMacroFile(wxCommandEvent& WXUNUSED(event))
 
 			if (str.IsNull() == false)
 			{
-				if (g_MadMacroDlg == nullptr)
+				if (!g_MadMacroDlg)
 				{
 					g_MadMacroDlg = new MadMacroDlg(this);
 				}
@@ -9440,7 +9440,7 @@ void MadEditFrame::OnToolsPlayRecMacro(wxCommandEvent& WXUNUSED(event))
 			if (g_FindInFilesDialog)
 			{ g_FindInFilesDialog->Show(false); }
 
-			if (g_MadMacroDlg == nullptr)
+			if (!g_MadMacroDlg)
 			{
 				g_MadMacroDlg = new MadMacroDlg(this);
 			}
@@ -9766,7 +9766,7 @@ void MadEditFrame::OnToolsConvertEncoding(wxCommandEvent& WXUNUSED(event))
 {
 	if (g_ActiveMadEdit)
 	{ 
-		if (g_ConvEncDialog == nullptr) { g_ConvEncDialog = new MadConvEncDialog(this, -1); }
+		if (!g_ConvEncDialog) { g_ConvEncDialog = new MadConvEncDialog(this, -1); }
 
 		// Hide Modaless Dialog
 		HideModalessDialogs();
@@ -9774,7 +9774,7 @@ void MadEditFrame::OnToolsConvertEncoding(wxCommandEvent& WXUNUSED(event))
 		if (g_ConvEncDialog->ShowModal() == wxID_OK)
 		{
 			g_ActiveMadEdit->ConvertEncoding(g_ConvEncDialog->WxComboBoxEncoding->GetValue(),
-											  MadConvertEncodingFlag(g_ConvEncDialog->WxRadioBoxOption->GetSelection()));
+											 MadConvertEncodingFlag(g_ConvEncDialog->WxRadioBoxOption->GetSelection()));
 
 			if (IsMacroRecording())
 			{
@@ -9800,8 +9800,7 @@ void MadEditFrame::OnToolsConvertEncoding(wxCommandEvent& WXUNUSED(event))
 					default:
 						flag += wxString(wxT("None"));
 				}
-				RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("ConvertEncoding(\"%s\", "), g_ConvEncDialog->WxComboBoxEncoding->GetValue().c_str()
-								) + flag + wxString(wxT(")")));
+				RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("ConvertEncoding(\"%s\", "), g_ConvEncDialog->WxComboBoxEncoding->GetValue().c_str()) + flag + wxString(wxT(")")));
 			}
 
 			wxString oldpath = m_Config->GetPath();
@@ -9962,7 +9961,7 @@ void MadEditFrame::OnToolsHtml2PlainText(wxCommandEvent& WXUNUSED(event))
 			wxLogError(wxString(_("This is not a text file:")) + g_ActiveMadEdit->GetFileName());
 			return;
 		}
-		if (g_MadToolHtmlWin == nullptr)
+		if (!g_MadToolHtmlWin)
 		{
 			try
 			{
@@ -10048,7 +10047,7 @@ static bool BuffersDiffer(const wxString &a, const wxString &b)
 
 void MadEditFrame::OnToolsAstyleFormat(wxCommandEvent& WXUNUSED(event))
 {
-	if (g_ActiveMadEdit == nullptr) { return; }
+	if (!g_ActiveMadEdit) return;
 	if (g_ActiveMadEdit->IsHexMode()) // In case of OOM
 	{
 		wxLogError(wxString(_("This is not a text file:")) + g_ActiveMadEdit->GetFileName());
@@ -10100,7 +10099,7 @@ void MadEditFrame::OnToolsAstyleFormat(wxCommandEvent& WXUNUSED(event))
 
 	wxString formattedText;
 
-	if (g_ASFormatter == nullptr)
+	if (!g_ASFormatter)
 	{
 		g_ASFormatter = new astyle::ASFormatter();
 	}
@@ -10203,7 +10202,7 @@ void MadEditFrame::OnToolsXMLFormat(wxCommandEvent& WXUNUSED(event))
 
 void MadEditFrame::OnToolsJSONFormat(wxCommandEvent& WXUNUSED(event))
 {
-	if (g_ActiveMadEdit == nullptr) { return; }
+	if (!g_ActiveMadEdit) return;
 	if (g_ActiveMadEdit->IsHexMode()) // In case of OOM
 	{
 		wxLogError(wxString(_("This is not a text file:")) + g_ActiveMadEdit->GetFileName());
@@ -10283,7 +10282,7 @@ void MadEditFrame::OnWindowToggleWindow(wxCommandEvent& WXUNUSED(event))
 {
 	size_t count = m_Notebook->GetPageCount();
 
-	if (count <= 1) { return; }
+	if (count <= 1) return;
 
 	int selid = m_Notebook->GetSelection();
 	g_CheckModTimeForReload = false;
@@ -10318,7 +10317,7 @@ void MadEditFrame::OnWindowToggleWindow(wxCommandEvent& WXUNUSED(event))
 
 void MadEditFrame::OnWindowPreviousWindow(wxCommandEvent& WXUNUSED(event))
 {
-	if (m_Notebook->GetPageCount() <= 1) { return; }
+	if (m_Notebook->GetPageCount() <= 1) return;
 
 	g_PrevPageID = m_Notebook->GetSelection();
 	g_CheckModTimeForReload = false;
@@ -10340,7 +10339,7 @@ void MadEditFrame::OnWindowPreviousWindow(wxCommandEvent& WXUNUSED(event))
 
 void MadEditFrame::OnWindowNextWindow(wxCommandEvent& WXUNUSED(event))
 {
-	if (m_Notebook->GetPageCount() <= 1) { return; }
+	if (m_Notebook->GetPageCount() <= 1) return;
 
 	g_PrevPageID = m_Notebook->GetSelection();
 	g_CheckModTimeForReload = false;
@@ -10362,7 +10361,7 @@ void MadEditFrame::OnWindowNextWindow(wxCommandEvent& WXUNUSED(event))
 
 void MadEditFrame::OnWindowWindowList(wxCommandEvent& WXUNUSED(event))
 {
-	if (g_WinListDialog == nullptr) g_WinListDialog = new MadWinListDialog(this);
+	if (!g_WinListDialog) g_WinListDialog = new MadWinListDialog(this);
 	g_WinListDialog->ShowModal();
 }
 
@@ -10578,7 +10577,7 @@ void MadEditFrame::OnContextMenu(wxContextMenuEvent& WXUNUSED(event))
 {
 #if wxUSE_MENUS
 
-	if (g_Menu_FrameContext == nullptr)
+	if (!g_Menu_FrameContext)
 	{
 		g_Menu_FrameContext = new wxMenu((long)0);
 		g_Menu_FrameContext->AppendCheckItem(menuToolBarsToggleAll, _("Toggle Main Toolbar"));

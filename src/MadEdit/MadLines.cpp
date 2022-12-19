@@ -154,7 +154,7 @@ size_t MadConvFileName::MB2WC(wchar_t *outputBuf, const char *psz, size_t output
 		bool is_utf8 = IsTextUTF8((wxByte *)psz + dirlen, int(fnlen));
 		wchar_t *obuf = outputBuf;
 
-		if (outputBuf != nullptr)
+		if (outputBuf)
 			obuf += dirret;
 
 		if (is_utf8)
@@ -2431,7 +2431,7 @@ _NOCHECK_:
 						}
 				}
 
-				if (bracexpos != nullptr)
+				if (bracexpos)
 				{
 					*bracexpos = rowidx.m_Width;
 					bracexpos = nullptr;
@@ -2927,7 +2927,7 @@ void MadLines::RecountLineWidth(void)
 						}
 				}
 
-				if (bpi != nullptr)
+				if (bpi)
 				{
 					wxASSERT((wxFileOffset)bracepos <= bpi->LinePos);
 
@@ -2953,7 +2953,7 @@ void MadLines::RecountLineWidth(void)
 
 				bracepos += firstuclen;
 
-				if (bracewidth != nullptr)
+				if (bracewidth)
 				{
 					*bracewidth += ucwidth;
 
@@ -2982,7 +2982,7 @@ void MadLines::RecountLineWidth(void)
 			iter->m_RowIndices.back() = rowidx;
 		}
 
-		wxASSERT(bpi == nullptr);
+		wxASSERT(!bpi);
 		braceposdelta = 0;
 	}
 	while (++iter != iterend);
@@ -3083,11 +3083,11 @@ bool MadLines::LoadFromFile(const wxString &filename, const wxString &encoding)
 		wxFileName fn(filename);
 		m_Syntax = MadSyntax::GetSyntaxByExt(fn.GetExt());
 
-		if (m_Syntax == nullptr)
+		if (!m_Syntax)
 		{
 			m_Syntax = MadSyntax::GetSyntaxByFileName(fn.GetName());
 
-			if (m_Syntax == nullptr)
+			if (!m_Syntax)
 			{
 				m_Syntax = MadSyntax::GetSyntaxByTitle(wxGetTranslation(MadPlainTextTitle));
 			}
@@ -3180,15 +3180,15 @@ bool MadLines::LoadFromFile(const wxString &filename, const wxString &encoding)
 		wxFileName fn(filename);
 		m_Syntax = MadSyntax::GetSyntaxByExt(fn.GetExt());
 
-		if (m_Syntax == nullptr)
+		if (!m_Syntax)
 		{
 			m_Syntax = MadSyntax::GetSyntaxByFirstLine(buf, s);
 
-			if (m_Syntax == nullptr)
+			if (!m_Syntax)
 			{
 				m_Syntax = MadSyntax::GetSyntaxByFileName(fn.GetName());
 
-				if (m_Syntax == nullptr)
+				if (!m_Syntax)
 				{
 					m_Syntax = MadSyntax::GetSyntaxByTitle(wxGetTranslation(MadPlainTextTitle));
 				}
@@ -3386,7 +3386,7 @@ bool TruncateFile(const wxString &filename, wxFileOffset size)
 		static char *buf = nullptr;
 		static vector<char> buffervector;
 
-		if (buf == nullptr)
+		if (!buf)
 		{
 			buffervector.resize(256 * 1024);
 			buf = &buffervector[0];
@@ -3434,7 +3434,7 @@ bool TruncateFile(const wxString &filename, wxFileOffset size)
 
 void MadLines::WriteBlockToData(MadOutData *data, const MadBlockIterator &bit)
 {
-	wxASSERT(data != nullptr);
+	wxASSERT(data);
 	wxDword bs = BUFFER_SIZE;
 	wxFileOffset size = bit->m_Size;
 	wxFileOffset pos = bit->m_Pos;
@@ -3455,7 +3455,7 @@ void MadLines::WriteToFile(wxFile &file, MadFileData *oldfd, MadFileData *newfd)
 {
 	if (m_Size > 0)
 	{
-		if (m_WriteBuffer == nullptr)
+		if (!m_WriteBuffer)
 		{
 			m_WriteBufferVector.resize(BUFFER_SIZE);
 			m_WriteBuffer = &m_WriteBufferVector[0];
@@ -3506,7 +3506,7 @@ void MadLines::WriteToFile(wxFile &file, MadFileData *oldfd, MadFileData *newfd)
 
 wxFileOffset MadLines::GetMaxTempSize(const wxString &filename)
 {
-	if (m_FileData == nullptr || filename != m_Name || m_Size == 0)
+	if (!m_FileData || filename != m_Name || m_Size == 0)
 		return 0;
 
 	wxFileOffset maxsize = 0, temppos = 0, tempsize = 0, filepos = 0;
@@ -3609,13 +3609,13 @@ wxFileOffset MadLines::GetMaxTempSize(const wxString &filename)
 
 		if (write_bit->m_Data == m_FileData)
 		{
-			if (file_lit_not_set == false && write_bit->m_Pos >= filepos)
+			if (!file_lit_not_set  && write_bit->m_Pos >= filepos)
 			{
 				file_lit_not_set = true;
 			}
 		}
 		else
-			if (write_bit->m_Data == nullptr) // this block is in the tempdata
+			if (!write_bit->m_Data) // this block is in the tempdata
 			{
 				write_bit->m_Data = m_FileData;
 				temppos += write_bit->m_Size;
@@ -3631,7 +3631,7 @@ wxFileOffset MadLines::GetMaxTempSize(const wxString &filename)
 		writepos += write_bit->m_Size;
 		writable_size -= write_bit->m_Size;
 
-		if (file_lit_not_set == false && writable_size == 0 && tempsize == 0)
+		if (!file_lit_not_set && writable_size == 0 && tempsize == 0)
 		{
 			file_lit_not_set = true;
 		}
@@ -3691,21 +3691,21 @@ bool MadLines::SaveToFile(const wxString &filename, const wxString &tempdir)
 			if (m_Size <= MaxSizeToLoad)
 				buf = m_MemData->m_Buffers.front();
 			else
-				buf = (m_FileData == nullptr) ? nullptr : m_FileData->m_Buffer1;
+				buf = (!m_FileData) ? nullptr : m_FileData->m_Buffer1;
 		}
 
 		tmp_Syntax = MadSyntax::GetSyntaxByExt(fn.GetExt());
 
-		if (tmp_Syntax == nullptr)
+		if (!tmp_Syntax)
 		{
-			if (buf != nullptr && s != 0)
+			if (buf && s != 0)
 				tmp_Syntax = MadSyntax::GetSyntaxByFirstLine(buf, s);
 
-			if (tmp_Syntax == nullptr)
+			if (!tmp_Syntax)
 			{
 				tmp_Syntax = MadSyntax::GetSyntaxByFileName(fn.GetName());
 
-				if (tmp_Syntax == nullptr)
+				if (!tmp_Syntax)
 				{
 					tmp_Syntax = MadSyntax::GetSyntaxByTitle(wxGetTranslation(MadPlainTextTitle));
 				}
@@ -3713,7 +3713,7 @@ bool MadLines::SaveToFile(const wxString &filename, const wxString &tempdir)
 		}
 	}
 
-	if (tmp_Syntax != nullptr)
+	if (tmp_Syntax)
 	{
 		if (tmp_Syntax->m_SynAttr->m_Title != m_Syntax->m_SynAttr->m_Title)
 		{
@@ -3728,7 +3728,7 @@ bool MadLines::SaveToFile(const wxString &filename, const wxString &tempdir)
 		delete tmp_Syntax;
 	}
 
-	if (m_FileData == nullptr)
+	if (!m_FileData)
 	{
 		int utf8test = MadFileNameIsUTF8(filename);
 #ifndef __WXMSW__
@@ -3838,7 +3838,7 @@ bool MadLines::SaveToFile(const wxString &filename, const wxString &tempdir)
 		return true;
 	}
 
-	if (m_WriteBuffer == nullptr)
+	if (!m_WriteBuffer)
 	{
 		m_WriteBufferVector.resize(BUFFER_SIZE);
 		m_WriteBuffer = &m_WriteBufferVector[0];
@@ -3931,7 +3931,7 @@ bool MadLines::SaveToFile(const wxString &filename, const wxString &tempdir)
 					}
 
 					// move the block to tempdata
-					if (tempoutdata == nullptr)
+					if (!tempoutdata)
 					{
 						if (tempfilename.IsEmpty())
 						{
@@ -3951,7 +3951,7 @@ bool MadLines::SaveToFile(const wxString &filename, const wxString &tempdir)
 
 					wxFileOffset pos0 = temppos + tempsize;
 
-					if (tempfiledata != nullptr)
+					if (tempfiledata)
 					{
 						tempfiledata->m_SavePos = pos0;
 					}
@@ -4002,7 +4002,7 @@ bool MadLines::SaveToFile(const wxString &filename, const wxString &tempdir)
 
 		if (write_bit->m_Data == m_FileData)
 		{
-			if (file_lit_not_set == false && write_bit->m_Pos >= filepos)
+			if (!file_lit_not_set  && write_bit->m_Pos >= filepos)
 			{
 				file_lit_not_set = true;
 			}
@@ -4022,7 +4022,7 @@ bool MadLines::SaveToFile(const wxString &filename, const wxString &tempdir)
 				{
 					temppos = 0;
 
-					if (tempmemdata != nullptr)
+					if (tempmemdata)
 					{
 						tempmemdata->Reset();
 					}
@@ -4032,7 +4032,7 @@ bool MadLines::SaveToFile(const wxString &filename, const wxString &tempdir)
 		writepos += write_bit->m_Size;
 		writable_size -= write_bit->m_Size;
 
-		if (file_lit_not_set == false && writable_size == 0 && tempsize == 0)
+		if (!file_lit_not_set  && writable_size == 0 && tempsize == 0)
 		{
 			file_lit_not_set = true;
 		}
@@ -4068,12 +4068,12 @@ bool MadLines::SaveToFile(const wxString &filename, const wxString &tempdir)
 	m_FileData->m_Buf1Pos = -1;
 	m_FileData->m_Buf2Pos = -1;
 
-	if (tempmemdata != nullptr)
+	if (tempmemdata)
 	{
 		delete tempmemdata;
 	}
 	else
-		if (tempfiledata != nullptr)
+		if (tempfiledata)
 		{
 			delete tempfiledata;
 			wxRemoveFile(tempfilename);

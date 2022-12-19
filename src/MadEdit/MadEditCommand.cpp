@@ -637,7 +637,7 @@ wxString ShortCutToString(MadEditShortCut shortcut)
 
 MadKeyBindings::MadKeyBindings()
 {
-	if (ms_CommandTextMap==nullptr)
+	if (!ms_CommandTextMap)
 		InitCommandTextMap();
 
 	m_KeyBindings=new MadKeyBindingList();
@@ -899,7 +899,7 @@ bool MadKeyBindings::KeyIsAssigned(const wxString &key)
 
 void MadKeyBindings::GetKeys(int menuid, MadEditCommand	editcmd, wxArrayString &keys)
 {
-	MadKeyBinding *kb=nullptr;
+	MadKeyBinding *kb = nullptr;
 	if (menuid!=0)
 	{
 		MadKeyBindingMap::iterator mit = m_MenuIdMap->find(menuid);
@@ -916,7 +916,7 @@ void MadKeyBindings::GetKeys(int menuid, MadEditCommand	editcmd, wxArrayString &
 			kb = ecit->second;
 		}
 	}
-	if (kb!=nullptr	&& kb->firstsc!=0)
+	if (kb && kb->firstsc!=0)
 	{
 		wxString key=ShortCutToString(kb->firstsc);
 		if (!key.IsEmpty()) keys.Add(key);

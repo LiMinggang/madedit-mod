@@ -837,7 +837,7 @@ void MadEncoding::InitEncodings()
 
 void MadEncoding::FreeEncodings()
 {
-	if (ms_SystemEncoding != nullptr)
+	if (ms_SystemEncoding)
 	{
 		delete ms_SystemEncoding;
 	}
@@ -935,7 +935,7 @@ int MadEncoding::NameToEncoding(const wxString &name)
 
 MadEncoding *MadEncoding::GetSystemEncoding()
 {
-	if (ms_SystemEncoding == nullptr)
+	if (!ms_SystemEncoding)
 	{
 		ms_SystemEncoding = new MadEncoding(ms_SystemEncodingIndex);
 	}
@@ -993,7 +993,7 @@ void MadEncoding::Create(size_t idx)
 	m_Info = &EncodingsTable[idx];
 	m_CSConv = m_Info->m_CSConv;
 
-	if (m_CSConv != nullptr)
+	if (m_CSConv)
 	{
 		m_MBtoWC_Table = m_Info->m_MBtoWC_Table;
 		m_WCtoMB_Table = m_Info->m_WCtoMB_Table;

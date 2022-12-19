@@ -819,7 +819,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 
 	for (size_t i = 0; i < (sizeof(printMenus)/sizeof(const wxChar *)); ++i)
 	{
-		if (printMenus[i] != nullptr)
+		if (printMenus[i])
 		{
 			wxMenuItem * menuItem = PopupMenuPrintMark.Append(wxID_ANY, printMenus[i], _T(""), wxITEM_NORMAL);
 			Bind(wxEVT_MENU, &MadOptionsDialog::PrintMarkClick, this, menuItem->GetId());
@@ -862,7 +862,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 
 	for (size_t i = 0; i < (sizeof(datetimeMenus)/sizeof(const wxChar *)); ++i)
 	{
-		if (datetimeMenus[i] != nullptr)
+		if (datetimeMenus[i])
 		{
 			wxMenuItem * menuItem = PopupMenuDateTimeMark.Append(wxID_ANY, datetimeMenus[i], _T(""), wxITEM_NORMAL);
 			Bind(wxEVT_MENU, &MadOptionsDialog::DateTimeMarkClick, this, menuItem->GetId());
@@ -1011,7 +1011,7 @@ MadOptionsDialog::~MadOptionsDialog()
 
 void MadOptionsDialog::MadOptionsDialogClose(wxCloseEvent& event)
 {
-	if (event.CanVeto() && (dynamic_cast< wxFrame * >(wxTheApp->GetTopWindow()) != nullptr))
+	if (event.CanVeto() && (dynamic_cast< wxFrame * >(wxTheApp->GetTopWindow())))
 	{
 		event.Veto();
 		Show(false);
@@ -1026,7 +1026,7 @@ void MadOptionsDialog::MadOptionsDialogActivate(wxActivateEvent& event)
 {
 	if (event.GetActive())
 	{
-		if (FindFocus()==nullptr)
+		if (!FindFocus())
 		{
 			SetReturnCode(wxID_CANCEL);
 			ButtonCancel->SetFocus();
@@ -1415,7 +1415,7 @@ void MadOptionsDialog::PrintMarkClick(wxCommandEvent& event)
 	else if (ButtonID == EditFooterRightId)  { edit = EditFooterRight; }
 	else { ; }
 
-	if (edit!=nullptr && str[0]==wxT('[') && str[3]==wxT(']'))
+	if (edit && str[0] == wxT('[') && str[3] == wxT(']'))
 	{
 		wxString text=edit->GetValue();
 		edit->SetValue(text+ str.Mid(1, 2));
@@ -1527,7 +1527,7 @@ void MadOptionsDialog::UpdateKeyHint()
 	{
 		// find the key is assigned to which command
 		TreeItemData *tid = g_OptionsDialog->FindKeyInList(scstr);
-		if (tid==nullptr)
+		if (!tid)
 		{
 			g_OptionsDialog->EditKeyHint->SetValue(_("This key is not assigned"));
 		}
@@ -1561,10 +1561,10 @@ void MadOptionsDialog::UpdateKeyHint()
 
 void MadOptionsDialog::ButtonAddKeyClick(wxCommandEvent& WXUNUSED(event))
 {
-	if (g_SelectedCommandItem!=nullptr && g_SelectedCommandItem!=g_CommandItemOfNewKey)
+	if (g_SelectedCommandItem && g_SelectedCommandItem!=g_CommandItemOfNewKey)
 	{
 		wxString key=EditKey->GetValue();
-		if (g_CommandItemOfNewKey!=nullptr) // new key is assigned to another command
+		if (g_CommandItemOfNewKey) // new key is assigned to another command
 		{
 			/*
 			wxMessageDialog dlg(this, key +wxT(": ") +EditKeyHint->GetValue() +wxT("\n\n") + wxString(_("Do you want to reassign this key?")),
@@ -1601,7 +1601,7 @@ void MadOptionsDialog::ButtonAddKeyClick(wxCommandEvent& WXUNUSED(event))
 
 void MadOptionsDialog::ButtonDeleteKeyClick(wxCommandEvent& WXUNUSED(event))
 {
-	if (g_SelectedCommandItem!=nullptr && g_SelectedKeyId >= 0)
+	if (g_SelectedCommandItem && g_SelectedKeyId >= 0)
 	{
 		g_SelectedCommandItem->keys.RemoveAt(g_SelectedKeyId);
 
@@ -1619,7 +1619,7 @@ void MadOptionsDialog::ButtonDeleteKeyClick(wxCommandEvent& WXUNUSED(event))
 void MadOptionsDialog::ButtonShowInMenuClick(wxCommandEvent& WXUNUSED(event))
 {
 	// move the selected key to first element of ListBoxKeys
-	if (g_SelectedCommandItem!=nullptr && g_SelectedCommandItem->cmddata->menu_id>0 && g_SelectedKeyId > 0)
+	if (g_SelectedCommandItem && g_SelectedCommandItem->cmddata->menu_id>0 && g_SelectedKeyId > 0)
 	{
 		wxString key=g_SelectedCommandItem->keys[g_SelectedKeyId];
 

@@ -512,7 +512,7 @@ void MadMacroDlg::OnEditSortByOptions(wxCommandEvent& WXUNUSED(event))
 
 void MadMacroDlg::OnEditSortOptions(wxCommandEvent& WXUNUSED(event))
 {
-	if (m_Pymacro == nullptr || m_Pymacro->IsHexMode())
+	if (!m_Pymacro || m_Pymacro->IsHexMode())
 	{
 		g_CurrentMadEdit = nullptr;
 		return;
@@ -706,7 +706,7 @@ void MadMacroDlg::OnEditToHalfWidth(wxCommandEvent& WXUNUSED(event))
 
 void MadMacroDlg::OnEditToHalfWidthByOptions(wxCommandEvent& WXUNUSED(event))
 {
-	if (m_Pymacro == nullptr)
+	if (!m_Pymacro)
 	{
 		g_CurrentMadEdit = nullptr;
 		return;
@@ -773,7 +773,7 @@ void MadMacroDlg::OnEditToFullWidth(wxCommandEvent& WXUNUSED(event))
 
 void MadMacroDlg::OnEditToFullWidthByOptions(wxCommandEvent& WXUNUSED(event))
 {
-	if (m_Pymacro == nullptr)
+	if (!m_Pymacro)
 	{
 		g_CurrentMadEdit = nullptr;
 		return;
@@ -904,7 +904,7 @@ void MadMacroDlg::OnEditInsertNumbers(wxCommandEvent& WXUNUSED(event))
 		// Hide Modaless Dialog
 		//HideModalessDialogs();
 
-		if (g_MadNumberDlg == nullptr) { g_MadNumberDlg = new MadNumberDlg(this); }
+		if (!g_MadNumberDlg) { g_MadNumberDlg = new MadNumberDlg(this); }
 
 		if (g_MadNumberDlg->ShowModal() == wxID_OK)
 		{
@@ -1012,7 +1012,7 @@ void MadMacroDlg::OnEditSpellCheck(wxCommandEvent& event)
 
 void MadMacroDlg::OnToolsMadScriptList(wxCommandEvent& event)
 {
-	if (m_Pymacro != nullptr)
+	if (m_Pymacro)
 	{
 		wxString scriptdir = g_MadEditAppDir + wxT("scripts") + wxFILE_SEP_PATH;
 		int menuId = event.GetId();

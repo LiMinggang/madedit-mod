@@ -4098,7 +4098,7 @@ void MadEdit::SelectWordFromCaretPos(wxString *ws, MadCaretPos * cpos/* = nullpt
 	MadCaretPos * caretPos = cpos;
 	m_ZeroSelection = false;
 
-	if (cpos == nullptr) caretPos = &m_CaretPos;
+	if (!cpos) caretPos = &m_CaretPos;
 
 	if (IsColumnMode() && caretPos->extraspaces)
 		return;
@@ -5769,7 +5769,7 @@ void MadEdit::InsertColumnString(const ucs4_t *ucs, size_t count, int linecount,
 		lineid = m_CaretPos.lineid;
 	}
 
-	if (undo == nullptr)
+	if (!undo)
 	{
 		undo = m_UndoBuffer->Add();
 		SetNeedSync();
@@ -6557,7 +6557,7 @@ MadUndo *MadEdit::DeleteSelection(bool bCorrectCaretPos, vector <int> *rpos, boo
 					DeleteInsertData(dudata->m_Pos, dudata->m_Size, &dudata->m_Data, 0, nullptr);
 #endif
 
-					if (undo == nullptr)
+					if (!undo)
 					{
 						undo = m_UndoBuffer->Add();
 						SetNeedSync();
@@ -10657,7 +10657,7 @@ void MadEdit::OnSize(wxSizeEvent &evt)
 	bool deletebitmap = false;
 	bool newbitmap = false;
 
-	if (m_ClientBitmap == nullptr)
+	if (!m_ClientBitmap)
 	{
 		newbitmap = true;
 		m_MaxWidth = w;
@@ -10700,7 +10700,7 @@ void MadEdit::OnSize(wxSizeEvent &evt)
 		m_MarkBitmap = new wxBitmap(w, h);
 #if FIXINVERT != 0
 
-		if (InvertRect == nullptr)
+		if (!InvertRect)
 		{
 			wxMemoryDC dc1, dc2;
 			dc1.SelectObject(*m_ClientBitmap);
@@ -11923,7 +11923,7 @@ int MadEdit::GetUCharWidth(ucs4_t uc)
 	__REGISTER int idx = uc >> 16;
 	wxUint16 *widths = m_TextFontWidths[idx];
 
-	if (widths == nullptr)
+	if (!widths)
 	{
 		widths = m_TextFontWidths[idx] = FontWidthManager::GetFontWidths(idx, m_TextFont->GetFaceName(), m_TextFont->GetPointSize(), this);
 	}
@@ -11985,7 +11985,7 @@ int MadEdit::GetHexUCharWidth(ucs4_t uc)
 	__REGISTER int idx = uc >> 16;
 	wxUint16 *widths = m_HexFontWidths[idx];
 
-	if (widths == nullptr)
+	if (!widths)
 	{
 		widths = m_HexFontWidths[idx] = FontWidthManager::GetFontWidths(idx, m_HexFont->GetFaceName(), m_HexFont->GetPointSize(),   this);
 	}
@@ -12070,7 +12070,7 @@ void MadEdit::OnUpdateHScrollPos(wxCommandEvent& WXUNUSED(evt))
 
 void MadEdit::ShowZeroLenSelIndicator()
 {
-	if (m_ZeroLenSelIndicator == nullptr)
+	if (!m_ZeroLenSelIndicator)
 	{
 		m_ZeroLenSelIndicator = new wxMenu((long)0);
 #ifdef __WXMSW__
@@ -12122,7 +12122,7 @@ void MadEdit::ConfigNewDocument()
 	}
 
 	m_Config->Read(wxT("NewDocumentSyntax"), &ss);
-	if (MadSyntax::GetSyntaxByTitle(ss) == nullptr) ss = wxGetTranslation(wxT("Plain Text"));
+	if (!MadSyntax::GetSyntaxByTitle(ss)) ss = wxGetTranslation(wxT("Plain Text"));
 	SetSyntax(ss);
 	ss.Empty();
 	m_Config->Read(wxT("NewDocumentTextFont"), &ss);

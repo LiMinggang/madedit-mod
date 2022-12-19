@@ -132,7 +132,7 @@ public:
 		const wxLanguageInfo * langinfo;
 		langinfo = wxLocale::FindLanguageInfo(dirName.AfterLast(wxFileName::GetPathSeparator()));
 
-		if (langinfo != nullptr) {
+		if (langinfo) {
 			wxLogTrace(wxT("MadTranslationHelper"), _("SEARCHING FOR %s"),
 						wxString(dirName + wxFileName::GetPathSeparator() +
 								  m_TransName + wxT(".mo")).GetData());
