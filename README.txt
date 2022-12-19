@@ -132,6 +132,8 @@ Mod v0.4.20
 7.Fix Linux build issue with wxWidgets < 3.1.1
 8.Update Python to 2.7.18
 9.Fix langurage ID of wxWidgets
+10.Update wxWidgets to 3.2.1
+11.Don't create new file by double clicking file title tab
 
 Mod v0.4.19
 1.Fix: Disable safe mode in PanChinese search

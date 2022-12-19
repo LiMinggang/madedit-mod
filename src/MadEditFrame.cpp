@@ -1190,9 +1190,6 @@ protected:
 		if (ctrl->TabHitTest(evt.m_x, evt.m_y, &win)) {
 			frame->CloseFile(GetPageIndex(win));
 		}
-		else{
-			frame->OpenFile(wxEmptyString, false);
-		}
 	}
 	void OnMouseWheel(wxMouseEvent &evt) {
 		bool bForward = true;
