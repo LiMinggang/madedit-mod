@@ -763,7 +763,7 @@ void MadEdit::SetEditMode(MadEditMode mode)
 
 				m_EditMode = emColumnMode;
 
-				if (!IsNoWrap)
+				if (!IsNoWrap())
 				{
 					bool oldconfigmode = m_StorePropertiesToGlobalConfig;
 					m_StorePropertiesToGlobalConfig = false;
@@ -956,7 +956,7 @@ void MadEdit::SetDisplayLineNumber(bool value)
 			m_Config->SetPath(oldpath);
 		}
 
-		if (!IsHexMode() && !IsNoWrap)
+		if (!IsHexMode() && !IsNoWrap())
 		{
 			if (IsWrapByWindow())
 				m_DrawingXPos = 0;
@@ -995,7 +995,7 @@ void MadEdit::SetDisplayBookmark(bool value)
 			m_Config->SetPath(oldpath);
 		}
 
-		if (!IsHexMode() && !IsNoWrap)
+		if (!IsHexMode() && !IsNoWrap())
 		{
 			if (IsWrapByWindow())
 				m_DrawingXPos = 0;

@@ -902,7 +902,7 @@ public: // basic functions
 	bool IsTextMode() { return m_EditMode == emTextMode; }
 	bool IsColumnMode() { return m_EditMode == emColumnMode; }
 	bool IsNoWrap() { return m_WordWrapMode == wwmNoWrap; } 
-	bool IsWrapByWindow() { return IsWrapByWindow(); } 
+	bool IsWrapByWindow() { return m_WordWrapMode == wwmWrapByWindow; }
 	bool IsWrapByColumn() { return m_WordWrapMode == wwmWrapByColumn; } 
 	bool IsModified() { return m_Modified; }
 	void MarkModified() { m_Modified = true; }
