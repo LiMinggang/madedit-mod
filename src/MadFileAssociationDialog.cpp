@@ -13,8 +13,8 @@
 #include "MadUtils.h"
 
 #ifdef _MSC_VER
-# pragma warning( push )
-# pragma warning( disable : 4996 )
+# pragma warning(push)
+# pragma warning(disable : 4996)
 #endif
 // disable 4996 {
 #include <wx/config.h>
@@ -26,7 +26,7 @@
 //*)
 // disable 4996 }
 #ifdef _MSC_VER
-# pragma warning( pop )
+# pragma warning(pop)
 #endif
 
 #ifdef _DEBUG
@@ -37,75 +37,75 @@
 
 const wxChar *g_PredefinedTypes[] =
 {
-	wxT( ".txt" ),
-	wxT( ".c" ),
-	wxT( ".cpp" ),
-	wxT( ".cc" ),
-	wxT( ".cxx" ),
-	wxT( ".h" ),
-	wxT( ".hpp" ),
-	wxT( ".hxx" ),
-	wxT( ".d" ),
-	wxT( ".asm" ),
-	wxT( ".s" ),
-	wxT( ".java" ),
+	wxT(".txt"),
+	wxT(".c"),
+	wxT(".cpp"),
+	wxT(".cc"),
+	wxT(".cxx"),
+	wxT(".h"),
+	wxT(".hpp"),
+	wxT(".hxx"),
+	wxT(".d"),
+	wxT(".asm"),
+	wxT(".s"),
+	wxT(".java"),
 	//    wxT(".htm"),
 	//    wxT(".html"),
-	wxT( ".pas" ),
+	wxT(".pas"),
 	//    wxT(".dpr"),
-	wxT( ".css" ),
-	wxT( ".js" ),
-	wxT( ".xml" ),
-	wxT( ".sql" ),
-	wxT( ".php" ),
-	wxT( ".asp" ),
-	wxT( ".inc" ),
-	wxT( ".cs" ),
+	wxT(".css"),
+	wxT(".js"),
+	wxT(".xml"),
+	wxT(".sql"),
+	wxT(".php"),
+	wxT(".asp"),
+	wxT(".inc"),
+	wxT(".cs"),
 	//    wxT(".vbs"),
-	wxT( ".bas" ),
-	wxT( ".frm" ),
-	wxT( ".cls" ),
+	wxT(".bas"),
+	wxT(".frm"),
+	wxT(".cls"),
 	//    wxT(".reg"),
 	//    wxT(".inf"),
-	wxT( ".ini" ),
-	wxT( ".cfg" ),
-	wxT( ".conf" ),
-	wxT( ".mak" ),
-	wxT( ".nfo" ),
-	wxT( ".diz" ),
+	wxT(".ini"),
+	wxT(".cfg"),
+	wxT(".conf"),
+	wxT(".mak"),
+	wxT(".nfo"),
+	wxT(".diz"),
 	//    wxT(".bat"),
 	//    wxT(".cmd"),
-	wxT( ".awk" ),
-	wxT( ".py" ),
-	wxT( ".python" ),
-	wxT( ".pl" ),
-	wxT( ".perl" ),
-	wxT( ".rb" ),
-	wxT( ".rbw" ),
-	wxT( ".diff" ),
-	wxT( ".patch" ),
-	wxT( ".lua" ),
-	wxT( ".nut" ),
-	wxT( ".f90" ),
-	wxT( ".f77" ),
-	wxT( ".for" ),
-	wxT( ".ftn" ),
-	wxT( ".lat" ),
-	wxT( ".tex" ),
-	wxT( ".lex" ),
-	wxT( ".as" ),
-	wxT( ".v" ),
-	wxT( ".vl" ),
-	wxT( ".vmd" ),
-	wxT( ".vhd" ),
-	wxT( ".vho" ),
-	wxT( ".vhdl" ),
-	wxT( ".syn" ),
-	wxT( ".sch" ),
-	wxT( ".att" ),
-	wxT( ".tcl" ),
-	wxT( ".yaml" ),
-	wxT( ".yang" ),
+	wxT(".awk"),
+	wxT(".py"),
+	wxT(".python"),
+	wxT(".pl"),
+	wxT(".perl"),
+	wxT(".rb"),
+	wxT(".rbw"),
+	wxT(".diff"),
+	wxT(".patch"),
+	wxT(".lua"),
+	wxT(".nut"),
+	wxT(".f90"),
+	wxT(".f77"),
+	wxT(".for"),
+	wxT(".ftn"),
+	wxT(".lat"),
+	wxT(".tex"),
+	wxT(".lex"),
+	wxT(".as"),
+	wxT(".v"),
+	wxT(".vl"),
+	wxT(".vmd"),
+	wxT(".vhd"),
+	wxT(".vho"),
+	wxT(".vhdl"),
+	wxT(".syn"),
+	wxT(".sch"),
+	wxT(".att"),
+	wxT(".tcl"),
+	wxT(".yaml"),
+	wxT(".yang"),
 };
 
 const int g_PredefinedTypes_Count = sizeof(g_PredefinedTypes) / sizeof(g_PredefinedTypes[0]);
@@ -114,25 +114,25 @@ bool DetectType(const wxString& type)
 {
 	wxLogNull nolog; // disable error log
 	wxString value;
-	wxRegKey *pRegKey = new wxRegKey( g_MadEditRegkeyPath + type );
+	wxRegKey *pRegKey = new wxRegKey(g_MadEditRegkeyPath + type);
 
-	if( pRegKey->Exists() && pRegKey->HasValues() ) { pRegKey->QueryValue( wxEmptyString, value ); }
+	if (pRegKey->Exists() && pRegKey->HasValues()) { pRegKey->QueryValue(wxEmptyString, value); }
 
 	delete pRegKey;
 
-	if( !value.IsEmpty() )
+	if (!value.IsEmpty())
 	{
-		pRegKey = new wxRegKey( g_MadEditRegkeyPath
+		pRegKey = new wxRegKey(g_MadEditRegkeyPath
 								+ value
-								+ wxString( wxT( "\\shell\\open\\command" ) ) );
+								+ wxString(wxT("\\shell\\open\\command")));
 		value.Empty();
 
-		if( pRegKey->Exists() && pRegKey->HasValues() ) { pRegKey->QueryValue( wxEmptyString, value ); }
+		if (pRegKey->Exists() && pRegKey->HasValues()) { pRegKey->QueryValue(wxEmptyString, value); }
 
 		delete pRegKey;
 		wxString exepath = GetExecutablePath();
 
-		if( value.Upper().Find( exepath.Upper() ) >= 0 )
+		if (value.Upper().Find(exepath.Upper()) >= 0)
 		{
 			return true;
 		}
@@ -141,21 +141,21 @@ bool DetectType(const wxString& type)
 	return false;
 }
 
-void AddType( const wxString& type )
+void AddType(const wxString& type)
 {
 	wxString value;
-	wxString madedit_type = wxString( wxT( "MadEdit-Mod" ) ) + type;
-	wxRegKey *pRegKey = new wxRegKey( g_MadEditRegkeyPath + type );
+	wxString madedit_type = wxString(wxT("MadEdit-Mod")) + type;
+	wxRegKey *pRegKey = new wxRegKey(g_MadEditRegkeyPath + type);
 
-	if( !pRegKey->Exists() ) { pRegKey->Create(); }
-	else { if (pRegKey->HasValues()) pRegKey->QueryValue( wxEmptyString, value ); }
+	if (!pRegKey->Exists()) { pRegKey->Create(); }
+	else { if (pRegKey->HasValues()) pRegKey->QueryValue(wxEmptyString, value); }
 
-	if( value != madedit_type )
+	if (value != madedit_type)
 	{
-		if( !value.IsEmpty() ) //save old default value
+		if (!value.IsEmpty()) //save old default value
 		{
-			pRegKey->SetValue( wxT( "Old_Default" ), value );
-			//if(type == wxT(".txt"))
+			pRegKey->SetValue(wxT("Old_Default"), value);
+			//if (type == wxT(".txt"))
 			//{
 			//    wxRegKey *pRegKey1 = new wxRegKey(wxString(wxT("HKEY_CLASSES_ROOT\\")) + type);
 			//    pRegKey->QueryValue(wxEmptyString, txt_name);
@@ -164,68 +164,68 @@ void AddType( const wxString& type )
 		}
 
 		value = madedit_type;
-		pRegKey->SetValue( wxEmptyString, value );
+		pRegKey->SetValue(wxEmptyString, value);
 	}
 
 	delete pRegKey;
-	wxString name( g_MadEditRegkeyPath );
+	wxString name(g_MadEditRegkeyPath);
 	name += value;
 
-	if( type == wxT( ".txt" ) )
+	if (type == wxT(".txt"))
 	{
 		wxString txt_name;
-		pRegKey = new wxRegKey( wxString( g_MadEditRegkeyPath + wxT( "txtfile" ) ) );
+		pRegKey = new wxRegKey(wxString(g_MadEditRegkeyPath + wxT("txtfile")));
 
-		if( pRegKey->Exists()  && pRegKey->HasValues()) { pRegKey->QueryValue( wxEmptyString, txt_name ); }
+		if (pRegKey->Exists()  && pRegKey->HasValues()) { pRegKey->QueryValue(wxEmptyString, txt_name); }
 
 		delete pRegKey;
 
-		if( txt_name.IsEmpty() ) { txt_name = wxT( "Text file" ); }
+		if (txt_name.IsEmpty()) { txt_name = wxT("Text file"); }
 
-		pRegKey = new wxRegKey( name );
+		pRegKey = new wxRegKey(name);
 		pRegKey->Create();
-		pRegKey->SetValue( wxEmptyString, txt_name );
+		pRegKey->SetValue(wxEmptyString, txt_name);
 		delete pRegKey;
 	}
 
-	name += wxT( "\\shell\\open\\command" );
-	pRegKey = new wxRegKey( name );
+	name += wxT("\\shell\\open\\command");
+	pRegKey = new wxRegKey(name);
 	pRegKey->Create();
 	wxString exepath = GetExecutablePath();
-	pRegKey->SetValue( wxEmptyString, wxString( wxT( '"' ) ) + exepath + wxString( wxT( "\" \"%1\"" ) ) );
+	pRegKey->SetValue(wxEmptyString, wxString(wxT('"')) + exepath + wxString(wxT("\" \"%1\"")));
 	delete pRegKey;
 	name = g_MadEditRegkeyPath;
 	name += value;
-	name += wxT( "\\DefaultIcon" );
-	pRegKey = new wxRegKey( name );
+	name += wxT("\\DefaultIcon");
+	pRegKey = new wxRegKey(name);
 	pRegKey->Create();
-	pRegKey->SetValue( wxEmptyString, exepath + wxString( wxT( ",1" ) ) );
+	pRegKey->SetValue(wxEmptyString, exepath + wxString(wxT(",1")));
 	delete pRegKey;
 }
 
-void RemoveType( const wxString& type )
+void RemoveType(const wxString& type)
 {
-	if( type.IsEmpty() ) { return; }
+	if (type.IsEmpty()) { return; }
 
 	wxString value, old_default;
-	wxString madedit_type = wxString( wxT( "MadEdit-Mod" ) ) + type;
-	wxRegKey *pRegKey = new wxRegKey( g_MadEditRegkeyPath + type );
+	wxString madedit_type = wxString(wxT("MadEdit-Mod")) + type;
+	wxRegKey *pRegKey = new wxRegKey(g_MadEditRegkeyPath + type);
 
-	if( pRegKey->Exists() && pRegKey->HasValues())
+	if (pRegKey->Exists() && pRegKey->HasValues())
 	{
-		pRegKey->QueryValue( wxT( "Old_Default" ), old_default );
-		pRegKey->QueryValue( wxEmptyString, value );
+		pRegKey->QueryValue(wxT("Old_Default"), old_default);
+		pRegKey->QueryValue(wxEmptyString, value);
 	}
 
-	if( !old_default.IsEmpty() )
+	if (!old_default.IsEmpty())
 	{
-		pRegKey->DeleteValue( wxT( "Old_Default" ) );
-		pRegKey->SetValue( wxEmptyString, old_default );
+		pRegKey->DeleteValue(wxT("Old_Default"));
+		pRegKey->SetValue(wxEmptyString, old_default);
 	}
 	else
-		if( !value.IsEmpty() )
+		if (!value.IsEmpty())
 		{
-			if( value == madedit_type )
+			if (value == madedit_type)
 			{
 				pRegKey->DeleteSelf();
 			}
@@ -233,11 +233,11 @@ void RemoveType( const wxString& type )
 
 	delete pRegKey;
 
-	if( value == madedit_type )
+	if (value == madedit_type)
 	{
-		pRegKey = new wxRegKey( g_MadEditRegkeyPath + value );
+		pRegKey = new wxRegKey(g_MadEditRegkeyPath + value);
 
-		if( pRegKey->Exists() ) { pRegKey->DeleteSelf(); }
+		if (pRegKey->Exists()) { pRegKey->DeleteSelf(); }
 
 		delete pRegKey;
 	}
@@ -246,69 +246,69 @@ void RemoveType( const wxString& type )
 
 wxArrayString as_remove; // the types will be removed
 
-void GetListBoxSelections( wxListBox *lb, wxArrayString &as )
+void GetListBoxSelections(wxListBox *lb, wxArrayString &as)
 {
 	wxArrayInt sel;
-	lb->GetSelections( sel );
+	lb->GetSelections(sel);
 	int idx = 0;
-	const int count = int( sel.Count() );
+	const int count = int(sel.Count());
 
-	while( idx < count )
+	while (idx < count)
 	{
-		as.Add( lb->GetString( sel[idx] ) );
+		as.Add(lb->GetString(sel[idx]));
 		++idx;
 	}
 }
 
-void AddTypeToAssociated( wxListBox *WxListBoxAssociated,
+void AddTypeToAssociated(wxListBox *WxListBoxAssociated,
 						  wxListBox *WxListBoxPredefined,
-						  const wxArrayString &as )
+						  const wxArrayString &as)
 {
 	int idx = 0;
-	const int count = int( as.Count() );
+	const int count = int(as.Count());
 	wxString type;
 
-	while( idx < count )
+	while (idx < count)
 	{
 		type = as[idx];
-		int n = WxListBoxPredefined->FindString( type );
+		int n = WxListBoxPredefined->FindString(type);
 
-		if( n != wxNOT_FOUND ) { WxListBoxPredefined->Delete( n ); }
+		if (n != wxNOT_FOUND) { WxListBoxPredefined->Delete(n); }
 
-		n = WxListBoxAssociated->FindString( type );
+		n = WxListBoxAssociated->FindString(type);
 
-		if( n == wxNOT_FOUND ) { WxListBoxAssociated->Append( type ); }
+		if (n == wxNOT_FOUND) { WxListBoxAssociated->Append(type); }
 
-		n = as_remove.Index( type );
+		n = as_remove.Index(type);
 
-		if( n != wxNOT_FOUND ) { as_remove.RemoveAt( n ); }
+		if (n != wxNOT_FOUND) { as_remove.RemoveAt(n); }
 
 		++idx;
 	}
 }
 
-void AddTypeToPredefined( wxListBox *WxListBoxAssociated,
+void AddTypeToPredefined(wxListBox *WxListBoxAssociated,
 						  wxListBox *WxListBoxPredefined,
-						  const wxArrayString &as )
+						  const wxArrayString &as)
 {
 	int idx = 0;
-	const int count = int( as.Count() );
+	const int count = int(as.Count());
 	wxString type;
 
-	while( idx < count )
+	while (idx < count)
 	{
 		type = as[idx];
-		int n = WxListBoxAssociated->FindString( type );
+		int n = WxListBoxAssociated->FindString(type);
 
-		if( n != wxNOT_FOUND ) { WxListBoxAssociated->Delete( n ); }
+		if (n != wxNOT_FOUND) { WxListBoxAssociated->Delete(n); }
 
-		n = WxListBoxPredefined->FindString( type );
+		n = WxListBoxPredefined->FindString(type);
 
-		if( n == wxNOT_FOUND ) { WxListBoxPredefined->Append( type ); }
+		if (n == wxNOT_FOUND) { WxListBoxPredefined->Append(type); }
 
-		n = as_remove.Index( type );
+		n = as_remove.Index(type);
 
-		if( n == wxNOT_FOUND ) { as_remove.Add( type ); }
+		if (n == wxNOT_FOUND) { as_remove.Add(type); }
 
 		++idx;
 	}
@@ -381,13 +381,13 @@ MadFileAssociationDialog::MadFileAssociationDialog(wxWindow* parent,wxWindowID W
 	//Connect(wxID_ANY,wxEVT_CLOSE_WINDOW,(wxObjectEventFunction)&MadFileAssociationDialog::MadFileAssociationDialogClose);
 	//*)
 
-	Bind( wxEVT_COMMAND_LISTBOX_DOUBLECLICKED, &MadFileAssociationDialog::WxListBoxAssociatedDoubleClicked, this, WxListBoxAssociated->GetId() );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadFileAssociationDialog::WxButtonAddClick, this, WxButtonAdd->GetId() );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadFileAssociationDialog::WxButtonRemoveClick, this, WxButtonRemove->GetId() );
-	Bind( wxEVT_COMMAND_LISTBOX_DOUBLECLICKED, &MadFileAssociationDialog::WxListBoxPredefinedDoubleClicked, this, WxListBoxPredefined->GetId() );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadFileAssociationDialog::WxButtonAddCustomClick, this, WxButtonAddCustom->GetId() );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadFileAssociationDialog::WxButtonOKClick, this, wxID_OK );
-	Bind( wxEVT_CLOSE_WINDOW, &MadFileAssociationDialog::MadFileAssociationDialogClose, this );
+	Bind(wxEVT_COMMAND_LISTBOX_DOUBLECLICKED, &MadFileAssociationDialog::WxListBoxAssociatedDoubleClicked, this, WxListBoxAssociated->GetId());
+	Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MadFileAssociationDialog::WxButtonAddClick, this, WxButtonAdd->GetId());
+	Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MadFileAssociationDialog::WxButtonRemoveClick, this, WxButtonRemove->GetId());
+	Bind(wxEVT_COMMAND_LISTBOX_DOUBLECLICKED, &MadFileAssociationDialog::WxListBoxPredefinedDoubleClicked, this, WxListBoxPredefined->GetId());
+	Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MadFileAssociationDialog::WxButtonAddCustomClick, this, WxButtonAddCustom->GetId());
+	Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MadFileAssociationDialog::WxButtonOKClick, this, wxID_OK);
+	Bind(wxEVT_CLOSE_WINDOW, &MadFileAssociationDialog::MadFileAssociationDialogClose, this);
 
 	wxArrayString as_predefined(g_PredefinedTypes_Count, g_PredefinedTypes);
 
@@ -397,12 +397,12 @@ MadFileAssociationDialog::MadFileAssociationDialog(wxWindow* parent,wxWindowID W
 
 	int idx=0, idx2;
 	wxString type;
-	while(cfg->Read(wxString()<<idx, &type))
+	while (cfg->Read(wxString()<<idx, &type))
 	{
-		if(DetectType(type))
+		if (DetectType(type))
 		{
 			WxListBoxAssociated->Append(type);
-			if((idx2=as_predefined.Index(type.c_str()))!=wxNOT_FOUND)
+			if ((idx2=as_predefined.Index(type.c_str()))!=wxNOT_FOUND)
 			{
 				as_predefined.RemoveAt(idx2);
 			}
@@ -463,11 +463,11 @@ void MadFileAssociationDialog::WxButtonAddCustomClick(wxCommandEvent& WXUNUSED(e
 	wxString type = WxEditCustomType->GetValue();
 	type.Trim(false);
 	type.Trim(true);
-	if(!type.IsEmpty())
+	if (!type.IsEmpty())
 	{
 		type.MakeLower();
 		wxString dot(wxT('.'));
-		if( type[0] != dot ) { type = dot + type; }
+		if (type[0] != dot) { type = dot + type; }
 
 		wxArrayString sel;
 		sel.Add(type);
@@ -489,10 +489,10 @@ void MadFileAssociationDialog::WxButtonOKClick(wxCommandEvent& WXUNUSED(event))
 	int idx=0;
 	int count = int(as_remove.Count());
 	wxString type;
-	while(idx<count)
+	while (idx<count)
 	{
 		type = as_remove[idx];
-		if(DetectType(type))
+		if (DetectType(type))
 		{
 			RemoveType(type);
 		}
@@ -502,7 +502,7 @@ void MadFileAssociationDialog::WxButtonOKClick(wxCommandEvent& WXUNUSED(event))
 	// add types
 	idx=0;
 	count = int(WxListBoxAssociated->GetCount());
-	while(idx<count)
+	while (idx<count)
 	{
 		type = WxListBoxAssociated->GetString(idx);
 		AddType(type);

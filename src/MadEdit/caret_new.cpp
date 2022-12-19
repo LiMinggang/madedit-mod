@@ -67,7 +67,7 @@ void wxCaretTimerNew::Notify()
 void wxCaretNew::OnTimer()
 {
     // don't blink the caret when we don't have the focus
-    if ( m_hasFocus )
+    if (m_hasFocus)
         Blink();
 }
 
@@ -101,10 +101,10 @@ void wxCaretNew::InitGeneric()
 
 wxCaretNew::~wxCaretNew()
 {
-    if ( IsVisible() )
+    if (IsVisible())
     {
         // stop blinking
-        if ( m_timer.IsRunning() )
+        if (m_timer.IsRunning())
             m_timer.Stop();
     }
 }
@@ -116,10 +116,10 @@ wxCaretNew::~wxCaretNew()
 void wxCaretNew::DoShow()
 {
     int blinkTime = GetBlinkTime();
-    if ( blinkTime )
+    if (blinkTime)
         m_timer.Start(blinkTime);
 
-    if ( m_blinkedOut )
+    if (m_blinkedOut)
         Blink();
 }
 
@@ -127,7 +127,7 @@ void wxCaretNew::DoHide()
 {
     m_timer.Stop();
 
-    if ( !m_blinkedOut )
+    if (!m_blinkedOut)
     {
         Blink();
     }
@@ -135,16 +135,16 @@ void wxCaretNew::DoHide()
 
 void wxCaretNew::DoMove()
 {
-    if ( IsVisible() )
+    if (IsVisible())
     {
-        if ( !m_blinkedOut )
+        if (!m_blinkedOut)
         {
             // hide it right now and it will be shown the next time it blinks
             Blink();
 
             // but if the caret is not blinking, we should blink it back into
             // visibility manually
-            if ( !m_timer.IsRunning() )
+            if (!m_timer.IsRunning())
                 Blink();
         }
     }
@@ -176,7 +176,7 @@ void wxCaretNew::OnSetFocus()
 {
     m_hasFocus = true;
 
-    if ( IsVisible() )
+    if (IsVisible())
         Refresh();
 }
 
@@ -184,14 +184,14 @@ void wxCaretNew::OnKillFocus()
 {
     m_hasFocus = false;
 
-    if ( IsVisible() )
+    if (IsVisible())
     {
         // the caret must be shown - otherwise, if it is hidden now, it will
         // stay so until the focus doesn't return because it won't blink any
         // more
 
         // hide it first if it isn't hidden ...
-        if ( !m_blinkedOut )
+        if (!m_blinkedOut)
             Blink();
 
         // .. and show it in the new style
@@ -215,7 +215,7 @@ void wxCaretNew::Refresh()
     wxClientDC dcWin(GetWindow());
     wxMemoryDC dcMem;
     dcMem.SelectObject(m_bmpUnderCaret);
-    if ( m_blinkedOut )
+    if (m_blinkedOut)
     {
         // restore the old image
         dcWin.Blit(m_xOld, m_yOld, m_width, m_height,
@@ -225,7 +225,7 @@ void wxCaretNew::Refresh()
     }
     else
     {
-        if ( m_xOld == -1 && m_yOld == -1 )
+        if (m_xOld == -1 && m_yOld == -1)
         {
             // save the part we're going to overdraw
 
@@ -264,7 +264,7 @@ void wxCaretNew::Refresh()
 void wxCaretNew::DoDraw(wxDC *dc)
 {
 
-    if(m_hasFocus)
+    if (m_hasFocus)
     {
 
 #if   FIXINVERT == 0

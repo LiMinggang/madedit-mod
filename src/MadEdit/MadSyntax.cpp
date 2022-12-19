@@ -27,21 +27,21 @@ extern wxString g_MadEditHomeDir;
 
 const wxChar *SystemAttributesName[] =
 {
-	wxT( "Text" ), wxT( "Delimiter" ), wxT( "Space" ), wxT( "Number" ), wxT( "String" ), wxT( "Comment" ),
-	wxT( "Directive" ), wxT( "SpecialWord" ), wxT( "LineNumber" ), wxT( "ActiveLine" ), wxT( "Bookmark" ),
+	wxT("Text"), wxT("Delimiter"), wxT("Space"), wxT("Number"), wxT("String"), wxT("Comment"),
+	wxT("Directive"), wxT("SpecialWord"), wxT("LineNumber"), wxT("ActiveLine"), wxT("Bookmark"),
 	wxT("HighlightWord"),
 };
 
 const wxChar *SystemAttributesColor[] =
 {
-	wxT( "Black" ), wxT( "SaddleBrown" ), wxT( "Aqua" ), wxT( "Blue" ), wxT( "Red" ), wxT( "Teal" ), wxT( "Green" ), wxT( "Maroon" ), wxT( "White" ),       wxT( "#\x46\x46\x46" ), wxT("DeepSkyBlue"), wxT("PaleGreen")
+	wxT("Black"), wxT("SaddleBrown"), wxT("Aqua"), wxT("Blue"), wxT("Red"), wxT("Teal"), wxT("Green"), wxT("Maroon"), wxT("White"),       wxT("#\x46\x46\x46"), wxT("DeepSkyBlue"), wxT("PaleGreen")
 };
 const wxChar *SystemAttributesBgColor[] =
 {
-	wxT( "White" ), wxT( "" ),           wxT( "" ),     wxT( "" ),     wxT( "" ),    wxT( "" ),     wxT( "" ),      wxT( "" ),      wxT( "#\xA0\xA0\xA0" ), wxT( "" ),        wxT("MediumBlue"), wxT("AntiqueWhite")
+	wxT("White"), wxT(""),           wxT(""),     wxT(""),     wxT(""),    wxT(""),     wxT(""),      wxT(""),      wxT("#\xA0\xA0\xA0"), wxT(""),        wxT("MediumBlue"), wxT("AntiqueWhite")
 };
 
-const wxString MadPlainTextTitle( wxT( "Plain Text" ) );
+const wxString MadPlainTextTitle(wxT("Plain Text"));
 
 vector<wxString> g_SynPaths;
 
@@ -57,7 +57,7 @@ StringPairTable g_NameSchfileTable;
 // syntax attributs in syntax files
 std::map< wxString, shared_ptr< MadSyntaxAttributes > > g_TitleSynAttrMap;
 
-WX_DECLARE_HASH_MAP( wxString, wxString, wxStringHash, wxStringEqual, StringMap );
+WX_DECLARE_HASH_MAP(wxString, wxString, wxStringHash, wxStringEqual, StringMap);
 
 // synfile of below is filename only
 StringMap g_ExtSynfileMap;
@@ -65,41 +65,41 @@ StringMap g_FirstlineSynfileMap;
 StringMap g_FilenameSynfileMap;
 
 
-void LoadListFile( const wxString &listfile, StringMap &map, bool noCase )
+void LoadListFile(const wxString &listfile, StringMap &map, bool noCase)
 {
 	wxTextFile list;
 
-	if( wxFileExists( listfile ) && list.Open( listfile ) && !list.Eof() )
+	if (wxFileExists(listfile) && list.Open(listfile) && !list.Eof())
 	{
 		wxString str = list.GetFirstLine(), tok1, tok2;
 
-		for( ;; )
+		for (;;)
 		{
-			str.Trim( false );
+			str.Trim(false);
 
-			if( !str.IsEmpty() && str[0] != '#' ) // not a comment line
+			if (!str.IsEmpty() && str[0] != '#') // not a comment line
 			{
-				wxStringTokenizer tkz( str );
+				wxStringTokenizer tkz(str);
 				tok1 = tkz.GetNextToken();
 				tok2 = tkz.GetNextToken();
 
-				if( !tok1.IsEmpty() && !tok2.IsEmpty() )
+				if (!tok1.IsEmpty() && !tok2.IsEmpty())
 				{
-					if( noCase )
+					if (noCase)
 					{
 						tok1.MakeUpper();
 					}
 
-					StringMap::iterator it = map.find( tok1 );
+					StringMap::iterator it = map.find(tok1);
 
-					if( it == map.end() )
+					if (it == map.end())
 					{
-						map.insert( StringMap::value_type( tok1, tok2 ) );
+						map.insert(StringMap::value_type(tok1, tok2));
 					}
 				}
 			}
 
-			if( list.Eof() )
+			if (list.Eof())
 				break;
 
 			str = list.GetNextLine();
@@ -112,37 +112,37 @@ bool MadSyntax::s_Loaded = false;
 
 void MadSyntax::LoadSyntaxFiles()
 {
-	for( size_t i = 0; i < g_SynPaths.size(); ++i )
+	for (size_t i = 0; i < g_SynPaths.size(); ++i)
 	{
-		wxDir dir( g_SynPaths[i] );
+		wxDir dir(g_SynPaths[i]);
 		wxString filename;
-		bool cont = dir.GetFirst( &filename, wxT( "syntax_*.syn" ), wxDIR_FILES );
+		bool cont = dir.GetFirst(&filename, wxT("syntax_*.syn"), wxDIR_FILES);
 
-		while( cont )
+		while (cont)
 		{
 			//wxLogMessage(filename);
 			filename = g_SynPaths[i] + filename;
-			wxFileConfig syn( wxEmptyString, wxEmptyString, filename, wxEmptyString, wxCONFIG_USE_RELATIVE_PATH | wxCONFIG_USE_NO_ESCAPE_CHARACTERS );
+			wxFileConfig syn(wxEmptyString, wxEmptyString, filename, wxEmptyString, wxCONFIG_USE_RELATIVE_PATH | wxCONFIG_USE_NO_ESCAPE_CHARACTERS);
 			wxString entry, title;
 			long idx = 0;
-			bool econt = syn.GetNextEntry( entry, idx );
+			bool econt = syn.GetNextEntry(entry, idx);
 
-			while( econt )
+			while (econt)
 			{
-				syn.Read( entry, &title );
+				syn.Read(entry, &title);
 				entry.MakeLower();
-				title.Trim( true );
-				title.Trim( false );
+				title.Trim(true);
+				title.Trim(false);
 
-				if( entry == wxT( "title" ) )
+				if (entry == wxT("title"))
 				{
-					if( title == MadPlainTextTitle )
+					if (title == MadPlainTextTitle)
 					{
 						// "Plain Text" synfile must be first item of g_TitleSynfileTable
 						title = wxGetTranslation(title);
-						if( g_TitleSynfileTable.empty() || g_TitleSynfileTable[0].first != title)
+						if (g_TitleSynfileTable.empty() || g_TitleSynfileTable[0].first != title)
 						{
-							g_TitleSynfileTable.insert( g_TitleSynfileTable.begin(), pair<wxString, wxString>(title, filename ) );
+							g_TitleSynfileTable.insert(g_TitleSynfileTable.begin(), pair<wxString, wxString>(title, filename));
 						}
 					}
 					else
@@ -151,24 +151,24 @@ void MadSyntax::LoadSyntaxFiles()
 						StringPairIterator itend = g_TitleSynfileTable.end();
 						bool insert = true;
 
-						if( it != itend )
+						if (it != itend)
 						{
-							if( g_TitleSynfileTable[0].first == wxGetTranslation(MadPlainTextTitle) )
+							if (g_TitleSynfileTable[0].first == wxGetTranslation(MadPlainTextTitle))
 							{
 								++it;
 							}
 
-							while( it != itend )
+							while (it != itend)
 							{
-								int cmp = it->first.CmpNoCase( title );
+								int cmp = it->first.CmpNoCase(title);
 
-								if( cmp == 0 )
+								if (cmp == 0)
 								{
 									insert = false;
 									break;
 								}
 
-								if( cmp > 0 )
+								if (cmp > 0)
 								{
 									break;
 								}
@@ -177,39 +177,39 @@ void MadSyntax::LoadSyntaxFiles()
 							}
 						}
 
-						if( insert )
+						if (insert)
 						{
-							g_TitleSynfileTable.insert( it, pair<wxString, wxString>( title, filename ) );
+							g_TitleSynfileTable.insert(it, pair<wxString, wxString>(title, filename));
 						}
 					}
 
 					break;
 				}
 
-				econt = syn.GetNextEntry( entry, idx );
+				econt = syn.GetNextEntry(entry, idx);
 			}
 
-			cont = dir.GetNext( &filename );
+			cont = dir.GetNext(&filename);
 		}
 
 		// load syntax scheme files
-		cont = dir.GetFirst( &filename, wxT( "*.sch" ), wxDIR_FILES );
+		cont = dir.GetFirst(&filename, wxT("*.sch"), wxDIR_FILES);
 		static int front = 0, back = 0;
 
-		while( cont )
+		while (cont)
 		{
 			filename = g_SynPaths[i] + filename;
-			wxFileName fn( filename );
+			wxFileName fn(filename);
 			wxString name = fn.GetName();
 			StringPairIterator it = g_NameSchfileTable.begin() + front;
 #ifdef __WXMSW__
 
-			if( filename.Upper().Find( s_AttributeFilePath.Upper().c_str() ) < 0 )
+			if (filename.Upper().Find(s_AttributeFilePath.Upper().c_str()) < 0)
 #else
-			if( filename.Find( s_AttributeFilePath.c_str() ) < 0 )
+			if (filename.Find(s_AttributeFilePath.c_str()) < 0)
 #endif
 			{
-				name += wxT( '*' );
+				name += wxT('*');
 				++front;
 			}
 			else
@@ -218,43 +218,43 @@ void MadSyntax::LoadSyntaxFiles()
 				++back;
 			}
 
-			g_NameSchfileTable.insert( it, pair<wxString, wxString>( name, filename ) );
-			cont = dir.GetNext( &filename );
+			g_NameSchfileTable.insert(it, pair<wxString, wxString>(name, filename));
+			cont = dir.GetNext(&filename);
 		}
 
-		LoadListFile( g_SynPaths[i] + wxT( "extension.list" ), g_ExtSynfileMap, true );
-		LoadListFile( g_SynPaths[i] + wxT( "firstline.list" ), g_FirstlineSynfileMap, false );
-		LoadListFile( g_SynPaths[i] + wxT( "filename.list" ),  g_FilenameSynfileMap, true );
+		LoadListFile(g_SynPaths[i] + wxT("extension.list"), g_ExtSynfileMap, true);
+		LoadListFile(g_SynPaths[i] + wxT("firstline.list"), g_FirstlineSynfileMap, false);
+		LoadListFile(g_SynPaths[i] + wxT("filename.list"),  g_FilenameSynfileMap, true);
 	}
 
 	// make sure "Plain Text" was added, otherwise add it
-	if( g_TitleSynfileTable.empty() || g_TitleSynfileTable[0].first != wxGetTranslation(MadPlainTextTitle) )
+	if (g_TitleSynfileTable.empty() || g_TitleSynfileTable[0].first != wxGetTranslation(MadPlainTextTitle))
 	{
-		g_TitleSynfileTable.insert( g_TitleSynfileTable.begin(), pair<wxString, wxString>(wxGetTranslation(MadPlainTextTitle), wxEmptyString ) );
+		g_TitleSynfileTable.insert(g_TitleSynfileTable.begin(), pair<wxString, wxString>(wxGetTranslation(MadPlainTextTitle), wxEmptyString));
 	}
 
 	// add "Default*" to the g_NameSchfileTable
-	g_NameSchfileTable.push_front( pair<wxString, wxString>( wxT( "Default*" ), wxEmptyString ) );
+	g_NameSchfileTable.push_front(pair<wxString, wxString>(wxT("Default*"), wxEmptyString));
 	s_Loaded = true;
 }
 
-void MadSyntax::AddSyntaxFilesPath( const wxString &path )
+void MadSyntax::AddSyntaxFilesPath(const wxString &path)
 {
-	if( wxDirExists( path ) ) g_SynPaths.push_back( path );
+	if (wxDirExists(path)) g_SynPaths.push_back(path);
 }
 
 size_t MadSyntax::GetSyntaxCount()
 {
-	if( !s_Loaded ) LoadSyntaxFiles();
+	if (!s_Loaded) LoadSyntaxFiles();
 
 	return g_TitleSynfileTable.size();
 }
 
-wxString MadSyntax::GetSyntaxTitle( size_t index )
+wxString MadSyntax::GetSyntaxTitle(size_t index)
 {
-	if( !s_Loaded ) LoadSyntaxFiles();
+	if (!s_Loaded) LoadSyntaxFiles();
 
-	if( index < g_TitleSynfileTable.size() )
+	if (index < g_TitleSynfileTable.size())
 	{
 		return g_TitleSynfileTable[index].first;
 	}
@@ -262,11 +262,11 @@ wxString MadSyntax::GetSyntaxTitle( size_t index )
 	return wxEmptyString;
 }
 
-wxString MadSyntax::GetSyntaxFile( size_t index )
+wxString MadSyntax::GetSyntaxFile(size_t index)
 {
-	if( !s_Loaded ) LoadSyntaxFiles();
+	if (!s_Loaded) LoadSyntaxFiles();
 
-	if( index < g_TitleSynfileTable.size() )
+	if (index < g_TitleSynfileTable.size())
 	{
 		return g_TitleSynfileTable[index].second;
 	}
@@ -274,13 +274,13 @@ wxString MadSyntax::GetSyntaxFile( size_t index )
 	return wxEmptyString;
 }
 
-wxString MadSyntax::GetSyntaxFileByTitle( const wxString &title )
+wxString MadSyntax::GetSyntaxFileByTitle(const wxString &title)
 {
-	if( !s_Loaded ) LoadSyntaxFiles();
+	if (!s_Loaded) LoadSyntaxFiles();
 
-	for( size_t i = 0; i < g_TitleSynfileTable.size(); ++i )
+	for (size_t i = 0; i < g_TitleSynfileTable.size(); ++i)
 	{
-		if( g_TitleSynfileTable[i].first == title )
+		if (g_TitleSynfileTable[i].first == title)
 		{
 			return g_TitleSynfileTable[i].second;
 		}
@@ -289,56 +289,56 @@ wxString MadSyntax::GetSyntaxFileByTitle( const wxString &title )
 	return wxEmptyString;
 }
 
-wxString MadSyntax::GetAttributeFileByTitle( const wxString &title )
+wxString MadSyntax::GetAttributeFileByTitle(const wxString &title)
 {
-	wxString file = GetSyntaxFileByTitle( title );
+	wxString file = GetSyntaxFileByTitle(title);
 
-	if( file.IsEmpty() )
+	if (file.IsEmpty())
 	{
-		file = s_AttributeFilePath + wxT( "temp.att" );
+		file = s_AttributeFilePath + wxT("temp.att");
 	}
 	else
 	{
-		wxFileName fn( file );
-		file = s_AttributeFilePath + fn.GetName() + wxT( ".att" );
+		wxFileName fn(file);
+		file = s_AttributeFilePath + fn.GetName() + wxT(".att");
 	}
 
 	return file;
 }
 
-MadSyntax* MadSyntax::GetSyntaxByTitle( const wxString &title )
+MadSyntax* MadSyntax::GetSyntaxByTitle(const wxString &title)
 {
-	if( !s_Loaded ) LoadSyntaxFiles();
+	if (!s_Loaded) LoadSyntaxFiles();
 
-	wxString synfile = GetSyntaxFileByTitle( title );
+	wxString synfile = GetSyntaxFileByTitle(title);
 
-	if( wxFileExists( synfile ) )
+	if (wxFileExists(synfile))
 	{
-		return new MadSyntax( synfile );
+		return new MadSyntax(synfile);
 	}
 
 	return new MadSyntax(); // return a default syntax
 }
 
-MadSyntax* MadSyntax::GetSyntaxByExt( const wxString &ext )
+MadSyntax* MadSyntax::GetSyntaxByExt(const wxString &ext)
 {
-	if( !s_Loaded ) LoadSyntaxFiles();
+	if (!s_Loaded) LoadSyntaxFiles();
 
 	wxString synfile;
-	StringMap::iterator it = g_ExtSynfileMap.find( ext.Upper() );
+	StringMap::iterator it = g_ExtSynfileMap.find(ext.Upper());
 
-	if( it != g_ExtSynfileMap.end() )
+	if (it != g_ExtSynfileMap.end())
 	{
 		synfile = it->second;
 	}
 
-	if( !synfile.IsEmpty() )
+	if (!synfile.IsEmpty())
 	{
-		for( size_t idx = 0; idx < g_SynPaths.size(); ++idx )
+		for (size_t idx = 0; idx < g_SynPaths.size(); ++idx)
 		{
-			if( wxFileExists( g_SynPaths[idx] + synfile ) )
+			if (wxFileExists(g_SynPaths[idx] + synfile))
 			{
-				return new MadSyntax( g_SynPaths[idx] + synfile );
+				return new MadSyntax(g_SynPaths[idx] + synfile);
 			}
 		}
 	}
@@ -346,7 +346,7 @@ MadSyntax* MadSyntax::GetSyntaxByExt( const wxString &ext )
 	return nullptr;
 }
 
-MadSyntax* MadSyntax::GetSyntaxByFirstLine( wxByte *data, int size )
+MadSyntax* MadSyntax::GetSyntaxByFirstLine(wxByte *data, int size)
 {
 	wxString line;
 	wxChar ch(0);
@@ -354,7 +354,7 @@ MadSyntax* MadSyntax::GetSyntaxByFirstLine( wxByte *data, int size )
 	// get first non-empty line
 	do
 	{
-		while( size > 0 && ( ch = wxChar( *data ) ) != 0x0D && ch != 0x0A && ch != 0 )
+		while (size > 0 && (ch = wxChar(*data)) != 0x0D && ch != 0x0A && ch != 0)
 		{
 			line << ch;
 			++data;
@@ -363,34 +363,34 @@ MadSyntax* MadSyntax::GetSyntaxByFirstLine( wxByte *data, int size )
 
 		++data;
 		--size;
-		line.Trim( false );
+		line.Trim(false);
 	}
-	while( line.IsEmpty() && size > 0 && ch != 0 );
+	while (line.IsEmpty() && size > 0 && ch != 0);
 
 	wxString synfile;
 
-	if( !line.IsEmpty() && g_FirstlineSynfileMap.size() != 0 )
+	if (!line.IsEmpty() && g_FirstlineSynfileMap.size() != 0)
 	{
 		StringMap::iterator it = g_FirstlineSynfileMap.begin();
 
 		do
 		{
-			if( line.Find( it->first.c_str() ) >= 0 )
+			if (line.Find(it->first.c_str()) >= 0)
 			{
 				synfile = it->second;
 				break;
 			}
 		}
-		while( ++it != g_FirstlineSynfileMap.end() );
+		while (++it != g_FirstlineSynfileMap.end());
 	}
 
-	if( !synfile.IsEmpty() )
+	if (!synfile.IsEmpty())
 	{
-		for( size_t idx = 0; idx < g_SynPaths.size(); ++idx )
+		for (size_t idx = 0; idx < g_SynPaths.size(); ++idx)
 		{
-			if( wxFileExists( g_SynPaths[idx] + synfile ) )
+			if (wxFileExists(g_SynPaths[idx] + synfile))
 			{
-				return new MadSyntax( g_SynPaths[idx] + synfile );
+				return new MadSyntax(g_SynPaths[idx] + synfile);
 			}
 		}
 	}
@@ -398,25 +398,25 @@ MadSyntax* MadSyntax::GetSyntaxByFirstLine( wxByte *data, int size )
 	return nullptr;
 }
 
-MadSyntax* MadSyntax::GetSyntaxByFileName( const wxString &filename )
+MadSyntax* MadSyntax::GetSyntaxByFileName(const wxString &filename)
 {
-	if( !s_Loaded ) LoadSyntaxFiles();
+	if (!s_Loaded) LoadSyntaxFiles();
 
 	wxString synfile;
-	StringMap::iterator it = g_FilenameSynfileMap.find( filename.Upper() );
+	StringMap::iterator it = g_FilenameSynfileMap.find(filename.Upper());
 
-	if( it != g_FilenameSynfileMap.end() )
+	if (it != g_FilenameSynfileMap.end())
 	{
 		synfile = it->second;
 	}
 
-	if( !synfile.IsEmpty() )
+	if (!synfile.IsEmpty())
 	{
-		for( size_t idx = 0; idx < g_SynPaths.size(); ++idx )
+		for (size_t idx = 0; idx < g_SynPaths.size(); ++idx)
 		{
-			if( wxFileExists( g_SynPaths[idx] + synfile ) )
+			if (wxFileExists(g_SynPaths[idx] + synfile))
 			{
-				return new MadSyntax( g_SynPaths[idx] + synfile );
+				return new MadSyntax(g_SynPaths[idx] + synfile);
 			}
 		}
 	}
@@ -426,15 +426,15 @@ MadSyntax* MadSyntax::GetSyntaxByFileName( const wxString &filename )
 
 size_t MadSyntax::GetSchemeCount()
 {
-	if( !s_Loaded ) LoadSyntaxFiles();
+	if (!s_Loaded) LoadSyntaxFiles();
 
 	return g_NameSchfileTable.size();
 }
-wxString MadSyntax::GetSchemeName( size_t index )
+wxString MadSyntax::GetSchemeName(size_t index)
 {
-	if( !s_Loaded ) LoadSyntaxFiles();
+	if (!s_Loaded) LoadSyntaxFiles();
 
-	if( index < g_NameSchfileTable.size() )
+	if (index < g_NameSchfileTable.size())
 	{
 		return g_NameSchfileTable[index].first;
 	}
@@ -442,31 +442,31 @@ wxString MadSyntax::GetSchemeName( size_t index )
 	return wxEmptyString;
 }
 
-wxString MadSyntax::GetSchemeFileByName( const wxString &schname, MadSyntax *default_syn, bool &star )
+wxString MadSyntax::GetSchemeFileByName(const wxString &schname, MadSyntax *default_syn, bool &star)
 {
-	if( !s_Loaded ) LoadSyntaxFiles();
+	if (!s_Loaded) LoadSyntaxFiles();
 
 	wxString name = schname;
 
-	if( name.Right( 1 ) == wxT( '*' ) ) name = schname.Left( schname.Len() - 1 );
+	if (name.Right(1) == wxT('*')) name = schname.Left(schname.Len() - 1);
 
-	if( name == wxT( "Default" ) )
+	if (name == wxT("Default"))
 	{
 		star = true;
 
-		if( default_syn ) return GetSyntaxFileByTitle( default_syn->m_SynAttr->m_Title );
+		if (default_syn) return GetSyntaxFileByTitle(default_syn->m_SynAttr->m_Title);
 
 		return wxEmptyString;
 	}
 
-	for( size_t i = 0; i < g_NameSchfileTable.size(); ++i )
+	for (size_t i = 0; i < g_NameSchfileTable.size(); ++i)
 	{
-		wxFileName fn( g_NameSchfileTable[i].second );
+		wxFileName fn(g_NameSchfileTable[i].second);
 		wxString n = fn.GetName();
 
-		if( n == name )
+		if (n == name)
 		{
-			star = ( g_NameSchfileTable[i].first.Last() == wxT( '*' ) );
+			star = (g_NameSchfileTable[i].first.Last() == wxT('*'));
 			return g_NameSchfileTable[i].second;
 		}
 	}
@@ -475,52 +475,52 @@ wxString MadSyntax::GetSchemeFileByName( const wxString &schname, MadSyntax *def
 	return wxEmptyString;
 }
 
-bool MadSyntax::LoadScheme( const wxString &schname, MadSyntax *syn )
+bool MadSyntax::LoadScheme(const wxString &schname, MadSyntax *syn)
 {
 	bool star;
-	wxString schfile = GetSchemeFileByName( schname, syn, star );
+	wxString schfile = GetSchemeFileByName(schname, syn, star);
 
-	if( schfile.IsEmpty() && syn->m_SynAttr->m_Title == MadPlainTextTitle )
+	if (schfile.IsEmpty() && syn->m_SynAttr->m_Title == MadPlainTextTitle)
 	{
-		if( schname == wxT( "Default*" ) || schname == wxT( "Default" ) )
+		if (schname == wxT("Default*") || schname == wxT("Default"))
 		{
-			MadSyntax *newsyn = new MadSyntax( false );
-			syn->AssignAttributes( newsyn );
+			MadSyntax *newsyn = new MadSyntax(false);
+			syn->AssignAttributes(newsyn);
 			delete newsyn;
 			return true;
 		}
 	}
 
-	if( schfile.IsEmpty() || !wxFileExists( schfile ) ) return false;
+	if (schfile.IsEmpty() || !wxFileExists(schfile)) return false;
 
-	MadSyntax *newsyn = new MadSyntax( schfile, false, true );
-	syn->AssignAttributes( newsyn );
+	MadSyntax *newsyn = new MadSyntax(schfile, false, true);
+	syn->AssignAttributes(newsyn);
 	delete newsyn;
 	return true;
 }
 
-bool MadSyntax::SaveScheme( const wxString &schname, MadSyntax *syn )
+bool MadSyntax::SaveScheme(const wxString &schname, MadSyntax *syn)
 {
-	wxASSERT( syn != nullptr );
+	wxASSERT(syn != nullptr);
 	wxString name = schname;
 
-	if( name.Right( 1 ) == wxT( '*' ) ) name = schname.Left( schname.Len() - 1 );
+	if (name.Right(1) == wxT('*')) name = schname.Left(schname.Len() - 1);
 
 	bool star;
-	wxString schfile = GetSchemeFileByName( name, syn, star );
+	wxString schfile = GetSchemeFileByName(name, syn, star);
 
-	if( star || name.IsEmpty() ) return false;
+	if (star || name.IsEmpty()) return false;
 
-	if( schfile.IsEmpty() || !wxFileExists( schfile ) )
+	if (schfile.IsEmpty() || !wxFileExists(schfile))
 	{
-		MadSyntax *newsyn = new MadSyntax( false );
+		MadSyntax *newsyn = new MadSyntax(false);
 		size_t i;
 		MadSyntaxRange ra;
 		ra.bgcolor = *wxWHITE;
 
-		for( i = newsyn->m_SynAttr->m_CustomRange.size(); i < 5; ++i )
+		for (i = newsyn->m_SynAttr->m_CustomRange.size(); i < 5; ++i)
 		{
-			newsyn->m_SynAttr->m_CustomRange.push_back( ra );
+			newsyn->m_SynAttr->m_CustomRange.push_back(ra);
 		}
 
 		MadSyntaxKeyword ke;
@@ -528,76 +528,76 @@ bool MadSyntax::SaveScheme( const wxString &schname, MadSyntax *syn )
 		ke.m_Attr.bgcolor = wxNullColour;
 		ke.m_Attr.style = fsNone;
 
-		for( i = newsyn->m_SynAttr->m_CustomKeyword.size(); i < 10; ++i )
+		for (i = newsyn->m_SynAttr->m_CustomKeyword.size(); i < 10; ++i)
 		{
-			newsyn->m_SynAttr->m_CustomKeyword.push_back( ke );
+			newsyn->m_SynAttr->m_CustomKeyword.push_back(ke);
 		}
 
-		newsyn->AssignAttributes( syn, true );
+		newsyn->AssignAttributes(syn, true);
 
-		if( schfile.IsEmpty() )
+		if (schfile.IsEmpty())
 		{
-			schfile = s_AttributeFilePath + name + wxT( ".sch" );
-			g_NameSchfileTable.push_back( pair<wxString, wxString>( name, schfile ) );
+			schfile = s_AttributeFilePath + name + wxT(".sch");
+			g_NameSchfileTable.push_back(pair<wxString, wxString>(name, schfile));
 		}
 
-		newsyn->SaveAttributes( schfile );
+		newsyn->SaveAttributes(schfile);
 		delete newsyn;
 	}
 	else
 	{
-		MadSyntax *newsyn = new MadSyntax( schfile, false );
-		newsyn->AssignAttributes( syn, true );
-		newsyn->SaveAttributes( schfile );
+		MadSyntax *newsyn = new MadSyntax(schfile, false);
+		newsyn->AssignAttributes(syn, true);
+		newsyn->SaveAttributes(schfile);
 		delete newsyn;
 	}
 
-	if( !wxFileExists( schfile ) ) return false;
+	if (!wxFileExists(schfile)) return false;
 
 	return true;
 }
 
-bool MadSyntax::DeleteScheme( const wxString &schname )
+bool MadSyntax::DeleteScheme(const wxString &schname)
 {
 	bool star;
-	wxString schfile = GetSchemeFileByName( schname, nullptr, star );
+	wxString schfile = GetSchemeFileByName(schname, nullptr, star);
 
-	if( star || schfile.IsEmpty() ) return false;
+	if (star || schfile.IsEmpty()) return false;
 
 	StringPairIterator it = g_NameSchfileTable.begin();
 
 	do
 	{
-		if( it->second == schfile )
+		if (it->second == schfile)
 		{
-			g_NameSchfileTable.erase( it );
+			g_NameSchfileTable.erase(it);
 			break;
 		}
 	}
-	while( ++it != g_NameSchfileTable.end() );
+	while (++it != g_NameSchfileTable.end());
 
-	wxRemoveFile( schfile );
+	wxRemoveFile(schfile);
 	return true;
 }
 
 //========================================================
 
-MadSyntax::MadSyntax( const wxString &filename, bool loadAttr/* = true*/, bool reParse/* = false*/ )
+MadSyntax::MadSyntax(const wxString &filename, bool loadAttr/* = true*/, bool reParse/* = false*/)
 {
-	LoadFromFile( filename, reParse );
-	wxFileName fn( filename );
+	LoadFromFile(filename, reParse);
+	wxFileName fn(filename);
 
-	if(!m_SynAttr) m_SynAttr.reset(new MadSyntaxAttributes());
-	if( loadAttr && fn.GetExt().CmpNoCase( wxT( "syn" ) ) == 0 )
+	if (!m_SynAttr) m_SynAttr.reset(new MadSyntaxAttributes());
+	if (loadAttr && fn.GetExt().CmpNoCase(wxT("syn")) == 0)
 	{
 		LoadAttributes();
 	}
 }
 
-MadSyntax::MadSyntax( bool loadAttr/* = true*/ )
+MadSyntax::MadSyntax(bool loadAttr/* = true*/)
 {
 	m_SynAttr.reset(new MadSyntaxAttributes());
-	if( loadAttr ) LoadAttributes();
+	if (loadAttr) LoadAttributes();
 }
 
 MadSyntax::~MadSyntax()
@@ -605,156 +605,156 @@ MadSyntax::~MadSyntax()
 	//Reset();    // free memories
 }
 
-void MadSyntax::LoadFromFile( const wxString &filename, bool reParse/* = false*/ )
+void MadSyntax::LoadFromFile(const wxString &filename, bool reParse/* = false*/)
 {
 	//Reset();    // reset attributes
-	ParseSyntax( filename, reParse );
-	if(m_SynAttr->m_Title == MadPlainTextTitle) m_SynAttr->m_IsPlainText = true;
+	ParseSyntax(filename, reParse);
+	if (m_SynAttr->m_Title == MadPlainTextTitle) m_SynAttr->m_IsPlainText = true;
 	else m_SynAttr->m_IsPlainText = false;
 }
 
-void MadSyntax::ParseSyntax( const wxString &filename, bool reParse/* = false*/ )
+void MadSyntax::ParseSyntax(const wxString &filename, bool reParse/* = false*/)
 {
-	if(!reParse && g_TitleSynAttrMap.find(filename) != g_TitleSynAttrMap.end())
+	if (!reParse && g_TitleSynAttrMap.find(filename) != g_TitleSynAttrMap.end())
 	{
 		m_SynAttr = g_TitleSynAttrMap[filename];
 		return;
 	}
-	wxFileConfig syn( wxEmptyString, wxEmptyString, filename, wxEmptyString, wxCONFIG_USE_RELATIVE_PATH | wxCONFIG_USE_NO_ESCAPE_CHARACTERS );
+	wxFileConfig syn(wxEmptyString, wxEmptyString, filename, wxEmptyString, wxCONFIG_USE_RELATIVE_PATH | wxCONFIG_USE_NO_ESCAPE_CHARACTERS);
 	wxString entry, value;
 	
 	m_SynAttr.reset(new MadSyntaxAttributes());
-	m_SynAttr->m_Title = wxT( "No Title" );
+	m_SynAttr->m_Title = wxT("No Title");
 	m_SynAttr->m_IsPlainText = false;
 	long idx = 0;
-	bool cont = syn.GetNextEntry( entry, idx );
+	bool cont = syn.GetNextEntry(entry, idx);
 	wxString s;
 
-	while( cont )
+	while (cont)
 	{
 		//wxLogMessage(entry);
-		syn.Read( entry, &value );
+		syn.Read(entry, &value);
 		entry.MakeLower();
-		value.Trim( true );
-		value.Trim( false );
+		value.Trim(true);
+		value.Trim(false);
 
-		if( entry == wxT( "title" ) )
+		if (entry == wxT("title"))
 		{
 			m_SynAttr->m_Title = value;
 		}
 		else
-			if( entry == wxT( "encoding" ) )
+			if (entry == wxT("encoding"))
 			{
 				m_SynAttr->m_Encoding = value;
 			}
 			else
-				if( entry == wxT( "casesensitive" ) )
+				if (entry == wxT("casesensitive"))
 				{
-					if( value.Lower() == wxT( "yes" ) )
+					if (value.Lower() == wxT("yes"))
 						m_SynAttr->m_CaseSensitive = true;
 				}
 				else
-					if( entry == wxT( "delimiter" ) )
+					if (entry == wxT("delimiter"))
 					{
 						//m_Delimiter = value;
 						//m_Delimiter.clear();
 						memset(m_SynAttr->m_Delimiter, 0, sizeof(m_SynAttr->m_Delimiter));
-						for( size_t i = 0; i < value.Len(); ++i )
+						for (size_t i = 0; i < value.Len(); ++i)
 						{
 							//m_Delimiter.insert((ucs4_t)value[i]);
-							if(value[i] < 0x100)
+							if (value[i] < 0x100)
 								m_SynAttr->m_Delimiter[(ucs4_t)value[i]] = 1;
 						}
 					}
 					else
-						if( entry == wxT( "escapechar" ) )
+						if (entry == wxT("escapechar"))
 						{
 							m_SynAttr->m_EscapeChar = value;
 
-							if( !m_SynAttr->m_EscapeChar.IsEmpty() )
+							if (!m_SynAttr->m_EscapeChar.IsEmpty())
 								m_SynAttr->nw_EscapeChar = m_SynAttr->m_EscapeChar[0];
 						}
 						else
-							if( entry == wxT( "stringchar" ) )
+							if (entry == wxT("stringchar"))
 							{
-								wxStringTokenizer tkz( value );
+								wxStringTokenizer tkz(value);
 								s = tkz.GetNextToken();
 
-								while( !s.IsEmpty() )
+								while (!s.IsEmpty())
 								{
 									m_SynAttr->m_StringChar += s;
 									s = tkz.GetNextToken();
 								}
 							}
 							else
-								if( entry == wxT( "directiveleading" ) )
+								if (entry == wxT("directiveleading"))
 								{
 									m_SynAttr->m_DirectiveLeading = value;
 								}
 								else
-									if( entry == wxT( "directiveleadingatbol" ) )
+									if (entry == wxT("directiveleadingatbol"))
 									{
-										if( value.Lower() == wxT( "yes" ) )
+										if (value.Lower() == wxT("yes"))
 											m_SynAttr->m_DirectiveLeadingAtBOL = true;
 									}
 									else
-										if( entry == wxT( "keywordprefix" ) )
+										if (entry == wxT("keywordprefix"))
 										{
 											m_SynAttr->m_KeywordPrefix = value;
 										}
 										else
-											if( entry == wxT( "specialwordprefix" ) )
+											if (entry == wxT("specialwordprefix"))
 											{
 												m_SynAttr->m_SpecialWordPrefix = value;
 											}
 											else
-												if( entry == wxT( "indentchar" ) )
+												if (entry == wxT("indentchar"))
 												{
-													wxStringTokenizer tkz( value );
+													wxStringTokenizer tkz(value);
 													s = tkz.GetNextToken();
 
-													while( !s.IsEmpty() )
+													while (!s.IsEmpty())
 													{
 														m_SynAttr->m_IndentChar += s;
 														s = tkz.GetNextToken();
 													}
 												}
 												else
-													if( entry == wxT( "unindentchar" ) )
+													if (entry == wxT("unindentchar"))
 													{
-														wxStringTokenizer tkz( value );
+														wxStringTokenizer tkz(value);
 														s = tkz.GetNextToken();
 
-														while( !s.IsEmpty() )
+														while (!s.IsEmpty())
 														{
 															m_SynAttr->m_UnindentChar += s;
 															s = tkz.GetNextToken();
 														}
 													}
 													else
-														if( entry == wxT( "bracepair" ) )
+														if (entry == wxT("bracepair"))
 														{
-															wxStringTokenizer tkz( value );
+															wxStringTokenizer tkz(value);
 															wxString pl = tkz.GetNextToken();
 															wxString pr = tkz.GetNextToken();
 
-															while( !pl.IsEmpty() && !pr.IsEmpty() )
+															while (!pl.IsEmpty() && !pr.IsEmpty())
 															{
-																m_SynAttr->m_LeftBrace.push_back( pl );
-																m_SynAttr->m_RightBrace.push_back( pr );
+																m_SynAttr->m_LeftBrace.push_back(pl);
+																m_SynAttr->m_RightBrace.push_back(pr);
 																pl = tkz.GetNextToken();
 																pr = tkz.GetNextToken();
 															}
 														}
 														else
-															if( entry == wxT( "autocompletepair" ) )
+															if (entry == wxT("autocompletepair"))
 															{
-																wxStringTokenizer tkz( value );
+																wxStringTokenizer tkz(value);
 																wxString p = tkz.GetNextToken();
 
-																while( !p.IsEmpty() )
+																while (!p.IsEmpty())
 																{
-																	if( p.Len() == 2 )
+																	if (p.Len() == 2)
 																	{
 																		m_SynAttr->m_AutoCompleteLeftChar += p[0];
 																		m_SynAttr->m_AutoCompleteRightChar += p[1];
@@ -764,132 +764,132 @@ void MadSyntax::ParseSyntax( const wxString &filename, bool reParse/* = false*/ 
 																}
 															}
 															else
-																if( entry == wxT( "customrange" ) )
+																if (entry == wxT("customrange"))
 																{
-																	wxStringTokenizer tkz( value );
+																	wxStringTokenizer tkz(value);
 																	MadSyntaxRange ra;
 
-																	while( true )
+																	while (true)
 																	{
 																		s = tkz.GetNextToken();
 
-																		if( !s.ToULong( &ra.id ) ) break;
+																		if (!s.ToULong(&ra.id)) break;
 
-																		if( ( ra.begin = tkz.GetNextToken() ).IsEmpty() ) break;
+																		if ((ra.begin = tkz.GetNextToken()).IsEmpty()) break;
 
-																		m_SynAttr->m_RangeBeginString.push_back( ra.begin );
+																		m_SynAttr->m_RangeBeginString.push_back(ra.begin);
 
-																		if( ( ra.end = tkz.GetNextToken() ).IsEmpty() ) break;
+																		if ((ra.end = tkz.GetNextToken()).IsEmpty()) break;
 
-																		if( ( s = tkz.GetNextToken() ).IsEmpty() ) break;
+																		if ((s = tkz.GetNextToken()).IsEmpty()) break;
 
-																		SetColor( s, ra.bgcolor );
-																		m_SynAttr->m_CustomRange.push_back( ra );
+																		SetColor(s, ra.bgcolor);
+																		m_SynAttr->m_CustomRange.push_back(ra);
 																	}
 																}
 																else
-																	if( entry == wxT( "stringinrange" ) )
+																	if (entry == wxT("stringinrange"))
 																	{
-																		SetInRange( value, m_SynAttr->m_StringInRange );
+																		SetInRange(value, m_SynAttr->m_StringInRange);
 																	}
 																	else
-																		if( entry == wxT( "linecomment" ) )
+																		if (entry == wxT("linecomment"))
 																		{
-																			wxStringTokenizer tkz( value );
+																			wxStringTokenizer tkz(value);
 																			s = tkz.GetNextToken();
 
-																			while( !s.IsEmpty() )
+																			while (!s.IsEmpty())
 																			{
-																				m_SynAttr->m_LineComment.push_back( s );
+																				m_SynAttr->m_LineComment.push_back(s);
 																				s = tkz.GetNextToken();
 																			}
 																		}
 																		else
-																			if( entry == wxT( "linecommentinrange" ) )
+																			if (entry == wxT("linecommentinrange"))
 																			{
-																				SetInRange( value, m_SynAttr->m_LineCommentInRange );
+																				SetInRange(value, m_SynAttr->m_LineCommentInRange);
 																			}
 																			else
-																				if( entry == wxT( "linecommentatbol" ) )
+																				if (entry == wxT("linecommentatbol"))
 																				{
-																					if( value.Lower() == wxT( "yes" ) )
+																					if (value.Lower() == wxT("yes"))
 																						m_SynAttr->m_LineCommentAtBOL = true;
 																				}
 																				else
-																					if( entry == wxT( "blockcomment" ) )
+																					if (entry == wxT("blockcomment"))
 																					{
-																						wxStringTokenizer tkz( value );
+																						wxStringTokenizer tkz(value);
 																						wxString on = tkz.GetNextToken();
 																						wxString off = tkz.GetNextToken();
 
-																						while( !on.IsEmpty() && !off.IsEmpty() )
+																						while (!on.IsEmpty() && !off.IsEmpty())
 																						{
-																							m_SynAttr->m_BlockCommentOn.push_back( on );
-																							m_SynAttr->m_BlockCommentOff.push_back( off );
+																							m_SynAttr->m_BlockCommentOn.push_back(on);
+																							m_SynAttr->m_BlockCommentOff.push_back(off);
 																							on = tkz.GetNextToken();
 																							off = tkz.GetNextToken();
 																						}
 																					}
 																					else
-																						if( entry == wxT( "blockcommentinrange" ) )
+																						if (entry == wxT("blockcommentinrange"))
 																						{
-																							wxStringTokenizer tkz( value, wxT( "," ), wxTOKEN_RET_EMPTY_ALL );
+																							wxStringTokenizer tkz(value, wxT(","), wxTOKEN_RET_EMPTY_ALL);
 																							size_t inx = 0;
 
-																							while( tkz.HasMoreTokens() )
+																							while (tkz.HasMoreTokens())
 																							{
 																								s = tkz.GetNextToken();
-																								m_SynAttr->m_BlockCommentInRange.push_back( vector<int>() );
-																								SetInRange( s, m_SynAttr->m_BlockCommentInRange[inx++] );
+																								m_SynAttr->m_BlockCommentInRange.push_back(vector<int>());
+																								SetInRange(s, m_SynAttr->m_BlockCommentInRange[inx++]);
 																							}
 																						}
 																						else
 																						{
 																							int attr = 0, alen = 5;
 
-																							if( entry.Right( 7 ) == wxT( "bgcolor" ) )
+																							if (entry.Right(7) == wxT("bgcolor"))
 																							{
 																								attr = 1;
 																								alen = 7;
 																							}
 																							else
-																								if( ( s = entry.Right( 5 ) ) == wxT( "color" ) )
+																								if ((s = entry.Right(5)) == wxT("color"))
 																								{
 																									attr = 2;
 																								}
 																								else
-																									if( s == wxT( "style" ) )
+																									if (s == wxT("style"))
 																									{
 																										attr = 3;
 																									}
 
-																							int elen = ( int )entry.size();
+																							int elen = (int)entry.size();
 
-																							if( attr != 0 && ( elen -= alen ) > 0 )
+																							if (attr != 0 && (elen -= alen) > 0)
 																							{
-																								MadAttributes *at = GetAttributes( entry.Left( elen ) );
+																								MadAttributes *at = GetAttributes(entry.Left(elen));
 
-																								if( at )
+																								if (at)
 																								{
-																									switch( attr )
+																									switch (attr)
 																									{
 																									case 1:
-																										SetColor( value, at->bgcolor );
+																										SetColor(value, at->bgcolor);
 																										break;
 
 																									case 2:
-																										SetColor( value, at->color );
+																										SetColor(value, at->color);
 																										break;
 
 																									case 3:
-																										SetStyle( value, at->style );
+																										SetStyle(value, at->style);
 																										break;
 																									}
 																								}
 																							}
 																						}
 
-		cont = syn.GetNextEntry( entry, idx );
+		cont = syn.GetNextEntry(entry, idx);
 	}
 
 	size_t kwlen;
@@ -897,7 +897,7 @@ void MadSyntax::ParseSyntax( const wxString &filename, bool reParse/* = false*/ 
 	// load custom keywords
 	wxString group;
 	long gidx = 0;
-	bool gcont = syn.GetNextGroup( group, gidx );
+	bool gcont = syn.GetNextGroup(group, gidx);
 
 	wxConfigBase  * cfg = wxConfigBase::Get(false);
 	wxString oldpath = cfg->GetPath();
@@ -905,92 +905,92 @@ void MadSyntax::ParseSyntax( const wxString &filename, bool reParse/* = false*/ 
 	bool bb = false;
 	cfg->Read(_T("AddKeywords"), &bb, true);
 	m_SynAttr->m_SyntaxKeywordDict->DisableSort();
-	while( gcont )
+	while (gcont)
 	{
 		//wxLogMessage(entry);
-		MadSyntaxKeyword *ck = GetCustomKeyword( group );
+		MadSyntaxKeyword *ck = GetCustomKeyword(group);
 		ck->m_CaseSensitive = m_SynAttr->m_CaseSensitive;
-		syn.SetPath( wxString( wxT( '/' ) ) + group );
+		syn.SetPath(wxString(wxT('/')) + group);
 		idx = 0;
-		cont = syn.GetNextEntry( entry, idx );
+		cont = syn.GetNextEntry(entry, idx);
 
-		while( cont )
+		while (cont)
 		{
-			syn.Read( entry, &value );
+			syn.Read(entry, &value);
 			entry.MakeLower();
-			value.Trim( true );
-			value.Trim( false );
+			value.Trim(true);
+			value.Trim(false);
 
-			if( entry == wxT( "color" ) )
+			if (entry == wxT("color"))
 			{
-				SetColor( value, ck->m_Attr.color );
+				SetColor(value, ck->m_Attr.color);
 			}
 			else
-				if( entry == wxT( "style" ) )
+				if (entry == wxT("style"))
 				{
-					SetStyle( value, ck->m_Attr.style );
+					SetStyle(value, ck->m_Attr.style);
 				}
 				else
-					if( entry == wxT( "inrange" ) )
+					if (entry == wxT("inrange"))
 					{
-						SetInRange( value, ck->m_InRange );
+						SetInRange(value, ck->m_InRange);
 					}
 					else
-						if( entry == wxT( "casesensitive" ) )
+						if (entry == wxT("casesensitive"))
 						{
 							value.MakeLower();
 
-							if( value == wxT( "yes" ) ) ck->m_CaseSensitive = true;
+							if (value == wxT("yes")) ck->m_CaseSensitive = true;
 							else
-								if( value == wxT( "no" ) ) ck->m_CaseSensitive = false;
+								if (value == wxT("no")) ck->m_CaseSensitive = false;
 						}
 						else
-							if( entry == wxT( "keyword" ) )
+							if (entry == wxT("keyword"))
 							{
-								wxStringTokenizer tkz( value );
+								wxStringTokenizer tkz(value);
 								wxString kw = tkz.GetNextToken();
 
-								while( !kw.IsEmpty() )
+								while (!kw.IsEmpty())
 								{
-									if( ( kwlen = kw.size() ) > m_SynAttr->nw_MaxKeywordLen )
+									if ((kwlen = kw.size()) > m_SynAttr->nw_MaxKeywordLen)
 									{
 										m_SynAttr->nw_MaxKeywordLen = kwlen;
 									}
 
-									if( !ck->m_CaseSensitive )
+									if (!ck->m_CaseSensitive)
 										kw.MakeLower();
 
-									ck->m_Keywords.insert( kw );
-									if(bb)
+									ck->m_Keywords.insert(kw);
+									if (bb)
 									{
-										if(m_SynAttr->m_SyntaxKeywordDict->IsWordInDictionary(kw) == false)
+										if (m_SynAttr->m_SyntaxKeywordDict->IsWordInDictionary(kw) == false)
 											m_SynAttr->m_SyntaxKeywordDict->AddWord(kw);
 									}
 									kw = tkz.GetNextToken();
 								}
 							}
 
-			cont = syn.GetNextEntry( entry, idx );
+			cont = syn.GetNextEntry(entry, idx);
 		}
 
-		syn.SetPath( wxString( wxT( '/' ) ) );
-		gcont = syn.GetNextGroup( group, gidx );
+		syn.SetPath(wxString(wxT('/')));
+		gcont = syn.GetNextGroup(group, gidx);
 	}
 
-	if(bb)
+	if (bb)
 		m_SynAttr->m_SyntaxKeywordDict->SortDict();
 	// syn loaded, begin post-processing
 #ifdef __WXMSW__
 
-	if( m_SynAttr->m_SystemAttributes[aeText].color == wxNullColour )
+	if (m_SynAttr->m_SystemAttributes[aeText].color == wxNullColour)
 	{
-		m_SynAttr->m_SystemAttributes[aeText].color = wxSystemSettings::GetColour( wxSYS_COLOUR_WINDOWTEXT );
+		m_SynAttr->m_SystemAttributes[aeText].color = wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT);
 	}
 
 #endif
 
-	if( m_SynAttr->m_SystemAttributes[aeText].color == wxNullColour ||
-			m_SynAttr->m_SystemAttributes[aeText].bgcolor == wxNullColour )
+	if (m_SynAttr->m_SystemAttributes[aeText].color == wxNullColour ||
+			m_SynAttr->m_SystemAttributes[aeText].bgcolor == wxNullColour)
 	{
 		m_SynAttr->m_SystemAttributes[aeText].color = *wxBLACK;
 		m_SynAttr->m_SystemAttributes[aeText].bgcolor = *wxWHITE;
@@ -998,51 +998,51 @@ void MadSyntax::ParseSyntax( const wxString &filename, bool reParse/* = false*/ 
 
 #ifdef __WXMSW__
 
-	if( m_SynAttr->m_SystemAttributes[aeText].bgcolor == *wxWHITE )
+	if (m_SynAttr->m_SystemAttributes[aeText].bgcolor == *wxWHITE)
 	{
-		m_SynAttr->m_SystemAttributes[aeText].bgcolor = wxSystemSettings::GetColour( wxSYS_COLOUR_WINDOW );
+		m_SynAttr->m_SystemAttributes[aeText].bgcolor = wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW);
 	}
 
 #endif
 	vector < MadSyntaxKeyword >::iterator kit = m_SynAttr->m_CustomKeyword.begin();
 	vector < MadSyntaxKeyword >::iterator kend = m_SynAttr->m_CustomKeyword.end();
 
-	while( kit != kend )
+	while (kit != kend)
 	{
-		if( kit->m_InRange.empty() )
-			kit->m_InRange.push_back( 0 ); // Keyword have effect in global range
+		if (kit->m_InRange.empty())
+			kit->m_InRange.push_back(0); // Keyword have effect in global range
 
 		++kit;
 	}
 
-	if(m_SynAttr->m_StringInRange.empty() )
-		m_SynAttr->m_StringInRange.push_back( 0 ); // String have effect in global range
+	if (m_SynAttr->m_StringInRange.empty())
+		m_SynAttr->m_StringInRange.push_back(0); // String have effect in global range
 
-	if( !m_SynAttr->m_LineComment.empty() && m_SynAttr->m_LineCommentInRange.empty() )
-		m_SynAttr->m_LineCommentInRange.push_back( 0 );      // m_LineComment have effect in global range
+	if (!m_SynAttr->m_LineComment.empty() && m_SynAttr->m_LineCommentInRange.empty())
+		m_SynAttr->m_LineCommentInRange.push_back(0);      // m_LineComment have effect in global range
 
 	size_t si = m_SynAttr->m_BlockCommentOn.size();
 
-	if( si > m_SynAttr->m_BlockCommentInRange.size() )
+	if (si > m_SynAttr->m_BlockCommentInRange.size())
 	{
-		m_SynAttr->m_BlockCommentInRange.resize( si );
+		m_SynAttr->m_BlockCommentInRange.resize(si);
 
-		for( size_t sz = 0; sz < si; ++sz )
+		for (size_t sz = 0; sz < si; ++sz)
 		{
-			if(m_SynAttr->m_BlockCommentInRange[sz].empty() )
-				m_SynAttr->m_BlockCommentInRange[sz].push_back( 0 );   // BlockComment[i] have effect in global range
+			if (m_SynAttr->m_BlockCommentInRange[sz].empty())
+				m_SynAttr->m_BlockCommentInRange[sz].push_back(0);   // BlockComment[i] have effect in global range
 		}
 	}
 
 	vector < wxString >::iterator sit, send;
 
-	if(m_SynAttr->m_CaseSensitive == false )
+	if (m_SynAttr->m_CaseSensitive == false)
 	{
 		// change string data to lowercase
 		sit = m_SynAttr->m_LineComment.begin();
 		send = m_SynAttr->m_LineComment.end();
 
-		while( sit != send )
+		while (sit != send)
 		{
 			sit->MakeLower();
 			++sit;
@@ -1051,7 +1051,7 @@ void MadSyntax::ParseSyntax( const wxString &filename, bool reParse/* = false*/ 
 		sit = m_SynAttr->m_BlockCommentOn.begin();
 		send = m_SynAttr->m_BlockCommentOn.end();
 
-		while( sit != send )
+		while (sit != send)
 		{
 			sit->MakeLower();
 			++sit;
@@ -1060,7 +1060,7 @@ void MadSyntax::ParseSyntax( const wxString &filename, bool reParse/* = false*/ 
 		sit = m_SynAttr->m_BlockCommentOff.begin();
 		send = m_SynAttr->m_BlockCommentOff.end();
 
-		while( sit != send )
+		while (sit != send)
 		{
 			sit->MakeLower();
 			++sit;
@@ -1069,7 +1069,7 @@ void MadSyntax::ParseSyntax( const wxString &filename, bool reParse/* = false*/ 
 		sit = m_SynAttr->m_LeftBrace.begin();
 		send = m_SynAttr->m_LeftBrace.end();
 
-		while( sit != send )
+		while (sit != send)
 		{
 			sit->MakeLower();
 			++sit;
@@ -1078,20 +1078,20 @@ void MadSyntax::ParseSyntax( const wxString &filename, bool reParse/* = false*/ 
 		sit = m_SynAttr->m_RightBrace.begin();
 		send = m_SynAttr->m_RightBrace.end();
 
-		while( sit != send )
+		while (sit != send)
 		{
 			sit->MakeLower();
 			++sit;
 		}
 	}
 
-	if( !m_SynAttr->m_LineComment.empty() || !m_SynAttr->m_BlockCommentOn.empty()  || !m_SynAttr->m_StringChar.IsEmpty()
-			|| !m_SynAttr->m_DirectiveLeading.IsEmpty() || !m_SynAttr->m_CustomRange.empty() || !m_SynAttr->m_LeftBrace.empty() )
+	if (!m_SynAttr->m_LineComment.empty() || !m_SynAttr->m_BlockCommentOn.empty()  || !m_SynAttr->m_StringChar.IsEmpty()
+			|| !m_SynAttr->m_DirectiveLeading.IsEmpty() || !m_SynAttr->m_CustomRange.empty() || !m_SynAttr->m_LeftBrace.empty())
 	{
 		m_SynAttr->m_CheckState = true;
 	}
 
-	if(!reParse)
+	if (!reParse)
 		g_TitleSynAttrMap[filename] = m_SynAttr;
 	cfg->SetPath(oldpath);
 }
@@ -1103,10 +1103,10 @@ MadSyntaxAttributes::MadSyntaxAttributes()
 {
 	m_Title = MadPlainTextTitle;
 	m_CaseSensitive = false;
-	//m_Delimiter = wxT( "~`!@#$%^&*()-+=|\\{}[]:;\"\',.<>/?" );
+	//m_Delimiter = wxT("~`!@#$%^&*()-+=|\\{}[]:;\"\',.<>/?");
 	//m_Delimiter.clear();
 	memset(m_Delimiter, 0, sizeof(m_Delimiter));
-	for( int i = 0; i < (sizeof(DefDelimiter)/sizeof(unsigned char)); ++i )
+	for (int i = 0; i < (sizeof(DefDelimiter)/sizeof(unsigned char)); ++i)
 	{
 		//m_Delimiter.insert((ucs4_t)DefDelimiter[i]);
 		m_Delimiter[DefDelimiter[i]] = 1;
@@ -1118,31 +1118,31 @@ MadSyntaxAttributes::MadSyntaxAttributes()
 	
 	MadAttributes *pat = m_SystemAttributes;
 #ifdef __WXMSW__
-	wxColour c = wxSystemSettings::GetColour( wxSYS_COLOUR_WINDOWTEXT );
-	wxColour c1 = wxSystemSettings::GetColour( wxSYS_COLOUR_WINDOW );
+	wxColour c = wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT);
+	wxColour c1 = wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOW);
 	wxString s = c.GetAsString();
 	wxString s1 = c1.GetAsString();
 	SystemAttributesColor[0] = s;
 	SystemAttributesBgColor[0] = s1;
 #endif
 
-	for( size_t i = 0; i < aeNone; ++i )
+	for (size_t i = 0; i < aeNone; ++i)
 	{
-		if( SystemAttributesColor[i][0] == 0 )
+		if (SystemAttributesColor[i][0] == 0)
 			pat->color = wxNullColour;
 		else
-			if( SystemAttributesColor[i][0] == wxT( '#' ) )
-				pat->color.Set( SystemAttributesColor[i][1], SystemAttributesColor[i][2], SystemAttributesColor[i][3] );
+			if (SystemAttributesColor[i][0] == wxT('#'))
+				pat->color.Set(SystemAttributesColor[i][1], SystemAttributesColor[i][2], SystemAttributesColor[i][3]);
 			else
-				pat->color = wxColour( SystemAttributesColor[i] );
+				pat->color = wxColour(SystemAttributesColor[i]);
 
-		if( SystemAttributesBgColor[i][0] == 0 )
+		if (SystemAttributesBgColor[i][0] == 0)
 			pat->bgcolor = wxNullColour;
 		else
-			if( SystemAttributesBgColor[i][0] == wxT( '#' ) )
-				pat->bgcolor.Set( SystemAttributesBgColor[i][1], SystemAttributesBgColor[i][2], SystemAttributesBgColor[i][3] );
+			if (SystemAttributesBgColor[i][0] == wxT('#'))
+				pat->bgcolor.Set(SystemAttributesBgColor[i][1], SystemAttributesBgColor[i][2], SystemAttributesBgColor[i][3]);
 			else
-				pat->bgcolor = wxColour( SystemAttributesBgColor[i] );
+				pat->bgcolor = wxColour(SystemAttributesBgColor[i]);
 
 		pat->style = fsNone;
 		++pat;
@@ -1182,7 +1182,7 @@ MadSyntaxAttributes::MadSyntaxAttributes(MadSyntaxAttributes & synAttrs)
 	m_RangeBeginString      = synAttrs.m_RangeBeginString;   
 	m_CustomKeyword         = synAttrs.m_CustomKeyword; // user defined keywords
 	m_SyntaxKeywordDict     = synAttrs.m_SyntaxKeywordDict;
-	for( size_t i = 0; i < aeNone; ++i )
+	for (size_t i = 0; i < aeNone; ++i)
 	{
 		m_SystemAttributes[i] = synAttrs.m_SystemAttributes[i];
 	}
@@ -1192,84 +1192,84 @@ void MadSyntax::Reset()
 {
 }
 
-MadAttributes *MadSyntax::GetAttributes( const wxString &name )
+MadAttributes *MadSyntax::GetAttributes(const wxString &name)
 {
-	for( int i = 0; i < aeNone; ++i )
+	for (int i = 0; i < aeNone; ++i)
 	{
-		if( name.CmpNoCase( SystemAttributesName[i] ) == 0 )
+		if (name.CmpNoCase(SystemAttributesName[i]) == 0)
 			return &m_SynAttr->m_SystemAttributes[i];
 	}
 
 	return nullptr;
 }
 
-MadSyntaxKeyword *MadSyntax::GetCustomKeyword( const wxString &name )
+MadSyntaxKeyword *MadSyntax::GetCustomKeyword(const wxString &name)
 {
 	vector < MadSyntaxKeyword >::iterator it = m_SynAttr->m_CustomKeyword.begin();
 
-	while( it != m_SynAttr->m_CustomKeyword.end() )
+	while (it != m_SynAttr->m_CustomKeyword.end())
 	{
-		if( it->m_Name == name )
+		if (it->m_Name == name)
 		{
-			return &( *it );
+			return &(*it);
 		}
 
 		++it;
 	}
 
-	it = m_SynAttr->m_CustomKeyword.insert(m_SynAttr->m_CustomKeyword.end(), MadSyntaxKeyword() );
+	it = m_SynAttr->m_CustomKeyword.insert(m_SynAttr->m_CustomKeyword.end(), MadSyntaxKeyword());
 	it->m_Name = name;
 
-	return &( *it );
+	return &(*it);
 }
 
-void MadSyntax::SetColor( const wxString &value, wxColour &c )
+void MadSyntax::SetColor(const wxString &value, wxColour &c)
 {
-	if( value.Upper() == wxT( "NONE" ) )
+	if (value.Upper() == wxT("NONE"))
 	{
 		c = wxNullColour;
 	}
 	else
 	{
-		c = wxTheColourDatabase->Find( value );
+		c = wxTheColourDatabase->Find(value);
 
-		if( !c.Ok() && !value.IsEmpty() )
+		if (!c.Ok() && !value.IsEmpty())
 		{
 			unsigned long ul;
 
-			if( value.ToULong( &ul, 16 ) )
+			if (value.ToULong(&ul, 16))
 			{
-				c.Set( ( ul >> 16 ) & 0xFF, ( ul >> 8 ) & 0xFF, ul & 0xFF );
+				c.Set((ul >> 16) & 0xFF, (ul >> 8) & 0xFF, ul & 0xFF);
 			}
 		}
 	}
 }
 
-void MadSyntax::SetStyle( const wxString &value, MadFontStyles &fs )
+void MadSyntax::SetStyle(const wxString &value, MadFontStyles &fs)
 {
-	wxStringTokenizer tkz( value );
+	wxStringTokenizer tkz(value);
 	wxString s = tkz.GetNextToken();
 
-	while( !s.IsEmpty() )
+	while (!s.IsEmpty())
 	{
 		s.MakeLower();
 
-		if( s == wxT( "bold" ) )
+		if (s == wxT("bold"))
 		{
 			fs |= fsBold;
 		}
 		else
-			if( s == wxT( "italic" ) )
+			if (s == wxT("italic"))
 			{
 				fs |= fsItalic;
 			}
 			else
-				if( s == wxT( "underline" ) )
+				if (s == wxT("underline"))
 				{
 					fs |= fsUnderline;
 				}
 				else
-					if( s == wxT( "strikeout" ) )
+					if (s == wxT("strikeout"))
 					{
 						fs |= fsStrikeOut;
 					}
@@ -1278,67 +1278,67 @@ void MadSyntax::SetStyle( const wxString &value, MadFontStyles &fs )
 	}
 }
 
-void MadSyntax::SetInRange( const wxString &value, vector < int > &ir )
+void MadSyntax::SetInRange(const wxString &value, vector < int > &ir)
 {
-	wxStringTokenizer tkz( value );
+	wxStringTokenizer tkz(value);
 	wxString s = tkz.GetNextToken();
 	unsigned long ul;
 
-	while( !s.IsEmpty() )
+	while (!s.IsEmpty())
 	{
-		if( s.ToULong( &ul ) )
+		if (s.ToULong(&ul))
 		{
-			ir.push_back( ul );
+			ir.push_back(ul);
 		}
 
 		s = tkz.GetNextToken();
 	}
 }
 
-bool MadSyntax::IsInRange( int range, vector < int >&InRangeVector )
+bool MadSyntax::IsInRange(int range, vector < int >&InRangeVector)
 {
-	if( !InRangeVector.empty() )
+	if (!InRangeVector.empty())
 	{
 		vector < int >::iterator it = InRangeVector.begin();
 
 		do
 		{
-			if( range == *it ) return true;
+			if (range == *it) return true;
 
 			++it;
 		}
-		while( it != InRangeVector.end() );
+		while (it != InRangeVector.end());
 	}
 
 	return false;
 }
 
-MadSyntaxRange *MadSyntax::GetSyntaxRange( int rangeid )
+MadSyntaxRange *MadSyntax::GetSyntaxRange(int rangeid)
 {
-	if( !m_SynAttr->m_CustomRange.empty() )
+	if (!m_SynAttr->m_CustomRange.empty())
 	{
 		vector < MadSyntaxRange >::iterator it = m_SynAttr->m_CustomRange.begin();
 
 		do
 		{
-			if( ( int )it->id == rangeid ) return &( *it );
+			if ((int)it->id == rangeid) return &(*it);
 
 			++it;
 		}
-		while( it != m_SynAttr->m_CustomRange.end() );
+		while (it != m_SynAttr->m_CustomRange.end());
 	}
 
 	return nullptr;
 }
 
-wxString MadSyntax::GetAttributeName( MadAttributeElement ae )
+wxString MadSyntax::GetAttributeName(MadAttributeElement ae)
 {
-	return wxString( SystemAttributesName[ae] );
+	return wxString(SystemAttributesName[ae]);
 }
 
-void MadSyntax::SetAttributes( MadAttributes *attr )
+void MadSyntax::SetAttributes(MadAttributes *attr)
 {
-	if( attr == m_SynAttr->m_SystemAttributes + aeText )
+	if (attr == m_SynAttr->m_SystemAttributes + aeText)
 	{
 		nw_BgColor = nw_CurrentBgColor;
 	}
@@ -1347,33 +1347,33 @@ void MadSyntax::SetAttributes( MadAttributes *attr )
 		nw_BgColor = attr->bgcolor;
 	}
 
-	if( nw_BgColor == wxNullColour )
+	if (nw_BgColor == wxNullColour)
 	{
 		nw_BgColor = nw_CurrentBgColor;
 	}
 
-	if( ( nw_Color = attr->color ) == wxNullColour )
+	if ((nw_Color = attr->color) == wxNullColour)
 	{
 		nw_Color = m_SynAttr->m_SystemAttributes[aeText].color;
 	}
 
-	//if((attr->style&fsStrikeOut)!=0)
+	//if ((attr->style&fsStrikeOut)!=0)
 
-	if( attr != &m_SynAttr->m_SystemAttributes[aeSpace] &&
+	if (attr != &m_SynAttr->m_SystemAttributes[aeSpace] &&
 			attr != &m_SynAttr->m_SystemAttributes[aeActiveLine] &&
 			attr != &m_SynAttr->m_SystemAttributes[aeBookmark] &&
-			attr != &m_SynAttr->m_SystemAttributes[aeHighlightWord] )
+			attr != &m_SynAttr->m_SystemAttributes[aeHighlightWord])
 	{
-		nw_Font = wxTheFontList->FindOrCreateFont( nw_FontSize, (wxFontFamily)nw_FontFamily,
-				  ( attr->style & fsItalic ) == 0 ? wxFONTSTYLE_NORMAL : wxFONTSTYLE_ITALIC,
-				  ( attr->style & fsBold ) == 0 ? wxFONTWEIGHT_NORMAL : wxFONTWEIGHT_BOLD,
-				  ( attr->style & fsUnderline ) != 0,
-				  nw_FontName );
+		nw_Font = wxTheFontList->FindOrCreateFont(nw_FontSize, (wxFontFamily)nw_FontFamily,
+				  (attr->style & fsItalic) == 0 ? wxFONTSTYLE_NORMAL : wxFONTSTYLE_ITALIC,
+				  (attr->style & fsBold) == 0 ? wxFONTWEIGHT_NORMAL : wxFONTWEIGHT_BOLD,
+				  (attr->style & fsUnderline) != 0,
+				  nw_FontName);
 	}
 }
 
 
-void MadSyntax::InitNextWord1( MadLines *madlines, ucs4_t *word, int *widths, const wxString &fontname, int fontsize, int fontfamily )
+void MadSyntax::InitNextWord1(MadLines *madlines, ucs4_t *word, int *widths, const wxString &fontname, int fontsize, int fontfamily)
 {
 	nw_MadLines = madlines;
 	nw_MadEdit = madlines->m_MadEdit;
@@ -1383,30 +1383,30 @@ void MadSyntax::InitNextWord1( MadLines *madlines, ucs4_t *word, int *widths, co
 	nw_FontName = fontname;
 	nw_FontSize = fontsize;
 	nw_FontFamily = fontfamily;
-	nw_Font = wxTheFontList->FindOrCreateFont( nw_FontSize, (wxFontFamily)nw_FontFamily,
-			  wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, nw_FontName );
+	nw_Font = wxTheFontList->FindOrCreateFont(nw_FontSize, (wxFontFamily)nw_FontFamily,
+			  wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, nw_FontName);
 
-	if(m_SynAttr->m_CaseSensitive )
+	if (m_SynAttr->m_CaseSensitive)
 		FindString = &MadSyntax::FindStringCase;
 	else
 		FindString = &MadSyntax::FindStringNoCase;
 }
 
-void MadSyntax::InitNextWord2( MadLineIterator &lit, size_t row )
+void MadSyntax::InitNextWord2(MadLineIterator &lit, size_t row)
 {
 	nw_LineIter = lit;
 	nw_State.Reset();
 	nw_CommentUntilEOL = false;
-	nw_BeginOfLine = ( row == 0 );
+	nw_BeginOfLine = (row == 0);
 	nw_CurrentBgColor = m_SynAttr->m_SystemAttributes[aeText].bgcolor; // set bgcolor for empty lines
 	nw_RowIndexIter = lit->m_RowIndices.begin();
-	std::advance( nw_RowIndexIter, row );
-	nw_MadLines->InitNextUChar( lit, nw_RowIndexIter->m_Start );
+	std::advance(nw_RowIndexIter, row);
+	nw_MadLines->InitNextUChar(lit, nw_RowIndexIter->m_Start);
 	nw_NotSpaceCount = 0;
 	nw_LineWidth = 0;
 	nw_FirstIndex = 0;
 	nw_RestCount = 0;
-	if(lit->m_RowIndices[row + 1].m_Start >= nw_RowIndexIter->m_Start)
+	if (lit->m_RowIndices[row + 1].m_Start >= nw_RowIndexIter->m_Start)
 		nw_MaxLength = lit->m_RowIndices[row + 1].m_Start - nw_RowIndexIter->m_Start;
 	else
 	{
@@ -1414,44 +1414,44 @@ void MadSyntax::InitNextWord2( MadLineIterator &lit, size_t row )
 		nw_MaxLength = 0;
 	}
 
-	if( m_SynAttr->m_CheckState )
+	if (m_SynAttr->m_CheckState)
 	{
 		MadLineState &state = lit->m_State;
 		nw_SynRange = 0;
 
-		if( ( nw_State.rangeid = state.RangeId ) != 0 )
+		if ((nw_State.rangeid = state.RangeId) != 0)
 		{
-			nw_SynRange = GetSyntaxRange( nw_State.rangeid );
-			if(nw_SynRange)
+			nw_SynRange = GetSyntaxRange(nw_State.rangeid);
+			if (nw_SynRange)
 				nw_CurrentBgColor = nw_SynRange->bgcolor; // set bgcolor for empty lines
 
-			if( nw_CurrentBgColor == wxNullColour )
+			if (nw_CurrentBgColor == wxNullColour)
 			{
 				nw_CurrentBgColor = m_SynAttr->m_SystemAttributes[aeText].bgcolor;
 			}
 		}
 
-		if( ( nw_State.blkcmtid = state.CommentId ) != 0 )
+		if ((nw_State.blkcmtid = state.CommentId) != 0)
 		{
-			if( m_SynAttr->m_SystemAttributes[aeComment].bgcolor != wxNullColour )
+			if (m_SynAttr->m_SystemAttributes[aeComment].bgcolor != wxNullColour)
 			{
 				nw_CurrentBgColor = m_SynAttr->m_SystemAttributes[aeComment].bgcolor; // set bgcolor for empty lines
 			}
 		}
 
-		nw_ContainCommentOff = ( state.CommentOff != 0 );
+		nw_ContainCommentOff = (state.CommentOff != 0);
 
-		if( ( nw_State.stringid = state.StringId ) != 0 )
+		if ((nw_State.stringid = state.StringId) != 0)
 		{
 			nw_StringChar = m_SynAttr->m_StringChar[nw_State.stringid - 1];
 
-			if( m_SynAttr->m_SystemAttributes[aeString].bgcolor != wxNullColour )
+			if (m_SynAttr->m_SystemAttributes[aeString].bgcolor != wxNullColour)
 			{
 				nw_CurrentBgColor = m_SynAttr->m_SystemAttributes[aeString].bgcolor; // set bgcolor for empty lines
 			}
 		}
 
-		if( ( nw_State.linecmt = state.LineComment ) != 0 )
+		if ((nw_State.linecmt = state.LineComment) != 0)
 		{
 			nw_CommentUntilEOL = true;
 		}
@@ -1462,39 +1462,39 @@ void MadSyntax::InitNextWord2( MadLineIterator &lit, size_t row )
 	nw_NextState = nw_State;
 	nw_EndOfLine = false;
 
-	if( nw_RowIndexIter->m_Width == 0 )
+	if (nw_RowIndexIter->m_Width == 0)
 	{
 		nw_EndOfLine = true;
 	}
 
-	if( !nw_ucqueue.empty() )
+	if (!nw_ucqueue.empty())
 	{
 		nw_ucqueue.clear();
 	}
 }
 
-void MadSyntax::SetEncoding( MadEncoding *encoding )
+void MadSyntax::SetEncoding(MadEncoding *encoding)
 {
 	nw_Encoding = encoding;
 }
 
 // 0: none, 1: first, 2:...
-int MadSyntax::FindStringCase( MadUCQueue & ucqueue, size_t first,
+int MadSyntax::FindStringCase(MadUCQueue & ucqueue, size_t first,
 							   MadStringIterator begin, const MadStringIterator & end,
-							   size_t & len )
+							   size_t & len)
 {
 	int idx = 1;
 	ucs4_t firstuc = ucqueue[first].first;
 	size_t ucsize = ucqueue.size() - first;
-	wxASSERT( ucsize > 0 );
+	wxASSERT(ucsize > 0);
 	bool noNewLine = true;
 	MadUCQueueIterator it;
 
-	if( ucsize > 1 )
+	if (ucsize > 1)
 	{
 		__REGISTER ucs4_t uc = ucqueue.back().first;
 
-		if( uc == 0x0D || uc == 0x0A )
+		if (uc == 0x0D || uc == 0x0A)
 		{
 			noNewLine = false;
 			--ucsize; // exclude NewLine char
@@ -1508,70 +1508,70 @@ int MadSyntax::FindStringCase( MadUCQueue & ucqueue, size_t first,
 		const wchar_t *cstr = begin->c_str();
 		len = begin->size();
 
-		if( firstuc == ( ucs4_t )cstr[0] )
+		if (firstuc == (ucs4_t)cstr[0])
 		{
-			if( len == 1 ) return idx;
+			if (len == 1) return idx;
 
-			if( ucsize < len && noNewLine )
+			if (ucsize < len && noNewLine)
 			{
-				while( ( nw_MadLines->*NextUChar )( ucqueue ) )
+				while ((nw_MadLines->*NextUChar)(ucqueue))
 				{
 					__REGISTER ucs4_t uc = ucqueue.back().first;
 
-					if( uc == 0x0D || uc == 0x0A )
+					if (uc == 0x0D || uc == 0x0A)
 					{
 						noNewLine = false;
 						break;
 					}
 
-					if( ( ++ucsize ) >= len ) break;
+					if ((++ucsize) >= len) break;
 				}
 			}
 
-			if( ucsize >= len )
+			if (ucsize >= len)
 			{
 				it = ucqueue.begin();
-				std::advance( it, first + 1 );
+				std::advance(it, first + 1);
 
-				while( *( ++cstr ) != 0 )
+				while (*(++cstr) != 0)
 				{
-					if( ( ucs4_t )*cstr != it->first ) break;
+					if ((ucs4_t)*cstr != it->first) break;
 
 					++it;
 				}
 
-				if( *cstr == 0 ) return idx;
+				if (*cstr == 0) return idx;
 			}
 		}
 
 		++idx;
 	}
-	while( ++begin != end );
+	while (++begin != end);
 
 	return 0;
 }
 
-int MadSyntax::FindStringNoCase( MadUCQueue & ucqueue, size_t first,
+int MadSyntax::FindStringNoCase(MadUCQueue & ucqueue, size_t first,
 								 MadStringIterator begin, const MadStringIterator & end,
-								 size_t & len )
+								 size_t & len)
 {
 	int idx = 1;
 	ucs4_t firstuc = ucqueue[first].first;
 
-	if( firstuc >= 'A' && firstuc <= 'Z' )
+	if (firstuc >= 'A' && firstuc <= 'Z')
 	{
 		firstuc |= 0x20; // to lower case
 	}
 
 	size_t ucsize = ucqueue.size() - first;
-	wxASSERT( ucsize > 0 );
+	wxASSERT(ucsize > 0);
 	bool noNewLine = true;
 
-	if( ucsize > 1 )
+	if (ucsize > 1)
 	{
 		__REGISTER ucs4_t uc = ucqueue.back().first;
 
-		if( uc == 0x0D || uc == 0x0A )
+		if (uc == 0x0D || uc == 0x0A)
 		{
 			noNewLine = false;
 			--ucsize; // exclude NewLine char
@@ -1586,64 +1586,64 @@ int MadSyntax::FindStringNoCase( MadUCQueue & ucqueue, size_t first,
 		const wchar_t *cstr = begin->c_str();
 		len = begin->size();
 
-		if( firstuc == ( ucs4_t )cstr[0] )
+		if (firstuc == (ucs4_t)cstr[0])
 		{
-			if( len == 1 ) return idx;
+			if (len == 1) return idx;
 
-			if( ucsize < len && noNewLine )
+			if (ucsize < len && noNewLine)
 			{
-				while( ( nw_MadLines->*NextUChar )( ucqueue ) )
+				while ((nw_MadLines->*NextUChar)(ucqueue))
 				{
 					__REGISTER ucs4_t uc = ucqueue.back().first;
 
-					if( uc == 0x0D || uc == 0x0A )
+					if (uc == 0x0D || uc == 0x0A)
 					{
 						noNewLine = false;
 						break;
 					}
 
-					if( ( ++ucsize ) >= len ) break;
+					if ((++ucsize) >= len) break;
 				}
 			}
 
-			if( ucsize >= len )
+			if (ucsize >= len)
 			{
 				it = ucqueue.begin();
-				std::advance( it, first + 1 );
+				std::advance(it, first + 1);
 
-				while( *( ++cstr ) != 0 )
+				while (*(++cstr) != 0)
 				{
 					__REGISTER ucs4_t uc = it->first;
 
-					if( uc >= 'A' && uc <= 'Z' )
+					if (uc >= 'A' && uc <= 'Z')
 					{
 						uc |= 0x20; // to lower case
 					}
 
-					if( ( ucs4_t )*cstr != uc ) break;
+					if ((ucs4_t)*cstr != uc) break;
 
 					++it;
 				}
 
-				if( *cstr == 0 ) return idx;
+				if (*cstr == 0) return idx;
 			}
 		}
 
 		++idx;
 	}
-	while( ++begin != end );
+	while (++begin != end);
 
 	return 0;
 }
 
 // return wordlength
-int MadSyntax::NextWord( int &wordwidth )
+int MadSyntax::NextWord(int &wordwidth)
 {
 	wordwidth = 0;
 
-	if( nw_RestCount == 0 )
+	if (nw_RestCount == 0)
 	{
-		if( nw_EndOfLine && nw_ucqueue.empty() )
+		if (nw_EndOfLine && nw_ucqueue.empty())
 			return 0;
 
 		MadLines::NextUCharFuncPtr NextUChar = nw_MadLines->NextUChar;
@@ -1654,54 +1654,54 @@ int MadSyntax::NextWord( int &wordwidth )
 
 		do
 		{
-			if( nw_EndOfLine == false )
+			if (nw_EndOfLine == false)
 			{
-				( nw_MadLines->*NextUChar )( nw_ucqueue );
+				(nw_MadLines->*NextUChar)(nw_ucqueue);
 			}
 
 			size_t ucsize = nw_ucqueue.size();
 
-			if( ucsize )
+			if (ucsize)
 			{
 				ucs4_t lastuc = nw_ucqueue.back().first;
 
-				if( lastuc == 0x0D || lastuc == 0x0A )
+				if (lastuc == 0x0D || lastuc == 0x0A)
 				{
 					nw_ucqueue.pop_back();
 					--ucsize;
 				}
 			}
 
-			if( nw_FirstIndex >= ucsize )
+			if (nw_FirstIndex >= ucsize)
 			{
 				//nw_EndOfLine = true;
-				if( nw_RestCount == 0 )
+				if (nw_RestCount == 0)
 					return 0;
 
 				break;
 			}
 
-			if( !nw_CommentUntilEOL )
+			if (!nw_CommentUntilEOL)
 			{
 				ucs4_t firstuc = nw_ucqueue[nw_FirstIndex].first;
 
-				if( /*firstuc < 0x100 && */ !IsSpace( firstuc ) )
+				if (/*firstuc < 0x100 && */ !IsSpace(firstuc))
 				{
 					++nw_NotSpaceCount;
 
-					if( m_SynAttr->m_CheckState && firstuc < 0x100 )
+					if (m_SynAttr->m_CheckState && firstuc < 0x100)
 					{
 						// check EscapeChar
-						if( firstuc == m_SynAttr->nw_EscapeChar )
+						if (firstuc == m_SynAttr->nw_EscapeChar)
 						{
-							( nw_MadLines->*NextUChar )( nw_ucqueue );
-							idx = ( int )nw_FirstIndex + 1;
+							(nw_MadLines->*NextUChar)(nw_ucqueue);
+							idx = (int)nw_FirstIndex + 1;
 
-							if( nw_ucqueue.size() > ( size_t ) idx )
+							if (nw_ucqueue.size() > (size_t) idx)
 							{
 								ucs4_t c = nw_ucqueue[idx].first;
 
-								if( c != 0x0D && c != 0x0A )
+								if (c != 0x0D && c != 0x0A)
 								{
 									++nw_FirstIndex;
 									++nw_RestCount;
@@ -1712,9 +1712,9 @@ int MadSyntax::NextWord( int &wordwidth )
 						}
 
 						// check String Off
-						if( nw_State.stringid != 0 )
+						if (nw_State.stringid != 0)
 						{
-							if( firstuc == nw_StringChar )
+							if (firstuc == nw_StringChar)
 							{
 								nw_NextState.stringid = 0;
 								++nw_FirstIndex;
@@ -1726,20 +1726,20 @@ int MadSyntax::NextWord( int &wordwidth )
 						}
 
 						// check Block Comment Off
-						if( nw_State.blkcmtid != 0 )
+						if (nw_State.blkcmtid != 0)
 						{
-							if( !nw_ContainCommentOff )
+							if (!nw_ContainCommentOff)
 							{
 								nw_CommentUntilEOL = true;
 								goto _NEXTUCHAR_;
 							}
 
 							sit = m_SynAttr->m_BlockCommentOff.begin();
-							std::advance( sit, nw_State.blkcmtid - 1 );
+							std::advance(sit, nw_State.blkcmtid - 1);
 							sitend = sit;
 							++sitend;
 
-							if( ( this->*FindString )( nw_ucqueue, nw_FirstIndex, sit, sitend, strlen ) != 0 )
+							if ((this->*FindString)(nw_ucqueue, nw_FirstIndex, sit, sitend, strlen) != 0)
 							{
 								nw_NextState.blkcmtid = 0;
 								nw_FirstIndex += strlen;
@@ -1751,15 +1751,15 @@ int MadSyntax::NextWord( int &wordwidth )
 						}
 
 						// check Range Off
-						if( nw_State.rangeid != 0 )
+						if (nw_State.rangeid != 0)
 						{
-							if( nw_SynRange )
+							if (nw_SynRange)
 							{
 								vector < wxString > strvec;
-								strvec.push_back( nw_SynRange->end );
+								strvec.push_back(nw_SynRange->end);
 
-								if( ( this->*FindString )( nw_ucqueue, nw_FirstIndex,
-														   strvec.begin(), strvec.end(), strlen ) != 0 )
+								if ((this->*FindString)(nw_ucqueue, nw_FirstIndex,
+														   strvec.begin(), strvec.end(), strlen) != 0)
 								{
 									nw_NextState.rangeid = 0;
 									nw_FirstIndex += strlen;
@@ -1770,16 +1770,16 @@ int MadSyntax::NextWord( int &wordwidth )
 						}
 
 						// check Directive
-						if( !m_SynAttr->m_DirectiveLeadingAtBOL || nw_BeginOfLine )
+						if (!m_SynAttr->m_DirectiveLeadingAtBOL || nw_BeginOfLine)
 						{
-							if( nw_NotSpaceCount == 1 && !m_SynAttr->m_DirectiveLeading.IsEmpty() )
+							if (nw_NotSpaceCount == 1 && !m_SynAttr->m_DirectiveLeading.IsEmpty())
 							{
-								if(m_SynAttr->m_DirectiveLeading.Find( wxChar( firstuc ) ) >= 0 )
+								if (m_SynAttr->m_DirectiveLeading.Find(wxChar(firstuc)) >= 0)
 								{
 									nw_NextState.directive = 1;
 									nw_FirstIndex += 1;
 
-									if( nw_RestCount == 0 )
+									if (nw_RestCount == 0)
 									{
 										nw_State = nw_NextState;
 										nw_RestCount = nw_FirstIndex;
@@ -1792,20 +1792,20 @@ int MadSyntax::NextWord( int &wordwidth )
 						}
 
 						// check Block Comment On
-						if( !m_SynAttr->m_BlockCommentOn.empty() )
+						if (!m_SynAttr->m_BlockCommentOn.empty())
 						{
-							idx = ( this->*FindString )( nw_ucqueue, nw_FirstIndex,
-								m_SynAttr->m_BlockCommentOn.begin(), m_SynAttr->m_BlockCommentOn.end(), strlen );
+							idx = (this->*FindString)(nw_ucqueue, nw_FirstIndex,
+								m_SynAttr->m_BlockCommentOn.begin(), m_SynAttr->m_BlockCommentOn.end(), strlen);
 
-							if( idx != 0 )
+							if (idx != 0)
 							{
 								// check InRange
-								if( IsInRange( nw_State.rangeid, m_SynAttr->m_BlockCommentInRange[idx - 1] ) )
+								if (IsInRange(nw_State.rangeid, m_SynAttr->m_BlockCommentInRange[idx - 1]))
 								{
 									nw_NextState.blkcmtid = idx;
 									nw_FirstIndex += strlen;
 
-									if( nw_RestCount == 0 )
+									if (nw_RestCount == 0)
 									{
 										nw_State = nw_NextState;
 										nw_RestCount = nw_FirstIndex;
@@ -1818,19 +1818,19 @@ int MadSyntax::NextWord( int &wordwidth )
 						}
 
 						// check Line Comment On
-						if( !m_SynAttr->m_LineCommentAtBOL || nw_BeginOfLine )
+						if (!m_SynAttr->m_LineCommentAtBOL || nw_BeginOfLine)
 						{
-							if( !m_SynAttr->m_LineComment.empty() )
+							if (!m_SynAttr->m_LineComment.empty())
 							{
-								idx = ( this->*FindString )( nw_ucqueue, nw_FirstIndex,
-									m_SynAttr->m_LineComment.begin(), m_SynAttr->m_LineComment.end(), strlen );
+								idx = (this->*FindString)(nw_ucqueue, nw_FirstIndex,
+									m_SynAttr->m_LineComment.begin(), m_SynAttr->m_LineComment.end(), strlen);
 
-								if( idx != 0 )
+								if (idx != 0)
 								{
-									if( IsInRange( nw_State.rangeid, m_SynAttr->m_LineCommentInRange ) )
+									if (IsInRange(nw_State.rangeid, m_SynAttr->m_LineCommentInRange))
 									{
 										// range-off mark may be beyond linecomment (ex: javascript)
-										if( nw_State.rangeid == 0 )
+										if (nw_State.rangeid == 0)
 										{
 											nw_CommentUntilEOL = true;
 										}
@@ -1838,7 +1838,7 @@ int MadSyntax::NextWord( int &wordwidth )
 										nw_NextState.linecmt = idx;
 										nw_FirstIndex += strlen;
 
-										if( nw_RestCount == 0 )
+										if (nw_RestCount == 0)
 										{
 											nw_State = nw_NextState;
 											nw_RestCount = nw_FirstIndex;
@@ -1852,16 +1852,16 @@ int MadSyntax::NextWord( int &wordwidth )
 						}
 
 						// check String On
-						if( !m_SynAttr->m_StringChar.IsEmpty()
-								&& IsInRange( nw_State.rangeid, m_SynAttr->m_StringInRange ) )
+						if (!m_SynAttr->m_StringChar.IsEmpty()
+								&& IsInRange(nw_State.rangeid, m_SynAttr->m_StringInRange))
 						{
-							if( ( idx = m_SynAttr->m_StringChar.Find( wxChar( firstuc ) ) + 1 ) > 0 )
+							if ((idx = m_SynAttr->m_StringChar.Find(wxChar(firstuc)) + 1) > 0)
 							{
 								nw_NextState.stringid = idx;
 								nw_StringChar = firstuc;
 								++nw_FirstIndex;
 
-								if( nw_RestCount == 0 )
+								if (nw_RestCount == 0)
 								{
 									nw_State = nw_NextState;
 									nw_RestCount = nw_FirstIndex;
@@ -1873,18 +1873,18 @@ int MadSyntax::NextWord( int &wordwidth )
 						}
 
 						// check Range On
-						if( nw_State.rangeid == 0 && !m_SynAttr->m_RangeBeginString.empty() )
+						if (nw_State.rangeid == 0 && !m_SynAttr->m_RangeBeginString.empty())
 						{
-							idx = ( this->*FindString )( nw_ucqueue, nw_FirstIndex,
-														 m_SynAttr->m_RangeBeginString.begin(), m_SynAttr->m_RangeBeginString.end(), strlen );
+							idx = (this->*FindString)(nw_ucqueue, nw_FirstIndex,
+														 m_SynAttr->m_RangeBeginString.begin(), m_SynAttr->m_RangeBeginString.end(), strlen);
 
-							if( idx != 0 )
+							if (idx != 0)
 							{
 								nw_NextState.rangeid = m_SynAttr->m_CustomRange[idx - 1].id;
-								nw_SynRange = GetSyntaxRange( nw_NextState.rangeid );
+								nw_SynRange = GetSyntaxRange(nw_NextState.rangeid);
 								nw_FirstIndex += strlen;
 
-								if( nw_RestCount == 0 )
+								if (nw_RestCount == 0)
 								{
 									nw_State = nw_NextState;
 									nw_RestCount = nw_FirstIndex;
@@ -1903,47 +1903,47 @@ _NEXTUCHAR_:
 			++nw_RestCount;
 			nw_BeginOfLine = false;
 		}
-		while( nw_RestCount < nw_MaxLength );
+		while (nw_RestCount < nw_MaxLength);
 	}
 
-	wxASSERT( nw_RestCount != 0 );
-	wxASSERT( nw_RowIndexIter->m_Width != 0 );
+	wxASSERT(nw_RestCount != 0);
+	wxASSERT(nw_RowIndexIter->m_Width != 0);
 	nw_BeginOfLine = false;
 	// set current bgcolor by state
 	bool setbgcolor = false;
 
-	if( nw_State.blkcmtid != 0 || nw_State.linecmt != 0 )
+	if (nw_State.blkcmtid != 0 || nw_State.linecmt != 0)
 	{
 		nw_CurrentBgColor = m_SynAttr->m_SystemAttributes[aeComment].bgcolor;
 
-		if( nw_CurrentBgColor != wxNullColour ) setbgcolor = true;
+		if (nw_CurrentBgColor != wxNullColour) setbgcolor = true;
 	}
 
-	if( setbgcolor == false )
+	if (setbgcolor == false)
 	{
-		if( nw_State.directive )
+		if (nw_State.directive)
 		{
 			nw_CurrentBgColor = m_SynAttr->m_SystemAttributes[aeDirective].bgcolor;
 
-			if( nw_CurrentBgColor != wxNullColour ) setbgcolor = true;
+			if (nw_CurrentBgColor != wxNullColour) setbgcolor = true;
 		}
 		else
-			if( nw_State.stringid != 0 )
+			if (nw_State.stringid != 0)
 			{
 				nw_CurrentBgColor = m_SynAttr->m_SystemAttributes[aeString].bgcolor;
 
-				if( nw_CurrentBgColor != wxNullColour ) setbgcolor = true;
+				if (nw_CurrentBgColor != wxNullColour) setbgcolor = true;
 			}
 	}
 
-	if( setbgcolor == false )
+	if (setbgcolor == false)
 	{
-		if( nw_State.rangeid != 0 )
+		if (nw_State.rangeid != 0)
 		{
-			MadSyntaxRange * r = GetSyntaxRange( nw_State.rangeid );
+			MadSyntaxRange * r = GetSyntaxRange(nw_State.rangeid);
 			nw_CurrentBgColor = r->bgcolor;
 
-			if( nw_CurrentBgColor == wxNullColour )
+			if (nw_CurrentBgColor == wxNullColour)
 			{
 				nw_CurrentBgColor = m_SynAttr->m_SystemAttributes[aeText].bgcolor;
 			}
@@ -1961,24 +1961,24 @@ _NEXTUCHAR_:
 	int width;
 	ucs4_t uc = nw_ucqueue.front().first;
 
-	if( IsSpace( uc ) )
+	if (IsSpace(uc))
 	{
-		SetAttributes( aeSpace );
-		int tabwidth = nw_MadEdit->m_TabColumns * nw_MadEdit->GetUCharWidth( 0x20 );
+		SetAttributes(aeSpace);
+		int tabwidth = nw_MadEdit->m_TabColumns * nw_MadEdit->GetUCharWidth(0x20);
 
 		do
 		{
 			nw_Word[idx] = uc;
 			nw_ucqueue.pop_front();
-			width = nw_MadEdit->GetUCharWidth( uc );
+			width = nw_MadEdit->GetUCharWidth(uc);
 
-			if( uc == 0x09 )
+			if (uc == 0x09)
 			{
 				int tbwidth = tabwidth;
 				width = nw_RowIndexIter->m_Width - nw_LineWidth;
-				tbwidth -= ( nw_LineWidth % tbwidth );
+				tbwidth -= (nw_LineWidth % tbwidth);
 
-				if( tbwidth < width )
+				if (tbwidth < width)
 					width = tbwidth;
 			}
 
@@ -1987,111 +1987,111 @@ _NEXTUCHAR_:
 			++idx;
 			--nw_FirstIndex;
 		}
-		while( --nw_RestCount && nw_LineWidth < nw_RowIndexIter->m_Width
-				&& IsSpace( uc = nw_ucqueue.front().first ) );
+		while (--nw_RestCount && nw_LineWidth < nw_RowIndexIter->m_Width
+				&& IsSpace(uc = nw_ucqueue.front().first));
 
 		nw_Word[idx] = 0;
 	}
 	else
-		if( nw_State.blkcmtid != 0 || nw_State.linecmt != 0 )
+		if (nw_State.blkcmtid != 0 || nw_State.linecmt != 0)
 		{
-			SetAttributes( aeComment );
+			SetAttributes(aeComment);
 
 			do
 			{
 				nw_Word[idx] = uc;
 				nw_ucqueue.pop_front();
-				width = nw_MadEdit->GetUCharWidth( uc );
+				width = nw_MadEdit->GetUCharWidth(uc);
 				nw_Widths[idx] = width;
 				nw_LineWidth += width;
 				++idx;
 				--nw_FirstIndex;
 			}
-			while( --nw_RestCount && nw_LineWidth < nw_RowIndexIter->m_Width
-					&& !IsSpace( uc = nw_ucqueue.front().first ) );
+			while (--nw_RestCount && nw_LineWidth < nw_RowIndexIter->m_Width
+					&& !IsSpace(uc = nw_ucqueue.front().first));
 
 			nw_Word[idx] = 0;
 		}
 		else
-			if( nw_State.directive )
+			if (nw_State.directive)
 			{
-				SetAttributes( aeDirective );
+				SetAttributes(aeDirective);
 
 				do
 				{
 					nw_Word[idx] = uc;
 					nw_ucqueue.pop_front();
-					width = nw_MadEdit->GetUCharWidth( uc );
+					width = nw_MadEdit->GetUCharWidth(uc);
 					nw_Widths[idx] = width;
 					nw_LineWidth += width;
 					++idx;
 					--nw_FirstIndex;
 				}
-				while( --nw_RestCount && nw_LineWidth < nw_RowIndexIter->m_Width
-						&& !IsSpace( uc = nw_ucqueue.front().first ) );
+				while (--nw_RestCount && nw_LineWidth < nw_RowIndexIter->m_Width
+						&& !IsSpace(uc = nw_ucqueue.front().first));
 
 				nw_Word[idx] = 0;
 			}
 			else
-				if( nw_State.stringid != 0 )
+				if (nw_State.stringid != 0)
 				{
-					SetAttributes( aeString );
+					SetAttributes(aeString);
 
 					do
 					{
 						nw_Word[idx] = uc;
 						nw_ucqueue.pop_front();
-						width = nw_MadEdit->GetUCharWidth( uc );
+						width = nw_MadEdit->GetUCharWidth(uc);
 						nw_Widths[idx] = width;
 						nw_LineWidth += width;
 						++idx;
 						--nw_FirstIndex;
 					}
-					while( --nw_RestCount && nw_LineWidth < nw_RowIndexIter->m_Width
-							&& !IsSpace( uc = nw_ucqueue.front().first ) );
+					while (--nw_RestCount && nw_LineWidth < nw_RowIndexIter->m_Width
+							&& !IsSpace(uc = nw_ucqueue.front().first));
 
 					nw_Word[idx] = 0;
 				}
 				else
-					if( uc < 0x100 )
+					if (uc < 0x100)
 					{
-						if( uc >= '0' && uc <= '9' )
+						if (uc >= '0' && uc <= '9')
 						{
-							SetAttributes( aeNumber );
+							SetAttributes(aeNumber);
 
 							do
 							{
-								if(m_SynAttr->m_IsPlainText && ( uc < '0' || uc > '9' )) break;
+								if (m_SynAttr->m_IsPlainText && (uc < '0' || uc > '9')) break;
 
 								nw_Word[idx] = uc;
 								nw_ucqueue.pop_front();
-								width = nw_MadEdit->GetUCharWidth( uc );
+								width = nw_MadEdit->GetUCharWidth(uc);
 								nw_Widths[idx] = width;
 								nw_LineWidth += width;
 								++idx;
 								--nw_FirstIndex;
 							}
-							while( --nw_RestCount && nw_LineWidth < nw_RowIndexIter->m_Width
-									&& IsNotDelimiter( uc = nw_ucqueue.front().first ));
+							while (--nw_RestCount && nw_LineWidth < nw_RowIndexIter->m_Width
+									&& IsNotDelimiter(uc = nw_ucqueue.front().first));
 
 							nw_Word[idx] = 0;
 						}
 						else
-							if(m_SynAttr->m_SpecialWordPrefix.Find( wxChar( uc ) ) >= 0 )
+							if (m_SynAttr->m_SpecialWordPrefix.Find(wxChar(uc)) >= 0)
 							{
 								do
 								{
-									if(m_SynAttr->m_IsPlainText && ( uc >= '0' && uc <= '9' )) break;
+									if (m_SynAttr->m_IsPlainText && (uc >= '0' && uc <= '9')) break;
 									nw_Word[idx] = uc;
 									nw_ucqueue.pop_front();
-									width = nw_MadEdit->GetUCharWidth( uc );
+									width = nw_MadEdit->GetUCharWidth(uc);
 									nw_Widths[idx] = width;
 									nw_LineWidth += width;
 									++idx;
 									--nw_FirstIndex;
 								}
-								while( --nw_RestCount && nw_LineWidth < nw_RowIndexIter->m_Width
-										&& IsNotDelimiter( uc = nw_ucqueue.front().first ) );
+								while (--nw_RestCount && nw_LineWidth < nw_RowIndexIter->m_Width
+										&& IsNotDelimiter(uc = nw_ucqueue.front().first));
 
 								nw_Word[idx] = 0;
 
@@ -2100,33 +2100,33 @@ _NEXTUCHAR_:
 								vector < MadSyntaxKeyword >::iterator kend = m_SynAttr->m_CustomKeyword.end();
 								bool bIsKeyword = false;
 
-								if( m_SynAttr->nw_MaxKeywordLen != 0 && idx <= ( int )m_SynAttr->nw_MaxKeywordLen && kit != kend )
+								if (m_SynAttr->nw_MaxKeywordLen != 0 && idx <= (int)m_SynAttr->nw_MaxKeywordLen && kit != kend)
 								{
-									wxString strorg( wxT( ' ' ), idx ), strlower( wxT( ' ' ), idx );
+									wxString strorg(wxT(' '), idx), strlower(wxT(' '), idx);
 									ucs4_t *puc = nw_Word;
 
-									for( int i = 0; i < idx; ++i )
+									for (int i = 0; i < idx; ++i)
 									{
 										uc = *puc++;
 #ifdef __WXMSW__
 
-										if( uc < 0x10000 )
+										if (uc < 0x10000)
 #endif
 										{
-											strorg[i] = wxChar( uc );
+											strorg[i] = wxChar(uc);
 
-											if( uc <= ( ucs4_t )wxT( 'Z' ) && uc >= ( ucs4_t )wxT( 'A' ) )
-												strlower[i] = wxChar( uc | 0x20 );
+											if (uc <= (ucs4_t)wxT('Z') && uc >= (ucs4_t)wxT('A'))
+												strlower[i] = wxChar(uc | 0x20);
 											else
-												strlower[i] = wxChar( uc );
+												strlower[i] = wxChar(uc);
 										}
 
 #ifdef __WXMSW__
 										else
 										{
 											//to surrogates????
-											strorg[i] = wxChar( 0xFFFF );
-											strlower[i] = wxChar( 0xFFFF );
+											strorg[i] = wxChar(0xFFFF);
+											strlower[i] = wxChar(0xFFFF);
 										}
 
 #endif
@@ -2136,28 +2136,28 @@ _NEXTUCHAR_:
 
 									do
 									{
-										if( IsInRange( nw_State.rangeid, kit->m_InRange ) )
+										if (IsInRange(nw_State.rangeid, kit->m_InRange))
 										{
-											if( kit->m_CaseSensitive ) it = kit->m_Keywords.find( strorg );
-											else                     it = kit->m_Keywords.find( strlower );
+											if (kit->m_CaseSensitive) it = kit->m_Keywords.find(strorg);
+											else                     it = kit->m_Keywords.find(strlower);
 
-											if( it != kit->m_Keywords.end() )
+											if (it != kit->m_Keywords.end())
 											{
 												bIsKeyword = true;
 												break;
 											}
 										}
 									}
-									while( ++kit != kend );
+									while (++kit != kend);
 								}
 
-								if( bIsKeyword )
-									SetAttributes( &( kit->m_Attr ) );
+								if (bIsKeyword)
+									SetAttributes(&(kit->m_Attr));
 								else
-									SetAttributes( aeSpecialWord );
+									SetAttributes(aeSpecialWord);
 							}
 							else
-								if(m_SynAttr->m_KeywordPrefix.Find( wxChar( uc ) ) >= 0 )
+								if (m_SynAttr->m_KeywordPrefix.Find(wxChar(uc)) >= 0)
 								{
 									size_t old_firstindex = nw_FirstIndex;
 									size_t old_rest_count = nw_RestCount;
@@ -2168,14 +2168,14 @@ _NEXTUCHAR_:
 									{
 										nw_Word[idx] = uc;
 										//nw_ucqueue.pop_front(); // cannot pop here
-										width = nw_MadEdit->GetUCharWidth( uc );
+										width = nw_MadEdit->GetUCharWidth(uc);
 										nw_Widths[idx] = width;
 										nw_LineWidth += width;
 										++idx;
 										--nw_FirstIndex;
 									}
-									while( --nw_RestCount && nw_LineWidth < nw_RowIndexIter->m_Width
-											&& ( uc = nw_ucqueue[idx].first ) < 0x100 && IsNotDelimiter( uc ) );
+									while (--nw_RestCount && nw_LineWidth < nw_RowIndexIter->m_Width
+											&& (uc = nw_ucqueue[idx].first) < 0x100 && IsNotDelimiter(uc));
 
 									nw_Word[idx] = 0;
 									// check if is Keyword
@@ -2183,33 +2183,33 @@ _NEXTUCHAR_:
 									vector < MadSyntaxKeyword >::iterator kend = m_SynAttr->m_CustomKeyword.end();
 									bool bIsKeyword = false;
 
-									if( m_SynAttr->nw_MaxKeywordLen != 0 && idx <= ( int )m_SynAttr->nw_MaxKeywordLen && kit != kend )
+									if (m_SynAttr->nw_MaxKeywordLen != 0 && idx <= (int)m_SynAttr->nw_MaxKeywordLen && kit != kend)
 									{
-										wxString strorg( wxT( ' ' ), idx ), strlower( wxT( ' ' ), idx );
+										wxString strorg(wxT(' '), idx), strlower(wxT(' '), idx);
 										ucs4_t *puc = nw_Word;
 
-										for( int i = 0; i < idx; ++i )
+										for (int i = 0; i < idx; ++i)
 										{
 											uc = *puc++;
 #ifdef __WXMSW__
 
-											if( uc < 0x10000 )
+											if (uc < 0x10000)
 #endif
 											{
-												strorg[i] = wxChar( uc );
+												strorg[i] = wxChar(uc);
 
-												if( uc <= ( ucs4_t )wxT( 'Z' ) && uc >= ( ucs4_t )wxT( 'A' ) )
-													strlower[i] = wxChar( uc | 0x20 );
+												if (uc <= (ucs4_t)wxT('Z') && uc >= (ucs4_t)wxT('A'))
+													strlower[i] = wxChar(uc | 0x20);
 												else
-													strlower[i] = wxChar( uc );
+													strlower[i] = wxChar(uc);
 											}
 
 #ifdef __WXMSW__
 											else
 											{
 												//to surrogates????
-												strorg[i] = wxChar( 0xFFFF );
-												strlower[i] = wxChar( 0xFFFF );
+												strorg[i] = wxChar(0xFFFF);
+												strlower[i] = wxChar(0xFFFF);
 											}
 
 #endif
@@ -2219,27 +2219,27 @@ _NEXTUCHAR_:
 
 										do
 										{
-											if( IsInRange( nw_State.rangeid, kit->m_InRange ) )
+											if (IsInRange(nw_State.rangeid, kit->m_InRange))
 											{
-												if( kit->m_CaseSensitive ) it = kit->m_Keywords.find( strorg );
-												else                     it = kit->m_Keywords.find( strlower );
+												if (kit->m_CaseSensitive) it = kit->m_Keywords.find(strorg);
+												else                     it = kit->m_Keywords.find(strlower);
 
-												if( it != kit->m_Keywords.end() )
+												if (it != kit->m_Keywords.end())
 												{
 													bIsKeyword = true;
 													break;
 												}
 											}
 										}
-										while( ++kit != kend );
+										while (++kit != kend);
 									}
 
-									if( bIsKeyword )
+									if (bIsKeyword)
 									{
-										SetAttributes( &( kit->m_Attr ) );
+										SetAttributes(&(kit->m_Attr));
 										int i = 0;
 
-										while( i < idx )
+										while (i < idx)
 										{
 											nw_ucqueue.pop_front();
 											++i;
@@ -2247,34 +2247,34 @@ _NEXTUCHAR_:
 									}
 									else
 									{
-										SetAttributes( aeDelimiter );
+										SetAttributes(aeDelimiter);
 										idx = 1;
 										nw_Word[1] = 0;
 										nw_ucqueue.pop_front();
 										nw_FirstIndex = old_firstindex - 1;
 										nw_RestCount = old_rest_count - 1;
-										nw_LineWidth = old_line_width + nw_MadEdit->GetUCharWidth( nw_Word[0] );
+										nw_LineWidth = old_line_width + nw_MadEdit->GetUCharWidth(nw_Word[0]);
 									}
 								}
 								else
-									if( IsDelimiter( uc ) )
+									if (IsDelimiter(uc))
 									{
-										SetAttributes( aeDelimiter );
+										SetAttributes(aeDelimiter);
 
 										do
 										{
 											nw_Word[idx] = uc;
 											nw_ucqueue.pop_front();
-											width = nw_MadEdit->GetUCharWidth( uc );
+											width = nw_MadEdit->GetUCharWidth(uc);
 											nw_Widths[idx] = width;
 											nw_LineWidth += width;
 											++idx;
 											--nw_FirstIndex;
 										}
-										while( --nw_RestCount && nw_LineWidth < nw_RowIndexIter->m_Width
-												&& IsDelimiter( uc = nw_ucqueue.front().first )
-												&& m_SynAttr->m_KeywordPrefix.Find( wxChar( uc ) ) < 0
-												&& m_SynAttr->m_SpecialWordPrefix.Find( wxChar( uc ) ) < 0 );
+										while (--nw_RestCount && nw_LineWidth < nw_RowIndexIter->m_Width
+												&& IsDelimiter(uc = nw_ucqueue.front().first)
+												&& m_SynAttr->m_KeywordPrefix.Find(wxChar(uc)) < 0
+												&& m_SynAttr->m_SpecialWordPrefix.Find(wxChar(uc)) < 0);
 
 										nw_Word[idx] = 0;
 									}
@@ -2283,17 +2283,17 @@ _NEXTUCHAR_:
 										// get full word
 										do
 										{
-											if(m_SynAttr->m_IsPlainText && ( uc >= '0' && uc <= '9' )) break;
+											if (m_SynAttr->m_IsPlainText && (uc >= '0' && uc <= '9')) break;
 											nw_Word[idx] = uc;
 											nw_ucqueue.pop_front();
-											width = nw_MadEdit->GetUCharWidth( uc );
+											width = nw_MadEdit->GetUCharWidth(uc);
 											nw_Widths[idx] = width;
 											nw_LineWidth += width;
 											++idx;
 											--nw_FirstIndex;
 										}
-										while( --nw_RestCount && nw_LineWidth < nw_RowIndexIter->m_Width
-												&& IsNotDelimiter( uc = nw_ucqueue.front().first ) );
+										while (--nw_RestCount && nw_LineWidth < nw_RowIndexIter->m_Width
+												&& IsNotDelimiter(uc = nw_ucqueue.front().first));
 
 										nw_Word[idx] = 0;
 										// check if is Keyword
@@ -2301,32 +2301,32 @@ _NEXTUCHAR_:
 										vector < MadSyntaxKeyword >::iterator kend = m_SynAttr->m_CustomKeyword.end();
 										bool bIsKeyword = false;
 
-										if( m_SynAttr->nw_MaxKeywordLen != 0 && idx <= ( int )m_SynAttr->nw_MaxKeywordLen && kit != kend )
+										if (m_SynAttr->nw_MaxKeywordLen != 0 && idx <= (int)m_SynAttr->nw_MaxKeywordLen && kit != kend)
 										{
-											wxString strorg( wxT( ' ' ), idx ), strlower( wxT( ' ' ), idx );
+											wxString strorg(wxT(' '), idx), strlower(wxT(' '), idx);
 											ucs4_t *puc = nw_Word;
 
-											for( int i = 0; i < idx; ++i )
+											for (int i = 0; i < idx; ++i)
 											{
 												uc = *puc++;
 #ifdef __WXMSW__
-												if( uc < 0x10000 )
+												if (uc < 0x10000)
 #endif
 												{
-													strorg[i] = wxChar( uc );
+													strorg[i] = wxChar(uc);
 
-													if( uc <= ( ucs4_t )wxT( 'Z' ) && uc >= ( ucs4_t )wxT( 'A' ) )
-														strlower[i] = wxChar( uc | 0x20 );
+													if (uc <= (ucs4_t)wxT('Z') && uc >= (ucs4_t)wxT('A'))
+														strlower[i] = wxChar(uc | 0x20);
 													else
-														strlower[i] = wxChar( uc );
+														strlower[i] = wxChar(uc);
 												}
 
 #ifdef __WXMSW__
 												else
 												{
 													//to surrogates????
-													strorg[i] = wxChar( 0xFFFF );
-													strlower[i] = wxChar( 0xFFFF );
+													strorg[i] = wxChar(0xFFFF);
+													strlower[i] = wxChar(0xFFFF);
 												}
 
 #endif
@@ -2336,84 +2336,84 @@ _NEXTUCHAR_:
 
 											do
 											{
-												if( IsInRange( nw_State.rangeid, kit->m_InRange ) )
+												if (IsInRange(nw_State.rangeid, kit->m_InRange))
 												{
-													if( kit->m_CaseSensitive ) it = kit->m_Keywords.find( strorg );
-													else                     it = kit->m_Keywords.find( strlower );
+													if (kit->m_CaseSensitive) it = kit->m_Keywords.find(strorg);
+													else                     it = kit->m_Keywords.find(strlower);
 
-													if( it != kit->m_Keywords.end() )
+													if (it != kit->m_Keywords.end())
 													{
 														bIsKeyword = true;
 														break;
 													}
 												}
 											}
-											while( ++kit != kend );
+											while (++kit != kend);
 										}
 
-										if( bIsKeyword )
+										if (bIsKeyword)
 										{
-											SetAttributes( &( kit->m_Attr ) );
+											SetAttributes(&(kit->m_Attr));
 										}
 										else
 										{
-											SetAttributes( aeText );
+											SetAttributes(aeText);
 										}
 									}
 					}
 					else                                                    // Text
 					{
-						SetAttributes( aeText );
+						SetAttributes(aeText);
 
 						do
 						{
 							nw_Word[idx] = uc;
 							nw_ucqueue.pop_front();
-							width = nw_MadEdit->GetUCharWidth( uc );
+							width = nw_MadEdit->GetUCharWidth(uc);
 							nw_Widths[idx] = width;
 							nw_LineWidth += width;
 							++idx;
 							--nw_FirstIndex;
 						}
-						while( --nw_RestCount && nw_LineWidth < nw_RowIndexIter->m_Width
-								&& ( uc = nw_ucqueue.front().first ) >= 0x100 );
+						while (--nw_RestCount && nw_LineWidth < nw_RowIndexIter->m_Width
+								&& (uc = nw_ucqueue.front().first) >= 0x100);
 
 						nw_Word[idx] = 0;
 					}
 
 	//wxASSERT(nw_RowIndexIter->m_Width >= nw_LineWidth);
-	//if(nw_RowIndexIter->m_Width < nw_LineWidth)
+	//if (nw_RowIndexIter->m_Width < nw_LineWidth)
 	//    nw_LineWidth += 0;
 	wordwidth = nw_LineWidth - old_line_width;
 
-	if( nw_RestCount == 0 )
+	if (nw_RestCount == 0)
 	{
 		// reset bgcolor
-		if( nw_NextState.rangeid != nw_State.rangeid )
+		if (nw_NextState.rangeid != nw_State.rangeid)
 		{
 			nw_CurrentBgColor = m_SynAttr->m_SystemAttributes[aeText].bgcolor;
 		}
 		else
-			if( nw_NextState.blkcmtid != nw_State.blkcmtid ||
-					nw_NextState.stringid != nw_State.stringid )
+			if (nw_NextState.blkcmtid != nw_State.blkcmtid ||
+					nw_NextState.stringid != nw_State.stringid)
 			{
-				if( nw_NextState.directive != 0 )
+				if (nw_NextState.directive != 0)
 				{
 					nw_CurrentBgColor = m_SynAttr->m_SystemAttributes[aeDirective].bgcolor;
 
-					if( nw_CurrentBgColor == wxNullColour )
+					if (nw_CurrentBgColor == wxNullColour)
 					{
 						nw_CurrentBgColor = m_SynAttr->m_SystemAttributes[aeText].bgcolor;
 					}
 				}
 				else
 				{
-					if( nw_NextState.rangeid != 0 )
+					if (nw_NextState.rangeid != 0)
 					{
-						MadSyntaxRange * r = GetSyntaxRange( nw_NextState.rangeid );
+						MadSyntaxRange * r = GetSyntaxRange(nw_NextState.rangeid);
 						nw_CurrentBgColor = r->bgcolor;
 
-						if( nw_CurrentBgColor == wxNullColour )
+						if (nw_CurrentBgColor == wxNullColour)
 						{
 							nw_CurrentBgColor = m_SynAttr->m_SystemAttributes[aeText].bgcolor;
 						}
@@ -2428,11 +2428,11 @@ _NEXTUCHAR_:
 		nw_State = nw_NextState;
 	}
 
-	if( nw_LineWidth >= nw_RowIndexIter->m_Width )
+	if (nw_LineWidth >= nw_RowIndexIter->m_Width)
 	{
 		nw_LineWidth = 0;
 
-		if( ( ++nw_RowIndexIter )->m_Width == 0 )
+		if ((++nw_RowIndexIter)->m_Width == 0)
 		{
 			nw_EndOfLine = true;
 		}
@@ -2440,7 +2440,7 @@ _NEXTUCHAR_:
 		{
 			MadRowIndexIterator nextit = nw_RowIndexIter;
 			++nextit;
-			if(nextit->m_Start >= nw_RowIndexIter->m_Start)
+			if (nextit->m_Start >= nw_RowIndexIter->m_Start)
 				nw_MaxLength = nextit->m_Start - nw_RowIndexIter->m_Start;
 			else
 			{
@@ -2454,17 +2454,17 @@ _NEXTUCHAR_:
 }
 
 // for Printing
-void MadSyntax::BeginPrint( bool printSyntax )
+void MadSyntax::BeginPrint(bool printSyntax)
 {
 	m_PrintSyntax = printSyntax;
 
-	if( m_PrintSyntax ) return;
+	if (m_PrintSyntax) return;
 
 	// store colors
 	MadAttributes *pat = m_SynAttr->m_SystemAttributes;
 	MadAttributes *old = m_old_SystemAttributes;
 
-	for( int i = 0; i < aeNone; ++i )
+	for (int i = 0; i < aeNone; ++i)
 	{
 		old->color = pat->color;
 		old->bgcolor = pat->bgcolor;
@@ -2475,18 +2475,18 @@ void MadSyntax::BeginPrint( bool printSyntax )
 	}
 
 	size_t count = m_SynAttr->m_CustomRange.size();
-	m_CustomRangeBgColor.resize( count );
+	m_CustomRangeBgColor.resize(count);
 
-	for( size_t i = 0; i < count; ++i )
+	for (size_t i = 0; i < count; ++i)
 	{
 		m_CustomRangeBgColor[i] = m_SynAttr->m_CustomRange[i].bgcolor;
 		m_SynAttr->m_CustomRange[i].bgcolor = *wxWHITE;
 	}
 
 	count = m_SynAttr->m_CustomKeyword.size();
-	m_CustomKeywordColor.resize( count );
+	m_CustomKeywordColor.resize(count);
 
-	for( size_t i = 0; i < count; ++i )
+	for (size_t i = 0; i < count; ++i)
 	{
 		m_CustomKeywordColor[i].color = m_SynAttr->m_CustomKeyword[i].m_Attr.color;
 		m_CustomKeywordColor[i].bgcolor = m_SynAttr->m_CustomKeyword[i].m_Attr.bgcolor;
@@ -2497,13 +2497,13 @@ void MadSyntax::BeginPrint( bool printSyntax )
 
 void MadSyntax::EndPrint()
 {
-	if( m_PrintSyntax ) return;
+	if (m_PrintSyntax) return;
 
 	// store colors
 	MadAttributes *pat = m_SynAttr->m_SystemAttributes;
 	MadAttributes *old = m_old_SystemAttributes;
 
-	for( int i = 0; i < aeNone; ++i )
+	for (int i = 0; i < aeNone; ++i)
 	{
 		pat->color = old->color;
 		pat->bgcolor = old->bgcolor;
@@ -2513,184 +2513,184 @@ void MadSyntax::EndPrint()
 
 	size_t count = m_SynAttr->m_CustomRange.size();
 
-	for( size_t i = 0; i < count; ++i )
+	for (size_t i = 0; i < count; ++i)
 	{
 		m_SynAttr->m_CustomRange[i].bgcolor = m_CustomRangeBgColor[i];
 	}
 
 	count = m_SynAttr->m_CustomKeyword.size();
 
-	for( size_t i = 0; i < count; ++i )
+	for (size_t i = 0; i < count; ++i)
 	{
 		m_SynAttr->m_CustomKeyword[i].m_Attr.color = m_CustomKeywordColor[i].color;
 		m_SynAttr->m_CustomKeyword[i].m_Attr.bgcolor = m_CustomKeywordColor[i].bgcolor;
 	}
 }
 
-void MadSyntax::LoadAttributes( const wxString &file )
+void MadSyntax::LoadAttributes(const wxString &file)
 {
 	wxString attfile = file;
 
-	if( attfile.IsEmpty() )
+	if (attfile.IsEmpty())
 	{
-		attfile = GetAttributeFileByTitle( m_SynAttr->m_Title );
+		attfile = GetAttributeFileByTitle(m_SynAttr->m_Title);
 	}
 
-	if( wxFileExists( attfile ) )
+	if (wxFileExists(attfile))
 	{
-		MadSyntax *att = new MadSyntax( attfile );
-		AssignAttributes( att );
+		MadSyntax *att = new MadSyntax(attfile);
+		AssignAttributes(att);
 		delete att;
 	}
 }
 
-wxString GetColorName( wxColour &c )
+wxString GetColorName(wxColour &c)
 {
-	if( !c.Ok() || c == wxNullColour ) return wxString( wxT( "None" ) );
+	if (!c.Ok() || c == wxNullColour) return wxString(wxT("None"));
 
-	wxString name = wxTheColourDatabase->FindName( c );
+	wxString name = wxTheColourDatabase->FindName(c);
 
-	if( name.IsEmpty() )
+	if (name.IsEmpty())
 	{
-		name.Printf( wxT( "%02X%02X%02X" ), c.Red(), c.Green(), c.Blue() );
+		name.Printf(wxT("%02X%02X%02X"), c.Red(), c.Green(), c.Blue());
 	}
 
 	return name;
 }
-wxString GetStyleString( MadFontStyles s )
+wxString GetStyleString(MadFontStyles s)
 {
 	wxString str;
 
-	if( ( s & fsBold ) != 0 ) str += wxT( " Bold" );
+	if ((s & fsBold) != 0) str += wxT(" Bold");
 
-	if( ( s & fsItalic ) != 0 ) str += wxT( " Italic" );
+	if ((s & fsItalic) != 0) str += wxT(" Italic");
 
-	if( ( s & fsUnderline ) != 0 ) str += wxT( " Underline" );
+	if ((s & fsUnderline) != 0) str += wxT(" Underline");
 
 	return str;
 }
 
-void MadSyntax::SaveAttributes( const wxString &file )
+void MadSyntax::SaveAttributes(const wxString &file)
 {
 	wxString attfile = file;
 
-	if( attfile.IsEmpty() )
+	if (attfile.IsEmpty())
 	{
-		attfile = GetAttributeFileByTitle( m_SynAttr->m_Title );
+		attfile = GetAttributeFileByTitle(m_SynAttr->m_Title);
 	}
 
-	wxFileName fn( attfile );
-	wxString dir = fn.GetPath( wxPATH_GET_VOLUME );
+	wxFileName fn(attfile);
+	wxString dir = fn.GetPath(wxPATH_GET_VOLUME);
 
-	if( !wxDirExists( dir ) )
+	if (!wxDirExists(dir))
 	{
-		wxMkdir( dir );
+		wxMkdir(dir);
 	}
 
-	wxFileConfig syn( wxEmptyString, wxEmptyString, attfile, wxEmptyString, wxCONFIG_USE_RELATIVE_PATH | wxCONFIG_USE_NO_ESCAPE_CHARACTERS );
+	wxFileConfig syn(wxEmptyString, wxEmptyString, attfile, wxEmptyString, wxCONFIG_USE_RELATIVE_PATH | wxCONFIG_USE_NO_ESCAPE_CHARACTERS);
 	// write custom ranges
 	wxString str, value;
 	size_t i;
 
-	for( i = 0; i < m_SynAttr->m_CustomRange.size(); ++i )
+	for (i = 0; i < m_SynAttr->m_CustomRange.size(); ++i)
 	{
 		wxString s, cname;
-		cname = GetColorName(m_SynAttr->m_CustomRange[i].bgcolor );
-		s.Printf( wxT( " %d b%d e%d %s" ), (unsigned int)(i + 1), (unsigned int)(i + 1), (unsigned int)(i + 1), cname.c_str() );
+		cname = GetColorName(m_SynAttr->m_CustomRange[i].bgcolor);
+		s.Printf(wxT(" %d b%d e%d %s"), (unsigned int)(i + 1), (unsigned int)(i + 1), (unsigned int)(i + 1), cname.c_str());
 		str += s;
 	}
 
-	syn.Write( wxT( "/CustomRange" ), str );
+	syn.Write(wxT("/CustomRange"), str);
 
 	// write system attributes
-	for( i = aeText; i < aeActiveLine; ++i )
+	for (i = aeText; i < aeActiveLine; ++i)
 	{
-		str.Printf( wxT( "/%sColor" ), SystemAttributesName[i] );
-		value.Printf( wxT( "%s" ), GetColorName( m_SynAttr->m_SystemAttributes[i].color ).c_str() );
-		syn.Write( str, value );
-		str.Printf( wxT( "/%sBgColor" ), SystemAttributesName[i] );
-		value.Printf( wxT( "%s" ), GetColorName( m_SynAttr->m_SystemAttributes[i].bgcolor ).c_str() );
-		syn.Write( str, value );
-		str.Printf( wxT( "/%sStyle" ), SystemAttributesName[i] );
-		value.Printf( wxT( "%s" ), GetStyleString( m_SynAttr->m_SystemAttributes[i].style ).c_str() );
-		syn.Write( str, value );
+		str.Printf(wxT("/%sColor"), SystemAttributesName[i]);
+		value.Printf(wxT("%s"), GetColorName(m_SynAttr->m_SystemAttributes[i].color).c_str());
+		syn.Write(str, value);
+		str.Printf(wxT("/%sBgColor"), SystemAttributesName[i]);
+		value.Printf(wxT("%s"), GetColorName(m_SynAttr->m_SystemAttributes[i].bgcolor).c_str());
+		syn.Write(str, value);
+		str.Printf(wxT("/%sStyle"), SystemAttributesName[i]);
+		value.Printf(wxT("%s"), GetStyleString(m_SynAttr->m_SystemAttributes[i].style).c_str());
+		syn.Write(str, value);
 	}
 
-	str.Printf( wxT( "/%sColor" ), SystemAttributesName[aeActiveLine] );
-	value.Printf( wxT( "%s" ), GetColorName( m_SynAttr->m_SystemAttributes[aeActiveLine].color ).c_str() );
-	syn.Write( str, value );
-	str.Printf( wxT( "/%sColor" ), SystemAttributesName[aeBookmark] );
-	value.Printf( wxT( "%s" ), GetColorName( m_SynAttr->m_SystemAttributes[aeBookmark].color ).c_str() );
-	syn.Write( str, value );
-	str.Printf( wxT( "/%sBgColor" ), SystemAttributesName[aeBookmark] );
-	value.Printf( wxT( "%s" ), GetColorName( m_SynAttr->m_SystemAttributes[aeBookmark].bgcolor ).c_str() );
-	syn.Write( str, value );
-	str.Printf( wxT( "/%sColor" ), SystemAttributesName[aeHighlightWord] );
-	value.Printf( wxT( "%s" ), GetColorName( m_SynAttr->m_SystemAttributes[aeHighlightWord].color ).c_str() );
-	syn.Write( str, value );
-	str.Printf( wxT( "/%sBgColor" ), SystemAttributesName[aeHighlightWord] );
-	value.Printf( wxT( "%s" ), GetColorName( m_SynAttr->m_SystemAttributes[aeHighlightWord].bgcolor ).c_str() );
-	syn.Write( str, value );
+	str.Printf(wxT("/%sColor"), SystemAttributesName[aeActiveLine]);
+	value.Printf(wxT("%s"), GetColorName(m_SynAttr->m_SystemAttributes[aeActiveLine].color).c_str());
+	syn.Write(str, value);
+	str.Printf(wxT("/%sColor"), SystemAttributesName[aeBookmark]);
+	value.Printf(wxT("%s"), GetColorName(m_SynAttr->m_SystemAttributes[aeBookmark].color).c_str());
+	syn.Write(str, value);
+	str.Printf(wxT("/%sBgColor"), SystemAttributesName[aeBookmark]);
+	value.Printf(wxT("%s"), GetColorName(m_SynAttr->m_SystemAttributes[aeBookmark].bgcolor).c_str());
+	syn.Write(str, value);
+	str.Printf(wxT("/%sColor"), SystemAttributesName[aeHighlightWord]);
+	value.Printf(wxT("%s"), GetColorName(m_SynAttr->m_SystemAttributes[aeHighlightWord].color).c_str());
+	syn.Write(str, value);
+	str.Printf(wxT("/%sBgColor"), SystemAttributesName[aeHighlightWord]);
+	value.Printf(wxT("%s"), GetColorName(m_SynAttr->m_SystemAttributes[aeHighlightWord].bgcolor).c_str());
+	syn.Write(str, value);
 
 	// write custom keywords
-	for( i = 0; i < m_SynAttr->m_CustomKeyword.size(); ++i )
+	for (i = 0; i < m_SynAttr->m_CustomKeyword.size(); ++i)
 	{
-		str.Printf( wxT( "/%x.Keyword/Color" ), (unsigned int)(i + 1) );
-		value.Printf( wxT( "%s" ), GetColorName( m_SynAttr->m_CustomKeyword[i].m_Attr.color ).c_str() );
-		syn.Write( str, value );
-		str.Printf( wxT( "/%x.Keyword/BgColor" ), (unsigned int)(i + 1) );
-		value.Printf( wxT( "%s" ), GetColorName( m_SynAttr->m_CustomKeyword[i].m_Attr.bgcolor ).c_str() );
-		syn.Write( str, value );
-		str.Printf( wxT( "/%x.Keyword/Style" ), (unsigned int)(i + 1) );
-		value.Printf( wxT( "%s" ), GetStyleString(m_SynAttr->m_CustomKeyword[i].m_Attr.style ).c_str() );
-		syn.Write( str, value );
+		str.Printf(wxT("/%x.Keyword/Color"), (unsigned int)(i + 1));
+		value.Printf(wxT("%s"), GetColorName(m_SynAttr->m_CustomKeyword[i].m_Attr.color).c_str());
+		syn.Write(str, value);
+		str.Printf(wxT("/%x.Keyword/BgColor"), (unsigned int)(i + 1));
+		value.Printf(wxT("%s"), GetColorName(m_SynAttr->m_CustomKeyword[i].m_Attr.bgcolor).c_str());
+		syn.Write(str, value);
+		str.Printf(wxT("/%x.Keyword/Style"), (unsigned int)(i + 1));
+		value.Printf(wxT("%s"), GetStyleString(m_SynAttr->m_CustomKeyword[i].m_Attr.style).c_str());
+		syn.Write(str, value);
 	}
 }
 
-void MadSyntax::AssignAttributes( MadSyntax *syn, bool add )
+void MadSyntax::AssignAttributes(MadSyntax *syn, bool add)
 {
-	if( this == syn ) return;
+	if (this == syn) return;
 
 	size_t i;
 
-	for( i = 0; i < m_SynAttr->m_CustomRange.size() && i < syn->m_SynAttr->m_CustomRange.size(); ++i )
+	for (i = 0; i < m_SynAttr->m_CustomRange.size() && i < syn->m_SynAttr->m_CustomRange.size(); ++i)
 	{
 		m_SynAttr->m_CustomRange[i].bgcolor = syn->m_SynAttr->m_CustomRange[i].bgcolor;
 	}
 
-	if( add )
+	if (add)
 	{
-		for( ; i < syn->m_SynAttr->m_CustomRange.size(); ++i )
+		for (; i < syn->m_SynAttr->m_CustomRange.size(); ++i)
 		{
 			MadSyntaxRange ra;
 			ra.bgcolor = syn->m_SynAttr->m_CustomRange[i].bgcolor;
-			m_SynAttr->m_CustomRange.push_back( ra );
+			m_SynAttr->m_CustomRange.push_back(ra);
 		}
 	}
 
-	for( i = aeText; i < aeNone; ++i )
+	for (i = aeText; i < aeNone; ++i)
 	{
 		m_SynAttr->m_SystemAttributes[i].color = syn->m_SynAttr->m_SystemAttributes[i].color;
 		m_SynAttr->m_SystemAttributes[i].bgcolor = syn->m_SynAttr->m_SystemAttributes[i].bgcolor;
 		m_SynAttr->m_SystemAttributes[i].style = syn->m_SynAttr->m_SystemAttributes[i].style;
 	}
 
-	for( i = 0; i < m_SynAttr->m_CustomKeyword.size() && i < syn->m_SynAttr->m_CustomKeyword.size(); ++i )
+	for (i = 0; i < m_SynAttr->m_CustomKeyword.size() && i < syn->m_SynAttr->m_CustomKeyword.size(); ++i)
 	{
 		m_SynAttr->m_CustomKeyword[i].m_Attr.color = syn->m_SynAttr->m_CustomKeyword[i].m_Attr.color;
 		m_SynAttr->m_CustomKeyword[i].m_Attr.bgcolor = syn->m_SynAttr->m_CustomKeyword[i].m_Attr.bgcolor;
 		m_SynAttr->m_CustomKeyword[i].m_Attr.style = syn->m_SynAttr->m_CustomKeyword[i].m_Attr.style;
 	}
 
-	if( add )
+	if (add)
 	{
-		for( ; i < syn->m_SynAttr->m_CustomKeyword.size(); ++i )
+		for (; i < syn->m_SynAttr->m_CustomKeyword.size(); ++i)
 		{
 			MadSyntaxKeyword ke;
 			ke.m_Attr.color  = syn->m_SynAttr->m_CustomKeyword[i].m_Attr.color;
 			ke.m_Attr.bgcolor = syn->m_SynAttr->m_CustomKeyword[i].m_Attr.bgcolor;
 			ke.m_Attr.style = syn->m_SynAttr->m_CustomKeyword[i].m_Attr.style;
-			m_SynAttr->m_CustomKeyword.push_back( ke );
+			m_SynAttr->m_CustomKeyword.push_back(ke);
 		}
 	}
 }

@@ -11660,7 +11660,7 @@ void InitConvertTable(ucs2_t ucs2_table[], ucs2_t tab[])
 	{
 		ucs2_table[ *tab ] = tab[1];
 		tab+=2;
-	}while(*tab != 0);
+	}while (*tab != 0);
 
 }
 
@@ -11670,7 +11670,7 @@ void ClearConvertTable(ucs2_t ucs2_table[], ucs2_t tab[])
 	{
 		ucs2_table[ *tab ] = 0;
 		tab+=2;
-	}while(*tab != 0);
+	}while (*tab != 0);
 }
 
 void InitConvertMap(std::map<ucs4_t, ucs4_t> * conv_map, ucs4_t tab[])
@@ -11679,21 +11679,21 @@ void InitConvertMap(std::map<ucs4_t, ucs4_t> * conv_map, ucs4_t tab[])
 	{
 		(*conv_map)[ *tab ] = tab[1];
 		tab+=2;
-	}while(*tab != 0);
+	}while (*tab != 0);
 }
 
 void ClearConvertMap(std::map<ucs4_t, ucs4_t> * conv_map, ucs4_t tab[])
 {
 	do
 	{
-		conv_map->erase( *tab );
+		conv_map->erase(*tab);
 		tab+=2;
-	}while(*tab != 0);
+	}while (*tab != 0);
 }
 
 void BuildConvertTable(ucs2_t* &ucs2_table, ucs2_t tab[])
 {
-	if(ucs2_table==nullptr)
+	if (ucs2_table==nullptr)
 	{
 		ucs2_table = new ucs2_t[TWO_BYTES_MAX];
 		memset(ucs2_table, 0, sizeof(ucs2_t) * TWO_BYTES_MAX);
@@ -11704,27 +11704,27 @@ void BuildConvertTable(ucs2_t* &ucs2_table, ucs2_t tab[])
 
 void FreeConvertChineseTable()
 {
-	if(Simp2TradTable)
+	if (Simp2TradTable)
 	{
 		delete []Simp2TradTable;
 		Simp2TradTable=nullptr;
 	}
-	if(Trad2SimpTable)
+	if (Trad2SimpTable)
 	{
 		delete []Trad2SimpTable;
 		Trad2SimpTable=nullptr;
 	}
-	if(Kanji2TradTable)
+	if (Kanji2TradTable)
 	{
 		delete []Kanji2TradTable;
 		Kanji2TradTable=nullptr;
 	}
-	if(Kanji2SimpTable)
+	if (Kanji2SimpTable)
 	{
 		delete []Kanji2SimpTable;
 		Kanji2SimpTable=nullptr;
 	}
-	if(Chinese2KanjiTable)
+	if (Chinese2KanjiTable)
 	{
 		delete []Chinese2KanjiTable;
 		Chinese2KanjiTable=nullptr;
@@ -11737,18 +11737,18 @@ int ConvertChinese(const wxChar *in, wxChar *out, size_t count, MadConvertChines
 	ucs2_t *table = 0;
 	std::map<ucs4_t, ucs4_t> * convmap = 0;
 
-	switch(flag)
+	switch (flag)
 	{
 	case ccfTrad2Simp:
 		BuildConvertTable(Trad2SimpTable, Trad2Simp_Table);
 		table=Trad2SimpTable;
 		wxASSERT(table != nullptr);
 		convmap = &Trad2SimpExtMap;
-		if(convmap->empty())
+		if (convmap->empty())
 		{
 			InitConvertMap(convmap, Trad2SimpExt_Table);
 		}
-		if(g_ConvertChineseSafeMode)
+		if (g_ConvertChineseSafeMode)
 		{
 			ClearConvertTable(table, Trad2SimpUS_Table);
 			ClearConvertMap(convmap, Trad2SimpUSExt_Table);
@@ -11764,11 +11764,11 @@ int ConvertChinese(const wxChar *in, wxChar *out, size_t count, MadConvertChines
 		table=Simp2TradTable;
 		wxASSERT(table != nullptr);
 		convmap = &Simp2TradExtMap;
-		if(convmap->empty())
+		if (convmap->empty())
 		{
 			InitConvertMap(convmap, Simp2TradExt_Table);
 		}
-		if(g_ConvertChineseSafeMode)
+		if (g_ConvertChineseSafeMode)
 		{
 			ClearConvertTable(table, Simp2TradUS_Table);
 			ClearConvertMap(convmap, Simp2TradUSExt_Table);
@@ -11795,23 +11795,23 @@ int ConvertChinese(const wxChar *in, wxChar *out, size_t count, MadConvertChines
 		return 0;
 	}
 
-	for(size_t i=0; i<count; ++i, ++in, ++out)
+	for (size_t i=0; i<count; ++i, ++in, ++out)
 	{
 		ucs4_t wc = *in;
 #ifdef __WXMSW__
-		if( wc >= 0xD800 && wc <= 0xDBFF && i < (count - 1) )
+		if (wc >= 0xD800 && wc <= 0xDBFF && i < (count - 1))
 		{
 			ucs4_t wc1 = *(in + 1);
 
-			if( wc1 >= 0xDC00 && wc1 <= 0xDFFF )
+			if (wc1 >= 0xDC00 && wc1 <= 0xDFFF)
 			{
 				++in;
 				++i;
-				wc = ( ( wc - 0xD800 ) << 10 ) + ( wc1 - 0xDC00 ) + 0x10000;
+				wc = ((wc - 0xD800) << 10) + (wc1 - 0xDC00) + 0x10000;
 			}
 		}
 #endif
-		if(wc >= 0 && wc < TWO_BYTES_MAX && table[wc] != 0 && table[wc] != NEED_TRANS/*Extension*/)
+		if (wc >= 0 && wc < TWO_BYTES_MAX && table[wc] != 0 && table[wc] != NEED_TRANS/*Extension*/)
 		{
 			*out = table[ wc ];
 			++converted;
@@ -11819,9 +11819,9 @@ int ConvertChinese(const wxChar *in, wxChar *out, size_t count, MadConvertChines
 		else
 		{
 #ifdef __WXMSW__
-            if(wc < TWO_BYTES_MAX)
+            if (wc < TWO_BYTES_MAX)
         	{
-        		if(table[wc] != NEED_TRANS/*Extension*/)
+        		if (table[wc] != NEED_TRANS/*Extension*/)
     			{
 					*out = wxChar(wc);
     			}
@@ -11830,7 +11830,7 @@ int ConvertChinese(const wxChar *in, wxChar *out, size_t count, MadConvertChines
 					wxASSERT(convmap != nullptr);
 					ucs4_t outc = (*convmap)[wc];
 					wxString wstr(wxUniChar((int)outc));
-					for(size_t j = 0; j < wstr.Length(); ++j)
+					for (size_t j = 0; j < wstr.Length(); ++j)
 					{
 						*out = wstr.GetChar(j);
 						++out;
@@ -11842,16 +11842,16 @@ int ConvertChinese(const wxChar *in, wxChar *out, size_t count, MadConvertChines
         	}
 			else
 			{
-				if(convmap)
+				if (convmap)
 				{
 					std::map<ucs4_t, ucs4_t>::iterator it = convmap->find(wc);
-					if(it != convmap->end())
+					if (it != convmap->end())
 					{
 						wc = it->second;
 						++converted;
 					}
 				}
-				if(wc < TWO_BYTES_MAX)
+				if (wc < TWO_BYTES_MAX)
 				{
 					*out = wxChar(wc);
 					//if (convmap) //Don't need this because (wc < TWO_BYTES_MAX) if only wc = it->second was excuted
@@ -11860,7 +11860,7 @@ int ConvertChinese(const wxChar *in, wxChar *out, size_t count, MadConvertChines
 				else
 				{
 					wxString wstr(wxUniChar((int)wc));
-					for(size_t j = 0; j < wstr.Length(); ++j)
+					for (size_t j = 0; j < wstr.Length(); ++j)
 					{
 						*out = wstr.GetChar(j);
 						++out;
@@ -11869,7 +11869,7 @@ int ConvertChinese(const wxChar *in, wxChar *out, size_t count, MadConvertChines
 				}
 			}
 #else
-			if((table[wc] == NEED_TRANS/*Extension*/ || wc >= TWO_BYTES_MAX) && convmap != nullptr) // Try again
+			if ((table[wc] == NEED_TRANS/*Extension*/ || wc >= TWO_BYTES_MAX) && convmap != nullptr) // Try again
 			{
 				std::map<ucs4_t, ucs4_t>::iterator it = convmap->find(wc);
 				if (it != convmap->end())
@@ -11888,15 +11888,15 @@ int ConvertChinese(const wxChar *in, wxChar *out, size_t count, MadConvertChines
 
 void ConvertChineseInClipboard(MadConvertChineseFlag flag)
 {
-	if(wxTheClipboard->Open())
+	if (wxTheClipboard->Open())
 	{
-		if(wxTheClipboard->IsSupported(wxDF_TEXT) || wxTheClipboard->IsSupported(wxDF_UNICODETEXT))
+		if (wxTheClipboard->IsSupported(wxDF_TEXT) || wxTheClipboard->IsSupported(wxDF_UNICODETEXT))
 		{
 			wxTextDataObject data;
-			wxTheClipboard->GetData( data );
+			wxTheClipboard->GetData(data);
 			wxString text=data.GetText();
 
-			if(text.Len()>0)
+			if (text.Len()>0)
 			{
 				size_t rcount = text.Len();
 #ifdef __WXMSW__
@@ -11905,10 +11905,10 @@ void ConvertChineseInClipboard(MadConvertChineseFlag flag)
 				wxChar *str = new wxChar[rcount];
 #endif
 				int count=ConvertChinese(text.c_str(), str, text.Len(), flag, rcount);
-				if(count>0)
+				if (count>0)
 				{
 					wxString ws(str, rcount);
-					wxTheClipboard->SetData( new wxTextDataObject(ws) );
+					wxTheClipboard->SetData(new wxTextDataObject(ws));
 					wxTheClipboard->Flush();
 				}
 				delete []str;

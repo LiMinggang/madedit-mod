@@ -17,13 +17,13 @@
 
 MadUndo::~MadUndo()
 {
-	if(m_Undos.size())
+	if (m_Undos.size())
 	{
 		MadUndoDataIterator	it = m_Undos.begin();
 		do
 		{
 			MadUndoData	*pud = *it;
-			switch(pud->m_Type)
+			switch (pud->m_Type)
 			{
 			case udtInsert:
 				{
@@ -52,7 +52,7 @@ MadUndo::~MadUndo()
 				break;
 			}
 		}
-		while(++it != m_Undos.end());
+		while (++it != m_Undos.end());
 
 		//m_Undos.clear();
 	}
@@ -77,7 +77,7 @@ void MadUndoBuffer::Clear()
 
 void MadUndoBuffer::ClearTillEnd()
 {
-	if(m_CurrentUndo != m_UndoList.end())
+	if (m_CurrentUndo != m_UndoList.end())
 	{
 		m_CurrentUndo = m_UndoList.erase(m_CurrentUndo,	m_UndoList.end());
 	}
@@ -96,7 +96,7 @@ MadUndo	*MadUndoBuffer::Add()
 void MadUndoBuffer::Add(wxFileOffset caretPosBefore, wxFileOffset caretPosAfter)
 {
 #if	0
-	if(m_UndoList.size() &&	m_CurrentUndo!=m_UndoList.end())
+	if (m_UndoList.size() &&	m_CurrentUndo!=m_UndoList.end())
 	{
 		//caretPosBefore=caretPosAfter;???
 	}
@@ -107,16 +107,16 @@ void MadUndoBuffer::Add(wxFileOffset caretPosBefore, wxFileOffset caretPosAfter)
 
 MadUndo	*MadUndoBuffer::GetPrevUndo()
 {
-	if(m_CurrentUndo==m_UndoList.begin())
+	if (m_CurrentUndo==m_UndoList.begin())
 		return nullptr;
 
 	MadUndoIterator	it = m_CurrentUndo;
 	--it; // to	previous
 
-	while(it!=m_UndoList.begin() &&	it->m_Undos.size()==0)
+	while (it!=m_UndoList.begin() &&	it->m_Undos.size()==0)
 		--it;
 
-	if(it==m_UndoList.begin() && it->m_Undos.size()==0)
+	if (it==m_UndoList.begin() && it->m_Undos.size()==0)
 		return nullptr;
 
 	return &(*it);
@@ -124,17 +124,17 @@ MadUndo	*MadUndoBuffer::GetPrevUndo()
 
 MadUndo	*MadUndoBuffer::Undo(bool noCaretMovement)
 {
-	if(m_CurrentUndo == m_UndoList.begin())
+	if (m_CurrentUndo == m_UndoList.begin())
 		return nullptr;
 
-	if(noCaretMovement)
+	if (noCaretMovement)
 	{
 		--m_CurrentUndo;
 
-		while(m_CurrentUndo	!= m_UndoList.begin() && m_CurrentUndo->m_Undos.size()==0)
+		while (m_CurrentUndo	!= m_UndoList.begin() && m_CurrentUndo->m_Undos.size()==0)
 			--m_CurrentUndo;
 
-		if(m_CurrentUndo==m_UndoList.begin() &&	m_CurrentUndo->m_Undos.size()==0)
+		if (m_CurrentUndo==m_UndoList.begin() &&	m_CurrentUndo->m_Undos.size()==0)
 			return nullptr;
 
 		return &(*m_CurrentUndo);
@@ -145,15 +145,15 @@ MadUndo	*MadUndoBuffer::Undo(bool noCaretMovement)
 
 MadUndo	*MadUndoBuffer::Redo(bool noCaretMovement)
 {
-	if(m_CurrentUndo == m_UndoList.end())
+	if (m_CurrentUndo == m_UndoList.end())
 		return nullptr;
 
-	if(noCaretMovement)
+	if (noCaretMovement)
 	{
-		while(m_CurrentUndo	!= m_UndoList.end()	&& m_CurrentUndo->m_Undos.size()==0)
+		while (m_CurrentUndo	!= m_UndoList.end()	&& m_CurrentUndo->m_Undos.size()==0)
 			++m_CurrentUndo;
 
-		if(m_CurrentUndo==m_UndoList.end())
+		if (m_CurrentUndo==m_UndoList.end())
 			return nullptr;
 	}
 
@@ -162,18 +162,18 @@ MadUndo	*MadUndoBuffer::Redo(bool noCaretMovement)
 
 bool MadUndoBuffer::CanUndo(bool noCaretMovement)
 {
-	if(m_CurrentUndo == m_UndoList.begin())
+	if (m_CurrentUndo == m_UndoList.begin())
 		return false;
 
-	if(noCaretMovement)
+	if (noCaretMovement)
 	{
 		MadUndoIterator	it=m_CurrentUndo;
 		--it;
 
-		while(it!=m_UndoList.begin() &&	it->m_Undos.size()==0)
+		while (it!=m_UndoList.begin() &&	it->m_Undos.size()==0)
 			--it;
 
-		if(it==m_UndoList.begin() && it->m_Undos.size()==0)
+		if (it==m_UndoList.begin() && it->m_Undos.size()==0)
 			return false;
 	}
 
@@ -182,17 +182,17 @@ bool MadUndoBuffer::CanUndo(bool noCaretMovement)
 
 bool MadUndoBuffer::CanRedo(bool noCaretMovement)
 {
-	if(m_CurrentUndo == m_UndoList.end())
+	if (m_CurrentUndo == m_UndoList.end())
 		return false;
 
-	if(noCaretMovement)
+	if (noCaretMovement)
 	{
 		MadUndoIterator	it=m_CurrentUndo;
 
-		while(it != m_UndoList.end() &&	it->m_Undos.size()==0)
+		while (it != m_UndoList.end() &&	it->m_Undos.size()==0)
 			++it;
 
-		if(it==m_UndoList.end())
+		if (it==m_UndoList.end())
 			return false;
 	}
 

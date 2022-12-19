@@ -10,8 +10,8 @@
 #include "MadOptionsDialog.h"
 
 #ifdef _MSC_VER
-# pragma warning( push )
-# pragma warning( disable : 4996 )
+# pragma warning(push)
+# pragma warning(disable : 4996)
 #endif
 // disable 4996 {
 //(*InternalHeaders(MadOptionsDialog)
@@ -21,7 +21,7 @@
 //*)
 // disable 4996 }
 #ifdef _MSC_VER
-# pragma warning( pop )
+# pragma warning(pop)
 #endif
 
 #include <wx/aui/auibook.h>
@@ -71,9 +71,9 @@ public:
 			   const wxString& name = wxTextCtrlNameStr)
 			   :wxTextCtrl(parent, id, value, pos, size, style, validator, name), m_OptDlg(nullptr)
 	{
-		Bind( wxEVT_KEY_DOWN, &KeyTextCtrl::OnKeyDown, this );
-		Bind( wxEVT_SET_FOCUS, &KeyTextCtrl::OnSetFocus, this );
-		Bind( wxEVT_KILL_FOCUS, &KeyTextCtrl::OnKillFocus, this );
+		Bind(wxEVT_KEY_DOWN, &KeyTextCtrl::OnKeyDown, this);
+		Bind(wxEVT_SET_FOCUS, &KeyTextCtrl::OnSetFocus, this);
+		Bind(wxEVT_KILL_FOCUS, &KeyTextCtrl::OnKillFocus, this);
 	}
 
 	void BindDialog(MadOptionsDialog * optDlg)
@@ -86,27 +86,27 @@ public:
 		int flags=wxACCEL_NORMAL;
 		int key=evt.GetKeyCode();
 
-		if(evt.ControlDown()) flags|=wxACCEL_CTRL;
-		if(evt.AltDown())     flags|=wxACCEL_ALT;
-		if(evt.ShiftDown())   flags|=wxACCEL_SHIFT;
+		if (evt.ControlDown()) flags|=wxACCEL_CTRL;
+		if (evt.AltDown())     flags|=wxACCEL_ALT;
+		if (evt.ShiftDown())   flags|=wxACCEL_SHIFT;
 
 		MadEditShortCut sc=ShortCut(flags, key);
 		static MadEditShortCut prevsc=0;
 
-		if(sc==prevsc) return;
+		if (sc==prevsc) return;
 		prevsc=sc;
 
 		wxString scstr=ShortCutToString(sc);
 		SetValue(scstr);
 
-		if(m_OptDlg)
+		if (m_OptDlg)
 			m_OptDlg->UpdateKeyHint();
 		//evt.Skip();
 	}
 	
 	void OnSetFocus(wxFocusEvent &evt)
 	{   // for getting Ctrl-Tab
-		if(m_OptDlg)
+		if (m_OptDlg)
 		{
 			m_OptDlg->SetWindowStyleFlag(m_OptDlg->GetWindowStyleFlag() & ~wxTAB_TRAVERSAL);
 			m_OptDlg->AuiNotebook1->wxControl::SetWindowStyleFlag(m_OptDlg->AuiNotebook1->wxControl::GetWindowStyleFlag() & ~wxTAB_TRAVERSAL);
@@ -118,7 +118,7 @@ public:
 	
 	void OnKillFocus(wxFocusEvent &evt)
 	{   // restore wxTAB_TRAVERSAL
-		if(m_OptDlg)
+		if (m_OptDlg)
 		{
 			m_OptDlg->SetWindowStyleFlag(m_OptDlg->GetWindowStyleFlag() | wxTAB_TRAVERSAL);
 			m_OptDlg->AuiNotebook1->wxControl::SetWindowStyleFlag(m_OptDlg->AuiNotebook1->wxControl::GetWindowStyleFlag() | wxTAB_TRAVERSAL);
@@ -135,9 +135,9 @@ wxString FilterChar(const wxChar *ws)
 	wxString str;
 	wxChar wc;
 
-	while((wc=*ws) != wxT('\0'))
+	while ((wc=*ws) != wxT('\0'))
 	{
-		if(wc!=wxT('&') && wc!=wxT('.'))
+		if (wc!=wxT('&') && wc!=wxT('.'))
 		{
 			str << wc;
 		}
@@ -152,7 +152,7 @@ wxString FilterChar(const wxChar *ws)
 
 typedef struct {
 	wxWindow * pWin;
-	void (MadOptionsDialog::*method)( wxCommandEvent &);
+	void (MadOptionsDialog::*method)(wxCommandEvent &);
 } MadEvtMap;
 
 #define ADD2EVENTMAP(con, pwin, method) \
@@ -265,21 +265,21 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	BoxSizer3 = new wxBoxSizer(wxVERTICAL);
 	BoxSizer27 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer27->Add(3,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
-	wxASSERT( g_LanguageString.empty() != true );
-	ComboBoxLanguage = new wxComboBox( Panel1, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(160,-1), 0, nullptr,  wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, wxT( "wxID_ANY" ) );
+	wxASSERT(g_LanguageString.empty() != true);
+	ComboBoxLanguage = new wxComboBox(Panel1, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(160,-1), 0, nullptr,  wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, wxT("wxID_ANY"));
 #if wxMAJOR_VERSION < 3 || (wxMAJOR_VERSION == 3 && wxMINOR_VERSION < 1)
 	wxArrayString items;
 	items.Alloc(g_LanguageString.size());
 	std::vector<wxString>::iterator itt = g_LanguageString.begin(); std::vector<wxString>::iterator itend = g_LanguageString.end();
-	for(; itt != itend; ++itt)
+	for (; itt != itend; ++itt)
 	{
 		items.Add(*itt);
 	}
-	ComboBoxLanguage->Append( items );
+	ComboBoxLanguage->Append(items);
 #else
 	ComboBoxLanguage->Append(g_LanguageString);
 #endif
-	ComboBoxLanguage->SetValue( g_LanguageString[0] );
+	ComboBoxLanguage->SetValue(g_LanguageString[0]);
 	BoxSizer27->Add(ComboBoxLanguage, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	StaticText17 = new wxStaticText(Panel1, wxID_ANY, _("Language of User Interface (must restart MadEdit)"), wxDefaultPosition, wxDefaultSize, 0, _T("wxID_ANY"));
 	BoxSizer27->Add(StaticText17, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
@@ -332,7 +332,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	BoxSizer41 = new wxBoxSizer(wxHORIZONTAL);
 	BoxSizer41->Add(3,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 0);
 	ComboBoxViewModeInOpen = new wxComboBox(Panel1, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(160,-1), 0, 0, wxCB_READONLY|wxCB_DROPDOWN, wxDefaultValidator, _T("wxID_ANY"));
-	ComboBoxViewModeInOpen->SetSelection( ComboBoxViewModeInOpen->Append(_("Auto")) ); /*{ emTextMode, emColumnMode, emHexMode }*/
+	ComboBoxViewModeInOpen->SetSelection(ComboBoxViewModeInOpen->Append(_("Auto"))); /*{ emTextMode, emColumnMode, emHexMode }*/
 	ComboBoxViewModeInOpen->Append(_("Text"));
 	ComboBoxViewModeInOpen->Append(_("Column"));
 	ComboBoxViewModeInOpen->Append(_("Hex"));
@@ -782,9 +782,9 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	Connect(wxID_CANCEL,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&MadOptionsDialog::ButtonCancelClick);
 #endif
 	//*)
-	for(size_t i = 0; i < ButtonEvtMapVec.size(); ++i)
+	for (size_t i = 0; i < ButtonEvtMapVec.size(); ++i)
 	{
-		Bind( wxEVT_BUTTON, ButtonEvtMapVec[i].method, this, ButtonEvtMapVec[i].pWin->GetId() );
+		Bind(wxEVT_BUTTON, ButtonEvtMapVec[i].method, this, ButtonEvtMapVec[i].pWin->GetId());
 	}
 
 	for (size_t i = 0; i < CheckboxEvtMapVec.size(); ++i)
@@ -797,13 +797,13 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 		Bind(wxEVT_COMMAND_RADIOBUTTON_SELECTED, RadioButtonEvtMapVec[i].method, this, RadioButtonEvtMapVec[i].pWin->GetId());
 	}
 
-	Bind( wxEVT_CLOSE_WINDOW, &MadOptionsDialog::MadOptionsDialogClose , this );
-	Bind( wxEVT_ACTIVATE, &MadOptionsDialog::MadOptionsDialogActivate , this );
+	Bind(wxEVT_CLOSE_WINDOW, &MadOptionsDialog::MadOptionsDialogClose , this);
+	Bind(wxEVT_ACTIVATE, &MadOptionsDialog::MadOptionsDialogActivate , this);
 
-	Bind( wxEVT_TEXT_ENTER, &MadOptionsDialog::EditDictionaryDirTextEnter, this, EditDictionaryDir->GetId() );
-	Bind( wxEVT_COMBOBOX, &MadOptionsDialog::ComboDictionarySelected, this, ComboDictionary->GetId() );
-	Bind( wxEVT_LISTBOX, &MadOptionsDialog::ListBoxKeysSelected , this, ListBoxKeys->GetId() );
-	Bind( wxEVT_TREE_SEL_CHANGED, &MadOptionsDialog::TreeCtrl1SelChanged , this, TreeCtrl1->GetId() );
+	Bind(wxEVT_TEXT_ENTER, &MadOptionsDialog::EditDictionaryDirTextEnter, this, EditDictionaryDir->GetId());
+	Bind(wxEVT_COMBOBOX, &MadOptionsDialog::ComboDictionarySelected, this, ComboDictionary->GetId());
+	Bind(wxEVT_LISTBOX, &MadOptionsDialog::ListBoxKeysSelected , this, ListBoxKeys->GetId());
+	Bind(wxEVT_TREE_SEL_CHANGED, &MadOptionsDialog::TreeCtrl1SelChanged , this, TreeCtrl1->GetId());
 
 	const wxChar * printMenus[] = 
 	{
@@ -817,12 +817,12 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 		_("[%t] &Time"),
 	};
 
-	for( size_t i = 0; i < (sizeof(printMenus)/sizeof(const wxChar *)); ++i)
+	for (size_t i = 0; i < (sizeof(printMenus)/sizeof(const wxChar *)); ++i)
 	{
-		if(printMenus[i] != nullptr)
+		if (printMenus[i] != nullptr)
 		{
-			wxMenuItem * menuItem = PopupMenuPrintMark.Append( wxID_ANY, printMenus[i], _T(""), wxITEM_NORMAL);
-			Bind( wxEVT_MENU, &MadOptionsDialog::PrintMarkClick, this, menuItem->GetId() );
+			wxMenuItem * menuItem = PopupMenuPrintMark.Append(wxID_ANY, printMenus[i], _T(""), wxITEM_NORMAL);
+			Bind(wxEVT_MENU, &MadOptionsDialog::PrintMarkClick, this, menuItem->GetId());
 		}
 		else
 		{
@@ -860,12 +860,12 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 		_("[%Z] Time-zone abbreviation"),
 	};
 
-	for( size_t i = 0; i < (sizeof(datetimeMenus)/sizeof(const wxChar *)); ++i)
+	for (size_t i = 0; i < (sizeof(datetimeMenus)/sizeof(const wxChar *)); ++i)
 	{
-		if(datetimeMenus[i] != nullptr)
+		if (datetimeMenus[i] != nullptr)
 		{
-			wxMenuItem * menuItem = PopupMenuDateTimeMark.Append( wxID_ANY, datetimeMenus[i], _T(""), wxITEM_NORMAL);
-			Bind( wxEVT_MENU, &MadOptionsDialog::DateTimeMarkClick, this, menuItem->GetId() );
+			wxMenuItem * menuItem = PopupMenuDateTimeMark.Append(wxID_ANY, datetimeMenus[i], _T(""), wxITEM_NORMAL);
+			Bind(wxEVT_MENU, &MadOptionsDialog::DateTimeMarkClick, this, menuItem->GetId());
 		}
 		else
 		{
@@ -886,35 +886,35 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 
 	ComboBoxEncoding->SetValue(systemenc);
 
-	/*for(i=0; i<g_LanguageString.GetCount(); ++i)
+	/*for (i=0; i<g_LanguageString.GetCount(); ++i)
 	{
 	ComboBoxLanguage->Append(g_LanguageString[i]);
 	}
 	ComboBoxLanguage->SetValue(g_LanguageString[0]);*/
 
 	cnt=MadSyntax::GetSyntaxCount();
-	for(i = 0; i < cnt; ++i)
+	for (i = 0; i < cnt; ++i)
 	{
 		ComboBoxNewDocSyntax->Append(wxGetTranslation(MadSyntax::GetSyntaxTitle(i)));
 	}
 
 	int index = ComboBoxNewDocSyntax->FindString(_("Plain Text"));
-	if(index != wxNOT_FOUND)
+	if (index != wxNOT_FOUND)
 		ComboBoxNewDocSyntax->SetSelection(index);
 	m_NewDocEncoding = _("System Default");
 	m_NewDocLineEnding = nltDefault;
 
 #ifdef __WXMSW__
-	wxString fontname( wxT( "Courier New" ) );
+	wxString fontname(wxT("Courier New"));
 #elif defined(__APPLE__) && defined(__MACH__)
-	wxString fontname( wxT( "Monaco" ) );
+	wxString fontname(wxT("Monaco"));
 #else
-	wxString fontname( wxT( "Monospace" ) );
+	wxString fontname(wxT("Monospace"));
 #endif
 	index = ComboBoxDefaultFont->FindString(fontname);
-	if(index != wxNOT_FOUND) ComboBoxDefaultFont->SetSelection(index);
+	if (index != wxNOT_FOUND) ComboBoxDefaultFont->SetSelection(index);
 	index = ComboBoxNewDocFont->FindString(fontname);
-	if(index != wxNOT_FOUND) ComboBoxNewDocFont->SetSelection(index);
+	if (index != wxNOT_FOUND) ComboBoxNewDocFont->SetSelection(index);
 
 	wxSize sz1 = BoxSizer3->CalcMin();
 	wxSize sz2 = BoxSizer8->CalcMin();
@@ -947,7 +947,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 	// Menu command
 	do
 	{
-		if(cd->menu_level==0)
+		if (cd->menu_level==0)
 		{
 			tid=TreeCtrl1->AppendItem(menuRoot, FilterChar(wxGetTranslation(cd->text)));
 			tree_stack.clear();
@@ -955,21 +955,21 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 			++cd;
 			continue;
 		}
-		else if(cd->menu_level < int(tree_stack.size()))
+		else if (cd->menu_level < int(tree_stack.size()))
 		{
 			do
 			{
 				tree_stack.pop_back();
 			}
-			while(cd->menu_level < int(tree_stack.size()));
+			while (cd->menu_level < int(tree_stack.size()));
 		}
 
-		if(cd->menu_ptr != 0)
+		if (cd->menu_ptr != 0)
 		{
 			tid=TreeCtrl1->AppendItem(tree_stack.back(), FilterChar(wxGetTranslation(cd->text)));
 			tree_stack.push_back(tid);
 		}
-		else if(cd->kind != wxITEM_SEPARATOR)
+		else if (cd->kind != wxITEM_SEPARATOR)
 		{
 			TreeItemData *data=new TreeItemData;
 			data->cmddata=cd;
@@ -981,7 +981,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 
 		++cd;
 	}
-	while(cd->menu_level>=0);
+	while (cd->menu_level>=0);
 
 	// Editor command
 	do
@@ -994,7 +994,7 @@ MadOptionsDialog::MadOptionsDialog(wxWindow* parent,wxWindowID WXUNUSED(id))
 		TreeCtrl1->SetItemBold(tid, true);
 		cd++;
 	}
-	while(cd->command > 0);
+	while (cd->command > 0);
 
 	TreeCtrl1->Expand(menuRoot);
 	TreeCtrl1->Expand(editorRoot);
@@ -1011,7 +1011,7 @@ MadOptionsDialog::~MadOptionsDialog()
 
 void MadOptionsDialog::MadOptionsDialogClose(wxCloseEvent& event)
 {
-	if(event.CanVeto() && (dynamic_cast< wxFrame * >(wxTheApp->GetTopWindow()) != nullptr))
+	if (event.CanVeto() && (dynamic_cast< wxFrame * >(wxTheApp->GetTopWindow()) != nullptr))
 	{
 		event.Veto();
 		Show(false);
@@ -1024,15 +1024,15 @@ void MadOptionsDialog::MadOptionsDialogClose(wxCloseEvent& event)
 
 void MadOptionsDialog::MadOptionsDialogActivate(wxActivateEvent& event)
 {
-	if(event.GetActive())
+	if (event.GetActive())
 	{
-		if(FindFocus()==nullptr)
+		if (FindFocus()==nullptr)
 		{
 			SetReturnCode(wxID_CANCEL);
 			ButtonCancel->SetFocus();
 		}
 
-		if(ComboDictionary->GetCount())
+		if (ComboDictionary->GetCount())
 		{
 			ComboDictionary->Enable(true);
 		}
@@ -1047,70 +1047,70 @@ void MadOptionsDialog::MadOptionsDialogActivate(wxActivateEvent& event)
 
 void MadOptionsDialog::LoadOptions(void)
 {
-	wxConfigBase *cfg = wxConfigBase::Get( false );
+	wxConfigBase *cfg = wxConfigBase::Get(false);
 	wxString oldpath = cfg->GetPath();
-	cfg->SetPath( wxT( "/MadEdit" ) );
+	cfg->SetPath(wxT("/MadEdit"));
 	long ll;
 	bool bb;
 	wxString ss;
 #ifdef __WXMSW__
-	wxString fontname( wxT( "Courier New" ) );
+	wxString fontname(wxT("Courier New"));
 #elif defined(__APPLE__) && defined(__MACH__)
-	wxString fontname( wxT( "Monaco" ) );
+	wxString fontname(wxT("Monaco"));
 #else
-	wxString fontname( wxT( "Monospace" ) );
+	wxString fontname(wxT("Monospace"));
 #endif
 	// General page
 	ss = g_LanguageString[0];
-	cfg->Read( wxT( "/Application/Language" ), &ss );
-	ComboBoxLanguage->SetValue( ss );
-	cfg->Read( wxT( "/Application/SingleInstance" ), &bb, false );
-	CheckBoxSingleInstance->SetValue( bb );
-	cfg->Read( wxT( "RecordCaretMovements" ), &bb, true );
-	CheckBoxRecordCaretMovements->SetValue( bb );
-	cfg->Read( wxT( "MaxSizeToLoad" ), &ll );
-	EditMaxSizeToLoad->SetValue( wxString() << ll );
-	cfg->Read( wxT( "MaxTextFileSize" ), &ll );
-	EditMaxTextFileSize->SetValue( wxString() << ll );
-	cfg->Read( wxT( "ViewModeInOpen" ), &ll, 0 );
-	if(ll < 0 || ll > 3) /*{ emTextMode, emColumnMode, emHexMode }*/
+	cfg->Read(wxT("/Application/Language"), &ss);
+	ComboBoxLanguage->SetValue(ss);
+	cfg->Read(wxT("/Application/SingleInstance"), &bb, false);
+	CheckBoxSingleInstance->SetValue(bb);
+	cfg->Read(wxT("RecordCaretMovements"), &bb, true);
+	CheckBoxRecordCaretMovements->SetValue(bb);
+	cfg->Read(wxT("MaxSizeToLoad"), &ll);
+	EditMaxSizeToLoad->SetValue(wxString() << ll);
+	cfg->Read(wxT("MaxTextFileSize"), &ll);
+	EditMaxTextFileSize->SetValue(wxString() << ll);
+	cfg->Read(wxT("ViewModeInOpen"), &ll, 0);
+	if (ll < 0 || ll > 3) /*{ emTextMode, emColumnMode, emHexMode }*/
 		ll = 0; //Auto
-	ComboBoxViewModeInOpen->SetSelection( ll );
-	cfg->Read( wxT( "/UIView/MaxDisplaySize" ), &ll );
-	EditMaxDisplaySize->SetValue( wxString() << ll );
-	ss = _( "System Default" );
-	cfg->Read( wxT( "DefaultEncoding" ), &ss );
-	ComboBoxEncoding->SetValue( ss );
-	cfg->Read( wxT( "EnforceDefaultEncoding" ), &bb, false );
-	CheckBoxSkipAutoEncoding->SetValue( bb );
+	ComboBoxViewModeInOpen->SetSelection(ll);
+	cfg->Read(wxT("/UIView/MaxDisplaySize"), &ll);
+	EditMaxDisplaySize->SetValue(wxString() << ll);
+	ss = _("System Default");
+	cfg->Read(wxT("DefaultEncoding"), &ss);
+	ComboBoxEncoding->SetValue(ss);
+	cfg->Read(wxT("EnforceDefaultEncoding"), &bb, false);
+	CheckBoxSkipAutoEncoding->SetValue(bb);
 
-	cfg->Read( wxT( "DefaultTextFont" ), &fontname );
+	cfg->Read(wxT("DefaultTextFont"), &fontname);
 	int index = ComboBoxDefaultFont->FindString(fontname);
-	if(index != wxNOT_FOUND) ComboBoxDefaultFont->SetSelection(index);
-	cfg->Read( wxT( "DefaultTextFontSize" ), &ll, DEFAULT_FONT_SIZE );
-	if(ll < 0) ll = DEFAULT_FONT_SIZE;
-	if(ll > MAX_FONT_SIZE) ll = MAX_FONT_SIZE;
-	EditDefaultFontSize->SetValue( wxString() << ll );
+	if (index != wxNOT_FOUND) ComboBoxDefaultFont->SetSelection(index);
+	cfg->Read(wxT("DefaultTextFontSize"), &ll, DEFAULT_FONT_SIZE);
+	if (ll < 0) ll = DEFAULT_FONT_SIZE;
+	if (ll > MAX_FONT_SIZE) ll = MAX_FONT_SIZE;
+	EditDefaultFontSize->SetValue(wxString() << ll);
 
-	cfg->Read( wxT( "/Application/AutoSaveTimeout" ), &ll, 0 );
+	cfg->Read(wxT("/Application/AutoSaveTimeout"), &ll, 0);
 	bb = ((ll >= 10) && (ll <= 30));
-	CheckBoxEnableAutoSave->SetValue( bb );
-	if(!bb) ll = 10;
+	CheckBoxEnableAutoSave->SetValue(bb);
+	if (!bb) ll = 10;
 	EditAutoSaveTimeout->Enable(bb);
-	EditAutoSaveTimeout->SetValue( wxString() << ll );
-	cfg->Read( wxT( "/Application/AutoBackup" ), &bb, false );
-	CheckBoxEnableAutoBackup->SetValue( bb );
+	EditAutoSaveTimeout->SetValue(wxString() << ll);
+	cfg->Read(wxT("/Application/AutoBackup"), &bb, false);
+	CheckBoxEnableAutoBackup->SetValue(bb);
 #ifdef __WXMSW__
-	wxRegKey *pRegKey = new wxRegKey( g_MadEditRegkeyPath + wxT( "*\\shell\\MadEdit-Mod\\command" ) );
+	wxRegKey *pRegKey = new wxRegKey(g_MadEditRegkeyPath + wxT("*\\shell\\MadEdit-Mod\\command"));
 
-	if( pRegKey->Exists() )
+	if (pRegKey->Exists())
 	{
 		wxString str;
 
-		if( pRegKey->QueryValue( wxEmptyString, str ) )
+		if (pRegKey->QueryValue(wxEmptyString, str))
 		{
 			wxString exepath = GetExecutablePath();
-			CheckBoxRightClickMenu->SetValue( str.Upper().Find( exepath.Upper() ) >= 0 );
+			CheckBoxRightClickMenu->SetValue(str.Upper().Find(exepath.Upper()) >= 0);
 		}
 	}
 
@@ -1118,58 +1118,58 @@ void MadOptionsDialog::LoadOptions(void)
 #endif
 
 	// Edit page
-	cfg->Read( wxT( "MaxLineLength" ), &ll );
-	EditMaxLineLength->SetValue( wxString() << ll );
-	cfg->Read( wxT( "MaxColumns" ), &ll );
-	EditMaxColumns->SetValue( wxString() << ll );
-	cfg->Read( wxT( "TabColumns" ), &ll );
-	EditTabColumns->SetValue( wxString() << ll );
-	cfg->Read( wxT( "IndentColumns" ), &ll );
-	EditIndentColumns->SetValue( wxString() << ll );
-	cfg->Read( wxT( "HintColumns" ), &ll, 80 );
-	EditHintColumns->SetValue( wxString() << ll );
-	cfg->Read( wxT( "DateTimeFormat" ), &ss, wxT( "%c" ) );
-	EditDateTime->SetValue( ss );
-	cfg->Read( wxT( "DateTimeInEnglish" ), &bb, false );
-	CheckBoxDateTimeInEnglish->SetValue( bb );
-	cfg->Read( wxT( "InsertSpacesInsteadOfTab" ), &bb, false );
-	CheckBoxTabOrSpaces->SetValue( bb );
-	cfg->Read( wxT( "AutoIndent" ), &bb, false );
-	CheckBoxAutoIndent->SetValue( bb );
-	cfg->Read( wxT( "AutoCompletePair" ), &bb, false );
-	CheckBoxAutoCompletePair->SetValue( bb );
+	cfg->Read(wxT("MaxLineLength"), &ll);
+	EditMaxLineLength->SetValue(wxString() << ll);
+	cfg->Read(wxT("MaxColumns"), &ll);
+	EditMaxColumns->SetValue(wxString() << ll);
+	cfg->Read(wxT("TabColumns"), &ll);
+	EditTabColumns->SetValue(wxString() << ll);
+	cfg->Read(wxT("IndentColumns"), &ll);
+	EditIndentColumns->SetValue(wxString() << ll);
+	cfg->Read(wxT("HintColumns"), &ll, 80);
+	EditHintColumns->SetValue(wxString() << ll);
+	cfg->Read(wxT("DateTimeFormat"), &ss, wxT("%c"));
+	EditDateTime->SetValue(ss);
+	cfg->Read(wxT("DateTimeInEnglish"), &bb, false);
+	CheckBoxDateTimeInEnglish->SetValue(bb);
+	cfg->Read(wxT("InsertSpacesInsteadOfTab"), &bb, false);
+	CheckBoxTabOrSpaces->SetValue(bb);
+	cfg->Read(wxT("AutoIndent"), &bb, false);
+	CheckBoxAutoIndent->SetValue(bb);
+	cfg->Read(wxT("AutoCompletePair"), &bb, false);
+	CheckBoxAutoCompletePair->SetValue(bb);
 	CheckBoxInsertPairForSelection->Enable(bb);
-	cfg->Read( wxT( "InsertPairForSelction" ), &bb, true );
-	CheckBoxInsertPairForSelection->SetValue( bb );
-	cfg->Read( wxT( "MouseSelectToCopy" ), &bb, false );
-	CheckBoxMouseSelectToCopy->SetValue( bb );
-	CheckBoxCtrlWithMouseToSelect->Enable( bb );
-	cfg->Read( wxT( "MouseSelectToCopyWithCtrlKey" ), &bb, true );
-	CheckBoxCtrlWithMouseToSelect->SetValue( bb );
-	cfg->Read( wxT( "MiddleMouseToPaste" ), &bb, false );
-	CheckBoxMiddleMouseToPaste->SetValue( bb );
-	cfg->Read( wxT( "AutoFillColumnPaste" ), &bb, true );
-	CheckBoxAutoFillColumnPaste->SetValue( bb );
-	cfg->Read( wxT( "LDoubleClickHighlight" ), &bb, true );
-	CheckBoxLDClickHighlight->SetValue( bb );
-	cfg->Read( wxT( "TypewriterMode" ), &bb, false );
-	CheckBoxTypewriterMode->SetValue( bb );
-	cfg->Read( wxT( "FixedWidthMode" ), &bb, false );
-	CheckBoxFixWidthMode->SetValue( bb );
-	cfg->Read( wxT( "IgnoreUndoWarn" ), &bb, false );
-	CheckBoxIgnoreUndoWrnMsg->SetValue( bb );
+	cfg->Read(wxT("InsertPairForSelction"), &bb, true);
+	CheckBoxInsertPairForSelection->SetValue(bb);
+	cfg->Read(wxT("MouseSelectToCopy"), &bb, false);
+	CheckBoxMouseSelectToCopy->SetValue(bb);
+	CheckBoxCtrlWithMouseToSelect->Enable(bb);
+	cfg->Read(wxT("MouseSelectToCopyWithCtrlKey"), &bb, true);
+	CheckBoxCtrlWithMouseToSelect->SetValue(bb);
+	cfg->Read(wxT("MiddleMouseToPaste"), &bb, false);
+	CheckBoxMiddleMouseToPaste->SetValue(bb);
+	cfg->Read(wxT("AutoFillColumnPaste"), &bb, true);
+	CheckBoxAutoFillColumnPaste->SetValue(bb);
+	cfg->Read(wxT("LDoubleClickHighlight"), &bb, true);
+	CheckBoxLDClickHighlight->SetValue(bb);
+	cfg->Read(wxT("TypewriterMode"), &bb, false);
+	CheckBoxTypewriterMode->SetValue(bb);
+	cfg->Read(wxT("FixedWidthMode"), &bb, false);
+	CheckBoxFixWidthMode->SetValue(bb);
+	cfg->Read(wxT("IgnoreUndoWarn"), &bb, false);
+	CheckBoxIgnoreUndoWrnMsg->SetValue(bb);
 	extern bool g_DoNotSaveSettings;
-	CheckBoxDoNotSaveSettings->SetValue( g_DoNotSaveSettings );
-	cfg->Read( wxT( "/Application/ReloadFiles" ), &bb, true );
-	CheckBoxReloadFiles->SetValue( bb );
-	cfg->Read( wxT( "/Application/PurgeHistory" ), &bb, false );
-	CheckBoxPurgeHistory->SetValue( bb );
-	cfg->Read( wxT( "RestoreCaretPos" ), &bb, true );
-	CheckBoxRestoreCaretPos->SetValue( bb );
+	CheckBoxDoNotSaveSettings->SetValue(g_DoNotSaveSettings);
+	cfg->Read(wxT("/Application/ReloadFiles"), &bb, true);
+	CheckBoxReloadFiles->SetValue(bb);
+	cfg->Read(wxT("/Application/PurgeHistory"), &bb, false);
+	CheckBoxPurgeHistory->SetValue(bb);
+	cfg->Read(wxT("RestoreCaretPos"), &bb, true);
+	CheckBoxRestoreCaretPos->SetValue(bb);
 
 	// New Document
-	cfg->Read( wxT( "NewDocumentLineEnding" ), &m_NewDocLineEnding, nltDefault );
-	switch(m_NewDocLineEnding)
+	cfg->Read(wxT("NewDocumentLineEnding"), &m_NewDocLineEnding, nltDefault);
+	switch (m_NewDocLineEnding)
 	{
 	case nltDefault:
 		RadioButtonNewDocLineEndingCR->SetValue(false);
@@ -1200,19 +1200,19 @@ void MadOptionsDialog::LoadOptions(void)
 	}
 
 	ss = wxGetTranslation(wxT("Plain Text"));
-	cfg->Read( wxT( "NewDocumentSyntax" ), &ss );
+	cfg->Read(wxT("NewDocumentSyntax"), &ss);
 	index = ComboBoxNewDocSyntax->FindString(ss);
-	if(index == wxNOT_FOUND) index = 0;
+	if (index == wxNOT_FOUND) index = 0;
 	ComboBoxNewDocSyntax->SetSelection(index);
 
-	m_NewDocEncoding = _( "System Default" );
-	cfg->Read( wxT( "NewDocumentEncoding" ), &m_NewDocEncoding );
-	wxFontEncoding enc = wxFontMapper::GetEncodingFromName( m_NewDocEncoding );
+	m_NewDocEncoding = _("System Default");
+	cfg->Read(wxT("NewDocumentEncoding"), &m_NewDocEncoding);
+	wxFontEncoding enc = wxFontMapper::GetEncodingFromName(m_NewDocEncoding);
 	index = ComboBoxNewDocEncOther->FindString(m_NewDocEncoding);
 	if (wxFONTENCODING_MAX == enc || wxFONTENCODING_DEFAULT == enc || index == wxNOT_FOUND)
 		enc = wxFONTENCODING_SYSTEM;
 
-	if(wxFONTENCODING_UTF8 == enc)
+	if (wxFONTENCODING_UTF8 == enc)
 	{
 		CheckBoxNewDocEncUTF8WithBOM->Enable(true);
 		ComboBoxNewDocEncOther->Enable(false);
@@ -1225,7 +1225,7 @@ void MadOptionsDialog::LoadOptions(void)
 	{
 		CheckBoxNewDocEncUTF8WithBOM->Enable(false);
 		RadioButtonNewDocEncUTF8->SetValue(false);
-		if(wxFONTENCODING_SYSTEM == enc)
+		if (wxFONTENCODING_SYSTEM == enc)
 		{
 			ComboBoxNewDocEncOther->Enable(false);
 			RadioButtonNewDocEncOther->SetValue(false);
@@ -1240,68 +1240,68 @@ void MadOptionsDialog::LoadOptions(void)
 		}
 	}
 
-	cfg->Read( wxT( "NewDocumentEncodingUTF8WithBOM" ), &bb, false );
-	CheckBoxNewDocEncUTF8WithBOM->SetValue( bb );
+	cfg->Read(wxT("NewDocumentEncodingUTF8WithBOM"), &bb, false);
+	CheckBoxNewDocEncUTF8WithBOM->SetValue(bb);
 
 #ifdef __WXMSW__
-	fontname = wxString( wxT( "Courier New" ) );
+	fontname = wxString(wxT("Courier New"));
 #elif defined(__APPLE__) && defined(__MACH__)
-	fontname = wxString( wxT( "Monaco" ) );
+	fontname = wxString(wxT("Monaco"));
 #else
-	fontname = wxString( wxT( "Monospace" ) );
+	fontname = wxString(wxT("Monospace"));
 #endif
-	cfg->Read( wxT( "NewDocumentTextFont" ), &fontname );
+	cfg->Read(wxT("NewDocumentTextFont"), &fontname);
 	index = ComboBoxNewDocFont->FindString(fontname);
-	if(index != wxNOT_FOUND) ComboBoxNewDocFont->SetSelection(index);
+	if (index != wxNOT_FOUND) ComboBoxNewDocFont->SetSelection(index);
 
-	cfg->Read( wxT( "NewDocumentTextFontSize" ), &ll, DEFAULT_FONT_SIZE );
-	if(ll < 0) ll = DEFAULT_FONT_SIZE;
-	if(ll > MAX_FONT_SIZE) ll = MAX_FONT_SIZE;
-	EditNewDocFontSize->SetValue( wxString() << ll );
+	cfg->Read(wxT("NewDocumentTextFontSize"), &ll, DEFAULT_FONT_SIZE);
+	if (ll < 0) ll = DEFAULT_FONT_SIZE;
+	if (ll > MAX_FONT_SIZE) ll = MAX_FONT_SIZE;
+	EditNewDocFontSize->SetValue(wxString() << ll);
 
 	// Print page
-	cfg->Read( wxT( "PrintSyntax" ), &bb );
-	CheckBoxPrintSyntax->SetValue( bb );
-	cfg->Read( wxT( "PrintLineNumber" ), &bb );
-	CheckBoxPrintLineNumber->SetValue( bb );
-	cfg->Read( wxT( "PrintBookmark" ), &bb );
-	CheckBoxPrintBookmark->SetValue( bb );
-	cfg->Read( wxT( "PrintEndOfLine" ), &bb );
-	CheckBoxPrintEndOfLine->SetValue( bb );
-	cfg->Read( wxT( "PrintTabChar" ), &bb );
-	CheckBoxPrintTabChar->SetValue( bb );
-	cfg->Read( wxT( "PrintSpaceChar" ), &bb );
-	CheckBoxPrintSpaceChar->SetValue( bb );
-	cfg->Read( wxT( "PrintOffsetHeader" ), &ll );
-	RadioBoxPrintOffset->SetSelection( ll );
-	cfg->Read( wxT( "PrintPageHeader" ), &bb );
-	CheckBoxPrintPageHeader->SetValue( bb );
-	cfg->Read( wxT( "PageHeaderLeft" ), &ss );
-	EditHeaderLeft->SetValue( ss );
-	cfg->Read( wxT( "PageHeaderCenter" ), &ss );
-	EditHeaderCenter->SetValue( ss );
-	cfg->Read( wxT( "PageHeaderRight" ), &ss );
-	EditHeaderRight->SetValue( ss );
-	cfg->Read( wxT( "PrintPageFooter" ), &bb );
-	CheckBoxPrintPageFooter->SetValue( bb );
-	cfg->Read( wxT( "PageFooterLeft" ), &ss );
-	EditFooterLeft->SetValue( ss );
-	cfg->Read( wxT( "PageFooterCenter" ), &ss );
-	EditFooterCenter->SetValue( ss );
-	cfg->Read( wxT( "PageFooterRight" ), &ss );
-	EditFooterRight->SetValue( ss );
+	cfg->Read(wxT("PrintSyntax"), &bb);
+	CheckBoxPrintSyntax->SetValue(bb);
+	cfg->Read(wxT("PrintLineNumber"), &bb);
+	CheckBoxPrintLineNumber->SetValue(bb);
+	cfg->Read(wxT("PrintBookmark"), &bb);
+	CheckBoxPrintBookmark->SetValue(bb);
+	cfg->Read(wxT("PrintEndOfLine"), &bb);
+	CheckBoxPrintEndOfLine->SetValue(bb);
+	cfg->Read(wxT("PrintTabChar"), &bb);
+	CheckBoxPrintTabChar->SetValue(bb);
+	cfg->Read(wxT("PrintSpaceChar"), &bb);
+	CheckBoxPrintSpaceChar->SetValue(bb);
+	cfg->Read(wxT("PrintOffsetHeader"), &ll);
+	RadioBoxPrintOffset->SetSelection(ll);
+	cfg->Read(wxT("PrintPageHeader"), &bb);
+	CheckBoxPrintPageHeader->SetValue(bb);
+	cfg->Read(wxT("PageHeaderLeft"), &ss);
+	EditHeaderLeft->SetValue(ss);
+	cfg->Read(wxT("PageHeaderCenter"), &ss);
+	EditHeaderCenter->SetValue(ss);
+	cfg->Read(wxT("PageHeaderRight"), &ss);
+	EditHeaderRight->SetValue(ss);
+	cfg->Read(wxT("PrintPageFooter"), &bb);
+	CheckBoxPrintPageFooter->SetValue(bb);
+	cfg->Read(wxT("PageFooterLeft"), &ss);
+	EditFooterLeft->SetValue(ss);
+	cfg->Read(wxT("PageFooterCenter"), &ss);
+	EditFooterCenter->SetValue(ss);
+	cfg->Read(wxT("PageFooterRight"), &ss);
+	EditFooterRight->SetValue(ss);
 	bb = SpellCheckerManager::Instance().GetEnablePersonalDictionary();
-	CheckBoxPersonalDict->SetValue( bb );
-	cfg->Read( wxT( "/SpellChecker/AddKeywords" ), &bb, true );
-	CheckBoxAddKeywords->SetValue( bb );
-	EditDictionaryDir->SetValue( SpellCheckerManager::Instance().GetDictionaryPath() );
+	CheckBoxPersonalDict->SetValue(bb);
+	cfg->Read(wxT("/SpellChecker/AddKeywords"), &bb, true);
+	CheckBoxAddKeywords->SetValue(bb);
+	EditDictionaryDir->SetValue(SpellCheckerManager::Instance().GetDictionaryPath());
 	InitDictionaryChoice();
 	//cfg->Read(wxT("ThesPath"), &ss, dictDir);
 	//EditThesauriDir->SetValue(ss);
 	//cfg->Read(wxT("BitmPath"), &ss, dictDir);
 	//EditBitMapDir->SetValue(ss);
 	extern bool g_ResetAllKeys;
-	CheckBoxResetAllKeys->SetValue( g_ResetAllKeys );
+	CheckBoxResetAllKeys->SetValue(g_ResetAllKeys);
 	ChangedTreeItemDataList.clear();
 	// get all keys of each command and srore them in TreeItemDataList
 	list<TreeItemData*>::iterator tidit = TreeItemDataList.begin();
@@ -1309,11 +1309,11 @@ void MadOptionsDialog::LoadOptions(void)
 
 	do
 	{
-		CommandData *cd = ( *tidit )->cmddata;
-		( *tidit )->keys.Clear();
-		MadEdit::ms_KeyBindings.GetKeys( cd->menu_id, cd->command, ( *tidit )->keys );
+		CommandData *cd = (*tidit)->cmddata;
+		(*tidit)->keys.Clear();
+		MadEdit::ms_KeyBindings.GetKeys(cd->menu_id, cd->command, (*tidit)->keys);
 	}
-	while( ++tidit != tiditend );
+	while (++tidit != tiditend);
 
 	g_SelectedCommandItem = nullptr;
 	g_SelectedKeyId = -1;
@@ -1322,74 +1322,74 @@ void MadOptionsDialog::LoadOptions(void)
 	UpdateKeyHint();
 	wxTreeItemId selid = TreeCtrl1->GetSelection();
 
-	if( selid.IsOk() )
+	if (selid.IsOk())
 	{
 		TreeCtrl1->Unselect();
-		TreeCtrl1->SelectItem( selid, true );
+		TreeCtrl1->SelectItem(selid, true);
 	}
 
-	cfg->SetPath( oldpath );
+	cfg->SetPath(oldpath);
 }
 
 void MadOptionsDialog::ButtonOKClick(wxCommandEvent& WXUNUSED(event))
 {
 	long lo, ml;
 	bool error = false;
-	wxString errtext( _( "Invalid value of \"%s(%s)\"" ) );
+	wxString errtext(_("Invalid value of \"%s(%s)\""));
 
-	if( !EditMaxSizeToLoad->GetValue().ToLong( &lo ) || lo < 0 )
+	if (!EditMaxSizeToLoad->GetValue().ToLong(&lo) || lo < 0)
 	{
-		wxLogError( errtext + _(": Should be greater than zero"), StaticText4->GetLabel().c_str(), EditMaxSizeToLoad->GetValue().c_str() );
+		wxLogError(errtext + _(": Should be greater than zero"), StaticText4->GetLabel().c_str(), EditMaxSizeToLoad->GetValue().c_str());
 		error = true;
 	}
 
-	if( !EditMaxTextFileSize->GetValue().ToLong( &lo ) || lo < 0 )
+	if (!EditMaxTextFileSize->GetValue().ToLong(&lo) || lo < 0)
 	{
-		wxLogError( errtext + _(": Should be greater than zero"), StaticText5->GetLabel().c_str(), EditMaxTextFileSize->GetValue().c_str() );
+		wxLogError(errtext + _(": Should be greater than zero"), StaticText5->GetLabel().c_str(), EditMaxTextFileSize->GetValue().c_str());
 		error = true;
 	}
 
 #if PATCH_MAXLINELENGTH == 1
-	if( !EditMaxLineLength->GetValue().ToLong( &lo ) || lo < 80 || lo > 4096 )
+	if (!EditMaxLineLength->GetValue().ToLong(&lo) || lo < 80 || lo > 4096)
 #else
-	if( !EditMaxLineLength->GetValue().ToLong( &lo ) || lo < 80 )
+	if (!EditMaxLineLength->GetValue().ToLong(&lo) || lo < 80)
 #endif
 	{
-		wxLogError( errtext + _(": Should be 1~4096"), StaticText8->GetLabel().c_str(), EditMaxLineLength->GetValue().c_str() );
+		wxLogError(errtext + _(": Should be 1~4096"), StaticText8->GetLabel().c_str(), EditMaxLineLength->GetValue().c_str());
 		error = true;
 	}
 
-	if( !EditMaxColumns->GetValue().ToLong( &ml ) || ml <= 0 || ml > 4096 )
+	if (!EditMaxColumns->GetValue().ToLong(&ml) || ml <= 0 || ml > 4096)
 	{
-		wxLogError( errtext + _(": Should be 1~4096"), StaticText9->GetLabel().c_str(), EditMaxColumns->GetValue().c_str() );
+		wxLogError(errtext + _(": Should be 1~4096"), StaticText9->GetLabel().c_str(), EditMaxColumns->GetValue().c_str());
 		error = true;
 	}
 
-	if( !EditTabColumns->GetValue().ToLong( &lo ) || lo <= 0 || lo > 256 )
+	if (!EditTabColumns->GetValue().ToLong(&lo) || lo <= 0 || lo > 256)
 	{
-		wxLogError( errtext + _(": Should be 1~256"), StaticText10->GetLabel().c_str(), EditTabColumns->GetValue().c_str() );
+		wxLogError(errtext + _(": Should be 1~256"), StaticText10->GetLabel().c_str(), EditTabColumns->GetValue().c_str());
 		error = true;
 	}
 
-	if( !EditIndentColumns->GetValue().ToLong( &lo ) || lo <= 0 || lo > 256 )
+	if (!EditIndentColumns->GetValue().ToLong(&lo) || lo <= 0 || lo > 256)
 	{
-		wxLogError( errtext + _(": Should be 1~256"), StaticText11->GetLabel().c_str(), EditIndentColumns->GetValue().c_str() );
+		wxLogError(errtext + _(": Should be 1~256"), StaticText11->GetLabel().c_str(), EditIndentColumns->GetValue().c_str());
 		error = true;
 	}
 
-	if( !EditHintColumns->GetValue().ToLong( &lo ) || lo <= 0 || lo > ml )
+	if (!EditHintColumns->GetValue().ToLong(&lo) || lo <= 0 || lo > ml)
 	{
-		wxLogError( errtext + _(": Should be 1~") + EditMaxColumns->GetValue(), StaticText11->GetLabel().c_str(), EditHintColumns->GetValue().c_str() );
+		wxLogError(errtext + _(": Should be 1~") + EditMaxColumns->GetValue(), StaticText11->GetLabel().c_str(), EditHintColumns->GetValue().c_str());
 		error = true;
 	}
 
-	if( !EditAutoSaveTimeout->GetValue().ToLong( &lo ) || ( lo < 10 || lo > 30 ))
+	if (!EditAutoSaveTimeout->GetValue().ToLong(&lo) || (lo < 10 || lo > 30))
 	{
-		wxLogError( errtext + _(": Should be 10~30"), StaticText7->GetLabel().c_str(), EditAutoSaveTimeout->GetValue().c_str() );
+		wxLogError(errtext + _(": Should be 10~30"), StaticText7->GetLabel().c_str(), EditAutoSaveTimeout->GetValue().c_str());
 		error = true;
 	}
 
-	if( !error ) { EndModal( wxID_OK ); }
+	if (!error) { EndModal(wxID_OK); }
 }
 
 void MadOptionsDialog::ButtonCancelClick(wxCommandEvent& WXUNUSED(event))
@@ -1405,7 +1405,7 @@ void MadOptionsDialog::PrintMarkButtonClick(wxCommandEvent& event)
 
 void MadOptionsDialog::PrintMarkClick(wxCommandEvent& event)
 {
-	wxString str = PopupMenuPrintMark.GetLabel( event.GetId() );
+	wxString str = PopupMenuPrintMark.GetLabel(event.GetId());
 	wxTextCtrl *edit = nullptr;
 	if      (ButtonID == EditHeaderLeftId)   { edit = EditHeaderLeft; }
 	else if (ButtonID == EditHeaderCenterId) { edit = EditHeaderCenter; }
@@ -1415,7 +1415,7 @@ void MadOptionsDialog::PrintMarkClick(wxCommandEvent& event)
 	else if (ButtonID == EditFooterRightId)  { edit = EditFooterRight; }
 	else { ; }
 
-	if(edit!=nullptr && str[0]==wxT('[') && str[3]==wxT(']'))
+	if (edit!=nullptr && str[0]==wxT('[') && str[3]==wxT(']'))
 	{
 		wxString text=edit->GetValue();
 		edit->SetValue(text+ str.Mid(1, 2));
@@ -1426,12 +1426,12 @@ void MadOptionsDialog::PrintMarkClick(wxCommandEvent& event)
 void MadOptionsDialog::TreeCtrl1SelChanged(wxTreeEvent& event)
 {
 	wxTreeItemId id = event.GetItem();
-	if(!id.IsOk()) return;
+	if (!id.IsOk()) return;
 
 	g_SelectedCommandItem = dynamic_cast< TreeItemData* >(TreeCtrl1->GetItemData(id));
 	g_SelectedKeyId=-1;
 
-	if(g_SelectedCommandItem == nullptr)
+	if (g_SelectedCommandItem == nullptr)
 	{
 		ListBoxKeys->Clear();
 		EditCommandHint->SetValue(_("Cannot assign key to this item"));
@@ -1440,16 +1440,16 @@ void MadOptionsDialog::TreeCtrl1SelChanged(wxTreeEvent& event)
 	{
 		ListBoxKeys->Set(g_SelectedCommandItem->keys);
 		wxString hint=wxT('[');
-		if(g_SelectedCommandItem->cmddata->menuid_name != 0)
+		if (g_SelectedCommandItem->cmddata->menuid_name != 0)
 		{
 			hint+= wxString(g_SelectedCommandItem->cmddata->menuid_name);
 		}
-		if(g_SelectedCommandItem->cmddata->command > 0)
+		if (g_SelectedCommandItem->cmddata->command > 0)
 		{
 			wxString text=MadKeyBindings::CommandToText(g_SelectedCommandItem->cmddata->command);
-			if(!text.IsEmpty())
+			if (!text.IsEmpty())
 			{
-				if(hint.Length()>1)
+				if (hint.Length()>1)
 				{
 					hint+= wxT(',');
 				}
@@ -1476,17 +1476,17 @@ TreeItemData* MadOptionsDialog::FindKeyInList(const wxString &key)
 
 	wxString lkey = key.Lower();
 
-	while(tidit!=tiditend)
+	while (tidit!=tiditend)
 	{
 		TreeItemData *tid = (*tidit);
-		if(!tid->keys.IsEmpty())
+		if (!tid->keys.IsEmpty())
 		{
 			size_t count=tid->keys.GetCount();
 			size_t idx=0;
 
-			for( ; idx < count; ++idx )
+			for (; idx < count; ++idx)
 			{
-				if(tid->keys[idx].Lower() == lkey)
+				if (tid->keys[idx].Lower() == lkey)
 				{
 					return tid;
 				}
@@ -1503,9 +1503,9 @@ bool MadOptionsDialog::FindItemInList(TreeItemData* tid, const list<TreeItemData
 	list<TreeItemData*>::const_iterator tidit=tlist.begin();
 	list<TreeItemData*>::const_iterator tiditend=tlist.end();
 
-	while(tidit != tiditend)
+	while (tidit != tiditend)
 	{
-		if((*tidit) == tid)
+		if ((*tidit) == tid)
 		{
 			return true;
 		}
@@ -1519,7 +1519,7 @@ void MadOptionsDialog::UpdateKeyHint()
 	wxString scstr=EditKey->GetValue();
 	g_CommandItemOfNewKey=nullptr;
 
-	if(scstr.IsEmpty())
+	if (scstr.IsEmpty())
 	{
 		g_OptionsDialog->EditKeyHint->Clear();
 	}
@@ -1527,7 +1527,7 @@ void MadOptionsDialog::UpdateKeyHint()
 	{
 		// find the key is assigned to which command
 		TreeItemData *tid = g_OptionsDialog->FindKeyInList(scstr);
-		if(tid==nullptr)
+		if (tid==nullptr)
 		{
 			g_OptionsDialog->EditKeyHint->SetValue(_("This key is not assigned"));
 		}
@@ -1536,16 +1536,16 @@ void MadOptionsDialog::UpdateKeyHint()
 			g_CommandItemOfNewKey=tid;
 			wxString cmd;
 
-			if(tid->cmddata->menuid_name != 0)
+			if (tid->cmddata->menuid_name != 0)
 			{
 				cmd+= wxString(tid->cmddata->menuid_name);
 			}
-			if(tid->cmddata->command > 0)
+			if (tid->cmddata->command > 0)
 			{
 				wxString text=MadKeyBindings::CommandToText(tid->cmddata->command);
-				if(!text.IsEmpty())
+				if (!text.IsEmpty())
 				{
-					if(cmd.Length()>1)
+					if (cmd.Length()>1)
 					{
 						cmd+= wxT(',');
 					}
@@ -1561,15 +1561,15 @@ void MadOptionsDialog::UpdateKeyHint()
 
 void MadOptionsDialog::ButtonAddKeyClick(wxCommandEvent& WXUNUSED(event))
 {
-	if(g_SelectedCommandItem!=nullptr && g_SelectedCommandItem!=g_CommandItemOfNewKey)
+	if (g_SelectedCommandItem!=nullptr && g_SelectedCommandItem!=g_CommandItemOfNewKey)
 	{
 		wxString key=EditKey->GetValue();
-		if(g_CommandItemOfNewKey!=nullptr) // new key is assigned to another command
+		if (g_CommandItemOfNewKey!=nullptr) // new key is assigned to another command
 		{
 			/*
 			wxMessageDialog dlg(this, key +wxT(": ") +EditKeyHint->GetValue() +wxT("\n\n") + wxString(_("Do you want to reassign this key?")),
-				wxT("MadEdit"), wxYES_NO|wxICON_QUESTION );
-			if(dlg.ShowModal()!=wxID_YES)
+				wxT("MadEdit"), wxYES_NO|wxICON_QUESTION);
+			if (dlg.ShowModal()!=wxID_YES)
 			{
 				return;
 			}
@@ -1579,7 +1579,7 @@ void MadOptionsDialog::ButtonAddKeyClick(wxCommandEvent& WXUNUSED(event))
 			int idx=g_CommandItemOfNewKey->keys.Index(key.c_str(), false);
 			wxASSERT(idx>=0);
 			g_CommandItemOfNewKey->keys.RemoveAt(idx);
-			if(FindItemInList(g_CommandItemOfNewKey, ChangedTreeItemDataList)==false)
+			if (FindItemInList(g_CommandItemOfNewKey, ChangedTreeItemDataList)==false)
 			{
 				ChangedTreeItemDataList.push_back(g_CommandItemOfNewKey);
 			}
@@ -1589,7 +1589,7 @@ void MadOptionsDialog::ButtonAddKeyClick(wxCommandEvent& WXUNUSED(event))
 		g_SelectedCommandItem->keys.Add(key);
 
 		ListBoxKeys->Set(g_SelectedCommandItem->keys);
-		if(FindItemInList(g_SelectedCommandItem, ChangedTreeItemDataList)==false)
+		if (FindItemInList(g_SelectedCommandItem, ChangedTreeItemDataList)==false)
 		{
 			ChangedTreeItemDataList.push_back(g_SelectedCommandItem);
 		}
@@ -1601,12 +1601,12 @@ void MadOptionsDialog::ButtonAddKeyClick(wxCommandEvent& WXUNUSED(event))
 
 void MadOptionsDialog::ButtonDeleteKeyClick(wxCommandEvent& WXUNUSED(event))
 {
-	if(g_SelectedCommandItem!=nullptr && g_SelectedKeyId >= 0)
+	if (g_SelectedCommandItem!=nullptr && g_SelectedKeyId >= 0)
 	{
 		g_SelectedCommandItem->keys.RemoveAt(g_SelectedKeyId);
 
 		ListBoxKeys->Set(g_SelectedCommandItem->keys);
-		if(FindItemInList(g_SelectedCommandItem, ChangedTreeItemDataList)==false)
+		if (FindItemInList(g_SelectedCommandItem, ChangedTreeItemDataList)==false)
 		{
 			ChangedTreeItemDataList.push_back(g_SelectedCommandItem);
 		}
@@ -1619,7 +1619,7 @@ void MadOptionsDialog::ButtonDeleteKeyClick(wxCommandEvent& WXUNUSED(event))
 void MadOptionsDialog::ButtonShowInMenuClick(wxCommandEvent& WXUNUSED(event))
 {
 	// move the selected key to first element of ListBoxKeys
-	if(g_SelectedCommandItem!=nullptr && g_SelectedCommandItem->cmddata->menu_id>0 && g_SelectedKeyId > 0)
+	if (g_SelectedCommandItem!=nullptr && g_SelectedCommandItem->cmddata->menu_id>0 && g_SelectedKeyId > 0)
 	{
 		wxString key=g_SelectedCommandItem->keys[g_SelectedKeyId];
 
@@ -1627,7 +1627,7 @@ void MadOptionsDialog::ButtonShowInMenuClick(wxCommandEvent& WXUNUSED(event))
 		g_SelectedCommandItem->keys.Insert(key, 0);
 
 		ListBoxKeys->Set(g_SelectedCommandItem->keys);
-		if(FindItemInList(g_SelectedCommandItem, ChangedTreeItemDataList)==false)
+		if (FindItemInList(g_SelectedCommandItem, ChangedTreeItemDataList)==false)
 		{
 			ChangedTreeItemDataList.push_back(g_SelectedCommandItem);
 		}
@@ -1645,7 +1645,7 @@ void MadOptionsDialog::DateTimeMarkClick(wxCommandEvent& event)
 {
 	wxString str=PopupMenuDateTimeMark.GetLabel(event.GetId());
 	int pos=str.Find(wxT(']'));
-	if(pos != wxNOT_FOUND && str[0]==wxT('['))
+	if (pos != wxNOT_FOUND && str[0]==wxT('['))
 	{
 		str = str.Mid(1, pos-1);
 	}
@@ -1655,46 +1655,46 @@ void MadOptionsDialog::DateTimeMarkClick(wxCommandEvent& event)
 }
 
 #if ENABLE_BITMAP_THUARI
-void MadOptionsDialog::ButtonBitmapDirClick( wxCommandEvent& WXUNUSED(event) )
+void MadOptionsDialog::ButtonBitmapDirClick(wxCommandEvent& WXUNUSED(event))
 {
 }
-void MadOptionsDialog::ButtonThesauriDirClick( wxCommandEvent& WXUNUSED(event) )
+void MadOptionsDialog::ButtonThesauriDirClick(wxCommandEvent& WXUNUSED(event))
 {
 	wxString defdir = SpellCheckerManager::Instance().GetThesaurusPath();
 
-	if( defdir.IsEmpty() ) { defdir = wxGetCwd(); }
+	if (defdir.IsEmpty()) { defdir = wxGetCwd(); }
 
-	wxDirDialog dlg( this, _( "Choose a directory" ), defdir );
+	wxDirDialog dlg(this, _("Choose a directory"), defdir);
 
-	if( dlg.ShowModal() == wxID_OK )
+	if (dlg.ShowModal() == wxID_OK)
 	{
-		EditThesauriDir->SetValue( dlg.GetPath() );
-		SpellCheckerManager::Instance().SetThesaurusPath( dlg.GetPath() );
+		EditThesauriDir->SetValue(dlg.GetPath());
+		SpellCheckerManager::Instance().SetThesaurusPath(dlg.GetPath());
 		InitDictionaryChoice();
 	}
 }
 #endif
 
-void MadOptionsDialog::ButtonDictionaryDirClick( wxCommandEvent& WXUNUSED(event) )
+void MadOptionsDialog::ButtonDictionaryDirClick(wxCommandEvent& WXUNUSED(event))
 {
 	wxString defdir = SpellCheckerManager::Instance().GetDictionaryPath();
 
-	if( defdir.IsEmpty() ) { defdir = wxGetCwd(); }
+	if (defdir.IsEmpty()) { defdir = wxGetCwd(); }
 
-	wxDirDialog dlg( this, _( "Choose a directory" ), defdir );
+	wxDirDialog dlg(this, _("Choose a directory"), defdir);
 
-	if( dlg.ShowModal() == wxID_OK )
+	if (dlg.ShowModal() == wxID_OK)
 	{
-		EditDictionaryDir->SetValue( dlg.GetPath() );
-		InitDictionaryChoice( dlg.GetPath() );
+		EditDictionaryDir->SetValue(dlg.GetPath());
+		InitDictionaryChoice(dlg.GetPath());
 	}
 }
 
-void MadOptionsDialog::InitDictionaryChoice( const wxString &path/* = wxEmptyString*/ )
+void MadOptionsDialog::InitDictionaryChoice(const wxString &path/* = wxEmptyString*/)
 {
-	if( !path.IsEmpty() )
+	if (!path.IsEmpty())
 	{
-		SpellCheckerManager::Instance().SetDictionaryPath( path );
+		SpellCheckerManager::Instance().SetDictionaryPath(path);
 		SpellCheckerManager::Instance().ScanForDictionaries();
 	}
 
@@ -1702,20 +1702,20 @@ void MadOptionsDialog::InitDictionaryChoice( const wxString &path/* = wxEmptyStr
 	int sel = SpellCheckerManager::Instance().GetSelectedDictionaryNumber();
 	ComboDictionary->Clear();
 
-	for( unsigned int i = 0 ; i < dics.size(); i++ )
-	{ ComboDictionary->Append( SpellCheckerManager::Instance().GetLanguageName( dics[i] ) ); }
+	for (unsigned int i = 0 ; i < dics.size(); i++)
+	{ ComboDictionary->Append(SpellCheckerManager::Instance().GetLanguageName(dics[i])); }
 
-	if( sel != -1 )
-	{ ComboDictionary->SetSelection( sel ); }
+	if (sel != -1)
+	{ ComboDictionary->SetSelection(sel); }
 }
 
-void MadOptionsDialog::EditDictionaryDirTextEnter( wxCommandEvent& WXUNUSED(event) )
+void MadOptionsDialog::EditDictionaryDirTextEnter(wxCommandEvent& WXUNUSED(event))
 {
 	wxString path = EditDictionaryDir->GetValue();
 
-	if( wxDir::Exists( path ) )
+	if (wxDir::Exists(path))
 	{
-		InitDictionaryChoice( path );
+		InitDictionaryChoice(path);
 	}
 	else
 	{
@@ -1723,42 +1723,42 @@ void MadOptionsDialog::EditDictionaryDirTextEnter( wxCommandEvent& WXUNUSED(even
 	}
 }
 
-void MadOptionsDialog::ComboDictionarySelected( wxCommandEvent& WXUNUSED(event) )
+void MadOptionsDialog::ComboDictionarySelected(wxCommandEvent& WXUNUSED(event))
 {
-	wxString dictDesc = ComboDictionary->GetString( ComboDictionary->GetSelection() );
-	wxString dictName = SpellCheckerManager::Instance().GetDictionaryName( dictDesc );
+	wxString dictDesc = ComboDictionary->GetString(ComboDictionary->GetSelection());
+	wxString dictName = SpellCheckerManager::Instance().GetDictionaryName(dictDesc);
 
-	if( !dictName.IsEmpty() )
+	if (!dictName.IsEmpty())
 	{
-		SpellCheckerManager::Instance().SetDictionaryName( dictName );
+		SpellCheckerManager::Instance().SetDictionaryName(dictName);
 	}
 }
 
-void MadOptionsDialog::CheckBoxMouseSelectToCopyClick( wxCommandEvent& WXUNUSED(event) )
+void MadOptionsDialog::CheckBoxMouseSelectToCopyClick(wxCommandEvent& WXUNUSED(event))
 {
-	CheckBoxCtrlWithMouseToSelect->Enable( CheckBoxMouseSelectToCopy->GetValue() );
+	CheckBoxCtrlWithMouseToSelect->Enable(CheckBoxMouseSelectToCopy->GetValue());
 }
 
-void MadOptionsDialog::CheckBoxAutoCompletePairClick( wxCommandEvent& WXUNUSED(event) )
+void MadOptionsDialog::CheckBoxAutoCompletePairClick(wxCommandEvent& WXUNUSED(event))
 {
-	CheckBoxInsertPairForSelection->Enable( CheckBoxAutoCompletePair->GetValue() );
+	CheckBoxInsertPairForSelection->Enable(CheckBoxAutoCompletePair->GetValue());
 }
 
-void MadOptionsDialog::EnableAutoSaveClick( wxCommandEvent& WXUNUSED(event) )
+void MadOptionsDialog::EnableAutoSaveClick(wxCommandEvent& WXUNUSED(event))
 {
-	EditAutoSaveTimeout->Enable( CheckBoxEnableAutoSave->GetValue() );
+	EditAutoSaveTimeout->Enable(CheckBoxEnableAutoSave->GetValue());
 }
 
 #ifdef MADEDIT_ENABLE_STC
-void MadOptionsDialog::OnMarginClick( wxStyledTextEvent &event )
+void MadOptionsDialog::OnMarginClick(wxStyledTextEvent &event)
 {
-	if( event.GetMargin() == MARGIN_FOLD )
+	if (event.GetMargin() == MARGIN_FOLD)
 	{
-		int lineClick = TextSample->LineFromPosition( event.GetPosition() );
-		int levelClick = TextSample->GetFoldLevel( lineClick );
-		if( ( levelClick & wxSTC_FOLDLEVELHEADERFLAG ) > 0 )
+		int lineClick = TextSample->LineFromPosition(event.GetPosition());
+		int levelClick = TextSample->GetFoldLevel(lineClick);
+		if ((levelClick & wxSTC_FOLDLEVELHEADERFLAG) > 0)
 		{
-			TextSample->ToggleFold( lineClick );
+			TextSample->ToggleFold(lineClick);
 		}
 	}
 }
@@ -1766,7 +1766,7 @@ void MadOptionsDialog::OnMarginClick( wxStyledTextEvent &event )
 
 void MadOptionsDialog::RadioButtonNewDocEncSelect(wxCommandEvent& event)
 {
-	if(RadioButtonNewDocEncUTF8->GetId() == event.GetId())
+	if (RadioButtonNewDocEncUTF8->GetId() == event.GetId())
 	{
 		CheckBoxNewDocEncUTF8WithBOM->Enable(true);
 		ComboBoxNewDocEncOther->Enable(false);
@@ -1775,10 +1775,10 @@ void MadOptionsDialog::RadioButtonNewDocEncSelect(wxCommandEvent& event)
 	else
 	{
 		CheckBoxNewDocEncUTF8WithBOM->Enable(false);
-		if(RadioButtonNewDocEncOther->GetId() == event.GetId())
+		if (RadioButtonNewDocEncOther->GetId() == event.GetId())
 		{
 			ComboBoxNewDocEncOther->Enable(true);
-			if(ComboBoxNewDocEncOther->GetSelection() == wxNOT_FOUND && ComboBoxNewDocEncOther->GetCount() > 0)
+			if (ComboBoxNewDocEncOther->GetSelection() == wxNOT_FOUND && ComboBoxNewDocEncOther->GetCount() > 0)
 			{
 				ComboBoxNewDocEncOther->SetSelection(0);
 			}

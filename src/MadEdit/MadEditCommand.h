@@ -118,27 +118,27 @@ typedef	int	MadEditShortCut;
 typedef	int	MadEditCommand;
 
 
-WX_DECLARE_HASH_MAP( MadEditShortCut,
+WX_DECLARE_HASH_MAP(MadEditShortCut,
 					 wxString,
 					 wxIntegerHash,
 					 wxIntegerEqual,
-					 MadCommandTextMap );
+					 MadCommandTextMap);
 
-WX_DECLARE_HASH_MAP( wxString,
+WX_DECLARE_HASH_MAP(wxString,
 					 MadEditShortCut,
 					 wxStringHash,
 					 wxStringEqual,
-					 MadTextCommandMap );
+					 MadTextCommandMap);
 
-WX_DECLARE_HASH_MAP( int,			  // menuid
+WX_DECLARE_HASH_MAP(int,			  // menuid
 					 MadEditShortCut,
 					 wxIntegerHash,
 					 wxIntegerEqual,
-					 MadMenuCommandMap );
+					 MadMenuCommandMap);
 
 //---------------------------------------------------------------------------
 
-WX_DECLARE_HASH_SET( MadEditShortCut, wxIntegerHash, wxIntegerEqual, MadShortCutSet	);
+WX_DECLARE_HASH_SET(MadEditShortCut, wxIntegerHash, wxIntegerEqual, MadShortCutSet	);
 
 struct MadKeyBinding
 {
@@ -152,17 +152,17 @@ struct MadKeyBinding
 
 	void Add(int mid, MadEditCommand cmd, MadEditShortCut sc)
 	{
-		if(mid!=0) menuid=mid;
-		if(cmd!=0) editcmd=cmd;
-		if(firstsc==0) firstsc=sc;
+		if (mid!=0) menuid=mid;
+		if (cmd!=0) editcmd=cmd;
+		if (firstsc==0) firstsc=sc;
 		else shortcuts.insert(sc);
 	}
 	void AddFirst(int mid, MadEditCommand cmd, MadEditShortCut sc)
 	{
-		if(mid!=0) menuid=mid;
-		if(cmd!=0) editcmd=cmd;
-		if(firstsc==0) firstsc=sc;
-		else if(firstsc!=sc)
+		if (mid!=0) menuid=mid;
+		if (cmd!=0) editcmd=cmd;
+		if (firstsc==0) firstsc=sc;
+		else if (firstsc!=sc)
 		{
 			shortcuts.insert(firstsc);
 			firstsc=sc;
@@ -171,11 +171,11 @@ struct MadKeyBinding
 
 	void RemoveShortCut(MadEditShortCut	sc)
 	{
-		if(firstsc!=0)
+		if (firstsc!=0)
 		{
-			if(firstsc==sc)
+			if (firstsc==sc)
 			{
-				if(shortcuts.begin() !=	shortcuts.end())
+				if (shortcuts.begin() !=	shortcuts.end())
 				{
 					firstsc	= *shortcuts.begin();
 					shortcuts.erase(shortcuts.begin());
@@ -200,11 +200,11 @@ struct MadKeyBinding
 
 typedef	list<MadKeyBinding*> MadKeyBindingList;
 
-WX_DECLARE_HASH_MAP( int,				// menuid or editcmd or	shortcut
+WX_DECLARE_HASH_MAP(int,				// menuid or editcmd or	shortcut
 					 MadKeyBinding*,
 					 wxIntegerHash,
 					 wxIntegerEqual,
-					 MadKeyBindingMap );
+					 MadKeyBindingMap);
 
 //---------------------------------------------------------------------------
 
@@ -257,20 +257,20 @@ public:
 	void Add(MadEditShortCut shortcut, bool	first, int menuid, bool	overwrite)
 	{
 		MadKeyBindingMap::iterator scit	= m_ShortCutMap->find(shortcut);
-		if(scit	== m_ShortCutMap->end())
+		if (scit	== m_ShortCutMap->end())
 		{
 			overwrite=true;
 		}
-		else if(overwrite)
+		else if (overwrite)
 		{
 			//remove old corelation
 			scit->second->RemoveShortCut(shortcut);
 		}
-		if(overwrite)
+		if (overwrite)
 		{
 			MadKeyBinding *kb;
 			MadKeyBindingMap::iterator mit = m_MenuIdMap->find(menuid);
-			if(mit != m_MenuIdMap->end())
+			if (mit != m_MenuIdMap->end())
 			{
 				kb = mit->second;
 			}
@@ -281,31 +281,31 @@ public:
 			}
 
 			MadEditCommand cmd = GetCommandFromMenuId(menuid);
-			if(first) kb->AddFirst(menuid, cmd,	shortcut);
+			if (first) kb->AddFirst(menuid, cmd,	shortcut);
 			else	  kb->Add(menuid, cmd, shortcut);
 
 			m_MenuIdMap->insert(MadKeyBindingMap::value_type(menuid, kb));
-			if(cmd!=0) m_EditCommandMap->insert(MadKeyBindingMap::value_type(cmd, kb));
+			if (cmd!=0) m_EditCommandMap->insert(MadKeyBindingMap::value_type(cmd, kb));
 			m_ShortCutMap->insert(MadKeyBindingMap::value_type(shortcut, kb));
 		}
 	}
 	void Add(MadEditShortCut shortcut, MadEditCommand cmd, bool overwrite, bool first = false)
 	{
 		MadKeyBindingMap::iterator scit	= m_ShortCutMap->find(shortcut);
-		if(scit	== m_ShortCutMap->end())
+		if (scit	== m_ShortCutMap->end())
 		{
 			overwrite=true;
 		}
-		else if(overwrite)
+		else if (overwrite)
 		{
 			//remove old corelation
 			scit->second->RemoveShortCut(shortcut);
 		}
-		if(overwrite)
+		if (overwrite)
 		{
 			MadKeyBinding *kb=nullptr;
 			MadKeyBindingMap::iterator ecit	= m_EditCommandMap->find(cmd);
-			if(ecit	!= m_EditCommandMap->end())
+			if (ecit	!= m_EditCommandMap->end())
 			{
 				kb = ecit->second;
 			}
@@ -315,7 +315,7 @@ public:
 				m_KeyBindings->push_back(kb);
 			}
 
-			if(first) kb->AddFirst(0, cmd, shortcut);
+			if (first) kb->AddFirst(0, cmd, shortcut);
 			else	  kb->Add(0, cmd, shortcut);
 			m_EditCommandMap->insert(MadKeyBindingMap::value_type(cmd, kb));
 			m_ShortCutMap->insert(MadKeyBindingMap::value_type(shortcut, kb));
@@ -344,7 +344,7 @@ public:
 	MadEditCommand FindCommand(MadEditShortCut shortcut)
 	{
 		MadKeyBindingMap::iterator scit	= m_ShortCutMap->find(shortcut);
-		if(scit	!= m_ShortCutMap->end())
+		if (scit	!= m_ShortCutMap->end())
 		{
 			return scit->second->editcmd;
 		}

@@ -37,7 +37,7 @@ private:
 		buffer* next;
 		explicit buffer(MadDeque<T> *d) :
 			mdeque(d),
-			begin( (T*) operator new(N * sizeof(T))),
+			begin((T*) operator new(N * sizeof(T))),
 			end(begin + N),
 			prev(nullptr),
 			next(nullptr)
@@ -89,25 +89,25 @@ public:
 		}
 		iterator& operator+=(difference_type off)
 		{
-			if(off != 0)
+			if (off != 0)
 			{
 				do
 				{
 					++(*this);
 				}
-				while(--off > 0);
+				while (--off > 0);
 			}
 			return *this;
 		}
 		iterator& operator-=(difference_type off)
 		{
-			if(off != 0)
+			if (off != 0)
 			{
 				do
 				{
 					--(*this);
 				}
-				while(--off > 0);
+				while (--off > 0);
 			}
 			return *this;
 		}
@@ -115,9 +115,9 @@ public:
 		// pre-increment operator
 		iterator& operator++()
 		{
-			if(++ptr == buf->end)
+			if (++ptr == buf->end)
 			{
-				if(buf->next == nullptr)
+				if (buf->next == nullptr)
 				{
 					//assert(buf==buf->mdeque->m_last_buffrt);
 					buf->mdeque->add_buffer_back();
@@ -137,7 +137,7 @@ public:
 		// pre-decrement operator
 		iterator& operator--()
 		{
-			if(ptr == buf->begin)
+			if (ptr == buf->begin)
 			{
 				buf = buf->prev;
 				ptr = buf->end;
@@ -155,7 +155,7 @@ public:
 		iterator operator+(difference_type off)
 		{
 			iterator it = *this;
-			if(off>=0) it += off;
+			if (off>=0) it += off;
 			else it -= (-off);
 			return it;
 		}
@@ -179,7 +179,7 @@ public:
 	}
 	void delete_first_buffer()
 	{
-		if(m_first_buffer != m_last_buffer)
+		if (m_first_buffer != m_last_buffer)
 		{
 			buffer *tmp = m_first_buffer->next;
 			delete m_first_buffer;
@@ -195,18 +195,18 @@ public:
 			tmp = m_first_buffer->next;
 			delete m_first_buffer;
 			m_first_buffer = tmp;
-		}while(m_first_buffer != nullptr);
+		}while (m_first_buffer != nullptr);
 		m_last_buffer = nullptr;
 	}
 	pointer	get_pointer(size_type index) const
 	{
 		//assert(index<m_size)
-		if(index <= m_size/2) // from begin
+		if (index <= m_size/2) // from begin
 		{
 			buffer *buf = m_begin_iterator.buf;
 			T* ptr = m_begin_iterator.ptr;
 			size_type count = buf->end - ptr;
-			while(index >= count)
+			while (index >= count)
 			{
 				buf = buf->next;
 				ptr = buf->begin;
@@ -220,16 +220,16 @@ public:
 		index = m_size - index;
 		buffer *buf = m_end_iterator.buf;
 		T* ptr = buf->begin;
-		if(buf == m_begin_iterator.buf)
+		if (buf == m_begin_iterator.buf)
 		{
 			ptr = m_begin_iterator.ptr;
 		}
 		size_type count = m_end_iterator.ptr - ptr;
-		while(index > count)
+		while (index > count)
 		{
 			buf = buf->prev;
 			ptr = buf->begin;
-			if(buf == m_begin_iterator.buf)
+			if (buf == m_begin_iterator.buf)
 			{
 				ptr = m_begin_iterator.ptr;
 			}
@@ -243,14 +243,14 @@ private:
 	void init(const MadDeque& d)
 	{
 		clear(); // destroy old T
-		if(!d.empty())
+		if (!d.empty())
 		{
 			iterator it = d.begin(), itend = d.end();
 			do
 			{
 				this->push_back(*it);
 			}
-			while(++it != itend);
+			while (++it != itend);
 		}
 	}
 
@@ -274,7 +274,7 @@ public:
 	}
 	~MadDeque()
 	{
-		while(m_begin_iterator != m_end_iterator)
+		while (m_begin_iterator != m_end_iterator)
 		{
 			(m_begin_iterator.ptr)->~T();
 			++m_begin_iterator;
@@ -288,15 +288,15 @@ public:
 	}
 	bool operator==(const MadDeque& d) const
 	{
-		if(m_size != d.m_size) return false;
-		if(m_size == 0)	return true;
+		if (m_size != d.m_size) return false;
+		if (m_size == 0)	return true;
 
 		iterator it0 = begin(), it0end = end();
 		iterator it1 = d.begin();
-		while(*it0 == *it1)
+		while (*it0 == *it1)
 		{
 			++it1;
-			if(++it0 == it0end) return true;
+			if (++it0 == it0end) return true;
 		}
 		return false;
 	}
@@ -348,7 +348,7 @@ public:
 		(m_begin_iterator.ptr)->~T();
 		++m_begin_iterator;
 		--m_size;
-		if(m_begin_iterator.buf != m_first_buffer)
+		if (m_begin_iterator.buf != m_first_buffer)
 		{
 			delete_first_buffer();
 		}
@@ -361,7 +361,7 @@ public:
 	}
 	void clear()
 	{
-		while(m_begin_iterator != m_end_iterator)
+		while (m_begin_iterator != m_end_iterator)
 		{
 			(m_begin_iterator.ptr)->~T();
 			++m_begin_iterator;

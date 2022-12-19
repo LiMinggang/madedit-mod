@@ -10,8 +10,8 @@
 #define	_MADWORDCOUNTDIALOG_H_
 
 #ifdef _MSC_VER
-# pragma warning( push )
-# pragma warning( disable : 4996 )
+# pragma warning(push)
+# pragma warning(disable : 4996)
 #endif
 // disable 4996 {
 //(*Headers(WXMWordCountDialog)
@@ -24,7 +24,7 @@
 //*)
 // disable 4996 }
 #ifdef _MSC_VER
-# pragma warning( pop )
+# pragma warning(pop)
 #endif
 
 class MadWordCountDialog: public wxDialog

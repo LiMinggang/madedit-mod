@@ -25,7 +25,7 @@ PLUGIN_EXPORT int PluginOnEvents(int PluginID, int nEvents, void* pParam)
 
 PLUGIN_EXPORT int PluginProc(int PluginID, int nMsg, void* pParam)
 {
-    switch(nMsg)
+    switch (nMsg)
     {
     case PL_INITIALIZE:
         g_PluginID=PluginID;

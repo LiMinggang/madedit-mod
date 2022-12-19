@@ -53,7 +53,7 @@ static HINSTANCE gs_hInstance=nullptr;								\
 BOOL WINAPI														\
 DllMain(HINSTANCE hModule, DWORD fdwReason,	LPVOID lpReserved)	\
 {																\
-	if(fdwReason ==	DLL_PROCESS_ATTACH ){						\
+	if (fdwReason ==	DLL_PROCESS_ATTACH){						\
 		gs_hInstance = hModule;									\
 	}															\
 	return TRUE;												\

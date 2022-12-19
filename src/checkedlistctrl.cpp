@@ -44,7 +44,7 @@ DEFINE_EVENT_TYPE(wxEVT_COMMAND_LIST_ITEM_UNCHECKED);
 wxCheckedListCtrl::wxCheckedListCtrl()
 	: wxListCtrl(), m_imageList(16, 16, TRUE)
 {
-	Bind( wxEVT_LEFT_DOWN, &wxCheckedListCtrl::OnMouseEvent, this );
+	Bind(wxEVT_LEFT_DOWN, &wxCheckedListCtrl::OnMouseEvent, this);
 }
 
 wxCheckedListCtrl::wxCheckedListCtrl(wxWindow *parent, wxWindowID id/* = -1*/,
@@ -56,7 +56,7 @@ wxCheckedListCtrl::wxCheckedListCtrl(wxWindow *parent, wxWindowID id/* = -1*/,
 					: wxListCtrl(), m_imageList(16, 16, TRUE)
 {
 	Create(parent, id, pt, sz, style, validator, name);
-	Bind( wxEVT_LEFT_DOWN, &wxCheckedListCtrl::OnMouseEvent, this );
+	Bind(wxEVT_LEFT_DOWN, &wxCheckedListCtrl::OnMouseEvent, this);
 }
 
 bool wxCheckedListCtrl::Create(wxWindow* parent, wxWindowID id, const wxPoint& pt,
@@ -300,7 +300,7 @@ long wxCheckedListCtrl::SetItem(long index, int col, const wxString& label, int 
 	return SetItem(li);
 }
 
-long wxCheckedListCtrl::InsertItem( long index, const wxString& label, int WXUNUSED(imageIndex) )
+long wxCheckedListCtrl::InsertItem(long index, const wxString& label, int WXUNUSED(imageIndex))
 {
     wxListItem info;
     info.m_text = label;
@@ -393,14 +393,14 @@ void wxCheckedListCtrl::OnMouseEvent(wxMouseEvent& event)
 		bool sel = (GetItemState(item, wxLIST_STATE_SELECTED) == wxLIST_STATE_SELECTED);
 		bool checked = FALSE;
 		selectedItems.Add(item); //Make sure it's the first
-		if(sel) {
+		if (sel) {
 			long selitem = -1;
-			for ( ;; ) {
+			for (;;) {
 				selitem = GetNextItem(selitem, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
-				if ( selitem == -1 )
+				if (selitem == -1)
 					break;
 
-				if((item != selitem) && (IsChecked(item) == IsChecked(selitem)))
+				if ((item != selitem) && (IsChecked(item) == IsChecked(selitem)))
 					selectedItems.Add(selitem);
 			}
 		}
@@ -415,7 +415,7 @@ void wxCheckedListCtrl::OnMouseEvent(wxMouseEvent& event)
 			checked = true;
 		}
 
-		for(size_t i = 0; i < selectedItems.GetCount(); ++i) {
+		for (size_t i = 0; i < selectedItems.GetCount(); ++i) {
 			item = selectedItems[i];
 			wxListEvent *pEvt = new wxListEvent(evtType, GetId());
 			pEvt->m_itemIndex = item;

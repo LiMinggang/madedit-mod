@@ -54,21 +54,21 @@ MadWinListDialog::MadWinListDialog(wxWindow* parent,wxWindowID id)
 	BoxSizer1->Fit(this);
 	BoxSizer1->SetSizeHints(this);
 
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonActivateClick, this, ButtonActivate->GetId() );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonSaveClick, this, ButtonSave->GetId() );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonSaveAsClick, this, ButtonSaveAs->GetId() );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonCloseWindowsClick, this, ButtonCloseWindows->GetId() );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonSortTabByNameClick, this, ButtonSortTabByName->GetId() );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonSortTabByPathClick, this, ButtonSortTabByPath->GetId() );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonOkClick, this, wxID_OK );
-	Bind( wxEVT_CLOSE_WINDOW, &MadWinListDialog::OnMadWinListDialogClose, this, wxID_ANY );
-	Bind( wxEVT_KEY_DOWN, &MadWinListDialog::OnKeyDown, this, wxID_ANY );
+	Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonActivateClick, this, ButtonActivate->GetId());
+	Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonSaveClick, this, ButtonSave->GetId());
+	Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonSaveAsClick, this, ButtonSaveAs->GetId());
+	Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonCloseWindowsClick, this, ButtonCloseWindows->GetId());
+	Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonSortTabByNameClick, this, ButtonSortTabByName->GetId());
+	Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonSortTabByPathClick, this, ButtonSortTabByPath->GetId());
+	Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MadWinListDialog::OnButtonOkClick, this, wxID_OK);
+	Bind(wxEVT_CLOSE_WINDOW, &MadWinListDialog::OnMadWinListDialogClose, this, wxID_ANY);
+	Bind(wxEVT_KEY_DOWN, &MadWinListDialog::OnKeyDown, this, wxID_ANY);
 	//*)
 
-	MadWindowsList->Bind( wxEVT_KEY_DOWN, &MadWinListDialog::OnKeyDown, this );
-	Bind( wxEVT_LIST_ITEM_SELECTED, &MadWinListDialog::OnWinListSelectionChanged, this, MadWindowsList->GetId() );
-	Bind( wxEVT_LIST_ITEM_DESELECTED, &MadWinListDialog::OnWinListSelectionChanged, this, MadWindowsList->GetId() );
-	Bind( wxEVT_LIST_COL_CLICK, &MadWinListDialog::OnWinListColumnTabClicked, this, MadWindowsList->GetId() );
+	MadWindowsList->Bind(wxEVT_KEY_DOWN, &MadWinListDialog::OnKeyDown, this);
+	Bind(wxEVT_LIST_ITEM_SELECTED, &MadWinListDialog::OnWinListSelectionChanged, this, MadWindowsList->GetId());
+	Bind(wxEVT_LIST_ITEM_DESELECTED, &MadWinListDialog::OnWinListSelectionChanged, this, MadWindowsList->GetId());
+	Bind(wxEVT_LIST_COL_CLICK, &MadWinListDialog::OnWinListColumnTabClicked, this, MadWindowsList->GetId());
 
 	ResetButtonStatus();
 
@@ -82,7 +82,7 @@ MadWinListDialog::MadWinListDialog(wxWindow* parent,wxWindowID id)
 	itemCol.SetText(_("Path"));
 	itemCol.SetAlign(wxLIST_FORMAT_LEFT);
 	MadWindowsList->InsertColumn(COL_PATH, itemCol);
-	Bind( wxEVT_ACTIVATE, &MadWinListDialog::MadWinListDialogActivate, this );
+	Bind(wxEVT_ACTIVATE, &MadWinListDialog::MadWinListDialogActivate, this);
 }
 
 MadWinListDialog::~MadWinListDialog()
@@ -102,11 +102,11 @@ void MadWinListDialog::InitWindowListIterms()
 
 	MadWindowsList->Freeze();
 	wxListItem info;
-	for( size_t id = 0; id < count; ++id )
+	for (size_t id = 0; id < count; ++id)
 	{
-		MadEdit * madedit = dynamic_cast < MadEdit* >(notebookp->GetPage( id ));
-		wxFileName fileName( madedit->GetFileName() );
-		wxString fname = notebookp->GetPageText( id );
+		MadEdit * madedit = dynamic_cast < MadEdit* >(notebookp->GetPage(id));
+		wxFileName fileName(madedit->GetFileName());
+		wxString fname = notebookp->GetPageText(id);
 		wxString fdir = fileName.GetPath();
 		
 		info.Clear();
@@ -119,22 +119,22 @@ void MadWinListDialog::InitWindowListIterms()
 	}
 	MadWindowsList->Thaw();
 
-	if(count)
+	if (count)
 	{
-	    MadWindowsList->SetColumnWidth( COL_TABNAME, wxLIST_AUTOSIZE );
-		MadWindowsList->SetColumnWidth( COL_PATH, wxLIST_AUTOSIZE );
+	    MadWindowsList->SetColumnWidth(COL_TABNAME, wxLIST_AUTOSIZE);
+		MadWindowsList->SetColumnWidth(COL_PATH, wxLIST_AUTOSIZE);
 	}
 
-	if(WINLIST_MIN_PATH_COL_WIDTH > MadWindowsList->GetColumnWidth(COL_PATH))
+	if (WINLIST_MIN_PATH_COL_WIDTH > MadWindowsList->GetColumnWidth(COL_PATH))
 	{
-		MadWindowsList->SetColumnWidth( COL_PATH, WINLIST_MIN_PATH_COL_WIDTH );
+		MadWindowsList->SetColumnWidth(COL_PATH, WINLIST_MIN_PATH_COL_WIDTH);
 	}
 
 	MadWindowsList->Show();
-	GetSizer()->Fit( this );
+	GetSizer()->Fit(this);
 }
 
-void MadWinListDialog::MadWinListDialogActivate( wxActivateEvent& WXUNUSED(event) )
+void MadWinListDialog::MadWinListDialogActivate(wxActivateEvent& WXUNUSED(event))
 {
 	InitWindowListIterms();
 	ResetButtonStatus();
@@ -144,26 +144,26 @@ void MadWinListDialog::OnButtonActivateClick(wxCommandEvent& WXUNUSED(event))
 {
 	wxASSERT(MadWindowsList->GetSelectedItemCount() == 1);
 	long selRowId = MadWindowsList->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
-	wxASSERT ( selRowId != -1 );
+	wxASSERT (selRowId != -1);
 	long pageId = static_cast<long>(MadWindowsList->GetItemData(selRowId));
-	m_MainFrame->SetPageFocus( pageId );
+	m_MainFrame->SetPageFocus(pageId);
 }
 
 void MadWinListDialog::SaveFile(bool saveas/* = false*/)
 {
 	long item = -1;
 	std::vector<long> items;
-	for ( ;; )
+	for (;;)
 	{
 		item = MadWindowsList->GetNextItem(item, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
-		if ( item == -1 )
+		if (item == -1)
 			break;
 
 		// this item is selected
 		items.push_back(item);
 	}
 	
-	for(size_t i = 0; i < items.size(); ++i)
+	for (size_t i = 0; i < items.size(); ++i)
 	{
 		long pageId = static_cast<long>(MadWindowsList->GetItemData(items[i]));
 		m_MainFrame->SaveFile(pageId, saveas);
@@ -186,10 +186,10 @@ void MadWinListDialog::OnButtonCloseWindowsClick(wxCommandEvent& WXUNUSED(event)
 	wxASSERT(MadWindowsList->GetSelectedItemCount() > 0);
 	std::vector<long> items, pages; 
 	long item = -1;
-	for ( ;; )
+	for (;;)
 	{
 		item = MadWindowsList->GetNextItem(item, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
-		if ( item == -1 )
+		if (item == -1)
 			break;
 
 		items.push_back(item);
@@ -201,7 +201,7 @@ void MadWinListDialog::OnButtonCloseWindowsClick(wxCommandEvent& WXUNUSED(event)
 	std::sort(items.begin(), items.end(), std::greater<long>());
 	std::sort(pages.begin(), pages.end(), std::greater<long>());
 
-	for(size_t i = 0; i < items.size(); ++i)
+	for (size_t i = 0; i < items.size(); ++i)
 	{
 		MadWindowsList->DeleteItem(items[i]);
 		m_MainFrame->CloseFile(pages[i]);
@@ -227,22 +227,22 @@ void MadWinListDialog::SortTabs(long column)
 	{
 		++seq;
 		item = MadWindowsList->GetNextItem(item);
-		if ( item == -1 )
+		if (item == -1)
 			break;
 
 		name = MadWindowsList->GetItemText(item, column);
-		if(column == COL_PATH)
+		if (column == COL_PATH)
 		{
 			tname = MadWindowsList->GetItemText(item);
 			name += tname;
 		}
 		
 		long pageId = static_cast<long>(MadWindowsList->GetItemData(item));
-		MadEdit * madedit = dynamic_cast < MadEdit* >(notebookp->GetPage( pageId ));
-        capMap[madedit] = notebookp->GetPageText( pageId );
-		if(name.IsEmpty())
+		MadEdit * madedit = dynamic_cast < MadEdit* >(notebookp->GetPage(pageId));
+        capMap[madedit] = notebookp->GetPageText(pageId);
+		if (name.IsEmpty())
 			name.Printf(wxT("*%04d"), seq);
-		else if(madEditMap.find(name) != madEditMap.end())
+		else if (madEditMap.find(name) != madEditMap.end())
 		{
 			wxString postfix;
 			postfix.Printf(wxT("*%04d"), seq);
@@ -255,16 +255,16 @@ void MadWinListDialog::SortTabs(long column)
 
 		madEditMap[name] = madedit;
 		oldmedits.push_back(madedit);
-		if(selid == pageId)
+		if (selid == pageId)
 			selmedit = madedit;
 	}
 
     bool changed = false;
     size_t index = 0;
     it = madEditMap.begin();
-	for( ; it != madEditMap.end(); ++it )
+	for (; it != madEditMap.end(); ++it)
     {
-        if(oldmedits[index] != it->second)
+        if (oldmedits[index] != it->second)
         {
             changed = true;
             break;
@@ -272,22 +272,22 @@ void MadWinListDialog::SortTabs(long column)
         index++;
     }
 
-	if(changed)
+	if (changed)
 	{
 		m_MainFrame->WxMenuBar1->Freeze();
-		while(notebookp->GetPageCount())
+		while (notebookp->GetPageCount())
 		{
-			notebookp->RemovePage( 0 );
+			notebookp->RemovePage(0);
 		}
 
 		selid = 0;
 		seq = 0;
         it = madEditMap.begin();
-        for( ; it != madEditMap.end(); ++it)
+        for (; it != madEditMap.end(); ++it)
         {
 			wxFileName fileName((it->second)->GetFileName());
 			wxString fname = fileName.GetFullName();
-            if(fname.IsEmpty())
+            if (fname.IsEmpty())
 			    fname = capMap[it->second];
 			notebookp->AddPage(it->second, fname);
 			if (selmedit == it->second)
@@ -296,7 +296,7 @@ void MadWinListDialog::SortTabs(long column)
 			seq++;
         }
 		m_MainFrame->WxMenuBar1->Thaw();
-		m_MainFrame->SetPageFocus( selid );
+		m_MainFrame->SetPageFocus(selid);
 		InitWindowListIterms();
 	}
 }
@@ -328,13 +328,13 @@ void MadWinListDialog::OnWinListColumnTabClicked(wxListEvent& event)
     for (; ;)
     {
         item = MadWindowsList->GetNextItem(item);
-        if ( item == -1 )
+        if (item == -1)
             break;
 
         dat.path = MadWindowsList->GetItemText(item, COL_PATH);
         dat.name = MadWindowsList->GetItemText(item, COL_TABNAME);
         dat.id = static_cast<long>(MadWindowsList->GetItemData(item));
-        if(col == COL_PATH)
+        if (col == COL_PATH)
         {
             sortby = dat.path + dat.name;
         }
@@ -356,7 +356,7 @@ void MadWinListDialog::OnWinListColumnTabClicked(wxListEvent& event)
 	wxListItem info;
 
     std::map<wxString, winlistdat>::iterator it = winListMap.begin();
-	for( ; it != winListMap.end(); ++it )
+	for (; it != winListMap.end(); ++it)
     {
         wxString fname = it->second.name;
         wxString fdir = it->second.path;
@@ -372,24 +372,24 @@ void MadWinListDialog::OnWinListColumnTabClicked(wxListEvent& event)
     }
     MadWindowsList->Thaw();
 
-    if(MadWindowsList->GetItemCount())
+    if (MadWindowsList->GetItemCount())
     {
-        MadWindowsList->SetColumnWidth( COL_TABNAME, wxLIST_AUTOSIZE );
-        MadWindowsList->SetColumnWidth( COL_PATH, wxLIST_AUTOSIZE );
+        MadWindowsList->SetColumnWidth(COL_TABNAME, wxLIST_AUTOSIZE);
+        MadWindowsList->SetColumnWidth(COL_PATH, wxLIST_AUTOSIZE);
     }
 
-    if(WINLIST_MIN_PATH_COL_WIDTH > MadWindowsList->GetColumnWidth(COL_PATH))
+    if (WINLIST_MIN_PATH_COL_WIDTH > MadWindowsList->GetColumnWidth(COL_PATH))
     {
-        MadWindowsList->SetColumnWidth( COL_PATH, WINLIST_MIN_PATH_COL_WIDTH );
+        MadWindowsList->SetColumnWidth(COL_PATH, WINLIST_MIN_PATH_COL_WIDTH);
     }
 
     MadWindowsList->Show();
-    GetSizer()->Fit( this );
+    GetSizer()->Fit(this);
 }
 
 void MadWinListDialog::OnButtonOkClick(wxCommandEvent& WXUNUSED(event))
 {
-    Show( false );
+    Show(false);
 }
 
 void MadWinListDialog::OnMadWinListDialogClose(wxCloseEvent& WXUNUSED(event))
@@ -402,20 +402,20 @@ void MadWinListDialog::OnWinListSelectionChanged(wxListEvent& event)
 {
 	bool onlyone = (MadWindowsList->GetSelectedItemCount() == 1);
 	bool selected = (MadWindowsList->GetSelectedItemCount() > 0);
-	if(ButtonActivate->IsEnabled() != onlyone)
+	if (ButtonActivate->IsEnabled() != onlyone)
 		ButtonActivate->Enable(onlyone);
 	
-	if(ButtonCloseWindows->IsEnabled() != selected)
+	if (ButtonCloseWindows->IsEnabled() != selected)
 		ButtonCloseWindows->Enable(selected);
-	if(ButtonSaveAs->IsEnabled() != selected)
+	if (ButtonSaveAs->IsEnabled() != selected)
 		ButtonSaveAs->Enable(selected);
-	if(selected)
+	if (selected)
 	{
 		wxString fname = MadWindowsList->GetItemText(event.GetIndex());
-		selected = (fname[fname.Len() - 1] == wxT( '*' ));
+		selected = (fname[fname.Len() - 1] == wxT('*'));
 	}
 
-	if(ButtonSave->IsEnabled() != selected)
+	if (ButtonSave->IsEnabled() != selected)
 		ButtonSave->Enable(selected);
 }
 
@@ -432,7 +432,7 @@ void MadWinListDialog::OnKeyDown(wxKeyEvent& event)
 	// insert your code here
 	int key=event.GetKeyCode();
 
-	switch(key)
+	switch (key)
 	{
 	case WXK_ESCAPE:
 		{
@@ -445,18 +445,18 @@ void MadWinListDialog::OnKeyDown(wxKeyEvent& event)
 	}
 
 	int flags=wxACCEL_NORMAL;
-	if(event.m_controlDown) flags|=wxACCEL_CTRL;
+	if (event.m_controlDown) flags|=wxACCEL_CTRL;
 
-	if('A' == key && wxACCEL_CTRL == flags)
+	if ('A' == key && wxACCEL_CTRL == flags)
 	{
-		if(MadWindowsList->GetSelectedItemCount() > 0)
+		if (MadWindowsList->GetSelectedItemCount() > 0)
 		{
 			long item = -1;
 			MadWindowsList->Freeze();
-			for ( ;; )
+			for (;;)
 			{
 				item = MadWindowsList->GetNextItem(item);
-				if ( item == -1 )
+				if (item == -1)
 					break;
 				MadWindowsList->SetItemState(item, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
 			}

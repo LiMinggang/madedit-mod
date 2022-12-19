@@ -60,20 +60,20 @@ DECLARE_EXPORTED_EVENT_TYPE(WXEXPORT, wxEVT_COMMAND_LIST_ITEM_CHECKED, -1);
 DECLARE_EXPORTED_EVENT_TYPE(WXEXPORT, wxEVT_COMMAND_LIST_ITEM_UNCHECKED, -1);
 #ifndef EVT_LIST_ITEM_CHECKED
 #define EVT_LIST_ITEM_CHECKED(id, fn) \
-    DECLARE_EVENT_TABLE_ENTRY( \
+    DECLARE_EVENT_TABLE_ENTRY(\
         wxEVT_COMMAND_LIST_ITEM_CHECKED, id, -1, \
         (wxObjectEventFunction)(wxEventFunction)(wxListEventFunction)&fn, \
         (wxObject *) nullptr \
-    ),
+   ),
 #endif
 #ifndef EVT_LIST_ITEM_UNCHECKED
 
 #define EVT_LIST_ITEM_UNCHECKED(id, fn) \
-    DECLARE_EVENT_TABLE_ENTRY( \
+    DECLARE_EVENT_TABLE_ENTRY(\
         wxEVT_COMMAND_LIST_ITEM_UNCHECKED, id, -1, \
         (wxObjectEventFunction)(wxEventFunction)(wxListEventFunction)&fn, \
         (wxObject *) nullptr \
-    ),
+   ),
 
 #endif
 
@@ -107,7 +107,7 @@ public:
                         const wxValidator& validator = wxDefaultValidator,
                         const wxString& name = wxListCtrlNameStr);
 
-    virtual ~wxCheckedListCtrl() { DeletePendingEvents  (  ); }
+    virtual ~wxCheckedListCtrl() { DeletePendingEvents  (); }
 
 
 public:			// utilities
@@ -152,7 +152,7 @@ public:			// utilities
     // #GetItem and #SetItem functions...
     bool SetItemState(long item, long state, long stateMask);
     int GetItemState(long item, long stateMask) const;
-    long InsertItem( long index, const wxString& label, int imageIndex = -1);
+    long InsertItem(long index, const wxString& label, int imageIndex = -1);
     long SetItem(long index, int col, const wxString& label, int imageId = -1);
 
     // the image associated with an element is already in used by wxCheckedListCtrl

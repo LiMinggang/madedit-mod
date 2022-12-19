@@ -11,8 +11,8 @@
 
 
 #ifdef _MSC_VER
-# pragma warning( push )
-# pragma warning( disable : 4996 )
+# pragma warning(push)
+# pragma warning(disable : 4996)
 #endif
 // disable 4996 {
 //(*Headers(MadHighlightingDialog)
@@ -31,7 +31,7 @@
 using std::vector;
 // disable 4996 }
 #ifdef _MSC_VER
-# pragma warning( pop )
+# pragma warning(pop)
 #endif
 
 #include <wx/colordlg.h>

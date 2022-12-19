@@ -14,8 +14,8 @@
 #include "MadUtils.h"
 
 #ifdef _MSC_VER
-# pragma warning( push )
-# pragma warning( disable : 4996 )
+# pragma warning(push)
+# pragma warning(disable : 4996)
 #endif
 // disable 4996 {
 #include <wx/progdlg.h>
@@ -29,7 +29,7 @@
 //*)
 // disable 4996 }
 #ifdef _MSC_VER
-# pragma warning( pop )
+# pragma warning(pop)
 #endif
 
 
@@ -46,12 +46,12 @@ extern wxStatusBar *g_StatusBar;
 extern MadEdit *g_ActiveMadEdit;
 extern wxMenu *g_Menu_EditPop;
 
-extern void DisplayFindAllResult( wxTreeItemId &myroot, vector<wxFileOffset> &begpos, vector<wxFileOffset> &endpos, MadEdit *madedit, bool expandresults = true, OnProgressUpdatePtr updater = nullptr );
-extern int MadMessageBox( const wxString& message,
+extern void DisplayFindAllResult(wxTreeItemId &myroot, vector<wxFileOffset> &begpos, vector<wxFileOffset> &endpos, MadEdit *madedit, bool expandresults = true, OnProgressUpdatePtr updater = nullptr);
+extern int MadMessageBox(const wxString& message,
                           const wxString& caption = wxMessageBoxCaptionStr,
                           long style = wxOK | wxCENTRE,
                           wxWindow *parent = nullptr,
-                          int x = wxDefaultCoord, int y = wxDefaultCoord );
+                          int x = wxDefaultCoord, int y = wxDefaultCoord);
 
 //(*IdInit(MadFindInFilesDialog)
 //*)
@@ -237,18 +237,18 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID WXUNUSED(
 	// find
 	WxButtonFind->GetSize(&bw, &bh);
 
-	m_FindText = new MadEdit( this, wxID_ANY, wxPoint( 0, 0 ), wxSize( 400, bh ) );
-	m_FindText->SetSingleLineMode( true );
-	m_FindText->SetEncoding( wxT( "UTF-32LE" ) );
-	m_FindText->SetFixedWidthMode( false );
-	m_FindText->SetRecordCaretMovements( false );
-	m_FindText->SetInsertSpacesInsteadOfTab( false );
-	m_FindText->SetWantTab( false );
+	m_FindText = new MadEdit(this, wxID_ANY, wxPoint(0, 0), wxSize(400, bh));
+	m_FindText->SetSingleLineMode(true);
+	m_FindText->SetEncoding(wxT("UTF-32LE"));
+	m_FindText->SetFixedWidthMode(false);
+	m_FindText->SetRecordCaretMovements(false);
+	m_FindText->SetInsertSpacesInsteadOfTab(false);
+	m_FindText->SetWantTab(false);
 	MadSyntax* syn = m_FindText->GetSyntax();
 	syn->DuplicateAttributes();
 	m_FindText->LoadDefaultSyntaxScheme();
 	m_FindText->SetShowEndOfLine(false);
-	m_FindText->SetShowTabChar( true );
+	m_FindText->SetShowTabChar(true);
 	BoxSizer6->Add(m_FindText,1,wxEXPAND|wxALIGN_LEFT | wxALL,2);
 	BoxSizer6->SetItemMinSize(m_FindText, 400, bh);
 
@@ -259,21 +259,21 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID WXUNUSED(
 	// replace
 	WxButtonReplace->GetSize(&bw, &bh);
 
-	m_ReplaceText = new MadEdit( this, wxID_ANY, wxPoint( 0, 0 ), wxSize( 400, bh ) );
-	m_ReplaceText->SetSingleLineMode( true );
-	m_ReplaceText->SetEncoding( wxT( "UTF-32LE" ) );
-	m_ReplaceText->SetFixedWidthMode( false );
-	m_ReplaceText->SetRecordCaretMovements( false );
-	m_ReplaceText->SetInsertSpacesInsteadOfTab( false );
-	m_ReplaceText->SetWantTab( false );
+	m_ReplaceText = new MadEdit(this, wxID_ANY, wxPoint(0, 0), wxSize(400, bh));
+	m_ReplaceText->SetSingleLineMode(true);
+	m_ReplaceText->SetEncoding(wxT("UTF-32LE"));
+	m_ReplaceText->SetFixedWidthMode(false);
+	m_ReplaceText->SetRecordCaretMovements(false);
+	m_ReplaceText->SetInsertSpacesInsteadOfTab(false);
+	m_ReplaceText->SetWantTab(false);
 	syn = m_ReplaceText->GetSyntax();
 	syn->DuplicateAttributes();
 	m_ReplaceText->LoadDefaultSyntaxScheme();
 	m_ReplaceText->SetShowEndOfLine(false);
-	m_ReplaceText->SetShowTabChar( true );
+	m_ReplaceText->SetShowTabChar(true);
 	// connect to KeyDown event handler
-	m_FindText->Bind( wxEVT_KEY_DOWN, &MadFindInFilesDialog::MadFindInFilesDialogKeyDown, this );
-	m_ReplaceText->Bind( wxEVT_KEY_DOWN, &MadFindInFilesDialog::MadFindInFilesDialogKeyDown, this );
+	m_FindText->Bind(wxEVT_KEY_DOWN, &MadFindInFilesDialog::MadFindInFilesDialogKeyDown, this);
+	m_ReplaceText->Bind(wxEVT_KEY_DOWN, &MadFindInFilesDialog::MadFindInFilesDialogKeyDown, this);
 	BoxSizer7->Add(m_ReplaceText,1,wxEXPAND|wxALIGN_LEFT | wxALL,2);
 	BoxSizer7->SetItemMinSize(m_ReplaceText, 400, bh);
 
@@ -288,104 +288,104 @@ MadFindInFilesDialog::MadFindInFilesDialog(wxWindow* parent,wxWindowID WXUNUSED(
 	BoxSizer1->SetSizeHints(this);
 	Center();
 
-	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED, &MadFindInFilesDialog::WxCheckBoxRegexClick, this, WxCheckBoxRegex->GetId() );
-	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED, &MadFindInFilesDialog::WxCheckBoxFindHexClick, this, WxCheckBoxFindHex->GetId() );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadFindInFilesDialog::WxButtonFindClick, this, WxButtonFind->GetId() );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadFindInFilesDialog::WxButtonReplaceClick, this, WxButtonReplace->GetId() );
-	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED, &MadFindInFilesDialog::WxCheckBoxEnableReplaceClick, this, WxCheckBoxEnableReplace->GetId() );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadFindInFilesDialog::WxButtonDirClick, this, WxButtonDir->GetId() );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadFindInFilesDialog::WxButtonActiveDirClick, this, WxButtonActiveDir->GetId() );
+	Bind(wxEVT_COMMAND_CHECKBOX_CLICKED, &MadFindInFilesDialog::WxCheckBoxRegexClick, this, WxCheckBoxRegex->GetId());
+	Bind(wxEVT_COMMAND_CHECKBOX_CLICKED, &MadFindInFilesDialog::WxCheckBoxFindHexClick, this, WxCheckBoxFindHex->GetId());
+	Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MadFindInFilesDialog::WxButtonFindClick, this, WxButtonFind->GetId());
+	Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MadFindInFilesDialog::WxButtonReplaceClick, this, WxButtonReplace->GetId());
+	Bind(wxEVT_COMMAND_CHECKBOX_CLICKED, &MadFindInFilesDialog::WxCheckBoxEnableReplaceClick, this, WxCheckBoxEnableReplace->GetId());
+	Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MadFindInFilesDialog::WxButtonDirClick, this, WxButtonDir->GetId());
+	Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MadFindInFilesDialog::WxButtonActiveDirClick, this, WxButtonActiveDir->GetId());
 
-	Bind( wxEVT_ACTIVATE, &MadFindInFilesDialog::MadFindInFilesDialogActivate, this );
+	Bind(wxEVT_ACTIVATE, &MadFindInFilesDialog::MadFindInFilesDialogActivate, this);
 
-	Bind( wxEVT_BUTTON, &MadFindInFilesDialog::WxBitmapButtonRecentFindTextClick, this, WxBitmapButtonRecentFindText->GetId() );
-	Bind( wxEVT_BUTTON, &MadFindInFilesDialog::WxBitmapButtonRecentReplaceTextClick, this, WxBitmapButtonRecentReplaceText->GetId() );
-	Bind( wxEVT_MENU, &MadFindInFilesDialog::OnRecentFindText, this, ID_RECENTFINDTEXT1, ID_RECENTFINDTEXT20 );
-	Bind( wxEVT_MENU, &MadFindInFilesDialog::OnRecentReplaceText, this, ID_RECENTREPLACETEXT1, ID_RECENTREPLACETEXT20 );
-	Bind( wxEVT_CLOSE_WINDOW, &MadFindInFilesDialog::MadFindInFilesDialogClose, this);
+	Bind(wxEVT_BUTTON, &MadFindInFilesDialog::WxBitmapButtonRecentFindTextClick, this, WxBitmapButtonRecentFindText->GetId());
+	Bind(wxEVT_BUTTON, &MadFindInFilesDialog::WxBitmapButtonRecentReplaceTextClick, this, WxBitmapButtonRecentReplaceText->GetId());
+	Bind(wxEVT_MENU, &MadFindInFilesDialog::OnRecentFindText, this, ID_RECENTFINDTEXT1, ID_RECENTFINDTEXT20);
+	Bind(wxEVT_MENU, &MadFindInFilesDialog::OnRecentReplaceText, this, ID_RECENTREPLACETEXT1, ID_RECENTREPLACETEXT20);
+	Bind(wxEVT_CLOSE_WINDOW, &MadFindInFilesDialog::MadFindInFilesDialogClose, this);
 
-	for(size_t i = 0; i < sizeof(m_menu_evt_map)/sizeof(m_menu_evt_map[0]); ++i)
+	for (size_t i = 0; i < sizeof(m_menu_evt_map)/sizeof(m_menu_evt_map[0]); ++i)
 	{
-		Bind( wxEVT_MENU, m_menu_evt_map[i].method, this, m_menu_evt_map[i].evtTag );
+		Bind(wxEVT_MENU, m_menu_evt_map[i].method, this, m_menu_evt_map[i].evtTag);
 	}
 
-	for(size_t i = 0; i < sizeof(m_menu_evt_range_map)/sizeof(m_menu_evt_range_map[0]); ++i)
+	for (size_t i = 0; i < sizeof(m_menu_evt_range_map)/sizeof(m_menu_evt_range_map[0]); ++i)
 	{
-		Bind( wxEVT_MENU, m_menu_evt_range_map[i].method, this, m_menu_evt_range_map[i].evtStartTag, m_menu_evt_range_map[i].evtEndTag );
+		Bind(wxEVT_MENU, m_menu_evt_range_map[i].method, this, m_menu_evt_range_map[i].evtStartTag, m_menu_evt_range_map[i].evtEndTag);
 	}
 
 	// build encoding list
-	wxString systemenc( _( "Automatic Detection" ) );
-	WxComboBoxEncoding->Append( systemenc );
+	wxString systemenc(_("Automatic Detection"));
+	WxComboBoxEncoding->Append(systemenc);
 	size_t cnt = MadEncoding::GetEncodingsCount();
 
-	for( size_t i = 0; i < cnt; ++i )
+	for (size_t i = 0; i < cnt; ++i)
 	{
-		WxComboBoxEncoding->Append( MadEncoding::GetEncodingName( i ) ); //enc+des);
+		WxComboBoxEncoding->Append(MadEncoding::GetEncodingName(i)); //enc+des);
 	}
 
-	WxComboBoxEncoding->SetValue( systemenc );
+	WxComboBoxEncoding->SetValue(systemenc);
 	//
 	m_RecentFindDir = new MadRecentList();
 	m_RecentFindFilter = new MadRecentList();
 	m_RecentFindExclude = new MadRecentList();
-	wxConfigBase *m_Config = wxConfigBase::Get( false );
+	wxConfigBase *m_Config = wxConfigBase::Get(false);
 	wxString oldpath = m_Config->GetPath();
-	m_Config->SetPath( wxT( "/RecentFindDir" ) );
-	m_RecentFindDir->Load( *m_Config );
-	m_Config->SetPath( wxT( "/RecentFindFilter" ) );
-	m_RecentFindFilter->Load( *m_Config );
-	m_Config->SetPath( wxT( "/RecentFindExcludeFilter" ) );
-	m_RecentFindExclude->Load( *m_Config );
-	m_Config->SetPath( oldpath );
+	m_Config->SetPath(wxT("/RecentFindDir"));
+	m_RecentFindDir->Load(*m_Config);
+	m_Config->SetPath(wxT("/RecentFindFilter"));
+	m_RecentFindFilter->Load(*m_Config);
+	m_Config->SetPath(wxT("/RecentFindExcludeFilter"));
+	m_RecentFindExclude->Load(*m_Config);
+	m_Config->SetPath(oldpath);
 	size_t count = m_RecentFindDir->GetCount();
 
-	if( count > 0 )
+	if (count > 0)
 	{
-		wxString text = m_RecentFindDir->GetHistoryFile( 0 );
-		WxComboBoxDir->SetValue( text );
-		WxComboBoxDir->Append( text );
+		wxString text = m_RecentFindDir->GetHistoryFile(0);
+		WxComboBoxDir->SetValue(text);
+		WxComboBoxDir->Append(text);
 
-		for( size_t i = 1; i < count; ++i ) { WxComboBoxDir->Append( m_RecentFindDir->GetHistoryFile( i ) ); }
+		for (size_t i = 1; i < count; ++i) { WxComboBoxDir->Append(m_RecentFindDir->GetHistoryFile(i)); }
 	}
 
 	count = m_RecentFindFilter->GetCount();
 
-	if( count > 0 )
+	if (count > 0)
 	{
-		wxString text = m_RecentFindFilter->GetHistoryFile( 0 );
-		WxComboBoxFilter->SetValue( text );
-		WxComboBoxFilter->Append( text );
+		wxString text = m_RecentFindFilter->GetHistoryFile(0);
+		WxComboBoxFilter->SetValue(text);
+		WxComboBoxFilter->Append(text);
 
-		for( size_t i = 1; i < count; ++i ) { WxComboBoxFilter->Append( m_RecentFindFilter->GetHistoryFile( i ) ); }
+		for (size_t i = 1; i < count; ++i) { WxComboBoxFilter->Append(m_RecentFindFilter->GetHistoryFile(i)); }
 	}
 
 	count = m_RecentFindExclude->GetCount();
 
-	if( count > 0 )
+	if (count > 0)
 	{
-		wxString text = m_RecentFindExclude->GetHistoryFile( 0 );
+		wxString text = m_RecentFindExclude->GetHistoryFile(0);
 		//WxComboBoxExclude->SetValue(text);
-		WxComboBoxExclude->Append( text );
+		WxComboBoxExclude->Append(text);
 
-		for( size_t i = 1; i < count; ++i ) { WxComboBoxExclude->Append( m_RecentFindExclude->GetHistoryFile( i ) ); }
+		for (size_t i = 1; i < count; ++i) { WxComboBoxExclude->Append(m_RecentFindExclude->GetHistoryFile(i)); }
 	}
 
 	wxASSERT(g_SearchReplaceDialog != nullptr);
-	if( g_SearchReplaceDialog->m_RecentFindText->GetCount() > 0 )
+	if (g_SearchReplaceDialog->m_RecentFindText->GetCount() > 0)
 	{
-		m_FindText->SetText( g_SearchReplaceDialog->m_RecentFindText->GetHistoryFile( 0 ) );
+		m_FindText->SetText(g_SearchReplaceDialog->m_RecentFindText->GetHistoryFile(0));
 	}
 
-	if( g_SearchReplaceDialog->m_RecentReplaceText->GetCount() > 0 )
+	if (g_SearchReplaceDialog->m_RecentReplaceText->GetCount() > 0)
 	{
-		m_ReplaceText->SetText( g_SearchReplaceDialog->m_RecentReplaceText->GetHistoryFile( 0 ) );
+		m_ReplaceText->SetText(g_SearchReplaceDialog->m_RecentReplaceText->GetHistoryFile(0));
 	}
 
-	m_FindText->SetOnMouseRightUp( &OnEditMouseRightUp );
-	m_FindText->SetRightClickMenu( g_Menu_EditPop );
-	m_ReplaceText->SetOnMouseRightUp( &OnEditMouseRightUp );
-	m_ReplaceText->SetRightClickMenu( g_Menu_EditPop );
+	m_FindText->SetOnMouseRightUp(&OnEditMouseRightUp);
+	m_FindText->SetRightClickMenu(g_Menu_EditPop);
+	m_ReplaceText->SetOnMouseRightUp(&OnEditMouseRightUp);
+	m_ReplaceText->SetRightClickMenu(g_Menu_EditPop);
 
 	WxButtonClose->SetFocus();
 }
@@ -401,18 +401,18 @@ MadFindInFilesDialog::~MadFindInFilesDialog()
 
 void MadFindInFilesDialog::MadFindInFilesDialogClose(wxCloseEvent& event)
 {
-	if(event.CanVeto())
+	if (event.CanVeto())
 	{
 		wxFrame * mframe = dynamic_cast< wxFrame * >(wxTheApp->GetTopWindow());
-		if( mframe != nullptr )
+		if (mframe != nullptr)
 		{
 			event.Veto();
 			Show(false);
 			mframe->Raise();
 
-			if( g_ActiveMadEdit != nullptr )
+			if (g_ActiveMadEdit != nullptr)
 			{
-				g_ActiveMadEdit->Refresh( false );
+				g_ActiveMadEdit->Refresh(false);
 				g_ActiveMadEdit->SetFocus();
 			}
 			return;
@@ -423,9 +423,9 @@ void MadFindInFilesDialog::MadFindInFilesDialogClose(wxCloseEvent& event)
 	Destroy();
 }
 
-void MadFindInFilesDialog::UpdateCheckBoxByCBHex( bool check )
+void MadFindInFilesDialog::UpdateCheckBoxByCBHex(bool check)
 {
-	if( check )
+	if (check)
 	{
 		WxCheckBoxCaseSensitive->Disable();
 		WxCheckBoxWholeWord->Disable();
@@ -438,7 +438,7 @@ void MadFindInFilesDialog::UpdateCheckBoxByCBHex( bool check )
 		WxCheckBoxCaseSensitive->Enable();
 		WxCheckBoxRegex->Enable();
 		WxCheckBoxPanChinese->Enable();
-		if(WxCheckBoxRegex->GetValue())
+		if (WxCheckBoxRegex->GetValue())
 		{
 			WxCheckBoxDotMatchNewLine->Enable();
 			WxCheckBoxWholeWord->Disable();
@@ -451,42 +451,42 @@ void MadFindInFilesDialog::UpdateCheckBoxByCBHex( bool check )
 	}
 }
 
-void MadFindInFilesDialog::WxBitmapButtonRecentFindTextClick( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::WxBitmapButtonRecentFindTextClick(wxCommandEvent& WXUNUSED(event))
 {
 	wxASSERT(g_SearchReplaceDialog != nullptr);
 
-	PopupMenu( &g_SearchReplaceDialog->WxPopupMenuRecentFindText );
+	PopupMenu(&g_SearchReplaceDialog->WxPopupMenuRecentFindText);
 }
 
-void MadFindInFilesDialog::WxBitmapButtonRecentReplaceTextClick( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::WxBitmapButtonRecentReplaceTextClick(wxCommandEvent& WXUNUSED(event))
 {
 	wxASSERT(g_SearchReplaceDialog != nullptr);
 
-	PopupMenu( &g_SearchReplaceDialog->WxPopupMenuRecentReplaceText );
+	PopupMenu(&g_SearchReplaceDialog->WxPopupMenuRecentReplaceText);
 }
 
-void MadFindInFilesDialog::OnRecentFindText( wxCommandEvent& event )
+void MadFindInFilesDialog::OnRecentFindText(wxCommandEvent& event)
 {
 	int idx = event.GetId() - ID_RECENTFINDTEXT1;
 	wxASSERT(g_SearchReplaceDialog != nullptr);
-	wxString text = g_SearchReplaceDialog->m_RecentFindText->GetHistoryFile( idx );
+	wxString text = g_SearchReplaceDialog->m_RecentFindText->GetHistoryFile(idx);
 
-	if( !text.IsEmpty() )
+	if (!text.IsEmpty())
 	{
-		m_FindText->SetText( text );
+		m_FindText->SetText(text);
 		m_FindText->SetFocus();
 	}
 }
 
-void MadFindInFilesDialog::OnRecentReplaceText( wxCommandEvent& event )
+void MadFindInFilesDialog::OnRecentReplaceText(wxCommandEvent& event)
 {
 	int idx = event.GetId() - ID_RECENTREPLACETEXT1;
 	wxASSERT(g_SearchReplaceDialog != nullptr);
-	wxString text = g_SearchReplaceDialog->m_RecentReplaceText->GetHistoryFile( idx );
+	wxString text = g_SearchReplaceDialog->m_RecentReplaceText->GetHistoryFile(idx);
 
-	if( !text.IsEmpty() )
+	if (!text.IsEmpty())
 	{
-		m_ReplaceText->SetText( text );
+		m_ReplaceText->SetText(text);
 		m_ReplaceText->SetFocus();
 	}
 }
@@ -494,109 +494,109 @@ void MadFindInFilesDialog::OnRecentReplaceText( wxCommandEvent& event )
 /*
  * WxCheckBoxFindHexClick
  */
-void MadFindInFilesDialog::WxCheckBoxFindHexClick( wxCommandEvent& event )
+void MadFindInFilesDialog::WxCheckBoxFindHexClick(wxCommandEvent& event)
 {
-	UpdateCheckBoxByCBHex( event.IsChecked() );
+	UpdateCheckBoxByCBHex(event.IsChecked());
 }
 
 /*
  * WxButtonFindClick
  */
-void MadFindInFilesDialog::WxButtonFindClick( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::WxButtonFindClick(wxCommandEvent& WXUNUSED(event))
 {
 	wxString text;
-	m_FindText->GetText( text );
+	m_FindText->GetText(text);
 
-	if( !text.IsEmpty() )
+	if (!text.IsEmpty())
 	{
 		wxASSERT(g_SearchReplaceDialog != nullptr);
-		g_SearchReplaceDialog->m_RecentFindText->AddFileToHistory( text );
-		FindReplaceInFiles( false );
+		g_SearchReplaceDialog->m_RecentFindText->AddFileToHistory(text);
+		FindReplaceInFiles(false);
 	}
 }
 
 /*
  * WxButtonReplaceClick
  */
-void MadFindInFilesDialog::WxButtonReplaceClick( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::WxButtonReplaceClick(wxCommandEvent& WXUNUSED(event))
 {
 	wxString text, text2;
-	m_FindText->GetText( text );
-	m_ReplaceText->GetText( text2 );
+	m_FindText->GetText(text);
+	m_ReplaceText->GetText(text2);
 
-	if( !text.IsEmpty() )
+	if (!text.IsEmpty())
 	{
 		wxASSERT(g_SearchReplaceDialog != nullptr);
-		g_SearchReplaceDialog->m_RecentFindText->AddFileToHistory( text );
+		g_SearchReplaceDialog->m_RecentFindText->AddFileToHistory(text);
 
-		if( !text2.IsEmpty() )
+		if (!text2.IsEmpty())
 		{
-			g_SearchReplaceDialog->m_RecentReplaceText->AddFileToHistory( text2 );
+			g_SearchReplaceDialog->m_RecentReplaceText->AddFileToHistory(text2);
 		}
 
-		FindReplaceInFiles( true );
+		FindReplaceInFiles(true);
 	}
 }
 
 /*
  * WxButtonDirClick
  */
-void MadFindInFilesDialog::WxButtonDirClick( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::WxButtonDirClick(wxCommandEvent& WXUNUSED(event))
 {
 	wxString defdir = WxComboBoxDir->GetValue();
 
-	if( defdir.IsEmpty() || ( wxDirExists( defdir ) == false)) { defdir = wxGetCwd(); }
+	if (defdir.IsEmpty() || (wxDirExists(defdir) == false)) { defdir = wxGetCwd(); }
 
-	wxDirDialog dlg( this, _( "Choose a directory" ), defdir );
+	wxDirDialog dlg(this, _("Choose a directory"), defdir);
 
-	if( dlg.ShowModal() == wxID_OK )
+	if (dlg.ShowModal() == wxID_OK)
 	{
-		WxComboBoxDir->SetValue( dlg.GetPath() );
+		WxComboBoxDir->SetValue(dlg.GetPath());
 	}
 }
 
 /*
  * MadFindInFilesDialogActivate
  */
-void MadFindInFilesDialog::MadFindInFilesDialogActivate( wxActivateEvent& event )
+void MadFindInFilesDialog::MadFindInFilesDialogActivate(wxActivateEvent& event)
 {
-	wxConfigBase *m_Config = wxConfigBase::Get( false );
+	wxConfigBase *m_Config = wxConfigBase::Get(false);
 	wxString oldpath = m_Config->GetPath();
 
-	if( event.GetActive() )
+	if (event.GetActive())
 	{
 		bool bb;
-		m_Config->Read( wxT( "/MadEdit/SearchCaseSensitive" ), &bb, false );
-		WxCheckBoxCaseSensitive->SetValue( bb );
-		m_Config->Read( wxT( "/MadEdit/SearchWholeWord" ), &bb, false );
-		WxCheckBoxWholeWord->SetValue( bb );
-		m_Config->Read( wxT( "/MadEdit/SearchRegex" ), &bb, false );
-		WxCheckBoxRegex->SetValue( bb );
-		m_Config->Read( wxT( "/MadEdit/SearchHex" ), &bb, false );
-		WxCheckBoxFindHex->SetValue( bb );
-		UpdateCheckBoxByCBHex( bb );
-		m_Config->Read( wxT( "/Application/FindListFileOnly" ), &bb, false );
-		WxCheckBoxListFirstOnly->SetValue( bb );
-		m_Config->Read( wxT( "/Application/FindOpenedFiles" ), &bb, true );
-		WxRadioButtonOpenedFiles->SetValue( bb );
-		m_Config->Read( wxT( "/Application/FindDir" ), &bb, false );
-		WxRadioButtonDir->SetValue( bb );
-		m_Config->Read( wxT( "/Application/FindSubDir" ), &bb, true );
-		WxCheckBoxSubDir->SetValue( bb );
+		m_Config->Read(wxT("/MadEdit/SearchCaseSensitive"), &bb, false);
+		WxCheckBoxCaseSensitive->SetValue(bb);
+		m_Config->Read(wxT("/MadEdit/SearchWholeWord"), &bb, false);
+		WxCheckBoxWholeWord->SetValue(bb);
+		m_Config->Read(wxT("/MadEdit/SearchRegex"), &bb, false);
+		WxCheckBoxRegex->SetValue(bb);
+		m_Config->Read(wxT("/MadEdit/SearchHex"), &bb, false);
+		WxCheckBoxFindHex->SetValue(bb);
+		UpdateCheckBoxByCBHex(bb);
+		m_Config->Read(wxT("/Application/FindListFileOnly"), &bb, false);
+		WxCheckBoxListFirstOnly->SetValue(bb);
+		m_Config->Read(wxT("/Application/FindOpenedFiles"), &bb, true);
+		WxRadioButtonOpenedFiles->SetValue(bb);
+		m_Config->Read(wxT("/Application/FindDir"), &bb, false);
+		WxRadioButtonDir->SetValue(bb);
+		m_Config->Read(wxT("/Application/FindSubDir"), &bb, true);
+		WxCheckBoxSubDir->SetValue(bb);
 	}
 	else
 	{
-		m_Config->Write( wxT( "/MadEdit/SearchCaseSensitive" ), WxCheckBoxCaseSensitive->GetValue() );
-		m_Config->Write( wxT( "/MadEdit/SearchWholeWord" ), WxCheckBoxWholeWord->GetValue() );
-		m_Config->Write( wxT( "/MadEdit/SearchRegex" ), WxCheckBoxRegex->GetValue() );
-		m_Config->Write( wxT( "/MadEdit/SearchHex" ), WxCheckBoxFindHex->GetValue() );
-		m_Config->Write( wxT( "/Application/FindListFileOnly" ), WxCheckBoxListFirstOnly->GetValue() );
-		m_Config->Write( wxT( "/Application/FindOpenedFiles" ), WxRadioButtonOpenedFiles->GetValue() );
-		m_Config->Write( wxT( "/Application/FindDir" ), WxRadioButtonDir->GetValue() );
-		m_Config->Write( wxT( "/Application/FindSubDir" ), WxCheckBoxSubDir->GetValue() );
+		m_Config->Write(wxT("/MadEdit/SearchCaseSensitive"), WxCheckBoxCaseSensitive->GetValue());
+		m_Config->Write(wxT("/MadEdit/SearchWholeWord"), WxCheckBoxWholeWord->GetValue());
+		m_Config->Write(wxT("/MadEdit/SearchRegex"), WxCheckBoxRegex->GetValue());
+		m_Config->Write(wxT("/MadEdit/SearchHex"), WxCheckBoxFindHex->GetValue());
+		m_Config->Write(wxT("/Application/FindListFileOnly"), WxCheckBoxListFirstOnly->GetValue());
+		m_Config->Write(wxT("/Application/FindOpenedFiles"), WxRadioButtonOpenedFiles->GetValue());
+		m_Config->Write(wxT("/Application/FindDir"), WxRadioButtonDir->GetValue());
+		m_Config->Write(wxT("/Application/FindSubDir"), WxCheckBoxSubDir->GetValue());
 	}
 
-	m_Config->SetPath( oldpath );
+	m_Config->SetPath(oldpath);
 }
 
 //=========================================================
@@ -607,11 +607,11 @@ wxLongLong g_Time;
 
 wxString fmtmsg1;
 
-WX_DECLARE_HASH_SET( wxString, wxStringHash, wxStringEqual, MadFileNameList );
+WX_DECLARE_HASH_SET(wxString, wxStringHash, wxStringEqual, MadFileNameList);
 MadFileNameList g_FileNameList; // the filenames matched the filename filter
 
 vector<wxString> g_ExcludeFilters;
-extern wxString MadStrLower( const wxString & );
+extern wxString MadStrLower(const wxString &);
 class DirTraverser : public wxDirTraverser
 {
 public:
@@ -619,31 +619,31 @@ public:
 		wxLongLong t = wxGetLocalTimeMillis();
 		wxLongLong delta = t - g_Time;
 
-		if( delta.ToLong() >= 350 ) {
+		if (delta.ToLong() >= 350) {
 			g_Time = t;
 			wxASSERT(g_ProgressDialog != nullptr);
-			g_Continue = g_ProgressDialog->Update( 0, wxString::Format( fmtmsg1, ( wxLongLong( g_FileNameList.size() ).ToString() ).c_str() ) );
+			g_Continue = g_ProgressDialog->Update(0, wxString::Format(fmtmsg1, (wxLongLong(g_FileNameList.size()).ToString()).c_str()));
 
-			if( !g_Continue ) { return wxDIR_STOP; }
+			if (!g_Continue) { return wxDIR_STOP; }
 		}
 
 		return wxDIR_CONTINUE;
 	}
-	virtual wxDirTraverseResult OnFile( const wxString& filename ) {
+	virtual wxDirTraverseResult OnFile(const wxString& filename) {
 		bool exclude = false;
 
-		if( !g_ExcludeFilters.empty() ) {
+		if (!g_ExcludeFilters.empty()) {
 			wxFileName fn;
 			size_t count = g_ExcludeFilters.size();
 
-			for( size_t i = 0; i < count; ++i ) {
-				fn.Assign( filename );
+			for (size_t i = 0; i < count; ++i) {
+				fn.Assign(filename);
 #ifdef __WXMSW__
 
-				if( MadStrLower( fn.GetFullName() ).Matches( g_ExcludeFilters[i].c_str() ) )
-					//if(fn.GetFullName().Lower().Matches(g_ExcludeFilters[i].c_str()))
+				if (MadStrLower(fn.GetFullName()).Matches(g_ExcludeFilters[i].c_str()))
+					//if (fn.GetFullName().Lower().Matches(g_ExcludeFilters[i].c_str()))
 #else
-				if( fn.GetFullName().Matches( g_ExcludeFilters[i].c_str() ) )
+				if (fn.GetFullName().Matches(g_ExcludeFilters[i].c_str()))
 #endif
 				{
 					exclude = true;
@@ -652,61 +652,61 @@ public:
 			}
 		}
 
-		if( !exclude && g_FileNameList.find( filename ) == g_FileNameList.end() ) {
-			g_FileNameList.insert( filename );
+		if (!exclude && g_FileNameList.find(filename) == g_FileNameList.end()) {
+			g_FileNameList.insert(filename);
 		}
 
 		return Continue();
 	}
-	virtual wxDirTraverseResult OnDir( const wxString& WXUNUSED( dirname ) ) {
+	virtual wxDirTraverseResult OnDir(const wxString& WXUNUSED(dirname)) {
 		return Continue();
 	}
 };
 
 extern wxProgressDialog *g_SearchProgressDialog;
-extern bool OnSearchProgressUpdate( int value, const wxString &newmsg = wxEmptyString, bool *skip = nullptr );
-void MadFindInFilesDialog::FindReplaceInFiles( bool bReplace )
+extern bool OnSearchProgressUpdate(int value, const wxString &newmsg = wxEmptyString, bool *skip = nullptr);
+void MadFindInFilesDialog::FindReplaceInFiles(bool bReplace)
 {
 	//wxLogNull nolog;
 	const int max = 1000;
-	fmtmsg1 = _( "Found %s file(s) matched the filters..." );
-	fmtmsg1 += wxT( "                                        \n" );
-	wxProgressDialog dialog( this->GetTitle(),
-	                         wxString::Format( fmtmsg1, wxT("0") ),
+	fmtmsg1 = _("Found %s file(s) matched the filters...");
+	fmtmsg1 += wxT("                                        \n");
+	wxProgressDialog dialog(this->GetTitle(),
+	                         wxString::Format(fmtmsg1, wxT("0")),
 	                         max,    // range
 	                         g_MainFrame,   // parent
 	                         wxPD_CAN_ABORT |
 	                         wxPD_AUTO_HIDE |
-	                         wxPD_APP_MODAL );
+	                         wxPD_APP_MODAL);
 	g_ProgressDialog = &dialog;
 	g_MainFrame->ResetFindInFilesResults();
-	g_MainFrame->m_AuiManager.GetPane( g_MainFrame->m_InfoNotebook ).Show();
+	g_MainFrame->m_AuiManager.GetPane(g_MainFrame->m_InfoNotebook).Show();
 	g_MainFrame->m_AuiManager.Update();
 	g_Continue = true;
 	g_Time = wxGetLocalTimeMillis();
 	size_t totalfiles;
 
-	if( WxRadioButtonOpenedFiles->GetValue() )
+	if (WxRadioButtonOpenedFiles->GetValue())
 	{
-		totalfiles = ( ( wxAuiNotebook* )g_MainFrame->m_Notebook )->GetPageCount();
+		totalfiles = ((wxAuiNotebook*)g_MainFrame->m_Notebook)->GetPageCount();
 	}
 	else
 	{
 		// test the existence of the dir
 		wxString str = WxComboBoxDir->GetValue();
 
-		if( !wxDirExists( str ) )
+		if (!wxDirExists(str))
 		{
-			dialog.Update( max );
-			MadMessageBox( _( "The selected directory does not exist." ), wxT( "MadEdit-Mod" ), wxOK | wxICON_ERROR );
+			dialog.Update(max);
+			MadMessageBox(_("The selected directory does not exist."), wxT("MadEdit-Mod"), wxOK | wxICON_ERROR);
 			return;
 		}
 
-		m_RecentFindDir->AddFileToHistory( str );
+		m_RecentFindDir->AddFileToHistory(str);
 
-		if( WxComboBoxDir->GetCount() == 0 || WxComboBoxDir->GetString( 0 ) != str )
+		if (WxComboBoxDir->GetCount() == 0 || WxComboBoxDir->GetString(0) != str)
 		{
-			WxComboBoxDir->Insert( str, 0 );
+			WxComboBoxDir->Insert(str, 0);
 		}
 
 		// get the filename filters
@@ -715,57 +715,57 @@ void MadFindInFilesDialog::FindReplaceInFiles( bool bReplace )
 		str = WxComboBoxFilter->GetValue();
 		if (!str.IsEmpty())
 		{
-			str.Trim( true );
-			str.Trim( false );
-			wxStringTokenizer tkz( str, wxT( " \t;" ) );
+			str.Trim(true);
+			str.Trim(false);
+			wxStringTokenizer tkz(str, wxT(" \t;"));
 
-			for( ;; )
+			for (;;)
 			{
 				tok = tkz.GetNextToken();
 
-				if( tok.IsEmpty() ) { break; }
+				if (tok.IsEmpty()) { break; }
 
-				filters.push_back( tok );
+				filters.push_back(tok);
 			}
 
-			if( !filters.empty() )
+			if (!filters.empty())
 			{
-				m_RecentFindFilter->AddFileToHistory( str );
+				m_RecentFindFilter->AddFileToHistory(str);
 
-				if( WxComboBoxFilter->GetCount() == 0 || WxComboBoxFilter->GetString( 0 ) != str )
+				if (WxComboBoxFilter->GetCount() == 0 || WxComboBoxFilter->GetString(0) != str)
 				{
-					WxComboBoxFilter->Insert( str, 0 );
+					WxComboBoxFilter->Insert(str, 0);
 				}
 			}
 		}
 
 		str = WxComboBoxExclude->GetValue();
 		g_ExcludeFilters.clear();
-		if(!str.IsEmpty())
+		if (!str.IsEmpty())
 		{
-			str.Trim( true );
-			str.Trim( false );
-			wxStringTokenizer tkz2( str, wxT( " \t;" ) );
+			str.Trim(true);
+			str.Trim(false);
+			wxStringTokenizer tkz2(str, wxT(" \t;"));
 
-			for( ;; )
+			for (;;)
 			{
 				tok = tkz2.GetNextToken();
 
-				if( tok.IsEmpty() ) { break; }
+				if (tok.IsEmpty()) { break; }
 
 #ifdef __WXMSW__
 				tok.MakeLower();
 #endif
-				g_ExcludeFilters.push_back( tok );
+				g_ExcludeFilters.push_back(tok);
 			}
 
-			if( !g_ExcludeFilters.empty() )
+			if (!g_ExcludeFilters.empty())
 			{
-				m_RecentFindExclude->AddFileToHistory( str );
+				m_RecentFindExclude->AddFileToHistory(str);
 
-				if( WxComboBoxExclude->GetCount() == 0 || WxComboBoxExclude->GetString( 0 ) != str )
+				if (WxComboBoxExclude->GetCount() == 0 || WxComboBoxExclude->GetString(0) != str)
 				{
-					WxComboBoxExclude->Insert( str, 0 );
+					WxComboBoxExclude->Insert(str, 0);
 				}
 			}
 		}
@@ -773,80 +773,80 @@ void MadFindInFilesDialog::FindReplaceInFiles( bool bReplace )
 		// get the files matched the filters
 		g_FileNameList.clear();
 		DirTraverser traverser;
-		wxDir dir( WxComboBoxDir->GetValue() );
+		wxDir dir(WxComboBoxDir->GetValue());
 		int flags = wxDIR_FILES | wxDIR_HIDDEN;
 
-		if( WxCheckBoxSubDir->GetValue() ) { flags |= wxDIR_DIRS; }
+		if (WxCheckBoxSubDir->GetValue()) { flags |= wxDIR_DIRS; }
 
-		if( filters.empty() )
+		if (filters.empty())
 		{
-			dir.Traverse( traverser, wxEmptyString, flags );
+			dir.Traverse(traverser, wxEmptyString, flags);
 		}
 		else
 		{
-			for( size_t i = 0; i < filters.size(); ++i )
+			for (size_t i = 0; i < filters.size(); ++i)
 			{
-				dir.Traverse( traverser, filters[i], flags );
+				dir.Traverse(traverser, filters[i], flags);
 			}
 		}
 
 		totalfiles = g_FileNameList.size();
 	}
 
-	if( g_Continue )
+	if (g_Continue)
 	{
 		MadEdit *tempedit = nullptr;
 
 		bool bForceText = false;
-		if( WxRadioButtonDir->GetValue() )
+		if (WxRadioButtonDir->GetValue())
 		{
-			tempedit = new MadEdit( this, -1, wxPoint( -1024, -1024 ) );
+			tempedit = new MadEdit(this, -1, wxPoint(-1024, -1024));
 			tempedit->StopRepaint();
-			tempedit->SetStorePropertiesToGlobalConfig( false );
-			tempedit->SetFixedWidthMode( false );
-			tempedit->SetWordWrapMode( wwmNoWrap );
-			tempedit->SetSearchOptions( true, WxCheckBoxWholeWord->GetValue() );
+			tempedit->SetStorePropertiesToGlobalConfig(false);
+			tempedit->SetFixedWidthMode(false);
+			tempedit->SetWordWrapMode(wwmNoWrap);
+			tempedit->SetSearchOptions(true, WxCheckBoxWholeWord->GetValue());
 			bForceText = true; // reset to default
 		}
 
-		wxString fmt( _( "Processing %s of %s files..." ) );
+		wxString fmt(_("Processing %s of %s files..."));
 		vector<wxFileOffset> begpos, endpos;
 		MadFileNameList::iterator fnit = g_FileNameList.begin();
 		bool cont = true;
-		Show( false );
-		begpos.reserve( 128 * 1024 );
-		endpos.reserve( 128 * 1024 );
+		Show(false);
+		begpos.reserve(128 * 1024);
+		endpos.reserve(128 * 1024);
 
 		wxString tobes;
-		m_FindText->GetText( tobes );
-		wxString strtobesearch = _("Search \"") + tobes + wxT("\" ") + wxString::Format( _("(in %s files)"), ( wxLongLong( totalfiles ).ToString().c_str() ) );
+		m_FindText->GetText(tobes);
+		wxString strtobesearch = _("Search \"") + tobes + wxT("\" ") + wxString::Format(_("(in %s files)"), (wxLongLong(totalfiles).ToString().c_str()));
 		wxTreeItemId myroot = g_MainFrame->NewSearchSession(strtobesearch);
 
-		for( size_t i = 0; i < totalfiles && cont; ++i )
+		for (size_t i = 0; i < totalfiles && cont; ++i)
 		{
 			MadEdit *madedit = nullptr;
 
 			// prepare madedit
-			if( WxRadioButtonOpenedFiles->GetValue() )
+			if (WxRadioButtonOpenedFiles->GetValue())
 			{
-				madedit = ( MadEdit* )( ( wxAuiNotebook* )g_MainFrame->m_Notebook )->GetPage( i );
+				madedit = (MadEdit*)((wxAuiNotebook*)g_MainFrame->m_Notebook)->GetPage(i);
 			}
 			else
 			{
 				size_t id;
-				madedit = g_MainFrame->GetEditByFileName( *fnit, id );
+				madedit = g_MainFrame->GetEditByFileName(*fnit, id);
 
-				if( madedit == nullptr )
+				if (madedit == nullptr)
 				{
 					madedit = tempedit;
 					wxString enc = WxComboBoxEncoding->GetValue();
 
-					if( enc == WxComboBoxEncoding->GetString( 0 ) )
+					if (enc == WxComboBoxEncoding->GetString(0))
 					{
 						enc.Clear();
 					}
 
-					madedit->LoadFromFile( *fnit, enc, bForceText );
+					madedit->LoadFromFile(*fnit, enc, bForceText);
 				}
 
 				++fnit;
@@ -855,23 +855,23 @@ void MadFindInFilesDialog::FindReplaceInFiles( bool bReplace )
 			wxLongLong t = wxGetLocalTimeMillis();
 			wxLongLong delta = t - g_Time;
 
-			if( delta.ToLong() >= 350 )
+			if (delta.ToLong() >= 350)
 			{
 				g_Time = t;
-				int idx = int( i * max / totalfiles );
-				wxString str = wxString::Format( fmt, ( wxLongLong( i ).ToString().c_str() ), ( wxLongLong( totalfiles ).ToString().c_str() ) );
+				int idx = int(i * max / totalfiles);
+				wxString str = wxString::Format(fmt, (wxLongLong(i).ToString().c_str()), (wxLongLong(totalfiles).ToString().c_str()));
 				wxString fn = madedit->GetFileName();
 
-				if( !fn.IsEmpty() )
+				if (!fn.IsEmpty())
 				{
-					str += wxT( '\n' );
+					str += wxT('\n');
 					str += fn;
 				}
 
-				cont = dialog.Update( idx, str );
+				cont = dialog.Update(idx, str);
 				dialog.Fit();
 
-				if( !cont ) { break; }
+				if (!cont) { break; }
 			}
 
 			// get all matched data in madedit
@@ -880,105 +880,105 @@ void MadFindInFilesDialog::FindReplaceInFiles( bool bReplace )
 			wxString expr, rstr;
 			int ok;
 
-			if( bReplace )
+			if (bReplace)
 			{
-				m_FindText->GetText( expr );
-				m_ReplaceText->GetText( rstr );
+				m_FindText->GetText(expr);
+				m_ReplaceText->GetText(rstr);
 
-				if( WxCheckBoxFindHex->GetValue() )
+				if (WxCheckBoxFindHex->GetValue())
 				{
-					ok = madedit->ReplaceHexAll( expr, rstr, &begpos, &endpos );
+					ok = madedit->ReplaceHexAll(expr, rstr, &begpos, &endpos);
 				}
 				else
 				{
 					bool bRegex = WxCheckBoxRegex->GetValue(), bWholeWord = WxCheckBoxWholeWord->GetValue(), bDotMatchNewline = WxCheckBoxDotMatchNewLine->GetValue();
 					bool bPanChinese = WxCheckBoxPanChinese->GetValue(), bCaseSensitive = WxCheckBoxCaseSensitive->GetValue();
 					
-					if( bRegex ) bWholeWord = false;
+					if (bRegex) bWholeWord = false;
 					else
 					{
 						bDotMatchNewline = false;
 						bPanChinese = false;
 					}
-					ok = madedit->ReplaceTextAll( expr, rstr,
+					ok = madedit->ReplaceTextAll(expr, rstr,
 					                              bRegex,
 					                              bCaseSensitive,
 					                              bWholeWord,
 					                              bDotMatchNewline,
 					                              bPanChinese,
-					                              &begpos, &endpos );
+					                              &begpos, &endpos);
 				}
 
-				if( ok < 0 ) { break; }
+				if (ok < 0) { break; }
 
 				expr = madedit->GetFileName();
-				int id = ( ( wxAuiNotebook* )g_MainFrame->m_Notebook )->GetPageIndex( madedit );
+				int id = ((wxAuiNotebook*)g_MainFrame->m_Notebook)->GetPageIndex(madedit);
 
-				if( madedit->IsModified() && !expr.IsEmpty() && id == wxNOT_FOUND )
+				if (madedit->IsModified() && !expr.IsEmpty() && id == wxNOT_FOUND)
 				{
-					madedit->SaveToFile( expr );
+					madedit->SaveToFile(expr);
 				}
 			}
 			else
 			{
-				m_FindText->GetText( expr );
+				m_FindText->GetText(expr);
 
-				if( WxCheckBoxFindHex->GetValue() )
+				if (WxCheckBoxFindHex->GetValue())
 				{
-					ok = madedit->FindHexAll( expr, WxCheckBoxListFirstOnly->GetValue(),
-					                          &begpos, &endpos );
+					ok = madedit->FindHexAll(expr, WxCheckBoxListFirstOnly->GetValue(),
+					                          &begpos, &endpos);
 				}
 				else
 				{
 					bool bRegex = WxCheckBoxRegex->GetValue(), bWholeWord = WxCheckBoxWholeWord->GetValue(), bDotMatchNewline = WxCheckBoxDotMatchNewLine->GetValue();
 					bool bPanChinese = WxCheckBoxPanChinese->GetValue(), bCaseSensitive = WxCheckBoxCaseSensitive->GetValue();
 					
-					if( bRegex ) bWholeWord = false;
+					if (bRegex) bWholeWord = false;
 					else
 					{
 						bDotMatchNewline = false;
 						bPanChinese = false;
 					}
-					ok = madedit->FindTextAll( expr,
+					ok = madedit->FindTextAll(expr,
 					                           bRegex,
 					                           bCaseSensitive,
 					                           bWholeWord,
 					                           bDotMatchNewline,
 					                           bPanChinese,
 					                           WxCheckBoxListFirstOnly->GetValue(),
-					                           &begpos, &endpos );
+					                           &begpos, &endpos);
 				}
 
-				if( ok < 0 ) { break; }
+				if (ok < 0) { break; }
 			}
 
-			if( ok > 2000 )
+			if (ok > 2000)
 			{
-				wxString msg = _( "Found %s matched texts..." );
-				msg += wxT( "                                \n" );
-				wxProgressDialog tmpdialog( _( "Preparing Results" ),
-				                            wxString::Format( msg, ( wxLongLong( ok ).ToString().c_str() ) ),
+				wxString msg = _("Found %s matched texts...");
+				msg += wxT("                                \n");
+				wxProgressDialog tmpdialog(_("Preparing Results"),
+				                            wxString::Format(msg, (wxLongLong(ok).ToString().c_str())),
 				                            ok,    // range
 				                            g_MainFrame,   // parent
 				                            wxPD_CAN_ABORT |
 				                            wxPD_AUTO_HIDE |
-				                            wxPD_APP_MODAL );
+				                            wxPD_APP_MODAL);
 				g_SearchProgressDialog = &tmpdialog;
-				dialog.Show( false );
-				DisplayFindAllResult( myroot, begpos, endpos, madedit, false, &OnSearchProgressUpdate );
-				g_SearchProgressDialog->Update( ok );
+				dialog.Show(false);
+				DisplayFindAllResult(myroot, begpos, endpos, madedit, false, &OnSearchProgressUpdate);
+				g_SearchProgressDialog->Update(ok);
 				g_SearchProgressDialog = nullptr;
-				dialog.Show( true );
+				dialog.Show(true);
 			}
 			else
-			{ DisplayFindAllResult( myroot, begpos, endpos, madedit, false ); }
+			{ DisplayFindAllResult(myroot, begpos, endpos, madedit, false); }
 		}
 
-		if( tempedit ) { delete tempedit; }
+		if (tempedit) { delete tempedit; }
 	}
 
-	dialog.Update( max );
-	Show( true );
+	dialog.Update(max);
+	Show(true);
 	g_ProgressDialog = nullptr;
 	g_FileNameList.clear();
 }
@@ -986,9 +986,9 @@ void MadFindInFilesDialog::FindReplaceInFiles( bool bReplace )
 /*
  * WxCheckBoxEnableReplaceClick
  */
-void MadFindInFilesDialog::WxCheckBoxEnableReplaceClick( wxCommandEvent& event )
+void MadFindInFilesDialog::WxCheckBoxEnableReplaceClick(wxCommandEvent& event)
 {
-	if(event.IsChecked())
+	if (event.IsChecked())
 	{
 		m_ReplaceText->Show(true);
 		WxBitmapButtonRecentReplaceText->Show(true);
@@ -1011,48 +1011,48 @@ void MadFindInFilesDialog::WxCheckBoxEnableReplaceClick( wxCommandEvent& event )
 /*
  * WxButtonActiveDirClick
  */
-void MadFindInFilesDialog::WxButtonActiveDirClick( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::WxButtonActiveDirClick(wxCommandEvent& WXUNUSED(event))
 {
 	extern MadEdit *g_ActiveMadEdit;
 
-	if( g_ActiveMadEdit != nullptr )
+	if (g_ActiveMadEdit != nullptr)
 	{
 		wxString str = g_ActiveMadEdit->GetFileName();
 
-		if( !str.IsEmpty() )
+		if (!str.IsEmpty())
 		{
-			wxFileName fn( str );
-			WxComboBoxDir->SetValue( fn.GetPath( wxPATH_GET_VOLUME | wxPATH_GET_SEPARATOR ) );
+			wxFileName fn(str);
+			WxComboBoxDir->SetValue(fn.GetPath(wxPATH_GET_VOLUME | wxPATH_GET_SEPARATOR));
 		}
 	}
 }
 
 void MadFindInFilesDialog::PurgeRecentFindDirs()
 {
-	int n = ( int ) m_RecentFindDir->GetCount();
+	int n = (int) m_RecentFindDir->GetCount();
 
-	for( int i = n - 1; i >= 0; --i )
-	{ m_RecentFindDir->RemoveFileFromHistory( ( size_t )i ); }
+	for (int i = n - 1; i >= 0; --i)
+	{ m_RecentFindDir->RemoveFileFromHistory((size_t)i); }
 
 	WxComboBoxDir->Clear();
 }
 
 void MadFindInFilesDialog::PurgeRecentFindFilters()
 {
-	int n = ( int ) m_RecentFindFilter->GetCount();
+	int n = (int) m_RecentFindFilter->GetCount();
 
-	for( int i = n - 1; i >= 0; --i )
-	{ m_RecentFindFilter->RemoveFileFromHistory( ( size_t )i ); }
+	for (int i = n - 1; i >= 0; --i)
+	{ m_RecentFindFilter->RemoveFileFromHistory((size_t)i); }
 
 	WxComboBoxFilter->Clear();
 }
 
 void MadFindInFilesDialog::PurgeRecentFindExcludes()
 {
-	int n = ( int ) m_RecentFindExclude->GetCount();
+	int n = (int) m_RecentFindExclude->GetCount();
 
-	for( int i = n - 1; i >= 0; --i )
-	{ m_RecentFindExclude->RemoveFileFromHistory( ( size_t )i ); }
+	for (int i = n - 1; i >= 0; --i)
+	{ m_RecentFindExclude->RemoveFileFromHistory((size_t)i); }
 
 	WxComboBoxExclude->Clear();
 }
@@ -1060,7 +1060,7 @@ void MadFindInFilesDialog::PurgeRecentFindExcludes()
 void MadFindInFilesDialog::WxCheckBoxRegexClick(wxCommandEvent& event)
 {
 	// insert your code here
-	if(event.IsChecked())
+	if (event.IsChecked())
 	{
 		WxCheckBoxDotMatchNewLine->Enable();
 		WxCheckBoxFindHex->Disable();
@@ -1080,46 +1080,46 @@ void MadFindInFilesDialog::MadFindInFilesDialogKeyDown(wxKeyEvent& event)
 
 	//SetTitle(wxString()<<key);
 
-	switch( key )
+	switch (key)
 	{
 	case WXK_ESCAPE:
-		Show( false );
+		Show(false);
 		return;
 
 	case WXK_RETURN:
 	case WXK_NUMPAD_ENTER:
-		//if( this->GetClassInfo()->GetClassName() != wxString( wxT( "wxButton" ) ) )
+		//if (this->GetClassInfo()->GetClassName() != wxString(wxT("wxButton")))
 		{
 			wxCommandEvent e;
-			wxButton* default_btn = static_cast<wxButton*>( GetDefaultItem() );
+			wxButton* default_btn = static_cast<wxButton*>(GetDefaultItem());
 
-			if( default_btn == WxButtonReplace )
-				return WxButtonReplaceClick( e ); // no skip
+			if (default_btn == WxButtonReplace)
+				return WxButtonReplaceClick(e); // no skip
 
-			return WxButtonFindClick( e ); // no skip
+			return WxButtonFindClick(e); // no skip
 		}
 
 		break;
 
 	case WXK_DOWN:
 		wxWindow * win = FindFocus();
-		if( win == (wxWindow *)m_FindText )
+		if (win == (wxWindow *)m_FindText)
 		{
 			int x, y, w, h;
-			m_FindText->GetPosition( &x, &y );
-			m_FindText->GetSize( &w, &h );
+			m_FindText->GetPosition(&x, &y);
+			m_FindText->GetSize(&w, &h);
 			wxASSERT(g_SearchReplaceDialog != nullptr);
-			PopupMenu( &g_SearchReplaceDialog->WxPopupMenuRecentFindText, x, y + h );
+			PopupMenu(&g_SearchReplaceDialog->WxPopupMenuRecentFindText, x, y + h);
 			return;
 		}
 		else
-			if( win == (wxWindow *)m_ReplaceText )
+			if (win == (wxWindow *)m_ReplaceText)
 			{
 				int x, y, w, h;
-				m_ReplaceText->GetPosition( &x, &y );
-				m_ReplaceText->GetSize( &w, &h );
+				m_ReplaceText->GetPosition(&x, &y);
+				m_ReplaceText->GetSize(&w, &h);
 				wxASSERT(g_SearchReplaceDialog != nullptr);
-				PopupMenu( &g_SearchReplaceDialog->WxPopupMenuRecentReplaceText, x, y + h );
+				PopupMenu(&g_SearchReplaceDialog->WxPopupMenuRecentReplaceText, x, y + h);
 				return;
 			}
 
@@ -1129,237 +1129,237 @@ void MadFindInFilesDialog::MadFindInFilesDialogKeyDown(wxKeyEvent& event)
 	event.Skip();
 }
 
-void MadFindInFilesDialog::OnEditUndo( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditUndo(wxCommandEvent& WXUNUSED(event))
 {
 	EditUndo();
 }
 
-void MadFindInFilesDialog::OnEditRedo( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditRedo(wxCommandEvent& WXUNUSED(event))
 {
 	EditRedo();
 }
 
-void MadFindInFilesDialog::OnEditCut( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditCut(wxCommandEvent& WXUNUSED(event))
 {
 	EditCut();
 }
 
-void MadFindInFilesDialog::OnEditCopy( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditCopy(wxCommandEvent& WXUNUSED(event))
 {
 	EditCopy();
 }
 
-void MadFindInFilesDialog::OnEditPaste( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditPaste(wxCommandEvent& WXUNUSED(event))
 {
 	EditPaste();
 }
 
-void MadFindInFilesDialog::OnEditDelete( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditDelete(wxCommandEvent& WXUNUSED(event))
 {
 	EditDelete();
 }
 
-void MadFindInFilesDialog::OnEditCutLine( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditCutLine(wxCommandEvent& WXUNUSED(event))
 {
 	EditCutLine();
 }
 
-void MadFindInFilesDialog::OnEditDeleteLine( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditDeleteLine(wxCommandEvent& WXUNUSED(event))
 {
 	EditDeleteLine();
 }
 
-void MadFindInFilesDialog::OnEditSelectAll( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditSelectAll(wxCommandEvent& WXUNUSED(event))
 {
 	EditSelectAll();
 }
 
-void MadFindInFilesDialog::OnEditStartEndSelction( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditStartEndSelction(wxCommandEvent& WXUNUSED(event))
 {
 	EditStartEndSelction();
 }
 
-void MadFindInFilesDialog::OnEditInsertTabChar( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditInsertTabChar(wxCommandEvent& WXUNUSED(event))
 {
 	EditInsertTabChar();
 }
 
-void MadFindInFilesDialog::OnEditInsertDateTime( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditInsertDateTime(wxCommandEvent& WXUNUSED(event))
 {
 	EditInsertDateTime();
 }
 
-void MadFindInFilesDialog::OnEditSortAscending( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditSortAscending(wxCommandEvent& WXUNUSED(event))
 {
 	EditSortAscending();
 }
 
-void MadFindInFilesDialog::OnEditSortDescending( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditSortDescending(wxCommandEvent& WXUNUSED(event))
 {
 	EditSortDescending();
 }
 
-void MadFindInFilesDialog::OnEditSortAscendingCase( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditSortAscendingCase(wxCommandEvent& WXUNUSED(event))
 {
 	EditSortAscendingCase();
 }
 
-void MadFindInFilesDialog::OnEditSortDescendingCase( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditSortDescendingCase(wxCommandEvent& WXUNUSED(event))
 {
 	EditSortDescendingCase();
 }
 
-void MadFindInFilesDialog::OnEditSortByOptions( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditSortByOptions(wxCommandEvent& WXUNUSED(event))
 {
 	EditSortByOptions();
 }
 
-void MadFindInFilesDialog::OnEditSortOptions( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditSortOptions(wxCommandEvent& WXUNUSED(event))
 {
 	EditSortOptions(this);
 }
 
-void MadFindInFilesDialog::OnEditCopyAsHexString( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditCopyAsHexString(wxCommandEvent& WXUNUSED(event))
 {
 	EditCopyAsHexString();
 }
 
-void MadFindInFilesDialog::OnEditCopyAsHexStringWithSpace( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditCopyAsHexStringWithSpace(wxCommandEvent& WXUNUSED(event))
 {
 	EditCopyAsHexStringWithSpace();
 }
 
-void MadFindInFilesDialog::OnEditCopyRevertHex( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditCopyRevertHex(wxCommandEvent& WXUNUSED(event))
 {
 	EditCopyRevertHex();
 }
 
-void MadFindInFilesDialog::OnEditIncIndent( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditIncIndent(wxCommandEvent& WXUNUSED(event))
 {
 	EditIncIndent();
 }
 
-void MadFindInFilesDialog::OnEditDecIndent( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditDecIndent(wxCommandEvent& WXUNUSED(event))
 {
 	EditDecIndent();
 }
 
-void MadFindInFilesDialog::OnEditComment( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditComment(wxCommandEvent& WXUNUSED(event))
 {
 	EditComment();
 }
 
-void MadFindInFilesDialog::OnEditUncomment( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditUncomment(wxCommandEvent& WXUNUSED(event))
 {
 	EditUncomment();
 }
 
-void MadFindInFilesDialog::OnEditWordWrapToNewLine( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditWordWrapToNewLine(wxCommandEvent& WXUNUSED(event))
 {
 	EditWordWrapToNewLine();
 }
 
-void MadFindInFilesDialog::OnEditNewLineToWordWrap( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditNewLineToWordWrap(wxCommandEvent& WXUNUSED(event))
 {
 	EditNewLineToWordWrap();
 }
 
-void MadFindInFilesDialog::OnEditToUpperCase( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditToUpperCase(wxCommandEvent& WXUNUSED(event))
 {
 	EditToUpperCase();
 }
 
-void MadFindInFilesDialog::OnEditToLowerCase( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditToLowerCase(wxCommandEvent& WXUNUSED(event))
 {
 	EditToLowerCase();
 }
 
-void MadFindInFilesDialog::OnEditInvertCase( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditInvertCase(wxCommandEvent& WXUNUSED(event))
 {
 	EditInvertCase();
 }
 
-void MadFindInFilesDialog::OnEditCapitalize( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditCapitalize(wxCommandEvent& WXUNUSED(event))
 {
 	EditCapitalize();
 }
 
-void MadFindInFilesDialog::OnEditToHalfWidth( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditToHalfWidth(wxCommandEvent& WXUNUSED(event))
 {
 	EditToHalfWidth();
 }
 
-void MadFindInFilesDialog::OnEditToHalfWidthByOptions( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditToHalfWidthByOptions(wxCommandEvent& WXUNUSED(event))
 {
 	EditToHalfWidthByOptions(this);
 }
 
-void MadFindInFilesDialog::OnEditToFullWidth( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditToFullWidth(wxCommandEvent& WXUNUSED(event))
 {
 	EditToFullWidth();
 }
 
-void MadFindInFilesDialog::OnEditToFullWidthByOptions( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditToFullWidthByOptions(wxCommandEvent& WXUNUSED(event))
 {
 	EditToFullWidthByOptions(this);
 }
 
-void MadFindInFilesDialog::OnEditTabToSpace( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditTabToSpace(wxCommandEvent& WXUNUSED(event))
 {
 	EditTabToSpace();
 }
 
-void MadFindInFilesDialog::OnEditSpaceToTab( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditSpaceToTab(wxCommandEvent& WXUNUSED(event))
 {
 	EditSpaceToTab();
 }
 
-void MadFindInFilesDialog::OnEditTrimTrailingSpaces( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditTrimTrailingSpaces(wxCommandEvent& WXUNUSED(event))
 {
 	EditTrimTrailingSpaces();
 }
 
-void MadFindInFilesDialog::OnEditTrimLeadingSpaces( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditTrimLeadingSpaces(wxCommandEvent& WXUNUSED(event))
 {
 	EditTrimLeadingSpaces();
 }
 
-void MadFindInFilesDialog::OnEditDeleteEmptyLines( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditDeleteEmptyLines(wxCommandEvent& WXUNUSED(event))
 {
 	EditDeleteEmptyLines();
 }
 
-void MadFindInFilesDialog::OnEditDeleteEmptyLinesWithSpaces( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditDeleteEmptyLinesWithSpaces(wxCommandEvent& WXUNUSED(event))
 {
 	EditDeleteEmptyLinesWithSpaces();
 }
 
-void MadFindInFilesDialog::OnEditJoinLines( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditJoinLines(wxCommandEvent& WXUNUSED(event))
 {
 	EditJoinLines();
 }
 
-void MadFindInFilesDialog::OnEditInsertNumbers( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditInsertNumbers(wxCommandEvent& WXUNUSED(event))
 {
 	EditInsertNumbers(this);
 }
 
-void MadFindInFilesDialog::OnEditColumnAlignLeft( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditColumnAlignLeft(wxCommandEvent& WXUNUSED(event))
 {
 	EditColumnAlignLeft();
 }
 
-void MadFindInFilesDialog::OnEditColumnAlignRight( wxCommandEvent& WXUNUSED(event) )
+void MadFindInFilesDialog::OnEditColumnAlignRight(wxCommandEvent& WXUNUSED(event))
 {
 	EditColumnAlignRight();
 }
 
-void MadFindInFilesDialog::OnEditSpellCheck( wxCommandEvent& event )
+void MadFindInFilesDialog::OnEditSpellCheck(wxCommandEvent& event)
 {
 	EditSpellCheck(event);
 }
 
-void MadFindInFilesDialog::OnToolsMadScriptList( wxCommandEvent& event )
+void MadFindInFilesDialog::OnToolsMadScriptList(wxCommandEvent& event)
 {
 	ToolsMadScriptList(event);
 }

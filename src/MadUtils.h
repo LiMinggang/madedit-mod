@@ -124,7 +124,7 @@ void EditJoinLines(void);
 void EditInsertNumbers(wxWindow* parent);
 void EditColumnAlignLeft(void);
 void EditColumnAlignRight(void);
-void EditSpellCheck( wxCommandEvent& event );
-void ToolsMadScriptList( wxCommandEvent& event );
+void EditSpellCheck(wxCommandEvent& event);
+void ToolsMadScriptList(wxCommandEvent& event);
 
 #endif

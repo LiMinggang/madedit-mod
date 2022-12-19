@@ -45,19 +45,19 @@ public:
     virtual bool IsOpened() const;
 
     // set the clipboard data. all other formats will be deleted.
-    virtual bool SetData( wxDataObject *data );
+    virtual bool SetData(wxDataObject *data);
 
     // add to the clipboard data.
-    virtual bool AddData( wxDataObject *data );
+    virtual bool AddData(wxDataObject *data);
 
     // ask if data in correct format is available
-    virtual bool IsSupported( const wxDataFormat& format );
+    virtual bool IsSupported(const wxDataFormat& format);
 
     // ask if data in correct format is available
-    virtual bool IsSupportedAsync( wxEvtHandler *sink );
+    virtual bool IsSupportedAsync(wxEvtHandler *sink);
 
     // fill data with data on the clipboard (if available)
-    virtual bool GetData( wxDataObject& data );
+    virtual bool GetData(wxDataObject& data);
 
     // clears wxTheClipboard and the system's clipboard if possible
     virtual void Clear();
@@ -74,7 +74,7 @@ public:
     GdkAtom GTKGetClipboardAtom() const;
 
     // get the data object currently being requested
-    wxDataObject *GTKGetDataObject( GdkAtom atom );
+    wxDataObject *GTKGetDataObject(GdkAtom atom);
 
     // clear the data for the given clipboard kind
     void GTKClearData(Kind kind);

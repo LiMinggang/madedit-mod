@@ -113,7 +113,7 @@ MadAboutDialog::MadAboutDialog(wxWindow* parent,wxWindowID id,const wxPoint& WXU
 	WxListCredits->Freeze();
 	wxListItem info;
 	long tmp;
-	for( size_t idx = 0; idx < g_num_contributers; ++idx )
+	for (size_t idx = 0; idx < g_num_contributers; ++idx)
 	{
 		wxString name(g_MadEditModCredits[ idx ][0]);
 		wxString role(wxGetTranslation(g_MadEditModCredits[ idx ][1]));
@@ -127,10 +127,10 @@ MadAboutDialog::MadAboutDialog(wxWindow* parent,wxWindowID id,const wxPoint& WXU
 	}
 	WxListCredits->Thaw();
 
-	if(g_num_contributers)
+	if (g_num_contributers)
 	{
-	    WxListCredits->SetColumnWidth( 0, wxLIST_AUTOSIZE );
-		WxListCredits->SetColumnWidth( 1, wxLIST_AUTOSIZE );
+	    WxListCredits->SetColumnWidth(0, wxLIST_AUTOSIZE);
+		WxListCredits->SetColumnWidth(1, wxLIST_AUTOSIZE);
 	}
 }
 

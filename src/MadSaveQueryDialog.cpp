@@ -60,17 +60,17 @@ MadSaveQueryDialog::MadSaveQueryDialog(wxWindow* parent,wxWindowID id,const wxPo
 	BoxSizer1->SetSizeHints(this);
 	Center();
 
-	Bind( wxEVT_COMMAND_LIST_ITEM_SELECTED, &MadSaveQueryDialog::OnMadFileListItemSelectChange, this, MadFileList->GetId() );
-	Bind( wxEVT_COMMAND_LIST_ITEM_DESELECTED, &MadSaveQueryDialog::OnMadFileListItemSelectChange, this, MadFileList->GetId() );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadSaveQueryDialog::OnButtonOKClick, this, wxID_OK );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadSaveQueryDialog::OnButtonSaveNoneClick, this, ButtonSaveNone->GetId() );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadSaveQueryDialog::OnButtonCancelClick, this, wxID_CANCEL );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadSaveQueryDialog::OnButtonSelectAllClick, this, ButtonSelectAll->GetId() );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadSaveQueryDialog::OnButtonDselectAllClick, this, ButtonDselectAll->GetId() );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadSaveQueryDialog::OnButtonGoToClick, this, ButtonGoTo->GetId() );
+	Bind(wxEVT_COMMAND_LIST_ITEM_SELECTED, &MadSaveQueryDialog::OnMadFileListItemSelectChange, this, MadFileList->GetId());
+	Bind(wxEVT_COMMAND_LIST_ITEM_DESELECTED, &MadSaveQueryDialog::OnMadFileListItemSelectChange, this, MadFileList->GetId());
+	Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MadSaveQueryDialog::OnButtonOKClick, this, wxID_OK);
+	Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MadSaveQueryDialog::OnButtonSaveNoneClick, this, ButtonSaveNone->GetId());
+	Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MadSaveQueryDialog::OnButtonCancelClick, this, wxID_CANCEL);
+	Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MadSaveQueryDialog::OnButtonSelectAllClick, this, ButtonSelectAll->GetId());
+	Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MadSaveQueryDialog::OnButtonDselectAllClick, this, ButtonDselectAll->GetId());
+	Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MadSaveQueryDialog::OnButtonGoToClick, this, ButtonGoTo->GetId());
 	//*)
 
-	Bind( wxEVT_LIST_COL_CLICK, &MadSaveQueryDialog::OnWinListColumnTabClicked, this, MadFileList->GetId() );
+	Bind(wxEVT_LIST_COL_CLICK, &MadSaveQueryDialog::OnWinListColumnTabClicked, this, MadFileList->GetId());
 
 	SetDefaultItem(ButtonOK);
 	m_MainFrame = static_cast<MadEditFrame *>(parent);
@@ -103,14 +103,14 @@ void MadSaveQueryDialog::InitWindowListIterms()
 	MadFileList->Freeze();
 	
 	wxListItem info;
-	for( size_t id = 0; id < count; ++id )
+	for (size_t id = 0; id < count; ++id)
 	{
-		MadEdit * madedit = dynamic_cast < MadEdit* >(notebookp->GetPage( id ));
-		wxASSERT( madedit != 0 );
-		if(madedit->IsModified())
+		MadEdit * madedit = dynamic_cast < MadEdit* >(notebookp->GetPage(id));
+		wxASSERT(madedit != 0);
+		if (madedit->IsModified())
 		{
-			wxFileName fileName( madedit->GetFileName() );
-			wxString fname = notebookp->GetPageText( id );
+			wxFileName fileName(madedit->GetFileName());
+			wxString fname = notebookp->GetPageText(id);
 			wxString fdir = fileName.GetPath();
 
 			info.Clear();
@@ -125,19 +125,19 @@ void MadSaveQueryDialog::InitWindowListIterms()
 	}
 	MadFileList->Thaw();
 
-	if(hasdata)
+	if (hasdata)
 	{
-	    MadFileList->SetColumnWidth( COL_TABNAME, wxLIST_AUTOSIZE );
-		MadFileList->SetColumnWidth( COL_PATH, wxLIST_AUTOSIZE );
+	    MadFileList->SetColumnWidth(COL_TABNAME, wxLIST_AUTOSIZE);
+		MadFileList->SetColumnWidth(COL_PATH, wxLIST_AUTOSIZE);
 	}
 
-	if(SAVEQUERY_MIN_PATH_COL_WIDTH > MadFileList->GetColumnWidth(COL_PATH))
+	if (SAVEQUERY_MIN_PATH_COL_WIDTH > MadFileList->GetColumnWidth(COL_PATH))
 	{
-		MadFileList->SetColumnWidth( COL_PATH, SAVEQUERY_MIN_PATH_COL_WIDTH );
+		MadFileList->SetColumnWidth(COL_PATH, SAVEQUERY_MIN_PATH_COL_WIDTH);
 	}
 
 	MadFileList->Show();
-	GetSizer()->Fit( this );
+	GetSizer()->Fit(this);
 }
 
 struct winlistdat
@@ -157,13 +157,13 @@ void MadSaveQueryDialog::SortTabs(long column)
     for (; ;)
     {
         item = MadFileList->GetNextItem(item);
-        if ( item == -1 )
+        if (item == -1)
             break;
 
         dat.path = MadFileList->GetItemText(item, COL_PATH);
         dat.name = MadFileList->GetItemText(item, COL_TABNAME);
         dat.id = static_cast<long>(MadFileList->GetItemData(item));
-        if(column == COL_PATH)
+        if (column == COL_PATH)
         {
             sortby = dat.path + dat.name;
         }
@@ -185,7 +185,7 @@ void MadSaveQueryDialog::SortTabs(long column)
 	wxListItem info;
 
     std::map<wxString, winlistdat>::iterator it = winListMap.begin();
-	for( ; it != winListMap.end(); ++it )
+	for (; it != winListMap.end(); ++it)
     {
         wxString fname = it->second.name;
         wxString fdir = it->second.path;
@@ -201,19 +201,19 @@ void MadSaveQueryDialog::SortTabs(long column)
     }
     MadFileList->Thaw();
 
-    if(MadFileList->GetItemCount())
+    if (MadFileList->GetItemCount())
     {
-        MadFileList->SetColumnWidth( COL_TABNAME, wxLIST_AUTOSIZE );
-        MadFileList->SetColumnWidth( COL_PATH, wxLIST_AUTOSIZE );
+        MadFileList->SetColumnWidth(COL_TABNAME, wxLIST_AUTOSIZE);
+        MadFileList->SetColumnWidth(COL_PATH, wxLIST_AUTOSIZE);
     }
 
-    if(SAVEQUERY_MIN_PATH_COL_WIDTH > MadFileList->GetColumnWidth(COL_PATH))
+    if (SAVEQUERY_MIN_PATH_COL_WIDTH > MadFileList->GetColumnWidth(COL_PATH))
     {
-        MadFileList->SetColumnWidth( COL_PATH, SAVEQUERY_MIN_PATH_COL_WIDTH);
+        MadFileList->SetColumnWidth(COL_PATH, SAVEQUERY_MIN_PATH_COL_WIDTH);
     }
 
     MadFileList->Show();
-    GetSizer()->Fit( this );
+    GetSizer()->Fit(this);
 }
 
 
@@ -257,9 +257,9 @@ void MadSaveQueryDialog::OnButtonGoToClick(wxCommandEvent& WXUNUSED(event))
 {
 	wxASSERT(MadFileList->GetSelectedItemCount() == 1);
 	long selRowId = MadFileList->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
-	wxASSERT ( selRowId != -1 );
+	wxASSERT (selRowId != -1);
 	long pageId = static_cast<long>(MadFileList->GetItemData(selRowId));
-	m_MainFrame->SetPageFocus( pageId );
+	m_MainFrame->SetPageFocus(pageId);
 }
 
 void MadSaveQueryDialog::OnMadFileListItemSelectChange(wxListEvent& WXUNUSED(event))
@@ -271,11 +271,11 @@ void MadSaveQueryDialog::OnMadFileListItemSelectChange(wxListEvent& WXUNUSED(eve
 void MadSaveQueryDialog::GetCheckedItemsData(std::set< long > & selectedItems, bool checked)
 {
 	long item = -1, pid = -1;
-	for ( ;; ) {
+	for (;;) {
 		item = MadFileList->GetNextItem(item, wxLIST_NEXT_ALL, wxLIST_STATE_DONTCARE);
-		if ( item == -1 )
+		if (item == -1)
 			break;
-		if((!checked) || (MadFileList->IsChecked(item)))
+		if ((!checked) || (MadFileList->IsChecked(item)))
 		{
 			pid = static_cast<long>(MadFileList->GetItemData(item));
 			selectedItems.insert(pid);

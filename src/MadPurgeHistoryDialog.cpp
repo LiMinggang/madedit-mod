@@ -11,8 +11,8 @@
 #include "MadFindInFilesDialog.h"
 
 #ifdef _MSC_VER
-# pragma warning( push )
-# pragma warning( disable : 4996 )
+# pragma warning(push)
+# pragma warning(disable : 4996)
 #endif
 // disable 4996 {
 //(*InternalHeaders(MadPurgeHistoriesDialog)
@@ -21,7 +21,7 @@
 //*)
 // disable 4996 }
 #ifdef _MSC_VER
-# pragma warning( pop )
+# pragma warning(pop)
 #endif
 
 #ifdef _DEBUG
@@ -91,11 +91,11 @@ MadPurgeHistoryDialog::MadPurgeHistoryDialog(wxWindow* parent,wxWindowID WXUNUSE
 	BoxSizer1->SetSizeHints(this);
 	Center();
 
-	Bind( wxEVT_COMMAND_CHECKBOX_CLICKED, &MadPurgeHistoryDialog::wxCheckBoxAllAboveClick, this, wxCheckBoxAllAbove->GetId() );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadPurgeHistoryDialog::WxButtonOKClick, this, wxID_OK );
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadPurgeHistoryDialog::WxButtonCancelClick, this, wxID_CANCEL );
-	Bind( wxEVT_CLOSE_WINDOW, &MadPurgeHistoryDialog::MadPurgeHistoryDialogClose, this, wxID_ANY );
-	Bind(wxEVT_KEY_DOWN, &MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown, this, wxID_ANY );
+	Bind(wxEVT_COMMAND_CHECKBOX_CLICKED, &MadPurgeHistoryDialog::wxCheckBoxAllAboveClick, this, wxCheckBoxAllAbove->GetId());
+	Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MadPurgeHistoryDialog::WxButtonOKClick, this, wxID_OK);
+	Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MadPurgeHistoryDialog::WxButtonCancelClick, this, wxID_CANCEL);
+	Bind(wxEVT_CLOSE_WINDOW, &MadPurgeHistoryDialog::MadPurgeHistoryDialogClose, this, wxID_ANY);
+	Bind(wxEVT_KEY_DOWN, &MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown, this, wxID_ANY);
 	//*)
 }
 
@@ -133,7 +133,7 @@ void MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown(wxKeyEvent& event)
 	// insert your code here
 	int key=event.GetKeyCode();
 
-	switch(key)
+	switch (key)
 	{
 	case WXK_ESCAPE:
 		{
@@ -146,18 +146,18 @@ void MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown(wxKeyEvent& event)
 	}
 
 	int flags=wxACCEL_NORMAL;
-	if(event.m_altDown) flags|=wxACCEL_ALT;
-	if(event.m_shiftDown) flags|=wxACCEL_SHIFT;
-	if(event.m_controlDown) flags|=wxACCEL_CTRL;
+	if (event.m_altDown) flags|=wxACCEL_ALT;
+	if (event.m_shiftDown) flags|=wxACCEL_SHIFT;
+	if (event.m_controlDown) flags|=wxACCEL_CTRL;
 
-	if('O' == key && wxACCEL_ALT == flags)
+	if ('O' == key && wxACCEL_ALT == flags)
 	{
 		wxCommandEvent e;
 		WxButtonOKClick(e);
 		return; // no skip
 	}
 
-	if('C' == key && wxACCEL_ALT == flags)
+	if ('C' == key && wxACCEL_ALT == flags)
 	{
 		wxCommandEvent e;
 		WxButtonCancelClick(e);
@@ -169,7 +169,7 @@ void MadPurgeHistoryDialog::MadPurgeHistoryDialogKeyDown(wxKeyEvent& event)
 
 void MadPurgeHistoryDialog::wxCheckBoxAllAboveClick(wxCommandEvent& event)
 {
-	if(event.IsChecked()) 
+	if (event.IsChecked()) 
 	{
 		wxCheckBoxRecentSearchedExcludeFilters->SetValue(true);
 		wxRecentSearchedFileFilters->SetValue(true);

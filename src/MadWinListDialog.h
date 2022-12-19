@@ -53,7 +53,7 @@ class MadWinListDialog: public wxDialog
 		void OnButtonSaveAsClick(wxCommandEvent& WXUNUSED(event));
 		void OnKeyDown(wxKeyEvent& event);
 		//*)
-		void MadWinListDialogActivate( wxActivateEvent& WXUNUSED(event) );
+		void MadWinListDialogActivate(wxActivateEvent& WXUNUSED(event));
 		void OnWinListSelectionChanged(wxListEvent& event);
 		void OnWinListColumnTabClicked(wxListEvent& event);
 		void InitWindowListIterms();

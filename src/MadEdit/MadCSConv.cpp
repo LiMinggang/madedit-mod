@@ -21,16 +21,16 @@ MadCSConv::MadCSConv(const wxString &charset):m_Charset(charset.Upper())
 {
 
 	m_Encoding = wxFontMapperBase::GetEncodingFromName(charset);
-	if(m_Encoding != wxFONTENCODING_SYSTEM && m_Encoding < wxFONTENCODING_MAX)
+	if (m_Encoding != wxFONTENCODING_SYSTEM && m_Encoding < wxFONTENCODING_MAX)
 	{
-		m_CSConv.reset(new wxCSConv( (wxFontEncoding)m_Encoding ));
+		m_CSConv.reset(new wxCSConv((wxFontEncoding)m_Encoding));
 	}
 	else
 	{
 		m_Encoding = wxFONTENCODING_SYSTEM;
 #ifdef __MAD_ENCODING_EXTENDED__
 		std::map<wxString, int>::iterator it = MadExtCharSetNames.find(m_Charset);
-		if(MadExtCharSetNames.end() != it)
+		if (MadExtCharSetNames.end() != it)
 			m_Encoding = it->second;
 #endif //__MAD_ENCODING_EXTENDED__
 	}
@@ -38,16 +38,16 @@ MadCSConv::MadCSConv(const wxString &charset):m_Charset(charset.Upper())
 
 MadCSConv::MadCSConv(int encoding):m_Charset(_T("UNKNOWN_CHARSET")), m_Encoding(encoding)
 {
-	if(m_Encoding < wxFONTENCODING_MAX)
+	if (m_Encoding < wxFONTENCODING_MAX)
 	{
-		m_CSConv.reset(new wxCSConv( (wxFontEncoding)m_Encoding ));
+		m_CSConv.reset(new wxCSConv((wxFontEncoding)m_Encoding));
 	}
 	else
 	{
 #ifdef __MAD_ENCODING_EXTENDED__
 		std::map<wxString, int>::iterator it = MadExtCharSetNames.begin();
-		for(; it != MadExtCharSetNames.end(); ++it)
-			if(it->second == m_Encoding)
+		for (; it != MadExtCharSetNames.end(); ++it)
+			if (it->second == m_Encoding)
 				break;
 		if (it == MadExtCharSetNames.end())		
 #endif //__MAD_ENCODING_EXTENDED__
@@ -127,14 +127,14 @@ void MadCSConv::InitCharSetNames()
 size_t MadCSConv::MB2WC (wchar_t *out, const char *in, size_t outLen) const
 {
 	int ret = 0;
-	if((m_Encoding < wxFONTENCODING_MAX) && (m_CSConv)) return m_CSConv->MB2WC(out, in, outLen);
+	if ((m_Encoding < wxFONTENCODING_MAX) && (m_CSConv)) return m_CSConv->MB2WC(out, in, outLen);
 
 #ifdef __MAD_ENCODING_EXTENDED__
 	ucs4_t *pwc = (ucs4_t *)out;
 	const unsigned char *s = (const unsigned char *)in;
 	int n = (int)outLen;
 
-	switch(m_Encoding)
+	switch (m_Encoding)
 	{
 		case MAD_FONTENCODING_GB18030:
 			ret = gb18030_mbtowc(pwc, s, n);
@@ -232,7 +232,7 @@ size_t MadCSConv::MB2WC (wchar_t *out, const char *in, size_t outLen) const
 			break;
 	}
 
-	if(ret < 0) ret = 0;
+	if (ret < 0) ret = 0;
 #endif //__MAD_ENCODING_EXTENDED__
 
 	return ret;
@@ -241,13 +241,13 @@ size_t MadCSConv::MB2WC (wchar_t *out, const char *in, size_t outLen) const
 size_t MadCSConv::WC2MB (char *buf, const wchar_t *psz, size_t n) const
 {
 	int ret = 0;
-	if((m_Encoding < wxFONTENCODING_MAX) && (m_CSConv)) return m_CSConv->WC2MB(buf, psz, n);
+	if ((m_Encoding < wxFONTENCODING_MAX) && (m_CSConv)) return m_CSConv->WC2MB(buf, psz, n);
 
 #ifdef __MAD_ENCODING_EXTENDED__
 	unsigned char *r = (unsigned char *)buf;
 	ucs4_t wc = *((ucs4_t *)psz);
 
-	switch(m_Encoding)
+	switch (m_Encoding)
 	{
 		case MAD_FONTENCODING_GB18030:
 			ret = gb18030_wctomb(r, wc, (int)n);
@@ -345,7 +345,7 @@ size_t MadCSConv::WC2MB (char *buf, const wchar_t *psz, size_t n) const
 			break;
 	}
 	
-	if(ret < 0) ret = 0;
+	if (ret < 0) ret = 0;
 #endif //__MAD_ENCODING_EXTENDED__
 
 	return ret;

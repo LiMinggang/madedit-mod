@@ -8,8 +8,8 @@
 #include "MadUtils.h"
 
 #ifdef _MSC_VER
-# pragma warning( push )
-# pragma warning( disable : 4996 )
+# pragma warning(push)
+# pragma warning(disable : 4996)
 #endif
 // disable 4996 {
 //(*InternalHeaders(MadConvEncDialog)
@@ -22,7 +22,7 @@
 #include "MadEdit/MadEncoding.h"
 
 #ifdef _MSC_VER
-# pragma warning( pop )
+# pragma warning(pop)
 #endif
 
 #ifdef _DEBUG
@@ -81,10 +81,10 @@ MadConvEncDialog::MadConvEncDialog(wxWindow* parent,wxWindowID id,const wxPoint&
 	//Connect(wxID_ANY,wxEVT_CLOSE_WINDOW,(wxObjectEventFunction)&MadConvEncDialog::MadConvEncDialogClose);
 	//*)
 
-	Bind( wxEVT_CLOSE_WINDOW, &MadConvEncDialog::MadConvEncDialogClose, this);
+	Bind(wxEVT_CLOSE_WINDOW, &MadConvEncDialog::MadConvEncDialogClose, this);
 
 	size_t cnt=MadEncoding::GetEncodingsCount();
-	for(size_t i=0;i<cnt;++i)
+	for (size_t i=0;i<cnt;++i)
 	{
 		WxComboBoxEncoding->Append(MadEncoding::GetEncodingName(i));//enc+des);
 	}
@@ -108,7 +108,7 @@ MadConvEncDialog::~MadConvEncDialog()
 
 void MadConvEncDialog::MadConvEncDialogClose(wxCloseEvent& event)
 {
-	if(event.CanVeto() && (nullptr != dynamic_cast< wxFrame * >(wxTheApp->GetTopWindow())))
+	if (event.CanVeto() && (nullptr != dynamic_cast< wxFrame * >(wxTheApp->GetTopWindow())))
 	{
 		event.Veto();
 		Show(false);

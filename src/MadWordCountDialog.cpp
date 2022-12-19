@@ -11,8 +11,8 @@
 
 
 #ifdef _MSC_VER
-# pragma warning( push )
-# pragma warning( disable : 4996 )
+# pragma warning(push)
+# pragma warning(disable : 4996)
 #endif
 // disable 4996 {
 //(*InternalHeaders(MadWordCountDialog)
@@ -21,7 +21,7 @@
 //*)
 // disable 4996 }
 #ifdef _MSC_VER
-# pragma warning( pop )
+# pragma warning(pop)
 #endif
 
 #ifdef _DEBUG
@@ -90,10 +90,10 @@ MadWordCountDialog::MadWordCountDialog(wxWindow* parent,wxWindowID WXUNUSED(id),
 	int	words, chars, spaces, lines, halfwidths, fullwidths;
 	wxArrayString detail;
 	g_ActiveMadEdit->WordCount(g_ActiveMadEdit->IsSelected(), words, chars, spaces, halfwidths, fullwidths, lines, &detail);
-	if( IsMacroRecording() )
+	if (IsMacroRecording())
 		RecordAsMadMacro(g_ActiveMadEdit, wxString::Format(wxT("WordCount(selection=%s)"), g_ActiveMadEdit->IsSelected()?wxT("True"):wxT("False")));
 
-	if(g_ActiveMadEdit->IsSelected())
+	if (g_ActiveMadEdit->IsSelected())
 	{
 		this->SetTitle(_("Word Count(Selected Text)"));
 	}
@@ -105,7 +105,7 @@ MadWordCountDialog::MadWordCountDialog(wxWindow* parent,wxWindowID WXUNUSED(id),
 	WxStaticTextFullwidthCount->SetLabel(wxString()<<fullwidths);
 	WxStaticTextLineCount->SetLabel(wxString()<<lines);
 	wxString str;
-	for(size_t i=0;i<detail.Count();++i)
+	for (size_t i=0;i<detail.Count();++i)
 	{
 		str<<detail[i]<<wxT("\n");
 	}

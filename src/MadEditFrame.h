@@ -372,10 +372,10 @@ enum   // menu id
 class MadEditFrame : public wxFrame
 {
 public:
-	MadEditFrame( wxWindow *parent, wxWindowID id = wxID_ANY, const wxString &title = wxT( "MadEdit-Mod" ),
+	MadEditFrame(wxWindow *parent, wxWindowID id = wxID_ANY, const wxString &title = wxT("MadEdit-Mod"),
 	              const wxPoint& pos = wxDefaultPosition,
 	              const wxSize& size = wxDefaultSize,
-	              long style = MadEditFrame_STYLE );
+	              long style = MadEditFrame_STYLE);
 	virtual ~MadEditFrame();
 public:
 	//Do not add custom Control Declarations here.
@@ -401,7 +401,7 @@ public:
 		ID_WXTOOLBAR1, //NextValue should be (ID_WXTOOLBAR1+tbTOOLBAR_MAX)
 		////GUI Enum Control ID End
 
-		ID_NOTEBOOK = ( ID_WXTOOLBAR1 + tbMAX ), // for wxAuiNotebook m_Notebook
+		ID_NOTEBOOK = (ID_WXTOOLBAR1 + tbMAX), // for wxAuiNotebook m_Notebook
 		ID_OUTPUTNOTEBOOK,
 		ID_FINDINFILESRESULTS,
 		//ID_WXTOOLBARQUICKSEARCH,
@@ -448,308 +448,308 @@ public:
 	bool           m_SearchDirectionNext;
     wxFileOffset   m_QSearchBegPos, m_QSearchEndPos;
 private:
-	void OnUpdateUI_CheckFrameStyle( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuFile_CheckCount( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuFileReload( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuFileRecentFiles( wxUpdateUIEvent& event );
+	void OnUpdateUI_CheckFrameStyle(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuFile_CheckCount(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuFileReload(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuFileRecentFiles(wxUpdateUIEvent& event);
 
-	void OnUpdateUI_MenuEditUndo( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuEditRedo( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuEdit_CheckSelSize( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuEditCut( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuEditCopy( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuEditPaste( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuEditDelete( wxUpdateUIEvent& event );
-	void OnUpdateUI_Menu_CheckSize( wxUpdateUIEvent& event );
-	void OnUpdateUI_Menu_CheckTextFileSize( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuEditStartEndSelction( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuFile_Readonly( wxUpdateUIEvent& event );
+	void OnUpdateUI_MenuEditUndo(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuEditRedo(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuEdit_CheckSelSize(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuEditCut(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuEditCopy(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuEditPaste(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuEditDelete(wxUpdateUIEvent& event);
+	void OnUpdateUI_Menu_CheckSize(wxUpdateUIEvent& event);
+	void OnUpdateUI_Menu_CheckTextFileSize(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuEditStartEndSelction(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuFile_Readonly(wxUpdateUIEvent& event);
 
 	// add: gogo, 21.09.2009
-	void OnUpdateUI_MenuEditToggleBookmark( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuEditCheckBookmark( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuEditCheckBookmarkWritable( wxUpdateUIEvent& event );
+	void OnUpdateUI_MenuEditToggleBookmark(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuEditCheckBookmark(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuEditCheckBookmarkWritable(wxUpdateUIEvent& event);
 
-	void OnUpdateUI_Menu_CheckTextFile( wxUpdateUIEvent& event );
-	void OnUpdateUI_Menu_CheckWritableTextFile( wxUpdateUIEvent& event );
-	void OnUpdateUI_Menu_CheckColumnMode( wxUpdateUIEvent& event );
-	void OnUpdateUI_Menu_JoinLines( wxUpdateUIEvent& event );
+	void OnUpdateUI_Menu_CheckTextFile(wxUpdateUIEvent& event);
+	void OnUpdateUI_Menu_CheckWritableTextFile(wxUpdateUIEvent& event);
+	void OnUpdateUI_Menu_CheckColumnMode(wxUpdateUIEvent& event);
+	void OnUpdateUI_Menu_JoinLines(wxUpdateUIEvent& event);
 
-	void OnUpdateUI_MenuEditCopyAsHexString( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuIndent( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuComment( wxUpdateUIEvent& event );
+	void OnUpdateUI_MenuEditCopyAsHexString(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuIndent(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuComment(wxUpdateUIEvent& event);
 
-	void OnUpdateUI_MenuSearchGoBack( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuSearchGoForward( wxUpdateUIEvent& event );
+	void OnUpdateUI_MenuSearchGoBack(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuSearchGoForward(wxUpdateUIEvent& event);
 
-	void OnUpdateUI_MenuSearchGoToBrace( wxUpdateUIEvent& event );
+	void OnUpdateUI_MenuSearchGoToBrace(wxUpdateUIEvent& event);
 
-	void OnUpdateUI_MenuViewEncoding( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewSyntax( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewFontName( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewFontSize( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewFixedWidthMode( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewTabColumn( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewLineSpacing( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewPreview( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewPreviewList( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewNoWrap( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewWrapByWindow( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewWrapByColumn( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewDisplayLineNumber( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewDisplayBookmark( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewDisplay80ColHint( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewShowEndOfLine( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewShowTabChar( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewShowSpaceChar( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewShowAllChars( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewRightToLeft( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewMarkActiveLine( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewMarkBracePair( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewTextMode( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewColumnMode( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewHexMode( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewSpellChecker( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuSpellIgnore( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuSpellAdd2Dict( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuSpellRemoveFromDict( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewToolbarsToggleAll( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewToolbarsLockPosition( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewMenuBarToggle( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewToolbarList( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuViewTypewriterMode( wxUpdateUIEvent& event );
+	void OnUpdateUI_MenuViewEncoding(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewSyntax(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewFontName(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewFontSize(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewFixedWidthMode(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewTabColumn(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewLineSpacing(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewPreview(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewPreviewList(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewNoWrap(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewWrapByWindow(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewWrapByColumn(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewDisplayLineNumber(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewDisplayBookmark(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewDisplay80ColHint(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewShowEndOfLine(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewShowTabChar(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewShowSpaceChar(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewShowAllChars(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewRightToLeft(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewMarkActiveLine(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewMarkBracePair(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewTextMode(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewColumnMode(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewHexMode(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewSpellChecker(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuSpellIgnore(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuSpellAdd2Dict(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuSpellRemoveFromDict(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewToolbarsToggleAll(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewToolbarsLockPosition(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewMenuBarToggle(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewToolbarList(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewTypewriterMode(wxUpdateUIEvent& event);
 
-	void OnUpdateUI_MenuToolsByteOrderMark( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuToolsNewLineChar( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuToolsInsertNewLineChar( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuCheckWritable( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuCheckIsThisModified( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuCheckIsAnyoneModified( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuToolsConvertEncoding( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuToolsConvertChineseSafeMode( wxUpdateUIEvent& event );
+	void OnUpdateUI_MenuToolsByteOrderMark(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuToolsNewLineChar(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuToolsInsertNewLineChar(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuCheckWritable(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuCheckIsThisModified(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuCheckIsAnyoneModified(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuToolsConvertEncoding(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuToolsConvertChineseSafeMode(wxUpdateUIEvent& event);
 
-	void OnUpdateUI_MenuWindow_CheckCount( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuWindow_Window( wxUpdateUIEvent& event );
+	void OnUpdateUI_MenuWindow_CheckCount(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuWindow_Window(wxUpdateUIEvent& event);
 
-	void OnUpdateUI_MenuToolsStartRecMacro( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuToolsStopRecMacro( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuToolsPlayRecMacro( wxUpdateUIEvent& event );
-	void OnUpdateUI_MenuToolsSaveRecMacro( wxUpdateUIEvent& event );
+	void OnUpdateUI_MenuToolsStartRecMacro(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuToolsStopRecMacro(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuToolsPlayRecMacro(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuToolsSaveRecMacro(wxUpdateUIEvent& event);
 	
-	void OnUpdateUI_MenuSearch_QuickBar( wxUpdateUIEvent& event );
+	void OnUpdateUI_MenuSearch_QuickBar(wxUpdateUIEvent& event);
 
-	void OnFileNew( wxCommandEvent& WXUNUSED(event) );
-	void OnFileOpen( wxCommandEvent& WXUNUSED(event) );
-	void OnFileSave( wxCommandEvent& WXUNUSED(event) );
-	void OnFileSaveAs( wxCommandEvent& WXUNUSED(event) );
-	void OnFileSaveAll( wxCommandEvent& WXUNUSED(event) );
-	void OnFileSaveACopy( wxCommandEvent& WXUNUSED(event) );
-	void OnFileReload( wxCommandEvent& WXUNUSED(event) );
-	void OnRecentFilesList( wxCommandEvent& WXUNUSED(event) );
-	void OnRecentFilesPop( wxCommandEvent& WXUNUSED(event) );
-	void OnFileClose( wxCommandEvent& WXUNUSED(event) );
-	void OnFileCloseAll( wxCommandEvent& WXUNUSED(event) );
-	void OnFileCloseAllButThis( wxCommandEvent& WXUNUSED(event) );
-	void OnFileCloseAllToTheLeft( wxCommandEvent& WXUNUSED(event) );
-	void OnFileCloseAllToTheRight( wxCommandEvent& WXUNUSED(event) );
-	void OnFilePageSetup( wxCommandEvent& WXUNUSED(event) );
-	void OnFilePrintPreview( wxCommandEvent& WXUNUSED(event) );
-	void OnFilePrint( wxCommandEvent& WXUNUSED(event) );
-	void OnFileRecentFile( wxCommandEvent& event );
-	void OnFileExit( wxCommandEvent& WXUNUSED(event) );
-	void OnCopyFilePath( wxCommandEvent& WXUNUSED(event) );
-	void OnCopyFileName( wxCommandEvent& event );
-	void OnCopyFileDir( wxCommandEvent& WXUNUSED(event) );
-	void OnOpenFileDir( wxCommandEvent& WXUNUSED(event) );
-	void OnFileToggleReadOnly( wxCommandEvent& WXUNUSED(event) );
+	void OnFileNew(wxCommandEvent& WXUNUSED(event));
+	void OnFileOpen(wxCommandEvent& WXUNUSED(event));
+	void OnFileSave(wxCommandEvent& WXUNUSED(event));
+	void OnFileSaveAs(wxCommandEvent& WXUNUSED(event));
+	void OnFileSaveAll(wxCommandEvent& WXUNUSED(event));
+	void OnFileSaveACopy(wxCommandEvent& WXUNUSED(event));
+	void OnFileReload(wxCommandEvent& WXUNUSED(event));
+	void OnRecentFilesList(wxCommandEvent& WXUNUSED(event));
+	void OnRecentFilesPop(wxCommandEvent& WXUNUSED(event));
+	void OnFileClose(wxCommandEvent& WXUNUSED(event));
+	void OnFileCloseAll(wxCommandEvent& WXUNUSED(event));
+	void OnFileCloseAllButThis(wxCommandEvent& WXUNUSED(event));
+	void OnFileCloseAllToTheLeft(wxCommandEvent& WXUNUSED(event));
+	void OnFileCloseAllToTheRight(wxCommandEvent& WXUNUSED(event));
+	void OnFilePageSetup(wxCommandEvent& WXUNUSED(event));
+	void OnFilePrintPreview(wxCommandEvent& WXUNUSED(event));
+	void OnFilePrint(wxCommandEvent& WXUNUSED(event));
+	void OnFileRecentFile(wxCommandEvent& event);
+	void OnFileExit(wxCommandEvent& WXUNUSED(event));
+	void OnCopyFilePath(wxCommandEvent& WXUNUSED(event));
+	void OnCopyFileName(wxCommandEvent& event);
+	void OnCopyFileDir(wxCommandEvent& WXUNUSED(event));
+	void OnOpenFileDir(wxCommandEvent& WXUNUSED(event));
+	void OnFileToggleReadOnly(wxCommandEvent& WXUNUSED(event));
 
-	void OnEditUndo( wxCommandEvent& WXUNUSED(event) );
-	void OnEditRedo( wxCommandEvent& WXUNUSED(event) );
-	void OnEditCut( wxCommandEvent& WXUNUSED(event) );
-	void OnEditCopy( wxCommandEvent& WXUNUSED(event) );
-	void OnEditPaste( wxCommandEvent& WXUNUSED(event) );
-	void OnEditDelete( wxCommandEvent& WXUNUSED(event) );
-	void OnEditCutLine( wxCommandEvent& WXUNUSED(event) );
-	void OnEditDeleteLine( wxCommandEvent& WXUNUSED(event) );
-	void OnEditSelectAll( wxCommandEvent& WXUNUSED(event) );
-	void OnEditStartEndSelction( wxCommandEvent& WXUNUSED(event) );
-	void OnEditInsertTabChar( wxCommandEvent& WXUNUSED(event) );
-	void OnEditInsertDateTime( wxCommandEvent& WXUNUSED(event) );
+	void OnEditUndo(wxCommandEvent& WXUNUSED(event));
+	void OnEditRedo(wxCommandEvent& WXUNUSED(event));
+	void OnEditCut(wxCommandEvent& WXUNUSED(event));
+	void OnEditCopy(wxCommandEvent& WXUNUSED(event));
+	void OnEditPaste(wxCommandEvent& WXUNUSED(event));
+	void OnEditDelete(wxCommandEvent& WXUNUSED(event));
+	void OnEditCutLine(wxCommandEvent& WXUNUSED(event));
+	void OnEditDeleteLine(wxCommandEvent& WXUNUSED(event));
+	void OnEditSelectAll(wxCommandEvent& WXUNUSED(event));
+	void OnEditStartEndSelction(wxCommandEvent& WXUNUSED(event));
+	void OnEditInsertTabChar(wxCommandEvent& WXUNUSED(event));
+	void OnEditInsertDateTime(wxCommandEvent& WXUNUSED(event));
 
 	// add: gogo, 21.09.2009
-	void OnSearchToggleBookmark( wxCommandEvent& WXUNUSED(event) );
-	void OnSearchGotoNextBookmark( wxCommandEvent& WXUNUSED(event) );
-	void OnSearchGotoPreviousBookmark( wxCommandEvent& WXUNUSED(event) );
-	void OnSearchClearAllBookmarks( wxCommandEvent& WXUNUSED(event) );
+	void OnSearchToggleBookmark(wxCommandEvent& WXUNUSED(event));
+	void OnSearchGotoNextBookmark(wxCommandEvent& WXUNUSED(event));
+	void OnSearchGotoPreviousBookmark(wxCommandEvent& WXUNUSED(event));
+	void OnSearchClearAllBookmarks(wxCommandEvent& WXUNUSED(event));
 	//----------
 
-	void OnEditSortAscending( wxCommandEvent& WXUNUSED(event) );
-	void OnEditSortDescending( wxCommandEvent& WXUNUSED(event) );
-	void OnEditSortAscendingCase( wxCommandEvent& WXUNUSED(event) );
-	void OnEditSortDescendingCase( wxCommandEvent& WXUNUSED(event) );
-	void OnEditSortByOptions( wxCommandEvent& WXUNUSED(event) );
-	void OnEditSortOptions( wxCommandEvent& WXUNUSED(event) );
+	void OnEditSortAscending(wxCommandEvent& WXUNUSED(event));
+	void OnEditSortDescending(wxCommandEvent& WXUNUSED(event));
+	void OnEditSortAscendingCase(wxCommandEvent& WXUNUSED(event));
+	void OnEditSortDescendingCase(wxCommandEvent& WXUNUSED(event));
+	void OnEditSortByOptions(wxCommandEvent& WXUNUSED(event));
+	void OnEditSortOptions(wxCommandEvent& WXUNUSED(event));
 
-	void OnEditCopyAsHexString( wxCommandEvent& WXUNUSED(event) );
-	void OnEditCopyAsHexStringWithSpace( wxCommandEvent& WXUNUSED(event) );
-	void OnEditCopyRevertHex( wxCommandEvent& WXUNUSED(event) );
-	void OnEditIncIndent( wxCommandEvent& WXUNUSED(event) );
-	void OnEditDecIndent( wxCommandEvent& WXUNUSED(event) );
-	void OnEditComment( wxCommandEvent& WXUNUSED(event) );
-	void OnEditUncomment( wxCommandEvent& WXUNUSED(event) );
-	void OnEditWordWrapToNewLine( wxCommandEvent& WXUNUSED(event) );
-	void OnEditNewLineToWordWrap( wxCommandEvent& WXUNUSED(event) );
-	void OnEditToUpperCase( wxCommandEvent& WXUNUSED(event) );
-	void OnEditToLowerCase( wxCommandEvent& WXUNUSED(event) );
-	void OnEditInvertCase( wxCommandEvent& WXUNUSED(event) );
-	void OnEditCapitalize( wxCommandEvent& WXUNUSED(event) );
-	void OnEditToHalfWidth( wxCommandEvent& WXUNUSED(event) );
-	void OnEditToHalfWidthByOptions( wxCommandEvent& WXUNUSED(event) );
-	void OnEditToFullWidth( wxCommandEvent& WXUNUSED(event) );
-	void OnEditToFullWidthByOptions( wxCommandEvent& WXUNUSED(event) );
-	void OnEditTabToSpace( wxCommandEvent& WXUNUSED(event) );
-	void OnEditSpaceToTab( wxCommandEvent& WXUNUSED(event) );
-	void OnEditTrimTrailingSpaces( wxCommandEvent& WXUNUSED(event) );
-	void OnEditTrimLeadingSpaces( wxCommandEvent& WXUNUSED(event) );
-	void OnEditDeleteEmptyLines( wxCommandEvent& WXUNUSED(event) );
-	void OnEditDeleteEmptyLinesWithSpaces( wxCommandEvent& WXUNUSED(event) );
-	void OnEditJoinLines( wxCommandEvent& WXUNUSED(event) );
-	void OnEditInsertNumbers( wxCommandEvent& WXUNUSED(event) );
-	void OnEditColumnAlignLeft( wxCommandEvent& WXUNUSED(event) );
-	void OnEditColumnAlignRight( wxCommandEvent& WXUNUSED(event) );
-	void OnEditSpellCheck( wxCommandEvent& WXUNUSED(event) );
-	void OnEditBookmarkCopy( wxCommandEvent& WXUNUSED(event) );
-	void OnEditBookmarkCut( wxCommandEvent& WXUNUSED(event) );
-	void OnEditBookmarkDel( wxCommandEvent& WXUNUSED(event) );
-	void OnEditBookmarkCopyUnmarked( wxCommandEvent& WXUNUSED(event) );
-	void OnEditBookmarkCutUnmarked( wxCommandEvent& WXUNUSED(event) );
-	void OnEditBookmarkDelUnmarked( wxCommandEvent& WXUNUSED(event) );
-	void OnEditBookmarkReplace( wxCommandEvent& WXUNUSED(event) );
+	void OnEditCopyAsHexString(wxCommandEvent& WXUNUSED(event));
+	void OnEditCopyAsHexStringWithSpace(wxCommandEvent& WXUNUSED(event));
+	void OnEditCopyRevertHex(wxCommandEvent& WXUNUSED(event));
+	void OnEditIncIndent(wxCommandEvent& WXUNUSED(event));
+	void OnEditDecIndent(wxCommandEvent& WXUNUSED(event));
+	void OnEditComment(wxCommandEvent& WXUNUSED(event));
+	void OnEditUncomment(wxCommandEvent& WXUNUSED(event));
+	void OnEditWordWrapToNewLine(wxCommandEvent& WXUNUSED(event));
+	void OnEditNewLineToWordWrap(wxCommandEvent& WXUNUSED(event));
+	void OnEditToUpperCase(wxCommandEvent& WXUNUSED(event));
+	void OnEditToLowerCase(wxCommandEvent& WXUNUSED(event));
+	void OnEditInvertCase(wxCommandEvent& WXUNUSED(event));
+	void OnEditCapitalize(wxCommandEvent& WXUNUSED(event));
+	void OnEditToHalfWidth(wxCommandEvent& WXUNUSED(event));
+	void OnEditToHalfWidthByOptions(wxCommandEvent& WXUNUSED(event));
+	void OnEditToFullWidth(wxCommandEvent& WXUNUSED(event));
+	void OnEditToFullWidthByOptions(wxCommandEvent& WXUNUSED(event));
+	void OnEditTabToSpace(wxCommandEvent& WXUNUSED(event));
+	void OnEditSpaceToTab(wxCommandEvent& WXUNUSED(event));
+	void OnEditTrimTrailingSpaces(wxCommandEvent& WXUNUSED(event));
+	void OnEditTrimLeadingSpaces(wxCommandEvent& WXUNUSED(event));
+	void OnEditDeleteEmptyLines(wxCommandEvent& WXUNUSED(event));
+	void OnEditDeleteEmptyLinesWithSpaces(wxCommandEvent& WXUNUSED(event));
+	void OnEditJoinLines(wxCommandEvent& WXUNUSED(event));
+	void OnEditInsertNumbers(wxCommandEvent& WXUNUSED(event));
+	void OnEditColumnAlignLeft(wxCommandEvent& WXUNUSED(event));
+	void OnEditColumnAlignRight(wxCommandEvent& WXUNUSED(event));
+	void OnEditSpellCheck(wxCommandEvent& WXUNUSED(event));
+	void OnEditBookmarkCopy(wxCommandEvent& WXUNUSED(event));
+	void OnEditBookmarkCut(wxCommandEvent& WXUNUSED(event));
+	void OnEditBookmarkDel(wxCommandEvent& WXUNUSED(event));
+	void OnEditBookmarkCopyUnmarked(wxCommandEvent& WXUNUSED(event));
+	void OnEditBookmarkCutUnmarked(wxCommandEvent& WXUNUSED(event));
+	void OnEditBookmarkDelUnmarked(wxCommandEvent& WXUNUSED(event));
+	void OnEditBookmarkReplace(wxCommandEvent& WXUNUSED(event));
 
-	void OnSearchFind( wxCommandEvent& WXUNUSED(event) );
-	void OnSearchFindNext( wxCommandEvent& WXUNUSED(event) );
-	void OnSearchFindPrevious( wxCommandEvent& WXUNUSED(event) );
-	void OnSearchReplace( wxCommandEvent& WXUNUSED(event) );
-	void OnSearchFindInFiles( wxCommandEvent& WXUNUSED(event) );
-	void OnSearchShowFindInFilesResults( wxCommandEvent& WXUNUSED(event) );
-	void OnSearchGoToLine( wxCommandEvent& WXUNUSED(event) );
-	void OnSearchGoToPosition( wxCommandEvent& WXUNUSED(event) );
-	void OnSearchGoBack( wxCommandEvent& WXUNUSED(event) );
-	void OnSearchGoForward( wxCommandEvent& WXUNUSED(event) );
-	void OnSearchGoToLeftBrace( wxCommandEvent& WXUNUSED(event) );
-	void OnSearchGoToRightBrace( wxCommandEvent& WXUNUSED(event) );
-	void OnSearchQuickFind( wxCommandEvent& event );
-	void OnSearchQuickFindNext( wxCommandEvent& event );
-	void OnSearchQuickFindPrevious( wxCommandEvent& event );
-	void OnShowQuickSearchBar( wxCommandEvent& WXUNUSED(event) );
+	void OnSearchFind(wxCommandEvent& WXUNUSED(event));
+	void OnSearchFindNext(wxCommandEvent& WXUNUSED(event));
+	void OnSearchFindPrevious(wxCommandEvent& WXUNUSED(event));
+	void OnSearchReplace(wxCommandEvent& WXUNUSED(event));
+	void OnSearchFindInFiles(wxCommandEvent& WXUNUSED(event));
+	void OnSearchShowFindInFilesResults(wxCommandEvent& WXUNUSED(event));
+	void OnSearchGoToLine(wxCommandEvent& WXUNUSED(event));
+	void OnSearchGoToPosition(wxCommandEvent& WXUNUSED(event));
+	void OnSearchGoBack(wxCommandEvent& WXUNUSED(event));
+	void OnSearchGoForward(wxCommandEvent& WXUNUSED(event));
+	void OnSearchGoToLeftBrace(wxCommandEvent& WXUNUSED(event));
+	void OnSearchGoToRightBrace(wxCommandEvent& WXUNUSED(event));
+	void OnSearchQuickFind(wxCommandEvent& event);
+	void OnSearchQuickFindNext(wxCommandEvent& event);
+	void OnSearchQuickFindPrevious(wxCommandEvent& event);
+	void OnShowQuickSearchBar(wxCommandEvent& WXUNUSED(event));
 
-    void OnViewAlwaysOnTop( wxCommandEvent& WXUNUSED(event) );
-    void OnViewFullScreen( wxCommandEvent& WXUNUSED(event) );
-	void OnViewPostIt( wxCommandEvent& WXUNUSED(event) );
-	void OnViewEncoding( wxCommandEvent& WXUNUSED(event) );
-	void OnViewRecentEncoding( wxCommandEvent& WXUNUSED(event) );
-	void OnViewSyntax( wxCommandEvent& WXUNUSED(event) );
-	void OnViewFontName( wxCommandEvent& WXUNUSED(event) );
-	void OnViewRecentFont( wxCommandEvent& WXUNUSED(event) );
-	void OnViewFontSize( wxCommandEvent& WXUNUSED(event) );
-	void OnViewSetFont( wxCommandEvent& WXUNUSED(event) );
-	void OnViewFixedWidthMode( wxCommandEvent& WXUNUSED(event) );
-	void OnViewLineSpacing( wxCommandEvent& WXUNUSED(event) );
-	void OnViewTabColumn( wxCommandEvent& WXUNUSED(event) );
-	void OnViewPreview( wxCommandEvent& WXUNUSED(event) );
-	void OnRefreshPreview( wxCommandEvent& WXUNUSED(event) );
-	void OnClosePreview( wxCommandEvent& WXUNUSED(event) );
-	void OnViewNoWrap( wxCommandEvent& WXUNUSED(event) );
-	void OnViewWrapByWindow( wxCommandEvent& WXUNUSED(event) );
-	void OnViewWrapByColumn( wxCommandEvent& WXUNUSED(event) );
-	void OnViewDisplayLineNumber( wxCommandEvent& WXUNUSED(event) );
-	void OnViewDisplayBookmark( wxCommandEvent& WXUNUSED(event) );
-	void OnViewDisplay80ColHint( wxCommandEvent& WXUNUSED(event) );
-	void OnViewShowEndOfLine( wxCommandEvent& WXUNUSED(event) );
-	void OnViewShowTabChar( wxCommandEvent& WXUNUSED(event) );
-	void OnViewShowSpaceChar( wxCommandEvent& WXUNUSED(event) );
-	void OnViewShowAllChars( wxCommandEvent& WXUNUSED(event) );
-	void OnViewRightToLeft( wxCommandEvent& WXUNUSED(event) );
-	void OnViewMarkActiveLine( wxCommandEvent& WXUNUSED(event) );
-	void OnViewMarkBracePair( wxCommandEvent& WXUNUSED(event) );
-	void OnViewTextMode( wxCommandEvent& WXUNUSED(event) );
-	void OnViewColumnMode( wxCommandEvent& WXUNUSED(event) );
-	void OnViewHexMode( wxCommandEvent& WXUNUSED(event) );
-	void OnViewSpellChecker( wxCommandEvent& WXUNUSED(event) );
-	void OnSpellCheckIgnore( wxCommandEvent& WXUNUSED(event) );
-	void OnSpellAdd2Dict( wxCommandEvent& WXUNUSED(event) );
-	void OnSpellCheckRemoveFromDict( wxCommandEvent& WXUNUSED(event) );
-	void OnViewToolBarsToggleAll( wxCommandEvent& event );
-	void OnViewToolBarsLockPosistion( wxCommandEvent& event );
-	void OnViewMenuBarToggle( wxCommandEvent& event );
-	void OnViewToolbars( wxCommandEvent& WXUNUSED(event) );
-	void OnViewTypewriterMode( wxCommandEvent& WXUNUSED(event) );
+    void OnViewAlwaysOnTop(wxCommandEvent& WXUNUSED(event));
+    void OnViewFullScreen(wxCommandEvent& WXUNUSED(event));
+	void OnViewPostIt(wxCommandEvent& WXUNUSED(event));
+	void OnViewEncoding(wxCommandEvent& WXUNUSED(event));
+	void OnViewRecentEncoding(wxCommandEvent& WXUNUSED(event));
+	void OnViewSyntax(wxCommandEvent& WXUNUSED(event));
+	void OnViewFontName(wxCommandEvent& WXUNUSED(event));
+	void OnViewRecentFont(wxCommandEvent& WXUNUSED(event));
+	void OnViewFontSize(wxCommandEvent& WXUNUSED(event));
+	void OnViewSetFont(wxCommandEvent& WXUNUSED(event));
+	void OnViewFixedWidthMode(wxCommandEvent& WXUNUSED(event));
+	void OnViewLineSpacing(wxCommandEvent& WXUNUSED(event));
+	void OnViewTabColumn(wxCommandEvent& WXUNUSED(event));
+	void OnViewPreview(wxCommandEvent& WXUNUSED(event));
+	void OnRefreshPreview(wxCommandEvent& WXUNUSED(event));
+	void OnClosePreview(wxCommandEvent& WXUNUSED(event));
+	void OnViewNoWrap(wxCommandEvent& WXUNUSED(event));
+	void OnViewWrapByWindow(wxCommandEvent& WXUNUSED(event));
+	void OnViewWrapByColumn(wxCommandEvent& WXUNUSED(event));
+	void OnViewDisplayLineNumber(wxCommandEvent& WXUNUSED(event));
+	void OnViewDisplayBookmark(wxCommandEvent& WXUNUSED(event));
+	void OnViewDisplay80ColHint(wxCommandEvent& WXUNUSED(event));
+	void OnViewShowEndOfLine(wxCommandEvent& WXUNUSED(event));
+	void OnViewShowTabChar(wxCommandEvent& WXUNUSED(event));
+	void OnViewShowSpaceChar(wxCommandEvent& WXUNUSED(event));
+	void OnViewShowAllChars(wxCommandEvent& WXUNUSED(event));
+	void OnViewRightToLeft(wxCommandEvent& WXUNUSED(event));
+	void OnViewMarkActiveLine(wxCommandEvent& WXUNUSED(event));
+	void OnViewMarkBracePair(wxCommandEvent& WXUNUSED(event));
+	void OnViewTextMode(wxCommandEvent& WXUNUSED(event));
+	void OnViewColumnMode(wxCommandEvent& WXUNUSED(event));
+	void OnViewHexMode(wxCommandEvent& WXUNUSED(event));
+	void OnViewSpellChecker(wxCommandEvent& WXUNUSED(event));
+	void OnSpellCheckIgnore(wxCommandEvent& WXUNUSED(event));
+	void OnSpellAdd2Dict(wxCommandEvent& WXUNUSED(event));
+	void OnSpellCheckRemoveFromDict(wxCommandEvent& WXUNUSED(event));
+	void OnViewToolBarsToggleAll(wxCommandEvent& event);
+	void OnViewToolBarsLockPosistion(wxCommandEvent& event);
+	void OnViewMenuBarToggle(wxCommandEvent& event);
+	void OnViewToolbars(wxCommandEvent& WXUNUSED(event));
+	void OnViewTypewriterMode(wxCommandEvent& WXUNUSED(event));
 
-	void OnFontEncoding( wxCommandEvent& WXUNUSED(event) );
-	void OnIncDecFontSize( wxCommandEvent& WXUNUSED(event) );
-	void UpdateFontEncoding(  );
+	void OnFontEncoding(wxCommandEvent& WXUNUSED(event));
+	void OnIncDecFontSize(wxCommandEvent& WXUNUSED(event));
+	void UpdateFontEncoding();
 
-	void OnToolsOptions( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsHighlighting( wxCommandEvent& WXUNUSED(event) );
+	void OnToolsOptions(wxCommandEvent& WXUNUSED(event));
+	void OnToolsHighlighting(wxCommandEvent& WXUNUSED(event));
 #ifdef __WXMSW__
-	void OnToolsFileAssociation( wxCommandEvent& WXUNUSED(event) );
+	void OnToolsFileAssociation(wxCommandEvent& WXUNUSED(event));
 #endif
-	void OnToolsSourceFormatter( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsPurgeHistories( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsRunTempMacro( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsRunMacroFile( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsStartRecMacro( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsStopRecMacro( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsPlayRecMacro( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsSaveRecMacro( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsMadScriptList( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsEditMacroFile( wxCommandEvent& WXUNUSED(event) );
+	void OnToolsSourceFormatter(wxCommandEvent& WXUNUSED(event));
+	void OnToolsPurgeHistories(wxCommandEvent& WXUNUSED(event));
+	void OnToolsRunTempMacro(wxCommandEvent& WXUNUSED(event));
+	void OnToolsRunMacroFile(wxCommandEvent& WXUNUSED(event));
+	void OnToolsStartRecMacro(wxCommandEvent& WXUNUSED(event));
+	void OnToolsStopRecMacro(wxCommandEvent& WXUNUSED(event));
+	void OnToolsPlayRecMacro(wxCommandEvent& WXUNUSED(event));
+	void OnToolsSaveRecMacro(wxCommandEvent& WXUNUSED(event));
+	void OnToolsMadScriptList(wxCommandEvent& WXUNUSED(event));
+	void OnToolsEditMacroFile(wxCommandEvent& WXUNUSED(event));
 
-	void OnToolsToggleBOM( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsConvertToDOS( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsConvertToMAC( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsConvertToUNIX( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsInsertDOS( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsInsertMAC( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsInsertUNIX( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsConvertEncoding( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsConvertChineseSafeMode( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsSimp2TradChinese( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsTrad2SimpChinese( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsKanji2TradChinese( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsKanji2SimpChinese( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsChinese2Kanji( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsSimp2TradClipboard( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsTrad2SimpClipboard( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsKanji2TradClipboard( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsKanji2SimpClipboard( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsChinese2KanjiClipboard( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsWordCount( wxCommandEvent& WXUNUSED(event) );
+	void OnToolsToggleBOM(wxCommandEvent& WXUNUSED(event));
+	void OnToolsConvertToDOS(wxCommandEvent& WXUNUSED(event));
+	void OnToolsConvertToMAC(wxCommandEvent& WXUNUSED(event));
+	void OnToolsConvertToUNIX(wxCommandEvent& WXUNUSED(event));
+	void OnToolsInsertDOS(wxCommandEvent& WXUNUSED(event));
+	void OnToolsInsertMAC(wxCommandEvent& WXUNUSED(event));
+	void OnToolsInsertUNIX(wxCommandEvent& WXUNUSED(event));
+	void OnToolsConvertEncoding(wxCommandEvent& WXUNUSED(event));
+	void OnToolsConvertChineseSafeMode(wxCommandEvent& WXUNUSED(event));
+	void OnToolsSimp2TradChinese(wxCommandEvent& WXUNUSED(event));
+	void OnToolsTrad2SimpChinese(wxCommandEvent& WXUNUSED(event));
+	void OnToolsKanji2TradChinese(wxCommandEvent& WXUNUSED(event));
+	void OnToolsKanji2SimpChinese(wxCommandEvent& WXUNUSED(event));
+	void OnToolsChinese2Kanji(wxCommandEvent& WXUNUSED(event));
+	void OnToolsSimp2TradClipboard(wxCommandEvent& WXUNUSED(event));
+	void OnToolsTrad2SimpClipboard(wxCommandEvent& WXUNUSED(event));
+	void OnToolsKanji2TradClipboard(wxCommandEvent& WXUNUSED(event));
+	void OnToolsKanji2SimpClipboard(wxCommandEvent& WXUNUSED(event));
+	void OnToolsChinese2KanjiClipboard(wxCommandEvent& WXUNUSED(event));
+	void OnToolsWordCount(wxCommandEvent& WXUNUSED(event));
 
-	void OnWindowPreviousWindow( wxCommandEvent& WXUNUSED(event) );
-	void OnWindowNextWindow( wxCommandEvent& WXUNUSED(event) );
-	void OnWindowWindowList( wxCommandEvent& WXUNUSED(event) );
-	void OnWindowWindowActivate( wxCommandEvent& WXUNUSED(event) );
+	void OnWindowPreviousWindow(wxCommandEvent& WXUNUSED(event));
+	void OnWindowNextWindow(wxCommandEvent& WXUNUSED(event));
+	void OnWindowWindowList(wxCommandEvent& WXUNUSED(event));
+	void OnWindowWindowActivate(wxCommandEvent& WXUNUSED(event));
 
-	void OnHelpAbout( wxCommandEvent& WXUNUSED(event) );
+	void OnHelpAbout(wxCommandEvent& WXUNUSED(event));
 
-    void CollapseAllResults( wxCommandEvent& WXUNUSED(event) );
-	void OnCopyCurrResult( wxCommandEvent& WXUNUSED(event) );
-	void OnCopyAllResults( wxCommandEvent& WXUNUSED(event) );
-	void OnResetResult( wxCommandEvent& WXUNUSED(event) );
-	void OnDeleteCurrResult( wxCommandEvent& WXUNUSED(event) );
-	void OnCollapseCurrResult( wxCommandEvent& WXUNUSED(event) );
-    void OnRightClickToolBar( wxAuiToolBarEvent& event );
-    void OnQuickSearchSetFocus( wxFocusEvent& event );
-	void OnContextMenu( wxContextMenuEvent& event );
-	void OnScrollBarMenu( wxCommandEvent& WXUNUSED(event) );
+    void CollapseAllResults(wxCommandEvent& WXUNUSED(event));
+	void OnCopyCurrResult(wxCommandEvent& WXUNUSED(event));
+	void OnCopyAllResults(wxCommandEvent& WXUNUSED(event));
+	void OnResetResult(wxCommandEvent& WXUNUSED(event));
+	void OnDeleteCurrResult(wxCommandEvent& WXUNUSED(event));
+	void OnCollapseCurrResult(wxCommandEvent& WXUNUSED(event));
+    void OnRightClickToolBar(wxAuiToolBarEvent& event);
+    void OnQuickSearchSetFocus(wxFocusEvent& event);
+	void OnContextMenu(wxContextMenuEvent& event);
+	void OnScrollBarMenu(wxCommandEvent& WXUNUSED(event));
 public:
-	void OnWindowToggleWindow( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsMarkdown2Html( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsHtml2PlainText( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsAstyleFormat( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsXMLFormat( wxCommandEvent& WXUNUSED(event) );
-	void OnToolsJSONFormat( wxCommandEvent& WXUNUSED(event) );
+	void OnWindowToggleWindow(wxCommandEvent& WXUNUSED(event));
+	void OnToolsMarkdown2Html(wxCommandEvent& WXUNUSED(event));
+	void OnToolsHtml2PlainText(wxCommandEvent& WXUNUSED(event));
+	void OnToolsAstyleFormat(wxCommandEvent& WXUNUSED(event));
+	void OnToolsXMLFormat(wxCommandEvent& WXUNUSED(event));
+	void OnToolsJSONFormat(wxCommandEvent& WXUNUSED(event));
 private:
 	bool m_PageClosing; // prevent from reentry of CloseFile(), OnNotebookPageClosing()
 public:
@@ -758,40 +758,40 @@ public:
 	void InitMenu_VScrollPop();
 	size_t OpenedFileCount();
     void ActivateFile(int num);
-	bool OpenFile( const wxString &filename, bool mustExist, bool changeSelection = true ); // if filename is empty, open a new file
-	void RunScriptWithFile( const wxString &filename, const wxString &script, bool mustExist, bool closeafterdone, bool ignorereadonly, bool activeFile );
-	void CloseFile( size_t pageId );
-	void CloseAllFiles( bool force );
-	void MadEditFrameKeyDown( wxKeyEvent& event );
-	void SetPageFocus( size_t pageId );
-	int GetPageFocus( );
-	MadEdit *GetEditByFileName( const wxString &filename, size_t &id );
+	bool OpenFile(const wxString &filename, bool mustExist, bool changeSelection = true); // if filename is empty, open a new file
+	void RunScriptWithFile(const wxString &filename, const wxString &script, bool mustExist, bool closeafterdone, bool ignorereadonly, bool activeFile);
+	void CloseFile(size_t pageId);
+	void CloseAllFiles(bool force);
+	void MadEditFrameKeyDown(wxKeyEvent& event);
+	void SetPageFocus(size_t pageId);
+	int GetPageFocus();
+	MadEdit *GetEditByFileName(const wxString &filename, size_t &id);
 	void ResetAcceleratorTable();
 	void HideQuickFindBar();
     void SaveFile(size_t pageId, bool saveas = false, bool hideDlg = true);
 
 protected:
-	void MadEditFrameClose( wxCloseEvent& event );
-	void CreateGUIControls( void );
+	void MadEditFrameClose(wxCloseEvent& event);
+	void CreateGUIControls(void);
 
-	void OnNotebookPageChanging( wxAuiNotebookEvent& event );
-	void OnNotebookPageChanged( wxAuiNotebookEvent& event );
-	void OnNotebookPageClosing( wxAuiNotebookEvent& event );
-	void OnNotebookPageClosed( bool bZeroPage = false ); //wxAuiNotebookEvent& event); //wxAUI doesn't support this event
-	void OnNotebookPageRightUp( wxAuiNotebookEvent& event );
+	void OnNotebookPageChanging(wxAuiNotebookEvent& event);
+	void OnNotebookPageChanged(wxAuiNotebookEvent& event);
+	void OnNotebookPageClosing(wxAuiNotebookEvent& event);
+	void OnNotebookPageClosed(bool bZeroPage = false); //wxAuiNotebookEvent& event); //wxAUI doesn't support this event
+	void OnNotebookPageRightUp(wxAuiNotebookEvent& event);
 
-	void OnSize( wxSizeEvent &evt );
+	void OnSize(wxSizeEvent &evt);
 	//void OnChar(wxKeyEvent& evt);
-	void OnActivate( wxActivateEvent &evt );
+	void OnActivate(wxActivateEvent &evt);
 
-	bool QueryCloseFile( size_t idx );
+	bool QueryCloseFile(size_t idx);
 	bool QueryCloseAllFiles();
 
-	void LoadMenuKeys( wxConfigBase *config );
-	wxString GetMenuKey( const wxString &menu, const wxString &defaultkey );
+	void LoadMenuKeys(wxConfigBase *config);
+	wxString GetMenuKey(const wxString &menu, const wxString &defaultkey);
 
-	//void OnInfoNotebookSize( wxSizeEvent &evt );
-	void OnFindInFilesResultsDClick( wxMouseEvent& event );
+	//void OnInfoNotebookSize(wxSizeEvent &evt);
+	void OnFindInFilesResultsDClick(wxMouseEvent& event);
     void HideAllToolBars();
     void ShowAllToolBars();
     void ToggleFullScreen(long style, bool maxmize);
@@ -801,13 +801,13 @@ protected:
     bool RestoreAuiPanel(wxWindow * toolbar, wxString& toobar_status, bool gripper = false);
 
 #ifdef __WXMSW__
-	WXLRESULT MSWWindowProc( WXUINT message, WXWPARAM wParam, WXLPARAM lParam );
+	WXLRESULT MSWWindowProc(WXUINT message, WXWPARAM wParam, WXLPARAM lParam);
 #endif
 	static const long ID_WXTIMER;
 public:
 	void ResetFindInFilesResults();
-	wxTreeItemId & NewSearchSession( const wxString &sessionLabel );
-	void AddItemToFindInFilesResults( wxTreeItemId & myroot, const wxString &distext, const wxString &acttext, size_t index, const wxString &filename, int pageid, const wxFileOffset &begpos, wxFileOffset &endpos );
+	wxTreeItemId & NewSearchSession(const wxString &sessionLabel);
+	void AddItemToFindInFilesResults(wxTreeItemId & myroot, const wxString &distext, const wxString &acttext, size_t index, const wxString &filename, int pageid, const wxFileOffset &begpos, wxFileOffset &endpos);
 
 	void PurgeRecentFiles();
 	void PurgeRecentFonts();
@@ -829,53 +829,53 @@ private:
 	typedef struct 
 	{
 		const long evtTag;
-		void (MadEditFrame::*method)( wxCommandEvent &);
+		void (MadEditFrame::*method)(wxCommandEvent &);
 	} wxCmdEvtHandlerMap_t;
     static wxCmdEvtHandlerMap_t m_menu_evt_map[];
 	typedef struct 
 	{
 		const long evtStartTag;
 		const long evtEndTag;
-		void (MadEditFrame::*method)( wxCommandEvent &);
+		void (MadEditFrame::*method)(wxCommandEvent &);
 	} wxCmdEvtHandlerRangeMap_t;
     static wxCmdEvtHandlerRangeMap_t m_menu_evt_range_map[];
 	typedef struct 
 	{
 		const long evtTag;
-		void (MadEditFrame::*method)( wxUpdateUIEvent &);
+		void (MadEditFrame::*method)(wxUpdateUIEvent &);
 	} wxUIUpdateEvtHandlerMap_t;
 	static wxUIUpdateEvtHandlerMap_t m_menu_ui_updater_map[];
 	typedef struct 
 	{
 		const long evtStartTag;
 		const long evtEndTag;
-		void (MadEditFrame::*method)( wxUpdateUIEvent &);
+		void (MadEditFrame::*method)(wxUpdateUIEvent &);
 	} wxCmdUpdaterRangeMap_t;
     static wxCmdUpdaterRangeMap_t m_menu_ui_updater_range_map[];
 	void UpdateControlsColour(const wxColour& colFt, const wxColour& colBg);
 public:
 	MadMacroMode GetMadMacroStatus() {return m_MadMacroStatus;}
-	bool IsMacroRunning() {return ( m_MadMacroStatus == emMacroRunning );}
-	bool IsMacroRecording() {return ( m_MadMacroStatus == emMacroRecoding );}
-	bool IsMacroStopped() {return ( m_MadMacroStatus == emMacroStopped );}
+	bool IsMacroRunning() {return (m_MadMacroStatus == emMacroRunning);}
+	bool IsMacroRecording() {return (m_MadMacroStatus == emMacroRecoding);}
+	bool IsMacroStopped() {return (m_MadMacroStatus == emMacroStopped);}
 	void SetMacroRunning() {m_MadMacroStatus = emMacroRunning;}
 	void SetMacroRecording() {m_MadMacroStatus = emMacroRecoding;}
 	void SetMacroStopped() {m_MadMacroStatus = emMacroStopped;}
 	void AddMacroScript(const wxString & script, /*wxFileOffset caretPos = 0,*/ wxFileOffset selBeg = -1, wxFileOffset selEnd = -1);
-	bool HasRecordedScript() {return ( m_MadMacroScripts.GetCount() > 0 );}
+	bool HasRecordedScript() {return (m_MadMacroScripts.GetCount() > 0);}
 	wxArrayString& GetRecordedScripts() {return m_MadMacroScripts;}
 
-	friend void OnFontChanged( MadEdit *madedit );
-	friend void OnEncodingChanged( MadEdit *madedit );
-    friend void OnSyntaxChanged( MadEdit *madedit );
-    friend void OnLineSpaceChanged( MadEdit *madedit );
-	friend void OnEditSelectionChanged( MadEdit *madedit );
-	friend void OnEditStatusChanged( MadEdit *madedit );
-	friend void OnEditActivate( MadEdit *WXUNUSED(madedit) );
-	friend void OnEditToggleWindow( MadEdit * WXUNUSED(madedit) );
-	friend void OnEditMouseRightUp( MadEdit * madedit );
-	friend void OnVScrollMouseRightUp( MadEdit *madedit );
-	friend void OnHScrollMouseRightUp( MadEdit *madedit );
+	friend void OnFontChanged(MadEdit *madedit);
+	friend void OnEncodingChanged(MadEdit *madedit);
+    friend void OnSyntaxChanged(MadEdit *madedit);
+    friend void OnLineSpaceChanged(MadEdit *madedit);
+	friend void OnEditSelectionChanged(MadEdit *madedit);
+	friend void OnEditStatusChanged(MadEdit *madedit);
+	friend void OnEditActivate(MadEdit *WXUNUSED(madedit));
+	friend void OnEditToggleWindow(MadEdit * WXUNUSED(madedit));
+	friend void OnEditMouseRightUp(MadEdit * madedit);
+	friend void OnVScrollMouseRightUp(MadEdit *madedit);
+	friend void OnHScrollMouseRightUp(MadEdit *madedit);
 };
 
 enum MadPreviewType
@@ -887,7 +887,7 @@ enum MadPreviewType
 	//MAX::menuPreview16
 };
 extern MadEditFrame *g_MainFrame;
-extern void OnReceiveMessage( const wchar_t *msg, size_t WXUNUSED(size), bool activeFile = true );
+extern void OnReceiveMessage(const wchar_t *msg, size_t WXUNUSED(size), bool activeFile = true);
 
 #define USE_GENERIC_TREECTRL 1
 #if USE_GENERIC_TREECTRL
@@ -902,14 +902,14 @@ class MadTreeCtrl : public wxTreeCtrl
 {
 public:
 	MadTreeCtrl() {}
-	MadTreeCtrl( wxWindow *parent, const wxWindowID id,
+	MadTreeCtrl(wxWindow *parent, const wxWindowID id,
 	             const wxPoint& pos, const wxSize& size,
-	             long style );
+	             long style);
 	virtual ~MadTreeCtrl() {};
-	void OnItemMenu( wxTreeEvent& event );
-	void OnMouseWheel( wxMouseEvent &evt );
+	void OnItemMenu(wxTreeEvent& event);
+	void OnMouseWheel(wxMouseEvent &evt);
 protected:
-	void ShowMenu( wxTreeItemId id, const wxPoint& pt );
+	void ShowMenu(wxTreeItemId id, const wxPoint& pt);
 private:
 	// NB: due to an ugly wxMSW hack you _must_ use DECLARE_DYNAMIC_CLASS()
 	//     if you want your overloaded OnCompareItems() to be called.

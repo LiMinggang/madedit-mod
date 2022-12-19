@@ -49,10 +49,10 @@ using std::pair;
 //===========================================================================
 
 // return 0: filename is not found, 1:yes, -1:no
-int MadFileNameIsUTF8( const wxString& filename );
+int MadFileNameIsUTF8(const wxString& filename);
 
 // return 0: name is not a dir or not found, 1:yes(utf8), -1:yes(libc)
-int MadDirExists( const wxString& name );
+int MadDirExists(const wxString& name);
 
 extern bool g_WC2MB_2_utf8;
 extern bool g_MB2WC_is_utf8;
@@ -61,7 +61,7 @@ extern bool g_MB2WC_check_dir_filename;//check dir, filename separately
 class MadConvFileName_WC2MB_UseLibc
 {
 public:
-	explicit MadConvFileName_WC2MB_UseLibc( bool uselibc ) {
+	explicit MadConvFileName_WC2MB_UseLibc(bool uselibc) {
 		g_WC2MB_2_utf8 = !uselibc;
 	}
 	~MadConvFileName_WC2MB_UseLibc() {
@@ -73,8 +73,8 @@ public:
 class MadConvFileName : public wxMBConv
 {
 public:
-	virtual size_t MB2WC( wchar_t *outputBuf, const char *psz, size_t outputSize ) const;
-	virtual size_t WC2MB( char *outputBuf, const wchar_t *psz, size_t outputSize ) const;
+	virtual size_t MB2WC(wchar_t *outputBuf, const char *psz, size_t outputSize) const;
+	virtual size_t WC2MB(char *outputBuf, const wchar_t *psz, size_t outputSize) const;
 	virtual wxMBConv *Clone() const { return new MadConvFileName; }
 };
 #endif
@@ -86,8 +86,8 @@ protected:
 	wxFileOffset m_Size;
 public:
 	virtual ~MadInData() {}
-	virtual wxByte Get( const wxFileOffset &pos ) = 0;
-	virtual void Get( const wxFileOffset &pos, wxByte *buffer, size_t size ) = 0;
+	virtual wxByte Get(const wxFileOffset &pos) = 0;
+	virtual void Get(const wxFileOffset &pos, wxByte *buffer, size_t size) = 0;
 	wxFileOffset GetSize() { return m_Size; }
 };
 
@@ -95,7 +95,7 @@ class MadOutData
 {
 public:
 	virtual ~MadOutData() {}
-	virtual wxFileOffset Put( wxByte *buffer, size_t size ) = 0;
+	virtual wxFileOffset Put(wxByte *buffer, size_t size) = 0;
 };
 
 
@@ -112,9 +112,9 @@ public:
 	MadMemData();
 	virtual ~MadMemData();
 
-	virtual wxByte Get( const wxFileOffset &pos );
-	virtual void Get( const wxFileOffset &pos, wxByte *buffer, size_t size );
-	virtual wxFileOffset Put( wxByte *buffer, size_t size );
+	virtual wxByte Get(const wxFileOffset &pos);
+	virtual void Get(const wxFileOffset &pos, wxByte *buffer, size_t size);
+	virtual wxFileOffset Put(wxByte *buffer, size_t size);
 };
 
 class MadFileData : public MadInData, public MadOutData
@@ -133,18 +133,18 @@ private:
 	wxFileOffset m_SavePos; // for Put()
 
 	bool OpenFile();
-	bool Rename( const wxString &name );
+	bool Rename(const wxString &name);
 
 public:
-	explicit MadFileData( const wxString &name );
+	explicit MadFileData(const wxString &name);
 	virtual ~MadFileData();
-	virtual wxByte Get( const wxFileOffset &pos );
-	virtual void Get( const wxFileOffset &pos, wxByte *buffer, size_t size );
+	virtual wxByte Get(const wxFileOffset &pos);
+	virtual void Get(const wxFileOffset &pos, wxByte *buffer, size_t size);
 
-	virtual wxFileOffset Put( wxByte *buffer, size_t size );
-	void Read( const wxFileOffset &pos, wxByte *buffer, size_t size ) {
-		m_File.Seek( pos );
-		m_File.Read( buffer, size );
+	virtual wxFileOffset Put(wxByte *buffer, size_t size);
+	void Read(const wxFileOffset &pos, wxByte *buffer, size_t size) {
+		m_File.Seek(pos);
+		m_File.Read(buffer, size);
 	}
 
 	bool OpenSuccess() { return m_OpenSuccess; }
@@ -159,23 +159,23 @@ struct MadBlock//:public Loki::SmallObject <>
 	wxFileOffset m_Pos;
 	wxFileOffset m_Size;
 
-	MadBlock(): m_Data( nullptr ), m_Pos( 0 ), m_Size( 0 ) {
+	MadBlock(): m_Data(nullptr), m_Pos(0), m_Size(0) {
 	}
-	MadBlock( MadInData *data, const wxFileOffset &pos, const wxFileOffset &size )
-		: m_Data( data ), m_Pos( pos ), m_Size( size ) {
+	MadBlock(MadInData *data, const wxFileOffset &pos, const wxFileOffset &size)
+		: m_Data(data), m_Pos(pos), m_Size(size) {
 	}
 	void Reset() {
 		m_Data = nullptr;
 		m_Pos = 0;
 		m_Size = 0;
 	}
-	wxByte Get( const wxFileOffset &pos ) {
-		wxASSERT( pos >= 0 && pos < m_Size );
-		return m_Data->Get( m_Pos + pos );
+	wxByte Get(const wxFileOffset &pos) {
+		wxASSERT(pos >= 0 && pos < m_Size);
+		return m_Data->Get(m_Pos + pos);
 	}
-	void Get( const wxFileOffset &pos, wxByte *buffer, size_t size ) {
-		wxASSERT( pos >= 0 && pos < m_Size );
-		m_Data->Get( m_Pos + pos, buffer, size );
+	void Get(const wxFileOffset &pos, wxByte *buffer, size_t size) {
+		wxASSERT(pos >= 0 && pos < m_Size);
+		m_Data->Get(m_Pos + pos, buffer, size);
 	}
 };
 
@@ -184,9 +184,9 @@ struct MadRowIndex    // wrapped-line index
 	wxFileOffset m_Start;                   // start position
 	int m_Width;                            // pixel-width of this row
 
-	MadRowIndex(): m_Start( 0 ), m_Width( 0 ) {
+	MadRowIndex(): m_Start(0), m_Width(0) {
 	}
-	MadRowIndex( const wxFileOffset &start, int width ): m_Start( start ), m_Width( width ) {
+	MadRowIndex(const wxFileOffset &start, int width): m_Start(start), m_Width(width) {
 	}
 	void Reset() {
 		m_Start = 0;
@@ -203,9 +203,9 @@ struct MadLineState
 	wxByte LineComment; // 0: not in linecomment, 1..255: in linecomment
 	wxByte Directive;   // 0: not in directive, 1..255: in directive
 
-	MadLineState(): RangeId( 0 ), CommentId( 0 ), CommentOff( 0 ), StringId( 0 ), LineComment( 0 ), Directive( 0 ) {
+	MadLineState(): RangeId(0), CommentId(0), CommentOff(0), StringId(0), LineComment(0), Directive(0) {
 	}
-	bool operator==( const MadLineState &ls ) const {
+	bool operator==(const MadLineState &ls) const {
 		return RangeId == ls.RangeId && CommentId == ls.CommentId &&
 			   CommentOff == ls.CommentOff && StringId == ls.StringId &&
 			   LineComment == ls.LineComment && Directive == ls.Directive;
@@ -221,11 +221,11 @@ struct BracePairIndex
 	wxByte       LeftPair;   // non-zero: leftpair, zero: rightpair
 	char         BraceIndex; //
 
-	BracePairIndex(): LinePos( 0 ), XPos( 0 ), Width( 0 ), Length( 0 ), LeftPair( 0 ), BraceIndex( 0 )
+	BracePairIndex(): LinePos(0), XPos(0), Width(0), Length(0), LeftPair(0), BraceIndex(0)
 	{}
 
-	BracePairIndex( int xpos, wxUint16 wid, wxFileOffset lpos, wxUint16 len, wxByte lp, char bi )
-		: LinePos( lpos ), XPos( xpos ), Width( wid ), Length( len ), LeftPair( lp ), BraceIndex( bi )
+	BracePairIndex(int xpos, wxUint16 wid, wxFileOffset lpos, wxUint16 len, wxByte lp, char bi)
+		: LinePos(lpos), XPos(xpos), Width(wid), Length(len), LeftPair(lp), BraceIndex(bi)
 	{}
 };
 
@@ -246,55 +246,55 @@ struct MadLine
 	vector <MadRowIndex>    m_RowIndices;
 	vector <BracePairIndex> m_BracePairIndices;
 
-	MadLine(): m_Size( 0 ), m_NewLineSize( 0 ) {
+	MadLine(): m_Size(0), m_NewLineSize(0) {
 	}
 	void Reset();
 	void Empty();
 	bool IsEmpty() { return m_Size == 0; }
 
 	// if false return 0 ; else return 0x0D or 0x0A
-	ucs4_t LastUCharIsNewLine( MadEncoding *encoding );
-	bool FirstUCharIs0x0A( MadEncoding *encoding );
+	ucs4_t LastUCharIsNewLine(MadEncoding *encoding);
+	bool FirstUCharIs0x0A(MadEncoding *encoding);
 
-	wxByte Get( wxFileOffset pos ) {                        // get 1 byte
-		wxASSERT( pos >= 0 && pos < m_Size );
+	wxByte Get(wxFileOffset pos) {                        // get 1 byte
+		wxASSERT(pos >= 0 && pos < m_Size);
 		MadBlockIterator biter = m_Blocks.begin();
 
-		if( pos >= biter->m_Size )
+		if (pos >= biter->m_Size)
 			do {
 				pos -= biter->m_Size;
 				++biter;
 			}
-			while( pos >= biter->m_Size );
+			while (pos >= biter->m_Size);
 
-		return biter->Get( pos );
+		return biter->Get(pos);
 	}
 
-	void Get( wxFileOffset pos, wxByte *buf, size_t size ) { // get n bytes
-		wxASSERT( pos >= 0 && ((wxFileOffset)(pos + size) <= m_Size) );
+	void Get(wxFileOffset pos, wxByte *buf, size_t size) { // get n bytes
+		wxASSERT(pos >= 0 && ((wxFileOffset)(pos + size) <= m_Size));
 
-		if( size == 0 ) { return; }
+		if (size == 0) { return; }
 
 		MadBlockIterator biter = m_Blocks.begin();
 
-		if( pos >= biter->m_Size )
+		if (pos >= biter->m_Size)
 			do {
 				pos -= biter->m_Size;
 			}
-			while( pos >= ( ++biter )->m_Size );
+			while (pos >= (++biter)->m_Size);
 
 		size_t cnt;
 
-		while( true ) {
+		while (true) {
 			cnt = size;
 
 			//wxLogDebug(wxT("Before:m_size[%d], m_data[%p]"), biter->m_Size, biter->m_Data);
-			if( ((wxFileOffset)(pos + cnt)) > biter->m_Size ) { cnt = (size_t)(biter->m_Size - pos); }
+			if (((wxFileOffset)(pos + cnt)) > biter->m_Size) { cnt = (size_t)(biter->m_Size - pos); }
 
-			biter->Get( pos, buf, cnt );
+			biter->Get(pos, buf, cnt);
 
 			//wxLogDebug(wxT("After:m_size[%d], m_data[%p]"), biter->m_Size, biter->m_Data);
-			if( ( size -= cnt ) == 0 ) { break; }
+			if ((size -= cnt) == 0) { break; }
 
 			pos = 0;
 			buf += cnt;
@@ -327,22 +327,22 @@ class MadLineList : public list <MadLine>
 public:
 	MadLineList();
 
-	void SetBookmark( MadLineIterator position, bool toggle = true );     // toggle or remove bookmark from given position
-	void RemoveBookmark( MadLineIterator position );     // remove bookmark from given position
-	int  GetNextBookmark( MadLineIterator position ); // return line number, or -1 if no bookmars
-	int  GetPreviousBookmark( MadLineIterator position ); // return line number from the end to the beginning, or -1
-	bool IsBookmarked( MadLineIterator position );
+	void SetBookmark(MadLineIterator position, bool toggle = true);     // toggle or remove bookmark from given position
+	void RemoveBookmark(MadLineIterator position);     // remove bookmark from given position
+	int  GetNextBookmark(MadLineIterator position); // return line number, or -1 if no bookmars
+	int  GetPreviousBookmark(MadLineIterator position); // return line number from the end to the beginning, or -1
+	bool IsBookmarked(MadLineIterator position);
 	void ClearAllBookmarks();
-	bool HasBookMark() {return !( m_BookmarkList.empty() );}
+	bool HasBookMark() {return !(m_BookmarkList.empty());}
 	list<MadLineIterator> & GetBookmarkedLines() {return m_BookmarkList;}
 
-	MadLineIterator erase( MadLineIterator position );
+	MadLineIterator erase(MadLineIterator position);
 
 private:
 	// it is private because bookmarks removal is not implemented yet for it
 	// in this way if someone try to use it, he will get compiler error
-	MadLineIterator erase( MadLineIterator first, MadLineIterator last )
-	{ return list<MadLine>::erase( first, last ); }
+	MadLineIterator erase(MadLineIterator first, MadLineIterator last)
+	{ return list<MadLine>::erase(first, last); }
 };
 typedef list<MadLineIterator>::iterator  MadBookmarkIterator;
 
@@ -353,8 +353,8 @@ class MadSyntax;
 class MadLines
 {
 private:
-	typedef int ( MadLines::*FindStringPtr )( MadUCQueue &ucqueue,
-			MadStringIterator begin, const MadStringIterator &end, size_t &len );
+	typedef int (MadLines::*FindStringPtr)(MadUCQueue &ucqueue,
+			MadStringIterator begin, const MadStringIterator &end, size_t &len);
 	friend class MadEdit;
 	friend class MadSyntax;
 
@@ -394,70 +394,70 @@ private:
 
 private:
 
-	void Empty( bool freeAll );
-	void Clear( bool freeAll );
+	void Empty(bool freeAll);
+	void Clear(bool freeAll);
 
 	size_t ReformatCount;
 	// reformat single line, return the state of line-end
-	void Reformat( /*IN*/MadLineIterator &iter,/*IN*/int maxwrapwidth, /*IN*/long orgtabwidth, /*OUT*/MadLineState &state );
+	void Reformat(/*IN*/MadLineIterator &iter,/*IN*/int maxwrapwidth, /*IN*/long orgtabwidth, /*OUT*/MadLineState &state);
 	// reformat lines in [first,last]
-	size_t Reformat( MadLineIterator first, MadLineIterator last );
+	size_t Reformat(MadLineIterator first, MadLineIterator last);
 	// Recount all lines' width
-	void RecountLineWidth( void );
+	void RecountLineWidth(void);
 
 	// append lit2 after lit1
-	void Append( const MadLineIterator &lit1, const MadLineIterator &lit2 );
+	void Append(const MadLineIterator &lit1, const MadLineIterator &lit2);
 
 	// write to fd or file if which one isn't nullptr
-	void WriteBlockToData( MadOutData *fd, const MadBlockIterator &bit );
-	void WriteToFile( wxFile &file, MadFileData *oldfd, MadFileData *newfd );
+	void WriteBlockToData(MadOutData *fd, const MadBlockIterator &bit);
+	void WriteToFile(wxFile &file, MadFileData *oldfd, MadFileData *newfd);
 
-	wxFileOffset GetMaxTempSize( const wxString &filename );
+	wxFileOffset GetMaxTempSize(const wxString &filename);
 
 public:
-	explicit MadLines( MadEdit *madedit );
+	explicit MadLines(MadEdit *madedit);
 	~MadLines();
 
-	bool LoadFromFile( const wxString &filename, const wxString &encoding = wxEmptyString );
-	bool SaveToFile( const wxString &filename, const wxString &tempdir );
+	bool LoadFromFile(const wxString &filename, const wxString &encoding = wxEmptyString);
+	bool SaveToFile(const wxString &filename, const wxString &tempdir);
 	wxFileOffset GetSize() { return m_Size; }
 
 private:  // NextUChar()
 	void LoadNewBuffer();
 
-	bool NextUChar_SBCS( MadUCQueue &ucqueue );
-	bool NextUChar_DBCS( MadUCQueue &ucqueue );
-	bool NextUChar_UTF8( MadUCQueue &ucqueue );
-	bool NextUChar_UTF16LE( MadUCQueue &ucqueue );
-	bool NextUChar_UTF16BE( MadUCQueue &ucqueue );
-	bool NextUChar_UTF32LE( MadUCQueue &ucqueue );
-	bool NextUChar_UTF32BE( MadUCQueue &ucqueue );
-    bool NextUChar_GB18030( MadUCQueue &ucqueue );
+	bool NextUChar_SBCS(MadUCQueue &ucqueue);
+	bool NextUChar_DBCS(MadUCQueue &ucqueue);
+	bool NextUChar_UTF8(MadUCQueue &ucqueue);
+	bool NextUChar_UTF16LE(MadUCQueue &ucqueue);
+	bool NextUChar_UTF16BE(MadUCQueue &ucqueue);
+	bool NextUChar_UTF32LE(MadUCQueue &ucqueue);
+	bool NextUChar_UTF32BE(MadUCQueue &ucqueue);
+    bool NextUChar_GB18030(MadUCQueue &ucqueue);
 
-	bool NextUCharIs0x0A( void );
+	bool NextUCharIs0x0A(void);
 
-	int FindStringCase( MadUCQueue &ucqueue, MadStringIterator begin,
-						const MadStringIterator &end, size_t &len );
+	int FindStringCase(MadUCQueue &ucqueue, MadStringIterator begin,
+						const MadStringIterator &end, size_t &len);
 
 	// the [begin,end) iter must be lower case
-	int FindStringNoCase( MadUCQueue &ucqueue, MadStringIterator begin,
-						  const MadStringIterator &end, size_t &len );
+	int FindStringNoCase(MadUCQueue &ucqueue, MadStringIterator begin,
+						  const MadStringIterator &end, size_t &len);
 
 
 public:
-	void SetEncoding( MadEncoding *encoding );
+	void SetEncoding(MadEncoding *encoding);
 
 	// if no newline return 0 ; else return 0x0D or 0x0A or 0x0D+0x0A (=0x17)
-	ucs4_t GetNewLine( const MadLineIterator &iter );
+	ucs4_t GetNewLine(const MadLineIterator &iter);
 
-	void InitNextUChar( const MadLineIterator &iter, const wxFileOffset pos );
+	void InitNextUChar(const MadLineIterator &iter, const wxFileOffset pos);
 
-	typedef bool ( MadLines::*NextUCharFuncPtr )( MadUCQueue & ucqueue );
+	typedef bool (MadLines::*NextUCharFuncPtr)(MadUCQueue & ucqueue);
 	NextUCharFuncPtr NextUChar;
 
 	// should not frequently use this, it's slowly
 	// if no, return MadUCPair(0, 0)
-	MadUCPair PreviousUChar( /*IN_OUT*/MadLineIterator &lit, /*IN_OUT*/wxFileOffset &linepos );
+	MadUCPair PreviousUChar(/*IN_OUT*/MadLineIterator &lit, /*IN_OUT*/wxFileOffset &linepos);
 	static const MadLine madNewEmptyLine;
 	static const MadRowIndex madNewRowIdx;
 };

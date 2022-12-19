@@ -25,16 +25,16 @@ MadNumberDlg::MadNumberDlg(wxWindow *parent, wxWindowID id, const wxString &titl
 	WxStaticTextPreview = 0;
 	CreateGUIControls();
 
-	Bind( wxEVT_CLOSE_WINDOW, &MadNumberDlg::OnClose, this );
-	Bind( wxEVT_BUTTON, &MadNumberDlg::WxOKButtonClick, this, wxID_OK );
+	Bind(wxEVT_CLOSE_WINDOW, &MadNumberDlg::OnClose, this);
+	Bind(wxEVT_BUTTON, &MadNumberDlg::WxOKButtonClick, this, wxID_OK);
 
-	Bind( wxEVT_TEXT,&MadNumberDlg::WxEditItialnumberUpdated, this, WxEditInitialNumber->GetId() );
+	Bind(wxEVT_TEXT,&MadNumberDlg::WxEditItialnumberUpdated, this, WxEditInitialNumber->GetId());
 	
-	Bind( wxEVT_TEXT, &MadNumberDlg::WxEditPostfixUpdated, this, WxEditPostfix->GetId() );
-	Bind( wxEVT_CHECKBOX, &MadNumberDlg::WxCheckPostfixClick, this, WxCheckPostfix->GetId() );
+	Bind(wxEVT_TEXT, &MadNumberDlg::WxEditPostfixUpdated, this, WxEditPostfix->GetId());
+	Bind(wxEVT_CHECKBOX, &MadNumberDlg::WxCheckPostfixClick, this, WxCheckPostfix->GetId());
 
-	Bind( wxEVT_TEXT, &MadNumberDlg::WxEditPrefixUpdated, this, WxEditPrefix->GetId() );
-	Bind( wxEVT_CHECKBOX, &MadNumberDlg::WxCheckPrefixClick, this, WxCheckPrefix->GetId() );
+	Bind(wxEVT_TEXT, &MadNumberDlg::WxEditPrefixUpdated, this, WxEditPrefix->GetId());
+	Bind(wxEVT_CHECKBOX, &MadNumberDlg::WxCheckPrefixClick, this, WxCheckPrefix->GetId());
 }
 
 MadNumberDlg::~MadNumberDlg()
@@ -184,32 +184,32 @@ void MadNumberDlg::WxOKButtonClick(wxCommandEvent& WXUNUSED(event))
 	long lo;
 	bool error=false;
 	wxString errtext(_("Invalid value of \"%s:%s\""));
-	if(!WxEditNumberOfChars->GetValue().ToLong(&lo) || lo<0 || lo>NUMBERING_MAX_CHARS) //HardCode
+	if (!WxEditNumberOfChars->GetValue().ToLong(&lo) || lo<0 || lo>NUMBERING_MAX_CHARS) //HardCode
 	{
 		wxString Err = WxEditNumberOfChars->GetValue() + _(": Valid range is 0~512, 0 means NO PADDING");
 		wxLogError(errtext, WxStaticText5->GetLabel().c_str(), Err.c_str());
 		error=true;
 	}
 
-	if(!WxEditInitialNumber->GetValue().ToLong(&lo))
+	if (!WxEditInitialNumber->GetValue().ToLong(&lo))
 	{
 		wxLogError(errtext, WxStaticText1->GetLabel().c_str(), WxEditNumberOfChars->GetValue().c_str());
 		error=true;
 	}
 
-	if(!WxEditNumberingStep->GetValue().ToLong(&lo))
+	if (!WxEditNumberingStep->GetValue().ToLong(&lo))
 	{
 		wxLogError(errtext, WxStaticText8->GetLabel().c_str(), WxEditNumberingStep->GetValue().c_str());
 		error=true;
 	}
 	
-	if(!WxEditNumberOfChars->GetValue().ToLong(&lo))
+	if (!WxEditNumberOfChars->GetValue().ToLong(&lo))
 	{
 		wxLogError(errtext, WxStaticText5->GetLabel().c_str(), WxEditNumberOfChars->GetValue().c_str());
 		error=true;
 	}
 
-	if(!error) EndModal(wxID_OK);
+	if (!error) EndModal(wxID_OK);
 }
 
 
@@ -219,10 +219,10 @@ void MadNumberDlg::WxOKButtonClick(wxCommandEvent& WXUNUSED(event))
 void MadNumberDlg::WxEditPrefixUpdated(wxCommandEvent& WXUNUSED(event))
 {
 	// insert your code	here
-	if(WxStaticTextPreview)
+	if (WxStaticTextPreview)
 	{	
 		wxString preview((WxCheckPrefix->GetValue()?WxEditPrefix->GetValue():wxT(""))+WxEditInitialNumber->GetValue());
-		if(WxCheckPostfix->GetValue())
+		if (WxCheckPostfix->GetValue())
 			preview += WxEditPostfix->GetValue();
 		WxStaticTextPreview->SetLabel(preview);
 	}
@@ -231,12 +231,12 @@ void MadNumberDlg::WxEditPrefixUpdated(wxCommandEvent& WXUNUSED(event))
 void MadNumberDlg::WxEditItialnumberUpdated(wxCommandEvent&	WXUNUSED(event))
 {
 	// insert your code	here
-	if(WxStaticTextPreview)
+	if (WxStaticTextPreview)
 	{
 		wxString preview;
-		if(WxCheckPrefix->GetValue())
+		if (WxCheckPrefix->GetValue())
 		{
-			if(WxCheckPrefix->GetValue())
+			if (WxCheckPrefix->GetValue())
 				preview += WxEditPrefix->GetValue();
 			
 			preview += WxEditInitialNumber->GetValue();
@@ -245,7 +245,7 @@ void MadNumberDlg::WxEditItialnumberUpdated(wxCommandEvent&	WXUNUSED(event))
 		{
 			preview = WxEditInitialNumber->GetValue();
 		}
-		if(WxCheckPostfix->GetValue())
+		if (WxCheckPostfix->GetValue())
 			preview += WxEditPostfix->GetValue();
 		WxStaticTextPreview->SetLabel(preview);
 	}
@@ -257,14 +257,14 @@ void MadNumberDlg::WxEditItialnumberUpdated(wxCommandEvent&	WXUNUSED(event))
 void MadNumberDlg::WxEditPostfixUpdated(wxCommandEvent&	WXUNUSED(event))
 {
 	// insert your code	here
-	if(WxStaticTextPreview)
+	if (WxStaticTextPreview)
 	{	
 		wxString preview;
-		if(WxCheckPrefix->GetValue())
+		if (WxCheckPrefix->GetValue())
 			preview += WxEditPrefix->GetValue();
 		
 		preview += WxEditInitialNumber->GetValue();
-		if(WxCheckPostfix->GetValue())
+		if (WxCheckPostfix->GetValue())
 			preview += WxEditPostfix->GetValue();
 		WxStaticTextPreview->SetLabel(preview);
 	}
@@ -277,18 +277,18 @@ void MadNumberDlg::WxCheckPrefixClick(wxCommandEvent& WXUNUSED(event))
 {
 	// insert your code	here
 	wxString preview;
-	if(WxCheckPrefix->GetValue())
+	if (WxCheckPrefix->GetValue())
 	{
 		WxEditPrefix->Enable(true);
 		preview += WxEditPrefix->GetValue()+WxEditInitialNumber->GetValue();
-		if(WxCheckPostfix->GetValue())
+		if (WxCheckPostfix->GetValue())
 			preview += WxEditPostfix->GetValue();
 	}
 	else
 	{
 		WxEditPrefix->Enable(false);
 		preview += WxEditInitialNumber->GetValue();
-		if(WxCheckPostfix->GetValue())
+		if (WxCheckPostfix->GetValue())
 			preview += WxEditPostfix->GetValue();
 	}
 	WxStaticTextPreview->SetLabel(preview);
@@ -301,10 +301,10 @@ void MadNumberDlg::WxCheckPostfixClick(wxCommandEvent& WXUNUSED(event))
 {
 	// insert your code	here
 	wxString preview;
-	if(WxCheckPostfix->GetValue())
+	if (WxCheckPostfix->GetValue())
 	{
 		WxEditPostfix->Enable(true);
-		if(WxCheckPrefix->GetValue())
+		if (WxCheckPrefix->GetValue())
 			preview += WxEditPrefix->GetValue();
 		
 		preview += WxEditInitialNumber->GetValue() + WxEditPostfix->GetValue();
@@ -312,7 +312,7 @@ void MadNumberDlg::WxCheckPostfixClick(wxCommandEvent& WXUNUSED(event))
 	else
 	{
 		WxEditPostfix->Enable(false);
-		if(WxCheckPrefix->GetValue())
+		if (WxCheckPrefix->GetValue())
 			preview += WxEditPrefix->GetValue();
 		
 		preview += WxEditInitialNumber->GetValue();

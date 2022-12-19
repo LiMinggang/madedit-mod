@@ -33,8 +33,8 @@
 using namespace std;
 using namespace boost::xpressive;
 extern wxStatusBar *g_StatusBar;
-ucs4string ConvertEscape( const ucs4string &str );
-extern wxString *ConvertTextToNewString( const wxString& text, MadConvertChineseFlag flag );
+ucs4string ConvertEscape(const ucs4string &str);
+extern wxString *ConvertTextToNewString(const wxString& text, MadConvertChineseFlag flag);
 
 #ifdef _DEBUG
 	#include <crtdbg.h>
@@ -42,41 +42,41 @@ extern wxString *ConvertTextToNewString( const wxString& text, MadConvertChinese
 #endif
 
 template<typename char_type>
-inline char_type xtolower( char_type ch )
+inline char_type xtolower(char_type ch)
 {
-	if( ch < 0 || ch > 0xFFFF ) { return ch; }
+	if (ch < 0 || ch > 0xFFFF) { return ch; }
 
 #if defined(__WXMSW__)
 	LPWSTR tch = (LPWSTR)ch;
-	return ( char_type )CharLowerW( tch );
+	return (char_type)CharLowerW(tch);
 #else
-	return std::towlower( wchar_t( ch ) );
+	return std::towlower(wchar_t(ch));
 #endif
 }
 
 template<>
-inline wchar_t xtolower( wchar_t ch )
+inline wchar_t xtolower(wchar_t ch)
 {
 #if defined(__WXMSW__)
 	LPWSTR tch = (LPWSTR)ch;
-	return ( wchar_t )CharLowerW( tch );
+	return (wchar_t)CharLowerW(tch);
 #else
-	return std::towlower( wchar_t( ch ) );
+	return std::towlower(wchar_t(ch));
 #endif
 }
 
 template<>
-inline wxByte xtolower( wxByte ch )
+inline wxByte xtolower(wxByte ch)
 {
 	return ch;
 }
 
 template <typename char_type>
-bool IsTheSame( const char_type *s1, const char_type *s2, int len )
+bool IsTheSame(const char_type *s1, const char_type *s2, int len)
 {
-	while( --len >= 0 )
+	while (--len >= 0)
 	{
-		if( *s1++ != *s2++ ) { return false; }
+		if (*s1++ != *s2++) { return false; }
 	}
 
 	return true;
@@ -89,21 +89,21 @@ private:
 	std::basic_string<wxByte> m_Pattern;
 public:
 	JumpTable_Hex() {}
-	void Build( const wxByte* pat, size_t len ) {
-		if( m_Pattern.length() == len && IsTheSame( m_Pattern.c_str(), pat, ( int )len ) ) { return; }
+	void Build(const wxByte* pat, size_t len) {
+		if (m_Pattern.length() == len && IsTheSame(m_Pattern.c_str(), pat, (int)len)) { return; }
 
-		m_Pattern.assign( pat, len );
+		m_Pattern.assign(pat, len);
 
-		for( size_t i = 0; i < 256; ++i ) { m_Table[i] = ( int )len + 1; }
+		for (size_t i = 0; i < 256; ++i) { m_Table[i] = (int)len + 1; }
 
-		for( size_t i = 0; i < len; ++i ) { m_Table[pat[i]] = ( int )( len - i ); }
+		for (size_t i = 0; i < len; ++i) { m_Table[pat[i]] = (int)(len - i); }
 	}
-	int GetValue( const wxByte ch ) const {
+	int GetValue(const wxByte ch) const {
 		return m_Table[ch];
 	}
 };
 
-WX_DECLARE_HASH_MAP( unsigned int, int, wxIntegerHash, wxIntegerEqual, UCS4_Map );
+WX_DECLARE_HASH_MAP(unsigned int, int, wxIntegerHash, wxIntegerEqual, UCS4_Map);
 class JumpTable_UCS4
 {
 private:
@@ -112,69 +112,69 @@ private:
 	ucs4string m_Pattern;
 	int m_Len_1;
 public:
-	void Build( const ucs4_t* pat, size_t len ) {
-		if( m_Pattern.length() == len && IsTheSame( m_Pattern.c_str(), pat, ( int )len ) ) { return; }
+	void Build(const ucs4_t* pat, size_t len) {
+		if (m_Pattern.length() == len && IsTheSame(m_Pattern.c_str(), pat, (int)len)) { return; }
 
-		m_Pattern.assign( pat, len );
-		const int len1 = m_Len_1 = ( int )len + 1;
+		m_Pattern.assign(pat, len);
+		const int len1 = m_Len_1 = (int)len + 1;
 		int *ptab = m_UCS2_Table;
 
-		for( size_t i = 0; i < 65536; ++i, ++ptab ) { *ptab = len1; }
+		for (size_t i = 0; i < 65536; ++i, ++ptab) { *ptab = len1; }
 
 		m_Table.clear();
 		const ucs4_t* p = pat;
 
-		for( size_t i = 0; i < len; ++i, ++p ) {
-			const unsigned int idx = ( unsigned int )( *p );
+		for (size_t i = 0; i < len; ++i, ++p) {
+			const unsigned int idx = (unsigned int)(*p);
 
-			if( idx <= 0xFFFF ) {
-				m_UCS2_Table[idx] = ( int )( len - i );
+			if (idx <= 0xFFFF) {
+				m_UCS2_Table[idx] = (int)(len - i);
 			}
 			else {
-				m_Table[idx] = ( int )( len - i );
+				m_Table[idx] = (int)(len - i);
 			}
 		}
 	}
-	int GetValue( const ucs4_t ch ) const {
-		if( ch <= 0xFFFF && ch >= 0 ) {
-			return m_UCS2_Table[( unsigned int )ch];
+	int GetValue(const ucs4_t ch) const {
+		if (ch <= 0xFFFF && ch >= 0) {
+			return m_UCS2_Table[(unsigned int)ch];
 		}
 
-		UCS4_Map::const_iterator it = m_Table.find( ( unsigned int )ch );
+		UCS4_Map::const_iterator it = m_Table.find((unsigned int)ch);
 
-		if( it == m_Table.end() ) { return m_Len_1; }
+		if (it == m_Table.end()) { return m_Len_1; }
 
 		return it->second;
 	}
 };
 
 template <typename char_type, typename CharIter, typename JumpTable>
-bool Search( CharIter &begin, CharIter &end,
+bool Search(CharIter &begin, CharIter &end,
 			 const char_type *pattern, size_t pat_len,
-			 const JumpTable &jump_table, bool bCaseSensitive )
-// if(bCaseSensitive==false) the content of 'pattern' must be lower case!!!
+			 const JumpTable &jump_table, bool bCaseSensitive)
+// if (bCaseSensitive==false) the content of 'pattern' must be lower case!!!
 {
-	wxASSERT( pat_len != 0 );
+	wxASSERT(pat_len != 0);
 
-	if( begin == end ) { return false; }
+	if (begin == end) { return false; }
 
 	__REGISTER size_t idx = 0;
 	__REGISTER const char_type *p = pattern;
 	CharIter beginpos;
 	__REGISTER char_type c1;
 
-	for( ;; )
+	for (;;)
 	{
 		c1 = *begin;
 
-		if( bCaseSensitive == false )
+		if (bCaseSensitive == false)
 		{
-			c1 = xtolower( c1 );
+			c1 = xtolower(c1);
 		}
 
-		if( c1 == *p )
+		if (c1 == *p)
 		{
-			if( idx == 0 )
+			if (idx == 0)
 			{
 				beginpos = begin;
 			}
@@ -182,7 +182,7 @@ bool Search( CharIter &begin, CharIter &end,
 			++idx;
 			++p;
 
-			if( idx == pat_len ) // found
+			if (idx == pat_len) // found
 			{
 				end = begin;
 				++end;
@@ -191,54 +191,54 @@ bool Search( CharIter &begin, CharIter &end,
 			}
 
 			// compare next char
-			if( ++begin == end )
+			if (++begin == end)
 			{ return false; }
 		}
 		else // c1 != *p
 		{
 			// jump by the jump_table
 			CharIter it = begin;
-			int i = ( int )( pat_len - idx );
+			int i = (int)(pat_len - idx);
 
 			do
 			{
-				if( ++it == end )
+				if (++it == end)
 				{ return false; }
 			}
-			while( --i > 0 );
+			while (--i > 0);
 
 			c1 = *it;
 
-			if( bCaseSensitive == false )
+			if (bCaseSensitive == false)
 			{
-				c1 = xtolower( c1 );
+				c1 = xtolower(c1);
 			}
 
-			__REGISTER int jv = jump_table.GetValue( c1 );
+			__REGISTER int jv = jump_table.GetValue(c1);
 
-			if( jv >= ( int )pat_len )
+			if (jv >= (int)pat_len)
 			{
 				begin = it;
-				jv -= ( int )pat_len;
+				jv -= (int)pat_len;
 				idx = 0;
 				p = pattern;
 			}
 			else
-				if( idx != 0 )
+				if (idx != 0)
 				{
 					begin = beginpos;
 					idx = 0;
 					p = pattern;
 				}
 
-			if( jv > 0 )
+			if (jv > 0)
 			{
 				do
 				{
-					if( ++begin == end )
+					if (++begin == end)
 					{ return false; }
 				}
-				while( --jv > 0 );
+				while (--jv > 0);
 			}
 		}
 	}
@@ -266,7 +266,7 @@ namespace boost {
 			template<char Ch, wchar_t Wch>
 			struct char_literal<ucs4_t, Ch, Wch>
 			{
-				BOOST_STATIC_CONSTANT( ucs4_t, value = Wch );
+				BOOST_STATIC_CONSTANT(ucs4_t, value = Wch);
 			};
 
 #ifndef BOOST_NO_INCLASS_MEMBER_INITIALIZATION
@@ -281,18 +281,18 @@ namespace boost {
 			{
 				static ucs4string inter_str;
 
-				static ucs4_t const *pick( char const *, wchar_t const *cstr ) {
+				static ucs4_t const *pick(char const *, wchar_t const *cstr) {
 					inter_str.clear();
 
-					while( *cstr != 0 ) {
-						inter_str.push_back( ucs4_t( *cstr ) );
+					while (*cstr != 0) {
+						inter_str.push_back(ucs4_t(*cstr));
 						++cstr;
 					}
 
 					return inter_str.c_str();
 				}
 
-				static ucs4_t pick( char, wchar_t ch ) {
+				static ucs4_t pick(char, wchar_t ch) {
 					return ch;
 				}
 			};
@@ -312,93 +312,93 @@ struct ucs4_regex_traits: public null_regex_traits<ucs4_t>
 	typedef std::locale locale_type;
 
 	template<typename char_type2>
-	static char_type2 tolower( char_type2 ch ) {
-		if( ch < 0 || ch > 0xFFFF ) { return ch; }
+	static char_type2 tolower(char_type2 ch) {
+		if (ch < 0 || ch > 0xFFFF) { return ch; }
 
 #if defined(__WXMSW__)
 		LPWSTR tch = (LPWSTR)ch;
-		return ( char_type2 )CharLowerW( tch );
+		return (char_type2)CharLowerW(tch);
 #else
-		return std::towlower( wchar_t( ch ) );
+		return std::towlower(wchar_t(ch));
 #endif
 	}
-	static wchar_t tolower( wchar_t ch ) {
+	static wchar_t tolower(wchar_t ch) {
 #if defined(__WXMSW__)
 		LPWSTR tch = (LPWSTR)ch;
-		return ( wchar_t )CharLowerW( tch );
+		return (wchar_t)CharLowerW(tch);
 #else
-		return std::towlower( ch );
+		return std::towlower(ch);
 #endif
 	}
 
 	template<typename char_type2>
-	static char_type2 toupper( char_type2 ch ) {
-		if( ch < 0 || ch > 0xFFFF ) { return ch; }
+	static char_type2 toupper(char_type2 ch) {
+		if (ch < 0 || ch > 0xFFFF) { return ch; }
 
 #if defined(__WXMSW__)
 		LPWSTR tch = (LPWSTR)ch;
-		return ( char_type2 )CharUpperW( tch );
+		return (char_type2)CharUpperW(tch);
 #else
-		return std::towupper( wchar_t( ch ) );
+		return std::towupper(wchar_t(ch));
 #endif
 	}
-	static wchar_t toupper( wchar_t ch ) {
+	static wchar_t toupper(wchar_t ch) {
 #if defined(__WXMSW__)
 		LPWSTR tch = (LPWSTR)ch;
-		return ( wchar_t )CharUpperW( tch );
+		return (wchar_t)CharUpperW(tch);
 #else
-		return std::towupper( wchar_t( ch ) );
+		return std::towupper(wchar_t(ch));
 #endif
 	}
 
-	static char_type widen( char ch ) {
-		return char_type( ch );
+	static char_type widen(char ch) {
+		return char_type(ch);
 	}
 
-	char_type translate_nocase( char_type ch ) const {
-		return this->tolower( ch );
+	char_type translate_nocase(char_type ch) const {
+		return this->tolower(ch);
 	}
 
-	bool in_range_nocase( char_type first, char_type last, char_type ch ) const {
-		return this->in_range( first, last, ch )
-			   || this->in_range( first, last, this->toupper( ch ) )
-			   || this->in_range( first, last, this->tolower( ch ) );
+	bool in_range_nocase(char_type first, char_type last, char_type ch) const {
+		return this->in_range(first, last, ch)
+			   || this->in_range(first, last, this->toupper(ch))
+			   || this->in_range(first, last, this->tolower(ch));
 	}
 
 	template<typename FwdIter>
-	static char_class_type lookup_classname( FwdIter begin, FwdIter end, bool icase ) {
+	static char_class_type lookup_classname(FwdIter begin, FwdIter end, bool icase) {
 		cpp_regex_traits<char> cpptraits;
-		char_class_type c = cpptraits.lookup_classname( begin, end, icase );
+		char_class_type c = cpptraits.lookup_classname(begin, end, icase);
 		return c;
 	}
 
-	static bool isctype( char_type ch, char_class_type mask ) {
+	static bool isctype(char_type ch, char_class_type mask) {
 		cpp_regex_traits<char> cpptraits;
 		int i = ch;
 
-		if( i < 0 || i > 0xFF ) { ch = 0x0; } //?
+		if (i < 0 || i > 0xFF) { ch = 0x0; } //?
 
-		return cpptraits.isctype( char( ch ), mask );
+		return cpptraits.isctype(char(ch), mask);
 	}
 
-	static int value( char_type ch, int radix ) {
-		switch( radix ) {
+	static int value(char_type ch, int radix) {
+		switch (radix) {
 		case 8:
-			if( ch >= '0' && ch <= '7' ) { return ch - '0'; }
+			if (ch >= '0' && ch <= '7') { return ch - '0'; }
 
 			break;
 
 		case 10:
-			if( ch >= '0' && ch <= '9' ) { return ch - '0'; }
+			if (ch >= '0' && ch <= '9') { return ch - '0'; }
 
 			break;
 
 		case 16:
-			if( ch >= '0' && ch <= '9' ) { return ch - '0'; }
+			if (ch >= '0' && ch <= '9') { return ch - '0'; }
 
-			if( ch >= 'A' && ch <= 'F' ) { return ch - 'A' + 10; }
+			if (ch >= 'A' && ch <= 'F') { return ch - 'A' + 10; }
 
-			if( ch >= 'a' && ch <= 'f' ) { return ch - 'a' + 10; }
+			if (ch >= 'a' && ch <= 'f') { return ch - 'a' + 10; }
 
 			break;
 		}
@@ -433,8 +433,8 @@ struct UCIterator   // ucs4_t widechar iterator
 	static wxFileOffset     s_endpos;
 	static list<UCQueueSet> s_ucqueues;
 
-	static void Init( MadLines *lines, const wxFileOffset &endpos ) {
-		wxASSERT( endpos >= 0 && endpos <= lines->GetSize() );
+	static void Init(MadLines *lines, const wxFileOffset &endpos) {
+		wxASSERT(endpos >= 0 && endpos <= lines->GetSize());
 		s_lines = lines;
 		s_NextUChar = lines->NextUChar;
 		s_endpos = endpos;
@@ -451,50 +451,50 @@ struct UCIterator   // ucs4_t widechar iterator
 	UCQIterator     ucqit;
 	int             ucqidx;
 
-	UCIterator(): ucqidx( -1 ) {}
+	UCIterator(): ucqidx(-1) {}
 
 	~UCIterator() {
-		if( ucqidx >= 0 && --ucqit->lock == 0 ) {
-			s_ucqueues.erase( ucqit );
+		if (ucqidx >= 0 && --ucqit->lock == 0) {
+			s_ucqueues.erase(ucqit);
 		}
 	}
 
 	//UCIterator(wxFileOffset pos0):ucqidx(-1), pos(pos0) {}
 
-	UCIterator( const UCIterator &ucit ): ucqidx( -1 ) {
-		this->operator =( ucit );
+	UCIterator(const UCIterator &ucit): ucqidx(-1) {
+		this->operator =(ucit);
 	}
 
-	UCIterator( wxFileOffset pos0, const MadLineIterator &lit0, wxFileOffset linepos0 )
-		: pos( pos0 ), lit( lit0 ), linepos( linepos0 ) {
-		if( linepos == lit->m_Size && pos < s_lines->GetSize() ) {
+	UCIterator(wxFileOffset pos0, const MadLineIterator &lit0, wxFileOffset linepos0)
+		: pos(pos0), lit(lit0), linepos(linepos0) {
+		if (linepos == lit->m_Size && pos < s_lines->GetSize()) {
 			++lit;
 			linepos = 0;
 		}
 
-		s_ucqueues.push_back( UCQueueSet() );
+		s_ucqueues.push_back(UCQueueSet());
 		ucqit = s_ucqueues.end();
 		--ucqit;
 		ucqit->lock = 1;          // lock this ucqueue
 		ucqidx = 0;
 
-		if( pos < s_lines->GetSize() ) {
+		if (pos < s_lines->GetSize()) {
 			MadUCQueue &ucqueue = ucqit->ucq;
-			s_lines->InitNextUChar( lit, linepos );
+			s_lines->InitNextUChar(lit, linepos);
 			int i = BUF_MAXSIZE;
 
-			if( pos >= s_endpos ) { i = 10; }
+			if (pos >= s_endpos) { i = 10; }
 
-			while( --i > 0 && ( s_lines->*s_NextUChar )( ucqueue ) ) {
+			while (--i > 0 && (s_lines->*s_NextUChar)(ucqueue)) {
 				//ucqit->size += ucqueue.back().second;
 			}
 		}
 	}
 
-	UCIterator & operator=( const UCIterator & it ) {
-		if( ucqidx >= 0 && --ucqit->lock == 0 ) {
-			wxASSERT( ucqit != it.ucqit );
-			s_ucqueues.erase( ucqit );
+	UCIterator & operator=(const UCIterator & it) {
+		if (ucqidx >= 0 && --ucqit->lock == 0) {
+			wxASSERT(ucqit != it.ucqit);
+			s_ucqueues.erase(ucqit);
 		}
 
 		pos = it.pos;
@@ -503,13 +503,13 @@ struct UCIterator   // ucs4_t widechar iterator
 		ucqit = it.ucqit;
 		ucqidx = it.ucqidx;
 
-		if( ucqidx >= 0 ) { ++ucqit->lock; }
+		if (ucqidx >= 0) { ++ucqit->lock; }
 
 		return *this;
 	}
 
 	const value_type operator*() const {
-		wxASSERT( ucqidx >= 0 && ucqidx < int( ucqit->ucq.size() ) );
+		wxASSERT(ucqidx >= 0 && ucqidx < int(ucqit->ucq.size()));
 		return ucqit->ucq[ucqidx].first;
 	}
 
@@ -522,14 +522,14 @@ struct UCIterator   // ucs4_t widechar iterator
 
 	// pre-increment operator
 	UCIterator & operator++() {
-		wxASSERT( ucqidx >= 0 && ucqidx < int( ucqit->ucq.size() ) );
-		MadUCQueue *ucqueue = &( ucqit->ucq );
-		int len = ( *ucqueue )[ucqidx].second;
+		wxASSERT(ucqidx >= 0 && ucqidx < int(ucqit->ucq.size()));
+		MadUCQueue *ucqueue = &(ucqit->ucq);
+		int len = (*ucqueue)[ucqidx].second;
 		pos += len;
 		linepos += len;
 
-		if( linepos == lit->m_Size ) {
-			if( pos == s_endpos ) { return *this; } // end
+		if (linepos == lit->m_Size) {
+			if (pos == s_endpos) { return *this; } // end
 
 			++lit;
 			linepos = 0;
@@ -537,26 +537,26 @@ struct UCIterator   // ucs4_t widechar iterator
 
 		++ucqidx;
 
-		if( ucqidx == ( int )( *ucqueue ).size() ) {
-			wxASSERT( pos <= s_endpos );
+		if (ucqidx == (int)(*ucqueue).size()) {
+			wxASSERT(pos <= s_endpos);
 
-			if( ucqidx >= UCQ_MAXSIZE ) {
-				if( --ucqit->lock == 0 ) {
-					s_ucqueues.erase( ucqit );
+			if (ucqidx >= UCQ_MAXSIZE) {
+				if (--ucqit->lock == 0) {
+					s_ucqueues.erase(ucqit);
 				}
 
-				s_ucqueues.push_back( UCQueueSet() );
+				s_ucqueues.push_back(UCQueueSet());
 				ucqit = s_ucqueues.end();
 				--ucqit;
 				ucqit->lock = 1;          // lock this ucqueue
 				ucqidx = 0;
-				ucqueue = &( ucqit->ucq );
+				ucqueue = &(ucqit->ucq);
 			}
 
-			s_lines->InitNextUChar( lit, linepos );
+			s_lines->InitNextUChar(lit, linepos);
 			int i = BUF_MAXSIZE;
 
-			while( --i > 0 && ( s_lines->*s_NextUChar )( *ucqueue ) ) {
+			while (--i > 0 && (s_lines->*s_NextUChar)(*ucqueue)) {
 				//ucqit->size += ucqueue->back().second;
 			}
 		}
@@ -577,33 +577,33 @@ struct UCIterator   // ucs4_t widechar iterator
 	//***
 	// pre-decrement operator
 	UCIterator & operator--() {
-		wxASSERT( pos > 0 && ucqidx >= 0 && ucqidx <= int( ucqit->ucq.size() ) );
+		wxASSERT(pos > 0 && ucqidx >= 0 && ucqidx <= int(ucqit->ucq.size()));
 
-		if( ucqidx == 0 ) {             //rarely happen
-			if( --ucqit->lock == 0 ) {
-				s_ucqueues.erase( ucqit );
+		if (ucqidx == 0) {             //rarely happen
+			if (--ucqit->lock == 0) {
+				s_ucqueues.erase(ucqit);
 			}
 
-			s_ucqueues.push_back( UCQueueSet() );
+			s_ucqueues.push_back(UCQueueSet());
 			ucqit = s_ucqueues.end();
 			--ucqit;
 			ucqit->lock = 1;            // lock this ucqueue
 			ucqidx = 0;
-			MadUCPair ucp = s_lines->PreviousUChar( lit, linepos );
-			wxASSERT( ucp.second != 0 );
+			MadUCPair ucp = s_lines->PreviousUChar(lit, linepos);
+			wxASSERT(ucp.second != 0);
 			pos -= ucp.second;
-			ucqit->ucq.push_back( ucp );
+			ucqit->ucq.push_back(ucp);
 			return *this;
 		}
 
 		//--ucqidx;
 		//The regex search fails when content is "込1込", expression is   ＾込.+込" From    stonewell in SF.net
-		if( pos != s_endpos ) { --ucqidx; }
+		if (pos != s_endpos) { --ucqidx; }
 
 		int len = ucqit->ucq[ucqidx].second;
 		pos -= len;
 
-		if( linepos == 0 ) {
+		if (linepos == 0) {
 			--lit;
 			linepos = lit->m_Size;
 		}
@@ -623,14 +623,14 @@ struct UCIterator   // ucs4_t widechar iterator
 	}
 	***/
 
-	bool operator==( const UCIterator & it ) const {
-		if( pos == it.pos ) { return true; }
+	bool operator==(const UCIterator & it) const {
+		if (pos == it.pos) { return true; }
 
-		return ( pos >= s_endpos && it.pos >= s_endpos );
+		return (pos >= s_endpos && it.pos >= s_endpos);
 	}
 
-	bool operator!=( const UCIterator & it ) const {
-		return !( this->operator==( it ) ) ;
+	bool operator!=(const UCIterator & it) const {
+		return !(this->operator==(it)) ;
 	}
 
 };
@@ -649,38 +649,38 @@ void MadEdit::PanChinese(wxString &text)
 	pan_ch.push_back(ptext);
 	bool safe = g_ConvertChineseSafeMode;
 	g_ConvertChineseSafeMode = false;
-	for( int i = 0; i < sizeof( cefs ) / sizeof( cefs[0] ); ++i )
+	for (int i = 0; i < sizeof(cefs) / sizeof(cefs[0]); ++i)
 	{
-		ptext.reset( ConvertTextToNewString( text, ccfs[i] ));
-		if(ptext)
+		ptext.reset(ConvertTextToNewString(text, ccfs[i]));
+		if (ptext)
 			pan_ch.push_back(ptext);
 	}
 	g_ConvertChineseSafeMode = safe;
 
-	if(!pan_ch.empty())
+	if (!pan_ch.empty())
 	{
 		std::set<wxChar> panch, lastpanch;
 		wxString ttext;
 		bool inSquare = false;
 		wxChar lastpchar = 0;
-		for(size_t i = 0; i < text.Len(); ++i)
+		for (size_t i = 0; i < text.Len(); ++i)
 		{
 			panch.clear();
-			for(size_t j = 0; j < pan_ch.size(); ++j )
+			for (size_t j = 0; j < pan_ch.size(); ++j)
 			{
 				panch.insert((*(pan_ch[j]))[i]);
 			}
 
 			std::set<wxChar> intersect;
 
-			if(panch.size() > 1)
+			if (panch.size() > 1)
 			{
 				bool insert = !inSquare;
-				if(inSquare)
+				if (inSquare)
 				{
 					std::set_intersection(lastpanch.begin(),lastpanch.end(), panch.begin(), panch.end(),
 								  std::inserter(intersect, intersect.begin()));
-					if(intersect != panch)
+					if (intersect != panch)
 					{
 						intersect.clear();
 						std::set_union(lastpanch.begin(),lastpanch.end(), panch.begin(), panch.end(),
@@ -690,16 +690,16 @@ void MadEdit::PanChinese(wxString &text)
 					}
 				}
 
-				if(insert)
+				if (insert)
 				{
-					if(!inSquare)
+					if (!inSquare)
 						ttext << '[';
-					for(std::set<wxChar>::iterator it = panch.begin(); it != panch.end(); ++it)
+					for (std::set<wxChar>::iterator it = panch.begin(); it != panch.end(); ++it)
 					{
 						ttext << *it;
 					}
 
-					if(!inSquare)
+					if (!inSquare)
 						ttext << ']';
 				}
 			}
@@ -709,14 +709,14 @@ void MadEdit::PanChinese(wxString &text)
 				ttext << text[i];
 			}
 
-			if(lastpchar == '\\')
+			if (lastpchar == '\\')
 			{
 				lastpchar = 0;
 			}
 			else
 			{
 				lastpchar = text[i];
-				if(inSquare == false)
+				if (inSquare == false)
 					inSquare = (lastpchar == '[');
 				else
 					inSquare = (lastpchar != ']');
@@ -727,33 +727,33 @@ void MadEdit::PanChinese(wxString &text)
 	}
 }
 
-extern wxString MadStrLower( const wxString & );
+extern wxString MadStrLower(const wxString &);
 
 MadLines *UCIterator::s_lines = nullptr;
 MadLines::NextUCharFuncPtr UCIterator::s_NextUChar = nullptr;
 wxFileOffset UCIterator::s_endpos = 0;
 list<UCQueueSet> UCIterator::s_ucqueues;
 
-MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadCaretPos &endpos,
-		const wxString &text, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline/* = false*/, bool bPanChinese/* = false*/,/*IN_OUT*/ucs4string *fmt/*= nullptr*/, ucs4string *out/* = nullptr*/ )
+MadSearchResult MadEdit::Search(/*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadCaretPos &endpos,
+		const wxString &text, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline/* = false*/, bool bPanChinese/* = false*/,/*IN_OUT*/ucs4string *fmt/*= nullptr*/, ucs4string *out/* = nullptr*/)
 {
-	if((( beginpos.pos >= endpos.pos) && (!m_ZeroSelection) )|| text.IsEmpty() )
+	if (((beginpos.pos >= endpos.pos) && (!m_ZeroSelection))|| text.IsEmpty())
 	{ return SR_NO; }
 
 	regex_constants::syntax_option_type opt = regex_constants::ECMAScript;
 	const wxString *text_ptr = &text;
 
-	if( bCaseSensitive == false )
+	if (bCaseSensitive == false)
 	{
 		opt = opt | regex_constants::icase;
 		static wxString text_lower;
-		if(bRegex)
+		if (bRegex)
 		{
 			text_lower.Empty();
 			wchar_t lastChar = 0;
-			for(size_t i = 0; i < text.Len(); ++i)
+			for (size_t i = 0; i < text.Len(); ++i)
 			{
-				if(lastChar == wchar_t('\\'))
+				if (lastChar == wchar_t('\\'))
 				{
 					text_lower << text[i];
 				}
@@ -761,29 +761,29 @@ MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 				{
 #ifdef __WXMSW__
 					LPWSTR singleChar = (LPTSTR)((TCHAR)text[i]);
-					singleChar = CharLowerW( singleChar );
+					singleChar = CharLowerW(singleChar);
 					text_lower << (TCHAR)singleChar;
 #else
 					text_lower << (wchar_t)towlower(text[i]);
 #endif
 				}
-                if(lastChar == wchar_t('\\') && text[i] == wchar_t('\\'))
+                if (lastChar == wchar_t('\\') && text[i] == wchar_t('\\'))
                     lastChar = 0;
                 else
 				    lastChar = text[i];
 			}
 		}
 		else
-			text_lower = MadStrLower( text );
+			text_lower = MadStrLower(text);
 
 		text_ptr = &text_lower;
 	}
 
-	if(bPanChinese)
+	if (bPanChinese)
 	{
 		static wxString pan_chs;
 		pan_chs = *text_ptr;
-		if(!bRegex)
+		if (!bRegex)
 		{
 			bDotMatchNewline = false;
 			// todo trans
@@ -802,9 +802,9 @@ MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 		text_ptr = &pan_chs;
 	}
 
-	if(bRegex)
+	if (bRegex)
 	{
-		if( bDotMatchNewline == false )
+		if (bDotMatchNewline == false)
 		{
 			opt = opt | regex_constants::not_dot_newline;
 		}
@@ -812,84 +812,84 @@ MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 
 #ifdef __WXMSW__
 	vector<ucs4_t> ucs;
-	TranslateText( text_ptr->c_str(), text_ptr->Len(), &ucs, true );
+	TranslateText(text_ptr->c_str(), text_ptr->Len(), &ucs, true);
 	ucs4_t *puc = &ucs[0];
 	size_t len = ucs.size();
-	ucs4string exprstr( puc, puc + len );
+	ucs4string exprstr(puc, puc + len);
 #else
 	const ucs4_t *puc = text_ptr->c_str();
 	size_t len = text_ptr->Len();
-	ucs4string exprstr( puc, puc + len );
+	ucs4string exprstr(puc, puc + len);
 #endif
 	regex_compiler<UCIterator, ucs4_regex_traits > ucs4comp;
 	basic_regex<UCIterator> expression;
 
-	if( bRegex )
+	if (bRegex)
 	{
 		try
 		{
 			// Ugly patch for deadloop
 			ucs4_t bad_reg[3][3] =  {{'(', ')', 0}, {'[', ']', 0}, {'{', '}', 0}}, transChar = '\\';
 
-			for( int i = 0; i < 3; ++i )
+			for (int i = 0; i < 3; ++i)
 			{
-				ucs4_t *tpuc = &( bad_reg[i][0] );
-				ucs4string bstr( tpuc, tpuc + 2 );
-				ucs4string::size_type n = exprstr.find( bstr );
+				ucs4_t *tpuc = &(bad_reg[i][0]);
+				ucs4string bstr(tpuc, tpuc + 2);
+				ucs4string::size_type n = exprstr.find(bstr);
 
-				if( n != ucs4string::npos )
+				if (n != ucs4string::npos)
 				{
-					if( n == 0 || ( exprstr.at( n - 1 ) != transChar ) )
-					{ throw regex_error( regex_constants::error_badbrace, "Empty (), [] or {}" ); }
+					if (n == 0 || (exprstr.at(n - 1) != transChar))
+					{ throw regex_error(regex_constants::error_badbrace, "Empty (), [] or {}"); }
 				}
 			}
 
-			expression = ucs4comp.compile( exprstr, opt );
+			expression = ucs4comp.compile(exprstr, opt);
 		}
-		catch( regex_error & e )
+		catch(regex_error & e)
 		{
-			//wxMessageDialog dlg( this, wxString::Format( _( "'%s' is not a valid regular expression.(Or empty (), [] or {})" ), text.c_str() ),
-			//					 wxT( "MadEdit-Mod" ), wxOK | wxICON_ERROR );
-			//dlg.SetOKLabel( wxMessageDialog::ButtonLabel( _( "&Ok" ) ) );
+			//wxMessageDialog dlg(this, wxString::Format(_("'%s' is not a valid regular expression.(Or empty (), [] or {})"), text.c_str()),
+			//					 wxT("MadEdit-Mod"), wxOK | wxICON_ERROR);
+			//dlg.SetOKLabel(wxMessageDialog::ButtonLabel(_("&Ok")));
 			//dlg.ShowModal();
 			wxString regErr(_("Regex error:"));
 			regErr << wxGetTranslation(e.what());
-			g_StatusBar->SetStatusText( regErr, 0 );
+			g_StatusBar->SetStatusText(regErr, 0);
 			return SR_EXPR_ERROR;
 		}
 	}
 
-	UCIterator::Init( m_Lines, endpos.pos );
-	UCIterator start( beginpos.pos, beginpos.iter, beginpos.linepos );
-	UCIterator end( endpos.pos, endpos.iter, endpos.linepos );
+	UCIterator::Init(m_Lines, endpos.pos);
+	UCIterator start(beginpos.pos, beginpos.iter, beginpos.linepos);
+	UCIterator end(endpos.pos, endpos.iter, endpos.linepos);
 	UCIterator fbegin, fend;
 	match_results < UCIterator > what;
 	bool found;
 	static JumpTable_UCS4 jtab;
-	jtab.Build( puc, len );
+	jtab.Build(puc, len);
 
 	try
 	{
-		for( ;; )
+		for (;;)
 		{
-			if( bRegex )
+			if (bRegex)
 			{
-				found = regex_search( start, end, what, expression );
+				found = regex_search(start, end, what, expression);
 			}
 			else
 			{
 				fbegin = start;
 				fend = end;
-				found =::Search<ucs4_t, UCIterator, JumpTable_UCS4>( fbegin, fend, puc, len, jtab, bCaseSensitive );
+				found =::Search<ucs4_t, UCIterator, JumpTable_UCS4>(fbegin, fend, puc, len, jtab, bCaseSensitive);
 			}
 
-			if( !found ) { break; }
+			if (!found) { break; }
 
-			if( bWholeWord )            // check if is WholeWord
+			if (bWholeWord)            // check if is WholeWord
 			{
 				UCIterator cpos1, cpos2;
 
-				if( bRegex )
+				if (bRegex)
 				{
 					cpos1 = what[0].first;
 					cpos2 = what[0].second;
@@ -901,18 +901,18 @@ MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 				}
 
 				// check cpos2
-				if( cpos2.linepos > cpos2.lit->m_RowIndices[0].m_Start     // not at begin/end of line
-						&& cpos2.linepos < ( cpos2.lit->m_Size - cpos2.lit->m_NewLineSize ) )
+				if (cpos2.linepos > cpos2.lit->m_RowIndices[0].m_Start     // not at begin/end of line
+						&& cpos2.linepos < (cpos2.lit->m_Size - cpos2.lit->m_NewLineSize))
 				{
 					ucs4_t uc = *cpos2;
 
-					if( uc > 0x20 && !m_Syntax->IsDelimiter( uc ) && uc != 0x3000 )
+					if (uc > 0x20 && !m_Syntax->IsDelimiter(uc) && uc != 0x3000)
 					{
 						// check prev-uchar of cpos2
 						--cpos2;
 						uc = *cpos2;
 
-						if( uc > 0x20 &&  !m_Syntax->IsDelimiter( uc ) && uc != 0x3000 )
+						if (uc > 0x20 &&  !m_Syntax->IsDelimiter(uc) && uc != 0x3000)
 						{
 							found = false;
 						}
@@ -920,21 +920,21 @@ MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 				}
 
 				// check cpos1
-				if( found )
+				if (found)
 				{
 					wxFileOffset lpos = cpos1.lit->m_RowIndices[0].m_Start;
 
-					if( cpos1.linepos > lpos )      // not at begin of line
+					if (cpos1.linepos > lpos)      // not at begin of line
 					{
 						ucs4_t uc = *cpos1;
 
-						if( uc > 0x20 && !m_Syntax->IsDelimiter( uc ) && uc != 0x3000 )
+						if (uc > 0x20 && !m_Syntax->IsDelimiter(uc) && uc != 0x3000)
 						{
 							// check prev-uchar of cpos1
 							--cpos1;
 							uc = *cpos1;
 
-							if( uc > 0x20 && !m_Syntax->IsDelimiter( uc ) && uc != 0x3000 )
+							if (uc > 0x20 && !m_Syntax->IsDelimiter(uc) && uc != 0x3000)
 							{
 								found = false;
 							}
@@ -943,9 +943,9 @@ MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 				}
 			}
 
-			if( found )
+			if (found)
 			{
-				if( bRegex )
+				if (bRegex)
 				{
 					beginpos.pos = what[0].first.pos;
 					beginpos.iter = what[0].first.lit;
@@ -953,7 +953,7 @@ MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 					endpos.pos = what[0].second.pos;
 					endpos.iter = what[0].second.lit;
 					endpos.linepos = what[0].second.linepos;
-					if(fmt)
+					if (fmt)
 					{
 #if defined(_DEBUG) && defined(__WXMSW__)
 						for (int i = 0; i < (*fmt).size(); ++i)
@@ -966,7 +966,7 @@ MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 							DBOUT((wchar_t)(*out)[i]);
 						DBOUT('\n');
 #endif
-						//*out = ConvertEscape( *out );
+						//*out = ConvertEscape(*out);
 					}
 				}
 				else
@@ -983,7 +983,7 @@ MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 			}
 
 			// not found, repeat...
-			if( bRegex )
+			if (bRegex)
 			{
 				start = what[0].second;
 			}
@@ -993,13 +993,13 @@ MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 			}
 		}
 	}
-	catch( regex_error & e )
+	catch(regex_error & e)
 	{
 		wxString regErr(_("Regex error:"));
 		regErr << e.what();
-		wxMessageDialog dlg( this, regErr,
-							 wxT( "MadEdit-Mod" ), wxOK | wxICON_ERROR );
-		dlg.SetOKLabel( wxMessageDialog::ButtonLabel( _( "&Ok" ) ) );
+		wxMessageDialog dlg(this, regErr,
+							 wxT("MadEdit-Mod"), wxOK | wxICON_ERROR);
+		dlg.SetOKLabel(wxMessageDialog::ButtonLabel(_("&Ok")));
 		dlg.ShowModal();
 		return SR_EXPR_ERROR;
 	}
@@ -1009,7 +1009,7 @@ MadSearchResult MadEdit::Search( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadC
 
 
 // convert escape char to literal char
-ucs4string ConvertEscape( const ucs4string &str )
+ucs4string ConvertEscape(const ucs4string &str)
 {
 	ucs4string out;
 	detail::escape_value<ucs4_t, ucs4_regex_traits::char_class_type> esc;
@@ -1017,18 +1017,18 @@ ucs4string ConvertEscape( const ucs4string &str )
 	ucs4string::const_iterator end = str.end();
 	compiler_traits<ucs4_regex_traits> ucs4traits;
 
-	while( begin != end )
+	while (begin != end)
 	{
-		if( *begin == '\\' )
+		if (*begin == '\\')
 		{
-			if( ++begin == end )
+			if (++begin == end)
 			{
 				//out.push_back('\\'); // last char is '\'
-				throw regex_error( regex_constants::error_escape );
+				throw regex_error(regex_constants::error_escape);
 			}
 			else
 			{
-				esc = detail::parse_escape( begin, end, ucs4traits );
+				esc = detail::parse_escape(begin, end, ucs4traits);
 				out += esc.ch_;
 			}
 		}
@@ -1042,19 +1042,19 @@ ucs4string ConvertEscape( const ucs4string &str )
 	return out;
 }
 
-MadSearchResult MadEdit::Replace( ucs4string &out, const MadCaretPos &beginpos, const MadCaretPos &endpos,
+MadSearchResult MadEdit::Replace(ucs4string &out, const MadCaretPos &beginpos, const MadCaretPos &endpos,
 								  const wxString &expr, const wxString &fmt,
-								  bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline/* = false*/, bool bPanChinese/* = false*/ )
+								  bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline/* = false*/, bool bPanChinese/* = false*/)
 {
-	if( expr.IsEmpty() ) { return SR_NO; }
+	if (expr.IsEmpty()) { return SR_NO; }
 
-	if( bRegex == false )
+	if (bRegex == false)
 	{
 		// fmt is the wanted string
 		vector<ucs4_t> ucs;
-		TranslateText( fmt.c_str(), fmt.Len(), &ucs, true );
+		TranslateText(fmt.c_str(), fmt.Len(), &ucs, true);
 
-		for( size_t i = 0, size = ucs.size(); i < size; ++i )
+		for (size_t i = 0, size = ucs.size(); i < size; ++i)
 		{
 			out += ucs[i] ;
 		}
@@ -1064,24 +1064,24 @@ MadSearchResult MadEdit::Replace( ucs4string &out, const MadCaretPos &beginpos, 
 
 	regex_constants::syntax_option_type opt = regex_constants::ECMAScript;
 
-	if( bCaseSensitive == false )
+	if (bCaseSensitive == false)
 	{
 		opt = opt | regex_constants::icase;
 	}
 
-	if( bDotMatchNewline == false )
+	if (bDotMatchNewline == false)
 	{
 		opt = opt | regex_constants::not_dot_newline;
 	}
 
 #ifdef __WXMSW__
 	vector<ucs4_t> ucs;
-	TranslateText( expr.c_str(), expr.Len(), &ucs, true );
+	TranslateText(expr.c_str(), expr.Len(), &ucs, true);
 	ucs4_t *puc = &ucs[0];
-	ucs4string exprstr( puc, puc + ucs.size() );
+	ucs4string exprstr(puc, puc + ucs.size());
 #else
 	const ucs4_t *puc = expr.c_str();
-	ucs4string exprstr( puc, puc + expr.Len() );
+	ucs4string exprstr(puc, puc + expr.Len());
 #endif
 	typedef ucs4string::const_iterator ucs4iter;
 	regex_compiler<ucs4iter, ucs4_regex_traits > ucs4comp;
@@ -1089,15 +1089,15 @@ MadSearchResult MadEdit::Replace( ucs4string &out, const MadCaretPos &beginpos, 
 
 	try
 	{
-		expression = ucs4comp.compile( exprstr, opt );
+		expression = ucs4comp.compile(exprstr, opt);
 	}
-	catch( regex_error & e )
+	catch(regex_error & e)
 	{
 		wxString regErr(_("Regex error:"));
 		regErr << e.what();
-		wxMessageDialog dlg( this, regErr,
-							 wxT( "MadEdit-Mod" ), wxOK | wxICON_ERROR );
-		dlg.SetOKLabel( wxMessageDialog::ButtonLabel( _( "&Ok" ) ) );
+		wxMessageDialog dlg(this, regErr,
+							 wxT("MadEdit-Mod"), wxOK | wxICON_ERROR);
+		dlg.SetOKLabel(wxMessageDialog::ButtonLabel(_("&Ok")));
 		dlg.ShowModal();
 		return SR_EXPR_ERROR;
 	}
@@ -1106,10 +1106,10 @@ MadSearchResult MadEdit::Replace( ucs4string &out, const MadCaretPos &beginpos, 
 	ucs.clear();
 #if PATCH_RPLACE_REGEXP == 1
 
-	if( !fmt.IsEmpty() )
+	if (!fmt.IsEmpty())
 	{
 #endif
-		TranslateText( fmt.c_str(), fmt.Len(), &ucs, true );
+		TranslateText(fmt.c_str(), fmt.Len(), &ucs, true);
 		puc = &ucs[0];
 #if PATCH_RPLACE_REGEXP == 1
 	}
@@ -1117,25 +1117,25 @@ MadSearchResult MadEdit::Replace( ucs4string &out, const MadCaretPos &beginpos, 
 	{ puc = 0; }
 
 #endif
-	ucs4string fmtstr( puc, puc + ucs.size() );
+	ucs4string fmtstr(puc, puc + ucs.size());
 #else
 
-	if( !fmt.IsEmpty() )
+	if (!fmt.IsEmpty())
 	{
 		puc = fmt.c_str();
 	}
 	else
 	{ puc = 0; }
 
-	ucs4string fmtstr( puc, puc + fmt.Len() );
+	ucs4string fmtstr(puc, puc + fmt.Len());
 #endif
-	UCIterator begin( beginpos.pos, beginpos.iter, beginpos.linepos );
-	UCIterator end( endpos.pos, endpos.iter, endpos.linepos );
+	UCIterator begin(beginpos.pos, beginpos.iter, beginpos.linepos);
+	UCIterator end(endpos.pos, endpos.iter, endpos.linepos);
 	ucs4string str;
 
 	//back_insert_iterator<ucs4string> oi(str);
 	//std::copy(first, last, oi);
-	while( begin != end )
+	while (begin != end)
 	{
 		str += *begin;
 		++begin;
@@ -1143,24 +1143,24 @@ MadSearchResult MadEdit::Replace( ucs4string &out, const MadCaretPos &beginpos, 
 
 	try
 	{
-		out = regex_replace( str, expression, fmtstr, regex_constants::format_perl );
+		out = regex_replace(str, expression, fmtstr, regex_constants::format_perl);
 #if defined(_DEBUG) && defined(__WXMSW__)
 		for (int i = 0; i < fmtstr.size(); ++i)
 			DBOUT((wchar_t)fmtstr[i]);
 		DBOUT('\n');
-		for(int i = 0; i < out.size(); ++i)
-			DBOUT((wchar_t)out[i] );
+		for (int i = 0; i < out.size(); ++i)
+			DBOUT((wchar_t)out[i]);
 		DBOUT('\n');
 #endif
-		//out = ConvertEscape( out );
+		//out = ConvertEscape(out);
 	}
-	catch( regex_error & e )
+	catch(regex_error & e)
 	{
 		wxString regErr(_("Regex error:"));
 		regErr << e.what();
-		wxMessageDialog dlg( this, regErr,
-							 wxT( "MadEdit-Mod" ), wxOK | wxICON_ERROR );
-		dlg.SetOKLabel( wxMessageDialog::ButtonLabel( _( "&Ok" ) ) );
+		wxMessageDialog dlg(this, regErr,
+							 wxT("MadEdit-Mod"), wxOK | wxICON_ERROR);
+		dlg.SetOKLabel(wxMessageDialog::ButtonLabel(_("&Ok")));
 		dlg.ShowModal();
 		return SR_EXPR_ERROR;
 	}
@@ -1185,8 +1185,8 @@ struct ByteIterator
 	static MadLines         *s_lines;
 	static wxFileOffset     s_endpos;
 
-	static void Init( MadLines *lines, const wxFileOffset &endpos ) {
-		wxASSERT( endpos >= 0 && endpos <= lines->GetSize() );
+	static void Init(MadLines *lines, const wxFileOffset &endpos) {
+		wxASSERT(endpos >= 0 && endpos <= lines->GetSize());
 		s_lines = lines;
 		s_endpos = endpos;
 	}
@@ -1197,19 +1197,19 @@ struct ByteIterator
 
 	ByteIterator() {}
 
-	ByteIterator( const ByteIterator &it ) {
-		this->operator =( it );
+	ByteIterator(const ByteIterator &it) {
+		this->operator =(it);
 	}
 
-	ByteIterator( wxFileOffset pos0, const MadLineIterator &lit0, wxFileOffset linepos0 )
-		: pos( pos0 ), lit( lit0 ), linepos( linepos0 ) {
-		if( linepos == lit->m_Size && pos < s_lines->GetSize() ) {
+	ByteIterator(wxFileOffset pos0, const MadLineIterator &lit0, wxFileOffset linepos0)
+		: pos(pos0), lit(lit0), linepos(linepos0) {
+		if (linepos == lit->m_Size && pos < s_lines->GetSize()) {
 			++lit;
 			linepos = 0;
 		}
 	}
 
-	ByteIterator & operator=( const ByteIterator & it ) {
+	ByteIterator & operator=(const ByteIterator & it) {
 		pos = it.pos;
 		lit = it.lit;
 		linepos = it.linepos;
@@ -1217,8 +1217,8 @@ struct ByteIterator
 	}
 
 	const value_type operator*() {
-		wxASSERT( linepos < lit->m_Size );
-		return lit->Get( linepos );
+		wxASSERT(linepos < lit->m_Size);
+		return lit->Get(linepos);
 	}
 
 	/***
@@ -1233,8 +1233,8 @@ struct ByteIterator
 		++pos;
 		++linepos;
 
-		if( linepos == lit->m_Size ) {
-			if( pos == s_endpos ) { return *this; } // end
+		if (linepos == lit->m_Size) {
+			if (pos == s_endpos) { return *this; } // end
 
 			++lit;
 			linepos = 0;
@@ -1256,10 +1256,10 @@ struct ByteIterator
 	//***
 	// pre-decrement operator
 	ByteIterator & operator--() {
-		wxASSERT( pos > 0 );
+		wxASSERT(pos > 0);
 		--pos;
 
-		if( linepos == 0 ) {
+		if (linepos == 0) {
 			--lit;
 			linepos = lit->m_Size;
 		}
@@ -1279,14 +1279,14 @@ struct ByteIterator
 	}
 	***/
 
-	bool operator==( const ByteIterator & it ) const {
-		if( pos == it.pos ) { return true; }
+	bool operator==(const ByteIterator & it) const {
+		if (pos == it.pos) { return true; }
 
-		return ( pos >= s_endpos && it.pos >= s_endpos );
+		return (pos >= s_endpos && it.pos >= s_endpos);
 	}
 
-	bool operator!=( const ByteIterator & it ) const {
-		return !( this->operator==( it ) ) ;
+	bool operator!=(const ByteIterator & it) const {
+		return !(this->operator==(it)) ;
 	}
 
 };
@@ -1294,19 +1294,19 @@ struct ByteIterator
 MadLines *ByteIterator::s_lines = nullptr;
 wxFileOffset ByteIterator::s_endpos = 0;
 
-MadSearchResult MadEdit::SearchHex( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadCaretPos &endpos,
-		const wxByte *hex, size_t count )
+MadSearchResult MadEdit::SearchHex(/*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/MadCaretPos &endpos,
+		const wxByte *hex, size_t count)
 {
-	if( beginpos.pos >= endpos.pos || count == 0 )
+	if (beginpos.pos >= endpos.pos || count == 0)
 	{ return SR_NO; }
 
-	ByteIterator::Init( m_Lines, endpos.pos );
-	ByteIterator start( beginpos.pos, beginpos.iter, beginpos.linepos );
-	ByteIterator end( endpos.pos, endpos.iter, endpos.linepos );
+	ByteIterator::Init(m_Lines, endpos.pos);
+	ByteIterator start(beginpos.pos, beginpos.iter, beginpos.linepos);
+	ByteIterator end(endpos.pos, endpos.iter, endpos.linepos);
 	static JumpTable_Hex jtab;
-	jtab.Build( hex, count );
+	jtab.Build(hex, count);
 
-	if( ::Search( start, end, hex, count, jtab, true ) )
+	if (::Search(start, end, hex, count, jtab, true))
 	{
 		beginpos.pos = start.pos;
 		beginpos.iter = start.lit;
@@ -1320,19 +1320,19 @@ MadSearchResult MadEdit::SearchHex( /*IN_OUT*/MadCaretPos &beginpos, /*IN_OUT*/M
 	return SR_NO;
 }
 
-bool MadEdit::NextRegexSearchingPos( MadCaretPos& cp, const wxString &expr )
+bool MadEdit::NextRegexSearchingPos(MadCaretPos& cp, const wxString &expr)
 {
-	if( expr.find_first_of( wxT( '^' ) ) != wxString::npos || expr.find_last_of( wxT( '$' ) ) != wxString::npos )
+	if (expr.find_first_of(wxT('^')) != wxString::npos || expr.find_last_of(wxT('$')) != wxString::npos)
 	{
 		wxFileOffset len = cp.iter->m_Size - cp.linepos - 1;
 		cp.pos += len;
 		cp.linepos += len;
 	}
 
-	if( cp.pos == UCIterator::s_endpos )
+	if (cp.pos == UCIterator::s_endpos)
 	{ return false; }
 
-	UCIterator it( cp.pos, cp.iter, cp.linepos );
+	UCIterator it(cp.pos, cp.iter, cp.linepos);
 	++it;
 	cp.pos = it.pos;
 	cp.iter = it.lit;
@@ -1340,14 +1340,14 @@ bool MadEdit::NextRegexSearchingPos( MadCaretPos& cp, const wxString &expr )
 	return true;
 }
 
-bool MadEdit::MoveToNextRegexSearchingPos( const wxString &expr )
+bool MadEdit::MoveToNextRegexSearchingPos(const wxString &expr)
 {
 	MadCaretPos& cp = m_CaretPos;
-	if( expr.find_first_of( wxT( '^' ) ) != wxString::npos || expr.find_last_of( wxT( '$' ) ) != wxString::npos )
+	if (expr.find_first_of(wxT('^')) != wxString::npos || expr.find_last_of(wxT('$')) != wxString::npos)
 	{
 		//wxASSERT((cp.iter->m_Size - cp.linepos - 1) >= 0);
 		wxFileOffset len = cp.iter->m_Size - cp.linepos - 1;
-		if(len < 0)
+		if (len < 0)
 		{
 			return false;
 		}
@@ -1355,10 +1355,10 @@ bool MadEdit::MoveToNextRegexSearchingPos( const wxString &expr )
 		cp.linepos += len;
 	}
 
-	if( cp.pos == UCIterator::s_endpos )
+	if (cp.pos == UCIterator::s_endpos)
 	{ return false; }
 
-	UCIterator it( cp.pos, cp.iter, cp.linepos );
+	UCIterator it(cp.pos, cp.iter, cp.linepos);
 	++it;
 	cp.pos = it.pos;
 	cp.iter = it.lit;
@@ -1366,17 +1366,17 @@ bool MadEdit::MoveToNextRegexSearchingPos( const wxString &expr )
 	return true;
 }
 
-wxFileOffset MadEdit::GetLineBeginPos(int line )
+wxFileOffset MadEdit::GetLineBeginPos(int line)
 {
 	MadCaretPos caret = m_CaretPos;
 	--line;
 
-	if( line < 0 ) line = 0;
+	if (line < 0) line = 0;
 	else
-		if( line >= int( m_Lines->m_LineCount ) ) line = int( m_Lines->m_LineCount - 1 );
+		if (line >= int(m_Lines->m_LineCount)) line = int(m_Lines->m_LineCount - 1);
 
 	m_UpdateValidPos = -1;
-	caret.rowid = GetLineByLine( caret.iter, caret.pos, line );
+	caret.rowid = GetLineByLine(caret.iter, caret.pos, line);
 	caret.lineid = line;
 	caret.subrowid = 0;
 	caret.linepos = 0;
@@ -1385,7 +1385,7 @@ wxFileOffset MadEdit::GetLineBeginPos(int line )
 	int ucharPos = 0;
 	vector<int> widthArray;
 	MadUCQueue ucharQueue;
-	UpdateCaret( caret, ucharQueue, widthArray, ucharPos);
+	UpdateCaret(caret, ucharQueue, widthArray, ucharPos);
 	return caret.pos;
 }
 

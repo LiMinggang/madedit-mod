@@ -72,5 +72,5 @@ wxString g_MadEdit_Version(wxString(wxT("MadEdit-Mod 0.4.20"))
 #endif
 #endif
 	+ wxT(" wxWidgets ") + wxMAKE_VERSION_DOT_STRING(wxMAJOR_VERSION, wxMINOR_VERSION, wxRELEASE_NUMBER) \
- + wxT( " build " ) + wxT( __TIME__ ) + wxT( " " ) + wxT( __DATE__ ) );
+ + wxT(" build ") + wxT(__TIME__) + wxT(" ") + wxT(__DATE__));
 

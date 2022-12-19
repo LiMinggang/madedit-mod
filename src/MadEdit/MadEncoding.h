@@ -115,7 +115,7 @@ public:
 	static MadEncoding *GetSystemEncoding();
 	static wxString GetGroupNameById(int id)
 	{
-		if(id<ENCG_WESTERNEUROPE ||	id>=ENCG_MAX) return wxEmptyString;
+		if (id<ENCG_WESTERNEUROPE ||	id>=ENCG_MAX) return wxEmptyString;
 		return MadEncodingGrpName[id];
 	}
 

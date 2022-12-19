@@ -51,11 +51,11 @@ MadFileHistoryDialog::MadFileHistoryDialog(wxWindow* parent,wxWindowID id, const
 	BoxSizer1->SetSizeHints(this);
 	Center();
 
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadFileHistoryDialog::OnButtonOKClick, this, wxID_OK);
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadFileHistoryDialog::OnButtonCancelClick, this, wxID_CANCEL);
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadFileHistoryDialog::OnButtonSelectAllClick, this, ButtonSelectAll->GetId());
-	Bind( wxEVT_COMMAND_BUTTON_CLICKED, &MadFileHistoryDialog::OnButtonDselectAllClick, this, ButtonDselectAll->GetId());
-	Bind( wxEVT_CLOSE_WINDOW, &MadFileHistoryDialog::MadFileHistoryDialogClose, this, wxID_ANY);
+	Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MadFileHistoryDialog::OnButtonOKClick, this, wxID_OK);
+	Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MadFileHistoryDialog::OnButtonCancelClick, this, wxID_CANCEL);
+	Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MadFileHistoryDialog::OnButtonSelectAllClick, this, ButtonSelectAll->GetId());
+	Bind(wxEVT_COMMAND_BUTTON_CLICKED, &MadFileHistoryDialog::OnButtonDselectAllClick, this, ButtonDselectAll->GetId());
+	Bind(wxEVT_CLOSE_WINDOW, &MadFileHistoryDialog::MadFileHistoryDialogClose, this, wxID_ANY);
 	//*)
 
 	SetDefaultItem(ButtonOK);
@@ -84,16 +84,16 @@ void MadFileHistoryDialog::ResetWindowListIterms()
 
 	MadFileList->Hide();
 	MadFileList->DeleteAllItems();
-	if( count )
+	if (count)
 	{
 		wxString fname, fdir;
 		wxListItem info;
 		wxFileName fileName;
 		MadFileList->Freeze();
-		for( size_t id = 0; id < count; ++id )
+		for (size_t id = 0; id < count; ++id)
 		{
-			fileName.Assign( m_RecentFiles->GetHistoryFile( id ) );
-			if(fileName.Exists())
+			fileName.Assign(m_RecentFiles->GetHistoryFile(id));
+			if (fileName.Exists())
 			{
 				fname = fileName.GetFullName();
 				fdir = fileName.GetPath();
@@ -107,17 +107,17 @@ void MadFileHistoryDialog::ResetWindowListIterms()
 			}
 		}
 		MadFileList->Thaw();
-	    MadFileList->SetColumnWidth( 0, wxLIST_AUTOSIZE );
-		MadFileList->SetColumnWidth( 1, wxLIST_AUTOSIZE );
+	    MadFileList->SetColumnWidth(0, wxLIST_AUTOSIZE);
+		MadFileList->SetColumnWidth(1, wxLIST_AUTOSIZE);
 	}
 
-	if(FILEHISTORY_MIN_PATH_COL_WIDTH > MadFileList->GetColumnWidth(1))
+	if (FILEHISTORY_MIN_PATH_COL_WIDTH > MadFileList->GetColumnWidth(1))
 	{
-		MadFileList->SetColumnWidth( 1, FILEHISTORY_MIN_PATH_COL_WIDTH );
+		MadFileList->SetColumnWidth(1, FILEHISTORY_MIN_PATH_COL_WIDTH);
 	}
 
 	MadFileList->Show();
-	GetSizer()->Fit( this );
+	GetSizer()->Fit(this);
 }
 
 void MadFileHistoryDialog::OnButtonOKClick(wxCommandEvent& WXUNUSED(event))
@@ -149,11 +149,11 @@ void MadFileHistoryDialog::GetCheckedItemsData(wxArrayString & selectedItems, bo
 	long item = -1;
 	wxString fname;
 	wxString fdir;
-	for ( ;; ) {
+	for (;;) {
 		item = MadFileList->GetNextItem(item, wxLIST_NEXT_ALL, wxLIST_STATE_DONTCARE);
-		if ( item == -1 )
+		if (item == -1)
 			break;
-		if((!checked) || (MadFileList->IsChecked(item)))
+		if ((!checked) || (MadFileList->IsChecked(item)))
 		{
 			fname = MadFileList->GetItemText(item, 0);
 			fdir = MadFileList->GetItemText(item, 1);

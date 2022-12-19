@@ -43,16 +43,16 @@ public:
     virtual bool IsOpened() const;
 
     // set the clipboard data. all other formats will be deleted.
-    virtual bool SetData( wxDataObject *data );
+    virtual bool SetData(wxDataObject *data);
 
     // add to the clipboard data.
-    virtual bool AddData( wxDataObject *data );
+    virtual bool AddData(wxDataObject *data);
 
     // ask if data in correct format is available
-    virtual bool IsSupported( const wxDataFormat& format );
+    virtual bool IsSupported(const wxDataFormat& format);
 
     // fill data with data on the clipboard (if available)
-    virtual bool GetData( wxDataObject& data );
+    virtual bool GetData(wxDataObject& data);
 
     // clears wxTheClipboard and the system's clipboard if possible
     virtual void Clear();

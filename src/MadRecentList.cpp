@@ -58,7 +58,7 @@ void MadRecentList::AddFileToHistory(const wxString& file)
     // Check we don't already have this item
     for (i = 0; i < m_fileHistoryN; ++i)
     {
-        if ( m_fileHistory[i] && ItemEQ(file, m_fileHistory[i]) )
+        if (m_fileHistory[i] && ItemEQ(file, m_fileHistory[i]))
         {
             // we do have it, move it to the top of the history
             RemoveFileFromHistory (i);
@@ -68,7 +68,7 @@ void MadRecentList::AddFileToHistory(const wxString& file)
     }
 
     // if we already have a full history, delete the one at the end
-    if ( m_fileMaxFiles == m_fileHistoryN )
+    if (m_fileMaxFiles == m_fileHistoryN)
     {
         RemoveFileFromHistory (m_fileHistoryN - 1);
         AddFileToHistory (file);
@@ -83,7 +83,7 @@ void MadRecentList::AddFileToHistory(const wxString& file)
         while (node)
         {
             wxMenu* menu = (wxMenu*) node->GetData();
-            if ( m_fileHistoryN == 0 && menu->GetMenuItemCount() )
+            if (m_fileHistoryN == 0 && menu->GetMenuItemCount())
             {
                 menu->AppendSeparator();
             }
@@ -101,7 +101,7 @@ void MadRecentList::AddFileToHistory(const wxString& file)
 
     for (i = 0; i < m_fileHistoryN; ++i)
     {
-        if ( m_fileHistory[i] )
+        if (m_fileHistory[i])
         {
             wxString itemInMenu = m_fileHistory[i];
 
@@ -128,9 +128,9 @@ void MadRecentList::AddFileToHistory(const wxString& file)
     const wxString newFile = NormalizeFileName(fnNew);
     size_t i,
            numFiles = m_fileHistory.size();
-    for ( i = 0; i < numFiles; i++ )
+    for (i = 0; i < numFiles; i++)
     {
-        if ( newFile == NormalizeFileName(m_fileHistory[i]) )
+        if (newFile == NormalizeFileName(m_fileHistory[i]))
         {
             // we do have it, move it to the top of the history
             RemoveFileFromHistory(i);
@@ -140,19 +140,19 @@ void MadRecentList::AddFileToHistory(const wxString& file)
     }
 
     // if we already have a full history, delete the one at the end
-    if ( numFiles == m_fileMaxFiles )
+    if (numFiles == m_fileMaxFiles)
     {
         RemoveFileFromHistory(--numFiles);
     }
 
     // add a new menu item to all file menus (they will be updated below)
-    for ( wxList::compatibility_iterator node = m_fileMenus.GetFirst();
+    for (wxList::compatibility_iterator node = m_fileMenus.GetFirst();
         node;
-        node = node->GetNext() )
+        node = node->GetNext())
     {
         wxMenu * const menu = (wxMenu *)node->GetData();
 
-        if ( !numFiles && menu->GetMenuItemCount() )
+        if (!numFiles && menu->GetMenuItemCount())
             menu->AppendSeparator();
 
         // label doesn't matter, it will be set below anyhow, but it can't
@@ -165,13 +165,13 @@ void MadRecentList::AddFileToHistory(const wxString& file)
     numFiles++;
 
     // update the labels in all menus
-    for ( i = 0; i < numFiles; i++ )
+    for (i = 0; i < numFiles; i++)
     {
         // if in same directory just show the filename; otherwise the full path
         const wxFileName fnOld(m_fileHistory[i]);
 
         wxString pathInMenu;
-        if ( fnOld.GetPath() == fnNew.GetPath() && m_isFileHistory )
+        if (fnOld.GetPath() == fnNew.GetPath() && m_isFileHistory)
         {
             pathInMenu = fnOld.GetFullName();
         }
@@ -181,9 +181,9 @@ void MadRecentList::AddFileToHistory(const wxString& file)
             pathInMenu = m_fileHistory[i];
         }
 
-        for ( wxList::compatibility_iterator node = m_fileMenus.GetFirst();
+        for (wxList::compatibility_iterator node = m_fileMenus.GetFirst();
               node;
-              node = node->GetNext() )
+              node = node->GetNext())
         {
             wxMenu * const menu = (wxMenu *)node->GetData();
 

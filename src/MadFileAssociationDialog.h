@@ -13,8 +13,8 @@
 #ifdef __WXMSW__
 
 #ifdef _MSC_VER
-# pragma warning( push )
-# pragma warning( disable : 4996 )
+# pragma warning(push)
+# pragma warning(disable : 4996)
 #endif
 // disable 4996 {
 //(*Headers(MadFileAssociationDialog)
@@ -27,7 +27,7 @@
 //*)
 // disable 4996 }
 #ifdef _MSC_VER
-# pragma warning( pop )
+# pragma warning(pop)
 #endif
 
 class MadFileAssociationDialog: public wxDialog

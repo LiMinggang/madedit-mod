@@ -148,7 +148,7 @@ void MadKeyBindings::FreeCommandTextMap()
 wxString MadKeyBindings::CommandToText(MadEditCommand cmd)
 {
 	MadCommandTextMap::iterator	textit;
-	if((textit=ms_CommandTextMap->find(cmd)) !=	ms_CommandTextMap->end())
+	if ((textit=ms_CommandTextMap->find(cmd)) !=	ms_CommandTextMap->end())
 	{
 		return textit->second;
 	}
@@ -158,7 +158,7 @@ wxString MadKeyBindings::CommandToText(MadEditCommand cmd)
 wxString MadKeyBindings::MenuIdToText(int menuid)
 {
 	MadCommandTextMap::iterator	textit;
-	if((textit=ms_MenuIdTextMap->find(menuid)) != ms_MenuIdTextMap->end())
+	if ((textit=ms_MenuIdTextMap->find(menuid)) != ms_MenuIdTextMap->end())
 	{
 		return textit->second;
 	}
@@ -168,7 +168,7 @@ wxString MadKeyBindings::MenuIdToText(int menuid)
 int	MadKeyBindings::TextToMenuId(const wxString &text)
 {
 	MadTextCommandMap::iterator	it;
-	if((it=ms_TextMenuIdMap->find(text)) !=	 ms_TextMenuIdMap->end())
+	if ((it=ms_TextMenuIdMap->find(text)) !=	 ms_TextMenuIdMap->end())
 	{
 		return it->second;
 	}
@@ -185,7 +185,7 @@ void MadKeyBindings::AddMenuTextCommand(int menuid, const wxString &text, MadEdi
 MadEditCommand MadKeyBindings::GetCommandFromMenuId(int menuid)
 {
 	MadMenuCommandMap::iterator	it=ms_MenuIdCommandMap->find(menuid);
-	if(it != ms_MenuIdCommandMap->end())
+	if (it != ms_MenuIdCommandMap->end())
 	{
 		return it->second;
 	}
@@ -196,29 +196,29 @@ MadEditCommand MadKeyBindings::GetCommandFromMenuId(int menuid)
 
 MadEditShortCut	StringToShortCut(const wxString &text)
 {
-	// wxPrintf( wxT("text %s\n"), text.c_str()	);
+	// wxPrintf(wxT("text %s\n"), text.c_str()	);
 
 	// check for accelerators: they	are	given after	'\t'
 	//int posTab = text.Find(wxT('\t'));
-	//if ( posTab != wxNOT_FOUND ) {
+	//if (posTab != wxNOT_FOUND) {
 		// parse the accelerator string
 		int	keyCode	= 0;
 		int	accelFlags = wxACCEL_NORMAL;
 		wxString current;
-		for	( size_t n = 0;	n <	text.Len();	++n	) {
-			if ( (text[n] == '+') || (text[n] == '-') )	{
-				if ( current ==	wxT("ctrl")	)
+		for	(size_t n = 0;	n <	text.Len();	++n	) {
+			if ((text[n] == '+') || (text[n] == '-'))	{
+				if (current ==	wxT("ctrl")	)
 					accelFlags |= wxACCEL_CTRL;
-				else if	( current == wxT("alt")	)
+				else if	(current == wxT("alt")	)
 					accelFlags |= wxACCEL_ALT;
-				else if	( current == wxT("shift") )
+				else if	(current == wxT("shift"))
 					accelFlags |= wxACCEL_SHIFT;
 				else {
 					// we may have "Ctrl-+", for example, but we still want	to
 					// catch typos like	"Crtl-A" so	only give the warning if we
 					// have	something before the current '+' or	'-', else take
 					// it as a literal symbol
-					if ( current.empty() )
+					if (current.empty())
 					{
 						current	+= text[n];
 
@@ -240,11 +240,11 @@ MadEditShortCut	StringToShortCut(const wxString &text)
 			}
 		}
 
-		if ( current.empty() ) {
+		if (current.empty()) {
             wxLogDebug(wxT("No accel key found, accel string ignored."));
 		}
 		else {
-			if ( current.Len() == 1	) {
+			if (current.Len() == 1	) {
 				// it's	a letter
 				keyCode	= current[0U];
 
@@ -256,135 +256,135 @@ MadEditShortCut	StringToShortCut(const wxString &text)
 			}
 			else {
 				// is it a function	key?
-				if ( current[0U] ==	'f'	&& wxIsdigit(current[1U]) &&
+				if (current[0U] ==	'f'	&& wxIsdigit(current[1U]) &&
 					 (current.Len()	== 2 ||
-					 (current.Len()	== 3 &&	wxIsdigit(current[2U]))) ) {
+					 (current.Len()	== 3 &&	wxIsdigit(current[2U])))) {
 					keyCode	= WXK_F1 + wxAtoi(current.c_str() +	1) - 1;
 				}
 				else {
 					// several special cases
 					current.MakeUpper();
-					if ( current ==	wxT("DEL") )
+					if (current ==	wxT("DEL"))
 						keyCode	= WXK_DELETE;
-					else if	( current == wxT("DELETE") )
+					else if	(current == wxT("DELETE"))
 						keyCode	= WXK_DELETE;
-					else if	( current == wxT("BACK") )
+					else if	(current == wxT("BACK"))
 						keyCode	= WXK_BACK;
-					else if	( current == wxT("INS")	)
+					else if	(current == wxT("INS")	)
 						keyCode	= WXK_INSERT;
-					else if	( current == wxT("INSERT") )
+					else if	(current == wxT("INSERT"))
 						keyCode	= WXK_INSERT;
-					else if	( current == wxT("ENTER") || current ==	wxT("RETURN") )
+					else if	(current == wxT("ENTER") || current ==	wxT("RETURN"))
 						keyCode	= WXK_RETURN;
-					else if	( current == wxT("LEFT") )
+					else if	(current == wxT("LEFT"))
 						keyCode	= WXK_LEFT;
-					else if	( current == wxT("RIGHT") )
+					else if	(current == wxT("RIGHT"))
 						keyCode	= WXK_RIGHT;
-					else if	( current == wxT("UP") )
+					else if	(current == wxT("UP"))
 						keyCode	= WXK_UP;
-					else if	( current == wxT("DOWN") )
+					else if	(current == wxT("DOWN"))
 						keyCode	= WXK_DOWN;
-					else if	( current == wxT("HOME") )
+					else if	(current == wxT("HOME"))
 						keyCode	= WXK_HOME;
-					else if	( current == wxT("END")	)
+					else if	(current == wxT("END")	)
 						keyCode	= WXK_END;
-					else if	( current == wxT("SPACE") )
+					else if	(current == wxT("SPACE"))
 						keyCode	= WXK_SPACE;
-					else if	( current == wxT("TAB")	)
+					else if	(current == wxT("TAB")	)
 						keyCode	= WXK_TAB;
-					else if	( current == wxT("ESC")	|| current == wxT("ESCAPE")	)
+					else if	(current == wxT("ESC")	|| current == wxT("ESCAPE")	)
 						keyCode	= WXK_ESCAPE;
-					else if	( current == wxT("CANCEL") )
+					else if	(current == wxT("CANCEL"))
 						keyCode	= WXK_CANCEL;
-					else if	( current == wxT("CLEAR") )
+					else if	(current == wxT("CLEAR"))
 						keyCode	= WXK_CLEAR;
-					else if	( current == wxT("MENU") )
+					else if	(current == wxT("MENU"))
 						keyCode	= WXK_MENU;
-					else if	( current == wxT("PAUSE") )
+					else if	(current == wxT("PAUSE"))
 						keyCode	= WXK_PAUSE;
-					else if	( current == wxT("CAPITAL")	)
+					else if	(current == wxT("CAPITAL")	)
 						keyCode	= WXK_CAPITAL;
-					else if	( current == wxT("SELECT") )
+					else if	(current == wxT("SELECT"))
 						keyCode	= WXK_SELECT;
-					else if	( current == wxT("PRINT") )
+					else if	(current == wxT("PRINT"))
 						keyCode	= WXK_PRINT;
-					else if	( current == wxT("EXECUTE")	)
+					else if	(current == wxT("EXECUTE")	)
 						keyCode	= WXK_EXECUTE;
-					else if	( current == wxT("SNAPSHOT") )
+					else if	(current == wxT("SNAPSHOT"))
 						keyCode	= WXK_SNAPSHOT;
-					else if	( current == wxT("HELP") )
+					else if	(current == wxT("HELP"))
 						keyCode	= WXK_HELP;
-					else if	( current == wxT("ADD")	)
+					else if	(current == wxT("ADD")	)
 						keyCode	= WXK_ADD;
-					else if	( current == wxT("SEPARATOR") )
+					else if	(current == wxT("SEPARATOR"))
 						keyCode	= WXK_SEPARATOR;
-					else if	( current == wxT("SUBTRACT") )
+					else if	(current == wxT("SUBTRACT"))
 						keyCode	= WXK_SUBTRACT;
-					else if	( current == wxT("DECIMAL")	)
+					else if	(current == wxT("DECIMAL")	)
 						keyCode	= WXK_DECIMAL;
-					else if	( current == wxT("DIVIDE") )
+					else if	(current == wxT("DIVIDE"))
 						keyCode	= WXK_DIVIDE;
-					else if	( current == wxT("NUM_LOCK") )
+					else if	(current == wxT("NUM_LOCK"))
 						keyCode	= WXK_NUMLOCK;
-					else if	( current == wxT("SCROLL_LOCK")	)
+					else if	(current == wxT("SCROLL_LOCK")	)
 						keyCode	= WXK_SCROLL;
-					else if	( current == wxT("PGUP") )
+					else if	(current == wxT("PGUP"))
 						keyCode	= WXK_PAGEUP;
-					else if	( current == wxT("PGDN") )
+					else if	(current == wxT("PGDN"))
 						keyCode	= WXK_PAGEDOWN;
-					else if	( current == wxT("KP_SPACE") )
+					else if	(current == wxT("KP_SPACE"))
 						keyCode	= WXK_NUMPAD_SPACE;
-					else if	( current == wxT("KP_TAB") )
+					else if	(current == wxT("KP_TAB"))
 						keyCode	= WXK_NUMPAD_TAB;
-					else if	( current == wxT("KP_ENTER") )
+					else if	(current == wxT("KP_ENTER"))
 						keyCode	= WXK_NUMPAD_ENTER;
-					else if	( current == wxT("KP_HOME")	)
+					else if	(current == wxT("KP_HOME")	)
 						keyCode	= WXK_NUMPAD_HOME;
-					else if	( current == wxT("KP_LEFT")	)
+					else if	(current == wxT("KP_LEFT")	)
 						keyCode	= WXK_NUMPAD_LEFT;
-					else if	( current == wxT("KP_UP") )
+					else if	(current == wxT("KP_UP"))
 						keyCode	= WXK_NUMPAD_UP;
-					else if	( current == wxT("KP_RIGHT") )
+					else if	(current == wxT("KP_RIGHT"))
 						keyCode	= WXK_NUMPAD_RIGHT;
-					else if	( current == wxT("KP_DOWN")	)
+					else if	(current == wxT("KP_DOWN")	)
 						keyCode	= WXK_NUMPAD_DOWN;
-					else if	( current == wxT("KP_PGUP")	)
+					else if	(current == wxT("KP_PGUP")	)
 						keyCode	= WXK_NUMPAD_PAGEUP;
-					else if	( current == wxT("KP_PGDN")	)
+					else if	(current == wxT("KP_PGDN")	)
 						keyCode	= WXK_NUMPAD_PAGEDOWN;
-					else if	( current == wxT("KP_END") )
+					else if	(current == wxT("KP_END"))
 						keyCode	= WXK_NUMPAD_END;
-					else if	( current == wxT("KP_BEGIN") )
+					else if	(current == wxT("KP_BEGIN"))
 						keyCode	= WXK_NUMPAD_BEGIN;
-					else if	( current == wxT("KP_INSERT") )
+					else if	(current == wxT("KP_INSERT"))
 						keyCode	= WXK_NUMPAD_INSERT;
-					else if	( current == wxT("KP_DELETE") )
+					else if	(current == wxT("KP_DELETE"))
 						keyCode	= WXK_NUMPAD_DELETE;
-					else if	( current == wxT("KP_EQUAL") )
+					else if	(current == wxT("KP_EQUAL"))
 						keyCode	= WXK_NUMPAD_EQUAL;
-					else if	( current == wxT("KP_MULTIPLY")	)
+					else if	(current == wxT("KP_MULTIPLY")	)
 						keyCode	= WXK_NUMPAD_MULTIPLY;
-					else if	( current == wxT("KP_ADD") )
+					else if	(current == wxT("KP_ADD"))
 						keyCode	= WXK_NUMPAD_ADD;
-					else if	( current == wxT("KP_SEPARATOR") )
+					else if	(current == wxT("KP_SEPARATOR"))
 						keyCode	= WXK_NUMPAD_SEPARATOR;
-					else if	( current == wxT("KP_SUBTRACT")	)
+					else if	(current == wxT("KP_SUBTRACT")	)
 						keyCode	= WXK_NUMPAD_SUBTRACT;
-					else if	( current == wxT("KP_DECIMAL") )
+					else if	(current == wxT("KP_DECIMAL"))
 						keyCode	= WXK_NUMPAD_DECIMAL;
-					else if	( current == wxT("KP_DIVIDE") )
+					else if	(current == wxT("KP_DIVIDE"))
 						keyCode	= WXK_NUMPAD_DIVIDE;
-					else if	( current == wxT("WINDOWS_LEFT") )
+					else if	(current == wxT("WINDOWS_LEFT"))
 						keyCode	= WXK_WINDOWS_LEFT;
-					else if	( current == wxT("WINDOWS_RIGHT") )
+					else if	(current == wxT("WINDOWS_RIGHT"))
 						keyCode	= WXK_WINDOWS_RIGHT;
-					else if	( current == wxT("WINDOWS_MENU") )
+					else if	(current == wxT("WINDOWS_MENU"))
 						keyCode	= WXK_WINDOWS_MENU;
-					else if	( current == wxT("COMMAND")	)
+					else if	(current == wxT("COMMAND")	)
 						keyCode	= WXK_COMMAND;
-					else if	( current.Left(3) == wxT("KP_")	&& wxIsdigit(current[3U]) )
+					else if	(current.Left(3) == wxT("KP_")	&& wxIsdigit(current[3U]))
 						keyCode	= WXK_NUMPAD0 +	wxAtoi(current.c_str() + 3);
-					else if	( current.Left(7) == wxT("SPECIAL")	&& wxIsdigit(current[7U]) )
+					else if	(current.Left(7) == wxT("SPECIAL")	&& wxIsdigit(current[7U]))
 						keyCode	= WXK_SPECIAL1 + wxAtoi(current.c_str()	+ 7) - 1;
 					else
 					{
@@ -396,7 +396,7 @@ MadEditShortCut	StringToShortCut(const wxString &text)
 			}
 		}
 
-		if ( keyCode ) {
+		if (keyCode) {
 			// we do have something
 			return ShortCut(accelFlags,	keyCode);
 		}
@@ -410,15 +410,15 @@ wxString ShortCutToString(MadEditShortCut shortcut)
 	wxString text;
 
 	int	flags =	shortcut>>16;
-	if ( flags & wxACCEL_CTRL )
+	if (flags & wxACCEL_CTRL)
 		text +=	wxT("Ctrl-");
-	if ( flags & wxACCEL_SHIFT )
+	if (flags & wxACCEL_SHIFT)
 		text +=	wxT("Shift-");
-	if ( flags & wxACCEL_ALT )
+	if (flags & wxACCEL_ALT)
 		text +=	wxT("Alt-");
 
 	int	code = shortcut&0xFFFF;
-	switch ( code )
+	switch (code)
 	{
 		case WXK_F1:
 		case WXK_F2:
@@ -610,24 +610,24 @@ wxString ShortCutToString(MadEditShortCut shortcut)
 			break;
 
 		default:
-			if(code<WXK_DELETE && code>WXK_SPACE) //wxIsalnum(code)	)
+			if (code<WXK_DELETE && code>WXK_SPACE) //wxIsalnum(code)	)
 			{
 				text <<	(wxChar)code;
 				break;
 			}
-			if(code>=WXK_NUMPAD0 &&	code<=WXK_NUMPAD9)
+			if (code>=WXK_NUMPAD0 &&	code<=WXK_NUMPAD9)
 			{
 				text <<	wxT("KP_") << wxChar(wxT('0') +	code - WXK_NUMPAD0);
 				break;
 			}
-			if(code>=WXK_SPECIAL1 && code<=WXK_SPECIAL20)
+			if (code>=WXK_SPECIAL1 && code<=WXK_SPECIAL20)
 			{
 				text <<	wxT("SPECIAL") << code-WXK_SPECIAL1+1;
 				break;
 			}
 
 			return wxEmptyString;
-			//wxFAIL_MSG( wxT("unknown keyboard	accel")	);
+			//wxFAIL_MSG(wxT("unknown keyboard	accel")	);
 	}
 
 	return text;
@@ -637,7 +637,7 @@ wxString ShortCutToString(MadEditShortCut shortcut)
 
 MadKeyBindings::MadKeyBindings()
 {
-	if(ms_CommandTextMap==nullptr)
+	if (ms_CommandTextMap==nullptr)
 		InitCommandTextMap();
 
 	m_KeyBindings=new MadKeyBindingList();
@@ -649,7 +649,7 @@ MadKeyBindings::MadKeyBindings()
 MadKeyBindings::~MadKeyBindings()
 {
 	MadKeyBindingList::iterator	it=m_KeyBindings->begin();
-	while(it !=	m_KeyBindings->end())
+	while (it !=	m_KeyBindings->end())
 	{ 
 		delete *it;
 		++it;
@@ -794,15 +794,15 @@ void MadKeyBindings::AddDefaultBindings(bool overwrite)
 void MadKeyBindings::RemoveByCommand(MadEditCommand cmd)
 {
 	MadKeyBindingMap::iterator ecit	= m_EditCommandMap->find(cmd);
-	if(ecit==m_EditCommandMap->end()) return;
+	if (ecit==m_EditCommandMap->end()) return;
 
 	MadKeyBinding *kb =	ecit->second;
 
 	MadKeyBindingList::iterator	it=m_KeyBindings->begin();
 	MadKeyBindingList::iterator	itend=m_KeyBindings->end();
-	while(it!=itend)
+	while (it!=itend)
 	{
-		if(*it == kb)
+		if (*it == kb)
 		{
 			m_KeyBindings->erase(it);
 			break;
@@ -811,15 +811,15 @@ void MadKeyBindings::RemoveByCommand(MadEditCommand cmd)
 	}
 
 	m_EditCommandMap->erase(cmd);
-	if(kb->menuid!=0) m_MenuIdMap->erase(kb->menuid);
+	if (kb->menuid!=0) m_MenuIdMap->erase(kb->menuid);
 
-	if(kb->firstsc!=0)
+	if (kb->firstsc!=0)
 	{
 		m_ShortCutMap->erase(kb->firstsc);
 
 		MadShortCutSet::iterator sit=kb->shortcuts.begin();
 		MadShortCutSet::iterator sitend=kb->shortcuts.end();
-		while(sit!=sitend)
+		while (sit!=sitend)
 		{
 			m_ShortCutMap->erase(*sit);
 			++sit;
@@ -831,15 +831,15 @@ void MadKeyBindings::RemoveByCommand(MadEditCommand cmd)
 void MadKeyBindings::RemoveByMenuId(int menuid)
 {
 	MadKeyBindingMap::iterator mit = m_MenuIdMap->find(menuid);
-	if(mit==m_MenuIdMap->end())	return;
+	if (mit==m_MenuIdMap->end())	return;
 
 	MadKeyBinding *kb =	mit->second;
 
 	MadKeyBindingList::iterator	it=m_KeyBindings->begin();
 	MadKeyBindingList::iterator	itend=m_KeyBindings->end();
-	while(it!=itend)
+	while (it!=itend)
 	{
-		if(*it == kb)
+		if (*it == kb)
 		{
 			m_KeyBindings->erase(it);
 			break;
@@ -848,15 +848,15 @@ void MadKeyBindings::RemoveByMenuId(int menuid)
 	}
 
 	m_MenuIdMap->erase(menuid);
-	if(kb->editcmd!=0) m_EditCommandMap->erase(kb->editcmd);
+	if (kb->editcmd!=0) m_EditCommandMap->erase(kb->editcmd);
 
-	if(kb->firstsc!=0)
+	if (kb->firstsc!=0)
 	{
 		m_ShortCutMap->erase(kb->firstsc);
 
 		MadShortCutSet::iterator sit=kb->shortcuts.begin();
 		MadShortCutSet::iterator sitend=kb->shortcuts.end();
-		while(sit!=sitend)
+		while (sit!=sitend)
 		{
 			m_ShortCutMap->erase(*sit);
 			++sit;
@@ -868,13 +868,13 @@ void MadKeyBindings::RemoveByMenuId(int menuid)
 wxString MadKeyBindings::GetKeyByMenuText(const wxString &text)
 {
 	int	menuid=TextToMenuId(text);
-	if(menuid!=0)
+	if (menuid!=0)
 	{
 		MadKeyBindingMap::iterator mit = m_MenuIdMap->find(menuid);
-		if(mit != m_MenuIdMap->end())
+		if (mit != m_MenuIdMap->end())
 		{
 			MadKeyBinding *kb=mit->second;
-			if(kb->firstsc != 0)
+			if (kb->firstsc != 0)
 			{
 				return ShortCutToString(kb->firstsc);
 			}
@@ -886,10 +886,10 @@ wxString MadKeyBindings::GetKeyByMenuText(const wxString &text)
 bool MadKeyBindings::KeyIsAssigned(const wxString &key)
 {
 	MadEditShortCut	sc=StringToShortCut(key);
-	if(sc != 0)
+	if (sc != 0)
 	{
 		MadKeyBindingMap::iterator scit	= m_ShortCutMap->find(sc);
-		if(scit	!= m_ShortCutMap->end())
+		if (scit	!= m_ShortCutMap->end())
 		{
 			return true;
 		}
@@ -900,33 +900,33 @@ bool MadKeyBindings::KeyIsAssigned(const wxString &key)
 void MadKeyBindings::GetKeys(int menuid, MadEditCommand	editcmd, wxArrayString &keys)
 {
 	MadKeyBinding *kb=nullptr;
-	if(menuid!=0)
+	if (menuid!=0)
 	{
 		MadKeyBindingMap::iterator mit = m_MenuIdMap->find(menuid);
-		if(mit != m_MenuIdMap->end())
+		if (mit != m_MenuIdMap->end())
 		{
 			kb = mit->second;
 		}
 	}
-	else if(editcmd!=0)
+	else if (editcmd!=0)
 	{
 		MadKeyBindingMap::iterator ecit	= m_EditCommandMap->find(editcmd);
-		if(ecit	!= m_EditCommandMap->end())
+		if (ecit	!= m_EditCommandMap->end())
 		{
 			kb = ecit->second;
 		}
 	}
-	if(kb!=nullptr	&& kb->firstsc!=0)
+	if (kb!=nullptr	&& kb->firstsc!=0)
 	{
 		wxString key=ShortCutToString(kb->firstsc);
-		if(!key.IsEmpty()) keys.Add(key);
+		if (!key.IsEmpty()) keys.Add(key);
 
 		MadShortCutSet::iterator sit=kb->shortcuts.begin();
 		MadShortCutSet::iterator sitend=kb->shortcuts.end();
-		while(sit!=sitend)
+		while (sit!=sitend)
 		{
 			key=ShortCutToString(*sit);
-			if(!key.IsEmpty()) keys.Add(key);
+			if (!key.IsEmpty()) keys.Add(key);
 			++sit;
 		}
 	}
@@ -935,23 +935,23 @@ void MadKeyBindings::GetKeys(int menuid, MadEditCommand	editcmd, wxArrayString &
 void MadKeyBindings::BuildAccelEntries(bool	includeFirstSC,	vector<wxAcceleratorEntry> &entries)
 {
 	MadKeyBindingList::iterator	it=m_KeyBindings->begin();
-	while(it!=m_KeyBindings->end())
+	while (it!=m_KeyBindings->end())
 	{
 		MadKeyBinding *kb =	(*it);
 		MadEditShortCut	sc = kb->firstsc;
-		if(kb->menuid!=0 &&	kb->editcmd==0 && sc!=0)
+		if (kb->menuid!=0 &&	kb->editcmd==0 && sc!=0)
 		{
-			if(includeFirstSC)
+			if (includeFirstSC)
 			{
-				entries.push_back(wxAcceleratorEntry( sc>>16, sc&0xFFFF, kb->menuid	));
+				entries.push_back(wxAcceleratorEntry(sc>>16, sc&0xFFFF, kb->menuid	));
 			}
 
 			MadShortCutSet::iterator sit=kb->shortcuts.begin();
 			MadShortCutSet::iterator sitend=kb->shortcuts.end();
-			while(sit!=sitend)
+			while (sit!=sitend)
 			{
 				sc = *sit;
-				entries.push_back(wxAcceleratorEntry( sc>>16, sc&0xFFFF, kb->menuid	));
+				entries.push_back(wxAcceleratorEntry(sc>>16, sc&0xFFFF, kb->menuid	));
 				++sit;
 			}
 		}
@@ -968,13 +968,13 @@ void MadKeyBindings::LoadFromConfig(wxConfigBase *config)
 	wxString key, text;
 	long idx=0;
 	bool kcont=config->GetNextEntry(key, idx);
-	while(kcont)
+	while (kcont)
 	{
 		config->Read(key, &text);
 
-		if((sc=StringToShortCut(key))!=0)
+		if ((sc=StringToShortCut(key))!=0)
 		{
-			if((cmdit=ms_TextCommandMap->find(text))!=ms_TextCommandMap->end())
+			if ((cmdit=ms_TextCommandMap->find(text))!=ms_TextCommandMap->end())
 			{
 				Add(sc,	cmdit->second, true);
 			}
@@ -993,32 +993,32 @@ void MadKeyBindings::LoadFromConfig_New(wxConfigBase *config)
 	long idx=0;
 	bool first;
 	bool kcont=config->GetNextEntry(key, idx);
-	while(kcont)
+	while (kcont)
 	{
 		config->Read(key, &text);
 
-		if((sc=StringToShortCut(key))!=0)
+		if ((sc=StringToShortCut(key))!=0)
 		{
 			first=false;
 			wxStringTokenizer tkz(text);
 			text=tkz.GetNextToken();
-			while(!text.IsEmpty())
+			while (!text.IsEmpty())
 			{
 				const wxChar ch	= text[0];
-				if(ch == wxT('*'))
+				if (ch == wxT('*'))
 				{
 					first=true;
 				}
-				else if(ch == wxT('m'))// menuXXX
+				else if (ch == wxT('m'))// menuXXX
 				{
-					if((tcit=ms_TextMenuIdMap->find(text))!=ms_TextMenuIdMap->end())
+					if ((tcit=ms_TextMenuIdMap->find(text))!=ms_TextMenuIdMap->end())
 					{
 						Add(sc,	first, tcit->second, true);
 					}
 				}
-				else if(ch == wxT('e'))// ecXXX
+				else if (ch == wxT('e'))// ecXXX
 				{
-					if((tcit=ms_TextCommandMap->find(text))!=ms_TextCommandMap->end())
+					if ((tcit=ms_TextCommandMap->find(text))!=ms_TextCommandMap->end())
 					{
 						Add(sc,	tcit->second, true,	first);
 					}
@@ -1038,49 +1038,49 @@ void MadKeyBindings::SaveToConfig_New(wxConfigBase *config)
 	wxString key;
 	long idx=0;
 	bool kcont=config->GetNextEntry(key, idx);
-	while(kcont)
+	while (kcont)
 	{
 		keys.Add(key);
 		kcont=config->GetNextEntry(key,	idx);
 	}
 	
 	MadKeyBindingList::iterator	it=m_KeyBindings->begin();
-	while(it!=m_KeyBindings->end())
+	while (it!=m_KeyBindings->end())
 	{
 		MadKeyBinding *kb= (*it);
 
 		wxString text;
-		if(kb->menuid != 0)
+		if (kb->menuid != 0)
 		{
 			text = wxT(' ');
 			text +=	MenuIdToText(kb->menuid);
 		}
-		if(kb->editcmd != 0)
+		if (kb->editcmd != 0)
 		{
 			wxString s = CommandToText(kb->editcmd);
-			if(!s.IsEmpty())
+			if (!s.IsEmpty())
 			{
 				text +=	wxT(' ');
 				text +=	s;
 			}
 		}
 
-		if(!text.IsEmpty() && kb->firstsc!=0)
+		if (!text.IsEmpty() && kb->firstsc!=0)
 		{
 			key=ShortCutToString(kb->firstsc);
 			config->Write(key, wxString(wxT(" *"))+text);
 
 			int	ix=keys.Index(key.c_str(),	false);
-			if(ix>=0) { keys.RemoveAt(ix); }
+			if (ix>=0) { keys.RemoveAt(ix); }
 
 			MadShortCutSet::iterator sit=kb->shortcuts.begin();
 			MadShortCutSet::iterator sitend=kb->shortcuts.end();
-			while(sit!=sitend)
+			while (sit!=sitend)
 			{
 				key=ShortCutToString(*sit);
 				config->Write(key, text);
 				ix=keys.Index(key.c_str(),	false);
-				if(ix>=0) { keys.RemoveAt(ix); }
+				if (ix>=0) { keys.RemoveAt(ix); }
 				++sit;
 			}
 		}
@@ -1089,7 +1089,7 @@ void MadKeyBindings::SaveToConfig_New(wxConfigBase *config)
 	}
 
 	//delete unused	keys
-	for(size_t i=0;	i<keys.GetCount(); ++i)
+	for (size_t i=0;	i<keys.GetCount(); ++i)
 	{
 		config->DeleteEntry(keys[i]);
 	}

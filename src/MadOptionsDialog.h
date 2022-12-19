@@ -11,8 +11,8 @@
 #include "MadUtils.h"
 
 #ifdef _MSC_VER
-# pragma warning( push )
-# pragma warning( disable : 4996 )
+# pragma warning(push)
+# pragma warning(disable : 4996)
 #endif
 // disable 4996 {
 //(*Headers(MadOptionsDialog)
@@ -33,7 +33,7 @@
 //*)
 // disable 4996 }
 #ifdef _MSC_VER
-# pragma warning( pop )
+# pragma warning(pop)
 #endif
 
 #include <list>
@@ -203,7 +203,7 @@ private:
 	typedef struct 
 	{
 		const long evtTag;
-		void (MadOptionsDialog::*method)( wxCommandEvent &);
+		void (MadOptionsDialog::*method)(wxCommandEvent &);
 	} wxCmdEvtHandlerMap_t;
 
 public:

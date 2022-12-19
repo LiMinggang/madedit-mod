@@ -37,19 +37,19 @@ namespace embedded_python {
 		py_redirector()
 		{ }
 
-		explicit py_redirector( boost::function<void ( const std::string& )> f )
-			: m_write_fn( f )
+		explicit py_redirector(boost::function<void (const std::string&)> f)
+			: m_write_fn(f)
 		{ }
 
-		void write( const std::string& text ) {
-			if( m_write_fn )
-			{ m_write_fn( text ); }
+		void write(const std::string& text) {
+			if (m_write_fn)
+			{ m_write_fn(text); }
 			else
 			{ std::cout << text; }
 		}
 
 	public:
-		boost::function<void ( const std::string& )> m_write_fn;
+		boost::function<void (const std::string&)> m_write_fn;
 	};
 
 	typedef py_redirector<STDOUT>   stdout_redirector;
@@ -58,13 +58,13 @@ namespace embedded_python {
 
 	static std::auto_ptr<stdout_redirector> make_stdout_redirector()
 	{
-		std::auto_ptr<stdout_redirector> ptr( new stdout_redirector(PrintString) );
+		std::auto_ptr<stdout_redirector> ptr(new stdout_redirector(PrintString));
 		return ptr;
 	}
 
 	static std::auto_ptr<stderr_redirector> make_stderr_redirector()
 	{
-		std::auto_ptr<stderr_redirector> ptr( new stderr_redirector(PrintString) );
+		std::auto_ptr<stderr_redirector> ptr(new stderr_redirector(PrintString));
 		return ptr;
 	}
 }
@@ -79,13 +79,13 @@ public:
 		//Py_Finalize();
 	}
 
-	void exec( const std::string& command ) {
+	void exec(const std::string& command) {
 		try {
-			py::object result = py::exec( command.c_str(),
-			                              m_main_global, m_main_global );
+			py::object result = py::exec(command.c_str(),
+			                              m_main_global, m_main_global);
 		}
-		catch( const py::error_already_set& ) {
-			if( PyErr_Occurred() ) {
+		catch(const py::error_already_set&) {
+			if (PyErr_Occurred()) {
 				PyErr_Print();
 				PyErr_Clear();
 			}
@@ -96,11 +96,11 @@ public:
 		}
 	}
 
-	void write_stdout( const std::string& text ) {
+	void write_stdout(const std::string& text) {
 		std::cout << ">>> " << text;
 	}
 
-	void write_stderr( const std::string& text ) {
+	void write_stderr(const std::string& text) {
 		std::cout << "xxx " << text;
 	}
 

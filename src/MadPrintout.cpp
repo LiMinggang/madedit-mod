@@ -32,7 +32,7 @@ MadPrintout::MadPrintout(const wxString& title)
 
 MadPrintout::~MadPrintout()
 {
-    if(--s_PrintoutCount==0)
+    if (--s_PrintoutCount==0)
     {
         g_ActiveMadEdit->EndPrint();
     }
@@ -69,14 +69,14 @@ void MadPrintout::OnPreparePrinting()
     
     // subtract header,footer rect
     m_HeaderHeight=0;
-    if(m_PrintHeader)
+    if (m_PrintHeader)
     {
         m_HeaderHeight = (m_CharHeight*5)/4 ; // 1.25 times
         printRect.y += m_HeaderHeight;
         printRect.height -= m_HeaderHeight;
     }
     m_FooterHeight=0;
-    if(m_PrintFooter)
+    if (m_PrintFooter)
     {
         m_FooterHeight = (m_CharHeight*5)/4 ; // 1.25 times
         printRect.height -= m_FooterHeight;
@@ -89,7 +89,7 @@ void MadPrintout::GetPageInfo(int *minPage, int *maxPage, int *pageFrom, int *pa
 {
     // get info from g_ActiveMadEdit
     *maxPage = *pageTo = g_ActiveMadEdit->GetPageCount();
-    if(*maxPage==0)
+    if (*maxPage==0)
     {
         *minPage=*pageFrom=0;
     }
@@ -119,15 +119,15 @@ wxString TranslatePrintMark(const wxString &text, int pageNum)
     wxString newtext, name;
     wxDateTime now;
     size_t count=text.Len();
-    for(size_t i=0;i<count;++i)
+    for (size_t i=0;i<count;++i)
     {
-        if(text[i]==wxT('%') && (i+1)<count)
+        if (text[i]==wxT('%') && (i+1)<count)
         {
             const wxChar wc=text[++i];
-            switch(wc)
+            switch (wc)
             {
             case wxT('f'):
-                if(GetActiveMadEditPathNameOrTitle(name))
+                if (GetActiveMadEditPathNameOrTitle(name))
                 {
                     wxFileName fn(name);
                     newtext += fn.GetFullName();
@@ -194,20 +194,20 @@ bool MadPrintout::OnPrintPage(int page)
 
     int w, h;
     wxString str;
-    if(m_PrintHeader)
+    if (m_PrintHeader)
     {
-        if(!m_HeaderLeft.IsEmpty())
+        if (!m_HeaderLeft.IsEmpty())
         {
             str=TranslatePrintMark(m_HeaderLeft, page);
             dc->DrawText(str, rect.x, rect.y);
         }
-        if(!m_HeaderCenter.IsEmpty())
+        if (!m_HeaderCenter.IsEmpty())
         {
             str=TranslatePrintMark(m_HeaderCenter, page);
             dc->GetTextExtent(str, &w, &h);
             dc->DrawText(str, rect.x + (rect.width-w)/2, rect.y);
         }
-        if(!m_HeaderRight.IsEmpty())
+        if (!m_HeaderRight.IsEmpty())
         {
             str=TranslatePrintMark(m_HeaderRight, page);
             dc->GetTextExtent(str, &w, &h);
@@ -220,22 +220,22 @@ bool MadPrintout::OnPrintPage(int page)
         dc->DrawLine(rect.x, y, rect.x+rect.width, y);
     }
     
-    if(m_PrintFooter)
+    if (m_PrintFooter)
     {
         int y=rect.y+rect.height-m_CharHeight;
         
-        if(!m_FooterLeft.IsEmpty())
+        if (!m_FooterLeft.IsEmpty())
         {
             str=TranslatePrintMark(m_FooterLeft, page);
             dc->DrawText(str, rect.x, y);
         }
-        if(!m_FooterCenter.IsEmpty())
+        if (!m_FooterCenter.IsEmpty())
         {
             str=TranslatePrintMark(m_FooterCenter, page);
             dc->GetTextExtent(str, &w, &h);
             dc->DrawText(str, rect.x + (rect.width-w)/2, y);
         }
-        if(!m_FooterRight.IsEmpty())
+        if (!m_FooterRight.IsEmpty())
         {
             str=TranslatePrintMark(m_FooterRight, page);
             dc->GetTextExtent(str, &w, &h);

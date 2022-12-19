@@ -51,12 +51,12 @@ extern bool g_mainThreadLocked;
 // These are used when transforming Ctrl-alpha to ascii values 1-26
 inline bool wxIsLowerChar(int code)
 {
-    return (code >= 'a' && code <= 'z' );
+    return (code >= 'a' && code <= 'z');
 }
 
 inline bool wxIsUpperChar(int code)
 {
-    return (code >= 'A' && code <= 'Z' );
+    return (code >= 'A' && code <= 'Z');
 }
 
 
@@ -74,7 +74,7 @@ static long wxTranslateKeySymToWXKey(KeySym keysym, bool isChar)
 {
     long key_code;
 
-    switch ( keysym )
+    switch (keysym)
     {
         // Shift, Control and Alt don't generate the CHAR events at all
         case GDK_Shift_L:
@@ -355,7 +355,7 @@ static void wxFillOtherKeyEventFields(wxKeyEvent& event,
     if (gdk_event->window)
         gdk_window_get_pointer(gdk_event->window, &x, &y, &state);
 
-    event.SetTimestamp( gdk_event->time );
+    event.SetTimestamp(gdk_event->time);
     event.SetId(win->GetId());
     event.m_shiftDown = (gdk_event->state & GDK_SHIFT_MASK) != 0;
     event.m_controlDown = (gdk_event->state & GDK_CONTROL_MASK) != 0;
@@ -367,11 +367,11 @@ static void wxFillOtherKeyEventFields(wxKeyEvent& event,
 #if wxUSE_UNICODE
     event.m_uniChar = gdk_keyval_to_unicode(gdk_event->keyval);
 #endif
-    wxGetMousePosition( &x, &y );
-    win->ScreenToClient( &x, &y );
+    wxGetMousePosition(&x, &y);
+    win->ScreenToClient(&x, &y);
     event.m_x = x;
     event.m_y = y;
-    event.SetEventObject( win );
+    event.SetEventObject(win);
 }
 
 
@@ -400,15 +400,15 @@ wxTranslateGTKKeyEventToWx(wxKeyEvent& event,
 
     long key_code = wxTranslateKeySymToWXKey(keysym, false /* !isChar */);
 
-    if ( !key_code )
+    if (!key_code)
     {
         // do we have the translation or is it a plain ASCII character?
-        if ( (gdk_event->length == 1) || wxIsAsciiKeysym(keysym) )
+        if ((gdk_event->length == 1) || wxIsAsciiKeysym(keysym))
         {
             // we should use keysym if it is ASCII as X does some translations
             // like "I pressed while Control is down" => "Ctrl-I" == "TAB"
             // which we don't want here (but which we do use for OnChar())
-            if ( !wxIsAsciiKeysym(keysym) )
+            if (!wxIsAsciiKeysym(keysym))
             {
                 keysym = (KeySym)gdk_event->string[0];
             }
@@ -445,17 +445,17 @@ wxTranslateGTKKeyEventToWx(wxKeyEvent& event,
             key_code = 0;
 
             // but if we have cached information from the last KEY_PRESS
-            if ( gdk_event->type == GDK_KEY_RELEASE )
+            if (gdk_event->type == GDK_KEY_RELEASE)
             {
                 // then reuse it
-                if ( keysym == s_lastKeyPress.keysym )
+                if (keysym == s_lastKeyPress.keysym)
                 {
                     key_code = s_lastKeyPress.keycode;
                 }
             }
         }
 
-        if ( gdk_event->type == GDK_KEY_PRESS )
+        if (gdk_event->type == GDK_KEY_PRESS)
         {
             // remember it to be reused for KEY_UP event later
             s_lastKeyPress.keysym = keysym;
@@ -466,7 +466,7 @@ wxTranslateGTKKeyEventToWx(wxKeyEvent& event,
     wxLogTrace(TRACE_KEYS, _T("\t-> wxKeyCode %ld"), key_code);
 
     // sending unknown key events doesn't really make sense
-    if ( !key_code )
+    if (!key_code)
         return false;
 
     // now fill all the other fields
@@ -474,7 +474,7 @@ wxTranslateGTKKeyEventToWx(wxKeyEvent& event,
 
     event.m_keyCode = key_code;
 #if wxUSE_UNICODE
-    if ( gdk_event->type == GDK_KEY_PRESS ||  gdk_event->type == GDK_KEY_RELEASE )
+    if (gdk_event->type == GDK_KEY_PRESS ||  gdk_event->type == GDK_KEY_RELEASE)
     {
         event.m_uniChar = key_code;
     }
@@ -502,9 +502,9 @@ struct wxGtkIMData
 
 extern "C" {
 static gboolean
-gtk_window_key_press_callback( GtkWidget *widget,
+gtk_window_key_press_callback(GtkWidget *widget,
                                GdkEventKey *gdk_event,
-                               wxWindow *win )
+                               wxWindow *win)
 {
     DEBUG_MAIN_THREAD
 
@@ -516,12 +516,12 @@ gtk_window_key_press_callback( GtkWidget *widget,
         return FALSE;
 
 
-    wxKeyEvent event( wxEVT_KEY_DOWN );
+    wxKeyEvent event(wxEVT_KEY_DOWN);
     bool ret = false;
     bool return_after_IM = false;
 
     // madedit: fixed that keyevent should be processed by IM first
-    if( wxTranslateGTKKeyEventToWx(event, win, gdk_event) == false )
+    if (wxTranslateGTKKeyEventToWx(event, win, gdk_event) == false)
     {
         // Return after IM processing as we cannot do
         // anything with it anyhow.
@@ -539,7 +539,7 @@ gtk_window_key_press_callback( GtkWidget *widget,
     // widgets has both IM context and input focus, the event should be filtered
     // by gtk_im_context_filter_keypress().
     // Then, we should, according to GTK+ 2.0 API doc, return whatever it returns.
-    if ((!ret) && (win->m_imData != nullptr) && ( wxWindow::FindFocus() == win ))
+    if ((!ret) && (win->m_imData != nullptr) && (wxWindow::FindFocus() == win))
     {
         // We should let GTK+ IM filter key event first. According to GTK+ 2.0 API
         // docs, if IM filter returns true, no further processing should be done.
@@ -559,7 +559,7 @@ gtk_window_key_press_callback( GtkWidget *widget,
 
     // madedit: fixed that keyevent should be processed by IM first
     // Emit KEY_DOWN event
-    ret = win->GetEventHandler()->ProcessEvent( event );
+    ret = win->GetEventHandler()->ProcessEvent(event);
 
 
 #if wxUSE_ACCEL
@@ -568,11 +568,11 @@ gtk_window_key_press_callback( GtkWidget *widget,
         wxWindowGTK *ancestor = win;
         while (ancestor)
         {
-            int command = ancestor->GetAcceleratorTable()->GetCommand( event );
+            int command = ancestor->GetAcceleratorTable()->GetCommand(event);
             if (command != -1)
             {
-                wxCommandEvent command_event( wxEVT_COMMAND_MENU_SELECTED, command );
-                ret = ancestor->GetEventHandler()->ProcessEvent( command_event );
+                wxCommandEvent command_event(wxEVT_COMMAND_MENU_SELECTED, command);
+                ret = ancestor->GetEventHandler()->ProcessEvent(command_event);
                 break;
             }
             if (ancestor->IsTopLevel())
@@ -590,21 +590,21 @@ gtk_window_key_press_callback( GtkWidget *widget,
         KeySym keysym = gdk_event->keyval;
         // Find key code for EVT_CHAR and EVT_CHAR_HOOK events
         key_code = wxTranslateKeySymToWXKey(keysym, true /* isChar */);
-        if ( !key_code )
+        if (!key_code)
         {
-            if ( wxIsAsciiKeysym(keysym) )
+            if (wxIsAsciiKeysym(keysym))
             {
                 // ASCII key
                 key_code = (unsigned char)keysym;
             }
             // gdk_event->string is actually deprecated
-            else if ( gdk_event->length == 1 )
+            else if (gdk_event->length == 1)
             {
                 key_code = (unsigned char)gdk_event->string[0];
             }
         }
 
-        if ( key_code )
+        if (key_code)
         {
             wxLogTrace(TRACE_KEYS, _T("Char event: %ld"), key_code);
 
@@ -612,12 +612,12 @@ gtk_window_key_press_callback( GtkWidget *widget,
 
             // To conform to the docs we need to translate Ctrl-alpha
             // characters to values in the range 1-26.
-            if ( event.ControlDown() &&
-                 ( wxIsLowerChar(key_code) || wxIsUpperChar(key_code) ))
+            if (event.ControlDown() &&
+                 (wxIsLowerChar(key_code) || wxIsUpperChar(key_code)))
             {
-                if ( wxIsLowerChar(key_code) )
+                if (wxIsLowerChar(key_code))
                     event.m_keyCode = key_code - 'a' + 1;
-                if ( wxIsUpperChar(key_code) )
+                if (wxIsUpperChar(key_code))
                     event.m_keyCode = key_code - 'A' + 1;
 #if wxUSE_UNICODE
                 event.m_uniChar = event.m_keyCode;
@@ -630,20 +630,20 @@ gtk_window_key_press_callback( GtkWidget *widget,
                 parent = parent->GetParent();
             if (parent)
             {
-                event.SetEventType( wxEVT_CHAR_HOOK );
-                ret = parent->GetEventHandler()->ProcessEvent( event );
+                event.SetEventType(wxEVT_CHAR_HOOK);
+                ret = parent->GetEventHandler()->ProcessEvent(event);
             }
 
             if (!ret)
             {
                 event.SetEventType(wxEVT_CHAR);
-                ret = win->GetEventHandler()->ProcessEvent( event );
+                ret = win->GetEventHandler()->ProcessEvent(event);
             }
         }
     }
 
     // win is a control: tab can be propagated up
-    if ( !ret &&
+    if (!ret &&
          ((gdk_event->keyval == GDK_Tab) || (gdk_event->keyval == GDK_ISO_Left_Tab)) &&
 // VZ: testing for wxTE_PROCESS_TAB shouldn't be done here - the control may
 //     have this style, yet choose not to process this particular TAB in which
@@ -652,18 +652,18 @@ gtk_window_key_press_callback( GtkWidget *widget,
 //     (with wxTE_PROCESS_TAB you have to call Navigate to get default
 //     navigation behaviour)
 #if wxUSE_TEXTCTRL
-         (! (win->HasFlag(wxTE_PROCESS_TAB) && win->IsKindOf(CLASSINFO(wxTextCtrl)) )) &&
+         (! (win->HasFlag(wxTE_PROCESS_TAB) && win->IsKindOf(CLASSINFO(wxTextCtrl)))) &&
 #endif
-         win->GetParent() && (win->GetParent()->HasFlag( wxTAB_TRAVERSAL)) )
+         win->GetParent() && (win->GetParent()->HasFlag(wxTAB_TRAVERSAL)))
     {
         wxNavigationKeyEvent new_event;
-        new_event.SetEventObject( win->GetParent() );
+        new_event.SetEventObject(win->GetParent());
         // GDK reports GDK_ISO_Left_Tab for SHIFT-TAB
-        new_event.SetDirection( (gdk_event->keyval == GDK_Tab) );
+        new_event.SetDirection((gdk_event->keyval == GDK_Tab));
         // CTRL-TAB changes the (parent) window, i.e. switch notebook page
-        new_event.SetWindowChange( (gdk_event->state & GDK_CONTROL_MASK) );
-        new_event.SetCurrentFocus( win );
-        ret = win->GetParent()->GetEventHandler()->ProcessEvent( new_event );
+        new_event.SetWindowChange((gdk_event->state & GDK_CONTROL_MASK));
+        new_event.SetCurrentFocus(win);
+        ret = win->GetParent()->GetEventHandler()->ProcessEvent(new_event);
     }
 
     return ret;
@@ -676,9 +676,9 @@ gtk_window_key_press_callback( GtkWidget *widget,
 
 extern "C" {
 static gboolean
-gtk_window_key_release_callback( GtkWidget *widget,
+gtk_window_key_release_callback(GtkWidget *widget,
                                  GdkEventKey *gdk_event,
-                                 wxWindowGTK *win )
+                                 wxWindowGTK *win)
 {
     DEBUG_MAIN_THREAD
 
@@ -690,8 +690,8 @@ gtk_window_key_release_callback( GtkWidget *widget,
     if (g_blockEventsOnDrag)
         return FALSE;
 
-    wxKeyEvent event( wxEVT_KEY_UP );
-    if ( !wxTranslateGTKKeyEventToWx(event, win, gdk_event) )
+    wxKeyEvent event(wxEVT_KEY_UP);
+    if (!wxTranslateGTKKeyEventToWx(event, win, gdk_event))
     {
         // unknown key pressed, ignore (the event would be useless anyhow)
         return FALSE;
@@ -722,8 +722,8 @@ static bool gs_isNewEvent;
 
 #if wxUSE_THREADS
 #   define DEBUG_MAIN_THREAD \
-        wxASSERT_MSG( !g_mainThreadLocked || !wxThread::IsMain(), \
-                      "GUI reentrancy detected" );
+        wxASSERT_MSG(!g_mainThreadLocked || !wxThread::IsMain(), \
+                      "GUI reentrancy detected");
 #else
 #   define DEBUG_MAIN_THREAD
 #endif
@@ -749,7 +749,7 @@ static long wxTranslateKeySymToWXKey(KeySym keysym, bool isChar)
 {
     long key_code;
 
-    switch ( keysym )
+    switch (keysym)
     {
         // Shift, Control and Alt don't generate the CHAR events at all
         case GDK_Shift_L:
@@ -1025,7 +1025,7 @@ static void wxFillOtherKeyEventFields(wxKeyEvent& event,
                                       wxWindowGTK *win,
                                       GdkEventKey *gdk_event)
 {
-    event.SetTimestamp( gdk_event->time );
+    event.SetTimestamp(gdk_event->time);
     event.SetId(win->GetId());
 
     event.m_shiftDown = (gdk_event->state & GDK_SHIFT_MASK) != 0;
@@ -1037,7 +1037,7 @@ static void wxFillOtherKeyEventFields(wxKeyEvent& event,
     // we represent it, for consistency with Windows, which really allows to
     // use Ctrl+Alt as a replacement for AltGr if this key is not present, as a
     // combination of these two modifiers.
-    if ( gdk_event->state & GDK_MOD5_MASK )
+    if (gdk_event->state & GDK_MOD5_MASK)
     {
         event.m_controlDown =
         event.m_altDown = true;
@@ -1060,7 +1060,7 @@ static void wxFillOtherKeyEventFields(wxKeyEvent& event,
     // among all platforms and fix the discrepancy here instead of adding
     // wxGTK-specific code to wxUIActionSimulator.
     const bool isPress = gdk_event->type == GDK_KEY_PRESS;
-    switch ( gdk_event->keyval )
+    switch (gdk_event->keyval)
     {
         case GDK_Shift_L:
         case GDK_Shift_R:
@@ -1088,7 +1088,7 @@ static void wxFillOtherKeyEventFields(wxKeyEvent& event,
     event.m_rawCode = (wxUint32) gdk_event->keyval;
     event.m_rawFlags = gdk_event->hardware_keycode;
 
-    event.SetEventObject( win );
+    event.SetEventObject(win);
 }
 
 static bool
@@ -1116,15 +1116,15 @@ wxTranslateGTKKeyEventToWx(wxKeyEvent& event,
 
     long key_code = wxTranslateKeySymToWXKey(keysym, false /* !isChar */);
 
-    if ( !key_code )
+    if (!key_code)
     {
         // do we have the translation or is it a plain ASCII character?
-        if ( (gdk_event->length == 1) || wxIsAsciiKeysym(keysym) )
+        if ((gdk_event->length == 1) || wxIsAsciiKeysym(keysym))
         {
             // we should use keysym if it is ASCII as X does some translations
             // like "I pressed while Control is down" => "Ctrl-I" == "TAB"
             // which we don't want here (but which we do use for OnChar())
-            if ( !wxIsAsciiKeysym(keysym) )
+            if (!wxIsAsciiKeysym(keysym))
             {
                 keysym = (KeySym)gdk_event->string[0];
             }
@@ -1169,17 +1169,17 @@ wxTranslateGTKKeyEventToWx(wxKeyEvent& event,
             key_code = 0;
 
             // but if we have cached information from the last KEY_PRESS
-            if ( gdk_event->type == GDK_KEY_RELEASE )
+            if (gdk_event->type == GDK_KEY_RELEASE)
             {
                 // then reuse it
-                if ( keysym == s_lastKeyPress.keysym )
+                if (keysym == s_lastKeyPress.keysym)
                 {
                     key_code = s_lastKeyPress.keycode;
                 }
             }
         }
 
-        if ( gdk_event->type == GDK_KEY_PRESS )
+        if (gdk_event->type == GDK_KEY_PRESS)
         {
             // remember it to be reused for KEY_UP event later
             s_lastKeyPress.keysym = keysym;
@@ -1190,14 +1190,14 @@ wxTranslateGTKKeyEventToWx(wxKeyEvent& event,
     wxLogTrace(TRACE_KEYS, wxT("\t-> wxKeyCode %ld"), key_code);
 
     // sending unknown key events doesn't really make sense
-    if ( !key_code )
+    if (!key_code)
         return false;
 
     event.m_keyCode = key_code;
 
 #if wxUSE_UNICODE
     event.m_uniChar = gdk_keyval_to_unicode(key_code);
-    if ( !event.m_uniChar && event.m_keyCode <= WXK_DELETE )
+    if (!event.m_uniChar && event.m_keyCode <= WXK_DELETE)
     {
         // Set Unicode key code to the ASCII equivalent for compatibility. E.g.
         // let RETURN generate the key event with both key and Unicode key
@@ -1224,11 +1224,11 @@ bool SendCharHookEvent(const wxKeyEvent& event, wxWindow *win)
     // to handle key events in all of its children unless the mouse is captured
     // in which case we consider that the keyboard should be "captured" too.
     // Fixme: Assume g_captureWindow always nullptr because it's static in gtk/window.cpp
-    //if ( !g_captureWindow )
+    //if (!g_captureWindow)
     {
         wxKeyEvent eventCharHook(wxEVT_CHAR_HOOK, event);
-        if ( win->HandleWindowEvent(eventCharHook)
-                && !event.IsNextEventAllowed() )
+        if (win->HandleWindowEvent(eventCharHook)
+                && !event.IsNextEventAllowed())
             return true;
     }
 
@@ -1244,19 +1244,19 @@ void AdjustCharEventKeyCodes(wxKeyEvent& event)
     const int code = event.m_keyCode;
 
     // Check for (a) above.
-    if ( event.ControlDown() )
+    if (event.ControlDown())
     {
         // We intentionally don't use isupper/lower() here, we really need
         // ASCII letters only as it doesn't make sense to translate any other
         // ones into this range which has only 26 slots.
-        if ( code >= 'a' && code <= 'z' )
+        if (code >= 'a' && code <= 'z')
             event.m_keyCode = code - 'a' + 1;
-        else if ( code >= 'A' && code <= 'Z' )
+        else if (code >= 'A' && code <= 'Z')
             event.m_keyCode = code - 'A' + 1;
 
 #if wxUSE_UNICODE
         // Adjust the Unicode equivalent in the same way too.
-        if ( event.m_keyCode != code )
+        if (event.m_keyCode != code)
             event.m_uniChar = event.m_keyCode;
 #endif // wxUSE_UNICODE
     }
@@ -1265,7 +1265,7 @@ void AdjustCharEventKeyCodes(wxKeyEvent& event)
     // Check for (b) from above.
     //
     // FIXME: Should we do it for key codes up to 255?
-    if ( !event.m_uniChar && code < WXK_DELETE )
+    if (!event.m_uniChar && code < WXK_DELETE)
         event.m_uniChar = code;
 #endif // wxUSE_UNICODE
 }
@@ -1284,9 +1284,9 @@ void AdjustCharEventKeyCodes(wxKeyEvent& event)
 
 extern "C" {
 static gboolean
-gtk_window_key_press_callback( GtkWidget *WXUNUSED(widget),
+gtk_window_key_press_callback(GtkWidget *WXUNUSED(widget),
                                GdkEventKey *gdk_event,
-                               wxWindow *win )
+                               wxWindow *win)
 {
     // Fixme: use DND of MadEdit could not link to wxGTK's
     //if (g_blockEventsOnDrag)
@@ -1294,14 +1294,14 @@ gtk_window_key_press_callback( GtkWidget *WXUNUSED(widget),
 
     wxPROCESS_EVENT_ONCE(GdkEventKey, gdk_event);
 
-    wxKeyEvent event( wxEVT_KEY_DOWN );
+    wxKeyEvent event(wxEVT_KEY_DOWN);
     bool ret = false;
     bool return_after_IM = false;
 
-    if( wxTranslateGTKKeyEventToWx(event, win, gdk_event) )
+    if (wxTranslateGTKKeyEventToWx(event, win, gdk_event))
     {
         // Send the CHAR_HOOK event first
-        if ( SendCharHookEvent(event, win) )
+        if (SendCharHookEvent(event, win))
         {
             // Don't do anything at all with this event any more.
             return TRUE;
@@ -1312,19 +1312,19 @@ gtk_window_key_press_callback( GtkWidget *WXUNUSED(widget),
         wxWindowGTK *ancestor = win;
         while (ancestor)
         {
-            int command = ancestor->GetAcceleratorTable()->GetCommand( event );
+            int command = ancestor->GetAcceleratorTable()->GetCommand(event);
             if (command != -1)
             {
-                wxCommandEvent menu_event( wxEVT_MENU, command );
-                ret = ancestor->HandleWindowEvent( menu_event );
+                wxCommandEvent menu_event(wxEVT_MENU, command);
+                ret = ancestor->HandleWindowEvent(menu_event);
 
-                if ( !ret )
+                if (!ret)
                 {
                     // if the accelerator wasn't handled as menu event, try
                     // it as button click (for compatibility with other
                     // platforms):
-                    wxCommandEvent button_event( wxEVT_BUTTON, command );
-                    ret = ancestor->HandleWindowEvent( button_event );
+                    wxCommandEvent button_event(wxEVT_BUTTON, command);
+                    ret = ancestor->HandleWindowEvent(button_event);
                 }
 
                 break;
@@ -1336,8 +1336,8 @@ gtk_window_key_press_callback( GtkWidget *WXUNUSED(widget),
 #endif // wxUSE_ACCEL
 
         // If not an accelerator, then emit KEY_DOWN event
-        if ( !ret )
-            ret = win->HandleWindowEvent( event );
+        if (!ret)
+            ret = win->HandleWindowEvent(event);
     }
     else
     {
@@ -1346,7 +1346,7 @@ gtk_window_key_press_callback( GtkWidget *WXUNUSED(widget),
         return_after_IM = true;
     }
 
-    if ( !ret )
+    if (!ret)
     {
         // Indicate that IM handling is in process by setting this pointer
         // (which will remain valid for all the code called during IM key
@@ -1360,7 +1360,7 @@ gtk_window_key_press_callback( GtkWidget *WXUNUSED(widget),
 
         win->m_imKeyEvent = nullptr;
 
-        if ( intercepted_by_IM )
+        if (intercepted_by_IM)
         {
             wxLogTrace(TRACE_KEYS, wxT("Key event intercepted by IM"));
             return TRUE;
@@ -1377,21 +1377,21 @@ gtk_window_key_press_callback( GtkWidget *WXUNUSED(widget),
         KeySym keysym = gdk_event->keyval;
         // Find key code for EVT_CHAR and EVT_CHAR_HOOK events
         long key_code = wxTranslateKeySymToWXKey(keysym, true /* isChar */);
-        if ( !key_code )
+        if (!key_code)
         {
-            if ( wxIsAsciiKeysym(keysym) )
+            if (wxIsAsciiKeysym(keysym))
             {
                 // ASCII key
                 key_code = (unsigned char)keysym;
             }
             // gdk_event->string is actually deprecated
-            else if ( gdk_event->length == 1 )
+            else if (gdk_event->length == 1)
             {
                 key_code = (unsigned char)gdk_event->string[0];
             }
         }
 
-        if ( key_code )
+        if (key_code)
         {
             wxKeyEvent eventChar(wxEVT_CHAR, event);
 
@@ -1418,9 +1418,9 @@ gtk_window_key_press_callback( GtkWidget *WXUNUSED(widget),
 
 extern "C" {
 static gboolean
-gtk_window_key_release_callback( GtkWidget * WXUNUSED(widget),
+gtk_window_key_release_callback(GtkWidget * WXUNUSED(widget),
                                  GdkEventKey *gdk_event,
-                                 wxWindowGTK *win )
+                                 wxWindowGTK *win)
 {
     // Fixme: use DND of MadEdit could not link to wxGTK's
     //if (g_blockEventsOnDrag)
@@ -1428,8 +1428,8 @@ gtk_window_key_release_callback( GtkWidget * WXUNUSED(widget),
 
     wxPROCESS_EVENT_ONCE(GdkEventKey, gdk_event);
 
-    wxKeyEvent event( wxEVT_KEY_UP );
-    if ( !wxTranslateGTKKeyEventToWx(event, win, gdk_event) )
+    wxKeyEvent event(wxEVT_KEY_UP);
+    if (!wxTranslateGTKKeyEventToWx(event, win, gdk_event))
     {
         // unknown key pressed, ignore (the event would be useless anyhow)
         return FALSE;
@@ -1479,7 +1479,7 @@ void MadEdit::ConnectToFixedKeyPressHandler()
     guint cnt=g_signal_handlers_disconnect_matched(connect_widget, GSignalMatchType(G_SIGNAL_MATCH_ID|G_SIGNAL_MATCH_DETAIL|G_SIGNAL_MATCH_DATA) , sid, det, 0, 0, this);
 
     //std::wcout<<int(bl)<<' '<<cnt<<std::endl;
-    if(bl==false || cnt==0) // error!!!
+    if (bl==false || cnt==0) // error!!!
     {
         std::wcout<<"cannot disconnect old key_press handler\n";
         return;
@@ -1488,7 +1488,7 @@ void MadEdit::ConnectToFixedKeyPressHandler()
     bl=g_signal_parse_name("key_release_event", G_OBJECT_TYPE(connect_widget), &sid, &det, TRUE);
     cnt=g_signal_handlers_disconnect_matched(connect_widget, GSignalMatchType(G_SIGNAL_MATCH_ID|G_SIGNAL_MATCH_DETAIL|G_SIGNAL_MATCH_DATA) , sid, det, 0, 0, this);
 
-    if(bl==false || cnt==0) // error!!!
+    if (bl==false || cnt==0) // error!!!
     {
         std::wcout<<"cannot disconnect old key_release handler\n";
         return;

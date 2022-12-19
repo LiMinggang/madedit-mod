@@ -231,7 +231,7 @@ wxString GetExecutablePath()
 		processinfo.processName	= nullptr;
 		processinfo.processAppSpec = &fsSpec;
 
-		GetProcessInformation( &procno , &processinfo )	;
+		GetProcessInformation(&procno , &processinfo)	;
 		path = wxMacFSSpec2MacFilename(&fsSpec);
 #else
 		wxString argv0 = wxTheApp->argv[0];
@@ -274,8 +274,8 @@ MadUniqueIDReserver::MadUniqueIDReserver()
 
 void EditUndo()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && ( !g_CurrentMadEdit->IsReadOnly() ) )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit && (!g_CurrentMadEdit->IsReadOnly()))
 	{
 		g_CurrentMadEdit->Undo();
 	}
@@ -285,8 +285,8 @@ void EditUndo()
 
 void EditRedo()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && ( !g_CurrentMadEdit->IsReadOnly() ) )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit && (!g_CurrentMadEdit->IsReadOnly()))
 	{
 		g_CurrentMadEdit->Redo();
 	}
@@ -296,8 +296,8 @@ void EditRedo()
 
 void EditCut()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit)
 	{
 		g_CurrentMadEdit->CutToClipboard();
 		g_CurrentMadEdit = nullptr;
@@ -306,8 +306,8 @@ void EditCut()
 
 void EditCopy()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit)
 	{
 		g_CurrentMadEdit->CopyToClipboard();
 		g_CurrentMadEdit = nullptr;
@@ -316,8 +316,8 @@ void EditCopy()
 
 void EditPaste()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit)
 	{
 		g_CurrentMadEdit->PasteFromClipboard();
 		g_CurrentMadEdit = nullptr;
@@ -326,8 +326,8 @@ void EditPaste()
 
 void EditDelete()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit)
 	{
 		g_CurrentMadEdit->Delete();
 		g_CurrentMadEdit = nullptr;
@@ -336,8 +336,8 @@ void EditDelete()
 
 void EditCutLine()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit)
 	{
 		g_CurrentMadEdit->CutLine();
 		g_CurrentMadEdit = nullptr;
@@ -346,8 +346,8 @@ void EditCutLine()
 
 void EditDeleteLine()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit)
 	{
 		g_CurrentMadEdit->DeleteLine();
 		g_CurrentMadEdit = nullptr;
@@ -356,8 +356,8 @@ void EditDeleteLine()
 
 void EditSelectAll()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit)
 	{
 		g_CurrentMadEdit->SelectAll();
 		g_CurrentMadEdit = nullptr;
@@ -366,8 +366,8 @@ void EditSelectAll()
 
 void EditStartEndSelction()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit)
 	{
 		g_CurrentMadEdit->StartEndSelction();
 		g_CurrentMadEdit = nullptr;
@@ -376,8 +376,8 @@ void EditStartEndSelction()
 
 void EditInsertTabChar()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit)
 	{
 		g_CurrentMadEdit->InsertTabChar();
 		g_CurrentMadEdit = nullptr;
@@ -386,8 +386,8 @@ void EditInsertTabChar()
 
 void EditInsertDateTime()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit)
 	{
 		g_CurrentMadEdit->InsertDateTime();
 		g_CurrentMadEdit = nullptr;
@@ -396,12 +396,12 @@ void EditInsertDateTime()
 
 void EditSortAscending()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode() )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode())
 	{
 		int begin, end;
-		g_CurrentMadEdit->GetSelectionLineId( begin, end );
-		g_CurrentMadEdit->SortLines( sfAscending, begin, end );
+		g_CurrentMadEdit->GetSelectionLineId(begin, end);
+		g_CurrentMadEdit->SortLines(sfAscending, begin, end);
 	}
 
 	g_CurrentMadEdit = nullptr;
@@ -409,12 +409,12 @@ void EditSortAscending()
 
 void EditSortDescending()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode() )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode())
 	{
 		int begin, end;
-		g_CurrentMadEdit->GetSelectionLineId( begin, end );
-		g_CurrentMadEdit->SortLines( sfDescending, begin, end );
+		g_CurrentMadEdit->GetSelectionLineId(begin, end);
+		g_CurrentMadEdit->SortLines(sfDescending, begin, end);
 	}
 
 	g_CurrentMadEdit = nullptr;
@@ -422,12 +422,12 @@ void EditSortDescending()
 
 void EditSortAscendingCase()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode() )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode())
 	{
 		int begin, end;
-		g_CurrentMadEdit->GetSelectionLineId( begin, end );
-		g_CurrentMadEdit->SortLines( sfAscending | sfCaseSensitive, begin, end );
+		g_CurrentMadEdit->GetSelectionLineId(begin, end);
+		g_CurrentMadEdit->SortLines(sfAscending | sfCaseSensitive, begin, end);
 	}
 
 	g_CurrentMadEdit = nullptr;
@@ -435,12 +435,12 @@ void EditSortAscendingCase()
 
 void EditSortDescendingCase()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode() )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode())
 	{
 		int begin, end;
-		g_CurrentMadEdit->GetSelectionLineId( begin, end );
-		g_CurrentMadEdit->SortLines( sfDescending | sfCaseSensitive, begin, end );
+		g_CurrentMadEdit->GetSelectionLineId(begin, end);
+		g_CurrentMadEdit->SortLines(sfDescending | sfCaseSensitive, begin, end);
 	}
 
 	g_CurrentMadEdit = nullptr;
@@ -448,26 +448,26 @@ void EditSortDescendingCase()
 
 void EditSortByOptions()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode() )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode())
 	{
 		wxConfigBase *m_Config = wxConfigBase::Get(false);
 		wxString oldpath = m_Config->GetPath();
-		m_Config->SetPath( wxT( "/MadEdit" ) );
+		m_Config->SetPath(wxT("/MadEdit"));
 		int order;
 		bool cs, num, rem;
-		m_Config->Read( wxT( "SortOrder" ), &order, sfAscending );
-		m_Config->Read( wxT( "SortCaseSensitive" ), &cs, false );
-		m_Config->Read( wxT( "SortNumeric" ), &num, false );
-		m_Config->Read( wxT( "SortRemoveDup" ), &rem, false );
-		m_Config->SetPath( oldpath );
+		m_Config->Read(wxT("SortOrder"), &order, sfAscending);
+		m_Config->Read(wxT("SortCaseSensitive"), &cs, false);
+		m_Config->Read(wxT("SortNumeric"), &num, false);
+		m_Config->Read(wxT("SortRemoveDup"), &rem, false);
+		m_Config->SetPath(oldpath);
 		MadSortFlags flags = order |
-							 ( cs ? sfCaseSensitive : 0 ) |
-							 ( num ? sfNumericSort : 0 ) |
-							 ( rem ? sfRemoveDuplicate : 0 ) ;
+							 (cs ? sfCaseSensitive : 0) |
+							 (num ? sfNumericSort : 0) |
+							 (rem ? sfRemoveDuplicate : 0) ;
 		int begin, end;
-		g_CurrentMadEdit->GetSelectionLineId( begin, end );
-		g_CurrentMadEdit->SortLines( flags, begin, end );
+		g_CurrentMadEdit->GetSelectionLineId(begin, end);
+		g_CurrentMadEdit->SortLines(flags, begin, end);
 	}
 
 	g_CurrentMadEdit = nullptr;
@@ -475,8 +475,8 @@ void EditSortByOptions()
 
 void EditSortOptions(wxWindow* parent)
 {
-	if( g_CurrentMadEdit == nullptr || g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit->IsHexMode() )
+	if (g_CurrentMadEdit == nullptr || g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit->IsHexMode())
 	{
 		g_CurrentMadEdit = nullptr;
 		return;
@@ -484,106 +484,106 @@ void EditSortOptions(wxWindow* parent)
 	wxConfigBase *m_Config = wxConfigBase::Get(false);
 	MadSortDialog dialog(parent);
 	wxString oldpath = m_Config->GetPath();
-	m_Config->SetPath( wxT( "/MadEdit" ) );
+	m_Config->SetPath(wxT("/MadEdit"));
 	int order;
 	bool cs, num, rem;
-	m_Config->Read( wxT( "SortOrder" ), &order, sfAscending );
-	dialog.WxRadioBoxOrder->SetSelection( order );
-	m_Config->Read( wxT( "SortCaseSensitive" ), &cs, false );
-	dialog.WxCheckBoxCase->SetValue( cs );
-	m_Config->Read( wxT( "SortNumeric" ), &num, false );
-	dialog.WxCheckBoxNumeric->SetValue( num );
-	m_Config->Read( wxT( "SortRemoveDup" ), &rem, false );
-	dialog.WxCheckBoxRemoveDup->SetValue( rem );
+	m_Config->Read(wxT("SortOrder"), &order, sfAscending);
+	dialog.WxRadioBoxOrder->SetSelection(order);
+	m_Config->Read(wxT("SortCaseSensitive"), &cs, false);
+	dialog.WxCheckBoxCase->SetValue(cs);
+	m_Config->Read(wxT("SortNumeric"), &num, false);
+	dialog.WxCheckBoxNumeric->SetValue(num);
+	m_Config->Read(wxT("SortRemoveDup"), &rem, false);
+	dialog.WxCheckBoxRemoveDup->SetValue(rem);
 	// Hide Modaless Dialog
 	//HideModalessDialogs();
 
-	if( dialog.ShowModal() == wxID_OK )
+	if (dialog.ShowModal() == wxID_OK)
 	{
 		order = dialog.WxRadioBoxOrder->GetSelection();
 		cs = dialog.WxCheckBoxCase->GetValue();
 		num = dialog.WxCheckBoxNumeric->GetValue();
 		rem = dialog.WxCheckBoxRemoveDup->GetValue();
-		m_Config->Write( wxT( "SortOrder" ), order );
-		m_Config->Write( wxT( "SortCaseSensitive" ), cs );
-		m_Config->Write( wxT( "SortNumeric" ), num );
-		m_Config->Write( wxT( "SortRemoveDup" ), rem );
+		m_Config->Write(wxT("SortOrder"), order);
+		m_Config->Write(wxT("SortCaseSensitive"), cs);
+		m_Config->Write(wxT("SortNumeric"), num);
+		m_Config->Write(wxT("SortRemoveDup"), rem);
 		int flags = order |
-					( cs ? sfCaseSensitive : 0 ) |
-					( num ? sfNumericSort : 0 ) |
-					( rem ? sfRemoveDuplicate : 0 ) ;
+					(cs ? sfCaseSensitive : 0) |
+					(num ? sfNumericSort : 0) |
+					(rem ? sfRemoveDuplicate : 0) ;
 		int begin, end;
-		g_CurrentMadEdit->GetSelectionLineId( begin, end );
-		g_CurrentMadEdit->SortLines( flags, begin, end );
+		g_CurrentMadEdit->GetSelectionLineId(begin, end);
+		g_CurrentMadEdit->SortLines(flags, begin, end);
 	}
 
-	m_Config->SetPath( oldpath );
+	m_Config->SetPath(oldpath);
 	g_CurrentMadEdit = nullptr;
 }
 
 void EditCopyAsHexString()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit)
 	{
-		g_CurrentMadEdit->CopyAsHexString( false );
+		g_CurrentMadEdit->CopyAsHexString(false);
 		g_CurrentMadEdit = nullptr;
 	}
 }
 
 void EditCopyAsHexStringWithSpace()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit)
 	{
-		g_CurrentMadEdit->CopyAsHexString( true );
+		g_CurrentMadEdit->CopyAsHexString(true);
 		g_CurrentMadEdit = nullptr;
 	}
 }
 
 void EditCopyRevertHex()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit)
 	{
-		static wxString strDelimiters = wxT( " .,?!@#\t$%^&*()-=_+[]{}\\|;:\"'`<>/~" );
-		wxString str = wxGetTextFromUser( _( "Delimiters:" ), _( "Revert Hex String" ), strDelimiters );
+		static wxString strDelimiters = wxT(" .,?!@#\t$%^&*()-=_+[]{}\\|;:\"'`<>/~");
+		wxString str = wxGetTextFromUser(_("Delimiters:"), _("Revert Hex String"), strDelimiters);
 
-		if( !str.IsEmpty() )
+		if (!str.IsEmpty())
 		{
 			strDelimiters = str;
 		}
 
-		g_CurrentMadEdit->CopyRevertHex( str );
+		g_CurrentMadEdit->CopyRevertHex(str);
 		g_CurrentMadEdit = nullptr;
 	}
 }
 
 void EditIncIndent()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit)
 	{
-		g_CurrentMadEdit->IncreaseDecreaseIndent( true );
+		g_CurrentMadEdit->IncreaseDecreaseIndent(true);
 		g_CurrentMadEdit = nullptr;
 	}
 }
 void EditDecIndent()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit)
 	{
-		g_CurrentMadEdit->IncreaseDecreaseIndent( false );
+		g_CurrentMadEdit->IncreaseDecreaseIndent(false);
 		g_CurrentMadEdit = nullptr;
 	}
 }
 
 void EditComment()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit)
 	{
-		g_CurrentMadEdit->CommentUncomment( true );
+		g_CurrentMadEdit->CommentUncomment(true);
 
 		g_CurrentMadEdit = nullptr;
 	}
@@ -591,18 +591,18 @@ void EditComment()
 
 void EditUncomment()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit)
 	{
-		g_CurrentMadEdit->CommentUncomment( false );
+		g_CurrentMadEdit->CommentUncomment(false);
 		g_CurrentMadEdit = nullptr;
 	}
 }
 
 void EditWordWrapToNewLine()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit)
 	{
 		g_CurrentMadEdit->ConvertWordWrapToNewLine();
 		g_CurrentMadEdit = nullptr;
@@ -610,8 +610,8 @@ void EditWordWrapToNewLine()
 }
 void EditNewLineToWordWrap()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit)
 	{
 		g_CurrentMadEdit->ConvertNewLineToWordWrap();
 		g_CurrentMadEdit = nullptr;
@@ -620,8 +620,8 @@ void EditNewLineToWordWrap()
 
 void EditToUpperCase()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit)
 	{
 		g_CurrentMadEdit->ToUpperCase();
 		g_CurrentMadEdit = nullptr;
@@ -630,8 +630,8 @@ void EditToUpperCase()
 
 void EditToLowerCase()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit)
 	{
 		g_CurrentMadEdit->ToLowerCase();
 		g_CurrentMadEdit = nullptr;
@@ -640,8 +640,8 @@ void EditToLowerCase()
 
 void EditInvertCase()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit)
 	{
 		g_CurrentMadEdit->InvertCase();
 		g_CurrentMadEdit = nullptr;
@@ -650,8 +650,8 @@ void EditInvertCase()
 
 void EditCapitalize()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit)
 	{
 		g_CurrentMadEdit->Capitalize();
 		g_CurrentMadEdit = nullptr;
@@ -660,8 +660,8 @@ void EditCapitalize()
 
 void EditToHalfWidth()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit)
 	{
 		g_CurrentMadEdit->ToHalfWidth();
 		g_CurrentMadEdit = nullptr;
@@ -670,41 +670,41 @@ void EditToHalfWidth()
 
 void EditToHalfWidthByOptions(wxWindow* parent)
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit == nullptr ) { return; }
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit == nullptr) { return; }
 
 	static wxArrayInt selections;
 	static bool inited = false;
 
-	if( !inited )
+	if (!inited)
 	{
-		selections.Add( 0 );
-		selections.Add( 1 );
-		selections.Add( 2 );
-		selections.Add( 3 );
+		selections.Add(0);
+		selections.Add(1);
+		selections.Add(2);
+		selections.Add(3);
 		inited = true;
 	}
 
-	wxString choices[4] = { _( "ASCII characters" ), _( "Japanese characters" ),
-							_( "Korean characters" ), _( "other characters" )
+	wxString choices[4] = { _("ASCII characters"), _("Japanese characters"),
+							_("Korean characters"), _("other characters")
 						  };
 #if (wxMAJOR_VERSION == 2)
-	size_t sels = wxGetSelectedChoices( selections,
-										_( "Choose the characters you want to convert:" ), _( "To Halfwidth by Options..." ),
+	size_t sels = wxGetSelectedChoices(selections,
+										_("Choose the characters you want to convert:"), _("To Halfwidth by Options..."),
 										4, choices, parent);
 #else
-	int sels = wxGetSelectedChoices( selections,
-									 _( "Choose the characters you want to convert:" ), _( "To Halfwidth by Options..." ),
+	int sels = wxGetSelectedChoices(selections,
+									 _("Choose the characters you want to convert:"), _("To Halfwidth by Options..."),
 									 4, choices, parent);
 #endif
 
-	if( sels > 0 )
+	if (sels > 0)
 	{
 		bool ascii = false, japanese = false, korean = false, other = false;
 
-		for( size_t i = 0; i < (size_t)sels; ++i )
+		for(size_t i = 0; i < (size_t)sels; ++i)
 		{
-			switch( selections[i] )
+			switch(selections[i])
 			{
 			case 0: ascii = true; break;
 
@@ -716,7 +716,7 @@ void EditToHalfWidthByOptions(wxWindow* parent)
 			}
 		}
 
-		g_CurrentMadEdit->ToHalfWidth( ascii, japanese, korean, other );
+		g_CurrentMadEdit->ToHalfWidth(ascii, japanese, korean, other);
 	}
 
 	g_CurrentMadEdit = nullptr;
@@ -724,8 +724,8 @@ void EditToHalfWidthByOptions(wxWindow* parent)
 
 void EditToFullWidth()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit)
 	{
 		g_CurrentMadEdit->ToFullWidth();
 		g_CurrentMadEdit = nullptr;
@@ -734,40 +734,40 @@ void EditToFullWidth()
 
 void EditToFullWidthByOptions(wxWindow* parent)
 {
-	if(( g_CurrentMadEdit == g_ActiveMadEdit ) ||( g_CurrentMadEdit == nullptr ) ) return;
+	if ((g_CurrentMadEdit == g_ActiveMadEdit) ||(g_CurrentMadEdit == nullptr)) return;
 
 	static wxArrayInt selections;
 	static bool inited = false;
 
-	if( !inited )
+	if (!inited)
 	{
-		selections.Add( 0 );
-		selections.Add( 1 );
-		selections.Add( 2 );
-		selections.Add( 3 );
+		selections.Add(0);
+		selections.Add(1);
+		selections.Add(2);
+		selections.Add(3);
 		inited = true;
 	}
 
-	wxString choices[4] = { _( "ASCII characters" ), _( "Japanese characters" ),
-							_( "Korean characters" ), _( "other characters" )
+	wxString choices[4] = { _("ASCII characters"), _("Japanese characters"),
+							_("Korean characters"), _("other characters")
 						  };
 #if (wxMAJOR_VERSION == 2)
-	size_t sels = wxGetSelectedChoices( selections,
-										_( "Choose the characters you want to convert:" ), _( "To Fullwidth by Options..." ),
-										4, choices, parent );
+	size_t sels = wxGetSelectedChoices(selections,
+										_("Choose the characters you want to convert:"), _("To Fullwidth by Options..."),
+										4, choices, parent);
 #else
-	int sels = wxGetSelectedChoices( selections,
-									 _( "Choose the characters you want to convert:" ), _( "To Fullwidth by Options..." ),
-									 4, choices, parent );
+	int sels = wxGetSelectedChoices(selections,
+									 _("Choose the characters you want to convert:"), _("To Fullwidth by Options..."),
+									 4, choices, parent);
 #endif
 
-	if( sels > 0 )
+	if (sels > 0)
 	{
 		bool ascii = false, japanese = false, korean = false, other = false;
 
-		for( size_t i = 0; i < (size_t)sels; ++i )
+		for(size_t i = 0; i < (size_t)sels; ++i)
 		{
-			switch( selections[i] )
+			switch(selections[i])
 			{
 			case 0: ascii = true; break;
 
@@ -779,7 +779,7 @@ void EditToFullWidthByOptions(wxWindow* parent)
 			}
 		}
 
-		g_CurrentMadEdit->ToFullWidth( ascii, japanese, korean, other );
+		g_CurrentMadEdit->ToFullWidth(ascii, japanese, korean, other);
 	}
 
 	g_CurrentMadEdit = nullptr;
@@ -787,8 +787,8 @@ void EditToFullWidthByOptions(wxWindow* parent)
 
 void EditTabToSpace()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit)
 	{
 		g_CurrentMadEdit->ConvertTabToSpace();
 		g_CurrentMadEdit = nullptr;
@@ -797,8 +797,8 @@ void EditTabToSpace()
 }
 void EditSpaceToTab()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit)
 	{
 		g_CurrentMadEdit->ConvertSpaceToTab();
 		g_CurrentMadEdit = nullptr;
@@ -807,8 +807,8 @@ void EditSpaceToTab()
 
 void EditTrimTrailingSpaces()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode() )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode())
 	{
 		g_CurrentMadEdit->TrimTrailingSpaces();
 	}
@@ -818,8 +818,8 @@ void EditTrimTrailingSpaces()
 
 void EditTrimLeadingSpaces()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode() )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode())
 	{
 		g_CurrentMadEdit->TrimLeadingSpaces();
 	}
@@ -829,8 +829,8 @@ void EditTrimLeadingSpaces()
 
 void EditDeleteEmptyLines()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode() )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode())
 	{
 		g_CurrentMadEdit->DeleteEmptyLines();
 	}
@@ -840,8 +840,8 @@ void EditDeleteEmptyLines()
 
 void EditDeleteEmptyLinesWithSpaces()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode() )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode())
 	{
 		g_CurrentMadEdit->DeleteEmptyLinesWithSpaces();
 	}
@@ -851,8 +851,8 @@ void EditDeleteEmptyLinesWithSpaces()
 
 void EditJoinLines()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode() )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode())
 	{
 		g_CurrentMadEdit->JoinLines();
 	}
@@ -862,22 +862,22 @@ void EditJoinLines()
 
 void EditInsertNumbers(wxWindow* parent)
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && g_CurrentMadEdit->IsColumnMode() )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit && g_CurrentMadEdit->IsColumnMode())
 	{
 		// Hide Modaless Dialog
 		//HideModalessDialogs();
 
-		if( g_MadNumberDlg == nullptr ) { g_MadNumberDlg = new MadNumberDlg( parent ); }
+		if (g_MadNumberDlg == nullptr) { g_MadNumberDlg = new MadNumberDlg(parent); }
 
-		if( g_MadNumberDlg->ShowModal() == wxID_OK )
+		if (g_MadNumberDlg->ShowModal() == wxID_OK)
 		{
 			MadNumberingStepType numStepType = mnstLinear;
 			MadNumberFormat numFormat = nfDEC;
 			MadNumberAlign numAlign = naLeft;
 			int sel = g_MadNumberDlg->WxChoiceNumberStepType->GetSelection();
 
-			switch( sel )
+			switch(sel)
 			{
 			case 1: numStepType = mnstExponential; break;
 
@@ -886,7 +886,7 @@ void EditInsertNumbers(wxWindow* parent)
 
 			sel = g_MadNumberDlg->WxChoiceFormat->GetSelection();
 
-			switch( sel )
+			switch(sel)
 			{
 			case 1:
 				{
@@ -912,7 +912,7 @@ void EditInsertNumbers(wxWindow* parent)
 
 			sel = g_MadNumberDlg->WxChoiceAlign->GetSelection();
 
-			switch( sel )
+			switch (sel)
 			{
 			case 1:
 				{
@@ -925,19 +925,19 @@ void EditInsertNumbers(wxWindow* parent)
 			}
 
 			long initialNum = 0, numStep = 0, totalChar = 0;
-			g_MadNumberDlg->WxEditNumberOfChars->GetValue().ToLong( &totalChar );
-			g_MadNumberDlg->WxEditNumberingStep->GetValue().ToLong( &numStep );
-			g_MadNumberDlg->WxEditInitialNumber->GetValue().ToLong( &initialNum );
+			g_MadNumberDlg->WxEditNumberOfChars->GetValue().ToLong(&totalChar);
+			g_MadNumberDlg->WxEditNumberingStep->GetValue().ToLong(&numStep);
+			g_MadNumberDlg->WxEditInitialNumber->GetValue().ToLong(&initialNum);
 			wxString prefix, postfix;
 
-			if( g_MadNumberDlg->WxCheckPrefix->GetValue() )
+			if (g_MadNumberDlg->WxCheckPrefix->GetValue())
 			{ prefix = g_MadNumberDlg->WxEditPrefix->GetValue(); }
 
-			if( g_MadNumberDlg->WxCheckPostfix->GetValue() )
+			if (g_MadNumberDlg->WxCheckPostfix->GetValue())
 			{ postfix = g_MadNumberDlg->WxEditPostfix->GetValue(); }
 
-			g_CurrentMadEdit->InsertIncrementalNumber( initialNum, numStep, totalChar, numStepType, numFormat, numAlign, g_MadNumberDlg->WxPadChar->GetValue(), prefix, postfix );
-			g_CurrentMadEdit->Refresh( false );
+			g_CurrentMadEdit->InsertIncrementalNumber(initialNum, numStep, totalChar, numStepType, numFormat, numAlign, g_MadNumberDlg->WxPadChar->GetValue(), prefix, postfix);
+			g_CurrentMadEdit->Refresh(false);
 		}
 	}
 
@@ -946,8 +946,8 @@ void EditInsertNumbers(wxWindow* parent)
 
 void EditColumnAlignLeft()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode() )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode())
 	{
 		g_CurrentMadEdit->ColumnAlignLeft();
 	}
@@ -957,8 +957,8 @@ void EditColumnAlignLeft()
 
 void EditColumnAlignRight()
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode() )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode())
 	{
 		g_CurrentMadEdit->ColumnAlignRight();
 	}
@@ -966,67 +966,67 @@ void EditColumnAlignRight()
 	g_CurrentMadEdit = nullptr;
 }
 
-void EditSpellCheck( wxCommandEvent& event )
+void EditSpellCheck(wxCommandEvent& event)
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode() )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit && !g_CurrentMadEdit->IsHexMode())
 	{
-		g_CurrentMadEdit->ReplaceWordFromCaretPos( g_SpellSuggestions[event.GetId() - menuSpellOption1] );
+		g_CurrentMadEdit->ReplaceWordFromCaretPos(g_SpellSuggestions[event.GetId() - menuSpellOption1]);
 	}
 	g_CurrentMadEdit = nullptr;
 }
 
-void ToolsMadScriptList( wxCommandEvent& event )
+void ToolsMadScriptList(wxCommandEvent& event)
 {
-	if( g_CurrentMadEdit == g_ActiveMadEdit ) return;
-	if( g_CurrentMadEdit != nullptr )
+	if (g_CurrentMadEdit == g_ActiveMadEdit) return;
+	if (g_CurrentMadEdit != nullptr)
 	{ 
-		wxString scriptdir = g_MadEditAppDir + wxT( "scripts" ) + wxFILE_SEP_PATH;
+		wxString scriptdir = g_MadEditAppDir + wxT("scripts") + wxFILE_SEP_PATH;
 		int menuId = event.GetId();
-		wxString filename = g_Menu_MadMacro_Scripts->GetLabelText( menuId ) + wxT( ".mpy" );
+		wxString filename = g_Menu_MadMacro_Scripts->GetLabelText(menuId) + wxT(".mpy");
 		wxString scripfile = scriptdir + filename;
-		if(!wxFileExists(scripfile)) scripfile = g_MadEditHomeDir + wxT( "scripts" ) + wxFILE_SEP_PATH + filename;
-		if(!wxFileExists(scripfile)) 
+		if (!wxFileExists(scripfile)) scripfile = g_MadEditHomeDir + wxT("scripts") + wxFILE_SEP_PATH + filename;
+		if (!wxFileExists(scripfile)) 
 		{
 			scripfile = 
 #if defined (DATA_DIR)
-				wxT( DATA_DIR"/madedit-mod/scripts/" ) +
+				wxT(DATA_DIR"/madedit-mod/scripts/") +
 #else
-				wxT( "/usr/share/madedit-mod/scripts/" ) +
+				wxT("/usr/share/madedit-mod/scripts/") +
 #endif
 			filename;
 		}
 
-		wxTextFile scriptfile( scripfile );
-		scriptfile.Open( wxConvFile );
+		wxTextFile scriptfile(scripfile);
+		scriptfile.Open(wxConvFile);
 
-		if( scriptfile.IsOpened() )
+		if (scriptfile.IsOpened())
 		{
-			if( !g_EmbeddedPython )
+			if (!g_EmbeddedPython)
 			{
 				try
 				{
 					g_EmbeddedPython = new EmbeddedPython();
 				}
-				catch( std::bad_alloc & )
+				catch(std::bad_alloc &)
 				{
-					MadMessageBox( _( "Memory allocation failed" ), _( "Error" ),  wxOK | wxICON_ERROR );
+					MadMessageBox(_("Memory allocation failed"), _("Error"),  wxOK | wxICON_ERROR);
 				}
 			}
 
-			if( g_EmbeddedPython )
+			if (g_EmbeddedPython)
 			{
-				wxString str = scriptfile.GetFirstLine() + wxT( "\n" );
+				wxString str = scriptfile.GetFirstLine() + wxT("\n");
 
-				for( ; !scriptfile.Eof(); )
+				for(; !scriptfile.Eof();)
 				{
-					str << scriptfile.GetNextLine() << wxT( "\n" );
+					str << scriptfile.GetNextLine() << wxT("\n");
 				}
 
-				if( str.IsNull() == false )
+				if (str.IsNull() == false)
 				{
 					g_MainFrame->SetMacroRunning();
-					g_EmbeddedPython->exec( std::string((const char *)(str.ToUTF8().data())) );
+					g_EmbeddedPython->exec(std::string((const char *)(str.ToUTF8().data())));
 					g_MainFrame->SetMacroStopped();
 				}
 			}

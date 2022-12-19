@@ -42,7 +42,7 @@
 using std::vector;
 //using std::set;
 
-WX_DECLARE_HASH_SET( wxString, wxStringHash, wxStringEqual, MadKeywordSet );
+WX_DECLARE_HASH_SET(wxString, wxStringHash, wxStringEqual, MadKeywordSet);
 
 
 enum MadFontStyle { fsNone = 0, fsBold = 1, fsItalic = 2, fsUnderline = 4, fsStrikeOut = 8 };
@@ -53,9 +53,9 @@ struct MadAttributes    // font attributes
 	wxColour color;        // text color
 	wxColour bgcolor;      // background color
 	MadFontStyles style;   // style
-	MadAttributes(): color( wxNullColour ), bgcolor( wxNullColour ), style( fsNone )
+	MadAttributes(): color(wxNullColour), bgcolor(wxNullColour), style(fsNone)
 	{}
-	MadAttributes(const MadAttributes & attr): color( attr.color ), bgcolor( attr.bgcolor ), style( attr.style )
+	MadAttributes(const MadAttributes & attr): color(attr.color), bgcolor(attr.bgcolor), style(attr.style)
 	{}
 };
 
@@ -65,7 +65,7 @@ struct MadSyntaxRange
 	wxString begin;
 	wxString end;
 	wxColour bgcolor;
-	MadSyntaxRange(): id( 0 ), bgcolor( wxNullColour )
+	MadSyntaxRange(): id(0), bgcolor(wxNullColour)
 	{}
 	MadSyntaxRange(const MadSyntaxRange& synRange)
 		:id(synRange.id), begin(synRange.begin), end(synRange.end), bgcolor(synRange.bgcolor)
@@ -79,9 +79,9 @@ struct MadSyntaxKeyword
 	vector < int > m_InRange;
 	MadKeywordSet m_Keywords;
 	bool m_CaseSensitive;
-	MadSyntaxKeyword() : m_CaseSensitive( false )
+	MadSyntaxKeyword() : m_CaseSensitive(false)
 	{}
-	MadSyntaxKeyword(const MadSyntaxKeyword & keyword) : m_CaseSensitive( keyword.m_CaseSensitive ),
+	MadSyntaxKeyword(const MadSyntaxKeyword & keyword) : m_CaseSensitive(keyword.m_CaseSensitive),
 		m_Attr(keyword.m_Attr), m_InRange(keyword.m_InRange), m_Keywords(keyword.m_Keywords)
 	{}
 };
@@ -170,90 +170,90 @@ private: // syntax files manager
 	static bool s_Loaded;
 	static void LoadSyntaxFiles();
 public:
-	static void SetAttributeFilePath( const wxString &path ) { // where to load/save .clr files
+	static void SetAttributeFilePath(const wxString &path) { // where to load/save .clr files
 		s_AttributeFilePath = path;
 	}
-	static void AddSyntaxFilesPath( const wxString &path );
+	static void AddSyntaxFilesPath(const wxString &path);
 	static size_t GetSyntaxCount();
-	static wxString GetSyntaxTitle( size_t index ); //index must < GetSyntaxCount()
-	static wxString GetSyntaxFile( size_t index ); //index must < GetSyntaxCount()
-	static wxString GetSyntaxFileByTitle( const wxString &title );
-	static wxString GetAttributeFileByTitle( const wxString &title );
+	static wxString GetSyntaxTitle(size_t index); //index must < GetSyntaxCount()
+	static wxString GetSyntaxFile(size_t index); //index must < GetSyntaxCount()
+	static wxString GetSyntaxFileByTitle(const wxString &title);
+	static wxString GetAttributeFileByTitle(const wxString &title);
 
 	// if title was not found it will return a default MadSyntax obj
-	static MadSyntax* GetSyntaxByTitle( const wxString &title );
+	static MadSyntax* GetSyntaxByTitle(const wxString &title);
 
 	// below functions will return NULL if not found
-	static MadSyntax* GetSyntaxByExt( const wxString &ext );
-	static MadSyntax* GetSyntaxByFirstLine( wxByte *data, int size );
-	static MadSyntax* GetSyntaxByFileName( const wxString &filename );
+	static MadSyntax* GetSyntaxByExt(const wxString &ext);
+	static MadSyntax* GetSyntaxByFirstLine(wxByte *data, int size);
+	static MadSyntax* GetSyntaxByFileName(const wxString &filename);
 
 	// .sch files management functions
 	static size_t GetSchemeCount();
-	static wxString GetSchemeName( size_t index );
-	static wxString GetSchemeFileByName( const wxString &schname, MadSyntax *default_syn, bool &star );
-	static bool LoadScheme( const wxString &schname, MadSyntax *syn ); // apply scheme to syn
-	static bool SaveScheme( const wxString &schname, MadSyntax *syn ); // save scheme from syn
-	static bool DeleteScheme( const wxString &schname );
+	static wxString GetSchemeName(size_t index);
+	static wxString GetSchemeFileByName(const wxString &schname, MadSyntax *default_syn, bool &star);
+	static bool LoadScheme(const wxString &schname, MadSyntax *syn); // apply scheme to syn
+	static bool SaveScheme(const wxString &schname, MadSyntax *syn); // save scheme from syn
+	static bool DeleteScheme(const wxString &schname);
 	shared_ptr<PersonalDictionary>& GetSyntaxDictionary() { return m_SynAttr->m_SyntaxKeywordDict; }
 
 private:
 	friend class MadEdit;
 	friend class MadLines;
 
-	void  ParseSyntax( const wxString &filename, bool reParse = false );
-	MadAttributes *GetAttributes( const wxString &name );
-	MadSyntaxKeyword *GetCustomKeyword( const wxString &name );
+	void  ParseSyntax(const wxString &filename, bool reParse = false);
+	MadAttributes *GetAttributes(const wxString &name);
+	MadSyntaxKeyword *GetCustomKeyword(const wxString &name);
 
-	void  SetColor( const wxString &value, wxColour &c );
-	void  SetStyle( const wxString &value, MadFontStyles &fs );
-	void  SetInRange( const wxString &value, vector < int > &ir );
+	void  SetColor(const wxString &value, wxColour &c);
+	void  SetStyle(const wxString &value, MadFontStyles &fs);
+	void  SetInRange(const wxString &value, vector < int > &ir);
 
 public:
 	shared_ptr< MadSyntaxAttributes > m_SynAttr;
 
 public:
-	MadSyntax( const wxString &filename, bool loadAttr = true, bool reParse = false );
-	explicit MadSyntax( bool loadAttr = true );
+	MadSyntax(const wxString &filename, bool loadAttr = true, bool reParse = false);
+	explicit MadSyntax(bool loadAttr = true);
 	~MadSyntax();
 
-	void LoadFromFile( const wxString &filename, bool reParse = false );
+	void LoadFromFile(const wxString &filename, bool reParse = false);
 	void Reset();
-	void LoadAttributes( const wxString &file = wxEmptyString ); // if file IsEmpty, load from default .att file
-	void SaveAttributes( const wxString &file = wxEmptyString ); // if file IsEmpty, save to default .att file
-	void AssignAttributes( MadSyntax *syn, bool add = false ); // assign attributes from syn
+	void LoadAttributes(const wxString &file = wxEmptyString); // if file IsEmpty, load from default .att file
+	void SaveAttributes(const wxString &file = wxEmptyString); // if file IsEmpty, save to default .att file
+	void AssignAttributes(MadSyntax *syn, bool add = false); // assign attributes from syn
 	void DuplicateAttributes();
 
-	bool IsInRange( int range, vector < int >&InRangeVector );
-	MadSyntaxRange *GetSyntaxRange( int rangeid );
+	bool IsInRange(int range, vector < int >&InRangeVector);
+	MadSyntaxRange *GetSyntaxRange(int rangeid);
 
-	MadAttributes *GetAttributes( MadAttributeElement ae ) {
+	MadAttributes *GetAttributes(MadAttributeElement ae) {
 		return m_SynAttr->m_SystemAttributes + ae;
 	}
-	static wxString GetAttributeName( MadAttributeElement ae );
+	static wxString GetAttributeName(MadAttributeElement ae);
 
-	static bool IsSpace( ucs4_t uc ) {
-		return ( uc == 0x20 || ( uc <= 0x0D && uc >= 0x09 ) );
+	static bool IsSpace(ucs4_t uc) {
+		return (uc == 0x20 || (uc <= 0x0D && uc >= 0x09));
 	}
 
-	bool IsDelimiter( ucs4_t uc ) {
+	bool IsDelimiter(ucs4_t uc) {
 		//return ((uc < 0x100) && m_Delimiter.Find(wxChar(uc))>=0);
-		//return ( ( uc < 0x100 ) && ( m_Delimiter.find( uc ) != m_Delimiter.end() ) );
-		return ( ( uc < 0x100 ) && (m_SynAttr->m_Delimiter[ uc ] != 0 ) );
+		//return ((uc < 0x100) && (m_Delimiter.find(uc) != m_Delimiter.end()));
+		return ((uc < 0x100) && (m_SynAttr->m_Delimiter[ uc ] != 0));
 	}
-	bool IsNotDelimiter( ucs4_t uc ) {
+	bool IsNotDelimiter(ucs4_t uc) {
 		// changed: gogo, 21.09.2009 (purpose - correct word wrap for words with non-ascii chars)
 		// Rollbacked: 26.12.2015 for performance
 		//return ((uc < 0x100) && (!IsSpace(uc)) && (m_Delimiter.Find(wxChar(uc))<0));
-		//return ( ( uc < 0x100 ) && ( !IsSpace( uc ) ) && ( m_Delimiter.find( uc ) == m_Delimiter.end() ) );
+		//return ((uc < 0x100) && (!IsSpace(uc)) && (m_Delimiter.find(uc) == m_Delimiter.end()));
 		//return ((m_Delimiter.Find(wxChar(uc)) < 0)  && (! IsSpace(uc)));
-		return ( ( uc < 0x100 ) && ( !IsSpace( uc ) ) && (m_SynAttr->m_Delimiter[ uc ] == 0 ) );
+		return ((uc < 0x100) && (!IsSpace(uc)) && (m_SynAttr->m_Delimiter[ uc ] == 0));
 	}
 
-	void SetAttributes( MadAttributeElement ae ) {
-		SetAttributes( m_SynAttr->m_SystemAttributes + ae );
+	void SetAttributes(MadAttributeElement ae) {
+		SetAttributes(m_SynAttr->m_SystemAttributes + ae);
 	}
-	void SetAttributes( MadAttributes *attr );
+	void SetAttributes(MadAttributes *attr);
 
 private: // for NextWord()
 	MadLines    *nw_MadLines;
@@ -289,32 +289,32 @@ private: // for NextWord()
 	wxColor nw_Color, nw_BgColor, nw_CurrentBgColor;
 	wxFont *nw_Font;
  
-	int FindStringCase( MadUCQueue & ucqueue, size_t first,
+	int FindStringCase(MadUCQueue & ucqueue, size_t first,
 						MadStringIterator begin, const MadStringIterator & end,
-						size_t & len );
-	int FindStringNoCase( MadUCQueue & ucqueue, size_t first,
+						size_t & len);
+	int FindStringNoCase(MadUCQueue & ucqueue, size_t first,
 						  MadStringIterator begin, const MadStringIterator & end,
-						  size_t & len );
+						  size_t & len);
 
-	typedef int ( MadSyntax::*FindStringPtr )( MadUCQueue & ucqueue, size_t first,
+	typedef int (MadSyntax::*FindStringPtr)(MadUCQueue & ucqueue, size_t first,
 			MadStringIterator begin, const MadStringIterator & end,
-			size_t & len );
+			size_t & len);
 	FindStringPtr FindString;
 
 public:
-	void InitNextWord1( MadLines *madlines, ucs4_t *word, int *widths, const wxString &fontname, int fontsize, int fontfamily );
-	void InitNextWord2( MadLineIterator &lit, size_t row );
-	void SetEncoding( MadEncoding *encoding );
+	void InitNextWord1(MadLines *madlines, ucs4_t *word, int *widths, const wxString &fontname, int fontsize, int fontfamily);
+	void InitNextWord2(MadLineIterator &lit, size_t row);
+	void SetEncoding(MadEncoding *encoding);
 
 	// return wordlength
-	int NextWord( int &wordwidth );
+	int NextWord(int &wordwidth);
 
 private: // for Printing
 	bool m_PrintSyntax;
 	MadAttributes m_old_SystemAttributes[aeNone];
 	vector < wxColour > m_CustomRangeBgColor;
 	vector < MadAttributes > m_CustomKeywordColor;
-	void BeginPrint( bool printSyntax );
+	void BeginPrint(bool printSyntax);
 	void EndPrint();
 
 };

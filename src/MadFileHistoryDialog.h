@@ -48,7 +48,7 @@ class MadFileHistoryDialog: public wxDialog
 		void OnButtonDselectAllClick(wxCommandEvent& event);
 		void MadFileHistoryDialogClose(wxCloseEvent& event);
 		//*)
-		void MadFileHistoryDialogActivate( wxActivateEvent& event );
+		void MadFileHistoryDialogActivate(wxActivateEvent& event);
 };
 
 extern MadFileHistoryDialog *g_RecentOpenedFileListDialog;
