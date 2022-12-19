@@ -81,6 +81,8 @@ class MadHighlightingDialog : public wxDialog
 	private:
 		MadSyntax *m_Syntax;
 		vector<MadSyntax*> m_ModifiedSyntax;
+
+		void SetKeywordFont(bool set, int style);
 	public:
 		wxString m_InitSetting; // the init title of madsyntax
 		MadSyntax *GetSyntax(const wxString &title);

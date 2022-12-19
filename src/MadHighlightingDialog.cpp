@@ -339,7 +339,6 @@ MadHighlightingDialog::~MadHighlightingDialog()
 	//*)
 }
 
-
 void MadHighlightingDialog::MadHighlightingDialogClose(wxCloseEvent& event)
 {
 	if (event.CanVeto() && (dynamic_cast< wxFrame * >(wxTheApp->GetTopWindow())))
@@ -421,7 +420,6 @@ void MadHighlightingDialog::WxListBoxSyntaxSelected(wxCommandEvent& event)
 	e.m_itemIndex = 0;
 	WxListCtrlKeywordSelected(e);
 }
-
 
 void MadHighlightingDialog::SetPanelFC(const wxColor &color)
 {
@@ -607,24 +605,29 @@ void MadHighlightingDialog::WxListCtrlBCSelected(wxListEvent& event)
 	WxListCtrlBC->SetItemState(event.m_itemIndex, 0, wxLIST_STATE_SELECTED);
 }
 
-/*
- * WxCheckBoxBoldClick
- */
-void MadHighlightingDialog::WxCheckBoxBoldClick(wxCommandEvent& event)
+void MadHighlightingDialog::SetKeywordFont(bool set, int style)
 {
 	wxFont font = GetItemFont(WxListCtrlKeyword, g_Index);
-	if (event.IsChecked()) 
+	if (set) 
 	{
-		g_KeywordInfoTable[g_Index].attr->style |= fsBold;
+		g_KeywordInfoTable[g_Index].attr->style |= (MadFontStyle)style;
 	}
 	else
 	{
-		g_KeywordInfoTable[g_Index].attr->style &= (~fsBold);
+		g_KeywordInfoTable[g_Index].attr->style &= (~(MadFontStyle)style);
 	}
 	SetFontStyle(font, g_KeywordInfoTable[g_Index].attr->style);
 	SetItemFont(WxListCtrlKeyword, g_Index, font);
 	WxListCtrlKeyword->SetColumnWidth(0, WxListCtrlKeyword->GetClientSize().x - 4);
 	SetToModifiedSyntax(g_Syntax);
+}
+
+/*
+ * WxCheckBoxBoldClick
+ */
+void MadHighlightingDialog::WxCheckBoxBoldClick(wxCommandEvent& event)
+{
+	SetKeywordFont(event.IsChecked(), fsBold);
 }
 
 /*
@@ -632,19 +635,7 @@ void MadHighlightingDialog::WxCheckBoxBoldClick(wxCommandEvent& event)
  */
 void MadHighlightingDialog::WxCheckBoxItalicClick(wxCommandEvent& event)
 {
-	wxFont font = GetItemFont(WxListCtrlKeyword, g_Index);
-	if (event.IsChecked()) 
-	{
-		g_KeywordInfoTable[g_Index].attr->style |= fsItalic;
-	}
-	else
-	{
-		g_KeywordInfoTable[g_Index].attr->style &= (~fsItalic);
-	}
-	SetFontStyle(font, g_KeywordInfoTable[g_Index].attr->style);
-	SetItemFont(WxListCtrlKeyword, g_Index, font);
-	WxListCtrlKeyword->SetColumnWidth(0, WxListCtrlKeyword->GetClientSize().x - 4);
-	SetToModifiedSyntax(g_Syntax);
+	SetKeywordFont(event.IsChecked(), fsItalic);
 }
 
 /*
@@ -652,19 +643,7 @@ void MadHighlightingDialog::WxCheckBoxItalicClick(wxCommandEvent& event)
  */
 void MadHighlightingDialog::WxCheckBoxUnderlineClick(wxCommandEvent& event)
 {
-	wxFont font = GetItemFont(WxListCtrlKeyword, g_Index);
-	if (event.IsChecked()) 
-	{
-		g_KeywordInfoTable[g_Index].attr->style |= fsUnderline;
-	}
-	else
-	{
-		g_KeywordInfoTable[g_Index].attr->style &= (~fsUnderline);
-	}
-	SetFontStyle(font, g_KeywordInfoTable[g_Index].attr->style);
-	SetItemFont(WxListCtrlKeyword, g_Index, font);
-	WxListCtrlKeyword->SetColumnWidth(0, WxListCtrlKeyword->GetClientSize().x - 4);
-	SetToModifiedSyntax(g_Syntax);
+	SetKeywordFont(event.IsChecked(), fsUnderline);
 }
 
 /*
@@ -880,7 +859,6 @@ void MadHighlightingDialog::FreeSyntax(bool restore)
 	}
 	m_ModifiedSyntax.clear();
 }
-
 
 /*
  * WxButtonLoadClick
