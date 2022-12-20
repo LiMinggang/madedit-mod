@@ -312,9 +312,11 @@ PyAPI_FUNC(int) PyUnicodeTranslateError_SetReason(
    be reliable.
 */
 #if defined(MS_WIN32) && !defined(HAVE_SNPRINTF)
+#if _MSC_VER < 1900
 # define HAVE_SNPRINTF
 # define snprintf _snprintf
 # define vsnprintf _vsnprintf
+#endif
 #endif
 
 #include <stdarg.h>
