@@ -155,7 +155,7 @@ void MadEdit::SetSyntax(const wxString &title)
 		wxASSERT(m_Syntax != 0);
 		m_Syntax->SetEncoding(m_Encoding);
 		m_Syntax->InitNextWord1(m_Lines, m_WordBuffer, m_WidthBuffer,
-								 m_TextFont->GetFaceName(), m_TextFont->GetPointSize(), m_TextFont->GetFamily());
+								 m_TextFont->GetFaceName(), m_TextFont->GetPointSize(), FromDIP(m_TextFont->GetPointSize()), m_TextFont->GetFamily());
 		UpdateSyntaxDictionary();
 		m_Lines->m_Syntax = m_Syntax;
 
@@ -349,7 +349,7 @@ void MadEdit::SetTextFont(const wxString &name, int size, bool forceReset)
 				m_RightMarginWidth = m_TextFontAveCharWidth << 1;
 			}
 			m_Syntax->InitNextWord1(m_Lines, m_WordBuffer, m_WidthBuffer,
-									 name, size, m_TextFont->GetFamily());
+				name, size, FromDIP(size), m_TextFont->GetFamily());
 			// prepare m_Space_Points, m_EOF_Points
 			const int cw = m_TextFontSpaceWidth/*GetUCharWidth(0x20)*/; //FFontAveCharWidth;
 			{
@@ -488,6 +488,8 @@ void MadEdit::SetHexFont(const wxString &name, int size, bool forceReset)
 	if (forceReset || size != m_HexFont->GetPointSize() || name != m_HexFont->GetFaceName())
 	{
 		m_HexFont = wxTheFontList->FindOrCreateFont(size, //font.GetFamily(), font.GetStyle(), font.GetWeight(), font.GetUnderlined(), name);
+					wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, name);
+		m_HexFontDIP = wxTheFontList->FindOrCreateFont(FromDIP(size), //font.GetFamily(), font.GetStyle(), font.GetWeight(), font.GetUnderlined(), name);
 					wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, name);
 		memset(m_HexFontWidths, 0, sizeof(m_HexFontWidths));
 		m_HexFontWidths[0] = FontWidthManager::GetFontWidths(0, name, size, this);

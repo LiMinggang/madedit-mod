@@ -65,7 +65,7 @@ void MadPrintout::OnPreparePrinting()
     font.SetPointSize(12);      // use 12 PointSize to print Header, Footer
     wxDC *dc=GetDC();
     dc->SetFont(font);
-    m_CharHeight = dc->GetCharHeight();
+    m_CharHeight = g_ActiveMadEdit->ToPhys(dc->GetCharHeight());
     
     // subtract header,footer rect
     m_HeaderHeight=0;
@@ -192,7 +192,6 @@ bool MadPrintout::OnPrintPage(int page)
     dc->SetFont(font);
     dc->SetTextForeground(*wxBLACK);
 
-    int w, h;
     wxString str;
     if (m_PrintHeader)
     {
@@ -204,14 +203,14 @@ bool MadPrintout::OnPrintPage(int page)
         if (!m_HeaderCenter.IsEmpty())
         {
             str=TranslatePrintMark(m_HeaderCenter, page);
-            dc->GetTextExtent(str, &w, &h);
-            dc->DrawText(str, rect.x + (rect.width-w)/2, rect.y);
+			wxSize size = g_ActiveMadEdit->ToPhys(dc->GetTextExtent(str)); 
+            dc->DrawText(str, rect.x + (rect.width-size.x)/2, rect.y);
         }
         if (!m_HeaderRight.IsEmpty())
         {
             str=TranslatePrintMark(m_HeaderRight, page);
-            dc->GetTextExtent(str, &w, &h);
-            dc->DrawText(str, rect.x+rect.width-w, rect.y);
+			wxSize size = g_ActiveMadEdit->ToPhys(dc->GetTextExtent(str)); 
+            dc->DrawText(str, rect.x+rect.width-size.x, rect.y);
         }
         
         // draw a line
@@ -232,14 +231,14 @@ bool MadPrintout::OnPrintPage(int page)
         if (!m_FooterCenter.IsEmpty())
         {
             str=TranslatePrintMark(m_FooterCenter, page);
-            dc->GetTextExtent(str, &w, &h);
-            dc->DrawText(str, rect.x + (rect.width-w)/2, y);
+			wxSize size = g_ActiveMadEdit->ToPhys(dc->GetTextExtent(str)); 
+            dc->DrawText(str, rect.x + (rect.width-size.x)/2, y);
         }
         if (!m_FooterRight.IsEmpty())
         {
             str=TranslatePrintMark(m_FooterRight, page);
-            dc->GetTextExtent(str, &w, &h);
-            dc->DrawText(str, rect.x+rect.width-w, y);
+			wxSize size = g_ActiveMadEdit->ToPhys(dc->GetTextExtent(str)); 
+            dc->DrawText(str, rect.x+rect.width-size.x, y);
         }
         
         // draw a line

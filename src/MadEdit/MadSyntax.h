@@ -288,6 +288,7 @@ private: // for NextWord()
 	bool nw_EndOfLine;
 	wxColor nw_Color, nw_BgColor, nw_CurrentBgColor;
 	wxFont *nw_Font;
+	wxFont *nw_FontDIP;
  
 	int FindStringCase(MadUCQueue & ucqueue, size_t first,
 						MadStringIterator begin, const MadStringIterator & end,
@@ -302,7 +303,8 @@ private: // for NextWord()
 	FindStringPtr FindString;
 
 public:
-	void InitNextWord1(MadLines *madlines, ucs4_t *word, int *widths, const wxString &fontname, int fontsize, int fontfamily);
+	void InitNextWord1(MadLines *madlines, ucs4_t *word, int *widths,
+		const wxString &fontname, int fontsize, int fontsizeDIP, int fontfamily);
 	void InitNextWord2(MadLineIterator &lit, size_t row);
 	void SetEncoding(MadEncoding *encoding);
 

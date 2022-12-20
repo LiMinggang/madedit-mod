@@ -3095,7 +3095,8 @@ bool MadLines::LoadFromFile(const wxString &filename, const wxString &encoding)
 		wxASSERT(m_Syntax != 0);
 
 		wxFont *font = m_MadEdit->m_TextFont;
-		m_Syntax->InitNextWord1(m_MadEdit->m_Lines, m_MadEdit->m_WordBuffer, m_MadEdit->m_WidthBuffer, font->GetFaceName(), font->GetPointSize(), font->GetFamily());
+		m_Syntax->InitNextWord1(m_MadEdit->m_Lines, m_MadEdit->m_WordBuffer, m_MadEdit->m_WidthBuffer,
+			font->GetFaceName(), font->GetPointSize(), m_MadEdit->FromDIP(font->GetPointSize()), font->GetFamily());
 		m_MadEdit->m_Syntax = m_Syntax;
 		m_MadEdit->UpdateSyntaxDictionary();
 		m_MadEdit->m_LoadingFile = false;
@@ -3198,7 +3199,8 @@ bool MadLines::LoadFromFile(const wxString &filename, const wxString &encoding)
 
 	wxASSERT(m_Syntax != 0);
 	wxFont *font = m_MadEdit->m_TextFont;
-	m_Syntax->InitNextWord1(m_MadEdit->m_Lines, m_MadEdit->m_WordBuffer, m_MadEdit->m_WidthBuffer, font->GetFaceName(), font->GetPointSize(), font->GetFamily());
+	m_Syntax->InitNextWord1(m_MadEdit->m_Lines, m_MadEdit->m_WordBuffer, m_MadEdit->m_WidthBuffer,
+		font->GetFaceName(), font->GetPointSize(), m_MadEdit->FromDIP(font->GetPointSize()), font->GetFamily());
 	m_MadEdit->m_Syntax = m_Syntax;
 	m_MadEdit->UpdateSyntaxDictionary();
 	long maxtextfilesize;
@@ -3718,7 +3720,8 @@ bool MadLines::SaveToFile(const wxString &filename, const wxString &tempdir)
 		if (tmp_Syntax->m_SynAttr->m_Title != m_Syntax->m_SynAttr->m_Title)
 		{
 			wxFont *font = m_MadEdit->m_TextFont;
-			tmp_Syntax->InitNextWord1(m_MadEdit->m_Lines, m_MadEdit->m_WordBuffer, m_MadEdit->m_WidthBuffer, font->GetFaceName(), font->GetPointSize(), font->GetFamily());
+			tmp_Syntax->InitNextWord1(m_MadEdit->m_Lines, m_MadEdit->m_WordBuffer, m_MadEdit->m_WidthBuffer,
+				font->GetFaceName(), font->GetPointSize(), m_MadEdit->FromDIP(font->GetPointSize()), font->GetFamily());
 			m_MadEdit->m_Syntax = tmp_Syntax;
 			tmp_Syntax = m_Syntax;
 			m_Syntax = m_MadEdit->m_Syntax;

@@ -332,6 +332,7 @@ private:
 	int             m_TextFontSpaceWidth;
 
 	wxFont          *m_HexFont; // readonly, set it at SetHexFont()
+	wxFont          *m_HexFontDIP; // readonly, set it at SetHexFont()
 	int             m_HexFontHeight;
 	int             m_HexFontMaxDigitWidth;
 
@@ -644,6 +645,7 @@ protected:
 	void OnEraseBackground(wxEraseEvent &evt);
 	void OnPaint(wxPaintEvent &evt) {return MadEditOnPaint(&evt);}
 	void MadEditOnPaint(wxPaintEvent *pevt = NULL);
+	void OnDPIChanged(wxDPIChangedEvent& event);
 
 	void DoSelectionChanged();
 	void DoStatusChanged();

@@ -448,7 +448,7 @@ bool FontWidthManager::VerifyFontWidths(wxUint16 *widths, const wxString &fontna
 			{
 				text.SetChar(0, wc);
 				win->GetTextExtent(text, &w, &h, nullptr, nullptr, pf);
-
+				
 				if (widths[wc] != 0)
 				{
 					if (widths[wc] != w) // not match
@@ -1033,6 +1033,7 @@ MadEdit::MadEdit(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSi
 
 	Bind(wxEVT_ERASE_BACKGROUND, &MadEdit::OnEraseBackground, this);
 	Bind(wxEVT_PAINT, &MadEdit::OnPaint, this);
+	Bind(wxEVT_DPI_CHANGED, &MadEdit::OnDPIChanged, this);
 }
 
 MadEdit::~MadEdit()
@@ -2034,8 +2035,15 @@ void MadEdit::PaintTextLines(wxDC *dc, const wxRect &rect, int toprow, int rowco
 	subrowid = toprow - subrowid;
 	bool displaylinenumber = true; // check first row for displayning line-number or not
 	int wordwidth = -1, wordlength = -1, lastwordwidth = -1;
+	wxFont *font = nullptr;
 
 	wxASSERT(subrowid >= 0);
+
+	if (!InPrinting())
+		font = m_Syntax->nw_FontDIP;
+	else
+		font = m_Syntax->nw_Font;
+
 	if (m_Syntax->m_SynAttr->m_CheckState)
 	{
 		m_Syntax->InitNextWord2(lineiter, 0);
@@ -2298,7 +2306,7 @@ void MadEdit::PaintTextLines(wxDC *dc, const wxRect &rect, int toprow, int rowco
 							}
 
 							dc->SetTextForeground(m_Syntax->nw_Color);
-							dc->SetFont(*(m_Syntax->nw_Font));
+							dc->SetFont(*font);
 							bool spellMark = false;
 #ifndef PYMADEDIT_DLL
 
@@ -2571,7 +2579,7 @@ void MadEdit::PaintTextLines(wxDC *dc, const wxRect &rect, int toprow, int rowco
 						lnums = wxString::Format(lnums, lineid);
 						const wxChar *wcstr = lnums.c_str();
 						dc->SetTextForeground(m_Syntax->nw_Color);
-						dc->SetFont(*(m_Syntax->nw_Font));
+						dc->SetFont(*font);
 
 						if (!InPrinting() && reverseLineNum)
 						{
@@ -2713,19 +2721,29 @@ void MadEdit::PaintHexLines(wxDC *dc, wxRect &rect, int toprow, int rowcount, bo
 {
 	int left = rect.x;
 	int top = rect.y;
+	wxFont *font = m_HexFontDIP;
+	int width = m_HexFontMaxDigitWidth;
+	
+
+	if (InPrinting())
+	{
+		font = m_HexFont;
+		wxSize size = ToPhys(wxSize(m_HexFontMaxDigitWidth, 0));
+		width = size.x;
+	}
 
 	for (int i = 0; i < 76; ++i)
-		m_WidthBuffer[i] = m_HexFontMaxDigitWidth;
+		m_WidthBuffer[i] = width;
 
 	m_Syntax->SetAttributes(aeText);
 	dc->SetTextForeground(m_Syntax->nw_Color);
-	dc->SetFont(*m_HexFont);
+	dc->SetFont(*font);
 	wxColor &markcolor = m_Syntax->GetAttributes(aeActiveLine)->color;
 	dc->SetPen(*(wxThePenList->FindOrCreatePen(markcolor, 1, wxPENSTYLE_SOLID)));
 
 	if (painthead)
 	{
-		dc->Blit(left, top, m_HexFontMaxDigitWidth * 76, m_RowHeight, m_HexDigitDC, 0, m_RowHeight * 2);
+		dc->Blit(left, top, width * 76, m_RowHeight, m_HexDigitDC, 0, m_RowHeight * 2);
 		top += m_RowHeight;
 	}
 
@@ -2789,7 +2807,7 @@ void MadEdit::PaintHexLines(wxDC *dc, wxRect &rect, int toprow, int rowcount, bo
 
 		m_WordBuffer[8] = wxT(':');
 		PaintHexOffset(dc, left, top, m_WordBuffer, m_WidthBuffer, 9);
-		left += m_HexFontMaxDigitWidth * 10;
+		left += width * 10;
 		// paint binary data
 		int idx = 0;
 
@@ -2820,7 +2838,7 @@ void MadEdit::PaintHexLines(wxDC *dc, wxRect &rect, int toprow, int rowcount, bo
 
 		m_WordBuffer[idx] = wxT('|');
 		PaintHexDigit(dc, left, top, m_WordBuffer, m_WidthBuffer, 16 * 3 + 1);
-		left += m_HexFontMaxDigitWidth * (16 * 3 + 2);
+		left += width * (16 * 3 + 2);
 		// paint text data
 		idx = 0;
 		int *pw = m_WidthBuffer + 60;
@@ -2833,7 +2851,7 @@ void MadEdit::PaintHexLines(wxDC *dc, wxRect &rect, int toprow, int rowcount, bo
 			{
 				m_WordBuffer[idx] = 0x20;
 				++idx;
-				*pw++ = m_HexFontMaxDigitWidth;
+				*pw++ = width;
 			}
 			while (--i > 0);
 		}
@@ -2872,7 +2890,7 @@ void MadEdit::PaintHexLines(wxDC *dc, wxRect &rect, int toprow, int rowcount, bo
 			else
 				m_WordBuffer[idx++] = ucp.first;
 
-			*pw++ = m_HexFontMaxDigitWidth * ucp.second;
+			*pw++ = width * ucp.second;
 			linepos2 += ucp.second;
 			oldpos = pos;
 			pos += ucp.second;
@@ -2898,23 +2916,23 @@ void MadEdit::PaintHexLines(wxDC *dc, wxRect &rect, int toprow, int rowcount, bo
 				{
 					if (oldpos == SelPos1)
 					{
-						SelLeft = ((int (oldpos) & 0xF) + 60) * m_HexFontMaxDigitWidth;
+						SelLeft = ((int (oldpos) & 0xF) + 60) * width;
 					}
 					else
 						if (pos < hexrowpos)
 						{
-							SelLeft = ((int (pos) & 0xF) + 60) * m_HexFontMaxDigitWidth;
+							SelLeft = ((int (pos) & 0xF) + 60) * width;
 						}
 						else//oldpos < SelPos1
 						{
 							// partial selected
-							SelLeft = ((int (oldpos) & 0xF) + 60) * m_HexFontMaxDigitWidth;
+							SelLeft = ((int (oldpos) & 0xF) + 60) * width;
 						}
 				}
 				else
 					if (SelPos1 >= oldhexrowpos)
 					{
-						SelLeft = ((int (oldpos) & 0xF) + 60) * m_HexFontMaxDigitWidth;
+						SelLeft = ((int (oldpos) & 0xF) + 60) * width;
 					}
 			}
 
@@ -2927,7 +2945,7 @@ void MadEdit::PaintHexLines(wxDC *dc, wxRect &rect, int toprow, int rowcount, bo
 				}
 				else ***/
 				{
-					SelRight = ((int (oldpos) & 0xF) + 60) * m_HexFontMaxDigitWidth;
+					SelRight = ((int (oldpos) & 0xF) + 60) * width;
 				}
 			}
 		}
@@ -2937,13 +2955,13 @@ void MadEdit::PaintHexLines(wxDC *dc, wxRect &rect, int toprow, int rowcount, bo
 		{
 			if (SelPos2 == hexrowpos)
 			{
-				SelRight = (60 + int (oldpos & 0x0F)) * m_HexFontMaxDigitWidth +
+				SelRight = (60 + int (oldpos & 0x0F)) * width +
 						   GetHexUCharWidth(m_WordBuffer[idx - 1]);
 			}
 			else
 				if (SelPos2 < hexrowpos && pos == SelPos2)
 				{
-					SelRight = ((int (pos) & 0xF) + 60) * m_HexFontMaxDigitWidth;
+					SelRight = ((int (pos) & 0xF) + 60) * width;
 				}
 		}
 
@@ -2957,28 +2975,28 @@ void MadEdit::PaintHexLines(wxDC *dc, wxRect &rect, int toprow, int rowcount, bo
 			{
 				if (SelPos2 < hexrowpos)
 				{
-					int x1 = (10 + (int (SelPos1) & 0xF) * 3) * m_HexFontMaxDigitWidth + rect.x;
-					int x2 = (9 + (int (SelPos2) & 0xF) * 3) * m_HexFontMaxDigitWidth + rect.x;
+					int x1 = (10 + (int (SelPos1) & 0xF) * 3) * width + rect.x;
+					int x2 = (9 + (int (SelPos2) & 0xF) * 3) * width + rect.x;
 					INVERT_RECT(dc, x1, top, x2 - x1, m_RowHeight);
 				}
 				else
 					if (SelPos1 < hexrowpos && hexrowpos <= SelPos2)
 					{
-						int x1 = (10 + (int (SelPos1) & 0xF) * 3) * m_HexFontMaxDigitWidth + rect.x;
-						INVERT_RECT(dc, x1, top, (57 * m_HexFontMaxDigitWidth + rect.x) - x1, m_RowHeight);
+						int x1 = (10 + (int (SelPos1) & 0xF) * 3) * width + rect.x;
+						INVERT_RECT(dc, x1, top, (57 * width + rect.x) - x1, m_RowHeight);
 					}
 			}
 			else                      //oldhexrowpos> SelPos1
 			{
 				if (hexrowpos <= SelPos2)
 				{
-					INVERT_RECT(dc, 10 * m_HexFontMaxDigitWidth + rect.x, top, 47 * m_HexFontMaxDigitWidth, m_RowHeight);
+					INVERT_RECT(dc, 10 * width + rect.x, top, 47 * width, m_RowHeight);
 				}
 				else
 					if (SelPos2 > oldhexrowpos)
 					{
-						int x1 = 10 * m_HexFontMaxDigitWidth + rect.x;
-						int x2 = (9 + (int (SelPos2) & 0xF) * 3) * m_HexFontMaxDigitWidth + rect.x;
+						int x1 = 10 * width + rect.x;
+						int x2 = (9 + (int (SelPos2) & 0xF) * 3) * width + rect.x;
 						INVERT_RECT(dc, x1, top, x2 - x1, m_RowHeight);
 					}
 			}
@@ -2998,7 +3016,7 @@ void MadEdit::PaintHexLines(wxDC *dc, wxRect &rect, int toprow, int rowcount, bo
 				else
 				{
 					int x1 = SelLeft + rect.x;
-					int x2 = (60 + int (oldpos & 0x0F)) * m_HexFontMaxDigitWidth +
+					int x2 = (60 + int (oldpos & 0x0F)) * width +
 							 GetHexUCharWidth(m_WordBuffer[idx - 1]) + rect.x;
 					INVERT_RECT(dc, x1, top, x2 - x1, m_RowHeight);
 					SelLeft = 0;
@@ -3007,15 +3025,15 @@ void MadEdit::PaintHexLines(wxDC *dc, wxRect &rect, int toprow, int rowcount, bo
 			else
 				if (SelRight > 0)
 				{
-					int x1 = 60 * m_HexFontMaxDigitWidth + rect.x;
+					int x1 = 60 * width + rect.x;
 					INVERT_RECT(dc, x1, top, SelRight + rect.x - x1, m_RowHeight);
 					SelRight = 0;
 				}
 				else
 					if (oldhexrowpos > SelPos1 && hexrowpos - 1 < SelPos2)      // in middle of selection
 					{
-						int x1 = 60 * m_HexFontMaxDigitWidth + rect.x;
-						int x2 = (60 + int (oldpos & 0x0F)) * m_HexFontMaxDigitWidth +
+						int x1 = 60 * width + rect.x;
+						int x2 = (60 + int (oldpos & 0x0F)) * width +
 								 GetHexUCharWidth(m_WordBuffer[idx - 1]) + rect.x;
 						INVERT_RECT(dc, x1, top, x2 - x1, m_RowHeight);
 					}
@@ -3030,8 +3048,8 @@ void MadEdit::PaintHexLines(wxDC *dc, wxRect &rect, int toprow, int rowcount, bo
 			{
 				if (MarkPos2 < hexrowpos)
 				{
-					int x1 = (((int)MarkPos1 & 0xF) * 3 + 10) * m_HexFontMaxDigitWidth + rect.x;
-					int x2 = x1 + (((int)(MarkPos2 - MarkPos1)) * 3 + 2) * m_HexFontMaxDigitWidth;
+					int x1 = (((int)MarkPos1 & 0xF) * 3 + 10) * width + rect.x;
+					int x2 = x1 + (((int)(MarkPos2 - MarkPos1)) * 3 + 2) * width;
 					--x1;
 					dc->DrawLine(x1, top, x2, top);
 					dc->DrawLine(x2, top, x2, top + h);
@@ -3042,8 +3060,8 @@ void MadEdit::PaintHexLines(wxDC *dc, wxRect &rect, int toprow, int rowcount, bo
 				else
 				{
 					int x1 = ((int)MarkPos1 & 0xF);
-					int x2 = ((15 - x1) * 3 + 2) * m_HexFontMaxDigitWidth;
-					x1 = (x1 * 3 + 10) * m_HexFontMaxDigitWidth + rect.x;
+					int x2 = ((15 - x1) * 3 + 2) * width;
+					x1 = (x1 * 3 + 10) * width + rect.x;
 					x2 += x1;
 					--x1;
 					dc->DrawLine(x2, top, x1, top);
@@ -3053,8 +3071,8 @@ void MadEdit::PaintHexLines(wxDC *dc, wxRect &rect, int toprow, int rowcount, bo
 			}
 			else
 			{
-				int x1 = 10 * m_HexFontMaxDigitWidth + rect.x;
-				int x2 = x1 + (((int)(MarkPos2) & 0xF) * 3 + 2) * m_HexFontMaxDigitWidth;
+				int x1 = 10 * width + rect.x;
+				int x2 = x1 + (((int)(MarkPos2) & 0xF) * 3 + 2) * width;
 				--x1;
 				dc->DrawLine(x1, top, x2, top);
 				dc->DrawLine(x2, top, x2, top + h);
@@ -11307,9 +11325,13 @@ void MadEdit::MadEditOnPaint(wxPaintEvent *evt /*=NULL*/ )
 
 				if (!m_HexDigitBitmap)
 				{
+					wxFont *font = m_HexFontDIP;
+					
+					if (InPrinting())
+						font = m_HexFont;
 					m_HexDigitBitmap = new wxBitmap(m_HexFontMaxDigitWidth * 76, m_RowHeight * 3);
 					memdc.SelectObject(*m_HexDigitBitmap);
-					memdc.SetFont(*m_HexFont);
+					memdc.SetFont(*font);
 
 					for (int i = 0; i < 76; ++i)
 						m_WidthBuffer[i] = m_HexFontMaxDigitWidth;
@@ -11374,6 +11396,19 @@ void MadEdit::MadEditOnPaint(wxPaintEvent *evt /*=NULL*/ )
 
 #endif
 	m_Painted = true;
+}
+
+void MadEdit::OnDPIChanged(wxDPIChangedEvent& event)
+{
+	wxString fname;
+	int size;
+
+	GetTextFont(fname, size);
+	SetTextFont(fname, size, true);
+
+	GetHexFont(fname, size);
+	SetTextFont(fname, size, true);
+	event.Skip();
 }
 
 void MadEdit::DoSelectionChanged()
@@ -11953,7 +11988,15 @@ int MadEdit::GetUCharWidth(ucs4_t uc)
 		wcs[1] = 0;
 #endif
 		int h;
+
 		GetTextExtent(wcs, &w, &h, nullptr, nullptr, m_TextFont);
+
+		if (InPrinting())
+		{
+			wxSize size = ToPhys(wxSize(w, h));
+			w = size.x;
+			h = size.y;
+		}
 
 		if (w <= 0)
 		{
@@ -11987,7 +12030,10 @@ int MadEdit::GetHexUCharWidth(ucs4_t uc)
 
 	if (!widths)
 	{
-		widths = m_HexFontWidths[idx] = FontWidthManager::GetFontWidths(idx, m_HexFont->GetFaceName(), m_HexFont->GetPointSize(),   this);
+		int fontsize = m_HexFont->GetPointSize();
+		if (InPrinting())
+			fontsize = ToPhys(m_HexFont->GetPointSize());
+		widths = m_HexFontWidths[idx] = FontWidthManager::GetFontWidths(idx, m_HexFont->GetFaceName(), fontsize, this);
 	}
 
 	idx = uc & 0xFFFF;
@@ -12016,6 +12062,12 @@ int MadEdit::GetHexUCharWidth(ucs4_t uc)
 #endif
 		int h;
 		GetTextExtent(wcs, &w, &h, nullptr, nullptr, m_HexFont);
+		if (InPrinting())
+		{
+			wxSize size = ToPhys(wxSize(w, h));
+			w = size.x;
+			h = size.y;
+		}
 
 		if (w <= 0)
 		{

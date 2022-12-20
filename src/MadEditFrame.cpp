@@ -2997,19 +2997,19 @@ void MadEditFrame::CreateGUIControls(void)
 	ToolBarData * td = &ToolBarTable[0];
 	while (td->toolbar_id >= 0)
 	{
-		WxToolBar[td->toolbar_id] = new wxAuiToolBar(this, ID_WXTOOLBAR1 + td->toolbar_id, wxPoint(0, 0), wxSize(392, -1), td->toolbar_style);
+		WxToolBar[td->toolbar_id] = new wxAuiToolBar(this, ID_WXTOOLBAR1 + td->toolbar_id, FromDIP(wxPoint(0, 0)), FromDIP(wxSize(392, -1)), td->toolbar_style);
 		WxToolBar[td->toolbar_id]->Bind(wxEVT_AUITOOLBAR_RIGHT_CLICK, &MadEditFrame::OnRightClickToolBar, this);
 		g_ToolbarNames[td->toolbar_id] = td->caption;
 		++td;
 	}
 
-	m_QuickSearchBar = new wxAuiToolBar(this, ID_WXTOOLBAR1 + tbQSEARCH, wxPoint(0, 0), wxSize(392, -1), MADTOOBAR_DEFAULT);
+	m_QuickSearchBar = new wxAuiToolBar(this, ID_WXTOOLBAR1 + tbQSEARCH, FromDIP(wxPoint(0, 0)), FromDIP(wxSize(392, -1)), MADTOOBAR_DEFAULT);
 	m_QuickSearchBar->Bind(wxEVT_AUITOOLBAR_RIGHT_CLICK, &MadEditFrame::OnRightClickToolBar, this);
 	m_QuickSearchBar->Bind(wxEVT_SET_FOCUS, &MadEditFrame::OnQuickSearchSetFocus, this);
 	g_ToolbarNames[tbQSEARCH] = _("Quick Search");
 	WxToolBar[tbQSEARCH] = m_QuickSearchBar;
 
-	m_Notebook = new wxMadAuiNotebook(this, ID_NOTEBOOK, wxPoint(0, 29), wxSize(392, 320), wxWANTS_CHARS | wxAUI_NB_TOP | wxAUI_NB_TAB_SPLIT | wxAUI_NB_TAB_MOVE | wxAUI_NB_SCROLL_BUTTONS | wxAUI_NB_WINDOWLIST_BUTTON | wxAUI_NB_CLOSE_BUTTON | wxAUI_NB_CLOSE_ON_ALL_TABS);
+	m_Notebook = new wxMadAuiNotebook(this, ID_NOTEBOOK, FromDIP(wxPoint(0, 29)), FromDIP(wxSize(392, 320)), wxWANTS_CHARS | wxAUI_NB_TOP | wxAUI_NB_TAB_SPLIT | wxAUI_NB_TAB_MOVE | wxAUI_NB_SCROLL_BUTTONS | wxAUI_NB_WINDOWLIST_BUTTON | wxAUI_NB_CLOSE_BUTTON | wxAUI_NB_CLOSE_ON_ALL_TABS);
 	m_Notebook->wxControl::SetWindowStyleFlag(m_Notebook->wxControl::GetWindowStyleFlag() & ~wxTAB_TRAVERSAL);
 	m_Notebook->SetDropTarget(new MadDropTarget());
 	m_Notebook->SetArtProvider(new wxAuiSimpleTabArt);
@@ -6170,11 +6170,11 @@ void MadEditFrame::OnFilePrintPreview(wxCommandEvent& WXUNUSED(event))
 	else
 	{
 		wxPreviewFrame *frame = new wxPreviewFrame(preview, this, _("MadEdit Print Preview"),
-				wxPoint(0, 0),
+				FromDIP(wxPoint(0, 0)),
 #ifdef __WXMSW__
-				wxSize(600, 720)
+				FromDIP(wxSize(600, 720))
 #else
-				wxSize(600, 620)
+				FromDIP(wxSize(600, 620))
 #endif
 												);
 		frame->Centre(wxBOTH);

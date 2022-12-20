@@ -134,6 +134,8 @@ Mod v0.4.20
 9.Fix langurage ID of wxWidgets
 10.Update wxWidgets to 3.2.1
 11.Don't create new file by double clicking file title tab
+12.Fix VS compiling issue(snprintf)
+13.Fix High DPI awareness issue
 
 Mod v0.4.19
 1.Fix: Disable safe mode in PanChinese search
