@@ -1933,7 +1933,7 @@ MadEditFrame::wxCmdEvtHandlerMap_t MadEditFrame::m_menu_evt_map[] =
 	{ menuWrapByColumn, &MadEditFrame::OnViewWrapByColumn },
 	{ menuDisplayLineNumber, &MadEditFrame::OnViewDisplayLineNumber },
 	{ menuDisplayBookmark, &MadEditFrame::OnViewDisplayBookmark },
-	{ menuDisplay80ColHint, &MadEditFrame::OnViewDisplay80ColHint },
+	{ menuDisplayColHint, &MadEditFrame::OnViewDisplayColHint },
 	{ menuShowEndOfLine, &MadEditFrame::OnViewShowEndOfLine },
 	{ menuShowTabChar, &MadEditFrame::OnViewShowTabChar },
 	{ menuShowSpaceChar, &MadEditFrame::OnViewShowSpaceChar },
@@ -2139,7 +2139,7 @@ MadEditFrame::wxUIUpdateEvtHandlerMap_t MadEditFrame::m_menu_ui_updater_map[] =
 	{ menuWrapByColumn, &MadEditFrame::OnUpdateUI_MenuViewWrapByColumn },
 	{ menuDisplayLineNumber, &MadEditFrame::OnUpdateUI_MenuViewDisplayLineNumber },
 	{ menuDisplayBookmark, &MadEditFrame::OnUpdateUI_MenuViewDisplayBookmark },
-	{ menuDisplay80ColHint, &MadEditFrame::OnUpdateUI_MenuViewDisplay80ColHint },
+	{ menuDisplayColHint, &MadEditFrame::OnUpdateUI_MenuViewDisplayColHint },
 	{ menuShowEndOfLine, &MadEditFrame::OnUpdateUI_MenuViewShowEndOfLine },
 	{ menuShowTabChar, &MadEditFrame::OnUpdateUI_MenuViewShowTabChar },
 	{ menuShowSpaceChar, &MadEditFrame::OnUpdateUI_MenuViewShowSpaceChar },
@@ -2536,7 +2536,7 @@ CommandData CommandTable[] =
 	{ 0,			  1, 0,			         0,						    0,						 0,			       wxITEM_SEPARATOR, -1,			     0,						 0, 0, 0, 0, false},
 	{ 0,			  1, menuDisplayLineNumber, wxT("menuDisplayLineNumber"), _("&Display Line Number"), wxT("Ctrl-Alt-D"),   wxITEM_CHECK,     -1,			     0,						 _("Display the Line Numbers"), 0, 0, 0, false},
 	{ 0,			  1, menuDisplayBookmark,   wxT("menuDisplayBookmark"),   _("Display &Bookmark"),    wxT("Ctrl-Alt-B"),   wxITEM_CHECK,     -1,			     0,						 _("Display the Bookmark sign"), 0, 0, 0, false},
-	{ 0,			  1, menuDisplay80ColHint,  wxT("menuDisplay80ColHint"),  _("Display 80th Cols &Hint"), wxT(""),          wxITEM_CHECK,     -1,			     0,						 _("Display the 80th columns hint"), 0, 0, 0, false},
+	{ 0,			  1, menuDisplayColHint,  wxT("menuDisplayColHint"),  _("Display 80th Cols &Hint"), wxT(""),          wxITEM_CHECK,     -1,			     0,						 _("Display the 80th columns hint"), 0, 0, 0, false},
 	{ 0,			  1, menuShowEndOfLine,     wxT("menuShowEndOfLine"),     _("Show End Of Line"),     wxT("Ctrl-Alt-L"),   wxITEM_CHECK,     -1,			     0,						 _("Show the sign of EndOfLine"), 0, 0, 0, false},
 	{ 0,			  1, menuShowTabChar,       wxT("menuShowTabChar"),       _("Show Tab Char"),        wxT("Ctrl-Alt-T"),   wxITEM_CHECK,     -1,			     0,						 _("Show the sign of Tab char"), 0, 0, 0, false},
 	{ 0,			  1, menuShowSpaceChar,     wxT("menuShowSpaceChar"),     _("Show Space Char"),      wxT("Ctrl-Alt-S"),   wxITEM_CHECK,     -1,			     0,						 _("Show the sign of Space char"), 0, 0, 0, false},
@@ -5520,10 +5520,10 @@ void MadEditFrame::OnUpdateUI_MenuViewDisplayBookmark(wxUpdateUIEvent& event)
 	event.Enable(g_ActiveMadEdit && !g_ActiveMadEdit->IsHexMode());
 	event.Check(g_ActiveMadEdit && g_ActiveMadEdit->GetDisplayBookmark());
 }
-void MadEditFrame::OnUpdateUI_MenuViewDisplay80ColHint(wxUpdateUIEvent& event)
+void MadEditFrame::OnUpdateUI_MenuViewDisplayColHint(wxUpdateUIEvent& event)
 {
 	event.Enable(g_ActiveMadEdit && !g_ActiveMadEdit->IsHexMode() && g_ActiveMadEdit->GetFixedWidthMode());
-	event.Check(g_ActiveMadEdit && g_ActiveMadEdit->GetDisplay80ColHint());
+	event.Check(g_ActiveMadEdit && g_ActiveMadEdit->GetDisplayColHint());
 }
 void MadEditFrame::OnUpdateUI_MenuViewShowEndOfLine(wxUpdateUIEvent& event)
 {
@@ -7902,7 +7902,7 @@ void MadEditFrame::OnViewFixedWidthMode(wxCommandEvent& event)
 	{ 
 		g_ActiveMadEdit->SetFixedWidthMode(event.IsChecked());
 		if (!event.IsChecked())
-			g_ActiveMadEdit->SetDisplay80ColHint(false);
+			g_ActiveMadEdit->SetDisplayColHint(false);
 
 		if (IsMacroRecording())
 		{
@@ -8103,17 +8103,17 @@ void MadEditFrame::OnViewDisplayBookmark(wxCommandEvent& event)
 	}
 }
 
-void MadEditFrame::OnViewDisplay80ColHint(wxCommandEvent& event)
+void MadEditFrame::OnViewDisplayColHint(wxCommandEvent& event)
 {
 	if (g_ActiveMadEdit && g_ActiveMadEdit->GetFixedWidthMode())
 	{ 
-		g_ActiveMadEdit->SetDisplay80ColHint(event.IsChecked());
+		g_ActiveMadEdit->SetDisplayColHint(event.IsChecked());
 
 		if (IsMacroRecording())
 		{
 			if (event.IsChecked())
 			{
-				RecordAsMadMacro(g_ActiveMadEdit, wxString(wxT("Display80ColHint()")));
+				RecordAsMadMacro(g_ActiveMadEdit, wxString(wxT("DisplayColHint()")));
 			}
 			else
 			{
@@ -8945,7 +8945,7 @@ void MadEditFrame::OnToolsOptions(wxCommandEvent& WXUNUSED(event))
 		}
 
 		m_Config->SetPath(oldpath);
-		g_ActiveMadEdit->SetDisplay80ColHint(g_ActiveMadEdit->GetDisplay80ColHint());
+		g_ActiveMadEdit->SetDisplayColHint(g_ActiveMadEdit->GetDisplayColHint());
 	}
 	else
 	{

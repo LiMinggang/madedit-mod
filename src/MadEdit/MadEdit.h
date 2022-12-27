@@ -392,7 +392,7 @@ private:
 	bool            m_DisplayLineNumber;
 	bool            m_ShowEndOfLine, m_ShowSpaceChar, m_ShowTabChar, m_MarkActiveLine;
 	bool            m_DisplayBookmark;
-	bool            m_Display80ColHint;
+	bool            m_DisplayColHint;
 	bool            m_MarkBracePair;
 
 	bool            m_InsertMode;
@@ -787,8 +787,8 @@ public: // basic functions
 	bool GetDisplayLineNumber() { return m_DisplayLineNumber; }
 	void SetDisplayBookmark(bool value);
 	bool GetDisplayBookmark() {return m_DisplayBookmark; }
-	void SetDisplay80ColHint(bool value);
-	bool GetDisplay80ColHint() {return m_Display80ColHint; }
+	void SetDisplayColHint(bool value);
+	bool GetDisplayColHint() {return m_DisplayColHint; }
 
 	bool GetShowEndOfLine() { return m_ShowEndOfLine; }
 	bool GetShowTabChar() { return m_ShowTabChar; }

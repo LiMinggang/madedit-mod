@@ -245,7 +245,7 @@ enum   // menu id
 	menuWrapByColumn,
 	menuDisplayLineNumber,
 	menuDisplayBookmark,
-	menuDisplay80ColHint,
+	menuDisplayColHint,
 	menuShowEndOfLine,
 	menuShowTabChar,
 	menuShowSpaceChar,
@@ -498,7 +498,7 @@ private:
 	void OnUpdateUI_MenuViewWrapByColumn(wxUpdateUIEvent& event);
 	void OnUpdateUI_MenuViewDisplayLineNumber(wxUpdateUIEvent& event);
 	void OnUpdateUI_MenuViewDisplayBookmark(wxUpdateUIEvent& event);
-	void OnUpdateUI_MenuViewDisplay80ColHint(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewDisplayColHint(wxUpdateUIEvent& event);
 	void OnUpdateUI_MenuViewShowEndOfLine(wxUpdateUIEvent& event);
 	void OnUpdateUI_MenuViewShowTabChar(wxUpdateUIEvent& event);
 	void OnUpdateUI_MenuViewShowSpaceChar(wxUpdateUIEvent& event);
@@ -664,7 +664,7 @@ private:
 	void OnViewWrapByColumn(wxCommandEvent& WXUNUSED(event));
 	void OnViewDisplayLineNumber(wxCommandEvent& WXUNUSED(event));
 	void OnViewDisplayBookmark(wxCommandEvent& WXUNUSED(event));
-	void OnViewDisplay80ColHint(wxCommandEvent& WXUNUSED(event));
+	void OnViewDisplayColHint(wxCommandEvent& WXUNUSED(event));
 	void OnViewShowEndOfLine(wxCommandEvent& WXUNUSED(event));
 	void OnViewShowTabChar(wxCommandEvent& WXUNUSED(event));
 	void OnViewShowSpaceChar(wxCommandEvent& WXUNUSED(event));
@@ -786,7 +786,6 @@ protected:
 
 	bool QueryCloseFile(size_t idx);
 	bool QueryCloseAllFiles();
-
 	void LoadMenuKeys(wxConfigBase *config);
 	wxString GetMenuKey(const wxString &menu, const wxString &defaultkey);
 

@@ -862,7 +862,7 @@ void MadEdit::SetSingleLineMode(bool mode)
 			m_VScrollBar->Show(false);
 			m_HScrollBar->Show(false);
 			SetDisplayBookmark(false);
-			SetDisplay80ColHint(false);
+			SetDisplayColHint(false);
 			m_RightMarginWidth = 0;
 		}
 
@@ -1012,16 +1012,16 @@ void MadEdit::SetDisplayBookmark(bool value)
 	Refresh(false);
 }
 
-void MadEdit::SetDisplay80ColHint(bool value)
+void MadEdit::SetDisplayColHint(bool value)
 {
-	if (value != m_Display80ColHint)
+	if (value != m_DisplayColHint)
 	{
-		m_Display80ColHint = value;
+		m_DisplayColHint = value;
 
 		if (m_StorePropertiesToGlobalConfig)
 		{
 			wxString oldpath = m_Config->GetPath();
-			m_Config->Write(wxT("/MadEdit/Display80ColHint"), value);
+			m_Config->Write(wxT("/MadEdit/DisplayColHint"), value);
 			m_Config->SetPath(oldpath);
 		}
 	}

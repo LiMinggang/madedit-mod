@@ -1365,12 +1365,12 @@ namespace mad_python {
 			{ madedit->SetDisplayLineNumber(true); }
 		}
 
-		void Display80ColHint() {
+		void DisplayColHint() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
-			{ madedit->SetDisplay80ColHint(true); }
+			{ madedit->SetDisplayColHint(true); }
 		}
 
 		void DisplayBookmark() {
@@ -1429,12 +1429,12 @@ namespace mad_python {
 			{ madedit->SetDisplayBookmark(false); }
 		}
 
-		void Hide80ColHint() {
+		void HideColHint() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if (!madedit)
 				madedit = g_ActiveMadEdit;
 			if (madedit)
-			{ madedit->SetDisplay80ColHint(false); }
+			{ madedit->SetDisplayColHint(false); }
 		}
 
 		bool GetDisplayLineNumber() {
@@ -3269,13 +3269,13 @@ BOOST_PYTHON_MODULE(madpython) {
 	.def("MarkActiveLine", &PyMadEdit::MarkActiveLine, "")
 	.def("DisplayLineNumber", &PyMadEdit::DisplayLineNumber, "")
 	.def("DisplayBookmark", &PyMadEdit::DisplayBookmark, "")
-	.def("Display80ColHint", &PyMadEdit::Display80ColHint, "")
+	.def("DisplayColHint", &PyMadEdit::DisplayColHint, "")
 	.def("HideEndOfLine", &PyMadEdit::HideEndOfLine, "")
 	.def("HideTabChar", &PyMadEdit::HideTabChar, "")
 	.def("HideSpaceChar", &PyMadEdit::HideSpaceChar, "")
 	.def("HideMarkActiveLine", &PyMadEdit::HideMarkActiveLine, "")
 	.def("HideBookmark", &PyMadEdit::HideBookmark, "")
-	.def("Hide80ColHint", &PyMadEdit::Hide80ColHint, "")
+	.def("HideColHint", &PyMadEdit::HideColHint, "")
 	.def("GetDisplayLineNumber", &PyMadEdit::GetDisplayLineNumber, "")
 	.def("GetShowEndOfLine", &PyMadEdit::GetShowEndOfLine, "")
 	.def("GetShowTabChar", &PyMadEdit::GetShowTabChar, "")

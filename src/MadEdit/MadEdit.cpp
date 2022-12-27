@@ -879,7 +879,7 @@ MadEdit::MadEdit(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSi
 	m_AutoIndent        = m_Config->ReadBool(wxT("AutoIndent"),         true);
 	m_DisplayLineNumber = m_Config->ReadBool(wxT("DisplayLineNumber"),  true);
 	m_DisplayBookmark   = m_Config->ReadBool(wxT("DisplayBookmark"),    true);
-	m_Display80ColHint  = m_Config->ReadBool(wxT("Display80ColHint"),   true);
+	m_DisplayColHint    = m_Config->ReadBool(wxT("DisplayColHint"),   true);
 	m_ShowEndOfLine     = m_Config->ReadBool(wxT("ShowEndOfLine"),      true);
 	m_ShowSpaceChar     = m_Config->ReadBool(wxT("ShowSpaceChar"),      true);
 	m_ShowTabChar       = m_Config->ReadBool(wxT("ShowTabChar"),        true);
@@ -2653,7 +2653,7 @@ void MadEdit::PaintTextLines(wxDC *dc, const wxRect &rect, int toprow, int rowco
 			dc->DrawLine(x1, y, x1, y + rect.GetHeight());
 		}
 
-		if (!InPrinting() && m_Display80ColHint && m_FixedWidthMode)
+		if (!InPrinting() && m_DisplayColHint && m_FixedWidthMode)
 		{
 			extern long g_HintColumns;
 			int width = g_HintColumns * m_TextFontAveCharWidth;
