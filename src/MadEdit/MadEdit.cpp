@@ -2026,6 +2026,48 @@ void MadEdit::ReplaceSelection(wxString &ws)
 	//    DeleteSelection(false,vector < int > * rpos,bool bColumnEditing)
 }
 
+static void PaintTabChar(wxDC *dc, int xtop, int ytop, int width, int height)
+{
+	const int t1 = height / 7 + 1;
+	const int  y = ytop + height * 3 / 5 + 1;
+	const int tx = (t1 > (width >> 1)) ? (width >> 1) : t1;
+	const int x = xtop + 1;
+	const int dx = width - 2;
+	wxPoint pts[8] =
+	{
+		wxPoint(x, y - t1 * 2 / 3),
+		wxPoint(x, y + t1 * 2 / 3),
+		wxPoint(x, y),
+		wxPoint(x + dx, y),
+		wxPoint(x + dx - tx, y - t1),
+		wxPoint(x + dx, y),
+		wxPoint(x + dx - tx, y + t1),
+		wxPoint(x + dx, y)
+	};
+	dc->DrawLines(8, pts);
+}
+
+static void PaintBookmark(wxDC *dc, int xtop, int ytop, int width, int height, MadAttributes* attr)
+{
+	int b = height < 24 ? 1 : height / 24;
+
+	wxASSERT(attr != 0);
+
+	dc->SetPen(*(wxThePenList->FindOrCreatePen(attr->color, b, wxPENSTYLE_SOLID)));
+	dc->SetBrush(*(wxTheBrushList->FindOrCreateBrush(attr->bgcolor)));
+
+	wxRect rdrect(xtop /*+ offset*/, ytop + b, width - b, height - b * 3 / 2);
+	double r = height < 18 ? 3.0 : height / 6.0;
+	dc->DrawRoundedRectangle(rdrect, r);
+}
+
+static inline void PaintRectangle(wxDC *dc, int x1, int y1, int width, int height, const wxColour &color, int penwidth)
+{
+	dc->SetPen(*(wxThePenList->FindOrCreatePen(color, penwidth, wxPENSTYLE_SOLID)));
+	dc->SetBrush(*(wxTheBrushList->FindOrCreateBrush(color)));
+	dc->DrawRectangle(x1, y1, width, height);
+}
+
 void MadEdit::PaintTextLines(wxDC *dc, const wxRect &rect, int toprow, int rowcount, const wxColor &bgcolor)
 {
 	MadLineIterator lineiter;
@@ -2126,9 +2168,7 @@ void MadEdit::PaintTextLines(wxDC *dc, const wxRect &rect, int toprow, int rowco
 
 		if (m_Syntax->nw_BgColor != bgcolor)
 		{
-			dc->SetPen(*(wxThePenList->FindOrCreatePen(m_Syntax->nw_BgColor, 1, wxPENSTYLE_SOLID)));
-			dc->SetBrush(*(wxTheBrushList->FindOrCreateBrush(m_Syntax->nw_BgColor)));
-			dc->DrawRectangle(rect.GetLeft(), rect.GetTop(), m_LineNumberAreaWidth, rect.GetHeight()) ;
+			PaintRectangle(dc, rect.GetLeft(), rect.GetTop(), m_LineNumberAreaWidth, rect.GetHeight(), m_Syntax->nw_BgColor, 1);
 		}
 
 		reverseLineNum = (GetLayoutDirection() == wxLayout_RightToLeft);
@@ -2151,9 +2191,7 @@ void MadEdit::PaintTextLines(wxDC *dc, const wxRect &rect, int toprow, int rowco
 				if (c != current_bgcolor)
 				{
 					current_bgcolor = c;
-					dc->SetPen(*(wxThePenList->FindOrCreatePen(c, 1, wxPENSTYLE_SOLID)));
-					dc->SetBrush(*(wxTheBrushList->FindOrCreateBrush(c)));
-					dc->DrawRectangle(minleft, row_top, rectright - minleft, m_RowHeight);
+					PaintRectangle(dc, minleft, row_top, rectright - minleft, m_RowHeight, c, 1);
 				}
 			}
 
@@ -2198,9 +2236,7 @@ void MadEdit::PaintTextLines(wxDC *dc, const wxRect &rect, int toprow, int rowco
 							if (m_Syntax->nw_BgColor != current_bgcolor)
 							{
 								current_bgcolor = m_Syntax->nw_BgColor;
-								dc->SetPen(*(wxThePenList->FindOrCreatePen(m_Syntax->nw_BgColor, 1, wxPENSTYLE_SOLID)));
-								dc->SetBrush(*(wxTheBrushList->FindOrCreateBrush(m_Syntax->nw_BgColor)));
-								dc->DrawRectangle((left > minleft) ? left : minleft, row_top, rectright - left, m_RowHeight);
+								PaintRectangle(dc, (left > minleft) ? left : minleft, row_top, rectright - left, m_RowHeight, m_Syntax->nw_BgColor, 1);
 							}
 
 							dc->SetPen(*(wxThePenList->FindOrCreatePen(m_Syntax->nw_Color, 1, wxPENSTYLE_SOLID)));
@@ -2222,23 +2258,7 @@ void MadEdit::PaintTextLines(wxDC *dc, const wxRect &rect, int toprow, int rowco
 									{
 										if (m_ShowTabChar)
 										{
-											const int t1 = m_TextFontHeight / 7 + 1;
-											const int  y = text_top + m_TextFontHeight * 3 / 5 + 1;
-											const int tx = (t1 > (m_WidthBuffer[idx] >> 1)) ? (m_WidthBuffer[idx] >> 1) : t1;
-											const int x = x0 + 1;
-											const int dx = m_WidthBuffer[idx] - 2;
-											wxPoint pts[8] =
-											{
-												wxPoint(x, y - t1 * 2 / 3),
-												wxPoint(x, y + t1 * 2 / 3),
-												wxPoint(x, y),
-												wxPoint(x + dx, y),
-												wxPoint(x + dx - tx, y - t1),
-												wxPoint(x + dx, y),
-												wxPoint(x + dx - tx, y + t1),
-												wxPoint(x + dx, y)
-											};
-											dc->DrawLines(8, pts);
+											PaintTabChar(dc, x0, text_top, m_WidthBuffer[idx], m_TextFontHeight);
 										}
 									}
 								}
@@ -2300,9 +2320,7 @@ void MadEdit::PaintTextLines(wxDC *dc, const wxRect &rect, int toprow, int rowco
 							if (newBg)
 							{
 								wxASSERT(fclr != 0);
-								dc->SetPen(*(wxThePenList->FindOrCreatePen(*fclr, pensize, wxPENSTYLE_SOLID)));
-								dc->SetBrush(*(wxTheBrushList->FindOrCreateBrush(current_bgcolor)));
-								dc->DrawRectangle(left, row_top, nowright - left, m_RowHeight);
+								PaintRectangle(dc, left, row_top, nowright - left, m_RowHeight, *fclr, pensize);
 							}
 
 							dc->SetTextForeground(m_Syntax->nw_Color);
@@ -2395,9 +2413,7 @@ void MadEdit::PaintTextLines(wxDC *dc, const wxRect &rect, int toprow, int rowco
 				if (m_Syntax->nw_BgColor != current_bgcolor)
 				{
 					current_bgcolor = m_Syntax->nw_BgColor;
-					dc->SetPen(*(wxThePenList->FindOrCreatePen(m_Syntax->nw_BgColor, 1, wxPENSTYLE_SOLID)));
-					dc->SetBrush(*(wxTheBrushList->FindOrCreateBrush(m_Syntax->nw_BgColor)));
-					dc->DrawRectangle(left, row_top, maxright - left, m_RowHeight);
+					PaintRectangle(dc, left, row_top, maxright - left, m_RowHeight, m_Syntax->nw_BgColor, 1);
 				}
 
 				dc->SetPen(*(wxThePenList->FindOrCreatePen(m_Syntax->nw_Color, 1, wxPENSTYLE_SOLID)));
@@ -2436,9 +2452,7 @@ void MadEdit::PaintTextLines(wxDC *dc, const wxRect &rect, int toprow, int rowco
 
 				if (c != current_bgcolor)
 				{
-					dc->SetBrush(*(wxTheBrushList->FindOrCreateBrush(c)));
-					dc->SetPen(*(wxThePenList->FindOrCreatePen(c, 1, wxPENSTYLE_SOLID)));
-					dc->DrawRectangle(left, row_top, rectright - left, m_RowHeight);
+					PaintRectangle(dc, left, row_top, rectright - left, m_RowHeight, c, 1);
 				}
 			}
 
@@ -2516,7 +2530,7 @@ void MadEdit::PaintTextLines(wxDC *dc, const wxRect &rect, int toprow, int rowco
 			{
 				int l = rect.GetLeft();
 
-				if (m_DisplayLineNumber  || (displaylinenumber && m_DisplayBookmark))
+				if (m_DisplayLineNumber || (displaylinenumber && m_DisplayBookmark))
 				{
 					// paint bg
 					m_Syntax->SetAttributes(aeLineNumber);
@@ -2526,9 +2540,7 @@ void MadEdit::PaintTextLines(wxDC *dc, const wxRect &rect, int toprow, int rowco
 
 					if (m_DrawingXPos && m_Syntax->nw_BgColor != bgcolor)
 					{
-						dc->SetPen(*(wxThePenList->FindOrCreatePen(m_Syntax->nw_BgColor, 1, wxPENSTYLE_SOLID)));
-						dc->SetBrush(*(wxTheBrushList->FindOrCreateBrush(m_Syntax->nw_BgColor)));
-						dc->DrawRectangle(l, row_top, lwidth, m_RowHeight);
+						PaintRectangle(dc, l, row_top, lwidth, m_RowHeight, m_Syntax->nw_BgColor, 1);
 					}
 #if 0
 					if (displaylinenumber)
@@ -2559,17 +2571,8 @@ void MadEdit::PaintTextLines(wxDC *dc, const wxRect &rect, int toprow, int rowco
 							// add: gogo, 27.09.2009
 							if (m_Lines->m_LineList.IsBookmarked(lineiter))
 							{
-								int b = m_RowHeight < 24 ? 1 : m_RowHeight / 24;
-								
-								MadAttributes* attr = GetSyntax()->GetAttributes(aeBookmark);
-								wxASSERT(attr != 0);
-
-								dc->SetPen(*(wxThePenList->FindOrCreatePen(attr->color, b, wxPENSTYLE_SOLID)));
-								dc->SetBrush(*(wxTheBrushList->FindOrCreateBrush(attr->bgcolor)));
-								
-								wxRect rdrect(l /*+ offset*/, row_top + b, lwidth - b, m_RowHeight - b * 3 / 2);
-								double r = m_RowHeight < 18 ? 3.0 : m_RowHeight / 6.0;
-								dc->DrawRoundedRectangle(rdrect, r);
+								MadAttributes *attr = GetSyntax()->GetAttributes(aeBookmark);
+								PaintBookmark(dc, l, row_top, lwidth, m_RowHeight, attr);
 							}
 						}
 
@@ -10780,7 +10783,7 @@ void MadEdit::OnSize(wxSizeEvent &evt)
 void MadEdit::OnVScroll(wxScrollEvent &evt)
 {
 	m_TopRow = evt.GetPosition();
-	DBOUT("OnVScroll:"<<m_TopRow<<"\n");
+	DBOUT("OnVScroll:" << m_TopRow << " width:" << GetUCharWidth('A') << " || " << GetTextExtent("A").x << "\n");
 
 	if (!IsHexMode())
 	{
