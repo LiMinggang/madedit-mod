@@ -16,11 +16,11 @@ A. Linux, FreeBSD, and Unix-like OS (__WXGTK__):
       1. wxWidgets-3.1.2 or higher with Unicode and IPC enabled(obsoleted)
       2. Boost-1.56.0 or higher(1.70 is recommended)
 
-      (install wxgtk gtk2-devel/gtk3-devel gettext-devel automake autoconf pkgconf rpm-build (Fedora/Mageia))
+      (install wxgtk3 gtk2-devel/gtk3-devel gettext-devel automake autoconf pkgconf rpm-build (Fedora/Mageia))
       gtk+2.0-dev/libgtk-3-dev automake (Ubuntu/Debian/ElementaryOS)
       copy wxwin.m4 to usr/share/acloXXX/ or install wxGTK-devel
 
-      install wxgtk(and rename the script under /usr/local/bin/wxgtk3uxxx-config tp wx-config)
+      install wxgtk3(and rename the script under /usr/local/bin/wxgtk3uxxx-config to wx-config)
       pkgconf for FreeBSD is recommanded
       sudo portsnap fetch extract(/usr/share/mk/bsd.port.mk not found)
 
@@ -132,7 +132,7 @@ Mod v0.4.20
 7.Fix Linux build issue with wxWidgets < 3.1.1
 8.Update Python to 2.7.18
 9.Fix langurage ID of wxWidgets
-10.Update wxWidgets to 3.2.1
+10.Update wxWidgets to 3.2.2.1
 11.Don't create new file by double clicking file title tab
 12.Fix VS compiling issue(snprintf)
 13.Fix High DPI awareness issue

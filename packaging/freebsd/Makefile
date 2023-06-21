@@ -2,7 +2,7 @@
 # $FreeBSD$
 
 PORTNAME=	madedit-mod
-PORTVERSION=	0.4.17
+PORTVERSION=	0.4.20
 CATEGORIES=	editors
 MASTER_SITES=	https://sourceforge.net/projects/${PORTNAME}/files/${PORTVERSION}/
 DISTNAME=	MadEdit-Mod\ ${PORTVERSION}
@@ -16,7 +16,7 @@ USES=		gettext pkgconfig desktop-file-utils
 WANT_UNICODE=	yes
 
 GNU_CONFIGURE=	yes
-CONFIGURE_ARGS+=--with-boost=${HOME}/boost_1_70_0
+CONFIGURE_ARGS+=--with-boost=${HOME}/boost_1_82_0
 CONFIGURE_ENV+=	PKG_CONFIG="${PKG_CONFIG}" glib_gtk3_CFLAGS="${glib_gtk2_CFLAGS}" glib_gtk3_LIBS="${glib_gtk2_LIBS}"
 CXXFLAGS+=	${glib_gtk3_CFLAGS}
 CPPFLAGS+=	-I/usr/local/include

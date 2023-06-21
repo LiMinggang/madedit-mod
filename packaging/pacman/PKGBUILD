@@ -5,8 +5,8 @@
 #   2) Extract('tar -xvf ...') the source code packages at your {HOME} or other(change the {HOME} in './configure ...')
 #   3) Run 'makepkg' under the directory of this file
 
-boost=${HOME}/boost_1_71_0
-wxWidgets=${HOME}/wxWidgets-3.1.3
+boost=${HOME}/boost_1_82_0
+wxWidgets=${HOME}/wxWidgets-3.2.2.1
 pkgname=madedit-mod
 pkgver=$MADEDIT_VERSION
 pkgrel=1
@@ -22,7 +22,7 @@ build() {
 
   sh ./autogen.sh
 
-  sh ./configure --prefix=/usr --with-boost=$boost  --with-wxdir=$wxWidgets --with-gtk=3
+  sh ./configure --prefix=/usr --with-boost=$boost --with-wxdir=$wxWidgets --with-gtk=3
   make
 }
 

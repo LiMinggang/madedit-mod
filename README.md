@@ -81,6 +81,21 @@ Translations
 
 News
 =======
+Mod v0.4.20
+* Fix: JSON formatter convert Unicode chars to UTF8 chars #309
+* Fix global-buffer-overflow due EUCTW_TABLE_SIZE
+* Crashing sequence with nsSJISProber
+* Input size could not decrease the size of Input control
+* Fix compiling issue under wx 3.1.4
+* Fix bug that caused file type detect wrongly
+* Fix Linux build issue with wxWidgets < 3.1.1
+* Update Python to 2.7.18
+* Fix langurage ID of wxWidgets
+* Update wxWidgets to 3.2.2.1
+* Don't create new file by double clicking file title tab
+* Fix VS compiling issue(snprintf)
+* Fix High DPI awareness issue
+
 Mod v0.4.19
 * Fix: Disable safe mode in PanChinese search
 * Fix: String encoding bug in MadPython #304

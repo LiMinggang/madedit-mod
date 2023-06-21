@@ -1,3 +1,19 @@
+madedit-mod (0.4.20-1) stable; urgency=low
+  1.Fix: JSON formatter convert Unicode chars to UTF8 chars #309
+  2.Fix global-buffer-overflow due EUCTW_TABLE_SIZE
+  3.Crashing sequence with nsSJISProber
+  4.Input size could not decrease the size of Input control
+  5.Fix compiling issue under wx 3.1.4
+  6.Fix bug that caused file type detect wrongly
+  7.Fix Linux build issue with wxWidgets < 3.1.1
+  8.Update Python to 2.7.18
+  9.Fix langurage ID of wxWidgets
+  10.Update wxWidgets to 3.2.2.1
+  11.Don't create new file by double clicking file title tab
+  12.Fix VS compiling issue(snprintf)
+  13.Fix High DPI awareness issue
+ -- Minggang Li <liminggang@gmail.com>  Wed, 21 June 2023 17:35:45 +0800
+
 madedit-mod (0.4.19-1) stable; urgency=low
   1.Fix: Disable safe mode in PanChinese search
   2.Fix: String encoding bug in MadPython #304
