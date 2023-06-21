@@ -877,6 +877,7 @@ public:
 	friend void OnHScrollMouseRightUp(MadEdit *madedit);
 };
 
+
 enum MadPreviewType
 {
 	ptPREVIEW_NONE,
@@ -886,7 +887,8 @@ enum MadPreviewType
 	//MAX::menuPreview16
 };
 extern MadEditFrame *g_MainFrame;
-extern void OnReceiveMessage(const wchar_t *msg, size_t WXUNUSED(size), bool activeFile = true);
+void OnReceiveMessage(const wchar_t *msg, size_t WXUNUSED(size), bool activeFile = true);
+void OnEditMouseRightUp(MadEdit * madedit);
 
 #define USE_GENERIC_TREECTRL 1
 #if USE_GENERIC_TREECTRL
