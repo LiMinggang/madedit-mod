@@ -11,7 +11,15 @@
                 #error "Unknown LONG size"
             #endif
         #else
-            #if __SIZEOF_LONG__ == 8 || defined(__x86_64__)
+            #if defined(__aarch64__) || defined(__arm__)
+                #if __SIZEOF_LONG__ == 8
+                    #include "pyconfig-arm64.h"
+                #elif __SIZEOF_LONG__ == 4 || defined(__i386__)
+                    #include "pyconfig-arm32.h"
+                #else
+                    #error "Unknown LONG size"
+                #endif
+            #elif __SIZEOF_LONG__ == 8 || defined(__x86_64__)
                 #include "pyconfig-64.h"
             #elif __SIZEOF_LONG__ == 4 || defined(__i386__)
                 #include "pyconfig-32.h"
