@@ -14,7 +14,7 @@ pkgdesc="Cross-platform Text/Hex Editor, a fork of MadEdit with bug fixes and en
 arch=("i686" "x86_64")
 url="https://github.com/LiMinggang/madedit-mod"
 license=('GPL')
-source=("https://github.com/LiMinggang/madedit-mod/archive/$pkgver.tar.gz")
+source=("https://github.com/LiMinggang/madedit-mod/archive/refs/tags/$pkgver.tar.gz")
 sha256sums=('SKIP')
 
 build() {
