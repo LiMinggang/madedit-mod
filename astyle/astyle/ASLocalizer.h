@@ -1,5 +1,5 @@
 // ASLocalizer.h
-// Copyright (c) 2018 by Jim Pattee <jimp03@email.com>.
+// Copyright (c) 2023 The Artistic Style Authors.
 // This code is licensed under the MIT License.
 // License.md describes the conditions under which this software may be distributed.
 
@@ -19,8 +19,6 @@
 
 namespace astyle {
 
-using namespace std;
-
 #ifndef ASTYLE_LIB
 
 //-----------------------------------------------------------------------------
@@ -35,7 +33,7 @@ class ASLocalizer
 public:		// functions
 	ASLocalizer();
 	virtual ~ASLocalizer();
-	string getLanguageID() const;
+	std::string getLanguageID() const;
 	const Translation* getTranslationClass() const;
 #ifdef _WIN32
 	void setLanguageFromLCID(size_t lcid);
@@ -48,8 +46,8 @@ private:	// functions
 
 private:	// variables
 	Translation* m_translationClass;// pointer to a polymorphic Translation class
-	string m_langID;				// language identifier from the locale
-	string m_subLangID;				// sub language identifier, if needed
+	std::string m_langID;				// language identifier from the locale
+	std::string m_subLangID;				// sub language identifier, if needed
 #ifdef _WIN32
 	size_t m_lcid;					// LCID of the user locale (Windows only)
 	size_t m_codepage;				// active codepage, 65001 = utf-8
@@ -63,36 +61,36 @@ private:	// variables
 class Translation
 // This base class is inherited by the language translation classes.
 // Polymorphism is used to call the correct language translator.
-// This class contains the translation vector and settext translation method.
-// The language vector is built by the language sub classes.
+// This class contains the translation std::vector and settext translation method.
+// The language std::vector is built by the language sub classes.
 // NOTE: This class must have virtual methods for typeid() to work.
 //       typeid() is used by AStyleTestI18n_Localizer.cpp.
 {
 public:
-	Translation() {}
-	virtual ~Translation() {}
-	string convertToMultiByte(const wstring& wideStr) const;
-	string getTranslationString(size_t i) const;
+	Translation();
+	virtual ~Translation() = default;
+	std::string convertToMultiByte(const std::wstring& wideStr) const;
+	std::string getTranslationString(size_t i) const;
 	size_t getTranslationVectorSize() const;
-	bool getWideTranslation(const string& stringIn, wstring& wideOut) const;
-	string& translate(const string& stringIn) const;
+	bool getWideTranslation(const std::string& stringIn, std::wstring& wideOut) const;
+	std::string& translate(const std::string& stringIn) const;
 
 protected:
-	void addPair(const string& english, const wstring& translated);
+	void addPair(const std::string& english, const std::wstring& translated);
 	// variables
-	vector<pair<string, wstring> > m_translationVector;
+	std::vector<std::pair<std::string, std::wstring> > m_translationVector;
 
 private:
 	// the number of translation pairs added a constructor
 	static const size_t translationElements = 30;	// need static for vs2013
-	// the translated string
-	mutable string m_mbTranslation;
+	// the translated std::string
+	mutable std::string m_mbTranslation;
 };
 
 //----------------------------------------------------------------------------
 // Translation classes
 // One class for each language.
-// These classes have only a constructor which builds the language vector.
+// These classes have only a constructor which builds the language std::vector.
 //----------------------------------------------------------------------------
 
 class Bulgarian : public Translation
