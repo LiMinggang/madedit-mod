@@ -16,7 +16,8 @@ contains the approximate word count (for optimal hash memory size). Each word
 may optionally be followed by a slash ("/") and one or more flags, which
 represents the word attributes, for example affixes.
 
-Note: Dictionary words can contain also slashes when escaped like  "\/" syntax. 
+Note: Dictionary words can contain also slashes when escaped like "\\/"
+syntax.
 
 It's worth to add not only words, but word pairs to the dictionary to get correct
 suggestions for common misspellings with missing space, as in the
@@ -122,7 +123,6 @@ Set flag type. Default type is the extended ASCII (8-bit) character.
 The `long' value sets the double extended ASCII character flag type,
 the `num' sets the decimal number flag type. Decimal flags numbered from 1 to
 65000, and in flag fields are separated by comma.
-BUG: UTF-8 flag type doesn't work on ARM platform.
 .PP
 .RS
 .nf

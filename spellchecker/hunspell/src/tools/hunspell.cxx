@@ -2,7 +2,7 @@
 /* ***** BEGIN LICENSE BLOCK *****
  * Version: MPL 1.1/GPL 2.0/LGPL 2.1
  *
- * Copyright (C) 2002-2017 Németh László
+ * Copyright (C) 2002-2022 Németh László
  *
  * The contents of this file are subject to the Mozilla Public License Version
  * 1.1 (the "License"); you may not use this file except in compliance with
@@ -46,7 +46,7 @@
 #include <sstream>
 #include <string>
 #include <string.h>
-#include "../../config.h"
+#include <config.h>
 #include "../hunspell/atypes.hxx"
 #include "../hunspell/hunspell.hxx"
 #include "../hunspell/csutil.hxx"
@@ -288,7 +288,6 @@ TextParser* get_parser(int format, const char* extension, Hunspell* pMS) {
   int io_utf8 = 0;
   const char* denc = pMS->get_dict_encoding().c_str();
 #ifdef HAVE_ICONV
-  initialize_utf_tbl();  // also need for 8-bit tokenization
   if (io_enc) {
     if ((strcmp(io_enc, "UTF-8") == 0) || (strcmp(io_enc, "utf-8") == 0) ||
         (strcmp(io_enc, "UTF8") == 0) || (strcmp(io_enc, "utf8") == 0)) {
@@ -309,7 +308,7 @@ TextParser* get_parser(int format, const char* extension, Hunspell* pMS) {
     const std::vector<w_char>& vec_wordchars_utf16 = pMS->get_wordchars_utf16();
     const std::string& vec_wordchars = pMS->get_wordchars_cpp();
     wordchars_utf16_len = vec_wordchars_utf16.size();
-    wordchars_utf16 = wordchars_utf16_len ? &vec_wordchars_utf16[0] : NULL;
+    wordchars_utf16 = wordchars_utf16_len ? vec_wordchars_utf16.data() : NULL;
     if ((strcmp(denc, "UTF-8") != 0) && !vec_wordchars.empty()) {
       const char* wchars = vec_wordchars.c_str();
       size_t c1 = vec_wordchars.size();
@@ -325,7 +324,7 @@ TextParser* get_parser(int format, const char* extension, Hunspell* pMS) {
         iconv_close(conv);
         u8_u16(new_wordchars_utf16, text_conv);
         std::sort(new_wordchars_utf16.begin(), new_wordchars_utf16.end());
-        wordchars_utf16 = &new_wordchars_utf16[0];
+        wordchars_utf16 = new_wordchars_utf16.data();
         wordchars_utf16_len = new_wordchars_utf16.size();
       }
     }
@@ -391,7 +390,7 @@ TextParser* get_parser(int format, const char* extension, Hunspell* pMS) {
 #else
   if (strcmp(denc, "UTF-8") == 0) {
     const std::vector<w_char>& vec_wordchars_utf16 = pMS->get_wordchars_utf16();
-    wordchars_utf16 = (vec_wordchars_utf16.size() == 0) ? NULL : &vec_wordchars_utf16[0];
+    wordchars_utf16 = (vec_wordchars_utf16.size() == 0) ? NULL : vec_wordchars_utf16.data();
     wordchars_utf16_len = vec_wordchars_utf16.size();
     io_utf8 = 1;
   } else {
@@ -578,10 +577,21 @@ const char* basename(const char* s, char c) {
   return p;
 }
 
+char* mystrdup(const char* s) {
+  char* d = NULL;
+  if (s) {
+    int sl = strlen(s) + 1;
+    d = (char*)malloc(sl);
+    if (d)
+      memcpy(d, s, sl);
+  }
+  return d;
+}
+
 #ifdef HAVE_CURSES_H
-char* scanline(char* message) {
+char* scanline(const char* message) {
   char input[INPUTLEN];
-  printw(message);
+  printw("%s", message);
   echo();
   getnstr(input, INPUTLEN);
   noecho();
@@ -799,7 +809,8 @@ nextline:
         mystrrep(token, ENTITY_APOS, "'");
         switch (filter_mode) {
           case BADWORD: {
-            if (!check(pMS, &d, token, NULL, NULL)) {
+            int info;
+            if (!check(pMS, &d, token, &info, NULL)) {
               bad = 1;
               if (!printgood)
                 fprintf(stdout, "%s%s\n", filename_prefix.c_str(), token.c_str());
@@ -811,7 +822,8 @@ nextline:
           }
 
           case WORDFILTER: {
-            if (!check(pMS, &d, parser->get_word(token), NULL, NULL)) {
+            int info;
+            if (!check(pMS, &d, parser->get_word(token), &info, NULL)) {
               if (!printgood)
                 fprintf(stdout, "%s\n", buf);
             } else {
@@ -822,7 +834,8 @@ nextline:
           }
 
           case BADLINE: {
-            if (!check(pMS, &d, parser->get_word(token), NULL, NULL)) {
+            int info;
+            if (!check(pMS, &d, parser->get_word(token), &info, NULL)) {
               bad = 1;
             }
             continue;
@@ -833,7 +846,8 @@ nextline:
           case AUTO2:
           case AUTO3: {
             FILE* f = (filter_mode == AUTO) ? stderr : stdout;
-            if (!check(pMS, &d, parser->get_word(token), NULL, NULL)) {
+            int info;
+            if (!check(pMS, &d, parser->get_word(token), &info, NULL)) {
               bad = 1;
               std::vector<std::string> wlst =
                   pMS[d]->suggest(chenc(parser->get_word(token), io_enc, dic_enc[d]));
@@ -1180,9 +1194,9 @@ void dialogscreen(TextParser* parser,
   mvprintw(MAXPREVLINE + 2, 0, "\n");
   for (size_t i = 0; i < wlst.size(); ++i) {
     if ((wlst.size() > 10) && (i < 10)) {
-      printw(" 0%d: %s\n", i, chenc(wlst[i], io_enc, ui_enc).c_str());
+      printw(" 0%zu: %s\n", i, chenc(wlst[i], io_enc, ui_enc).c_str());
     } else {
-      printw(" %d: %s\n", i, chenc(wlst[i], io_enc, ui_enc).c_str());
+      printw(" %zu: %s\n", i, chenc(wlst[i], io_enc, ui_enc).c_str());
     }
   }
 
@@ -1878,7 +1892,7 @@ int main(int argc, char** argv) {
       fprintf(stdout, "\n");
       if (strcmp(argv[i], "-vv") != 0) {
         fprintf(stdout, "%s",
-                gettext("\nCopyright (C) 2002-2014 L\303\241szl\303\263 "
+                gettext("\nCopyright (C) 2002-2022 L\303\241szl\303\263 "
                         "N\303\251meth. License: MPL/GPL/LGPL.\n\n"
                         "Based on OpenOffice.org's Myspell library.\n"
                         "Myspell's copyright (C) Kevin Hendricks, 2001-2002, "
@@ -2066,9 +2080,6 @@ int main(int argc, char** argv) {
         gettext(
             "AVAILABLE DICTIONARIES (path is not mandatory for -d option):\n"));
     search(path, NULL, NULL);
-    if (-1 == arg_files) {
-      exit(0);
-    }
   }
 
   if (!privdicname)
@@ -2114,6 +2125,10 @@ int main(int argc, char** argv) {
                             "dictionary named \"%s\".\n"),
             dicname);
     exit(1);
+  }
+
+  if (showpath && -1 == arg_files) {
+      exit(0);
   }
 
   /* open the private dictionaries */
@@ -2207,9 +2222,6 @@ int main(int argc, char** argv) {
     free(aff);
   if (dic)
     free(dic);
-#ifdef HAVE_ICONV
-  free_utf_tbl();
-#endif
   for (int i = 0; i < dmax; i++)
     delete pMS[i];
   return 0;
