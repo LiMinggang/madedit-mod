@@ -122,6 +122,12 @@ Note: Not support wxWidgets 2.X anymore since 0.3.X
 Todo:
 Packing for FreeBSD
 
+.Fix ARM64 build
+.Use per monitor DPI awareness V2
+.Update Astyle to 3.4.9
+.Update hunspell to 1.7.2
+.Update wxWidgets to 3.2.4
+
 Mod v0.4.20
 1.Fix: JSON formatter convert Unicode chars to UTF8 chars #309
 2.Fix global-buffer-overflow due EUCTW_TABLE_SIZE
