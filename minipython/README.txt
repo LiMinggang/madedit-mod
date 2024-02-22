@@ -1,9 +1,9 @@
 Minipython is based on http://www.adintr.com/article/blog/281(Python 2.7.2). I updated it to 2.7.15.
 
 Based on the description from the author:
-1. È¥µô python ½âÊÍÆ÷¶Ô Python Ô´´úÂëµÄ±ê×¼¿âµÄÒÀÀµ. 
-2. È¥µôÁËÒ»ÏÂµÄÒ»Ğ©Ä£¿é: cPickle, _io, datetime,  _random, cStringIO, _lsprof, _collections, _struct, _sre, time, _locale, _headq, _functools, _weakref, itertools
-3. È¥µôÁËÕâÁ½¸öÄÚ½¨µÄ¶ÔÏó: bytearray,  memoryobject
+1. å»æ‰ python è§£é‡Šå™¨å¯¹ Python æºä»£ç çš„æ ‡å‡†åº“çš„ä¾èµ–. 
+2. å»æ‰äº†ä»¥ä¸‹çš„ä¸€äº›æ¨¡å—: cPickle, _io, datetime,  _random, cStringIO, _lsprof, _collections, _struct, _sre, time, _locale, _headq, _functools, _weakref, itertools
+3. å»æ‰äº†è¿™ä¸¤ä¸ªå†…å»ºçš„å¯¹è±¡: bytearray,  memoryobject
 
 English:
 1. Removed the dependency between Python interpreter and Python source code standard library.
