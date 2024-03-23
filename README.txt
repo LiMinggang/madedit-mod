@@ -123,6 +123,7 @@ Todo:
 Packing for FreeBSD
 
 .Fix ARM64 build
+.Fix bug in FindTextAll macro recording, issue #331
 .Use per monitor DPI awareness V2
 .Update Astyle to 3.4.9
 .Update hunspell to 1.7.2

@@ -1790,7 +1790,7 @@ void MadSearchReplaceDialog::SearchAll(MadEdit * madedit, bool needRec/*=true*/)
 			if (needRec && (IsMacroRecording()))
 			{
 				MadSearchEscapeString(expr, bRegex);
-				wxString fnstr(wxString::Format(wxT("FindTextAll(\"%s\", bRegex=%s, bCaseSensitive=%s, bWholeWord=%s, bDotMatchNewline=%s, bPanChinese=%s, False)"),  expr.c_str(),
+				wxString fnstr(wxString::Format(wxT("FindTextAll(\"%s\", bRegex=%s, bCaseSensitive=%s, bWholeWord=%s, bDotMatchNewline=%s, bPanChinese=%s, showresults=False)"),  expr.c_str(),
 												  bRegex ? wxT("True") : wxT("False"),
 												  bCaseSensitive ? wxT("True") : wxT("False"),
 												  bWholeWord ? wxT("True") : wxT("False"),
