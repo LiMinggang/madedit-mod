@@ -795,6 +795,7 @@ MadEdit::MadEdit(wxWindow* parent, wxWindowID id, const wxPoint& pos, const wxSi
 	m_Modified = false;
 	m_ModificationTime = 0;
 	m_ReadOnly = false;
+	m_RulerHeight = 18;
 #ifdef __WXMSW__
 	wxCaret *caret = new wxCaret(this, 2, 2);
 #else
@@ -1897,7 +1898,7 @@ void MadEdit::PaintText(wxDC *dc, int x, int y, const ucs4_t *text, const int *w
 	if (len > 0)
 	{
 		HDC hdc = (HDC)dc->GetHDC();
-		SetTextColor(hdc, m_Syntax->nw_Color.GetPixel());
+		SetTextColor(hdc, m_Syntax->nw_Color.GetRGB());
 		::ExtTextOut(hdc, nowleft, y, 0, nullptr, m_WCWordBuffer + wcstart, len, m_WCWidthBuffer + wcstart);
 	}
 
@@ -2078,6 +2079,7 @@ void MadEdit::PaintTextLines(wxDC *dc, const wxRect &rect, int toprow, int rowco
 	bool displaylinenumber = true; // check first row for displayning line-number or not
 	int wordwidth = -1, wordlength = -1, lastwordwidth = -1;
 	wxFont *font = nullptr;
+	wxColor& activeLineBGcolor = m_Syntax->GetAttributes(aeActiveLine)->color;
 
 	wxASSERT(subrowid >= 0);
 
@@ -2180,7 +2182,10 @@ void MadEdit::PaintTextLines(wxDC *dc, const wxRect &rect, int toprow, int rowco
 		do                          // every row of line
 		{
 			left = leftpos;
-			current_bgcolor = bgcolor;
+			if (m_MarkActiveLine && m_CaretPos.rowid == toprow)
+				current_bgcolor = activeLineBGcolor;
+			else
+				current_bgcolor = bgcolor;
 			// paint left margin
 			int leftmarginwidth = m_LeftMarginWidth - m_DrawingXPos;
 
@@ -2191,7 +2196,10 @@ void MadEdit::PaintTextLines(wxDC *dc, const wxRect &rect, int toprow, int rowco
 				if (c != current_bgcolor)
 				{
 					current_bgcolor = c;
-					PaintRectangle(dc, minleft, row_top, rectright - minleft, m_RowHeight, c, 1);
+					if (m_MarkActiveLine && m_CaretPos.rowid == toprow)
+						PaintRectangle(dc, minleft, row_top, rectright - minleft, m_RowHeight, activeLineBGcolor, 1);
+					else
+						PaintRectangle(dc, minleft, row_top, rectright - minleft, m_RowHeight, c, 1);
 				}
 			}
 
@@ -2678,6 +2686,7 @@ void MadEdit::PaintTextLines(wxDC *dc, const wxRect &rect, int toprow, int rowco
 
 void MadEdit::PaintHexDigit(wxDC *dc, int x, int y, const ucs4_t *hexdigit, const int *width, int count)
 {
+
 	while (count > 0)
 	{
 		if (*hexdigit != 0x20)
@@ -2689,8 +2698,10 @@ void MadEdit::PaintHexDigit(wxDC *dc, int x, int y, const ucs4_t *hexdigit, cons
 				if (xsrc > 22) xsrc = 16;
 				else xsrc -= 7;
 			}
-
-			dc->Blit(x, y, m_HexFontMaxDigitWidth, m_RowHeight, m_HexDigitDC, xsrc * m_HexFontMaxDigitWidth, 0);
+			if (m_CaretAtHexArea)
+				dc->Blit(x, y, m_HexFontMaxDigitWidth, m_RowHeight, m_HexDigitDC, xsrc * m_HexFontMaxDigitWidth, 0);
+			else
+				dc->Blit(x, y, m_HexFontMaxDigitWidth, m_RowHeight, m_HexDigitDC, (xsrc+17) * m_HexFontMaxDigitWidth, 0);
 		}
 
 		x += *width;
@@ -2720,13 +2731,13 @@ void MadEdit::PaintHexOffset(wxDC *dc, int x, int y, const ucs4_t *hexdigit, con
 	}
 }
 
-void MadEdit::PaintHexLines(wxDC *dc, wxRect &rect, int toprow, int rowcount, bool painthead)
+void MadEdit::PaintHexLines(wxDC *dc, wxRect &rect, int toprow, int rowcount, bool painthead, wxColour tempColor)
 {
 	int left = rect.x;
 	int top = rect.y;
 	wxFont *font = m_HexFontDIP;
 	int width = m_HexFontMaxDigitWidth;
-	
+	wxColour oldColor;
 
 	if (InPrinting())
 	{
@@ -2739,7 +2750,7 @@ void MadEdit::PaintHexLines(wxDC *dc, wxRect &rect, int toprow, int rowcount, bo
 		m_WidthBuffer[i] = width;
 
 	m_Syntax->SetAttributes(aeText);
-	dc->SetTextForeground(m_Syntax->nw_Color);
+	oldColor = m_Syntax->nw_Color;
 	dc->SetFont(*font);
 	wxColor &markcolor = m_Syntax->GetAttributes(aeActiveLine)->color;
 	dc->SetPen(*(wxThePenList->FindOrCreatePen(markcolor, 1, wxPENSTYLE_SOLID)));
@@ -2841,8 +2852,14 @@ void MadEdit::PaintHexLines(wxDC *dc, wxRect &rect, int toprow, int rowcount, bo
 
 		m_WordBuffer[idx] = wxT('|');
 		PaintHexDigit(dc, left, top, m_WordBuffer, m_WidthBuffer, 16 * 3 + 1);
+
 		left += width * (16 * 3 + 2);
 		// paint text data
+		if (!m_CaretAtHexArea)
+			m_Syntax->nw_Color = oldColor;
+		else
+			m_Syntax->nw_Color = tempColor;
+
 		idx = 0;
 		int *pw = m_WidthBuffer + 60;
 
@@ -8094,6 +8111,7 @@ void MadEdit::ProcessCommand(MadEditCommand command)
 							{
 								if (IsTextMode())
 								{
+									m_RepaintAll = true; // add by sln.1550
 									if (m_CaretPos.subrowid != 0)   // to prev subrow
 									{
 										--m_CaretPos.rowid;
@@ -8141,6 +8159,7 @@ void MadEdit::ProcessCommand(MadEditCommand command)
 						{
 							if (IsTextMode())
 							{
+								m_RepaintAll = true; // add by sln.1550
 								MadLineIterator & lit = m_CaretPos.iter;
 
 								if (m_CaretPos.subrowid + 1 < int(lit->RowCount()))  // to next subrow
@@ -8190,6 +8209,7 @@ void MadEdit::ProcessCommand(MadEditCommand command)
 				case ecUp:
 					if (m_Selection)
 						m_CaretPos = *m_SelectionBegin;
+					m_RepaintAll = true; // add by sln.1550
 
 				case ecSelUp:
 					if (m_CaretPos.rowid > 0)
@@ -8226,6 +8246,7 @@ void MadEdit::ProcessCommand(MadEditCommand command)
 				case ecDown:
 					if (m_Selection)
 						m_CaretPos = *m_SelectionEnd;
+					m_RepaintAll = true; // add by sln.1550
 
 				case ecSelDown:
 					if (m_CaretPos.rowid < int(m_Lines->m_RowCount - 1)) //to next line/row
@@ -9978,6 +9999,7 @@ void MadEdit::OnKeyUp(wxKeyEvent& evt)
 
 void MadEdit::OnMouseLeftDown(wxMouseEvent &evt)
 {
+	int row;
 	//wxTheApp->GetTopWindow()->SetTitle(wxString::Format(wxT("LDown")));
 	DBOUT("LDown\n");
 
@@ -9985,7 +10007,7 @@ void MadEdit::OnMouseLeftDown(wxMouseEvent &evt)
 	{
 		ReleaseMouse();
 	}
-
+	
 	if ((!IsHexMode()) && evt.m_x >= 0 && evt.m_x <= (m_LineNumberAreaWidth + m_BookmarkWidth))
 	{
 		if (evt.m_controlDown)
@@ -9996,7 +10018,7 @@ void MadEdit::OnMouseLeftDown(wxMouseEvent &evt)
 		}
 		else
 		{
-			int row = evt.m_y / m_RowHeight;
+			row = (evt.m_y - m_RulerHeight) / m_RowHeight;
 			// update current caretpos
 			row += m_TopRow;
 
@@ -10037,8 +10059,8 @@ void MadEdit::OnMouseLeftDown(wxMouseEvent &evt)
 		return;
 	}
 
-	int row = evt.m_y / m_RowHeight;
-	if (IsHexMode() && row == 0)
+	row = (evt.m_y - m_RulerHeight) / m_RowHeight;
+	if (IsHexMode() && evt.m_y / m_RowHeight == 0)
 	{
 		m_MouseLeftDown = false;
 		m_MouseAtHexTextArea = false;
@@ -10072,51 +10094,50 @@ void MadEdit::OnMouseLeftDown(wxMouseEvent &evt)
 				//EndUpdateSelection(false);  // reset selection
 			}
 		}
-
-		if (!IsHexMode())
-		{
-			// update current caretpos
-			row += m_TopRow;
-
-			if (row >= int(m_Lines->m_RowCount))
-				row = int(m_Lines->m_RowCount - 1);
-
-			m_CaretPos.rowid = row;
-			m_CaretPos.lineid = GetLineByRow(m_CaretPos.iter, m_CaretPos.pos, row);
-			m_CaretPos.subrowid = m_CaretPos.rowid - row;
-			MadRowIndexIterator riter = m_CaretPos.iter->m_RowIndices.begin();
-			std::advance(riter, m_CaretPos.subrowid);
-			m_CaretPos.linepos = riter->m_Start;
-			m_CaretPos.pos += m_CaretPos.linepos;
-			UpdateCaretByXPos(evt.m_x + m_DrawingXPos - m_LineNumberAreaWidth - m_BookmarkWidth - m_LeftMarginWidth,
-							   m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos);
-			m_LastCaretXPos = m_CaretPos.xpos;
-		}
-		else                    // HexMode
-		{
-			int xpos = evt.m_x + m_DrawingXPos;
-			const int divide = 58 * m_HexFontMaxDigitWidth + (m_HexFontMaxDigitWidth >> 1);
-
-			if (xpos < divide)
+		
+			if (!IsHexMode())
 			{
-				m_CaretAtHexArea = true;
+				// update current caretpos
+				row += m_TopRow;
+
+				if (row >= int(m_Lines->m_RowCount))
+					row = int(m_Lines->m_RowCount - 1);
+
+				m_CaretPos.rowid = row;
+				m_CaretPos.lineid = GetLineByRow(m_CaretPos.iter, m_CaretPos.pos, row);
+				m_CaretPos.subrowid = m_CaretPos.rowid - row;
+				MadRowIndexIterator riter = m_CaretPos.iter->m_RowIndices.begin();
+				std::advance(riter, m_CaretPos.subrowid);
+				m_CaretPos.linepos = riter->m_Start;
+				m_CaretPos.pos += m_CaretPos.linepos;
+				UpdateCaretByXPos(evt.m_x + m_DrawingXPos - m_LineNumberAreaWidth - m_BookmarkWidth - m_LeftMarginWidth,
+					m_CaretPos, m_ActiveRowUChars, m_ActiveRowWidths, m_CaretRowUCharPos);
+				m_LastCaretXPos = m_CaretPos.xpos;
 			}
-			else
+			else                    // HexMode
 			{
-				m_CaretAtHexArea = false;
-				m_CaretAtHalfByte = false;
+				int xpos = evt.m_x + m_DrawingXPos;
+				const int divide = 58 * m_HexFontMaxDigitWidth + (m_HexFontMaxDigitWidth >> 1);
+
+				if (xpos < divide)
+				{
+					m_CaretAtHexArea = true;
+				}
+				else
+				{
+					m_CaretAtHexArea = false;
+					m_CaretAtHalfByte = false;
+				}
+				row = evt.m_y / m_RowHeight - 1;
+				row += m_TopRow;
+
+				if (row >= m_TopRow + m_HexRowCount)
+					row = m_TopRow + m_HexRowCount - 1;
+
+				UpdateHexPosByXPos(row, xpos);
+				m_RepaintAll = true;
 			}
-
-			--row;
-			row += m_TopRow;
-
-			if (row >= m_TopRow + m_HexRowCount)
-				row = m_TopRow + m_HexRowCount - 1;
-
-			UpdateHexPosByXPos(row, xpos);
-			m_RepaintAll = true;
-		}
-
+		
 		if (!evt.m_shiftDown)
 		{
 			if ((m_Selection) && (evt.m_x > (m_LineNumberAreaWidth + m_BookmarkWidth)) && (m_CaretPos.pos > m_SelectionBegin->pos && m_CaretPos.pos < m_SelectionEnd->pos) && (!IsHexMode()) && ((IsTextMode()) ||
@@ -10281,7 +10302,7 @@ void MadEdit::OnMouseLeftDClick(wxMouseEvent &evt)
 	m_MouseLeftDoubleClick = true;
 	m_MouseLeftDown = true;
 
-	int row = evt.m_y / m_RowHeight;
+	int row = (evt.m_y - m_RulerHeight) / m_RowHeight;
 	// update current caretpos
 	row += m_TopRow;
 
@@ -10353,9 +10374,9 @@ void MadEdit::OnMouseMotion(wxMouseEvent &evt)
 		{
 			int row;
 
-			if (evt.m_y < 0)
+			if ((evt.m_y - m_RulerHeight) < m_RowHeight)
 			{
-				row = (-evt.m_y / m_RowHeight) + 1;
+				row = (-(evt.m_y - m_RulerHeight) / m_RowHeight);
 
 				if (row > m_TopRow)
 				{
@@ -10368,7 +10389,7 @@ void MadEdit::OnMouseMotion(wxMouseEvent &evt)
 			}
 			else
 			{
-				row = evt.m_y / m_RowHeight;
+				row = (evt.m_y - m_RulerHeight) / m_RowHeight;
 				row += m_TopRow;
 
 				if (row >= int(m_Lines->m_RowCount))
@@ -10962,7 +10983,7 @@ void MadEdit::UpdateCursor(int mouse_x, int mouse_y)
 {
 	if (!IsHexMode())
 	{
-		if (mouse_x > (m_LineNumberAreaWidth + m_BookmarkWidth) && mouse_x <= m_ClientWidth && mouse_y <= m_ClientHeight)
+		if (mouse_x > (m_LineNumberAreaWidth + m_BookmarkWidth) && mouse_x <= m_ClientWidth && mouse_y > m_RulerHeight && mouse_y <= m_ClientHeight)
 		{
 			if (m_DragDrop)
 			{
@@ -10997,7 +11018,7 @@ void MadEdit::UpdateCursor(int mouse_x, int mouse_y)
 	}
 	else
 	{
-		if ((mouse_x + m_DrawingXPos) > (9 * m_HexFontMaxDigitWidth) && mouse_x <= m_ClientWidth && mouse_y > m_RowHeight    && mouse_y <= m_ClientHeight)
+		if ((mouse_x + m_DrawingXPos) > (9 * m_HexFontMaxDigitWidth) && mouse_x <= m_ClientWidth && mouse_y > m_RowHeight && mouse_y <= m_ClientHeight)
 		{
 			if (m_DragDrop)
 			{
@@ -11029,6 +11050,24 @@ void MadEdit::UpdateCursor(int mouse_x, int mouse_y)
 void MadEdit::OnEraseBackground(wxEraseEvent & WXUNUSED(evt))
 {
 	// do nothing
+}
+
+void MadEdit::DrawCursor(int xpos)
+{
+	wxPaintDC dc(this);
+
+	if (xpos != m_LastCaretXPos1) {
+		dc.SetBrush(*(wxTheBrushList->FindOrCreateBrush(wxColor(240, 240, 240))));
+		dc.SetPen(*(wxThePenList->FindOrCreatePen(wxColor(240, 240, 240), 1, wxPENSTYLE_SOLID)));
+		dc.DrawLine(m_LastCaretXPos1 - 4, 0, m_LastCaretXPos1 + 5, 0);
+		dc.DrawLine(m_LastCaretXPos1 , 0, m_LastCaretXPos1 , 5);
+		m_LastCaretXPos1 = xpos;
+	}	
+	dc.SetBrush(*(wxTheBrushList->FindOrCreateBrush(wxColor(0, 0, 0))));
+	dc.SetPen(*(wxThePenList->FindOrCreatePen(wxColor(0, 0, 0), 1, wxPENSTYLE_SOLID)));
+	dc.DrawLine(xpos - 4, 0, xpos + 5, 0);
+	dc.DrawLine(xpos, 0, xpos, 5);
+
 }
 
 void MadEdit::MadEditOnPaint(wxPaintEvent *evt /*=NULL*/ )
@@ -11082,7 +11121,7 @@ void MadEdit::MadEditOnPaint(wxPaintEvent *evt /*=NULL*/ )
 			if (m_Lines->m_RowCount < (size_t)m_TopRow)
 			{
 				wxASSERT(0);
-				m_TopRow = m_Lines->m_RowCount - 1;
+				m_TopRow = m_Lines->m_RowCount ;
 			}
 
 			int rowcount = (int)(m_Lines->m_RowCount - m_TopRow);
@@ -11113,12 +11152,45 @@ void MadEdit::MadEditOnPaint(wxPaintEvent *evt /*=NULL*/ )
 				}
 
 				// clear client area
-				wxColor &bgcolor = m_Syntax->GetAttributes(aeText)->bgcolor;
+			    // ruler draw
+				wxColor rulerColor;
+				rulerColor.Set(0xf0f0f0);
+				wxColor& bgcolor = m_Syntax->GetAttributes(aeText)->bgcolor;
+				memdc.SetBrush(*(wxTheBrushList->FindOrCreateBrush(rulerColor)));
+				memdc.SetPen(*(wxThePenList->FindOrCreatePen(rulerColor, 1, wxPENSTYLE_SOLID)));
+				memdc.DrawRectangle(0, 0, m_ClientWidth, m_RulerHeight);
+
+				m_Syntax->nw_Color = m_Syntax->GetAttributes(aeText)->color;
+				memdc.SetBrush(*(wxTheBrushList->FindOrCreateBrush(m_Syntax->nw_Color)));
+				memdc.SetPen(*(wxThePenList->FindOrCreatePen(m_Syntax->nw_Color, 1, wxPENSTYLE_SOLID)));
+				memdc.DrawLine(0, m_RulerHeight - 1, m_ClientWidth, m_RulerHeight - 1);
+				
+				HDC hdc = (HDC)memdc.GetHDC();
+				//SetTextColor(hdc, m_Syntax->nw_Color.GetRGB());
+				memdc.SetFont(wxFont(10, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_MEDIUM));
+				for (int i = 0; i < (m_ClientWidth - m_LineNumberAreaWidth )/ m_TextFontMaxDigitWidth; i++)
+				{
+					int xid = m_DrawingXPos / m_TextFontMaxDigitWidth;
+					int xpos = m_LineNumberAreaWidth + i * m_TextFontMaxDigitWidth - (m_DrawingXPos % m_TextFontMaxDigitWidth) + m_BookmarkWidth + m_LeftMarginWidth;
+					wchar_t pwc[50];
+					if ((xid + i) % 10 == 0){
+						memdc.DrawLine(xpos, m_RulerHeight - 5, xpos, m_RulerHeight);
+						wsprintfW(pwc, L"%d", xid + i);
+						::ExtTextOut(hdc, xpos-7*lstrlenW(pwc)/2, m_RulerHeight-16, 0, nullptr, pwc, lstrlenW(pwc), 0);
+					}else if ((xid + i) % 5 == 0)
+						memdc.DrawLine(xpos, m_RulerHeight - 5, xpos, m_RulerHeight);
+					else
+						memdc.DrawLine(xpos, m_RulerHeight - 3, xpos, m_RulerHeight);
+				}
+				DrawCursor(m_LineNumberAreaWidth + m_BookmarkWidth + m_LeftMarginWidth + m_CaretPos.xpos - m_DrawingXPos);
+				memdc.SetFont(*m_TextFont);
+
 				memdc.SetBrush(*(wxTheBrushList->FindOrCreateBrush(bgcolor)));
 				memdc.SetPen(*(wxThePenList->FindOrCreatePen(bgcolor, 1, wxPENSTYLE_SOLID)));
-				memdc.DrawRectangle(0, 0, m_ClientWidth, m_ClientHeight);
+				memdc.DrawRectangle(0, m_RulerHeight, m_ClientWidth, m_ClientHeight);
+
 				// paint rows
-				wxRect rect(0, 0, m_ClientWidth, m_ClientHeight);
+				wxRect rect(0, m_RulerHeight, m_ClientWidth, m_ClientHeight);
 				PaintTextLines(&memdc, rect, m_TopRow, rowcount, bgcolor);
 				m_RepaintAll = false;
 				m_RepaintSelection = false;
@@ -11129,11 +11201,11 @@ void MadEdit::MadEditOnPaint(wxPaintEvent *evt /*=NULL*/ )
 					if (!(m_SelFirstRow > lastrow || m_SelLastRow < int(m_TopRow)))
 					{
 						int firstrow = int(m_TopRow);
-						wxRect rect(0, 0, m_ClientWidth, m_ClientHeight);
+						wxRect rect(0, m_RulerHeight, m_ClientWidth, m_ClientHeight);
 
 						if (firstrow < m_SelFirstRow)
 						{
-							rect.y = m_RowHeight * (m_SelFirstRow - firstrow);
+							rect.y = m_RowHeight * (m_SelFirstRow - firstrow) + m_RulerHeight;
 							firstrow = m_SelFirstRow;
 						}
 
@@ -11152,7 +11224,7 @@ void MadEdit::MadEditOnPaint(wxPaintEvent *evt /*=NULL*/ )
 						memdc.DrawRectangle(rect.x, rect.y, rect.width, rect.height);
 						PaintTextLines(&memdc, rect, firstrow, rows, bgcolor);
 					}
-
+					DrawCursor(m_LineNumberAreaWidth + m_BookmarkWidth + m_LeftMarginWidth + m_CaretPos.xpos - m_DrawingXPos);
 					m_RepaintSelection = false;
 				}
 
@@ -11181,7 +11253,7 @@ void MadEdit::MadEditOnPaint(wxPaintEvent *evt /*=NULL*/ )
 				if (m_LeftBrace_rowid >= m_TopRow && m_LeftBrace_rowid <= lastrow &&
 						x < maxright && x + w > minleft)
 				{
-					int y = (int)(m_LeftBrace_rowid - m_TopRow) * (SpacingHeight + m_TextFontHeight) + (SpacingHeight >> 1) + m_TextFontHeight - h;
+					int y = (int)(m_LeftBrace_rowid - m_TopRow) * (SpacingHeight + m_TextFontHeight) + m_RulerHeight + (SpacingHeight >> 1) + m_TextFontHeight - h;
 					int dw = m_LineNumberAreaWidth + m_BookmarkWidth + 1 - x;
 
 					if (dw > 0)
@@ -11214,7 +11286,7 @@ void MadEdit::MadEditOnPaint(wxPaintEvent *evt /*=NULL*/ )
 				if (m_RightBrace_rowid >= m_TopRow && m_RightBrace_rowid <= lastrow &&
 						x < maxright && x + w > minleft)
 				{
-					int y = (int)(m_RightBrace_rowid - m_TopRow) * (SpacingHeight + m_TextFontHeight) + (SpacingHeight >> 1)    + m_TextFontHeight - h;
+					int y = (int)(m_RightBrace_rowid - m_TopRow) * (SpacingHeight + m_TextFontHeight) + m_RulerHeight + (SpacingHeight >> 1)    + m_TextFontHeight - h;
 					int dw = m_LineNumberAreaWidth + m_BookmarkWidth + 1 - x;
 
 					if (dw > 0)
@@ -11237,7 +11309,7 @@ void MadEdit::MadEditOnPaint(wxPaintEvent *evt /*=NULL*/ )
 					}
 				}
 			}
-
+			/* 改用背景显示当前行 modified by sln.1550
 			if (m_MarkActiveLine && m_CaretPos.rowid >= m_TopRow
 					&& m_CaretPos.rowid < m_TopRow + m_VisibleRowCount)
 			{
@@ -11268,7 +11340,7 @@ void MadEdit::MadEditOnPaint(wxPaintEvent *evt /*=NULL*/ )
 				markdc.SetBrush(*wxTRANSPARENT_BRUSH);
 				markdc.DrawRectangle(x, y, w, h);
 			}
-
+			*/
 #ifndef __WXMSW__
 			else
 				if (bPaintMark == false)
@@ -11325,6 +11397,9 @@ void MadEdit::MadEditOnPaint(wxPaintEvent *evt /*=NULL*/ )
 				memdc.SetBrush(*(wxTheBrushList->FindOrCreateBrush(bgcolor)));
 				memdc.SetPen(*(wxThePenList->FindOrCreatePen(bgcolor, 1, wxPENSTYLE_SOLID)));
 				memdc.DrawRectangle(0, 0, m_ClientWidth, m_ClientHeight);
+				m_Syntax->nw_Color = m_Syntax->GetAttributes(aeText)->color;
+				wxColor tempColor;
+				tempColor.Set(m_Syntax->nw_Color.GetRed() / 2 + bgcolor.GetRed() / 2, m_Syntax->nw_Color.GetGreen() / 2 + bgcolor.GetGreen() / 2, m_Syntax->nw_Color.GetBlue() / 2 + bgcolor.GetBlue() / 2, 255);
 
 				if (!m_HexDigitBitmap)
 				{
@@ -11339,12 +11414,13 @@ void MadEdit::MadEditOnPaint(wxPaintEvent *evt /*=NULL*/ )
 					for (int i = 0; i < 76; ++i)
 						m_WidthBuffer[i] = m_HexFontMaxDigitWidth;
 
-					// first line: aeText hexdigit
-					memdc.DrawRectangle(0, 0, m_HexFontMaxDigitWidth * 17, m_RowHeight);
-					m_Syntax->nw_Color = m_Syntax->GetAttributes(aeText)->color;
-					memdc.SetTextForeground(m_Syntax->nw_Color);
+					/// first line: aeText hexdigit
+					memdc.DrawRectangle(0, 0, m_HexFontMaxDigitWidth * 34, m_RowHeight);
 					PaintText(&memdc, 0, 0, &HexHeader[60], m_WidthBuffer, 17, 0, 9999999);
-					// second line: aeLineNumberArea hexdigit
+					m_Syntax->nw_Color = tempColor;
+					PaintText(&memdc, m_HexFontMaxDigitWidth * 17, 0, &HexHeader[60], m_WidthBuffer, 17, 0, 9999999);
+
+					/// second line: aeLineNumberArea hexdigit
 					m_Syntax->SetAttributes(aeLineNumber);
 					memdc.SetPen(*(wxThePenList->FindOrCreatePen(m_Syntax->nw_BgColor, 1, wxPENSTYLE_SOLID)));
 					memdc.SetBrush(*(wxTheBrushList->FindOrCreateBrush(m_Syntax->nw_BgColor)));
@@ -11359,7 +11435,7 @@ void MadEdit::MadEditOnPaint(wxPaintEvent *evt /*=NULL*/ )
 				markdc.SelectObject(*m_HexDigitBitmap);
 				m_HexDigitDC = &markdc;
 				wxRect rect(-m_DrawingXPos, 0, m_ClientWidth, m_ClientHeight);
-				PaintHexLines(&memdc, rect, m_TopRow, (int)count, true);
+				PaintHexLines(&memdc, rect, m_TopRow, (int)count, true, tempColor);
 				m_HexDigitDC = nullptr;
 				m_RepaintAll = false;
 				m_RepaintSelection = false;
@@ -11540,6 +11616,7 @@ WXLRESULT MadEdit::MSWWindowProc(WXUINT message, WXWPARAM wParam, WXLPARAM lPara
 
 					if (!IsHexMode())
 					{
+						row = (y - m_RulerHeight)/ m_RowHeight;
 						if (row <= m_VisibleRowCount && (m_TopRow + row) < int(m_Lines->m_RowCount))
 							paint = true;
 					}
@@ -11817,24 +11894,27 @@ void MadEdit::DisplayCaret(bool moveonly)
 	if (!IsHexMode())
 	{
 		const int xpos = m_LineNumberAreaWidth + m_BookmarkWidth + m_LeftMarginWidth + m_CaretPos.xpos -  m_DrawingXPos;
-		const int ypos = (int)(m_CaretPos.rowid - m_TopRow) * m_RowHeight + ((m_RowHeight - m_TextFontHeight) >> 1);
+		const int ypos = (int)(m_CaretPos.rowid - m_TopRow) * m_RowHeight + m_RulerHeight + ((m_RowHeight - m_TextFontHeight) >> 1);
+
+		DrawCursor(xpos);
 
 		if (m_CaretPos.xpos + m_LeftMarginWidth > m_DrawingXPos &&
-				xpos >= (m_LineNumberAreaWidth + m_BookmarkWidth) && xpos < m_ClientWidth && ypos >= 0 && ypos < m_ClientHeight)
+			xpos >= (m_LineNumberAreaWidth + m_BookmarkWidth) && xpos < m_ClientWidth && ypos >= 0 && ypos < m_ClientHeight)
 		{
 			caret->Move(xpos, ypos);
+
 //#ifdef __WXGTK__
 #if 0
 			extern GtkIMContext *GetWindowIMContext(wxWindow * win);
 			GdkRectangle rect = {xpos, ypos + m_TextFontHeight, 0, 0};
 			gtk_im_context_set_cursor_location(GetWindowIMContext(this), &rect);
 #endif
-
 			if (!moveonly)
 			{
 				if (!caret->IsVisible())
 					caret->Show();
 			}
+
 		}
 		else
 			if (caret->IsVisible())
@@ -11865,7 +11945,7 @@ void MadEdit::DisplayCaret(bool moveonly)
 			}
 
 			xpos -= m_DrawingXPos;
-			int ypos = (int)(row - m_TopRow + 1) * m_RowHeight;
+			int ypos = (int)(row - m_TopRow) * m_RowHeight + m_RowHeight;
 			caret->Move(xpos, ypos);
 //#ifdef __WXGTK__
 #if 0
@@ -12141,7 +12221,7 @@ void MadEdit::ShowZeroLenSelIndicator()
 #else
 	int xpos = m_LineNumberAreaWidth + m_BookmarkWidth + m_LeftMarginWidth + m_CaretPos.xpos - m_DrawingXPos - (m_TextFontSpaceWidth+1)/2;
 #endif
-	int ypos = (int)(m_CaretPos.rowid - m_TopRow) * m_RowHeight + ((m_RowHeight - m_TextFontHeight) >> 1);
+	int ypos = (int)(m_CaretPos.rowid - m_TopRow) * m_RowHeight+ m_RulerHeight + ((m_RowHeight - m_TextFontHeight) >> 1);
 	if ((ypos + 2 * m_RowHeight) >= m_MaxHeight) ypos -= m_RowHeight;
 	else ypos += m_RowHeight;
 

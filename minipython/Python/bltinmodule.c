@@ -2722,7 +2722,7 @@ _PyBuiltin_Init(void)
     SETBUILTIN("basestring",            &PyBaseString_Type);
     SETBUILTIN("bool",                  &PyBool_Type);
     //SETBUILTIN("memoryview",        &PyMemoryView_Type);
-    //SETBUILTIN("bytearray",             &PyByteArray_Type);
+    SETBUILTIN("bytearray",             &PyByteArray_Type);
     SETBUILTIN("bytes",                 &PyString_Type);
     SETBUILTIN("buffer",                &PyBuffer_Type);
     SETBUILTIN("classmethod",           &PyClassMethod_Type);

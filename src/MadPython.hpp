@@ -2589,7 +2589,7 @@ namespace mad_python {
 #ifndef PYMADEDIT_DLL
 		// list the matched data to pbegpos & pendpos
 		// return the found count or SR_EXPR_ERROR
-		long FindTextAll(const std::string &expr, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false, bool bPanChinese = false, bool showresults = true) {
+		long FindTextAll(const std::string &expr, bool bRegex, bool bCaseSensitive, bool bWholeWord, bool bDotMatchNewline = false, bool bPanChinese = false, bool keepresults = true) {
 			long ok = SR_EXPR_ERROR;
 
 			MadEdit *madedit = g_CurrentMadEdit;
@@ -2599,7 +2599,30 @@ namespace mad_python {
 				wxString wxExpr(expr.c_str(), wxConvUTF8);
 				vector<wxFileOffset> begpos, endpos;
 				//wxTreeCtrl * results = g_MainFrame->m_FindInFilesResults;
-				
+#if USE_GENERIC_TREECTRL
+				wxGenericTreeCtrl* results = g_MainFrame->m_FindInFilesResults;
+#else
+				wxTreeCtrl* results = g_MainFrame->m_FindInFilesResults;
+#endif
+				// Root
+				if (!keepresults){
+					results->DeleteAllItems();
+					results->AddRoot(wxT("Root"));
+				}
+				wxTreeItemId rtid = results->GetRootItem();
+				wxASSERT(rtid.IsOk());
+				wxTreeItemIdValue rtck;
+				// First Level----search results summary
+				wxTreeItemId id = results->GetFirstChild(rtid, rtck);
+				if (id.IsOk())
+				{
+					// Second Level File results
+					wxTreeItemIdValue cookie;
+					wxTreeItemId lstid = results->GetFirstChild(id, cookie);
+					if (lstid.IsOk() && results->IsExpanded(lstid))
+						results->Collapse(lstid);
+				}
+
 				if (bRegex) bWholeWord = false;
 				else
 				{
@@ -2608,7 +2631,7 @@ namespace mad_python {
 				}
 				ok = madedit->FindTextAll(wxExpr, bRegex, bCaseSensitive, bWholeWord, bDotMatchNewline, bPanChinese, false, &begpos, &endpos);
 
-				if (ok >= 0 && showresults) {
+				if (ok >= 0 ) {
 					static wxString text(_("Search Results"));
 					int pid = g_MainFrame->m_InfoNotebook->GetPageIndex(g_MainFrame->m_FindInFilesResults);
 					wxASSERT(pid != wxNOT_FOUND);
@@ -2616,6 +2639,21 @@ namespace mad_python {
 					wxString strtobesearch = _("Search \"") + wxExpr + wxT("\" ") + wxString::Format(_("(%s hits in 1 file)"), (wxLongLong(ok).ToString().c_str()));
 					wxTreeItemId myroot = g_MainFrame->NewSearchSession(strtobesearch);
 					DisplayFindAllResult(myroot, begpos, endpos, madedit);
+				}
+
+				{
+					wxTreeItemIdValue cookie;
+					id = results->GetFirstChild(rtid, cookie);
+					if (id.IsOk())
+					{
+						if (!results->IsExpanded(id))
+							results->Expand(id);
+						// Second Level File results
+						wxTreeItemIdValue ck;
+						wxTreeItemId lstid = results->GetFirstChild(id, ck);
+						if (lstid.IsOk() && !results->IsExpanded(lstid))
+							results->Expand(lstid);
+					}
 				}
 			}
 
@@ -3430,7 +3468,7 @@ BOOST_PYTHON_MODULE(madpython) {
 	.def("ReplaceTextAll", &PyMadEdit::ReplaceTextAll, ReplaceTextAll_member_overloads(args("expr", "fmt", "bRegex", "bCaseSensitive", "bWholeWord", "bDotMatchNewline", "bPanChinese", "rangeFrom", "rangeTo"), "Doc string")[return_value_policy<return_by_value>()])
 	.def("ReplaceHexAll", &PyMadEdit::ReplaceHexAll, ReplaceHexAll_member_overloads(args("expr", "fmt", "rangeFrom", "rangeTo"), "Doc string")[return_value_policy<return_by_value>()])
 #ifndef PYMADEDIT_DLL
-	.def("FindTextAll", &PyMadEdit::FindTextAll, FindTextAll_member_overloads(args("expr", "bRegex", "bCaseSensitive", "bWholeWord", "bDotMatchNewline", "bPanChinese", "showresults"), "Doc string")[return_value_policy<return_by_value>()])
+	.def("FindTextAll", &PyMadEdit::FindTextAll, FindTextAll_member_overloads(args("expr", "bRegex", "bCaseSensitive", "bWholeWord", "bDotMatchNewline", "bPanChinese", "keepresults"), "Doc string")[return_value_policy<return_by_value>()])
 	.def("FindHexAll", &PyMadEdit::FindHexAll, FindHexAll_member_overloads(args("expr", "showresults"), "Doc string")[return_value_policy<return_by_value>()])
 #endif
 	.def("LoadFromFile", &PyMadEdit::LoadFromFile, LoadFromFile_member_overloads(args("filename", "encoding", "bForceText"), "Doc string")[return_value_policy<return_by_value>()])

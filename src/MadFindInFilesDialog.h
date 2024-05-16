@@ -136,9 +136,9 @@ class MadFindInFilesDialog: public wxDialog
 		void OnEditSortByOptions(wxCommandEvent& WXUNUSED(event));
 		void OnEditSortOptions(wxCommandEvent& WXUNUSED(event));
 		
-		void OnEditCopyAsHexString(wxCommandEvent& WXUNUSED(event));
-		void OnEditCopyAsHexStringWithSpace(wxCommandEvent& WXUNUSED(event));
-		void OnEditCopyRevertHex(wxCommandEvent& WXUNUSED(event));
+		//void OnEditCopyAsHexString(wxCommandEvent& WXUNUSED(event));
+		//void OnEditCopyAsHexStringWithSpace(wxCommandEvent& WXUNUSED(event));
+		//void OnEditCopyRevertHex(wxCommandEvent& WXUNUSED(event));
 		void OnEditIncIndent(wxCommandEvent& WXUNUSED(event));
 		void OnEditDecIndent(wxCommandEvent& WXUNUSED(event));
 		void OnEditComment(wxCommandEvent& WXUNUSED(event));

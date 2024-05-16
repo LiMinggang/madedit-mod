@@ -89,9 +89,9 @@ MadMacroDlg::wxCmdEvtHandlerMap_t MadMacroDlg::m_menu_evt_map[] =
 	{ menuSortDescendingCase, &MadMacroDlg::OnEditSortDescendingCase },
 	{ menuSortByOptions, &MadMacroDlg::OnEditSortByOptions },
 	{ menuSortOptions, &MadMacroDlg::OnEditSortOptions },
-	{ menuCopyAsHexString, &MadMacroDlg::OnEditCopyAsHexString },
-	{ menuCopyAsHexStringWithSpace, &MadMacroDlg::OnEditCopyAsHexStringWithSpace },
-	{ menuCopyRevertHex, &MadMacroDlg::OnEditCopyRevertHex },
+	//{ menuCopyAsHexString, &MadMacroDlg::OnEditCopyAsHexString },
+	//{ menuCopyAsHexStringWithSpace, &MadMacroDlg::OnEditCopyAsHexStringWithSpace },
+	//{ menuCopyRevertHex, &MadMacroDlg::OnEditCopyRevertHex },
 	{ menuIncreaseIndent, &MadMacroDlg::OnEditIncIndent },
 	{ menuDecreaseIndent, &MadMacroDlg::OnEditDecIndent },
 	{ menuComment, &MadMacroDlg::OnEditComment },
@@ -558,43 +558,43 @@ void MadMacroDlg::OnEditSortOptions(wxCommandEvent& WXUNUSED(event))
 	g_CurrentMadEdit = nullptr;
 }
 
-void MadMacroDlg::OnEditCopyAsHexString(wxCommandEvent& WXUNUSED(event))
-{
-	if (m_Pymacro)
-	{
-		m_Pymacro->CopyAsHexString(false);
-	}
-
-	g_CurrentMadEdit = nullptr;
-}
-
-void MadMacroDlg::OnEditCopyAsHexStringWithSpace(wxCommandEvent& WXUNUSED(event))
-{
-	if (m_Pymacro)
-	{
-		m_Pymacro->CopyAsHexString(true);
-	}
-
-	g_CurrentMadEdit = nullptr;
-}
-
-void MadMacroDlg::OnEditCopyRevertHex(wxCommandEvent& WXUNUSED(event))
-{
-	if (m_Pymacro)
-	{
-		static wxString strDelimiters = wxT(" .,?!@#\t$%^&*()-=_+[]{}\\|;:\"'`<>/~");
-		wxString str = wxGetTextFromUser(_("Delimiters:"), _("Revert Hex String"), strDelimiters);
-
-		if (!str.IsEmpty())
-		{
-			strDelimiters = str;
-		}
-
-		m_Pymacro->CopyRevertHex(str);
-	}
-
-	g_CurrentMadEdit = nullptr;
-}
+//void MadMacroDlg::OnEditCopyAsHexString(wxCommandEvent& WXUNUSED(event))
+//{
+//	if (m_Pymacro)
+//	{
+//		m_Pymacro->CopyAsHexString(false);
+//	}
+//
+//	g_CurrentMadEdit = nullptr;
+//}
+//
+//void MadMacroDlg::OnEditCopyAsHexStringWithSpace(wxCommandEvent& WXUNUSED(event))
+//{
+//	if (m_Pymacro)
+//	{
+//		m_Pymacro->CopyAsHexString(true);
+//	}
+//
+//	g_CurrentMadEdit = nullptr;
+//}
+//
+//void MadMacroDlg::OnEditCopyRevertHex(wxCommandEvent& WXUNUSED(event))
+//{
+//	if (m_Pymacro)
+//	{
+//		static wxString strDelimiters = wxT(" .,?!@#\t$%^&*()-=_+[]{}\\|;:\"'`<>/~");
+//		wxString str = wxGetTextFromUser(_("Delimiters:"), _("Revert Hex String"), strDelimiters);
+//
+//		if (!str.IsEmpty())
+//		{
+//			strDelimiters = str;
+//		}
+//
+//		m_Pymacro->CopyRevertHex(str);
+//	}
+//
+//	g_CurrentMadEdit = nullptr;
+//}
 
 void MadMacroDlg::OnEditIncIndent(wxCommandEvent& WXUNUSED(event))
 {

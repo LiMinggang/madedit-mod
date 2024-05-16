@@ -1857,22 +1857,35 @@ void MadEdit::CopyToClipboard()
 			wxFileOffset lpos = m_SelectionBegin->linepos;
 			std::string data;
 
+			//do
+			//{
+			//	if (lpos < lit->m_Size)
+			//	{
+			//		data += lit->Get(lpos++);
+			//		++pos;
+			//	}
+			//	else
+			//	{
+			//		++lit;
+			//		lpos = 0;
+			//	}
+			//}
+			//while (pos < m_SelectionEnd->pos);
+
+			//PutHexDataToClipboard(data.c_str(), data.size());
+			wxString ws;
 			do
 			{
-				if (lpos < lit->m_Size)
-				{
-					data += lit->Get(lpos++);
-					++pos;
-				}
-				else
+				unsigned char b = lit->Get(lpos);
+				ws << wxChar(ToHex(b >> 4));
+				ws << wxChar(ToHex(b & 0xf));
+				if (++lpos == lit->m_Size)
 				{
 					++lit;
 					lpos = 0;
 				}
-			}
-			while (pos < m_SelectionEnd->pos);
-
-			PutHexDataToClipboard(data.c_str(), data.size());
+			} while (++pos < m_SelectionEnd->pos);
+			PutTextToClipboard(ws);
 		}
 }
 
@@ -1890,14 +1903,58 @@ void MadEdit::PasteFromClipboard()
 			InsertColumnString(&ucs[0], ucs.size(), lines, false, false);
 	}
 	else
-		if (IsHexMode() && m_CaretAtHexArea)
+		if (IsHexMode())
 		{
-			vector < char >cs;
-			GetHexDataFromClipboard(&cs);
-
-			if (!cs.empty())
+			if (m_CaretAtHexArea)
 			{
-				InsertHexData((wxByte*)&cs[0], cs.size());
+				vector < char > ucs;
+				GetHexDataFromClipboard(&ucs);
+				size_t size = ucs.size();
+
+				if (size < 2) return;
+
+				wxString strText;
+
+				wxStringTokenizer tkz(&ucs[0], " ");
+				std::string locStr;
+
+				if (tkz.HasMoreTokens())
+					strText = wxT("");
+
+				while (tkz.HasMoreTokens())
+				{
+					wxString token = tkz.GetNextToken();
+					strText += token;
+				}
+				if (strText == "")
+					strText.assign(&ucs[0],size);
+				size_t strLen = strText.Length();
+				if (strLen>1 && strLen % 2 == 0) {
+					size_t i = 0;
+					while (i < (strLen - 1))
+					{
+						wxString subs = strText.SubString(i, i + 1);
+						unsigned long value;
+						subs.ToULong(&value, 16);
+						if (value == -1) return;
+						locStr += (char)value;
+						i += 2;
+					}
+				}
+				else return;
+				//wxString ws(locStr.c_str(), wxConvLocal);
+				//vector < ucs4_t > cs;
+				//cs.assign(ws.begin(), ws.end());
+				//InsertString(&cs[0], ws.size(), false, true, false);
+				if (!locStr.empty())
+					InsertHexData((wxByte*)locStr.c_str(), strLen>>1);
+			}
+			else
+			{
+				vector < char >cs;
+				GetHexDataFromClipboard(&cs);
+				if (!cs.empty())
+					InsertHexData((wxByte*)&cs[0], cs.size());
 			}
 		}
 		else //if (IsTextMode() || !m_CaretAtHexArea)

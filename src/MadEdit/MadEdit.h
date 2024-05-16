@@ -301,6 +301,7 @@ private:
 	vector<int>     m_ActiveRowWidths;  // width cache of active row
 	int             m_CaretRowUCharPos; // ucs4 char pos of active row
 	int             m_LastCaretXPos;    // when move caret up/down, use this to calc the nearest xpos
+	int             m_LastCaretXPos1;   // when move caret left/right, use this to draw ruler cursor.
 
 	// generally m_ValidPos==TopRow, but sometimes not
 	MadLineIterator m_ValidPos_iter;    // line iterator
@@ -418,7 +419,7 @@ private:
 	vector<wxFileOffset> m_HexRowIndex;     // HexMode row index
 	int             m_TextAreaXPos;         // in HexMode, the xpos of caret in TextArea
 	int             m_LastTextAreaXPos;     // for Up,Down,PageUp,PageDown...
-
+	int				m_RulerHeight;          // Add by sln.1550
 	// if brace_rowid < 0 indicate the brace is invalid
 	int             m_LeftBrace_rowid, m_RightBrace_rowid;
 	BracePairIndex  m_LeftBrace, m_RightBrace;
@@ -511,7 +512,7 @@ protected:
 
 	void PaintHexDigit(wxDC *dc, int x, int y, const ucs4_t *hexdigit, const int *width, int count);
 	void PaintHexOffset(wxDC *dc, int x, int y, const ucs4_t *hexdigit, const int *width, int count);
-	void PaintHexLines(wxDC *dc, wxRect &rect, int toprow, int rowcount, bool painthead);
+	void PaintHexLines(wxDC *dc, wxRect &rect, int toprow, int rowcount, bool painthead, wxColour tempColor);
 
 	int GetVisibleHexRowCount();
 	void PrepareHexRowIndex(int toprow, int count);
@@ -645,6 +646,7 @@ protected:
 	void OnEraseBackground(wxEraseEvent &evt);
 	void OnPaint(wxPaintEvent &evt) {return MadEditOnPaint(&evt);}
 	void MadEditOnPaint(wxPaintEvent *pevt = NULL);
+	void DrawCursor(int xpos);
 	void OnDPIChanged(wxDPIChangedEvent& event);
 
 	void DoSelectionChanged();

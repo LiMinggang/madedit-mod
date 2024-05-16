@@ -65,9 +65,9 @@ MadSearchReplaceDialog::wxCmdEvtHandlerMap_t MadSearchReplaceDialog::m_menu_evt_
 	{ menuSortDescendingCase, &MadSearchReplaceDialog::OnEditSortDescendingCase },
 	{ menuSortByOptions, &MadSearchReplaceDialog::OnEditSortByOptions },
 	{ menuSortOptions, &MadSearchReplaceDialog::OnEditSortOptions },
-	{ menuCopyAsHexString, &MadSearchReplaceDialog::OnEditCopyAsHexString },
-	{ menuCopyAsHexStringWithSpace, &MadSearchReplaceDialog::OnEditCopyAsHexStringWithSpace },
-	{ menuCopyRevertHex, &MadSearchReplaceDialog::OnEditCopyRevertHex },
+	//{ menuCopyAsHexString, &MadSearchReplaceDialog::OnEditCopyAsHexString },
+	//{ menuCopyAsHexStringWithSpace, &MadSearchReplaceDialog::OnEditCopyAsHexStringWithSpace },
+	//{ menuCopyRevertHex, &MadSearchReplaceDialog::OnEditCopyRevertHex },
 	{ menuIncreaseIndent, &MadSearchReplaceDialog::OnEditIncIndent },
 	{ menuDecreaseIndent, &MadSearchReplaceDialog::OnEditDecIndent },
 	{ menuComment, &MadSearchReplaceDialog::OnEditComment },
@@ -1372,8 +1372,8 @@ void MadSearchReplaceDialog::MadSearchReplaceDialogActivate(wxActivateEvent& eve
 			m_ReplaceText->SetSpellCheck(g_ActiveMadEdit->GetSpellCheckStatus());
 
 			m_FindText->GetSize (&width, &height);
-			BoxSizerSearch->SetItemMinSize(m_FindText, width, height*times);
-			BoxSizerReplace->SetItemMinSize(m_ReplaceText, width, height*times);
+			BoxSizerSearch->SetItemMinSize(m_FindText, width, 30 * times + 18);
+			BoxSizerReplace->SetItemMinSize(m_ReplaceText, width, 30 * times + 18);
 		}
 
 		UpdateCheckBoxByCBHex(WxCheckBoxFindHex->GetValue());
@@ -2052,7 +2052,7 @@ void MadSearchReplaceDialog::OnWxSliderInputSizerCmdScroll(wxCommandEvent& WXUNU
 	int times = WxSliderInputSizer->GetValue();
 	int width = 0, height = 0, bw, bhm;
 	WxButtonFindNext->GetSize(&bw, &bhm);
-	height = bhm * times;
+	height = 25 * times + 18;
 	BoxSizerSearch->SetItemMinSize(m_FindText, width, height);
 	BoxSizerReplace->SetItemMinSize(m_ReplaceText, width, height);
 
@@ -2175,20 +2175,20 @@ void MadSearchReplaceDialog::OnEditSortOptions(wxCommandEvent& WXUNUSED(event))
 	EditSortOptions(this);
 }
 
-void MadSearchReplaceDialog::OnEditCopyAsHexString(wxCommandEvent& WXUNUSED(event))
-{
-	EditCopyAsHexString();
-}
-
-void MadSearchReplaceDialog::OnEditCopyAsHexStringWithSpace(wxCommandEvent& WXUNUSED(event))
-{
-	EditCopyAsHexStringWithSpace();
-}
-
-void MadSearchReplaceDialog::OnEditCopyRevertHex(wxCommandEvent& WXUNUSED(event))
-{
-	EditCopyRevertHex();
-}
+//void MadSearchReplaceDialog::OnEditCopyAsHexString(wxCommandEvent& WXUNUSED(event))
+//{
+//	EditCopyAsHexString();
+//}
+//
+//void MadSearchReplaceDialog::OnEditCopyAsHexStringWithSpace(wxCommandEvent& WXUNUSED(event))
+//{
+//	EditCopyAsHexStringWithSpace();
+//}
+//
+//void MadSearchReplaceDialog::OnEditCopyRevertHex(wxCommandEvent& WXUNUSED(event))
+//{
+//	EditCopyRevertHex();
+//}
 
 void MadSearchReplaceDialog::OnEditIncIndent(wxCommandEvent& WXUNUSED(event))
 {

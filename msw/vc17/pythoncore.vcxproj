@@ -337,6 +337,7 @@
     <ClInclude Include="..\..\minipython\Python\thread_nt.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\minipython\Modules\binascii.c" />
     <ClCompile Include="..\..\minipython\Modules\zlib\gzclose.c" />
     <ClCompile Include="..\..\minipython\Modules\zlib\gzlib.c" />
     <ClCompile Include="..\..\minipython\Modules\zlib\gzread.c" />
@@ -363,9 +364,14 @@
     <ClCompile Include="..\..\minipython\Modules\zlib\trees.c" />
     <ClCompile Include="..\..\minipython\Modules\zlib\uncompr.c" />
     <ClCompile Include="..\..\minipython\Modules\zlib\zutil.c" />
+    <ClCompile Include="..\..\minipython\Modules\_sre.c" />
+    <ClCompile Include="..\..\minipython\Modules\_struct.c" />
+    <ClCompile Include="..\..\minipython\Modules\_weakref.c" />
     <ClCompile Include="..\..\minipython\Objects\abstract.c" />
     <ClCompile Include="..\..\minipython\Objects\boolobject.c" />
     <ClCompile Include="..\..\minipython\Objects\bufferobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\bytearrayobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\bytes_methods.c" />
     <ClCompile Include="..\..\minipython\Objects\capsule.c" />
     <ClCompile Include="..\..\minipython\Objects\cellobject.c" />
     <ClCompile Include="..\..\minipython\Objects\classobject.c" />
