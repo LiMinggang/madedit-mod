@@ -722,6 +722,24 @@
     <ClCompile Include="..\..\minipython\Modules\zlib\gzclose.c">
       <Filter>Modules\zlib</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\bytearrayobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\bytes_methods.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\_sre.c">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\_struct.c">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\_weakref.c">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\binascii.c">
+      <Filter>Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\minipython\PC\python_nt.rc">

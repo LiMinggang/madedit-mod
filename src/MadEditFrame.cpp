@@ -1864,9 +1864,9 @@ MadEditFrame::wxCmdEvtHandlerMap_t MadEditFrame::m_menu_evt_map[] =
 	{ menuSortDescendingCase, &MadEditFrame::OnEditSortDescendingCase },
 	{ menuSortByOptions, &MadEditFrame::OnEditSortByOptions },
 	{ menuSortOptions, &MadEditFrame::OnEditSortOptions },
-	{ menuCopyAsHexString, &MadEditFrame::OnEditCopyAsHexString },
-	{ menuCopyAsHexStringWithSpace, &MadEditFrame::OnEditCopyAsHexStringWithSpace },
-	{ menuCopyRevertHex, &MadEditFrame::OnEditCopyRevertHex },
+	//{ menuCopyAsHexString, &MadEditFrame::OnEditCopyAsHexString },
+	//{ menuCopyAsHexStringWithSpace, &MadEditFrame::OnEditCopyAsHexStringWithSpace },
+	//{ menuCopyRevertHex, &MadEditFrame::OnEditCopyRevertHex },
 	{ menuIncreaseIndent, &MadEditFrame::OnEditIncIndent },
 	{ menuDecreaseIndent, &MadEditFrame::OnEditDecIndent },
 	{ menuComment, &MadEditFrame::OnEditComment },
@@ -2072,9 +2072,9 @@ MadEditFrame::wxUIUpdateEvtHandlerMap_t MadEditFrame::m_menu_ui_updater_map[] =
 	{ menuSortOptions, &MadEditFrame::OnUpdateUI_Menu_CheckWritableTextFile },
 	{ menuSort, &MadEditFrame::OnUpdateUI_MenuFile_CheckCount },
 	{ menuAdvanced, &MadEditFrame::OnUpdateUI_MenuFile_CheckCount },
-	{ menuCopyAsHexString, &MadEditFrame::OnUpdateUI_MenuEditCopyAsHexString },
-	{ menuCopyAsHexStringWithSpace, &MadEditFrame::OnUpdateUI_MenuEditCopyAsHexString },
-	{ menuCopyRevertHex, &MadEditFrame::OnUpdateUI_MenuEditCopyAsHexString },
+	//{ menuCopyAsHexString, &MadEditFrame::OnUpdateUI_MenuEditCopyAsHexString },
+	//{ menuCopyAsHexStringWithSpace, &MadEditFrame::OnUpdateUI_MenuEditCopyAsHexString },
+	//{ menuCopyRevertHex, &MadEditFrame::OnUpdateUI_MenuEditCopyAsHexString },
 	{ menuIncreaseIndent, &MadEditFrame::OnUpdateUI_MenuIndent },
 	{ menuDecreaseIndent, &MadEditFrame::OnUpdateUI_MenuIndent },
 	{ menuComment, &MadEditFrame::OnUpdateUI_MenuComment },
@@ -2312,10 +2312,10 @@ CommandData CommandTable[] =
 	{ 0,			    2, menuBookmarkReplace,          wxT("menuBookmarkReplace"),          _("Replace Bookmarked Lines"),			    0,			       wxITEM_NORMAL,    -1,			    0,			         _("Replace Bookmarked Lines"), 0, 0, 0, false},
 	{ 0,			    1, 0,						    0,						           0,									        0,			       wxITEM_SEPARATOR, -1,			    0,			         0, 0, 0, 0, false},
 	{ 0,			    1, menuAdvanced,			     wxT("menuAdvanced"),			     _("Ad&vanced"),						       0,			       wxITEM_NORMAL,    -1,			    &g_Menu_Edit_Advanced, 0, 0, 0, 0, false},
-	{ 0,			    2, menuCopyAsHexString,          wxT("menuCopyAsHexString"),          _("Copy As &Hex String"),			         wxT(""),			 wxITEM_NORMAL,    -1,			    0,			         _("Copy the selection as hex-string"), &g_Menu_EditSubAdv, 0, 0, false},
-	{ 0,			    2, menuCopyAsHexStringWithSpace, wxT("menuCopyAsHexStringWithSpace"), _("Copy As He&x String with Space"),          wxT(""),			 wxITEM_NORMAL,    -1,			    0,			         _("Copy the selection as hex-string with space"), &g_Menu_EditSubAdv, 0, 0, false},
-	{ 0,			    2, menuCopyRevertHex,			wxT("menuCopyRevertHex"),			_("Copy Value &Reverted from Hex String"),    wxT(""),			 wxITEM_NORMAL,    -1,			    0,			         _("Copy the selection reverted from hex-string"), &g_Menu_EditSubAdv, 0, 0, false},
-	{ 0,			    2, 0,						    0,						           0,									        0,			       wxITEM_SEPARATOR, -1,			    0,			         0, &g_Menu_EditSubAdv, 0, 0, false},
+//	{ 0,			    2, menuCopyAsHexString,          wxT("menuCopyAsHexString"),          _("Copy As &Hex String"),			         wxT(""),			 wxITEM_NORMAL,    -1,			    0,			         _("Copy the selection as hex-string"), &g_Menu_EditSubAdv, 0, 0, false},
+//	{ 0,			    2, menuCopyAsHexStringWithSpace, wxT("menuCopyAsHexStringWithSpace"), _("Copy As He&x String with Space"),          wxT(""),			 wxITEM_NORMAL,    -1,			    0,			         _("Copy the selection as hex-string with space"), &g_Menu_EditSubAdv, 0, 0, false},
+//	{ 0,			    2, menuCopyRevertHex,			wxT("menuCopyRevertHex"),			_("Copy Value &Reverted from Hex String"),    wxT(""),			 wxITEM_NORMAL,    -1,			    0,			         _("Copy the selection reverted from hex-string"), &g_Menu_EditSubAdv, 0, 0, false},
+//	{ 0,			    2, 0,						    0,						           0,									        0,			       wxITEM_SEPARATOR, -1,			    0,			         0, &g_Menu_EditSubAdv, 0, 0, false},
 	{ ecIncreaseIndent, 2, menuIncreaseIndent,           wxT("menuIncreaseIndent"),           _("&Increase Indent"),						wxT(""),			 wxITEM_NORMAL,    indent_xpm_idx,    0,			         _("Increase the indent of seleted lines"), &g_Menu_EditSubAdv, &g_tbEDITOR_ptr, _("Increase Indent"), false},
 	{ ecDecreaseIndent, 2, menuDecreaseIndent,           wxT("menuDecreaseIndent"),           _("&Decrease Indent"),						wxT("Shift-TAB"),    wxITEM_NORMAL,    unindent_xpm_idx,  0,			         _("Decrease the indent of seleted lines"), &g_Menu_EditSubAdv, &g_tbEDITOR_ptr, _("Decrease Indent"), true},
 	{ 0,			    2, 0,						    0,						           0,									        0,			       wxITEM_SEPARATOR, -1,			    0,			         0, &g_Menu_EditSubAdv, 0, 0, false},
@@ -5311,11 +5311,11 @@ void MadEditFrame::OnUpdateUI_Menu_JoinLines(wxUpdateUIEvent& event)
 	event.Enable(g_ActiveMadEdit && !g_ActiveMadEdit->IsReadOnly() && !g_ActiveMadEdit->IsHexMode() && g_ActiveMadEdit->IsSelected());
 }
 
-void MadEditFrame::OnUpdateUI_MenuEditCopyAsHexString(wxUpdateUIEvent& event)
-{
-	event.Enable(g_ActiveMadEdit && //g_ActiveMadEdit->GetEditMode()==emHexMode &&
-				  g_ActiveMadEdit->IsSelected());
-}
+//void MadEditFrame::OnUpdateUI_MenuEditCopyAsHexString(wxUpdateUIEvent& event)
+//{
+//	event.Enable(g_ActiveMadEdit && //g_ActiveMadEdit->GetEditMode()==emHexMode &&
+//				  g_ActiveMadEdit->IsSelected());
+//}
 
 void MadEditFrame::OnUpdateUI_MenuIndent(wxUpdateUIEvent& event)
 {
@@ -6671,46 +6671,46 @@ void MadEditFrame::OnEditSortOptions(wxCommandEvent& WXUNUSED(event))
 	m_Config->SetPath(oldpath);
 }
 
-void MadEditFrame::OnEditCopyAsHexString(wxCommandEvent& WXUNUSED(event))
-{
-	if (g_ActiveMadEdit)
-	{
-		g_ActiveMadEdit->CopyAsHexString(false);
+//void MadEditFrame::OnEditCopyAsHexString(wxCommandEvent& WXUNUSED(event))
+//{
+//	if (g_ActiveMadEdit)
+//	{
+//		g_ActiveMadEdit->CopyAsHexString(false);
+//
+//		if (IsMacroRecording())
+//			RecordAsMadMacro(g_ActiveMadEdit, wxString(wxT("CopyAsHexString(False) # withSpace=False")));
+//	}
+//}
 
-		if (IsMacroRecording())
-			RecordAsMadMacro(g_ActiveMadEdit, wxString(wxT("CopyAsHexString(False) # withSpace=False")));
-	}
-}
+//void MadEditFrame::OnEditCopyAsHexStringWithSpace(wxCommandEvent& WXUNUSED(event))
+//{
+//	if (g_ActiveMadEdit)
+//	{
+//		g_ActiveMadEdit->CopyAsHexString(true);
+//
+//		if (IsMacroRecording())
+//			RecordAsMadMacro(g_ActiveMadEdit, wxString(wxT("CopyAsHexString(True) # withSpace=True")));
+//	}
+//}
 
-void MadEditFrame::OnEditCopyAsHexStringWithSpace(wxCommandEvent& WXUNUSED(event))
-{
-	if (g_ActiveMadEdit)
-	{
-		g_ActiveMadEdit->CopyAsHexString(true);
-
-		if (IsMacroRecording())
-			RecordAsMadMacro(g_ActiveMadEdit, wxString(wxT("CopyAsHexString(True) # withSpace=True")));
-	}
-}
-
-void MadEditFrame::OnEditCopyRevertHex(wxCommandEvent& WXUNUSED(event))
-{
-	if (g_ActiveMadEdit)
-	{
-		static wxString strDelimiters = wxT(" .,?!@#\t$%^&*()-=_+[]{}\\|;:\"'`<>/~");
-		wxString str = wxGetTextFromUser(_("Delimiters:"), _("Revert Hex String"), strDelimiters);
-
-		if (!str.IsEmpty())
-		{
-			strDelimiters = str;
-		}
-
-		g_ActiveMadEdit->CopyRevertHex(str);
-
-		if (IsMacroRecording())
-			RecordAsMadMacro(g_ActiveMadEdit, wxString(wxString::Format(wxT("CopyRevertHex(%s) # withSpace"), str.c_str())));
-	}
-}
+//void MadEditFrame::OnEditCopyRevertHex(wxCommandEvent& WXUNUSED(event))
+//{
+//	if (g_ActiveMadEdit)
+//	{
+//		static wxString strDelimiters = wxT(" .,?!@#\t$%^&*()-=_+[]{}\\|;:\"'`<>/~");
+//		wxString str = wxGetTextFromUser(_("Delimiters:"), _("Revert Hex String"), strDelimiters);
+//
+//		if (!str.IsEmpty())
+//		{
+//			strDelimiters = str;
+//		}
+//
+//		g_ActiveMadEdit->CopyRevertHex(str);
+//
+//		if (IsMacroRecording())
+//			RecordAsMadMacro(g_ActiveMadEdit, wxString(wxString::Format(wxT("CopyRevertHex(%s) # withSpace"), str.c_str())));
+//	}
+//}
 
 void MadEditFrame::OnEditIncIndent(wxCommandEvent& WXUNUSED(event))
 {

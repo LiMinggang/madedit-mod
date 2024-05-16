@@ -82,9 +82,9 @@ MadFindInFilesDialog::wxCmdEvtHandlerMap_t MadFindInFilesDialog::m_menu_evt_map[
 	{ menuSortDescendingCase, &MadFindInFilesDialog::OnEditSortDescendingCase },
 	{ menuSortByOptions, &MadFindInFilesDialog::OnEditSortByOptions },
 	{ menuSortOptions, &MadFindInFilesDialog::OnEditSortOptions },
-	{ menuCopyAsHexString, &MadFindInFilesDialog::OnEditCopyAsHexString },
-	{ menuCopyAsHexStringWithSpace, &MadFindInFilesDialog::OnEditCopyAsHexStringWithSpace },
-	{ menuCopyRevertHex, &MadFindInFilesDialog::OnEditCopyRevertHex },
+	//{ menuCopyAsHexString, &MadFindInFilesDialog::OnEditCopyAsHexString },
+	//{ menuCopyAsHexStringWithSpace, &MadFindInFilesDialog::OnEditCopyAsHexStringWithSpace },
+	//{ menuCopyRevertHex, &MadFindInFilesDialog::OnEditCopyRevertHex },
 	{ menuIncreaseIndent, &MadFindInFilesDialog::OnEditIncIndent },
 	{ menuDecreaseIndent, &MadFindInFilesDialog::OnEditDecIndent },
 	{ menuComment, &MadFindInFilesDialog::OnEditComment },
@@ -1219,20 +1219,20 @@ void MadFindInFilesDialog::OnEditSortOptions(wxCommandEvent& WXUNUSED(event))
 	EditSortOptions(this);
 }
 
-void MadFindInFilesDialog::OnEditCopyAsHexString(wxCommandEvent& WXUNUSED(event))
-{
-	EditCopyAsHexString();
-}
+//void MadFindInFilesDialog::OnEditCopyAsHexString(wxCommandEvent& WXUNUSED(event))
+//{
+//	EditCopyAsHexString();
+//}
 
-void MadFindInFilesDialog::OnEditCopyAsHexStringWithSpace(wxCommandEvent& WXUNUSED(event))
-{
-	EditCopyAsHexStringWithSpace();
-}
+//void MadFindInFilesDialog::OnEditCopyAsHexStringWithSpace(wxCommandEvent& WXUNUSED(event))
+//{
+//	EditCopyAsHexStringWithSpace();
+//}
 
-void MadFindInFilesDialog::OnEditCopyRevertHex(wxCommandEvent& WXUNUSED(event))
-{
-	EditCopyRevertHex();
-}
+//void MadFindInFilesDialog::OnEditCopyRevertHex(wxCommandEvent& WXUNUSED(event))
+//{
+//	EditCopyRevertHex();
+//}
 
 void MadFindInFilesDialog::OnEditIncIndent(wxCommandEvent& WXUNUSED(event))
 {
