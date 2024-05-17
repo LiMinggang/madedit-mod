@@ -246,6 +246,7 @@ enum   // menu id
 	menuDisplayLineNumber,
 	menuDisplayBookmark,
 	menuDisplayColHint,
+	menuShowRuler,
 	menuShowEndOfLine,
 	menuShowTabChar,
 	menuShowSpaceChar,
@@ -499,6 +500,7 @@ private:
 	void OnUpdateUI_MenuViewDisplayLineNumber(wxUpdateUIEvent& event);
 	void OnUpdateUI_MenuViewDisplayBookmark(wxUpdateUIEvent& event);
 	void OnUpdateUI_MenuViewDisplayColHint(wxUpdateUIEvent& event);
+	void OnUpdateUI_MenuViewShowRuler(wxUpdateUIEvent& event);
 	void OnUpdateUI_MenuViewShowEndOfLine(wxUpdateUIEvent& event);
 	void OnUpdateUI_MenuViewShowTabChar(wxUpdateUIEvent& event);
 	void OnUpdateUI_MenuViewShowSpaceChar(wxUpdateUIEvent& event);
@@ -665,6 +667,7 @@ private:
 	void OnViewDisplayLineNumber(wxCommandEvent& WXUNUSED(event));
 	void OnViewDisplayBookmark(wxCommandEvent& WXUNUSED(event));
 	void OnViewDisplayColHint(wxCommandEvent& WXUNUSED(event));
+	void OnViewShowRuler(wxCommandEvent& WXUNUSED(event));
 	void OnViewShowEndOfLine(wxCommandEvent& WXUNUSED(event));
 	void OnViewShowTabChar(wxCommandEvent& WXUNUSED(event));
 	void OnViewShowSpaceChar(wxCommandEvent& WXUNUSED(event));

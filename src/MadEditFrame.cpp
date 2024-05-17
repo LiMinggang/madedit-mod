@@ -1934,6 +1934,7 @@ MadEditFrame::wxCmdEvtHandlerMap_t MadEditFrame::m_menu_evt_map[] =
 	{ menuDisplayLineNumber, &MadEditFrame::OnViewDisplayLineNumber },
 	{ menuDisplayBookmark, &MadEditFrame::OnViewDisplayBookmark },
 	{ menuDisplayColHint, &MadEditFrame::OnViewDisplayColHint },
+	{ menuShowRuler, &MadEditFrame::OnViewShowRuler },
 	{ menuShowEndOfLine, &MadEditFrame::OnViewShowEndOfLine },
 	{ menuShowTabChar, &MadEditFrame::OnViewShowTabChar },
 	{ menuShowSpaceChar, &MadEditFrame::OnViewShowSpaceChar },
@@ -2140,6 +2141,7 @@ MadEditFrame::wxUIUpdateEvtHandlerMap_t MadEditFrame::m_menu_ui_updater_map[] =
 	{ menuDisplayLineNumber, &MadEditFrame::OnUpdateUI_MenuViewDisplayLineNumber },
 	{ menuDisplayBookmark, &MadEditFrame::OnUpdateUI_MenuViewDisplayBookmark },
 	{ menuDisplayColHint, &MadEditFrame::OnUpdateUI_MenuViewDisplayColHint },
+	{ menuShowRuler, &MadEditFrame::OnUpdateUI_MenuViewShowRuler },
 	{ menuShowEndOfLine, &MadEditFrame::OnUpdateUI_MenuViewShowEndOfLine },
 	{ menuShowTabChar, &MadEditFrame::OnUpdateUI_MenuViewShowTabChar },
 	{ menuShowSpaceChar, &MadEditFrame::OnUpdateUI_MenuViewShowSpaceChar },
@@ -2537,6 +2539,7 @@ CommandData CommandTable[] =
 	{ 0,			  1, menuDisplayLineNumber, wxT("menuDisplayLineNumber"), _("&Display Line Number"), wxT("Ctrl-Alt-D"),   wxITEM_CHECK,     -1,			     0,						 _("Display the Line Numbers"), 0, 0, 0, false},
 	{ 0,			  1, menuDisplayBookmark,   wxT("menuDisplayBookmark"),   _("Display &Bookmark"),    wxT("Ctrl-Alt-B"),   wxITEM_CHECK,     -1,			     0,						 _("Display the Bookmark sign"), 0, 0, 0, false},
 	{ 0,			  1, menuDisplayColHint,  wxT("menuDisplayColHint"),  _("Display 80th Cols &Hint"), wxT(""),          wxITEM_CHECK,     -1,			     0,						 _("Display the 80th columns hint"), 0, 0, 0, false},
+	{ 0,			  1, menuShowRuler,         wxT("menuShowRuler"),         _("Show &Ruler"),          wxT(""),             wxITEM_CHECK,     -1,			     0,						 _("Display the Ruler"), 0, 0, 0, false},
 	{ 0,			  1, menuShowEndOfLine,     wxT("menuShowEndOfLine"),     _("Show End Of Line"),     wxT("Ctrl-Alt-L"),   wxITEM_CHECK,     -1,			     0,						 _("Show the sign of EndOfLine"), 0, 0, 0, false},
 	{ 0,			  1, menuShowTabChar,       wxT("menuShowTabChar"),       _("Show Tab Char"),        wxT("Ctrl-Alt-T"),   wxITEM_CHECK,     -1,			     0,						 _("Show the sign of Tab char"), 0, 0, 0, false},
 	{ 0,			  1, menuShowSpaceChar,     wxT("menuShowSpaceChar"),     _("Show Space Char"),      wxT("Ctrl-Alt-S"),   wxITEM_CHECK,     -1,			     0,						 _("Show the sign of Space char"), 0, 0, 0, false},
@@ -2870,6 +2873,10 @@ MadEditFrame::MadEditFrame(wxWindow *parent, wxWindowID id, const wxString &titl
 	MadSyntax::AddSyntaxFilesPath(g_MadEditAppDir + wxT("syntax") + wxFILE_SEP_PATH);
 #endif
 	CreateGUIControls();
+	MadEdit::ms_RulerColor = g_StatusBar->GetBackgroundColour();
+	MadEdit::ms_GradationColor = g_StatusBar->GetForegroundColour();
+	MadEdit::ms_RulerFont = g_StatusBar->GetFont();
+
 	//g_PrintData = new wxPrintData;
 	g_PageSetupData = new wxPageSetupDialogData;
 	LoadDefaultSettings(m_Config);
@@ -5525,6 +5532,11 @@ void MadEditFrame::OnUpdateUI_MenuViewDisplayColHint(wxUpdateUIEvent& event)
 	event.Enable(g_ActiveMadEdit && !g_ActiveMadEdit->IsHexMode() && g_ActiveMadEdit->GetFixedWidthMode());
 	event.Check(g_ActiveMadEdit && g_ActiveMadEdit->GetDisplayColHint());
 }
+void MadEditFrame::OnUpdateUI_MenuViewShowRuler(wxUpdateUIEvent& event)
+{
+	event.Enable(g_ActiveMadEdit && !g_ActiveMadEdit->IsHexMode());
+	event.Check(g_ActiveMadEdit && g_ActiveMadEdit->GetRulerStatus());
+}
 void MadEditFrame::OnUpdateUI_MenuViewShowEndOfLine(wxUpdateUIEvent& event)
 {
 	event.Enable(g_ActiveMadEdit && !g_ActiveMadEdit->IsHexMode());
@@ -7900,9 +7912,14 @@ void MadEditFrame::OnViewFixedWidthMode(wxCommandEvent& event)
 {
 	if (g_ActiveMadEdit)
 	{ 
+		if (g_ActiveMadEdit->GetRulerStatus()
+			&& wxNO == MadMessageBox(wxString::Format(_("Ruler may not be accurate in non-fixed width mode. Continue?")), _("Warning"), wxICON_WARNING | wxYES_NO))
+			return;
 		g_ActiveMadEdit->SetFixedWidthMode(event.IsChecked());
 		if (!event.IsChecked())
+		{
 			g_ActiveMadEdit->SetDisplayColHint(false);
+		}
 
 		if (IsMacroRecording())
 		{
@@ -8118,6 +8135,36 @@ void MadEditFrame::OnViewDisplayColHint(wxCommandEvent& event)
 			else
 			{
 				RecordAsMadMacro(g_ActiveMadEdit, wxString(wxT("Hide80ColHint()")));
+			}
+		}
+	}
+}
+
+void MadEditFrame::OnViewShowRuler(wxCommandEvent& event)
+{
+	if (g_ActiveMadEdit)
+	{
+		if (event.IsChecked()) {
+			if (!g_ActiveMadEdit->GetFixedWidthMode() &&
+				!g_ActiveMadEdit->GetFont().IsFixedWidth() &&
+				wxNO == MadMessageBox(wxString::Format(_("Ruler may not be accurate in non-fixed width mode. Continue?")), _("Warning"), wxICON_WARNING | wxYES_NO))
+				return;
+			g_ActiveMadEdit->ShowRuler();
+		}
+		else
+		{
+			g_ActiveMadEdit->HideRuler();
+		}
+
+		if (IsMacroRecording())
+		{
+			if (event.IsChecked())
+			{
+					RecordAsMadMacro(g_ActiveMadEdit, wxString(wxT("ShowRuler()")));
+			}
+			else
+			{
+					RecordAsMadMacro(g_ActiveMadEdit, wxString(wxT("HideRuler()")));
 			}
 		}
 	}

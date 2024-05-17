@@ -125,9 +125,10 @@ Packing for FreeBSD
 .Fix ARM64 build
 .Fix bug in FindTextAll macro recording, issue #331
 .Use per monitor DPI awareness V2
+.Add ruler by sln-1550(https://github.com/sln-1550)
 .Update Astyle to 3.4.9
 .Update hunspell to 1.7.2
-.Update wxWidgets to 3.2.4
+.Update wxWidgets to 3.2.5
 
 Mod v0.4.20
 1.Fix: JSON formatter convert Unicode chars to UTF8 chars #309
