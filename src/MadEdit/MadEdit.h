@@ -53,6 +53,10 @@
 #define DEFAULT_MAX_LINELEN 4096
 #define MAX_FONT_SIZE 72
 #define DEFAULT_FONT_SIZE 12
+#define MADEDIT_RULER_HEIGHT 18
+#define MADEDIT_RULER_FONT_SIZE 10
+#define MADEDIT_RULER_CURSOR_SIZE 10
+#define MADEDIT_RULER_MARGIN 2
 
 enum { ID_VSCROLLBAR = 19876, ID_HSCROLLBAR };
 
@@ -255,6 +259,9 @@ public:
 		HSCROLLLEFT,
 		HSCROLLRIGHT,
 	};
+	static wxColor ms_RulerColor;
+	static wxColor ms_GradationColor;
+	static wxFont ms_RulerFont;
 private:
 	friend class MadSyntax;
 	friend class MadEncoding;
@@ -301,6 +308,7 @@ private:
 	vector<int>     m_ActiveRowWidths;  // width cache of active row
 	int             m_CaretRowUCharPos; // ucs4 char pos of active row
 	int             m_LastCaretXPos;    // when move caret up/down, use this to calc the nearest xpos
+	int             m_RulerLastCaretXPos;   // when move caret left/right, use this to draw ruler cursor.
 
 	// generally m_ValidPos==TopRow, but sometimes not
 	MadLineIterator m_ValidPos_iter;    // line iterator
@@ -418,7 +426,7 @@ private:
 	vector<wxFileOffset> m_HexRowIndex;     // HexMode row index
 	int             m_TextAreaXPos;         // in HexMode, the xpos of caret in TextArea
 	int             m_LastTextAreaXPos;     // for Up,Down,PageUp,PageDown...
-
+	int             m_RulerHeight;          // Add by sln.1550
 	// if brace_rowid < 0 indicate the brace is invalid
 	int             m_LeftBrace_rowid, m_RightBrace_rowid;
 	BracePairIndex  m_LeftBrace, m_RightBrace;
@@ -645,6 +653,8 @@ protected:
 	void OnEraseBackground(wxEraseEvent &evt);
 	void OnPaint(wxPaintEvent &evt) {return MadEditOnPaint(&evt);}
 	void MadEditOnPaint(wxPaintEvent *pevt = NULL);
+	void DrawRulerCursor();
+	void DrawRuler(wxMemoryDC& memdc);
 	void OnDPIChanged(wxDPIChangedEvent& event);
 
 	void DoSelectionChanged();
@@ -829,6 +839,10 @@ public: // basic functions
 		//    return false;
 		return m_InsertMode;
 	}
+	void SetShowRuler(bool show = true);
+	bool GetRulerStatus() {return (bool)m_RulerHeight;}
+	void ShowRuler() {SetShowRuler();}
+	void HideRuler() {SetShowRuler(false);}
 
 	void SetCaretType(MadCaretType type);
 
@@ -1184,6 +1198,7 @@ private: // Printing functions
 	int             m_old_LeftMarginWidth;
 	int             m_old_DrawingXPos;
 	int             m_old_BookmarkWidth;
+	int             m_old_RulerHeight;
 
 	wxRect m_PrintRect;
 	int m_PrintPageCount;

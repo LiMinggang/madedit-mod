@@ -1381,6 +1381,33 @@ namespace mad_python {
 			{ madedit->SetDisplayBookmark(true); }
 		}
 
+		void ShowRuler() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if (!madedit)
+				madedit = g_ActiveMadEdit;
+			if (madedit)
+			{ madedit->ShowRuler(); }
+		}
+
+		void HideRuler() {
+			MadEdit *madedit = g_CurrentMadEdit;
+			if (!madedit)
+				madedit = g_ActiveMadEdit;
+			if (madedit)
+			{ madedit->HideRuler(); }
+		}
+
+		bool GetRulerStatus() {
+			bool res = false;
+			MadEdit *madedit = g_CurrentMadEdit;
+			if (!madedit)
+				madedit = g_ActiveMadEdit;
+			if (madedit)
+			{ res = madedit->GetDisplayLineNumber(); }
+
+			return res;
+		}
+
 		void HideEndOfLine() {
 			MadEdit *madedit = g_CurrentMadEdit;
 			if (!madedit)
@@ -3270,6 +3297,8 @@ BOOST_PYTHON_MODULE(madpython) {
 	.def("DisplayLineNumber", &PyMadEdit::DisplayLineNumber, "")
 	.def("DisplayBookmark", &PyMadEdit::DisplayBookmark, "")
 	.def("DisplayColHint", &PyMadEdit::DisplayColHint, "")
+	.def("ShowRuler", &PyMadEdit::ShowRuler, "")
+	.def("HideRuler", &PyMadEdit::HideRuler, "")
 	.def("HideEndOfLine", &PyMadEdit::HideEndOfLine, "")
 	.def("HideTabChar", &PyMadEdit::HideTabChar, "")
 	.def("HideSpaceChar", &PyMadEdit::HideSpaceChar, "")
@@ -3281,6 +3310,7 @@ BOOST_PYTHON_MODULE(madpython) {
 	.def("GetShowTabChar", &PyMadEdit::GetShowTabChar, "")
 	.def("GetShowSpaceChar", &PyMadEdit::GetShowSpaceChar, "")
 	.def("GetMarkActiveLine", &PyMadEdit::GetMarkActiveLine, "")
+	.def("GetRulerStatus", &PyMadEdit::GetRulerStatus, "")
 	.def("MarkBracePair", &PyMadEdit::MarkBracePair, "")
 	.def("NoMarkBracePair", &PyMadEdit::NoMarkBracePair, "")
 	.def("GetMarkBracePair", &PyMadEdit::GetMarkBracePair, "")

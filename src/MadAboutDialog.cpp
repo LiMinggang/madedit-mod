@@ -21,7 +21,7 @@
 wxString g_MadEdit_URL(wxT("https://sourceforge.net/projects/madedit/ or https://sourceforge.net/projects/madedit-mod/"));
 wxString g_MadEditMod_URL(wxT("https://sourceforge.net/p/madedit-mod/wiki/MadEdi-Mod/"));
 wxString g_MadEditModLicense (
-_("Copyright (C) 2012-2020 Minggang Li <minggang.li@gmail.com>\n\n\
+_("Copyright (C) 2012-2024 Minggang Li <minggang.li@gmail.com>\n\n\
     This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by\
  the Free Software Foundation, either version 3 of the License, or\
  (at your option) any later version.\n\n\
@@ -32,7 +32,7 @@ _("Copyright (C) 2012-2020 Minggang Li <minggang.li@gmail.com>\n\n\
  along with this program.  If not, see <http://www.gnu.org/licenses/>.\n")
 );
 
-const int g_num_contributers = 6;
+const int g_num_contributers = 7;
 
 const wxChar   * g_MadEditModCredits[g_num_contributers][2] = {
 	wxT("Minggang Li"), _("Current maintainer"),
@@ -40,6 +40,7 @@ const wxChar   * g_MadEditModCredits[g_num_contributers][2] = {
 	wxT("Nikoss"), _("Greek Translation"),
 	wxT("ZhTw2013"), _("Traditional Chinese Translation"),
 	wxT("Tilt"), _("Japanese Translation"),
+	wxT("sln.1550"), _("Translation/patch contributers"),
 	wxT("Others"), _("Translation/patch contributers"),
 };
 

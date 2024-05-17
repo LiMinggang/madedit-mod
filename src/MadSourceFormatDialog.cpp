@@ -118,6 +118,7 @@ MadSourceFormatDialog::MadSourceFormatDialog(wxWindow* parent,wxWindowID WXUNUSE
 	TextSample->SetShowTabChar(false);
 	TextSample->SetShowEndOfLine(false);
 	TextSample->SetSpellCheck(false);
+	TextSample->HideRuler();
 	TextSample->SetSyntax(wxT("C/C++"));
 	MadSyntax* syn = TextSample->GetSyntax();
 	syn->DuplicateAttributes();

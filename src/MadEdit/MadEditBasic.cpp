@@ -864,6 +864,7 @@ void MadEdit::SetSingleLineMode(bool mode)
 			SetDisplayBookmark(false);
 			SetDisplayColHint(false);
 			m_RightMarginWidth = 0;
+			HideRuler();
 		}
 
 		m_SingleLineMode = mode;
@@ -4083,6 +4084,7 @@ void MadEdit::BeginPrint(const wxRect &printRect)
 	m_old_LeftMarginWidth   = m_LeftMarginWidth;
 	m_old_DrawingXPos       = m_DrawingXPos;
 	m_old_BookmarkWidth     = m_BookmarkWidth;
+	m_old_RulerHeight       = m_RulerHeight;
 	// apply printing settings
 	m_PrintRect = printRect;
 
@@ -4148,6 +4150,7 @@ void MadEdit::BeginPrint(const wxRect &printRect)
 		m_PrintHexEdit->m_BookmarkWidth = 0;
 		m_PrintHexEdit->m_LeftMarginWidth = 0;
 		m_PrintHexEdit->m_RightMarginWidth = 0;
+		m_PrintHexEdit->m_RulerHeight = 0;
 		// In Hex-Printing mode, every char is only one maxdigit width.
 		// calc max columns of one line
 		int maxcols = printRect.width / m_PrintHexEdit->m_TextFontMaxDigitWidth;
@@ -4249,6 +4252,7 @@ void MadEdit::EndPrint()
 		m_DrawingXPos       = m_old_DrawingXPos;
 		m_DisplayBookmark   = m_old_DisplayBookmark;
 		m_BookmarkWidth     = m_old_BookmarkWidth;
+		m_RulerHeight       = m_old_RulerHeight;
 		m_Syntax->EndPrint();
 		ReformatAll();
 	}
