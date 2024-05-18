@@ -2048,11 +2048,9 @@ void MadSearchReplaceDialog::WxCheckBoxRegexClick(wxCommandEvent& event)
 void MadSearchReplaceDialog::OnWxSliderInputSizerCmdScroll(wxCommandEvent& WXUNUSED(event))
 {
 	int times = WxSliderInputSizer->GetValue();
-	int width = 0, height = 0;
-	WxButtonFindNext->GetSize(&width, &height);
-	height *= times;
-	BoxSizerSearch->SetItemMinSize(m_FindText, width, height);
-	BoxSizerReplace->SetItemMinSize(m_ReplaceText, width, height);
+
+	BoxSizerSearch->SetItemMinSize(m_FindText, m_OriginInputSize.GetWidth(), m_OriginInputSize.GetHeight() * times);
+	BoxSizerReplace->SetItemMinSize(m_ReplaceText, m_OriginInputSize.GetWidth(), m_OriginInputSize.GetHeight() * times);
 
 	if (times == 1)
 	{
