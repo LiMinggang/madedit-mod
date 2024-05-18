@@ -1356,25 +1356,23 @@ void MadSearchReplaceDialog::MadSearchReplaceDialogActivate(wxActivateEvent& eve
 
 	if (event.GetActive())
 	{
+		int times = WxSliderInputSizer->GetValue();
+
 		if (g_ActiveMadEdit)
 		{
 			wxString fname, enc = g_ActiveMadEdit->GetEncodingName();
-			int fsize, fsize1;
-			int times = WxSliderInputSizer->GetValue();
-			int width = 0, height = 0;
-			m_FindText->GetFont(fname, fsize);
-			g_ActiveMadEdit->GetFont(fname, fsize1);
+			int fsize;
+
+			g_ActiveMadEdit->GetFont(fname, fsize);
 			m_FindText->SetEncoding(enc);
 			m_FindText->SetFont(fname, fsize);
 			m_FindText->SetSpellCheck(g_ActiveMadEdit->GetSpellCheckStatus());
 			m_ReplaceText->SetEncoding(enc);
 			m_ReplaceText->SetFont(fname, fsize);
 			m_ReplaceText->SetSpellCheck(g_ActiveMadEdit->GetSpellCheckStatus());
-
-			m_FindText->GetSize (&width, &height);
-			BoxSizerSearch->SetItemMinSize(m_FindText, width, height*times);
-			BoxSizerReplace->SetItemMinSize(m_ReplaceText, width, height*times);
 		}
+		BoxSizerSearch->SetItemMinSize(m_FindText, m_OriginInputSize.GetWidth(), m_OriginInputSize.GetHeight() * times);
+		BoxSizerReplace->SetItemMinSize(m_ReplaceText, m_OriginInputSize.GetWidth(), m_OriginInputSize.GetHeight() * times);
 
 		UpdateCheckBoxByCBHex(WxCheckBoxFindHex->GetValue());
 
@@ -2050,9 +2048,9 @@ void MadSearchReplaceDialog::WxCheckBoxRegexClick(wxCommandEvent& event)
 void MadSearchReplaceDialog::OnWxSliderInputSizerCmdScroll(wxCommandEvent& WXUNUSED(event))
 {
 	int times = WxSliderInputSizer->GetValue();
-	int width = 0, height = 0, bw, bhm;
-	WxButtonFindNext->GetSize(&bw, &bhm);
-	height = bhm * times;
+	int width = 0, height = 0;
+	WxButtonFindNext->GetSize(&width, &height);
+	height *= times;
 	BoxSizerSearch->SetItemMinSize(m_FindText, width, height);
 	BoxSizerReplace->SetItemMinSize(m_ReplaceText, width, height);
 
