@@ -285,9 +285,6 @@
     <ClInclude Include="..\..\minipython\Include\weakrefobject.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\minipython\Modules\_math.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\minipython\Modules\zlib\crc32.h">
       <Filter>Modules\zlib</Filter>
     </ClInclude>
@@ -324,9 +321,6 @@
     <ClInclude Include="..\..\minipython\Objects\stringlib\count.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\minipython\Objects\stringlib\fastsearch.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\minipython\Objects\stringlib\find.h">
       <Filter>Objects</Filter>
     </ClInclude>
@@ -334,9 +328,6 @@
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="..\..\minipython\Objects\stringlib\split.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\minipython\Objects\unicodetype_db.h">
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="..\..\minipython\Parser\parser.h">
@@ -356,6 +347,9 @@
     </ClInclude>
     <ClInclude Include="..\..\minipython\Python\thread_nt.h">
       <Filter>Python</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\minipython\Include\memoryobject.h">
+      <Filter>Include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -721,6 +715,30 @@
     </ClCompile>
     <ClCompile Include="..\..\minipython\Modules\zlib\gzclose.c">
       <Filter>Modules\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\bytearrayobject.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\bytes_methods.c">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\_sre.c">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\_struct.c">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\_weakref.c">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\binascii.c">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Modules\_io\bufferedio.c">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\minipython\Objects\memoryobject.c">
+      <Filter>Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

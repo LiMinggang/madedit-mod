@@ -84,7 +84,7 @@ struct _inittab _PyImport_Inittab[] = {
     //{"audioop", initaudioop},
 #endif
 #endif
-    //{"binascii", initbinascii},
+    {"binascii", initbinascii},
     //{"cmath", initcmath},
     {"errno", initerrno},
     {"future_builtins", initfuture_builtins},
@@ -115,7 +115,7 @@ struct _inittab _PyImport_Inittab[] = {
     //{"_subprocess", init_subprocess},
 
     {"_codecs", init_codecs},
-    //{"_weakref", init_weakref},
+    {"_weakref", init_weakref},
     //{"_hotshot", init_hotshot},
     //{"_random", init_random},
     //{"_bisect", init_bisect},
@@ -126,10 +126,10 @@ struct _inittab _PyImport_Inittab[] = {
     {"_symtable", init_symtable},
     //{"mmap", initmmap},
     //{"_csv", init_csv},
-    //{"_sre", init_sre},
+    {"_sre", init_sre},
     {"parser", initparser},
     //{"_winreg", init_winreg},
-    //{"_struct", init_struct},
+    {"_struct", init_struct},
     //{"datetime", initdatetime},
     //{"_functools", init_functools},
     //{"_json", init_json},

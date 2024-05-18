@@ -263,6 +263,7 @@
     <ClInclude Include="..\..\minipython\Include\longintrepr.h" />
     <ClInclude Include="..\..\minipython\Include\longobject.h" />
     <ClInclude Include="..\..\minipython\Include\marshal.h" />
+    <ClInclude Include="..\..\minipython\Include\memoryobject.h" />
     <ClInclude Include="..\..\minipython\Include\metagrammar.h" />
     <ClInclude Include="..\..\minipython\Include\methodobject.h" />
     <ClInclude Include="..\..\minipython\Include\modsupport.h" />
@@ -311,7 +312,6 @@
     <ClInclude Include="..\..\minipython\Include\ucnhash.h" />
     <ClInclude Include="..\..\minipython\Include\unicodeobject.h" />
     <ClInclude Include="..\..\minipython\Include\weakrefobject.h" />
-    <ClInclude Include="..\..\minipython\Modules\_math.h" />
     <ClInclude Include="..\..\minipython\Modules\zlib\crc32.h" />
     <ClInclude Include="..\..\minipython\Modules\zlib\deflate.h" />
     <ClInclude Include="..\..\minipython\Modules\zlib\inffast.h" />
@@ -324,11 +324,9 @@
     <ClInclude Include="..\..\minipython\Modules\zlib\zlib.h" />
     <ClInclude Include="..\..\minipython\Modules\zlib\zutil.h" />
     <ClInclude Include="..\..\minipython\Objects\stringlib\count.h" />
-    <ClInclude Include="..\..\minipython\Objects\stringlib\fastsearch.h" />
     <ClInclude Include="..\..\minipython\Objects\stringlib\find.h" />
     <ClInclude Include="..\..\minipython\Objects\stringlib\partition.h" />
     <ClInclude Include="..\..\minipython\Objects\stringlib\split.h" />
-    <ClInclude Include="..\..\minipython\Objects\unicodetype_db.h" />
     <ClInclude Include="..\..\minipython\Parser\parser.h" />
     <ClInclude Include="..\..\minipython\Parser\tokenizer.h" />
     <ClInclude Include="..\..\minipython\PC\errmap.h" />
@@ -337,11 +335,13 @@
     <ClInclude Include="..\..\minipython\Python\thread_nt.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\minipython\Modules\binascii.c" />
     <ClCompile Include="..\..\minipython\Modules\zlib\gzclose.c" />
     <ClCompile Include="..\..\minipython\Modules\zlib\gzlib.c" />
     <ClCompile Include="..\..\minipython\Modules\zlib\gzread.c" />
     <ClCompile Include="..\..\minipython\Modules\zlib\gzwrite.c" />
     <ClCompile Include="..\..\minipython\Modules\_codecsmodule.c" />
+    <ClCompile Include="..\..\minipython\Modules\_io\bufferedio.c" />
     <ClCompile Include="..\..\minipython\Modules\_math.c" />
     <ClCompile Include="..\..\minipython\Modules\errnomodule.c" />
     <ClCompile Include="..\..\minipython\Modules\future_builtins.c" />
@@ -363,9 +363,14 @@
     <ClCompile Include="..\..\minipython\Modules\zlib\trees.c" />
     <ClCompile Include="..\..\minipython\Modules\zlib\uncompr.c" />
     <ClCompile Include="..\..\minipython\Modules\zlib\zutil.c" />
+    <ClCompile Include="..\..\minipython\Modules\_sre.c" />
+    <ClCompile Include="..\..\minipython\Modules\_struct.c" />
+    <ClCompile Include="..\..\minipython\Modules\_weakref.c" />
     <ClCompile Include="..\..\minipython\Objects\abstract.c" />
     <ClCompile Include="..\..\minipython\Objects\boolobject.c" />
     <ClCompile Include="..\..\minipython\Objects\bufferobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\bytearrayobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\bytes_methods.c" />
     <ClCompile Include="..\..\minipython\Objects\capsule.c" />
     <ClCompile Include="..\..\minipython\Objects\cellobject.c" />
     <ClCompile Include="..\..\minipython\Objects\classobject.c" />
@@ -385,6 +390,7 @@
     <ClCompile Include="..\..\minipython\Objects\iterobject.c" />
     <ClCompile Include="..\..\minipython\Objects\listobject.c" />
     <ClCompile Include="..\..\minipython\Objects\longobject.c" />
+    <ClCompile Include="..\..\minipython\Objects\memoryobject.c" />
     <ClCompile Include="..\..\minipython\Objects\methodobject.c" />
     <ClCompile Include="..\..\minipython\Objects\moduleobject.c" />
     <ClCompile Include="..\..\minipython\Objects\object.c" />

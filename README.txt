@@ -127,6 +127,7 @@ Packing for FreeBSD
 .Use per monitor DPI awareness V2
 .Add ruler by sln-1550(https://github.com/sln-1550)
 .Fix input control size issue of SearchReplace dialog(sln-1550)
+.Add binascii, sre, struct, weakref, bytearrayobject to miniPython(sln-1550)
 .Update Astyle to 3.4.9
 .Update hunspell to 1.7.2
 .Update wxWidgets to 3.2.5

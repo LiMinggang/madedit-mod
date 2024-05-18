@@ -249,6 +249,7 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	minipython/Include/longintrepr.h \
 	minipython/Include/longobject.h \
 	minipython/Include/marshal.h \
+	minipython/Include/memoryobject.h \
 	minipython/Include/metagrammar.h \
 	minipython/Include/methodobject.h \
 	minipython/Include/modsupport.h \
@@ -323,8 +324,24 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	minipython/Parser/tokenizer.h \
 	minipython/Python/importdl.h \
 	minipython/Python/thread_pthread.h \
+	minipython/Modules/_io/_iomodule.c \
+	minipython/Modules/_io/_iomodule.h \
+	minipython/Modules/_io/bufferedio.c \
+	minipython/Modules/_io/bytesio.c \
+	minipython/Modules/_io/fileio.c \
+	minipython/Modules/_io/iobase.c \
+	minipython/Modules/_io/stringio.c \
+	minipython/Modules/_io/textio.c \
 	minipython/Modules/_codecsmodule.c \
 	minipython/Modules/_math.c \
+	minipython/Modules/_sre.c \
+	minipython/Modules/_struct.c \
+	minipython/Modules/_weakref.c \
+	minipython/Modules/binascii.c \
+	minipython/Modules/posixmodule.c \
+	minipython/Modules/sre.h \
+	minipython/Modules/sre_constants.h \
+	minipython/Modules/timemodule.c \
 	minipython/Modules/errnomodule.c \
 	minipython/Modules/future_builtins.c \
 	minipython/Modules/gcmodule.c \
@@ -356,6 +373,8 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	minipython/Objects/abstract.c \
 	minipython/Objects/boolobject.c \
 	minipython/Objects/bufferobject.c \
+	minipython/Objects/bytearrayobject.c \
+	minipython/Objects/bytes_methods.c \
 	minipython/Objects/capsule.c \
 	minipython/Objects/cellobject.c \
 	minipython/Objects/classobject.c \
@@ -375,6 +394,7 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	minipython/Objects/iterobject.c \
 	minipython/Objects/listobject.c \
 	minipython/Objects/longobject.c \
+	minipython/Objects/memoryobject.c \
 	minipython/Objects/methodobject.c \
 	minipython/Objects/moduleobject.c \
 	minipython/Objects/object.c \
