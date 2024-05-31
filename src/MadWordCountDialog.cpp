@@ -73,7 +73,7 @@ MadWordCountDialog::MadWordCountDialog(wxWindow* parent,wxWindowID WXUNUSED(id),
 	BoxSizer1->Add(StaticLine1, 0, wxALL|wxEXPAND, 2);
 	StaticText7 = new wxStaticText(this, wxID_ANY, _("Detail Information of Characters:"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT7"));
 	BoxSizer1->Add(StaticText7, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 2);
-	WxMemo1 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(440,160), wxTE_MULTILINE|wxTE_DONTWRAP, wxDefaultValidator, _T("ID_WXMEMO1"));
+	WxMemo1 = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(440,160), wxTE_MULTILINE|wxTE_DONTWRAP|wxTE_READONLY, wxDefaultValidator, _T("ID_WXMEMO1"));
 	BoxSizer1->Add(WxMemo1, 1, wxALL|wxEXPAND, 4);
 	Button1 = new wxButton(this, wxID_CANCEL, _("&Close"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("wxID_CANCEL"));
 	Button1->SetDefault();
@@ -109,6 +109,14 @@ MadWordCountDialog::MadWordCountDialog(wxWindow* parent,wxWindowID WXUNUSED(id),
 	{
 		str<<detail[i]<<wxT("\n");
 	}
+#ifdef __WXMSW__
+	wxFont font(wxFontInfo().FaceName(wxT("Courier New")));
+#elif defined(__APPLE__) && defined(__MACH__)
+	wxFont font(wxFontInfo().FaceName(wxT("Monaco")));
+#else
+	wxFont font(wxFontInfo().FaceName(wxT("Monospace")));
+#endif
+	WxMemo1->SetFont(font);
 	WxMemo1->SetValue(str);
 	Button1->SetFocus();
 }

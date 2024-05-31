@@ -128,6 +128,7 @@ Packing for FreeBSD
 .Add ruler by sln-1550(https://github.com/sln-1550)
 .Fix input control size issue of SearchReplace dialog(sln-1550)
 .Add binascii, sre, struct, weakref, bytearrayobject to miniPython(sln-1550)
+.Improve on Word Count dialog, make the summary text control readonly, use fix width font.
 .Update Astyle to 3.4.9
 .Update hunspell to 1.7.2
 .Update wxWidgets to 3.2.5
