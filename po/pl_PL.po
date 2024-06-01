@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MadEdit-Mod 0.4.18\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-18 14:59+0800\n"
+"POT-Creation-Date: 2024-06-01 12:15+0800\n"
 "PO-Revision-Date: 2015-03-31 14:56+0100\n"
 "Last-Translator: Adam Massalski <massaada@wp.pl>\n"
 "Language-Team: Adam Massalski <massaada@wp.pl>\n"
@@ -239,7 +239,7 @@ msgstr "Wpisz numer strony pomiędzy %d i %d:"
 msgid "Please wait while printing\n"
 msgstr "Proszę czekać, drukowanie\n"
 
-#: wxstd.po.cpp:50 ../src/MadEditFrame.cpp:6204
+#: wxstd.po.cpp:50 ../src/MadEditFrame.cpp:6208
 msgid "Printing"
 msgstr "Drukowanie"
 
@@ -379,11 +379,13 @@ msgstr "Południowoeuropejski"
 msgid "North European"
 msgstr "Północnoeuropejski"
 
-#: wxstd.po.cpp:85 ../src/MadEdit/MadEncoding.cpp:154
+#: wxstd.po.cpp:85 ../src/MadEdit/MadEditAdvanced.cpp:1536
+#: ../src/MadEdit/MadEncoding.cpp:154
 msgid "Cyrillic"
 msgstr "Cyrylica"
 
-#: wxstd.po.cpp:86 ../src/MadEdit/MadEncoding.cpp:155
+#: wxstd.po.cpp:86 ../src/MadEdit/MadEditAdvanced.cpp:1540
+#: ../src/MadEdit/MadEncoding.cpp:155
 msgid "Arabic"
 msgstr "Arabskie"
 
@@ -392,7 +394,8 @@ msgstr "Arabskie"
 msgid "Greek"
 msgstr "Grecki"
 
-#: wxstd.po.cpp:88 ../src/MadEdit/MadEncoding.cpp:157
+#: wxstd.po.cpp:88 ../src/MadEdit/MadEditAdvanced.cpp:1539
+#: ../src/MadEdit/MadEncoding.cpp:157
 msgid "Hebrew"
 msgstr "Hebrajskie"
 
@@ -966,15 +969,1266 @@ msgstr "Hebrajskie"
 msgid "IBM Arabic"
 msgstr "Arabskie"
 
-#: ../src/MadEdit/MadEdit.cpp:12230
+#: ../src/MadEdit/MadEdit.cpp:12249
 msgid "Zero Length Match"
 msgstr ""
 
-#: ../src/MadEdit/MadEdit.cpp:12233
+#: ../src/MadEdit/MadEdit.cpp:12252
 msgid "^ Zero Length Match"
 msgstr ""
 
-#: ../src/MadEdit/MadEditAdvanced.cpp:1863
+#: ../src/MadEdit/MadEditAdvanced.cpp:1527
+msgid "Control Characters"
+msgstr "Znaki sterujące"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1528
+#, fuzzy
+msgid "Basic Latin"
+msgstr "Podstawowy łaciński"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1529
+msgid "Latin-1 Supplement"
+msgstr "Dodatek Latin-1"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1530
+msgid "Latin Extended-A"
+msgstr "Rozszerzony łaciński A"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1531
+msgid "Latin Extended-B"
+msgstr "Rozszerzony łaciński B"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1532
+msgid "IPA Extensions"
+msgstr "Rozszerzenia IPA"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1533
+msgid "Spacing Modifier Letters"
+msgstr "Oddzielone litery modyfikujące"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1534
+msgid "Combining Diacritical Marks"
+msgstr "Składające znaki diakrytyczne"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1535
+msgid "Greek and Coptic"
+msgstr "Grecki i koptyjski"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1537
+msgid "Cyrillic Supplement"
+msgstr "Uzupełnienie cyrylicy"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1538
+msgid "Armenian"
+msgstr "Armeńskie"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1541
+msgid "Syriac"
+msgstr "Syryjski"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1542
+msgid "Arabic Supplement"
+msgstr "Uzupełnienie arabskiego"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1543
+msgid "Thaana"
+msgstr "Thaana"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1544
+#, fuzzy
+msgid "NKo"
+msgstr "NKo"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1545
+msgid "Samaritan"
+msgstr "Samarytańskie"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1546
+msgid "Mandaic"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1547
+#, fuzzy
+msgid "Syriac Supplement"
+msgstr "Uzupełnienie cyrylicy"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1548
+msgid "Arabic Extended-A"
+msgstr "Arabski rozszerzenie-A"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1549
+#, fuzzy
+msgid "Devanagari"
+msgstr "Dewanagari"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1550
+msgid "Bengali"
+msgstr "Bengalski"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1551
+msgid "Gurmukhi"
+msgstr "Gurmukhi"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1552
+msgid "Gujarati"
+msgstr "Gudźarati"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1553
+msgid "Oriya"
+msgstr "Orija"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1554
+msgid "Tamil"
+msgstr "Tamilski"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1555
+msgid "Telugu"
+msgstr "Telugu"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1556
+msgid "Kannada"
+msgstr "Kannada"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1557
+msgid "Malayalam"
+msgstr "Malajalam"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1558
+msgid "Sinhala"
+msgstr "Syngaleski"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1559
+#, fuzzy
+msgid "Thai"
+msgstr "Tajski"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1560
+msgid "Lao"
+msgstr "Laotański"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1561
+msgid "Tibetan"
+msgstr "Tybetański"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1562
+msgid "Myanmar"
+msgstr "Birmański"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1563
+msgid "Georgian"
+msgstr "Gruzińskie"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1564
+msgid "Hangul Jamo"
+msgstr "Dzamo hangyl"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1565
+msgid "Ethiopic"
+msgstr "Etiopski"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1566
+msgid "Ethiopic Supplement"
+msgstr "Uzupełnienie etiopskiego"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1567
+msgid "Cherokee"
+msgstr "Czirokeski"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1568
+msgid "Unified Canadian Aboriginal Syllabics"
+msgstr "Ujednolicony sylabariusz rdzennych kanadyjczyków"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1569
+msgid "Ogham"
+msgstr "Ogamiczny"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1570
+msgid "Runic"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1571
+msgid "Tagalog"
+msgstr "Tagalski"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1572
+msgid "Hanunoo"
+msgstr "Hanunoo"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1573
+msgid "Buhid"
+msgstr "Buhid"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1574
+msgid "Tagbanwa"
+msgstr "Tagbanwa"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1575
+msgid "Khmer"
+msgstr "Kmerski"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1576
+msgid "Mongolian"
+msgstr "Mongolski"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1577
+msgid "Unified Canadian Aboriginal Syllabics Extended"
+msgstr "Rozszerzenie ujednoliconego sylabariusza rdzennych kanadyjczyków"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1578
+msgid "Limbu"
+msgstr "Limbu"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1579
+msgid "Tai Le"
+msgstr "Tai Le"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1580
+msgid "New Tai Lue"
+msgstr "Nowy Tai Lue"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1581
+msgid "Khmer Symbols"
+msgstr "Symbole kmerskie"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1582
+msgid "Buginese"
+msgstr "Buginese"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1583
+msgid "Tai Tham"
+msgstr "Tai Tham"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1584
+#, fuzzy
+msgid "Combining Diacritical Marks Extended"
+msgstr "Składające znaki diakrytyczne"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1585
+#, fuzzy
+msgid "Balinese"
+msgstr "Buginese"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1586
+msgid "Sundanese"
+msgstr "Sundyjski"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1587
+#, fuzzy
+msgid "Batak"
+msgstr "Katakana"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1588
+msgid "Lepcha"
+msgstr "Lepcza"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1589
+msgid "Ol Chiki"
+msgstr "Ol Chiki"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1590
+#, fuzzy
+msgid "Cyrillic Extended-C"
+msgstr "Rozszerzona cyrylica A"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1591
+#, fuzzy
+msgid "Georgian Extended"
+msgstr "Greckie rozszerzony"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1592
+#, fuzzy
+msgid "Sundanese Supplement"
+msgstr "Dodatek Latin-1"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1593
+msgid "Vedic Extensions"
+msgstr "Rozszerzenia wedyjskie"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1594
+#, fuzzy
+msgid "Phonetic Extensions"
+msgstr "Rozszerzenia fonetyczne katakana"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1595
+msgid "Phonetic Extensions Supplement"
+msgstr "Uzupełnienie rozszerzeń fonetycznych"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1596
+msgid "Combining Diacritical Marks Supplement"
+msgstr "Uzupełnienie składających znaków diakrytycznych"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1597
+msgid "Latin Extended Additional"
+msgstr "Łacińskie rozszerzone dodatkowe"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1598
+msgid "Greek Extended"
+msgstr "Greckie rozszerzony"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1599
+#, fuzzy
+msgid "General Punctuation"
+msgstr "Dodatkowe znaki interpunkcyjne"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1600
+msgid "Superscripts and Subscripts"
+msgstr "Indeksy górne i dolne"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1601
+msgid "Currency Symbols"
+msgstr "Symbole walut"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1602
+msgid "Combining Diacritical Marks for Symbols"
+msgstr "Składające znaki diakrytyczne dla symboli"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1603
+msgid "Letterlike Symbols"
+msgstr "Symbole literopodobne"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1604
+#, fuzzy
+msgid "Number Forms"
+msgstr "Formy liczbowe"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1605
+msgid "Arrows"
+msgstr "Strzałki"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1606
+msgid "Mathematical Operators"
+msgstr "Operatory matematyczne"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1607
+msgid "Miscellaneous Technical"
+msgstr "Różne znaki techniczne"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1608
+msgid "Control Pictures"
+msgstr "Obrazki znaków sterujących"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1609
+msgid "Optical Character Recognition"
+msgstr "Rozpoznawanie tekstu (OCR)"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1610
+msgid "Enclosed Alphanumerics"
+msgstr "Otoczone symbole alfanumeryczne"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1611
+msgid "Box Drawing"
+msgstr "Obszar rysowania"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1612
+msgid "Block Elements"
+msgstr "Elementy blokowe"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1613
+msgid "Geometric Shapes"
+msgstr "Kształty geometryczne"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1614
+msgid "Miscellaneous Symbols"
+msgstr "Różne symbole"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1615
+msgid "Dingbats"
+msgstr "Dingbaty"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1616
+msgid "Miscellaneous Mathematical Symbols-A"
+msgstr "Różne symbole matematyczne A"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1617
+msgid "Supplemental Arrows-A"
+msgstr "Dodatkowe strzałki A"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1618
+msgid "Braille Patterns"
+msgstr "Pismo Braille'a"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1619
+msgid "Supplemental Arrows-B"
+msgstr "Dodatkowe strzałki B"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1620
+msgid "Miscellaneous Mathematical Symbols-B"
+msgstr "Różne symbole matematyczne B"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1621
+msgid "Supplemental Mathematical Operators"
+msgstr "Dodatkowe operatory matematyczne"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1622
+msgid "Miscellaneous Symbols and Arrows"
+msgstr "Różne symbole i strzałki"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1623
+msgid "Glagolitic"
+msgstr "Głagolica"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1624
+msgid "Latin Extended-C"
+msgstr "Rozszerzony łaciński C"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1625
+msgid "Coptic"
+msgstr "Koptyjski"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1626
+msgid "Georgian Supplement"
+msgstr "Uzupełnienie gruzińskiego"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1627
+msgid "Tifinagh"
+msgstr "Tifinagh"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1628
+msgid "Ethiopic Extended"
+msgstr "Rozszerzony etiopski"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1629
+msgid "Cyrillic Extended-A"
+msgstr "Rozszerzona cyrylica A"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1630
+msgid "Supplemental Punctuation"
+msgstr "Dodatkowe znaki interpunkcyjne"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1631
+msgid "CJK Radicals Supplement"
+msgstr "Dodatkowe radykały CJK"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1632
+msgid "Kangxi Radicals"
+msgstr "Radykały Kangxi"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1633
+msgid "Ideographic Description Characters"
+msgstr "Znaki opisu ideograficznego"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1634
+msgid "CJK Symbols and Punctuation"
+msgstr "Symbole i znaki interpunkcyjne CJK"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1635
+msgid "Hiragana"
+msgstr "Hiragana"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1636
+msgid "Katakana"
+msgstr "Katakana"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1637
+msgid "Bopomofo"
+msgstr "Bopomofo"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1638
+msgid "Hangul Compatibility Jamo"
+msgstr "Dzamo zgodności dla hangyl"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1639
+msgid "Kanbun"
+msgstr "Kanbun"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1640
+msgid "Bopomofo Extended"
+msgstr "Rozszerzone bopomofo"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1641
+msgid "CJK Strokes"
+msgstr "Kreski CJK"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1642
+msgid "Katakana Phonetic Extensions"
+msgstr "Rozszerzenia fonetyczne katakana"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1643
+msgid "Enclosed CJK Letters and Months"
+msgstr "Otoczone litery i miesiące CJK"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1644
+msgid "CJK Compatibility"
+msgstr "Znaki zgodności CJK"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1645
+msgid "CJK Unified Ideographs Extension A"
+msgstr "Rozszerzenie A ujednoliconych ideogramów CJK"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1646
+msgid "Yijing Hexagram Symbols"
+msgstr "Heksagramy Yijing"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1647
+msgid "CJK Unified Ideographs"
+msgstr "Ujednolicone ideogramy CJK"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1648
+msgid "Yi Syllables"
+msgstr "Sylaby yi"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1649
+msgid "Yi Radicals"
+msgstr "Radykały yi"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1650
+msgid "Lisu"
+msgstr "Lisu"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1651
+msgid "Vai"
+msgstr "Wai"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1652
+msgid "Cyrillic Extended-B"
+msgstr "Rozszerzona cyrylica B"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1653
+msgid "Bamum"
+msgstr "Bamum"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1654
+msgid "Modifier Tone Letters"
+msgstr "Modyfikujące litery tonów"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1655
+msgid "Latin Extended-D"
+msgstr "Rozszerzony łaciński D"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1656
+msgid "Syloti Nagri"
+msgstr "Syloti Nagri"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1657
+msgid "Common Indic Number Forms"
+msgstr "Indyjskie formy liczbowe"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1658
+msgid "Phags-pa"
+msgstr "Phags-pa"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1659
+msgid "Saurashtra"
+msgstr "Saurashtra"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1660
+msgid "Devanagari Extended"
+msgstr "Rozszerzone dewanagari"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1661
+msgid "Kayah Li"
+msgstr "Kayah Li"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1662
+msgid "Rejang"
+msgstr "Rejang"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1663
+msgid "Hangul Jamo Extended-A"
+msgstr "Rozszerzenie A dzamo hangyl"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1664
+msgid "Javanese"
+msgstr "Jawajski"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1665
+#, fuzzy
+msgid "Myanmar Extended-B"
+msgstr "Rozszerzony birmański A"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1666
+msgid "Cham"
+msgstr "Cham"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1667
+msgid "Myanmar Extended-A"
+msgstr "Rozszerzony birmański A"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1668
+msgid "Tai Viet"
+msgstr "Tai Viet"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1669
+#, fuzzy
+msgid "Meetei Mayek Extensions"
+msgstr "Manipuri"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1670
+#, fuzzy
+msgid "Ethiopic Extended-A"
+msgstr "Rozszerzony etiopski"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1671
+#, fuzzy
+msgid "Latin Extended-E"
+msgstr "Rozszerzony łaciński A"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1672
+#, fuzzy
+msgid "Cherokee Supplement"
+msgstr "Uzupełnienie cyrylicy"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1673
+msgid "Meetei Mayek"
+msgstr "Manipuri"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1674
+msgid "Hangul Syllables"
+msgstr "Sylaby hangyl"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1675
+msgid "Hangul Jamo Extended-B"
+msgstr "Rozszerzenie B dzamo hangyl"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1676
+msgid "High Surrogates"
+msgstr "Starsze surogaty"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1677
+msgid "High Private Use Surrogates"
+msgstr "Starsze surogaty prywatnego użytku"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1678
+msgid "Low Surrogates"
+msgstr "Młodsze surogaty"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1679
+msgid "Private Use Area"
+msgstr "Obszar prywatnego użytku"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1680
+msgid "CJK Compatibility Ideographs"
+msgstr "Ideogramy zgodności CJK"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1681
+msgid "Alphabetic Presentation Forms"
+msgstr "Alfabetyczne formy prezentacyjne"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1682
+msgid "Arabic Presentation Forms-A"
+msgstr "Arabskie formy prezentacyjne A"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1683
+msgid "Variation Selectors"
+msgstr "Przełączniki wariantów glifów"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1684
+msgid "Vertical Forms"
+msgstr "Formy pionowe"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1685
+msgid "Combining Half Marks"
+msgstr "Składające półznaki"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1686
+msgid "CJK Compatibility Forms"
+msgstr "Formy zgodności CJK"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1687
+msgid "Small Form Variants"
+msgstr "Różne małe formy"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1688
+msgid "Arabic Presentation Forms-B"
+msgstr "Arabskie formy prezentacyjne B"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1689
+msgid "Halfwidth and Fullwidth Forms"
+msgstr "Formy połowy i pełnej szerokości"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1690
+msgid "Specials"
+msgstr "Specjalne"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1691
+#, fuzzy
+msgid "Linear B Syllabary"
+msgstr "Sylabariusz cypryjski"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1692
+msgid "Linear B Ideograms"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1693
+msgid "Aegean Numbers"
+msgstr "Liczby Egejskie"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1694
+msgid "Ancient Greek Numbers"
+msgstr "Starożytne greckie liczby"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1695
+msgid "Ancient Symbols"
+msgstr "Symbole starożytne"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1696
+msgid "Phaistos Disc"
+msgstr "Dysk z Fajstos"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1697
+msgid "Lycian"
+msgstr "Licyjski"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1698
+msgid "Carian"
+msgstr "Karyjski"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1699
+#, fuzzy
+msgid "Coptic Epact Numbers"
+msgstr "Drukuj numery linii"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1700
+msgid "Old Italic"
+msgstr "Staroitalski"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1701
+msgid "Gothic"
+msgstr "Gothic"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1702
+#, fuzzy
+msgid "Old Permic"
+msgstr "Staroperski"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1703
+msgid "Ugaritic"
+msgstr "Ugarycki"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1704
+msgid "Old Persian"
+msgstr "Staroperski"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1705
+msgid "Deseret"
+msgstr "Deseret"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1706
+msgid "Shavian"
+msgstr "Shavian"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1707
+msgid "Osmanya"
+msgstr "Osmanya"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1708
+msgid "Osage"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1709
+msgid "Elbasan"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1710
+msgid "Caucasian Albanian"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1711
+#, fuzzy
+msgid "Linear A"
+msgstr "Linie"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1712
+msgid "Cypriot Syllabary"
+msgstr "Sylabariusz cypryjski"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1713
+msgid "Imperial Aramaic"
+msgstr "Aramejski imperjalny"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1714
+msgid "Palmyrene"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1715
+msgid "Nabataean"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1716
+msgid "Hatran"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1717
+msgid "Phoenician"
+msgstr "Fenicki"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1718
+msgid "Lydian"
+msgstr "Lidyjskie"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1719
+#, fuzzy
+msgid "Meroitic Hieroglyphs"
+msgstr "Hieroglify egipskie"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1720
+msgid "Meroitic Cursive"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1721
+msgid "Kharoshthi"
+msgstr "Kharoshthi"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1722
+msgid "Old South Arabian"
+msgstr "Staro południowoarabski"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1723
+msgid "Old North Arabian"
+msgstr "Stary połnocnoarabski"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1724
+msgid "Manichaean"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1725
+msgid "Avestan"
+msgstr "awestyjski"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1726
+msgid "Inscriptional Parthian"
+msgstr "Inskrypcyjne Partów"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1727
+msgid "Inscriptional Pahlavi"
+msgstr "Inskrypcyjne Pahlawi "
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1728
+#, fuzzy
+msgid "Psalter Pahlavi"
+msgstr "Inskrypcyjne Pahlawi "
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1729
+msgid "Old Turkic"
+msgstr "Staroturecki"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1730
+#, fuzzy
+msgid "Old Hungarian"
+msgstr "Staroperski"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1731
+msgid "Hanifi Rohingya"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1732
+msgid "Rumi Numeral Symbols"
+msgstr "Symbole numeryczne Rumi"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1733
+#, fuzzy
+msgid "Old Sogdian"
+msgstr "Staro południowoarabski"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1734
+#, fuzzy
+msgid "Sogdian"
+msgstr "Lidyjskie"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1735
+msgid "Elymaic"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1736
+msgid "Brahmi"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1737
+msgid "Kaithi"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1738
+msgid "Sora Sompeng"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1739
+msgid "Chakma"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1740
+msgid "Mahajani"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1741
+msgid "Sharada"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1742
+msgid "Sinhala Archaic Numbers"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1743
+msgid "Khojki"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1744
+msgid "Multani"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1745
+msgid "Khudawadi"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1746
+msgid "Grantha"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1747
+msgid "Newa"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1748
+msgid "Tirhuta"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1749
+msgid "Siddham"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1750
+msgid "Modi"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1751
+#, fuzzy
+msgid "Mongolian Supplement"
+msgstr "Uzupełnienie gruzińskiego"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1752
+msgid "Takri"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1753
+msgid "Ahom"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1754
+msgid "Dogra"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1755
+msgid "Warang Citi"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1756
+#, fuzzy
+msgid "Nandinagari"
+msgstr "Dewanagari"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1757
+msgid "Zanabazar Square"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1758
+msgid "Soyombo"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1759
+msgid "Pau Cin Hau"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1760
+msgid "Bhaiksuki"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1761
+#, fuzzy
+msgid "Marchen"
+msgstr "Szukaj"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1762
+msgid "Masaram Gondi"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1763
+msgid "Gunjala Gondi"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1764
+msgid "Makasar"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1765
+#, fuzzy
+msgid "Tamil Supplement"
+msgstr "Uzupełnienie arabskiego"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1766
+msgid "Cuneiform"
+msgstr "Cuneiform"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1767
+msgid "Cuneiform Numbers and Punctuation"
+msgstr "Liczby i interpunkcja pisma klinowego"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1768
+msgid "Early Dynastic Cuneiform"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1769
+msgid "Egyptian Hieroglyphs"
+msgstr "Hieroglify egipskie"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1770
+#, fuzzy
+msgid "Egyptian Hieroglyph Format Controls"
+msgstr "Hieroglify egipskie"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1771
+#, fuzzy
+msgid "Anatolian Hieroglyphs"
+msgstr "Hieroglify egipskie"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1772
+#, fuzzy
+msgid "Bamum Supplement"
+msgstr "Uzupełnienie arabskiego"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1773
+#, fuzzy
+msgid "Mro"
+msgstr "Kasztanowy"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1774
+msgid "Bassa Vah"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1775
+msgid "Pahawh Hmong"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1776
+msgid "Medefaidrin"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1777
+msgid "Miao"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1778
+#, fuzzy
+msgid "Ideographic Symbols and Punctuation"
+msgstr "Symbole i znaki interpunkcyjne CJK"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1779
+msgid "Tangut"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1780
+msgid "Tangut Components"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1781
+#, fuzzy
+msgid "Kana Supplement"
+msgstr "Dodatek Latin-1"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1782
+#, fuzzy
+msgid "Kana Extended-A"
+msgstr "Rozszerzony birmański A"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1783
+msgid "Small Kana Extension"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1784
+msgid "Nushu"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1785
+msgid "Duployan"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1786
+msgid "Shorthand Format Controls"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1787
+msgid "Byzantine Musical Symbols"
+msgstr "Bizantyjskie symbole muzyczne"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1788
+msgid "Musical Symbols"
+msgstr "Symbole muzyczne"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1789
+msgid "Ancient Greek Musical Notation"
+msgstr "Starożytny grecki notacja muzyczna"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1790
+#, fuzzy
+msgid "Mayan Numerals"
+msgstr "Liczby Egejskie"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1791
+msgid "Tai Xuan Jing Symbols"
+msgstr "Symbole Tajskie Xuan Jing"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1792
+msgid "Counting Rod Numerals"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1793
+msgid "Mathematical Alphanumeric Symbols"
+msgstr "Alfanumeryczne symbole matematyczne"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1794
+msgid "Sutton SignWriting"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1795
+#, fuzzy
+msgid "Glagolitic Supplement"
+msgstr "Uzupełnienie cyrylicy"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1796
+msgid "Nyiakeng Puachue Hmong"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1797
+msgid "Wancho"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1798
+msgid "Mende Kikakui"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1799
+msgid "Adlam"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1800
+#, fuzzy
+msgid "Indic Siyaq Numbers"
+msgstr "Drukuj numery linii"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1801
+msgid "Ottoman Siyaq Numbers"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1802
+#, fuzzy
+msgid "Arabic Mathematical Alphabetic Symbols"
+msgstr "Alfanumeryczne symbole matematyczne"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1803
+msgid "Mahjong Tiles"
+msgstr "Symbole gry Mahjong"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1804
+msgid "Domino Tiles"
+msgstr "Symbole gry Domino"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1805
+msgid "Playing Cards"
+msgstr "Karty do gry"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1806
+#, fuzzy
+msgid "Enclosed Alphanumeric Supplement"
+msgstr "Otoczone symbole alfanumeryczne"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1807
+#, fuzzy
+msgid "Enclosed Ideographic Supplement"
+msgstr "Uzupełnienie etiopskiego"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1808
+#, fuzzy
+msgid "Miscellaneous Symbols and Pictographs"
+msgstr "Różne symbole i piktogramy"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1809
+msgid "Emoticons"
+msgstr "Emotikony"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1810
+msgid "Ornamental Dingbats"
+msgstr ""
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1811
+#, fuzzy
+msgid "Transport and Map Symbols"
+msgstr "Transport i symbole map"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1812
+msgid "Alchemical Symbols"
+msgstr "Symbole alchemiczne"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1813
+#, fuzzy
+msgid "Geometric Shapes Extended"
+msgstr "Kształty geometryczne"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1814
+#, fuzzy
+msgid "Supplemental Arrows-C"
+msgstr "Dodatkowe strzałki A"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1815
+#, fuzzy
+msgid "Supplemental Symbols and Pictographs"
+msgstr "Różne symbole i piktogramy"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1816
+#, fuzzy
+msgid "Chess Symbols"
+msgstr "Symbole kmerskie"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1817
+#, fuzzy
+msgid "Symbols and Pictographs Extended-A"
+msgstr "Różne symbole i piktogramy"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1818
+msgid "CJK Unified Ideographs Extension B"
+msgstr "Ujednolicone ideogramy CJK rozszerzenie B"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1819
+#, fuzzy
+msgid "CJK Unified Ideographs Extension C"
+msgstr "Rozszerzenie A ujednoliconych ideogramów CJK"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1820
+#, fuzzy
+msgid "CJK Unified Ideographs Extension D"
+msgstr "Rozszerzenie A ujednoliconych ideogramów CJK"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1821
+#, fuzzy
+msgid "CJK Unified Ideographs Extension E"
+msgstr "Rozszerzenie A ujednoliconych ideogramów CJK"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1822
+#, fuzzy
+msgid "CJK Unified Ideographs Extension F"
+msgstr "Rozszerzenie A ujednoliconych ideogramów CJK"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1823
+msgid "CJK Compatibility Ideographs Supplement"
+msgstr "Dodatkowe ideogramy zgodności CJK"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1824
+msgid "Tags"
+msgstr "Tagi"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1825
+#, fuzzy
+msgid "Variation Selectors Supplement"
+msgstr "Przełączniki wariantów glifów"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1826
+#, fuzzy
+msgid "Supplementary Private Use Area-A"
+msgstr "Obszar prywatnego użytku"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:1827
+#, fuzzy
+msgid "Supplementary Private Use Area-B"
+msgstr "Obszar prywatnego użytku"
+
+#: ../src/MadEdit/MadEditAdvanced.cpp:2012
 msgid "Invalid Unicode Characters"
 msgstr "Nieprawidłowy znak Unikod"
 
@@ -1002,7 +2256,7 @@ msgid ""
 msgstr ""
 
 #: ../src/MadEdit/MadEditBasic.cpp:2501 ../src/MadEdit/MadEditBasic.cpp:2561
-#: ../src/MadEditFrame.cpp:4647
+#: ../src/MadEditFrame.cpp:4651
 msgid "The Parent Directory of this file does not exist:"
 msgstr "Katalog nadrzędny tego pliku nie istnieje:"
 
@@ -1014,7 +2268,7 @@ msgstr "Nie można zapisać tego pliku:"
 #: ../src/MadEdit/MadEditBasic.cpp:3120 ../src/MadEdit/MadEditSearch.cpp:1002
 #: ../src/MadEdit/MadEditSearch.cpp:1100 ../src/MadEdit/MadEditSearch.cpp:1163
 #: ../src/MadEditFrame.cpp:546 ../src/MadEditFrame.cpp:551
-#: ../src/MadEditFrame.cpp:5938
+#: ../src/MadEditFrame.cpp:5942
 #, fuzzy
 msgid "&Ok"
 msgstr "&OK"
@@ -1025,15 +2279,15 @@ msgstr "Czy chcesz zapisać ten plik?"
 
 #: ../src/MadEdit/MadEditBasic.cpp:2612 ../src/MadEdit/MadEditBasic.cpp:2727
 #: ../src/MadEdit/MadEditBasic.cpp:2811 ../src/MadEditFrame.cpp:535
-#: ../src/MadEditFrame.cpp:541 ../src/MadEditFrame.cpp:4686
-#: ../src/MadEditFrame.cpp:6277
+#: ../src/MadEditFrame.cpp:541 ../src/MadEditFrame.cpp:4690
+#: ../src/MadEditFrame.cpp:6281
 msgid "&Yes"
 msgstr ""
 
 #: ../src/MadEdit/MadEditBasic.cpp:2613 ../src/MadEdit/MadEditBasic.cpp:2727
 #: ../src/MadEdit/MadEditBasic.cpp:2811 ../src/MadEditFrame.cpp:536
-#: ../src/MadEditFrame.cpp:541 ../src/MadEditFrame.cpp:4686
-#: ../src/MadEditFrame.cpp:6277
+#: ../src/MadEditFrame.cpp:541 ../src/MadEditFrame.cpp:4690
+#: ../src/MadEditFrame.cpp:6281
 #, fuzzy
 msgid "&No"
 msgstr "NKo"
@@ -1218,7 +2472,7 @@ msgstr "&Otwórz plik"
 msgid "Open an existing file"
 msgstr "Otwórz istniejący plik"
 
-#: ../src/MadEditFrame.cpp:2225 ../src/MadEditFrame.cpp:5850
+#: ../src/MadEditFrame.cpp:2225 ../src/MadEditFrame.cpp:5854
 msgid "Open File"
 msgstr "Otwórz plik"
 
@@ -1324,11 +2578,11 @@ msgstr "Zamknij wszystko z prawej"
 msgid "Close all files to the right"
 msgstr "Zamknij wszystkie pliki z wyjątkiem bieżącego"
 
-#: ../src/MadEditFrame.cpp:2240 ../src/MadEditFrame.cpp:5278
+#: ../src/MadEditFrame.cpp:2240 ../src/MadEditFrame.cpp:5282
 msgid "Set/Clear ReadOnly Flag"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2240 ../src/MadEditFrame.cpp:5279
+#: ../src/MadEditFrame.cpp:2240 ../src/MadEditFrame.cpp:5283
 msgid "Set/Clear ReadOnly flag of the file"
 msgstr ""
 
@@ -1357,7 +2611,7 @@ msgid "Print the file"
 msgstr "Drukluj plik"
 
 #: ../src/MadEditFrame.cpp:2246 ../src/MadEditFrame.cpp:2247
-#: ../src/MadEditFrame.cpp:3689
+#: ../src/MadEditFrame.cpp:3693
 msgid "Recent Files"
 msgstr "Ostatnio otwierane"
 
@@ -1522,11 +2776,11 @@ msgstr "Zaznacz wszystko"
 msgid "Select all data"
 msgstr "Zaznaczwszystkie dane"
 
-#: ../src/MadEditFrame.cpp:2290 ../src/MadEditFrame.cpp:5246
+#: ../src/MadEditFrame.cpp:2290 ../src/MadEditFrame.cpp:5250
 msgid "Begin/End Selecting"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2290 ../src/MadEditFrame.cpp:5247
+#: ../src/MadEditFrame.cpp:2290 ../src/MadEditFrame.cpp:5251
 msgid "Begin/End selecting text"
 msgstr ""
 
@@ -1583,7 +2837,7 @@ msgstr "Usuń linię"
 msgid "Replace Bookmarked Lines"
 msgstr "Pokazuje zakładki"
 
-#: ../src/MadEditFrame.cpp:2316 ../src/MadEditFrame.cpp:3292
+#: ../src/MadEditFrame.cpp:2316 ../src/MadEditFrame.cpp:3296
 msgid "Ad&vanced"
 msgstr "Zaawansowane"
 
@@ -1719,8 +2973,8 @@ msgstr "Do H&alfwidth"
 msgid "Convert the selection to halfwidth"
 msgstr "Konwersja zaznaczenia do połowy szerokości"
 
-#: ../src/MadEditFrame.cpp:2336 ../src/MadEditFrame.cpp:6862
-#: ../src/MadEditFrame.cpp:6866 ../src/MadUtils.cpp:692 ../src/MadUtils.cpp:696
+#: ../src/MadEditFrame.cpp:2336 ../src/MadEditFrame.cpp:6866
+#: ../src/MadEditFrame.cpp:6870 ../src/MadUtils.cpp:692 ../src/MadUtils.cpp:696
 #: ../src/MadMacroDlg.cpp:732 ../src/MadMacroDlg.cpp:736
 msgid "To Halfwidth by Options..."
 msgstr "Do Halfwidth wg ustawień..."
@@ -1737,8 +2991,8 @@ msgstr "Do &Fullwidth"
 msgid "Convert the selection to fullwidth"
 msgstr "Konwertuje zaznaczony tekst do fullwidith"
 
-#: ../src/MadEditFrame.cpp:2338 ../src/MadEditFrame.cpp:6928
-#: ../src/MadEditFrame.cpp:6932 ../src/MadUtils.cpp:755 ../src/MadUtils.cpp:759
+#: ../src/MadEditFrame.cpp:2338 ../src/MadEditFrame.cpp:6932
+#: ../src/MadEditFrame.cpp:6936 ../src/MadUtils.cpp:755 ../src/MadUtils.cpp:759
 #: ../src/MadMacroDlg.cpp:799 ../src/MadMacroDlg.cpp:803
 msgid "To Fullwidth by Options..."
 msgstr "Do fullwidith wg ustawień"
@@ -1800,7 +3054,7 @@ msgstr ""
 msgid "Align Right"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2347 ../src/MadEditFrame.cpp:3294
+#: ../src/MadEditFrame.cpp:2347 ../src/MadEditFrame.cpp:3298
 #: ../src/MadSortDialog.cpp:45
 msgid "&Sort"
 msgstr "&Sortuj"
@@ -1879,8 +3133,8 @@ msgstr "Znajdź &następny"
 msgid "Find next occurrence"
 msgstr "Znajdź następne wystąpienie"
 
-#: ../src/MadEditFrame.cpp:2360 ../src/MadEditFrame.cpp:3653
-#: ../src/MadSearchReplaceDialog.cpp:673 ../src/MadSearchReplaceDialog.cpp:1299
+#: ../src/MadEditFrame.cpp:2360 ../src/MadEditFrame.cpp:3657
+#: ../src/MadSearchReplaceDialog.cpp:672 ../src/MadSearchReplaceDialog.cpp:1298
 msgid "Find Next"
 msgstr "Znajdź następny"
 
@@ -1892,8 +3146,8 @@ msgstr "Znajdź &poprzedni"
 msgid "Find previous occurrence"
 msgstr "Znajdź następne wystąpienie"
 
-#: ../src/MadEditFrame.cpp:2361 ../src/MadEditFrame.cpp:3654
-#: ../src/MadSearchReplaceDialog.cpp:828
+#: ../src/MadEditFrame.cpp:2361 ../src/MadEditFrame.cpp:3658
+#: ../src/MadSearchReplaceDialog.cpp:827
 msgid "Find Previous"
 msgstr "Znajdź poprzedni"
 
@@ -1915,7 +3169,7 @@ msgstr "&Zamień"
 msgid "Replace a string"
 msgstr "Zamien tekst"
 
-#: ../src/MadEditFrame.cpp:2364 ../src/MadSearchReplaceDialog.cpp:1429
+#: ../src/MadEditFrame.cpp:2364 ../src/MadSearchReplaceDialog.cpp:1426
 msgid "Replace"
 msgstr "Zamień"
 
@@ -2040,8 +3294,8 @@ msgstr ""
 msgid "Post-It"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2390 ../src/MadEditFrame.cpp:5356
-#: ../src/MadEditFrame.cpp:5362
+#: ../src/MadEditFrame.cpp:2390 ../src/MadEditFrame.cpp:5360
+#: ../src/MadEditFrame.cpp:5366
 msgid "Encoding: "
 msgstr "Kodowanie:"
 
@@ -2050,13 +3304,13 @@ msgstr "Kodowanie:"
 msgid "All Encodings"
 msgstr "Kodowanie pliku:"
 
-#: ../src/MadEditFrame.cpp:2393 ../src/MadEditFrame.cpp:5371
-#: ../src/MadEditFrame.cpp:5376
+#: ../src/MadEditFrame.cpp:2393 ../src/MadEditFrame.cpp:5375
+#: ../src/MadEditFrame.cpp:5380
 msgid "Syntax Type: "
 msgstr "Typ pdświetlania skłądni"
 
-#: ../src/MadEditFrame.cpp:2395 ../src/MadEditFrame.cpp:5388
-#: ../src/MadEditFrame.cpp:5393
+#: ../src/MadEditFrame.cpp:2395 ../src/MadEditFrame.cpp:5392
+#: ../src/MadEditFrame.cpp:5397
 msgid "Font Name: "
 msgstr "Nazwa czcionki:"
 
@@ -2064,8 +3318,8 @@ msgstr "Nazwa czcionki:"
 msgid "[other]"
 msgstr "[inny]"
 
-#: ../src/MadEditFrame.cpp:2404 ../src/MadEditFrame.cpp:5404
-#: ../src/MadEditFrame.cpp:5409
+#: ../src/MadEditFrame.cpp:2404 ../src/MadEditFrame.cpp:5408
+#: ../src/MadEditFrame.cpp:5413
 msgid "Font Size: "
 msgstr "Rozmiar czcionki:"
 
@@ -2089,8 +3343,8 @@ msgstr "Czcionki ze stała szerokością"
 msgid "Set/Unset the font with Fixed Width"
 msgstr "Włączone / wyłączone czcionki ze stałeą szerokością"
 
-#: ../src/MadEditFrame.cpp:2482 ../src/MadEditFrame.cpp:5424
-#: ../src/MadEditFrame.cpp:5429
+#: ../src/MadEditFrame.cpp:2482 ../src/MadEditFrame.cpp:5428
+#: ../src/MadEditFrame.cpp:5433
 msgid "Tab Column: "
 msgstr "Tabulator:"
 
@@ -2098,8 +3352,8 @@ msgstr "Tabulator:"
 msgid "Set column of Tab char"
 msgstr "Ustaw rozmiar tabulacji"
 
-#: ../src/MadEditFrame.cpp:2501 ../src/MadEditFrame.cpp:5492
-#: ../src/MadEditFrame.cpp:5497
+#: ../src/MadEditFrame.cpp:2501 ../src/MadEditFrame.cpp:5496
+#: ../src/MadEditFrame.cpp:5501
 msgid "Line Spacing: "
 msgstr "Rozmiar linii:"
 
@@ -2256,7 +3510,7 @@ msgstr ""
 msgid "Toolbars"
 msgstr "&Narzędzia"
 
-#: ../src/MadEditFrame.cpp:2554 ../src/MadEditFrame.cpp:10622
+#: ../src/MadEditFrame.cpp:2554 ../src/MadEditFrame.cpp:10627
 #, fuzzy
 msgid "Toggle Main Toolbar"
 msgstr "Dodaj zakładkę"
@@ -2265,7 +3519,7 @@ msgstr "Dodaj zakładkę"
 msgid "Show/Hide Main Toolbar"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2555 ../src/MadEditFrame.cpp:10623
+#: ../src/MadEditFrame.cpp:2555 ../src/MadEditFrame.cpp:10628
 #, fuzzy
 msgid "Lock Toolbar"
 msgstr "Idź do pozycji"
@@ -2321,7 +3575,7 @@ msgstr "Zmień tryb edycji na heksadecymalny"
 msgid "Hex Mode"
 msgstr "Tryb heksadecymakny"
 
-#: ../src/MadEditFrame.cpp:2563 ../src/MadEditFrame.cpp:5460
+#: ../src/MadEditFrame.cpp:2563 ../src/MadEditFrame.cpp:5464
 #, fuzzy
 msgid "Preview as: "
 msgstr "Podgląd"
@@ -2428,7 +3682,7 @@ msgstr "&Wyczyść historię..."
 msgid "Clearing out your history"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:2586 ../src/MadEditFrame.cpp:5673
+#: ../src/MadEditFrame.cpp:2586 ../src/MadEditFrame.cpp:5677
 msgid "Has Unicode BOM (Byte-Order Mark)"
 msgstr "Ma Unicode BOM"
 
@@ -2440,7 +3694,7 @@ msgstr "Dodaj/Usuń BOM"
 msgid "Add/Remove Unicode BOM"
 msgstr "Dodaj/Usuń Unicode BOM"
 
-#: ../src/MadEditFrame.cpp:2589 ../src/MadEditFrame.cpp:5688
+#: ../src/MadEditFrame.cpp:2589 ../src/MadEditFrame.cpp:5692
 msgid "NewLine Char (File Format): "
 msgstr "Znak nowej linii (Format pliku):"
 
@@ -2470,7 +3724,7 @@ msgstr "Konwertuj do LF/0A (&UNIX)"
 msgid "Convert the file format to UNIX format"
 msgstr "konwertuj format pliku do formatu UNIX"
 
-#: ../src/MadEditFrame.cpp:2593 ../src/MadEditFrame.cpp:5715
+#: ../src/MadEditFrame.cpp:2593 ../src/MadEditFrame.cpp:5719
 msgid "Press Enter to Insert NewLine Char: "
 msgstr "Naciśnij klawisz Enter, aby wstawić znak nowej linii:"
 
@@ -3019,240 +4273,240 @@ msgstr "Przewiń w prawo tekstu"
 msgid "Scrolls right by aprox. 1 tab stop"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:3012 ../src/MadEditFrame.cpp:10821
+#: ../src/MadEditFrame.cpp:3016 ../src/MadEditFrame.cpp:10826
 #, fuzzy
 msgid "Quick Search"
 msgstr "Szukaj"
 
-#: ../src/MadEditFrame.cpp:3021 ../src/MadEditFrame.cpp:5442
+#: ../src/MadEditFrame.cpp:3025 ../src/MadEditFrame.cpp:5446
 msgid "HTML"
 msgstr "HTML"
 
-#: ../src/MadEditFrame.cpp:3022 ../src/MadEditFrame.cpp:5446
+#: ../src/MadEditFrame.cpp:3026 ../src/MadEditFrame.cpp:5450
 msgid "Markdown"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:3264
+#: ../src/MadEditFrame.cpp:3268
 #, fuzzy
 msgid "Copy full path name"
 msgstr "Kopiuj pełną ścieżkę"
 
-#: ../src/MadEditFrame.cpp:3265
+#: ../src/MadEditFrame.cpp:3269
 #, fuzzy
 msgid "Copy full file name"
 msgstr "Kopiuj nazwę pliku"
 
-#: ../src/MadEditFrame.cpp:3266
+#: ../src/MadEditFrame.cpp:3270
 #, fuzzy
 msgid "Copy full file name without extension"
 msgstr "Kopiuj nazwę pliku"
 
-#: ../src/MadEditFrame.cpp:3267
+#: ../src/MadEditFrame.cpp:3271
 #, fuzzy
 msgid "Copy directory name"
 msgstr "Wybierz katalog"
 
-#: ../src/MadEditFrame.cpp:3268
+#: ../src/MadEditFrame.cpp:3272
 msgid "Open directory of the file"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:3296
+#: ../src/MadEditFrame.cpp:3300
 #, fuzzy
 msgid "Run Scripts"
 msgstr "AngelScript"
 
-#: ../src/MadEditFrame.cpp:3503
+#: ../src/MadEditFrame.cpp:3507
 #, fuzzy
 msgid "Increase Font Size"
 msgstr "Zwiększ wcięcie"
 
-#: ../src/MadEditFrame.cpp:3503
+#: ../src/MadEditFrame.cpp:3507
 msgid "Make your text a bit bigger"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:3504
+#: ../src/MadEditFrame.cpp:3508
 #, fuzzy
 msgid "Decrease Font Size"
 msgstr "Zmniejsz wcięcie"
 
-#: ../src/MadEditFrame.cpp:3504
+#: ../src/MadEditFrame.cpp:3508
 msgid "Make your text a bit smaller"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:3653
+#: ../src/MadEditFrame.cpp:3657
 msgid "Find matched text next to caret"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:3654
+#: ../src/MadEditFrame.cpp:3658
 msgid "Find matched text previous from caret"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:3655
+#: ../src/MadEditFrame.cpp:3659
 #, fuzzy
 msgid "Whole Word Only"
 msgstr "&Tylko całe wyrazy"
 
-#: ../src/MadEditFrame.cpp:3655
+#: ../src/MadEditFrame.cpp:3659
 #, fuzzy
 msgid "Match Whole Word Only"
 msgstr "&Tylko całe wyrazy"
 
-#: ../src/MadEditFrame.cpp:3663
+#: ../src/MadEditFrame.cpp:3667
 #, fuzzy
 msgid "Case Sensitive"
 msgstr "&Wielkie litery"
 
-#: ../src/MadEditFrame.cpp:3665
+#: ../src/MadEditFrame.cpp:3669
 #, fuzzy
 msgid "Regular Expression"
 msgstr "Za pomocą wyrażeń regularnych"
 
-#: ../src/MadEditFrame.cpp:3665
+#: ../src/MadEditFrame.cpp:3669
 #, fuzzy
 msgid "Use Regular Expressions"
 msgstr "Za pomocą wyrażeń regularnych"
 
-#: ../src/MadEditFrame.cpp:3665 ../src/MadFindInFilesDialog.cpp:153
+#: ../src/MadEditFrame.cpp:3669 ../src/MadFindInFilesDialog.cpp:153
 #: ../src/MadSearchReplaceDialog.cpp:204
 msgid "Use Regular E&xpressions"
 msgstr "Za pomocą wyrażeń regularnych"
 
-#: ../src/MadEditFrame.cpp:3667
+#: ../src/MadEditFrame.cpp:3671
 msgid "Dot Match Newline"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:3667
+#: ../src/MadEditFrame.cpp:3671
 #, fuzzy
 msgid "Dot Match Newline in Regular Expressions"
 msgstr "Za pomocą wyrażeń regularnych"
 
-#: ../src/MadEditFrame.cpp:3689
+#: ../src/MadEditFrame.cpp:3693
 #, fuzzy
 msgid "Recent file list"
 msgstr "Ostatnio otwierane"
 
-#: ../src/MadEditFrame.cpp:3689
+#: ../src/MadEditFrame.cpp:3693
 msgid "List all recent opened files"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:3711 ../src/MadSearchReplaceDialog.cpp:1839
+#: ../src/MadEditFrame.cpp:3715 ../src/MadSearchReplaceDialog.cpp:1836
 #: ../src/MadPython.hpp:2639 ../src/MadPython.hpp:2665
 #, fuzzy
 msgid "Search Results"
 msgstr "Szukaj"
 
-#: ../src/MadEditFrame.cpp:4580 ../src/MadEditFrame.cpp:4589
+#: ../src/MadEditFrame.cpp:4584 ../src/MadEditFrame.cpp:4593
 #, c-format
 msgid "NoName%d"
 msgstr "BezNazwy%d"
 
-#: ../src/MadEditFrame.cpp:4637
+#: ../src/MadEditFrame.cpp:4641
 msgid "This is a Directory:"
 msgstr "Jest to katalog:"
 
-#: ../src/MadEditFrame.cpp:4658
+#: ../src/MadEditFrame.cpp:4662
 msgid "This file does not exist:"
 msgstr "Ten plik nie istnieje:"
 
-#: ../src/MadEditFrame.cpp:4676
+#: ../src/MadEditFrame.cpp:4680
 msgid "Cannot access this file:"
 msgstr "Brak dostępu do tego pliku:"
 
-#: ../src/MadEditFrame.cpp:4685
+#: ../src/MadEditFrame.cpp:4689
 #, fuzzy
 msgid "The file "
 msgstr "Zapisz plik"
 
-#: ../src/MadEditFrame.cpp:4685
+#: ../src/MadEditFrame.cpp:4689
 msgid ""
 " doesn't exist.\n"
 " Are you going to create it?"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:4691
+#: ../src/MadEditFrame.cpp:4695
 #, fuzzy
 msgid "File does not exist:"
 msgstr "Ten plik nie istnieje:"
 
-#: ../src/MadEditFrame.cpp:4785
+#: ../src/MadEditFrame.cpp:4789
 msgid "Cannot load this file:"
 msgstr "Nie można wczytać pliku:"
 
-#: ../src/MadEditFrame.cpp:4924 ../src/MadEditFrame.cpp:9702
+#: ../src/MadEditFrame.cpp:4928 ../src/MadEditFrame.cpp:9707
 #: ../src/MadUtils.cpp:1012 ../src/MadMacroDlg.cpp:266
 #: ../src/MadMacroDlg.cpp:1046
 msgid "Memory allocation failed"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:4924 ../src/MadEditFrame.cpp:9702
-#: ../src/MadEditFrame.cpp:10292 ../src/MadEditFrame.cpp:10297
+#: ../src/MadEditFrame.cpp:4928 ../src/MadEditFrame.cpp:9707
+#: ../src/MadEditFrame.cpp:10297 ../src/MadEditFrame.cpp:10302
 #: ../src/MadUtils.cpp:1012 ../src/MadMacroDlg.cpp:266
 #: ../src/MadMacroDlg.cpp:1046
 msgid "Error"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:5235
+#: ../src/MadEditFrame.cpp:5239
 #, fuzzy
 msgid "End Selecting"
 msgstr "&Szukaj w zazmnaczeniu"
 
-#: ../src/MadEditFrame.cpp:5236
+#: ../src/MadEditFrame.cpp:5240
 #, fuzzy
 msgid "End selecting text"
 msgstr "Konwersja zaznaczenia do połowy szerokości"
 
-#: ../src/MadEditFrame.cpp:5240
+#: ../src/MadEditFrame.cpp:5244
 #, fuzzy
 msgid "Begin Selecting"
 msgstr "&Szukaj w zazmnaczeniu"
 
-#: ../src/MadEditFrame.cpp:5241
+#: ../src/MadEditFrame.cpp:5245
 #, fuzzy
 msgid "Begin selecting text"
 msgstr "Konwersja zaznaczenia do połowy szerokości"
 
-#: ../src/MadEditFrame.cpp:5265
+#: ../src/MadEditFrame.cpp:5269
 msgid "Clear ReadOnly Flag"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:5266
+#: ../src/MadEditFrame.cpp:5270
 #, fuzzy
 msgid "Clear ReadOnly flag of the file"
 msgstr "Zamknij wszystkie pliki z wyjątkiem bieżącego"
 
-#: ../src/MadEditFrame.cpp:5273
+#: ../src/MadEditFrame.cpp:5277
 #, fuzzy
 msgid "Set ReadOnly Flag"
 msgstr "Do odczytu"
 
-#: ../src/MadEditFrame.cpp:5274
+#: ../src/MadEditFrame.cpp:5278
 #, fuzzy
 msgid "Set ReadOnly flag of the file"
 msgstr "Zwiększ wcięcie wybranych linii"
 
-#: ../src/MadEditFrame.cpp:5362 ../src/MadEditFrame.cpp:5376
-#: ../src/MadEditFrame.cpp:5393 ../src/MadEditFrame.cpp:5409
-#: ../src/MadEditFrame.cpp:5429 ../src/MadEditFrame.cpp:5435
-#: ../src/MadEditFrame.cpp:5497 ../src/MadEditFrame.cpp:5710
-#: ../src/MadEditFrame.cpp:5737 ../src/MadSourceFormatDialog.cpp:395
-#: ../src/MadSourceFormatDialog.cpp:403 ../src/MadOptionsDialog.cpp:581
+#: ../src/MadEditFrame.cpp:5366 ../src/MadEditFrame.cpp:5380
+#: ../src/MadEditFrame.cpp:5397 ../src/MadEditFrame.cpp:5413
+#: ../src/MadEditFrame.cpp:5433 ../src/MadEditFrame.cpp:5439
+#: ../src/MadEditFrame.cpp:5501 ../src/MadEditFrame.cpp:5714
+#: ../src/MadEditFrame.cpp:5741 ../src/MadSourceFormatDialog.cpp:396
+#: ../src/MadSourceFormatDialog.cpp:404 ../src/MadOptionsDialog.cpp:581
 #: ../src/MadConvEncDialog.cpp:58
 msgid "None"
 msgstr "Brak"
 
-#: ../src/MadEditFrame.cpp:5677 ../src/MadEditFrame.cpp:5683
+#: ../src/MadEditFrame.cpp:5681 ../src/MadEditFrame.cpp:5687
 msgid "Has No Unicode BOM (Byte-Order Mark)"
 msgstr "Nie ma Unicode BOM (Byte-Order Mark)"
 
-#: ../src/MadEditFrame.cpp:5936
+#: ../src/MadEditFrame.cpp:5940
 msgid "Failed to backup the file. "
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:5936
+#: ../src/MadEditFrame.cpp:5940
 msgid " might not exist."
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:6176
+#: ../src/MadEditFrame.cpp:6180
 #, fuzzy
 msgid ""
 "There was a problem previewing this document.\n"
@@ -3261,16 +4515,16 @@ msgstr ""
 "Wystąpił problem podczas przeglądania. \n"
 "Być może Twoja domyślna drukarka nie jest prawidłowo ustawiona?"
 
-#: ../src/MadEditFrame.cpp:6176
+#: ../src/MadEditFrame.cpp:6180
 msgid "Previewing"
 msgstr "Podgląd"
 
-#: ../src/MadEditFrame.cpp:6180
+#: ../src/MadEditFrame.cpp:6184
 #, fuzzy
 msgid "MadEdit Print Preview"
 msgstr "MadEdit Podgląd wydruku"
 
-#: ../src/MadEditFrame.cpp:6204
+#: ../src/MadEditFrame.cpp:6208
 #, fuzzy
 msgid ""
 "There was a problem printing this document.\n"
@@ -3279,49 +4533,49 @@ msgstr ""
 "Wystąpił błąd podczas drukowania. \n"
 "Być może Twoja bieżąca drukarka nie jest prawidłowo ustawiona?"
 
-#: ../src/MadEditFrame.cpp:6275
+#: ../src/MadEditFrame.cpp:6279
 msgid ""
 " does not exist. It might have been removed. Do you want to removed it from "
 "recent file list?"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:6709 ../src/MadUtils.cpp:550
+#: ../src/MadEditFrame.cpp:6713 ../src/MadUtils.cpp:550
 #: ../src/MadMacroDlg.cpp:586
 #, fuzzy
 msgid "Delimiters:"
 msgstr "Separator"
 
-#: ../src/MadEditFrame.cpp:6709 ../src/MadUtils.cpp:550
+#: ../src/MadEditFrame.cpp:6713 ../src/MadUtils.cpp:550
 #: ../src/MadMacroDlg.cpp:586
 #, fuzzy
 msgid "Revert Hex String"
 msgstr "Kopiuj jako wyrażenie heksadecymalne"
 
-#: ../src/MadEditFrame.cpp:6857 ../src/MadEditFrame.cpp:6923
+#: ../src/MadEditFrame.cpp:6861 ../src/MadEditFrame.cpp:6927
 #: ../src/MadUtils.cpp:687 ../src/MadUtils.cpp:750 ../src/MadMacroDlg.cpp:727
 #: ../src/MadMacroDlg.cpp:794
 msgid "ASCII characters"
 msgstr "Znaki ASCII"
 
-#: ../src/MadEditFrame.cpp:6857 ../src/MadEditFrame.cpp:6923
+#: ../src/MadEditFrame.cpp:6861 ../src/MadEditFrame.cpp:6927
 #: ../src/MadUtils.cpp:687 ../src/MadUtils.cpp:750 ../src/MadMacroDlg.cpp:727
 #: ../src/MadMacroDlg.cpp:794
 msgid "Japanese characters"
 msgstr "Znaki japońskie"
 
-#: ../src/MadEditFrame.cpp:6858 ../src/MadEditFrame.cpp:6924
+#: ../src/MadEditFrame.cpp:6862 ../src/MadEditFrame.cpp:6928
 #: ../src/MadUtils.cpp:688 ../src/MadUtils.cpp:751 ../src/MadMacroDlg.cpp:728
 #: ../src/MadMacroDlg.cpp:795
 msgid "Korean characters"
 msgstr "Znaki koreańskie"
 
-#: ../src/MadEditFrame.cpp:6858 ../src/MadEditFrame.cpp:6924
+#: ../src/MadEditFrame.cpp:6862 ../src/MadEditFrame.cpp:6928
 #: ../src/MadUtils.cpp:688 ../src/MadUtils.cpp:751 ../src/MadMacroDlg.cpp:795
 msgid "other characters"
 msgstr "inne znaki"
 
-#: ../src/MadEditFrame.cpp:6862 ../src/MadEditFrame.cpp:6866
-#: ../src/MadEditFrame.cpp:6928 ../src/MadEditFrame.cpp:6932
+#: ../src/MadEditFrame.cpp:6866 ../src/MadEditFrame.cpp:6870
+#: ../src/MadEditFrame.cpp:6932 ../src/MadEditFrame.cpp:6936
 #: ../src/MadUtils.cpp:692 ../src/MadUtils.cpp:696 ../src/MadUtils.cpp:755
 #: ../src/MadUtils.cpp:759 ../src/MadMacroDlg.cpp:732
 #: ../src/MadMacroDlg.cpp:736 ../src/MadMacroDlg.cpp:799
@@ -3329,148 +4583,148 @@ msgstr "inne znaki"
 msgid "Choose the characters you want to convert:"
 msgstr "Wybierz znaki, które chcesz przekonwertować"
 
-#: ../src/MadEditFrame.cpp:7456
+#: ../src/MadEditFrame.cpp:7460
 msgid "Find/Replace in Files Results"
 msgstr "Wynik Znajdź/Zamień w plikach"
 
-#: ../src/MadEditFrame.cpp:7527
+#: ../src/MadEditFrame.cpp:7531
 #, fuzzy, c-format
 msgid "Line Number(1~%s): (you can input HexNumber(0x1~0x%X): 0xNNN)"
 msgstr "Numer linii: (możesz wprowadzić heksadecymalnie: 0xNNN)"
 
-#: ../src/MadEditFrame.cpp:7527
+#: ../src/MadEditFrame.cpp:7531
 msgid "Go To Line"
 msgstr "Idź do linii"
 
-#: ../src/MadEditFrame.cpp:7588
+#: ../src/MadEditFrame.cpp:7592
 #, fuzzy, c-format
 msgid "Position(0~%s): (you can input HexNumber: 0xNNN)"
 msgstr "Pozycja: (możesz wprowadzić heksadecymalnie: 0xNNN)"
 
-#: ../src/MadEditFrame.cpp:7588
+#: ../src/MadEditFrame.cpp:7592
 msgid "Go To Position"
 msgstr "Idź do pozycji"
 
-#: ../src/MadEditFrame.cpp:7912 ../src/MadEditFrame.cpp:8145
+#: ../src/MadEditFrame.cpp:7916 ../src/MadEditFrame.cpp:8150
 msgid "Ruler may not be accurate in non-fixed width mode. Continue?"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:7912 ../src/MadEditFrame.cpp:8145
-#: ../src/MadEditFrame.cpp:9542
+#: ../src/MadEditFrame.cpp:7916 ../src/MadEditFrame.cpp:8150
+#: ../src/MadEditFrame.cpp:9547
 msgid "Warning"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:7959
+#: ../src/MadEditFrame.cpp:7963
 msgid "Markdown/HTML Preview"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:7962
+#: ../src/MadEditFrame.cpp:7966
 msgid "Refresh"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:7962
+#: ../src/MadEditFrame.cpp:7966
 msgid "Refresh prviewed text"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:7963
+#: ../src/MadEditFrame.cpp:7967
 #, fuzzy
 msgid "Close Preveiw"
 msgstr "Zamknij więcej..."
 
-#: ../src/MadEditFrame.cpp:7963
+#: ../src/MadEditFrame.cpp:7967
 msgid "Close preveiw windows"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:9382
+#: ../src/MadEditFrame.cpp:9387
 #, fuzzy
 msgid "Open Mad Macro File"
 msgstr "Otwórz plik"
 
-#: ../src/MadEditFrame.cpp:9533
+#: ../src/MadEditFrame.cpp:9538
 msgid "|All files(*;*.*)"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:9534
+#: ../src/MadEditFrame.cpp:9539
 msgid "Mad Macro"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:9542
+#: ../src/MadEditFrame.cpp:9547
 #, fuzzy, c-format
 msgid "Do you want to overwrite %s ?"
 msgstr "Czy chcesz wczytać ponownie?"
 
-#: ../src/MadEditFrame.cpp:9645
+#: ../src/MadEditFrame.cpp:9650
 msgid "Edit Mad Macro File"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:9976 ../src/MadEditFrame.cpp:10000
-#: ../src/MadEditFrame.cpp:10092 ../src/MadEditFrame.cpp:10202
-#: ../src/MadEditFrame.cpp:10247
+#: ../src/MadEditFrame.cpp:9981 ../src/MadEditFrame.cpp:10005
+#: ../src/MadEditFrame.cpp:10097 ../src/MadEditFrame.cpp:10207
+#: ../src/MadEditFrame.cpp:10252
 #, fuzzy
 msgid "This is not a text file:"
 msgstr "Ten plik nie istnieje:"
 
-#: ../src/MadEditFrame.cpp:10292 ../src/MadEditFrame.cpp:10297
+#: ../src/MadEditFrame.cpp:10297 ../src/MadEditFrame.cpp:10302
 msgid "Invalid JSON string, formatting failed\n"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:10419
+#: ../src/MadEditFrame.cpp:10424
 msgid ""
 "Download dictionary at\n"
 "https://github.com/LibreOffice/dictionaries"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:10420
+#: ../src/MadEditFrame.cpp:10425
 msgid "Press OK to visit our HomePage."
 msgstr "Naciśnij OK, aby odwiedzić naszą stronę."
 
-#: ../src/MadEditFrame.cpp:10625
+#: ../src/MadEditFrame.cpp:10630
 #, fuzzy
 msgid "Toggle Main Menubar"
 msgstr "Dodaj zakładkę"
 
-#: ../src/MadEditFrame.cpp:10719
+#: ../src/MadEditFrame.cpp:10724
 #, fuzzy
 msgid "Passed the begin of the file/selection"
 msgstr "Zwiększ wcięcie wybranych linii"
 
-#: ../src/MadEditFrame.cpp:10781 ../src/MadSearchReplaceDialog.cpp:641
+#: ../src/MadEditFrame.cpp:10786 ../src/MadSearchReplaceDialog.cpp:640
 #, fuzzy
 msgid "Passed the end of the file"
 msgstr "Zwiększ wcięcie wybranych linii"
 
-#: ../src/MadEditFrame.cpp:10826
+#: ../src/MadEditFrame.cpp:10831
 msgid "Information Window"
 msgstr "Okno informacyjne"
 
-#: ../src/MadEditFrame.cpp:10866
+#: ../src/MadEditFrame.cpp:10871
 msgid "Invalid item"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:10879
+#: ../src/MadEditFrame.cpp:10884
 #, fuzzy
 msgid "&Collapse All"
 msgstr "Zamkni&j wszystkie"
 
-#: ../src/MadEditFrame.cpp:10880
+#: ../src/MadEditFrame.cpp:10885
 #, fuzzy
 msgid "Copy &All"
 msgstr "Kopiuj pełną ścieżkę"
 
-#: ../src/MadEditFrame.cpp:10881
+#: ../src/MadEditFrame.cpp:10886
 msgid "&Reset Results"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:10883
+#: ../src/MadEditFrame.cpp:10888
 #, fuzzy
 msgid "&Collapse Selected"
 msgstr "Zamkni&j wszystkie"
 
-#: ../src/MadEditFrame.cpp:10884
+#: ../src/MadEditFrame.cpp:10889
 msgid "&Copy Selected"
 msgstr ""
 
-#: ../src/MadEditFrame.cpp:10885
+#: ../src/MadEditFrame.cpp:10890
 #, fuzzy
 msgid "&Delete Selected"
 msgstr "Usuń zaznaczone linie"
@@ -3599,7 +4853,7 @@ msgstr "Wybrany katalog nie istnieje"
 msgid "Processing %s of %s files..."
 msgstr "Przetwarzanie %d z %d plików..."
 
-#: ../src/MadFindInFilesDialog.cpp:822 ../src/MadSearchReplaceDialog.cpp:1723
+#: ../src/MadFindInFilesDialog.cpp:822 ../src/MadSearchReplaceDialog.cpp:1720
 #: ../src/MadPython.hpp:2643 ../src/MadPython.hpp:2670
 #, fuzzy
 msgid "Search \""
@@ -3610,12 +4864,12 @@ msgstr "Szukaj"
 msgid "(in %s files)"
 msgstr ""
 
-#: ../src/MadFindInFilesDialog.cpp:957 ../src/MadSearchReplaceDialog.cpp:1820
+#: ../src/MadFindInFilesDialog.cpp:957 ../src/MadSearchReplaceDialog.cpp:1817
 #, fuzzy, c-format
 msgid "Found %s matched texts..."
 msgstr "Znaleziono %d plik(i) dopasowane do filtra..."
 
-#: ../src/MadFindInFilesDialog.cpp:959 ../src/MadSearchReplaceDialog.cpp:1822
+#: ../src/MadFindInFilesDialog.cpp:959 ../src/MadSearchReplaceDialog.cpp:1819
 msgid "Preparing Results"
 msgstr ""
 
@@ -3633,8 +4887,8 @@ msgstr ""
 msgid "&Deselect All"
 msgstr "Zaznacz wszystko"
 
-#: ../src/MadFileHistoryDialog.cpp:66 ../src/MadSourceFormatDialog.cpp:398
-#: ../src/MadSourceFormatDialog.cpp:406 ../src/MadSaveQueryDialog.cpp:78
+#: ../src/MadFileHistoryDialog.cpp:66 ../src/MadSourceFormatDialog.cpp:399
+#: ../src/MadSourceFormatDialog.cpp:407 ../src/MadSaveQueryDialog.cpp:78
 #: ../src/MadWinListDialog.cpp:79 ../src/MadAboutDialog.cpp:107
 #, fuzzy
 msgid "Name"
@@ -3842,118 +5096,118 @@ msgstr ""
 msgid "C&ount"
 msgstr "Zlicz"
 
-#: ../src/MadSearchReplaceDialog.cpp:288 ../src/MadSearchReplaceDialog.cpp:1443
+#: ../src/MadSearchReplaceDialog.cpp:288 ../src/MadSearchReplaceDialog.cpp:1440
 #, fuzzy
 msgid "R&eplace >>"
 msgstr "&Zamień >>"
 
-#: ../src/MadSearchReplaceDialog.cpp:656 ../src/MadSearchReplaceDialog.cpp:811
-#: ../src/MadSearchReplaceDialog.cpp:1676
-#: ../src/MadSearchReplaceDialog.cpp:1848
+#: ../src/MadSearchReplaceDialog.cpp:655 ../src/MadSearchReplaceDialog.cpp:810
+#: ../src/MadSearchReplaceDialog.cpp:1673
+#: ../src/MadSearchReplaceDialog.cpp:1845
 #, fuzzy
 msgid "Cannot find the matched string"
 msgstr "Nie można znaleźć poszukiwanego ciągu."
 
-#: ../src/MadSearchReplaceDialog.cpp:667 ../src/MadSearchReplaceDialog.cpp:822
+#: ../src/MadSearchReplaceDialog.cpp:666 ../src/MadSearchReplaceDialog.cpp:821
 msgid "Cannot find the matched string."
 msgstr "Nie można znaleźć poszukiwanego ciągu."
 
-#: ../src/MadSearchReplaceDialog.cpp:670 ../src/MadSearchReplaceDialog.cpp:1296
+#: ../src/MadSearchReplaceDialog.cpp:669 ../src/MadSearchReplaceDialog.cpp:1295
 #, fuzzy
 msgid "Do you want to find from begin of selection?"
 msgstr "Czy chcesz wczytać ponownie?"
 
-#: ../src/MadSearchReplaceDialog.cpp:671 ../src/MadSearchReplaceDialog.cpp:1297
+#: ../src/MadSearchReplaceDialog.cpp:670 ../src/MadSearchReplaceDialog.cpp:1296
 #, fuzzy
 msgid "Do you want to find from begin of file?"
 msgstr "Czy chcesz zapisać ten plik?"
 
-#: ../src/MadSearchReplaceDialog.cpp:696 ../src/MadSearchReplaceDialog.cpp:842
-#: ../src/MadSearchReplaceDialog.cpp:1885
+#: ../src/MadSearchReplaceDialog.cpp:695 ../src/MadSearchReplaceDialog.cpp:841
+#: ../src/MadSearchReplaceDialog.cpp:1882
 msgid "Empty expression"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:797
+#: ../src/MadSearchReplaceDialog.cpp:796
 #, fuzzy
 msgid "Passed the begin of the file"
 msgstr "Zwiększ wcięcie wybranych linii"
 
-#: ../src/MadSearchReplaceDialog.cpp:825
+#: ../src/MadSearchReplaceDialog.cpp:824
 #, fuzzy
 msgid "Do you want to find from end of selection?"
 msgstr "Czy chcesz wczytać ponownie?"
 
-#: ../src/MadSearchReplaceDialog.cpp:826
+#: ../src/MadSearchReplaceDialog.cpp:825
 #, fuzzy
 msgid "Do you want to find from end of file?"
 msgstr "Czy chcesz zapisać ten plik?"
 
-#: ../src/MadSearchReplaceDialog.cpp:1293
+#: ../src/MadSearchReplaceDialog.cpp:1292
 #, fuzzy
 msgid ""
 "Cannot find the matched string.\n"
 "Replace is finished."
 msgstr "Nie można znaleźć poszukiwanego ciągu. Zamiana zakończona"
 
-#: ../src/MadSearchReplaceDialog.cpp:1420
+#: ../src/MadSearchReplaceDialog.cpp:1417
 #, fuzzy
 msgid "Search <<"
 msgstr "Szukaj"
 
-#: ../src/MadSearchReplaceDialog.cpp:1447
+#: ../src/MadSearchReplaceDialog.cpp:1444
 msgid "Search"
 msgstr "Szukaj"
 
-#: ../src/MadSearchReplaceDialog.cpp:1530
+#: ../src/MadSearchReplaceDialog.cpp:1527
 #, c-format
 msgid "'%s' was found %d times."
 msgstr "'%s' znaleziono %d razy."
 
-#: ../src/MadSearchReplaceDialog.cpp:1567
+#: ../src/MadSearchReplaceDialog.cpp:1564
 #, fuzzy, c-format
 msgid "Preparing %s of %s results..."
 msgstr "Przetwarzanie %d z %d plików..."
 
-#: ../src/MadSearchReplaceDialog.cpp:1606
+#: ../src/MadSearchReplaceDialog.cpp:1603
 #, fuzzy, c-format
 msgid "Line(%d-%d)"
 msgstr "Linia(%d): "
 
-#: ../src/MadSearchReplaceDialog.cpp:1611
+#: ../src/MadSearchReplaceDialog.cpp:1608
 #, fuzzy, c-format
 msgid "Line(%d)"
 msgstr "Linia(%d): "
 
-#: ../src/MadSearchReplaceDialog.cpp:1616
+#: ../src/MadSearchReplaceDialog.cpp:1613
 #, fuzzy, c-format
 msgid "Offset(%s)"
 msgstr "Przesunięcie(%s):"
 
-#: ../src/MadSearchReplaceDialog.cpp:1617
+#: ../src/MadSearchReplaceDialog.cpp:1614
 msgid "Binary file matches"
 msgstr "Porównanie binarne plików"
 
-#: ../src/MadSearchReplaceDialog.cpp:1680
+#: ../src/MadSearchReplaceDialog.cpp:1677
 #, fuzzy
 msgid " results"
 msgstr "%d wyników"
 
-#: ../src/MadSearchReplaceDialog.cpp:1812 ../src/MadPython.hpp:2643
+#: ../src/MadSearchReplaceDialog.cpp:1809 ../src/MadPython.hpp:2643
 #: ../src/MadPython.hpp:2670
 #, c-format
 msgid "(%s hits in 1 file)"
 msgstr ""
 
-#: ../src/MadSearchReplaceDialog.cpp:1853
+#: ../src/MadSearchReplaceDialog.cpp:1850
 #, fuzzy, c-format
 msgid "%s results"
 msgstr "%d wyników"
 
-#: ../src/MadSearchReplaceDialog.cpp:1966
+#: ../src/MadSearchReplaceDialog.cpp:1963
 msgid "Cannot find any matched string."
 msgstr "Nie można znaleźć żadnego pasującego łańcucha."
 
-#: ../src/MadSearchReplaceDialog.cpp:1968
+#: ../src/MadSearchReplaceDialog.cpp:1965
 #, fuzzy, c-format
 msgid "%s string(s) were replaced."
 msgstr "%d ciąg(i) zostały zastąpione."
@@ -3975,256 +5229,256 @@ msgstr ""
 msgid "Sample of the bracket style option chosen to use:"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:205
+#: ../src/MadSourceFormatDialog.cpp:206
 msgid "Attach Classes"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:208
+#: ../src/MadSourceFormatDialog.cpp:209
 msgid "Attach Extern C"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:211
+#: ../src/MadSourceFormatDialog.cpp:212
 msgid "Attach Namespaces"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:214
+#: ../src/MadSourceFormatDialog.cpp:215
 msgid "Attach Inlines"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:217
+#: ../src/MadSourceFormatDialog.cpp:218
 msgid "Attach Closing While"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:226 ../src/MadSourceFormatDialog.cpp:419
+#: ../src/MadSourceFormatDialog.cpp:227 ../src/MadSourceFormatDialog.cpp:420
 msgid "Indentation size(in spaces):"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:232
+#: ../src/MadSourceFormatDialog.cpp:233
 #, fuzzy
 msgid "Use TABs instead of spaces"
 msgstr "Używanie języka angielskiego zamiast bieżących lokalizacji"
 
-#: ../src/MadSourceFormatDialog.cpp:235
+#: ../src/MadSourceFormatDialog.cpp:236
 msgid "Force using TABs"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:238
+#: ../src/MadSourceFormatDialog.cpp:239
 msgid "Indent case: statement in switches (commands under case:)"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:241
+#: ../src/MadSourceFormatDialog.cpp:242
 msgid "Indent classes (keywords public:, protected: and private:)"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:244
+#: ../src/MadSourceFormatDialog.cpp:245
 #, fuzzy
 msgid "Indent labels"
 msgstr "Orientacja"
 
-#: ../src/MadSourceFormatDialog.cpp:247
+#: ../src/MadSourceFormatDialog.cpp:248
 #, fuzzy
 msgid "Indent modifiers"
 msgstr "Orientacja"
 
-#: ../src/MadSourceFormatDialog.cpp:250
+#: ../src/MadSourceFormatDialog.cpp:251
 #, fuzzy
 msgid "Indent namespaces"
 msgstr "Orientacja"
 
-#: ../src/MadSourceFormatDialog.cpp:253
+#: ../src/MadSourceFormatDialog.cpp:254
 msgid "Indent switches"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:256
+#: ../src/MadSourceFormatDialog.cpp:257
 msgid ""
 "Indent preprocessor blocks at bracket level zero, and within a namespace"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:259
+#: ../src/MadSourceFormatDialog.cpp:260
 msgid "Indent multi-line preprocessor definitions ending with a backslash"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:262
+#: ../src/MadSourceFormatDialog.cpp:263
 msgid "Indent preprocessor conditionals"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:265
+#: ../src/MadSourceFormatDialog.cpp:266
 msgid "Indent C++ comments beginning in column one"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:268
+#: ../src/MadSourceFormatDialog.cpp:269
 #, fuzzy
 msgid "Indent after parens"
 msgstr "Orientacja"
 
-#: ../src/MadSourceFormatDialog.cpp:273
+#: ../src/MadSourceFormatDialog.cpp:274
 msgid "Minimal indent added when a header is built of multiple lines:"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:278
+#: ../src/MadSourceFormatDialog.cpp:279
 msgid "Maximum of # spaces to indent a continuation line (max. 120):"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:282
+#: ../src/MadSourceFormatDialog.cpp:283
 msgid "Indent a continuation line (default 1)"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:292
+#: ../src/MadSourceFormatDialog.cpp:293
 msgid "Break closing headers from their immediately preceding closing braces"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:295
+#: ../src/MadSourceFormatDialog.cpp:296
 msgid "Break 'else if ()' header combinations into seperate lines"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:298
+#: ../src/MadSourceFormatDialog.cpp:299
 msgid "Add braces to unbraced one line conditional statements"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:301
+#: ../src/MadSourceFormatDialog.cpp:302
 msgid "Add one line braces to unbraced one line conditional statements"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:304
+#: ../src/MadSourceFormatDialog.cpp:305
 msgid ""
 "Remove braces from conditional statements (single statement on a single line)"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:307
+#: ../src/MadSourceFormatDialog.cpp:308
 msgid "Don't break one-line blocks"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:310
+#: ../src/MadSourceFormatDialog.cpp:311
 msgid ""
 "Don't break complex statements and multiple statements residing in a single "
 "line"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:313
+#: ../src/MadSourceFormatDialog.cpp:314
 #, fuzzy
 msgid "Convert TABs to spaces"
 msgstr "Używanie języka angielskiego zamiast bieżących lokalizacji"
 
-#: ../src/MadSourceFormatDialog.cpp:316
+#: ../src/MadSourceFormatDialog.cpp:317
 msgid "Closes whitespace in the angle brackets of template definitions"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:319
+#: ../src/MadSourceFormatDialog.cpp:320
 msgid "Remove the preceding '*' in a multi-line comment that begins a line"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:322
+#: ../src/MadSourceFormatDialog.cpp:323
 msgid "Break one line headers"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:325
+#: ../src/MadSourceFormatDialog.cpp:326
 #, fuzzy
 msgid "Enable line breaking"
 msgstr "Ustaw rozmiar linii"
 
-#: ../src/MadSourceFormatDialog.cpp:330
+#: ../src/MadSourceFormatDialog.cpp:331
 msgid "Break lines after amount of chars (range: 50-200)"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:337
+#: ../src/MadSourceFormatDialog.cpp:338
 msgid "Break logical conditionals to be placed last on the previous line"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:346
+#: ../src/MadSourceFormatDialog.cpp:347
 msgid "Pad empty lines around header blocks (e.g. 'if', 'while'...)"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:351
+#: ../src/MadSourceFormatDialog.cpp:352
 msgid ""
 "Treat closing header blocks (e.g. 'else', 'catch') as stand-alone blocks"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:355
+#: ../src/MadSourceFormatDialog.cpp:356
 msgid "Insert space padding around operators"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:358
+#: ../src/MadSourceFormatDialog.cpp:359
 msgid "Insert space padding around parenthesies on the outside"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:361
+#: ../src/MadSourceFormatDialog.cpp:362
 msgid "Insert space padding around parenthesies on the inside"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:364
+#: ../src/MadSourceFormatDialog.cpp:365
 msgid "Insert space padding between a header and the following parenthesis"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:367
+#: ../src/MadSourceFormatDialog.cpp:368
 msgid "Remove extra space padding around parenthesis"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:370
+#: ../src/MadSourceFormatDialog.cpp:371
 msgid "Delete empty lines within a function or method"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:373
+#: ../src/MadSourceFormatDialog.cpp:374
 msgid "Fill empty lines with the whitespace of their previous lines"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:376
+#: ../src/MadSourceFormatDialog.cpp:377
 msgid "Pad comma"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:379
+#: ../src/MadSourceFormatDialog.cpp:380
 msgid "Pad return type(Object-C)"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:382
+#: ../src/MadSourceFormatDialog.cpp:383
 msgid "Unpad return type(Object-C)"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:385
+#: ../src/MadSourceFormatDialog.cpp:386
 msgid "Pad param type(Object-C)"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:388
+#: ../src/MadSourceFormatDialog.cpp:389
 msgid "Unpad param type(Object-C)"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:392
+#: ../src/MadSourceFormatDialog.cpp:393
 msgid "Pointer alignment"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:396 ../src/MadSourceFormatDialog.cpp:404
+#: ../src/MadSourceFormatDialog.cpp:397 ../src/MadSourceFormatDialog.cpp:405
 msgid "Type"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:397 ../src/MadSourceFormatDialog.cpp:405
+#: ../src/MadSourceFormatDialog.cpp:398 ../src/MadSourceFormatDialog.cpp:406
 msgid "Middle"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:400
+#: ../src/MadSourceFormatDialog.cpp:401
 msgid "Reference alignment"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:415
+#: ../src/MadSourceFormatDialog.cpp:416
 msgid "XML version:"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:427
+#: ../src/MadSourceFormatDialog.cpp:428
 msgid "Style"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:428
+#: ../src/MadSourceFormatDialog.cpp:429
 msgid "Brackets"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:429
+#: ../src/MadSourceFormatDialog.cpp:430
 #, fuzzy
 msgid "Indentation"
 msgstr "Orientacja"
 
-#: ../src/MadSourceFormatDialog.cpp:430
+#: ../src/MadSourceFormatDialog.cpp:431
 msgid "Formatting"
 msgstr ""
 
-#: ../src/MadSourceFormatDialog.cpp:431
+#: ../src/MadSourceFormatDialog.cpp:432
 msgid "Padding"
 msgstr ""
 
@@ -5254,9 +6508,6 @@ msgstr ""
 #~ msgid "Space Characters"
 #~ msgstr "Spacje"
 
-#~ msgid "Control Characters"
-#~ msgstr "Znaki sterujące"
-
 #~ msgid "Fullwidth Characters (with East Asian Ambiguous Width Characters)"
 #~ msgstr ""
 #~ "Fullwidth Characters (ze znakami wschodnioazjatyckimi o niejednoznacznej "
@@ -5303,9 +6554,6 @@ msgstr ""
 
 #~ msgid "Nordic "
 #~ msgstr "Nordycki"
-
-#~ msgid "Thai "
-#~ msgstr "Tajski"
 
 #~ msgid "Celtic "
 #~ msgstr "Celtycki"
@@ -5499,552 +6747,6 @@ msgstr ""
 
 #~ msgid "No_Block"
 #~ msgstr "Nie Blok"
-
-#~ msgid "Latin-1 Supplement"
-#~ msgstr "Dodatek Latin-1"
-
-#~ msgid "Latin Extended-A"
-#~ msgstr "Rozszerzony łaciński A"
-
-#~ msgid "Latin Extended-B"
-#~ msgstr "Rozszerzony łaciński B"
-
-#~ msgid "IPA Extensions"
-#~ msgstr "Rozszerzenia IPA"
-
-#~ msgid "Spacing Modifier Letters"
-#~ msgstr "Oddzielone litery modyfikujące"
-
-#~ msgid "Combining Diacritical Marks"
-#~ msgstr "Składające znaki diakrytyczne"
-
-#~ msgid "Greek and Coptic"
-#~ msgstr "Grecki i koptyjski"
-
-#~ msgid "Armenian"
-#~ msgstr "Armeńskie"
-
-#~ msgid "Syriac"
-#~ msgstr "Syryjski"
-
-#~ msgid "Thaana"
-#~ msgstr "Thaana"
-
-#~ msgid "Bengali"
-#~ msgstr "Bengalski"
-
-#~ msgid "Gurmukhi"
-#~ msgstr "Gurmukhi"
-
-#~ msgid "Gujarati"
-#~ msgstr "Gudźarati"
-
-#~ msgid "Oriya"
-#~ msgstr "Orija"
-
-#~ msgid "Tamil"
-#~ msgstr "Tamilski"
-
-#~ msgid "Telugu"
-#~ msgstr "Telugu"
-
-#~ msgid "Kannada"
-#~ msgstr "Kannada"
-
-#~ msgid "Malayalam"
-#~ msgstr "Malajalam"
-
-#~ msgid "Sinhala"
-#~ msgstr "Syngaleski"
-
-#~ msgid "Lao"
-#~ msgstr "Laotański"
-
-#~ msgid "Tibetan"
-#~ msgstr "Tybetański"
-
-#~ msgid "Myanmar"
-#~ msgstr "Birmański"
-
-#~ msgid "Georgian"
-#~ msgstr "Gruzińskie"
-
-#~ msgid "Hangul Jamo"
-#~ msgstr "Dzamo hangyl"
-
-#~ msgid "Ethiopic"
-#~ msgstr "Etiopski"
-
-#~ msgid "Cherokee"
-#~ msgstr "Czirokeski"
-
-#~ msgid "Unified Canadian Aboriginal Syllabics"
-#~ msgstr "Ujednolicony sylabariusz rdzennych kanadyjczyków"
-
-#~ msgid "Ogham"
-#~ msgstr "Ogamiczny"
-
-#~ msgid "Khmer"
-#~ msgstr "Kmerski"
-
-#~ msgid "Mongolian"
-#~ msgstr "Mongolski"
-
-#~ msgid "Latin Extended Additional"
-#~ msgstr "Łacińskie rozszerzone dodatkowe"
-
-#~ msgid "Greek Extended"
-#~ msgstr "Greckie rozszerzony"
-
-#~ msgid "Superscripts and Subscripts"
-#~ msgstr "Indeksy górne i dolne"
-
-#~ msgid "Currency Symbols"
-#~ msgstr "Symbole walut"
-
-#~ msgid "Combining Diacritical Marks for Symbols"
-#~ msgstr "Składające znaki diakrytyczne dla symboli"
-
-#~ msgid "Letterlike Symbols"
-#~ msgstr "Symbole literopodobne"
-
-#~ msgid "Arrows"
-#~ msgstr "Strzałki"
-
-#~ msgid "Mathematical Operators"
-#~ msgstr "Operatory matematyczne"
-
-#~ msgid "Miscellaneous Technical"
-#~ msgstr "Różne znaki techniczne"
-
-#~ msgid "Control Pictures"
-#~ msgstr "Obrazki znaków sterujących"
-
-#~ msgid "Optical Character Recognition"
-#~ msgstr "Rozpoznawanie tekstu (OCR)"
-
-#~ msgid "Enclosed Alphanumerics"
-#~ msgstr "Otoczone symbole alfanumeryczne"
-
-#~ msgid "Box Drawing"
-#~ msgstr "Obszar rysowania"
-
-#~ msgid "Block Elements"
-#~ msgstr "Elementy blokowe"
-
-#~ msgid "Geometric Shapes"
-#~ msgstr "Kształty geometryczne"
-
-#~ msgid "Miscellaneous Symbols"
-#~ msgstr "Różne symbole"
-
-#~ msgid "Dingbats"
-#~ msgstr "Dingbaty"
-
-#~ msgid "Braille Patterns"
-#~ msgstr "Pismo Braille'a"
-
-#~ msgid "CJK Radicals Supplement"
-#~ msgstr "Dodatkowe radykały CJK"
-
-#~ msgid "Kangxi Radicals"
-#~ msgstr "Radykały Kangxi"
-
-#~ msgid "Ideographic Description Characters"
-#~ msgstr "Znaki opisu ideograficznego"
-
-#~ msgid "CJK Symbols and Punctuation"
-#~ msgstr "Symbole i znaki interpunkcyjne CJK"
-
-#~ msgid "Hiragana"
-#~ msgstr "Hiragana"
-
-#~ msgid "Katakana"
-#~ msgstr "Katakana"
-
-#~ msgid "Bopomofo"
-#~ msgstr "Bopomofo"
-
-#~ msgid "Hangul Compatibility Jamo"
-#~ msgstr "Dzamo zgodności dla hangyl"
-
-#~ msgid "Kanbun"
-#~ msgstr "Kanbun"
-
-#~ msgid "Bopomofo Extended"
-#~ msgstr "Rozszerzone bopomofo"
-
-#~ msgid "Enclosed CJK Letters and Months"
-#~ msgstr "Otoczone litery i miesiące CJK"
-
-#~ msgid "CJK Compatibility"
-#~ msgstr "Znaki zgodności CJK"
-
-#~ msgid "CJK Unified Ideographs Extension A"
-#~ msgstr "Rozszerzenie A ujednoliconych ideogramów CJK"
-
-#~ msgid "CJK Unified Ideographs"
-#~ msgstr "Ujednolicone ideogramy CJK"
-
-#~ msgid "Yi Syllables"
-#~ msgstr "Sylaby yi"
-
-#~ msgid "Yi Radicals"
-#~ msgstr "Radykały yi"
-
-#~ msgid "Hangul Syllables"
-#~ msgstr "Sylaby hangyl"
-
-#~ msgid "High Surrogates"
-#~ msgstr "Starsze surogaty"
-
-#~ msgid "High Private Use Surrogates"
-#~ msgstr "Starsze surogaty prywatnego użytku"
-
-#~ msgid "Low Surrogates"
-#~ msgstr "Młodsze surogaty"
-
-#~ msgid "Private Use Area"
-#~ msgstr "Obszar prywatnego użytku"
-
-#~ msgid "CJK Compatibility Ideographs"
-#~ msgstr "Ideogramy zgodności CJK"
-
-#~ msgid "Alphabetic Presentation Forms"
-#~ msgstr "Alfabetyczne formy prezentacyjne"
-
-#~ msgid "Arabic Presentation Forms-A"
-#~ msgstr "Arabskie formy prezentacyjne A"
-
-#~ msgid "Combining Half Marks"
-#~ msgstr "Składające półznaki"
-
-#~ msgid "CJK Compatibility Forms"
-#~ msgstr "Formy zgodności CJK"
-
-#~ msgid "Small Form Variants"
-#~ msgstr "Różne małe formy"
-
-#~ msgid "Arabic Presentation Forms-B"
-#~ msgstr "Arabskie formy prezentacyjne B"
-
-#~ msgid "Specials"
-#~ msgstr "Specjalne"
-
-#~ msgid "Halfwidth and Fullwidth Forms"
-#~ msgstr "Formy połowy i pełnej szerokości"
-
-#~ msgid "Old Italic"
-#~ msgstr "Staroitalski"
-
-#~ msgid "Gothic"
-#~ msgstr "Gothic"
-
-#~ msgid "Deseret"
-#~ msgstr "Deseret"
-
-#~ msgid "Byzantine Musical Symbols"
-#~ msgstr "Bizantyjskie symbole muzyczne"
-
-#~ msgid "Musical Symbols"
-#~ msgstr "Symbole muzyczne"
-
-#~ msgid "Mathematical Alphanumeric Symbols"
-#~ msgstr "Alfanumeryczne symbole matematyczne"
-
-#~ msgid "CJK Unified Ideographs Extension B"
-#~ msgstr "Ujednolicone ideogramy CJK rozszerzenie B"
-
-#~ msgid "CJK Compatibility Ideographs Supplement"
-#~ msgstr "Dodatkowe ideogramy zgodności CJK"
-
-#~ msgid "Tags"
-#~ msgstr "Tagi"
-
-#~ msgid "Cyrillic Supplement"
-#~ msgstr "Uzupełnienie cyrylicy"
-
-#~ msgid "Tagalog"
-#~ msgstr "Tagalski"
-
-#~ msgid "Hanunoo"
-#~ msgstr "Hanunoo"
-
-#~ msgid "Buhid"
-#~ msgstr "Buhid"
-
-#~ msgid "Tagbanwa"
-#~ msgstr "Tagbanwa"
-
-#~ msgid "Miscellaneous Mathematical Symbols-A"
-#~ msgstr "Różne symbole matematyczne A"
-
-#~ msgid "Supplemental Arrows-A"
-#~ msgstr "Dodatkowe strzałki A"
-
-#~ msgid "Supplemental Arrows-B"
-#~ msgstr "Dodatkowe strzałki B"
-
-#~ msgid "Miscellaneous Mathematical Symbols-B"
-#~ msgstr "Różne symbole matematyczne B"
-
-#~ msgid "Supplemental Mathematical Operators"
-#~ msgstr "Dodatkowe operatory matematyczne"
-
-#~ msgid "Katakana Phonetic Extensions"
-#~ msgstr "Rozszerzenia fonetyczne katakana"
-
-#~ msgid "Variation Selectors"
-#~ msgstr "Przełączniki wariantów glifów"
-
-#~ msgid "Limbu"
-#~ msgstr "Limbu"
-
-#~ msgid "Tai Le"
-#~ msgstr "Tai Le"
-
-#~ msgid "Khmer Symbols"
-#~ msgstr "Symbole kmerskie"
-
-#~ msgid "Miscellaneous Symbols and Arrows"
-#~ msgstr "Różne symbole i strzałki"
-
-#~ msgid "Yijing Hexagram Symbols"
-#~ msgstr "Heksagramy Yijing"
-
-#~ msgid "Aegean Numbers"
-#~ msgstr "Liczby Egejskie"
-
-#~ msgid "Ugaritic"
-#~ msgstr "Ugarycki"
-
-#~ msgid "Shavian"
-#~ msgstr "Shavian"
-
-#~ msgid "Osmanya"
-#~ msgstr "Osmanya"
-
-#~ msgid "Cypriot Syllabary"
-#~ msgstr "Sylabariusz cypryjski"
-
-#~ msgid "Tai Xuan Jing Symbols"
-#~ msgstr "Symbole Tajskie Xuan Jing"
-
-#~ msgid "Ancient Greek Musical Notation"
-#~ msgstr "Starożytny grecki notacja muzyczna"
-
-#~ msgid "Ancient Greek Numbers"
-#~ msgstr "Starożytne greckie liczby"
-
-#~ msgid "Arabic Supplement"
-#~ msgstr "Uzupełnienie arabskiego"
-
-#~ msgid "Buginese"
-#~ msgstr "Buginese"
-
-#~ msgid "CJK Strokes"
-#~ msgstr "Kreski CJK"
-
-#~ msgid "Combining Diacritical Marks Supplement"
-#~ msgstr "Uzupełnienie składających znaków diakrytycznych"
-
-#~ msgid "Coptic"
-#~ msgstr "Koptyjski"
-
-#~ msgid "Ethiopic Extended"
-#~ msgstr "Rozszerzony etiopski"
-
-#~ msgid "Ethiopic Supplement"
-#~ msgstr "Uzupełnienie etiopskiego"
-
-#~ msgid "Georgian Supplement"
-#~ msgstr "Uzupełnienie gruzińskiego"
-
-#~ msgid "Glagolitic"
-#~ msgstr "Głagolica"
-
-#~ msgid "Kharoshthi"
-#~ msgstr "Kharoshthi"
-
-#~ msgid "Modifier Tone Letters"
-#~ msgstr "Modyfikujące litery tonów"
-
-#~ msgid "New Tai Lue"
-#~ msgstr "Nowy Tai Lue"
-
-#~ msgid "Old Persian"
-#~ msgstr "Staroperski"
-
-#~ msgid "Phonetic Extensions Supplement"
-#~ msgstr "Uzupełnienie rozszerzeń fonetycznych"
-
-#~ msgid "Supplemental Punctuation"
-#~ msgstr "Dodatkowe znaki interpunkcyjne"
-
-#~ msgid "Syloti Nagri"
-#~ msgstr "Syloti Nagri"
-
-#~ msgid "Tifinagh"
-#~ msgstr "Tifinagh"
-
-#~ msgid "Vertical Forms"
-#~ msgstr "Formy pionowe"
-
-#~ msgid "Latin Extended-C"
-#~ msgstr "Rozszerzony łaciński C"
-
-#~ msgid "Latin Extended-D"
-#~ msgstr "Rozszerzony łaciński D"
-
-#~ msgid "Phags-pa"
-#~ msgstr "Phags-pa"
-
-#~ msgid "Phoenician"
-#~ msgstr "Fenicki"
-
-#~ msgid "Cuneiform"
-#~ msgstr "Cuneiform"
-
-#~ msgid "Cuneiform Numbers and Punctuation"
-#~ msgstr "Liczby i interpunkcja pisma klinowego"
-
-#~ msgid "Sundanese"
-#~ msgstr "Sundyjski"
-
-#~ msgid "Lepcha"
-#~ msgstr "Lepcza"
-
-#~ msgid "Ol Chiki"
-#~ msgstr "Ol Chiki"
-
-#~ msgid "Cyrillic Extended-A"
-#~ msgstr "Rozszerzona cyrylica A"
-
-#~ msgid "Vai"
-#~ msgstr "Wai"
-
-#~ msgid "Cyrillic Extended-B"
-#~ msgstr "Rozszerzona cyrylica B"
-
-#~ msgid "Saurashtra"
-#~ msgstr "Saurashtra"
-
-#~ msgid "Kayah Li"
-#~ msgstr "Kayah Li"
-
-#~ msgid "Rejang"
-#~ msgstr "Rejang"
-
-#~ msgid "Cham"
-#~ msgstr "Cham"
-
-#~ msgid "Ancient Symbols"
-#~ msgstr "Symbole starożytne"
-
-#~ msgid "Phaistos Disc"
-#~ msgstr "Dysk z Fajstos"
-
-#~ msgid "Lycian"
-#~ msgstr "Licyjski"
-
-#~ msgid "Carian"
-#~ msgstr "Karyjski"
-
-#~ msgid "Lydian"
-#~ msgstr "Lidyjskie"
-
-#~ msgid "Mahjong Tiles"
-#~ msgstr "Symbole gry Mahjong"
-
-#~ msgid "Domino Tiles"
-#~ msgstr "Symbole gry Domino"
-
-#~ msgid "Samaritan"
-#~ msgstr "Samarytańskie"
-
-#~ msgid "Unified Canadian Aboriginal Syllabics Extended"
-#~ msgstr "Rozszerzenie ujednoliconego sylabariusza rdzennych kanadyjczyków"
-
-#~ msgid "Tai Tham"
-#~ msgstr "Tai Tham"
-
-#~ msgid "Vedic Extensions"
-#~ msgstr "Rozszerzenia wedyjskie"
-
-#~ msgid "Lisu"
-#~ msgstr "Lisu"
-
-#~ msgid "Bamum"
-#~ msgstr "Bamum"
-
-#~ msgid "Common Indic Number Forms"
-#~ msgstr "Indyjskie formy liczbowe"
-
-#~ msgid "Devanagari Extended"
-#~ msgstr "Rozszerzone dewanagari"
-
-#~ msgid "Hangul Jamo Extended-A"
-#~ msgstr "Rozszerzenie A dzamo hangyl"
-
-#~ msgid "Javanese"
-#~ msgstr "Jawajski"
-
-#~ msgid "Myanmar Extended-A"
-#~ msgstr "Rozszerzony birmański A"
-
-#~ msgid "Tai Viet"
-#~ msgstr "Tai Viet"
-
-#~ msgid "Meetei Mayek"
-#~ msgstr "Manipuri"
-
-#~ msgid "Hangul Jamo Extended-B"
-#~ msgstr "Rozszerzenie B dzamo hangyl"
-
-#~ msgid "Imperial Aramaic"
-#~ msgstr "Aramejski imperjalny"
-
-#~ msgid "Old South Arabian"
-#~ msgstr "Staro południowoarabski"
-
-#~ msgid "Avestan"
-#~ msgstr "awestyjski"
-
-#~ msgid "Inscriptional Parthian"
-#~ msgstr "Inskrypcyjne Partów"
-
-#~ msgid "Inscriptional Pahlavi"
-#~ msgstr "Inskrypcyjne Pahlawi "
-
-#~ msgid "Old Turkic"
-#~ msgstr "Staroturecki"
-
-#~ msgid "Rumi Numeral Symbols"
-#~ msgstr "Symbole numeryczne Rumi"
-
-#~ msgid "Egyptian Hieroglyphs"
-#~ msgstr "Hieroglify egipskie"
-
-#~ msgid "Playing Cards"
-#~ msgstr "Karty do gry"
-
-#~ msgid "Miscellaneous Symbols And Pictographs"
-#~ msgstr "Różne symbole i piktogramy"
-
-#~ msgid "Emoticons"
-#~ msgstr "Emotikony"
-
-#~ msgid "Transport And Map Symbols"
-#~ msgstr "Transport i symbole map"
-
-#~ msgid "Alchemical Symbols"
-#~ msgstr "Symbole alchemiczne"
-
-#~ msgid "Arabic Extended-A"
-#~ msgstr "Arabski rozszerzenie-A"
-
-#~ msgid "Old North Arabian"
-#~ msgstr "Stary połnocnoarabski"
 
 #~ msgid "Paper size"
 #~ msgstr "Rozmiar papieru"
@@ -6240,9 +6942,6 @@ msgstr ""
 
 #~ msgid "Magenta"
 #~ msgstr "Magenta"
-
-#~ msgid "Maroon"
-#~ msgstr "Kasztanowy"
 
 #~ msgid "MintCream"
 #~ msgstr "Miętowy"
