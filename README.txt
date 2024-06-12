@@ -122,16 +122,20 @@ Note: Not support wxWidgets 2.X anymore since 0.3.X
 Todo:
 Packing for FreeBSD
 
+Mod v0.4.21
 .Fix ARM64 build
 .Fix bug in FindTextAll macro recording, issue #331
+.Fix input control size issue of SearchReplace dialog(sln-1550)
+.Fix Hangul char detection bug
 .Use per monitor DPI awareness V2
 .Add ruler by sln-1550(https://github.com/sln-1550)
-.Fix input control size issue of SearchReplace dialog(sln-1550)
 .Add binascii, sre, struct, weakref, bytearrayobject to miniPython(sln-1550)
 .Improve on Word Count dialog, make the summary text control readonly, use fix width font.
+.Update chardet to 0.0.8
 .Update Astyle to 3.4.9
 .Update hunspell to 1.7.2
 .Update wxWidgets to 3.2.5
+.Update Simplified Chinese translations
 
 Mod v0.4.20
 1.Fix: JSON formatter convert Unicode chars to UTF8 chars #309
