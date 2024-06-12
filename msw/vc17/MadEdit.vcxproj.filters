@@ -704,6 +704,9 @@
     <ClCompile Include="..\..\json\JSON.cpp">
       <Filter>Source files\jsonformatter</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangNorwegianModel.cpp">
+      <Filter>Source files\charset-detector\LangModels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\src\MadEditApp.rc">

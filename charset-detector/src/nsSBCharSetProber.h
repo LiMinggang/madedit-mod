@@ -171,6 +171,7 @@ extern const SequenceModel Windows_1258VietnameseModel;
 extern const SequenceModel Iso_8859_15DanishModel;
 extern const SequenceModel Iso_8859_1DanishModel;
 extern const SequenceModel Windows_1252DanishModel;
+extern const SequenceModel Ibm865DanishModel;
 
 extern const SequenceModel Iso_8859_13LithuanianModel;
 extern const SequenceModel Iso_8859_10LithuanianModel;
@@ -251,6 +252,11 @@ extern const SequenceModel Iso_8859_4SwedishModel;
 extern const SequenceModel Iso_8859_9SwedishModel;
 extern const SequenceModel Iso_8859_15SwedishModel;
 extern const SequenceModel Windows_1252SwedishModel;
+
+extern const SequenceModel Iso_8859_15NorwegianModel;
+extern const SequenceModel Iso_8859_1NorwegianModel;
+extern const SequenceModel Windows_1252NorwegianModel;
+extern const SequenceModel Ibm865NorwegianModel;
 
 #endif /* nsSingleByteCharSetProber_h__ */
 

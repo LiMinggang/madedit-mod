@@ -352,6 +352,7 @@
     <ClCompile Include="..\..\charset-detector\src\LangModels\LangLatvianModel.cpp" />
     <ClCompile Include="..\..\charset-detector\src\LangModels\LangLithuanianModel.cpp" />
     <ClCompile Include="..\..\charset-detector\src\LangModels\LangMalteseModel.cpp" />
+    <ClCompile Include="..\..\charset-detector\src\LangModels\LangNorwegianModel.cpp" />
     <ClCompile Include="..\..\charset-detector\src\LangModels\LangPolishModel.cpp" />
     <ClCompile Include="..\..\charset-detector\src\LangModels\LangPortugueseModel.cpp" />
     <ClCompile Include="..\..\charset-detector\src\LangModels\LangRomanianModel.cpp" />
