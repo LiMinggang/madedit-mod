@@ -1932,7 +1932,7 @@ void DetectEncoding(const wxByte *text, int count, int &enc)
 									enc = wxFONTENCODING_EUC_JP;
 								}
 								else
-									if (name.IsSameAs(wxT("EUC-KR")))
+									if (name.IsSameAs(wxT("UHC")) || name.IsSameAs(wxT("EUC-KR")))
 									{
 										enc = wxFONTENCODING_CP949;
 									}
