@@ -75,6 +75,7 @@
 #include <ctime>
 
 #include <algorithm>
+#include <chrono>
 #include <memory>
 #include <limits>
 #include <string>
@@ -770,7 +771,7 @@ int AffixMgr::build_pfxtree(PfxEntry* pfxptr) {
   pFlag[flg] = ep;
 
   // handle the special case of null affix string
-  if (strlen(key) == 0) {
+  if (*key == '\0') {
     // always inset them at head of list at element 0
     ptr = pStart[0];
     ep->setNext(ptr);
@@ -836,7 +837,7 @@ int AffixMgr::build_sfxtree(SfxEntry* sfxptr) {
   // next index by affix string
 
   // handle the special case of null affix string
-  if (strlen(key) == 0) {
+  if (*key == '\0') {
     // always inset them at head of list at element 0
     ptr = sStart[0];
     ep->setNext(ptr);
@@ -1320,7 +1321,7 @@ int AffixMgr::cpdwordpair_check(const std::string& word, int wl) {
 
 // forbid compoundings when there are special patterns at word bound
 int AffixMgr::cpdpat_check(const std::string& word,
-                           int pos,
+                           size_t pos,
                            hentry* r1,
                            hentry* r2,
                            const char /*affixed*/) {
@@ -1547,15 +1548,15 @@ short AffixMgr::get_syllable(const std::string& word) {
   return num;
 }
 
-void AffixMgr::setcminmax(int* cmin, int* cmax, const char* word, int len) {
+void AffixMgr::setcminmax(size_t* cmin, size_t* cmax, const char* word, size_t len) {
   if (utf8) {
     int i;
     for (*cmin = 0, i = 0; (i < cpdmin) && *cmin < len; i++) {
       for ((*cmin)++; *cmin < len && (word[*cmin] & 0xc0) == 0x80; (*cmin)++)
         ;
     }
-    for (*cmax = len, i = 0; (i < (cpdmin - 1)) && *cmax >= 0; i++) {
-      for ((*cmax)--; *cmax >= 0 && (word[*cmax] & 0xc0) == 0x80; (*cmax)--)
+    for (*cmax = len, i = 0; (i < (cpdmin - 1)) && *cmax > 0; i++) {
+      for ((*cmax)--; *cmax > 0 && (word[*cmax] & 0xc0) == 0x80; (*cmax)--)
         ;
     }
   } else {
@@ -1580,7 +1581,8 @@ struct hentry* AffixMgr::compound_check(const std::string& word,
   hentry *rv = NULL, *rv_first;
   std::string st;
   char ch = '\0', affixed;
-  int cmin, cmax, striple = 0, soldi = 0, oldcmin = 0, oldcmax = 0, oldlen = 0, checkedstriple = 0;
+  size_t cmin, cmax;
+  int striple = 0, soldi = 0, oldcmin = 0, oldcmax = 0, oldlen = 0, checkedstriple = 0;
   hentry** oldwords = words;
   size_t scpd = 0, len = word.size();
 
@@ -1589,23 +1591,26 @@ struct hentry* AffixMgr::compound_check(const std::string& word,
   // add a time limit to handle possible
   // combinatorical explosion of the overlapping words
 
-  HUNSPELL_THREAD_LOCAL clock_t timelimit;
+  HUNSPELL_THREAD_LOCAL std::chrono::steady_clock::time_point clock_time_start;
+  HUNSPELL_THREAD_LOCAL bool timelimit_exceeded;
+
+  // get the current time
+  std::chrono::steady_clock::time_point clock_now = std::chrono::steady_clock::now();
 
   if (wordnum == 0) {
-      // get the start time, seeing as we're reusing this set to 0
-      // to flag timeout, use clock() + 1 to avoid start clock()
-      // of 0 as being a timeout
-      timelimit = clock() + 1;
+      // set the start time
+      clock_time_start = clock_now;
+      timelimit_exceeded = false;
   }
-  else if (timelimit != 0 && (clock() > timelimit + TIMELIMIT)) {
-      timelimit = 0;
-  }
+  else if (std::chrono::duration_cast<std::chrono::milliseconds>(clock_now - clock_time_start).count()
+            > static_cast<double>(TIMELIMIT) * CLOCKS_PER_SEC * 1000)
+      timelimit_exceeded = true;
 
   setcminmax(&cmin, &cmax, word.c_str(), len);
 
   st.assign(word);
 
-  for (int i = cmin; i < cmax; ++i) {
+  for (size_t i = cmin; i < cmax; ++i) {
     // go to end of the UTF-8 character
     if (utf8) {
       for (; (st[i] & 0xc0) == 0x80; i++)
@@ -1625,7 +1630,7 @@ struct hentry* AffixMgr::compound_check(const std::string& word,
 
       do {  // simplified checkcompoundpattern loop
 
-        if (timelimit == 0)
+        if (timelimit_exceeded)
           return 0;
 
         if (scpd > 0) {
@@ -1673,8 +1678,24 @@ struct hentry* AffixMgr::compound_check(const std::string& word,
         // forbid dictionary stems with COMPOUNDFORBIDFLAG in
         // compound words, overriding the effect of COMPOUNDPERMITFLAG
         if ((rv) && compoundforbidflag &&
-                TESTAFF(rv->astr, compoundforbidflag, rv->alen) && !hu_mov_rule)
+                TESTAFF(rv->astr, compoundforbidflag, rv->alen) && !hu_mov_rule) {
+            bool would_continue = !onlycpdrule && simplifiedcpd;
+            if (!scpd && would_continue) {
+                // given the while conditions that continue jumps to, this situation
+                // never ends
+                HUNSPELL_WARNING(stderr, "break infinite loop\n");
+                break;
+            }
+
+            if (scpd > 0 && would_continue) {
+                // under these conditions we loop again, but the assumption above
+                // appears to be that cmin and cmax are the original values they
+                // had in the outside loop
+                cmin = oldcmin;
+                cmax = oldcmax;
+            }
             continue;
+        }
 
         // search homonym with compound flag
         while ((rv) && !hu_mov_rule &&
@@ -1821,7 +1842,7 @@ struct hentry* AffixMgr::compound_check(const std::string& word,
                  scpd == 0 || checkcpdtable[scpd - 1].cond == FLAG_NULL ||
                  TESTAFF(rv->astr, checkcpdtable[scpd - 1].cond, rv->alen)) &&
              !((checkcompoundtriple && scpd == 0 &&
-                !words &&  // test triple letters
+                !words && i < word.size() && // test triple letters
                 (word[i - 1] == word[i]) &&
                 (((i > 1) && (word[i - 1] == word[i - 2])) ||
                  ((word[i - 1] == word[i + 1]))  // may be word[i+1] == '\0'
@@ -2191,30 +2212,34 @@ int AffixMgr::compound_check_morph(const std::string& word,
   hentry* rv = NULL, *rv_first;
   std::string st, presult;
   char ch, affixed = 0;
-  int checked_prefix, cmin, cmax, ok = 0;
+  int checked_prefix, ok = 0;
+  size_t cmin, cmax;
   hentry** oldwords = words;
   size_t len = word.size();
 
   // add a time limit to handle possible
   // combinatorical explosion of the overlapping words
 
-  HUNSPELL_THREAD_LOCAL clock_t timelimit;
+  HUNSPELL_THREAD_LOCAL std::chrono::steady_clock::time_point clock_time_start;
+  HUNSPELL_THREAD_LOCAL bool timelimit_exceeded;
+
+  // get the current time
+  std::chrono::steady_clock::time_point clock_now = std::chrono::steady_clock::now();
 
   if (wordnum == 0) {
-      // get the start time, seeing as we're reusing this set to 0
-      // to flag timeout, use clock() + 1 to avoid start clock()
-      // of 0 as being a timeout
-      timelimit = clock() + 1;
+      // set the start time
+      clock_time_start = clock_now;
+      timelimit_exceeded = false;
   }
-  else if (timelimit != 0 && (clock() > timelimit + TIMELIMIT)) {
-      timelimit = 0;
-  }
+  else if (std::chrono::duration_cast<std::chrono::milliseconds>(clock_now - clock_time_start).count()
+            > static_cast<double>(TIMELIMIT) * CLOCKS_PER_SEC * 1000)
+      timelimit_exceeded = true;
 
   setcminmax(&cmin, &cmax, word.c_str(), len);
 
   st.assign(word);
 
-  for (int i = cmin; i < cmax; ++i) {
+  for (size_t i = cmin; i < cmax; ++i) {
     // go to end of the UTF-8 character
     if (utf8) {
       for (; (st[i] & 0xc0) == 0x80; i++)
@@ -2228,7 +2253,7 @@ int AffixMgr::compound_check_morph(const std::string& word,
 
     do {  // onlycpdrule loop
 
-      if (timelimit == 0)
+      if (timelimit_exceeded)
         return 0;
 
       oldnumsyllable = numsyllable;
@@ -2465,7 +2490,7 @@ int AffixMgr::compound_check_morph(const std::string& word,
           result.append(presult);
           result.push_back(MSEP_FLD);
           result.append(MORPH_PART);
-          result.append(word, i);
+          result.append(word, i, word.size());
           if (complexprefixes && HENTRY_DATA(rv))
             result.append(HENTRY_DATA2(rv));
           if (!HENTRY_FIND(rv, MORPH_STEM)) {
@@ -2522,7 +2547,7 @@ int AffixMgr::compound_check_morph(const std::string& word,
           result.append(presult);
           result.push_back(MSEP_FLD);
           result.append(MORPH_PART);
-          result.append(word, i);
+          result.append(word, i, word.size());
 
           if (HENTRY_DATA(rv)) {
             if (complexprefixes)
@@ -2573,7 +2598,7 @@ int AffixMgr::compound_check_morph(const std::string& word,
             if (!m.empty()) {
               result.push_back(MSEP_FLD);
               result.append(MORPH_PART);
-              result.append(word, i);
+              result.append(word, i, word.size());
               line_uniq_app(m, MSEP_REC);
               result.append(m);
             }
@@ -2665,7 +2690,7 @@ int AffixMgr::compound_check_morph(const std::string& word,
           if (!m.empty()) {
             result.push_back(MSEP_FLD);
             result.append(MORPH_PART);
-            result.append(word, i);
+            result.append(word, i, word.size());
             line_uniq_app(m, MSEP_REC);
             result.push_back(MSEP_FLD);
             result.append(m);
@@ -4006,6 +4031,7 @@ bool AffixMgr::parse_checkcpdtable(const std::string& line, FileMgr* af) {
           if (nl.compare(start_piece - nl.begin(), 20, "CHECKCOMPOUNDPATTERN", 20) != 0) {
             HUNSPELL_WARNING(stderr, "error: line %d: table is corrupt\n",
                              af->getlinenum());
+            checkcpdtable.clear();
             return false;
           }
           break;

@@ -137,6 +137,7 @@ madedit_SOURCES =	src/MadAboutDialog.cpp \
 	charset-detector/src/prmem.h \
 	charset-detector/src/uchardet.cpp \
 	charset-detector/src/uchardet.h \
+	charset-detector/src/LangModels/LangNorwegianModel.cpp \
 	charset-detector/src/LangModels/LangVietnameseModel.cpp \
 	charset-detector/src/LangModels/LangThaiModel.cpp \
 	charset-detector/src/LangModels/LangTurkishModel.cpp \
