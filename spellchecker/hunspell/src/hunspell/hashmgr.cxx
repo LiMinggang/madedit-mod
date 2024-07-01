@@ -106,7 +106,7 @@ HashMgr::HashMgr(const char* tpath, const char* apath, const char* key)
   }
 }
 
-void HashMgr::free_flag(unsigned short* astr, short alen) {
+void HashMgr::free_flag(unsigned short* astr, int alen) {
   if (astr && (aliasf.empty() || TESTAFF(astr, ONLYUPCASEFLAG, alen)))
     delete[] astr;
 }
@@ -209,7 +209,7 @@ int HashMgr::add_word(const std::string& in_word,
   }
 
   // limit of hp->blen
-  if (word->size() > std::numeric_limits<unsigned char>::max()) {
+  if (word->size() > std::numeric_limits<unsigned short>::max()) {
     HUNSPELL_WARNING(stderr, "error: word len %ld is over max limit\n", word->size());
     delete desc_copy;
     delete word_copy;
@@ -235,8 +235,8 @@ int HashMgr::add_word(const std::string& in_word,
 
   int i = hash(hpw, word->size());
 
-  hp->blen = (unsigned char)word->size();
-  hp->clen = (unsigned char)wcl;
+  hp->blen = (unsigned short)word->size();
+  hp->clen = (unsigned short)wcl;
   hp->alen = (short)al;
   hp->astr = aff;
   hp->next = NULL;
@@ -492,29 +492,36 @@ int HashMgr::remove(const std::string& word) {
 }
 
 /* remove forbidden flag to add a personal word to the hash */
-int HashMgr::remove_forbidden_flag(const std::string& word) {
+void HashMgr::remove_forbidden_flag(const std::string& word) {
   struct hentry* dp = lookup(word.c_str(), word.size());
   if (!dp)
-    return 1;
+    return;
   while (dp) {
     if (dp->astr && TESTAFF(dp->astr, forbiddenword, dp->alen))
       dp->alen = 0;  // XXX forbidden words of personal dic.
     dp = dp->next_homonym;
   }
-  return 0;
 }
 
 // add a custom dic. word to the hash table (public)
 int HashMgr::add(const std::string& word) {
-  if (remove_forbidden_flag(word)) {
-    int captype, al = 0;
-    unsigned short* flags = NULL;
-    int wcl = get_clen_and_captype(word, &captype);
-    add_word(word, wcl, flags, al, NULL, false, captype);
-    return add_hidden_capitalized_word(word, wcl, flags, al, NULL,
-                                       captype);
-  }
-  return 0;
+  remove_forbidden_flag(word);
+  int captype, al = 0;
+  unsigned short* flags = NULL;
+  int wcl = get_clen_and_captype(word, &captype);
+  add_word(word, wcl, flags, al, NULL, false, captype);
+  return add_hidden_capitalized_word(word, wcl, flags, al, NULL,
+                                     captype);
+}
+
+int HashMgr::add_with_flags(const std::string& word, const std::string& flags, const std::string& desc) {
+  remove_forbidden_flag(word);
+  int captype;
+  unsigned short *df;
+  int al = decode_flags(&df, flags, NULL);
+  int wcl = get_clen_and_captype(word, &captype);
+  add_word(word, wcl, df, al, &desc, false, captype);
+  return add_hidden_capitalized_word(word, wcl, df, al, &desc, captype);
 }
 
 int HashMgr::add_with_affix(const std::string& word, const std::string& example) {
@@ -578,7 +585,7 @@ int HashMgr::load_tables(const char* tpath, const char* key) {
 #if !defined(FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION)
   const int max_allowed = (std::numeric_limits<int>::max() - 1 - nExtra) / int(sizeof(struct hentry*));
 #else
-  const int max_allowed = (268435456 - 1 - nExtra) / int(sizeof(struct hentry*));
+  const int max_allowed = (100000 - 1 - nExtra) / int(sizeof(struct hentry*));
 #endif
 
   if (tablesize <= 0 || tablesize >= max_allowed) {
@@ -599,7 +606,9 @@ int HashMgr::load_tables(const char* tpath, const char* key) {
 
   std::vector<w_char> workbuf;
 
+  int nLineCount(0);
   while (dict->getline(ts)) {
+    ++nLineCount;
     mychomp(ts);
     // split each line into word and morphological description
     size_t dp_pos = 0;
@@ -681,15 +690,23 @@ int HashMgr::load_tables(const char* tpath, const char* key) {
     }
   }
 
+  int ret(0);
+
+  // reject ludicrous tablesizes
+  if (tablesize > 8192 + nExtra && tablesize > nLineCount * 10 + nExtra) {
+    HUNSPELL_WARNING(stderr, ".dic initial approximate word count line value of %d is too large for %d lines\n", tablesize, nLineCount);
+    ret = 3;
+  }
+
   delete dict;
-  return 0;
+  return ret;
 }
 
 // the hash function is a simple load and rotate
 // algorithm borrowed
 int HashMgr::hash(const char* word, size_t len) const {
   unsigned long hv = 0;
-  int i = 0;
+  size_t i = 0;
   while (i < 4 && i < len)
     hv = (hv << 8) | word[i++];
   while (i < len) {
@@ -708,7 +725,7 @@ int HashMgr::decode_flags(unsigned short** result, const std::string& flags, Fil
   switch (flag_mode) {
     case FLAG_LONG: {  // two-character flags (1x2yZz -> 1x 2y Zz)
       len = flags.size();
-      if ((len & 1) == 1)
+      if ((len & 1) == 1 && af != NULL)
         HUNSPELL_WARNING(stderr, "error: line %d: bad flagvector\n",
                          af->getlinenum());
       len >>= 1;
@@ -717,7 +734,7 @@ int HashMgr::decode_flags(unsigned short** result, const std::string& flags, Fil
         unsigned short flag = ((unsigned short)((unsigned char)flags[i << 1]) << 8) |
                               ((unsigned short)((unsigned char)flags[(i << 1) | 1]));
 
-        if (flag >= DEFAULTFLAGS) {
+        if (flag >= DEFAULTFLAGS && af != NULL) {
           HUNSPELL_WARNING(stderr,
                            "error: line %d: flag id %d is too large (max: %d)\n",
                            af->getlinenum(), flag, DEFAULTFLAGS - 1);
@@ -737,14 +754,14 @@ int HashMgr::decode_flags(unsigned short** result, const std::string& flags, Fil
       for (size_t p = 0; p < flags.size(); ++p) {
         if (flags[p] == ',') {
           int i = atoi(src);
-          if (i >= DEFAULTFLAGS) {
+          if ((i >= DEFAULTFLAGS || i < 0) && af != NULL) {
             HUNSPELL_WARNING(
                 stderr, "error: line %d: flag id %d is too large (max: %d)\n",
                 af->getlinenum(), i, DEFAULTFLAGS - 1);
              i = 0;
 	  }
           *dest = (unsigned short)i;
-          if (*dest == 0)
+          if (*dest == 0 && af != NULL)
             HUNSPELL_WARNING(stderr, "error: line %d: 0 is wrong flag id\n",
                              af->getlinenum());
           src = flags.c_str() + p + 1;
@@ -752,7 +769,7 @@ int HashMgr::decode_flags(unsigned short** result, const std::string& flags, Fil
         }
       }
       int i = atoi(src);
-      if (i >= DEFAULTFLAGS) {
+      if (i >= DEFAULTFLAGS || i < 0) {
         HUNSPELL_WARNING(stderr,
                          "error: line %d: flag id %d is too large (max: %d)\n",
                          af->getlinenum(), i, DEFAULTFLAGS - 1);
@@ -851,7 +868,7 @@ bool HashMgr::decode_flags(std::vector<unsigned short>& result, const std::strin
       result.resize(origsize + len);
       memcpy(result.data() + origsize, w.data(), len * sizeof(short));
 #else
-      result.reserve(origsize + len);	
+      result.reserve(origsize + len);
       for (const w_char wc : w) result.push_back((unsigned short)wc);
 #endif
       break;
@@ -871,7 +888,8 @@ unsigned short HashMgr::decode_flag(const std::string& f) const {
   int i;
   switch (flag_mode) {
     case FLAG_LONG:
-      s = ((unsigned short)((unsigned char)f[0]) << 8) | ((unsigned short)((unsigned char)f[1]));
+      if (f.size() >= 2)
+        s = ((unsigned short)((unsigned char)f[0]) << 8) | ((unsigned short)((unsigned char)f[1]));
       break;
     case FLAG_NUM:
       i = atoi(f.c_str());
@@ -890,7 +908,8 @@ unsigned short HashMgr::decode_flag(const std::string& f) const {
       break;
     }
     default:
-      s = (unsigned char)f[0];
+      if (!f.empty())
+        s = (unsigned char)f[0];
   }
   if (s == 0)
     HUNSPELL_WARNING(stderr, "error: 0 is wrong flag id\n");

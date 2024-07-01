@@ -108,6 +108,7 @@ public:
   const std::vector<w_char>& get_wordchars_utf16() const;
   const std::string& get_dict_encoding() const;
   int add(const std::string& word);
+  int add_with_flags(const std::string& word, const std::string& flags, const std::string& desc = NULL);
   int add_with_affix(const std::string& word, const std::string& example);
   int remove(const std::string& word);
   const std::string& get_version_cpp() const;
@@ -497,6 +498,11 @@ bool HunspellImpl::spell_internal(const std::string& word, std::vector<std::stri
     else
       wl = cleanword2(scw, sunicw, word, &captype, &abbv);
   }
+
+#if defined(FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION)
+    if (wl > 32768)
+      return false;
+#endif
 
 #ifdef MOZILLA_CLIENT
   // accept the abbreviated words without dots
@@ -937,9 +943,15 @@ struct hentry* HunspellImpl::checkword(const std::string& w, int* info, std::str
   return he;
 }
 
+#if defined(FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION)
+#define MAX_CANDIDATE_STACK_DEPTH 512
+#else
+#define MAX_CANDIDATE_STACK_DEPTH 2048
+#endif
+
 std::vector<std::string> HunspellImpl::suggest(const std::string& word, std::vector<std::string>& suggest_candidate_stack) {
 
-  if (suggest_candidate_stack.size() > 2048 || // apply a fairly arbitrary depth limit
+  if (suggest_candidate_stack.size() > MAX_CANDIDATE_STACK_DEPTH || // apply a fairly arbitrary depth limit
       // something very broken if suggest ends up calling itself with the same word
       std::find(suggest_candidate_stack.begin(), suggest_candidate_stack.end(), word) != suggest_candidate_stack.end()) {
     return { };
@@ -1468,6 +1480,12 @@ int HunspellImpl::mkinitsmall2(std::string& u8, std::vector<w_char>& u16) {
 int HunspellImpl::add(const std::string& word) {
   if (!m_HMgrs.empty())
     return m_HMgrs[0]->add(word);
+  return 0;
+}
+
+int HunspellImpl::add_with_flags(const std::string& word, const std::string& flags, const std::string& desc) {
+  if (!m_HMgrs.empty())
+    return m_HMgrs[0]->add_with_flags(word, flags, desc);
   return 0;
 }
 
@@ -2152,6 +2170,10 @@ int Hunspell::add(const std::string& word) {
   return m_Impl->add(word);
 }
 
+int Hunspell::add_with_flags(const std::string& word, const std::string& flags, const std::string& desc) {
+  return m_Impl->add_with_flags(word, flags, desc);
+}
+
 int Hunspell::add_with_affix(const std::string& word, const std::string& example) {
   return m_Impl->add_with_affix(word, example);
 }
@@ -2309,6 +2331,10 @@ int Hunspell_generate2(Hunhandle* pHunspell,
 
 int Hunspell_add(Hunhandle* pHunspell, const char* word) {
   return reinterpret_cast<HunspellImpl*>(pHunspell)->add(word);
+}
+
+int Hunspell_add_with_flags(Hunhandle* pHunspell, const char* word, const char* flags, const char* desc) {
+  return reinterpret_cast<HunspellImpl*>(pHunspell)->add_with_flags(word, flags, desc);
 }
 
 /* add word to the run-time dictionary with affix flags of

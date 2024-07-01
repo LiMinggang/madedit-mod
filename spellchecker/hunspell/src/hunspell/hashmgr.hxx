@@ -116,6 +116,7 @@ class HashMgr {
   struct hentry* walk_hashtable(int& col, struct hentry* hp) const;
 
   int add(const std::string& word);
+  int add_with_flags(const std::string& word, const std::string& flags, const std::string& desc = NULL);
   int add_with_affix(const std::string& word, const std::string& pattern);
   int remove(const std::string& word);
   int decode_flags(unsigned short** result, const std::string& flags, FileMgr* af) const;
@@ -149,9 +150,9 @@ class HashMgr {
                                   int captype);
   bool parse_aliasm(const std::string& line, FileMgr* af);
   bool parse_reptable(const std::string& line, FileMgr* af);
-  int remove_forbidden_flag(const std::string& word);
+  void remove_forbidden_flag(const std::string& word);
   void free_table();
-  void free_flag(unsigned short* astr, short alen);
+  void free_flag(unsigned short* astr, int alen);
 };
 
 #endif

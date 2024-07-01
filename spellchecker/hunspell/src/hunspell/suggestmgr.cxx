@@ -75,12 +75,14 @@
 #include <ctime>
 
 #include "suggestmgr.hxx"
+#include "hunspell.hxx"
 #include "htypes.hxx"
 #include "csutil.hxx"
 
 const w_char W_VLINE = {'\0', '|'};
 
 #define MAX_CHAR_DISTANCE 4
+#define MAXWORDUTF8LEN (MAXWORDLEN * 3)
 
 SuggestMgr::SuggestMgr(const std::string& tryme, unsigned int maxn, AffixMgr* aptr) {
   // register affix manager and check in string of chars to
@@ -242,8 +244,11 @@ bool SuggestMgr::suggest(std::vector<std::string>& slst,
     if ((slst.size() < maxSug) && (!cpdsuggest || (slst.size() < oldSug + maxcpdsugs))) {
       size_t i = slst.size();
       replchars(slst, word, cpdsuggest, info);
-      if (slst.size() > i)
+      if (slst.size() > i) {
         good_suggestion = true;
+        if (info & SPELL_BEST_SUG)
+          return true;
+      }
     }
     if (clock() > timelimit + TIMELIMIT_SUGGESTION)
       return good_suggestion;
@@ -366,6 +371,9 @@ bool SuggestMgr::suggest(std::vector<std::string>& slst,
     // drop compound word and other suggestions)
     if (!cpdsuggest || (!nosplitsugs && slst.size() < oldSug + maxcpdsugs)) {
       good_suggestion = twowords(slst, word, cpdsuggest, good_suggestion, info);
+
+      if (info & SPELL_BEST_SUG)
+        return true;
     }
     if (clock() > timelimit + TIMELIMIT_SUGGESTION)
       return good_suggestion;
@@ -448,7 +456,7 @@ int SuggestMgr::map_related(const std::string& word,
     return wlst.size();
   }
 
-  if (depth > 16384) {
+  if (depth > 0x3F00) {
     *timer = 0;
     return wlst.size();
   }
@@ -506,15 +514,21 @@ int SuggestMgr::replchars(std::vector<std::string>& wlst,
       candidate.assign(word, 0, r);
       candidate.append(entry.outstrings[type]);
       candidate.append(word, r + entry.pattern.size(), std::string::npos);
-      testsug(wlst, candidate, cpdsuggest, NULL, NULL, info);
-      // check REP suggestions with space
       size_t sp = candidate.find(' ');
+      size_t oldns = wlst.size();
+      testsug(wlst, candidate, cpdsuggest, NULL, NULL, info);
+      if (oldns < wlst.size()) {
+        // REP suggestions are the best, don't search other type of suggestions
+        info |= SPELL_BEST_SUG;
+      }
+
+      // check REP suggestions with space
       if (sp != std::string::npos) {
         size_t prev = 0;
         while (sp != std::string::npos) {
           std::string prev_chunk = candidate.substr(prev, sp - prev);
           if (checkword(prev_chunk, 0, NULL, NULL)) {
-            size_t oldns = wlst.size();
+            oldns = wlst.size();
             std::string post_chunk = candidate.substr(sp + 1);
             testsug(wlst, post_chunk, cpdsuggest, NULL, NULL, info);
             if (oldns < wlst.size()) {
@@ -854,11 +868,15 @@ bool SuggestMgr::twowords(std::vector<std::string>& wlst,
     // alot -> a lot, alto, slot...
     *p = ' ';
     if (!cpdsuggest && checkword(candidate, cpdsuggest, NULL, NULL)) {
+      // best solution
+      info |= SPELL_BEST_SUG;
+
       // remove not word pair suggestions
       if (!good) {
         good = true;
         wlst.clear();
       }
+
       wlst.insert(wlst.begin(), candidate);
     }
 
@@ -867,6 +885,9 @@ bool SuggestMgr::twowords(std::vector<std::string>& wlst,
       *p = '-';
 
       if (!cpdsuggest && checkword(candidate, cpdsuggest, NULL, NULL)) {
+        // best solution
+        info |= SPELL_BEST_SUG;
+
         // remove not word pair suggestions
         if (!good) {
           good = true;
@@ -1110,6 +1131,35 @@ int SuggestMgr::movechar_utf(std::vector<std::string>& wlst,
   return wlst.size();
 }
 
+namespace
+{
+  class ngsuggest_guard
+  {
+    bool m_nonbmp;
+    cs_info* m_origconv;
+    int* m_utf8;
+    cs_info** m_csconv;
+
+    public:
+
+    ngsuggest_guard(bool nonbmp, cs_info* origconv, int* utf8, cs_info** csconv)
+      : m_nonbmp(nonbmp)
+      , m_origconv(origconv)
+      , m_utf8(utf8)
+      , m_csconv(csconv)
+    {
+    }
+
+    ~ngsuggest_guard()
+    {
+      if (m_nonbmp) {
+        *m_csconv = m_origconv;
+        *m_utf8 = 1;
+      }
+    }
+  };
+}
+
 // generate a set of suggestions for very poorly spelled words
 void SuggestMgr::ngsuggest(std::vector<std::string>& wlst,
                           const char* w,
@@ -1129,6 +1179,8 @@ void SuggestMgr::ngsuggest(std::vector<std::string>& wlst,
     rootsphon[i] = NULL;
     scoresphon[i] = -100 * i;
   }
+  bool has_roots = false;
+  bool has_rootsphon = false;
   lp = MAX_ROOTS - 1;
   lpphon = MAX_ROOTS - 1;
   int low = NGRAM_LOWERING;
@@ -1164,6 +1216,12 @@ void SuggestMgr::ngsuggest(std::vector<std::string>& wlst,
     nonbmp = 1;
     low = 0;
   }
+  ngsuggest_guard restore_state(nonbmp, origconv, &utf8, &csconv);
+  int max_word_len = (utf8) ? MAXWORDUTF8LEN : MAXWORDLEN;
+  // ofz#59067 a replist entry can generate a very long word, abandon
+  // ngram if that odd-edge case arises
+  if (n > max_word_len * 4)
+      return;
 
   struct hentry* hp = NULL;
   int col = -1;
@@ -1294,6 +1352,7 @@ void SuggestMgr::ngsuggest(std::vector<std::string>& wlst,
       if (sc > scores[lp]) {
         scores[lp] = sc;
         roots[lp] = hp;
+        has_roots = true;
         lval = sc;
         for (int j = 0; j < MAX_ROOTS; j++)
           if (scores[j] < lval) {
@@ -1305,6 +1364,7 @@ void SuggestMgr::ngsuggest(std::vector<std::string>& wlst,
       if (scphon > scoresphon[lpphon]) {
         scoresphon[lpphon] = scphon;
         rootsphon[lpphon] = HENTRY_WORD(hp);
+        has_rootsphon = true;
         lval = scphon;
         for (int j = 0; j < MAX_ROOTS; j++)
           if (scoresphon[j] < lval) {
@@ -1313,6 +1373,12 @@ void SuggestMgr::ngsuggest(std::vector<std::string>& wlst,
           }
       }
     }
+  }
+
+  if (!has_roots && !has_rootsphon) {
+    // with no roots there will be no guesses and no point running
+    // ngram
+    return;
   }
 
   // find minimum threshold for a passable suggestion
@@ -1638,11 +1704,6 @@ void SuggestMgr::ngsuggest(std::vector<std::string>& wlst,
         }
       }
     }
-
-  if (nonbmp) {
-    csconv = origconv;
-    utf8 = 1;
-  }
 }
 
 // see if a candidate suggestion is spelled correctly
@@ -1973,7 +2034,7 @@ int SuggestMgr::ngram(int n,
                       const std::vector<w_char>& su1,
                       const std::vector<w_char>& su2,
                       int opt) {
-  int nscore = 0, ns, test = 0, l1 = su1.size(), l2 = su2.size();
+  int nscore = 0, ns, l1 = su1.size(), l2 = su2.size();
 
   if (l2 == 0)
     return 0;
@@ -1993,7 +2054,6 @@ int SuggestMgr::ngram(int n,
       }
       if (k != j && opt & NGRAM_WEIGHTED) {
         ns--;
-        test++;
         if (i == 0 || i == l1 - j)
           ns--;  // side weight
       }
@@ -2017,7 +2077,7 @@ int SuggestMgr::ngram(int n,
                       const std::string& s1,
                       const std::string& s2,
                       int opt) {
-  int nscore = 0, ns, l1, l2 = s2.size(), test = 0;
+  int nscore = 0, ns, l1, l2 = s2.size();
   
   if (l2 == 0)
     return 0;
@@ -2030,7 +2090,6 @@ int SuggestMgr::ngram(int n,
         ns++;
       } else if (opt & NGRAM_WEIGHTED) {
         ns--;
-        test++;
         if (i == 0 || i == l1 - j)
           ns--;  // side weight
       }
