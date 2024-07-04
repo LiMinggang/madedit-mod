@@ -108,7 +108,7 @@ public:
 public:	// function declarations
 	explicit ASStreamIterator(T* in);
 	~ASStreamIterator() override;
-	bool getLineEndChange(int lineEndFormat) const;
+
 	int  getStreamLength() const override;
 	std::string nextLine(bool emptyLineWasDeleted) override;
 	std::string peekNextLine() override;
@@ -120,10 +120,8 @@ private:
 	T* inStream;            // pointer to the input stream
 	std::string buffer;          // current input line
 	std::string prevBuffer;      // previous input line
-	std::string outputEOL;       // next output end of line char
-	int eolWindows;         // number of Windows line endings, CRLF
-	int eolLinux;           // number of Linux line endings, LF
-	int eolMacOld;          // number of old Mac line endings. CR
+	std::string lastOutputEOL;       // next output end of line char
+
 	std::streamoff streamLength; // length of the input file stream
 	std::streamoff peekStart;    // starting position for peekNextLine
 	bool prevLineDeleted;   // the previous input line was deleted
@@ -131,7 +129,7 @@ private:
 public:	// inline functions
 	bool compareToInputBuffer(const std::string& nextLine_) const
 	{ return (nextLine_ == prevBuffer); }
-	const std::string& getOutputEOL() const { return outputEOL; }
+	const std::string& getLastOutputEOL() const { return lastOutputEOL; }
 	std::streamoff getPeekStart() const override { return peekStart; }
 	bool hasMoreLines() const override { return !inStream->eof(); }
 };
@@ -181,7 +179,7 @@ public:
 #endif
 	std::string getOptionErrors() const;
 	void importOptions(std::stringstream& in, std::vector<std::string>& optionsVector);
-	bool parseOptions(std::vector<std::string>& optionsVector, const std::string& errorInfo);
+	bool parseOptions(std::vector<std::string>& optionsVector);
 
 private:
 	// variables
@@ -196,11 +194,11 @@ private:
 	std::string getParam(const std::string& arg, const char* op1, const char* op2);
 	bool isOption(const std::string& arg, const char* op);
 	bool isOption(const std::string& arg, const char* op1, const char* op2);
-	void isOptionError(const std::string& arg, const std::string& errorInfo);
+	void isOptionError(const std::string& arg);
 	bool isParamOption(const std::string& arg, const char* option);
 	bool isParamOption(const std::string& arg, const char* option1, const char* option2);
-	void parseOption(const std::string& arg, const std::string& errorInfo);
-	bool parseOptionContinued(const std::string& arg, const std::string& errorInfo);
+	void parseOption(const std::string& arg);
+	bool parseOptionContinued(const std::string& arg);
 };
 
 #ifndef	ASTYLE_LIB
@@ -234,11 +232,10 @@ private:    // variables
 	bool filesAreIdentical;             // input and output files are identical
 	int  filesFormatted;                // number of files formatted
 	int  filesUnchanged;                // number of files unchanged
-	bool lineEndsMixed;                 // output has mixed line ends
 	int  linesOut;                      // number of output lines
 
 	std::string outputEOL;                   // current line end
-	std::string prevEOL;                     // previous line end
+
 	std::string astyleExePath;               // absolute executable path and name from argv[0]
 	std::string optionFileName;              // file path and name of the options file
 	std::string origSuffix;                  // suffix= option
@@ -260,7 +257,7 @@ public:     // functions
 	explicit ASConsole(ASFormatter& formatterArg);
 	ASConsole(const ASConsole&)            = delete;
 	ASConsole& operator=(ASConsole const&) = delete;
-	void convertLineEnds(std::ostringstream& out, int lineEnd);
+
 	FileEncoding detectEncoding(const char* data, size_t dataSize) const;
 	void error() const;
 	void error(const char* why, const char* what) const;
@@ -309,7 +306,7 @@ public:     // functions
 	void setStdPathIn(const std::string& path);
 	void setStdPathOut(const std::string& path);
 	void standardizePath(std::string& path, bool removeBeginningSeparator = false) const;
-	bool stringEndsWith(const std::string& str, const std::string& suffix) const;
+	bool stringEndsWith(std::string_view str, std::string_view suffix) const;
 	void updateExcludeVector(const std::string& suffixParam);
 	std::vector<std::string> getExcludeVector() const;
 	std::vector<bool>   getExcludeHitsVector() const;
@@ -320,7 +317,7 @@ public:     // functions
 	std::vector<std::string> getFileName() const;
 
 private:	// functions
-	void correctMixedLineEnds(std::ostringstream& out);
+
 	void formatFile(const std::string& fileName_);
 	std::string getParentDirectory(const std::string& absPath) const;
 	std::string findProjectOptionFilePath(const std::string& fileName_) const;
@@ -345,7 +342,6 @@ private:	// functions
 	FileEncoding readFile(const std::string& fileName_, std::stringstream& in) const;
 	void removeFile(const char* fileName_, const char* errMsg) const;
 	void renameFile(const char* oldFileName, const char* newFileName, const char* errMsg) const;
-	void setOutputEOL(LineEndFormat lineEndFormat, const std::string& currentEOL);
 	void sleep(int seconds) const;
 	int  waitForRemove(const char* newFileName) const;
 	int  wildcmp(const char* wild, const char* data) const;
