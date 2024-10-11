@@ -188,7 +188,7 @@ void ASEnhancer::convertSpaceIndentToForceTab(std::string& line) const
  * @param caseIndex     the line index of the case statement.
  * @return              the line index of the colon.
  */
-size_t ASEnhancer::findCaseColon(std::string_view line, size_t caseIndex) const
+size_t ASEnhancer::findCaseColon(STRING_VIEW line, size_t caseIndex) const
 {
 	size_t i = caseIndex;
 	bool isInQuote_ = false;
@@ -276,7 +276,7 @@ int ASEnhancer::indentLine(std::string& line, int indent) const
  * @param index         the current line index.
  * @return              true if a hit.
  */
-bool ASEnhancer::isBeginDeclareSectionSQL(std::string_view line, size_t index) const
+bool ASEnhancer::isBeginDeclareSectionSQL(STRING_VIEW line, size_t index) const
 {
 
 	size_t hits = 0;
@@ -290,7 +290,7 @@ bool ASEnhancer::isBeginDeclareSectionSQL(std::string_view line, size_t index) c
 			break;
 		if (!isCharPotentialHeader(line, i))
 			continue;
-		std::string_view word = getCurrentWord(line, i);
+		STRING_VIEW word = getCurrentWord(line, i);
 		for (char character : word)
 			character = (char) toupper(character);
 		if (word == "EXEC" || word == "SQL")
@@ -325,7 +325,7 @@ bool ASEnhancer::isBeginDeclareSectionSQL(std::string_view line, size_t index) c
  * @param index         the current line index.
  * @return              true if a hit.
  */
-bool ASEnhancer::isEndDeclareSectionSQL(std::string_view line, size_t index) const
+bool ASEnhancer::isEndDeclareSectionSQL(STRING_VIEW line, size_t index) const
 {
 	size_t hits = 0;
 	size_t i;
@@ -338,7 +338,7 @@ bool ASEnhancer::isEndDeclareSectionSQL(std::string_view line, size_t index) con
 			break;
 		if (!isCharPotentialHeader(line, i))
 			continue;
-		std::string_view word = getCurrentWord(line, i);
+		STRING_VIEW word = getCurrentWord(line, i);
 		for (char character : word)
 			character = (char) toupper(character);
 		if (word == "EXEC" || word == "SQL")
@@ -373,7 +373,7 @@ bool ASEnhancer::isEndDeclareSectionSQL(std::string_view line, size_t index) con
  * @return     false = one-line brace has not been reached.
  *             true  = one-line brace has been reached.
  */
-bool ASEnhancer::isOneLineBlockReached(std::string_view line, int startChar) const
+bool ASEnhancer::isOneLineBlockReached(STRING_VIEW line, int startChar) const
 {
 	assert(line[startChar] == '{');
 
@@ -618,7 +618,7 @@ void ASEnhancer::parseCurrentLine(std::string& line, bool isInPreprocessor, bool
 			// bypass the entire word
 			if (isPotentialKeyword)
 			{
-				std::string_view name = getCurrentWord(line, i);
+				STRING_VIEW name = getCurrentWord(line, i);
 				i += name.length() - 1;
 			}
 			continue;
@@ -711,7 +711,7 @@ size_t ASEnhancer::processSwitchBlock(std::string& line, size_t index)
 	}
 	if (isPotentialKeyword)
 	{
-		std::string_view name = getCurrentWord(line, i);          // bypass the entire name
+		STRING_VIEW name = getCurrentWord(line, i);          // bypass the entire name
 		i += name.length() - 1;
 	}
 	return i;

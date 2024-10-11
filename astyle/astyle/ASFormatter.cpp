@@ -1729,7 +1729,7 @@ std::string ASFormatter::nextLine()
 				isSharpDelegate = true;
 
 			// append the entire name
-			std::string_view name = getCurrentWord(currentLine, charNum);
+			STRING_VIEW name = getCurrentWord(currentLine, charNum);
 			// must pad the 'and' and 'or' operators if required
 			if (name == "and" || name == "or")
 			{
@@ -3046,7 +3046,7 @@ void ASFormatter::appendChar(char ch, bool canBreakLine)
  * @param sequence         the sequence to append.
  * @param canBreakLine     if true, a registered line-break
  */
-void ASFormatter::appendSequence(std::string_view sequence, bool canBreakLine)
+void ASFormatter::appendSequence(STRING_VIEW sequence, bool canBreakLine)
 {
 	if (canBreakLine && isInLineBreak)
 		breakLine();
@@ -3062,7 +3062,7 @@ void ASFormatter::appendSequence(std::string_view sequence, bool canBreakLine)
  * @param sequence         the sequence to append.
  * @param canBreakLine     if true, a registered line-break
  */
-void ASFormatter::appendOperator(std::string_view sequence, bool canBreakLine)
+void ASFormatter::appendOperator(STRING_VIEW sequence, bool canBreakLine)
 {
 	if (canBreakLine && isInLineBreak)
 		breakLine();
@@ -3257,7 +3257,7 @@ BraceType ASFormatter::getBraceType()
 	return returnVal;
 }
 
-bool ASFormatter::isNumericVariable(std::string_view word) const
+bool ASFormatter::isNumericVariable(STRING_VIEW word) const
 {
 	if (word == "bool"
 	        || word == "int"
@@ -3315,7 +3315,7 @@ bool ASFormatter::isClassInitializer() const
  *
  * @return        whether line is empty
  */
-bool ASFormatter::isEmptyLine(std::string_view line) const
+bool ASFormatter::isEmptyLine(STRING_VIEW line) const
 {
 	return line.find_first_not_of(" \t") == std::string::npos;
 }
@@ -3643,7 +3643,7 @@ bool ASFormatter::isPointerOrReferenceCentered() const
  *
  * @return        whether word is a pointer or reference variable.
  */
-bool ASFormatter::isPointerOrReferenceVariable(std::string_view word) const
+bool ASFormatter::isPointerOrReferenceVariable(STRING_VIEW word) const
 {
 	assert(currentChar == '*' || currentChar == '&' || currentChar == '^');
 	bool retval = false;
@@ -3689,7 +3689,7 @@ bool ASFormatter::isPointerOrReferenceVariable(std::string_view word) const
  *
  * @return        true if a pointer *.
  */
-bool ASFormatter::isPointerToPointer(std::string_view line, int currPos) const
+bool ASFormatter::isPointerToPointer(STRING_VIEW line, int currPos) const
 {
 	assert(line[currPos] == '*' && peekNextChar() == '*');
 	if ((int) line.length() > currPos + 1 && line[currPos + 1] == '*')
@@ -3822,7 +3822,7 @@ bool ASFormatter::isNonInStatementArrayBrace() const
  *             2 = one-line block has been reached and is followed by a comma.
  *             3 = one-line block has been reached and is an empty block.
  */
-int ASFormatter::isOneLineBlockReached(std::string_view line, int startChar) const
+int ASFormatter::isOneLineBlockReached(STRING_VIEW line, int startChar) const
 {
 	assert(line[startChar] == '{');
 
@@ -4074,7 +4074,7 @@ bool ASFormatter::isMultiStatementLine() const
  * @param   firstLine   the first line to check
  * @return  the next non-whitespace substd::string.
  */
-std::string ASFormatter::peekNextText(std::string_view firstLine,
+std::string ASFormatter::peekNextText(STRING_VIEW firstLine,
                                       bool endOnEmptyLine /*false*/,
                                       const std::shared_ptr<ASPeekStream>& streamArg /*nullptr*/) const
 {
@@ -5823,7 +5823,7 @@ bool ASFormatter::isSharpStyleWithParen(const std::string* header) const
  * firstLine must contain the start of the comment.
  * return value is a pointer to the header or nullptr.
  */
-const std::string* ASFormatter::checkForHeaderFollowingComment(std::string_view firstLine) const
+const std::string* ASFormatter::checkForHeaderFollowingComment(STRING_VIEW firstLine) const
 {
 	assert(isInComment || isInLineComment);
 	assert(shouldBreakElseIfs || shouldBreakBlocks || isInSwitchStatement());
@@ -6893,7 +6893,7 @@ bool ASFormatter::removeBracesFromStatement()
  * @param searchStart  the start position on the line (default is 0).
  * @return the position on the line or std::string::npos if not found.
  */
-size_t ASFormatter::findNextChar(std::string_view line, char searchChar, int searchStart /*0*/) const
+size_t ASFormatter::findNextChar(STRING_VIEW line, char searchChar, int searchStart /*0*/) const
 {
 	// find the next searchChar
 	size_t i;
@@ -7308,7 +7308,7 @@ bool ASFormatter::isStructAccessModified(const std::string& firstLine, size_t in
 				        || findKeyword(nextLine_, i, AS_PRIVATE)
 				        || findKeyword(nextLine_, i, AS_PROTECTED))
 					return true;
-				std::string_view name = getCurrentWord(nextLine_, i);
+				STRING_VIEW name = getCurrentWord(nextLine_, i);
 				i += name.length() - 1;
 			}
 		}	// end of for loop
@@ -7478,7 +7478,7 @@ EndOfWhileLoop:
 	return isInIndentableBlock;
 }
 
-bool ASFormatter::isNDefPreprocStatement(std::string_view nextLine_, std::string_view preproc) const
+bool ASFormatter::isNDefPreprocStatement(STRING_VIEW nextLine_, STRING_VIEW preproc) const
 {
 	if (preproc == "ifndef")
 		return true;
@@ -7502,14 +7502,14 @@ bool ASFormatter::isNDefPreprocStatement(std::string_view nextLine_, std::string
  * @param index         the current line index.
  * @return              true if the statement is EXEC SQL.
  */
-bool ASFormatter::isExecSQL(std::string_view line, size_t index) const
+bool ASFormatter::isExecSQL(STRING_VIEW line, size_t index) const
 {
 	if (line[index] != 'e' && line[index] != 'E')	// quick check to reject most
 		return false;
-	std::string_view word;
+	std::string word;
 	if (isCharPotentialHeader(line, index))
 		word = getCurrentWord(line, index);
-	for (char character : word)
+	for (char& character : word)
 		character = (char) toupper(character);
 	if (word != "EXEC")
 		return false;
@@ -7518,11 +7518,11 @@ bool ASFormatter::isExecSQL(std::string_view line, size_t index) const
 	if (index2 == std::string::npos)
 		return false;
 
-	std::string_view word2;
+	std::string word2;
 
 	if (isCharPotentialHeader(line, index2))
 		word2 = getCurrentWord(line, index2);
-	for (char character : word2)
+	for (char& character : word2)
 		character = (char) toupper(character);
 	if (word2 != "SQL")
 		return false;
@@ -7769,7 +7769,7 @@ void ASFormatter::checkIfTemplateOpener()
 				templateDepth = 0;
 				return;
 			}
-			std::string_view name = getCurrentWord(nextLine_, i);
+			STRING_VIEW name = getCurrentWord(nextLine_, i);
 			i += name.length() - 1;
 		}	// end for loop
 	}	// end while loop
@@ -7879,7 +7879,7 @@ void ASFormatter::updateFormattedLineSplitPoints(char appendedChar)
 	}
 }
 
-void ASFormatter::updateFormattedLineSplitPointsOperator(std::string_view sequence)
+void ASFormatter::updateFormattedLineSplitPointsOperator(STRING_VIEW sequence)
 {
 	assert(maxCodeLength != std::string::npos);
 	assert(formattedLine.length() > 0);
@@ -8201,7 +8201,7 @@ bool ASFormatter::pointerSymbolFollows() const
  * Compute the input checksum.
  * This is called as an assert so it for is debug config only
  */
-bool ASFormatter::computeChecksumIn(std::string_view currentLine_)
+bool ASFormatter::computeChecksumIn(STRING_VIEW currentLine_)
 {
 	for (const char character : currentLine_)
 		if (!isWhiteSpace(character))
@@ -8233,7 +8233,7 @@ size_t ASFormatter::getChecksumIn() const
  * Compute the output checksum.
  * This is called as an assert so it is for debug config only
  */
-bool ASFormatter::computeChecksumOut(std::string_view beautifiedLine)
+bool ASFormatter::computeChecksumOut(STRING_VIEW beautifiedLine)
 {
 	for (const char character : beautifiedLine)
 		if (!isWhiteSpace(character))

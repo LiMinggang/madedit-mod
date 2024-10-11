@@ -10334,7 +10334,15 @@ void MadEdit::OnMouseLeftDClick(wxMouseEvent &evt)
 void MadEdit::OnMouseMotion(wxMouseEvent &evt)
 {
 	//wxTheApp->GetTopWindow()->SetTitle(wxString::Format(wxT("%d %d"), evt.m_x, evt.m_y));
-
+	/*HWND m_hWnd = (HWND)GetHWND();
+	HIMC m_hImc(ImmGetContext(m_hWnd));
+	wxTopLevelWindow *pwin = (wxTopLevelWindow*)wxTheApp->GetTopWindow();
+	wxString title(pwin->GetTitle());
+	size_t pos = title.rfind("--");
+	if (pos != wxNOT_FOUND)
+		title.RemoveLast(title.Len() - pos);
+	pwin->SetTitle(title + wxString::Format(wxT("--%s"), ImmGetOpenStatus(m_hImc) ? " ON" : "OFF"));
+	ImmReleaseContext(m_hWnd, m_hImc);*/
 	//ProcessCommand(ecMouseNotify); // no notify on mousemotion
 	//DBOUT("OnMM:TW:"<<m_TopRow<<", InW?"<<(m_MouseInWindow?"T":"F")<<", (" <<evt.m_x <<", " << evt.m_y <<")\n");
 

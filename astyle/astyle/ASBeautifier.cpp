@@ -1367,7 +1367,7 @@ std::string ASBeautifier::preLineWS(int lineIndentCount, int lineSpaceIndentCoun
 /**
  * register a continuation indent.
  */
-void ASBeautifier::registerContinuationIndent(std::string_view line, int i, int spaceIndentCount_,
+void ASBeautifier::registerContinuationIndent(STRING_VIEW line, int i, int spaceIndentCount_,
                                               int tabIncrementIn, int minIndent, bool updateParenStack)
 {
 	//return;
@@ -1448,7 +1448,7 @@ void ASBeautifier::registerContinuationIndent(std::string_view line, int i, int 
 /**
 * Register a continuation indent for a class header or a class initializer colon.
 */
-void ASBeautifier::registerContinuationIndentColon(std::string_view line, int i, int tabIncrementIn)
+void ASBeautifier::registerContinuationIndentColon(STRING_VIEW line, int i, int tabIncrementIn)
 {
 	assert(line[i] == ':');
 	assert(isInClassInitializer || isInClassHeaderTab);
@@ -1490,7 +1490,7 @@ std::pair<int, int> ASBeautifier::computePreprocessorIndent()
  * get distance to the next non-white space, non-comment character in the line.
  * if no such character exists, return the length remaining to the end of the line.
  */
-int ASBeautifier::getNextProgramCharDistance(std::string_view line, int i) const
+int ASBeautifier::getNextProgramCharDistance(STRING_VIEW line, int i) const
 {
 	bool inComment = false;
 	int  remainingCharNum = line.length() - i;
@@ -1565,7 +1565,7 @@ int ASBeautifier::convertTabToSpaces(int i, int tabIncrementIn) const
  * @return          the trimmed line.
  * @param str       the line to trim.
  */
-std::string ASBeautifier::trim(std::string_view str) const
+std::string ASBeautifier::trim(STRING_VIEW str) const
 {
 	int start = 0;
 	int end = str.length() - 1;
@@ -1590,7 +1590,7 @@ std::string ASBeautifier::trim(std::string_view str) const
  * @return          the trimmed line.
  * @param str       the line to trim.
  */
-std::string ASBeautifier::rtrim(std::string_view str) const
+std::string ASBeautifier::rtrim(STRING_VIEW str) const
 {
 	size_t len = str.length();
 	size_t end = str.find_last_not_of(" \t");
@@ -1727,7 +1727,7 @@ void ASBeautifier::initTempStacksContainer(std::vector<std::vector<const std::st
  *
  * @return  true if line ends with a comma, otherwise false.
  */
-bool ASBeautifier::statementEndsWithComma(std::string_view line, int index) const
+bool ASBeautifier::statementEndsWithComma(STRING_VIEW line, int index) const
 {
 	assert(line[index] == '=');
 
@@ -1809,7 +1809,7 @@ bool ASBeautifier::statementEndsWithComma(std::string_view line, int index) cons
  *
  * @return     is before a line-end comment.
  */
-bool ASBeautifier::isLineEndComment(std::string_view line, int startPos) const
+bool ASBeautifier::isLineEndComment(STRING_VIEW line, int startPos) const
 {
 	assert(line.compare(startPos, AS_OPEN_COMMENT.length(), AS_OPEN_COMMENT) == 0
 			|| line.compare(startPos, AS_GSC_OPEN_COMMENT.length(), AS_GSC_OPEN_COMMENT) == 0 );
@@ -1832,7 +1832,7 @@ bool ASBeautifier::isLineEndComment(std::string_view line, int startPos) const
  *
  * @return is the index to the previous word (the in statement indent).
  */
-int ASBeautifier::getContinuationIndentAssign(std::string_view line, size_t currPos) const
+int ASBeautifier::getContinuationIndentAssign(STRING_VIEW line, size_t currPos) const
 {
 	assert(line[currPos] == '=');
 
@@ -1860,7 +1860,7 @@ int ASBeautifier::getContinuationIndentAssign(std::string_view line, size_t curr
  *
  * @return is the indent to the second word on the line (the in statement indent).
  */
-int ASBeautifier::getContinuationIndentComma(std::string_view line, size_t currPos) const
+int ASBeautifier::getContinuationIndentComma(STRING_VIEW line, size_t currPos) const
 {
 	assert(line[currPos] == ',');
 
@@ -1921,7 +1921,7 @@ std::string ASBeautifier::getNextWord(const std::string& line, size_t currPos) c
  *
  * @return is true or false.
  */
-bool ASBeautifier::isIndentedPreprocessor(std::string_view line, size_t currPos) const
+bool ASBeautifier::isIndentedPreprocessor(STRING_VIEW line, size_t currPos) const
 {
 	assert(line[0] == '#');
 	std::string nextWord = getNextWord(std::string(line), currPos);
@@ -1955,7 +1955,7 @@ bool ASBeautifier::isIndentedPreprocessor(std::string_view line, size_t currPos)
 				break;
 		}
 		// check for "pragma omp"
-		std::string_view word = line.substr(start, end - start);
+		STRING_VIEW word = line.substr(start, end - start);
 		if (word == "omp" || word == "region" || word == "endregion")
 			return true;
 	}
@@ -1967,7 +1967,7 @@ bool ASBeautifier::isIndentedPreprocessor(std::string_view line, size_t currPos)
  *
  * @return is true or false.
  */
-bool ASBeautifier::isPreprocessorConditionalCplusplus(std::string_view line) const
+bool ASBeautifier::isPreprocessorConditionalCplusplus(STRING_VIEW line) const
 {
 	std::string preproc = trim(line.substr(1));
 	if (preproc.compare(0, 5, "ifdef") == 0 && getNextWord(preproc, 4) == "__cplusplus")
@@ -1999,7 +1999,7 @@ bool ASBeautifier::isPreprocessorConditionalCplusplus(std::string_view line) con
  *
  * @return is true or false.
  */
-bool ASBeautifier::isInPreprocessorUnterminatedComment(std::string_view line)
+bool ASBeautifier::isInPreprocessorUnterminatedComment(STRING_VIEW line)
 {
 	if (!isInPreprocessorComment)
 	{
@@ -2034,7 +2034,7 @@ int ASBeautifier::getBeautifierFileType() const
 /**
  * Process preprocessor statements and update the beautifier stacks.
  */
-void ASBeautifier::processPreprocessor(std::string_view preproc, std::string_view line)
+void ASBeautifier::processPreprocessor(STRING_VIEW preproc, STRING_VIEW line)
 {
 	// When finding a multi-lined #define statement, the original beautifier
 	// 1. sets its isInDefineDefinition flag
@@ -2388,7 +2388,7 @@ int ASBeautifier::adjustIndentCountForBreakElseIfComments() const
  * Extract a preprocessor statement without the #.
  * If a error occurs an empty std::string is returned.
  */
-std::string ASBeautifier::extractPreprocessorStatement(std::string_view line) const
+std::string ASBeautifier::extractPreprocessorStatement(STRING_VIEW line) const
 {
 	std::string preproc;
 	size_t start = line.find_first_not_of("#/ \t");
@@ -2401,7 +2401,7 @@ std::string ASBeautifier::extractPreprocessorStatement(std::string_view line) co
 	return preproc;
 }
 
-void ASBeautifier::adjustObjCMethodDefinitionIndentation(std::string_view line_)
+void ASBeautifier::adjustObjCMethodDefinitionIndentation(STRING_VIEW line_)
 {
 	// register indent for Objective-C continuation line
 	if (line_.length() > 0
@@ -2432,7 +2432,7 @@ void ASBeautifier::adjustObjCMethodDefinitionIndentation(std::string_view line_)
 	}
 }
 
-void ASBeautifier::adjustObjCMethodCallIndentation(std::string_view line_)
+void ASBeautifier::adjustObjCMethodCallIndentation(STRING_VIEW line_)
 {
 	static int keywordIndentObjCMethodAlignment = 0;
 	if (shouldAlignMethodColon && objCColonAlignSubsequent != -1)
@@ -2509,7 +2509,7 @@ void ASBeautifier::clearObjCMethodDefinitionAlignment()
  * Find the first alignment colon on a line.
  * Ternary operators (?) are bypassed.
  */
-int ASBeautifier::findObjCColonAlignment(std::string_view line) const
+int ASBeautifier::findObjCColonAlignment(STRING_VIEW line) const
 {
 	bool haveTernary = false;
 	for (size_t i = 0; i < line.length(); i++)
@@ -2567,7 +2567,7 @@ int ASBeautifier::findObjCColonAlignment(const std::string& line) const
  * If it cannot be aligned indentLength is returned and a new colon
  * position is calculated.
  */
-int ASBeautifier::computeObjCColonAlignment(std::string_view line, int colonAlignPosition) const
+int ASBeautifier::computeObjCColonAlignment(STRING_VIEW line, int colonAlignPosition) const
 {
 	int colonPosition = findObjCColonAlignment(line);
 	if (colonPosition < 0 || colonPosition > colonAlignPosition)
@@ -2581,7 +2581,7 @@ int ASBeautifier::computeObjCColonAlignment(std::string_view line, int colonAlig
  * Use for now and see what happens.
  * Most programmers will probably use align-method-colon anyway.
  */
-int ASBeautifier::getObjCFollowingKeyword(std::string_view line, int bracePos) const
+int ASBeautifier::getObjCFollowingKeyword(STRING_VIEW line, int bracePos) const
 {
 	assert(line[bracePos] == '[');
 	size_t firstText = line.find_first_not_of(" \t", bracePos + 1);
@@ -2621,7 +2621,7 @@ int ASBeautifier::getObjCFollowingKeyword(std::string_view line, int bracePos) c
  * The indentCount is NOT included
  * Needed to compute an accurate alignment.
  */
-std::string ASBeautifier::getIndentedSpaceEquivalent(std::string_view line_) const
+std::string ASBeautifier::getIndentedSpaceEquivalent(STRING_VIEW line_) const
 {
 	std::string spaceIndent;
 	spaceIndent.append(spaceIndentCount, ' ');
@@ -2669,7 +2669,7 @@ bool ASBeautifier::isTopLevel() const
 /**
  * Parse the current line to update indentCount and spaceIndentCount.
  */
-void ASBeautifier::parseCurrentLine(std::string_view line)
+void ASBeautifier::parseCurrentLine(STRING_VIEW line)
 {
 	bool isInLineComment = false;
 	bool isInOperator = false;
@@ -3839,7 +3839,7 @@ void ASBeautifier::parseCurrentLine(std::string_view line)
 			}
 
 			// bypass the entire name for all others
-			std::string_view name = getCurrentWord(line, i);
+			STRING_VIEW name = getCurrentWord(line, i);
 			i += name.length() - 1;
 			continue;
 		}
@@ -3852,7 +3852,7 @@ void ASBeautifier::parseCurrentLine(std::string_view line)
 		        && !isWhiteSpace(line[i + 1])
 		        && isCharPotentialHeader(line, i + 1))
 		{
-			std::string_view curWord = getCurrentWord(line, i + 1);
+			STRING_VIEW curWord = getCurrentWord(line, i + 1);
 			if (curWord == AS_INTERFACE || curWord == AS_AUTORELEASEPOOL)
 			{
 				isInObjCInterface = true;

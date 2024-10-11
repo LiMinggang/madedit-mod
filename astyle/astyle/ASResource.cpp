@@ -634,7 +634,7 @@ void ASResource::buildPreDefinitionHeaders(std::vector<const std::string*>* preD
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 // check if a specific line position contains a header.
-const std::string* ASBase::findHeader(std::string_view line, int i,
+const std::string* ASBase::findHeader(STRING_VIEW line, int i,
                                       const std::vector<const std::string*>* possibleHeaders) const
 {
 	assert(isCharPotentialHeader(line, i));
@@ -674,7 +674,7 @@ const std::string* ASBase::findHeader(std::string_view line, int i,
 }
 
 // check if a specific line position contains a keyword.
-bool ASBase::findKeyword(std::string_view  line, int i, std::string_view keyword) const
+bool ASBase::findKeyword(STRING_VIEW  line, int i, STRING_VIEW keyword) const
 {
 	assert(isCharPotentialHeader(line, i));
 	// check the word
@@ -703,7 +703,7 @@ bool ASBase::findKeyword(std::string_view  line, int i, std::string_view keyword
 }
 
 // check if a specific line position contains an operator.
-const std::string* ASBase::findOperator(std::string_view line, int i,
+const std::string* ASBase::findOperator(STRING_VIEW line, int i,
                                         const std::vector<const std::string*>* possibleOperators) const
 {
 	assert(isCharPotentialOperator(line[i]));
@@ -724,7 +724,7 @@ const std::string* ASBase::findOperator(std::string_view line, int i,
 
 // get the current word on a line
 // index must point to the beginning of the word
-std::string_view ASBase::getCurrentWord(std::string_view line, size_t index) const
+STRING_VIEW ASBase::getCurrentWord(STRING_VIEW line, size_t index) const
 {
 	//assert(isCharPotentialHeader(line, index));
 	size_t lineLength = line.length();
@@ -754,7 +754,7 @@ bool ASBase::isLegalNameChar(char ch) const
 }
 
 // check if a specific character can be part of a header
-bool ASBase::isCharPotentialHeader(std::string_view line, size_t i) const
+bool ASBase::isCharPotentialHeader(STRING_VIEW line, size_t i) const
 {
 	assert(!isWhiteSpace(line[i]));
 	char prevCh = ' ';
@@ -790,7 +790,7 @@ bool ASBase::isDigit(char ch) const
 }
 
 // check if a specific character is a digit separator
-bool ASBase::isDigitSeparator(std::string_view line, int i) const
+bool ASBase::isDigitSeparator(STRING_VIEW line, int i) const
 {
 	assert(line[i] == '\'');
 	// casting to (unsigned char) eliminates negative characters
@@ -803,7 +803,7 @@ bool ASBase::isDigitSeparator(std::string_view line, int i) const
 }
 
 // peek at the next unread character.
-char ASBase::peekNextChar(std::string_view  line, int i) const
+char ASBase::peekNextChar(STRING_VIEW  line, int i) const
 {
 	char ch = ' ';
 	size_t peekNum = line.find_first_not_of(" \t", i + 1);

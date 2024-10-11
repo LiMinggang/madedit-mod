@@ -18,6 +18,13 @@
 #include <string>
 #include <memory>
 
+#if __cplusplus >= 201703L
+template <typename T>
+using auto_ptr = std::unique_ptr<T>;
+#else
+using std::auto_ptr;
+#endif
+
 namespace py = ::boost::python;
 
 extern void PrintString(const std::string& str);
@@ -56,15 +63,15 @@ namespace embedded_python {
 	typedef py_redirector<STDERR>   stderr_redirector;
 
 
-	static std::auto_ptr<stdout_redirector> make_stdout_redirector()
+	static auto_ptr<stdout_redirector> make_stdout_redirector()
 	{
-		std::auto_ptr<stdout_redirector> ptr(new stdout_redirector(PrintString));
+		auto_ptr<stdout_redirector> ptr(new stdout_redirector(PrintString));
 		return ptr;
 	}
 
-	static std::auto_ptr<stderr_redirector> make_stderr_redirector()
+	static auto_ptr<stderr_redirector> make_stderr_redirector()
 	{
-		std::auto_ptr<stderr_redirector> ptr(new stderr_redirector(PrintString));
+		auto_ptr<stderr_redirector> ptr(new stderr_redirector(PrintString));
 		return ptr;
 	}
 }
