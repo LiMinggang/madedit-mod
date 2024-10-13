@@ -130,6 +130,7 @@ Mod v0.4.21
 .Use per monitor DPI awareness V2
 .Add ruler by sln-1550(https://github.com/sln-1550)
 .Add binascii, sre, struct, weakref, bytearrayobject to miniPython(sln-1550)
+.Add Copy All with File Title in right click menu of Search in Files results
 .Improve on Word Count dialog, make the summary text control readonly, use fix width font.
 .Update chardet to 0.0.8
 .Update Astyle to 3.4.9

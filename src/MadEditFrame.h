@@ -338,6 +338,7 @@ enum   // menu id
 	// results
 	menuCopyCurResult,
 	menuCopyAllResults,
+	menuCopyAllResultsWithTitle,
 	menuResetResult,
 	menuDeleteCurResult,
     menuCollapseCurResult,
@@ -739,6 +740,7 @@ private:
     void CollapseAllResults(wxCommandEvent& WXUNUSED(event));
 	void OnCopyCurrResult(wxCommandEvent& WXUNUSED(event));
 	void OnCopyAllResults(wxCommandEvent& WXUNUSED(event));
+	void OnCopyAllResultsWithTitle(wxCommandEvent& WXUNUSED(event));
 	void OnResetResult(wxCommandEvent& WXUNUSED(event));
 	void OnDeleteCurrResult(wxCommandEvent& WXUNUSED(event));
 	void OnCollapseCurrResult(wxCommandEvent& WXUNUSED(event));
@@ -801,6 +803,7 @@ protected:
     bool ResetQuickSearchBarPos();
     bool ResetInformationWinPos();    
     bool RestoreAuiPanel(wxWindow * toolbar, wxString& toobar_status, bool gripper = false);
+	void CopyAllResults(bool with_title = false);
 
 #ifdef __WXMSW__
 	WXLRESULT MSWWindowProc(WXUINT message, WXWPARAM wParam, WXLPARAM lParam);

@@ -2010,6 +2010,7 @@ MadEditFrame::wxCmdEvtHandlerMap_t MadEditFrame::m_menu_evt_map[] =
 	{ menuCollapseAllResults, &MadEditFrame::CollapseAllResults },
 	{ menuCopyCurResult, &MadEditFrame::OnCopyCurrResult },
 	{ menuCopyAllResults, &MadEditFrame::OnCopyAllResults },
+	{ menuCopyAllResultsWithTitle, &MadEditFrame::OnCopyAllResultsWithTitle },
 	{ menuResetResult, &MadEditFrame::OnResetResult },
 	{ menuDeleteCurResult, &MadEditFrame::OnDeleteCurrResult },
 	{ menuCollapseCurResult, &MadEditFrame::OnCollapseCurrResult },
@@ -10504,56 +10505,65 @@ void MadEditFrame::OnCopyCurrResult(wxCommandEvent& WXUNUSED(event))
 	}
 }
 
+void MadEditFrame::CopyAllResults(bool with_title/* = false*/)
+{
+	wxTreeItemId RootId = m_FindInFilesResults->GetRootItem();
+	wxString results(wxT("")), result;
+
+	if (RootId.IsOk())
+	{
+		wxTreeItemIdValue cookie;
+		wxTreeItemId id = m_FindInFilesResults->GetFirstChild(m_FindInFilesResults->GetRootItem(), cookie);
+
+		while (id.IsOk())// Keywords
+		{
+			wxTreeItemIdValue tmpCookie;
+			wxTreeItemId tmpId = m_FindInFilesResults->GetFirstChild(id, tmpCookie);
+
+			while (tmpId.IsOk())// File
+			{
+				wxTreeItemIdValue fileCookie;
+				wxTreeItemId itemId = m_FindInFilesResults->GetFirstChild(tmpId, fileCookie);
+
+				if (with_title)
+					results += m_FindInFilesResults->GetItemText(tmpId) + wxT("\n");
+				while (itemId.IsOk())// Result
+				{
+					result = m_FindInFilesResults->GetItemText(itemId);
+					int pos = result.Find(wxT(": "));
+					if (pos != wxNOT_FOUND)
+					{
+						CaretPosData *cpdata = (CaretPosData*)m_FindInFilesResults->GetItemData(itemId);
+						results += cpdata->matchstring;
+					}
+					itemId = m_FindInFilesResults->GetNextChild(tmpId, fileCookie);
+				}
+				tmpId = m_FindInFilesResults->GetNextChild(id, tmpCookie);
+			}
+
+			id = m_FindInFilesResults->GetNextChild(RootId, cookie);
+		}
+	}
+
+	if (!results.IsEmpty())
+	{
+		if (wxTheClipboard->Open())
+		{
+			wxTheClipboard->SetData(new wxTextDataObject(results));
+			wxTheClipboard->Flush();
+			wxTheClipboard->Close();
+		}
+	}
+}
 void MadEditFrame::OnCopyAllResults(wxCommandEvent& WXUNUSED(event))
 {
 	//if (g_ActiveMadEdit)
-	{
-		wxTreeItemId RootId = m_FindInFilesResults->GetRootItem();
-		wxString results(wxT("")), result;
+	CopyAllResults();
+}
 
-		if (RootId.IsOk())
-		{
-			wxTreeItemIdValue cookie;
-			wxTreeItemId id = m_FindInFilesResults->GetFirstChild(m_FindInFilesResults->GetRootItem(), cookie);
-
-			while (id.IsOk())// Keywords
-			{
-				wxTreeItemIdValue tmpCookie;
-				wxTreeItemId tmpId = m_FindInFilesResults->GetFirstChild(id, tmpCookie);
-
-				while (tmpId.IsOk())// File
-				{
-					wxTreeItemIdValue fileCookie;
-					wxTreeItemId itemId = m_FindInFilesResults->GetFirstChild(tmpId, fileCookie);
-
-					while (itemId.IsOk())// Result
-					{
-						result = m_FindInFilesResults->GetItemText(itemId);
-						int pos = result.Find(wxT(": "));
-						if (pos != wxNOT_FOUND)
-						{
-							CaretPosData *cpdata = (CaretPosData*)m_FindInFilesResults->GetItemData(itemId);
-							results += cpdata->matchstring;
-						}
-						itemId = m_FindInFilesResults->GetNextChild(tmpId, fileCookie);
-					}
-					tmpId = m_FindInFilesResults->GetNextChild(id, tmpCookie);
-				}
-
-				id = m_FindInFilesResults->GetNextChild(RootId, cookie);
-			}
-		}
-
-		if (!results.IsEmpty())
-		{
-			if (wxTheClipboard->Open())
-			{
-				wxTheClipboard->SetData(new wxTextDataObject(results));
-				wxTheClipboard->Flush();
-				wxTheClipboard->Close();
-			}
-		}
-	}
+void MadEditFrame::OnCopyAllResultsWithTitle(wxCommandEvent& WXUNUSED(event))
+{
+	CopyAllResults(true);
 }
 
 void MadEditFrame::OnResetResult(wxCommandEvent& WXUNUSED(event))
@@ -10883,6 +10893,7 @@ void MadTreeCtrl::ShowMenu(wxTreeItemId WXUNUSED(id), const wxPoint& pt)
 	{
 		menu.Append(menuCollapseAllResults, _("&Collapse All"));
 		menu.Append(menuCopyAllResults, _("Copy &All"));
+		menu.Append(menuCopyAllResultsWithTitle, _("Copy All with &Title"));
 		menu.Append(menuResetResult, _("&Reset Results"));
 		menu.AppendSeparator();
 		menu.Append(menuCollapseCurResult, _("&Collapse Selected"));
