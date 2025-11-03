@@ -21,9 +21,6 @@ public:
 	bool IsWordInDictionary(const wxString& strWord);
 	void AddWord(const wxString& strWord);
 	void RemoveWord(const wxString& strWord);
-	void DisableSort() { m_bEnableSort = false;}
-	void EnableSort() { m_bEnableSort = true;}
-	void SortDict() { m_DictionaryWords.Sort(); }
 	wxArrayString GetWordListAsArray();
 	wxString GetDictionaryFileName()
 	{
@@ -37,7 +34,6 @@ public:
 private:
 	wxSortedArrayString m_DictionaryWords;
 	wxString m_strDictionaryFileName;
-	bool m_bEnableSort;
 };
 
 #endif // __WX_SPELL_CHECKER_PERSONAL_DICTIONARY__

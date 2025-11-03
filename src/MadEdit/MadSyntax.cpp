@@ -904,7 +904,6 @@ void MadSyntax::ParseSyntax(const wxString &filename, bool reParse/* = false*/)
 	cfg->SetPath(_T("/SpellChecker"));
 	bool bb = false;
 	cfg->Read(_T("AddKeywords"), &bb, true);
-	m_SynAttr->m_SyntaxKeywordDict->DisableSort();
 	while (gcont)
 	{
 		//wxLogMessage(entry);
@@ -977,9 +976,6 @@ void MadSyntax::ParseSyntax(const wxString &filename, bool reParse/* = false*/)
 		gcont = syn.GetNextGroup(group, gidx);
 	}
 
-	if (bb)
-		m_SynAttr->m_SyntaxKeywordDict->SortDict();
-	// syn loaded, begin post-processing
 #ifdef __WXMSW__
 
 	if (m_SynAttr->m_SystemAttributes[aeText].color == wxNullColour)

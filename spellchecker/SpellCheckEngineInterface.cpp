@@ -166,12 +166,12 @@ const wxCharBuffer wxSpellCheckEngineInterface::ConvertToUnicode(const wxString&
     if (strEncoding != wxEmptyString)
     {
         wxCSConv conv(strEncoding);
-        wxCharBuffer returnBuffer(conv.cWC2MB(inputString.wc_str(*wxConvCurrent)));
+        wxCharBuffer returnBuffer(conv.cWC2MB(inputString.wc_str()));
         return returnBuffer;
     }
     else
     {
-        wxCharBuffer returnBuffer(wxConvUTF8.cWC2MB(inputString.wc_str(*wxConvCurrent)));
+        wxCharBuffer returnBuffer(wxConvUTF8.cWC2MB(inputString.wc_str()));
         return returnBuffer;
     }
 #else
@@ -187,12 +187,12 @@ wxString wxSpellCheckEngineInterface::ConvertFromUnicode(const char* inputBuffer
     if (strEncoding != wxEmptyString)
     {
         wxCSConv conv(strEncoding);
-        wxString returnString(conv.cMB2WC(inputBuffer), *wxConvCurrent);
+        wxString returnString(conv.cMB2WC(inputBuffer));
         return returnString;
     }
     else
     {
-        wxString returnString(wxConvUTF8.cMB2WC(inputBuffer), *wxConvCurrent);
+        wxString returnString(wxConvUTF8.cMB2WC(inputBuffer));
         return returnString;
     }
 #else

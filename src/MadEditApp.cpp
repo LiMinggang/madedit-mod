@@ -263,7 +263,7 @@ wxConnectionBase *MadAppSrv::OnAcceptConnection(const wxString& topic)
 	if (topic.Lower() == g_MadTopicStr)
 	{
 		// Check that there are no modal dialogs active
-		wxWindowList::Node* node = wxTopLevelWindows.GetFirst();
+		wxWindowList::compatibility_iterator node = wxTopLevelWindows.GetFirst();
 
 		while (node)
 		{

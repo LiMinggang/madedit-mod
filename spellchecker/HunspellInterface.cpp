@@ -497,7 +497,7 @@ wxString HunspellInterface::GetCharacterEncoding()
     if (m_pHunspell == nullptr)
         return wxEmptyString;
 
-    wxString encoding(wxConvUTF8.cMB2WC(m_pHunspell->get_dic_encoding()), *wxConvCurrent);
+    wxString encoding(wxConvUTF8.cMB2WC(m_pHunspell->get_dic_encoding()));
     return encoding;
 }
 

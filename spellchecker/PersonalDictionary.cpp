@@ -3,7 +3,7 @@
 #include <wx/filename.h>
 #include <wx/textfile.h>
 
-PersonalDictionary::PersonalDictionary(wxString strFileName /*= _T(".wxSpellCheckerPersonalDictionary")*/) : m_bEnableSort(true)
+PersonalDictionary::PersonalDictionary(wxString strFileName /*= _T(".wxSpellCheckerPersonalDictionary")*/)
 {
     m_strDictionaryFileName = strFileName;
     m_DictionaryWords.Clear();
@@ -96,8 +96,6 @@ void PersonalDictionary::AddWord(const wxString& strWord)
     wxString word = strWord.Lower();
     if(word.IsEmpty()) return;
     m_DictionaryWords.Add(strWord.Lower());
-	if(m_bEnableSort)
-    	m_DictionaryWords.Sort();
 }
 
 void PersonalDictionary::RemoveWord(const wxString& strWord)

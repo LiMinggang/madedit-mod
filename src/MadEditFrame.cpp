@@ -1059,7 +1059,7 @@ public:
 	};
 
 	list<PageData> GetPagesList() {
-		wxAuiNotebookPageArray& pages = m_tabs.GetPages();
+		const wxAuiNotebookPageArray& pages = m_tabs.GetPages();
 		size_t i, page_count = pages.GetCount();
 		list<PageData> pages_list;
 		list<PageData>::iterator it;
@@ -10215,7 +10215,7 @@ void MadEditFrame::OnToolsXMLFormat(wxCommandEvent& WXUNUSED(event))
 		{
 			wxStringInputStream instr(text);
 			wxCSConv docConv(g_ActiveMadEdit->GetEncodingName());
-			xmlDoc.Load(instr, g_ActiveMadEdit->GetEncodingName());
+			xmlDoc.Load(instr);
 
 			if (xmlDoc.IsOk())
 			{
